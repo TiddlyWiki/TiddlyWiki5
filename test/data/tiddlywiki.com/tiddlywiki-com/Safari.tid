@@ -1,0 +1,11 @@
+title: Safari
+modifier: blaine
+created: 20110211110700
+modified: 20110211131020
+tags: browsers issues
+creator: psd
+
+Safari can SaveChanges using the TiddlySaver Java applet.
+
+There are still some issues with Safari:
+* Permalinks with Unicode characters in them (like [[this one|http://avm.free.fr/tidlipo.html#AdaptationFran%C3%A7aise]]) don't work properly

@@ -1,0 +1,21 @@
+title: PersistentOptions
+modifier: blaine
+created: 20110211110656
+modified: 20110211131019
+creator: psd
+
+TiddlyWiki now has the ability to save options in the TiddlyWiki document itself (in addition to the ability to save options in cookies). Persistent options are stored in the [[SystemSettings]] tiddler. Persistent options are sometimes called "baked" options, since the value of the cookie is "baked" into the TiddlyWiki.
+
+As an example, let's look at the {{{chkAnimate}}} option; this is currently stored as a cookie. You can get its value to be persistent by adding it to the [[SystemSettings]] tiddler. If there is no SystemSettings tiddler, you need to create it. Then add, for example:
+<<<
+chkAnimate: true
+<<<
+This has two effects, it makes the {{{chkAnimate}}} option persistent, and it gives the option a value (in this case {{{true}}}, it could equally well have been {{{false}}}).
+
+The option can still be changed in the normal way (by ticking the box in the options panel); it can also be changed by editing the value in the [[SystemSettings]] tiddler. If the option is removed from the [[SystemSettings]] tiddler, then its value will be retained, but it will stored in a cookie.
+
+!!Under the hood
+The "source" of an option is controlled by the {{{config.optionsSource[optionName]}}} variable. This can take one of two values:
+# {{{null}}} - the option is stored in a cookie, this is the ''default''.
+# {{{setting}}} - the option is stored in the [[SystemSettings]] tiddler. 
+The {{{config.optionsSource[]}}} variable is controlled by the values in the [[SystemSettings]] tiddler. If the option exists in [[SystemSettings]], then {{{config.optionsSource[optionName]}}} is set to {{{setting}}}, and the option is persisted.

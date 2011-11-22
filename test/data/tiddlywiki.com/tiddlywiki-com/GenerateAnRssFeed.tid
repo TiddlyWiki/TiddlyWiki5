@@ -1,0 +1,10 @@
+title: GenerateAnRssFeed
+modifier: blaine
+created: 20110211110636
+modified: 20110211131017
+tags: features options
+creator: psd
+
+A new feature for the ThirdVersion of TiddlyWiki is the ability to generate an RssFeed of its content. You can flick it on with a new addition to the InterfaceOptions. If enabled, it automatically saves an RSS 2.0 format file with the last few changed tiddlers in it. It's given the same filename as the TiddlyWiki file but with the ".xml" extension. Like all TiddlyWiki features, it's experimental, and will probably be a bit temperamental in your feedreader until the bugs are ironed out.
+
+Note that you must set the tiddler SiteUrl to be the URL where your TiddlyWiki will be published. (Don't put leading spaces or line breaks before or after the URL).

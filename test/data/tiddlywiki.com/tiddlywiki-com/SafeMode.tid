@@ -1,0 +1,8 @@
+title: SafeMode
+modifier: jermolene
+created: 20110211110700
+modified: 20111020135126
+tags: features
+creator: psd
+
+SafeMode can be selected by putting {{{#start:safe}}} (see StartupParameters) on the end of the TiddlyWiki URL. It stops TiddlyWiki from executing any [[Plugins]], modifying shadow tiddlers, or reading/writing cookies. It can be useful for tracking down problems caused by rogue [[Plugins]].

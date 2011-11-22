@@ -1,0 +1,8 @@
+title: MicroContent
+modifier: blaine
+created: 20110211110649
+modified: 20110211131018
+tags: concepts
+creator: psd
+
+MicroContent being a fashionable word for self-contained fragments of content that are typically smaller than entire pages. Often MicroContent is presented via some kind of aggregation that reduces the perceptual shock and resource cost of context switching (eg Blogs aggregating several entries onto a page or Flickr presenting photos in an album). This TiddlyWiki aggregates MicroContent items that I call 'tiddlers' into pages that are loaded in one gulp and progressively displayed as the user clicks hypertext links to read them.

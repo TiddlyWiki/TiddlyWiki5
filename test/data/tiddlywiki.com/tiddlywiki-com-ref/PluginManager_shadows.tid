@@ -1,0 +1,11 @@
+title: PluginManager shadows
+modifier: matt
+created: 20110211161318
+modified: 201102151511
+tags: shadow
+creator: matt
+
+This tiddler contains the command to display the plugin manager: 
+{{{
+<<plugins>>
+}}}

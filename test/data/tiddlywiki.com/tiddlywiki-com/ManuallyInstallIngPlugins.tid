@@ -1,0 +1,21 @@
+title: ManuallyInstallIngPlugins
+modifier: psd
+created: 20110211110649
+modified: 20110216120424
+creator: psd
+
+In some situations it can be useful to use the clipboard insead of InstallingPlugins using ImportTiddlers.
+
+# Open a new browser window and navigate to the TiddlyWiki site containing the macro you want
+# Double click the tiddler, or click the {{{source}}} button (on other sites it will sometimes be a {{{view}}} or {{{edit}}} button)
+# The entire text of the tiddler should be selected; if not select it manually with ~Control-A or ~Command-A
+# Copy the entire text of the tiddler to the clipboard
+# Open your TiddlyWiki file in a new browser window
+# Click {{{new tiddler}}} to create a new blank tiddler
+## Paste the contents of the clipboard into it's body
+## Set the title as appropriate
+## Add the tag {{{systemConfig}}}
+# Click {{{done}}} on the tiddler
+# SaveChanges
+# Reload your TiddlyWiki in the browser
+The plugin should now be available for use.

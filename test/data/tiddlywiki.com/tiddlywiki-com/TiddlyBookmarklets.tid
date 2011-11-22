@@ -1,0 +1,15 @@
+title: TiddlyBookmarklets
+modifier: jermolene
+created: 20110211110707
+modified: 20111020135127
+tags: community help
+creator: psd
+
+[[Bookmarklets|http://en.wikipedia.org/wiki/Bookmarklet]] can be useful for TiddlyWiki hackers. They are browser bookmarks that contain embedded ~JavaScript that can reach into the currently loaded TiddlyWiki page to manipulate them and extract data.
+
+Drag these links to your bookmark/favourites bar, or right click on them and choose "add to bookmarks" or "add to favourites":
+* [[Scrub shadow tiddlers|javascript:(function(){if(window.version&&window.version.title=='TiddlyWiki'){for(var s in config.shadowTiddlers){store.removeTiddler(s);}refreshDisplay();}})()]] - deletes any overridden shadow tiddlers, reverting them to their default values. Handy when you’ve gone mad with PageTemplate customisations and your ~TiddlyWiki document won’t display properly
+* [[Scrub tiddler fields|javascript:(function(){if(window.version&&window.version.title=='TiddlyWiki'){store.forEachTiddler(function(title,tiddler){tiddler.fields={};});refreshDisplay();}})()]] - all the extended fields from a ~TiddlyWiki document, including that pesky “changecount” field
+* [[Rescue raw TiddlyWiki content|javascript:(function(){if(window.version&&window.version.title=='TiddlyWiki'){var w=window.open();w.document.open();w.document.write('<html><body><pre>');w.document.write(store.allTiddlersAsHtml().htmlEncode());w.document.write('</pre></body></html>');w.document.close();}})()]] - opens a new window containing the raw content of a ~TiddlyWiki.  Handy when you’ve inadvertently been editing an online version of TiddlyWiki that isn’t letting you save changes in the usual way
+
+If you're creating your own bookmarklets, this [[editor|http://subsimple.com/bookmarklets/jsbuilder.htm]] and these [[tips|http://subsimple.com/bookmarklets/tips.asp]] are useful resources.

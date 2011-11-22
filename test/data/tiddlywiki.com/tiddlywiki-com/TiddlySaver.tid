@@ -1,0 +1,14 @@
+title: TiddlySaver
+modifier: jermolene
+created: 20110211110708
+modified: 20111103164539
+tags: features
+creator: psd
+
+The ~TiddlySaver Java applet allows ~TiddlyWiki to save changes in a local version (from a file:// URL) of Safari, Opera and other browsers. It is a small file named [["TiddlySaver.jar"|TiddlySaver.jar]] that must be placed in the same directory as your ~TiddlyWiki file. As of August 2008, when an empty ~TiddlyWiki file is downloaded using either Safari or Opera, it is bundled with a copy of the ~TiddlySaver.jar file in a zip file - both files must be in the same directory ''whenever the ~TiddlyWiki file is opened'' in order to work.
+
+[["TiddlySaver.jar"|TiddlySaver.jar]]  is signed by [[UnaMesa Association|UnaMesa]]. The [[UnaMesa Association|UnaMesa]] certificate is signed by the ''Thawte Code Signing CA'' intermediate certificate which is chained to the ''Thawte Premium Server CA'' root certificate. You need to trust this certificate Chain to be able to use the applet.
+
+Note that there is currently [[a bug|http://trac.tiddlywiki.org/ticket/172]] that prevents ~TiddlySaver from working if you have specified a backup directory in AdvancedOptions and the directory doesn't exist.
+
+Thanks to Andrew Gregory for the original TiddlySaver code, and ~BidiX for arranging all the certificate magic.

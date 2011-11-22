@@ -1,0 +1,21 @@
+title: Suppressing Formatting
+modifier: psd
+created: 20110216112221
+tags: formatting
+creator: psd
+
+Wiki markup rules can be suppressed for any given section of text by enclosing it in 3 ''double'' quotes:
+{{{
+"""//WikiWord//"""
+}}}
+Displays as:
+"""//WikiWord//"""
+
+WikiWords can also be suppressed by prefixing the WikiWord with ''~'':
+{{{
+~WikiWord
+}}}
+Displays as:
+~WikiWord
+!!Also See
+[[Code formatting]]

@@ -1,0 +1,10 @@
+title: TiddlyWiki
+modifier: jermolene
+created: 20110211110708
+modified: 20111020135127
+tags: concepts
+creator: psd
+
+~TiddlyWiki is a complete [[wiki|WikiWikiWeb]] in a single HTML file. It contains the entire text of the wiki, and all the ~JavaScript, CSS and HTML goodness to be able to display it, and let you edit it or search it - without needing a server. Although, having said that, there are some fine ServerSide adaptations out there.
+
+~TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers. [[Osmosoft]], part of [[BT|http://btplc.com]], is the leading contributor to the project.

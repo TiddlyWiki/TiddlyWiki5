@@ -1,0 +1,37 @@
+title: list macro
+modifier: colmbritton
+created: 20110211143953
+modified: 20110211144608
+tags: macro
+creator: colmbritton
+
+!all
+To list all tiddlers
+{{{
+<<list all>>
+}}}
+!filter
+List tiddlers that match a certain [[filter|filters syntax]]. The following example lists all plugins.
+{{{
+<<list filter [tag[systemConfig]]>>
+}}}
+!Missing
+To list tiddlers that have links to them but are not defined:
+{{{
+<<list missing>>
+}}}
+!Orphans
+To list tiddlers that are not linked to from any other tiddlers:
+{{{
+<<list orphans>>
+}}}
+!Shadowed
+To list tiddlers shadowed with default contents:
+{{{
+<<list shadowed>>
+}}}
+!Touched
+Show tiddlers that have been modified locally:
+{{{
+<<list touched>>
+}}}

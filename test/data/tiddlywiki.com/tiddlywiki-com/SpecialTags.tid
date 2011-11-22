@@ -1,0 +1,12 @@
+title: SpecialTags
+modifier: colmbritton
+created: 20110211110704
+modified: 20110221142923
+tags: features
+creator: psd
+
+TiddlyWiki defines a small number of SpecialTags that are used to indicate that tiddlers should be treated differently in some way:
+* ''excludeSearch'': excludes a tiddler from search results
+* ''excludeLists'': excludes a tiddler from the lists in the sidebar tabs
+* ''systemConfig'': marks tiddlers that contain [[JavaScript|http://en.wikipedia.org/wiki/JavaScript]] that should be executed once TiddlyWiki has loaded
+* ''excludeMissing'': excludes a tiddler from the processing that generates the MissingTiddlers list. Use it when you have a tiddler that contains links to missing tiddlers and you don't want those missing links to appear in the MissingTiddlers list

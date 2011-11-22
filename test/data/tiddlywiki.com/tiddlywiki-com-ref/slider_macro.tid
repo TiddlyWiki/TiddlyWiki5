@@ -1,0 +1,20 @@
+title: slider macro
+modifier: colmbritton
+created: 20110211143954
+modified: 20110211144610
+tags: macro
+creator: colmbritton
+
+The slider macro allows embedding tiddlers within another tiddler, with the option to toggle the visibility of the [[transclusion|transcluded]] content:
+{{{
+<<slider cookie tiddler label tooltip>>
+}}}
+* {{{cookie}}}: variable to save the state of the slider (e.g. {{{chkFooSlider}}})
+* {{{tiddler}}}: name of the tiddler to include in the slider
+* {{{label}}}: title text of the slider
+* {{{tooltip}}}: tooltip text of the slider
+
+For example: 
+{{{
+<<slider chkTestSlider [[OptionsPanel]] "Options" "Open advanced options">>
+}}}

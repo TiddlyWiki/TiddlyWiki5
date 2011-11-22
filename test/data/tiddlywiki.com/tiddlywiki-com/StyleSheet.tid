@@ -1,0 +1,62 @@
+title: StyleSheet
+modifier: jermolene
+created: 20110211110705
+modified: 20111103182525
+creator: psd
+
+/***
+This fixes a problem with the tabs slider
+***/
+/*{{{*/
+#sidebarTabs .button {
+margin:0em 0.2em;
+padding:0.2em 0.3em;
+display:block;
+}
+/*}}}*/
+/***
+This is a sample style definition to demonstrate [[CustomCssClass|CSS Formatting]] formatting
+***/
+/*{{{*/
+.wrappingClass {color: #666; background: #bbb;}
+/*}}}*/
+/***
+Prettyify
+***/
+/*{{{*/
+body {
+	font-size: 0.92em;
+	margin-bottom: 4em;
+}
+
+.tiddler .viewer {
+	font-size: 1.1em;
+}
+
+#contentWrapper .chunkyButton {
+	width: auto;
+}
+
+#contentWrapper span.chunkyButton {
+	border: none;
+}
+
+#contentWrapper span.chunkyButton a.button, #contentWrapper span.chunkyButton a:active.button {
+	font-weight: bold;
+	font-size: 1.3em;
+	color: [[ColorPalette::Background]];
+	background-color: [[ColorPalette::QuaternaryMid]];
+	text-align: center;
+	padding: 0.5em 1em;
+	border-radius: 1ex;
+	border-style: none !important;
+}
+
+#contentWrapper span.chunkyButton a.button:hover {
+	background-color: [[ColorPalette::QuaternaryDark]];
+	color: [[ColorPalette::Background]];
+	border-style: none !important;
+}
+
+/*}}}*/
+

@@ -1,0 +1,18 @@
+title: Basic Formatting
+modifier: psd
+created: 20110211142531
+modified: 201102151515
+tags: formatting
+creator: matt
+
+|Style|Formatting|h
+|''bold''|{{{''bold''}}} - two single-quotes, not a double-quote|
+|//italics//|{{{//italics//}}}|
+|''//bold italics//''|{{{''//bold italics//''}}}|
+|__underline__|{{{__underline__}}}|
+|--strikethrough--|{{{--Strikethrough--}}}|
+|super^^script^^|{{{super^^script^^}}}|
+|sub~~script~~|{{{sub~~script~~}}}|
+|@@Highlight@@|{{{@@Highlight@@}}}|
+|{{{plain text}}}|{{{ {{{PlainText No ''Formatting''}}} }}}|
+|/%this text will be invisible%/hidden text|{{{/%this text will be invisible%/}}}|

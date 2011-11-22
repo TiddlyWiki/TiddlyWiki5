@@ -1,0 +1,6 @@
+title: WikiWord
+modifier: blaine
+created: 20110211151015
+creator: blaine
+
+A WikiWord is a word composed of a bunch of other words slammed together with each of their first letters capitalised. WikiWord notation in a conventional WikiWikiWeb is used to name individual pages while TiddlyWiki uses WikiWord titles for smaller chunks of MicroContent. Referring to a page with a WikiWord automatically creates a link to it. Clicking on a link jumps to that page or, if it doesn't exist, to an editor to create it. It's also easy to have NonWikiWordLinks, and there's a WikiWordEscape for situations where you don't want a WikiWord to be interpreted as a link.
