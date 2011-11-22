@@ -1,5 +1,7 @@
 /*
- Parse a space-separated string of name:value parameters
+ Parse a space-separated string of name:value parameters. Values can be quoted with single quotes, double quotes,
+ double square brackets, or double curly braces.
+
  The parameters are returned in a structure that can be referenced like this:
 
 		(return).byName["name"][0] - First occurance of parameter with a given name
