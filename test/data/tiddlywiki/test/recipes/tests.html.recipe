@@ -1,0 +1,18 @@
+# TiddlyWiki components
+recipe: ../../tiddlywiki.html.recipe
+recipe: ../../deprecated/split.recipe
+recipe: shadows/split.recipe
+
+# jQuery
+recipe: ../../jquery/split.recipe
+
+# test framework
+recipe: ../qunit/split.recipe
+recipe: ../jqMock/split.recipe
+recipe: ../html/split.recipe
+
+# tests
+recipe: ../js/split.recipe
+
+# testdata
+recipe: ../testdata/split.recipe

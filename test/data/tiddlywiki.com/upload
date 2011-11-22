@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+# Usage:
+#  upload [user] [release] [cleanup]
+
+# default values
+DEFAULT_RELEASE="2.6.5"
+REMOTE_USER=${1:-$USER}
+RELEASE=${2:-$DEFAULT_RELEASE}
+DEST=$PWD/cooked/tiddlywiki.com
+HOST="tiddlywiki.com"
+DIR="/var/www/www.tiddlywiki.com/htdocs"
+ARCHIVE_DIR="$DIR/archive"
+OWNER="www-data:www-data"
+PERM="664"
+
+# setPermissions()
+# Usage:
+#  setPermissions file
+function setPermissions() {
+	COMMANDS="$COMMANDS sudo chown $OWNER $1;"
+	COMMANDS="$COMMANDS sudo chmod $PERM $1;"
+}
+
+# upload files to temporary folder
+echo
+echo "uploading files"
+echo
+FILES="$DEST/index.$RELEASE.html $DEST/index.$RELEASE.xml $DEST/empty.$RELEASE.html $DEST/TiddlySaver.jar $DEST/empty.$RELEASE.zip"
+scp $FILES "$REMOTE_USER@$HOST:./tmp/"
+
+# transfer files to their respective folders
+echo
+echo "transferring files"
+echo
+COMMANDS="ssh $REMOTE_USER@$HOST"
+# Index
+COMMANDS="$COMMANDS sudo cp ./tmp/index.$RELEASE.html $ARCHIVE_DIR/;"
+setPermissions "$ARCHIVE_DIR/index.$RELEASE.html"
+COMMANDS="$COMMANDS sudo mv ./tmp/index.$RELEASE.html $DIR/index.html;"
+setPermissions "$DIR/index.html"
+COMMANDS="$COMMANDS sudo mv ./tmp/index.$RELEASE.xml $DIR/index.xml;"
+setPermissions "$DIR/index.xml"
+# Empty
+COMMANDS="$COMMANDS sudo cp ./tmp/empty.$RELEASE.html $ARCHIVE_DIR/;"
+setPermissions "$ARCHIVE_DIR/empty.$RELEASE.html"
+COMMANDS="$COMMANDS sudo cp ./tmp/empty.$RELEASE.html $DIR/empty.html;"
+setPermissions "$DIR/empty.html"
+# Upgrade
+COMMANDS="$COMMANDS sudo mv ./tmp/empty.$RELEASE.html $DIR/upgrade/index.html;"
+setPermissions "$DIR/upgrade/index.html"
+# TiddlySaver
+COMMANDS="$COMMANDS sudo mv ./tmp/TiddlySaver.jar $DIR/TiddlySaver.jar;"
+setPermissions "$DIR/TiddlySaver.jar"
+# ZIP package
+COMMANDS="$COMMANDS sudo mv ./tmp/empty.$RELEASE.zip $DIR/empty.zip;"
+setPermissions "$DIR/empty.zip"
+# execute
+$COMMANDS
+
+# cleanup
+if [ "$3" = "true" ]; then
+	echo "cleaning up (removing cooked files)"
+	echo "removing index.$RELEASE.html"
+	rm "index.$RELEASE.html"
+	echo "removing empty.$RELEASE.html"
+	rm "empty.$RELEASE.html"
+	echo "removing TiddlySaver.jar"
+	rm "TiddlySaver.jar"
+fi

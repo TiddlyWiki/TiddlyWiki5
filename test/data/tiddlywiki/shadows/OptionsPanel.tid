@@ -1,0 +1,15 @@
+title: OptionsPanel
+
+These [[InterfaceOptions]] for customising [[TiddlyWiki]] are saved in your browser
+
+Your username for signing your edits. Write it as a [[WikiWord]] (eg [[JoeBloggs]])
+
+<<option txtUserName>>
+<<option chkSaveBackups>> [[SaveBackups]]
+<<option chkAutoSave>> [[AutoSave]]
+<<option chkRegExpSearch>> [[RegExpSearch]]
+<<option chkCaseSensitiveSearch>> [[CaseSensitiveSearch]]
+<<option chkAnimate>> [[EnableAnimations]]
+
+----
+Also see [[AdvancedOptions]]

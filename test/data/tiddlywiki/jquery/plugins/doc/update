@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Usage:
+#  upload [user]
+
+REMOTE_USER=${1:-$USER}
+HOST="jquery.tiddlywiki.org"
+DIR="/var/www/www.jquery.tiddlywiki.org/htdocs/"
+
+COMMANDS="ssh $REMOTE_USER@$HOST"
+COMMANDS="$COMMANDS cd $DIR;"
+COMMANDS="$COMMANDS sudo svn update;"
+$COMMANDS

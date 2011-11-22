@@ -1,0 +1,5 @@
+recipe: ../../tiddlywiki.com/index.html.recipe
+tiddler: Test1.tiddler
+tiddler: TestNoPreTag.tiddler
+tiddler: TestWithTags.tiddler
+tiddler: TestContainsTag.tiddler

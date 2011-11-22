@@ -1,0 +1,13 @@
+prehead: MarkupPreHead.tid
+shadow: MarkupPreHead.tid
+shadow: ColorPalette.tid
+shadow: StyleSheetColors.tid
+shadow: StyleSheetLayout.tid
+shadow: StyleSheetLocale.tid
+shadow: StyleSheetPrint.tid
+shadow: PageTemplate.tid
+shadow: ViewTemplate.tid
+shadow: EditTemplate.tid
+shadow: GettingStarted.tid
+shadow: OptionsPanel.tid
+shadow: ImportTiddlers.tid

@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# This is a sample ginsu script to be used with the tiddlywiki.com scripts
+# Adjust this script and then install it somewhere on your $PATH, such as ~/bin.
+#
+# You will need to adjust COOKER_TRUNK below.
+#
+# Change this to where you have the cooker code installed
+COOKER_TRUNK=$HOME/Documents/Code/GitHub/tiddlywiki/cooker
+DEFAULT_FILENAME=index
+FILENAME=${1:-$DEFAULT_FILENAME}
+DEST=$PWD
+RECIPE=$PWD/$FILENAME.html
+ruby -C $COOKER_TRUNK ginsu.rb $RECIPE -d$DEST $2 $3 $4 $5

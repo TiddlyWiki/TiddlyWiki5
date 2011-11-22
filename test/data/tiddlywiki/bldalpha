@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# Usage:
+#  bldalpha [release]
+
+# Requires a cook script on $PATH.
+# See 'cook' in this directory for a sample.
+
+DEFAULT_RELEASE=`cat ALPHA`
+OUTPUT_DIR=$PWD/cooked
+mkdir -p $OUTPUT_DIR
+RELEASE=${1:-$DEFAULT_RELEASE}
+RECIPE=$PWD/tiddlywiki.html.recipe
+RECIPE_EXT_JS=$PWD/tiddlywiki_externaljs.html.recipe
+RECIPE_EXT_JS_TS=$PWD/tiddlywiki_externaljs_tiddlyspace_alpha.html.recipe
+cook $RECIPE -d $OUTPUT_DIR -o tiddlywiki.$RELEASE.html
+cp java/TiddlySaver.jar $OUTPUT_DIR
+cook $RECIPE -d $OUTPUT_DIR -o tiddlywiki_compressed.$RELEASE.html -cr -Cr -Dr
+cook $RECIPE -d $OUTPUT_DIR -o twcore.$RELEASE.js -j
+cook $RECIPE_EXT_JS -d $OUTPUT_DIR -o tiddlywiki_externaljs.$RELEASE.html
+cook $RECIPE_EXT_JS_TS -d $OUTPUT_DIR -o tiddlywiki_externaljs_tiddlyspace.$RELEASE.html

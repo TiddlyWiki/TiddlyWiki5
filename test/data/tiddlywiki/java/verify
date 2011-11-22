@@ -1,0 +1,2 @@
+# assume TiddlySaverVerify.keystore and TiddlySaver.jar in the current directory
+jarsigner -verify -verbose -certs -keystore TiddlySaverVerify.keystore -keypass tiddlywiki TiddlySaver.jar

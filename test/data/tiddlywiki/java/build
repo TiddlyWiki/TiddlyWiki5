@@ -1,0 +1,5 @@
+javac -source 1.2 -target 1.2 -g:none TiddlySaver.java
+jar cf TiddlySaver.jar TiddlySaver*.class
+# assume you have UnaMesa.keystore in the same directory
+# and Passphrase for keystore
+jarsigner -keystore UnaMesa.keystore TiddlySaver.jar BidiX
