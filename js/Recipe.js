@@ -28,7 +28,9 @@ this.ingredients = {
 */
 
 var tiddler = require("./Tiddler.js"),
-	tiddlerUtils = require("./TiddlerUtils.js"),
+	tiddlerInput = require("./TiddlerInput.js"),
+	tiddlerOutput = require("./TiddlerOutput.js"),
+	utils = require("./TiddlerUtils.js"),
 	tiddlywiki = require("./TiddlyWiki.js"),
 	fs = require("fs"),
 	path = require("path"),
@@ -102,11 +104,11 @@ Recipe.prototype.readIngredient = function(dirname,filepath) {
 			title: basename
 		};
 	// Read the tiddler file
-	fields = tiddlerUtils.parseTiddler(fs.readFileSync(fullpath,"utf8"),extname,fields);
+	fields = tiddlerInput.parseTiddler(fs.readFileSync(fullpath,"utf8"),extname,fields);
 	// Check for the .meta file
 	var metafile = fullpath + ".meta";
 	if(path.existsSync(metafile)) {
-		fields = tiddlerUtils.parseMetaDataBlock(fs.readFileSync(metafile,"utf8"),fields);
+		fields = tiddlerInput.parseMetaDataBlock(fs.readFileSync(metafile,"utf8"),fields);
 	}
 	return fields;
 }
@@ -164,7 +166,7 @@ Recipe.ingredientOutputter = {
 		// Ordinary tiddlers are output as a <DIV>
 		for(var t=0; t<ingredient.length; t++) {
 			var tid = ingredient[t];
-			tiddlerUtils.outputTiddlerDiv(out,tid);
+			tiddlerOutput.outputTiddlerDiv(out,tid);
 		}
 	},
 	javascript: function(out,ingredient) {
@@ -196,7 +198,7 @@ Recipe.ingredientOutputter = {
 			} else {
 				tweakedTiddler = tid;
 			}
-			tiddlerUtils.outputTiddlerDiv(out,tweakedTiddler,{omitPrecedingLineFeed: true});
+			tiddlerOutput.outputTiddlerDiv(out,tweakedTiddler,{omitPrecedingLineFeed: true});
 		}
 	}
 };
