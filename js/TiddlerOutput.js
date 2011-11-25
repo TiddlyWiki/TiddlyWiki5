@@ -14,7 +14,7 @@ tid - the tiddler to be output
 options - options:
 		omitPrecedingLineFeed - determines if a linefeed is inserted between the <PRE> tag and the text
 */
-tiddlerOutput.outputTiddlerDiv = function(out,tid) {
+tiddlerOutput.outputTiddlerDiv = function(tid) {
 	var result = [];
 	var outputAttribute = function(name,value) {
 		result.push(" " + name + "=\"" + value + "\"");
@@ -43,7 +43,7 @@ tiddlerOutput.outputTiddlerDiv = function(out,tid) {
 	result.push(">\n<pre>\n");
 	result.push(utils.htmlEncode(tid.fields.text));
 	result.push("</pre>\n</div>");
-	out.push(result.join(""));
+	return result.join("");
 }
 
 tiddlerOutput.stringifyTags = function(tags) {

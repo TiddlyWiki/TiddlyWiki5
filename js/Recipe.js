@@ -166,7 +166,7 @@ Recipe.ingredientOutputter = {
 		// Ordinary tiddlers are output as a <DIV>
 		for(var t=0; t<ingredient.length; t++) {
 			var tid = ingredient[t];
-			tiddlerOutput.outputTiddlerDiv(out,tid);
+			out.push(tiddlerOutput.outputTiddlerDiv(tid));
 		}
 	},
 	javascript: function(out,ingredient) {
@@ -198,7 +198,7 @@ Recipe.ingredientOutputter = {
 			} else {
 				tweakedTiddler = tid;
 			}
-			tiddlerOutput.outputTiddlerDiv(out,tweakedTiddler);
+			out.push(tiddlerOutput.outputTiddlerDiv(tweakedTiddler));
 		}
 	}
 };
