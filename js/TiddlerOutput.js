@@ -8,6 +8,39 @@ var argParser = require("./ArgParser.js"),
 var tiddlerOutput = exports;
 
 /*
+Output a tiddler as a .tid file
+*/
+tiddlerOutput.outputTiddler = function(tid) {
+	var result = [];
+	var outputAttribute = function(name,value) {
+		result.push(name + ": " + value + "\n");
+	};
+	for(var t in tid.fields) {
+		switch(t) {
+			case "text":
+				// Ignore the text field
+				break;
+			case "tags":
+				// Output tags as a list
+				outputAttribute(t,tiddlerOutput.stringifyTags(tid.fields.tags));
+				break;
+			case "modified":
+			case "created":
+				// Output dates in YYYYMMDDHHMM
+				outputAttribute(t,utils.convertToYYYYMMDDHHMM(tid.fields[t]));
+				break;
+			default:
+				// Output other attributes raw
+				outputAttribute(t,tid.fields[t]);
+				break;
+		}
+	}
+	result.push("\n");
+	result.push(tid.fields.text);
+	return result.join("");
+}
+
+/*
 Output a tiddler as an HTML <DIV>
 out - array to push the output strings
 tid - the tiddler to be output
