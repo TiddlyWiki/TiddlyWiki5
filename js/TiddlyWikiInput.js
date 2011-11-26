@@ -22,6 +22,7 @@ tiddlyWikiInput.parseTiddlyWiki = function(tiddlywikidoc) {
 		while(match && startPos < storeAreaPos[1]) {
 			var endPos = endOfDivRegExp.lastIndex;
 			var fields = tiddlerInput.parseTiddlerDiv(tiddlywikidoc.substring(startPos,endPos));
+			fields.text = utils.htmlDecode(fields.text);
 			results.push(fields);
 			startPos = endPos;
 			match = endOfDivRegExp.exec(tiddlywikidoc);
