@@ -26,5 +26,5 @@ for(var t=0; t<tiddlers.length; t++) {
 	recipe.push("tiddler: " + filename + "\n");
 }
 
-fs.writeFileSync(path.join(outputdir,"split.recipe"),recipe.join());
+fs.writeFileSync(path.join(outputdir,"split.recipe"),recipe.join(""));
 
