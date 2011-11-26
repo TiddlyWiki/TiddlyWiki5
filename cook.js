@@ -12,4 +12,4 @@ var store = new tiddlywiki.TiddlyWiki();
 
 var theRecipe = new recipe.Recipe(store,filename);
 
-console.log(theRecipe.cook());
+process.stdout.write(theRecipe.cook());
