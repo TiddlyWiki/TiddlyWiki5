@@ -21,7 +21,7 @@ var tiddlers = tiddlyWikiInput.parseTiddlyWiki(tiddlywikidoc);
 var recipe = [];
 for(var t=0; t<tiddlers.length; t++) {
 	var tid = new tiddler.Tiddler(tiddlers[t]);
-	var filename = tid.fields.title + ".tid";
+	var filename = encodeURIComponent(tid.fields.title) + ".tid";
 	fs.writeFileSync(path.join(outputdir,filename),tiddlerOutput.outputTiddler(tid));
 	recipe.push("tiddler: " + filename + "\n");
 }
