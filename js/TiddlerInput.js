@@ -2,7 +2,7 @@
 Functions concerned with parsing representations of tiddlers
 */
 
-var argParser = require("./ArgParser.js"),
+var ArgParser = require("./ArgParser.js").ArgParser,
 	utils = require("./Utils.js");
 
 var tiddlerInput = exports;
@@ -143,7 +143,7 @@ tiddlerInput.parseMetaDataItem = function(field,value) {
 			result = utils.convertFromYYYYMMDDHHMMSS(value);
 			break;
 		case "tags":
-			var parser = new argParser.ArgParser(value,{noNames: true});
+			var parser = new ArgParser(value,{noNames: true});
 			result = parser.getValuesByName("","");
 			break;
 		default:

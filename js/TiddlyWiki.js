@@ -1,4 +1,4 @@
-var tiddler = require("./Tiddler.js");
+var Tiddler = require("./Tiddler.js").Tiddler;
 
 var TiddlyWiki = function() {
 	this.tiddlers = {};
@@ -10,7 +10,7 @@ TiddlyWiki.prototype.clear = function() {
 
 TiddlyWiki.prototype.fetchTiddler = function(title) {
 	var t = this.tiddlers[title];
-	return t instanceof tiddler.Tiddler ? t : null;
+	return t instanceof Tiddler ? t : null;
 }
 
 TiddlyWiki.prototype.deleteTiddler = function(title) {
@@ -25,7 +25,7 @@ TiddlyWiki.prototype.forEachTiddler = function(callback) {
 	var t;
 	for(t in this.tiddlers) {
 		var tiddler = this.tiddlers[t];
-		if(tiddler instanceof tiddler.Tiddler)
+		if(tiddler instanceof Tiddler)
 			callback.call(this,t,tiddler);
 	}
 }

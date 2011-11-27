@@ -8,7 +8,7 @@
 var sys = require("sys"),
 	fs = require("fs"),
 	path = require("path"),
-	tiddler = require("./js/Tiddler.js"),
+	Tiddler = require("./js/Tiddler.js").Tiddler,
 	tiddlyWikiInput = require("./js/TiddlyWikiInput.js"),
 	tiddlerOutput = require("./js/TiddlerOutput.js");
 
@@ -20,7 +20,7 @@ var tiddlers = tiddlyWikiInput.parseTiddlyWiki(tiddlywikidoc);
 
 var recipe = [];
 for(var t=0; t<tiddlers.length; t++) {
-	var tid = new tiddler.Tiddler(tiddlers[t]);
+	var tid = new Tiddler(tiddlers[t]);
 	var filename = encodeURIComponent(tid.fields.title.replace(/ /g,"_")) + ".tid";
 	fs.writeFileSync(path.join(outputdir,filename),tiddlerOutput.outputTiddler(tid));
 	recipe.push("tiddler: " + filename + "\n");

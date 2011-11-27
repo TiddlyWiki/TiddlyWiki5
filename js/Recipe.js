@@ -27,11 +27,11 @@ this.ingredients = {
 
 */
 
-var tiddler = require("./Tiddler.js"),
+var Tiddler = require("./Tiddler.js").Tiddler,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	utils = require("./Utils.js"),
-	tiddlywiki = require("./TiddlyWiki.js"),
+	TiddlyWiki = require("./TiddlyWiki.js").TiddlyWiki,
 	fs = require("fs"),
 	path = require("path"),
 	util = require("util");
@@ -86,7 +86,7 @@ Recipe.prototype.readIngredientPostProcess = {
 };
 
 Recipe.prototype.addIngredient = function(marker,tiddlerFields) {
-	var ingredientTiddler = new tiddler.Tiddler(tiddlerFields);
+	var ingredientTiddler = new Tiddler(tiddlerFields);
 	this.store.addTiddler(ingredientTiddler);
 	if(marker in this.ingredients) {
 		this.ingredients[marker].push(ingredientTiddler);
@@ -192,7 +192,7 @@ Recipe.ingredientOutputter = {
 			var title = tid.fields.title;
 			var tweakedTiddler;
 			if(title.indexOf(".shadow") === title.length - 7) {
-				tweakedTiddler = new tiddler.Tiddler(tid,{
+				tweakedTiddler = new Tiddler(tid,{
 					title: title.substr(0, title.length-7)
 				});
 			} else {

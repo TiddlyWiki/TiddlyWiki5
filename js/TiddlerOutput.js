@@ -2,8 +2,7 @@
 Functions concerned with parsing representations of tiddlers
 */
 
-var argParser = require("./ArgParser.js"),
-	utils = require("./Utils.js");
+var utils = require("./Utils.js");
 
 var tiddlerOutput = exports;
 

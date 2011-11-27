@@ -3,13 +3,13 @@
 // Usage: node cook.js <recipefile>
 
 var sys = require("sys"),
-	tiddlywiki = require("./js/TiddlyWiki.js"),
-	recipe = require("./js/Recipe.js");
+	TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
+	Recipe = require("./js/Recipe.js").Recipe;
 
 var filename = process.argv[2];
 
-var store = new tiddlywiki.TiddlyWiki();
+var store = new TiddlyWiki();
 
-var theRecipe = new recipe.Recipe(store,filename);
+var theRecipe = new Recipe(store,filename);
 
 process.stdout.write(theRecipe.cook());
