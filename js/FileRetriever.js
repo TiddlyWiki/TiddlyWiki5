@@ -15,7 +15,6 @@ var fileRequestQueue = utils.queue(function(task,callback) {
 	});
 },10);
 
-
 // Retrieve a file given a filepath specifier and a context path. If the filepath isn't an absolute
 // filepath or an absolute URL, then it is interpreted relative to the context path, which can also be
 // a filepath or a URL. It returns the final path used to reach the file. On completion, the callback

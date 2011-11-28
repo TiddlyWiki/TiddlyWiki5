@@ -139,9 +139,9 @@ Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
 
 // Return a string of the cooked recipe
 Recipe.prototype.cook = function() {
-	var template = this.ingredients.template ? this.ingredients.template[0].fields.text : "";
-	var out = [];
-	var me = this;
+	var template = this.ingredients.template ? this.ingredients.template[0].fields.text : "",
+		out = [],
+		me = this;
 	template.split("\n").forEach(function(line) {
 		var templateRegExp = /^(?:<!--@@(.*)@@-->)|(?:&lt;!--@@(.*)@@--&gt;)$/gi;
 		var match = templateRegExp.exec(line);
@@ -157,9 +157,9 @@ Recipe.prototype.cook = function() {
 
 // Output all the tiddlers in the recipe with a particular marker
 Recipe.prototype.outputIngredient = function(out,marker) {
-	var ingredient = this.ingredients[marker];
-	var outputType = Recipe.ingredientOutputMapper[marker] || "raw";
-	var outputter = Recipe.ingredientOutputter[outputType];
+	var ingredient = this.ingredients[marker],
+		outputType = Recipe.ingredientOutputMapper[marker] || "raw",
+		outputter = Recipe.ingredientOutputter[outputType];
 	if(outputter && ingredient) {
 		outputter(out,ingredient);
 	}
@@ -195,8 +195,8 @@ Recipe.ingredientOutputter = {
 	javascript: function(out,ingredient) {
 		// Lines starting with //# are removed from javascript tiddlers
 		for(var t=0; t<ingredient.length; t++) {
-			var tid = ingredient[t];
-			var text = tid.fields.text;
+			var tid = ingredient[t],
+				text = tid.fields.text;
 			// For compatibility with cook.rb, remove one trailing \n from tiddler
 			text = text.charAt(text.length-1) === "\n" ? text.substr(0,text.length-1) : text;
 			var lines = text.split("\n");
@@ -211,9 +211,9 @@ Recipe.ingredientOutputter = {
 	shadow: function(out,ingredient) {
 		// Shadows are output as a <DIV> with the the ".shadow" suffix removed from the title
 		for(var t=0; t<ingredient.length; t++) {
-			var tid = ingredient[t];
-			var title = tid.fields.title;
-			var tweakedTiddler;
+			var tid = ingredient[t],
+				title = tid.fields.title,
+				tweakedTiddler;
 			if(title.indexOf(".shadow") === title.length - 7) {
 				tweakedTiddler = new Tiddler(tid,{
 					title: title.substr(0, title.length-7)

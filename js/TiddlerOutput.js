@@ -10,8 +10,8 @@ var tiddlerOutput = exports;
 Output a tiddler as a .tid file
 */
 tiddlerOutput.outputTiddler = function(tid) {
-	var result = [];
-	var outputAttribute = function(name,value) {
+	var result = [],
+		outputAttribute = function(name,value) {
 		result.push(name + ": " + value + "\n");
 	};
 	for(var t in tid.fields) {
@@ -47,10 +47,10 @@ options - options:
 		omitPrecedingLineFeed - determines if a linefeed is inserted between the <PRE> tag and the text
 */
 tiddlerOutput.outputTiddlerDiv = function(tid) {
-	var result = [];
-	var outputAttribute = function(name,value) {
-		result.push(" " + name + "=\"" + value + "\"");
-	};
+	var result = [],
+		outputAttribute = function(name,value) {
+			result.push(" " + name + "=\"" + value + "\"");
+		};
 	result.push("<div");
 	for(var t in tid.fields) {
 		switch(t) {

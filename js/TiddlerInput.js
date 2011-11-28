@@ -109,10 +109,10 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 	if(fields === undefined) {
 		var fields = {};
 	}
-	var divRegExp = /^\s*<div\s+([^>]*)>((?:.|\n)*)<\/div>\s*$/gi;
-	var subDivRegExp = /^\s*<pre>((?:.|\n)*)<\/pre>\s*$/gi;
-	var attrRegExp = /\s*([^=\s]+)\s*=\s*"([^"]*)"/gi;
-	var match = divRegExp.exec(text);
+	var divRegExp = /^\s*<div\s+([^>]*)>((?:.|\n)*)<\/div>\s*$/gi,
+		subDivRegExp = /^\s*<pre>((?:.|\n)*)<\/pre>\s*$/gi,
+		attrRegExp = /\s*([^=\s]+)\s*=\s*"([^"]*)"/gi,
+		match = divRegExp.exec(text);
 	if(match) {
 		var subMatch = subDivRegExp.exec(match[2]); // Body of the <DIV> tag
 		if(subMatch) {
