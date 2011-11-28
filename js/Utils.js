@@ -72,3 +72,42 @@ utils.htmlDecode = function(s)
 	return s.replace(/&lt;/mg,"<").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
 
+// Adapted from async.js, https://github.com/caolan/async
+// Creates a queue of tasks for an asyncronous worker function with a specified maximum number of concurrent operations.
+// 	q = utils.queue(function(taskData,callback) {
+//		fs.readFile(taskData.filename,"uft8",function(err,data) {
+//			callback(err,data);
+//		});
+//  });
+// 	q.push(taskData,callback) is used to queue a new task
+utils.queue = function(worker, concurrency) {
+    var workers = 0;
+    var q = {
+        tasks: [],
+        concurrency: concurrency,
+        push: function (data, callback) {
+            q.tasks.push({data: data, callback: callback});
+            process.nextTick(q.process);
+        },
+        process: function () {
+            if (workers < q.concurrency && q.tasks.length) {
+                var task = q.tasks.shift();
+                workers += 1;
+                worker(task.data, function () {
+                    workers -= 1;
+                    if (task.callback) {
+                        task.callback.apply(task, arguments);
+                    }
+                    q.process();
+                });
+            }
+        },
+        length: function () {
+            return q.tasks.length;
+        },
+        running: function () {
+            return workers;
+        }
+    };
+    return q;
+};

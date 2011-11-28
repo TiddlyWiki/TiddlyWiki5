@@ -10,6 +10,7 @@ var filename = process.argv[2];
 
 var store = new TiddlyWiki();
 
-var theRecipe = new Recipe(store,filename);
+var theRecipe = new Recipe(store,filename,function() {
+	process.stdout.write(theRecipe.cook());
+});
 
-process.stdout.write(theRecipe.cook());

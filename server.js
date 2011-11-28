@@ -12,11 +12,12 @@ var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
 
 var filename = process.argv[2];
 
-http.createServer(function (request, response) {
+http.createServer(function(request, response) {
 	response.writeHead(200, {"Content-Type": "text/html"});
 	var store = new TiddlyWiki();
-	var theRecipe = new Recipe(store,filename);
-	response.end(theRecipe.cook(), "utf-8");
+	var theRecipe = new Recipe(store,filename,function() {
+		response.end(theRecipe.cook(), "utf-8");	
+	});
 }).listen(8000);
 
 sys.puts("Server running at http://127.0.0.1:8000/");

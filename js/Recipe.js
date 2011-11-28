@@ -32,33 +32,48 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	utils = require("./Utils.js"),
 	TiddlyWiki = require("./TiddlyWiki.js").TiddlyWiki,
+	retrieveFile = require("./FileRetriever.js").retrieveFile,
 	fs = require("fs"),
 	path = require("path"),
 	util = require("util");
 
-// Create a new Recipe object from the specified recipe file, storing the tiddlers in a specified TiddlyWiki store
-var Recipe = function(store,filepath) {
+// Create a new Recipe object from the specified recipe file, storing the tiddlers in a specified TiddlyWiki store. Invoke
+// the callback function when all of the referenced tiddlers and recipes have been loaded successfully
+var Recipe = function(store,filepath,callback) {
 	this.store = store; // Save a reference to the store
 	this.ingredients = {}; // Hashmap of array of ingredients
+	this.callback = callback;
+	this.fetchCount = 0;
 	this.readRecipe(filepath); // Read the recipe file
 }
 
-// Specialised configuration and handlers for particular ingredient markers
-var specialMarkers = {
-	shadow: {
-		readIngredientPostProcess: function(fields) {
-			// Add ".shadow" to the name of shadow tiddlers
-			fields.title = fields.title + ".shadow";
-			return fields;
-		}	
+// The fetch counter is used to keep track of the number of asynchronous requests outstanding
+Recipe.prototype.incFetchCount = function() {
+	this.fetchCount++;
+}
+
+// When the fetch counter reaches zero, all the results are in, so invoke the recipe callback
+Recipe.prototype.decFetchCount = function() {
+	if(--this.fetchCount === 0) {
+		this.callback();
 	}
-};
+}
 
 // Process the contents of a recipe file
 Recipe.prototype.readRecipe = function(filepath) {
 	var dirname = path.dirname(filepath),
 		me = this;
-	fs.readFileSync(filepath,"utf8").split("\n").forEach(function(line) {
+	this.incFetchCount();
+	retrieveFile(filepath, null, function(err, data) {
+		if (err) throw err;
+		me.processRecipe(data,dirname);
+		me.decFetchCount();
+	});
+}
+
+Recipe.prototype.processRecipe = function (data,dirname) {
+	var me = this;
+	data.split("\n").forEach(function(line) {
 		var p = line.indexOf(":");
 		if(p !== -1) {
 			var marker = line.substr(0, p).trim(),
@@ -66,11 +81,19 @@ Recipe.prototype.readRecipe = function(filepath) {
 			if(marker === "recipe") {
 				me.readRecipe(path.resolve(dirname,value));
 			} else {
-				var fields = me.readIngredient(dirname,value),
-					postProcess = me.readIngredientPostProcess[marker];
-				if(postProcess)
-					fields = postProcess(fields);
-				me.addIngredient(marker,fields);
+				if(!(marker in me.ingredients)) {
+					me.ingredients[marker] = [];
+				}
+				var ingredientLocation = me.ingredients[marker].length;
+				me.ingredients[marker][ingredientLocation] = null;
+				me.readIngredient(dirname,value,function(fields) {
+					var postProcess = me.readIngredientPostProcess[marker];
+					if(postProcess)
+						fields = postProcess(fields);
+					var ingredientTiddler = new Tiddler(fields);
+					me.store.addTiddler(ingredientTiddler);
+					me.ingredients[marker][ingredientLocation] = ingredientTiddler;
+				});
 			}
 		}
 	});
@@ -85,32 +108,35 @@ Recipe.prototype.readIngredientPostProcess = {
 	}	
 };
 
-Recipe.prototype.addIngredient = function(marker,tiddlerFields) {
-	var ingredientTiddler = new Tiddler(tiddlerFields);
-	this.store.addTiddler(ingredientTiddler);
-	if(marker in this.ingredients) {
-		this.ingredients[marker].push(ingredientTiddler);
-	} else {
-		this.ingredients[marker] = [ingredientTiddler];
-	}
-}
-
 // Read an ingredient file and return it as a hashmap of tiddler fields. Also read the .meta file, if present
-Recipe.prototype.readIngredient = function(dirname,filepath) {
-	var fullpath = path.resolve(dirname,filepath),
+Recipe.prototype.readIngredient = function(dirname,filepath,callback) {
+	var me = this,
+		fullpath = path.resolve(dirname,filepath),
 		extname = path.extname(filepath),
 		basename = path.basename(filepath,extname),
 		fields = {
 			title: basename
 		};
+	me.incFetchCount();
 	// Read the tiddler file
-	fields = tiddlerInput.parseTiddler(fs.readFileSync(fullpath,"utf8"),extname,fields);
-	// Check for the .meta file
-	var metafile = fullpath + ".meta";
-	if(path.existsSync(metafile)) {
-		fields = tiddlerInput.parseMetaDataBlock(fs.readFileSync(metafile,"utf8"),fields);
-	}
-	return fields;
+	retrieveFile(fullpath,null,function(err,data) {
+		if (err) throw err;
+		fields = tiddlerInput.parseTiddler(data,extname,fields);
+		// Check for the .meta file
+		var metafile = fullpath + ".meta";
+		me.incFetchCount();
+		retrieveFile(metafile,null,function(err,data) {
+			if(err && err.code !== 'ENOENT') {
+				throw err;
+			}
+			if(!err) {
+				fields = tiddlerInput.parseMetaDataBlock(data,fields);
+			}
+			callback(fields);
+			me.decFetchCount();
+		});
+		me.decFetchCount();
+	});
 }
 
 // Return a string of the cooked recipe
@@ -128,7 +154,6 @@ Recipe.prototype.cook = function() {
 			out.push(line);
 		}
 	});
-//	out.push("\nRecipe:\n" + util.inspect(this.ingredients,false,4));
 	return out.join("\n");
 }
 
