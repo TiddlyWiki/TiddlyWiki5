@@ -12,6 +12,10 @@ Cooks a recipe file and sends the output to STDOUT
 
 Cooks a recipe file and serves it over HTTP port 8000
 
+	node ginsu.js <tiddlywikifile> <outputdir>
+
+Splits a TiddlyWiki file into separate `.tid` files and a `split.recipe` file.
+
 ## Testing
 
 `test.sh` contains a simple test that cooks the main tiddlywiki.com recipe, first with the old Ruby-based tool, and then the new one. It uses OS X's opendiff to display the differences between the two files.
