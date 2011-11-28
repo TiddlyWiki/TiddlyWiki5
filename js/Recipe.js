@@ -44,7 +44,7 @@ var Recipe = function(store,filepath,callback) {
 	this.ingredients = {}; // Hashmap of array of ingredients
 	this.callback = callback;
 	this.fetchCount = 0;
-	this.readRecipe(filepath); // Read the recipe file
+	this.readRecipe(filepath,process.cwd()); // Read the recipe file
 }
 
 // The fetch counter is used to keep track of the number of asynchronous requests outstanding
@@ -60,18 +60,17 @@ Recipe.prototype.decFetchCount = function() {
 }
 
 // Process the contents of a recipe file
-Recipe.prototype.readRecipe = function(filepath) {
-	var dirname = path.dirname(filepath),
-		me = this;
+Recipe.prototype.readRecipe = function(filepath,contextPath) {
+	var me = this;
 	this.incFetchCount();
-	retrieveFile(filepath, null, function(err, data) {
+	var actualPath = retrieveFile(filepath, contextPath, function(err, data) {
 		if (err) throw err;
-		me.processRecipe(data,dirname);
+		me.processRecipe(data,actualPath);
 		me.decFetchCount();
 	});
 }
 
-Recipe.prototype.processRecipe = function (data,dirname) {
+Recipe.prototype.processRecipe = function (data,contextPath) {
 	var me = this;
 	data.split("\n").forEach(function(line) {
 		var p = line.indexOf(":");
@@ -79,14 +78,14 @@ Recipe.prototype.processRecipe = function (data,dirname) {
 			var marker = line.substr(0, p).trim(),
 				value = line.substr(p+1).trim();
 			if(marker === "recipe") {
-				me.readRecipe(path.resolve(dirname,value));
+				me.readRecipe(value,contextPath);
 			} else {
 				if(!(marker in me.ingredients)) {
 					me.ingredients[marker] = [];
 				}
 				var ingredientLocation = me.ingredients[marker].length;
 				me.ingredients[marker][ingredientLocation] = null;
-				me.readIngredient(dirname,value,function(fields) {
+				me.readIngredient(value,contextPath,function(fields) {
 					var postProcess = me.readIngredientPostProcess[marker];
 					if(postProcess)
 						fields = postProcess(fields);
@@ -109,9 +108,8 @@ Recipe.prototype.readIngredientPostProcess = {
 };
 
 // Read an ingredient file and return it as a hashmap of tiddler fields. Also read the .meta file, if present
-Recipe.prototype.readIngredient = function(dirname,filepath,callback) {
+Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
 	var me = this,
-		fullpath = path.resolve(dirname,filepath),
 		extname = path.extname(filepath),
 		basename = path.basename(filepath,extname),
 		fields = {
@@ -119,13 +117,13 @@ Recipe.prototype.readIngredient = function(dirname,filepath,callback) {
 		};
 	me.incFetchCount();
 	// Read the tiddler file
-	retrieveFile(fullpath,null,function(err,data) {
+	retrieveFile(filepath,contextPath,function(err,data) {
 		if (err) throw err;
 		fields = tiddlerInput.parseTiddler(data,extname,fields);
 		// Check for the .meta file
-		var metafile = fullpath + ".meta";
+		var metafile = filepath + ".meta";
 		me.incFetchCount();
-		retrieveFile(metafile,null,function(err,data) {
+		retrieveFile(metafile,contextPath,function(err,data) {
 			if(err && err.code !== 'ENOENT') {
 				throw err;
 			}
