@@ -124,7 +124,7 @@ Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
 		var metafile = filepath + ".meta";
 		me.incFetchCount();
 		retrieveFile(metafile,contextPath,function(err,data) {
-			if(err && err.code !== 'ENOENT') {
+			if(err && err.code !== "ENOENT" && err.code !== "404") {
 				throw err;
 			}
 			if(!err) {
