@@ -5,8 +5,7 @@
 // The .html extension is optional
 //
 // Ginsu creates the specified places the .tid files in the specified directory (which must already exist)
-var sys = require("sys"),
-	fs = require("fs"),
+var fs = require("fs"),
 	path = require("path"),
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	tiddlyWikiInput = require("./js/TiddlyWikiInput.js"),

@@ -4,7 +4,6 @@
 
 var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
 	Recipe = require("./js/Recipe.js").Recipe,
-	sys = require("sys"),
 	http = require("http"),
 	fs = require("fs"),
 	url = require("url"),

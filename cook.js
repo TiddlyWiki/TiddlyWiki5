@@ -2,8 +2,7 @@
 //
 // Usage: node cook.js <recipefile>
 
-var sys = require("sys"),
-	TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
+var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
 	Recipe = require("./js/Recipe.js").Recipe;
 
 var filename = process.argv[2];
