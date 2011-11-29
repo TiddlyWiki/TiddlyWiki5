@@ -1,6 +1,10 @@
 # cook.js
 
-This is an attempt to modernise TiddlyWiki's build system, which is based on tools written in Ruby called Cook and Ginsu (see https://github.com/TiddlyWiki/cooker for details). This new version is written in JavaScript for node.js, with the intention that it can share code with TiddlyWiki itself.
+This is an attempt to modernise TiddlyWiki's build system, which has been based on tools written in Ruby called Cook and Ginsu (see https://github.com/TiddlyWiki/cooker for details). They were first written in 2006 and have been heavily hacked since then.
+
+This new version is written in JavaScript for node.js, with the intention that it can share code with TiddlyWiki itself.
+
+The goal is to achieve byte-for-byte compatibility with the old tools, but only to support the features required by the recipe files that are currently in use by TiddlyWiki and TiddlySpace.
 
 ## Usage
 
