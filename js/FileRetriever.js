@@ -58,11 +58,10 @@ FileRetriever.retrieveFile = function(filepath,contextPath,callback) {
 		// If we've got a full HTTP URI then we're good to go
 		newpath = url.resolve(contextPath,filepath);
 		httpRequestQueue.push({url: newpath},callback);
-		return newpath;
 	} else {
 		// It's a file requested in a file context
 		newpath = path.resolve(path.dirname(contextPath),filepath);
 		fileRequestQueue.push({filepath: newpath},callback);
-		return newpath;
 	}
+	return newpath;
 }
