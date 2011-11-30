@@ -23,7 +23,7 @@ utils.convertToYYYYMMDDHHMM = function(date)
 	return date.getUTCFullYear() + utils.zeroPad(date.getUTCMonth()+1,2) + utils.zeroPad(date.getUTCDate(),2) + utils.zeroPad(date.getUTCHours(),2) + utils.zeroPad(date.getUTCMinutes(),2);
 };
 
-// Convert a date to UTC YYYYMMDD.HHMMSSMMM string format
+// Convert a date to UTC YYYYMMDDHHMMSSMMM string format
 utils.convertToYYYYMMDDHHMMSSMMM = function(date)
 {
 	return date.getUTCFullYear() + utils.zeroPad(date.getUTCMonth()+1,2) + utils.zeroPad(date.getUTCDate(),2) + utils.zeroPad(date.getUTCHours(),2) + utils.zeroPad(date.getUTCMinutes(),2) + utils.zeroPad(date.getUTCSeconds(),2) + utils.zeroPad(date.getUTCMilliseconds(),3) +"0";
