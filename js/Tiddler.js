@@ -21,6 +21,9 @@ as a TiddlyWiki quoted string (eg, "one [[two three]]").
 
 "use strict";
 
+var utils = require("./Utils.js"),
+	ArgParser = require("./ArgParser.js").ArgParser;
+
 var Tiddler = function(/* tiddler,fields */) {
 	this.fields = {};
 	for(var c=0; c<arguments.length; c++) {

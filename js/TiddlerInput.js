@@ -4,8 +4,7 @@ Functions concerned with parsing representations of tiddlers
 
 "use strict";
 
-var ArgParser = require("./ArgParser.js").ArgParser,
-	utils = require("./Utils.js"),
+var utils = require("./Utils.js"),
 	util = require("util");
 
 var tiddlerInput = exports;
@@ -71,16 +70,17 @@ tiddlerInput.parseTiddlerFileByMimeType = {
 		return [fields];
 	},
 	"application/json": function(text,fields) {
-		var tiddlers = JSON.parse(text);
-		var result = [];
+		var tiddlers = JSON.parse(text),
+			result = [],
+			getKnownFields = function(tid) {
+				var fields = {};
+				"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
+					fields[value] = tid[value];
+				});
+				return fields;
+			};
 		for(var t=0; t<tiddlers.length; t++) {
-			var tid = tiddlers[t],
-				fields = {};
-			// Just whitelist the fields we know that we want
-			"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
-				fields[value] = tid[value];
-			});
-			result.push(fields);
+			result.push(getKnownFields(tiddlers[t]));
 		}
 		return result;
 	}

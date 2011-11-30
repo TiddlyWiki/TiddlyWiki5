@@ -9,7 +9,8 @@ var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
 	http = require("http"),
 	fs = require("fs"),
 	url = require("url"),
-	path = require("path");
+	path = require("path"),
+	util = require("util");
 
 var filename = process.argv[2];
 
@@ -21,4 +22,4 @@ http.createServer(function(request, response) {
 		});
 }).listen(8000);
 
-sys.puts("Server running at http://127.0.0.1:8000/");
+util.puts("Server running at http://127.0.0.1:8000/");
