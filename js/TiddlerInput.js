@@ -16,7 +16,7 @@ For example ".txt" file extension is mapped to the "text/plain" mimetype.
 Special processing to extract embedded metadata is applied to some mimetypes.
 */
 
-tiddlerInput.parseTiddler = function(text,type,fields) {
+tiddlerInput.parseTiddlerFile = function(text,type,fields) {
 	if(fields === undefined) {
 		var fields = {};
 	}
@@ -25,13 +25,12 @@ tiddlerInput.parseTiddler = function(text,type,fields) {
 	if(fileExtensionMapping)
 		type = fileExtensionMapping;
 	// Invoke the parser for the specified mimetype
-	var parser = tiddlerInput.parseTiddlerByMimeType[type];
+	var parser = tiddlerInput.parseTiddlerFileByMimeType[type];
 	if(parser) {
 		return parser(text,fields);
 	} else {
-		throw new Error("Unknown tiddler type in tiddlerInput.parseTiddler: " + type);
+		throw new Error("Unknown tiddler type in tiddlerInput.parseTiddlerFile: " + type);
 	}
-	return fields;
 }
 
 tiddlerInput.fileExtensionMappings = {
@@ -39,21 +38,21 @@ tiddlerInput.fileExtensionMappings = {
 	".html": "text/html",
 	".tiddler": "application/x-tiddler-html-div",
 	".tid": "application/x-tiddler",
-	".js": "application/javascript"
+	".js": "application/javascript",
+	".json": "application/json"
 }
 
-tiddlerInput.parseTiddlerByMimeType = {
+tiddlerInput.parseTiddlerFileByMimeType = {
 	"text/plain": function(text,fields) {
 		fields.text = text;
-		return fields;
+		return [fields];
 	},
 	"text/html": function(text,fields) {
 		fields.text = text;
-		return fields;
+		return [fields];
 	},
 	"application/x-tiddler-html-div": function(text,fields) {
-		fields = tiddlerInput.parseTiddlerDiv(text,fields);
-		return fields;
+		return [tiddlerInput.parseTiddlerDiv(text,fields)];
 	},
 	"application/x-tiddler": function(text,fields) {
 		var split = text.indexOf("\n\n");
@@ -62,11 +61,14 @@ tiddlerInput.parseTiddlerByMimeType = {
 		}
 		fields = tiddlerInput.parseMetaDataBlock(text.substr(0,split),fields);
 		fields.text = text.substr(split + 2);
-		return fields;
+		return [fields];
 	},
 	"application/javascript": function(text,fields) {
 		fields.text = text;
-		return fields;
+		return [fields];
+	},
+	"application/json": function(text,fields) {
+		
 	}
 }
 
@@ -122,8 +124,9 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 		} else {
 			fields.text = match[2]; 
 		}
+		var attrMatch;
 		do {
-			var attrMatch = attrRegExp.exec(match[1]);
+			attrMatch = attrRegExp.exec(match[1]);
 			if(attrMatch) {
 				var name = attrMatch[1];
 				var value = attrMatch[2];

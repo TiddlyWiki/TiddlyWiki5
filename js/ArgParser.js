@@ -44,8 +44,9 @@ var ArgParser = function(argString,options) {
 	var skipSpace = "(?:\\s*)";
 	var token = "(?:" + dblQuote + "|" + sngQuote + "|" + dblSquare + "|" + dblBrace + "|" + unQuoted + "|" + emptyQuote + ")";
 	var re = options.noNames ? new RegExp(token,"mg") : new RegExp(skipSpace + token + skipSpace + "(?:(\\:)" + skipSpace + token + ")?","mg");
+	var match;
 	do {
-		var match = re.exec(argString);
+		match = re.exec(argString);
 		if(match) {
 			var n = parseToken(match,1);
 			if(options.noNames) {

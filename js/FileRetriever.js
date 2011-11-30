@@ -16,7 +16,6 @@ var FileRetriever = exports;
 var fileRequestQueue = utils.queue(function(task,callback) {
 	fs.readFile(task.filepath,"utf8", function(err,data) {
 		callback(err,data);
-console.error("Retrieved " + task.filepath);
 	});
 },10);
 
@@ -31,11 +30,10 @@ var httpRequestQueue = utils.queue(function(task,callback) {
 		} else {
 			var data = [];
 			res.on("data", function(chunk) {
-				data.push(chunk)
+				data.push(chunk);
 			});
 			res.on("end", function() {
 				callback(null,data.join(""));
-console.error("Retrieved " + task.url);
 			});
 		}
 	});
@@ -72,4 +70,4 @@ FileRetriever.retrieveFile = function(filepath,contextPath,callback) {
 		fileRequestQueue.push({filepath: result.path},callback);
 	}
 	return result;
-}
+};

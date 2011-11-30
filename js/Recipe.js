@@ -80,17 +80,28 @@ Recipe.prototype.processRecipe = function (data,contextPath) {
 			if(marker === "recipe") {
 				me.readRecipe(value,contextPath);
 			} else {
+				// Reserve a place in the ingredients array for this ingredient, just to keep tiddler ordering
+				// compatible with cook.rb
 				if(!(marker in me.ingredients)) {
 					me.ingredients[marker] = [];
 				}
 				var ingredientLocation = me.ingredients[marker].push(null) - 1;
-				me.readIngredient(value,contextPath,function(fields) {
-					var postProcess = me.readIngredientPostProcess[marker];
-					if(postProcess)
-						fields = postProcess(fields);
-					var ingredientTiddler = new Tiddler(fields);
-					me.store.addTiddler(ingredientTiddler);
-					me.ingredients[marker][ingredientLocation] = ingredientTiddler;
+				me.readIngredient(value,contextPath,function(tiddlers) {
+					for(var t=0; t<tiddlers.length; t++) {
+						var fields = tiddlers[t];
+						var postProcess = me.readIngredientPostProcess[marker];
+						if(postProcess) {
+							fields = postProcess(fields);
+						}
+						var ingredientTiddler = new Tiddler(fields);
+						me.store.addTiddler(ingredientTiddler);
+						if(ingredientLocation !== -1) {
+							me.ingredients[marker][ingredientLocation] = ingredientTiddler;
+							ingredientLocation = -1;
+						} else {
+							me.ingredients[marker].push(ingredientTiddler);		
+						}
+					}
 				});
 			}
 		}
@@ -106,7 +117,8 @@ Recipe.prototype.readIngredientPostProcess = {
 	}	
 };
 
-// Read an ingredient file and return it as a hashmap of tiddler fields. Also read the .meta file, if present
+// Read an ingredient file and callback with an array of hashmaps of tiddler fields. For single
+// tiddler files it also looks for an accompanying .meta file
 Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
 	var me = this;
 	me.incFetchCount();
@@ -116,20 +128,25 @@ Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
 		var fields = {
 			title: rf.basename
 		};
-		fields = tiddlerInput.parseTiddler(data,rf.extname,fields);
+		var tiddlers = tiddlerInput.parseTiddlerFile(data,rf.extname,fields);
 		// Check for the .meta file
-		var metafile = filepath + ".meta";
-		me.incFetchCount();
-		retrieveFile(metafile,contextPath,function(err,data) {
-			if(err && err.code !== "ENOENT" && err.code !== "404") {
-				throw err;
-			}
-			if(!err) {
-				fields = tiddlerInput.parseMetaDataBlock(data,fields);
-			}
-			callback(fields);
-			me.decFetchCount();
-		});
+		if(rf.extname !== ".json" && tiddlers.length === 1) {
+			var metafile = filepath + ".meta";
+			me.incFetchCount();
+			retrieveFile(metafile,contextPath,function(err,data) {
+				if(err && err.code !== "ENOENT" && err.code !== "404") {
+					throw err;
+				}
+				var fields = tiddlers[0];
+				if(!err) {
+					fields = tiddlerInput.parseMetaDataBlock(data,fields);
+				}
+				callback([fields]);
+				me.decFetchCount();
+			});
+		} else {
+			callback(tiddlers);
+		}
 		me.decFetchCount();
 	});
 }
