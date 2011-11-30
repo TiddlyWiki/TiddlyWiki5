@@ -2,6 +2,8 @@
 Functions concerned with parsing representations of tiddlers
 */
 
+"use strict";
+
 var utils = require("./Utils.js");
 
 var tiddlerOutput = exports;

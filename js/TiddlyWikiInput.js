@@ -2,6 +2,8 @@
 Functions concerned with parsing TiddlyWiki files
 */
 
+"use strict";
+
 var tiddlerInput = require("./TiddlerInput.js"),
 	utils = require("./Utils.js");
 

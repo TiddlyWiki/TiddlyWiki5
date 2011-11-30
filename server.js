@@ -2,6 +2,8 @@
 //
 // Usage: node server.js <recipefile>
 
+"use strict";
+
 var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
 	Recipe = require("./js/Recipe.js").Recipe,
 	http = require("http"),

@@ -4,6 +4,8 @@ Various static utility functions.
 This file is a bit of a dumping ground; the expectation is that most of these functions will be refactored.
 */
 
+"use strict";
+
 var utils = exports;
 
 // Pad a string to a certain length with zeros

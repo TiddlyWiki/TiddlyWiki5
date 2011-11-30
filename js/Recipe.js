@@ -27,6 +27,8 @@ this.ingredients = {
 
 */
 
+"use strict";
+
 var Tiddler = require("./Tiddler.js").Tiddler,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),

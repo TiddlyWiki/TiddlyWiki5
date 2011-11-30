@@ -2,6 +2,8 @@
 Functions concerned with parsing representations of tiddlers
 */
 
+"use strict";
+
 var ArgParser = require("./ArgParser.js").ArgParser,
 	utils = require("./Utils.js"),
 	util = require("util");

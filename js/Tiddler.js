@@ -14,6 +14,8 @@ Tiddler.fields - hashmap of tiddler fields
 
 */
 
+"use strict";
+
 var Tiddler = function(/* tiddler,fields */) {
 	var tiddler, fields, c = 0, t;
 	if(arguments[c] instanceof Tiddler) {

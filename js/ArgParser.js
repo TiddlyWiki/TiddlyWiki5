@@ -17,6 +17,8 @@ Options and their defaults are:
 
 */
 
+"use strict";
+
 var ArgParser = function(argString,options) {
 	var parseToken = function(match,p) {
 		var n;
@@ -35,16 +37,16 @@ var ArgParser = function(argString,options) {
 		return n;
 	};
 	this.byPos = [];
-	var dblQuote = "(?:\"((?:(?:\\\\\")|[^\"])+)\")";
-	var sngQuote = "(?:'((?:(?:\\\\\')|[^'])+)')";
-	var dblSquare = "(?:\\[\\[((?:\\s|\\S)*?)\\]\\])";
-	var dblBrace = "(?:\\{\\{((?:\\s|\\S)*?)\\}\\})";
-	var unQuoted = options.noNames ? "([^\"'\\s]\\S*)" : "([^\"':\\s][^\\s:]*)";
-	var emptyQuote = "((?:\"\")|(?:''))";
-	var skipSpace = "(?:\\s*)";
-	var token = "(?:" + dblQuote + "|" + sngQuote + "|" + dblSquare + "|" + dblBrace + "|" + unQuoted + "|" + emptyQuote + ")";
-	var re = options.noNames ? new RegExp(token,"mg") : new RegExp(skipSpace + token + skipSpace + "(?:(\\:)" + skipSpace + token + ")?","mg");
-	var match;
+	var dblQuote = "(?:\"((?:(?:\\\\\")|[^\"])+)\")",
+		sngQuote = "(?:'((?:(?:\\\\\')|[^'])+)')",
+		dblSquare = "(?:\\[\\[((?:\\s|\\S)*?)\\]\\])",
+		dblBrace = "(?:\\{\\{((?:\\s|\\S)*?)\\}\\})",
+		unQuoted = options.noNames ? "([^\"'\\s]\\S*)" : "([^\"':\\s][^\\s:]*)",
+		emptyQuote = "((?:\"\")|(?:''))",
+		skipSpace = "(?:\\s*)",
+		token = "(?:" + dblQuote + "|" + sngQuote + "|" + dblSquare + "|" + dblBrace + "|" + unQuoted + "|" + emptyQuote + ")",
+		re = options.noNames ? new RegExp(token,"mg") : new RegExp(skipSpace + token + skipSpace + "(?:(\\:)" + skipSpace + token + ")?","mg"),
+		match;
 	do {
 		match = re.exec(argString);
 		if(match) {
@@ -69,8 +71,8 @@ var ArgParser = function(argString,options) {
 	} while(match);
 	this.byName = {};
 	for(var t=0; t<this.byPos.length; t++) {
-		var n = this.byPos[t].n;
-		var v = this.byPos[t].v;
+		var n = this.byPos[t].n,
+			v = this.byPos[t].v;
 		if(n in this.byName)
 			this.byName[n].push(v);
 		else

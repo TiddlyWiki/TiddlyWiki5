@@ -1,3 +1,5 @@
+"use strict";
+
 var Tiddler = require("./Tiddler.js").Tiddler;
 
 var TiddlyWiki = function() {

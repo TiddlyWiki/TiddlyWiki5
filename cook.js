@@ -2,6 +2,8 @@
 //
 // Usage: node cook.js <recipefile>
 
+"use strict";
+
 var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
 	Recipe = require("./js/Recipe.js").Recipe,
 	util = require("util");
