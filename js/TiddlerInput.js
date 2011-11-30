@@ -19,9 +19,6 @@ Special processing to extract embedded metadata is applied to some mimetypes.
 */
 
 tiddlerInput.parseTiddlerFile = function(text,type,fields) {
-	if(fields === undefined) {
-		var fields = {};
-	}
 	// Map extensions to mimetpyes
 	var fileExtensionMapping = tiddlerInput.fileExtensionMappings[type];
 	if(fileExtensionMapping)
@@ -124,8 +121,11 @@ Parse an old-style tiddler DIV. It looks like this:
 Note that the field attributes are HTML encoded, but that the body of the <PRE> tag is not.
 */
 tiddlerInput.parseTiddlerDiv = function(text,fields) {
-	if(fields === undefined) {
-		var fields = {};
+	var result = {};
+	if(fields) {
+		for(var t in fields) {
+			result[t] = fields[t];		
+		}
 	}
 	var divRegExp = /^\s*<div\s+([^>]*)>((?:.|\n)*)<\/div>\s*$/gi,
 		subDivRegExp = /^\s*<pre>((?:.|\n)*)<\/pre>\s*$/gi,
@@ -134,9 +134,9 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 	if(match) {
 		var subMatch = subDivRegExp.exec(match[2]); // Body of the <DIV> tag
 		if(subMatch) {
-			fields.text = subMatch[1];
+			result.text = subMatch[1];
 		} else {
-			fields.text = match[2]; 
+			result.text = match[2]; 
 		}
 		var attrMatch;
 		do {
@@ -144,9 +144,9 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 			if(attrMatch) {
 				var name = attrMatch[1];
 				var value = attrMatch[2];
-				fields[name] = value;
+				result[name] = value;
 			}
 		} while(attrMatch);
 	}
-	return fields;	
+	return result;	
 }
