@@ -28,6 +28,8 @@ tiddlerInput.parseTiddler = function(text,type,fields) {
 	var parser = tiddlerInput.parseTiddlerByMimeType[type];
 	if(parser) {
 		return parser(text,fields);
+	} else {
+		throw new Error("Unknown tiddler type in tiddlerInput.parseTiddler: " + type);
 	}
 	return fields;
 }
