@@ -17,12 +17,6 @@ utils.zeroPad = function(n,d)
 	return s;
 };
 
-// Convert a date to local YYYYMMDDHHMM string format
-utils.convertToLocalYYYYMMDDHHMM = function(date)
-{
-	return date.getFullYear() + utils.zeroPad(date.getMonth()+1,2) + utils.zeroPad(date.getDate(),2) + utils.zeroPad(date.getHours(),2) + utils.zeroPad(date.getMinutes(),2);
-};
-
 // Convert a date to UTC YYYYMMDDHHMM string format
 utils.convertToYYYYMMDDHHMM = function(date)
 {
@@ -32,27 +26,24 @@ utils.convertToYYYYMMDDHHMM = function(date)
 // Convert a date to UTC YYYYMMDD.HHMMSSMMM string format
 utils.convertToYYYYMMDDHHMMSSMMM = function(date)
 {
-	return date.getUTCFullYear() + utils.zeroPad(date.getUTCMonth()+1,2) + utils.zeroPad(date.getUTCDate(),2) + "." + utils.zeroPad(date.getUTCHours(),2) + utils.zeroPad(date.getUTCMinutes(),2) + utils.zeroPad(date.getUTCSeconds(),2) + utils.zeroPad(date.getUTCMilliseconds(),3) +"0";
+	return date.getUTCFullYear() + utils.zeroPad(date.getUTCMonth()+1,2) + utils.zeroPad(date.getUTCDate(),2) + utils.zeroPad(date.getUTCHours(),2) + utils.zeroPad(date.getUTCMinutes(),2) + utils.zeroPad(date.getUTCSeconds(),2) + utils.zeroPad(date.getUTCMilliseconds(),3) +"0";
 };
 
-// Create a date from a UTC YYYYMMDDHHMM format string
+// Create a UTC date from a YYYYMMDDHHMM format string
 utils.convertFromYYYYMMDDHHMM = function(d)
 {
-	d = d?d.replace(/[^0-9]/g, ""):"";
 	return utils.convertFromYYYYMMDDHHMMSSMMM(d.substr(0,12));
 };
 
-// Create a date from a UTC YYYYMMDDHHMMSS format string
+// Create a UTC date from a YYYYMMDDHHMMSS format string
 utils.convertFromYYYYMMDDHHMMSS = function(d)
 {
-	d = d?d.replace(/[^0-9]/g, ""):"";
 	return utils.convertFromYYYYMMDDHHMMSSMMM(d.substr(0,14));
 };
 
-// Create a date from a UTC YYYYMMDDHHMMSSMMM format string
+// Create a UTC date from a YYYYMMDDHHMMSSMMM format string
 utils.convertFromYYYYMMDDHHMMSSMMM = function(d)
 {
-	d = d ? d.replace(/[^0-9]/g, "") : "";
 	return new Date(Date.UTC(parseInt(d.substr(0,4),10),
 			parseInt(d.substr(4,2),10)-1,
 			parseInt(d.substr(6,2),10),
