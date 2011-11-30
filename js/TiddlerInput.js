@@ -3,7 +3,8 @@ Functions concerned with parsing representations of tiddlers
 */
 
 var ArgParser = require("./ArgParser.js").ArgParser,
-	utils = require("./Utils.js");
+	utils = require("./Utils.js"),
+	util = require("util");
 
 var tiddlerInput = exports;
 
@@ -68,7 +69,22 @@ tiddlerInput.parseTiddlerFileByMimeType = {
 		return [fields];
 	},
 	"application/json": function(text,fields) {
-		
+		var tiddlers = JSON.parse(text);
+		var result = [];
+		for(var t=0; t<tiddlers.length; t++) {
+			var tid = tiddlers[t],
+				fields = {};
+			fields.title = tid.title;
+			fields.text = tid.text;
+			fields.created = utils.convertFromYYYYMMDDHHMMSS(tid.created);
+			fields.creator = tid.creator;
+			fields.modified = utils.convertFromYYYYMMDDHHMMSS(tid.modified);
+			fields.modifier = tid.modifier;
+			fields.type = tid.type;
+			fields.tags = tid.tags;
+			result.push(fields);
+		}
+		return result;
 	}
 }
 
