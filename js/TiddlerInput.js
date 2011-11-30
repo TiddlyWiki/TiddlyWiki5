@@ -76,14 +76,10 @@ tiddlerInput.parseTiddlerFileByMimeType = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = tiddlers[t],
 				fields = {};
-			fields.title = tid.title;
-			fields.text = tid.text;
-			fields.created = utils.convertFromYYYYMMDDHHMMSS(tid.created);
-			fields.creator = tid.creator;
-			fields.modified = utils.convertFromYYYYMMDDHHMMSS(tid.modified);
-			fields.modifier = tid.modifier;
-			fields.type = tid.type;
-			fields.tags = tid.tags;
+			// Just whitelist the fields we know that we want
+			"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
+				fields[value] = tid[value];
+			});
 			result.push(fields);
 		}
 		return result;
@@ -111,7 +107,7 @@ tiddlerInput.parseMetaDataBlock = function(metaData,fields) {
 		if(p !== -1) {
 			var field = line.substr(0, p).trim();
 			var value = line.substr(p+1).trim();
-			fields[field] = tiddlerInput.parseMetaDataItem(field,value);
+			fields[field] = value;
 		}
 	});
 	return fields;
@@ -148,30 +144,9 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 			if(attrMatch) {
 				var name = attrMatch[1];
 				var value = attrMatch[2];
-				fields[name] = tiddlerInput.parseMetaDataItem(name,value);
+				fields[name] = value;
 			}
 		} while(attrMatch);
 	}
 	return fields;	
-}
-
-/*
-Parse a single metadata field/value pair and return the value as the appropriate data type
-*/
-tiddlerInput.parseMetaDataItem = function(field,value) {
-	var result;
-	switch(field) {
-		case "modified":
-		case "created":
-			result = utils.convertFromYYYYMMDDHHMMSS(value);
-			break;
-		case "tags":
-			var parser = new ArgParser(value,{noNames: true});
-			result = parser.getValuesByName("","");
-			break;
-		default:
-			result = value;
-			break;
-	}
-	return result;
 }
