@@ -63,9 +63,9 @@ Recipe.prototype.decFetchCount = function() {
 Recipe.prototype.readRecipe = function(filepath,contextPath) {
 	var me = this;
 	this.incFetchCount();
-	var actualPath = retrieveFile(filepath, contextPath, function(err, data) {
+	var rf = retrieveFile(filepath, contextPath, function(err, data) {
 		if (err) throw err;
-		me.processRecipe(data,actualPath);
+		me.processRecipe(data,rf.path);
 		me.decFetchCount();
 	});
 }
@@ -83,8 +83,7 @@ Recipe.prototype.processRecipe = function (data,contextPath) {
 				if(!(marker in me.ingredients)) {
 					me.ingredients[marker] = [];
 				}
-				var ingredientLocation = me.ingredients[marker].length;
-				me.ingredients[marker][ingredientLocation] = null;
+				var ingredientLocation = me.ingredients[marker].push(null) - 1;
 				me.readIngredient(value,contextPath,function(fields) {
 					var postProcess = me.readIngredientPostProcess[marker];
 					if(postProcess)
@@ -109,17 +108,15 @@ Recipe.prototype.readIngredientPostProcess = {
 
 // Read an ingredient file and return it as a hashmap of tiddler fields. Also read the .meta file, if present
 Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
-	var me = this,
-		extname = path.extname(filepath),
-		basename = path.basename(filepath,extname),
-		fields = {
-			title: basename
-		};
+	var me = this;
 	me.incFetchCount();
 	// Read the tiddler file
-	retrieveFile(filepath,contextPath,function(err,data) {
+	var rf = retrieveFile(filepath,contextPath,function(err,data) {
 		if (err) throw err;
-		fields = tiddlerInput.parseTiddler(data,extname,fields);
+		var fields = {
+			title: rf.basename
+		};
+		fields = tiddlerInput.parseTiddler(data,rf.extname,fields);
 		// Check for the .meta file
 		var metafile = filepath + ".meta";
 		me.incFetchCount();

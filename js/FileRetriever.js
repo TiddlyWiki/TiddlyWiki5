@@ -47,21 +47,29 @@ console.error("Retrieved " + task.url);
 
 // Retrieve a file given a filepath specifier and a context path. If the filepath isn't an absolute
 // filepath or an absolute URL, then it is interpreted relative to the context path, which can also be
-// a filepath or a URL. It returns the final path used to reach the file. On completion, the callback
-// function is called as callback(err,data)
+// a filepath or a URL. On completion, the callback function is called as callback(err,data). It
+// returns an object:
+//		path: full path used to reach the file
+//		basename: the basename of the file (used as the default tiddler title)
+//		extname: the extension of the file
 FileRetriever.retrieveFile = function(filepath,contextPath,callback) {
 	var httpRegExp = /^(https?:\/\/)/gi,
-		newpath,
+		result = {},
 		filepathIsHttp = httpRegExp.test(filepath),
 		contextPathIsHttp = httpRegExp.test(contextPath);
 	if(contextPathIsHttp || filepathIsHttp) {
 		// If we've got a full HTTP URI then we're good to go
-		newpath = url.resolve(contextPath,filepath);
-		httpRequestQueue.push({url: newpath},callback);
+		result.path = url.resolve(contextPath,filepath);
+		var parsedPath = url.parse(result.path);
+		result.extname = path.extname(parsedPath.pathname);
+		result.basename = path.basename(parsedPath.extname);
+		httpRequestQueue.push({url: result.path},callback);
 	} else {
 		// It's a file requested in a file context
-		newpath = path.resolve(path.dirname(contextPath),filepath);
-		fileRequestQueue.push({filepath: newpath},callback);
+		result.path = path.resolve(path.dirname(contextPath),filepath);
+		result.extname = path.extname(result.path);
+		result.basename = path.basename(result.path,result.extname);
+		fileRequestQueue.push({filepath: result.path},callback);
 	}
-	return newpath;
+	return result;
 }
