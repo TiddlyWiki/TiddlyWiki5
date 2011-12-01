@@ -4,7 +4,7 @@ This is an attempt to modernise TiddlyWiki's build system, which has been based 
 
 This new version is written in JavaScript for node.js, with the intention that it can share code with TiddlyWiki itself.
 
-The goal is to achieve byte-for-byte compatibility with the old tools, but only to support the features required by the recipe files that are currently in use by TiddlyWiki and TiddlySpace.
+The goal is to achieve byte-for-byte compatibility with the old tools, but only to support the features required by the recipe files that are currently in use by TiddlyWiki and TiddlySpace. One of the difficulties is that cook.rb is very buggy; the current build process for tiddlywiki.com relies on TiddlyWiki itself doing a save operation in the browser to clear up problems with duplicate tiddlers and badly formed attributes.
 
 ## Usage
 
