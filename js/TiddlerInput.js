@@ -30,7 +30,7 @@ tiddlerInput.parseTiddlerFile = function(text,type,fields) {
 	} else {
 		throw new Error("Unknown tiddler type in tiddlerInput.parseTiddlerFile: " + type);
 	}
-}
+};
 
 tiddlerInput.fileExtensionMappings = {
 	".txt": "text/plain",
@@ -39,7 +39,7 @@ tiddlerInput.fileExtensionMappings = {
 	".tid": "application/x-tiddler",
 	".js": "application/javascript",
 	".json": "application/json"
-}
+};
 
 tiddlerInput.parseTiddlerFileByMimeType = {
 	"text/plain": function(text,fields) {
@@ -81,7 +81,7 @@ tiddlerInput.parseTiddlerFileByMimeType = {
 		}
 		return result;
 	}
-}
+};
 
 /*
 Parse a block of metadata and merge the results into a hashmap of tiddler fields.
@@ -96,19 +96,22 @@ tags: browsers issues
 creator: psd
 */
 tiddlerInput.parseMetaDataBlock = function(metaData,fields) {
-	if(fields === undefined) {
-		var fields = {};
+	var result = {};
+	if(fields) {
+		for(var t in fields) {
+			result[t] = fields[t];
+		}
 	}
 	metaData.split("\n").forEach(function(line) {
 		var p = line.indexOf(":");
 		if(p !== -1) {
 			var field = line.substr(0, p).trim();
 			var value = line.substr(p+1).trim();
-			fields[field] = value;
+			result[field] = value;
 		}
 	});
-	return fields;
-}
+	return result;
+};
 
 /*
 Parse an old-style tiddler DIV. It looks like this:
@@ -149,4 +152,4 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 		} while(attrMatch);
 	}
 	return result;	
-}
+};

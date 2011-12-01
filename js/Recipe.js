@@ -47,19 +47,19 @@ var Recipe = function(store,filepath,callback) {
 	this.callback = callback;
 	this.fetchCount = 0;
 	this.readRecipe(filepath,process.cwd()); // Read the recipe file
-}
+};
 
 // The fetch counter is used to keep track of the number of asynchronous requests outstanding
 Recipe.prototype.incFetchCount = function() {
 	this.fetchCount++;
-}
+};
 
 // When the fetch counter reaches zero, all the results are in, so invoke the recipe callback
 Recipe.prototype.decFetchCount = function() {
 	if(--this.fetchCount === 0) {
 		this.callback();
 	}
-}
+};
 
 // Process the contents of a recipe file
 Recipe.prototype.readRecipe = function(filepath,contextPath) {
@@ -70,7 +70,7 @@ Recipe.prototype.readRecipe = function(filepath,contextPath) {
 		me.processRecipe(data,rf.path);
 		me.decFetchCount();
 	});
-}
+};
 
 Recipe.prototype.processRecipe = function (data,contextPath) {
 	var me = this;
@@ -108,7 +108,7 @@ Recipe.prototype.processRecipe = function (data,contextPath) {
 			}
 		}
 	});
-}
+};
 
 // Special post-processing required for certain ingredient types
 Recipe.prototype.readIngredientPostProcess = {
@@ -151,7 +151,7 @@ Recipe.prototype.readIngredient = function(filepath,contextPath,callback) {
 		}
 		me.decFetchCount();
 	});
-}
+};
 
 // Return a string of the cooked recipe
 Recipe.prototype.cook = function() {
@@ -169,7 +169,7 @@ Recipe.prototype.cook = function() {
 		}
 	});
 	return out.join("\n");
-}
+};
 
 // Output all the tiddlers in the recipe with a particular marker
 Recipe.prototype.outputIngredient = function(out,marker) {
@@ -179,7 +179,7 @@ Recipe.prototype.outputIngredient = function(out,marker) {
 	if(outputter && ingredient) {
 		outputter(out,ingredient);
 	}
-}
+};
 
 // Allows for specialised processing for certain markers
 Recipe.ingredientOutputMapper = {

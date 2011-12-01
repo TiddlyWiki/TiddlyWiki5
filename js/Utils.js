@@ -74,33 +74,33 @@ utils.htmlDecode = function(s)
 //  });
 // 	q.push(taskData,callback) is used to queue a new task
 utils.queue = function(worker, concurrency) {
-    var workers = 0;
-    var q = {
-        tasks: [],
-        concurrency: concurrency,
-        push: function (data, callback) {
-            q.tasks.push({data: data, callback: callback});
-            process.nextTick(q.process);
-        },
-        process: function () {
-            if (workers < q.concurrency && q.tasks.length) {
-                var task = q.tasks.shift();
-                workers += 1;
-                worker(task.data, function () {
-                    workers -= 1;
-                    if (task.callback) {
-                        task.callback.apply(task, arguments);
-                    }
-                    q.process();
-                });
-            }
-        },
-        length: function () {
-            return q.tasks.length;
-        },
-        running: function () {
-            return workers;
-        }
-    };
-    return q;
+	var workers = 0;
+	var q = {
+		tasks: [],
+		concurrency: concurrency,
+		push: function (data, callback) {
+			q.tasks.push({data: data, callback: callback});
+			process.nextTick(q.process);
+		},
+		process: function () {
+			if (workers < q.concurrency && q.tasks.length) {
+				var task = q.tasks.shift();
+				workers += 1;
+				worker(task.data, function () {
+					workers -= 1;
+					if (task.callback) {
+						task.callback.apply(task, arguments);
+					}
+					q.process();
+				});
+			}
+		},
+		length: function () {
+			return q.tasks.length;
+		},
+		running: function () {
+			return workers;
+		}
+	};
+	return q;
 };

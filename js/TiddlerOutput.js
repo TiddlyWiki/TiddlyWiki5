@@ -39,7 +39,7 @@ tiddlerOutput.outputTiddler = function(tid) {
 	result.push("\n");
 	result.push(tid.fields.text);
 	return result.join("");
-}
+};
 
 /*
 Output a tiddler as an HTML <DIV>
@@ -78,7 +78,7 @@ tiddlerOutput.outputTiddlerDiv = function(tid) {
 	result.push(utils.htmlEncode(tid.fields.text));
 	result.push("</pre>\n</div>");
 	return result.join("");
-}
+};
 
 tiddlerOutput.stringifyTags = function(tags) {
 	var results = [];
@@ -90,6 +90,6 @@ tiddlerOutput.stringifyTags = function(tags) {
 		}
 	}
 	return results.join(" ");
-}
+};
 
 

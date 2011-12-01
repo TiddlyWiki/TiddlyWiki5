@@ -9,6 +9,25 @@ var tiddlerInput = require("./TiddlerInput.js"),
 
 var tiddlyWikiInput = exports;
 
+function locateStoreArea(tiddlywikidoc)
+{
+	var startSaveArea = '<div id="' + 'storeArea">',
+		startSaveAreaRegExp = /<div id=["']?storeArea['"]?>/gi,
+		endSaveArea = '</d' + 'iv>',
+		endSaveAreaCaps = '</D' + 'IV>',
+		posOpeningDiv = tiddlywikidoc.search(startSaveAreaRegExp),
+		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-STOREAREA--"+">");
+	if(limitClosingDiv == -1) {
+		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-BODY-START--"+">");
+	}
+	var start = limitClosingDiv == -1 ? tiddlywikidoc.length : limitClosingDiv,
+		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveArea,start);
+	if(posClosingDiv == -1) {
+		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveAreaCaps,start);
+	}
+	return (posOpeningDiv != -1 && posClosingDiv != -1) ? [posOpeningDiv + startSaveArea.length,posClosingDiv] : null;
+}
+
 /*
 Parses the text of a TiddlyWiki HTML file, and returns the tiddlers as an array of hashmaps of raw fields.
 
@@ -31,23 +50,4 @@ tiddlyWikiInput.parseTiddlyWiki = function(tiddlywikidoc) {
 		}
 	}
 	return results;
-}
-
-function locateStoreArea(tiddlywikidoc)
-{
-	var startSaveArea = '<div id="' + 'storeArea">',
-		startSaveAreaRegExp = /<div id=["']?storeArea['"]?>/gi,
-		endSaveArea = '</d' + 'iv>',
-		endSaveAreaCaps = '</D' + 'IV>',
-		posOpeningDiv = tiddlywikidoc.search(startSaveAreaRegExp),
-		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-STOREAREA--"+">");
-	if(limitClosingDiv == -1) {
-		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-BODY-START--"+">");
-	}
-	var start = limitClosingDiv == -1 ? tiddlywikidoc.length : limitClosingDiv,
-		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveArea,start);
-	if(posClosingDiv == -1) {
-		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveAreaCaps,start);
-	}
-	return (posOpeningDiv != -1 && posClosingDiv != -1) ? [posOpeningDiv + startSaveArea.length,posClosingDiv] : null;
-}
+};

@@ -46,15 +46,15 @@ var ArgParser = function(argString,options) {
 		skipSpace = "(?:\\s*)",
 		token = "(?:" + dblQuote + "|" + sngQuote + "|" + dblSquare + "|" + dblBrace + "|" + unQuoted + "|" + emptyQuote + ")",
 		re = options.noNames ? new RegExp(token,"mg") : new RegExp(skipSpace + token + skipSpace + "(?:(\\:)" + skipSpace + token + ")?","mg"),
-		match;
+		match,n,v;
 	do {
 		match = re.exec(argString);
 		if(match) {
-			var n = parseToken(match,1);
+			n = parseToken(match,1);
 			if(options.noNames) {
 				this.byPos.push({n:"", v:n});
 			} else {
-				var v = parseToken(match,8);
+				v = parseToken(match,8);
 				if(v === null && options.defaultName) {
 					v = n;
 					n = options.defaultName;
@@ -71,25 +71,25 @@ var ArgParser = function(argString,options) {
 	} while(match);
 	this.byName = {};
 	for(var t=0; t<this.byPos.length; t++) {
-		var n = this.byPos[t].n,
-			v = this.byPos[t].v;
+		n = this.byPos[t].n;
+		v = this.byPos[t].v;
 		if(n in this.byName)
 			this.byName[n].push(v);
 		else
 			this.byName[n] = [v];
 	}
-}
+};
 
 // Retrieve the first occurance of a named parameter, or the default if missing
 ArgParser.prototype.getValueByName = function(n,defaultValue) {
 	var v = this.byName[n];
 	return v && v.length > 0 ? v[0] : defaultValue;
-}
+};
 
 // Retrieve all the values of a named parameter as an array
 ArgParser.prototype.getValuesByName = function(n,defaultValue) {
 	var v = this.byName[n];
 	return v && v.length > 0 ? v : defaultValue;
-}
+};
 
-exports.ArgParser = ArgParser
+exports.ArgParser = ArgParser;
