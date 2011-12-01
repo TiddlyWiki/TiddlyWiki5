@@ -12,17 +12,17 @@ var fs = require("fs"),
 	util = require("util"),
 	http = require("http"),
 	https = require("https"),
-	utils = require("./Utils.js");
+	async = require("async");
 
 var FileRetriever = exports;
 
-var fileRequestQueue = utils.queue(function(task,callback) {
+var fileRequestQueue = async.queue(function(task,callback) {
 	fs.readFile(task.filepath,"utf8", function(err,data) {
 		callback(err,data);
 	});
 },10);
 
-var httpRequestQueue = utils.queue(function(task,callback) {
+var httpRequestQueue = async.queue(function(task,callback) {
 	var opts = url.parse(task.url);
 	var httpLib = opts.protocol === "http:" ? http : https;
 	var request = httpLib.get(opts,function(res) {
