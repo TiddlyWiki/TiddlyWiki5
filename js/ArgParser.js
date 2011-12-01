@@ -17,6 +17,7 @@ Options and their defaults are:
 
 */
 
+/*global require: false, exports: false */
 "use strict";
 
 var ArgParser = function(argString,options) {

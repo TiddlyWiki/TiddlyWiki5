@@ -2,6 +2,7 @@
 Functions concerned with parsing TiddlyWiki files
 */
 
+/*global require: false, exports: false */
 "use strict";
 
 var tiddlerInput = require("./TiddlerInput.js"),

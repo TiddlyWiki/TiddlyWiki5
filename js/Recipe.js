@@ -27,6 +27,7 @@ this.ingredients = {
 
 */
 
+/*global require: false, exports: false, process: false */
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,

@@ -19,6 +19,7 @@ as a TiddlyWiki quoted string (eg, "one [[two three]]").
 
 */
 
+/*global require: false, exports: false */
 "use strict";
 
 var utils = require("./Utils.js"),

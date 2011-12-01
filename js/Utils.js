@@ -4,6 +4,7 @@ Various static utility functions.
 This file is a bit of a dumping ground; the expectation is that most of these functions will be refactored.
 */
 
+/*global require: false, exports: false, process: false */
 "use strict";
 
 var utils = exports;
@@ -67,12 +68,12 @@ utils.htmlDecode = function(s)
 
 // Adapted from async.js, https://github.com/caolan/async
 // Creates a queue of tasks for an asyncronous worker function with a specified maximum number of concurrent operations.
-// 	q = utils.queue(function(taskData,callback) {
+//	q = utils.queue(function(taskData,callback) {
 //		fs.readFile(taskData.filename,"uft8",function(err,data) {
 //			callback(err,data);
 //		});
 //  });
-// 	q.push(taskData,callback) is used to queue a new task
+//	q.push(taskData,callback) is used to queue a new task
 utils.queue = function(worker, concurrency) {
 	var workers = 0;
 	var q = {

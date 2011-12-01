@@ -1,3 +1,4 @@
+/*global require: false, exports: false */
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler;

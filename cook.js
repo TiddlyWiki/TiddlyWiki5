@@ -2,6 +2,7 @@
 //
 // Usage: node cook.js <recipefile>
 
+/*global require: false, exports: false */
 "use strict";
 
 var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,

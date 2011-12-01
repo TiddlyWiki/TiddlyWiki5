@@ -3,6 +3,7 @@ FileRetriever can asynchronously retrieve files from HTTP URLs or the local file
 throttling so that we don't get error EMFILE "Too many open files".
 */
 
+/*global require: false, exports: false */
 "use strict";
 
 var fs = require("fs"),
