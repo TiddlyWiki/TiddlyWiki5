@@ -27,7 +27,7 @@ TiddlyWiki.prototype.deleteTiddler = function(title) {
 
 TiddlyWiki.prototype.isTiddler = function(title) {
 	return this.tiddlers[title] instanceof Tiddler;
-}
+};
 
 TiddlyWiki.prototype.addTiddler = function(tiddler) {
 	this.tiddlers[tiddler.fields.title] = tiddler;

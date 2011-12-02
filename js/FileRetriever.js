@@ -11,19 +11,16 @@ var fs = require("fs"),
 	url = require("url"),
 	util = require("util"),
 	http = require("http"),
-	https = require("https"),
-	async = require("async");
+	https = require("https");
 
 var FileRetriever = exports;
 
-var fileRequestQueue = async.queue(function(task,callback) {
-	fs.readFile(task.filepath,"utf8", function(err,data) {
-		callback(err,data);
-	});
-},10);
+var fileRequest = function fileRequest(filepath,callback) {
+	fs.readFile(filepath,"utf8", callback);
+};
 
-var httpRequestQueue = async.queue(function(task,callback) {
-	var opts = url.parse(task.url);
+var httpRequest = function(fileurl,callback) {
+	var opts = url.parse(fileurl);
 	var httpLib = opts.protocol === "http:" ? http : https;
 	var request = httpLib.get(opts,function(res) {
 		if(res.statusCode != 200) {
@@ -44,33 +41,40 @@ var httpRequestQueue = async.queue(function(task,callback) {
 		callback(err);
 	});
 	request.end();
-},4);
+};
 
 // Retrieve a file given a filepath specifier and a context path. If the filepath isn't an absolute
 // filepath or an absolute URL, then it is interpreted relative to the context path, which can also be
-// a filepath or a URL. On completion, the callback function is called as callback(err,data). It
-// returns an object:
+// a filepath or a URL. On completion, the callback function is called as callback(err,data). The
+// data hashmap is as follows:
+//		text: full text of file
 //		path: full path used to reach the file
-//		basename: the basename of the file (used as the default tiddler title)
+//		basename: the basename of the file
 //		extname: the extension of the file
 FileRetriever.retrieveFile = function(filepath,contextPath,callback) {
 	var httpRegExp = /^(https?:\/\/)/gi,
 		result = {},
 		filepathIsHttp = httpRegExp.test(filepath),
-		contextPathIsHttp = httpRegExp.test(contextPath);
+		contextPathIsHttp = httpRegExp.test(contextPath),
+		requester;
 	if(contextPathIsHttp || filepathIsHttp) {
 		// If we've got a full HTTP URI then we're good to go
 		result.path = url.resolve(contextPath,filepath);
 		var parsedPath = url.parse(result.path);
 		result.extname = path.extname(parsedPath.pathname);
 		result.basename = path.basename(parsedPath.extname);
-		httpRequestQueue.push({url: result.path},callback);
+		requester = httpRequest;
 	} else {
 		// It's a file requested in a file context
 		result.path = path.resolve(path.dirname(contextPath),filepath);
 		result.extname = path.extname(result.path);
 		result.basename = path.basename(result.path,result.extname);
-		fileRequestQueue.push({filepath: result.path},callback);
+		requester = fileRequest;
 	}
-	return result;
+	requester(result.path,function(err,data) {
+		if(!err) {
+			result.text = data;
+		}
+		callback(err,result);
+	});
 };
