@@ -3,8 +3,9 @@
 
 var Tiddler = require("./Tiddler.js").Tiddler;
 
-var TiddlyWiki = function() {
+var TiddlyWiki = function TiddlyWiki(shadowStore) {
 	this.tiddlers = {};
+	this.shadows = shadowStore === undefined ? new TiddlyWiki(null) : shadowStore;
 };
 
 TiddlyWiki.prototype.clear = function() {

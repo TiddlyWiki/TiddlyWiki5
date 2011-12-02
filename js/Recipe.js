@@ -117,7 +117,8 @@ Recipe.prototype.chooseTiddlers = function(recipe) {
 		if(recipeLine instanceof Array) {
 			this.chooseTiddlers(recipeLine);
 		} else {
-			var markerArray = this.markers[recipeLine.marker];
+			var store = recipeLine.marker === "shadow" ? this.store.shadows : this.store,
+				markerArray = this.markers[recipeLine.marker];
 			if(markerArray === undefined) {
 				this.markers[recipeLine.marker] = [];
 				markerArray = this.markers[recipeLine.marker];
@@ -132,8 +133,8 @@ Recipe.prototype.chooseTiddlers = function(recipe) {
 				}
 				if(!found) {
 					markerArray.push(recipeLine.tiddlers[t].title);
-				}
-				this.store.addTiddler(new Tiddler(recipeLine.tiddlers[t]));
+				}	
+				store.addTiddler(new Tiddler(recipeLine.tiddlers[t]));
 			}
 		}		
 	}
@@ -269,19 +270,10 @@ Recipe.tiddlerOutputter = {
 		}
 	},
 	shadow: function(out,tiddlers) {
-		// Shadows are output as a <DIV> with the the ".shadow" suffix removed from the title
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
-				tid = this.store.getTiddler(title),
-				tweakedTiddler;
-			if(title.indexOf(".shadow") === title.length - 7) {
-				tweakedTiddler = new Tiddler(tid,{
-					title: title.substr(0, title.length-7)
-				});
-			} else {
-				tweakedTiddler = tid;
-			}
-			out.push(tiddlerOutput.outputTiddlerDiv(tweakedTiddler));
+				tid = this.store.shadows.getTiddler(title);
+			out.push(tiddlerOutput.outputTiddlerDiv(tid));
 		}
 	}
 };
