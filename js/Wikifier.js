@@ -28,22 +28,15 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 // Construct a wikifier object
 // source - source string that's going to be wikified
 // formatter - Formatter() object containing the list of formatters to be used
-// highlightRegExp - regular expression of the text string to highlight
 // tiddler - reference to the tiddler that's taken to be the container for this wikification
-var Wikifier = function(source,formatter,highlightRegExp,tiddler)
+var Wikifier = function(source,formatter,tiddler)
 {
 	this.source = source;
 	this.output = null;
 	this.formatter = formatter;
 	this.nextMatch = 0;
-	this.autoLinkWikiWords = tiddler && tiddler.autoLinkWikiWords() == false ? false : true;
-	this.highlightRegExp = highlightRegExp;
-	this.highlightMatch = null;
+	this.autoLinkWikiWords = true;
 	this.isStatic = false;
-	if(highlightRegExp) {
-		highlightRegExp.lastIndex = 0;
-		this.highlightMatch = highlightRegExp.exec(source);
-	}
 	this.tiddler = tiddler;
 }
 
@@ -166,31 +159,15 @@ Wikifier.prototype.subWikifyTerm = function(output,terminatorRegExp)
 
 Wikifier.prototype.outputText = function(place,startPos,endPos)
 {
-	// Check for highlights
-	while(this.highlightMatch && (this.highlightRegExp.lastIndex > startPos) && (this.highlightMatch.index < endPos) && (startPos < endPos)) {
-		// Deal with any plain text before the highlight
-		if(this.highlightMatch.index > startPos) {
-			createTiddlyText(place,this.source.substring(startPos,this.highlightMatch.index));
-			startPos = this.highlightMatch.index;
-		}
-		// Deal with the highlight
-		var highlightEnd = Math.min(this.highlightRegExp.lastIndex,endPos);
-		createTiddlyElement(place,"span",null,"highlight",this.source.substring(startPos,highlightEnd));
-		startPos = highlightEnd;
-		// Nudge along to the next highlight if we're done with this one
-		if(startPos >= this.highlightRegExp.lastIndex)
-			this.highlightMatch = this.highlightRegExp.exec(this.source);
-	}
-	// Do the unhighlighted text left over
 	if(startPos < endPos) {
 		createTiddlyText(place,this.source.substring(startPos,endPos));
 	}
 };
 
-Wikifier.wikify = function(source,output,highlightRegExp,tiddler)
+Wikifier.wikify = function(source,output,tiddler)
 {
 	if(source) {
-		var wikifier = new Wikifier(source,getParser(tiddler),highlightRegExp,tiddler);
+		var wikifier = new Wikifier(source,getParser(tiddler),tiddler);
 		var t0 = new Date();
 		wikifier.subWikify(output);
 		if(tiddler && config.options.chkDisplayInstrumentation)
@@ -198,7 +175,7 @@ Wikifier.wikify = function(source,output,highlightRegExp,tiddler)
 	}
 };
 
-Wikifier.wikifyStatic = function(source,highlightRegExp,tiddler,format)
+Wikifier.wikifyStatic = function(source,tiddler,format)
 {
 	var e = createTiddlyElement(document.body,"pre");
 	e.style.display = "none";
@@ -206,7 +183,7 @@ Wikifier.wikifyStatic = function(source,highlightRegExp,tiddler,format)
 	if(source && source != "") {
 		if(!tiddler)
 			tiddler = new Tiddler("temp");
-		var wikifier = new Wikifier(source,getParser(tiddler,format),highlightRegExp,tiddler);
+		var wikifier = new Wikifier(source,getParser(tiddler,format),tiddler);
 		wikifier.isStatic = true;
 		wikifier.subWikify(e);
 		html = e.innerHTML;
