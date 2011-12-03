@@ -22,8 +22,8 @@ Splits a TiddlyWiki file into separate `.tid` files and a `split.recipe` file.
 
 ## Testing
 
-`test.sh` contains a simple test that cooks the main tiddlywiki.com recipe, first with the old Ruby-based tool, and then the new one. It uses OS X's opendiff to display the differences between the two files.
+`test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation).
 
 ## Current status
 
-As of 22nd November 2011, cook.js can now build a fully functional TiddlyWiki from the existing recipe files. There are still some minor differences in the layout of tiddler attributes, and some whitespace issues that prevent full byte-for-byte compatibility.
+As of 2nd December 2011, cook.js can now build a fully functional TiddlyWiki from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.
