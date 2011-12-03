@@ -14,11 +14,17 @@ TiddlyWiki.prototype.clear = function() {
 
 TiddlyWiki.prototype.getTiddler = function(title) {
 	var t = this.tiddlers[title];
-	return t instanceof Tiddler ? t : null;
+	if(t instanceof Tiddler) {
+		return t;
+	} else if(this.shadows) {
+		return this.shadows.getTiddler(title);
+	} else {
+		return null;
+	}
 };
 
 TiddlyWiki.prototype.getTiddlerText = function(title) {
-	var t = this.tiddlers[title];
+	var t = this.getTiddler(title);
 	return t instanceof Tiddler ? t.fields.text : null;
 };
 
@@ -26,7 +32,7 @@ TiddlyWiki.prototype.deleteTiddler = function(title) {
 	delete this.tiddlers[title];
 };
 
-TiddlyWiki.prototype.isTiddler = function(title) {
+TiddlyWiki.prototype.tiddlerExists = function(title) {
 	return this.tiddlers[title] instanceof Tiddler;
 };
 

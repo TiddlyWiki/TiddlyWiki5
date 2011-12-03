@@ -1,3 +1,22 @@
+/*
+
+Wikifier for TiddlyWiki format text
+
+The wikifier parses wikitext into an intermediate tree from which the HTML is generated. The tree
+looks like this:
+
+this.tree = [
+	{type: "div", attributes: {
+			attr1: value,
+			attr2: value
+		}, children: [
+			{child},
+			{child},		
+	]}
+];
+
+*/
+
 /*global require: false, exports: false, process: false */
 "use strict";
 
