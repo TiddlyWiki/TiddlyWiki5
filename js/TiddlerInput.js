@@ -26,11 +26,9 @@ tiddlerInput.parseTiddlerFile = function(text,type,fields) {
 		type = fileExtensionMapping;
 	// Invoke the parser for the specified mimetype
 	var parser = tiddlerInput.parseTiddlerFileByMimeType[type];
-	if(parser) {
-		return parser(text,fields);
-	} else {
-		throw new Error("Unknown tiddler type in tiddlerInput.parseTiddlerFile: " + type);
-	}
+	if(!parser)
+		parser = tiddlerInput.parseTiddlerFileByMimeType["text/plain"];
+	return parser(text,fields);
 };
 
 tiddlerInput.fileExtensionMappings = {
