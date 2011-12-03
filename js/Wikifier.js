@@ -2,10 +2,10 @@
 
 Wikifier for TiddlyWiki format text
 
-The wikifier parses wikitext into an intermediate tree from which the HTML is generated. The tree
-looks like this:
+The wikifier parses wikitext into an intermediate tree from which the HTML is generated.
 
-this.tree = [
+HTML elements are stored in the tree like this:
+
 	{type: "div", attributes: {
 			attr1: value,
 			attr2: value
@@ -13,7 +13,10 @@ this.tree = [
 			{child},
 			{child},		
 	]}
-];
+
+Text nodes are:
+
+	{type: "text", value: "string of text node"}
 
 */
 
@@ -25,29 +28,51 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	utils = require("./Utils.js"),
 	util = require("util");
 
-// Construct a wikifier object
-// source - source string that's going to be wikified
-// formatter - Formatter() object containing the list of formatters to be used
-// tiddler - reference to the tiddler that's taken to be the container for this wikification
-var Wikifier = function(source,formatter,tiddler)
-{
-	this.source = source;
-	this.output = null;
+// Construct a wikifier object around a Formatter() object
+var Wikifier = function(formatter) {
 	this.formatter = formatter;
-	this.nextMatch = 0;
 	this.autoLinkWikiWords = true;
-	this.isStatic = false;
-	this.tiddler = tiddler;
-}
+};
 
-Wikifier.prototype.wikifyPlain = function()
+// Wikify a string as if it were from a particular tiddler and return it as an HTML string
+Wikifier.prototype.wikify = function(source,tiddler) {
+	this.source = source;
+	this.nextMatch = 0;
+	this.tiddler = tiddler;
+	this.tree = [];
+	this.output = null;
+	this.subWikify(this.tree);
+	return this.tree; // Just return the tree for now
+};
+
+// Wikify a string as if it were from a particular tiddler and return it as plain text
+Wikifier.prototype.wikifyPlain = function(source,tiddler) {
+	this.source = source;
+	this.nextMatch = 0;
+	this.tiddler = tiddler;
+	this.tree = [];
+	this.output = null;
+	this.subWikify(this.tree);
+	var resultText = [],
+		extractText = function(tree) {
+			for(var t=0; t<tree.length; t++) {
+				var node = tree[t];
+				if(node.type === "text") {
+					resultText.push(node.value);
+				} else if(node.children) {
+					extractText(node.children);
+				}
+			}
+		};
+	extractText(this.tree);
+	return resultText.join("");
+};
+
+Wikifier.prototype.outputText = function(place,startPos,endPos)
 {
-	var e = createTiddlyElement(document.body,"div");
-	e.style.display = "none";
-	this.subWikify(e);
-	var text = jQuery(e).text();
-	jQuery(e).remove();
-	return text;
+	if(startPos < endPos) {
+		place.push({type: "text", value: this.source.substring(startPos,endPos)});
+	}
 };
 
 Wikifier.prototype.subWikify = function(output,terminator)
@@ -155,53 +180,6 @@ Wikifier.prototype.subWikifyTerm = function(output,terminatorRegExp)
 	}
 	// Restore the output pointer
 	this.output = oldOutput;
-};
-
-Wikifier.prototype.outputText = function(place,startPos,endPos)
-{
-	if(startPos < endPos) {
-		createTiddlyText(place,this.source.substring(startPos,endPos));
-	}
-};
-
-Wikifier.wikify = function(source,output,tiddler)
-{
-	if(source) {
-		var wikifier = new Wikifier(source,getParser(tiddler),tiddler);
-		var t0 = new Date();
-		wikifier.subWikify(output);
-		if(tiddler && config.options.chkDisplayInstrumentation)
-			displayMessage("wikify:" +tiddler.title+ " in " + (new Date()-t0) + " ms");
-	}
-};
-
-Wikifier.wikifyStatic = function(source,tiddler,format)
-{
-	var e = createTiddlyElement(document.body,"pre");
-	e.style.display = "none";
-	var html = "";
-	if(source && source != "") {
-		if(!tiddler)
-			tiddler = new Tiddler("temp");
-		var wikifier = new Wikifier(source,getParser(tiddler,format),tiddler);
-		wikifier.isStatic = true;
-		wikifier.subWikify(e);
-		html = e.innerHTML;
-		jQuery(e).remove();
-	}
-	return html;
-};
-
-// Wikify a string to plain text
-//   text - text to wikify
-//   limit - maximum number of characters to generate
-//   tiddler - optional reference to the tiddler containing this text
-Wikifier.wikifyPlainText = function(text,limit,tiddler)
-{
-	if(limit > 0)
-		text = text.substr(0,limit);
-	var wikifier = new Wikifier(text,formatter,null,tiddler);
-	return wikifier.wikifyPlain();
 };
 
 exports.Wikifier = Wikifier;
