@@ -93,6 +93,7 @@ var Recipe = function(store,filepath,callback) {
 	};
 	this.tiddlerQueue.drain = function() {
 		me.chooseTiddlers(me.recipe);
+		me.sortTiddlersForMarker("tiddler");
 		me.callback();
 	};
 	this.recipeQueue.push({filepath: filepath,
@@ -138,6 +139,12 @@ Recipe.prototype.chooseTiddlers = function(recipe) {
 			}
 		}		
 	}
+};
+
+Recipe.prototype.sortTiddlersForMarker = function(marker) {
+	if(this.markers[marker]) {
+		this.markers[marker].sort();
+	}	
 };
 
 // Process the contents of a recipe file
