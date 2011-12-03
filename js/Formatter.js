@@ -19,82 +19,73 @@ function Formatter(formatters)
 	this.formatterRegExp = new RegExp(pattern.join("|"),"mg");
 }
 
-config.formatterHelpers = {
+Formatter.createElementAndWikify = function(w) {
+	w.subWikifyTerm(createTiddlyElement(w.output,this.element),this.termRegExp);
+};
 
-	createElementAndWikify: function(w)
-	{
-		w.subWikifyTerm(createTiddlyElement(w.output,this.element),this.termRegExp);
-	},
-
-	inlineCssHelper: function(w)
-	{
-		var styles = [];
+Formatter.inlineCssHelper = function(w) {
+	var styles = [];
+	config.textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
+	var lookaheadMatch = config.textPrimitives.cssLookaheadRegExp.exec(w.source);
+	while(lookaheadMatch && lookaheadMatch.index == w.nextMatch) {
+		var s,v;
+		if(lookaheadMatch[1]) {
+			s = lookaheadMatch[1].unDash();
+			v = lookaheadMatch[2];
+		} else {
+			s = lookaheadMatch[3].unDash();
+			v = lookaheadMatch[4];
+		}
+		if(s=="bgcolor")
+			s = "backgroundColor";
+		if(s=="float")
+			s = "cssFloat";
+		styles.push({style: s, value: v});
+		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 		config.textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
-		var lookaheadMatch = config.textPrimitives.cssLookaheadRegExp.exec(w.source);
-		while(lookaheadMatch && lookaheadMatch.index == w.nextMatch) {
-			var s,v;
-			if(lookaheadMatch[1]) {
-				s = lookaheadMatch[1].unDash();
-				v = lookaheadMatch[2];
-			} else {
-				s = lookaheadMatch[3].unDash();
-				v = lookaheadMatch[4];
-			}
-			if(s=="bgcolor")
-				s = "backgroundColor";
-			if(s=="float")
-				s = "cssFloat";
-			styles.push({style: s, value: v});
-			w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
-			config.textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
-			lookaheadMatch = config.textPrimitives.cssLookaheadRegExp.exec(w.source);
-		}
-		return styles;
-	},
+		lookaheadMatch = config.textPrimitives.cssLookaheadRegExp.exec(w.source);
+	}
+	return styles;
+};
 
-	applyCssHelper: function(e,styles)
-	{
-		var t;
-		for(t=0; t< styles.length; t++) {
-			try {
-				e.style[styles[t].style] = styles[t].value;
-			} catch (ex) {
-			}
+Formatter.applyCssHelper = function(e,styles) {
+	var t;
+	for(t=0; t< styles.length; t++) {
+		try {
+			e.style[styles[t].style] = styles[t].value;
+		} catch (ex) {
 		}
-	},
+	}
+};
 
-	enclosedTextHelper: function(w)
-	{
-		this.lookaheadRegExp.lastIndex = w.matchStart;
-		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
-		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			var text = lookaheadMatch[1];
-			if(config.browser.isIE)
-				text = text.replace(/\n/g,"\r");
-			createTiddlyElement(w.output,this.element,null,null,text);
-			w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
-		}
-	},
+Formatter.enclosedTextHelper = function(w) {
+	this.lookaheadRegExp.lastIndex = w.matchStart;
+	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
+		var text = lookaheadMatch[1];
+		if(config.browser.isIE)
+			text = text.replace(/\n/g,"\r");
+		createTiddlyElement(w.output,this.element,null,null,text);
+		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
+	}
+};
 
-	isExternalLink: function(link)
-	{
-		if(store.tiddlerExists(link) || store.isShadowTiddler(link)) {
-			//# Definitely not an external link
-			return false;
-		}
-		var urlRegExp = new RegExp(config.textPrimitives.urlPattern,"mg");
-		if(urlRegExp.exec(link)) {
-			//# Definitely an external link
-			return true;
-		}
-		if(link.indexOf(".")!=-1 || link.indexOf("\\")!=-1 || link.indexOf("/")!=-1 || link.indexOf("#")!=-1) {
-			//# Link contains . / \ or # so is probably an external link
-			return true;
-		}
-		//# Otherwise assume it is not an external link
+Formatter.isExternalLink = function(link) {
+	if(store.tiddlerExists(link) || store.isShadowTiddler(link)) {
+		//# Definitely not an external link
 		return false;
 	}
-
+	var urlRegExp = new RegExp(config.textPrimitives.urlPattern,"mg");
+	if(urlRegExp.exec(link)) {
+		//# Definitely an external link
+		return true;
+	}
+	if(link.indexOf(".")!=-1 || link.indexOf("\\")!=-1 || link.indexOf("/")!=-1 || link.indexOf("#")!=-1) {
+		//# Link contains . / \ or # so is probably an external link
+		return true;
+	}
+	//# Otherwise assume it is not an external link
+	return false;
 };
 
 config.formatters = [
@@ -185,7 +176,7 @@ config.formatters = [
 			} else {
 				// Cell
 				w.nextMatch++;
-				var styles = config.formatterHelpers.inlineCssHelper(w);
+				var styles = Formatter.inlineCssHelper(w);
 				var spaceLeft = false;
 				var chr = w.source.substr(w.nextMatch,1);
 				while(chr == " ") {
@@ -207,7 +198,7 @@ config.formatters = [
 					cell.setAttribute("colSpan",colSpanCount); // Needed for IE
 					colSpanCount = 1;
 				}
-				config.formatterHelpers.applyCssHelper(cell,styles);
+				Formatter.applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
 					cell.align = spaceLeft ? "center" : "left";
@@ -294,7 +285,7 @@ config.formatters = [
 	match: "^<<<\\n",
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
-	handler: config.formatterHelpers.createElementAndWikify
+	handler: Formatter.createElementAndWikify
 },
 
 {
@@ -362,7 +353,7 @@ config.formatters = [
 		default:
 			break;
 		}
-		config.formatterHelpers.enclosedTextHelper.call(this,w);
+		Formatter.enclosedTextHelper.call(this,w);
 	}
 },
 
@@ -405,7 +396,7 @@ config.formatters = [
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
-				e = (!lookaheadMatch[2] && config.formatterHelpers.isExternalLink(link)) ?
+				e = (!lookaheadMatch[2] && Formatter.isExternalLink(link)) ?
 						createExternalLink(w.output,link) : createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
 			} else {
 				// Simple bracketted link
@@ -466,7 +457,7 @@ config.formatters = [
 			var e = w.output;
 			if(lookaheadMatch[5]) {
 				var link = lookaheadMatch[5];
-				e = config.formatterHelpers.isExternalLink(link) ? createExternalLink(w.output,link) : createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
+				e = Formatter.isExternalLink(link) ? createExternalLink(w.output,link) : createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
 				jQuery(e).addClass("imageLink");
 			}
 			var img = createTiddlyElement(e,"img");
@@ -557,11 +548,11 @@ config.formatters = [
 		switch(w.matchText) {
 		case "@@":
 			var e = createTiddlyElement(w.output,"span");
-			var styles = config.formatterHelpers.inlineCssHelper(w);
+			var styles = Formatter.inlineCssHelper(w);
 			if(styles.length == 0)
 				e.className = "marked";
 			else
-				config.formatterHelpers.applyCssHelper(e,styles);
+				Formatter.applyCssHelper(e,styles);
 			w.subWikifyTerm(e,/(@@)/mg);
 			break;
 		case "{{":
