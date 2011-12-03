@@ -6,6 +6,39 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	utils = require("./Utils.js"),
 	util = require("util");
 
+textPrimitives = {
+	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
+	lowerLetter: "[a-z0-9_\\-\u00df-\u00ff\u0151\u0171]",
+	anyLetter:   "[A-Za-z0-9_\\-\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]",
+	anyLetterStrict: "[A-Za-z0-9\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]",
+	sliceSeparator: "::",
+	sectionSeparator: "##",
+	urlPattern: "(?:file|http|https|mailto|ftp|irc|news|data):[^\\s'\"]+(?:/|\\b)",
+	unWikiLink: "~",
+	brackettedLink: "\\[\\[([^\\]]+)\\]\\]",
+	titledBrackettedLink: "\\[\\[([^\\[\\]\\|]+)\\|([^\\[\\]\\|]+)\\]\\]"
+};
+
+textPrimitives.wikiLink = "(?:(?:" + textPrimitives.upperLetter + "+" +
+							textPrimitives.lowerLetter + "+" +
+							textPrimitives.upperLetter +
+							textPrimitives.anyLetter + "*)|(?:" +
+							textPrimitives.upperLetter + "{2,}" +
+							textPrimitives.lowerLetter + "+))";
+
+textPrimitives.cssLookahead = "(?:(" + textPrimitives.anyLetter +
+	"+)\\(([^\\)\\|\\n]+)(?:\\):))|(?:(" + textPrimitives.anyLetter + "+):([^;\\|\\n]+);)";
+
+textPrimitives.cssLookaheadRegExp = new RegExp(textPrimitives.cssLookahead,"mg");
+
+textPrimitives.tiddlerForcedLinkRegExp = new RegExp("(?:" + textPrimitives.titledBrackettedLink + ")|(?:" +
+	textPrimitives.brackettedLink + ")|(?:" +
+	textPrimitives.urlPattern + ")","mg");
+
+textPrimitives.tiddlerAnyLinkRegExp = new RegExp("("+ textPrimitives.wikiLink + ")|(?:" +
+	textPrimitives.titledBrackettedLink + ")|(?:" +
+	textPrimitives.brackettedLink + ")|(?:" +
+	textPrimitives.urlPattern + ")","mg");
 
 function Formatter()
 {
@@ -23,8 +56,8 @@ Formatter.createElementAndWikify = function(w) {
 
 Formatter.inlineCssHelper = function(w) {
 	var styles = [];
-	config.textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
-	var lookaheadMatch = config.textPrimitives.cssLookaheadRegExp.exec(w.source);
+	textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
+	var lookaheadMatch = textPrimitives.cssLookaheadRegExp.exec(w.source);
 	while(lookaheadMatch && lookaheadMatch.index == w.nextMatch) {
 		var s,v;
 		if(lookaheadMatch[1]) {
@@ -40,8 +73,8 @@ Formatter.inlineCssHelper = function(w) {
 			s = "cssFloat";
 		styles.push({style: s, value: v});
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
-		config.textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
-		lookaheadMatch = config.textPrimitives.cssLookaheadRegExp.exec(w.source);
+		textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
+		lookaheadMatch = textPrimitives.cssLookaheadRegExp.exec(w.source);
 	}
 	return styles;
 };
@@ -61,8 +94,6 @@ Formatter.enclosedTextHelper = function(w) {
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 		var text = lookaheadMatch[1];
-		if(config.browser.isIE)
-			text = text.replace(/\n/g,"\r");
 		createTiddlyElement(w.output,this.element,null,null,text);
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 	}
@@ -73,7 +104,7 @@ Formatter.isExternalLink = function(link) {
 		// Definitely not an external link
 		return false;
 	}
-	var urlRegExp = new RegExp(config.textPrimitives.urlPattern,"mg");
+	var urlRegExp = new RegExp(textPrimitives.urlPattern,"mg");
 	if(urlRegExp.exec(link)) {
 		// Definitely an external link
 		return true;
@@ -408,15 +439,15 @@ Formatter.formatters = [
 
 {
 	name: "wikiLink",
-	match: config.textPrimitives.unWikiLink+"?"+config.textPrimitives.wikiLink,
+	match: textPrimitives.unWikiLink+"?"+textPrimitives.wikiLink,
 	handler: function(w)
 	{
-		if(w.matchText.substr(0,1) == config.textPrimitives.unWikiLink) {
+		if(w.matchText.substr(0,1) == textPrimitives.unWikiLink) {
 			w.outputText(w.output,w.matchStart+1,w.nextMatch);
 			return;
 		}
 		if(w.matchStart > 0) {
-			var preRegExp = new RegExp(config.textPrimitives.anyLetterStrict,"mg");
+			var preRegExp = new RegExp(textPrimitives.anyLetterStrict,"mg");
 			preRegExp.lastIndex = w.matchStart-1;
 			var preMatch = preRegExp.exec(w.source);
 			if(preMatch.index == w.matchStart-1) {
@@ -435,7 +466,7 @@ Formatter.formatters = [
 
 {
 	name: "urlLink",
-	match: config.textPrimitives.urlPattern,
+	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
 		w.outputText(createExternalLink(w.output,w.matchText),w.matchStart,w.nextMatch);
