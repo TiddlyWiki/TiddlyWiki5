@@ -75,7 +75,7 @@ tiddlerOutput.outputTiddlerDiv = function(tid) {
 				break;
 		}
 	}
-	result.push(">\n<pre>\n");
+	result.push(">\n<pre>");
 	result.push(utils.htmlEncode(tid.fields.text));
 	result.push("</pre>\n</div>");
 	return result.join("");
