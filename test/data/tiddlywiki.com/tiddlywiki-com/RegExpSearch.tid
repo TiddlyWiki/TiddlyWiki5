@@ -1,8 +1,0 @@
-title: RegExpSearch
-modifier: jermolene
-created: 20110211110659
-modified: 20111020135126
-tags: features options
-creator: psd
-
-RegExpSearch is an [[advanced option|AdvancedOptions]] uses [[JavaScript|http://en.wikipedia.org/wiki/JavaScript]]'s [[RegExp syntax|http://www.programmershelp.co.uk/docs/javascript/regexp.html#1193188]] to allow flexible searches.

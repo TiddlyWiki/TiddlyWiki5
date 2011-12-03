@@ -1,8 +1,0 @@
-title: JavaScript
-modifier: jermolene
-created: 20111020135123
-creator: jermolene
-
-JavaScript is the programming language that powers the [[Web]]. In the browser it is used to script behaviours that breathe life into the static world of [[HTML]] and [[CSS]], and it is increasingly being selected as a ServerSide programming language.
-
-TiddlyWiki relies on JavaScript, and can't function properly without it. An alternative is to use a ServerSide adaptation like TiddlyWeb or TiddlySpace that can provide a static HTML view of TiddlyWiki content that doesn't require JavaScript in the browser.

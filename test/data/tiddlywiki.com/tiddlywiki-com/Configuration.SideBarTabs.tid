@@ -1,9 +1,0 @@
-title: Configuration.SideBarTabs
-modifier: blaine
-created: 20110211110627
-modified: 20110211131016
-creator: psd
-
-SideBarTabs
-|[[Timeline|TabTimeline]]|[[All|TabAll]]|[[Tags|TabTags]]|>|>|[[More|TabMore]] |
-|>|>||[[Missing|TabMoreMissing]]|[[Orphans|TabMoreOrphans]]|[[Shadowed|TabMoreShadowed]]|

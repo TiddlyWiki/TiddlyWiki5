@@ -1,6 +1,0 @@
-<script type="text/javascript">
-//<![CDATA[
-if(useJavaSaver)
-	document.write("<applet style='position:absolute;left:-1px' name='TiddlySaver' code='TiddlySaver.class' archive='TiddlySaver.jar' width='1' height='1'></applet>");
-//]]>
-</script>

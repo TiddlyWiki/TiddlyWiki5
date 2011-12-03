@@ -1,9 +1,0 @@
-title: Chrome
-modifier: blaine
-created: 20110211110626
-modified: 20110211131015
-tags: browsers issues
-creator: psd
-
-~TiddlyWiki works well in Google Chrome and Chromium using [[TiddlySaver]].
-However, due to Chrome's [[lack of Java support on Mac OS and Linux|http://groups.google.com/group/tiddlywiki/browse_thread/thread/1f0e299198573e89]], it currently cannot save on those platforms.

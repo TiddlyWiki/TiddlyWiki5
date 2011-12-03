@@ -1,0 +1,4 @@
+recipe: test.recipe
+title=TiddlyWiki Wizard tests
+jsspecsrc=<script type="text/javascript" src="../js/tiddlywiki.js"></script>
+jsspecsrc=<script type="text/javascript" src="../jsspec/Wizard.jsspec.js"></script>

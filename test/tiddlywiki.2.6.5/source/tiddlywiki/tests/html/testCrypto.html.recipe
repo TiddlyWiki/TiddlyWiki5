@@ -1,0 +1,4 @@
+recipe: testmin.recipe
+title=TiddlyWiki Crypto tests
+jsspecsrc=<script type="text/javascript" src="../../js/Crypto.js"></script>
+jsspecsrc=<script type="text/javascript" src="../jsspec/Crypto.jsspec.js"></script>
