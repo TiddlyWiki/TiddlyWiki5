@@ -7,14 +7,12 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util");
 
 
-function Formatter(formatters)
+function Formatter()
 {
-	var n;
-	this.formatters = [];
 	var pattern = [];
-	for(n=0; n<formatters.length; n++) {
-		pattern.push("(" + formatters[n].match + ")");
-		this.formatters.push(formatters[n]);
+	this.formatters = Formatter.formatters;
+	for(var n=0; n<this.formatters.length; n++) {
+		pattern.push("(" + this.formatters[n].match + ")");
 	}
 	this.formatterRegExp = new RegExp(pattern.join("|"),"mg");
 }
@@ -88,7 +86,7 @@ Formatter.isExternalLink = function(link) {
 	return false;
 };
 
-config.formatters = [
+Formatter.formatters = [
 {
 	name: "table",
 	match: "^\\|(?:[^\\n]*)\\|(?:[fhck]?)$",
