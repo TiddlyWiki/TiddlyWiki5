@@ -20,6 +20,14 @@ Cooks a recipe file and serves it over HTTP port 8000
 
 Splits a TiddlyWiki file into separate `.tid` files and a `split.recipe` file.
 
+Tiddlers can be read from `.tid`, `.tiddler` or TiddlyWeb-style fat `.json' files.
+
+You can use filepaths or URLs to reference recipe files and tiddlers. For example, this recipe cooks the latest TiddlyWiki components directly from the online repositories:
+
+	recipe: https://raw.github.com/TiddlyWiki/tiddlywiki/master/tiddlywikinonoscript.html.recipe
+	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com-ref_public/tiddlers.json?fat=1
+	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com_public/tiddlers.json?fat=1
+
 ## Testing
 
 `test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation).
