@@ -69,7 +69,7 @@ Formatter.enclosedTextHelper = function(w) {
 };
 
 Formatter.isExternalLink = function(link) {
-	if(store.tiddlerExists(link) || store.isShadowTiddler(link)) {
+	if(w.store.tiddlerExists(link) || w.store.isShadowTiddler(link)) {
 		// Definitely not an external link
 		return false;
 	}
@@ -424,7 +424,7 @@ Formatter.formatters = [
 				return;
 			}
 		}
-		if(w.autoLinkWikiWords || store.isShadowTiddler(w.matchText)) {
+		if(w.autoLinkWikiWords || w.store.isShadowTiddler(w.matchText)) {
 			var link = createTiddlyLink(w.output,w.matchText,false,null,w.isStatic,w.tiddler);
 			w.outputText(link,w.matchStart,w.nextMatch);
 		} else {

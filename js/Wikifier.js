@@ -29,7 +29,8 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util");
 
 // Construct a wikifier object around a Formatter() object
-var Wikifier = function(formatter) {
+var Wikifier = function(store,formatter) {
+	this.store = store;
 	this.formatter = formatter;
 	this.autoLinkWikiWords = true;
 };
