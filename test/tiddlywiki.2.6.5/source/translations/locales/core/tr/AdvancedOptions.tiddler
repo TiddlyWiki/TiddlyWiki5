@@ -1,0 +1,15 @@
+<div title="GelişmişSeçenekler" modifier="KıvılcımHindistan" tags="excludeLists">
+<pre>&lt;&lt;option chkGenerateAnRssFeed&gt;&gt; GenerateAnRssFeed
+&lt;&lt;option chkOpenInNewWindow&gt;&gt; OpenLinksInNewWindow
+&lt;&lt;option chkSaveEmptyTemplate&gt;&gt; SaveEmptyTemplate
+&lt;&lt;option chkToggleLinks&gt;&gt; Halihazırda açık notlara tıklanırsa bu notcuklar kapanacaktır.
+^^(CTRL ve diğer değiştirici tuşlarla bunu devre dışı bırakabilirsiniz)^^
+&lt;&lt;option chkHttpReadOnly&gt;&gt; HTTP üzerinden görüntülendiğinde DüzenlemeÖzellikleriniGizle
+&lt;&lt;option chkForceMinorUpdate&gt;&gt; Eski saat ve tarih değerlerini koru ve değişiklikleri MinörDeğişiklik olarak değerlendir
+^^('bitti'ye basarken shift'e basarak, ya da Ctrl-Shift-Enter'a basarak devre dışı bırakabilirsiniz.^^
+&lt;&lt;option chkConfirmDelete&gt;&gt; SilmedenÖnceOnayla
+ Düzenlenemez bir kutudaki maksimum satır sayısı: &lt;&lt;option txtMaxEditRows&gt;&gt;
+Yedekleme dosyası için dizin ismi: &lt;&lt;option txtBackupFolder&gt;&gt;
+&lt;&lt;option chkInsertTabs&gt;&gt; Tab tuşunu bir sonraki alana geçmek için değil TAB karakteri girmek için kullanın
+&lt;&lt;option txtFileSystemCharSet&gt;&gt; Character set to use for saving (Firefox/Mozilla only)</pre>
+</div>

@@ -1,0 +1,13 @@
+title: Line Break Formatting
+modifier: psd
+created: 20110211143101
+modified: 20110215151912
+tags: formatting
+creator: matt
+
+Line breaks can be forced explicitly:
+{{{
+Some text with a<br>line break in the middle
+}}}
+Displays as:
+Some text with a<br>line break in the middle

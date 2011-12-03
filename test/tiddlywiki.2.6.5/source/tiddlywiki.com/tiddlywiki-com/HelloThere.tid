@@ -1,0 +1,12 @@
+title: HelloThere
+modifier: jermolene
+created: 20110211110638
+modified: 20111130165200
+tags: gettingstarted welcome
+creator: psd
+
+Welcome to TiddlyWiki, a reusable non-linear personal web notebook.  It's a unique [[wiki|WikiWikiWeb]] that people [[love using|Raves]] to keep ideas and information organised. It was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers.
+
+TiddlyWiki is written in [[HTML]], [[CSS]] and JavaScript to run on any reasonably modern [[browser|Browsers]] without needing any ServerSide logic. It allows anyone to create personal SelfContained hypertext documents that can be published to a WebServer, sent by email, stored in a DropBox or kept on a USB thumb drive to make a WikiOnAStick. Because it doesn't need to be installed and configured it makes a great GuerillaWiki. This is revision <<version>> of TiddlyWiki, and is published under an OpenSourceLicense.
+
+Unlike most wikis, TiddlyWiki doesn't directly support group collaboration; it is a wiki in the sense of elevating linking be a part of the punctuation of writing. You can easily publish a TiddlyWiki you have created by placing the single file on a web server (for instance the homepage hosting provided by many ISPs). If you need full  group collaboration features, there are several HostedOptions to choose from.

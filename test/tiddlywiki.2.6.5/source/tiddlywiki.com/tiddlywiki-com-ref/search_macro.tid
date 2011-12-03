@@ -1,0 +1,22 @@
+title: search macro
+modifier: colmbritton
+created: 20110211143954
+modified: 20110211144610
+tags: macro
+creator: colmbritton
+
+Search fields can be created using:
+{{{
+<<search>>
+}}}
+Displays as:
+
+<<search>>
+
+A default search term can also be added:
+{{{
+<<search [term]>>
+}}}
+Displays as:
+
+<<search [term]>>

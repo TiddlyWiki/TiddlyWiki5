@@ -1,0 +1,18 @@
+title: HowToUpgradeOlderTiddlyWikis
+modifier: blaine
+created: 20110211110641
+modified: 20110211131017
+tags: instructions
+creator: psd
+
+The steps you need to take depend on which version of TiddlyWiki you are upgrading from. From version 2.4.0 onwards, you can upgrade to the latest version using the 'Upgrade' tab in the BackstageArea, as described in HowToUpgrade. If you're using an earlier version of TiddlyWiki, you'll need to follow these instructions instead:
+! Upgrading from TiddlyWiki earlier than version 2.4.0 to the latest version
+* Download a fresh, empty version of TiddlyWiki by right-clicking on [[this link|http://www.tiddlywiki.com/empty.html]], selecting 'Save target' or 'Save link' and saving it in a convenient location as (say) "mynewtiddlywiki.html"
+* Open the new TiddlyWiki file in your browser
+* Choose ''import'' from the BackstageArea at the top of the window (you may need to click the 'backstage' button at the upper right to show the BackstageArea)
+* Click the ''browse'' button and select your original TiddlyWiki file (say, "mytiddlywiki.html") from the file browser
+* Click the ''open'' button on the import wizard; a list of all of your tiddlers is displayed
+* Click on the top-left checkbox to select all the tiddlers in the list
+* Scroll down to the bottom of the wizard and ensure that the checkbox labelled //Keep these tiddlers linked to this server...// is ''clear''
+* Click the ''import'' button
+The most likely cause of the upgrade process not working properly is that one of the [[Plugins]] you're using is not compatible with a change in the new release. If so, you can repeat the process omitting the troublesome plugins.

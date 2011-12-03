@@ -1,0 +1,24 @@
+title: ParameterParser
+modifier: colmbritton
+created: 20110211110654
+modified: 20110221143137
+tags: features
+creator: psd
+
+The ParameterParser is used in several places in TiddlyWiki:
+* to process the StartupParameters after the '#' in a TiddlyWiki URL
+* to process the DefaultTiddlers list
+* to process the parameters to Macros
+* to process tag lists when editing a tiddler
+It supports a list of parameters each of the form "name:value". For example:
+{{{
+name:John   location:"Isle of Wight"   [[dietary needs]]:none   really:'yes, really'
+}}}
+Names and values that need to contain spaces may be quoted with single- or double-quotes or double-square brackets. The parser is generally tolerant of additional spaces.
+
+When processing macro parameters, names and values may also be quoted with double-braces which causes them to be evaluated as a [[JavaScript|http://en.wikipedia.org/wiki/JavaScript]] expression. For example:
+{{{
+title:{{window.title}}
+}}}
+
+The ParameterParser will cope with either the name or the value being omitted, and will substitute a specified default. This is how the StartupParameters work; the default parameter name is specified as 'open'.

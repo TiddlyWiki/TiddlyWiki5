@@ -1,0 +1,6 @@
+Following translations of shadow tiddler names are not currently supported by TiddlyWiki
+
+DefaultTiddlers: Öntan?ml?Notlar
+OptionsPanel: SeçeneklerPaneli
+PluginManager: PluginYöneticisi
+ImportTiddlers: NotTransferEtmek	

@@ -1,0 +1,7 @@
+<div title="DownloadSoftware"  modifier="BramChen">
+<pre>由於 TiddlyWiki 是一個單一的 HTML 文件，當您在瀏覽這個站點時，實際上已經下載了整個軟體。如果您想要儲存變更，保存一份屬於自己的空白 TiddlyWiki 請右鍵點擊[[這裡|empty.zh-Hant.html]]，然後選擇「鏈結另存新檔...」 或「另存目標...」。您可以選擇保存文件於何處，並且隨意命名（請確定它被保存為 HTML 格式，且延伸檔名為 HTML）。
+
+@@在不同的瀏覽器之間，可能有些許纏擾不清和微妙的差異。因此請留意：@@
+* 由於 SaveUnpredictabilities 的原故，請勿使用瀏覽器選單上的「檔案/另存新檔」來保存 TiddlyWiki。
+* 確認您已經儲存成 HTML (或「頁面原始檔」 格式)，而非被插入其他資料的檔案格式，如果您已經在使用 TiddlyWiki，請參考 [[如何升級|HowToUpgrade]] 。如果您想要保存這個站點的一個完全拷貝，包括所有指示和其它文本，請右鍵點擊[[這裡|TiddlyWiki.zh-Hant.html]]，然後選擇「鏈結另存新檔...」 或「另存目標...」。</pre>
+</div>

@@ -1,0 +1,12 @@
+title: TabMoreOrphans shadows
+modifier: matt
+created: 20110211161504
+modified: 201102151514
+tags: shadow
+creator: matt
+
+The TabMoreOrphans tiddler contains a command that lists all the tiddlers that are not linked to from any other tidder.
+{{{
+<<list orphans>>
+}}}
+In TiddlyWiki this list appears as default in the {{{Orphans}}} tab on the right-hand menu.

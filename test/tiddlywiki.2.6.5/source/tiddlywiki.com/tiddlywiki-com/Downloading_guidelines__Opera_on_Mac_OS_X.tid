@@ -1,0 +1,27 @@
+title: Downloading guidelines: Opera on Mac OS X
+modifier: jermolene
+created: 20110211110646
+modified: 201111031800
+creator: psd
+
+Follow these easy steps to get started! Note that these guidelines are for Opera 9.5.1 running on Mac OS X 10.5.4, but will apply to several other configurations (including most other versions of [[Opera]])
+
+''If these guidelines aren't appropriate, check the [[other browser-specific guidelines|Downloading]] to find some that are right for you.''
+!Step 1 - Download files
+Download the zip file to a location of your choice.
+
+[img[images/step1macopera.jpg]]
+!Step 2 - Check files
+Open the zip file, and then check in the resulting folder that you have automatically received two files:
+*empty.html (this is your ~TiddlyWiki file)
+*~TiddlySaver.jar (this is a java applet, which will make sure everything works in your chosen browser. Note a copy of this file ''must'' be kept in the same folder as any ~TiddlyWiki file you are using) 
+[img[images/step2macopera.jpg]]
+You can download the TiddlySaver file on it's own from [[here|http://www.tiddlywiki.com/TiddlySaver.jar]] if you need it.
+
+Open the empty.html file to get started.
+!Step 3 - Trust applet
+The ~TiddlySaver.jar applet has been signed by [[UnaMesa|http://www.unamesa.org]], who hold the rights to ~TiddlyWiki on behalf of the community. You can find out more about the applet itself [[here|TiddlySaver]], and you'll need to click on 'Trust' in order for the ~TiddlyWiki to work. If you've accidentally clicked on 'Don't Trust' previously, don't worry - just restart the browser and you should get asked again.
+
+[img[images/step3macopera.jpg]]
+!Step 4 - You're done!
+Thanks to the applet, you now have the full functionality of ~TiddlyWiki at your disposal. Be sure to check out the guidelines in [[Getting Started|GettingStarted]]!

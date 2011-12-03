@@ -1,0 +1,25 @@
+title: tabs macro
+modifier: jermolene
+created: 20110211153122
+modified: 20111103182330
+tags: macro
+creator: colmbritton
+
+The tab macro lets you create tab interfaces such as the one used for the timeline in the sidebar.
+You use it as follows:
+{{{
+<<tabs theCookieName
+nameOfFirstTab "HoverValueOfFirstTab" TiddlerToShowInTab(or content)
+nameOfSecondTab "HoverValueOfSecondTab" TiddlerToShowInTab(or content)
+...
+>>
+}}}
+''theCookieName'' is used to store the name of the tab you currently have open. It does this so that when you return the tiddler will still be displaying the last tab you had selected.
+
+Example use of the tab macro:
+{{{
+<<tabs txtFavourite
+tags "First tab" "tags macro"
+tag "Second tab" "tag macro"
+>>
+}}}

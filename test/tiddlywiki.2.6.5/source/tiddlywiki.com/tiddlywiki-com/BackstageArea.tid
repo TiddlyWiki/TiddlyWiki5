@@ -1,0 +1,12 @@
+title: BackstageArea
+modifier: colmbritton
+created: 20110211110622
+modified: 20110221142735
+tags: features
+creator: psd
+
+One of the great strengths of TiddlyWiki is the way that its interface can be customised by editting various shadow tiddlers. However, a problem that has consistently emerged is the difficulty of reconciling the needs of authors, who need access to the full array of TiddlyWiki features, and the needs of ordinary readers, who generally benefit from seeing a restricted set of functionality more suited to their needs.
+
+The new backstage area in release 2.2 offers a solution to this conundrum by providing a consistent way of accessing authoring functionality that is independent of the interface customisations (so, even if you blast away the contents of your PageTemplate, you can still access the backstage area).
+
+The backstage area is only available when a TiddlyWiki is edittable - typically meaning that it's been opened off of a {{{file://}}} URL. It appears as an unobtrusive link in the topright corner of the page. Clicking it reveals the backstage toolbar consisting of commands like {{{saveChanges}}} and drop-down tasks like ImportTiddlers, SyncMacro, PluginManager and Tweak (which provides access to the new [[options macro]]).

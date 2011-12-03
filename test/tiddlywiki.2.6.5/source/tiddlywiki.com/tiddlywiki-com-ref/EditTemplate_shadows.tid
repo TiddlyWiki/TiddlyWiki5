@@ -1,0 +1,34 @@
+title: EditTemplate shadows
+modifier: matt
+created: 20110211143734
+modified: 201102151511
+tags: shadow
+creator: matt
+
+This tiddler contains the markup used to display tiddlers in edit mode. It is designed to make it easy to change the layout/structure of the tiddler in edit mode.
+By default it contains the following markup:
+{{{
+<div class='toolbar'
+	macro='toolbar [[ToolbarCommands::EditToolbar]] icons:yes'>
+</div>
+<div class='heading editorHeading'>
+	<div class='editor title' macro='edit title'></div>
+	<div class='tagClear'></div>
+</div>
+<div class='annotationsBox' macro='annotations'>
+	<div class='editSpaceSiteIcon'
+		macro='tiddlerOrigin height:16 width:16 label:no interactive:no'>
+	</div>
+	<div class="privacyEdit" macro='setPrivacy label:no interactive:no'></div>
+	<div class='tagClear'></div>
+</div>
+<div class='editor' macro='edit text'></div>
+<div class='editorFooter'>
+	<div class='tagTitle'>tags</div>
+	<div class='editor' macro='edit tags'></div>
+	<div class='tagAnnotation'>
+		<span macro='message views.editor.tagPrompt'></span>
+		<span macro='tagChooser excludeLists'></span>
+	</div>
+</div>
+}}}

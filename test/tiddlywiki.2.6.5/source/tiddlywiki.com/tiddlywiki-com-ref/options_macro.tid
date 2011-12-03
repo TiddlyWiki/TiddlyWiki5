@@ -1,0 +1,17 @@
+title: options macro
+modifier: jermolene
+created: 20110221142149
+modified: 20111103182247
+tags: macro
+creator: colmbritton
+
+The options macro, used predominately in the backstage, allows the user to set a number of cookie based options that affect the enabled features of the Tiddlywiki.  These settings can be trivial, such as do you want animations enabled, or can be used for more complex things, such as enable regular expressions searches.
+It is used as below:
+{{{
+<<options>>
+}}}
+
+Options can be used by plugin developers to add settings that can be used by their plugin.
+
+Displays as:
+<<options>>

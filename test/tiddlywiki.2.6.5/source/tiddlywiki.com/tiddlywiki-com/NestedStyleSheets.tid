@@ -1,0 +1,18 @@
+title: NestedStyleSheets
+modifier: blaine
+created: 20110211110651
+modified: 20110211131019
+tags: features
+creator: psd
+
+Within a CustomStyleSheet, you can include the text of another tiddler by including it in double square brackets. For example, if the tiddler MyFavouriteColour contains {{{#ff763e}}}, and the StyleSheet tiddler contained:
+
+{{{
+#mainMenu {background-color:[[MyFavouriteColour]];}
+}}}
+
+Then, the effect is that each CSS declaration will be set to {{{background-color: #ff763e;}}}.
+
+In practice, for small bits of text like a colour, it makes sense to use TiddlerSlicing format to reference a chunk of text within a tiddler. See ColorPalette and StyleSheetColors for an example.
+
+Of course, you can use this mechanism to redirect any part of a stylesheet, not just colours. And you can nest references for more complex effects.

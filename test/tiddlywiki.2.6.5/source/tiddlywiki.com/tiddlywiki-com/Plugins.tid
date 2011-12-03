@@ -1,0 +1,14 @@
+title: Plugins
+modifier: jermolene
+created: 20110211110658
+modified: 20111103182507
+tags: community concepts gettingstarted
+creator: psd
+
+~TiddlyWiki can be extended by [[installing plugins|InstallingPlugins]] that implement a wide variety of features (including [[Macros]], [[themes|http://tiddlythemes.com/]] or tweaks).
+
+Community member Dave Gifford oversees an extensive catalogue of available plugins at [[TiddlyVault|http://tiddlyvault.tiddlyspot.com/]], and Eric Shulman maintains his own impressive collection of plugins at [[TiddlyTools|http://www.tiddlytools.com]]. More recently, Saq Imtiaz has built a service which lists plugins from all around the web in a single place, at [[plugins.tiddlywiki.org|http://plugins.tiddlywiki.org/]]
+
+When you've chosen the plugin you'd like to import, follow the directions in ImportTiddlers (just make sure to tag the plugin {{{systemConfig}}}).
+
+See http://tiddlywikidev.tiddlyspace.com/ for information on writing plugins for TiddlyWiki.

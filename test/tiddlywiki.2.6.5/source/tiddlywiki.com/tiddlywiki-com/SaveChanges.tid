@@ -1,0 +1,16 @@
+title: SaveChanges
+modifier: jermolene
+created: 20110211110700
+modified: 20111103182515
+tags: features gettingstarted instructions
+creator: psd
+
+If you've followed the appropriate [[Downloading]] guidelines, then you can save your changes as you go along. (AutoSave makes this easy).
+
+It's important to save changes using ~TiddlyWiki's built in saving functionality (rather than the browser's 'Save As' function - [[here's why|SaveUnpredictabilities]]). Your local version of ~TiddlyWiki will have a button on the right hand side that says 'save changes' - that's the button you'll need to use.
+
+It's worthwhile configuring your backup settings. You can edit the AdvancedOptions to decide when backups are made and where they're saved.
+
+If you're still experiencing problems, the following links will help: 
+*General guidance on FireFox, InternetExplorer, [[Opera]], [[Camino]] or [[Safari]]
+* if you're using InternetExplorer on Windows you might run into XP ServicePack2Problems or VistaIssues

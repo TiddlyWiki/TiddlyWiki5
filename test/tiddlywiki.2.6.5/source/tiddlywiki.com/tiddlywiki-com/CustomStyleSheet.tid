@@ -1,0 +1,10 @@
+title: CustomStyleSheet
+modifier: jermolene
+created: 20110211110628
+modified: 20111020135116
+tags: features
+creator: psd
+
+You can skin TiddlyWiki with a special StyleSheet tiddler containing your own CSS style sheet declarations. Unlike hacking the HTML directly, the StyleSheet tiddler withstands upgrading to a new version of the TiddlyWiki code (see HowToUpgrade). You can also use the NestedStyleSheets feature to structure your CSS declarations.
+
+The ExampleStyleSheet shows some of the basic options you can control (see AnotherExampleStyleSheet for more complex examples). SaveChanges and then click refresh in your browser to see StyleSheet changes. Any errors in your CSS syntax will be caught and displayed, but they shouldn't stop TiddlyWiki from working.

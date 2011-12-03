@@ -1,0 +1,11 @@
+title: MarkupPreHead
+modifier: colmbritton
+created: 20110211132837
+tags: excludeLists
+creator: colmbritton
+
+<!--{{{-->
+<link rel="shortcut icon" href="/recipes/tiddlywiki-com-ref_public/tiddlers/favicon.ico" />
+<link href="/bags/tiddlywiki-com-ref_public/tiddlers.atom" rel="alternate"
+	type="application/atom+xml" title="tiddlywiki-com-ref's public feed" />
+<!--}}}-->

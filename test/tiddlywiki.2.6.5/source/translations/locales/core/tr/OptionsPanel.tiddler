@@ -1,0 +1,17 @@
+<div title="OptionsPanel" modifier="KıvılcımHindistan" tags="excludeLists">
+<pre>TiddlyWiki'yi isteklerinize uygun hale getirmek için olan bu seçenekler tarayıcınıza kaydedilecek
+
+Düzenlemelerinizin kim tarafından yapıldığını belirtmek için kullanıcı isminiz gerekli. İsminizi bir WikiWord (ör: SaitFaik) olarak girmeniz gerekmekte
+
+&lt;&lt;option txtUserName&gt;&gt;
+&lt;&lt;option chkSaveBackups&gt;&gt; ~YedekleriKaydet
+&lt;&lt;option chkAutoSave&gt;&gt; ~OtomatikKaydet
+&lt;&lt;option chkRegExpSearch&gt;&gt; DuzenliİfadeArama
+&lt;&lt;option chkCaseSensitiveSearch&gt;&gt; DuyarlıArama
+&lt;&lt;option chkAnimate&gt;&gt; ~AnimasyonlarAçık
+
+----
+[[GelişmişSeçenekler]]
+[[PluginManager]]
+[[ImportTiddlers]]</pre>
+</div>

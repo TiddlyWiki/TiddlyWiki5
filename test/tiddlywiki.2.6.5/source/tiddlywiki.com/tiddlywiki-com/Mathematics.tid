@@ -1,0 +1,12 @@
+title: Mathematics
+modifier: jermolene
+created: 20111114122159
+modified: 20111114122829
+tags: niche
+creator: jermolene
+
+There are several ways to incorporate mathematical formulae into TiddlyWiki, both of which let you to type ordinary LaTeX into a tiddler:
+1. Use the [[jsMath|http://www.math.union.edu/~dpvc/jsMath/]] library via Bob McElrath's [[TiddlyJsMath|http://bob.mcelrath.org/tiddlyjsmath.html]] plugin
+2. Use the [[MathJax|http://www.mathjax.org/]] library via [[PluginMathJax|http://math-template.tiddlyspace.com/#%5B%5BPluginMathJax%20v1.3%5D%5D]]
+
+An alternative is to use a service like [[CodeCogs|http://www.codecogs.com/latex/eqneditor.php]] that enables you to generate images of equations from LaTeX source that can be manually inserted into TiddlyWiki. Some examples of this technique are http://twmath.tiddlyspot.com/ and http://twequation.tiddlyspot.com/

@@ -1,0 +1,11 @@
+title: CloseOthersCommand
+modifier: blaine
+created: 20110211110626
+modified: 20110211131016
+tags: commands
+creator: psd
+
+Closes all other open tiddlers, except for any that are being editted. It is used with the ToolbarMacro like this:
+{{{
+<<toolbar closeOthers>>
+}}}

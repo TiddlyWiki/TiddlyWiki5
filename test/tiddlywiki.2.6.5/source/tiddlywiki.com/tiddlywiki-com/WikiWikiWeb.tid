@@ -1,0 +1,12 @@
+title: WikiWikiWeb
+modifier: blaine
+created: 20110211110714
+modified: 20110211131022
+tags: concepts
+creator: psd
+
+A wiki (derived from the Hawaiian word for "fast") is a popular way of building collaborative websites. It's based on the two ideas of allowing users to easily edit any page and the use of special formatting to create links between pages. See Wikipedia for [[more details|http://en.wikipedia.org/wiki/Wiki]].
+
+~TiddlyWiki is fundamentally different from a conventional Wiki because it is not based on separate, entire pages of content, but rather items of MicroContent referred to as [[Tiddlers|Tiddler]] that live together on the same page.
+
+Out of the box, ~TiddlyWiki is also different because it doesn't support public editing - or indeed any persistent editing when viewed over the web. However, there are ServerSide editions, TiddlyWikiAdaptations and [[Plugins]] that provide these features in a wide range of different configurations.

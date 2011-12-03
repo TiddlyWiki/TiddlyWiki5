@@ -1,0 +1,8 @@
+title: ContentsSlider
+modifier: blaine
+created: 20110211110627
+modified: 20110211131016
+creator: psd
+
+@@margin-left:.5em;<<slider chkContents SideBarTabs "contents »" "show
+lists of tiddlers contained in this document">>@@

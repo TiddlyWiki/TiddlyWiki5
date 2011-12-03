@@ -1,0 +1,8 @@
+title: GreaseMonkey
+modifier: blaine
+created: 20110211110638
+modified: 20110211131017
+tags: issues
+creator: psd
+
+Several popular GreaseMonkey scripts can cause some or all features of TiddlyWiki to stop working - the default Linkify script seems to be particularly troublesome. There doesn't seem to be a //solid// way to disable GreaseMonkey from within TiddlyWiki (which is technically entirely understandable but does lead to a fairly grim user experience).

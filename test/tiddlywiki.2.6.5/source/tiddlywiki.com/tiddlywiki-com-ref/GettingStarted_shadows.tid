@@ -1,0 +1,13 @@
+title: GettingStarted shadows
+modifier: matt
+created: 20110211143758
+modified: 201102151537
+tags: shadow
+creator: matt
+
+The GettingStarted shadow tiddler contains information about how to start using your TiddlyWiki.
+You can change it to include anything you desire.
+
+For example a lot of tiddlywiki authors use it to explain what their wiki is about. This is a particularly useful approach because by default the GettingStarted tiddler is in the [[DefaultTiddlers|Shadow - DefaultTiddlers]] tiddler, thus opens automatically upon loading of the page.
+
+By default it is also part of the [[MainMenu|Shadow - MainMenu]] tiddler so is included on the left side of the menu bar above.

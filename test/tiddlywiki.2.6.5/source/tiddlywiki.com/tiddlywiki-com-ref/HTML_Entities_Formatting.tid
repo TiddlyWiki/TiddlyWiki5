@@ -1,0 +1,18 @@
+title: HTML Entities Formatting
+modifier: psd
+created: 20110211142850
+modified: 201102151515
+tags: formatting
+creator: matt
+
+HTML entities can be used to easily type special characters:
+{{{
+Here is a quote symbol: &quot;
+And a pound sign: &pound;
+}}}
+Displays as:
+Here is a quote symbol: &quot;
+And a pound sign: &pound;
+!Notes
+For a full list of available HTML references see:
+http://www.w3schools.com/tags/ref_entities.asp

@@ -1,0 +1,16 @@
+title: Customisation
+modifier: jermolene
+created: 20110211110629
+modified: 20111103173340
+creator: psd
+
+You can customise the appearance and behaviour of TiddlyWiki to almost any degree you want:
+* Install [[Plugins]] to extend the core functionality
+* Use the ColorPalette to change the basic colour scheme
+* Use built in [[Formatting|Basic Formatting]] techniques
+* Create a CustomStyleSheet for finer grained control over the appearance
+* Customise the PageTemplate, ViewTemplate or EditTemplate to change the composition of the page and the layout of individual tiddlers
+* Further SpecialTiddlers
+* Use off-the-shelf themes from [[TiddlyThemes|http://tiddlythemes.com/]]
+* Visit the [[Configuration]] summary to see all the special configuration tiddlers
+* Use TiddlyBookmarklets for low level hacking of TiddlyWiki documents
