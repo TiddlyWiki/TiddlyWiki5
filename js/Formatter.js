@@ -70,19 +70,19 @@ Formatter.enclosedTextHelper = function(w) {
 
 Formatter.isExternalLink = function(link) {
 	if(store.tiddlerExists(link) || store.isShadowTiddler(link)) {
-		//# Definitely not an external link
+		// Definitely not an external link
 		return false;
 	}
 	var urlRegExp = new RegExp(config.textPrimitives.urlPattern,"mg");
 	if(urlRegExp.exec(link)) {
-		//# Definitely an external link
+		// Definitely an external link
 		return true;
 	}
 	if(link.indexOf(".")!=-1 || link.indexOf("\\")!=-1 || link.indexOf("/")!=-1 || link.indexOf("#")!=-1) {
-		//# Link contains . / \ or # so is probably an external link
+		// Link contains . / \ or # so is probably an external link
 		return true;
 	}
-	//# Otherwise assume it is not an external link
+	// Otherwise assume it is not an external link
 	return false;
 };
 
@@ -445,7 +445,7 @@ Formatter.formatters = [
 {
 	name: "image",
 	match: "\\[[<>]?[Ii][Mm][Gg]\\[",
-	//# [<] sequence below is to avoid lessThan-questionMark sequence so TiddlyWikis can be included in PHP files
+	// [<] sequence below is to avoid lessThan-questionMark sequence so TiddlyWikis can be included in PHP files
 	lookaheadRegExp: /\[([<]?)(>?)[Ii][Mm][Gg]\[(?:([^\|\]]+)\|)?([^\[\]\|]+)\](?:\[([^\]]*)\])?\]/mg,
 	handler: function(w)
 	{
