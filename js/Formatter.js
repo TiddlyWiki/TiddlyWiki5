@@ -6,7 +6,7 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	utils = require("./Utils.js"),
 	util = require("util");
 
-textPrimitives = {
+var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
 	lowerLetter: "[a-z0-9_\\-\u00df-\u00ff\u0151\u0171]",
 	anyLetter:   "[A-Za-z0-9_\\-\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]",
@@ -51,7 +51,9 @@ function Formatter()
 }
 
 Formatter.createElementAndWikify = function(w) {
-	w.subWikifyTerm(createTiddlyElement(w.output,this.element),this.termRegExp);
+	var e = {type: this.element, children: []};
+	w.output.push(e);
+	w.subWikifyTerm(e.children,this.termRegExp);
 };
 
 Formatter.inlineCssHelper = function(w) {
@@ -80,12 +82,14 @@ Formatter.inlineCssHelper = function(w) {
 };
 
 Formatter.applyCssHelper = function(e,styles) {
-	var t;
-	for(t=0; t< styles.length; t++) {
-		try {
-			e.style[styles[t].style] = styles[t].value;
-		} catch (ex) {
-		}
+	if(!"attributes" in e) {
+		e.attributes = {};
+	}
+	if(!"styles" in e.attributes) {
+		e.attributes.style = {};
+	}
+	for(var t=0; t< styles.length; t++) {
+		e.attributes.style[styles[t].style] = styles[t].value;
 	}
 };
 
@@ -94,12 +98,14 @@ Formatter.enclosedTextHelper = function(w) {
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 		var text = lookaheadMatch[1];
-		createTiddlyElement(w.output,this.element,null,null,text);
+		w.output.push({type: this.element, children: [
+				{type: "text", value: text}
+			]});
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 	}
 };
 
-Formatter.isExternalLink = function(link) {
+Formatter.isExternalLink = function(w,link) {
 	if(w.store.tiddlerExists(link) || w.store.isShadowTiddler(link)) {
 		// Definitely not an external link
 		return false;
@@ -128,37 +134,39 @@ Formatter.formatters = [
 	rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 	handler: function(w)
 	{
-		var table = createTiddlyElement(w.output,"table",null,"twtable");
+		var table = {type: "table", attributes: {className: "twtable"}, children: []};
+		w.output.push(table);
 		var prevColumns = [];
 		var currRowType = null;
 		var rowContainer;
 		var rowCount = 0;
-		var onmouseover = function() {jQuery(this).addClass("hoverRow");};
-		var onmouseout = function() {jQuery(this).removeClass("hoverRow");};
 		w.nextMatch = w.matchStart;
 		this.lookaheadRegExp.lastIndex = w.nextMatch;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		while(lookaheadMatch && lookaheadMatch.index == w.nextMatch) {
 			var nextRowType = lookaheadMatch[2];
 			if(nextRowType == "k") {
-				table.className = lookaheadMatch[1];
+				table.attributes.className = lookaheadMatch[1];
 				w.nextMatch += lookaheadMatch[0].length+1;
 			} else {
 				if(nextRowType != currRowType) {
-					rowContainer = createTiddlyElement(table,this.rowTypes[nextRowType]);
+					rowContainer = {type: this.rowTypes[nextRowType], children: [], attributes: {}};
+					table.children.push(rowContainer);
 					currRowType = nextRowType;
 				}
 				if(currRowType == "c") {
 					// Caption
 					w.nextMatch++;
-					if(rowContainer != table.firstChild)
-						table.insertBefore(rowContainer,table.firstChild);
-					rowContainer.setAttribute("align",rowCount == 0?"top":"bottom");
-					w.subWikifyTerm(rowContainer,this.rowTermRegExp);
+					// Move the caption to the first row if it isn't already
+					if(table.children.length !== 1) {
+						table.children.pop(); // Take rowContainer out of the children array
+						table.splice(0,0,rowContainer); // Insert it at the bottom						
+					}
+					rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
+					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
-					var theRow = createTiddlyElement(rowContainer,"tr",null,rowCount%2?"oddRow":"evenRow");
-					theRow.onmouseover = onmouseover;
-					theRow.onmouseout = onmouseout;
+					var theRow = {type: "tr", className: rowCount%2 ? "oddRow" : "evenRow", children: []};
+					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow,prevColumns);
 					rowCount++;
 				}
@@ -180,12 +188,10 @@ Formatter.formatters = [
 				var last = prevColumns[col];
 				if(last) {
 					last.rowSpanCount++;
-					last.element.setAttribute("rowspan",last.rowSpanCount);
-					last.element.setAttribute("rowSpan",last.rowSpanCount); // Needed for IE
-					last.element.valign = "center";
+					last.element.attributes.rowspan = last.rowSpanCount;
+					last.element.attributes.valign = "center";
 					if(colSpanCount > 1) {
-						last.element.setAttribute("colspan",colSpanCount);
-						last.element.setAttribute("colSpan",colSpanCount); // Needed for IE
+						last.element.attributes.colspan = colSpanCount;
 						colSpanCount = 1;
 					}
 				}
@@ -197,8 +203,7 @@ Formatter.formatters = [
 			} else if(cellMatch[2]) {
 				// End of row
 				if(prevCell && colSpanCount > 1) {
-					prevCell.setAttribute("colspan",colSpanCount);
-					prevCell.setAttribute("colSpan",colSpanCount); // Needed for IE
+					prevCell.attributes.colspan = colSpanCount;
 				}
 				w.nextMatch = this.cellRegExp.lastIndex;
 				break;
@@ -215,24 +220,25 @@ Formatter.formatters = [
 				}
 				var cell;
 				if(chr == "!") {
-					cell = createTiddlyElement(e,"th");
+					cell = {type: "th", attributes: {}, children: []};
+					e.push(cell);
 					w.nextMatch++;
 				} else {
-					cell = createTiddlyElement(e,"td");
+					cell = {type: "td", attributes: {}, children: []};
+					e.push(cell);
 				}
 				prevCell = cell;
 				prevColumns[col] = {rowSpanCount:1,element:cell};
 				if(colSpanCount > 1) {
-					cell.setAttribute("colspan",colSpanCount);
-					cell.setAttribute("colSpan",colSpanCount); // Needed for IE
+					cell.attributes.colspan = colSpanCount;
 					colSpanCount = 1;
 				}
 				Formatter.applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
-					cell.align = spaceLeft ? "center" : "left";
+					cell.attributes.align = spaceLeft ? "center" : "left";
 				else if(spaceLeft)
-					cell.align = "right";
+					cell.attributes.align = "right";
 				w.nextMatch--;
 			}
 			col++;
@@ -248,7 +254,9 @@ Formatter.formatters = [
 	termRegExp: /(\n)/mg,
 	handler: function(w)
 	{
-		w.subWikifyTerm(createTiddlyElement(w.output,"h" + w.matchLength),this.termRegExp);
+		var e = {type: "h" + w.matchLength, attributes: {}, children: []};
+		w.output.push(e);
+		w.subWikifyTerm(e.children,this.termRegExp);
 	}
 },
 
@@ -283,11 +291,13 @@ Formatter.formatters = [
 				baseType = listType;
 			listLevel = lookaheadMatch[0].length;
 			w.nextMatch += lookaheadMatch[0].length;
-			var t;
+			var t,e;
 			if(listLevel > currLevel) {
 				for(t=currLevel; t<listLevel; t++) {
-					var target = (currLevel == 0) ? stack[stack.length-1] : stack[stack.length-1].lastChild;
-					stack.push(createTiddlyElement(target,listType));
+					var target = (currLevel === 0) ? stack[stack.length-1] : stack[stack.length-1].lastChild;
+					e = {type: listType, attributes: {}, children: []};
+					target.push(e);
+					stack.push(e.children);
 				}
 			} else if(listType!=baseType && listLevel==1) {
 				w.nextMatch -= lookaheadMatch[0].length;
@@ -297,12 +307,15 @@ Formatter.formatters = [
 					stack.pop();
 			} else if(listLevel == currLevel && listType != currType) {
 				stack.pop();
-				stack.push(createTiddlyElement(stack[stack.length-1].lastChild,listType));
+				e = {type: listType, attributes: {}, children: []};
+				stack[stack.length-1].push(e);
+				stack.push(e.children);
 			}
 			currLevel = listLevel;
 			currType = listType;
-			var e = createTiddlyElement(stack[stack.length-1],itemType);
-			w.subWikifyTerm(e,this.termRegExp);
+			e = {type: itemType, attributes: {}, children: []};
+			stack[stack.length-1].push(e);
+			w.subWikifyTerm(e.children,this.termRegExp);
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
 			lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		}
@@ -328,18 +341,20 @@ Formatter.formatters = [
 		var stack = [w.output];
 		var currLevel = 0;
 		var newLevel = w.matchLength;
-		var t,matched;
+		var t,matched,e;
 		do {
 			if(newLevel > currLevel) {
-				for(t=currLevel; t<newLevel; t++)
-					stack.push(createTiddlyElement(stack[stack.length-1],this.element));
+				for(t=currLevel; t<newLevel; t++) {
+					e = {type: this.element, attributes: {}, children: []};
+					stack[stack.length-1].push(e);
+				}
 			} else if(newLevel < currLevel) {
 				for(t=currLevel; t>newLevel; t--)
 					stack.pop();
 			}
 			currLevel = newLevel;
 			w.subWikifyTerm(stack[stack.length-1],this.termRegExp);
-			createTiddlyElement(stack[stack.length-1],"br");
+			stack[stack.length-1].push({type: "br", attributes: {}});
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			matched = lookaheadMatch && lookaheadMatch.index == w.nextMatch;
@@ -356,7 +371,8 @@ Formatter.formatters = [
 	match: "^----+$\\n?|<hr ?/?>\\n?",
 	handler: function(w)
 	{
-		createTiddlyElement(w.output,"hr");
+		var e = {type: "hr", attributes: {}};
+		w.output.push(e);
 	}
 },
 
@@ -406,7 +422,7 @@ Formatter.formatters = [
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && lookaheadMatch[1]) {
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
-			invokeMacro(w.output,lookaheadMatch[1],lookaheadMatch[2],w,w.tiddler);
+			w.output.push({type: "macro", name: lookaheadMatch[1], params: lookaheadMatch[2]});
 		}
 	}
 },
@@ -425,13 +441,17 @@ Formatter.formatters = [
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
-				e = (!lookaheadMatch[2] && Formatter.isExternalLink(link)) ?
-						createExternalLink(w.output,link) : createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
+				if(!lookaheadMatch[2] && Formatter.isExternalLink(w,link)) {
+					e = {type: "a", href: link, children: []};
+				} else {
+					e = {type: "tiddlerLink", href: link, children: []};
+				}
 			} else {
 				// Simple bracketted link
-				e = createTiddlyLink(w.output,text,false,null,w.isStatic,w.tiddler);
+				e = {type: "tiddlerLink", href: text, children: []};
 			}
-			createTiddlyText(e,text);
+			w.output.push(e);
+			e.children.push({type: "text", value: text});
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -456,8 +476,9 @@ Formatter.formatters = [
 			}
 		}
 		if(w.autoLinkWikiWords || w.store.isShadowTiddler(w.matchText)) {
-			var link = createTiddlyLink(w.output,w.matchText,false,null,w.isStatic,w.tiddler);
-			w.outputText(link,w.matchStart,w.nextMatch);
+			var link = {type: "tiddlerLink", href: w.matchText, children: []};
+			w.output.push(link);
+			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
@@ -469,7 +490,9 @@ Formatter.formatters = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		w.outputText(createExternalLink(w.output,w.matchText),w.matchStart,w.nextMatch);
+		var e = {type: "a", href: w.matchText, children: []};
+		w.output.push(e);
+		w.outputText(e.children,w.matchStart,w.nextMatch);
 	}
 },
 
@@ -485,18 +508,27 @@ Formatter.formatters = [
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			var e = w.output;
 			if(lookaheadMatch[5]) {
-				var link = lookaheadMatch[5];
-				e = Formatter.isExternalLink(link) ? createExternalLink(w.output,link) : createTiddlyLink(w.output,link,false,null,w.isStatic,w.tiddler);
-				jQuery(e).addClass("imageLink");
+				var link = lookaheadMatch[5],t;
+				if(Formatter.isExternalLink(w,link)) {
+					t = {type: "a", href: link, attributes: {}, children: []};
+					w.output.push(t);
+					e = t.children;
+				} else {
+					t = {type: "tiddlerLink", href: link, attributes: {}, children: []};
+					w.output.push(t);
+					e = t.children;
+				}
+				t.attributes.className = "imageLink";
 			}
-			var img = createTiddlyElement(e,"img");
+			var img = {type: "img", attributes: {}};
+			e.push(img);
 			if(lookaheadMatch[1])
-				img.align = "left";
+				img.attributes.align = "left";
 			else if(lookaheadMatch[2])
-				img.align = "right";
+				img.attributes.align = "right";
 			if(lookaheadMatch[3]) {
-				img.title = lookaheadMatch[3];
-				img.setAttribute("alt",lookaheadMatch[3]);
+				img.attributes.title = lookaheadMatch[3];
+				img.attributes.alt = lookaheadMatch[3];
 			}
 			img.src = lookaheadMatch[4];
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
@@ -513,7 +545,7 @@ Formatter.formatters = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			createTiddlyElement(w.output,"span").innerHTML = lookaheadMatch[1];
+			w.output.push({type: "html", value: lookaheadMatch[1]});
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -537,31 +569,46 @@ Formatter.formatters = [
 	match: "''|//|__|\\^\\^|~~|--(?!\\s|$)|\\{\\{\\{",
 	handler: function(w)
 	{
+		var e;
 		switch(w.matchText) {
 		case "''":
-			w.subWikifyTerm(w.output.appendChild(document.createElement("strong")),/('')/mg);
+			e = {type: "strong", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/('')/mg);
 			break;
 		case "//":
-			w.subWikifyTerm(createTiddlyElement(w.output,"em"),/(\/\/)/mg);
+			e = {type: "em", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/(\/\/)/mg);
 			break;
 		case "__":
-			w.subWikifyTerm(createTiddlyElement(w.output,"u"),/(__)/mg);
+			e = {type: "u", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/(__)/mg);
 			break;
 		case "^^":
-			w.subWikifyTerm(createTiddlyElement(w.output,"sup"),/(\^\^)/mg);
+			e = {type: "sup", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/(\^\^)/mg);
 			break;
 		case "~~":
-			w.subWikifyTerm(createTiddlyElement(w.output,"sub"),/(~~)/mg);
+			e = {type: "sub", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/(~~)/mg);
 			break;
 		case "--":
-			w.subWikifyTerm(createTiddlyElement(w.output,"strike"),/(--)/mg);
+			e = {type: "strike", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/(--)/mg);
 			break;
 		case "{{{":
 			var lookaheadRegExp = /\{\{\{((?:.|\n)*?)\}\}\}/mg;
 			lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				createTiddlyElement(w.output,"code",null,null,lookaheadMatch[1]);
+				w.output.push({type: "code", children: [
+					{type: "text", value: lookaheadMatch[1]}
+				]});
 				w.nextMatch = lookaheadRegExp.lastIndex;
 			}
 			break;
@@ -576,13 +623,14 @@ Formatter.formatters = [
 	{
 		switch(w.matchText) {
 		case "@@":
-			var e = createTiddlyElement(w.output,"span");
+			var e = {type: "span", attributes: {}, children: []};
+			w.output.push(e);
 			var styles = Formatter.inlineCssHelper(w);
-			if(styles.length == 0)
+			if(styles.length === 0)
 				e.className = "marked";
 			else
 				Formatter.applyCssHelper(e,styles);
-			w.subWikifyTerm(e,/(@@)/mg);
+			w.subWikifyTerm(e.children,/(@@)/mg);
 			break;
 		case "{{":
 			var lookaheadRegExp = /\{\{[\s]*([\w]+[\s\w]*)[\s]*\{(\n?)/mg;
@@ -590,8 +638,11 @@ Formatter.formatters = [
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
-				e = createTiddlyElement(w.output,lookaheadMatch[2] == "\n" ? "div" : "span",null,lookaheadMatch[1]);
-				w.subWikifyTerm(e,/(\}\}\})/mg);
+				e = {type: lookaheadMatch[2] == "\n" ? "div" : "span", children: [
+					{type: "text", value: lookaheadMatch[1]}
+				]};
+				w.output.push(e);
+				w.subWikifyTerm(e.children,/(\}\}\})/mg);
 			}
 			break;
 		}
@@ -603,7 +654,7 @@ Formatter.formatters = [
 	match: "--",
 	handler: function(w)
 	{
-		createTiddlyElement(w.output,"span").innerHTML = "&mdash;";
+		w.output.push({type: "text", value: "&mdash;"});
 	}
 },
 
@@ -612,7 +663,7 @@ Formatter.formatters = [
 	match: "\\n|<br ?/?>",
 	handler: function(w)
 	{
-		createTiddlyElement(w.output,"br");
+		w.output.push({type: "br"});
 	}
 },
 
@@ -625,7 +676,7 @@ Formatter.formatters = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			createTiddlyElement(w.output,"span",null,null,lookaheadMatch[1]);
+			w.output.push({type: "text", value: lookaheadMatch[1]});
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -636,7 +687,7 @@ Formatter.formatters = [
 	match: "(?:(?:&#?[a-zA-Z0-9]{2,8};|.)(?:&#?(?:x0*(?:3[0-6][0-9a-fA-F]|1D[c-fC-F][0-9a-fA-F]|20[d-fD-F][0-9a-fA-F]|FE2[0-9a-fA-F])|0*(?:76[89]|7[7-9][0-9]|8[0-7][0-9]|761[6-9]|76[2-7][0-9]|84[0-3][0-9]|844[0-7]|6505[6-9]|6506[0-9]|6507[0-1]));)+|&#?[a-zA-Z0-9]{2,8};)",
 	handler: function(w)
 	{
-		createTiddlyElement(w.output,"span").innerHTML = w.matchText;
+		w.output.push({type: "text", value: w.matchText});
 	}
 }
 

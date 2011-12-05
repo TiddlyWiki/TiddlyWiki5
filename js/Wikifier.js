@@ -8,11 +8,14 @@ HTML elements are stored in the tree like this:
 
 	{type: "div", attributes: {
 			attr1: value,
-			attr2: value
+			style: {
+				name: value,
+				name2: value2
+			}
 		}, children: [
 			{child},
 			{child},		
-	]}
+		]}
 
 Text nodes are:
 
@@ -79,14 +82,10 @@ Wikifier.prototype.outputText = function(place,startPos,endPos)
 Wikifier.prototype.subWikify = function(output,terminator)
 {
 	// Handle the terminated and unterminated cases separately, this speeds up wikifikation by about 30%
-	try {
-		if(terminator)
-			this.subWikifyTerm(output,new RegExp("(" + terminator + ")","mg"));
-		else
-			this.subWikifyUnterm(output);
-	} catch(ex) {
-		showException(ex);
-	}
+	if(terminator)
+		this.subWikifyTerm(output,new RegExp("(" + terminator + ")","mg"));
+	else
+		this.subWikifyUnterm(output);
 };
 
 Wikifier.prototype.subWikifyUnterm = function(output)
