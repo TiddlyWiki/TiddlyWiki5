@@ -13,12 +13,17 @@ var wikiTest = function(spec) {
 		store = new TiddlyWiki(),
 		w;
 	for(t=0; t<spec.tiddlers.length; t++) {
-		store.addTiddler(new Tiddler(spec.tiddlers[t]));
+		var tid = new Tiddler(spec.tiddlers[t]);
+		store.addTiddler(tid);
+
+console.error("%s in HTML:\n%s",tid.fields.title,tid.getParseTree().render("text/html",store,tid.fields.title));
+
+
 	}
 	for(t=0; t<spec.tests.length; t++) {
 		w = store.getTiddler(spec.tests[t].tiddler).getParseTree().tree;
 		if(JSON.stringify(w) !== JSON.stringify(spec.tests[t].output)) {
-			console.error("Failed at tiddler: " + spec.tests[t].tiddler + " with JSON:\n" + util.inspect(w,false,8));
+			console.error("Failed at tiddler: " + spec.tests[t].tiddler + " with JSON:\n" + util.inspect(w,false,8) + "\nTarget was:\n" + util.inspect(spec.tests[t].output,false,8));
 		}
 	}
 };
@@ -41,8 +46,8 @@ wikiTest({ tiddlers:
           { type: 'text',
             value: ' of the first tiddler, with a link to the ' },
           { type: 'tiddlerLink',
-            href: 'SecondTiddler',
-            children: [ { type: 'text', value: 'SecondTiddler' } ] },
+            children: [ { type: 'text', value: 'SecondTiddler' } ],
+          	attributes: {href: 'SecondTiddler'} },
           { type: 'text', value: ', too.' } ] },
      { tiddler: 'SecondTiddler',
        output: 
@@ -66,14 +71,14 @@ wikiTest({ tiddlers:
        output: 
 		[ { type: 'text', value: 'An explicit link ' },
 		  { type: 'tiddlerLink',
-		    href: 'Fourth Tiddler',
-		    children: [ { type: 'text', value: 'Fourth Tiddler' } ] },
+		    children: [ { type: 'text', value: 'Fourth Tiddler' } ],
+		    attributes: { href: 'Fourth Tiddler' } },
 		  { type: 'text', value: ' and ' },
 		  { type: 'tiddlerLink',
-		    href: 'Fourth Tiddler',
-		    children: [ { type: 'text', value: 'a pretty link' } ] } ] },
+		    children: [ { type: 'text', value: 'a pretty link' } ],
+		    attributes: { href: 'Fourth Tiddler' } } ] },
      { tiddler: 'Fourth Tiddler',
        output: 
         [ { type: 'text', value: 'An image ' },
-		  { type: 'img', src: 'Something.jpg' } ] } ] }
+		  { type: 'img',  attributes: {src: 'Something.jpg' } } ] } ] }
 );

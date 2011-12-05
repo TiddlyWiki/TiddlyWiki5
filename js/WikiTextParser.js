@@ -40,15 +40,62 @@ var WikiTextParser = function(text) {
 	this.subWikify(this.tree);
 };
 
-WikiTextParser.prototype.outputText = function(place,startPos,endPos)
-{
+// Render the tiddler as HTML from its parse tree
+//	type - MIME type of required output
+//	store - store object providing context for inter-tiddler operations
+//  title - render the tree as if it came from a tiddler of this title
+WikiTextParser.prototype.render = function(type,store,title) {
+	if(type === "text/html") {
+		return this.renderAsHtml(store,title);
+	} else {
+		return null;
+	}
+};
+
+WikiTextParser.prototype.renderAsHtml = function(store,title) {
+	var output = [];
+	var renderElement = function(element, selfClosing) {
+		var tagBits = [element.type];
+		if(element.attributes) {
+			for(var a in element.attributes) {
+				tagBits.push(a + "=\"" + element.attributes[a] + "\"");
+			}
+		}
+		output.push("<" + tagBits.join(" ") + (selfClosing ? " /" : "") + ">");
+		if(!selfClosing) {
+			if(element.children) {
+				renderSubTree(element.children);
+			}
+			output.push("</" + element.type + ">");
+		}
+	};
+	var renderSubTree = function(tree) {
+		for(var t=0; t<tree.length; t++) {
+			switch(tree[t].type) {
+				case "text":
+					output.push(tree[t].value);
+					break;
+				case "br":
+				case "img":
+					renderElement(tree[t],true); // Self closing elements
+					break;
+				default:
+					renderElement(tree[t]);
+					break;
+			}
+		}
+	};
+	renderSubTree(this.tree);
+	return output.join("");	
+};
+
+WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
 	if(startPos < endPos) {
 		place.push({type: "text", value: this.source.substring(startPos,endPos)});
 	}
 };
 
-WikiTextParser.prototype.subWikify = function(output,terminator)
-{
+WikiTextParser.prototype.subWikify = function(output,terminator) {
 	// Handle the terminated and unterminated cases separately, this speeds up wikifikation by about 30%
 	if(terminator)
 		this.subWikifyTerm(output,new RegExp("(" + terminator + ")","mg"));
@@ -56,8 +103,7 @@ WikiTextParser.prototype.subWikify = function(output,terminator)
 		this.subWikifyUnterm(output);
 };
 
-WikiTextParser.prototype.subWikifyUnterm = function(output)
-{
+WikiTextParser.prototype.subWikifyUnterm = function(output) {
 	// subWikify can be indirectly recursive, so we need to save the old output pointer
 	var oldOutput = this.output;
 	this.output = output;
@@ -94,8 +140,7 @@ WikiTextParser.prototype.subWikifyUnterm = function(output)
 	this.output = oldOutput;
 };
 
-WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp)
-{
+WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 	// subWikify can be indirectly recursive, so we need to save the old output pointer
 	var oldOutput = this.output;
 	this.output = output;

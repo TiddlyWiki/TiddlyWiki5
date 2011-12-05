@@ -54,7 +54,7 @@ WikiTextRules.createElementAndWikify = function(w) {
 };
 
 WikiTextRules.setAttr = function(e,attr,value) {
-	if(!"attributes" in e) {
+	if(!e.attributes) {
 		e.attributes = {};
 	}
 	e.attributes[attr] = value;
@@ -165,7 +165,8 @@ WikiTextRules.rules = [
 					rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
-					var theRow = {type: "tr", className: rowCount%2 ? "oddRow" : "evenRow", children: []};
+					var theRow = {type: "tr", children: []};
+					WikiTextRules.setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow")
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow,prevColumns);
 					rowCount++;
@@ -188,10 +189,10 @@ WikiTextRules.rules = [
 				var last = prevColumns[col];
 				if(last) {
 					last.rowSpanCount++;
-					last.element.attributes.rowspan = last.rowSpanCount;
-					last.element.attributes.valign = "center";
+					WikiTextRules.setAttr(last.element,"rowspan",last.rowSpanCount);
+					WikiTextRules.setAttr(last.element,"valign","center");
 					if(colSpanCount > 1) {
-						last.element.attributes.colspan = colSpanCount;
+						WikiTextRules.setAttr(last.element,"colspan",colSpanCount);
 						colSpanCount = 1;
 					}
 				}
@@ -203,7 +204,7 @@ WikiTextRules.rules = [
 			} else if(cellMatch[2]) {
 				// End of row
 				if(prevCell && colSpanCount > 1) {
-					prevCell.attributes.colspan = colSpanCount;
+					WikiTextRules.setAttr(prevCell,"colspan",colSpanCount);
 				}
 				w.nextMatch = this.cellRegExp.lastIndex;
 				break;
@@ -230,15 +231,15 @@ WikiTextRules.rules = [
 				prevCell = cell;
 				prevColumns[col] = {rowSpanCount:1,element:cell};
 				if(colSpanCount > 1) {
-					cell.attributes.colspan = colSpanCount;
+					WikiTextRules.setAttr(cell,"colspan",colSpanCount);
 					colSpanCount = 1;
 				}
 				WikiTextRules.applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
-					cell.attributes.align = spaceLeft ? "center" : "left";
+					WikiTextRules.setAttr(cell,"align",spaceLeft ? "center" : "left");
 				else if(spaceLeft)
-					cell.attributes.align = "right";
+					WikiTextRules.setAttr(cell,"align","right");
 				w.nextMatch--;
 			}
 			col++;
@@ -354,7 +355,7 @@ WikiTextRules.rules = [
 			}
 			currLevel = newLevel;
 			w.subWikifyTerm(stack[stack.length-1],this.termRegExp);
-			stack[stack.length-1].push({type: "br", attributes: {}});
+			stack[stack.length-1].push({type: "br"});
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			matched = lookaheadMatch && lookaheadMatch.index == w.nextMatch;
@@ -371,7 +372,7 @@ WikiTextRules.rules = [
 	match: "^----+$\\n?|<hr ?/?>\\n?",
 	handler: function(w)
 	{
-		var e = {type: "hr", attributes: {}};
+		var e = {type: "hr"};
 		w.output.push(e);
 	}
 },
@@ -442,13 +443,15 @@ WikiTextRules.rules = [
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
 				if(!lookaheadMatch[2] && WikiTextRules.isExternalLink(w,link)) {
-					e = {type: "a", href: link, children: []};
+					e = {type: "a", children: []};
 				} else {
-					e = {type: "tiddlerLink", href: link, children: []};
+					e = {type: "tiddlerLink", children: []};
 				}
+				WikiTextRules.setAttr(e,"href",link);
 			} else {
 				// Simple bracketted link
-				e = {type: "tiddlerLink", href: text, children: []};
+				e = {type: "tiddlerLink", children: []};
+				WikiTextRules.setAttr(e,"href",text);
 			}
 			w.output.push(e);
 			e.children.push({type: "text", value: text});
@@ -476,7 +479,8 @@ WikiTextRules.rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			var link = {type: "tiddlerLink", href: w.matchText, children: []};
+			var link = {type: "tiddlerLink", children: []};
+			WikiTextRules.setAttr(link,"href",w.matchText);
 			w.output.push(link);
 			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
@@ -490,7 +494,8 @@ WikiTextRules.rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		var e = {type: "a", href: w.matchText, children: []};
+		var e = {type: "a", children: []};
+		WikiTextRules.setAttr(e,"href",w.matchText);
 		w.output.push(e);
 		w.outputText(e.children,w.matchStart,w.nextMatch);
 	}
@@ -510,15 +515,16 @@ WikiTextRules.rules = [
 			if(lookaheadMatch[5]) {
 				var link = lookaheadMatch[5],t;
 				if(WikiTextRules.isExternalLink(w,link)) {
-					t = {type: "a", href: link, children: []};
+					t = {type: "a", children: []};
 					w.output.push(t);
 					e = t.children;
 				} else {
-					t = {type: "tiddlerLink", href: link, children: []};
+					t = {type: "tiddlerLink", children: []};
 					w.output.push(t);
 					e = t.children;
 				}
-				t.attributes.className = "imageLink";
+				WikiTextRules.setAttr(t,"href",link);
+				WikiTextRules.setAttr(t,"className","imageLink");
 			}
 			var img = {type: "img"};
 			e.push(img);
@@ -530,7 +536,7 @@ WikiTextRules.rules = [
 				WikiTextRules.setAttr(img,"title",lookaheadMatch[3]);
 				WikiTextRules.setAttr(img,"alt",lookaheadMatch[3]);
 			}
-			img.src = lookaheadMatch[4];
+			WikiTextRules.setAttr(img,"src",lookaheadMatch[4]);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -623,7 +629,7 @@ WikiTextRules.rules = [
 	{
 		switch(w.matchText) {
 		case "@@":
-			var e = {type: "span", attributes: {}, children: []};
+			var e = {type: "span", children: []};
 			w.output.push(e);
 			var styles = WikiTextRules.inlineCssHelper(w);
 			if(styles.length === 0)
