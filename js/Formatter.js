@@ -56,6 +56,13 @@ Formatter.createElementAndWikify = function(w) {
 	w.subWikifyTerm(e.children,this.termRegExp);
 };
 
+Formatter.setAttr = function(e,attr,value) {
+	if(!"attributes" in e) {
+		e.attributes = {};
+	}
+	e.attributes[attr] = value;
+}
+
 Formatter.inlineCssHelper = function(w) {
 	var styles = [];
 	textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
@@ -254,7 +261,7 @@ Formatter.formatters = [
 	termRegExp: /(\n)/mg,
 	handler: function(w)
 	{
-		var e = {type: "h" + w.matchLength, attributes: {}, children: []};
+		var e = {type: "h" + w.matchLength, children: []};
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -295,7 +302,7 @@ Formatter.formatters = [
 			if(listLevel > currLevel) {
 				for(t=currLevel; t<listLevel; t++) {
 					var target = (currLevel === 0) ? stack[stack.length-1] : stack[stack.length-1].lastChild;
-					e = {type: listType, attributes: {}, children: []};
+					e = {type: listType, children: []};
 					target.push(e);
 					stack.push(e.children);
 				}
@@ -307,13 +314,13 @@ Formatter.formatters = [
 					stack.pop();
 			} else if(listLevel == currLevel && listType != currType) {
 				stack.pop();
-				e = {type: listType, attributes: {}, children: []};
+				e = {type: listType, children: []};
 				stack[stack.length-1].push(e);
 				stack.push(e.children);
 			}
 			currLevel = listLevel;
 			currType = listType;
-			e = {type: itemType, attributes: {}, children: []};
+			e = {type: itemType, children: []};
 			stack[stack.length-1].push(e);
 			w.subWikifyTerm(e.children,this.termRegExp);
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
@@ -510,25 +517,25 @@ Formatter.formatters = [
 			if(lookaheadMatch[5]) {
 				var link = lookaheadMatch[5],t;
 				if(Formatter.isExternalLink(w,link)) {
-					t = {type: "a", href: link, attributes: {}, children: []};
+					t = {type: "a", href: link, children: []};
 					w.output.push(t);
 					e = t.children;
 				} else {
-					t = {type: "tiddlerLink", href: link, attributes: {}, children: []};
+					t = {type: "tiddlerLink", href: link, children: []};
 					w.output.push(t);
 					e = t.children;
 				}
 				t.attributes.className = "imageLink";
 			}
-			var img = {type: "img", attributes: {}};
+			var img = {type: "img"};
 			e.push(img);
 			if(lookaheadMatch[1])
-				img.attributes.align = "left";
+				Formatter.setAttr(img,"align","left");
 			else if(lookaheadMatch[2])
-				img.attributes.align = "right";
+				Formatter.setAttr(img,"align","right");
 			if(lookaheadMatch[3]) {
-				img.attributes.title = lookaheadMatch[3];
-				img.attributes.alt = lookaheadMatch[3];
+				Formatter.setAttr(img,"title",lookaheadMatch[3]);
+				Formatter.setAttr(img,"alt",lookaheadMatch[3]);
 			}
 			img.src = lookaheadMatch[4];
 			w.nextMatch = this.lookaheadRegExp.lastIndex;

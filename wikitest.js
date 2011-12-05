@@ -36,7 +36,7 @@ wikiTest({ tiddlers:
        text: 'An explicit link [[Fourth Tiddler]] and [[a pretty link|Fourth Tiddler]]' },
      { title: 'Fourth Tiddler',
        text: 'An image [img[Something.jpg]]' } ],
-  tests: 
+  tests:
    [ { tiddler: 'FirstTiddler',
        output: 
         [ { type: 'text', value: 'This is the ' },
@@ -51,22 +51,17 @@ wikiTest({ tiddlers:
      { tiddler: 'SecondTiddler',
        output: 
         [ { type: 'h2',
-            attributes: {},
             children: [ { type: 'text', value: 'Heading' } ] },
           { type: 'text',
             value: 'This is the second tiddler. It has a list:' },
           { type: 'br' },
           { type: 'ul',
-            attributes: {},
             children: 
              [ { type: 'li',
-                 attributes: {},
                  children: [ { type: 'text', value: ' Item one' } ] },
                { type: 'li',
-                 attributes: {},
                  children: [ { type: 'text', value: ' Item two' } ] },
                { type: 'li',
-                 attributes: {},
                  children: [ { type: 'text', value: ' Item three' } ] } ] },
           { type: 'text', value: 'And a ' },
           { type: 'macro', name: 'macro', params: 'invocation' },
@@ -84,5 +79,5 @@ wikiTest({ tiddlers:
      { tiddler: 'Fourth Tiddler',
        output: 
         [ { type: 'text', value: 'An image ' },
-		  { type: 'img', attributes: {}, src: 'Something.jpg' } ] } ] }
+		  { type: 'img', src: 'Something.jpg' } ] } ] }
 );
