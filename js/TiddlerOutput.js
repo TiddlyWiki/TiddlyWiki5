@@ -73,9 +73,9 @@ tiddlerOutput.outputTiddlerDiv = function(tid) {
 	outputAttribute("title");
 	outputAttribute("creator");
 	outputAttribute("modifier");
-	outputAttribute("created", function(v) {return utils.convertToYYYYMMDDHHMM(v)});
-	outputAttribute("modified", function(v) {return utils.convertToYYYYMMDDHHMM(v)});
-	outputAttribute("tags", function(v) {return tiddlerOutput.stringifyTags(v)});
+	outputAttribute("created", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
+	outputAttribute("modified", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
+	outputAttribute("tags", function(v) {return tiddlerOutput.stringifyTags(v);});
 	// Output any other attributes
 	for(t in attributes) {
 		outputAttribute(t,null,true);

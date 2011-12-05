@@ -1,7 +1,8 @@
-/*global require: false, exports: false */
+/*global require: false, exports: false, console: false */
 "use strict";
 
-var Tiddler = require("./Tiddler.js").Tiddler;
+var Tiddler = require("./Tiddler.js").Tiddler,
+	util = require("util");
 
 var TiddlyWiki = function TiddlyWiki(shadowStore) {
 	this.tiddlers = {};

@@ -5,27 +5,23 @@ Wikifier test rig
 
 var Tiddler = require("./js/Tiddler.js").Tiddler,
 	TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
-	Formatter = require("./js/Formatter.js").Formatter,
-	Wikifier = require("./js/Wikifier.js").Wikifier,
 	utils = require("./js/Utils.js"),
 	util = require("util");
 
 var wikiTest = function(spec) {
 	var t,
 		store = new TiddlyWiki(),
-		formatter = new Formatter(),
-		wikifier = new Wikifier(store,formatter),
 		w;
 	for(t=0; t<spec.tiddlers.length; t++) {
 		store.addTiddler(new Tiddler(spec.tiddlers[t]));
 	}
 	for(t=0; t<spec.tests.length; t++) {
-		w = wikifier.wikify(store.getTiddlerText(spec.tests[t].tiddler));
+		w = store.getTiddler(spec.tests[t].tiddler).getParseTree().tree;
 		if(JSON.stringify(w) !== JSON.stringify(spec.tests[t].output)) {
 			console.error("Failed at tiddler: " + spec.tests[t].tiddler + " with JSON:\n" + util.inspect(w,false,8));
 		}
 	}
-}
+};
 
 wikiTest({ tiddlers: 
    [ { title: 'FirstTiddler',

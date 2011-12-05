@@ -1,10 +1,7 @@
 /*global require: false, exports: false, process: false */
 "use strict";
 
-var Tiddler = require("./Tiddler.js").Tiddler,
-	TiddlyWiki = require("./TiddlyWiki.js").TiddlyWiki,
-	utils = require("./Utils.js"),
-	util = require("util");
+var util = require("util");
 
 var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
@@ -40,30 +37,30 @@ textPrimitives.tiddlerAnyLinkRegExp = new RegExp("("+ textPrimitives.wikiLink + 
 	textPrimitives.brackettedLink + ")|(?:" +
 	textPrimitives.urlPattern + ")","mg");
 
-function Formatter()
+function WikiTextRules()
 {
 	var pattern = [];
-	this.formatters = Formatter.formatters;
-	for(var n=0; n<this.formatters.length; n++) {
-		pattern.push("(" + this.formatters[n].match + ")");
+	this.rules = WikiTextRules.rules;
+	for(var n=0; n<this.rules.length; n++) {
+		pattern.push("(" + this.rules[n].match + ")");
 	}
-	this.formatterRegExp = new RegExp(pattern.join("|"),"mg");
+	this.rulesRegExp = new RegExp(pattern.join("|"),"mg");
 }
 
-Formatter.createElementAndWikify = function(w) {
+WikiTextRules.createElementAndWikify = function(w) {
 	var e = {type: this.element, children: []};
 	w.output.push(e);
 	w.subWikifyTerm(e.children,this.termRegExp);
 };
 
-Formatter.setAttr = function(e,attr,value) {
+WikiTextRules.setAttr = function(e,attr,value) {
 	if(!"attributes" in e) {
 		e.attributes = {};
 	}
 	e.attributes[attr] = value;
-}
+};
 
-Formatter.inlineCssHelper = function(w) {
+WikiTextRules.inlineCssHelper = function(w) {
 	var styles = [];
 	textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
 	var lookaheadMatch = textPrimitives.cssLookaheadRegExp.exec(w.source);
@@ -88,7 +85,7 @@ Formatter.inlineCssHelper = function(w) {
 	return styles;
 };
 
-Formatter.applyCssHelper = function(e,styles) {
+WikiTextRules.applyCssHelper = function(e,styles) {
 	if(!"attributes" in e) {
 		e.attributes = {};
 	}
@@ -100,7 +97,7 @@ Formatter.applyCssHelper = function(e,styles) {
 	}
 };
 
-Formatter.enclosedTextHelper = function(w) {
+WikiTextRules.enclosedTextHelper = function(w) {
 	this.lookaheadRegExp.lastIndex = w.matchStart;
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
@@ -112,11 +109,7 @@ Formatter.enclosedTextHelper = function(w) {
 	}
 };
 
-Formatter.isExternalLink = function(w,link) {
-	if(w.store.tiddlerExists(link) || w.store.isShadowTiddler(link)) {
-		// Definitely not an external link
-		return false;
-	}
+WikiTextRules.isExternalLink = function(w,link) {
 	var urlRegExp = new RegExp(textPrimitives.urlPattern,"mg");
 	if(urlRegExp.exec(link)) {
 		// Definitely an external link
@@ -130,7 +123,7 @@ Formatter.isExternalLink = function(w,link) {
 	return false;
 };
 
-Formatter.formatters = [
+WikiTextRules.rules = [
 {
 	name: "table",
 	match: "^\\|(?:[^\\n]*)\\|(?:[fhck]?)$",
@@ -217,7 +210,7 @@ Formatter.formatters = [
 			} else {
 				// Cell
 				w.nextMatch++;
-				var styles = Formatter.inlineCssHelper(w);
+				var styles = WikiTextRules.inlineCssHelper(w);
 				var spaceLeft = false;
 				var chr = w.source.substr(w.nextMatch,1);
 				while(chr == " ") {
@@ -240,7 +233,7 @@ Formatter.formatters = [
 					cell.attributes.colspan = colSpanCount;
 					colSpanCount = 1;
 				}
-				Formatter.applyCssHelper(cell,styles);
+				WikiTextRules.applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
 					cell.attributes.align = spaceLeft ? "center" : "left";
@@ -334,7 +327,7 @@ Formatter.formatters = [
 	match: "^<<<\\n",
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
-	handler: Formatter.createElementAndWikify
+	handler: WikiTextRules.createElementAndWikify
 },
 
 {
@@ -405,7 +398,7 @@ Formatter.formatters = [
 		default:
 			break;
 		}
-		Formatter.enclosedTextHelper.call(this,w);
+		WikiTextRules.enclosedTextHelper.call(this,w);
 	}
 },
 
@@ -448,7 +441,7 @@ Formatter.formatters = [
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
-				if(!lookaheadMatch[2] && Formatter.isExternalLink(w,link)) {
+				if(!lookaheadMatch[2] && WikiTextRules.isExternalLink(w,link)) {
 					e = {type: "a", href: link, children: []};
 				} else {
 					e = {type: "tiddlerLink", href: link, children: []};
@@ -482,7 +475,7 @@ Formatter.formatters = [
 				return;
 			}
 		}
-		if(w.autoLinkWikiWords || w.store.isShadowTiddler(w.matchText)) {
+		if(w.autoLinkWikiWords) {
 			var link = {type: "tiddlerLink", href: w.matchText, children: []};
 			w.output.push(link);
 			w.outputText(link.children,w.matchStart,w.nextMatch);
@@ -516,7 +509,7 @@ Formatter.formatters = [
 			var e = w.output;
 			if(lookaheadMatch[5]) {
 				var link = lookaheadMatch[5],t;
-				if(Formatter.isExternalLink(w,link)) {
+				if(WikiTextRules.isExternalLink(w,link)) {
 					t = {type: "a", href: link, children: []};
 					w.output.push(t);
 					e = t.children;
@@ -530,12 +523,12 @@ Formatter.formatters = [
 			var img = {type: "img"};
 			e.push(img);
 			if(lookaheadMatch[1])
-				Formatter.setAttr(img,"align","left");
+				WikiTextRules.setAttr(img,"align","left");
 			else if(lookaheadMatch[2])
-				Formatter.setAttr(img,"align","right");
+				WikiTextRules.setAttr(img,"align","right");
 			if(lookaheadMatch[3]) {
-				Formatter.setAttr(img,"title",lookaheadMatch[3]);
-				Formatter.setAttr(img,"alt",lookaheadMatch[3]);
+				WikiTextRules.setAttr(img,"title",lookaheadMatch[3]);
+				WikiTextRules.setAttr(img,"alt",lookaheadMatch[3]);
 			}
 			img.src = lookaheadMatch[4];
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
@@ -632,11 +625,11 @@ Formatter.formatters = [
 		case "@@":
 			var e = {type: "span", attributes: {}, children: []};
 			w.output.push(e);
-			var styles = Formatter.inlineCssHelper(w);
+			var styles = WikiTextRules.inlineCssHelper(w);
 			if(styles.length === 0)
 				e.className = "marked";
 			else
-				Formatter.applyCssHelper(e,styles);
+				WikiTextRules.applyCssHelper(e,styles);
 			w.subWikifyTerm(e.children,/(@@)/mg);
 			break;
 		case "{{":
@@ -700,4 +693,4 @@ Formatter.formatters = [
 
 ];
 
-exports.Formatter = Formatter;
+exports.wikiTextRules = new WikiTextRules();
