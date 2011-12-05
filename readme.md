@@ -35,3 +35,33 @@ You can use filepaths or URLs to reference recipe files and tiddlers. For exampl
 ## Current status
 
 As of 2nd December 2011, cook.js can now build a fully functional TiddlyWiki from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.
+
+## Plans for new command line interface
+
+The idea is to join `cook.js`, `ginsu.js` and `server.js` into a single command line tool, provisionally called `tiddlywiki.js`. This would be used as follows:
+
+	node tiddlywiki.js <options>
+
+An interesting potential goal is that the same `tiddlywiki.js` file could be used in the browser as on the server side.
+
+The command line options are processed left to right. The following options are available:
+
+	--recipe <filepath>			# Loads a specfied `.recipe` file
+	--load <filepath>			# Load additional tiddlers from TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
+	--savewiki <outdir>			# Saves all the loaded tiddlers as a single file TiddlyWiki in `.html` and RSS (`.xml`) format
+	--savetiddlers <outdir>		# Saves all the loaded tiddlers as `.tid` files in the specified directory
+	--serve <host and port>		# Serve the cooked TiddlyWiki at `/`, and single tiddlers at `/tiddlertitle`
+	--verbose 					# verbose output, useful for debugging
+
+This example loads the tiddlers from a TiddlyWiki HTML file and makes them available over HTTP:
+
+	node tiddlywiki.js --load mywiki.html --serve 127.0.0.1:8000
+
+This example cooks a TiddlyWiki from a recipe:
+
+	node tiddlywiki.js --recipe tiddlywiki.com/index.recipe --savewiki tmp/
+
+This example ginsus a TiddlyWiki into its constituent tiddlers:
+
+	node tiddlywiki.js --load mywiki.html --savetiddlers tmp/tiddlers
+
