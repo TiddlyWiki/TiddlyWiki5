@@ -4,14 +4,14 @@ Wikifier test rig
 
 
 var Tiddler = require("./js/Tiddler.js").Tiddler,
-	TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
+	WikiStore = require("./js/WikiStore.js").WikiStore,
 	utils = require("./js/Utils.js"),
 	util = require("util");
 
 var wikiTest = function(spec) {
 //console.error(util.inspect(spec,false,99));
 	var t,
-		store = new TiddlyWiki(),
+		store = new WikiStore(),
 		w;
 	for(t=0; t<spec.tiddlers.length; t++) {
 		var tid = new Tiddler(spec.tiddlers[t]);

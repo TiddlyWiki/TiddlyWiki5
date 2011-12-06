@@ -4,7 +4,7 @@
 
 "use strict";
 
-var TiddlyWiki = require("./js/TiddlyWiki.js").TiddlyWiki,
+var WikiStore = require("./js/WikiStore.js").WikiStore,
 	Recipe = require("./js/Recipe.js").Recipe,
 	http = require("http"),
 	fs = require("fs"),
@@ -16,7 +16,7 @@ var filename = process.argv[2];
 
 http.createServer(function(request, response) {
 	response.writeHead(200, {"Content-Type": "text/html"});
-	var store = new TiddlyWiki(),
+	var store = new WikiStore(),
 		theRecipe = new Recipe(store,filename,function() {
 			response.end(theRecipe.cook(), "utf-8");	
 		});
