@@ -26,8 +26,7 @@ Text nodes are:
 /*global require: false, exports: false */
 "use strict";
 
-var Tiddler = require("./Tiddler.js").Tiddler,
-	wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
+var wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
 	utils = require("./Utils.js"),
 	util = require("util");
 
