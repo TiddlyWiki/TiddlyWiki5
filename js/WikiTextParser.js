@@ -60,7 +60,15 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 		var tagBits = [element.type];
 		if(element.attributes) {
 			for(var a in element.attributes) {
-				tagBits.push(a + "=\"" + utils.htmlEncode(element.attributes[a]) + "\"");
+				var r = element.attributes[a];
+				if(a === "style") {
+					var s = [];
+					for(var t in r) {
+						s.push(t + ":" + r[t] + ";");
+					}
+					r = s.join("");
+				}
+				tagBits.push(a + "=\"" + utils.htmlEncode(r) + "\"");
 			}
 		}
 		output.push("<" + tagBits.join(" ") + (selfClosing ? " /" : "") + ">");
