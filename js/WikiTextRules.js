@@ -86,14 +86,16 @@ WikiTextRules.inlineCssHelper = function(w) {
 };
 
 WikiTextRules.applyCssHelper = function(e,styles) {
-	if(!e.attributes) {
-		e.attributes = {};
-	}
-	if(!e.attributes.style) {
-		e.attributes.style = {};
-	}
-	for(var t=0; t< styles.length; t++) {
-		e.attributes.style[styles[t].style] = styles[t].value;
+	if(styles.length > 0) {
+		if(!e.attributes) {
+			e.attributes = {};
+		}
+		if(!e.attributes.style) {
+			e.attributes.style = {};
+		}
+		for(var t=0; t< styles.length; t++) {
+			e.attributes.style[styles[t].style] = styles[t].value;
+		}
 	}
 };
 
@@ -168,7 +170,7 @@ WikiTextRules.rules = [
 					var theRow = {type: "tr", children: []};
 					WikiTextRules.setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow")
 					rowContainer.children.push(theRow);
-					this.rowHandler(w,theRow,prevColumns);
+					this.rowHandler(w,theRow.children,prevColumns);
 					rowCount++;
 				}
 			}
@@ -221,11 +223,11 @@ WikiTextRules.rules = [
 				}
 				var cell;
 				if(chr == "!") {
-					cell = {type: "th", attributes: {}, children: []};
+					cell = {type: "th", children: []};
 					e.push(cell);
 					w.nextMatch++;
 				} else {
-					cell = {type: "td", attributes: {}, children: []};
+					cell = {type: "td", children: []};
 					e.push(cell);
 				}
 				prevCell = cell;
@@ -235,7 +237,7 @@ WikiTextRules.rules = [
 					colSpanCount = 1;
 				}
 				WikiTextRules.applyCssHelper(cell,styles);
-				w.subWikifyTerm(cell,this.cellTermRegExp);
+				w.subWikifyTerm(cell.children,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
 					WikiTextRules.setAttr(cell,"align",spaceLeft ? "center" : "left");
 				else if(spaceLeft)

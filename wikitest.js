@@ -9,7 +9,7 @@ var Tiddler = require("./js/Tiddler.js").Tiddler,
 	util = require("util");
 
 var wikiTest = function(spec) {
-// console.error(util.inspect(spec,false,99));
+//console.error(util.inspect(spec,false,99));
 	var t,
 		store = new TiddlyWiki(),
 		w;
@@ -42,7 +42,9 @@ wikiTest(
      { title: 'ThirdTiddler',
        text: 'An explicit link [[Fourth Tiddler]] and [[a pretty link|Fourth Tiddler]]' },
      { title: 'Fourth Tiddler',
-       text: 'An image [img[Something.jpg]]' } ],
+       text: 'An image [img[Something.jpg]]' },
+     { title: 'Fifth Tiddler',
+       text: '|A caption above the table|c\n| Left | Middle | Right |h\n|North West|North|North East|\n|West|Here|East|\n|South West|South|South East|' } ],
   tests: 
    [ { tiddler: 'FirstTiddler',
        output: 
@@ -100,5 +102,56 @@ wikiTest(
            [ { type: 'text', value: 'An image ' },
              { type: 'img', attributes: { src: 'Something.jpg' } } ],
           html: 'An image <img src="Something.jpg" />',
-          plain: 'An image ' } } ] }
+          plain: 'An image ' } },
+     { tiddler: 'Fifth Tiddler',
+       output: 
+        { tree: 
+           [ { type: 'table',
+               attributes: { className: 'twtable' },
+               children: 
+                [ { type: 'caption',
+                    children: [ { type: 'text', value: 'A caption above the table' } ],
+                    attributes: { align: 'top' } },
+                  { type: 'thead',
+                    children: 
+                     [ { type: 'tr',
+                         children: 
+                          [ { type: 'td',
+                              children: [ { type: 'text', value: 'Left' } ],
+                              attributes: { align: 'center' } },
+                            { type: 'td',
+                              children: [ { type: 'text', value: 'Middle' } ],
+                              attributes: { align: 'center' } },
+                            { type: 'td',
+                              children: [ { type: 'text', value: 'Right' } ],
+                              attributes: { align: 'center' } } ],
+                         attributes: { className: 'evenRow' } } ],
+                    attributes: {} },
+                  { type: 'tbody',
+                    children: 
+                     [ { type: 'tr',
+                         children: 
+                          [ { type: 'td',
+                              children: [ { type: 'text', value: 'North West' } ] },
+                            { type: 'td', children: [ { type: 'text', value: 'North' } ] },
+                            { type: 'td',
+                              children: [ { type: 'text', value: 'North East' } ] } ],
+                         attributes: { className: 'oddRow' } },
+                       { type: 'tr',
+                         children: 
+                          [ { type: 'td', children: [ { type: 'text', value: 'West' } ] },
+                            { type: 'td', children: [ { type: 'text', value: 'Here' } ] },
+                            { type: 'td', children: [ { type: 'text', value: 'East' } ] } ],
+                         attributes: { className: 'evenRow' } },
+                       { type: 'tr',
+                         children: 
+                          [ { type: 'td',
+                              children: [ { type: 'text', value: 'South West' } ] },
+                            { type: 'td', children: [ { type: 'text', value: 'South' } ] },
+                            { type: 'td',
+                              children: [ { type: 'text', value: 'South East' } ] } ],
+                         attributes: { className: 'oddRow' } } ],
+                    attributes: {} } ] } ],
+          html: '<table className="twtable"><caption align="top">A caption above the table</caption><thead><tr className="evenRow"><td align="center">Left</td><td align="center">Middle</td><td align="center">Right</td></tr></thead><tbody><tr className="oddRow"><td>North West</td><td>North</td><td>North East</td></tr><tr className="evenRow"><td>West</td><td>Here</td><td>East</td></tr><tr className="oddRow"><td>South West</td><td>South</td><td>South East</td></tr></tbody></table>',
+          plain: 'A caption above the tableLeftMiddleRightNorth WestNorthNorth EastWestHereEastSouth WestSouthSouth East' } } ] }
 );
