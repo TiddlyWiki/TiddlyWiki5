@@ -60,7 +60,7 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 		var tagBits = [element.type];
 		if(element.attributes) {
 			for(var a in element.attributes) {
-				tagBits.push(a + "=\"" + element.attributes[a] + "\"");
+				tagBits.push(a + "=\"" + utils.htmlEncode(element.attributes[a]) + "\"");
 			}
 		}
 		output.push("<" + tagBits.join(" ") + (selfClosing ? " /" : "") + ">");
@@ -75,7 +75,7 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 		for(var t=0; t<tree.length; t++) {
 			switch(tree[t].type) {
 				case "text":
-					output.push(tree[t].value);
+					output.push(utils.htmlEncode(tree[t].value);
 					break;
 				case "br":
 				case "img":
