@@ -437,21 +437,21 @@ WikiTextRules.rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			var e;
+			var e = {type: "a", children: []};
 			var text = lookaheadMatch[1];
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
-				if(!lookaheadMatch[2] && WikiTextRules.isExternalLink(w,link)) {
-					e = {type: "a", children: []};
-				} else {
-					e = {type: "tiddlerLink", children: []};
-				}
 				WikiTextRules.setAttr(e,"href",link);
+				if(!lookaheadMatch[2] && WikiTextRules.isExternalLink(w,link)) {
+					WikiTextRules.setAttr(e,"className","externalLink");
+				} else {
+					WikiTextRules.setAttr(e,"className","tiddlyLink");
+				}
 			} else {
 				// Simple bracketted link
-				e = {type: "tiddlerLink", children: []};
 				WikiTextRules.setAttr(e,"href",text);
+				WikiTextRules.setAttr(e,"className","tiddlyLink");
 			}
 			w.output.push(e);
 			e.children.push({type: "text", value: text});
@@ -479,8 +479,9 @@ WikiTextRules.rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			var link = {type: "tiddlerLink", children: []};
+			var link = {type: "a", children: []};
 			WikiTextRules.setAttr(link,"href",w.matchText);
+			WikiTextRules.setAttr(link,"className","tiddlyLink");
 			w.output.push(link);
 			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
