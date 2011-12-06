@@ -47,6 +47,8 @@ var WikiTextParser = function(text) {
 WikiTextParser.prototype.render = function(type,store,title) {
 	if(type === "text/html") {
 		return this.renderAsHtml(store,title);
+	} else if (type === "text/plain") {
+		return this.renderAsText(store,title);
 	} else {
 		return null;
 	}
@@ -82,6 +84,22 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 				default:
 					renderElement(tree[t]);
 					break;
+			}
+		}
+	};
+	renderSubTree(this.tree);
+	return output.join("");	
+};
+
+WikiTextParser.prototype.renderAsText = function(store,title) {
+	var output = [];
+	var renderSubTree = function(tree) {
+		for(var t=0; t<tree.length; t++) {
+			if(tree[t].type === "text") {
+				output.push(tree[t].value);
+			}
+			if(tree[t].children) {
+				renderSubTree(tree[t].children);
 			}
 		}
 	};

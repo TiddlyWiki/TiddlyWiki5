@@ -16,7 +16,10 @@ var wikiTest = function(spec) {
 		var tid = new Tiddler(spec.tiddlers[t]);
 		store.addTiddler(tid);
 
-console.error("%s in HTML:\n%s",tid.fields.title,tid.getParseTree().render("text/html",store,tid.fields.title));
+console.error("%s in HTML:\n%s\nAnd in plain:\n%s",
+			tid.fields.title,
+			tid.getParseTree().render("text/html",store,tid.fields.title),
+			tid.getParseTree().render("text/plain",store,tid.fields.title));
 
 
 	}
