@@ -67,10 +67,10 @@ WikiTextRules.inlineCssHelper = function(w) {
 	while(lookaheadMatch && lookaheadMatch.index == w.nextMatch) {
 		var s,v;
 		if(lookaheadMatch[1]) {
-			s = lookaheadMatch[1].unDash();
+			s = lookaheadMatch[1];
 			v = lookaheadMatch[2];
 		} else {
-			s = lookaheadMatch[3].unDash();
+			s = lookaheadMatch[3];
 			v = lookaheadMatch[4];
 		}
 		if(s=="bgcolor")
@@ -86,10 +86,10 @@ WikiTextRules.inlineCssHelper = function(w) {
 };
 
 WikiTextRules.applyCssHelper = function(e,styles) {
-	if(!"attributes" in e) {
+	if(!e.attributes) {
 		e.attributes = {};
 	}
-	if(!"styles" in e.attributes) {
+	if(!e.attributes.style) {
 		e.attributes.style = {};
 	}
 	for(var t=0; t< styles.length; t++) {

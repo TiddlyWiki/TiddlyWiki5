@@ -75,7 +75,7 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 		for(var t=0; t<tree.length; t++) {
 			switch(tree[t].type) {
 				case "text":
-					output.push(utils.htmlEncode(tree[t].value);
+					output.push(utils.htmlEncode(tree[t].value));
 					break;
 				case "br":
 				case "img":

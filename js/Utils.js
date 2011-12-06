@@ -57,12 +57,12 @@ utils.convertFromYYYYMMDDHHMMSSMMM = function(d)
 // Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
 utils.htmlEncode = function(s)
 {
-	return s.replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
+	return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
 };
 
 // Convert "&amp;" to &, "&lt;" to <, "&gt;" to > and "&quot;" to "
 utils.htmlDecode = function(s)
 {
-	return s.replace(/&lt;/mg,"<").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
+	return s.toString().replace(/&lt;/mg,"<").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
 
