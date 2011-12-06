@@ -50,12 +50,13 @@ The command line options are processed left to right. The following options are 
 	--load <filepath>			# Load additional tiddlers from TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
 	--savewiki <outdir>			# Saves all the loaded tiddlers as a single file TiddlyWiki in `.html` and RSS (`.xml`) format
 	--savetiddlers <outdir>		# Saves all the loaded tiddlers as `.tid` files in the specified directory
-	--serve <host and port>		# Serve the cooked TiddlyWiki at `/`, and single tiddlers at `/tiddlertitle`
+	--servewiki <host:port>		# Serve the cooked TiddlyWiki over HTTP at `/`
+	--servetiddlers <host:port>	# Serve individual tiddlers over HTTP at `/tiddlertitle`
 	--verbose 					# verbose output, useful for debugging
 
 This example loads the tiddlers from a TiddlyWiki HTML file and makes them available over HTTP:
 
-	node tiddlywiki.js --load mywiki.html --serve 127.0.0.1:8000
+	node tiddlywiki.js --load mywiki.html --servewiki 127.0.0.1:8000
 
 This example cooks a TiddlyWiki from a recipe:
 
@@ -65,3 +66,4 @@ This example ginsus a TiddlyWiki into its constituent tiddlers:
 
 	node tiddlywiki.js --load mywiki.html --savetiddlers tmp/tiddlers
 
+`--servewiki` and `--servertiddlers` are for different purposes and should not be used together. The former is for TiddlyWiki core developers who want to be able to edit the TiddlyWiki source files in a text editor and view the results in the browser by clicking refresh; it is slow because it reloads all the TiddlyWiki JavaScript files each time the page is loaded. The latter is for experimenting with the new wikification engine.
