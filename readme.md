@@ -44,7 +44,7 @@ The idea is to join `cook.js`, `ginsu.js` and `server.js` into a single command 
 
 An interesting potential goal is that the same `tiddlywiki.js` file could be used in the browser as on the server side.
 
-The command line options are processed left to right. The following options are available:
+The command line options are processed in sequential order from left to right. Processing pauses during long operations, like loading a recipe file and all the subrecipes and tiddlers that it references. The following options are available:
 
 	--recipe <filepath>			# Loads a specfied `.recipe` file
 	--load <filepath>			# Load additional tiddlers from TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
