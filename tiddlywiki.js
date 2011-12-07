@@ -159,7 +159,7 @@ var commandLineSwitches = {
 		handler: function(args,callback) {
 			var port = args.length > 0 ? args[0] : 8000;
 			http.createServer(function (request, response) {
-				var title = url.parse(request.url).pathname.substr(1),
+				var title = decodeURIComponent(url.parse(request.url).pathname.substr(1)),
 					tiddler = store.getTiddler(title);
 				if(tiddler) {
 					response.writeHead(200, {"Content-Type": "text/html"});
