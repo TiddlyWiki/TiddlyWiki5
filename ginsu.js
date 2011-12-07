@@ -11,14 +11,14 @@
 var fs = require("fs"),
 	path = require("path"),
 	Tiddler = require("./js/Tiddler.js").Tiddler,
-	tiddlyWikiInput = require("./js/TiddlyWikiInput.js"),
+	tiddlerInput = require("./js/TiddlerInput.js"),
 	tiddlerOutput = require("./js/TiddlerOutput.js");
 
 var tiddlywikifilename = process.argv[2];
 var outputdir = process.argv[3];
 
 var tiddlywikidoc = fs.readFileSync(tiddlywikifilename,"utf8");
-var tiddlers = tiddlyWikiInput.parseTiddlyWiki(tiddlywikidoc);
+var tiddlers = tiddlerInput.parseTiddlerFile(tiddlywikidoc,"application/x-tiddlywiki");
 
 var recipe = [];
 for(var t=0; t<tiddlers.length; t++) {

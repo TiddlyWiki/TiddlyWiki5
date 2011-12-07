@@ -37,7 +37,8 @@ tiddlerInput.fileExtensionMappings = {
 	".tiddler": "application/x-tiddler-html-div",
 	".tid": "application/x-tiddler",
 	".js": "application/javascript",
-	".json": "application/json"
+	".json": "application/json",
+	".tiddlywiki": "application/x-tiddlywiki"
 };
 
 tiddlerInput.parseTiddlerFileByMimeType = {
@@ -79,7 +80,44 @@ tiddlerInput.parseTiddlerFileByMimeType = {
 			result.push(getKnownFields(tiddlers[t]));
 		}
 		return result;
+	},
+	"application/x-tiddlywiki": function(text,fields) {
+		var results = [],
+			storeAreaPos = tiddlerInput.locateStoreArea(text);
+		if(storeAreaPos) {
+			var endOfDivRegExp = /(<\/div>\s*)/gi,
+				startPos = storeAreaPos[0];
+			endOfDivRegExp.lastIndex = startPos;
+			var match = endOfDivRegExp.exec(text);
+			while(match && startPos < storeAreaPos[1]) {
+				var endPos = endOfDivRegExp.lastIndex,
+					fields = tiddlerInput.parseTiddlerDiv(text.substring(startPos,endPos));
+				fields.text = utils.htmlDecode(fields.text);
+				results.push(fields);
+				startPos = endPos;
+				match = endOfDivRegExp.exec(text);
+			}
+		}
+		return results;
 	}
+};
+
+tiddlerInput.locateStoreArea = function(tiddlywikidoc) {
+	var startSaveArea = '<div id="' + 'storeArea">',
+		startSaveAreaRegExp = /<div id=["']?storeArea['"]?>/gi,
+		endSaveArea = '</d' + 'iv>',
+		endSaveAreaCaps = '</D' + 'IV>',
+		posOpeningDiv = tiddlywikidoc.search(startSaveAreaRegExp),
+		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-STOREAREA--"+">");
+	if(limitClosingDiv == -1) {
+		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-BODY-START--"+">");
+	}
+	var start = limitClosingDiv == -1 ? tiddlywikidoc.length : limitClosingDiv,
+		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveArea,start);
+	if(posClosingDiv == -1) {
+		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveAreaCaps,start);
+	}
+	return (posOpeningDiv != -1 && posClosingDiv != -1) ? [posOpeningDiv + startSaveArea.length,posClosingDiv] : null;
 };
 
 /*

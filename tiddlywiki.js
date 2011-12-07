@@ -9,7 +9,6 @@ var WikiStore = require("./js/WikiStore.js").WikiStore,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	Recipe = require("./js/Recipe.js").Recipe,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
-	tiddlyWikiInput = require("./js/TiddlyWikiInput.js"),
 	tiddlerOutput = require("./js/TiddlerOutput.js"),
 	tiddlerInput = require("./js/TiddlerInput.js"),
 	util = require("util"),
@@ -101,8 +100,10 @@ var commandLineSwitches = {
 				if(err) {
 					callback(err);
 				} else {
-					var fields = {title: args[0]};
-					var tiddlers = tiddlerInput.parseTiddlerFile(data,path.extname(args[0]),fields);
+					var fields = {title: args[0]},
+						extname = path.extname(args[0]),
+						type = extname === ".html" ? "application/x-tiddlywiki" : extname;
+					var tiddlers = tiddlerInput.parseTiddlerFile(data,type,fields);
 					for(var t=0; t<tiddlers.length; t++) {
 						store.addTiddler(new Tiddler(tiddlers[t]));
 					}
