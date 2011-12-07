@@ -48,10 +48,11 @@ The command line options are processed in sequential order from left to right. P
 
 	--recipe <filepath>			# Loads a specfied `.recipe` file
 	--load <filepath>			# Load additional tiddlers from TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
-	--savewiki <outdir>			# Saves all the loaded tiddlers as a single file TiddlyWiki in `.html` and RSS (`.xml`) format
+	--savewiki <filepath>		# Saves all the loaded tiddlers as a single file TiddlyWiki in `.html` format
+	--saverss <filepath> 		# Saves the the loaded tiddlers as an RSS feed in `.xml` format
 	--savetiddlers <outdir>		# Saves all the loaded tiddlers as `.tid` files in the specified directory
-	--servewiki <host:port>		# Serve the cooked TiddlyWiki over HTTP at `/`
-	--servetiddlers <host:port>	# Serve individual tiddlers over HTTP at `/tiddlertitle`
+	--servewiki <port>			# Serve the cooked TiddlyWiki over HTTP at `/`
+	--servetiddlers <port>		# Serve individual tiddlers over HTTP at `/tiddlertitle`
 	--verbose 					# verbose output, useful for debugging
 
 This example loads the tiddlers from a TiddlyWiki HTML file and makes them available over HTTP:
