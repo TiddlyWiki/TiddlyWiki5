@@ -13,6 +13,7 @@ var WikiStore = require("./js/WikiStore.js").WikiStore,
 	tiddlerInput = require("./js/TiddlerInput.js"),
 	util = require("util"),
 	fs = require("fs"),
+	url = require("url"),
 	path = require("path"),
 	aync = require("async"),
 	http = require("http");
@@ -154,9 +155,20 @@ var commandLineSwitches = {
 		}
 	},
 	servetiddlers: {
-		args: {min: 1, max: 1},
+		args: {min: 0, max: 1},
 		handler: function(args,callback) {
-			process.nextTick(function() {callback(null);});
+			var port = args.length > 0 ? args[0] : 8000;
+			http.createServer(function (request, response) {
+				var title = url.parse(request.url).pathname.substr(1),
+					tiddler = store.getTiddler(title);
+				if(tiddler) {
+					response.writeHead(200, {"Content-Type": "text/html"});
+					response.end(tiddler.getParseTree().render("text/html"),"utf8");					
+				} else {
+					response.writeHead(404);
+					response.end();
+				}
+			}).listen(port);
 		}
 	},
 	verbose: {
