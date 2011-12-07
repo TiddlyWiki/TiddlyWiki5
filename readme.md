@@ -38,11 +38,9 @@ As of 2nd December 2011, cook.js can now build a fully functional TiddlyWiki fro
 
 ## Plans for new command line interface
 
-The idea is to join `cook.js`, `ginsu.js` and `server.js` into a single command line tool, provisionally called `tiddlywiki.js`. This would be used as follows:
+There is now an experimental new command line interface that combines `cook.js`, `ginsu.js` and `server.js`, provisionally called `tiddlywiki.js`. It is used as follows:
 
 	node tiddlywiki.js <options>
-
-An interesting potential goal is that the same `tiddlywiki.js` file could be used in the browser as on the server side.
 
 The command line options are processed in sequential order from left to right. Processing pauses during long operations, like loading a recipe file and all the subrecipes and tiddlers that it references. The following options are available:
 

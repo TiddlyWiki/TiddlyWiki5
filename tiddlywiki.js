@@ -11,6 +11,7 @@ var WikiStore = require("./js/WikiStore.js").WikiStore,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	tiddlyWikiInput = require("./js/TiddlyWikiInput.js"),
 	tiddlerOutput = require("./js/TiddlerOutput.js"),
+	tiddlerInput = require("./js/TiddlerInput.js"),
 	util = require("util"),
 	fs = require("fs"),
 	path = require("path"),
@@ -86,10 +87,28 @@ var commandLineSwitches = {
 			}
 		}
 	},
+	dumpstore: {
+		args: {min: 0, max: 0},
+		handler: function(args,callback) {
+			console.log("Store is:\n%s",util.inspect(store,false,10));
+			process.nextTick(function() {callback(null);});
+		}
+	},
 	load: {
 		args: {min: 1, max: 1},
 		handler: function(args,callback) {
-			process.nextTick(function() {callback(null);});
+			fs.readFile(args[0],"utf8",function(err,data) {
+				if(err) {
+					callback(err);
+				} else {
+					var fields = {title: args[0]};
+					var tiddlers = tiddlerInput.parseTiddlerFile(data,path.extname(args[0]),fields);
+					for(var t=0; t<tiddlers.length; t++) {
+						store.addTiddler(new Tiddler(tiddlers[t]));
+					}
+					callback(null);	
+				}
+			});
 		}
 	},
 	savewiki: {
