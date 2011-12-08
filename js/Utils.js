@@ -54,6 +54,83 @@ utils.convertFromYYYYMMDDHHMMSSMMM = function(d)
 			parseInt(d.substr(14,3)||"000",10)));
 };
 
+utils.formatDateString = function (date,template) {
+	var t = template.replace(/0hh12/g,utils.zeroPad(utils.getHours12(date),2));
+	t = t.replace(/hh12/g,utils.getHours12(date));
+	t = t.replace(/0hh/g,utils.zeroPad(date.getHours(),2));
+	t = t.replace(/hh/g,date.getHours());
+	t = t.replace(/mmm/g,utils.dateFormats.shortMonths[date.getMonth()]);
+	t = t.replace(/0mm/g,utils.zeroPad(date.getMinutes(),2));
+	t = t.replace(/mm/g,date.getMinutes());
+	t = t.replace(/0ss/g,utils.zeroPad(date.getSeconds(),2));
+	t = t.replace(/ss/g,date.getSeconds());
+	t = t.replace(/[ap]m/g,utils.getAmPm(date).toLowerCase());
+	t = t.replace(/[AP]M/g,utils.getAmPm(date).toUpperCase());
+	t = t.replace(/wYYYY/g,utils.getYearForWeekNo(date));
+	t = t.replace(/wYY/g,utils.zeroPad(utils.getYearForWeekNo(date)-2000,2));
+	t = t.replace(/YYYY/g,date.getFullYear());
+	t = t.replace(/YY/g,utils.zeroPad(date.getFullYear()-2000,2));
+	t = t.replace(/MMM/g,utils.dateFormats.months[date.getMonth()]);
+	t = t.replace(/0MM/g,utils.zeroPad(date.getMonth()+1,2));
+	t = t.replace(/MM/g,date.getMonth()+1);
+	t = t.replace(/0WW/g,utils.zeroPad(utils.getWeek(date),2));
+	t = t.replace(/WW/g,utils.getWeek(date));
+	t = t.replace(/DDD/g,utils.dateFormats.days[date.getDay()]);
+	t = t.replace(/ddd/g,utils.dateFormats.shortDays[date.getDay()]);
+	t = t.replace(/0DD/g,utils.zeroPad(date.getDate(),2));
+	t = t.replace(/DDth/g,date.getDate()+utils.getDaySuffix(date));
+	t = t.replace(/DD/g,date.getDate());
+	var tz = date.getTimezoneOffset();
+	var atz = Math.abs(tz);
+	t = t.replace(/TZD/g,(tz < 0 ? '+' : '-') + utils.zeroPad(Math.floor(atz / 60),2) + ':' + utils.zeroPad(atz % 60,2));
+	t = t.replace(/\\/g,"");
+	return t;
+};
+
+utils.dateFormats = {
+	months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November","December"],
+	days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+	shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+	shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+// suffixes for dates, eg "1st","2nd","3rd"..."30th","31st"
+	daySuffixes: ["st","nd","rd","th","th","th","th","th","th","th",
+		"th","th","th","th","th","th","th","th","th","th",
+		"st","nd","rd","th","th","th","th","th","th","th",
+		"st"],
+	am: "am",
+	pm: "pm"
+};
+
+utils.getAmPm = function(date) {
+	return date.getHours() >= 12 ? utils.dateFormats.pm : utils.dateFormats.am;
+};
+
+utils.getDaySuffix = function(date) {
+	return utils.dateFormats.daySuffixes[date.getDate()-1];
+};
+
+utils.getWeek = function(date) {
+	var dt = new Date(date.getTime());
+	var d = dt.getDay();
+	if(d==0) d=7;// JavaScript Sun=0, ISO Sun=7
+	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week to calculate weekNo
+	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1)+3600000)/86400000);
+	return Math.floor(n/7)+1;
+};
+
+utils.getYearForWeekNo = function(date) {
+	var dt = new Date(date.getTime());
+	var d = dt.getDay();
+	if(d==0) d=7;// JavaScript Sun=0, ISO Sun=7
+	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week
+	return dt.getFullYear();
+};
+
+utils.getHours12 = function(date) {
+	var h = date.getHours();
+	return h > 12 ? h-12 : ( h > 0 ? h : 12 );
+};
+
 // Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
 utils.htmlEncode = function(s)
 {
