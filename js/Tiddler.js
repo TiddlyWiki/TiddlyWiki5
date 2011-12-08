@@ -59,6 +59,17 @@ var Tiddler = function(/* tiddler,fields */) {
 	}
 };
 
+Tiddler.prototype.hasTag = function(tag) {
+	if(this.tags) {
+		for(var t=0; t<this.tags.length; t++) {
+			if(this.tags[t] === tag) {
+				return true;
+			}
+		}
+	}
+	return false;
+};
+
 Tiddler.prototype.parseTiddlerField = function(name,value) {
 	var type = Tiddler.specialTiddlerFields[name];
 	if(type) {
