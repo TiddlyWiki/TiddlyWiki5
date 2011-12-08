@@ -165,15 +165,6 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 	});
 };
 
-// Special post-processing required for certain ingredient types
-Recipe.prototype.readIngredientPostProcess = {
-	"shadow": function(fields) {
-		// Add ".shadow" to the name of shadow tiddlers
-		fields.title = fields.title + ".shadow";
-		return fields;
-	}	
-};
-
 // Read a tiddler file and callback with an array of hashmaps of tiddler fields. For single
 // tiddler files it also looks for an accompanying .meta file
 Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
@@ -283,6 +274,81 @@ Recipe.tiddlerOutputter = {
 		}
 	}
 };
+
+// Cook an RSS file of the most recent 20 tiddlers
+Recipe.prototype.cookRss = function()
+{
+	var me = this,
+		numRssItems = 20,
+		s = [],
+		d = new Date(),
+		u = this.store.getTiddler("SiteUrl").getParseTree().render("text/plain"),
+		encodeTiddlyLink = function(title) {
+			return title.indexOf(" ") == -1 ? title : "[[" + title + "]]";
+		},
+		tiddlerToRssItem = function(tiddler,uri) {
+			var s = "<title" + ">" + utils.htmlEncode(tiddler.fields.title) + "</title" + ">\n";
+			s += "<description>" + utils.htmlEncode(tiddler.getParseTree().render("text/html")) + "</description>\n";
+			var i;
+			if(tiddler.fields.tags) {
+				for(i=0; i<tiddler.fields.tags.length; i++) {
+					s += "<category>" + tiddler.fields.tags[i] + "</category>\n";
+				}
+			}
+			s += "<link>" + uri + "#" + encodeURIComponent(encodeTiddlyLink(tiddler.fields.title)) + "</link>\n";
+			if(tiddler.fields.modified) {
+				s +="<pubDate>" + tiddler.fields.modified.toUTCString() + "</pubDate>\n";
+			}
+			return s;
+		},
+		getRssTiddlers = function(sortField,excludeTag) {
+			var r = [];
+			me.store.forEachTiddler(function(title,tiddler) {
+				if(!tiddler.hasTag(excludeTag)) {
+					r.push(tiddler);
+				}
+			});
+			r.sort(function(a,b) {
+				var aa = a.fields[sortField] || 0,
+					bb = b.fields[sortField] || 0;
+console.error("Comparing %s (%s) and %s (%s)",a.fields.title,util.inspect(a.fields[sortField],false,8),b.fields.title,util.inspect(b.fields[sortField],false,8));
+				if(aa < bb) {
+					return -1;
+				} else {
+					if(aa > bb) {
+						return 1;
+					} else {
+						return 0;
+					}
+				}
+			});
+			return r;
+		};
+	// Assemble the header
+	s.push("<" + "?xml version=\"1.0\"?" + ">");
+	s.push("<rss version=\"2.0\">");
+	s.push("<channel>");
+	s.push("<title" + ">" + utils.htmlEncode(this.store.getTiddler("SiteTitle").getParseTree().render("text/plain")) + "</title" + ">");
+	if(u)
+		s.push("<link>" + utils.htmlEncode(u) + "</link>");
+	s.push("<description>" + utils.htmlEncode(this.store.getTiddler("SiteSubtitle").getParseTree().render("text/plain")) + "</description>");
+	//s.push("<language>" + config.locale + "</language>");
+	s.push("<pubDate>" + d.toUTCString() + "</pubDate>");
+	s.push("<lastBuildDate>" + d.toUTCString() + "</lastBuildDate>");
+	s.push("<docs>http://blogs.law.harvard.edu/tech/rss</docs>");
+	s.push("<generator>https://github.com/Jermolene/cook.js</generator>");
+	// The body
+	var tiddlers = getRssTiddlers("modified","excludeLists");
+	var i,n = numRssItems > tiddlers.length ? 0 : tiddlers.length-numRssItems;
+	for(i=tiddlers.length-1; i>=n; i--) {
+		s.push("<item>\n" + tiddlerToRssItem(tiddlers[i],u) + "\n</item>");
+	}
+	// And footer
+	s.push("</channel>");
+	s.push("</rss>");
+	// Save it all
+	return s.join("\n");
+}
 
 exports.Recipe = Recipe;
 
