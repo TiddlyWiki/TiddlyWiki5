@@ -283,7 +283,10 @@ WikiTextRules.rules = [
 			var t,e;
 			if(listLevel > currLevel) {
 				for(t=currLevel; t<listLevel; t++) {
-					var target = (currLevel === 0) ? stack[stack.length-1] : stack[stack.length-1].lastChild;
+					var target = stack[stack.length-1];
+					if(currLevel !== 0 && target.children) {
+						target = target.children[target.children.length-1];
+					}
 					e = {type: listType, children: []};
 					target.push(e);
 					stack.push(e.children);
