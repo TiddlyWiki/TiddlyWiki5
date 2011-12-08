@@ -111,20 +111,6 @@ WikiTextRules.enclosedTextHelper = function(w) {
 	}
 };
 
-WikiTextRules.isExternalLink = function(w,link) {
-	var urlRegExp = new RegExp(textPrimitives.urlPattern,"mg");
-	if(urlRegExp.exec(link)) {
-		// Definitely an external link
-		return true;
-	}
-	if(link.indexOf(".")!=-1 || link.indexOf("\\")!=-1 || link.indexOf("/")!=-1 || link.indexOf("#")!=-1) {
-		// Link contains . / \ or # so is probably an external link
-		return true;
-	}
-	// Otherwise assume it is not an external link
-	return false;
-};
-
 WikiTextRules.rules = [
 {
 	name: "table",
@@ -445,15 +431,9 @@ WikiTextRules.rules = [
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
 				WikiTextRules.setAttr(e,"href",link);
-				if(!lookaheadMatch[2] && WikiTextRules.isExternalLink(w,link)) {
-					WikiTextRules.setAttr(e,"className","externalLink");
-				} else {
-					WikiTextRules.setAttr(e,"className","tiddlyLink");
-				}
 			} else {
 				// Simple bracketted link
 				WikiTextRules.setAttr(e,"href",text);
-				WikiTextRules.setAttr(e,"className","tiddlyLink");
 			}
 			w.output.push(e);
 			e.children.push({type: "text", value: text});
@@ -483,7 +463,6 @@ WikiTextRules.rules = [
 		if(w.autoLinkWikiWords) {
 			var link = {type: "a", children: []};
 			WikiTextRules.setAttr(link,"href",w.matchText);
-			WikiTextRules.setAttr(link,"className","tiddlyLink");
 			w.output.push(link);
 			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
@@ -516,18 +495,11 @@ WikiTextRules.rules = [
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			var e = w.output;
 			if(lookaheadMatch[5]) {
-				var link = lookaheadMatch[5],t;
-				if(WikiTextRules.isExternalLink(w,link)) {
+				var link = lookaheadMatch[5],
 					t = {type: "a", children: []};
-					w.output.push(t);
-					e = t.children;
-				} else {
-					t = {type: "tiddlerLink", children: []};
-					w.output.push(t);
-					e = t.children;
-				}
 				WikiTextRules.setAttr(t,"href",link);
-				WikiTextRules.setAttr(t,"className","imageLink");
+				w.output.push(t);
+				e = t.children;
 			}
 			var img = {type: "img"};
 			e.push(img);
