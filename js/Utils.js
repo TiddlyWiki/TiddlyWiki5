@@ -69,8 +69,12 @@ utils.htmlDecode = function(s)
 // Converts all HTML entities to their character equivalents
 utils.entityDecode = function(s) {
 	var e = s.substr(1,s.length-2); // Strip the & and the ;
-	if(e.charAt(0) == "#") {
-		return String.fromCharCode(parseInt(e.substr(1),10));
+	if(e.charAt(0) === "#") {
+		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
+			return String.fromCharCode(parseInt(e.substr(2),16));	
+		} else {
+			return String.fromCharCode(parseInt(e.substr(1),10));
+		}
 	} else {
 		var c = utils.htmlEntities[e];
 		if(c) {
