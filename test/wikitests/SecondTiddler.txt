@@ -1,1 +1,1 @@
-HeadingThis is the second tiddler. It has a list: Item one Item two Item threeAnd a 
+HeadingThis is the second tiddler. It has a list: Item one Item two Item threeAnd a  and a custom class

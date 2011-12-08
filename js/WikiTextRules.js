@@ -636,7 +636,7 @@ WikiTextRules.rules = [
 			w.output.push(e);
 			var styles = WikiTextRules.inlineCssHelper(w);
 			if(styles.length === 0)
-				e.className = "marked";
+				WikiTextRules.setAttr(e,"className","marked");
 			else
 				WikiTextRules.applyCssHelper(e,styles);
 			w.subWikifyTerm(e.children,/(@@)/mg);
@@ -647,9 +647,8 @@ WikiTextRules.rules = [
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
-				e = {type: lookaheadMatch[2] == "\n" ? "div" : "span", children: [
-					{type: "text", value: lookaheadMatch[1]}
-				]};
+				e = {type: lookaheadMatch[2] == "\n" ? "div" : "span", children: []};
+				WikiTextRules.setAttr(e,"className",lookaheadMatch[1]);
 				w.output.push(e);
 				w.subWikifyTerm(e.children,/(\}\}\})/mg);
 			}
