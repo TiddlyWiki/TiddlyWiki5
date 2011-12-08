@@ -84,6 +84,9 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 				case "text":
 					output.push(utils.htmlEncode(tree[t].value));
 					break;
+				case "entity":
+					output.push(tree[t].value);
+					break;
 				case "br":
 				case "img":
 					renderElement(tree[t],true); // Self closing elements
@@ -102,8 +105,18 @@ WikiTextParser.prototype.renderAsText = function(store,title) {
 	var output = [];
 	var renderSubTree = function(tree) {
 		for(var t=0; t<tree.length; t++) {
-			if(tree[t].type === "text") {
-				output.push(tree[t].value);
+			switch(tree[t].type) {
+				case "text":
+					output.push(tree[t].value);
+					break;
+				case "entity":
+					var c = utils.entityDecode(tree[t].value);
+					if(c) {
+						output.push(c);
+					} else {
+						output.push(tree[t].value);
+					}
+					break;
 			}
 			if(tree[t].children) {
 				renderSubTree(tree[t].children);
