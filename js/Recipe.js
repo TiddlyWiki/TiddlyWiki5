@@ -311,7 +311,6 @@ Recipe.prototype.cookRss = function()
 			r.sort(function(a,b) {
 				var aa = a.fields[sortField] || 0,
 					bb = b.fields[sortField] || 0;
-console.error("Comparing %s (%s) and %s (%s)",a.fields.title,util.inspect(a.fields[sortField],false,8),b.fields.title,util.inspect(b.fields[sortField],false,8));
 				if(aa < bb) {
 					return -1;
 				} else {
