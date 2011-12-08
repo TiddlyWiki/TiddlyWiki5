@@ -26,7 +26,8 @@ Text nodes are:
 /*global require: false, exports: false */
 "use strict";
 
-var wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
+var wikiTextMacros = require("./WikiTextMacros.js"),
+	wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -91,12 +92,16 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 				case "img":
 					renderElement(tree[t],true); // Self closing elements
 					break;
+				case "macro":
+					renderSubTree(tree[t].output);
+					break;
 				default:
 					renderElement(tree[t]);
 					break;
 			}
 		}
 	};
+	wikiTextMacros.executeMacros(this.tree,this.store);
 	renderSubTree(this.tree);
 	return output.join("");	
 };
@@ -116,6 +121,9 @@ WikiTextParser.prototype.renderAsText = function(store,title) {
 					} else {
 						output.push(tree[t].value);
 					}
+					break;
+				case "macro":
+					renderSubTree(tree[t].output);
 					break;
 			}
 			if(tree[t].children) {
