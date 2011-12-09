@@ -101,7 +101,7 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 			}
 		}
 	};
-	wikiTextMacros.executeMacros(this.tree,this.store);
+	wikiTextMacros.executeMacros(this.tree,store);
 	renderSubTree(this.tree);
 	return output.join("");	
 };
@@ -131,6 +131,7 @@ WikiTextParser.prototype.renderAsText = function(store,title) {
 			}
 		}
 	};
+	wikiTextMacros.executeMacros(this.tree,store);
 	renderSubTree(this.tree);
 	return output.join("");	
 };

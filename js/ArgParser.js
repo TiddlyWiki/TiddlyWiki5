@@ -56,10 +56,10 @@ var ArgParser = function(argString,options) {
 				this.byPos.push({n:"", v:n});
 			} else {
 				v = parseToken(match,8);
-				if(v === null && options.defaultName) {
+				if(v == null && options.defaultName) {
 					v = n;
 					n = options.defaultName;
-				} else if(v === null && options.defaultValue) {
+				} else if(v == null && options.defaultValue) {
 					v = options.defaultValue;
 				}
 				this.byPos.push({n:n, v:v});

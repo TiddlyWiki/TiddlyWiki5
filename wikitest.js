@@ -38,14 +38,14 @@ for(f=0; f<files.length; f++) {
 
 for(t=0; t<titles.length; t++) {
 	var tree = store.getTiddler(titles[t]).getParseTree(),
-		htmlRender = tree.render("text/html"),
+		htmlRender = tree.render("text/html",store,titles[t]),
 		htmlTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".html"),"utf8"),
-		plainRender = tree.render("text/plain"),
+		plainRender = tree.render("text/plain",store,titles[t]),
 		plainTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".txt"),"utf8");
 	if(htmlTarget !== htmlRender) {
-		console.error("Tiddler %s html error\nTarget: %s\nFound: %s",titles[t],htmlTarget,htmlRender);
+		console.error("Tiddler %s html error\nTarget: %s\nFound: %s\n",titles[t],htmlTarget,htmlRender);
 	}
 	if(plainTarget !== plainRender) {
-		console.error("Tiddler %s plain text error\nTarget: %s\nFound: %s",titles[t],plainTarget,plainRender);
+		console.error("Tiddler %s plain text error\nTarget: %s\nFound: %s\n",titles[t],plainTarget,plainRender);
 	}
 }
