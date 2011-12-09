@@ -26,8 +26,7 @@ Text nodes are:
 /*jslint node: true */
 "use strict";
 
-var wikiTextMacros = require("./WikiTextMacros.js"),
-	wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
+var wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -38,103 +37,6 @@ var WikiTextParser = function(text) {
 	this.tree = [];
 	this.output = null;
 	this.subWikify(this.tree);
-};
-
-// Render the tiddler as HTML from its parse tree
-//	type - MIME type of required output
-//	store - store object providing context for inter-tiddler operations
-//  title - render the tree as if it came from a tiddler of this title
-WikiTextParser.prototype.render = function(type,store,title) {
-	if(type === "text/html") {
-		return this.renderAsHtml(store,title);
-	} else if (type === "text/plain") {
-		return this.renderAsText(store,title);
-	} else {
-		return null;
-	}
-};
-
-WikiTextParser.prototype.renderAsHtml = function(store,title) {
-	var output = [],
-		renderSubTree;
-	var renderElement = function(element, selfClosing) {
-		var tagBits = [element.type];
-		if(element.attributes) {
-			for(var a in element.attributes) {
-				var r = element.attributes[a];
-				if(a === "style") {
-					var s = [];
-					for(var t in r) {
-						s.push(t + ":" + r[t] + ";");
-					}
-					r = s.join("");
-				}
-				tagBits.push(a + "=\"" + utils.htmlEncode(r) + "\"");
-			}
-		}
-		output.push("<" + tagBits.join(" ") + (selfClosing ? " /" : "") + ">");
-		if(!selfClosing) {
-			if(element.children) {
-				renderSubTree(element.children);
-			}
-			output.push("</" + element.type + ">");
-		}
-	};
-	renderSubTree = function(tree) {
-		for(var t=0; t<tree.length; t++) {
-			switch(tree[t].type) {
-				case "text":
-					output.push(utils.htmlEncode(tree[t].value));
-					break;
-				case "entity":
-					output.push(tree[t].value);
-					break;
-				case "br":
-				case "img":
-					renderElement(tree[t],true); // Self closing elements
-					break;
-				case "macro":
-					renderSubTree(tree[t].output);
-					break;
-				default:
-					renderElement(tree[t]);
-					break;
-			}
-		}
-	};
-	wikiTextMacros.executeMacros(this.tree,store,title);
-	renderSubTree(this.tree);
-	return output.join("");	
-};
-
-WikiTextParser.prototype.renderAsText = function(store,title) {
-	var output = [];
-	var renderSubTree = function(tree) {
-		for(var t=0; t<tree.length; t++) {
-			switch(tree[t].type) {
-				case "text":
-					output.push(tree[t].value);
-					break;
-				case "entity":
-					var c = utils.entityDecode(tree[t].value);
-					if(c) {
-						output.push(c);
-					} else {
-						output.push(tree[t].value);
-					}
-					break;
-				case "macro":
-					renderSubTree(tree[t].output);
-					break;
-			}
-			if(tree[t].children) {
-				renderSubTree(tree[t].children);
-			}
-		}
-	};
-	wikiTextMacros.executeMacros(this.tree,store,title);
-	renderSubTree(this.tree);
-	return output.join("");	
 };
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {

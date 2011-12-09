@@ -14,6 +14,7 @@ verifying that the output matches `<tiddlername>.html` and `<tiddlername>.txt`.
 
 var Tiddler = require("./js/Tiddler.js").Tiddler,
 	WikiStore = require("./js/WikiStore.js").WikiStore,
+	WikiTextRenderer = require("./js/WikiTextRenderer.js").WikiTextRenderer,
 	tiddlerInput = require("./js/TiddlerInput"),
 	utils = require("./js/Utils.js"),
 	util = require("util"),
@@ -39,11 +40,12 @@ for(f=0; f<files.length; f++) {
 }
 
 for(t=0; t<titles.length; t++) {
-	var tree = store.getTiddler(titles[t]).getParseTree(),
-		htmlRender = tree.render("text/html",store,titles[t]),
-		htmlTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".html"),"utf8"),
-		plainRender = tree.render("text/plain",store,titles[t]),
-		plainTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".txt"),"utf8");
+	var htmlTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".html"),"utf8"),
+		plainTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".txt"),"utf8"),
+		parser = store.getTiddler(titles[t]).getParseTree(),
+		renderer = new WikiTextRenderer(parser,store,titles[t]),
+		htmlRender = renderer.render("text/html"),
+		plainRender = renderer.render("text/plain");
 	if(htmlTarget !== htmlRender) {
 		console.error("Tiddler %s html error\nTarget: %s\nFound: %s\n",titles[t],htmlTarget,htmlRender);
 	}
