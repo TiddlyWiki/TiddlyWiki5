@@ -282,13 +282,13 @@ Recipe.prototype.cookRss = function()
 		numRssItems = 20,
 		s = [],
 		d = new Date(),
-		u = this.store.getTiddler("SiteUrl").getParseTree().render("text/plain"),
+		u = this.store.getTiddler("SiteUrl").getParseTree().render("text/plain",me.store,"SiteUrl"),
 		encodeTiddlyLink = function(title) {
 			return title.indexOf(" ") == -1 ? title : "[[" + title + "]]";
 		},
 		tiddlerToRssItem = function(tiddler,uri) {
 			var s = "<title" + ">" + utils.htmlEncode(tiddler.fields.title) + "</title" + ">\n";
-			s += "<description>" + utils.htmlEncode(tiddler.getParseTree().render("text/html")) + "</description>\n";
+			s += "<description>" + utils.htmlEncode(tiddler.getParseTree().render("text/html",me.store,tiddler.fields.title)) + "</description>\n";
 			var i;
 			if(tiddler.fields.tags) {
 				for(i=0; i<tiddler.fields.tags.length; i++) {
@@ -327,10 +327,10 @@ Recipe.prototype.cookRss = function()
 	s.push("<" + "?xml version=\"1.0\"?" + ">");
 	s.push("<rss version=\"2.0\">");
 	s.push("<channel>");
-	s.push("<title" + ">" + utils.htmlEncode(this.store.getTiddler("SiteTitle").getParseTree().render("text/plain")) + "</title" + ">");
+	s.push("<title" + ">" + utils.htmlEncode(this.store.getTiddler("SiteTitle").getParseTree().render("text/plain",me.store,"SiteTitle")) + "</title" + ">");
 	if(u)
 		s.push("<link>" + utils.htmlEncode(u) + "</link>");
-	s.push("<description>" + utils.htmlEncode(this.store.getTiddler("SiteSubtitle").getParseTree().render("text/plain")) + "</description>");
+	s.push("<description>" + utils.htmlEncode(this.store.getTiddler("SiteSubtitle").getParseTree().render("text/plain",me.store,"SiteSubtitle")) + "</description>");
 	//s.push("<language>" + config.locale + "</language>");
 	s.push("<pubDate>" + d.toUTCString() + "</pubDate>");
 	s.push("<lastBuildDate>" + d.toUTCString() + "</lastBuildDate>");

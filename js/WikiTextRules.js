@@ -148,7 +148,7 @@ WikiTextRules.rules = [
 					// Move the caption to the first row if it isn't already
 					if(table.children.length !== 1) {
 						table.children.pop(); // Take rowContainer out of the children array
-						table.splice(0,0,rowContainer); // Insert it at the bottom						
+						table.children.splice(0,0,rowContainer); // Insert it at the bottom						
 					}
 					rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
