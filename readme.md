@@ -8,38 +8,6 @@ The goal is to achieve byte-for-byte compatibility with the old tools, but only 
 
 ## Usage
 
-	node cook.js <recipefile>
-
-Cooks a recipe file and sends the output to STDOUT
-
-	node server.js <recipefile>
-
-Cooks a recipe file and serves it over HTTP port 8000
-
-	node ginsu.js <tiddlywikifile> <outputdir>
-
-Splits a TiddlyWiki file into separate `.tid` files and a `split.recipe` file.
-
-Tiddlers can be read from `.tid`, `.tiddler` or TiddlyWeb-style fat `.json' files.
-
-You can use filepaths or URLs to reference recipe files and tiddlers. For example, this recipe cooks the latest TiddlyWiki components directly from the online repositories:
-
-	recipe: https://raw.github.com/TiddlyWiki/tiddlywiki/master/tiddlywikinonoscript.html.recipe
-	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com-ref_public/tiddlers.json?fat=1
-	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com_public/tiddlers.json?fat=1
-
-## Testing
-
-`test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation).
-
-## Current status
-
-As of 2nd December 2011, cook.js can now build a fully functional TiddlyWiki from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.
-
-## Plans for new command line interface
-
-There is now an experimental new command line interface that combines `cook.js`, `ginsu.js` and `server.js`, provisionally called `tiddlywiki.js`. It is used as follows:
-
 	node tiddlywiki.js <options>
 
 The command line options are processed in sequential order from left to right. Processing pauses during long operations, like loading a recipe file and all the subrecipes and tiddlers that it references. The following options are available:
@@ -66,3 +34,17 @@ This example ginsus a TiddlyWiki into its constituent tiddlers:
 	node tiddlywiki.js --load mywiki.html --savetiddlers tmp/tiddlers
 
 `--servewiki` and `--servertiddlers` are for different purposes and should not be used together. The former is for TiddlyWiki core developers who want to be able to edit the TiddlyWiki source files in a text editor and view the results in the browser by clicking refresh; it is slow because it reloads all the TiddlyWiki JavaScript files each time the page is loaded. The latter is for experimenting with the new wikification engine.
+
+You can use filepaths or URLs to reference recipe files and tiddlers. For example, this recipe cooks the latest TiddlyWiki components directly from the online repositories:
+
+	recipe: https://raw.github.com/TiddlyWiki/tiddlywiki/master/tiddlywikinonoscript.html.recipe
+	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com-ref_public/tiddlers.json?fat=1
+	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com_public/tiddlers.json?fat=1
+
+## Testing
+
+`test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation).
+
+## Current status
+
+As of 2nd December 2011, cook.js can now build a fully functional TiddlyWiki from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.
