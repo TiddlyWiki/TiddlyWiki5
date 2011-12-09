@@ -43,8 +43,8 @@ You can use filepaths or URLs to reference recipe files and tiddlers. For exampl
 
 ## Testing
 
-`test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation).
+`test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation). It also invokes `wikitest.js`, a wikification test rig that works off the data in `test/wikitests/`.
 
 ## Current status
 
-As of 2nd December 2011, cook.js can now build a fully functional TiddlyWiki from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.
+As of 8th December 2011, cook.js can now build a fully functional TiddlyWiki and its RSS feed from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.

@@ -2,8 +2,7 @@
 Wiki text macro implementation
 */
 
-
-/*global require: false, exports: false */
+/*jslint node: true */
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
@@ -74,13 +73,14 @@ wikiTextMacros.macros = {
 			var args = new ArgParser(macroNode.params,{defaultName:"name"}),
 				targetTitle = args.getValueByName("name",null),
 				withTokens = args.getValuesByName("with",[]),
-				text = store.getTiddlerText(targetTitle,"");
+				text = store.getTiddlerText(targetTitle,""),
+				t;
 			for(t=0; t<withTokens.length; t++) {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
 			var parseTree = new WikiTextParserModule.WikiTextParser(text);
-			for(var t=0; t<parseTree.tree.length; t++) {
+			for(t=0; t<parseTree.tree.length; t++) {
 				macroNode.output.push(parseTree.tree[t]);
 			}
 			// Execute any macros in the copy

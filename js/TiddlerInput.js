@@ -2,7 +2,7 @@
 Functions concerned with parsing representations of tiddlers
 */
 
-/*global require: false, exports: false */
+/*jslint node: true */
 "use strict";
 
 var utils = require("./Utils.js"),
@@ -91,9 +91,9 @@ tiddlerInput.parseTiddlerFileByMimeType = {
 			var match = endOfDivRegExp.exec(text);
 			while(match && startPos < storeAreaPos[1]) {
 				var endPos = endOfDivRegExp.lastIndex,
-					fields = tiddlerInput.parseTiddlerDiv(text.substring(startPos,endPos));
-				fields.text = utils.htmlDecode(fields.text);
-				results.push(fields);
+					tiddlerFields = tiddlerInput.parseTiddlerDiv(text.substring(startPos,endPos),fields);
+				tiddlerFields.text = utils.htmlDecode(tiddlerFields.text);
+				results.push(tiddlerFields);
 				startPos = endPos;
 				match = endOfDivRegExp.exec(text);
 			}

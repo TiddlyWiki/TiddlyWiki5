@@ -33,7 +33,7 @@ as a TiddlyWiki quoted string (eg, "one [[two three]]").
 
 */
 
-/*global require: false, exports: false */
+/*jslint node: true */
 "use strict";
 
 var utils = require("./Utils.js"),

@@ -4,7 +4,7 @@ Various static utility functions.
 This file is a bit of a dumping ground; the expectation is that most of these functions will be refactored.
 */
 
-/*global require: false, exports: false, process: false */
+/*jslint node: true */
 "use strict";
 
 var utils = exports;
@@ -131,7 +131,7 @@ utils.getDaySuffix = function(date) {
 utils.getWeek = function(date) {
 	var dt = new Date(date.getTime());
 	var d = dt.getDay();
-	if(d==0) d=7;// JavaScript Sun=0, ISO Sun=7
+	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
 	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week to calculate weekNo
 	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1)+3600000)/86400000);
 	return Math.floor(n/7)+1;
@@ -140,7 +140,7 @@ utils.getWeek = function(date) {
 utils.getYearForWeekNo = function(date) {
 	var dt = new Date(date.getTime());
 	var d = dt.getDay();
-	if(d==0) d=7;// JavaScript Sun=0, ISO Sun=7
+	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
 	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week
 	return dt.getFullYear();
 };

@@ -1,4 +1,4 @@
-/*global require: false, exports: false, process: false */
+/*jslint node: true */
 "use strict";
 
 var util = require("util");
@@ -154,7 +154,7 @@ WikiTextRules.rules = [
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
 					var theRow = {type: "tr", children: []};
-					WikiTextRules.setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow")
+					WikiTextRules.setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow");
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow.children,prevColumns);
 					rowCount++;

@@ -46,7 +46,7 @@ At this point tiddlers are placed in the store so that they can be referenced by
 
 */
 
-/*global require: false, exports: false, process: false */
+/*jslint node: true */
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,
@@ -347,7 +347,7 @@ Recipe.prototype.cookRss = function()
 	s.push("</rss>");
 	// Save it all
 	return s.join("\n");
-}
+};
 
 exports.Recipe = Recipe;
 

@@ -1,4 +1,4 @@
-/*global require: false, exports: false, console: false */
+/*jslint node: true */
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,

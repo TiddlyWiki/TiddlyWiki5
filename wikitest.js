@@ -9,6 +9,8 @@ verifying that the output matches `<tiddlername>.html` and `<tiddlername>.txt`.
 
 */
 
+/*jslint node: true */
+"use strict";
 
 var Tiddler = require("./js/Tiddler.js").Tiddler,
 	WikiStore = require("./js/WikiStore.js").WikiStore,

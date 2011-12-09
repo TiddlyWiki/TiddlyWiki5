@@ -23,7 +23,7 @@ Text nodes are:
 
 */
 
-/*global require: false, exports: false */
+/*jslint node: true */
 "use strict";
 
 var wikiTextMacros = require("./WikiTextMacros.js"),
@@ -55,7 +55,8 @@ WikiTextParser.prototype.render = function(type,store,title) {
 };
 
 WikiTextParser.prototype.renderAsHtml = function(store,title) {
-	var output = [];
+	var output = [],
+		renderSubTree;
 	var renderElement = function(element, selfClosing) {
 		var tagBits = [element.type];
 		if(element.attributes) {
@@ -79,7 +80,7 @@ WikiTextParser.prototype.renderAsHtml = function(store,title) {
 			output.push("</" + element.type + ">");
 		}
 	};
-	var renderSubTree = function(tree) {
+	renderSubTree = function(tree) {
 		for(var t=0; t<tree.length; t++) {
 			switch(tree[t].type) {
 				case "text":

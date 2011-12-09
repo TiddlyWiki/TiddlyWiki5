@@ -2,7 +2,7 @@
 TiddlyWiki command line interface
 */
 
-/*global require: false, exports: false, process: false */
+/*jslint node: true */
 "use strict";
 
 var WikiStore = require("./js/WikiStore.js").WikiStore,
@@ -33,9 +33,9 @@ var parseOptions = function(args,defaultSwitch) {
 				switchArgs.push(args[a++]);
 			switchRegExp.lastIndex = 0;
 			}
-			result.push({switch: m[1], args: switchArgs});
+			result.push({switchName: m[1], args: switchArgs});
 		} else {
-			result.push({switch: defaultSwitch, args: [args[a++]]});
+			result.push({switchName: defaultSwitch, args: [args[a++]]});
 		}
 	}
 	return result;
@@ -80,16 +80,15 @@ for(var t=0; t<shadowShadows.length; t++) {
 	shadowShadowStore.addTiddler(new Tiddler(shadowShadows[t]));
 }
 
-
 var processNextSwitch = function() {
 	if(currSwitch < switches.length) {
 		var s = switches[currSwitch++],
-			csw = commandLineSwitches[s.switch];
+			csw = commandLineSwitches[s.switchName];
 		if(s.args.length < csw.args.min) {
-			throw "Command line switch --" + s.switch + " should have a minimum of " + csw.args.min + " arguments"
+			throw "Command line switch --" + s.switchName + " should have a minimum of " + csw.args.min + " arguments";
 		}
 		if(s.args.length > csw.args.max) {
-			throw "Command line switch --" + s.switch + " should have a maximum of " + csw.args.max + " arguments"
+			throw "Command line switch --" + s.switchName + " should have a maximum of " + csw.args.max + " arguments";
 		}
 		csw.handler(s.args,function (err) {
 			if(err) {
