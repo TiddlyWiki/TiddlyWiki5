@@ -94,7 +94,7 @@ wikiTextMacros.macros = {
 	today: {
 		handler: function(macroNode,store,title) {
 			var now = new Date(),
-				args = new ArgParser(macroNode.params,{noNames:true}),
+				args = new ArgParser(macroNode.params,{noNames:true,cascadeDefaults:true}),
 				value = args.byPos[0] ? utils.formatDateString(now,args.byPos[0].v) : now.toLocaleString();
 			macroNode.output.push({type: "text", value: value});
 		}
