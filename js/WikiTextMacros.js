@@ -7,6 +7,7 @@ Wiki text macro implementation
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
+	WikiTextParserModule = require("./WikiTextParser.js"),
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -69,17 +70,19 @@ wikiTextMacros.macros = {
 	tiddler: {
 		handler: function(macroNode,store,tiddler) {
 			var args = new ArgParser(macroNode.params,{defaultName:"name"}),
-				title = args.getValueByName("name",null),
-				withTokens = args.getValuesByName("with",[]);
-			if(withTokens.length > 0) {
-				
-			} else {
-				// There are no substitution tokens, so just copy the parse tree of the tiddler
-				var copy = utils.deepCopy(store.getTiddler(title).getParseTree().tree);
-				for(var t=0; t<copy.length; t++) {
-					macroNode.output.push(copy[t]);
-				}
+				targetTitle = args.getValueByName("name",null),
+				withTokens = args.getValuesByName("with",[]),
+				text = store.getTiddlerText(targetTitle,"");
+			for(t=0; t<withTokens.length; t++) {
+				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
+				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
+			var parseTree = new WikiTextParserModule.WikiTextParser(text);
+			for(var t=0; t<parseTree.tree.length; t++) {
+				macroNode.output.push(parseTree.tree[t]);
+			}
+			// Execute any macros in the copy
+			wikiTextMacros.executeMacros(macroNode.output,store,tiddler);
 		}
 	},
 	timeline: {

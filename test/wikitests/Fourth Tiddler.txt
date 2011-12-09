@@ -1,1 +1,1 @@
-An image  and a couple of Ç Ç "HTML Entity"
+An image  and a $1 couple of Ç Ç "HTML Entity" and macro 0.0.0

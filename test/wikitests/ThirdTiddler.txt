@@ -1,1 +1,1 @@
-An explicit link Fourth Tiddler and a pretty link and a transclusion An image  and a couple of Ç Ç "HTML Entity"
+An explicit link Fourth Tiddler and a pretty link and a transclusion An image  and a Stringy couple of Ç Ç "HTML Entity" and macro 0.0.0
