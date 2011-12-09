@@ -47,20 +47,20 @@ function WikiTextRules()
 	this.rulesRegExp = new RegExp(pattern.join("|"),"mg");
 }
 
-WikiTextRules.createElementAndWikify = function(w) {
+var createElementAndWikify = function(w) {
 	var e = {type: this.element, children: []};
 	w.output.push(e);
 	w.subWikifyTerm(e.children,this.termRegExp);
 };
 
-WikiTextRules.setAttr = function(e,attr,value) {
+var setAttr = function(e,attr,value) {
 	if(!e.attributes) {
 		e.attributes = {};
 	}
 	e.attributes[attr] = value;
 };
 
-WikiTextRules.inlineCssHelper = function(w) {
+var inlineCssHelper = function(w) {
 	var styles = [];
 	textPrimitives.cssLookaheadRegExp.lastIndex = w.nextMatch;
 	var lookaheadMatch = textPrimitives.cssLookaheadRegExp.exec(w.source);
@@ -85,7 +85,7 @@ WikiTextRules.inlineCssHelper = function(w) {
 	return styles;
 };
 
-WikiTextRules.applyCssHelper = function(e,styles) {
+var applyCssHelper = function(e,styles) {
 	if(styles.length > 0) {
 		if(!e.attributes) {
 			e.attributes = {};
@@ -99,7 +99,7 @@ WikiTextRules.applyCssHelper = function(e,styles) {
 	}
 };
 
-WikiTextRules.enclosedTextHelper = function(w) {
+var enclosedTextHelper = function(w) {
 	this.lookaheadRegExp.lastIndex = w.matchStart;
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
@@ -154,7 +154,7 @@ WikiTextRules.rules = [
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
 					var theRow = {type: "tr", children: []};
-					WikiTextRules.setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow");
+					setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow");
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow.children,prevColumns);
 					rowCount++;
@@ -177,10 +177,10 @@ WikiTextRules.rules = [
 				var last = prevColumns[col];
 				if(last) {
 					last.rowSpanCount++;
-					WikiTextRules.setAttr(last.element,"rowspan",last.rowSpanCount);
-					WikiTextRules.setAttr(last.element,"valign","center");
+					setAttr(last.element,"rowspan",last.rowSpanCount);
+					setAttr(last.element,"valign","center");
 					if(colSpanCount > 1) {
-						WikiTextRules.setAttr(last.element,"colspan",colSpanCount);
+						setAttr(last.element,"colspan",colSpanCount);
 						colSpanCount = 1;
 					}
 				}
@@ -192,14 +192,14 @@ WikiTextRules.rules = [
 			} else if(cellMatch[2]) {
 				// End of row
 				if(prevCell && colSpanCount > 1) {
-					WikiTextRules.setAttr(prevCell,"colspan",colSpanCount);
+					setAttr(prevCell,"colspan",colSpanCount);
 				}
 				w.nextMatch = this.cellRegExp.lastIndex;
 				break;
 			} else {
 				// Cell
 				w.nextMatch++;
-				var styles = WikiTextRules.inlineCssHelper(w);
+				var styles = inlineCssHelper(w);
 				var spaceLeft = false;
 				var chr = w.source.substr(w.nextMatch,1);
 				while(chr == " ") {
@@ -219,15 +219,15 @@ WikiTextRules.rules = [
 				prevCell = cell;
 				prevColumns[col] = {rowSpanCount:1,element:cell};
 				if(colSpanCount > 1) {
-					WikiTextRules.setAttr(cell,"colspan",colSpanCount);
+					setAttr(cell,"colspan",colSpanCount);
 					colSpanCount = 1;
 				}
-				WikiTextRules.applyCssHelper(cell,styles);
+				applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell.children,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
-					WikiTextRules.setAttr(cell,"align",spaceLeft ? "center" : "left");
+					setAttr(cell,"align",spaceLeft ? "center" : "left");
 				else if(spaceLeft)
-					WikiTextRules.setAttr(cell,"align","right");
+					setAttr(cell,"align","right");
 				w.nextMatch--;
 			}
 			col++;
@@ -319,7 +319,7 @@ WikiTextRules.rules = [
 	match: "^<<<\\n",
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
-	handler: WikiTextRules.createElementAndWikify
+	handler: createElementAndWikify
 },
 
 {
@@ -390,7 +390,7 @@ WikiTextRules.rules = [
 		default:
 			break;
 		}
-		WikiTextRules.enclosedTextHelper.call(this,w);
+		enclosedTextHelper.call(this,w);
 	}
 },
 
@@ -433,10 +433,10 @@ WikiTextRules.rules = [
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
-				WikiTextRules.setAttr(e,"href",link);
+				setAttr(e,"href",link);
 			} else {
 				// Simple bracketted link
-				WikiTextRules.setAttr(e,"href",text);
+				setAttr(e,"href",text);
 			}
 			w.output.push(e);
 			e.children.push({type: "text", value: text});
@@ -465,7 +465,7 @@ WikiTextRules.rules = [
 		}
 		if(w.autoLinkWikiWords) {
 			var link = {type: "a", children: []};
-			WikiTextRules.setAttr(link,"href",w.matchText);
+			setAttr(link,"href",w.matchText);
 			w.output.push(link);
 			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
@@ -480,7 +480,7 @@ WikiTextRules.rules = [
 	handler: function(w)
 	{
 		var e = {type: "a", children: []};
-		WikiTextRules.setAttr(e,"href",w.matchText);
+		setAttr(e,"href",w.matchText);
 		w.output.push(e);
 		w.outputText(e.children,w.matchStart,w.nextMatch);
 	}
@@ -500,21 +500,21 @@ WikiTextRules.rules = [
 			if(lookaheadMatch[5]) {
 				var link = lookaheadMatch[5],
 					t = {type: "a", children: []};
-				WikiTextRules.setAttr(t,"href",link);
+				setAttr(t,"href",link);
 				w.output.push(t);
 				e = t.children;
 			}
 			var img = {type: "img"};
 			e.push(img);
 			if(lookaheadMatch[1])
-				WikiTextRules.setAttr(img,"align","left");
+				setAttr(img,"align","left");
 			else if(lookaheadMatch[2])
-				WikiTextRules.setAttr(img,"align","right");
+				setAttr(img,"align","right");
 			if(lookaheadMatch[3]) {
-				WikiTextRules.setAttr(img,"title",lookaheadMatch[3]);
-				WikiTextRules.setAttr(img,"alt",lookaheadMatch[3]);
+				setAttr(img,"title",lookaheadMatch[3]);
+				setAttr(img,"alt",lookaheadMatch[3]);
 			}
-			WikiTextRules.setAttr(img,"src",lookaheadMatch[4]);
+			setAttr(img,"src",lookaheadMatch[4]);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -609,11 +609,11 @@ WikiTextRules.rules = [
 		case "@@":
 			var e = {type: "span", children: []};
 			w.output.push(e);
-			var styles = WikiTextRules.inlineCssHelper(w);
+			var styles = inlineCssHelper(w);
 			if(styles.length === 0)
-				WikiTextRules.setAttr(e,"className","marked");
+				setAttr(e,"className","marked");
 			else
-				WikiTextRules.applyCssHelper(e,styles);
+				applyCssHelper(e,styles);
 			w.subWikifyTerm(e.children,/(@@)/mg);
 			break;
 		case "{{":
@@ -623,7 +623,7 @@ WikiTextRules.rules = [
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
 				e = {type: lookaheadMatch[2] == "\n" ? "div" : "span", children: []};
-				WikiTextRules.setAttr(e,"className",lookaheadMatch[1]);
+				setAttr(e,"className",lookaheadMatch[1]);
 				w.output.push(e);
 				w.subWikifyTerm(e.children,/(\}\}\})/mg);
 			}
