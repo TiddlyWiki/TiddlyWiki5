@@ -28,7 +28,6 @@ wikiTextMacros.executeMacros = function(tree,store,title) {
 
 wikiTextMacros.executeMacro = function(macroNode,store,title) {
 	var macroInfo = wikiTextMacros.macros[macroNode.name];
-console.error("Executing macro %s with params %s in tiddler %s",macroNode.name,0,title);
 	macroNode.output = [];
 	if(macroInfo) {
 		macroInfo.handler(macroNode,store,title);
