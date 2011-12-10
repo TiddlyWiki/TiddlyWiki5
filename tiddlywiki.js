@@ -127,6 +127,13 @@ var commandLineSwitches = {
 			process.nextTick(function() {callback(null);});
 		}
 	},
+	dumprecipe: {
+		args: {min: 0, max: 0},
+		handler: function(args,callback) {
+			console.log("Recipe is:\n%s",util.inspect(recipe,false,10));
+			process.nextTick(function() {callback(null);});
+		}
+	},
 	load: {
 		args: {min: 1, max: 1},
 		handler: function(args,callback) {

@@ -18,6 +18,8 @@ The command line options are processed in sequential order from left to right. P
 	--savetiddlers <outdir>		# Saves all the loaded tiddlers as `.tid` files in the specified directory
 	--servewiki <port>			# Serve the cooked TiddlyWiki over HTTP at `/`
 	--servetiddlers <port>		# Serve individual tiddlers over HTTP at `/tiddlertitle`
+	--dumpstore					# Dump the TiddlyWiki store in JSON format
+	--dumprecipe				# Dump the current recipe in JSON format
 	--verbose 					# verbose output, useful for debugging
 
 This example loads the tiddlers from a TiddlyWiki HTML file and makes them available over HTTP:
