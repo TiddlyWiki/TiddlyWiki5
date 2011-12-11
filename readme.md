@@ -46,6 +46,262 @@ You can use filepaths or URLs to reference recipe files and tiddlers. For exampl
 
 `test.sh` contains a simple test that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation). It also invokes `wikitest.js`, a wikification test rig that works off the data in `test/wikitests/`.
 
-## Current status
+## API
 
-As of 8th December 2011, cook.js can now build a fully functional TiddlyWiki and its RSS feed from the existing recipe files. There are two or three minor whitespace issues that prevent full byte-for-byte compatibility.
+Here is a guide to the key modules making up tiddlywiki.js and their public APIs. The modules are listed in order of dependency; modules generally don't know about other modules later in the list unless specifically noted.
+
+Some non-standard MIME types are used by the code:
+
+* **text/x-tiddlywiki:** TiddlyWiki-format wiki text
+* **application/x-tiddlywiki:** A TiddlyWiki HTML file containing tiddlers
+* **application/x-tiddler:** A tiddler in TiddlyWeb-style tiddler file format
+* **application/x-tiddler-html-div:** A tiddler in TiddlyWiki `<div>` format
+
+### Tiddler.js
+
+Tiddlers are an immutable dictionary of name:value pairs called fields. Values can be a string, an array of strings, or a JavaScript date object.
+
+The only field that is required is the `title` field, but useful tiddlers also have a `text` field, and some or all of the standard fields `modified`, `modifier`, `created`, `creator`, `tags` and `type`.
+
+Hardcoded in the system is the knowledge that the 'tags' field is a string array, and that the 'modified' and 'created' fields are dates. All other fields are strings.
+
+#### var tiddler = new Tiddler([srcFields{,srcFields}])
+
+Create a Tiddler given a series of sources of fields which can either be a plain hashmap of name:value pairs or an existing tiddler to clone. Fields in later sources overwrite the same field specified in earlier sources.
+
+The hashmaps can specify the  "modified" and "created" fields as strings in YYYYMMDDHHMMSSMMM format or as JavaScript date objects. The "tags" field can be given as a JavaScript array of strings or as a TiddlyWiki quoted string (eg, "one [[two three]]").
+
+#### tiddler.fields
+
+Returns a hashmap of tiddler fields, which can be used for read-only access
+
+#### tiddler.hasTag(tag)
+
+Returns a Boolean indicating whether the tiddler has a particular tag.
+
+#### tiddler.cache(name[,value])
+
+Returns or sets the value of a named cache object associated with the tiddler.
+
+### TiddlerConverters.js
+
+This class acts as a factory for tiddler serializers and deserializers.
+
+#### var tiddlerConverters = new TiddlerConverters()
+
+Creates a tiddler converter factory
+
+#### tiddlerConverters.registerSerializer(extension,mimeType,serializer)
+
+Registers a function that knows how to serialise a tiddler into a representation identified by a file extension and a MIME type. The serializer is called with a tiddler to convert and returns the string representation:
+
+	Tiddler.registerSerializer(".tiddler","application/x-tiddler-html-div",function (tiddler) {
+		return "<div" + "...>" + "</div>"; 
+	});
+
+#### tiddlerConverters.registerDeserializer(extension,mimeType,deserializer)
+
+Registers a function that knows how to deserialize one or more tiddlers from a block of text identified by a particular file extension and a MIME type. The deserializer is called with the text to convert and should return an array of tiddler field hashmaps:
+
+	Tiddler.registerDeserializer(".tid","application/x-tiddler",function (text,srcFields) {
+		var fields = copy(SrcFields);
+		// Assemble the fields from the text
+		return [fields];
+	});
+
+#### tiddlerConverters.deserialize(type,text,srcFields)
+
+Given a block of text and a MIME type or file extension, returns an array of hashmaps of tiddler fields. One or more source fields can be provided to pre-populate the tiddler before the text is parsed.
+
+If the type is not recognised then the raw text is assigned to the `text` field.
+
+#### tiddlerConverters.serialize(tiddler,type)
+
+Serializes a tiddler into a text representation identified by a MIME type or file extension.
+
+For example:
+
+	console.log(tiddlerConverters.serialize(tiddler,".tid"));
+
+### TiddlerInput.js and TiddlerOutput.js
+
+Contain classes that can be registered with a TiddlerConverters object to common formats.
+
+#### TiddlerInput.register(tiddlerConverters)
+
+Registers deserializers for these input types:
+
+	Extension	MIME types						Description
+	---------	---------						-----------
+	.tiddler	application/x-tiddler-html-div	TiddlyWiki storeArea-style <div>
+	.tid		application/x-tiddler			TiddlyWeb-style tiddler text file
+	.txt		text/plain						plain text file interpreted as the tiddler text
+	.html		text/html						plain HTML file interpreted as the tiddler text
+	.js			application/javascript			JavaScript file interpreted as the tiddler text
+	.json		application/json				JSON object containing an array of tiddler field hashmaps
+	.tiddlywiki	application/x-tiddlywiki		TiddlyWiki HTML document containing one or more tiddler <div>s
+
+#### TiddlerOutput.register(tiddlerConverters)
+
+Registers serializers for these output types:
+
+	Extension	MIME types						Description
+	---------	---------						-----------
+	.tiddler	application/x-tiddler-html-div	TiddlyWiki storeArea-style <div>
+	.tid		application/x-tiddler			TiddlyWeb-style tiddler text file
+
+### TextProcessors.js
+
+Text processors are components that know how to parse and render tiddlers of particular types. The core of TiddlyWiki is the WikiText processor, which can parse TiddlyWiki wikitext into a JavaScript object tree representation, and then render the tree into HTML or plain text. Other text processors planned include:
+
+* `JSONText` to allow JSON objects to display nicely, and make their content available with TiddlyWiki section/slice notation
+* `CSSText` to parse CSS, and process extensions such as transclusion, theming and variables
+* `JavaScriptText` to parse JavaScript tiddlers for clearer display, and allow sandboxed execution through compilation
+
+Note that text processors encapsulate two operations: parsing into a tree, and rendering that tree into text representations. Parsing doesn't need a context, but rendering needs to have access to a context consisting of a WikiStore to use to retrieve any referenced tiddlers, and the title of the tiddler that is being rendered.
+
+#### textProcessors = new TextProcessors()
+
+Applications should create a TextProcessors object to keep track of the available text processors.
+
+#### textProcessors.registerTextProcessor(mimeType,textProcessor)
+
+Registers an instance of a text processor class to handle text with a particular MIME type. For example:
+
+	var options = {
+		...
+	};
+	textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor(options));
+
+The text processor object must support the following methods:
+
+	// Parses some text and returns a parse tree object
+	var parseTree = textProcessor.parse(text)
+
+Parser objects support the following methods:
+
+	// Renders a subnode of the parse tree to a representation identified by MIME type,
+	// as if rendered within the context of the specified WikiStore and tiddler title
+	var renderedText = parseTree.render(type,treenode,store,title)
+
+#### textProcessors.parse(type,text)
+
+Chooses a text processor based on the MIME type of the content and calls the `parse` method to parse the text into a parse tree. Returns null if the type was not recognised by a registered parser.
+
+If the MIME type is unrecognised or unknown, it defaults to "text/x-tiddlywiki".
+
+### WikiTextProcessor.js
+
+A text processor that parses and renders TiddlyWiki style wiki text.
+
+This module privately includes the following modules:
+
+* WikiTextParser.js containing the wiki text parsing engine
+* WikiTextRules.js containing the rules driving the wiki text parsing engine
+* WikiTextRenderer.js containing the wiki text rendering engine
+* WikiTextMacros.js containing the predefined macros used by the renderer
+
+#### var wikiTextProcessor = new WikiTextProcessor(options)
+
+Creates a new instance of the wiki text processor with the specified options. The options are a hashmap of optional members as follows:
+
+* **enableRules:** An array of names of wiki text rules to enable. If not specified, all rules are available
+* **extraRules:** An array of additional rule handlers to add
+* **enableMacros:** An array of names of macros to enable. If not specified, all macros are available
+* **extraMacros:** An array of additional macro handlers to add
+
+### WikiStore.js
+
+A collection of uniquely titled tiddlers. Although the tiddlers themselves are immutable, new tiddlers can be stored under an existing title, replacing the previous tiddler.
+
+Each wiki store is connected to a shadow store that is also a WikiStore() object. Under certain circumstances, when an attempt is made to retrieve a tiddler that doesn't exist in the store, the search continues into its shadow store (and so on, if the shadow store itself has a shadow store).
+
+#### var store = new WikiStore(options)
+
+Creates a new wiki store. The options are a hashmap of optional members as follows:
+
+* **textProcessors:** A reference to the TextProcessors() instance to be used to resolve parsing and rendering requests
+* **shadowStore:** An optional reference to an existing WikiStore to use as the source of shadow tiddlers. Pass null to disable shadow tiddlers for the new store
+
+#### store.shadows
+
+Exposes a reference to the shadow store for this store.
+
+#### store.clear()
+
+Clears the store of all tiddlers.
+
+#### store.getTiddler(title)
+
+Attempts to retrieve the tiddler with a given title. Returns `null` if the tiddler doesn't exist.
+
+#### store.getTiddlerText(title,defaultText)
+
+Retrieves the text of a particular tiddler. If the tiddler doesn't exist, then the defaultText is returned, or `null` if not specified.
+
+#### store.deleteTiddler(title)
+
+Deletes the specified tiddler from the store.
+
+#### store.tiddlerExists(title)
+
+Returns a boolean indicating whether a particular tiddler exists.
+
+#### store.addTiddler(tiddler)
+
+Adds the specified tiddler object to the store. The tiddler can be specified as a Tiddler() object or a hashmap of tiddler fields.
+
+#### store.forEachTiddler([sortField,]callback)
+
+Invokes a callback for each tiddler in the store, optionally sorted by a particular field. The callback is called with the title of the tiddler and a reference to the tiddler itself. For example:
+
+	store.forEachTiddler(function(title,tiddler) {
+		console.log(title);
+	});
+
+#### store.parseTiddler(title)
+
+Returns the parse tree object for a tiddler, which may be cached within the tiddler.
+
+#### store.renderTiddler(type,title)
+
+Returns a dynamically generated rendering of the tiddler in a representation identified by a MIME type.
+
+### Recipe.js
+
+The Recipe() class loads a TiddlyWiki recipe file, resolving references to subrecipe files. Tiddlers referenced by the recipe are loaded into a WikiStore. A fully loaded recipe can then be cooked to produce an HTML or RSS TiddlyWiki representation of the recipe.
+
+#### var recipe = new Recipe(options,callback)
+
+Creates a new Recipe object by loading the specified recipe file. On completion the callback is invoked with a single parameter `err` that is null if the recipe loading was successful, or an Error() object otherwise.
+
+	var recipe = new Recipe({
+		filepath: "recent.recipe",
+		tiddlerConverters: tiddlerConverters,
+		store: store	
+	},function callback(err) {
+		if(err) {
+			throw err;
+		} else {
+			console.log(recipe.cook())
+		}
+	}
+
+Options is a hashmap with the following mandatory fields:
+
+* **filepath:** The filepath to the recipe file to load
+* **tiddlerConverters:** The TiddlerConverters() object to use to serialize and deserialize tiddlers
+* **textProcessors:** The TextProcessors() object to use to parse and render tiddler text
+* **store:** The WikiStore object to use to store the tiddlers in the recipe
+
+The options can also contain these optional fields:
+
+* (none at present)
+
+#### recipe.cook()
+
+Cooks a TiddlyWiki HTML file from the recipe and returns it as a string.
+
+#### recipe.cookRss()
+
+Cooks a TiddlyWiki RSS file from the recipe and returns it as a string.

@@ -4,9 +4,13 @@
 var Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util");
 
-var WikiStore = function WikiStore(shadowStore) {
+var WikiStore = function WikiStore(options) {
 	this.tiddlers = {};
-	this.shadows = shadowStore === undefined ? new WikiStore(null) : shadowStore;
+	this.shadows = options.shadowStore !== undefined ? options.shadowStore : new WikiStore({
+		shadowStore: null,
+		textProcessors: options.textProcessors
+	});
+	this.textProcessors = options.textProcessors;
 };
 
 WikiStore.prototype.clear = function() {
@@ -49,5 +53,23 @@ WikiStore.prototype.forEachTiddler = function(callback) {
 			callback.call(this,t,tiddler);
 	}
 };
+
+WikiStore.prototype.parseTiddler = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler) {
+		return this.textProcessors.parse(tiddler.fields.type,tiddler.fields.text);
+	} else {
+		return null;
+	}
+}
+
+WikiStore.prototype.renderTiddler = function(type,title) {
+	var parser = this.parseTiddler(title);
+	if(parser) {
+		return parser.render(type,parser.children,this,title);
+	} else {
+		return null;
+	}
+}
 
 exports.WikiStore = WikiStore;

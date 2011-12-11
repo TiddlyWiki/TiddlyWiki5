@@ -8,9 +8,10 @@ TiddlyWiki command line interface
 var WikiStore = require("./js/WikiStore.js").WikiStore,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	Recipe = require("./js/Recipe.js").Recipe,
-	Tiddler = require("./js/Tiddler.js").Tiddler,
 	tiddlerInput = require("./js/TiddlerInput.js"),
 	tiddlerOutput = require("./js/TiddlerOutput.js"),
+	TextProcessors = require("./js/TextProcessors.js").TextProcessors,
+	WikiTextProcessor = require("./js/WikiTextProcessor.js").WikiTextProcessor,
 	TiddlerConverters = require("./js/TiddlerConverters.js").TiddlerConverters,
 	util = require("util"),
 	fs = require("fs"),
@@ -42,19 +43,27 @@ var parseOptions = function(args,defaultSwitch) {
 	return result;
 };
 
-var tiddlerConverters = new TiddlerConverters(),
+var textProcessors = new TextProcessors(),
+	tiddlerConverters = new TiddlerConverters(),
 	switches = parseOptions(Array.prototype.slice.call(process.argv,2),"dummy"),
-	store = new WikiStore(),
+	store = new WikiStore({
+		textProcessors: textProcessors
+	}),
 	recipe = null,
 	lastRecipeFilepath = null,
 	currSwitch = 0;
 
+
+textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({}));
 // Register the standard tiddler serializers and deserializers
 tiddlerInput.register(tiddlerConverters);
 tiddlerOutput.register(tiddlerConverters);
 
 // Add the shadow tiddlers that are built into TiddlyWiki
-var shadowShadowStore = new WikiStore(null),
+var shadowShadowStore = new WikiStore({
+		textProcessors: textProcessors,
+		shadowStore: null
+	}),
 	shadowShadows = [
 		{title: "StyleSheet", text: ""},
 		{title: "MarkupPreHead", text: ""},
@@ -123,7 +132,8 @@ var commandLineSwitches = {
 				recipe = new Recipe({
 					filepath: args[0],
 					store: store,
-					tiddlerConverters: tiddlerConverters
+					tiddlerConverters: tiddlerConverters,
+					textProcessors: textProcessors
 				},function() {
 					callback(null);
 				});
@@ -203,7 +213,9 @@ var commandLineSwitches = {
 			// Dumbly, this implementation wastes the recipe processing that happened on the --recipe switch
 			http.createServer(function(request, response) {
 				response.writeHead(200, {"Content-Type": "text/html"});
-				store = new WikiStore();
+				store = new WikiStore({
+					textProcessors: textProcessors
+				});
 				recipe = new Recipe(store,lastRecipeFilepath,function() {
 					response.end(recipe.cook(), "utf8");	
 				});
@@ -219,7 +231,7 @@ var commandLineSwitches = {
 					tiddler = store.getTiddler(title);
 				if(tiddler) {
 					response.writeHead(200, {"Content-Type": "text/html"});
-					response.end(tiddler.getParseTree().render("text/html"),"utf8");					
+					response.end(store.renderTiddler("text/html",title),"utf8");					
 				} else {
 					response.writeHead(404);
 					response.end();

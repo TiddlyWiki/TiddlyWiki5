@@ -37,16 +37,6 @@ textPrimitives.tiddlerAnyLinkRegExp = new RegExp("("+ textPrimitives.wikiLink + 
 	textPrimitives.brackettedLink + ")|(?:" +
 	textPrimitives.urlPattern + ")","mg");
 
-function WikiTextRules()
-{
-	var pattern = [];
-	this.rules = WikiTextRules.rules;
-	for(var n=0; n<this.rules.length; n++) {
-		pattern.push("(" + this.rules[n].match + ")");
-	}
-	this.rulesRegExp = new RegExp(pattern.join("|"),"mg");
-}
-
 var createElementAndWikify = function(w) {
 	var e = {type: this.element, children: []};
 	w.output.push(e);
@@ -111,7 +101,7 @@ var enclosedTextHelper = function(w) {
 	}
 };
 
-WikiTextRules.rules = [
+var rules = [
 {
 	name: "table",
 	match: "^\\|(?:[^\\n]*)\\|(?:[fhck]?)$",
@@ -676,4 +666,4 @@ WikiTextRules.rules = [
 
 ];
 
-exports.wikiTextRules = new WikiTextRules();
+exports.rules = rules;

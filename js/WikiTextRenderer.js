@@ -6,27 +6,27 @@ Wiki text macro implementation
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
-	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
+	WikiTextParserModule = require("./WikiTextParser.js"),
 	utils = require("./Utils.js"),
 	util = require("util");
 
-var WikiTextRenderer = function(parser,store,title) {
+var WikiTextRenderer = function(store,title,parser) {
 	this.parser = parser;
 	this.store = store;
 	this.title = title;
 };
 
-WikiTextRenderer.prototype.render = function(type) {
+WikiTextRenderer.prototype.render = function(type,treenode) {
 	if(type === "text/html") {
-		return this.renderAsHtml();
+		return this.renderAsHtml(treenode);
 	} else if (type === "text/plain") {
-		return this.renderAsText();
+		return this.renderAsText(treenode);
 	} else {
 		return null;
 	}
 };
 
-WikiTextRenderer.prototype.renderAsHtml = function() {
+WikiTextRenderer.prototype.renderAsHtml = function(treenode) {
 	var output = [],
 		renderSubTree;
 	var renderElement = function(element, selfClosing) {
@@ -74,12 +74,12 @@ WikiTextRenderer.prototype.renderAsHtml = function() {
 			}
 		}
 	};
-	this.executeMacros(this.parser.tree);
-	renderSubTree(this.parser.tree);
+	this.executeMacros(treenode);
+	renderSubTree(treenode);
 	return output.join("");	
 };
 
-WikiTextRenderer.prototype.renderAsText = function() {
+WikiTextRenderer.prototype.renderAsText = function(treenode) {
 	var output = [];
 	var renderSubTree = function(tree) {
 		for(var t=0; t<tree.length; t++) {
@@ -104,8 +104,8 @@ WikiTextRenderer.prototype.renderAsText = function() {
 			}
 		}
 	};
-	this.executeMacros(this.parser.tree);
-	renderSubTree(this.parser.tree);
+	this.executeMacros(treenode);
+	renderSubTree(treenode);
 	return output.join("");	
 };
 
@@ -176,9 +176,9 @@ WikiTextRenderer.macros = {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			var parseTree = new WikiTextParser(text);
-			for(t=0; t<parseTree.tree.length; t++) {
-				macroNode.output.push(parseTree.tree[t]);
+			var parseTree = new WikiTextParserModule.WikiTextParser(text,this.parser.processor);
+			for(t=0; t<parseTree.children.length; t++) {
+				macroNode.output.push(parseTree.children[t]);
 			}
 			// Execute any macros in the copy
 			this.executeMacros(macroNode.output);

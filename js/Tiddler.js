@@ -116,27 +116,4 @@ Tiddler.specialTiddlerFieldParsers = {
 	}
 };
 
-Tiddler.prototype.getParseTree = function() {
-	if(!this.parseTree) {
-		var type = this.fields.type || "application/x-tiddlywikitext",
-		parser = Tiddler.tiddlerTextParsers[type];
-		if(parser) {
-			this.parseTree = Tiddler.tiddlerTextParsers[type].call(this);
-		}
-	}
-	return this.parseTree;
-};
-
-Tiddler.tiddlerTextParsers = {
-	"application/x-tiddlywikitext": function() {
-		return new WikiTextParser(this.fields.text);
-	},
-	"application/javascript": function() {
-		// Would be useful to parse so that we can do syntax highlighting and debugging
-	},
-	"application/json": function() {
-		return JSON.parse(this.fields.text);
-	}
-};
-
 exports.Tiddler = Tiddler;

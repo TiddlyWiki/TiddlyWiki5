@@ -14,7 +14,8 @@ verifying that the output matches `<tiddlername>.html` and `<tiddlername>.txt`.
 
 var Tiddler = require("./js/Tiddler.js").Tiddler,
 	WikiStore = require("./js/WikiStore.js").WikiStore,
-	WikiTextRenderer = require("./js/WikiTextRenderer.js").WikiTextRenderer,
+	TextProcessors = require("./js/TextProcessors.js").TextProcessors,
+	WikiTextProcessor = require("./js/WikiTextProcessor.js").WikiTextProcessor,
 	TiddlerConverters = require("./js/TiddlerConverters.js").TiddlerConverters,
 	tiddlerInput = require("./js/TiddlerInput.js"),
 	utils = require("./js/Utils.js"),
@@ -23,12 +24,16 @@ var Tiddler = require("./js/Tiddler.js").Tiddler,
 	path = require("path");
 
 var testdirectory = process.argv[2],
+	textProcessors = new TextProcessors(),
 	tiddlerConverters = new TiddlerConverters(),
-	store = new WikiStore(),
+	store = new WikiStore({
+		textProcessors: textProcessors
+	}),
 	files = fs.readdirSync(testdirectory),
 	titles = [],
 	f,t,extname,basename;
 
+textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({}));
 tiddlerInput.register(tiddlerConverters);
 
 for(f=0; f<files.length; f++) {
@@ -46,10 +51,9 @@ for(f=0; f<files.length; f++) {
 for(t=0; t<titles.length; t++) {
 	var htmlTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".html"),"utf8"),
 		plainTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".txt"),"utf8"),
-		parser = store.getTiddler(titles[t]).getParseTree(),
-		renderer = new WikiTextRenderer(parser,store,titles[t]),
-		htmlRender = renderer.render("text/html"),
-		plainRender = renderer.render("text/plain");
+		tiddler = store.getTiddler(titles[t]),
+		htmlRender = store.renderTiddler("text/html",titles[t]),
+		plainRender = store.renderTiddler("text/plain",titles[t]);
 	if(htmlTarget !== htmlRender) {
 		console.error("Tiddler %s html error\nTarget: %s\nFound: %s\n",titles[t],htmlTarget,htmlRender);
 	}

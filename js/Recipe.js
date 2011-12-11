@@ -50,7 +50,6 @@ At this point tiddlers are placed in the store so that they can be referenced by
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,
-	WikiTextRenderer = require("./WikiTextRenderer").WikiTextRenderer,
 	utils = require("./Utils.js"),
 	retrieveFile = require("./FileRetriever.js").retrieveFile,
 	fs = require("fs"),
@@ -63,6 +62,7 @@ var Recipe = function(options,callback) {
 	this.filepath = options.filepath;
 	this.store = options.store;
 	this.tiddlerConverters = options.tiddlerConverters;
+	this.textProcessors = options.textProcessors;
 	this.callback = callback;
 	this.recipe = [];
 	this.markers = {};
@@ -280,7 +280,7 @@ Recipe.tiddlerOutputter = {
 		}
 	},
 	title: function(out,tiddlers) {
-		out.push(this.renderTiddler("WindowTitle","text/plain"));
+		out.push(this.store.renderTiddler("text/plain","WindowTitle"));
 	}
 };
 
@@ -291,13 +291,13 @@ Recipe.prototype.cookRss = function()
 		numRssItems = 20,
 		s = [],
 		d = new Date(),
-		u = this.renderTiddler("SiteUrl","text/plain"),
+		u = this.store.renderTiddler("text/plain","SiteUrl"),
 		encodeTiddlyLink = function(title) {
 			return title.indexOf(" ") == -1 ? title : "[[" + title + "]]";
 		},
 		tiddlerToRssItem = function(tiddler,uri) {
 			var s = "<title" + ">" + utils.htmlEncode(tiddler.fields.title) + "</title" + ">\n";
-			s += "<description>" + utils.htmlEncode(me.renderTiddler(tiddler.fields.title,"text/plain")) + "</description>\n";
+			s += "<description>" + utils.htmlEncode(me.store.renderTiddler("text/plain",tiddler.fields.title)) + "</description>\n";
 			var i;
 			if(tiddler.fields.tags) {
 				for(i=0; i<tiddler.fields.tags.length; i++) {
@@ -336,10 +336,10 @@ Recipe.prototype.cookRss = function()
 	s.push("<" + "?xml version=\"1.0\"?" + ">");
 	s.push("<rss version=\"2.0\">");
 	s.push("<channel>");
-	s.push("<title" + ">" + utils.htmlEncode(this.renderTiddler("SiteTitle","text/plain")) + "</title" + ">");
+	s.push("<title" + ">" + utils.htmlEncode(this.store.renderTiddler("text/plain","SiteTitle")) + "</title" + ">");
 	if(u)
 		s.push("<link>" + utils.htmlEncode(u) + "</link>");
-	s.push("<description>" + utils.htmlEncode(this.renderTiddler("SiteSubtitle","text/plain")) + "</description>");
+	s.push("<description>" + utils.htmlEncode(this.store.renderTiddler("text/plain","SiteSubtitle")) + "</description>");
 	//s.push("<language>" + config.locale + "</language>");
 	s.push("<pubDate>" + d.toUTCString() + "</pubDate>");
 	s.push("<lastBuildDate>" + d.toUTCString() + "</lastBuildDate>");
@@ -356,11 +356,6 @@ Recipe.prototype.cookRss = function()
 	s.push("</rss>");
 	// Save it all
 	return s.join("\n");
-};
-
-Recipe.prototype.renderTiddler = function(title,type) {
-	var r = new WikiTextRenderer(this.store.getTiddler(title).getParseTree(),this.store,title);
-	return r.render(type);
 };
 
 exports.Recipe = Recipe;

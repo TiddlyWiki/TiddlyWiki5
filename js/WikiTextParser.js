@@ -26,17 +26,18 @@ Text nodes are:
 /*jslint node: true */
 "use strict";
 
-var wikiTextRules = require("./WikiTextRules.js").wikiTextRules,
+var WikiTextRenderer = require("./WikiTextRenderer.js").WikiTextRenderer,
 	utils = require("./Utils.js"),
 	util = require("util");
 
-var WikiTextParser = function(text) {
+var WikiTextParser = function(text,processor) {
+	this.processor = processor;
 	this.autoLinkWikiWords = true;
 	this.source = text;
 	this.nextMatch = 0;
-	this.tree = [];
+	this.children = [];
 	this.output = null;
-	this.subWikify(this.tree);
+	this.subWikify(this.children);
 };
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
@@ -58,8 +59,8 @@ WikiTextParser.prototype.subWikifyUnterm = function(output) {
 	var oldOutput = this.output;
 	this.output = output;
 	// Get the first match
-	wikiTextRules.rulesRegExp.lastIndex = this.nextMatch;
-	var ruleMatch = wikiTextRules.rulesRegExp.exec(this.source);
+	this.processor.rulesRegExp.lastIndex = this.nextMatch;
+	var ruleMatch = this.processor.rulesRegExp.exec(this.source);
 	while(ruleMatch) {
 		// Output any text before the match
 		if(ruleMatch.index > this.nextMatch)
@@ -68,18 +69,18 @@ WikiTextParser.prototype.subWikifyUnterm = function(output) {
 		this.matchStart = ruleMatch.index;
 		this.matchLength = ruleMatch[0].length;
 		this.matchText = ruleMatch[0];
-		this.nextMatch = wikiTextRules.rulesRegExp.lastIndex;
+		this.nextMatch = this.processor.rulesRegExp.lastIndex;
 		// Figure out which rule matched and call its handler
 		var t;
 		for(t=1; t<ruleMatch.length; t++) {
 			if(ruleMatch[t]) {
-				wikiTextRules.rules[t-1].handler(this);
-				wikiTextRules.rulesRegExp.lastIndex = this.nextMatch;
+				this.processor.rules[t-1].handler(this);
+				this.processor.rulesRegExp.lastIndex = this.nextMatch;
 				break;
 			}
 		}
 		// Get the next match
-		ruleMatch = wikiTextRules.rulesRegExp.exec(this.source);
+		ruleMatch = this.processor.rulesRegExp.exec(this.source);
 	}
 	// Output any text after the last match
 	if(this.nextMatch < this.source.length) {
@@ -97,8 +98,8 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 	// Get the first matches for the rule and terminator RegExps
 	terminatorRegExp.lastIndex = this.nextMatch;
 	var terminatorMatch = terminatorRegExp.exec(this.source);
-	wikiTextRules.rulesRegExp.lastIndex = this.nextMatch;
-	var ruleMatch = wikiTextRules.rulesRegExp.exec(terminatorMatch ? this.source.substr(0,terminatorMatch.index) : this.source);
+	this.processor.rulesRegExp.lastIndex = this.nextMatch;
+	var ruleMatch = this.processor.rulesRegExp.exec(terminatorMatch ? this.source.substr(0,terminatorMatch.index) : this.source);
 	while(terminatorMatch || ruleMatch) {
 		// Check for a terminator match before the next rule match
 		if(terminatorMatch && (!ruleMatch || terminatorMatch.index <= ruleMatch.index)) {
@@ -121,20 +122,20 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 		this.matchStart = ruleMatch.index;
 		this.matchLength = ruleMatch[0].length;
 		this.matchText = ruleMatch[0];
-		this.nextMatch = wikiTextRules.rulesRegExp.lastIndex;
+		this.nextMatch = this.processor.rulesRegExp.lastIndex;
 		// Figure out which rule matched and call its handler
 		var t;
 		for(t=1; t<ruleMatch.length; t++) {
 			if(ruleMatch[t]) {
-				wikiTextRules.rules[t-1].handler(this);
-				wikiTextRules.rulesRegExp.lastIndex = this.nextMatch;
+				this.processor.rules[t-1].handler(this);
+				this.processor.rulesRegExp.lastIndex = this.nextMatch;
 				break;
 			}
 		}
 		// Get the next match
 		terminatorRegExp.lastIndex = this.nextMatch;
 		terminatorMatch = terminatorRegExp.exec(this.source);
-		ruleMatch = wikiTextRules.rulesRegExp.exec(terminatorMatch ? this.source.substr(0,terminatorMatch.index) : this.source);
+		ruleMatch = this.processor.rulesRegExp.exec(terminatorMatch ? this.source.substr(0,terminatorMatch.index) : this.source);
 	}
 	// Output any text after the last match
 	if(this.nextMatch < this.source.length) {
@@ -143,6 +144,11 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 	}
 	// Restore the output pointer
 	this.output = oldOutput;
+};
+
+WikiTextParser.prototype.render = function(type,treenode,store,title) {
+	var renderer = new WikiTextRenderer(store,title,this);
+	return renderer.render(type,treenode);
 };
 
 exports.WikiTextParser = WikiTextParser;
