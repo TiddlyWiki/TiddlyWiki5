@@ -1,6 +1,5 @@
 /*
-FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system. It incorporates
-throttling so that we don't get error EMFILE "Too many open files".
+FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system
 */
 
 /*jslint node: true */
