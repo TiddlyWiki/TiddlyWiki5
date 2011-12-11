@@ -1,19 +1,5 @@
 /*
 
-Recipe files consist of recipe lines consisting of a marker, a colon and the pathname of an ingredient:
-
-marker: filepath
-
-The filepath is interpreted relative to the directory containing the recipe file.
-
-The special marker "recipe" is used to load a sub-recipe file.
-
-The special marker "template" is used to identify the HTML template. The HTML template contains
-markers in two different forms:
-
-<!--@@marker@@-->
-&lt;!--@@marker@@--&gt;
-
 Recipe processing is in four parts:
 
 1) The recipe file is parsed and any subrecipe files loaded recursively into this structure:

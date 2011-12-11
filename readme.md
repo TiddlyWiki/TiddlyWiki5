@@ -4,7 +4,7 @@ This is an attempt to modernise TiddlyWiki's build system, which has been based 
 
 This new version is written in JavaScript for node.js, with the intention that it can share code with TiddlyWiki itself.
 
-The goal is to achieve byte-for-byte compatibility with the old tools, but only to support the features required by the recipe files that are currently in use by TiddlyWiki and TiddlySpace. One of the difficulties is that cook.rb is very buggy; the current build process for tiddlywiki.com relies on TiddlyWiki itself doing a save operation in the browser to clear up problems with duplicate tiddlers and badly formed attributes.
+The original goal was to achieve byte-for-byte compatibility with the old tools. However, so many bugs have been discovered in the old tools that the new goal is to achieve byte-for-byte compatibility with TiddlyWiki itself when it saves changes.
 
 ## Usage
 
@@ -41,6 +41,71 @@ You can use filepaths or URLs to reference recipe files and tiddlers. For exampl
 	recipe: https://raw.github.com/TiddlyWiki/tiddlywiki/master/tiddlywikinonoscript.html.recipe
 	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com-ref_public/tiddlers.json?fat=1
 	tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com_public/tiddlers.json?fat=1
+
+## Recipe files
+
+`.recipe` files are text files that list the components to be assembled into a TiddlyWiki. They link to a simple template file that contains the basic structure of the TiddlyWiki document with additional markers to identify parts of the file where ingredients are inserted. Recipes determine which tiddlers should be included in the file, and put together the individual JavaScript files making up the TiddlyWiki core code.
+
+Each line of the recipe file lists an ingredient, prefixed with a tag that describes what to do with the ingredient. Tags either identify a marker within the template file or are special tags that initiate an action.
+
+Recipe files contain lines consisting of a marker, a colon and the pathname of an ingredient:
+
+	marker: filepath
+
+The filepath is interpreted relative to the directory containing the recipe file.
+
+The special marker `recipe` is used to load a sub-recipe file.
+
+The special marker `template` is used to identify the HTML template. The HTML template contains markers in two different forms:
+
+	<!--@@marker@@-->
+	&lt;!--@@marker@@--&gt;
+
+The special marker `title` is automatically filled in with a plain text rendering of the WindowTitle tiddler.
+
+The special marker `tiddler` is used for the main content tiddlers that will be encoded in TiddlyWiki `<DIV>` format.
+
+The special marker `copy` is used to indicate files that should be copied alongside the finished TiddlyWiki file.
+
+## Tiddler files
+
+Tiddlers can be stored in text files in several different formats. Files containing single tiddlers can also have an auxiliary `.meta` file formatted as a sequence of name:value pairs:
+
+	title: TheTitle
+	modifier: someone
+
+### TiddlyWeb-style .tid files
+
+These files consist of a sequence of lines containing name:value pairs, a blank line and then the text of the tiddler. For example:
+
+	title: MyTiddler
+	modifier: Jeremy
+
+	This is the text of my tiddler.
+
+### TiddlyWiki `<DIV>` .tiddler files
+
+Modern `*.tiddler` files look like this:
+
+	<div title="AnotherExampleStyleSheet" modifier="blaine" created="201102111106" modified="201102111310" tags="examples" creator="psd">
+	<pre>Note that there is an embedded <pre> tag, and line feeds are not escaped.
+	
+	And, weirdly, there is no HTML encoding of the body.</pre>
+	</div>
+
+These `*.tiddler` files are therefore not quite the same as the tiddlers found inside a TiddlyWiki HTML file, where the body is HTML encoded in the expected way.
+
+Older `*.tiddler` files more closely matched the store format used by TiddlyWiki at the time:
+
+	<div tiddler="AnotherExampleStyleSheet" modifier="JeremyRuston" modified="200508181432" created="200508181432" tags="examples">This is an old-school .tiddler file, without an embedded &lt;pre&gt; tag.\nNote how the body is &quot;HTML encoded&quot; and new lines are escaped to \\n</div>
+
+### TiddlyWeb-style JSON files
+
+These files are a straightforward array of hashmaps of name:value fields. Currently only these known fields are processed: `title`, `text`, `created`, `creator`, `modified`, `modifier`, `type` and `tags`.
+
+### TiddlyWiki HTML files
+
+TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
 
 ## Testing
 
