@@ -15,22 +15,26 @@ verifying that the output matches `<tiddlername>.html` and `<tiddlername>.txt`.
 var Tiddler = require("./js/Tiddler.js").Tiddler,
 	WikiStore = require("./js/WikiStore.js").WikiStore,
 	WikiTextRenderer = require("./js/WikiTextRenderer.js").WikiTextRenderer,
-	tiddlerInput = require("./js/TiddlerInput"),
+	TiddlerConverters = require("./js/TiddlerConverters.js").TiddlerConverters,
+	tiddlerInput = require("./js/TiddlerInput.js"),
 	utils = require("./js/Utils.js"),
 	util = require("util"),
 	fs = require("fs"),
 	path = require("path");
 
 var testdirectory = process.argv[2],
+	tiddlerConverters = new TiddlerConverters(),
 	store = new WikiStore(),
 	files = fs.readdirSync(testdirectory),
 	titles = [],
 	f,t,extname,basename;
 
+tiddlerInput.register(tiddlerConverters);
+
 for(f=0; f<files.length; f++) {
 	extname = path.extname(files[f]);
 	if(extname === ".tid") {
-		var tiddlers = tiddlerInput.parseTiddlerFile(fs.readFileSync(path.resolve(testdirectory,files[f]),"utf8"),extname);
+		var tiddlers = tiddlerConverters.deserialize(extname,fs.readFileSync(path.resolve(testdirectory,files[f]),"utf8"));
 		if(tiddlers.length > 1) {
 			throw "Cannot use .JSON files";
 		}

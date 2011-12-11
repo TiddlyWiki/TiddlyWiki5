@@ -9,8 +9,9 @@ var WikiStore = require("./js/WikiStore.js").WikiStore,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	Recipe = require("./js/Recipe.js").Recipe,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
-	tiddlerOutput = require("./js/TiddlerOutput.js"),
 	tiddlerInput = require("./js/TiddlerInput.js"),
+	tiddlerOutput = require("./js/TiddlerOutput.js"),
+	TiddlerConverters = require("./js/TiddlerConverters.js").TiddlerConverters,
 	util = require("util"),
 	fs = require("fs"),
 	url = require("url"),
@@ -41,11 +42,16 @@ var parseOptions = function(args,defaultSwitch) {
 	return result;
 };
 
-var switches = parseOptions(Array.prototype.slice.call(process.argv,2),"dummy"),
+var tiddlerConverters = new TiddlerConverters(),
+	switches = parseOptions(Array.prototype.slice.call(process.argv,2),"dummy"),
 	store = new WikiStore(),
 	recipe = null,
 	lastRecipeFilepath = null,
 	currSwitch = 0;
+
+// Register the standard tiddler serializers and deserializers
+tiddlerInput.register(tiddlerConverters);
+tiddlerOutput.register(tiddlerConverters);
 
 // Add the shadow tiddlers that are built into TiddlyWiki
 var shadowShadowStore = new WikiStore(null),
@@ -114,7 +120,11 @@ var commandLineSwitches = {
 				callback("--recipe: Cannot process more than one recipe file");
 			} else {
 				lastRecipeFilepath = args[0];
-				recipe = new Recipe(store,args[0],function() {
+				recipe = new Recipe({
+					filepath: args[0],
+					store: store,
+					tiddlerConverters: tiddlerConverters
+				},function() {
 					callback(null);
 				});
 			}

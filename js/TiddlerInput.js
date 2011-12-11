@@ -11,117 +11,7 @@ var utils = require("./Utils.js"),
 var tiddlerInput = exports;
 
 /*
-Parse a tiddler given its mimetype, and merge the results into a hashmap of tiddler fields.
-
-A file extension can be passed as a shortcut for the mimetype, as shown in tiddlerUtils.fileExtensionMappings.
-For example ".txt" file extension is mapped to the "text/plain" mimetype.
-
-Special processing to extract embedded metadata is applied to some mimetypes.
-*/
-
-tiddlerInput.parseTiddlerFile = function(text,type,fields) {
-	// Map extensions to mimetpyes
-	var fileExtensionMapping = tiddlerInput.fileExtensionMappings[type];
-	if(fileExtensionMapping)
-		type = fileExtensionMapping;
-	// Invoke the parser for the specified mimetype
-	var parser = tiddlerInput.parseTiddlerFileByMimeType[type];
-	if(!parser)
-		parser = tiddlerInput.parseTiddlerFileByMimeType["text/plain"];
-	return parser(text,fields);
-};
-
-tiddlerInput.fileExtensionMappings = {
-	".txt": "text/plain",
-	".html": "text/html",
-	".tiddler": "application/x-tiddler-html-div",
-	".tid": "application/x-tiddler",
-	".js": "application/javascript",
-	".json": "application/json",
-	".tiddlywiki": "application/x-tiddlywiki"
-};
-
-tiddlerInput.parseTiddlerFileByMimeType = {
-	"text/plain": function(text,fields) {
-		fields.text = text;
-		return [fields];
-	},
-	"text/html": function(text,fields) {
-		fields.text = text;
-		return [fields];
-	},
-	"application/x-tiddler-html-div": function(text,fields) {
-		return [tiddlerInput.parseTiddlerDiv(text,fields)];
-	},
-	"application/x-tiddler": function(text,fields) {
-		var split = text.indexOf("\n\n");
-		if(split === -1) {
-			split = text.length;
-		}
-		fields = tiddlerInput.parseMetaDataBlock(text.substr(0,split),fields);
-		fields.text = text.substr(split + 2);
-		return [fields];
-	},
-	"application/javascript": function(text,fields) {
-		fields.text = text;
-		return [fields];
-	},
-	"application/json": function(text,fields) {
-		var tiddlers = JSON.parse(text),
-			result = [],
-			getKnownFields = function(tid) {
-				var fields = {};
-				"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
-					fields[value] = tid[value];
-				});
-				return fields;
-			};
-		for(var t=0; t<tiddlers.length; t++) {
-			result.push(getKnownFields(tiddlers[t]));
-		}
-		return result;
-	},
-	"application/x-tiddlywiki": function(text,fields) {
-		var results = [],
-			storeAreaPos = tiddlerInput.locateStoreArea(text);
-		if(storeAreaPos) {
-			var endOfDivRegExp = /(<\/div>\s*)/gi,
-				startPos = storeAreaPos[0];
-			endOfDivRegExp.lastIndex = startPos;
-			var match = endOfDivRegExp.exec(text);
-			while(match && startPos < storeAreaPos[1]) {
-				var endPos = endOfDivRegExp.lastIndex,
-					tiddlerFields = tiddlerInput.parseTiddlerDiv(text.substring(startPos,endPos),fields);
-				tiddlerFields.text = utils.htmlDecode(tiddlerFields.text);
-				results.push(tiddlerFields);
-				startPos = endPos;
-				match = endOfDivRegExp.exec(text);
-			}
-		}
-		return results;
-	}
-};
-
-tiddlerInput.locateStoreArea = function(tiddlywikidoc) {
-	var startSaveArea = '<div id="' + 'storeArea">',
-		startSaveAreaRegExp = /<div id=["']?storeArea['"]?>/gi,
-		endSaveArea = '</d' + 'iv>',
-		endSaveAreaCaps = '</D' + 'IV>',
-		posOpeningDiv = tiddlywikidoc.search(startSaveAreaRegExp),
-		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-STOREAREA--"+">");
-	if(limitClosingDiv == -1) {
-		limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-BODY-START--"+">");
-	}
-	var start = limitClosingDiv == -1 ? tiddlywikidoc.length : limitClosingDiv,
-		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveArea,start);
-	if(posClosingDiv == -1) {
-		posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveAreaCaps,start);
-	}
-	return (posOpeningDiv != -1 && posClosingDiv != -1) ? [posOpeningDiv + startSaveArea.length,posClosingDiv] : null;
-};
-
-/*
-Parse a block of metadata and merge the results into a hashmap of tiddler fields.
+Utility function to parse a block of metadata and merge the results into a hashmap of tiddler fields.
 
 The block consists of newline delimited lines consisting of the field name, a colon, and then the value. For example:
 
@@ -132,7 +22,7 @@ modified: 20110211131020
 tags: browsers issues
 creator: psd
 */
-tiddlerInput.parseMetaDataBlock = function(metaData,fields) {
+var parseMetaDataBlock = function(metaData,fields) {
 	var result = {};
 	if(fields) {
 		for(var t in fields) {
@@ -151,7 +41,7 @@ tiddlerInput.parseMetaDataBlock = function(metaData,fields) {
 };
 
 /*
-Parse an old-style tiddler DIV. It looks like this:
+Utility function to parse an old-style tiddler DIV. It looks like this:
 
 <div title="Title" creator="JoeBloggs" modifier="JoeBloggs" created="201102111106" modified="201102111310" tags="myTag [[my long tag]]">
 <pre>The text of the tiddler (without the expected HTML encoding).
@@ -160,7 +50,7 @@ Parse an old-style tiddler DIV. It looks like this:
 
 Note that the field attributes are HTML encoded, but that the body of the <PRE> tag is not.
 */
-tiddlerInput.parseTiddlerDiv = function(text,fields) {
+var parseTiddlerDiv = function(text,fields) {
 	var result = {};
 	if(fields) {
 		for(var t in fields) {
@@ -189,4 +79,86 @@ tiddlerInput.parseTiddlerDiv = function(text,fields) {
 		} while(attrMatch);
 	}
 	return result;	
+};
+
+var inputTiddlerPlain = function(text,fields) {
+	fields.text = text;
+	return [fields];
+};
+
+var inputTiddlerDiv = function(text,fields) {
+	return [parseTiddlerDiv(text,fields)];
+};
+
+var inputTiddler = function(text,fields) {
+	var split = text.indexOf("\n\n");
+	if(split !== -1) {
+		fields.text = text.substr(split + 2);
+	}
+	if(split === -1) {
+		split = text.length;
+	}
+	fields = parseMetaDataBlock(text.substr(0,split),fields);
+	return [fields];
+};
+
+var inputTiddlerJSON = function(text,fields) {
+	var tiddlers = JSON.parse(text),
+		result = [],
+		getKnownFields = function(tid) {
+			var fields = {};
+			"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
+				fields[value] = tid[value];
+			});
+			return fields;
+		};
+	for(var t=0; t<tiddlers.length; t++) {
+		result.push(getKnownFields(tiddlers[t]));
+	}
+	return result;
+};
+
+var inputTiddlyWiki = function(text,fields) {
+	var locateStoreArea = function(tiddlywikidoc) {
+			var startSaveArea = '<div id="' + 'storeArea">',
+				startSaveAreaRegExp = /<div id=["']?storeArea['"]?>/gi,
+				endSaveArea = '</d' + 'iv>',
+				endSaveAreaCaps = '</D' + 'IV>',
+				posOpeningDiv = tiddlywikidoc.search(startSaveAreaRegExp),
+				limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-STOREAREA--"+">");
+			if(limitClosingDiv == -1) {
+				limitClosingDiv = tiddlywikidoc.indexOf("<"+"!--POST-BODY-START--"+">");
+			}
+			var start = limitClosingDiv == -1 ? tiddlywikidoc.length : limitClosingDiv,
+				posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveArea,start);
+			if(posClosingDiv == -1) {
+				posClosingDiv = tiddlywikidoc.lastIndexOf(endSaveAreaCaps,start);
+			}
+			return (posOpeningDiv != -1 && posClosingDiv != -1) ? [posOpeningDiv + startSaveArea.length,posClosingDiv] : null;
+		},
+		results = [],
+		storeAreaPos = locateStoreArea(text);
+	if(storeAreaPos) {
+		var endOfDivRegExp = /(<\/div>\s*)/gi,
+			startPos = storeAreaPos[0];
+		endOfDivRegExp.lastIndex = startPos;
+		var match = endOfDivRegExp.exec(text);
+		while(match && startPos < storeAreaPos[1]) {
+			var endPos = endOfDivRegExp.lastIndex,
+				tiddlerFields = parseTiddlerDiv(text.substring(startPos,endPos),fields);
+			tiddlerFields.text = utils.htmlDecode(tiddlerFields.text);
+			results.push(tiddlerFields);
+			startPos = endPos;
+			match = endOfDivRegExp.exec(text);
+		}
+	}
+	return results;
+};
+
+tiddlerInput.register = function(tiddlerConverters) {
+	tiddlerConverters.registerDeserializer(".txt","text/plain",inputTiddlerPlain);
+	tiddlerConverters.registerDeserializer(".tiddler","application/x-tiddler-html-div",inputTiddlerDiv);
+	tiddlerConverters.registerDeserializer(".tid","application/x-tiddler",inputTiddler);
+	tiddlerConverters.registerDeserializer(".json","application/json",inputTiddlerJSON);
+	tiddlerConverters.registerDeserializer(".tiddlywiki","application/x-tiddlywiki",inputTiddlyWiki);
 };

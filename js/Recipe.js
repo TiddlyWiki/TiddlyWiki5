@@ -51,8 +51,6 @@ At this point tiddlers are placed in the store so that they can be referenced by
 
 var Tiddler = require("./Tiddler.js").Tiddler,
 	WikiTextRenderer = require("./WikiTextRenderer").WikiTextRenderer,
-	tiddlerInput = require("./TiddlerInput.js"),
-	tiddlerOutput = require("./TiddlerOutput.js"),
 	utils = require("./Utils.js"),
 	retrieveFile = require("./FileRetriever.js").retrieveFile,
 	fs = require("fs"),
@@ -60,11 +58,11 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util"),
 	async = require("async");
 
-// Create a new Recipe object from the specified recipe file, storing the tiddlers in a specified TiddlyWiki store. Invoke
-// the callback function when all of the referenced tiddlers and recipes have been loaded successfully
-var Recipe = function(store,filepath,callback) {
+var Recipe = function(options,callback) {
 	var me = this;
-	this.store = store; // Save a reference to the store
+	this.filepath = options.filepath;
+	this.store = options.store;
+	this.tiddlerConverters = options.tiddlerConverters;
 	this.callback = callback;
 	this.recipe = [];
 	this.markers = {};
@@ -94,9 +92,9 @@ var Recipe = function(store,filepath,callback) {
 	this.tiddlerQueue.drain = function() {
 		me.chooseTiddlers(me.recipe);
 		me.sortTiddlersForMarker("tiddler");
-		me.callback();
+		me.callback(null);
 	};
-	this.recipeQueue.push({filepath: filepath,
+	this.recipeQueue.push({filepath: this.filepath,
 							contextPath: process.cwd(),
 							recipe: this.recipe});
 };
@@ -176,7 +174,7 @@ Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
 		var fields = {
 			title: data.path
 		};
-		var tiddlers = tiddlerInput.parseTiddlerFile(data.text,data.extname,fields);
+		var tiddlers = me.tiddlerConverters.deserialize(data.extname,data.text,fields);
 		// Check for the .meta file
 		if(data.extname !== ".json" && tiddlers.length === 1) {
 			var metafile = filepath + ".meta";
@@ -186,7 +184,10 @@ Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
 				} else {
 					var fields = tiddlers[0];
 					if(!err) {
-						fields = tiddlerInput.parseMetaDataBlock(data.text,fields);
+						var text = data.text.split("\n\n")[0];
+						if(text) {
+							fields = me.tiddlerConverters.deserialize("application/x-tiddler",text,fields)[0];
+						}
 					}
 					callback(null,[fields]);
 				}
@@ -252,7 +253,7 @@ Recipe.tiddlerOutputter = {
 		// Ordinary tiddlers are output as a <DIV>
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = this.store.getTiddler(tiddlers[t]);
-			out.push(tiddlerOutput.outputTiddlerDiv(tid));
+			out.push(this.tiddlerConverters.serialize("application/x-tiddler-html-div",tid));
 		}
 	},
 	javascript: function(out,tiddlers) {
@@ -275,7 +276,7 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
 				tid = this.store.shadows.getTiddler(title);
-			out.push(tiddlerOutput.outputTiddlerDiv(tid));
+			out.push(this.tiddlerConverters.serialize("application/x-tiddler-html-div",tid));
 		}
 	},
 	title: function(out,tiddlers) {

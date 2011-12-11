@@ -5,14 +5,28 @@ Functions concerned with parsing representations of tiddlers
 /*jslint node: true */
 "use strict";
 
-var utils = require("./Utils.js");
+var utils = require("./Utils.js"),
+	util = require("util");
 
 var tiddlerOutput = exports;
+
+// Utility function to convert a tags string array into a TiddlyWiki-style quoted tags string
+var stringifyTags = function(tags) {
+	var results = [];
+	for(var t=0; t<tags.length; t++) {
+		if(tags[t].indexOf(" ") !== -1) {
+			results.push("[[" + tags[t] + "]]");
+		} else {
+			results.push(tags[t]);
+		}
+	}
+	return results.join(" ");
+};
 
 /*
 Output a tiddler as a .tid file
 */
-tiddlerOutput.outputTiddler = function(tid) {
+var outputTiddler = function(tid) {
 	var result = [],
 		outputAttribute = function(name,value) {
 		result.push(name + ": " + value + "\n");
@@ -48,7 +62,7 @@ out - array to push the output strings
 tid - the tiddler to be output
 The fields are in the order title, creator, modifier, created, modified, tags, followed by any others
 */
-tiddlerOutput.outputTiddlerDiv = function(tid) {
+var outputTiddlerDiv = function(tid) {
 	var result = [],
 		attributes = {},
 		outputAttribute = function(name,transform,dontDelete) {
@@ -75,7 +89,7 @@ tiddlerOutput.outputTiddlerDiv = function(tid) {
 	outputAttribute("modifier");
 	outputAttribute("created", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
 	outputAttribute("modified", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
-	outputAttribute("tags", function(v) {return tiddlerOutput.stringifyTags(v);});
+	outputAttribute("tags", function(v) {return stringifyTags(v);});
 	// Output any other attributes
 	for(t in attributes) {
 		outputAttribute(t,null,true);
@@ -86,16 +100,7 @@ tiddlerOutput.outputTiddlerDiv = function(tid) {
 	return result.join("");
 };
 
-tiddlerOutput.stringifyTags = function(tags) {
-	var results = [];
-	for(var t=0; t<tags.length; t++) {
-		if(tags[t].indexOf(" ") !== -1) {
-			results.push("[[" + tags[t] + "]]");
-		} else {
-			results.push(tags[t]);
-		}
-	}
-	return results.join(" ");
+tiddlerOutput.register = function(tiddlerConverters) {
+	tiddlerConverters.registerSerializer(".tid","application/x-tiddler",outputTiddler);
+	tiddlerConverters.registerSerializer(".tiddler","application/x-tiddler-html-div",outputTiddlerDiv);
 };
-
-
