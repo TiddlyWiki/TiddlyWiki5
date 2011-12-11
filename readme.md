@@ -199,7 +199,6 @@ This module privately includes the following modules:
 * WikiTextParser.js containing the wiki text parsing engine
 * WikiTextRules.js containing the rules driving the wiki text parsing engine
 * WikiTextRenderer.js containing the wiki text rendering engine
-* WikiTextMacros.js containing the predefined macros used by the renderer
 
 #### var wikiTextProcessor = new WikiTextProcessor(options)
 
@@ -214,7 +213,7 @@ Creates a new instance of the wiki text processor with the specified options. Th
 
 A collection of uniquely titled tiddlers. Although the tiddlers themselves are immutable, new tiddlers can be stored under an existing title, replacing the previous tiddler.
 
-Each wiki store is connected to a shadow store that is also a WikiStore() object. Under certain circumstances, when an attempt is made to retrieve a tiddler that doesn't exist in the store, the search continues into its shadow store (and so on, if the shadow store itself has a shadow store).
+Each wiki store is connected to a shadow store that is also a WikiStore() object. Under usual circumstances, when an attempt is made to retrieve a tiddler that doesn't exist in the store, the search continues into its shadow store (and so on, if the shadow store itself has a shadow store).
 
 #### var store = new WikiStore(options)
 
@@ -251,9 +250,9 @@ Returns a boolean indicating whether a particular tiddler exists.
 
 Adds the specified tiddler object to the store. The tiddler can be specified as a Tiddler() object or a hashmap of tiddler fields.
 
-#### store.forEachTiddler([sortField,]callback)
+#### store.forEachTiddler(callback)
 
-Invokes a callback for each tiddler in the store, optionally sorted by a particular field. The callback is called with the title of the tiddler and a reference to the tiddler itself. For example:
+Invokes a callback for each tiddler in the store. The callback is called with the title of the tiddler and a reference to the tiddler itself. For example:
 
 	store.forEachTiddler(function(title,tiddler) {
 		console.log(title);
