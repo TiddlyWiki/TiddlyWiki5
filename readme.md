@@ -315,9 +315,9 @@ Returns a boolean indicating whether a particular tiddler exists.
 
 Adds the specified tiddler object to the store. The tiddler can be specified as a Tiddler() object or a hashmap of tiddler fields.
 
-#### store.forEachTiddler(callback)
+#### store.forEachTiddler([sortField,[excludeTag,]]callback)
 
-Invokes a callback for each tiddler in the store. The callback is called with the title of the tiddler and a reference to the tiddler itself. For example:
+Invokes a callback for each tiddler in the store, optionally sorting by a specified field and excluding tiddlers with a specified tag. The callback is called with the title of the tiddler and a reference to the tiddler itself. For example:
 
 	store.forEachTiddler(function(title,tiddler) {
 		console.log(title);

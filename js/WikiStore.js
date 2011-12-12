@@ -45,12 +45,40 @@ WikiStore.prototype.addTiddler = function(tiddler) {
 	this.tiddlers[tiddler.fields.title] = tiddler;
 };
 
-WikiStore.prototype.forEachTiddler = function(callback) {
-	var t;
-	for(t in this.tiddlers) {
-		var tiddler = this.tiddlers[t];
-		if(tiddler instanceof Tiddler)
-			callback.call(this,t,tiddler);
+WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
+	var a = 0,
+		sortField = arguments.length > 1 ? arguments[a++] : null,
+		excludeTag = arguments.length > 2 ? arguments[a++] : null,
+		callback = arguments[a++],
+		t,tiddlers = [],tiddler;
+	if(sortField) {
+		for(t in this.tiddlers) {
+			tiddlers.push(this.tiddlers[t]); 
+		}
+		tiddlers.sort(function (a,b) {
+			var aa = a.fields[sortField] || 0,
+				bb = b.fields[sortField] || 0;
+			if(aa < bb) {
+				return -1;
+			} else {
+				if(aa > bb) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+		});
+		for(t=0; t<tiddlers.length; t++) {
+			if(!tiddlers[t].hasTag(excludeTag)) {
+				callback.call(this,tiddlers[t].fields.title,tiddlers[t]);
+			}
+		}
+	} else {
+		for(t in this.tiddlers) {
+			tiddler = this.tiddlers[t];
+			if(tiddler instanceof Tiddler && !tiddler.hasTag(excludeTag))
+				callback.call(this,t,tiddler);
+		}
 	}
 };
 

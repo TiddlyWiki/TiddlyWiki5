@@ -283,7 +283,7 @@ Recipe.prototype.cookRss = function()
 		},
 		tiddlerToRssItem = function(tiddler,uri) {
 			var s = "<title" + ">" + utils.htmlEncode(tiddler.fields.title) + "</title" + ">\n";
-			s += "<description>" + utils.htmlEncode(me.store.renderTiddler("text/plain",tiddler.fields.title)) + "</description>\n";
+			s += "<description>" + utils.htmlEncode(me.store.renderTiddler("text/html",tiddler.fields.title)) + "</description>\n";
 			var i;
 			if(tiddler.fields.tags) {
 				for(i=0; i<tiddler.fields.tags.length; i++) {
@@ -298,22 +298,9 @@ Recipe.prototype.cookRss = function()
 		},
 		getRssTiddlers = function(sortField,excludeTag) {
 			var r = [];
-			me.store.forEachTiddler(function(title,tiddler) {
+			me.store.forEachTiddler(sortField,excludeTag,function(title,tiddler) {
 				if(!tiddler.hasTag(excludeTag)) {
 					r.push(tiddler);
-				}
-			});
-			r.sort(function(a,b) {
-				var aa = a.fields[sortField] || 0,
-					bb = b.fields[sortField] || 0;
-				if(aa < bb) {
-					return -1;
-				} else {
-					if(aa > bb) {
-						return 1;
-					} else {
-						return 0;
-					}
 				}
 			});
 			return r;
