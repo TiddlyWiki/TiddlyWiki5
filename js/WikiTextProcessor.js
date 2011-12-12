@@ -4,7 +4,6 @@
 var WikiTextRules = require("./WikiTextRules.js"),
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser;
 
-
 /*
 Creates a new instance of the wiki text processor with the specified options. The
 options are a hashmap of optional members as follows:

@@ -267,7 +267,7 @@ This module privately includes the following modules:
 
 #### var wikiTextProcessor = new WikiTextProcessor(options)
 
-Creates a new instance of the wiki text processor with the specified options. The options are a hashmap of optional members as follows:
+Creates a new instance of the wiki text processor with the specified options. The options are a hashmap of optional members and are planned as follows:
 
 * **enableRules:** An array of names of wiki text rules to enable. If not specified, all rules are available
 * **extraRules:** An array of additional rule handlers to add
