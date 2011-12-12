@@ -1,3 +1,5 @@
+(function(){
+
 /*
 FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system
 */
@@ -77,3 +79,5 @@ FileRetriever.retrieveFile = function(filepath,contextPath,callback) {
 		callback(err,result);
 	});
 };
+
+})();

@@ -1,3 +1,5 @@
+(function(){
+
 /*
 Wiki text macro implementation
 */
@@ -209,3 +211,4 @@ WikiTextRenderer.macros = {
 
 exports.WikiTextRenderer = WikiTextRenderer;
 
+})();

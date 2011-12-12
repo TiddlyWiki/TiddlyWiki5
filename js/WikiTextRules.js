@@ -1,3 +1,5 @@
+(function(){
+
 /*jslint node: true */
 "use strict";
 
@@ -667,3 +669,5 @@ var rules = [
 ];
 
 exports.rules = rules;
+
+})();

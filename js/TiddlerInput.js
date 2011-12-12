@@ -1,3 +1,5 @@
+(function(){
+
 /*
 Functions concerned with parsing representations of tiddlers
 */
@@ -162,3 +164,5 @@ tiddlerInput.register = function(tiddlerConverters) {
 	tiddlerConverters.registerDeserializer(".json","application/json",inputTiddlerJSON);
 	tiddlerConverters.registerDeserializer(".tiddlywiki","application/x-tiddlywiki",inputTiddlyWiki);
 };
+
+})();

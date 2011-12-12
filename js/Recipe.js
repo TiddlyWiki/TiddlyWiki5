@@ -1,3 +1,5 @@
+(function(){
+
 /*
 
 Recipe processing is in four parts:
@@ -333,3 +335,4 @@ Recipe.prototype.cookRss = function()
 
 exports.Recipe = Recipe;
 
+})();

@@ -1,3 +1,5 @@
+(function(){
+
 /*jslint node: true */
 "use strict";
 
@@ -89,7 +91,7 @@ WikiStore.prototype.parseTiddler = function(title) {
 	} else {
 		return null;
 	}
-}
+};
 
 WikiStore.prototype.renderTiddler = function(type,title) {
 	var parser = this.parseTiddler(title);
@@ -98,6 +100,8 @@ WikiStore.prototype.renderTiddler = function(type,title) {
 	} else {
 		return null;
 	}
-}
+};
 
 exports.WikiStore = WikiStore;
+
+})();

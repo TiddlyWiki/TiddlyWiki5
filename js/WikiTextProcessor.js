@@ -1,3 +1,5 @@
+(function(){
+
 /*jslint node: true */
 "use strict";
 
@@ -24,6 +26,8 @@ var WikiTextProcessor = function(options) {
 
 WikiTextProcessor.prototype.parse = function(text) {
 	return new WikiTextParser(text,this);
-}
+};
 
 exports.WikiTextProcessor = WikiTextProcessor;
+
+})();

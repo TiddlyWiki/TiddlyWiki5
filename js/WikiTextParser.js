@@ -1,3 +1,5 @@
+(function(){
+
 /*
 
 WikiTextParser.js
@@ -152,3 +154,5 @@ WikiTextParser.prototype.render = function(type,treenode,store,title) {
 };
 
 exports.WikiTextParser = WikiTextParser;
+
+})();

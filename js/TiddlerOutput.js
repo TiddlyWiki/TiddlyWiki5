@@ -1,3 +1,5 @@
+(function(){
+
 /*
 Functions concerned with parsing representations of tiddlers
 */
@@ -104,3 +106,5 @@ tiddlerOutput.register = function(tiddlerConverters) {
 	tiddlerConverters.registerSerializer(".tid","application/x-tiddler",outputTiddler);
 	tiddlerConverters.registerSerializer(".tiddler","application/x-tiddler-html-div",outputTiddlerDiv);
 };
+
+})();

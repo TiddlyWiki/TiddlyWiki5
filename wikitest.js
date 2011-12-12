@@ -1,3 +1,5 @@
+(function(){
+
 /*
 Wikifier test rig
 
@@ -61,3 +63,5 @@ for(t=0; t<titles.length; t++) {
 		console.error("Tiddler %s plain text error\nTarget: %s\nFound: %s\n",titles[t],plainTarget,plainRender);
 	}
 }
+
+})();

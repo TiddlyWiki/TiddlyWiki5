@@ -1,3 +1,5 @@
+(function(){
+
 /*
 
 Tiddlers are an immutable dictionary of name:value pairs called fields. Values can be a string, an array
@@ -105,3 +107,5 @@ Tiddler.specialTiddlerFieldParsers = {
 };
 
 exports.Tiddler = Tiddler;
+
+})();

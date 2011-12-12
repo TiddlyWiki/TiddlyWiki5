@@ -1,3 +1,5 @@
+(function(){
+
 /*jslint node: true */
 "use strict";
 
@@ -24,3 +26,5 @@ TextProcessors.prototype.parse = function(type,text) {
 };
 
 exports.TextProcessors = TextProcessors;
+
+})();

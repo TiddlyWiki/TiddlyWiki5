@@ -1,3 +1,5 @@
+(function(){
+
 /*
  Parse a space-separated string of name:value parameters. Values can be quoted with single quotes, double quotes,
  double square brackets, or double curly braces.
@@ -94,3 +96,5 @@ ArgParser.prototype.getValuesByName = function(n,defaultValue) {
 };
 
 exports.ArgParser = ArgParser;
+
+})();

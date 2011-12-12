@@ -1,3 +1,5 @@
+(function(){
+
 /*
 TiddlyWiki command line interface
 */
@@ -94,27 +96,6 @@ store.shadows.shadows = shadowShadowStore;
 for(var t=0; t<shadowShadows.length; t++) {
 	shadowShadowStore.addTiddler(new Tiddler(shadowShadows[t]));
 }
-
-var processNextSwitch = function() {
-	if(currSwitch < switches.length) {
-		var s = switches[currSwitch++],
-			csw = commandLineSwitches[s.switchName];
-		if(s.args.length < csw.args.min) {
-			throw "Command line switch --" + s.switchName + " should have a minimum of " + csw.args.min + " arguments";
-		}
-		if(s.args.length > csw.args.max) {
-			throw "Command line switch --" + s.switchName + " should have a maximum of " + csw.args.max + " arguments";
-		}
-		csw.handler(s.args,function (err) {
-			if(err) {
-				throw err;
-			}
-			process.nextTick(processNextSwitch);
-		});
-	}
-};
-
-process.nextTick(processNextSwitch);
 
 /*
 Each command line switch is represented by a function that takes a string array of arguments and a callback to
@@ -247,3 +228,25 @@ var commandLineSwitches = {
 	}
 };
 
+var processNextSwitch = function() {
+	if(currSwitch < switches.length) {
+		var s = switches[currSwitch++],
+			csw = commandLineSwitches[s.switchName];
+		if(s.args.length < csw.args.min) {
+			throw "Command line switch --" + s.switchName + " should have a minimum of " + csw.args.min + " arguments";
+		}
+		if(s.args.length > csw.args.max) {
+			throw "Command line switch --" + s.switchName + " should have a maximum of " + csw.args.max + " arguments";
+		}
+		csw.handler(s.args,function (err) {
+			if(err) {
+				throw err;
+			}
+			process.nextTick(processNextSwitch);
+		});
+	}
+};
+
+process.nextTick(processNextSwitch);
+
+})();

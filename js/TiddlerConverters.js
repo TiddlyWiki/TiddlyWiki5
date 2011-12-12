@@ -1,3 +1,5 @@
+(function(){
+
 /*jslint node: true */
 "use strict";
 
@@ -44,3 +46,5 @@ TiddlerConverters.prototype.deserialize = function(type,text,srcFields) {
 };
 
 exports.TiddlerConverters = TiddlerConverters;
+
+})();
