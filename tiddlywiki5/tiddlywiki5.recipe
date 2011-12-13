@@ -16,6 +16,8 @@ jsmodule: ../js/WikiTextProcessor.js
 jsmodule: ../js/WikiTextParser.js
 jsmodule: ../js/WikiTextRules.js
 jsmodule: ../js/WikiTextRenderer.js
+jsmodule: ../js/Navigators.js
+jsmodule: ../js/StoryNavigator.js
 jsmodule: ../js/Main.js
 
 jsbootstart: BootStart.js

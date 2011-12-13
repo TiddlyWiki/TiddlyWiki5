@@ -15,7 +15,9 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	TextProcessors = require("./TextProcessors.js").TextProcessors,
 	WikiTextProcessor = require("./WikiTextProcessor.js").WikiTextProcessor,
-	TiddlerConverters = require("./TiddlerConverters.js").TiddlerConverters;
+	TiddlerConverters = require("./TiddlerConverters.js").TiddlerConverters,
+	Navigators = require("./Navigators.js").Navigators,
+	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
 
 var textProcessors = new TextProcessors(),
 	tiddlerConverters = new TiddlerConverters(),
@@ -76,7 +78,17 @@ for(t=0; t<tiddlers.length; t++) {
 	store.addTiddler(new Tiddler(tiddlers[t]));
 }
 
-// Render HelloThere
-$("<div/>").html(store.renderTiddler("text/html","HelloThere")).appendTo("body");
+// Install the standard navigators
+var navigators = new Navigators({
+		document: document,
+		store: store
+	});
+
+navigators.registerNavigator("StoryNavigator",new StoryNavigator(navigators));
+// Use the story navigator for all links
+navigators.install("a","StoryNavigator");
+
+// Navigate to HelloThere
+navigators.navigateTo("HelloThere","StoryNavigator");
 
 })();
