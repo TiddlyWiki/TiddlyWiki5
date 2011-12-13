@@ -1,6 +1,7 @@
-(function(){
+/*\
+title: js/Recipe.js
 
-/*
+FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system
 
 Recipe processing is in four parts:
 
@@ -32,7 +33,8 @@ At this point tiddlers are placed in the store so that they can be referenced by
 
 4) Finally, the template is processed by replacing the markers with the text of the associated tiddlers
 
-*/
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";
@@ -224,7 +226,8 @@ Recipe.tiddlerOutputMapper = {
 	jsdeprecated: "javascript",
 	jquery: "javascript",
 	shadow: "shadow",
-	title: "title"
+	title: "title",
+	jsmodule: "jsmodule"
 };
 
 Recipe.tiddlerOutputter = {
@@ -269,6 +272,16 @@ Recipe.tiddlerOutputter = {
 	},
 	title: function(out,tiddlers) {
 		out.push(this.store.renderTiddler("text/plain","WindowTitle"));
+	},
+	jsmodule: function(out,tiddlers) {
+		// JavaScript modules are output as a special script tag
+		for(var t=0; t<tiddlers.length; t++) {
+			var title = tiddlers[t],
+				tid = this.store.getTiddler(title);
+			out.push("<" + "script type=\"application/x-js-module\" title=\"" + title + "\">");
+			out.push(tid.fields.text);
+			out.push("</" + "script>");
+		}
 	}
 };
 

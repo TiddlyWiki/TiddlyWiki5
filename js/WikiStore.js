@@ -1,3 +1,7 @@
+/*\
+title: js/WikiStore.js
+
+\*/
 (function(){
 
 /*jslint node: true */

@@ -1,8 +1,5 @@
-(function(){
-
-/*
-
-WikiTextParser.js
+/*\
+title: js/WikiTextParser.js
 
 Parses a block of tiddlywiki-format wiki text into a parse tree object.
 
@@ -23,7 +20,8 @@ Text nodes are:
 
 	{type: "text", value: "string of text node"}
 
-*/
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";

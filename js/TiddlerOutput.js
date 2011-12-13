@@ -1,8 +1,10 @@
-(function(){
+/*\
+title: js/TiddlerOutput.js
 
-/*
 Functions concerned with parsing representations of tiddlers
-*/
+
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";

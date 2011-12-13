@@ -35,7 +35,9 @@ var testdirectory = process.argv[2],
 	titles = [],
 	f,t,extname,basename;
 
-textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({}));
+textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
+	textProcessors: textProcessors
+}));
 tiddlerInput.register(tiddlerConverters);
 
 for(f=0; f<files.length; f++) {

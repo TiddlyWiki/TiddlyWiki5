@@ -1,14 +1,13 @@
-(function(){
+/*\
+title: js/WikiTextRenderer.js
 
-/*
-Wiki text macro implementation
-*/
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
-	WikiTextParserModule = require("./WikiTextParser.js"),
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -169,16 +168,17 @@ WikiTextRenderer.macros = {
 	},
 	tiddler: {
 		handler: function(macroNode) {
-			var args = new ArgParser(macroNode.params,{defaultName:"name"}),
+			var args = new ArgParser(macroNode.params,{defaultName:"name",cascadeDefaults:true}),
 				targetTitle = args.getValueByName("name",null),
 				withTokens = args.getValuesByName("with",[]),
+				tiddler = this.store.getTiddler(targetTitle),
 				text = this.store.getTiddlerText(targetTitle,""),
 				t;
 			for(t=0; t<withTokens.length; t++) {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			var parseTree = new WikiTextParserModule.WikiTextParser(text,this.parser.processor);
+			var parseTree = this.parser.processor.textProcessors.parse(tiddler.fields.type,text);
 			for(t=0; t<parseTree.children.length; t++) {
 				macroNode.output.push(parseTree.children[t]);
 			}

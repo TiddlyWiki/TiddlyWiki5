@@ -56,7 +56,9 @@ var textProcessors = new TextProcessors(),
 	currSwitch = 0;
 
 
-textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({}));
+textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
+	textProcessors: textProcessors
+}));
 // Register the standard tiddler serializers and deserializers
 tiddlerInput.register(tiddlerConverters);
 tiddlerOutput.register(tiddlerConverters);

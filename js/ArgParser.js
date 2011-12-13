@@ -1,23 +1,23 @@
-(function(){
+/*\
+title: js/ArgParser.js
 
-/*
- Parse a space-separated string of name:value parameters. Values can be quoted with single quotes, double quotes,
- double square brackets, or double curly braces.
+Parse a space-separated string of name:value parameters. Values can be quoted with single quotes, double quotes, double square brackets, or double curly braces.
 
- The parameters are returned in a structure that can be referenced like this:
+The parameters are returned in a structure that can be referenced like this:
 
-		(return).byName["name"][0] - First occurance of parameter with a given name
-		(return).byPos[0].n - Name of parameter in first position
-		(return).byPos[0].v - Value of parameter in first position
+	(return).byName["name"][0] - First occurance of parameter with a given name
+	(return).byPos[0].n - Name of parameter in first position
+	(return).byPos[0].v - Value of parameter in first position
 
 Options and their defaults are:
 
-		defaultName: null,
-		defaultValue: null,
-		noNames: false,
-		cascadeDefaults: false
+	defaultName: null,
+	defaultValue: null,
+	noNames: false,
+	cascadeDefaults: false
 
-*/
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";

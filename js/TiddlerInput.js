@@ -1,13 +1,16 @@
-(function(){
+/*\
+title: js/TiddlerInput.js
 
-/*
 Functions concerned with parsing representations of tiddlers
-*/
+
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";
 
 var utils = require("./Utils.js"),
+	Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util");
 
 var tiddlerInput = exports;
@@ -88,6 +91,16 @@ var inputTiddlerPlain = function(text,fields) {
 	return [fields];
 };
 
+var inputTiddlerJavaScript = function(text,fields) {
+	var headerCommentRegExp = /^\/\*\\\n((?:^[^\n]*\n)+?)(^\\\*\/$\n?)/mg,
+		match = headerCommentRegExp.exec(text);
+	fields.text = text;
+	if(match) {
+		fields = parseMetaDataBlock(match[1],fields);
+	}
+	return [fields];
+};
+
 var inputTiddlerDiv = function(text,fields) {
 	return [parseTiddlerDiv(text,fields)];
 };
@@ -157,12 +170,52 @@ var inputTiddlyWiki = function(text,fields) {
 	return results;
 };
 
+// Given a reference to a DOM node, return the tiddlers stored in the immediate child nodes
+var inputTiddlerDOM = function(node) {
+	var extractTiddler = function(node) {
+			var e = node.firstChild;
+			while(e && e.nodeName.toLowerCase() !== "pre") {
+				e = e.nextSibling;
+			}
+			if(e && node.hasAttribute("title")) {
+				var i,
+					attrs = node.attributes,
+					tiddler = {
+						text: utils.htmlDecode(e.innerHTML)
+					};
+				for(i=attrs.length-1; i >= 0; i--) {
+					if(attrs[i].specified) {
+						var value = attrs[i].value,
+							name = attrs[i].name;
+						if(!Tiddler.isStandardField(name)) {
+							value = utils.unescapeLineBreaks(value);
+						}
+						tiddler[name] = value;
+					}
+				}
+				return tiddler;
+			} else {
+				return null;
+			}
+		},
+		t,tiddlers = [];
+	for(t = 0; t < node.childNodes.length; t++) {
+			var tiddler = extractTiddler(node.childNodes[t]);
+			if(tiddler) {
+				tiddlers.push(tiddler);
+			}
+	}
+	return tiddlers;
+};
+
 tiddlerInput.register = function(tiddlerConverters) {
 	tiddlerConverters.registerDeserializer(".txt","text/plain",inputTiddlerPlain);
+	tiddlerConverters.registerDeserializer(".js","application/javascript",inputTiddlerJavaScript);
 	tiddlerConverters.registerDeserializer(".tiddler","application/x-tiddler-html-div",inputTiddlerDiv);
 	tiddlerConverters.registerDeserializer(".tid","application/x-tiddler",inputTiddler);
 	tiddlerConverters.registerDeserializer(".json","application/json",inputTiddlerJSON);
 	tiddlerConverters.registerDeserializer(".tiddlywiki","application/x-tiddlywiki",inputTiddlyWiki);
+	tiddlerConverters.registerDeserializer("(DOM)","(DOM)",inputTiddlerDOM);
 };
 
 })();

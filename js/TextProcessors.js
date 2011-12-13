@@ -1,3 +1,7 @@
+/*\
+title: js/TextProcessors.js
+
+\*/
 (function(){
 
 /*jslint node: true */

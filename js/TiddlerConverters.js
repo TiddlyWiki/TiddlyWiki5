@@ -1,3 +1,7 @@
+/*\
+title: js/TiddlerConverters.js
+
+\*/
 (function(){
 
 /*jslint node: true */

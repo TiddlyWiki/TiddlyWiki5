@@ -1,8 +1,10 @@
-(function(){
+/*\
+title: js/FileRetriever.js
 
-/*
 FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system
-*/
+
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";

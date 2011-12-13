@@ -1,6 +1,5 @@
-(function(){
-
-/*
+/*\
+title: js/Tiddler.js
 
 Tiddlers are an immutable dictionary of name:value pairs called fields. Values can be a string, an array
 of strings, or a date. The only field that is required is the `title` field, but useful tiddlers also
@@ -21,7 +20,8 @@ The hashmap(s) can specify the  "modified" and "created" fields as strings in YY
 format or as JavaScript date objects. The "tags" field can be given as a JavaScript array of strings or
 as a TiddlyWiki quoted string (eg, "one [[two three]]").
 
-*/
+\*/
+(function(){
 
 /*jslint node: true */
 "use strict";
@@ -47,6 +47,21 @@ var Tiddler = function(/* tiddler,fields */) {
 			}
 		}
 	}
+};
+
+Tiddler.standardFields = {
+	title: {		type: "string"},
+	modifier: {		type: "string"},
+	modified: {		type: "date"},
+	creator: {		type: "string"},
+	created: {		type: "date"},
+	tags: {			type: "tags"},
+	type: {			type: "string"},
+	text: {			type: "string"}
+}
+
+Tiddler.isStandardField = function(name) {
+	return name in Tiddler.standardFields;
 };
 
 Tiddler.prototype.hasTag = function(tag) {

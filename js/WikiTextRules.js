@@ -1,3 +1,7 @@
+/*\
+title: js/WikiTextRules.js
+
+\*/
 (function(){
 
 /*jslint node: true */
