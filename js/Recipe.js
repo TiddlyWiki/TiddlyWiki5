@@ -278,8 +278,10 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
 				tid = this.store.getTiddler(title);
-			out.push("<" + "script type=\"application/x-js-module\" title=\"" + title + "\">");
+			out.push("<" + "script type=\"application/javascript\">");
+			out.push("define(\"" + title + "\",function(require,exports) {");
 			out.push(tid.fields.text);
+			out.push("});")
 			out.push("</" + "script>");
 		}
 	}
