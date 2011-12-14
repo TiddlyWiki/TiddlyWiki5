@@ -1,5 +1,6 @@
 template: tiddlywiki5.template.html
 copyright: ../copyright.txt
+style: styles.css
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 

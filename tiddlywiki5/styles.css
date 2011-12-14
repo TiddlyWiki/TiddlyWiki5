@@ -1,0 +1,39 @@
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+/* Following styles created with http://www.gridlover.net/; */
+
+body {
+    font-size: 18px;
+    line-height: 27px;
+}
+article {
+    max-width: 944px;
+    margin: auto;
+}
+h1 {
+    font-size: 62px;
+    line-height: 81px;
+    margin-top: 27px;
+    margin-bottom: 54px;
+}
+h2 {
+    font-size: 33px;
+    line-height: 54px;
+    margin-top: 54px;
+    margin-bottom: 27px;
+}
+h3 {
+    font-size: 25px;
+    line-height: 27px;
+    margin-top: 27px;
+    margin-bottom: 0px;
+}
+p, ul {
+    margin-top: 0px;
+    margin-bottom: 27px;
+}
+small, aside {
+    font-size: 13px;
+}
