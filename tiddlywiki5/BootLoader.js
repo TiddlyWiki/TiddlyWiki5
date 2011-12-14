@@ -30,19 +30,23 @@ function resolveModuleName(srcModule,dstModule) {
 		}
 		return src.join("/");
 	} else {
-		// If there was no / or ./ then it's a built in module
+		// If there was no / or ./ then it's a built in module and the name doesn't need resolving
 		return dstModule;		
 	}
 }
 
-function executeModule(name) {
-	var require = function(filepath) {
-			return executeModule(resolveModuleName(name,filepath));
+/*
+Execute the module named 'modName'. The name can optionally be relative to the module named 'modRoot'
+*/
+function executeModule(modName,modRoot) {
+	var name = modRoot ? resolveModuleName(modRoot,modName) : modName,
+		require = function(modRequire) {
+			return executeModule(modRequire,name);
 		},
 		exports = {},
 		module = modules[name];
 	if(!module) {
-		throw new Error("Cannot find module named '" + name + "'");
+		throw new Error("Cannot find module named '" + modName + "' required by module '" + modRoot + "'");
 	}
 	if(module.exports) {
 		return module.exports;
