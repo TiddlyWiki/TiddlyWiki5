@@ -58,7 +58,7 @@ Tiddler.standardFields = {
 	tags: {			type: "tags"},
 	type: {			type: "string"},
 	text: {			type: "string"}
-}
+};
 
 Tiddler.isStandardField = function(name) {
 	return name in Tiddler.standardFields;

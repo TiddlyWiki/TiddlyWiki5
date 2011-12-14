@@ -6,7 +6,7 @@ This is the main() function in the browser
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
 "use strict";
 
 var WikiStore = require("./WikiStore.js").WikiStore,

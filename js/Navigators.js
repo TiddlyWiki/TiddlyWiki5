@@ -31,7 +31,7 @@ Navigators.prototype.install = function(selector,navname) {
 	this.document.addEventListener("click",function(e) {
 		var el = e.target,
 			matchesSelector = el.matchesSelector || el.mozMatchesSelector ||
-				el.webkitMatchesSelector || el.oMatchesSelector || el.msMatchesSelector
+				el.webkitMatchesSelector || el.oMatchesSelector || el.msMatchesSelector;
 		if(matchesSelector && matchesSelector.call(el,selector)) {
 			var r = nav.navigateTo(el.getAttribute("href"));
 			if(!r) {

@@ -281,7 +281,7 @@ Recipe.tiddlerOutputter = {
 			out.push("<" + "script type=\"application/javascript\">");
 			out.push("define(\"" + title + "\",function(require,exports) {");
 			out.push(tid.fields.text);
-			out.push("});")
+			out.push("});");
 			out.push("</" + "script>");
 		}
 	}
