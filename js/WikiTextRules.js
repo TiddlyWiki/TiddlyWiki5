@@ -118,7 +118,7 @@ var rules = [
 	rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 	handler: function(w)
 	{
-		var table = {type: "table", attributes: {className: "twtable"}, children: []};
+		var table = {type: "table", attributes: {"class": "twtable"}, children: []};
 		w.output.push(table);
 		var prevColumns = [];
 		var currRowType = null;
@@ -130,7 +130,7 @@ var rules = [
 		while(lookaheadMatch && lookaheadMatch.index == w.nextMatch) {
 			var nextRowType = lookaheadMatch[2];
 			if(nextRowType == "k") {
-				table.attributes.className = lookaheadMatch[1];
+				table.attributes["class"] = lookaheadMatch[1];
 				w.nextMatch += lookaheadMatch[0].length+1;
 			} else {
 				if(nextRowType != currRowType) {
@@ -150,7 +150,7 @@ var rules = [
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
 					var theRow = {type: "tr", children: []};
-					setAttr(theRow,"className",rowCount%2 ? "oddRow" : "evenRow");
+					setAttr(theRow,"class",rowCount%2 ? "oddRow" : "evenRow");
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow.children,prevColumns);
 					rowCount++;
@@ -607,7 +607,7 @@ var rules = [
 			w.output.push(e);
 			var styles = inlineCssHelper(w);
 			if(styles.length === 0)
-				setAttr(e,"className","marked");
+				setAttr(e,"class","marked");
 			else
 				applyCssHelper(e,styles);
 			w.subWikifyTerm(e.children,/(@@)/mg);
@@ -619,7 +619,7 @@ var rules = [
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
 				e = {type: lookaheadMatch[2] == "\n" ? "div" : "span", children: []};
-				setAttr(e,"className",lookaheadMatch[1]);
+				setAttr(e,"class",lookaheadMatch[1]);
 				w.output.push(e);
 				w.subWikifyTerm(e.children,/(\}\}\})/mg);
 			}

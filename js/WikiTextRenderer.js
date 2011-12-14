@@ -193,7 +193,7 @@ WikiTextRenderer.macros = {
 	today: {
 		handler: function(macroNode) {
 			var now = new Date(),
-				args = new ArgParser(macroNode.params,{noNames:true,cascadeDefaults:true}),
+				args = new ArgParser(macroNode.params,{noNames:true}),
 				value = args.byPos[0] ? utils.formatDateString(now,args.byPos[0].v) : now.toLocaleString();
 			macroNode.output.push({type: "text", value: value});
 		}
@@ -205,6 +205,41 @@ WikiTextRenderer.macros = {
 	},
 	view: {
 		handler: function(macroNode) {
+			var args = new ArgParser(macroNode.params,{noNames:true}),
+				field = args.byPos[0] ? args.byPos[0].v : null,
+				format = args.byPos[1] ? args.byPos[1].v : "text",
+				tiddler = this.store.getTiddler(this.title),
+				value = tiddler ? tiddler.fields[field] : null;
+			if(tiddler && field && value) {
+				switch(format) {
+					case "text":
+						macroNode.output.push({type: "text", value: value});
+						break;
+					case "link":
+						macroNode.output.push({
+							type: "a",
+							attributes: {
+								href: value
+								},
+							children: [
+								{type: "text", value: value}
+							]
+						});
+						break;
+					case "wikified":
+						var parseTree = this.parser.processor.textProcessors.parse("text/x-tiddlywiki",value);
+						for(var t=0; t<parseTree.children.length; t++) {
+							macroNode.output.push(parseTree.children[t]);
+						}
+						// Execute any macros in the copy
+						this.executeMacros(macroNode.output);
+						break;
+					case "date":
+						var template = args.byPos[2] ? args.byPos[2].v : "DD MMM YYYY";
+						macroNode.output.push({type: "text", value: utils.formatDateString(value,template)});
+						break;
+				}
+			}
 		}
 	}
 };

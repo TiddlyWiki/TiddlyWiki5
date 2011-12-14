@@ -101,8 +101,9 @@ WikiStore.prototype.parseTiddler = function(title) {
 Render a tiddler to a particular MIME type. Optionally render it with a different tiddler as the context. This option is used to render a tiddler through a template as store.renderTiddler("text/html",tiddler,template)
 */
 WikiStore.prototype.renderTiddler = function(type,title,asTitle) {
-	var parser = this.parseTiddler(title);
-	if(parser) {
+	var parser = this.parseTiddler(title),
+		asTitleExists = asTitle ? this.tiddlerExists(asTitle) : true;
+	if(parser && asTitleExists) {
 		return parser.render(type,parser.children,this,asTitle ? asTitle : title);
 	} else {
 		return null;
