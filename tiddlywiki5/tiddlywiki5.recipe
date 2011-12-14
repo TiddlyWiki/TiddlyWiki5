@@ -2,6 +2,11 @@ template: tiddlywiki5.template.html
 copyright: ../copyright.txt
 style: styles.css
 
+recipe: ../test/tiddlywiki.2.6.5/source/tiddlywiki.com/tiddlywiki-com-ref/split.recipe
+recipe: ../test/tiddlywiki.2.6.5/source/tiddlywiki.com/tiddlywiki-com/split.recipe
+
+recipe: tiddlers/split.recipe
+
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 
 jsmodule: ../js/ArgParser.js
@@ -24,5 +29,3 @@ jsmodule: ../js/Main.js
 jsbootstart: BootStart.js
 jsbootend: BootLoader.js
 
-recipe: ../test/tiddlywiki.2.6.5/source/tiddlywiki.com/tiddlywiki-com-ref/split.recipe
-recipe: ../test/tiddlywiki.2.6.5/source/tiddlywiki.com/tiddlywiki-com/split.recipe

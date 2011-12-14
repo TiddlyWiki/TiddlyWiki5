@@ -1,0 +1,9 @@
+title: SimpleTemplate
+modifier: JeremyRuston
+
+{{title{
+<<view title>>}}}
+{{small{
+<<view modifier link>> <<view modified date>>}}}
+{{body{
+<<view text wikified>>}}}
