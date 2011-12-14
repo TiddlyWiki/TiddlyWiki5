@@ -140,10 +140,61 @@ WikiTextRenderer.macros = {
 	},
 	br: {
 		handler: function(macroNode) {
+			macroNode.output.push({type: "br"});
 		}
 	},
 	list: {
 		handler: function(macroNode) {
+			var args = new ArgParser(macroNode.params,{defaultName:"type"}),
+				type = args.getValueByName("type","all"),
+				template = args.getValueByName("template",null),
+				emptyMessage = args.getValueByName("emptyMessage",null);
+			// Get the template to use (currently it's ignored though)
+			template = template ? this.store.getTiddlerText(template,null) : null;
+			template = template || "<<view title link>>";
+			// Get the tiddlers
+			var handler = WikiTextRenderer.macros.list.types[type];
+			handler = handler || WikiTextRenderer.macros.list.types.all;
+			var tiddlers = handler.call(this);
+			// Render them as a list
+			var ul = {type: "ul", children: []};
+			for(var t=0; t<tiddlers.length; t++) {
+				var title = tiddlers[t],
+					li = {
+						type: "li",
+						children: [ {
+							type: "a",
+							attributes: {
+								href: title},
+							children: [ {
+							type: "text", value: title
+						}]}
+					]};
+				ul.children.push(li);
+			}
+			macroNode.output.push(ul);
+		},
+		types: {
+			all: function() {
+				return this.store.getTitles("title","excludeLists");
+			},
+			missing: function() {
+				return this.store.getMissingTitles();
+			},
+			orphans: function() {
+				return this.store.getOrphanTitles();
+			},
+			shadowed: function() {
+				return this.store.getShadowTitles();
+			},
+			touched: function() {
+				// Server syncing isn't implemented yet
+				return [];
+			},
+			filter: function() {
+				// Filters aren't implemented yet
+				return [];
+			}
 		}
 	},
 	slider: {

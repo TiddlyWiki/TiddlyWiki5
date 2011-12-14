@@ -90,5 +90,6 @@ navigators.install("a","StoryNavigator");
 
 // Navigate to HelloThere
 navigators.navigateTo("HelloThere","StoryNavigator");
+navigators.navigateTo("TabAll","StoryNavigator");
 
 })();

@@ -8,7 +8,7 @@ mkdir -p tmp/newcooked
 node tiddlywiki.js --recipe $PWD/test/tiddlywiki.2.6.5/source/tiddlywiki.com/index.html.recipe --savewiki tmp/newcooked || exit 1
 
 # compare the two
-opendiff tmp/newcooked/index.html test/tiddlywiki.2.6.5/target/index.2.6.5.html
+diff tmp/newcooked/index.html test/tiddlywiki.2.6.5/target/index.2.6.5.html
 
 # Run the wikification tests
 node wikitest.js test/wikitests/

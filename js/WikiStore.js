@@ -88,6 +88,14 @@ WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callba
 	}
 };
 
+WikiStore.prototype.getTitles = function(sortField,excludeTag) {
+	var tiddlers = [];
+	this.forEachTiddler(sortField,excludeTag,function(title,tiddler) {
+		tiddlers.push(title);
+	});
+	return tiddlers;
+};
+
 WikiStore.prototype.parseTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
