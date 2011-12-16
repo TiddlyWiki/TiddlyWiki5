@@ -369,3 +369,76 @@ Cooks a TiddlyWiki HTML file from the recipe and returns it as a string.
 #### recipe.cookRss()
 
 Cooks a TiddlyWiki RSS file from the recipe and returns it as a string.
+
+## Parsing and rendering wiki text
+
+Wiki text is parsed into a simple object tree format. The parser doesn't need access to a WikiStore, nor does it need to know which tiddler, if any, the text it is parsing came from. This means that the parse tree can be cached within a tiddler when needed, and that parse trees can exist independently of tiddlers and WikiStores.
+
+Rendering converts the parse tree into a textual format. The process requires access to a WikiStore so that it can resolve references to other tiddlers. It also needs to know which tiddler to use as the context for rendering the parse tree - this is the tiddler that is referenced by the `<<view>>` macro, for example.
+
+### Parse tree format
+
+The parse tree described here is defined as part of the WikiTextParser; other text processors could choose to represent their parse trees differently. However, it is hoped that this format is a sufficiently generic, transparent representation of HTML (and SVG) that it could be used by many other parsers, allowing the rendering engine, and macro processing, to be shared across parsers.
+
+HTML elements are represented as:
+
+	{type: "div", attributes: {
+			attr1: value,
+			style: {
+				name: value,
+				name2: value2
+			}
+		}, children: [
+			{child},
+			{child},		
+		]}
+
+Text nodes are represented as:
+
+	{type: "text", value: "string of text node"}
+
+Macros are represented as:
+
+	{type: "macro", name: "macroname", params: "parameter string", output: [<outputtree]}
+
+Note that the macro output is only added to the tree during rendering.
+
+The parse tree can also contain context frames:
+
+	{type: "context", tiddler: "title", children: [<childnodes>]}
+
+Context frames are explained further in the section on rendering below.
+
+### Rendering process
+
+Wiki text rendering requires:
+
+* the MIME type of the target format (currently `text/plain` or `text/html`)
+* the parse tree to be rendered
+* the WikiStore object to be used for resolving references to other tiddlers
+* the title of the tiddler to use as the rendering context
+
+The rendering process is to recursively scan the parse tree and stitch together the fragments making up the HTML elements corresponding to the nodes of the tree.
+
+Macros are executed during rendering, which involves invoking the named macro handler with the macro parameter string, and a reference to the parse tree node for the macro. The handler then inserts the output parse tree into the `output` member of the macro node.
+
+The `<<tiddler>>` macro doesn't change the tiddler context for its children. This means that when you transclude a tiddler, any `<<view>>` macros within it reference the fields of the tiddler that did the transcluding.
+
+The list macro uses transcluding in a slightly different way as a form of templating. For example:
+
+	<<list all template:MyTiddler>>
+
+Here, `MyTiddler` specifies the information that should be displayed about each tiddler. In this example, there is a link to the tiddler, a link to the author, and the modification date:
+
+	<<view title link>>, <<view modifier link>>, <<view modified "YYYY MM DD">>
+
+In order to ensure that the correct target is used for these view macros, the `<<list>>`` macro creates a context frame around each list item:
+
+	{type: "li", children: [
+		{type: "context", tiddler: "FirstTiddler", children: [
+			{type: "macro", name: "view", params: "title link"},
+			{type: "macro", name: "view", params: "modifier link"},
+			{type: "macro", name: "view", params: "modified \"YYYY MM DD\""}
+		]}
+	]}
+
