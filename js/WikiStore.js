@@ -44,7 +44,13 @@ WikiStore.prototype.deleteTiddler = function(title) {
 };
 
 WikiStore.prototype.tiddlerExists = function(title) {
-	return this.tiddlers[title] instanceof Tiddler;
+	var exists = this.tiddlers[title] instanceof Tiddler;
+	if(exists) {
+		return true;
+	} else if (this.shadows) {
+		return this.shadows.tiddlerExists(title);
+	}
+	return ;
 };
 
 WikiStore.prototype.addTiddler = function(tiddler) {

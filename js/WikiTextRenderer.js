@@ -66,6 +66,9 @@ WikiTextRenderer.prototype.renderAsHtml = function(treenode) {
 				case "img":
 					renderElement(tree[t],true); // Self closing elements
 					break;
+				case "context":
+					renderSubTree(tree[t].children);
+					break;
 				case "macro":
 					renderSubTree(tree[t].output);
 					break;
@@ -75,7 +78,7 @@ WikiTextRenderer.prototype.renderAsHtml = function(treenode) {
 			}
 		}
 	};
-	this.executeMacros(treenode);
+	this.executeMacros(treenode,this.title);
 	renderSubTree(treenode);
 	return output.join("");	
 };
@@ -105,27 +108,28 @@ WikiTextRenderer.prototype.renderAsText = function(treenode) {
 			}
 		}
 	};
-	this.executeMacros(treenode);
+	this.executeMacros(treenode,this.title);
 	renderSubTree(treenode);
 	return output.join("");	
 };
 
-WikiTextRenderer.prototype.executeMacros = function(tree) {
+WikiTextRenderer.prototype.executeMacros = function(tree,title) {
 	for(var t=0; t<tree.length; t++) {
 		if(tree[t].type === "macro") {
-			this.executeMacro(tree[t]);
+			this.executeMacro(tree[t],title);
 		}
 		if(tree[t].children) {
-			this.executeMacros(tree[t].children);
+			var contextForChildren = tree[t].type === "context" ? tree[t].tiddler : title;
+			this.executeMacros(tree[t].children,contextForChildren);
 		}
 	}
 };
 
-WikiTextRenderer.prototype.executeMacro = function(macroNode) {
+WikiTextRenderer.prototype.executeMacro = function(macroNode,title) {
 	var macroInfo = WikiTextRenderer.macros[macroNode.name];
 	macroNode.output = [];
 	if(macroInfo) {
-		macroInfo.handler.call(this,macroNode);
+		macroInfo.handler.call(this,macroNode,title);
 	} else {
 		macroNode.output.push({type: "text", value: "Unknown macro " + macroNode.name});
 	}
@@ -135,44 +139,54 @@ WikiTextRenderer.versionTiddlyWiki = "2.6.5";
 
 WikiTextRenderer.macros = {
 	allTags: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	br: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 			macroNode.output.push({type: "br"});
 		}
 	},
 	list: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 			var args = new ArgParser(macroNode.params,{defaultName:"type"}),
 				type = args.getValueByName("type","all"),
 				template = args.getValueByName("template",null),
+				templateType = "text/x-tiddlywiki", templateText = "<<view title link>>",
 				emptyMessage = args.getValueByName("emptyMessage",null);
-			// Get the template to use (currently it's ignored though)
-			template = template ? this.store.getTiddlerText(template,null) : null;
-			template = template || "<<view title link>>";
-			// Get the tiddlers
+			// Get the template to use
+			template = template ? this.store.getTiddler(template) : null;
+			if(template) {
+				templateType = template.fields.type;
+				templateText = template.fields.text;
+			}
+			// Get the handler and the tiddlers
 			var handler = WikiTextRenderer.macros.list.types[type];
 			handler = handler || WikiTextRenderer.macros.list.types.all;
 			var tiddlers = handler.call(this);
 			// Render them as a list
 			var ul = {type: "ul", children: []};
 			for(var t=0; t<tiddlers.length; t++) {
-				var title = tiddlers[t],
-					li = {
+				var li = {
 						type: "li",
 						children: [ {
-							type: "a",
-							attributes: {
-								href: title},
-							children: [ {
-							type: "text", value: title
-						}]}
-					]};
+							type: "context",
+							tiddler: tiddlers[t],
+							children: []
+						} ] 
+				};
+				var parseTree = this.parser.processor.textProcessors.parse(templateType,templateText);
+				for(var c=0; c<parseTree.children.length; c++) {
+					li.children[0].children.push(parseTree.children[c]);
+				}
 				ul.children.push(li);
 			}
-			macroNode.output.push(ul);
+			if(ul.children.length > 0) {
+				macroNode.output.push(ul);
+				this.executeMacros(macroNode.output,title);
+			} else if (emptyMessage) {
+				macroNode.output.push({type: "text", value: emptyMessage});	
+			}
 		},
 		types: {
 			all: function() {
@@ -198,27 +212,27 @@ WikiTextRenderer.macros = {
 		}
 	},
 	slider: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	tabs: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	tag: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	tagging: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	tags: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	tiddler: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 			var args = new ArgParser(macroNode.params,{defaultName:"name",cascadeDefaults:true}),
 				targetTitle = args.getValueByName("name",null),
 				withTokens = args.getValuesByName("with",[]),
@@ -234,15 +248,15 @@ WikiTextRenderer.macros = {
 				macroNode.output.push(parseTree.children[t]);
 			}
 			// Execute any macros in the copy
-			this.executeMacros(macroNode.output);
+			this.executeMacros(macroNode.output,title);
 		}
 	},
 	timeline: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 		}
 	},
 	today: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 			var now = new Date(),
 				args = new ArgParser(macroNode.params,{noNames:true}),
 				value = args.byPos[0] ? utils.formatDateString(now,args.byPos[0].v) : now.toLocaleString();
@@ -250,16 +264,16 @@ WikiTextRenderer.macros = {
 		}
 	},
 	version: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 			macroNode.output.push({type: "text", value: WikiTextRenderer.versionTiddlyWiki});
 		}
 	},
 	view: {
-		handler: function(macroNode) {
+		handler: function(macroNode,title) {
 			var args = new ArgParser(macroNode.params,{noNames:true}),
 				field = args.byPos[0] ? args.byPos[0].v : null,
 				format = args.byPos[1] ? args.byPos[1].v : "text",
-				tiddler = this.store.getTiddler(this.title),
+				tiddler = this.store.getTiddler(title),
 				value = tiddler ? tiddler.fields[field] : null;
 			if(tiddler && field && value) {
 				switch(format) {
@@ -283,7 +297,7 @@ WikiTextRenderer.macros = {
 							macroNode.output.push(parseTree.children[t]);
 						}
 						// Execute any macros in the copy
-						this.executeMacros(macroNode.output);
+						this.executeMacros(macroNode.output,title);
 						break;
 					case "date":
 						var template = args.byPos[2] ? args.byPos[2].v : "DD MMM YYYY";

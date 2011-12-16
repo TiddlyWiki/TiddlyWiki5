@@ -3,23 +3,6 @@ title: js/WikiTextParser.js
 
 Parses a block of tiddlywiki-format wiki text into a parse tree object.
 
-HTML elements are stored in the tree like this:
-
-	{type: "div", attributes: {
-			attr1: value,
-			style: {
-				name: value,
-				name2: value2
-			}
-		}, children: [
-			{child},
-			{child},		
-		]}
-
-Text nodes are:
-
-	{type: "text", value: "string of text node"}
-
 \*/
 (function(){
 
