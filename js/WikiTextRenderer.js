@@ -147,6 +147,70 @@ WikiTextRenderer.macros = {
 			macroNode.output.push({type: "br"});
 		}
 	},
+	timeline: {
+		handler: function(macroNode,title) {
+			var args = new ArgParser(macroNode.params,{defaultName:"anon"}),
+				anonByPos = args.getValuesByName("anon",[]),
+				field = anonByPos[0] || "modified",
+				limit = anonByPos[1] || null,
+				dateformat = anonByPos[2] || "DD MMM YYYY",
+				template = args.getValueByName("template",null),
+				templateType = "text/x-tiddlywiki",
+				templateText = "<<view title link>>",
+				groupTemplate = args.getValueByName("groupTemplate",null),
+				groupTemplateType = "text/x-tiddlywiki",
+				groupTemplateText = "<<view " + field + " date '" + dateformat + "'>>",
+				filter = args.getValueByName("filter",null),
+				tiddlers,
+				lastGroup = "",
+				ul,
+				last = 0,
+				t;
+			limit = limit ? parseInt(limit,10) : null;
+			template = template ? this.store.getTiddler(template) : null;
+			if(template) {
+				templateType = template.fields.type;
+				templateText = template.fields.text;
+			}
+			groupTemplate = groupTemplate ? this.store.getTiddler(groupTemplate) : null;
+			if(groupTemplate) {
+				groupTemplateType = groupTemplate.fields.type;
+				groupTemplateText = groupTemplate.fields.text;
+			}
+			if(filter) {
+				// Filtering not implemented yet
+				tiddlers = this.store.getTitles(field,"excludeLists");
+			} else {
+				tiddlers = this.store.getTitles(field,"excludeLists");
+			}
+			if(limit !== null) {
+				last = tiddlers.length - Math.min(tiddlers.length,limit);
+			}
+			for(t=tiddlers.length-1; t>=last; t--) {
+				var tiddler = tiddlers[t],
+					theGroupParseTree = this.parser.processor.textProcessors.parse(groupTemplateType,groupTemplateText),
+					theGroup = theGroupParseTree.render("text/plain",theGroupParseTree.children,this.store,tiddler);
+
+				if(ul === undefined || theGroup != lastGroup) {
+					ul = {type: "ul", attributes: {"class": "timeline"}, children: []};
+					macroNode.output.push(ul);
+					ul.children.push({type: "li", attributes: {"class": "listTitle"}, children: [{type: "text", value: theGroup}]});
+					lastGroup = theGroup;
+				}
+				var item = {type: "li", attributes: {"class": "listLink"}, children: [ {
+							type: "context",
+							tiddler: tiddler,
+							children: []
+						}]};
+				ul.children.push(item);
+				var itemParseTree = this.parser.processor.textProcessors.parse(templateType,templateText);
+				for(var c=0; c<itemParseTree.children.length; c++) {
+					item.children[0].children.push(itemParseTree.children[c]);
+				}
+			}
+			this.executeMacros(macroNode.output,title);
+		}
+	},
 	list: {
 		handler: function(macroNode,title) {
 			var args = new ArgParser(macroNode.params,{defaultName:"type"}),
@@ -249,10 +313,6 @@ WikiTextRenderer.macros = {
 			}
 			// Execute any macros in the copy
 			this.executeMacros(macroNode.output,title);
-		}
-	},
-	timeline: {
-		handler: function(macroNode,title) {
 		}
 	},
 	today: {
