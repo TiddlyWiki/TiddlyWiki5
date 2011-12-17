@@ -191,7 +191,7 @@ WikiTextRenderer.macros = {
 					theGroupParseTree = this.parser.processor.textProcessors.parse(groupTemplateType,groupTemplateText),
 					theGroup = theGroupParseTree.render("text/plain",theGroupParseTree.children,this.store,tiddler);
 				if(theGroup !== "") {
-					if(ul === undefined || theGroup != lastGroup) {
+					if(ul === undefined || theGroup !== lastGroup) {
 						ul = {type: "ul", attributes: {"class": "timeline"}, children: []};
 						macroNode.output.push(ul);
 						ul.children.push({type: "li", attributes: {"class": "listTitle"}, children: [{type: "text", value: theGroup}]});
@@ -207,10 +207,7 @@ WikiTextRenderer.macros = {
 										children: []
 								}]};
 					ul.children.push(item);
-					var itemParseTree = this.parser.processor.textProcessors.parse(templateType,templateText);
-					for(var c=0; c<itemParseTree.children.length; c++) {
-						item.children[0].children.push(itemParseTree.children[c]);
-					}
+					item.children[0].children = this.parser.processor.textProcessors.parse(templateType,templateText).children;
 				}
 			}
 			this.executeMacros(macroNode.output,title);
@@ -244,10 +241,7 @@ WikiTextRenderer.macros = {
 							children: []
 						} ] 
 				};
-				var parseTree = this.parser.processor.textProcessors.parse(templateType,templateText);
-				for(var c=0; c<parseTree.children.length; c++) {
-					li.children[0].children.push(parseTree.children[c]);
-				}
+				li.children[0].children = this.parser.processor.textProcessors.parse(templateType,templateText).children;
 				ul.children.push(li);
 			}
 			if(ul.children.length > 0) {
@@ -312,10 +306,7 @@ WikiTextRenderer.macros = {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			var parseTree = this.parser.processor.textProcessors.parse(tiddler.fields.type,text);
-			for(t=0; t<parseTree.children.length; t++) {
-				macroNode.output.push(parseTree.children[t]);
-			}
+			macroNode.output = this.parser.processor.textProcessors.parse(tiddler.fields.type,text).children;
 			// Execute any macros in the copy
 			this.executeMacros(macroNode.output,title);
 		}
@@ -357,10 +348,7 @@ WikiTextRenderer.macros = {
 						});
 						break;
 					case "wikified":
-						var parseTree = this.parser.processor.textProcessors.parse("text/x-tiddlywiki",value);
-						for(var t=0; t<parseTree.children.length; t++) {
-							macroNode.output.push(parseTree.children[t]);
-						}
+						macroNode.output = this.parser.processor.textProcessors.parse("text/x-tiddlywiki",value).children;
 						// Execute any macros in the copy
 						this.executeMacros(macroNode.output,title);
 						break;
