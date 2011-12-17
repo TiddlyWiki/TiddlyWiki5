@@ -190,22 +190,27 @@ WikiTextRenderer.macros = {
 				var tiddler = tiddlers[t],
 					theGroupParseTree = this.parser.processor.textProcessors.parse(groupTemplateType,groupTemplateText),
 					theGroup = theGroupParseTree.render("text/plain",theGroupParseTree.children,this.store,tiddler);
-
-				if(ul === undefined || theGroup != lastGroup) {
-					ul = {type: "ul", attributes: {"class": "timeline"}, children: []};
-					macroNode.output.push(ul);
-					ul.children.push({type: "li", attributes: {"class": "listTitle"}, children: [{type: "text", value: theGroup}]});
-					lastGroup = theGroup;
-				}
-				var item = {type: "li", attributes: {"class": "listLink"}, children: [ {
-							type: "context",
-							tiddler: tiddler,
-							children: []
-						}]};
-				ul.children.push(item);
-				var itemParseTree = this.parser.processor.textProcessors.parse(templateType,templateText);
-				for(var c=0; c<itemParseTree.children.length; c++) {
-					item.children[0].children.push(itemParseTree.children[c]);
+				if(theGroup !== "") {
+					if(ul === undefined || theGroup != lastGroup) {
+						ul = {type: "ul", attributes: {"class": "timeline"}, children: []};
+						macroNode.output.push(ul);
+						ul.children.push({type: "li", attributes: {"class": "listTitle"}, children: [{type: "text", value: theGroup}]});
+						lastGroup = theGroup;
+					}
+					var item = {
+									type: "li",
+									attributes: {
+										"class": "listLink"}, 
+									children: [ {
+										type: "context",
+										tiddler: tiddler,
+										children: []
+								}]};
+					ul.children.push(item);
+					var itemParseTree = this.parser.processor.textProcessors.parse(templateType,templateText);
+					for(var c=0; c<itemParseTree.children.length; c++) {
+						item.children[0].children.push(itemParseTree.children[c]);
+					}
 				}
 			}
 			this.executeMacros(macroNode.output,title);
