@@ -145,7 +145,7 @@ Recipe.prototype.sortTiddlersForMarker = function(marker) {
 // Process the contents of a recipe file
 Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 	var matchLine = function(linetext) {
-			var lineRegExp = /^(\s*)([^\s\:]+)\s*:\s*(.+)*$/,
+			var lineRegExp = /^(\s*)([^\s\:]+)\s*:\s*(.+)*\s*$/,
 				match = lineRegExp.exec(linetext);
 			return match ? {
 				indent: match[1],
