@@ -71,6 +71,13 @@ var Recipe = function(options,callback) {
 			if(err) {
 				callback(err);
 			} else {
+				if(task.recipeLine.fields) {
+					for(var t=0; t<data.length; t++) {
+						for(var f in task.recipeLine.fields) {
+							data[t][f] = task.recipeLine.fields[f];
+						}
+					}
+				}
 				task.recipeLine.tiddlers = data;
 				callback(null);
 			}
@@ -137,21 +144,42 @@ Recipe.prototype.sortTiddlersForMarker = function(marker) {
 
 // Process the contents of a recipe file
 Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
-	var me = this;
-	text.split("\n").forEach(function(line) {
-		var p = line.indexOf(":"),
-			insertionPoint;
-		if(p !== -1) {
-			var marker = line.substr(0, p).trim(),
-				value = line.substr(p+1).trim();
-			if(marker === "recipe") {
-				insertionPoint = recipe.push([]) - 1;
-				me.recipeQueue.push({filepath: value, contextPath: contextPath, recipe: recipe[insertionPoint]});
+	var matchLine = function(linetext) {
+			var lineRegExp = /^(\s*)([^\s\:]+)\s*:\s*(.+)*$/,
+				match = lineRegExp.exec(linetext);
+			return match ? {
+				indent: match[1],
+				marker: match[2],
+				value: match[3]
+			} : null;
+		},
+		lines = text.split("\n"),
+		line = 0;
+	while(line < lines.length) {
+		var linetext = lines[line++],
+			match = matchLine(linetext);
+		if(match) {
+			if(match.indent.length > 0) {
+				throw "Unexpected indentation in recipe file";
+			}
+			if(match.marker === "recipe") {
+				var insertionPoint = recipe.push([]) - 1;
+				this.recipeQueue.push({filepath: match.value, contextPath: contextPath, recipe: recipe[insertionPoint]});
 			} else {
-				recipe.push({marker: marker, filepath: value, contextPath: contextPath});
+				var fieldLines = [],
+					fieldMatch = matchLine(lines[line]);
+				while(fieldMatch && fieldMatch.indent.length > 0) {
+					fieldLines.push(lines[line++]);
+					fieldMatch = matchLine(lines[line]);
+				}
+				var fields = {};
+				if(fieldLines.length > 0) {
+					fields = this.tiddlerConverters.deserialize("application/x-tiddler",fieldLines.join("\n"),{})[0];
+				}
+				recipe.push({marker: match.marker, filepath: match.value, contextPath: contextPath, fields: fields});
 			}
 		}
-	});
+	}
 };
 
 // Read a tiddler file and callback with an array of hashmaps of tiddler fields. For single
@@ -279,7 +307,7 @@ Recipe.tiddlerOutputter = {
 			var title = tiddlers[t],
 				tid = this.store.getTiddler(title);
 			out.push("<" + "script type=\"application/javascript\">");
-			out.push("define(\"" + title + "\",function(require,exports) {");
+			out.push("define(\"" + title + "\",function(require,exports,module) {");
 			out.push(tid.fields.text);
 			out.push("});");
 			out.push("</" + "script>");
