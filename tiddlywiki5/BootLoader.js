@@ -7,7 +7,6 @@
 Given the absolute path of a srcModule, and a relative reference to a dstModule, return the fully resolved module name
 */
 function resolveModuleName(srcModule,dstModule) {
-console.log("Resolving " + dstModule + " in the context of " + srcModule);
 	var src = srcModule.split("/"),
 		dst = dstModule.split("/"),
 		c;

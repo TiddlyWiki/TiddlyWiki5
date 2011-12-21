@@ -14,7 +14,11 @@ Options and their defaults are:
 	defaultName: null,
 	defaultValue: null,
 	noNames: false,
-	cascadeDefaults: false
+	cascadeDefaults: false,
+	allowEval: true
+	globals: null
+
+`globals` is the global variable object provided to evaluated parameters
 
 \*/
 (function(){
@@ -22,23 +26,26 @@ Options and their defaults are:
 /*jslint node: true */
 "use strict";
 
+var Sandbox = require("./Sandbox.js").Sandbox;
+
 var ArgParser = function(argString,options) {
 	var parseToken = function(match,p) {
-		var n;
-		if(match[p]) // Double quoted
-			n = match[p];
-		else if(match[p+1]) // Single quoted
-			n = match[p+1];
-		else if(match[p+2]) // Double-square-bracket quoted
-			n = match[p+2];
-		else if(match[p+3]) // Double-brace quoted
-			n = match[p+3];
-		else if(match[p+4]) // Unquoted
-			n = match[p+4];
-		else if(match[p+5]) // empty quote
-			n = "";
-		return n;
-	};
+			var n;
+			if(match[p]) { // Double quoted
+				n = match[p];
+			} else if(match[p+1]) { // Single quoted
+				n = match[p+1];
+			} else if(match[p+2]) { // Double-square-bracket quoted
+				n = match[p+2];
+			} else if(match[p+3]) { // Double-brace quoted
+				n = options.allowEval === false ? match[p+3] : Sandbox(match[p+3],options.globals);
+			} else if(match[p+4]) { // Unquoted
+				n = match[p+4];
+			} else if(match[p+5]) { // empty quote
+				n = "";
+			}
+			return n;
+		};
 	this.byPos = [];
 	var dblQuote = "(?:\"((?:(?:\\\\\")|[^\"])+)\")",
 		sngQuote = "(?:'((?:(?:\\\\\')|[^'])+)')",

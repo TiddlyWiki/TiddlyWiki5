@@ -129,7 +129,19 @@ WikiTextRenderer.prototype.executeMacro = function(macroNode,title) {
 	var macroInfo = WikiTextRenderer.macros[macroNode.name];
 	macroNode.output = [];
 	if(macroInfo) {
-		macroInfo.handler.call(this,macroNode,title);
+		var args;
+		if(macroInfo.argOptions) {
+			var argOptions = {
+				globals: {
+					title: title
+				}
+			};
+			for(var g in macroInfo.argOptions) {
+				argOptions[g] = macroInfo.argOptions[g];
+			}
+			args = new ArgParser(macroNode.params,argOptions);
+		}
+		macroInfo.handler.call(this,macroNode,args,title);
 	} else {
 		macroNode.output.push({type: "text", value: "Unknown macro " + macroNode.name});
 	}
@@ -139,18 +151,25 @@ WikiTextRenderer.versionTiddlyWiki = "2.6.5";
 
 WikiTextRenderer.macros = {
 	allTags: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 		}
 	},
 	br: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 			macroNode.output.push({type: "br"});
 		}
 	},
+	echo: {
+		argOptions: {defaultName: "anon"},
+		handler: function(macroNode,args,title) {
+			var globals = {title: title};
+			macroNode.output.push({type: "text", value: args.byPos[0].v});
+		}	
+	},
 	timeline: {
-		handler: function(macroNode,title) {
-			var args = new ArgParser(macroNode.params,{defaultName:"anon"}),
-				anonByPos = args.getValuesByName("anon",[]),
+		argOptions: {defaultName:"anon"},
+		handler: function(macroNode,args,title) {
+			var anonByPos = args.getValuesByName("anon",[]),
 				field = anonByPos[0] || "modified",
 				limit = anonByPos[1] || null,
 				dateformat = anonByPos[2] || "DD MMM YYYY",
@@ -214,9 +233,9 @@ WikiTextRenderer.macros = {
 		}
 	},
 	list: {
-		handler: function(macroNode,title) {
-			var args = new ArgParser(macroNode.params,{defaultName:"type"}),
-				type = args.getValueByName("type","all"),
+		argOptions: {defaultName:"type"},
+		handler: function(macroNode,args,title) {
+			var type = args.getValueByName("type","all"),
 				template = args.getValueByName("template",null),
 				templateType = "text/x-tiddlywiki", templateText = "<<view title link>>",
 				emptyMessage = args.getValueByName("emptyMessage",null);
@@ -275,29 +294,29 @@ WikiTextRenderer.macros = {
 		}
 	},
 	slider: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 		}
 	},
 	tabs: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 		}
 	},
 	tag: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 		}
 	},
 	tagging: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 		}
 	},
 	tags: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 		}
 	},
 	tiddler: {
-		handler: function(macroNode,title) {
-			var args = new ArgParser(macroNode.params,{defaultName:"name",cascadeDefaults:true}),
-				targetTitle = args.getValueByName("name",null),
+		argOptions: {defaultName:"name",cascadeDefaults:true},
+		handler: function(macroNode,args,title) {
+			var targetTitle = args.getValueByName("name",null),
 				withTokens = args.getValuesByName("with",[]),
 				tiddler = this.store.getTiddler(targetTitle),
 				text = this.store.getTiddlerText(targetTitle,""),
@@ -312,22 +331,22 @@ WikiTextRenderer.macros = {
 		}
 	},
 	today: {
-		handler: function(macroNode,title) {
+		argOptions: {noNames:true},
+		handler: function(macroNode,args,title) {
 			var now = new Date(),
-				args = new ArgParser(macroNode.params,{noNames:true}),
 				value = args.byPos[0] ? utils.formatDateString(now,args.byPos[0].v) : now.toLocaleString();
 			macroNode.output.push({type: "text", value: value});
 		}
 	},
 	version: {
-		handler: function(macroNode,title) {
+		handler: function(macroNode,args,title) {
 			macroNode.output.push({type: "text", value: WikiTextRenderer.versionTiddlyWiki});
 		}
 	},
 	view: {
-		handler: function(macroNode,title) {
-			var args = new ArgParser(macroNode.params,{noNames:true}),
-				field = args.byPos[0] ? args.byPos[0].v : null,
+		argOptions: {noNames:true},
+		handler: function(macroNode,args,title) {
+			var field = args.byPos[0] ? args.byPos[0].v : null,
 				format = args.byPos[1] ? args.byPos[1].v : "text",
 				tiddler = this.store.getTiddler(title),
 				value = tiddler ? tiddler.fields[field] : null;
