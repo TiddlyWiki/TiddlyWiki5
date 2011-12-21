@@ -26,7 +26,7 @@ Options and their defaults are:
 /*jslint node: true */
 "use strict";
 
-var Sandbox = require("./Sandbox.js").Sandbox;
+var sandbox = require("./Sandbox.js").sandbox;
 
 var ArgParser = function(argString,options) {
 	var parseToken = function(match,p) {
@@ -38,7 +38,7 @@ var ArgParser = function(argString,options) {
 			} else if(match[p+2]) { // Double-square-bracket quoted
 				n = match[p+2];
 			} else if(match[p+3]) { // Double-brace quoted
-				n = options.allowEval === false ? match[p+3] : Sandbox(match[p+3],options.globals);
+				n = options.allowEval === false ? match[p+3] : sandbox(match[p+3],options.globals);
 			} else if(match[p+4]) { // Unquoted
 				n = match[p+4];
 			} else if(match[p+5]) { // empty quote

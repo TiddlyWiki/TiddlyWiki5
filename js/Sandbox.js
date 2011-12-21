@@ -6,16 +6,12 @@ Execute a fragment of JavaScript in a sandbox
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint evil: true, node: true */
 "use strict";
 
 var uglify = require("uglify-js");
 
-var safeEval = function(e) {
-	return eval(e);
-};
-
-var Sandbox = function(code,globals) {
+var sandbox = function(code,globals) {
 	var globalNames = [],
 		globalValues = [],
 		collectGlobals = function(globals) {
@@ -34,7 +30,7 @@ var Sandbox = function(code,globals) {
 	});
 	// Compose the code
 	var out = [];
-	out.push("(function(")
+	out.push("(function(");
 	out.push(globalNames.join(","));
 	out.push(") { return ");
 	out.push(code);
@@ -45,9 +41,15 @@ var Sandbox = function(code,globals) {
 	// Recompile the code
 	var compiledCode = uglify.uglify.gen_code(tree);
 	// Execute it
-	return eval(compiledCode).apply(null,globalValues);
+	var result;
+	try {
+		result = eval(compiledCode).apply(null,globalValues);
+	} catch(err) {
+		result = "{{** Evaluation error: " + err + " **}}";
+	}
+	return result;
 };
 
-exports.Sandbox = Sandbox;
+exports.sandbox = sandbox;
 
 })();

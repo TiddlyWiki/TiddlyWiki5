@@ -59,10 +59,10 @@ for(t=0; t<titles.length; t++) {
 		htmlRender = store.renderTiddler("text/html",titles[t]),
 		plainRender = store.renderTiddler("text/plain",titles[t]);
 	if(htmlTarget !== htmlRender) {
-		console.error("Tiddler %s html error\nTarget: %s\nFound: %s\n",titles[t],htmlTarget,htmlRender);
+		console.error("Tiddler %s html error\nTarget: %s\nFound:  %s\n",titles[t],htmlTarget,htmlRender);
 	}
 	if(plainTarget !== plainRender) {
-		console.error("Tiddler %s plain text error\nTarget: %s\nFound: %s\n",titles[t],plainTarget,plainRender);
+		console.error("Tiddler %s plain text error\nTarget: %s\nFound:  %s\n",titles[t],plainTarget,plainRender);
 	}
 }
 
