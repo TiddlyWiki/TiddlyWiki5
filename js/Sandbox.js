@@ -9,9 +9,13 @@ Execute a fragment of JavaScript in a sandbox
 /*jslint evil: true, node: true */
 "use strict";
 
-var uglify = require("uglify-js");
+var pegjs = require("pegjs");
 
-var sandbox = function(code,globals) {
+var Sandbox = function(parserText) {
+	this.parser = pegjs.buildParser(parserText);
+};
+
+Sandbox.prototype.execute = function(code,globals) {
 	var globalNames = [],
 		globalValues = [],
 		collectGlobals = function(globals) {
@@ -36,20 +40,20 @@ var sandbox = function(code,globals) {
 	out.push(code);
 	out.push(";})");
 	// Parse the code
-	var tree = uglify.parser.parse(out.join(""));
+	var code = out.join(""),
+		tree = this.parser.parse(out.join(""));
 	// XXX: Sanitise the code by checking for references to globals, stripping out eval()
-	// Recompile the code
-	var compiledCode = uglify.uglify.gen_code(tree);
+console.log(tree);
 	// Execute it
 	var result;
 	try {
-		result = eval(compiledCode).apply(null,globalValues);
+		result = eval(code).apply(null,globalValues);
 	} catch(err) {
 		result = "{{** Evaluation error: " + err + " **}}";
 	}
 	return result;
 };
 
-exports.sandbox = sandbox;
+exports.Sandbox = Sandbox;
 
 })();

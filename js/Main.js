@@ -14,6 +14,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	WikiTextProcessor = require("./WikiTextProcessor.js").WikiTextProcessor,
+	Sandbox = require("./Sandbox.js").Sandbox,
 	Navigators = require("./Navigators.js").Navigators,
 	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
 
@@ -57,6 +58,9 @@ var storeArea = document.getElementById("storeArea"),
 for(t=0; t<tiddlers.length; t++) {
 	store.addTiddler(new Tiddler(tiddlers[t]));
 }
+
+// Set up the sandbox for evaluated macro parameters
+store.sandbox = new Sandbox(store.getTiddlerText("javascript.pegjs"));
 
 // Install the standard navigators
 var navigators = new Navigators({

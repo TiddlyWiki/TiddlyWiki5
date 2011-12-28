@@ -3,6 +3,7 @@ copyright: ../copyright.txt
 style: styles.css
 
 recipe: tiddlers/split.recipe
+recipe: ../parsers/split.recipe
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 
@@ -22,14 +23,8 @@ jsmodule: ../js/Navigators.js
 jsmodule: ../js/StoryNavigator.js
 jsmodule: ../js/Main.js
 
-jsmodule: ../node_modules/uglify-js/lib/parse-js.js
-	title: lib/parse-js
-jsmodule: ../node_modules/uglify-js/lib/process.js
-	title: lib/process
-jsmodule: ../node_modules/uglify-js/lib/squeeze-more.js
-	title: lib/squeeze-more
-jsmodule: ../node_modules/uglify-js/uglify-js.js
-	title: uglify-js
+jsmodule: ../node_modules/pegjs/lib/peg.js
+	title: pegjs
 
 jsbootstart: BootStart.js
 jsbootend: BootLoader.js

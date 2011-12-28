@@ -134,7 +134,8 @@ WikiTextRenderer.prototype.executeMacro = function(macroNode,title) {
 			var argOptions = {
 				globals: {
 					title: title
-				}
+				},
+				sandbox: this.store.sandbox
 			};
 			for(var g in macroInfo.argOptions) {
 				argOptions[g] = macroInfo.argOptions[g];

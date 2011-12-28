@@ -21,6 +21,7 @@ var WikiStore = function WikiStore(options) {
 	this.textProcessors = {};
 	this.tiddlerSerializers = {};
 	this.tiddlerDeserializers = {};
+	this.sandbox = options.sandbox;
 	this.shadows = options.shadowStore !== undefined ? options.shadowStore : new WikiStore({
 		shadowStore: null
 	});

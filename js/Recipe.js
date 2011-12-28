@@ -57,7 +57,7 @@ var Recipe = function(options,callback) {
 	this.recipeQueue = async.queue(function(task,callback) {
 		retrieveFile(task.filepath,task.contextPath,function(err,data) {
 			if(err) {
-				callback(err);
+				me.callback(err);
 			} else {
 				me.processRecipeFile(task.recipe,data.text,data.path);
 				callback(null);
@@ -342,7 +342,7 @@ Recipe.prototype.cookRss = function()
 		getRssTiddlers = function(sortField,excludeTag) {
 			var r = [];
 			me.store.forEachTiddler(sortField,excludeTag,function(title,tiddler) {
-				if(!tiddler.hasTag(excludeTag)) {
+				if(!tiddler.hasTag(excludeTag) && tiddler.fields.modified !== undefined) {
 					r.push(tiddler);
 				}
 			});

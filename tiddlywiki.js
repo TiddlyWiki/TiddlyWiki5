@@ -107,8 +107,8 @@ var commandLineSwitches = {
 				recipe = new Recipe({
 					filepath: args[0],
 					store: store
-				},function() {
-					callback(null);
+				},function(err) {
+					callback(err);
 				});
 			}
 		}
