@@ -207,7 +207,7 @@ WikiTextRenderer.macros = {
 			}
 			for(t=tiddlers.length-1; t>=last; t--) {
 				var tiddler = tiddlers[t],
-					theGroupParseTree = this.parser.processor.textProcessors.parse(groupTemplateType,groupTemplateText),
+					theGroupParseTree = this.store.parseText(groupTemplateType,groupTemplateText),
 					theGroup = theGroupParseTree.render("text/plain",theGroupParseTree.children,this.store,tiddler);
 				if(theGroup !== "") {
 					if(ul === undefined || theGroup !== lastGroup) {
@@ -226,7 +226,7 @@ WikiTextRenderer.macros = {
 										children: []
 								}]};
 					ul.children.push(item);
-					item.children[0].children = this.parser.processor.textProcessors.parse(templateType,templateText).children;
+					item.children[0].children = this.store.parseText(templateType,templateText).children;
 				}
 			}
 			this.executeMacros(macroNode.output,title);
@@ -260,7 +260,7 @@ WikiTextRenderer.macros = {
 							children: []
 						} ] 
 				};
-				li.children[0].children = this.parser.processor.textProcessors.parse(templateType,templateText).children;
+				li.children[0].children = this.store.parseText(templateType,templateText).children;
 				ul.children.push(li);
 			}
 			if(ul.children.length > 0) {
@@ -325,7 +325,7 @@ WikiTextRenderer.macros = {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			macroNode.output = this.parser.processor.textProcessors.parse(tiddler.fields.type,text).children;
+			macroNode.output = this.store.parseText(tiddler.fields.type,text).children;
 			// Execute any macros in the copy
 			this.executeMacros(macroNode.output,title);
 		}
@@ -367,7 +367,7 @@ WikiTextRenderer.macros = {
 						});
 						break;
 					case "wikified":
-						macroNode.output = this.parser.processor.textProcessors.parse("text/x-tiddlywiki",value).children;
+						macroNode.output = this.store.parseText("text/x-tiddlywiki",value).children;
 						// Execute any macros in the copy
 						this.executeMacros(macroNode.output,title);
 						break;

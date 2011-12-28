@@ -11,11 +11,9 @@ jsmodule: ../js/ArgParser.js
 jsmodule: ../js/FileRetriever.js
 jsmodule: ../js/Utils.js
 jsmodule: ../js/Tiddler.js
-jsmodule: ../js/TiddlerConverters.js
 jsmodule: ../js/TiddlerInput.js
 jsmodule: ../js/TiddlerOutput.js
 jsmodule: ../js/WikiStore.js
-jsmodule: ../js/TextProcessors.js
 jsmodule: ../js/WikiTextProcessor.js
 jsmodule: ../js/WikiTextParser.js
 jsmodule: ../js/WikiTextRules.js

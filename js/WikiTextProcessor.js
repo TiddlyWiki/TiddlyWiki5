@@ -24,7 +24,6 @@ Planned:
 	extraMacros: An array of additional macro handlers to add
 */
 var WikiTextProcessor = function(options) {
-	this.textProcessors = options.textProcessors;
 	this.rules = WikiTextRules.rules;
 	var pattern = [];
 	for(var n=0; n<this.rules.length; n++) {

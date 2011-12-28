@@ -16,9 +16,7 @@ verifying that the output matches `<tiddlername>.html` and `<tiddlername>.txt`.
 
 var Tiddler = require("./js/Tiddler.js").Tiddler,
 	WikiStore = require("./js/WikiStore.js").WikiStore,
-	TextProcessors = require("./js/TextProcessors.js").TextProcessors,
 	WikiTextProcessor = require("./js/WikiTextProcessor.js").WikiTextProcessor,
-	TiddlerConverters = require("./js/TiddlerConverters.js").TiddlerConverters,
 	tiddlerInput = require("./js/TiddlerInput.js"),
 	utils = require("./js/Utils.js"),
 	util = require("util"),
@@ -26,24 +24,20 @@ var Tiddler = require("./js/Tiddler.js").Tiddler,
 	path = require("path");
 
 var testdirectory = process.argv[2],
-	textProcessors = new TextProcessors(),
-	tiddlerConverters = new TiddlerConverters(),
-	store = new WikiStore({
-		textProcessors: textProcessors
-	}),
+	store = new WikiStore(),
 	files = fs.readdirSync(testdirectory),
 	titles = [],
 	f,t,extname,basename;
 
-textProcessors.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
-	textProcessors: textProcessors
+store.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
+	store: store
 }));
-tiddlerInput.register(tiddlerConverters);
+tiddlerInput.register(store);
 
 for(f=0; f<files.length; f++) {
 	extname = path.extname(files[f]);
 	if(extname === ".tid") {
-		var tiddlers = tiddlerConverters.deserialize(extname,fs.readFileSync(path.resolve(testdirectory,files[f]),"utf8"));
+		var tiddlers = store.deserializeTiddlers(extname,fs.readFileSync(path.resolve(testdirectory,files[f]),"utf8"));
 		if(tiddlers.length > 1) {
 			throw "Cannot use .JSON files";
 		}

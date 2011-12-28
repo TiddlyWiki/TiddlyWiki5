@@ -51,8 +51,6 @@ var Recipe = function(options,callback) {
 	var me = this;
 	this.filepath = options.filepath;
 	this.store = options.store;
-	this.tiddlerConverters = options.tiddlerConverters;
-	this.textProcessors = options.textProcessors;
 	this.callback = callback;
 	this.recipe = [];
 	this.markers = {};
@@ -174,7 +172,7 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 				}
 				var fields = {};
 				if(fieldLines.length > 0) {
-					fields = this.tiddlerConverters.deserialize("application/x-tiddler",fieldLines.join("\n"),{})[0];
+					fields = this.store.deserializeTiddlers("application/x-tiddler",fieldLines.join("\n"),{})[0];
 				}
 				recipe.push({marker: match.marker, filepath: match.value, contextPath: contextPath, fields: fields});
 			}
@@ -192,7 +190,7 @@ Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
 		var fields = {
 			title: data.path
 		};
-		var tiddlers = me.tiddlerConverters.deserialize(data.extname,data.text,fields);
+		var tiddlers = me.store.deserializeTiddlers(data.extname,data.text,fields);
 		// Check for the .meta file
 		if(data.extname !== ".json" && tiddlers.length === 1) {
 			var metafile = filepath + ".meta";
@@ -204,7 +202,7 @@ Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
 					if(!err) {
 						var text = data.text.split("\n\n")[0];
 						if(text) {
-							fields = me.tiddlerConverters.deserialize("application/x-tiddler",text,fields)[0];
+							fields = me.store.deserializeTiddlers("application/x-tiddler",text,fields)[0];
 						}
 					}
 					callback(null,[fields]);
@@ -272,7 +270,7 @@ Recipe.tiddlerOutputter = {
 		// Ordinary tiddlers are output as a <DIV>
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = this.store.getTiddler(tiddlers[t]);
-			out.push(this.tiddlerConverters.serialize("application/x-tiddler-html-div",tid));
+			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid));
 		}
 	},
 	javascript: function(out,tiddlers) {
@@ -295,7 +293,7 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
 				tid = this.store.shadows.getTiddler(title);
-			out.push(this.tiddlerConverters.serialize("application/x-tiddler-html-div",tid));
+			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid));
 		}
 	},
 	title: function(out,tiddlers) {

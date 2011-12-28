@@ -10,17 +10,34 @@ title: js/WikiStore.js
 var Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util");
 
+/* Creates a new WikiStore object
+
+Available options are:
+	shadowStore: An existing WikiStore to use for shadow tiddler storage. Pass null to prevent a default shadow store from being created
+*/
 var WikiStore = function WikiStore(options) {
+	options = options || {};
 	this.tiddlers = {};
+	this.textProcessors = {};
+	this.tiddlerSerializers = {};
+	this.tiddlerDeserializers = {};
 	this.shadows = options.shadowStore !== undefined ? options.shadowStore : new WikiStore({
-		shadowStore: null,
-		textProcessors: options.textProcessors
+		shadowStore: null
 	});
-	this.textProcessors = options.textProcessors;
 };
 
-WikiStore.prototype.clear = function() {
-	this.tiddlers = {};
+WikiStore.prototype.registerTextProcessor = function(type,processor) {
+	this.textProcessors[type] = processor;
+};
+
+WikiStore.prototype.registerTiddlerSerializer = function(extension,mimeType,serializer) {
+	this.tiddlerSerializers[extension] = serializer;
+	this.tiddlerSerializers[mimeType] = serializer;
+};
+
+WikiStore.prototype.registerTiddlerDeserializer = function(extension,mimeType,deserializer) {
+	this.tiddlerDeserializers[extension] = deserializer;
+	this.tiddlerDeserializers[mimeType] = deserializer;	
 };
 
 WikiStore.prototype.getTiddler = function(title) {
@@ -115,10 +132,49 @@ WikiStore.prototype.getShadowTitles = function() {
 	return this.shadows ? this.shadows.getTitles() : [];
 };
 
+WikiStore.prototype.serializeTiddler = function(type,tiddler) {
+	var serializer = this.tiddlerSerializers[type];
+	if(serializer) {
+		return serializer(tiddler);
+	} else {
+		return null;
+	}
+};
+
+WikiStore.prototype.deserializeTiddlers = function(type,text,srcFields) {
+	var fields = {},
+		deserializer = this.tiddlerDeserializers[type],
+		t;
+	if(srcFields) {
+		for(t in srcFields) {
+			fields[t] = srcFields[t];		
+		}
+	}
+	if(deserializer) {
+		return deserializer(text,fields);
+	} else {
+		// Return a raw tiddler for unknown types
+		fields.text = text;
+		return [fields];
+	}
+};
+
+WikiStore.prototype.parseText = function(type,text) {
+	var processor = this.textProcessors[type];
+	if(!processor) {
+		processor = this.textProcessors["text/x-tiddlywiki"];
+	}
+	if(processor) {
+		return processor.parse(text);
+	} else {
+		return null;
+	}
+};
+
 WikiStore.prototype.parseTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
-		return this.textProcessors.parse(tiddler.fields.type,tiddler.fields.text);
+		return this.parseText(tiddler.fields.type,tiddler.fields.text);
 	} else {
 		return null;
 	}

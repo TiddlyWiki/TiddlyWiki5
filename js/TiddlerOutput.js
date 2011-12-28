@@ -104,9 +104,9 @@ var outputTiddlerDiv = function(tid) {
 	return result.join("");
 };
 
-tiddlerOutput.register = function(tiddlerConverters) {
-	tiddlerConverters.registerSerializer(".tid","application/x-tiddler",outputTiddler);
-	tiddlerConverters.registerSerializer(".tiddler","application/x-tiddler-html-div",outputTiddlerDiv);
+tiddlerOutput.register = function(store) {
+	store.registerTiddlerSerializer(".tid","application/x-tiddler",outputTiddler);
+	store.registerTiddlerSerializer(".tiddler","application/x-tiddler-html-div",outputTiddlerDiv);
 };
 
 })();

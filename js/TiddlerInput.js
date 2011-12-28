@@ -208,14 +208,14 @@ var inputTiddlerDOM = function(node) {
 	return tiddlers;
 };
 
-tiddlerInput.register = function(tiddlerConverters) {
-	tiddlerConverters.registerDeserializer(".txt","text/plain",inputTiddlerPlain);
-	tiddlerConverters.registerDeserializer(".js","application/javascript",inputTiddlerJavaScript);
-	tiddlerConverters.registerDeserializer(".tiddler","application/x-tiddler-html-div",inputTiddlerDiv);
-	tiddlerConverters.registerDeserializer(".tid","application/x-tiddler",inputTiddler);
-	tiddlerConverters.registerDeserializer(".json","application/json",inputTiddlerJSON);
-	tiddlerConverters.registerDeserializer(".tiddlywiki","application/x-tiddlywiki",inputTiddlyWiki);
-	tiddlerConverters.registerDeserializer("(DOM)","(DOM)",inputTiddlerDOM);
+tiddlerInput.register = function(store) {
+	store.registerTiddlerDeserializer(".txt","text/plain",inputTiddlerPlain);
+	store.registerTiddlerDeserializer(".js","application/javascript",inputTiddlerJavaScript);
+	store.registerTiddlerDeserializer(".tiddler","application/x-tiddler-html-div",inputTiddlerDiv);
+	store.registerTiddlerDeserializer(".tid","application/x-tiddler",inputTiddler);
+	store.registerTiddlerDeserializer(".json","application/json",inputTiddlerJSON);
+	store.registerTiddlerDeserializer(".tiddlywiki","application/x-tiddlywiki",inputTiddlyWiki);
+	store.registerTiddlerDeserializer("(DOM)","(DOM)",inputTiddlerDOM);
 };
 
 })();
