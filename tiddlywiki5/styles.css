@@ -1,5 +1,5 @@
 body {
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 /* Following styles created with http://www.gridlover.net/; */
@@ -9,7 +9,7 @@ body {
     line-height: 27px;
 }
 article {
-    max-width: 944px;
+    max-width: 644px;
     margin: auto;
 }
 .title {
