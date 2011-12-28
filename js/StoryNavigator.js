@@ -16,7 +16,11 @@ var StoryNavigator = function(navigators) {
 StoryNavigator.prototype.navigateTo = function(title) {
 	var tiddlerHtml = this.navigators.store.renderTiddler("text/html","SimpleTemplate",title);
 	if(tiddlerHtml) {
-		$("<article/>").html(tiddlerHtml).appendTo("body");
+		var article = $("<article/>").html(tiddlerHtml);
+		article.appendTo("body");
+		$("html,body").animate({
+			scrollTop: article.offset().top
+		}, 400);
 		return false;
 	} else {
 		return true;		
