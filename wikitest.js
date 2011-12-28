@@ -34,6 +34,10 @@ store.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
 }));
 tiddlerInput.register(store);
 
+// Frightful temporary hack, but setup the sandbox for evaluated macro parameters
+var Sandbox = require("./js/Sandbox.js").Sandbox;
+store.sandbox = new Sandbox(fs.readFileSync("parsers/javascript.pegjs","utf8"));
+
 for(f=0; f<files.length; f++) {
 	extname = path.extname(files[f]);
 	if(extname === ".tid") {

@@ -40,14 +40,13 @@ Sandbox.prototype.execute = function(code,globals) {
 	out.push(code);
 	out.push(";})");
 	// Parse the code
-	var code = out.join(""),
+	var compiledCode = out.join(""),
 		tree = this.parser.parse(out.join(""));
 	// XXX: Sanitise the code by checking for references to globals, stripping out eval()
-console.log(tree);
 	// Execute it
 	var result;
 	try {
-		result = eval(code).apply(null,globalValues);
+		result = eval(compiledCode).apply(null,globalValues);
 	} catch(err) {
 		result = "{{** Evaluation error: " + err + " **}}";
 	}
