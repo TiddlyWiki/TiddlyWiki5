@@ -14,7 +14,7 @@ var WikiTextRules = require("./WikiTextRules.js"),
 Creates a new instance of the wiki text processor with the specified options. The
 options are a hashmap of mandatory members as follows:
 
-	textProcessors: The TextProcessors object to use to parse any cascaded content (eg transclusion)
+	store: The store object to use to parse any cascaded content (eg transclusion)
 
 Planned:
 
@@ -24,6 +24,8 @@ Planned:
 	extraMacros: An array of additional macro handlers to add
 */
 var WikiTextProcessor = function(options) {
+	options = options || {};
+	this.store = options.store;
 	this.rules = WikiTextRules.rules;
 	var pattern = [];
 	for(var n=0; n<this.rules.length; n++) {
