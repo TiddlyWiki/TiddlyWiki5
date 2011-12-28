@@ -95,11 +95,24 @@ WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callba
 };
 
 WikiStore.prototype.getTitles = function(sortField,excludeTag) {
+	sortField = sortField || "title";
 	var tiddlers = [];
 	this.forEachTiddler(sortField,excludeTag,function(title,tiddler) {
 		tiddlers.push(title);
 	});
 	return tiddlers;
+};
+
+WikiStore.prototype.getMissingTitles = function() {
+	return [];
+};
+
+WikiStore.prototype.getOrphanTitles = function() {
+	return [];
+};
+
+WikiStore.prototype.getShadowTitles = function() {
+	return this.shadows ? this.shadows.getTitles() : [];
 };
 
 WikiStore.prototype.parseTiddler = function(title) {
