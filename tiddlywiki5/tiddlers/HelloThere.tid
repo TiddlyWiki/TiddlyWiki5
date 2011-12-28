@@ -1,12 +1,12 @@
 title: HelloThere
 modifier: JeremyRuston
 
-Welcome to TiddlyWiki5, a [[primordial|ThisIsAlpha]], modernised reusable non-linear personal web notebook.
+Welcome to TiddlyWiki5, an [[in-progress|ThisIsAlpha]] reboot of TiddlyWiki, the reusable non-linear personal web notebook first released in 2004.
 
-TiddlyWiki is a unique [[wiki|WikiWikiWeb]] that people [[love using|Raves]] to keep ideas and information organised. It was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers.
+Over the years, TiddlyWiki has earned an enduring role as a tool that people [[love using|Raves]] for its rich, interactive interface to [[manipulate complex data|TiddlyWikiConcepts]] with structure that doesn't easily fit into conventional tools like spreadsheets and wordprocessors. Because people can use it without needing any complicated server infrastructure, and because it is [[open source|OpenSourceLicense]], it has bought unprecedented freedom to people to keep their precious information under their own control. TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers.
 
-TiddlyWiki is written in [[HTML]], [[CSS]] and JavaScript to run on any reasonably modern [[browser|Browsers]] without needing any ServerSide logic. It allows anyone to create personal SelfContained hypertext documents that can be published to a WebServer, sent by email, stored in a DropBox or kept on a USB thumb drive to make a WikiOnAStick. Because it doesn't need to be installed and configured it makes a great GuerillaWiki. This is revision <<version>> of TiddlyWiki, and is published under an OpenSourceLicense.
+TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|TiddlyWikiArchitecture]] using the latest features of HTML5 and node.js. It runs natively under node.js, and can also use its own components to construct a version of itself that works entirely within the browser, just as TiddlyWiki has always done.
 
-Unlike most wikis, TiddlyWiki doesn't directly support group collaboration; it is a wiki in the sense of elevating linking be a part of the punctuation of writing. You can easily publish a TiddlyWiki you have created by placing the single file on a web server (for instance the homepage hosting provided by many ISPs). If you need full  group collaboration features, there are several HostedOptions to choose from.
+TiddlyWiki5 also functions as the build system for earlier versions of TiddlyWiki, replacing the elderly Cook and Ginsu tools (see https://github.com/TiddlyWiki/cooker for details). See the CommandLineInterface for details.
 
-<<echo {{2+2 /* something */ - 3 * 17 + title + tiddlywiki + out.length}}>>
+<<list all>>

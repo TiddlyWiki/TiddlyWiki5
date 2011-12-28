@@ -1,3 +1,13 @@
 tiddler: HelloThere.tid
 tiddler: ThisIsAlpha.tid
+tiddler: CommandLineInterface.tid
+tiddler: RecipeFiles.tid
+tiddler: TiddlerFiles.tid
+tiddler: TiddlyWikiArchitecture.tid
+tiddler: TiddlyWikiInternals.tid
+tiddler: NewWikiTextFeatures.tid
+
+tiddler: SiteTitle.tid
+tiddler: SiteSubtitle.tid
+
 tiddler: SimpleTemplate.tid
