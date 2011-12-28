@@ -37,7 +37,7 @@ var sandbox = function(code,globals) {
 	out.push(";})");
 	// Parse the code
 	var tree = uglify.parser.parse(out.join(""));
-	// XXX: Sanitise the code by checking for references to globals
+	// XXX: Sanitise the code by checking for references to globals, stripping out eval()
 	// Recompile the code
 	var compiledCode = uglify.uglify.gen_code(tree);
 	// Execute it
