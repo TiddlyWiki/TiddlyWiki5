@@ -8,6 +8,7 @@ title: js/WikiStore.js
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,
+	utils = require("./Utils.js"),
 	util = require("util");
 
 /* Creates a new WikiStore object
@@ -160,6 +161,105 @@ WikiStore.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	}
 };
 
+WikiStore.prototype.getFormattedTiddlerField = function(title,field,format,template) {
+	format = format || "text";
+	var tiddler = this.getTiddler(title);
+	if(tiddler && tiddler.fields[field]) {
+		switch(format) {
+			case "text":
+				return utils.htmlEncode(tiddler.fields[field]);
+				break;
+			case "link":
+				// xxx: Attribute encoding is wrong
+				return "<a href='" + utils.htmlEncode(tiddler.fields[field]) + "'>" + utils.htmlEncode(tiddler.fields[field]) + "</a>";
+				break;
+			case "wikified":
+				return this.renderTiddler("text/html",tiddler.fields.title);
+				break;
+			case "date":
+				template = template || "DD MMM YYYY";
+				return utils.htmlEncode(utils.formatDateString(tiddler.fields[field],template));
+				break;
+		}
+	}
+	return "";
+};
+
+WikiStore.prototype.classesForLink = function(target) {
+	return this.tiddlerExists(target) ? "class=\"linkResolves\"" : "";
+};
+
+WikiStore.prototype.listTiddlers = function(type,template,emptyMessage) {
+	return "<span>Listing!</span>";
+};
+
+
+/*
+
+		argOptions: {defaultName:"type"},
+		handler: function(macroNode,args,title) {
+			var type = args.getValueByName("type","all"),
+				template = args.getValueByName("template",null),
+				templateType = "text/x-tiddlywiki", templateText = "<<view title link>>",
+				emptyMessage = args.getValueByName("emptyMessage",null);
+			// Get the template to use
+			template = template ? this.store.getTiddler(template) : null;
+			if(template) {
+				templateType = template.fields.type;
+				templateText = template.fields.text;
+			}
+			// Get the handler and the tiddlers
+			var handler = WikiTextRenderer.macros.list.types[type];
+			handler = handler || WikiTextRenderer.macros.list.types.all;
+			var tiddlers = handler.call(this);
+			// Render them as a list
+			var ul = {type: "ul", children: []};
+			for(var t=0; t<tiddlers.length; t++) {
+				var li = {
+						type: "li",
+						children: [ {
+							type: "context",
+							tiddler: tiddlers[t],
+							children: []
+						} ] 
+				};
+				li.children[0].children = this.store.parseText(templateType,templateText).children;
+				ul.children.push(li);
+			}
+			if(ul.children.length > 0) {
+				macroNode.output.push(ul);
+				this.executeMacros(macroNode.output,title);
+			} else if (emptyMessage) {
+				macroNode.output.push({type: "text", value: emptyMessage});	
+			}
+		},
+		types: {
+			all: function() {
+				return this.store.getTitles("title","excludeLists");
+			},
+			missing: function() {
+				return this.store.getMissingTitles();
+			},
+			orphans: function() {
+				return this.store.getOrphanTitles();
+			},
+			shadowed: function() {
+				return this.store.getShadowTitles();
+			},
+			touched: function() {
+				// Server syncing isn't implemented yet
+				return [];
+			},
+			filter: function() {
+				// Filters aren't implemented yet
+				return [];
+			}
+		}
+	},
+
+*/
+
+
 WikiStore.prototype.parseText = function(type,text) {
 	var processor = this.textProcessors[type];
 	if(!processor) {
@@ -192,6 +292,52 @@ WikiStore.prototype.renderTiddler = function(type,title,asTitle) {
 	} else {
 		return null;
 	}
+};
+
+WikiStore.prototype.compileTiddler = function(type,title,asTitle) {
+	var parser = this.parseTiddler(title),
+		asTitleExists = asTitle ? this.tiddlerExists(asTitle) : true;
+	if(parser && asTitleExists) {
+		return parser.compile(type,parser.children,this,asTitle ? asTitle : title);
+	} else {
+		return null;
+	}
+};
+
+WikiStore.prototype.installMacros = function() {
+	this.macros = {
+		echo: {
+			params: {
+				text: {byPos: 0, type: "text", optional: false}
+			},
+			code: {
+				"text/html": this.sandbox.parse("return '<p>' + utils.htmlEncode(params.text) + '</p>';"),
+				"text/plain": this.sandbox.parse("return params.text;")
+			}
+		},
+		view: {
+			params: {
+				field: {byPos: 0, type: "text", optional: false},
+				format: {byPos: 1, type: "text", optional: true},
+				template: {byPos: 2, type: "text", optional: true}
+			},
+			code: {
+				"text/html": this.sandbox.parse("return '<span>' + store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template) + '</span>';"),
+				"text/plain": this.sandbox.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);")
+			}
+		},
+		list: {
+			params: {
+				type: {byName: "default", type: "text", optional: false},
+				template: {byName: true, type: "tiddler", optional: true},
+				emptyMessage: {byName: true, type: "text", optional: true}
+			},
+			code: {
+				"text/html": this.sandbox.parse("return '<span>' + store.listTiddlers(params.type,params.template,params.emptyMessage) + '</span>';"),
+				"text/plain": this.sandbox.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);")
+			}
+		}
+	};
 };
 
 exports.WikiStore = WikiStore;
