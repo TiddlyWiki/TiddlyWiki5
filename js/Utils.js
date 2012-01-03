@@ -156,7 +156,11 @@ utils.getHours12 = function(date) {
 // Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
 utils.htmlEncode = function(s)
 {
-	return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
+	} else {
+		return "";
+	}
 };
 
 // Convert "&amp;" to &, "&lt;" to <, "&gt;" to > and "&quot;" to "
@@ -188,6 +192,47 @@ utils.htmlEntities = {quot:34, amp:38, apos:39, lt:60, gt:62, nbsp:160, iexcl:16
 
 utils.unescapeLineBreaks = function(s) {
 	return s.replace(/\\n/mg,"\n").replace(/\\b/mg," ").replace(/\\s/mg,"\\").replace(/\r/mg,"");
+};
+
+/*
+ * Returns an escape sequence for given character. Uses \x for characters <=
+ * 0xFF to save space, \u for the rest.
+ *
+ * The code needs to be in sync with th code template in the compilation
+ * function for "action" nodes.
+ */
+// Copied from peg.js, thanks to David Majda
+utils.escape = function(ch) {
+	var escapeChar,
+		length,
+		charCode = ch.charCodeAt(0);
+	if (charCode <= 0xFF) {
+		escapeChar = 'x';
+		length = 2;
+	} else {
+		escapeChar = 'u';
+		length = 4;
+	}
+	return '\\' + escapeChar + utils.zeroPad(charCode.toString(16).toUpperCase(),length);
+};
+
+// Turns a string into a legal JavaScript string
+// Copied from peg.js, thanks to David Majda
+utils.stringify = function(s) {
+	/*
+	* ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a string
+	* literal except for the closing quote character, backslash, carriage return,
+	* line separator, paragraph separator, and line feed. Any character may
+	* appear in the form of an escape sequence.
+	*
+	* For portability, we also escape escape all non-ASCII characters.
+	*/
+	return '"' + s
+		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/"/g, '\\"')              // closing quote character
+		.replace(/\r/g, '\\r')             // carriage return
+		.replace(/\n/g, '\\n')             // line feed
+		.replace(/[\x80-\uFFFF]/g, utils.escape) + '"'; // non-ASCII characters
 };
 
 })();
