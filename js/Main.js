@@ -72,7 +72,12 @@ navigators.registerNavigator("StoryNavigator",new StoryNavigator(navigators));
 // Use the story navigator for all links
 navigators.install("a","StoryNavigator");
 
+store.installMacros();
+
+//console.log(JSON.stringify(store.sandbox.parse("store.classesForLink(\"HelloThere\");")));
+
 // Navigate to HelloThere
 navigators.navigateTo("HelloThere","StoryNavigator");
+
 
 })();
