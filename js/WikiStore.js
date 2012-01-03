@@ -168,18 +168,14 @@ WikiStore.prototype.getFormattedTiddlerField = function(title,field,format,templ
 		switch(format) {
 			case "text":
 				return utils.htmlEncode(tiddler.fields[field]);
-				break;
 			case "link":
 				// xxx: Attribute encoding is wrong
 				return "<a href='" + utils.htmlEncode(tiddler.fields[field]) + "'>" + utils.htmlEncode(tiddler.fields[field]) + "</a>";
-				break;
 			case "wikified":
 				return this.renderTiddler("text/html",tiddler.fields.title);
-				break;
 			case "date":
 				template = template || "DD MMM YYYY";
 				return utils.htmlEncode(utils.formatDateString(tiddler.fields[field],template));
-				break;
 		}
 	}
 	return "";

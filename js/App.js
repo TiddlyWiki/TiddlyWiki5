@@ -1,5 +1,5 @@
 /*\
-title: js/Main.js
+title: js/App.js
 
 This is the main() function in the browser
 

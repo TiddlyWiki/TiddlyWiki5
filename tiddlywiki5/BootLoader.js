@@ -62,7 +62,7 @@ function executeModule(modName,modRoot) {
 
 $(function() {
 	// Execute the main module
-	executeModule("js/Main.js");
+	executeModule("js/App.js");
 })
 
 })();

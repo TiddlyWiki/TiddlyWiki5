@@ -78,9 +78,9 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 			var insertParam = function(name,arg) {
 				if(arg.evaluated) {
 					var prog = me.store.sandbox.parse(arg.string);
-					paramsProps[m] = prog.elements[0];
+					paramsProps[name] = prog.elements[0];
 				} else {
-					paramsProps[m] = {type: "StringLiteral", value: arg.string};
+					paramsProps[name] = {type: "StringLiteral", value: arg.string};
 				}
 			};
 			for(var m in macro.params) {

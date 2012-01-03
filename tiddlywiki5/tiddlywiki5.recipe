@@ -22,7 +22,7 @@ jsmodule: ../js/WikiTextRenderer.js
 jsmodule: ../js/WikiTextCompiler.js
 jsmodule: ../js/Navigators.js
 jsmodule: ../js/StoryNavigator.js
-jsmodule: ../js/Main.js
+jsmodule: ../js/App.js
 
 jsmodule: ../node_modules/pegjs/lib/peg.js
 	title: pegjs
