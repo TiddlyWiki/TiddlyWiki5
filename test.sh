@@ -15,3 +15,4 @@ node tiddlywiki.js --wikitest test/wikitests/
 
 jshint *.js
 jshint js
+jshint tiddlywiki5/*.js
