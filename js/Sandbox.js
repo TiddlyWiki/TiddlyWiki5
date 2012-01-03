@@ -15,6 +15,10 @@ var Sandbox = function(parserText) {
 	this.parser = pegjs.buildParser(parserText);
 };
 
+Sandbox.prototype.parse = function(code) {
+	return this.parser.parse(code);
+}
+
 Sandbox.prototype.execute = function(code,globals) {
 	var globalNames = [],
 		globalValues = [],
