@@ -11,7 +11,7 @@ node tiddlywiki.js --recipe $PWD/test/tiddlywiki.2.6.5/source/tiddlywiki.com/ind
 diff tmp/newcooked/index.html test/tiddlywiki.2.6.5/target/index.2.6.5.html
 
 # Run the wikification tests
-node wikitest.js test/wikitests/
+node tiddlywiki.js --wikitest test/wikitests/
 
 jshint *.js
 jshint js
