@@ -60,6 +60,7 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 		}
 		pushString("<" + tagBits.join(" ") + (options.selfClosing ? " /" : ""));
 		if(options.insertAfterAttributes) {
+			pushString(" ");
 			output.push(options.insertAfterAttributes);
 		}
 		pushString(">");

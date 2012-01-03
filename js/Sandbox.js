@@ -19,44 +19,6 @@ Sandbox.prototype.parse = function(code) {
 	return this.parser.parse(code);
 };
 
-Sandbox.prototype.execute = function(code,globals) {
-	var globalNames = [],
-		globalValues = [],
-		collectGlobals = function(globals) {
-			if(globals) {
-				for(var g in globals) {
-					globalNames.push(g);
-					globalValues.push(globals[g]);
-				}
-			}
-		};
-	// Collect the supplied globals
-	collectGlobals(globals);
-	// Add the default globals
-	collectGlobals({
-		tiddlywiki: "5"
-	});
-	// Compose the code
-	var out = [];
-	out.push("(function(");
-	out.push(globalNames.join(","));
-	out.push(") { return ");
-	out.push(code);
-	out.push(";})");
-	// Parse the code
-	var compiledCode = out.join(""),
-		tree = this.parser.parse(out.join(""));
-	// XXX: Sanitise the code by checking for references to globals, stripping out eval()
-	// Execute it
-	var result;
-	try {
-		result = eval(compiledCode).apply(null,globalValues);
-	} catch(err) {
-		result = "{{** Evaluation error: " + err + " **}}";
-	}
-	return result;
-};
-
 exports.Sandbox = Sandbox;
 
 })();
