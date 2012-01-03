@@ -1,5 +1,5 @@
 title: TiddlerFiles
-modified: JeremyRuston
+modifier: JeremyRuston
 
 Tiddlers can be stored in text files in several different formats. Files containing single tiddlers can also have an auxiliary {{{.meta}}} file formatted as a sequence of name:value pairs:
 {{{

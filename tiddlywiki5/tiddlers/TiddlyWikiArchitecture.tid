@@ -105,7 +105,7 @@ function() {
 }
 }}}
 
-Now, the return value of this function can be cached until a tiddler in the dependency chain changes. The function itself can be cached until the tiddler itself changes.
+Now, the return value of this function can be cached until a tiddler in the dependency chain changes. The function itself can be cached until the tiddler itself changes, or a macro that it uses changes.
 
 The dependency chain is calculated when a tiddler is compiled. Every tiddler that is directly referenced is accumulated (until the point at which it is concluded that it is simpler to mark the tiddler as being dependent on any other tiddler changing).
 

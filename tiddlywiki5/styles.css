@@ -36,3 +36,18 @@ p, ul {
 .small, aside {
     font-size: 13px;
 }
+
+a {
+    font-style: italic;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #00e;
+    color: #fff;
+}
+
+a.linkResolves {
+    font-style: normal;
+    font-weight: bold;
+}
