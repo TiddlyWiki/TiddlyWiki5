@@ -314,8 +314,8 @@ Recipe.tiddlerOutputter = {
 };
 
 // Cook an RSS file of the most recent 20 tiddlers
-Recipe.prototype.cookRss = function()
-{
+Recipe.prototype.cookRss = function() {
+	return ""; // Temporarily suppress RSS feed generation
 	var me = this,
 		numRssItems = 20,
 		s = [],
