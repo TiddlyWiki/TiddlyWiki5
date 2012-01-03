@@ -7,7 +7,8 @@ The parameters are returned in a structure that can be referenced like this:
 
 	(return).byName["name"][0] - First occurance of parameter with a given name
 	(return).byPos[0].n - Name of parameter in first position
-	(return).byPos[0].v - Value of parameter in first position
+	(return).byPos[0].v.string - Value of parameter in first position
+	(return).byPos[0].v.evaluated - True if the parameter is to be evaluated
 
 Options and their defaults are:
 
@@ -16,11 +17,6 @@ Options and their defaults are:
 	noNames: false,
 	cascadeDefaults: false,
 	allowEval: true
-	sandbox: null
-	globals: null
-
-`sandbox` is the sandbox object used to evaluate JavaScript parameters
-`globals` is the global variable object provided to evaluated parameters
 
 \*/
 (function(){
@@ -33,17 +29,17 @@ var ArgParser = function(argString,options) {
 	var parseToken = function(match,p) {
 			var n;
 			if(match[p]) { // Double quoted
-				n = match[p];
+				n = {string: match[p]};
 			} else if(match[p+1]) { // Single quoted
-				n = match[p+1];
+				n = {string: match[p+1]};
 			} else if(match[p+2]) { // Double-square-bracket quoted
-				n = match[p+2];
+				n = {string: match[p+2]};
 			} else if(match[p+3]) { // Double-brace quoted
-				n = options.allowEval === false ? match[p+3] : options.sandbox.execute(match[p+3],options.globals);
+				n = {string: match[p+3], evaluated: true};
 			} else if(match[p+4]) { // Unquoted
-				n = match[p+4];
+				n = {string: match[p+4]};
 			} else if(match[p+5]) { // empty quote
-				n = "";
+				n = {string: ""};
 			}
 			return n;
 		};
@@ -92,15 +88,18 @@ var ArgParser = function(argString,options) {
 };
 
 // Retrieve the first occurance of a named parameter, or the default if missing
-ArgParser.prototype.getValueByName = function(n,defaultValue) {
+ArgParser.prototype.getValueByName = function(n) {
 	var v = this.byName[n];
-	return v && v.length > 0 ? v[0] : defaultValue;
+	return v && v.length > 0 ? v[0] : null;
 };
 
-// Retrieve all the values of a named parameter as an array
-ArgParser.prototype.getValuesByName = function(n,defaultValue) {
-	var v = this.byName[n];
-	return v && v.length > 0 ? v : defaultValue;
+// Retrieve all the string values as an array
+ArgParser.prototype.getStringValues = function() {
+	var result = [];
+	for(var t=0; t<this.byPos.length; t++) {
+		result.push(this.byPos[t].v.string);
+	}
+	return result;
 };
 
 exports.ArgParser = ArgParser;
