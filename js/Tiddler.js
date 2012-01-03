@@ -105,8 +105,8 @@ Tiddler.specialTiddlerFieldParsers = {
 	},
 	array: function(value) {
 		if(typeof value === "string") {
-			var parser = new ArgParser(value,{noNames: true});
-			return parser.getValuesByName("","");
+			var parser = new ArgParser(value,{noNames: true, allowEval: false});
+			return parser.getStringValues();
 		} else if (value instanceof Array) {
 			var result = [];
 			for(var t=0; t<value.length; t++) {
