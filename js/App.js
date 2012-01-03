@@ -41,12 +41,25 @@ var App = function() {
 			{title: "MarkupPostHead", text: ""},
 			{title: "MarkupPreBody", text: ""},
 			{title: "MarkupPostBody", text: ""},
+			{title: "TabTimeline", text: "<<timeline>>"},
+			{title: "TabAll", text: "<<list all>>"},
+			{title: "TabTags", text: "<<allTags excludeLists>>"},
+			{title: "TabMoreMissing", text: "<<list missing>>"},
+			{title: "TabMoreOrphans", text: "<<list orphans>>"},
+			{title: "TabMoreShadowed", text: "<<list shadowed>>"},
+			{title: "AdvancedOptions", text: "<<options>>"},
+			{title: "PluginManager", text: "<<plugins>>"},
+			{title: "SystemSettings", text: ""},
+			{title: "ToolbarCommands", text: "|~ViewToolbar|closeTiddler closeOthers +editTiddler > fields syncing permalink references jump|\n|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|"},
 			{title: "WindowTitle", text: "<<tiddler SiteTitle>> - <<tiddler SiteSubtitle>>"},
 			{title: "DefaultTiddlers", text: "[[GettingStarted]]"},
 			{title: "MainMenu", text: "[[GettingStarted]]"},
 			{title: "SiteTitle", text: "My TiddlyWiki"},
 			{title: "SiteSubtitle", text: "a reusable non-linear personal web notebook"},
-			{title: "SiteUrl", text: ""}
+			{title: "SiteUrl", text: ""},
+			{title: "SideBarOptions", text: '<<search>><<closeAll>><<permaview>><<newTiddler>><<newJournal "DD MMM YYYY" "journal">><<saveChanges>><<slider chkSliderOptionsPanel OptionsPanel "options \u00bb" "Change TiddlyWiki advanced options">>'},
+			{title: "SideBarTabs", text: '<<tabs txtMainTab "Timeline" "Timeline" TabTimeline "All" "All tiddlers" TabAll "Tags" "All tags" TabTags "More" "More lists" TabMore>>'},
+			{title: "TabMore", text: '<<tabs txtMoreTab "Missing" "Missing tiddlers" TabMoreMissing "Orphans" "Orphaned tiddlers" TabMoreOrphans "Shadowed" "Shadowed tiddlers" TabMoreShadowed>>'}
 		];
 	this.store.shadows.shadows = shadowShadowStore;
 	for(t=0; t<shadowShadows.length; t++) {

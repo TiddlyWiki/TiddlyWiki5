@@ -7,7 +7,8 @@ TiddlyWiki command line interface
 /*jslint node: true */
 "use strict";
 
-var WikiStore = require("./js/WikiStore.js").WikiStore,
+var App = require("./js/App.js").App,
+	WikiStore = require("./js/WikiStore.js").WikiStore,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	Recipe = require("./js/Recipe.js").Recipe,
 	tiddlerInput = require("./js/TiddlerInput.js"),
@@ -19,6 +20,8 @@ var WikiStore = require("./js/WikiStore.js").WikiStore,
 	path = require("path"),
 	aync = require("async"),
 	http = require("http");
+
+var app = new App();
 
 var parseOptions = function(args,defaultSwitch) {
 	var result = [],
@@ -44,58 +47,10 @@ var parseOptions = function(args,defaultSwitch) {
 };
 
 var switches = parseOptions(Array.prototype.slice.call(process.argv,2),"dummy"),
-	store = new WikiStore(),
 	recipe = null,
 	lastRecipeFilepath = null,
 	currSwitch = 0;
 
-store.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
-	store: store
-}));
-// Register the standard tiddler serializers and deserializers
-tiddlerInput.register(store);
-tiddlerOutput.register(store);
-
-// Frightful temporary hack, but setup the sandbox for evaluated macro parameters
-var Sandbox = require("./js/Sandbox.js").Sandbox;
-store.sandbox = new Sandbox(fs.readFileSync("parsers/javascript.pegjs","utf8"));
-
-store.installMacros();
-
-// Add the shadow tiddlers that are built into TiddlyWiki
-var shadowShadowStore = new WikiStore({
-		shadowStore: null
-	}),
-	shadowShadows = [
-		{title: "StyleSheet", text: ""},
-		{title: "MarkupPreHead", text: ""},
-		{title: "MarkupPostHead", text: ""},
-		{title: "MarkupPreBody", text: ""},
-		{title: "MarkupPostBody", text: ""},
-		{title: "TabTimeline", text: "<<timeline>>"},
-		{title: "TabAll", text: "<<list all>>"},
-		{title: "TabTags", text: "<<allTags excludeLists>>"},
-		{title: "TabMoreMissing", text: "<<list missing>>"},
-		{title: "TabMoreOrphans", text: "<<list orphans>>"},
-		{title: "TabMoreShadowed", text: "<<list shadowed>>"},
-		{title: "AdvancedOptions", text: "<<options>>"},
-		{title: "PluginManager", text: "<<plugins>>"},
-		{title: "SystemSettings", text: ""},
-		{title: "ToolbarCommands", text: "|~ViewToolbar|closeTiddler closeOthers +editTiddler > fields syncing permalink references jump|\n|~EditToolbar|+saveTiddler -cancelTiddler deleteTiddler|"},
-		{title: "WindowTitle", text: "<<tiddler SiteTitle>> - <<tiddler SiteSubtitle>>"},
-		{title: "DefaultTiddlers", text: "[[GettingStarted]]"},
-		{title: "MainMenu", text: "[[GettingStarted]]"},
-		{title: "SiteTitle", text: "My TiddlyWiki"},
-		{title: "SiteSubtitle", text: "a reusable non-linear personal web notebook"},
-		{title: "SiteUrl", text: ""},
-		{title: "SideBarOptions", text: '<<search>><<closeAll>><<permaview>><<newTiddler>><<newJournal "DD MMM YYYY" "journal">><<saveChanges>><<slider chkSliderOptionsPanel OptionsPanel "options \u00bb" "Change TiddlyWiki advanced options">>'},
-		{title: "SideBarTabs", text: '<<tabs txtMainTab "Timeline" "Timeline" TabTimeline "All" "All tiddlers" TabAll "Tags" "All tags" TabTags "More" "More lists" TabMore>>'},
-		{title: "TabMore", text: '<<tabs txtMoreTab "Missing" "Missing tiddlers" TabMoreMissing "Orphans" "Orphaned tiddlers" TabMoreOrphans "Shadowed" "Shadowed tiddlers" TabMoreShadowed>>'}
-	];
-store.shadows.shadows = shadowShadowStore;
-for(var t=0; t<shadowShadows.length; t++) {
-	shadowShadowStore.addTiddler(new Tiddler(shadowShadows[t]));
-}
 
 /*
 Each command line switch is represented by a function that takes a string array of arguments and a callback to
@@ -112,7 +67,7 @@ var commandLineSwitches = {
 				lastRecipeFilepath = args[0];
 				recipe = new Recipe({
 					filepath: args[0],
-					store: store
+					store: app.store
 				},function(err) {
 					callback(err);
 				});
@@ -122,7 +77,7 @@ var commandLineSwitches = {
 	dumpstore: {
 		args: {min: 0, max: 0},
 		handler: function(args,callback) {
-			console.log("Store is:\n%s",util.inspect(store,false,10));
+			console.log("Store is:\n%s",util.inspect(app.store,false,10));
 			process.nextTick(function() {callback(null);});
 		}
 	},
@@ -145,7 +100,7 @@ var commandLineSwitches = {
 						type = extname === ".html" ? "application/x-tiddlywiki" : extname;
 					var tiddlers = tiddlerInput.parseTiddlerFile(data,type,fields);
 					for(var t=0; t<tiddlers.length; t++) {
-						store.addTiddler(new Tiddler(tiddlers[t]));
+						app.store.addTiddler(new Tiddler(tiddlers[t]));
 					}
 					callback(null);	
 				}
@@ -173,7 +128,7 @@ var commandLineSwitches = {
 		args: {min: 1, max: 1},
 		handler: function(args,callback) {
 			var recipe = [];
-			store.forEachTiddler(function(title,tiddler) {
+			app.store.forEachTiddler(function(title,tiddler) {
 				var filename = encodeURIComponent(tiddler.fields.title.replace(/ /g,"_")) + ".tid";
 				fs.writeFileSync(path.resolve(args[0],filename),tiddlerOutput.outputTiddler(tiddler),"utf8");
 				recipe.push("tiddler: " + filename + "\n");
@@ -192,8 +147,8 @@ var commandLineSwitches = {
 			// Dumbly, this implementation wastes the recipe processing that happened on the --recipe switch
 			http.createServer(function(request, response) {
 				response.writeHead(200, {"Content-Type": "text/html"});
-				store = new WikiStore();
-				recipe = new Recipe(store,lastRecipeFilepath,function() {
+				var store = new WikiStore();
+				var recipe = new Recipe(store,lastRecipeFilepath,function() {
 					response.end(recipe.cook(), "utf8");	
 				});
 			}).listen(port);
@@ -205,10 +160,10 @@ var commandLineSwitches = {
 			var port = args.length > 0 ? args[0] : 8000;
 			http.createServer(function (request, response) {
 				var title = decodeURIComponent(url.parse(request.url).pathname.substr(1)),
-					tiddler = store.getTiddler(title);
+					tiddler = app.store.getTiddler(title);
 				if(tiddler) {
 					response.writeHead(200, {"Content-Type": "text/html"});
-					response.end(store.renderTiddler("text/html",title),"utf8");					
+					response.end(app.store.renderTiddler("text/html",title),"utf8");					
 				} else {
 					response.writeHead(404);
 					response.end();

@@ -2,6 +2,6 @@ title: SeventhTiddler
 
 <<echo {{2+2}}>>
 
-<<echo {{title}}>>
+<<echo {{"title"}}>>
 
-<<echo {{window}}>>
+<<echo {{"window"}}>>
