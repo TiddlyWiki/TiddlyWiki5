@@ -117,7 +117,7 @@ var compileJavaScript = function(tree) {
 			default:
 				console.log(node);
 				throw "Unknown JavaScript node type: " + node.type;
-				break;
+				//break;
 		}
 	};
 	compileJavaScriptTree = function(tree) {

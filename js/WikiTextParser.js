@@ -131,6 +131,7 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 };
 
 WikiTextParser.prototype.render = function(type,treenode,store,title) {
+	/*jslint evil: true */
 	var compiler = new WikiTextCompiler(store,title,this);
 	var code = compiler.compile(type,treenode);
 	var fn = eval(code);
