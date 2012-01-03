@@ -60,6 +60,8 @@ tiddlerOutput.register(store);
 var Sandbox = require("./js/Sandbox.js").Sandbox;
 store.sandbox = new Sandbox(fs.readFileSync("parsers/javascript.pegjs","utf8"));
 
+store.installMacros();
+
 // Add the shadow tiddlers that are built into TiddlyWiki
 var shadowShadowStore = new WikiStore({
 		shadowStore: null
