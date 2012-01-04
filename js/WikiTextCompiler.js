@@ -136,7 +136,7 @@ WikiTextCompiler.prototype.compile = function(type,treenode) {
 	if(type === "text/html") {
 		return this.compileAsHtml(treenode);
 	} else if(type === "text/plain") {
-		return this.compileAsHtml(treenode);
+		return this.compileAsText(treenode);
 	} else {
 		return null;
 	}
@@ -271,6 +271,146 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 								"type": "StringLiteral",
 								"value": tree[t].attributes.href}]}
 					});
+					break;
+				default:
+					compileElement(tree[t]);
+					break;
+			}
+		}
+	};
+	// Compile the wiki parse tree into a javascript parse tree
+	compileSubTree(treenode);
+	// And then render the javascript parse tree back into JavaScript code
+	return compileJavaScript(
+		[
+			{
+				type: "Function",
+				name: null,
+				params: ["tiddler","store","utils"],
+				elements: [
+					{
+					type: "ReturnStatement",
+					value: {
+						type: "FunctionCall",
+						name: {
+							type: "PropertyAccess",
+							base: {
+								type: "ArrayLiteral",
+								elements: output
+							},
+							name: "join"
+						},
+						"arguments": [ {
+							type: "StringLiteral",
+							value: ""
+							}
+						]
+						}
+					}
+				]
+			}
+		]
+	).join("");
+};
+
+WikiTextCompiler.prototype.compileAsText = function(treenode) {
+	var me = this,
+		output = [],
+		compileSubTree;
+	var pushString = function(s) {
+		var last = output[output.length-1];
+		if(output.length > 0 && last.type === "StringLiterals") {
+			last.value.push(s);
+		} else if (output.length > 0 && last.type === "StringLiteral") {
+			last.type = "StringLiterals";
+			last.value = [last.value,s];
+		} else {
+			output.push({type: "StringLiteral", value: s});
+		}
+	};
+	var compileElement = function(element, options) {
+		options = options || {};
+		if(!options.selfClosing) {
+			if(element.children) {
+				compileSubTree(element.children);
+			}
+		}
+	};
+	var compileMacroCall = function(name,params) {
+		var macro = me.store.macros[name];
+		if(macro) {
+			var args = new ArgParser(params,{defaultName: "anon"}),
+				paramsProps = {};
+			var insertParam = function(name,arg) {
+				if(arg.evaluated) {
+					var prog = me.store.sandbox.parse(arg.string);
+					paramsProps[name] = prog.elements[0];
+				} else {
+					paramsProps[name] = {type: "StringLiteral", value: arg.string};
+				}
+			};
+			for(var m in macro.params) {
+				var param = macro.params[m];
+				if("byPos" in param && args.byPos[param.byPos]) {
+					insertParam(m,args.byPos[param.byPos].v);
+				} else if("byName" in param) {
+					var arg = args.getValueByName(m);
+					if(!arg && param.byName === "default") {
+						arg = args.getValueByName("anon");
+					}
+					if(arg) {
+						insertParam(m,arg);
+					}
+				}
+			}
+			var macroCall = {
+				type: "FunctionCall",
+				name: {
+					type: "Function",
+					name: null,
+					params: ["params"],
+					elements: []},
+				"arguments": [ {
+					type: "ObjectLiteral",
+					properties: []	
+				}]
+			};
+			macroCall.name.elements = macro.code["text/plain"].elements;
+			for(m in paramsProps) {
+				macroCall["arguments"][0].properties.push({
+					type: "PropertyAssignment",
+					name: m,
+					value: paramsProps[m]
+				});
+			}
+			output.push(macroCall);
+		} else {
+			pushString("{{** Unknown macro '" + name + "' **}}");
+		}
+	};
+	compileSubTree = function(tree) {
+		for(var t=0; t<tree.length; t++) {
+			switch(tree[t].type) {
+				case "text":
+					pushString(utils.htmlEncode(tree[t].value));
+					break;
+				case "entity":
+					var c = utils.entityDecode(tree[t].value);
+					if(c) {
+						pushString(c);
+					} else {
+						pushString(tree[t].value);
+					}
+					break;
+				case "br":
+				case "img":
+					compileElement(tree[t],{selfClosing: true}); // Self closing elements
+					break;
+				case "context":
+					//compileSubTree(tree[t].children);
+					break;
+				case "macro":
+					compileMacroCall(tree[t].name,tree[t].params);
 					break;
 				default:
 					compileElement(tree[t]);
