@@ -307,7 +307,7 @@ WikiStore.prototype.installMacros = function() {
 				text: {byPos: 0, type: "text", optional: false}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return '<p>' + utils.htmlEncode(params.text) + '</p>';"),
+				"text/html": this.sandbox.parse("return utils.htmlEncode(params.text);"),
 				"text/plain": this.sandbox.parse("return params.text;")
 			}
 		},
@@ -318,7 +318,7 @@ WikiStore.prototype.installMacros = function() {
 				template: {byPos: 2, type: "text", optional: true}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return '<span>' + store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template) + '</span>';"),
+				"text/html": this.sandbox.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);"),
 				"text/plain": this.sandbox.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);")
 			}
 		},
@@ -329,12 +329,54 @@ WikiStore.prototype.installMacros = function() {
 				emptyMessage: {byName: true, type: "text", optional: true}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return '<span>' + store.listTiddlers(params.type,params.template,params.emptyMessage) + '</span>';"),
+				"text/html": this.sandbox.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);"),
 				"text/plain": this.sandbox.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);")
+			}
+		},
+		version: {
+			params: {
+			},
+			code: {
+				"text/html": this.sandbox.parse("return '5.0.0';"),
+				"text/plain": this.sandbox.parse("return '5.0.0';")
+			}
+		},
+		tiddler: {
+			params: {
+				target: {byName: "default", type: "tiddler", optional: false},
+				with: {byName: true, type: "text", optional: true, cascade: true}
+			},
+			code: {
+				"text/html": this.sandbox.parse("return store.renderTiddler('text/html',params.target);"),
+				"text/plain": this.sandbox.parse("return store.renderTiddler('text/plain',params.target);")
 			}
 		}
 	};
 };
+
+/*
+
+tiddler: {
+		argOptions: {defaultName:"name",cascadeDefaults:true},
+		handler: function(macroNode,args,title) {
+			var targetTitle = args.getValueByName("name",null),
+				withTokens = args.getValuesByName("with",[]),
+				tiddler = this.store.getTiddler(targetTitle),
+				text = this.store.getTiddlerText(targetTitle,""),
+				t;
+			for(t=0; t<withTokens.length; t++) {
+				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
+				text = text.replace(placeholderRegExp,withTokens[t]);
+			}
+			macroNode.output = this.store.parseText(tiddler.fields.type,text).children;
+			// Execute any macros in the copy
+			this.executeMacros(macroNode.output,title);
+		}
+	},
+
+*/
+
+
 
 exports.WikiStore = WikiStore;
 
