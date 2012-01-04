@@ -9,8 +9,7 @@ Parses a block of tiddlywiki-format wiki text into a parse tree object.
 /*jslint node: true */
 "use strict";
 
-var WikiTextRenderer = require("./WikiTextRenderer.js").WikiTextRenderer,
-	WikiTextCompiler = require("./WikiTextCompiler.js").WikiTextCompiler,
+var WikiTextCompiler = require("./WikiTextCompiler.js").WikiTextCompiler,
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -137,11 +136,6 @@ WikiTextParser.prototype.render = function(type,treenode,store,title) {
 	var fn = eval(code);
 	var tiddler = store.getTiddler(title);
 	return fn(tiddler,store,utils);
-};
-
-WikiTextParser.prototype.compile = function(type,treenode,store,title) {
-	var compiler = new WikiTextCompiler(store,title,this);
-	return compiler.compile(type,treenode);
 };
 
 exports.WikiTextParser = WikiTextParser;

@@ -307,8 +307,8 @@ WikiStore.prototype.installMacros = function() {
 				text: {byPos: 0, type: "text", optional: false}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return utils.htmlEncode(params.text);"),
-				"text/plain": this.sandbox.parse("return params.text;")
+				"text/html": this.jsParser.parse("return utils.htmlEncode(params.text);"),
+				"text/plain": this.jsParser.parse("return params.text;")
 			}
 		},
 		view: {
@@ -318,8 +318,8 @@ WikiStore.prototype.installMacros = function() {
 				template: {byPos: 2, type: "text", optional: true}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);"),
-				"text/plain": this.sandbox.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);")
+				"text/html": this.jsParser.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);"),
+				"text/plain": this.jsParser.parse("return store.getFormattedTiddlerField(tiddler.fields.title,params.field,params.format,params.template);")
 			}
 		},
 		list: {
@@ -329,26 +329,26 @@ WikiStore.prototype.installMacros = function() {
 				emptyMessage: {byName: true, type: "text", optional: true}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);"),
-				"text/plain": this.sandbox.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);")
+				"text/html": this.jsParser.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);"),
+				"text/plain": this.jsParser.parse("return store.listTiddlers(params.type,params.template,params.emptyMessage);")
 			}
 		},
 		version: {
 			params: {
 			},
 			code: {
-				"text/html": this.sandbox.parse("return '5.0.0';"),
-				"text/plain": this.sandbox.parse("return '5.0.0';")
+				"text/html": this.jsParser.parse("return '5.0.0';"),
+				"text/plain": this.jsParser.parse("return '5.0.0';")
 			}
 		},
 		tiddler: {
 			params: {
 				target: {byName: "default", type: "tiddler", optional: false},
-				with: {byName: true, type: "text", optional: true, cascade: true}
+				"with": {byName: true, type: "text", optional: true, cascade: true}
 			},
 			code: {
-				"text/html": this.sandbox.parse("return store.renderTiddler('text/html',params.target);"),
-				"text/plain": this.sandbox.parse("return store.renderTiddler('text/plain',params.target);")
+				"text/html": this.jsParser.parse("return store.renderTiddler('text/html',params.target);"),
+				"text/plain": this.jsParser.parse("return store.renderTiddler('text/plain',params.target);")
 			}
 		}
 	};

@@ -8,6 +8,7 @@ title: js/WikiTextCompiler.js
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
+	JavaScriptParseTree = require("./JavaScriptParseTree.js").JavaScriptParseTree,
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -15,121 +16,6 @@ var WikiTextCompiler = function(store,title,parser) {
 	this.parser = parser;
 	this.store = store;
 	this.title = title;
-};
-
-// Compile a javascript tree into an array of string fragments
-var compileJavaScript = function(tree) {
-	var output = [],
-		compileJavaScriptTree,
-		compileJavaScriptNode = function(node) {
-		var p;
-		switch(node.type) {
-			case "StringLiteral":
-				output.push(utils.stringify(node.value));
-				break;
-			case "StringLiterals":
-				output.push(utils.stringify(node.value.join("")));
-				break;
-			case "FunctionCall":
-				output.push("(");
-				compileJavaScriptNode(node.name);
-				output.push(")");
-				output.push("(");
-				for(p=0; p<node["arguments"].length; p++) {
-					if(p) {
-						output.push(",");
-					}
-					compileJavaScriptNode(node["arguments"][p]);
-				}
-				output.push(")");
-				break;
-			case "PropertyAccess":
-				compileJavaScriptNode(node.base);
-				if(typeof node.name === "string") {
-					output.push("." + node.name);
-				} else {
-					output.push("[");
-					compileJavaScriptNode(node.name);
-					output.push("]");	
-				}
-				break;
-			case "ArrayLiteral":
-				output.push("[");
-				for(p=0; p<node.elements.length; p++) {
-					if(p) {
-						output.push(",");
-					}
-					compileJavaScriptNode(node.elements[p]);
-				}
-				output.push("]");
-				break;
-			case "Variable":
-				output.push(node.name);
-				break;
-			case "ObjectLiteral":
-				output.push("{");
-				for(p=0; p<node.properties.length; p++) {
-					if(p) {
-						output.push(",");
-					}
-					compileJavaScriptNode(node.properties[p]);
-				}
-				output.push("}");
-				break;
-			case "PropertyAssignment":
-				output.push(node.name);
-				output.push(":");
-				compileJavaScriptNode(node.value);
-				break;
-			case "BinaryExpression":
-				output.push("(");
-				compileJavaScriptNode(node.left);
-				output.push(")");
-				output.push(node.operator);
-				output.push("(");
-				compileJavaScriptNode(node.right);
-				output.push(")");
-				break;
-			case "NumericLiteral":
-				output.push(node.value);
-				break;
-			case "Function":
-				output.push("(");
-				output.push("function ");
-				if(node.name !== null) {
-					output.push(node.name);
-				}
-				output.push("(");
-				output.push(node.params.join(","));
-				output.push(")");
-				output.push("{");
-				compileJavaScriptTree(node.elements);
-				output.push("}");
-				output.push(")");
-				break;
-			case "ReturnStatement":
-				output.push("return ");
-				compileJavaScriptNode(node.value);
-				break;
-			case "This":
-				output.push("this");
-				break;
-			default:
-				console.log(node);
-				throw "Unknown JavaScript node type: " + node.type;
-				//break;
-		}
-	};
-	compileJavaScriptTree = function(tree) {
-		for(var t=0; t<tree.length; t++) {
-			if(t) {
-				output.push(";\n");
-			}
-			compileJavaScriptNode(tree[t]);
-		}
-	};
-	compileJavaScriptTree(tree);
-	return output;
 };
 
 WikiTextCompiler.prototype.compile = function(type,treenode) {
@@ -193,8 +79,8 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 				paramsProps = {};
 			var insertParam = function(name,arg) {
 				if(arg.evaluated) {
-					var prog = me.store.sandbox.parse(arg.string);
-					paramsProps[name] = prog.elements[0];
+					var prog = me.store.jsParser.parse(arg.string);
+					paramsProps[name] = prog.tree.elements[0];
 				} else {
 					paramsProps[name] = {type: "StringLiteral", value: arg.string};
 				}
@@ -225,7 +111,7 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 					properties: []	
 				}]
 			};
-			macroCall.name.elements = macro.code["text/html"].elements;
+			macroCall.name.elements = macro.code["text/html"].tree.elements;
 			for(m in paramsProps) {
 				macroCall["arguments"][0].properties.push({
 					type: "PropertyAssignment",
@@ -281,7 +167,7 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 	// Compile the wiki parse tree into a javascript parse tree
 	compileSubTree(treenode);
 	// And then render the javascript parse tree back into JavaScript code
-	return compileJavaScript(
+	var parseTree = this.store.jsParser.createTree(
 		[
 			{
 				type: "Function",
@@ -309,8 +195,8 @@ WikiTextCompiler.prototype.compileAsHtml = function(treenode) {
 					}
 				]
 			}
-		]
-	).join("");
+		]);
+	return parseTree.render();
 };
 
 WikiTextCompiler.prototype.compileAsText = function(treenode) {
@@ -343,8 +229,8 @@ WikiTextCompiler.prototype.compileAsText = function(treenode) {
 				paramsProps = {};
 			var insertParam = function(name,arg) {
 				if(arg.evaluated) {
-					var prog = me.store.sandbox.parse(arg.string);
-					paramsProps[name] = prog.elements[0];
+					var prog = me.store.jsParser.parse(arg.string);
+					paramsProps[name] = prog.tree.elements[0];
 				} else {
 					paramsProps[name] = {type: "StringLiteral", value: arg.string};
 				}
@@ -375,7 +261,7 @@ WikiTextCompiler.prototype.compileAsText = function(treenode) {
 					properties: []	
 				}]
 			};
-			macroCall.name.elements = macro.code["text/plain"].elements;
+			macroCall.name.elements = macro.code["text/plain"].tree.elements;
 			for(m in paramsProps) {
 				macroCall["arguments"][0].properties.push({
 					type: "PropertyAssignment",
@@ -421,7 +307,7 @@ WikiTextCompiler.prototype.compileAsText = function(treenode) {
 	// Compile the wiki parse tree into a javascript parse tree
 	compileSubTree(treenode);
 	// And then render the javascript parse tree back into JavaScript code
-	return compileJavaScript(
+	var parseTree = this.store.jsParser.createTree(
 		[
 			{
 				type: "Function",
@@ -449,8 +335,8 @@ WikiTextCompiler.prototype.compileAsText = function(treenode) {
 					}
 				]
 			}
-		]
-	).join("");
+		]);
+	return parseTree.render();
 };
 
 exports.WikiTextCompiler = WikiTextCompiler;

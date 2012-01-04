@@ -14,7 +14,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	WikiTextProcessor = require("./WikiTextProcessor.js").WikiTextProcessor,
-	Sandbox = require("./Sandbox.js").Sandbox,
+	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
 	Navigators = require("./Navigators.js").Navigators,
 	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
 
@@ -73,11 +73,11 @@ var App = function() {
 			this.store.addTiddler(new Tiddler(tiddlers[t]));
 		}
 	}
-	// Set up the sandbox for JavaScript parsing
+	// Set up the JavaScript parser
 	if(this.isBrowser) {
-		this.store.sandbox = new Sandbox(this.store.getTiddlerText("javascript.pegjs"));
+		this.store.jsParser = new JavaScriptParser(this.store.getTiddlerText("javascript.pegjs"));
 	} else {
-		this.store.sandbox = new Sandbox(require("fs").readFileSync("parsers/javascript.pegjs","utf8"));
+		this.store.jsParser = new JavaScriptParser(require("fs").readFileSync("parsers/javascript.pegjs","utf8"));
 	}
 	// Hack to install standard macros
 	this.store.installMacros();

@@ -7,7 +7,8 @@ recipe: ../parsers/split.recipe
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 
-jsmodule: ../js/Sandbox.js
+jsmodule: ../js/JavaScriptParser.js
+jsmodule: ../js/JavaScriptParseTree.js
 jsmodule: ../js/ArgParser.js
 jsmodule: ../js/FileRetriever.js
 jsmodule: ../js/Utils.js
