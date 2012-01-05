@@ -226,7 +226,12 @@ WikiTextParseTree.prototype.compileSubTreePlain = function(tree) {
 				this.pushString(utils.htmlEncode(tree[t].value));
 				break;
 			case "entity":
-				this.pushString(tree[t].value);
+				var c = utils.entityDecode(tree[t].value);
+				if(c) {
+					this.pushString(c);
+				} else {
+					this.pushString(tree[t].value);
+				}
 				break;
 			case "br":
 			case "img":
