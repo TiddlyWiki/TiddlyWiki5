@@ -1,1 +1,1 @@
-This is the text of the first tiddler, with a link to the SecondTiddler, too.
+This is the text of the first tiddler, with a link to the SecondTiddler, too. And a link to http://tiddlywiki.com/.

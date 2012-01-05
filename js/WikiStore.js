@@ -170,7 +170,7 @@ WikiStore.prototype.getFormattedTiddlerField = function(title,field,format,templ
 				return utils.htmlEncode(tiddler.fields[field]);
 			case "link":
 				// xxx: Attribute encoding is wrong
-				return "<a href='" + utils.htmlEncode(tiddler.fields[field]) + "'>" + utils.htmlEncode(tiddler.fields[field]) + "</a>";
+				return "<a href='" + utils.htmlEncode(tiddler.fields[field]) + "' " + this.classesForLink(tiddler.fields[field]) + ">" + utils.htmlEncode(tiddler.fields[field]) + "</a>";
 			case "wikified":
 				return this.renderTiddler("text/html",tiddler.fields.title);
 			case "date":
@@ -182,7 +182,16 @@ WikiStore.prototype.getFormattedTiddlerField = function(title,field,format,templ
 };
 
 WikiStore.prototype.classesForLink = function(target) {
-	return this.tiddlerExists(target) ? "class=\"linkResolves\"" : "";
+	var className = "",
+		externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i;
+	if(externalRegExp.test(target)) {
+		className = "linkExternal";
+	} else if (this.tiddlerExists(target)) {
+		className = "linkInternalResolves";
+	} else {
+		className = "linkInternalMissing";
+	}
+	return className !== "" ? "class=\"" + className + "\"" : "";
 };
 
 WikiStore.prototype.listTiddlers = function(type,template,emptyMessage) {

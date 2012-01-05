@@ -5,8 +5,39 @@ body {
 /* Following styles created with http://www.gridlover.net/; */
 
 body {
-    font-size: 18px;
-    line-height: 27px;
+    font-size: 15px;
+    line-height: 22px;
+}
+code, pre {
+    font-size: 13px;
+    line-height: 18px;
+    padding: 0 3px 2px;
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+    font-size: 12px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+code {
+	background-color: #fee9cc;
+	color: rgba(0, 0, 0, 0.75);
+	padding: 1px 3px;
+}
+pre {
+	background-color: #f5f5f5;
+	display: block;
+	padding: 8.5px;
+	margin: 0 0 18px;
+	line-height: 18px;
+	font-size: 12px;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	white-space: pre;
+	white-space: pre-wrap;
+	word-wrap: break-word;
 }
 article {
     max-width: 644px;
@@ -38,8 +69,11 @@ p, ul {
 }
 
 a {
-    font-style: italic;
     text-decoration: none;
+}
+
+a.linkExternal::before {
+    content: "\27a0";
 }
 
 a:hover {
@@ -47,7 +81,16 @@ a:hover {
     color: #fff;
 }
 
-a.linkResolves {
+a.linkExternal {
+    font-style: normal;
+    font-weight: normal;
+}
+
+a.linkInternalResolves {
     font-style: normal;
     font-weight: bold;
+}
+
+a.linkInternalMissing {
+    font-style: italic;
 }
