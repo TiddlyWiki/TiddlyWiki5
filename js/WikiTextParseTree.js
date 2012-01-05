@@ -156,7 +156,6 @@ WikiTextParseTree.prototype.compileElementHtml = function(element, options) {
 	}
 	this.pushString("<" + tagBits.join(" ") + (options.selfClosing ? " /" : ""));
 	if(options.insertAfterAttributes) {
-		this.pushString(" ");
 		this.output.push(options.insertAfterAttributes);
 	}
 	this.pushString(">");

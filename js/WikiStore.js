@@ -81,7 +81,9 @@ WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callba
 		sortField = arguments.length > 1 ? arguments[a++] : null,
 		excludeTag = arguments.length > 2 ? arguments[a++] : null,
 		callback = arguments[a++],
-		t,tiddlers = [],tiddler;
+		t,
+		tiddlers = [],
+		tiddler;
 	if(sortField) {
 		for(t in this.tiddlers) {
 			tiddlers.push(this.tiddlers[t]); 
@@ -170,7 +172,7 @@ WikiStore.prototype.getFormattedTiddlerField = function(title,field,format,templ
 				return utils.htmlEncode(tiddler.fields[field]);
 			case "link":
 				// xxx: Attribute encoding is wrong
-				return "<a href='" + utils.htmlEncode(tiddler.fields[field]) + "' " + this.classesForLink(tiddler.fields[field]) + ">" + utils.htmlEncode(tiddler.fields[field]) + "</a>";
+				return "<a href='" + utils.htmlEncode(tiddler.fields[field]) + "'" + this.classesForLink(tiddler.fields[field]) + ">" + utils.htmlEncode(tiddler.fields[field]) + "</a>";
 			case "wikified":
 				return this.renderTiddler("text/html",tiddler.fields.title);
 			case "date":
@@ -191,7 +193,7 @@ WikiStore.prototype.classesForLink = function(target) {
 	} else {
 		className = "linkInternalMissing";
 	}
-	return className !== "" ? "class=\"" + className + "\"" : "";
+	return className !== "" ? " class=\"" + className + "\"" : "";
 };
 
 WikiStore.prototype.listTiddlers = function(type,template,emptyMessage) {
