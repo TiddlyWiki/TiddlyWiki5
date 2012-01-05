@@ -134,8 +134,6 @@ The compilation process has several steps:
 
 !! Macros
 
-
-
 Macros should be examples of javascript tiddlers that are invoked with parameters. The familiar ones all generate text/html output. For example:
 
 	function tiddler_macro(args) {
