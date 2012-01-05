@@ -1,7 +1,12 @@
 /*\
 title: js/JavaScriptParseTree.js
 
-JavaScript parse tree
+This object stores a JavaScript parse tree in the format produced by the pegjs JavaScript parser.
+
+The parse tree represents the syntactical structure of a JavaScript program, represented as a tree
+structure built from JavaScript arrays and objects. The nodes of the tree are objects with a "type"
+field that indicates the type of the node (see the function renderNode() for a list of the types).
+Depending on the type, other fields provide further details about the node.
 
 \*/
 (function(){
@@ -12,9 +17,8 @@ JavaScript parse tree
 var utils = require("./Utils.js");
 
 // Create a new JavaScript tree object
-var JavaScriptParseTree = function(tree,processor) {
+var JavaScriptParseTree = function(tree) {
 	this.tree = tree;
-	this.processor = processor;
 };
 
 // Render the entire JavaScript tree object to JavaScript source code
@@ -24,6 +28,7 @@ JavaScriptParseTree.prototype.render = function() {
 	return this.output.join("");
 };
 
+// Render a subtree of the parse tree to an array of fragments of JavaScript source code
 JavaScriptParseTree.prototype.renderSubTree = function(tree) {
 	for(var t=0; t<tree.length; t++) {
 		if(t) {
@@ -33,7 +38,7 @@ JavaScriptParseTree.prototype.renderSubTree = function(tree) {
 	}
 };
 
-// Compile a javascript tree into an array of string fragments
+// Compile a JavaScript node to an array of fragments of JavaScript source code
 JavaScriptParseTree.prototype.renderNode = function(node) {
 	var p;
 	switch(node.type) {

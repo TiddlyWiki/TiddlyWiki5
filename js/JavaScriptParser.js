@@ -1,7 +1,7 @@
 /*\
 title: js/JavaScriptParser.js
 
-JavaScript processing
+Parses JavaScript source code into a parse tree using PEGJS
 
 \*/
 (function(){
@@ -12,16 +12,19 @@ JavaScript processing
 var JavaScriptParseTree = require("./JavaScriptParseTree.js").JavaScriptParseTree,
 	pegjs = require("pegjs");
 
+// Initialise the parser
 var JavaScriptParser = function(parserText) {
 	this.parser = pegjs.buildParser(parserText);
 };
 
+// Parse a string of JavaScript code and return the parse tree
 JavaScriptParser.prototype.parse = function(code) {
 	return new JavaScriptParseTree(this.parser.parse(code),this);
 };
 
+// Create a parse tree object from a raw tree
 JavaScriptParser.prototype.createTree = function(tree) {
-	return new JavaScriptParseTree(tree,this);
+	return new JavaScriptParseTree(tree);
 };
 
 exports.JavaScriptParser = JavaScriptParser;
