@@ -13,7 +13,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	Tiddler = require("./Tiddler.js").Tiddler,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),
-	WikiTextProcessor = require("./WikiTextProcessor.js").WikiTextProcessor,
+	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
 	Navigators = require("./Navigators.js").Navigators,
 	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
@@ -24,8 +24,8 @@ var App = function() {
 	this.isBrowser = typeof window !== "undefined";
 	// Create the main store
 	this.store = new WikiStore();	
-	// Register the wikitext processor
-	this.store.registerTextProcessor("text/x-tiddlywiki",new WikiTextProcessor({
+	// Register the wikitext parser
+	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({
 		store: this.store
 	}));
 	// Register the standard tiddler serializers and deserializers

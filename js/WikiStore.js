@@ -19,7 +19,7 @@ Available options are:
 var WikiStore = function WikiStore(options) {
 	options = options || {};
 	this.tiddlers = {};
-	this.textProcessors = {};
+	this.parsers = {};
 	this.tiddlerSerializers = {};
 	this.tiddlerDeserializers = {};
 	this.sandbox = options.sandbox;
@@ -28,8 +28,8 @@ var WikiStore = function WikiStore(options) {
 	});
 };
 
-WikiStore.prototype.registerTextProcessor = function(type,processor) {
-	this.textProcessors[type] = processor;
+WikiStore.prototype.registerParser = function(type,parser) {
+	this.parsers[type] = parser;
 };
 
 WikiStore.prototype.registerTiddlerSerializer = function(extension,mimeType,serializer) {
@@ -255,12 +255,12 @@ WikiStore.prototype.listTiddlers = function(type,template,emptyMessage) {
 */
 
 WikiStore.prototype.parseText = function(type,text) {
-	var processor = this.textProcessors[type];
-	if(!processor) {
-		processor = this.textProcessors["text/x-tiddlywiki"];
+	var parser = this.parsers[type];
+	if(!parser) {
+		parser = this.parsers["text/x-tiddlywiki"];
 	}
-	if(processor) {
-		return processor.parse(text);
+	if(parser) {
+		return parser.parse(text);
 	} else {
 		return null;
 	}

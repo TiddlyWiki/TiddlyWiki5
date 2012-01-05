@@ -16,11 +16,9 @@ jsmodule: ../js/Tiddler.js
 jsmodule: ../js/TiddlerInput.js
 jsmodule: ../js/TiddlerOutput.js
 jsmodule: ../js/WikiStore.js
-jsmodule: ../js/WikiTextProcessor.js
 jsmodule: ../js/WikiTextParser.js
 jsmodule: ../js/WikiTextRules.js
-jsmodule: ../js/WikiTextRenderer.js
-jsmodule: ../js/WikiTextCompiler.js
+jsmodule: ../js/WikiTextParseTree.js
 jsmodule: ../js/Navigators.js
 jsmodule: ../js/StoryNavigator.js
 jsmodule: ../js/App.js
