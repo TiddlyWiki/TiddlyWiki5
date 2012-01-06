@@ -7,7 +7,8 @@ title: js/WikiTextRules.js
 /*jslint node: true */
 "use strict";
 
-var util = require("util");
+var ArgParser = require("./ArgParser.js").ArgParser,
+	util = require("util");
 
 var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
@@ -105,6 +106,32 @@ var enclosedTextHelper = function(w) {
 			]});
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 	}
+};
+
+var parseMacroCall = function(w,name,paramString) {
+	var macro = w.store.macros[name],
+		params = {};
+	if(macro) {
+		var args = new ArgParser(paramString,{defaultName: "anon"}),
+			insertParam = function(name,arg) {
+				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
+			};
+		for(var m in macro.params) {
+			var param = macro.params[m];
+			if("byPos" in param && args.byPos[param.byPos]) {
+				insertParam(m,args.byPos[param.byPos].v);
+			} else if("byName" in param) {
+				var arg = args.getValueByName(m);
+				if(!arg && param.byName === "default") {
+					arg = args.getValueByName("anon");
+				}
+				if(arg) {
+					insertParam(m,arg);
+				}
+			}
+		}
+	}
+	return {type: "macro", name: name, params: params};
 };
 
 var rules = [
@@ -410,7 +437,7 @@ var rules = [
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && lookaheadMatch[1]) {
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
-			w.output.push({type: "macro", name: lookaheadMatch[1], params: lookaheadMatch[2]});
+			w.output.push(parseMacroCall(w,lookaheadMatch[1],lookaheadMatch[2]));
 		}
 	}
 },

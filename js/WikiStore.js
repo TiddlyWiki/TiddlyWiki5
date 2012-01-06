@@ -314,15 +314,18 @@ store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 WikiStore.prototype.renderTiddler = function(type,title,asTitle) {
 	var tiddler = this.getTiddler(title),
 		fn = this.compileTiddler(title,type);
-	if(asTitle) {
-		var asTiddler = this.getTiddler(asTitle);
-		return fn(asTiddler,this,utils);
-	} else {
-		if(!tiddler.renditions[type]) {
-			tiddler.renditions[type] = fn(tiddler,this,utils);
+	if(tiddler) {
+		if(asTitle) {
+			var asTiddler = this.getTiddler(asTitle);
+			return fn(asTiddler,this,utils);
+		} else {
+			if(!tiddler.renditions[type]) {
+				tiddler.renditions[type] = fn(tiddler,this,utils);
+			}
+			return tiddler.renditions[type];
 		}
-		return tiddler.renditions[type];
 	}
+	return null;
 };
 
 WikiStore.prototype.installMacros = function() {

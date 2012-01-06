@@ -76,32 +76,10 @@ WikiTextParseTree.prototype.pushString = function(s) {
 };
 
 WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
-	var me = this,
-		macro = this.store.macros[name];
+	var macro = this.store.macros[name],
+		p,
+		n;
 	if(macro) {
-		var args = new ArgParser(params,{defaultName: "anon"}),
-			paramsProps = {};
-		var insertParam = function(name,arg) {
-			if(arg.evaluated) {
-				paramsProps[name] = me.store.jsParser.parse(arg.string).tree.elements[0];
-			} else {
-				paramsProps[name] = {type: "StringLiteral", value: arg.string};
-			}
-		};
-		for(var m in macro.params) {
-			var param = macro.params[m];
-			if("byPos" in param && args.byPos[param.byPos]) {
-				insertParam(m,args.byPos[param.byPos].v);
-			} else if("byName" in param) {
-				var arg = args.getValueByName(m);
-				if(!arg && param.byName === "default") {
-					arg = args.getValueByName("anon");
-				}
-				if(arg) {
-					insertParam(m,arg);
-				}
-			}
-		}
 		var macroCall = {
 			type: "FunctionCall",
 			name: {
@@ -115,11 +93,16 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 			}]
 		};
 		macroCall.name.elements = macro.code[type].tree.elements;
-		for(m in paramsProps) {
+		for(p in params) {
+			if(params[p].type === "string") {
+				n = {type: "StringLiteral", value: params[p].value};
+			} else {
+				n = this.store.jsParser.parse(params[p].value).tree.elements[0];
+			}
 			macroCall["arguments"][0].properties.push({
 				type: "PropertyAssignment",
-				name: m,
-				value: paramsProps[m]
+				name: p,
+				value: n
 			});
 		}
 		this.output.push(macroCall);
