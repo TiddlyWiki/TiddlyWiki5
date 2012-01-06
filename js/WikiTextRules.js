@@ -114,7 +114,9 @@ var parseMacroCall = function(w,name,paramString) {
 	if(macro) {
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
 			insertParam = function(param,name,arg) {
-				if(param.type === "tiddler") {
+				if(param.dependantAll) {
+					w.dependencies = null;
+				} else if(param.type === "tiddler") {
 					if(arg.evaluated) {
 						w.dependencies = null;
 					} else {

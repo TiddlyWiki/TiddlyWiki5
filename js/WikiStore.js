@@ -351,6 +351,7 @@ WikiStore.prototype.installMacros = function() {
 			}
 		},
 		list: {
+			dependantAll: true, // Tiddlers containing <<list>> macro are dependent on every tiddler
 			params: {
 				type: {byName: "default", type: "text", optional: false},
 				template: {byName: true, type: "tiddler", optional: true},
