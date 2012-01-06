@@ -8,8 +8,7 @@ title: js/WikiStore.js
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,
-	utils = require("./Utils.js"),
-	util = require("util");
+	utils = require("./Utils.js");
 
 /* Creates a new WikiStore object
 

@@ -18,8 +18,7 @@ the 'modified' and 'created' fields are dates. All other fields are strings.
 "use strict";
 
 var utils = require("./Utils.js"),
-	ArgParser = require("./ArgParser.js").ArgParser,
-	WikiTextParser = require("./WikiTextParser.js").WikiTextParser;
+	ArgParser = require("./ArgParser.js").ArgParser;
 
 var Tiddler = function(/* tiddler,fields */) {
 	this.parseTree = null; // Caches the parse tree for the tiddler
