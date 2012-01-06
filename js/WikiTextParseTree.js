@@ -13,8 +13,9 @@ var ArgParser = require("./ArgParser.js").ArgParser,
 	utils = require("./Utils.js");
 
 // Intialise the parse tree object
-var WikiTextParseTree = function(tree,store) {
+var WikiTextParseTree = function(tree,dependencies,store) {
 	this.tree = tree;
+	this.dependencies = dependencies; // An array of tiddler names, or null if this tiddler depends on too many to track
 	this.store = store;
 };
 

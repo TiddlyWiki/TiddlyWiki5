@@ -113,20 +113,31 @@ var parseMacroCall = function(w,name,paramString) {
 		params = {};
 	if(macro) {
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
-			insertParam = function(name,arg) {
+			insertParam = function(param,name,arg) {
+				if(param.type === "tiddler") {
+					if(arg.evaluated) {
+						w.dependencies = null;
+					} else {
+						if(w.dependencies) {
+							w.dependencies.push(arg.string);
+						}
+					}
+				}
 				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
 			};
 		for(var m in macro.params) {
-			var param = macro.params[m];
+			var param = macro.params[m],
+				arg;
 			if("byPos" in param && args.byPos[param.byPos]) {
-				insertParam(m,args.byPos[param.byPos].v);
+				arg = args.byPos[param.byPos].v;
+				insertParam(param,m,arg);
 			} else if("byName" in param) {
-				var arg = args.getValueByName(m);
+				arg = args.getValueByName(m);
 				if(!arg && param.byName === "default") {
 					arg = args.getValueByName("anon");
 				}
 				if(arg) {
-					insertParam(m,arg);
+					insertParam(param,m,arg);
 				}
 			}
 		}

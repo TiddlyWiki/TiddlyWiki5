@@ -44,9 +44,10 @@ WikiTextParser.prototype.parse = function(text) {
 	this.source = text;
 	this.nextMatch = 0;
 	this.children = [];
+	this.dependencies = [];
 	this.output = null;
 	this.subWikify(this.children);
-	return new WikiTextParseTree(this.children,this.store);
+	return new WikiTextParseTree(this.children,this.dependencies,this.store);
 };
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
