@@ -73,7 +73,7 @@ a {
 }
 
 a.linkExternal::before {
-    content: "\27a0";
+    content: "\27a0\00a0";
 }
 
 a:hover {

@@ -20,14 +20,6 @@ var WikiTextParseTree = function(tree,store) {
 	this.store = store;
 };
 
-WikiTextParseTree.prototype.render = function(type,treenode,store,title) {
-	/*jslint evil: true */
-	var code = this.compile(type,treenode);
-	var fn = eval(code);
-	var tiddler = store.getTiddler(title);
-	return fn(tiddler,store,utils);
-};
-
 // Compile the parse tree into a JavaScript function that returns the required
 // representation of the tree
 WikiTextParseTree.prototype.compile = function(type,treenode) {

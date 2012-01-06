@@ -280,24 +280,49 @@ WikiStore.prototype.parseText = function(type,text) {
 WikiStore.prototype.parseTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
-		return this.parseText(tiddler.fields.type,tiddler.fields.text);
+		// Check the cache
+		if(!tiddler.parseTree) {
+			tiddler.parseTree = this.parseText(tiddler.fields.type,tiddler.fields.text);
+		}
+		return tiddler.parseTree;
 	} else {
 		return null;
 	}
 };
 
 /*
+Compiles a JavaScript function that renders a tiddler in a particular MIME type
+*/
+WikiStore.prototype.compileTiddler = function(title,type) {
+	/*jslint evil: true */
+	var tiddler = this.getTiddler(title);
+	if(tiddler) {
+		if(!tiddler.renderers[type]) {
+			var tree = this.parseTiddler(title);
+			tiddler.renderers[type] = eval(tree.compile(type));
+		}
+		return tiddler.renderers[type];
+	} else {
+		return null;	
+	}
+};
+
+/*
 Render a tiddler to a particular MIME type. Optionally render it with a different tiddler
-as the context. This option is used to render a tiddler through a template as
+as the context. This option is used to render a tiddler through a template eg
 store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 */
 WikiStore.prototype.renderTiddler = function(type,title,asTitle) {
-	var parser = this.parseTiddler(title),
-		asTitleExists = asTitle ? this.tiddlerExists(asTitle) : true;
-	if(parser && asTitleExists) {
-		return parser.render(type,parser.children,this,asTitle ? asTitle : title);
+	var tiddler = this.getTiddler(title),
+		fn = this.compileTiddler(title,type);
+	if(asTitle) {
+		var asTiddler = this.getTiddler(asTitle);
+		return fn(asTiddler,this,utils);
 	} else {
-		return null;
+		if(!tiddler.renditions[type]) {
+			tiddler.renditions[type] = fn(tiddler,this,utils);
+		}
+		return tiddler.renditions[type];
 	}
 };
 

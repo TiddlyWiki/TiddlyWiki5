@@ -22,6 +22,9 @@ var utils = require("./Utils.js"),
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser;
 
 var Tiddler = function(/* tiddler,fields */) {
+	this.parseTree = null; // Caches the parse tree for the tiddler
+	this.renderers = {}; // Caches rendering functions for this tiddler (indexed by MIME type)
+	this.renditions = {}; // Caches the renditions produced by those functions (indexed by MIME type)
 	this.fields = {};
 	for(var c=0; c<arguments.length; c++) {
 		var arg = arguments[c],
