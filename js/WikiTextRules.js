@@ -125,6 +125,9 @@ var parseMacroCall = function(w,name,paramString) {
 		for(var m in macro.params) {
 			var param = macro.params[m],
 				arg;
+			if(param.dependentAll) {
+				w.addDependency(null);
+			}
 			if("byPos" in param && args.byPos[param.byPos]) {
 				arg = args.byPos[param.byPos].v;
 				insertParam(param,m,arg);
