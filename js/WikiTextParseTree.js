@@ -80,61 +80,57 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 	var macro = this.store.macros[name],
 		p,
 		n;
-	if(macro) {
-		var macroCall = {
-			type: "FunctionCall",
-			name: {
+	if(!macro) {
+		this.pushString("{{** Unknown macro '" + name + "' **}}");
+		return;
+	}
+	if(macro.types.indexOf(type) === -1) {
+		this.pushString("{{**  Macro '" + name + "' cannot render to MIME type '" + type + "'**}}");
+		return;
+	}
+	var macroCall = {
+		type: "FunctionCall",
+		name: {
+			"base": {
 				"base": {
 					"base": {
-						"base": {
-							"name": "store", 
-							"type": "Variable"
-						}, 
-						"name": "macros", 
-						"type": "PropertyAccess"
-					}, 
-					"name": {
-						"type": "StringLiteral", 
-						"value": name
-					}, 
-					"type": "PropertyAccess"
-				}, 
-				"name": "code", 
-				"type": "PropertyAccess"
-			},
-			"arguments": [ {
-				"type": "StringLiteral", 
-				"value": type
-			},
-			{
-				"type": "Variable",
-				"name": "tiddler"
-			}, 
-			{
-				"type": "Variable",
-				"name": "store"
-			},
-			{
-				type: "ObjectLiteral",
-				properties: []	
-			}]
-		};
-		for(p in params) {
-			if(params[p].type === "string") {
-				n = {type: "StringLiteral", value: params[p].value};
-			} else {
-				n = this.store.jsParser.parse(params[p].value).tree.elements[0];
-			}
-			macroCall["arguments"][3].properties.push({
-				type: "PropertyAssignment",
-				name: p,
-				value: n
-			});
+						"name": "store", 
+						"type": "Variable"}, 
+					"name": "macros", 
+					"type": "PropertyAccess"}, 
+				"name": {
+					"type": "StringLiteral", 
+					"value": name}, 
+				"type": "PropertyAccess"}, 
+			"name": "code", 
+			"type": "PropertyAccess"},
+		"arguments": [ {
+			"type": "StringLiteral", 
+			"value": type
+		},{
+			"type": "Variable",
+			"name": "tiddler"
+		},{
+			"type": "Variable",
+			"name": "store"
+		},{
+			type: "ObjectLiteral",
+			properties: []	
+		}]
+	};
+	for(p in params) {
+		if(params[p].type === "string") {
+			n = {type: "StringLiteral", value: params[p].value};
+		} else {
+			n = this.store.jsParser.parse(params[p].value).tree.elements[0];
 		}
-		this.output.push(macroCall);
-	} else {
-		this.pushString("{{** Unknown macro '" + name + "' **}}");
+		macroCall["arguments"][3].properties.push({
+			type: "PropertyAssignment",
+			name: p,
+			value: n
+		});
 	}
+	this.output.push(macroCall);
 };
 
 WikiTextParseTree.prototype.compileElementHtml = function(element, options) {
