@@ -202,6 +202,15 @@ WikiStore.prototype.parseTiddler = function(title) {
 };
 
 /*
+Compiles a block of text of a specified type into a JavaScript function that renders the text in a particular MIME type
+*/
+WikiStore.prototype.compileText = function(type,text,targetType) {
+	/*jslint evil: true */
+	var tree = this.parseText(type,text);
+	return eval(tree.compile(targetType));
+};
+
+/*
 Compiles a JavaScript function that renders a tiddler in a particular MIME type
 */
 WikiStore.prototype.compileTiddler = function(title,type) {
@@ -216,6 +225,15 @@ WikiStore.prototype.compileTiddler = function(title,type) {
 	} else {
 		return null;	
 	}
+};
+
+/*
+Render a block of text of a specified type into a particular MIME type
+*/
+WikiStore.prototype.renderText = function(type,text,targetType,asTitle) {
+	var tiddler = this.getTiddler(asTitle),
+		fn = this.compileText(type,text,targetType);
+	return fn(tiddler,this,utils);
 };
 
 /*
