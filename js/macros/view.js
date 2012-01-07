@@ -28,6 +28,7 @@ exports.macro = {
 					} else {
 						return v;
 					}
+					break; // JSHint wants this even though it's not really necessary
 				case "wikified":
 					return store.renderTiddler(type,tiddler.fields.title);
 				case "date":
