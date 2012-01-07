@@ -112,11 +112,12 @@ var parseMacroCall = function(w,name,paramString) {
 	var macro = w.store.macros[name],
 		params = {};
 	if(macro) {
+		if(macro.dependentAll) {
+			w.addDependency(null);
+		}
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
 			insertParam = function(param,name,arg) {
-				if(param.dependantAll) {
-					w.addDependency(null);
-				} else if(param.type === "tiddler") {
+				if(param.type === "tiddler") {
 					w.addDependency(arg.evaluated ? null : arg.string);
 				}
 				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
