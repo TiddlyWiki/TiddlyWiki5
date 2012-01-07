@@ -84,37 +84,37 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 		var macroCall = {
 			type: "FunctionCall",
 			name: {
-		        "base": {
-		            "base": {
-		                "base": {
-		                    "name": "store", 
-		                    "type": "Variable"
-		                }, 
-		                "name": "macros", 
-		                "type": "PropertyAccess"
-		            }, 
-		            "name": {
-		                "type": "StringLiteral", 
-		                "value": name
-		            }, 
-		            "type": "PropertyAccess"
-		        }, 
-		        "name": "code", 
-		        "type": "PropertyAccess"
-		    },
+				"base": {
+					"base": {
+						"base": {
+							"name": "store", 
+							"type": "Variable"
+						}, 
+						"name": "macros", 
+						"type": "PropertyAccess"
+					}, 
+					"name": {
+						"type": "StringLiteral", 
+						"value": name
+					}, 
+					"type": "PropertyAccess"
+				}, 
+				"name": "code", 
+				"type": "PropertyAccess"
+			},
 			"arguments": [ {
-	            "type": "StringLiteral", 
-	            "value": type
-	        },
-	        {
-	            "type": "Variable",
-	            "name": "tiddler"
-	        }, 
-	        {
-	            "type": "Variable",
-	            "name": "store"
-	        },
-	        {
+				"type": "StringLiteral", 
+				"value": type
+			},
+			{
+				"type": "Variable",
+				"name": "tiddler"
+			}, 
+			{
+				"type": "Variable",
+				"name": "store"
+			},
+			{
 				type: "ObjectLiteral",
 				properties: []	
 			}]
