@@ -115,15 +115,9 @@ var parseMacroCall = function(w,name,paramString) {
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
 			insertParam = function(param,name,arg) {
 				if(param.dependantAll) {
-					w.dependencies = null;
+					w.addDependency(null);
 				} else if(param.type === "tiddler") {
-					if(arg.evaluated) {
-						w.dependencies = null;
-					} else {
-						if(w.dependencies) {
-							w.dependencies.push(arg.string);
-						}
-					}
+					w.addDependency(arg.evaluated ? null : arg.string);
 				}
 				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
 			};
@@ -470,9 +464,11 @@ var rules = [
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
 				setAttr(e,"href",link);
+				w.addDependency(link);
 			} else {
 				// Simple bracketted link
 				setAttr(e,"href",text);
+				w.addDependency(text);
 			}
 			w.output.push(e);
 			e.children.push({type: "text", value: text});
@@ -502,6 +498,7 @@ var rules = [
 		if(w.autoLinkWikiWords) {
 			var link = {type: "a", children: []};
 			setAttr(link,"href",w.matchText);
+			w.addDependency(w.matchText);
 			w.output.push(link);
 			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
@@ -517,6 +514,7 @@ var rules = [
 	{
 		var e = {type: "a", children: []};
 		setAttr(e,"href",w.matchText);
+		w.addDependency(w.matchText);
 		w.output.push(e);
 		w.outputText(e.children,w.matchStart,w.nextMatch);
 	}

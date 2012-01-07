@@ -199,6 +199,21 @@ WikiStore.prototype.listTiddlers = function(type,template,emptyMessage) {
 	return "<span>Listing!</span>";
 };
 
+WikiStore.prototype.tiddlerInfo = function(title) {
+	var tiddler = this.getTiddler(title),
+		parseTree = this.parseTiddler(title);
+	if(tiddler && parseTree) {
+		var d = parseTree.dependencies;
+		if(d === null) {
+			return "Dependencies: *";
+		} else {
+			return "Dependencies: " + d.join(", ");
+		}
+	} else {
+		return "";
+	}
+};
+
 /*
 
 		argOptions: {defaultName:"type"},
@@ -378,6 +393,15 @@ WikiStore.prototype.installMacros = function() {
 			code: {
 				"text/html": this.jsParser.parse("return store.renderTiddler('text/html',params.target);"),
 				"text/plain": this.jsParser.parse("return store.renderTiddler('text/plain',params.target);")
+			}
+		},
+		info: {
+			params: {
+				
+			},
+			code: {
+				"text/html": this.jsParser.parse("return store.tiddlerInfo(tiddler.fields.title);"),
+				"text/plain": this.jsParser.parse("return store.tiddlerInfo(tiddler.fields.title);")
 			}
 		}
 	};

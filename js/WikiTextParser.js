@@ -50,6 +50,14 @@ WikiTextParser.prototype.parse = function(text) {
 	return new WikiTextParseTree(this.children,this.dependencies,this.store);
 };
 
+WikiTextParser.prototype.addDependency = function(dependency) {
+	if(dependency === null) {
+		this.dependencies = null;
+	} else if(this.dependencies && this.dependencies.indexOf(dependency) === -1) {
+		this.dependencies.push(dependency);
+	}	
+};
+
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
 	if(startPos < endPos) {
 		place.push({type: "text", value: this.source.substring(startPos,endPos)});
