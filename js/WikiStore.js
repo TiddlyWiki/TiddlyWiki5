@@ -185,10 +185,10 @@ WikiStore.prototype.getFormattedTiddlerField = function(title,field,format,templ
 WikiStore.prototype.classesForLink = function(target) {
 	var className = "",
 		externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i;
-	if(externalRegExp.test(target)) {
-		className = "linkExternal";
-	} else if (this.tiddlerExists(target)) {
+	if (this.tiddlerExists(target)) {
 		className = "linkInternalResolves";
+	} else if(externalRegExp.test(target)) {
+		className = "linkExternal";
 	} else {
 		className = "linkInternalMissing";
 	}
