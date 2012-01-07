@@ -37,7 +37,7 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 			{
 				type: "Function",
 				name: null,
-				params: ["tiddler","store","utils"],
+				params: ["tiddler","store","utils"], // These are the parameters passed to the tiddler function; must match the invocation in WikiStore.renderTiddler()
 				elements: [
 					{
 					type: "ReturnStatement",
