@@ -175,9 +175,6 @@ WikiTextParseTree.prototype.compileSubTreeHtml = function(tree) {
 			case "img":
 				this.compileElementHtml(tree[t],{selfClosing: true}); // Self closing elements
 				break;
-			case "context":
-				//compileSubTree(tree[t].children);
-				break;
 			case "macro":
 				this.compileMacroCall("text/html",tree[t].name,tree[t].params);
 				break;
@@ -229,9 +226,6 @@ WikiTextParseTree.prototype.compileSubTreePlain = function(tree) {
 			case "br":
 			case "img":
 				this.compileElementPlain(tree[t],{selfClosing: true}); // Self closing elements
-				break;
-			case "context":
-				//compileSubTree(tree[t].children);
 				break;
 			case "macro":
 				this.compileMacroCall("text/plain",tree[t].name,tree[t].params);
