@@ -26,6 +26,8 @@ Options and their defaults are:
 
 var ArgParser = function(argString,options) {
 	options = options || {};
+	var defaultName = options.defaultName,
+		defaultValue = options.defaultValue;
 	var parseToken = function(match,p) {
 			var n;
 			if(match[p]) { // Double quoted
@@ -62,16 +64,21 @@ var ArgParser = function(argString,options) {
 				this.byPos.push({n:"", v:n});
 			} else {
 				v = parseToken(match,8);
-				if(v === undefined && options.defaultName) {
+				if(v === undefined && defaultName) {
 					v = n;
-					n = options.defaultName;
-				} else if(v === undefined && options.defaultValue) {
-					v = options.defaultValue;
+					n = defaultName;
+				} else if(v === undefined && defaultValue) {
+					v = defaultValue;
+				}
+				if(n.evaluated === true) {
+					n = "{{" + n.string + "}}";
+				} else if (typeof n === "object" && "string" in n) {
+					n = n.string;
 				}
 				this.byPos.push({n:n, v:v});
 				if(options.cascadeDefaults) {
-					options.defaultName = n;
-					options.defaultValue = v;
+					defaultName = n;
+					defaultValue = v;
 				}
 			}
 		}
