@@ -84,23 +84,48 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 		var macroCall = {
 			type: "FunctionCall",
 			name: {
-				type: "Function",
-				name: null,
-				params: ["params"],
-				elements: []},
+		        "base": {
+		            "base": {
+		                "base": {
+		                    "name": "store", 
+		                    "type": "Variable"
+		                }, 
+		                "name": "macros", 
+		                "type": "PropertyAccess"
+		            }, 
+		            "name": {
+		                "type": "StringLiteral", 
+		                "value": name
+		            }, 
+		            "type": "PropertyAccess"
+		        }, 
+		        "name": "code", 
+		        "type": "PropertyAccess"
+		    },
 			"arguments": [ {
+	            "type": "StringLiteral", 
+	            "value": type
+	        },
+	        {
+	            "type": "Variable",
+	            "name": "tiddler"
+	        }, 
+	        {
+	            "type": "Variable",
+	            "name": "store"
+	        },
+	        {
 				type: "ObjectLiteral",
 				properties: []	
 			}]
 		};
-		macroCall.name.elements = macro.code[type].tree.elements;
 		for(p in params) {
 			if(params[p].type === "string") {
 				n = {type: "StringLiteral", value: params[p].value};
 			} else {
 				n = this.store.jsParser.parse(params[p].value).tree.elements[0];
 			}
-			macroCall["arguments"][0].properties.push({
+			macroCall["arguments"][3].properties.push({
 				type: "PropertyAssignment",
 				name: p,
 				value: n
@@ -108,7 +133,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 		}
 		this.output.push(macroCall);
 	} else {
-		this.pushString("<span class='error errorUnknownMacro'>Unknown macro '" + name + "'</span>");
+		this.pushString("{{** Unknown macro '" + name + "' **}}");
 	}
 };
 

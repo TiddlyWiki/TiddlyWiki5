@@ -23,6 +23,13 @@ jsmodule: ../js/Navigators.js
 jsmodule: ../js/StoryNavigator.js
 jsmodule: ../js/App.js
 
+jsmodule: ../js/macros/echo.js
+jsmodule: ../js/macros/info.js
+jsmodule: ../js/macros/list.js
+jsmodule: ../js/macros/tiddler.js
+jsmodule: ../js/macros/version.js
+jsmodule: ../js/macros/view.js
+
 jsmodule: ../node_modules/pegjs/lib/peg.js
 	title: pegjs
 

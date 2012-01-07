@@ -79,8 +79,13 @@ var App = function() {
 	} else {
 		this.store.jsParser = new JavaScriptParser(require("fs").readFileSync("parsers/javascript.pegjs","utf8"));
 	}
-	// Hack to install standard macros
-	this.store.installMacros();
+	// Bit of a hack to set up the macros
+	this.store.installMacro(require("./macros/echo.js").macro);
+	this.store.installMacro(require("./macros/info.js").macro);
+	this.store.installMacro(require("./macros/list.js").macro);
+	this.store.installMacro(require("./macros/tiddler.js").macro);
+	this.store.installMacro(require("./macros/version.js").macro);
+	this.store.installMacro(require("./macros/view.js").macro);
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
 		// Install the standard navigators
