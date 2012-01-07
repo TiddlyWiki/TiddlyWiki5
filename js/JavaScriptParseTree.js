@@ -8,6 +8,10 @@ structure built from JavaScript arrays and objects. The nodes of the tree are ob
 field that indicates the type of the node (see the function renderNode() for a list of the types).
 Depending on the type, other fields provide further details about the node.
 
+The pegjs parser uses "StringLiteral" nodes to represent individual string literals. TiddlyWiki adds
+support for nodes of type "StringLiterals" that represent a contiguous sequence of string constants.
+This simplifies coalescing adjacent constants into a single string.
+
 \*/
 (function(){
 
