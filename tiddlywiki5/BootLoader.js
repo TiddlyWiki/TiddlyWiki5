@@ -10,8 +10,8 @@ function resolveModuleName(srcModule,dstModule) {
 	var src = srcModule.split("/"),
 		dst = dstModule.split("/"),
 		c;
-	// If the destination starts with ./ then it's a relative reference to an ordinary module
-	if(dstModule.substr(0,2) === "./" ) {
+	// If the destination starts with ./ or ../ then it's a relative reference to an ordinary module
+	if(dstModule.substr(0,2) === "./" || dstModule.substr(0,3) === "../" ) {
 		// Remove the filename part of the src path
 		src.splice(src.length-1,1);
 		// Process the destination path bit by bit
@@ -33,7 +33,7 @@ function resolveModuleName(srcModule,dstModule) {
 	} else if(dstModule.substr(0,1) === "/") {
 		return dst.join("/");
 	} else {
-		// If there was no / or ./ then it's a built in module and the name doesn't need resolving
+		// If there was no / or ./ or ../ then it's a built in module and the name doesn't need resolving
 		return dstModule;		
 	}
 }
