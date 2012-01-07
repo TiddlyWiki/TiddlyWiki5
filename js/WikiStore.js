@@ -381,14 +381,15 @@ WikiStore.prototype.installMacros = function() {
 			params: {
 			},
 			code: {
-				"text/html": this.jsParser.parse("return '5.0.0';"),
+				"text/html": this.jsParser.parse("return utils.htmlEncode('5.0.0');"),
 				"text/plain": this.jsParser.parse("return '5.0.0';")
 			}
 		},
 		tiddler: {
+			cascadeParams: true, // Cascade names of named parameters to following anonymous parameters
 			params: {
 				target: {byName: "default", type: "tiddler", optional: false},
-				"with": {byName: true, type: "text", optional: true, cascade: true}
+				"with": {byName: true, type: "text", optional: true}
 			},
 			code: {
 				"text/html": this.jsParser.parse("return store.renderTiddler('text/html',params.target);"),
@@ -397,10 +398,9 @@ WikiStore.prototype.installMacros = function() {
 		},
 		info: {
 			params: {
-				
 			},
 			code: {
-				"text/html": this.jsParser.parse("return store.tiddlerInfo(tiddler.fields.title);"),
+				"text/html": this.jsParser.parse("return utils.htmlEncode(store.tiddlerInfo(tiddler.fields.title));"),
 				"text/plain": this.jsParser.parse("return store.tiddlerInfo(tiddler.fields.title);")
 			}
 		}
