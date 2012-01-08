@@ -47,7 +47,10 @@ WikiTextParser.prototype.parse = function(text) {
 	this.dependencies = [];
 	this.output = null;
 	this.subWikify(this.children);
-	return new WikiTextParseTree(this.children,this.dependencies,this.store);
+	var tree = new WikiTextParseTree(this.children,this.dependencies,this.store);
+	this.source = null;
+	this.children = null;
+	return tree;
 };
 
 WikiTextParser.prototype.addDependency = function(dependency) {

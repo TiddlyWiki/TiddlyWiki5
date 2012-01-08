@@ -29,7 +29,9 @@ var JavaScriptParseTree = function(tree) {
 JavaScriptParseTree.prototype.render = function() {
 	this.output = [];
 	this.renderSubTree(this.tree);
-	return this.output.join("");
+	var r = this.output.join("");
+	this.output = null;
+	return r;
 };
 
 // Render a subtree of the parse tree to an array of fragments of JavaScript source code

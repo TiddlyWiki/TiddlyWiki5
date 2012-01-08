@@ -61,7 +61,9 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 				]
 			}
 		]);
-	return parseTree.render();
+	var r = parseTree.render();
+	this.output = null;
+	return r;
 };
 
 WikiTextParseTree.prototype.pushString = function(s) {
