@@ -588,7 +588,7 @@ var rules = [
 
 {
 	name: "characterFormat",
-	match: "''|//|__|\\^\\^|~~|--(?!\\s|$)|\\{\\{\\{",
+	match: "''|//|__|\\^\\^|~~|--(?!\\s|$)|\\{\\{\\{|`",
 	handler: function(w)
 	{
 		var e;
@@ -622,6 +622,11 @@ var rules = [
 			e = {type: "strike", children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(--)/mg);
+			break;
+		case "`":
+			e = {type: "code", children: []};
+			w.output.push(e);
+			w.subWikifyTerm(e.children,/(`)/mg);
 			break;
 		case "{{{":
 			var lookaheadRegExp = /\{\{\{((?:.|\n)*?)\}\}\}/mg;

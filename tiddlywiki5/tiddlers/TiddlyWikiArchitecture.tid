@@ -27,13 +27,13 @@ Tiddlers are a dictionary of name:value pairs called fields.
 
 The only field that is required is the {{{title}}} field, but useful tiddlers also have a {{{text}}} field, and some or all of the standard fields {{{modified}}}, {{{modifier}}}, {{{created}}}, {{{creator}}}, {{{tags}}} and {{{type}}}.
 
-Values can be a string, an array of strings, or a JavaScript {{{Date}}} object. Hardcoded in the system is the knowledge that the 'tags' field is a string array, and that the 'modified' and 'created' fields are dates. All other fields are strings.
+Values can be a string, an array of strings, or a JavaScript {{{Date}}} object. Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are dates. All other fields are strings.
 
 The {{{type}}} field identifies the representation of the tiddler text with a raw, unparameterised, MIME type.
 
 !! WikiStore
 
-Groups of uniquely title tiddlers are contained in WikiStore objects.
+Groups of uniquely titled tiddlers are contained in WikiStore objects.
 
 The WikiStore also manages the plugin modules used for macros, and operations like serializing, deserializing, parsing and rendering tiddlers.
 
