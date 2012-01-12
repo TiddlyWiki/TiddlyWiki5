@@ -16,6 +16,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
 	SVGParser = require("./SVGParser.js").SVGParser,
+	BitmapParser = require("./BitmapParser.js").BitmapParser,
 	Navigators = require("./Navigators.js").Navigators,
 	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
 
@@ -30,6 +31,10 @@ var App = function() {
 		store: this.store
 	}));
 	this.store.registerParser("image/svg+xml",new SVGParser());
+	var bitmapParser = new BitmapParser();
+	this.store.registerParser("image/jpg",bitmapParser);
+	this.store.registerParser("image/jpeg",bitmapParser);
+	this.store.registerParser("image/png",bitmapParser);
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);

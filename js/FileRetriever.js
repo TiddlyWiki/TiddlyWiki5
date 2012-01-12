@@ -19,7 +19,17 @@ var fs = require("fs"),
 var FileRetriever = exports;
 
 var fileRequest = function fileRequest(filepath,callback) {
-	fs.readFile(filepath,"utf8", callback);
+	fs.readFile(filepath, function (err,data) {
+		if(err) {
+			callback(err); 
+		} else {
+			if([".jpg",".jpeg",".png"].indexOf(path.extname(filepath)) !== -1) {
+				callback(err,data.toString("base64"));
+			} else {
+				callback(err,data.toString("utf8"));
+			}
+		}
+	});
 };
 
 var httpRequest = function(fileurl,callback) {

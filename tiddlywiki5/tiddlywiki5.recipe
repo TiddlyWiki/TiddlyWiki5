@@ -18,6 +18,7 @@ jsmodule: ../js/TiddlerInput.js
 jsmodule: ../js/TiddlerOutput.js
 jsmodule: ../js/WikiStore.js
 jsmodule: ../js/SVGParser.js
+jsmodule: ../js/BitmapParser.js
 jsmodule: ../js/WikiTextParser.js
 jsmodule: ../js/WikiTextRules.js
 jsmodule: ../js/WikiTextParseTree.js
