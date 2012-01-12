@@ -9,6 +9,8 @@ TiddlyWiki is based on the idea of making information more useful by modelling i
 
 Tiddlers use a special wikitext notation that concisely represents text formatting and hypertext features. A cornerstone of wikitext is the ability to combine and embed tiddlers in various ways.
 
+<<tiddler [[High Level Architecture.svg]]>>
+
 !! Content Types
 
 TiddlyWiki uses MIME types to indicate how the text of tiddlers should be interpreted. It uses standard MIME types such as {{{text/plain}}} and {{{text/html}}}, as well as these non-standard types for TiddlyWiki-specific formats:

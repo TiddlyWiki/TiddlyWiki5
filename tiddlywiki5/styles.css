@@ -94,3 +94,7 @@ a.linkInternalResolves {
 a.linkInternalMissing {
     font-style: italic;
 }
+
+svg {
+    width: 100%;
+}

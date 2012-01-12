@@ -4,6 +4,7 @@ style: styles.css
 
 recipe: tiddlers/split.recipe
 recipe: ../parsers/split.recipe
+tiddler: ../docs/High Level Architecture.svg
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 
@@ -16,6 +17,7 @@ jsmodule: ../js/Tiddler.js
 jsmodule: ../js/TiddlerInput.js
 jsmodule: ../js/TiddlerOutput.js
 jsmodule: ../js/WikiStore.js
+jsmodule: ../js/SVGParser.js
 jsmodule: ../js/WikiTextParser.js
 jsmodule: ../js/WikiTextRules.js
 jsmodule: ../js/WikiTextParseTree.js
