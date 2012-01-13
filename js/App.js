@@ -106,8 +106,9 @@ var App = function() {
 		// Use the story navigator for all links
 		navigators.install("a","StoryNavigator");
 		// Open the PageTemplate
-		var div = $("<div/>").html(this.store.renderTiddler("text/html","PageTemplate"));
-		div.appendTo("body");
+		var div = document.createElement("div");
+		div.innerHTML = this.store.renderTiddler("text/html","PageTemplate");
+		document.body.appendChild(div);
 	}
 };
 
