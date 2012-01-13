@@ -13,3 +13,6 @@ tiddler: SiteTitle.tid
 tiddler: SiteSubtitle.tid
 
 tiddler: SimpleTemplate.tid
+
+tiddler: PageTemplate.tid
+tiddler: StoryTiddlers.tid

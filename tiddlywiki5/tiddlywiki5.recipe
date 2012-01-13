@@ -6,7 +6,7 @@ recipe: tiddlers/split.recipe
 recipe: ../parsers/split.recipe
 tiddler: ../docs/High Level Architecture.svg
 tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
-	type: image/jpg
+	type: image/jpeg
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 
@@ -31,6 +31,7 @@ jsmodule: ../js/App.js
 jsmodule: ../js/macros/echo.js
 jsmodule: ../js/macros/info.js
 jsmodule: ../js/macros/list.js
+jsmodule: ../js/macros/story.js
 jsmodule: ../js/macros/tiddler.js
 jsmodule: ../js/macros/version.js
 jsmodule: ../js/macros/view.js

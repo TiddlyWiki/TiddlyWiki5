@@ -91,6 +91,7 @@ var App = function() {
 	this.store.installMacro(require("./macros/echo.js").macro);
 	this.store.installMacro(require("./macros/info.js").macro);
 	this.store.installMacro(require("./macros/list.js").macro);
+	this.store.installMacro(require("./macros/story.js").macro);
 	this.store.installMacro(require("./macros/tiddler.js").macro);
 	this.store.installMacro(require("./macros/version.js").macro);
 	this.store.installMacro(require("./macros/view.js").macro);
@@ -104,8 +105,9 @@ var App = function() {
 		navigators.registerNavigator("StoryNavigator",new StoryNavigator(navigators));
 		// Use the story navigator for all links
 		navigators.install("a","StoryNavigator");
-		// Navigate to HelloThere
-		navigators.navigateTo("HelloThere","StoryNavigator");
+		// Open the PageTemplate
+		var div = $("<div/>").html(this.store.renderTiddler("text/html","PageTemplate"));
+		div.appendTo("body");
 	}
 };
 
