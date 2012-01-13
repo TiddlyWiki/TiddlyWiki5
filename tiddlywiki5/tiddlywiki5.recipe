@@ -5,6 +5,8 @@ style: styles.css
 recipe: tiddlers/split.recipe
 recipe: ../parsers/split.recipe
 tiddler: ../docs/High Level Architecture.svg
+tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
+	type: image/jpg
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 

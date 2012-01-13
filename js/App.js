@@ -35,6 +35,7 @@ var App = function() {
 	this.store.registerParser("image/jpg",bitmapParser);
 	this.store.registerParser("image/jpeg",bitmapParser);
 	this.store.registerParser("image/png",bitmapParser);
+	this.store.registerParser("image/gif",bitmapParser);
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);

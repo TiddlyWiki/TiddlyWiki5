@@ -18,12 +18,14 @@ var fs = require("fs"),
 
 var FileRetriever = exports;
 
+FileRetriever.binaryFileExtensions = [".jpg",".jpeg",".png",".gif"];
+
 var fileRequest = function fileRequest(filepath,callback) {
 	fs.readFile(filepath, function (err,data) {
 		if(err) {
 			callback(err); 
 		} else {
-			if([".jpg",".jpeg",".png"].indexOf(path.extname(filepath)) !== -1) {
+			if(FileRetriever.binaryFileExtensions.indexOf(path.extname(filepath)) !== -1) {
 				callback(err,data.toString("base64"));
 			} else {
 				callback(err,data.toString("utf8"));
@@ -33,8 +35,9 @@ var fileRequest = function fileRequest(filepath,callback) {
 };
 
 var httpRequest = function(fileurl,callback) {
-	var opts = url.parse(fileurl);
-	var httpLib = opts.protocol === "http:" ? http : https;
+	var opts = url.parse(fileurl),
+		httpLib = opts.protocol === "http:" ? http : https,
+		encoding = (FileRetriever.binaryFileExtensions.indexOf(path.extname(fileurl)) !== -1) ? "binary" : "utf8";
 	var request = httpLib.get(opts,function(res) {
 		if(res.statusCode != 200) {
 			var err = new Error("HTTP error");
@@ -42,11 +45,16 @@ var httpRequest = function(fileurl,callback) {
 			callback(err);
 		} else {
 			var data = [];
+			res.setEncoding(encoding);
 			res.on("data", function(chunk) {
 				data.push(chunk);
 			});
 			res.on("end", function() {
-				callback(null,data.join(""));
+				if(encoding === "binary") {
+					callback(null,(new Buffer(data.join(""),"binary")).toString("base64"));
+				} else {
+					callback(null,data.join(""));
+				}
 			});
 		}
 	});

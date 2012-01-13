@@ -3,6 +3,8 @@ modifier: JeremyRuston
 
 Welcome to TiddlyWiki5, an [[in-progress|ThisIsAlpha]] reboot of TiddlyWiki, the reusable non-linear personal web notebook first released in 2004.
 
+<<tiddler [[Motovun Jack.jpg]]>>
+
 Over the years, TiddlyWiki has earned an enduring role as a tool that people [[love using|Raves]] for its rich, interactive interface to [[manipulate complex data|TiddlyWikiConcepts]] with structure that doesn't easily fit into conventional tools like spreadsheets and wordprocessors. Because people can use it without needing any complicated server infrastructure, and because it is [[open source|OpenSourceLicense]], it has bought unprecedented freedom to people to keep their precious information under their own control. TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers.
 
 TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|TiddlyWikiArchitecture]] using the latest features of HTML5 and node.js. It runs natively under node.js, and can also use its own components to construct a version of itself that works entirely within the browser, just as TiddlyWiki has always done.
