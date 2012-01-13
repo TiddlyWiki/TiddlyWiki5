@@ -3,7 +3,7 @@ modifier: JeremyRuston
 
 {{{.recipe}}} files are text files that list the components to be assembled into a TiddlyWiki. They link to a simple template file that contains the basic structure of the TiddlyWiki document with additional markers to identify parts of the file where ingredients are inserted. Recipes determine which tiddlers should be included in the file, and put together the individual JavaScript files making up the TiddlyWiki core code.
 
-Each line of the recipe file lists an ingredient, prefixed with a tag that describes what to do with the ingredient. Tags either identify a marker within the template file or are special tags that initiate an action.
+Each line of the recipe file is either a comment starting with `#` or lists an ingredient, prefixed with a tag that describes what to do with the ingredient. Tags either identify a marker within the template file or are special tags that initiate an action.
 
 Recipe files contain lines consisting of a marker, a colon and the pathname of an ingredient:
 {{{
@@ -13,6 +13,7 @@ The filepath is interpreted relative to the directory containing the recipe file
 
 You can use filepaths or URLs to reference recipe files and tiddlers. For example, this recipe cooks the latest TiddlyWiki components directly from the online repositories:
 {{{
+# Get the recipe direct from GitHub
 recipe: https://raw.github.com/TiddlyWiki/tiddlywiki/master/tiddlywikinonoscript.html.recipe
 tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com-ref_public/tiddlers.json?fat=1
 tiddler: http://tiddlywiki-com.tiddlyspace.com/bags/tiddlywiki-com_public/tiddlers.json?fat=1

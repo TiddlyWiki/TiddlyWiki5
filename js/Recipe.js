@@ -143,12 +143,13 @@ Recipe.prototype.sortTiddlersForMarker = function(marker) {
 // Process the contents of a recipe file
 Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 	var matchLine = function(linetext) {
-			var lineRegExp = /^(\s*)([^\s\:]+)\s*:\s*(.+)*\s*$/,
+			var lineRegExp = /^(#?)(\s*)(#?)([^\s\:]+)\s*:\s*(.+)*\s*$/,
 				match = lineRegExp.exec(linetext);
 			return match ? {
-				indent: match[1],
-				marker: match[2],
-				value: match[3]
+				comment: match[1] || match[3],
+				indent: match[2],
+				marker: match[4],
+				value: match[5]
 			} : null;
 		},
 		lines = text.split("\n"),
@@ -156,7 +157,7 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 	while(line < lines.length) {
 		var linetext = lines[line++],
 			match = matchLine(linetext);
-		if(match) {
+		if(match && !match.comment) {
 			if(match.indent.length > 0) {
 				throw "Unexpected indentation in recipe file";
 			}
