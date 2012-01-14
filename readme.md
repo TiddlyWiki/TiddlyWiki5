@@ -1,10 +1,12 @@
 # Introduction
 
-This is an attempt to modernise TiddlyWiki's build system, which has been based on tools written in Ruby called Cook and Ginsu (see https://github.com/TiddlyWiki/cooker for details). They were first written in 2006 and have been heavily hacked since then.
+Welcome to TiddlyWiki5, a complete rewrite of TiddlyWiki, the reusable non-linear personal web notebook first released in 2004.
 
-This new version is written in JavaScript for node.js, so that it can share code with TiddlyWiki itself.
+TiddlyWiki5 is an interactive wiki written in JavaScript to run in the browser or under node.js. For full documentation, see the finished build at http://tiddlywiki.com/tiddlywiki5/.
 
-The original goal was to achieve byte-for-byte compatibility with the old tools. However, so many bugs have been discovered in the old tools that the new goal is to achieve byte-for-byte compatibility with TiddlyWiki itself when it saves changes.
+This iteration of the project started as an attempt to modernise TiddlyWiki's old and quirky build system. It had been based on tools from 2006 written in Ruby called Cook and Ginsu and heavily hacked since then (see https://github.com/TiddlyWiki/cooker for details). 
+
+The original goal was to achieve byte-for-byte compatibility with the old tools. However, so many bugs have been discovered in the old tools that the revised goal became to achieve byte-for-byte compatibility with TiddlyWiki itself when it saves changes.
 
 # Usage
 
@@ -12,7 +14,7 @@ The original goal was to achieve byte-for-byte compatibility with the old tools.
 
 The command line options are processed in sequential order from left to right. Processing pauses during long operations, like loading a recipe file and all the subrecipes and tiddlers that it references. The following options are available:
 
-	--recipe <filepath>			# Loads a specfied `.recipe` file
+	--recipe <filepath>			# Loads a specified `.recipe` file
 	--load <filepath>			# Load additional tiddlers from TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
 	--savewiki <dirpath>		# Saves all the loaded tiddlers as a single file TiddlyWiki called `index.html` and an RSS feed called `index.xml`
 	--savetiddlers <outdir>		# Saves all the loaded tiddlers as `.tid` files in the specified directory
