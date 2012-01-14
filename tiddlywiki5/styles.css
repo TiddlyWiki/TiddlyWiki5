@@ -81,17 +81,17 @@ a:hover {
     color: #fff;
 }
 
-a.linkExternal {
+a.tw-tiddlylink {
     font-style: normal;
     font-weight: normal;
 }
 
-a.linkInternalResolves {
+a.tw-tiddlylink-resolves {
     font-style: normal;
     font-weight: bold;
 }
 
-a.linkInternalMissing {
+a.tw-tiddlylink-missing {
     font-style: italic;
 }
 

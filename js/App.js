@@ -109,6 +109,16 @@ var App = function() {
 		var div = document.createElement("div");
 		div.innerHTML = this.store.renderTiddler("text/html","PageTemplate");
 		document.body.appendChild(div);
+		var me = this;
+		window.setInterval(function() {
+			me.store.addTiddler(new Tiddler({
+				title: "TiddlyWiki5",
+				text: "This is a newly created tiddler!"
+			}));
+		},3000);
+		this.store.addEventListener("",function() {
+			me.store.refreshDomNode(div,me.store.getTiddler("PageTemplate"));
+		});
 	}
 };
 

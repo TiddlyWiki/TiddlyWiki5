@@ -22,6 +22,9 @@ var WikiStore = function WikiStore(options) {
 	this.macros = {};
 	this.tiddlerSerializers = {};
 	this.tiddlerDeserializers = {};
+	this.eventListeners = []; // Array of {filter:,listener:}
+	this.eventsTriggered = false;
+	this.changedTiddlers = {}; // Hashmap of {title: "created|modified|deleted"}
 	this.sandbox = options.sandbox;
 	this.shadows = options.shadowStore !== undefined ? options.shadowStore : new WikiStore({
 		shadowStore: null
@@ -40,6 +43,73 @@ WikiStore.prototype.registerTiddlerSerializer = function(extension,mimeType,seri
 WikiStore.prototype.registerTiddlerDeserializer = function(extension,mimeType,deserializer) {
 	this.tiddlerDeserializers[extension] = deserializer;
 	this.tiddlerDeserializers[mimeType] = deserializer;	
+};
+
+WikiStore.prototype.addEventListener = function(filter,listener) {
+	this.eventListeners.push({
+		filter: filter,
+		listener: listener
+	});	
+};
+
+WikiStore.prototype.removeEventListener = function(listener) {
+	for(var c=this.eventListeners.length-1; c>=0; c--) {
+		var l = this.eventListeners[c];
+		if(l.listener === listener) {
+			this.eventListeners.splice(c,1);
+		}
+	}
+};
+
+/*
+Causes a tiddler to be marked as changed, so that event listeners are triggered for it
+	type: Type of change to be registered for the tiddler "created", "modified" or "deleted"
+If the tiddler is already touched, the resultant touch type is as follows:
+
+If the tiddler is already marked "created",
+... attempts to mark it "modified" leave it "created"
+... attempts to mark it "deleted" succeed
+
+If the tiddler is already marked "modified",
+... attempts to mark it "deleted" succeed
+
+If the tiddler is already marked "deleted",
+... attempts to mark it "created" succeed
+... attempts to mark it "modified" fail 
+
+*/
+WikiStore.prototype.touchTiddler = function(type,title) {
+	var existingType = this.changedTiddlers[title];
+	if(existingType === undefined && type === "modified") {
+		type = "created";
+	}
+	if(existingType === "modified" && type === "created") {
+		type = "modified";
+	}
+	if(existingType === "deleted" && type === "created") {
+		type = "modified";
+	}
+	this.changedTiddlers[title] = type;
+	this.triggerEvents();
+};
+
+/*
+Trigger the execution of the event dispatcher at the next tick, if it is not already triggered
+*/
+WikiStore.prototype.triggerEvents = function() {
+	if(!this.eventsTriggered) {
+		var me = this;
+		utils.nextTick(function() {
+			var changes = me.changedTiddlers;
+			me.changedTiddlers = {};
+			me.eventsTriggered = false;
+			for(var e=0; e<me.eventListeners.length; e++) {
+				var listener = me.eventListeners[e];
+				listener.listener(changes);
+			}
+		});
+		this.eventsTriggered = true;
+	}
 };
 
 WikiStore.prototype.getTiddler = function(title) {
@@ -74,6 +144,7 @@ WikiStore.prototype.tiddlerExists = function(title) {
 
 WikiStore.prototype.addTiddler = function(tiddler) {
 	this.tiddlers[tiddler.fields.title] = tiddler;
+	this.touchTiddler("modified",tiddler.fields.title);
 };
 
 WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
@@ -163,17 +234,45 @@ WikiStore.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	}
 };
 
-WikiStore.prototype.classesForLink = function(target) {
-	var className = "",
-		externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i;
+WikiStore.prototype.adjustClassesForLink = function(classes,target) {
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i,
+		setClass = function(className) {
+			if(classes.indexOf(className) === -1) {
+				classes.push(className);
+			}
+		},
+		removeClass = function(className) {
+			var p = classes.indexOf(className);
+			if(p !== -1) {
+				classes.splice(p,1);
+			}
+		};
+	// Make sure we've got the main link class
+	setClass("tw-tiddlylink");
+	// Check if it's an internal link
 	if (this.tiddlerExists(target)) {
-		className = "linkInternalResolves";
+		removeClass("tw-tiddlylink-external");
+		setClass("tw-tiddlylink-internal");
+		setClass("tw-tiddlylink-resolves");
+		removeClass("tw-tiddlylink-missing");
 	} else if(externalRegExp.test(target)) {
-		className = "linkExternal";
+		setClass("tw-tiddlylink-external");
+		removeClass("tw-tiddlylink-internal");
+		removeClass("tw-tiddlylink-resolves");
+		removeClass("tw-tiddlylink-missing");
 	} else {
-		className = "linkInternalMissing";
+		removeClass("tw-tiddlylink-external");
+		setClass("tw-tiddlylink-internal");
+		removeClass("tw-tiddlylink-resolves");
+		setClass("tw-tiddlylink-missing");
 	}
-	return className !== "" ? " class=\"" + className + "\"" : "";
+	return classes;
+};
+
+WikiStore.prototype.classesForLink = function(target) {
+	var classes = ["tw-tiddlylink"];
+	this.adjustClassesForLink(classes,target);
+	return " class=\"" + classes.join(" ") + "\"";
 };
 
 WikiStore.prototype.parseText = function(type,text) {
@@ -256,6 +355,47 @@ WikiStore.prototype.renderTiddler = function(type,title,asTitle) {
 		}
 	}
 	return null;
+};
+
+/*
+Refresh a DOM node so that it reflects the current state of the store
+
+The refresh processing is:
+
+1. If the node is a link, check the link classes correctly reflect the status of the target tiddler. Recursively process any children. Exit
+2. If the node is a macro, and dependencies have changed, re-render the macro into the DOM node. Exit
+3. If the node is a macro and the dependencies haven't changed, recursively process each child node of the macro. Exit
+
+Arguments
+	node - the DOM node to be processed
+	tiddler - the tiddler providing context for the rendering
+
+*/
+WikiStore.prototype.refreshDomNode = function(node,tiddler) {
+	// Process links
+	if(node.className) {
+		var classes = node.className.split(" ");
+		if(classes.indexOf("tw-tiddlylink") !== -1) {
+			var target = node.getAttribute("href");
+			node.className = this.adjustClassesForLink(classes,target).join(" ");
+		}
+	}
+	// Process macros
+	var macro = node.getAttribute && node.getAttribute("data-tw-macro"),
+		params = node.getAttribute && node.getAttribute("data-tw-params");
+	if(macro && params) {
+	}
+	// Process children
+	if(node.hasChildNodes()) {
+		this.refreshDomChildren(node,tiddler);
+	}
+};
+
+WikiStore.prototype.refreshDomChildren = function(node,tiddler) {
+	var nodes = node.childNodes;
+	for(var c=0; c<nodes.length; c++) {
+		this.refreshDomNode(nodes[c],tiddler);
+	}
 };
 
 WikiStore.prototype.installMacro = function(macro) {
