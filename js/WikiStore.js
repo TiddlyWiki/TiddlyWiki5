@@ -340,18 +340,18 @@ Render a tiddler to a particular MIME type. Optionally render it with a differen
 as the context. This option is used to render a tiddler through a template eg
 store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 */
-WikiStore.prototype.renderTiddler = function(type,title,asTitle) {
+WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 	var tiddler = this.getTiddler(title),
-		fn = this.compileTiddler(title,type);
+		fn = this.compileTiddler(title,targetType);
 	if(tiddler) {
 		if(asTitle) {
 			var asTiddler = this.getTiddler(asTitle);
 			return fn(asTiddler,this,utils);
 		} else {
-			if(!tiddler.renditions[type]) {
-				tiddler.renditions[type] = fn(tiddler,this,utils);
+			if(!tiddler.renditions[targetType]) {
+				tiddler.renditions[targetType] = fn(tiddler,this,utils);
 			}
-			return tiddler.renditions[type];
+			return tiddler.renditions[targetType];
 		}
 	}
 	return null;
