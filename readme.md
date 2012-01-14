@@ -1,6 +1,6 @@
 # Introduction
 
-Welcome to TiddlyWiki5, a complete rewrite of TiddlyWiki, the reusable non-linear personal web notebook first released in 2004.
+Welcome to TiddlyWiki5, a complete rewrite of TiddlyWiki, the reusable non-linear personal web notebook that was first released in 2004.
 
 TiddlyWiki5 is an interactive wiki written in JavaScript to run in the browser or under node.js. For full documentation, see the finished build at http://tiddlywiki.com/tiddlywiki5/.
 
