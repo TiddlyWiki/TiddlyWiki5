@@ -235,4 +235,52 @@ utils.stringify = function(s) {
 		.replace(/[\x80-\uFFFF]/g, utils.escape) + '"'; // non-ASCII characters
 };
 
+// Creates an HTML element string from these arguments:
+//		element: element name
+//		attributes: hashmap of element attributes to add
+//		options: hashmap of options
+// The attributes hashmap can contain strings or arrays of strings, which
+// are processed to attr="name1:value1;name2:value2;"
+// The options include:
+//		selfClosing: causes the element to be rendered with a trailing /, as in <br />
+//		insertAfterAttributes: a string to insert after the attribute section of the element
+utils.stitchElement = function(element,attributes,options) {
+	var output = [];
+	options = options || {};
+	output.push("<",element);
+	if(attributes) {
+		for(var a in attributes) {
+			var v = attributes[a];
+			if(typeof v === "object") {
+				var s = [];
+				for(var t in v) {
+					s.push(t + ":" + v[t] + ";");
+				}
+				v = s.join("");
+			}
+			output.push(" ");
+			output.push(a);
+			output.push("='");
+			output.push(utils.htmlEncode(v));
+			output.push("'");
+		}
+	}
+	if(options.insertAfterAttributes) {
+		output.push(options.insertAfterAttributes);
+	}
+	if(options.selfClosing) {
+		output.push(" /");
+	}
+	output.push(">");
+	return output.join("");
+};
+
+utils.nextTick = function(fn) {
+	if(typeof window !== "undefined") {
+		window.setTimeout(fn,4);
+	} else {
+		process.nextTick(fn);
+	}
+};
+
 })();
