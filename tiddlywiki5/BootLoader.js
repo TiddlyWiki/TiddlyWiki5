@@ -1,6 +1,7 @@
 (function() {
 	
 /*jslint node: true */
+/*global modules: false */
 "use strict";
 
 /*

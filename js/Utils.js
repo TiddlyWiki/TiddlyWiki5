@@ -276,6 +276,7 @@ utils.stitchElement = function(element,attributes,options) {
 };
 
 utils.nextTick = function(fn) {
+/*global window: false */
 	if(typeof window !== "undefined") {
 		window.setTimeout(fn,4);
 	} else {
