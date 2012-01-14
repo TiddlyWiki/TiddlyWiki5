@@ -132,7 +132,16 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 			value: n
 		});
 	}
+	if(type === "text/html") {
+		this.pushString(utils.stitchElement("div",{
+			"data-tw-macro": name,
+			"data-tw-params": JSON.stringify(params)
+		}));
+	}
 	this.output.push(macroCall);
+	if(type === "text/html") {
+		this.pushString("</div>");
+	}
 };
 
 WikiTextParseTree.prototype.compileElementHtml = function(element, options) {
