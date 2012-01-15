@@ -235,16 +235,17 @@ WikiStore.prototype.deserializeTiddlers = function(type,text,srcFields) {
 };
 
 WikiStore.prototype.adjustClassesForLink = function(classes,target) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i,
+	var newClasses = classes.slice(0),
+		externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i,
 		setClass = function(className) {
-			if(classes.indexOf(className) === -1) {
-				classes.push(className);
+			if(newClasses.indexOf(className) === -1) {
+				newClasses.push(className);
 			}
 		},
 		removeClass = function(className) {
-			var p = classes.indexOf(className);
+			var p = newClasses.indexOf(className);
 			if(p !== -1) {
-				classes.splice(p,1);
+				newClasses.splice(p,1);
 			}
 		};
 	// Make sure we've got the main link class
@@ -266,13 +267,7 @@ WikiStore.prototype.adjustClassesForLink = function(classes,target) {
 		removeClass("tw-tiddlylink-resolves");
 		setClass("tw-tiddlylink-missing");
 	}
-	return classes;
-};
-
-WikiStore.prototype.classesForLink = function(target) {
-	var classes = ["tw-tiddlylink"];
-	this.adjustClassesForLink(classes,target);
-	return " class=\"" + classes.join(" ") + "\"";
+	return newClasses;
 };
 
 WikiStore.prototype.parseText = function(type,text) {
