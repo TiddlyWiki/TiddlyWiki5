@@ -462,20 +462,23 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			var e = {type: "a", children: []};
-			var text = lookaheadMatch[1];
+			var e = {type: "macro", name: "link", params: {
+					target: {type: "string", value: null},
+					text: {type: "string", value: null}
+				}},
+				text = lookaheadMatch[1];
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
-				setAttr(e,"href",link);
+				e.params.target.value = link;
 				w.addDependency(link);
 			} else {
 				// Simple bracketted link
-				setAttr(e,"href",text);
+				e.params.target.value = text;
 				w.addDependency(text);
 			}
+			e.params.text.value = text;
 			w.output.push(e);
-			e.children.push({type: "text", value: text});
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -500,11 +503,14 @@ var rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			var link = {type: "a", children: []};
-			setAttr(link,"href",w.matchText);
+			var link = {type: "macro", name: "link", params: {
+							target: {type: "string", value: null},
+							text: {type: "string", value: null}
+						}};
+			link.params.target.value = w.matchText;
+			link.params.text.value = w.source.substring(w.matchStart,w.nextMatch);
 			w.addDependency(w.matchText);
 			w.output.push(link);
-			w.outputText(link.children,w.matchStart,w.nextMatch);
 		} else {
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
@@ -516,11 +522,14 @@ var rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		var e = {type: "a", children: []};
-		setAttr(e,"href",w.matchText);
+		var e = {type: "macro", name: "link", params: {
+					target: {type: "string", value: null},
+					text: {type: "string", value: null}
+				}};
+		e.params.target.value = w.matchText;
+		e.params.text.value = w.source.substring(w.matchStart,w.nextMatch);
 		w.addDependency(w.matchText);
 		w.output.push(e);
-		w.outputText(e.children,w.matchStart,w.nextMatch);
 	}
 },
 

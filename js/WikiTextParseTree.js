@@ -132,15 +132,15 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 			value: n
 		});
 	}
+	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html") {
-		this.pushString(utils.stitchElement("div",{
-			"data-tw-macro": name,
-			"data-tw-params": JSON.stringify(params)
+		this.pushString(utils.stitchElement(wrapperTag,{
+			"data-tw-macro": name
 		}));
 	}
 	this.output.push(macroCall);
 	if(type === "text/html") {
-		this.pushString("</div>");
+		this.pushString("</" + wrapperTag + ">");
 	}
 };
 
@@ -160,11 +160,7 @@ WikiTextParseTree.prototype.compileElementHtml = function(element, options) {
 			tagBits.push(a + "=\"" + utils.htmlEncode(r) + "\"");
 		}
 	}
-	this.pushString("<" + tagBits.join(" ") + (options.selfClosing ? " /" : ""));
-	if(options.insertAfterAttributes) {
-		this.output.push(options.insertAfterAttributes);
-	}
-	this.pushString(">");
+	this.pushString("<" + tagBits.join(" ") + (options.selfClosing ? " /" : "") + ">");
 	if(!options.selfClosing) {
 		if(element.children) {
 			this.compileSubTreeHtml(element.children);
@@ -188,21 +184,6 @@ WikiTextParseTree.prototype.compileSubTreeHtml = function(tree) {
 				break;
 			case "macro":
 				this.compileMacroCall("text/html",tree[t].name,tree[t].params);
-				break;
-			case "a":
-				this.compileElementHtml(tree[t],{
-					insertAfterAttributes: {
-						"type": "FunctionCall",
-						"name": {
-							"type": "PropertyAccess",
-							"base": {
-								"type": "Variable",
-								"name": "store"},
-							"name": "classesForLink"},
-						"arguments":[{
-							"type": "StringLiteral",
-							"value": tree[t].attributes.href}]}
-				});
 				break;
 			default:
 				this.compileElementHtml(tree[t]);
