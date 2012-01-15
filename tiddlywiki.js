@@ -127,10 +127,7 @@ var commandLineSwitches = {
 		args: {min: 2, max: 3},
 		handler: function(args,callback) {
 			var type = args[2] || "text/html";
-			fs.writeFileSync(args[1],
-				"<!doctype html><html><head></head><body>" +
-				app.store.renderTiddler(type,args[0]) +
-				"</body></html>","utf8");
+			fs.writeFileSync(args[1],app.store.renderTiddler(type,args[0]),"utf8");
 		}	
 	},
 	savetiddlers: {
