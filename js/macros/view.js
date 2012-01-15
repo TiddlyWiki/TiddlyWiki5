@@ -23,7 +23,7 @@ exports.macro = {
 		if(v) {
 			switch(params.format) {
 				case "link":
-					return store.renderMacro("link",type,tiddler,{target: v});
+					return store.renderMacro("link",type,tiddler,{target: v},encoder(v));
 				case "wikified":
 					return store.renderTiddler(type,tiddler.fields.title);
 				case "date":

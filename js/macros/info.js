@@ -18,12 +18,14 @@ exports.macro = {
 		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;},
 			parseTree = store.parseTiddler(tiddler.fields.title);
 		if(parseTree) {
+			var r = [];
 			var d = parseTree.dependencies;
 			if(d === null) {
-				return encoder("Dependencies: *");
+				r.push(encoder("Dependencies: *"));
 			} else {
-				return encoder("Dependencies: " + d.join(", "));
+				r.push(encoder("Dependencies: " + d.join(", ")));
 			}
+			return r.join("/n");
 		} else {
 			return "";
 		}

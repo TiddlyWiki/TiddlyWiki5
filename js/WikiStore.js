@@ -355,10 +355,10 @@ WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 /*
 Executes a macro and returns the result
 */
-WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params) {
+WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params,content) {
 	var macro = this.macros[macroName];
 	if(macro) {
-		return macro.handler(targetType,tiddler,this,params);
+		return macro.handler(targetType,tiddler,this,params,content);
 	} else {
 		return null;
 	}

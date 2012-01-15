@@ -78,8 +78,10 @@ WikiTextParseTree.prototype.pushString = function(s) {
 	}
 };
 
-WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
-	var macro = this.store.macros[name],
+WikiTextParseTree.prototype.compileMacroCall = function(type,node) {
+	var name = node.name,
+		params = node.params,
+		macro = this.store.macros[name],
 		p,
 		n;
 	if(!macro) {
@@ -93,28 +95,28 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 	var macroCall = {
 		type: "FunctionCall",
 		name: {
-			"base": {
-				"base": {
-					"base": {
-						"name": "store", 
-						"type": "Variable"}, 
-					"name": "macros", 
-					"type": "PropertyAccess"}, 
-				"name": {
-					"type": "StringLiteral", 
-					"value": name}, 
-				"type": "PropertyAccess"}, 
-			"name": "handler", 
-			"type": "PropertyAccess"},
+			base: {
+				base: {
+					base: {
+						name: "store", 
+						type: "Variable"}, 
+					name: "macros", 
+					type: "PropertyAccess"}, 
+				name: {
+					type: "StringLiteral", 
+					value: name}, 
+				type: "PropertyAccess"}, 
+			name: "handler", 
+			type: "PropertyAccess"},
 		"arguments": [ {
-			"type": "StringLiteral", 
-			"value": type
+			type: "StringLiteral", 
+			value: type
 		},{
-			"type": "Variable",
-			"name": "tiddler"
+			type: "Variable",
+			name: "tiddler"
 		},{
-			"type": "Variable",
-			"name": "store"
+			type: "Variable",
+			name: "store"
 		},{
 			type: "ObjectLiteral",
 			properties: []	
@@ -131,6 +133,27 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 			name: p,
 			value: n
 		});
+	}
+	if(node.children) {
+		var saveOutput = this.output;
+		this.output = [];
+		this.compileSubTreeHtml(node.children);
+		macroCall["arguments"].push({
+			type: "FunctionCall",
+			name: {
+				type: "PropertyAccess",
+				base: {
+					type: "ArrayLiteral",
+					elements: this.output
+				},
+				name: "join"
+			},
+			"arguments": [ {
+				type: "StringLiteral",
+				value: ""
+			}]
+		});
+		this.output = saveOutput;
 	}
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html") {
@@ -183,7 +206,7 @@ WikiTextParseTree.prototype.compileSubTreeHtml = function(tree) {
 				this.compileElementHtml(tree[t],{selfClosing: true}); // Self closing elements
 				break;
 			case "macro":
-				this.compileMacroCall("text/html",tree[t].name,tree[t].params);
+				this.compileMacroCall("text/html",tree[t]);
 				break;
 			default:
 				this.compileElementHtml(tree[t]);
@@ -220,7 +243,7 @@ WikiTextParseTree.prototype.compileSubTreePlain = function(tree) {
 				this.compileElementPlain(tree[t],{selfClosing: true}); // Self closing elements
 				break;
 			case "macro":
-				this.compileMacroCall("text/plain",tree[t].name,tree[t].params);
+				this.compileMacroCall("text/plain",tree[t]);
 				break;
 			default:
 				this.compileElementPlain(tree[t]);

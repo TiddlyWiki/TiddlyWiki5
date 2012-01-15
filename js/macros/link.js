@@ -14,20 +14,18 @@ exports.macro = {
 	wrapperTag: "span",
 	types: ["text/html","text/plain"],
 	params: {
-		target: {byName: "default", type: "tiddler", optional: false},
-		text: {byName: true, type: "text", optional: true}
+		target: {byName: "default", type: "tiddler", optional: false}
 	},
-	handler: function(type,tiddler,store,params) {
-		var text = params.text || params.target;
+	handler: function(type,tiddler,store,params,content) {
 		if(type === "text/html") {
 			return utils.stitchElement("a",{
 				href: params.target
 			},{
-				content: utils.htmlEncode(text),
+				content: content,
 				classNames: store.adjustClassesForLink([],params.target)
 			});
 		} else if (type === "text/plain") {
-			return text;	
+			return "";	
 		}
 	}
 };

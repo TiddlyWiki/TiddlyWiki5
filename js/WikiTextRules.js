@@ -463,9 +463,12 @@ var rules = [
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			var e = {type: "macro", name: "link", params: {
-					target: {type: "string", value: null},
-					text: {type: "string", value: null}
-				}},
+					target: {type: "string", value: null}
+				},
+				children: [{
+					type: "text",
+					value: ""
+				}]},
 				text = lookaheadMatch[1];
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
@@ -477,7 +480,7 @@ var rules = [
 				e.params.target.value = text;
 				w.addDependency(text);
 			}
-			e.params.text.value = text;
+			e.children[0].value = text;
 			w.output.push(e);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
@@ -504,11 +507,12 @@ var rules = [
 		}
 		if(w.autoLinkWikiWords) {
 			var link = {type: "macro", name: "link", params: {
-							target: {type: "string", value: null},
-							text: {type: "string", value: null}
-						}};
-			link.params.target.value = w.matchText;
-			link.params.text.value = w.source.substring(w.matchStart,w.nextMatch);
+							target: {type: "string", value: w.matchText},
+						},
+						children: [{
+							type: "text",
+							value: w.source.substring(w.matchStart,w.nextMatch)
+						}]};
 			w.addDependency(w.matchText);
 			w.output.push(link);
 		} else {
@@ -523,11 +527,12 @@ var rules = [
 	handler: function(w)
 	{
 		var e = {type: "macro", name: "link", params: {
-					target: {type: "string", value: null},
-					text: {type: "string", value: null}
-				}};
-		e.params.target.value = w.matchText;
-		e.params.text.value = w.source.substring(w.matchStart,w.nextMatch);
+					target: {type: "string", value: w.matchText}
+				},
+				children: [{
+					type: "text",
+					value: w.source.substring(w.matchStart,w.nextMatch)
+				}]};
 		w.addDependency(w.matchText);
 		w.output.push(e);
 	}
