@@ -624,9 +624,15 @@ var rules = [
 			w.subWikifyTerm(e.children,/(--)/mg);
 			break;
 		case "`":
-			e = {type: "code", children: []};
-			w.output.push(e);
-			w.subWikifyTerm(e.children,/(`)/mg);
+			var lookaheadRegExp = /`((?:.|\n)*?)`/mg;
+			lookaheadRegExp.lastIndex = w.matchStart;
+			var lookaheadMatch = lookaheadRegExp.exec(w.source);
+			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
+				w.output.push({type: "code", children: [
+					{type: "text", value: lookaheadMatch[1]}
+				]});
+				w.nextMatch = lookaheadRegExp.lastIndex;
+			}
 			break;
 		case "{{{":
 			var lookaheadRegExp = /\{\{\{((?:.|\n)*?)\}\}\}/mg;
