@@ -242,6 +242,8 @@ utils.stringify = function(s) {
 // The attributes hashmap can contain strings or arrays of strings, which
 // are processed to attr="name1:value1;name2:value2;"
 // The options include:
+//		content: a string to include as content in the element (also generates closing tag)
+//		classNames: an array of classnames to apply to the element
 //		selfClosing: causes the element to be rendered with a trailing /, as in <br />
 //		insertAfterAttributes: a string to insert after the attribute section of the element
 utils.stitchElement = function(element,attributes,options) {
@@ -268,10 +270,17 @@ utils.stitchElement = function(element,attributes,options) {
 	if(options.insertAfterAttributes) {
 		output.push(options.insertAfterAttributes);
 	}
+	if(options.classNames) {
+		output.push(" class='",options.classNames.join(" "),"'");
+	}
 	if(options.selfClosing) {
 		output.push(" /");
 	}
 	output.push(">");
+	if(options.content) {
+		output.push(options.content);
+		output.push("</",element,">");
+	}
 	return output.join("");
 };
 
