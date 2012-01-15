@@ -14,7 +14,7 @@ var StoryNavigator = function(navigators) {
 };
 
 StoryNavigator.prototype.navigateTo = function(title) {
-	var tiddlerHtml = this.navigators.store.renderTiddler("text/html","SimpleTemplate",title);
+	var tiddlerHtml = this.navigators.store.tiddlerExists(title) && this.navigators.store.renderTiddler("text/html","SimpleTemplate",title);
 	if(tiddlerHtml) {
 		var article = $("<article/>").html(tiddlerHtml);
 		article.appendTo("body");
