@@ -372,14 +372,6 @@ Arguments
 
 */
 WikiStore.prototype.refreshDomNode = function(node,tiddler) {
-	// Process links
-	if(node.className) {
-		var classes = node.className.split(" ");
-		if(classes.indexOf("tw-tiddlylink") !== -1) {
-			var target = node.getAttribute("href");
-			node.className = this.adjustClassesForLink(classes,target).join(" ");
-		}
-	}
 	// Process macros
 	var macro = node.getAttribute && node.getAttribute("data-tw-macro"),
 		params = node.getAttribute && node.getAttribute("data-tw-params");
