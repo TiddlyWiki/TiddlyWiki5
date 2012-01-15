@@ -29,6 +29,7 @@ jsmodule: ../js/StoryNavigator.js
 jsmodule: ../js/App.js
 
 jsmodule: ../js/macros/echo.js
+jsmodule: ../js/macros/image.js
 jsmodule: ../js/macros/info.js
 jsmodule: ../js/macros/link.js
 jsmodule: ../js/macros/list.js

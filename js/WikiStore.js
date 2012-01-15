@@ -362,7 +362,7 @@ WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params) 
 	} else {
 		return null;
 	}
-}
+};
 
 /*
 Refresh a DOM node so that it reflects the current state of the store

@@ -253,18 +253,20 @@ utils.stitchElement = function(element,attributes,options) {
 	if(attributes) {
 		for(var a in attributes) {
 			var v = attributes[a];
-			if(typeof v === "object") {
-				var s = [];
-				for(var t in v) {
-					s.push(t + ":" + v[t] + ";");
+			if(v !== undefined) {
+				if(typeof v === "object") {
+					var s = [];
+					for(var t in v) {
+						s.push(t + ":" + v[t] + ";");
+					}
+					v = s.join("");
 				}
-				v = s.join("");
+				output.push(" ");
+				output.push(a);
+				output.push("='");
+				output.push(utils.htmlEncode(v));
+				output.push("'");
 			}
-			output.push(" ");
-			output.push(a);
-			output.push("='");
-			output.push(utils.htmlEncode(v));
-			output.push("'");
 		}
 	}
 	if(options.insertAfterAttributes) {
