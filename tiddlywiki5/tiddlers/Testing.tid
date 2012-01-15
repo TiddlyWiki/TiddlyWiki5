@@ -1,0 +1,3 @@
+title: Testing
+
+`test.sh` contains a simple test script that cooks the main tiddlywiki.com recipe and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation). It also runs a series of wikifications tests that work off the data in `test/wikitests/`.

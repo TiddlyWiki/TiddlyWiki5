@@ -1,0 +1,24 @@
+title: MacroInternals
+
+Macros are conventional JavaScript modules that export a single variable called `macro` that contains:
+
+|!Field Name |!Description |
+|`name` |The name of the macro |
+|`types` |An array of the MIME types that the macro can render |
+|`params` |A hashmap of the parameters accepted by the macro (see below) |
+|`code` |The macro rendering function (see below) |
+
+The `params` hashmap provides the following fields about each parameter:
+
+|!Param Field Name |!Description |
+|`byName` |Provided if the parameter should be referenced by name. The value can be `true` or `"default"` to indicate that the parameter should accept anonymous parameters |
+|`type` |The type of the parameter, from `text` or `tiddler` (used for dependency tracking) |
+|`optional` |`true` if the parameter is optional |
+
+The `code` function is called with the following parameters:
+
+|!Param Name |!Description |
+|`type` |The target MIME type for rendering the macro |
+|`tiddler` |The tiddler in whose context the macro is being rendered |
+|`store` |The `WikiStore` object to be used |
+|`params` |The macro parameters as a hashmap |
