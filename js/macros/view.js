@@ -23,12 +23,7 @@ exports.macro = {
 		if(v) {
 			switch(params.format) {
 				case "link":
-					if(type === "text/html") {
-						return "<a href='" + encoder(v) + "'" + store.classesForLink(v) + ">" + encoder(v) + "</a>";
-					} else {
-						return v;
-					}
-					break; // JSHint wants this even though it's not really necessary
+					return store.renderMacro("link",type,tiddler,{target: v});
 				case "wikified":
 					return store.renderTiddler(type,tiddler.fields.title);
 				case "date":

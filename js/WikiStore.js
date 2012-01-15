@@ -358,6 +358,18 @@ WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 };
 
 /*
+Executes a macro and returns the result
+*/
+WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params) {
+	var macro = this.macros[macroName];
+	if(macro) {
+		return macro.handler(targetType,tiddler,this,params);
+	} else {
+		return null;
+	}
+}
+
+/*
 Refresh a DOM node so that it reflects the current state of the store
 
 The refresh processing is:
