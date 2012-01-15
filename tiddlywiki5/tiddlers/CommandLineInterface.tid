@@ -8,7 +8,6 @@ Usage:
 node tiddlywiki.js <options>
 }}}
 The command line options are processed sequentially from left to right. Processing pauses during long operations, like loading a [[recipe file|RecipeFiles]] and all the subrecipes and [[tiddlers|TiddlerFiles]] that it references. The following options are available:
-
 |{{{--recipe <filepath>}}} |Loads a specfied `.recipe` file |
 |{{{--load <filepath>}}} |Load additional tiddlers from TiddlyWiki files ({{{.html}}}), {{{.tiddler}}}, {{{.tid}}}, {{{.json}}} or other files |
 |{{{--savewiki <dirpath>}}} |Saves all the loaded tiddlers as a single file TiddlyWiki called {{{index.html}}} and an RSS feed called {{{index.xml}}} |
@@ -20,7 +19,6 @@ The command line options are processed sequentially from left to right. Processi
 |{{{--dumpstore}}} |Dump the TiddlyWiki store in JSON format |
 |{{{--dumprecipe}}} |Dump the current recipe in JSON format |
 |{{{--verbose}}} |verbose output, useful for debugging |
-
 !! Examples
 This example loads the tiddlers from a TiddlyWiki HTML file and makes them available over HTTP:
 {{{

@@ -6,7 +6,7 @@ Macros are conventional JavaScript modules that export a single variable called 
 |`name` |The name of the macro |
 |`types` |An array of the MIME types that the macro can render |
 |`params` |A hashmap of the parameters accepted by the macro (see below) |
-|`code` |The macro rendering function (see below) |
+|`handler` |The macro rendering function (see below) |
 
 The `params` hashmap provides the following fields about each parameter:
 

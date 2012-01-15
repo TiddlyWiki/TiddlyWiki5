@@ -17,7 +17,7 @@ exports.macro = {
 		format: {byPos: 1, type: "text", optional: true},
 		template: {byPos: 2, type: "text", optional: true}
 	},
-	code: function(type,tiddler,store,params) {
+	handler: function(type,tiddler,store,params) {
 		var v = tiddler.fields[params.field],
 			encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;};
 		if(v) {

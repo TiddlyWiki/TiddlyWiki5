@@ -17,7 +17,7 @@ exports.macro = {
 		target: {byName: "default", type: "tiddler", optional: false},
 		"with": {byName: true, type: "text", optional: true, dependentAll: true}
 	},
-	code: function(type,tiddler,store,params) {
+	handler: function(type,tiddler,store,params) {
 		if(params["with"]) {
 			// Parameterised transclusion
 			var targetTiddler = store.getTiddler(params.target),

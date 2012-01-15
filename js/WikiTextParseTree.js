@@ -104,7 +104,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,name,params) {
 					"type": "StringLiteral", 
 					"value": name}, 
 				"type": "PropertyAccess"}, 
-			"name": "code", 
+			"name": "handler", 
 			"type": "PropertyAccess"},
 		"arguments": [ {
 			"type": "StringLiteral", 

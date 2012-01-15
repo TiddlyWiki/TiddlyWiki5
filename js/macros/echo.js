@@ -15,7 +15,7 @@ exports.macro = {
 	params: {
 		text: {byPos: 0, type: "text", optional: false}
 	},
-	code: function(type,tiddler,store,params) {
+	handler: function(type,tiddler,store,params) {
 		if(type === "text/html") {
 			return utils.htmlEncode(params.text);
 		} else {
