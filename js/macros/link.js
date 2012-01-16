@@ -25,7 +25,7 @@ exports.macro = {
 				classNames: store.adjustClassesForLink([],params.target)
 			});
 		} else if (type === "text/plain") {
-			return "";	
+			return content;	
 		}
 	}
 };

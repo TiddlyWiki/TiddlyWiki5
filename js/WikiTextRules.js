@@ -507,7 +507,7 @@ var rules = [
 		}
 		if(w.autoLinkWikiWords) {
 			var link = {type: "macro", name: "link", params: {
-							target: {type: "string", value: w.matchText},
+							target: {type: "string", value: w.matchText}
 						},
 						children: [{
 							type: "text",
@@ -546,27 +546,29 @@ var rules = [
 	handler: function(w)
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
-		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
+			image = {type: "macro", name: "image", params: {
+				src: {type: "string", value: ""}
+			}},
+			link = {type: "macro", name: "link", params: {
+				target: {type: "string", value: ""}
+			}, children: [image]};
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			var e = w.output;
-			if(lookaheadMatch[5]) {
-				var link = lookaheadMatch[5],
-					t = {type: "a", children: []};
-				setAttr(t,"href",link);
-				w.output.push(t);
-				e = t.children;
+			if(lookaheadMatch[1]) {
+				image.params.alignment = {type: "string", value: "left"};
+			} else if(lookaheadMatch[2]) {
+				image.params.alignment = {type: "string", value: "right"};
 			}
-			var img = {type: "img"};
-			e.push(img);
-			if(lookaheadMatch[1])
-				setAttr(img,"align","left");
-			else if(lookaheadMatch[2])
-				setAttr(img,"align","right");
 			if(lookaheadMatch[3]) {
-				setAttr(img,"title",lookaheadMatch[3]);
-				setAttr(img,"alt",lookaheadMatch[3]);
+				image.params.text = {type: "string", value: lookaheadMatch[3]};
 			}
-			setAttr(img,"src",lookaheadMatch[4]);
+			image.params.src.value = lookaheadMatch[4];
+			if(lookaheadMatch[5]) {
+				link.params.target.value = lookaheadMatch[5];
+				w.output.push(link);
+			} else {
+				w.output.push(image);
+			}
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -605,7 +607,7 @@ var rules = [
 	match: "''|//|__|\\^\\^|~~|--(?!\\s|$)|\\{\\{\\{|`",
 	handler: function(w)
 	{
-		var e;
+		var e,lookaheadRegExp,lookaheadMatch;
 		switch(w.matchText) {
 		case "''":
 			e = {type: "strong", children: []};
@@ -638,9 +640,9 @@ var rules = [
 			w.subWikifyTerm(e.children,/(--)/mg);
 			break;
 		case "`":
-			var lookaheadRegExp = /`((?:.|\n)*?)`/mg;
+			lookaheadRegExp = /`((?:.|\n)*?)`/mg;
 			lookaheadRegExp.lastIndex = w.matchStart;
-			var lookaheadMatch = lookaheadRegExp.exec(w.source);
+			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 				w.output.push({type: "code", children: [
 					{type: "text", value: lookaheadMatch[1]}
@@ -649,9 +651,9 @@ var rules = [
 			}
 			break;
 		case "{{{":
-			var lookaheadRegExp = /\{\{\{((?:.|\n)*?)\}\}\}/mg;
+			lookaheadRegExp = /\{\{\{((?:.|\n)*?)\}\}\}/mg;
 			lookaheadRegExp.lastIndex = w.matchStart;
-			var lookaheadMatch = lookaheadRegExp.exec(w.source);
+			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 				w.output.push({type: "code", children: [
 					{type: "text", value: lookaheadMatch[1]}

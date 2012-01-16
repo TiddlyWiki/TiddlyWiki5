@@ -1,6 +1,10 @@
 title: Introduction
 
 <<tiddler [[Motovun Jack.jpg]]>>
+<<image [[Motovun Jack.jpg]] text:"A kitten">>
+[img[Motovun Jack.jpg]]
+[img[tooltip|Motovun Jack.jpg]]
+[img[tooltip|Motovun Jack.jpg][http://google.com/]]
 
 TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|TiddlyWikiArchitecture]] using the latest features of HTML5 and node.js. It runs natively under node.js, and can also use its own components to construct a version of itself that works entirely within the browser, just as TiddlyWiki has always done.
 
