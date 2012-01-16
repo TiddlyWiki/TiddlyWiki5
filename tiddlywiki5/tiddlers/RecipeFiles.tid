@@ -9,8 +9,10 @@ Recipe files contain lines consisting of a marker, a colon and the pathname of a
 {{{
 marker: filepath
 }}}
-The filepath is interpreted relative to the directory containing the recipe file.
-
+The filepath is interpreted relative to the directory containing the recipe file. The filename can contain the `*` wildcard character, for example:
+{{{
+tiddler: ../content/*.tid
+}}}
 You can use filepaths or URLs to reference recipe files and tiddlers. For example, this recipe cooks the latest TiddlyWiki components directly from the online repositories:
 {{{
 # Get the recipe direct from GitHub

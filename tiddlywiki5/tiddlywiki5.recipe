@@ -2,7 +2,8 @@ template: tiddlywiki5.template.html
 copyright: ../copyright.txt
 style: styles.css
 
-recipe: tiddlers/split.recipe
+tiddler: tiddlers/*.tid
+tiddler: tiddlers/*.jpg
 recipe: ../parsers/split.recipe
 tiddler: ../docs/High Level Architecture.svg
 #tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
@@ -10,33 +11,9 @@ tiddler: ../docs/High Level Architecture.svg
 
 jslib: ../test/tiddlywiki.2.6.5/source/tiddlywiki/jquery/jquery.js
 
-jsmodule: ../js/JavaScriptParser.js
-jsmodule: ../js/JavaScriptParseTree.js
-jsmodule: ../js/ArgParser.js
-jsmodule: ../js/FileRetriever.js
-jsmodule: ../js/Utils.js
-jsmodule: ../js/Tiddler.js
-jsmodule: ../js/TiddlerInput.js
-jsmodule: ../js/TiddlerOutput.js
-jsmodule: ../js/WikiStore.js
-jsmodule: ../js/SVGParser.js
-jsmodule: ../js/BitmapParser.js
-jsmodule: ../js/WikiTextParser.js
-jsmodule: ../js/WikiTextRules.js
-jsmodule: ../js/WikiTextParseTree.js
-jsmodule: ../js/Navigators.js
-jsmodule: ../js/StoryNavigator.js
-jsmodule: ../js/App.js
+jsmodule: ../js/*.js
 
-jsmodule: ../js/macros/echo.js
-jsmodule: ../js/macros/image.js
-jsmodule: ../js/macros/info.js
-jsmodule: ../js/macros/link.js
-jsmodule: ../js/macros/list.js
-jsmodule: ../js/macros/story.js
-jsmodule: ../js/macros/tiddler.js
-jsmodule: ../js/macros/version.js
-jsmodule: ../js/macros/view.js
+jsmodule: ../js/macros/*.js
 
 jsmodule: ../node_modules/pegjs/lib/peg.js
 	title: pegjs

@@ -1,8 +1,6 @@
 /*\
 title: js/Recipe.js
 
-FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system
-
 Recipe processing is in four parts:
 
 1) The recipe file is parsed and any subrecipe files loaded recursively into this structure:
@@ -31,7 +29,7 @@ At this point tiddlers are placed in the store so that they can be referenced by
 		...
 	}
 
-4) Finally, the template is processed by replacing the markers with the text of the associated tiddlers
+4) Finally, to actually cook the recipe, the template is processed by replacing the markers with the text of the associated tiddlers
 
 \*/
 (function(){
@@ -47,6 +45,18 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 	util = require("util"),
 	async = require("async");
 
+/*
+Load a recipe file. Arguments are:
+
+	options: See below
+	callback: Function to be called when the recipe has been loaded as callback(err), null === success
+
+Options include:
+
+	filepath: The filepath of the recipe file to load. Can be a local path or an HTTP URL
+	store: Indicates the WikiStore to use to store the tiddlers (mandatory)
+
+*/
 var Recipe = function(options,callback) {
 	var me = this;
 	this.filepath = options.filepath;
@@ -54,6 +64,7 @@ var Recipe = function(options,callback) {
 	this.callback = callback;
 	this.recipe = [];
 	this.markers = {};
+	// A task queue for loading recipe files
 	this.recipeQueue = async.queue(function(task,callback) {
 		retrieveFile(task.filepath,task.contextPath,function(err,data) {
 			if(err) {
@@ -64,6 +75,7 @@ var Recipe = function(options,callback) {
 			}
 		});
 	},1);
+	// A task queue for loading tiddler files
 	this.tiddlerQueue = async.queue(function(task,callback) {
 		me.readTiddlerFile(task.filepath,task.contextPath,function(err,data) {
 			if(err) {
@@ -76,47 +88,87 @@ var Recipe = function(options,callback) {
 						}
 					}
 				}
-				task.recipeLine.tiddlers = data;
+				if(!task.recipeLine.tiddlers) {
+					task.recipeLine.tiddlers = [];
+				}
+				Array.prototype.push.apply(task.recipeLine.tiddlers,data);
 				callback(null);
 			}
 		});
 	},1);
+	// Called when all the recipes have been loaded
 	this.recipeQueue.drain = function() {
-		me.loadTiddlerFiles(me.recipe);
+		// Initiate the loading of the tiddlers referenced by the recipe
+		for(var r=0; r<me.recipe.length; r++) {
+			me.loadTiddlerFiles(me.recipe[r]);
+		}
 	};
+	// Called when all the tiddlers have been loaded
 	this.tiddlerQueue.drain = function() {
+		// Select the tiddlers that are associated with each marker
 		me.chooseTiddlers(me.recipe);
+		// Sort the main content tiddlers (makes it easier to diff TiddlyWiki files)
 		me.sortTiddlersForMarker("tiddler");
 		me.callback(null);
 	};
+	// Start the process off by queueing up the loading of the initial recipe
 	this.recipeQueue.push({filepath: this.filepath,
 							contextPath: process.cwd(),
 							recipe: this.recipe});
 };
 
-Recipe.prototype.loadTiddlerFiles = function(recipe) {
-	for(var r=0; r<recipe.length; r++) {
-		var recipeLine = recipe[r];
-		if(recipeLine instanceof Array) {
-			this.loadTiddlerFiles(recipeLine);	
+/*
+Recursively queue loading the tiddler files referenced by a recipe line
+*/
+Recipe.prototype.loadTiddlerFiles = function(recipeLine) {
+	var me = this;
+	if(recipeLine instanceof Array) {
+		for(var r=0; r<recipeLine.length; r++) {
+			me.loadTiddlerFiles(recipeLine[r]);	
+		}
+	} else {
+		var filepath = recipeLine.filepath, // eg ../js/*.js
+			filedir = path.dirname(filepath), // eg ../js
+			filename = path.basename(filepath), // eg *.js
+			posStar = filename.indexOf("*");
+		if(posStar !== -1) {
+			var fileRegExp = new RegExp("^" + filename.replace(/[-[\]{}()+?.,\\^$|#\s]/g, "\\$&").replace("*",".*") + "$");
+			var files = fs.readdirSync(path.resolve(path.dirname(recipeLine.contextPath),filedir));
+			for(var f=0; f<files.length; f++) {
+				if(fileRegExp.test(files[f])) {
+					me.tiddlerQueue.push({
+						filepath: filedir + "/" + files[f],
+						contextPath: recipeLine.contextPath,
+						recipeLine: recipeLine
+					});
+				}
+			}
 		} else {
-			this.tiddlerQueue.push({filepath: recipeLine.filepath, contextPath: recipeLine.contextPath, recipeLine: recipeLine});
+			me.tiddlerQueue.push({filepath: filepath, contextPath: recipeLine.contextPath, recipeLine: recipeLine});
 		}
 	}
 };
 
+/*
+Choose the tiddlers to be included on each marker
+*/
 Recipe.prototype.chooseTiddlers = function(recipe) {
+	// Loop through the lines of the recipe
 	for(var r=0; r<recipe.length; r++) {
 		var recipeLine = recipe[r];
 		if(recipeLine instanceof Array) {
+			// Process subrecipes recursively
 			this.chooseTiddlers(recipeLine);
 		} else {
+			// Choose the store and marker array to be used for this marker
 			var store = recipeLine.marker === "shadow" ? this.store.shadows : this.store,
 				markerArray = this.markers[recipeLine.marker];
+			// Create the marker array if necessary
 			if(markerArray === undefined) {
 				this.markers[recipeLine.marker] = [];
 				markerArray = this.markers[recipeLine.marker];
 			}
+			// Process each of the tiddlers referenced by the recipe line
 			for(var t=0; t<recipeLine.tiddlers.length; t++) {
 				// Only add the tiddler to the marker if it isn't already there
 				var found = false;
@@ -127,20 +179,26 @@ Recipe.prototype.chooseTiddlers = function(recipe) {
 				}
 				if(!found) {
 					markerArray.push(recipeLine.tiddlers[t].title);
-				}	
+				}
+				// Add the tiddler to the store
 				store.addTiddler(new Tiddler(recipeLine.tiddlers[t]));
 			}
 		}		
 	}
 };
 
+/*
+Sort the tiddlers associated with a particular marker
+*/
 Recipe.prototype.sortTiddlersForMarker = function(marker) {
 	if(this.markers[marker]) {
 		this.markers[marker].sort();
 	}	
 };
 
-// Process the contents of a recipe file
+/*
+Process the contents of a recipe file
+*/
 Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 	var matchLine = function(linetext) {
 			var lineRegExp = /^(#?)(\s*)(#?)([^\s\:]+)\s*:\s*(.+)*\s*$/,
@@ -163,7 +221,11 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 			}
 			if(match.marker === "recipe") {
 				var insertionPoint = recipe.push([]) - 1;
-				this.recipeQueue.push({filepath: match.value, contextPath: contextPath, recipe: recipe[insertionPoint]});
+				this.recipeQueue.push({
+					filepath: match.value,
+					contextPath: contextPath,
+					recipe: recipe[insertionPoint]
+				});
 			} else {
 				var fieldLines = [],
 					fieldMatch = matchLine(lines[line]);
@@ -188,6 +250,7 @@ Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
 	// Read the tiddler file
 	retrieveFile(filepath,contextPath,function(err,data) {
 		if (err) throw err;
+		// Use the filepath as the default title for the tiddler
 		var fields = {
 			title: data.path
 		};

@@ -1,7 +1,7 @@
 /*\
 title: js/FileRetriever.js
 
-FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system
+FileRetriever can asynchronously retrieve files from HTTP URLs or the local file system. Files are treated as utf-8 text or, if the filepath ends in one of the recognised binary extensions, as a base64 encoded binary string
 
 \*/
 (function(){
@@ -18,13 +18,16 @@ var fs = require("fs"),
 
 var FileRetriever = exports;
 
+// These are the file extensions that we'll recognise as binary.
 FileRetriever.binaryFileExtensions = [".jpg",".jpeg",".png",".gif"];
 
+// Retrieve a local file and invoke callback(err,data) in the usual way
 var fileRequest = function fileRequest(filepath,callback) {
 	fs.readFile(filepath, function (err,data) {
 		if(err) {
 			callback(err); 
 		} else {
+			// Check if we need to base64 encode the file
 			if(FileRetriever.binaryFileExtensions.indexOf(path.extname(filepath)) !== -1) {
 				callback(err,data.toString("base64"));
 			} else {
@@ -34,6 +37,7 @@ var fileRequest = function fileRequest(filepath,callback) {
 	});
 };
 
+// Retrieve a file over HTTP and invoke callback(err,data) in the usual way
 var httpRequest = function(fileurl,callback) {
 	var opts = url.parse(fileurl),
 		httpLib = opts.protocol === "http:" ? http : https,
