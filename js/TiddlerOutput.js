@@ -34,29 +34,30 @@ var outputTiddler = function(tid) {
 	var result = [],
 		outputAttribute = function(name,value) {
 		result.push(name + ": " + value + "\n");
-	};
-	for(var t in tid.fields) {
+	},
+		fields = tid.getFields();
+	for(var t in fields) {
 		switch(t) {
 			case "text":
 				// Ignore the text field
 				break;
 			case "tags":
 				// Output tags as a list
-				outputAttribute(t,tiddlerOutput.stringifyTags(tid.fields.tags));
+				outputAttribute(t,tiddlerOutput.stringifyTags(fields.tags));
 				break;
 			case "modified":
 			case "created":
 				// Output dates in YYYYMMDDHHMM
-				outputAttribute(t,utils.convertToYYYYMMDDHHMM(tid.fields[t]));
+				outputAttribute(t,utils.convertToYYYYMMDDHHMM(fields[t]));
 				break;
 			default:
 				// Output other attributes raw
-				outputAttribute(t,tid.fields[t]);
+				outputAttribute(t,fields[t]);
 				break;
 		}
 	}
 	result.push("\n");
-	result.push(tid.fields.text);
+	result.push(fields.text);
 	return result.join("");
 };
 
@@ -68,23 +69,19 @@ The fields are in the order title, creator, modifier, created, modified, tags, f
 */
 var outputTiddlerDiv = function(tid) {
 	var result = [],
-		attributes = {},
-		outputAttribute = function(name,transform,dontDelete) {
-			if(name in attributes) {
-				var value = attributes[name];
+		fields = tid.getFields(),
+		text = fields.text,
+		outputAttribute = function(name,transform) {
+			if(name in fields) {
+				var value = fields[name];
 				if(transform)
 					value = transform(value);
 				result.push(" " + name + "=\"" + value + "\"");
-				if(!dontDelete) {
-					delete attributes[name];
-				}
+				delete fields[name];
 			}
 		};
-	for(var t in tid.fields) {
-		attributes[t] = tid.fields[t];
-	}
-	if(attributes.text) {
-		delete attributes.text;
+	if(fields.text) {
+		delete fields.text;
 	}
 	result.push("<div");
 	// Output the standard attributes in the correct order
@@ -95,11 +92,11 @@ var outputTiddlerDiv = function(tid) {
 	outputAttribute("modified", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
 	outputAttribute("tags", function(v) {return stringifyTags(v);});
 	// Output any other attributes
-	for(t in attributes) {
+	for(var t in fields) {
 		outputAttribute(t,null,true);
 	}
 	result.push(">\n<pre>");
-	result.push(utils.htmlEncode(tid.fields.text));
+	result.push(utils.htmlEncode(text));
 	result.push("</pre>\n</div>");
 	return result.join("");
 };

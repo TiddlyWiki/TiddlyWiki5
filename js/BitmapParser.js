@@ -16,7 +16,7 @@ var BitmapParseTree = function() {
 
 BitmapParseTree.prototype.compile = function(type) {
 	if(type === "text/html") {
-		return "(function (tiddler,store,utils) {return '<img src=\"data:' + tiddler.fields.type + ';base64,' + tiddler.fields.text + '\">';})";
+		return "(function (tiddler,store,utils) {return '<img src=\"data:' + tiddler.type + ';base64,' + tiddler.text + '\">';})";
 	} else {
 		return null;
 	}

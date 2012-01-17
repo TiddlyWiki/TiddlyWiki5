@@ -52,8 +52,8 @@ exports.macro = {
 			handler,
 			t;
 		if(template) {
-			templateType = template.fields.type;
-			templateText = template.fields.text;
+			templateType = template.type;
+			templateText = template.text;
 		}
 		handler = handlers[params.type];
 		handler = handler || handlers.all;

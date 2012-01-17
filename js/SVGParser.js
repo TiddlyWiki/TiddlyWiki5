@@ -16,7 +16,7 @@ var SVGParseTree = function() {
 
 SVGParseTree.prototype.compile = function(type) {
 	if(type === "text/html") {
-		return "(function (tiddler,store,utils) {return tiddler.fields.text;})";
+		return "(function (tiddler,store,utils) {return tiddler.text;})";
 	} else {
 		return null;
 	}

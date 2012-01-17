@@ -2,6 +2,6 @@ title: SeventhTiddler
 
 <<echo {{2+2}}>>
 
-<<echo {{tiddler.fields.title}}>>
+<<echo {{tiddler.title}}>>
 
 <<echo {{"window"}}>>

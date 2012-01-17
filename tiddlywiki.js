@@ -135,7 +135,7 @@ var commandLineSwitches = {
 		handler: function(args,callback) {
 			var recipe = [];
 			app.store.forEachTiddler(function(title,tiddler) {
-				var filename = encodeURIComponent(tiddler.fields.title.replace(/ /g,"_")) + ".tid";
+				var filename = encodeURIComponent(tiddler.title.replace(/ /g,"_")) + ".tid";
 				fs.writeFileSync(path.resolve(args[0],filename),tiddlerOutput.outputTiddler(tiddler),"utf8");
 				recipe.push("tiddler: " + filename + "\n");
 			});

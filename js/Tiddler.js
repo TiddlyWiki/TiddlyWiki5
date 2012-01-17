@@ -21,25 +21,57 @@ var utils = require("./Utils.js"),
 	ArgParser = require("./ArgParser.js").ArgParser;
 
 var Tiddler = function(/* tiddler,fields */) {
-	this.parseTree = null; // Caches the parse tree for the tiddler
-	this.renderers = {}; // Caches rendering functions for this tiddler (indexed by MIME type)
-	this.renditions = {}; // Caches the renditions produced by those functions (indexed by MIME type)
-	this.fields = {};
-	for(var c=0; c<arguments.length; c++) {
-		var arg = arguments[c],
-			src = null;
+	this.cache = {}; // Expose the cache object
+	var fields = {}, // Keep the fields private, later we'll expose getters for them
+		tags, // Keep the tags separately because they're the only Array field
+		f,t,c,arg,src;
+	// Accumulate the supplied fields
+	for(c=0; c<arguments.length; c++) {
+		arg = arguments[c];
+		src = null;
 		if(arg instanceof Tiddler) {
 			src = arg.fields;
 		} else {
 			src = arg;
 		}
-		for(var t in src) {
-			var f = this.parseTiddlerField(t,src[t]);
+		for(t in src) {
+			f = Tiddler.parseTiddlerField(t,src[t]);
 			if(f !== null) {
-				this.fields[t] = f;
+				fields[t] = f;
 			}
 		}
 	}
+	// Pull out the tags
+	if(fields.tags) {
+		tags = fields.tags;
+		delete fields.tags;
+	}
+	// Expose the fields as read only properties
+	for(f in fields) {
+		Object.defineProperty(this,f,{value: fields[f], writeable: false});
+	}
+	// Expose the tags as a getter
+	Object.defineProperty(this,"tags",{get: function() {return tags ? tags.slice(0) : [];}});
+	// Other methods that need access to the fields
+	this.getFields = function() {
+		var r = {};
+		for(var f in fields) {
+			var v = fields[f];
+			if(v instanceof Array) {
+				r[f] = v.slice(0);
+			} else {
+				r[f] = v;
+			}
+		}
+		if(tags) {
+			r.tags = tags;
+		}
+		return r;
+	};
+};
+
+Tiddler.prototype.hasTag = function(tag) {
+	return this.tags.indexOf(tag) !== -1;
 };
 
 Tiddler.standardFields = {
@@ -57,18 +89,21 @@ Tiddler.isStandardField = function(name) {
 	return name in Tiddler.standardFields;
 };
 
-Tiddler.prototype.hasTag = function(tag) {
-	if(this.tags) {
-		for(var t=0; t<this.tags.length; t++) {
-			if(this.tags[t] === tag) {
-				return true;
-			}
+Tiddler.compareTiddlerFields = function(a,b,sortField) {
+	var aa = a[sortField] || 0,
+		bb = b[sortField] || 0;
+	if(aa < bb) {
+		return -1;
+	} else {
+		if(aa > bb) {
+			return 1;
+		} else {
+			return 0;
 		}
 	}
-	return false;
 };
 
-Tiddler.prototype.parseTiddlerField = function(name,value) {
+Tiddler.parseTiddlerField = function(name,value) {
 	var type = Tiddler.specialTiddlerFields[name];
 	if(type) {
 		return Tiddler.specialTiddlerFieldParsers[type](value);

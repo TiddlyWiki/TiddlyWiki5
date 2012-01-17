@@ -1,6 +1,12 @@
 /*\
 title: js/WikiStore.js
 
+WikiStore uses the .cache member of tiddlers to store the following information:
+
+	parseTree: Caches the parse tree for the tiddler
+	renderers: Caches rendering functions for this tiddler (indexed by MIME type)
+	renditions: Caches the renditions produced by those functions (indexed by MIME type)
+
 \*/
 (function(){
 
@@ -125,7 +131,7 @@ WikiStore.prototype.getTiddler = function(title) {
 
 WikiStore.prototype.getTiddlerText = function(title) {
 	var t = this.getTiddler(title);
-	return t instanceof Tiddler ? t.fields.text : null;
+	return t instanceof Tiddler ? t.text : null;
 };
 
 WikiStore.prototype.deleteTiddler = function(title) {
@@ -143,8 +149,8 @@ WikiStore.prototype.tiddlerExists = function(title) {
 };
 
 WikiStore.prototype.addTiddler = function(tiddler) {
-	this.tiddlers[tiddler.fields.title] = tiddler;
-	this.touchTiddler("modified",tiddler.fields.title);
+	this.tiddlers[tiddler.title] = tiddler;
+	this.touchTiddler("modified",tiddler.title);
 };
 
 WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
@@ -159,22 +165,10 @@ WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callba
 		for(t in this.tiddlers) {
 			tiddlers.push(this.tiddlers[t]); 
 		}
-		tiddlers.sort(function (a,b) {
-			var aa = a.fields[sortField] || 0,
-				bb = b.fields[sortField] || 0;
-			if(aa < bb) {
-				return -1;
-			} else {
-				if(aa > bb) {
-					return 1;
-				} else {
-					return 0;
-				}
-			}
-		});
+		tiddlers.sort(function (a,b) {return Tiddler.compareTiddlerFields(a,b,sortField);});
 		for(t=0; t<tiddlers.length; t++) {
 			if(!tiddlers[t].hasTag(excludeTag)) {
-				callback.call(this,tiddlers[t].fields.title,tiddlers[t]);
+				callback.call(this,tiddlers[t].title,tiddlers[t]);
 			}
 		}
 	} else {
@@ -286,10 +280,10 @@ WikiStore.prototype.parseTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
 		// Check the cache
-		if(!tiddler.parseTree) {
-			tiddler.parseTree = this.parseText(tiddler.fields.type,tiddler.fields.text);
+		if(!tiddler.cache.parseTree) {
+			tiddler.cache.parseTree = this.parseText(tiddler.type,tiddler.text);
 		}
-		return tiddler.parseTree;
+		return tiddler.cache.parseTree;
 	} else {
 		return null;
 	}
@@ -311,11 +305,14 @@ WikiStore.prototype.compileTiddler = function(title,type) {
 	/*jslint evil: true */
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
-		if(!tiddler.renderers[type]) {
-			var tree = this.parseTiddler(title);
-			tiddler.renderers[type] = eval(tree.compile(type));
+		if(!tiddler.cache.renderers) {
+			tiddler.cache.renderers = {};
 		}
-		return tiddler.renderers[type];
+		if(!tiddler.cache.renderers[type]) {
+			var tree = this.parseTiddler(title);
+			tiddler.cache.renderers[type] = eval(tree.compile(type));
+		}
+		return tiddler.cache.renderers[type];
 	} else {
 		return null;	
 	}
@@ -343,10 +340,13 @@ WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 			var asTiddler = this.getTiddler(asTitle);
 			return fn(asTiddler,this,utils);
 		} else {
-			if(!tiddler.renditions[targetType]) {
-				tiddler.renditions[targetType] = fn(tiddler,this,utils);
+			if(!tiddler.cache.renditions) {
+				tiddler.cache.renditions = {};
 			}
-			return tiddler.renditions[targetType];
+			if(!tiddler.cache.renditions[targetType]) {
+				tiddler.cache.renditions[targetType] = fn(tiddler,this,utils);
+			}
+			return tiddler.cache.renditions[targetType];
 		}
 	}
 	return null;

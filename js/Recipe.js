@@ -132,7 +132,7 @@ Recipe.prototype.loadTiddlerFiles = function(recipeLine) {
 			filename = path.basename(filepath), // eg *.js
 			posStar = filename.indexOf("*");
 		if(posStar !== -1) {
-			var fileRegExp = new RegExp("^" + filename.replace(/[-[\]{}()+?.,\\^$|#\s]/g, "\\$&").replace("*",".*") + "$");
+			var fileRegExp = new RegExp("^" + filename.replace(/[\-\[\]{}()+?.,\\\^$|#\s]/g, "\\$&").replace("*",".*") + "$");
 			var files = fs.readdirSync(path.resolve(path.dirname(recipeLine.contextPath),filedir));
 			for(var f=0; f<files.length; f++) {
 				if(fileRegExp.test(files[f])) {
@@ -341,7 +341,7 @@ Recipe.tiddlerOutputter = {
 		// Lines starting with //# are removed from javascript tiddlers
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = this.store.getTiddler(tiddlers[t]),
-				text = tid.fields.text;
+				text = tid.text;
 			// For compatibility with cook.rb, remove one trailing \n from tiddler
 			text = text.charAt(text.length-1) === "\n" ? text.substr(0,text.length-1) : text;
 			var lines = text.split("\n");
@@ -370,7 +370,7 @@ Recipe.tiddlerOutputter = {
 				tid = this.store.getTiddler(title);
 			out.push("<" + "script type=\"application/javascript\">");
 			out.push("define(\"" + title + "\",function(require,exports,module) {");
-			out.push(tid.fields.text);
+			out.push(tid.text);
 			out.push("});");
 			out.push("</" + "script>");
 		}
@@ -388,24 +388,24 @@ Recipe.prototype.cookRss = function() {
 			return title.indexOf(" ") == -1 ? title : "[[" + title + "]]";
 		},
 		tiddlerToRssItem = function(tiddler,uri) {
-			var s = "<title" + ">" + utils.htmlEncode(tiddler.fields.title) + "</title" + ">\n";
-			s += "<description>" + utils.htmlEncode(me.store.renderTiddler("text/html",tiddler.fields.title)) + "</description>\n";
+			var s = "<title" + ">" + utils.htmlEncode(tiddler.title) + "</title" + ">\n";
+			s += "<description>" + utils.htmlEncode(me.store.renderTiddler("text/html",tiddler.title)) + "</description>\n";
 			var i;
-			if(tiddler.fields.tags) {
-				for(i=0; i<tiddler.fields.tags.length; i++) {
-					s += "<category>" + tiddler.fields.tags[i] + "</category>\n";
+			if(tiddler.tags) {
+				for(i=0; i<tiddler.tags.length; i++) {
+					s += "<category>" + tiddler.tags[i] + "</category>\n";
 				}
 			}
-			s += "<link>" + uri + "#" + encodeURIComponent(encodeTiddlyLink(tiddler.fields.title)) + "</link>\n";
-			if(tiddler.fields.modified) {
-				s +="<pubDate>" + tiddler.fields.modified.toUTCString() + "</pubDate>\n";
+			s += "<link>" + uri + "#" + encodeURIComponent(encodeTiddlyLink(tiddler.title)) + "</link>\n";
+			if(tiddler.modified) {
+				s +="<pubDate>" + tiddler.modified.toUTCString() + "</pubDate>\n";
 			}
 			return s;
 		},
 		getRssTiddlers = function(sortField,excludeTag) {
 			var r = [];
 			me.store.forEachTiddler(sortField,excludeTag,function(title,tiddler) {
-				if(!tiddler.hasTag(excludeTag) && tiddler.fields.modified !== undefined) {
+				if(!tiddler.hasTag(excludeTag) && tiddler.modified !== undefined) {
 					r.push(tiddler);
 				}
 			});
