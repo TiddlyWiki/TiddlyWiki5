@@ -21,7 +21,6 @@ var utils = require("./Utils.js"),
 	ArgParser = require("./ArgParser.js").ArgParser;
 
 var Tiddler = function(/* tiddler,fields */) {
-	this.cache = {}; // Expose the cache object
 	var fields = {}, // Keep the fields private, later we'll expose getters for them
 		tags, // Keep the tags separately because they're the only Array field
 		f,t,c,arg,src;

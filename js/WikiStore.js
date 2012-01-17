@@ -23,15 +23,15 @@ Available options are:
 */
 var WikiStore = function WikiStore(options) {
 	options = options || {};
-	this.tiddlers = {};
-	this.parsers = {};
-	this.macros = {};
-	this.tiddlerSerializers = {};
-	this.tiddlerDeserializers = {};
+	this.tiddlers = {}; // Hashmap of tiddlers by title
+	this.parsers = {}; // Hashmap of parsers by accepted MIME type
+	this.macros = {}; // Hashmap of macros by macro name
+	this.caches = {}; // Hashmap of cache objects by tiddler title, each is a hashmap of named caches
+	this.tiddlerSerializers = {}; // Hashmap of serializers by target MIME type
+	this.tiddlerDeserializers = {}; // Hashmap of deserializers by accepted MIME type
 	this.eventListeners = []; // Array of {filter:,listener:}
 	this.eventsTriggered = false;
 	this.changedTiddlers = {}; // Hashmap of {title: "created|modified|deleted"}
-	this.sandbox = options.sandbox;
 	this.shadows = options.shadowStore !== undefined ? options.shadowStore : new WikiStore({
 		shadowStore: null
 	});
@@ -264,6 +264,21 @@ WikiStore.prototype.adjustClassesForLink = function(classes,target) {
 	return newClasses;
 };
 
+// Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
+WikiStore.prototype.getCacheForTiddler = function(title,cacheName,initializer) {
+	var caches = this.caches[title];
+	if(caches && caches[cacheName]) {
+		return caches[cacheName];
+	} else {
+		if(!caches) {
+			caches = {};
+			this.caches[title] = caches;
+		}
+		caches[cacheName] = initializer();
+		return caches[cacheName];
+	}
+};
+
 WikiStore.prototype.parseText = function(type,text) {
 	var parser = this.parsers[type];
 	if(!parser) {
@@ -277,16 +292,12 @@ WikiStore.prototype.parseText = function(type,text) {
 };
 
 WikiStore.prototype.parseTiddler = function(title) {
-	var tiddler = this.getTiddler(title);
-	if(tiddler) {
-		// Check the cache
-		if(!tiddler.cache.parseTree) {
-			tiddler.cache.parseTree = this.parseText(tiddler.type,tiddler.text);
-		}
-		return tiddler.cache.parseTree;
-	} else {
-		return null;
-	}
+	var me = this,
+		tiddler = this.getTiddler(title),
+		parseTree = this.getCacheForTiddler(title,"parseTree",function() {
+			return me.parseText(tiddler.type,tiddler.text);
+		});
+	return parseTree;
 };
 
 /*
@@ -303,16 +314,16 @@ Compiles a JavaScript function that renders a tiddler in a particular MIME type
 */
 WikiStore.prototype.compileTiddler = function(title,type) {
 	/*jslint evil: true */
-	var tiddler = this.getTiddler(title);
+	var tiddler = this.getTiddler(title),
+		renderers = this.getCacheForTiddler(title,"renderers",function() {
+			return {};
+		});
 	if(tiddler) {
-		if(!tiddler.cache.renderers) {
-			tiddler.cache.renderers = {};
-		}
-		if(!tiddler.cache.renderers[type]) {
+		if(!renderers[type]) {
 			var tree = this.parseTiddler(title);
-			tiddler.cache.renderers[type] = eval(tree.compile(type));
+			renderers[type] = eval(tree.compile(type));
 		}
-		return tiddler.cache.renderers[type];
+		return renderers[type];
 	} else {
 		return null;	
 	}
@@ -334,19 +345,19 @@ store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 */
 WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 	var tiddler = this.getTiddler(title),
-		fn = this.compileTiddler(title,targetType);
+		fn = this.compileTiddler(title,targetType),
+		renditions = this.getCacheForTiddler(title,"renditions",function() {
+			return {};
+		});
 	if(tiddler) {
 		if(asTitle) {
 			var asTiddler = this.getTiddler(asTitle);
 			return fn(asTiddler,this,utils);
 		} else {
-			if(!tiddler.cache.renditions) {
-				tiddler.cache.renditions = {};
+			if(!renditions[targetType]) {
+				renditions[targetType] = fn(tiddler,this,utils);
 			}
-			if(!tiddler.cache.renditions[targetType]) {
-				tiddler.cache.renditions[targetType] = fn(tiddler,this,utils);
-			}
-			return tiddler.cache.renditions[targetType];
+			return renditions[targetType];
 		}
 	}
 	return null;
