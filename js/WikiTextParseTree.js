@@ -23,11 +23,11 @@ var WikiTextParseTree = function(tree,dependencies,store) {
 // representation of the tree
 WikiTextParseTree.prototype.compile = function(type,treenode) {
 	treenode = treenode || this.tree;
-	this.output = [];
+	var output = [];
 	if(type === "text/html") {
-		this.compileSubTreeHtml(treenode);
+		this.compileSubTreeHtml(output,treenode);
 	} else if(type === "text/plain") {
-		this.compileSubTreePlain(treenode);
+		this.compileSubTreePlain(output,treenode);
 	} else {
 		return null;
 	}
@@ -47,7 +47,7 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 							type: "PropertyAccess",
 							base: {
 								type: "ArrayLiteral",
-								elements: this.output
+								elements: output
 							},
 							name: "join"
 						},
@@ -62,34 +62,33 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 			}
 		]);
 	var r = parseTree.render();
-	this.output = null;
 	return r;
 };
 
-WikiTextParseTree.prototype.pushString = function(s) {
-	var last = this.output[this.output.length-1];
-	if(this.output.length > 0 && last.type === "StringLiterals") {
+WikiTextParseTree.prototype.pushString = function(output,s) {
+	var last = output[output.length-1];
+	if(output.length > 0 && last.type === "StringLiterals") {
 		last.value.push(s);
-	} else if (this.output.length > 0 && last.type === "StringLiteral") {
+	} else if (output.length > 0 && last.type === "StringLiteral") {
 		last.type = "StringLiterals";
 		last.value = [last.value,s];
 	} else {
-		this.output.push({type: "StringLiteral", value: s});
+		output.push({type: "StringLiteral", value: s});
 	}
 };
 
-WikiTextParseTree.prototype.compileMacroCall = function(type,node) {
+WikiTextParseTree.prototype.compileMacroCall = function(output,type,node) {
 	var name = node.name,
 		params = node.params,
 		macro = this.store.macros[name],
 		p,
 		n;
 	if(!macro) {
-		this.pushString("{{** Unknown macro '" + name + "' **}}");
+		this.pushString(output,"{{** Unknown macro '" + name + "' **}}");
 		return;
 	}
 	if(macro.types.indexOf(type) === -1) {
-		this.pushString("{{**  Macro '" + name + "' cannot render to MIME type '" + type + "'**}}");
+		this.pushString(output,"{{**  Macro '" + name + "' cannot render to MIME type '" + type + "'**}}");
 		return;
 	}
 	var macroCall = {
@@ -135,16 +134,15 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,node) {
 		});
 	}
 	if(node.children) {
-		var saveOutput = this.output;
-		this.output = [];
-		this.compileSubTreeHtml(node.children);
+		var subOutput = [];
+		this.compileSubTreeHtml(subOutput,node.children);
 		macroCall["arguments"].push({
 			type: "FunctionCall",
 			name: {
 				type: "PropertyAccess",
 				base: {
 					type: "ArrayLiteral",
-					elements: this.output
+					elements: subOutput
 				},
 				name: "join"
 			},
@@ -153,21 +151,20 @@ WikiTextParseTree.prototype.compileMacroCall = function(type,node) {
 				value: ""
 			}]
 		});
-		this.output = saveOutput;
 	}
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html") {
-		this.pushString(utils.stitchElement(wrapperTag,{
+		this.pushString(output,utils.stitchElement(wrapperTag,{
 			"data-tw-macro": name
 		}));
 	}
-	this.output.push(macroCall);
+	output.push(macroCall);
 	if(type === "text/html") {
-		this.pushString("</" + wrapperTag + ">");
+		this.pushString(output,"</" + wrapperTag + ">");
 	}
 };
 
-WikiTextParseTree.prototype.compileElementHtml = function(element, options) {
+WikiTextParseTree.prototype.compileElementHtml = function(output,element,options) {
 	options = options || {};
 	var tagBits = [element.type];
 	if(element.attributes) {
@@ -183,70 +180,70 @@ WikiTextParseTree.prototype.compileElementHtml = function(element, options) {
 			tagBits.push(a + "=\"" + utils.htmlEncode(r) + "\"");
 		}
 	}
-	this.pushString("<" + tagBits.join(" ") + (options.selfClosing ? " /" : "") + ">");
+	this.pushString(output,"<" + tagBits.join(" ") + (options.selfClosing ? " /" : "") + ">");
 	if(!options.selfClosing) {
 		if(element.children) {
-			this.compileSubTreeHtml(element.children);
+			this.compileSubTreeHtml(output,element.children);
 		}
-		this.pushString("</" + element.type + ">");
+		this.pushString(output,"</" + element.type + ">");
 	}
 };
 
-WikiTextParseTree.prototype.compileSubTreeHtml = function(tree) {
+WikiTextParseTree.prototype.compileSubTreeHtml = function(output,tree) {
 	for(var t=0; t<tree.length; t++) {
 		switch(tree[t].type) {
 			case "text":
-				this.pushString(utils.htmlEncode(tree[t].value));
+				this.pushString(output,utils.htmlEncode(tree[t].value));
 				break;
 			case "entity":
-				this.pushString(tree[t].value);
+				this.pushString(output,tree[t].value);
 				break;
 			case "br":
 			case "img":
-				this.compileElementHtml(tree[t],{selfClosing: true}); // Self closing elements
+				this.compileElementHtml(output,tree[t],{selfClosing: true}); // Self closing elements
 				break;
 			case "macro":
-				this.compileMacroCall("text/html",tree[t]);
+				this.compileMacroCall(output,"text/html",tree[t]);
 				break;
 			default:
-				this.compileElementHtml(tree[t]);
+				this.compileElementHtml(output,tree[t]);
 				break;
 		}
 	}
 };
 
-WikiTextParseTree.prototype.compileElementPlain = function(element, options) {
+WikiTextParseTree.prototype.compileElementPlain = function(output,element, options) {
 	options = options || {};
 	if(!options.selfClosing) {
 		if(element.children) {
-			this.compileSubTreePlain(element.children);
+			this.compileSubTreePlain(output,element.children);
 		}
 	}
 };
 
-WikiTextParseTree.prototype.compileSubTreePlain = function(tree) {
+WikiTextParseTree.prototype.compileSubTreePlain = function(output,tree) {
 	for(var t=0; t<tree.length; t++) {
 		switch(tree[t].type) {
 			case "text":
-				this.pushString(utils.htmlEncode(tree[t].value));
+				this.pushString(output,utils.htmlEncode(tree[t].value));
 				break;
 			case "entity":
 				var c = utils.entityDecode(tree[t].value);
 				if(c) {
-					this.pushString(c);
+					this.pushString(output,c);
 				} else {
-					this.pushString(tree[t].value);
+					this.pushString(output,tree[t].value);
 				}
 				break;
 			case "br":
 			case "img":
-				this.compileElementPlain(tree[t],{selfClosing: true}); // Self closing elements
+				this.compileElementPlain(output,tree[t],{selfClosing: true}); // Self closing elements
 				break;
 			case "macro":
-				this.compileMacroCall("text/plain",tree[t]);
+				this.compileMacroCall(output,"text/plain",tree[t]);
 				break;
 			default:
-				this.compileElementPlain(tree[t]);
+				this.compileElementPlain(output,tree[t]);
 				break;
 		}
 	}
