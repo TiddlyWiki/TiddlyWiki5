@@ -27,112 +27,111 @@ var JavaScriptParseTree = function(tree) {
 
 // Render the entire JavaScript tree object to JavaScript source code
 JavaScriptParseTree.prototype.render = function() {
-	this.output = [];
-	this.renderSubTree(this.tree);
-	var r = this.output.join("");
-	this.output = null;
+	var output = [];
+	this.renderSubTree(output,this.tree);
+	var r = output.join("");
 	return r;
 };
 
 // Render a subtree of the parse tree to an array of fragments of JavaScript source code
-JavaScriptParseTree.prototype.renderSubTree = function(tree) {
+JavaScriptParseTree.prototype.renderSubTree = function(output,tree) {
 	for(var t=0; t<tree.length; t++) {
 		if(t) {
 			this.output.push(";\n");
 		}
-		this.renderNode(tree[t]);
+		this.renderNode(output,tree[t]);
 	}
 };
 
 // Compile a JavaScript node to an array of fragments of JavaScript source code
-JavaScriptParseTree.prototype.renderNode = function(node) {
+JavaScriptParseTree.prototype.renderNode = function(output,node) {
 	var p;
 	switch(node.type) {
 		case "StringLiteral":
-			this.output.push(utils.stringify(node.value));
+			output.push(utils.stringify(node.value));
 			break;
 		case "StringLiterals":
-			this.output.push(utils.stringify(node.value.join("")));
+			output.push(utils.stringify(node.value.join("")));
 			break;
 		case "FunctionCall":
-			this.output.push("(");
-			this.renderNode(node.name);
-			this.output.push(")(");
+			output.push("(");
+			this.renderNode(output,node.name);
+			output.push(")(");
 			for(p=0; p<node["arguments"].length; p++) {
 				if(p) {
-					this.output.push(",");
+					output.push(",");
 				}
-				this.renderNode(node["arguments"][p]);
+				this.renderNode(output,node["arguments"][p]);
 			}
-			this.output.push(")");
+			output.push(")");
 			break;
 		case "PropertyAccess":
-			this.renderNode(node.base);
+			this.renderNode(output,node.base);
 			if(typeof node.name === "string") {
-				this.output.push("." + node.name);
+				output.push("." + node.name);
 			} else {
-				this.output.push("[");
-				this.renderNode(node.name);
-				this.output.push("]");	
+				output.push("[");
+				this.renderNode(output,node.name);
+				output.push("]");	
 			}
 			break;
 		case "ArrayLiteral":
-			this.output.push("[");
+			output.push("[");
 			for(p=0; p<node.elements.length; p++) {
 				if(p) {
-					this.output.push(",");
+					output.push(",");
 				}
-				this.renderNode(node.elements[p]);
+				this.renderNode(output,node.elements[p]);
 			}
-			this.output.push("]");
+			output.push("]");
 			break;
 		case "Variable":
-			this.output.push(node.name);
+			output.push(node.name);
 			break;
 		case "ObjectLiteral":
-			this.output.push("{");
+			output.push("{");
 			for(p=0; p<node.properties.length; p++) {
 				if(p) {
-					this.output.push(",");
+					output.push(",");
 				}
-				this.renderNode(node.properties[p]);
+				this.renderNode(output,node.properties[p]);
 			}
-			this.output.push("}");
+			output.push("}");
 			break;
 		case "PropertyAssignment":
-			this.output.push(node.name);
-			this.output.push(":");
-			this.renderNode(node.value);
+			output.push(node.name);
+			output.push(":");
+			this.renderNode(output,node.value);
 			break;
 		case "BinaryExpression":
-			this.output.push("(");
-			this.renderNode(node.left);
-			this.output.push(")");
-			this.output.push(node.operator);
-			this.output.push("(");
-			this.renderNode(node.right);
-			this.output.push(")");
+			output.push("(");
+			this.renderNode(output,node.left);
+			output.push(")");
+			output.push(node.operator);
+			output.push("(");
+			this.renderNode(output,node.right);
+			output.push(")");
 			break;
 		case "NumericLiteral":
-			this.output.push(node.value);
+			output.push(node.value);
 			break;
 		case "Function":
-			this.output.push("(function ");
+			output.push("(function ");
 			if(node.name !== null) {
-				this.output.push(node.name);
+				output.push(node.name);
 			}
-			this.output.push("(");
-			this.output.push(node.params.join(","));
-			this.output.push("){");
-			this.renderSubTree(node.elements);
-			this.output.push("})");
+			output.push("(");
+			output.push(node.params.join(","));
+			output.push("){");
+			this.renderSubTree(output,node.elements);
+			output.push("})");
 			break;
 		case "ReturnStatement":
-			this.output.push("return ");
-			this.renderNode(node.value);
+			output.push("return ");
+			this.renderNode(output,node.value);
 			break;
 		case "This":
-			this.output.push("this");
+			output.push("this");
 			break;
 		default:
 			console.log(node);
