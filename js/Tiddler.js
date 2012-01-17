@@ -55,15 +55,10 @@ var Tiddler = function(/* tiddler,fields */) {
 	this.getFields = function() {
 		var r = {};
 		for(var f in fields) {
-			var v = fields[f];
-			if(v instanceof Array) {
-				r[f] = v.slice(0);
-			} else {
-				r[f] = v;
-			}
+			r[f] = fields[f];
 		}
 		if(tags) {
-			r.tags = tags;
+			r.tags = tags.slice(0);
 		}
 		return r;
 	};
