@@ -44,17 +44,12 @@ textPrimitives.tiddlerAnyLinkRegExp = new RegExp("("+ textPrimitives.wikiLink + 
 	textPrimitives.brackettedLink + ")|(?:" +
 	textPrimitives.urlPattern + ")","mg");
 
-var createElementAndWikify = function(w) {
-	var e = {type: this.element, children: []};
-	w.output.push(e);
-	w.subWikifyTerm(e.children,this.termRegExp);
-};
-
-var setAttr = function(e,attr,value) {
-	if(!e.attributes) {
-		e.attributes = {};
+// Helper to add an attribute to an HTML node
+var setAttr = function(node,attr,value) {
+	if(!node.attributes) {
+		node.attributes = {};
 	}
-	e.attributes[attr] = value;
+	node.attributes[attr] = value;
 };
 
 var inlineCssHelper = function(w) {
@@ -353,7 +348,11 @@ var rules = [
 	match: "^<<<\\n",
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
-	handler: createElementAndWikify
+	handler:  function(w) {
+		var e = {type: this.element, children: []};
+		w.output.push(e);
+		w.subWikifyTerm(e.children,this.termRegExp);
+	}
 },
 
 {
