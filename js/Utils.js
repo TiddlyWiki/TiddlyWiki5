@@ -289,6 +289,7 @@ utils.stitchElement = function(element,attributes,options) {
 utils.nextTick = function(fn) {
 /*global window: false */
 	if(typeof window !== "undefined") {
+		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,4);
 	} else {
 		process.nextTick(fn);
