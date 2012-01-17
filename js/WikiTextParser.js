@@ -1,7 +1,29 @@
 /*\
 title: js/WikiTextParser.js
 
-Parses a block of tiddlywiki-format wiki text into a parse tree object.
+Parses a block of tiddlywiki-format wiki text into a parse tree object. This is a transliterated version of the old TiddlyWiki code. The plan is to replace it with a new, mostly backwards compatible parser built in PEGJS.
+
+A wikitext parse tree is an array of objects with a `type` field that can be `text`,`macro` or the name of an HTML element.
+
+Text nodes are represented as `{type: "text", value: "A string of text"}`.
+
+Macro nodes look like this:
+`
+{type: "macro", name: "view", params: {
+	one: {type: "eval", value: "2+2"},
+	two: {type: "string", value: "twenty two"}
+}}
+`
+HTML nodes look like this:
+`
+{type: "div", attributes: {
+	src: "one"
+	styles: {
+		"background-color": "#fff",
+		"color": "#000"
+	}
+}}
+`
 
 \*/
 (function(){
