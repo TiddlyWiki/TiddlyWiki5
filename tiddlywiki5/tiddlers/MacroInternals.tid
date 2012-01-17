@@ -22,3 +22,4 @@ The `code` function is called with the following parameters:
 |`tiddler` |The tiddler in whose context the macro is being rendered |
 |`store` |The `WikiStore` object to be used |
 |`params` |The macro parameters as a hashmap |
+|`content` |The rendered text of the children of the macro |
