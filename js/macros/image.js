@@ -40,7 +40,7 @@ exports.macro = {
 				});
 			}
 		} else if (type === "text/plain") {
-			return params.text ? params.text : params.src;	
+			return params.text ? params.text : "";	
 		}
 	}
 };
