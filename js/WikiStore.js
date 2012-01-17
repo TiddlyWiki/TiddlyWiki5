@@ -320,8 +320,11 @@ WikiStore.prototype.compileTiddler = function(title,type) {
 		});
 	if(tiddler) {
 		if(!renderers[type]) {
-			var tree = this.parseTiddler(title);
-			renderers[type] = eval(tree.compile(type));
+			var tree = this.parseTiddler(title),
+				text = tree.compile(type);
+			// Add a source URL to help debugging (see http://blog.getfirebug.com/2009/08/11/give-your-eval-a-name-with-sourceurl/)
+			text += "//@ sourceURL=" + encodeURIComponent(title) + "-" + type;
+			renderers[type] = eval(text);
 		}
 		return renderers[type];
 	} else {
