@@ -13,21 +13,23 @@ exports.macro = {
 	name: "info",
 	types: ["text/html","text/plain"],
 	params: {
+		info: {byName: "default", type: "text", optional: false}
 	},
 	handler: function(type,tiddler,store,params) {
 		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;},
+			info = params.info ? params.info : "parsetree",
 			parseTree = store.parseTiddler(tiddler.title);
-		if(parseTree) {
-			var r = [];
-			var d = parseTree.dependencies;
-			if(d === null) {
-				r.push(encoder("Dependencies: *"));
-			} else {
-				r.push(encoder("Dependencies: " + d.join(", ")));
-			}
-			return r.join("/n");
-		} else {
-			return "";
+		switch(info) {
+			case "parsetree":
+				return "Parse tree: " + parseTree.toString(type);
+				break;
+			case "dependencies":
+				if(parseTree.dependencies === null) {
+					return encoder("Dependencies: *");
+				} else {
+					return encoder("Dependencies: " + parseTree.dependencies.join(", "));
+				}
+				break;
 		}
 	}
 };
