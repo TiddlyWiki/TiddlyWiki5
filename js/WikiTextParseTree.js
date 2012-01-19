@@ -249,6 +249,98 @@ WikiTextParseTree.prototype.compileSubTreePlain = function(output,tree) {
 	}
 };
 
+// Render the parse tree to a debugging string of the specified MIME type
+// fieldOrder is an array of fieldname. The zeroth field is rendered as a special tag node, without a label
+WikiTextParseTree.prototype.toString = function(type) {
+	var output = [],
+		htmlNodes = "a br hr table tr td th h1 h2 h3 h4 h5 h6 ul ol li dl dd dt blockquote pre img strong em u sup sub strike code span div".split(" "),
+		customTemplates = [
+			function(output,type,node) { // Text nodes
+				if(node.type === "text") {
+					output.push(utils.stitchElement("span",null,{
+						content: node.type,
+						classNames: ["treeNodeTypeText"]
+					}));
+					output.push(utils.stitchElement("span",null,{
+						content: utils.htmlEncode(node.value),
+						classNames: ["treeNodeFieldValue"]
+					}));
+					return true;
+				}
+				return false;
+			},
+			function(output,type,node) { // Macro nodes
+				if(node.type === "macro") {
+					output.push(utils.stitchElement("span",null,{
+						content: node.type,
+						classNames: ["treeNodeTypeMacro"]
+					}));
+					output.push(utils.stitchElement("span",null,{
+						content: utils.htmlEncode(node.name),
+						classNames: ["treeNodeFieldValue"]
+					}));
+					for(var f in node.params) {
+						output.push(utils.stitchElement("span",null,{
+							content: utils.htmlEncode(f),
+							classNames: ["treeNodeTypeParam"]
+						}));
+						var v = node.params[f].value;
+						if(node.params[f].type === "string") {
+							v = utils.stringify(v);
+						} else if(node.params[f].type === "eval") {
+							v = "{{" + v + "}}";
+						}
+						output.push(utils.stitchElement("span",null,{
+							content: utils.htmlEncode(v),
+							classNames: ["treeNodeFieldValue"]
+						}));
+					}
+					if(node.children) {
+						utils.renderObject(output,type,node.children,customTemplates);
+					}
+					return true;
+				}
+				return false;
+			},
+			function(output,type,node) { // HTML nodes
+				if(htmlNodes.indexOf(node.type) !== -1) {
+					output.push(utils.stitchElement("span",null,{
+						content: node.type,
+						classNames: ["treeNodeTypeHtml"]
+					}));
+					for(var f in node.attributes) {
+						output.push(utils.stitchElement("span",null,{
+							content: utils.htmlEncode(f),
+							classNames: ["treeNodeType"]
+						}));
+						var v = node.attributes[f];
+						if(typeof v === "string") {
+							v = utils.stringify(v);
+						} else if(v instanceof Array) {
+							v = v.join("; ");
+						}
+						if(typeof v === "object") {
+							utils.renderObject(output,type,v);
+						} else {
+							output.push(utils.stitchElement("span",null,{
+								content: utils.htmlEncode(v),
+								classNames: ["treeNodeFieldValue"]
+							}));
+						}
+					}
+					if(node.children) {
+						utils.renderObject(output,type,node.children,customTemplates);
+					}
+					return true;
+				} else {
+					return false;
+				}
+			}
+		];
+	utils.renderObject(output,type,this.tree,customTemplates);
+	return output.join("");
+};
+
 exports.WikiTextParseTree = WikiTextParseTree;
 
 })();
