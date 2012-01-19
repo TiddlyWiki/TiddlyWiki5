@@ -286,6 +286,71 @@ utils.stitchElement = function(element,attributes,options) {
 	return output.join("");
 };
 
+/*
+Render an object and its children to a specified MIME type
+	type: target MIME type
+	node: object to render
+	customTemplates: optionally, an array of custom template functions
+
+Arguments for the custom template functions:
+	output: an array to which output strings should be pushed
+	type: target MIME type
+	node: the node to be examined/rendered
+
+The custom template function should push the string rendering of the node to the output array, and return true, or just return false if it cannot render the node.
+*/
+utils.renderObject = function(output,type,node,customTemplates) {
+	var renderArrayHtml = function(output,tree) {
+			output.push(utils.stitchElement("ul",null,{classNames: ["treeArray"]}));
+			for(var t=0; t<tree.length; t++) {
+				output.push(utils.stitchElement("li",null,{classNames: ["treeArrayMember"]}));
+				renderNodeHtml(output,tree[t]);
+				output.push("</li>");
+			}
+			output.push("</ul>");
+		},
+		renderFieldHtml = function(output,name,value) {
+			output.push(utils.stitchElement("li",null,{classNames: ["treeNodeField"]}));
+			output.push(utils.stitchElement("span",null,{
+				content: utils.htmlEncode(name),
+				classNames: ["treeNodeFieldName"]
+			}));
+			if (value instanceof Array) {
+				renderArrayHtml(output,value);
+			} else if(typeof value === "object") {
+				renderNodeHtml(output,value);
+			} else {
+				output.push(utils.stitchElement("span",null,{
+					content: utils.htmlEncode(value),
+					classNames: ["treeNodeFieldValue"]
+				}));
+			}
+			output.push("</li>")
+		},
+		renderNodeHtml = function(output,node) {
+			if(node instanceof Array) {
+				renderArrayHtml(output,node);
+			} else {
+				output.push(utils.stitchElement("ul",null,{classNames: ["treeNode"]}));
+				var custom = false;
+				for(var t=0; t<customTemplates.length; t++) {
+					if(!custom && customTemplates[t](output,type,node)) {
+						custom = true;
+					}
+				}
+				if(!custom) {
+					for(var f in node) {
+						renderFieldHtml(output,f,node[f]);
+					}
+				}
+				output.push("</ul>");
+			}
+		};
+	if(type === "text/html") {
+		renderNodeHtml(output,node);
+	}
+};
+
 utils.nextTick = function(fn) {
 /*global window: false */
 	if(typeof window !== "undefined") {
