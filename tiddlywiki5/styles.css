@@ -60,7 +60,7 @@ h2 {
     margin-top: 27px;
     margin-bottom: 0px;
 }
-p, ul {
+p {
     margin-top: 0px;
     margin-bottom: 27px;
 }
@@ -93,4 +93,95 @@ a.tw-tiddlylink-resolves {
 
 a.tw-tiddlylink-missing {
     font-style: italic;
+}
+
+.treeArray {
+    padding: 2px 4px 3px;
+    list-style-type: none;
+}
+
+.treeArrayMember {
+    padding: 2px 4px 3px;
+    margin-top: 3px;
+}
+
+.treeNodeType {
+    padding: 3px 5px 3px;
+    background-color: #46A546;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+.treeNodeTypeText {
+    padding: 3px 5px 3px;
+    background-color: #62CFFC;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+.treeNodeTypeMacro {
+    padding: 3px 5px 3px;
+    background-color: #46A546;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+.treeNodeTypeParam {
+    padding: 3px 5px 3px;
+    background-color: #4646a5;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+.treeNodeTypeHtml {
+    padding: 3px 5px 3px;
+    background-color: #F89406;
+    color: #fff;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
+    list-style-type: none;
+}
+
+.treeNodeField {
+    
+}
+
+.treeNodeFieldName {
+    margin-right: 0;
+    padding: 3px 5px 3px;
+    background-color: #dedede;
+    color: #444;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
+}
+
+.treeNodeFieldValue {
+    margin-left: 0;
+    padding: 3px 5px 3px 3px;
+    background-color: #eee;
+    color: #000;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    font-size: 10.5px;
+    font-weight: bold;
 }
