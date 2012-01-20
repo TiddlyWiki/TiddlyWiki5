@@ -106,56 +106,59 @@ a.tw-tiddlylink-missing {
 }
 
 .treeNodeType {
+    text-transform: uppercase;
     padding: 3px 5px 3px;
     background-color: #46A546;
     color: #fff;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: bold;
     list-style-type: none;
 }
 
 .treeNodeTypeText {
+    text-transform: uppercase;
     padding: 3px 5px 3px;
-    background-color: #62CFFC;
+    background-color: #4646a5;
     color: #fff;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: bold;
     list-style-type: none;
 }
 
 .treeNodeTypeMacro {
+    text-transform: uppercase;
     padding: 3px 5px 3px;
+    margin-right: 3px;
     background-color: #46A546;
     color: #fff;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    font-size: 10.5px;
+    border-radius: 3px;
+    font-size: 9.5px;
     font-weight: bold;
     list-style-type: none;
 }
 
 .treeNodeTypeParam {
     padding: 3px 5px 3px;
-    background-color: #4646a5;
+    background-color: #62CFFC;
     color: #fff;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
-    font-size: 10.5px;
+    font-size: 9.5px;
     font-weight: bold;
     list-style-type: none;
 }
 
 .treeNodeTypeHtml {
+    text-transform: uppercase;
     padding: 3px 5px 3px;
     background-color: #F89406;
     color: #fff;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    font-size: 10.5px;
+    border-radius: 3px;
+    font-size: 9.5px;
     font-weight: bold;
     list-style-type: none;
 }
@@ -177,6 +180,7 @@ a.tw-tiddlylink-missing {
 
 .treeNodeFieldValue {
     margin-left: 0;
+    margin-right: 3px;
     padding: 3px 5px 3px 3px;
     background-color: #eee;
     color: #000;

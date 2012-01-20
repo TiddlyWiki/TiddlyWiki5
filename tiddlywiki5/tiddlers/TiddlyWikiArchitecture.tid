@@ -45,8 +45,6 @@ Each WikiStore is connected to another shadow store that is used to provide defa
 
 Clients can register event handlers with the WikiStore object. Event handlers can be registered to be triggered for modifications to any tiddler in the store, or with a filter to only be invoked when a particular tiddler or set of tiddlers changes.
 
-
-
 Whenever a change is made to a tiddler, the wikistore registers a nexttick handler (if it hasn't already done so). The nexttick handler looks back at all the tiddler changes, and dispatches matching event handlers. 
 
 !! Parsing

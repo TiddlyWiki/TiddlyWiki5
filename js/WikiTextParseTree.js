@@ -262,7 +262,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 						classNames: ["treeNodeTypeText"]
 					}));
 					output.push(utils.stitchElement("span",null,{
-						content: utils.htmlEncode(node.value),
+						content: utils.htmlEncode(node.value).replace(/\n/g,"<br>"),
 						classNames: ["treeNodeFieldValue"]
 					}));
 					return true;
@@ -272,12 +272,8 @@ WikiTextParseTree.prototype.toString = function(type) {
 			function(output,type,node) { // Macro nodes
 				if(node.type === "macro") {
 					output.push(utils.stitchElement("span",null,{
-						content: node.type,
-						classNames: ["treeNodeTypeMacro"]
-					}));
-					output.push(utils.stitchElement("span",null,{
 						content: utils.htmlEncode(node.name),
-						classNames: ["treeNodeFieldValue"]
+						classNames: ["treeNodeTypeMacro"]
 					}));
 					for(var f in node.params) {
 						output.push(utils.stitchElement("span",null,{
