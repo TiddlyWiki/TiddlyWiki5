@@ -10,7 +10,7 @@ node tiddlywiki.js <options>
 The command line options are processed sequentially from left to right. Processing pauses during long operations, like loading a [[recipe file|RecipeFiles]] and all the subrecipes and [[tiddlers|TiddlerFiles]] that it references. The following options are available:
 |{{{--recipe <filepath>}}} |Loads a specfied `.recipe` file |
 |{{{--load <filepath>}}} |Load additional tiddlers from TiddlyWiki files ({{{.html}}}), {{{.tiddler}}}, {{{.tid}}}, {{{.json}}} or other files |
-|{{{--savewiki <dirpath>}}} |Saves all the loaded tiddlers as a single file TiddlyWiki called {{{index.html}}} and an RSS feed called {{{index.xml}}} |
+|{{{--savewiki <dirpath>}}} |Saves all the loaded tiddlers as a single file TiddlyWiki called {{{index.html}}} and an RSS feed called {{{index.xml}}} in a new directory of the specified name |
 |{{{--savetiddler <title> <filename> [<type>]}}} |Save an individual tiddler as a specified MIME type, defaults to `text/html` |
 |{{{--savetiddlers <outdir>}}} |Saves all the loaded tiddlers as {{{.tid}}} files in the specified directory |
 |{{{--servewiki <port>}}} |Serve the cooked TiddlyWiki over HTTP at {{{/}}} |
