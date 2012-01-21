@@ -95,97 +95,64 @@ a.tw-tiddlylink-missing {
     font-style: italic;
 }
 
+.label {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 9.5px;
+    margin-right: 5px;
+    padding: 3px 5px 3px;
+    border-radius: 3px;
+    background-color: #cca;
+}
+
+.splitLabel {
+    font-size: 9.5px;
+    margin-right: 5px;
+}
+
+.splitLabelLeft {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 3px 1px 3px 5px;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: #ccc;
+}
+
+.splitLabelRight {
+    padding: 3px 5px 3px 1px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    background-color: #eee;
+}
+
 .treeArray {
-    padding: 2px 4px 3px;
     list-style-type: none;
 }
 
 .treeArrayMember {
-    padding: 2px 4px 3px;
-    margin-top: 3px;
 }
 
-.treeNodeType {
-    text-transform: uppercase;
-    padding: 3px 5px 3px;
-    background-color: #46A546;
-    color: #fff;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    font-size: 9.5px;
-    font-weight: bold;
+.treeNode {
     list-style-type: none;
 }
 
-.treeNodeTypeText {
-    text-transform: uppercase;
-    padding: 3px 5px 3px;
-    background-color: #4646a5;
-    color: #fff;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    font-size: 9.5px;
-    font-weight: bold;
-    list-style-type: none;
-}
-
-.treeNodeTypeMacro {
-    text-transform: uppercase;
-    padding: 3px 5px 3px;
-    margin-right: 3px;
-    background-color: #46A546;
-    color: #fff;
-    border-radius: 3px;
-    font-size: 9.5px;
-    font-weight: bold;
-    list-style-type: none;
-}
-
-.treeNodeTypeParam {
-    padding: 3px 5px 3px;
+.splitLabelLeft[data-tw-treenode-type='text'] {
     background-color: #62CFFC;
     color: #fff;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    font-size: 9.5px;
-    font-weight: bold;
-    list-style-type: none;
 }
 
-.treeNodeTypeHtml {
-    text-transform: uppercase;
-    padding: 3px 5px 3px;
+.label[data-tw-treenode-type='macro'] {
+    background-color: #46A546;
+    color: #fff;
+}
+
+.splitLabelLeft[data-tw-treenode-type='param'] {
+    background-color: #85e585;
+    color: #fff;
+}
+
+.label[data-tw-treenode-type='html'] {
     background-color: #F89406;
     color: #fff;
-    border-radius: 3px;
-    font-size: 9.5px;
-    font-weight: bold;
-    list-style-type: none;
-}
-
-.treeNodeField {
-    
-}
-
-.treeNodeFieldName {
-    margin-right: 0;
-    padding: 3px 5px 3px;
-    background-color: #dedede;
-    color: #444;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    font-size: 10.5px;
-    font-weight: bold;
-}
-
-.treeNodeFieldValue {
-    margin-left: 0;
-    margin-right: 3px;
-    padding: 3px 5px 3px 3px;
-    background-color: #eee;
-    color: #000;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    font-size: 10.5px;
-    font-weight: bold;
 }

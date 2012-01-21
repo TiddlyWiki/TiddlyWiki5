@@ -313,7 +313,7 @@ utils.renderObject = function(output,type,node,customTemplates) {
 			output.push(utils.stitchElement("li",null,{classNames: ["treeNodeField"]}));
 			output.push(utils.stitchElement("span",null,{
 				content: utils.htmlEncode(name),
-				classNames: ["treeNodeFieldName"]
+				classNames: (typeof value === "object") ? ["label"] : ["splitLabel","splitLabelLeft"]
 			}));
 			if (value instanceof Array) {
 				renderArrayHtml(output,value);
@@ -322,7 +322,7 @@ utils.renderObject = function(output,type,node,customTemplates) {
 			} else {
 				output.push(utils.stitchElement("span",null,{
 					content: utils.htmlEncode(value),
-					classNames: ["treeNodeFieldValue"]
+					classNames: ["splitLabelRight"]
 				}));
 			}
 			output.push("</li>")
@@ -331,7 +331,6 @@ utils.renderObject = function(output,type,node,customTemplates) {
 			if(node instanceof Array) {
 				renderArrayHtml(output,node);
 			} else {
-				output.push(utils.stitchElement("ul",null,{classNames: ["treeNode"]}));
 				var custom = false;
 				for(var t=0; t<customTemplates.length; t++) {
 					if(!custom && customTemplates[t](output,type,node)) {
@@ -339,11 +338,12 @@ utils.renderObject = function(output,type,node,customTemplates) {
 					}
 				}
 				if(!custom) {
+					output.push(utils.stitchElement("ul",null,{classNames: ["treeNode"]}));
 					for(var f in node) {
 						renderFieldHtml(output,f,node[f]);
 					}
+					output.push("</ul>");
 				}
-				output.push("</ul>");
 			}
 		};
 	if(type === "text/html") {

@@ -257,28 +257,35 @@ WikiTextParseTree.prototype.toString = function(type) {
 		customTemplates = [
 			function(output,type,node) { // Text nodes
 				if(node.type === "text") {
-					output.push(utils.stitchElement("span",null,{
+					output.push(utils.stitchElement("div",null,
+						{classNames: ["treeNode","splitLabel"]}));
+					output.push(utils.stitchElement("span",{"data-tw-treenode-type": "text"},{
 						content: node.type,
-						classNames: ["treeNodeTypeText"]
+						classNames: ["splitLabelLeft"]
 					}));
 					output.push(utils.stitchElement("span",null,{
 						content: utils.htmlEncode(node.value).replace(/\n/g,"<br>"),
-						classNames: ["treeNodeFieldValue"]
+						classNames: ["splitLabelRight"]
 					}));
+					output.push("</div>");
 					return true;
 				}
 				return false;
 			},
 			function(output,type,node) { // Macro nodes
 				if(node.type === "macro") {
-					output.push(utils.stitchElement("span",null,{
-						content: utils.htmlEncode(node.name),
-						classNames: ["treeNodeTypeMacro"]
+					output.push(utils.stitchElement("span",
+						{"data-tw-treenode-type": "macro"},{
+							content: utils.htmlEncode(node.name),
+							classNames: ["treeNode","label"]
 					}));
 					for(var f in node.params) {
 						output.push(utils.stitchElement("span",null,{
+							classNames: ["splitLabel"]
+						}));
+						output.push(utils.stitchElement("span",{"data-tw-treenode-type": "param"},{
 							content: utils.htmlEncode(f),
-							classNames: ["treeNodeTypeParam"]
+							classNames: ["splitLabelLeft"]
 						}));
 						var v = node.params[f].value;
 						if(node.params[f].type === "string") {
@@ -288,28 +295,34 @@ WikiTextParseTree.prototype.toString = function(type) {
 						}
 						output.push(utils.stitchElement("span",null,{
 							content: utils.htmlEncode(v),
-							classNames: ["treeNodeFieldValue"]
+							classNames: ["splitLabelRight"]
 						}));
+						output.push("</span>");
 					}
 					if(node.children) {
 						utils.renderObject(output,type,node.children,customTemplates);
 					}
+					output.push("</span>");
 					return true;
 				}
 				return false;
 			},
 			function(output,type,node) { // HTML nodes
 				if(htmlNodes.indexOf(node.type) !== -1) {
-					output.push(utils.stitchElement("span",null,{
+					output.push(utils.stitchElement("span",
+						{"data-tw-treenode-type": "html"},{
 						content: node.type,
-						classNames: ["treeNodeTypeHtml"]
+						classNames: ["treeNode","label"]
 					}));
 					for(var f in node.attributes) {
-						output.push(utils.stitchElement("span",null,{
-							content: utils.htmlEncode(f),
-							classNames: ["treeNodeType"]
+						output.push(utils.string("span",null,{
+							classNames: ["treeNode"]
 						}));
 						var v = node.attributes[f];
+						output.push(utils.stitchElement("span",null,{
+							content: utils.htmlEncode(f),
+							classNames: (typeof v === "object") ? ["label"] : ["splitLabel","splitLabelLeft"]
+						}));
 						if(typeof v === "string") {
 							v = utils.stringify(v);
 						} else if(v instanceof Array) {
@@ -320,7 +333,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 						} else {
 							output.push(utils.stitchElement("span",null,{
 								content: utils.htmlEncode(v),
-								classNames: ["treeNodeFieldValue"]
+								classNames: ["splitLabelRight"]
 							}));
 						}
 					}
