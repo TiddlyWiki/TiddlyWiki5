@@ -22,7 +22,7 @@ exports.macro = {
 		switch(info) {
 			case "parsetree":
 				return "Parse tree: " + parseTree.toString(type);
-				break;
+				//break;
 			case "dependencies":
 				if(parseTree.dependencies === null) {
 					return encoder("Dependencies: *");

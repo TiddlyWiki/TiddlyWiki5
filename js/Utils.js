@@ -300,7 +300,8 @@ Arguments for the custom template functions:
 The custom template function should push the string rendering of the node to the output array, and return true, or just return false if it cannot render the node.
 */
 utils.renderObject = function(output,type,node,customTemplates) {
-	var renderArrayHtml = function(output,tree) {
+	var renderNodeHtml,
+		renderArrayHtml = function(output,tree) {
 			output.push(utils.stitchElement("ul",null,{classNames: ["treeArray"]}));
 			for(var t=0; t<tree.length; t++) {
 				output.push(utils.stitchElement("li",null,{classNames: ["treeArrayMember"]}));
@@ -325,8 +326,8 @@ utils.renderObject = function(output,type,node,customTemplates) {
 					classNames: ["splitLabelRight"]
 				}));
 			}
-			output.push("</li>")
-		},
+			output.push("</li>");
+		};
 		renderNodeHtml = function(output,node) {
 			if(node instanceof Array) {
 				renderArrayHtml(output,node);
