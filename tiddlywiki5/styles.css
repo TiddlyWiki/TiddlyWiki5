@@ -113,14 +113,14 @@ a.tw-tiddlylink-missing {
 .splitLabelLeft {
     text-transform: uppercase;
     font-weight: bold;
-    padding: 3px 1px 3px 5px;
+    padding: 3px 2px 3px 5px;
     border-top-left-radius: 3px;
     border-bottom-left-radius: 3px;
     background-color: #ccc;
 }
 
 .splitLabelRight {
-    padding: 3px 5px 3px 1px;
+    padding: 3px 5px 3px 2px;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     background-color: #eee;
@@ -148,7 +148,7 @@ a.tw-tiddlylink-missing {
 }
 
 .splitLabelLeft[data-tw-treenode-type='param'] {
-    background-color: #85e585;
+    background-color: #a546a5;
     color: #fff;
 }
 
