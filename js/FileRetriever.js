@@ -91,7 +91,7 @@ FileRetriever.retrieveFile = function(filepath,contextPath,callback) {
 		requester = httpRequest;
 	} else {
 		// It's a file requested in a file context
-		result.path = path.resolve(path.dirname(contextPath),filepath);
+		result.path = path.resolve(contextPath,filepath);
 		result.extname = path.extname(result.path);
 		result.basename = path.basename(result.path,result.extname);
 		requester = fileRequest;

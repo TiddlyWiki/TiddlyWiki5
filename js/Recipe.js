@@ -70,7 +70,7 @@ var Recipe = function(options,callback) {
 			if(err) {
 				me.callback(err);
 			} else {
-				me.processRecipeFile(task.recipe,data.text,data.path);
+				me.processRecipeFile(task.recipe,data.text,path.dirname(data.path));
 				callback(null);
 			}
 		});
