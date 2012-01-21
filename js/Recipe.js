@@ -6,13 +6,13 @@ Recipe processing is in four parts:
 1) The recipe file is parsed and any subrecipe files loaded recursively into this structure:
 
 	this.recipe = [
-		{marker: <marker>, filepath: <filepath>, contextPath: <contextPath>},
+		{marker: <marker>, filepath: <filepath>, baseDir: <baseDir>},
 		...
-		{marker: <marker>, filepath: <filepath>, contextPath: <contextPath>},
+		{marker: <marker>, filepath: <filepath>, baseDir: <baseDir>},
 		[
-			{marker: <marker>, filepath: <filepath>, contextPath: <contextPath>},
+			{marker: <marker>, filepath: <filepath>, baseDir: <baseDir>},
 			...
-			{marker: <marker>, filepath: <filepath>, contextPath: <contextPath>},
+			{marker: <marker>, filepath: <filepath>, baseDir: <baseDir>},
 		]
 	];
 
@@ -66,18 +66,18 @@ var Recipe = function(options,callback) {
 	this.markers = {};
 	// A task queue for loading recipe files
 	this.recipeQueue = async.queue(function(task,callback) {
-		retrieveFile(task.filepath,task.contextPath,function(err,data) {
+		retrieveFile(task.filepath,task.baseDir,function(err,data) {
 			if(err) {
 				me.callback(err);
 			} else {
-				me.processRecipeFile(task.recipe,data.text,path.dirname(data.path));
+				me.processRecipeFile(task.recipe,data.text,data.path);
 				callback(null);
 			}
 		});
 	},1);
 	// A task queue for loading tiddler files
 	this.tiddlerQueue = async.queue(function(task,callback) {
-		me.readTiddlerFile(task.filepath,task.contextPath,function(err,data) {
+		me.readTiddlerFile(task.filepath,task.baseDir,function(err,data) {
 			if(err) {
 				callback(err);
 			} else {
@@ -113,7 +113,7 @@ var Recipe = function(options,callback) {
 	};
 	// Start the process off by queueing up the loading of the initial recipe
 	this.recipeQueue.push({filepath: this.filepath,
-							contextPath: process.cwd(),
+							baseDir: process.cwd(),
 							recipe: this.recipe});
 };
 
@@ -133,18 +133,18 @@ Recipe.prototype.loadTiddlerFiles = function(recipeLine) {
 			posStar = filename.indexOf("*");
 		if(posStar !== -1) {
 			var fileRegExp = new RegExp("^" + filename.replace(/[\-\[\]{}()+?.,\\\^$|#\s]/g, "\\$&").replace("*",".*") + "$");
-			var files = fs.readdirSync(path.resolve(path.dirname(recipeLine.contextPath),filedir));
+			var files = fs.readdirSync(path.resolve(recipeLine.baseDir,filedir));
 			for(var f=0; f<files.length; f++) {
 				if(fileRegExp.test(files[f])) {
 					me.tiddlerQueue.push({
 						filepath: filedir + "/" + files[f],
-						contextPath: recipeLine.contextPath,
+						baseDir: recipeLine.baseDir,
 						recipeLine: recipeLine
 					});
 				}
 			}
 		} else {
-			me.tiddlerQueue.push({filepath: filepath, contextPath: recipeLine.contextPath, recipeLine: recipeLine});
+			me.tiddlerQueue.push({filepath: filepath, baseDir: recipeLine.baseDir, recipeLine: recipeLine});
 		}
 	}
 };
@@ -199,7 +199,7 @@ Recipe.prototype.sortTiddlersForMarker = function(marker) {
 /*
 Process the contents of a recipe file
 */
-Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
+Recipe.prototype.processRecipeFile = function(recipe,text,recipePath) {
 	var matchLine = function(linetext) {
 			var lineRegExp = /^(#?)(\s*)(#?)([^\s\:]+)\s*:\s*(.+)*\s*$/,
 				match = lineRegExp.exec(linetext);
@@ -223,7 +223,7 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 				var insertionPoint = recipe.push([]) - 1;
 				this.recipeQueue.push({
 					filepath: match.value,
-					contextPath: contextPath,
+					baseDir: path.dirname(recipePath),
 					recipe: recipe[insertionPoint]
 				});
 			} else {
@@ -237,7 +237,7 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 				if(fieldLines.length > 0) {
 					fields = this.store.deserializeTiddlers("application/x-tiddler",fieldLines.join("\n"),{})[0];
 				}
-				recipe.push({marker: match.marker, filepath: match.value, contextPath: contextPath, fields: fields});
+				recipe.push({marker: match.marker, filepath: match.value, baseDir: path.dirname(recipePath), fields: fields});
 			}
 		}
 	}
@@ -245,10 +245,10 @@ Recipe.prototype.processRecipeFile = function(recipe,text,contextPath) {
 
 // Read a tiddler file and callback with an array of hashmaps of tiddler fields. For single
 // tiddler files it also looks for an accompanying .meta file
-Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
+Recipe.prototype.readTiddlerFile = function(filepath,baseDir,callback) {
 	var me = this;
 	// Read the tiddler file
-	retrieveFile(filepath,contextPath,function(err,data) {
+	retrieveFile(filepath,baseDir,function(err,data) {
 		if (err) throw err;
 		// Use the filepath as the default title for the tiddler
 		var fields = {
@@ -258,7 +258,7 @@ Recipe.prototype.readTiddlerFile = function(filepath,contextPath,callback) {
 		// Check for the .meta file
 		if(data.extname !== ".json" && tiddlers.length === 1) {
 			var metafile = filepath + ".meta";
-			retrieveFile(metafile,contextPath,function(err,data) {
+			retrieveFile(metafile,baseDir,function(err,data) {
 				if(err && err.code !== "ENOENT" && err.code !== "404") {
 					callback(err);
 				} else {
