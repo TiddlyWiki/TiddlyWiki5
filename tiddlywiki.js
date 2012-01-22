@@ -230,7 +230,7 @@ var processNextSwitch = function() {
 		}
 		csw.handler(s.args,function (err) {
 			if(err) {
-				throw err;
+				throw "Error while executing option '--" + s.switchName + "' was:\n" + err;
 			}
 			process.nextTick(processNextSwitch);
 		});

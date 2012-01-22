@@ -70,8 +70,7 @@ var Recipe = function(options,callback) {
 			if(err) {
 				me.callback(err);
 			} else {
-				me.processRecipeFile(task.recipe,data.text,data.path);
-				callback(null);
+				callback(me.processRecipeFile(task.recipe,data.text,data.path));
 			}
 		});
 	},1);
@@ -79,20 +78,24 @@ var Recipe = function(options,callback) {
 	this.tiddlerQueue = async.queue(function(task,callback) {
 		me.readTiddlerFile(task.filepath,task.baseDir,function(err,data) {
 			if(err) {
-				callback(err);
+				me.callback(err);
 			} else {
-				if(task.recipeLine.fields) {
-					for(var t=0; t<data.length; t++) {
-						for(var f in task.recipeLine.fields) {
-							data[t][f] = task.recipeLine.fields[f];
+				if(data.length === 0) {
+					callback("Tiddler file '" + task.filepath + "' does not contain any tiddlers");	
+				} else {
+					if(task.recipeLine.fields) {
+						for(var t=0; t<data.length; t++) {
+							for(var f in task.recipeLine.fields) {
+								data[t][f] = task.recipeLine.fields[f];
+							}
 						}
 					}
+					if(!task.recipeLine.tiddlers) {
+						task.recipeLine.tiddlers = [];
+					}
+					Array.prototype.push.apply(task.recipeLine.tiddlers,data);
+					callback(null);
 				}
-				if(!task.recipeLine.tiddlers) {
-					task.recipeLine.tiddlers = [];
-				}
-				Array.prototype.push.apply(task.recipeLine.tiddlers,data);
-				callback(null);
 			}
 		});
 	},1);
@@ -198,6 +201,10 @@ Recipe.prototype.sortTiddlersForMarker = function(marker) {
 
 /*
 Process the contents of a recipe file
+	recipe: a reference to the array in which to store the recipe contents
+	text: the text of the recipe file
+	recipePath: the full pathname used to reach the recipe file
+The return value is `null` if the operation succeeded, or an error string if not
 */
 Recipe.prototype.processRecipeFile = function(recipe,text,recipePath) {
 	var matchLine = function(linetext) {
@@ -217,7 +224,7 @@ Recipe.prototype.processRecipeFile = function(recipe,text,recipePath) {
 			match = matchLine(linetext);
 		if(match && !match.comment) {
 			if(match.indent.length > 0) {
-				throw "Unexpected indentation in recipe file";
+				return "Unexpected indentation in recipe file '" + recipePath + "'";
 			}
 			if(match.marker === "recipe") {
 				var insertionPoint = recipe.push([]) - 1;
@@ -237,19 +244,32 @@ Recipe.prototype.processRecipeFile = function(recipe,text,recipePath) {
 				if(fieldLines.length > 0) {
 					fields = this.store.deserializeTiddlers("application/x-tiddler",fieldLines.join("\n"),{})[0];
 				}
-				recipe.push({marker: match.marker, filepath: match.value, baseDir: path.dirname(recipePath), fields: fields});
+				recipe.push({
+					marker: match.marker,
+					filepath: match.value,
+					baseDir: path.dirname(recipePath),
+					fields: fields});
 			}
 		}
 	}
+	return null;
 };
 
-// Read a tiddler file and callback with an array of hashmaps of tiddler fields. For single
-// tiddler files it also looks for an accompanying .meta file
+/*
+Read a tiddler file and callback with an array of hashmaps of tiddler fields. For single
+tiddler files it also looks for an accompanying .meta file
+	filepath: the filepath to the tiddler file (possibly relative)
+	baseDir: the base directory from which the filepath is taken
+	callback: called on completion as callback(err,data) where data is an array of tiddler fields
+*/
 Recipe.prototype.readTiddlerFile = function(filepath,baseDir,callback) {
 	var me = this;
 	// Read the tiddler file
 	retrieveFile(filepath,baseDir,function(err,data) {
-		if (err) throw err;
+		if (err) {
+			callback(err);
+			return;
+		}
 		// Use the filepath as the default title for the tiddler
 		var fields = {
 			title: data.path
