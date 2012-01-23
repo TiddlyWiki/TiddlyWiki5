@@ -83,7 +83,7 @@ Now, the return value of this function can be cached until a tiddler in the depe
 
 The dependency chain is calculated when a tiddler is parsed. Every tiddler that is directly referenced is accumulated (until the point at which it is concluded that it is simpler to mark the tiddler as being dependent on any other tiddler changing).
 
-Evaluated macro parameters are parsed and can bechecked for safeness, and then included in the compiled code. For example,
+Evaluated macro parameters are parsed and can be checked for safeness, and then included in the compiled code. For example,
 {{{
 Hello <<echo {{2+2}}>>
 }}}

@@ -250,7 +250,6 @@ WikiTextParseTree.prototype.compileSubTreePlain = function(output,tree) {
 };
 
 // Render the parse tree to a debugging string of the specified MIME type
-// fieldOrder is an array of fieldname. The zeroth field is rendered as a special tag node, without a label
 WikiTextParseTree.prototype.toString = function(type) {
 	var output = [],
 		htmlNodes = "a br hr table tr td th h1 h2 h3 h4 h5 h6 ul ol li dl dd dt blockquote pre img strong em u sup sub strike code span div".split(" "),
