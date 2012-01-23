@@ -166,21 +166,9 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,type,node) {
 
 WikiTextParseTree.prototype.compileElementHtml = function(output,element,options) {
 	options = options || {};
-	var tagBits = [element.type];
-	if(element.attributes) {
-		for(var a in element.attributes) {
-			var r = element.attributes[a];
-			if(a === "style") {
-				var s = [];
-				for(var t in r) {
-					s.push(t + ":" + r[t] + ";");
-				}
-				r = s.join("");
-			}
-			tagBits.push(a + "=\"" + utils.htmlEncode(r) + "\"");
-		}
-	}
-	this.pushString(output,"<" + tagBits.join(" ") + (options.selfClosing ? " /" : "") + ">");
+	this.pushString(output,utils.stitchElement(element.type,element.attributes,{
+		selfClosing: options.selfClosing
+	}));
 	if(!options.selfClosing) {
 		if(element.children) {
 			this.compileSubTreeHtml(output,element.children);
