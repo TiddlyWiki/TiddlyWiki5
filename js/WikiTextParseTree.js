@@ -225,7 +225,7 @@ WikiTextParseTree.prototype.compileSubTreePlain = function(output,tree) {
 	for(var t=0; t<tree.length; t++) {
 		switch(tree[t].type) {
 			case "text":
-				this.pushString(output,utils.htmlEncode(tree[t].value));
+				this.pushString(output,tree[t].value);
 				break;
 			case "entity":
 				var c = utils.entityDecode(tree[t].value);
