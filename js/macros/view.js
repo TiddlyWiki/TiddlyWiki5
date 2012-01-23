@@ -18,19 +18,23 @@ exports.macro = {
 		template: {byPos: 2, type: "text", optional: true}
 	},
 	handler: function(type,tiddler,store,params) {
-		var v = tiddler[params.field],
-			encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;};
-		if(v) {
-			switch(params.format) {
-				case "link":
-					return store.renderMacro("link",type,tiddler,{target: v},encoder(v));
-				case "wikified":
-					return store.renderTiddler(type,tiddler.title);
-				case "date":
-					var template = params.template || "DD MMM YYYY";
-					return encoder(utils.formatDateString(v,template));
-				default: // "text"
-					return encoder(v);
+		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;};
+		if(!tiddler) {
+			return "{{** Missing tiddler **}}";
+		} else {
+			var v = tiddler[params.field];
+			if(v !== undefined) {
+				switch(params.format) {
+					case "link":
+						return store.renderMacro("link",type,tiddler,{target: v},encoder(v));
+					case "wikified":
+						return store.renderTiddler(type,tiddler.title);
+					case "date":
+						var template = params.template || "DD MMM YYYY";
+						return encoder(utils.formatDateString(v,template));
+					default: // "text"
+						return encoder(v);
+				}
 			}
 		}
 		return "";
