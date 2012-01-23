@@ -1,13 +1,13 @@
 title: TiddlyWikiArchitecture
 modifier: JeremyRuston
 
-//This is a broad, conceptual overview of how TiddlyWiki works. See TiddlyWikiInternals for implementation details.//
-
 !! Overview
 
-TiddlyWiki is based on the idea of making information more useful by modelling it in the smallest meaningful semantic units. We call these units "tiddlers".  Structure coming from links, tags, and stories (sequences of tiddlers). TiddlyWiki's role is to provide a rich, useful and enjoyable interactive interface for manipulating tiddlers.
 
-Tiddlers use a special wikitext notation that concisely represents text formatting and hypertext features. A cornerstone of wikitext is the ability to combine and embed tiddlers in various ways.
+
+Tiddlers use a special wikitext notation that concisely represents text formatting and hypertext features. 
+
+
 
 <<tiddler [[High Level Architecture.svg]]>>
 

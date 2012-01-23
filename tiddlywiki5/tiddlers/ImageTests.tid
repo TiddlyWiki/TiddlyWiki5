@@ -1,0 +1,7 @@
+title: ImageTests
+
+<<tiddler [[Motovun Jack.jpg]]>>
+<<image [[Motovun Jack.jpg]] text:"A kitten">>
+[img[Motovun Jack.jpg]]
+[img[tooltip|Motovun Jack.jpg]]
+[img[tooltip|Motovun Jack.jpg][http://google.com/]]

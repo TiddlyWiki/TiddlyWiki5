@@ -4,35 +4,35 @@ modifier: JeremyRuston
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on RecipeFiles, TiddlerFiles and TiddlyWikiFiles.
 
 Usage:
-{{{
+`
 node tiddlywiki.js <options>
-}}}
+`
 The command line options are processed sequentially from left to right. Processing pauses during long operations, like loading a [[recipe file|RecipeFiles]] and all the subrecipes and [[tiddlers|TiddlerFiles]] that it references. The following options are available:
-|{{{--recipe <filepath>}}} |Loads a specfied `.recipe` file |
-|{{{--load <filepath>}}} |Load additional tiddlers from 2.x.x TiddlyWiki files ({{{.html}}}), {{{.tiddler}}}, {{{.tid}}}, {{{.json}}} or other files |
-|{{{--savewiki <dirpath>}}} |Saves all the loaded tiddlers as a single file TiddlyWiki called {{{index.html}}} and an RSS feed called {{{index.xml}}} in a new directory of the specified name |
-|{{{--savetiddler <title> <filename> [<type>]}}} |Save an individual tiddler as a specified MIME type, defaults to `text/html` |
-|{{{--savetiddlers <outdir>}}} |Saves all the loaded tiddlers as {{{.tid}}} files in the specified directory |
-|{{{--servewiki <port>}}} |Serve the cooked TiddlyWiki over HTTP at {{{/}}} |
-|{{{--servetiddlers <port>}}} |Serve individual tiddlers over HTTP at {{{/tiddlertitle}}} |
-|{{{--wikitest <dir>}}} |Run wikification tests against the tiddlers in the given directory |
-|{{{--dumpstore}}} |Dump the TiddlyWiki store in JSON format |
-|{{{--dumprecipe}}} |Dump the current recipe in JSON format |
-|{{{--verbose}}} |verbose output, useful for debugging |
+|`--recipe <filepath>` |Loads a specfied `.recipe` file |
+|`--load <filepath>` |Load additional tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files |
+|`--savewiki <dirpath>` |Saves all the loaded tiddlers as a single file TiddlyWiki called `index.html` and an RSS feed called `index.xml` in a new directory of the specified name |
+|`--savetiddler <title> <filename> [<type>]` |Save an individual tiddler as a specified MIME type, defaults to `text/html` |
+|`--savetiddlers <outdir>` |Saves all the loaded tiddlers as `.tid` files in the specified directory |
+|`--servewiki <port>` |Serve the cooked TiddlyWiki over HTTP at `/` |
+|`--servetiddlers <port>` |Serve individual tiddlers over HTTP at `/tiddlertitle` |
+|`--wikitest <dir>` |Run wikification tests against the tiddlers in the given directory |
+|`--dumpstore` |Dump the TiddlyWiki store in JSON format |
+|`--dumprecipe` |Dump the current recipe in JSON format |
+|`--verbose` |verbose output, useful for debugging |
 !! Examples
 This example loads the tiddlers from a TiddlyWiki HTML file and makes them available over HTTP:
-{{{
+`
 node tiddlywiki.js --load mywiki.html --servewiki 127.0.0.1:8000
-}}}
+`
 This example cooks a TiddlyWiki from a recipe:
-{{{
+`
 node tiddlywiki.js --recipe tiddlywiki.com/index.recipe --savewiki tmp/
-}}}
+`
 This example ginsus a TiddlyWiki into its constituent tiddlers:
-{{{
+`
 node tiddlywiki.js --load mywiki.html --savetiddlers tmp/tiddlers
-}}}
+`
 !! Notes
-{{{--servewiki}}} and {{{--servertiddlers}}} are for different purposes and should not be used together. The former is for TiddlyWiki core developers who want to be able to edit the TiddlyWiki source files in a text editor and view the results in the browser by clicking refresh; it is slow because it reloads all the TiddlyWiki JavaScript files each time the page is loaded. The latter is for experimenting with the new wikification engine.
+`--servewiki` and `--servertiddlers` are for different purposes and should not be used together. The former is for TiddlyWiki core developers who want to be able to edit the TiddlyWiki source files in a text editor and view the results in the browser by clicking refresh; it is slow because it reloads all the TiddlyWiki JavaScript files each time the page is loaded. The latter is for experimenting with the new wikification engine.
 
 `--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
