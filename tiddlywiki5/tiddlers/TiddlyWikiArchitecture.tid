@@ -3,26 +3,10 @@ modifier: JeremyRuston
 
 !! Overview
 
+The heart of TiddlyWiki can be seen as an extensible representation transformation engine. Given the text of a tiddler and its associated MIME type, the engine can produce a rendering of the tiddler in a new MIME type.
 
+The most important transformations are from `text/x-tiddlywiki` wikitext into `text/html` or `text/plain` but the engine is used throughout the system for other transformations, such as converting images for display in HTML, sanitising fragments of JavaScript, and processing CSS.
 
-Tiddlers use a special wikitext notation that concisely represents text formatting and hypertext features. 
-
-
-
-<<tiddler [[High Level Architecture.svg]]>>
-
-!! Content Types
-
-TiddlyWiki uses MIME types to indicate how the text of tiddlers should be interpreted. It uses standard MIME types such as {{{text/plain}}} and {{{text/html}}}, as well as these non-standard types for TiddlyWiki-specific formats:
-
-* {{{text/x-tiddlywiki}}}: TiddlyWiki-format wiki text
-* {{{application/x-tiddlywiki}}}: A TiddlyWiki HTML file containing tiddlers
-* {{{application/x-tiddler}}}: A tiddler in TiddlyWeb-style tiddler file format
-* {{{application/x-tiddler-html-div}}}: A tiddler in TiddlyWiki {{{<div>}}} format
-In some situations //parameterised MIME types// are used to allow parameters to be specified for the conversion. For example, a tiddler can be rendered to an image of a particular size:
-{{{
-image/png({width:500})
-}}}
 !! Tiddlers
 
 Tiddlers are a dictionary of name:value pairs called fields.
@@ -31,9 +15,9 @@ The only field that is required is the {{{title}}} field, but useful tiddlers al
 
 Values can be a string, an array of strings, or a JavaScript {{{Date}}} object. Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are dates. All other fields are strings.
 
-The {{{type}}} field identifies the representation of the tiddler text with a raw, unparameterised, MIME type.
+The {{{type}}} field identifies the representation of the tiddler text with a MIME type.
 
-!! WikiStore
+!! ~WikiStore
 
 Groups of uniquely titled tiddlers are contained in WikiStore objects.
 
@@ -41,11 +25,11 @@ The WikiStore also manages the plugin modules used for macros, and operations li
 
 Each WikiStore is connected to another shadow store that is used to provide default content. Under usual circumstances, when an attempt is made to retrieve a tiddler that doesn't exist in the store, the search continues into its shadow store (and so on, if the shadow store itself has a shadow store).
 
-!! WikiStore Events
+!! ~WikiStore Events
 
 Clients can register event handlers with the WikiStore object. Event handlers can be registered to be triggered for modifications to any tiddler in the store, or with a filter to only be invoked when a particular tiddler or set of tiddlers changes.
 
-Whenever a change is made to a tiddler, the wikistore registers a nexttick handler (if it hasn't already done so). The nexttick handler looks back at all the tiddler changes, and dispatches matching event handlers. 
+Whenever a change is made to a tiddler, the wikistore registers a `nexttick` handler (if it hasn't already done so). The `nexttick handler` looks back at all the tiddler changes, and dispatches matching event handlers. 
 
 !! Parsing
 
@@ -56,7 +40,7 @@ TiddlyWiki parses the content of tiddlers to build an internal tree representati
 * Detecting tiddlers that are orphans with no incoming links
 * Detecting tiddlers that are referred to but missing
 
-The parse tree is built when needed, and then cached by the WikiStore until the text changes.
+The parse tree is built when needed, and then cached by the WikiStore until the tiddler changes.
 
 TiddlyWiki5 uses multiple parsers:
 * Wikitext ({{{text/x-tiddlywiki}}})
@@ -64,16 +48,6 @@ TiddlyWiki5 uses multiple parsers:
 * CSS ({{{text/css}}})
 * JSON ({{{application/json}}})
 * Recipe ({{{text/x-tiddlywiki-recipe}}})
-
-The parsers support several useful conversions:
-* Converting wikitext to HTML
-* Converting Less-style CSS to real CSS, using tiddler references for variable names
-* Whitelisting JavaScript for safe execution of untrusted code
-
-In the future the architecture might also support:
-* Converting JavaScript procedural images to PNGs, using a synthetic graphics context mocking the canvas
-* Converting images from one size or format to another
-* Minifying JavaScript
 
 !! Compiling and Rendering
 
@@ -107,14 +81,9 @@ function() {
 
 Now, the return value of this function can be cached until a tiddler in the dependency chain changes. The function itself can be cached until the tiddler itself changes, or a macro that it uses changes.
 
-The dependency chain is calculated when a tiddler is compiled. Every tiddler that is directly referenced is accumulated (until the point at which it is concluded that it is simpler to mark the tiddler as being dependent on any other tiddler changing).
+The dependency chain is calculated when a tiddler is parsed. Every tiddler that is directly referenced is accumulated (until the point at which it is concluded that it is simpler to mark the tiddler as being dependent on any other tiddler changing).
 
-The render function is invoked with `this` pointing to a tiddler object. Parameters to the render function include:
-* ''getTiddler(title)'' - a function to retrieve a specified tiddler
-* ''renderTiddler(title,type,params)'' - a function to render a tiddler to a specified type
-* ''forEachTiddler(sortField,excludeTag,callback)'' - a function to enumerate all tiddlers
-
-Evaluated macro parameters would be parsed and checked for safeness, and then included in the compiled code. For example,
+Evaluated macro parameters are parsed and can bechecked for safeness, and then included in the compiled code. For example,
 {{{
 Hello <<echo {{2+2}}>>
 }}}

@@ -1,0 +1,8 @@
+title: TiddlyWikiInternals
+
+This diagram gives a birds eye view of the JavaScript files making up TiddlyWiki5:
+
+<<tiddler [[High Level Architecture.svg]]>>
+
+See TiddlyWikiArchitecture for an overview of the architecture of the system.
+
