@@ -302,18 +302,20 @@ Recipe.prototype.readTiddlerFile = function(filepath,baseDir,callback) {
 Recipe.prototype.cook = function() {
 	var template = this.markers.template ? this.store.getTiddlerText(this.markers.template[0]) : "",
 		out = [],
-		me = this;
-	template.split("\n").forEach(function(line) {
+		templateLines = template.split("\n");
+	for(var line=0; line<templateLines.length; line++) {
 		var templateRegExp = /^(?:<!--@@(.*)@@-->)|(?:&lt;!--@@(.*)@@--&gt;)$/gi;
-		var match = templateRegExp.exec(line);
+		var match = templateRegExp.exec(templateLines[line]);
 		if(match) {
 			var marker = match[1] === undefined ? match[2] : match[1];
-			me.outputTiddlersForMarker(out,marker);
+			this.outputTiddlersForMarker(out,marker);
 		} else {
-			out.push(line);
+			if(line !== templateLines.length-1) {
+				out.push(templateLines[line],"\n");
+			}
 		}
-	});
-	return out.join("\n");
+	}
+	return out.join("");
 };
 
 // Output all the tiddlers in the recipe with a particular marker
@@ -325,7 +327,16 @@ Recipe.prototype.outputTiddlersForMarker = function(out,marker) {
 		tiddlers = [];
 	}
 	if(outputter) {
+		if((out.length > 1) && (Recipe.compatibilityCheats[marker] === "suppressLeadingNewline")) {
+			var lastLine = out[out.length-1];
+			if(lastLine.substr(-1) === "\n") {
+				out[out.length-1] = lastLine.substr(0,lastLine.length-1);
+			}
+		}
 		outputter.call(this,out,tiddlers);
+		if(Recipe.compatibilityCheats[marker] === "addTrailingNewline") {
+			out.push("\n");
+		}
 	}
 };
 
@@ -333,6 +344,7 @@ Recipe.prototype.outputTiddlersForMarker = function(out,marker) {
 Recipe.tiddlerOutputMapper = {
 	tiddler: "div",
 	js: "javascript",
+	jslib: "javascript",
 	jsdeprecated: "javascript",
 	jquery: "javascript",
 	shadow: "shadow",
@@ -340,21 +352,26 @@ Recipe.tiddlerOutputMapper = {
 	jsmodule: "jsmodule"
 };
 
+Recipe.compatibilityCheats = {
+	"prehead": "addTrailingNewline",
+	"posthead": "addTrailingNewline",
+	"prebody": "addTrailingNewline",
+	"postscript": "addTrailingNewline",
+	"title": "suppressLeadingNewline"
+};
+
 Recipe.tiddlerOutputter = {
 	raw: function(out,tiddlers) {
 		// The default is just to output the raw text of the tiddler, ignoring any metadata
 		for(var t=0; t<tiddlers.length; t++) {
-			// For compatibility with cook.rb, remove one trailing \n from tiddler
-			var text = this.store.getTiddlerText(tiddlers[t]);
-			text = text.charAt(text.length-1) === "\n" ? text.substr(0,text.length-1) : text;
-			out.push(text);
+			out.push(this.store.getTiddlerText(tiddlers[t]));
 		}
 	},
 	div: function(out,tiddlers) {
 		// Ordinary tiddlers are output as a <DIV>
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = this.store.getTiddler(tiddlers[t]);
-			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid));
+			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid),"\n");
 		}
 	},
 	javascript: function(out,tiddlers) {
@@ -362,13 +379,14 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = this.store.getTiddler(tiddlers[t]),
 				text = tid.text;
-			// For compatibility with cook.rb, remove one trailing \n from tiddler
-			text = text.charAt(text.length-1) === "\n" ? text.substr(0,text.length-1) : text;
 			var lines = text.split("\n");
 			for(var line=0; line<lines.length; line++) {
 				var commentRegExp = /^\s*\/\/#/gi;
 				if(!commentRegExp.test(lines[line])) {
-					out.push(lines[line]);	
+					out.push(lines[line]);
+					if(line !== lines.length-1)	{
+						out.push("\n");
+					}
 				}
 			}	
 		}
@@ -377,11 +395,11 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
 				tid = this.store.shadows.getTiddler(title);
-			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid));
+			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid),"\n");
 		}
 	},
 	title: function(out,tiddlers) {
-		out.push(this.store.renderTiddler("text/plain","WindowTitle"));
+		out.push(" ",this.store.renderTiddler("text/plain","WindowTitle")," ");
 	},
 	jsmodule: function(out,tiddlers) {
 		// JavaScript modules are output as a special script tag
