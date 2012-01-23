@@ -97,7 +97,7 @@ var commandLineSwitches = {
 					var fields = {title: args[0]},
 						extname = path.extname(args[0]),
 						type = extname === ".html" ? "application/x-tiddlywiki" : extname;
-					var tiddlers = tiddlerInput.parseTiddlerFile(data,type,fields);
+					var tiddlers = app.store.deserializeTiddlers(type,data,fields);
 					for(var t=0; t<tiddlers.length; t++) {
 						app.store.addTiddler(new Tiddler(tiddlers[t]));
 					}
