@@ -17,19 +17,21 @@ exports.macro = {
 	},
 	handler: function(type,tiddler,store,params) {
 		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;},
-			info = params.info ? params.info : "parsetree",
-			parseTree = store.parseTiddler(tiddler.title);
-		switch(info) {
-			case "parsetree":
-				return "Parse tree: " + parseTree.toString(type);
-				//break;
-			case "dependencies":
-				if(parseTree.dependencies === null) {
-					return encoder("Dependencies: *");
-				} else {
-					return encoder("Dependencies: " + parseTree.dependencies.join(", "));
-				}
-				break;
+			info = params.info ? params.info : "parsetree";
+		if(tiddler) {
+			var parseTree = store.parseTiddler(tiddler.title);
+			switch(info) {
+				case "parsetree":
+					return "Parse tree: " + parseTree.toString(type);
+					//break;
+				case "dependencies":
+					if(parseTree.dependencies === null) {
+						return encoder("Dependencies: *");
+					} else {
+						return encoder("Dependencies: " + parseTree.dependencies.join(", "));
+					}
+					break;
+			}
 		}
 	}
 };
