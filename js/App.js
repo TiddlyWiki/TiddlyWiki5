@@ -93,6 +93,7 @@ var App = function() {
 	this.store.installMacro(require("./macros/info.js").macro);
 	this.store.installMacro(require("./macros/link.js").macro);
 	this.store.installMacro(require("./macros/list.js").macro);
+	this.store.installMacro(require("./macros/slider.js").macro);
 	this.store.installMacro(require("./macros/story.js").macro);
 	this.store.installMacro(require("./macros/tiddler.js").macro);
 	this.store.installMacro(require("./macros/version.js").macro);
