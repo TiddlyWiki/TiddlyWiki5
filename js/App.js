@@ -15,8 +15,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
-	SVGParser = require("./SVGParser.js").SVGParser,
-	BitmapParser = require("./BitmapParser.js").BitmapParser,
+	ImageParser = require("./ImageParser.js").ImageParser,
 	Navigators = require("./Navigators.js").Navigators,
 	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
 
@@ -30,12 +29,12 @@ var App = function() {
 	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({
 		store: this.store
 	}));
-	this.store.registerParser("image/svg+xml",new SVGParser());
-	var bitmapParser = new BitmapParser();
-	this.store.registerParser("image/jpg",bitmapParser);
-	this.store.registerParser("image/jpeg",bitmapParser);
-	this.store.registerParser("image/png",bitmapParser);
-	this.store.registerParser("image/gif",bitmapParser);
+	var imageParser = new ImageParser();
+	this.store.registerParser("image/svg+xml",imageParser);
+	this.store.registerParser("image/jpg",imageParser);
+	this.store.registerParser("image/jpeg",imageParser);
+	this.store.registerParser("image/png",imageParser);
+	this.store.registerParser("image/gif",imageParser);
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);
@@ -110,8 +109,14 @@ var App = function() {
 		navigators.install("a","StoryNavigator");
 		// Open the PageTemplate
 		var div = document.createElement("div");
-		div.innerHTML = this.store.renderTiddler("text/html","PageTemplate");
+		div.innerHTML = this.store.renderMacro("tiddler",
+											"text/html",
+											this.store.getTiddler("PageTemplate"),
+											{
+												target: "PageTemplate"
+											});
 		document.body.appendChild(div);
+		// Set up a timer to change the value of a tiddler
 		var me = this;
 		window.setInterval(function() {
 			me.store.addTiddler(new Tiddler({
@@ -119,6 +124,7 @@ var App = function() {
 				text: "This is a newly created tiddler!"
 			}));
 		},3000);
+		// Register an event handler to handle refreshing the DOM
 		this.store.addEventListener("",function() {
 			me.store.refreshDomNode(div,me.store.getTiddler("PageTemplate"));
 		});
