@@ -13,8 +13,8 @@ exports.macro = {
 	name: "story",
 	types: ["text/html","text/plain"],
 	params: {
-		story: {byName: "default", type: "text", optional: false},
-		template: {byName: true, type: "text", optional: true}
+		story: {byName: "default", type: "tiddler", optional: false},
+		template: {byName: true, type: "tiddler", optional: true}
 	},
 	handler: function(type,tiddler,store,params) {
 		var tiddlers = store.getTiddlerText(params.story).split("\n"),
@@ -23,13 +23,21 @@ exports.macro = {
 		for(t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t].trim();
 			if(title !== "") {
-				output.push("<article>");
 				if(params.template) {
-					output.push(store.renderTiddler(type,params.template,title));
+					output.push(store.renderMacro("tiddler",
+											type,
+											store.getTiddler(title),
+											{
+												target: params.template
+											}));
 				} else {
-					output.push(store.renderTiddler(type,title));
+					output.push(store.renderMacro("tiddler",
+											type,
+											store.getTiddler(title),
+											{
+												target: title
+											}));
 				}
-				output.push("</article>");
 			}
 		}
 		return output.join("\n");
