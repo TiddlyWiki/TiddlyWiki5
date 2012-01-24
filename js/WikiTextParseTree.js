@@ -179,8 +179,8 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html") {
 		pushString(output,utils.stitchElement(wrapperTag,{
-			"data-tw-macro": name,
-			"data-tw-render-step": renderStepIndex
+			"data-tw-macro": name //,
+			//"data-tw-render-step": renderStepIndex
 		}));
 	}
 	output.push({
