@@ -285,7 +285,7 @@ WikiStore.prototype.parseText = function(type,text) {
 		parser = this.parsers["text/x-tiddlywiki"];
 	}
 	if(parser) {
-		return parser.parse(text);
+		return parser.parse(type,text);
 	} else {
 		return null;
 	}
@@ -367,7 +367,13 @@ Executes a macro and returns the result
 WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params,content) {
 	var macro = this.macros[macroName];
 	if(macro) {
-		return macro.handler(targetType,tiddler,this,params,content);
+		var wrapperTag = macro.wrapperTag || "div";
+		return utils.stitchElement(wrapperTag,{
+			"data-tw-macro": macroName,
+			"data-tw-render-tiddler": tiddler.title
+		},{
+			content: macro.handler(targetType,tiddler,this,params,content)
+		});
 	} else {
 		return null;
 	}
