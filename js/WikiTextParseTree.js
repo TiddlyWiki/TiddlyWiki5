@@ -178,10 +178,10 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 	renderStep.handler = eval(this.store.jsParser.createTree(macroCall).render());
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html") {
-		pushString(output,utils.stitchElement(wrapperTag,{
-			"data-tw-macro": name //,
-			//"data-tw-render-step": renderStepIndex
-		}));
+		pushString(output,"<" + wrapperTag +
+			" data-tw-macro='" + name + "' data-tw-render-step='" + renderStepIndex + "' data-tw-render-tiddler='");
+		output.push({type: "PropertyAccess", name: "title", base: {type: "Variable", name: "tiddler"}});
+		pushString(output,"'>");
 	}
 	output.push({
 		type: "FunctionCall",
@@ -319,7 +319,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 						}));
 						var v = node.params[f].value;
 						if(node.params[f].type === "string") {
-							v = utils.stringify(v);
+							v = '"' + utils.stringify(v) + '"';
 						} else if(node.params[f].type === "eval") {
 							v = "{{" + v + "}}";
 						}
@@ -365,7 +365,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 							classNames: (typeof v === "object") ? ["label"] : ["splitLabel","splitLabelLeft"]
 						}));
 						if(typeof v === "string") {
-							v = utils.stringify(v);
+							v = '"' + utils.stringify(v) + '"';
 						} else if(v instanceof Array) {
 							v = v.join("; ");
 						}
