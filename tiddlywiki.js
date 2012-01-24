@@ -154,7 +154,7 @@ var commandLineSwitches = {
 			http.createServer(function(request, response) {
 				response.writeHead(200, {"Content-Type": "text/html"});
 				var store = new WikiStore();
-				var recipe = new Recipe(store,lastRecipeFilepath,function() {
+				var recipe = new Recipe({store: store,filepath: lastRecipeFilepath},function() {
 					response.end(recipe.cook(), "utf8");	
 				});
 			}).listen(port);
