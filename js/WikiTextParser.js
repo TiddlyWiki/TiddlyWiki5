@@ -62,7 +62,7 @@ var WikiTextParser = function(options) {
 
 };
 
-WikiTextParser.prototype.parse = function(text) {
+WikiTextParser.prototype.parse = function(type,text) {
 	this.source = text;
 	this.nextMatch = 0;
 	this.children = [];
