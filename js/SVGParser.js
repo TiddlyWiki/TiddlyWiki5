@@ -9,6 +9,17 @@ Compiles SVG images into JavaScript functions that render them in HTML
 /*jslint node: true */
 "use strict";
 
+var utils = require("./Utils.js");
+
+var SVGRenderer = function(handlerCode) {
+	/*jslint evil: true */
+	this.handler = eval(handlerCode);
+};
+
+SVGRenderer.prototype.render = function(tiddler,store) {
+	return this.handler(tiddler,store,utils);
+};
+
 // The parse tree is degenerate
 var SVGParseTree = function() {
 	this.dependencies = [];
@@ -16,7 +27,7 @@ var SVGParseTree = function() {
 
 SVGParseTree.prototype.compile = function(type) {
 	if(type === "text/html") {
-		return "(function (tiddler,store,utils) {return '<img src=\"data:' + tiddler.type + ',' + encodeURIComponent(tiddler.text) + '\">';})";
+		return new SVGRenderer("(function (tiddler,store,utils) {return '<img src=\"data:' + tiddler.type + ',' + encodeURIComponent(tiddler.text) + '\">';})");
 	} else {
 		return null;
 	}

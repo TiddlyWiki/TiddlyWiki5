@@ -83,6 +83,18 @@ WikiTextParser.prototype.addDependency = function(dependency) {
 	}	
 };
 
+WikiTextParser.prototype.addDependencies = function(dependencies) {
+	if(dependencies === null) {
+		this.dependencies = null;
+	} else if(this.dependencies !== null){
+		for(var t=0; t<dependencies.length; t++) {
+			if(this.dependencies.indexOf(dependencies[t]) === -1) {
+				this.dependencies.push(dependencies[t]);
+			}
+		}
+	}	
+};
+
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
 	if(startPos < endPos) {
 		place.push({type: "text", value: this.source.substring(startPos,endPos)});

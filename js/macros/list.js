@@ -61,11 +61,11 @@ exports.macro = {
 		if(tiddlers.length === 0) {
 			return params.emptyMessage ? encoder(params.emptyMessage) : "";
 		} else {
-			var fn = store.compileText(templateType,templateText,type);
+			var renderer = store.compileText(templateType,templateText,type);
 			pushTag("<ul>");
 			for(t=0; t<tiddlers.length; t++) {
 				pushTag("<li>");
-				output.push(fn(store.getTiddler(tiddlers[t]),store,utils));
+				output.push(renderer.render(store.getTiddler(tiddlers[t]),store));
 				pushTag("</li>");	
 			}
 			pushTag("</ul>");

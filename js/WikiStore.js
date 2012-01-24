@@ -301,30 +301,25 @@ WikiStore.prototype.parseTiddler = function(title) {
 };
 
 /*
-Compiles a block of text of a specified type into a JavaScript function that renders the text in a particular MIME type
+Compiles a block of text of a specified type into a renderer that renders the text in a particular MIME type
 */
 WikiStore.prototype.compileText = function(type,text,targetType) {
-	/*jslint evil: true */
 	var tree = this.parseText(type,text);
-	return eval(tree.compile(targetType));
+	return tree.compile(targetType);
 };
 
 /*
 Compiles a JavaScript function that renders a tiddler in a particular MIME type
 */
 WikiStore.prototype.compileTiddler = function(title,type) {
-	/*jslint evil: true */
 	var tiddler = this.getTiddler(title),
 		renderers = this.getCacheForTiddler(title,"renderers",function() {
 			return {};
 		});
 	if(tiddler) {
 		if(!renderers[type]) {
-			var tree = this.parseTiddler(title),
-				text = tree.compile(type);
-			// Add a source URL to help debugging (see http://blog.getfirebug.com/2009/08/11/give-your-eval-a-name-with-sourceurl/)
-			text += "//@ sourceURL=" + encodeURIComponent(title) + "-" + type;
-			renderers[type] = eval(text);
+			var tree = this.parseTiddler(title);
+			renderers[type] = tree.compile(type);
 		}
 		return renderers[type];
 	} else {
@@ -337,8 +332,8 @@ Render a block of text of a specified type into a particular MIME type
 */
 WikiStore.prototype.renderText = function(type,text,targetType,asTitle) {
 	var tiddler = this.getTiddler(asTitle),
-		fn = this.compileText(type,text,targetType);
-	return fn(tiddler,this,utils);
+		renderer = this.compileText(type,text,targetType);
+	return renderer.render(tiddler,this);
 };
 
 /*
@@ -348,17 +343,17 @@ store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 */
 WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 	var tiddler = this.getTiddler(title),
-		fn = this.compileTiddler(title,targetType),
+		renderer = this.compileTiddler(title,targetType),
 		renditions = this.getCacheForTiddler(title,"renditions",function() {
 			return {};
 		});
 	if(tiddler) {
 		if(asTitle) {
 			var asTiddler = this.getTiddler(asTitle);
-			return fn(asTiddler,this,utils);
+			return renderer.render(asTiddler,this);
 		} else {
 			if(!renditions[targetType]) {
-				renditions[targetType] = fn(tiddler,this,utils);
+				renditions[targetType] = renderer.render(tiddler,this);
 			}
 			return renditions[targetType];
 		}

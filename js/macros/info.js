@@ -25,9 +25,7 @@ exports.macro = {
 					return "Parse tree: " + parseTree.toString(type);
 					//break;
 				case "compiled":
-					return "Compiled as: " + utils.stitchElement("pre",null,{
-						content: encoder(parseTree.compile(type))
-					});
+					return "Compiled as: " + parseTree.compile(type).toString(type);
 					//break;
 				case "dependencies":
 					if(parseTree.dependencies === null) {

@@ -105,24 +105,29 @@ var enclosedTextHelper = function(w) {
 
 var parseMacroCall = function(w,name,paramString) {
 	var macro = w.store.macros[name],
-		params = {};
+		params = {},
+		dependencies = [];
 	if(macro) {
 		if(macro.dependentAll) {
-			w.addDependency(null);
+			dependencies = null;
 		}
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
 			insertParam = function(param,name,arg) {
+				if(param.dependentAll) {
+					dependencies = null;
+				}
 				if(param.type === "tiddler") {
-					w.addDependency(arg.evaluated ? null : arg.string);
+					if(arg.evaluated) {
+						dependencies = null;
+					} else if(dependencies !== null) {
+						dependencies.push(arg.string);
+					}
 				}
 				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
 			};
 		for(var m in macro.params) {
 			var param = macro.params[m],
 				arg;
-			if(param.dependentAll) {
-				w.addDependency(null);
-			}
 			if("byPos" in param && args.byPos[param.byPos]) {
 				arg = args.byPos[param.byPos].v;
 				insertParam(param,m,arg);
@@ -137,7 +142,8 @@ var parseMacroCall = function(w,name,paramString) {
 			}
 		}
 	}
-	return {type: "macro", name: name, params: params};
+	w.addDependencies(dependencies);
+	return {type: "macro", name: name, params: params, dependencies: dependencies};
 };
 
 var rules = [
@@ -467,16 +473,19 @@ var rules = [
 				children: [{
 					type: "text",
 					value: ""
-				}]},
+				}],
+				dependencies: []},
 				text = lookaheadMatch[1];
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
 				var link = lookaheadMatch[3];
 				e.params.target.value = link;
+				e.dependencies.push(link);
 				w.addDependency(link);
 			} else {
 				// Simple bracketted link
 				e.params.target.value = text;
+				e.dependencies.push(text);
 				w.addDependency(text);
 			}
 			e.children[0].value = text;
@@ -511,7 +520,10 @@ var rules = [
 						children: [{
 							type: "text",
 							value: w.source.substring(w.matchStart,w.nextMatch)
-						}]};
+						}],
+						dependencies: [
+							w.matchText
+						]};
 			w.addDependency(w.matchText);
 			w.output.push(link);
 		} else {
@@ -531,7 +543,10 @@ var rules = [
 				children: [{
 					type: "text",
 					value: w.source.substring(w.matchStart,w.nextMatch)
-				}]};
+				}],
+				dependencies: [
+					w.matchText
+				]};
 		w.addDependency(w.matchText);
 		w.output.push(e);
 	}
@@ -562,8 +577,10 @@ var rules = [
 				image.params.text = {type: "string", value: lookaheadMatch[3]};
 			}
 			image.params.src.value = lookaheadMatch[4];
+			image.dependencies = [lookaheadMatch[4]];
 			if(lookaheadMatch[5]) {
 				link.params.target.value = lookaheadMatch[5];
+				link.dependencies = [lookaheadMatch[5]];
 				w.output.push(link);
 			} else {
 				w.output.push(image);

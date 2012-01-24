@@ -28,7 +28,11 @@ var JavaScriptParseTree = function(tree) {
 // Render the entire JavaScript tree object to JavaScript source code
 JavaScriptParseTree.prototype.render = function() {
 	var output = [];
-	this.renderSubTree(output,this.tree);
+	if(this.tree instanceof Array) {
+		this.renderSubTree(output,this.tree);
+	} else {
+		this.renderNode(output,this.tree);	
+	}
 	var r = output.join("");
 	return r;
 };
