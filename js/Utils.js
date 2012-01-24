@@ -227,12 +227,13 @@ utils.stringify = function(s) {
 	*
 	* For portability, we also escape escape all non-ASCII characters.
 	*/
-	return '"' + s
+	return s
 		.replace(/\\/g, '\\\\')            // backslash
-		.replace(/"/g, '\\"')              // closing quote character
+		.replace(/"/g, '\\"')              // double quote character
+		.replace(/'/g, "\\'")              // single quote character
 		.replace(/\r/g, '\\r')             // carriage return
 		.replace(/\n/g, '\\n')             // line feed
-		.replace(/[\x80-\uFFFF]/g, utils.escape) + '"'; // non-ASCII characters
+		.replace(/[\x80-\uFFFF]/g, utils.escape); // non-ASCII characters
 };
 
 // Creates an HTML element string from these arguments:

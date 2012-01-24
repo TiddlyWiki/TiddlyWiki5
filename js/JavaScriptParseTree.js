@@ -52,10 +52,10 @@ JavaScriptParseTree.prototype.renderNode = function(output,node) {
 	var p;
 	switch(node.type) {
 		case "StringLiteral":
-			output.push(utils.stringify(node.value));
+			output.push('"' + utils.stringify(node.value) + '"');
 			break;
 		case "StringLiterals":
-			output.push(utils.stringify(node.value.join("")));
+			output.push('"' + utils.stringify(node.value.join("")) + '"');
 			break;
 		case "FunctionCall":
 			output.push("(");
