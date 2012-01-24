@@ -30,7 +30,7 @@ exports.macro = {
 			return store.renderText(targetTiddler.type,text,type,tiddler.title);
 		} else {
 			// There's no parameterisation, so we can just render the target tiddler directly
-			return store.renderTiddler(type,params.target);
+			return store.renderTiddler(type,params.target,tiddler.title);
 		}
 	}
 };
