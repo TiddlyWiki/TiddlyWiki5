@@ -178,10 +178,10 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 	renderStep.handler = eval(this.store.jsParser.createTree(macroCall).render());
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html") {
-		pushString(output,"<" + wrapperTag +
-			" data-tw-macro='" + name + "' data-tw-render-step='" + renderStepIndex + "' data-tw-render-tiddler='");
-		output.push({type: "PropertyAccess", name: "title", base: {type: "Variable", name: "tiddler"}});
-		pushString(output,"'>");
+		pushString(output,utils.stitchElement(wrapperTag,{
+			"data-tw-macro": name,
+			"data-tw-render-step": renderStepIndex
+		}));
 	}
 	output.push({
 		type: "FunctionCall",
@@ -343,7 +343,6 @@ WikiTextParseTree.prototype.toString = function(type) {
 					if(node.children) {
 						utils.renderObject(output,type,node.children,customTemplates);
 					}
-					output.push("</span>");
 					return true;
 				}
 				return false;
@@ -377,6 +376,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 								classNames: ["splitLabelRight"]
 							}));
 						}
+						output.push("</span>");
 					}
 					if(node.children) {
 						utils.renderObject(output,type,node.children,customTemplates);

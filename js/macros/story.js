@@ -24,19 +24,9 @@ exports.macro = {
 			var title = tiddlers[t].trim();
 			if(title !== "") {
 				if(params.template) {
-					output.push(store.renderMacro("tiddler",
-											type,
-											store.getTiddler(title),
-											{
-												target: params.template
-											}));
+					output.push(store.renderTiddler(type,params.template,title));
 				} else {
-					output.push(store.renderMacro("tiddler",
-											type,
-											store.getTiddler(title),
-											{
-												target: title
-											}));
+					output.push(store.renderTiddler(type,title));
 				}
 			}
 		}

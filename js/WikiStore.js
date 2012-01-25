@@ -85,16 +85,6 @@ If the tiddler is already marked "deleted",
 
 */
 WikiStore.prototype.touchTiddler = function(type,title) {
-	var existingType = this.changedTiddlers[title];
-	if(existingType === undefined && type === "modified") {
-		type = "created";
-	}
-	if(existingType === "modified" && type === "created") {
-		type = "modified";
-	}
-	if(existingType === "deleted" && type === "created") {
-		type = "modified";
-	}
 	this.changedTiddlers[title] = type;
 	this.triggerEvents();
 };
@@ -149,8 +139,10 @@ WikiStore.prototype.tiddlerExists = function(title) {
 };
 
 WikiStore.prototype.addTiddler = function(tiddler) {
+	var status = tiddler.title in this.tiddlers ? "modified" : "created";
+	this.clearCache(tiddler.title);
 	this.tiddlers[tiddler.title] = tiddler;
-	this.touchTiddler("modified",tiddler.title);
+	this.touchTiddler(status,tiddler.title);
 };
 
 WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
@@ -279,6 +271,13 @@ WikiStore.prototype.getCacheForTiddler = function(title,cacheName,initializer) {
 	}
 };
 
+// Clear all caches associated with a particular tiddler
+WikiStore.prototype.clearCache = function(title) {
+	if(title in this.caches) {
+		delete this.caches[title];
+	}
+};
+
 WikiStore.prototype.parseText = function(type,text) {
 	var parser = this.parsers[type];
 	if(!parser) {
@@ -341,8 +340,10 @@ Render a tiddler to a particular MIME type. Optionally render it with a differen
 as the context. This option is used to render a tiddler through a template eg
 store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 */
-WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
-	var tiddler = this.getTiddler(title),
+WikiStore.prototype.renderTiddler = function(targetType,title,asTitle,options) {
+	options = options || {};
+	var stitcher = ((targetType === "text/html") && !options.noWrap) ? utils.stitchElement : function(a,b,c) {return c.content;},
+		tiddler = this.getTiddler(title),
 		renderer = this.compileTiddler(title,targetType),
 		renditions = this.getCacheForTiddler(title,"renditions",function() {
 			return {};
@@ -350,12 +351,21 @@ WikiStore.prototype.renderTiddler = function(targetType,title,asTitle) {
 	if(tiddler) {
 		if(asTitle) {
 			var asTiddler = this.getTiddler(asTitle);
-			return renderer.render(asTiddler,this);
+			return stitcher("div",{
+				"data-tw-render-tiddler": title,
+				"data-tw-render-as": asTitle
+			},{
+				content: renderer.render(asTiddler,this)
+			});
 		} else {
 			if(!renditions[targetType]) {
 				renditions[targetType] = renderer.render(tiddler,this);
 			}
-			return renditions[targetType];
+			return stitcher("div",{
+					"data-tw-render-tiddler": title
+				},{
+					content: renditions[targetType]
+				});
 		}
 	}
 	return null;
@@ -367,48 +377,47 @@ Executes a macro and returns the result
 WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params,content) {
 	var macro = this.macros[macroName];
 	if(macro) {
-		var wrapperTag = macro.wrapperTag || "div";
-		return utils.stitchElement(wrapperTag,{
-			"data-tw-macro": macroName,
-			"data-tw-render-tiddler": tiddler.title
-		},{
-			content: macro.handler(targetType,tiddler,this,params,content)
-		});
+		return macro.handler(targetType,tiddler,this,params,content);
 	} else {
 		return null;
 	}
 };
 
 /*
-Refresh a DOM node so that it reflects the current state of the store
-
-The refresh processing is:
-
-1. If the node is a link, check the link classes correctly reflect the status of the target tiddler. Recursively process any children. Exit
-2. If the node is a macro, and dependencies have changed, re-render the macro into the DOM node. Exit
-3. If the node is a macro and the dependencies haven't changed, recursively process each child node of the macro. Exit
-
-Arguments
-	node - the DOM node to be processed
-	tiddler - the tiddler providing context for the rendering
-
+Refresh a DOM node and it's children so that it reflects the current state of the store
+	node: reference to the DOM node to be refreshed
+	changes: hashmap of {title: "created|modified|deleted"} 
 */
-WikiStore.prototype.refreshDomNode = function(node,tiddler) {
-	// Process macros
-	var macro = node.getAttribute && node.getAttribute("data-tw-macro"),
-		params = node.getAttribute && node.getAttribute("data-tw-params");
-	if(macro && params) {
-	}
-	// Process children
-	if(node.hasChildNodes()) {
-		this.refreshDomChildren(node,tiddler);
-	}
-};
+WikiStore.prototype.refreshDomNode = function(node,changes) {
+	var me = this,
+		refreshChildNodes = function(node) {
+			if(node.hasChildNodes()) {
+				for(var c=0; c<node.childNodes.length; c++) {
+					me.refreshDomNode(node.childNodes[c],changes);
+				}
+			}
+		};
+	// Get all the various attributes we need
+	var renderTiddler = node.getAttribute ? node.getAttribute("data-tw-render-tiddler") : null,
+		renderAs = node.getAttribute ? node.getAttribute("data-tw-render-as") : null,
+		macro = node.getAttribute ? node.getAttribute("data-tw-macro") : null,
+		renderStep = node.getAttribute ? node.getAttribute("data-tw-render-step") : null;
+	// Is this node the rendering of a tiddler?
+	if(renderTiddler !== null) {
+		// Rerender the content of the node if the tiddler being rendered has changed
+		if((renderTiddler in changes) || (renderAs && renderAs in changes)) {
+			node.innerHTML = this.renderTiddler("text/html",renderTiddler,renderAs,{noWrap: true});
+		} else {
+			// If it hasn't changed, just refresh the child nodes
+			refreshChildNodes(node);
+		}
 
-WikiStore.prototype.refreshDomChildren = function(node,tiddler) {
-	var nodes = node.childNodes;
-	for(var c=0; c<nodes.length; c++) {
-		this.refreshDomNode(nodes[c],tiddler);
+	// Is this node a macro
+	} else if(macro !== null) {
+		refreshChildNodes(node);
+	// If it's not a macro or a tiddler rendering, just process any child nodes
+	} else {
+		refreshChildNodes(node);
 	}
 };
 

@@ -109,24 +109,19 @@ var App = function() {
 		navigators.install("a","StoryNavigator");
 		// Open the PageTemplate
 		var div = document.createElement("div");
-		div.innerHTML = this.store.renderMacro("tiddler",
-											"text/html",
-											this.store.getTiddler("PageTemplate"),
-											{
-												target: "PageTemplate"
-											});
+		div.innerHTML = this.store.renderTiddler("text/html","PageTemplate");
 		document.body.appendChild(div);
 		// Set up a timer to change the value of a tiddler
 		var me = this;
 		window.setInterval(function() {
 			me.store.addTiddler(new Tiddler({
-				title: "TiddlyWiki5",
-				text: "This is a newly created tiddler!"
+				title: "HelloThere",
+				text: "This tiddler is growing\n" + me.store.getTiddlerText("HelloThere")
 			}));
 		},3000);
 		// Register an event handler to handle refreshing the DOM
-		this.store.addEventListener("",function() {
-			me.store.refreshDomNode(div,me.store.getTiddler("PageTemplate"));
+		this.store.addEventListener("",function(changes) {
+			me.store.refreshDomNode(div,changes);
 		});
 	}
 };

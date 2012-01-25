@@ -276,11 +276,8 @@ utils.stitchElement = function(element,attributes,options) {
 	if(options.classNames) {
 		output.push(" class='",options.classNames.join(" "),"'");
 	}
-	if(options.selfClosing) {
-		output.push(" /");
-	}
 	output.push(">");
-	if(options.content) {
+	if("content" in options) {
 		output.push(options.content);
 		output.push("</",element,">");
 	}
