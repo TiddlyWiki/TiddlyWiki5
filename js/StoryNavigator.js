@@ -18,7 +18,7 @@ var StoryNavigator = function(navigators) {
 StoryNavigator.prototype.navigateTo = function(title) {
 	var store = this.navigators.store,
 		tiddler = store.getTiddler(title),
-		storyTiddler = store.getTiddler("StoryTiddlers");
+		storyTiddler = store.getTiddler("StoryTiddlers"); // This is a hack, obviously
 	if(tiddler) {
 		store.addTiddler(new Tiddler(storyTiddler,{text: title + "\n" + storyTiddler.text}));
 		$("html,body").animate({
