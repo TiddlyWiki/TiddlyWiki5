@@ -117,6 +117,8 @@ var App = function() {
 				el.nextSibling.style.display = currState === "block" ? "none" : "block";
 				e.preventDefault();
 				return false;
+			} else {
+				return true;
 			}
 		},false);
 		// Open the PageTemplate
