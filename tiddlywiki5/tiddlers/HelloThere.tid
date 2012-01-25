@@ -3,6 +3,7 @@ modifier: JeremyRuston
 
 Welcome to TiddlyWiki5, an interactive wiki written in JavaScript to run in the browser or under node.js. It is a reboot of TiddlyWiki (http://www.tiddlywiki.com/), the now venerable, reusable non-linear personal web notebook first released in 2004.
 
+<<slider name "Motovun Jack.jpg" "TiddlyWiki Kitten" "See the kitten">>
 TiddlyWiki is based on the idea of making information more useful by modelling it in the smallest meaningful semantic units, referred to as "tiddlers".  Structure comes from links, tags, and stories (sequences of tiddlers). Tiddlers use a wikitext notation that concisely represents a wide range of text formatting and hypertext features.
 
 TiddlyWiki has earned an enduring place as a tool that people [[love using|Raves]] for its rich, interactive interface to [[manipulate complex data|TiddlyWikiConcepts]] with structure that doesn't easily fit into conventional tools like spreadsheets or wordprocessors. Because people can use it without needing any complicated server infrastructure, and because it is [[open source|OpenSourceLicense]], it has bought unprecedented freedom to people to keep their precious information under their own control. TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers.

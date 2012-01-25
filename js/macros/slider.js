@@ -20,24 +20,10 @@ exports.macro = {
 	},
 	handler: function(type,tiddler,store,params) {
 		if(type === "text/html") {
-			var sliderHandle = utils.stitchElement("div",params.tooltip ? {
-					title: utils.htmlEncode(params.tooltip)
-				} : null,{
-					content: utils.htmlEncode(params.label),
-					classNames: ["tw-slider-handle"]
-				}),
-				sliderBody = utils.stitchElement("div",{
-					style: {
-						display: "block"
-					}
-				},{
-					content: store.renderTiddler(type,params.targetTiddler),
-					classNames: ["tw-slider-body"]
-				});
-			return utils.stitchElement("div",null,{
-				content: sliderHandle + sliderBody,
-				classNames: ["tw-slider"]
-			});
+			return utils.stitchSlider(type,
+										params.label,
+										params.tooltip,
+										store.renderTiddler(type,params.targetTiddler));
 		} else if(type === "text/plain") {
 			return store.renderTiddler(type,params.target);
 		}

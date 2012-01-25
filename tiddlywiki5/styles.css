@@ -7,6 +7,8 @@ body {
 body {
     font-size: 15px;
     line-height: 22px;
+    max-width: 644px;
+    margin: auto;
 }
 code, pre {
     font-size: 13px;
@@ -40,8 +42,6 @@ pre {
 	word-wrap: break-word;
 }
 article {
-    max-width: 644px;
-    margin: auto;
 }
 .title {
     font-weight: bold;
@@ -155,4 +155,69 @@ a.tw-tiddlylink-missing {
 .label[data-tw-treenode-type='html'] {
     background-color: #F89406;
     color: #fff;
+}
+
+.tw-slider-label {
+    -webkit-box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.046875) 0px 1px 2px 0px;
+    -webkit-transition-delay: 0s;
+    -webkit-transition-duration: 0.1s;
+    -webkit-transition-property: all;
+    -webkit-transition-timing-function: linear;
+    background-color: #E6E6E6;
+    background-image: -webkit-linear-gradient(top, white, white 25%, #E6E6E6);
+    background-repeat: no-repeat;
+    border-bottom-color: #BBB;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-color: #CCC;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-right-color: #CCC;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-top-color: #CCC;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-top-style: solid;
+    border-top-width: 1px;
+    box-shadow: rgba(255, 255, 255, 0.199219) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.046875) 0px 1px 2px 0px;
+    box-sizing: border-box;
+    color: #333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+    height: 28px;
+    letter-spacing: normal;
+    line-height: normal;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    overflow-y: visible;
+    padding-bottom: 6px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-top: 5px;
+    text-align: center;
+    text-indent: 0px;
+    text-shadow: rgba(255, 255, 255, 0.746094) 0px 1px 1px;
+    text-transform: none;
+    vertical-align: baseline;
+    width: 131px;
+    word-spacing: 0px;
+}
+
+.tw-slider-label:hover {
+    background-color: #e6e6e6;
+    background-position: 0 -15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.tw-slider-label:focus {
+  outline: 1px dotted #666;
 }

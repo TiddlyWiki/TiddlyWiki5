@@ -17,15 +17,15 @@ exports.macro = {
 	},
 	handler: function(type,tiddler,store,params) {
 		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;},
-			info = params.info ? params.info : "parsetree";
+			info = params.info || "parsetree";
 		if(tiddler) {
 			var parseTree = store.parseTiddler(tiddler.title);
 			switch(info) {
 				case "parsetree":
-					return "Parse tree: " + parseTree.toString(type);
+					return utils.stitchSlider(type,"Parse tree","The parse tree for this tiddler",parseTree.toString(type));
 					//break;
 				case "compiled":
-					return "Compiled as: " + parseTree.compile(type).toString(type);
+					return utils.stitchSlider(type,"Render functions","The render functions for this tiddler",parseTree.compile(type).toString(type));
 					//break;
 				case "dependencies":
 					if(parseTree.dependencies === null) {

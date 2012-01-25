@@ -355,26 +355,32 @@ WikiTextParseTree.prototype.toString = function(type) {
 						classNames: ["treeNode","label"]
 					}));
 					for(var f in node.attributes) {
-						output.push(utils.string("span",null,{
+						output.push(utils.stitchElement("span",null,{
 							classNames: ["treeNode"]
 						}));
 						var v = node.attributes[f];
-						output.push(utils.stitchElement("span",null,{
-							content: utils.htmlEncode(f),
-							classNames: (typeof v === "object") ? ["label"] : ["splitLabel","splitLabelLeft"]
-						}));
 						if(typeof v === "string") {
 							v = '"' + utils.stringify(v) + '"';
 						} else if(v instanceof Array) {
 							v = v.join("; ");
 						}
 						if(typeof v === "object") {
+							output.push(utils.stitchElement("span",null,{
+								classNames: ["label"],
+								content: utils.htmlEncode(f)
+							}));
 							utils.renderObject(output,type,v);
 						} else {
 							output.push(utils.stitchElement("span",null,{
-								content: utils.htmlEncode(v),
-								classNames: ["splitLabelRight"]
-							}));
+								classNames: ["splitLabel"],
+								content: utils.stitchElement("span",null,{
+									classNames: ["splitLabelLeft"],
+									content: utils.htmlEncode(f)
+								}) + utils.stitchElement("span",null,{
+									classNames: ["splitLabelRight"],
+									content: utils.htmlEncode(v)
+								})
+							}));	
 						}
 						output.push("</span>");
 					}

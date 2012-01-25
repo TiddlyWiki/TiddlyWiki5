@@ -284,6 +284,36 @@ utils.stitchElement = function(element,attributes,options) {
 	return output.join("");
 };
 
+utils.stitchSlider = function(type,label,tooltip,body) {
+	if(type === "text/html") {
+		var labelAttrs = {};
+		if(tooltip) {
+			labelAttrs.alt = tooltip;
+			labelAttrs.title = tooltip;
+		}
+		var labelNode = utils.stitchElement("a",labelAttrs,{
+				content: label,
+				classNames: ["tw-slider-label"]
+			}),
+			bodyNode = utils.stitchElement("div",{
+				style: {
+					display: "none"
+				}
+			},{
+				content: body,
+				classNames: ["tw-slider-body"]
+			});
+		return utils.stitchElement("div",null,{
+			content: labelNode + bodyNode,
+			classNames: ["tw-slider"]
+		});
+	} else if(type === "text/plain") {
+		return label + "\n" + body;
+	} else {
+		return null;
+	}
+};
+
 /*
 Render an object and its children to a specified MIME type
 	type: target MIME type
@@ -310,18 +340,22 @@ utils.renderObject = function(output,type,node,customTemplates) {
 		},
 		renderFieldHtml = function(output,name,value) {
 			output.push(utils.stitchElement("li",null,{classNames: ["treeNodeField"]}));
-			output.push(utils.stitchElement("span",null,{
-				content: utils.htmlEncode(name),
-				classNames: (typeof value === "object") ? ["label"] : ["splitLabel","splitLabelLeft"]
-			}));
-			if (value instanceof Array) {
-				renderArrayHtml(output,value);
-			} else if(typeof value === "object") {
-				renderNodeHtml(output,value);
+			if(typeof value === "object") {
+				output.push(utils.stitchElement("span",null,{
+					classNames: ["label"],
+					content: utils.htmlEncode(name)
+				}));
+				renderNodeHtml(output,value);	
 			} else {
 				output.push(utils.stitchElement("span",null,{
-					content: utils.htmlEncode(value),
-					classNames: ["splitLabelRight"]
+					classNames: ["splitLabel"],
+					content: utils.stitchElement("span",null,{
+						classNames: ["splitLabelLeft"],
+						content: utils.htmlEncode(name)
+					}) + utils.stitchElement("span",null,{
+						classNames: ["splitLabelRight"],
+						content: utils.htmlEncode(value)
+					})
 				}));
 			}
 			output.push("</li>");
