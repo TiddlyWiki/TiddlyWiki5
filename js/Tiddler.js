@@ -29,7 +29,7 @@ var Tiddler = function(/* tiddler,fields */) {
 		arg = arguments[c];
 		src = null;
 		if(arg instanceof Tiddler) {
-			src = arg.fields;
+			src = arg.getFields();
 		} else {
 			src = arg;
 		}

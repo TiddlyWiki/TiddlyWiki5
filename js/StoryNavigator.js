@@ -9,17 +9,20 @@ This browser component manages navigating to new tiddlers in a TiddlyWiki classi
 /*jslint node: true, jquery: true */
 "use strict";
 
+var Tiddler = require("./Tiddler.js").Tiddler;
+
 var StoryNavigator = function(navigators) {
 	this.navigators = navigators;
 };
 
 StoryNavigator.prototype.navigateTo = function(title) {
-	var tiddlerHtml = this.navigators.store.tiddlerExists(title) && this.navigators.store.renderTiddler("text/html","SimpleTemplate",title);
-	if(tiddlerHtml) {
-		var article = $("<article/>").html(tiddlerHtml);
-		article.appendTo("body");
+	var store = this.navigators.store,
+		tiddler = store.getTiddler(title),
+		storyTiddler = store.getTiddler("StoryTiddlers");
+	if(tiddler) {
+		store.addTiddler(new Tiddler(storyTiddler,{text: title + "\n" + storyTiddler.text}));
 		$("html,body").animate({
-			scrollTop: article.offset().top
+			scrollTop: 0
 		}, 400);
 		return false;
 	} else {
