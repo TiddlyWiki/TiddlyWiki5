@@ -72,7 +72,7 @@ a {
     text-decoration: none;
 }
 
-a.linkExternal::before {
+a.tw-tiddlylink-external::before {
     content: "\27a0\00a0";
 }
 
