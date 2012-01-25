@@ -363,6 +363,11 @@ utils.renderObject = function(output,type,node,customTemplates) {
 		renderNodeHtml = function(output,node) {
 			if(node instanceof Array) {
 				renderArrayHtml(output,node);
+			} else if (typeof node === "string") {
+				output.push(utils.stitchElement("span",null,{
+					classNames: ["treeNode","label"],
+					content: utils.htmlEncode(node)
+				}));
 			} else {
 				var custom = false;
 				for(var t=0; t<customTemplates.length; t++) {
