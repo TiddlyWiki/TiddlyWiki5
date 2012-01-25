@@ -115,8 +115,8 @@ var App = function() {
 		var me = this;
 		window.setInterval(function() {
 			me.store.addTiddler(new Tiddler({
-				title: "HelloThere",
-				text: "This tiddler is growing\n" + me.store.getTiddlerText("HelloThere")
+				title: "TiddlyWiki5",
+				text: "This tiddler is new"
 			}));
 		},3000);
 		// Register an event handler to handle refreshing the DOM

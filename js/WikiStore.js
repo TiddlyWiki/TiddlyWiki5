@@ -386,14 +386,16 @@ WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params,c
 /*
 Refresh a DOM node and it's children so that it reflects the current state of the store
 	node: reference to the DOM node to be refreshed
-	changes: hashmap of {title: "created|modified|deleted"} 
+	changes: hashmap of {title: "created|modified|deleted"}
+	renderer: the renderer to use to refresh the node (usually pass null)
+	tiddler: the tiddler to use as the context for executing the renderer
 */
-WikiStore.prototype.refreshDomNode = function(node,changes) {
+WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	var me = this,
-		refreshChildNodes = function(node) {
+		refreshChildNodes = function(node,renderer,tidder) {
 			if(node.hasChildNodes()) {
 				for(var c=0; c<node.childNodes.length; c++) {
-					me.refreshDomNode(node.childNodes[c],changes);
+					me.refreshDomNode(node.childNodes[c],changes,renderer,tiddler);
 				}
 			}
 		};
@@ -409,15 +411,34 @@ WikiStore.prototype.refreshDomNode = function(node,changes) {
 			node.innerHTML = this.renderTiddler("text/html",renderTiddler,renderAs,{noWrap: true});
 		} else {
 			// If it hasn't changed, just refresh the child nodes
-			refreshChildNodes(node);
+			var asTiddler = renderAs !== null ? this.getTiddler(renderAs) : this.getTiddler(renderTiddler); 
+			refreshChildNodes(node,this.compileTiddler(renderTiddler,"text/html"),asTiddler);
 		}
 
 	// Is this node a macro
 	} else if(macro !== null) {
-		refreshChildNodes(node);
+		// Get the render step
+		var r = renderer.renderSteps[renderStep],
+			hasChanged = false;
+		// Refresh if a dependency has changed
+		if(r.dependencies === null) {
+			hasChanged = true;
+		} else {
+			for(var d=0; d<r.dependencies.length; d++) {
+				if(r.dependencies[d] in changes) {
+					hasChanged = true;
+				}
+			}
+		}
+		if(hasChanged) {
+			node.innerHTML = renderer.render(tiddler,this,renderStep);
+		} else {
+			// If no change, just refresh the children
+			refreshChildNodes(node,renderer,tiddler);
+		}
 	// If it's not a macro or a tiddler rendering, just process any child nodes
 	} else {
-		refreshChildNodes(node);
+		refreshChildNodes(node,renderer,tiddler);
 	}
 };
 

@@ -29,10 +29,6 @@ WikiTextRenderer.prototype.render = function(tiddler,store,renderStep) {
 	}
 };
 
-WikiTextRenderer.prototype.refreshDom = function(node,tiddler,store) {
-	
-};
-
 WikiTextRenderer.prototype.toString = function(type) {
 	var output = [],
 		customTemplates = [
