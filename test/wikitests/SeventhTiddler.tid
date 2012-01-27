@@ -5,7 +5,3 @@ title: SeventhTiddler
 <<echo {{tiddler.title}}>>
 
 <<echo {{"window"}}>>
-
-<<tiddler SixthTiddler>>
-
-<<list all>>

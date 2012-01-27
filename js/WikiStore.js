@@ -349,7 +349,7 @@ WikiStore.prototype.renderTiddler = function(targetType,title,asTitle,options) {
 			return {};
 		});
 	if(tiddler) {
-		if(asTitle) {
+		if(asTitle && asTitle !== title) {
 			var asTiddler = this.getTiddler(asTitle);
 			return stitcher("div",{
 				"data-tw-render-tiddler": title,
