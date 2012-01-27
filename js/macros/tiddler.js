@@ -27,7 +27,7 @@ exports.macro = {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			return store.renderText(targetTiddler.type,text,type,tiddler.title);
+			return store.renderText(targetTiddler.type,text,type,params.target);
 		} else {
 			// There's no parameterisation, so we can just render the target tiddler directly
 			return store.renderTiddler(type,params.target);
