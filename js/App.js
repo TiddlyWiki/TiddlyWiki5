@@ -26,13 +26,9 @@ var App = function() {
 	this.isBrowser = typeof window !== "undefined";
 	// Create the main store
 	this.store = new WikiStore();	
-	// Register the wikitext parser and the image parser
-	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({
-		store: this.store
-	}));
-	this.store.registerParser("application/json",new JSONParser({
-		store: this.store
-	}));
+	// Register the parsers
+	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({store: this.store}));
+	this.store.registerParser("application/json",new JSONParser({store: this.store}));
 	var imageParser = new ImageParser();
 	this.store.registerParser("image/svg+xml",imageParser);
 	this.store.registerParser("image/jpg",imageParser);
@@ -84,7 +80,7 @@ var App = function() {
 			this.store.addTiddler(new Tiddler(tiddlers[t]));
 		}
 	}
-	// Set up the JavaScript parser
+	// Set up the JavaScript parser. Currently a hack; the idea is that the parsers would be loaded through a boot recipe
 	if(this.isBrowser) {
 		this.store.jsParser = new JavaScriptParser(this.store.getTiddlerText("javascript.pegjs"));
 	} else {
