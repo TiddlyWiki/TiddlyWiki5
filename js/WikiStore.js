@@ -273,7 +273,7 @@ WikiStore.prototype.getCacheForTiddler = function(title,cacheName,initializer) {
 
 // Clear all caches associated with a particular tiddler
 WikiStore.prototype.clearCache = function(title) {
-	if(title in this.caches) {
+	if(this.caches.hasOwnProperty("title")) {
 		delete this.caches[title];
 	}
 };

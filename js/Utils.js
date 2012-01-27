@@ -23,7 +23,9 @@ utils.deepCopy = function(v) {
 	} else if (typeof v === "object" && v) {
 		r = {};
 		for(t in v) {
-			r[t] = utils.deepCopy(v[t]);
+			if(v.hasOwnPropery(t)) {
+				r[t] = utils.deepCopy(v[t]);
+			}
 		}
 	} else {
 		r = v;
