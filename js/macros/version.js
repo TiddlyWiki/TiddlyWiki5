@@ -14,7 +14,7 @@ exports.macro = {
 	types: ["text/html","text/plain"],
 	params: {
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		return "5.0.0";
 	}
 };

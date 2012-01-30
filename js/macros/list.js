@@ -41,7 +41,7 @@ exports.macro = {
 		template: {byName: true, type: "tiddler", optional: true},
 		emptyMessage: {byName: true, type: "text", optional: true}
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		var templateType = "text/x-tiddlywiki",
 			templateText = "<<view title link>>",
 			template = params.template ? store.getTiddler(params.template) : null,

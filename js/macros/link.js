@@ -16,7 +16,7 @@ exports.macro = {
 	params: {
 		target: {byName: "default", type: "tiddler", optional: false}
 	},
-	handler: function(type,tiddler,store,params,content) {
+	render: function(type,tiddler,store,params,content) {
 		if(type === "text/html") {
 			return utils.stitchElement("a",{
 				href: params.target

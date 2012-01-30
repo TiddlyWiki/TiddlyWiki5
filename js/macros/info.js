@@ -15,7 +15,7 @@ exports.macro = {
 	params: {
 		info: {byName: "default", type: "text", optional: false}
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;},
 			info = params.info || "parsetree";
 		if(tiddler) {

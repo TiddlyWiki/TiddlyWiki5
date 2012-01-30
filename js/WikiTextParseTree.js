@@ -123,7 +123,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 							type: "StringLiteral", 
 							value: name}, 
 						type: "PropertyAccess"}, 
-					name: "handler", 
+					name: "render", 
 					type: "PropertyAccess"},
 				"arguments": [ {
 					type: "StringLiteral", 

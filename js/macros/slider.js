@@ -18,7 +18,7 @@ exports.macro = {
 		label: {byPos: 2, type: "text", optional: false},
 		tooltip: {byPos: 3, type: "text", optional: true}
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		if(type === "text/html") {
 			return utils.stitchSlider(type,
 										params.label,

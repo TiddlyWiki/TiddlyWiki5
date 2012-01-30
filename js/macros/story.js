@@ -16,7 +16,7 @@ exports.macro = {
 		story: {byName: "default", type: "tiddler", optional: false},
 		template: {byName: true, type: "tiddler", optional: true}
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		var tiddlers = store.getTiddlerText(params.story).split("\n"),
 			t,
 			output = [];

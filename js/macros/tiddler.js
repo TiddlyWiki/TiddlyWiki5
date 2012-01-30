@@ -53,7 +53,7 @@ exports.macro = {
 		template: {byName: true, type: "tiddler", optional: true},
 		"with": {byName: true, type: "text", optional: true, dependentAll: true}
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		var renderTitle = params.template,
 			renderAs = params.target;
 		// Slightly bewildering logic to sort out the optional parameters

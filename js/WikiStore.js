@@ -373,13 +373,17 @@ WikiStore.prototype.renderTiddler = function(targetType,title,asTitle,options) {
 	return null;
 };
 
+WikiStore.prototype.installMacro = function(macro) {
+	this.macros[macro.name] = macro;
+};
+
 /*
 Executes a macro and returns the result
 */
 WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params,content) {
 	var macro = this.macros[macroName];
 	if(macro) {
-		return macro.handler(targetType,tiddler,this,params,content);
+		return macro.render(targetType,tiddler,this,params,content);
 	} else {
 		return null;
 	}
@@ -441,10 +445,6 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	} else {
 		refreshChildNodes(node,renderer,tiddler);
 	}
-};
-
-WikiStore.prototype.installMacro = function(macro) {
-	this.macros[macro.name] = macro;
 };
 
 exports.WikiStore = WikiStore;

@@ -17,7 +17,7 @@ exports.macro = {
 		text: {byName: true, type: "text", optional: true},
 		alignment: {byName: true, type: "text", optional: true}
 	},
-	handler: function(type,tiddler,store,params) {
+	render: function(type,tiddler,store,params) {
 		if(type === "text/html") {
 			if(store.tiddlerExists(params.src)) {
 				if(params.text) {
