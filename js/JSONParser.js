@@ -33,7 +33,6 @@ var JSONParseTree = function(tree) {
 };
 
 JSONParseTree.prototype.compile = function(type) {
-console.log("(function (tiddler,store,utils) {var output=[]; utils.renderObject(output,'" + type + "'," + JSON.stringify(this.tree) + ",[]);return output.join('');})");
 	return new JSONRenderer("(function (tiddler,store,utils) {var output=[]; utils.renderObject(output,'" + type + "'," + JSON.stringify(this.tree) + ",[]);return output.join('');})");
 };
 
