@@ -177,7 +177,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 	renderStep.dependencies = node.dependencies;
 	renderStep.handler = eval(this.store.jsParser.createTree(macroCall).render());
 	var wrapperTag = macro.wrapperTag || "div";
-	if(type === "text/html") {
+	if(type === "text/html" && !this.store.disableHtmlWrapperNodes) {
 		pushString(output,utils.stitchElement(wrapperTag,{
 			"data-tw-macro": name,
 			"data-tw-render-step": renderStepIndex
@@ -202,7 +202,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 			value: renderStepIndex	
 		}]
 	});
-	if(type === "text/html") {
+	if(type === "text/html" && !this.store.disableHtmlWrapperNodes) {
 		pushString(output,"</" + wrapperTag + ">");
 	}
 };

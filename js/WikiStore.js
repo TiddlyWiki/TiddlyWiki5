@@ -20,9 +20,11 @@ var Tiddler = require("./Tiddler.js").Tiddler,
 
 Available options are:
 	shadowStore: An existing WikiStore to use for shadow tiddler storage. Pass null to prevent a default shadow store from being created
+	disableHtmlWrapperNodes: If true will suppress the generation of the wrapper nodes used by the refresh and diagnostic machinery
 */
 var WikiStore = function WikiStore(options) {
 	options = options || {};
+	this.disableHtmlWrapperNodes = !!options.disableHtmlWrapperNodes;
 	this.tiddlers = {}; // Hashmap of tiddlers by title
 	this.parsers = {}; // Hashmap of parsers by accepted MIME type
 	this.macros = {}; // Hashmap of macros by macro name
@@ -342,7 +344,7 @@ store.renderTiddler("text/html",templateTitle,tiddlerTitle)
 */
 WikiStore.prototype.renderTiddler = function(targetType,title,asTitle,options) {
 	options = options || {};
-	var stitcher = ((targetType === "text/html") && !options.noWrap) ? utils.stitchElement : function(a,b,c) {return c.content;},
+	var stitcher = ((targetType === "text/html") && !options.noWrap && !this.disableHtmlWrapperNodes) ? utils.stitchElement : function(a,b,c) {return c.content;},
 		tiddler = this.getTiddler(title),
 		renderer = this.compileTiddler(title,targetType),
 		renditions = this.getCacheForTiddler(title,"renditions",function() {
