@@ -37,28 +37,28 @@ WikiTextRenderer.prototype.toString = function(type) {
 					output.push(utils.stitchElement("span",
 						{"data-tw-treenode-type": "renderStep"},{
 						content: node.step.toString(),
-						classNames: ["treeNode","label"]
+						classes: ["treeNode","label"]
 					}));
 					output.push(utils.stitchElement("span",null,
-						{classNames: ["treeNode","splitLabel"]}));
+						{classes: ["treeNode","splitLabel"]}));
 					output.push(utils.stitchElement("span",{"data-tw-treenode-type": "renderStepDependencies"},{
 						content: "dependencies",
-						classNames: ["splitLabelLeft"]
+						classes: ["splitLabelLeft"]
 					}));
 					output.push(utils.stitchElement("span",null,{
 						content: utils.htmlEncode(node.dependencies === null ? "*" : node.dependencies.join(", ")),
-						classNames: ["splitLabelRight"]
+						classes: ["splitLabelRight"]
 					}));
 					output.push("</span>");
 					output.push(utils.stitchElement("span",null,
-						{classNames: ["treeNode","splitLabel"]}));
+						{classes: ["treeNode","splitLabel"]}));
 					output.push(utils.stitchElement("span",{"data-tw-treenode-type": "renderStepHandler"},{
 						content: "handler",
-						classNames: ["splitLabelLeft"]
+						classes: ["splitLabelLeft"]
 					}));
 					output.push(utils.stitchElement("code",null,{
 						content: utils.htmlEncode(node.handler.toString()).replace(/\n/g,"<br>"),
-						classNames: ["splitLabelRight"]
+						classes: ["splitLabelRight"]
 					}));
 					output.push("</span>");
 					return true;

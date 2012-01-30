@@ -22,7 +22,7 @@ exports.macro = {
 				href: params.target
 			},{
 				content: content,
-				classNames: store.adjustClassesForLink([],params.target)
+				classes: store.adjustClassesForLink([],params.target)
 			});
 		} else if (type === "text/plain") {
 			return content;	

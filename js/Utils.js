@@ -246,7 +246,7 @@ utils.stringify = function(s) {
 // are processed to attr="name1:value1;name2:value2;"
 // The options include:
 //		content: a string to include as content in the element (also generates closing tag)
-//		classNames: an array of classnames to apply to the element
+//		classes: an array of classnames to apply to the element
 //		selfClosing: causes the element to be rendered with a trailing /, as in <br />
 //		insertAfterAttributes: a string to insert after the attribute section of the element
 utils.stitchElement = function(element,attributes,options) {
@@ -275,8 +275,8 @@ utils.stitchElement = function(element,attributes,options) {
 	if(options.insertAfterAttributes) {
 		output.push(options.insertAfterAttributes);
 	}
-	if(options.classNames) {
-		output.push(" class='",options.classNames.join(" "),"'");
+	if(options.classes) {
+		output.push(" class='",options.classes.join(" "),"'");
 	}
 	output.push(">");
 	if("content" in options) {
@@ -295,7 +295,7 @@ utils.stitchSlider = function(type,label,tooltip,body) {
 		}
 		var labelNode = utils.stitchElement("a",labelAttrs,{
 				content: label,
-				classNames: ["tw-slider-label"]
+				classes: ["tw-slider-label"]
 			}),
 			bodyNode = utils.stitchElement("div",{
 				style: {
@@ -303,11 +303,11 @@ utils.stitchSlider = function(type,label,tooltip,body) {
 				}
 			},{
 				content: body,
-				classNames: ["tw-slider-body"]
+				classes: ["tw-slider-body"]
 			});
 		return utils.stitchElement("div",null,{
 			content: labelNode + bodyNode,
-			classNames: ["tw-slider"]
+			classes: ["tw-slider"]
 		});
 	} else if(type === "text/plain") {
 		return label + "\n" + body;
@@ -332,30 +332,30 @@ The custom template function should push the string rendering of the node to the
 utils.renderObject = function(output,type,node,customTemplates) {
 	var renderNodeHtml,
 		renderArrayHtml = function(output,tree) {
-			output.push(utils.stitchElement("ul",null,{classNames: ["treeArray"]}));
+			output.push(utils.stitchElement("ul",null,{classes: ["treeArray"]}));
 			for(var t=0; t<tree.length; t++) {
-				output.push(utils.stitchElement("li",null,{classNames: ["treeArrayMember"]}));
+				output.push(utils.stitchElement("li",null,{classes: ["treeArrayMember"]}));
 				renderNodeHtml(output,tree[t]);
 				output.push("</li>");
 			}
 			output.push("</ul>");
 		},
 		renderFieldHtml = function(output,name,value) {
-			output.push(utils.stitchElement("li",null,{classNames: ["treeNodeField"]}));
+			output.push(utils.stitchElement("li",null,{classes: ["treeNodeField"]}));
 			if(typeof value === "object") {
 				output.push(utils.stitchElement("span",null,{
-					classNames: ["label"],
+					classes: ["label"],
 					content: utils.htmlEncode(name)
 				}));
 				renderNodeHtml(output,value);	
 			} else {
 				output.push(utils.stitchElement("span",null,{
-					classNames: ["splitLabel"],
+					classes: ["splitLabel"],
 					content: utils.stitchElement("span",null,{
-						classNames: ["splitLabelLeft"],
+						classes: ["splitLabelLeft"],
 						content: utils.htmlEncode(name)
 					}) + utils.stitchElement("span",null,{
-						classNames: ["splitLabelRight"],
+						classes: ["splitLabelRight"],
 						content: utils.htmlEncode(value)
 					})
 				}));
@@ -367,7 +367,7 @@ utils.renderObject = function(output,type,node,customTemplates) {
 				renderArrayHtml(output,node);
 			} else if (typeof node === "string") {
 				output.push(utils.stitchElement("span",null,{
-					classNames: ["treeNode","label"],
+					classes: ["treeNode","label"],
 					content: utils.htmlEncode(node)
 				}));
 			} else {
@@ -378,7 +378,7 @@ utils.renderObject = function(output,type,node,customTemplates) {
 					}
 				}
 				if(!custom) {
-					output.push(utils.stitchElement("ul",null,{classNames: ["treeNode"]}));
+					output.push(utils.stitchElement("ul",null,{classes: ["treeNode"]}));
 					for(var f in node) {
 						renderFieldHtml(output,f,node[f]);
 					}

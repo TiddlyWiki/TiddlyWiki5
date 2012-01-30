@@ -288,14 +288,14 @@ WikiTextParseTree.prototype.toString = function(type) {
 			function(output,type,node) { // Text nodes
 				if(node.type === "text") {
 					output.push(utils.stitchElement("div",null,
-						{classNames: ["treeNode","splitLabel"]}));
+						{classes: ["treeNode","splitLabel"]}));
 					output.push(utils.stitchElement("span",{"data-tw-treenode-type": "text"},{
 						content: node.type,
-						classNames: ["splitLabelLeft"]
+						classes: ["splitLabelLeft"]
 					}));
 					output.push(utils.stitchElement("span",null,{
 						content: utils.htmlEncode(node.value).replace(/\n/g,"<br>"),
-						classNames: ["splitLabelRight"]
+						classes: ["splitLabelRight"]
 					}));
 					output.push("</div>");
 					return true;
@@ -307,15 +307,15 @@ WikiTextParseTree.prototype.toString = function(type) {
 					output.push(utils.stitchElement("span",
 						{"data-tw-treenode-type": "macro"},{
 							content: utils.htmlEncode(node.name),
-							classNames: ["treeNode","label"]
+							classes: ["treeNode","label"]
 					}));
 					for(var f in node.params) {
 						output.push(utils.stitchElement("span",null,{
-							classNames: ["splitLabel"]
+							classes: ["splitLabel"]
 						}));
 						output.push(utils.stitchElement("span",{"data-tw-treenode-type": "param"},{
 							content: utils.htmlEncode(f),
-							classNames: ["splitLabelLeft"]
+							classes: ["splitLabelLeft"]
 						}));
 						var v = node.params[f].value;
 						if(node.params[f].type === "string") {
@@ -325,19 +325,19 @@ WikiTextParseTree.prototype.toString = function(type) {
 						}
 						output.push(utils.stitchElement("span",null,{
 							content: utils.htmlEncode(v),
-							classNames: ["splitLabelRight"]
+							classes: ["splitLabelRight"]
 						}));
 						output.push("</span>");
 					}
 					output.push(utils.stitchElement("span",null,
-						{classNames: ["treeNode","splitLabel"]}));
+						{classes: ["treeNode","splitLabel"]}));
 					output.push(utils.stitchElement("span",{"data-tw-treenode-type": "renderStepDependencies"},{
 						content: "dependencies",
-						classNames: ["splitLabelLeft"]
+						classes: ["splitLabelLeft"]
 					}));
 					output.push(utils.stitchElement("span",null,{
 						content: utils.htmlEncode(node.dependencies === null ? "*" : node.dependencies.join(", ")),
-						classNames: ["splitLabelRight"]
+						classes: ["splitLabelRight"]
 					}));
 					output.push("</span>");
 					if(node.children) {
@@ -352,11 +352,11 @@ WikiTextParseTree.prototype.toString = function(type) {
 					output.push(utils.stitchElement("span",
 						{"data-tw-treenode-type": "html"},{
 						content: node.type,
-						classNames: ["treeNode","label"]
+						classes: ["treeNode","label"]
 					}));
 					for(var f in node.attributes) {
 						output.push(utils.stitchElement("span",null,{
-							classNames: ["treeNode"]
+							classes: ["treeNode"]
 						}));
 						var v = node.attributes[f];
 						if(typeof v === "string") {
@@ -366,18 +366,18 @@ WikiTextParseTree.prototype.toString = function(type) {
 						}
 						if(typeof v === "object") {
 							output.push(utils.stitchElement("span",null,{
-								classNames: ["label"],
+								classes: ["label"],
 								content: utils.htmlEncode(f)
 							}));
 							utils.renderObject(output,type,v);
 						} else {
 							output.push(utils.stitchElement("span",null,{
-								classNames: ["splitLabel"],
+								classes: ["splitLabel"],
 								content: utils.stitchElement("span",null,{
-									classNames: ["splitLabelLeft"],
+									classes: ["splitLabelLeft"],
 									content: utils.htmlEncode(f)
 								}) + utils.stitchElement("span",null,{
-									classNames: ["splitLabelRight"],
+									classes: ["splitLabelRight"],
 									content: utils.htmlEncode(v)
 								})
 							}));	
