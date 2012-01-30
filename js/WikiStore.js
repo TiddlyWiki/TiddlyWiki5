@@ -414,7 +414,6 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 			var asTiddler = renderAs !== null ? this.getTiddler(renderAs) : this.getTiddler(renderTiddler); 
 			refreshChildNodes(node,this.compileTiddler(renderTiddler,"text/html"),asTiddler);
 		}
-
 	// Is this node a macro
 	} else if(macro !== null) {
 		// Get the render step
