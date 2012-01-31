@@ -103,8 +103,9 @@ JavaScriptParseTree.prototype.renderNode = function(output,node) {
 			output.push("}");
 			break;
 		case "PropertyAssignment":
+			output.push("'");
 			output.push(node.name);
-			output.push(":");
+			output.push("':");
 			this.renderNode(output,node.value);
 			break;
 		case "BinaryExpression":
