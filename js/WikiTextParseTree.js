@@ -66,6 +66,7 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 				]
 			}
 		]);
+	renderStep.type = "main";
 	renderStep.step = renderStepIndex;
 	renderStep.dependencies = [];
 	renderStep.handler = eval(parseTree.render());
@@ -102,80 +103,73 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 		pushString(output,"{{**  Macro '" + name + "' cannot render to MIME type '" + type + "'**}}");
 		return;
 	}
-	// Compose the macro call as a render function
-	var macroCall = {
-		type: "Function",
-		name: null,
-		params: ["tiddler","renderer","store","utils"], // These are the parameters passed to the tiddler function; must match the invocation in WikiStore.renderTiddler()
-		elements: [ {
-			type: "ReturnStatement",
-			value: {
-				type: "FunctionCall",
-				name: {
-					base: {
-						base: {
-							base: {
-								name: "store", 
-								type: "Variable"}, 
-							name: "macros", 
-							type: "PropertyAccess"}, 
-						name: {
-							type: "StringLiteral", 
-							value: name}, 
-						type: "PropertyAccess"}, 
-					name: "render", 
-					type: "PropertyAccess"},
-				"arguments": [ {
-					type: "StringLiteral", 
-					value: type
-				},{
-					type: "Variable",
-					name: "tiddler"
-				},{
-					type: "Variable",
-					name: "store"
-				},{
-					type: "ObjectLiteral",
-					properties: []	
-				}]
-			}}]
-	};
+	renderStep.type = "macro";
+	renderStep.macro = name;
+	renderStep.renderType = type;
+	renderStep.step = renderStepIndex;
+	renderStep.dependencies = node.dependencies;
 	// Slot the parameters into the macro call
+	var properties = [];
 	for(p in params) {
 		if(params[p].type === "string") {
 			n = {type: "StringLiteral", value: params[p].value};
 		} else {
 			n = this.store.jsParser.parse(params[p].value).tree.elements[0];
 		}
-		macroCall.elements[0].value["arguments"][3].properties.push({
+		properties.push({
 			type: "PropertyAssignment",
 			name: p,
 			value: n
 		});
 	}
+	renderStep.params = eval(this.store.jsParser.createTree([
+			{
+				type: "Function",
+				name: null,
+				params: ["tiddler","renderer","store","utils"], // These are the parameters passed to the tiddler function; must match the invocation in WikiStore.renderTiddler()
+				elements: [ {
+					type: "ReturnStatement",
+					value: {
+						type: "ObjectLiteral",
+						properties: properties
+					}
+				} ]
+			}
+		]).render());
 	// Compile any child nodes
+	var subOutput = [];
 	if(node.children) {
-		var subOutput = [];
 		this.compileSubTreeHtml(subOutput,renderer,node.children);
-		macroCall.elements[0].value["arguments"].push({
-			type: "FunctionCall",
-			name: {
-				type: "PropertyAccess",
-				base: {
-					type: "ArrayLiteral",
-					elements: subOutput
-				},
-				name: "join"
-			},
-			"arguments": [ {
-				type: "StringLiteral",
-				value: ""
-			}]
-		});
 	}
-	renderStep.step = renderStepIndex;
-	renderStep.dependencies = node.dependencies;
-	renderStep.handler = eval(this.store.jsParser.createTree(macroCall).render());
+	renderStep.content = eval(this.store.jsParser.createTree([
+		{
+			type: "Function",
+			name: null,
+			params: ["tiddler","renderer","store","utils"], // These are the parameters passed to the tiddler function; must match the invocation in WikiStore.renderTiddler()
+			elements: [
+				{
+				type: "ReturnStatement",
+				value: {
+					type: "FunctionCall",
+					name: {
+						type: "PropertyAccess",
+						base: {
+							type: "ArrayLiteral",
+							elements: subOutput
+						},
+						name: "join"
+					},
+					"arguments": [ {
+						type: "StringLiteral",
+						value: ""
+						}
+					]
+					}
+				}
+			]
+		}
+	]).render());
+	// Add the wrapper node
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html" && !this.store.disableHtmlWrapperNodes) {
 		pushString(output,utils.stitchElement(wrapperTag,{
@@ -183,6 +177,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 			"data-tw-render-step": renderStepIndex
 		}));
 	}
+	// Output the macro call
 	output.push({
 		type: "FunctionCall",
 		name: {
