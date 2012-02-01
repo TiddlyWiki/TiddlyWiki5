@@ -24,7 +24,6 @@ var parseStory = function(storyText) {
 
 // Search the children of a node looking for the required tiddler rendering
 var searchTiddlerNode = function(node,renderTiddler,renderTemplate) {
-	var renderAs;
 	while(node !== null) {
 		if(node.getAttribute && node.getAttribute("data-tw-render-tiddler") === renderTiddler) {
 			if(!renderTemplate || (renderTemplate && node.getAttribute("data-tw-render-template") == renderTemplate)) {
