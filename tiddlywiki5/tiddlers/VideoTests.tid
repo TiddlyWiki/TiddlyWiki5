@@ -1,0 +1,7 @@
+title: VideoTests
+
+Here is a collection of embedded videos. Try opening and closing tiddlers while the videos are playing; they should not be affected.
+
+<<video src:32001208 type:vimeo>>
+<<video src:wvWHnK2FiCk type:youtube>>
+<<video src:santa_claus_conquers_the_martians_ipod type:archiveorg>>
