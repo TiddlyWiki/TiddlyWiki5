@@ -96,6 +96,7 @@ var App = function() {
 	this.store.installMacro(require("./macros/story.js").macro);
 	this.store.installMacro(require("./macros/tiddler.js").macro);
 	this.store.installMacro(require("./macros/version.js").macro);
+	this.store.installMacro(require("./macros/video.js").macro);
 	this.store.installMacro(require("./macros/view.js").macro);
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
