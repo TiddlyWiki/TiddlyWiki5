@@ -54,33 +54,27 @@ exports.macro = {
 		"with": {byName: true, type: "text", optional: true, dependentAll: true}
 	},
 	render: function(type,tiddler,store,params) {
-		var renderTitle = params.template,
-			renderAs = params.target;
-		// Slightly bewildering logic to sort out the optional parameters
-		if(renderAs === undefined) {
-			if(renderTitle === undefined) {
-				return "";
-			} else {
-				renderAs = tiddler.title;
-			}
-		} else {
-			if(renderTitle === undefined) {
-				renderTitle = renderAs;
-			}
+		var renderTitle = params.target,
+			renderTemplate = params.template;
+		if(typeof renderTitle !== "string") {
+			renderTitle = tiddler.title;
+		}
+		if(typeof renderTemplate !== "string") {
+			renderTemplate = renderTitle;
 		}
 		if(params["with"]) {
 			// Parameterised transclusion
-			var targetTiddler = store.getTiddler(renderTitle),
+			var targetTiddler = store.getTiddler(renderTemplate),
 				text = targetTiddler.text;
 			var withTokens = [params["with"]];
 			for(var t=0; t<withTokens.length; t++) {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			return store.renderText(targetTiddler.type,text,type,renderAs);
+			return store.renderText(targetTiddler.type,text,type,renderTitle);
 		} else {
 			// There's no parameterisation, so we can just render the target tiddler directly
-			return store.renderTiddler(type,renderTitle,renderAs);
+			return store.renderTiddler(type,renderTitle,renderTemplate);
 		}
 	}
 };

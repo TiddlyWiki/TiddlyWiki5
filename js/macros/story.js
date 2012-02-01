@@ -25,13 +25,9 @@ var parseStory = function(storyText) {
 // Search the children of a node looking for the required tiddler rendering
 var searchTiddlerNode = function(node,renderTiddler,renderTemplate) {
 	var renderAs;
-	if(renderTemplate) {
-		renderAs = renderTiddler;
-		renderTiddler = renderTemplate;
-	}
 	while(node !== null) {
 		if(node.getAttribute && node.getAttribute("data-tw-render-tiddler") === renderTiddler) {
-			if(!renderAs || (renderAs && node.getAttribute("data-tw-render-as") == renderAs)) {
+			if(!renderTemplate || (renderTemplate && node.getAttribute("data-tw-render-template") == renderTemplate)) {
 				return node;
 			}
 		}
@@ -52,7 +48,7 @@ exports.macro = {
 			output = [];
 		for(var t=0; t<tiddlers.length; t++) {
 			if(params.template) {
-				output.push(store.renderTiddler(type,params.template,tiddlers[t]));
+				output.push(store.renderTiddler(type,tiddlers[t],params.template));
 			} else {
 				output.push(store.renderTiddler(type,tiddlers[t]));
 			}
@@ -71,9 +67,7 @@ exports.macro = {
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
 				var tmpNode = document.createElement("div");
-				tmpNode.innerHTML = params.template ?
-						store.renderTiddler(type,params.template,targetTiddlers[t]) :
-						store.renderTiddler(type,targetTiddlers[t]);
+				tmpNode.innerHTML = store.renderTiddler(type,targetTiddlers[t],params.template);
 				tiddlerNode = tmpNode.firstChild;
 				node.insertBefore(tiddlerNode,currNode);
 			} else {

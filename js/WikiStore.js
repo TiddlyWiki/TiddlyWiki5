@@ -275,7 +275,7 @@ WikiStore.prototype.getCacheForTiddler = function(title,cacheName,initializer) {
 
 // Clear all caches associated with a particular tiddler
 WikiStore.prototype.clearCache = function(title) {
-	if(this.caches.hasOwnProperty("title")) {
+	if(this.caches.hasOwnProperty(title)) {
 		delete this.caches[title];
 	}
 };
@@ -338,26 +338,35 @@ WikiStore.prototype.renderText = function(type,text,targetType,asTitle) {
 };
 
 /*
-Render a tiddler to a particular MIME type. Optionally render it with a different tiddler
-as the context. This option is used to render a tiddler through a template eg
-store.renderTiddler("text/html",templateTitle,tiddlerTitle)
+Render a tiddler to a particular MIME type
+	targetType: target MIME type
+	title: title of the tiddler to render
+	template: optional title of the tiddler to use as a template
+	options: see below
+
+Options include:
+	noWrap: Suppress the outer refresh wrapper nodes
+
 */
-WikiStore.prototype.renderTiddler = function(targetType,title,asTitle,options) {
+WikiStore.prototype.renderTiddler = function(targetType,title,templateTitle,options) {
 	options = options || {};
+	if(typeof templateTitle !== "string") {
+		templateTitle = title;
+	}
 	var stitcher = ((targetType === "text/html") && !options.noWrap && !this.disableHtmlWrapperNodes) ? utils.stitchElement : function(a,b,c) {return c.content;},
 		tiddler = this.getTiddler(title),
-		renderer = this.compileTiddler(title,targetType),
-		renditions = this.getCacheForTiddler(title,"renditions",function() {
+		renderer = this.compileTiddler(templateTitle,targetType),
+		renditions = this.getCacheForTiddler(templateTitle,"renditions",function() {
 			return {};
 		});
 	if(tiddler) {
-		if(asTitle && asTitle !== title) {
-			var asTiddler = this.getTiddler(asTitle);
+		if(title !== templateTitle) {
+			var template = this.getTiddler(templateTitle);
 			return stitcher("div",{
 				"data-tw-render-tiddler": title,
-				"data-tw-render-as": asTitle
+				"data-tw-render-template": templateTitle
 			},{
-				content: renderer.render(asTiddler,this)
+				content: renderer.render(tiddler,this)
 			});
 		} else {
 			if(!renditions[targetType]) {
@@ -421,18 +430,20 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 		};
 	// Get all the various attributes we need
 	var renderTiddler = node.getAttribute ? node.getAttribute("data-tw-render-tiddler") : null,
-		renderAs = node.getAttribute ? node.getAttribute("data-tw-render-as") : null,
+		renderTemplate = node.getAttribute ? node.getAttribute("data-tw-render-template") : null,
 		macro = node.getAttribute ? node.getAttribute("data-tw-macro") : null,
 		renderStep = node.getAttribute ? node.getAttribute("data-tw-render-step") : null;
 	// Is this node the rendering of a tiddler?
 	if(renderTiddler !== null) {
 		// Rerender the content of the node if the tiddler being rendered has changed
-		if((renderTiddler in changes) || (renderAs && renderAs in changes)) {
-			node.innerHTML = this.renderTiddler("text/html",renderTiddler,renderAs,{noWrap: true});
+		if(changes.hasOwnProperty(renderTiddler) || (renderTemplate && changes.hasOwnProperty(renderTemplate))) {
+			node.innerHTML = this.renderTiddler("text/html",renderTiddler,renderTemplate,{noWrap: true});
 		} else {
 			// If it hasn't changed, just refresh the child nodes
-			var asTiddler = renderAs !== null ? this.getTiddler(renderAs) : this.getTiddler(renderTiddler); 
-			refreshChildNodes(node,this.compileTiddler(renderTiddler,"text/html"),asTiddler);
+			if(typeof renderTemplate !== "string") {
+				renderTemplate = renderTiddler;
+			}
+			refreshChildNodes(node,this.compileTiddler(renderTemplate,"text/html"),this.getTiddler(renderTiddler));
 		}
 	// Is this node a macro
 	} else if(macro !== null) {
