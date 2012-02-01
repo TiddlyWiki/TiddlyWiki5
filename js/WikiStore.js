@@ -390,6 +390,20 @@ WikiStore.prototype.renderMacro = function(macroName,targetType,tiddler,params,c
 };
 
 /*
+Re-renders a macro into a node
+*/
+WikiStore.prototype.rerenderMacro = function(node,changes,macroName,targetType,tiddler,params,content) {
+	var macro = this.macros[macroName];
+	if(macro) {
+		if(macro.rerender) {
+			macro.rerender(node,changes,targetType,tiddler,this,params,content);
+		} else {
+			node.innerHTML = macro.render(targetType,tiddler,this,params,content);
+		}
+	}
+};
+
+/*
 Refresh a DOM node and it's children so that it reflects the current state of the store
 	node: reference to the DOM node to be refreshed
 	changes: hashmap of {title: "created|modified|deleted"}
@@ -436,7 +450,7 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 			}
 		}
 		if(hasChanged) {
-			node.innerHTML = renderer.render(tiddler,this,renderStep);
+			renderer.rerender(node,changes,tiddler,this,renderStep);
 		} else {
 			// If no change, just refresh the children
 			refreshChildNodes(node,renderer,tiddler);

@@ -39,6 +39,25 @@ WikiTextRenderer.prototype.render = function(tiddler,store,renderStep) {
 	}
 };
 
+WikiTextRenderer.prototype.rerender = function(node,changes,tiddler,store,renderStep) {
+	renderStep = renderStep || 0;
+	var step = this.renderSteps[renderStep];
+	if(renderStep < this.renderSteps.length) {
+		switch(step.type) {
+			case "main":
+				node.innerHTML = step.handler(tiddler,this,store,utils);
+				break;
+			case "macro":
+				store.rerenderMacro(node,changes,step.macro,
+								step.renderType,
+								tiddler,
+								step.params(tiddler,this,store,utils),
+								step.content(tiddler,this,store,utils));
+				break;
+		}
+	}
+};
+
 WikiTextRenderer.prototype.toString = function(type) {
 	var output = [],
 		stitchSplitLabel = function(name,value) {
