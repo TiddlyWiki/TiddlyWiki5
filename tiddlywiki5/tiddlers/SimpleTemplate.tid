@@ -8,4 +8,5 @@ modifier: JeremyRuston
 {{body{
 <<view text wikified>>}}}
 <<info parsetree>>
+<<info dependencies>>
 <<info compiled>>
