@@ -7,7 +7,8 @@ title: js/macros/story.js
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var Tiddler = require("../Tiddler.js").Tiddler,
+	utils = require("../Utils.js");
 
 // Parse the text of a story tiddler into an array of tiddler titles
 var parseStory = function(storyText) {
@@ -87,6 +88,15 @@ exports.macro = {
 			node.removeChild(currNode);
 			currNode = nextNode;
 		}
+	},
+	navigateTo: function(args,node,tiddler,store,params) {
+		/*jslint jquery: true */
+		var storyTiddler = store.getTiddler(params.story);
+		store.addTiddler(new Tiddler(storyTiddler,{text: args.target + "\n" + storyTiddler.text}));
+		$("html,body").animate({
+			scrollTop: 0
+		}, 400);
+		return true;
 	}
 };
 

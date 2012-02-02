@@ -28,14 +28,14 @@ Navigators.prototype.registerNavigator = function(name,nav) {
 
 Navigators.prototype.install = function(selector,navname) {
 	var nav = this.navigators[navname];
-	this.document.addEventListener("click",function(e) {
-		var el = e.target,
+	this.document.addEventListener("click",function(event) {
+		var el = event.target,
 			matchesSelector = el.matchesSelector || el.mozMatchesSelector ||
 				el.webkitMatchesSelector || el.oMatchesSelector || el.msMatchesSelector;
 		if(matchesSelector && matchesSelector.call(el,selector)) {
-			var r = nav.navigateTo(el.getAttribute("href"));
+			var r = nav.navigateTo(el.getAttribute("href"),event);
 			if(!r) {
-				e.preventDefault();
+				event.preventDefault();
 			} else {
 				el.setAttribute("target","_blank");
 			}

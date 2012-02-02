@@ -15,15 +15,14 @@ var StoryNavigator = function(navigators) {
 	this.navigators = navigators;
 };
 
-StoryNavigator.prototype.navigateTo = function(title) {
+StoryNavigator.prototype.navigateTo = function(title,event) {
 	var store = this.navigators.store,
-		tiddler = store.getTiddler(title),
-		storyTiddler = store.getTiddler("StoryTiddlers"); // This is a hack, obviously
+		tiddler = store.getTiddler(title);
 	if(tiddler) {
-		store.addTiddler(new Tiddler(storyTiddler,{text: title + "\n" + storyTiddler.text}));
-		$("html,body").animate({
-			scrollTop: 0
-		}, 400);
+		store.invokeMacroMethod(event.target,"navigateTo",{
+			event: event,
+			target: title
+		});
 		return false;
 	} else {
 		return true;		
