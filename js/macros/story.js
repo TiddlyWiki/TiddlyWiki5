@@ -67,7 +67,7 @@ exports.macro = {
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
 				var tmpNode = document.createElement("div");
-				tmpNode.innerHTML = store.renderTiddler(type,targetTiddlers[t],params.template);
+				store.renderTiddlerInNode(tmpNode,targetTiddlers[t],params.template);
 				tiddlerNode = tmpNode.firstChild;
 				node.insertBefore(tiddlerNode,currNode);
 			} else {

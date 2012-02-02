@@ -382,6 +382,48 @@ WikiStore.prototype.renderTiddler = function(targetType,title,templateTitle,opti
 	return null;
 };
 
+/*
+Renders a tiddler and inserts the HTML into a DOM node, and then attaches the event handlers needed by macros
+*/
+WikiStore.prototype.renderTiddlerInNode = function(node,title,templateTitle,options) {
+	node.innerHTML = this.renderTiddler("text/html",title,templateTitle,options);
+	this.attachEventHandlers(node,title,templateTitle);
+};
+
+/*
+Recursively attach macro event handlers for a node and its children
+*/
+WikiStore.prototype.attachEventHandlers = function(node,renderTiddler,renderTemplate) {
+	var me = this,
+		dispatchMacroEvent = function(event) {
+			var renderer = me.compileTiddler(renderTemplate ? renderTemplate : renderTiddler,"text/html"),
+				macroName = node.getAttribute("data-tw-macro"),
+				macro = me.macros[macroName],
+				step = node.getAttribute("data-tw-render-step");
+			macro.events[event.type](event,node,renderTiddler,me,renderer.renderSteps[step].params(renderTiddler,renderer,me,utils));
+		};
+	if(node.getAttribute) {
+		var macroName = node.getAttribute("data-tw-macro");
+		if(typeof macroName === "string") {
+			var macro = this.macros[macroName];
+			if(macro.events) {
+				for(var e in macro.events) {
+					node.addEventListener(e,dispatchMacroEvent,false);
+				}
+			}
+		}
+		if(node.hasAttribute("data-tw-render-tiddler")) {
+			renderTiddler = node.getAttribute("data-tw-render-tiddler");
+			renderTemplate = node.getAttribute("data-tw-render-template");
+		}
+	}
+	if(node.hasChildNodes) {
+		for(var t=0; t<node.childNodes.length; t++) {
+			this.attachEventHandlers(node.childNodes[t],renderTiddler,renderTemplate);
+		}
+	}
+};
+
 WikiStore.prototype.installMacro = function(macro) {
 	this.macros[macro.name] = macro;
 };
@@ -437,7 +479,7 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	if(renderTiddler !== null) {
 		// Rerender the content of the node if the tiddler being rendered has changed
 		if(changes.hasOwnProperty(renderTiddler) || (renderTemplate && changes.hasOwnProperty(renderTemplate))) {
-			node.innerHTML = this.renderTiddler("text/html",renderTiddler,renderTemplate,{noWrap: true});
+			this.renderTiddlerInNode(node,renderTiddler,renderTemplate,{noWrap: true});
 		} else {
 			// If it hasn't changed, just refresh the child nodes
 			if(typeof renderTemplate !== "string") {

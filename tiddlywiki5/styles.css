@@ -95,6 +95,10 @@ a.tw-tiddlylink-missing {
     font-style: italic;
 }
 
+a.tw-slider-label::after {
+    content: "\00a0\27a4";
+}
+
 .label {
     text-transform: uppercase;
     font-weight: bold;
@@ -207,7 +211,6 @@ a.tw-tiddlylink-missing {
     text-shadow: rgba(255, 255, 255, 0.746094) 0px 1px 1px;
     text-transform: none;
     vertical-align: baseline;
-    width: 131px;
     word-spacing: 0px;
 }
 

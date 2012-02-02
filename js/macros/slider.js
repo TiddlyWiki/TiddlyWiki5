@@ -18,6 +18,14 @@ exports.macro = {
 		label: {byPos: 2, type: "text", optional: false},
 		tooltip: {byPos: 3, type: "text", optional: true}
 	},
+	events: {
+		click: function(event,node,tiddler,store,params) {
+			var el = node.firstChild.firstChild.nextSibling;
+			el.style.display = el.style.display === "block" ? "none" : "block";
+			event.preventDefault();
+			return false;
+		}
+	},
 	render: function(type,tiddler,store,params) {
 		if(type === "text/html") {
 			return utils.stitchSlider(type,

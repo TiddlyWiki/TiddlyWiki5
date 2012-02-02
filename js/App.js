@@ -108,23 +108,9 @@ var App = function() {
 		navigators.registerNavigator("StoryNavigator",new StoryNavigator(navigators));
 		// Use the story navigator for all links
 		navigators.install("a","StoryNavigator");
-		// Install an event handler for sliders
-		document.addEventListener("click",function(e) {
-			var el = e.target,
-				matchesSelector = el.matchesSelector || el.mozMatchesSelector ||
-					el.webkitMatchesSelector || el.oMatchesSelector || el.msMatchesSelector;
-			if(matchesSelector && matchesSelector.call(el,".tw-slider-label")) {
-				var currState = el.nextSibling.style.display;
-				el.nextSibling.style.display = currState === "block" ? "none" : "block";
-				e.preventDefault();
-				return false;
-			} else {
-				return true;
-			}
-		},false);
 		// Open the PageTemplate
 		var div = document.createElement("div");
-		div.innerHTML = this.store.renderTiddler("text/html","PageTemplate");
+		this.store.renderTiddlerInNode(div,"PageTemplate");
 		document.body.appendChild(div);
 		// Set up a timer to change the value of a tiddler
 		var me = this;
