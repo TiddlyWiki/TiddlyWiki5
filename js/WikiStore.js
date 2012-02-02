@@ -421,7 +421,7 @@ Refresh a DOM node and it's children so that it reflects the current state of th
 */
 WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	var me = this,
-		refreshChildNodes = function(node,renderer,tidder) {
+		refreshChildNodes = function(node,renderer,tiddler) {
 			if(node.hasChildNodes()) {
 				for(var c=0; c<node.childNodes.length; c++) {
 					me.refreshDomNode(node.childNodes[c],changes,renderer,tiddler);
