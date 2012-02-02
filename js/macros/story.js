@@ -4,7 +4,7 @@ title: js/macros/story.js
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, jquery: true */
 "use strict";
 
 var Tiddler = require("../Tiddler.js").Tiddler,
@@ -42,6 +42,15 @@ exports.macro = {
 	params: {
 		story: {byName: "default", type: "tiddler", optional: false},
 		template: {byName: true, type: "tiddler", optional: true}
+	},
+	events: {
+		"tw-navigate": function(event,node,tiddler,store,params) {
+			var storyTiddler = store.getTiddler(params.story);
+			store.addTiddler(new Tiddler(storyTiddler,{text: event.navigateTo + "\n" + storyTiddler.text}));
+			$("html,body").animate({
+				scrollTop: 0
+			}, 400);
+		}
 	},
 	render: function(type,tiddler,store,params) {
 		var tiddlers = parseStory(store.getTiddlerText(params.story)),
@@ -88,15 +97,6 @@ exports.macro = {
 			node.removeChild(currNode);
 			currNode = nextNode;
 		}
-	},
-	navigateTo: function(args,node,tiddler,store,params) {
-		/*jslint jquery: true */
-		var storyTiddler = store.getTiddler(params.story);
-		store.addTiddler(new Tiddler(storyTiddler,{text: args.target + "\n" + storyTiddler.text}));
-		$("html,body").animate({
-			scrollTop: 0
-		}, 400);
-		return true;
 	}
 };
 

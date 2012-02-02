@@ -514,62 +514,6 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	}
 };
 
-/*
-Search up the parents of the specified node, looking for a macro that accepts the specified method
-*/
-WikiStore.prototype.invokeMacroMethod = function(node,method,args) {
-	// Walk up the DOM chain to get the context tiddler for each node
-	var contextStack = [],
-		macroStack = [],
-		nodeStack = [],
-		parentWalker = function(node) {
-			if(node.parentNode !== null) {
-				var parentContext = parentWalker(node.parentNode),
-					contextInfo = {tiddler: parentContext.tiddler, template: parentContext.template},
-					macroInfo = {};
-				if(node.getAttribute) {
-					if(node.hasAttribute("data-tw-render-tiddler")) {
-						contextInfo.tiddler = node.getAttribute("data-tw-render-tiddler");
-						contextInfo.template = node.getAttribute("data-tw-render-template");
-					}
-					macroInfo.macro = node.getAttribute("data-tw-macro");
-					macroInfo.step = node.getAttribute("data-tw-render-step");
-				}
-				nodeStack.push(node);
-				contextStack.push(contextInfo);
-				macroStack.push(macroInfo);
-				return contextInfo;
-			} else {
-				return {tiddler: null, template: null};
-			}
-		};
-	parentWalker(node);
-	// Walk back up the DOM chain to find a macro that can handle this method
-	var t;
-	for(t=nodeStack.length-1; t>=0; t--) {
-		var macro = macroStack[t].macro;
-		if(macro && this.macros[macro].hasOwnProperty(method)) {
-			var renderTitle = contextStack[t].tiddler,
-				renderTemplate = contextStack[t].template,
-				renderStep = macroStack[t].step;
-			if(typeof renderTemplate !== "string") {
-				renderTemplate = renderTitle;
-			}
-			var renderTiddler = this.getTiddler(renderTitle),
-				renderer = this.compileTiddler(renderTemplate,"text/html");
-			var ret = this.macros[macro][method](args,
-												nodeStack[t],
-												renderTiddler,
-												this,
-												renderer.renderSteps[renderStep].params(renderTiddler,renderer,this,utils));
-			if(ret) {
-				return true;
-			}
-		}		
-	}
-	return false; // Didn't manage to dispatch it
-};
-
 exports.WikiStore = WikiStore;
 
 })();

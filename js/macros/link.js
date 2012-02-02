@@ -4,7 +4,7 @@ title: js/macros/link.js
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
 "use strict";
 
 var utils = require("../Utils.js");
@@ -15,6 +15,16 @@ exports.macro = {
 	types: ["text/html","text/plain"],
 	params: {
 		target: {byName: "default", type: "tiddler", optional: false}
+	},
+	events: {
+		click: function(event,node,tiddler,store,params) {
+			var navEvent = document.createEvent("Event");
+			navEvent.initEvent("tw-navigate",true,true);
+			navEvent.navigateTo = params.target;
+			node.dispatchEvent(navEvent); 
+			event.preventDefault();
+			return false;
+		}
 	},
 	render: function(type,tiddler,store,params,content) {
 		if(type === "text/html") {

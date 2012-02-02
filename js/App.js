@@ -16,9 +16,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
 	JSONParser = require("./JSONParser.js").JSONParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
-	ImageParser = require("./ImageParser.js").ImageParser,
-	Navigators = require("./Navigators.js").Navigators,
-	StoryNavigator = require("./StoryNavigator.js").StoryNavigator;
+	ImageParser = require("./ImageParser.js").ImageParser;
 
 var App = function() {
 	var t;
@@ -100,14 +98,6 @@ var App = function() {
 	this.store.installMacro(require("./macros/view.js").macro);
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
-		// Install the standard navigators
-		var navigators = new Navigators({
-				document: document,
-				store: this.store
-			});
-		navigators.registerNavigator("StoryNavigator",new StoryNavigator(navigators));
-		// Use the story navigator for all links
-		navigators.install("a","StoryNavigator");
 		// Open the PageTemplate
 		var div = document.createElement("div");
 		this.store.renderTiddlerInNode(div,"PageTemplate");
