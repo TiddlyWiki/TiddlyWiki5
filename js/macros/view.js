@@ -28,7 +28,7 @@ exports.macro = {
 					case "link":
 						return store.renderMacro("link",type,tiddler,{target: v},encoder(v));
 					case "wikified":
-						return store.renderTiddler(type,tiddler.title);
+						return store.renderTiddler(type,tiddler.title); // Should be return store.renderText("text/x-tiddlywiki",v,type);
 					case "date":
 						var template = params.template || "DD MMM YYYY";
 						return encoder(utils.formatDateString(v,template));
