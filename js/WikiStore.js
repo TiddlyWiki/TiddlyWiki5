@@ -400,7 +400,7 @@ WikiStore.prototype.attachEventHandlers = function(node,renderTiddler,renderTemp
 				macroName = node.getAttribute("data-tw-macro"),
 				macro = me.macros[macroName],
 				step = node.getAttribute("data-tw-render-step");
-			macro.events[event.type](event,node,renderTiddler,me,renderer.renderSteps[step].params(renderTiddler,renderer,me,utils));
+			return macro.events[event.type](event,node,renderTiddler,me,renderer.renderSteps[step].params(renderTiddler,renderer,me,utils));
 		};
 	if(node.getAttribute) {
 		var macroName = node.getAttribute("data-tw-macro");
