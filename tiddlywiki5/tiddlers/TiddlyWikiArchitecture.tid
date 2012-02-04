@@ -13,7 +13,7 @@ Tiddlers are a dictionary of name:value pairs called fields.
 
 The only field that is required is the {{{title}}} field, but useful tiddlers also have a {{{text}}} field, and some or all of the standard fields {{{modified}}}, {{{modifier}}}, {{{created}}}, {{{creator}}}, {{{tags}}} and {{{type}}}.
 
-Values can be a string, an array of strings, or a JavaScript {{{Date}}} object. Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are dates. All other fields are strings.
+Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are JavaScript `Date` objects. All other fields are strings.
 
 The {{{type}}} field identifies the representation of the tiddler text with a MIME type.
 
@@ -29,7 +29,7 @@ Each WikiStore is connected to another shadow store that is used to provide defa
 
 Clients can register event handlers with the WikiStore object. Event handlers can be registered to be triggered for modifications to any tiddler in the store, or with a filter to only be invoked when a particular tiddler or set of tiddlers changes.
 
-Whenever a change is made to a tiddler, the wikistore registers a `nexttick` handler (if it hasn't already done so). The `nexttick handler` looks back at all the tiddler changes, and dispatches matching event handlers. 
+Whenever a change is made to a tiddler, the wikistore registers a `nexttick` handler (if it hasn't already done so). The `nexttick` handler looks back at all the tiddler changes, and dispatches any matching event handlers. 
 
 !! Parsing
 
