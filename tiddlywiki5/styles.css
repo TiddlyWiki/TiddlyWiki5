@@ -130,34 +130,52 @@ a.tw-slider-label::after {
     background-color: #eee;
 }
 
-.treeArray {
+.treeWikiText {
     list-style-type: none;
 }
 
-.treeArrayMember {
+.nodeWikiText {
+    
 }
 
-.treeNode {
-    list-style-type: none;
-}
-
-.splitLabelLeft[data-tw-treenode-type='text'] {
+.nodeWikiText .splitLabelLeft[data-tw-label-type='text'] {
     background-color: #62CFFC;
     color: #fff;
 }
 
-.label[data-tw-treenode-type='macro'] {
+.nodeWikiText .splitLabelLeft[data-tw-label-type='macro'] {
     background-color: #46A546;
     color: #fff;
 }
 
-.splitLabelLeft[data-tw-treenode-type='param'] {
+.nodeWikiText .splitLabelLeft[data-tw-label-type='param'] {
     background-color: #a546a5;
     color: #fff;
 }
 
-.label[data-tw-treenode-type='html'] {
+.nodeWikiText .splitLabelLeft[data-tw-label-type='html'] {
     background-color: #F89406;
+    color: #fff;
+}
+
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='rendererStep'] {
+    background-color: #F89406;
+    color: #fff;
+}
+
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='macro'] {
+    background-color: #46A546;
+    color: #fff;
+}
+
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='content'] {
+    background-color: #62CFFC;
+    color: #fff;
+}
+
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='handler'],
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='params'] {
+    background-color: #a546a5;
     color: #fff;
 }
 
