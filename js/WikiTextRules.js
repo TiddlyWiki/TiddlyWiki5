@@ -277,7 +277,7 @@ var rules = [
 	termRegExp: /(\n)/mg,
 	handler: function(w)
 	{
-		var e = {type: "h" + w.matchLength, children: []};
+		var e = HTML.elem("h" + w.matchLength,{},[]);
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -321,7 +321,7 @@ var rules = [
 					if(currLevel !== 0 && target.children) {
 						target = target.children[target.children.length-1];
 					}
-					e = {type: listType, children: []};
+					e = HTML.elem(listType,{},[]);
 					target.push(e);
 					stack.push(e.children);
 				}
@@ -333,13 +333,13 @@ var rules = [
 					stack.pop();
 			} else if(listLevel == currLevel && listType != currType) {
 				stack.pop();
-				e = {type: listType, children: []};
+				e = HTML.elem(listType,{},[]);
 				stack[stack.length-1].push(e);
 				stack.push(e.children);
 			}
 			currLevel = listLevel;
 			currType = listType;
-			e = {type: itemType, children: []};
+			e = HTML.elem(itemType,{},[]);
 			stack[stack.length-1].push(e);
 			w.subWikifyTerm(e.children,this.termRegExp);
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
@@ -354,7 +354,7 @@ var rules = [
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
 	handler:  function(w) {
-		var e = {type: this.element, children: []};
+		var e = HTML.elem(this.element,{},[]);
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -375,7 +375,7 @@ var rules = [
 		do {
 			if(newLevel > currLevel) {
 				for(t=currLevel; t<newLevel; t++) {
-					e = {type: this.element, attributes: {}, children: []};
+					e = HTML.elem(this.element,{},[]);
 					stack[stack.length-1].push(e);
 				}
 			} else if(newLevel < currLevel) {
@@ -384,7 +384,7 @@ var rules = [
 			}
 			currLevel = newLevel;
 			w.subWikifyTerm(stack[stack.length-1],this.termRegExp);
-			stack[stack.length-1].push({type: "br"});
+			stack[stack.length-1].push(HTML.elem("br"));
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			matched = lookaheadMatch && lookaheadMatch.index == w.nextMatch;
@@ -401,8 +401,7 @@ var rules = [
 	match: "^----+$\\n?|<hr ?/?>\\n?",
 	handler: function(w)
 	{
-		var e = {type: "hr"};
-		w.output.push(e);
+		w.output.push(HTML.elem("hr"));
 	}
 },
 
@@ -469,10 +468,7 @@ var rules = [
 			var e = {type: "macro", name: "link", params: {
 					target: {type: "string", value: null}
 				},
-				children: [{
-					type: "text",
-					value: ""
-				}],
+				children: [HTML.text("")],
 				dependencies: []},
 				text = lookaheadMatch[1];
 			if(lookaheadMatch[3]) {
@@ -539,10 +535,7 @@ var rules = [
 		var e = {type: "macro", name: "link", params: {
 					target: {type: "string", value: w.matchText}
 				},
-				children: [{
-					type: "text",
-					value: w.source.substring(w.matchStart,w.nextMatch)
-				}],
+				children: [HTML.text(w.source.substring(w.matchStart,w.nextMatch))],
 				dependencies: [
 					w.matchText
 				]};
@@ -598,7 +591,7 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			w.output.push({type: "html", value: lookaheadMatch[1]});
+			w.output.push(HTML.elem("html",{},[HTML.raw(lookaheadMatch[1])]));
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -625,32 +618,32 @@ var rules = [
 		var e,lookaheadRegExp,lookaheadMatch;
 		switch(w.matchText) {
 		case "''":
-			e = {type: "strong", children: []};
+			e = HTML.elem("strong",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/('')/mg);
 			break;
 		case "//":
-			e = {type: "em", children: []};
+			e = HTML.elem("em",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(\/\/)/mg);
 			break;
 		case "__":
-			e = {type: "u", children: []};
+			e = HTML.elem("u",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(__)/mg);
 			break;
 		case "^^":
-			e = {type: "sup", children: []};
+			e = HTML.elem("sup",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(\^\^)/mg);
 			break;
 		case "~~":
-			e = {type: "sub", children: []};
+			e = HTML.elem("sub",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(~~)/mg);
 			break;
 		case "--":
-			e = {type: "strike", children: []};
+			e = HTML.elem("strike",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(--)/mg);
 			break;
@@ -659,9 +652,7 @@ var rules = [
 			lookaheadRegExp.lastIndex = w.matchStart;
 			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push({type: "code", children: [
-					{type: "text", value: lookaheadMatch[1]}
-				]});
+				w.output.push(HTML.elem("code",null,[HTML.text(lookaheadMatch[1])]));
 				w.nextMatch = lookaheadRegExp.lastIndex;
 			}
 			break;
@@ -670,9 +661,7 @@ var rules = [
 			lookaheadRegExp.lastIndex = w.matchStart;
 			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push({type: "code", children: [
-					{type: "text", value: lookaheadMatch[1]}
-				]});
+				w.output.push(HTML.elem("code",null,[HTML.text(lookaheadMatch[1])]));
 				w.nextMatch = lookaheadRegExp.lastIndex;
 			}
 			break;
@@ -687,7 +676,7 @@ var rules = [
 	{
 		switch(w.matchText) {
 		case "@@":
-			var e = {type: "span", children: []};
+			var e = HTML.elem("span",null,[]);
 			w.output.push(e);
 			var styles = inlineCssHelper(w);
 			if(styles.length === 0)
@@ -702,8 +691,9 @@ var rules = [
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
-				e = {type: lookaheadMatch[2] == "\n" ? "div" : "span", children: []};
-				setAttr(e,"class",lookaheadMatch[1]);
+				e = HTML.elem(lookaheadMatch[2] == "\n" ? "div" : "span",{
+					"class": lookaheadMatch[1]
+				},[]);
 				w.output.push(e);
 				w.subWikifyTerm(e.children,/(\}\}\})/mg);
 			}
@@ -717,7 +707,7 @@ var rules = [
 	match: "--",
 	handler: function(w)
 	{
-		w.output.push({type: "text", value: "&mdash;"});
+		w.output.push(HTML.entity("&mdash;"));
 	}
 },
 
@@ -726,7 +716,7 @@ var rules = [
 	match: "\\n|<br ?/?>",
 	handler: function(w)
 	{
-		w.output.push({type: "br"});
+		w.output.push(HTML.elem("br"));
 	}
 },
 
@@ -739,7 +729,7 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			w.output.push({type: "text", value: lookaheadMatch[1]});
+			w.output.push(HTML.text(lookaheadMatch[1]));
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -750,7 +740,7 @@ var rules = [
 	match: "&#?[a-zA-Z0-9]{2,8};",
 	handler: function(w)
 	{
-		w.output.push({type: "entity", value: w.matchText});
+		w.output.push(HTML.entity(w.matchText));
 	}
 }
 
