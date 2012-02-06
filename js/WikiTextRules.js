@@ -102,26 +102,36 @@ var enclosedTextHelper = function(w) {
 	}
 };
 
-var parseMacroCall = function(w,name,paramString) {
+var insertMacroCall = function(w,output,name,params,children) {
 	var macro = w.store.macros[name],
-		params = {},
 		dependencies = [];
 	if(macro) {
 		if(macro.dependentAll) {
 			dependencies = null;
 		}
-		var args = new ArgParser(paramString,{defaultName: "anon"}),
-			insertParam = function(param,name,arg) {
-				if(param.dependentAll) {
-					dependencies = null;
-				}
+		for(var m in macro.params) {
+			var param = macro.params[m];
+			if(m in params) {
 				if(param.type === "tiddler") {
-					if(arg.evaluated) {
+					if(params[m].type === "eval") {
 						dependencies = null;
 					} else if(dependencies !== null) {
-						dependencies.push(arg.string);
+						dependencies.push(params[m].value);
 					}
 				}
+			}
+		}
+		w.addDependencies(dependencies);
+		output.push(HTML.macro(name,params,children,dependencies));
+	}
+};
+
+var parseMacroParams = function(w,name,paramString) {
+	var macro = w.store.macros[name],
+		params = {};
+	if(macro) {
+		var args = new ArgParser(paramString,{defaultName: "anon"}),
+			insertParam = function(param,name,arg) {
 				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
 			};
 		for(var m in macro.params) {
@@ -141,8 +151,7 @@ var parseMacroCall = function(w,name,paramString) {
 			}
 		}
 	}
-	w.addDependencies(dependencies);
-	return HTML.macro(name,params,null,dependencies);
+	return params;
 };
 
 var rules = [
@@ -451,7 +460,8 @@ var rules = [
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && lookaheadMatch[1]) {
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
-			w.output.push(parseMacroCall(w,lookaheadMatch[1],lookaheadMatch[2]));
+			var name = lookaheadMatch[1];
+			insertMacroCall(w,w.output,name,parseMacroParams(w,name,lookaheadMatch[2]));
 		}
 	}
 },
@@ -465,26 +475,15 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			var e = HTML.macro("link",{
-					target: {type: "string", value: null}
-				},
-				[HTML.text("")],
-				[]),
-				text = lookaheadMatch[1];
+			var text = lookaheadMatch[1],
+				link = text;
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
-				var link = lookaheadMatch[3];
-				e.params.target.value = link;
-				e.dependencies.push(link);
-				w.addDependency(link);
-			} else {
-				// Simple bracketted link
-				e.params.target.value = text;
-				e.dependencies.push(text);
-				w.addDependency(text);
+				link = lookaheadMatch[3];
 			}
-			e.children[0].value = text;
-			w.output.push(e);
+			insertMacroCall(w,w.output,"link",{
+				target: {type: "string", value: link}
+			},[HTML.text(text)]);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -509,16 +508,9 @@ var rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			var link = HTML.macro("link",{
-							target: {type: "string", value: w.matchText}
-						},
-						[
-							HTML.text(w.source.substring(w.matchStart,w.nextMatch))
-						],[
-							w.matchText
-						]);
-			w.addDependency(w.matchText);
-			w.output.push(link);
+			insertMacroCall(w,w.output,"link",{
+				target: {type: "string", value: w.matchText}
+			},[HTML.text(w.source.substring(w.matchStart,w.nextMatch))]);
 		} else {
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
@@ -530,15 +522,9 @@ var rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		var e = HTML.macro("link",{
-					target: {type: "string", value: w.matchText}
-				},[
-					HTML.text(w.source.substring(w.matchStart,w.nextMatch))
-				],[
-					w.matchText
-				]);
-		w.addDependency(w.matchText);
-		w.output.push(e);
+		insertMacroCall(w,w.output,"link",{
+			target: {type: "string", value: w.matchText}
+		},[HTML.text(w.source.substring(w.matchStart,w.nextMatch))]);
 	}
 },
 
@@ -551,31 +537,29 @@ var rules = [
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
-			image = HTML.macro("image",{
+			imageParams = {
 				src: {type: "string", value: ""}
-			},[],[]),
-			link = HTML.macro("link",{
+			},
+			linkParams = {
 				target: {type: "string", value: ""}
-			},[
-				image
-			],[]);
+			};
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			if(lookaheadMatch[1]) {
-				image.params.alignment = {type: "string", value: "left"};
+				imageParams.alignment = {type: "string", value: "left"};
 			} else if(lookaheadMatch[2]) {
-				image.params.alignment = {type: "string", value: "right"};
+				imageParams.alignment = {type: "string", value: "right"};
 			}
 			if(lookaheadMatch[3]) {
-				image.params.text = {type: "string", value: lookaheadMatch[3]};
+				imageParams.text = {type: "string", value: lookaheadMatch[3]};
 			}
-			image.params.src.value = lookaheadMatch[4];
-			image.dependencies = [lookaheadMatch[4]];
+			imageParams.src.value = lookaheadMatch[4];
 			if(lookaheadMatch[5]) {
-				link.params.target.value = lookaheadMatch[5];
-				link.dependencies = [lookaheadMatch[5]];
-				w.output.push(link);
+				linkParams.target.value = lookaheadMatch[5];
+				var linkChildren = [];
+				insertMacroCall(w,w.output,"link",linkParams,linkChildren);
+				insertMacroCall(w,linkChildren,"image",imageParams);
 			} else {
-				w.output.push(image);
+				insertMacroCall(w,w.output,"image",imageParams);
 			}
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
