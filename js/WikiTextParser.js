@@ -33,6 +33,7 @@ HTML nodes look like this:
 
 var WikiTextRules = require("./WikiTextRules.js"),
 	WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
+	HTML = require("./HTML.js").HTML,
 	utils = require("./Utils.js"),
 	util = require("util");
 
@@ -97,7 +98,7 @@ WikiTextParser.prototype.addDependencies = function(dependencies) {
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
 	if(startPos < endPos) {
-		place.push({type: "text", value: this.source.substring(startPos,endPos)});
+		place.push(HTML.text(this.source.substring(startPos,endPos)));
 	}
 };
 

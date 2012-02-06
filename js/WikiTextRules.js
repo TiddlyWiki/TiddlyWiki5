@@ -8,6 +8,7 @@ title: js/WikiTextRules.js
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
+	HTML = require("./HTML.js").HTML,
 	util = require("util");
 
 var textPrimitives = {
@@ -96,9 +97,7 @@ var enclosedTextHelper = function(w) {
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 		var text = lookaheadMatch[1];
-		w.output.push({type: this.element, children: [
-				{type: "text", value: text}
-			]});
+		w.output.push(HTML.elem(this.element,null,[HTML.text(text)]));
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 	}
 };
@@ -157,7 +156,7 @@ var rules = [
 	rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 	handler: function(w)
 	{
-		var table = {type: "table", attributes: {"class": "twtable"}, children: []};
+		var table = HTML.elem("table",{"class": "twtable"},[]);
 		w.output.push(table);
 		var prevColumns = [];
 		var currRowType = null;
@@ -188,8 +187,8 @@ var rules = [
 					rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
-					var theRow = {type: "tr", children: []};
-					setAttr(theRow,"class",rowCount%2 ? "oddRow" : "evenRow");
+					var theRow = HTML.elem("tr",{},[]);
+					theRow.attributes["class"] = rowCount%2 ? "oddRow" : "evenRow";
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow.children,prevColumns);
 					rowCount++;
@@ -212,10 +211,10 @@ var rules = [
 				var last = prevColumns[col];
 				if(last) {
 					last.rowSpanCount++;
-					setAttr(last.element,"rowspan",last.rowSpanCount);
-					setAttr(last.element,"valign","center");
+					last.element.attributes.rowspan = last.rowSpanCount;
+					last.element.attributes.valign = "center";
 					if(colSpanCount > 1) {
-						setAttr(last.element,"colspan",colSpanCount);
+						last.element.attributes.colspan = colSpanCount;
 						colSpanCount = 1;
 					}
 				}
@@ -227,7 +226,7 @@ var rules = [
 			} else if(cellMatch[2]) {
 				// End of row
 				if(prevCell && colSpanCount > 1) {
-					setAttr(prevCell,"colspan",colSpanCount);
+					prevCell.attributes.colspan = colSpanCount;
 				}
 				w.nextMatch = this.cellRegExp.lastIndex;
 				break;
@@ -244,25 +243,25 @@ var rules = [
 				}
 				var cell;
 				if(chr == "!") {
-					cell = {type: "th", children: []};
+					cell = HTML.elem("th",{},[]);
 					e.push(cell);
 					w.nextMatch++;
 				} else {
-					cell = {type: "td", children: []};
+					cell = HTML.elem("td",{},[]);
 					e.push(cell);
 				}
 				prevCell = cell;
 				prevColumns[col] = {rowSpanCount:1,element:cell};
 				if(colSpanCount > 1) {
-					setAttr(cell,"colspan",colSpanCount);
+					cell.attributes.colspan = colSpanCount;
 					colSpanCount = 1;
 				}
 				applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell.children,this.cellTermRegExp);
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
-					setAttr(cell,"align",spaceLeft ? "center" : "left");
+					cell.attributes.align = spaceLeft ? "center" : "left";
 				else if(spaceLeft)
-					setAttr(cell,"align","right");
+					cell.attributes.align = "right";
 				w.nextMatch--;
 			}
 			col++;
