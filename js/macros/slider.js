@@ -7,7 +7,8 @@ title: js/macros/slider.js
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var HTML = require("../HTML.js").HTML,
+	utils = require("../Utils.js");
 
 exports.macro = {
 	name: "slider",
@@ -28,10 +29,10 @@ exports.macro = {
 	},
 	render: function(type,tiddler,store,params) {
 		if(type === "text/html") {
-			return utils.stitchSlider(type,
+			return HTML(HTML.slider(params.name,
 										params.label,
 										params.tooltip,
-										store.renderTiddler(type,params.targetTiddler));
+										HTML.raw(store.renderTiddler(type,params.targetTiddler))),type);
 		} else if(type === "text/plain") {
 			return store.renderTiddler(type,params.target);
 		}

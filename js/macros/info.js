@@ -31,22 +31,22 @@ exports.macro = {
 			var parseTree = store.parseTiddler(tiddler.title);
 			switch(info) {
 				case "parsetree":
-					return HTML(HTML.slider(type,
+					return HTML(HTML.slider("parsetree",
 										"Parse tree",
 										"The parse tree for this tiddler",
-										parseTree.toString(type)),type);
+										HTML.raw(parseTree.toString(type))),type);
 					//break;
 				case "compiled":
-					return HTML(HTML.slider(type,
+					return HTML(HTML.slider("compiled",
 										"Render functions",
 										"The render functions for this tiddler",
-										parseTree.compile(type).toString(type)),type);
+										HTML.raw(parseTree.compile(type).toString(type))),type);
 					//break;
 				case "dependencies":
-					return HTML(HTML.slider(type,
+					return HTML(HTML.slider("dependencies",
 										"Dependencies",
 										"The dependencies for this tiddler",
-										(parseTree.dependencies === null) ? "*" : encoder(parseTree.dependencies.join(", "))),type);
+										HTML.raw((parseTree.dependencies === null) ? "*" : encoder(parseTree.dependencies.join(", ")))),type);
 					//break;
 			}
 		}

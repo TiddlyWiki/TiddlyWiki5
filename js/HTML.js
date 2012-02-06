@@ -123,7 +123,8 @@ Static method to construct a slider
 */
 HTML.slider = function(type,label,tooltip,body) {
 	var attributes = {
-		"class": "tw-slider"
+		"class": "tw-slider",
+		"data-tw-slider-type": type
 	};
 	if(tooltip) {
 		attributes.alt = tooltip;
@@ -141,7 +142,8 @@ HTML.slider = function(type,label,tooltip,body) {
 			),
 			HTML.elem("div",
 				{
-					"class": ["tw-slider-body"]
+					"class": ["tw-slider-body"],
+					"style": {"display": "none"}
 				},
 				body
 			)
