@@ -14,6 +14,7 @@ WikiStore uses the .cache member of tiddlers to store the following information:
 "use strict";
 
 var Tiddler = require("./Tiddler.js").Tiddler,
+	HTML = require("./HTML.js").HTML,
 	utils = require("./Utils.js");
 
 /* Creates a new WikiStore object
@@ -353,30 +354,30 @@ WikiStore.prototype.renderTiddler = function(targetType,title,templateTitle,opti
 	if(typeof templateTitle !== "string") {
 		templateTitle = title;
 	}
-	var stitcher = ((targetType === "text/html") && !options.noWrap && !this.disableHtmlWrapperNodes) ? utils.stitchElement : function(a,b,c) {return c.content;},
+	var noWrap = options.noWrap || this.disableHtmlWrapperNodes,
 		tiddler = this.getTiddler(title),
 		renderer = this.compileTiddler(templateTitle,targetType),
 		renditions = this.getCacheForTiddler(templateTitle,"renditions",function() {
 			return {};
-		});
+		}),
+		template,
+		content;
 	if(tiddler) {
 		if(title !== templateTitle) {
-			var template = this.getTiddler(templateTitle);
-			return stitcher("div",{
-				"data-tw-render-tiddler": title,
-				"data-tw-render-template": templateTitle
-			},{
-				content: renderer.render(tiddler,this)
-			});
+			template = this.getTiddler(templateTitle);
+			content = renderer.render(tiddler,this);
+			return noWrap ? content : HTML(HTML.elem("div",{
+											"data-tw-render-tiddler": title,
+											"data-tw-render-template": templateTitle
+										},[HTML.raw(content)]),targetType);
 		} else {
 			if(!renditions[targetType]) {
 				renditions[targetType] = renderer.render(tiddler,this);
 			}
-			return stitcher("div",{
-					"data-tw-render-tiddler": title
-				},{
-					content: renditions[targetType]
-				});
+			content = renditions[targetType];
+			return noWrap ? content : HTML(HTML.elem("div",{
+											"data-tw-render-tiddler": title
+										},[HTML.raw(content)]),targetType);
 		}
 	}
 	return null;

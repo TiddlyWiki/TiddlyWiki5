@@ -9,7 +9,8 @@ An array of JavaScript functions that generate a specified representation of a p
 /*jslint node: true */
 "use strict";
 
-var utils = require("./Utils.js");
+var HTML = require("./HTML.js").HTML,
+	utils = require("./Utils.js");
 
 var WikiTextRenderer = function() {
 	this.renderSteps = []; // Array of {step: n, dependencies: [],handler: function(tiddler,renderer,store,utils) {}}
@@ -59,51 +60,61 @@ WikiTextRenderer.prototype.rerender = function(node,changes,tiddler,store,render
 };
 
 WikiTextRenderer.prototype.toString = function(type) {
-	var output = [],
-		stitchSplitLabel = function(name,value) {
-			output.push(utils.stitchElement("span",null,
-				{classes: ["treeNode","splitLabel"]}));
-			output.push(utils.stitchElement("span",null,{
-				content: name,
-				classes: ["splitLabelLeft"]
-			}));
-			output.push(utils.stitchElement("code",null,{
-				content: value,
-				classes: ["splitLabelRight"]
-			}));
-			output.push("</span>");
-		},
-		customTemplates = [
-			function(output,type,node) { // Rendering step
-				if(node.step !== undefined) {
-					output.push(utils.stitchElement("span",null,{
-						content: node.step.toString(),
-						classes: ["treeNode","label"]
-					}));
-					output.push(utils.stitchElement("span",null,{
-						content: node.type.toString(),
-						classes: ["treeNode","label"]
-					}));
-					stitchSplitLabel("dependencies",node.dependencies === null ? "*" : node.dependencies.join(", "));
-					if(node.macro) {
-						stitchSplitLabel("macro",utils.htmlEncode(node.macro.toString()));
-					}
-					if(node.params) {
-						stitchSplitLabel("params",utils.htmlEncode(node.params.toString()).replace(/\n/g,"<br>"));
-					}
-					if(node.content) {
-						stitchSplitLabel("content",utils.htmlEncode(node.content.toString()).replace(/\n/g,"<br>"));
-					}
-					if(node.handler) {
-						stitchSplitLabel("handler",utils.htmlEncode(node.handler.toString()).replace(/\n/g,"<br>"));
-					}
-					return true;
-				}
-				return false;
+	var renderNode,
+		renderArray = function(tree) {
+			var children = [];
+			for(var t=0; t<tree.length; t++) {
+				children.push(HTML.elem("li",{
+					"class": ["nodeWikiTextRenderer"]
+				},renderNode(tree[t])));
 			}
-		];
-	utils.renderObject(output,type,this.renderSteps,customTemplates);
-	return output.join("");
+			return HTML.elem("ul",{
+				"class": ["treeWikiTextRenderer"]
+			},children);
+		};
+	renderNode = function(node) {
+		var ret = [];
+		ret.push(HTML.splitLabel(
+			"rendererStep",
+			[HTML.text(node.step.toString())],
+			[HTML.text(node.type.toString())]
+		));
+		ret.push(HTML.splitLabel(
+			"dependencies",
+			[HTML.text("Dependencies")],
+			[HTML.text(node.dependencies === null ? "*" : node.dependencies.join(", "))]
+		));
+		if(node.macro) {
+			ret.push(HTML.splitLabel(
+				"macro",
+				[HTML.text("macro")],
+				[HTML.text(node.macro)]
+			));
+		}
+		if(node.params) {
+			ret.push(HTML.splitLabel(
+				"params",
+				[HTML.text("params")],
+				[HTML.raw(utils.htmlEncode(node.params.toString()).replace(/\n/g,"<br>"))]
+			));
+		}
+		if(node.content) {
+			ret.push(HTML.splitLabel(
+				"content",
+				[HTML.text("content")],
+				[HTML.raw(utils.htmlEncode(node.content.toString()).replace(/\n/g,"<br>"))]
+			));
+		}
+		if(node.handler) {
+			ret.push(HTML.splitLabel(
+				"handler",
+				[HTML.text("handler")],
+				[HTML.raw(utils.htmlEncode(node.handler.toString()).replace(/\n/g,"<br>"))]
+			));
+		}
+		return ret;
+	};
+	return HTML(renderArray(this.renderSteps),type);
 };
 
 exports.WikiTextRenderer = WikiTextRenderer;
