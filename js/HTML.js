@@ -100,6 +100,17 @@ HTML.raw = function(value) {
 };
 
 /*
+Static method to construct a macro call
+*/
+HTML.macro = function(name,params,children,dependencies) {
+	var m = {type: "macro", name: name, params: params, dependencies: dependencies};
+	if(children) {
+		m.children = children;
+	}
+	return m;
+};
+
+/*
 Static method to construct a split label
 */
 HTML.splitLabel = function(type,left,right,classes) {

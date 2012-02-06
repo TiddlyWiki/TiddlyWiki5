@@ -142,7 +142,7 @@ var parseMacroCall = function(w,name,paramString) {
 		}
 	}
 	w.addDependencies(dependencies);
-	return {type: "macro", name: name, params: params, dependencies: dependencies};
+	return HTML.macro(name,params,null,dependencies);
 };
 
 var rules = [
@@ -172,7 +172,7 @@ var rules = [
 				w.nextMatch += lookaheadMatch[0].length+1;
 			} else {
 				if(nextRowType != currRowType) {
-					rowContainer = {type: this.rowTypes[nextRowType], children: [], attributes: {}};
+					rowContainer = HTML.elem(this.rowTypes[nextRowType],{},[]);
 					table.children.push(rowContainer);
 					currRowType = nextRowType;
 				}
@@ -465,11 +465,11 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			var e = {type: "macro", name: "link", params: {
+			var e = HTML.macro("link",{
 					target: {type: "string", value: null}
 				},
-				children: [HTML.text("")],
-				dependencies: []},
+				[HTML.text("")],
+				[]),
 				text = lookaheadMatch[1];
 			if(lookaheadMatch[3]) {
 				// Pretty bracketted link
@@ -509,16 +509,14 @@ var rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			var link = {type: "macro", name: "link", params: {
+			var link = HTML.macro("link",{
 							target: {type: "string", value: w.matchText}
 						},
-						children: [{
-							type: "text",
-							value: w.source.substring(w.matchStart,w.nextMatch)
-						}],
-						dependencies: [
+						[
+							HTML.text(w.source.substring(w.matchStart,w.nextMatch))
+						],[
 							w.matchText
-						]};
+						]);
 			w.addDependency(w.matchText);
 			w.output.push(link);
 		} else {
@@ -532,13 +530,13 @@ var rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		var e = {type: "macro", name: "link", params: {
+		var e = HTML.macro("link",{
 					target: {type: "string", value: w.matchText}
-				},
-				children: [HTML.text(w.source.substring(w.matchStart,w.nextMatch))],
-				dependencies: [
+				},[
+					HTML.text(w.source.substring(w.matchStart,w.nextMatch))
+				],[
 					w.matchText
-				]};
+				]);
 		w.addDependency(w.matchText);
 		w.output.push(e);
 	}
@@ -553,12 +551,14 @@ var rules = [
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
-			image = {type: "macro", name: "image", params: {
+			image = HTML.macro("image",{
 				src: {type: "string", value: ""}
-			}},
-			link = {type: "macro", name: "link", params: {
+			},[],[]),
+			link = HTML.macro("link",{
 				target: {type: "string", value: ""}
-			}, children: [image]};
+			},[
+				image
+			],[]);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			if(lookaheadMatch[1]) {
 				image.params.alignment = {type: "string", value: "left"};
