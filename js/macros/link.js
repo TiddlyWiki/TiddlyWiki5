@@ -7,7 +7,8 @@ title: js/macros/link.js
 /*jslint node: true, browser: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var HTML = require("../HTML.js").HTML,
+	utils = require("../Utils.js");
 
 exports.macro = {
 	name: "link",
@@ -27,16 +28,14 @@ exports.macro = {
 		}
 	},
 	render: function(type,tiddler,store,params,content) {
-		if(type === "text/html") {
-			return utils.stitchElement("a",{
-				href: params.target
-			},{
-				content: content,
-				classes: store.adjustClassesForLink([],params.target)
-			});
-		} else if (type === "text/plain") {
-			return content;	
-		}
+		return HTML(HTML.elem(
+							"a",{
+								href: params.target,
+								"class": store.adjustClassesForLink([],params.target)
+							},[
+								HTML.raw(content)
+							]
+				),type);
 	}
 };
 
