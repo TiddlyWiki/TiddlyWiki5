@@ -130,12 +130,8 @@ a.tw-slider-label::after {
     background-color: #eee;
 }
 
-.treeWikiText {
+.treeWikiText, .treeWikiTextRenderer {
     list-style-type: none;
-}
-
-.nodeWikiText {
-    
 }
 
 .nodeWikiText .splitLabelLeft[data-tw-label-type='text'] {
@@ -155,6 +151,18 @@ a.tw-slider-label::after {
 
 .nodeWikiText .splitLabelLeft[data-tw-label-type='html'] {
     background-color: #F89406;
+    color: #fff;
+}
+
+.nodeWikiText .splitLabelLeft[data-tw-label-type='dependencies'],
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='dependencies'] {
+    background-color: #f89999;
+    color: #fff;
+}
+
+.nodeWikiText .splitLabelLeft[data-tw-label-type='dependency'],
+.treeWikiTextRenderer .splitLabelLeft[data-tw-label-type='dependency'] {
+    background-color: #F80055;
     color: #fff;
 }
 

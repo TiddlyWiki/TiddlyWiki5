@@ -13,7 +13,7 @@ var HTML = require("./HTML.js").HTML,
 	utils = require("./Utils.js");
 
 var WikiTextRenderer = function() {
-	this.renderSteps = []; // Array of {step: n, dependencies: [],handler: function(tiddler,renderer,store,utils) {}}
+	this.renderSteps = []; // Array of {step: n, dependencies: {},handler: function(tiddler,renderer,store,utils) {}}
 };
 
 WikiTextRenderer.prototype.addRenderStep = function(renderStep) {
@@ -79,11 +79,25 @@ WikiTextRenderer.prototype.toString = function(type) {
 			[HTML.text(node.step.toString())],
 			[HTML.text(node.type.toString())]
 		));
-		ret.push(HTML.splitLabel(
-			"dependencies",
-			[HTML.text("Dependencies")],
-			[HTML.text(node.dependencies === null ? "*" : node.dependencies.join(", "))]
-		));
+		if(node.dependencies) {
+			var dependencies = [];
+			for(var d in node.dependencies) {
+				if(d === "dependentAll") {
+					dependencies.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(node.dependencies[d])]));
+				} else {
+					var dependents = [];
+					for(var t in node.dependencies[d]) {
+						dependents.push(t);
+					}
+					dependencies.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(dependents.join(","))]));
+				}
+			}
+			ret.push(HTML.splitLabel(
+				"dependencies",
+				[HTML.text("Dependencies")],
+				dependencies
+			));
+		}
 		if(node.macro) {
 			ret.push(HTML.splitLabel(
 				"macro",

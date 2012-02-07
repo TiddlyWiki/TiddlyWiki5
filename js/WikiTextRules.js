@@ -104,24 +104,33 @@ var enclosedTextHelper = function(w) {
 
 var insertMacroCall = function(w,output,name,params,children) {
 	var macro = w.store.macros[name],
-		dependencies = [];
+		dependencies = {};
 	if(macro) {
 		if(macro.dependentAll) {
-			dependencies = null;
+			dependencies.dependentAll = true;
 		}
 		for(var m in macro.params) {
 			var param = macro.params[m];
 			if(m in params) {
 				if(param.type === "tiddler") {
 					if(params[m].type === "eval") {
-						dependencies = null;
-					} else if(dependencies !== null) {
-						dependencies.push(params[m].value);
+						dependencies.dependentAll = true;
+					} else {
+						var rel = param.rel || "include",
+							target = params[m].value;
+						if(!(rel in dependencies)) {
+							dependencies[rel] = {};
+						}
+						if(dependencies[rel][target]) {
+							dependencies[rel][target]++;
+						} else {
+							dependencies[rel][target] = 1;
+						}
 					}
 				}
 			}
 		}
-		w.addDependencies(dependencies);
+		w.mergeDependencies(dependencies);
 		output.push(HTML.macro(name,params,children,dependencies));
 	}
 };

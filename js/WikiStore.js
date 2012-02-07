@@ -491,19 +491,9 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	// Is this node a macro
 	} else if(macro !== null) {
 		// Get the render step
-		var r = renderer.renderSteps[renderStep],
-			hasChanged = false;
+		var r = renderer.renderSteps[renderStep];
 		// Refresh if a dependency has changed
-		if(r.dependencies === null) {
-			hasChanged = true;
-		} else {
-			for(var d=0; d<r.dependencies.length; d++) {
-				if(r.dependencies[d] in changes) {
-					hasChanged = true;
-				}
-			}
-		}
-		if(hasChanged) {
+		if(this.hasDependencyChanged(r.dependencies,changes)) {
 			renderer.rerender(node,changes,tiddler,this,renderStep);
 		} else {
 			// If no change, just refresh the children
@@ -513,6 +503,27 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 	} else {
 		refreshChildNodes(node,renderer,tiddler);
 	}
+};
+
+/*
+Check if the specified dependencies are impacted by the specified changes
+	dependencies: a dependencies tree
+	changes: an array of titles of changed tiddlers
+*/
+WikiStore.prototype.hasDependencyChanged = function(dependencies,changes) {
+	if(dependencies.dependentAll) {
+		return true;
+	}
+	for(var rel in dependencies) {
+		if(rel !== "dependentAll") {
+			for(var t in dependencies[rel]) {
+				if(t in changes) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
 };
 
 exports.WikiStore = WikiStore;

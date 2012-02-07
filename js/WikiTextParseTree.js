@@ -17,7 +17,7 @@ var WikiTextRenderer = require("./WikiTextRenderer.js").WikiTextRenderer,
 // Intialise the parse tree object
 var WikiTextParseTree = function(tree,dependencies,store) {
 	this.tree = tree;
-	this.dependencies = dependencies; // An array of tiddler names, or null if this tiddler depends on too many to track
+	this.dependencies = dependencies;
 	this.store = store;
 };
 
@@ -69,7 +69,7 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 		]);
 	renderStep.type = "main";
 	renderStep.step = renderStepIndex;
-	renderStep.dependencies = [];
+	renderStep.dependencies = {};
 	renderStep.handler = eval(parseTree.render());
 	return renderer;
 };
@@ -316,12 +316,25 @@ WikiTextParseTree.prototype.toString = function(type) {
 				params,
 				["treeNode"]
 			));
-			ret.push(HTML.splitLabel(
-				"dependencies",
-				[HTML.text("Dependencies")],
-				[HTML.text(node.dependencies === null ? "*" : node.dependencies.join(", "))],
-				["treeNode"]
-			));
+			if(node.dependencies) {
+				var dependencies = [];
+				for(var d in node.dependencies) {
+					if(d === "dependentAll") {
+						dependencies.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(node.dependencies[d])]));
+					} else {
+						var dependents = [];
+						for(var t in node.dependencies[d]) {
+							dependents.push(t);
+						}
+						dependencies.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(dependents.join(","))]));
+					}
+				}
+				ret.push(HTML.splitLabel(
+					"dependencies",
+					[HTML.text("Dependencies")],
+					dependencies
+				));
+			}
 			if(node.children) {
 				ret.push(renderArray(node.children));
 			}

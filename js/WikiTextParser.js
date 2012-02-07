@@ -67,7 +67,7 @@ WikiTextParser.prototype.parse = function(type,text) {
 	this.source = text;
 	this.nextMatch = 0;
 	this.children = [];
-	this.dependencies = [];
+	this.dependencies = {};
 	this.output = null;
 	this.subWikify(this.children);
 	var tree = new WikiTextParseTree(this.children,this.dependencies,this.store);
@@ -76,24 +76,23 @@ WikiTextParser.prototype.parse = function(type,text) {
 	return tree;
 };
 
-WikiTextParser.prototype.addDependency = function(dependency) {
-	if(dependency === null) {
-		this.dependencies = null;
-	} else if(this.dependencies && this.dependencies.indexOf(dependency) === -1) {
-		this.dependencies.push(dependency);
-	}	
-};
-
-WikiTextParser.prototype.addDependencies = function(dependencies) {
-	if(dependencies === null) {
-		this.dependencies = null;
-	} else if(this.dependencies !== null){
-		for(var t=0; t<dependencies.length; t++) {
-			if(this.dependencies.indexOf(dependencies[t]) === -1) {
-				this.dependencies.push(dependencies[t]);
+WikiTextParser.prototype.mergeDependencies = function(newDependencies) {
+	for(var rel in newDependencies) {
+		if(rel === "dependentAll") {
+			this.dependencies.dependentAll = newDependencies.dependentAll;
+		} else {
+			if(!(rel in this.dependencies)) {
+				this.dependencies[rel] = {};
+			}
+			for(var t in newDependencies[rel]) {
+				if(this.dependencies[rel][t]) {
+					this.dependencies[rel][t]++;
+				} else {
+					this.dependencies[rel][t] = 1;
+				}
 			}
 		}
-	}	
+	}
 };
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {

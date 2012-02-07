@@ -15,7 +15,7 @@ exports.macro = {
 	wrapperTag: "span",
 	types: ["text/html","text/plain"],
 	params: {
-		target: {byName: "default", type: "tiddler", optional: false}
+		target: {byName: "default", type: "tiddler", rel: "link", optional: false}
 	},
 	events: {
 		click: function(event,node,tiddler,store,params) {

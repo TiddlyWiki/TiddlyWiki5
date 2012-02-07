@@ -24,7 +24,7 @@ ImageRenderer.prototype.render = function(tiddler,store) {
 var ImageParseTree = function(type,text) {
 	this.type = type;
 	this.text = text;
-	this.dependencies = [];
+	this.dependencies = {};
 };
 
 ImageParseTree.prototype.compile = function(type) {

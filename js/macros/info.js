@@ -42,12 +42,6 @@ exports.macro = {
 										"The render functions for this tiddler",
 										HTML.raw(parseTree.compile(type).toString(type))),type);
 					//break;
-				case "dependencies":
-					return HTML(HTML.slider("dependencies",
-										"Dependencies",
-										"The dependencies for this tiddler",
-										HTML.raw((parseTree.dependencies === null) ? "*" : encoder(parseTree.dependencies.join(", ")))),type);
-					//break;
 			}
 		}
 	}

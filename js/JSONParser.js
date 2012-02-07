@@ -29,7 +29,7 @@ JSONRenderer.prototype.toString = function(type) {
 // The parse tree is degenerate
 var JSONParseTree = function(tree) {
 	this.tree = tree;
-	this.dependencies = [];
+	this.dependencies = {};
 };
 
 JSONParseTree.prototype.compile = function(type) {
