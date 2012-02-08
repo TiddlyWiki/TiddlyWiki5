@@ -79,6 +79,20 @@ WikiTextRenderer.prototype.toString = function(type) {
 			[HTML.text(node.step.toString())],
 			[HTML.text(node.type.toString())]
 		));
+		if(node.macro) {
+			ret.push(HTML.splitLabel(
+				"macro",
+				[HTML.text("macro")],
+				[HTML.text(node.macro)]
+			));
+		}
+		if(node.params) {
+			ret.push(HTML.splitLabel(
+				"params",
+				[HTML.text("params")],
+				[HTML.raw(utils.htmlEncode(node.params.toString()).replace(/\n/g,"<br>"))]
+			));
+		}
 		if(node.dependencies) {
 			var dependencies = [];
 			for(var d in node.dependencies) {
@@ -96,20 +110,6 @@ WikiTextRenderer.prototype.toString = function(type) {
 				"dependencies",
 				[HTML.text("Dependencies")],
 				dependencies
-			));
-		}
-		if(node.macro) {
-			ret.push(HTML.splitLabel(
-				"macro",
-				[HTML.text("macro")],
-				[HTML.text(node.macro)]
-			));
-		}
-		if(node.params) {
-			ret.push(HTML.splitLabel(
-				"params",
-				[HTML.text("params")],
-				[HTML.raw(utils.htmlEncode(node.params.toString()).replace(/\n/g,"<br>"))]
 			));
 		}
 		if(node.content) {
