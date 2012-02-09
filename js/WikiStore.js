@@ -223,42 +223,6 @@ WikiStore.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	}
 };
 
-WikiStore.prototype.adjustClassesForLink = function(classes,target) {
-	var newClasses = classes.slice(0),
-		externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i,
-		setClass = function(className) {
-			if(newClasses.indexOf(className) === -1) {
-				newClasses.push(className);
-			}
-		},
-		removeClass = function(className) {
-			var p = newClasses.indexOf(className);
-			if(p !== -1) {
-				newClasses.splice(p,1);
-			}
-		};
-	// Make sure we've got the main link class
-	setClass("tw-tiddlylink");
-	// Check if it's an internal link
-	if (this.tiddlerExists(target)) {
-		removeClass("tw-tiddlylink-external");
-		setClass("tw-tiddlylink-internal");
-		setClass("tw-tiddlylink-resolves");
-		removeClass("tw-tiddlylink-missing");
-	} else if(externalRegExp.test(target)) {
-		setClass("tw-tiddlylink-external");
-		removeClass("tw-tiddlylink-internal");
-		removeClass("tw-tiddlylink-resolves");
-		removeClass("tw-tiddlylink-missing");
-	} else {
-		removeClass("tw-tiddlylink-external");
-		setClass("tw-tiddlylink-internal");
-		removeClass("tw-tiddlylink-resolves");
-		setClass("tw-tiddlylink-missing");
-	}
-	return newClasses;
-};
-
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 WikiStore.prototype.getCacheForTiddler = function(title,cacheName,initializer) {
 	var caches = this.caches[title];
