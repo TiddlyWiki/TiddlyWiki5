@@ -70,7 +70,7 @@ WikiTextParseTree.prototype.compile = function(type,treenode) {
 	renderStep.type = "main";
 	renderStep.step = renderStepIndex;
 	renderStep.dependencies = {};
-	renderStep.handler = eval(parseTree.render());
+	renderStep.handler = parseTree.compile("application/javascript").render;
 	return renderer;
 };
 
@@ -123,7 +123,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 			value: n
 		});
 	}
-	renderStep.params = eval(this.store.jsParser.createTree([
+	renderStep.params = this.store.jsParser.createTree([
 			{
 				type: "Function",
 				name: null,
@@ -136,13 +136,13 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 					}
 				} ]
 			}
-		]).render());
+		]).compile("application/javascript").render;
 	// Compile any child nodes
 	var subOutput = [];
 	if(node.children) {
 		this.compileSubTreeHtml(subOutput,renderer,node.children);
 	}
-	renderStep.content = eval(this.store.jsParser.createTree([
+	renderStep.content = this.store.jsParser.createTree([
 		{
 			type: "Function",
 			name: null,
@@ -169,7 +169,7 @@ WikiTextParseTree.prototype.compileMacroCall = function(output,renderer,type,nod
 				}
 			]
 		}
-	]).render());
+	]).compile("application/javascript").render;
 	// Add the wrapper node
 	var wrapperTag = macro.wrapperTag || "div";
 	if(type === "text/html" && !this.store.disableHtmlWrapperNodes) {
