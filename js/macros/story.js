@@ -50,6 +50,8 @@ exports.macro = {
 			$("html,body").animate({
 				scrollTop: 0
 			}, 400);
+			event.preventDefault();
+			return false;
 		}
 	},
 	render: function(type,tiddler,store,params) {
