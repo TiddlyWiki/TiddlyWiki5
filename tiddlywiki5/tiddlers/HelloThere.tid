@@ -1,15 +1,27 @@
 title: HelloThere
 modifier: JeremyRuston
 
-<<view title link>>
+Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the venerable, reusable non-linear personal web notebook first released in 2004. It is a complete interactive wiki that can run from a single HTML file or as a powerful [[node.js application|What is node.js?]].
 
-Welcome to TiddlyWiki5, a reboot of the venerable, reusable non-linear personal web notebook first released in 2004. It is a complete interactive wiki that can run from a single HTML file or as a powerful `node.js` application.
+Some useful tiddlers for feature testing:
+* ImageTests showing different ways of embedding images
+* SampleData showing how JSON tiddlers are handled
+* VideoTests showing how different online video formats can be embedded
 
-TiddlyWiki is based on the idea of making information more useful by modelling it in the smallest meaningful semantic units, referred to as "tiddlers".  Structure comes from links, tags, and stories (sequences of tiddlers). Tiddlers use a wikitext notation that concisely represents a wide range of text formatting and hypertext features.
-
-TiddlyWiki has earned an enduring role as a tool that people [[love using|Raves]] for its rich, interactive interface to [[manipulate complex data|TiddlyWikiConcepts]] with structure that doesn't easily fit into conventional tools like spreadsheets or wordprocessors. Because people can use it without needing any complicated server infrastructure, and because it is [[open source|OpenSourceLicense]], it has bought unprecedented freedom to people to keep their precious information under their own control. TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|OpenSourceLicense]] project with a busy [[Community]] of independent developers.
+Technical documentation includes:
+* [[Testing]] regimen
+* Details of the CommandLineInterface
+* Overview of TiddlyWikiArchitecture
+** MacroInternals
+* Information about TiddlerFiles and RecipeFiles
+* NewWikiTextFeatures
 
 TiddlyWiki5 is currently in early beta, which is to say that it is useful but incomplete. You can get involved in the development on GitHub and the discussions on Google Groups:
 
 https://github.com/Jermolene/TiddlyWiki5
 http://groups.google.com/group/TiddlyWikiDev
+
+<<<
+Bug: this link doesn't work:
+<<view title link>>
+<<<

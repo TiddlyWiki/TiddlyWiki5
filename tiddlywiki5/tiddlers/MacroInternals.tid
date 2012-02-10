@@ -1,21 +1,29 @@
 title: MacroInternals
 
+! Macro Fields
+
 Macros are conventional JavaScript modules that export a single variable called `macro` that contains:
 
 |!Field Name |!Description |
 |`name` |The name of the macro |
 |`types` |An array of the MIME types that the macro can render |
 |`params` |A hashmap of the parameters accepted by the macro (see below) |
-|`handler` |The macro rendering function (see below) |
+|`events` |An optional hashmap of event handling functions (see below) |
+|`render` |The macro rendering function (see below) |
+|`rerender` |The optional macro rerendering function (see below) |
+|`dependentAll` |True if the macro needs access to all available tiddlers |
 
+! Macro Parameters
 The `params` hashmap provides the following fields about each parameter:
 
 |!Param Field Name |!Description |
-|`byName` |Provided if the parameter should be referenced by name. The value can be `true` or `"default"` to indicate that the parameter should accept anonymous parameters |
-|`type` |The type of the parameter, from `text` or `tiddler` (used for dependency tracking) |
+|`byName` |Provided if the parameter should be referenced by name. The value can be `true` or `"default"` to indicate that anonymous parameters are acceptable |
+|`type` |The type of the parameter, either `text` or `tiddler` (used for dependency tracking) |
+|`rel` |The relationship for parameters of type tiddler - either "link" or "include" |
 |`optional` |`true` if the parameter is optional |
 
-The `code` function is called with the following parameters:
+! Macro Rendering
+The `render` function should return the new text representation of the macro output. It is called with the following parameters:
 
 |!Param Name |!Description |
 |`type` |The target MIME type for rendering the macro |
@@ -23,3 +31,28 @@ The `code` function is called with the following parameters:
 |`store` |The `WikiStore` object to be used |
 |`params` |The macro parameters as a hashmap |
 |`content` |The rendered text of the children of the macro |
+
+!Macro Rerendering
+The `rerender` function is called with the following parameters:
+
+|!Param Name |!Description |
+|`node` |The DOM node containing the existing rendering of the macro |
+|`changes` |Hashmap of `{title: "created|modified|deleted"}` |
+|`type` |The target MIME type for rendering the macro |
+|`tiddler` |The tiddler in whose context the macro is being rendered |
+|`store` |The `WikiStore` object to be used |
+|`params` |The macro parameters as a hashmap |
+|`content` |The rendered text of the children of the macro |
+
+!Macro Event Handlers
+Event handlers are called with the following parameters:
+
+|!Param Name |!Description |
+|`event` |The DOM node containing the existing rendering of the macro |
+|`node` |Hashmap of `{title: "created|modified|deleted"}` |
+|`tiddler` |The tiddler in whose context the macro is being rendered |
+|`store` |The `WikiStore` object to be used |
+|`params` |The macro parameters as a hashmap |
+
+Event handlers should return `false` if they handle the event (and generally should also call `event.preventDefault()`), and `true` if they do not.
+
