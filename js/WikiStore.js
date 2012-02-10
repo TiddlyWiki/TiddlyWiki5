@@ -5,7 +5,6 @@ WikiStore uses the .cache member of tiddlers to store the following information:
 
 	parseTree: Caches the parse tree for the tiddler
 	renderers: Caches rendering functions for this tiddler (indexed by MIME type)
-	renditions: Caches the renditions produced by those functions (indexed by MIME type)
 
 \*/
 (function(){
@@ -321,24 +320,17 @@ WikiStore.prototype.renderTiddler = function(targetType,title,templateTitle,opti
 	var noWrap = options.noWrap || this.disableHtmlWrapperNodes,
 		tiddler = this.getTiddler(title),
 		renderer = this.compileTiddler(templateTitle,targetType),
-		renditions = this.getCacheForTiddler(templateTitle,"renditions",function() {
-			return {};
-		}),
 		template,
 		content;
 	if(tiddler) {
+		content = renderer.render(tiddler,this);
 		if(title !== templateTitle) {
 			template = this.getTiddler(templateTitle);
-			content = renderer.render(tiddler,this);
 			return noWrap ? content : HTML(HTML.elem("div",{
 											"data-tw-render-tiddler": title,
 											"data-tw-render-template": templateTitle
 										},[HTML.raw(content)]),targetType);
 		} else {
-			if(!renditions[targetType]) {
-				renditions[targetType] = renderer.render(tiddler,this);
-			}
-			content = renditions[targetType];
 			return noWrap ? content : HTML(HTML.elem("div",{
 											"data-tw-render-tiddler": title
 										},[HTML.raw(content)]),targetType);
