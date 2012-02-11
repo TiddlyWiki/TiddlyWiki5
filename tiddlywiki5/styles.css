@@ -6,9 +6,13 @@ body {
 
 body {
     font-size: 15px;
-    line-height: 22px;
-    max-width: 644px;
+    line-height: 20px;
+    max-width: 944px;
     margin: auto;
+}
+th, td {
+    background: #f6f6f6;
+    padding: 3px 3px 3px 3px;
 }
 code, pre {
     font-size: 13px;

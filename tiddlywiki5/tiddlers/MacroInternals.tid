@@ -2,7 +2,7 @@ title: MacroInternals
 
 ! Macro Fields
 
-Macros are conventional JavaScript modules that export a single variable called `macro` that contains:
+Macros are implemented as conventional JavaScript modules that export a single variable called `macro` that contains these fields:
 
 |!Field Name |!Description |
 |`name` |The name of the macro |
