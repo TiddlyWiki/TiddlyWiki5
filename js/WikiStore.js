@@ -434,7 +434,7 @@ WikiStore.prototype.refreshDomNode = function(node,changes,renderer,tiddler) {
 		renderStep = node.getAttribute ? node.getAttribute("data-tw-render-step") : null;
 	// Is this node the rendering of a tiddler?
 	if(renderTiddler !== null) {
-		// Rerender the content of the node if the tiddler being rendered has changed
+		// Rerender the content of the node if the tiddler being rendered or its template has changed
 		if(changes.hasOwnProperty(renderTiddler) || (renderTemplate && changes.hasOwnProperty(renderTemplate))) {
 			this.renderTiddlerInNode(node,renderTiddler,renderTemplate,{noWrap: true});
 		} else {
@@ -473,7 +473,7 @@ WikiStore.prototype.hasDependencyChanged = function(dependencies,changes) {
 	for(var rel in dependencies) {
 		if(rel !== "dependentAll") {
 			for(var t in dependencies[rel]) {
-				if(t in changes) {
+				if(changes.hasOwnProperty(t)) {
 					return true;
 				}
 			}

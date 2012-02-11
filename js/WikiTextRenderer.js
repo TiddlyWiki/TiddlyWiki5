@@ -13,7 +13,7 @@ var HTML = require("./HTML.js").HTML,
 	utils = require("./Utils.js");
 
 var WikiTextRenderer = function() {
-	this.renderSteps = []; // Array of {step: n, dependencies: {},handler: function(tiddler,renderer,store,utils) {}}
+	this.renderSteps = []; // Array of {step: n, renderType: "main"|"macro", dependencies: {},handler: function(tiddler,renderer,store,utils) {}}
 };
 
 WikiTextRenderer.prototype.addRenderStep = function(renderStep) {
