@@ -136,7 +136,7 @@ var commandLineSwitches = {
 			var recipe = [];
 			app.store.forEachTiddler(function(title,tiddler) {
 				var filename = encodeURIComponent(tiddler.title.replace(/ /g,"_")) + ".tid";
-				fs.writeFileSync(path.resolve(args[0],filename),store.serializeTiddler("application/x-tiddler",tiddler),"utf8");
+				fs.writeFileSync(path.resolve(args[0],filename),app.store.serializeTiddler("application/x-tiddler",tiddler),"utf8");
 				recipe.push("tiddler: " + filename + "\n");
 			});
 			fs.writeFileSync(path.join(args[0],"split.recipe"),recipe.join(""));
