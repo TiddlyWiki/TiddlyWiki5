@@ -26,8 +26,8 @@ var App = function() {
 	this.store = new WikiStore();	
 	// Register the parsers
 	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({store: this.store}));
-	this.store.registerParser("application/json",new JSONParser());
-	var imageParser = new ImageParser();
+	this.store.registerParser("application/json",new JSONParser({store: this.store}));
+	var imageParser = new ImageParser({store: this.store});
 	this.store.registerParser("image/svg+xml",imageParser);
 	this.store.registerParser("image/jpg",imageParser);
 	this.store.registerParser("image/jpeg",imageParser);
