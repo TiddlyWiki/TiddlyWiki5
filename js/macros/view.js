@@ -28,7 +28,11 @@ exports.macro = {
 					case "link":
 						return store.renderMacro("link",type,tiddler,{target: v},encoder(v));
 					case "wikified":
-						return store.renderTiddler(type,tiddler.title); // Should be return store.renderText("text/x-tiddlywiki",v,type);
+						if(params.field === "text") {
+							return store.renderTiddler(type,tiddler.title);
+						} else {
+							return store.renderText("text/x-tiddlywiki",v,type,tiddler.title);
+						}
 					case "date":
 						var template = params.template || "DD MMM YYYY";
 						return encoder(utils.formatDateString(v,template));
