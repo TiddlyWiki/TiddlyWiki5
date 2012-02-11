@@ -9,22 +9,41 @@ Compiles images into JavaScript functions that render them in HTML
 /*jslint node: true */
 "use strict";
 
-var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
-	HTML = require("./HTML.js").HTML,
-	utils = require("./Utils.js");
+var utils = require("./Utils.js");
 
-var ImageParser = function(options) {
-	this.store = options.store;
+var ImageRenderer = function(handlerCode) {
+	/*jslint evil: true */
+	this.handler = eval(handlerCode);
+};
+
+ImageRenderer.prototype.render = function(tiddler,store) {
+	return this.handler(tiddler,store,utils);
+};
+
+// The parse tree is degenerate
+var ImageParseTree = function(type,text) {
+	this.type = type;
+	this.text = text;
+	this.dependencies = {};
+};
+
+ImageParseTree.prototype.compile = function(type) {
+	if(type === "text/html") {
+		if(this.type === "image/svg+xml") {
+			return new ImageRenderer("(function (tiddler,store,utils) {return '<img src=\"data:" + this.type + "," + utils.stringify(encodeURIComponent(this.text)) + "\">';})");
+		} else {
+			return new ImageRenderer("(function (tiddler,store,utils) {return '<img src=\"data:" + this.type + ";base64," + this.text + "\">';})");
+		}
+	} else {
+		return null;
+	}
+};
+
+var ImageParser = function() {
 };
 
 ImageParser.prototype.parse = function(type,text) {
-	var src;
-	if(this.type === "image/svg+xml") {
-		src = "data:" + type + "," + encodeURIComponent(text);
-	} else {
-		src = "data:" + type + ";base64," + text;
-	}
-	return new WikiTextParseTree([HTML.elem("img",{src: src})],{},this.store);
+	return new ImageParseTree(type,text);
 };
 
 exports.ImageParser = ImageParser;

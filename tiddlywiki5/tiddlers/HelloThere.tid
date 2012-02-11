@@ -13,7 +13,6 @@ Technical documentation includes:
 * [[Testing]] regimen
 * Details of the CommandLineInterface
 * Overview of TiddlyWikiArchitecture
-** TiddlyWikiInternals
 ** MacroInternals
 * Information about TiddlerFiles and RecipeFiles
 * NewWikiTextFeatures
