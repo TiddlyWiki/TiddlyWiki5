@@ -296,6 +296,25 @@ WikiTextParseTree.prototype.toString = function(type) {
 				["treeNode"]
 			)];
 		},
+		renderDependencies = function(dependencies) {
+			var output = [];
+			for(var d in dependencies) {
+				if(d === "dependentAll") {
+					output.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(dependencies[d])]));
+				} else {
+					var dependents = [];
+					for(var t in dependencies[d]) {
+						dependents.push(t);
+					}
+					output.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(dependents.join(", "))]));
+				}
+			}
+			return HTML.splitLabel(
+				"dependencies",
+				[HTML.text("Dependencies")],
+				output
+			);
+		},
 		renderMacroNode = function(node) {
 			var params = [],
 				ret = [];
@@ -317,23 +336,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 				["treeNode"]
 			));
 			if(node.dependencies) {
-				var dependencies = [];
-				for(var d in node.dependencies) {
-					if(d === "dependentAll") {
-						dependencies.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(node.dependencies[d])]));
-					} else {
-						var dependents = [];
-						for(var t in node.dependencies[d]) {
-							dependents.push(t);
-						}
-						dependencies.push(HTML.splitLabel("dependency",[HTML.text(d)],[HTML.text(dependents.join(","))]));
-					}
-				}
-				ret.push(HTML.splitLabel(
-					"dependencies",
-					[HTML.text("Dependencies")],
-					dependencies
-				));
+				ret.push(renderDependencies(node.dependencies));
 			}
 			if(node.children) {
 				ret.push(renderArray(node.children));
@@ -382,7 +385,7 @@ WikiTextParseTree.prototype.toString = function(type) {
 				return renderHtmlNode(node);
 			}
 		};
-	return HTML(renderArray(this.tree),type);
+	return HTML(renderDependencies(this.dependencies),type) + HTML(renderArray(this.tree),type);
 };
 
 exports.WikiTextParseTree = WikiTextParseTree;
