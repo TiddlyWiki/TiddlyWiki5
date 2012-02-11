@@ -295,10 +295,16 @@ WikiStore.prototype.compileTiddler = function(title,type) {
 /*
 Render a block of text of a specified type into a particular MIME type
 */
-WikiStore.prototype.renderText = function(type,text,targetType,asTitle) {
-	var tiddler = this.getTiddler(asTitle),
-		renderer = this.compileText(type,text,targetType);
-	return renderer.render(tiddler,this);
+WikiStore.prototype.renderText = function(type,text,targetType,asTitle,options) {
+	options = options || {};
+	var noWrap = options.noWrap || this.disableHtmlWrapperNodes,
+		tiddler = this.getTiddler(asTitle),
+		renderer = this.compileText(type,text,targetType),
+		content = renderer.render(tiddler,this);
+	return noWrap ? content : HTML(HTML.elem("div",{
+									"data-tw-render-text": true,
+									"data-tw-render-as": asTitle
+								},[HTML.raw(content)]),targetType);
 };
 
 /*
