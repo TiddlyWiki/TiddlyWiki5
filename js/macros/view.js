@@ -33,6 +33,7 @@ exports.macro = {
 						} else {
 							return store.renderText("text/x-tiddlywiki",v,type,tiddler.title);
 						}
+						break;
 					case "date":
 						var template = params.template || "DD MMM YYYY";
 						return encoder(utils.formatDateString(v,template));

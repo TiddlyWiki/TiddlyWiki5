@@ -9,46 +9,42 @@ Compiles JSON objects into JavaScript functions that render them in HTML and pla
 /*jslint node: true */
 "use strict";
 
-var utils = require("./Utils.js");
+var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
+	HTML = require("./HTML.js").HTML,
+	utils = require("./Utils.js");
 
-var JSONRenderer = function(handlerCode) {
-	/*jslint evil: true */
-	this.handler = eval(handlerCode);
+var renderObject = function(obj) {
+	var children = [],t;
+	if(obj instanceof Array) {
+		for(t=0; t<obj.length; t++) {
+			children.push(HTML.elem("li",{
+				"class": ["jsonArrayMember"]
+			},[renderObject(obj[t])]));
+		}
+		return HTML.elem("ul",{
+			"class": ["jsonArray"]
+		},children);
+	} else if(typeof obj === "object") {
+		for(t in obj) {
+			children.push(HTML.elem("li",{
+				"class": ["jsonObjectMember"]
+			},[HTML.splitLabel("JSON",[HTML.text(t)],[renderObject(obj[t])])]));
+		}
+		return HTML.elem("ul",{
+			"class": ["jsonObject"]
+		},children);
+	} else {
+		return HTML.label("JSON" + (typeof obj),[HTML.text(JSON.stringify(obj))],["jsonValue"]);
+	}
 };
 
-JSONRenderer.prototype.render = function(tiddler,store) {
-	return this.handler(tiddler,store,utils);
-};
-
-JSONRenderer.prototype.toString = function(type) {
-	var output = [];
-	utils.renderObject(output,type,this.handler.toString(),[]);
-	return output.join("");
-};
-
-// The parse tree is degenerate
-var JSONParseTree = function(tree) {
-	this.tree = tree;
-	this.dependencies = {};
-};
-
-JSONParseTree.prototype.compile = function(type) {
-	return new JSONRenderer("(function (tiddler,store,utils) {var output=[]; utils.renderObject(output,'" + type + "'," + JSON.stringify(this.tree) + ",[]);return output.join('');})");
-};
-
-JSONParseTree.prototype.toString = function(type) {
-	var output = [];
-	utils.renderObject(output,type,this.tree,[]);
-	return output.join("");
-};
-
-var JSONParser = function() {
+var JSONParser = function(options) {
+	this.store = options.store;
 };
 
 JSONParser.prototype.parse = function(type,text) {
-	return new JSONParseTree(JSON.parse(text));
+	return new WikiTextParseTree([renderObject(JSON.parse(text))],{},this.store);
 };
-
 
 exports.JSONParser = JSONParser;
 

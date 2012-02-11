@@ -42,7 +42,7 @@ var utils = require("./Utils.js");
 Constructs an HTMLParseTree from a tree of nodes. A single node or an array of nodes can be passed.
 
 As a shortcut, the constructor can be called as an ordinary function without the new keyword, in which case
-it automatically returns the `text/html` rendering of the tree.
+it by default returns the `text/html` rendering of the tree.
 */
 var HTML = function(tree,type) {
 	if(this instanceof HTML) {
@@ -108,6 +108,17 @@ HTML.macro = function(name,params,children,dependencies) {
 		m.children = children;
 	}
 	return m;
+};
+
+/*
+Static method to construct a label
+*/
+HTML.label = function(type,value,classes) {
+	classes = (classes || []).slice(0);
+	classes.push("label");
+	return HTML.elem("span",{
+		"class": classes
+	},value);
 };
 
 /*
