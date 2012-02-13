@@ -6,6 +6,7 @@ type: application/json
         "title": "example glossary",
 		"GlossDiv": {
             "title": "S",
+            "age": 34,
 			"GlossList": {
                 "GlossEntry": {
                     "ID": "SGML",
@@ -15,7 +16,7 @@ type: application/json
 					"Abbrev": "ISO 8879:1986",
 					"GlossDef": {
                         "para": "A meta-markup language, used to create markup languages such as DocBook.",
-						"GlossSeeAlso": ["GML", "XML"]
+						"GlossSeeAlso": ["GML", "XML", 23]
                     },
 					"GlossSee": "markup"
                 }
