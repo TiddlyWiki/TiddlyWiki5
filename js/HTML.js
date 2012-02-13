@@ -117,7 +117,8 @@ HTML.label = function(type,value,classes) {
     classes = (classes || []).slice(0);
     classes.push("label");
     return HTML.elem("span",{
-        "class": classes
+        "class": classes,
+		"data-tw-label-type": type
     },value);
 };
 
