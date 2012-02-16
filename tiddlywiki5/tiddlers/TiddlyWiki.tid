@@ -1,4 +1,6 @@
 title: TiddlyWiki
+modifier: JeremyRuston
+modified: 20120211110622
 
 TiddlyWiki is based on the idea of making information more useful by modelling it in the smallest meaningful semantic units, referred to as "tiddlers".  Structure comes from links, tags, and stories (sequences of tiddlers). Tiddlers use a wikitext notation that concisely represents a wide range of text formatting and hypertext features.
 
