@@ -7,7 +7,7 @@ title: js/macros/info.js
 /*jslint node: true */
 "use strict";
 
-var HTML = require("../HTML.js").HTML,
+var Renderer = require("../Renderer.js").Renderer,
 	utils = require("../Utils.js");
 
 exports.macro = {
@@ -31,16 +31,16 @@ exports.macro = {
 			var parseTree = store.parseTiddler(tiddler.title);
 			switch(info) {
 				case "parsetree":
-					return HTML(HTML.slider("parsetree",
+					return [Renderer.SliderNode("parsetree",
 										"Parse tree",
 										"The parse tree for this tiddler",
-										HTML.raw(parseTree.toString(type))),type);
+										(parseTree.toString(type)))];
 					//break;
 				case "compiled":
-					return HTML(HTML.slider("compiled",
+					return [Renderer.SliderNode("compiled",
 										"Render functions",
 										"The render functions for this tiddler",
-										HTML.raw(parseTree.compile(type).toString(type))),type);
+										(parseTree.compile(type).toString(type)))];
 					//break;
 			}
 		}

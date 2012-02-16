@@ -8,7 +8,7 @@ title: js/WikiTextRules.js
 "use strict";
 
 var ArgParser = require("./ArgParser.js").ArgParser,
-	HTML = require("./HTML.js").HTML,
+	Renderer = require("./Renderer.js").Renderer,
 	util = require("util");
 
 var textPrimitives = {
@@ -97,9 +97,36 @@ var enclosedTextHelper = function(w) {
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 		var text = lookaheadMatch[1];
-		w.output.push(HTML.elem(this.element,null,[HTML.text(text)]));
+		w.output.push(Renderer.ElementNode(this.element,null,[Renderer.TextNode(text)]));
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 	}
+};
+
+var compileMacroParams = function(w,params) {
+	// Slot the parameters into the macro call
+	var properties = [],n;
+	for(var p in params) {
+		if(params[p].type === "string") {
+			n = {type: "StringLiteral", value: params[p].value};
+		} else {
+			n = w.store.jsParser.parse(params[p].value).tree.elements[0];
+		}
+		properties.push({type: "PropertyAssignment",name: p,value: n});
+	}
+	return w.store.jsParser.createTree([
+			{
+				type: "Function",
+				name: null,
+				params: ["tiddler","store","utils"], // These are the parameters passed to the parameter expressions
+				elements: [ {
+					type: "ReturnStatement",
+					value: {
+						type: "ObjectLiteral",
+						properties: properties
+					}
+				} ]
+			}
+		]).compile("application/javascript").render;
 };
 
 var insertMacroCall = function(w,output,name,params,children) {
@@ -131,7 +158,7 @@ var insertMacroCall = function(w,output,name,params,children) {
 			}
 		}
 		w.mergeDependencies(dependencies);
-		output.push(HTML.macro(name,params,children,dependencies));
+		output.push(Renderer.MacroNode(name,compileMacroParams(w,params),children,dependencies,w.store));
 	}
 };
 
@@ -174,7 +201,7 @@ var rules = [
 	rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 	handler: function(w)
 	{
-		var table = HTML.elem("table",{"class": "twtable"},[]);
+		var table = Renderer.ElementNode("table",{"class": "twtable"},[]);
 		w.output.push(table);
 		var prevColumns = [];
 		var currRowType = null;
@@ -190,7 +217,7 @@ var rules = [
 				w.nextMatch += lookaheadMatch[0].length+1;
 			} else {
 				if(nextRowType != currRowType) {
-					rowContainer = HTML.elem(this.rowTypes[nextRowType],{},[]);
+					rowContainer = Renderer.ElementNode(this.rowTypes[nextRowType],{},[]);
 					table.children.push(rowContainer);
 					currRowType = nextRowType;
 				}
@@ -205,7 +232,7 @@ var rules = [
 					rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
-					var theRow = HTML.elem("tr",{},[]);
+					var theRow = Renderer.ElementNode("tr",{},[]);
 					theRow.attributes["class"] = rowCount%2 ? "oddRow" : "evenRow";
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow.children,prevColumns);
@@ -261,11 +288,11 @@ var rules = [
 				}
 				var cell;
 				if(chr == "!") {
-					cell = HTML.elem("th",{},[]);
+					cell = Renderer.ElementNode("th",{},[]);
 					e.push(cell);
 					w.nextMatch++;
 				} else {
-					cell = HTML.elem("td",{},[]);
+					cell = Renderer.ElementNode("td",{},[]);
 					e.push(cell);
 				}
 				prevCell = cell;
@@ -295,7 +322,7 @@ var rules = [
 	termRegExp: /(\n)/mg,
 	handler: function(w)
 	{
-		var e = HTML.elem("h" + w.matchLength,{},[]);
+		var e = Renderer.ElementNode("h" + w.matchLength,{},[]);
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -339,7 +366,7 @@ var rules = [
 					if(currLevel !== 0 && target.children) {
 						target = target.children[target.children.length-1];
 					}
-					e = HTML.elem(listType,{},[]);
+					e = Renderer.ElementNode(listType,{},[]);
 					target.push(e);
 					stack.push(e.children);
 				}
@@ -351,13 +378,13 @@ var rules = [
 					stack.pop();
 			} else if(listLevel == currLevel && listType != currType) {
 				stack.pop();
-				e = HTML.elem(listType,{},[]);
+				e = Renderer.ElementNode(listType,{},[]);
 				stack[stack.length-1].push(e);
 				stack.push(e.children);
 			}
 			currLevel = listLevel;
 			currType = listType;
-			e = HTML.elem(itemType,{},[]);
+			e = Renderer.ElementNode(itemType,{},[]);
 			stack[stack.length-1].push(e);
 			w.subWikifyTerm(e.children,this.termRegExp);
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
@@ -372,7 +399,7 @@ var rules = [
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
 	handler:  function(w) {
-		var e = HTML.elem(this.element,{},[]);
+		var e = Renderer.ElementNode(this.element,{},[]);
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -393,7 +420,7 @@ var rules = [
 		do {
 			if(newLevel > currLevel) {
 				for(t=currLevel; t<newLevel; t++) {
-					e = HTML.elem(this.element,{},[]);
+					e = Renderer.ElementNode(this.element,{},[]);
 					stack[stack.length-1].push(e);
 				}
 			} else if(newLevel < currLevel) {
@@ -402,7 +429,7 @@ var rules = [
 			}
 			currLevel = newLevel;
 			w.subWikifyTerm(stack[stack.length-1],this.termRegExp);
-			stack[stack.length-1].push(HTML.elem("br"));
+			stack[stack.length-1].push(Renderer.ElementNode("br"));
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			matched = lookaheadMatch && lookaheadMatch.index == w.nextMatch;
@@ -419,7 +446,7 @@ var rules = [
 	match: "^----+$\\n?|<hr ?/?>\\n?",
 	handler: function(w)
 	{
-		w.output.push(HTML.elem("hr"));
+		w.output.push(Renderer.ElementNode("hr"));
 	}
 },
 
@@ -492,7 +519,7 @@ var rules = [
 			}
 			insertMacroCall(w,w.output,"link",{
 				target: {type: "string", value: link}
-			},[HTML.text(text)]);
+			},[Renderer.TextNode(text)]);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -519,7 +546,7 @@ var rules = [
 		if(w.autoLinkWikiWords) {
 			insertMacroCall(w,w.output,"link",{
 				target: {type: "string", value: w.matchText}
-			},[HTML.text(w.source.substring(w.matchStart,w.nextMatch))]);
+			},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
 		} else {
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
@@ -533,7 +560,7 @@ var rules = [
 	{
 		insertMacroCall(w,w.output,"link",{
 			target: {type: "string", value: w.matchText}
-		},[HTML.text(w.source.substring(w.matchStart,w.nextMatch))]);
+		},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
 	}
 },
 
@@ -584,7 +611,7 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			w.output.push(HTML.elem("html",{},[HTML.raw(lookaheadMatch[1])]));
+			w.output.push(Renderer.ElementNode("html",{},[Renderer.RawNode(lookaheadMatch[1])]));
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -611,32 +638,32 @@ var rules = [
 		var e,lookaheadRegExp,lookaheadMatch;
 		switch(w.matchText) {
 		case "''":
-			e = HTML.elem("strong",null,[]);
+			e = Renderer.ElementNode("strong",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/('')/mg);
 			break;
 		case "//":
-			e = HTML.elem("em",null,[]);
+			e = Renderer.ElementNode("em",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(\/\/)/mg);
 			break;
 		case "__":
-			e = HTML.elem("u",null,[]);
+			e = Renderer.ElementNode("u",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(__)/mg);
 			break;
 		case "^^":
-			e = HTML.elem("sup",null,[]);
+			e = Renderer.ElementNode("sup",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(\^\^)/mg);
 			break;
 		case "~~":
-			e = HTML.elem("sub",null,[]);
+			e = Renderer.ElementNode("sub",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(~~)/mg);
 			break;
 		case "--":
-			e = HTML.elem("strike",null,[]);
+			e = Renderer.ElementNode("strike",null,[]);
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(--)/mg);
 			break;
@@ -645,7 +672,7 @@ var rules = [
 			lookaheadRegExp.lastIndex = w.matchStart;
 			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push(HTML.elem("code",null,[HTML.text(lookaheadMatch[1])]));
+				w.output.push(Renderer.ElementNode("code",null,[Renderer.TextNode(lookaheadMatch[1])]));
 				w.nextMatch = lookaheadRegExp.lastIndex;
 			}
 			break;
@@ -654,7 +681,7 @@ var rules = [
 			lookaheadRegExp.lastIndex = w.matchStart;
 			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push(HTML.elem("code",null,[HTML.text(lookaheadMatch[1])]));
+				w.output.push(Renderer.ElementNode("code",null,[Renderer.TextNode(lookaheadMatch[1])]));
 				w.nextMatch = lookaheadRegExp.lastIndex;
 			}
 			break;
@@ -669,7 +696,7 @@ var rules = [
 	{
 		switch(w.matchText) {
 		case "@@":
-			var e = HTML.elem("span",null,[]);
+			var e = Renderer.ElementNode("span",null,[]);
 			w.output.push(e);
 			var styles = inlineCssHelper(w);
 			if(styles.length === 0)
@@ -684,7 +711,7 @@ var rules = [
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
-				e = HTML.elem(lookaheadMatch[2] == "\n" ? "div" : "span",{
+				e = Renderer.ElementNode(lookaheadMatch[2] == "\n" ? "div" : "span",{
 					"class": lookaheadMatch[1]
 				},[]);
 				w.output.push(e);
@@ -700,7 +727,7 @@ var rules = [
 	match: "--",
 	handler: function(w)
 	{
-		w.output.push(HTML.entity("&mdash;"));
+		w.output.push(Renderer.EntityNode("&mdash;"));
 	}
 },
 
@@ -709,7 +736,7 @@ var rules = [
 	match: "\\n|<br ?/?>",
 	handler: function(w)
 	{
-		w.output.push(HTML.elem("br"));
+		w.output.push(Renderer.ElementNode("br"));
 	}
 },
 
@@ -722,7 +749,7 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			w.output.push(HTML.text(lookaheadMatch[1]));
+			w.output.push(Renderer.TextNode(lookaheadMatch[1]));
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -733,7 +760,7 @@ var rules = [
 	match: "&#?[a-zA-Z0-9]{2,8};",
 	handler: function(w)
 	{
-		w.output.push(HTML.entity(w.matchText));
+		w.output.push(Renderer.EntityNode(w.matchText));
 	}
 }
 

@@ -7,7 +7,8 @@ title: js/macros/view.js
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var Renderer = require("../Renderer.js").Renderer,
+	utils = require("../Utils.js");
 
 exports.macro = {
 	name: "view",
@@ -17,28 +18,44 @@ exports.macro = {
 		format: {byPos: 1, type: "text", optional: true},
 		template: {byPos: 2, type: "text", optional: true}
 	},
-	render: function(type,tiddler,store,params) {
-		var encoder = type === "text/html" ? utils.htmlEncode : function(x) {return x;};
+	execute: function(macroNode,tiddler,store) {
 		if(!tiddler) {
-			return "{{** Missing tiddler **}}";
+			return Renderer.TextNode("{{** Missing tiddler **}}");
 		} else {
-			var v = tiddler[params.field];
+			var v = tiddler[macroNode.params.field],
+				content,
+				t,
+				contentClone = [];
 			if(v !== undefined) {
-				switch(params.format) {
+				switch(macroNode.params.format) {
 					case "link":
-						return store.renderMacro("link",type,tiddler,{target: v},encoder(v));
+						var dependencies = {link: {}};
+						dependencies.link[v] = 1;
+						var link = Renderer.MacroNode("link",
+													{target: v},
+													[Renderer.TextNode(v)],
+													dependencies,
+													store);
+						link.execute(tiddler);
+						return [link];
 					case "wikified":
-						if(params.field === "text") {
-							return store.renderTiddler(type,tiddler.title);
+						if(macroNode.params.field === "text") {
+							content = store.parseTiddler(tiddler.title).tree;
 						} else {
-							return store.renderText("text/x-tiddlywiki",v,type,tiddler.title);
+							content = store.parseText("text/x-tiddlywiki",v).tree;
 						}
-						break;
+						for(t=0; t<content.length; t++) {
+							contentClone.push(content[t].clone());
+						}
+						for(t=0; t<contentClone.length; t++) {
+							contentClone[t].execute(tiddler);
+						}
+						return contentClone;
 					case "date":
-						var template = params.template || "DD MMM YYYY";
-						return encoder(utils.formatDateString(v,template));
+						var template = macroNode.params.template || "DD MMM YYYY";
+						return [Renderer.TextNode(utils.formatDateString(v,template))];
 					default: // "text"
-						return encoder(v);
+						return [Renderer.TextNode(v)];
 				}
 			}
 		}

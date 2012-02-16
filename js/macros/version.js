@@ -7,15 +7,15 @@ title: js/macros/version.js
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "version",
 	types: ["text/html","text/plain"],
 	params: {
 	},
-	render: function(type,tiddler,store,params) {
-		return "5.0.0";
+	execute: function(macroNode,tiddler,store) {
+		return [Renderer.TextNode("5.0.0")];
 	}
 };
 

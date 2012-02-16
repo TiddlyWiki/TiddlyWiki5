@@ -185,7 +185,7 @@ utils.entityDecode = function(s) {
 		if(c) {
 			return String.fromCharCode(c);
 		} else {
-			return null;
+			return s; // Couldn't convert it as an entity, just return it raw
 		}
 	}
 };

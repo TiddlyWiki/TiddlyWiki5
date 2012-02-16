@@ -7,7 +7,7 @@ title: js/macros/slider.js
 /*jslint node: true */
 "use strict";
 
-var HTML = require("../HTML.js").HTML,
+var Renderer = require("../Renderer.js").Renderer,
 	utils = require("../Utils.js");
 
 exports.macro = {
@@ -20,23 +20,25 @@ exports.macro = {
 		tooltip: {byPos: 3, type: "text", optional: true}
 	},
 	events: {
-		click: function(event,node,tiddler,store,params) {
-			var el = node.firstChild.firstChild.nextSibling;
+		click: function(event,macroNode) {
+			var el = event.currentTarget.firstChild.firstChild.nextSibling;
 			el.style.display = el.style.display === "block" ? "none" : "block";
 			event.preventDefault();
 			return false;
 		}
 	},
-	render: function(type,tiddler,store,params) {
-		if(type === "text/html") {
-			return HTML(HTML.slider(params.name,
-										params.label,
-										params.tooltip,
-										HTML.raw(store.renderTiddler(type,params.targetTiddler))),type);
-		} else if(type === "text/plain") {
-			return store.renderTiddler(type,params.target);
-		}
-		return null;	
+	execute: function(macroNode,tiddler,store) {
+			var target = macroNode.params.targetTiddler,
+				dependencies = {include: {}};
+			dependencies.include[target] = 1;
+			var content = Renderer.SliderNode(macroNode.params.name,
+										macroNode.params.label,
+										macroNode.params.tooltip,
+										[
+											Renderer.MacroNode("tiddler",{target: target},null,dependencies,store)
+										]);
+			content.execute(tiddler);
+			return [content];
 	}
 };
 

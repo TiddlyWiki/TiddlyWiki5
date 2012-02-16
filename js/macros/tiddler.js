@@ -42,7 +42,7 @@ the `template` parameter or, if that parameter is missing, the tiddler named in 
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "tiddler",
@@ -53,29 +53,39 @@ exports.macro = {
 		template: {byName: true, type: "tiddler", optional: true},
 		"with": {byName: true, type: "text", optional: true, dependentAll: true}
 	},
-	render: function(type,tiddler,store,params) {
-		var renderTitle = params.target,
-			renderTemplate = params.template;
+	execute: function(macroNode,tiddler,store) {
+		var renderTitle = macroNode.params.target,
+			renderTemplate = macroNode.params.template,
+			content,
+			contentClone = [],
+			t;
 		if(typeof renderTitle !== "string") {
 			renderTitle = tiddler.title;
 		}
 		if(typeof renderTemplate !== "string") {
 			renderTemplate = renderTitle;
 		}
-		if(params["with"]) {
+		if("with" in macroNode.params) {
 			// Parameterised transclusion
 			var targetTiddler = store.getTiddler(renderTemplate),
 				text = targetTiddler.text;
-			var withTokens = [params["with"]];
-			for(var t=0; t<withTokens.length; t++) {
+			var withTokens = [macroNode.params["with"]];
+			for(t=0; t<withTokens.length; t++) {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
 			}
-			return store.renderText(targetTiddler.type,text,type,renderTitle);
+			content = store.parseText(targetTiddler.type,text).tree;
 		} else {
 			// There's no parameterisation, so we can just render the target tiddler directly
-			return store.renderTiddler(type,renderTitle,renderTemplate);
+			content = store.parseTiddler(renderTemplate).tree;
 		}
+		for(t=0; t<content.length; t++) {
+			contentClone.push(content[t].clone());
+		}
+		for(t=0; t<contentClone.length; t++) {
+			contentClone[t].execute(store.getTiddler(renderTitle));
+		}
+		return contentClone;
 	}
 };
 

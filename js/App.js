@@ -13,6 +13,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	Tiddler = require("./Tiddler.js").Tiddler,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),
+	Renderer = require("./Renderer.js").Renderer,
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
 	JSONParser = require("./JSONParser.js").JSONParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
@@ -99,9 +100,8 @@ var App = function() {
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
 		// Open the PageTemplate
-		var div = document.createElement("div");
-		this.store.renderTiddlerInNode(div,"PageTemplate");
-		document.body.appendChild(div);
+		var renderer = new Renderer("PageTemplate",null,this.store);
+		renderer.renderInDom(document.body);
 		// Set up a timer to change the value of a tiddler
 		var me = this;
 		window.setInterval(function() {
@@ -112,7 +112,7 @@ var App = function() {
 		},3000);
 		// Register an event handler to handle refreshing the DOM
 		this.store.addEventListener("",function(changes) {
-			me.store.refreshDomNode(div,changes);
+			renderer.refreshInDom(changes);
 		});
 	}
 };

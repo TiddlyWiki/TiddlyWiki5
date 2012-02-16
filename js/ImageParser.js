@@ -10,7 +10,7 @@ Compiles images into JavaScript functions that render them in HTML
 "use strict";
 
 var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
-    HTML = require("./HTML.js").HTML,
+    Renderer = require("./Renderer.js").Renderer,
     utils = require("./Utils.js");
 
 var ImageParser = function(options) {
@@ -19,12 +19,12 @@ var ImageParser = function(options) {
 
 ImageParser.prototype.parse = function(type,text) {
     var src;
-    if(this.type === "image/svg+xml") {
+    if(type === "image/svg+xml") {
         src = "data:" + type + "," + encodeURIComponent(text);
 	} else {
         src = "data:" + type + ";base64," + text;
 	}
-	return new WikiTextParseTree([HTML.elem("img",{src: src})],{},this.store);
+	return new WikiTextParseTree([Renderer.ElementNode("img",{src: src})],{},this.store);
 };
 
 exports.ImageParser = ImageParser;

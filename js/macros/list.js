@@ -7,7 +7,7 @@ title: js/macros/list.js
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var Renderer = require("../Renderer.js").Renderer;
 
 var handlers = {
 	all: function(store) {
@@ -41,35 +41,33 @@ exports.macro = {
 		template: {byName: true, type: "tiddler", optional: true},
 		emptyMessage: {byName: true, type: "text", optional: true}
 	},
-	render: function(type,tiddler,store,params) {
+	execute: function(macroNode,tiddler,store) {
 		var templateType = "text/x-tiddlywiki",
 			templateText = "<<view title link>>",
-			template = params.template ? store.getTiddler(params.template) : null,
-			output = [],
-			isHtml = type === "text/html",
-			encoder = isHtml ? utils.htmlEncode : function(x) {return x;},
-			pushTag = isHtml ? function(x) {output.push(x);} : function(x) {},
-			handler,
+			template = macroNode.params.template ? store.getTiddler(macroNode.params.template) : null,
+			content = [],
 			t;
 		if(template) {
 			templateType = template.type;
 			templateText = template.text;
 		}
-		handler = handlers[params.type];
+		var handler = handlers[macroNode.params.type];
 		handler = handler || handlers.all;
 		var tiddlers = handler(store);
 		if(tiddlers.length === 0) {
-			return params.emptyMessage ? encoder(params.emptyMessage) : "";
+			return [Renderer.TextNode(macroNode.params.emptyMessage || "")];
 		} else {
-			var renderer = store.compileText(templateType,templateText,type);
-			pushTag("<ul>");
+			var templateTree = store.parseText(templateType,templateText).tree;
 			for(t=0; t<tiddlers.length; t++) {
-				pushTag("<li>");
-				output.push(renderer.render(store.getTiddler(tiddlers[t]),store));
-				pushTag("</li>");	
+				var cloneTemplate = [];
+				for(var c=0; c<templateTree.length; c++) {
+					cloneTemplate.push(templateTree[c].clone());
+				}
+				var listNode = Renderer.ElementNode("li",null,cloneTemplate);
+				listNode.execute(store.getTiddler(tiddlers[t]));
+				content.push(listNode);
 			}
-			pushTag("</ul>");
-			return output.join("");
+			return [Renderer.ElementNode("ul",null,content)];
 		}
 	}
 };

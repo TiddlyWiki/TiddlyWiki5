@@ -7,8 +7,7 @@ title: js/macros/image.js
 /*jslint node: true */
 "use strict";
 
-var HTML = require("../HTML.js").HTML,
-	utils = require("../Utils.js");
+var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "image",
@@ -18,28 +17,27 @@ exports.macro = {
 		text: {byName: true, type: "text", optional: true},
 		alignment: {byName: true, type: "text", optional: true}
 	},
-	render: function(type,tiddler,store,params) {
-		if(type === "text/html") {
-			if(store.tiddlerExists(params.src)) {
-				if(params.text) {
-					return HTML(HTML.elem("div",{
-							alt: params.text,
-							title: params.text
-						},[
-							HTML.raw(store.renderTiddler(type,params.src))
-						]));
-				} else {
-					return store.renderTiddler(type,params.src);	
-				}
-			} else {
-				return HTML(HTML.elem("img",{
-					href: params.src,
-					alt: params.text,
-					title: params.text
-				}));
+	execute: function(macroNode,tiddler,store) {
+		if(store.tiddlerExists(macroNode.params.src)) {
+			var imageTree = store.parseTiddler(macroNode.params.src).tree,
+				cloneImage = [];
+			for(var t=0; t<imageTree.length; t++) {
+				cloneImage.push(imageTree[t].clone());
 			}
-		} else if (type === "text/plain") {
-			return params.text ? params.text : "";	
+			if(macroNode.params.text) {
+				return [Renderer.ElementNode("div",{
+						alt: macroNode.params.text,
+						title: macroNode.params.text
+					},cloneImage)];
+			} else {
+				return cloneImage;	
+			}
+		} else {
+			return [Renderer.ElementNode("img",{
+				href: macroNode.params.src,
+				alt: macroNode.params.text,
+				title: macroNode.params.text
+			})];
 		}
 	}
 };

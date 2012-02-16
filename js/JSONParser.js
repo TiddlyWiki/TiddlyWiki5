@@ -10,31 +10,31 @@ Compiles JSON objects into JavaScript functions that render them in HTML and pla
 "use strict";
 
 var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
-    HTML = require("./HTML.js").HTML,
+    Renderer = require("./Renderer.js").Renderer,
     utils = require("./Utils.js");
 
 var renderObject = function(obj) {
     var children = [],t;
     if(obj instanceof Array) {
         for(t=0; t<obj.length; t++) {
-            children.push(HTML.elem("li",{
+            children.push(Renderer.ElementNode("li",{
                 "class": ["jsonArrayMember"]
             },[renderObject(obj[t])]));
         }
-        return HTML.elem("ul",{
+        return Renderer.ElementNode("ul",{
             "class": ["jsonArray"]
         },children);
     } else if(typeof obj === "object") {
         for(t in obj) {
-            children.push(HTML.elem("li",{
+            children.push(Renderer.ElementNode("li",{
                 "class": ["jsonObjectMember"]
-            },[HTML.splitLabel("JSON",[HTML.text(t)],[renderObject(obj[t])])]));
+            },[Renderer.SplitLabelNode("JSON",[Renderer.TextNode(t)],[renderObject(obj[t])])]));
         }
-        return HTML.elem("ul",{
+        return Renderer.ElementNode("ul",{
             "class": ["jsonObject"]
         },children);
     } else {
-        return HTML.label("JSON" + (typeof obj),[HTML.text(JSON.stringify(obj))],["jsonValue"]);
+        return Renderer.LabelNode("JSON" + (typeof obj),[Renderer.TextNode(JSON.stringify(obj))],["jsonValue"]);
     }
 };
 

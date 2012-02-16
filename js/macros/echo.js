@@ -7,7 +7,7 @@ title: js/macros/echo.js
 /*jslint node: true */
 "use strict";
 
-var utils = require("../Utils.js");
+var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "echo",
@@ -15,12 +15,8 @@ exports.macro = {
 	params: {
 		text: {byPos: 0, type: "text", optional: false}
 	},
-	render: function(type,tiddler,store,params) {
-		if(type === "text/html") {
-			return utils.htmlEncode(params.text);
-		} else {
-			return params.text;
-		}
+	execute: function(macroNode,tiddler,store) {
+		return [Renderer.TextNode(macroNode.params.text)];
 	}
 };
 
