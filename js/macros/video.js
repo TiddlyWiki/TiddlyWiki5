@@ -13,10 +13,10 @@ exports.macro = {
 	name: "video",
 	types: ["text/html","text/plain"],
 	params: {
-		src: {byName: "default", type: "text", optional: false},
-		type: {byName: true, type: "text", optional: true},
-		width: {byName: true, type: "text", optional: true},
-		height: {byName: true, type: "text", optional: true}
+		src: {byName: "default", type: "text"},
+		type: {byName: true, type: "text"},
+		width: {byName: true, type: "text"},
+		height: {byName: true, type: "text"}
 	},
 	execute: function(macroNode,tiddler,store) {
 		var src = macroNode.params.src,

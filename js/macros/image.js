@@ -13,9 +13,9 @@ exports.macro = {
 	name: "image",
 	types: ["text/html","text/plain"],
 	params: {
-		src: {byName: "default", type: "tiddler", optional: false},
-		text: {byName: true, type: "text", optional: true},
-		alignment: {byName: true, type: "text", optional: true}
+		src: {byName: "default", type: "tiddler"},
+		text: {byName: true, type: "text"},
+		alignment: {byName: true, type: "text"}
 	},
 	execute: function(macroNode,tiddler,store) {
 		if(store.tiddlerExists(macroNode.params.src)) {

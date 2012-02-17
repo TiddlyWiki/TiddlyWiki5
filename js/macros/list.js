@@ -37,9 +37,9 @@ exports.macro = {
 	types: ["text/html","text/plain"],
 	dependentAll: true, // Tiddlers containing <<list>> macro are dependent on every tiddler
 	params: {
-		type: {byName: "default", type: "text", optional: false},
-		template: {byName: true, type: "tiddler", optional: true},
-		emptyMessage: {byName: true, type: "text", optional: true}
+		type: {byName: "default", type: "text"},
+		template: {byName: true, type: "tiddler"},
+		emptyMessage: {byName: true, type: "text"}
 	},
 	execute: function(macroNode,tiddler,store) {
 		var templateType = "text/x-tiddlywiki",

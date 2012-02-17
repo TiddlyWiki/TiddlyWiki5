@@ -18,7 +18,7 @@ exports.macro = {
 	name: "link",
 	types: ["text/html","text/plain"],
 	params: {
-		target: {byName: "default", type: "tiddler", skinny: true, optional: false}
+		target: {byName: "default", type: "tiddler", skinny: true}
 	},
 	events: {
 		click: function(event,macroNode) {

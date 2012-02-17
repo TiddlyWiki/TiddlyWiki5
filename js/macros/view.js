@@ -15,9 +15,9 @@ exports.macro = {
 	name: "view",
 	types: ["text/html","text/plain"],
 	params: {
-		field: {byPos: 0, type: "text", optional: false},
-		format: {byPos: 1, type: "text", optional: true},
-		template: {byPos: 2, type: "text", optional: true}
+		field: {byPos: 0, type: "text"},
+		format: {byPos: 1, type: "text"},
+		template: {byPos: 2, type: "text"}
 	},
 	execute: function(macroNode,tiddler,store) {
 		if(!tiddler) {

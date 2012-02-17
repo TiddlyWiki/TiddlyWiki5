@@ -49,9 +49,9 @@ exports.macro = {
 	types: ["text/html","text/plain"],
 	cascadeParams: true, // Cascade names of named parameters to following anonymous parameters
 	params: {
-		target: {byName: "default", type: "tiddler", optional: true},
-		template: {byName: true, type: "tiddler", optional: true},
-		"with": {byName: true, type: "text", optional: true, dependentAll: true}
+		target: {byName: "default", type: "tiddler"},
+		template: {byName: true, type: "tiddler"},
+		"with": {byName: true, type: "text", dependentAll: true}
 	},
 	execute: function(macroNode,tiddler,store) {
 		var renderTitle = macroNode.params.target,

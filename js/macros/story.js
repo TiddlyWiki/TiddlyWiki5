@@ -29,8 +29,8 @@ exports.macro = {
 	name: "story",
 	types: ["text/html","text/plain"],
 	params: {
-		story: {byName: "default", type: "tiddler", optional: false},
-		template: {byName: true, type: "tiddler", optional: true}
+		story: {byName: "default", type: "tiddler"},
+		template: {byName: true, type: "tiddler"}
 	},
 	events: {
 		"tw-navigate": function(event,macroNode) {

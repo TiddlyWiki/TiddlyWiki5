@@ -13,7 +13,7 @@ exports.macro = {
 	name: "echo",
 	types: ["text/html","text/plain"],
 	params: {
-		text: {byPos: 0, type: "text", optional: false}
+		text: {byPos: 0, type: "text"}
 	},
 	execute: function(macroNode,tiddler,store) {
 		return [Renderer.TextNode(macroNode.params.text)];

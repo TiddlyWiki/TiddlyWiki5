@@ -16,10 +16,10 @@ exports.macro = {
 	name: "slider",
 	types: ["text/html","text/plain"],
 	params: {
-		state: {byPos: 0, type: "text", optional: false},
-		targetTiddler: {byPos: 1, type: "tiddler", optional: false},
-		label: {byPos: 2, type: "text", optional: false},
-		tooltip: {byPos: 3, type: "text", optional: true}
+		state: {byPos: 0, type: "text"},
+		targetTiddler: {byPos: 1, type: "tiddler"},
+		label: {byPos: 2, type: "text"},
+		tooltip: {byPos: 3, type: "text"}
 	},
 	events: {
 		click: function(event,macroNode) {

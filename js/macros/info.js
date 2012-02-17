@@ -14,7 +14,7 @@ exports.macro = {
 	name: "info",
 	types: ["text/html","text/plain"],
 	params: {
-		info: {byName: "default", type: "text", optional: false}
+		info: {byName: "default", type: "text"}
 	},
 	events: {
 		click: function(event,node,tiddler,store,params) {
