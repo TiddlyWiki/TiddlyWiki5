@@ -6,7 +6,7 @@ Renderer objects
 \*/
 (function(){
 
-/*jshint node: true, browser: true, newcap: true */
+/*jshint node: true, browser: true */
 "use strict";
 
 var utils = require("./Utils.js");
@@ -339,6 +339,7 @@ RawNode.prototype.refreshInDom = function(changes) {
 Static method to construct a label
 */
 var LabelNode = function(type,value,classes) {
+/*jshint newcap: false */
     classes = (classes || []).slice(0);
     classes.push("label");
     return ElementNode("span",{
@@ -351,6 +352,7 @@ var LabelNode = function(type,value,classes) {
 Static method to construct a split label
 */
 var SplitLabelNode = function(type,left,right,classes) {
+/*jshint newcap: false */
 	classes = (classes || []).slice(0);
 	classes.push("splitLabel");
 	return ElementNode("span",{
@@ -370,6 +372,7 @@ var SplitLabelNode = function(type,left,right,classes) {
 Static method to construct a slider
 */
 var SliderNode = function(type,label,tooltip,isOpen,children) {
+/*jshint newcap: false */
 	var attributes = {
 		"class": "tw-slider",
 		"data-tw-slider-type": type
