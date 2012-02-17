@@ -77,7 +77,8 @@ exports.macro = {
 			content = store.parseText(targetTiddler.type,text).tree;
 		} else {
 			// There's no parameterisation, so we can just render the target tiddler directly
-			content = store.parseTiddler(renderTemplate).tree;
+			var parseTree = store.parseTiddler(renderTemplate);
+			content = parseTree ? parseTree.tree : [];
 		}
 		for(t=0; t<content.length; t++) {
 			contentClone.push(content[t].clone());

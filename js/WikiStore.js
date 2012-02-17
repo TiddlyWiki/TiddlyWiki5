@@ -126,6 +126,8 @@ WikiStore.prototype.getTiddlerText = function(title) {
 
 WikiStore.prototype.deleteTiddler = function(title) {
 	delete this.tiddlers[title];
+	this.clearCache(title);
+	this.touchTiddler("deleted",title);
 };
 
 WikiStore.prototype.tiddlerExists = function(title) {
@@ -256,11 +258,10 @@ WikiStore.prototype.parseText = function(type,text) {
 
 WikiStore.prototype.parseTiddler = function(title) {
 	var me = this,
-		tiddler = this.getTiddler(title),
-		parseTree = this.getCacheForTiddler(title,"parseTree",function() {
+		tiddler = this.getTiddler(title);
+	return tiddler ? this.getCacheForTiddler(title,"parseTree",function() {
 			return me.parseText(tiddler.type,tiddler.text);
-		});
-	return parseTree;
+		}) : null;
 };
 
 /*
