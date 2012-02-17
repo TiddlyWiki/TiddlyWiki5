@@ -8,6 +8,7 @@ title: js/macros/view.js
 "use strict";
 
 var Renderer = require("../Renderer.js").Renderer,
+	Dependencies = require("../Dependencies.js").Dependencies,
 	utils = require("../Utils.js");
 
 exports.macro = {
@@ -29,8 +30,8 @@ exports.macro = {
 			if(v !== undefined) {
 				switch(macroNode.params.format) {
 					case "link":
-						var dependencies = {link: {}};
-						dependencies.link[v] = 1;
+						var dependencies = new Dependencies();
+						dependencies.addDependency(v,false);
 						var link = Renderer.MacroNode("link",
 													{target: v},
 													[Renderer.TextNode(v)],
@@ -59,7 +60,7 @@ exports.macro = {
 				}
 			}
 		}
-		return "";
+		return [];
 	}
 };
 

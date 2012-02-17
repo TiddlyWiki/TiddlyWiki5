@@ -33,6 +33,7 @@ HTML nodes look like this:
 
 var WikiTextRules = require("./WikiTextRules.js"),
 	WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
+	Dependencies = require("./Dependencies.js").Dependencies,
 	Renderer = require("./Renderer.js").Renderer,
 	utils = require("./Utils.js"),
 	util = require("util");
@@ -67,32 +68,13 @@ WikiTextParser.prototype.parse = function(type,text) {
 	this.source = text;
 	this.nextMatch = 0;
 	this.children = [];
-	this.dependencies = {};
+	this.dependencies = new Dependencies();
 	this.output = null;
 	this.subWikify(this.children);
 	var tree = new WikiTextParseTree(this.children,this.dependencies,this.store);
 	this.source = null;
 	this.children = null;
 	return tree;
-};
-
-WikiTextParser.prototype.mergeDependencies = function(newDependencies) {
-	for(var rel in newDependencies) {
-		if(rel === "dependentAll") {
-			this.dependencies.dependentAll = newDependencies.dependentAll;
-		} else {
-			if(!(rel in this.dependencies)) {
-				this.dependencies[rel] = {};
-			}
-			for(var t in newDependencies[rel]) {
-				if(this.dependencies[rel][t]) {
-					this.dependencies[rel][t]++;
-				} else {
-					this.dependencies[rel][t] = 1;
-				}
-			}
-		}
-	}
 };
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {

@@ -9,6 +9,7 @@ Some useful tiddlers for feature testing:
 * ImageTests showing different ways of embedding images
 * SampleData showing how JSON tiddlers are handled
 * VideoTests showing how different online video formats can be embedded
+* SliderTests showing how sliders work
 
 Technical documentation includes:
 * [[Testing]] regimen

@@ -9,6 +9,7 @@ title: js/macros/story.js
 
 var Tiddler = require("../Tiddler.js").Tiddler,
 	Renderer = require("../Renderer.js").Renderer,
+    Dependencies = require("../Dependencies.js").Dependencies,
 	utils = require("../Utils.js");
 
 // Parse the text of a story tiddler into an array of tiddler titles
@@ -47,10 +48,10 @@ exports.macro = {
 			content = [];
 		for(var t=0; t<tiddlers.length; t++) {
 			var paramFn = {target: tiddlers[t],template: macroNode.params.template},
-				dependencies = {include: {}};
-			dependencies.include[tiddlers[t]] = 1;
+				dependencies = new Dependencies();
+			dependencies.addDependency(tiddlers[t],true);
 			if(macroNode.params.template) {
-				dependencies.include[macroNode.params.template] = 1;
+				dependencies.addDependency(macroNode.params.template,true);
 			}
 			var m = Renderer.MacroNode("tiddler",paramFn,null,dependencies,store);
 			m.execute(tiddler);
@@ -82,10 +83,10 @@ exports.macro = {
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
 				var paramFn = {target: targetTiddlers[t],template: template},
-					dependencies = {include: {}};
-				dependencies.include[targetTiddlers[t]] = 1;
+					dependencies = new Dependencies();
+				dependencies.addDependency(targetTiddlers[t],true);
 				if(template) {
-					dependencies.include[template] = 1;
+					dependencies.addDependency(template,true);
 				}
 				var m = Renderer.MacroNode("tiddler",paramFn,null,dependencies,store);
 				m.execute(store.getTiddler(targetTiddlers[t]));

@@ -11,6 +11,7 @@ Compiles JSON objects into JavaScript functions that render them in HTML and pla
 
 var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
     Renderer = require("./Renderer.js").Renderer,
+    Dependencies = require("./Dependencies.js").Dependencies,
     utils = require("./Utils.js");
 
 var renderObject = function(obj) {
@@ -43,7 +44,7 @@ var JSONParser = function(options) {
 };
 
 JSONParser.prototype.parse = function(type,text) {
-	return new WikiTextParseTree([renderObject(JSON.parse(text))],{},this.store);
+	return new WikiTextParseTree([renderObject(JSON.parse(text))],new Dependencies(),this.store);
 };
 
 exports.JSONParser = JSONParser;

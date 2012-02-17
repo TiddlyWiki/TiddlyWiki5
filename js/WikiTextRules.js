@@ -9,6 +9,7 @@ title: js/WikiTextRules.js
 
 var ArgParser = require("./ArgParser.js").ArgParser,
 	Renderer = require("./Renderer.js").Renderer,
+	Dependencies = require("./Dependencies.js").Dependencies,
 	util = require("util");
 
 var textPrimitives = {
@@ -131,7 +132,7 @@ var compileMacroParams = function(w,params) {
 
 var insertMacroCall = function(w,output,name,params,children) {
 	var macro = w.store.macros[name],
-		dependencies = {};
+		dependencies = new Dependencies();
 	if(macro) {
 		if(macro.dependentAll) {
 			dependencies.dependentAll = true;
@@ -143,21 +144,12 @@ var insertMacroCall = function(w,output,name,params,children) {
 					if(params[m].type === "eval") {
 						dependencies.dependentAll = true;
 					} else {
-						var rel = param.rel || "include",
-							target = params[m].value;
-						if(!(rel in dependencies)) {
-							dependencies[rel] = {};
-						}
-						if(dependencies[rel][target]) {
-							dependencies[rel][target]++;
-						} else {
-							dependencies[rel][target] = 1;
-						}
+						dependencies.addDependency(params[m].value,param.skinny);
 					}
 				}
 			}
 		}
-		w.mergeDependencies(dependencies);
+		w.dependencies.mergeDependencies(dependencies);
 		output.push(Renderer.MacroNode(name,compileMacroParams(w,params),children,dependencies,w.store));
 	}
 };

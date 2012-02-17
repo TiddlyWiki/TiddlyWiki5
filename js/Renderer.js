@@ -87,24 +87,9 @@ MacroNode.prototype.renderInDom = function(domNode,insertBefore) {
 
 MacroNode.prototype.refresh = function(changes) {
 	var t,
-		self = this,
-		hasDependencyChanged = function() {
-			if(self.dependencies.dependentAll) {
-				return true;
-			}
-			for(var rel in self.dependencies) {
-				if(rel !== "dependentAll") {
-					for(var t in self.dependencies[rel]) {
-						if(changes.hasOwnProperty(t)) {
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-		};
+		self = this;
 	// Check if any of the dependencies of this macro node have changed
-	if(hasDependencyChanged()) {
+	if(this.dependencies.hasChanged(changes)) {
 		// Re-execute the macro if so
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
 		this.execute(tiddler);
@@ -118,24 +103,9 @@ MacroNode.prototype.refresh = function(changes) {
 
 MacroNode.prototype.refreshInDom = function(changes) {
 	var t,
-		self = this,
-		hasDependencyChanged = function() {
-			if(self.dependencies.dependentAll) {
-				return true;
-			}
-			for(var rel in self.dependencies) {
-				if(rel !== "dependentAll") {
-					for(var t in self.dependencies[rel]) {
-						if(changes.hasOwnProperty(t)) {
-							return true;
-						}
-					}
-				}
-			}
-			return false;
-		};
+		self = this;
 	// Check if any of the dependencies of this macro node have changed
-	if(hasDependencyChanged()) {
+	if(this.dependencies.hasChanged(changes)) {
 		// Ask the macro to rerender itself if it can
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
 		if(this.macro.refresh) {

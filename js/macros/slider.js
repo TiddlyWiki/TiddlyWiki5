@@ -8,6 +8,7 @@ title: js/macros/slider.js
 "use strict";
 
 var Renderer = require("../Renderer.js").Renderer,
+    Dependencies = require("../Dependencies.js").Dependencies,
 	Tiddler = require("../Tiddler.js").Tiddler,
 	utils = require("../Utils.js");
 
@@ -35,8 +36,8 @@ exports.macro = {
 			var stateTiddler = macroNode.params.state ? store.getTiddler(macroNode.params.state) : {text: ""},
 				isOpen = stateTiddler.text.trim() === "open",
 				target = macroNode.params.targetTiddler,
-				dependencies = {include: {}};
-			dependencies.include[target] = 1;
+				dependencies = new Dependencies();
+			dependencies.addDependency(target,true);
 			var content = Renderer.SliderNode(macroNode.params.state,
 										macroNode.params.label,
 										macroNode.params.tooltip,
