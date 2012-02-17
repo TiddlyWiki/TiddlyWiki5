@@ -58,7 +58,7 @@ exports.macro = {
 		}
 		return content;
 	},
-	refresh: function(macroNode,tiddler,store) {
+	refresh: function(changes,macroNode,tiddler,store) {
 		/*jslint browser: true */
 		// Get the tiddlers we're supposed to be displaying
 		var targetTiddlers = parseStory(store.getTiddlerText(macroNode.params.story)),
@@ -102,6 +102,8 @@ exports.macro = {
 					// Then delete the actual renderer nodes
 					macroNode.content.splice(t,tiddlerNode-t);
 				}
+				// Refresh the DOM node we're reusing
+				macroNode.content[t].refreshInDom(changes);
 			}
 		}
 		// Remove any left over nodes
