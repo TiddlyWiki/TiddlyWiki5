@@ -62,7 +62,7 @@ MacroNode.prototype.render = function(type) {
 
 MacroNode.prototype.renderInDom = function(domNode,insertBefore) {
 	// Create the wrapper node for the macro
-	var macroContainer = document.createElement(this.macro.wrapperTag || "div");
+	var macroContainer = document.createElement(this.macro.wrapperTag || "span");
 	this.domNode = macroContainer;
 	if(insertBefore) {
 		domNode.insertBefore(macroContainer,insertBefore);	
@@ -82,6 +82,37 @@ MacroNode.prototype.renderInDom = function(domNode,insertBefore) {
 	// Render the content of the macro
 	for(var t=0; t<this.content.length; t++) {
 		this.content[t].renderInDom(macroContainer);
+	}
+};
+
+MacroNode.prototype.refresh = function(changes) {
+	var t,
+		self = this,
+		hasDependencyChanged = function() {
+			if(self.dependencies.dependentAll) {
+				return true;
+			}
+			for(var rel in self.dependencies) {
+				if(rel !== "dependentAll") {
+					for(var t in self.dependencies[rel]) {
+						if(changes.hasOwnProperty(t)) {
+							return true;
+						}
+					}
+				}
+			}
+			return false;
+		};
+	// Check if any of the dependencies of this macro node have changed
+	if(hasDependencyChanged()) {
+		// Re-execute the macro if so
+		var tiddler = this.store.getTiddler(this.tiddlerTitle);
+		this.execute(tiddler);
+	} else {
+		// Refresh any children
+		for(t=0; t<this.content.length; t++) {
+			this.content[t].refresh(changes);
+		}
 	}
 };
 
@@ -108,7 +139,7 @@ MacroNode.prototype.refreshInDom = function(changes) {
 		// Ask the macro to rerender itself if it can
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
 		if(this.macro.refresh) {
-			this.macro.refresh(this,tiddler,this.store);
+			this.macro.refresh(changes,this,tiddler,this.store);
 		} else {
 			// Manually reexecute and rerender this macro
 			while(this.domNode.hasChildNodes()) {
@@ -217,6 +248,14 @@ ElementNode.prototype.renderInDom = function(domNode) {
 	}
 };
 
+ElementNode.prototype.refresh = function(changes) {
+	if(this.children) {
+		for(var t=0; t<this.children.length; t++) {
+			this.children[t].refresh(changes);
+		}
+	}
+};
+
 ElementNode.prototype.refreshInDom = function(changes) {
 	if(this.children) {
 		for(var t=0; t<this.children.length; t++) {
@@ -250,6 +289,10 @@ TextNode.prototype.renderInDom = function(domNode) {
 	domNode.appendChild(document.createTextNode(this.text));	
 };
 
+TextNode.prototype.refresh = function(changes) {
+	// Text nodes don't need refreshing	
+};
+
 TextNode.prototype.refreshInDom = function(changes) {
 	// Text nodes don't need refreshing	
 };
@@ -277,6 +320,10 @@ EntityNode.prototype.render = function(type) {
 
 EntityNode.prototype.renderInDom = function(domNode) {
 	domNode.appendChild(document.createTextNode(utils.entityDecode(this.entity)));
+};
+
+EntityNode.prototype.refresh = function(changes) {
+	// Entity nodes don't need refreshing	
 };
 
 EntityNode.prototype.refreshInDom = function(changes) {
@@ -308,6 +355,10 @@ RawNode.prototype.renderInDom = function(domNode) {
 	var div = document.createElement("div");
 	div.innerHTML = this.html;
 	domNode.appendChild(div);	
+};
+
+RawNode.prototype.refresh = function(changes) {
+	// Raw nodes don't need refreshing	
 };
 
 RawNode.prototype.refreshInDom = function(changes) {
@@ -348,7 +399,7 @@ var SplitLabelNode = function(type,left,right,classes) {
 /*
 Static method to construct a slider
 */
-var SliderNode = function(type,label,tooltip,children) {
+var SliderNode = function(type,label,tooltip,isOpen,children) {
 	var attributes = {
 		"class": "tw-slider",
 		"data-tw-slider-type": type
@@ -370,7 +421,7 @@ var SliderNode = function(type,label,tooltip,children) {
 			ElementNode("div",
 				{
 					"class": ["tw-slider-body"],
-					"style": {"display": "none"}
+					"style": {"display": isOpen ? "block" : "none"}
 				},
 				children
 			)
@@ -414,6 +465,12 @@ Renderer.prototype.render = function(type) {
 Renderer.prototype.renderInDom = function(domNode,type) {
 	for(var t=0; t<this.steps.length; t++) {
 		this.steps[t].renderInDom(domNode,type);
+	}
+};
+
+Renderer.prototype.refresh = function(changes) {
+	for(var t=0; t<this.steps.length; t++) {
+		this.steps[t].refresh(changes);
 	}
 };
 
