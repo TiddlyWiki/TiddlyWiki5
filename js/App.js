@@ -102,6 +102,17 @@ var App = function() {
 		// Open the PageTemplate
 		var renderer = new Renderer("PageTemplate",null,this.store);
 		renderer.renderInDom(document.body);
+		// Register an event handler to handle refreshing the DOM
+		this.store.addEventListener("",function(changes) {
+			renderer.refreshInDom(changes);
+		});
+		// Set the page title and refresh it when needed
+		var titleRenderer = new Renderer("WindowTitle",null,this.store);
+		document.title = titleRenderer.render("text/plain");
+		this.store.addEventListener("",function(changes) {
+			titleRenderer.refresh(changes);
+			document.title = titleRenderer.render("text/plain");
+		});
 		// Set up a timer to change the value of a tiddler
 		var me = this;
 		window.setInterval(function() {
@@ -110,10 +121,6 @@ var App = function() {
 				text: "The time was recently " + (new Date()).toString()
 			}));
 		},3000);
-		// Register an event handler to handle refreshing the DOM
-		this.store.addEventListener("",function(changes) {
-			renderer.refreshInDom(changes);
-		});
 	}
 };
 
