@@ -119,9 +119,10 @@ WikiStore.prototype.getTiddler = function(title) {
 	}
 };
 
-WikiStore.prototype.getTiddlerText = function(title) {
+WikiStore.prototype.getTiddlerText = function(title,defaultText) {
+	defaultText = typeof defaultText === "string"  ? defaultText : null;
 	var t = this.getTiddler(title);
-	return t instanceof Tiddler ? t.text : null;
+	return t instanceof Tiddler ? t.text : defaultText;
 };
 
 WikiStore.prototype.deleteTiddler = function(title) {
