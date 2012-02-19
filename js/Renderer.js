@@ -39,7 +39,7 @@ MacroNode.prototype.cloneChildren = function() {
 	return childClones;
 };
 
-MacroNode.prototype.execute = function(tiddler) {
+MacroNode.prototype.execute = function(parents,tiddler) {
 	// Evaluate the macro parameters to get their values
 	if(typeof this.paramFn === "object") {
 		this.params = this.paramFn;	
@@ -48,6 +48,8 @@ MacroNode.prototype.execute = function(tiddler) {
 	}
 	// Save the context tiddler
 	this.tiddlerTitle = tiddler.title;
+	// Save a reference to the array of parents
+	this.parents = parents;
 	// Render the macro to get its content
 	this.content = this.macro.execute(this,tiddler,this.store);
 };
@@ -92,7 +94,7 @@ MacroNode.prototype.refresh = function(changes) {
 	if(this.dependencies.hasChanged(changes)) {
 		// Re-execute the macro if so
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
-		this.execute(tiddler);
+		this.execute(this.parents,tiddler);
 	} else {
 		// Refresh any children
 		for(t=0; t<this.content.length; t++) {
@@ -115,7 +117,7 @@ MacroNode.prototype.refreshInDom = function(changes) {
 			while(this.domNode.hasChildNodes()) {
 				this.domNode.removeChild(this.domNode.firstChild);
 			}
-			this.execute(tiddler);
+			this.execute(this.parents,tiddler);
 			for(t=0; t<this.content.length; t++) {
 				this.content[t].renderInDom(this.domNode);
 			}
@@ -149,10 +151,10 @@ ElementNode.prototype.clone = function() {
 	return new ElementNode(this.type,this.attributes,childClones);
 };
 
-ElementNode.prototype.execute = function(tiddler) {
+ElementNode.prototype.execute = function(parents,tiddler) {
 	if(this.children) {
 		for(var t=0; t<this.children.length; t++) {
-			this.children[t].execute(tiddler);
+			this.children[t].execute(parents,tiddler);
 		}
 	}
 };
@@ -247,7 +249,7 @@ TextNode.prototype.clone = function() {
 	return this;
 };
 
-TextNode.prototype.execute = function(tiddler) {
+TextNode.prototype.execute = function(parents,tiddler) {
 	// Text nodes don't need executing	
 };
 
@@ -280,7 +282,7 @@ EntityNode.prototype.clone = function() {
 	return this;
 };
 
-EntityNode.prototype.execute = function(tiddler) {
+EntityNode.prototype.execute = function(parents,tiddler) {
 	// Entity nodes don't need executing	
 };
 
@@ -313,7 +315,7 @@ RawNode.prototype.clone = function() {
 	return this;
 };
 
-RawNode.prototype.execute = function(tiddler) {
+RawNode.prototype.execute = function(parents,tiddler) {
 	// Raw nodes don't need executing	
 };
 
@@ -381,7 +383,7 @@ var SliderNode = function(type,label,tooltip,isOpen,children) {
 		attributes.alt = tooltip;
 		attributes.title = tooltip;
 	}
-	return ElementNode("div",
+	return ElementNode("span",
 		attributes,
 		[
 			ElementNode("a",
@@ -422,7 +424,7 @@ var Renderer = function(tiddlerTitle,templateTitle,store) {
 	// Execute the macros in the root
 	var tiddler = store.getTiddler(tiddlerTitle);
 	for(t=0; t<this.steps.length; t++) {
-		this.steps[t].execute(tiddler);
+		this.steps[t].execute([templateTitle],tiddler);
 	}
 };
 

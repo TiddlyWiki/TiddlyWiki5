@@ -55,7 +55,7 @@ exports.macro = {
 								"class": classes
 							},macroNode.cloneChildren())];
 		for(var t=0; t<content.length; t++) {
-			content[t].execute(tiddler);
+			content[t].execute(macroNode.parents,tiddler);
 		}
 		return content;
 	}

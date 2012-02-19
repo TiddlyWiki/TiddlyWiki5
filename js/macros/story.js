@@ -54,7 +54,7 @@ exports.macro = {
 				dependencies.addDependency(macroNode.params.template,true);
 			}
 			var m = Renderer.MacroNode("tiddler",paramFn,null,dependencies,store);
-			m.execute(tiddler);
+			m.execute(macroNode.parents,tiddler);
 			content.push(m);
 		}
 		return content;
@@ -89,7 +89,7 @@ exports.macro = {
 					dependencies.addDependency(template,true);
 				}
 				var m = Renderer.MacroNode("tiddler",paramFn,null,dependencies,store);
-				m.execute(store.getTiddler(targetTiddlers[t]));
+				m.execute(macroNode.parents,store.getTiddler(targetTiddlers[t]));
 				m.renderInDom(macroNode.domNode,macroNode.domNode.childNodes[t]);
 				macroNode.content.splice(t,0,m);
 			} else {

@@ -58,33 +58,39 @@ exports.macro = {
 			renderTemplate = macroNode.params.template,
 			content,
 			contentClone = [],
-			t;
+			t,
+			parents = macroNode.parents.slice(0);
 		if(typeof renderTitle !== "string") {
 			renderTitle = tiddler.title;
 		}
 		if(typeof renderTemplate !== "string") {
 			renderTemplate = renderTitle;
 		}
-		if("with" in macroNode.params) {
-			// Parameterised transclusion
-			var targetTiddler = store.getTiddler(renderTemplate),
-				text = targetTiddler.text;
-			var withTokens = [macroNode.params["with"]];
-			for(t=0; t<withTokens.length; t++) {
-				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
-				text = text.replace(placeholderRegExp,withTokens[t]);
+		if(parents.indexOf(renderTemplate) === -1) {
+			if("with" in macroNode.params) {
+				// Parameterised transclusion
+				var targetTiddler = store.getTiddler(renderTemplate),
+					text = targetTiddler.text;
+				var withTokens = [macroNode.params["with"]];
+				for(t=0; t<withTokens.length; t++) {
+					var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
+					text = text.replace(placeholderRegExp,withTokens[t]);
+				}
+				content = store.parseText(targetTiddler.type,text).tree;
+			} else {
+				// There's no parameterisation, so we can just render the target tiddler directly
+				var parseTree = store.parseTiddler(renderTemplate);
+				content = parseTree ? parseTree.tree : [];
 			}
-			content = store.parseText(targetTiddler.type,text).tree;
 		} else {
-			// There's no parameterisation, so we can just render the target tiddler directly
-			var parseTree = store.parseTiddler(renderTemplate);
-			content = parseTree ? parseTree.tree : [];
+			content = [Renderer.TextNode("{{** Tiddler recursion error in <<tiddler>> macro **}}")];	
 		}
+		parents.push(renderTemplate);
 		for(t=0; t<content.length; t++) {
 			contentClone.push(content[t].clone());
 		}
 		for(t=0; t<contentClone.length; t++) {
-			contentClone[t].execute(store.getTiddler(renderTitle));
+			contentClone[t].execute(parents,store.getTiddler(renderTitle));
 		}
 		return contentClone;
 	}

@@ -46,8 +46,11 @@ exports.macro = {
 			templateText = "<<view title link>>",
 			template = macroNode.params.template ? store.getTiddler(macroNode.params.template) : null,
 			content = [],
-			t;
+			t,
+			parents = macroNode.parents;
 		if(template) {
+			parents = parents.slice(0);
+			parents.push(template.title);
 			templateType = template.type;
 			templateText = template.text;
 		}
@@ -64,7 +67,7 @@ exports.macro = {
 					cloneTemplate.push(templateTree[c].clone());
 				}
 				var listNode = Renderer.ElementNode("li",null,cloneTemplate);
-				listNode.execute(store.getTiddler(tiddlers[t]));
+				listNode.execute(parents,store.getTiddler(tiddlers[t]));
 				content.push(listNode);
 			}
 			return [Renderer.ElementNode("ul",null,content)];

@@ -26,7 +26,8 @@ exports.macro = {
 			var v = tiddler[macroNode.params.field],
 				content,
 				t,
-				contentClone = [];
+				contentClone = [],
+				parents = macroNode.parents;
 			if(v !== undefined) {
 				switch(macroNode.params.format) {
 					case "link":
@@ -37,11 +38,17 @@ exports.macro = {
 													[Renderer.TextNode(v)],
 													dependencies,
 													store);
-						link.execute(tiddler);
+						link.execute(parents,tiddler);
 						return [link];
 					case "wikified":
 						if(macroNode.params.field === "text") {
-							content = store.parseTiddler(tiddler.title).tree;
+							if(parents.indexOf(tiddler.title) === -1) {
+								content = store.parseTiddler(tiddler.title).tree;
+							} else {
+								content = [Renderer.TextNode("{{** Tiddler recursion error in <<view>> macro **}}")];
+							}
+							parents = parents.slice(0);
+							parents.push(tiddler.title);
 						} else {
 							content = store.parseText("text/x-tiddlywiki",v).tree;
 						}
@@ -49,7 +56,7 @@ exports.macro = {
 							contentClone.push(content[t].clone());
 						}
 						for(t=0; t<contentClone.length; t++) {
-							contentClone[t].execute(tiddler);
+							contentClone[t].execute(parents,tiddler);
 						}
 						return contentClone;
 					case "date":
