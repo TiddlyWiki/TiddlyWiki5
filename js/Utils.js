@@ -13,26 +13,6 @@ This file is a bit of a dumping ground; the expectation is that most of these fu
 
 var utils = exports;
 
-utils.deepCopy = function(v) {
-	var r,t;
-	if(v instanceof Array) {
-		r = [];
-		for(t=0; t<v.length; t++) {
-			r.push(utils.deepCopy(v[t]));
-		}
-	} else if (typeof v === "object" && v) {
-		r = {};
-		for(t in v) {
-			if(v.hasOwnPropery(t)) {
-				r[t] = utils.deepCopy(v[t]);
-			}
-		}
-	} else {
-		r = v;
-	}
-	return r;
-};
-
 // Pad a string to a certain length with zeros
 utils.zeroPad = function(n,d)
 {
