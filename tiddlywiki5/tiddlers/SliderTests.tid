@@ -3,3 +3,7 @@ title: SliderTests
 The status of this slider is stored in the tiddler JackSlider:
 <<slider JackSlider "Motovun Jack.jpg" "TiddlyWiki Kitten" "See the kitten">>
 
+And here's another slider that is also keyed to JackSlider (<<slider JackSlider "HelloThere">>), this time inline.
+
+And here's another slider that contains a video:
+<<slider VideoSlider "VideoTests">>
