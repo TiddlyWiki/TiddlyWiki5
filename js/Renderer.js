@@ -11,6 +11,34 @@ Renderer objects
 
 var utils = require("./Utils.js");
 
+var Node = function(children) {
+	if(this instanceof Node) {
+		this.children = children;
+	} else {
+		return new Node(children);
+	}
+};
+
+Node.prototype.clone = function() {
+	// By default we don't actually clone nodes, we just re-use them (we do clone macros and elements)
+	return this;
+};
+
+Node.prototype.execute = function(parents,tiddler) {
+};
+
+Node.prototype.render = function(type) {
+};
+
+Node.prototype.renderInDom = function(domNode) {
+};
+
+Node.prototype.refresh = function(changes) {
+};
+
+Node.prototype.refreshInDom = function(changes) {
+};
+
 var MacroNode = function(macroName,paramFn,children,dependencies,store) {
 	if(this instanceof MacroNode) {
 		this.macroName = macroName;
@@ -23,6 +51,9 @@ var MacroNode = function(macroName,paramFn,children,dependencies,store) {
 		return new MacroNode(macroName,paramFn,children,dependencies,store);
 	}
 };
+
+MacroNode.prototype = new Node();
+MacroNode.prototype.constructor = MacroNode;
 
 MacroNode.prototype.clone = function() {
 	return new MacroNode(this.macroName,this.paramFn,this.cloneChildren(),this.dependencies,this.store);
@@ -140,6 +171,9 @@ var ElementNode = function(type,attributes,children) {
 	}
 };
 
+ElementNode.prototype = new Node();
+ElementNode.prototype.constructor = ElementNode;
+
 ElementNode.prototype.clone = function() {
 	var childClones;
 	if(this.children) {
@@ -244,14 +278,8 @@ var TextNode = function(text) {
 	}
 };
 
-TextNode.prototype.clone = function() {
-	// We don't actually clone text nodes, instead we re-use them
-	return this;
-};
-
-TextNode.prototype.execute = function(parents,tiddler) {
-	// Text nodes don't need executing	
-};
+TextNode.prototype = new Node();
+TextNode.prototype.constructor = TextNode;
 
 TextNode.prototype.render = function(type) {
 	return type === "text/html" ? utils.htmlEncode(this.text) : this.text;
@@ -259,14 +287,6 @@ TextNode.prototype.render = function(type) {
 
 TextNode.prototype.renderInDom = function(domNode) {
 	domNode.appendChild(document.createTextNode(this.text));	
-};
-
-TextNode.prototype.refresh = function(changes) {
-	// Text nodes don't need refreshing	
-};
-
-TextNode.prototype.refreshInDom = function(changes) {
-	// Text nodes don't need refreshing	
 };
 
 var EntityNode = function(entity) {
@@ -277,14 +297,8 @@ var EntityNode = function(entity) {
 	}
 };
 
-EntityNode.prototype.clone = function() {
-	// We don't actually clone entity nodes, instead we re-use them
-	return this;
-};
-
-EntityNode.prototype.execute = function(parents,tiddler) {
-	// Entity nodes don't need executing	
-};
+EntityNode.prototype = new Node();
+EntityNode.prototype.constructor = EntityNode;
 
 EntityNode.prototype.render = function(type) {
 	return type === "text/html" ? this.entity : utils.entityDecode(this.entity);
@@ -292,14 +306,6 @@ EntityNode.prototype.render = function(type) {
 
 EntityNode.prototype.renderInDom = function(domNode) {
 	domNode.appendChild(document.createTextNode(utils.entityDecode(this.entity)));
-};
-
-EntityNode.prototype.refresh = function(changes) {
-	// Entity nodes don't need refreshing	
-};
-
-EntityNode.prototype.refreshInDom = function(changes) {
-	// Entity nodes don't need refreshing	
 };
 
 var RawNode = function(html) {
@@ -310,14 +316,8 @@ var RawNode = function(html) {
 	}
 };
 
-RawNode.prototype.clone = function() {
-	// We don't actually clone raw nodes, instead we re-use them
-	return this;
-};
-
-RawNode.prototype.execute = function(parents,tiddler) {
-	// Raw nodes don't need executing	
-};
+RawNode.prototype = new Node();
+RawNode.prototype.constructor = RawNode;
 
 RawNode.prototype.render = function(type) {
 	return this.html;
@@ -327,14 +327,6 @@ RawNode.prototype.renderInDom = function(domNode) {
 	var div = document.createElement("div");
 	div.innerHTML = this.html;
 	domNode.appendChild(div);	
-};
-
-RawNode.prototype.refresh = function(changes) {
-	// Raw nodes don't need refreshing	
-};
-
-RawNode.prototype.refreshInDom = function(changes) {
-	// Raw nodes don't need refreshing	
 };
 
 /*
