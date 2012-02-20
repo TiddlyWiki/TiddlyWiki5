@@ -25,25 +25,18 @@ Node.prototype.clone = function() {
 	return this;
 };
 
-Node.prototype.execute = function(parents,tiddler) {
-};
-
-Node.prototype.render = function(type) {
-};
-
-Node.prototype.renderInDom = function(domNode) {
-};
-
-Node.prototype.refresh = function(changes) {
-};
-
-Node.prototype.refreshInDom = function(changes) {
+Node.prototype.execute = 
+Node.prototype.render =
+Node.prototype.renderInDom =
+Node.prototype.refresh =
+Node.prototype.refreshInDom = function() {
+	// All these methods are noops by default
 };
 
 /*
 Construct a renderer node representing a macro invocation
 	macroName: name of the macro
-	params: a hashmap of parameters (each can be a string, or a fn(tiddler,store,utils) for evaluated parameters)
+	srcParams: a hashmap of parameters (each can be a string, or a fn(tiddler,store,utils) for evaluated parameters)
 	children: optional array of child nodes
 	store: reference to the WikiStore associated with this macro
 */
