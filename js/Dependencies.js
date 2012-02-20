@@ -14,9 +14,26 @@ Represents the dependencies of a tiddler or a parser node as two fields:
 
 var utils = require("./Utils.js");
 
-var Dependencies = function(tiddlers,dependentAll) {
-	this.tiddlers = tiddlers || {};
+var Dependencies = function(skinnyTiddlers,fatTiddlers,dependentAll) {
+	var t,tiddlerTitle;
+	this.tiddlers = {};
 	this.dependentAll = dependentAll;
+	if(skinnyTiddlers) {
+		for(t=0; t<skinnyTiddlers.length; t++) {
+			tiddlerTitle = skinnyTiddlers[t];
+			if(typeof tiddlerTitle === "string" && tiddlerTitle !== "") {
+				this.tiddlers[tiddlerTitle] = false;
+			}
+		}
+	}
+	if(fatTiddlers) {
+		for(t=0; t<fatTiddlers.length; t++) {
+			tiddlerTitle = fatTiddlers[t];
+			if(typeof tiddlerTitle === "string" && tiddlerTitle !== "") {
+				this.tiddlers[tiddlerTitle] = true;
+			}
+		}
+	}
 };
 
 /*
