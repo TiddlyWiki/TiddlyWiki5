@@ -9,7 +9,8 @@ Renderer objects
 /*jshint node: true, browser: true */
 "use strict";
 
-var utils = require("./Utils.js");
+var utils = require("./Utils.js"),
+	Dependencies = require("./Dependencies.js").Dependencies;
 
 var Node = function(children) {
 	if(this instanceof Node) {
@@ -78,9 +79,9 @@ MacroNode.prototype.execute = function(parents,tiddler) {
 		this.params = this.paramFn(tiddler,this.store,utils);
 	}
 	// Save the context tiddler
-	this.tiddlerTitle = tiddler.title;
+	this.tiddlerTitle = tiddler ? tiddler.title : null;
 	// Save a reference to the array of parents
-	this.parents = parents;
+	this.parents = parents || [];
 	// Render the macro to get its content
 	this.content = this.macro.execute(this,tiddler,this.store);
 };
@@ -397,51 +398,31 @@ var SliderNode = function(type,label,tooltip,isOpen,children) {
 Construct a renderer object to render a tiddler, optionally specifying a template it should be rendered through
 */
 var Renderer = function(tiddlerTitle,templateTitle,store) {
-	var t;
-	// If there is no template specified, use the tiddler as its own template
-	templateTitle = templateTitle || tiddlerTitle;
-	// Save parameters
-	this.tiddlerTitle = tiddlerTitle;
-	this.templateTitle = templateTitle;
 	this.store = store;
-	// Start the renderer with a copy of the parse tree for this tiddler template
-	var parseTree = store.parseTiddler(templateTitle).tree;
-	this.steps = [];
-	for(t=0; t<parseTree.length; t++) {
-		this.steps.push(parseTree[t].clone());
-	}
-	// Execute the macros in the root
-	var tiddler = store.getTiddler(tiddlerTitle);
-	for(t=0; t<this.steps.length; t++) {
-		this.steps[t].execute([templateTitle],tiddler);
-	}
+	// Start the renderer with the tiddler macro
+	this.macro = new MacroNode(
+						"tiddler",
+						{target: tiddlerTitle, template: templateTitle},
+						null,
+						new Dependencies([],[tiddlerTitle,templateTitle]),
+						store);
+	this.macro.execute();
 };
 
 Renderer.prototype.render = function(type) {
-	var output = [];
-	// Render the root nodes
-	for(var t=0; t<this.steps.length; t++) {
-		output.push(this.steps[t].render(type));
-	}
-	return output.join("");
+	return this.macro.render(type);
 };
 
 Renderer.prototype.renderInDom = function(domNode,type) {
-	for(var t=0; t<this.steps.length; t++) {
-		this.steps[t].renderInDom(domNode,type);
-	}
+	this.macro.renderInDom(domNode,type);
 };
 
 Renderer.prototype.refresh = function(changes) {
-	for(var t=0; t<this.steps.length; t++) {
-		this.steps[t].refresh(changes);
-	}
+	this.macro.refresh(changes);
 };
 
 Renderer.prototype.refreshInDom = function(changes) {
-	for(var t=0; t<this.steps.length; t++) {
-		this.steps[t].refreshInDom(changes);
-	}
+	this.macro.refreshInDom(changes);
 };
 
 Renderer.MacroNode = MacroNode;
