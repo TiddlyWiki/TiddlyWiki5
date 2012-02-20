@@ -31,12 +31,10 @@ exports.macro = {
 			if(v !== undefined) {
 				switch(macroNode.params.format) {
 					case "link":
-						var dependencies = new Dependencies();
-						dependencies.addDependency(v,false);
 						var link = Renderer.MacroNode("link",
 													{target: v},
 													[Renderer.TextNode(v)],
-													dependencies,
+													new Dependencies([v]),
 													store);
 						link.execute(parents,tiddler);
 						return [link];

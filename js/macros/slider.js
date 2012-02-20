@@ -38,15 +38,18 @@ exports.macro = {
 	},
 	execute: function(macroNode,tiddler,store) {
 			var isOpen = macroNode.params.state ? store.getTiddlerText(macroNode.params.state,"").trim() === "open" : true,
-				target = macroNode.params.targetTiddler,
-				dependencies = new Dependencies();
-			dependencies.addDependency(target,true);
+				target = macroNode.params.targetTiddler;
 			var content = Renderer.SliderNode(macroNode.params.state,
 										macroNode.params.label ? macroNode.params.label : target,
 										macroNode.params.tooltip,
 										isOpen,
 										[
-											Renderer.MacroNode("tiddler",{target: target},null,dependencies,store)
+											Renderer.MacroNode(
+												"tiddler",
+												{target: target},
+												null,
+												new Dependencies([],[target]),
+												store)
 										]);
 			content.execute(macroNode.parents,tiddler);
 			return [content];

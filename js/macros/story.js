@@ -47,13 +47,11 @@ exports.macro = {
 		var tiddlers = parseStory(store.getTiddlerText(macroNode.params.story)),
 			content = [];
 		for(var t=0; t<tiddlers.length; t++) {
-			var paramFn = {target: tiddlers[t],template: macroNode.params.template},
-				dependencies = new Dependencies();
-			dependencies.addDependency(tiddlers[t],true);
-			if(macroNode.params.template) {
-				dependencies.addDependency(macroNode.params.template,true);
-			}
-			var m = Renderer.MacroNode("tiddler",paramFn,null,dependencies,store);
+			var m = Renderer.MacroNode("tiddler",
+										{target: tiddlers[t],template: macroNode.params.template},
+										null,
+										new Dependencies([],[tiddlers[t],macroNode.params.template]),
+										store);
 			m.execute(macroNode.parents,tiddler);
 			content.push(m);
 		}
@@ -82,13 +80,11 @@ exports.macro = {
 			var tiddlerNode = findTiddler(t,targetTiddlers[t],template);
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
-				var paramFn = {target: targetTiddlers[t],template: template},
-					dependencies = new Dependencies();
-				dependencies.addDependency(targetTiddlers[t],true);
-				if(template) {
-					dependencies.addDependency(template,true);
-				}
-				var m = Renderer.MacroNode("tiddler",paramFn,null,dependencies,store);
+				var m = Renderer.MacroNode("tiddler",
+											{target: targetTiddlers[t],template: template},
+											null,
+											new Dependencies([],[targetTiddlers[t],template]),
+											store);
 				m.execute(macroNode.parents,store.getTiddler(targetTiddlers[t]));
 				m.renderInDom(macroNode.domNode,macroNode.domNode.childNodes[t]);
 				macroNode.content.splice(t,0,m);
