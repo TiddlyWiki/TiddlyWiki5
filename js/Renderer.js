@@ -59,13 +59,11 @@ var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 				}
 				for(var m in this.macro.params) {
 					var paramInfo = this.macro.params[m];
-					if(m in srcParams) {
-						if(paramInfo.type === "tiddler") {
-							if(typeof srcParams[m] === "function") {
-								this.dependencies.dependentAll = true;
-							} else {
-								this.dependencies.addDependency(srcParams[m],paramInfo.skinny);
-							}
+					if(m in srcParams && paramInfo.type === "tiddler") {
+						if(typeof srcParams[m] === "function") {
+							this.dependencies.dependentAll = true;
+						} else {
+							this.dependencies.addDependency(srcParams[m],paramInfo.skinny);
 						}
 					}
 				}
