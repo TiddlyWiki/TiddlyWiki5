@@ -427,43 +427,15 @@ var SliderNode = function(type,label,tooltip,isOpen,children) {
 	);
 };
 
-/*
-Construct a renderer object to render a tiddler, optionally specifying a template it should be rendered through
-*/
-var Renderer = function(tiddlerTitle,templateTitle,store) {
-	this.store = store;
-	// Start the renderer with the tiddler macro
-	this.macro = new MacroNode(
-						"tiddler",
-						{target: tiddlerTitle, template: templateTitle},
-						null,
-						store);
-	this.macro.execute();
+var Renderer = {
+	MacroNode: MacroNode,
+	ElementNode: ElementNode,
+	TextNode: TextNode,
+	EntityNode: EntityNode,
+	LabelNode: LabelNode,
+	SplitLabelNode: SplitLabelNode,
+	SliderNode: SliderNode
 };
-
-Renderer.prototype.render = function(type) {
-	return this.macro.render(type);
-};
-
-Renderer.prototype.renderInDom = function(domNode,type) {
-	this.macro.renderInDom(domNode,type);
-};
-
-Renderer.prototype.refresh = function(changes) {
-	this.macro.refresh(changes);
-};
-
-Renderer.prototype.refreshInDom = function(changes) {
-	this.macro.refreshInDom(changes);
-};
-
-Renderer.MacroNode = MacroNode;
-Renderer.ElementNode = ElementNode;
-Renderer.TextNode = TextNode;
-Renderer.EntityNode = EntityNode;
-Renderer.LabelNode = LabelNode;
-Renderer.SplitLabelNode = SplitLabelNode;
-Renderer.SliderNode = SliderNode;
 
 exports.Renderer = Renderer;
 

@@ -100,14 +100,14 @@ var App = function() {
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
 		// Open the PageTemplate
-		var renderer = new Renderer("PageTemplate",null,this.store);
+		var renderer = this.store.renderMacro("tiddler",{target: "PageTemplate"});
 		renderer.renderInDom(document.body);
 		// Register an event handler to handle refreshing the DOM
 		this.store.addEventListener("",function(changes) {
 			renderer.refreshInDom(changes);
 		});
 		// Set the page title and refresh it when needed
-		var titleRenderer = new Renderer("WindowTitle",null,this.store);
+		var titleRenderer = this.store.renderMacro("tiddler",{target: "WindowTitle"});
 		document.title = titleRenderer.render("text/plain");
 		this.store.addEventListener("",function(changes) {
 			titleRenderer.refresh(changes);

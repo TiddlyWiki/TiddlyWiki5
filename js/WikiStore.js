@@ -287,6 +287,12 @@ WikiStore.prototype.installMacro = function(macro) {
 	this.macros[macro.name] = macro;
 };
 
+WikiStore.prototype.renderMacro = function(macroName,params,children,tiddler) {
+	var macro = Renderer.MacroNode(macroName,params,children,this);
+	macro.execute([],tiddler);
+	return macro;
+};
+
 exports.WikiStore = WikiStore;
 
 })();
