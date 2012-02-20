@@ -278,7 +278,6 @@ WikiStore.prototype.renderTiddler = function(targetType,tiddlerTitle,templateTit
 						"tiddler",
 						{target: tiddlerTitle, template: templateTitle},
 						null,
-						new Dependencies([],[tiddlerTitle,templateTitle]),
 						this);
 	macro.execute();
 	return macro.render(targetType);

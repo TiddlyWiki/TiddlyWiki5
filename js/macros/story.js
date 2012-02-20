@@ -50,7 +50,6 @@ exports.macro = {
 			var m = Renderer.MacroNode("tiddler",
 										{target: tiddlers[t],template: macroNode.params.template},
 										null,
-										new Dependencies([],[tiddlers[t],macroNode.params.template]),
 										store);
 			m.execute(macroNode.parents,tiddler);
 			content.push(m);
@@ -83,7 +82,6 @@ exports.macro = {
 				var m = Renderer.MacroNode("tiddler",
 											{target: targetTiddlers[t],template: template},
 											null,
-											new Dependencies([],[targetTiddlers[t],template]),
 											store);
 				m.execute(macroNode.parents,store.getTiddler(targetTiddlers[t]));
 				m.renderInDom(macroNode.domNode,macroNode.domNode.childNodes[t]);

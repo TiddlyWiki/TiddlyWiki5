@@ -48,7 +48,6 @@ exports.macro = {
 												"tiddler",
 												{target: target},
 												null,
-												new Dependencies([],[target]),
 												store)
 										]);
 			content.execute(macroNode.parents,tiddler);

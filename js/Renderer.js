@@ -40,16 +40,46 @@ Node.prototype.refresh = function(changes) {
 Node.prototype.refreshInDom = function(changes) {
 };
 
-var MacroNode = function(macroName,paramFn,children,dependencies,store) {
+/*
+Construct a renderer node representing a macro invocation
+	macroName: name of the macro
+	params: a hashmap of parameters (each can be a string, or a fn(tiddler,store,utils) for evaluated parameters)
+	children: optional array of child nodes
+	store: reference to the WikiStore associated with this macro
+*/
+var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 	if(this instanceof MacroNode) {
+		// Save the details
 		this.macroName = macroName;
 		this.macro = store.macros[macroName];
-		this.paramFn = paramFn; // Can be a function yielding a hashmap, or a direct hashmap
+		this.srcParams = srcParams;
 		this.children = children;
-		this.dependencies = dependencies;
 		this.store = store;
+		// Evaluate the dependencies
+		if(dependencies) {
+			this.dependencies = dependencies;
+		} else {
+			this.dependencies = new Dependencies();
+			if(srcParams && this.macro) {
+				if(this.macro.dependentAll) {
+					this.dependencies.dependentAll = true;
+				}
+				for(var m in this.macro.params) {
+					var paramInfo = this.macro.params[m];
+					if(m in srcParams) {
+						if(paramInfo.type === "tiddler") {
+							if(typeof srcParams[m] === "function") {
+								this.dependencies.dependentAll = true;
+							} else {
+								this.dependencies.addDependency(srcParams[m],paramInfo.skinny);
+							}
+						}
+					}
+				}
+			}
+		}
 	} else {
-		return new MacroNode(macroName,paramFn,children,dependencies,store);
+		return new MacroNode(macroName,srcParams,children,store,dependencies);
 	}
 };
 
@@ -57,7 +87,7 @@ MacroNode.prototype = new Node();
 MacroNode.prototype.constructor = MacroNode;
 
 MacroNode.prototype.clone = function() {
-	return new MacroNode(this.macroName,this.paramFn,this.cloneChildren(),this.dependencies,this.store);
+	return new MacroNode(this.macroName,this.srcParams,this.cloneChildren(),this.store,this.dependencies);
 };
 
 MacroNode.prototype.cloneChildren = function() {
@@ -72,11 +102,14 @@ MacroNode.prototype.cloneChildren = function() {
 };
 
 MacroNode.prototype.execute = function(parents,tiddler) {
-	// Evaluate the macro parameters to get their values
-	if(typeof this.paramFn === "object") {
-		this.params = this.paramFn;	
-	} else {
-		this.params = this.paramFn(tiddler,this.store,utils);
+	// Evaluate macro parameters to get their values
+	this.params = {};
+	for(var p in this.srcParams) {
+		if(typeof this.srcParams[p] === "function") {
+			this.params[p] = this.srcParams[p](tiddler,this.store,utils);
+		} else {
+			this.params[p] = this.srcParams[p];
+		}
 	}
 	// Save the context tiddler
 	this.tiddlerTitle = tiddler ? tiddler.title : null;
@@ -404,7 +437,6 @@ var Renderer = function(tiddlerTitle,templateTitle,store) {
 						"tiddler",
 						{target: tiddlerTitle, template: templateTitle},
 						null,
-						new Dependencies([],[tiddlerTitle,templateTitle]),
 						store);
 	this.macro.execute();
 };

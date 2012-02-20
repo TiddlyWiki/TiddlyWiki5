@@ -34,7 +34,6 @@ exports.macro = {
 						var link = Renderer.MacroNode("link",
 													{target: v},
 													[Renderer.TextNode(v)],
-													new Dependencies([v]),
 													store);
 						link.execute(parents,tiddler);
 						return [link];

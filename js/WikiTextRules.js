@@ -103,54 +103,11 @@ var enclosedTextHelper = function(w) {
 	}
 };
 
-var compileMacroParams = function(w,params) {
-	// Slot the parameters into the macro call
-	var properties = [],n;
-	for(var p in params) {
-		if(params[p].type === "string") {
-			n = {type: "StringLiteral", value: params[p].value};
-		} else {
-			n = w.store.jsParser.parse(params[p].value).tree.elements[0];
-		}
-		properties.push({type: "PropertyAssignment",name: p,value: n});
-	}
-	return w.store.jsParser.createTree([
-			{
-				type: "Function",
-				name: null,
-				params: ["tiddler","store","utils"], // These are the parameters passed to the parameter expressions
-				elements: [ {
-					type: "ReturnStatement",
-					value: {
-						type: "ObjectLiteral",
-						properties: properties
-					}
-				} ]
-			}
-		]).compile("application/javascript").render;
-};
-
 var insertMacroCall = function(w,output,name,params,children) {
-	var macro = w.store.macros[name],
-		dependencies = new Dependencies();
-	if(macro) {
-		if(macro.dependentAll) {
-			dependencies.dependentAll = true;
-		}
-		for(var m in macro.params) {
-			var param = macro.params[m];
-			if(m in params) {
-				if(param.type === "tiddler") {
-					if(params[m].type === "eval") {
-						dependencies.dependentAll = true;
-					} else {
-						dependencies.addDependency(params[m].value,param.skinny);
-					}
-				}
-			}
-		}
-		w.dependencies.mergeDependencies(dependencies);
-		output.push(Renderer.MacroNode(name,compileMacroParams(w,params),children,dependencies,w.store));
+	if(name in w.store.macros) {
+		var macroNode = Renderer.MacroNode(name,params,children,w.store);
+		w.dependencies.mergeDependencies(macroNode.dependencies);
+		output.push(macroNode);
 	}
 };
 
@@ -160,7 +117,21 @@ var parseMacroParams = function(w,name,paramString) {
 	if(macro) {
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
 			insertParam = function(param,name,arg) {
-				params[name] = {type: arg.evaluated ? "eval" : "string", value: arg.string};
+				if(arg.evaluated) {
+					params[name] = w.store.jsParser.createTree([
+						{
+							type: "Function",
+							name: null,
+							params: ["tiddler","store","utils"], // These are the parameters passed to the parameter expressions
+							elements: [ {
+								type: "ReturnStatement",
+								value: w.store.jsParser.parse(arg.string).tree.elements[0]
+							} ]
+						}
+					]).compile("application/javascript").render;
+				} else {
+					params[name] = arg.string;
+				}
 			};
 		for(var m in macro.params) {
 			var param = macro.params[m],
@@ -509,9 +480,7 @@ var rules = [
 				// Pretty bracketted link
 				link = lookaheadMatch[3];
 			}
-			insertMacroCall(w,w.output,"link",{
-				target: {type: "string", value: link}
-			},[Renderer.TextNode(text)]);
+			insertMacroCall(w,w.output,"link",{target: link},[Renderer.TextNode(text)]);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -536,9 +505,7 @@ var rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			insertMacroCall(w,w.output,"link",{
-				target: {type: "string", value: w.matchText}
-			},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
+			insertMacroCall(w,w.output,"link",{target: w.matchText},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
 		} else {
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
@@ -550,9 +517,7 @@ var rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		insertMacroCall(w,w.output,"link",{
-			target: {type: "string", value: w.matchText}
-		},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
+		insertMacroCall(w,w.output,"link",{target: w.matchText},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
 	}
 },
 
@@ -565,24 +530,20 @@ var rules = [
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
-			imageParams = {
-				src: {type: "string", value: ""}
-			},
-			linkParams = {
-				target: {type: "string", value: ""}
-			};
+			imageParams = {},
+			linkParams = {};
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			if(lookaheadMatch[1]) {
-				imageParams.alignment = {type: "string", value: "left"};
+				imageParams.alignment = "left";
 			} else if(lookaheadMatch[2]) {
-				imageParams.alignment = {type: "string", value: "right"};
+				imageParams.alignment = "right";
 			}
 			if(lookaheadMatch[3]) {
-				imageParams.text = {type: "string", value: lookaheadMatch[3]};
+				imageParams.text = lookaheadMatch[3];
 			}
-			imageParams.src.value = lookaheadMatch[4];
+			imageParams.src = lookaheadMatch[4];
 			if(lookaheadMatch[5]) {
-				linkParams.target.value = lookaheadMatch[5];
+				linkParams.target = lookaheadMatch[5];
 				var linkChildren = [];
 				insertMacroCall(w,w.output,"link",linkParams,linkChildren);
 				insertMacroCall(w,linkChildren,"image",imageParams);
