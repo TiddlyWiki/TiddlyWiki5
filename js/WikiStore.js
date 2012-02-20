@@ -14,6 +14,7 @@ WikiStore uses the .cache member of tiddlers to store the following information:
 
 var Tiddler = require("./Tiddler.js").Tiddler,
 	Renderer = require("./Renderer.js").Renderer,
+	Dependencies = require("./Dependencies.js").Dependencies,
 	utils = require("./Utils.js");
 
 /* Creates a new WikiStore object
@@ -271,9 +272,16 @@ Render a tiddler to a particular MIME type
 	title: title of the tiddler to render
 	template: optional title of the tiddler to use as a template
 */
-WikiStore.prototype.renderTiddler = function(targetType,title,templateTitle) {
-	var r = new Renderer(title,templateTitle,this);
-	return r.render(targetType);
+WikiStore.prototype.renderTiddler = function(targetType,tiddlerTitle,templateTitle) {
+	// Construct the tiddler macro
+	var macro = Renderer.MacroNode(
+						"tiddler",
+						{target: tiddlerTitle, template: templateTitle},
+						null,
+						new Dependencies([],[tiddlerTitle,templateTitle]),
+						this);
+	macro.execute();
+	return macro.render(targetType);
 };
 
 WikiStore.prototype.installMacro = function(macro) {
