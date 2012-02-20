@@ -333,10 +333,9 @@ RawNode.prototype.renderInDom = function(domNode) {
 Static method to construct a label
 */
 var LabelNode = function(type,value,classes) {
-/*jshint newcap: false */
     classes = (classes || []).slice(0);
     classes.push("label");
-    return ElementNode("span",{
+    return new ElementNode("span",{
         "class": classes,
 		"data-tw-label-type": type
     },value);
@@ -346,17 +345,16 @@ var LabelNode = function(type,value,classes) {
 Static method to construct a split label
 */
 var SplitLabelNode = function(type,left,right,classes) {
-/*jshint newcap: false */
 	classes = (classes || []).slice(0);
 	classes.push("splitLabel");
-	return ElementNode("span",{
+	return new ElementNode("span",{
 		"class": classes
 	},[
-		ElementNode("span",{
+		new ElementNode("span",{
 			"class": ["splitLabelLeft"],
 			"data-tw-label-type": type
 		},left),
-		ElementNode("span",{
+		new ElementNode("span",{
 			"class": ["splitLabelRight"]
 		},right)
 	]);
@@ -366,7 +364,6 @@ var SplitLabelNode = function(type,left,right,classes) {
 Static method to construct a slider
 */
 var SliderNode = function(type,label,tooltip,isOpen,children) {
-/*jshint newcap: false */
 	var attributes = {
 		"class": "tw-slider",
 		"data-tw-slider-type": type
@@ -375,17 +372,17 @@ var SliderNode = function(type,label,tooltip,isOpen,children) {
 		attributes.alt = tooltip;
 		attributes.title = tooltip;
 	}
-	return ElementNode("span",
+	return new ElementNode("span",
 		attributes,
 		[
-			ElementNode("a",
+			new ElementNode("a",
 				{
 					"class": ["tw-slider-label"]
 				},[
-					TextNode(label)
+					new TextNode(label)
 				]
 			),
-			ElementNode("div",
+			new ElementNode("div",
 				{
 					"class": ["tw-slider-body"],
 					"style": {"display": isOpen ? "block" : "none"}
