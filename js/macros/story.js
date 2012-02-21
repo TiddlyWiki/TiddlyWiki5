@@ -33,9 +33,9 @@ exports.macro = {
 		template: {byName: true, type: "tiddler"}
 	},
 	events: {
-		"tw-navigate": function(event,macroNode) {
-			var storyTiddler = macroNode.store.getTiddler(macroNode.params.story);
-			macroNode.store.addTiddler(new Tiddler(storyTiddler,{text: event.navigateTo + "\n" + storyTiddler.text}));
+		"tw-navigate": function(event) {
+			var storyTiddler = this.store.getTiddler(this.params.story);
+			this.store.addTiddler(new Tiddler(storyTiddler,{text: event.navigateTo + "\n" + storyTiddler.text}));
 			$("html,body").animate({
 				scrollTop: 0
 			}, 400);
@@ -43,28 +43,29 @@ exports.macro = {
 			return false;
 		}
 	},
-	execute: function(macroNode,tiddler,store) {
-		var tiddlers = parseStory(store.getTiddlerText(macroNode.params.story)),
+	execute: function() {
+		var tiddlers = parseStory(this.store.getTiddlerText(this.params.story)),
 			content = [];
 		for(var t=0; t<tiddlers.length; t++) {
 			var m = Renderer.MacroNode("tiddler",
-										{target: tiddlers[t],template: macroNode.params.template},
+										{target: tiddlers[t],template: this.params.template},
 										null,
-										store);
-			m.execute(macroNode.parents,tiddler);
+										this.store);
+			m.execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
 			content.push(m);
 		}
 		return content;
 	},
-	refresh: function(changes,macroNode,tiddler,store) {
+	refresh: function(changes) {
 		/*jslint browser: true */
 		// Get the tiddlers we're supposed to be displaying
-		var targetTiddlers = parseStory(store.getTiddlerText(macroNode.params.story)),
-			template = macroNode.params.template,
+		var self = this,
+			targetTiddlers = parseStory(this.store.getTiddlerText(this.params.story)),
+			template = this.params.template,
 			t,n,domNode,
 			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
-				while(childIndex < macroNode.content.length) {
-					var params = macroNode.content[childIndex].params;
+				while(childIndex < self.content.length) {
+					var params = self.content[childIndex].params;
 					if(params.target === tiddlerTitle) {
 						if(!templateTitle || params.template === templateTitle) {
 							return childIndex;
@@ -82,32 +83,32 @@ exports.macro = {
 				var m = Renderer.MacroNode("tiddler",
 											{target: targetTiddlers[t],template: template},
 											null,
-											store);
-				m.execute(macroNode.parents,store.getTiddler(targetTiddlers[t]));
-				m.renderInDom(macroNode.domNode,macroNode.domNode.childNodes[t]);
-				macroNode.content.splice(t,0,m);
+											this.store);
+				m.execute(this.parents,this.store.getTiddler(targetTiddlers[t]));
+				m.renderInDom(this.domNode,this.domNode.childNodes[t]);
+				this.content.splice(t,0,m);
 			} else {
 				// Delete any nodes preceding the one we want
 				if(tiddlerNode > t) {
 					// First delete the DOM nodes
 					for(n=t; n<tiddlerNode; n++) {
-						domNode = macroNode.content[n].domNode;
+						domNode = this.content[n].domNode;
 						domNode.parentNode.removeChild(domNode);
 					}
 					// Then delete the actual renderer nodes
-					macroNode.content.splice(t,tiddlerNode-t);
+					this.content.splice(t,tiddlerNode-t);
 				}
 				// Refresh the DOM node we're reusing
-				macroNode.content[t].refreshInDom(changes);
+				this.content[t].refreshInDom(changes);
 			}
 		}
 		// Remove any left over nodes
-		if(macroNode.content.length > targetTiddlers.length) {
-			for(t=targetTiddlers.length; t<macroNode.content.length; t++) {
-				domNode = macroNode.content[t].domNode;
+		if(this.content.length > targetTiddlers.length) {
+			for(t=targetTiddlers.length; t<this.content.length; t++) {
+				domNode = this.content[t].domNode;
 				domNode.parentNode.removeChild(domNode);
 			}
-			macroNode.content.splice(targetTiddlers.length,macroNode.content.length-targetTiddlers.length);
+			this.content.splice(targetTiddlers.length,this.content.length-targetTiddlers.length);
 		}
 	}
 };

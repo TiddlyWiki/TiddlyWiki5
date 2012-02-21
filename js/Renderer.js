@@ -30,7 +30,7 @@ Node.prototype.render =
 Node.prototype.renderInDom =
 Node.prototype.refresh =
 Node.prototype.refreshInDom = function() {
-	// All these methods are noops by default
+	// All these methods are no-ops by default
 };
 
 /*
@@ -107,7 +107,7 @@ MacroNode.prototype.execute = function(parents,tiddler) {
 	// Save a reference to the array of parents
 	this.parents = parents || [];
 	// Render the macro to get its content
-	this.content = this.macro.execute(this,tiddler,this.store);
+	this.content = this.macro.execute.call(this);
 };
 
 MacroNode.prototype.render = function(type) {
@@ -132,7 +132,7 @@ MacroNode.prototype.renderInDom = function(domNode,insertBefore) {
 	// Add event handlers to the node
 	var self = this,
 		dispatchMacroEvent = function(event) {
-			self.macro.events[event.type](event,self);
+			self.macro.events[event.type].call(self,event);
 		};
 	for(var e in this.macro.events) {
 		macroContainer.addEventListener(e,dispatchMacroEvent,false);
@@ -167,7 +167,7 @@ MacroNode.prototype.refreshInDom = function(changes) {
 		// Ask the macro to rerender itself if it can
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
 		if(this.macro.refresh) {
-			this.macro.refresh(changes,this,tiddler,this.store);
+			this.macro.refresh.call(this,changes);
 		} else {
 			// Manually reexecute and rerender this macro
 			while(this.domNode.hasChildNodes()) {

@@ -14,7 +14,7 @@ exports.macro = {
 	types: ["text/html","text/plain"],
 	params: {
 	},
-	execute: function(macroNode,tiddler,store) {
+	execute: function() {
 		return [Renderer.TextNode("5.0.0")];
 	}
 };

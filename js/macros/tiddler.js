@@ -53,13 +53,14 @@ exports.macro = {
 		template: {byName: true, type: "tiddler"},
 		"with": {byName: true, type: "text", dependentAll: true}
 	},
-	execute: function(macroNode,tiddler,store) {
-		var renderTitle = macroNode.params.target,
-			renderTemplate = macroNode.params.template,
+	execute: function() {
+		var tiddler = this.store.getTiddler(this.tiddlerTitle),
+			renderTitle = this.params.target,
+			renderTemplate = this.params.template,
 			content,
 			contentClone = [],
 			t,
-			parents = macroNode.parents.slice(0);
+			parents = this.parents.slice(0);
 		if(typeof renderTitle !== "string") {
 			renderTitle = tiddler.title;
 		}
@@ -67,19 +68,19 @@ exports.macro = {
 			renderTemplate = renderTitle;
 		}
 		if(parents.indexOf(renderTemplate) === -1) {
-			if("with" in macroNode.params) {
+			if("with" in this.params) {
 				// Parameterised transclusion
-				var targetTiddler = store.getTiddler(renderTemplate),
+				var targetTiddler = this.store.getTiddler(renderTemplate),
 					text = targetTiddler.text;
-				var withTokens = [macroNode.params["with"]];
+				var withTokens = [this.params["with"]];
 				for(t=0; t<withTokens.length; t++) {
 					var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 					text = text.replace(placeholderRegExp,withTokens[t]);
 				}
-				content = store.parseText(targetTiddler.type,text).tree;
+				content = this.store.parseText(targetTiddler.type,text).tree;
 			} else {
 				// There's no parameterisation, so we can just render the target tiddler directly
-				var parseTree = store.parseTiddler(renderTemplate);
+				var parseTree = this.store.parseTiddler(renderTemplate);
 				content = parseTree ? parseTree.tree : [];
 			}
 		} else {
@@ -90,7 +91,7 @@ exports.macro = {
 			contentClone.push(content[t].clone());
 		}
 		for(t=0; t<contentClone.length; t++) {
-			contentClone[t].execute(parents,store.getTiddler(renderTitle));
+			contentClone[t].execute(parents,this.store.getTiddler(renderTitle));
 		}
 		return contentClone;
 	}

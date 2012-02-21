@@ -18,11 +18,11 @@ exports.macro = {
 		width: {byName: true, type: "text"},
 		height: {byName: true, type: "text"}
 	},
-	execute: function(macroNode,tiddler,store) {
-		var src = macroNode.params.src,
-			videoType = macroNode.params.type || "vimeo",
-			videoWidth = macroNode.params.width || 640,
-			videoHeight = macroNode.params.height || 360;
+	execute: function() {
+		var src = this.params.src,
+			videoType = this.params.type || "vimeo",
+			videoWidth = this.params.width || 640,
+			videoHeight = this.params.height || 360;
 		switch(videoType) {
 			case "vimeo":
 				return [Renderer.ElementNode("iframe",{

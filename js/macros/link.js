@@ -21,28 +21,28 @@ exports.macro = {
 		target: {byName: "default", type: "tiddler", skinny: true}
 	},
 	events: {
-		click: function(event,macroNode) {
-			if(isLinkExternal(macroNode.params.target)) {
+		click: function(event) {
+			if(isLinkExternal(this.params.target)) {
 				event.target.setAttribute("target","_blank");
 				return true;
 			} else {
 				var navEvent = document.createEvent("Event");
 				navEvent.initEvent("tw-navigate",true,true);
-				navEvent.navigateTo = macroNode.params.target;
+				navEvent.navigateTo = this.params.target;
 				event.target.dispatchEvent(navEvent); 
 				event.preventDefault();
 				return false;
 			}
 		}
 	},
-	execute: function(macroNode,tiddler,store) {
+	execute: function() {
 		var classes = ["tw-tiddlylink"],
-			target = macroNode.params.target;
+			target = this.params.target;
 		if(isLinkExternal(target)) {
 			classes.push("tw-tiddlylink-external");
 		} else {
 			classes.push("tw-tiddlylink-internal");
-			if(store.tiddlerExists(target)) {
+			if(this.store.tiddlerExists(target)) {
 				classes.push("tw-tiddlylink-resolves");
 			} else {
 				classes.push("tw-tiddlylink-missing");
@@ -53,9 +53,9 @@ exports.macro = {
 							"a",{
 								href: target,
 								"class": classes
-							},macroNode.cloneChildren())];
+							},this.cloneChildren())];
 		for(var t=0; t<content.length; t++) {
-			content[t].execute(macroNode.parents,tiddler);
+			content[t].execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
 		}
 		return content;
 	}

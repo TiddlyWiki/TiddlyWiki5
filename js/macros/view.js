@@ -19,35 +19,36 @@ exports.macro = {
 		format: {byPos: 1, type: "text"},
 		template: {byPos: 2, type: "text"}
 	},
-	execute: function(macroNode,tiddler,store) {
-		if(!tiddler) {
+	execute: function() {
+		if(!this.tiddlerTitle) {
 			return Renderer.TextNode("{{** Missing tiddler **}}");
 		} else {
-			var v = tiddler[macroNode.params.field],
+			var tiddler = this.store.getTiddler(this.tiddlerTitle),
+				v = tiddler[this.params.field],
 				content,
 				t,
 				contentClone = [],
-				parents = macroNode.parents;
+				parents = this.parents;
 			if(v !== undefined) {
-				switch(macroNode.params.format) {
+				switch(this.params.format) {
 					case "link":
 						var link = Renderer.MacroNode("link",
 													{target: v},
 													[Renderer.TextNode(v)],
-													store);
+													this.store);
 						link.execute(parents,tiddler);
 						return [link];
 					case "wikified":
-						if(macroNode.params.field === "text") {
+						if(this.params.field === "text") {
 							if(parents.indexOf(tiddler.title) === -1) {
-								content = store.parseTiddler(tiddler.title).tree;
+								content = this.store.parseTiddler(tiddler.title).tree;
 							} else {
 								content = [Renderer.TextNode("{{** Tiddler recursion error in <<view>> macro **}}")];
 							}
 							parents = parents.slice(0);
 							parents.push(tiddler.title);
 						} else {
-							content = store.parseText("text/x-tiddlywiki",v).tree;
+							content = this.store.parseText("text/x-tiddlywiki",v).tree;
 						}
 						for(t=0; t<content.length; t++) {
 							contentClone.push(content[t].clone());
@@ -57,7 +58,7 @@ exports.macro = {
 						}
 						return contentClone;
 					case "date":
-						var template = macroNode.params.template || "DD MMM YYYY";
+						var template = this.params.template || "DD MMM YYYY";
 						return [Renderer.TextNode(utils.formatDateString(v,template))];
 					default: // "text"
 						return [Renderer.TextNode(v)];

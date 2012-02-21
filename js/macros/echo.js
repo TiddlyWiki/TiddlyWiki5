@@ -15,8 +15,8 @@ exports.macro = {
 	params: {
 		text: {byPos: 0, type: "text"}
 	},
-	execute: function(macroNode,tiddler,store) {
-		return [Renderer.TextNode(macroNode.params.text)];
+	execute: function() {
+		return [Renderer.TextNode(this.params.text)];
 	}
 };
 

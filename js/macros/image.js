@@ -17,26 +17,26 @@ exports.macro = {
 		text: {byName: true, type: "text"},
 		alignment: {byName: true, type: "text"}
 	},
-	execute: function(macroNode,tiddler,store) {
-		if(store.tiddlerExists(macroNode.params.src)) {
-			var imageTree = store.parseTiddler(macroNode.params.src).tree,
+	execute: function() {
+		if(this.store.tiddlerExists(this.params.src)) {
+			var imageTree = this.store.parseTiddler(this.params.src).tree,
 				cloneImage = [];
 			for(var t=0; t<imageTree.length; t++) {
 				cloneImage.push(imageTree[t].clone());
 			}
-			if(macroNode.params.text) {
+			if(this.params.text) {
 				return [Renderer.ElementNode("div",{
-						alt: macroNode.params.text,
-						title: macroNode.params.text
+						alt: this.params.text,
+						title: this.params.text
 					},cloneImage)];
 			} else {
 				return cloneImage;	
 			}
 		} else {
 			return [Renderer.ElementNode("img",{
-				href: macroNode.params.src,
-				alt: macroNode.params.text,
-				title: macroNode.params.text
+				href: this.params.src,
+				alt: this.params.text,
+				title: this.params.text
 			})];
 		}
 	}

@@ -22,13 +22,13 @@ exports.macro = {
 		tooltip: {byPos: 3, type: "text"}
 	},
 	events: {
-		click: function(event,macroNode) {
+		click: function(event) {
 			if(event.target === event.currentTarget.firstChild.firstChild) {
 				var el = event.currentTarget.firstChild.firstChild.nextSibling,
-					stateTiddler = macroNode.params.state ? macroNode.store.getTiddler(macroNode.params.state) : null;
-				stateTiddler = stateTiddler || new Tiddler({title: macroNode.params.state, text: ""});
+					stateTiddler = this.params.state ? this.store.getTiddler(this.params.state) : null;
+				stateTiddler = stateTiddler || new Tiddler({title: this.params.state, text: ""});
 				var isOpen = stateTiddler.text.trim() === "open";
-				macroNode.store.addTiddler(new Tiddler(stateTiddler,{text: isOpen ? "closed" : "open"}));
+				this.store.addTiddler(new Tiddler(stateTiddler,{text: isOpen ? "closed" : "open"}));
 				event.preventDefault();
 				return false;
 			} else {
@@ -36,30 +36,30 @@ exports.macro = {
 			}
 		}
 	},
-	execute: function(macroNode,tiddler,store) {
-			var isOpen = macroNode.params.state ? store.getTiddlerText(macroNode.params.state,"").trim() === "open" : true,
-				target = macroNode.params.targetTiddler;
-			var content = Renderer.SliderNode(macroNode.params.state,
-										macroNode.params.label ? macroNode.params.label : target,
-										macroNode.params.tooltip,
+	execute: function() {
+			var isOpen = this.params.state ? this.store.getTiddlerText(this.params.state,"").trim() === "open" : true,
+				target = this.params.targetTiddler;
+			var content = Renderer.SliderNode(this.params.state,
+										this.params.label ? this.params.label : target,
+										this.params.tooltip,
 										isOpen,
 										[
 											Renderer.MacroNode(
 												"tiddler",
 												{target: target},
 												null,
-												store)
+												this.store)
 										]);
-			content.execute(macroNode.parents,tiddler);
+			content.execute(this.parents,this.store.getTiddler(this.tiddlerText));
 			return [content];
 	},
-	refresh: function(changes,macroNode,tiddler,store) {
-		if(macroNode.params.target && changes.hasOwnProperty(macroNode.params.target) !== -1) {
+	refresh: function(changes) {
+		if(this.params.target && changes.hasOwnProperty(this.params.target) !== -1) {
 			// If the target has changed, re-render the macro
-		} else if (macroNode.params.state && changes.hasOwnProperty(macroNode.params.state) !== -1) {
+		} else if (this.params.state && changes.hasOwnProperty(this.params.state) !== -1) {
 			// If it was just the state tiddler that's changed, set the display appropriately
-			var el = macroNode.domNode.firstChild.firstChild.nextSibling,
-				isOpen = macroNode.store.getTiddlerText(macroNode.params.state,"").trim() === "open";
+			var el = this.domNode.firstChild.firstChild.nextSibling,
+				isOpen = this.store.getTiddlerText(this.params.state,"").trim() === "open";
 			el.style.display = isOpen ? "block" : "none";
 		}
 	}
