@@ -10,6 +10,7 @@ Renderer objects
 "use strict";
 
 var utils = require("./Utils.js"),
+	ArgParser = require("./ArgParser.js").ArgParser,
 	Dependencies = require("./Dependencies.js").Dependencies;
 
 var Node = function(children) {
@@ -45,25 +46,25 @@ var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 		// Save the details
 		this.macroName = macroName;
 		this.macro = store.macros[macroName];
-		this.srcParams = srcParams;
 		this.children = children;
 		this.store = store;
+		this.srcParams = typeof srcParams === "string" ? this.parseMacroParamString(srcParams) : srcParams;
 		// Evaluate the dependencies
 		if(dependencies) {
 			this.dependencies = dependencies;
 		} else {
 			this.dependencies = new Dependencies();
-			if(srcParams && this.macro) {
+			if(this.srcParams && this.macro) {
 				if(this.macro.dependentAll) {
 					this.dependencies.dependentAll = true;
 				}
 				for(var m in this.macro.params) {
 					var paramInfo = this.macro.params[m];
-					if(m in srcParams && paramInfo.type === "tiddler") {
-						if(typeof srcParams[m] === "function") {
+					if(m in this.srcParams && paramInfo.type === "tiddler") {
+						if(typeof this.srcParams[m] === "function") {
 							this.dependencies.dependentAll = true;
 						} else {
-							this.dependencies.addDependency(srcParams[m],paramInfo.skinny);
+							this.dependencies.addDependency(this.srcParams[m],paramInfo.skinny);
 						}
 					}
 				}
@@ -76,6 +77,46 @@ var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 
 MacroNode.prototype = new Node();
 MacroNode.prototype.constructor = MacroNode;
+
+MacroNode.prototype.parseMacroParamString = function(paramString) {
+	var params = {},
+		args = new ArgParser(paramString,{defaultName: "anon", cascadeDefaults: this.macro.cascadeDefaults}),
+		self = this,
+		insertParam = function(name,arg) {
+			if(arg.evaluated) {
+				params[name] = self.store.jsParser.createTree([
+					{
+						type: "Function",
+						name: null,
+						params: ["tiddler","store","utils"], // These are the parameters passed to the parameter expressions
+						elements: [ {
+							type: "ReturnStatement",
+							value: self.store.jsParser.parse(arg.string).tree.elements[0]
+						} ]
+					}
+				]).compile("application/javascript").render;
+			} else {
+				params[name] = arg.string;
+			}
+		};
+	for(var m in this.macro.params) {
+		var param = this.macro.params[m],
+			arg;
+		if("byPos" in param && args.byPos[param.byPos] && (args.byPos[param.byPos].n === "anon" || args.byPos[param.byPos].n === m)) {
+			arg = args.byPos[param.byPos].v;
+			insertParam(m,arg);
+		} else {
+			arg = args.getValueByName(m);
+			if(!arg && param.byName === "default") {
+				arg = args.getValueByName("anon");
+			}
+			if(arg) {
+				insertParam(m,arg);
+			}
+		}
+	}
+	return params;
+};
 
 MacroNode.prototype.clone = function() {
 	return new MacroNode(this.macroName,this.srcParams,this.cloneChildren(),this.store,this.dependencies);
@@ -166,8 +207,8 @@ MacroNode.prototype.refreshInDom = function(changes) {
 	if(this.dependencies.hasChanged(changes)) {
 		// Ask the macro to rerender itself if it can
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
-		if(this.macro.refresh) {
-			this.macro.refresh.call(this,changes);
+		if(this.macro.refreshInDom) {
+			this.macro.refreshInDom.call(this,changes);
 		} else {
 			// Manually reexecute and rerender this macro
 			while(this.domNode.hasChildNodes()) {

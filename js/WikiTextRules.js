@@ -111,48 +111,6 @@ var insertMacroCall = function(w,output,name,params,children) {
 	}
 };
 
-var parseMacroParams = function(w,name,paramString) {
-	var macro = w.store.macros[name],
-		params = {};
-	if(macro) {
-		var args = new ArgParser(paramString,{defaultName: "anon", cascadeDefaults: macro.cascadeDefaults}),
-			insertParam = function(name,arg) {
-				if(arg.evaluated) {
-					params[name] = w.store.jsParser.createTree([
-						{
-							type: "Function",
-							name: null,
-							params: ["tiddler","store","utils"], // These are the parameters passed to the parameter expressions
-							elements: [ {
-								type: "ReturnStatement",
-								value: w.store.jsParser.parse(arg.string).tree.elements[0]
-							} ]
-						}
-					]).compile("application/javascript").render;
-				} else {
-					params[name] = arg.string;
-				}
-			};
-		for(var m in macro.params) {
-			var param = macro.params[m],
-				arg;
-			if("byPos" in param && args.byPos[param.byPos] && (args.byPos[param.byPos].n === "anon" || args.byPos[param.byPos].n === m)) {
-				arg = args.byPos[param.byPos].v;
-				insertParam(m,arg);
-			} else {
-				arg = args.getValueByName(m);
-				if(!arg && param.byName === "default") {
-					arg = args.getValueByName("anon");
-				}
-				if(arg) {
-					insertParam(m,arg);
-				}
-			}
-		}
-	}
-	return params;
-};
-
 var rules = [
 {
 	name: "table",
@@ -460,7 +418,7 @@ var rules = [
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && lookaheadMatch[1]) {
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 			var name = lookaheadMatch[1];
-			insertMacroCall(w,w.output,name,parseMacroParams(w,name,lookaheadMatch[2]));
+			insertMacroCall(w,w.output,name,lookaheadMatch[2]);
 		}
 	}
 },
