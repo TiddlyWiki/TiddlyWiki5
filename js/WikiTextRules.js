@@ -115,7 +115,7 @@ var parseMacroParams = function(w,name,paramString) {
 	var macro = w.store.macros[name],
 		params = {};
 	if(macro) {
-		var args = new ArgParser(paramString,{defaultName: "anon"}),
+		var args = new ArgParser(paramString,{defaultName: "anon", cascadeDefaults: macro.cascadeDefaults}),
 			insertParam = function(name,arg) {
 				if(arg.evaluated) {
 					params[name] = w.store.jsParser.createTree([
