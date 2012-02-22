@@ -116,7 +116,7 @@ var parseMacroParams = function(w,name,paramString) {
 		params = {};
 	if(macro) {
 		var args = new ArgParser(paramString,{defaultName: "anon"}),
-			insertParam = function(param,name,arg) {
+			insertParam = function(name,arg) {
 				if(arg.evaluated) {
 					params[name] = w.store.jsParser.createTree([
 						{
@@ -138,14 +138,14 @@ var parseMacroParams = function(w,name,paramString) {
 				arg;
 			if("byPos" in param && args.byPos[param.byPos] && (args.byPos[param.byPos].n === "anon" || args.byPos[param.byPos].n === m)) {
 				arg = args.byPos[param.byPos].v;
-				insertParam(param,m,arg);
+				insertParam(m,arg);
 			} else {
 				arg = args.getValueByName(m);
 				if(!arg && param.byName === "default") {
 					arg = args.getValueByName("anon");
 				}
 				if(arg) {
-					insertParam(param,m,arg);
+					insertParam(m,arg);
 				}
 			}
 		}
