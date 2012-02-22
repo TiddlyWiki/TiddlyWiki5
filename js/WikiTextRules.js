@@ -136,10 +136,10 @@ var parseMacroParams = function(w,name,paramString) {
 		for(var m in macro.params) {
 			var param = macro.params[m],
 				arg;
-			if("byPos" in param && args.byPos[param.byPos]) {
+			if("byPos" in param && args.byPos[param.byPos] && (args.byPos[param.byPos].n === "anon" || args.byPos[param.byPos].n === m)) {
 				arg = args.byPos[param.byPos].v;
 				insertParam(param,m,arg);
-			} else if("byName" in param) {
+			} else {
 				arg = args.getValueByName(m);
 				if(!arg && param.byName === "default") {
 					arg = args.getValueByName("anon");
