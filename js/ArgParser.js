@@ -87,7 +87,7 @@ var ArgParser = function(argString,options) {
 	for(var t=0; t<this.byPos.length; t++) {
 		n = this.byPos[t].n;
 		v = this.byPos[t].v;
-		if(this.byName.hasOwnProperty("n"))
+		if(this.byName.hasOwnProperty(n))
 			this.byName[n].push(v);
 		else
 			this.byName[n] = [v];
