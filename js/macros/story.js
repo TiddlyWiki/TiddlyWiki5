@@ -56,7 +56,7 @@ exports.macro = {
 		}
 		return content;
 	},
-	refresh: function(changes) {
+	refreshInDom: function(changes) {
 		/*jslint browser: true */
 		// Get the tiddlers we're supposed to be displaying
 		var self = this,

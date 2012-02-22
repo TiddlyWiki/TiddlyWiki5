@@ -58,7 +58,7 @@ exports.macro = {
 			content.execute(this.parents,this.store.getTiddler(this.tiddlerText));
 			return [content];
 	},
-	refresh: function(changes) {
+	refreshInDom: function(changes) {
 		if(this.params.target && changes.hasOwnProperty(this.params.target)) {
 			// If the target has changed, re-render the macro
 		} else {
