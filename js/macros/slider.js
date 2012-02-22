@@ -59,13 +59,19 @@ exports.macro = {
 			return [content];
 	},
 	refresh: function(changes) {
-		if(this.params.target && changes.hasOwnProperty(this.params.target) !== -1) {
+		if(this.params.target && changes.hasOwnProperty(this.params.target)) {
 			// If the target has changed, re-render the macro
-		} else if (this.params.state && changes.hasOwnProperty(this.params.state) !== -1) {
-			// If it was just the state tiddler that's changed, set the display appropriately
-			var el = this.domNode.firstChild.firstChild.nextSibling,
-				isOpen = this.store.getTiddlerText(this.params.state,"").trim() === "open";
-			el.style.display = isOpen ? "block" : "none";
+		} else {
+			if (this.params.state && changes.hasOwnProperty(this.params.state)) {
+				// If it was just the state tiddler that's changed, set the display appropriately
+				var el = this.domNode.firstChild.firstChild.nextSibling,
+					isOpen = this.store.getTiddlerText(this.params.state,"").trim() === "open";
+				el.style.display = isOpen ? "block" : "none";
+			}
+			// Refresh any children
+			for(var t=0; t<this.content.length; t++) {
+				this.content[t].refreshInDom(changes);
+			}
 		}
 	}
 };
