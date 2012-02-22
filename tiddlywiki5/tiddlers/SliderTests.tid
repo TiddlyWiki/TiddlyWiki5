@@ -5,5 +5,8 @@ The status of this slider is stored in the tiddler JackSlider:
 
 And here's another slider that is also keyed to JackSlider (<<slider JackSlider "HelloThere">>), this time inline.
 
-And here's another slider that contains a video:
+And here's another slider that contains a video, with the state stored in VideoSlider (currently <<tiddler VideoSlider>>):
 <<slider VideoSlider "VideoTests">>
+
+And here's a slider that works with text, rather than a separate tiddler.
+<<slider state:MiniSlider label:"Click me!" content:"This is the //content// of the slider. The state is stored in MiniSlider">>

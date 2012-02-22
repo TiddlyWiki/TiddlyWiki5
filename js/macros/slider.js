@@ -19,7 +19,8 @@ exports.macro = {
 		state: {byPos: 0, type: "tiddler"},
 		targetTiddler: {byPos: 1, type: "tiddler"},
 		label: {byPos: 2, type: "text"},
-		tooltip: {byPos: 3, type: "text"}
+		tooltip: {byPos: 3, type: "text"},
+		content: {byName: true, type: "text"}
 	},
 	events: {
 		click: function(event) {
@@ -38,18 +39,22 @@ exports.macro = {
 	},
 	execute: function() {
 			var isOpen = this.params.state ? this.store.getTiddlerText(this.params.state,"").trim() === "open" : true,
-				target = this.params.targetTiddler;
+				target = this.params.targetTiddler,
+				sliderContent;
+			if(this.params.hasOwnProperty("content")) {
+				sliderContent = this.store.parseText("text/x-tiddlywiki",this.params.content).tree;
+			} else {
+				sliderContent = [Renderer.MacroNode(
+										"tiddler",
+										{target: target},
+										null,
+										this.store)];
+			}
 			var content = Renderer.SliderNode(this.params.state,
 										this.params.label ? this.params.label : target,
 										this.params.tooltip,
 										isOpen,
-										[
-											Renderer.MacroNode(
-												"tiddler",
-												{target: target},
-												null,
-												this.store)
-										]);
+										sliderContent);
 			content.execute(this.parents,this.store.getTiddler(this.tiddlerText));
 			return [content];
 	},
