@@ -4,7 +4,6 @@ style: styles.css
 
 tiddler: tiddlers/*.tid
 tiddler: tiddlers/*.jpg
-recipe: ../parsers/split.recipe
 tiddler: ../docs/High Level Architecture.svg
 #tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
 #	type: image/jpeg
