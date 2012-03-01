@@ -172,7 +172,7 @@ var inputTiddlyWiki = function(text,fields) {
 
 // Given a reference to a DOM node, return the tiddlers stored in the immediate child nodes
 var inputTiddlerDOM = function(node) {
-	var extractTiddler = function(node) {
+	var extractTextTiddler = function(node) {
 			var e = node.firstChild;
 			while(e && e.nodeName.toLowerCase() !== "pre") {
 				e = e.nextSibling;
@@ -198,9 +198,21 @@ var inputTiddlerDOM = function(node) {
 				return null;
 			}
 		},
+		extractModuleTiddler = function(node) {
+			if(node.hasAttribute && node.hasAttribute("data-tiddler-title")) {
+				return {
+					title: node.getAttribute("data-tiddler-title"),
+					text: node.innerHTML,
+					type: "application/javascript"
+				};
+			} else {
+				return null;
+			}
+		},
 		t,tiddlers = [];
 	for(t = 0; t < node.childNodes.length; t++) {
-			var tiddler = extractTiddler(node.childNodes[t]);
+			var tiddler = extractTextTiddler(node.childNodes[t]);
+			tiddler = tiddler || extractModuleTiddler(node.childNodes[t]);
 			if(tiddler) {
 				tiddlers.push(tiddler);
 			}

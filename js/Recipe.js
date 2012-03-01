@@ -406,7 +406,7 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
 				tid = this.store.getTiddler(title);
-			out.push("<" + "script type=\"application/javascript\">");
+			out.push("<" + "script type=\"application/javascript\" data-tiddler-title=\"" + title + "\">");
 			out.push("define(\"" + title + "\",function(require,exports,module) {");
 			out.push(tid.text);
 			out.push("});");
