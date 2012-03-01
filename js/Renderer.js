@@ -11,7 +11,8 @@ Renderer objects
 
 var utils = require("./Utils.js"),
 	ArgParser = require("./ArgParser.js").ArgParser,
-	Dependencies = require("./Dependencies.js").Dependencies;
+	Dependencies = require("./Dependencies.js").Dependencies,
+	esprima = require("esprima");
 
 var Node = function(children) {
 	if(this instanceof Node) {
@@ -79,12 +80,13 @@ MacroNode.prototype = new Node();
 MacroNode.prototype.constructor = MacroNode;
 
 MacroNode.prototype.parseMacroParamString = function(paramString) {
+	/*jslint evil: true */
 	var params = {},
 		args = new ArgParser(paramString,{defaultName: "anon", cascadeDefaults: this.macro.cascadeDefaults}),
 		self = this,
 		insertParam = function(name,arg) {
 			if(arg.evaluated) {
-				params[name] = self.store.jsParser.createTree( // (function(tiddler,store,utils) {return {paramOne: 1};})
+				params[name] = eval(esprima.generate( // (function(tiddler,store,utils) {return {paramOne: 1};})
 					{
 						"type": "Program",
 						"body": [
@@ -112,7 +114,7 @@ MacroNode.prototype.parseMacroParamString = function(paramString) {
 										"body": [
 											{
 												"type": "ReturnStatement",
-												"argument": self.store.jsParser.parse("(" + arg.string + ")").tree.body[0].expression
+												"argument": esprima.parse("(" + arg.string + ")").body[0].expression
 											}
 										]
 									}
@@ -120,7 +122,7 @@ MacroNode.prototype.parseMacroParamString = function(paramString) {
 							}
 						]
 					}
-				).compile("application/javascript").render;
+				));
 			} else {
 				params[name] = arg.string;
 			}

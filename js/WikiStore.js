@@ -39,7 +39,13 @@ var WikiStore = function WikiStore(options) {
 };
 
 WikiStore.prototype.registerParser = function(type,parser) {
-	this.parsers[type] = parser;
+	if(type instanceof Array) {
+		for(var t=0; t<type.length; t++) {
+			this.parsers[type[t]] = parser;
+		}
+	} else {
+		this.parsers[type] = parser;
+	}
 };
 
 WikiStore.prototype.registerTiddlerSerializer = function(extension,mimeType,serializer) {

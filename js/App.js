@@ -15,7 +15,6 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	Renderer = require("./Renderer.js").Renderer,
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
-	JSONParser = require("./JSONParser.js").JSONParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
 	ImageParser = require("./ImageParser.js").ImageParser;
 
@@ -27,16 +26,8 @@ var App = function() {
 	this.store = new WikiStore();	
 	// Register the parsers
 	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({store: this.store}));
-	this.store.registerParser("application/json",new JSONParser({store: this.store}));
-	var imageParser = new ImageParser({store: this.store});
-	this.store.registerParser("image/svg+xml",imageParser);
-	this.store.registerParser("image/jpg",imageParser);
-	this.store.registerParser("image/jpeg",imageParser);
-	this.store.registerParser("image/png",imageParser);
-	this.store.registerParser("image/gif",imageParser);
-	// Set up the JavaScript parser
-	this.store.jsParser = new JavaScriptParser();
-	this.store.registerParser("application/javascript",this.store.jsParser);
+	this.store.registerParser(["image/svg+xml","image/jpg","image/jpeg","image/png","image/gif"],new ImageParser({store: this.store}));
+	this.store.registerParser(["application/json","application/javascript"],new JavaScriptParser({store: this.store}));
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);
