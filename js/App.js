@@ -36,6 +36,7 @@ var App = function() {
 	this.store.registerParser("image/gif",imageParser);
 	// Set up the JavaScript parser
 	this.store.jsParser = new JavaScriptParser();
+	this.store.registerParser("application/javascript",this.store.jsParser);
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);
@@ -75,8 +76,15 @@ var App = function() {
 	}
 	// If in the browser, load the tiddlers built into the TiddlyWiki document
 	if(this.isBrowser) {
-		var storeArea = document.getElementById("storeArea"),
-			tiddlers = this.store.deserializeTiddlers("(DOM)",storeArea);
+		// First, the JavaScript system tiddlers
+		var moduleArea = document.getElementById("jsModules"),
+			tiddlers = this.store.deserializeTiddlers("(DOM)",moduleArea);
+		for(t=0; t<tiddlers.length; t++) {
+			this.store.addTiddler(new Tiddler(tiddlers[t]));
+		}
+		// Then, the ordinary tiddlers baked into the storeArea
+		var storeArea = document.getElementById("storeArea");
+		tiddlers = this.store.deserializeTiddlers("(DOM)",storeArea);
 		for(t=0; t<tiddlers.length; t++) {
 			this.store.addTiddler(new Tiddler(tiddlers[t]));
 		}
