@@ -64,7 +64,7 @@ var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 						if(typeof this.srcParams[m] === "function") {
 							this.dependencies.dependentAll = true;
 						} else {
-							this.dependencies.addDependency(this.srcParams[m],paramInfo.skinny);
+							this.dependencies.addDependency(this.srcParams[m],!paramInfo.skinny);
 						}
 					}
 				}
