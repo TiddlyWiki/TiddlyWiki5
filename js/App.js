@@ -34,6 +34,8 @@ var App = function() {
 	this.store.registerParser("image/jpeg",imageParser);
 	this.store.registerParser("image/png",imageParser);
 	this.store.registerParser("image/gif",imageParser);
+	// Set up the JavaScript parser
+	this.store.jsParser = new JavaScriptParser();
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);
@@ -78,12 +80,6 @@ var App = function() {
 		for(t=0; t<tiddlers.length; t++) {
 			this.store.addTiddler(new Tiddler(tiddlers[t]));
 		}
-	}
-	// Set up the JavaScript parser. Currently a hack; the idea is that the parsers would be loaded through a boot recipe
-	if(this.isBrowser) {
-		this.store.jsParser = new JavaScriptParser(this.store.getTiddlerText("javascript.pegjs"));
-	} else {
-		this.store.jsParser = new JavaScriptParser(require("fs").readFileSync("parsers/javascript.pegjs","utf8"));
 	}
 	// Bit of a hack to set up the macros
 	this.store.installMacro(require("./macros/echo.js").macro);

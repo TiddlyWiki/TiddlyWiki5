@@ -15,8 +15,8 @@ jsmodule: ../js/*.js
 
 jsmodule: ../js/macros/*.js
 
-jsmodule: ../node_modules/pegjs/lib/peg.js
-	title: pegjs
+jsmodule: ../node_modules/esprima/esprima.js
+	title: esprima
 
 jsbootstart: BootStart.js
 jsbootend: BootLoader.js

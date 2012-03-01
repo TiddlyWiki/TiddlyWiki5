@@ -10,16 +10,15 @@ Parses JavaScript source code into a parse tree using PEGJS
 "use strict";
 
 var JavaScriptParseTree = require("./JavaScriptParseTree.js").JavaScriptParseTree,
-	pegjs = require("pegjs");
+	esprima = require("esprima");
 
 // Initialise the parser
-var JavaScriptParser = function(parserText) {
-	this.parser = pegjs.buildParser(parserText);
+var JavaScriptParser = function() {
 };
 
 // Parse a string of JavaScript code and return the parse tree
 JavaScriptParser.prototype.parse = function(code) {
-	return new JavaScriptParseTree(this.parser.parse(code),this);
+	return new JavaScriptParseTree(esprima.parse(code));
 };
 
 // Create a parse tree object from a raw tree

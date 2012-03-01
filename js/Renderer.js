@@ -84,17 +84,43 @@ MacroNode.prototype.parseMacroParamString = function(paramString) {
 		self = this,
 		insertParam = function(name,arg) {
 			if(arg.evaluated) {
-				params[name] = self.store.jsParser.createTree([
+				params[name] = self.store.jsParser.createTree( // (function(tiddler,store,utils) {return {paramOne: 1};})
 					{
-						type: "Function",
-						name: null,
-						params: ["tiddler","store","utils"], // These are the parameters passed to the parameter expressions
-						elements: [ {
-							type: "ReturnStatement",
-							value: self.store.jsParser.parse(arg.string).tree.elements[0]
-						} ]
+						"type": "Program",
+						"body": [
+							{
+								"type": "ExpressionStatement",
+								"expression": {
+									"type": "FunctionExpression",
+									"id": null,
+									"params": [
+										{
+											"type": "Identifier",
+											"name": "tiddler"
+										},
+										{
+											"type": "Identifier",
+											"name": "store"
+										},
+										{
+											"type": "Identifier",
+											"name": "utils"
+										}
+									],
+									"body": {
+										"type": "BlockStatement",
+										"body": [
+											{
+												"type": "ReturnStatement",
+												"argument": self.store.jsParser.parse("(" + arg.string + ")").tree.body[0].expression
+											}
+										]
+									}
+								}
+							}
+						]
 					}
-				]).compile("application/javascript").render;
+				).compile("application/javascript").render;
 			} else {
 				params[name] = arg.string;
 			}
@@ -399,12 +425,12 @@ RawNode.prototype.renderInDom = function(domNode) {
 Static method to construct a label
 */
 var LabelNode = function(type,value,classes) {
-    classes = (classes || []).slice(0);
-    classes.push("label");
-    return new ElementNode("span",{
-        "class": classes,
+	classes = (classes || []).slice(0);
+	classes.push("label");
+	return new ElementNode("span",{
+		"class": classes,
 		"data-tw-label-type": type
-    },value);
+	},value);
 };
 
 /*
