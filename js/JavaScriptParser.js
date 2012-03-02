@@ -48,20 +48,25 @@ JavaScriptParser.prototype.parse = function(type,code) {
 		renderComment = function(comment) {
 			var text = comment.value,
 				element,
-				classes = [];
+				classes = ["javascript-comment"],
+				content = [];
 			renderWhitespace(comment.range[0]);
 			if(comment.type === "Block") {
 				element = "div";
 				classes.push("javascript-block-comment");
+				content.push(Renderer.TextNode("/*"));
 			} else {
 				element = "span";
 				classes.push("javascript-line-comment");
+				content.push(Renderer.TextNode("//"));
 			}
-			result.push(Renderer.ElementNode(element,{"class": classes},
-					self.store.parseText("text/x-tiddlywiki",text).tree));
-			if(comment.type === "Line") {
-				result.push(Renderer.TextNode("\n"));
+			content.push.apply(content,self.store.parseText("text/x-tiddlywiki",text).tree);
+			if(comment.type === "Block") {
+				content.push(Renderer.TextNode("*/"));
+			} else {
+				content.push(Renderer.TextNode("\n"));
 			}
+			result.push(Renderer.ElementNode(element,{"class": classes},content));
 			currPos = comment.range[1] + 1;
 		},
 		renderToken = function(token) {

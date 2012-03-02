@@ -301,14 +301,27 @@ a.tw-slider-label::after {
     color: #388;
 }
 
+.javascript-source .javascript-comment {
+    padding: 4px 4px 4px 4px;
+    border: 1px solid #feed77;
+    background: #feed77;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#dede80),color-stop(7%,#feed77),color-stop(92%,#feed77),color-stop(100%,#dede80));
+    background: -webkit-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0) 25%),-webkit-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background:    -moz-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0) 25%),   -moz-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background:      -o-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0) 25%),     -o-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background:     -ms-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0) 25%),    -ms-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    background:         linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0) 25%),        linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+    -webkit-box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+       -moz-box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+            box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+}
+
 .javascript-source .javascript-block-comment {
     font-family: Helvetica, Arial, sans-serif;
-    background: #fff;
 }
 
 .javascript-source .javascript-line-comment {
     font-family: Helvetica, Arial, sans-serif;
-    background: #ff0;
 }
 
 
