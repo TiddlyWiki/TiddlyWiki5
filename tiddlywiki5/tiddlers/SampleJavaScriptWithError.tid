@@ -1,0 +1,13 @@
+title: SampleJavaScriptWithError
+type: application/javascript
+
+/*
+This is an example JavaScript file
+*/
+function myFunction(param) {
+	if(=) { // An error
+		param = param/17;
+	}
+	return param * Math.PI; // Perform a calculation
+}
+

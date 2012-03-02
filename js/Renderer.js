@@ -424,6 +424,17 @@ RawNode.prototype.renderInDom = function(domNode) {
 };
 
 /*
+Static method to construct an error message
+*/
+var ErrorNode = function(text) {
+	return new ElementNode("span",{
+		"class": "tw-error"
+	},[
+		new TextNode(text)
+	]);
+};
+
+/*
 Static method to construct a label
 */
 var LabelNode = function(type,value,classes) {
@@ -492,6 +503,7 @@ var Renderer = {
 	ElementNode: ElementNode,
 	TextNode: TextNode,
 	EntityNode: EntityNode,
+	ErrorNode: ErrorNode,
 	LabelNode: LabelNode,
 	SplitLabelNode: SplitLabelNode,
 	SliderNode: SliderNode

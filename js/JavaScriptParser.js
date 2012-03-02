@@ -21,13 +21,23 @@ var JavaScriptParser = function(options) {
 
 // Parse a string of JavaScript code or JSON and return the parse tree as a wikitext parse tree
 JavaScriptParser.prototype.parse = function(type,code) {
-	// Get the parse tree
-	var parseTree = esprima.parse(code,{
-			tokens: true,
-			range: true
-		}),
+	var parseTree,
 		result = [],
 		t,endLastToken = 0;
+	// Try to parse the code
+	try {
+		parseTree = esprima.parse(code,{tokens: true,range: true});
+	} catch(ex) {
+		// Return a helpful error if the parse failed
+		return new WikiTextParseTree([
+			Renderer.ElementNode("pre",{"class": "javascript-source"},[
+				Renderer.TextNode(code.substring(0,ex.index)),
+				Renderer.ErrorNode(ex),
+				Renderer.TextNode(code.substring(ex.index))
+			])
+		],new Dependencies(),this.store);
+	}
+	// Render the tokens with the appropriate class
 	for(t=0; t<parseTree.tokens.length; t++) {
 		var token = parseTree.tokens[t];
 		if(token.range[0] > endLastToken) {

@@ -107,6 +107,20 @@ a.tw-slider-label::after {
     content: "\00a0\27a4";
 }
 
+.tw-error {
+    background-color: #B94A48;
+    padding: 2px 4px 3px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    font-style: normal;
+    color: white;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
 .label {
     text-transform: uppercase;
     font-weight: bold;
