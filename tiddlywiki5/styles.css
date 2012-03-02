@@ -273,42 +273,43 @@ a.tw-slider-label::after {
   outline: 1px dotted #666;
 }
 
-.javascript-source {
-    font-style: italic;
-}
-
 .javascript-source .javascript-boolean {
-    font-style: normal;
 }
 
 .javascript-source .javascript-identifier {
-    font-style: normal;
     color: #b00;
 }
 
 .javascript-source .javascript-keyword {
-    font-style: normal;
     color: #393;
     font-weight: bold;
 }
 
 .javascript-source .javascript-null {
-    font-style: normal;
     color: #833;
 }
 
 .javascript-source .javascript-numeric {
-    font-style: normal;
     color: #33a;
 }
 
 .javascript-source .javascript-punctuator {
-    font-style: normal;
     color: #444;
 }
 
 .javascript-source .javascript-string {
-    font-style: normal;
     color: #388;
 }
+
+.javascript-source .javascript-block-comment {
+    font-family: Helvetica, Arial, sans-serif;
+    background: #fff;
+}
+
+.javascript-source .javascript-line-comment {
+    font-family: Helvetica, Arial, sans-serif;
+    background: #ff0;
+}
+
+
 
