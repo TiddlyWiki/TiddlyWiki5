@@ -200,9 +200,15 @@ var inputTiddlerDOM = function(node) {
 		},
 		extractModuleTiddler = function(node) {
 			if(node.hasAttribute && node.hasAttribute("data-tiddler-title")) {
+				var text = node.innerHTML,
+					s = text.indexOf("{"),
+					e = text.lastIndexOf("}");
+				if(s !== -1 && e !== -1) {
+					text = text.substring(s+1,e-1);
+				}
 				return {
 					title: node.getAttribute("data-tiddler-title"),
-					text: node.innerHTML,
+					text: text,
 					type: "application/javascript"
 				};
 			} else {
