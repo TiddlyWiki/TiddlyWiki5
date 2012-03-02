@@ -22,8 +22,9 @@ var JavaScriptParser = function(options) {
 // Parse a string of JavaScript code or JSON and return the parse tree as a wikitext parse tree
 JavaScriptParser.prototype.parse = function(type,code) {
 	// Try to parse the code
+	var parseTree;
 	try {
-		var parseTree = esprima.parse(code,{comment: true,tokens: true,range: true});
+		parseTree = esprima.parse(code,{comment: true,tokens: true,range: true});
 	} catch(ex) {
 		// Return a helpful error if the parse failed
 		return new WikiTextParseTree([
