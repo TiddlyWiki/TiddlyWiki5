@@ -44,11 +44,47 @@ var JavaScriptParser = function(options) {
     this.store = options.store;
 };
 
-// Parse a string of JavaScript code and return the parse tree as a wikitext parse tree
+// Parse a string of JavaScript code or JSON and return the parse tree as a wikitext parse tree
 JavaScriptParser.prototype.parse = function(type,code) {
-	if(type === "application/json") {
-		code = "(" + code + ")";
+	if(type === "application/javascript") {
+		return this.parseJavaScript(code);
+	} else {
+		return this.parseJSON(code);
 	}
+}
+
+JavaScriptParser.prototype.parseJavaScript = function(code) {
+	// Get the parse tree
+	var parseTree = esprima.parse(code,{
+			tokens: true,
+			range: true
+		}),
+		result = [],
+		t,endLastToken = 0;
+	for(t=0; t<parseTree.tokens.length; t++) {
+		var token = parseTree.tokens[t];
+		if(token.range[0] > endLastToken) {
+			result.push(Renderer.TextNode(code.substring(endLastToken,token.range[0])));
+		}
+		result.push(Renderer.ElementNode("span",{
+			"class": "javascript-" + token.type.toLowerCase()
+		},[
+			Renderer.TextNode(token.value)
+		]));
+		endLastToken = token.range[1] + 1;
+	}
+	if(endLastToken < code.length) {
+		result.push(Renderer.TextNode(code.substring(endLastToken)));
+	}
+	return new WikiTextParseTree([
+			Renderer.ElementNode("pre",{"class": "javascript-source"},result)
+		],new Dependencies(),this.store);
+};
+
+JavaScriptParser.prototype.parseJSON = function(code) {
+	// Wrap it in parenthesis to make it a program
+	code = "(" + code + ")";
+	// Get the parse tree
 	return new WikiTextParseTree([
 		renderObject(esprima.parse(code))
 	],new Dependencies(),this.store);
