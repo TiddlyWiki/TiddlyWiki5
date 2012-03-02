@@ -5,3 +5,5 @@ title: ImageTests
 [img[Motovun Jack.jpg]]
 [img[tooltip|Motovun Jack.jpg]]
 [img[tooltip|Motovun Jack.jpg][http://google.com/]]
+<<tiddler [[Tiddler Fishes.svg]]>>
+[img[Tiddler Fishes.svg]]
