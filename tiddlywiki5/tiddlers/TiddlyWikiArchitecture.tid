@@ -37,7 +37,7 @@ Each WikiStore is connected to another shadow store that is used to provide defa
 Clients can register event handlers with the WikiStore object. Event handlers can be registered to be triggered for modifications to any tiddler in the store, or with a filter to only be invoked when a particular tiddler or set of tiddlers changes.
 
 Whenever a change is made to a tiddler, the wikistore registers a `nexttick` handler (if it hasn't already done so). The `nexttick` handler looks back at all the tiddler changes, and dispatches any matching event handlers. 
-!! Parsing and Compiling
+!! Parsing and Rendering
 TiddlyWiki parses the content of tiddlers to build an internal tree representation that is used for several purposes:
 * Rendering a tiddler to other formats (e.g. converting wikitext to HTML)
 * Detecting outgoing links from a tiddler, and from them...
@@ -54,12 +54,12 @@ TiddlyWiki5 uses multiple parsers:
 Additional parsers are planned:
 * CSS ({{{text/css}}})
 * Recipe ({{{text/x-tiddlywiki-recipe}}})
-One global instance of each parser is instantiated in `js/App.js` and registered with the main WikiStore object. In some cases the constructors require special parameters or options (eg, the JavaScript parser requires the [[PEG.JS]] JavaScript parser text).
+One global instance of each parser is instantiated in `js/App.js` and registered with the main WikiStore object.
 
 The parsers are all used the same way:
-{{{
+$$$.js
 var parseTree = parser.parse(type,text) // Parses the text and returns a parse tree object
-}}}
+$$$
 The parse tree object exposes the following fields:
 $$$.js
 var renderer = parseTree.compile(type); // Compiles the parse tree into a renderer for the specified MIME type
@@ -69,12 +69,11 @@ $$$
 The dependencies are returned as an object like this:
 {{{
 {
-	link: {"tiddlertitle1": 2, "tiddlertitle2": 3},
-	include: {"tiddlertitle3": 5},
+	tiddlers: {"tiddlertitle1": true, "tiddlertitle2": false},
 	dependentAll: false
 }
 }}}
-The `link` and `include` fields are hashmaps of the title of each tiddler that is linked or included in the current one. For the tiddler to be subsequently rendered correctly, the linked tiddlers must be present, at least in skinny form, and the included tiddlers must be fully loaded.
+The `tiddlers` field is a hashmap of the title of each tiddler that is linked or included in the current one. The value is `true` if the tiddler is a //'fat'// dependency (ie the text is included in some way) or `false` if the tiddler is a //`skinny`// dependency.
 
 The `dependentAll` field is used to indicate that the tiddler contains a macro that scans the entire pool of tiddlers (for example the `<<list>>` macro), and is potentially dependent on any of them. The effect is that the tiddler should be rerendered whenever any other tiddler changes.
 !! Rendering
@@ -106,55 +105,4 @@ The parameters to `rerender()` are:
 |renderStep |See below |
 Currently, the only macro that supports rerendering is the `<<story>>` macro; all other macros are rerendered by calling the ordinary `render()` method again. The reason that the `<<story>>` macro goes to the trouble of having a `rerender()` method is so that it can be carefully selective about not disturbing tiddlers in the DOM that aren't affected by the change. If there were, for instance, a video playing in one of the open tiddlers it would be reset to the beginning if the tiddler were rerendered.
 
-----
-//The remaining text is from an earlier draft, and is in the process of being updated//
 
-When the text of a tiddler is requested in a different format than its native type, TiddlyWiki5 compiles a JavaScript function that generates the new format from the text of the tiddler.
-
-So, a simple tiddler in {{{application/x-tiddlywiki}}} format might read:
-{{{
-Hello World
-}}}
-The function to render it to {{{text/html}}} might look like this:
-{{{
-function() {
-	return "<p>Hello World</p>";
-}
-}}}
-
-The function can also include calls to the store to incorporate the values of other tiddlers. Consider this tiddler, called {{{HelloThere}}}:
-{{{
-Hello <<tiddler Who>>
-}}}
-And this one called {{{Who}}}:
-{{{
-World
-}}}
-The function to generate {{{HelloThere}}} in {{{text/html}}} might be:
-{{{
-function() {
-	return ["<p>","Hello ", getTiddlerText("Who","text/html"), "</p>"].join(""); 
-}
-}}}
-
-Now, the return value of this function can be cached until a tiddler in the dependency chain changes. The function itself can be cached until the tiddler itself changes, or a macro that it uses changes.
-
-The dependency chain is calculated when a tiddler is parsed. Every tiddler that is directly referenced is accumulated (until the point at which it is concluded that it is simpler to mark the tiddler as being dependent on any other tiddler changing).
-
-Evaluated macro parameters are parsed and can be checked for safeness, and then included in the compiled code. For example,
-{{{
-Hello <<echo {{2+2}}>>
-}}}
-Compiles to:
-{{{
-function() {
-	return ["Hello ",(function(){
-		return 2+2;
-	})().toString()].join("");
-}
-}}}
-
-The compilation process has several steps:
-* First, the parse tree is used to generate a JavaScript tree
-* The JavaScript tree is scanned to determine the tiddlers on which this one depends
-* Finally, executable JavaScript text is generated by walking the JavaScript tree

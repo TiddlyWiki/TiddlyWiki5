@@ -13,6 +13,7 @@ The command line options are processed sequentially from left to right. Processi
 |`--savewiki <dirpath>` |Saves all the loaded tiddlers as a single file TiddlyWiki called `index.html` and an RSS feed called `index.xml` in a new directory of the specified name |
 |`--savetiddler <title> <filename> [<type>]` |Save an individual tiddler as a specified MIME type, defaults to `text/html` |
 |`--savetiddlers <outdir>` |Saves all the loaded tiddlers as `.tid` files in the specified directory |
+|`--savehtml <outdir>` |Saves all the loaded tiddlers as static, unstyled `.html` files in the specified directory |
 |`--servewiki <port>` |Serve the cooked TiddlyWiki over HTTP at `/` |
 |`--servetiddlers <port>` |Serve individual tiddlers over HTTP at `/tiddlertitle` |
 |`--wikitest <dir>` |Run wikification tests against the tiddlers in the given directory |
