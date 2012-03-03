@@ -11,6 +11,7 @@ Some useful tiddlers for feature testing:
 * SampleJavaScript and SampleJavaScriptWithError showing how JavaScript code is displayed
 * VideoTests showing how different online video formats can be embedded
 * SliderTests showing how sliders work
+* TypedBlockTests showing how embedded typed text blocks work
 
 Technical documentation includes:
 * [[Testing]] regimen

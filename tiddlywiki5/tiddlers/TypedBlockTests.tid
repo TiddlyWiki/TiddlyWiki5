@@ -31,3 +31,14 @@ $$$.svg
   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
 </svg>
 $$$
+
+And, finally, a JSON example:
+{{{
+$$$.json
+{"teapot": "brown","inside":["milk","sugar",23]}
+$$$
+}}}
+Which renders as:
+$$$.json
+{"teapot": "brown","inside":["milk","sugar",23]}
+$$$
