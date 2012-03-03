@@ -77,11 +77,11 @@ exports.macro = {
 					var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 					text = text.replace(placeholderRegExp,withTokens[t]);
 				}
-				content = this.store.parseText(targetTiddler.type,text).tree;
+				content = this.store.parseText(targetTiddler.type,text).nodes;
 			} else {
 				// There's no parameterisation, so we can just render the target tiddler directly
 				var parseTree = this.store.parseTiddler(renderTemplate);
-				content = parseTree ? parseTree.tree : [];
+				content = parseTree ? parseTree.nodes : [];
 			}
 		} else {
 			content = [Renderer.ErrorNode("Tiddler recursion error in <<tiddler>> macro")];	

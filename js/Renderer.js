@@ -15,8 +15,8 @@ var utils = require("./Utils.js"),
 	esprima = require("esprima");
 
 // Intialise the renderer object
-var Renderer = function(tree,dependencies,store) {
-	this.tree = tree;
+var Renderer = function(nodes,dependencies,store) {
+	this.nodes = nodes;
 	this.dependencies = dependencies;
 	this.store = store;
 };

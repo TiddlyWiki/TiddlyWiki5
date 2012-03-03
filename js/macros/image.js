@@ -19,7 +19,7 @@ exports.macro = {
 	},
 	execute: function() {
 		if(this.store.tiddlerExists(this.params.src)) {
-			var imageTree = this.store.parseTiddler(this.params.src).tree,
+			var imageTree = this.store.parseTiddler(this.params.src).nodes,
 				cloneImage = [];
 			for(var t=0; t<imageTree.length; t++) {
 				cloneImage.push(imageTree[t].clone());

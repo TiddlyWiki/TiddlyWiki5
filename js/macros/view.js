@@ -41,14 +41,14 @@ exports.macro = {
 					case "wikified":
 						if(this.params.field === "text") {
 							if(parents.indexOf(tiddler.title) === -1) {
-								content = this.store.parseTiddler(tiddler.title).tree;
+								content = this.store.parseTiddler(tiddler.title).nodes;
 							} else {
 								content = [Renderer.ErrorNode("Tiddler recursion error in <<view>> macro")];
 							}
 							parents = parents.slice(0);
 							parents.push(tiddler.title);
 						} else {
-							content = this.store.parseText("text/x-tiddlywiki",v).tree;
+							content = this.store.parseText("text/x-tiddlywiki",v).nodes;
 						}
 						for(t=0; t<content.length; t++) {
 							contentClone.push(content[t].clone());

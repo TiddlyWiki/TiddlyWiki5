@@ -420,7 +420,7 @@ var rules = [
 			w.nextMatch = oldNextMatch;
 			w.children = oldChildren;
 			w.dependencies = oldDependencies;
-			w.output.push.apply(w.output,parseTree.tree);
+			w.output.push.apply(w.output,parseTree.nodes);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}

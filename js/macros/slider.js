@@ -42,7 +42,7 @@ exports.macro = {
 				target = this.params.targetTiddler,
 				sliderContent;
 			if(this.params.hasOwnProperty("content")) {
-				sliderContent = this.store.parseText("text/x-tiddlywiki",this.params.content).tree;
+				sliderContent = this.store.parseText("text/x-tiddlywiki",this.params.content).nodes;
 			} else {
 				sliderContent = [Renderer.MacroNode(
 										"tiddler",

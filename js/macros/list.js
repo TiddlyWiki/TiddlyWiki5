@@ -60,7 +60,7 @@ exports.macro = {
 		if(tiddlers.length === 0) {
 			return [Renderer.TextNode(this.params.emptyMessage || "")];
 		} else {
-			var templateTree = this.store.parseText(templateType,templateText).tree;
+			var templateTree = this.store.parseText(templateType,templateText).nodes;
 			for(t=0; t<tiddlers.length; t++) {
 				var cloneTemplate = [];
 				for(var c=0; c<templateTree.length; c++) {

@@ -60,7 +60,7 @@ JavaScriptParser.prototype.parse = function(type,code) {
 				classes.push("javascript-line-comment");
 				content.push(Renderer.TextNode("//"));
 			}
-			content.push.apply(content,self.store.parseText("text/x-tiddlywiki",text).tree);
+			content.push.apply(content,self.store.parseText("text/x-tiddlywiki",text).nodes);
 			if(comment.type === "Block") {
 				content.push(Renderer.TextNode("*/"));
 			} else {
