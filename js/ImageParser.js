@@ -21,7 +21,7 @@ var ImageParser = function(options) {
 ImageParser.prototype.parse = function(type,text) {
     var src;
     if(type === "image/svg+xml" || type === ".svg") {
-        src = "data:" + type + "," + encodeURIComponent(text);
+        src = "data:image/svg+xml," + encodeURIComponent(text);
 	} else {
         src = "data:" + type + ";base64," + text;
 	}
