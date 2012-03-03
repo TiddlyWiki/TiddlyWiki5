@@ -252,10 +252,17 @@ WikiStore.prototype.clearCache = function(title) {
 	}
 };
 
-WikiStore.prototype.parseText = function(type,text) {
+/*
+Parse a block of text of a specified MIME type
+
+Options are:
+	defaultType: Default MIME type to use if the specified one is unknown
+*/
+WikiStore.prototype.parseText = function(type,text,options) {
+	options = options || {};
 	var parser = this.parsers[type];
 	if(!parser) {
-		parser = this.parsers["text/x-tiddlywiki"];
+		parser = this.parsers[options.defaultType || "text/x-tiddlywiki"];
 	}
 	if(parser) {
 		return parser.parse(type,text);
