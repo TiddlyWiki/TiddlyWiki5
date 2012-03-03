@@ -42,3 +42,14 @@ Which renders as:
 $$$.json
 {"teapot": "brown","inside":["milk","sugar",23]}
 $$$
+
+Unknown types render as plain text:
+{{{
+$$$text/unknown
+Some plain text, which will not be //formatted//.
+$$$
+}}}
+Which renders as:
+$$$text/unknown
+Some plain text, which will not be //formatted//.
+$$$
