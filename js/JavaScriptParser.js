@@ -9,8 +9,7 @@ Parses JavaScript source code into a parse tree using Esprima
 /*jslint node: true */
 "use strict";
 
-var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
-    Renderer = require("./Renderer.js").Renderer,
+var Renderer = require("./Renderer.js").Renderer,
     Dependencies = require("./Dependencies.js").Dependencies,
     esprima = require("esprima");
 
@@ -27,7 +26,7 @@ JavaScriptParser.prototype.parse = function(type,code) {
 		parseTree = esprima.parse(code,{comment: true,tokens: true,range: true});
 	} catch(ex) {
 		// Return a helpful error if the parse failed
-		return new WikiTextParseTree([
+		return new Renderer([
 			Renderer.ElementNode("pre",{"class": "javascript-source"},[
 				Renderer.TextNode(code.substring(0,ex.index)),
 				Renderer.ErrorNode(ex),
@@ -95,7 +94,7 @@ JavaScriptParser.prototype.parse = function(type,code) {
 	}
 	renderWhitespace(code.length);
 	// Wrap the whole lot in a `<PRE>`
-	return new WikiTextParseTree([
+	return new Renderer([
 			Renderer.ElementNode("pre",{"class": "javascript-source"},result)
 		],new Dependencies(),this.store);
 };

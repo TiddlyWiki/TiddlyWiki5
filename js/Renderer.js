@@ -14,6 +14,13 @@ var utils = require("./Utils.js"),
 	Dependencies = require("./Dependencies.js").Dependencies,
 	esprima = require("esprima");
 
+// Intialise the renderer object
+var Renderer = function(tree,dependencies,store) {
+	this.tree = tree;
+	this.dependencies = dependencies;
+	this.store = store;
+};
+
 var Node = function(children) {
 	if(this instanceof Node) {
 		this.children = children;
@@ -498,16 +505,14 @@ var SliderNode = function(type,label,tooltip,isOpen,children) {
 	);
 };
 
-var Renderer = {
-	MacroNode: MacroNode,
-	ElementNode: ElementNode,
-	TextNode: TextNode,
-	EntityNode: EntityNode,
-	ErrorNode: ErrorNode,
-	LabelNode: LabelNode,
-	SplitLabelNode: SplitLabelNode,
-	SliderNode: SliderNode
-};
+Renderer.MacroNode = MacroNode;
+Renderer.ElementNode = ElementNode;
+Renderer.TextNode = TextNode;
+Renderer.EntityNode = EntityNode;
+Renderer.ErrorNode = ErrorNode;
+Renderer.LabelNode = LabelNode;
+Renderer.SplitLabelNode = SplitLabelNode;
+Renderer.SliderNode = SliderNode;
 
 exports.Renderer = Renderer;
 

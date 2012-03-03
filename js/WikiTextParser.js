@@ -32,7 +32,6 @@ HTML nodes look like this:
 "use strict";
 
 var WikiTextRules = require("./WikiTextRules.js"),
-	WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
 	Dependencies = require("./Dependencies.js").Dependencies,
 	Renderer = require("./Renderer.js").Renderer,
 	utils = require("./Utils.js"),
@@ -71,7 +70,7 @@ WikiTextParser.prototype.parse = function(type,text) {
 	this.dependencies = new Dependencies();
 	this.output = null;
 	this.subWikify(this.children);
-	var tree = new WikiTextParseTree(this.children,this.dependencies,this.store);
+	var tree = new Renderer(this.children,this.dependencies,this.store);
 	this.source = null;
 	this.children = null;
 	return tree;

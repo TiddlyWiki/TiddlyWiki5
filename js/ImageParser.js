@@ -9,8 +9,7 @@ Compiles images into JavaScript functions that render them in HTML
 /*jslint node: true */
 "use strict";
 
-var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
-    Renderer = require("./Renderer.js").Renderer,
+var Renderer = require("./Renderer.js").Renderer,
     Dependencies = require("./Dependencies.js").Dependencies,
     utils = require("./Utils.js");
 
@@ -25,7 +24,7 @@ ImageParser.prototype.parse = function(type,text) {
 	} else {
         src = "data:" + type + ";base64," + text;
 	}
-	return new WikiTextParseTree([Renderer.ElementNode("img",{src: src})],new Dependencies(),this.store);
+	return new Renderer([Renderer.ElementNode("img",{src: src})],new Dependencies(),this.store);
 };
 
 exports.ImageParser = ImageParser;

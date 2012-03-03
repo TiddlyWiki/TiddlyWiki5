@@ -9,8 +9,7 @@ Renders plain text tiddlers
 /*jslint node: true */
 "use strict";
 
-var WikiTextParseTree = require("./WikiTextParseTree.js").WikiTextParseTree,
-    Renderer = require("./Renderer.js").Renderer,
+var Renderer = require("./Renderer.js").Renderer,
     Dependencies = require("./Dependencies.js").Dependencies,
     utils = require("./Utils.js");
 
@@ -19,7 +18,7 @@ var PlainTextParser = function(options) {
 };
 
 PlainTextParser.prototype.parse = function(type,text) {
-	return new WikiTextParseTree([Renderer.ElementNode("pre",{},[Renderer.TextNode(text)])],new Dependencies(),this.store);
+	return new Renderer([Renderer.ElementNode("pre",{},[Renderer.TextNode(text)])],new Dependencies(),this.store);
 };
 
 exports.PlainTextParser = PlainTextParser;
