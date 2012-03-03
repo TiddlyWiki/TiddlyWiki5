@@ -1,0 +1,13 @@
+title: TypedBlockTests
+
+Here's an example of a typed block containing JavaScript source code:
+$$$.js
+return 2+2;
+$$$
+
+Here's an example of a typed block containing an SVG image:
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$

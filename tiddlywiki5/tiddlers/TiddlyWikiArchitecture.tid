@@ -61,11 +61,11 @@ The parsers are all used the same way:
 var parseTree = parser.parse(type,text) // Parses the text and returns a parse tree object
 }}}
 The parse tree object exposes the following fields:
-{{{
+$$$.js
 var renderer = parseTree.compile(type); // Compiles the parse tree into a renderer for the specified MIME type
 console.log(parseTree.toString(type)); // Returns a readable string representation of the parse tree (either `text/html` or `text/plain`)
 var dependencies = parseTree.dependencies; // Gets the dependencies of the parse tree (see below)
-}}}
+$$$
 The dependencies are returned as an object like this:
 {{{
 {
@@ -81,10 +81,10 @@ The `dependentAll` field is used to indicate that the tiddler contains a macro t
 The `parseTree.compile(type)` method returns a renderer object that contains a JavaScript function that generates the new representation of the original parsed text.
 
 The renderer is invoked as follows:
-{{{
+$$$.js
 var renderer = parseTree.compile("text/html");
 var html = renderer.render(tiddler,store);
-}}}
+$$$
 The `tiddler` parameter to the `render` method identifies the tiddler that is acting as the context for this rendering -- for example, it provides the fields displayed by the `<<view>>` macro. The `store` parameter is used to resolve any references to other tiddlers.
 !! Rerendering
 When rendering to the HTML/SVG DOM in the browser, TiddlyWiki5 also allows a previous rendering to be selectively updated in response to changes in dependent tiddlers. At the moment, only the WikiTextRenderer supports rerendering.

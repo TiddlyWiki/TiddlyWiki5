@@ -398,6 +398,34 @@ var rules = [
 },
 
 {
+	name: "typedBlock",
+	match: "^\\$\\$\\$(?:.*)\\n",
+	lookaheadRegExp: /^\$\$\$(.*)\n((?:.|\n)*?)\$\$\$/mg,
+	handler: function(w)
+	{
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
+		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
+			// The wikitext parsing infrastructure is horribly unre-entrant
+			var mimeType = lookaheadMatch[1],
+				content = lookaheadMatch[2],
+				oldOutput = w.output,
+				oldSource = w.source,
+				oldNextMatch = w.nextMatch,
+				oldChildren = w.children,
+				oldDependencies = w.dependencies,
+				parseTree = w.store.parseText(mimeType,content);
+			w.output = oldOutput;
+			w.source = oldSource;
+			w.nextMatch = oldNextMatch;
+			w.children = oldChildren;
+			w.dependencies = oldDependencies;
+			w.output.push.apply(w.output,parseTree.tree);
+			w.nextMatch = this.lookaheadRegExp.lastIndex;
+		}
+	}
+},
+
+{
 	name: "wikifyComment",
 	match: "^(?:/\\*\\*\\*|<!---)\\n",
 	handler: function(w)

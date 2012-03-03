@@ -27,9 +27,9 @@ var App = function() {
 	this.store = new WikiStore();	
 	// Register the parsers
 	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({store: this.store}));
-	this.store.registerParser(["image/svg+xml","image/jpg","image/jpeg","image/png","image/gif"],new ImageParser({store: this.store}));
-	this.store.registerParser("application/javascript",new JavaScriptParser({store: this.store}));
-	this.store.registerParser("application/json",new JSONParser({store: this.store}));
+	this.store.registerParser(["image/svg+xml",".svg","image/jpg",".jpg","image/jpeg",".jpeg","image/png",".png","image/gif",".gif"],new ImageParser({store: this.store}));
+	this.store.registerParser(["application/javascript",".js"],new JavaScriptParser({store: this.store}));
+	this.store.registerParser(["application/json",".json"],new JSONParser({store: this.store}));
 	// Register the standard tiddler serializers and deserializers
 	tiddlerInput.register(this.store);
 	tiddlerOutput.register(this.store);
