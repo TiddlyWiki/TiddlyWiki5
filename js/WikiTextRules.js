@@ -400,9 +400,10 @@ var rules = [
 {
 	name: "typedBlock",
 	match: "^\\$\\$\\$(?:.*)\\n",
-	lookaheadRegExp: /^\$\$\$(.*)\n((?:.|\n)*?)\$\$\$/mg,
+	lookaheadRegExp: /^\$\$\$(.*)\n((?:^[^\n]*\n)+?)(^\f*\$\$\$$\n?)/mg,
 	handler: function(w)
 	{
+		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			// The wikitext parsing infrastructure is horribly unre-entrant
