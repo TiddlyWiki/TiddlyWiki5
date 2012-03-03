@@ -15,6 +15,7 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	Renderer = require("./Renderer.js").Renderer,
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
+	PlainTextParser = require("./PlainTextParser.js").PlainTextParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
 	JSONParser = require("./JSONParser.js").JSONParser,
 	ImageParser = require("./ImageParser.js").ImageParser;
@@ -27,6 +28,7 @@ var App = function() {
 	this.store = new WikiStore();	
 	// Register the parsers
 	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({store: this.store}));
+	this.store.registerParser("text/plain",new PlainTextParser({store: this.store}));
 	this.store.registerParser(["image/svg+xml",".svg","image/jpg",".jpg","image/jpeg",".jpeg","image/png",".png","image/gif",".gif"],new ImageParser({store: this.store}));
 	this.store.registerParser(["application/javascript",".js"],new JavaScriptParser({store: this.store}));
 	this.store.registerParser(["application/json",".json"],new JSONParser({store: this.store}));
