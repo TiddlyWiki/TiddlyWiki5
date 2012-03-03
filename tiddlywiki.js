@@ -126,20 +126,34 @@ var commandLineSwitches = {
 	savetiddler: {
 		args: {min: 2, max: 3},
 		handler: function(args,callback) {
-			var type = args[2] || "text/html";
-			fs.writeFileSync(args[1],app.store.renderTiddler(type,args[0]),"utf8");
+			var title = args[0],
+				filename = args[1],
+				type = args[2] || "text/html";
+			fs.writeFileSync(filename,app.store.renderTiddler(type,title),"utf8");
 		}	
 	},
 	savetiddlers: {
-		args: {min: 1, max: 1},
+		args: {min: 1, max: 2},
 		handler: function(args,callback) {
-			var recipe = [];
+			var outdir = args[0],
+				recipe = [];
 			app.store.forEachTiddler(function(title,tiddler) {
 				var filename = encodeURIComponent(tiddler.title.replace(/ /g,"_")) + ".tid";
-				fs.writeFileSync(path.resolve(args[0],filename),app.store.serializeTiddler("application/x-tiddler",tiddler),"utf8");
+				fs.writeFileSync(path.resolve(outdir,filename),app.store.serializeTiddler("application/x-tiddler",tiddler),"utf8");
 				recipe.push("tiddler: " + filename + "\n");
 			});
 			fs.writeFileSync(path.join(args[0],"split.recipe"),recipe.join(""));
+			process.nextTick(function() {callback(null);});
+		}
+	},
+	savehtml: {
+		args: {min: 1, max: 1},
+		handler: function(args,callback) {
+			var outdir = args[0];
+			app.store.forEachTiddler(function(title,tiddler) {
+				var filename = encodeURIComponent(title.replace(/ /g,"_")) + ".html";
+				fs.writeFileSync(path.resolve(outdir,filename),app.store.renderTiddler("text/html",title),"utf8");
+			});
 			process.nextTick(function() {callback(null);});
 		}
 	},
