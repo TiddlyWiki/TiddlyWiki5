@@ -1,7 +1,7 @@
 /*\
 title: js/JavaScriptParser.js
 
-Parses JavaScript source code into a parse tree using PEGJS
+Parses JavaScript source code into a parse tree using Esprima
 
 \*/
 (function(){
