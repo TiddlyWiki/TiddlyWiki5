@@ -84,7 +84,7 @@ exports.macro = {
 				content = parseTree ? parseTree.tree : [];
 			}
 		} else {
-			content = [Renderer.TextNode("{{** Tiddler recursion error in <<tiddler>> macro **}}")];	
+			content = [Renderer.ErrorNode("Tiddler recursion error in <<tiddler>> macro")];	
 		}
 		parents.push(renderTemplate);
 		for(t=0; t<content.length; t++) {

@@ -21,7 +21,7 @@ exports.macro = {
 	},
 	execute: function() {
 		if(!this.tiddlerTitle) {
-			return Renderer.TextNode("{{** Missing tiddler **}}");
+			return Renderer.ErrorNode("Missing tiddler");
 		} else {
 			var tiddler = this.store.getTiddler(this.tiddlerTitle),
 				v = tiddler[this.params.field],
@@ -43,7 +43,7 @@ exports.macro = {
 							if(parents.indexOf(tiddler.title) === -1) {
 								content = this.store.parseTiddler(tiddler.title).tree;
 							} else {
-								content = [Renderer.TextNode("{{** Tiddler recursion error in <<view>> macro **}}")];
+								content = [Renderer.ErrorNode("Tiddler recursion error in <<view>> macro")];
 							}
 							parents = parents.slice(0);
 							parents.push(tiddler.title);
