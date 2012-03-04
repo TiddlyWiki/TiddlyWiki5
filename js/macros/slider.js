@@ -1,6 +1,24 @@
 /*\
 title: js/macros/slider.js
 
+!Introduction
+The slider macro is used to selectively reveal a chunk of text. By default, it renders as a button that may be clicked or touched to reveal the enclosed text.
+
+The enclosed text can be a string of WikiText or be taken from a target tiddler.
+!!Parameters
+|`state` //(defaults to 1st parameter)// |The title of the tiddler to contain the current state of the slider |
+|`default` |The initial state of the slider, either `open` or `closed` |
+|`content` |The WikiText to be enclosed in the slider. Overrides the `target` parameter, if present |
+|`target` //(defaults to 2nd parameter)// |The title of the tiddler that contains the enclosed text. Ignored if the `content` parameter is specified |
+|`label` //(defaults to 3rd parameter)// |The plain text to be displayed as the label for the slider button |
+|`tooltip` //(defaults to 4th parameter)// |The plain text tooltip to be displayed when the mouse hovers over the slider button |
+!!Examples
+A minimal slider:
+{{{
+<<slider target:MyTiddler>>
+}}}
+!!Notes
+The slider is a good study example of a simple interactive macro.
 \*/
 (function(){
 
@@ -17,7 +35,8 @@ exports.macro = {
 	types: ["text/html","text/plain"],
 	params: {
 		state: {byPos: 0, type: "tiddler"},
-		targetTiddler: {byPos: 1, type: "tiddler"},
+		"default": {byName: true, type: "text"},
+		target: {byPos: 1, type: "tiddler"},
 		label: {byPos: 2, type: "text"},
 		tooltip: {byPos: 3, type: "text"},
 		content: {byName: true, type: "text"}
@@ -39,7 +58,7 @@ exports.macro = {
 	},
 	execute: function() {
 			var isOpen = this.params.state ? this.store.getTiddlerText(this.params.state,"").trim() === "open" : true,
-				target = this.params.targetTiddler,
+				target = this.params.target,
 				sliderContent;
 			if(this.params.hasOwnProperty("content")) {
 				sliderContent = this.store.parseText("text/x-tiddlywiki",this.params.content).nodes;
