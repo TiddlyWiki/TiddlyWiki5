@@ -5,6 +5,8 @@ title: js/macros/slider.js
 The slider macro is used to selectively reveal a chunk of text. By default, it renders as a button that may be clicked or touched to reveal the enclosed text.
 
 The enclosed text can be a string of WikiText or be taken from a target tiddler.
+
+The current state of the slider can be stored as the string "open" or "closed" in a specified tiddler. If the value of that tiddler changes then the slider is automatically updated.
 !!Parameters
 |`state` //(defaults to 1st parameter)// |The title of the tiddler to contain the current state of the slider |
 |`default` |The initial state of the slider, either `open` or `closed` |
@@ -30,6 +32,44 @@ var Renderer = require("../Renderer.js").Renderer,
 	Tiddler = require("../Tiddler.js").Tiddler,
 	utils = require("../Utils.js");
 
+
+function getOpenState() {
+	if(this.params.hasOwnProperty("state")) {
+		var stateTiddler = this.store.getTiddler(this.params.state);
+		if(stateTiddler) {
+			return stateTiddler.text.trim() === "open";
+		}
+	}
+	if(this.params.hasOwnProperty("default")) {
+		return this.params["default"] === "open";
+	}
+	return false;
+};
+
+function saveOpenState() {
+	if(this.params.hasOwnProperty("state")) {
+		var stateTiddler = this.store.getTiddler(this.params.state) ||
+							new Tiddler({title: this.params.state, text: ""});
+		this.store.addTiddler(new Tiddler(stateTiddler,{text: this.isOpen ? "open" : "closed"}));
+		return true;
+	}
+	return false;
+}
+
+function getSliderContent() {
+	if(this.params.hasOwnProperty("content")) {
+		return this.store.parseText("text/x-tiddlywiki",this.params.content).nodes;
+	} else if(this.params.hasOwnProperty("target")) {
+		return [Renderer.MacroNode(
+								"tiddler",
+								{target: this.params.target},
+								null,
+								this.store)];
+	} else {
+		return [Renderer.ErrorNode("No content specified for slider")];
+	}
+};
+
 exports.macro = {
 	name: "slider",
 	types: ["text/html","text/plain"],
@@ -43,12 +83,11 @@ exports.macro = {
 	},
 	events: {
 		click: function(event) {
-			if(event.target === event.currentTarget.firstChild.firstChild) {
-				var el = event.currentTarget.firstChild.firstChild.nextSibling,
-					stateTiddler = this.params.state ? this.store.getTiddler(this.params.state) : null;
-				stateTiddler = stateTiddler || new Tiddler({title: this.params.state, text: ""});
-				var isOpen = stateTiddler.text.trim() === "open";
-				this.store.addTiddler(new Tiddler(stateTiddler,{text: isOpen ? "closed" : "open"}));
+			if(event.target === this.domNode.firstChild.firstChild) {
+				this.isOpen = !this.isOpen;
+				if(!saveOpenState.call(this)) {
+					exports.macro.refreshInDom.call(this,{});
+				}
 				event.preventDefault();
 				return false;
 			} else {
@@ -57,37 +96,40 @@ exports.macro = {
 		}
 	},
 	execute: function() {
-			var isOpen = this.params.state ? this.store.getTiddlerText(this.params.state,"").trim() === "open" : true,
-				target = this.params.target,
-				sliderContent;
-			if(this.params.hasOwnProperty("content")) {
-				sliderContent = this.store.parseText("text/x-tiddlywiki",this.params.content).nodes;
-			} else {
-				sliderContent = [Renderer.MacroNode(
-										"tiddler",
-										{target: target},
-										null,
-										this.store)];
+			this.isOpen = getOpenState.call(this);
+			var sliderContent = [];
+			if(this.isOpen) {
+				sliderContent = getSliderContent.call(this);
 			}
 			var content = Renderer.SliderNode(this.params.state,
-										this.params.label ? this.params.label : target,
+										this.params.label ? this.params.label : this.params.target,
 										this.params.tooltip,
-										isOpen,
+										this.isOpen,
 										sliderContent);
-			content.execute(this.parents,this.store.getTiddler(this.tiddlerText));
+			content.execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
 			return [content];
 	},
 	refreshInDom: function(changes) {
-		if(this.params.target && changes.hasOwnProperty(this.params.target)) {
-			// If the target has changed, re-render the macro
-		} else {
-			if (this.params.state && changes.hasOwnProperty(this.params.state)) {
-				// If it was just the state tiddler that's changed, set the display appropriately
-				var el = this.domNode.firstChild.firstChild.nextSibling,
-					isOpen = this.store.getTiddlerText(this.params.state,"").trim() === "open";
-				el.style.display = isOpen ? "block" : "none";
-			}
-			// Refresh any children
+		var needContentRefresh = true; // Avoid refreshing the content nodes if we don't need to
+		// If the state tiddler has changed then reset the open state
+		if(this.params.hasOwnProperty("state") && changes.hasOwnProperty(this.params.state)) {
+			this.isOpen = getOpenState.call(this);
+		}
+		// Render the content if the slider is open and we don't have any content yet
+		if(this.isOpen && this.content[0].children[1].children.length === 0) {
+			// Get the slider content and execute it
+			this.content[0].children[1].children = getSliderContent.call(this);
+			this.content[0].children[1].execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
+			// Replace the existing slider body DOM node
+			this.domNode.firstChild.removeChild(this.domNode.firstChild.firstChild.nextSibling);
+			this.content[0].children[1].renderInDom(this.domNode.firstChild,this.domNode.firstChild.firstChild.nextSibling);
+			needContentRefresh = false; // Don't refresh the children if we've just created them
+		}
+		// Set the visibility of the slider content
+		var el = this.domNode.firstChild.firstChild.nextSibling;
+		el.style.display = this.isOpen ? "block" : "none";
+		// Refresh any children
+		if(needContentRefresh) {
 			for(var t=0; t<this.content.length; t++) {
 				this.content[t].refreshInDom(changes);
 			}
