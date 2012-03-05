@@ -122,7 +122,7 @@ var rules = [
 	rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 	handler: function(w)
 	{
-		var table = Renderer.ElementNode("table",{"class": "twtable"},[]);
+		var table = Renderer.ElementNode("table",{"class": "table"},[]);
 		w.output.push(table);
 		var prevColumns = [];
 		var currRowType = null;
@@ -646,7 +646,7 @@ var rules = [
 			w.subWikifyTerm(e.children,/(@@)/mg);
 			break;
 		case "{{":
-			var lookaheadRegExp = /\{\{[\s]*([\w]+[\s\w]*)[\s]*\{(\n?)/mg;
+			var lookaheadRegExp = /\{\{[\s]*([\-\w]+[\-\s\w]*)[\s]*\{(\n?)/mg;
 			lookaheadRegExp.lastIndex = w.matchStart;
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch) {
