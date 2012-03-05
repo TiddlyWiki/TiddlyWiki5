@@ -6,7 +6,6 @@ Macros are implemented as conventional JavaScript modules that export a single v
 
 |!Field Name |!Description |
 |`name` |The name of the macro |
-|`types` |An array of the MIME types that the macro can render |
 |`params` |A hashmap of the parameters accepted by the macro (see below) |
 |`events` |An optional hashmap of event handling functions (see below) |
 |`execute` |The macro rendering function (see below) |
