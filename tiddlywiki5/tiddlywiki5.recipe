@@ -1,5 +1,6 @@
 template: tiddlywiki5.template.html
 copyright: ../copyright.txt
+style: bootstrap.css
 style: styles.css
 
 tiddler: tiddlers/*.tid

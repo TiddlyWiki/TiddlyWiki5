@@ -442,7 +442,7 @@ Static method to construct an error message
 */
 var ErrorNode = function(text) {
 	return new ElementNode("span",{
-		"class": "tw-error"
+		"class": ["label","label-important"]
 	},[
 		new TextNode(text)
 	]);
