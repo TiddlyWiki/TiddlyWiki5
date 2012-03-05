@@ -11,7 +11,6 @@ var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "echo",
-	types: ["text/html","text/plain"],
 	params: {
 		text: {byPos: 0, type: "text"}
 	},

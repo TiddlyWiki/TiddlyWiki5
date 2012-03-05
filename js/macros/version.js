@@ -11,7 +11,6 @@ var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "version",
-	types: ["text/html","text/plain"],
 	params: {
 	},
 	execute: function() {

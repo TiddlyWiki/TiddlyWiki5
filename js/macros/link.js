@@ -16,7 +16,6 @@ var isLinkExternal = function(target) {
 
 exports.macro = {
 	name: "link",
-	types: ["text/html","text/plain"],
 	params: {
 		target: {byName: "default", type: "tiddler", skinny: true}
 	},

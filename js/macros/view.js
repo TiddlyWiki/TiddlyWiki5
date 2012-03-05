@@ -13,7 +13,6 @@ var Renderer = require("../Renderer.js").Renderer,
 
 exports.macro = {
 	name: "view",
-	types: ["text/html","text/plain"],
 	params: {
 		field: {byPos: 0, type: "text"},
 		format: {byPos: 1, type: "text"},

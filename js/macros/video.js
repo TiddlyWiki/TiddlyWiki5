@@ -11,7 +11,6 @@ var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "video",
-	types: ["text/html","text/plain"],
 	params: {
 		src: {byName: "default", type: "text"},
 		type: {byName: true, type: "text"},

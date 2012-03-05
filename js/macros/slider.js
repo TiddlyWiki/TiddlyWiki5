@@ -32,47 +32,45 @@ var Renderer = require("../Renderer.js").Renderer,
 	Tiddler = require("../Tiddler.js").Tiddler,
 	utils = require("../Utils.js");
 
-
-function getOpenState() {
-	if(this.params.hasOwnProperty("state")) {
-		var stateTiddler = this.store.getTiddler(this.params.state);
+function getOpenState(macroNode) {
+	if(macroNode.params.hasOwnProperty("state")) {
+		var stateTiddler = macroNode.store.getTiddler(macroNode.params.state);
 		if(stateTiddler) {
 			return stateTiddler.text.trim() === "open";
 		}
 	}
-	if(this.params.hasOwnProperty("default")) {
-		return this.params["default"] === "open";
+	if(macroNode.params.hasOwnProperty("default")) {
+		return macroNode.params["default"] === "open";
 	}
 	return false;
-};
+}
 
-function saveOpenState() {
-	if(this.params.hasOwnProperty("state")) {
-		var stateTiddler = this.store.getTiddler(this.params.state) ||
-							new Tiddler({title: this.params.state, text: ""});
-		this.store.addTiddler(new Tiddler(stateTiddler,{text: this.isOpen ? "open" : "closed"}));
+function saveOpenState(macroNode) {
+	if(macroNode.params.hasOwnProperty("state")) {
+		var stateTiddler = macroNode.store.getTiddler(macroNode.params.state) ||
+							new Tiddler({title: macroNode.params.state, text: ""});
+		macroNode.store.addTiddler(new Tiddler(stateTiddler,{text: macroNode.isOpen ? "open" : "closed"}));
 		return true;
 	}
 	return false;
 }
 
-function getSliderContent() {
-	if(this.params.hasOwnProperty("content")) {
-		return this.store.parseText("text/x-tiddlywiki",this.params.content).nodes;
-	} else if(this.params.hasOwnProperty("target")) {
+function getSliderContent(macroNode) {
+	if(macroNode.params.hasOwnProperty("content")) {
+		return macroNode.store.parseText("text/x-tiddlywiki",macroNode.params.content).nodes;
+	} else if(macroNode.params.hasOwnProperty("target")) {
 		return [Renderer.MacroNode(
 								"tiddler",
-								{target: this.params.target},
+								{target: macroNode.params.target},
 								null,
-								this.store)];
+								macroNode.store)];
 	} else {
 		return [Renderer.ErrorNode("No content specified for slider")];
 	}
-};
+}
 
 exports.macro = {
 	name: "slider",
-	types: ["text/html","text/plain"],
 	params: {
 		state: {byPos: 0, type: "tiddler"},
 		"default": {byName: true, type: "text"},

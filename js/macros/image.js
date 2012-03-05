@@ -11,7 +11,6 @@ var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "image",
-	types: ["text/html","text/plain"],
 	params: {
 		src: {byName: "default", type: "tiddler"},
 		text: {byName: true, type: "text"},

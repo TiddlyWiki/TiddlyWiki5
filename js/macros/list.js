@@ -34,7 +34,6 @@ var handlers = {
 
 exports.macro = {
 	name: "list",
-	types: ["text/html","text/plain"],
 	dependentAll: true, // Tiddlers containing <<list>> macro are dependent on every tiddler
 	params: {
 		type: {byName: "default", type: "text"},

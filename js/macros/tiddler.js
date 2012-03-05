@@ -46,7 +46,6 @@ var Renderer = require("../Renderer.js").Renderer;
 
 exports.macro = {
 	name: "tiddler",
-	types: ["text/html","text/plain"],
 	cascadeParams: true, // Cascade names of named parameters to following anonymous parameters
 	params: {
 		target: {byName: "default", type: "tiddler"},
