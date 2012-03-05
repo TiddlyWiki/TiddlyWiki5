@@ -1,3 +1,5 @@
 title: PageTemplate
 
+{{container{
 <<story story:StoryTiddlers template:SimpleTemplate>>
+}}}
