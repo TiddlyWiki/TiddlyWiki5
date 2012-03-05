@@ -472,39 +472,6 @@ var SplitLabelNode = function(type,left,right,classes) {
 	]);
 };
 
-/*
-Static method to construct a slider
-*/
-var SliderNode = function(type,label,tooltip,isOpen,children) {
-	var attributes = {
-		"class": "tw-slider",
-		"data-tw-slider-type": type
-	};
-	if(tooltip) {
-		attributes.alt = tooltip;
-		attributes.title = tooltip;
-	}
-	return new ElementNode("span",
-		attributes,
-		[
-			new ElementNode("a",
-				{
-					"class": ["tw-slider-label"]
-				},[
-					new TextNode(label)
-				]
-			),
-			new ElementNode("div",
-				{
-					"class": ["tw-slider-body"],
-					"style": {"display": isOpen ? "block" : "none"}
-				},
-				children
-			)
-		]
-	);
-};
-
 Renderer.MacroNode = MacroNode;
 Renderer.ElementNode = ElementNode;
 Renderer.TextNode = TextNode;
@@ -512,7 +479,6 @@ Renderer.EntityNode = EntityNode;
 Renderer.ErrorNode = ErrorNode;
 Renderer.LabelNode = LabelNode;
 Renderer.SplitLabelNode = SplitLabelNode;
-Renderer.SliderNode = SliderNode;
 
 exports.Renderer = Renderer;
 
