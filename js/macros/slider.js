@@ -112,13 +112,13 @@ exports.macro = {
 			var attributes = {
 				"class": ["tw-slider"]
 			};
-			if(this.params.hasOwnProperty("class")) {
+			if(this.hasParameter("class")) {
 				attributes["class"].push(this.params["class"]);
 			}
-			if(this.params.hasOwnProperty("state")) {
+			if(this.hasParameter("state")) {
 				attributes["data-tw-slider-type"] = this.params.state;
 			}
-			if(this.params.hasOwnProperty("tooltip")) {
+			if(this.hasParameter("tooltip")) {
 				attributes.alt = this.params.tooltip;
 				attributes.title = this.params.tooltip;
 			}
@@ -147,22 +147,21 @@ exports.macro = {
 	refreshInDom: function(changes) {
 		var needContentRefresh = true; // Avoid refreshing the content nodes if we don't need to
 		// If the state tiddler has changed then reset the open state
-		if(this.params.hasOwnProperty("state") && changes.hasOwnProperty(this.params.state)) {
+		if(this.hasParameter("state") && changes.hasOwnProperty(this.params.state)) {
 			this.isOpen = getOpenState(this);
 		}
 		// Render the content if the slider is open and we don't have any content yet
 		if(this.isOpen && this.content[0].children[1].children.length === 0) {
+			// Remove the existing dom node for the body
+			this.content[0].domNode.removeChild(this.content[0].children[1].domNode);
 			// Get the slider content and execute it
 			this.content[0].children[1].children = getSliderContent(this);
 			this.content[0].children[1].execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
-			// Replace the existing slider body DOM node
-			this.domNode.firstChild.removeChild(this.domNode.firstChild.firstChild.nextSibling);
-			this.content[0].children[1].renderInDom(this.domNode.firstChild,this.domNode.firstChild.firstChild.nextSibling);
+			this.content[0].children[1].renderInDom(this.content[0].domNode,null);
 			needContentRefresh = false; // Don't refresh the children if we've just created them
 		}
 		// Set the visibility of the slider content
-		var el = this.domNode.firstChild.firstChild.nextSibling;
-		el.style.display = this.isOpen ? "block" : "none";
+		this.content[0].children[1].domNode.style.display = this.isOpen ? "block" : "none";
 		// Refresh any children
 		if(needContentRefresh) {
 			for(var t=0; t<this.content.length; t++) {

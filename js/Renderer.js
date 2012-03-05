@@ -153,6 +153,10 @@ MacroNode.prototype.parseMacroParamString = function(paramString) {
 	return params;
 };
 
+MacroNode.prototype.hasParameter = function(name) {
+	return this.params.hasOwnProperty(name);
+};
+
 MacroNode.prototype.clone = function() {
 	return new MacroNode(this.macroName,this.srcParams,this.cloneChildren(),this.store,this.dependencies);
 };
@@ -348,6 +352,7 @@ ElementNode.prototype.renderInDom = function(domNode) {
 		}
 	}
 	domNode.appendChild(element);
+	this.domNode = element;
 	if(this.children) {
 		for(var t=0; t<this.children.length; t++) {
 			this.children[t].renderInDom(element);
@@ -387,7 +392,8 @@ TextNode.prototype.render = function(type) {
 };
 
 TextNode.prototype.renderInDom = function(domNode) {
-	domNode.appendChild(document.createTextNode(this.text));	
+	this.domNode = document.createTextNode(this.text);
+	domNode.appendChild(this.domNode);
 };
 
 var EntityNode = function(entity) {
@@ -406,7 +412,8 @@ EntityNode.prototype.render = function(type) {
 };
 
 EntityNode.prototype.renderInDom = function(domNode) {
-	domNode.appendChild(document.createTextNode(utils.entityDecode(this.entity)));
+	this.domNode = document.createTextNode(utils.entityDecode(this.entity));
+	domNode.appendChild(this.domNode);
 };
 
 var RawNode = function(html) {
@@ -425,9 +432,9 @@ RawNode.prototype.render = function(type) {
 };
 
 RawNode.prototype.renderInDom = function(domNode) {
-	var div = document.createElement("div");
-	div.innerHTML = this.html;
-	domNode.appendChild(div);	
+	this.domNode = document.createElement("div");
+	this.domNode.innerHTML = this.html;
+	domNode.appendChild(this.domNode);	
 };
 
 /*
