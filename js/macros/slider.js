@@ -6,7 +6,7 @@ The slider macro is used to selectively reveal a chunk of text. By default, it r
 
 The enclosed text can be a string of WikiText or be taken from a target tiddler.
 
-The current state of the slider can be stored as the string "open" or "closed" in a specified tiddler. If the value of that tiddler changes then the slider is automatically updated.
+The current state of the slider can be stored as the string "open" or "closed" in a specified tiddler. If the value of that tiddler changes then the slider is automatically updated. If no state tiddler is specified then the state of the slider isn't retained, but the slider still works as expected.
 !!Parameters
 |`state` //(defaults to 1st parameter)// |The title of the tiddler to contain the current state of the slider |
 |`default` |The initial state of the slider, either `open` or `closed` |
