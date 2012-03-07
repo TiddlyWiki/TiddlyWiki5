@@ -228,4 +228,14 @@ utils.nextTick = function(fn) {
 	}
 };
 
+/*
+Determines whether element 'a' contains element 'b'
+Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
+*/
+utils.domContains = function(a,b) {
+	return a.contains ?
+		a != b && a.contains(b) :
+		!!(a.compareDocumentPosition(b) & 16);
+};
+
 })();
