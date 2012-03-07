@@ -210,17 +210,18 @@ MacroNode.prototype.renderInDom = function(domNode,insertBefore) {
 	// Add some debugging information to it
 	macroContainer.setAttribute("data-tw-macro",this.macroName);
 	// Add event handlers to the node
-	var self = this,
-		dispatchMacroEvent = function(event) {
-			self.macro.events[event.type].call(self,event);
-		};
 	for(var e in this.macro.events) {
-		macroContainer.addEventListener(e,dispatchMacroEvent,false);
+		// Register this macro node to handle the event via the handleEvent() method
+		macroContainer.addEventListener(e,this,false);
 	}
 	// Render the content of the macro
 	for(var t=0; t<this.content.length; t++) {
 		this.content[t].renderInDom(macroContainer);
 	}
+};
+
+MacroNode.prototype.handleEvent = function(event) {
+	return this.macro.events[event.type].call(this,event);
 };
 
 MacroNode.prototype.refresh = function(changes) {
