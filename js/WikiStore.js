@@ -292,7 +292,9 @@ WikiStore.prototype.renderTiddler = function(targetType,tiddlerTitle,templateTit
 						{target: tiddlerTitle, template: templateTitle},
 						null,
 						this);
-	macro.execute();
+	// Execute the macro
+	macro.execute([],this.getTiddler(tiddlerTitle));
+	// Render it
 	return macro.render(targetType);
 };
 
@@ -300,9 +302,9 @@ WikiStore.prototype.installMacro = function(macro) {
 	this.macros[macro.name] = macro;
 };
 
-WikiStore.prototype.renderMacro = function(macroName,params,children,tiddler) {
+WikiStore.prototype.renderMacro = function(macroName,params,children,tiddlerTitle) {
 	var macro = Renderer.MacroNode(macroName,params,children,this);
-	macro.execute([],tiddler);
+	macro.execute([],this.getTiddler(tiddlerTitle));
 	return macro;
 };
 
