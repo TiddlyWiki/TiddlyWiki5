@@ -167,10 +167,7 @@ var commandLineSwitches = {
 			// Dumbly, this implementation wastes the recipe processing that happened on the --recipe switch
 			http.createServer(function(request, response) {
 				response.writeHead(200, {"Content-Type": "text/html"});
-				var store = new WikiStore();
-				var recipe = new Recipe({store: store,filepath: lastRecipeFilepath},function() {
-					response.end(recipe.cook(), "utf8");	
-				});
+				response.end(recipe.cook(), "utf8");	
 			}).listen(port);
 		}
 	},
