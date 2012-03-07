@@ -108,5 +108,17 @@ a.tw-tiddlylink-missing {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+.navigation-panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background: #ddd;
+}
 
-
+.navigation-panel div {
+	width: 100%;
+	height: 100%;
+	padding-left: 8px;
+	padding-right: 8px;
+}

@@ -1,5 +1,8 @@
 title: PageTemplate
 
+{{navigation-panel{
+<<chooser>>
+}}}
 {{container{
 <<story story:StoryTiddlers template:SimpleTemplate>>
 }}}

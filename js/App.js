@@ -85,6 +85,7 @@ var App = function() {
 		}
 	}
 	// Bit of a hack to set up the macros
+	this.store.installMacro(require("./macros/chooser.js").macro);
 	this.store.installMacro(require("./macros/echo.js").macro);
 	this.store.installMacro(require("./macros/image.js").macro);
 	this.store.installMacro(require("./macros/link.js").macro);
