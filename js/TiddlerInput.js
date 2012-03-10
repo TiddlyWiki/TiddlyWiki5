@@ -161,8 +161,10 @@ var inputTiddlyWiki = function(text,fields) {
 		while(match && startPos < storeAreaPos[1]) {
 			var endPos = endOfDivRegExp.lastIndex,
 				tiddlerFields = parseTiddlerDiv(text.substring(startPos,endPos),fields);
-			tiddlerFields.text = utils.htmlDecode(tiddlerFields.text);
-			results.push(tiddlerFields);
+			if(tiddlerFields.text !== null) {
+				tiddlerFields.text = utils.htmlDecode(tiddlerFields.text);
+				results.push(tiddlerFields);
+			}
 			startPos = endPos;
 			match = endOfDivRegExp.exec(text);
 		}
