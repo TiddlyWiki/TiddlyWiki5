@@ -4,6 +4,10 @@ TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|T
 
 TiddlyWiki5 also functions as the build system for earlier versions of TiddlyWiki, replacing the elderly Cook and Ginsu tools (see https://github.com/TiddlyWiki/cooker for details). See the CommandLineInterface for details.
 
+Learning more about TiddlyWiki5:
+* WaysToUseTiddlyWiki discusses the various configurations in which TiddlyWiki5 can be used
+* Some very rough UserInterfaceSketches showing where it is heading
+
 Some useful tiddlers for feature testing:
 * ClockTiddler showing automatic refreshing of tiddlers
 * ImageTests showing different ways of embedding images
