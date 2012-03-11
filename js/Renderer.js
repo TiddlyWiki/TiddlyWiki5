@@ -198,14 +198,14 @@ MacroNode.prototype.render = function(type) {
 	return output.join("");
 };
 
-MacroNode.prototype.renderInDom = function(domNode,insertBefore) {
+MacroNode.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	// Create the wrapper node for the macro
 	var macroContainer = document.createElement(this.macro.wrapperTag || "span");
 	this.domNode = macroContainer;
 	if(insertBefore) {
-		domNode.insertBefore(macroContainer,insertBefore);	
+		parentDomNode.insertBefore(macroContainer,insertBefore);	
 	} else {
-		domNode.appendChild(macroContainer);
+		parentDomNode.appendChild(macroContainer);
 	}
 	// Add some debugging information to it
 	macroContainer.setAttribute("data-tw-macro",this.macroName);
@@ -334,7 +334,7 @@ ElementNode.prototype.render = function(type) {
 	return output.join("");
 };
 
-ElementNode.prototype.renderInDom = function(domNode) {
+ElementNode.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	var element = document.createElement(this.type);
 	if(this.attributes) {
 		for(var a in this.attributes) {
@@ -352,7 +352,11 @@ ElementNode.prototype.renderInDom = function(domNode) {
 			}
 		}
 	}
-	domNode.appendChild(element);
+	if(insertBefore) {
+		parentDomNode.insertBefore(element,insertBefore);
+	} else {
+		parentDomNode.appendChild(element);
+	}
 	this.domNode = element;
 	if(this.children) {
 		for(var t=0; t<this.children.length; t++) {
