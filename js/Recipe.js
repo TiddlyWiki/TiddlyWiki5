@@ -171,20 +171,22 @@ Recipe.prototype.chooseTiddlers = function(recipe) {
 				this.markers[recipeLine.marker] = [];
 				markerArray = this.markers[recipeLine.marker];
 			}
-			// Process each of the tiddlers referenced by the recipe line
-			for(var t=0; t<recipeLine.tiddlers.length; t++) {
-				// Only add the tiddler to the marker if it isn't already there
-				var found = false;
-				for(var m=0; m<markerArray.length; m++) {
-					if(markerArray[m] === recipeLine.tiddlers[t].title) {
-						found = true;
+			if(recipeLine.tiddlers) {
+				// Process each of the tiddlers referenced by the recipe line
+				for(var t=0; t<recipeLine.tiddlers.length; t++) {
+					// Only add the tiddler to the marker if it isn't already there
+					var found = false;
+					for(var m=0; m<markerArray.length; m++) {
+						if(markerArray[m] === recipeLine.tiddlers[t].title) {
+							found = true;
+						}
 					}
+					if(!found) {
+						markerArray.push(recipeLine.tiddlers[t].title);
+					}
+					// Add the tiddler to the store
+					store.addTiddler(new Tiddler(recipeLine.tiddlers[t]));
 				}
-				if(!found) {
-					markerArray.push(recipeLine.tiddlers[t].title);
-				}
-				// Add the tiddler to the store
-				store.addTiddler(new Tiddler(recipeLine.tiddlers[t]));
 			}
 		}		
 	}
