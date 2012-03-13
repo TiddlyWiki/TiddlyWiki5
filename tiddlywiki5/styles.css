@@ -112,13 +112,28 @@ a.tw-tiddlylink-missing {
 	position: absolute;
 	top: 0;
 	left: 0;
+	min-width: 16px;
 	height: 100%;
-	background: #ddd;
 }
 
 .navigation-panel div {
 	width: 100%;
 	height: 100%;
-	padding-left: 8px;
-	padding-right: 8px;
 }
+
+.navigation-panel div ul {
+	margin: 0 0 0 0;
+	padding: 0px 4px 0px 4px;
+	list-style: none;
+	background: #ddd;
+}
+
+.navigation-panel div ul li {
+	padding: 2px 4px 2px 4px;
+}
+
+.navigation-panel .selected {
+	color: #fff;
+	background: #a55;
+}
+
