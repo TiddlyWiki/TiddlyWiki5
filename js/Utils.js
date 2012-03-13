@@ -238,4 +238,25 @@ utils.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+utils.hasClass = function(el,className) {
+	return el.className.split(" ").indexOf(className) !== -1;
+}
+
+utils.addClass = function(el,className) {
+	var c = el.className.split(" ");
+	if(c.indexOf(className) === -1) {
+		c.push(className);
+	}
+	el.className = c.join(" ");
+}
+
+utils.removeClass = function(el,className) {
+	var c = el.className.split(" "),
+		p = c.indexOf(className);
+	if(p !== -1) {
+		c.splice(p,1);
+		el.className = c.join(" ");
+	}
+}
+
 })();
