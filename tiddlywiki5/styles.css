@@ -58,34 +58,36 @@ a.tw-tiddlylink-missing {
 }
 
 .javascript-source .javascript-boolean {
+	color: #066;
 }
 
 .javascript-source .javascript-identifier {
-	color: #b00;
+	color: #606;
 }
 
 .javascript-source .javascript-keyword {
-	color: #393;
+	color: #008;
 	font-weight: bold;
 }
 
 .javascript-source .javascript-null {
-	color: #833;
+	color: #080;
 }
 
 .javascript-source .javascript-numeric {
-	color: #33a;
+	color: #066;
 }
 
 .javascript-source .javascript-punctuator {
-	color: #444;
+	color: #660;
 }
 
 .javascript-source .javascript-string {
-	color: #388;
+	color: #080;
 }
 
 .javascript-source .javascript-comment {
+	color: #800;
 	padding: 4px 4px 4px 4px;
 	border: 1px solid #feed77;
 	background: #feed77;
