@@ -240,7 +240,7 @@ utils.domContains = function(a,b) {
 
 utils.hasClass = function(el,className) {
 	return el.className.split(" ").indexOf(className) !== -1;
-}
+};
 
 utils.addClass = function(el,className) {
 	var c = el.className.split(" ");
@@ -248,7 +248,7 @@ utils.addClass = function(el,className) {
 		c.push(className);
 	}
 	el.className = c.join(" ");
-}
+};
 
 utils.removeClass = function(el,className) {
 	var c = el.className.split(" "),
@@ -257,6 +257,6 @@ utils.removeClass = function(el,className) {
 		c.splice(p,1);
 		el.className = c.join(" ");
 	}
-}
+};
 
 })();

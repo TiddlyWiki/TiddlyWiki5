@@ -36,7 +36,7 @@ Node.prototype.clone = function() {
 
 Node.prototype.broadcastEvent = function(event) {
 	return true;
-}
+};
 
 Node.prototype.execute = 
 Node.prototype.render =

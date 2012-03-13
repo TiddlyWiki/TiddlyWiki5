@@ -4,7 +4,7 @@ title: js/macros/chooser.js
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
 "use strict";
 
 var Renderer = require("../Renderer.js").Renderer,
