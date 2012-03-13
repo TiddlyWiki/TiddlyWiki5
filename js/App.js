@@ -120,6 +120,10 @@ var App = function() {
 				text: "The time was recently " + (new Date()).toString()
 			}));
 		},3000);
+		// Listen for navigate events that weren't caught
+		document.addEventListener("tw-navigate",function (event) {
+			renderer.broadcastEvent(event);
+		},false);
 	}
 };
 

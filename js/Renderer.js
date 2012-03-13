@@ -34,6 +34,10 @@ Node.prototype.clone = function() {
 	return this;
 };
 
+Node.prototype.broadcastEvent = function(event) {
+	return true;
+}
+
 Node.prototype.execute = 
 Node.prototype.render =
 Node.prototype.renderInDom =
@@ -220,10 +224,6 @@ MacroNode.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	}
 };
 
-MacroNode.prototype.handleEvent = function(event) {
-	return this.macro.events[event.type].call(this,event);
-};
-
 MacroNode.prototype.refresh = function(changes) {
 	var t,
 		self = this;
@@ -265,6 +265,26 @@ MacroNode.prototype.refreshInDom = function(changes) {
 			this.content[t].refreshInDom(changes);
 		}
 	}
+};
+
+MacroNode.prototype.handleEvent = function(event) {
+	return this.macro.events[event.type].call(this,event);
+};
+
+MacroNode.prototype.broadcastEvent = function(event) {
+	if(this.macro.events && this.macro.events.hasOwnProperty(event.type)) {
+		if(!this.handleEvent(event)) {
+			return false;
+		}
+	}
+	if(this.content) {
+		for(var t=0; t<this.content.length; t++) {
+			if(!this.content[t].broadcastEvent(event)) {
+				return false;
+			}
+		}
+	}
+	return true;
 };
 
 var ElementNode = function(type,attributes,children) {
@@ -379,6 +399,17 @@ ElementNode.prototype.refreshInDom = function(changes) {
 			this.children[t].refreshInDom(changes);
 		}
 	}
+};
+
+ElementNode.prototype.broadcastEvent = function(event) {
+	if(this.children) {
+		for(var t=0; t<this.children.length; t++) {
+			if(!this.children[t].broadcastEvent(event)) {
+				return false;
+			}
+		}
+	}
+	return true;
 };
 
 var TextNode = function(text) {
