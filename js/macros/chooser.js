@@ -80,7 +80,7 @@ function hoverChooser(macroNode,x,y) {
 		var expandFactor = x > 50 ? (x/50) : 1;
 		// Set up the transform
 		var scale = scaleFactor * expandFactor,
-			translateX = 0, //x > 50 ? 0 : -(((50-x)/50) * widthPanel) / scale,
+			translateX = x > 16 ? 0 : -(((16-x)/16) * widthPanel) / scale,
 			translateY = (y / scale) - ((y/window.innerHeight) * heightPanel);
 		domPanel.style.webkitTransformOrigin = "0 0";
 		domPanel.style.webkitTransform = "scale(" + scale + ") translateX(" + translateX + "px) translateY(" + translateY + "px)";
