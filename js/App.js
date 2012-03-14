@@ -72,17 +72,14 @@ var App = function() {
 	// If in the browser, load the tiddlers built into the TiddlyWiki document
 	if(this.isBrowser) {
 		// First, the JavaScript system tiddlers
-		var moduleArea = document.getElementById("jsModules"),
-			tiddlers = this.store.deserializeTiddlers("(DOM)",moduleArea);
-		for(t=0; t<tiddlers.length; t++) {
-			this.store.addTiddler(new Tiddler(tiddlers[t]));
-		}
+		var moduleArea = document.getElementById("jsModules");
+		this.store.shadows.addTiddlers(this.store.deserializeTiddlers("(DOM)",moduleArea));
 		// Then, the ordinary tiddlers baked into the storeArea
 		var storeArea = document.getElementById("storeArea");
-		tiddlers = this.store.deserializeTiddlers("(DOM)",storeArea);
-		for(t=0; t<tiddlers.length; t++) {
-			this.store.addTiddler(new Tiddler(tiddlers[t]));
-		}
+		this.store.addTiddlers(this.store.deserializeTiddlers("(DOM)",storeArea));
+		// Finally, the shadow tiddlers
+		var shadowArea = document.getElementById("shadowArea");
+		this.store.shadows.addTiddlers(this.store.deserializeTiddlers("(DOM)",shadowArea));
 	}
 	// Bit of a hack to set up the macros
 	this.store.installMacro(require("./macros/chooser.js").macro);
