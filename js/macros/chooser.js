@@ -82,8 +82,10 @@ function hoverChooser(macroNode,x,y) {
 		var scale = scaleFactor * expandFactor,
 			translateX = x > 16 ? 0 : -(((16-x)/16) * widthPanel) / scale,
 			translateY = (y / scale) - ((y/window.innerHeight) * heightPanel);
-		domPanel.style.webkitTransformOrigin = "0 0";
-		domPanel.style.webkitTransform = "scale(" + scale + ") translateX(" + translateX + "px) translateY(" + translateY + "px)";
+		domPanel.style.webkitTransformOrigin = 
+		domPanel.style.MozTransformOrigin = "0 0";
+		domPanel.style.webkitTransform = 
+		domPanel.style.MozTransform = "scale(" + scale + ") translateX(" + translateX + "px) translateY(" + translateY + "px)";
 	}
 }
 
