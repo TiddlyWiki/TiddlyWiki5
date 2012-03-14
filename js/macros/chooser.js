@@ -30,9 +30,12 @@ function showChooser(macroNode) {
 	}
 }
 
+/*
+Select the appropriate chooser item given a touch/mouse position in screen coordinates
+*/
 function select(macroNode,y) {
 	if(macroNode.content.length > 0) {
-		var targetIndex = Math.floor(macroNode.content[0].domNode.childNodes.length * (y/macroNode.domNode.offsetHeight)),
+		var targetIndex = Math.floor(macroNode.content[0].domNode.childNodes.length * (y/window.innerHeight)),
 			target = macroNode.content[0].domNode.childNodes[targetIndex];
 		if(target) {
 			deselect(macroNode);
@@ -58,28 +61,27 @@ function action(macroNode) {
 	}
 }
 
+/*
+Set the position of the chooser panel within its wrapper given a touch/mouse position in screen coordinates
+*/
 function hoverChooser(macroNode,x,y) {
 	if(macroNode.chooserDisplayed) {
 		// Get the target element that the touch/mouse is over
 		select(macroNode,y);
 		// Things we need for sizing and positioning the chooser
-		var domWrapper = macroNode.domNode,
-			heightWrapper = domWrapper.offsetHeight,
-			rectWrapper = domWrapper.getBoundingClientRect(),
-			domPanel = macroNode.content[0].domNode,
+		var domPanel = macroNode.content[0].domNode,
 			heightPanel = domPanel.offsetHeight,
 			widthPanel = domPanel.offsetWidth;
-		// Make the coordinates relative to the wrapper
-		x = x - rectWrapper.left;
-		y = y - rectWrapper.top;
+		// Position the chooser div to account for scrolling
+		macroNode.content[0].domNode.style.top = window.pageYOffset + "px";
 		// Scale the panel to fit
-		var scaleFactor = heightWrapper/heightPanel;
+		var scaleFactor = window.innerHeight/heightPanel;
 		// Scale up as we move right
 		var expandFactor = x > 50 ? (x/50) : 1;
 		// Set up the transform
 		var scale = scaleFactor * expandFactor,
 			translateX = 0, //x > 50 ? 0 : -(((50-x)/50) * widthPanel) / scale,
-			translateY = (y / scale) - ((y/heightWrapper) * heightPanel);
+			translateY = (y / scale) - ((y/window.innerHeight) * heightPanel);
 		domPanel.style.webkitTransformOrigin = "0 0";
 		domPanel.style.webkitTransform = "scale(" + scale + ") translateX(" + translateX + "px) translateY(" + translateY + "px)";
 	}

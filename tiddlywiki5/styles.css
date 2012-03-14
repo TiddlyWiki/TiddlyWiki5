@@ -1,3 +1,7 @@
+body {
+	position: relative;
+}
+
 .title {
 	font-weight: bold;
 	font-size: 40px;
@@ -110,20 +114,17 @@ a.tw-tiddlylink-missing {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
-.navigation-panel {
+.navigation-panel div {
 	position: absolute;
-	top: 0;
 	left: 0;
+	top: 0;
 	min-width: 16px;
 	height: 100%;
 }
 
-.navigation-panel div {
-	width: 100%;
-	height: 100%;
-}
-
 .navigation-panel div ul {
+	position: absolute;
+	left: 0;
 	margin: 0 0 0 0;
 	padding: 0px 4px 0px 4px;
 	list-style: none;
