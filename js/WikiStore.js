@@ -149,10 +149,20 @@ WikiStore.prototype.tiddlerExists = function(title) {
 };
 
 WikiStore.prototype.addTiddler = function(tiddler) {
+	// Check if we're passed a fields hashmap instead of a tiddler
+	if(!(tiddler instanceof Tiddler)) {
+		tiddler = new Tiddler(tiddler);
+	}
 	var status = tiddler.title in this.tiddlers ? "modified" : "created";
 	this.clearCache(tiddler.title);
 	this.tiddlers[tiddler.title] = tiddler;
 	this.touchTiddler(status,tiddler.title);
+};
+
+WikiStore.prototype.addTiddlers = function(tiddlers) {
+	for(var t=0; t<tiddlers.length; t++) {
+		this.addTiddler(tiddlers[t]);
+	}
 };
 
 WikiStore.prototype.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
