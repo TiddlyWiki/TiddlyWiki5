@@ -129,6 +129,7 @@ a.tw-tiddlylink-missing {
 	padding: 0px 4px 0px 4px;
 	list-style: none;
 	background: #ddd;
+	border-right: 1px solid #aaa;
 }
 
 .navigation-panel div ul li {
