@@ -1,14 +1,12 @@
 template: tiddlywiki5.template.html
 copyright: ../copyright.txt
-style: bootstrap.css
-style: styles.css
+style: shadows/css/*.css
 
 tiddler: tiddlers/*.tid
 tiddler: tiddlers/*.jpg
+tiddler: tiddlers/*.png
 tiddler: tiddlers/*.svg
-tiddler: ../docs/*.svg
-tiddler: ../docs/*.png
-tiddler: ../docs/*.jpg
+tiddler: shadows/templates/*.tid
 #tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
 #	type: image/jpeg
 
@@ -21,6 +19,6 @@ jsmodule: ../js/macros/*.js
 jsmodule: ../node_modules/esprima/esprima.js
 	title: esprima
 
-jsbootstart: BootStart.js
-jsbootend: BootLoader.js
+jsbootstart: boot/BootStart.js
+jsbootend: boot/BootLoader.js
 
