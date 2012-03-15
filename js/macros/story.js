@@ -38,7 +38,7 @@ exports.macro = {
 			$("html,body").animate({
 				scrollTop: 0
 			}, 400);
-			event.preventDefault();
+			event.stopPropagation();
 			return false;
 		}
 	},
