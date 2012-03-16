@@ -43,7 +43,7 @@ var outputTiddler = function(tid) {
 				break;
 			case "tags":
 				// Output tags as a list
-				outputAttribute(t,tiddlerOutput.stringifyTags(fields.tags));
+				outputAttribute(t,stringifyTags(fields.tags));
 				break;
 			case "modified":
 			case "created":
