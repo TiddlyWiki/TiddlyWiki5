@@ -27,7 +27,7 @@ folder/
 		MyTiddler2.jpg
 		MyTiddler3.svg
 }}}
-You can just open the `index.html` in the browser. The content is lazily loaded as required. In some browsers you will be able to make changes to the data through the browser too
+You can just open the `index.html` in the browser. The content tiddlers are lazily loaded as required, with the HTML file acting as a literal index, listing the titles and other metadata about each tiddler. In some browsers you will be able to make changes to the data through the browser too.
 
 The key advantage of this configuration is that it plays well with existing desktop PC file tools, including source code control systems like Git and Subversion.
 
