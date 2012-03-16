@@ -77,7 +77,7 @@ function hoverChooser(macroNode,x,y) {
 		// Scale the panel to fit
 		var scaleFactor = window.innerHeight/heightPanel;
 		// Scale up as we move right
-		var expandFactor = x > 50 ? (x/50) : 1;
+		var expandFactor = x > 50 ? ((x+150)/200) : 1;
 		// Set up the transform
 		var scale = scaleFactor * expandFactor,
 			translateX = x > 16 ? 0 : -(((16-x)/16) * widthPanel) / scale,
