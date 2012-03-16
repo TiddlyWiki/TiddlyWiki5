@@ -6,6 +6,7 @@ tiddler: tiddlers/*.tid
 tiddler: tiddlers/*.jpg
 tiddler: tiddlers/*.png
 tiddler: tiddlers/*.svg
+shadow: shadows/*.tid
 shadow: shadows/templates/*.tid
 #tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
 #	type: image/jpeg
