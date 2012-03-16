@@ -93,6 +93,7 @@ var App = function() {
 	this.store.installMacro(require("./macros/version.js").macro);
 	this.store.installMacro(require("./macros/video.js").macro);
 	this.store.installMacro(require("./macros/view.js").macro);
+	this.store.installMacro(require("./macros/zoomer.js").macro);
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
 		// Open the PageTemplate

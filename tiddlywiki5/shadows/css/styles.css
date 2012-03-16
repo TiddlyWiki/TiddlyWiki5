@@ -119,7 +119,7 @@ a.tw-tiddlylink-missing {
 	left: 0;
 	top: 0;
 	min-width: 16px;
-	height: 100%;
+	height: 100%; /* Makes the element the same height as the body, since the body is position: relative */
 }
 
 .navigation-panel div ul {
@@ -141,3 +141,26 @@ a.tw-tiddlylink-missing {
 	background: #a55;
 }
 
+body {
+	-webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+
+body.in-zoomer {
+	-webkit-transition: none;
+}
+
+.zoomer-panel div {
+	position: absolute;
+	right: 0;
+	top: 0;
+	min-width: 16px;
+	height: 100%; /* Makes the element the same height as the body, since the body is position: relative */
+}
+
+body.in-zoomer .zoomer-panel div {
+	background: rgba(236,128,75,0.5);
+}
+
+body.in-zoomer iframe {
+	visibility: hidden;
+}
