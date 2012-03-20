@@ -58,14 +58,19 @@ function hoverZoomer(macroNode,x,y) {
 	if(macroNode.xFactor > 1) {
 		macroNode.xFactor = 1;
 	}
-	// And the 0->1 ration (from top to bottom) of the position of the touch down the screen
+	// And the 0->1 ratio (from top to bottom) of the position of the touch down the screen
 	macroNode.yFactor = y/macroNode.windowHeight;
 	// Now interpolate the scale
 	macroNode.scale = (macroNode.minScale - 1) * macroNode.xFactor + 1;
-	// Apply the transform
-	document.body.style.webkitTransform = "translateY(" + window.scrollY * macroNode.xFactor + "px) " + 
-										  "scale(" + macroNode.scale + ") " +
-										  "translateY(" + ((macroNode.windowHeight / macroNode.scale) - macroNode.bodyHeight) * macroNode.yFactor * macroNode.xFactor + "px)";
+	// Apply the transform. The malarkey with .toFixed() is because otherwise we might get numbers in
+	// exponential notation (such as 5.1e-15) that are illegal in CSS
+	var preTranslateY = window.scrollY * macroNode.xFactor,
+		scale = macroNode.scale,
+		postTranslateY = ((macroNode.windowHeight / macroNode.scale) - macroNode.bodyHeight) * macroNode.yFactor * macroNode.xFactor;
+	var transform = "translateY(" + preTranslateY.toFixed(8) + "px) " + 
+										  "scale(" + scale.toFixed(8) + ") " +
+										  "translateY(" + postTranslateY.toFixed(8) + "px)";
+	document.body.style.webkitTransform = transform;
 }
 
 exports.macro = {
