@@ -8,6 +8,10 @@ body {
 	line-height: 48px;
 }
 
+img {
+	max-width: 100%;
+}
+
 a.tw-tiddlylink-external::before {
 	content: "\27a0\00a0";
 }
@@ -158,7 +162,7 @@ body.in-zoomer {
 }
 
 body.in-zoomer .zoomer-panel div {
-	background: rgba(236,128,75,0.5);
+	background: rgba(235,235,235,0.5);
 }
 
 body.in-zoomer iframe {
