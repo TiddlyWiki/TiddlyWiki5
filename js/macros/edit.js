@@ -35,11 +35,17 @@ exports.macro = {
 					break;
 			}
 		}
+		var type = "div";
+		switch(field) {
+			case "text":
+				type = "pre";
+				break;
+		}
 		var attributes = {
 			"contenteditable": true,
 			"class": ["tw-edit-field"]
 		};
-		return [Renderer.ElementNode("div",attributes,[Renderer.TextNode(value)])];
+		return [Renderer.ElementNode(type,attributes,[Renderer.TextNode(value)])];
 	}
 };
 

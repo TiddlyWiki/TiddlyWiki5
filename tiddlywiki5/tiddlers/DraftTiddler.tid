@@ -1,4 +1,0 @@
-title: DraftTiddler
-draft.title: New Tiddler
-
-This is a sample draft tiddler. It is a draft of the tiddler titled in the `draft.title` field, in this case <<view draft.title>>.

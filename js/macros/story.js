@@ -16,11 +16,12 @@ exports.macro = {
 	name: "story",
 	params: {
 		story: {byName: "default", type: "tiddler"},
-		defaultViewTemplate: {byName: true, type: "tiddler"}
+		defaultViewTemplate: {byName: true, type: "tiddler"},
+		defaultEditTemplate: {byName: true, type: "tiddler"}
 	},
 	events: {
 		"tw-navigate": function(event) {
-			var template = this.params.defaultViewTemplate ? this.params.defaultViewTemplate : "SimpleTemplate",
+			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultViewTemplate : "SimpleTemplate",
 				storyTiddler = this.store.getTiddler(this.params.story),
 				story = {tiddlers: []};
 			if(storyTiddler && storyTiddler.hasOwnProperty("text")) {
@@ -31,6 +32,26 @@ exports.macro = {
 			$("html,body").animate({
 				scrollTop: 0
 			}, 400);
+			event.stopPropagation();
+			return false;
+		},
+		"tw-EditTiddler": function(event) {
+			var template = this.hasParameter("defaultEditTemplate") ? this.params.defaultEditTemplate : "EditTemplate",
+				storyTiddler = this.store.getTiddler(this.params.story),
+				story = {tiddlers: []};
+			if(storyTiddler && storyTiddler.hasOwnProperty("text")) {
+				story = JSON.parse(storyTiddler.text);
+			}
+			for(var t=0; t<story.tiddlers.length; t++) {
+				var storyRecord = story.tiddlers[t];
+				if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
+					storyRecord.title = "Draft of " + event.tiddlerTitle + " at " + (new Date());
+					storyRecord.template = template;
+					var tiddler = this.store.getTiddler(event.tiddlerTitle);
+					this.store.addTiddler(new Tiddler(tiddler,{title: storyRecord.title, "draft.title": event.tiddlerTitle}));
+				}
+			}
+			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
 			event.stopPropagation();
 			return false;
 		}

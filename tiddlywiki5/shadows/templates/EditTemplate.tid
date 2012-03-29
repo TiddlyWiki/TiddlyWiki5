@@ -1,6 +1,7 @@
 title: EditTemplate
 modifier: JeremyRuston
 
+<<view title>>
 {{title{
 <<edit draft.title>>}}}
 {{body{
