@@ -53,20 +53,24 @@ exports.macro = {
 		"with": {byName: true, type: "text", dependentAll: true}
 	},
 	execute: function() {
-		var tiddler = this.store.getTiddler(this.tiddlerTitle),
-			renderTitle = this.params.target,
+		var renderTitle = this.params.target,
 			renderTemplate = this.params.template,
 			content,
 			contentClone = [],
 			t,
 			parents = this.parents.slice(0);
+		// If there's no render title specified then use the current tiddler title
 		if(typeof renderTitle !== "string") {
-			renderTitle = tiddler.title;
+			renderTitle = this.tiddlerTitle;
 		}
+		// If there's no template specified then use the target tiddler title
 		if(typeof renderTemplate !== "string") {
 			renderTemplate = renderTitle;
 		}
-		if(parents.indexOf(renderTemplate) === -1) {
+		// Check for recursion
+		if(parents.indexOf(renderTemplate) !== -1) {
+			content = [Renderer.ErrorNode("Tiddler recursion error in <<tiddler>> macro")];	
+		} else {
 			if("with" in this.params) {
 				// Parameterised transclusion
 				var targetTiddler = this.store.getTiddler(renderTemplate),
@@ -82,16 +86,18 @@ exports.macro = {
 				var parseTree = this.store.parseTiddler(renderTemplate);
 				content = parseTree ? parseTree.nodes : [];
 			}
-		} else {
-			content = [Renderer.ErrorNode("Tiddler recursion error in <<tiddler>> macro")];	
 		}
+		// Update the stack of tiddler titles for recursion detection
 		parents.push(renderTemplate);
+		// Clone the content
 		for(t=0; t<content.length; t++) {
 			contentClone.push(content[t].clone());
 		}
+		// Execute macros within the content
 		for(t=0; t<contentClone.length; t++) {
 			contentClone[t].execute(parents,this.store.getTiddler(renderTitle));
 		}
+		// Return the content
 		return contentClone;
 	}
 };
