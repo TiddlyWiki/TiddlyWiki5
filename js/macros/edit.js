@@ -38,7 +38,7 @@ exports.macro = {
 		var attributes = {
 			"contenteditable": true,
 			"class": ["tw-edit-field"]
-		}
+		};
 		return [Renderer.ElementNode("div",attributes,[Renderer.TextNode(value)])];
 	}
 };
