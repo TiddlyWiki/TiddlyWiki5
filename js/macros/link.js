@@ -54,7 +54,7 @@ exports.macro = {
 								"class": classes
 							},this.cloneChildren())];
 		for(var t=0; t<content.length; t++) {
-			content[t].execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
+			content[t].execute(this.parents,this.tiddlerTitle);
 		}
 		return content;
 	}

@@ -95,7 +95,7 @@ exports.macro = {
 		}
 		// Execute macros within the content
 		for(t=0; t<contentClone.length; t++) {
-			contentClone[t].execute(parents,this.store.getTiddler(renderTitle));
+			contentClone[t].execute(parents,renderTitle);
 		}
 		// Return the content
 		return contentClone;

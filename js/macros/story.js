@@ -43,7 +43,7 @@ exports.macro = {
 										{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 										null,
 										this.store);
-			m.execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
+			m.execute(this.parents,this.tiddlerTitle);
 			content.push(m);
 		}
 		return content;
@@ -76,7 +76,7 @@ exports.macro = {
 											{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 											null,
 											this.store);
-				m.execute(this.parents,this.store.getTiddler(story.tiddlers[t].title));
+				m.execute(this.parents,story.tiddlers[t].title);
 				m.renderInDom(this.domNode,this.domNode.childNodes[t]);
 				this.content.splice(t,0,m);
 			} else {

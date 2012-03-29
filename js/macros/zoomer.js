@@ -24,8 +24,8 @@ function stopZoomer(macroNode) {
 	macroNode.inZoomer = false;
 	window.scrollTo(0,newScrollY);
 	document.body.style.webkitTransform = "translateY(" + newScrollY * macroNode.xFactor + "px) " + 
-										  "scale(" + macroNode.scale + ") " +
-										  "translateY(" + ((macroNode.windowHeight / macroNode.scale) - macroNode.bodyHeight) * macroNode.yFactor * macroNode.xFactor + "px)";
+		"scale(" + macroNode.scale + ") " +
+		"translateY(" + ((macroNode.windowHeight / macroNode.scale) - macroNode.bodyHeight) * macroNode.yFactor * macroNode.xFactor + "px)";
 	utils.removeClass(document.body,"in-zoomer");
 	document.body.style.webkitTransform = "translateY(0) scale(1) translateY(0)";
 }
@@ -68,8 +68,8 @@ function hoverZoomer(macroNode,x,y) {
 		scale = macroNode.scale,
 		postTranslateY = ((macroNode.windowHeight / macroNode.scale) - macroNode.bodyHeight) * macroNode.yFactor * macroNode.xFactor;
 	var transform = "translateY(" + preTranslateY.toFixed(8) + "px) " + 
-										  "scale(" + scale.toFixed(8) + ") " +
-										  "translateY(" + postTranslateY.toFixed(8) + "px)";
+			"scale(" + scale.toFixed(8) + ") " +
+			"translateY(" + postTranslateY.toFixed(8) + "px)";
 	document.body.style.webkitTransform = transform;
 }
 

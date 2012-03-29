@@ -24,7 +24,7 @@ function showChooser(macroNode) {
 				]));
 		});
 		var wrapper = Renderer.ElementNode("ul",{},nodes);
-		wrapper.execute(macroNode.parents,macroNode.store.getTiddler(macroNode.tiddlerTitle));
+		wrapper.execute(macroNode.parents,macroNode.tiddlerTitle);
 		macroNode.content = [wrapper];
 		macroNode.content[0].renderInDom(macroNode.domNode);
 	}

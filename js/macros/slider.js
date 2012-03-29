@@ -141,7 +141,7 @@ exports.macro = {
 				)
 			]
 		);
-		content.execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
+		content.execute(this.parents,this.tiddlerTitle);
 		return [content];
 	},
 	refreshInDom: function(changes) {
@@ -156,7 +156,7 @@ exports.macro = {
 			this.content[0].domNode.removeChild(this.content[0].children[1].domNode);
 			// Get the slider content and execute it
 			this.content[0].children[1].children = getSliderContent(this);
-			this.content[0].children[1].execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
+			this.content[0].children[1].execute(this.parents,this.tiddlerTitle);
 			this.content[0].children[1].renderInDom(this.content[0].domNode,null);
 			needContentRefresh = false; // Don't refresh the children if we've just created them
 		}

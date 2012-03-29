@@ -66,7 +66,7 @@ exports.macro = {
 					cloneTemplate.push(templateTree[c].clone());
 				}
 				var listNode = Renderer.ElementNode("li",null,cloneTemplate);
-				listNode.execute(parents,this.store.getTiddler(tiddlers[t]));
+				listNode.execute(parents,tiddlers[t]);
 				content.push(listNode);
 			}
 			return [Renderer.ElementNode("ul",null,content)];

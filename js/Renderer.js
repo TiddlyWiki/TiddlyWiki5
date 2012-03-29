@@ -207,9 +207,13 @@ MacroNode.prototype.cloneChildren = function() {
 	return childClones;
 };
 
-MacroNode.prototype.execute = function(parents,tiddler) {
+MacroNode.prototype.execute = function(parents,tiddlerTitle) {
 	// Evaluate macro parameters to get their values
 	this.params = {};
+	var tiddler = this.store.getTiddler(tiddlerTitle);
+	if(!tiddler) {
+		tiddler = {title: tiddlerTitle};
+	}
 	for(var p in this.srcParams) {
 		if(typeof this.srcParams[p] === "function") {
 			this.params[p] = this.srcParams[p](tiddler,this.store,utils);
@@ -218,7 +222,7 @@ MacroNode.prototype.execute = function(parents,tiddler) {
 		}
 	}
 	// Save the context tiddler
-	this.tiddlerTitle = tiddler ? tiddler.title : null;
+	this.tiddlerTitle = tiddlerTitle;
 	// Save a reference to the array of parents
 	this.parents = parents || [];
 	// Render the macro to get its content
@@ -261,8 +265,7 @@ MacroNode.prototype.refresh = function(changes) {
 	// Check if any of the dependencies of this macro node have changed
 	if(this.dependencies.hasChanged(changes)) {
 		// Re-execute the macro if so
-		var tiddler = this.store.getTiddler(this.tiddlerTitle);
-		this.execute(this.parents,tiddler);
+		this.execute(this.parents,this.tiddlerTitle);
 	} else {
 		// Refresh any children
 		for(t=0; t<this.content.length; t++) {
@@ -277,7 +280,6 @@ MacroNode.prototype.refreshInDom = function(changes) {
 	// Check if any of the dependencies of this macro node have changed
 	if(this.dependencies.hasChanged(changes)) {
 		// Ask the macro to rerender itself if it can
-		var tiddler = this.store.getTiddler(this.tiddlerTitle);
 		if(this.macro.refreshInDom) {
 			this.macro.refreshInDom.call(this,changes);
 		} else {
@@ -285,7 +287,7 @@ MacroNode.prototype.refreshInDom = function(changes) {
 			while(this.domNode.hasChildNodes()) {
 				this.domNode.removeChild(this.domNode.firstChild);
 			}
-			this.execute(this.parents,tiddler);
+			this.execute(this.parents,this.tiddlerTitle);
 			for(t=0; t<this.content.length; t++) {
 				this.content[t].renderInDom(this.domNode);
 			}
@@ -342,10 +344,10 @@ ElementNode.prototype.clone = function() {
 	return new ElementNode(this.type,this.attributes,childClones);
 };
 
-ElementNode.prototype.execute = function(parents,tiddler) {
+ElementNode.prototype.execute = function(parents,tiddlerTitle) {
 	if(this.children) {
 		for(var t=0; t<this.children.length; t++) {
-			this.children[t].execute(parents,tiddler);
+			this.children[t].execute(parents,tiddlerTitle);
 		}
 	}
 };

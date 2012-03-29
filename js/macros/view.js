@@ -47,12 +47,17 @@ exports.macro = {
 		}
 		switch(this.params.format) {
 			case "link":
-				var link = Renderer.MacroNode("link",
-											{target: value},
-											[Renderer.TextNode(value)],
-											this.store);
-				link.execute(parents,tiddler);
-				return [link];
+				if(value === undefined) {
+					return [];
+				} else {
+					var link = Renderer.MacroNode("link",
+												{target: value},
+												[Renderer.TextNode(value)],
+												this.store);
+					link.execute(parents,this.tiddlerTitle);
+					return [link];
+				}
+				break;
 			case "wikified":
 				if(tiddler && this.params.field === "text") {
 					if(parents.indexOf(tiddler.title) !== -1) {
@@ -69,7 +74,7 @@ exports.macro = {
 					contentClone.push(content[t].clone());
 				}
 				for(t=0; t<contentClone.length; t++) {
-					contentClone[t].execute(parents,tiddler);
+					contentClone[t].execute(parents,this.tiddlerTitle);
 				}
 				return contentClone;
 			case "date":
@@ -79,6 +84,7 @@ exports.macro = {
 				} else {
 					return [Renderer.TextNode(utils.formatDateString(value,template))];
 				}
+				break;
 			default: // "text"
 				return [Renderer.TextNode(value)];
 		}
