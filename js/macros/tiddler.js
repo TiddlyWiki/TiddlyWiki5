@@ -101,10 +101,10 @@ exports.macro = {
 		var attributes = {
 			"data-tiddler-target": renderTitle,
 			"data-tiddler-template": renderTemplate,
-			"class": ["tiddlerFrame"]
+			"class": ["tw-tiddler-frame"]
 		};
 		if(!this.store.tiddlerExists(renderTitle)) {
-			attributes["class"].push("tiddlerMissing");
+			attributes["class"].push("tw-tiddler-missing");
 		}
 		// Return the content
 		return [Renderer.ElementNode("div",attributes,contentClone)];

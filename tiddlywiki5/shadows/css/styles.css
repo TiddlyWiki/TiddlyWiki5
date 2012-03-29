@@ -8,7 +8,7 @@ body {
 	line-height: 48px;
 }
 
-.tiddlerMissing .title {
+.tw-tiddler-missing .title {
 	font-style: italic;
 	font-weight: normal;
 }
