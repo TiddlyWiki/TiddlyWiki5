@@ -12,29 +12,22 @@ var Tiddler = require("../Tiddler.js").Tiddler,
     Dependencies = require("../Dependencies.js").Dependencies,
 	utils = require("../Utils.js");
 
-// Parse the text of a story tiddler into an array of tiddler titles
-var parseStory = function(storyText) {
-	var storyLines = storyText.split("\n"),
-		tiddlers = [];
-	for(var t=0; t<storyLines.length; t++) {
-		var title = storyLines[t].trim();
-		if(title !== "") {
-			tiddlers.push(title);
-		}
-	}
-	return tiddlers;
-};
-
 exports.macro = {
 	name: "story",
 	params: {
 		story: {byName: "default", type: "tiddler"},
-		template: {byName: true, type: "tiddler"}
+		defaultViewTemplate: {byName: true, type: "tiddler"}
 	},
 	events: {
 		"tw-navigate": function(event) {
-			var storyTiddler = this.store.getTiddler(this.params.story);
-			this.store.addTiddler(new Tiddler(storyTiddler,{text: event.navigateTo + "\n" + storyTiddler.text}));
+			var template = this.params.defaultViewTemplate ? this.params.defaultViewTemplate : "SimpleTemplate",
+				storyTiddler = this.store.getTiddler(this.params.story),
+				story = {tiddlers: []};
+			if(storyTiddler && storyTiddler.hasOwnProperty("text")) {
+				story = JSON.parse(storyTiddler.text);
+			}
+			story.tiddlers.unshift({title: event.navigateTo, template: template});
+			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
 			$("html,body").animate({
 				scrollTop: 0
 			}, 400);
@@ -43,11 +36,11 @@ exports.macro = {
 		}
 	},
 	execute: function() {
-		var tiddlers = parseStory(this.store.getTiddlerText(this.params.story)),
+		var story = JSON.parse(this.store.getTiddlerText(this.params.story)),
 			content = [];
-		for(var t=0; t<tiddlers.length; t++) {
+		for(var t=0; t<story.tiddlers.length; t++) {
 			var m = Renderer.MacroNode("tiddler",
-										{target: tiddlers[t],template: this.params.template},
+										{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 										null,
 										this.store);
 			m.execute(this.parents,this.store.getTiddler(this.tiddlerTitle));
@@ -59,7 +52,7 @@ exports.macro = {
 		/*jslint browser: true */
 		// Get the tiddlers we're supposed to be displaying
 		var self = this,
-			targetTiddlers = parseStory(this.store.getTiddlerText(this.params.story)),
+			story = JSON.parse(this.store.getTiddlerText(this.params.story)),
 			template = this.params.template,
 			t,n,domNode,
 			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
@@ -74,16 +67,16 @@ exports.macro = {
 				}
 				return null;
 			};
-		for(t=0; t<targetTiddlers.length; t++) {
+		for(t=0; t<story.tiddlers.length; t++) {
 			// See if the node we want is already there
-			var tiddlerNode = findTiddler(t,targetTiddlers[t],template);
+			var tiddlerNode = findTiddler(t,story.tiddlers[t].title,story.tiddlers[t].template);
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
 				var m = Renderer.MacroNode("tiddler",
-											{target: targetTiddlers[t],template: template},
+											{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 											null,
 											this.store);
-				m.execute(this.parents,this.store.getTiddler(targetTiddlers[t]));
+				m.execute(this.parents,this.store.getTiddler(story.tiddlers[t].title));
 				m.renderInDom(this.domNode,this.domNode.childNodes[t]);
 				this.content.splice(t,0,m);
 			} else {
@@ -102,12 +95,12 @@ exports.macro = {
 			}
 		}
 		// Remove any left over nodes
-		if(this.content.length > targetTiddlers.length) {
-			for(t=targetTiddlers.length; t<this.content.length; t++) {
+		if(this.content.length > story.tiddlers.length) {
+			for(t=story.tiddlers.length; t<this.content.length; t++) {
 				domNode = this.content[t].domNode;
 				domNode.parentNode.removeChild(domNode);
 			}
-			this.content.splice(targetTiddlers.length,this.content.length-targetTiddlers.length);
+			this.content.splice(story.tiddlers.length,this.content.length-story.tiddlers.length);
 		}
 	}
 };

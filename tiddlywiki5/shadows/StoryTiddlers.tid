@@ -1,5 +1,10 @@
 title: StoryTiddlers
+type: application/json
 
-HelloThere
-Introduction
-NewWikiTextFeatures
+{
+	"tiddlers": [
+		{"title": "HelloThere", "template": "SimpleTemplate"},
+		{"title": "Introduction", "template": "SimpleTemplate"},
+		{"title": "NewWikiTextFeatures", "template": "SimpleTemplate"}
+	]
+}
