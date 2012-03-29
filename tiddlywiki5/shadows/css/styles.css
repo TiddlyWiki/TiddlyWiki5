@@ -10,6 +10,11 @@ body {
 
 .tiddlerMissing .title {
 	font-style: italic;
+	font-weight: normal;
+}
+
+.tw-edit-field {
+	border: 1px dotted #888;
 }
 
 img {

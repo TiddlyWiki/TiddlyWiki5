@@ -1,0 +1,7 @@
+title: EditTemplate
+modifier: JeremyRuston
+
+{{title{
+<<edit draft.title>>}}}
+{{body{
+<<edit text>>}}}
