@@ -8,6 +8,10 @@ body {
 	line-height: 48px;
 }
 
+.tiddlerMissing .title {
+	font-style: italic;
+}
+
 img {
 	max-width: 100%;
 }
