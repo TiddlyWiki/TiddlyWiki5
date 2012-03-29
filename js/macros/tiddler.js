@@ -97,8 +97,17 @@ exports.macro = {
 		for(t=0; t<contentClone.length; t++) {
 			contentClone[t].execute(parents,renderTitle);
 		}
+		// Set up the attributes for the wrapper element
+		var attributes = {
+			"data-tiddler-target": renderTitle,
+			"data-tiddler-template": renderTemplate,
+			"class": ["tiddlerFrame"]
+		};
+		if(!this.store.tiddlerExists(renderTitle)) {
+			attributes["class"].push("tiddlerMissing");
+		}
 		// Return the content
-		return contentClone;
+		return [Renderer.ElementNode("div",attributes,contentClone)];
 	}
 };
 
