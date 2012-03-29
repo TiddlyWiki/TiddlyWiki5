@@ -1,7 +1,23 @@
 /*\
 title: js/Renderer.js
 
-Renderer objects 
+Renderer objects encapsulate a tree of nodes that are capable of rendering and selectively updating an
+HTML representation of themselves. The following node types are defined:
+* ''MacroNode'' - represents an invocation of a macro
+* ''ElementNode'' - represents a single HTML element
+* ''TextNode'' - represents an HTML text node
+* ''EntityNode'' - represents an HTML entity node
+* ''RawNode'' - represents a chunk of unparsed HTML text
+
+These node types are implemented with prototypal inheritance from a base Node class. One
+unusual convenience in the implementation is that the node constructors can be called without an explicit
+`new` keyword: the constructors check for `this` not being an instance of themselves, and recursively invoke
+themselves with `new` when required.
+
+Convenience functions are provided to wrap up the construction of some common interface elements:
+* ''ErrorNode''
+* ''LabelNode''
+* ''SplitLabelNode''
 
 \*/
 (function(){
@@ -14,13 +30,21 @@ var utils = require("./Utils.js"),
 	Dependencies = require("./Dependencies.js").Dependencies,
 	esprima = require("esprima");
 
-// Intialise the renderer object
+/*
+Intialise the renderer object
+	nodes: an array of Node objects
+	dependencies: an optional Dependencies object
+	store: a reference to the WikiStore object to use for rendering these nodes
+*/
 var Renderer = function(nodes,dependencies,store) {
 	this.nodes = nodes;
 	this.dependencies = dependencies;
 	this.store = store;
 };
 
+/*
+The base class for all types of renderer nodes
+*/
 var Node = function(children) {
 	if(this instanceof Node) {
 		this.children = children;
@@ -52,6 +76,9 @@ Construct a renderer node representing a macro invocation
 	srcParams: a hashmap of parameters (each can be a string, or a fn(tiddler,store,utils) for evaluated parameters)
 	children: optional array of child nodes
 	store: reference to the WikiStore associated with this macro
+	dependencies: optional Dependencies object representing the dependencies of this macro
+
+Note that the dependencies will be evaluated if not provided.
 */
 var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 	if(this instanceof MacroNode) {
@@ -61,27 +88,8 @@ var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 		this.children = children;
 		this.store = store;
 		this.srcParams = typeof srcParams === "string" ? this.parseMacroParamString(srcParams) : srcParams;
-		// Evaluate the dependencies
-		if(dependencies) {
-			this.dependencies = dependencies;
-		} else {
-			this.dependencies = new Dependencies();
-			if(this.srcParams && this.macro) {
-				if(this.macro.dependentAll) {
-					this.dependencies.dependentAll = true;
-				}
-				for(var m in this.macro.params) {
-					var paramInfo = this.macro.params[m];
-					if(m in this.srcParams && paramInfo.type === "tiddler") {
-						if(typeof this.srcParams[m] === "function") {
-							this.dependencies.dependentAll = true;
-						} else {
-							this.dependencies.addDependency(this.srcParams[m],!paramInfo.skinny);
-						}
-					}
-				}
-			}
-		}
+		// Evaluate the dependencies if required
+		this.dependencies = dependencies ? dependencies : this.evaluateDependencies();
 	} else {
 		return new MacroNode(macroName,srcParams,children,store,dependencies);
 	}
@@ -89,6 +97,29 @@ var MacroNode = function(macroName,srcParams,children,store,dependencies) {
 
 MacroNode.prototype = new Node();
 MacroNode.prototype.constructor = MacroNode;
+
+/*
+Evaluate the dependencies of this macro invocation by examining the macro parameters
+*/
+MacroNode.prototype.evaluateDependencies = function() {
+	var dependencies = new Dependencies();
+	if(this.srcParams && this.macro) {
+		if(this.macro.dependentAll) {
+			dependencies.dependentAll = true;
+		}
+		for(var m in this.macro.params) {
+			var paramInfo = this.macro.params[m];
+			if(m in this.srcParams && paramInfo.type === "tiddler") {
+				if(typeof this.srcParams[m] === "function") {
+					dependencies.dependentAll = true;
+				} else {
+					dependencies.addDependency(this.srcParams[m],!paramInfo.skinny);
+				}
+			}
+		}
+	}
+	return dependencies;
+};
 
 MacroNode.prototype.parseMacroParamString = function(paramString) {
 	/*jslint evil: true */
