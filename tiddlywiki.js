@@ -195,9 +195,10 @@ var commandLineSwitches = {
 		}
 	},
 	wikitest: {
-		args: {min: 1, max: 1},
+		args: {min: 1, max: 2},
 		handler: function(args,callback) {
 			var testdirectory = args[0],
+				saveResults = args[1] === "save",
 				files = fs.readdirSync(testdirectory),
 				titles = [],
 				f,t,extname,basename;
@@ -213,16 +214,25 @@ var commandLineSwitches = {
 				}
 			}
 			for(t=0; t<titles.length; t++) {
-				var htmlTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".html"),"utf8"),
-					plainTarget = fs.readFileSync(path.resolve(testdirectory,titles[t] + ".txt"),"utf8"),
+				var htmlFilename = path.resolve(testdirectory,titles[t] + ".html"),
+					plainFilename = path.resolve(testdirectory,titles[t] + ".txt"),
+					htmlTarget = fs.readFileSync(htmlFilename,"utf8"),
+					plainTarget = fs.readFileSync(plainFilename,"utf8"),
 					tiddler = app.store.getTiddler(titles[t]),
 					htmlRender = app.store.renderTiddler("text/html",titles[t]),
 					plainRender = app.store.renderTiddler("text/plain",titles[t]);
-				if(htmlTarget !== htmlRender) {
-					console.error("Tiddler %s html error\nTarget: %s\nFound:  %s\n",titles[t],htmlTarget,htmlRender);
-				}
-				if(plainTarget !== plainRender) {
-					console.error("Tiddler %s plain text error\nTarget: %s\nFound:  %s\n",titles[t],plainTarget,plainRender);
+				if(saveResults) {
+					// Save results
+					fs.writeFileSync(htmlFilename,htmlRender,"utf8");
+					fs.writeFileSync(plainFilename,plainRender,"utf8");
+				} else {
+					// Report results
+					if(htmlTarget !== htmlRender) {
+						console.error("Tiddler %s html error\nTarget: %s\nFound:  %s\n",titles[t],htmlTarget,htmlRender);
+					}
+					if(plainTarget !== plainRender) {
+						console.error("Tiddler %s plain text error\nTarget: %s\nFound:  %s\n",titles[t],plainTarget,plainRender);
+					}
 				}
 			}
 		}
