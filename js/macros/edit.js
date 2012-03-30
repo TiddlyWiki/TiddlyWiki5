@@ -94,6 +94,10 @@ exports.macro = {
 		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 			// Don't refresh the editor if it contains the caret or selection
 			if(!window.getSelection().containsNode(this.domNode, true)) {
+				// Remove the event handlers so they don't get triggered by the following DOM manipulations
+				for(var e in exports.macro.events) {
+					this.domNode.removeEventListener(e,this,false);
+				}
 				// Remove the previous content
 				while(this.domNode.hasChildNodes()) {
 					this.domNode.removeChild(this.domNode.firstChild);
