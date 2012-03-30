@@ -48,7 +48,7 @@ exports.macro = {
 					storyRecord.title = "Draft of " + event.tiddlerTitle + " at " + (new Date());
 					storyRecord.template = template;
 					var tiddler = this.store.getTiddler(event.tiddlerTitle);
-					this.store.addTiddler(new Tiddler(tiddler,{title: storyRecord.title, "draft.title": event.tiddlerTitle}));
+					this.store.addTiddler(new Tiddler({text: "Type the text for the tiddler '" + event.tiddlerTitle + "'"},tiddler,{title: storyRecord.title, "draft.title": event.tiddlerTitle}));
 				}
 			}
 			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
