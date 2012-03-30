@@ -56,9 +56,13 @@ Dependencies.prototype.mergeDependencies = function(dep) {
 /*
 Determine if these dependencies are impacted by the specified array of changes
 	changes: Hashmap of {title: "created|modified|deleted"}
+	contextTiddlerTitle: The title of the current context tiddler
 */
-Dependencies.prototype.hasChanged = function(changes) {
+Dependencies.prototype.hasChanged = function(changes,contextTiddlerTitle) {
 	if(this.dependentAll) {
+		return true;
+	}
+	if(this.dependentOnContextTiddler && contextTiddlerTitle && changes.hasOwnProperty(contextTiddlerTitle)) {
 		return true;
 	}
 	for(var c in changes) {
