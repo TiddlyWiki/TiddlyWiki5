@@ -4,6 +4,6 @@ modifier: JeremyRuston
 {{title{
 <<view title>>}}}
 {{small{
-<<view modifier link>> <<view modified date>> <<command EditTiddler label:"edit" class:"btn btn-mini btn-success">>}}}
+<<view modifier link>> <<view modified date>> <<command EditTiddler label:"edit" class:"btn btn-mini btn-primary">>}}}
 {{body{
 <<view text wikified>>}}}
