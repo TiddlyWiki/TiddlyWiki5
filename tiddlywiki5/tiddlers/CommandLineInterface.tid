@@ -16,7 +16,7 @@ The command line options are processed sequentially from left to right. Processi
 |`--savehtml <outdir>` |Saves all the loaded tiddlers as static, unstyled `.html` files in the specified directory |
 |`--servewiki <port>` |Serve the cooked TiddlyWiki over HTTP at `/` |
 |`--servetiddlers <port>` |Serve individual tiddlers over HTTP at `/tiddlertitle` |
-|`--wikitest <dir>` |Run wikification tests against the tiddlers in the given directory |
+|`--wikitest <dir> [save]` |Run wikification tests against the tiddlers in the given directory. Include the `save` flag to save the test result files as the new targets |
 |`--dumpstore` |Dump the TiddlyWiki store in JSON format |
 |`--dumprecipe` |Dump the current recipe in JSON format |
 |`--verbose` |verbose output, useful for debugging |
