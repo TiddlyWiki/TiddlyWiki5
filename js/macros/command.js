@@ -4,7 +4,7 @@ title: js/macros/command.js
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
 "use strict";
 
 var Renderer = require("../Renderer.js").Renderer;
@@ -30,9 +30,9 @@ exports.macro = {
 	execute: function() {
 		var attributes = {};
 		if(this.hasParameter("class")) {
-			attributes["class"] = this.params.class.split(" ");
+			attributes["class"] = this.params["class"].split(" ");
 		}
-		return [Renderer.ElementNode("button",attributes,[Renderer.TextNode(this.params.label)])]
+		return [Renderer.ElementNode("button",attributes,[Renderer.TextNode(this.params.label)])];
 	}
 };
 
