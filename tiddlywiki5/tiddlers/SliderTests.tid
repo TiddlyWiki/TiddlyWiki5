@@ -1,15 +1,15 @@
 title: SliderTests
 
 The status of this slider is stored in the tiddler JackSlider:
-<<slider JackSlider "Motovun Jack.jpg" "TiddlyWiki Kitten" "See the kitten">>
+<<slider JackSlider "Motovun Jack.jpg" "TiddlyWiki Kitten »" "See the kitten">>
 
-And here's another slider that is also keyed to JackSlider (<<slider JackSlider "HelloThere">>), this time inline.
+And here's another slider that is also keyed to JackSlider (<<slider JackSlider "HelloThere »">>), this time inline.
 
 And here's another slider that contains a video, with the state stored in VideoSlider (currently <<tiddler VideoSlider>>):
-<<slider VideoSlider "VideoTests">>
+<<slider VideoSlider "VideoTests »">>
 
 And here's a MiniSlider that works with text, rather than a separate tiddler.
-<<slider state:MiniSlider label:"Click me!" content:"This is the //content// of the slider. The state is stored in MiniSlider">>
+<<slider state:MiniSlider label:"Click me! »" content:"This is the //content// of the slider. The state is stored in MiniSlider">>
 
 And here's a slider that doesn't use a state tiddler:
-<<slider label:"Click me!" content:"This is the //content// of the slider. The state is not retained.">>
+<<slider label:"Click me! »" content:"This is the //content// of the slider. The state is not retained.">>
