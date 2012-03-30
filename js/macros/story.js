@@ -58,7 +58,8 @@ exports.macro = {
 		"tw-SaveTiddler": function(event) {
 			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultEditTemplate : "SimpleTemplate",
 				storyTiddler = this.store.getTiddler(this.params.story),
-				story = {tiddlers: []};
+				story = {tiddlers: []},
+				storyTiddlerModified = false;
 			if(storyTiddler && storyTiddler.hasOwnProperty("text")) {
 				story = JSON.parse(storyTiddler.text);
 			}
@@ -74,10 +75,16 @@ exports.macro = {
 						// Make the story record point to the newly saved tiddler
 						storyRecord.title = tiddler["draft.title"];
 						storyRecord.template = template;
+						// Check if we're modifying the story tiddler itself
+						if(tiddler["draft.title"] === this.params.story) {
+							storyTiddlerModified = true;
+						}
 					}
 				}
 			}
-			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
+			if(!storyTiddlerModified) {
+				this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
+			}
 			event.stopPropagation();
 			return false;
 		}
