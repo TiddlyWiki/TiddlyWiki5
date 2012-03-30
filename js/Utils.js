@@ -268,6 +268,6 @@ utils.toggleClass = function(el,className,status) {
 	} else {
 		utils.removeClass(el,className);
 	}
-}
+};
 
 })();
