@@ -43,7 +43,8 @@ the `template` parameter or, if that parameter is missing, the tiddler named in 
 "use strict";
 
 var Renderer = require("../Renderer.js").Renderer,
-	Dependencies = require("../Dependencies.js").Dependencies;
+	Dependencies = require("../Dependencies.js").Dependencies,
+	utils = require("../Utils.js");
 
 exports.macro = {
 	name: "tiddler",
@@ -122,6 +123,33 @@ exports.macro = {
 		}
 		// Return the content
 		return [Renderer.ElementNode("div",attributes,contentClone)];
+	},
+	refreshInDom: function(changes) {
+		var t;
+		// Set the class for missing tiddlers
+		var renderTitle = this.params.target;
+		if(typeof renderTitle !== "string") {
+			renderTitle = this.params.template;
+		}
+		if(renderTitle) {
+			utils.toggleClass(this.content[0].domNode,"tw-tiddler-missing",!this.store.tiddlerExists(renderTitle));
+		}
+		// Rerender the tiddler if it is impacted by the changes
+		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
+			// Manually reexecute and rerender this macro
+			while(this.domNode.hasChildNodes()) {
+				this.domNode.removeChild(this.domNode.firstChild);
+			}
+			this.execute(this.parents,this.tiddlerTitle);
+			for(t=0; t<this.content.length; t++) {
+				this.content[t].renderInDom(this.domNode);
+			}
+		} else {
+			// Refresh any children
+			for(t=0; t<this.content.length; t++) {
+				this.content[t].refreshInDom(changes);
+			}
+		}
 	}
 };
 
