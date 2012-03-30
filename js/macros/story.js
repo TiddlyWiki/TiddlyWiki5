@@ -97,57 +97,63 @@ exports.macro = {
 	},
 	refreshInDom: function(changes) {
 		/*jslint browser: true */
-		// Get the tiddlers we're supposed to be displaying
-		var self = this,
-			story = JSON.parse(this.store.getTiddlerText(this.params.story)),
-			template = this.params.template,
-			t,n,domNode,
-			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
-				while(childIndex < self.content.length) {
-					var params = self.content[childIndex].params;
-					if(params.target === tiddlerTitle) {
-						if(!templateTitle || params.template === templateTitle) {
-							return childIndex;
+		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
+			// Get the tiddlers we're supposed to be displaying
+			var self = this,
+				story = JSON.parse(this.store.getTiddlerText(this.params.story)),
+				template = this.params.template,
+				t,n,domNode,
+				findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
+					while(childIndex < self.content.length) {
+						var params = self.content[childIndex].params;
+						if(params.target === tiddlerTitle) {
+							if(!templateTitle || params.template === templateTitle) {
+								return childIndex;
+							}
 						}
+						childIndex++;
 					}
-					childIndex++;
-				}
-				return null;
-			};
-		for(t=0; t<story.tiddlers.length; t++) {
-			// See if the node we want is already there
-			var tiddlerNode = findTiddler(t,story.tiddlers[t].title,story.tiddlers[t].template);
-			if(tiddlerNode === null) {
-				// If not, render the tiddler
-				var m = Renderer.MacroNode("tiddler",
-											{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
-											null,
-											this.store);
-				m.execute(this.parents,story.tiddlers[t].title);
-				m.renderInDom(this.domNode,this.domNode.childNodes[t]);
-				this.content.splice(t,0,m);
-			} else {
-				// Delete any nodes preceding the one we want
-				if(tiddlerNode > t) {
-					// First delete the DOM nodes
-					for(n=t; n<tiddlerNode; n++) {
-						domNode = this.content[n].domNode;
-						domNode.parentNode.removeChild(domNode);
+					return null;
+				};
+			for(t=0; t<story.tiddlers.length; t++) {
+				// See if the node we want is already there
+				var tiddlerNode = findTiddler(t,story.tiddlers[t].title,story.tiddlers[t].template);
+				if(tiddlerNode === null) {
+					// If not, render the tiddler
+					var m = Renderer.MacroNode("tiddler",
+												{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
+												null,
+												this.store);
+					m.execute(this.parents,this.tiddlerTitle);
+					m.renderInDom(this.domNode,this.domNode.childNodes[t]);
+					this.content.splice(t,0,m);
+				} else {
+					// Delete any nodes preceding the one we want
+					if(tiddlerNode > t) {
+						// First delete the DOM nodes
+						for(n=t; n<tiddlerNode; n++) {
+							domNode = this.content[n].domNode;
+							domNode.parentNode.removeChild(domNode);
+						}
+						// Then delete the actual renderer nodes
+						this.content.splice(t,tiddlerNode-t);
 					}
-					// Then delete the actual renderer nodes
-					this.content.splice(t,tiddlerNode-t);
+					// Refresh the DOM node we're reusing
+					this.content[t].refreshInDom(changes);
 				}
-				// Refresh the DOM node we're reusing
+			}
+			// Remove any left over nodes
+			if(this.content.length > story.tiddlers.length) {
+				for(t=story.tiddlers.length; t<this.content.length; t++) {
+					domNode = this.content[t].domNode;
+					domNode.parentNode.removeChild(domNode);
+				}
+				this.content.splice(story.tiddlers.length,this.content.length-story.tiddlers.length);
+			}
+		} else {
+			for(t=0; t<this.content.length; t++) {
 				this.content[t].refreshInDom(changes);
 			}
-		}
-		// Remove any left over nodes
-		if(this.content.length > story.tiddlers.length) {
-			for(t=story.tiddlers.length; t<this.content.length; t++) {
-				domNode = this.content[t].domNode;
-				domNode.parentNode.removeChild(domNode);
-			}
-			this.content.splice(story.tiddlers.length,this.content.length-story.tiddlers.length);
 		}
 	}
 };

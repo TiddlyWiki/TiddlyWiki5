@@ -288,12 +288,12 @@ MacroNode.prototype.refresh = function(changes) {
 MacroNode.prototype.refreshInDom = function(changes) {
 	var t,
 		self = this;
-	// Check if any of the dependencies of this macro node have changed
-	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
-		// Ask the macro to rerender itself if it can
-		if(this.macro.refreshInDom) {
-			this.macro.refreshInDom.call(this,changes);
-		} else {
+	// Ask the macro to rerender itself if it can
+	if(this.macro.refreshInDom) {
+		this.macro.refreshInDom.call(this,changes);
+	} else {
+		// Check if any of the dependencies of this macro node have changed
+		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 			// Manually reexecute and rerender this macro
 			while(this.domNode.hasChildNodes()) {
 				this.domNode.removeChild(this.domNode.firstChild);
@@ -302,11 +302,11 @@ MacroNode.prototype.refreshInDom = function(changes) {
 			for(t=0; t<this.content.length; t++) {
 				this.content[t].renderInDom(this.domNode);
 			}
-		}
-	} else {
-		// Refresh any children
-		for(t=0; t<this.content.length; t++) {
-			this.content[t].refreshInDom(changes);
+		} else {
+			// Refresh any children
+			for(t=0; t<this.content.length; t++) {
+				this.content[t].refreshInDom(changes);
+			}
 		}
 	}
 };

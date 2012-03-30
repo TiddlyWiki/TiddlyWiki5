@@ -91,17 +91,19 @@ exports.macro = {
 		return [editor];
 	},
 	refreshInDom: function(changes) {
-		// Don't refresh the editor if it contains the caret or selection
-		if(!window.getSelection().containsNode(this.domNode, true)) {
-			// Remove the previous content
-			while(this.domNode.hasChildNodes()) {
-				this.domNode.removeChild(this.domNode.firstChild);
-			}
-			// Execute the new content
-			this.execute(this.parents,this.tiddlerTitle);
-			// Render to the DOM
-			for(var t=0; t<this.content.length; t++) {
-				this.content[t].renderInDom(this.domNode);
+		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
+			// Don't refresh the editor if it contains the caret or selection
+			if(!window.getSelection().containsNode(this.domNode, true)) {
+				// Remove the previous content
+				while(this.domNode.hasChildNodes()) {
+					this.domNode.removeChild(this.domNode.firstChild);
+				}
+				// Execute the new content
+				this.execute(this.parents,this.tiddlerTitle);
+				// Render to the DOM
+				for(var t=0; t<this.content.length; t++) {
+					this.content[t].renderInDom(this.domNode);
+				}
 			}
 		}
 	}

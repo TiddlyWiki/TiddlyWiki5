@@ -145,27 +145,29 @@ exports.macro = {
 		return [content];
 	},
 	refreshInDom: function(changes) {
-		var needContentRefresh = true; // Avoid refreshing the content nodes if we don't need to
-		// If the state tiddler has changed then reset the open state
-		if(this.hasParameter("state") && changes.hasOwnProperty(this.params.state)) {
-			this.isOpen = getOpenState(this);
-		}
-		// Render the content if the slider is open and we don't have any content yet
-		if(this.isOpen && this.content[0].children[1].children.length === 0) {
-			// Remove the existing dom node for the body
-			this.content[0].domNode.removeChild(this.content[0].children[1].domNode);
-			// Get the slider content and execute it
-			this.content[0].children[1].children = getSliderContent(this);
-			this.content[0].children[1].execute(this.parents,this.tiddlerTitle);
-			this.content[0].children[1].renderInDom(this.content[0].domNode,null);
-			needContentRefresh = false; // Don't refresh the children if we've just created them
-		}
-		// Set the visibility of the slider content
-		this.content[0].children[1].domNode.style.display = this.isOpen ? "block" : "none";
-		// Refresh any children
-		if(needContentRefresh) {
-			for(var t=0; t<this.content.length; t++) {
-				this.content[t].refreshInDom(changes);
+		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
+			var needContentRefresh = true; // Avoid refreshing the content nodes if we don't need to
+			// If the state tiddler has changed then reset the open state
+			if(this.hasParameter("state") && changes.hasOwnProperty(this.params.state)) {
+				this.isOpen = getOpenState(this);
+			}
+			// Render the content if the slider is open and we don't have any content yet
+			if(this.isOpen && this.content[0].children[1].children.length === 0) {
+				// Remove the existing dom node for the body
+				this.content[0].domNode.removeChild(this.content[0].children[1].domNode);
+				// Get the slider content and execute it
+				this.content[0].children[1].children = getSliderContent(this);
+				this.content[0].children[1].execute(this.parents,this.tiddlerTitle);
+				this.content[0].children[1].renderInDom(this.content[0].domNode,null);
+				needContentRefresh = false; // Don't refresh the children if we've just created them
+			}
+			// Set the visibility of the slider content
+			this.content[0].children[1].domNode.style.display = this.isOpen ? "block" : "none";
+			// Refresh any children
+			if(needContentRefresh) {
+				for(var t=0; t<this.content.length; t++) {
+					this.content[t].refreshInDom(changes);
+				}
 			}
 		}
 	}
