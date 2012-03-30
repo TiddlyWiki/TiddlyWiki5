@@ -3,8 +3,8 @@ type: application/json
 
 {
 	"tiddlers": [
-		{"title": "HelloThere", "template": "SimpleTemplate"},
-		{"title": "Introduction", "template": "SimpleTemplate"},
-		{"title": "NewWikiTextFeatures", "template": "SimpleTemplate"}
+		{"title": "HelloThere", "template": "ViewTemplate"},
+		{"title": "Introduction", "template": "ViewTemplate"},
+		{"title": "NewWikiTextFeatures", "template": "ViewTemplate"}
 	]
 }

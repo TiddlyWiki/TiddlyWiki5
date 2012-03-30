@@ -19,6 +19,7 @@ Some useful tiddlers for feature testing:
 * VideoTests showing how different online video formats can be embedded
 * SliderTests showing how sliders work
 * TypedBlockTests showing how embedded typed text blocks work
+* ShadowTiddlers, including ViewTemplate, EditTemplate and PageTemplate
 
 Technical documentation includes:
 * [[Testing]] regimen

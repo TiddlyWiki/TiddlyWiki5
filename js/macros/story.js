@@ -21,7 +21,7 @@ exports.macro = {
 	},
 	events: {
 		"tw-navigate": function(event) {
-			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultViewTemplate : "SimpleTemplate",
+			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultViewTemplate : "ViewTemplate",
 				storyTiddler = this.store.getTiddler(this.params.story),
 				story = {tiddlers: []};
 			if(storyTiddler && storyTiddler.hasOwnProperty("text")) {
@@ -48,7 +48,16 @@ exports.macro = {
 					storyRecord.title = "Draft of " + event.tiddlerTitle + " at " + (new Date());
 					storyRecord.template = template;
 					var tiddler = this.store.getTiddler(event.tiddlerTitle);
-					this.store.addTiddler(new Tiddler({text: "Type the text for the tiddler '" + event.tiddlerTitle + "'"},tiddler,{title: storyRecord.title, "draft.title": event.tiddlerTitle}));
+					this.store.addTiddler(new Tiddler(
+						{
+							text: "Type the text for the tiddler '" + event.tiddlerTitle + "'"
+						},
+						tiddler,
+						{
+							title: storyRecord.title,
+							"draft.title": event.tiddlerTitle,
+							"draft.of": event.tiddlerTitle
+						}));
 				}
 			}
 			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
@@ -56,7 +65,7 @@ exports.macro = {
 			return false;
 		},
 		"tw-SaveTiddler": function(event) {
-			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultEditTemplate : "SimpleTemplate",
+			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultEditTemplate : "ViewTemplate",
 				storyTiddler = this.store.getTiddler(this.params.story),
 				story = {tiddlers: []},
 				storyTiddlerModified = false;
@@ -72,6 +81,10 @@ exports.macro = {
 						this.store.addTiddler(new Tiddler(tiddler,{title: tiddler["draft.title"],"draft.title": undefined}));
 						// Remove the draft tiddler
 						this.store.deleteTiddler(storyRecord.title);
+						// Remove the original tiddler if we're renaming it
+						if(tiddler["draft.of"] !== tiddler["draft.title"]) {
+							this.store.deleteTiddler(tiddler["draft.of"]);
+						}
 						// Make the story record point to the newly saved tiddler
 						storyRecord.title = tiddler["draft.title"];
 						storyRecord.template = template;
@@ -103,13 +116,14 @@ exports.macro = {
 		return content;
 	},
 	refreshInDom: function(changes) {
+		var t;
 		/*jslint browser: true */
 		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 			// Get the tiddlers we're supposed to be displaying
 			var self = this,
 				story = JSON.parse(this.store.getTiddlerText(this.params.story)),
 				template = this.params.template,
-				t,n,domNode,
+				n,domNode,
 				findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
 					while(childIndex < self.content.length) {
 						var params = self.content[childIndex].params;
