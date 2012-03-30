@@ -1,10 +1,11 @@
 /*\
 title: js/Dependencies.js
 
-Represents the dependencies of a tiddler or a parser node as two fields:
+Represents the dependencies of a tiddler or a parser node as these fields:
 
 	tiddlers: A hashmap of explicitly tiddler titles, with the value `false` if the dependency is skinny, and `true` if it is fat
 	dependentAll: True if there is an implicit skinny dependency on all available tiddlers
+	dependentOnContextTiddler: True if the node has a fat dependency on the current context tiddler
 
 \*/
 (function(){
@@ -62,7 +63,7 @@ Dependencies.prototype.hasChanged = function(changes,contextTiddlerTitle) {
 	if(this.dependentAll) {
 		return true;
 	}
-	if(this.dependentOnContextTiddler && contextTiddlerTitle && changes.hasOwnProperty(contextTiddlerTitle)) {
+	if(!!this.dependentOnContextTiddler && contextTiddlerTitle !== undefined && changes.hasOwnProperty(contextTiddlerTitle)) {
 		return true;
 	}
 	for(var c in changes) {
