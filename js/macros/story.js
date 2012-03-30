@@ -54,6 +54,32 @@ exports.macro = {
 			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
 			event.stopPropagation();
 			return false;
+		},
+		"tw-SaveTiddler": function(event) {
+			var template = this.hasParameter("defaultViewTemplate") ? this.params.defaultEditTemplate : "SimpleTemplate",
+				storyTiddler = this.store.getTiddler(this.params.story),
+				story = {tiddlers: []};
+			if(storyTiddler && storyTiddler.hasOwnProperty("text")) {
+				story = JSON.parse(storyTiddler.text);
+			}
+			for(var t=0; t<story.tiddlers.length; t++) {
+				var storyRecord = story.tiddlers[t];
+				if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
+					var tiddler = this.store.getTiddler(storyRecord.title);
+					if(tiddler && tiddler.hasOwnProperty("draft.title")) {
+						// Save the draft tiddler as the real tiddler
+						this.store.addTiddler(new Tiddler(tiddler,{title: tiddler["draft.title"],"draft.title": undefined}));
+						// Remove the draft tiddler
+						this.store.deleteTiddler(storyRecord.title);
+						// Make the story record point to the newly saved tiddler
+						storyRecord.title = tiddler["draft.title"];
+						storyRecord.template = template;
+					}
+				}
+			}
+			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
+			event.stopPropagation();
+			return false;
 		}
 	},
 	execute: function() {
