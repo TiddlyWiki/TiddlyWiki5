@@ -42,7 +42,8 @@ the `template` parameter or, if that parameter is missing, the tiddler named in 
 /*jslint node: true */
 "use strict";
 
-var Renderer = require("../Renderer.js").Renderer;
+var Renderer = require("../Renderer.js").Renderer,
+	Dependencies = require("../Dependencies.js").Dependencies;
 
 exports.macro = {
 	name: "tiddler",
@@ -51,6 +52,19 @@ exports.macro = {
 		target: {byName: "default", type: "tiddler"},
 		template: {byName: true, type: "tiddler"},
 		"with": {byName: true, type: "text", dependentAll: true}
+	},
+	evaluateDependencies: function() {
+		var dependencies = new Dependencies(),
+			template = this.srcParams.template;
+		if(template === undefined) {
+			template = this.srcParams.target;
+		}
+		if(typeof template === "function") {
+			dependencies.dependentAll = true;
+		} else {
+			dependencies.addDependency(template,true);
+		}
+		return dependencies;
 	},
 	execute: function() {
 		var renderTitle = this.params.target,
