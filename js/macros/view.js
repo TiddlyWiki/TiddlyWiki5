@@ -13,6 +13,7 @@ var Renderer = require("../Renderer.js").Renderer,
 
 exports.macro = {
 	name: "view",
+	dependentOnContextTiddler: true,
 	params: {
 		field: {byPos: 0, type: "text"},
 		format: {byPos: 1, type: "text"},
