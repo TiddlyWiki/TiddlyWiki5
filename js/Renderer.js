@@ -99,26 +99,37 @@ MacroNode.prototype = new Node();
 MacroNode.prototype.constructor = MacroNode;
 
 /*
-Evaluate the dependencies of this macro invocation by examining the macro parameters
+Evaluate the dependencies of this macro invocation. If the macro provides an `evaluateDependencies` method
+then it is invoked to evaluate the dependencies. Otherwise it generates the dependencies based on the
+macro parameters provided
 */
 MacroNode.prototype.evaluateDependencies = function() {
-	var dependencies = new Dependencies();
 	if(this.srcParams && this.macro) {
-		if(this.macro.dependentAll) {
-			dependencies.dependentAll = true;
-		}
-		for(var m in this.macro.params) {
-			var paramInfo = this.macro.params[m];
-			if(m in this.srcParams && paramInfo.type === "tiddler") {
-				if(typeof this.srcParams[m] === "function") {
-					dependencies.dependentAll = true;
-				} else {
-					dependencies.addDependency(this.srcParams[m],!paramInfo.skinny);
+		if(this.macro.evaluateDependencies) {
+			// Call the evaluateDependencies method if the macro provides it
+			return this.macro.evaluateDependencies.call(this);
+		} else {
+			// Figure out the dependencies from the metadata and parameters
+			var dependencies = new Dependencies();
+			if(this.macro.dependentAll) {
+				dependencies.dependentAll = true;
+			}
+			if(this.macro.dependentOnContextTiddler) {
+				dependencies.dependentOnContextTiddler = true;
+			}
+			for(var m in this.macro.params) {
+				var paramInfo = this.macro.params[m];
+				if(m in this.srcParams && paramInfo.type === "tiddler") {
+					if(typeof this.srcParams[m] === "function") {
+						dependencies.dependentAll = true;
+					} else {
+						dependencies.addDependency(this.srcParams[m],!paramInfo.skinny);
+					}
 				}
 			}
+			return dependencies;
 		}
 	}
-	return dependencies;
 };
 
 MacroNode.prototype.parseMacroParamString = function(paramString) {
@@ -263,7 +274,7 @@ MacroNode.prototype.refresh = function(changes) {
 	var t,
 		self = this;
 	// Check if any of the dependencies of this macro node have changed
-	if(this.dependencies.hasChanged(changes)) {
+	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Re-execute the macro if so
 		this.execute(this.parents,this.tiddlerTitle);
 	} else {
@@ -278,7 +289,7 @@ MacroNode.prototype.refreshInDom = function(changes) {
 	var t,
 		self = this;
 	// Check if any of the dependencies of this macro node have changed
-	if(this.dependencies.hasChanged(changes)) {
+	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Ask the macro to rerender itself if it can
 		if(this.macro.refreshInDom) {
 			this.macro.refreshInDom.call(this,changes);
