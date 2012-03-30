@@ -259,4 +259,15 @@ utils.removeClass = function(el,className) {
 	}
 };
 
+utils.toggleClass = function(el,className,status) {
+	if(status === undefined) {
+		status = !utils.hasClass(el,className);
+	}
+	if(status) {
+		utils.addClass(el,className);
+	} else {
+		utils.removeClass(el,className);
+	}
+}
+
 })();
