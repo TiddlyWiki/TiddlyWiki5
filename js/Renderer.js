@@ -259,14 +259,22 @@ MacroNode.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	}
 	// Add some debugging information to it
 	macroContainer.setAttribute("data-tw-macro",this.macroName);
-	// Add event handlers to the node
-	for(var e in this.macro.events) {
-		// Register this macro node to handle the event via the handleEvent() method
-		macroContainer.addEventListener(e,this,false);
+	// Ask the macro to add event handlers to the node
+	if(this.macro.addEventHandlers) {
+		this.macro.addEventHandlers.call(this);
+	} else {
+		for(var e in this.macro.events) {
+			// Register this macro node to handle the event via the handleEvent() method
+			macroContainer.addEventListener(e,this,false);
+		}
 	}
 	// Render the content of the macro
 	for(var t=0; t<this.content.length; t++) {
 		this.content[t].renderInDom(macroContainer);
+	}
+	// Call the macro renderInDom method if it has one
+	if(this.macro.renderInDom) {
+		this.macro.renderInDom.call(this);
 	}
 };
 
