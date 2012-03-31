@@ -17,7 +17,7 @@ function BitmapEditor(macroNode) {
 }
 
 BitmapEditor.prototype.getContent = function() {
-	return [Renderer.ElementNode("canvas",{},[])]
+	return [Renderer.ElementNode("canvas",{},[])];
 };
 
 BitmapEditor.prototype.renderInDom = function() {
@@ -85,7 +85,7 @@ BitmapEditor.prototype.saveChanges = function() {
 BitmapEditor.prototype.isRefreshable = function() {
 	// Don't ever refresh the bitmap editor
 	return false;
-}
+};
 
 function TextEditor(macroNode) {
 	this.macroNode = macroNode;
@@ -163,7 +163,7 @@ TextEditor.prototype.handleEvent = function(event) {
 TextEditor.prototype.isRefreshable = function() {
 	// Don't refresh the editor if it contains the caret or selection
 	return !window.getSelection().containsNode(this.macroNode.domNode, true);
-}
+};
 
 exports.macro = {
 	name: "edit",
@@ -175,13 +175,13 @@ exports.macro = {
 		// Get the tiddler being editted
 		var tiddler = this.store.getTiddler(this.tiddlerTitle);
 		// Figure out which editor to use
-		var editor = TextEditor;
+		var Editor = TextEditor;
 		if(this.params.field === "text") {
 			if(["image/jpg","image/jpeg","image/png","image/gif"].indexOf(tiddler.type) !== -1) {
-				editor = BitmapEditor;
+				Editor = BitmapEditor;
 			}
 		}
-		this.editor = new editor(this);
+		this.editor = new Editor(this);
 		var content = this.editor.getContent();
 		for(var t=0; t<content.length; t++) {
 			content[t].execute(this.parents,this.tiddlerTitle);
