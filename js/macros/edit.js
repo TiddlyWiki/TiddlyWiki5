@@ -25,13 +25,22 @@ BitmapEditor.prototype.getContent = function() {
 BitmapEditor.prototype.renderInDom = function() {
 	var tiddler = this.macroNode.store.getTiddler(this.macroNode.tiddlerTitle),
 		canvas = this.macroNode.content[0].domNode,
-		img = new Image();
+		currImage = new Image();
+	// Set the macro node itself to be position: relative
 	this.macroNode.domNode.style.position = "relative";
-	img.src = "data:" + tiddler.type + ";base64," + tiddler.text;
-	canvas.width = img.width;
-	canvas.height = img.height;
+	// Get the current bitmap into an image object
+	currImage.src = "data:" + tiddler.type + ";base64," + tiddler.text;
+	// Copy it to the on-screen canvas
+	canvas.width = currImage.width;
+	canvas.height = currImage.height;
 	var ctx = canvas.getContext("2d");
-	ctx.drawImage(img,0,0);
+	ctx.drawImage(currImage,0,0);
+	// And also copy the current bitmap to the off-screen canvas
+	this.currCanvas = document.createElement("canvas");
+	this.currCanvas.width = currImage.width;
+	this.currCanvas.height = currImage.height;
+	ctx = this.currCanvas.getContext("2d");
+	ctx.drawImage(currImage,0,0);
 };
 
 BitmapEditor.prototype.addEventHandlers = function() {
@@ -55,7 +64,6 @@ BitmapEditor.prototype.addEventHandlers = function() {
 			if(self.brushDown) {
 				self.brushDown = false;
 				self.strokeEnd();
-				self.saveChanges();
 			}
 			event.preventDefault();
 			event.stopPropagation();
@@ -80,7 +88,6 @@ BitmapEditor.prototype.addEventHandlers = function() {
 			if(self.brushDown) {
 				self.brushDown = false;
 				self.strokeEnd();
-				self.saveChanges();
 				event.preventDefault();
 				event.stopPropagation();
 				return false;
@@ -91,29 +98,39 @@ BitmapEditor.prototype.addEventHandlers = function() {
 
 BitmapEditor.prototype.strokeStart = function(x,y) {
 	var canvas = this.macroNode.content[0].domNode,
-		canvasRect = canvas.getBoundingClientRect(),
-		ctx = canvas.getContext("2d");
-	this.startX = x - canvasRect.left;
-	this.startY = y - canvasRect.top;
-//	ctx.beginPath();
-	ctx.moveTo(this.startX,this.startY);
+		canvasRect = canvas.getBoundingClientRect();
+	// Start off a new stroke
+	this.stroke = [{x: x - canvasRect.left, y: y - canvasRect.top}];
 };
 
 BitmapEditor.prototype.strokeMove = function(x,y) {
 	var canvas = this.macroNode.content[0].domNode,
 		canvasRect = canvas.getBoundingClientRect(),
 		ctx = canvas.getContext("2d");
-	ctx.lineWidth = 2;
+	// Add the new position to the end of the stroke
+	this.stroke.push({x: x - canvasRect.left, y: y - canvasRect.top})
+	// Redraw the previous image
+	ctx.drawImage(this.currCanvas,0,0);
+	// Render the stroke
+	ctx.lineWidth = 3;
 	ctx.lineCap = "round";
 	ctx.lineJoin = "round";
-	this.startX = x - canvasRect.left;
-	this.startY = y - canvasRect.top;
-	ctx.lineTo(this.startX,this.startY);
+	ctx.beginPath();
+	ctx.moveTo(this.stroke[0].x,this.stroke[0].y);
+	for(var t=1; t<this.stroke.length; t++) {
+		var s = this.stroke[t];
+		ctx.lineTo(s.x,s.y);
+	}
 	ctx.stroke();
 };
 
 BitmapEditor.prototype.strokeEnd = function() {
-
+	// Copy the bitmap to the off-screen canvas
+	var canvas = this.macroNode.content[0].domNode,
+		ctx = this.currCanvas.getContext("2d");
+	ctx.drawImage(canvas,0,0);
+	// Save the image into the tiddler
+	this.saveChanges();
 };
 
 BitmapEditor.prototype.saveChanges = function() {
