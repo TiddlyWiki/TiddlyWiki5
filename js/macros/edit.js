@@ -17,7 +17,9 @@ function BitmapEditor(macroNode) {
 }
 
 BitmapEditor.prototype.getContent = function() {
-	return [Renderer.ElementNode("canvas",{},[])];
+	return [Renderer.ElementNode("canvas",{
+		"class": ["tw-edit-field"]
+	},[])];
 };
 
 BitmapEditor.prototype.renderInDom = function() {
@@ -36,13 +38,14 @@ BitmapEditor.prototype.addEventHandlers = function() {
 	var self = this;
 	this.macroNode.domNode.addEventListener("touchstart",function(event) {
 			self.brushDown = true;
+			self.strokeStart(event.touches[0].clientX,event.touches[0].clientY);
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
 		},false);
 	this.macroNode.domNode.addEventListener("touchmove",function(event) {
 			if(self.brushDown) {
-				self.moveTo(event.touches[0].clientX,event.touches[0].clientY);
+				self.strokeMove(event.touches[0].clientX,event.touches[0].clientY);
 			}
 			event.preventDefault();
 			event.stopPropagation();
@@ -51,6 +54,7 @@ BitmapEditor.prototype.addEventHandlers = function() {
 	this.macroNode.domNode.addEventListener("touchend",function(event) {
 			if(self.brushDown) {
 				self.brushDown = false;
+				self.strokeEnd();
 				self.saveChanges();
 			}
 			event.preventDefault();
@@ -58,13 +62,16 @@ BitmapEditor.prototype.addEventHandlers = function() {
 			return false;
 		},false);
 	this.macroNode.domNode.addEventListener("mousedown",function(event) {
+			self.strokeStart(event.clientX,event.clientY);
 			self.brushDown = true;
+			event.preventDefault();
 			event.stopPropagation();
 			return false;
 		},false);
 	this.macroNode.domNode.addEventListener("mousemove",function(event) {
 			if(self.brushDown) {
-				self.moveTo(event.clientX,event.clientY);
+				self.strokeMove(event.clientX,event.clientY);
+				event.preventDefault();
 				event.stopPropagation();
 				return false;
 			}
@@ -72,7 +79,9 @@ BitmapEditor.prototype.addEventHandlers = function() {
 	this.macroNode.domNode.addEventListener("mouseup",function(event) {
 			if(self.brushDown) {
 				self.brushDown = false;
+				self.strokeEnd();
 				self.saveChanges();
+				event.preventDefault();
 				event.stopPropagation();
 				return false;
 			}
@@ -80,14 +89,31 @@ BitmapEditor.prototype.addEventHandlers = function() {
 		},false);
 };
 
-BitmapEditor.prototype.moveTo = function(x,y) {
+BitmapEditor.prototype.strokeStart = function(x,y) {
 	var canvas = this.macroNode.content[0].domNode,
 		canvasRect = canvas.getBoundingClientRect(),
 		ctx = canvas.getContext("2d");
-	ctx.beginPath();
-	ctx.arc(x - canvasRect.left,y - canvasRect.top,10,0,Math.PI*2,false);
-	ctx.fill();
-	ctx.closePath();
+	this.startX = x - canvasRect.left;
+	this.startY = y - canvasRect.top;
+//	ctx.beginPath();
+	ctx.moveTo(this.startX,this.startY);
+};
+
+BitmapEditor.prototype.strokeMove = function(x,y) {
+	var canvas = this.macroNode.content[0].domNode,
+		canvasRect = canvas.getBoundingClientRect(),
+		ctx = canvas.getContext("2d");
+	ctx.lineWidth = 2;
+	ctx.lineCap = "round";
+	ctx.lineJoin = "round";
+	this.startX = x - canvasRect.left;
+	this.startY = y - canvasRect.top;
+	ctx.lineTo(this.startX,this.startY);
+	ctx.stroke();
+};
+
+BitmapEditor.prototype.strokeEnd = function() {
+
 };
 
 BitmapEditor.prototype.saveChanges = function() {

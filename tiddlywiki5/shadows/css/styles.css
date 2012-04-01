@@ -17,6 +17,13 @@ body {
 	border: 1px dotted #888;
 }
 
+canvas.tw-edit-field  {
+	cursor: crosshair;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
 img {
 	max-width: 100%;
 }
