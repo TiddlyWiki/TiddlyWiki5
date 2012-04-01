@@ -108,7 +108,7 @@ BitmapEditor.prototype.strokeMove = function(x,y) {
 		canvasRect = canvas.getBoundingClientRect(),
 		ctx = canvas.getContext("2d");
 	// Add the new position to the end of the stroke
-	this.stroke.push({x: x - canvasRect.left, y: y - canvasRect.top})
+	this.stroke.push({x: x - canvasRect.left, y: y - canvasRect.top});
 	// Redraw the previous image
 	ctx.drawImage(this.currCanvas,0,0);
 	// Render the stroke
