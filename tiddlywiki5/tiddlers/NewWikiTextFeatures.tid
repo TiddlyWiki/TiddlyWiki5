@@ -8,7 +8,7 @@ It is proposed to extend the existing TiddlyWiki WikiText syntax with the follow
 # Addition of WikiCreole-style forced line break, e.g. {{{force\\linebreak}}}
 # Addition of WikiCreole-style headings, e.g. {{{==Heading}}}
 # Addition of WikiCreole-style headings in tables, e.g. {{{|=|=table|=header|}}}
-# Addition of white-listed HTML tags intermixed with wikitext
+# Addition of white-listed HTML and SVG tags intermixed with wikitext
 # Addition of WikiCreole-style pretty links, e.g. {{{[[description -> link]]}}}
 # Addition of multiline macros, e.g.
 {{{
