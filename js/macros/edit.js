@@ -34,6 +34,29 @@ BitmapEditor.prototype.renderInDom = function() {
 
 BitmapEditor.prototype.addEventHandlers = function() {
 	var self = this;
+	this.macroNode.domNode.addEventListener("touchstart",function(event) {
+			self.brushDown = true;
+			event.preventDefault();
+			event.stopPropagation();
+			return false;
+		},false);
+	this.macroNode.domNode.addEventListener("touchmove",function(event) {
+			if(self.brushDown) {
+				self.moveTo(event.touches[0].clientX,event.touches[0].clientY);
+			}
+			event.preventDefault();
+			event.stopPropagation();
+			return false;
+		},false);
+	this.macroNode.domNode.addEventListener("touchend",function(event) {
+			if(self.brushDown) {
+				self.brushDown = false;
+				self.saveChanges();
+			}
+			event.preventDefault();
+			event.stopPropagation();
+			return false;
+		},false);
 	this.macroNode.domNode.addEventListener("mousedown",function(event) {
 			self.brushDown = true;
 			event.stopPropagation();
@@ -71,7 +94,7 @@ BitmapEditor.prototype.saveChanges = function() {
 	var tiddler = this.macroNode.store.getTiddler(this.macroNode.tiddlerTitle);
 	if(tiddler) {
 		// data URIs look like "data:<type>;base64,<text>"
-		var dataURL = this.macroNode.content[0].domNode.toDataURL(tiddler.type),
+		var dataURL = this.macroNode.content[0].domNode.toDataURL(tiddler.type,0.95),
 			posColon = dataURL.indexOf(":"),
 			posSemiColon = dataURL.indexOf(";"),
 			posComma = dataURL.indexOf(","),
