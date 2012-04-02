@@ -106,7 +106,8 @@ BitmapEditor.prototype.strokeStart = function(x,y) {
 BitmapEditor.prototype.strokeMove = function(x,y) {
 	var canvas = this.macroNode.content[0].domNode,
 		canvasRect = canvas.getBoundingClientRect(),
-		ctx = canvas.getContext("2d");
+		ctx = canvas.getContext("2d"),
+		t;
 	// Add the new position to the end of the stroke
 	this.stroke.push({x: x - canvasRect.left, y: y - canvasRect.top});
 	// Redraw the previous image
@@ -117,9 +118,12 @@ BitmapEditor.prototype.strokeMove = function(x,y) {
 	ctx.lineJoin = "round";
 	ctx.beginPath();
 	ctx.moveTo(this.stroke[0].x,this.stroke[0].y);
-	for(var t=1; t<this.stroke.length; t++) {
-		var s = this.stroke[t];
-		ctx.lineTo(s.x,s.y);
+	for(t=1; t<this.stroke.length-1; t++) {
+		var s1 = this.stroke[t],
+			s2 = this.stroke[t-1],
+			c = (s1.x + s2.x)/2,
+			d = (s1.y + s2.y)/2;
+		ctx.quadraticCurveTo(s2.x,s2.y,c,d);
 	}
 	ctx.stroke();
 };
