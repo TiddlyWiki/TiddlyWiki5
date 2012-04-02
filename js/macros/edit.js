@@ -96,20 +96,24 @@ BitmapEditor.prototype.addEventHandlers = function() {
 		},false);
 };
 
-BitmapEditor.prototype.strokeStart = function(x,y) {
+BitmapEditor.prototype.adjustCoordinates = function(x,y) {
 	var canvas = this.macroNode.content[0].domNode,
-		canvasRect = canvas.getBoundingClientRect();
+		canvasRect = canvas.getBoundingClientRect(),
+		scale = canvas.width/canvasRect.width;
+	return {x: (x - canvasRect.left) * scale, y: (y - canvasRect.top) * scale};
+};
+
+BitmapEditor.prototype.strokeStart = function(x,y) {
 	// Start off a new stroke
-	this.stroke = [{x: x - canvasRect.left, y: y - canvasRect.top}];
+	this.stroke = [this.adjustCoordinates(x,y)];
 };
 
 BitmapEditor.prototype.strokeMove = function(x,y) {
 	var canvas = this.macroNode.content[0].domNode,
-		canvasRect = canvas.getBoundingClientRect(),
 		ctx = canvas.getContext("2d"),
 		t;
 	// Add the new position to the end of the stroke
-	this.stroke.push({x: x - canvasRect.left, y: y - canvasRect.top});
+	this.stroke.push(this.adjustCoordinates(x,y));
 	// Redraw the previous image
 	ctx.drawImage(this.currCanvas,0,0);
 	// Render the stroke
@@ -121,9 +125,9 @@ BitmapEditor.prototype.strokeMove = function(x,y) {
 	for(t=1; t<this.stroke.length-1; t++) {
 		var s1 = this.stroke[t],
 			s2 = this.stroke[t-1],
-			c = (s1.x + s2.x)/2,
-			d = (s1.y + s2.y)/2;
-		ctx.quadraticCurveTo(s2.x,s2.y,c,d);
+			tx = (s1.x + s2.x)/2,
+			ty = (s1.y + s2.y)/2;
+		ctx.quadraticCurveTo(s2.x,s2.y,tx,ty);
 	}
 	ctx.stroke();
 };

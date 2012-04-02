@@ -24,7 +24,7 @@ canvas.tw-edit-field  {
 	-ms-user-select: none;
 }
 
-img {
+img, canvas {
 	max-width: 100%;
 }
 
