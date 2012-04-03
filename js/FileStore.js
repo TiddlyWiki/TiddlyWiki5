@@ -65,18 +65,19 @@ function FileStore(dirpath,store,callback) {
 		if(err) {
 			callback(err);
 		} else {
-			for(var t=0; t<files.length; t++) {
-				var f = files[t];
-				if(["..",".",".DS_Store"].indexOf(f) === -1 && f.indexOf(".meta") !== f.length-5) {
-					self.loadQueue.push({
-						filepath: path.resolve(self.dirpath,f),
-						callback: function(task,tiddlers) {
+			var loadCallback = function(task,tiddlers) {
 							for(var t=0; t<tiddlers.length; t++) {
 								var tiddler = tiddlers[t];
 								self.sources[tiddler.title] = task.filepath;
 								self.store.addTiddler(tiddler);
 							}
-						}
+						};
+			for(var t=0; t<files.length; t++) {
+				var f = files[t];
+				if(["..",".",".DS_Store"].indexOf(f) === -1 && f.indexOf(".meta") !== f.length-5) {
+					self.loadQueue.push({
+						filepath: path.resolve(self.dirpath,f),
+						callback: loadCallback
 					});
 				}
 			}
