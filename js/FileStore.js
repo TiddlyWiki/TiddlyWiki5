@@ -18,6 +18,7 @@ function FileStore(dirpath,store,callback) {
 	this.dirpath = dirpath;
 	this.store = store;
 	this.callback = callback;
+	this.sources = {}; // A hashmap of <tiddlername>: <srcpath>
 	var self = this;
 	// Set up a queue for loading tiddler files
 	this.loadQueue = async.queue(function(task,callback) {
@@ -27,8 +28,7 @@ function FileStore(dirpath,store,callback) {
 			} else {
 				// Use the filepath as the default title and src for the tiddler
 				var fields = {
-					title: data.path,
-					src: data.path
+					title: data.path
 				};
 				var tiddlers = self.store.deserializeTiddlers(data.extname,data.text,fields);
 				// Check for the .meta file
@@ -45,12 +45,12 @@ function FileStore(dirpath,store,callback) {
 									fields = self.store.deserializeTiddlers("application/x-tiddler",text,fields)[0];
 								}
 							}
-							self.store.addTiddler(fields);
+							task.callback(task,[fields]);
 							callback(null);
 						}
 					});
 				} else {
-					self.store.addTiddlers(tiddlers);
+					task.callback(task,tiddlers);
 					callback(null);
 				}
 			}
@@ -69,7 +69,14 @@ function FileStore(dirpath,store,callback) {
 				var f = files[t];
 				if(["..",".",".DS_Store"].indexOf(f) === -1 && f.indexOf(".meta") !== f.length-5) {
 					self.loadQueue.push({
-						filepath: path.resolve(self.dirpath,f)
+						filepath: path.resolve(self.dirpath,f),
+						callback: function(task,tiddlers) {
+							for(var t=0; t<tiddlers.length; t++) {
+								var tiddler = tiddlers[t];
+								self.sources[tiddler.title] = task.filepath;
+								self.store.addTiddler(tiddler);
+							}
+						}
 					});
 				}
 			}
