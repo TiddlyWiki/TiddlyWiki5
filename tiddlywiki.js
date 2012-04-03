@@ -9,6 +9,7 @@ TiddlyWiki command line interface
 
 var App = require("./js/App.js").App,
 	WikiStore = require("./js/WikiStore.js").WikiStore,
+	FileStore = require("./js/FileStore.js").FileStore,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	Recipe = require("./js/Recipe.js").Recipe,
 	tiddlerInput = require("./js/TiddlerInput.js"),
@@ -47,6 +48,7 @@ var parseOptions = function(args,defaultSwitch) {
 
 var switches = parseOptions(Array.prototype.slice.call(process.argv,2),"dummy"),
 	recipe = null,
+	fileStore = null,
 	lastRecipeFilepath = null,
 	currSwitch = 0;
 
@@ -103,6 +105,14 @@ var commandLineSwitches = {
 					}
 					callback(null);	
 				}
+			});
+		}
+	},
+	store: {
+		args: {min: 1, max: 1},
+		handler: function(args,callback) {
+			fileStore = new FileStore(args[0],app.store,function() {
+				callback(null);
 			});
 		}
 	},

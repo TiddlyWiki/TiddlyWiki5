@@ -2,7 +2,7 @@ title: Testing
 
 !Test Scripts
 
-Three test scripts are provided, each as a Mac OS X `*.sh` bash script and a Windows `*.bat` batch file.
+Three test scripts are provided, each as a Mac OS X `*.sh` bash script and a Windows `*.bat` batch file. In each case they should be run with the current directory set to the directory in which they reside.
 
 * `test.sh`/`test.bat` cooks the main tiddlywiki.com recipe for TiddlyWiki 2.6.5 and compares it with the results of the old build process (ie, running cook.rb and then opening the file in a browser and performing a 'save changes' operation). It also runs a series of wikifications tests that work off the data in `test/wikitests/`.
 * `tw5.sh`/`tw5.bat` builds TiddlyWiki5 as a static HTML file

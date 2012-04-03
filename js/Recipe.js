@@ -164,7 +164,7 @@ Recipe.prototype.chooseTiddlers = function(recipe) {
 			this.chooseTiddlers(recipeLine);
 		} else {
 			// Choose the store and marker array to be used for this marker
-			var store = recipeLine.marker === "shadow" ? this.store.shadows : this.store,
+			var store = recipeLine.marker === "tiddler" ? this.store : this.store.shadows,
 				markerArray = this.markers[recipeLine.marker];
 			// Create the marker array if necessary
 			if(markerArray === undefined) {
@@ -322,12 +322,19 @@ Recipe.prototype.cook = function() {
 
 // Output all the tiddlers in the recipe with a particular marker
 Recipe.prototype.outputTiddlersForMarker = function(out,marker) {
-	var tiddlers = this.markers[marker],
+	var tiddlers = [],
 		outputType = Recipe.tiddlerOutputMapper[marker] || "raw",
 		outputter = Recipe.tiddlerOutputter[outputType];
-	if(!tiddlers) {
-		tiddlers = [];
+	if(this.markers[marker]) {
+		tiddlers = this.markers[marker];
 	}
+	if(marker === "tiddler") {
+		this.store.forEachTiddler(function(title,tiddler) {
+			if(tiddlers.indexOf(title) === -1) {
+				tiddlers.push(title);
+			}
+		});
+	} 
 	if(outputter) {
 		if((out.length > 1) && (Recipe.compatibilityCheats[marker] === "suppressLeadingNewline")) {
 			var lastLine = out[out.length-1];
