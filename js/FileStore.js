@@ -67,7 +67,7 @@ function FileStore(dirpath,store,callback) {
 		} else {
 			for(var t=0; t<files.length; t++) {
 				var f = files[t];
-				if(f !== ".." && f !== "." && f.indexOf(".meta") !== f.length-5) {
+				if(["..",".",".DS_Store"].indexOf(f) === -1 && f.indexOf(".meta") !== f.length-5) {
 					self.loadQueue.push({
 						filepath: path.resolve(self.dirpath,f)
 					});
