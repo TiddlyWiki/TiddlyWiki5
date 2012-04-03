@@ -1,6 +1,25 @@
 /*\
 title: js/macros/link.js
 
+Implements the link macro.
+
+A special callback function is used to massage links according to the needs of the host platform.
+
+The linkMassager is stored in the `linkMassager` property of the store object. It is a function
+that takes a `linkInfo` structure as the only parameter. It contains a hashmap of information
+as follows:
+
+	{
+		target: the target of the link
+		space: an optional space associated with the link
+		isExternal: true if the link has been determined to be an external link by the default heuristics
+		isMissing: true if a non-external link references a missing tiddler
+		classes: an array of strings representing the CSS classes to be applied to the link. The default classes are already applied
+		href: the href to be used in the link
+	}
+
+The linkMassager can modify the `classes` and `href` fields as required.
+
 \*/
 (function(){
 
@@ -17,7 +36,8 @@ var isLinkExternal = function(target) {
 exports.macro = {
 	name: "link",
 	params: {
-		target: {byName: "default", type: "tiddler", skinny: true}
+		target: {byName: "default", type: "tiddler", skinny: true},
+		space: {byName: true, type: "text"}
 	},
 	events: {
 		click: function(event) {
@@ -35,23 +55,38 @@ exports.macro = {
 		}
 	},
 	execute: function() {
-		var classes = ["tw-tiddlylink"],
-			target = this.params.target;
-		if(isLinkExternal(target)) {
-			classes.push("tw-tiddlylink-external");
-		} else {
-			classes.push("tw-tiddlylink-internal");
-			if(this.store.tiddlerExists(target)) {
-				classes.push("tw-tiddlylink-resolves");
-			} else {
-				classes.push("tw-tiddlylink-missing");
-			}
-			target = encodeURIComponent(target);
+		// Assemble the information about the link
+		var linkInfo = {
+			target: this.params.target,
+			space: this.params.space
+		};
+		// Generate the default link characteristics
+		linkInfo.isExternal = isLinkExternal(linkInfo.target);
+		if(!linkInfo.isExternal) {
+			linkInfo.isMissing = !this.store.tiddlerExists(linkInfo.target);
 		}
+		linkInfo.href = encodeURIComponent(linkInfo.target);
+		// Generate the default classes for the link
+		linkInfo.classes = ["tw-tiddlylink"];
+		if(linkInfo.isExternal) {
+			linkInfo.classes.push("tw-tiddlylink-external");
+		} else {
+			linkInfo.classes.push("tw-tiddlylink-internal");
+			if(linkInfo.isMissing) {
+				linkInfo.classes.push("tw-tiddlylink-missing");
+			} else {
+				linkInfo.classes.push("tw-tiddlylink-resolves");
+			}
+		}
+		// Invoke the link massager if defined
+		if(this.store.linkMassager) {
+			this.store.linkMassager(linkInfo);
+		}
+		// Figure out the classes to assign to the link
 		var content = [Renderer.ElementNode(
 							"a",{
-								href: target,
-								"class": classes
+								href: linkInfo.target,
+								"class": linkInfo.classes
 							},this.cloneChildren())];
 		for(var t=0; t<content.length; t++) {
 			content[t].execute(this.parents,this.tiddlerTitle);

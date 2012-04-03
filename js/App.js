@@ -96,6 +96,12 @@ var App = function() {
 	this.store.installMacro(require("./macros/video.js").macro);
 	this.store.installMacro(require("./macros/view.js").macro);
 	this.store.installMacro(require("./macros/zoomer.js").macro);
+	// Install the default link massager
+	this.store.linkMassager = function(linkInfo) {
+		if(!linkInfo.isExternal) {
+			linkInfo.target = encodeURIComponent(linkInfo.target);
+		}
+	};
 	// Set up navigation if we're in the browser
 	if(this.isBrowser) {
 		// Open the PageTemplate
