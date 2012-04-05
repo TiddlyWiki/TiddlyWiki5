@@ -51,7 +51,8 @@ var Tiddler = function(/* tiddler,fields */) {
 	}
 	// Expose the tags as a getter
 	Object.defineProperty(this,"tags",{get: function() {return tags ? tags.slice(0) : [];}});
-	// Other methods that need access to the fields
+
+	// Get a copy of the fields hashmap
 	this.getFields = function() {
 		var r = {};
 		for(var f in fields) {
@@ -61,6 +62,53 @@ var Tiddler = function(/* tiddler,fields */) {
 			r.tags = tags.slice(0);
 		}
 		return r;
+	};
+	// Return a field as a string
+	this.getFieldString = function(field) {
+		var result, t;
+		if(field === "tags") {
+			if(tags) {
+				result = [];
+				for(t=0; t<tags.length; t++) {
+					if(tags[t].indexOf(" ") !== -1) {
+						result.push("[[" + tags[t] + "]]");
+					} else {
+						result.push(tags[t]);
+					}
+				}
+				return result.join(" ");
+			} else {
+				return null;
+			}
+		} else {
+			if(fields.hasOwnProperty(field)) {
+				if(field === "created" || field === "modified") {
+					return utils.convertToYYYYMMDDHHMM(fields[field]);
+				} else {
+					return fields[field];
+				}
+			} else {
+				return null;
+			}
+		}
+	};
+	// Get all the tiddler fields as an array of {name:string,value:string} objects
+	this.getFieldStrings = function() {
+		var result = [],
+			fieldOrder = "title creator modifier created modified tags type".split(" "),
+			t,v;
+		for(t=0; t<fieldOrder.length; t++) {
+			v = this.getFieldString(fieldOrder[t]);
+			if(v !== null) {
+				result.push({name: fieldOrder[t], value: v});
+			}
+		}
+		for(t in fields) {
+			if(fieldOrder.indexOf(t) === -1 && t !== "text") {
+				result.push({name: t, value: fields[t]});
+			}
+		}
+		return result;
 	};
 };
 
