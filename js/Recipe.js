@@ -380,7 +380,7 @@ Recipe.tiddlerOutputter = {
 		// Ordinary tiddlers are output as a <DIV>
 		for(var t=0; t<tiddlers.length; t++) {
 			var tid = this.store.getTiddler(tiddlers[t]);
-			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid),"\n");
+			out.push(this.store.serializeTiddlers([tid],"application/x-tiddler-html-div")[0].data,"\n");
 		}
 	},
 	javascript: function(out,tiddlers) {
@@ -404,7 +404,7 @@ Recipe.tiddlerOutputter = {
 		for(var t=0; t<tiddlers.length; t++) {
 			var title = tiddlers[t],
 				tid = this.store.shadows.getTiddler(title);
-			out.push(this.store.serializeTiddler("application/x-tiddler-html-div",tid),"\n");
+			out.push(this.store.serializeTiddlers([tid],"application/x-tiddler-html-div")[0].data,"\n");
 		}
 	},
 	title: function(out,tiddlers) {

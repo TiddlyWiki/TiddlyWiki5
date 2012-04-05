@@ -1,5 +1,5 @@
 /*\
-title: js/FileStore.js
+title: js/LocalFileSync.js
 
 \*/
 (function(){
@@ -8,17 +8,18 @@ title: js/FileStore.js
 "use strict";
 
 var retrieveFile = require("./FileRetriever.js").retrieveFile,
+	utils = require("./Utils.js"),
 	fs = require("fs"),
 	path = require("path"),
 	url = require("url"),
 	util = require("util"),
 	async = require("async");
 
-function FileStore(dirpath,store,callback) {
+function LocalFileSync(dirpath,store,callback) {
 	this.dirpath = dirpath;
 	this.store = store;
 	this.callback = callback;
-	this.sources = {}; // A hashmap of <tiddlername>: <srcpath>
+	this.changeCounts = {}; // A hashmap of <tiddlername>: <changeCount>
 	var self = this;
 	// Set up a queue for loading tiddler files
 	this.loadQueue = async.queue(function(task,callback) {
@@ -68,8 +69,8 @@ function FileStore(dirpath,store,callback) {
 			var loadCallback = function(task,tiddlers) {
 							for(var t=0; t<tiddlers.length; t++) {
 								var tiddler = tiddlers[t];
-								self.sources[tiddler.title] = task.filepath;
 								self.store.addTiddler(tiddler);
+								self.changeCounts[tiddler.title] = self.store.getChangeCount(tiddler.title);
 							}
 						};
 			for(var t=0; t<files.length; t++) {
@@ -83,8 +84,42 @@ function FileStore(dirpath,store,callback) {
 			}
 		}
 	});
+	// Set up a queue for saving tiddler files
+	this.saveQueue = async.queue(function(task,callback) {
+		var data = task.data,
+			encoding = "utf8";
+		if(task.binary) {
+			data = new Buffer(task.data,"base64").toString("binary"),
+			encoding = "binary";
+		}
+		fs.writeFile(self.dirpath + "/" + task.name,data,encoding,function(err) {
+			callback(err);
+		});
+	},10);
+	// Install our event listener to listen out for tiddler changes
+	this.store.addEventListener("",function(changes) {
+		for(var title in changes) {
+			// Get the information about the tiddler
+			var tiddler = self.store.getTiddler(title),
+				changeCount = self.store.getChangeCount(title),
+				lastChangeCount = self.changeCounts[title],
+				files = [];
+			// Construct a changecount record if we don't have one
+			if(!lastChangeCount) {
+				lastChangeCount = 0;
+				self.changeCounts[title] = lastChangeCount; 
+			}
+			// Save the tiddler if the changecount has increased
+			if(changeCount > lastChangeCount) {
+				files = self.store.serializeTiddlers([tiddler],"application/x-tiddler");
+				for(var t=0; t<files.length; t++) {
+					self.saveQueue.push(files[t]);
+				}
+			}
+		}
+	});
 }
 
-exports.FileStore = FileStore;
+exports.LocalFileSync = LocalFileSync;
 
 })();

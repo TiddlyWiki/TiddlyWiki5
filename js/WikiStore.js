@@ -28,6 +28,7 @@ var WikiStore = function WikiStore(options) {
 	this.parsers = {}; // Hashmap of parsers by accepted MIME type
 	this.macros = {}; // Hashmap of macros by macro name
 	this.caches = {}; // Hashmap of cache objects by tiddler title, each is a hashmap of named caches
+	this.changeCount = {}; // Hashmap of integer changecount (>1) for each tiddler; persistent across deletions
 	this.tiddlerSerializers = {}; // Hashmap of serializers by target MIME type
 	this.tiddlerDeserializers = {}; // Hashmap of deserializers by accepted MIME type
 	this.eventListeners = []; // Array of {filter:,listener:}
@@ -36,6 +37,22 @@ var WikiStore = function WikiStore(options) {
 	this.shadows = options.shadowStore !== undefined ? options.shadowStore : new WikiStore({
 		shadowStore: null
 	});
+};
+
+WikiStore.prototype.incChangeCount = function(title) {
+	if(this.changeCount.hasOwnProperty(title)) {
+		this.changeCount[title]++;
+	} else {
+		this.changeCount[title] = 1;
+	}
+};
+
+WikiStore.prototype.getChangeCount = function(title) {
+	if(this.changeCount.hasOwnProperty(title)) {
+		return this.changeCount[title];
+	} else {
+		return 0;
+	}
 };
 
 WikiStore.prototype.registerParser = function(type,parser) {
@@ -96,6 +113,10 @@ WikiStore.prototype.touchTiddler = function(type,title) {
 	this.triggerEvents();
 };
 
+WikiStore.prototype.clearEvents = function() {
+	this.changedTiddlers = {};
+};
+
 /*
 Trigger the execution of the event dispatcher at the next tick, if it is not already triggered
 */
@@ -133,6 +154,7 @@ WikiStore.prototype.getTiddlerText = function(title,defaultText) {
 };
 
 WikiStore.prototype.deleteTiddler = function(title) {
+	this.incChangeCount(title);
 	delete this.tiddlers[title];
 	this.clearCache(title);
 	this.touchTiddler("deleted",title);
@@ -153,6 +175,7 @@ WikiStore.prototype.addTiddler = function(tiddler) {
 	if(!(tiddler instanceof Tiddler)) {
 		tiddler = new Tiddler(tiddler);
 	}
+	this.incChangeCount(tiddler.title);
 	var status = tiddler.title in this.tiddlers ? "modified" : "created";
 	this.clearCache(tiddler.title);
 	this.tiddlers[tiddler.title] = tiddler;
@@ -213,10 +236,11 @@ WikiStore.prototype.getShadowTitles = function() {
 	return this.shadows ? this.shadows.getTitles() : [];
 };
 
-WikiStore.prototype.serializeTiddler = function(type,tiddler) {
+WikiStore.prototype.serializeTiddlers = function(tiddlers,type) {
+	type = type || "application/x-tiddler";
 	var serializer = this.tiddlerSerializers[type];
 	if(serializer) {
-		return serializer(tiddler);
+		return serializer(tiddlers);
 	} else {
 		return null;
 	}

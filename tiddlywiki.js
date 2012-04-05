@@ -9,7 +9,7 @@ TiddlyWiki command line interface
 
 var App = require("./js/App.js").App,
 	WikiStore = require("./js/WikiStore.js").WikiStore,
-	FileStore = require("./js/FileStore.js").FileStore,
+	LocalFileSync = require("./js/LocalFileSync.js").LocalFileSync,
 	Tiddler = require("./js/Tiddler.js").Tiddler,
 	Recipe = require("./js/Recipe.js").Recipe,
 	tiddlerInput = require("./js/TiddlerInput.js"),
@@ -47,8 +47,9 @@ var parseOptions = function(args,defaultSwitch) {
 };
 
 var switches = parseOptions(Array.prototype.slice.call(process.argv,2),"dummy"),
+	verbose = false,
 	recipe = null,
-	fileStore = null,
+	localFileSync = null,
 	lastRecipeFilepath = null,
 	currSwitch = 0;
 
@@ -111,7 +112,7 @@ var commandLineSwitches = {
 	store: {
 		args: {min: 1, max: 1},
 		handler: function(args,callback) {
-			fileStore = new FileStore(args[0],app.store,function() {
+			localFileSync = new LocalFileSync(args[0],app.store,function() {
 				callback(null);
 			});
 		}
@@ -149,7 +150,7 @@ var commandLineSwitches = {
 				recipe = [];
 			app.store.forEachTiddler(function(title,tiddler) {
 				var filename = encodeURIComponent(tiddler.title.replace(/ /g,"_")) + ".tid";
-				fs.writeFileSync(path.resolve(outdir,filename),app.store.serializeTiddler("application/x-tiddler",tiddler),"utf8");
+				fs.writeFileSync(path.resolve(outdir,filename),app.store.serializeTiddlers([tiddler],"application/x-tiddler")[0].data,"utf8");
 				recipe.push("tiddler: " + filename + "\n");
 			});
 			fs.writeFileSync(path.join(args[0],"split.recipe"),recipe.join(""));
@@ -174,11 +175,33 @@ var commandLineSwitches = {
 				callback("--servewiki must be preceded by a --recipe");
 			}
 			var port = args.length > 0 ? args[0] : 8000;
-			// Dumbly, this implementation wastes the recipe processing that happened on the --recipe switch
 			http.createServer(function(request, response) {
-				response.writeHead(200, {"Content-Type": "text/html"});
-				response.end(recipe.cook(), "utf8");	
+				var path = url.parse(request.url).pathname;
+				switch(request.method) {
+					case "PUT":
+						var data = "";
+						request.on("data",function(chunk) {
+							data += chunk.toString();
+						});
+						request.on("end",function() {
+							var title = decodeURIComponent(path.substr(1));
+							app.store.addTiddler(new Tiddler(JSON.parse(data),{title: title}));
+							response.writeHead(204, "OK");
+							response.end();
+						});
+						break;
+					case "GET":
+						if(path === "/") {
+							response.writeHead(200, {"Content-Type": "text/html"});
+							response.end(recipe.cook(), "utf8");	
+						} else {
+							response.writeHead(404);
+							response.end();
+						}
+						break;
+					}
 			}).listen(port);
+			process.nextTick(function() {callback(null);});
 		}
 	},
 	servetiddlers: {
@@ -196,11 +219,13 @@ var commandLineSwitches = {
 					response.end();
 				}
 			}).listen(port);
+			process.nextTick(function() {callback(null);});
 		}
 	},
 	verbose: {
 		args: {min: 0, max: 0},
 		handler: function(args,callback) {
+			verbose = true;
 			process.nextTick(function() {callback(null);});
 		}
 	},
@@ -245,6 +270,7 @@ var commandLineSwitches = {
 					}
 				}
 			}
+			process.nextTick(function() {callback(null);});
 		}
 	}
 };
@@ -258,6 +284,9 @@ var processNextSwitch = function() {
 		}
 		if(s.args.length > csw.args.max) {
 			throw "Command line switch --" + s.switchName + " should have a maximum of " + csw.args.max + " arguments";
+		}
+		if(verbose) {
+			console.log("Processing --" + s.switchName + " " + s.args.join(" "));
 		}
 		csw.handler(s.args,function (err) {
 			if(err) {

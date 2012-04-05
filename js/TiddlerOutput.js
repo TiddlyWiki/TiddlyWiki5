@@ -1,7 +1,24 @@
 /*\
 title: js/TiddlerOutput.js
 
-Functions concerned with parsing representations of tiddlers
+Serializers that output tiddlers in a variety of formats.
+
+store.serializeTiddlers(tiddlers,type)
+
+	tiddlers: An array of tiddler objects
+	type: The target output type as a file extension like `.tid` or a MIME type like `application/x-tiddler`. If `null` or `undefined` then the best type is chosen automatically
+
+The serializer returns an array of information defining one or more files containing the tiddlers:
+
+	[
+		{name: "title.tid", type: "application/x-tiddler", ext: ".tid", data: "xxxxx"},
+		{name: "title.jpg", type: "image/jpeg", ext: ".jpg", binary: true, data: "xxxxx"},
+		{name: "title.jpg.meta", type: "application/x-tiddler-metadata", ext: ".meta", data: "xxxxx"}
+	]
+
+Notes:
+* The `type` field is the type of the file, which is not necessrily the same as the type of the tiddler.
+* The `binary` field may be omitted if it is not `true`
 
 \*/
 (function(){
@@ -14,96 +31,105 @@ var utils = require("./Utils.js"),
 
 var tiddlerOutput = exports;
 
-// Utility function to convert a tags string array into a TiddlyWiki-style quoted tags string
-var stringifyTags = function(tags) {
-	var results = [];
-	for(var t=0; t<tags.length; t++) {
-		if(tags[t].indexOf(" ") !== -1) {
-			results.push("[[" + tags[t] + "]]");
-		} else {
-			results.push(tags[t]);
-		}
+var outputMetaDataBlock = function(tiddler) {
+	var result = [],
+		fields = tiddler.getFieldStrings(),
+		t;
+	for(t=0; t<fields.length; t++) {
+		result.push(fields[t].name + ": " + fields[t].value);
 	}
-	return results.join(" ");
+	return result.join("\n");
 };
 
 /*
-Output a tiddler as a .tid file
+Output tiddlers as separate files in their native formats (ie. `.tid` or `.jpg`/`.jpg.meta`)
 */
-var outputTiddler = function(tid) {
-	var result = [],
-		outputAttribute = function(name,value) {
-		result.push(name + ": " + value + "\n");
-	},
-		fields = tid.getFields();
-	for(var t in fields) {
-		switch(t) {
-			case "text":
-				// Ignore the text field
+var outputTiddlers = function(tiddlers) {
+	var result = [];
+	for(var t=0; t<tiddlers.length; t++) {
+		var tiddler = tiddlers[t],
+			extension,
+			binary = false;
+		switch(tiddler.type) {
+			case "image/jpeg":
+				extension = ".jpg";
+				binary = true;
 				break;
-			case "tags":
-				// Output tags as a list
-				outputAttribute(t,stringifyTags(fields.tags));
+			case "image/gif":
+				extension = ".gif";
+				binary = true;
 				break;
-			case "modified":
-			case "created":
-				// Output dates in YYYYMMDDHHMM
-				outputAttribute(t,utils.convertToYYYYMMDDHHMM(fields[t]));
+			case "image/png":
+				extension = ".png";
+				binary = true;
+				break;
+			case "image/svg+xml":
+				extension = ".svg";
 				break;
 			default:
-				// Output other attributes raw
-				outputAttribute(t,fields[t]);
+				extension = ".tid";
 				break;
 		}
+		if(extension === ".tid") {
+			result.push({
+				name: tiddler.title + ".tid",
+				type: "application/x-tiddler",
+				extension: ".tid",
+				data: outputMetaDataBlock(tiddler) + "\n\n" + tiddler.text,
+				binary: false
+			});
+		} else {
+			result.push({
+				name: tiddler.title,
+				type: tiddler.type,
+				extension: extension,
+				data: tiddler.text,
+				binary: binary
+			});
+			result.push({
+				name: tiddler.title + ".meta",
+				type: "application/x-tiddler-metadata",
+				extension: ".meta",
+				data: outputMetaDataBlock(tiddler),
+				binary: false
+			});
+		}
 	}
-	result.push("\n");
-	result.push(fields.text);
-	return result.join("");
+	return result;
 };
 
 /*
-Output a tiddler as an HTML <DIV>
+Output an array of tiddlers as HTML <DIV>s
 out - array to push the output strings
 tid - the tiddler to be output
 The fields are in the order title, creator, modifier, created, modified, tags, followed by any others
 */
-var outputTiddlerDiv = function(tid) {
-	var result = [],
-		fields = tid.getFields(),
-		text = fields.text,
-		outputAttribute = function(name,transform) {
-			if(name in fields) {
-				var value = fields[name];
-				if(transform)
-					value = transform(value);
-				result.push(" " + name + "=\"" + value + "\"");
-				delete fields[name];
-			}
-		};
-	if(fields.text) {
-		delete fields.text;
+var outputTiddlerDivs = function(tiddlers) {
+	var result = [];
+	for(var t=0; t<tiddlers.length; t++) {
+		var tiddler = tiddlers[t],
+			output = [],
+			fieldStrings = tiddler.getFieldStrings();
+		output.push("<div");
+		for(var f=0; f<fieldStrings.length; f++) {
+			output.push(" " + fieldStrings[f].name + "=\"" + fieldStrings[f].value + "\"");
+		}
+		output.push(">\n<pre>");
+		output.push(utils.htmlEncode(tiddler.text));
+		output.push("</pre>\n</div>");
+		result.push({
+			name: tiddler.title,
+			type: "application/x-tiddler-html-div",
+			extension: ".tiddler",
+			data: output.join("")
+		});
 	}
-	result.push("<div");
-	// Output the standard attributes in the correct order
-	outputAttribute("title");
-	outputAttribute("creator");
-	outputAttribute("modifier");
-	outputAttribute("created", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
-	outputAttribute("modified", function(v) {return utils.convertToYYYYMMDDHHMM(v);});
-	outputAttribute("tags", function(v) {return stringifyTags(v);});
-	// Output any other attributes
-	for(var t in fields) {
-		outputAttribute(t,null,true);
-	}
-	result.push(">\n<pre>");
-	result.push(utils.htmlEncode(text));
-	result.push("</pre>\n</div>");
-	return result.join("");
+	return result;
 };
 
 tiddlerOutput.register = function(store) {
-	store.registerTiddlerSerializer(".tid","application/x-tiddler",outputTiddler);
-	store.registerTiddlerSerializer(".tiddler","application/x-tiddler-html-div",outputTiddlerDiv);
+	store.registerTiddlerSerializer(".tid","application/x-tiddler",outputTiddlers);
+	store.registerTiddlerSerializer(".tiddler","application/x-tiddler-html-div",outputTiddlerDivs);
 };
 
 })();

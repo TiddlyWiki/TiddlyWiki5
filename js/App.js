@@ -10,6 +10,7 @@ This is the main() function in the browser
 "use strict";
 
 var WikiStore = require("./WikiStore.js").WikiStore,
+	HttpSync = require("./HttpSync.js").HttpSync,
 	Tiddler = require("./Tiddler.js").Tiddler,
 	tiddlerInput = require("./TiddlerInput.js"),
 	tiddlerOutput = require("./TiddlerOutput.js"),
@@ -81,6 +82,8 @@ var App = function() {
 		var shadowArea = document.getElementById("shadowArea");
 		this.store.shadows.addTiddlers(this.store.deserializeTiddlers("(DOM)",shadowArea));
 	}
+	// Reset pending events on the store so that we don't get events for the initial load
+	this.store.clearEvents();
 	// Bit of a hack to set up the macros
 	this.store.installMacro(require("./macros/chooser.js").macro);
 	this.store.installMacro(require("./macros/command.js").macro);
@@ -102,8 +105,10 @@ var App = function() {
 			linkInfo.target = encodeURIComponent(linkInfo.target);
 		}
 	};
-	// Set up navigation if we're in the browser
+	// Set up for the browser
 	if(this.isBrowser) {
+		// Set up HttpSync
+		this.httpSync = new HttpSync(this.store);
 		// Open the PageTemplate
 		var renderer = this.store.renderMacro("tiddler",{target: "PageTemplate"});
 		renderer.renderInDom(document.body);
@@ -118,18 +123,19 @@ var App = function() {
 			titleRenderer.refresh(changes);
 			document.title = titleRenderer.render("text/plain");
 		});
-		// Set up a timer to change the value of a tiddler
-		var me = this;
-		window.setInterval(function() {
-			me.store.addTiddler(new Tiddler({
-				title: "ClockTiddler",
-				text: "The time was recently " + (new Date()).toString()
-			}));
-		},3000);
 		// Listen for navigate events that weren't caught
 		document.addEventListener("tw-navigate",function (event) {
 			renderer.broadcastEvent(event);
 		},false);
+		// Set up a timer to change the value of a tiddler
+		var me = this,
+			s = setInterval || window.setInterval;
+			s(function() {
+				me.store.addTiddler(new Tiddler({
+					title: "ClockTiddler",
+					text: "The time was recently " + (new Date()).toString()
+				}));
+			},3000);
 	}
 };
 

@@ -45,7 +45,7 @@ exports.macro = {
 			for(var t=0; t<story.tiddlers.length; t++) {
 				var storyRecord = story.tiddlers[t];
 				if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
-					storyRecord.title = "Draft of " + event.tiddlerTitle + " at " + (new Date());
+					storyRecord.title = "Draft " + (new Date()) + " of " + event.tiddlerTitle;
 					storyRecord.template = template;
 					var tiddler = this.store.getTiddler(event.tiddlerTitle);
 					this.store.addTiddler(new Tiddler(
