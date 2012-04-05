@@ -15,19 +15,26 @@ var retrieveFile = require("./FileRetriever.js").retrieveFile,
 	util = require("util"),
 	async = require("async");
 
+
+
 function LocalFileSync(dirpath,store,callback) {
 	this.dirpath = dirpath;
 	this.store = store;
 	this.callback = callback;
-	this.changeCounts = {}; // A hashmap of <tiddlername>: <changeCount>
-	var self = this;
-	// Set up a queue for loading tiddler files
+	this.tiddlers = {}; // A hashmap of <tiddlername>: {changeCount: <changeCount>, files: [name]}
+	var self = this,
+		sanitizeFilepath = function(filepath) {
+			return filepath.replace(/\//mg,"-");
+		};
+	// Set up a queue for loading tiddler files, tasks are {filepath:,callback:}
 	this.loadQueue = async.queue(function(task,callback) {
+		task.files = [];
 		retrieveFile(task.filepath,self.dirpath,function(err,data) {
 			if(err) {
 				callback(err);
 			} else {
-				// Use the filepath as the default title and src for the tiddler
+				task.files.push(task.filepath);
+				// Use the filepath as the default title for the tiddler
 				var fields = {
 					title: data.path
 				};
@@ -39,6 +46,7 @@ function LocalFileSync(dirpath,store,callback) {
 						if(err && err.code !== "ENOENT" && err.code !== "404") {
 							callback(err);
 						} else {
+							task.files.push(metafile);
 							var fields = tiddlers[0];
 							if(!err) {
 								var text = data.text.split("\n\n")[0];
@@ -70,14 +78,17 @@ function LocalFileSync(dirpath,store,callback) {
 							for(var t=0; t<tiddlers.length; t++) {
 								var tiddler = tiddlers[t];
 								self.store.addTiddler(tiddler);
-								self.changeCounts[tiddler.title] = self.store.getChangeCount(tiddler.title);
+								self.tiddlers[tiddler.title] = {
+									changeCount: self.store.getChangeCount(tiddler.title),
+									files: task.files
+								};
 							}
 						};
 			for(var t=0; t<files.length; t++) {
 				var f = files[t];
 				if(["..",".",".DS_Store"].indexOf(f) === -1 && f.indexOf(".meta") !== f.length-5) {
 					self.loadQueue.push({
-						filepath: path.resolve(self.dirpath,f),
+						filepath: f,
 						callback: loadCallback
 					});
 				}
@@ -89,7 +100,7 @@ function LocalFileSync(dirpath,store,callback) {
 		var data = task.data,
 			encoding = "utf8";
 		if(task.binary) {
-			data = new Buffer(task.data,"base64").toString("binary"),
+			data = new Buffer(task.data,"base64").toString("binary");
 			encoding = "binary";
 		}
 		fs.writeFile(self.dirpath + "/" + task.name,data,encoding,function(err) {
@@ -98,22 +109,35 @@ function LocalFileSync(dirpath,store,callback) {
 	},10);
 	// Install our event listener to listen out for tiddler changes
 	this.store.addEventListener("",function(changes) {
+		var t;
 		for(var title in changes) {
 			// Get the information about the tiddler
 			var tiddler = self.store.getTiddler(title),
 				changeCount = self.store.getChangeCount(title),
-				lastChangeCount = self.changeCounts[title],
+				tiddlerInfo = self.tiddlers[title],
 				files = [];
-			// Construct a changecount record if we don't have one
-			if(!lastChangeCount) {
-				lastChangeCount = 0;
-				self.changeCounts[title] = lastChangeCount; 
-			}
-			// Save the tiddler if the changecount has increased
-			if(changeCount > lastChangeCount) {
-				files = self.store.serializeTiddlers([tiddler],"application/x-tiddler");
-				for(var t=0; t<files.length; t++) {
-					self.saveQueue.push(files[t]);
+			if(tiddler) {
+				// Construct a changecount record if we don't have one
+				if(!tiddlerInfo) {
+					tiddlerInfo = {changeCount: 0, files: []};
+					self.tiddlers[title] = tiddlerInfo; 
+				}
+				// Save the tiddler if the changecount has increased
+				if(changeCount > tiddlerInfo.changeCount) {
+					files = self.store.serializeTiddlers([tiddler],"application/x-tiddler");
+					for(t=0; t<files.length; t++) {
+						files[t].name = sanitizeFilepath(files[t].name);
+						tiddlerInfo.files.push(files[t].name);
+						self.saveQueue.push(files[t]);
+					}
+				}
+			} else {
+				// Delete the tiddler file if the tiddler has gone
+				if(tiddlerInfo) {
+					for(t=0; t<tiddlerInfo.files.length; t++) {
+						fs.unlink(self.dirpath + "/" + tiddlerInfo.files[t]);
+					}
+					delete self.tiddlers[title]; 
 				}
 			}
 		}

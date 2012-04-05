@@ -190,6 +190,11 @@ var commandLineSwitches = {
 							response.end();
 						});
 						break;
+					case "DELETE":
+						app.store.deleteTiddler(decodeURIComponent(path.substr(1)));
+						response.writeHead(204, "OK");
+						response.end();
+						break;
 					case "GET":
 						if(path === "/") {
 							response.writeHead(200, {"Content-Type": "text/html"});
