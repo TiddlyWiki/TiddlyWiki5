@@ -14,11 +14,20 @@ as follows:
 		space: an optional space associated with the link
 		isExternal: true if the link has been determined to be an external link by the default heuristics
 		isMissing: true if a non-external link references a missing tiddler
-		classes: an array of strings representing the CSS classes to be applied to the link. The default classes are already applied
-		href: the href to be used in the link
+		attributes: a hashmap of HTML attributes to add to the `<a>` tag
+		suppressLink: see below
 	}
 
-The linkMassager can modify the `classes` and `href` fields as required.
+The link massager is called with the `attributes` hashmap initialised as follows:
+
+	{
+		classes: an array of strings representing the CSS classes to be applied to the link. The default classes are already applieda according to whether the heuristics decide the tiddler is external or missing
+		href: the href to be used in the link (defaults to the unencoded value of the `to` parameter)
+	}
+
+The linkMassager can modify the `classes` and `href` fields as required, and add additional HTML attributes, such as the `target` attribute.
+
+The linkMassager can cause the link to be suppressed by setting the `linkInfo.suppressLink` to `true`. The content of the link will still be displayed.
 
 \*/
 (function(){
@@ -65,29 +74,32 @@ exports.macro = {
 		if(!linkInfo.isExternal) {
 			linkInfo.isMissing = !this.store.tiddlerExists(linkInfo.to);
 		}
-		linkInfo.href = encodeURIComponent(linkInfo.to);
+		linkInfo.attributes = {
+			href: linkInfo.to
+		};
 		// Generate the default classes for the link
-		linkInfo.classes = ["tw-tiddlylink"];
+		linkInfo.attributes.classes = ["tw-tiddlylink"];
 		if(linkInfo.isExternal) {
-			linkInfo.classes.push("tw-tiddlylink-external");
+			linkInfo.attributes.classes.push("tw-tiddlylink-external");
 		} else {
-			linkInfo.classes.push("tw-tiddlylink-internal");
+			linkInfo.attributes.classes.push("tw-tiddlylink-internal");
 			if(linkInfo.isMissing) {
-				linkInfo.classes.push("tw-tiddlylink-missing");
+				linkInfo.attributes.classes.push("tw-tiddlylink-missing");
 			} else {
-				linkInfo.classes.push("tw-tiddlylink-resolves");
+				linkInfo.attributes.classes.push("tw-tiddlylink-resolves");
 			}
 		}
 		// Invoke the link massager if defined
 		if(this.store.linkMassager) {
 			this.store.linkMassager(linkInfo);
 		}
-		// Figure out the classes to assign to the link
-		var content = [Renderer.ElementNode(
-							"a",{
-								href: linkInfo.href,
-								"class": linkInfo.classes
-							},this.cloneChildren())];
+		// Create the link
+		var content;
+		if(linkInfo.suppressLink) {
+			content = this.cloneChildren();
+		} else { 
+			content = [Renderer.ElementNode("a",linkInfo.attributes,this.cloneChildren())];
+		}
 		for(var t=0; t<content.length; t++) {
 			content[t].execute(this.parents,this.tiddlerTitle);
 		}

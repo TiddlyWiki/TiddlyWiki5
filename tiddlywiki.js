@@ -117,6 +117,22 @@ var commandLineSwitches = {
 			});
 		}
 	},
+	links: {
+		args: {min: 1, max: 1},
+		handler: function(args,callback) {
+			var type = args[0];
+			app.store.linkMassager = function(linkInfo) {
+				switch(type) {
+					case "none":
+						if(!linkInfo.isExternal) {
+							linkInfo.suppressLink = true;
+						}
+						break;
+				}
+			};
+			process.nextTick(function() {callback(null);});
+		}
+	},
 	savewiki: {
 		args: {min: 1, max: 1},
 		handler: function(args,callback) {
@@ -284,6 +300,9 @@ var processNextSwitch = function() {
 	if(currSwitch < switches.length) {
 		var s = switches[currSwitch++],
 			csw = commandLineSwitches[s.switchName];
+		if(!csw) {
+			throw "Unknown command line switch --" + s.switchName;
+		}
 		if(s.args.length < csw.args.min) {
 			throw "Command line switch --" + s.switchName + " should have a minimum of " + csw.args.min + " arguments";
 		}
