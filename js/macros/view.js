@@ -52,7 +52,7 @@ exports.macro = {
 					return [];
 				} else {
 					var link = Renderer.MacroNode("link",
-												{target: value},
+												{to: value},
 												[Renderer.TextNode(value)],
 												this.store);
 					link.execute(parents,this.tiddlerTitle);

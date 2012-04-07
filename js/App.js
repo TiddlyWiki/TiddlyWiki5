@@ -102,7 +102,7 @@ var App = function() {
 	// Install the default link massager
 	this.store.linkMassager = function(linkInfo) {
 		if(!linkInfo.isExternal) {
-			linkInfo.target = encodeURIComponent(linkInfo.target);
+			linkInfo.to = encodeURIComponent(linkInfo.to);
 		}
 	};
 	// Set up for the browser

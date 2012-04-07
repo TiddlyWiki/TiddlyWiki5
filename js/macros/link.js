@@ -10,7 +10,7 @@ that takes a `linkInfo` structure as the only parameter. It contains a hashmap o
 as follows:
 
 	{
-		target: the target of the link
+		to: the target of the link
 		space: an optional space associated with the link
 		isExternal: true if the link has been determined to be an external link by the default heuristics
 		isMissing: true if a non-external link references a missing tiddler
@@ -28,26 +28,26 @@ The linkMassager can modify the `classes` and `href` fields as required.
 
 var Renderer = require("../Renderer.js").Renderer;
 
-var isLinkExternal = function(target) {
+var isLinkExternal = function(to) {
 	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i;
-	return externalRegExp.test(target);
+	return externalRegExp.test(to);
 };
 
 exports.macro = {
 	name: "link",
 	params: {
-		target: {byName: "default", type: "tiddler", skinny: true},
+		to: {byName: "default", type: "tiddler", skinny: true},
 		space: {byName: true, type: "text"}
 	},
 	events: {
 		click: function(event) {
-			if(isLinkExternal(this.params.target)) {
+			if(isLinkExternal(this.params.to)) {
 				event.target.setAttribute("target","_blank");
 				return true;
 			} else {
 				var navEvent = document.createEvent("Event");
 				navEvent.initEvent("tw-navigate",true,true);
-				navEvent.navigateTo = this.params.target;
+				navEvent.navigateTo = this.params.to;
 				event.target.dispatchEvent(navEvent); 
 				event.preventDefault();
 				return false;
@@ -57,15 +57,15 @@ exports.macro = {
 	execute: function() {
 		// Assemble the information about the link
 		var linkInfo = {
-			target: this.params.target,
+			to: this.params.to,
 			space: this.params.space
 		};
 		// Generate the default link characteristics
-		linkInfo.isExternal = isLinkExternal(linkInfo.target);
+		linkInfo.isExternal = isLinkExternal(linkInfo.to);
 		if(!linkInfo.isExternal) {
-			linkInfo.isMissing = !this.store.tiddlerExists(linkInfo.target);
+			linkInfo.isMissing = !this.store.tiddlerExists(linkInfo.to);
 		}
-		linkInfo.href = encodeURIComponent(linkInfo.target);
+		linkInfo.href = encodeURIComponent(linkInfo.to);
 		// Generate the default classes for the link
 		linkInfo.classes = ["tw-tiddlylink"];
 		if(linkInfo.isExternal) {
@@ -85,7 +85,7 @@ exports.macro = {
 		// Figure out the classes to assign to the link
 		var content = [Renderer.ElementNode(
 							"a",{
-								href: linkInfo.target,
+								href: linkInfo.href,
 								"class": linkInfo.classes
 							},this.cloneChildren())];
 		for(var t=0; t<content.length; t++) {

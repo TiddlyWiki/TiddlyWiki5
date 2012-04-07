@@ -467,7 +467,7 @@ var rules = [
 				// Pretty bracketted link
 				link = lookaheadMatch[3];
 			}
-			insertMacroCall(w,w.output,"link",{target: link},[Renderer.TextNode(text)]);
+			insertMacroCall(w,w.output,"link",{to: link},[Renderer.TextNode(text)]);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -492,7 +492,7 @@ var rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			insertMacroCall(w,w.output,"link",{target: w.matchText},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
+			insertMacroCall(w,w.output,"link",{to: w.matchText},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
 		} else {
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
@@ -504,7 +504,7 @@ var rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		insertMacroCall(w,w.output,"link",{target: w.matchText},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
+		insertMacroCall(w,w.output,"link",{to: w.matchText},[Renderer.TextNode(w.source.substring(w.matchStart,w.nextMatch))]);
 	}
 },
 
