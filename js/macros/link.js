@@ -21,9 +21,11 @@ as follows:
 The link massager is called with the `attributes` hashmap initialised as follows:
 
 	{
-		classes: an array of strings representing the CSS classes to be applied to the link. The default classes are already applieda according to whether the heuristics decide the tiddler is external or missing
+		class: an array of strings representing the CSS classes to be applied to the link. The default classes are already applieda according to whether the heuristics decide the tiddler is external or missing
 		href: the href to be used in the link (defaults to the unencoded value of the `to` parameter)
 	}
+
+Note that the member `class` cannot be referred to with JavaScript dot syntax: use `linkInfo.attributes["class"]` rather than `linkInfo.attributes.class`.
 
 The linkMassager can modify the `classes` and `href` fields as required, and add additional HTML attributes, such as the `target` attribute.
 
@@ -78,15 +80,15 @@ exports.macro = {
 			href: linkInfo.to
 		};
 		// Generate the default classes for the link
-		linkInfo.attributes.classes = ["tw-tiddlylink"];
+		linkInfo.attributes["class"] = ["tw-tiddlylink"];
 		if(linkInfo.isExternal) {
-			linkInfo.attributes.classes.push("tw-tiddlylink-external");
+			linkInfo.attributes["class"].push("tw-tiddlylink-external");
 		} else {
-			linkInfo.attributes.classes.push("tw-tiddlylink-internal");
+			linkInfo.attributes["class"].push("tw-tiddlylink-internal");
 			if(linkInfo.isMissing) {
-				linkInfo.attributes.classes.push("tw-tiddlylink-missing");
+				linkInfo.attributes["class"].push("tw-tiddlylink-missing");
 			} else {
-				linkInfo.attributes.classes.push("tw-tiddlylink-resolves");
+				linkInfo.attributes["class"].push("tw-tiddlylink-resolves");
 			}
 		}
 		// Invoke the link massager if defined

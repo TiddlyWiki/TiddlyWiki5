@@ -47,6 +47,8 @@ This example ginsus a TiddlyWiki into its constituent tiddlers:
 node tiddlywiki.js --load mywiki.html --savetiddlers tmp/tiddlers
 `
 !! Notes
+The HTTP serving functionality built into TiddlyWiki5 is designed to support personal use scenarios. If you want to flexibly and robustly share tiddlers on the web for multiple users, you should use TiddlyWeb or TiddlySpace.
+
 `--servewiki` and `--servetiddlers` are for different purposes and should not be used together. The former is for TiddlyWiki core developers who want to be able to edit the TiddlyWiki source files in a text editor and view the results in the browser by clicking refresh; it is slow because it reloads all the TiddlyWiki JavaScript files each time the page is loaded. The latter is for experimenting with the new wikification engine.
 
 `--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
