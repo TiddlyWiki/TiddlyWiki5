@@ -1,6 +1,8 @@
 /*\
 title: js/HttpSync.js
 
+A very simple synchroniser. It PUTs updated or created tiddlers, and DELETEs deleted tiddlers.
+
 \*/
 (function(){
 

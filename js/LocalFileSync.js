@@ -1,6 +1,8 @@
 /*\
 title: js/LocalFileSync.js
 
+Loads tiddlers from a given directory, and then keeps the files up to date as tiddlers are modified, created or deleted.
+
 \*/
 (function(){
 
@@ -14,8 +16,6 @@ var retrieveFile = require("./FileRetriever.js").retrieveFile,
 	url = require("url"),
 	util = require("util"),
 	async = require("async");
-
-
 
 function LocalFileSync(dirpath,store,callback) {
 	this.dirpath = dirpath;
