@@ -34,9 +34,14 @@ var Tiddler = function(/* tiddler,fields */) {
 			src = arg;
 		}
 		for(t in src) {
-			f = Tiddler.parseTiddlerField(t,src[t]);
-			if(f !== null) {
-				fields[t] = f;
+			if(src[t] === undefined) {
+				// If we get a field that's undefined, delete any previous field value
+				delete fields[t];
+			} else {
+				f = Tiddler.parseTiddlerField(t,src[t]);
+				if(f !== null) {
+					fields[t] = f;
+				}
 			}
 		}
 	}
