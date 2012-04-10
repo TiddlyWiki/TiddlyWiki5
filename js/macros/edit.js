@@ -170,7 +170,7 @@ TextEditor.prototype.getContent = function() {
 		field = this.macroNode.hasParameter("field") ? this.macroNode.params.field : "title",
 		value;
 	if(tiddler) {
-		value = tiddler[field];
+		value = tiddler.getFieldString(field);
 	} else {
 		switch(field) {
 			case "text":
