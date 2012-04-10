@@ -17,6 +17,10 @@ body {
 	border: 1px dotted #888;
 }
 
+textarea.tw-edit-field {
+	width: 100%;
+}
+
 canvas.tw-edit-field  {
 	cursor: crosshair;
 	-moz-user-select: none;
@@ -143,6 +147,8 @@ a.tw-tiddlylink-missing {
 }
 
 .navigation-panel div ul {
+	position: relative;
+	top: 0;
 	margin: 0 0 0 0;
 	padding: 0px 4px 0px 4px;
 	list-style: none;
