@@ -244,7 +244,7 @@ TextEditor.prototype.fixHeight = function() {
 
 TextEditor.prototype.renderInDom = function() {
 	this.fixHeight();
-}
+};
 
 TextEditor.prototype.isRefreshable = function() {
 	// Don't refresh the editor if it contains the caret or selection
@@ -285,6 +285,7 @@ exports.macro = {
 		}
 	},
 	refreshInDom: function(changes) {
+		var t;
 		// Only refresh if a dependency is triggered
 		if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 			// Only refresh if the editor lets us
@@ -300,7 +301,7 @@ exports.macro = {
 				// Execute the new content
 				this.execute(this.parents,this.tiddlerTitle);
 				// Render to the DOM
-				for(var t=0; t<this.content.length; t++) {
+				for(t=0; t<this.content.length; t++) {
 					this.content[t].renderInDom(this.domNode);
 				}
 			}
