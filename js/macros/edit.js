@@ -184,55 +184,67 @@ TextEditor.prototype.getContent = function() {
 				break;
 		}
 	}
-	var type = "div";
-	if(field === "text") {
-		type = "pre";
-	}
 	var attributes = {
-		"contenteditable": true,
-		"class": ["tw-edit-field"]
-	};
-	return [Renderer.ElementNode(type,attributes,[Renderer.TextNode(value)])];
-};
-
-TextEditor.prototype.getText = function(text,node) {
-	if(node.nodeType === window.Node.TEXT_NODE) {
-		text.push(node.data);
-	} else if(node.nodeType === window.Node.ELEMENT_NODE && node.nodeName.toLowerCase() === "br") {
-		// Firefox has `<br>` tags instead of line feeds
-		text.push("\n");
+			"class": ["tw-edit-field"]
+		},
+		tagName,
+		content = [];
+	if(field === "text") {
+		tagName = "textarea";
+		content.push(Renderer.TextNode(value));
+	} else {
+		tagName = "input";
+		attributes.type = "text";
+		attributes.value = value;
 	}
-	if(node.hasChildNodes && node.hasChildNodes()) {
-		for(var t=0; t<node.childNodes.length; t++) {
-			this.getText(text,node.childNodes[t]);
-		}
-	}
+	return [Renderer.ElementNode(tagName,attributes,content)];
 };
 
 TextEditor.prototype.addEventHandlers = function() {
-	this.macroNode.domNode.addEventListener("DOMNodeInserted",this,false);
-	this.macroNode.domNode.addEventListener("DOMNodeRemoved",this,false);
-	this.macroNode.domNode.addEventListener("DOMCharacterDataModified",this,false);
+	this.macroNode.domNode.addEventListener("focus",this,false);
+	this.macroNode.domNode.addEventListener("keyup",this,false);
 };
 
 TextEditor.prototype.handleEvent = function(event) {
-	if(["DOMNodeInserted","DOMNodeRemoved","DOMCharacterDataModified"].indexOf(event.type) !== -1) {
-		var tiddler = this.macroNode.store.getTiddler(this.macroNode.tiddlerTitle);
-		if(this.macroNode.content[0].domNode && tiddler) {
-			var text = [];
-			this.getText(text,this.macroNode.content[0].domNode);
-			text = text.join("");
-			if(text !== tiddler[this.macroNode.params.field]) {
-				var update = {};
-				update[this.macroNode.params.field] = text;
-				this.macroNode.store.addTiddler(new Tiddler(tiddler,update));
-			}
-			event.stopPropagation();
-			return false;
-		}
+	// Get the value of the field if it might have changed
+	if("keyup".split(" ").indexOf(event.type) !== -1) {
+		this.saveChanges();
 	}
+	// Whatever the event, fix the height of the textarea if required
+	var self = this;
+	window.setTimeout(function() {
+		self.fixHeight();
+	},5);
 	return true;
 };
+
+TextEditor.prototype.saveChanges = function() {
+	var text = this.macroNode.content[0].domNode.value,
+		tiddler = this.macroNode.store.getTiddler(this.macroNode.tiddlerTitle);
+	if(tiddler && text !== tiddler[this.macroNode.params.field]) {
+		var update = {};
+		update[this.macroNode.params.field] = text;
+		this.macroNode.store.addTiddler(new Tiddler(tiddler,update));
+	}
+};
+
+TextEditor.prototype.fixHeight = function() {
+	if(this.macroNode.content[0] && this.macroNode.content[0].domNode) {
+		var wrapper = this.macroNode.domNode,
+			textarea = this.macroNode.content[0].domNode;
+		// Set the text area height to 1px temporarily, which allows us to read the true scrollHeight
+		var prevWrapperHeight = wrapper.style.height;
+		wrapper.style.height = textarea.style.height + "px";
+		textarea.style.overflow = "hidden";
+		textarea.style.height = "1px";
+		textarea.style.height = textarea.scrollHeight + "px";
+		wrapper.style.height = prevWrapperHeight;
+	}
+};
+
+TextEditor.prototype.renderInDom = function() {
+	this.fixHeight();
+}
 
 TextEditor.prototype.isRefreshable = function() {
 	// Don't refresh the editor if it contains the caret or selection
@@ -291,6 +303,11 @@ exports.macro = {
 				for(var t=0; t<this.content.length; t++) {
 					this.content[t].renderInDom(this.domNode);
 				}
+			}
+		} else {
+			// Refresh any children
+			for(t=0; t<this.content.length; t++) {
+				this.content[t].refreshInDom(changes);
 			}
 		}
 	}
