@@ -78,7 +78,7 @@ exports.macro = {
 					var tiddler = this.store.getTiddler(storyRecord.title);
 					if(tiddler && tiddler.hasOwnProperty("draft.title")) {
 						// Save the draft tiddler as the real tiddler
-						this.store.addTiddler(new Tiddler(tiddler,{title: tiddler["draft.title"],"draft.title": undefined}));
+						this.store.addTiddler(new Tiddler(tiddler,{title: tiddler["draft.title"],"draft.title": undefined, "draft.of": undefined}));
 						// Remove the draft tiddler
 						this.store.deleteTiddler(storyRecord.title);
 						// Remove the original tiddler if we're renaming it
