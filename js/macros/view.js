@@ -87,7 +87,15 @@ exports.macro = {
 				}
 				break;
 			default: // "text"
-				return [Renderer.TextNode(value)];
+				// Get the stringified version of the field value
+				if(field !== "text" && tiddler) {
+					value = tiddler.getFieldString(field)
+				}
+				if(value === undefined || value === null) {
+					return [];
+				} else {
+					return [Renderer.TextNode(value)];
+				}
 		}
 		return [];
 	}
