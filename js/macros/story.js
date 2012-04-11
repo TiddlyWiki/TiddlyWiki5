@@ -12,6 +12,17 @@ var Tiddler = require("../Tiddler.js").Tiddler,
     Dependencies = require("../Dependencies.js").Dependencies,
 	utils = require("../Utils.js");
 
+function scrollToTop(duration) {
+    if (duration < 0) {
+    	return;
+    }
+    var delta = (-document.body.scrollTop/duration) * 10;
+    window.setTimeout(function() {
+        document.body.scrollTop = document.body.scrollTop + delta;
+        scrollToTop(duration-10);
+    }, 10);
+}
+
 exports.macro = {
 	name: "story",
 	params: {
@@ -29,9 +40,7 @@ exports.macro = {
 			}
 			story.tiddlers.unshift({title: event.navigateTo, template: template});
 			this.store.addTiddler(new Tiddler(storyTiddler,{text: JSON.stringify(story)}));
-			$("html,body").animate({
-				scrollTop: 0
-			}, 400);
+			scrollToTop(400);
 			event.stopPropagation();
 			return false;
 		},
