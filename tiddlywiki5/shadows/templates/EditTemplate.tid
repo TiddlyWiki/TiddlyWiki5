@@ -4,5 +4,6 @@ modifier: JeremyRuston
 <<view title>> <<command SaveTiddler label:"done" class:"btn btn-mini btn-success">>
 {{title{
 <<edit draft.title>>}}}
+<<edit tags>>
 {{body{
 <<edit text>>}}}
