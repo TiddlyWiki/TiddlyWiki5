@@ -14,7 +14,7 @@ var Tiddler = require("../Tiddler.js").Tiddler,
 
 function scrollToTop(duration) {
     if (duration < 0) {
-    	return;
+		return;
     }
     var delta = (-document.body.scrollTop/duration) * 10;
     window.setTimeout(function() {
