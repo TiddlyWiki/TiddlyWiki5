@@ -179,7 +179,8 @@ var inputTiddlerDOM = function(node) {
 			while(e && e.nodeName.toLowerCase() !== "pre") {
 				e = e.nextSibling;
 			}
-			if(e && node.hasAttribute("title")) {
+			var title = node.getAttribute ? node.getAttribute("title") : null;
+			if(e && title) {
 				var i,
 					attrs = node.attributes,
 					tiddler = {
