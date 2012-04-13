@@ -571,6 +571,7 @@ Renderer.MacroNode = MacroNode;
 Renderer.ElementNode = ElementNode;
 Renderer.TextNode = TextNode;
 Renderer.EntityNode = EntityNode;
+Renderer.RawNode = RawNode;
 Renderer.ErrorNode = ErrorNode;
 Renderer.LabelNode = LabelNode;
 Renderer.SplitLabelNode = SplitLabelNode;
