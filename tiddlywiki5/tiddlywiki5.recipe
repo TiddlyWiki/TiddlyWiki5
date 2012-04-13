@@ -1,5 +1,6 @@
 template: tiddlywiki5.template.html
 copyright: ../copyright.txt
+style: lib/bootstrap/css/bootstrap.css
 style: shadows/css/*.css
 
 shadow: shadows/*.tid
@@ -7,7 +8,8 @@ shadow: shadows/templates/*.tid
 #tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
 #	type: image/jpeg
 
-jslib: lib/zepto.js
+#jslib: lib/jquery.js
+#jslib: lib/bootstrap/js/bootstrap.js
 
 jsmodule: ../js/*.js
 
