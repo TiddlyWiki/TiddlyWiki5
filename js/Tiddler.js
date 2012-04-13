@@ -132,40 +132,15 @@ Tiddler.standardFields = {
 	text: {			type: "string"}
 };
 
-Tiddler.isStandardField = function(name) {
-	return name in Tiddler.standardFields;
-};
-
-Tiddler.compareTiddlerFields = function(a,b,sortField) {
-	var aa = a[sortField] || 0,
-		bb = b[sortField] || 0;
-	if(aa < bb) {
-		return -1;
-	} else {
-		if(aa > bb) {
-			return 1;
-		} else {
-			return 0;
-		}
-	}
-};
-
-Tiddler.parseTiddlerField = function(name,value) {
-	var type = Tiddler.specialTiddlerFields[name];
-	if(type) {
-		return Tiddler.specialTiddlerFieldParsers[type](value);
-	} else if (typeof value === "string") {
-		return value;
-	} else {
-		return null;
-	}
-};
-
 // These are the non-string fields
 Tiddler.specialTiddlerFields = {
 	"created": "date",
 	"modified": "date",
 	"tags": "array"
+};
+
+Tiddler.isStandardField = function(name) {
+	return name in Tiddler.standardFields;
 };
 
 Tiddler.specialTiddlerFieldParsers = {
@@ -193,6 +168,31 @@ Tiddler.specialTiddlerFieldParsers = {
 		} else {
 			return null;
 		}
+	}
+};
+
+Tiddler.compareTiddlerFields = function(a,b,sortField) {
+	var aa = a[sortField] || 0,
+		bb = b[sortField] || 0;
+	if(aa < bb) {
+		return -1;
+	} else {
+		if(aa > bb) {
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+};
+
+Tiddler.parseTiddlerField = function(name,value) {
+	var type = Tiddler.specialTiddlerFields[name];
+	if(type) {
+		return Tiddler.specialTiddlerFieldParsers[type](value);
+	} else if (typeof value === "string") {
+		return value;
+	} else {
+		return null;
 	}
 };
 
