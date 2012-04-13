@@ -4,7 +4,7 @@ title: js/macros/story.js
 \*/
 (function(){
 
-/*jslint node: true, jquery: true */
+/*jslint node: true, jquery: true, browser: true */
 "use strict";
 
 var Tiddler = require("../Tiddler.js").Tiddler,

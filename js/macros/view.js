@@ -89,7 +89,7 @@ exports.macro = {
 			default: // "text"
 				// Get the stringified version of the field value
 				if(field !== "text" && tiddler) {
-					value = tiddler.getFieldString(field)
+					value = tiddler.getFieldString(field);
 				}
 				if(value === undefined || value === null) {
 					return [];
