@@ -358,7 +358,8 @@ Recipe.tiddlerOutputMapper = {
 	jquery: "javascript",
 	shadow: "shadow",
 	title: "title",
-	jsmodule: "jsmodule"
+	jsmodule: "jsmodule",
+	base64ie: "base64ie"
 };
 
 Recipe.compatibilityCheats = {
@@ -420,6 +421,27 @@ Recipe.tiddlerOutputter = {
 			out.push(tid.text);
 			out.push("});");
 			out.push("</" + "script>");
+		}
+	},
+	base64ie: function(out,tiddlers) {
+		// For IE, we output binary tiddlers in MHTML format (http://www.phpied.com/mhtml-when-you-need-data-uris-in-ie7-and-under/)
+		if(tiddlers.length) {
+			out.push("<!--\n");
+			out.push("Content-Type: multipart/related; boundary=\"_tw_mhtml" + "_tiddler\"\n");
+			out.push("\n");
+			for(var t=0; t<tiddlers.length; t++) {
+				var tiddler = this.store.getTiddler(tiddlers[t]);
+				out.push("--_tw_mhtml" + "_tiddler\n");
+				out.push("Content-Location:" + tiddler.title + "\n");
+				out.push("Content-Type:" + tiddler.type + "\n");
+				out.push("Content-Transfer-Encoding:base64\n");
+				out.push("\n");
+				out.push(tiddler.text);
+				out.push("\n\n");
+			}
+			out.push("--_tw_mhtml" + "_tiddler--\n");
+			out.push("\n");
+			out.push("-->\n");
 		}
 	}
 };
