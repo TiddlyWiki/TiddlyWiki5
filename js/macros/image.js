@@ -33,7 +33,7 @@ exports.macro = {
 			}
 		} else {
 			return [Renderer.ElementNode("img",{
-				href: this.params.src,
+				src: this.params.src,
 				alt: this.params.text,
 				title: this.params.text
 			})];
