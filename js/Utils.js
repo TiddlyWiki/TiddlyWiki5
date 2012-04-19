@@ -270,4 +270,25 @@ utils.toggleClass = function(el,className,status) {
 	}
 };
 
+utils.applyStyleSheet = function(id,css) {
+	var el = document.getElementById(id);
+	if(document.createStyleSheet) { // Older versions of IE
+		if(el) {
+			el.parentNode.removeChild(el);
+		}
+		doc.getElementsByTagName("head")[0].insertAdjacentHTML("beforeEnd",
+			'&nbsp;<style id="' + id + '" type="text/css">' + css + '</style>'); // fails without &nbsp;
+	} else { // Modern browsers
+		if(el) {
+			el.replaceChild(document.createTextNode(css), el.firstChild);
+		} else {
+			el = document.createElement("style");
+			el.type = "text/css";
+			el.id = id;
+			el.appendChild(document.createTextNode(css));
+			document.getElementsByTagName("head")[0].appendChild(el);
+		}
+	}
+};
+
 })();
