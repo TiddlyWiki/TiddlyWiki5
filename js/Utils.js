@@ -276,7 +276,7 @@ utils.applyStyleSheet = function(id,css) {
 		if(el) {
 			el.parentNode.removeChild(el);
 		}
-		doc.getElementsByTagName("head")[0].insertAdjacentHTML("beforeEnd",
+		document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeEnd",
 			'&nbsp;<style id="' + id + '" type="text/css">' + css + '</style>'); // fails without &nbsp;
 	} else { // Modern browsers
 		if(el) {
