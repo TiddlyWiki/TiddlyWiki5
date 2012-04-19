@@ -5,6 +5,7 @@ style: shadows/css/*.css
 
 shadow: shadows/*.tid
 shadow: shadows/templates/*.tid
+shadow: shadows/tiddlycss/*.tid
 #tiddler: http://wikitext.tiddlyspace.com/fractalveg.jpg
 #	type: image/jpeg
 
