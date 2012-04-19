@@ -16,10 +16,12 @@ var WikiStore = require("./WikiStore.js").WikiStore,
 	tiddlerOutput = require("./TiddlerOutput.js"),
 	Renderer = require("./Renderer.js").Renderer,
 	WikiTextParser = require("./WikiTextParser.js").WikiTextParser,
+	TiddlyTextParser = require("./TiddlyTextParser.js").TiddlyTextParser,
 	PlainTextParser = require("./PlainTextParser.js").PlainTextParser,
 	JavaScriptParser = require("./JavaScriptParser.js").JavaScriptParser,
 	JSONParser = require("./JSONParser.js").JSONParser,
-	ImageParser = require("./ImageParser.js").ImageParser;
+	ImageParser = require("./ImageParser.js").ImageParser,
+	utils = require("./Utils.js");
 
 var App = function() {
 	var t;
@@ -29,6 +31,7 @@ var App = function() {
 	this.store = new WikiStore();	
 	// Register the parsers
 	this.store.registerParser("text/x-tiddlywiki",new WikiTextParser({store: this.store}));
+	this.store.registerParser("text/x-tiddlywiki-css",new TiddlyTextParser({store: this.store}));
 	this.store.registerParser("text/plain",new PlainTextParser({store: this.store}));
 	this.store.registerParser(["image/svg+xml",".svg","image/jpg",".jpg","image/jpeg",".jpeg","image/png",".png","image/gif",".gif"],new ImageParser({store: this.store}));
 	this.store.registerParser(["application/javascript",".js"],new JavaScriptParser({store: this.store}));
@@ -109,6 +112,13 @@ var App = function() {
 	if(this.isBrowser) {
 		// Set up HttpSync
 		this.httpSync = new HttpSync(this.store);
+		// Apply the dynamic stylesheet
+		var styleRenderer = this.store.renderMacro("tiddler",{target: "StyleSheet"});
+		utils.applyStyleSheet("StyleSheet",styleRenderer.render("text/plain"));
+		this.store.addEventListener("",function(changes) {
+			styleRenderer.refresh(changes);
+			utils.applyStyleSheet("StyleSheet",styleRenderer.render("text/plain"));
+		});
 		// Open the PageTemplate
 		var renderer = this.store.renderMacro("tiddler",{target: "PageTemplate"});
 		renderer.renderInDom(document.body);
