@@ -1,0 +1,10 @@
+recipe: ../tiddlywiki5.recipe
+
+style: lib/bootstrap/css/bootstrap.css
+style: shadows/css/*.css
+
+shadow: shadows/*.tid
+shadow: shadows/templates/*.tid
+shadow: shadows/tiddlycss/*.tid
+#jslib: lib/jquery.js
+#jslib: lib/bootstrap/js/bootstrap.js

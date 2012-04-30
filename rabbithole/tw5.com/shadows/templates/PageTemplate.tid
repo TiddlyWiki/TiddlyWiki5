@@ -1,0 +1,6 @@
+title: PageTemplate
+
+{{navigation-panel{<<chooser>>}}}{{zoomer-panel{<<zoomer>>}}}
+{{container-fluid{
+<<story story:StoryTiddlers>>
+}}}

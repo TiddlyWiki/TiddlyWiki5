@@ -1,0 +1,14 @@
+template: tiddlywiki5.template.html
+copyright: copyright.txt
+
+jsbootstart: core/bootprefix.js
+jsbootend: core/boot.js
+
+pluginmodule: core/modules/*.js
+pluginmodule: core/modules/macros/*.js
+pluginmodule: core/modules/macros/edit/*.js
+pluginmodule: core/modules/macros/edit/editors/*.js
+pluginmodule: core/modules/treenodes/*.js
+pluginmodule: core/modules/parsers/*.js
+pluginmodule: core/modules/parsers/wikitextparser/*.js
+pluginmodule: core/modules/parsers/wikitextparser/rules/*.js

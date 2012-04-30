@@ -1,0 +1,30 @@
+title: NewWikiTextFeatures
+modifier: JeremyRuston
+
+It is proposed to extend the existing TiddlyWiki WikiText syntax with the following extensions
+
+# Addition of {{{**bold**}}} character formatting
+# Addition of {{{`backtick for code`}}} character formatting
+# Addition of WikiCreole-style forced line break, e.g. {{{force\\linebreak}}}
+# Addition of WikiCreole-style headings, e.g. {{{==Heading}}}
+# Addition of WikiCreole-style headings in tables, e.g. {{{|=|=table|=header|}}}
+# Addition of white-listed HTML and SVG tags intermixed with wikitext
+# Addition of WikiCreole-style pretty links, e.g. {{{[[description -> link]]}}}
+# Addition of multiline macros, e.g.
+{{{
+<<myMacro
+param1: Parameter value
+param2: value
+"unnamed parameter"
+param4: ((
+A multiline parameter that can go on for as long as it likes
+and contain linebreaks.
+))
+>>
+}}}
+# Addition of typed text blocks, e.g.
+{{{
+	$$$.js
+		return "This will have syntax highlighting applied"
+	$$$
+}}}

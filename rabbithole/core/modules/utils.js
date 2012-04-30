@@ -1,0 +1,222 @@
+/*\
+title: $:/core/utils.js
+type: application/javascript
+module-type: utils
+
+Various static utility functions.
+
+This file is a bit of a dumping ground; the expectation is that most of these functions will be refactored.
+
+\*/
+(function(){
+
+/*jslint node: true */
+"use strict";
+
+exports.formatDateString = function (date,template) {
+	var t = template.replace(/0hh12/g,$tw.utils.pad($tw.utils.getHours12(date)));
+	t = t.replace(/hh12/g,$tw.utils.getHours12(date));
+	t = t.replace(/0hh/g,$tw.utils.pad(date.getHours()));
+	t = t.replace(/hh/g,date.getHours());
+	t = t.replace(/mmm/g,$tw.config.dateFormats.shortMonths[date.getMonth()]);
+	t = t.replace(/0mm/g,$tw.utils.pad(date.getMinutes()));
+	t = t.replace(/mm/g,date.getMinutes());
+	t = t.replace(/0ss/g,$tw.utils.pad(date.getSeconds()));
+	t = t.replace(/ss/g,date.getSeconds());
+	t = t.replace(/[ap]m/g,$tw.utils.getAmPm(date).toLowerCase());
+	t = t.replace(/[AP]M/g,$tw.utils.getAmPm(date).toUpperCase());
+	t = t.replace(/wYYYY/g,$tw.utils.getYearForWeekNo(date));
+	t = t.replace(/wYY/g,$tw.utils.pad($tw.utils.getYearForWeekNo(date)-2000));
+	t = t.replace(/YYYY/g,date.getFullYear());
+	t = t.replace(/YY/g,$tw.utils.pad(date.getFullYear()-2000));
+	t = t.replace(/MMM/g,$tw.config.dateFormats.months[date.getMonth()]);
+	t = t.replace(/0MM/g,$tw.utils.pad(date.getMonth()+1));
+	t = t.replace(/MM/g,date.getMonth()+1);
+	t = t.replace(/0WW/g,$tw.utils.pad($tw.utils.getWeek(date)));
+	t = t.replace(/WW/g,$tw.utils.getWeek(date));
+	t = t.replace(/DDD/g,$tw.config.dateFormats.days[date.getDay()]);
+	t = t.replace(/ddd/g,$tw.config.dateFormats.shortDays[date.getDay()]);
+	t = t.replace(/0DD/g,$tw.utils.pad(date.getDate()));
+	t = t.replace(/DDth/g,date.getDate()+$tw.utils.getDaySuffix(date));
+	t = t.replace(/DD/g,date.getDate());
+	var tz = date.getTimezoneOffset();
+	var atz = Math.abs(tz);
+	t = t.replace(/TZD/g,(tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60));
+	t = t.replace(/\\/g,"");
+	return t;
+};
+
+exports.getAmPm = function(date) {
+	return date.getHours() >= 12 ? $tw.config.dateFormats.pm : $tw.config.dateFormats.am;
+};
+
+exports.getDaySuffix = function(date) {
+	return $tw.config.dateFormats.daySuffixes[date.getDate()-1];
+};
+
+exports.getWeek = function(date) {
+	var dt = new Date(date.getTime());
+	var d = dt.getDay();
+	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
+	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week to calculate weekNo
+	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1)+3600000)/86400000);
+	return Math.floor(n/7)+1;
+};
+
+exports.getYearForWeekNo = function(date) {
+	var dt = new Date(date.getTime());
+	var d = dt.getDay();
+	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
+	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week
+	return dt.getFullYear();
+};
+
+exports.getHours12 = function(date) {
+	var h = date.getHours();
+	return h > 12 ? h-12 : ( h > 0 ? h : 12 );
+};
+
+// Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
+exports.htmlEncode = function(s)
+{
+	if(s) {
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
+	} else {
+		return "";
+	}
+};
+
+// Converts all HTML entities to their character equivalents
+exports.entityDecode = function(s) {
+	var e = s.substr(1,s.length-2); // Strip the & and the ;
+	if(e.charAt(0) === "#") {
+		if(e.charAt(1) === "x" || e.charAt(1) === "X") {
+			return String.fromCharCode(parseInt(e.substr(2),16));	
+		} else {
+			return String.fromCharCode(parseInt(e.substr(1),10));
+		}
+	} else {
+		var c = $tw.config.htmlEntities[e];
+		if(c) {
+			return String.fromCharCode(c);
+		} else {
+			return s; // Couldn't convert it as an entity, just return it raw
+		}
+	}
+};
+
+exports.unescapeLineBreaks = function(s) {
+	return s.replace(/\\n/mg,"\n").replace(/\\b/mg," ").replace(/\\s/mg,"\\").replace(/\r/mg,"");
+};
+
+/*
+ * Returns an escape sequence for given character. Uses \x for characters <=
+ * 0xFF to save space, \u for the rest.
+ *
+ * The code needs to be in sync with th code template in the compilation
+ * function for "action" nodes.
+ */
+// Copied from peg.js, thanks to David Majda
+exports.escape = function(ch) {
+	var charCode = ch.charCodeAt(0);
+	if (charCode <= 0xFF) {
+		return '\\x' + $tw.utils.pad(charCode.toString(16).toUpperCase());
+	} else {
+		return '\\u' + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);
+	}
+};
+
+// Turns a string into a legal JavaScript string
+// Copied from peg.js, thanks to David Majda
+exports.stringify = function(s) {
+	/*
+	* ECMA-262, 5th ed., 7.8.4: All characters may appear literally in a string
+	* literal except for the closing quote character, backslash, carriage return,
+	* line separator, paragraph separator, and line feed. Any character may
+	* appear in the form of an escape sequence.
+	*
+	* For portability, we also escape escape all non-ASCII characters.
+	*/
+	return s
+		.replace(/\\/g, '\\\\')            // backslash
+		.replace(/"/g, '\\"')              // double quote character
+		.replace(/'/g, "\\'")              // single quote character
+		.replace(/\r/g, '\\r')             // carriage return
+		.replace(/\n/g, '\\n')             // line feed
+		.replace(/[\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
+};
+
+exports.nextTick = function(fn) {
+/*global window: false */
+	if(typeof window !== "undefined") {
+		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
+		window.setTimeout(fn,4);
+	} else {
+		process.nextTick(fn);
+	}
+};
+
+/*
+Determines whether element 'a' contains element 'b'
+Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
+*/
+exports.domContains = function(a,b) {
+	return a.contains ?
+		a != b && a.contains(b) :
+		!!(a.compareDocumentPosition(b) & 16);
+};
+
+exports.hasClass = function(el,className) {
+	return el.className.split(" ").indexOf(className) !== -1;
+};
+
+exports.addClass = function(el,className) {
+	var c = el.className.split(" ");
+	if(c.indexOf(className) === -1) {
+		c.push(className);
+	}
+	el.className = c.join(" ");
+};
+
+exports.removeClass = function(el,className) {
+	var c = el.className.split(" "),
+		p = c.indexOf(className);
+	if(p !== -1) {
+		c.splice(p,1);
+		el.className = c.join(" ");
+	}
+};
+
+exports.toggleClass = function(el,className,status) {
+	if(status === undefined) {
+		status = !exports.hasClass(el,className);
+	}
+	if(status) {
+		exports.addClass(el,className);
+	} else {
+		exports.removeClass(el,className);
+	}
+};
+
+exports.applyStyleSheet = function(id,css) {
+	var el = document.getElementById(id);
+	if(document.createStyleSheet) { // Older versions of IE
+		if(el) {
+			el.parentNode.removeChild(el);
+		}
+		document.getElementsByTagName("head")[0].insertAdjacentHTML("beforeEnd",
+			'&nbsp;<style id="' + id + '" type="text/css">' + css + '</style>'); // fails without &nbsp;
+	} else { // Modern browsers
+		if(el) {
+			el.replaceChild(document.createTextNode(css), el.firstChild);
+		} else {
+			el = document.createElement("style");
+			el.type = "text/css";
+			el.id = id;
+			el.appendChild(document.createTextNode(css));
+			document.getElementsByTagName("head")[0].appendChild(el);
+		}
+	}
+};
+
+})();

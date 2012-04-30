@@ -1,0 +1,6 @@
+title: StyleSheet
+type: text/x-tiddlywiki-css
+
+body {
+	background-color: [[BaseColour]];
+}
