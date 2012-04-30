@@ -17,7 +17,7 @@ if(window && !window.$tw) {
 	window.$tw = {isBrowser: true};
 }
 
-$tw.modules = {}; // hashmap by module name of {fn:, exports:, moduleType:}
+$tw.modules = {titles: {}}; // hashmap by module name of {fn:, exports:, moduleType:}
 
 /*
 Define a JavaScript tiddler module for later execution
@@ -25,8 +25,8 @@ Define a JavaScript tiddler module for later execution
 	moduleType: type of module
 	fn: function defining the module, called with the arguments (module,require,exports)
 */
-$tw.defineModule = function(moduleName,moduleType,fn) {
-	$tw.modules[moduleName] = {
+$tw.modules.define = function(moduleName,moduleType,fn) {
+	$tw.modules.titles[moduleName] = {
 		moduleType: moduleType,
 		fn: fn
 	};

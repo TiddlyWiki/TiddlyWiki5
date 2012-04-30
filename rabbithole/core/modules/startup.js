@@ -14,14 +14,14 @@ This is the main application logic for both the client and server
 exports.startup = function() {
 	var modules,n,m,f;
 	// Set up additional global objects
-	$tw.applyPluginMethods("global",$tw);
+	$tw.plugins.applyMethods("global",$tw);
 	// Wire up plugin modules
-	$tw.applyPluginMethods("config",$tw.config);
-	$tw.applyPluginMethods("utils",$tw.utils);
-	$tw.applyPluginMethods("tiddlermethod",$tw.Tiddler.prototype);
-	$tw.applyPluginMethods("wikimethod",$tw.Wiki.prototype);
-	$tw.applyPluginMethods("treeutils",$tw.Tree);
-	$tw.applyPluginMethods("treenode",$tw.Tree);
+	$tw.plugins.applyMethods("config",$tw.config);
+	$tw.plugins.applyMethods("utils",$tw.utils);
+	$tw.plugins.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
+	$tw.plugins.applyMethods("wikimethod",$tw.Wiki.prototype);
+	$tw.plugins.applyMethods("treeutils",$tw.Tree);
+	$tw.plugins.applyMethods("treenode",$tw.Tree);
 	// Set up the wiki store
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();

@@ -202,7 +202,7 @@ exports.initParsers = function(moduleType) {
 	// Install the parser modules
 	moduleType = moduleType || "parser";
 	$tw.wiki.parsers = {}; 
-	var modules = $tw.plugins[moduleType],
+	var modules = $tw.plugins.moduleTypes[moduleType],
 		n,m,f;
 	if(modules) {
 		for(n=0; n<modules.length; n++) {
@@ -214,7 +214,7 @@ exports.initParsers = function(moduleType) {
 		}
 	}
 	// Install the wikitext rules
-	modules = $tw.plugins["wikitextrule"];
+	modules = $tw.plugins.moduleTypes["wikitextrule"];
 	var wikitextparser = this.parsers["text/x-tiddlywiki"];
 	if(modules && wikitextparser) {
 		for(n=0; n<modules.length; n++) {
@@ -268,7 +268,7 @@ exports.initMacros = function(moduleType) {
 	moduleType = moduleType || "macro";
 	$tw.wiki.macros = {}; 
 	var MacroClass = require("./treenodes/macro.js").Macro,
-		modules = $tw.plugins[moduleType],
+		modules = $tw.plugins.moduleTypes[moduleType],
 		n,m,f,
 		subclassMacro = function(module) {
 			// Make a copy of the Macro() constructor function
@@ -300,7 +300,7 @@ exports.initEditors = function(moduleType) {
 	var editMacro = this.macros.edit;
 	if(editMacro) {
 		editMacro.editors = {};
-		$tw.applyPluginMethods(moduleType,editMacro.editors);
+		$tw.plugins.applyMethods(moduleType,editMacro.editors);
 	}
 };
 
