@@ -359,6 +359,7 @@ Recipe.tiddlerOutputMapper = {
 	shadow: "shadow",
 	title: "title",
 	jsmodule: "jsmodule",
+	pluginmodule: "pluginmodule",
 	base64ie: "base64ie"
 };
 
@@ -418,6 +419,18 @@ Recipe.tiddlerOutputter = {
 				tid = this.store.getTiddler(title);
 			out.push("<" + "script type=\"text/javascript\" data-tiddler-title=\"" + title + "\">");
 			out.push("define(\"" + title + "\",function(require,exports,module) {");
+			out.push(tid.text);
+			out.push("});");
+			out.push("</" + "script>");
+		}
+	},
+	pluginmodule: function(out,tiddlers) {
+		// plugin modules are output as a special script tag
+		for(var t=0; t<tiddlers.length; t++) {
+			var title = tiddlers[t],
+				tid = this.store.getTiddler(title);
+			out.push("<" + "script type=\"text/javascript\" data-tiddler-title=\"" + title + "\">");
+			out.push("$tw.defineModule(\"" + title + "\",\"" + tid.module + "\",function(module,exports,require) {");
 			out.push(tid.text);
 			out.push("});");
 			out.push("</" + "script>");
