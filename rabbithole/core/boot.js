@@ -526,7 +526,7 @@ var fs = require("fs"),
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
 */
-$tw.loadTiddlersFromFile = function(file,basetitle) {
+$tw.plugins.loadTiddlersFromFile = function(file,basetitle) {
 	var ext = path.extname(file),
 		fields = {
 			title: basetitle
@@ -559,7 +559,7 @@ $tw.plugins.loadPlugins = function(filepath,basetitle) {
 			}
 		}
 	} else if(stat.isFile()) {
-		$tw.loadTiddlersFromFile(filepath,basetitle);
+		$tw.plugins.loadTiddlersFromFile(filepath,basetitle);
 	}
 }
 
