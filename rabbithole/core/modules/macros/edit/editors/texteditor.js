@@ -96,7 +96,7 @@ TextEditor.prototype.postRenderInDom = function() {
 
 TextEditor.prototype.isRefreshable = function() {
 	// Don't refresh the editor if it contains the caret or selection
-	return !window.getSelection().containsNode(this.macroNode.domNode, true);
+	return document.activeElement !== this.macroNode.children[0].domNode;
 };
 
 exports["text/x-tiddlywiki"] = TextEditor;
