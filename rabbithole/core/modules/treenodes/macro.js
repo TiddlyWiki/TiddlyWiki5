@@ -139,7 +139,7 @@ Macro.prototype.execute = function(parents,tiddlerTitle) {
 	}
 	for(var p in this.srcParams) {
 		if(typeof this.srcParams[p] === "function") {
-			this.params[p] = this.srcParams[p](tiddler,this.wiki);
+			this.params[p] = this.srcParams[p](tiddler.fields,this.wiki);
 		} else {
 			this.params[p] = this.srcParams[p];
 		}
