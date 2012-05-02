@@ -17,7 +17,7 @@ var Element = function(type,attributes,children) {
 	if(this instanceof Element) {
 		this.type = type;
 		this.attributes = attributes || {};
-		this.children = children || [];
+		this.children = children;
 	} else {
 		return new Element(type,attributes,children);
 	}
@@ -27,16 +27,21 @@ Element.prototype = new Node();
 Element.prototype.constructor = Element;
 
 Element.prototype.clone = function() {
-	var childClones = [];
-	for(var t=0; t<this.children.length; t++) {
-		childClones.push(this.children[t].clone());
+	var childClones;
+	if(this.children) {
+		childClones = [];
+		for(var t=0; t<this.children.length; t++) {
+			childClones.push(this.children[t].clone());
+		}
 	}
 	return new Element(this.type,this.attributes,childClones);
 };
 
 Element.prototype.execute = function(parents,tiddlerTitle) {
-	for(var t=0; t<this.children.length; t++) {
-		this.children[t].execute(parents,tiddlerTitle);
+	if(this.children) {
+		for(var t=0; t<this.children.length; t++) {
+			this.children[t].execute(parents,tiddlerTitle);
+		}
 	}
 };
 
