@@ -87,11 +87,11 @@ exports.executeMacro = function() {
 	if(parents.indexOf(renderTemplate) !== -1) {
 		children = [$tw.Tree.errorNode("Tiddler recursion error in <<tiddler>> macro")];	
 	} else {
-		if("with" in this.params) {
+		if(this.hasParameter("with")) {
 			// Parameterised transclusion
 			var targetTiddler = this.wiki.getTiddler(renderTemplate),
 				text = targetTiddler.fields.text;
-			var withTokens = [this.params["with"]];
+			var withTokens = [this.params["with"]]; // TODO: Allow for more than one with: parameter
 			for(t=0; t<withTokens.length; t++) {
 				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
 				text = text.replace(placeholderRegExp,withTokens[t]);
