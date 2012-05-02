@@ -37,6 +37,7 @@ Commander.prototype.execute = function() {
 Execute the next command in the sequence
 */
 Commander.prototype.executeNextCommand = function() {
+	var self = this;
 	// Invoke the callback if there are no more commands
 	if(this.nextToken >= this.commandTokens.length) {
 		this.callback(null);
@@ -54,20 +55,35 @@ Commander.prototype.executeNextCommand = function() {
 				params.push(this.commandTokens[this.nextToken++]);
 			}
 			// Get the command info
-			var command = $tw.commands[commandName];
+			var command = $tw.commands[commandName],
+				c,err;
 			if(!command) {
 				this.callback("Unknown command: " + commandName);
 			} else {
+				if(this.verbose) {
+					this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
+				}
 				if(command.info.synchronous) {
-					if(this.verbose) {
-						this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
-					}
-					var c = new command.Command(params,this),
-						err = c.execute();
+					// Synchronous command
+					c = new command.Command(params,this);
+					err = c.execute();
 					if(err) {
 						this.callback(err);
 					} else {
 						this.executeNextCommand();
+					}
+				} else {
+					// Asynchronous command
+					c = new command.Command(params,this,function(err) {
+						if(err) {
+							self.callback(err);
+						} else {
+							self.executeNextCommand();
+						}
+					});
+					err = c.execute();
+					if(err) {
+						this.callback(err);
 					}
 				}
 			}
