@@ -262,8 +262,14 @@ Options are:
 	defaultType: Default MIME type to use if the specified one is unknown
 */
 exports.renderText = function(outputType,textType,text,options) {
-	var renderer = this.parseText(type,text,options);
+	var renderer = this.parseText(textType,text,options);
 	renderer.execute([]);
+	return renderer.render(outputType);
+};
+
+exports.renderTiddler = function(outputType,title) {
+	var renderer = this.parseTiddler(title);
+	renderer.execute([],title);
 	return renderer.render(outputType);
 };
 
