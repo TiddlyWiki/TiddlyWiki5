@@ -56,6 +56,9 @@ exports.executeMacro = function() {
 	linkInfo.attributes = {
 		href: linkInfo.to
 	};
+	if(!linkInfo.isExternal) {
+		linkInfo.attributes.href = encodeURIComponent(linkInfo.to);
+	}
 	// Generate the default classes for the link
 	linkInfo.attributes["class"] = ["tw-tiddlylink"];
 	if(linkInfo.isExternal) {
