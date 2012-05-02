@@ -13,8 +13,7 @@ Dump command
 
 exports.info = {
 	name: "dump",
-	synchronous: true,
-	params: {}
+	synchronous: true
 }
 
 var Command = function(params,commander) {

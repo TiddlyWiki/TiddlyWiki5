@@ -13,8 +13,7 @@ Version command
 
 exports.info = {
 	name: "version",
-	synchronous: true,
-	params: {}
+	synchronous: true
 }
 
 var Command = function(params,commander) {

@@ -13,8 +13,7 @@ Verbose command
 
 exports.info = {
 	name: "verbose",
-	synchronous: true,
-	params: {}
+	synchronous: true
 }
 
 var Command = function(params,commander) {
