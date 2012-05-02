@@ -1,9 +1,9 @@
 /*\
-title: $:/core/commands/version.js
+title: $:/core/commands/verbose.js
 type: application/javascript
 module-type: command
 
-Version command
+Verbose command
 
 \*/
 (function(){
@@ -12,7 +12,7 @@ Version command
 "use strict";
 
 exports.info = {
-	name: "version",
+	name: "verbose",
 	synchronous: true,
 	params: {}
 }
@@ -23,7 +23,7 @@ var Command = function(params,commander) {
 };
 
 Command.prototype.execute = function() {
-	this.commander.streams.output.write($tw.utils.getVersionString() + "\n");
+	this.commander.verbose = true;
 	return null; // No error
 }
 

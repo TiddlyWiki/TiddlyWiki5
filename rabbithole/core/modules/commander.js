@@ -59,9 +59,16 @@ Commander.prototype.executeNextCommand = function() {
 				this.callback("Unknown command: " + commandName);
 			} else {
 				if(command.info.synchronous) {
-					var c = new command.Command(params,this);
-					c.execute();
-					this.executeNextCommand();
+					if(this.verbose) {
+						this.streams.output.write("Executing command: " + commandName + " " + params.join(" ") + "\n");
+					}
+					var c = new command.Command(params,this),
+						err = c.execute();
+					if(err) {
+						this.callback(err);
+					} else {
+						this.executeNextCommand();
+					}
 				}
 			}
 		}
