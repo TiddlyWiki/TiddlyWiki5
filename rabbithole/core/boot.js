@@ -35,6 +35,9 @@ if(typeof(window) === "undefined" && !global.$tw) {
 	global.$tw = {isBrowser: false};
 }
 
+// Boot information
+$tw.boot = {};
+
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {} // hashmap by module title of {fn:, exports:, moduleType:}
@@ -523,6 +526,8 @@ var fs = require("fs"),
 	path = require("path"),
 	vm = require("vm");
 
+$tw.boot.bootPath = path.dirname(module.filename);
+
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
 */
@@ -574,6 +579,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			module: module,
 			exports: {},
 			console: console,
+			process: process,
 			$tw: $tw,
 			require: function(title) {
 				return $tw.modules.execute(title,name);
@@ -598,7 +604,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 }
 
 // Load plugins from the plugins directory
-$tw.plugins.loadPlugins(path.resolve(path.dirname(module.filename),$tw.config.pluginSubDir));
+$tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.pluginSubDir));
 
 // End of if(!$tw.isBrowser)	
 }

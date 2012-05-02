@@ -253,6 +253,21 @@ exports.parseTiddler = function(title) {
 };
 
 /*
+Parse text in a specified format and render it into another format
+	outputType: content type for the output
+	textType: content type of the input text
+	text: input text
+	options: see below
+Options are:
+	defaultType: Default MIME type to use if the specified one is unknown
+*/
+exports.renderText = function(outputType,textType,text,options) {
+	var renderer = this.parseText(type,text,options);
+	renderer.execute([]);
+	return renderer.render(outputType);
+};
+
+/*
 Install macro plugins into this wiki
 	moduleType: Plugin type to install (defaults to "macro")
 

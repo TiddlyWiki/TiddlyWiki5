@@ -1,10 +1,12 @@
 template: tiddlywiki5.template.html
 copyright: copyright.txt
+version: core/version.txt
 
 jsbootstart: core/bootprefix.js
 jsbootend: core/boot.js
 
 pluginmodule: core/modules/*.js
+pluginmodule: core/modules/commands/*.js
 pluginmodule: core/modules/macros/*.js
 pluginmodule: core/modules/macros/edit/*.js
 pluginmodule: core/modules/macros/edit/editors/*.js

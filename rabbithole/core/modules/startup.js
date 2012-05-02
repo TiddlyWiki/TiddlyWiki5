@@ -18,6 +18,7 @@ exports.startup = function() {
 	// Wire up plugin modules
 	$tw.plugins.applyMethods("config",$tw.config);
 	$tw.plugins.applyMethods("utils",$tw.utils);
+	$tw.version = $tw.utils.extractVersionInfo();
 	$tw.plugins.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.plugins.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.plugins.applyMethods("treeutils",$tw.Tree);
@@ -26,6 +27,8 @@ exports.startup = function() {
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();
 	$tw.wiki.initParsers();
+	// Set up the command plugins
+	$tw.Commander.initCommands();
 
 if($tw.isBrowser) {
 	var renderer = $tw.wiki.parseTiddler("PageTemplate");
@@ -36,7 +39,17 @@ if($tw.isBrowser) {
 	});
 	console.log("$tw",$tw);
 } else {
-	console.log("$tw",require("util").inspect($tw,false,8));
+	var commander = new $tw.Commander(
+		Array.prototype.slice.call(process.argv,2),
+		function(err) {
+			if(err) {
+				console.log("Error: " + err);
+			}
+		},
+		$tw.wiki,
+		{output: process.stdout, error: process.stderr}
+	);
+	commander.execute();
 }
 
 

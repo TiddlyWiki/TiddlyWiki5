@@ -4,4 +4,4 @@ tags: Introduction
 
 Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the venerable, reusable non-linear personal web notebook first released in 2004. It is a complete interactive wiki that can run from a single HTML file in the browser or as a powerful [[node.js application|What is node.js?]].
 
-TiddlyWiki5 is currently in early beta, which is to say that it is useful but incomplete. You can try out the prototype at http://tiddlywiki.com/tiddlywiki5, get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]] or the discussions on [[the TiddlyWikiDev Google Group|http://groups.google.com/group/TiddlyWikiDev]].
+TiddlyWiki5 is currently at version <<version>> and is under active development, which is to say that it is useful but incomplete. You can try out the prototype at http://tiddlywiki.com/tiddlywiki5, get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]] or the discussions on [[the TiddlyWikiDev Google Group|http://groups.google.com/group/TiddlyWikiDev]].

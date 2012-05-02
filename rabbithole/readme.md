@@ -57,6 +57,7 @@ The 'core' is the boot kernel plus the set of plugin modules that it loads. It c
 * `editor` - interactive editors for different types of content
 * `parser` - parsers for different types of content
 * `wikitextrule` - individual rules for the wikitext parser
+* `command` - individual commands for the `$tw.Commander` class
 
 TiddlyWiki5 makes extensive use of JavaScript inheritance:
 

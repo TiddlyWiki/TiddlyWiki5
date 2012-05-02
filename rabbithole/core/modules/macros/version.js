@@ -16,7 +16,7 @@ exports.info = {
 }
 
 exports.executeMacro = function() {
-	return [$tw.Tree.Text("5.0.0")];
+	return [$tw.Tree.Text($tw.utils.getVersionString())];
 };
 
 })();
