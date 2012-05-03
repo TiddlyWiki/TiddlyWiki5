@@ -533,7 +533,6 @@ $tw.plugins.loadTiddlersFromFile = function(file,basetitle) {
 		data = fs.readFileSync(file).toString(extensionInfo ? extensionInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metafile = file + ".meta";
-console.log("loadTiddlersFromFile",file,basetitle,tiddlers);
 	if(ext !== ".json" && tiddlers.length === 1 && path.existsSync(metafile)) {
 		var metadata = fs.readFileSync(metafile).toString("utf8");
 		if(metadata) {
