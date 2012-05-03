@@ -1,5 +1,5 @@
 /*\
-title: $:/core/renderer.js
+title: $:/core/modules/renderer.js
 type: application/javascript
 module-type: global
 

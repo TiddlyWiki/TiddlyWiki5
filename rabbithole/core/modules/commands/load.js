@@ -1,5 +1,5 @@
 /*\
-title: $:/core/commands/load.js
+title: $:/core/modules/commands/load.js
 type: application/javascript
 module-type: command
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/tree.utils.js
+title: $:/core/modules/tree.utils.js
 type: application/javascript
 module-type: treeutils
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/tree.js
+title: $:/core/modules/tree.js
 type: application/javascript
 module-type: global
 

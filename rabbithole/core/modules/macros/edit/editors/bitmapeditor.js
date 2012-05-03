@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/edit/editors/bitmapeditor.js
+title: $:/core/modules/macros/edit/editors/bitmapeditor.js
 type: application/javascript
 module-type: editor
 

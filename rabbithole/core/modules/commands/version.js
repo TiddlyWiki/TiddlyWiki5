@@ -1,5 +1,5 @@
 /*\
-title: $:/core/commands/version.js
+title: $:/core/modules/commands/version.js
 type: application/javascript
 module-type: command
 

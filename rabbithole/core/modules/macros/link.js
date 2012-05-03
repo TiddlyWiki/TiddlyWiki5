@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/link.js
+title: $:/core/modules/macros/link.js
 type: application/javascript
 module-type: macro
 

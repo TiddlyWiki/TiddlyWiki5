@@ -1,5 +1,5 @@
 /*\
-title: $:/core/config.js
+title: $:/core/modules/config.js
 type: application/javascript
 module-type: config
 

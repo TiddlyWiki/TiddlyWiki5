@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/edit/editors/texteditor.js
+title: $:/core/modules/macros/edit/editors/texteditor.js
 type: application/javascript
 module-type: editor
 

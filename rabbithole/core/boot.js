@@ -1,5 +1,5 @@
 /*\
-title: $:/boot.js
+title: $:/core/boot.js
 type: application/javascript
 
 The main boot kernel for TiddlyWiki. This single file creates a barebones TW environment that is just
@@ -56,6 +56,8 @@ $tw.config.pluginSubDir = $tw.config.pluginSubDir || "./modules";
 // File extensions
 $tw.config.fileExtensions = {
 	".tid": {type: "application/x-tiddler", encoding: "utf8"},
+	".txt": {type: "text/plain", encoding: "utf8"},
+	".html": {type: "text/html", encoding: "utf8"},
 	".js": {type: "application/javascript", encoding: "utf8"},
 	".jpg": {type: "image/jpeg", encoding: "base64"},
 	".jpeg": {type: "image/jpeg", encoding: "base64"},
@@ -352,13 +354,6 @@ Hashmap of field plugins by plugin name
 $tw.Wiki.tiddlerDeserializerPlugins = {};
 
 /*
-Install any tiddler deserializer plugin modules
-*/
-$tw.Wiki.installPlugins = function() {
-	$tw.Wiki.tiddlerDeserializerPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerdeserializer");
-};
-
-/*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
@@ -374,7 +369,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		fields[f] = srcFields[f]
 	};
 	if(deserializer) {
-		return deserializer.deserialize.call(this,text,fields);
+		return deserializer.call(this,text,fields);
 	} else {
 		// Return a raw tiddler for unknown types
 		fields.text = text;
@@ -386,8 +381,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 Register the built in tiddler deserializer plugins
 */
 $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","tiddlerdeserializer",{
-	name: "application/javascript",
-	deserialize: function(text,fields) {
+	"application/javascript": function(text,fields) {
 		var headerCommentRegExp = /^\/\*\\\n((?:^[^\n]*\n)+?)(^\\\*\/$\n?)/mg,
 			match = headerCommentRegExp.exec(text);
 		fields.text = text;
@@ -398,8 +392,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","t
 	}
 });
 $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
-	name: "application/x-tiddler",
-	deserialize: function(text,fields) {
+	"application/x-tiddler": function(text,fields) {
 		var split = text.indexOf("\n\n");
 		if(split !== -1) {
 			fields = $tw.utils.parseFields(text.substr(0,split),fields);
@@ -411,7 +404,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","
 	}
 });
 // Install the tiddler deserializer plugins so they are immediately available
-$tw.Wiki.installPlugins();
+$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
 
 /////////////////////////// Intermediate initialisation
 
@@ -450,8 +443,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 Register a deserializer that can extract tiddlers from the DOM
 */
 $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","tiddlerdeserializer",{
-	name: "(DOM)",
-	deserialize: function(node) {
+	"(DOM)": function(node) {
 		var extractTextTiddler = function(node) {
 				var e = node.firstChild;
 				while(e && e.nodeName.toLowerCase() !== "pre") {
@@ -500,7 +492,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","
 	}
 });
 // Install the tiddler deserializer plugin
-$tw.Wiki.installPlugins();
+$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
 
 // Load the JavaScript system tiddlers from the DOM
 $tw.wiki.shadows.addTiddlers(
@@ -526,6 +518,7 @@ var fs = require("fs"),
 	path = require("path"),
 	vm = require("vm");
 
+$tw.boot.bootFile = path.basename(module.filename);
 $tw.boot.bootPath = path.dirname(module.filename);
 
 /*
@@ -540,6 +533,7 @@ $tw.plugins.loadTiddlersFromFile = function(file,basetitle) {
 		data = fs.readFileSync(file).toString(extensionInfo ? extensionInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metafile = file + ".meta";
+console.log("loadTiddlersFromFile",file,basetitle,tiddlers);
 	if(ext !== ".json" && tiddlers.length === 1 && path.existsSync(metafile)) {
 		var metadata = fs.readFileSync(metafile).toString("utf8");
 		if(metadata) {
@@ -552,15 +546,16 @@ $tw.plugins.loadTiddlersFromFile = function(file,basetitle) {
 /*
 Load all the plugins from the plugins directory
 */
-$tw.plugins.loadPlugins = function(filepath,basetitle) {
+$tw.plugins.loadPlugins = function(filepath,basetitle,excludeRegExp) {
 	basetitle = basetitle || "$:/plugins";
+	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
 	var stat = fs.statSync(filepath);
 	if(stat.isDirectory()) {
 		var files = fs.readdirSync(filepath);
 		for(var f=0; f<files.length; f++) {
 			var file = files[f];
-			if(file !== ".DS_Store" && path.extname(file) !== ".meta") {
-				$tw.plugins.loadPlugins(filepath + "/" + file,basetitle + "/" + file);
+			if(!excludeRegExp.test(file)) {
+				$tw.plugins.loadPlugins(filepath + "/" + file,basetitle + "/" + file,excludeRegExp);
 			}
 		}
 	} else if(stat.isFile()) {
@@ -616,7 +611,7 @@ $tw.plugins.registerPlugins();
 
 // Now we can properly install all of our extension plugins
 $tw.Tiddler.installPlugins();
-$tw.Wiki.installPlugins();
+$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
 
 // Run any startup plugin modules
 var mainModules = $tw.plugins.moduleTypes["startup"];

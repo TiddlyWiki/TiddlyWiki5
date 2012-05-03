@@ -1,5 +1,5 @@
 /*\
-title: $:/core/parsers/jsonparser.js
+title: $:/core/modules/parsers/jsonparser.js
 type: application/javascript
 module-type: parser
 

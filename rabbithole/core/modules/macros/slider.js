@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/slider.js
+title: $:/core/modules/macros/slider.js
 type: application/javascript
 module-type: macro
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/utils.js
+title: $:/core/modules/utils.js
 type: application/javascript
 module-type: utils
 
@@ -12,6 +12,34 @@ This file is a bit of a dumping ground; the expectation is that most of these fu
 
 /*jslint node: true */
 "use strict";
+
+exports.deepCopy = function(object) {
+	var result,t;
+	if($tw.utils.isArray(object)) {
+		// Copy arrays
+		result = object.slice(0);
+	} else if(typeof object === "object") {
+		result = {};
+		for(t in object) {
+			if(object[t] !== undefined) {
+				result[t] = $tw.utils.deepCopy(object[t]);
+			}
+		}
+	} else {
+		result = object;
+	}
+	return result;
+};
+
+exports.extendDeepCopy = function(object,extendedProperties) {
+	var result = $tw.utils.deepCopy(object),t;
+	for(var t in extendedProperties) {
+		if(object[t] !== undefined) {
+			result[t] = $tw.utils.deepCopy(object[t]);
+		}
+	}
+	return result;
+};
 
 exports.formatDateString = function (date,template) {
 	var t = template.replace(/0hh12/g,$tw.utils.pad($tw.utils.getHours12(date)));

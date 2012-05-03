@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/video.js
+title: $:/core/modules/macros/video.js
 type: application/javascript
 module-type: macro
 

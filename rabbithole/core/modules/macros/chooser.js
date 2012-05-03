@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/chooser.js
+title: $:/core/modules/macros/chooser.js
 type: application/javascript
 module-type: macro
 

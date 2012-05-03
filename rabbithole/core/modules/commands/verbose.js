@@ -1,5 +1,5 @@
 /*\
-title: $:/core/commands/verbose.js
+title: $:/core/modules/commands/verbose.js
 type: application/javascript
 module-type: command
 

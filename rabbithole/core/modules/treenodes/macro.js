@@ -1,5 +1,5 @@
 /*\
-title: $:/core/treenodes/macro.js
+title: $:/core/modules/treenodes/macro.js
 type: application/javascript
 module-type: treenode
 

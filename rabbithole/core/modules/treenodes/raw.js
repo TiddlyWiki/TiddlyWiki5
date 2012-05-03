@@ -1,5 +1,5 @@
 /*\
-title: $:/core/treenodes/raw.js
+title: $:/core/modules/treenodes/raw.js
 type: application/javascript
 module-type: treenode
 

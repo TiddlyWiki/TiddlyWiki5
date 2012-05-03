@@ -1,5 +1,5 @@
 /*\
-title: $:/core/startup.js
+title: $:/core/modules/startup.js
 type: application/javascript
 module-type: startup
 
@@ -13,6 +13,7 @@ This is the main application logic for both the client and server
 
 exports.startup = function() {
 	var modules,n,m,f;
+
 	// Set up additional global objects
 	$tw.plugins.applyMethods("global",$tw);
 	// Wire up plugin modules
@@ -23,6 +24,10 @@ exports.startup = function() {
 	$tw.plugins.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.plugins.applyMethods("treeutils",$tw.Tree);
 	$tw.plugins.applyMethods("treenode",$tw.Tree);
+	// Load up the tiddlers in the root of the core directory
+	if(!$tw.isBrowser) {
+		$tw.plugins.loadPlugins($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
+	}
 	// Set up the wiki store
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();
@@ -51,7 +56,6 @@ if($tw.isBrowser) {
 	);
 	commander.execute();
 }
-
 
 }
 

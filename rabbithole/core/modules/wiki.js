@@ -1,5 +1,5 @@
 /*\
-title: $:/core/wiki.js
+title: $:/core/modules/wiki.js
 type: application/javascript
 module-type: wikimethod
 

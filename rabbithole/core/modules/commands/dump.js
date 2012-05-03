@@ -1,5 +1,5 @@
 /*\
-title: $:/core/commands/dump.js
+title: $:/core/modules/commands/dump.js
 type: application/javascript
 module-type: command
 

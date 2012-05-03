@@ -1,5 +1,5 @@
 /*\
-title: $:/core/commander.js
+title: $:/core/modules/commander.js
 type: application/javascript
 module-type: global
 

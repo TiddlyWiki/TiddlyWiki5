@@ -1,5 +1,5 @@
 /*\
-title: $:/core/tiddler.js
+title: $:/core/modules/tiddler.js
 type: application/javascript
 module-type: tiddlermethod
 

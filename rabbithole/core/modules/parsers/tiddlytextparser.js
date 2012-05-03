@@ -1,5 +1,5 @@
 /*\
-title: $:/core/parsers/tiddlytextparser.js
+title: $:/core/modules/parsers/tiddlytextparser.js
 type: application/javascript
 module-type: parser
 

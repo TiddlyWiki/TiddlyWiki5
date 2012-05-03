@@ -1,5 +1,5 @@
 /*\
-title: $:/core/dependencies.js
+title: $:/core/modules/dependencies.js
 type: application/javascript
 module-type: global
 

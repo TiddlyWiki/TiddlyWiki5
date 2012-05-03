@@ -1,5 +1,5 @@
 /*\
-title: $:/core/treenodes/node.js
+title: $:/core/modules/treenodes/node.js
 type: application/javascript
 module-type: treenode
 

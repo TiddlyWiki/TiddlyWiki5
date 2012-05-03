@@ -1,5 +1,5 @@
 /*\
-title: $:/bootprefix.js
+title: $:/core/bootprefix.js
 type: application/javascript
 
 This file sets up the globals that need to be available when JavaScript modules are executed in the browser. The overall sequence is:

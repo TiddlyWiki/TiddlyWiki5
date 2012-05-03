@@ -1,5 +1,5 @@
 /*\
-title: $:/core/commands/wikitest.js
+title: $:/core/modules/commands/wikitest.js
 type: application/javascript
 module-type: command
 

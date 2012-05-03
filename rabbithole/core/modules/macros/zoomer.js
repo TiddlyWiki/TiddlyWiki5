@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/zoomer.js
+title: $:/core/modules/macros/zoomer.js
 type: application/javascript
 module-type: macro
 

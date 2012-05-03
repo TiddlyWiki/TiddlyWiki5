@@ -1,5 +1,5 @@
 /*\
-title: $:/core/macros/tiddler.js
+title: $:/core/modules/macros/tiddler.js
 type: application/javascript
 module-type: macro
 
