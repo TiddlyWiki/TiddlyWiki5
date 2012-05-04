@@ -51,7 +51,8 @@ $tw.config = $tw.config || {};
 
 // Constants
 $tw.config.root = $tw.config.root || "$:"; // Root for module titles (eg, "$:/kernel/boot.js")
-$tw.config.moduleSubDir = $tw.config.moduleSubDir || "./modules";
+$tw.config.bootModuleSubDir = $tw.config.bootModuleSubDir || "./modules";
+$tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 
 // File extensions
 $tw.config.fileExtensions = {
@@ -549,17 +550,19 @@ Load all the plugins from the plugins directory
 $tw.plugins.loadPlugins = function(filepath,basetitle,excludeRegExp) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
-	var stat = fs.statSync(filepath);
-	if(stat.isDirectory()) {
-		var files = fs.readdirSync(filepath);
-		for(var f=0; f<files.length; f++) {
-			var file = files[f];
-			if(!excludeRegExp.test(file)) {
-				$tw.plugins.loadPlugins(filepath + "/" + file,basetitle + "/" + file,excludeRegExp);
+	if(path.existsSync(filepath)) {
+		var stat = fs.statSync(filepath);
+		if(stat.isDirectory()) {
+			var files = fs.readdirSync(filepath);
+			for(var f=0; f<files.length; f++) {
+				var file = files[f];
+				if(!excludeRegExp.test(file)) {
+					$tw.plugins.loadPlugins(filepath + "/" + file,basetitle + "/" + file,excludeRegExp);
+				}
 			}
+		} else if(stat.isFile()) {
+			$tw.plugins.loadTiddlersFromFile(filepath,basetitle);
 		}
-	} else if(stat.isFile()) {
-		$tw.plugins.loadTiddlersFromFile(filepath,basetitle);
 	}
 }
 
@@ -599,7 +602,10 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 }
 
 // Load plugins from the plugins directory
-$tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.moduleSubDir));
+$tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
+
+// Load any plugins in the wiki plugins directory
+$tw.plugins.loadPlugins(require("path").resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
 
 // End of if(!$tw.isBrowser)	
 }

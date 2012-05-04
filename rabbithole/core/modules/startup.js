@@ -13,7 +13,6 @@ This is the main application logic for both the client and server
 
 exports.startup = function() {
 	var modules,n,m,f;
-
 	// Set up additional global objects
 	$tw.plugins.applyMethods("global",$tw);
 	// Wire up plugin modules
