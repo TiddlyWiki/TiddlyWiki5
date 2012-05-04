@@ -5,7 +5,9 @@ TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|T
 TiddlyWiki5 also functions as the build system for earlier versions of TiddlyWiki, replacing the elderly Cook and Ginsu tools (see https://github.com/TiddlyWiki/cooker for details). See the CommandLineInterface for details.
 
 {{alert alert-error{
-Try out the prototype tiddler chooser by swiping into the left edge of the screen (or hover the mouse over the extreme left edge of the browser window).	
+Try out the prototype touch features:
+* The zooming chooser appears by swiping into the left edge of the screen (or hover the mouse over the extreme left edge of the browser window)
+* The zooming navigator appears by swiping in from the right edge of the screen (not accessible by mouse)
 }}}
 Learning more about TiddlyWiki5:
 * WaysToUseTiddlyWiki discusses the various configurations in which TiddlyWiki5 can be used

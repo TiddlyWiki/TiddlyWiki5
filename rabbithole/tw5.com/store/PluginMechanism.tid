@@ -1,0 +1,15 @@
+title: PluginMechanism
+
+!Introduction
+TiddlyWiki5 is based on a 500 line boot kernel that runs on node.js or in the browser, and everything
+else is plugins.
+
+The kernel boots just enough of the TiddlyWiki environment to allow it to load tiddlers as plugins and execute them (a barebones tiddler class, a barebones wiki store class, some utilities etc.). Plugin modules are written like `node.js` modules; you can use `require()` to invoke sub components and to control load order.
+
+There are several different types of plugins: parsers, serializers, deserializers, macros etc. It goes much further than you might expect. For example, individual tiddler fields are plugins, too: there's a plugin that knows how to handle the `tags` field, and another that knows how to handle the special behaviour of
+the `modified` and `created` fields.
+
+Some plugins have further sub-plugins: the wikitext parser, for instance, accepts rules as individual plugins.
+
+!Plugins and Modules
+In TiddlyWiki5, a plugin is a bundle of related tiddlers that are distributed together as a single unit. Plugins can include tiddlers which are JavaScript modules. These modules are executed by the kernel, and the resulting
