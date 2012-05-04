@@ -51,7 +51,7 @@ $tw.config = $tw.config || {};
 
 // Constants
 $tw.config.root = $tw.config.root || "$:"; // Root for module titles (eg, "$:/kernel/boot.js")
-$tw.config.pluginSubDir = $tw.config.pluginSubDir || "./modules";
+$tw.config.moduleSubDir = $tw.config.moduleSubDir || "./modules";
 
 // File extensions
 $tw.config.fileExtensions = {
@@ -520,6 +520,7 @@ var fs = require("fs"),
 
 $tw.boot.bootFile = path.basename(module.filename);
 $tw.boot.bootPath = path.dirname(module.filename);
+$tw.boot.wikiPath = process.cwd();
 
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
@@ -598,7 +599,10 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 }
 
 // Load plugins from the plugins directory
-$tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.pluginSubDir));
+$tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.moduleSubDir));
+
+// Load plugins from the TiddlyWiki store directory
+$tw.plugins.loadPlugins($tw.boot.wikiPath);
 
 // End of if(!$tw.isBrowser)	
 }
