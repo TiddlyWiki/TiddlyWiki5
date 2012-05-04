@@ -13,7 +13,7 @@ wikitest command
 
 exports.info = {
 	name: "wikitest",
-	synchronous: false
+	synchronous: true
 };
 
 var Command = function(params,commander) {
