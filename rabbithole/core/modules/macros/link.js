@@ -9,6 +9,7 @@ Implements the link macro.
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var isLinkExternal = function(to) {

@@ -16,7 +16,8 @@ The syntax for macros is:
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var TiddlyTextParser = function(options) {

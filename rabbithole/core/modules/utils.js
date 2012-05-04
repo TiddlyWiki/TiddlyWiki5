@@ -10,7 +10,8 @@ This file is a bit of a dumping ground; the expectation is that most of these fu
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.deepCopy = function(object) {
@@ -33,7 +34,7 @@ exports.deepCopy = function(object) {
 
 exports.extendDeepCopy = function(object,extendedProperties) {
 	var result = $tw.utils.deepCopy(object),t;
-	for(var t in extendedProperties) {
+	for(t in extendedProperties) {
 		if(object[t] !== undefined) {
 			result[t] = $tw.utils.deepCopy(object[t]);
 		}

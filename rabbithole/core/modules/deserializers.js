@@ -12,7 +12,8 @@ Represents the dependencies of a tiddler or a parser node as these fields:
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports["text/plain"] = function(text,fields) {

@@ -7,6 +7,7 @@ module-type: macro
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -48,14 +49,14 @@ exports.select = function(y) {
 			$tw.utils.addClass(target,"selected");
 		}
 	}
-}
+};
 
 exports.deselect = function() {
 	if(this.selectedNode) {
 		$tw.utils.removeClass(this.selectedNode,"selected");
 		this.selectedNode = null;
 	}
-}
+};
 
 exports.action = function() {
 	if(this.selectedNode) {
@@ -64,7 +65,7 @@ exports.action = function() {
 		navEvent.navigateTo = this.selectedNode.getAttribute("data-link");
 		this.domNode.dispatchEvent(navEvent); 
 	}
-}
+};
 
 /*
 Set the position of the chooser panel within its wrapper given a touch/mouse position in screen coordinates
@@ -92,7 +93,7 @@ exports.hoverChooser = function(x,y) {
 		domPanel.style.webkitTransform = 
 		domPanel.style.MozTransform = "scale(" + scale + ") translateX(" + translateX + "px) translateY(" + translateY + "px)";
 	}
-}
+};
 
 exports.hideChooser = function() {
 	if(this.chooserDisplayed) {
@@ -101,7 +102,7 @@ exports.hideChooser = function() {
 		this.domNode.removeChild(this.children[0].domNode);
 		this.children = [];
 	}
-}
+};
 
 exports.handleEvent = function(event) {
 	switch(event.type) {

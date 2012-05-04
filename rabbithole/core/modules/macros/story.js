@@ -6,7 +6,8 @@ module-type: macro
 \*/
 (function(){
 
-/*jslint node: true, jquery: true, browser: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 function scrollToTop(duration) {
@@ -30,9 +31,8 @@ exports.info = {
 	events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler"]
 };
 
-
 exports.handleEvent = function(event) {
-	var template, storyTiddler, story, storyRecord, tiddler, storyTiddlerModified;
+	var template, storyTiddler, story, storyRecord, tiddler, storyTiddlerModified, t;
 	switch(event.type) {
 		case "tw-navigate":
 			// Navigate to a specified tiddler
@@ -55,12 +55,12 @@ exports.handleEvent = function(event) {
 			if(storyTiddler && storyTiddler.fields.hasOwnProperty("text")) {
 				story = JSON.parse(storyTiddler.fields.text);
 			}
-			for(var t=0; t<story.tiddlers.length; t++) {
-				var storyRecord = story.tiddlers[t];
+			for(t=0; t<story.tiddlers.length; t++) {
+				storyRecord = story.tiddlers[t];
 				if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
 					storyRecord.title = "Draft " + (new Date()) + " of " + event.tiddlerTitle;
 					storyRecord.template = template;
-					var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+					tiddler = this.wiki.getTiddler(event.tiddlerTitle);
 					this.wiki.addTiddler(new $tw.Tiddler(
 						{
 							text: "Type the text for the tiddler '" + event.tiddlerTitle + "'"
@@ -84,10 +84,10 @@ exports.handleEvent = function(event) {
 			if(storyTiddler && storyTiddler.fields.hasOwnProperty("text")) {
 				story = JSON.parse(storyTiddler.fields.text);
 			}
-			for(var t=0; t<story.tiddlers.length; t++) {
-				var storyRecord = story.tiddlers[t];
+			for(t=0; t<story.tiddlers.length; t++) {
+				storyRecord = story.tiddlers[t];
 				if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
-					var tiddler = this.wiki.getTiddler(storyRecord.title);
+					tiddler = this.wiki.getTiddler(storyRecord.title);
 					if(tiddler && tiddler.fields.hasOwnProperty("draft.title")) {
 						// Save the draft tiddler as the real tiddler
 						this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: tiddler.fields["draft.title"],"draft.title": undefined, "draft.of": undefined}));

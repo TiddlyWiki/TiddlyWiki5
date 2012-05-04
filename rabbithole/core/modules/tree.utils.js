@@ -8,7 +8,8 @@ Static utility methods for the $tw.Tree class
 \*/
 (function(){
 
-/*jshint node: true, browser: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 /*
@@ -18,7 +19,7 @@ exports.errorNode = function(text) {
 	return $tw.Tree.Element("span",{
 		"class": ["label","label-important"]
 	},[
-		new TextNode(text)
+		new $tw.Tree.Text(text)
 	]);
 };
 

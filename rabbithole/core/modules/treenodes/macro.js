@@ -9,6 +9,7 @@ Macro node, used as the base class for macros
 (function(){
 
 /*jshint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var Node = require("./node.js").Node;
@@ -46,8 +47,7 @@ var Macro = function(macroName,srcParams,content,wiki,dependencies) {
 			this.info = MacroClass.prototype.info;
 		}
 	} else {
-		// If Macro() has been called without new then lookup the macro class to instantiate
-		var MacroClass = wiki.macros[macroName];
+		// If Macro() has been called without 'new' then instantiate the right macro class
 		return new MacroClass(macroName,srcParams,content,wiki,dependencies);
 	}
 };
@@ -123,7 +123,7 @@ Macro.prototype.cloneContent = function() {
 		contentClones.push(this.content[t].clone());
 	}
 	return contentClones;
-}
+};
 
 Macro.prototype.clone = function() {
 	return new this.MacroClass(this.macroName,this.srcParams,this.cloneContent(),this.wiki,this.dependencies);

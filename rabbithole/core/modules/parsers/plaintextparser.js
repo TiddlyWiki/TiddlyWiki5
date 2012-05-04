@@ -8,7 +8,8 @@ Renders plain text tiddlers
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var PlainTextParser = function(options) {

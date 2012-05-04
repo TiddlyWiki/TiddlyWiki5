@@ -8,13 +8,14 @@ Dump command
 \*/
 (function(){
 
-/*jslint node: true, browser: true */
+/*jshint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.info = {
 	name: "dump",
 	synchronous: true
-}
+};
 
 var Command = function(params,commander) {
 	this.params = params;
@@ -32,13 +33,13 @@ Command.prototype.execute = function() {
 	} else {
 		return "Unknown subcommand (" + this.params[0] + ") for dump command";
 	}
-}
+};
 
 Command.prototype.subcommands = {};
 
 
 Command.prototype.subcommands.tiddlers = function() {
-	var tiddlers = this.commander.wiki.sortTiddlers()
+	var tiddlers = this.commander.wiki.sortTiddlers();
 	this.output.write("Wiki contains these tiddlers:\n");
 	for(var t=0; t<tiddlers.length; t++) {
 		this.output.write(tiddlers[t] + "\n");
@@ -47,7 +48,7 @@ Command.prototype.subcommands.tiddlers = function() {
 };
 
 Command.prototype.subcommands.shadows = function() {
-	var tiddlers = this.commander.wiki.shadows.sortTiddlers()
+	var tiddlers = this.commander.wiki.shadows.sortTiddlers();
 	this.output.write("Wiki contains these shadow tiddlers:\n");
 	for(var t=0; t<tiddlers.length; t++) {
 		this.output.write(tiddlers[t] + "\n");

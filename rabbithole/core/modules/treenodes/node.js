@@ -8,7 +8,8 @@ Base class for all other tree nodes
 \*/
 (function(){
 
-/*jshint node: true, browser: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 /*

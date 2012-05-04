@@ -7,6 +7,7 @@ module-type: editor
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 function BitmapEditor(macroNode) {

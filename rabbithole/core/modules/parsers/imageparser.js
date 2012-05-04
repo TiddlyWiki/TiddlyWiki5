@@ -8,7 +8,8 @@ Parses an image into a parse tree containing an HTML img element
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var ImageParser = function(options) {

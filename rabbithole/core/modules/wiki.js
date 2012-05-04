@@ -21,7 +21,8 @@ last dispatched. Each entry is a hashmap containing two fields:
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.getTiddlerText = function(title,defaultText) {
@@ -124,7 +125,7 @@ exports.sortTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		tiddlers.push(this.tiddlers[t])
+		tiddlers.push(this.tiddlers[t]);
 	}
 	tiddlers.sort(function(a,b) {
 		var aa = a.fields[sortField] || 0,

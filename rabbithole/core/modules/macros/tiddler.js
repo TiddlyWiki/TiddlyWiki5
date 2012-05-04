@@ -41,7 +41,8 @@ the `template` parameter or, if that parameter is missing, the tiddler named in 
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -66,7 +67,7 @@ exports.evaluateDependencies = function() {
 		dependencies.addDependency(template,true);
 	}
 	return dependencies;
-}
+};
 
 exports.executeMacro = function() {
 	var renderTitle = this.params.target,
@@ -124,7 +125,7 @@ exports.executeMacro = function() {
 	}
 	// Return the children
 	return [$tw.Tree.Element("div",attributes,childrenClone)];
-}
+};
 
 exports.refreshInDom = function(changes) {
 	var t;

@@ -19,7 +19,8 @@ themselves with `new` when required.
 \*/
 (function(){
 
-/*jshint node: true, browser: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.Tree = {};

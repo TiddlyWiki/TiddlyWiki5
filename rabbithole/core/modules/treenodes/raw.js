@@ -8,7 +8,8 @@ Raw, unparsed HTML nodes
 \*/
 (function(){
 
-/*jshint node: true, browser: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var Node = require("./node.js").Node;

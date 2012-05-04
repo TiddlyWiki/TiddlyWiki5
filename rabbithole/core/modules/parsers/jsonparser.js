@@ -8,7 +8,8 @@ Parses a JSON object into a parse tree
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 var renderObject = function(obj) {
@@ -41,7 +42,7 @@ var JSONParser = function(options) {
 };
 
 JSONParser.prototype.parse = function(type,text) {
-	return new $tw.Renderer([renderObject(JSON.parse(text))],new Dependencies());
+	return new $tw.Renderer([renderObject(JSON.parse(text))],new $tw.Dependencies());
 };
 
 exports["application/json"] = JSONParser;

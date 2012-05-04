@@ -9,12 +9,13 @@ Version command
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.info = {
 	name: "version",
 	synchronous: true
-}
+};
 
 var Command = function(params,commander) {
 	this.params = params;
@@ -24,7 +25,7 @@ var Command = function(params,commander) {
 Command.prototype.execute = function() {
 	this.commander.streams.output.write($tw.utils.getVersionString() + "\n");
 	return null; // No error
-}
+};
 
 exports.Command = Command;
 

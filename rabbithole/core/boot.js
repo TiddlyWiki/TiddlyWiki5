@@ -24,8 +24,8 @@ In practice, each module is wrapped in a separate script block.
 \*/
 (function() {
 
-/*jslint node: true */
-/*global modules: false */
+/*jslint node: true, browser: true */
+/*global modules: false, $tw: false */
 "use strict";
 
 /////////////////////////// Setting up $tw
@@ -40,7 +40,7 @@ $tw.boot = {};
 
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
-$tw.modules.titles = $tw.modules.titles || {} // hashmap by module title of {fn:, exports:, moduleType:}
+$tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
 
 // Plugins store organises module exports by module type
 $tw.plugins = $tw.plugins || {};
@@ -75,7 +75,7 @@ Determine if a value is an array
 */
 $tw.utils.isArray = function(value) {
 	return Object.prototype.toString.call(value) == "[object Array]";
-}
+};
 
 // Convert "&amp;" to &, "&lt;" to <, "&gt;" to > and "&quot;" to "
 $tw.utils.htmlDecode = function(s) {
@@ -88,8 +88,9 @@ Pad a string to a given length with "0"s. Length defaults to 2
 $tw.utils.pad = function(value,length) {
 	length = length || 2;
 	var s = value.toString();
-	if(s.length < length)
+	if(s.length < length) {
 		s = "000000000000000000000000000".substr(0,length - s.length) + s;
+	}
 	return s;
 };
 
@@ -367,8 +368,8 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type];
 	}
 	for(var f in srcFields) {
-		fields[f] = srcFields[f]
-	};
+		fields[f] = srcFields[f];
+	}
 	if(deserializer) {
 		return deserializer.call(this,text,fields);
 	} else {
@@ -564,7 +565,7 @@ $tw.plugins.loadPlugins = function(filepath,basetitle,excludeRegExp) {
 			$tw.plugins.loadTiddlersFromFile(filepath,basetitle);
 		}
 	}
-}
+};
 
 /*
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
@@ -599,7 +600,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 	}
 	// Return the exports of the module
 	return module.exports;
-}
+};
 
 // Load plugins from the plugins directory
 $tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));

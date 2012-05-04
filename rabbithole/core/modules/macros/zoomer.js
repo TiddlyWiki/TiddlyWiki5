@@ -7,6 +7,7 @@ module-type: macro
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.info = {
@@ -22,7 +23,7 @@ exports.startZoomer = function(x,y) {
 	this.startX = x;
 	this.startY = y;
 	$tw.utils.addClass(document.body,"in-zoomer");
-}
+};
 
 exports.stopZoomer = function() {
 	var newScrollY = this.yFactor * (this.bodyHeight - this.windowHeight);
@@ -33,7 +34,7 @@ exports.stopZoomer = function() {
 		"translateY(" + ((this.windowHeight / this.scale) - this.bodyHeight) * this.yFactor * this.xFactor + "px)";
 	$tw.utils.removeClass(document.body,"in-zoomer");
 	document.body.style.webkitTransform = "translateY(0) scale(1) translateY(0)";
-}
+};
 
 /*
 Zoom the body element given a touch/mouse position in screen coordinates

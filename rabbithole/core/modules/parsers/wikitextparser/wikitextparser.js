@@ -30,7 +30,8 @@ HTML nodes look like this:
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 /*

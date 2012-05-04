@@ -8,7 +8,8 @@ Core configuration constants
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.dateFormats = {

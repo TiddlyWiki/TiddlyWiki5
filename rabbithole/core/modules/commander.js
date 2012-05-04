@@ -9,6 +9,7 @@ The $tw.Commander class is a command interpreter
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 /*

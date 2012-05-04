@@ -8,7 +8,8 @@ Extension methods for the $tw.Tiddler object
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.hasTag = function(tag) {

@@ -35,7 +35,8 @@ The slider is a good study example of a simple interactive macro.
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.info = {

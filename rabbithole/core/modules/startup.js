@@ -9,6 +9,7 @@ This is the main application logic for both the client and server
 (function(){
 
 /*jslint node: true, browser: true */
+/*global $tw: false */
 "use strict";
 
 exports.startup = function() {
@@ -56,6 +57,6 @@ if($tw.isBrowser) {
 	commander.execute();
 }
 
-}
+};
 
 })();
