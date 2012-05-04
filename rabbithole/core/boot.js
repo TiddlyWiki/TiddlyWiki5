@@ -601,9 +601,6 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 // Load plugins from the plugins directory
 $tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.moduleSubDir));
 
-// Load plugins from the TiddlyWiki store directory
-$tw.plugins.loadPlugins($tw.boot.wikiPath);
-
 // End of if(!$tw.isBrowser)	
 }
 
