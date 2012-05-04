@@ -7,7 +7,7 @@
 
 # default values
 REMOTE_USER=${1:-$USER}
-FROMDIR=$PWD/tmp/tw5
+FROMDIR=$PWD/../tmp/tw5
 HOST="tiddlywiki.com"
 DIR="/var/www/www.tiddlywiki.com/htdocs/tiddlywiki5"
 OWNER="www-data:www-data"
