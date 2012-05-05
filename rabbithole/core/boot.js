@@ -389,7 +389,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","t
 			match = headerCommentRegExp.exec(text);
 		fields.text = text;
 		if(match) {
-			fields = $tw.utils.parseFields(match[1],fields);
+			fields = $tw.utils.parseFields(match[1].split("\n\n")[0],fields);
 		}
 		return [fields];
 	}
@@ -473,11 +473,16 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","
 					var text = node.innerHTML,
 						s = text.indexOf("{"),
 						e = text.lastIndexOf("}");
-					if(s !== -1 && e !== -1) {
+					if(node.hasAttribute("data-module") && s !== -1 && e !== -1) {
 						text = text.substring(s+1,e-1);
 					}
-					var fields = $tw.wiki.deserializeTiddlers("application/javascript",text)[0];
-					fields.title = node.getAttribute("data-tiddler-title");
+					var fields = {text: text},
+						attributes = node.attributes;
+					for(var a=0; a<attributes.length; a++) {
+						if(attributes[a].nodeName.substr(0,13) === "data-tiddler-") {
+							fields[attributes[a].nodeName.substr(13)] = attributes[a].nodeValue;
+						}
+					}
 					return fields;
 				} else {
 					return null;

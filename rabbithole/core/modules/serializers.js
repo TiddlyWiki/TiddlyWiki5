@@ -21,14 +21,37 @@ exports["text/html"] = function(tiddler) {
 	return text ? text : "";
 };
 
+exports["application/javascript"] = function(tiddler) {
+	var attributes = {type: "text/javascript"}; // The script type is set to text/javascript for compatibility with old browsers
+	for(var f in tiddler.fields) {
+		if(f !== "text") {
+			attributes["data-tiddler-" + f] = tiddler.getFieldString(f);
+		}
+	}
+	return $tw.Tree.Element(
+			"script",
+			attributes,
+			[$tw.Tree.Raw(tiddler.fields.text)]
+		).render("text/html");
+};
+
 exports["application/x-tiddler-module"] = function(tiddler) {
-	var result = [];
-	result.push("<" + "script type=\"text/javascript\" data-tiddler-title=\"" + tiddler.fields.title + "\">\n");
-	result.push("$tw.modules.define(\"" + tiddler.fields.title + "\",\"" + tiddler.fields["module-type"] + "\",function(module,exports,require) {");
-	result.push(tiddler.fields.text);
-	result.push("});\n");
-	result.push("</" + "script>");
-	return result.join("");
+	var attributes = {
+			type: "text/javascript",
+			"data-module": "yes"
+		}, // The script type is set to text/javascript for compatibility with old browsers
+		text = tiddler.fields.text;
+	text = "$tw.modules.define(\"" + tiddler.fields.title + "\",\"" + tiddler.fields["module-type"] + "\",function(module,exports,require) {" + text + "});\n";
+	for(var f in tiddler.fields) {
+		if(f !== "text") {
+			attributes["data-tiddler-" + f] = tiddler.getFieldString(f);
+		}
+	}
+	return $tw.Tree.Element(
+			"script",
+			attributes,
+			[$tw.Tree.Raw(text)]
+		).render("text/html");
 };
 
 exports["application/x-tiddler-html-div"] = function(tiddler) {

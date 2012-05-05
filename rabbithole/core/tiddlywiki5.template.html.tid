@@ -36,16 +36,12 @@ type: text/x-tiddlywiki-html
 <<^"[is[tiddler]]" application/x-tiddler-html-div>>
 </div>
 <!----------- Boot kernel prologue ----------->
-<script id="jsBootStartArea" type="text/javascript">
-<<^"$:/core/bootprefix.js" text/plain>>
-</script>
+<<^"$:/core/bootprefix.js" application/javascript>>
 <!----------- Plugin modules ----------->
 <div id="pluginModules" style="display:none;">
 <<^"[is[shadowModule]]" application/x-tiddler-module>>
 </div>
 <!----------- Boot kernel ----------->
-<script id="jsBootEndArea" type="text/javascript">
-<<^"$:/core/boot.js" text/plain>>
-</script>
+<<^"$:/core/boot.js" application/javascript>>
 </body>
 </html>
