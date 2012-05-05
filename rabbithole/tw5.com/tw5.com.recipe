@@ -1,13 +1,8 @@
 recipe: ../tiddlywiki5.recipe
 
-style: lib/bootstrap/css/bootstrap.css
-style: shadows/css/*.css
+style: shadows/*.css
 
 shadow: shadows/*.tid
-shadow: shadows/templates/*.tid
-shadow: shadows/tiddlycss/*.tid
-#jslib: lib/jquery.js
-#jslib: lib/bootstrap/js/bootstrap.js
 
 pluginmodule: plugins/*.js
 pluginmodule: plugins/demoplugin/*.js
