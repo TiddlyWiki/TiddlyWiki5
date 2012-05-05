@@ -5,7 +5,7 @@ version: core/version.txt
 jsbootstart: core/bootprefix.js
 jsbootend: core/boot.js
 
-shadow: core/tiddlywiki5.template.html
+shadow: core/tiddlywiki5.template.html.tid
 	title: $:/core/tiddlywiki5.template.html
 shadow: core/copyright.txt
 	title: $:/core/copyright.txt

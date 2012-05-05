@@ -1,3 +1,6 @@
+title: $:/core/tiddlywiki5.template.html
+type: text/x-tiddlywiki-html
+
 <<! 
 
 A mockup of a template for new-style generation of TiddlyWiki HTML files
@@ -17,7 +20,7 @@ A mockup of a template for new-style generation of TiddlyWiki HTML files
 <meta name="copyright" content="
 [[$:/core/copyright.txt]]
 " />
-<title>[[$:/shadows/title]]</title>
+<title><<tiddler target:$:/shadows/title>></title>
 <style id="styleArea" type="text/css">
 <<serialize filter:"[is[shadow]type[text/css]]" as:styleblock>>
 </style>
