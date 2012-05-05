@@ -121,7 +121,7 @@ exports.addTiddler = function(tiddler) {
 exports.serializeTiddler = function(title,type) {
 	var serializer = $tw.Wiki.tiddlerSerializerPlugins[type],
 		tiddler = this.getTiddler(title);
-	if(serializer) {
+	if(serializer && tiddler) {
 		return serializer.call(this,tiddler);
 	} else {
 		return null;
