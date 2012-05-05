@@ -437,15 +437,15 @@ var rules = [
 {
 	name: "macro",
 	match: "<<",
-	lookaheadRegExp: /<<([^>\s]+)(?:\s*)((?:[^>]|(?:>(?!>)))*)>>/mg,
+	lookaheadRegExp: /<<(?:([!@£\$%\^\&\*\(\)`\~'"\|\\\/;\:\.\,\+\=\-\_\{\}])|([^>\s]+))(?:\s*)((?:[^>]|(?:>(?!>)))*)>>/mg,
 	handler: function(w)
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
-		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
-		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && lookaheadMatch[1]) {
+		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
+			name = lookaheadMatch[1] || lookaheadMatch[2];
+		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && name) {
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
-			var name = lookaheadMatch[1];
-			insertMacroCall(w,w.output,name,lookaheadMatch[2]);
+			insertMacroCall(w,w.output,name,lookaheadMatch[3]);
 		}
 	}
 },
