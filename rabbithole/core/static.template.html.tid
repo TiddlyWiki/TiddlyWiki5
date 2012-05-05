@@ -1,0 +1,26 @@
+title: $:/core/static.template.html
+type: text/x-tiddlywiki-html
+
+<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="application-name" content="TiddlyWiki" />
+<meta name="generator" content="TiddlyWiki" />
+<meta name="tiddlywiki-version" content="<<^"$:/core/version.txt" text/plain>>" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="format-detection" content="telephone=no">
+<meta name="copyright" content="
+<<^"$:/core/copyright.txt" text/plain>>
+" />
+<title><<tiddler target:$:/shadows/title>></title>
+<!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
+<style id="styleArea" type="text/css">
+<<^"[is[shadowStyle]]" text/plain>>
+</style>
+</head>
+<body>
+<<^"PageTemplate" text/html>>
+</body>
+</html>
