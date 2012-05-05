@@ -2,7 +2,7 @@
 
 # run TiddlyWiki5
 
-node ../core/boot.js --verbose --wikitest ../../test/wikitests/ || exit 1
+node ../core/boot.js --verbose --wikitest ../tests/wikitests/ || exit 1
 
 # run jshint
 jshint ../core/*.js

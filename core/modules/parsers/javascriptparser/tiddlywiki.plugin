@@ -1,7 +1,7 @@
 {
 	"tiddlers": [
 		{
-			"file": "../../../../../node_modules/esprima/esprima.js", 
+			"file": "../../../../node_modules/esprima/esprima.js", 
 			"fields": {
 				"title": "$:/core/modules/parsers/javascriptparser/esprima.js",
 				"type": "application/javascript"
