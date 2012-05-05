@@ -1,0 +1,7 @@
+title: SeventhTiddler
+
+<<echo {{2+2}}>>
+
+<<echo {{tiddler.title}}>>
+
+<<echo {{"window"}}>>

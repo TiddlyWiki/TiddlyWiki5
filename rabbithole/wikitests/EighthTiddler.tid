@@ -1,0 +1,6 @@
+title: EighthTiddler
+
+<<tiddler SixthTiddler>>
+<<tiddler target:SixthTiddler>>
+<<tiddler template:SixthTiddler>>
+<<tiddler template:SixthTiddler target:FirstTiddler>>
