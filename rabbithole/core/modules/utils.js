@@ -35,8 +35,8 @@ exports.deepCopy = function(object) {
 exports.extendDeepCopy = function(object,extendedProperties) {
 	var result = $tw.utils.deepCopy(object),t;
 	for(t in extendedProperties) {
-		if(object[t] !== undefined) {
-			result[t] = $tw.utils.deepCopy(object[t]);
+		if(extendedProperties[t] !== undefined) {
+			result[t] = $tw.utils.deepCopy(extendedProperties[t]);
 		}
 	}
 	return result;
