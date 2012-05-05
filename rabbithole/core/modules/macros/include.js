@@ -13,23 +13,24 @@ module-type: macro
 exports.info = {
 	name: "^",
 	params: {
-		target: {byPos: 0, type: "tiddler"},
+		filter: {byPos: 0, type: "filter"},
 		as: {byPos: 1, as: "text"}
 	}
 };
 
 exports.executeMacro = function() {
-	var tiddler = this.hasParameter("target") ? this.wiki.getTiddler(this.params.target) : null,
-		as = this.params.as,
-		children = [];
-	if(tiddler) {
-		as = as || tiddler.fields.as || "text/plain";
-		children = this.wiki.parseText(as,tiddler.fields.text).tree;
-		for(var t=0; t<children.length; t++) {
-			children[t].execute(this.parents,this.tiddlerTitle);
+	var as = this.params.as || "text/plain";
+	if(this.hasParameter("filter")) {
+		var titles = this.wiki.filterTiddlers(this.params.filter),
+			result = [];
+		for(var t=0; t<titles.length; t++) {
+			result.push(this.wiki.serializeTiddler(this.params.filter,as));
 		}
+		return [$tw.Tree.Element("pre",{},[
+				$tw.Tree.Text(result.join("\n"))
+			])];
 	}
-	return children;
+	return [];
 };
 
 
