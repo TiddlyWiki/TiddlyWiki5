@@ -53,5 +53,6 @@ TiddlyTextParser.prototype.parse = function(type,text) {
 };
 
 exports["text/x-tiddlywiki-css"] = TiddlyTextParser;
+exports["text/x-tiddlywiki-html"] = TiddlyTextParser;
 
 })();
