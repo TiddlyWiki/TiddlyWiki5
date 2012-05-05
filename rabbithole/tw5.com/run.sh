@@ -4,8 +4,6 @@
 
 node ../core/boot.js --verbose --wikitest ../../test/wikitests/ || exit 1
 
-node ../core/boot.js --verbose --savetiddler $:/core/tiddlywiki5.template.html ../tmp/tw5/rabbit.html text/plain || exit 1
-
 # run jshint
 jshint ../core/*.js
 jshint ../core/modules/*.js

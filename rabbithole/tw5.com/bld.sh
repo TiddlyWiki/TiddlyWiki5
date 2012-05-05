@@ -7,8 +7,4 @@ mkdir -p tmp
 mkdir -p tmp/tw5
 
 # cook TiddlyWiki5
-node ../../tiddlywiki.js \
-	--recipe $PWD/tw5.com.recipe \
-	--store tiddlers \
-	--savewiki ../tmp/tw5 \
-	|| exit 1
+node ../core/boot.js --verbose --savetiddler $:/core/tiddlywiki5.template.html tmp/tw5/index.html text/plain || exit 1
