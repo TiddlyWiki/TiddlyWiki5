@@ -48,6 +48,9 @@ var Macro = function(macroName,srcParams,content,wiki,dependencies) {
 		}
 	} else {
 		// If Macro() has been called without 'new' then instantiate the right macro class
+		if(!MacroClass) {
+			throw "Unknown macro '" + macroName + "'";
+		}
 		return new MacroClass(macroName,srcParams,content,wiki,dependencies);
 	}
 };
