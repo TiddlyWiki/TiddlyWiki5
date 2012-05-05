@@ -16,7 +16,7 @@ jsmodule: ../js/*.js
 
 jsmodule: ../js/macros/*.js
 
-jsmodule: ../node_modules/esprima/esprima.js
+jsmodule: ../../node_modules/esprima/esprima.js
 	title: esprima
 
 jsbootstart: boot/BootStart.js
