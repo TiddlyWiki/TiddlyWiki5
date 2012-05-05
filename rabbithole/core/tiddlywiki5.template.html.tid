@@ -1,28 +1,22 @@
 title: $:/core/tiddlywiki5.template.html
 type: text/x-tiddlywiki-html
 
-<<! 
-
-A mockup of a template for new-style generation of TiddlyWiki HTML files
-
->>
-
 <!doctype html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="[[$:/core/version.txt]]" />
+<meta name="tiddlywiki-version" content="<<^"$:/core/version.txt" text/plain>>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="
-[[$:/core/copyright.txt]]
+<<^"$:/core/copyright.txt" text/plain>>
 " />
 <title><<tiddler target:$:/shadows/title>></title>
 <style id="styleArea" type="text/css">
-<<serialize filter:"[is[shadow]type[text/css]]" as:styleblock>>
+<<!serialize filter:"[is[shadow]type[text/css]]" as:styleblock>>
 </style>
 </head>
 <body>
@@ -30,22 +24,22 @@ A mockup of a template for new-style generation of TiddlyWiki HTML files
 <!--@@noscript@@-->
 </noscript>
 <div id="shadowArea" style="display:none;">
-<<serialize filter:"[is[shadow]!type[text/css]!is[module]]" as:divblock>>
+<<!serialize filter:"[is[shadow]!type[text/css]!is[module]]" as:divblock>>
 </div>
 <div id="storeArea" style="display:none;">
-<<serialize filter:"[is[tiddler]]" as:divblock>>
+<<!serialize filter:"[is[tiddler]]" as:divblock>>
 </div>
 <script id="jsLibArea" type="text/javascript">
-[[$:/lib/jquery.js]]
+<<^"$:/lib/jquery.js" text/plain>>
 </script>
 <script id="jsBootStartArea" type="text/javascript">
-[[$:/core/bootprefix.js]]
+<<^"$:/core/bootprefix.js" text/plain>>
 </script>
 <div id="pluginModules" style="display:none;">
-<<serialize filter:"[is[module]]" as:pluginmodule>>
+<<!serialize filter:"[is[module]]" as:pluginmodule>>
 </div>
 <script id="jsBootEndArea" type="text/javascript">
-[[$:/core/boot.js]]
+<<^"$:/core/boot.js" text/plain>>
 </script>
 </body>
 </html>
