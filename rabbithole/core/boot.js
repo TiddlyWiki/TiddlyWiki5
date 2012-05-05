@@ -58,6 +58,7 @@ $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.fileExtensions = {
 	".tid": {type: "application/x-tiddler", encoding: "utf8"},
 	".txt": {type: "text/plain", encoding: "utf8"},
+	".css": {type: "text/css", encoding: "utf8"},
 	".html": {type: "text/html", encoding: "utf8"},
 	".js": {type: "application/javascript", encoding: "utf8"},
 	".jpg": {type: "image/jpeg", encoding: "base64"},
@@ -97,10 +98,10 @@ $tw.utils.pad = function(value,length) {
 // Convert a date into YYYYMMDDHHMM format
 $tw.utils.stringifyDate = function(value) {
 	return value.getUTCFullYear() +
-			$tw.utils.pad2(value.getUTCMonth() + 1) +
-			$tw.utils.pad2(value.getUTCDate()) + 
-			$tw.utils.pad2(value.getUTCHours()) + 
-			$tw.utils.pad2(value.getUTCMinutes());
+			$tw.utils.pad(value.getUTCMonth() + 1) +
+			$tw.utils.pad(value.getUTCDate()) + 
+			$tw.utils.pad(value.getUTCHours()) + 
+			$tw.utils.pad(value.getUTCMinutes());
 };
 
 // Parse a date from a YYYYMMDDHHMMSSMMM format string
@@ -355,10 +356,14 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	srcFields = srcFields || {};
 	var deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type],
 		fields = {};
-	if(!deserializer) {
+	if(!deserializer && $tw.config.fileExtensions[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.config.fileExtensions[type].type;
 		deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type];
+	}
+	if(!deserializer) {
+		// If we still don't have a deserializer, treat it as plain text
+		deserializer = $tw.Wiki.tiddlerDeserializerPlugins["text/plain"];
 	}
 	for(var f in srcFields) {
 		fields[f] = srcFields[f];
@@ -610,6 +615,12 @@ $tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.bootPath,$tw.config.boot
 
 // Load any plugins in the wiki plugins directory
 $tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
+
+// HACK: to be replaced when we re-establish sync plugins
+// Load shadow tiddlers from wiki shadows directory
+$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./shadows"));
+// Load tiddlers from wiki tiddlers directory
+$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./tiddlers"));
 
 // End of if(!$tw.isBrowser)	
 }
