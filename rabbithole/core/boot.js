@@ -198,7 +198,7 @@ $tw.plugins.registerPlugin = function(name,moduleType,moduleExports) {
 /*
 Register all plugin module tiddlers
 */
-$tw.plugins.registerPlugins = function() {
+$tw.plugins.registerPluginModules = function() {
 	for(var title in $tw.wiki.shadows.tiddlers) {
 		var tiddler = $tw.wiki.shadows.getTiddler(title);
 		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
@@ -277,13 +277,6 @@ Hashmap of field plugins by plugin name
 $tw.Tiddler.fieldPlugins = {};
 
 /*
-Install any tiddler field plugin modules
-*/
-$tw.Tiddler.installPlugins = function() {
-	$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
-};
-
-/*
 Register and install the built in tiddler field plugins
 */
 $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerfields/modified","tiddlerfield",{
@@ -312,7 +305,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerfields/tags","tiddl
 	}
 });
 // Install built in tiddler fields plugins so that they are available immediately
-$tw.Tiddler.installPlugins();
+$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
 
 /////////////////////////// Barebones wiki store
 
@@ -369,6 +362,9 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	}
 	for(var f in srcFields) {
 		fields[f] = srcFields[f];
+	}
+	if(!fields.type) {
+		fields.type = type;
 	}
 	if(deserializer) {
 		return deserializer.call(this,text,fields);
@@ -527,11 +523,8 @@ $tw.boot.wikiPath = process.cwd();
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
 */
-$tw.plugins.loadTiddlersFromFile = function(file,basetitle) {
+$tw.plugins.loadTiddlersFromFile = function(file,fields) {
 	var ext = path.extname(file),
-		fields = {
-			title: basetitle
-		},
 		extensionInfo = $tw.config.fileExtensions[ext],
 		data = fs.readFileSync(file).toString(extensionInfo ? extensionInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
@@ -548,21 +541,31 @@ $tw.plugins.loadTiddlersFromFile = function(file,basetitle) {
 /*
 Load all the plugins from the plugins directory
 */
-$tw.plugins.loadPlugins = function(filepath,basetitle,excludeRegExp) {
+$tw.plugins.loadPluginsFromFolder = function(filepath,basetitle,excludeRegExp) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
 	if(path.existsSync(filepath)) {
 		var stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			var files = fs.readdirSync(filepath);
-			for(var f=0; f<files.length; f++) {
-				var file = files[f];
-				if(!excludeRegExp.test(file)) {
-					$tw.plugins.loadPlugins(filepath + "/" + file,basetitle + "/" + file,excludeRegExp);
+			// Look for a tiddlywiki.plugin file
+			if(files.indexOf("tiddlywiki.plugin") !== -1) {
+				// If so, process the files it describes
+				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
+				for(var p=0; p<pluginInfo.tiddlers.length; p++) {
+					$tw.plugins.loadTiddlersFromFile(path.resolve(filepath,pluginInfo.tiddlers[p].file),pluginInfo.tiddlers[p].fields);
+				}
+			} else {
+				// If not, read all the files in the directory
+				for(var f=0; f<files.length; f++) {
+					var file = files[f];
+					if(!excludeRegExp.test(file)) {
+						$tw.plugins.loadPluginsFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp);
+					}
 				}
 			}
 		} else if(stat.isFile()) {
-			$tw.plugins.loadTiddlersFromFile(filepath,basetitle);
+			$tw.plugins.loadTiddlersFromFile(filepath,{title: basetitle});
 		}
 	}
 };
@@ -603,10 +606,10 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 };
 
 // Load plugins from the plugins directory
-$tw.plugins.loadPlugins(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
+$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
 
 // Load any plugins in the wiki plugins directory
-$tw.plugins.loadPlugins(require("path").resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
+$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
 
 // End of if(!$tw.isBrowser)	
 }
@@ -614,11 +617,7 @@ $tw.plugins.loadPlugins(require("path").resolve($tw.boot.wikiPath,$tw.config.wik
 /////////////////////////// Final initialisation
 
 // Register plugins from the tiddlers we've just loaded
-$tw.plugins.registerPlugins();
-
-// Now we can properly install all of our extension plugins
-$tw.Tiddler.installPlugins();
-$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
+$tw.plugins.registerPluginModules();
 
 // Run any startup plugin modules
 var mainModules = $tw.plugins.moduleTypes["startup"];
