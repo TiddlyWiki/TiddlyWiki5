@@ -21,8 +21,11 @@ type: text/x-tiddlywiki-html
 </head>
 <body>
 <noscript>
-<!--@@noscript@@-->
+<<^"$:/wiki/noscript" text/plain>>
 </noscript>
+<div id="splashArea" style="display:none;">
+<<^"$:/wiki/splash" text/html>>
+</div>
 <div id="shadowArea" style="display:none;">
 <<^"[is[shadowPlain]]" application/x-tiddler-html-div>>
 </div>
