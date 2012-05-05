@@ -8,7 +8,7 @@ This file is a bit of a dumping ground; the expectation is that most of these fu
 \*/
 (function(){
 
-/*jslint node: true */
+/*jslint node: true, browser: true */
 "use strict";
 
 var utils = exports;
