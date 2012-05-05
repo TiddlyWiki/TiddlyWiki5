@@ -24,7 +24,7 @@ exports.executeMacro = function() {
 		var titles = this.wiki.filterTiddlers(this.params.filter),
 			result = [];
 		for(var t=0; t<titles.length; t++) {
-			result.push(this.wiki.serializeTiddler(this.params.filter,as));
+			result.push(this.wiki.serializeTiddler(titles[t],as));
 		}
 		return [$tw.Tree.Element("pre",{},[
 				$tw.Tree.Text(result.join("\n"))
