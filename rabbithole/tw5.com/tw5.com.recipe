@@ -1,8 +1,0 @@
-recipe: ../tiddlywiki5.recipe
-
-style: shadows/*.css
-
-shadow: shadows/*.tid
-
-pluginmodule: plugins/*.js
-pluginmodule: plugins/demoplugin/*.js
