@@ -27,3 +27,10 @@ node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.ht
 `
 !! Notes
 `--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
+!!Try it out
+The easiest way to try out the code is to visit http://tiddlywiki.com/tiddlywiki5/
+
+For trying it out under `node.js`, two batch files are provided:
+
+* `run.sh` boots the kernel and loads the core modules and then outputs the `$tw` global for inspection
+* `bld.sh` builds the new TiddlyWiki 5 HTML file (placed in the `tmp/tw5/` directory by default)

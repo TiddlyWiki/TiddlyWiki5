@@ -4,10 +4,10 @@ title: ReadMe
 <<tiddler HelloThere>>
 !Usage
 <<tiddler CommandLineInterface>>
-!Testing
-<<tiddler Testing>>
 !Architecture
 <<tiddler TiddlyWikiArchitecture>>
+!Plugin Mechanism
+<<tiddler PluginMechanism>>
 !Planned WikiText Features
 <<tiddler NewWikiTextFeatures>>
 
