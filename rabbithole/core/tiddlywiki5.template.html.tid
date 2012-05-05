@@ -16,7 +16,7 @@ type: text/x-tiddlywiki-html
 " />
 <title><<tiddler target:$:/shadows/title>></title>
 <style id="styleArea" type="text/css">
-<<!serialize filter:"[is[shadow]type[text/css]]" as:styleblock>>
+<<^"[is[shadowStyle]]" text/plain>>
 </style>
 </head>
 <body>
@@ -24,10 +24,10 @@ type: text/x-tiddlywiki-html
 <!--@@noscript@@-->
 </noscript>
 <div id="shadowArea" style="display:none;">
-<<!serialize filter:"[is[shadow]!type[text/css]!is[module]]" as:divblock>>
+<<^"[is[shadowPlain]]" application/x-tiddler-html-div>>
 </div>
 <div id="storeArea" style="display:none;">
-<<!serialize filter:"[is[tiddler]]" as:divblock>>
+<<^"[is[tiddler]]" application/x-tiddler-html-div>>
 </div>
 <script id="jsLibArea" type="text/javascript">
 <<^"$:/lib/jquery.js" text/plain>>
@@ -36,7 +36,7 @@ type: text/x-tiddlywiki-html
 <<^"$:/core/bootprefix.js" text/plain>>
 </script>
 <div id="pluginModules" style="display:none;">
-<<!serialize filter:"[is[module]]" as:pluginmodule>>
+<<^"[is[shadowModule]]" application/x-tiddler-module>>
 </div>
 <script id="jsBootEndArea" type="text/javascript">
 <<^"$:/core/boot.js" text/plain>>
