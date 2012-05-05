@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/macros/serialize.js
+title: $:/core/modules/macros/include.js
 type: application/javascript
 module-type: macro
 
@@ -11,12 +11,25 @@ module-type: macro
 "use strict";
 
 exports.info = {
-	name: "serialize",
-	params: {}
+	name: "^",
+	params: {
+		target: {byPos: 0, type: "tiddler"},
+		as: {byPos: 1, as: "text"}
+	}
 };
 
 exports.executeMacro = function() {
-	return [];
+	var tiddler = this.hasParameter("target") ? this.wiki.getTiddler(this.params.target) : null,
+		as = this.params.as,
+		children = [];
+	if(tiddler) {
+		as = as || tiddler.fields.as || "text/plain";
+		children = this.wiki.parseText(as,tiddler.fields.text).tree;
+		for(var t=0; t<children.length; t++) {
+			children[t].execute(this.parents,this.tiddlerTitle);
+		}
+	}
+	return children;
 };
 
 
