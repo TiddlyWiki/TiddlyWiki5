@@ -27,7 +27,7 @@ var TiddlyTextParser = function(options) {
 TiddlyTextParser.prototype.parse = function(type,text) {
 	var output = [],
 		dependencies = new $tw.Dependencies(),
-		macroRegExp = /(?:\[\[([^\]]+)\]\])|(?:<<([^>\s]+)(?:\s*)((?:[^>]|(?:>(?!>)))*)>>)/mg,
+		macroRegExp = /(?:\[\[([^\]]+)\]\])|(?:<<(?:([!@£\$%\^\&\*\(\)`\~'"\|\\\/;\:\.\,\+\=\-\_\{\}])|([^>\s]+))(?:\s*)((?:[^>]|(?:>(?!>)))*)>>)/mg,
 		lastMatchPos = 0,
 		match,
 		macroNode;
@@ -35,12 +35,13 @@ TiddlyTextParser.prototype.parse = function(type,text) {
 		match = macroRegExp.exec(text);
 		if(match) {
 			output.push($tw.Tree.Text(text.substring(lastMatchPos,match.index)));
+			var macroName = match[2] || match[3];
 			if(match[1]) { // Transclusion
 				macroNode = $tw.Tree.Macro("tiddler",{
 					target: match[1]
 				},[],this.wiki);
-			} else if(match[2]) { // Macro call
-				macroNode = $tw.Tree.Macro(match[2],match[3],[],this.wiki);
+			} else if(macroName) { // Macro call
+				macroNode = $tw.Tree.Macro(macroName,match[4],[],this.wiki);
 			}
 			output.push(macroNode);
 			dependencies.mergeDependencies(macroNode.dependencies);
