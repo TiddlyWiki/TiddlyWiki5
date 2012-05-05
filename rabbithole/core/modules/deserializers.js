@@ -3,11 +3,7 @@ title: $:/core/modules/deserializers.js
 type: application/javascript
 module-type: tiddlerdeserializer
 
-Represents the dependencies of a tiddler or a parser node as these fields:
-
-	tiddlers: A hashmap of explicitly tiddler titles, with the value `false` if the dependency is skinny, and `true` if it is fat
-	dependentAll: True if there is an implicit skinny dependency on all available tiddlers
-	dependentOnContextTiddler: True if the node has a fat dependency on the current context tiddler
+Plugins to deserialise tiddlers from a block of text
 
 \*/
 (function(){
@@ -17,17 +13,15 @@ Represents the dependencies of a tiddler or a parser node as these fields:
 "use strict";
 
 exports["text/plain"] = function(text,fields) {
-	return [$tw.utils.extendDeepCopy(fields,{
-		text: text,
-		type: "text/plain"
-	})];
+	fields.text = text;
+	fields.type = "text/plain";
+	return [fields];
 };
 
 exports["text/html"] = function(text,fields) {
-	return [$tw.utils.extendDeepCopy(fields,{
-		text: text,
-		type: "text/html"
-	})];
+	fields.text = text;
+	fields.type = "text/html";
+	return [fields];
 };
 
 })();
