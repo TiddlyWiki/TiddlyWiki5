@@ -10,20 +10,20 @@ node core/boot.js <options>
 This boots the TiddlyWiki kernel and loads the core plugins. The wiki store is initially empty.
 
 The command line options are processed sequentially from left to right. Processing pauses during long operations and then resumes with the next command line option in sequence.
-ent recipe
 
 The following options are available:
 |`--load <filepath>` |Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files |
 |`--savetiddler <title> <filename> [<type>]` |Save an individual tiddler as a specified MIME type, defaults to `text/html` |
 |`--wikitest <dir> [save]` |Run wikification tests against the tiddlers in the given directory. Include the `save` flag to save the test result files as the new targets |
 |`--dump tiddlers` |Dump the titles of the tiddlers in the wiki store |
+|`--dump tiddler <title>` |Dump the fields of an individual tiddler |
 |`--dump shadows` |Dump the titles of the shadow tiddlers in the wiki store |
 |`--dump config` |Dump the current core configuration |
 |`--verbose` |Triggers verbose output, useful for debugging |
 !! Examples
 This example loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 `
-node tiddlywiki.js --verbose --load mywiki.html --savertiddler ReadMe ./readme.html
+node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html
 `
 !! Notes
 `--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
