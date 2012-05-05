@@ -7,7 +7,7 @@
 
 # default values
 REMOTE_USER=${1:-$USER}
-FROMDIR=$PWD/../tmp/tw5
+FROMDIR=$PWD/tmp/tw5
 HOST="tiddlywiki.com"
 DIR="/var/www/www.tiddlywiki.com/htdocs/tiddlywiki5"
 OWNER="www-data:www-data"
@@ -23,7 +23,7 @@ function setPermissions() {
 
 echo "uploading files"
 
-FILES="$FROMDIR/index.html $FROMDIR/index.xml"
+FILES="$FROMDIR/index.html $FROMDIR/static.html"
 scp $FILES "$REMOTE_USER@$HOST:$DIR"
 
 echo "setting file permissions"
