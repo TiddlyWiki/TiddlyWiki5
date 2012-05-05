@@ -37,6 +37,17 @@ Command.prototype.execute = function() {
 
 Command.prototype.subcommands = {};
 
+Command.prototype.subcommands.tiddler = function() {
+	if(this.params.length < 2) {
+		return "Too few parameters for dump tiddler command";
+	}
+	var tiddler = this.commander.wiki.getTiddler(this.params[1]);
+	this.output.write("Tiddler '" + this.params[1] + "' contains these fields:\n");
+	for(var t in tiddler.fields) {
+		this.output.write("  " + t + ": " + tiddler.getFieldString(t) + "\n");
+	}
+	return null; // No error
+};
 
 Command.prototype.subcommands.tiddlers = function() {
 	var tiddlers = this.commander.wiki.sortTiddlers();
