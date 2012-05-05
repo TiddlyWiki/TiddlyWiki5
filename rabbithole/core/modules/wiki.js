@@ -118,6 +118,16 @@ exports.addTiddler = function(tiddler) {
 	this.touchTiddler(title);
 };
 
+exports.serializeTiddler = function(title,type) {
+	var serializer = $tw.Wiki.tiddlerSerializerPlugins[type],
+		tiddler = this.getTiddler(title);
+	if(serializer) {
+		return serializer.call(this,tiddler);
+	} else {
+		return null;
+	}
+};
+
 /*
 Return a sorted array of tiddler titles, optionally filtered by a tag 
 */

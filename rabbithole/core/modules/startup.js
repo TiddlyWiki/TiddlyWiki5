@@ -16,17 +16,19 @@ exports.startup = function() {
 	var modules,n,m,f,commander;
 	// Set up additional global objects
 	$tw.plugins.applyMethods("global",$tw);
-	// Reinstall the plugin categories that were installed during the kernel boot process
-	$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
-	$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
-	// Wire up other plugin modules
+	// Wire up plugin modules
 	$tw.plugins.applyMethods("config",$tw.config);
 	$tw.plugins.applyMethods("utils",$tw.utils);
-	$tw.version = $tw.utils.extractVersionInfo();
+	$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
 	$tw.plugins.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.plugins.applyMethods("wikimethod",$tw.Wiki.prototype);
+	$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
+	$tw.Wiki.tiddlerSerializerPlugins = {};
+	$tw.plugins.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerPlugins);
 	$tw.plugins.applyMethods("treeutils",$tw.Tree);
 	$tw.plugins.applyMethods("treenode",$tw.Tree);
+	// Get version information
+	$tw.version = $tw.utils.extractVersionInfo();
 	// Load up the tiddlers in the root of the core directory (we couldn't do before because we didn't have the serializers installed)
 	if(!$tw.isBrowser) {
 		$tw.plugins.loadPluginsFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
