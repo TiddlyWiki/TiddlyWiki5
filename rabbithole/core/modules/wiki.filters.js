@@ -31,21 +31,38 @@ exports.filters = {
 	},
 	is: function(results,match) {
 		switch(match[3]) {
-			case "pluginModule":
-				this.forEachTiddler(function(title,tiddler) {
-					if(title.indexOf("$:/plugins/") === 0 && tiddler.fields.type === "application/javascript") {
+			case "shadowStyle":
+				this.shadows.forEachTiddler(function(title,tiddler) {
+					if(tiddler.fields.type === "text/css") {
 						if(results.indexOf(title) === -1) {
 							results.push(title);
 						}
 					}
 				});
 				break;
-			case "pluginTiddler":
-				this.forEachTiddler(function(title,tiddler) {
-					if(title.indexOf("$:/plugins/") === 0 && tiddler.fields.type !== "application/javascript") {
+			case "shadowModule":
+				this.shadows.forEachTiddler(function(title,tiddler) {
+					if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"]) {
 						if(results.indexOf(title) === -1) {
 							results.push(title);
 						}
+					}
+				});
+				break;
+			case "shadowPlain":
+				this.shadows.forEachTiddler(function(title,tiddler) {
+					if((tiddler.fields.type !== "application/javascript" || !tiddler.fields["module-type"]) &&
+						tiddler.fields.type !== "text/css") {
+						if(results.indexOf(title) === -1) {
+							results.push(title);
+						}
+					}
+				});
+				break;
+			case "tiddler":
+				this.forEachTiddler(function(title,tiddler) {
+					if(results.indexOf(title) === -1) {
+						results.push(title);
 					}
 				});
 				break;
@@ -54,7 +71,7 @@ exports.filters = {
 };
 
 // Return the tiddler titles from the store that match a filter expression
-//    filter - filter expression (eg "tidlertitle [[multi word tiddler title]] [tag[systemConfig]]")
+//    filter - filter expression (eg "tiddlertitle [[multi word tiddler title]] [tag[systemConfig]]")
 // Returns an array of tiddler titles that match the filter expression
 exports.filterTiddlers = function(filter) {
 	// text or [foo[bar]] or [[tiddler title]]
