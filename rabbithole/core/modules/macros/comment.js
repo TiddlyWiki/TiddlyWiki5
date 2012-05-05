@@ -3,7 +3,7 @@ title: $:/core/modules/macros/comment.js
 type: application/javascript
 module-type: macro
 
-Comment macro, a no-op.
+Comment macro, a no-op
 
 \*/
 (function(){
