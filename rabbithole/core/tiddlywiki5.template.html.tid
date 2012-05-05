@@ -15,32 +15,35 @@ type: text/x-tiddlywiki-html
 <<^"$:/core/copyright.txt" text/plain>>
 " />
 <title><<tiddler target:$:/shadows/title>></title>
+<!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <style id="styleArea" type="text/css">
 <<^"[is[shadowStyle]]" text/plain>>
 </style>
 </head>
 <body>
+<!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
-<<^"$:/wiki/noscript" text/plain>>
-</noscript>
 <div id="splashArea" style="display:none;">
 <<^"$:/wiki/splash" text/html>>
 </div>
+</noscript>
+<!----------- Shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
 <<^"[is[shadowPlain]]" application/x-tiddler-html-div>>
 </div>
+<!----------- Ordinary tiddlers ----------->
 <div id="storeArea" style="display:none;">
 <<^"[is[tiddler]]" application/x-tiddler-html-div>>
 </div>
-<script id="jsLibArea" type="text/javascript">
-<<^"$:/lib/jquery.js" text/plain>>
-</script>
+<!----------- Boot kernel prologue ----------->
 <script id="jsBootStartArea" type="text/javascript">
 <<^"$:/core/bootprefix.js" text/plain>>
 </script>
+<!----------- Plugin modules ----------->
 <div id="pluginModules" style="display:none;">
 <<^"[is[shadowModule]]" application/x-tiddler-module>>
 </div>
+<!----------- Boot kernel ----------->
 <script id="jsBootEndArea" type="text/javascript">
 <<^"$:/core/boot.js" text/plain>>
 </script>
