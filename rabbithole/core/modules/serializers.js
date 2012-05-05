@@ -23,11 +23,11 @@ exports["text/html"] = function(tiddler) {
 
 exports["application/x-tiddler-module"] = function(tiddler) {
 	var result = [];
-	result.push("<" + "script type=\"text/javascript\" data-tiddler-title=\"" + tiddler.fields.title + "\">");
+	result.push("<" + "script type=\"text/javascript\" data-tiddler-title=\"" + tiddler.fields.title + "\">\n");
 	result.push("$tw.modules.define(\"" + tiddler.fields.title + "\",\"" + tiddler.fields["module-type"] + "\",function(module,exports,require) {");
 	result.push(tiddler.fields.text);
-	result.push("});");
-	result.push("</" + "script>\n");
+	result.push("});\n");
+	result.push("</" + "script>");
 	return result.join("");
 };
 
