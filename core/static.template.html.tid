@@ -17,7 +17,7 @@ type: text/x-tiddlywiki-html
 <title><<tiddler target:$:/shadows/title>></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <div id="styleArea">
-<<^"[is[shadowStyle]]" text/plain>>
+<<^"[is[shadowStyle]]" application/x-tiddler-css>>
 </div>
 </head>
 <body>
