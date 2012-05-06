@@ -506,6 +506,10 @@ $tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugi
 $tw.wiki.shadows.addTiddlers(
 	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("pluginModules"))
 );
+// Load the stylesheet tiddlers from the DOM
+$tw.wiki.shadows.addTiddlers(
+	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("styleArea"))
+);
 // Load the main store tiddlers from the DOM
 $tw.wiki.addTiddlers(
 	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("storeArea"))

@@ -21,6 +21,20 @@ exports["text/html"] = function(tiddler) {
 	return text ? text : "";
 };
 
+exports["application/x-tiddler-css"] = function(tiddler) {
+	var attributes = {type: "text/css"}; // The script type is set to text/javascript for compatibility with old browsers
+	for(var f in tiddler.fields) {
+		if(f !== "text") {
+			attributes["data-tiddler-" + f] = tiddler.getFieldString(f);
+		}
+	}
+	return $tw.Tree.Element(
+			"style",
+			attributes,
+			[$tw.Tree.Raw(tiddler.fields.text)]
+		).render("text/html");
+};
+
 exports["application/javascript"] = function(tiddler) {
 	var attributes = {type: "text/javascript"}; // The script type is set to text/javascript for compatibility with old browsers
 	for(var f in tiddler.fields) {
