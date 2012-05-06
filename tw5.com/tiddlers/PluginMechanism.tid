@@ -59,3 +59,6 @@ The 'core' is the boot kernel plus the set of plugin modules that it loads. It c
 TiddlyWiki5 makes extensive use of JavaScript inheritance:
 * Tree nodes defined in `$:/core/treenodes/` all inherit from `$:/core/treenodes/node.js`
 * Macros defined in `$:/core/macros/` all inherit from `$:/core/treenodes/macro.js`
+
+`tiddlywiki.plugin` files
+
