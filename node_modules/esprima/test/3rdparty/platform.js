@@ -1,61 +1,59 @@
 /*!
- * Platform.js <http://mths.be/platform>
- * Copyright 2010-2011 John-David Dalton <http://allyoucanleet.com/>
+ * Platform.js v1.0.0-pre <http://mths.be/platform>
+ * Copyright 2010-2012 John-David Dalton <http://allyoucanleet.com/>
  * Available under MIT license <http://mths.be/mit>
  */
 ;(function(window) {
 
   /** Backup possible window/global object */
-  var oldWin = window,
-
-  /** Possible global object */
-  thisBinding = this,
+  var oldWin = window;
 
   /** Detect free variable `exports` */
-  freeExports = typeof exports == 'object' && exports,
+  var freeExports = typeof exports == 'object' && exports;
 
   /** Detect free variable `global` */
-  freeGlobal = typeof global == 'object' && global && (global == global.global ? (window = global) : global),
+  var freeGlobal = typeof global == 'object' && global &&
+    (global == global.global ? (window = global) : global);
 
-  /** Used to check for own properties of an object */
-  hasOwnProperty = {}.hasOwnProperty,
+  /** Opera regexp */
+  var reOpera = /Opera/;
 
   /** Used to resolve a value's internal [[Class]] */
-  toString = {}.toString,
+  var toString = {}.toString;
 
   /** Detect Java environment */
-  java = /Java/.test(getClassOf(window.java)) && window.java,
+  var java = /Java/.test(getClassOf(window.java)) && window.java;
 
   /** A character to represent alpha */
-  alpha = java ? 'a' : '\u03b1',
+  var alpha = java ? 'a' : '\u03b1';
 
   /** A character to represent beta */
-  beta = java ? 'b' : '\u03b2',
+  var beta = java ? 'b' : '\u03b2';
 
   /** Browser document object */
-  doc = window.document || {},
+  var doc = window.document || {};
+
+  /** Used to check for own properties of an object */
+  var hasOwnProperty = {}.hasOwnProperty;
 
   /** Browser navigator object */
-  nav = window.navigator || {},
-
-  /** Previous platform object */
-  old = window.platform,
-
-  /** Browser user agent string */
-  userAgent = nav.userAgent || '',
+  var nav = window.navigator || {};
 
   /**
    * Detect Opera browser
    * http://www.howtocreate.co.uk/operaStuff/operaObject.html
    * http://dev.opera.com/articles/view/opera-mini-web-content-authoring-guidelines/#operamini
    */
-  opera = window.operamini || window.opera,
-
-  /** Opera regexp */
-  reOpera = /Opera/,
+  var opera = window.operamini || window.opera;
 
   /** Opera [[Class]] */
-  operaClass = reOpera.test(operaClass = getClassOf(opera)) ? operaClass : (opera = null);
+  var operaClass = reOpera.test(operaClass = getClassOf(opera)) ? operaClass : (opera = null);
+
+  /** Possible global object */
+  var thisBinding = this;
+
+  /** Browser user agent string */
+  var userAgent = nav.userAgent || '';
 
   /*--------------------------------------------------------------------------*/
 
@@ -175,7 +173,17 @@
   }
 
   /**
-   * A bare-bones` Array#reduce` utility function.
+   * Prepares a string for use in a RegExp constructor by making hyphens and spaces optional.
+   * @private
+   * @param {String} string The string to qualify.
+   * @returns {String} The qualified string.
+   */
+  function qualify(string) {
+    return String(string).replace(/([ -])(?!$)/g, '$1?');
+  }
+
+  /**
+   * A bare-bones` Array#reduce` like utility function.
    * @private
    * @param {Array} array The array to iterate over.
    * @param {Function} callback The function called per iteration.
@@ -188,16 +196,6 @@
       accumulator = callback(accumulator, value, index, array);
     });
     return accumulator;
-  }
-
-  /**
-   * Prepares a string for use in a RegExp constructor by making hyphens and spaces optional.
-   * @private
-   * @param {String} string The string to qualify.
-   * @returns {String} The qualified string.
-   */
-  function qualify(string) {
-    return String(string).replace(/([ -])(?!$)/g, '$1?');
   }
 
   /**
@@ -223,25 +221,25 @@
     ua || (ua = userAgent);
 
     /** Temporary variable used over the script's lifetime */
-    var data,
+    var data;
 
     /** The CPU architecture */
-    arch = ua,
+    var arch = ua;
 
     /** Platform description array */
-    description = [],
+    var description = [];
 
     /** Platform alpha/beta indicator */
-    prerelease = null,
+    var prerelease = null;
 
     /** A flag to indicate that environment features should be used to resolve the platform */
-    useFeatures = ua == userAgent,
+    var useFeatures = ua == userAgent;
 
     /** The browser/environment version */
-    version = useFeatures && opera && typeof opera.version == 'function' && opera.version(),
+    var version = useFeatures && opera && typeof opera.version == 'function' && opera.version();
 
     /* Detectable layout engines (order is important) */
-    layout = getLayout([
+    var layout = getLayout([
       { 'label': 'WebKit', 'pattern': 'AppleWebKit' },
       'iCab',
       'Presto',
@@ -250,10 +248,10 @@
       'Trident',
       'KHTML',
       'Gecko'
-    ]),
+    ]);
 
     /* Detectable browser names (order is important) */
-    name = getName([
+    var name = getName([
       'Adobe AIR',
       'Arora',
       'Avant Browser',
@@ -289,10 +287,10 @@
       { 'label': 'Firefox', 'pattern': '(?:Firefox|Minefield)' },
       { 'label': 'IE', 'pattern': 'MSIE' },
       'Safari'
-    ]),
+    ]);
 
     /* Detectable products (order is important) */
-    product = getProduct([
+    var product = getProduct([
       'BlackBerry',
       { 'label': 'Galaxy S', 'pattern': 'GT-I9000' },
       { 'label': 'Galaxy S2', 'pattern': 'GT-I9100' },
@@ -306,10 +304,10 @@
       'TouchPad',
       'Transformer',
       'Xoom'
-    ]),
+    ]);
 
     /* Detectable manufacturers */
-    manufacturer = getManufacturer({
+    var manufacturer = getManufacturer({
       'Apple': { 'iPad': 1, 'iPhone': 1, 'iPod': 1 },
       'Amazon': { 'Kindle': 1, 'Kindle Fire': 1 },
       'Asus': { 'Transformer': 1 },
@@ -320,10 +318,10 @@
       'Motorola': { 'Xoom': 1 },
       'Nokia': { },
       'Samsung': { 'Galaxy S': 1, 'Galaxy S2': 1 }
-    }),
+    });
 
     /* Detectable OSes (order is important) */
-    os = getOS([
+    var os = getOS([
       'Android',
       'CentOS',
       'Debian',
@@ -490,17 +488,6 @@
     /*------------------------------------------------------------------------*/
 
     /**
-     * Restores a previously overwritten platform object.
-     * @memberOf platform
-     * @type Function
-     * @returns {Object} The current platform object.
-     */
-    function noConflict() {
-      window['platform'] = old;
-      return this;
-    }
-
-    /**
      * Return platform description when the platform object is coerced to a string.
      * @name toString
      * @memberOf platform
@@ -542,8 +529,9 @@
     }
     // detect false positives for Firefox/Safari
     else if (!name || (data = !/\bMinefield\b/i.test(ua) && /Firefox|Safari/.exec(name))) {
-      // clear name of false positives
-      if (name && !product && /[/,]|^[^(]+?\)/.test(ua.slice(ua.indexOf(data + '/') + 8))) {
+      // escape the `/` for Firefox 1
+      if (name && !product && /[\/,]|^[^(]+?\)/.test(ua.slice(ua.indexOf(data + '/') + 8))) {
+        // clear name of false positives
         name = null;
       }
       // reassign a generic name
@@ -716,8 +704,10 @@
     }
     // detect WebKit Nightly and approximate Chrome/Safari versions
     if ((data = (/AppleWebKit\/([\d.]+\+?)/i.exec(ua) || 0)[1])) {
+      // correct build for numeric comparison
+      // (e.g. "532.5" becomes "532.05")
+      data = [parseFloat(data.replace(/\.(\d)$/, '.0$1')), data];
       // nightly builds are postfixed with a `+`
-      data = [parseFloat(data), data];
       if (name == 'Safari' && data[1].slice(-1) == '+') {
         name = 'WebKit Nightly';
         prerelease = 'alpha';
@@ -738,7 +728,7 @@
         data = (data = data[0], data < 400 ? 1 : data < 500 ? 2 : data < 526 ? 3 : data < 533 ? 4 : data < 534 ? '4+' : data < 535 ? 5 : '5');
       } else {
         layout[1] = 'like Chrome';
-        data = data[1] || (data = data[0], data < 530 ? 1 : data < 532 ? 2 : data < 532.5 ? 3 : data < 533 ? 4 : data < 534.3 ? 5 : data < 534.7 ? 6 : data < 534.1 ? 7 : data < 534.13 ? 8 : data < 534.16 ? 9 : data < 534.24 ? 10 : data < 534.3 ? 11 : data < 535.1 ? 12 : data < 535.2 ? '13+' : data < 535.5 ? 15 : data < 535.7 ? 16 : '17');
+        data = data[1] || (data = data[0], data < 530 ? 1 : data < 532 ? 2 : data < 532.05 ? 3 : data < 533 ? 4 : data < 534.03 ? 5 : data < 534.07 ? 6 : data < 534.10 ? 7 : data < 534.13 ? 8 : data < 534.16 ? 9 : data < 534.24 ? 10 : data < 534.30 ? 11 : data < 535.01 ? 12 : data < 535.02 ? '13+' : data < 535.07 ? 15 : data < 535.11 ? 16 : data < 535.19 ? 17 : data < 535.21 ? 18 : '19');
       }
       // add the postfix of ".x" or "+" for approximate versions
       layout[1] += ' ' + (data += typeof data == 'number' ? '.x' : /[.+]/.test(data) ? '' : '+');
@@ -856,9 +846,6 @@
        */
       'ua': ua,
 
-      // avoid platform object conflicts in browsers
-      'noConflict': noConflict,
-
       // parses a user agent string into a platform object
       'parse': parse,
 
@@ -876,7 +863,7 @@
       freeExports[key] = value;
     });
   }
-  // via curl.js or RequireJS
+  // via an AMD loader
   else if (typeof define == 'function' && typeof define.amd == 'object' && define.amd) {
     define('platform', function() {
       return parse();

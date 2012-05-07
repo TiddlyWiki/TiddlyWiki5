@@ -154,14 +154,16 @@ function runBenchmarks() {
     function runBenchmark() {
         var test, source, parser, fn, benchmark;
 
+        function formatTime(t) {
+            return (t === 0) ? 'N/A' : (1000 * t).toFixed(1) + ' ms';
+        }
+
         if (index >= fixture.length) {
             setText('total-size', kb(totalSize));
-            setText('esprima-time', (1000 * totalTime.esprima).toFixed(1) + ' ms');
-            setText('parsejs-time', (1000 * totalTime.parsejs).toFixed(1) + ' ms');
-            setText('zeparser-time', (1000 * totalTime.zeparser).toFixed(1) + ' ms');
-            if (totalTime.narcissus > 0) {
-                setText('narcissus-time', (1000 * totalTime.narcissus).toFixed(1) + ' ms');
-            }
+            setText('esprima-time', formatTime(totalTime.esprima));
+            setText('parsejs-time', formatTime(totalTime.parsejs));
+            setText('zeparser-time', formatTime(totalTime.zeparser));
+            setText('narcissus-time', formatTime(totalTime.narcissus));
             ready();
             return;
         }
@@ -208,7 +210,7 @@ function runBenchmarks() {
 
         benchmark = new window.Benchmark(test, fn, {
             'onComplete': function () {
-                setText(parser + '-' + this.name, (1000 * this.stats.mean).toFixed(1) + ' ms');
+                setText(parser + '-' + this.name, formatTime(this.stats.mean));
                 totalSize += source.length;
                 totalTime[parser] += this.stats.mean;
             }
@@ -245,6 +247,16 @@ function runBenchmarks() {
             if (totalTime.hasOwnProperty(test)) {
                 setText(test + '-time', '');
             }
+        }
+
+        if (typeof window.Narcissus !== 'object') {
+            window.Narcissus = {
+                parser: {
+                    parse: function (code) {
+                        throw new Error('Narcissus is not available!');
+                    }
+                }
+            };
         }
 
         runBenchmark();

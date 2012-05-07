@@ -319,8 +319,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
         kwAllowed: true,
         cc: [],
         lexical: new JSLexical((basecolumn || 0) - indentUnit, 0, "block", false),
-        localVars: null,
-        context: null,
+        localVars: parserConfig.localVars,
+        context: parserConfig.localVars && {vars: parserConfig.localVars},
         indented: 0
       };
     },
@@ -334,7 +334,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       if (stream.eatSpace()) return null;
       var style = state.tokenize(stream, state);
       if (type == "comment") return style;
-      state.reAllowed = type == "operator" || type == "keyword c" || type.match(/^[\[{}\(,;:]$/);
+      state.reAllowed = !!(type == "operator" || type == "keyword c" || type.match(/^[\[{}\(,;:]$/));
       state.kwAllowed = type != '.';
       return parseJS(state, style, type, content, stream);
     },

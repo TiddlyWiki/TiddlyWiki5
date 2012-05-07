@@ -61,8 +61,8 @@ function traceRun() {
             code = window.editor.getValue();
         }
 
-        tracer = window.esprima.Tracer.FunctionEntrance('window.TRACE.enterFunction');
-        code = window.esprima.modify(code, tracer);
+        tracer = window.esmorph.Tracer.FunctionEntrance('window.TRACE.enterFunction');
+        code = window.esmorph.modify(code, tracer);
 
         // Enclose in IIFE.
         code = '(function() {\n' + code + '\n}())';

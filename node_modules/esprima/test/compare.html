@@ -9,30 +9,6 @@
 <script src="compare.js"></script>
 <script src="3rdparty/benchmark.js"></script>
 <script src="3rdparty/XMLHttpRequest.js"></script>
-
-<!-- Mozilla Narcissus -->
-<script src="3rdparty/jsdefs.js"></script>
-<script src="3rdparty/jslex.js"></script>
-<script src="3rdparty/jsparse.js"></script>
-
-<!-- ZeParser (https://github.com/qfox/ZeParser) -->
-<script src="3rdparty/Tokenizer.js"></script>
-<script src="3rdparty/ZeParser.js"></script>
-
-<!-- parse-js, part of UglifyJS -->
-<script>
-/*global exports: true, window: true*/
-exports = window.parseJS = {};
-</script>
-<script src="3rdparty/parse-js.js"></script>
-
-<script>
-/*global runBenchmarks: true*/
-window.onload = function () {
-    'use strict';
-    window.setTimeout(runBenchmarks, 211);
-};
-</script>
 </head>
 <body>
 
@@ -111,7 +87,7 @@ window.onload = function () {
 </tbody>
 </table>
 
-<p><strong>Warning:</strong> Since each parser has a different format for the syntax tree, the speed is not fully comparable (the cost of constructing different result is not taken into account). These tests exist only to ensure that Esprima parser is not ridiculously slow, e.g. one magnitude slower compare to other parsers.</p>
+<p><strong>Warning:</strong> Since each parser has a different format for the syntax tree, the speed is not fully comparable (the cost of constructing different result is not taken into account). These tests exist only to ensure that Esprima parser is not ridiculously slow compare to other parsers.</p>
 
 <p><strong>parse-js</strong> is the parser used in <a href="https://github.com/mishoo/UglifyJS">UglifyJS</a>. It's a JavaScript port of the Common LISP version. This test uses <code>parse-js</code> from UglifyJS version 1.2.5 (Jan 13 2011).</p>
 
@@ -124,6 +100,40 @@ window.onload = function () {
 <a href="http://ariya.ofilabs.com/about" target="_blank">Ariya Hidayat</a>. Follow <a href="http://twitter.com/ariyahidayat">@ariyahidayat</a> on Twitter.
 </div>
 </div>
+<script>
+/*jslint sloppy:true, browser:true */
+/*global runBenchmarks: true, exports: true */
+window.onload = function () {
+
+    function inject(fname) {
+        var head = document.getElementsByTagName('head')[0],
+            script = document.createElement('script');
+
+        script.src = fname;
+        script.type = 'text/javascript';
+        head.appendChild(script);
+    }
+
+    // Mozilla Narcissus
+    if (typeof Object.create === 'function' && typeof Object.defineProperty === 'function') {
+        inject('3rdparty/jsdefs.js');
+        inject('3rdparty/jslex.js');
+        inject('3rdparty/jsparse.js');
+    }
+
+    window.setTimeout(runBenchmarks, 211);
+};
+</script>
+
+<!-- ZeParser (https://github.com/qfox/ZeParser) -->
+<script src="3rdparty/Tokenizer.js"></script>
+<script src="3rdparty/ZeParser.js"></script>
+
+<!-- parse-js, part of UglifyJS -->
+<script>
+exports = window.parseJS = {};
+</script>
+<script src="3rdparty/parse-js.js"></script>
 
 </body>
 </html>
