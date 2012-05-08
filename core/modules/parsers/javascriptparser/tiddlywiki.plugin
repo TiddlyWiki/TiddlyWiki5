@@ -4,8 +4,12 @@
 			"file": "../../../../node_modules/esprima/esprima.js", 
 			"fields": {
 				"title": "$:/core/modules/parsers/javascriptparser/esprima.js",
-				"type": "application/javascript"
+				"type": "application/javascript",
+				"module-type": "library"
 			}
+		},
+		{
+			"file": "javascriptparser.js"
 		}
 	]
 }

@@ -52,7 +52,7 @@ Element.prototype.render = function(type) {
 	if(isHtml) {
 		output.push("<",this.type);
 		if(this.attributes) {
-			attr = []
+			attr = [];
 			for(a in this.attributes) {
 				attr.push(a);
 			}
