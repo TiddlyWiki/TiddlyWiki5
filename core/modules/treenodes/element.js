@@ -48,12 +48,17 @@ Element.prototype.execute = function(parents,tiddlerTitle) {
 
 Element.prototype.render = function(type) {
 	var isHtml = type === "text/html",
-		output = [];
+		output = [],attr,a,v;
 	if(isHtml) {
 		output.push("<",this.type);
 		if(this.attributes) {
-			for(var a in this.attributes) {
-				var v = this.attributes[a];
+			attr = []
+			for(a in this.attributes) {
+				attr.push(a);
+			}
+			attr.sort();
+			for(a=0; a<attr.length; a++) {
+				v = this.attributes[attr[a]];
 				if(v !== undefined) {
 					if($tw.utils.isArray(v)) {
 						v = v.join(" ");
@@ -64,7 +69,7 @@ Element.prototype.render = function(type) {
 						}
 						v = s.join("");
 					}
-					output.push(" ",a,"='",$tw.utils.htmlEncode(v),"'");
+					output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
 				}
 			}
 		}

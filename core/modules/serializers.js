@@ -69,12 +69,16 @@ exports["application/x-tiddler-module"] = function(tiddler) {
 };
 
 exports["application/x-tiddler-html-div"] = function(tiddler) {
-	var result = [];
+	var result = [],fields = [];
 	result.push("<div");
 	for(var f in tiddler.fields) {
 		if(f !== "text") {
-			result.push(" " + f + "=\"" + tiddler.getFieldString(f) + "\"");
+			fields.push(f);
 		}
+	}
+	fields.sort();
+	for(f=0; f<fields.length; f++) {
+		result.push(" " + fields[f] + "=\"" + tiddler.getFieldString(fields[f]) + "\"");
 	}
 	result.push(">\n<pre>");
 	result.push($tw.utils.htmlEncode(tiddler.fields.text));

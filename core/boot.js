@@ -507,6 +507,12 @@ $tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugi
 $tw.wiki.shadows.addTiddlers(
 	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("pluginModules"))
 );
+$tw.wiki.shadows.addTiddlers(
+	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernelPrefix"))
+);
+$tw.wiki.shadows.addTiddlers(
+	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernel"))
+);
 // Load the stylesheet tiddlers from the DOM
 $tw.wiki.shadows.addTiddlers(
 	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("styleArea"))

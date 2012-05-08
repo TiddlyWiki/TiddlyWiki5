@@ -189,7 +189,7 @@ exports.operators = {
 		},
 		filter: function(operator) {
 			var desc = operator.prefix === "!" ? "true" : "false";
-			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ");"
+			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ");";
 		}
 	},
 	"field": {
