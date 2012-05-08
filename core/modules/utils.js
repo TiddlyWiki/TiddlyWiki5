@@ -14,6 +14,59 @@ This file is a bit of a dumping ground; the expectation is that most of these fu
 /*global $tw: false */
 "use strict";
 
+// Check if an object has a property
+exports.hop = function(object,property) {
+	return Object.prototype.hasOwnProperty.call(object,property);
+};
+
+/*
+Push entries onto an array, removing them first if they already exist in the array
+	array: array to modify
+	value: a single value to push or an array of values to push
+*/
+exports.pushTop = function(array,value) {
+	var t,p;
+	if($tw.utils.isArray(value)) {
+		// Remove any array entries that are duplicated in the new values
+		for(t=0; t<value.length; t++) {
+			p = array.indexOf(value[t]);
+			if(p !== -1) {
+				array.splice(p,1);
+			}
+		}
+		// Push the values on top of the main array
+		array.push.apply(array,value);
+	} else {
+		p = array.indexOf(value);
+		if(p !== -1) {
+			array.splice(p,1);
+		}
+		array.push(value);
+	}
+};
+
+/*
+Remove entries from an array
+	array: array to modify
+	value: a single value to remove, or an array of values to remove
+*/
+exports.removeArrayEntries = function(array,value) {
+	var t,p;
+	if($tw.utils.isArray(value)) {
+		for(t=0; t<value.length; t++) {
+			p = array.indexOf(value[t]);
+			if(p !== -1) {
+				array.splice(p,1);
+			}
+		}
+	} else {
+		p = array.indexOf(value);
+		if(p !== -1) {
+			array.splice(p,1);
+		}
+	}
+};
+
 exports.deepCopy = function(object) {
 	var result,t;
 	if($tw.utils.isArray(object)) {
