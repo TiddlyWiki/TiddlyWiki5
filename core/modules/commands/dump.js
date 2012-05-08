@@ -50,7 +50,7 @@ Command.prototype.subcommands.tiddler = function() {
 };
 
 Command.prototype.subcommands.tiddlers = function() {
-	var tiddlers = this.commander.wiki.sortTiddlers();
+	var tiddlers = this.commander.wiki.getTiddlers();
 	this.output.write("Wiki contains these tiddlers:\n");
 	for(var t=0; t<tiddlers.length; t++) {
 		this.output.write(tiddlers[t] + "\n");
@@ -59,7 +59,7 @@ Command.prototype.subcommands.tiddlers = function() {
 };
 
 Command.prototype.subcommands.shadows = function() {
-	var tiddlers = this.commander.wiki.shadows.sortTiddlers();
+	var tiddlers = this.commander.wiki.shadows.getTiddlers();
 	this.output.write("Wiki contains these shadow tiddlers:\n");
 	for(var t=0; t<tiddlers.length; t++) {
 		this.output.write(tiddlers[t] + "\n");

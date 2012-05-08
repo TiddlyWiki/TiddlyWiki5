@@ -131,7 +131,7 @@ exports.serializeTiddler = function(title,type) {
 /*
 Return a sorted array of tiddler titles, optionally filtered by a tag 
 */
-exports.sortTiddlers = function(sortField,excludeTag) {
+exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
@@ -158,12 +158,35 @@ exports.sortTiddlers = function(sortField,excludeTag) {
 	return titles;
 };
 
+/*
+Sort an array of tiddler titles by a specified field
+	titles: array of titles (sorted in place)
+	sortField: name of field to sort by
+	isDescending: true if the sort should be descending
+*/
+exports.sortTiddlers = function(titles,sortField,isDescending) {
+	var self = this;
+	titles.sort(function(a,b) {
+		var aa = self.getTiddler(a).fields[sortField] || 0,
+			bb = self.getTiddler(b).fields[sortField] || 0;
+		if(aa < bb) {
+			return isDescending ? +1 : -1;
+		} else {
+			if(aa > bb) {
+				return isDescending ? -1 : +1;
+			} else {
+				return 0;
+			}
+		}
+	});
+};
+
 exports.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
 	var arg = 0,
 		sortField = arguments.length > 1 ? arguments[arg++] : null,
 		excludeTag = arguments.length > 2 ? arguments[arg++] : null,
 		callback = arguments[arg++],
-		titles = this.sortTiddlers(sortField,excludeTag),
+		titles = this.getTiddlers(sortField,excludeTag),
 		t, tiddler;
 	for(t=0; t<titles.length; t++) {
 		tiddler = this.tiddlers[titles[t]];
@@ -182,7 +205,7 @@ exports.getOrphanTitles = function() {
 };
 
 exports.getShadowTitles = function() {
-	return this.shadows ? this.shadows.sortTiddlers() : [];
+	return this.shadows ? this.shadows.getTiddlers() : [];
 };
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it

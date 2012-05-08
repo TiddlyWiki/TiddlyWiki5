@@ -12,7 +12,7 @@ module-type: macro
 
 var handlers = {
 	all: function(wiki) {
-		return wiki.sortTiddlers("title","excludeLists");
+		return wiki.getTiddlers("title","excludeLists");
 	},
 	missing: function(wiki) {
 		return wiki.getMissingTitles();

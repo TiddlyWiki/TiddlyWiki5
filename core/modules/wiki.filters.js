@@ -69,7 +69,7 @@ exports.filterTiddlers = function(filterString) {
 };
 
 /*
-Compiling a filter gives a JavaScript function that is invoked as `filter(source)`, where `source` is a hashmap of source tiddler titles (the values don't matter, so it is possible to use a store or a changes object). It returns an array of tiddler titles that satisfy the filter
+Compiling a filter gives a JavaScript function that is invoked as `this.filter(source)`, where `source` is a hashmap of source tiddler titles (the values don't matter, so it is possible to use a store or a changes object). It returns an array of tiddler titles that satisfy the filter
 */
 exports.compileFilter = function(filterString) {
 	var filter = this.parseFilter(filterString),
@@ -96,9 +96,10 @@ exports.compileFilter = function(filterString) {
 		output.push(operationInfo.epilogue);
 	}
 	output.push(this.filterFragments.epilogue);
+console.log("Compiled filter to ",output.join("\n"));
 	try {
 		/*jslint evil: true */
-		fn = eval(output.join(""));
+		fn = eval(output.join("\n"));
 	} catch(ex) {
 		throw "Error in filter expression: " + ex;
 	}
@@ -106,21 +107,21 @@ exports.compileFilter = function(filterString) {
 };
 
 exports.filterFragments = {
-	prologue: "(function(source) {\nvar results = [], subResults;\n",
+	prologue: "(function(source) {\nvar results = [], subResults;",
 	epilogue: "return results;\n})",
 	operation: {
 		prefix: {
 			"": {
-				prologue: "subResults = [];\n",
-				epilogue: "$tw.utils.pushTop(results,subResults);\n"
+				prologue: "subResults = [];",
+				epilogue: "$tw.utils.pushTop(results,subResults);"
 			},
 			"+": {
-				prologue: "subResults = results.slice(0);\nresults.splice(0,results.length);\n",
-				epilogue: "$tw.utils.pushTop(results,subResults);\n"
+				prologue: "subResults = results.slice(0);\nresults.splice(0,results.length);",
+				epilogue: "$tw.utils.pushTop(results,subResults);"
 			},
 			"-": {
-				prologue: "subResults = [];\n",
-				epilogue: "$tw.utils.removeArrayEntries(results,subResults);\n"
+				prologue: "subResults = [];",
+				epilogue: "$tw.utils.removeArrayEntries(results,subResults);"
 			}
 		}
 	}
@@ -129,10 +130,10 @@ exports.filterFragments = {
 exports.operators = {
 	"title": {
 		selector: function(operator) {
-			return "if($tw.utils.hop(source,\"" + $tw.utils.stringify(operator.operand) + "\")) {$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");}\n";
+			return "if($tw.utils.hop(source,\"" + $tw.utils.stringify(operator.operand) + "\")) {$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");}";
 		},
 		filter: function(operator) {
-			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") !== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}\n";
+			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") !== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}";
 		}
 	},
 	"is": {
@@ -181,6 +182,15 @@ exports.operators = {
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
 			return "for(var r=subResults.length-1; r>=0; r--) {if(this.getTiddler(subResults[r]).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {subResults.splice(r,1);}}";
+		}
+	},
+	"sort": {
+		selector: function(operator) {
+			throw "Cannot use sort operator at the start of a sort operation";
+		},
+		filter: function(operator) {
+			var desc = operator.prefix === "!" ? "true" : "false";
+			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ");"
 		}
 	},
 	"field": {
