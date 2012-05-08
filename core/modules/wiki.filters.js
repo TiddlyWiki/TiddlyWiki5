@@ -185,7 +185,7 @@ exports.operators = {
 	},
 	"sort": {
 		selector: function(operator) {
-			throw "Cannot use sort operator at the start of a sort operation";
+			throw "Cannot use sort operator at the start of a filter operation";
 		},
 		filter: function(operator) {
 			var desc = operator.prefix === "!" ? "true" : "false";
