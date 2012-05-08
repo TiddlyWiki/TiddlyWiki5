@@ -396,6 +396,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","t
 });
 $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
+		fields.type = "text/x-tiddlywiki";
 		var split = text.indexOf("\n\n");
 		if(split !== -1) {
 			fields = $tw.utils.parseFields(text.substr(0,split),fields);
