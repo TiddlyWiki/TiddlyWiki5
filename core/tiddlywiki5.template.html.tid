@@ -6,42 +6,42 @@ type: text/x-tiddlywiki-html
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="<<^"$:/core/version.txt" text/plain>>" />
+<meta name="tiddlywiki-version" content="<<include "$:/core/version.txt" text/plain shadow:yes>>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="
-<<^"$:/core/copyright.txt" text/plain>>
+<<include "$:/core/copyright.txt" text/plain shadow:yes>>
 " />
-<title><<tiddler target:$:/shadows/title>></title>
+<title><<include "$:/wiki/title" text/plain>></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <div id="styleArea">
-<<^"[is[shadowStyle]]" application/x-tiddler-css>>
+<<include "[type[text/css]]" application/x-tiddler-css shadow:yes>>
 </div>
 </head>
 <body>
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
 <div id="splashArea" style="display:none;">
-<<^"$:/wiki/splash" text/html>>
+<<include "$:/wiki/splash" text/html shadow:yes>>
 </div>
 </noscript>
 <!----------- Shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
-<<^"[is[shadowPlain]]" application/x-tiddler-html-div>>
+<<include "[!type[text/css]] -[type[application/javascript]has[module-type]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div shadow:yes>>
 </div>
 <!----------- Ordinary tiddlers ----------->
 <div id="storeArea" style="display:none;">
-<<^"[is[tiddler]]" application/x-tiddler-html-div>>
+<<include "[is[tiddler]]" application/x-tiddler-html-div>>
 </div>
 <!----------- Boot kernel prologue ----------->
-<<^"$:/core/bootprefix.js" application/javascript>>
+<<include "$:/core/bootprefix.js" application/javascript shadow:yes>>
 <!----------- Plugin modules ----------->
 <div id="pluginModules" style="display:none;">
-<<^"[is[shadowModule]]" application/x-tiddler-module>>
+<<include "[type[application/javascript]has[module-type]]" application/x-tiddler-module shadow:yes>>
 </div>
 <!----------- Boot kernel ----------->
-<<^"$:/core/boot.js" application/javascript>>
+<<include "$:/core/boot.js" application/javascript shadow:yes>>
 </body>
 </html>

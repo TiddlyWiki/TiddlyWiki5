@@ -11,17 +11,19 @@ module-type: macro
 "use strict";
 
 exports.info = {
-	name: "^",
+	name: "include",
 	params: {
 		filter: {byPos: 0, type: "filter"},
-		as: {byPos: 1, as: "text"}
+		as: {byPos: 1, as: "text"},
+		shadow: {byPos: 2, as: "text"}
 	}
 };
 
 exports.executeMacro = function() {
-	var as = this.params.as || "text/plain";
+	var as = this.params.as || "text/plain",
+		wiki = this.hasParameter("shadow") ? this.wiki.shadows : this.wiki;
 	if(this.hasParameter("filter")) {
-		var titles = this.wiki.filterTiddlers(this.params.filter),
+		var titles = wiki.filterTiddlers(this.params.filter),
 			result = [];
 		for(var t=0; t<titles.length; t++) {
 			result.push(this.wiki.serializeTiddler(titles[t],as));

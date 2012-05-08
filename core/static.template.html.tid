@@ -6,21 +6,21 @@ type: text/x-tiddlywiki-html
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="<<^"$:/core/version.txt" text/plain>>" />
+<meta name="tiddlywiki-version" content="<<include "$:/core/version.txt" text/plain shadow:yes>>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="
-<<^"$:/core/copyright.txt" text/plain>>
+<<include "$:/core/copyright.txt" text/plain shadow:yes>>
 " />
 <title><<tiddler target:$:/shadows/title>></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <div id="styleArea">
-<<^"[is[shadowStyle]]" application/x-tiddler-css>>
+<<include "[type[text/css]]" application/x-tiddler-css shadow:yes>>
 </div>
 </head>
 <body>
-<<^"PageTemplate" text/html>>
+<<include "PageTemplate" text/html shadow:yes>>
 </body>
 </html>
