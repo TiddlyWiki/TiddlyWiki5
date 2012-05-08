@@ -96,7 +96,6 @@ exports.compileFilter = function(filterString) {
 		output.push(operationInfo.epilogue);
 	}
 	output.push(this.filterFragments.epilogue);
-console.log("Compiled filter to ",output.join("\n"));
 	try {
 		/*jslint evil: true */
 		fn = eval(output.join("\n"));
