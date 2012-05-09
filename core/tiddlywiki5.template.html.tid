@@ -19,6 +19,8 @@ type: text/x-tiddlywiki-html
 <div id="styleArea">
 <<include "[type[text/css]]" application/x-tiddler-css shadow:yes>>
 </div>
+<!----------- Raw markup ----------->
+<<include "[tag[$:/shadow/rawMarkup]]" text/plain shadow:yes>>
 </head>
 <body>
 <!----------- Static content for Google and browsers without JavaScript ----------->
