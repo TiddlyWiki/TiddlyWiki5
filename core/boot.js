@@ -64,7 +64,8 @@ $tw.config.fileExtensions = {
 	".jpg": {type: "image/jpeg", encoding: "base64"},
 	".jpeg": {type: "image/jpeg", encoding: "base64"},
 	".png": {type: "image/png", encoding: "base64"},
-	".gif": {type: "image/gif", encoding: "base64"}
+	".gif": {type: "image/gif", encoding: "base64"},
+	".svg": {type: "image/svg+xml", encoding: "utf8"}
 };
 
 /////////////////////////// Utility functions
