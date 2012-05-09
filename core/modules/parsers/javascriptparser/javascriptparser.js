@@ -21,8 +21,6 @@ var JavaScriptParser = function(options) {
 
 // Parse a string of JavaScript code and return the parse tree as a wikitext parse tree
 JavaScriptParser.prototype.parse = function(type,code) {
-    // Simplistically replace tabs with spaces. Browsers will happily render tabs but most default to 8 character tab stops
-    code = code.replace(/\t/mg,"    ");
     // Try to parse the code
     var parseTree;
     try {
