@@ -412,13 +412,13 @@ var rules = [
 				oldNextMatch = w.nextMatch,
 				oldChildren = w.children,
 				oldDependencies = w.dependencies,
-				parseTree = w.wiki.parseText(mimeType,content,{defaultType: "text/plain"});
+				parseTree = w.wiki.parseText(mimeType,content,{defaultType: "text/plain"}).tree;
 			w.output = oldOutput;
 			w.source = oldSource;
 			w.nextMatch = oldNextMatch;
 			w.children = oldChildren;
 			w.dependencies = oldDependencies;
-			w.output.push.apply(w.output,parseTree.nodes);
+			w.output.push.apply(w.output,parseTree);
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
