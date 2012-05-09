@@ -124,7 +124,7 @@ $tw.utils.parseDate = function(value) {
 // Parse a string array from a bracketted list
 $tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
-		var memberRegExp = /(?:\[\[([^\]]+)\]\])|([^\s$]+)/mg,
+		var memberRegExp = /(?:\[\[([^\]]+)\]\])|([^\s]+)/mg,
 			results = [],
 			match;
 		do {
@@ -143,7 +143,7 @@ $tw.utils.parseStringArray = function(value) {
 
 // Parse a block of name:value fields. The `fields` object is used as the basis for the return value
 $tw.utils.parseFields = function(text,fields) {
-	text.split("\n").forEach(function(line) {
+	text.split(/\r?\n/mg).forEach(function(line) {
 		var p = line.indexOf(":");
 		if(p !== -1) {
 			var field = line.substr(0, p).trim(),
@@ -389,18 +389,17 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","t
 			match = headerCommentRegExp.exec(text);
 		fields.text = text;
 		if(match) {
-			fields = $tw.utils.parseFields(match[1].split("\n\n")[0],fields);
+			fields = $tw.utils.parseFields(match[1].split(/\r?\n\r?\n/mg)[0],fields);
 		}
 		return [fields];
 	}
 });
 $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
-		fields.type = "text/x-tiddlywiki";
-		var split = text.indexOf("\n\n");
-		if(split !== -1) {
-			fields = $tw.utils.parseFields(text.substr(0,split),fields);
-			fields.text = text.substr(split + 2);
+		var split = text.split(/\r?\n\r?\n/mg);
+		if(split.length > 1) {
+			fields = $tw.utils.parseFields(split[0],fields);
+			fields.text = split.slice(1).join("\n\n");
 		} else {
 			fields.text = text;
 		}
