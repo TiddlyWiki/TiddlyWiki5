@@ -62,7 +62,7 @@ exports.touchTiddler = function(title,isDeleted) {
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || {};
-	if(this.changeCount.hasOwnProperty(title)) {
+	if($tw.utils.hop(this.changeCount,title)) {
 		this.changeCount[title]++;
 	} else {
 		this.changeCount[title] = 1;
@@ -86,7 +86,7 @@ exports.touchTiddler = function(title,isDeleted) {
 
 exports.getChangeCount = function(title) {
 	this.changeCount = this.changeCount || {};
-	if(this.changeCount.hasOwnProperty(title)) {
+	if($tw.utils.hop(this.changeCount,title)) {
 		return this.changeCount[title];
 	} else {
 		return 0;
@@ -227,7 +227,7 @@ exports.getCacheForTiddler = function(title,cacheName,initializer) {
 // Clear all caches associated with a particular tiddler
 exports.clearCache = function(title) {
 	this.caches = this.caches || {};
-	if(this.caches.hasOwnProperty(title)) {
+	if($tw.utils.hop(this.caches,title)) {
 		delete this.caches[title];
 	}
 };

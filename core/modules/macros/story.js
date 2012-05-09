@@ -39,7 +39,7 @@ exports.handleEvent = function(event) {
 			template = this.hasParameter("defaultViewTemplate") ? this.params.defaultViewTemplate : "ViewTemplate";
 			storyTiddler = this.wiki.getTiddler(this.params.story);
 			story = {tiddlers: []};
-			if(storyTiddler && storyTiddler.fields.hasOwnProperty("text")) {
+			if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
 				story = JSON.parse(storyTiddler.fields.text);
 			}
 			story.tiddlers.unshift({title: event.navigateTo, template: template});
@@ -52,7 +52,7 @@ exports.handleEvent = function(event) {
 			template = this.hasParameter("defaultEditTemplate") ? this.params.defaultEditTemplate : "EditTemplate";
 			storyTiddler = this.wiki.getTiddler(this.params.story);
 			story = {tiddlers: []};
-			if(storyTiddler && storyTiddler.fields.hasOwnProperty("text")) {
+			if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
 				story = JSON.parse(storyTiddler.fields.text);
 			}
 			for(t=0; t<story.tiddlers.length; t++) {
@@ -81,14 +81,14 @@ exports.handleEvent = function(event) {
 			storyTiddler = this.wiki.getTiddler(this.params.story);
 			story = {tiddlers: []};
 			storyTiddlerModified = false;
-			if(storyTiddler && storyTiddler.fields.hasOwnProperty("text")) {
+			if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
 				story = JSON.parse(storyTiddler.fields.text);
 			}
 			for(t=0; t<story.tiddlers.length; t++) {
 				storyRecord = story.tiddlers[t];
 				if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
 					tiddler = this.wiki.getTiddler(storyRecord.title);
-					if(tiddler && tiddler.fields.hasOwnProperty("draft.title")) {
+					if(tiddler && $tw.utils.hop(tiddler.fields,"draft.title")) {
 						// Save the draft tiddler as the real tiddler
 						this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: tiddler.fields["draft.title"],"draft.title": undefined, "draft.of": undefined}));
 						// Remove the draft tiddler

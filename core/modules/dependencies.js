@@ -68,7 +68,7 @@ Dependencies.prototype.hasChanged = function(changes,contextTiddlerTitle) {
 		return true;
 	}
 	for(var c in changes) {
-		if(this.tiddlers.hasOwnProperty(c)) {
+		if($tw.utils.hop(this.tiddlers,c)) {
 			return true;
 		}
 	}

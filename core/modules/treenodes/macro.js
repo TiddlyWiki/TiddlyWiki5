@@ -117,7 +117,7 @@ Macro.prototype.parseMacroParamString = function(paramString) {
 };
 
 Macro.prototype.hasParameter = function(name) {
-	return this.params.hasOwnProperty(name);
+	return $tw.utils.hop(this.params,name);
 };
 
 Macro.prototype.cloneContent = function() {

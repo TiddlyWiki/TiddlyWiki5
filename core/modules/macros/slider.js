@@ -151,7 +151,7 @@ exports.executeMacro = function() {
 exports.refreshInDom = function(changes) {
 	var needChildrenRefresh = true; // Avoid refreshing the children nodes if we don't need to
 	// If the state tiddler has changed then reset the open state
-	if(this.hasParameter("state") && changes.hasOwnProperty(this.params.state)) {
+	if(this.hasParameter("state") && $tw.utils.hop(changes,this.params.state)) {
 		this.isOpen = this.getOpenState();
 	}
 	// Render the children if the slider is open and we don't have any children yet

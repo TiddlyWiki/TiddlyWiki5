@@ -75,7 +75,7 @@ var ArgParser = function(argString,options) {
 				}
 				if(n.evaluated === true) {
 					n = "{{" + n.string + "}}";
-				} else if (typeof n === "object" && n.hasOwnProperty("string")) {
+				} else if (typeof n === "object" && $tw.utils.hop(n,"string")) {
 					n = n.string;
 				}
 				this.byPos.push({n:n, v:v});
@@ -90,7 +90,7 @@ var ArgParser = function(argString,options) {
 	for(var t=0; t<this.byPos.length; t++) {
 		n = this.byPos[t].n;
 		v = this.byPos[t].v;
-		if(this.byName.hasOwnProperty(n))
+		if($tw.utils.hop(this.byName,n))
 			this.byName[n].push(v);
 		else
 			this.byName[n] = [v];
