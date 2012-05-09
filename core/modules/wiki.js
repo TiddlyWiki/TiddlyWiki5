@@ -268,6 +268,9 @@ Options are:
 exports.parseText = function(type,text,options) {
 	options = options || {};
 	var parser = this.parsers[type];
+	if(!parser && $tw.config.fileExtensions[type]) {
+		parser = this.parsers[$tw.config.fileExtensions[type].type];
+	}
 	if(!parser) {
 		parser = this.parsers[options.defaultType || "text/x-tiddlywiki"];
 	}
