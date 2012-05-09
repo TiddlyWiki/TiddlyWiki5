@@ -31,6 +31,8 @@ The operators look like `[operator[operand]]`, where `operator` is one of:
 * ''title'': selects the tiddler with the title given in the operand
 * ''is'': tests whether a tiddler is a member of the system defined set named in the operand (see below)
 * ''has'': tests whether a tiddler has a specified field
+* ''sort'': sorts the tiddlers by a given field
+* ''limit'': limits the number of subresults
 * ''tag'': tests whether a given tag is (`[tag[mytag]]`) or is not (`[!tag[mytag]]`) present on the tiddler
 * ''<field>'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
 
@@ -190,6 +192,16 @@ exports.operators = {
 		filter: function(operator) {
 			var desc = operator.prefix === "!" ? "true" : "false";
 			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ");";
+		}
+	},
+	"limit": {
+		selector: function(operator) {
+			throw "Cannot use limit operator at the start of a filter operation";
+		},
+		filter: function(operator) {
+			var limit = parseInt(operator.operand,10),
+				base = operator.prefix === "!" ? 0 : limit;
+			return "if(subResults.length > " + limit + ") {subResults.splice(" + base + ",subResults.length-" + limit + ");}";
 		}
 	},
 	"field": {
