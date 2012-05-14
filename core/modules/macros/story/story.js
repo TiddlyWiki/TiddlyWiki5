@@ -1,7 +1,17 @@
 /*\
-title: $:/core/modules/macros/story.js
+title: $:/core/modules/macros/story/story.js
 type: application/javascript
 module-type: macro
+
+Displays a sequence of tiddlers defined in a JSON structure:
+
+	{
+		tiddlers: [
+			{title: <string>, template: <string>}
+		]	
+	}
+
+The storyview is a plugin that extends the story macro to implement different navigation experiences.
 
 \*/
 (function(){
@@ -26,7 +36,8 @@ exports.info = {
 	params: {
 		story: {byName: "default", type: "tiddler"},
 		defaultViewTemplate: {byName: true, type: "tiddler"},
-		defaultEditTemplate: {byName: true, type: "tiddler"}
+		defaultEditTemplate: {byName: true, type: "tiddler"},
+		storyview: {byName: true, type: "text"}
 	},
 	events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler"]
 };
@@ -116,17 +127,25 @@ exports.handleEvent = function(event) {
 };
 
 exports.executeMacro = function() {
-	var story = JSON.parse(this.wiki.getTiddlerText(this.params.story)),
-		children = [];
-	for(var t=0; t<story.tiddlers.length; t++) {
+	var storyJson = JSON.parse(this.wiki.getTiddlerText(this.params.story)),
+		storyNode = $tw.Tree.Element("div",{},[]);
+	for(var t=0; t<storyJson.tiddlers.length; t++) {
 		var m = $tw.Tree.Macro("tiddler",
-									{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
+									{target: storyJson.tiddlers[t].title,template: storyJson.tiddlers[t].template},
 									null,
 									this.wiki);
 		m.execute(this.parents,this.tiddlerTitle);
-		children.push(m);
+		storyNode.children.push($tw.Tree.Element("div",{},[m]));
 	}
-	return children;
+	return [storyNode];
+};
+
+exports.postRenderInDom = function() {
+	// Instantiate the story view
+	var StoryView = this.wiki.macros.story.viewers[this.params.storyview];
+	if(StoryView) {
+		this.storyview = new StoryView(this);
+	};
 };
 
 exports.refreshInDom = function(changes) {
@@ -139,8 +158,8 @@ exports.refreshInDom = function(changes) {
 			template = this.params.template,
 			n,domNode,
 			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
-				while(childIndex < self.children.length) {
-					var params = self.children[childIndex].params;
+				while(childIndex < self.children[0].children.length) {
+					var params = self.children[0].children[childIndex].children[0].params;
 					if(params.target === tiddlerTitle) {
 						if(!templateTitle || params.template === templateTitle) {
 							return childIndex;
@@ -155,35 +174,40 @@ exports.refreshInDom = function(changes) {
 			var tiddlerNode = findTiddler(t,story.tiddlers[t].title,story.tiddlers[t].template);
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
-				var m = $tw.Tree.Macro("tiddler",
+				var m = $tw.Tree.Element("div",{},[
+							$tw.Tree.Macro("tiddler",
 											{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 											null,
-											this.wiki);
+											this.wiki)
+							]);
 				m.execute(this.parents,this.tiddlerTitle);
-				m.renderInDom(this.domNode,this.domNode.childNodes[t]);
-				this.children.splice(t,0,m);
+				m.renderInDom(this.children[0].domNode,this.children[0].domNode.childNodes[t]);
+				this.children[0].children.splice(t,0,m);
+				if(this.storyview && this.storyview.tiddlerAdded) {
+					this.storyview.tiddlerAdded(this.children[0].children[t]);
+				} 
 			} else {
 				// Delete any nodes preceding the one we want
 				if(tiddlerNode > t) {
 					// First delete the DOM nodes
 					for(n=t; n<tiddlerNode; n++) {
-						domNode = this.children[n].domNode;
+						domNode = this.children[0].children[n].domNode;
 						domNode.parentNode.removeChild(domNode);
 					}
 					// Then delete the actual renderer nodes
-					this.children.splice(t,tiddlerNode-t);
+					this.children[0].children.splice(t,tiddlerNode-t);
 				}
 				// Refresh the DOM node we're reusing
-				this.children[t].refreshInDom(changes);
+				this.children[0].children[t].refreshInDom(changes);
 			}
 		}
 		// Remove any left over nodes
-		if(this.children.length > story.tiddlers.length) {
-			for(t=story.tiddlers.length; t<this.children.length; t++) {
-				domNode = this.children[t].domNode;
+		if(this.children[0].children.length > story.tiddlers.length) {
+			for(t=story.tiddlers.length; t<this.children[0].children.length; t++) {
+				domNode = this.children[0].children[t].domNode;
 				domNode.parentNode.removeChild(domNode);
 			}
-			this.children.splice(story.tiddlers.length,this.children.length-story.tiddlers.length);
+			this.children[0].children.splice(story.tiddlers.length,this.children[0].children.length-story.tiddlers.length);
 		}
 	} else {
 		for(t=0; t<this.children.length; t++) {

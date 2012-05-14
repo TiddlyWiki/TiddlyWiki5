@@ -36,6 +36,7 @@ exports.startup = function() {
 	// Set up the wiki store
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();
+	$tw.wiki.initStoryViews();
 	$tw.wiki.initParsers();
 	// Set up the command plugins
 	$tw.Commander.initCommands();

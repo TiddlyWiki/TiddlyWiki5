@@ -362,4 +362,16 @@ exports.initEditors = function(moduleType) {
 	}
 };
 
+/*
+Install view plugins for the story macro
+*/
+exports.initStoryViews = function(moduleType) {
+	moduleType = moduleType || "storyview";
+	var storyMacro = this.macros.story;
+	if(storyMacro) {
+		storyMacro.viewers = {};
+		$tw.plugins.applyMethods(moduleType,storyMacro.viewers);
+	}
+};
+
 })();

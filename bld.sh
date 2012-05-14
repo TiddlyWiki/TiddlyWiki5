@@ -8,7 +8,6 @@ mkdir -p tmp/tw5
 
 # cook TiddlyWiki5
 
-
 pushd tw5.com > /dev/null
 
 node ../core/boot.js \

@@ -36,6 +36,7 @@ exports.handleEvent = function (event) {
 				var navEvent = document.createEvent("Event");
 				navEvent.initEvent("tw-navigate",true,true);
 				navEvent.navigateTo = this.params.to;
+				navEvent.navigateFrom = this;
 				event.target.dispatchEvent(navEvent); 
 				event.preventDefault();
 				return false;
