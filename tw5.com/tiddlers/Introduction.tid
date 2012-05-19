@@ -18,6 +18,7 @@ Learning more about TiddlyWiki5:
 * Some very rough UserInterfaceSketches showing where it is heading
 
 Some useful tiddlers for feature testing:
+* HelloThere
 * ImageTests showing different ways of embedding images
 * SampleData showing how JSON tiddlers are handled
 * SampleJavaScript and SampleJavaScriptWithError showing how JavaScript code is displayed
