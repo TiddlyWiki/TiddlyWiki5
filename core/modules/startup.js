@@ -40,7 +40,7 @@ exports.startup = function() {
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Load up the tiddlers in the root of the core directory (we couldn't do before because we didn't have the serializers installed)
 	if(!$tw.browser) {
-		$tw.plugins.loadPluginsFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
+		$tw.loadTiddlersFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
 	}
 	// Set up the wiki store
 	$tw.wiki.initMacros();

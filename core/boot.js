@@ -544,7 +544,7 @@ $tw.boot.wikiPath = process.cwd();
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
 */
-$tw.plugins.loadTiddlersFromFile = function(file,fields,wiki) {
+$tw.loadTiddlersFromFile = function(file,fields,wiki) {
 	wiki = wiki || $tw.wiki;
 	var ext = path.extname(file),
 		extensionInfo = $tw.config.fileExtensions[ext],
@@ -563,7 +563,7 @@ $tw.plugins.loadTiddlersFromFile = function(file,fields,wiki) {
 /*
 Load all the plugins from the plugins directory
 */
-$tw.plugins.loadPluginsFromFolder = function(filepath,basetitle,excludeRegExp,wiki) {
+$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,wiki) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
 	wiki = wiki || $tw.wiki.shadows;
@@ -576,19 +576,19 @@ $tw.plugins.loadPluginsFromFolder = function(filepath,basetitle,excludeRegExp,wi
 				// If so, process the files it describes
 				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
 				for(var p=0; p<pluginInfo.tiddlers.length; p++) {
-					$tw.plugins.loadTiddlersFromFile(path.resolve(filepath,pluginInfo.tiddlers[p].file),pluginInfo.tiddlers[p].fields,wiki);
+					$tw.loadTiddlersFromFile(path.resolve(filepath,pluginInfo.tiddlers[p].file),pluginInfo.tiddlers[p].fields,wiki);
 				}
 			} else {
 				// If not, read all the files in the directory
 				for(var f=0; f<files.length; f++) {
 					var file = files[f];
 					if(!excludeRegExp.test(file)) {
-						$tw.plugins.loadPluginsFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp,wiki);
+						$tw.loadTiddlersFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp,wiki);
 					}
 				}
 			}
 		} else if(stat.isFile()) {
-			$tw.plugins.loadTiddlersFromFile(filepath,{title: basetitle},wiki);
+			$tw.loadTiddlersFromFile(filepath,{title: basetitle},wiki);
 		}
 	}
 };
@@ -629,16 +629,16 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 };
 
 // Load plugins from the plugins directory
-$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
 
 // Load any plugins in the wiki plugins directory
-$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
 
 // HACK: to be replaced when we re-establish sync plugins
 // Load shadow tiddlers from wiki shadows directory
-$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./shadows"));
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,"./shadows"));
 // Load tiddlers from wiki tiddlers directory
-$tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./tiddlers"),null,null,$tw.wiki);
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,"./tiddlers"),null,null,$tw.wiki);
 
 // End of if(!$tw.browser)	
 }
