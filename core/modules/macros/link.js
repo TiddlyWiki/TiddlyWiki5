@@ -27,20 +27,19 @@ exports.info = {
 };
 
 exports.handleEvent = function (event) {
-	switch(event.type) {
-		case "click":
-			if(isLinkExternal(this.params.to)) {
-				event.target.setAttribute("target","_blank");
-				return true;
-			} else {
-				var navEvent = document.createEvent("Event");
-				navEvent.initEvent("tw-navigate",true,true);
-				navEvent.navigateTo = this.params.to;
-				navEvent.navigateFrom = this;
-				event.target.dispatchEvent(navEvent); 
-				event.preventDefault();
-				return false;
-			}
+	if(event.type === "click") {
+		if(isLinkExternal(this.params.to)) {
+			event.target.setAttribute("target","_blank");
+			return true;
+		} else {
+			var navEvent = document.createEvent("Event");
+			navEvent.initEvent("tw-navigate",true,true);
+			navEvent.navigateTo = this.params.to;
+			navEvent.navigateFrom = this;
+			event.target.dispatchEvent(navEvent); 
+			event.preventDefault();
+			return false;
+		}
 	}
 };
 

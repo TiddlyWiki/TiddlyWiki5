@@ -90,18 +90,17 @@ exports.getSliderChildren = function() {
 };
 
 exports.handleEvent = function(event) {
-	switch(event.type) {
-		case "click": 
-			if(event.target === this.domNode.firstChild.firstChild) {
-				this.isOpen = !this.isOpen;
-				if(!this.saveOpenState()) {
-					this.refreshInDom({});
-				}
-				event.preventDefault();
-				return false;
-			} else {
-				return true;	
+	if(event.type === "click") {
+		if(event.target === this.domNode.firstChild.firstChild) {
+			this.isOpen = !this.isOpen;
+			if(!this.saveOpenState()) {
+				this.refreshInDom({});
 			}
+			event.preventDefault();
+			return false;
+		} else {
+			return true;	
+		}
 	}
 	return true;
 };

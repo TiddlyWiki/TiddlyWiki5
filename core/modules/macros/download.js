@@ -22,15 +22,14 @@ exports.info = {
 };
 
 exports.handleEvent = function(event) {
-	switch(event.type) {
-		case "click":
-			var text = this.wiki.renderTiddler(this.downloadType,this.downloadTitle),
-				link = document.createElement("a");
-			link.setAttribute("download",this.downloadFilename);
-			link.setAttribute("href","data:" + this.downloadType + "," + encodeURIComponent(text));
-			link.click();
-			event.preventDefault();
-			return false;
+	if(event.type === "click") {
+		var text = this.wiki.renderTiddler(this.downloadType,this.downloadTitle),
+			link = document.createElement("a");
+		link.setAttribute("download",this.downloadFilename);
+		link.setAttribute("href","data:" + this.downloadType + "," + encodeURIComponent(text));
+		link.click();
+		event.preventDefault();
+		return false;
 	}
 	return true;
 };

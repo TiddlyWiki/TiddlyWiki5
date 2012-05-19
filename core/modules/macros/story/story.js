@@ -163,9 +163,9 @@ exports.postRenderInDom = function() {
 	var StoryView = this.wiki.macros.story.viewers[this.params.storyview];
 	if(StoryView) {
 		this.storyview = new StoryView(this);
-	};
+	}
 	if(!this.storyview) {
-		StoryView = this.wiki.macros.story.viewers["scroller"];
+		StoryView = this.wiki.macros.story.viewers.scroller;
 		if(StoryView) {
 			this.storyview = new StoryView(this);
 		}

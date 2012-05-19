@@ -21,15 +21,14 @@ exports.info = {
 };
 
 exports.handleEvent = function(event) {
-	switch(event.type) {
-		case "click":
-			var buttonEvent = document.createEvent("Event");
-			buttonEvent.initEvent("tw-" + this.params.name,true,true);
-			buttonEvent.tiddlerTitle = this.tiddlerTitle;
-			buttonEvent.commandOrigin = this;
-			event.target.dispatchEvent(buttonEvent); 
-			event.preventDefault();
-			return false;
+	if(event.type === "click") {
+		var buttonEvent = document.createEvent("Event");
+		buttonEvent.initEvent("tw-" + this.params.name,true,true);
+		buttonEvent.tiddlerTitle = this.tiddlerTitle;
+		buttonEvent.commandOrigin = this;
+		event.target.dispatchEvent(buttonEvent); 
+		event.preventDefault();
+		return false;
 	}
 	return true;
 };

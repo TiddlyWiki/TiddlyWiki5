@@ -90,7 +90,7 @@ exports.compileFilter = function(filterString) {
 			operator = operation.operators[p];
 			operatorInfo = this.operators[operator.operator];
 			if(!operatorInfo) { // Check for it being a field operator
-				operatorInfo = this.operators["field"];
+				operatorInfo = this.operators.field;
 			}
 			output.push(operatorInfo[type](operator));
 			type = "filter";
@@ -139,29 +139,25 @@ exports.operators = {
 	},
 	"is": {
 		selector: function(operator) {
-			switch(operator.operand) {
-				case "tiddler":
-					if(operator.prefix === "!") {
-						return "subResults = [];";
-					} else {
-						return "for(var title in source) {$tw.utils.pushTop(subResults,title);}";
-					}
-					break;
-				default:
-					throw "Unknown operand for 'is' filter operator";
+			if(operator.operand === "tiddler") {
+				if(operator.prefix === "!") {
+					return "subResults = [];";
+				} else {
+					return "for(var title in source) {$tw.utils.pushTop(subResults,title);}";
+				}
+			} else {
+				throw "Unknown operand for 'is' filter operator";
 			}
 		},
 		filter: function(operator) {
-			switch(operator.operand) {
-				case "tiddler":
-					if(operator.prefix === "!") {
-						return "subResults = [];";
-					} else {
-						return "";
-					}
-					break;
-				default:
-					throw "Unknown operand for 'is' filter operator";
+			if(operator.operand === "tiddler") {
+				if(operator.prefix === "!") {
+					return "subResults = [];";
+				} else {
+					return "";
+				}
+			} else {
+				throw "Unknown operand for 'is' filter operator";
 			}
 		}
 	},

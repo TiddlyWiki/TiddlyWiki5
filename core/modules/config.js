@@ -30,6 +30,6 @@ exports.htmlEntities = {quot:34, amp:38, apos:39, lt:60, gt:62, nbsp:160, iexcl:
 
 exports.preferences = {
 	animationDuration: 400
-}
+};
 
 })();

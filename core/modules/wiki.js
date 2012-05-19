@@ -248,7 +248,7 @@ exports.initParsers = function(moduleType) {
 		}
 	}
 	// Install the wikitext rules
-	modules = $tw.plugins.moduleTypes["wikitextrule"];
+	modules = $tw.plugins.moduleTypes.wikitextrule;
 	var wikitextparser = this.parsers["text/x-tiddlywiki"];
 	if(modules && wikitextparser) {
 		for(n=0; n<modules.length; n++) {

@@ -649,7 +649,7 @@ $tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./tiddlers"),n
 $tw.plugins.registerPluginModules();
 
 // Run any startup plugin modules
-var mainModules = $tw.plugins.moduleTypes["startup"];
+var mainModules = $tw.plugins.moduleTypes.startup;
 for(var m=0; m<mainModules.length; m++) {
 	mainModules[m].startup.call($tw);
 }
