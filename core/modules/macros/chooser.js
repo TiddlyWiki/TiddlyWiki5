@@ -3,6 +3,8 @@ title: $:/core/modules/macros/chooser.js
 type: application/javascript
 module-type: macro
 
+Zooming chooser macro
+
 \*/
 (function(){
 

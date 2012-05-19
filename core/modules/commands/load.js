@@ -3,7 +3,7 @@ title: $:/core/modules/commands/load.js
 type: application/javascript
 module-type: command
 
-Load tiddlers command
+Command to load tiddlers from a file
 
 \*/
 (function(){

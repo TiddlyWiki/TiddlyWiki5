@@ -3,7 +3,7 @@ title: $:/core/modules/commands/dump.js
 type: application/javascript
 module-type: command
 
-Dump command
+Dump command for inspecting TiddlyWiki internals
 
 \*/
 (function(){

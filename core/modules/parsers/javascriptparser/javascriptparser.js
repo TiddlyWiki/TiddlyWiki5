@@ -3,7 +3,7 @@ title: $:/core/modules/parsers/javascriptparser/javascriptparser.js
 type: application/javascript
 module-type: parser
 
-Parses a JSON object into a parse tree
+Parses a JavaScript program into a parse tree
 
 \*/
 (function(){

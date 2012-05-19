@@ -3,6 +3,8 @@ title: $:/core/modules/macros/download.js
 type: application/javascript
 module-type: macro
 
+Download macro
+
 \*/
 (function(){
 

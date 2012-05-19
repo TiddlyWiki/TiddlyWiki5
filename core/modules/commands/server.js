@@ -3,20 +3,7 @@ title: $:/core/modules/commands/server.js
 type: application/javascript
 module-type: command
 
-Serve tiddlers over http. The server is very simple. At the root, it serves a rendering of a specified tiddler. Otherwise, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for GET, PUT and DELETE.
-
-For example:
-
-	--server 8080 $:/core/tiddlywiki5.template.html text/plain text/html
-
-The parameters are:
-
-	--server <port> <roottiddler> <rendertype> <servetype>
-
-* ''port'' - port number to serve from (defaults to "8080")
-* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/tiddlywiki5.template.html") 
-* ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
-* ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
+Serve tiddlers over http
 
 \*/
 (function(){

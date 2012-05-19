@@ -7,9 +7,6 @@ type: text/x-tiddlywiki-html
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="<<include "$:/core/version.txt" text/plain shadow:yes>>" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="
 <<include "$:/core/copyright.txt" text/plain shadow:yes>>

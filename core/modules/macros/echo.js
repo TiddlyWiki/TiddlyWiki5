@@ -3,6 +3,8 @@ title: $:/core/modules/macros/echo.js
 type: application/javascript
 module-type: macro
 
+Echo macro
+
 \*/
 (function(){
 

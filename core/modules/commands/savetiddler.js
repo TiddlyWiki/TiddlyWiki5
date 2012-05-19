@@ -3,7 +3,7 @@ title: $:/core/modules/commands/savetiddler.js
 type: application/javascript
 module-type: command
 
-Save tiddlers command
+Command to save a tiddler to a file
 
 \*/
 (function(){

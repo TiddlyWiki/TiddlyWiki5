@@ -5,8 +5,6 @@ module-type: utils
 
 Various static utility functions.
 
-This file is a bit of a dumping ground; the expectation is that most of these functions will be refactored.
-
 \*/
 (function(){
 

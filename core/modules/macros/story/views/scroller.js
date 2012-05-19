@@ -3,7 +3,7 @@ title: $:/core/modules/macros/story/views/scroller.js
 type: application/javascript
 module-type: storyview
 
-A storyview that shows a sequence of tiddlers and navigates by scrolling
+A storyview that shows a sequence of tiddlers and navigates by smoothly scrolling
 
 \*/
 (function(){

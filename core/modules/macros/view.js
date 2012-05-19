@@ -3,6 +3,8 @@ title: $:/core/modules/macros/view.js
 type: application/javascript
 module-type: macro
 
+View macro
+
 \*/
 (function(){
 

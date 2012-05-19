@@ -3,6 +3,8 @@ title: $:/core/modules/macros/list.js
 type: application/javascript
 module-type: macro
 
+List macro
+
 \*/
 (function(){
 

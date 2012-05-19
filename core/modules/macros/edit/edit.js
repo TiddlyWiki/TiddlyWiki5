@@ -3,6 +3,8 @@ title: $:/core/modules/macros/edit/edit.js
 type: application/javascript
 module-type: macro
 
+Edit macro for editting fields and tiddlers
+
 \*/
 (function(){
 

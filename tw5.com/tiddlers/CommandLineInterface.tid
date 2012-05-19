@@ -2,35 +2,75 @@ title: CommandLineInterface
 modifier: JeremyRuston
 
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on RecipeFiles, TiddlerFiles and TiddlyWikiFiles.
-
-!!Usage
-`
-node core/boot.js <options>
-`
-This boots the TiddlyWiki kernel and loads the core plugins. The wiki store is initially empty.
-
-The command line options are processed sequentially from left to right. Processing pauses during long operations and then resumes with the next command line option in sequence.
-
-The following options are available:
-|`--load <filepath>` |Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files |
-|`--savetiddler <title> <filename> [<type>]` |Save an individual tiddler as a specified MIME type, defaults to `text/html` |
-|`--wikitest <dir> [save]` |Run wikification tests against the tiddlers in the given directory. Include the `save` flag to save the test result files as the new targets |
-|`--dump tiddlers` |Dump the titles of the tiddlers in the wiki store |
-|`--dump tiddler <title>` |Dump the fields of an individual tiddler |
-|`--dump shadows` |Dump the titles of the shadow tiddlers in the wiki store |
-|`--dump config` |Dump the current core configuration |
-|`--verbose` |Triggers verbose output, useful for debugging |
 !! Examples
 This example loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 `
 node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html
 `
-!! Notes
-`--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
-!!Try it out
-The easiest way to try out the code is to visit http://tiddlywiki.com/tiddlywiki5/
+!!Usage
+`
+node core/boot.js [--<option> [<arg>[,<arg>]]]
+`
+Running `boot.js` from the command line boots the TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments. The arguments are separated with spaces. The commands are identified by the prefix `--`.
 
-For trying it out under `node.js`, two batch files are provided:
+The commands are processed sequentially from left to right. Processing pauses during long operations and then resumes with the next command in sequence 
+!!Commands
+The following commands are available.
+
+!!! load
+`--load <filepath>`
+Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files 
+
+!!! savetiddler
+`--savetiddler <title> <filename> [<type>]` 
+Save an individual tiddler as a specified MIME type, defaults to `text/html` 
+
+!!! wikitest
+`--wikitest <dir> [save]` 
+Run wikification tests against the tiddlers in the given directory. Include the `save` flag to save the test result files as the new targets.
+
+`--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
+
+!!! server
+`--server <port> <roottiddler> <rendertype> <servetype>` 
+
+The server is very simple. At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for GET, PUT and DELETE.
+
+For example:
+{{{
+--server 8080 $:/core/tiddlywiki5.template.html text/plain text/html
+}}}
+The parameters are:
+{{{
+--server <port> <roottiddler> <rendertype> <servetype>
+}}}
+* ''port'' - port number to serve from (defaults to "8080")
+* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/tiddlywiki5.template.html") 
+* ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
+* ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
+
+!!! dump
+`--dump tiddlers` 
+Dump the titles of the tiddlers in the wiki store 
+
+!!! dump
+`--dump tiddler <title>` 
+Dump the fields of an individual tiddler 
+
+!!! dump
+`--dump shadows` 
+Dump the titles of the shadow tiddlers in the wiki store 
+
+!!! dump
+`--dump config` 
+Dump the current core configuration 
+
+!!! verbose
+`--verbose` 
+Triggers verbose output, useful for debugging 
+
+!!Trying it out
+For trying TiddlyWiki5 out under `node.js`, two batch files are provided:
 
 * `run.sh` boots the kernel and loads the core modules and then outputs the `$tw` global for inspection
 * `bld.sh` builds the new TiddlyWiki 5 HTML file (placed in the `tmp/tw5/` directory by default)

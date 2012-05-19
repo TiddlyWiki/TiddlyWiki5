@@ -3,6 +3,8 @@ title: $:/core/modules/macros/include.js
 type: application/javascript
 module-type: macro
 
+Include macro
+
 \*/
 (function(){
 

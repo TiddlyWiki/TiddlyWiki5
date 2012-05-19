@@ -3,6 +3,8 @@ title: $:/core/modules/macros/video.js
 type: application/javascript
 module-type: macro
 
+Video macro
+
 \*/
 (function(){
 

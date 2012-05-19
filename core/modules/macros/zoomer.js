@@ -3,6 +3,8 @@ title: $:/core/modules/macros/zoomer.js
 type: application/javascript
 module-type: macro
 
+Zooming navigator macro
+
 \*/
 (function(){
 

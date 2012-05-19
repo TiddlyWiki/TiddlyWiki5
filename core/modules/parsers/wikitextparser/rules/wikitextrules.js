@@ -3,6 +3,8 @@ title: $:/core/modules/parsers/wikitextparser/rules/wikitextrules.js
 type: application/javascript
 module-type: wikitextrule
 
+Rule modules for the wikitext parser
+
 \*/
 (function(){
 

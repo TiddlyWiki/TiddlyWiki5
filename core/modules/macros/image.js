@@ -3,6 +3,8 @@ title: $:/core/modules/macros/image.js
 type: application/javascript
 module-type: macro
 
+Image macro for displaying images
+
 \*/
 (function(){
 

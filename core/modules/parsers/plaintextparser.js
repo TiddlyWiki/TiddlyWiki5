@@ -3,7 +3,7 @@ title: $:/core/modules/parsers/plaintextparser.js
 type: application/javascript
 module-type: parser
 
-Renders plain text tiddlers
+Parses plain text tiddlers
 
 \*/
 (function(){
