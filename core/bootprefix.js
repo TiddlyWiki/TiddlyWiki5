@@ -14,7 +14,7 @@ See Boot.js for further details of the boot process.
 
 // Set up $tw global for the browser
 if(window && !window.$tw) {
-	window.$tw = {isBrowser: true};
+	window.$tw = {browser: {}};
 }
 
 $tw.modules = {titles: {}}; // hashmap by module name of {fn:, exports:, moduleType:}

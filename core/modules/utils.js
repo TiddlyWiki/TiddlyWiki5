@@ -335,7 +335,7 @@ exports.getVersionString = function() {
 Extract the version number from the meta tag or from the boot file
 */
 
-if($tw.isBrowser) {
+if($tw.browser) {
 
 // Browser version
 exports.extractVersionInfo = function() {

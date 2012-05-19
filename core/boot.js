@@ -32,7 +32,7 @@ In practice, each module is wrapped in a separate script block.
 
 // Set up $tw global for the server
 if(typeof(window) === "undefined" && !global.$tw) {
-	global.$tw = {isBrowser: false};
+	global.$tw = {}; // No ``browser`` member for the server
 }
 
 // Boot information
@@ -419,7 +419,7 @@ $tw.wiki = new $tw.Wiki();
 
 /////////////////////////// Browser definitions
 
-if($tw.isBrowser) {
+if($tw.browser) {
 
 /*
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
@@ -526,12 +526,12 @@ $tw.wiki.shadows.addTiddlers(
 	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("shadowArea"))
 );
 
-// End of if($tw.isBrowser)
+// End of if($tw.browser)
 }
 
 /////////////////////////// Server definitions
 
-if(!$tw.isBrowser) {
+if(!$tw.browser) {
 
 var fs = require("fs"),
 	path = require("path"),
@@ -640,7 +640,7 @@ $tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./shadows"));
 // Load tiddlers from wiki tiddlers directory
 $tw.plugins.loadPluginsFromFolder(path.resolve($tw.boot.wikiPath,"./tiddlers"),null,null,$tw.wiki);
 
-// End of if(!$tw.isBrowser)	
+// End of if(!$tw.browser)	
 }
 
 /////////////////////////// Final initialisation

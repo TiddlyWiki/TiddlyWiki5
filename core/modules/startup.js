@@ -14,6 +14,15 @@ This is the main application logic for both the client and server
 
 exports.startup = function() {
 	var modules,n,m,f,commander;
+	// This should be somewhere else
+	if($tw.browser) {
+		$tw.browser.prefix = document.body.style.webkitTransform !== undefined ? "webkit" : 
+							document.body.style.MozTransform !== undefined ? "Moz" :
+							document.body.style.OTransform !== undefined ? "O" : null;
+		$tw.browser.transition = $tw.browser.prefix + "Transition";
+		$tw.browser.transform = $tw.browser.prefix + "Transform";
+		$tw.browser.transformorigin = $tw.browser.prefix + "TransformOrigin";
+	}
 	// Set up additional global objects
 	$tw.plugins.applyMethods("global",$tw);
 	// Wire up plugin modules
@@ -30,7 +39,7 @@ exports.startup = function() {
 	// Get version information
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Load up the tiddlers in the root of the core directory (we couldn't do before because we didn't have the serializers installed)
-	if(!$tw.isBrowser) {
+	if(!$tw.browser) {
 		$tw.plugins.loadPluginsFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
 	}
 	// Set up the wiki store
@@ -41,7 +50,7 @@ exports.startup = function() {
 	// Set up the command plugins
 	$tw.Commander.initCommands();
 	// Host-specific startup
-	if($tw.isBrowser) {
+	if($tw.browser) {
 		// Display the PageTemplate
 		var renderer = $tw.wiki.parseTiddler("PageTemplate");
 		renderer.execute([],"PageTemplate");
