@@ -1,8 +1,8 @@
 title: PluginMechanism
+tags: internals
 
 !Introduction
-TiddlyWiki5 is based on a 500 line boot kernel that runs on node.js or in the browser, and everything
-else is plugins.
+TiddlyWiki5 is based on a 500 line boot kernel that runs on node.js or in the browser, and everything else is plugins.
 
 The kernel boots just enough of the TiddlyWiki environment to allow it to load tiddlers as plugins and execute them (a barebones tiddler class, a barebones wiki store class, some utilities etc.). Plugin modules are written like `node.js` modules; you can use `require()` to invoke sub components and to control load order.
 

@@ -5,59 +5,6 @@ module-type: wikimethod
 
 Adds tiddler filtering to the $tw.Wiki object.
 
-TiddlyWiki has a special syntax for expressing filters. They can be used to select tiddlers for an operation, or to filter a set of tiddlers to add or remove members.
-
-The mechanism is easiest to understand by first presenting some example filter strings:
-
-|!Filter |!Results |
-|`HelloThere` |The single tiddler titled `HelloThere` (if it exists) |
-|`[[A Title With Several Words]]` |The single tiddler titled `A Title With Several Words` (if it exists) |
-|`[title[MyTiddler]]` |The single tiddler titled `MyTiddler` (if it exists) |
-|`HelloThere Introduction` |The tiddlers titled `HelloThere` and `Introduction` (if they exist) |
-|`[tag[important]]` |Any tiddlers with the tag `important` |
-|`[!tag[important]]` |Any tiddlers not with the tag `important` |
-|`[tag[important]sort[title]]` |Any tiddlers with the tag `important` sorted by title |
-|`[tag[important]!sort[title]]` |Any tiddlers with the tag `important` reverse sorted by title |
-|`[[one][two][three]tag[tom]]` |Any of the tiddlers called `one`, `two` or `three` that exist and are tagged with `tom` |
-|`[[one][two][three]] [tag[tom]]` |Any of the tiddlers called `one`, `two` or `three` that exist, along with all of the source tiddlers that are tagged with `tom` |
-|`[tag[tom]] [tag[harry]] -[[one][two][three]]` |All tiddlers tagged either `tom` or `harry`, but excluding `one`, `two` and `three` |
-
-[[one]] [[two]] [tag[three]] -[[four]] +[sort[title]]
-[tag[important]] -[[one][two]] -[[three]] +[sort[-modified]limit[20]]
-
-A filter string consists of one or more filter operations, each comprising one or more filter operators with associated operands.
-
-The operators look like `[operator[operand]]`, where `operator` is one of:
-* ''title'': selects the tiddler with the title given in the operand
-* ''is'': tests whether a tiddler is a member of the system defined set named in the operand (see below)
-* ''has'': tests whether a tiddler has a specified field
-* ''sort'': sorts the tiddlers by a given field
-* ''limit'': limits the number of subresults
-* ''tag'': tests whether a given tag is (`[tag[mytag]]`) or is not (`[!tag[mytag]]`) present on the tiddler
-* ''<field>'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
-
-An operator can be negated with by preceding it with `!`, for example `[!tag[Tommy]]` selects the tiddlers that are not tagged with `Tommy`.
-
-The operator defaults to `title` if omitted, so `[[HelloThere]]` is equivalent to `[title[HelloThere]]`. If there are no spaces in the title, then the double square brackets can also be omitted: `HelloThere`.
-
-The operands available with the `is` operator are:
-* ''tiddler'': selects all ordinary (non-shadow) tiddlers
-
-Operators are combined into logically ANDed expressions by bashing them together and merging the square brackets:
-{{{
-[tag[one]] [tag[two]] ---> [tag[one]tag[two]]
-}}}
-
-Operations can be preceded with `-` to negate their action, removing the selected tiddlers from the results. For example, `[tag[Tommy]] -HelloThere -[[Another One]]` selects all tiddlers tagged with `Tommy` except those titled `HelloThere` or `Another One`.
-
-Operations can be preceded with `+` in order to make them apply to all of the current results, rather than the original source. For example, `[tag[Jeremy]] [tag[Tommy]] +[sort[title]]` selects the tiddlers tagged `Tommy` or `Jeremy`, and sorts them by the `title` field.
-
-Filters are processed with the following elements:
-* a string of filter operations, each made up of one or more filter operators
-* the incoming source tiddlers
-* the overall result stack
-* the subresult stack of the tiddlers selected by the current operation
-
 \*/
 (function(){
 

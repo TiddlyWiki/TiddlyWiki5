@@ -1,4 +1,5 @@
 title: WaysToUseTiddlyWiki
+tags: feature
 
 !Introduction
 TiddlyWiki5 will be deployable in a wide variety of different arrangements to suit different needs. The archetypal configurations are listed below along with a measure of how much complexity is involved in setting up each one -- once set up properly, the TiddlyWiki user experience should be consistent regardless of configuration.

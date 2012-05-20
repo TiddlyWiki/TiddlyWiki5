@@ -1,4 +1,5 @@
 title: TypedBlockTests
+tags: demo
 
 WikiText can include blocks of text that are rendered with an explicit MIME type like this:
 {{{

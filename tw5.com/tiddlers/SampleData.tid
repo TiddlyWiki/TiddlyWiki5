@@ -1,5 +1,6 @@
 title: SampleData
 type: application/json
+tags: demo
 
 {
     "glossary": {

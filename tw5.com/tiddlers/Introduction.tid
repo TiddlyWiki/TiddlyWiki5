@@ -1,5 +1,5 @@
 title: Introduction
-tags: Introduction
+tags: introduction
 
 TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|TiddlyWikiArchitecture]] using the latest features of HTML5 and node.js. It runs natively under node.js, and can also use its own components to construct a version of itself that works entirely within the browser, just as TiddlyWiki has always done.
 

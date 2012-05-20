@@ -1,4 +1,5 @@
 title: SliderTests
+tags: demo
 
 The status of this slider is stored in the tiddler JackSlider:
 <<slider JackSlider "Motovun Jack.jpg" "TiddlyWiki Kitten »" "See the kitten">>

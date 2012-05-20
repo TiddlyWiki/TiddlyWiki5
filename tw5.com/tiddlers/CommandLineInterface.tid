@@ -1,5 +1,6 @@
 title: CommandLineInterface
 modifier: JeremyRuston
+tags: feature
 
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlerFiles and TiddlyWikiFiles. For example, this loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 {{{
