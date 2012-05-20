@@ -62,7 +62,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 		}
 	} else {
 		// Add the tiddler to the bottom of the story (subsequently there will be a refreshInDom() call which is when we'll actually do the navigation)
-		story.tiddlers.push({title: event.navigateTo, template: template});
+		story.tiddlers.unshift({title: event.navigateTo, template: template});
 		this.wiki.addTiddler(new $tw.Tiddler(storyTiddler,{text: JSON.stringify(story)}));
 		// Record the details of the navigation for us to pick up in refreshInDom()
 		this.lastNavigationEvent = event;
