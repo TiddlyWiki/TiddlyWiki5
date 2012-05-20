@@ -2,7 +2,7 @@ title: SampleJavaScriptWithError
 type: application/javascript
 
 /*
-This is an example JavaScript file
+This is an example JavaScript program that contains an error
 */
 function myFunction(param) {
 	if(=) { // An error

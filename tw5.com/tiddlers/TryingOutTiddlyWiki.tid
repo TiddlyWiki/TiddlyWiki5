@@ -1,0 +1,6 @@
+title: TryingOutTiddlyWiki
+
+For trying TiddlyWiki5 out under node.js, two batch files are provided:
+
+* `run.sh` runs the wikitests
+* `bld.sh` builds the new TiddlyWiki 5 HTML file (placed in the `tmp/tw5/` directory by default)

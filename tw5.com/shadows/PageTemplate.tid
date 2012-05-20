@@ -2,5 +2,5 @@ title: PageTemplate
 
 {{navigation-panel{<<chooser>>}}}{{zoomer-panel{<<zoomer>>}}}
 {{container-fluid{
-<<story story:StoryTiddlers>>
+<<story story:StoryTiddlers storyview:zoomin>>
 }}}
