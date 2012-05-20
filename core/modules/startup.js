@@ -38,7 +38,7 @@ exports.startup = function() {
 	$tw.plugins.applyMethods("treenode",$tw.Tree);
 	// Get version information
 	$tw.version = $tw.utils.extractVersionInfo();
-	// Load up the tiddlers in the root of the core directory (we couldn't do before because we didn't have the serializers installed)
+	// Load up the shadow tiddlers in the root of the core directory (we couldn't do before because we didn't have the serializers installed)
 	if(!$tw.browser) {
 		$tw.loadTiddlersFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
 	}
