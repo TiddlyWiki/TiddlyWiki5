@@ -5,7 +5,9 @@ type: text/x-tiddlywiki-new
 
 HelloThere
 
-One two three four. With a link to HelloThere. And a link to TiddlyWiki and TiddlyWiki5. And a suppressed link to ~HelloThere.
+One two three four. With a link to HelloThere. And a link to TiddlyWiki and TiddlyWiki5. And a suppressed link to ~HelloThere. And now a [[pretty link|HelloThere]] and another pretty link: [[Introduction]].
+
+Here is a macro <<list all>>
 
 ! This is a new heading
 This is a paragraph
