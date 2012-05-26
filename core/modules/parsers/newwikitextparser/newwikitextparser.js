@@ -41,6 +41,9 @@ Parse a block of text at the current position
 */
 WikiTextRenderer.prototype.parseBlock = function() {
 	this.skipWhitespace();
+	if(this.pos >= this.sourceLength) {
+		return [];
+	}
 	// Look for a block rule
 	this.parser.blockRules.regExp.lastIndex = this.pos;
 	var match = this.parser.blockRules.regExp.exec(this.source);
