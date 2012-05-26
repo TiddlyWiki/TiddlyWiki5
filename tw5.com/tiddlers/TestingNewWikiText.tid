@@ -70,10 +70,9 @@ And here's a class assigned directly to a heading:
 Here are some HTML paragraph blocks:
 
 <article class="hello">
-This is my nice and simple block of text
+This is my nice and simple block of text. HelloThere
 </article>
 
 And another:
 
   <article class="hello" mysignal data-thing='Nothing'>This time the text is all squashed up, without line breaks</article>
-
