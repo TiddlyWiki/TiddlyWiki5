@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/runrules/prettylink.js
 type: application/javascript
-module-type: wikitextrunrule
+module-type: wikirule
 
 Wiki text run rule for pretty links
 
@@ -13,6 +13,8 @@ Wiki text run rule for pretty links
 "use strict";
 
 exports.name = "prettylink";
+
+exports.runParser = true;
 
 exports.regExpString = "\\[\\[";
 

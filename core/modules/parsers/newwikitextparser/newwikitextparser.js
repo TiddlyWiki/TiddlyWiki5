@@ -45,13 +45,13 @@ WikiTextRenderer.prototype.parseBlock = function() {
 		return [];
 	}
 	// Look for a block rule
-	this.parser.blockRules.regExp.lastIndex = this.pos;
-	var match = this.parser.blockRules.regExp.exec(this.source);
-	if(this.parser.blockRules.rules.length && match && match.index === this.pos) {
+	this.parser.blockRegExp.lastIndex = this.pos;
+	var match = this.parser.blockRegExp.exec(this.source);
+	if(this.parser.blockRules.length && match && match.index === this.pos) {
 		var rule;
-		for(var t=0; t<this.parser.blockRules.rules.length; t++) {
+		for(var t=0; t<this.parser.blockRules.length; t++) {
 			if(match[t+1]) {
-				rule = this.parser.blockRules.rules[t];
+				rule = this.parser.blockRules[t];
 			}
 		}
 		return rule ? rule.parse.call(this,match) : [];
@@ -82,8 +82,8 @@ WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
 	terminatorRegExp.lastIndex = this.pos;
 	var terminatorMatch = terminatorRegExp.exec(this.source);
 	// Find the next occurrence of a runrule
-	this.parser.runRules.regExp.lastIndex = this.pos;
-	var runRuleMatch = this.parser.runRules.regExp.exec(this.source);
+	this.parser.runRegExp.lastIndex = this.pos;
+	var runRuleMatch = this.parser.runRegExp.exec(this.source);
 	// Loop around until we've reached the end of the text
 	while(this.pos < this.sourceLength && (terminatorMatch || runRuleMatch)) {
 		// Return if we've found the terminator, and it precedes any run rule match
@@ -105,17 +105,17 @@ WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
 			}
 			// Process the run rule
 			var rule;
-			for(var t=0; t<this.parser.runRules.rules.length; t++) {
+			for(var t=0; t<this.parser.runRules.length; t++) {
 				if(runRuleMatch[t+1]) {
-					rule = this.parser.runRules.rules[t];
+					rule = this.parser.runRules[t];
 				}
 			}
 			if(rule) {
 				tree.push.apply(tree,rule.parse.call(this,runRuleMatch));
 			}
 			// Look for the next run rule
-			this.parser.runRules.regExp.lastIndex = this.pos;
-			runRuleMatch = this.parser.runRules.regExp.exec(this.source);
+			this.parser.runRegExp.lastIndex = this.pos;
+			runRuleMatch = this.parser.runRegExp.exec(this.source);
 		}
 	}
 	// Process the remaining text
@@ -149,10 +149,25 @@ WikiTextRenderer.prototype.parseClassedRun = function(terminatorRegExp) {
 The wikitext parser assembles the rules and uses the wikitext renderer to do the parsing
 */
 var WikiTextParser = function(options) {
-    this.wiki = options.wiki;
-    // Assemble the rule regexps
-    this.blockRules = this.getRules("wikitextblockrule");
-    this.runRules = this.getRules("wikitextrunrule");
+	this.wiki = options.wiki;
+	// Assemble the rule regexps
+	this.blockRules = [];
+	this.runRules = [];
+	var blockRegExpStrings = [],
+		runRegExpStrings = [],
+		rules = ($tw.plugins.moduleTypes.wikirule || []).slice(0);
+	for(var t=0; t<rules.length; t++) {
+		if(rules[t].blockParser) {
+			this.blockRules.push(rules[t]);
+			blockRegExpStrings.push("(" + rules[t].regExpString + ")");
+		}
+		if(rules[t].runParser) {
+			this.runRules.push(rules[t]);
+			runRegExpStrings.push("(" + rules[t].regExpString + ")");
+		}
+	}
+	this.blockRegExp = new RegExp(blockRegExpStrings.join("|"),"mg");
+	this.runRegExp = new RegExp(runRegExpStrings.join("|"),"mg");
 };
 
 /*
@@ -163,21 +178,6 @@ WikiTextParser.prototype.parse = function(type,text) {
 		wiki: this.wiki,
 		parser: this
 	});
-};
-
-/*
-Merge all the rule regexp strings into a single regexp
-*/
-WikiTextParser.prototype.getRules = function(moduleType) {
-	var rules = ($tw.plugins.moduleTypes[moduleType] || []).slice(0),
-		regExpStrings = [];
-	for(var t=0; t<rules.length; t++) {
-		regExpStrings.push("(" + rules[t].regExpString + ")");
-	}
-	return {
-		regExp: new RegExp(regExpStrings.join("|"),"mg"),
-		rules: rules
-	};
 };
 
 exports["text/x-tiddlywiki-new"] = WikiTextParser;

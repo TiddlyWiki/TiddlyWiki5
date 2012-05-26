@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/runrules/wikilink.js
 type: application/javascript
-module-type: wikitextrunrule
+module-type: wikirule
 
 Wiki text run rule for wiki links.
 
@@ -13,6 +13,8 @@ Wiki text run rule for wiki links.
 "use strict";
 
 exports.name = "wikilink";
+
+exports.runParser = true;
 
 var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",

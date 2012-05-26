@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/list.js
 type: application/javascript
-module-type: wikitextblockrule
+module-type: wikirule
 
 Wiki text block rule for lists.
 
@@ -15,6 +15,8 @@ Wiki text block rule for lists.
 "use strict";
 
 exports.name = "list";
+
+exports.blockParser = true;
 
 exports.regExpString = "[\\*#;:]+";
 

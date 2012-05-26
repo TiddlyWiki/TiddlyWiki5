@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/runrules/macro.js
 type: application/javascript
-module-type: wikitextrunrule
+module-type: wikirule
 
 Wiki text run rule for pretty links
 
@@ -13,6 +13,9 @@ Wiki text run rule for pretty links
 "use strict";
 
 exports.name = "macro";
+
+exports.runParser = true;
+exports.blockParser = true;
 
 exports.regExpString = "<<";
 

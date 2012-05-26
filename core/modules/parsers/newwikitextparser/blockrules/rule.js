@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/rule.js
 type: application/javascript
-module-type: wikitextblockrule
+module-type: wikirule
 
 Wiki text block rule for rules
 
@@ -13,6 +13,8 @@ Wiki text block rule for rules
 "use strict";
 
 exports.name = "rule";
+
+exports.blockParser = true;
 
 exports.regExpString = "-{3,}\r?\n";
 

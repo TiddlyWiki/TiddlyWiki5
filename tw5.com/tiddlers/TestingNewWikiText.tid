@@ -7,6 +7,8 @@ HelloThere
 
 One two three four. With a link to HelloThere. And a link to TiddlyWiki and TiddlyWiki5. And a suppressed link to ~HelloThere. And now a [[pretty link|HelloThere]] and another pretty link: [[Introduction]].
 
+Here's a paragraph with an embedded macro <<image "Motovun Jack.jpg">> and that was it.
+
 Here is a macro <<list all>>
 
 ! This is a new heading
@@ -75,4 +77,4 @@ This is my nice and simple block of text. HelloThere
 
 And another:
 
-  <article class="hello" mysignal data-thing='Nothing'>This time the text is all squashed up, without line breaks</article>
+  <article class="hello" mysignal data-thing='Nothing'><div class="another" mysignal2 data-thing='NothingElse'>This time the text is all squashed up, without line breaks</div></article>

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/class.js
 type: application/javascript
-module-type: wikitextblockrule
+module-type: wikirule
 
 Wiki text block rule for assigning classes to paragraphs and other blocks
 
@@ -13,6 +13,8 @@ Wiki text block rule for assigning classes to paragraphs and other blocks
 "use strict";
 
 exports.name = "class";
+
+exports.blockParser = true;
 
 exports.regExpString = "\\{\\{(?:[^\\{\\r\\n]*)\\{$";
 

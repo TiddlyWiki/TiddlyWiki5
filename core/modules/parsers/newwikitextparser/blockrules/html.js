@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/html.js
 type: application/javascript
-module-type: wikitextblockrule
+module-type: wikirule
 
 Wiki text block rule for block level HTML elements
 
@@ -13,6 +13,9 @@ Wiki text block rule for block level HTML elements
 "use strict";
 
 exports.name = "html";
+
+exports.blockParser = true;
+exports.runParser = true;
 
 exports.regExpString = "<[A-Za-z]+\\s*[^>]*>";
 
