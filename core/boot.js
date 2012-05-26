@@ -623,7 +623,11 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 	$tw.modules.titles[name] = module;
 	// Execute it to get its exports if we haven't already done so
 	if(!module.exports) {
-		vm.runInNewContext(tiddler.fields.text,sandbox,tiddler.fields.title);
+		try {
+			vm.runInNewContext(tiddler.fields.text,sandbox,tiddler.fields.title);
+		} catch(e) {
+			throw "Error executing boot module " + tiddler.fields.title + ":\n" + e;
+		}
 		module.exports = sandbox.exports;
 	}
 	// Return the exports of the module
