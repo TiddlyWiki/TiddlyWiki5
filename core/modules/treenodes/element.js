@@ -144,6 +144,14 @@ Element.prototype.broadcastEvent = function(event) {
 	return true;
 };
 
+Element.prototype.addClass = function(className) {
+	if(typeof this.attributes["class"] === "string") {
+		this.attributes["class"] = this.attributes["class"].split(" ");
+	}
+	this.attributes["class"] = this.attributes["class"] || [];
+	this.attributes["class"].push(className);
+};
+
 exports.Element = Element;
 
 })();

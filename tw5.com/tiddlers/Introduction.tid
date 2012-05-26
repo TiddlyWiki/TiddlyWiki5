@@ -19,6 +19,7 @@ Learning more about TiddlyWiki5:
 
 Some useful tiddlers for feature testing:
 * HelloThere
+* TestingNewWikiText shows off the embryonic new wiki text engine
 * ImageTests showing different ways of embedding images
 * SampleData showing how JSON tiddlers are handled
 * SampleJavaScript and SampleJavaScriptWithError showing how JavaScript code is displayed
@@ -33,7 +34,7 @@ Technical documentation includes:
 * Overview of TiddlyWikiArchitecture
 ** MacroInternals
 * Information about TiddlerFiles and RecipeFiles
-* NewWikiTextFeatures
+* A discussion of potential NewWikiTextFeatures
 
 All tiddlers:
 <<list all>>

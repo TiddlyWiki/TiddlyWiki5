@@ -1,0 +1,77 @@
+title: TestingNewWikiText
+type: text/x-tiddlywiki-new
+
+! This is a heading
+
+HelloThere
+
+One two three four. With a link to HelloThere. And a link to TiddlyWiki and TiddlyWiki5. And a suppressed link to ~HelloThere.
+
+! This is a new heading
+This is a paragraph
+immediately after
+that heading
+
+----
+* This is a list
+* Of lots of items
+** And subitems
+*# And nested numbered lists inside ordinary lists
+*# Yes
+*## Definitely
+*##* And then
+*##** back
+*##*** to items
+*## And back to numbers once more
+*# More numbering
+* And back to items
+
+----
+
+; definitionile
+: definitionate
+; definitionilisation
+: definitionatisative
+
+----
+
+This is a list with a class wrapped around it:
+
+{{myclass andanotherone{
+* One and one
+** Two and three
+* Four and five
+** Six and Seven
+}}}
+
+And here's another one:
+
+{{class1 class2{
+* Un et deux
+**{{class}} Two and three
+* Four and five
+** Trois et cinq
+}}}
+
+And here's a class wrapped around a heading:
+
+{{class1{
+! My heading
+}}}
+
+And here's a class assigned directly to a heading:
+
+!!!!{{class1}} My very beautiful heading
+
+---
+
+Here are some HTML paragraph blocks:
+
+<article class="hello">
+This is my nice and simple block of text
+</article>
+
+And another:
+
+  <article class="hello" mysignal data-thing='Nothing'>This time the text is all squashed up, without line breaks</article>
+
