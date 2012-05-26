@@ -3,7 +3,7 @@ title: $:/core/modules/parsers/newwikitextparser/runrules/wikilink.js
 type: application/javascript
 module-type: wikitextrunrule
 
-Wiki text run rule for wiki links
+Wiki text run rule for wiki links.
 
 \*/
 (function(){
@@ -29,7 +29,7 @@ textPrimitives.wikiLink = "(?:(?:" + textPrimitives.upperLetter + "+" +
 	textPrimitives.upperLetter + "{2,}" +
 	textPrimitives.lowerLetter + "+))";
 
-exports.regExpString = textPrimitives.unWikiLink+"?"+textPrimitives.wikiLink;
+exports.regExpString = textPrimitives.unWikiLink + "?" + textPrimitives.wikiLink;
 
 exports.parse = function(match) {
 	this.pos = match.index + match[0].length;
