@@ -9,6 +9,10 @@ One two three four. With a link to HelloThere. And a link to TiddlyWiki and Tidd
 
 Here's a paragraph with an embedded macro <<image "Motovun Jack.jpg">> and that was it.
 
+{{{
+This will be mono
+}}}
+
 Here is a macro <<list all>>
 
 ! This is a new heading

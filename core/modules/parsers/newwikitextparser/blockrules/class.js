@@ -16,11 +16,11 @@ exports.name = "class";
 
 exports.blockParser = true;
 
-exports.regExpString = "\\{\\{(?:[^\\{\\r\\n]*)\\{$";
+exports.regExpString = "\\{\\{(?:[^\\{\\r\\n]+)\\{$";
 
 exports.parse = function(match) {
 	var tree = [],
-		reStart = /\{\{([^\{\r\n]*){(?:\r?\n)?/mg,
+		reStart = /\{\{([^\{\r\n]+){(?:\r?\n)?/mg,
 		reEnd = /(\}\}\}$(?:\r?\n)?)/mg,
 		endMatch;
 	reStart.lastIndex = this.pos;
