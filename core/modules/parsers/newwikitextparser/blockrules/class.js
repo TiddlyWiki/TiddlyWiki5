@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/class.js
 type: application/javascript
-module-type: wikirule
+module-type: wikitextrule
 
 Wiki text block rule for assigning classes to paragraphs and other blocks
 

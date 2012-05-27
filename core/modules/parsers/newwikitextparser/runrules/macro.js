@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/runrules/macro.js
 type: application/javascript
-module-type: wikirule
+module-type: wikitextrule
 
 Wiki text run rule for pretty links
 

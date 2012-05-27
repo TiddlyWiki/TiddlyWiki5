@@ -247,15 +247,10 @@ exports.initParsers = function(moduleType) {
 			}
 		}
 	}
-	// Install the wikitext rules
-	modules = $tw.plugins.moduleTypes.wikitextrule;
+	// Install the rules for the old wikitext parser rules
 	var wikitextparser = this.parsers["text/x-tiddlywiki"];
 	if(modules && wikitextparser) {
-		for(n=0; n<modules.length; n++) {
-			m = modules[n];
-			// Add the rules defined by the module - currently a hack as we overwrite them
-			wikitextparser.installRules(m.rules);
-		}
+		wikitextparser.installRules();
 	}
 };
 

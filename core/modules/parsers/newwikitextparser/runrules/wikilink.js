@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/runrules/wikilink.js
 type: application/javascript
-module-type: wikirule
+module-type: wikitextrule
 
 Wiki text run rule for wiki links.
 

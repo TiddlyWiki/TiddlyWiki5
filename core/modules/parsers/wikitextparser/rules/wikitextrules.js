@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikitextparser/rules/wikitextrules.js
 type: application/javascript
-module-type: wikitextrule
+module-type: module
 
 Rule modules for the wikitext parser
 

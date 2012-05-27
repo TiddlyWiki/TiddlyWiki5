@@ -53,8 +53,9 @@ var WikiTextParser = function(options) {
 	this.autoLinkWikiWords = true;
 };
 
-WikiTextParser.prototype.installRules = function(rules) {
-	var pattern = [];
+WikiTextParser.prototype.installRules = function() {
+	var rules = require("./rules/wikitextrules.js").rules,
+		pattern = [];
 	for(var n=0; n<rules.length; n++) {
 		pattern.push("(" + rules[n].match + ")");
 	}

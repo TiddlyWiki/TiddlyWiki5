@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/html.js
 type: application/javascript
-module-type: wikirule
+module-type: wikitextrule
 
 Wiki text block rule for block level HTML elements
 

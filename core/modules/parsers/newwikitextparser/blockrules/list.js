@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/newwikitextparser/blockrules/list.js
 type: application/javascript
-module-type: wikirule
+module-type: wikitextrule
 
 Wiki text block rule for lists.
 
