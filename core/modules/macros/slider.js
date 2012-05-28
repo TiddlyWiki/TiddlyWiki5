@@ -79,11 +79,10 @@ exports.getSliderChildren = function() {
 	if(this.hasParameter("content")) {
 		return this.wiki.parseText("text/x-tiddlywiki",this.params.content).tree;
 	} else if(this.hasParameter("target")) {
-		return [$tw.Tree.Macro(
-					"tiddler",
-					{target: this.params.target},
-					null,
-					this.wiki)];
+		return [$tw.Tree.Macro("tiddler",{
+					srcParams: {target: this.params.target},
+					wiki: this.wiki
+				})];
 	} else {
 		return [$tw.Tree.errorNode("No content specified for slider")];
 	}

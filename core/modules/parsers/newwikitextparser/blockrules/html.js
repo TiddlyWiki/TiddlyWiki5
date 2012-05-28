@@ -19,7 +19,7 @@ exports.runParser = true;
 
 exports.regExpString = "<[A-Za-z]+\\s*[^>]*>";
 
-exports.parse = function(match) {
+exports.parse = function(match,isBlock) {
 	var reStart = /<([A-Za-z]+)(\s*[^>]*)>/mg,
 		reAttr = /\s*([A-Za-z\-_]+)(?:\s*=\s*(?:("[^"]*")|('[^']*')|([^"'\s]+)))?/mg;
 	reStart.lastIndex = this.pos;

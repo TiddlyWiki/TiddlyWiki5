@@ -14,7 +14,6 @@ Zooming chooser macro
 
 exports.info = {
 	name: "chooser",
-	wrapperTag: "div",
 	params: {
 	},
 	events: ["touchstart","touchmove","touchend","mouseover","mousemove","mouseup","mouseout"]

@@ -38,10 +38,14 @@ TiddlyTextParser.prototype.parse = function(type,text) {
 			var macroName = match[2] || match[3];
 			if(match[1]) { // Transclusion
 				macroNode = $tw.Tree.Macro("tiddler",{
-					target: match[1]
-				},[],this.wiki);
+					srcParams: {target: match[1]},
+					wiki: this.wiki
+				});
 			} else if(macroName) { // Macro call
-				macroNode = $tw.Tree.Macro(macroName,match[4],[],this.wiki);
+				macroNode = $tw.Tree.Macro(macroName,{
+					srcParams: match[4],
+					wiki: this.wiki
+				});
 			}
 			output.push(macroNode);
 			dependencies.mergeDependencies(macroNode.dependencies);

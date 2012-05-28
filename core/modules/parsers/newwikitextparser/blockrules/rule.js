@@ -18,7 +18,7 @@ exports.blockParser = true;
 
 exports.regExpString = "-{3,}\r?\n";
 
-exports.parse = function(match) {
+exports.parse = function(match,isBlock) {
 	this.pos = match.index + match[0].length;
 	return [$tw.Tree.Element("hr",{},[])];
 };

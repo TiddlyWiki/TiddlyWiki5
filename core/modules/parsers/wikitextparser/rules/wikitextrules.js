@@ -103,9 +103,13 @@ var enclosedTextHelper = function(w) {
 	}
 };
 
-var insertMacroCall = function(w,output,name,params,children) {
+var insertMacroCall = function(w,output,name,params,content) {
 	if(name in w.wiki.macros) {
-		var macroNode = $tw.Tree.Macro(name,params,children,w.wiki);
+		var macroNode = $tw.Tree.Macro(name,{
+			srcParams: params,
+			content: content,
+			wiki: w.wiki
+		});
 		w.dependencies.mergeDependencies(macroNode.dependencies);
 		output.push(macroNode);
 	}

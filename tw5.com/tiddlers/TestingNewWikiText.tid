@@ -82,3 +82,11 @@ This is my nice and simple block of text. HelloThere
 And another:
 
   <article class="hello" mysignal data-thing='Nothing'><div class="another" mysignal2 data-thing='NothingElse'>This time the text is all squashed up, without line breaks</div></article>
+
+---
+
+Macro calls can be inline like this: <<version>>
+
+Or, at paragraph block level:
+
+<<version>>

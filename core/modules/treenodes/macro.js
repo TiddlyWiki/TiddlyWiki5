@@ -17,32 +17,39 @@ var Node = require("./node.js").Node;
 /*
 Construct a renderer node representing a macro invocation
 	macroName: name of the macro
+	options: see below
+
+The options available are:
+
 	srcParams: a string or a hashmap of parameters (each can be a string, or a fn(tiddler,wiki) for evaluated parameters)
-	children: optional array of child nodes
-	store: reference to the WikiStore associated with this macro
+	content: optional array of child nodes
+	wiki: reference to the WikiStore associated with this macro
 	dependencies: optional Dependencies object representing the dependencies of this macro
+	isBlock: true if this macro is being used as an HTML block
 
 Note that the dependencies will be evaluated if not provided.
 */
-var Macro = function(macroName,srcParams,content,wiki,dependencies) {
-	var MacroClass = wiki ? wiki.macros[macroName] : null; // Get the macro class
+var Macro = function(macroName,options) {
+	options = options || {};
+	var MacroClass = options.wiki ? options.wiki.macros[macroName] : null; // Get the macro class
 	if(this instanceof Macro) {
 		// Save the details
 		this.macroName = macroName;
-		this.srcParams = srcParams || {};
-		this.content = content || [];
-		this.wiki = wiki;
-		this.dependencies = dependencies;
+		this.srcParams = options.srcParams || {};
+		this.content = options.content || [];
+		this.wiki = options.wiki;
+		this.dependencies = options.dependencies;
+		this.isBlock = options.isBlock;
 		// Parse the macro parameters if required
 		if(typeof this.srcParams === "string") {
-			this.srcParams = this.parseMacroParamString(srcParams);
+			this.srcParams = this.parseMacroParamString(this.srcParams);
 		}
 		// Evaluate the dependencies if required
 		if(macroName && !this.dependencies) {
 			this.dependencies = this.evaluateDependencies();
 		}
 		// Get a reference to the static information about this macro
-		if(wiki && wiki.macros[macroName]) {
+		if(MacroClass) {
 			this.MacroClass = MacroClass;
 			this.info = MacroClass.prototype.info;
 		}
@@ -51,7 +58,7 @@ var Macro = function(macroName,srcParams,content,wiki,dependencies) {
 		if(!MacroClass) {
 			throw "Unknown macro '" + macroName + "'";
 		}
-		return new MacroClass(macroName,srcParams,content,wiki,dependencies);
+		return new MacroClass(macroName,options);
 	}
 };
 
@@ -129,7 +136,13 @@ Macro.prototype.cloneContent = function() {
 };
 
 Macro.prototype.clone = function() {
-	return new this.MacroClass(this.macroName,this.srcParams,this.cloneContent(),this.wiki,this.dependencies);
+	return new this.MacroClass(this.macroName,{
+		srcParams: this.srcParams,
+		content: this.cloneContent(),
+		wiki: this.wiki,
+		isBlock: this.isBlock,
+		dependencies: this.dependencies
+	});
 };
 
 Macro.prototype.execute = function(parents,tiddlerTitle) {
@@ -164,7 +177,7 @@ Macro.prototype.render = function(type) {
 
 Macro.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	// Create the wrapper node for the macro
-	var domNode = document.createElement(this.info.wrapperTag || "span");
+	var domNode = document.createElement(this.isBlock ? "div" : "span");
 	this.domNode = domNode;
 	if(insertBefore) {
 		parentDomNode.insertBefore(domNode,insertBefore);	

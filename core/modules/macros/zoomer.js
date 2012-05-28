@@ -14,7 +14,6 @@ Zooming navigator macro
 
 exports.info = {
 	name: "zoomer",
-	wrapperTag: "div",
 	params: {
 	},
 	events: ["touchstart","touchmove","touchend"]

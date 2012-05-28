@@ -33,7 +33,7 @@ textPrimitives.wikiLink = "(?:(?:" + textPrimitives.upperLetter + "+" +
 
 exports.regExpString = textPrimitives.unWikiLink + "?" + textPrimitives.wikiLink;
 
-exports.parse = function(match) {
+exports.parse = function(match,isBlock) {
 	this.pos = match.index + match[0].length;
 	// If the link starts with the unwikilink character then just output it as plain text
 	if(match[0].substr(0,1) === textPrimitives.unWikiLink) {
@@ -48,7 +48,11 @@ exports.parse = function(match) {
 			return [$tw.Tree.Text(match[0])];
 		}
 	}
-	var macroNode = $tw.Tree.Macro("link",{to: match[0]},[$tw.Tree.Text(match[0])],this.wiki);
+	var macroNode = $tw.Tree.Macro("link",{
+		srcParams: {to: match[0]},
+		content: [$tw.Tree.Text(match[0])],
+		wiki: this.wiki
+	});
 	this.dependencies.mergeDependencies(macroNode.dependencies);
 	return [macroNode];
 };

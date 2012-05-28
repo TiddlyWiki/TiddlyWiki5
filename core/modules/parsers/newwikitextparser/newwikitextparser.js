@@ -54,7 +54,7 @@ WikiTextRenderer.prototype.parseBlock = function() {
 				rule = this.parser.blockRules[t];
 			}
 		}
-		return rule ? rule.parse.call(this,match) : [];
+		return rule ? rule.parse.call(this,match,true) : [];
 	} else {
 		// Treat it as a paragraph if we didn't find a block rule
 		return [$tw.Tree.Element("p",{},this.parseRun())];
@@ -111,7 +111,7 @@ WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
 				}
 			}
 			if(rule) {
-				tree.push.apply(tree,rule.parse.call(this,runRuleMatch));
+				tree.push.apply(tree,rule.parse.call(this,runRuleMatch,false));
 			}
 			// Look for the next run rule
 			this.parser.runRegExp.lastIndex = this.pos;

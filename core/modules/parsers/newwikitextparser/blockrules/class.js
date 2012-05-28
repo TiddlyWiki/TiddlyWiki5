@@ -18,7 +18,7 @@ exports.blockParser = true;
 
 exports.regExpString = "\\{\\{(?:[^\\{\\r\\n]+)\\{$";
 
-exports.parse = function(match) {
+exports.parse = function(match,isBlock) {
 	var tree = [],
 		reStart = /\{\{([^\{\r\n]+){(?:\r?\n)?/mg,
 		reEnd = /(\}\}\}$(?:\r?\n)?)/mg,

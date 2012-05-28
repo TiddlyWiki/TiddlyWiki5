@@ -148,10 +148,10 @@ exports.executeMacro = function() {
 	var storyJson = JSON.parse(this.wiki.getTiddlerText(this.params.story)),
 		storyNode = $tw.Tree.Element("div",{},[]);
 	for(var t=0; t<storyJson.tiddlers.length; t++) {
-		var m = $tw.Tree.Macro("tiddler",
-									{target: storyJson.tiddlers[t].title,template: storyJson.tiddlers[t].template},
-									null,
-									this.wiki);
+		var m = $tw.Tree.Macro("tiddler",{
+									srcParams: {target: storyJson.tiddlers[t].title,template: storyJson.tiddlers[t].template},
+									wiki: this.wiki
+								});
 		m.execute(this.parents,this.tiddlerTitle);
 		storyNode.children.push($tw.Tree.Element("div",{},[m]));
 	}
@@ -199,10 +199,10 @@ exports.refreshInDom = function(changes) {
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
 				var m = $tw.Tree.Element("div",{},[
-							$tw.Tree.Macro("tiddler",
-											{target: story.tiddlers[t].title,template: story.tiddlers[t].template},
-											null,
-											this.wiki)
+							$tw.Tree.Macro("tiddler",{
+											srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
+											wiki: this.wiki
+										})
 							]);
 				m.execute(this.parents,this.tiddlerTitle);
 				m.renderInDom(this.children[0].domNode,this.children[0].domNode.childNodes[t]);

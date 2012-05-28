@@ -18,7 +18,7 @@ exports.runParser = true;
 
 exports.regExpString = "\\[\\[";
 
-exports.parse = function(match) {
+exports.parse = function(match,isBlock) {
 	var regExp = /\[\[(.*?)(?:\|(~)?(.*?))?\]\]/mg;
 	regExp.lastIndex = this.pos;
 	match = regExp.exec(this.source);
@@ -26,7 +26,11 @@ exports.parse = function(match) {
 		var text = match[1],
 			link = match[3] || text;
 		this.pos = match.index + match[0].length;
-		var macroNode = $tw.Tree.Macro("link",{to: link},[$tw.Tree.Text(text)],this.wiki);
+		var macroNode = $tw.Tree.Macro("link",{
+			srcParams: {to: link},
+			content: [$tw.Tree.Text(text)],
+			wiki: this.wiki
+		});
 		this.dependencies.mergeDependencies(macroNode.dependencies);
 		return [macroNode];
 	}

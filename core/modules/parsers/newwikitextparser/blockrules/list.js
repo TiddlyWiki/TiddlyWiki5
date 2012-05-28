@@ -30,7 +30,7 @@ var listTypes = {
 /*
 
 */
-exports.parse = function(match) {
+exports.parse = function(match,isBlock) {
 	var listStack = [], // Array containing list elements for the previous row in the list
 		t, listInfo, listElement, itemElement, previousRootListTag;
 	// Cycle through the rows in the list
