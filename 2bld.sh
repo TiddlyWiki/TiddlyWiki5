@@ -12,7 +12,6 @@ pushd tw2 > /dev/null
 
 node ../core/boot.js \
 	--verbose \
-	--load shadows/tiddlywiki2.template.html.tid \
 	--load source/tiddlywiki.com/index.html.recipe \
 	--savetiddler $:/core/templates/tiddlywiki2.template.html ../tmp/tw2/index.html text/plain \
 	|| exit 1
