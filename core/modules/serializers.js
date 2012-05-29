@@ -69,14 +69,32 @@ exports["application/x-tiddler-module"] = function(tiddler) {
 };
 
 exports["application/x-tiddler-html-div"] = function(tiddler) {
-	var result = [],fields = [];
+	var result = [],
+		fields = [],
+		pullField = function(name) {
+			var fieldIndex = fields.indexOf(name);
+			if(fieldIndex !== -1) {
+				fields.splice(fieldIndex,1);
+				fields.unshift(name);
+			}
+		};
 	result.push("<div");
+	// Collect the field names in the tiddler
 	for(var f in tiddler.fields) {
 		if(f !== "text") {
 			fields.push(f);
 		}
 	}
+	// Sort the fields
 	fields.sort();
+	// Pull the standard fields up to the top
+	pullField("tags");
+	pullField("modified");
+	pullField("created");
+	pullField("modifier");
+	pullField("creator");
+	pullField("title");
+	// Output the fields
 	for(f=0; f<fields.length; f++) {
 		result.push(" " + fields[f] + "=\"" + tiddler.getFieldString(fields[f]) + "\"");
 	}
