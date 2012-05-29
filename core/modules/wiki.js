@@ -118,9 +118,14 @@ exports.addTiddler = function(tiddler) {
 	this.touchTiddler(title);
 };
 
-exports.serializeTiddler = function(title,type) {
-	var serializer = $tw.Wiki.tiddlerSerializerPlugins[type],
-		tiddler = this.getTiddler(title);
+/*
+Serialise a tiddler to a specified text serialization format
+*/
+exports.serializeTiddler = function(tiddler,type) {
+	var serializer = $tw.Wiki.tiddlerSerializerPlugins[type];
+	if(typeof tiddler === "string") {
+		tiddler = this.getTiddler(tiddler);
+	}
 	if(serializer && tiddler) {
 		return serializer.call(this,tiddler);
 	} else {
