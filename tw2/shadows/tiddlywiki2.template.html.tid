@@ -46,11 +46,11 @@ Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jerem
 <div id="contentWrapper"></div>
 <div id="contentStash"></div>
 <div id="shadowArea">
-<<include "[prefix[{shadow}]]" application/x-tiddler-html-div removePrefix:"{shadow}">>
+<<include "[prefix[{shadow}]] +[sort[title]]" application/x-tiddler-html-div removePrefix:"{shadow}">>
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<<include "[prefix[{tiddler}]]" application/x-tiddler-html-div removePrefix:"{tiddler}">>
+<<include "[prefix[{tiddler}]] +[sort[title]]" application/x-tiddler-html-div removePrefix:"{tiddler}">>
 <<include "[prefix[{plugin}]]" text/plain>>
 <<include "[prefix[{posttiddlers}]]" text/plain>>
 </div>
@@ -74,6 +74,7 @@ Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jerem
 <script id="jslibArea" type="text/javascript">
 //<![CDATA[
 <<include "[prefix[{jslib}]]" text/plain>>
+
 //]]>
 </script>
 <script id="jqueryArea" type="text/javascript">
