@@ -1,3 +1,6 @@
+title: styles.css
+type: text/css
+
 body {
 	position: relative;
 }
