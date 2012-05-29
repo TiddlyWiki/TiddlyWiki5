@@ -27,7 +27,7 @@ var TiddlyTextParser = function(options) {
 TiddlyTextParser.prototype.parse = function(type,text) {
 	var output = [],
 		dependencies = new $tw.Dependencies(),
-		macroRegExp = /(?:\[\[([^\]]+)\]\])|(?:<<(?:([!@£\$%\^\&\*\(\)`\~'"\|\\\/;\:\.\,\+\=\-\_\{\}])|([^>\s]+))(?:\s*)((?:[^>]|(?:>(?!>)))*)>>)/mg,
+		macroRegExp = /(?:\[\[([^\]]+)\]\])|(?:<<(?:([!@£\$%\^\&\*\(\)`\~'"\|\\\/;\:\.\,\+\=\-\_\{\}])|([^>\s]+))(?:\s*)((?:[^>]|(?:>(?!>)))*)>>((?:\r?\n)?))/mg,
 		lastMatchPos = 0,
 		match,
 		macroNode;
@@ -44,7 +44,8 @@ TiddlyTextParser.prototype.parse = function(type,text) {
 			} else if(macroName) { // Macro call
 				macroNode = $tw.Tree.Macro(macroName,{
 					srcParams: match[4],
-					wiki: this.wiki
+					wiki: this.wiki,
+					isBlock: !!match[5]
 				});
 			}
 			output.push(macroNode);
