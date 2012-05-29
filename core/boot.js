@@ -59,6 +59,8 @@ $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
 // File extensions
 $tw.config.fileExtensions = {
 	".tid": {type: "application/x-tiddler", encoding: "utf8"},
+	".tiddler": {type: "application/x-tiddler-html-div", encoding: "utf8"},
+	".recipe": {type: "application/x-tiddlywiki-recipe", encoding: "utf8"},
 	".txt": {type: "text/plain", encoding: "utf8"},
 	".css": {type: "text/css", encoding: "utf8"},
 	".html": {type: "text/html", encoding: "utf8"},
@@ -372,7 +374,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		fields[f] = srcFields[f];
 	}
 	if(!fields.type) {
-		fields.type = type;
+//		fields.type = type;
 	}
 	if(deserializer) {
 		return deserializer.call(this,text,fields);
