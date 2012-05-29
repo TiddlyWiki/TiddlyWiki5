@@ -84,6 +84,16 @@ exports.operators = {
 			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") !== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}";
 		}
 	},
+	"prefix": {
+		selector: function(operator) {
+			var op = operator.prefix === "!" ? "!" : "";
+			return "for(var title in source) {if(" + op + "title.substr(0,\"" + operator.operand.length + "\")===\"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
+		},
+		filter: function(operator) {
+			var op = operator.prefix === "!" ? "" : "!";
+			return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "title.substr(0,\"" + operator.operand.length + "\")===\"" + $tw.utils.stringify(operator.operand) + "\") {subResults.splice(r,1);}}";
+		}
+	},
 	"is": {
 		selector: function(operator) {
 			if(operator.operand === "tiddler") {
