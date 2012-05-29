@@ -29,7 +29,7 @@ type: text/x-tiddlywiki-html
 <<include "$:/wiki/splash" text/html shadow:yes>>
 </div>
 </noscript>
-<!----------- Shadow tiddlers ----------->
+<!----------- Miscellaneous shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
 <<include "[!type[text/css]] -[type[application/javascript]has[module-type]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div shadow:yes>>
 </div>
