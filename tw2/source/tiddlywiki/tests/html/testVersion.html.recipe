@@ -1,0 +1,5 @@
+recipe: test.recipe
+title=TiddlyWiki Version tests
+
+jsspecsrc=<script type="text/javascript" src="../js/tiddlywiki.js"></script>
+jsspecsrc=<script type="text/javascript" src="../jsspec/Version.jsspec.js"></script>

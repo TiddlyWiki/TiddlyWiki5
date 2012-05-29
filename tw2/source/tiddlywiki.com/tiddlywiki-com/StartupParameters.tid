@@ -1,0 +1,25 @@
+title: StartupParameters
+modifier: colmbritton
+created: 20110211110704
+modified: 20110216120145
+tags: features
+creator: psd
+
+TiddlyWiki obtains its StartupParameters from the //location// portion of it's URL (the bit after the '#'). At it's simplest, the StartupParameters can list the names of the tiddlers to be opened when the TiddlyWiki is opened:
+{{{
+http://www.tiddlywiki.com/#HelloThere JeremyRuston
+}}}
+In fact, that usage is equivalent to:
+{{{
+http://www.tiddlywiki.com/#open:HelloThere open:JeremyRuston
+}}}
+The complete list of commands is:
+|!Command |!Description |!Example |
+|open:title |Opens the tiddler with the specified title |http://www.tiddlywiki.com/#open:HelloThere |
+|start:safe |Switches to SafeMode |http://www.tiddlywiki.com/#start:safe |
+|search:text |Performs a search for the specified text |http://www.tiddlywiki.com/#search:jeremy |
+|tag:text |Displays tiddlers tagged with the specified tag |http://www.tiddlywiki.com/#tag:news |
+|newTiddler:title |Opens a new tiddler with the specified title in edit mode |http://www.tiddlywiki.com/#newTiddler:"This is a new tiddler" |
+|newJournal:titleFormat |Opens a new tiddler with the specified [[Date Format String|Date Formats]] |http://www.tiddlywiki.com/#newJournal:"YYYY MMM DD" |
+
+See the details of the underlying ParameterParser for more details.

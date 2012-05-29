@@ -1,0 +1,16 @@
+title: Tags
+modifier: blaine
+created: 20110211110706
+modified: 20110211131021
+tags: features gettingstarted terminology
+creator: psd
+
+You can categorise a tiddler by assigning it with one or more special keywords called tags. 
+
+Tiddlers which have been assigned tags can be accessed using the tagging menu that appears at the top right of each tiddler (when in read mode). For instance, this tiddler is tagged with "features", "terminology" and "gettingstarted". If you click on these tag names in the tagging menu, you get access to all the other tiddlers that have been given the same tag.
+
+You can see a whole list of tags by looking in the [[SideBarTabs]], and selecting the Tags tab.
+
+This site uses the standard convention that the names of tags start with a lower case letter, and tiddlers with an upper case letter, but this is not actually enforced.
+
+Tags can be tiddlers themselves, with their own tags, so you can have hierarchies of tiddlers.  This is a surprisingly useful and powerful technique has been dubbed ~TagglyTagging by the [[Community]].

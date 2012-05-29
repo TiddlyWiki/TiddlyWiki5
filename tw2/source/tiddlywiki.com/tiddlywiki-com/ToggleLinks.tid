@@ -1,0 +1,10 @@
+title: ToggleLinks
+modifier: blaine
+created: 20110211110712
+modified: 20110211131021
+tags: features options
+creator: psd
+
+If your press the command key on the Mac or the control key on the PC while clicking on a link to a tiddler, the tiddler will be opened as usual if it isn't already open, but if //is// open, it will be closed. It makes a handy way to review links without having to move the mouse around to re-close tiddlers.
+
+You can make this behaviour the default under AdvancedOptions (you can override back to the normal behaviour with the same command/control key).

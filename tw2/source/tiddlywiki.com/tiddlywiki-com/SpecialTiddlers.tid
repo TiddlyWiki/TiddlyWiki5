@@ -1,0 +1,12 @@
+title: SpecialTiddlers
+modifier: blaine
+created: 20110211110704
+modified: 20110211163323
+tags: features instructions
+creator: psd
+
+~TiddlyWiki uses several "special tiddlers" to perform a number of essential functions as follows:
+*[[Configuration]] tiddlers configure the layout of the page, including the MainMenu, the SiteTitle, the SiteSubtitle and other features. 
+*A tiddler called DefaultTiddlers is used to list the tiddlers that are shown at startup. 
+*A tiddler called SaveChanges is automatically displayed if there's a problem with saving. Any of them can be edited with the changes taking effect immediately.
+* MoreTab, MissingTiddlers, OrphanTiddlers

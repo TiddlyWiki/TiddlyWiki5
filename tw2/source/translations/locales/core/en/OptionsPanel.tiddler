@@ -1,0 +1,15 @@
+<div title="OptionsPanel" modifier="MartinBudden" tags="excludeLists excludeSearch">
+<pre>These Interface Options for customising TiddlyWiki are saved in your browser
+
+Your username for signing your edits. Write it as a WikiWord (eg JoeBloggs)
+&lt;&lt;option txtUserName&gt;&gt;
+
+&lt;&lt;option chkSaveBackups&gt;&gt; Save backups
+&lt;&lt;option chkAutoSave&gt;&gt; Auto save
+&lt;&lt;option chkRegExpSearch&gt;&gt; Regexp search
+&lt;&lt;option chkCaseSensitiveSearch&gt;&gt; Case sensitive search
+&lt;&lt;option chkAnimate&gt;&gt; Enable animations
+
+----
+Also see [[TranslatedAdvancedOptions|AdvancedOptions]]</pre>
+</div>

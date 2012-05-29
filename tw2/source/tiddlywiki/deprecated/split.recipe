@@ -1,0 +1,10 @@
+jsdeprecated: Crypto.js
+jsdeprecated: Deprecated.js
+jsdeprecated: FileAdaptor.js
+jsdeprecated: Http.js
+jsdeprecated: Strings.js
+jsdeprecated: Tiddler.js
+jsdeprecated: Numbers.js
+jsdeprecated: Utilities.js
+jsdeprecated: Wikifier.js
+

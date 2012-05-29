@@ -1,0 +1,15 @@
+<div title="OptionsPanel" modifier="MartinBudden" tags="excludeLists excludeSearch">
+<pre>Dessa gränssnittsinställningar för TiddlyWiki sparas i din webbläsare
+
+Ditt användarnamn för signering av redigeringar. Skriv det som ett WikiOrd (t.ex. JohanSvensson)
+&lt;&lt;option txtUserName&gt;&gt;
+
+&lt;&lt;option chkSaveBackups&gt;&gt; Spara säkerhetskopior
+&lt;&lt;option chkAutoSave&gt;&gt; Autosparning
+&lt;&lt;option chkRegExpSearch&gt;&gt; Sökning med regujära uttryck
+&lt;&lt;option chkCaseSensitiveSearch&gt;&gt; Skiftlägeskänslig sökning
+&lt;&lt;option chkAnimate&gt;&gt; Slå på animationer
+
+----
+Se även [[AvanceradeInställningar|AdvancedOptions]]</pre>
+</div>

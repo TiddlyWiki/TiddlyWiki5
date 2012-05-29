@@ -1,0 +1,5 @@
+recipe: testmin.recipe
+title=TiddlyWiki FileSystem tests
+jsspecsrc=<script type="text/javascript" src="../../js/Config.js"></script>
+jsspecsrc=<script type="text/javascript" src="../../js/FileSystem.js"></script>
+jsspecsrc=<script type="text/javascript" src="../jsspec/FileSystem.jsspec.js"></script>

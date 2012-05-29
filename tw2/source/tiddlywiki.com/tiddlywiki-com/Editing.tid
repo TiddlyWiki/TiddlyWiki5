@@ -1,0 +1,16 @@
+title: Editing
+modifier: jermolene
+created: 20110211110631
+modified: 20111103182424
+tags: gettingstarted
+creator: psd
+
+~TiddlyWiki is made up of chunks of information called tiddlers. You're reading a tiddler called 'Editing' right now.
+
+When you open an empty ~TiddlyWiki file for the first time, you'll be presented with a tiddler called "~GettingStarted". This contains links to tiddlers to help you define the main attributes of your ~TiddlyWiki; the Title, SubTitle and MainMenu navigation (see [[Configuration]]).
+
+You will notice that each tiddler has a command menu in it's top right corner (''close'', ''edit'', and so on). You can use this to switch the tiddler into edit mode, or if you prefer you can simply double click the tiddler when it is in view mode. When you are finished, click on ''done'', or ''cancel'' to discard your changes.
+
+You can sign your edits with your username, which is currently set to <<option txtUserName>>. You can change it here, or in the right hand sidebar, where it can be found under [[options »|InterfaceOptions]].
+
+There are two ways to make links between tiddlers. If you are linking to a tiddler which already exists, put the tiddler name in double square brackets (Double click here, and you'll see double square brackets around the word [[example]]). You can use this technique to point to (and create) a new tiddler, or alternatively just write the tiddler name by joining words starting with capital letters, LikeThis. When you save the tiddler and click on the link, you can then add content to your new tiddler.

@@ -1,0 +1,7 @@
+#saveTest {display:none;}
+#messageArea {display:none;}
+#copyright {display:none;}
+#storeArea {display:none;}
+#storeArea div {padding:0.5em; margin:1em 0em 0em 0em; border-color:#fff #666 #444 #ddd; border-style:solid; border-width:2px; overflow:auto;}
+#shadowArea {display:none;}
+#javascriptWarning {width:100%; text-align:center; font-weight:bold; background-color:#dd1100; color:#fff; padding:1em 0em;}

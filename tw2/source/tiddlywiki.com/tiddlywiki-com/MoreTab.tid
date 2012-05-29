@@ -1,0 +1,8 @@
+title: MoreTab
+modifier: blaine
+created: 20110211110651
+modified: 20110211131019
+tags: features
+creator: psd
+
+The functions of 'Timeline' and 'All' tabs have been around since the FirstVersion of TiddlyWiki. The purpose of the 'More' tab is to bring together some other, more specialised lists of tiddlers that can be useful during writing sessions. Currently, it offers lists of OrphanTiddlers and MissingTiddlers.

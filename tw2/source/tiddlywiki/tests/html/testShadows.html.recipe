@@ -1,0 +1,3 @@
+recipe: test.recipe
+title=TiddlyWiki Shadow tests
+jsspecsrc=<script type="text/javascript" src="../jsspec/Shadows.jsspec.js"></script>

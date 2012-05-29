@@ -1,0 +1,12 @@
+title: TabMoreShadowed shadows
+modifier: matt
+created: 20110211161542
+modified: 201102151514
+tags: shadow
+creator: matt
+
+The TabMoreShadowed tiddler contains a command that displays a list of all tiddlers shadowed with default content in them
+{{{
+<<list shadowed>>
+}}}
+In TiddlyWiki this list appears as default in the {{{Shadows}}} tab on the right-hand menu.

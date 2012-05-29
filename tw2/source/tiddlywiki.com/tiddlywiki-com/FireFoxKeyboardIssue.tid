@@ -1,0 +1,8 @@
+title: FireFoxKeyboardIssue
+modifier: blaine
+created: 20110211110635
+modified: 20110211131017
+tags: browsers issues
+creator: psd
+
+Under FireFox, TiddlyWiki can get into a state where it ignores the arrow keys on the keyboard but accepts ordinary alphanumeric input. The triggers for this behaviour are unclear, but it doesn't just affect TiddlyWiki. The solution appears to be to locate the file {{{compreg.dat}}} in your FireFox profile folder and rename it to {{{compreg.dat.old}}}.

@@ -1,0 +1,14 @@
+title: permaview macro
+modifier: colmbritton
+created: 20110211143953
+modified: 20110211144610
+tags: macro
+creator: colmbritton
+
+To create a permaview URL for all open tiddlers:
+{{{
+<<permaview>>
+}}}
+Displays as:
+
+<<permaview>>

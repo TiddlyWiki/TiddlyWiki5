@@ -1,0 +1,3 @@
+<script type="text/javascript" src="/bags/common/tiddlers/jquery.js"></script>
+<script type="text/javascript" src="/bags/common/tiddlers/jQuery.twStylesheet.js"></script>
+<script type="text/javascript" src="/bags/common/tiddlers/twcore.js"></script>

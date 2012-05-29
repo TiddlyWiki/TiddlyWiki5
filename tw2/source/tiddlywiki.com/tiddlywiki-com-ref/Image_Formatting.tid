@@ -1,0 +1,41 @@
+title: Image Formatting
+modifier: psd
+created: 20110211143038
+modified: 201102151519
+tags: formatting
+creator: matt
+
+!Simple Images
+{{{
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+}}}
+Displays as:
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+!Tooltips for Images
+{{{
+[img[tooltip|http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+}}}
+Displays as:
+[img[tooltip|http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+!Image Links
+{{{
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg][http://www.flickr.com/photos/jermy/10134618/]]
+}}}
+Displays as:
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg][http://www.flickr.com/photos/jermy/10134618/]]
+!Floating Images with Text
+{{{
+[<img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+}}}
+[<img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]Displays as.
+{{{
+@@clear:both;display:block; @@
+}}}
+Will then clear the float.
+@@clear:both;display:block;Like this@@
+{{{
+[>img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+}}}
+[>img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]Displays as.@@clear:both;display:block; @@
+!See Also
+[[Image Macro]]

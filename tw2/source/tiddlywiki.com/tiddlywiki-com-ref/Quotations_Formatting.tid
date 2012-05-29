@@ -1,0 +1,29 @@
+title: Quotations Formatting
+modifier: psd
+created: 20110211143244
+modified: 201102151517
+tags: formatting
+creator: matt
+
+!Block Quotations
+Blocks of text can be displayed as quotations:
+{{{
+<<<
+Steve Jobs: "computers are like a bicycle for our minds"
+<<<
+}}}
+Displays as:
+<<<
+Steve Jobs: "computers are like a bicycle for our minds"
+<<<
+!Nested Quotations 
+Quotes can be displayed on multi-levels:
+{{{
+> blockquote, level 1
+>> blockquote, level 2
+>>> blockquote, level 3
+}}}
+Displays as:
+> blockquote, level 1
+>> blockquote, level 2
+>>> blockquote, level 3

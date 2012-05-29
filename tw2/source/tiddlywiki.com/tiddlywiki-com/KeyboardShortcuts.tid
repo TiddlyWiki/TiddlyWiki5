@@ -1,0 +1,21 @@
+title: KeyboardShortcuts
+modifier: jermolene
+created: 20110211110648
+modified: 20111031163407
+tags: features
+creator: psd
+
+Access keys are shortcuts to common functions accessed by typing a letter with either the 'alt' (PC) or 'control-alt' (Mac) key:
+|!PC|!Mac|!Function|
+|~Alt-F|~Ctrl-Alt-F|Search|
+|~Alt-J|~Ctrl-Alt-J|NewJournal|
+|~Alt-N|~Ctrl-Alt-N|NewTiddler|
+|~Alt-S|~Ctrl-Alt-S|SaveChanges|
+These access keys are provided by the associated internal [[Macros]] for the functions above. The macro needs to be used in an open tiddler (or the MainMenu or SideBar) in order for the access keys to work.
+
+While editing a tiddler:
+* ~Control-Enter or ~Control-Return accepts your changes and switches out of editing mode (use ~Shift-Control-Enter or ~Shift-Control-Return to stop the date and time being updated for MinorChanges)
+* Escape abandons your changes and reverts the tiddler to its previous state
+
+In the search box:
+* Escape clears the search term

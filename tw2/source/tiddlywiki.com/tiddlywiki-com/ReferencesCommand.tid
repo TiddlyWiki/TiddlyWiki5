@@ -1,0 +1,11 @@
+title: ReferencesCommand
+modifier: blaine
+created: 20110211110659
+modified: 20110211131020
+tags: commands
+creator: psd
+
+Offers a popup menu displaying the tiddlers that link to the current one. It is used with the ToolbarMacro like this:
+{{{
+<<toolbar references>>
+}}}

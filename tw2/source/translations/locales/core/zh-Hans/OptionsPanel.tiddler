@@ -1,0 +1,13 @@
+<div title="OptionsPanel" modifier="BramChen" tags="excludeLists">
+<pre>这些设置将缓存于浏览器
+请签名<<option txtUserName>>
+(范例：WikiWord)
+
+<<option chkSaveBackups>> 保存备份
+<<option chkAutoSave>> 自动保存
+<<option chkRegExpSearch>> 正规式搜寻
+<<option chkCaseSensitiveSearch>> 区分大小写搜寻
+<<option chkAnimate>> 使用动画显示
+----
+[[进阶选项|AdvancedOptions]]</pre>
+</div>

@@ -1,0 +1,17 @@
+title: tag macro
+modifier: colmbritton
+created: 20110211143954
+modified: 20110211144610
+tags: macro
+creator: colmbritton
+
+The tag macro generates a button with the named [[tag]] which when clicked provides a drop-down list of [[tiddlers]] tagged with the given tag along with an option to open all of the tagged tiddlers.
+{{{
+<<tag tagName [label] [tooltip]>>
+}}}
+For example
+{{{
+<<tag macro>>
+}}}
+Which displays
+<<tag macro>>

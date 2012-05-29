@@ -1,0 +1,21 @@
+title: ToolbarButtons
+modifier: jermolene
+created: 20110211110712
+modified: 20111020135129
+tags: features
+creator: psd
+
+A row of ToolbarButtons appears to the right of a tiddler title when the mouse is hovered over it. The buttons are:
+* ''close'' - close the current tiddler
+* ''edit'' - edit the current tiddler
+* ''fields'' - show the custom fields attached to the current tiddler
+* ''syncing'' - shows the server synchronisation status of the current tiddler
+* ''jump'' - jump straight to another open tiddler
+* ''permalink'' - puts a link direct to the current tiddler into the address bar
+* ''references'' - displays all the tiddlers that link to the current tiddler
+* ''done'' - save changes to a tiddler being editted
+* ''cancel'' - cancel changes to a tiddler being editted
+* ''delete'' - delete the current tiddler
+
+The shadow tiddler ToolbarCommands allows these commands to customised and reordered.
+

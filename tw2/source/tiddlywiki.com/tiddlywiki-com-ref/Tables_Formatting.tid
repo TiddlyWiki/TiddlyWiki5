@@ -1,0 +1,112 @@
+title: Tables Formatting
+modifier: psd
+created: 20110211143329
+modified: 201102151517
+tags: formatting
+creator: matt
+
+!Simple Tables
+{{{
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+}}}
+Displays as:
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+!Cell Formatting
+*Insert a space before cell content to right justify cell
+*Insert a space after cell content to left justify cell
+*Insert spaces before and after cell content to centre justify cell
+*Insert an exclamation mark ({{{!}}}) as the first non-space character of a cell to turn it into a header cell
+For example:
+{{{
+|!First column|!Second column|!Third column|
+|left | centre | right|
+}}}
+Displays as:
+|!First column|!Second column|!Third column|
+|left | centre | right|
+!Table Headers and Footers
+* Mark a table row as a header by adding an 'h' to the end
+* Mark a table row as a footer by adding an 'f' to the end
+For example:
+{{{
+|North West|North|North East|h
+|West|Here|East|
+|South West|South|South East|f
+}}}
+Displays as:
+|North West|North|North East|h
+|West|Here|East|
+|South West|South|South East|f
+!Table Caption
+A caption can be added above or below a table by adding a special row marked with a 'c':
+{{{
+|A caption above the table|c
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+}}}
+{{{
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+|A caption below the table|c
+}}}
+Displays as:
+|A caption above the table|c
+|North West|North|North East|h
+|West|Here|East|
+|South West|South|South East|f
+
+|North West|North|North East|h
+|West|Here|East|
+|South West|South|South East|f
+|A caption below the table|c
+!Mergine Table Cells
+A cell can be merged horizontally with the cell to its right by giving it the text {{{>}}}:
+{{{
+|North West|North|North East|
+|>|>|West and Here and East|
+|South West|South|South East|
+}}}
+Displays as:
+|North West|North|North East|
+|>|>|West and Here and East|
+|South West|South|South East|
+A cell can be merged vertically with the cell in the row above by giving it the text {{{~}}}:
+{{{
+|Westerly|North|North East|
+|~|Here|East|
+|~|South|South East|
+}}}
+Displays as:
+|Westerly|North|North East|
+|~|Here|East|
+|~|South|South East|
+!Table CSS Formatting
+A CSS class can be added to an entire table by adding a special row tagged with a 'k':
+{{{
+|myClass|k
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+}}}
+CSS properties can be added to a table cell by preceding the cell content with CSS name/value pairs. There are two alternative forms of syntax:
+{{{
+|color:red; North West|opacity:0.5;North|North East|
+|color(green):West|Here|East|
+|South West|South|South East|
+}}}
+Displays as:
+|color:red; North West|opacity:0.5;North|North East|
+|color(green):West|Here|East|
+|South West|South|South East|
+!Alternating Rows
+TiddlyWiki automatically assigns the classes {{{oddRow}}} and {{{evenRow}}} to table rows {{{<TR>}}} elements. These can then be styled via the StyleSheet:
+{{{
+.viewer tr.oddRow { background-color: #fff; }
+.viewer tr.evenRow { background-color: #ffc; }
+}}}

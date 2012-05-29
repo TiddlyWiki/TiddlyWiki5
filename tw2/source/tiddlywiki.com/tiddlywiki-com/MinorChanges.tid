@@ -1,0 +1,7 @@
+title: MinorChanges
+modifier: blaine
+created: 20110211110650
+modified: 20110211131018
+creator: psd
+
+Sometimes it's useful to stop a minor change to a tiddler from causing it to rise to the top of the timeline. This can be done by pressing the Shift key while clicking the 'done' toolbar button, or with the ~Shift-Control-Enter key. This behaviour can be switched to become the default with one of the AdvancedOptions.

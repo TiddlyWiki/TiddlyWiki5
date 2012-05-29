@@ -1,0 +1,12 @@
+This is the master repository for the core of TiddlyWiki. See
+
+    http://tiddlywiki.com/
+
+for details about TiddlyWiki.
+
+The code and issues are in the progress of being moved from http://svn.tiddlywiki.org and http://trac.tiddlywiki.org
+
+Pull requests for feature requests/bug fixes are being accepted for this project. Pull requests should be accompanied by tests. If no tests existed for the given functionality previously, please include these in your contribution to ensure that the TiddlyWiki code base is as reliable as possible going forward. Any pull requests without tests will not generally be folded into the core codebase. See https://github.com/TiddlyWiki/tiddlywiki/wiki for more information.
+
+Copyright 2011 UneMesa Assocation
+BSD License.

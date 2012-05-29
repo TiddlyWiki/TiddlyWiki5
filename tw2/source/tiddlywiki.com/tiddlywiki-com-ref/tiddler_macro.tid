@@ -1,0 +1,35 @@
+title: tiddler macro
+modifier: jermolene
+created: 20110211143954
+modified: 20110228144138
+tags: macro
+creator: colmbritton
+
+The tiddler macro allows you to [[transclude|Tranclusion]] the text of other tidders, or sections of other tiddlers, into your current tiddler.
+!!Basic Usage
+The basic usage is:
+{{{
+<<tiddler tiddlerToTransclude>>
+}}}
+
+This displays as:
+<<<
+<<tiddler tiddlerToTransclude>>
+<<<
+Have a look at the actual [[tiddlerToTransclude]] tiddler.
+!!Transcluding Sections and Slices
+Instead of transcluding an entire tiddler, you can also transclude individual [[slices|Tiddler Slices]]  or [[sections|Tiddler Sections]]:
+{{{
+<<tiddler [[Title::sliceLabel]]>>
+<<tiddler [[Title##sectionHeading]]>>
+}}}
+!!Parameterised Transclusion
+Using the {{{with:}}} parameter, placeholders in the transcluded content can be replaced with a desired value. For example:
+{{{
+<<tiddler anotherTiddlerToTransclude with:"Jim" "Oz">> 
+}}}
+Which displays as:
+<<<
+<<tiddler anotherTiddlerToTransclude with:"Jim" "Oz">> 
+<<<
+Have a look at the actual [[anotherTiddlerToTransclude]].

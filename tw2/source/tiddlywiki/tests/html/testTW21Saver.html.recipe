@@ -1,0 +1,3 @@
+recipe: test.recipe
+title=TiddlyWiki TWSaver tests
+jsspecsrc=<script type="text/javascript" src="../jsspec/TW21Saver.jsspec.js"></script>

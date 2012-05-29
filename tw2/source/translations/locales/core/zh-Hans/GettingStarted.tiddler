@@ -1,0 +1,7 @@
+<div title="GettingStarted" modifier="BramChen" tags="excludeLists">
+<pre>使用此 TiddlyWiki 的空白范本之前，请先修改以下默认文章：
+* SiteTitle 及 SiteSubtitle：网站的标题和副标题，显示于页面上方<br />（在保存变更后，将显示于浏览器视窗的标题列）。
+* MainMenu：主菜单（通常在页面左侧）。
+* DefaultTiddlers：包含一些文章的标题，可于进入TiddlyWiki 后开启。
+请输入您的大名，作为所创建/ 编辑文章的署名：<<option txtUserName>></pre>
+</div>

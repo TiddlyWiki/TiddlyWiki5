@@ -1,0 +1,35 @@
+title: PageTemplate shadows
+modifier: matt
+created: 20110211161254
+modified: 201102151511
+tags: shadow
+creator: matt
+
+This tiddler contains the mark up to display the page. You can change the mark up to create a custom view of the page.
+
+By default it contains the following markup:
+
+{{{
+<!--{{{-->
+<div class='header'>
+	<div id='sidebarSearch'>
+		<span macro='search'></span>
+	</div>
+	<div class='headerForeground'>
+		<span class='siteTitle' refresh='content' tiddler='SiteTitle'></span>
+		<span class='siteSubtitle' refresh='content' tiddler='SiteSubtitle'></span>
+	</div>
+	<div class='clearFloat'></div>
+</div>
+
+<div id='menuBar'>
+	<div id='mainMenu' refresh='content' tiddler='MainMenu'></div>
+	<div id='sidebarOptions' refresh='content' tiddler='SideBarOptions'></div>
+</div>
+<div id='displayArea'>
+	<div id='messageArea'></div>
+	<div id='tiddlerDisplay'></div>
+	<div id='sidebarTabs' refresh='content' force='true' tiddler='SideBarTabs'></div>
+</div>
+<!--}}}-->
+}}}
