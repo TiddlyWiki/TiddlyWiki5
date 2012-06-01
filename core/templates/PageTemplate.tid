@@ -1,6 +1,6 @@
-title: PageTemplate
+title: $:/templates/PageTemplate
 
 {{navigation-panel{<<chooser>>}}}{{zoomer-panel{<<zoomer>>}}}
 {{container-fluid{
-<<story story:StoryTiddlers storyview:scroller>>
+<<story story:"$:/StoryTiddlers" storyview:scroller>>
 }}}

@@ -52,8 +52,9 @@ exports.startup = function() {
 	// Host-specific startup
 	if($tw.browser) {
 		// Display the PageTemplate
-		var renderer = $tw.wiki.parseTiddler("PageTemplate");
-		renderer.execute([],"PageTemplate");
+		var template = "$:/templates/PageTemplate",
+			renderer = $tw.wiki.parseTiddler(template);
+		renderer.execute([],template);
 		renderer.renderInDom(document.body);
 		$tw.wiki.addEventListener("",function(changes) {
 			renderer.refreshInDom(changes);

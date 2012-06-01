@@ -1,4 +1,4 @@
-title: EditTemplate
+title: $:/templates/EditTemplate
 modifier: JeremyRuston
 
 <<view title>> <<button SaveTiddler label:"done" class:"btn btn-mini btn-success">>

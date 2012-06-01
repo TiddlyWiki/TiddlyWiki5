@@ -1,4 +1,4 @@
-title: ViewTemplate
+title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
 {{title{

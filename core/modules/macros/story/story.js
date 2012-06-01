@@ -41,7 +41,7 @@ exports.eventMap = {};
 
 // Navigate to a specified tiddler
 exports.eventMap["tw-navigate"] = function(event) {
-	var template = this.params.defaultViewTemplate || "ViewTemplate",
+	var template = this.params.defaultViewTemplate || "$:/templates/ViewTemplate",
 		storyTiddler = this.wiki.getTiddler(this.params.story),
 		story = {tiddlers: []},
 		navTiddler,t,tiddler;
@@ -75,7 +75,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 exports.eventMap["tw-EditTiddler"] = function(event) {
 	var template, storyTiddler, story, storyRecord, tiddler, t;
 	// Put the specified tiddler into edit mode
-	template = this.params.defaultEditTemplate || "EditTemplate";
+	template = this.params.defaultEditTemplate || "$:/templates/EditTemplate";
 	storyTiddler = this.wiki.getTiddler(this.params.story);
 	story = {tiddlers: []};
 	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
@@ -107,7 +107,7 @@ exports.eventMap["tw-EditTiddler"] = function(event) {
 // Take a tiddler out of edit mode, saving the changes
 exports.eventMap["tw-SaveTiddler"] = function(event) {
 	var template, storyTiddler, story, storyRecord, tiddler, storyTiddlerModified, t;
-	template = this.params.defaultEditTemplate || "ViewTemplate";
+	template = this.params.defaultEditTemplate || "$:/templates/ViewTemplate";
 	storyTiddler = this.wiki.getTiddler(this.params.story);
 	story = {tiddlers: []};
 	storyTiddlerModified = false;
