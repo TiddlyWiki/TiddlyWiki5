@@ -31,7 +31,7 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		http = require("http"),
 		port = this.params[0] || "8080",
-		rootTiddler = this.params[1] || "$:/core/tiddlywiki5.template.html",
+		rootTiddler = this.params[1] || "$:/core/templates/tiddlywiki5.template.html",
 		renderType = this.params[2] || "text/plain",
 		serveType = this.params[3] || "text/html";
 	http.createServer(function(request, response) {
