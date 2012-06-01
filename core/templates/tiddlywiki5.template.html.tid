@@ -26,7 +26,7 @@ type: text/x-tiddlywiki-html
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
 <div id="splashArea" style="display:none;">
-<<include "$:/wiki/splash" text/html shadow:yes>>
+<<include "$:/templates/StaticContent" text/html shadow:yes>>
 </div>
 </noscript>
 <!----------- Miscellaneous shadow tiddlers ----------->
