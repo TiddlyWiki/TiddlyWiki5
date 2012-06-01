@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # build TiddlyWiki 2.x
 

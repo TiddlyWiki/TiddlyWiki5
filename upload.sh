@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Upload the latest build of tiddlywiki5 to the server at http://www.tiddlywiki.com/
 
