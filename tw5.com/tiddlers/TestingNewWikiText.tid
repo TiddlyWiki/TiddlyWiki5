@@ -13,7 +13,7 @@ Here's a paragraph with an embedded macro <<image "Motovun Jack.jpg">> and that 
 This will be mono
 }}}
 
-And this will be {{{inline and monospaced}}}.
+And this will be {{{inline and monospaced}}} and `so will this` little bit.
 
 Here is a macro <<list all>>
 

@@ -16,11 +16,27 @@ exports.name = "coderun";
 
 exports.runParser = true;
 
-exports.regExpString = "\\{\\{\\{";
+exports.regExpString = "(?:\\{\\{\\{)|(?:`)";
 
 exports.parse = function(match,isBlock) {
 	this.pos = match.index + match[0].length;
-	return [$tw.Tree.Element("code",{},this.parseRun(/(\}\}\})/mg))];
+	var regExp,
+		text;
+	if(match[0] === "{{{") {
+		regExp = /(\}\}\})/mg;
+	} else {
+		regExp = /(`)/mg;
+	}
+	regExp.lastIndex = this.pos;
+	match = regExp.exec(this.source);
+	if(match) {
+		text = this.source.substring(this.pos,match.index);
+		this.pos = match.index + match[0].length;
+	} else {
+		text = this.source.substr(this.pos);
+		this.pos = this.sourceLength;
+	}
+	return [$tw.Tree.Element("code",{},[$tw.Tree.Text(text)])];
 };
 
 })();
