@@ -75,6 +75,13 @@ Node.prototype.refreshInDom = function(changes) {
 	
 };
 
+/*
+Add a class to the node
+*/
+Node.prototype.addClass = function(className) {
+
+};
+
 exports.Node = Node;
 
 })();
