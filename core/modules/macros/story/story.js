@@ -31,6 +31,18 @@ exports.info = {
 	events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler"]
 };
 
+exports.getStory = function() {
+	var storyTiddler = this.wiki.getTiddler(this.params.story),
+		story = {tiddlers: []};
+	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
+		return JSON.parse(storyTiddler.fields.text);
+	} else {
+		return {
+			tiddlers: []
+		};
+	}
+};
+
 exports.handleEvent = function(event) {
 	if(this.eventMap[event.type]) {
 		this.eventMap[event.type].call(this,event);
@@ -42,13 +54,8 @@ exports.eventMap = {};
 // Navigate to a specified tiddler
 exports.eventMap["tw-navigate"] = function(event) {
 	var template = this.params.defaultViewTemplate || "$:/templates/ViewTemplate",
-		storyTiddler = this.wiki.getTiddler(this.params.story),
-		story = {tiddlers: []},
+		story = this.getStory(),
 		navTiddler,t,tiddler;
-	// Get the story
-	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
-		story = JSON.parse(storyTiddler.fields.text);
-	}
 	// See if the tiddler we want is already there
 	for(t=0; t<story.tiddlers.length; t++) {
 		if(story.tiddlers[t].title === event.navigateTo) {
@@ -63,7 +70,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 	} else {
 		// Add the tiddler to the bottom of the story (subsequently there will be a refreshInDom() call which is when we'll actually do the navigation)
 		story.tiddlers.unshift({title: event.navigateTo, template: template});
-		this.wiki.addTiddler(new $tw.Tiddler(storyTiddler,{text: JSON.stringify(story)}));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
 		// Record the details of the navigation for us to pick up in refreshInDom()
 		this.lastNavigationEvent = event;
 	}
@@ -76,11 +83,7 @@ exports.eventMap["tw-EditTiddler"] = function(event) {
 	var template, storyTiddler, story, storyRecord, tiddler, t;
 	// Put the specified tiddler into edit mode
 	template = this.params.defaultEditTemplate || "$:/templates/EditTemplate";
-	storyTiddler = this.wiki.getTiddler(this.params.story);
-	story = {tiddlers: []};
-	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
-		story = JSON.parse(storyTiddler.fields.text);
-	}
+	story = this.getStory();
 	for(t=0; t<story.tiddlers.length; t++) {
 		storyRecord = story.tiddlers[t];
 		if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
@@ -99,7 +102,7 @@ exports.eventMap["tw-EditTiddler"] = function(event) {
 				}));
 		}
 	}
-	this.wiki.addTiddler(new $tw.Tiddler(storyTiddler,{text: JSON.stringify(story)}));
+	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
 	event.stopPropagation();
 	return false;
 };
@@ -108,12 +111,8 @@ exports.eventMap["tw-EditTiddler"] = function(event) {
 exports.eventMap["tw-SaveTiddler"] = function(event) {
 	var template, storyTiddler, story, storyRecord, tiddler, storyTiddlerModified, t;
 	template = this.params.defaultEditTemplate || "$:/templates/ViewTemplate";
-	storyTiddler = this.wiki.getTiddler(this.params.story);
-	story = {tiddlers: []};
+	story = this.getStory();
 	storyTiddlerModified = false;
-	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
-		story = JSON.parse(storyTiddler.fields.text);
-	}
 	for(t=0; t<story.tiddlers.length; t++) {
 		storyRecord = story.tiddlers[t];
 		if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
@@ -138,18 +137,18 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 		}
 	}
 	if(!storyTiddlerModified) {
-		this.wiki.addTiddler(new $tw.Tiddler(storyTiddler,{text: JSON.stringify(story)}));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
 	}
 	event.stopPropagation();
 	return false;
 };
 
 exports.executeMacro = function() {
-	var storyJson = JSON.parse(this.wiki.getTiddlerText(this.params.story)),
+	var story = this.getStory(),
 		storyNode = $tw.Tree.Element("div",{},[]);
-	for(var t=0; t<storyJson.tiddlers.length; t++) {
+	for(var t=0; t<story.tiddlers.length; t++) {
 		var m = $tw.Tree.Macro("tiddler",{
-									srcParams: {target: storyJson.tiddlers[t].title,template: storyJson.tiddlers[t].template},
+									srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 									wiki: this.wiki
 								});
 		m.execute(this.parents,this.tiddlerTitle);
@@ -178,7 +177,7 @@ exports.refreshInDom = function(changes) {
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Get the tiddlers we're supposed to be displaying
 		var self = this,
-			story = JSON.parse(this.wiki.getTiddlerText(this.params.story)),
+			story = this.getStory(),
 			template = this.params.template,
 			n,domNode,
 			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
