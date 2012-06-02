@@ -92,7 +92,7 @@ WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
 				if(terminatorMatch.index > this.pos) {
 					tree.push($tw.Tree.Text(this.source.substring(this.pos,terminatorMatch.index)));
 				}
-				this.pos = terminatorMatch.index;
+				this.pos = terminatorMatch.index + terminatorMatch[0].length;
 				return tree;
 			}
 		}
@@ -120,7 +120,7 @@ WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {
-		tree.push($tw.tree.Text(this.source.substr(this.pos)));
+		tree.push($tw.Tree.Text(this.source.substr(this.pos)));
 	}
 	this.pos = this.sourceLength;
 	return tree;
