@@ -180,6 +180,6 @@ WikiTextParser.prototype.parse = function(type,text) {
 	});
 };
 
-exports["text/x-tiddlywiki-new"] = WikiTextParser;
+exports[$tw.useNewParser ? "text/x-tiddlywiki" : "text/x-tiddlywiki-new"] = WikiTextParser;
 
 })();

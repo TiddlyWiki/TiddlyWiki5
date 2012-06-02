@@ -35,6 +35,9 @@ if(typeof(window) === "undefined" && !global.$tw) {
 	global.$tw = {}; // No ``browser`` member for the server
 }
 
+// Temporary switch for replacing the old wiki text parser with the new one
+$tw.useNewParser = false;
+
 // Boot information
 $tw.boot = {};
 

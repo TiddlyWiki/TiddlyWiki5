@@ -253,7 +253,7 @@ exports.initParsers = function(moduleType) {
 		}
 	}
 	// Install the rules for the old wikitext parser rules
-	var wikitextparser = this.parsers["text/x-tiddlywiki"];
+	var wikitextparser = this.parsers[$tw.useNewParser ? "text/x-tiddlywiki-old" : "text/x-tiddlywiki"];
 	if(modules && wikitextparser) {
 		wikitextparser.installRules();
 	}
