@@ -88,7 +88,7 @@ WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
 	while(this.pos < this.sourceLength && (terminatorMatch || runRuleMatch)) {
 		// Return if we've found the terminator, and it precedes any run rule match
 		if(terminatorMatch) {
-			if(!runRuleMatch || runRuleMatch.index > terminatorMatch.index) {
+			if(!runRuleMatch || runRuleMatch.index >= terminatorMatch.index) {
 				if(terminatorMatch.index > this.pos) {
 					tree.push($tw.Tree.Text(this.source.substring(this.pos,terminatorMatch.index)));
 				}
