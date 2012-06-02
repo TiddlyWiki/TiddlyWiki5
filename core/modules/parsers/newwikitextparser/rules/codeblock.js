@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/blockrules/code.js
+title: $:/core/modules/parsers/newwikitextparser/rules/codeblock.js
 type: application/javascript
 module-type: wikitextrule
 
@@ -12,7 +12,7 @@ Wiki text run rule for code blocks
 /*global $tw: false */
 "use strict";
 
-exports.name = "code";
+exports.name = "codeblock";
 
 exports.blockParser = true;
 

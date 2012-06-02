@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/runrules/macro.js
+title: $:/core/modules/parsers/newwikitextparser/rules/macro.js
 type: application/javascript
 module-type: wikitextrule
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/runrules/code.js
+title: $:/core/modules/parsers/newwikitextparser/rules/coderun.js
 type: application/javascript
 module-type: wikitextrule
 
@@ -12,7 +12,7 @@ Wiki text run rule for code runs
 /*global $tw: false */
 "use strict";
 
-exports.name = "code";
+exports.name = "coderun";
 
 exports.runParser = true;
 

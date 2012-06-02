@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/runrules/prettylink.js
+title: $:/core/modules/parsers/newwikitextparser/rules/prettylink.js
 type: application/javascript
 module-type: wikitextrule
 
