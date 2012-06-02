@@ -13,6 +13,8 @@ Here's a paragraph with an embedded macro <<image "Motovun Jack.jpg">> and that 
 This will be mono
 }}}
 
+And this will be {{{inline and monospaced}}}.
+
 Here is a macro <<list all>>
 
 ! This is a new heading
