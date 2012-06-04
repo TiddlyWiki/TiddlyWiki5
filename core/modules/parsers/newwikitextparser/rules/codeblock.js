@@ -31,7 +31,7 @@ exports.parse = function(match,isBlock) {
 		text = this.source.substr(this.pos);
 		this.pos = this.sourceLength;
 	}
-	return [$tw.Tree.Element("code",{},[$tw.Tree.Text(text)])];
+	return [$tw.Tree.Element("pre",{},[$tw.Tree.Text(text)])];
 };
 
 })();
