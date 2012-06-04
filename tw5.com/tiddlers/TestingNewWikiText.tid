@@ -24,7 +24,9 @@ that heading
 
 ----
 * This is a list
+***** With a deep subitem
 * Of lots of items
+********* And another deep item
 ** And subitems
 *# And nested numbered lists inside ordinary lists
 *# Yes
