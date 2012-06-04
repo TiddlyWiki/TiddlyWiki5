@@ -31,7 +31,7 @@ The operators look like `[operator[operand]]`, where `operator` is one of:
 * ''sort'': sorts the tiddlers by a given field
 * ''limit'': limits the number of subresults
 * ''tag'': tests whether a given tag is (`[tag[mytag]]`) or is not (`[!tag[mytag]]`) present on the tiddler
-* ''<field>'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
+* ''{field}'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
 
 An operator can be negated with by preceding it with `!`, for example `[!tag[Tommy]]` selects the tiddlers that are not tagged with `Tommy`.
 
