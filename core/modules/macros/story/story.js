@@ -145,14 +145,14 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 
 exports.executeMacro = function() {
 	var story = this.getStory(),
-		storyNode = $tw.Tree.Element("div",{},[]);
+		storyNode = $tw.Tree.Element("div",{"class": "tw-story-frame"},[]);
 	for(var t=0; t<story.tiddlers.length; t++) {
 		var m = $tw.Tree.Macro("tiddler",{
 									srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 									wiki: this.wiki
 								});
 		m.execute(this.parents,this.tiddlerTitle);
-		storyNode.children.push($tw.Tree.Element("div",{},[m]));
+		storyNode.children.push($tw.Tree.Element("div",{"class": "tw-story-element"},[m]));
 	}
 	return [storyNode];
 };
@@ -197,7 +197,7 @@ exports.refreshInDom = function(changes) {
 			var tiddlerNode = findTiddler(t,story.tiddlers[t].title,story.tiddlers[t].template);
 			if(tiddlerNode === null) {
 				// If not, render the tiddler
-				var m = $tw.Tree.Element("div",{},[
+				var m = $tw.Tree.Element("div",{"class": "tw-story-element"},[
 							$tw.Tree.Macro("tiddler",{
 											srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 											wiki: this.wiki
