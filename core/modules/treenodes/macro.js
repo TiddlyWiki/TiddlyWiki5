@@ -26,6 +26,7 @@ The options available are:
 	wiki: reference to the WikiStore associated with this macro
 	dependencies: optional Dependencies object representing the dependencies of this macro
 	isBlock: true if this macro is being used as an HTML block
+	classes: array of classes to be assigned to the macro
 
 Note that the dependencies will be evaluated if not provided.
 */
@@ -40,6 +41,7 @@ var Macro = function(macroName,options) {
 		this.wiki = options.wiki;
 		this.dependencies = options.dependencies;
 		this.isBlock = options.isBlock;
+		this.classes = options.classes;
 		// Parse the macro parameters if required
 		if(typeof this.srcParams === "string") {
 			this.srcParams = this.parseMacroParamString(this.srcParams);
@@ -141,7 +143,8 @@ Macro.prototype.clone = function() {
 		content: this.cloneContent(),
 		wiki: this.wiki,
 		isBlock: this.isBlock,
-		dependencies: this.dependencies
+		dependencies: this.dependencies,
+		classes: this.classes
 	});
 };
 
@@ -184,7 +187,10 @@ Macro.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	} else {
 		parentDomNode.appendChild(domNode);
 	}
-	// Add some debugging information to it
+	// Add classes and some debugging information to it
+	if(this.classes) {
+		domNode.setAttribute("class",this.classes.join(" "));
+	}
 	domNode.setAttribute("data-tw-macro",this.macroName);
 	// Ask the macro to add event handlers to the node
 	this.addEventHandlers();
@@ -254,6 +260,11 @@ Macro.prototype.refreshInDom = function(changes) {
 			this.children[t].refreshInDom(changes);
 		}
 	}
+};
+
+Macro.prototype.addClass = function(className) {
+	this.classes = this.classes || [];
+	$tw.utils.pushTop(this.classes,className.split(" "));
 };
 
 exports.Macro = Macro;
