@@ -10,14 +10,18 @@ You can download a static copy of the tiddlers that are currently displayed in t
 
 {{alert alert-error{
 Try out the prototype touch features:
+
 * The zooming chooser appears by swiping into the left edge of the screen (or hover the mouse over the extreme left edge of the browser window)
 * The zooming navigator appears by swiping in from the right edge of the screen (not accessible by mouse)
 }}}
+
 Learning more about TiddlyWiki5:
+
 * WaysToUseTiddlyWiki discusses the various configurations in which TiddlyWiki5 can be used
 * Some very rough UserInterfaceSketches showing where it is heading
 
 Some useful tiddlers for feature testing:
+
 * HelloThere
 * TestingNewWikiText shows off the embryonic new wiki text engine
 * ImageTests showing different ways of embedding images
@@ -29,6 +33,7 @@ Some useful tiddlers for feature testing:
 * ShadowTiddlers, including ViewTemplate, EditTemplate and PageTemplate
 
 Technical documentation includes:
+
 * [[Testing]] regimen
 * Details of the CommandLineInterface
 * Overview of TiddlyWikiArchitecture

@@ -11,16 +11,22 @@ The most important transformations are from `text/x-tiddlywiki` wikitext into `t
 The key feature of wikitext is the ability to include one tiddler within another (usually referred to as //transclusion//). For example, one could have a tiddler called //Disclaimer// that contains the boilerplate of a legal disclaimer, and then include it within lots of different tiddlers with the macro call `<<tiddler Disclaimer>>`. This simple feature brings great power in terms of encapsulating and reusing content, and evolving a clean, usable implementation architecture to support it efficiently is a key objective of the TiddlyWiki5 design.
 
 It turns out that the transclusion capability combined with the selective refreshing mechanism provides a good foundation for building TiddlyWiki's user interface itself. Consider, for example, the StoryMacro in its simplest form:
+
 {{{
 <<story story:MyStoryTiddler>>
 }}}
+
 The story macro looks for a list of tiddler titles in the tiddler `MyStoryTiddler`, and displays them in sequence. The subtle part is that subsequently, if `MyStoryTiddler` changes, the `<<story>>` macro is selectively re-rendered. So, to navigate to a new tiddler, code merely needs to add the name of the tiddler and a line break to the top of `MyStoryTiddler`:
+
 {{{
 var storyTiddler = store.getTiddler("MyStoryTiddler");
 store.addTiddler(new Tiddler(storyTiddler,{text: navigateTo + "\n" + storyTiddler.text}));
 }}}
+
 The mechanisms that allow all of this to work are fairly intricate. The sections below progressively build the key architectural concepts of TiddlyWiki5 in a way that should provide a good basis for exploring the code directly.
+
 !! Tiddlers
+
 Tiddlers are an immutable dictionary of name:value pairs called fields.
 
 The only field that is required is the {{{title}}} field, but useful tiddlers also have a {{{text}}} field, and some or all of the standard fields {{{modified}}}, {{{modifier}}}, {{{created}}}, {{{creator}}}, {{{tags}}} and {{{type}}}.
@@ -28,26 +34,35 @@ The only field that is required is the {{{title}}} field, but useful tiddlers al
 Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are JavaScript `Date` objects. All other fields are strings.
 
 The {{{type}}} field identifies the representation of the tiddler text with a MIME type.
+
 !! ~WikiStore
+
 Groups of uniquely titled tiddlers are contained in WikiStore objects.
 
 The WikiStore also manages the plugin modules used for macros, and operations like serializing, deserializing, parsing and rendering tiddlers.
 
 Each WikiStore is connected to another shadow store that is used to provide default content. Under usual circumstances, when an attempt is made to retrieve a tiddler that doesn't exist in the store, the search continues into its shadow store (and so on, if the shadow store itself has a shadow store).
+
 !! ~WikiStore Events
+
 Clients can register event handlers with the WikiStore object. Event handlers can be registered to be triggered for modifications to any tiddler in the store, or with a filter to only be invoked when a particular tiddler or set of tiddlers changes.
 
 Whenever a change is made to a tiddler, the wikistore registers a `nexttick` handler (if it hasn't already done so). The `nexttick` handler looks back at all the tiddler changes, and dispatches any matching event handlers. 
+
 !! Parsing and Rendering
+
 TiddlyWiki parses the content of tiddlers to build an internal tree representation that is used for several purposes:
+
 * Rendering a tiddler to other formats (e.g. converting wikitext to HTML)
 * Detecting outgoing links from a tiddler, and from them...
 * ...computing incoming links to a tiddler
 * Detecting tiddlers that are orphans with no incoming links
 * Detecting tiddlers that are referred to but missing
+
 The parse tree is built when needed, and then cached by the WikiStore until the tiddler changes.
 
 TiddlyWiki5 uses multiple parsers:
+
 * Wikitext ({{{text/x-tiddlywiki}}}) in `js/WikiTextParser.js`
 * JavaScript ({{{text/javascript}}}) in `js/JavaScriptParser.js`
 * Images ({{{image/png}}} and {{{image/jpg}}}) in `js/ImageParser.js`
@@ -55,41 +70,55 @@ TiddlyWiki5 uses multiple parsers:
 Additional parsers are planned:
 * CSS ({{{text/css}}})
 * Recipe ({{{text/x-tiddlywiki-recipe}}})
+
 One global instance of each parser is instantiated in `js/App.js` and registered with the main WikiStore object.
 
 The parsers are all used the same way:
+
 $$$.js
 var parseTree = parser.parse(type,text) // Parses the text and returns a parse tree object
 $$$
+
 The parse tree object exposes the following fields:
+
 $$$.js
 var renderer = parseTree.compile(type); // Compiles the parse tree into a renderer for the specified MIME type
 console.log(parseTree.toString(type)); // Returns a readable string representation of the parse tree (either `text/html` or `text/plain`)
 var dependencies = parseTree.dependencies; // Gets the dependencies of the parse tree (see below)
 $$$
+
 The dependencies are returned as an object like this:
+
 {{{
 {
 	tiddlers: {"tiddlertitle1": true, "tiddlertitle2": false},
 	dependentAll: false
 }
 }}}
+
 The `tiddlers` field is a hashmap of the title of each tiddler that is linked or included in the current one. The value is `true` if the tiddler is a //'fat'// dependency (ie the text is included in some way) or `false` if the tiddler is a //`skinny`// dependency.
 
 The `dependentAll` field is used to indicate that the tiddler contains a macro that scans the entire pool of tiddlers (for example the `<<list>>` macro), and is potentially dependent on any of them. The effect is that the tiddler should be rerendered whenever any other tiddler changes.
+
 !! Rendering
+
 The `parseTree.compile(type)` method returns a renderer object that contains a JavaScript function that generates the new representation of the original parsed text.
 
 The renderer is invoked as follows:
+
 $$$.js
 var renderer = parseTree.compile("text/html");
 var html = renderer.render(tiddler,store);
 $$$
+
 The `tiddler` parameter to the `render` method identifies the tiddler that is acting as the context for this rendering -- for example, it provides the fields displayed by the `<<view>>` macro. The `store` parameter is used to resolve any references to other tiddlers.
+
 !! Rerendering
+
 When rendering to the HTML/SVG DOM in the browser, TiddlyWiki5 also allows a previous rendering to be selectively updated in response to changes in dependent tiddlers. At the moment, only the WikiTextRenderer supports rerendering.
 
 The rerender method on the renderer is called as follows:
+
 {{{
 var node = document.getElementById("myNode");
 var renderer = parseTree.compile("text/html");
@@ -97,13 +126,14 @@ myNode.innerHTML = renderer.render(tiddler,store);
 // And then, later:
 renderer.rerender(node,changes,tiddler,store,renderStep);
 }}}
+
 The parameters to `rerender()` are:
+
 |!Name |!Description |
 |node |A reference to the DOM node containing the rendering to be rerendered |
 |changes |A hashmap of `{title: "created|modified|deleted"}` indicating which tiddlers have changed since the original rendering |
 |tiddler |The tiddler providing the rendering context |
 |store |The store to use for resolving references to other tiddlers |
 |renderStep |See below |
+
 Currently, the only macro that supports rerendering is the `<<story>>` macro; all other macros are rerendered by calling the ordinary `render()` method again. The reason that the `<<story>>` macro goes to the trouble of having a `rerender()` method is so that it can be carefully selective about not disturbing tiddlers in the DOM that aren't affected by the change. If there were, for instance, a video playing in one of the open tiddlers it would be reset to the beginning if the tiddler were rerendered.
-
-

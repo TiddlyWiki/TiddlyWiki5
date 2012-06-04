@@ -2,13 +2,16 @@ title: UserInterfaceSketches
 modifier: JeremyRuston
 
 !Introduction
+
 At its core, TiddlyWiki is a representation transformation engine with a cunning line in selective live updating. The engine could be used to build many different user interface experiences. The role of the core UI is not to be all things to everyone, it is just to provide a beautiful and compelling interactive experience for the activities that experience has shown to be popular.
 
 !Principles
+
 * The best UI is transparent: just the content, no chrome unless you need it
 * Design for touch and mobile first, keyboard and mouse second, and play well with screenreaders
 
 !Sketches
+
 The basic idea is to preserve the page itself for the content, styled and arranged as the user wants. The interactive features necessary to use the application are overlaid when needed, and then get out of the way:
 
 [img[Main Screen Sketch.jpg]]
@@ -16,6 +19,7 @@ The basic idea is to preserve the page itself for the content, styled and arrang
 Swiping in from the left of the screen reveals the primary navigation chooser, an explorable fisheye menu that gives you access to all your tiddlers, categorised and linked to make them easy to find.
 
 The sketch below shows the main screen layout along with the contents of the //view switcher//. This allows the user to select between different ways of looking at tiddlers:
+
 * As a packed mosaic of images and text (like the jQuery Masonry plugin)
 * As a row of stacks for Kanban type sorting activities
 * As a lines-n-boxes diagram, with a plugin mechanism for laying them out
@@ -30,6 +34,7 @@ The sketch below shows the main screen layout along with the contents of the //v
 [img[View Switcher Sketch.jpg]]
 
 !Command Line
+
 The idea of the command line is to give people an environment that makes it easy to interactively process tiddlers, performing one-off imports and exports of data, or batch operations on many tiddlers at once. It was somewhat inspired by [[this wonderful experiment on reimagining the command line terminal|http://acko.net/blog/on-termkit/]].
 
 [img[Command Line Sketch.jpg]]

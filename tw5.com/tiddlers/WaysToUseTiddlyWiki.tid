@@ -2,6 +2,7 @@ title: WaysToUseTiddlyWiki
 tags: feature
 
 !Introduction
+
 TiddlyWiki5 will be deployable in a wide variety of different arrangements to suit different needs. The archetypal configurations are listed below along with a measure of how much complexity is involved in setting up each one -- once set up properly, the TiddlyWiki user experience should be consistent regardless of configuration.
 
 |!Name |!Description |!Barriers |
@@ -13,12 +14,15 @@ TiddlyWiki5 will be deployable in a wide variety of different arrangements to su
 |CustomBrowser |Building a custom web browser around TiddlyWiki to let it work optimally on a particular platform |Very High: you need to be a pretty experienced software developer |
 
 !SelfContained Configuration
+
 This is the familiar form of TiddlyWiki: a single HTML file that runs in the browser containing both the application logic and your data. On many browsers you can edit your content and save your changes without any special add-ins. Even without the ability to save changes, this configuration offers compelling advantages as a content distribution medium by allowing you distribute a fully interactive web experience with just a dumb, reliable static web server.
 
 The SelfContained configuration performs well on the web. By packing all the required JavaScript, CSS and HTML into a single file we avoid the latency that comes from traditional websites bringing in external resources as they load in the browser.
 
 !ExplodedFolder Configuration
+
 This form lays out your data and the components of TiddlyWiki as separate files:
+
 {{{
 folder/
 	index.html
@@ -28,23 +32,29 @@ folder/
 		MyTiddler2.jpg
 		MyTiddler3.svg
 }}}
+
 You can just open the `index.html` in the browser. The content tiddlers are lazily loaded as required, with the HTML file acting as a literal index, listing the titles and other metadata about each tiddler. In some browsers you will be able to make changes to the data through the browser too.
 
 The key advantage of this configuration is that it plays well with existing desktop PC file tools, including source code control systems like Git and Subversion.
 
 !LocalHelperApp Configuration
+
 This configuration uses node.js to enable TiddlyWiki5 to run as a local web server. This means that you interact with it from your browser, typically going to a URL like `127.0.0.1:8080`.
 
 On most operating systems, installing node.js is a single step operation - see http://nodejs.org/ for details. Once installed, running TiddlyWiki requires a simple command line that you can type in the terminal or assign to a shortcut:
+
 {{{
 node tiddlywiki myfolder/index.html
 }}}
+
 In this configuration, TiddlyWiki5 can store data in either a single SelfContained file, or in the ExplodedFolder layout.
 
 !PrivateServerApp Configuration
+
 TiddlyWiki5 can also be run under node.js on an Internet server hosted by a cloud provider such as Amazon or Joyent. In this configuration, your data is stored on a private computer in the cloud, and you access it securely using a browser. In this way you will be able to access your data from any device, including mobile devices.
 
 !Component Configuration
+
 Although TiddlyWiki5 can work as an HTTP server, it is not designed for large, high traffic installations. Instead, the representation transformation engine at the heart of TiddlyWiki5 can be used as a component within more elaborate HTTP servers to enable them to offer TiddlyWiki's flexible WikiText features.
 
 Work is underway to use TiddlyWiki5 within TiddlyWeb and TiddlySpace:
@@ -52,7 +62,9 @@ Work is underway to use TiddlyWiki5 within TiddlyWeb and TiddlySpace:
 https://github.com/cdent/tw5ikifier
 
 !CustomBrowser Configuration
+
 Many mobile platforms lack direct support in the browser to enable TiddlyWiki to save changes locally. One way around this is to use an online flavour of TiddlyWiki. A relatively straightforward option on many platforms is to write a custom application that embeds TiddlyWiki within a web browser control. For example, see these applications that work in this way with classic TiddlyWiki on iOS and Android:
+
 * [[AndTidWiki|https://market.android.com/details?id=de.mgsimon.android.andtidwiki]] for Android Devices
 * [[TWMobile|http://itunes.apple.com/gb/app/twmobile/id381945222?mt=8]] for iPad
 * [[TWEdit|http://itunes.apple.com/gb/app/twedit/id409607956?mt=8]] for iPhone, iPad and iPod Touch

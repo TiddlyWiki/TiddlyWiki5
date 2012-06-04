@@ -3,23 +3,29 @@ modifier: JeremyRuston
 tags: internals
 
 Tiddlers can be stored in text files in several different formats. Files containing single tiddlers can also have an auxiliary `.meta` file formatted as a sequence of name:value pairs:
+
 {{{
 title: TheTitle
 modifier: someone
 }}}
+
 !! ~TiddlyWeb-style .tid files
 
 These files consist of a sequence of lines containing name:value pairs, a blank line and then the text of the tiddler. For example:
+
 {{{
 title: MyTiddler
 modifier: Jeremy
 
 This is the text of my tiddler.
 }}}
+
 //The MIME type `application/x-tiddler` is used internally for these files//
+
 !! TiddlyWiki `<DIV>` .tiddler files
 
 Modern `*.tiddler` files look like this:
+
 {{{
 <div title="AnotherExampleStyleSheet" modifier="blaine" created="201102111106" modified="201102111310" tags="examples" creator="psd">
 <pre>Note that there is an embedded <pre> tag, and line feeds are not escaped.
@@ -27,19 +33,23 @@ Modern `*.tiddler` files look like this:
 And, weirdly, there is no HTML encoding of the body.</pre>
 </div>
 }}}
+
 These `*.tiddler` files are therefore not quite the same as the tiddlers found inside a TiddlyWiki HTML file, where the body is HTML encoded in the expected way.
 
 Older `*.tiddler` files more closely matched the store format used by TiddlyWiki at the time:
+
 {{{
 <div tiddler="AnotherExampleStyleSheet" modifier="JeremyRuston" modified="200508181432" created="200508181432" tags="examples">This is an old-school .tiddler file, without an embedded &lt;pre&gt; tag.\nNote how the body is &quot;HTML encoded&quot; and new lines are escaped to \\n</div>
 }}}
+
 //The MIME type `application/x-tiddler-html-div` is used internally for these files//
+
 !! ~TiddlyWeb-style JSON files
 
 These files are a straightforward array of hashmaps of name:value fields. Currently only these known fields are processed: `title`, `text`, `created`, `creator`, `modified`, `modifier`, `type` and `tags`.
 
-
 //The MIME type `application/json` is used internally for these files//
+
 !! TiddlyWiki HTML files
 
 TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
