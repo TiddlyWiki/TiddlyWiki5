@@ -36,7 +36,7 @@ if(typeof(window) === "undefined" && !global.$tw) {
 }
 
 // Temporary switch for replacing the old wiki text parser with the new one
-$tw.useNewParser = false;
+$tw.useNewParser = true;
 
 // Boot information
 $tw.boot = {};
