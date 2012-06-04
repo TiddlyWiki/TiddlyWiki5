@@ -23,9 +23,13 @@ var WikiTextRenderer = function(text,options) {
 	this.parser = options.parser;
 	this.tree = [];
 	this.dependencies = new $tw.Dependencies();
-	// Parse the text into blocks
-	while(this.pos < this.sourceLength) {
-		this.tree.push.apply(this.tree,this.parseBlock());
+	if(options.isRun) {
+		this.tree.push.apply(this.tree,this.parseRun(null));
+	} else {
+		// Parse the text into blocks
+		while(this.pos < this.sourceLength) {
+			this.tree.push.apply(this.tree,this.parseBlock());
+		}
 	}
 };
 
@@ -76,6 +80,48 @@ Parse a run of text at the current position
 Returns an array of tree nodes
 */
 WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
+	if(terminatorRegExp === null) {
+		return this.parseRunUnterminated();
+	} else {
+		return this.parseRunTerminated(terminatorRegExp);
+	}
+};
+
+WikiTextRenderer.prototype.parseRunUnterminated = function() {
+	var tree = [];
+	// Find the next occurrence of a runrule
+	this.parser.runRegExp.lastIndex = this.pos;
+	var runRuleMatch = this.parser.runRegExp.exec(this.source);
+	// Loop around until we've reached the end of the text
+	while(this.pos < this.sourceLength && runRuleMatch) {
+		// Process the text preceding the run rule
+		if(runRuleMatch.index > this.pos) {
+			tree.push($tw.Tree.Text(this.source.substring(this.pos,runRuleMatch.index)));
+			this.pos = runRuleMatch.index;
+		}
+		// Process the run rule
+		var rule;
+		for(var t=0; t<this.parser.runRules.length; t++) {
+			if(runRuleMatch[t+1]) {
+				rule = this.parser.runRules[t];
+			}
+		}
+		if(rule) {
+			tree.push.apply(tree,rule.parse.call(this,runRuleMatch,false));
+		}
+		// Look for the next run rule
+		this.parser.runRegExp.lastIndex = this.pos;
+		runRuleMatch = this.parser.runRegExp.exec(this.source);
+	}
+	// Process the remaining text
+	if(this.pos < this.sourceLength) {
+		tree.push($tw.Tree.Text(this.source.substr(this.pos)));
+	}
+	this.pos = this.sourceLength;
+	return tree;
+};
+
+WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp) {
 	var tree = [];
 	// Find the next occurrence of the terminator
 	terminatorRegExp = terminatorRegExp || /(\r?\n\r?\n)/mg;
@@ -176,10 +222,13 @@ The wikitext parser constructs a wikitext renderer to do the work
 WikiTextParser.prototype.parse = function(type,text) {
 	return new WikiTextRenderer(text,{
 		wiki: this.wiki,
-		parser: this
+		parser: this,
+		isRun: type === "text/x-tiddlywiki-run"
 	});
 };
 
 exports[$tw.useNewParser ? "text/x-tiddlywiki" : "text/x-tiddlywiki-new"] = WikiTextParser;
+
+exports["text/x-tiddlywiki-run"] = WikiTextParser;
 
 })();
