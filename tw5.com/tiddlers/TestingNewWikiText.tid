@@ -23,7 +23,9 @@ Here is some ''bold face'', and __some underlining__ and of course some --strike
 
 Here's an unterminated ''bit of bold face. And also some entities like &#xc7; &#199; &quot;HTML Entity&quot;.
 
-Here is a macro <<list all>>
+Here is a macro <<version>>.
+
+This is a macro with content <<link to:"HelloThere"><This is a //link// to something.>>
 
 ! This is a new heading
 This is a paragraph
