@@ -24,12 +24,10 @@ var textPrimitives = {
 };
 
 textPrimitives.unWikiLink = "~";
-textPrimitives.wikiLink = "(?:(?:" + textPrimitives.upperLetter + "+" +
+textPrimitives.wikiLink = textPrimitives.upperLetter + "+" +
 	textPrimitives.lowerLetter + "+" +
 	textPrimitives.upperLetter +
-	textPrimitives.anyLetter + "*)|(?:" +
-	textPrimitives.upperLetter + "{2,}" +
-	textPrimitives.lowerLetter + "+))";
+	textPrimitives.anyLetter + "*";
 
 exports.regExpString = textPrimitives.unWikiLink + "?" + textPrimitives.wikiLink;
 
