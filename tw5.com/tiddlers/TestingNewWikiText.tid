@@ -17,7 +17,7 @@ And this will be {{{inline and monospaced}}} and `so will this` little bit.
 
 Here is some ''bold face'', and __some underlining__ and of course some --strikethrough--.
 
-Here's an unterminated ''bit of bold face.
+Here's an unterminated ''bit of bold face. And also some entities like &#xc7; &#199; &quot;HTML Entity&quot;.
 
 Here is a macro <<list all>>
 
