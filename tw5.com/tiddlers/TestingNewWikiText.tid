@@ -1,5 +1,5 @@
 title: TestingNewWikiText
-type: text/x-tiddlywiki-new
+type: text/x-tiddlywiki
 
 ! This is a heading
 
@@ -14,6 +14,10 @@ This will be mono
 }}}
 
 And this will be {{{inline and monospaced}}} and `so will this` little bit.
+
+Here is some ''bold face'', and __some underlining__ and of course some --strikethrough--.
+
+Here's an unterminated ''bit of bold face.
 
 Here is a macro <<list all>>
 

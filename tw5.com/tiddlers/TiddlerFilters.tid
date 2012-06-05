@@ -18,8 +18,10 @@ The mechanism is easiest to understand by first presenting some example filter s
 |`[[one][two][three]] [tag[tom]]` |Any of the tiddlers called `one`, `two` or `three` that exist, along with all of the source tiddlers that are tagged with `tom` |
 |`[tag[tom]] [tag[harry]] -[[one][two][three]]` |All tiddlers tagged either `tom` or `harry`, but excluding `one`, `two` and `three` |
 
+{{{
 [[one]] [[two]] [tag[three]] -[[four]] +[sort[title]]
 [tag[important]] -[[one][two]] -[[three]] +[sort[-modified]limit[20]]
+}}}
 
 A filter string consists of one or more filter operations, each comprising one or more filter operators with associated operands.
 
