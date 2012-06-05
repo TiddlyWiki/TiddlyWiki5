@@ -85,8 +85,6 @@ exports.parse = function(match,isBlock) {
 		}
 		// Skip the list markers
 		this.pos = match.index + match[0].length;
-		// Skip any whitespace
-		this.skipWhitespace();
 		// Process the body of the list item into the last list item
 		var lastListInfo = listTypes[match[0].charAt(match[0].length-1)],
 			lastListChildren = listStack[listStack.length-1].children,
