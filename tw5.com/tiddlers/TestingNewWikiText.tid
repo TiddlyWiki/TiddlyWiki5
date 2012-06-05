@@ -27,6 +27,8 @@ Here is a macro <<version>>.
 
 This is a macro with content <<link to:"HelloThere"><This is a //link// to something.>>
 
+This is another macro with content, this time including another macro: <<link to:"HelloThere"><This is a //link// to something in <<version>> of TiddlyWiki.>>. That's that.
+
 ! This is a new heading
 This is a paragraph
 immediately after

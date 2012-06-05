@@ -168,9 +168,11 @@ WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp,option
 			if(rule) {
 				tree.push.apply(tree,rule.parse.call(this,runRuleMatch,false));
 			}
-			// Look for the next run rule
+			// Look for the next run rule and the next terminator match
 			this.parser.runRegExp.lastIndex = this.pos;
 			runRuleMatch = this.parser.runRegExp.exec(this.source);
+			terminatorRegExp.lastIndex = this.pos;
+			terminatorMatch = terminatorRegExp.exec(this.source);
 		}
 	}
 	// Process the remaining text
