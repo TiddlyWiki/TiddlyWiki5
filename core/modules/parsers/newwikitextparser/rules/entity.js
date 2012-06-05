@@ -3,7 +3,11 @@ title: $:/core/modules/parsers/newwikitextparser/rules/entity.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for HTML entities
+Wiki text run rule for HTML entities. For example:
+
+{{{
+	This is a copyright symbol: &copy;
+}}}
 
 \*/
 (function(){

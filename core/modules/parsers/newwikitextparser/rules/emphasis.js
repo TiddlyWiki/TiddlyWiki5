@@ -3,7 +3,21 @@ title: $:/core/modules/parsers/newwikitextparser/rules/emphasis.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for emphasis
+Wiki text run rule for emphasis. For example:
+
+{{{
+	This is ''bold'' text
+
+	This is //italic// text
+
+	This is __underlined__ text
+
+	This is ^^superscript^^ text
+
+	This is ~~subscript~~ text
+
+	This is --strikethrough-- text
+}}}
 
 \*/
 (function(){

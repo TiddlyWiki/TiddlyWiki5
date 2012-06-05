@@ -3,7 +3,11 @@ title: $:/core/modules/parsers/newwikitextparser/rules/rule.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text block rule for rules
+Wiki text block rule for rules. For example:
+
+{{{
+---
+}}}
 
 \*/
 (function(){

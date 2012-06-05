@@ -3,7 +3,15 @@ title: $:/core/modules/parsers/newwikitextparser/rules/macro.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for pretty links
+Wiki text run rule for pretty links. For example:
+
+{{{
+<<version>>
+
+<<link to:HelloThere><
+A macro with a bunch of content inside it. The content can include //formatting//.
+>>
+}}}
 
 \*/
 (function(){

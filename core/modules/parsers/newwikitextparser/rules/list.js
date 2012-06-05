@@ -3,9 +3,33 @@ title: $:/core/modules/parsers/newwikitextparser/rules/list.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text block rule for lists.
+Wiki text block rule for lists. For example:
 
+{{{
+* This is an unordered list
+* It has two items
 
+# This is a numbered list
+## With a subitem
+# And a third item
+
+; This is a term that is being defined
+: This is the definition of that term
+}}}
+
+Note that lists can be nested arbitrarily:
+
+{{{
+#** One
+#* Two
+#** Three
+#**** Four
+#**# Five
+#**## Six
+## Seven
+### Eight
+## Nine
+}}}
 
 \*/
 (function(){
@@ -61,6 +85,8 @@ exports.parse = function(match,isBlock) {
 		}
 		// Skip the list markers
 		this.pos = match.index + match[0].length;
+		// Skip any whitespace
+		this.skipWhitespace();
 		// Process the body of the list item into the last list item
 		var lastListInfo = listTypes[match[0].charAt(match[0].length-1)],
 			lastListChildren = listStack[listStack.length-1].children,

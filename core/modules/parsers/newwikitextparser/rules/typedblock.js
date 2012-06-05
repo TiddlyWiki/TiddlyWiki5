@@ -3,7 +3,19 @@ title: $:/core/modules/parsers/newwikitextparser/rules/typedblock.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for typed blocks
+Wiki text run rule for typed blocks. For example:
+
+{{{
+$$$.js
+This will be rendered as JavaScript
+$$$
+
+$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$
+}}}
 
 \*/
 (function(){

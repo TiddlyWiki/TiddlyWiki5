@@ -3,7 +3,13 @@ title: $:/core/modules/parsers/newwikitextparser/rules/html.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text block rule for block level HTML elements
+Wiki text block rule for block and run level HTML elements. For example:
+
+{{{
+<aside>
+This is an HTML5 aside element
+</aside>
+}}}
 
 \*/
 (function(){

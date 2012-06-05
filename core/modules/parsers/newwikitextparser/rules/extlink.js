@@ -3,7 +3,13 @@ title: $:/core/modules/parsers/newwikitextparser/rules/extlink.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for external links.
+Wiki text run rule for external links. For example:
+
+{{{
+An external link: http://www.tiddlywiki.com/
+
+A suppressed external link: ~http://www.tiddlyspace.com/
+}}}
 
 External links can be suppressed by preceding them with `~`.
 

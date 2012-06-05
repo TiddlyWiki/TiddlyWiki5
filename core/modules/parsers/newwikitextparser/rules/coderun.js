@@ -3,7 +3,11 @@ title: $:/core/modules/parsers/newwikitextparser/rules/coderun.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for code runs
+Wiki text run rule for code runs. For example:
+
+{{{
+	This is a {{{code run}} and `so is this`.
+}}}
 
 \*/
 (function(){

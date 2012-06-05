@@ -3,7 +3,15 @@ title: $:/core/modules/parsers/newwikitextparser/rules/wikilink.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for wiki links.
+Wiki text run rule for wiki links. For example:
+
+{{{
+AWikiLink
+AnotherLink
+~SuppressedLink
+}}}
+
+Precede a camel case word with `~` to prevent it from being recognised as a link.
 
 \*/
 (function(){
