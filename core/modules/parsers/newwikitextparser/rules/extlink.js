@@ -15,7 +15,6 @@ Wiki text run rule for external links
 exports.name = "extlink";
 
 exports.runParser = true;
-exports.blockParser = true;
 
 exports.regExpString = "(?:file|http|https|mailto|ftp|irc|news|data):[^\\s'\"]+(?:/|\\b)";
 
