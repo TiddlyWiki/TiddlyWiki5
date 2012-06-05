@@ -7,6 +7,8 @@ HelloThere
 
 One two three four. With a link to HelloThere. And a link to TiddlyWiki and TiddlyWiki5. And a suppressed link to ~HelloThere. And now a [[pretty link|HelloThere]] and another pretty link: [[Introduction]].
 
+Here's an http link: http://www.google.com/, and a suppressed link: ~http://www.apple.com/.
+
 Here's a paragraph with an embedded macro <<image "Motovun Jack.jpg">> and that was it.
 
 {{{

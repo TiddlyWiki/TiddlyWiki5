@@ -3,7 +3,9 @@ title: $:/core/modules/parsers/newwikitextparser/rules/extlink.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for external links
+Wiki text run rule for external links.
+
+External links can be suppressed by preceding them with `~`.
 
 \*/
 (function(){
@@ -16,17 +18,23 @@ exports.name = "extlink";
 
 exports.runParser = true;
 
-exports.regExpString = "(?:file|http|https|mailto|ftp|irc|news|data):[^\\s'\"]+(?:/|\\b)";
+var unWikiLink = "~";
+
+exports.regExpString = unWikiLink + "?(?:file|http|https|mailto|ftp|irc|news|data):[^\\s'\"]+(?:/|\\b)";
 
 exports.parse = function(match,isBlock) {
 	this.pos = match.index + match[0].length;
-	var macroNode = $tw.Tree.Macro("link",{
-		srcParams: {to: match[0]},
-		content: [$tw.Tree.Text(match[0])],
-		wiki: this.wiki
-	});
-	this.dependencies.mergeDependencies(macroNode.dependencies);
-	return [macroNode];
+	if(match[0].substr(0,1) === unWikiLink) {
+		return [$tw.Tree.Text(match[0].substr(1))];
+	} else {
+		var macroNode = $tw.Tree.Macro("link",{
+			srcParams: {to: match[0]},
+			content: [$tw.Tree.Text(match[0])],
+			wiki: this.wiki
+		});
+		this.dependencies.mergeDependencies(macroNode.dependencies);
+		return [macroNode];
+	}
 };
 
 })();
