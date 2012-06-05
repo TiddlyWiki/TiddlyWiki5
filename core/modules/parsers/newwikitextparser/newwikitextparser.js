@@ -77,17 +77,22 @@ WikiTextRenderer.prototype.skipWhitespace = function() {
 /*
 Parse a run of text at the current position
 	terminatorRegExp: a regexp at which to stop the run
+	options: see below
+
+Options are:
+	leaveTerminator: true if the terminator shouldn't be consumed
 Returns an array of tree nodes
 */
-WikiTextRenderer.prototype.parseRun = function(terminatorRegExp) {
+WikiTextRenderer.prototype.parseRun = function(terminatorRegExp,options) {
 	if(terminatorRegExp === null) {
-		return this.parseRunUnterminated();
+		return this.parseRunUnterminated(options);
 	} else {
-		return this.parseRunTerminated(terminatorRegExp);
+		return this.parseRunTerminated(terminatorRegExp,options);
 	}
 };
 
-WikiTextRenderer.prototype.parseRunUnterminated = function() {
+WikiTextRenderer.prototype.parseRunUnterminated = function(options) {
+	options = options || {};
 	var tree = [];
 	// Find the next occurrence of a runrule
 	this.parser.runRegExp.lastIndex = this.pos;
@@ -121,7 +126,8 @@ WikiTextRenderer.prototype.parseRunUnterminated = function() {
 	return tree;
 };
 
-WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp) {
+WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp,options) {
+	options = options || {};
 	var tree = [];
 	// Find the next occurrence of the terminator
 	terminatorRegExp = terminatorRegExp || /(\r?\n\r?\n)/mg;
@@ -138,7 +144,10 @@ WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp) {
 				if(terminatorMatch.index > this.pos) {
 					tree.push($tw.Tree.Text(this.source.substring(this.pos,terminatorMatch.index)));
 				}
-				this.pos = terminatorMatch.index + terminatorMatch[0].length;
+				this.pos = terminatorMatch.index;
+				if(!options.leaveTerminator) {
+					this.pos += terminatorMatch[0].length;
+				}
 				return tree;
 			}
 		}
