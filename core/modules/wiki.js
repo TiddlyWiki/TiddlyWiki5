@@ -108,10 +108,11 @@ exports.addTiddler = function(tiddler,isShadow) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
 	}
-	if(isShadow) {
+	var title = tiddler.fields.title,
+		prevTiddler = this.tiddlers[title];
+	if(isShadow || (prevTiddler && prevTiddler.isShadow)) {
 		tiddler.isShadow = true;
 	}
-	var title = tiddler.fields.title;
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
 	this.touchTiddler(title);
