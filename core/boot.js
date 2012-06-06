@@ -68,6 +68,7 @@ $tw.config.fileExtensions = {
 	".css": {type: "text/css", encoding: "utf8"},
 	".html": {type: "text/html", encoding: "utf8"},
 	".js": {type: "application/javascript", encoding: "utf8"},
+	".json": {type: "application/json", encoding: "utf8"},
 	".jpg": {type: "image/jpeg", encoding: "base64"},
 	".jpeg": {type: "image/jpeg", encoding: "base64"},
 	".png": {type: "image/png", encoding: "base64"},
