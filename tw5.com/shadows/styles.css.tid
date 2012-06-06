@@ -35,16 +35,6 @@ img, canvas {
 	max-width: 100%;
 }
 
-a.tw-tiddlylink-external::before {
-	content: "\27a0\00a0";
-}
-
-a:hover {
-	text-decoration: none;
-	background: #88aaff;
-	color: #005580;
-}
-
 a.tw-tiddlylink {
 	font-style: normal;
 	font-weight: normal;
