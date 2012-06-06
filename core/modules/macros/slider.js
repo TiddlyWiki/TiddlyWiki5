@@ -47,8 +47,7 @@ exports.info = {
 		label: {byPos: 2, type: "text"},
 		tooltip: {byPos: 3, type: "text"},
 		"default": {byName: true, type: "text"},
-		"class": {byName: true, type: "text"},
-		content: {byName: true, type: "text"}
+		"class": {byName: true, type: "text"}
 	},
 	events: ["click"]
 };
@@ -76,15 +75,15 @@ exports.saveOpenState = function() {
 };
 
 exports.getSliderChildren = function() {
-	if(this.hasParameter("content")) {
-		return this.wiki.parseText("text/x-tiddlywiki",this.params.content).tree;
-	} else if(this.hasParameter("target")) {
+	// Use the target tiddler if specified
+	if(this.hasParameter("target")) {
 		return [$tw.Tree.Macro("tiddler",{
 					srcParams: {target: this.params.target},
 					wiki: this.wiki
 				})];
 	} else {
-		return [$tw.Tree.errorNode("No content specified for slider")];
+		// Otherwise use the content of the macro
+		return this.content;
 	}
 };
 
