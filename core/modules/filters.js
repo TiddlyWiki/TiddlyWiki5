@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/wiki.filters.js
+title: $:/core/modules/filters.js
 type: application/javascript
 module-type: wikimethod
 
