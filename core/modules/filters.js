@@ -96,23 +96,17 @@ exports.operators = {
 	},
 	"is": {
 		selector: function(operator) {
-			if(operator.operand === "tiddler") {
-				if(operator.prefix === "!") {
-					return "subResults = [];";
-				} else {
-					return "for(var title in source) {$tw.utils.pushTop(subResults,title);}";
-				}
+			var op = operator.prefix === "!" ? "!" : "";
+			if(operator.operand === "shadow") {
+				return "for(var title in source) {if(" + op + "this.getTiddler(title).isShadow) {$tw.utils.pushTop(subResults,title);}}";
 			} else {
 				throw "Unknown operand for 'is' filter operator";
 			}
 		},
 		filter: function(operator) {
-			if(operator.operand === "tiddler") {
-				if(operator.prefix === "!") {
-					return "subResults = [];";
-				} else {
-					return "";
-				}
+			var op = operator.prefix === "!" ? "" : "!";
+			if(operator.operand === "shadow") {
+				return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow) {subResults.splice(r,1);}}"
 			} else {
 				throw "Unknown operand for 'is' filter operator";
 			}

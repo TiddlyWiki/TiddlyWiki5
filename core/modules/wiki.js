@@ -103,10 +103,13 @@ exports.tiddlerExists = function(title) {
 	return !!this.tiddlers[title];
 };
 
-exports.addTiddler = function(tiddler) {
+exports.addTiddler = function(tiddler,isShadow) {
 	// Check if we're passed a fields hashmap instead of a tiddler
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
+	}
+	if(isShadow) {
+		tiddler.isShadow = true;
 	}
 	var title = tiddler.fields.title;
 	this.tiddlers[title] = tiddler;
@@ -136,7 +139,9 @@ exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		tiddlers.push(this.tiddlers[t]);
+		if(!this.tiddlers[t].isShadow) {
+			tiddlers.push(this.tiddlers[t]);
+		}
 	}
 	tiddlers.sort(function(a,b) {
 		var aa = a.fields[sortField] || 0,
@@ -206,7 +211,14 @@ exports.getOrphanTitles = function() {
 };
 
 exports.getShadowTitles = function() {
-	return [];
+	var titles = [];
+	for(var title in this.tiddlers) {
+		if(this.tiddlers[title].isShadow) {
+			titles.push(title);
+		}
+	}
+	titles.sort();
+	return titles;
 };
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it

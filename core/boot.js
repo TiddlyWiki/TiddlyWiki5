@@ -321,16 +321,19 @@ $tw.Wiki = function() {
 	this.tiddlers = {};
 };
 
-$tw.Wiki.prototype.addTiddler = function(tiddler) {
+$tw.Wiki.prototype.addTiddler = function(tiddler,isShadow) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
 	}
-	this.tiddlers[tiddler.fields.title] = tiddler;	
+	if(isShadow) {
+		tiddler.isShadow = true;
+	}
+	this.tiddlers[tiddler.fields.title] = tiddler;
 };
 
-$tw.Wiki.prototype.addTiddlers = function(tiddlers) {
+$tw.Wiki.prototype.addTiddlers = function(tiddlers,isShadow) {
 	for(var t=0; t<tiddlers.length; t++) {
-		this.addTiddler(tiddlers[t]);
+		this.addTiddler(tiddlers[t],isShadow);
 	}	
 };
 
@@ -366,9 +369,6 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	}
 	for(var f in srcFields) {
 		fields[f] = srcFields[f];
-	}
-	if(!fields.type) {
-//		fields.type = type;
 	}
 	if(deserializer) {
 		return deserializer.call(this,text,fields);
@@ -502,27 +502,15 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","
 $tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
 
 // Load the JavaScript system tiddlers from the DOM
-$tw.wiki.addTiddlers(
-	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("pluginModules"))
-);
-$tw.wiki.addTiddlers(
-	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernelPrefix"))
-);
-$tw.wiki.addTiddlers(
-	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernel"))
-);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("pluginModules")),true);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernelPrefix")),true);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernel")),true);
 // Load the stylesheet tiddlers from the DOM
-$tw.wiki.addTiddlers(
-	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("styleArea"))
-);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("styleArea")),true);
 // Load the main store tiddlers from the DOM
-$tw.wiki.addTiddlers(
-	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("storeArea"))
-);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("storeArea")));
 // Load the shadow tiddlers from the DOM
-$tw.wiki.addTiddlers(
-	$tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("shadowArea"))
-);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("shadowArea")),true);
 
 // End of if($tw.browser)
 }
@@ -542,7 +530,7 @@ $tw.boot.wikiPath = process.cwd();
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
 */
-$tw.loadTiddlersFromFile = function(file,fields) {
+$tw.loadTiddlersFromFile = function(file,fields,isShadow) {
 	var ext = path.extname(file),
 		extensionInfo = $tw.config.fileExtensions[ext],
 		data = fs.readFileSync(file).toString(extensionInfo ? extensionInfo.encoding : "utf8"),
@@ -554,13 +542,13 @@ $tw.loadTiddlersFromFile = function(file,fields) {
 			tiddlers = [$tw.utils.parseFields(metadata,tiddlers[0])];
 		}
 	}
-	$tw.wiki.addTiddlers(tiddlers);
+	$tw.wiki.addTiddlers(tiddlers,isShadow);
 };
 
 /*
 Load all the plugins from the plugins directory
 */
-$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp) {
+$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
 	if(path.existsSync(filepath)) {
@@ -572,19 +560,19 @@ $tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp) {
 				// If so, process the files it describes
 				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
 				for(var p=0; p<pluginInfo.tiddlers.length; p++) {
-					$tw.loadTiddlersFromFile(path.resolve(filepath,pluginInfo.tiddlers[p].file),pluginInfo.tiddlers[p].fields);
+					$tw.loadTiddlersFromFile(path.resolve(filepath,pluginInfo.tiddlers[p].file),pluginInfo.tiddlers[p].fields,isShadow);
 				}
 			} else {
 				// If not, read all the files in the directory
 				for(var f=0; f<files.length; f++) {
 					var file = files[f];
 					if(!excludeRegExp.test(file)) {
-						$tw.loadTiddlersFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp);
+						$tw.loadTiddlersFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp,isShadow);
 					}
 				}
 			}
 		} else if(stat.isFile()) {
-			$tw.loadTiddlersFromFile(filepath,{title: basetitle});
+			$tw.loadTiddlersFromFile(filepath,{title: basetitle},isShadow);
 		}
 	}
 };
@@ -629,14 +617,14 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 };
 
 // Load plugins from the plugins directory
-$tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir),null,null,true);
 
 // Load any plugins in the wiki plugins directory
-$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir),null,null,true);
 
 // HACK: to be replaced when we re-establish sync plugins
 // Load shadow tiddlers from wiki shadows directory
-$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiShadowsSubDir));
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiShadowsSubDir),null,null,true);
 // Load tiddlers from wiki tiddlers directory
 $tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir));
 
