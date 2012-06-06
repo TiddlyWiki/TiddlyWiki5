@@ -17,6 +17,12 @@ Wiki text block rule for headings. For example:
 
 The bang `!` must be the first thing on the line. Any white space before the text of the heading is ignored.
 
+A CSS can be applied to the heading as follows:
+
+{{{
+!{{myClass}} This heading will have the class `myClass`
+}}}
+
 \*/
 (function(){
 

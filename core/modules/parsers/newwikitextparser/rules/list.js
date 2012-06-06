@@ -31,6 +31,14 @@ Note that lists can be nested arbitrarily:
 ## Nine
 }}}
 
+A CSS class can be applied to a list item as follows:
+
+{{{
+* List item one
+*{{active}} List item two has the class `active`
+* List item three
+}}}
+
 \*/
 (function(){
 
