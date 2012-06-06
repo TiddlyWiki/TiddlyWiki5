@@ -257,7 +257,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 	this.fields = {};
 	for(var c=0; c<arguments.length; c++) {
 		var arg = arguments[c],
-			src = (arg instanceof $tw.Tiddler) ? arg.getFields() : arg;
+			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
 		for(var t in src) {
 			if(src[t] === undefined) {
 				if(t in this.fields) {
@@ -274,10 +274,6 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 			}
 		}
 	}
-};
-
-$tw.Tiddler.prototype.getFields = function() {
-	return this.fields;
 };
 
 /*
