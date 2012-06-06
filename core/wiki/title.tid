@@ -1,0 +1,4 @@
+title: $:/core/wiki/title
+type: text/x-tiddlywiki
+
+<<tiddler SiteTitle>> --- <<tiddler SiteSubtitle>>

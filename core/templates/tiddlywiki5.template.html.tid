@@ -14,13 +14,13 @@ type: text/x-tiddlywiki-html
 <meta name="copyright" content="
 <<include "$:/core/copyright.txt" text/plain>>
 " />
-<title><<include "$:/wiki/title" text/plain>></title>
+<title><<tiddler "$:/core/wiki/title">></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <div id="styleArea">
 <<include "[is[shadow]type[text/css]]" application/x-tiddler-css>>
 </div>
 <!----------- Raw markup ----------->
-<<include "[tag[$:/shadow/rawMarkup]]" text/plain>>
+<<include "[tag[$:/core/wiki/rawmarkup]]" text/plain>>
 </head>
 <body>
 <!----------- Static content for Google and browsers without JavaScript ----------->

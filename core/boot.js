@@ -56,7 +56,7 @@ $tw.config = $tw.config || {};
 $tw.config.root = $tw.config.root || "$:"; // Root for module titles (eg, "$:/kernel/boot.js")
 $tw.config.bootModuleSubDir = $tw.config.bootModuleSubDir || "./modules";
 $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
-$tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./shadows";
+$tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
 $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
 
 // File extensions
