@@ -1,4 +1,5 @@
 title: SeventhTiddler
+type: text/x-tiddlywiki-old
 
 <<echo {{2+2}}>>
 

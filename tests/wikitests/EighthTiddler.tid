@@ -1,4 +1,5 @@
 title: EighthTiddler
+type: text/x-tiddlywiki-old
 
 <<tiddler SixthTiddler>>
 <<tiddler target:SixthTiddler>>
