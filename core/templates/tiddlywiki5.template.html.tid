@@ -6,32 +6,32 @@ type: text/x-tiddlywiki-html
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="<<include "$:/core/version.txt" text/plain shadow:yes>>" />
+<meta name="tiddlywiki-version" content="<<include "$:/core/version.txt" text/plain>>" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="
-<<include "$:/core/copyright.txt" text/plain shadow:yes>>
+<<include "$:/core/copyright.txt" text/plain>>
 " />
 <title><<include "$:/wiki/title" text/plain>></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <div id="styleArea">
-<<include "[type[text/css]]" application/x-tiddler-css shadow:yes>>
+<<include "[type[text/css]]" application/x-tiddler-css>>
 </div>
 <!----------- Raw markup ----------->
-<<include "[tag[$:/shadow/rawMarkup]]" text/plain shadow:yes>>
+<<include "[tag[$:/shadow/rawMarkup]]" text/plain>>
 </head>
 <body>
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
 <div id="splashArea" style="display:none;">
-<<include "$:/templates/StaticContent" text/html shadow:yes>>
+<<include "$:/templates/StaticContent" text/html>>
 </div>
 </noscript>
 <!----------- Miscellaneous shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
-<<include "[!type[text/css]] -[type[application/javascript]has[module-type]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div shadow:yes>>
+<<include "[!type[text/css]] -[type[application/javascript]has[module-type]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div>>
 </div>
 <!----------- Ordinary tiddlers ----------->
 <div id="storeArea" style="display:none;">
@@ -39,15 +39,15 @@ type: text/x-tiddlywiki-html
 </div>
 <!----------- Boot kernel prologue ----------->
 <div id="bootKernelPrefix" style="display:none;">
-<<include "$:/core/bootprefix.js" application/javascript shadow:yes>>
+<<include "$:/core/bootprefix.js" application/javascript>>
 </div>
 <!----------- Plugin modules ----------->
 <div id="pluginModules" style="display:none;">
-<<include "[type[application/javascript]has[module-type]]" application/x-tiddler-module shadow:yes>>
+<<include "[type[application/javascript]has[module-type]]" application/x-tiddler-module>>
 </div>
 <!----------- Boot kernel ----------->
 <div id="bootKernel" style="display:none;">
-<<include "$:/core/boot.js" application/javascript shadow:yes>>
+<<include "$:/core/boot.js" application/javascript>>
 </div>
 </body>
 </html>

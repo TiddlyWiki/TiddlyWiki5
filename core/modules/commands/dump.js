@@ -59,7 +59,7 @@ Command.prototype.subcommands.tiddlers = function() {
 };
 
 Command.prototype.subcommands.shadows = function() {
-	var tiddlers = this.commander.wiki.shadows.getTiddlers();
+	var tiddlers = this.commander.wiki.getShadowTitles();
 	this.output.write("Wiki contains these shadow tiddlers:\n");
 	for(var t=0; t<tiddlers.length; t++) {
 		this.output.write(tiddlers[t] + "\n");

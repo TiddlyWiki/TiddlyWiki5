@@ -100,11 +100,7 @@ exports.deleteTiddler = function(title) {
 };
 
 exports.tiddlerExists = function(title) {
-	if(this.tiddlers[title]) {
-		return true;
-	} else if (this.shadows) {
-		return this.shadows.tiddlerExists(title);
-	}
+	return !!this.tiddlers[title];
 };
 
 exports.addTiddler = function(tiddler) {
@@ -210,7 +206,7 @@ exports.getOrphanTitles = function() {
 };
 
 exports.getShadowTitles = function() {
-	return this.shadows ? this.shadows.getTiddlers() : [];
+	return [];
 };
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it

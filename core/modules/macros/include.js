@@ -17,17 +17,15 @@ exports.info = {
 	params: {
 		filter: {byPos: 0, type: "filter"},
 		as: {byPos: 1, type: "text"},
-		shadow: {byPos: 2, type: "text"},
 		removePrefix: {byName: true, type: "text"}
 	}
 };
 
 exports.executeMacro = function() {
 	var as = this.params.as || "text/plain",
-		wiki = this.hasParameter("shadow") ? this.wiki.shadows : this.wiki,
 		t;
 	if(this.hasParameter("filter")) {
-		var titles = wiki.filterTiddlers(this.params.filter),
+		var titles = this.wiki.filterTiddlers(this.params.filter),
 			result = [];
 		if(this.hasParameter("removePrefix")) {
 			for(t=0; t<titles.length; t++) {
