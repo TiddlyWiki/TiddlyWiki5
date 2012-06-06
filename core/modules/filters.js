@@ -106,7 +106,7 @@ exports.operators = {
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "" : "!";
 			if(operator.operand === "shadow") {
-				return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow) {subResults.splice(r,1);}}"
+				return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow) {subResults.splice(r,1);}}";
 			} else {
 				throw "Unknown operand for 'is' filter operator";
 			}
