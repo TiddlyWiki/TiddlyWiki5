@@ -86,12 +86,12 @@ exports.operators = {
 	},
 	"prefix": {
 		selector: function(operator) {
-			var op = operator.prefix === "!" ? "!" : "";
-			return "for(var title in source) {if(" + op + "title.substr(0,\"" + operator.operand.length + "\")===\"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
+			var op = operator.prefix === "!" ? "!" : "=";
+			return "for(var title in source) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
 		},
 		filter: function(operator) {
-			var op = operator.prefix === "!" ? "" : "!";
-			return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "title.substr(0,\"" + operator.operand.length + "\")===\"" + $tw.utils.stringify(operator.operand) + "\") {subResults.splice(r,1);}}";
+			var op = operator.prefix === "!" ? "=" : "!";
+			return "for(var r=subResults.length-1; r>=0; r--) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {subResults.splice(r,1);}}";
 		}
 	},
 	"is": {
