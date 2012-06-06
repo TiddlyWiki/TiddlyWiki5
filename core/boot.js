@@ -53,7 +53,7 @@ $tw.plugins.moduleTypes = $tw.plugins.moduleTypes || {}; // hashmap by module ty
 $tw.config = $tw.config || {};
 
 // Constants
-$tw.config.root = $tw.config.root || "$:"; // Root for module titles (eg, "$:/kernel/boot.js")
+$tw.config.root = $tw.config.root || "$:"; // Root for module titles (eg, "$:/core/boot.js")
 $tw.config.bootModuleSubDir = $tw.config.bootModuleSubDir || "./modules";
 $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
@@ -406,6 +406,21 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","
 		return [fields];
 	}
 });
+$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/txt","tiddlerdeserializer",{
+	"text/plain": function(text,fields) {
+		fields.text = text;
+		fields.type = "text/plain";
+		return [fields];
+	}
+});
+$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/html","tiddlerdeserializer",{
+	"text/html": function(text,fields) {
+		fields.text = text;
+		fields.type = "text/html";
+		return [fields];
+	}
+});
+
 // Install the tiddler deserializer plugins so they are immediately available
 $tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
 
@@ -619,6 +634,9 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 
 // Load plugins from the plugins directory
 $tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir),null,null,true);
+
+// Load up the shadow tiddlers in the root of the core directory
+$tw.loadTiddlersFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/,true);
 
 // Load any plugins in the wiki plugins directory
 $tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir),null,null,true);

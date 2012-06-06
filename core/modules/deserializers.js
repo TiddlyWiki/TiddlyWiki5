@@ -12,18 +12,6 @@ Plugins to deserialise tiddlers from a block of text
 /*global $tw: false */
 "use strict";
 
-exports["text/plain"] = function(text,fields) {
-	fields.text = text;
-	fields.type = "text/plain";
-	return [fields];
-};
-
-exports["text/html"] = function(text,fields) {
-	fields.text = text;
-	fields.type = "text/html";
-	return [fields];
-};
-
 /*
 Utility function to parse an old-style tiddler DIV. It looks like this:
 
