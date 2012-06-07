@@ -37,7 +37,7 @@ exports.handleEvent = function(event) {
 };
 
 exports.executeMacro = function() {
-	this.downloadTitle = this.params.title || "$:/core/tiddlywiki5.template.html";
+	this.downloadTitle = this.params.title || "$:/core/templates/tiddlywiki5.template.html";
 	this.downloadType = this.params.type || "text/plain";
 	this.downloadFilename = this.params.filename || this.downloadTitle;
 	var attributes = {},
