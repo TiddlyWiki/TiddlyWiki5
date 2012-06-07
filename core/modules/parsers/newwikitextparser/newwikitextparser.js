@@ -65,6 +65,39 @@ WikiTextRenderer.prototype.parseBlock = function() {
 	}
 };
 
+/*
+Parse blocks of text until a terminating regexp is encountered
+	terminatorRegExp: terminating regular expression
+	addClass: optional CSS class to add to each block
+*/
+WikiTextRenderer.prototype.parseBlockTerminated = function(terminatorRegExp,className) {
+	var tree = [];
+	// Skip any whitespace
+	this.skipWhitespace();
+	//  Check if we've got the end marker
+	terminatorRegExp.lastIndex = this.pos;
+	var match = terminatorRegExp.exec(this.source);
+	// Parse the text into blocks
+	while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
+		var blocks = this.parseBlock();
+		for(var t=0; t<blocks.length; t++) {
+			if(className) {
+				blocks[t].addClass(className);
+			}
+			tree.push(blocks[t]);
+		}
+		// Skip any whitespace
+		this.skipWhitespace();
+		//  Check if we've got the end marker
+		terminatorRegExp.lastIndex = this.pos;
+		match = terminatorRegExp.exec(this.source);
+	}
+	if(match && match.index === this.pos) {
+		this.pos = match.index + match[0].length;
+	}
+	return tree;
+};
+
 WikiTextRenderer.prototype.skipWhitespace = function() {
 	var whitespaceRegExp = /(\s+)/mg;
 	whitespaceRegExp.lastIndex = this.pos;
