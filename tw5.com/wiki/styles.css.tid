@@ -134,7 +134,7 @@ a.tw-tiddlylink-missing {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
-.navigation-panel div {
+.navigation-panel {
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -142,7 +142,7 @@ a.tw-tiddlylink-missing {
 	height: 100%; /* Makes the element the same height as the body, since the body is position: relative */
 }
 
-.navigation-panel div ul {
+.navigation-panel ul {
 	position: relative;
 	top: 0;
 	margin: 0 0 0 0;
@@ -152,7 +152,7 @@ a.tw-tiddlylink-missing {
 	border-right: 1px solid #aaa;
 }
 
-.navigation-panel div ul li {
+.navigation-panel ul li {
 	padding: 2px 4px 2px 4px;
 }
 
@@ -169,7 +169,7 @@ body.in-zoomer {
 	-webkit-transition: none;
 }
 
-.zoomer-panel div {
+.zoomer-panel {
 	position: absolute;
 	right: 0;
 	top: 0;
@@ -177,7 +177,7 @@ body.in-zoomer {
 	height: 100%; /* Makes the element the same height as the body, since the body is position: relative */
 }
 
-body.in-zoomer .zoomer-panel div {
+body.in-zoomer .zoomer-panel {
 	background: rgba(235,235,235,0.5);
 }
 
