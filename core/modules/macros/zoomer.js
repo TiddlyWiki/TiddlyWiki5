@@ -26,17 +26,6 @@ exports.startZoomer = function(x,y) {
 	$tw.utils.addClass(document.body,"in-zoomer");
 };
 
-exports.stopZoomer = function() {
-	var newScrollY = this.yFactor * (this.bodyHeight - this.windowHeight);
-	this.inZoomer = false;
-	window.scrollTo(0,newScrollY);
-	document.body.style[$tw.browser.transform] = "translateY(" + newScrollY * this.xFactor + "px) " + 
-		"scale(" + this.scale + ") " +
-		"translateY(" + ((this.windowHeight / this.scale) - this.bodyHeight) * this.yFactor * this.xFactor + "px)";
-	$tw.utils.removeClass(document.body,"in-zoomer");
-	document.body.style[$tw.browser.transform] = "translateY(0) scale(1) translateY(0)";
-};
-
 /*
 Zoom the body element given a touch/mouse position in screen coordinates
 */
@@ -78,6 +67,17 @@ exports.hoverZoomer = function(x,y) {
 			"scale(" + scale.toFixed(8) + ") " +
 			"translateY(" + postTranslateY.toFixed(8) + "px)";
 	document.body.style[$tw.browser.transform] = transform;
+};
+
+exports.stopZoomer = function() {
+	var newScrollY = this.yFactor * (this.bodyHeight - this.windowHeight);
+	this.inZoomer = false;
+	window.scrollTo(0,newScrollY);
+	document.body.style[$tw.browser.transform] = "translateY(" + newScrollY * this.xFactor + "px) " + 
+		"scale(" + this.scale + ") " +
+		"translateY(" + ((this.windowHeight / this.scale) - this.bodyHeight) * this.yFactor * this.xFactor + "px)";
+	$tw.utils.removeClass(document.body,"in-zoomer");
+	document.body.style[$tw.browser.transform] = "translateY(0) scale(1) translateY(0)";
 };
 
 exports.handleEvent = function(event) {
