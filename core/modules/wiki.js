@@ -108,11 +108,14 @@ exports.addTiddler = function(tiddler,isShadow) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
 	}
+	// Get the title, and the current tiddler with that title
 	var title = tiddler.fields.title,
 		prevTiddler = this.tiddlers[title];
+	// Make it be a shadow if indicated or if it is already a shadow
 	if(isShadow || (prevTiddler && prevTiddler.isShadow)) {
 		tiddler.isShadow = true;
 	}
+	// Save the tiddler
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
 	this.touchTiddler(title);
