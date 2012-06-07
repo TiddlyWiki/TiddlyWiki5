@@ -35,7 +35,12 @@ exports.parse = function(match,isBlock) {
 	if(match && match.index === this.pos) {
 		this.pos = match.index + match[0].length;
 		if(match[5]) {
-			content = this.parseRun(/(>>)/mg);
+			// If the macro has content then parse it as a block or run
+			if(isBlock) {
+				content = this.parseBlockTerminated(/(^>>$)/mg);
+			} else {
+				content = this.parseRun(/(>>)/mg);
+			}
 		}
 		var macroNode = $tw.Tree.Macro(match[1] || match[2],{
 				srcParams: match[3],
