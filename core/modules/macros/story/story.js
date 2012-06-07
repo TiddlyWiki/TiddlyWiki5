@@ -65,7 +65,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 	if(typeof(navTiddler) !== "undefined") {
 		// If we found our tiddler, just tell the storyview to navigate to it
 		if(this.storyview && this.storyview.navigate) {
-			this.storyview.navigate(this.children[0].children[navTiddler],false,event);
+			this.storyview.navigate(this.storyNode.children[navTiddler],false,event);
 		}
 	} else {
 		// Add the tiddler to the bottom of the story (subsequently there will be a refreshInDom() call which is when we'll actually do the navigation)
@@ -144,17 +144,21 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 };
 
 exports.executeMacro = function() {
-	var story = this.getStory(),
-		storyNode = $tw.Tree.Element("div",{"class": "tw-story-frame"},[]);
+	// Create the story frame
+	var story = this.getStory();
+	this.contentNode = $tw.Tree.Element("div",{"class": "tw-story-content"},this.content);
+	this.contentNode.execute(this.parents,this.tiddlerTitle);
+	this.storyNode = $tw.Tree.Element("div",{"class": "tw-story-frame"},[]);
+	// Create each story element
 	for(var t=0; t<story.tiddlers.length; t++) {
 		var m = $tw.Tree.Macro("tiddler",{
 									srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
 									wiki: this.wiki
 								});
 		m.execute(this.parents,this.tiddlerTitle);
-		storyNode.children.push($tw.Tree.Element("div",{"class": "tw-story-element"},[m]));
+		this.storyNode.children.push($tw.Tree.Element("div",{"class": "tw-story-element"},[m]));
 	}
-	return [storyNode];
+	return [this.contentNode,this.storyNode];
 };
 
 exports.postRenderInDom = function() {
@@ -181,8 +185,8 @@ exports.refreshInDom = function(changes) {
 			template = this.params.template,
 			n,domNode,
 			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
-				while(childIndex < self.children[0].children.length) {
-					var params = self.children[0].children[childIndex].children[0].params;
+				while(childIndex < self.storyNode.children.length) {
+					var params = self.storyNode.children[childIndex].children[0].params;
 					if(params.target === tiddlerTitle) {
 						if(!templateTitle || params.template === templateTitle) {
 							return childIndex;
@@ -204,34 +208,34 @@ exports.refreshInDom = function(changes) {
 										})
 							]);
 				m.execute(this.parents,this.tiddlerTitle);
-				m.renderInDom(this.children[0].domNode,this.children[0].domNode.childNodes[t]);
-				this.children[0].children.splice(t,0,m);
+				m.renderInDom(this.storyNode.domNode,this.storyNode.domNode.childNodes[t]);
+				this.storyNode.children.splice(t,0,m);
 				// Invoke the storyview to animate the navigation
 				if(this.storyview && this.storyview.navigate) {
-					this.storyview.navigate(this.children[0].children[t],true,this.lastNavigationEvent);
+					this.storyview.navigate(this.storyNode.children[t],true,this.lastNavigationEvent);
 				}
 			} else {
 				// Delete any nodes preceding the one we want
 				if(tiddlerNode > t) {
 					// First delete the DOM nodes
 					for(n=t; n<tiddlerNode; n++) {
-						domNode = this.children[0].children[n].domNode;
+						domNode = this.storyNode.children[n].domNode;
 						domNode.parentNode.removeChild(domNode);
 					}
 					// Then delete the actual renderer nodes
-					this.children[0].children.splice(t,tiddlerNode-t);
+					this.storyNode.children.splice(t,tiddlerNode-t);
 				}
 				// Refresh the DOM node we're reusing
-				this.children[0].children[t].refreshInDom(changes);
+				this.storyNode.children[t].refreshInDom(changes);
 			}
 		}
 		// Remove any left over nodes
-		if(this.children[0].children.length > story.tiddlers.length) {
-			for(t=story.tiddlers.length; t<this.children[0].children.length; t++) {
-				domNode = this.children[0].children[t].domNode;
+		if(this.storyNode.children.length > story.tiddlers.length) {
+			for(t=story.tiddlers.length; t<this.storyNode.children.length; t++) {
+				domNode = this.storyNode.children[t].domNode;
 				domNode.parentNode.removeChild(domNode);
 			}
-			this.children[0].children.splice(story.tiddlers.length,this.children[0].children.length-story.tiddlers.length);
+			this.storyNode.children.splice(story.tiddlers.length,this.storyNode.children.length-story.tiddlers.length);
 		}
 	} else {
 		// If our dependencies didn't change, just refresh the children
