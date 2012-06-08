@@ -75,9 +75,9 @@ exports.executeMacro = function() {
 	// Create the link
 	var children;
 	if(linkInfo.suppressLink) {
-		children = this.cloneContent();
+		children = this.content;
 	} else { 
-		children = [$tw.Tree.Element("a",linkInfo.attributes,this.cloneContent())];
+		children = [$tw.Tree.Element("a",linkInfo.attributes,this.content)];
 	}
 	for(var t=0; t<children.length; t++) {
 		children[t].execute(this.parents,this.tiddlerTitle);
