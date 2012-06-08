@@ -12,7 +12,7 @@ Parses a JavaScript program into a parse tree
 /*global $tw: false */
 "use strict";
 
-var esprima = require("./esprima.js");
+var esprima = require("./esprima/esprima.js");
 
 // Initialise the parser
 var JavaScriptParser = function(options) {
