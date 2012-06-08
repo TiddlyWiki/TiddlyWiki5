@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "zepto.min.js", 
+			"fields": {
+				"title": "$:/core/lib/zepto.min.js",
+				"type": "application/javascript",
+				"library": "yes"
+			}
+		}
+	]
+}
