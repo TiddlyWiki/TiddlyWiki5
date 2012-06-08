@@ -31,11 +31,15 @@ type: text/x-tiddlywiki-html
 </noscript>
 <!----------- Miscellaneous shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
-<<include "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div>>
+<<include "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div>>
 </div>
 <!----------- Ordinary tiddlers ----------->
 <div id="storeArea" style="display:none;">
 <<include "[!is[shadow]]" application/x-tiddler-html-div>>
+</div>
+<!----------- Library modules ----------->
+<div id="libraryModules" style="display:none;">
+<<include "[is[shadow]type[application/javascript]library[yes]]" application/x-tiddler-library>>
 </div>
 <!----------- Boot kernel prologue ----------->
 <div id="bootKernelPrefix" style="display:none;">

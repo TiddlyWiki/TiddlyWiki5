@@ -68,6 +68,23 @@ exports["application/x-tiddler-module"] = function(tiddler) {
 		).render("text/html");
 };
 
+exports["application/x-tiddler-library"] = function(tiddler) {
+	var attributes = {
+			type: "text/javascript"
+		}, // The script type is set to text/javascript for compatibility with old browsers
+		text = tiddler.fields.text;
+	for(var f in tiddler.fields) {
+		if(f !== "text") {
+			attributes["data-tiddler-" + f] = tiddler.getFieldString(f);
+		}
+	}
+	return $tw.Tree.Element(
+			"script",
+			attributes,
+			[$tw.Tree.Raw(text)]
+		).render("text/html");
+};
+
 exports["application/x-tiddler-html-div"] = function(tiddler) {
 	var result = [],
 		fields = [],
