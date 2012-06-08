@@ -59,21 +59,37 @@ $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
 $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
 
-// File extensions
-$tw.config.fileExtensions = {
-	".tid": {type: "application/x-tiddler", encoding: "utf8"},
-	".tiddler": {type: "application/x-tiddler-html-div", encoding: "utf8"},
-	".recipe": {type: "application/x-tiddlywiki-recipe", encoding: "utf8"},
-	".txt": {type: "text/plain", encoding: "utf8"},
-	".css": {type: "text/css", encoding: "utf8"},
-	".html": {type: "text/html", encoding: "utf8"},
-	".js": {type: "application/javascript", encoding: "utf8"},
-	".json": {type: "application/json", encoding: "utf8"},
-	".jpg": {type: "image/jpeg", encoding: "base64"},
-	".jpeg": {type: "image/jpeg", encoding: "base64"},
-	".png": {type: "image/png", encoding: "base64"},
-	".gif": {type: "image/gif", encoding: "base64"},
-	".svg": {type: "image/svg+xml", encoding: "utf8"}
+// File extension mappings
+$tw.config.fileExtensionInfo = {
+	".tid": {type: "application/x-tiddler"},
+	".tiddler": {type: "application/x-tiddler-html-div"},
+	".recipe": {type: "application/x-tiddlywiki-recipe"},
+	".txt": {type: "text/plain"},
+	".css": {type: "text/css"},
+	".html": {type: "text/html"},
+	".js": {type: "application/javascript"},
+	".json": {type: "application/json"},
+	".jpg": {type: "image/jpeg"},
+	".jpeg": {type: "image/jpeg"},
+	".png": {type: "image/png"},
+	".gif": {type: "image/gif"},
+	".svg": {type: "image/svg+xml"}
+};
+
+// Content type mappings
+$tw.config.contentTypeInfo = {
+	"application/x-tiddler": {encoding: "utf8"},
+	"application/x-tiddler-html-div": {encoding: "utf8"},
+	"application/x-tiddlywiki-recipe": {encoding: "utf8"},
+	"text/plain": {encoding: "utf8"},
+	"text/css": {encoding: "utf8"},
+	"text/html": {encoding: "utf8"},
+	"application/javascript": {encoding: "utf8"},
+	"application/json": {encoding: "utf8"},
+	"image/jpeg": {encoding: "base64"},
+	"image/png": {encoding: "base64"},
+	"image/gif": {encoding: "base64"},
+	"image/svg+xml": {encoding: "utf8"}
 };
 
 /////////////////////////// Utility functions
@@ -359,9 +375,9 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	srcFields = srcFields || {};
 	var deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type],
 		fields = {};
-	if(!deserializer && $tw.config.fileExtensions[type]) {
+	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
-		type = $tw.config.fileExtensions[type].type;
+		type = $tw.config.fileExtensionInfo[type].type;
 		deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type];
 	}
 	if(!deserializer) {
@@ -549,8 +565,9 @@ Load the tiddlers contained in a particular file (and optionally the accompanyin
 */
 $tw.loadTiddlersFromFile = function(file,fields,isShadow) {
 	var ext = path.extname(file),
-		extensionInfo = $tw.config.fileExtensions[ext],
-		data = fs.readFileSync(file).toString(extensionInfo ? extensionInfo.encoding : "utf8"),
+		extensionInfo = $tw.config.fileExtensionInfo[ext],
+		typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
+		data = fs.readFileSync(file).toString(typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metafile = file + ".meta";
 	if(ext !== ".json" && tiddlers.length === 1 && path.existsSync(metafile)) {
@@ -577,7 +594,10 @@ $tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow)
 				// If so, process the files it describes
 				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
 				for(var p=0; p<pluginInfo.tiddlers.length; p++) {
-					$tw.loadTiddlersFromFile(path.resolve(filepath,pluginInfo.tiddlers[p].file),pluginInfo.tiddlers[p].fields,isShadow);
+					var tidInfo = pluginInfo.tiddlers[p],
+						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
+						text = fs.readFileSync(path.resolve(filepath,tidInfo.file)).toString(typeInfo ? typeInfo.encoding : "utf8");
+					$tw.wiki.addTiddler(new $tw.Tiddler({text: text},tidInfo.fields),isShadow);
 				}
 			} else {
 				// If not, read all the files in the directory
