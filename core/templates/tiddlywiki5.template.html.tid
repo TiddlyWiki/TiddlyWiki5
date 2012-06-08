@@ -39,7 +39,8 @@ type: text/x-tiddlywiki-html
 </div>
 <!----------- Library modules ----------->
 <div id="libraryModules" style="display:none;">
-<<include "[is[shadow]type[application/javascript]library[yes]]" application/x-tiddler-library>>
+<<include "[[$:/core/lib/jquery.min.js]]" application/x-tiddler-library>>
+<<include "[is[shadow]type[application/javascript]library[yes]] -[[$:/core/lib/jquery.min.js]]" application/x-tiddler-library>>
 </div>
 <!----------- Boot kernel prologue ----------->
 <div id="bootKernelPrefix" style="display:none;">
