@@ -62,6 +62,7 @@ JavaScriptParser.prototype.parse = function(type,code) {
                 element = "span";
                 classes.push("javascript-line-comment");
                 content.push($tw.Tree.Text("//"));
+                text = text.replace(/\r?\n/mg,"");
                 content.push.apply(content,self.wiki.parseText("text/x-tiddlywiki-run",text).tree);
                 content.push($tw.Tree.Text("\n"));
             }
