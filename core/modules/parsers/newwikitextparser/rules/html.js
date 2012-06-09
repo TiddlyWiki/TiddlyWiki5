@@ -50,7 +50,13 @@ exports.parse = function(match,isBlock) {
 		}
 		this.pos = startMatch.index + startMatch[0].length;
 		var reEnd = new RegExp("(</" + startMatch[1] + ">)","mg"),
-			element = $tw.Tree.Element(startMatch[1],attributes,this.parseRun(reEnd));
+			content;
+		if(isBlock) {
+			content = this.parseBlockTerminated(reEnd);
+		} else {
+			content = this.parseRun(reEnd);
+		}
+		var element = $tw.Tree.Element(startMatch[1],attributes,content);
 		reEnd.lastIndex = this.pos;
 		match = reEnd.exec(this.source);
 		if(match && match.index === this.pos) {
