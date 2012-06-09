@@ -57,6 +57,7 @@ exports.executeMacro = function() {
 				var link = $tw.Tree.Macro("link",{
 											srcParams: {to: value},
 											content: [$tw.Tree.Text(value)],
+											isBlock: this.isBlock,
 											wiki: this.wiki
 										});
 				link.execute(parents,this.tiddlerTitle);
