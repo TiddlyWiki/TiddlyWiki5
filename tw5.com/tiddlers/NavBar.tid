@@ -1,0 +1,13 @@
+title: NavBar
+type: text/x-tiddlywiki
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+{{nav{
+* HelloThere
+* [[Introduction]]
+}}}
+    </div>
+  </div>
+</div>
