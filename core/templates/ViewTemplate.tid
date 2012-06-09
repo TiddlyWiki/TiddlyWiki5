@@ -2,7 +2,7 @@ title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
 {{title{
-<div><<view title>></div>
+<div><span><<view title>></span></div>
 }}}
 {{small{
 <div><<view modifier link>> <<view modified date>> <<view tags>> <<button EditTiddler label:"edit" class:"btn btn-mini btn-primary">></div>
