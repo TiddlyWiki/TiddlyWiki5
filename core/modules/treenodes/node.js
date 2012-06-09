@@ -31,13 +31,6 @@ Node.prototype.clone = function() {
 };
 
 /*
-Fire an event at a node which is also broadcast to any child nodes
-*/
-Node.prototype.broadcastEvent = function(event) {
-	return true; // true means that the event wasn't handled by this node
-};
-
-/*
 Execute a node and derive its child nodes
 	parents: array of titles of each transcluded parent tiddler (used for detecting recursion)
 	tiddlerTitle: title of the context tiddler within which this node is being executed

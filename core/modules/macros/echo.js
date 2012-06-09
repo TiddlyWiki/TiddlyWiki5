@@ -20,7 +20,7 @@ exports.info = {
 };
 
 exports.executeMacro = function() {
-	return [$tw.Tree.Text(this.params.text)];
+	return $tw.Tree.Text(this.params.text);
 };
 
 

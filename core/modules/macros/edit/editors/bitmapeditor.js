@@ -16,18 +16,18 @@ function BitmapEditor(macroNode) {
 	this.macroNode = macroNode;
 }
 
-BitmapEditor.prototype.getChildren = function() {
-	return [$tw.Tree.Element("canvas",{
+BitmapEditor.prototype.getChild = function() {
+	return $tw.Tree.Element("canvas",{
 		"class": ["tw-edit-field"]
-	},[])];
+	},[]);
 };
 
 BitmapEditor.prototype.postRenderInDom = function() {
 	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle),
-		canvas = this.macroNode.children[0].domNode,
+		canvas = this.macroNode.child.domNode,
 		currImage = new Image();
-	// Set the macro node itself to be position: relative
-	this.macroNode.domNode.style.position = "relative";
+/////////////////////	// Set the macro node itself to be position: relative
+/////////////////////	this.macroNode.domNode.style.position = "relative";
 	// Get the current bitmap into an image object
 	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
 	// Copy it to the on-screen canvas
@@ -45,14 +45,14 @@ BitmapEditor.prototype.postRenderInDom = function() {
 
 BitmapEditor.prototype.addEventHandlers = function() {
 	var self = this;
-	this.macroNode.domNode.addEventListener("touchstart",function(event) {
+	this.macroNode.child.domNode.addEventListener("touchstart",function(event) {
 			self.brushDown = true;
 			self.strokeStart(event.touches[0].clientX,event.touches[0].clientY);
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
 		},false);
-	this.macroNode.domNode.addEventListener("touchmove",function(event) {
+	this.macroNode.child.domNode.addEventListener("touchmove",function(event) {
 			if(self.brushDown) {
 				self.strokeMove(event.touches[0].clientX,event.touches[0].clientY);
 			}
@@ -60,7 +60,7 @@ BitmapEditor.prototype.addEventHandlers = function() {
 			event.stopPropagation();
 			return false;
 		},false);
-	this.macroNode.domNode.addEventListener("touchend",function(event) {
+	this.macroNode.child.domNode.addEventListener("touchend",function(event) {
 			if(self.brushDown) {
 				self.brushDown = false;
 				self.strokeEnd();
@@ -69,14 +69,14 @@ BitmapEditor.prototype.addEventHandlers = function() {
 			event.stopPropagation();
 			return false;
 		},false);
-	this.macroNode.domNode.addEventListener("mousedown",function(event) {
+	this.macroNode.child.domNode.addEventListener("mousedown",function(event) {
 			self.strokeStart(event.clientX,event.clientY);
 			self.brushDown = true;
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
 		},false);
-	this.macroNode.domNode.addEventListener("mousemove",function(event) {
+	this.macroNode.child.domNode.addEventListener("mousemove",function(event) {
 			if(self.brushDown) {
 				self.strokeMove(event.clientX,event.clientY);
 				event.preventDefault();
@@ -84,7 +84,7 @@ BitmapEditor.prototype.addEventHandlers = function() {
 				return false;
 			}
 		},false);
-	this.macroNode.domNode.addEventListener("mouseup",function(event) {
+	this.macroNode.child.domNode.addEventListener("mouseup",function(event) {
 			if(self.brushDown) {
 				self.brushDown = false;
 				self.strokeEnd();
@@ -97,7 +97,7 @@ BitmapEditor.prototype.addEventHandlers = function() {
 };
 
 BitmapEditor.prototype.adjustCoordinates = function(x,y) {
-	var canvas = this.macroNode.children[0].domNode,
+	var canvas = this.macroNode.child.domNode,
 		canvasRect = canvas.getBoundingClientRect(),
 		scale = canvas.width/canvasRect.width;
 	return {x: (x - canvasRect.left) * scale, y: (y - canvasRect.top) * scale};
@@ -109,7 +109,7 @@ BitmapEditor.prototype.strokeStart = function(x,y) {
 };
 
 BitmapEditor.prototype.strokeMove = function(x,y) {
-	var canvas = this.macroNode.children[0].domNode,
+	var canvas = this.macroNode.child.domNode,
 		ctx = canvas.getContext("2d"),
 		t;
 	// Add the new position to the end of the stroke
@@ -134,7 +134,7 @@ BitmapEditor.prototype.strokeMove = function(x,y) {
 
 BitmapEditor.prototype.strokeEnd = function() {
 	// Copy the bitmap to the off-screen canvas
-	var canvas = this.macroNode.children[0].domNode,
+	var canvas = this.macroNode.child.domNode,
 		ctx = this.currCanvas.getContext("2d");
 	ctx.drawImage(canvas,0,0);
 	// Save the image into the tiddler
@@ -145,7 +145,7 @@ BitmapEditor.prototype.saveChanges = function() {
 	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle);
 	if(tiddler) {
 		// data URIs look like "data:<type>;base64,<text>"
-		var dataURL = this.macroNode.children[0].domNode.toDataURL(tiddler.fields.type,1.0),
+		var dataURL = this.macroNode.child.domNode.toDataURL(tiddler.fields.type,1.0),
 			posColon = dataURL.indexOf(":"),
 			posSemiColon = dataURL.indexOf(";"),
 			posComma = dataURL.indexOf(","),

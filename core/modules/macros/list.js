@@ -52,7 +52,8 @@ exports.executeMacro = function() {
 		template = this.params.template ? this.wiki.getTiddler(this.params.template) : null,
 		children = [],
 		t,
-		parents = this.parents;
+		parents = this.parents,
+		attributes = {};
 	if(template) {
 		parents = parents.slice(0);
 		parents.push(template.title);
@@ -62,8 +63,11 @@ exports.executeMacro = function() {
 	var handler = handlers[this.params.type];
 	handler = handler || handlers.all;
 	var tiddlers = handler(this.wiki);
+	if(this.classes) {
+		$tw.utils.pushTop(attributes["class"],this.classes);
+	}
 	if(tiddlers.length === 0) {
-		return [$tw.Tree.Text(this.params.emptyMessage || "")];
+		return $tw.Tree.Text(this.params.emptyMessage || "");
 	} else {
 		var templateTree = this.wiki.parseText(templateType,templateText).tree;
 		for(t=0; t<tiddlers.length; t++) {
@@ -75,7 +79,7 @@ exports.executeMacro = function() {
 			listNode.execute(parents,tiddlers[t]);
 			children.push(listNode);
 		}
-		return [$tw.Tree.Element("ul",null,children)];
+		return $tw.Tree.Element("ul",attributes,children);
 	}
 };
 

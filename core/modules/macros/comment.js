@@ -18,7 +18,7 @@ exports.info = {
 };
 
 exports.executeMacro = function() {
-	return [];
+	return null;
 };
 
 

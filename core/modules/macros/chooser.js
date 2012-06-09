@@ -149,7 +149,7 @@ exports.handleEvent = function(event) {
 
 exports.executeMacro = function() {
 	this.chooserDisplayed = false;
-	return [];
+	return $tw.Tree.Element("div",{},[]);
 };
 
 })();

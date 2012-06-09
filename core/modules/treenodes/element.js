@@ -133,17 +133,6 @@ Element.prototype.refreshInDom = function(changes) {
 	}
 };
 
-Element.prototype.broadcastEvent = function(event) {
-	if(this.children) {
-		for(var t=0; t<this.children.length; t++) {
-			if(!this.children[t].broadcastEvent(event)) {
-				return false;
-			}
-		}
-	}
-	return true;
-};
-
 Element.prototype.addClass = function(className) {
 	if(typeof this.attributes["class"] === "string") {
 		this.attributes["class"] = this.attributes["class"].split(" ");

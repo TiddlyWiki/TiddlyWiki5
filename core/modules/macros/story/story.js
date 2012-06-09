@@ -158,7 +158,11 @@ exports.executeMacro = function() {
 		m.execute(this.parents,this.tiddlerTitle);
 		this.storyNode.children.push($tw.Tree.Element("div",{"class": "tw-story-element"},[m]));
 	}
-	return [this.contentNode,this.storyNode];
+	var attributes = {"class": []};
+	if(this.classes) {
+		$tw.utils.pushTop(attributes["class"],this.classes);
+	}
+	return $tw.Tree.Element("div",attributes,[this.contentNode,this.storyNode]);
 };
 
 exports.postRenderInDom = function() {
@@ -238,9 +242,8 @@ exports.refreshInDom = function(changes) {
 			this.storyNode.children.splice(story.tiddlers.length,this.storyNode.children.length-story.tiddlers.length);
 		}
 	} else {
-		// If our dependencies didn't change, just refresh the children
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].refreshInDom(changes);
+		if(this.child) {
+			this.child.refreshInDom(changes);
 		}
 	}
 	// Clear the details of the last navigation

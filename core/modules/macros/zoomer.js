@@ -100,7 +100,7 @@ exports.handleEvent = function(event) {
 
 exports.executeMacro = function() {
 	this.inZoomer = false;
-	return [];
+	return $tw.Tree.Element("div",{},[]);
 };
 
 })();

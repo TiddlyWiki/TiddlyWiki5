@@ -52,7 +52,7 @@ exports.executeMacro = function() {
 	switch(this.params.format) {
 		case "link":
 			if(value === undefined) {
-				return [];
+				return $tw.Tree.Element("span",{},[]);
 			} else {
 				var link = $tw.Tree.Macro("link",{
 											srcParams: {to: value},
@@ -60,7 +60,7 @@ exports.executeMacro = function() {
 											wiki: this.wiki
 										});
 				link.execute(parents,this.tiddlerTitle);
-				return [link];
+				return $tw.Tree.Element("span",{},[link]);
 			}
 			break;
 		case "wikified":
@@ -81,13 +81,13 @@ exports.executeMacro = function() {
 			for(t=0; t<childrenClone.length; t++) {
 				childrenClone[t].execute(parents,this.tiddlerTitle);
 			}
-			return childrenClone;
+			return $tw.Tree.Element(this.isBlock ? "div" : "span",{},childrenClone);
 		case "date":
 			var template = this.params.template || "DD MMM YYYY";
 			if(value === undefined) {
-				return [];
+				return $tw.Tree.Element("span",{},[]);
 			} else {
-				return [$tw.Tree.Text($tw.utils.formatDateString(value,template))];
+				return $tw.Tree.Text($tw.utils.formatDateString(value,template));
 			}
 			break;
 		default: // "text"
@@ -96,12 +96,12 @@ exports.executeMacro = function() {
 				value = tiddler.getFieldString(field);
 			}
 			if(value === undefined || value === null) {
-				return [];
+				return $tw.Tree.Element("span",{},[]);
 			} else {
-				return [$tw.Tree.Text(value)];
+				return $tw.Tree.Text(value);
 			}
 	}
-	return [];
+	return $tw.Tree.Element("span",{},[]);
 };
 
 })();

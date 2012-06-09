@@ -19,7 +19,7 @@ exports.info = {
 };
 
 exports.executeMacro = function() {
-	return [$tw.Tree.Text($tw.utils.getVersionString())];
+	return $tw.Tree.Text($tw.utils.getVersionString());
 };
 
 })();

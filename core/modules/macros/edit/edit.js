@@ -35,11 +35,9 @@ exports.executeMacro = function() {
 	}
 	this.editor = new Editor(this);
 	// Call the editor to generate the child nodes
-	var children = this.editor.getChildren();
-	for(var t=0; t<children.length; t++) {
-		children[t].execute(this.parents,this.tiddlerTitle);
-	}
-	return children;
+	var child = this.editor.getChild();
+	child.execute(this.parents,this.tiddlerTitle);
+	return child;
 };
 
 exports.addEventHandlers = function() {
@@ -60,22 +58,19 @@ exports.refreshInDom = function(changes) {
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Only refresh if the editor lets us
 		if(this.editor.isRefreshable()) {
-			// Remove the previous children
-			while(this.domNode.hasChildNodes()) {
-				this.domNode.removeChild(this.domNode.firstChild);
-			}
-			// Execute the new children
+			// Remove the previous child
+			var parent = this.child.domNode.parentNode,
+				nextSibling = this.child.domNode.nextSibling;
+			parent.removeChild(this.child.domNode);
+			// Execute the macro
 			this.execute(this.parents,this.tiddlerTitle);
 			// Render to the DOM
-			for(t=0; t<this.children.length; t++) {
-				this.children[t].renderInDom(this.domNode);
-			}
+			this.child.renderInDom(parent,nextSibling);
+			this.addEventHandlers();
 		}
 	} else {
 		// Refresh any children
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].refreshInDom(changes);
-		}
+		this.child.refreshInDom(changes);
 	}
 };
 

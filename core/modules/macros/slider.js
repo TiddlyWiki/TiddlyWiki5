@@ -89,7 +89,7 @@ exports.getSliderChildren = function() {
 
 exports.handleEvent = function(event) {
 	if(event.type === "click") {
-		if(event.target === this.domNode.firstChild.firstChild) {
+		if(event.target === this.child.domNode.firstChild) {
 			this.isOpen = !this.isOpen;
 			if(!this.saveOpenState()) {
 				this.refreshInDom({});
@@ -115,6 +115,9 @@ exports.executeMacro = function() {
 	if(this.hasParameter("class")) {
 		attributes["class"].push(this.params["class"]);
 	}
+	if(this.classes) {
+		$tw.utils.pushTop(attributes["class"],this.classes);
+	}
 	if(this.hasParameter("state")) {
 		attributes["data-tw-slider-type"] = this.params.state;
 	}
@@ -122,7 +125,7 @@ exports.executeMacro = function() {
 		attributes.alt = this.params.tooltip;
 		attributes.title = this.params.tooltip;
 	}
-	var children = $tw.Tree.Element("span",
+	var child = $tw.Tree.Element("span",
 		attributes,
 		[
 			$tw.Tree.Element("a",
@@ -141,8 +144,8 @@ exports.executeMacro = function() {
 			)
 		]
 	);
-	children.execute(this.parents,this.tiddlerTitle);
-	return [children];
+	child.execute(this.parents,this.tiddlerTitle);
+	return child;
 };
 
 exports.refreshInDom = function(changes) {
@@ -152,22 +155,20 @@ exports.refreshInDom = function(changes) {
 		this.isOpen = this.getOpenState();
 	}
 	// Render the children if the slider is open and we don't have any children yet
-	if(this.isOpen && this.children[0].children[1].children.length === 0) {
+	if(this.isOpen && this.child.children[1].children.length === 0) {
 		// Remove the existing dom node for the body
-		this.children[0].domNode.removeChild(this.children[0].children[1].domNode);
+		this.child.domNode.removeChild(this.child.children[1].domNode);
 		// Get the slider children and execute it
-		this.children[0].children[1].children = this.getSliderChildren();
-		this.children[0].children[1].execute(this.parents,this.tiddlerTitle);
-		this.children[0].children[1].renderInDom(this.children[0].domNode,null);
+		this.child.children[1].children = this.getSliderChildren();
+		this.child.children[1].execute(this.parents,this.tiddlerTitle);
+		this.child.children[1].renderInDom(this.child.domNode,null);
 		needChildrenRefresh = false; // Don't refresh the children if we've just created them
 	}
 	// Set the visibility of the slider children
-	this.children[0].children[1].domNode.style.display = this.isOpen ? "block" : "none";
+	this.child.children[1].domNode.style.display = this.isOpen ? "block" : "none";
 	// Refresh any children
 	if(needChildrenRefresh) {
-		for(var t=0; t<this.children.length; t++) {
-			this.children[t].refreshInDom(changes);
-		}
+		this.child.refreshInDom(changes);
 	}
 };
 

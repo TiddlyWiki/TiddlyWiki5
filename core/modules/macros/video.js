@@ -29,29 +29,29 @@ exports.executeMacro = function() {
 		videoHeight = this.params.height || 360;
 	switch(videoType) {
 		case "vimeo":
-			return [$tw.Tree.Element("iframe",{
+			return $tw.Tree.Element("iframe",{
 				src: "http://player.vimeo.com/video/" + src + "?autoplay=0",
 				width: videoWidth,
 				height: videoHeight,
 				frameborder: 0
-			})];
+			});
 		case "youtube":
-			return [$tw.Tree.Element("iframe",{
+			return $tw.Tree.Element("iframe",{
 				type: "text/html",
 				src: "http://www.youtube.com/embed/" + src,
 				width: videoWidth,
 				height: videoHeight,
 				frameborder: 0
-			})];
+			});
 		case "archiveorg":
-			return [$tw.Tree.Element("iframe",{
+			return $tw.Tree.Element("iframe",{
 				src: "http://www.archive.org/embed/" + src,
 				width: videoWidth,
 				height: videoHeight,
 				frameborder: 0
-			})];
+			});
 		default:
-			return [];
+			return null;
 	}
 };
 

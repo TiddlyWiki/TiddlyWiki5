@@ -72,17 +72,18 @@ exports.executeMacro = function() {
 			linkInfo.attributes["class"].push("tw-tiddlylink-resolves");
 		}
 	}
+	if(this.classes) {
+		$tw.utils.pushTop(linkInfo.attributes["class"],this.classes);
+	}
 	// Create the link
-	var children;
+	var child;
 	if(linkInfo.suppressLink) {
-		children = this.content;
+		child = $tw.Tree.Element("span",{},this.content);
 	} else { 
-		children = [$tw.Tree.Element("a",linkInfo.attributes,this.content)];
+		child = $tw.Tree.Element("a",linkInfo.attributes,this.content);
 	}
-	for(var t=0; t<children.length; t++) {
-		children[t].execute(this.parents,this.tiddlerTitle);
-	}
-	return children;
+	child.execute(this.parents,this.tiddlerTitle);
+	return child;
 };
 
 })();

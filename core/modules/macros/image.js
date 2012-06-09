@@ -24,24 +24,21 @@ exports.info = {
 exports.executeMacro = function() {
 	if(this.wiki.tiddlerExists(this.params.src)) {
 		var imageTree = this.wiki.parseTiddler(this.params.src).tree,
-			cloneImage = [];
-		for(var t=0; t<imageTree.length; t++) {
-			cloneImage.push(imageTree[t].clone());
-		}
+			cloneImage = imageTree[0].clone();
 		if(this.params.text) {
-			return [$tw.Tree.Element("div",{
+			return $tw.Tree.Element("div",{
 					alt: this.params.text,
 					title: this.params.text
-				},cloneImage)];
+				},[cloneImage]);
 		} else {
 			return cloneImage;	
 		}
 	} else {
-		return [$tw.Tree.Element("img",{
+		return $tw.Tree.Element("img",{
 			src: this.params.src,
 			alt: this.params.text,
 			title: this.params.text
-		})];
+		});
 	}
 };
 

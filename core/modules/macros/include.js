@@ -42,11 +42,11 @@ exports.executeMacro = function() {
 				result.push(this.wiki.serializeTiddler(titles[t],as));
 			}
 		}
-		return [$tw.Tree.Element("pre",{},[
+		return $tw.Tree.Element("pre",{},[
 				$tw.Tree.Text(result.join("\n"))
-			])];
+			]);
 	}
-	return [];
+	return null;
 };
 
 

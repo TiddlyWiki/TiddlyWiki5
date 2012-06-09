@@ -47,7 +47,10 @@ exports.executeMacro = function() {
 	} else {
 		content.push($tw.Tree.Text("Download \"" + this.downloadFilename + "\""));
 	}
-	return [$tw.Tree.Element("button",attributes,content)];
+	if(this.classes) {
+		attributes["class"] = this.classes.slice(0);
+	}
+	return $tw.Tree.Element("button",attributes,content);
 };
 
 })();

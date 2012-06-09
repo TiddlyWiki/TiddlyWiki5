@@ -166,60 +166,29 @@ Macro.prototype.execute = function(parents,tiddlerTitle) {
 	// Save the context info for use when we're refreshing it
 	this.tiddlerTitle = tiddlerTitle;
 	this.parents = parents;
-	// Execute the macro to generate its children, and recursively execute them
-	this.children = this.executeMacro.call(this);
+	// Execute the macro to generate its node and children, and recursively execute them
+	this.child = this.executeMacro.call(this);
 };
 
 Macro.prototype.render = function(type) {
-	var output = [];
-	for(var t=0; t<this.children.length; t++) {
-		output.push(this.children[t].render(type));
-	}
-	return output.join("");
+	return this.child ? this.child.render(type) : "";
 };
 
 Macro.prototype.renderInDom = function(parentDomNode,insertBefore) {
-	// Create the wrapper node for the macro
-	var domNode = document.createElement(this.isBlock ? "div" : "span");
-	this.domNode = domNode;
-	if(insertBefore) {
-		parentDomNode.insertBefore(domNode,insertBefore);	
-	} else {
-		parentDomNode.appendChild(domNode);
+	if(this.child) {
+		this.child.renderInDom(parentDomNode,insertBefore);
+		this.addEventHandlers();
+		this.postRenderInDom();
 	}
-	// Add classes and some debugging information to it
-	if(this.classes) {
-		domNode.setAttribute("class",this.classes.join(" "));
-	}
-	domNode.setAttribute("data-tw-macro",this.macroName);
-	// Ask the macro to add event handlers to the node
-	this.addEventHandlers();
-	// Render the content of the macro
-	for(var t=0; t<this.children.length; t++) {
-		this.children[t].renderInDom(domNode);
-	}
-	this.postRenderInDom();
 };
 
 Macro.prototype.addEventHandlers = function() {
-	if(this.info.events) {
+	if(this.info.events && this.child) {
 		for(var t=0; t<this.info.events.length; t++) {
 			// Register this macro node to handle the event via the handleEvent() method
-			this.domNode.addEventListener(this.info.events[t],this,false);
+			this.child.domNode.addEventListener(this.info.events[t],this,false);
 		}
 	}
-};
-
-Macro.prototype.broadcastEvent = function(event) {
-	if(!this.handleEvent(event)) {
-		return false;
-	}
-	for(var t=0; t<this.children.length; t++) {
-		if(!this.children[t].broadcastEvent(event)) {
-			return false;
-		}
-	}
-	return true;
 };
 
 Macro.prototype.postRenderInDom = function() {
@@ -234,9 +203,9 @@ Macro.prototype.refresh = function(changes) {
 		// Re-execute the macro if so
 		this.execute(this.parents,this.tiddlerTitle);
 	} else {
-		// Refresh any children
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].refresh(changes);
+		// Refresh the child node
+		if(this.child) {
+			this.child.refresh(changes);
 		}
 	}
 };
@@ -247,17 +216,15 @@ Macro.prototype.refreshInDom = function(changes) {
 	// Check if any of the dependencies of this macro node have changed
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Manually reexecute and rerender this macro
-		while(this.domNode.hasChildNodes()) {
-			this.domNode.removeChild(this.domNode.firstChild);
-		}
+		var parent = this.child.domNode.parentNode,
+			nextSibling = this.child.domNode.nextSibling;
+		parent.removeChild(this.child.domNode);
 		this.execute(this.parents,this.tiddlerTitle);
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].renderInDom(this.domNode);
-		}
+		this.child.renderInDom(parent,nextSibling);
+		this.addEventHandlers();
 	} else {
-		// Refresh any children
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].refreshInDom(changes);
+		if(this.child) {
+			this.child.refreshInDom(changes);
 		}
 	}
 };

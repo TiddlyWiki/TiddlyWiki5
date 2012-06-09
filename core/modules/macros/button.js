@@ -40,7 +40,10 @@ exports.executeMacro = function() {
 	if(this.hasParameter("class")) {
 		attributes["class"] = this.params["class"].split(" ");
 	}
-	return [$tw.Tree.Element("button",attributes,[$tw.Tree.Text(this.params.label)])];
+	if(this.classes) {
+		$tw.utils.pushTop(attributes["class"],this.classes);
+	}
+	return $tw.Tree.Element("button",attributes,[$tw.Tree.Text(this.params.label)]);
 };
 
 })();

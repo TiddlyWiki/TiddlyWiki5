@@ -124,7 +124,7 @@ exports.executeMacro = function() {
 		attributes["class"].push("tw-tiddler-missing");
 	}
 	// Return the children
-	return [$tw.Tree.Element("div",attributes,childrenClone)];
+	return $tw.Tree.Element("div",attributes,childrenClone);
 };
 
 exports.refreshInDom = function(changes) {
@@ -135,23 +135,18 @@ exports.refreshInDom = function(changes) {
 		renderTitle = this.params.template;
 	}
 	if(renderTitle) {
-		$tw.utils.toggleClass(this.children[0].domNode,"tw-tiddler-missing",!this.wiki.tiddlerExists(renderTitle));
+		$tw.utils.toggleClass(this.child.domNode,"tw-tiddler-missing",!this.wiki.tiddlerExists(renderTitle));
 	}
 	// Rerender the tiddler if it is impacted by the changes
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Manually reexecute and rerender this macro
-		while(this.domNode.hasChildNodes()) {
-			this.domNode.removeChild(this.domNode.firstChild);
-		}
+		var parent = this.child.domNode.parentNode,
+			nextSibling = this.child.domNode.nextSibling;
+		parent.removeChild(this.child.domNode);
 		this.execute(this.parents,this.tiddlerTitle);
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].renderInDom(this.domNode);
-		}
+		this.child.renderInDom(parent,nextSibling);
 	} else {
-		// Refresh any children
-		for(t=0; t<this.children.length; t++) {
-			this.children[t].refreshInDom(changes);
-		}
+		this.child.refreshInDom(changes);
 	}
 };
 

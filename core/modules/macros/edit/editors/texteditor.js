@@ -16,7 +16,7 @@ function TextEditor(macroNode) {
 	this.macroNode = macroNode;
 }
 
-TextEditor.prototype.getChildren = function() {
+TextEditor.prototype.getChild = function() {
 	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle),
 		field = this.macroNode.hasParameter("field") ? this.macroNode.params.field : "title",
 		value;
@@ -48,12 +48,12 @@ TextEditor.prototype.getChildren = function() {
 		attributes.type = "text";
 		attributes.value = value;
 	}
-	return [$tw.Tree.Element(tagName,attributes,content)];
+	return $tw.Tree.Element("div",{},[$tw.Tree.Element(tagName,attributes,content)]);
 };
 
 TextEditor.prototype.addEventHandlers = function() {
-	this.macroNode.domNode.addEventListener("focus",this,false);
-	this.macroNode.domNode.addEventListener("keyup",this,false);
+	this.macroNode.child.domNode.addEventListener("focus",this,false);
+	this.macroNode.child.domNode.addEventListener("keyup",this,false);
 };
 
 TextEditor.prototype.handleEvent = function(event) {
@@ -70,7 +70,7 @@ TextEditor.prototype.handleEvent = function(event) {
 };
 
 TextEditor.prototype.saveChanges = function() {
-	var text = this.macroNode.children[0].domNode.value,
+	var text = this.macroNode.child.children[0].domNode.value,
 		tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle);
 	if(tiddler && text !== tiddler.fields[this.macroNode.params.field]) {
 		var update = {};
@@ -80,9 +80,9 @@ TextEditor.prototype.saveChanges = function() {
 };
 
 TextEditor.prototype.fixHeight = function() {
-	if(this.macroNode.children[0] && this.macroNode.children[0].domNode) {
-		var wrapper = this.macroNode.domNode,
-			textarea = this.macroNode.children[0].domNode;
+	if(this.macroNode.child && this.macroNode.child.domNode) {
+		var wrapper = this.macroNode.child.domNode,
+			textarea = this.macroNode.child.children[0].domNode;
 		// Set the text area height to 1px temporarily, which allows us to read the true scrollHeight
 		var prevWrapperHeight = wrapper.style.height;
 		wrapper.style.height = textarea.style.height + "px";
@@ -99,7 +99,7 @@ TextEditor.prototype.postRenderInDom = function() {
 
 TextEditor.prototype.isRefreshable = function() {
 	// Don't refresh the editor if it contains the caret or selection
-	return document.activeElement !== this.macroNode.children[0].domNode;
+	return document.activeElement !== this.macroNode.child.children[0].domNode;
 };
 
 exports["text/x-tiddlywiki"] = TextEditor;
