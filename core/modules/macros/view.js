@@ -60,7 +60,7 @@ exports.executeMacro = function() {
 											wiki: this.wiki
 										});
 				link.execute(parents,this.tiddlerTitle);
-				return $tw.Tree.Element("span",{},[link]);
+				return link;
 			}
 			break;
 		case "wikified":

@@ -66,6 +66,7 @@ exports.refreshInDom = function(changes) {
 			this.execute(this.parents,this.tiddlerTitle);
 			// Render to the DOM
 			this.child.renderInDom(parent,nextSibling);
+			this.domNode = this.child.domNode;
 			this.addEventHandlers();
 		}
 	} else {

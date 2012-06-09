@@ -45,7 +45,6 @@ exports.info = {
 	}
 };
 
-
 exports.executeMacro = function() {
 	var templateType = "text/x-tiddlywiki",
 		templateText = "<<view title link>>",

@@ -145,6 +145,7 @@ exports.refreshInDom = function(changes) {
 		parent.removeChild(this.child.domNode);
 		this.execute(this.parents,this.tiddlerTitle);
 		this.child.renderInDom(parent,nextSibling);
+		this.domNode = this.child.domNode;
 	} else {
 		this.child.refreshInDom(changes);
 	}

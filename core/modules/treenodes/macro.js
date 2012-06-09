@@ -177,6 +177,7 @@ Macro.prototype.render = function(type) {
 Macro.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	if(this.child) {
 		this.child.renderInDom(parentDomNode,insertBefore);
+		this.domNode = this.child.domNode;
 		this.addEventHandlers();
 		this.postRenderInDom();
 	}
@@ -221,6 +222,7 @@ Macro.prototype.refreshInDom = function(changes) {
 		parent.removeChild(this.child.domNode);
 		this.execute(this.parents,this.tiddlerTitle);
 		this.child.renderInDom(parent,nextSibling);
+		this.domNode = this.child.domNode;
 		this.addEventHandlers();
 	} else {
 		if(this.child) {
