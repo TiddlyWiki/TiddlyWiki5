@@ -1,14 +1,6 @@
 {
 	"tiddlers": [
 		{
-			"file": "bootstrap.js", 
-			"fields": {
-				"title": "$:/core/lib/bootstrap.js",
-				"type": "application/javascript",
-				"library": "yes"
-			}
-		},
-		{
 			"file": "bootstrap.min.css", 
 			"fields": {
 				"title": "$:/core/lib/bootstrap.min.css",
