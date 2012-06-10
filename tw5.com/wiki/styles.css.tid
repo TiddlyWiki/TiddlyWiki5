@@ -17,10 +17,15 @@ body {
 			box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
 }
 
+.tw-story-element .body {
+	margin-top: 12px;
+}
+
 .title {
 	font-weight: bold;
 	font-size: 40px;
 	line-height: 48px;
+	color: #844;
 }
 
 .title > span {
