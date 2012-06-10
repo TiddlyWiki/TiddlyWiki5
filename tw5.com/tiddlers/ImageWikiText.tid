@@ -1,0 +1,45 @@
+title: ImageWikiText
+tags: docs wikitextrule
+
+The WikiText markup for images provides a shortcut for the ImageMacro, with an optional link and tooltip:
+
+{{{
+[img[<tiddlertitle>]]
+[img[<url>]]
+[img[<tooltip>|<tiddlertitle>]]
+[img[<tooltip>|<tiddlertitle>][<link>]]
+}}}
+
+! Examples
+
+Simple usage:
+
+{{{
+[img[Motovun Jack.jpg]]
+[img[Tiddler Fishes.svg]]
+}}}
+
+Appears as:
+
+[img[Motovun Jack.jpg]]
+[img[Tiddler Fishes.svg]]
+
+With a tooltip:
+
+{{{
+[img[tooltip|Motovun Jack.jpg]]
+}}}
+
+Appears as:
+
+[img[tooltip|Motovun Jack.jpg]]
+
+With a tooltip and a link:
+
+{{{
+[img[tooltip|Motovun Jack.jpg][http://google.com/]]
+}}}
+
+Appears as:
+
+[img[tooltip|Motovun Jack.jpg][http://google.com/]]

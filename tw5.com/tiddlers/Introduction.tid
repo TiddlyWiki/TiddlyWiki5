@@ -8,12 +8,12 @@ You can modify this wiki, and then download a copy by clicking this button:
 
 You can download a static copy of the tiddlers that are currently displayed in this wiki by clicking this button: <<download title:"$:/core/static.template.html" filename:"Story.html" label:"Static Wiki">>
 
-{{alert alert-error{
+<div class="alert alert-error">
 Try out the prototype touch features:
 
 * The zooming chooser appears by swiping into the left edge of the screen (or hover the mouse over the extreme left edge of the browser window)
 * The zooming navigator appears by swiping in from the right edge of the screen (not accessible by mouse)
-}}}
+</div>
 
 Learning more about TiddlyWiki5:
 
@@ -24,9 +24,8 @@ Some useful tiddlers for feature testing:
 
 * HelloThere
 * TestingNewWikiText shows off the embryonic new wiki text engine
-* ImageTests showing different ways of embedding images
-* SampleData showing how JSON tiddlers are handled
-* SampleJavaScript and SampleJavaScriptWithError showing how JavaScript code is displayed
+* SampleJsonTiddler showing how JSON tiddlers are handled
+* SampleJavaScriptTiddler and SampleJavaScriptTiddlerWithError showing how JavaScript code is displayed
 * VideoTests showing how different online video formats can be embedded
 * SliderTests showing how sliders work
 * TypedBlockTests showing how embedded typed text blocks work

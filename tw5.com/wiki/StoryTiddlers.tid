@@ -5,6 +5,6 @@ type: application/json
 	"tiddlers": [
 		{"title": "HelloThere", "template": "$:/templates/ViewTemplate"},
 		{"title": "Introduction", "template": "$:/templates/ViewTemplate"},
-		{"title": "NewWikiTextFeatures", "template": "$:/templates/ViewTemplate"}
+		{"title": "Docs", "template": "$:/templates/ViewTemplate"}
 	]
 }
