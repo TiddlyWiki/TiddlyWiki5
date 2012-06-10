@@ -1,8 +1,6 @@
 title: Wiki
 tags: docs concepts
 
-!! ~WikiStore
-
 Groups of uniquely titled tiddlers are contained in WikiStore objects.
 
 The WikiStore also manages the plugin modules used for macros, and operations like serializing, deserializing, parsing and rendering tiddlers.

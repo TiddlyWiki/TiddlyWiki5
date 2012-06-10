@@ -3,16 +3,23 @@ tags: docs
 
 ! Guides
 
+How to get things done with TiddlyWiki:
+
 * [[Getting started with TiddlyWiki in the browser]]
 * [[Getting started with TiddlyWiki under node.js]]
 * [[Getting involved in TiddlyWiki development]]
 
 ! Concepts
 
+The core concepts underlying TiddlyWiki are:
+
 * [[Tiddlers]]
 * [[Wiki]]
 * TiddlyWiki
 * WikiText
+
+The machinery tying those concepts together includes:
+
 * TiddlerFilters
 * TiddlerFields
 * ContentType
@@ -20,6 +27,8 @@ tags: docs
 * TiddlerModules
 
 ! Wiki Text Rules
+
+These are the individual rules that make up WikiText:
 
 * ClassBlockWikiText
 * CodeBlockWikiText
@@ -39,6 +48,8 @@ tags: docs
 * WikiLinkWikiText
 
 ! Macros
+
+Macros give WikiText dynamic functionality:
 
 * ViewMacro
 * EditMacro
@@ -61,6 +72,8 @@ tags: docs
 
 ! Commands
 
+When run under node.js, TiddlyWiki supports a [[command line interface|Getting started with TiddlyWiki under node.js]] with the following built-in commands:
+
 * DumpCommand
 * LoadCommand
 * SaveTiddlerCommand
@@ -69,8 +82,12 @@ tags: docs
 * VersionCommand
 * WikiTestCommand
 
-! Internal Mechanisms
+! Internal Objects and Mechanisms
 
+Internally, TiddlyWiki is built on a number of key objects and mechanisms:
+
+* TiddlerObject
+* WikiObject
 * BootMechanism
 * PluginMechanism
 * ParsingMechanism
@@ -85,34 +102,33 @@ tags: docs
 * CommandMechanism
 * ConfigMechanism
 
-! Data Model
-
-* TiddlerObject
-* WikiObject
-
 ! Plugin Module Types
 
-* CommandPlugins
-* ConfigPlugins
-* EditorPlugins
-* GlobalPlugins
-* LibraryPlugins
-* MacroPlugins
-* ModulePlugins
-* ParserPlugins
-* StartupPlugins
-* StoryViewPlugins
-* TiddlerDeserializerPlugins
-* TiddlerFieldPlugins
-* TiddlerMethodPlugins
-* TiddlerSerializerPlugins
-* TreeNodePlugins
-* TreeUtilsPlugins
-* UtilsPlugins
-* WikiMethodPlugins
-* WikiTextRulePlugins
+TiddlyWiki is built on a [[tiny microkernel|BootMechanism]] with all functionality provided as various types of plugin module:
+
+* CommandModules
+* ConfigModules
+* EditorModules
+* GlobalModules
+* LibraryModules
+* MacroModules
+* ModuleModules
+* ParserModules
+* StartupModules
+* StoryViewModules
+* TiddlerDeserializerModules
+* TiddlerFieldModules
+* TiddlerMethodModules
+* TiddlerSerializerModules
+* TreeNodeModules
+* TreeUtilsModules
+* UtilsModules
+* WikiMethodModules
+* WikiTextRuleModules
 
 ! Tree Nodes
+
+The ParsingMechanism and the RenderingMechanism use a simple tree structure to represent both parsed WikiText and the HTML DOM structure of rendered content.
 
 * TreeNode
 * ElementNode
@@ -123,6 +139,8 @@ tags: docs
 
 ! Other Parsers
 
+TiddlyWiki processes other [[ContentTypes|ContentType]] than WikiText using these parsers:
+
 * OldWikiTextParser
 * JsonParser
 * ImageParser
@@ -132,14 +150,18 @@ tags: docs
 
 ! Deserializers
 
+Deserializers are modules that read tiddlers from different text formats:
+
 * RecipeFiles
 * TiddlerFiles
+* TiddlyWikiFiles
 
 ! Serializers
 
-* TiddlyWikiFiles
+Serializers are modules that convert tiddlers to different text formats:
 
 ! Miscellaneous
 
+* [[History]]
 * [[Acknowledgements]]
 
