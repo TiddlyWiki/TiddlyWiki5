@@ -33,7 +33,7 @@ exports["application/x-tiddlywiki-recipe"] = function(text,fields) {
 		},
 		loadTiddlersFromFile = function(sourcePath,prefix) {
 			var ext = path.extname(sourcePath),
-				extensionInfo = $tw.config.fileExtensions[ext],
+				extensionInfo = $tw.config.fileExtensionInfo[ext],
 				typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
 				data = fs.readFileSync(sourcePath).toString(typeInfo ? typeInfo.encoding : "utf8"),
 				fields = {title: sourcePath},
