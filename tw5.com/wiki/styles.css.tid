@@ -27,6 +27,10 @@ body {
 	font-weight: normal;
 }
 
+.tw-tags-wrapper .label {
+	margin-right: 8px;
+}
+
 .tw-edit-field {
 	border: 1px dotted #888;
 }

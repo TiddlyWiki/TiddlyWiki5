@@ -1,0 +1,5 @@
+title: $:/templates/TagTemplate
+
+{{label{
+<<color background:yes default:#888><<<view title>>>>
+}}}

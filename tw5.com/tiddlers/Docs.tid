@@ -55,6 +55,8 @@ tags: docs
 * SliderMacro
 * ZoomerMacro
 * ChooserMacro
+* TagsMacro
+* ColorMacro
 
 ! Commands
 

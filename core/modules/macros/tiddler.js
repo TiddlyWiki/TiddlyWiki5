@@ -124,7 +124,7 @@ exports.executeMacro = function() {
 		attributes["class"].push("tw-tiddler-missing");
 	}
 	// Return the children
-	return $tw.Tree.Element("div",attributes,childrenClone);
+	return $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,childrenClone);
 };
 
 exports.refreshInDom = function(changes) {

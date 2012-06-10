@@ -1,5 +1,5 @@
 title: TiddlerFilters
-tags: feature
+tags: docs concepts
 
 TiddlyWiki has a special syntax for expressing filters. They can be used to select tiddlers for an operation, or to filter a set of tiddlers to add or remove members.
 
