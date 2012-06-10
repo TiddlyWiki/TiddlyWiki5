@@ -37,7 +37,7 @@ exports.parse = function(match,isBlock) {
 		if(match[5]) {
 			// If the macro has content then parse it as a block or run
 			if(isBlock) {
-				content = this.parseBlockTerminated(/(^>>$)/mg);
+				content = this.parseBlocks(">>");
 			} else {
 				content = this.parseRun(/(>>)/mg);
 			}

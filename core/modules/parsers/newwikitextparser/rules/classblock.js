@@ -33,13 +33,13 @@ exports.regExpString = "\\{\\{(?:[^\\{\\r\\n]+)\\{$\\r?\\n";
 exports.parse = function(match,isBlock) {
 	var tree = [],
 		reStart = /\{\{([^\{\r\n]+){\r?\n/mg,
-		reEnd = /(\}\}\}$(?:\r?\n)?)/mg,
+		reEndString = "(\\}\\}\\}$(?:\\r?\\n)?)",
 		endMatch;
 	reStart.lastIndex = this.pos;
 	match = reStart.exec(this.source);
 	if(match) {
 		this.pos = match.index + match[0].length;
-		tree = this.parseBlockTerminated(reEnd,match[1]);
+		tree = this.parseBlocks(reEndString,{addClass: match[1]});
 	}
 	return tree;
 };

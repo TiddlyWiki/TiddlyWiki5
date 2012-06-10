@@ -16,7 +16,6 @@ exports.info = {
 	name: "button",
 	params: {
 		name: {byName: "default", type: "text"},
-		label: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
 	},
 	events: ["click"]
@@ -43,7 +42,10 @@ exports.executeMacro = function() {
 	if(this.classes) {
 		$tw.utils.pushTop(attributes["class"],this.classes);
 	}
-	return $tw.Tree.Element("button",attributes,[$tw.Tree.Text(this.params.label)]);
+	for(var t=0; t<this.content.length; t++) {
+		this.content[t].execute(this.parents,this.tiddlerTitle);
+	}
+	return $tw.Tree.Element("button",attributes,this.content);
 };
 
 })();

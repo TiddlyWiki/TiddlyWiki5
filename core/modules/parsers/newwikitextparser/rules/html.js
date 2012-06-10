@@ -49,10 +49,11 @@ exports.parse = function(match,isBlock) {
 			attrMatch = reAttr.exec(startMatch[2]);
 		}
 		this.pos = startMatch.index + startMatch[0].length;
-		var reEnd = new RegExp("(</" + startMatch[1] + ">)","mg"),
+		var reEndString = "(</" + startMatch[1] + ">)",
+			reEnd = new RegExp(reEndString,"mg"),
 			content;
 		if(isBlock) {
-			content = this.parseBlockTerminated(reEnd);
+			content = this.parseBlocks(reEndString);
 		} else {
 			content = this.parseRun(reEnd);
 		}

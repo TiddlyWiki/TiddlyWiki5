@@ -1,7 +1,7 @@
 title: $:/templates/EditTemplate
 modifier: JeremyRuston
 
-<<view title>> <<button SaveTiddler label:"done" class:"btn btn-mini btn-success">>
+<<view title>> <<button SaveTiddler class:"btn btn-mini btn-success"><Done>>
 {{title{
 <<edit draft.title>>
 }}}

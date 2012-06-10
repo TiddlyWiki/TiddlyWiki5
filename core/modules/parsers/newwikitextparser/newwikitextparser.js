@@ -23,13 +23,11 @@ var WikiTextRenderer = function(text,options) {
 	this.parser = options.parser;
 	this.tree = [];
 	this.dependencies = new $tw.Dependencies();
+	// Parse the text into runs or blocks
 	if(options.isRun) {
-		this.tree.push.apply(this.tree,this.parseRun(null));
+		this.tree.push.apply(this.tree,this.parseRun());
 	} else {
-		// Parse the text into blocks
-		while(this.pos < this.sourceLength) {
-			this.tree.push.apply(this.tree,this.parseBlock());
-		}
+		this.tree.push.apply(this.tree,this.parseBlocks());
 	}
 };
 
@@ -41,9 +39,14 @@ WikiTextRenderer.prototype = new Renderer();
 WikiTextRenderer.constructor = WikiTextRenderer;
 
 /*
-Parse a block of text at the current position
+Parse a block from the current position
+	terminatorRegExpString: optional regular expression string that identifies the end of plain paragraphs. Must not include capturing parenthesis
+	options: see below
+Options are:
+	leaveTerminator: True if the terminator shouldn't be consumed
 */
-WikiTextRenderer.prototype.parseBlock = function() {
+WikiTextRenderer.prototype.parseBlock = function(terminatorRegExpString,options) {
+	var terminatorRegExp = terminatorRegExpString ? new RegExp("(" + terminatorRegExpString + "|\\r?\\n\\r?\\n)","mg") : /(\r?\n\r?\n)/mg;
 	this.skipWhitespace();
 	if(this.pos >= this.sourceLength) {
 		return [];
@@ -61,17 +64,44 @@ WikiTextRenderer.prototype.parseBlock = function() {
 		return rule ? rule.parse.call(this,match,true) : [];
 	} else {
 		// Treat it as a paragraph if we didn't find a block rule
-		return [$tw.Tree.Element("p",{},this.parseRun())];
+		return [$tw.Tree.Element("p",{},this.parseRun(terminatorRegExp,options))];
 	}
 };
 
 /*
-Parse blocks of text until a terminating regexp is encountered
-	terminatorRegExp: terminating regular expression
+Parse blocks of text until a terminating regexp is encountered or the end of the text
+	terminatorRegExpString: terminating regular expression
+	options: see below
+
+Options are:
 	addClass: optional CSS class to add to each block
 */
-WikiTextRenderer.prototype.parseBlockTerminated = function(terminatorRegExp,className) {
+WikiTextRenderer.prototype.parseBlocks = function(terminatorRegExpString,options) {
+	if(terminatorRegExpString) {
+		return this.parseBlocksTerminated(terminatorRegExpString,options);
+	} else {
+		return this.parseBlocksUnterminated(options);
+	}
+};
+
+/*
+Parse a block from the current position to the end of the text
+*/
+WikiTextRenderer.prototype.parseBlocksUnterminated = function(options) {
 	var tree = [];
+	while(this.pos < this.sourceLength) {
+		tree.push.apply(tree,this.parseBlock());
+	}
+	return tree;
+};
+
+/*
+Parse blocks of text until a terminating regexp is encountered. See parseBlocks() for details
+*/
+WikiTextRenderer.prototype.parseBlocksTerminated = function(terminatorRegExpString,options) {
+	options = options || {};
+	var terminatorRegExp = new RegExp("(" + terminatorRegExpString + ")","mg"),
+		tree = [];
 	// Skip any whitespace
 	this.skipWhitespace();
 	//  Check if we've got the end marker
@@ -79,10 +109,10 @@ WikiTextRenderer.prototype.parseBlockTerminated = function(terminatorRegExp,clas
 	var match = terminatorRegExp.exec(this.source);
 	// Parse the text into blocks
 	while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
-		var blocks = this.parseBlock();
+		var blocks = this.parseBlock(terminatorRegExpString,{leaveTerminator: true});
 		for(var t=0; t<blocks.length; t++) {
-			if(className) {
-				blocks[t].addClass(className);
+			if(options.addClass) {
+				blocks[t].addClass(options.addClass);
 			}
 			tree.push(blocks[t]);
 		}
@@ -117,10 +147,10 @@ Options are:
 Returns an array of tree nodes
 */
 WikiTextRenderer.prototype.parseRun = function(terminatorRegExp,options) {
-	if(terminatorRegExp === null) {
-		return this.parseRunUnterminated(options);
-	} else {
+	if(terminatorRegExp) {
 		return this.parseRunTerminated(terminatorRegExp,options);
+	} else {
+		return this.parseRunUnterminated(options);
 	}
 };
 
@@ -163,7 +193,6 @@ WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp,option
 	options = options || {};
 	var tree = [];
 	// Find the next occurrence of the terminator
-	terminatorRegExp = terminatorRegExp || /(\r?\n\r?\n)/mg;
 	terminatorRegExp.lastIndex = this.pos;
 	var terminatorMatch = terminatorRegExp.exec(this.source);
 	// Find the next occurrence of a runrule
