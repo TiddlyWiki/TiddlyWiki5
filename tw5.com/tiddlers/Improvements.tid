@@ -3,10 +3,10 @@ tags: docs introduction
 
 The following features have been improved in TiddlyWiki5:
 
-* TiddlyWiki can now be run under [[node.js|nodejs.org]] as well as in the browser
+* TiddlyWiki can now be run under [[node.js|http://nodejs.org]] as well as in the browser
 * TiddlyWiki is structured as a 600-line boot kernel, with everything else implemented as plugins
 * Improved WikiText, with much better generation of HTML, including proper `<p>` tags
 * Tiddlers containing images are now supported just like WikiText tiddlers, including integrated editing of bitmap and SVG images
-* Use of Twitter Bootstrap stylesheet (also enabling the use of Boostrap themes such as http://bootswatch.com)
+* Uses standard Twitter Bootstrap CSS (thus enabling the use of Boostrap themes such as http://bootswatch.com)
 * Syntax highlighting for JavaScript and JSON tiddlers
 * TiddlyWiki5 can directly build both itself and previous (2.6.x) versions of TiddlyWiki from their constituent separate files, without needing external tools
