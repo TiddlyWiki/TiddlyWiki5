@@ -1,0 +1,51 @@
+title: ParsingMechanism
+tags: docs mechanism
+
+TiddlyWiki parses the content of tiddlers to build an internal tree representation that is used for several purposes:
+
+* Rendering a tiddler to other formats (e.g. converting wikitext to HTML)
+* Detecting outgoing links from a tiddler, and from them...
+* ...computing incoming links to a tiddler
+* Detecting tiddlers that are orphans with no incoming links
+* Detecting tiddlers that are referred to but missing
+
+The parse tree is built when needed, and then cached by the WikiStore until the tiddler changes.
+
+TiddlyWiki5 uses multiple parsers:
+
+* Wikitext ({{{text/x-tiddlywiki}}}) in `js/WikiTextParser.js`
+* JavaScript ({{{text/javascript}}}) in `js/JavaScriptParser.js`
+* Images ({{{image/png}}} and {{{image/jpg}}}) in `js/ImageParser.js`
+* JSON ({{{application/json}}}) in `js/JSONParser.js`
+Additional parsers are planned:
+* CSS ({{{text/css}}})
+* Recipe ({{{text/x-tiddlywiki-recipe}}})
+
+One global instance of each parser is instantiated in `js/App.js` and registered with the main WikiStore object.
+
+The parsers are all used the same way:
+
+$$$.js
+var parseTree = parser.parse(type,text) // Parses the text and returns a parse tree object
+$$$
+
+The parse tree object exposes the following fields:
+
+$$$.js
+var renderer = parseTree.compile(type); // Compiles the parse tree into a renderer for the specified MIME type
+console.log(parseTree.toString(type)); // Returns a readable string representation of the parse tree (either `text/html` or `text/plain`)
+var dependencies = parseTree.dependencies; // Gets the dependencies of the parse tree (see below)
+$$$
+
+The dependencies are returned as an object like this:
+
+{{{
+{
+	tiddlers: {"tiddlertitle1": true, "tiddlertitle2": false},
+	dependentAll: false
+}
+}}}
+
+The `tiddlers` field is a hashmap of the title of each tiddler that is linked or included in the current one. The value is `true` if the tiddler is a //'fat'// dependency (ie the text is included in some way) or `false` if the tiddler is a //`skinny`// dependency.
+
+The `dependentAll` field is used to indicate that the tiddler contains a macro that scans the entire pool of tiddlers (for example the `<<list>>` macro), and is potentially dependent on any of them. The effect is that the tiddler should be rerendered whenever any other tiddler changes.

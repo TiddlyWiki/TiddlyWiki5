@@ -9,11 +9,11 @@ tags: docs
 
 ! Concepts
 
-* [[Tiddler]]
+* [[Tiddlers]]
 * [[Wiki]]
 * TiddlyWiki
 * WikiText
-* [[Filters]]
+* TiddlerFilters
 * TiddlerFields
 * ShadowTiddlers
 * TiddlerModules

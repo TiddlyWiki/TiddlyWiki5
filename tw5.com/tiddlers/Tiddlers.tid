@@ -1,0 +1,12 @@
+title: Tiddlers
+tags: docs concepts
+
+!! Tiddlers
+
+Tiddlers are an immutable dictionary of name:value pairs called fields.
+
+The only field that is required is the {{{title}}} field, but useful tiddlers also have a {{{text}}} field, and some or all of the standard fields {{{modified}}}, {{{modifier}}}, {{{created}}}, {{{creator}}}, {{{tags}}} and {{{type}}}.
+
+Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are JavaScript `Date` objects. All other fields are strings.
+
+The {{{type}}} field identifies the representation of the tiddler text with a MIME type.
