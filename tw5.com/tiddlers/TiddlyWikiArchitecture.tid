@@ -4,7 +4,7 @@ tags: docs internals
 
 !! Overview
 
-The heart of TiddlyWiki can be seen as an extensible representation transformation engine. Given the text of a tiddler and its associated MIME type, the engine can produce a rendering of the tiddler in a new MIME type. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
+The heart of TiddlyWiki can be seen as an extensible representation transformation engine. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
 The most important transformations are from `text/x-tiddlywiki` wikitext into `text/html` or `text/plain` but the engine is used throughout the system for other transformations, such as converting images for display in HTML, sanitising fragments of JavaScript, and processing CSS.
 

@@ -9,4 +9,4 @@ The only field that is required is the {{{title}}} field, but useful tiddlers al
 
 Hardcoded in the system is the knowledge that the `tags` field is a string array, and that the `modified` and `created` fields are JavaScript `Date` objects. All other fields are strings.
 
-The {{{type}}} field identifies the representation of the tiddler text with a MIME type.
+The {{{type}}} field identifies the representation of the tiddler text with a ContentType.

@@ -1,0 +1,8 @@
+title: VersionCommand
+tags: docs command
+
+Displays the version number of TiddlyWiki.
+
+{{{
+--version
+}}}

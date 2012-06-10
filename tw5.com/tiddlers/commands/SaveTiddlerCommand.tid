@@ -1,0 +1,8 @@
+title: SaveTiddlerCommand
+tags: docs command
+
+Save an individual tiddler as a specified ContentType, defaults to `text/html` 
+
+{{{
+--savetiddler <title> <filename> [<type>]
+}}}

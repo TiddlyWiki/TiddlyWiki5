@@ -20,7 +20,7 @@ modifier: Jeremy
 This is the text of my tiddler.
 }}}
 
-//The MIME type `application/x-tiddler` is used internally for these files//
+//The ContentType `application/x-tiddler` is used internally for these files//
 
 !! TiddlyWiki `<DIV>` .tiddler files
 
@@ -42,16 +42,16 @@ Older `*.tiddler` files more closely matched the store format used by TiddlyWiki
 <div tiddler="AnotherExampleStyleSheet" modifier="JeremyRuston" modified="200508181432" created="200508181432" tags="examples">This is an old-school .tiddler file, without an embedded &lt;pre&gt; tag.\nNote how the body is &quot;HTML encoded&quot; and new lines are escaped to \\n</div>
 }}}
 
-//The MIME type `application/x-tiddler-html-div` is used internally for these files//
+//The ContentType `application/x-tiddler-html-div` is used internally for these files//
 
 !! ~TiddlyWeb-style JSON files
 
 These files are a straightforward array of hashmaps of name:value fields. Currently only these known fields are processed: `title`, `text`, `created`, `creator`, `modified`, `modifier`, `type` and `tags`.
 
-//The MIME type `application/json` is used internally for these files//
+//The ContentType `application/json` is used internally for these files//
 
 !! TiddlyWiki HTML files
 
 TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
 
-//The MIME type `application/x-tiddlywiki` is used internally for these files//
+//The ContentType `application/x-tiddlywiki` is used internally for these files//

@@ -1,0 +1,8 @@
+title: VerboseCommand
+tags: docs command
+
+Triggers verbose output, useful for debugging 
+
+{{{
+--verbose
+}}}

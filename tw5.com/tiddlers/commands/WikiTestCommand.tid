@@ -1,0 +1,10 @@
+title: WikiTestCommand
+tags: docs command
+
+Run wikification tests against the tiddlers in the given directory. Include the `save` flag to save the test result files as the new targets.
+
+{{{
+--wikitest <dir> [save]
+}}}
+
+`--wikitest` looks for `*.tid` files in the specified folder. It then wikifies the tiddlers to both "text/plain" and "text/html" format and checks the results against the content of the `*.html` and `*.txt` files in the same directory.
