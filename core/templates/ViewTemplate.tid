@@ -8,6 +8,6 @@ modifier: JeremyRuston
 <div><<view modifier link>> <<view modified date>></div>
 <<tags template:"$:/templates/TagTemplate">>
 }}}
-{{body{
+<div class="body">
 <<view text wikified>>
-}}}
+</div>
