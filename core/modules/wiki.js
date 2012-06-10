@@ -148,8 +148,8 @@ exports.getTiddlers = function(sortField,excludeTag) {
 		}
 	}
 	tiddlers.sort(function(a,b) {
-		var aa = a.fields[sortField] || 0,
-			bb = b.fields[sortField] || 0;
+		var aa = a.fields[sortField].toLowerCase() || 0,
+			bb = b.fields[sortField].toLowerCase() || 0;
 		if(aa < bb) {
 			return -1;
 		} else {
@@ -177,8 +177,8 @@ Sort an array of tiddler titles by a specified field
 exports.sortTiddlers = function(titles,sortField,isDescending) {
 	var self = this;
 	titles.sort(function(a,b) {
-		var aa = self.getTiddler(a).fields[sortField] || 0,
-			bb = self.getTiddler(b).fields[sortField] || 0;
+		var aa = self.getTiddler(a).fields[sortField].toLowerCase() || 0,
+			bb = self.getTiddler(b).fields[sortField].toLowerCase() || 0;
 		if(aa < bb) {
 			return isDescending ? +1 : -1;
 		} else {
