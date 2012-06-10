@@ -1,7 +1,20 @@
 title: $:/templates/PageTemplate
 
-{{container-fluid{
+<div class="container">
+<div class="row">
+<div class="span12">
 <<story story:"$:/StoryTiddlers" storyview:scroller><
+<div class="navbar navbar-fixed-top">
+<div class="navbar-inner">
+<div class="container">
+{{nav{
+* HelloThere
+* [[Introduction]]
+* [[Docs]]
+}}}
+</div>
+</div>
+</div>
 {{navigation-panel{
 <<chooser>>
 }}}
@@ -9,4 +22,6 @@ title: $:/templates/PageTemplate
 <<zoomer>>
 }}}
 >>
-}}}
+</div>
+</div>
+</div>
