@@ -3,6 +3,17 @@ type: text/css
 
 body {
 	position: relative;
+	background: #eee;
+}
+
+.tw-story-element {
+	margin: 30px 0px 30px 0px;
+	padding: 20px 20px 20px 20px;
+	border: 1px solid #999;
+	background-color: #fff;
+	-webkit-box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+	   -moz-box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+			box-shadow: 1px 1px 6px rgba(0,0,0,0.4);
 }
 
 .title {
