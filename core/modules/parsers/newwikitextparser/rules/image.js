@@ -3,7 +3,7 @@ title: $:/core/modules/parsers/newwikitextparser/rules/image.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for pretty links. For example:
+Wiki text run rule for images. For example:
 
 {{{
 [img[MyPicture]]
