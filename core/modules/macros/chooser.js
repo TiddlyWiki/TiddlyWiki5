@@ -149,7 +149,19 @@ exports.handleEvent = function(event) {
 
 exports.executeMacro = function() {
 	this.chooserDisplayed = false;
-	return $tw.Tree.Element("div",{},[]);
+	var attributes = {
+		style: {
+			"position": "absolute",
+			"left": "0",
+			"top": "0",
+			"min-width": "16px",
+			"height": "100%" // Makes the height the same as the body, since the body is position:relative
+		}
+	};
+	if(this.classes) {
+		attributes["class"] = this.classes.slice(0);
+	}
+	return $tw.Tree.Element("div",attributes,[]);
 };
 
 })();

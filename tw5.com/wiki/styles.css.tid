@@ -159,14 +159,6 @@ a.tw-tiddlylink-missing {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
-.navigation-panel {
-	position: absolute;
-	left: 0;
-	top: 0;
-	min-width: 16px;
-	height: 100%; /* Makes the element the same height as the body, since the body is position: relative */
-}
-
 .navigation-panel ul {
 	position: relative;
 	top: 0;
