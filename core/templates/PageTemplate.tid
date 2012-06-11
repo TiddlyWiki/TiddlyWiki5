@@ -5,9 +5,7 @@ title: $:/templates/PageTemplate
 {{navigation-panel{
 <<chooser>>
 }}}
-{{zoomer-panel{
 <<zoomer>>
-}}}
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
