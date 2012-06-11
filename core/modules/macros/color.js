@@ -17,7 +17,7 @@ Applies the specified colour to its content. By default, the colour value is obt
 exports.info = {
 	name: "color",
 	params: {
-		"default": {byName: "default", type: "text"},
+		"default": {byName: "default", type: "text"}
 	}
 };
 
