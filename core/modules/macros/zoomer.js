@@ -100,7 +100,15 @@ exports.handleEvent = function(event) {
 
 exports.executeMacro = function() {
 	this.inZoomer = false;
-	return $tw.Tree.Element("div",{},[]);
+	return $tw.Tree.Element("div",{
+		style: {
+			"position": "absolute",
+			"right": "0",
+			"top": "0",
+			"min-width": "16px",
+			"height": "100%"
+		}
+	},[]);
 };
 
 })();
