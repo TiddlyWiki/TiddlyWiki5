@@ -4,7 +4,7 @@ type: text/css
 body {
 	position: relative;
 	background: #eee;
-	margin-top: 40px;
+	padding-top: 40px;
 }
 
 .tw-story-element {

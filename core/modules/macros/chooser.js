@@ -148,7 +148,7 @@ exports.executeMacro = function() {
 	this.chooserDisplayed = false;
 	var wrapperAttributes = {
 			style: {
-				"position": "fixed",
+				"position": "absolute",
 				"left": "0",
 				"top": "0",
 				"min-width": "16px",
@@ -162,8 +162,8 @@ exports.executeMacro = function() {
 				"padding": "0px 4px 0px 4px",
 				"top": "0",
 				"min-width": "16px",
-				"z-index": "2000",
 				"background": "#ddd",
+				"z-index": "2000",
 				"border-right": "1px solid #aaa"
 			}
 		};
