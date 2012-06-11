@@ -16,6 +16,7 @@ exports.startup = function() {
 	var modules,n,m,f,commander;
 	// This should be somewhere else
 	if($tw.browser) {
+		$tw.browser.unHyphenateCss = document.body.style["background-color"] === undefined;
 		$tw.browser.prefix = document.body.style.webkitTransform !== undefined ? "webkit" : 
 							document.body.style.MozTransform !== undefined ? "Moz" :
 							document.body.style.OTransform !== undefined ? "O" : null;

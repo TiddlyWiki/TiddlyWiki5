@@ -96,7 +96,7 @@ Element.prototype.renderInDom = function(parentDomNode,insertBefore) {
 					element.className = v.join(" "); 
 				} else if (typeof v === "object") { // ...or objects other than style?
 					for(var p in v) {
-						element.style[p] = v[p];
+						element.style[$tw.utils.unHyphenateCss(p)] = v[p];
 					}
 				} else {
 					element.setAttribute(a,v);
