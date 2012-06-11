@@ -63,7 +63,7 @@ exports.executeMacro = function() {
 	handler = handler || handlers.all;
 	var tiddlers = handler(this.wiki);
 	if(this.classes) {
-		$tw.utils.pushTop(attributes["class"],this.classes);
+		attributes["class"] = this.classes.slice(0);
 	}
 	if(tiddlers.length === 0) {
 		return $tw.Tree.Text(this.params.emptyMessage || "");

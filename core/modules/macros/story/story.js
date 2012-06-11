@@ -158,9 +158,9 @@ exports.executeMacro = function() {
 		m.execute(this.parents,this.tiddlerTitle);
 		this.storyNode.children.push($tw.Tree.Element("div",{"class": "tw-story-element"},[m]));
 	}
-	var attributes = {"class": []};
+	var attributes = {};
 	if(this.classes) {
-		$tw.utils.pushTop(attributes["class"],this.classes);
+		attributes["class"] = this.classes.slice(0);
 	}
 	return $tw.Tree.Element("div",attributes,[this.contentNode,this.storyNode]);
 };
