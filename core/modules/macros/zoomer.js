@@ -101,14 +101,14 @@ exports.handleEvent = function(event) {
 exports.executeMacro = function() {
 	this.inZoomer = false;
 	var attributes = {
-		style: {
-			"position": "absolute",
-			"right": "0",
-			"top": "0",
-			"min-width": "16px",
-			"height": "100%" // Makes the height the same as the body, since the body is position:relative
-		}
-	};
+			style: {
+				"position": "absolute",
+				"right": "0",
+				"top": "0",
+				"min-width": "16px",
+				"height": "100%" // Makes the height the same as the body, since the body is position:relative
+			}
+		};
 	if(this.classes) {
 		attributes["class"] = this.classes.slice(0);
 	}
