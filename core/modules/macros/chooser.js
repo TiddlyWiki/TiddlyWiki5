@@ -22,51 +22,46 @@ exports.info = {
 exports.showChooser = function() {
 	if(!this.chooserDisplayed) {
 		this.chooserDisplayed = true;
-		var nodes = [];
-		this.wiki.forEachTiddler("title",function(title,tiddler) {
-			nodes.push($tw.Tree.Element("li",{
-					"data-link": title
-				},[
-					$tw.Tree.Text(title)
-				]));
-		});
-		var wrapper = $tw.Tree.Element("ul",{},nodes);
-		wrapper.execute(this.parents,this.tiddlerTitle);
-		this.children = [wrapper];
-		this.children[0].renderInDom(this.domNode);
+		this.child.children[0].children = [];
+		for(var t=0; t<this.content.length; t++) {
+			var node = this.content[t].clone();
+			node.execute(this.parents,this.tiddlerTitle);
+			node.renderInDom(this.child.children[0].domNode);
+			this.child.children[0].children.push(node);
+		}
 	}
 };
 
 /*
 Select the appropriate chooser item given a touch/mouse position in screen coordinates
 */
-exports.select = function(y) {
-	if(this.children.length > 0) {
-		var targetIndex = Math.floor(this.children[0].domNode.childNodes.length * (y/window.innerHeight)),
-			target = this.children[0].domNode.childNodes[targetIndex];
-		if(target) {
-			this.deselect();
-			this.selectedNode = target;
-			$tw.utils.addClass(target,"selected");
-		}
-	}
-};
+// exports.select = function(y) {
+// 	if(this.children.length > 0) {
+// 		var targetIndex = Math.floor(this.children[0].domNode.childNodes.length * (y/window.innerHeight)),
+// 			target = this.children[0].domNode.childNodes[targetIndex];
+// 		if(target) {
+// 			this.deselect();
+// 			this.selectedNode = target;
+// 			$tw.utils.addClass(target,"selected");
+// 		}
+// 	}
+// };
 
-exports.deselect = function() {
-	if(this.selectedNode) {
-		$tw.utils.removeClass(this.selectedNode,"selected");
-		this.selectedNode = null;
-	}
-};
+// exports.deselect = function() {
+// 	if(this.selectedNode) {
+// 		$tw.utils.removeClass(this.selectedNode,"selected");
+// 		this.selectedNode = null;
+// 	}
+// };
 
-exports.action = function() {
-	if(this.selectedNode) {
-		var navEvent = document.createEvent("Event");
-		navEvent.initEvent("tw-navigate",true,true);
-		navEvent.navigateTo = this.selectedNode.getAttribute("data-link");
-		this.domNode.dispatchEvent(navEvent); 
-	}
-};
+// exports.action = function() {
+// 	if(this.selectedNode) {
+// 		var navEvent = document.createEvent("Event");
+// 		navEvent.initEvent("tw-navigate",true,true);
+// 		navEvent.navigateTo = this.selectedNode.getAttribute("data-link");
+// 		this.domNode.dispatchEvent(navEvent); 
+// 	}
+// };
 
 /*
 Set the position of the chooser panel within its wrapper given a touch/mouse position in screen coordinates
@@ -74,13 +69,13 @@ Set the position of the chooser panel within its wrapper given a touch/mouse pos
 exports.hoverChooser = function(x,y) {
 	if(this.chooserDisplayed) {
 		// Get the target element that the touch/mouse is over
-		this.select(y);
+		// this.select(y);
 		// Things we need for sizing and positioning the chooser
-		var domPanel = this.children[0].domNode,
+		var domPanel = this.child.children[0].domNode,
 			heightPanel = domPanel.offsetHeight,
 			widthPanel = domPanel.offsetWidth;
 		// Position the chooser div to account for scrolling
-		this.children[0].domNode.style.top = window.pageYOffset + "px";
+		domPanel.style.top = window.pageYOffset + "px";
 		// Scale the panel to fit
 		var scaleFactor = window.innerHeight/heightPanel;
 		// Scale up as we move right
@@ -96,10 +91,12 @@ exports.hoverChooser = function(x,y) {
 
 exports.hideChooser = function() {
 	if(this.chooserDisplayed) {
-		this.deselect();
+		// this.deselect();
 		this.chooserDisplayed = false;
-		this.domNode.removeChild(this.children[0].domNode);
-		this.children = [];
+		for(var t=0; t<this.child.children[0].children.length; t++) {
+			this.child.children[0].domNode.removeChild(this.child.children[0].children[t].domNode);
+		}
+		this.child.children[0].children = [];
 	}
 };
 
@@ -115,12 +112,12 @@ exports.handleEvent = function(event) {
 			event.preventDefault();
 			return false;
 		case "touchend":
-			this.action();
+			// this.action();
 			this.hideChooser();
 			event.preventDefault();
 			return false;
 		case "mouseover":
-			if(event.target === this.domNode) {
+			if(event.target === this.child.domNode) {
 				this.showChooser();
 				this.hoverChooser(event.clientX,event.clientY);
 				event.preventDefault();
@@ -132,12 +129,12 @@ exports.handleEvent = function(event) {
 			event.preventDefault();
 			return false;
 		case "mouseup":
-			this.action();
+			// this.action();
 			this.hideChooser();
 			event.preventDefault();
 			return false;
 		case "mouseout":
-			if(!$tw.utils.domContains(this.domNode,event.relatedTarget)) {
+			if(!$tw.utils.domContains(this.child.domNode,event.relatedTarget)) {
 				this.hideChooser();
 				event.preventDefault();
 				return false;
@@ -149,19 +146,33 @@ exports.handleEvent = function(event) {
 
 exports.executeMacro = function() {
 	this.chooserDisplayed = false;
-	var attributes = {
-		style: {
-			"position": "absolute",
-			"left": "0",
-			"top": "0",
-			"min-width": "16px",
-			"height": "100%" // Makes the height the same as the body, since the body is position:relative
-		}
-	};
+	var wrapperAttributes = {
+			style: {
+				"position": "fixed",
+				"left": "0",
+				"top": "0",
+				"min-width": "16px",
+				"z-index": "2000",
+				"height": "100%" // Makes the height the same as the body, since the body is position:relative
+			}
+		},
+		innerAttributes = {
+			style: {
+				"margin": "0 0 0 0",
+				"padding": "0px 4px 0px 4px",
+				"top": "0",
+				"min-width": "16px",
+				"z-index": "2000",
+				"background": "#ddd",
+				"border-right": "1px solid #aaa"
+			}
+		};
 	if(this.classes) {
-		attributes["class"] = this.classes.slice(0);
+		wrapperAttributes["class"] = this.classes.slice(0);
 	}
-	return $tw.Tree.Element("div",attributes,[]);
+	return $tw.Tree.Element("div",wrapperAttributes,[
+			$tw.Tree.Element("div",innerAttributes,[])
+		]);
 };
 
 })();

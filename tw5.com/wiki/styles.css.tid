@@ -158,22 +158,3 @@ a.tw-tiddlylink-missing {
 .javascript-source .javascript-line-comment {
 	font-family: Helvetica, Arial, sans-serif;
 }
-
-.navigation-panel ul {
-	position: relative;
-	top: 0;
-	margin: 0 0 0 0;
-	padding: 0px 4px 0px 4px;
-	list-style: none;
-	background: #ddd;
-	border-right: 1px solid #aaa;
-}
-
-.navigation-panel ul li {
-	padding: 2px 4px 2px 4px;
-}
-
-.navigation-panel .selected {
-	color: #fff;
-	background: #a55;
-}
