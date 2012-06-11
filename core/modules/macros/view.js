@@ -52,7 +52,7 @@ exports.executeMacro = function() {
 	switch(this.params.format) {
 		case "link":
 			if(value === undefined) {
-				return null;
+				return $tw.Tree.Text("");
 			} else {
 				var link = $tw.Tree.Macro("link",{
 											srcParams: {to: value},
@@ -86,7 +86,7 @@ exports.executeMacro = function() {
 		case "date":
 			var template = this.params.template || "DD MMM YYYY";
 			if(value === undefined) {
-				return null;
+				return $tw.Tree.Text("");
 			} else {
 				return $tw.Tree.Text($tw.utils.formatDateString(value,template));
 			}
@@ -97,12 +97,12 @@ exports.executeMacro = function() {
 				value = tiddler.getFieldString(field);
 			}
 			if(value === undefined || value === null) {
-				return null;
+				return $tw.Tree.Text("");
 			} else {
 				return $tw.Tree.Text(value);
 			}
 	}
-	return null;
+	return $tw.Tree.Text("");
 };
 
 })();
