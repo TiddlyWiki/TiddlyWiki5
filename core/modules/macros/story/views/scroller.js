@@ -16,7 +16,7 @@ function slowInSlowOut(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 }
 
-function animate(animList,duration) {
+function animateScroll(startX,startY,endX,endY,duration) {
 	var startTime = new Date(),
 		timerId = window.setInterval(function() {
 			var t = ((new Date()) - startTime) / duration;
@@ -25,33 +25,24 @@ function animate(animList,duration) {
 				t = 1;
 			}
 			t = slowInSlowOut(t);
-			for(var a=0; a<animList.length; a++) {
-				var anim = animList[a];
-				document.body[anim.property] = anim.from + (anim.to - anim.from) * t;
-			}
+			var x = startX + (endX - startX) * t,
+				y = startY + (endY - startY) * t;
+			window.scrollTo(x,y);
 		}, 10);
-}
-
-/*
-Check if the top left corner of a given element is currently visible, given the scroll position
-*/
-function isVisible(element) {
-	var x = element.offsetLeft, y = element.offsetTop;
-	return (x >= document.body.scrollLeft) && 
-			(x < (document.body.scrollLeft + window.innerHeight)) &&
-			(y >= document.body.scrollTop) &&
-			(y < (document.body.scrollTop + window.innerHeight));
 }
 
 /*
 Smoothly scroll an element back into view if needed
 */
 function scrollIntoView(element) {
-	if(!isVisible(element)) {
-		animate([
-			{property: "scrollLeft", from: document.body.scrollLeft, to: element.offsetLeft},
-			{property: "scrollTop", from: document.body.scrollTop, to: element.offsetTop}
-		],$tw.config.preferences.animationDuration);
+	var x = element.offsetLeft,
+		y = element.offsetTop,
+		winWidth = window.innerWidth,
+		winHeight = window.innerHeight,
+		scrollLeft = window.scrollX || document.documentElement.scrollLeft,
+		scrollTop = window.scrollY || document.documentElement.scrollTop;
+	if((x < scrollLeft) || (x > (scrollLeft + winWidth)) || (y < scrollTop) || (y > (scrollTop + winHeight))) {
+		animateScroll(scrollLeft,scrollTop,x,y,$tw.config.preferences.animationDuration);
 	}
 }
 
