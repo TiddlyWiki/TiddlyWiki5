@@ -1,5 +1,16 @@
 title: $:/templates/TagTemplate
 
 {{label{
-<<color background:yes default:#888><<<view title>>>>
+<<color background:yes default:#888><
+<<button toggle:MyTiddler on:open off:closed qualifyTiddlerTitles:yes><
+<<view title>>
+>>
+>>
 }}}
+<<reveal state:MyTiddler qualifyTiddlerTitles:yes><
+<div class="open">
+{{dropdown-menu{
+<<list tagging>>
+}}}
+</div>
+>>
