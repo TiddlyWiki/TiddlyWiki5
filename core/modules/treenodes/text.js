@@ -29,9 +29,13 @@ Text.prototype.render = function(type) {
 	return type === "text/html" ? $tw.utils.htmlEncode(this.text) : this.text;
 };
 
-Text.prototype.renderInDom = function(domNode) {
+Text.prototype.renderInDom = function(parentDomNode,insertBefore) {
 	this.domNode = document.createTextNode(this.text);
-	domNode.appendChild(this.domNode);
+	if(insertBefore) {
+		parentDomNode.insertBefore(this.domNode,insertBefore);
+	} else {
+		parentDomNode.appendChild(this.domNode);
+	}
 };
 
 exports.Text = Text;
