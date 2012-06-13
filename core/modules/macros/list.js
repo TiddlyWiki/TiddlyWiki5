@@ -29,6 +29,9 @@ var handlers = {
 		// Server syncing isn't implemented yet
 		return [];
 	},
+	tagging: function(wiki,tiddlerTitle) {
+		return wiki.getTiddlersWithTag(tiddlerTitle);
+	},
 	filter: function(wiki) {
 		// Filters aren't implemented yet
 		return [];
@@ -61,7 +64,7 @@ exports.executeMacro = function() {
 	}
 	var handler = handlers[this.params.type];
 	handler = handler || handlers.all;
-	var tiddlers = handler(this.wiki);
+	var tiddlers = handler(this.wiki,this.tiddlerTitle);
 	if(this.classes) {
 		attributes["class"] = this.classes.slice(0);
 	}
