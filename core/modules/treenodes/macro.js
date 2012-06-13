@@ -187,7 +187,11 @@ Macro.prototype.addEventHandlers = function() {
 	if(this.info.events && this.child) {
 		for(var t=0; t<this.info.events.length; t++) {
 			// Register this macro node to handle the event via the handleEvent() method
-			this.child.domNode.addEventListener(this.info.events[t],this,false);
+			var info = this.info.events[t];
+			if(typeof info === "string") {
+				info = {type: info};
+			}
+			this.child.domNode.addEventListener(info.type,this,info.capture);
 		}
 	}
 };
