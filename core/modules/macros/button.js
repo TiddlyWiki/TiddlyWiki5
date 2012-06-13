@@ -15,7 +15,12 @@ Button macro
 exports.info = {
 	name: "button",
 	params: {
-		name: {byName: "default", type: "text"},
+		message: {byName: "default", type: "text"},
+		toggle: {byName: true, type: "tiddler"},
+		set: {byName: true, type: "tiddler"},
+		on: {byName: true, type: "text"},
+		off: {byName: true, type: "text"},
+		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
 	},
 	events: ["click"]
@@ -23,11 +28,29 @@ exports.info = {
 
 exports.handleEvent = function(event) {
 	if(event.type === "click") {
-		var buttonEvent = document.createEvent("Event");
-		buttonEvent.initEvent("tw-" + this.params.name,true,true);
-		buttonEvent.tiddlerTitle = this.tiddlerTitle;
-		buttonEvent.commandOrigin = this;
-		event.target.dispatchEvent(buttonEvent); 
+		if(this.hasParameter("message")) {
+			var buttonEvent = document.createEvent("Event");
+			buttonEvent.initEvent("tw-" + this.params.message,true,true);
+			buttonEvent.tiddlerTitle = this.tiddlerTitle;
+			buttonEvent.commandOrigin = this;
+			event.target.dispatchEvent(buttonEvent);
+		}
+		if(this.hasParameter("toggle")) {
+			var title = this.params.toggle,
+				on = this.params.on || "open",
+				off = this.params.off || "closed";
+			if(this.hasParameter("qualifyTiddlerTitles") && this.params.qualifyTiddlerTitles === "yes") {
+				title = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + title;
+			}
+			var tiddler = this.wiki.getTiddler(title),
+				value = tiddler ? tiddler.fields.text : undefined;
+			if(value === this.params.on) {
+				value = this.params.off;
+			} else {
+				value = this.params.on;
+			}
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: value}));
+		}
 		event.preventDefault();
 		return false;
 	}
