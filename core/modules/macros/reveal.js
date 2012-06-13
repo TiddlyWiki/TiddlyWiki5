@@ -16,25 +16,51 @@ exports.info = {
 	name: "reveal",
 	params: {
 		state: {byPos: 0, type: "tiddler"},
+		type: {byName: true, type: "text"},
+		position: {byName: true, type: "text"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"default": {byName: true, type: "text"},
-		on: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
 	}
 };
 
-exports.getOpenState = function() {
+exports.readState = function() {
+	// Start with the default value for being open or closed
+	if(this.hasParameter("default")) {
+		this.isOpen = this.params["default"] === "open";
+	}
+	// Read the information from the state tiddler
 	if(this.stateTitle) {
-		var on = this.params.on || "open";
 		var stateTiddler = this.wiki.getTiddler(this.stateTitle);
 		if(stateTiddler) {
-			return stateTiddler.fields.text.trim() === on;
+			var state = stateTiddler ? stateTiddler.fields.text : "";
+			switch(this.params.type) {
+				case "popup":
+					this.readPopupState(state);
+					break;
+			}
 		}
 	}
-	if(this.hasParameter("default")) {
-		return this.params["default"] === "open";
+};
+
+exports.readPopupState = function(state) {
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+		match = popupLocationRegExp.exec(state);
+	// Check if the state matches the location regexp
+	if(match) {
+		// If so, we're open
+		this.isOpen = true;
+		// Get the location
+		this.popup = {
+			left: parseFloat(match[1]),
+			top: parseFloat(match[2]),
+			width: parseFloat(match[3]),
+			height: parseFloat(match[4])
+		};
+	} else {
+		// If not, we're closed
+		this.isOpen = false;
 	}
-	return false;
 };
 
 exports.executeMacro = function() {
@@ -42,9 +68,10 @@ exports.executeMacro = function() {
 	if(this.hasParameter("qualifyTiddlerTitles")) {
 		this.stateTitle = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + this.stateTitle;
 	}
-	this.isOpen = this.getOpenState();
+	this.readState();
 	var attributes = {
-		"class": ["tw-reveal"]
+		"class": ["tw-reveal"],
+		style: {position: "absolute"}
 	};
 	if(this.hasParameter("class")) {
 		attributes["class"].push(this.params["class"]);
@@ -63,7 +90,7 @@ exports.refreshInDom = function(changes) {
 		t;
 	// If the state tiddler has changed then reset the open state
 	if($tw.utils.hop(changes,this.stateTitle)) {
-		this.isOpen = this.getOpenState();
+		 this.readState();
 	}
 	// Render the children if we're open and we don't have any children yet
 	if(this.isOpen && this.child.children.length === 0) {
@@ -75,13 +102,40 @@ exports.refreshInDom = function(changes) {
 		}
 		needChildrenRefresh = false; // Don't refresh the children if we've just created them
 	}
-	// Set the visibility of the children
-	this.child.domNode.style.display = this.isOpen ? "block" : "none";
 	// Refresh the children
 	if(needChildrenRefresh) {
 		for(t=0; t<this.child.children.length; t++) {
 			this.child.children[t].refreshInDom(changes);
 		}
+	}
+	// Set the visibility of the children
+	this.child.domNode.style.display = this.isOpen ? "block" : "none";
+	// Position the content if required
+	switch(this.params.type) {
+		case "popup":
+			if(this.isOpen) {
+				this.child.domNode.style.position = "absolute";
+				this.child.domNode.style.zIndex = "3000";
+				switch(this.params.position) {
+					case "left":
+						this.child.domNode.style.left = (this.popup.left - this.child.domNode.offsetWidth) + "px";
+						this.child.domNode.style.top = this.popup.top + "px";
+						break;
+					case "above":
+						this.child.domNode.style.left = this.popup.left + "px";
+						this.child.domNode.style.top = (this.popup.top - this.child.domNode.offsetHeight) + "px";
+						break;
+					case "right":
+						this.child.domNode.style.left = (this.popup.left + this.popup.width) + "px";
+						this.child.domNode.style.top = this.popup.top + "px";
+						break;
+					default: // Below
+						this.child.domNode.style.left = this.popup.left + "px";
+						this.child.domNode.style.top = (this.popup.top + this.popup.height) + "px";
+						break;
+				}
+			}
+			break;
 	}
 };
 

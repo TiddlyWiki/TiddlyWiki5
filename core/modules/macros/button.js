@@ -16,40 +16,48 @@ exports.info = {
 	name: "button",
 	params: {
 		message: {byName: "default", type: "text"},
-		toggle: {byName: true, type: "tiddler"},
-		set: {byName: true, type: "tiddler"},
-		on: {byName: true, type: "text"},
-		off: {byName: true, type: "text"},
+		popup: {byName: true, type: "tiddler"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
 	},
 	events: ["click"]
 };
 
+exports.dispatchMessage = function(event) {
+	var buttonEvent = document.createEvent("Event");
+	buttonEvent.initEvent("tw-" + this.params.message,true,true);
+	buttonEvent.tiddlerTitle = this.tiddlerTitle;
+	event.target.dispatchEvent(buttonEvent);
+};
+
+exports.triggerPopup = function(event) {
+	// Get the title of the popup state tiddler
+	var title = this.params.popup;
+	if(this.hasParameter("qualifyTiddlerTitles") && this.params.qualifyTiddlerTitles === "yes") {
+		title = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + title;
+	}
+	// Get the popup state tiddler and the the text value
+	var tiddler = this.wiki.getTiddler(title),
+		value = tiddler ? tiddler.fields.text : "";
+	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
+    var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
+	if(popupLocationRegExp.test(value)) {
+		value = "";
+	} else {
+		// Set the position if we're opening it
+		value = "(" + this.domNode.offsetLeft + "," + this.domNode.offsetTop + "," + this.domNode.offsetWidth + "," + this.domNode.offsetHeight + ")";
+	}
+	// Update the state tiddler
+	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: value}),true);
+};
+
 exports.handleEvent = function(event) {
 	if(event.type === "click") {
 		if(this.hasParameter("message")) {
-			var buttonEvent = document.createEvent("Event");
-			buttonEvent.initEvent("tw-" + this.params.message,true,true);
-			buttonEvent.tiddlerTitle = this.tiddlerTitle;
-			buttonEvent.commandOrigin = this;
-			event.target.dispatchEvent(buttonEvent);
+			this.dispatchMessage(event);
 		}
-		if(this.hasParameter("toggle")) {
-			var title = this.params.toggle,
-				on = this.params.on || "open",
-				off = this.params.off || "closed";
-			if(this.hasParameter("qualifyTiddlerTitles") && this.params.qualifyTiddlerTitles === "yes") {
-				title = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + title;
-			}
-			var tiddler = this.wiki.getTiddler(title),
-				value = tiddler ? tiddler.fields.text : undefined;
-			if(value === this.params.on) {
-				value = this.params.off;
-			} else {
-				value = this.params.on;
-			}
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: value}));
+		if(this.hasParameter("popup")) {
+			this.triggerPopup();
 		}
 		event.preventDefault();
 		return false;

@@ -2,12 +2,12 @@ title: $:/templates/TagTemplate
 
 {{label{
 <<color background:yes default:#888><
-<<button toggle:MyTiddler on:open off:closed qualifyTiddlerTitles:yes><
+<<button popup:MyTiddler qualifyTiddlerTitles:yes><
 <<view title>>
 >>
 >>
 }}}
-<<reveal state:MyTiddler qualifyTiddlerTitles:yes><
+<<reveal state:MyTiddler type:popup qualifyTiddlerTitles:yes><
 <div class="open">
 {{dropdown-menu{
 <<list tagging>>
