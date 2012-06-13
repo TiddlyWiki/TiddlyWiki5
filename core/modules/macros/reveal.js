@@ -71,13 +71,19 @@ exports.executeMacro = function() {
 	this.readState();
 	var attributes = {
 		"class": ["tw-reveal"],
-		style: {position: "absolute"}
+		style: {}
 	};
 	if(this.hasParameter("class")) {
 		attributes["class"].push(this.params["class"]);
 	}
 	if(this.classes) {
 		$tw.utils.pushTop(attributes["class"],this.classes);
+	}
+	switch(this.params.type) {
+		case "popup":
+			attributes.style.position = "absolute";
+			attributes["class"].push("tw-popup");
+			break;
 	}
 	attributes.style = {display: this.isOpen ? "block" : "none"};
 	var child = $tw.Tree.Element("div",attributes,this.isOpen ? this.content : []);
@@ -115,7 +121,7 @@ exports.refreshInDom = function(changes) {
 		case "popup":
 			if(this.isOpen) {
 				this.child.domNode.style.position = "absolute";
-				this.child.domNode.style.zIndex = "3000";
+				this.child.domNode.style.zIndex = "1000";
 				switch(this.params.position) {
 					case "left":
 						this.child.domNode.style.left = (this.popup.left - this.child.domNode.offsetWidth) + "px";
