@@ -27,7 +27,8 @@ exports.info = {
 
 exports.executeMacro = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle),
-		child = $tw.Tree.Element("div",{"class":"tw-tags-wrapper"},[]);
+		child = $tw.Tree.Element("div",{"class":"tw-tags-wrapper"},[]),
+		parents = this.parents.slice(0);
 	if(tiddler && tiddler.fields.tags) {
 		for(var t=0; t<tiddler.fields.tags.length; t++) {
 			var tag = tiddler.fields.tags[t];
@@ -38,7 +39,8 @@ exports.executeMacro = function() {
 			}));
 		}
 	}
-	child.execute(this.parents,this.tiddlerTitle);
+	parents.push(this.tiddlerTitle);
+	child.execute(parents,this.tiddlerTitle);
 	return child;
 };
 
