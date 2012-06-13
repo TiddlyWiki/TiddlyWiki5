@@ -236,6 +236,7 @@ exports.getTiddlersWithTag = function(tag) {
 			titles.push(title);
 		}
 	}
+	this.sortTiddlers(titles,"title");
 	return titles;
 };
 
