@@ -8,6 +8,7 @@ body {
 }
 
 .tw-story-element {
+	position: relative;
 	margin: 30px 0px 30px 0px;
 	padding: 20px 20px 20px 20px;
 	border: 1px solid #999;
@@ -35,6 +36,10 @@ body {
 .tw-tiddler-missing .title {
 	font-style: italic;
 	font-weight: normal;
+}
+
+.dropdown-menu {
+	position: static;
 }
 
 .tw-tags-wrapper .label {
