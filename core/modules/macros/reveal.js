@@ -21,7 +21,8 @@ exports.info = {
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"default": {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
-	}
+	},
+	events: ["click"]
 };
 
 exports.readState = function() {
@@ -60,6 +61,14 @@ exports.readPopupState = function(state) {
 	} else {
 		// If not, we're closed
 		this.isOpen = false;
+	}
+};
+
+exports.handleEvent = function(event) {
+	if(event.type === "click") {
+		// Cancel the popup if we get a click on it
+		var tiddler = this.wiki.getTiddler(this.stateTitle);
+		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.stateTitle, text: ""}),true);
 	}
 };
 
