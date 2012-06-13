@@ -19,12 +19,15 @@ function TextEditor(macroNode) {
 }
 
 TextEditor.prototype.getChild = function() {
+	// Get the current tiddler and the field name
 	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle),
 		field = this.macroNode.hasParameter("field") ? this.macroNode.params.field : "title",
 		value;
+	// If we've got a tiddler, the value to display is the field string value
 	if(tiddler) {
 		value = tiddler.getFieldString(field);
 	} else {
+		// Otherwise, we need to construct a default value for the editor
 		switch(field) {
 			case "text":
 				value = "Type the text for the tiddler '" + this.macroNode.tiddlerTitle + "'";
@@ -42,6 +45,7 @@ TextEditor.prototype.getChild = function() {
 		},
 		tagName,
 		content = [];
+	// Make a textarea for text fields and an input box for other fields
 	if(field === "text") {
 		tagName = "textarea";
 		content.push($tw.Tree.Text(value));
@@ -50,6 +54,7 @@ TextEditor.prototype.getChild = function() {
 		attributes.type = "text";
 		attributes.value = value;
 	}
+	// Wrap the editor control in a div
 	return $tw.Tree.Element("div",{},[$tw.Tree.Element(tagName,attributes,content)]);
 };
 
