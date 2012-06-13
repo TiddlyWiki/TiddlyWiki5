@@ -68,7 +68,7 @@ exports.handleEvent = function(event) {
 			event.preventDefault();
 			return false;
 		case "tw-cancel-popup":
-			if(this.hasParameter("popup") && event.targetOfCancel !== this.domNode) {
+			if(this.hasParameter("popup") && !$tw.utils.domContains(this.domNode,event.targetOfCancel)) {
 				this.triggerPopup(event,true);
 			}
 			break;

@@ -1,10 +1,12 @@
 title: $:/templates/TagTemplate
 
+{{tw-tag-popup{
+<<button popup:MyTiddler qualifyTiddlerTitles:yes><
 {{label{
 <<color background:yes default:#888><
-<<button popup:MyTiddler qualifyTiddlerTitles:yes><
 <<view title>>
 >>
+}}}
 >>
 }}}
 <<reveal state:MyTiddler type:popup qualifyTiddlerTitles:yes><

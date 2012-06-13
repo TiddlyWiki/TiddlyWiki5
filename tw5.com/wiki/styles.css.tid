@@ -42,6 +42,13 @@ body {
 	position: static;
 }
 
+button.tw-tag-popup {
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+}
+
 .tw-tags-wrapper .label {
 	margin-right: 6px;
 }
