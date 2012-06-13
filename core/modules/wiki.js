@@ -225,6 +225,20 @@ exports.getShadowTitles = function() {
 	return titles;
 };
 
+/*
+Retrieves a list of the tiddler titles that are tagged with a given tag
+*/
+exports.getTiddlersWithTag = function(tag) {
+	var titles = [];
+	for(var title in this.tiddlers) {
+		var tiddler = this.tiddlers[title];
+		if(tiddler.fields.tags && tiddler.fields.tags.indexOf(tag) !== -1) {
+			titles.push(title);
+		}
+	}
+	return titles;
+};
+
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || {};
