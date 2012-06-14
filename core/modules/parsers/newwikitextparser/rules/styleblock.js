@@ -39,9 +39,9 @@ exports.parse = function(match,isBlock) {
 	// Look for the first style specifier
 	reStyleSpecififer.lastIndex = this.pos;
 	match = reStyleSpecififer.exec(this.source);
-	while(match) {
+	while(match && match.index === this.pos) {
 		// Save the style specified
-		styles[match[1].trim()] = match[2].trim();
+		styles[match[1]] = match[2].trim();
 		// Look to see if there is a further style specifier
 		this.pos = match.index + match[0].length;
 		reStyleSpecififer.lastIndex = this.pos;
