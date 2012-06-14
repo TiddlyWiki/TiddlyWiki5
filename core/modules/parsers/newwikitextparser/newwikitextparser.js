@@ -71,10 +71,7 @@ WikiTextRenderer.prototype.parseBlock = function(terminatorRegExpString,options)
 /*
 Parse blocks of text until a terminating regexp is encountered or the end of the text
 	terminatorRegExpString: terminating regular expression
-	options: see below
-
-Options are:
-	addClass: optional CSS class to add to each block
+	options: none at present
 */
 WikiTextRenderer.prototype.parseBlocks = function(terminatorRegExpString,options) {
 	if(terminatorRegExpString) {
@@ -110,12 +107,7 @@ WikiTextRenderer.prototype.parseBlocksTerminated = function(terminatorRegExpStri
 	// Parse the text into blocks
 	while(this.pos < this.sourceLength && !(match && match.index === this.pos)) {
 		var blocks = this.parseBlock(terminatorRegExpString,{leaveTerminator: true});
-		for(var t=0; t<blocks.length; t++) {
-			if(options.addClass) {
-				blocks[t].addClass(options.addClass);
-			}
-			tree.push(blocks[t]);
-		}
+		tree.push.apply(tree,blocks);
 		// Skip any whitespace
 		this.skipWhitespace();
 		//  Check if we've got the end marker

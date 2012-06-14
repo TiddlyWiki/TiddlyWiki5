@@ -39,7 +39,10 @@ exports.parse = function(match,isBlock) {
 	match = reStart.exec(this.source);
 	if(match) {
 		this.pos = match.index + match[0].length;
-		tree = this.parseBlocks(reEndString,{addClass: match[1]});
+		tree = this.parseBlocks(reEndString);
+		for(var t=0; t<tree.length; t++) {
+			tree[t].addClass(match[1]);
+		}
 	}
 	return tree;
 };
