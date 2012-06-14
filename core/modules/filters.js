@@ -141,6 +141,15 @@ exports.operators = {
 			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ");";
 		}
 	},
+	"sort-case-sensitive": {
+		selector: function(operator) {
+			throw "Cannot use sort operator at the start of a filter operation";
+		},
+		filter: function(operator) {
+			var desc = operator.prefix === "!" ? "true" : "false";
+			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ",true);";
+		}
+	},
 	"limit": {
 		selector: function(operator) {
 			throw "Cannot use limit operator at the start of a filter operation";
