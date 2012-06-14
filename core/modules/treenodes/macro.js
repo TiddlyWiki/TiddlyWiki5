@@ -175,7 +175,6 @@ Macro.prototype.render = function(type) {
 };
 
 Macro.prototype.renderInDom = function(parentDomNode,insertBefore) {
-	this.parentDomNode = parentDomNode;
 	if(this.child) {
 		this.child.renderInDom(parentDomNode,insertBefore);
 		this.postRenderInDom();
