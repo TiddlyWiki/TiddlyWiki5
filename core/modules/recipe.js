@@ -15,7 +15,8 @@ The idea is to process the recipe file recursively, loading tiddlers into the ma
 "use strict";
 
 exports["application/x-tiddlywiki-recipe"] = function(text,fields) {
-	var path = require("path"),
+	var self = this,
+		path = require("path"),
 		fs = require("fs"),
 		tiddlers = [],
 		parseRecipe = function(text) {
@@ -37,7 +38,7 @@ exports["application/x-tiddlywiki-recipe"] = function(text,fields) {
 				typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
 				data = fs.readFileSync(sourcePath).toString(typeInfo ? typeInfo.encoding : "utf8"),
 				fields = {title: sourcePath},
-				tids = $tw.wiki.deserializeTiddlers(ext,data,fields),
+				tids = self.deserializeTiddlers(ext,data,fields),
 				metafile = sourcePath + ".meta";
 			if(ext !== ".json" && tids.length === 1 && path.existsSync(metafile)) {
 				var metadata = fs.readFileSync(metafile).toString("utf8");
