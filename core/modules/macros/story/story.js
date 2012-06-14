@@ -27,8 +27,7 @@ exports.info = {
 		defaultViewTemplate: {byName: true, type: "tiddler"},
 		defaultEditTemplate: {byName: true, type: "tiddler"},
 		storyview: {byName: true, type: "text"}
-	},
-	events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler"]
+	}
 };
 
 exports.getStory = function() {
@@ -162,7 +161,10 @@ exports.executeMacro = function() {
 	if(this.classes) {
 		attributes["class"] = this.classes.slice(0);
 	}
-	return $tw.Tree.Element("div",attributes,[this.contentNode,this.storyNode]);
+	return $tw.Tree.Element("div",attributes,[this.contentNode,this.storyNode],{
+		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler"],
+		eventHandler: this
+	});
 };
 
 exports.postRenderInDom = function() {

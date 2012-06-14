@@ -15,8 +15,7 @@ Zooming navigator macro
 exports.info = {
 	name: "zoomer",
 	params: {
-	},
-	events: ["touchstart","touchmove","touchend"]
+	}
 };
 
 exports.startZoomer = function(x,y) {
@@ -112,7 +111,10 @@ exports.executeMacro = function() {
 	if(this.classes) {
 		attributes["class"] = this.classes.slice(0);
 	}
-	return $tw.Tree.Element("div",attributes,[]);
+	return $tw.Tree.Element("div",attributes,[],{
+		events: ["touchstart","touchmove","touchend"],
+		eventHandler: this
+	});
 };
 
 })();

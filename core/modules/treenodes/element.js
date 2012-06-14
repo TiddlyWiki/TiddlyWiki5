@@ -14,13 +14,16 @@ Element nodes
 
 var Node = require("./node.js").Node;
 
-var Element = function(type,attributes,children) {
+var Element = function(type,attributes,children,options) {
+	options = options || {};
 	if(this instanceof Element) {
 		this.type = type;
 		this.attributes = attributes || {};
 		this.children = children;
+		this.events = options.events;
+		this.eventHandler = options.eventHandler;
 	} else {
-		return new Element(type,attributes,children);
+		return new Element(type,attributes,children,options);
 	}
 };
 
@@ -35,7 +38,10 @@ Element.prototype.clone = function() {
 			childClones.push(this.children[t].clone());
 		}
 	}
-	return new Element(this.type,this.attributes,childClones);
+	return new Element(this.type,this.attributes,childClones,{
+		events: this.events,
+		eventHandler: this.eventHandler
+	});
 };
 
 Element.prototype.execute = function(parents,tiddlerTitle) {
@@ -87,7 +93,9 @@ Element.prototype.render = function(type) {
 };
 
 Element.prototype.renderInDom = function(parentDomNode,insertBefore) {
+	// Create the element
 	var element = document.createElement(this.type);
+	// Assign the attributes
 	if(this.attributes) {
 		for(var a in this.attributes) {
 			var v = this.attributes[a];
@@ -104,12 +112,21 @@ Element.prototype.renderInDom = function(parentDomNode,insertBefore) {
 			}
 		}
 	}
+	// Insert it into the DOM tree
 	if(insertBefore) {
 		parentDomNode.insertBefore(element,insertBefore);
 	} else {
 		parentDomNode.appendChild(element);
 	}
+	// Register event handlers
+	if(this.events) {
+		for(var e=0; e<this.events.length; e++) {
+			element.addEventListener(this.events[e],this.eventHandler,false);
+		}
+	}
+	// Save a reference to the DOM element
 	this.domNode = element;
+	// Render any child nodes
 	if(this.children) {
 		for(var t=0; t<this.children.length; t++) {
 			this.children[t].renderInDom(element);

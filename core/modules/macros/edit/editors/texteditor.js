@@ -55,12 +55,10 @@ TextEditor.prototype.getChild = function() {
 		attributes.value = value;
 	}
 	// Wrap the editor control in a div
-	return $tw.Tree.Element("div",{},[$tw.Tree.Element(tagName,attributes,content)]);
-};
-
-TextEditor.prototype.addEventHandlers = function() {
-	this.macroNode.child.domNode.addEventListener("focus",this,false);
-	this.macroNode.child.domNode.addEventListener("keyup",this,false);
+	return $tw.Tree.Element("div",{},[$tw.Tree.Element(tagName,attributes,content)],{
+		events: ["focus","keyup"],
+		eventHandler: this
+	});
 };
 
 TextEditor.prototype.handleEvent = function(event) {

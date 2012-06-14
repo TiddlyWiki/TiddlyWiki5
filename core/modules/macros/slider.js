@@ -48,8 +48,7 @@ exports.info = {
 		tooltip: {byPos: 3, type: "text"},
 		"default": {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
-	},
-	events: ["click"]
+	}
 };
 
 exports.getOpenState = function() {
@@ -142,7 +141,10 @@ exports.executeMacro = function() {
 				},
 				sliderChildren
 			)
-		]
+		],{
+			events: ["click"],
+			eventHandler: this
+		}
 	);
 	child.execute(this.parents,this.tiddlerTitle);
 	return child;

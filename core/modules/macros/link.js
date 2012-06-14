@@ -22,8 +22,7 @@ exports.info = {
 	params: {
 		to: {byName: "default", type: "tiddler", skinny: true},
 		space: {byName: true, type: "text"}
-	},
-	events: ["click"]
+	}
 };
 
 exports.handleEvent = function (event) {
@@ -80,7 +79,7 @@ exports.executeMacro = function() {
 	if(linkInfo.suppressLink) {
 		child = $tw.Tree.Element("span",{},this.content);
 	} else { 
-		child = $tw.Tree.Element("a",linkInfo.attributes,this.content);
+		child = $tw.Tree.Element("a",linkInfo.attributes,this.content,{events: ["click"], eventHandler: this});
 	}
 	child.execute(this.parents,this.tiddlerTitle);
 	return child;

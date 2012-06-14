@@ -21,8 +21,7 @@ exports.info = {
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"default": {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
-	},
-	events: ["click"]
+	}
 };
 
 exports.readState = function() {
@@ -95,7 +94,10 @@ exports.executeMacro = function() {
 			break;
 	}
 	attributes.style = {display: this.isOpen ? "block" : "none"};
-	var child = $tw.Tree.Element("div",attributes,this.isOpen ? this.content : []);
+	var child = $tw.Tree.Element("div",attributes,this.isOpen ? this.content : [],{
+		events: ["click"],
+		eventHandler: this
+	});
 	child.execute(this.parents,this.tiddlerTitle);
 	return child;
 };
@@ -105,7 +107,7 @@ exports.refreshInDom = function(changes) {
 		t;
 	// If the state tiddler has changed then reset the open state
 	if($tw.utils.hop(changes,this.stateTitle)) {
-		 this.readState();
+		this.readState();
 	}
 	// Render the children if we're open and we don't have any children yet
 	if(this.isOpen && this.child.children.length === 0) {

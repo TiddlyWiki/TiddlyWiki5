@@ -175,24 +175,10 @@ Macro.prototype.render = function(type) {
 };
 
 Macro.prototype.renderInDom = function(parentDomNode,insertBefore) {
+	this.parentDomNode = parentDomNode;
 	if(this.child) {
 		this.child.renderInDom(parentDomNode,insertBefore);
-		this.domNode = this.child.domNode;
-		this.addEventHandlers();
 		this.postRenderInDom();
-	}
-};
-
-Macro.prototype.addEventHandlers = function() {
-	if(this.info.events && this.child) {
-		for(var t=0; t<this.info.events.length; t++) {
-			// Register this macro node to handle the event via the handleEvent() method
-			var info = this.info.events[t];
-			if(typeof info === "string") {
-				info = {type: info};
-			}
-			this.child.domNode.addEventListener(info.type,this,info.capture);
-		}
 	}
 };
 
@@ -215,23 +201,12 @@ Macro.prototype.refresh = function(changes) {
 	}
 };
 
+/*
+Macros that need special refreshing should override this function
+*/
 Macro.prototype.refreshInDom = function(changes) {
-	var t,
-		self = this;
-	// Check if any of the dependencies of this macro node have changed
-	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
-		// Manually reexecute and rerender this macro
-		var parent = this.child.domNode.parentNode,
-			nextSibling = this.child.domNode.nextSibling;
-		parent.removeChild(this.child.domNode);
-		this.execute(this.parents,this.tiddlerTitle);
-		this.child.renderInDom(parent,nextSibling);
-		this.domNode = this.child.domNode;
-		this.addEventHandlers();
-	} else {
-		if(this.child) {
-			this.child.refreshInDom(changes);
-		}
+	if(this.child) {
+		this.child.refreshInDom(changes);
 	}
 };
 

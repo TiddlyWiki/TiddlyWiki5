@@ -19,7 +19,10 @@ function BitmapEditor(macroNode) {
 BitmapEditor.prototype.getChild = function() {
 	return $tw.Tree.Element("canvas",{
 		"class": ["tw-edit-field"]
-	},[]);
+	},[],{
+		events: ["touchstart","touchmove","touchend","mousedown","mousemove","mouseup"],
+		eventHandler: this
+	});
 };
 
 BitmapEditor.prototype.postRenderInDom = function() {
@@ -43,57 +46,54 @@ BitmapEditor.prototype.postRenderInDom = function() {
 	ctx.drawImage(currImage,0,0);
 };
 
-BitmapEditor.prototype.addEventHandlers = function() {
-	var self = this;
-	this.macroNode.child.domNode.addEventListener("touchstart",function(event) {
-			self.brushDown = true;
-			self.strokeStart(event.touches[0].clientX,event.touches[0].clientY);
+BitmapEditor.prototype.handleEvent = function(event) {
+	switch(event.type) {
+		case "touchstart":
+			this.brushDown = true;
+			this.strokeStart(event.touches[0].clientX,event.touches[0].clientY);
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
-		},false);
-	this.macroNode.child.domNode.addEventListener("touchmove",function(event) {
-			if(self.brushDown) {
-				self.strokeMove(event.touches[0].clientX,event.touches[0].clientY);
+		case "touchmove":
+			if(this.brushDown) {
+				this.strokeMove(event.touches[0].clientX,event.touches[0].clientY);
 			}
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
-		},false);
-	this.macroNode.child.domNode.addEventListener("touchend",function(event) {
-			if(self.brushDown) {
-				self.brushDown = false;
-				self.strokeEnd();
+		case "touchend":
+			if(this.brushDown) {
+				this.brushDown = false;
+				this.strokeEnd();
 			}
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
-		},false);
-	this.macroNode.child.domNode.addEventListener("mousedown",function(event) {
-			self.strokeStart(event.clientX,event.clientY);
-			self.brushDown = true;
+		case "mousedown":
+			this.strokeStart(event.clientX,event.clientY);
+			this.brushDown = true;
 			event.preventDefault();
 			event.stopPropagation();
 			return false;
-		},false);
-	this.macroNode.child.domNode.addEventListener("mousemove",function(event) {
-			if(self.brushDown) {
-				self.strokeMove(event.clientX,event.clientY);
-				event.preventDefault();
-				event.stopPropagation();
-				return false;
-			}
-		},false);
-	this.macroNode.child.domNode.addEventListener("mouseup",function(event) {
-			if(self.brushDown) {
-				self.brushDown = false;
-				self.strokeEnd();
+		case "mousemove":
+			if(this.brushDown) {
+				this.strokeMove(event.clientX,event.clientY);
 				event.preventDefault();
 				event.stopPropagation();
 				return false;
 			}
 			return true;
-		},false);
+		case "mouseup":
+			if(this.brushDown) {
+				this.brushDown = false;
+				this.strokeEnd();
+				event.preventDefault();
+				event.stopPropagation();
+				return false;
+			}
+			return true;
+		}
+	return true;
 };
 
 BitmapEditor.prototype.adjustCoordinates = function(x,y) {

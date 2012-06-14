@@ -19,8 +19,7 @@ exports.info = {
 		popup: {byName: true, type: "tiddler"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
-	},
-	events: ["click", "tw-cancel-popup"]
+	}
 };
 
 exports.dispatchMessage = function(event) {
@@ -44,12 +43,12 @@ exports.triggerPopup = function(event,cancel) {
 		value = "";
 	} else {
 		// Check if the popup is open by checking whether it matches "(<x>,<y>)"
-	    var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
+		var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 		if(popupLocationRegExp.test(value)) {
 			value = "";
 		} else {
 			// Set the position if we're opening it
-			value = "(" + this.domNode.offsetLeft + "," + this.domNode.offsetTop + "," + this.domNode.offsetWidth + "," + this.domNode.offsetHeight + ")";
+			value = "(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")";
 		}
 	}
 	// Update the state tiddler
@@ -68,7 +67,7 @@ exports.handleEvent = function(event) {
 			event.preventDefault();
 			return false;
 		case "tw-cancel-popup":
-			if(this.hasParameter("popup") && this.domNode !== event.targetOfCancel && !$tw.utils.domContains(this.domNode,event.targetOfCancel)) {
+			if(this.hasParameter("popup") && this.child.domNode !== event.targetOfCancel && !$tw.utils.domContains(this.child.domNode,event.targetOfCancel)) {
 				this.triggerPopup(event,true);
 			}
 			break;
@@ -87,7 +86,10 @@ exports.executeMacro = function() {
 	for(var t=0; t<this.content.length; t++) {
 		this.content[t].execute(this.parents,this.tiddlerTitle);
 	}
-	return $tw.Tree.Element("button",attributes,this.content);
+	return $tw.Tree.Element("button",attributes,this.content,{
+		events: ["click","tw-cancel-popup"],
+		eventHandler: this
+	});
 };
 
 })();

@@ -40,12 +40,6 @@ exports.executeMacro = function() {
 	return child;
 };
 
-exports.addEventHandlers = function() {
-	if(this.editor.addEventHandlers) {
-		this.editor.addEventHandlers();
-	}
-};
-
 exports.postRenderInDom = function() {
 	if(this.editor.postRenderInDom) {
 		this.editor.postRenderInDom();
@@ -66,8 +60,6 @@ exports.refreshInDom = function(changes) {
 			this.execute(this.parents,this.tiddlerTitle);
 			// Render to the DOM
 			this.child.renderInDom(parent,nextSibling);
-			this.domNode = this.child.domNode;
-			this.addEventHandlers();
 		}
 	} else {
 		// Refresh any children

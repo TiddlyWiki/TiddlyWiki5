@@ -15,8 +15,7 @@ Zooming chooser macro
 exports.info = {
 	name: "chooser",
 	params: {
-	},
-	events: ["touchstart","touchmove","touchend","mouseover","mousemove","mouseup","mouseout"]
+	}
 };
 
 exports.showChooser = function() {
@@ -172,7 +171,10 @@ exports.executeMacro = function() {
 	}
 	return $tw.Tree.Element("div",wrapperAttributes,[
 			$tw.Tree.Element("div",innerAttributes,[])
-		]);
+		],{
+			events: ["touchstart","touchmove","touchend","mouseover","mousemove","mouseup","mouseout"],
+			eventHandler: this
+		});
 };
 
 })();

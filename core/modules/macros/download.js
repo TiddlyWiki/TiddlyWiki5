@@ -19,8 +19,7 @@ exports.info = {
 		type: {byName: true, type: "text"},
 		"filename": {byName: true, type: "text"},
 		"label": {byName: true, type: "text"}
-	},
-	events: ["click"]
+	}
 };
 
 exports.handleEvent = function(event) {
@@ -50,7 +49,10 @@ exports.executeMacro = function() {
 	if(this.classes) {
 		attributes["class"] = this.classes.slice(0);
 	}
-	return $tw.Tree.Element("button",attributes,content);
+	return $tw.Tree.Element("button",attributes,content,{
+		events: ["click"],
+		eventHandler: this
+	});
 };
 
 })();
