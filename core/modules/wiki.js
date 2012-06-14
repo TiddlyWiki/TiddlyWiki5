@@ -173,12 +173,17 @@ Sort an array of tiddler titles by a specified field
 	titles: array of titles (sorted in place)
 	sortField: name of field to sort by
 	isDescending: true if the sort should be descending
+	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive) {
 	var self = this;
 	titles.sort(function(a,b) {
-		var aa = self.getTiddler(a).fields[sortField].toLowerCase() || 0,
-			bb = self.getTiddler(b).fields[sortField].toLowerCase() || 0;
+		var aa = self.getTiddler(a).fields[sortField] || 0,
+			bb = self.getTiddler(b).fields[sortField] || 0;
+		if(!isCaseSensitive) {
+			aa = aa.toLowerCase();
+			bb = bb.toLowerCase();
+		}
 		if(aa < bb) {
 			return isDescending ? +1 : -1;
 		} else {
