@@ -1,0 +1,21 @@
+title: StyleBlockWikiText
+
+This syntax enables you to assign arbitrary styles to generated elements. For example:
+
+{{{
+@@color:#f00
+This is in red!
+@@
+}}}
+
+Generates the results:
+
+@@color:#f00
+This is in red!
+@@
+
+The HTML looks like this:
+
+{{{
+<p style="color:rgb(255, 0, 0);">This is in red!</p>
+}}}

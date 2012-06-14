@@ -46,6 +46,7 @@ These are the individual rules that make up WikiText:
 * MacroWikiText
 * PrettyLinkWikiText
 * RuleWikiText
+* StyleBlockWikiText
 * TypedBlockWikiText
 * WikiLinkWikiText
 

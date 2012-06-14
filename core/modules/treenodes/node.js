@@ -75,6 +75,13 @@ Node.prototype.addClass = function(className) {
 
 };
 
+/*
+Add styles to a node
+*/
+Node.prototype.addStyles = function(styles) {
+
+};
+
 exports.Node = Node;
 
 })();
