@@ -1,7 +1,7 @@
 title: $:/templates/TagTemplate
 
 {{tw-tag-popup{
-<<button popup:MyTiddler qualifyTiddlerTitles:yes><
+<<button popup:TagDropDownLocation qualifyTiddlerTitles:yes><
 {{label{
 <<color background:yes default:#888><
 <<view title>>
@@ -9,7 +9,7 @@ title: $:/templates/TagTemplate
 }}}
 >>
 }}}
-<<reveal state:MyTiddler type:popup qualifyTiddlerTitles:yes><
+<<reveal state:TagDropDownLocation type:popup qualifyTiddlerTitles:yes><
 <div class="open">
 {{dropdown-menu{
 <<list tagging>>
