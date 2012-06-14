@@ -4,6 +4,7 @@ This syntax enables you to assign arbitrary styles to generated elements. For ex
 
 {{{
 @@color:#f00
+@@text-decoration:underline
 This is in red!
 @@
 }}}
@@ -11,13 +12,14 @@ This is in red!
 Generates the results:
 
 @@color:#f00
+@@text-decoration:underline
 This is in red!
 @@
 
 The HTML looks like this:
 
 {{{
-<p style="color:rgb(255, 0, 0);">This is in red!</p>
+<p style="color:rgb(255, 0, 0); text-decoration:underline;">This is in red!</p>
 }}}
 
 Note that the style block doesn't generate any HTML elements itself, but instead causes the styles to be applied to all of the elements contained within the style block. This means that you can assign styles to elements generated from WikiText. For example, here is a list with some additional styles applied:
