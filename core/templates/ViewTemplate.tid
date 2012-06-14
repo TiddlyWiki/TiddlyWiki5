@@ -6,8 +6,8 @@ modifier: JeremyRuston
 }}}
 {{small{
 <div><<view modifier link>> <<view modified date>></div>
-<<tags template:"$:/templates/TagTemplate">>
 }}}
+<<tags template:"$:/templates/TagTemplate">>
 <div class="body">
 <<view text wikified>>
 </div>
