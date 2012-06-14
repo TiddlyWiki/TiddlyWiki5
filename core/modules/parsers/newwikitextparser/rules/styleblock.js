@@ -28,12 +28,12 @@ exports.name = "style";
 
 exports.blockParser = true;
 
-exports.regExpString = "@@[a-zA-Z0-9_\\-]+:.*$";
+exports.regExpString = "@@[a-zA-Z0-9_\\-]+:.*;$";
 
 exports.parse = function(match,isBlock) {
 	var styles = {},
 		tree = [],
-		reStyleSpecififer = /@@([a-zA-Z0-9_\-]+):(.*)((?:\r?\n)?)/mg,
+		reStyleSpecififer = /@@([a-zA-Z0-9_\-]+):(.*);((?:\r?\n)?)/mg,
 		reEndString = "@@",
 		endMatch;
 	// Look for the first style specifier
