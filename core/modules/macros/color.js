@@ -37,5 +37,4 @@ exports.executeMacro = function() {
 	return $tw.Tree.Element("span",attributes,this.content);
 };
 
-
 })();
