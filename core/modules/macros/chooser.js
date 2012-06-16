@@ -92,8 +92,8 @@ exports.hideChooser = function() {
 	if(this.chooserDisplayed) {
 		// this.deselect();
 		this.chooserDisplayed = false;
-		for(var t=0; t<this.child.children[0].children.length; t++) {
-			this.child.children[0].domNode.removeChild(this.child.children[0].children[t].domNode);
+		while(this.child.children[0].domNode.hasChildNodes()) {
+			this.child.children[0].domNode.removeChild(this.child.children[0].domNode.firstChild);
 		}
 		this.child.children[0].children = [];
 	}
