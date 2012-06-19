@@ -37,14 +37,14 @@ exports.triggerPopup = function(event,cancel) {
 	}
 	// Check for cancelling
 	if(cancel) {
-		this.wiki.deleteTextReference(textRef,this.tiddlerTitle);
+		$tw.popupper.cancel();
 	} else {
 		// Get the current popup state tiddler 
 		var value = this.wiki.getTextReference(textRef,"",this.tiddlerTitle);
 		// Check if the popup is open by checking whether it matches "(<x>,<y>)"
 		var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 		if(popupLocationRegExp.test(value)) {
-			this.wiki.deleteTextReference(textRef,this.tiddlerTitle);
+			$tw.popupper.cancel();
 		} else {
 			// Set the position if we're opening it
 			this.wiki.setTextReference(textRef,

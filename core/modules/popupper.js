@@ -33,6 +33,7 @@ Popupper.prototype.popup = function(stateTextRef) {
 
 Popupper.prototype.handleEvent = function(event) {
 	if(event.type === "click") {
+		this.rootElement.removeEventListener("click",this,true);
 		this.cancel();
 	}
 }
