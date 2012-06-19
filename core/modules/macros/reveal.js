@@ -30,15 +30,12 @@ exports.readState = function() {
 		this.isOpen = this.params["default"] === "open";
 	}
 	// Read the information from the state tiddler
-	if(this.stateTitle) {
-		var stateTiddler = this.wiki.getTiddler(this.stateTitle);
-		if(stateTiddler) {
-			var state = stateTiddler ? stateTiddler.fields.text : "";
-			switch(this.params.type) {
-				case "popup":
-					this.readPopupState(state);
-					break;
-			}
+	if(this.stateTextRef) {
+		var state = this.wiki.getTextReference(this.stateTextRef,"",this.tiddlerTitle);
+		switch(this.params.type) {
+			case "popup":
+				this.readPopupState(state);
+				break;
 		}
 	}
 };
@@ -66,15 +63,16 @@ exports.readPopupState = function(state) {
 exports.handleEvent = function(event) {
 	if(event.type === "click") {
 		// Cancel the popup if we get a click on it
-		var tiddler = this.wiki.getTiddler(this.stateTitle);
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.stateTitle, text: ""}),true);
+		if(this.stateTextRef) {
+			this.wiki.deleteTextReference(this.stateTextRef);
+		}
 	}
 };
 
 exports.executeMacro = function() {
-	this.stateTitle = this.params.state;
+	this.stateTextRef = this.params.state;
 	if(this.hasParameter("qualifyTiddlerTitles")) {
-		this.stateTitle = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + this.stateTitle;
+		this.stateTextRef = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + this.stateTextRef;
 	}
 	this.readState();
 	var attributes = {
@@ -105,10 +103,8 @@ exports.executeMacro = function() {
 exports.refreshInDom = function(changes) {
 	var needChildrenRefresh = true, // Avoid refreshing the children nodes if we don't need to
 		t;
-	// If the state tiddler has changed then reset the open state
-	if($tw.utils.hop(changes,this.stateTitle)) {
-		this.readState();
-	}
+	// Re-read the open state
+	this.readState();
 	// Render the children if we're open and we don't have any children yet
 	if(this.isOpen && this.child.children.length === 0) {
 		// Install the children and execute them

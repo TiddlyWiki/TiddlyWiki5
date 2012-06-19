@@ -30,47 +30,42 @@ exports.dispatchMessage = function(event) {
 };
 
 exports.triggerPopup = function(event,cancel) {
-	// Get the title of the popup state tiddler
-	var title = this.params.popup;
+	// Get the textref of the popup state tiddler
+	var textRef = this.params.popup;
 	if(this.hasParameter("qualifyTiddlerTitles") && this.params.qualifyTiddlerTitles === "yes") {
-		title = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + title;
+		textRef = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + textRef;
 	}
-	// Get the popup state tiddler and the the text value
-	var tiddler = this.wiki.getTiddler(title),
-		value = tiddler ? tiddler.fields.text : "";
 	// Check for cancelling
 	if(cancel) {
-		value = "";
+		this.wiki.deleteTextReference(textRef,this.tiddlerTitle);
 	} else {
+		// Get the current popup state tiddler 
+		var value = this.wiki.getTextReference(textRef,"",this.tiddlerTitle);
 		// Check if the popup is open by checking whether it matches "(<x>,<y>)"
 		var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 		if(popupLocationRegExp.test(value)) {
-			value = "";
+			this.wiki.deleteTextReference(textRef,this.tiddlerTitle);
 		} else {
 			// Set the position if we're opening it
-			value = "(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")";
+			this.wiki.setTextReference(textRef,
+				"(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + 
+					this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")",
+				this.tiddlerTitle,true);
+			$tw.popupper.popup(textRef);
 		}
 	}
-	// Update the state tiddler
-	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: value}),true);
 };
 
 exports.handleEvent = function(event) {
-	switch(event.type) {
-		case "click":
-			if(this.hasParameter("message")) {
-				this.dispatchMessage(event);
-			}
-			if(this.hasParameter("popup")) {
-				this.triggerPopup(event);
-			}
-			event.preventDefault();
-			return false;
-		case "tw-cancel-popup":
-			if(this.hasParameter("popup") && this.child.domNode !== event.targetOfCancel && !$tw.utils.domContains(this.child.domNode,event.targetOfCancel)) {
-				this.triggerPopup(event,true);
-			}
-			break;
+	if(event.type === "click") {
+		if(this.hasParameter("message")) {
+			this.dispatchMessage(event);
+		}
+		if(this.hasParameter("popup")) {
+			this.triggerPopup(event);
+		}
+		event.preventDefault();
+		return false;
 	}
 	return true;
 };
@@ -87,7 +82,7 @@ exports.executeMacro = function() {
 		this.content[t].execute(this.parents,this.tiddlerTitle);
 	}
 	return $tw.Tree.Element("button",attributes,this.content,{
-		events: ["click","tw-cancel-popup"],
+		events: ["click"],
 		eventHandler: this
 	});
 };

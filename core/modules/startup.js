@@ -48,35 +48,18 @@ exports.startup = function() {
 	$tw.Commander.initCommands();
 	// Host-specific startup
 	if($tw.browser) {
-		// Install the popup zapper
-		// document.body.addEventListener("click",function(event) {
-		// 	// Is the click within a popup?
-		// 	var inPopup = false,
-		// 		e = event.target;
-		// 	while(e !== document) {
-		// 		if($tw.utils.hasClass(e,"tw-popup")) {
-		// 			inPopup = true;
-		// 		}
-		// 		e = e.parentNode;
-		// 	}
-		// 	// If we're not in a popup, then send out an event to cancel all popups
-		// 	if(!inPopup) {
-		// 		var cancelPopupEvent = document.createEvent("Event");
-		// 		cancelPopupEvent.initEvent("tw-cancel-popup",true,true);
-		// 		cancelPopupEvent.targetOfCancel = event.target;
-		// 		var controllers = document.querySelectorAll(".tw-popup-controller");
-		// 		for(var t=0; t<controllers.length; t++) {
-		// 			controllers[t].dispatchEvent(cancelPopupEvent);
-		// 		}
-		// 	}
-		// });
+		// Install the popupper
+		$tw.popupper = new $tw.utils.Popupper({
+			wiki: $tw.wiki,
+			rootElement: document.body
+		});
 		// Display the PageTemplate
-		var template = "$:/templates/PageTemplate",
-			renderer = $tw.wiki.parseTiddler(template);
-		renderer.execute([],template);
-		renderer.renderInDom(document.body);
+		var template = "$:/templates/PageTemplate";
+		$tw.renderer = $tw.wiki.parseTiddler(template);
+		$tw.renderer.execute([],template);
+		$tw.renderer.renderInDom(document.body);
 		$tw.wiki.addEventListener("",function(changes) {
-			renderer.refreshInDom(changes);
+			$tw.renderer.refreshInDom(changes);
 		});
 		console.log("$tw",$tw);
 	} else {
