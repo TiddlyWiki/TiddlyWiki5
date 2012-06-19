@@ -220,16 +220,18 @@ Sort an array of tiddler titles by a specified field
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive) {
 	var self = this;
 	titles.sort(function(a,b) {
-		var aa = self.getTiddler(a).fields[sortField] || 0,
-			bb = self.getTiddler(b).fields[sortField] || 0;
-		if(!isCaseSensitive) {
-			aa = aa.toLowerCase();
-			bb = bb.toLowerCase();
+		if(sortField !== "title") {
+			a = self.getTiddler(a).fields[sortField] || 0;
+			b = self.getTiddler(b).fields[sortField] || 0;
 		}
-		if(aa < bb) {
+		if(!isCaseSensitive) {
+			a = a.toLowerCase();
+			b = b.toLowerCase();
+		}
+		if(a < b) {
 			return isDescending ? +1 : -1;
 		} else {
-			if(aa > bb) {
+			if(a > b) {
 				return isDescending ? -1 : +1;
 			} else {
 				return 0;
@@ -283,7 +285,6 @@ exports.getTiddlersWithTag = function(tag) {
 			titles.push(title);
 		}
 	}
-	this.sortTiddlers(titles,"title");
 	return titles;
 };
 
