@@ -54,12 +54,12 @@ exports.executeMacro = function() {
 			if(value === undefined) {
 				return $tw.Tree.Text("");
 			} else {
-				var link = $tw.Tree.Macro("link",{
+				var link = $tw.Tree.Element("span",{},[$tw.Tree.Macro("link",{
 											srcParams: {to: value},
 											content: [$tw.Tree.Text(value)],
 											isBlock: this.isBlock,
 											wiki: this.wiki
-										});
+										})]);
 				link.execute(parents,this.tiddlerTitle);
 				return link;
 			}
