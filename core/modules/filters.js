@@ -12,9 +12,9 @@ Adds tiddler filtering to the $tw.Wiki object.
 /*global $tw: false */
 "use strict";
 
-exports.filterTiddlers = function(filterString) {
+exports.filterTiddlers = function(filterString,currTiddlerTitle) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,this.tiddlers);
+	return fn.call(this,this.tiddlers,currTiddlerTitle);
 };
 
 /*
@@ -55,7 +55,7 @@ exports.compileFilter = function(filterString) {
 };
 
 exports.filterFragments = {
-	prologue: "(function(source) {\nvar results = [], subResults;",
+	prologue: "(function(source,currTiddlerTitle) {\nvar results = [], subResults, subResultsTemp, title, r, t;",
 	epilogue: "return results;\n})",
 	operation: {
 		prefix: {
@@ -87,49 +87,73 @@ exports.operators = {
 	"prefix": {
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
-			return "for(var title in source) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
+			return "for(title in source) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "=" : "!";
-			return "for(var r=subResults.length-1; r>=0; r--) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {subResults.splice(r,1);}}";
+			return "for(r=subResults.length-1; r>=0; r--) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {subResults.splice(r,1);}}";
 		}
 	},
 	"is": {
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "";
-			if(operator.operand === "shadow") {
-				return "for(var title in source) {if(" + op + "this.getTiddler(title).isShadow) {$tw.utils.pushTop(subResults,title);}}";
-			} else {
-				throw "Unknown operand for 'is' filter operator";
+			switch(operator.operand) {
+				case "current":
+					if(operator.prefix === "!") {
+						return "for(title in source) {if(title !== currTiddlerTitle) {$tw.utils.pushTop(subResults,title);}}";
+					} else {
+						return "if($tw.utils.hop(source,currTiddlerTitle)) {$tw.utils.pushTop(subResults,currTiddlerTitle);}";
+					}
+					break;
+				case "shadow":
+					return "for(title in source) {if(" + op + "this.getTiddler(title).isShadow) {$tw.utils.pushTop(subResults,title);}}";
+				default:
+					throw "Unknown operand for 'is' filter operator";
 			}
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "" : "!";
-			if(operator.operand === "shadow") {
-				return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow) {subResults.splice(r,1);}}";
-			} else {
-				throw "Unknown operand for 'is' filter operator";
+			switch(operator.operand) {
+				case "current":
+					if(operator.prefix === "!") {
+						return "for(r=subResults.length-1; r>=0; r--) {if(subResults[r] === currTiddlerTitle) {subResults.splice(r,1);}}";
+					} else {
+						return "r = subResults.indexOf(currTiddlerTitle);\nif(r !== -1) {subResults = [currTiddlerTitle];} else {subResults = [];}";
+					}
+					break;
+				case "shadow":
+					return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow) {subResults.splice(r,1);}}";
+				default:
+					throw "Unknown operand for 'is' filter operator";
 			}
 		}
 	},
 	"tag": {
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "";
-			return "for(var title in source) {if(" + op + "this.getTiddler(title).hasTag(\"" + $tw.utils.stringify(operator.operand) + "\")) {$tw.utils.pushTop(subResults,title);}}";
+			return "for(title in source) {if(" + op + "this.getTiddler(title).hasTag(\"" + $tw.utils.stringify(operator.operand) + "\")) {$tw.utils.pushTop(subResults,title);}}";
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "" : "!";
-			return "for(var r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).hasTag(\"" + $tw.utils.stringify(operator.operand) + "\")) {subResults.splice(r,1);}}";
+			return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).hasTag(\"" + $tw.utils.stringify(operator.operand) + "\")) {subResults.splice(r,1);}}";
+		}
+	},
+	"tags": {
+		selector: function(operator) {
+			return "for(title in source) {r = this.getTiddler(title); if(r && r.fields.tags) {$tw.utils.pushTop(subResults,r.fields.tags);}}";
+		},
+		filter: function(operator) {
+			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {r = this.getTiddler(subResultsTemp[t]); if(r && r.fields.tags) {$tw.utils.pushTop(subResults,r.fields.tags);}}";
 		}
 	},
 	"has": {
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "=" : "!";
-			return "for(var title in source) {if(this.getTiddler(title).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {$tw.utils.pushTop(subResults,title);}}";
+			return "for(title in source) {if(this.getTiddler(title).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {$tw.utils.pushTop(subResults,title);}}";
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
-			return "for(var r=subResults.length-1; r>=0; r--) {if(this.getTiddler(subResults[r]).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {subResults.splice(r,1);}}";
+			return "for(r=subResults.length-1; r>=0; r--) {if(this.getTiddler(subResults[r]).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {subResults.splice(r,1);}}";
 		}
 	},
 	"sort": {
@@ -163,11 +187,11 @@ exports.operators = {
 	"field": {
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
-			return "for(var title in source) {if(this.getTiddler(title).fields[\"" + $tw.utils.stringify(operator.operator) + "\"] " + op + "== \"" + operator.operand + "\") {$tw.utils.pushTop(subResults,title);}}";
+			return "for(title in source) {if(this.getTiddler(title).fields[\"" + $tw.utils.stringify(operator.operator) + "\"] " + op + "== \"" + operator.operand + "\") {$tw.utils.pushTop(subResults,title);}}";
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "=" : "!";
-			return "for(var r=subResults.length-1; r>=0; r--) {if(this.getTiddler(subResults[r]).fields[\"" + $tw.utils.stringify(operator.operator) + "\"] " + op + "== \"" + operator.operand + "\") {subResults.splice(r,1);}}";
+			return "for(r=subResults.length-1; r>=0; r--) {if(this.getTiddler(subResults[r]).fields[\"" + $tw.utils.stringify(operator.operator) + "\"] " + op + "== \"" + operator.operand + "\") {subResults.splice(r,1);}}";
 		}
 	}
 };
