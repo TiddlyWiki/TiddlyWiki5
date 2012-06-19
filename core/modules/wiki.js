@@ -52,7 +52,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle,isShadow) {
 		title = tr.title || currTiddlerTitle;
 		tiddler = this.getTiddler(title);
 		if(tiddler) {
-			var fields = {};
+			fields = {};
 			fields[tr.field] = value;
 			this.addTiddler(new $tw.Tiddler(tiddler,fields));
 		}
@@ -70,7 +70,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 		title = tr.title || currTiddlerTitle;
 		tiddler = this.getTiddler(title);
 		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
-			var fields = {};
+			fields = {};
 			fields[tr.field] = undefined;
 			this.addTiddler(new $tw.Tiddler(tiddler,fields));
 		}
