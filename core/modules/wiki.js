@@ -25,10 +25,52 @@ last dispatched. Each entry is a hashmap containing two fields:
 /*global $tw: false */
 "use strict";
 
-exports.getTiddlerText = function(title,defaultText) {
-	defaultText = typeof defaultText === "string"  ? defaultText : null;
-	var t = this.getTiddler(title);
-	return t ? t.fields.text : defaultText;
+/*
+Get the value of a text reference
+*/
+exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
+	var tr = this.parseTextReference(textRef),
+		title = tr.title || currTiddlerTitle,
+		field = tr.field || "text",
+		tiddler = this.getTiddler(title);
+	if(tiddler && $tw.utils.hop(tiddler.fields,field)) {
+		return tiddler.fields[field];
+	} else {
+		return defaultText;
+	}
+};
+
+exports.setTextReference = function(textRef,value,currTiddlerTitle) {
+
+};
+
+exports.deleteTextReference = function(textRef) {
+
+};
+
+/*
+Parse a text reference into its constituent parts
+*/
+exports.parseTextReference = function(textRef,currTiddlerTitle) {
+	// Look for a metadata field separator
+	var pos = textRef.indexOf("!!");
+	if(pos !== -1) {
+		if(pos === 0) {
+			return {
+				field: textRef
+			};
+		} else {
+			return {
+				title: textRef.substring(0,pos - 1),
+				field: textRef.substring(pos + 2)
+			};	
+		}
+	} else {
+		// Otherwise, we've just got a title
+		return {
+			title: textRef
+		};
+	}
 };
 
 exports.addEventListener = function(filter,listener) {
