@@ -18,7 +18,8 @@ exports.info = {
 		filter: {byPos: 0, type: "filter"},
 		title: {byPos: 1, type: "tiddler"},
 		templateTitle: {byName: true, type: "text"},
-		templateText: {byName: true, type: "text"}
+		templateText: {byName: true, type: "text"},
+		emptyMessage: {byName: true, type: "text"}
 	}
 };
 
@@ -51,14 +52,22 @@ exports.executeMacro = function() {
 			templateParseTree = this.wiki.parseText("text/x-tiddlywiki","<<view text wikified>>");
 		}
 	}
-	// Render the tiddlers through the template
-	nodes = [];
-	for(t=0; t<titles.length; t++) {
-		title = titles[t];
-		for(c=0; c<templateParseTree.tree.length; c++) {
-			node = templateParseTree.tree[c].clone();
-			node.execute(parents,title);
-			nodes.push(node);
+	// Use the empty message if the list is empty
+	if(titles.length === 0 && this.hasParameter("emptyMessage")) {
+		nodes = this.wiki.parseText("text/x-tiddlywiki",this.params.emptyMessage).tree;
+		for(c=0; c<nodes.length; c++) {
+			nodes[c].execute(this.parents,this.tiddlerTitle);
+		}
+	} else {
+		// Render the tiddlers through the template
+		nodes = [];
+		for(t=0; t<titles.length; t++) {
+			title = titles[t];
+			for(c=0; c<templateParseTree.tree.length; c++) {
+				node = templateParseTree.tree[c].clone();
+				node.execute(parents,title);
+				nodes.push(node);
+			}
 		}
 	}
 	// Return

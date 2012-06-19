@@ -29,9 +29,6 @@ var handlers = {
 		// Server syncing isn't implemented yet
 		return [];
 	},
-	tagging: function(wiki,tiddlerTitle) {
-		return wiki.getTiddlersWithTag(tiddlerTitle);
-	},
 	filter: function(wiki) {
 		// Filters aren't implemented yet
 		return [];
