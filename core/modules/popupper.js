@@ -36,7 +36,7 @@ Popupper.prototype.handleEvent = function(event) {
 		this.rootElement.removeEventListener("click",this,true);
 		this.cancel();
 	}
-}
+};
 
 Popupper.prototype.cancel = function() {
 	if(this.popupTextRef) {
