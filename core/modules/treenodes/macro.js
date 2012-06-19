@@ -208,9 +208,13 @@ Macro.prototype.refreshInDom = function(changes) {
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Re-execute the macro if so
 		// Macros can only auto-refresh if their immediate child is a DOM node
-		var parentDomNode = this.child.domNode.parentNode,
-			insertBefore = this.child.domNode.nextSibling;
-		parentDomNode.removeChild(this.child.domNode);
+		var child = this.child;
+		while(!child.domNode && child.child) {
+			child = child.child;
+		}
+		var parentDomNode = child.domNode.parentNode,
+			insertBefore = child.domNode.nextSibling;
+		parentDomNode.removeChild(child.domNode);
 		this.execute(this.parents,this.tiddlerTitle);
 		this.renderInDom(parentDomNode,insertBefore);
 	} else {
