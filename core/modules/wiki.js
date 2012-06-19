@@ -40,12 +40,41 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	}
 };
 
-exports.setTextReference = function(textRef,value,currTiddlerTitle) {
-
+exports.setTextReference = function(textRef,value,currTiddlerTitle,isShadow) {
+	var tr = this.parseTextReference(textRef),
+		title,tiddler,fields;
+	// Check if it is a reference to a tiddler
+	if(tr.title && !tr.field) {
+		tiddler = this.getTiddler(tr.title);
+		this.addTiddler(new $tw.Tiddler(tiddler,{title: tr.title,text: value}),isShadow);
+	// Else check for a field reference
+	} else if(tr.field) {
+		title = tr.title || currTiddlerTitle;
+		tiddler = this.getTiddler(title);
+		if(tiddler) {
+			var fields = {};
+			fields[tr.field] = value;
+			this.addTiddler(new $tw.Tiddler(tiddler,fields));
+		}
+	}
 };
 
-exports.deleteTextReference = function(textRef) {
-
+exports.deleteTextReference = function(textRef,currTiddlerTitle) {
+	var tr = this.parseTextReference(textRef),
+		title,tiddler,fields;
+	// Check if it is a reference to a tiddler
+	if(tr.title && !tr.field) {
+		this.deleteTiddler(tr.title);
+	// Else check for a field reference
+	} else if(tr.field) {
+		title = tr.title || currTiddlerTitle;
+		tiddler = this.getTiddler(title);
+		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
+			var fields = {};
+			fields[tr.field] = undefined;
+			this.addTiddler(new $tw.Tiddler(tiddler,fields));
+		}
+	}
 };
 
 /*
