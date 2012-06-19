@@ -78,7 +78,7 @@ exports.filterFragments = {
 exports.operators = {
 	"title": {
 		selector: function(operator) {
-			return "if($tw.utils.hop(source,\"" + $tw.utils.stringify(operator.operand) + "\")) {$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");}";
+			return "$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");";
 		},
 		filter: function(operator) {
 			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") !== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}";
@@ -102,7 +102,7 @@ exports.operators = {
 					if(operator.prefix === "!") {
 						return "for(title in source) {if(title !== currTiddlerTitle) {$tw.utils.pushTop(subResults,title);}}";
 					} else {
-						return "if($tw.utils.hop(source,currTiddlerTitle)) {$tw.utils.pushTop(subResults,currTiddlerTitle);}";
+						return "$tw.utils.pushTop(subResults,currTiddlerTitle);";
 					}
 					break;
 				case "shadow":
@@ -144,6 +144,14 @@ exports.operators = {
 		},
 		filter: function(operator) {
 			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {r = this.getTiddler(subResultsTemp[t]); if(r && r.fields.tags) {$tw.utils.pushTop(subResults,r.fields.tags);}}";
+		}
+	},
+	"tagging": {
+		selector: function(operator) {
+			return "for(title in source) {$tw.utils.pushTop(subResults,this.getTiddlersWithTag(title));}";
+		},
+		filter: function(operator) {
+			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {$tw.utils.pushTop(subResults,this.getTiddlersWithTag(subResultsTemp[t]));}";
 		}
 	},
 	"has": {
