@@ -100,30 +100,7 @@ exports.executeMacro = function() {
 	return child;
 };
 
-exports.refreshInDom = function(changes) {
-	var needChildrenRefresh = true, // Avoid refreshing the children nodes if we don't need to
-		t;
-	// Re-read the open state
-	this.readState();
-	// Render the children if we're open and we don't have any children yet
-	if(this.isOpen && this.child.children.length === 0) {
-		// Install the children and execute them
-		this.child.children = this.content;
-		for(t=0; t<this.child.children.length; t++) {
-			this.child.children[t].execute(this.parents,this.tiddlerTitle);
-			this.child.children[t].renderInDom(this.child.domNode);
-		}
-		needChildrenRefresh = false; // Don't refresh the children if we've just created them
-	}
-	// Refresh the children
-	if(needChildrenRefresh) {
-		for(t=0; t<this.child.children.length; t++) {
-			this.child.children[t].refreshInDom(changes);
-		}
-	}
-	// Set the visibility of the children
-	this.child.domNode.style.display = this.isOpen ? "block" : "none";
-	// Position the content if required
+exports.postRenderInDom = function() {
 	switch(this.params.type) {
 		case "popup":
 			if(this.isOpen) {
@@ -150,6 +127,33 @@ exports.refreshInDom = function(changes) {
 			}
 			break;
 	}
+};
+
+exports.refreshInDom = function(changes) {
+	var needChildrenRefresh = true, // Avoid refreshing the children nodes if we don't need to
+		t;
+	// Re-read the open state
+	this.readState();
+	// Render the children if we're open and we don't have any children yet
+	if(this.isOpen && this.child.children.length === 0) {
+		// Install the children and execute them
+		this.child.children = this.content;
+		for(t=0; t<this.child.children.length; t++) {
+			this.child.children[t].execute(this.parents,this.tiddlerTitle);
+			this.child.children[t].renderInDom(this.child.domNode);
+		}
+		needChildrenRefresh = false; // Don't refresh the children if we've just created them
+	}
+	// Refresh the children
+	if(needChildrenRefresh) {
+		for(t=0; t<this.child.children.length; t++) {
+			this.child.children[t].refreshInDom(changes);
+		}
+	}
+	// Set the visibility of the children
+	this.child.domNode.style.display = this.isOpen ? "block" : "none";
+	// Position the content if required
+	this.postRenderInDom();
 };
 
 })();
