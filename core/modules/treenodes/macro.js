@@ -207,7 +207,7 @@ Macro.prototype.refreshInDom = function(changes) {
 	// Check if any of the dependencies of this macro node have changed
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Re-execute the macro if so
-		// Macros can only auto-refresh if their immediate child is a DOM node
+		// Macros can only auto-refresh if on of their descendent child has a DOM node
 		var child = this.child;
 		while(!child.domNode && child.child) {
 			child = child.child;
