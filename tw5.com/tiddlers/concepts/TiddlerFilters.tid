@@ -41,7 +41,8 @@ The operator defaults to `title` if omitted, so `[[HelloThere]]` is equivalent t
 
 The operands available with the `is` operator are:
 
-* ''tiddler'': selects all ordinary (non-shadow) tiddlers
+* ''shadow'': selects all shadow tiddlers
+* ''current'': selects the current ContextTiddler
 
 Operators are combined into logically ANDed expressions by bashing them together and merging the square brackets:
 

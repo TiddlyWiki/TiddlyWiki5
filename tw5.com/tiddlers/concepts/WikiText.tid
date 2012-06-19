@@ -2,9 +2,11 @@ title: WikiText
 type: text/x-tiddlywiki
 tags: docs concepts
 
-WikiText is a concise, expressive way of typing a wide range of text formatting and hypertext features. Operations like linking become part of the punctuation of your writing.
+WikiText is a concise, expressive way of typing a wide range of text formatting and hypertext features. It allows you to focus on writing without a complex user interface getting in the way.
 
-The key feature of wikitext is the ability to include one tiddler within another (usually referred to as //transclusion//). For example, one could have a tiddler called //Disclaimer// that contains the boilerplate of a legal disclaimer, and then include it within lots of different tiddlers with the macro call `<<tiddler Disclaimer>>`. 
+For example, you can create a link to a tiddler by wrapping its title in double square brackets -- `[[My Tiddler]]` -- or, if the tiddler title conforms to the CamcelCase rules, it is automatically linked without needing the brackets. In this way,  linking become part of the punctuation of your writing.
+
+Another key feature of wikitext is the ability to include one tiddler within another (referred to as //transclusion//). For example, one could have a tiddler called //Disclaimer// that contains the boilerplate of a legal disclaimer, and then include it within lots of different tiddlers with the macro call `<<tiddler Disclaimer>>`. 
 
 ! This is a heading
 

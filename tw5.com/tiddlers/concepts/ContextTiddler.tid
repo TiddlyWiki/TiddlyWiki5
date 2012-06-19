@@ -1,0 +1,4 @@
+title: ContextTiddler
+tags: docs concepts
+
+The ContextTiddler is the current tiddler during WikiText processing. It allows you to write a macro like `<<view title link>>` without explicitly specifying the tiddler that it applies to.
