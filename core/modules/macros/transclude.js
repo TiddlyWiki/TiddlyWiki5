@@ -26,7 +26,8 @@ exports.info = {
 exports.executeMacro = function() {
 	var titles,templateTiddler,templateText,t,title,templateParseTree,
 		nodes,node,c,
-		parents = this.parents;
+		parents = this.parents.slice(0);
+	parents.push(this.tiddlerTitle);
 	// Get the tiddlers we're transcluding
 	if(this.hasParameter("filter")) {
 		titles = this.wiki.filterTiddlers(this.params.filter,this.tiddlerTitle);
@@ -44,8 +45,7 @@ exports.executeMacro = function() {
 			// Check for recursion
 			if(parents.indexOf(this.params.templateTitle) !== -1) {
 				return $tw.Tree.errorNode("Tiddler recursion error in <<transclude>> macro");	
-			} 
-			parents = parents.slice(0);
+			}
 			parents.push(this.params.templateTitle);
 			templateParseTree = this.wiki.parseTiddler(this.params.templateTitle);
 		} else {
