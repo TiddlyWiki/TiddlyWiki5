@@ -204,8 +204,20 @@ Macro.prototype.refresh = function(changes) {
 Macros that need special refreshing should override this function
 */
 Macro.prototype.refreshInDom = function(changes) {
-	if(this.child) {
-		this.child.refreshInDom(changes);
+	// Check if any of the dependencies of this macro node have changed
+	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
+		// Re-execute the macro if so
+		// Macros can only auto-refresh if their immediate child is a DOM node
+		var parentDomNode = this.child.domNode.parentNode,
+			insertBefore = this.child.domNode.nextSibling;
+		parentDomNode.removeChild(this.child.domNode);
+		this.execute(this.parents,this.tiddlerTitle);
+		this.renderInDom(parentDomNode,insertBefore);
+	} else {
+		// Refresh any child
+		if(this.child) {
+			this.child.refreshInDom(changes);
+		}
 	}
 };
 
