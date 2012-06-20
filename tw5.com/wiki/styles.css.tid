@@ -24,8 +24,8 @@ body {
 
 .title {
 	font-weight: bold;
-	font-size: 40px;
-	line-height: 48px;
+	font-size: 33px;
+	line-height: 40px;
 	color: #844;
 }
 
