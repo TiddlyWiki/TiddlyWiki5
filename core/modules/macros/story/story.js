@@ -182,7 +182,7 @@ exports.postRenderInDom = function() {
 		this.storyview = new StoryView(this);
 	}
 	if(!this.storyview) {
-		StoryView = this.wiki.macros.story.viewers.scroller;
+		StoryView = this.wiki.macros.story.viewers.classic;
 		if(StoryView) {
 			this.storyview = new StoryView(this);
 		}

@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <div class="container-fluid">
-<<story story:"$:/StoryTiddlers" storyviewTiddler:[[$:/CurrentView]] storyview:scroller ><
+<<story story:"$:/StoryTiddlers" storyviewTiddler:[[$:/CurrentView]] storyview:classic ><
 {{navigation-panel{
 <<chooser><<<list all>>>>
 }}}
@@ -26,7 +26,7 @@ title: $:/templates/PageTemplate
 <<reveal state:ViewDropDownState type:popup><
 <div class="open">
 {{dropdown-menu tw-suppress-missing-tiddlylink{
-* <<link to:scroller>< <<hide tiddler:[[$:/CurrentView]] notequal:scroller>< <span class="tw-ticked-menu-item"></span> >> Classic>>
+* <<link to:classic>< <<hide tiddler:[[$:/CurrentView]] notequal:classic>< <span class="tw-ticked-menu-item"></span> >> Classic>>
 * <<link to:zoomin>< <<hide tiddler:[[$:/CurrentView]] notequal:zoomin>< <span class="tw-ticked-menu-item"></span> >> Zoomin>>
 * <<link to:pasteboard>< <<hide tiddler:[[$:/CurrentView]] notequal:pasteboard>< <span class="tw-ticked-menu-item"></span> >> Pasteboard>>
 }}}

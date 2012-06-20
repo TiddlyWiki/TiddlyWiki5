@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/macros/story/views/scroller.js
+title: $:/core/modules/macros/story/views/classic.js
 type: application/javascript
 module-type: storyview
 
@@ -46,7 +46,7 @@ function scrollIntoView(element) {
 	}
 }
 
-function Scroller(story) {
+function ClassicScroller(story) {
 	this.story = story;
 }
 
@@ -56,10 +56,10 @@ Visualise navigation to the specified tiddler macro, optionally specifying a sou
 	isNew: true if the node we're navigating to has just been added to the DOM
 	sourceNode: optional tree node that initiated the navigation
 */
-Scroller.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
+ClassicScroller.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
 	scrollIntoView(targetTiddlerNode.domNode);
 };
 
-exports.scroller = Scroller;
+exports.classic = ClassicScroller;
 
 })();
