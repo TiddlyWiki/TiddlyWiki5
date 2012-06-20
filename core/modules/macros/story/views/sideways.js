@@ -14,7 +14,7 @@ A storyview that shows a sequence of tiddlers as horizontally stacked blocks
 
 function setStoryElementStyles(e) {
 	e.style.display = "inline-block";
-	e.style.width = "350px";
+	e.style.width = "380px";
 	e.style.verticalAlign = "top";
 	e.style.whiteSpace = "normal";
 }
