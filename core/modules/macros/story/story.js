@@ -26,6 +26,7 @@ exports.info = {
 		story: {byName: "default", type: "tiddler"},
 		defaultViewTemplate: {byName: true, type: "tiddler"},
 		defaultEditTemplate: {byName: true, type: "tiddler"},
+		storyviewTiddler: {byName: true, type: "tiddler"},
 		storyview: {byName: true, type: "text"}
 	}
 };
