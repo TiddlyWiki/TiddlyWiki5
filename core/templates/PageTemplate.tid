@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <div class="container-fluid">
-<<story story:"$:/StoryTiddlers" storyview:scroller ><
+<<story story:"$:/StoryTiddlers" storyviewTiddler:[[$:/CurrentView]] storyview:scroller ><
 {{navigation-panel{
 <<chooser><<<list all>>>>
 }}}
@@ -17,7 +17,7 @@ title: $:/templates/PageTemplate
 *{{divider-vertical}}
 
 {{pull-right btn btn-info{
-<<button popup:ViewDropDownState><View<span class="caret"></span>>>
+<<button popup:ViewDropDownState><View <span class="caret"></span>>>
 }}}
 
 }}}

@@ -170,7 +170,14 @@ exports.executeMacro = function() {
 
 exports.postRenderInDom = function() {
 	// Instantiate the story view
-	var StoryView = this.wiki.macros.story.viewers[this.params.storyview];
+	var storyviewName;
+	if(this.hasParameter("storyviewTiddler")) {
+		storyviewName = this.wiki.getTextReference(this.params.storyviewTiddler)
+	}
+	if(!storyviewName && this.hasParameter("storyview")) {
+		storyviewName = this.params.storyview;
+	}
+	var StoryView = this.wiki.macros.story.viewers[storyviewName];
 	if(StoryView) {
 		this.storyview = new StoryView(this);
 	}
@@ -184,6 +191,20 @@ exports.postRenderInDom = function() {
 
 exports.refreshInDom = function(changes) {
 	var t;
+	// If the storyview has changed we'll have to completely re-execute the macro
+	if(this.hasParameter("storyviewTiddler") && $tw.utils.hop(changes,this.params.storyviewTiddler)) {
+		// This logic should be reused from the base macro class, and not duplicated
+		var child = this.child;
+		while(!child.domNode && child.child) {
+			child = child.child;
+		}
+		var parentDomNode = child.domNode.parentNode,
+			insertBefore = child.domNode.nextSibling;
+		parentDomNode.removeChild(child.domNode);
+		this.execute(this.parents,this.tiddlerTitle);
+		this.renderInDom(parentDomNode,insertBefore);
+		return;
+	}
 	/*jslint browser: true */
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Get the tiddlers we're supposed to be displaying
