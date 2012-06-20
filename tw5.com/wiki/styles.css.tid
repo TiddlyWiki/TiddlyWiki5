@@ -9,7 +9,7 @@ body {
 
 .tw-story-element {
 	position: relative;
-	margin: 30px 0px 30px 0px;
+	margin: 30px 5px 30px 5px;
 	padding: 20px 20px 20px 20px;
 	border: 1px solid #999;
 	background-color: #fff;
