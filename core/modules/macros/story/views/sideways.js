@@ -38,6 +38,7 @@ Visualise navigation to the specified tiddler macro, optionally specifying a sou
 */
 SidewaysView.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
 	setStoryElementStyles(targetTiddlerNode.domNode);
+	$tw.utils.scrollIntoView(targetTiddlerNode.domNode);
 };
 
 exports.sideways = SidewaysView;

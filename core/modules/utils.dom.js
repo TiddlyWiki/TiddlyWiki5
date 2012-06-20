@@ -75,4 +75,36 @@ exports.applyStyleSheet = function(id,css) {
 	}
 };
 
+/*
+Smoothly scroll an element back into view if needed
+*/
+exports.scrollIntoView = function(element) {
+	var slowInSlowOut = function(t) {
+			return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
+		},
+		animateScroll = function(startX,startY,endX,endY,duration) {
+			var startTime = new Date(),
+				timerId = window.setInterval(function() {
+					var t = ((new Date()) - startTime) / duration;
+					if(t >= 1) {
+						window.clearInterval(timerId);
+						t = 1;
+					}
+					t = slowInSlowOut(t);
+					var x = startX + (endX - startX) * t,
+						y = startY + (endY - startY) * t;
+					window.scrollTo(x,y);
+				}, 10);
+		},
+		x = element.offsetLeft,
+		y = element.offsetTop,
+		winWidth = window.innerWidth,
+		winHeight = window.innerHeight,
+		scrollLeft = window.scrollX || document.documentElement.scrollLeft,
+		scrollTop = window.scrollY || document.documentElement.scrollTop;
+	if((x < scrollLeft) || (x > (scrollLeft + winWidth)) || (y < scrollTop) || (y > (scrollTop + winHeight))) {
+		animateScroll(scrollLeft,scrollTop,x,y,$tw.config.preferences.animationDuration);
+	}
+};
+
 })();
