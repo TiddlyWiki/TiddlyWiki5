@@ -172,7 +172,7 @@ exports.postRenderInDom = function() {
 	// Instantiate the story view
 	var storyviewName;
 	if(this.hasParameter("storyviewTiddler")) {
-		storyviewName = this.wiki.getTextReference(this.params.storyviewTiddler)
+		storyviewName = this.wiki.getTextReference(this.params.storyviewTiddler);
 	}
 	if(!storyviewName && this.hasParameter("storyview")) {
 		storyviewName = this.params.storyview;
