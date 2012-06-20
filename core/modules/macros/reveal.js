@@ -66,7 +66,10 @@ exports.handleEvent = function(event) {
 		if(this.stateTextRef) {
 			this.wiki.deleteTextReference(this.stateTextRef);
 		}
+		event.preventDefault();
+		return false;
 	}
+	return true;
 };
 
 exports.executeMacro = function() {
