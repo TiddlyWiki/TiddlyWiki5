@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <div class="container-fluid">
-<<story story:"$:/StoryTiddlers" storyview:scroller><
+<<story story:"$:/StoryTiddlers" storyview:scroller ><
 {{navigation-panel{
 <<chooser><<<list all>>>>
 }}}
@@ -10,10 +10,30 @@ title: $:/templates/PageTemplate
 <div class="navbar-inner">
 <div class="container">
 {{nav{
+
 * HelloThere
 * [[Introduction]]
 * [[Docs]]
+*{{divider-vertical}}
+
+{{pull-right btn btn-info{
+<<button popup:ViewDropDownState><View<span class="caret"></span>>>
 }}}
+
+}}}
+
+<<linkcatcher store:[[$:/CurrentView]]><
+<<reveal state:ViewDropDownState type:popup><
+<div class="open">
+{{dropdown-menu tw-suppress-missing-tiddlylink{
+* <<link to:scroller>< <<hide tiddler:[[$:/CurrentView]] notequal:scroller>< <span class="tw-ticked-menu-item"></span> >> Classic>>
+* <<link to:zoomin>< <<hide tiddler:[[$:/CurrentView]] notequal:zoomin>< <span class="tw-ticked-menu-item"></span> >> Zoomin>>
+* <<link to:pasteboard>< <<hide tiddler:[[$:/CurrentView]] notequal:pasteboard>< <span class="tw-ticked-menu-item"></span> >> Pasteboard>>
+}}}
+</div>
+>>
+>>
+
 </div>
 </div>
 </div>

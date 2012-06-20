@@ -38,8 +38,18 @@ body {
 	font-weight: normal;
 }
 
+.tw-ticked-menu-item::before {
+	position: absolute;
+	content: "\2022";
+	left: 4px;
+}
+
 .dropdown-menu {
 	position: static;
+}
+
+.dropdown-menu a {
+	position: relative;
 }
 
 button.tw-tag-popup {
@@ -84,6 +94,18 @@ a.tw-tiddlylink-resolves {
 
 a.tw-tiddlylink-missing {
 	font-style: italic;
+}
+
+.tw-suppress-missing-tiddlylink a.tw-tiddlylink-missing {
+	font-style: inherit;
+}
+
+/* This is needed to make the dropdown arrows abutt to the dropdown itself */
+.navbar .dropdown-menu::before {
+top: -5px;
+}
+.navbar .dropdown-menu::after {
+top: -4px;
 }
 
 .splitLabel {
