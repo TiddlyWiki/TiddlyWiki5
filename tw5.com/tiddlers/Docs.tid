@@ -165,6 +165,7 @@ Serializers are modules that convert tiddlers to different text formats:
 
 ! Developer Cookbooks
 
+* [[Using TiddlyWiki for GitHub Pages project documentation]]
 * [[Using TiddlyWiki as a component in node.js applications]]
 
 ! Miscellaneous
