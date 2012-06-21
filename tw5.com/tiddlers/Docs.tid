@@ -163,6 +163,10 @@ Deserializers are modules that read tiddlers from different text formats:
 
 Serializers are modules that convert tiddlers to different text formats:
 
+! Developer Cookbooks
+
+* [[Using TiddlyWiki as a component in node.js applications]]
+
 ! Miscellaneous
 
 * ReportingBugs

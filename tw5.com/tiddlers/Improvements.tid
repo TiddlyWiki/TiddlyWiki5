@@ -1,7 +1,7 @@
 title: Improvements
 tags: docs introduction
 
-The following features have been improved in TiddlyWiki5:
+Some of the features that have been improved in TiddlyWiki5:
 
 * TiddlyWiki can now be run under [[node.js|http://nodejs.org]] as well as in the browser
 * TiddlyWiki is structured as a 600-line boot kernel, with everything else implemented as plugins
