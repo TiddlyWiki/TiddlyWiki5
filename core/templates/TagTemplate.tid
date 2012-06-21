@@ -1,6 +1,6 @@
 title: $:/templates/TagTemplate
 
-{{tw-tag-popup{
+{{btn-invisible{
 <<button popup:TagDropDownLocation qualifyTiddlerTitles:yes><
 {{label{
 <<color background:yes default:#888><

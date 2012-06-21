@@ -143,6 +143,27 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 	return false;
 };
 
+// Take a tiddler out of edit mode, saving the changes
+exports.eventMap["tw-CloseTiddler"] = function(event) {
+	var story,t,storyElement;
+	story = this.getStory();
+	// Look for tiddlers with this title to close
+	for(t=story.tiddlers.length-1; t>=0; t--) {
+		if(story.tiddlers[t].title === event.tiddlerTitle) {
+			storyElement = this.storyNode.children[t];
+			// Remove the DOM node
+			storyElement.domNode.parentNode.removeChild(storyElement.domNode);
+			// Remove the story element node
+			this.storyNode.children.splice(t,1);
+			// Remove the record in the story
+			story.tiddlers.splice(t,1);
+		}
+	}
+	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
+	event.stopPropagation();
+	return false;
+};
+
 exports.executeMacro = function() {
 	// Create the story frame
 	var story = this.getStory();
@@ -163,7 +184,7 @@ exports.executeMacro = function() {
 		attributes["class"] = this.classes.slice(0);
 	}
 	return $tw.Tree.Element("div",attributes,[this.contentNode,this.storyNode],{
-		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler"],
+		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
 		eventHandler: this
 	});
 };

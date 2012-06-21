@@ -3,7 +3,9 @@ title: $:/templates/PageTemplate
 <div class="container-fluid">
 <<story story:"$:/StoryTiddlers" storyviewTiddler:[[$:/CurrentView]] storyview:classic ><
 {{navigation-panel{
-<<chooser><<<list all>>>>
+<<chooser><
+	<<list all>>
+>>
 }}}
 <<zoomer>>
 <div class="navbar navbar-fixed-top">

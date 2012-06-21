@@ -1,15 +1,17 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-{{title{
-<div><span><<view title>></span><<button EditTiddler class:"btn btn-mini"><edit>></div>
-}}}
-{{small{
-<div><<view modifier link>> <<view modified date>></div>
-}}}
+<div class="title">
+	<span><<view title>></span>
+	<<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>>
+	<<button CloseTiddler class:"btn-invisible pull-right"><[img[$:/core/images/close-button.svg]]>>
+</div>
+<div class="small">
+	<<view modifier link>> <<view modified date>>
+</div>
 {{tw-tags-wrapper{
 ((([is[current]tags[]]))($:/templates/TagTemplate))
 }}}
 <div class="body">
-<<view text wikified>>
+	<<view text wikified>>
 </div>

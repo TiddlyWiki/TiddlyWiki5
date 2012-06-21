@@ -52,7 +52,7 @@ body {
 	position: relative;
 }
 
-button.tw-tag-popup {
+.btn-invisible {
 	border: none;
 	background: none;
 	margin: 0;
