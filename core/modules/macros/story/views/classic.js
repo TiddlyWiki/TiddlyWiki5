@@ -26,6 +26,38 @@ ClassicScroller.prototype.navigate = function(targetTiddlerNode,isNew,sourceEven
 	$tw.utils.scrollIntoView(targetTiddlerNode.domNode);
 };
 
+ClassicScroller.prototype.close = function(targetTiddlerNode,sourceEvent) {
+	var targetElement = targetTiddlerNode.domNode;
+	// Get the current height of the tiddler
+	var currHeight = targetElement.offsetHeight;
+	// Put a wrapper around the dom node we're closing
+	var wrapperElement = document.createElement("div");
+	targetElement.parentNode.insertBefore(wrapperElement,targetElement);
+	wrapperElement.appendChild(targetElement);
+	// Animate the closure
+	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s"
+	wrapperElement.style[$tw.browser.transformorigin] = "0% 0%";
+	wrapperElement.style[$tw.browser.transform] = "translateX(0px)";
+	wrapperElement.style.opacity = "1.0";
+	wrapperElement.style.height = currHeight + "px";
+	wrapperElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
+															"opacity " + d + " ease-out, " +
+															"height " + d + " ease-in-out";
+	$tw.utils.nextTick(function() {
+		wrapperElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
+		wrapperElement.style.opacity = "0.0";
+		wrapperElement.style.height = "0px";
+	});
+	// Attach an event handler for th eend of the transition
+	wrapperElement.addEventListener("webkitTransitionEnd",function(event) {
+		if(wrapperElement.parentNode) {
+			wrapperElement.parentNode.removeChild(wrapperElement);
+		}
+	},true);
+	// Returning true causes the DOM node not to be deleted
+	return true;
+};
+
 exports.classic = ClassicScroller;
 
 })();

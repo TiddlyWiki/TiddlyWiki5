@@ -151,8 +151,13 @@ exports.eventMap["tw-CloseTiddler"] = function(event) {
 	for(t=story.tiddlers.length-1; t>=0; t--) {
 		if(story.tiddlers[t].title === event.tiddlerTitle) {
 			storyElement = this.storyNode.children[t];
-			// Remove the DOM node
-			storyElement.domNode.parentNode.removeChild(storyElement.domNode);
+			// Invoke the storyview to animate the closure
+			if(this.storyview && this.storyview.close) {
+				if(!this.storyview.close(storyElement,this.lastNavigationEvent)) {
+					// Only delete the DOM element if the storyview.close() returned false
+					storyElement.domNode.parentNode.removeChild(storyElement.domNode);
+				}
+			}
 			// Remove the story element node
 			this.storyNode.children.splice(t,1);
 			// Remove the record in the story
