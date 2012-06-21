@@ -47,6 +47,7 @@ These are the individual rules that make up WikiText:
 * PrettyLinkWikiText
 * RuleWikiText
 * StyleBlockWikiText
+* TranscludeWikiText
 * TypedBlockWikiText
 * WikiLinkWikiText
 
@@ -54,24 +55,26 @@ These are the individual rules that make up WikiText:
 
 Macros give WikiText dynamic functionality:
 
-* ViewMacro
-* EditMacro
-* StoryMacro
-* TiddlerMacro
 * ButtonMacro
+* ChooserMacro
+* ColorMacro
 * CommentMacro
 * DownloadMacro
 * EchoMacro
+* EditMacro
+* HideMacro
 * ImageMacro
 * IncludeMacro
 * LinkMacro
+* LinkCatcherMacro
 * ListMacro
-* VideoMacro
 * SliderMacro
+* StoryMacro
+* TiddlerMacro
+* TranscludeMacro
+* VideoMacro
+* ViewMacro
 * ZoomerMacro
-* ChooserMacro
-* TagsMacro
-* ColorMacro
 
 ! Commands
 
