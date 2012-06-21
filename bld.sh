@@ -13,8 +13,8 @@ pushd tw5.com > /dev/null
 node ../core/boot.js \
 	--verbose \
 	--savetiddler ReadMe ../readme.md text/html \
-	--savetiddler $:/core/templates/tiddlywiki5.template.html ../tmp/tw5/index.html text/plain \
-	--savetiddler $:/core/templates/static.template.html ../tmp/tw5/static.html text/plain \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../jermolene.github.com/index.html text/plain \
+	--savetiddler $:/core/templates/static.template.html ../../jermolene.github.com/static.html text/plain \
 	|| exit 1
 
 popd > /dev/null
