@@ -29,6 +29,10 @@ body {
 	color: #844;
 }
 
+.title button {
+	vertical-align: top;
+}
+
 .title > span {
 	margin-right: 10px;
 }
