@@ -122,6 +122,10 @@ exports.postRenderInDom = function() {
 						this.child.domNode.style.left = (this.popup.left + this.popup.width) + "px";
 						this.child.domNode.style.top = this.popup.top + "px";
 						break;
+					case "belowleft":
+						this.child.domNode.style.left = (this.popup.left + this.popup.width - this.child.domNode.offsetWidth) + "px";
+						this.child.domNode.style.top = (this.popup.top + this.popup.height) + "px";
+						break;
 					default: // Below
 						this.child.domNode.style.left = this.popup.left + "px";
 						this.child.domNode.style.top = (this.popup.top + this.popup.height) + "px";
