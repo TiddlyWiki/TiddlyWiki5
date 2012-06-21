@@ -2,13 +2,9 @@
 
 # build TiddlyWiki5
 
-# create a temporary directory if it doesn't already exist
-mkdir -p tmp
-mkdir -p tmp/tw5
-
-# cook TiddlyWiki5
-
 pushd tw5.com > /dev/null
+
+echo "alpha.tiddlywiki.com" > ../../jermolene.github.com/CNAME
 
 node ../core/boot.js \
 	--verbose \
