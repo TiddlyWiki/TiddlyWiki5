@@ -3,7 +3,7 @@ modifier: JeremyRuston
 tags: introduction greetings
 type: text/x-tiddlywiki
 
-Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the venerable, reusable non-linear personal web notebook first released in 2004. It is a complete interactive wiki that can run from a single HTML file in the browser or as a powerful [[node.js application|node.js]].
+Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the venerable, reusable non-linear personal web notebook [[first released in 2004|History]]. It is a complete interactive wiki that can run from a single HTML file in the browser or as a powerful [[node.js application|node.js]].
 
 TiddlyWiki offers a radically improved way of managing your data compared to traditional documents and emails. The fundamental idea is that information is more useful and reusable if we cut up into the [[smallest semantically meaningful chunks|Tiddlers]] and use links, tags and macros to model the structured relationships between them.  TiddlyWiki aims to provide a fluid interface for working with tiddlers, allowing them to be aggregated and composed into longer narratives.
 
