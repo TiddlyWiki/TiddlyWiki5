@@ -2,116 +2,235 @@ title: WikiText
 type: text/x-tiddlywiki
 tags: docs concepts
 
-WikiText is a concise, expressive way of typing a wide range of text formatting and hypertext features. It allows you to focus on writing without a complex user interface getting in the way.
+WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is somewhat similar to [[MarkDown|http://daringfireball.net/projects/markdown/]], but with more of a focus on linking and the interactive features.
 
-For example, you can create a link to a tiddler by wrapping its title in double square brackets -- `[[My Tiddler]]` -- or, if the tiddler title conforms to the CamcelCase rules, it is automatically linked without needing the brackets. In this way,  linking become part of the punctuation of your writing.
+! Linking in WikiText
 
-* Paragraphs
+A key capability of WikiText is the ability to make links to other tiddlers or to external websites. There are several ways of doing this:
 
-Another key feature of wikitext is the ability to include one tiddler within another (referred to as //transclusion//). For example, one could have a tiddler called //Disclaimer// that contains the boilerplate of a legal disclaimer, and then include it within lots of different tiddlers with the macro call `<<tiddler Disclaimer>>`. 
+* To link to a tiddler by title: `[[Tiddler Title]]`
+* To link to a tiddler and specify the text of the link: `[[Tiddler Title|Displayed Link Title]]`
+* For tiddler titles that match the CamelCase rules, just typing the title will automatically create a link
+* To link to an external website, type the full URL of the site: `http://alpha.tiddlywiki.com/`
 
-! This is a heading
-
-HelloThere
-
-One two three four. With a link to HelloThere. And a link to TiddlyWiki and TiddlyWiki5. And a suppressed link to ~HelloThere. And now a [[pretty link|HelloThere]] and another pretty link: [[Introduction]].
-
-Here's an http link: http://www.google.com/, and a suppressed link: ~http://www.apple.com/.
-
-This is a series -- of dashes --- that are of different ---- sizes!
-
-Here's a paragraph with an embedded macro <<image "Motovun Jack.jpg">> and that was it.
+You can suppress a link from being recognised by preceding it with `~`. For example:
 
 {{{
-This will be mono
+* ~HelloThere is not a link
+* ~http://google.com/ is not a link
 }}}
 
-And this will be {{{inline and monospaced}}} and `so will this` little bit.
+Renders as:
 
-Here is some ''bold face'', and __some underlining__ and of course some --strikethrough--.
+* ~HelloThere is not a link
+* ~http://google.com/ is not a link
 
-Here's an unterminated ''bit of bold face. And also some entities like &#xc7; &#199; &quot;HTML Entity&quot;.
+! Paragraphs
 
-Here is a macro <<version>>.
+To mark the end of a paragraph in TiddlyWiki you need to type `enter` twice to create a double line break:
 
-This is a macro with content <<link to:"HelloThere"><This is a //link// to something.>>
+{{{
+This is the first paragraph.
 
-This is another macro with content, this time including another macro: <<link to:"HelloThere"><This is a //link// to something in <<version>> of TiddlyWiki.>>. That's that.
-
-! This is a new heading
-This is a paragraph
-immediately after
-that heading
-
-----
-* This is a list
-***** With a deep subitem
-* Of lots of items
-********* And another deep item
-** And subitems
-*# And nested numbered lists inside ordinary lists
-*# Yes
-*## Definitely
-*##* And then
-*##** back
-*##*** to items
-*## And back to numbers once more
-*# More numbering
-* And back to items
-
-----
-
-; definitionile
-: definitionate
-; definitionilisation
-: definitionatisative
-
-----
-
-This is a list with a class wrapped around it:
-
-{{myclass andanotherone{
-* One and one
-** Two and three
-* Four and five
-** Six and Seven
+And this is the second paragraph.
 }}}
 
-And here's another one:
+Single line breaks are ignored within paragraphs. For example:
 
-{{class1 class2{
-* Un et deux
-**{{class}} Two and three
-* Four and five
-** Trois et cinq
+{{{
+This is a
+paragraph made
+up of
+short lines
+
+
 }}}
 
-And here's a class wrapped around a heading:
+Renders as:
 
-{{class1{
-! My heading
+This is a
+paragraph made
+up of
+short lines
+
+! Formatting
+
+Available character formatting includes:
+
+* backticks for `code`
+* `''bold''` for ''bold text''
+* `//italic//` for //italic text//
+* `__underscore__` for __underscored text__
+* `^^superscript^^` for ^^superscript^^ text
+* `~~subscript~~` for ~~subscripted~~ text
+* `--strikethrough--` for --strikethrough-- text
+
+You can also use `{{{` to mark code blocks:
+
+{{{
+ {{{
+ This will be monospaced
+ }}}
 }}}
 
-And here's a class assigned directly to a heading:
+! Transclusion
 
-!!!!{{class1}} My very beautiful heading
+You can incorporate the content of one tiddler within another using the transclusion notation:
+
+* `((JeremyRuston))` transcludes a single tiddler
+* `((( [tag[docs]] )))`, with triple parenthesis, transcludes all the tiddlers that match a [[TiddlerFilter|TiddlerFilters]]
+
+A template can also be specified, in which case the tiddler(s) are rendered through that [[TiddlerTemplate|TiddlerTemplates]]. Templates can either be specified directly or instead a tiddler can be specified from which the template is extracted.
+
+* `((MyTiddler) <<view title>> by <<view modified>>)` renders the tiddler `MyTiddler` through a template that will yield `MyTiddler by JeremyRuston`, if the `modified` field is set to "JeremyRuston"
+* `((MyTiddler)(MyTemplate))` renders the tiddler `MyTiddler` through the template `MyTemplate`
+
+! Lists
+
+You can create unordered lists with `*` characters:
+
+{{{
+* First list item
+* Second list item
+** A subitem
+* Third list item
+}}}
+
+Renders as:
+
+* First list item
+* Second list item
+** A subitem
+* Third list item
+
+Ordered lists use `#` instead of `*`:
+
+# First item
+# Second item
+# Third item
+
+You can also mix ordered and unordered list items:
+
+{{{
+* To do today
+*# Eat
+* To get someone else to do
+*# This
+*# That
+*## And the other
+}}}
+
+Renders as:
+
+* To do today
+*# Eat
+* To get someone else to do
+*# This
+*# That
+*## And the other
+
+You can also create HTML definition lists:
+
+{{{
+; Term being defined
+: Definition of that term
+; Another term
+: Another definition
+}}}
+
+Renders as:
+
+; Term being defined
+: Definition of that term
+; Another term
+: Another definition
+
+! Cascading Stylesheets
+
+You can use this construction to cause the wrapped content to be assigned a specified CSS class:
+
+{{{
+ {{myStyle{
+ * List One
+ * List Two	
+ }}}
+}}}
+
+The resulting HTML looks like this:
+
+{{{
+<ul class="myStyle">
+	<li>List One</li>
+	<li>List Two</li>
+</ul>
+}}}
+
+You can also assign a CSS class to an individual member of a list with this notation:
+
+{{{
+* List One
+*{{MyClass}} List Two
+* List Three
+}}}
+
+The resulting HTML looks like this:
+
+{{{
+<ul>
+	<li>List One</li>
+	<li class="MyClass">List Two</li>
+	<li> List Three</li>
+</ul>
+}}}
+
+The same syntax can be used with headings:
+
+{{{
+!{{myStyle}} This heading has the class `myStyle`
+}}}
+
+! Typographic Features
+
+You can create an n-dash with a double hyphen `--` and an m-dash with a triple hyphen `---`. For example -- this is an example --- and so is this
+
+You can include a horizontal rule with three or more dashes on their own on a line:
+
+{{{
+---
+}}}
+
+Renders as:
 
 ---
 
-Here are some HTML paragraph blocks:
+! HTML in WikiText
 
+HTML tags can be used directly in WikiText. For example:
+
+{{{
 <article class="hello">
 This is my nice and simple block of text. HelloThere
 </article>
+}}}
 
-And another:
+! Macros
 
-  <article class="hello" mysignal data-thing='Nothing'><div class="another" mysignal2 data-thing='NothingElse'>This time the text is all squashed up, without line breaks</div></article>
+Macros provide rich functionality within WikiText. For example, the `<<video>>` macro can be used to embed videos from YouTube, Vimeo or the Internet Archive:
 
----
+{{{
+<<video src:32001208 type:vimeo>>
+}}}
 
-Macro calls can be inline like this: <<version>>
+For full details of the available macros, see the [[Docs]].
 
-Or, at paragraph block level:
+! Headings
 
-<<version>>
+Headings are specified with one or more leading `!` characters:
+
+{{{
+! This is a level 1 heading
+
+!! This is a level 2 heading
+
+!!! This is a level 3 heading
+}}}

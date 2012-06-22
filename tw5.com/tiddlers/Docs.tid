@@ -24,6 +24,7 @@ The machinery tying those concepts together includes:
 
 * TiddlerFilters
 * TiddlerFields
+* TiddlerTemplates
 * ContentType
 * ShadowTiddlers
 * TiddlerModules
