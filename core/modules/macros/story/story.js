@@ -50,7 +50,7 @@ exports.handleEvent = function(event) {
 };
 
 /*
-Return the index of the story element that contains the specified tree node. Returns story.length if not found
+Return the index of the story element that contains the specified tree node. Returns -1 if none
 */
 exports.findStoryElementContainingNode = function(node) {
 	// Get the DOM node contained by the target node
@@ -58,7 +58,7 @@ exports.findStoryElementContainingNode = function(node) {
 		node = node.child;
 	}
 	// Step through the story elements
-	var slot = this.storyNode.children.length;
+	var slot = -1;
 	for(var t=0; t<this.storyNode.children.length; t++) {
 		if($tw.utils.domContains(this.storyNode.children[t].domNode,node.domNode)) {
 			slot = t;
