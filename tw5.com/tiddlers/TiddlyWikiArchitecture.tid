@@ -2,27 +2,30 @@ title: TiddlyWikiArchitecture
 modifier: JeremyRuston
 tags: docs internals
 
-!! Overview
+! Overview
 
 The heart of TiddlyWiki can be seen as an extensible representation transformation engine. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
 The most important transformations are from `text/x-tiddlywiki` wikitext into `text/html` or `text/plain` but the engine is used throughout the system for other transformations, such as converting images for display in HTML, sanitising fragments of JavaScript, and processing CSS.
 
-The key feature of wikitext is the ability to include one tiddler within another (usually referred to as //transclusion//). For example, one could have a tiddler called //Disclaimer// that contains the boilerplate of a legal disclaimer, and then include it within lots of different tiddlers with the macro call `<<tiddler Disclaimer>>`. This simple feature brings great power in terms of encapsulating and reusing content, and evolving a clean, usable implementation architecture to support it efficiently is a key objective of the TiddlyWiki5 design.
-
-It turns out that the transclusion capability combined with the selective refreshing mechanism provides a good foundation for building TiddlyWiki's user interface itself. Consider, for example, the StoryMacro in its simplest form:
+You can explore this mechanism by opening the JavaScript console in your browser. Typing this command will replace the text of the tiddler `HelloThere` with new content:
 
 {{{
-<<story story:MyStoryTiddler>>
+$tw.wiki.addTiddler({title: "HelloThere", text: "This is some new content"});
 }}}
 
-The story macro looks for a list of tiddler titles in the tiddler `MyStoryTiddler`, and displays them in sequence. The subtle part is that subsequently, if `MyStoryTiddler` changes, the `<<story>>` macro is selectively re-rendered. So, to navigate to a new tiddler, code merely needs to add the name of the tiddler and a line break to the top of `MyStoryTiddler`:
+If the tiddler `HelloThere` is visible then you'll see it instantly change to reflect the new content. If you create a tiddler that doesn't currently exist then you'll see any displayed links to it instantly change from italicised to normal:
 
 {{{
-var storyTiddler = store.getTiddler("MyStoryTiddler");
-store.addTiddler(new Tiddler(storyTiddler,{text: navigateTo + "\n" + storyTiddler.text}));
+$tw.wiki.addTiddler({title: "TiddlyWiki5", text: "This tiddler now exists"});
 }}}
 
-The mechanisms that allow all of this to work are fairly intricate. The sections below progressively build the key architectural concepts of TiddlyWiki5 in a way that should provide a good basis for exploring the code directly.
+The power of this mechanism also drives the interactive features of TiddlyWiki. For example, try typing the following into the JavaScript console:
 
+{{{
+$tw.wiki.addTiddler({title: "ViewDropDownState", text: "(50,50,200,200)"});
+}}}
 
+You should see the view dropdown appear in the middle of the screen. The underlying mechanism is that the creation of the tiddler with this title triggers the display of the popup at the specified location.
+
+If you're interested in understanding more about the internal operation of TiddlyWiki, it is recommended that you review the [[Docs]] and read the code -- start with the boot kernel [[$:/core/boot.js]].

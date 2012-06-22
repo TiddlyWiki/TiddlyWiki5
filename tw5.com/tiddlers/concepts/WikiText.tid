@@ -203,6 +203,20 @@ Renders as:
 
 ---
 
+! Images
+
+To display an image stored in a tiddler:
+
+{{{
+[img[Motovun Jack.jpg]]
+}}}
+
+Displays as:
+
+[img[Motovun Jack.jpg]]
+
+See ImageWikiText for more details.
+
 ! HTML in WikiText
 
 HTML tags can be used directly in WikiText. For example:
@@ -234,3 +248,43 @@ Headings are specified with one or more leading `!` characters:
 
 !!! This is a level 3 heading
 }}}
+
+! Other WikiText features
+
+!! Typed Blocks
+
+You can incorporate text of a different type within blocks of WikiText. For example:
+
+{{{
+$$$.js
+return 2 + "string";
+$$$
+}}}
+
+Renders as:
+
+$$$.js
+return 2 + "string";
+$$$
+
+See TypedBlockWikiText for more details
+
+!! Style Blocks
+
+You can apply HTML attributes to blocks of content with this syntax:
+
+{{{
+@@color:#f00;
+@@text-decoration:underline;
+This is in red!
+@@
+}}}
+
+Generates the results:
+
+@@color:#f00;
+@@text-decoration:underline;
+This is in red!
+@@
+
+See StyleBlockWikiText for more details.
