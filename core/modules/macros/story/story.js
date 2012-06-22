@@ -49,13 +49,31 @@ exports.handleEvent = function(event) {
 	}
 };
 
+/*
+Return the index of the story element that contains the specified tree node. Returns story.length if not found
+*/
+exports.findStoryElementContainingNode = function(node) {
+	// Get the DOM node contained by the target node
+	while(node && !node.domNode) {
+		node = node.child;
+	}
+	// Step through the story elements
+	var slot = this.storyNode.children.length;
+	for(var t=0; t<this.storyNode.children.length; t++) {
+		if($tw.utils.domContains(this.storyNode.children[t].domNode,node.domNode)) {
+			slot = t;
+		}
+	}
+	return slot;
+};
+
 exports.eventMap = {};
 
 // Navigate to a specified tiddler
 exports.eventMap["tw-navigate"] = function(event) {
 	var template = this.params.defaultViewTemplate || "$:/templates/ViewTemplate",
 		story = this.getStory(),
-		navTiddler,t,tiddler;
+		navTiddler,t,tiddler,slot;
 	// See if the tiddler we want is already there
 	for(t=0; t<story.tiddlers.length; t++) {
 		if(story.tiddlers[t].title === event.navigateTo) {
@@ -68,8 +86,14 @@ exports.eventMap["tw-navigate"] = function(event) {
 			this.storyview.navigate(this.storyNode.children[navTiddler],false,event);
 		}
 	} else {
+		// Find the source location in the story
+		if(event.navigateFrom) {
+			slot = this.findStoryElementContainingNode(event.navigateFrom) + 1;
+		} else {
+			slot = 0;			
+		}
 		// Add the tiddler to the bottom of the story (subsequently there will be a refreshInDom() call which is when we'll actually do the navigation)
-		story.tiddlers.unshift({title: event.navigateTo, template: template});
+		story.tiddlers.splice(slot,0,{title: event.navigateTo, template: template});
 		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
 		// Record the details of the navigation for us to pick up in refreshInDom()
 		this.lastNavigationEvent = event;
@@ -153,7 +177,7 @@ exports.eventMap["tw-CloseTiddler"] = function(event) {
 			storyElement = this.storyNode.children[t];
 			// Invoke the storyview to animate the closure
 			if(this.storyview && this.storyview.close) {
-				if(!this.storyview.close(storyElement,this.lastNavigationEvent)) {
+				if(!this.storyview.close(storyElement,event)) {
 					// Only delete the DOM element if the storyview.close() returned false
 					storyElement.domNode.parentNode.removeChild(storyElement.domNode);
 				}
