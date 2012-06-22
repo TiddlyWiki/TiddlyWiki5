@@ -67,6 +67,25 @@ exports.findStoryElementContainingNode = function(node) {
 	return slot;
 };
 
+/*
+Return the index of the story element that corresponds to a particular title
+startIndex: index to start search (use zero to search from the top)
+tiddlerTitle: tiddler title to seach for
+templateTitle: optional template title to search for
+*/
+exports.findStoryElementByTitle = function(startIndex,tiddlerTitle,templateTitle) {
+	while(startIndex < this.storyNode.children.length) {
+		var params = this.storyNode.children[startIndex].children[0].params;
+		if(params.target === tiddlerTitle) {
+			if(!templateTitle || params.template === templateTitle) {
+				return startIndex;
+			}
+		}
+		startIndex++;
+	}
+	return undefined;
+};
+
 exports.eventMap = {};
 
 // Navigate to a specified tiddler
