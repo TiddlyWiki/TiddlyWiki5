@@ -49,7 +49,7 @@ ClassicScroller.prototype.close = function(targetTiddlerNode,sourceEvent) {
 		wrapperElement.style.height = "0px";
 	});
 	// Attach an event handler for th eend of the transition
-	wrapperElement.addEventListener("webkitTransitionEnd",function(event) {
+	wrapperElement.addEventListener($tw.browser.transitionEnd,function(event) {
 		if(wrapperElement.parentNode) {
 			wrapperElement.parentNode.removeChild(wrapperElement);
 		}

@@ -3,7 +3,7 @@ tags: introduction
 
 TiddlyWiki5 gains new capabilities through a [[completely rebuilt architecture|TiddlyWikiArchitecture]] using the latest features of HTML5 and node.js. It runs natively under node.js, and can also use its own components to construct a version of itself that works entirely within the browser, just as TiddlyWiki has always done.
 
-You can modify this wiki, and then download a copy by clicking this button:
+If you're running Google Chrome Canary you can modify this wiki, and then download a copy by clicking this button:
 <<download filename:"TiddlyWiki.html" label:"Save Changes">>
 
 You can download a static copy of the tiddlers that are currently displayed in this wiki by clicking this button: <<download title:"$:/core/static.template.html" filename:"Story.html" label:"Static Wiki">>

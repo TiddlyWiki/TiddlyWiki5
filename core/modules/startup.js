@@ -19,10 +19,18 @@ exports.startup = function() {
 		$tw.browser.unHyphenateCss = document.body.style["background-color"] === undefined;
 		$tw.browser.prefix = document.body.style.webkitTransform !== undefined ? "webkit" : 
 							document.body.style.MozTransform !== undefined ? "Moz" :
-							document.body.style.OTransform !== undefined ? "O" : null;
+							document.body.style.MSTransform !== undefined ? "MS" :
+							document.body.style.OTransform !== undefined ? "O" : "";
 		$tw.browser.transition = $tw.browser.prefix + "Transition";
 		$tw.browser.transform = $tw.browser.prefix + "Transform";
 		$tw.browser.transformorigin = $tw.browser.prefix + "TransformOrigin";
+		$tw.browser.transitionEnd = {		
+					"": "transitionEnd",
+					"O": "oTransitionEnd",
+					"MS": "msTransitionEnd",
+					"Moz": "transitionend",
+					"webkit": "webkitTransitionEnd"
+				}[$tw.browser.prefix];
 	}
 	// Set up additional global objects
 	$tw.plugins.applyMethods("global",$tw);
