@@ -35,7 +35,7 @@ ClassicScroller.prototype.close = function(targetTiddlerNode,sourceEvent) {
 	targetElement.parentNode.insertBefore(wrapperElement,targetElement);
 	wrapperElement.appendChild(targetElement);
 	// Animate the closure
-	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s"
+	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s";
 	wrapperElement.style[$tw.browser.transformorigin] = "0% 0%";
 	wrapperElement.style[$tw.browser.transform] = "translateX(0px)";
 	wrapperElement.style.opacity = "1.0";
