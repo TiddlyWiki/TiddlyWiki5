@@ -1,0 +1,23 @@
+title: History
+
+! Origins of TiddlyWiki
+
+Back in 1997 a colleague introduced me to [[Ward Cunningham's original wiki|http://c2.com/cgi/wiki]]. I was stunned that something so powerful could fit into just 700 lines of Perl, and fascinated by the radical reimagining of security and permissions. Like many other developers, I took every opportunity I could to try out various wikis, and to explore their use at work.
+
+After watching people use wikis for a few years, I noticed that power users made extensive use of the ability to open multiple wiki pages at once in several browser tabs, making it easier for them to compare and review pages, to copy text between them and to act as a sort of queue of pages yet to be read.
+
+I could see that this ability to manipulate multiple pages at once was central to the ability to refactor a wiki, and I've found that a wiki that is lovingly refactored tends to be more useful. And yet, standard wiki user interfaces have always been designed exclusively for the presentation and manipulation of single pages at once.
+
+All of these thoughts came together when I saw GMail in April 2004, which used Ajax cleverly to blend individual emails into threaded conversations.
+
+I started experimenting with HTML and JavaScript to explore the idea further. I'd had virtually no experience of either, just having put together some static pages and simple ASP sites in previous lives. Getting my head around these client-side technologies was painful; like everyone else, I was horrified to discover how appalling were the incompatibilities and inconsistencies of web programming.
+
+Then I could show the idea with a static HTML file. So, I didn't need a serverside to demonstrate how this simple user interface idea worked. Or indeed a proper grown-up server with the ability to run cgi scripts.
+
+! Launch of TiddlyWiki
+
+So, in September 2004 I released a primitive [[first version of TiddlyWiki|http://tiddlywiki.com/firstversion.html]]. It was the smallest possible thing that demonstrated the idea that I had: it was a simple, self-contained static 48KB HTML file sitting on a dusty old Sun server in my friend Steph's attic.
+
+The downside of writing the first version of TiddlyWiki in this way was that it made it completely impractical to use for editing - when you click 'save changes' it just pops up a window showing the data that would be saved if it were possible for an HTML page to write to the file system.
+
+//To be continued.../

@@ -2,11 +2,12 @@ title: Improvements
 modifier: JeremyRuston
 tags: docs introduction
 
-TiddlyWiki5 is a complete rewrite of the original TiddlyWiki, incorporating many of the improvements that I've wanted to make over the years. It is now based on an elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules.
+TiddlyWiki5 is a complete rewrite of the original TiddlyWiki, incorporating many of the improvements that I've wanted to make over the years. It is now based on an elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules. The new code is much easier to work with, and will hopefully prove an even more fertile ground for the community of open source developers around TiddlyWiki.
 
 For end users, the important improvements include:
 
 * Improved WikiText, with much better generation of HTML, including proper `<p>` tags
+* Flexible TiddlerFilters that make it easier to work with several tiddlers in a single operation
 * TiddlyWiki can now be run under [[node.js]] as well as in the browser, allowing it to be used as a personal web server
 * Tiddlers containing images are now supported just like WikiText tiddlers, including integrated editing of bitmap and SVG images
 * Uses standard Twitter Bootstrap CSS (thus enabling the use of Boostrap themes such as http://bootswatch.com)

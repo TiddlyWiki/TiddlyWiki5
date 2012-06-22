@@ -7,6 +7,6 @@ TiddlyWiki is a rich, interactive interface for manipulating complex data with s
 
 TiddlyWiki is based on the idea of making information more useful by modelling it in the smallest meaningful semantic units, referred to as [[Tiddlers]].  Structure comes from links, tags, and sequences of tiddlers called stories. Tiddlers use a WikiText notation that concisely represents a wide range of text formatting and hypertext features.
 
-People [[love using|Raves]] TiddlyWiki. Because it can be used without any complicated server infrastructure, and because it is [[open source|What is open source?]], it has bought unprecedented freedom to people to keep their precious information under their own control. TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|What is open source?]] project with a busy [[Community]] of independent developers.
+People [[love using|Raves]] TiddlyWiki. Because it can be used without any complicated server infrastructure, and because it is [[open source|What is open source?]], it has bought unprecedented freedom to people to keep their precious information under their own control. TiddlyWiki was originally created by JeremyRuston and is now a thriving [[open source|OpenSource]] project with a busy [[Community]] of independent developers.
 
 See TiddlyWikiArchitecture and [[Introduction]].
