@@ -31,7 +31,6 @@ title: $:/templates/PageTemplate
 * <<link to:classic>< <<hide tiddler:[[$:/CurrentView]] notequal:classic>< <span class="tw-ticked-menu-item"></span> >> Classic>>
 * <<link to:sideways>< <<hide tiddler:[[$:/CurrentView]] notequal:sideways>< <span class="tw-ticked-menu-item"></span> >> Sideways>>
 * <<link to:zoomin>< <<hide tiddler:[[$:/CurrentView]] notequal:zoomin>< <span class="tw-ticked-menu-item"></span> >> Zoomin>>
-* <<link to:pasteboard>< <<hide tiddler:[[$:/CurrentView]] notequal:pasteboard>< <span class="tw-ticked-menu-item"></span> >> Pasteboard>>
 }}}
 </div>
 >>
