@@ -1,0 +1,11 @@
+{
+	"tiddlers": [
+		{
+			"file": "tiddlywiki.css", 
+			"fields": {
+				"title": "$:/core/lib/tiddlywiki.css",
+				"type": "text/css"
+			}
+		}
+	]
+}

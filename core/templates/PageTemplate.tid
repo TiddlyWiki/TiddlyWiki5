@@ -18,7 +18,7 @@ title: $:/templates/PageTemplate
 * [[Docs]]
 *{{divider-vertical}}
 
-{{btn btn-info{
+{{btn btn-danger{
 <<button popup:ViewDropDownState><View <span class="caret"></span>>>
 }}}
 
