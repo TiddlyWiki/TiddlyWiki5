@@ -1,0 +1,60 @@
+// JavaScript syntax highlighting
+
+.javascript-source {
+	border: 1px solid #888;
+	padding: 18px 18px 18px 18px;
+	.box-shadow(inset 1px 1px 1px 1px rgba(0, 0, 0, 0.2));
+// TODO: Less doesn't seem to like my tab-size mixin
+//	.tab-size(4);
+}
+
+.javascript-source .javascript-boolean {
+	color: #066;
+}
+
+.javascript-source .javascript-identifier {
+	color: #606;
+}
+
+.javascript-source .javascript-keyword {
+	color: #008;
+	font-weight: bold;
+}
+
+.javascript-source .javascript-null {
+	color: #080;
+}
+
+.javascript-source .javascript-numeric {
+	color: #066;
+}
+
+.javascript-source .javascript-punctuator {
+	color: #660;
+}
+
+.javascript-source .javascript-string {
+	color: #080;
+}
+
+.javascript-source .javascript-comment {
+	color: #800;
+	padding: 4px 4px 4px 4px;
+	border: 1px solid #feed77;
+	background: #feed77;
+	background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#dede80),color-stop(7%,#feed77),color-stop(92%,#feed77),color-stop(100%,#dede80));
+	background: -webkit-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%),-webkit-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+	background:    -moz-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%),   -moz-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+	background:      -o-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%),     -o-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+	background:     -ms-linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%),    -ms-linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+	background:         linear-gradient(72deg,rgba(255, 255, 255, 0.5) 8%,rgba(255, 255, 255, 0.1) 80%),        linear-gradient(top,#dede80 0,#feed77 7%,#feed77 92%,#dede80 100%);
+	.box-shadow(1px 1px 6px rgba(0,0,0,0.4));
+}
+
+.javascript-source .javascript-block-comment {
+	font-family: @sansFontFamily;
+}
+
+.javascript-source .javascript-line-comment {
+	font-family: @sansFontFamily;
+}
