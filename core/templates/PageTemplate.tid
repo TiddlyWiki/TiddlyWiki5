@@ -1,6 +1,6 @@
 title: $:/templates/PageTemplate
 
-<div class="container-fluid">
+<div class="container">
 <<story story:"$:/StoryTiddlers" storyviewTiddler:[[$:/CurrentView]] storyview:classic ><
 {{navigation-panel{
 <<chooser><

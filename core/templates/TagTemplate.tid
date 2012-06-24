@@ -3,7 +3,7 @@ title: $:/templates/TagTemplate
 {{btn-invisible{
 <<button popup:TagDropDownLocation qualifyTiddlerTitles:yes><
 {{label{
-<<color background:yes default:#888><
+<<color background:yes default:#aaa><
 <<view title>>
 >>
 }}}

@@ -6,6 +6,12 @@
 				"title": "$:/core/lib/tiddlywiki.css",
 				"type": "text/css"
 			}
+		}, {
+			"file": "bootstrap-responsive.css", 
+			"fields": {
+				"title": "$:/core/lib/bootstrap-responsive.css",
+				"type": "text/css"
+			}
 		}
 	]
 }
