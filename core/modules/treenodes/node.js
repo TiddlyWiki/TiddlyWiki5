@@ -9,7 +9,7 @@ Base class for all other tree nodes
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: false, Node: false */
 "use strict";
 
 /*
@@ -81,6 +81,32 @@ Add styles to a node
 Node.prototype.addStyles = function(styles) {
 
 };
+
+/*
+Given a tree node find the bounding rectange of its first child element
+*/
+Node.prototype.getNodeBounds = function() {
+	var t,bounds;
+	if(this.domNode) {
+		if(this.domNode.nodeType === 3) { // Node.TEXT_NODE
+			return this.domNode.parentNode.getBoundingClientRect();
+		} else {
+			return this.domNode.getBoundingClientRect();
+		}
+	} else {
+		if(this.child) {
+			return this.child.getNodeBounds();
+		} else if(this.children) {
+			for(t=0; t<this.children.length; t++) {
+				bounds = this.children[t].getNodeBounds();
+				if(bounds) {
+					return bounds;
+				}
+			}
+		}
+	}
+	re
+}
 
 exports.Node = Node;
 

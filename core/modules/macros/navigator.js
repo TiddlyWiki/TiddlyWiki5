@@ -97,9 +97,13 @@ exports.eventMap["tw-navigate"] = function(event) {
 	if(this.hasParameter("set")) {
 		this.wiki.setTextReference(this.params.set,event.navigateTo);
 	}
-	// Add the tiddler to the top of the history stack
+	// Add a new record to the top of the history stack
 	this.getHistory();
-	this.history.stack.push({title: event.navigateTo});
+	this.history.stack.push({
+		title: event.navigateTo,
+		fromTitle: event.navigateFromTitle,
+		fromPosition: event.navigateFrom.getNodeBounds()
+	});
 	this.saveHistory();
 	event.stopPropagation();
 	return false;

@@ -291,14 +291,14 @@ exports.processHistoryChange = function() {
 		for(t=this.prevHistory.stack.length-1; t>=topCommon; t--) {
 			index = this.findStoryElementByTitle(0,this.prevHistory.stack[t].title);
 			if(index !== undefined && this.storyview.navigateBack) {
-				this.storyview.navigateBack(this.storyNode.children[index]);
+				this.storyview.navigateBack(this.storyNode.children[index],this.history.stack[t]);
 			}
 		}
 		// And now we navigate forwards through the new history to get to the latest tiddler
 		for(t=topCommon; t<this.history.stack.length; t++) {
 			index = this.findStoryElementByTitle(0,this.history.stack[t].title);
 			if(index !== undefined && this.storyview.navigateForward) {
-				this.storyview.navigateForward(this.storyNode.children[index]);
+				this.storyview.navigateForward(this.storyNode.children[index],this.history.stack[t]);
 			}
 		}
 	}

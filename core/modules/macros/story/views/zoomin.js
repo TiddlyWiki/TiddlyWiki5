@@ -55,25 +55,10 @@ function findTitleNode(node) {
 }
 
 /*
-Given a tree node find the bounding rectange of its first child element
-*/
-function getNodeBounds(node) {
-	if(node && node.domNode) {
-		if(node.domNode.nodeType === Node.TEXT_NODE) {
-			return node.domNode.parentNode.getBoundingClientRect();
-		} else {
-			return node.domNode.getBoundingClientRect();
-		}
-	} else {
-		return getNodeBounds(node.child);
-	}
-}
-
-/*
 Visualise removal of the the specified tiddler macro, optionally specifying a source node for the visualisation
 	storyElementNode: tree node of the tiddler macro we're navigating to
 */
-Zoomin.prototype.navigateForward = function(storyElementNode) {
+Zoomin.prototype.navigateForward = function(storyElementNode,historyInfo) {
 	// Do nothing if the target tiddler is already the current tiddler
 	if(storyElementNode === this.currTiddler) {
 		return;
@@ -85,7 +70,7 @@ Zoomin.prototype.navigateForward = function(storyElementNode) {
 	storyElementNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
 	storyElementNode.domNode.style[$tw.browser.transition] = "none";
 	// Get the position of the source node, or use the centre of the window as the source position
-	var sourceBounds = {
+	var sourceBounds = historyInfo.fromPosition || {
 			left: window.innerWidth/2 - 2,
 			top: window.innerHeight/2 - 2,
 			width: 4,
@@ -94,8 +79,8 @@ Zoomin.prototype.navigateForward = function(storyElementNode) {
 	// Try to find the title node in the target tiddler
 	var titleNode = findTitleNode(storyElementNode) || storyElementNode;
 	// Compute the transform for the target tiddler to make the title lie over the source rectange
-	var targetBounds = getNodeBounds(storyElementNode),
-		titleBounds = getNodeBounds(titleNode),
+	var targetBounds = storyElementNode.getNodeBounds(),
+		titleBounds = titleNode.getNodeBounds(),
 		scale = sourceBounds.width / titleBounds.width,
 		x = sourceBounds.left - targetBounds.left - (titleBounds.left - targetBounds.left) * scale,
 		y = sourceBounds.top - targetBounds.top - (titleBounds.top - targetBounds.top) * scale;
@@ -108,7 +93,7 @@ Zoomin.prototype.navigateForward = function(storyElementNode) {
 		currTiddler = this.currTiddler;
 	$tw.utils.nextTick(function() {
 		// Transform the target tiddler
-		var currTiddlerBounds = getNodeBounds(currTiddler),
+		var currTiddlerBounds = currTiddler.getNodeBounds(),
 			x = (currTiddlerBounds.left - targetBounds.left),
 			y = (currTiddlerBounds.top - targetBounds.top);
 		storyElementNode.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";

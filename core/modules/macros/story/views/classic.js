@@ -48,11 +48,11 @@ ClassicScroller.prototype.remove = function(storyElementNode) {
 	return true;
 };
 
-ClassicScroller.prototype.navigateBack = function(storyElementNode) {
+ClassicScroller.prototype.navigateBack = function(storyElementNode,historyInfo) {
 	$tw.utils.scrollIntoView(storyElementNode.domNode);
 };
 
-ClassicScroller.prototype.navigateForward = function(storyElementNode) {
+ClassicScroller.prototype.navigateForward = function(storyElementNode,historyInfo) {
 	$tw.utils.scrollIntoView(storyElementNode.domNode);
 };
 
