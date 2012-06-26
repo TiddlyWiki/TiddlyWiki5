@@ -15,17 +15,17 @@ A storyview that shows a single tiddler and navigates by zooming into links
 function Zoomin(story) {
 	// Save the story
 	this.story = story;
-	var wrapper = this.story.child.children[1].domNode;
+	this.storyNode = this.story.child.domNode;
 	// Make all the tiddlers position absolute, and hide all but the first one
-	wrapper.style.position = "relative";
-	for(var t=0; t<wrapper.children.length; t++) {
+	this.storyNode.style.position = "relative";
+	for(var t=0; t<this.storyNode.children.length; t++) {
 		if(t) {
-			wrapper.children[t].style.display = "none";
+			this.storyNode.children[t].style.display = "none";
 		}
-		wrapper.children[t].style.position = "absolute";
+		this.storyNode.children[t].style.position = "absolute";
 	}
 	// Record the current tiddler node
-	this.currTiddler = this.story.child.children[1].children[0];
+	this.currTiddler = this.story.child.children[0];
 	// Set up the stack of previously viewed tiddlers
 	this.prevTiddlers = [this.currTiddler.children[0].params.target];
 }
@@ -70,44 +70,37 @@ function getNodeBounds(node) {
 }
 
 /*
-Visualise navigation to the specified tiddler macro, optionally specifying a source node for the visualisation
-	targetTiddlerNode: tree node of the tiddler macro we're navigating to
-	isNew: true if the node we're navigating to has just been added to the DOM
-	sourceNode: optional tree node that initiated the navigation
+Visualise removal of the the specified tiddler macro, optionally specifying a source node for the visualisation
+	storyElementNode: tree node of the tiddler macro we're navigating to
 */
-Zoomin.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
+Zoomin.prototype.navigateForward = function(storyElementNode) {
 	// Do nothing if the target tiddler is already the current tiddler
-	if(targetTiddlerNode === this.currTiddler) {
+	if(storyElementNode === this.currTiddler) {
 		return;
 	}
 	// Make the new tiddler be position absolute and visible
-	targetTiddlerNode.domNode.style.position = "absolute";
-	targetTiddlerNode.domNode.style.display = "block";
-	targetTiddlerNode.domNode.style[$tw.browser.transformorigin] = "0 0";
-	targetTiddlerNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
-	targetTiddlerNode.domNode.style[$tw.browser.transition] = "none";
+	storyElementNode.domNode.style.position = "absolute";
+	storyElementNode.domNode.style.display = "block";
+	storyElementNode.domNode.style[$tw.browser.transformorigin] = "0 0";
+	storyElementNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
+	storyElementNode.domNode.style[$tw.browser.transition] = "none";
 	// Get the position of the source node, or use the centre of the window as the source position
-	var sourceBounds;
-	if(sourceEvent && sourceEvent.navigateFrom) {
-		sourceBounds = getNodeBounds(sourceEvent.navigateFrom);
-	} else {
-		sourceBounds = {
+	var sourceBounds = {
 			left: window.innerWidth/2 - 2,
 			top: window.innerHeight/2 - 2,
 			width: 4,
 			height: 4
 		};
-	}
 	// Try to find the title node in the target tiddler
-	var titleNode = findTitleNode(targetTiddlerNode) || targetTiddlerNode;
+	var titleNode = findTitleNode(storyElementNode) || storyElementNode;
 	// Compute the transform for the target tiddler to make the title lie over the source rectange
-	var targetBounds = getNodeBounds(targetTiddlerNode),
+	var targetBounds = getNodeBounds(storyElementNode),
 		titleBounds = getNodeBounds(titleNode),
 		scale = sourceBounds.width / titleBounds.width,
 		x = sourceBounds.left - targetBounds.left - (titleBounds.left - targetBounds.left) * scale,
 		y = sourceBounds.top - targetBounds.top - (titleBounds.top - targetBounds.top) * scale;
 	// Transform the target tiddler
-	targetTiddlerNode.domNode.style[$tw.browser.transform] = "translateX(" + x + "px) translateY(" + y + "px) scale(" + scale + ")";
+	storyElementNode.domNode.style[$tw.browser.transform] = "translateX(" + x + "px) translateY(" + y + "px) scale(" + scale + ")";
 	// Get the animation duration
 	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s";
 	// Apply the ending transitions with a timeout to ensure that the previously applied transformations are applied first
@@ -118,10 +111,10 @@ Zoomin.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
 		var currTiddlerBounds = getNodeBounds(currTiddler),
 			x = (currTiddlerBounds.left - targetBounds.left),
 			y = (currTiddlerBounds.top - targetBounds.top);
-		targetTiddlerNode.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
-		targetTiddlerNode.domNode.style.opacity = "1.0";
-		targetTiddlerNode.domNode.style[$tw.browser.transform] = "translateX(" + x + "px) translateY(" + y + "px) scale(1)";
-		targetTiddlerNode.domNode.style.zIndex = "500";
+		storyElementNode.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
+		storyElementNode.domNode.style.opacity = "1.0";
+		storyElementNode.domNode.style[$tw.browser.transform] = "translateX(" + x + "px) translateY(" + y + "px) scale(1)";
+		storyElementNode.domNode.style.zIndex = "500";
 		// Transform the current tiddler
 		var scale = titleBounds.width / sourceBounds.width;
 		x =  titleBounds.left - targetBounds.left - (sourceBounds.left - currTiddlerBounds.left) * scale;
@@ -133,15 +126,15 @@ Zoomin.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
 		currTiddler.domNode.style.zIndex = "0";
 	});
 	// Record the new current tiddler
-	this.currTiddler = targetTiddlerNode;
+	this.currTiddler = storyElementNode;
 	// Save the tiddler in the stack
-	this.prevTiddlers.push(targetTiddlerNode.children[0].params.target);
+	this.prevTiddlers.push(storyElementNode.children[0].params.target);
 };
 
 /*
-Visualise closing a tiddler
+Visualise removing a tiddler
 */
-Zoomin.prototype.close = function(targetTiddlerNode,sourceEvent) {
+Zoomin.prototype.remove = function(storyElementNode) {
 	// Remove the last entry from the navigation stack, which will be to navigate to the current tiddler
 	this.prevTiddlers.pop();
 	// Find the top entry in the navigation stack that still exists
@@ -159,12 +152,12 @@ Zoomin.prototype.close = function(targetTiddlerNode,sourceEvent) {
 	// Get the animation duration
 	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s";
 	// Set up the tiddler that is being closed
-	targetTiddlerNode.domNode.style.position = "absolute";
-	targetTiddlerNode.domNode.style.display = "block";
-	targetTiddlerNode.domNode.style[$tw.browser.transformorigin] = "50% 50%";
-	targetTiddlerNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
-	targetTiddlerNode.domNode.style[$tw.browser.transition] = "none";
-	targetTiddlerNode.domNode.style.zIndex = "0";
+	storyElementNode.domNode.style.position = "absolute";
+	storyElementNode.domNode.style.display = "block";
+	storyElementNode.domNode.style[$tw.browser.transformorigin] = "50% 50%";
+	storyElementNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
+	storyElementNode.domNode.style[$tw.browser.transition] = "none";
+	storyElementNode.domNode.style.zIndex = "0";
 	// Set up the tiddler we're moving back in
 	if(storyElement !== undefined) {
 		storyElement.domNode.style.position = "absolute";
@@ -183,15 +176,15 @@ Zoomin.prototype.close = function(targetTiddlerNode,sourceEvent) {
 	// Animate them both
 	$tw.utils.nextTick(function() {
 		// First, the tiddler we're closing
-		targetTiddlerNode.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
-		targetTiddlerNode.domNode.style.opacity = "0.0";
-		targetTiddlerNode.domNode.style[$tw.browser.transformorigin] = "50% 50%";
-		targetTiddlerNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(0.1)";
-		targetTiddlerNode.domNode.style.zIndex = "0";
-		targetTiddlerNode.domNode.addEventListener($tw.browser.transitionEnd,function(event) {
+		storyElementNode.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
+		storyElementNode.domNode.style.opacity = "0.0";
+		storyElementNode.domNode.style[$tw.browser.transformorigin] = "50% 50%";
+		storyElementNode.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(0.1)";
+		storyElementNode.domNode.style.zIndex = "0";
+		storyElementNode.domNode.addEventListener($tw.browser.transitionEnd,function(event) {
 			// Delete the DOM node when the transition is over
-			if(targetTiddlerNode.domNode.parentNode) {
-				targetTiddlerNode.domNode.parentNode.removeChild(targetTiddlerNode.domNode);
+			if(storyElementNode.domNode.parentNode) {
+				storyElementNode.domNode.parentNode.removeChild(storyElementNode.domNode);
 			}
 		},true);
 		// Now the tiddler we're going back to

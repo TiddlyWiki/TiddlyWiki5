@@ -21,7 +21,7 @@ function setStoryElementStyles(e) {
 
 function SidewaysView(story) {
 	this.story = story;
-	var wrapper = this.story.child.children[1].domNode;
+	var wrapper = this.story.child.domNode;
 	// Scroll horizontally
 	wrapper.style.whiteSpace = "nowrap";
 	// Make all the tiddlers position absolute, and hide all but the first one
@@ -31,18 +31,16 @@ function SidewaysView(story) {
 }
 
 /*
-Visualise navigation to the specified tiddler macro, optionally specifying a source node for the visualisation
-	targetTiddlerNode: tree node of the tiddler macro we're navigating to
-	isNew: true if the node we're navigating to has just been added to the DOM
-	sourceNode: optional tree node that initiated the navigation
+Visualise insertion of the specified tiddler macro, optionally specifying a source node for the visualisation
+	storyElementNode: tree node of the tiddler macro we're navigating to
 */
-SidewaysView.prototype.navigate = function(targetTiddlerNode,isNew,sourceEvent) {
-	setStoryElementStyles(targetTiddlerNode.domNode);
-	$tw.utils.scrollIntoView(targetTiddlerNode.domNode);
+SidewaysView.prototype.insert = function(storyElementNode) {
+	setStoryElementStyles(storyElementNode.domNode);
+	$tw.utils.scrollIntoView(storyElementNode.domNode);
 };
 
-SidewaysView.prototype.close = function(targetTiddlerNode,sourceEvent) {
-	var targetElement = targetTiddlerNode.domNode;
+SidewaysView.prototype.remove = function(storyElementNode) {
+	var targetElement = storyElementNode.domNode;
 	// Get the current width of the tiddler
 	var currWidth = targetElement.offsetWidth;
 	// Put a wrapper around the dom node we're closing

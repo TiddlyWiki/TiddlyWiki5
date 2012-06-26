@@ -3,9 +3,9 @@ type: application/json
 
 {
 	"tiddlers": [
-		{"title": "HelloThere", "template": "$:/templates/ViewTemplate"},
-		{"title": "Introduction", "template": "$:/templates/ViewTemplate"},
-		{"title": "Improvements", "template": "$:/templates/ViewTemplate"},
-		{"title": "Docs", "template": "$:/templates/ViewTemplate"}
+		{"title": "HelloThere"},
+		{"title": "Introduction"},
+		{"title": "Improvements"},
+		{"title": "Docs"}
 	]
 }

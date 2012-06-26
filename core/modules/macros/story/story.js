@@ -3,15 +3,27 @@ title: $:/core/modules/macros/story/story.js
 type: application/javascript
 module-type: macro
 
-Displays a sequence of tiddlers defined in a JSON structure:
+Displays a sequence of tiddlers defined in two JSON structures. The story tiddler is the sequence of tiddlers currently present in the DOM:
 
 	{
 		tiddlers: [
-			{title: <string>, template: <string>}
-		]	
+			{title: <string>, draft: <string>}
+		]
 	}
 
-The storyview is a plugin that extends the story macro to implement different navigation experiences.
+The optional `draft` member indicates that the tiddler is in edit mode, and the value is the title of the tiddler being used as the draft.
+
+When the story tiddler changes, the story macro adjusts the DOM to match. An optional storyview plugin can be used to visualise the changes.
+
+And the history tiddler is the stack of tiddlers that were navigated to in turn:
+
+	{
+		stack: [
+			{title: <string>}
+		]
+	}
+
+The history stack is updated during navigation, and again the storyview plugin is given an opportunity to animate the navigation.
 
 \*/
 (function(){
@@ -24,6 +36,7 @@ exports.info = {
 	name: "story",
 	params: {
 		story: {byName: "default", type: "tiddler"},
+		history: {byName: "default", type: "tiddler"},
 		defaultViewTemplate: {byName: true, type: "tiddler"},
 		defaultEditTemplate: {byName: true, type: "tiddler"},
 		storyviewTiddler: {byName: true, type: "tiddler"},
@@ -31,213 +44,133 @@ exports.info = {
 	}
 };
 
+/*
+Get the data from the JSON story tiddler
+*/
 exports.getStory = function() {
-	var storyTiddler = this.wiki.getTiddler(this.params.story),
-		story = {tiddlers: []};
+	var storyTiddler = this.wiki.getTiddler(this.params.story);
+	this.story = {
+		tiddlers: []
+	};
 	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
-		return JSON.parse(storyTiddler.fields.text);
-	} else {
-		return {
-			tiddlers: []
-		};
+		this.story = JSON.parse(storyTiddler.fields.text);
 	}
 };
 
-exports.handleEvent = function(event) {
-	if(this.eventMap[event.type]) {
-		this.eventMap[event.type].call(this,event);
+exports.getHistory = function() {
+	var historyTiddler = this.wiki.getTiddler(this.params.history);
+	this.history = {stack: []};
+	if(historyTiddler && $tw.utils.hop(historyTiddler.fields,"text")) {
+		this.history = JSON.parse(historyTiddler.fields.text);
+	}
+};
+
+exports.getViewTemplate = function() {
+	if(this.hasParameter("defaultViewTemplate")) {
+		return this.params.defaultViewTemplate;
+	} else {
+		return "$:/templates/ViewTemplate";
+	}
+};
+
+exports.getEditTemplate = function() {
+	if(this.hasParameter("defaultEditTemplate")) {
+		return this.params.defaultEditTemplate;
+	} else {
+		return "$:/templates/EditTemplate";
 	}
 };
 
 /*
-Return the index of the story element that contains the specified tree node. Returns -1 if none
+Create a story element representing a given tiddler, optionally being editted
 */
-exports.findStoryElementContainingNode = function(node) {
-	// Get the DOM node contained by the target node
-	while(node && !node.domNode) {
-		node = node.child;
+exports.createStoryElement = function(title,draft) {
+	var node = this.createStoryElementMacro(title,draft),
+		eventHandler = {handleEvent: function(event) {
+			// Add context information to the event
+			event.navigateFromStoryElement = node;
+			event.navigateFromTitle = title;
+			return true;
+		}};
+	node.execute(this.parents,this.tiddlerTitle);
+	var storyElement = $tw.Tree.Element("div",{"class": ["tw-story-element"]},[node],{
+			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
+			eventHandler: eventHandler
+		});
+	// Save our data inside the story element node
+	storyElement.storyElementInfo = {title: title};
+	if(draft) {
+		storyElement.storyElementInfo.draft = draft;
 	}
-	// Step through the story elements
-	var slot = -1;
-	for(var t=0; t<this.storyNode.children.length; t++) {
-		if($tw.utils.domContains(this.storyNode.children[t].domNode,node.domNode)) {
-			slot = t;
+	return storyElement;
+};
+
+/*
+Create the tiddler macro needed to represent a given tiddler and its draft status
+*/
+exports.createStoryElementMacro = function(title,draft) {
+	var srcParams;
+	if(draft) {
+		srcParams = {target: draft, template: this.getEditTemplate()};
+	} else {
+		srcParams = {target: title, template: this.getViewTemplate()};
+	}
+	return $tw.Tree.Macro("tiddler",{
+			srcParams: srcParams,
+			wiki: this.wiki
+		});
+};
+
+/*
+Remove a story element from the story, along with the attendant DOM nodes
+*/
+exports.removeStoryElement = function(storyElementIndex) {
+	var storyElement = this.storyNode.children[storyElementIndex];
+	// Invoke the storyview to animate the removal
+	if(this.storyview && this.storyview.remove) {
+		if(!this.storyview.remove(storyElement)) {
+			// Only delete the DOM element if the storyview.remove() returned false
+			storyElement.domNode.parentNode.removeChild(storyElement.domNode);
 		}
 	}
-	return slot;
+	// Then delete the actual renderer node
+	this.storyNode.children.splice(storyElementIndex,1);
 };
 
 /*
 Return the index of the story element that corresponds to a particular title
 startIndex: index to start search (use zero to search from the top)
 tiddlerTitle: tiddler title to seach for
-templateTitle: optional template title to search for
 */
-exports.findStoryElementByTitle = function(startIndex,tiddlerTitle,templateTitle) {
+exports.findStoryElementByTitle = function(startIndex,tiddlerTitle) {
 	while(startIndex < this.storyNode.children.length) {
-		var params = this.storyNode.children[startIndex].children[0].params;
-		if(params.target === tiddlerTitle) {
-			if(!templateTitle || params.template === templateTitle) {
-				return startIndex;
-			}
+		if(this.storyNode.children[startIndex].storyElementInfo.title === tiddlerTitle) {
+			return startIndex;
 		}
 		startIndex++;
 	}
 	return undefined;
 };
 
-exports.eventMap = {};
-
-// Navigate to a specified tiddler
-exports.eventMap["tw-navigate"] = function(event) {
-	var template = this.params.defaultViewTemplate || "$:/templates/ViewTemplate",
-		story = this.getStory(),
-		navTiddler,t,tiddler,slot;
-	// See if the tiddler we want is already there
-	for(t=0; t<story.tiddlers.length; t++) {
-		if(story.tiddlers[t].title === event.navigateTo) {
-			navTiddler = t;
-		}
-	}
-	if(typeof(navTiddler) !== "undefined") {
-		// If we found our tiddler, just tell the storyview to navigate to it
-		if(this.storyview && this.storyview.navigate) {
-			this.storyview.navigate(this.storyNode.children[navTiddler],false,event);
-		}
-	} else {
-		// Find the source location in the story
-		if(event.navigateFrom) {
-			slot = this.findStoryElementContainingNode(event.navigateFrom) + 1;
-		} else {
-			slot = 0;			
-		}
-		// Add the tiddler to the bottom of the story (subsequently there will be a refreshInDom() call which is when we'll actually do the navigation)
-		story.tiddlers.splice(slot,0,{title: event.navigateTo, template: template});
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
-		// Record the details of the navigation for us to pick up in refreshInDom()
-		this.lastNavigationEvent = event;
-	}
-	event.stopPropagation();
-	return false;
-};
-
-// Place a tiddler in edit mode
-exports.eventMap["tw-EditTiddler"] = function(event) {
-	var template, storyTiddler, story, storyRecord, tiddler, t;
-	// Put the specified tiddler into edit mode
-	template = this.params.defaultEditTemplate || "$:/templates/EditTemplate";
-	story = this.getStory();
-	for(t=0; t<story.tiddlers.length; t++) {
-		storyRecord = story.tiddlers[t];
-		if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
-			storyRecord.title = "Draft " + (new Date()) + " of " + event.tiddlerTitle;
-			storyRecord.template = template;
-			tiddler = this.wiki.getTiddler(event.tiddlerTitle);
-			this.wiki.addTiddler(new $tw.Tiddler(
-				{
-					text: "Type the text for the tiddler '" + event.tiddlerTitle + "'"
-				},
-				tiddler,
-				{
-					title: storyRecord.title,
-					"draft.title": event.tiddlerTitle,
-					"draft.of": event.tiddlerTitle
-				}));
-		}
-	}
-	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
-	event.stopPropagation();
-	return false;
-};
-
-// Take a tiddler out of edit mode, saving the changes
-exports.eventMap["tw-SaveTiddler"] = function(event) {
-	var template, storyTiddler, story, storyRecord, tiddler, storyTiddlerModified, t;
-	template = this.params.defaultEditTemplate || "$:/templates/ViewTemplate";
-	story = this.getStory();
-	storyTiddlerModified = false;
-	for(t=0; t<story.tiddlers.length; t++) {
-		storyRecord = story.tiddlers[t];
-		if(storyRecord.title === event.tiddlerTitle && storyRecord.template !== template) {
-			tiddler = this.wiki.getTiddler(storyRecord.title);
-			if(tiddler && $tw.utils.hop(tiddler.fields,"draft.title")) {
-				// Save the draft tiddler as the real tiddler
-				this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: tiddler.fields["draft.title"],"draft.title": undefined, "draft.of": undefined}));
-				// Remove the draft tiddler
-				this.wiki.deleteTiddler(storyRecord.title);
-				// Remove the original tiddler if we're renaming it
-				if(tiddler.fields["draft.of"] !== tiddler.fields["draft.title"]) {
-					this.wiki.deleteTiddler(tiddler.fields["draft.of"]);
-				}
-				// Make the story record point to the newly saved tiddler
-				storyRecord.title = tiddler.fields["draft.title"];
-				storyRecord.template = template;
-				// Check if we're modifying the story tiddler itself
-				if(tiddler.fields["draft.title"] === this.params.story) {
-					storyTiddlerModified = true;
-				}
-			}
-		}
-	}
-	if(!storyTiddlerModified) {
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
-	}
-	event.stopPropagation();
-	return false;
-};
-
-// Take a tiddler out of edit mode, saving the changes
-exports.eventMap["tw-CloseTiddler"] = function(event) {
-	var story,t,storyElement;
-	story = this.getStory();
-	// Look for tiddlers with this title to close
-	for(t=story.tiddlers.length-1; t>=0; t--) {
-		if(story.tiddlers[t].title === event.tiddlerTitle) {
-			storyElement = this.storyNode.children[t];
-			// Invoke the storyview to animate the closure
-			if(this.storyview && this.storyview.close) {
-				if(!this.storyview.close(storyElement,event)) {
-					// Only delete the DOM element if the storyview.close() returned false
-					storyElement.domNode.parentNode.removeChild(storyElement.domNode);
-				}
-			}
-			// Remove the story element node
-			this.storyNode.children.splice(t,1);
-			// Remove the record in the story
-			story.tiddlers.splice(t,1);
-		}
-	}
-	this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{text: JSON.stringify(story)}));
-	event.stopPropagation();
-	return false;
-};
-
 exports.executeMacro = function() {
+	// Get the story object
+	this.getStory();
 	// Create the story frame
-	var story = this.getStory();
-	this.contentNode = $tw.Tree.Element("div",{"class": "tw-story-content"},this.content);
-	this.contentNode.execute(this.parents,this.tiddlerTitle);
-	this.storyNode = $tw.Tree.Element("div",{"class": "tw-story-frame"},[]);
+	var attributes = {"class": "tw-story-frame"};
+	this.storyNode = $tw.Tree.Element("div",attributes,[]);
 	// Create each story element
-	for(var t=0; t<story.tiddlers.length; t++) {
-		var m = $tw.Tree.Macro("tiddler",{
-									srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
-									wiki: this.wiki
-								});
-		m.execute(this.parents,this.tiddlerTitle);
-		this.storyNode.children.push($tw.Tree.Element("div",{"class": "tw-story-element"},[m]));
+	for(var t=0; t<this.story.tiddlers.length; t++) {
+		this.storyNode.children.push(this.createStoryElement(this.story.tiddlers[t].title,this.story.tiddlers[t].draft));
 	}
-	var attributes = {};
 	if(this.classes) {
-		attributes["class"] = this.classes.slice(0);
+		$tw.utils.pushTop(attributes["class"],this.classes);
 	}
-	return $tw.Tree.Element("div",attributes,[this.contentNode,this.storyNode],{
-		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
-		eventHandler: this
-	});
+	return this.storyNode;
 };
 
 exports.postRenderInDom = function() {
+	// Reset the record of the previous history stack
+	this.prevHistory = {stack: []};
 	// Instantiate the story view
 	var storyviewName;
 	if(this.hasParameter("storyviewTiddler")) {
@@ -259,7 +192,6 @@ exports.postRenderInDom = function() {
 };
 
 exports.refreshInDom = function(changes) {
-	var t;
 	// If the storyview has changed we'll have to completely re-execute the macro
 	if(this.hasParameter("storyviewTiddler") && $tw.utils.hop(changes,this.params.storyviewTiddler)) {
 		// This logic should be reused from the base macro class, and not duplicated
@@ -274,73 +206,105 @@ exports.refreshInDom = function(changes) {
 		this.renderInDom(parentDomNode,insertBefore);
 		return;
 	}
-	/*jslint browser: true */
-	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
-		// Get the tiddlers we're supposed to be displaying
-		var self = this,
-			story = this.getStory(),
-			template = this.params.template,
-			n,domNode,
-			findTiddler = function (childIndex,tiddlerTitle,templateTitle) {
-				while(childIndex < self.storyNode.children.length) {
-					var params = self.storyNode.children[childIndex].children[0].params;
-					if(params.target === tiddlerTitle) {
-						if(!templateTitle || params.template === templateTitle) {
-							return childIndex;
-						}
-					}
-					childIndex++;
+	// If the story tiddler has changed we need to sync the story elements
+	if(this.hasParameter("story") && $tw.utils.hop(changes,this.params.story)) {
+		this.processStoryChange(changes);
+	} else {
+		// If the story didn't change then we must refresh our content
+		this.child.refreshInDom(changes);
+	}
+	// If the history tiddler has changed we may need to visualise something
+	if(this.hasParameter("history") && $tw.utils.hop(changes,this.params.history)) {
+		this.processHistoryChange();
+	}
+};
+
+exports.processStoryChange = function(changes) {
+	// Get the tiddlers we're supposed to be displaying
+	var self = this,storyElement,
+		t,n,domNode;
+	// Get the story object
+	this.getStory();
+	// Check through each tiddler in the story
+	for(t=0; t<this.story.tiddlers.length; t++) {
+		// See if the node we want is already there
+		var tiddlerNode = this.findStoryElementByTitle(t,this.story.tiddlers[t].title);
+		if(tiddlerNode === undefined) {
+			// If not, render the tiddler
+			this.storyNode.children.splice(t,0,this.createStoryElement(this.story.tiddlers[t].title,this.story.tiddlers[t].draft));
+			this.storyNode.children[t].renderInDom(this.storyNode.domNode,this.storyNode.domNode.childNodes[t]);
+			// Invoke the storyview to animate the navigation
+			if(this.storyview && this.storyview.insert) {
+				this.storyview.insert(this.storyNode.children[t]);
+			}
+		} else {
+			// Delete any nodes preceding the one we want
+			if(tiddlerNode > t) {
+				for(n=tiddlerNode-1; n>=t; n--) {
+					this.removeStoryElement(n);
 				}
-				return null;
-			};
-		for(t=0; t<story.tiddlers.length; t++) {
-			// See if the node we want is already there
-			var tiddlerNode = findTiddler(t,story.tiddlers[t].title,story.tiddlers[t].template);
-			if(tiddlerNode === null) {
-				// If not, render the tiddler
-				var m = $tw.Tree.Element("div",{"class": "tw-story-element"},[
-							$tw.Tree.Macro("tiddler",{
-											srcParams: {target: story.tiddlers[t].title,template: story.tiddlers[t].template},
-											wiki: this.wiki
-										})
-							]);
-				m.execute(this.parents,this.tiddlerTitle);
-				m.renderInDom(this.storyNode.domNode,this.storyNode.domNode.childNodes[t]);
-				this.storyNode.children.splice(t,0,m);
-				// Invoke the storyview to animate the navigation
-				if(this.storyview && this.storyview.navigate) {
-					this.storyview.navigate(this.storyNode.children[t],true,this.lastNavigationEvent);
-				}
+			}
+			storyElement = this.storyNode.children[t];
+			// Check that the edit status matches
+			if(this.story.tiddlers[t].draft !== storyElement.storyElementInfo.draft) {
+				// If not, we'll have to recreate the story element
+				storyElement.children[0] = this.createStoryElementMacro(this.story.tiddlers[t].title,this.story.tiddlers[t].draft);
+				// Remove the DOM node in the story element
+				storyElement.domNode.removeChild(storyElement.domNode.firstChild);
+				// Reexecute the story element
+				storyElement.children[0].execute(this.parents,this.tiddlerTitle);
+				// Render the story element in the DOM
+				storyElement.children[0].renderInDom(storyElement.domNode);
+				// Reset the information in the story element
+				storyElement.storyElementInfo = {title: this.story.tiddlers[t].title, draft: this.story.tiddlers[t].draft};
 			} else {
-				// Delete any nodes preceding the one we want
-				if(tiddlerNode > t) {
-					// First delete the DOM nodes
-					for(n=t; n<tiddlerNode; n++) {
-						domNode = this.storyNode.children[n].domNode;
-						domNode.parentNode.removeChild(domNode);
-					}
-					// Then delete the actual renderer nodes
-					this.storyNode.children.splice(t,tiddlerNode-t);
-				}
-				// Refresh the DOM node we're reusing
+				// If the draft status matches then just refresh the DOM node we're reusing
 				this.storyNode.children[t].refreshInDom(changes);
 			}
 		}
-		// Remove any left over nodes
-		if(this.storyNode.children.length > story.tiddlers.length) {
-			for(t=story.tiddlers.length; t<this.storyNode.children.length; t++) {
-				domNode = this.storyNode.children[t].domNode;
-				domNode.parentNode.removeChild(domNode);
-			}
-			this.storyNode.children.splice(story.tiddlers.length,this.storyNode.children.length-story.tiddlers.length);
-		}
-	} else {
-		if(this.child) {
-			this.child.refreshInDom(changes);
+	}
+	// Remove any left over nodes
+	if(this.storyNode.children.length > this.story.tiddlers.length) {
+		for(t=this.storyNode.children.length-1; t>=this.story.tiddlers.length; t--) {
+			this.removeStoryElement(t);
 		}
 	}
-	// Clear the details of the last navigation
-	this.lastNavigationEvent = undefined;
+};
+
+/*
+Respond to a change in the history tiddler. The basic idea is to issue forward/back navigation commands to the story view that correspond to the tiddlers that need to be popped on or off the stack
+*/
+exports.processHistoryChange = function() {
+	// Read the history tiddler
+	this.getHistory();
+	if(this.storyview) {
+		var t,index,
+			topCommon = Math.min(this.history.stack.length,this.prevHistory.stack.length);
+		// Find the common heritage of the new history stack and the previous one
+		for(t=0; t<topCommon; t++) {
+			if(this.history.stack[t].title !== this.prevHistory.stack[t].title) {
+				topCommon = t;
+				break;
+			}
+		}
+		// We now navigate backwards through the previous history to get back to the common ancestor
+		for(t=this.prevHistory.stack.length-1; t>=topCommon; t--) {
+			index = this.findStoryElementByTitle(0,this.prevHistory.stack[t].title);
+			if(index !== undefined && this.storyview.navigateBack) {
+				this.storyview.navigateBack(this.storyNode.children[index]);
+			}
+		}
+		// And now we navigate forwards through the new history to get to the latest tiddler
+		for(t=topCommon; t<this.history.stack.length; t++) {
+			index = this.findStoryElementByTitle(0,this.history.stack[t].title);
+			if(index !== undefined && this.storyview.navigateForward) {
+				this.storyview.navigateForward(this.storyNode.children[index]);
+			}
+		}
+	}
+	// Record the history stack for next time
+	this.prevHistory = this.history;
+	this.history = undefined;
 };
 
 })();

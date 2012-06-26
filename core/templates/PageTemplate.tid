@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
-<div class="container">
-<<story story:"$:/StoryTiddlers" storyviewTiddler:[[$:/CurrentView]] storyview:classic ><
+<<navigator story:"$:/StoryTiddlers" history:"$:/History" ><
+
 {{navigation-panel{
 <<chooser><
 	<<list all>>
@@ -35,9 +35,13 @@ title: $:/templates/PageTemplate
 </div>
 >>
 >>
+</div>
+</div>
+</div>
 
+<div class="container">
+<<story story:"$:/StoryTiddlers" history:"$:/History" storyviewTiddler:[[$:/CurrentView]] storyview:classic >>
 </div>
-</div>
-</div>
+
 >>
-</div>
+
