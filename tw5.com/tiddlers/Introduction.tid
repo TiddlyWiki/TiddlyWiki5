@@ -10,5 +10,6 @@ Here are a few features of TiddlyWiki that you can explore:
 * If you're running on a touch browser like Mobile Safari on the iPad or iPhone:
 ** The zooming chooser appears by swiping into the left edge of the screen. (It's currently broken but you get the idea)
 ** The zooming navigator appears by swiping in from the right edge of the screen. (It currently only works in the 'Classic' storyview)
+* Play with the SubStories example to understand how the StoryMechanism works
 * Browse the list of AllTiddlers or the ShadowTiddlers
 * Examine the example [[bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]]
