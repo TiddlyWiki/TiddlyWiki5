@@ -89,10 +89,19 @@ Node.prototype.getNodeBounds = function() {
 	var t,bounds;
 	if(this.domNode) {
 		if(this.domNode.nodeType === 3) { // Node.TEXT_NODE
-			return this.domNode.parentNode.getBoundingClientRect();
+			bounds = this.domNode.parentNode.getBoundingClientRect();
 		} else {
-			return this.domNode.getBoundingClientRect();
+			bounds = this.domNode.getBoundingClientRect();
 		}
+		// Absurdly, Firefox requires us to do this, otherwise JSON.stringify() gets confused
+		return {
+			top: bounds.top,
+			left: bounds.left,
+			right: bounds.right,
+			bottom: bounds.bottom,
+			width: bounds.width,
+			height: bounds.height
+		};
 	} else {
 		if(this.child) {
 			return this.child.getNodeBounds();
