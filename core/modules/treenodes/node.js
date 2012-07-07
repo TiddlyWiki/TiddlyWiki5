@@ -105,8 +105,8 @@ Node.prototype.getNodeBounds = function() {
 			}
 		}
 	}
-	re
-}
+	return null;
+};
 
 exports.Node = Node;
 
