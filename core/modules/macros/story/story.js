@@ -132,7 +132,7 @@ exports.removeStoryElement = function(storyElementIndex) {
 	var storyElement = this.storyNode.children[storyElementIndex];
 	// Invoke the storyview to animate the removal
 	if(this.storyview && this.storyview.remove) {
-		if(!this.storyview.remove(storyElement)) {
+		if(!this.storyview.remove(storyElement,storyElementIndex)) {
 			// Only delete the DOM element if the storyview.remove() returned false
 			storyElement.domNode.parentNode.removeChild(storyElement.domNode);
 		}

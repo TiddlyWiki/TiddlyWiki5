@@ -125,52 +125,55 @@ Zoomin.prototype.navigateForward = function(toStoryElement,fromStoryElement,hist
 
 /*
 Visualise navigating back to the previous tiddler
-	toStoryElement: story element being navigated back to
-	fromStoryElement: story element being navigated back from
-	historyInfo: member of the history stack[] array being navigated back through
+	storyElement: story element being closed
 */
-Zoomin.prototype.navigateBack = function(toStoryElement,fromStoryElement,historyInfo) {
+Zoomin.prototype.remove = function(storyElement,storyElementIndex) {
 	// Get the animation duration
 	var d = $tw.config.preferences.animationDuration + "ms";
 	// Set up the tiddler that is being closed
-	if(fromStoryElement) {
-		fromStoryElement.domNode.style.position = "absolute";
-		fromStoryElement.domNode.style.display = "block";
-		fromStoryElement.domNode.style[$tw.browser.transformorigin] = "50% 50%";
-		fromStoryElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
-		fromStoryElement.domNode.style[$tw.browser.transition] = "none";
-		fromStoryElement.domNode.style.zIndex = "0";
+		storyElement.domNode.style.position = "absolute";
+		storyElement.domNode.style.display = "block";
+		storyElement.domNode.style[$tw.browser.transformorigin] = "50% 50%";
+		storyElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
+		storyElement.domNode.style[$tw.browser.transition] = "none";
+		storyElement.domNode.style.zIndex = "0";
+	// We'll move back to the previous or next element in the story
+	var toStoryElement = this.story.storyNode.children[storyElementIndex - 1];
+	if(!toStoryElement) {
+		toStoryElement = this.story.storyNode.children[storyElementIndex + 1];
 	}
 	// Set up the tiddler we're moving back in
-	toStoryElement.domNode.style.position = "absolute";
-	toStoryElement.domNode.style.display = "block";
-	toStoryElement.domNode.style[$tw.browser.transformorigin] = "50% 50%";
-	toStoryElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(10)";
-	toStoryElement.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
-	toStoryElement.domNode.style.opacity = "0.0";
-	toStoryElement.domNode.style.zIndex = "500";
-	this.currentTiddler = toStoryElement;
+	if(toStoryElement) {
+		toStoryElement.domNode.style.position = "absolute";
+		toStoryElement.domNode.style.display = "block";
+		toStoryElement.domNode.style[$tw.browser.transformorigin] = "50% 50%";
+		toStoryElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(10)";
+		toStoryElement.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
+		toStoryElement.domNode.style.opacity = "0.0";
+		toStoryElement.domNode.style.zIndex = "500";
+		this.currentTiddler = toStoryElement;
+	}
 	// Animate them both
 	$tw.utils.nextTick(function() {
 		// First, the tiddler we're closing
-		if(fromStoryElement) {
-			fromStoryElement.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
-			fromStoryElement.domNode.style.opacity = "0.0";
-			fromStoryElement.domNode.style[$tw.browser.transformorigin] = "50% 50%";
-			fromStoryElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(0.1)";
-			fromStoryElement.domNode.style.zIndex = "0";
-			var eventHandler = function(event) {
-					// Delete the DOM node when the transition is over
-					if(fromStoryElement.domNode.parentNode) {
-						fromStoryElement.domNode.parentNode.removeChild(fromStoryElement.domNode);
-					}
-				fromStoryElement.domNode.removeEventListener($tw.browser.transitionEnd,eventHandler,true);
-				};
-			fromStoryElement.domNode.addEventListener($tw.browser.transitionEnd,eventHandler,true);
-		}
+		storyElement.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
+		storyElement.domNode.style.opacity = "0.0";
+		storyElement.domNode.style[$tw.browser.transformorigin] = "50% 50%";
+		storyElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(0.1)";
+		storyElement.domNode.style.zIndex = "0";
+		var eventHandler = function(event) {
+				// Delete the DOM node when the transition is over
+				if(storyElement.domNode.parentNode) {
+					storyElement.domNode.parentNode.removeChild(storyElement.domNode);
+				}
+			storyElement.domNode.removeEventListener($tw.browser.transitionEnd,eventHandler,true);
+			};
+		storyElement.domNode.addEventListener($tw.browser.transitionEnd,eventHandler,true);
 		// Now the tiddler we're going back to
-		toStoryElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
-		toStoryElement.domNode.style.opacity = "1.0";
+		if(toStoryElement) {
+			toStoryElement.domNode.style[$tw.browser.transform] = "translateX(0px) translateY(0px) scale(1)";
+			toStoryElement.domNode.style.opacity = "1.0";
+		}
 	});
 	return true; // Indicate that we'll delete the DOM node
 };
