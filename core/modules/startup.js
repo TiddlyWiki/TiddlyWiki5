@@ -61,6 +61,26 @@ exports.startup = function() {
 			wiki: $tw.wiki,
 			rootElement: document.body
 		});
+		// Install the scroller
+		$tw.scroller = new $tw.utils.Scroller();
+		// Get the default tiddlers
+		var defaultTiddlersTitle = "$:/DefaultTiddlers",
+			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
+			defaultTiddlers = [];
+		if(defaultTiddlersTiddler) {
+			defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
+		}
+		// Initialise the story and history
+		var storyTitle = "$:/StoryTiddlers",
+			historyTitle = "$:/History",
+			story = {tiddlers: []},
+			history = {stack: []};
+		for(var t=0; t<defaultTiddlers.length; t++) {
+			story.tiddlers[t] = {title: defaultTiddlers[t]};
+			history.stack[defaultTiddlers.length - t - 1] = {title: defaultTiddlers[t], fromTitle: defaultTiddlers[t+1]};
+		}
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: storyTitle,text: JSON.stringify(story)}));
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: historyTitle,text: JSON.stringify(history)}));
 		// Display the PageTemplate
 		var template = "$:/templates/PageTemplate";
 		$tw.renderer = $tw.wiki.parseTiddler(template);
