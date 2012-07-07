@@ -31,7 +31,7 @@ ClassicScroller.prototype.remove = function(storyElementNode) {
 		}
 	},false);
 	// Animate the closure
-	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s";
+	var d = $tw.config.preferences.animationDuration + "ms";
 	wrapperElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
 															"opacity " + d + " ease-out, " +
 															"height " + d + " ease-in-out";
@@ -48,12 +48,12 @@ ClassicScroller.prototype.remove = function(storyElementNode) {
 	return true;
 };
 
-ClassicScroller.prototype.navigateBack = function(storyElementNode,historyInfo) {
-	$tw.utils.scrollIntoView(storyElementNode.domNode);
+ClassicScroller.prototype.navigateBack = function(toStoryElement,fromStoryElement,historyInfo) {
+	$tw.scroller.scrollIntoView(toStoryElement.domNode);
 };
 
-ClassicScroller.prototype.navigateForward = function(storyElementNode,historyInfo) {
-	$tw.utils.scrollIntoView(storyElementNode.domNode);
+ClassicScroller.prototype.navigateForward = function(toStoryElement,fromStoryElement,historyInfo) {
+	$tw.scroller.scrollIntoView(toStoryElement.domNode);
 };
 
 exports.classic = ClassicScroller;

@@ -19,7 +19,11 @@ And the history tiddler is the stack of tiddlers that were navigated to in turn:
 
 	{
 		stack: [
-			{title: <string>}
+			{
+				title: <string>,
+				fromTitle: <string>,
+				fromPosition: {bottom: <num>, height: <num>, top: <num>, right: <num>, left: <num>, width: <num>}
+			}
 		]
 	}
 
@@ -132,6 +136,9 @@ exports.removeStoryElement = function(storyElementIndex) {
 			// Only delete the DOM element if the storyview.remove() returned false
 			storyElement.domNode.parentNode.removeChild(storyElement.domNode);
 		}
+	} else {
+		// Always delete the story element if we didn't invoke the storyview
+		storyElement.domNode.parentNode.removeChild(storyElement.domNode);
 	}
 	// Then delete the actual renderer node
 	this.storyNode.children.splice(storyElementIndex,1);
@@ -169,8 +176,10 @@ exports.executeMacro = function() {
 };
 
 exports.postRenderInDom = function() {
-	// Reset the record of the previous history stack
-	this.prevHistory = {stack: []};
+	// Get the history object and use it to set the previous history
+	this.getHistory();
+	this.prevHistory = this.history;
+	this.history = null;
 	// Instantiate the story view
 	var storyviewName;
 	if(this.hasParameter("storyviewTiddler")) {
@@ -278,7 +287,7 @@ exports.processHistoryChange = function() {
 	// Read the history tiddler
 	this.getHistory();
 	if(this.storyview) {
-		var t,index,
+		var t,indexTo,indexFrom,
 			topCommon = Math.min(this.history.stack.length,this.prevHistory.stack.length);
 		// Find the common heritage of the new history stack and the previous one
 		for(t=0; t<topCommon; t++) {
@@ -289,16 +298,21 @@ exports.processHistoryChange = function() {
 		}
 		// We now navigate backwards through the previous history to get back to the common ancestor
 		for(t=this.prevHistory.stack.length-1; t>=topCommon; t--) {
-			index = this.findStoryElementByTitle(0,this.prevHistory.stack[t].title);
-			if(index !== undefined && this.storyview.navigateBack) {
-				this.storyview.navigateBack(this.storyNode.children[index],this.history.stack[t]);
+			indexTo = this.findStoryElementByTitle(0,this.prevHistory.stack[t].fromTitle);
+			indexFrom = this.findStoryElementByTitle(0,this.prevHistory.stack[t].title);
+			// Call the story view if it defines a navigateBack() method
+			if(indexTo !== undefined && indexFrom !== undefined && this.storyview.navigateBack) {
+				this.storyview.navigateBack(this.storyNode.children[indexTo],this.storyNode.children[indexFrom],this.prevHistory.stack[t]);
 			}
 		}
 		// And now we navigate forwards through the new history to get to the latest tiddler
 		for(t=topCommon; t<this.history.stack.length; t++) {
-			index = this.findStoryElementByTitle(0,this.history.stack[t].title);
-			if(index !== undefined && this.storyview.navigateForward) {
-				this.storyview.navigateForward(this.storyNode.children[index],this.history.stack[t]);
+			indexTo = this.findStoryElementByTitle(0,this.history.stack[t].title);
+			indexFrom = this.findStoryElementByTitle(0,this.history.stack[t].fromTitle);
+			if(indexTo !== undefined && this.storyview.navigateForward) {
+				this.storyview.navigateForward(this.storyNode.children[indexTo],
+					indexFrom !== undefined ? this.storyNode.children[indexFrom] : undefined,
+					this.history.stack[t]);
 			}
 		}
 	}

@@ -17,8 +17,6 @@ exports.info = {
 	params: {
 		story: {byName: "default", type: "text"}, // Actually a tiddler, but we don't want it to be a dependency
 		history: {byName: "default", type: "text"}, // Actually a tiddler, but we don't want it to be a dependency
-		defaultViewTemplate: {byName: true, type: "tiddler"},
-		defaultEditTemplate: {byName: true, type: "tiddler"},
 		set: {byName: true, type: "tiddler"}
 	}
 };
@@ -64,8 +62,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 	// Update the story tiddler if specified
 	if(this.hasParameter("story")) {
 		this.getStory();
-		var template = this.params.defaultViewTemplate || "$:/templates/ViewTemplate",
-			t,tiddler,slot;
+		var t,tiddler,slot;
 		// See if the tiddler is already there
 		for(t=0; t<this.story.tiddlers.length; t++) {
 			if(this.story.tiddlers[t].title === event.navigateTo) {
@@ -102,9 +99,42 @@ exports.eventMap["tw-navigate"] = function(event) {
 	this.history.stack.push({
 		title: event.navigateTo,
 		fromTitle: event.navigateFromTitle,
-		fromPosition: event.navigateFrom.getNodeBounds()
+		fromPosition: event.navigateFrom.getNodeBounds(),
+		scrollPosition: $tw.utils.getScrollPosition()
 	});
 	this.saveHistory();
+	event.stopPropagation();
+	return false;
+};
+
+// Navigate to a specified tiddler
+exports.eventMap["tw-NavigateBack"] = function(event) {
+	// Pop a record record off the top of the history stack
+	this.getHistory();
+	if(this.history.stack.length < 2) {
+		return false; // Bail if there is not enough entries on the history stack
+	}
+	var fromHistoryInfo = this.history.stack.pop(),
+		toHistoryInfo = this.history.stack[this.history.stack.length-1];
+	this.saveHistory();
+	// Make sure that the tiddler we're navigating back to is open in the story
+	if(this.hasParameter("story") && toHistoryInfo) {
+		this.getStory();
+		var t,tiddler,slot;
+		// See if the tiddler is already there
+		for(t=0; t<this.story.tiddlers.length; t++) {
+			if(this.story.tiddlers[t].title === toHistoryInfo.title) {
+				tiddler = t;
+			}
+		}
+		// If not we need to add it
+		if(tiddler === undefined) {
+			// Add the tiddler
+			this.story.tiddlers.splice(slot,0,{title: toHistoryInfo.title});
+			// Save the story
+			this.saveStory();
+		}
+	}
 	event.stopPropagation();
 	return false;
 };
@@ -204,7 +234,7 @@ exports.executeMacro = function() {
 		this.content[t].execute(this.parents,this.tiddlerTitle);
 	}
 	return $tw.Tree.Element("div",attributes,this.content,{
-		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
+		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler","tw-NavigateBack"],
 		eventHandler: this
 	});
 };

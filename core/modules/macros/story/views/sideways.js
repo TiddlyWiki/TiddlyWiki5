@@ -31,12 +31,22 @@ function SidewaysView(story) {
 }
 
 /*
+Visualise navigation to a new tiddler
+	toStoryElementNode: tree node of the tiddler macro we're navigating to
+	fromStoryElementNode: optionally, tree node of the tiddler we're navigating from
+	historyInfo: record from the history tiddler corresponding to this navigation
+*/
+SidewaysView.prototype.navigateForward = function(toStoryElement,fromStoryElement,historyInfo) {
+	$tw.scroller.scrollIntoView(toStoryElement.domNode);
+};
+
+/*
 Visualise insertion of the specified tiddler macro, optionally specifying a source node for the visualisation
 	storyElementNode: tree node of the tiddler macro we're navigating to
 */
 SidewaysView.prototype.insert = function(storyElementNode) {
 	setStoryElementStyles(storyElementNode.domNode);
-	$tw.utils.scrollIntoView(storyElementNode.domNode);
+	$tw.scroller.scrollIntoView(storyElementNode.domNode);
 };
 
 SidewaysView.prototype.remove = function(storyElementNode) {
@@ -48,7 +58,7 @@ SidewaysView.prototype.remove = function(storyElementNode) {
 	targetElement.parentNode.insertBefore(wrapperElement,targetElement);
 	wrapperElement.appendChild(targetElement);
 	// Animate the closure
-	var d = ($tw.config.preferences.animationDuration/1000).toFixed(8) + "s";
+	var d = $tw.config.preferences.animationDuration + "ms";
 	wrapperElement.style.display = "inline-block";
 	wrapperElement.style[$tw.browser.transformorigin] = "0% 0%";
 	wrapperElement.style[$tw.browser.transform] = "translateY(0px)";
