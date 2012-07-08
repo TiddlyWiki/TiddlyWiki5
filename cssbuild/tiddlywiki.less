@@ -1,11 +1,17 @@
-// TiddlyWiki
-// CSS Overrides for Twitter Bootstrap
+/*
+TiddlyWiki
+Base CSS from Twitter Bootstrap plus TiddlyWiki-specific overrides
+*/
 
-// Base Twitter Bootstrap
+/*
+Base Twitter Bootstrap
+*/
 
 @import "twitter-bootstrap/less/bootstrap.less";
 
-// TiddlyWiki overrides of Bootstrap variables
+/*
+TiddlyWiki overrides of Bootstrap variables
+*/
 
 @baseFontSize:          14px;
 @baseLineHeight:        20px;
@@ -19,7 +25,9 @@
 @navbarText:                      @white;
 @navbarLinkColor:                 @grayLighter;
 
-// TiddlyWiki mixins
+/*
+TiddlyWiki mixins
+*/
 
 // This doesn't seem to work; trying to call it puts Less into an infinite loop
 .tab-size (@size) {
@@ -28,7 +36,9 @@
   -o-tab-size: @size;
 }
 
-// Base re-definitions
+/*
+Base re-definitions
+*/
 
 body {
 	position: relative; 		// So that height: 100% will fit to the body
@@ -36,7 +46,9 @@ body {
 	padding-top: @navbarHeight;	// Allow for the navbar
 }
 
-// Tiddler styles
+/*
+Tiddler styles
+*/
 
 .tw-story-element {
 	position: relative;
@@ -108,7 +120,9 @@ a.tw-tiddlylink-missing {
 	font-style: inherit;
 }
 
-// Dropdown menus
+/*
+Dropdown menus
+*/
 
 .tw-ticked-menu-item::before {
 	position: absolute;
@@ -132,7 +146,9 @@ a.tw-tiddlylink-missing {
 	top: -3px;
 }
 
-// Buttons
+/*
+Buttons
+*/
 
 .btn-invisible {
 	border: none;
@@ -145,7 +161,9 @@ a.tw-tiddlylink-missing {
 	margin-right: 6px;
 }
 
-// Split label
+/*
+Split label
+*/
 
 .splitLabel {
 	font-size: 9.5px;
@@ -168,6 +186,8 @@ a.tw-tiddlylink-missing {
 	background-color: #eee;
 }
 
-// Includes
+/*
+Includes
+*/
 
 @import "javascript.less";

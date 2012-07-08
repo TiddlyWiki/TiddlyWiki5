@@ -8,37 +8,37 @@ TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and sub
 
 There has already been a series of alpha releases of TiddlyWiki5. The goal of these releases is to test the new technical architecture and to explore user interface features.
 
-! Beta Release
-
-TiddlyWiki5 will progress to a beta release when it is feature complete.
-
 Some of the features and fixes required before the beta is declared include:
 
 * Synchronisation via HTTP in the browser
 * Synchronisation via direct file access under node.js
-* Operation with TiddlySpace
-* Operation with TiddlySpot
+* Preliminary integration with TiddlySpace
+* Preliminary integration with TiddlySpot
 * Saving changes to a file URI:// using Firefox
 * Move default tiddler storage from TiddlyWiki-style `<div>` elements to JSON
-* Ability to inspect and edit tiddler fields
-* WikiText table support
-* More user interface gadgets, including: tabs, popovers, toolbars, carousel, dropdown,
-* Checkbox support via tags
-** For example, `<<checkbox {filter} {tag} {template}>>` displays a filtered list of tiddlers along with a checkbox representing whether or not each tiddler carries the specified tag
-* Search
-* Tiddler themes and wiki themes
-* Text references: slices and sections, JSON references
 * Aliases/inheritance
 * Lazy loading
 * Better handling of binary tiddlers
+
+! Beta Release
+
+TiddlyWiki5 will progress to a beta release when it is practical for cautious everyday use.
+
+Some of the additional features under consideration during the beta include:
+
+* Ability to inspect and edit tiddler fields
+* WikiText table and block quote support
+* More user interface gadgets, including: tabs, popovers, toolbars, carousel, dropdown,
+* Checkbox support
+** For example, `<<checkbox {tag}>>` in a template displays a checkbox representing whether or not each tiddler carries the specified tag
+* Search
+* Tiddler themes and wiki themes
+* Text references: slices and sections, JSON references
 * Timed refreshed relative dates (eg, 'last modified 30 minutes ago')
 * Encrypted tiddlers and encrypted TiddlyWikis
+* Facebook, Twitter, G+ and LinkedIn macros
+* Integration with the browser back and forwards buttons
 
 ! 1.0 Release
 
 Hopefully, TiddlyWiki5 will reach version 1.0 around September. This is the point at which it is declared stable enough for general use. It will continue to improve and evolve after 1.0, although constrained to remain backwards compatible so that plugins and content created for version 1.0 will continue to work into the indefinite future.
-
-Some of the features under consideration for development after release 1.0 include:
-
-* Facebook, Twitter, G+ and LinkedIn macros
-
