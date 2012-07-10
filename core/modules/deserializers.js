@@ -63,7 +63,9 @@ exports["application/json"] = function(text,fields) {
 		getKnownFields = function(tid) {
 			var fields = {};
 			"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
-				fields[value] = tid[value];
+				if(tid[value] !== null) {
+					fields[value] = tid[value];
+				}
 			});
 			return fields;
 		};
