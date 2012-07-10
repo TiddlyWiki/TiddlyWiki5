@@ -505,7 +505,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","
 						s = text.indexOf("{"),
 						e = text.lastIndexOf("}");
 					if(node.hasAttribute("data-module") && s !== -1 && e !== -1) {
-						text = text.substring(s+1,e-1);
+						text = text.substring(s+1,e);
 					}
 					var fields = {text: text},
 						attributes = node.attributes;
