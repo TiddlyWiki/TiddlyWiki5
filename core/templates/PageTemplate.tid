@@ -22,6 +22,9 @@ title: $:/templates/PageTemplate
 <<button popup:ViewDropDownState><View <span class="caret"></span>>>
 }}}
 
+
+<<button save-wiki class:"btn"><Save Changes>>
+
 }}}
 
 <<linkcatcher store:[[$:/CurrentView]]><

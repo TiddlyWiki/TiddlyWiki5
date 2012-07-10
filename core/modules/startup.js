@@ -63,6 +63,14 @@ exports.startup = function() {
 		});
 		// Install the scroller
 		$tw.scroller = new $tw.utils.Scroller();
+		// Install the save action handler
+		$tw.wiki.initSavers();
+		document.addEventListener("tw-save-wiki",function(event) {
+			$tw.wiki.saveWiki({
+				template: "$:/core/templates/tiddlywiki5.template.html",
+				downloadType: "text/plain"
+			});
+		},false);
 		// Get the default tiddlers
 		var defaultTiddlersTitle = "$:/DefaultTiddlers",
 			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),

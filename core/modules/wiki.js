@@ -478,4 +478,57 @@ exports.initStoryViews = function(moduleType) {
 	}
 };
 
+/*
+Select the appropriate saver modules and set them up
+*/
+exports.initSavers = function(moduleType) {
+	moduleType = moduleType || "saver";
+	// Instantiate the available savers
+	this.savers = [];
+	for(var t=0; t<$tw.plugins.moduleTypes[moduleType].length; t++) {
+		var saver = $tw.plugins.moduleTypes[moduleType][t];
+		if(saver.canSave()) {
+			this.savers.push(saver.create());
+		}
+	}
+	// Sort the savers into priority order
+	this.savers.sort(function(a,b) {
+		if(a.info.priority < b.info.priority) {
+			return -1;
+		} else {
+			if(a.info.priority > b.info.priority) {
+				return +1;
+			} else {
+				return 0;
+			}
+		}
+	});
+};
+
+/*
+Invoke the highest priority saver that successfully handles a method
+*/
+exports.callSaver = function(method /*, args */ ) {
+	for(var t=this.savers.length-1; t>=0; t--) {
+		var saver = this.savers[t];
+		if(saver[method].apply(saver,Array.prototype.slice.call(arguments,1))) {
+			return true;
+		}
+	}
+	return false;
+};
+
+/*
+Save the wiki contents
+	template: the tiddler containing the template to save
+	downloadType: the content type for the saved file
+*/
+exports.saveWiki = function(options) {
+	options = options || {};
+	var template = options.template || "$:/core/templates/tiddlywiki5.template.html",
+		downloadType = options.downloadType || "text/plain",
+		text = this.renderTiddler(downloadType,template);
+	this.callSaver("save",text);
+};
+
 })();
