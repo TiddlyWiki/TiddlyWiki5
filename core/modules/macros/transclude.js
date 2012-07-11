@@ -14,7 +14,6 @@ Transclude macro
 
 exports.info = {
 	name: "transclude",
-	dependentAll: true, // Nodes containing <<transclude>> macro are dependent on every tiddler
 	params: {
 		filter: {byPos: 0, type: "filter"},
 		title: {byPos: 1, type: "tiddler"},
