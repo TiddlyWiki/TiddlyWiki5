@@ -50,16 +50,8 @@ exports.refreshInDom = function(changes) {
 	var t;
 	// Only refresh if a dependency is triggered
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
-		// Only refresh if the editor lets us
-		if(this.editor.isRefreshable()) {
-			// Remove the previous child
-			var parent = this.child.domNode.parentNode,
-				nextSibling = this.child.domNode.nextSibling;
-			parent.removeChild(this.child.domNode);
-			// Execute the macro
-			this.execute(this.parents,this.tiddlerTitle);
-			// Render to the DOM
-			this.child.renderInDom(parent,nextSibling);
+		if(this.editor.refreshInDom) {
+			this.editor.refreshInDom();
 		}
 	} else {
 		// Refresh any children

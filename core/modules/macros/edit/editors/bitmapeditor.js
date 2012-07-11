@@ -156,11 +156,6 @@ BitmapEditor.prototype.saveChanges = function() {
 	}
 };
 
-BitmapEditor.prototype.isRefreshable = function() {
-	// Don't ever refresh the bitmap editor
-	return false;
-};
-
 exports["image/jpg"] = BitmapEditor;
 exports["image/jpeg"] = BitmapEditor;
 exports["image/png"] = BitmapEditor;

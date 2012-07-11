@@ -18,7 +18,10 @@ function TextEditor(macroNode) {
 	this.macroNode = macroNode;
 }
 
-TextEditor.prototype.getChild = function() {
+/*
+Get the tiddler being editted, field name and current value
+*/
+TextEditor.prototype.getEditText = function() {
 	// Get the current tiddler and the field name
 	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle),
 		field = this.macroNode.hasParameter("field") ? this.macroNode.params.field : "title",
@@ -40,19 +43,24 @@ TextEditor.prototype.getChild = function() {
 				break;
 		}
 	}
+	return {tiddler: tiddler, field: field, value: value};
+};
+
+TextEditor.prototype.getChild = function() {
+	var edit = this.getEditText();
 	var attributes = {
 			"class": ["tw-edit-field"]
 		},
 		tagName,
 		content = [];
 	// Make a textarea for text fields and an input box for other fields
-	if(field === "text") {
+	if(edit.field === "text") {
 		tagName = "textarea";
-		content.push($tw.Tree.Text(value));
+		content.push($tw.Tree.Text(edit.value));
 	} else {
 		tagName = "input";
 		attributes.type = "text";
-		attributes.value = value;
+		attributes.value = edit.value;
 	}
 	// Wrap the editor control in a div
 	return $tw.Tree.Element("div",{},[$tw.Tree.Element(tagName,attributes,content)],{
@@ -92,7 +100,7 @@ TextEditor.prototype.fixHeight = function() {
 		var prevWrapperHeight = wrapper.style.height;
 		wrapper.style.height = textarea.style.height + "px";
 		textarea.style.overflow = "hidden";
-		textarea.style.height = "1px";
+//		textarea.style.height = "1px";
 		textarea.style.height = Math.max(textarea.scrollHeight,MIN_TEXT_AREA_HEIGHT) + "px";
 		wrapper.style.height = prevWrapperHeight;
 	}
@@ -102,9 +110,13 @@ TextEditor.prototype.postRenderInDom = function() {
 	this.fixHeight();
 };
 
-TextEditor.prototype.isRefreshable = function() {
-	// Don't refresh the editor if it contains the caret or selection
-	return document.activeElement !== this.macroNode.child.children[0].domNode;
+TextEditor.prototype.refreshInDom = function() {
+	if(document.activeElement !== this.macroNode.child.children[0].domNode) {
+		var edit = this.getEditText();
+		this.macroNode.child.children[0].domNode.value = edit.value;
+	}
+	// Fix the height if needed
+	this.fixHeight();
 };
 
 exports["text/x-tiddlywiki"] = TextEditor;
