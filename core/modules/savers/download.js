@@ -18,7 +18,16 @@ Select the appropriate saver module and set it up
 var DownloadSaver = function() {
 };
 
-DownloadSaver.prototype.save = function() {
+DownloadSaver.prototype.save = function(text) {
+	// Set up the link
+	var link = document.createElement("a");
+	link.setAttribute("target","_blank");
+	link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+	// Use the download attribute to download it if it is supported
+	if(link.download !== undefined) {
+		link.setAttribute("download","tiddlywiki.html");
+	}
+	link.click();
 };
 
 /*
