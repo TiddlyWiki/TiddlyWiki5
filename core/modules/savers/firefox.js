@@ -53,7 +53,7 @@ FirefoxSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function() {
-	return !!window.Components;
+	return window.location.protocol === "file:" && !!window.Components;
 };
 
 /*
