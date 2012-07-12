@@ -100,7 +100,7 @@ TextEditor.prototype.fixHeight = function() {
 		var prevWrapperHeight = wrapper.style.height;
 		wrapper.style.height = textarea.style.height + "px";
 		textarea.style.overflow = "hidden";
-//		textarea.style.height = "1px";
+		textarea.style.height = "1px";
 		textarea.style.height = Math.max(textarea.scrollHeight,MIN_TEXT_AREA_HEIGHT) + "px";
 		wrapper.style.height = prevWrapperHeight;
 	}
