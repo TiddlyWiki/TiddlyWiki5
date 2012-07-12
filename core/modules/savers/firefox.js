@@ -12,7 +12,7 @@ Handles saving changes via Firefox's XUL APIs
 /*global $tw: false */
 "use strict";
 
-var FirefoxSaver = function() {
+var FirefoxSaver = function(wiki) {
 };
 
 FirefoxSaver.prototype.save = function(text) {

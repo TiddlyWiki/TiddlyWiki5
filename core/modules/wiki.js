@@ -488,7 +488,7 @@ exports.initSavers = function(moduleType) {
 	for(var t=0; t<$tw.plugins.moduleTypes[moduleType].length; t++) {
 		var saver = $tw.plugins.moduleTypes[moduleType][t];
 		if(saver.canSave()) {
-			this.savers.push(saver.create());
+			this.savers.push(saver.create(this));
 		}
 	}
 	// Sort the savers into priority order

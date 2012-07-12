@@ -15,7 +15,7 @@ Handles saving changes via HTML5's download APIs
 /*
 Select the appropriate saver module and set it up
 */
-var DownloadSaver = function() {
+var DownloadSaver = function(wiki) {
 };
 
 DownloadSaver.prototype.save = function(text) {
@@ -28,6 +28,7 @@ DownloadSaver.prototype.save = function(text) {
 		link.setAttribute("download","tiddlywiki.html");
 	}
 	link.click();
+	return true;
 };
 
 /*
