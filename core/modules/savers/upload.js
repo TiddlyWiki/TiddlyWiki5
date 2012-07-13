@@ -26,6 +26,11 @@ UploadSaver.prototype.save = function(text) {
 		password = $tw.utils.getPassword("upload"),
 		uploadDir = ".",
 		url = this.wiki.getTextReference("$:/UploadURL");
+	// Bail out if we don't have the bits we need
+	if(!userName || userName.toString().trim() === "" || !password || password.toString().trim() === "") {
+		return false;
+	}
+	// Construct the url if not provided
 	if(!url) {
 		url = "http://" + userName + ".tiddlyspot.com/store.cgi";
 	}
@@ -68,7 +73,7 @@ UploadSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
-	return wiki.tiddlerExists("$:/UploadName");
+	return true;
 };
 
 /*
