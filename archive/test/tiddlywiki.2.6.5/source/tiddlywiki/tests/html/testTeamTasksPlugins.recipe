@@ -1,4 +1,0 @@
-template: testTeamTasksPlugins.template.html
-style: ../../html/style.txt
-recipe: ../../shadows/split.recipe
-recipe: ../../js/split.recipe

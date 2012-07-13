@@ -1,7 +1,0 @@
-#!/bin/bash
-TWDIR=$HOME/Documents/TiddlyWiki
-DEFAULT_FILENAME=tiddlywiki
-FILENAME=${1:-$DEFAULT_FILENAME}
-DEST=$PWD
-RECIPE=$PWD/$FILENAME.js.recipe
-ruby -C ../../../tools/cooker cook.rb $RECIPE -d$DEST -s $2 $3 $4 $5

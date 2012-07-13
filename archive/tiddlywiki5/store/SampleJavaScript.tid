@@ -1,9 +1,0 @@
-title: SampleJavaScript
-type: application/javascript
-
-/*
-This is an example JavaScript file
-*/
-function myFunction(param) {
-	return param * Math.PI; // Perform a calculation
-}

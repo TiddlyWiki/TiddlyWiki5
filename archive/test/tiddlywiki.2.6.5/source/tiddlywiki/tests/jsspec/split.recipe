@@ -1,8 +1,0 @@
-jsspec: BasicTypes.jsspec.js
-jsspec: Dom.jsspec.js
-jsspec: Macros.jsspec.js
-jsspec: Messages.jsspec.js
-jsspec: Mocks.jsspec.js
-jsspec: Strings.jsspec.js
-jsspec: Wikifier.jsspec.js
-jsspec: XML.jsspec.js

@@ -1,7 +1,0 @@
-<div title="Başlamak" modifier="KıvılcımHindistan">
-<pre>Bu boş TiddlyWiki ile başlangıç yapmanız için öncelikle şu notcukları değiştirmeniz gerekecek: :
-* SiteTitle &amp; SiteSubtitle: Sitenin başlığı ve altbaşlığı (kayedetmenizin ardından tarayıcınızın tepesinde de bu isimler görülecek)
-* MainMenu: Menü (genellikle sol tarafta) 
-* DefaultTiddlers: TiddlyWiki açıldığında gözükecek ön tanımlı notcuklar
- Düzenlemelerinizin kim tarafından yapıldığını belirtmek için kullanıcı isminiz gerekli: &lt;&lt;option txtUserName&gt;&gt;</pre>
-</div>

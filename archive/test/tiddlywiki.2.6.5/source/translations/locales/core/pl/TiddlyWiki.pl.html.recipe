@@ -1,6 +1,0 @@
-recipe: ../../../../core/tiddlywiki.html.recipe
-tiddler: locale.pl.js
-tiddler: SzybkiStart.tiddler
-shadow: AdvancedOptions.tiddler
-shadow: GettingStarted.tiddler
-shadow: OptionsPanel.tiddler

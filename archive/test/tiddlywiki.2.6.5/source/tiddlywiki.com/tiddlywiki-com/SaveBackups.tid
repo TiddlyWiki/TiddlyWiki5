@@ -1,8 +1,0 @@
-title: SaveBackups
-modifier: blaine
-created: 20110211110700
-modified: 20110211131020
-tags: features options
-creator: psd
-
-This is one of the InterfaceOptions you can use to customize TiddlyWiki. It determines whether TiddlyWiki creates a backup file each time you SaveChanges. I'd suggest keeping it switched on for safety!

@@ -1,3 +1,0 @@
-<script type="text/javascript" src="/bags/common/tiddlers/alpha_jquery.js"></script>
-<script type="text/javascript" src="/bags/common/tiddlers/alpha_jQuery.twStylesheet.js"></script>
-<script type="text/javascript" src="/bags/common/tiddlers/alpha_twcore.js"></script>

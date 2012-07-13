@@ -1,4 +1,0 @@
-recipe: test.recipe
-title=TiddlyWiki BasicTypes tests
-jsspecsrc=<script type="text/javascript" src="../js/tiddlywiki.js"></script>
-jsspecsrc=<script type="text/javascript" src="../jsspec/BasicTypes.jsspec.js"></script>

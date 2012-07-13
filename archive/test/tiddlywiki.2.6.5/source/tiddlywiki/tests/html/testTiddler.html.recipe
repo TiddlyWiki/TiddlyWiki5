@@ -1,3 +1,0 @@
-recipe: test.recipe
-title=TiddlyWiki Tiddler tests
-jsspecsrc=<script type="text/javascript" src="../jsspec/Tiddler.jsspec.js"></script>

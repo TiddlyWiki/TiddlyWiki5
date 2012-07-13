@@ -1,9 +1,0 @@
-title: ViewTemplate
-modifier: JeremyRuston
-
-{{title{
-<<view title>>}}}
-{{small{
-<<view modifier link>> <<view modified date>> <<view tags>> <<command EditTiddler label:"edit" class:"btn btn-mini btn-primary">>}}}
-{{body{
-<<view text wikified>>}}}
