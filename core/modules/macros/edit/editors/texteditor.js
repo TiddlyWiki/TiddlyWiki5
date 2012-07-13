@@ -30,16 +30,20 @@ TextEditor.prototype.getEditText = function() {
 		value = tiddler.getFieldString(this.macroNode.editField);
 	} else {
 		// Otherwise, we need to construct a default value for the editor
-		switch(this.macroNode.editField) {
-			case "text":
-				value = "Type the text for the tiddler '" + this.macroNode.editTiddler + "'";
-				break;
-			case "title":
-				value = this.macroNode.editTiddler;
-				break;
-			default:
-				value = "";
-				break;
+		if(this.macroNode.hasParameter("default")) {
+			value = this.macroNode.params["default"];
+		} else {
+			switch(this.macroNode.editField) {
+				case "text":
+					value = "Type the text for the tiddler '" + this.macroNode.editTiddler + "'";
+					break;
+				case "title":
+					value = this.macroNode.editTiddler;
+					break;
+				default:
+					value = "";
+					break;
+			}
 		}
 	}
 	return {tiddler: tiddler, field: this.macroNode.editField, value: value};
@@ -53,16 +57,16 @@ TextEditor.prototype.getChild = function() {
 		tagName,
 		content = [];
 	// Make a textarea for text fields and an input box for other fields
-	if(edit.field === "text") {
-		tagName = "textarea";
-		content.push($tw.Tree.Text(edit.value));
-	} else {
+	if(edit.field !== "text" || this.macroNode.hasParameter("singleline")) {
 		tagName = "input";
 		attributes.type = "text";
 		attributes.value = edit.value;
+	} else {
+		tagName = "textarea";
+		content.push($tw.Tree.Text(edit.value));
 	}
 	// Wrap the editor control in a div
-	return $tw.Tree.Element("div",{},[$tw.Tree.Element(tagName,attributes,content)],{
+	return $tw.Tree.Element(this.macroNode.isBlock ? "div" : "span",{},[$tw.Tree.Element(tagName,attributes,content)],{
 		events: ["focus","keyup"],
 		eventHandler: this
 	});
