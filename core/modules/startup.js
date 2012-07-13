@@ -67,7 +67,7 @@ exports.startup = function() {
 		$tw.wiki.initSavers();
 		document.addEventListener("tw-save-wiki",function(event) {
 			$tw.wiki.saveWiki({
-				template: "$:/core/templates/tiddlywiki5.template.html",
+				template: event.param,
 				downloadType: "text/plain"
 			});
 		},false);
