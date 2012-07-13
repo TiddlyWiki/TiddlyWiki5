@@ -23,7 +23,7 @@ var Command = function(params,commander) {
 };
 
 Command.prototype.execute = function() {
-	this.commander.streams.output.write($tw.utils.getVersionString() + "\n");
+	this.commander.streams.output.write($tw.version + "\n");
 	return null; // No error
 };
 

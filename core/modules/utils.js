@@ -250,36 +250,6 @@ exports.unHyphenateCss = function(propName) {
 };
 
 /*
-Parse a version number string of the form "1.2.3", "1.2.3.a4", or "1.2.3.b4" into:
-	{major: <number>, minor: <number>, revision: <number>, alpha: <number>, beta: <number>}
-*/
-exports.parseVersion = function(versionString) {
-	versionString = versionString || "0.0.0";
-	var components = versionString.split("."),
-		version = {
-			major: components[0] ? parseInt(components[0],10) : null,
-			minor: components[1] ? parseInt(components[1],10) : null,
-			revision: components[2] ? parseInt(components[2],10) : null
-		};
-	if(components[3]) {
-		if(components[3].charAt(0) === "a") {
-			version.alpha = parseInt(components[3].substr(1),10);
-		} else if(components[3].charAt(0) === "b") {
-			version.beta = parseInt(components[3].substr(1),10);
-		}
-	}
-	return version;
-};
-
-exports.getVersionString = function() {
-	return ($tw.version.major || "0") + "." +
-			($tw.version.minor || "0") + "." +
-			($tw.version.revision || "0") +
-			($tw.version.alpha ? ".a" + $tw.version.alpha : "") +
-			($tw.version.beta ? ".b" + $tw.version.beta : "");
-};
-
-/*
 Extract the version number from the meta tag or from the boot file
 */
 
@@ -291,10 +261,10 @@ exports.extractVersionInfo = function() {
 	for(var t=0; t<metatags.length; t++) {
 		var m = metatags[t];
 		if(m.name === "tiddlywiki-version") {
-			return $tw.utils.parseVersion(m.content);
+			return m.content;
 		}
 	}
-	return $tw.utils.parseVersion();
+	return null;
 };
 
 } else {
@@ -302,7 +272,7 @@ exports.extractVersionInfo = function() {
 // Server version
 exports.extractVersionInfo = function() {
 	var fs = require("fs");
-	return $tw.utils.parseVersion(fs.readFileSync($tw.boot.bootPath + "/version.txt").toString("utf8"));
+	return JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json")).version;
 };
 
 }
