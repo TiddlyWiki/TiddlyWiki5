@@ -5,9 +5,7 @@ Here are a few features of TiddlyWiki that you can explore:
 
 * Try editing some tiddlers here on tiddlywiki.com to try out the new WikiText. Your changes will not be visible to other users
 * Use TiddlySpot to host an instance of TiddlyWiki5
-* If you're running [[Google Chrome Canary|https://tools.google.com/dlpage/chromesxs]] you can:
-** Modify this wiki, and then download a copy by clicking this button: <<download filename:"TiddlyWiki.html" label:"Save Changes">>
-** Download a static copy of the tiddlers that are currently displayed in this wiki by clicking this button: <<download title:"$:/core/static.template.html" filename:"Story.html" label:"Static Wiki">>
+* Save this wiki as a static HTML file: <<button save-wiki param:"$:/core/templates/static.template.html" class:"btn"><Save Static>>
 * If you're running on a touch browser like Mobile Safari on the iPad or iPhone:
 ** The zooming chooser appears by swiping into the left edge of the screen. (It's currently broken but you get the idea)
 ** The zooming navigator appears by swiping in from the right edge of the screen. (It currently only works in the 'Classic' storyview)
