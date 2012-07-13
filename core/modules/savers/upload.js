@@ -3,7 +3,9 @@ title: $:/core/modules/savers/upload.js
 type: application/javascript
 module-type: saver
 
-Handles saving changes via upload to a server
+Handles saving changes via upload to a server.
+
+Designed to be compatible with BidiX's UploadPlugin at http://tiddlywiki.bidix.info/#UploadPlugin
 
 \*/
 (function(){
