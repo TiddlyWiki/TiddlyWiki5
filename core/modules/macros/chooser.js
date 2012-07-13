@@ -32,37 +32,6 @@ exports.showChooser = function() {
 };
 
 /*
-Select the appropriate chooser item given a touch/mouse position in screen coordinates
-*/
-// exports.select = function(y) {
-// 	if(this.children.length > 0) {
-// 		var targetIndex = Math.floor(this.children[0].domNode.childNodes.length * (y/window.innerHeight)),
-// 			target = this.children[0].domNode.childNodes[targetIndex];
-// 		if(target) {
-// 			this.deselect();
-// 			this.selectedNode = target;
-// 			$tw.utils.addClass(target,"selected");
-// 		}
-// 	}
-// };
-
-// exports.deselect = function() {
-// 	if(this.selectedNode) {
-// 		$tw.utils.removeClass(this.selectedNode,"selected");
-// 		this.selectedNode = null;
-// 	}
-// };
-
-// exports.action = function() {
-// 	if(this.selectedNode) {
-// 		var navEvent = document.createEvent("Event");
-// 		navEvent.initEvent("tw-navigate",true,true);
-// 		navEvent.navigateTo = this.selectedNode.getAttribute("data-link");
-// 		this.domNode.dispatchEvent(navEvent); 
-// 	}
-// };
-
-/*
 Set the position of the chooser panel within its wrapper given a touch/mouse position in screen coordinates
 */
 exports.hoverChooser = function(x,y) {
