@@ -11,7 +11,7 @@
     } 
   ],
   "bin": {
-    "tiddlywiki": "./core/cli.js"
+    "tiddlywiki": "./cli.js"
   },
   "main": "./core/boot.js",
   "repository": {
