@@ -27,7 +27,7 @@ title: $:/templates/PageTemplate
 
 }}}
 
-<<linkcatcher store:[[$:/CurrentView]]><
+<<navigator set:[[$:/CurrentView]]><
 <<reveal state:ViewDropDownState type:popup position:below><
 <div class="open">
 {{dropdown-menu tw-suppress-missing-tiddlylink{
