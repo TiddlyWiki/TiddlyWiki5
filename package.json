@@ -1,0 +1,37 @@
+{
+  "name": "tiddlywiki",
+  "preferGlobal": "true",
+  "version": "0.0.1",
+  "author": "Jeremy Ruston <jeremy@jermolene.com>",
+  "description": "a reusable non-linear personal web notebook",
+  "contributors": [ 
+    {
+      "name": "Jeremy Ruston",
+      "email": "jeremy@jermolene.com"
+    } 
+  ],
+  "bin": {
+    "tiddlywiki": "./core/boot.js"
+  },
+  "main": "./core/boot.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jermolene/TiddlyWiki5.git"
+  },
+  "keywords": [
+    "tiddlywiki",
+    "tiddlywiki5",
+    "wiki"
+  ],
+  "dependencies" : {
+    "esprima" :  "0.9.9"
+  },
+  "devDependencies": {
+  },
+  "bundleDependencies": [
+  ],
+  "license": "BSD",
+  "engine": {
+    "node": ">=0.8.2"
+  }
+}
