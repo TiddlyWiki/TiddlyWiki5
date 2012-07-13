@@ -18,6 +18,6 @@ type: text/x-tiddlywiki-html
 </div>
 </head>
 <body>
-<<include "PageTemplate" text/html>>
+<<include "$:/templates/PageTemplate" text/html>>
 </body>
 </html>
