@@ -42,7 +42,6 @@ Base re-definitions
 
 body {
 	position: relative; 		// So that height: 100% will fit to the body
-	background: @grayLighter; 	// So that the tiddlers pop out more
 	padding-top: @navbarHeight;	// Allow for the navbar
 }
 
@@ -52,11 +51,28 @@ Tiddler styles
 
 .tw-story-element {
 	position: relative;
-	margin: 30px 5px 30px 5px;
+}
+
+@media (min-width: 480px) {
+
+.tw-story-element {
 	padding: 30px 30px 30px 30px;
+	margin: 30px 5px 30px 5px;
 	border: 1px solid #999;
-	background-color: #fff;
 	.box-shadow(1px 1px 6px rgba(0,0,0,0.4));
+	background-color: #fff;
+}
+
+body {
+	background: @grayLighter; 	// So that the tiddlers pop out more
+}
+
+}
+
+@media (max-width: 480px) {
+
+
+
 }
 
 .tw-story-element .body {

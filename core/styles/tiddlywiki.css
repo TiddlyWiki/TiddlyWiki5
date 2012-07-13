@@ -5006,7 +5006,6 @@ Base re-definitions
 body {
   position: relative;
   padding-top: 40px;
-  background: #eeeeee;
 }
 
 /*
@@ -5015,13 +5014,25 @@ Tiddler styles
 
 .tw-story-element {
   position: relative;
-  padding: 30px 30px 30px 30px;
-  margin: 30px 5px 30px 5px;
-  background-color: #fff;
-  border: 1px solid #999;
-  -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-     -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-          box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 480px) {
+  .tw-story-element {
+    padding: 30px 30px 30px 30px;
+    margin: 30px 5px 30px 5px;
+    background-color: #fff;
+    border: 1px solid #999;
+    -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+       -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+  }
+  body {
+    background: #eeeeee;
+  }
+}
+
+@media (max-width: 480px) {
+  
 }
 
 .tw-story-element .body {
