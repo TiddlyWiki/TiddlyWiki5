@@ -1,7 +1,7 @@
 {
   "name": "tiddlywiki",
   "preferGlobal": "true",
-  "version": "5.0.0-alpha.4",
+  "version": "5.0.0-alpha.7",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a reusable non-linear personal web notebook",
   "contributors": [ 
@@ -11,7 +11,7 @@
     } 
   ],
   "bin": {
-    "tiddlywiki": "./core/boot.js"
+    "tiddlywiki": "./core/cli.js"
   },
   "main": "./core/boot.js",
   "repository": {

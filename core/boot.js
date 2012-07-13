@@ -33,6 +33,7 @@ In practice, each module is wrapped in a separate script block.
 // Set up $tw global for the server
 if(typeof(window) === "undefined" && !global.$tw) {
 	global.$tw = {}; // No ``browser`` member for the server
+	exports.$tw = $tw;
 }
 
 // Temporary switch for replacing the old wiki text parser with the new one
