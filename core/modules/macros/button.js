@@ -16,6 +16,7 @@ exports.info = {
 	name: "button",
 	params: {
 		message: {byName: "default", type: "text"},
+		param: {byName: true, type: "text"},
 		popup: {byName: true, type: "tiddler"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
@@ -25,6 +26,7 @@ exports.info = {
 exports.dispatchMessage = function(event) {
 	var buttonEvent = document.createEvent("Event");
 	buttonEvent.initEvent("tw-" + this.params.message,true,true);
+	buttonEvent.param = this.params.param;
 	buttonEvent.tiddlerTitle = this.tiddlerTitle;
 	event.target.dispatchEvent(buttonEvent);
 };
