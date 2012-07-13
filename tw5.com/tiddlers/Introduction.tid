@@ -4,6 +4,7 @@ tags: introduction
 Here are a few features of TiddlyWiki that you can explore:
 
 * Try editing some tiddlers here on tiddlywiki.com to try out the new WikiText. Your changes will not be visible to other users
+* Use TiddlySpot to host an instance of TiddlyWiki5
 * If you're running [[Google Chrome Canary|https://tools.google.com/dlpage/chromesxs]] you can:
 ** Modify this wiki, and then download a copy by clicking this button: <<download filename:"TiddlyWiki.html" label:"Save Changes">>
 ** Download a static copy of the tiddlers that are currently displayed in this wiki by clicking this button: <<download title:"$:/core/static.template.html" filename:"Story.html" label:"Static Wiki">>
