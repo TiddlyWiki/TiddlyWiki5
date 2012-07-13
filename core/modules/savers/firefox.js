@@ -9,7 +9,7 @@ Handles saving changes via Firefox's XUL APIs
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: false, netscape: false, Components: false */
 "use strict";
 
 var FirefoxSaver = function(wiki) {
