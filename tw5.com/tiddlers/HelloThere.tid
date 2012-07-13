@@ -14,7 +14,7 @@ TiddlyWiki5 has many [[improvements|Improvements]] over the original. It is curr
 * Join the discussions on [[the TiddlyWikiDev Google Group|http://groups.google.com/group/TiddlyWikiDev]]
 * Follow [[@TiddlyWiki on Twitter|http://twitter.com/#!/TiddlyWiki]] for the latest news
 
-<<hide tiddler:[[$:/CurrentView]] notequal:zoomin><
+<<reveal state:[[$:/CurrentView]] type:match text:zoomin><
 <<tiddler target:Introduction>>
 
 >>

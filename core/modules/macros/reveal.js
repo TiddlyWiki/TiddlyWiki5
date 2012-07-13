@@ -5,6 +5,18 @@ module-type: macro
 
 The reveal macro shows or hides content according to the value of the text in a specified tiddler.
 
+The parameters are:
+
+* ''state'' - text reference where the hide/reveal state is stored
+* ''type'' - type of the hide/reveal state:
+** //popup// - a popup - the state tiddler should contain the page coordinates of the button that triggered the popup
+** //match// - reveals if the state tiddler matches the match text
+* ''position'' - popup position: //left//, //above//, //right//, //below// or //belowleft//
+* ''text'' - match text
+* ''qualifyTiddlerTitles'' - if present, causes the title of the state tiddler to be qualified with the current tiddler stack
+* ''default'' - default hide/reveal state: `open` if visible, otherwise hidden
+* ''class'' - CSS class(es) to be assigned to the 
+
 \*/
 (function(){
 
@@ -17,6 +29,7 @@ exports.info = {
 	params: {
 		state: {byPos: 0, type: "tiddler"},
 		type: {byName: true, type: "text"},
+		text: {byName: true, type: "text"},
 		position: {byName: true, type: "text"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"default": {byName: true, type: "text"},
@@ -36,8 +49,15 @@ exports.readState = function() {
 			case "popup":
 				this.readPopupState(state);
 				break;
+			case "match":
+				this.readMatchState(state);
+				break;
 		}
 	}
+};
+
+exports.readMatchState = function(state) {
+	this.isOpen = state === this.params.text;
 };
 
 exports.readPopupState = function(state) {
@@ -61,7 +81,7 @@ exports.readPopupState = function(state) {
 };
 
 exports.handleEvent = function(event) {
-	if(event.type === "click") {
+	if(event.type === "click" && this.params.type === "popup") {
 		// Cancel the popup if we get a click on it
 		if(this.stateTextRef) {
 			this.wiki.deleteTextReference(this.stateTextRef);
@@ -95,7 +115,7 @@ exports.executeMacro = function() {
 			break;
 	}
 	attributes.style = {display: this.isOpen ? "block" : "none"};
-	var child = $tw.Tree.Element("div",attributes,this.isOpen ? this.content : [],{
+	var child = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,this.isOpen ? this.content : [],{
 		events: ["click"],
 		eventHandler: this
 	});
