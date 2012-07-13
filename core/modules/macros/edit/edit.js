@@ -14,20 +14,39 @@ Edit macro for editting fields and tiddlers
 
 exports.info = {
 	name: "edit",
-	dependentOnContextTiddler: true,
 	params: {
-		field: {byPos: 0, type: "text"}
+		field: {byPos: 0, type: "text"},
+		tiddler: {byName: true, type: "tiddler"}
 	}
+};
+
+exports.evaluateDependencies = function() {
+	var dependencies = new $tw.Dependencies();
+	if(!this.srcParams.tiddler) {
+		dependencies.dependentOnContextTiddler = true;
+	}
+	for(var m in this.info.params) {
+		var paramInfo = this.info.params[m];
+		if(m in this.srcParams && paramInfo.type === "tiddler") {
+			if(typeof this.srcParams[m] === "function") {
+				dependencies.dependentAll = true;
+			} else {
+				dependencies.addDependency(this.srcParams[m],!paramInfo.skinny);
+			}
+		}
+	}
+	return dependencies;
 };
 
 exports.executeMacro = function() {
 	// Get the tiddler being editted
-	var field = this.hasParameter("field") ? this.params.field : "text",
-		tiddler = this.wiki.getTiddler(this.tiddlerTitle),
+	this.editField = this.hasParameter("field") ? this.params.field : "text";
+	this.editTiddler = this.hasParameter("tiddler") ? this.params.tiddler : this.tiddlerTitle;
+	var tiddler = this.wiki.getTiddler(this.editTiddler),
 		Editor;
 	// Figure out which editor to use
 	// TODO: Tiddler field plugins should be able to specify a field type from which the editor is derived
-	if(field === "text" && tiddler.fields.type) {
+	if(this.editField === "text" && tiddler && tiddler.fields.type) {
 		Editor = this.wiki.macros.edit.editors[tiddler.fields.type];
 	}
 	if(!Editor) {

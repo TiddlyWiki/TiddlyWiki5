@@ -26,7 +26,7 @@ BitmapEditor.prototype.getChild = function() {
 };
 
 BitmapEditor.prototype.postRenderInDom = function() {
-	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle),
+	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.editTiddler),
 		canvas = this.macroNode.child.domNode,
 		currImage = new Image();
 /////////////////////	// Set the macro node itself to be position: relative
@@ -142,7 +142,7 @@ BitmapEditor.prototype.strokeEnd = function() {
 };
 
 BitmapEditor.prototype.saveChanges = function() {
-	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle);
+	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.editTiddler);
 	if(tiddler) {
 		// data URIs look like "data:<type>;base64,<text>"
 		var dataURL = this.macroNode.child.domNode.toDataURL(tiddler.fields.type,1.0),

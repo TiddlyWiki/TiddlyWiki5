@@ -23,27 +23,26 @@ Get the tiddler being editted, field name and current value
 */
 TextEditor.prototype.getEditText = function() {
 	// Get the current tiddler and the field name
-	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle),
-		field = this.macroNode.hasParameter("field") ? this.macroNode.params.field : "title",
+	var tiddler = this.macroNode.wiki.getTiddler(this.macroNode.editTiddler),
 		value;
 	// If we've got a tiddler, the value to display is the field string value
 	if(tiddler) {
-		value = tiddler.getFieldString(field);
+		value = tiddler.getFieldString(this.macroNode.editField);
 	} else {
 		// Otherwise, we need to construct a default value for the editor
-		switch(field) {
+		switch(this.macroNode.editField) {
 			case "text":
-				value = "Type the text for the tiddler '" + this.macroNode.tiddlerTitle + "'";
+				value = "Type the text for the tiddler '" + this.macroNode.editTiddler + "'";
 				break;
 			case "title":
-				value = this.macroNode.tiddlerTitle;
+				value = this.macroNode.editTiddler;
 				break;
 			default:
 				value = "";
 				break;
 		}
 	}
-	return {tiddler: tiddler, field: field, value: value};
+	return {tiddler: tiddler, field: this.macroNode.editField, value: value};
 };
 
 TextEditor.prototype.getChild = function() {
@@ -84,10 +83,13 @@ TextEditor.prototype.handleEvent = function(event) {
 
 TextEditor.prototype.saveChanges = function() {
 	var text = this.macroNode.child.children[0].domNode.value,
-		tiddler = this.macroNode.wiki.getTiddler(this.macroNode.tiddlerTitle);
-	if(tiddler && text !== tiddler.fields[this.macroNode.params.field]) {
+		tiddler = this.macroNode.wiki.getTiddler(this.macroNode.editTiddler);
+	if(!tiddler) {
+		tiddler = new $tw.Tiddler({title: this.macroNode.editTiddler});
+	}
+	if(text !== tiddler.fields[this.macroNode.editField]) {
 		var update = {};
-		update[this.macroNode.params.field] = text;
+		update[this.macroNode.editField] = text;
 		this.macroNode.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
 	}
 };
