@@ -42,15 +42,15 @@ DownloadSaver.prototype.info = {
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function() {
+exports.canSave = function(wiki) {
 	return true;
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function() {
-	return new DownloadSaver();
+exports.create = function(wiki) {
+	return new DownloadSaver(wiki);
 };
 
 })();

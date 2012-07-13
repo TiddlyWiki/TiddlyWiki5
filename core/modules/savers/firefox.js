@@ -52,15 +52,15 @@ FirefoxSaver.prototype.info = {
 /*
 Static method that returns true if this saver is capable of working
 */
-exports.canSave = function() {
+exports.canSave = function(wiki) {
 	return window.location.protocol === "file:" && !!window.Components;
 };
 
 /*
 Create an instance of this saver
 */
-exports.create = function() {
-	return new FirefoxSaver();
+exports.create = function(wiki) {
+	return new FirefoxSaver(wiki);
 };
 
 })();

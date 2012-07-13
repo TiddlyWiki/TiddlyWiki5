@@ -487,7 +487,7 @@ exports.initSavers = function(moduleType) {
 	this.savers = [];
 	for(var t=0; t<$tw.plugins.moduleTypes[moduleType].length; t++) {
 		var saver = $tw.plugins.moduleTypes[moduleType][t];
-		if(saver.canSave()) {
+		if(saver.canSave(this)) {
 			this.savers.push(saver.create(this));
 		}
 	}
