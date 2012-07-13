@@ -570,7 +570,7 @@ $tw.loadTiddlersFromFile = function(file,fields,isShadow) {
 		data = fs.readFileSync(file).toString(typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metafile = file + ".meta";
-	if(ext !== ".json" && tiddlers.length === 1 && path.existsSync(metafile)) {
+	if(ext !== ".json" && tiddlers.length === 1 && fs.existsSync(metafile)) {
 		var metadata = fs.readFileSync(metafile).toString("utf8");
 		if(metadata) {
 			tiddlers = [$tw.utils.parseFields(metadata,tiddlers[0])];
@@ -585,7 +585,7 @@ Load all the plugins from the plugins directory
 $tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
-	if(path.existsSync(filepath)) {
+	if(fs.existsSync(filepath)) {
 		var stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			var files = fs.readdirSync(filepath);

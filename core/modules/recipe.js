@@ -40,7 +40,7 @@ exports["application/x-tiddlywiki-recipe"] = function(text,fields) {
 				fields = {title: sourcePath},
 				tids = self.deserializeTiddlers(ext,data,fields),
 				metafile = sourcePath + ".meta";
-			if(ext !== ".json" && tids.length === 1 && path.existsSync(metafile)) {
+			if(ext !== ".json" && tids.length === 1 && fs.existsSync(metafile)) {
 				var metadata = fs.readFileSync(metafile).toString("utf8");
 				if(metadata) {
 					tids = [$tw.utils.parseFields(metadata,tids[0])];
