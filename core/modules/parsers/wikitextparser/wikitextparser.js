@@ -182,6 +182,6 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 	this.output = oldOutput;
 };
 
-exports[$tw.useNewParser ? "text/x-tiddlywiki-old" : "text/x-tiddlywiki"] = WikiTextParser;
+exports["text/x-tiddlywiki-old"] = WikiTextParser;
 
 })();

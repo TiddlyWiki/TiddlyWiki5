@@ -292,7 +292,7 @@ WikiTextParser.prototype.parse = function(type,text) {
 	});
 };
 
-exports[$tw.useNewParser ? "text/x-tiddlywiki" : "text/x-tiddlywiki-new"] = WikiTextParser;
+exports["text/x-tiddlywiki"] = WikiTextParser;
 
 exports["text/x-tiddlywiki-run"] = WikiTextParser;
 

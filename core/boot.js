@@ -36,9 +36,6 @@ if(typeof(window) === "undefined" && !global.$tw) {
 	exports.$tw = $tw;
 }
 
-// Temporary switch for replacing the old wiki text parser with the new one
-$tw.useNewParser = true;
-
 // Boot information
 $tw.boot = {};
 
