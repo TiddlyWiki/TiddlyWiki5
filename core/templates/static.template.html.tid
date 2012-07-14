@@ -6,18 +6,18 @@ type: text/x-tiddlywiki-html
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="<<include "$:/core/version.txt" text/plain>>" />
+<meta name="tiddlywiki-version" content="<<serialize "$:/core/version.txt" text/plain>>" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="
-<<include "$:/core/copyright.txt" text/plain>>
+<<serialize "$:/core/copyright.txt" text/plain>>
 " />
 <title><<tiddler target:$:/shadows/title>></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 <div id="styleArea">
-<<include "[type[text/css]]" application/x-tiddler-css>>
+<<serialize "[type[text/css]]" application/x-tiddler-css>>
 </div>
 </head>
 <body>
-<<include "$:/templates/PageTemplate" text/html>>
+<<serialize "$:/templates/PageTemplate" text/html>>
 </body>
 </html>

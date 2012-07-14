@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/macros/include.js
+title: $:/core/modules/macros/serialize.js
 type: application/javascript
 module-type: macro
 
-Include macro
+Serialize macro
 
 \*/
 (function(){
@@ -13,7 +13,7 @@ Include macro
 "use strict";
 
 exports.info = {
-	name: "include",
+	name: "serialize",
 	params: {
 		filter: {byPos: 0, type: "filter"},
 		as: {byPos: 1, type: "text"},
