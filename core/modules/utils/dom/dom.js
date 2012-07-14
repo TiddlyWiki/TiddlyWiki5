@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/utils.dom.js
+title: $:/core/modules/utils/dom.js
 type: application/javascript
 module-type: utils
 

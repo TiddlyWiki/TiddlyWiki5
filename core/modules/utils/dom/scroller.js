@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/scroller.js
+title: $:/core/modules/utils/dom/scroller.js
 type: application/javascript
 module-type: utils
 

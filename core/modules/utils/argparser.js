@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/utils.argparser.js
+title: $:/core/modules/utils/argparser.js
 type: application/javascript
 module-type: utils
 

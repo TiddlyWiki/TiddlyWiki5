@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/popup.js
+title: $:/core/modules/utils/dom/popup.js
 type: application/javascript
 module-type: utils
 
