@@ -56,8 +56,8 @@ exports.startup = function() {
 	$tw.Commander.initCommands();
 	// Host-specific startup
 	if($tw.browser) {
-		// Install the popupper
-		$tw.popupper = new $tw.utils.Popupper({
+		// Install the popup manage
+		$tw.popup = new $tw.utils.Popup({
 			wiki: $tw.wiki,
 			rootElement: document.body
 		});

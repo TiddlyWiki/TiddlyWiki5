@@ -39,21 +39,21 @@ exports.triggerPopup = function(event,cancel) {
 	}
 	// Check for cancelling
 	if(cancel) {
-		$tw.popupper.cancel();
+		$tw.popup.cancel();
 	} else {
 		// Get the current popup state tiddler 
 		var value = this.wiki.getTextReference(textRef,"",this.tiddlerTitle);
 		// Check if the popup is open by checking whether it matches "(<x>,<y>)"
 		var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 		if(popupLocationRegExp.test(value)) {
-			$tw.popupper.cancel();
+			$tw.popup.cancel();
 		} else {
 			// Set the position if we're opening it
 			this.wiki.setTextReference(textRef,
 				"(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + 
 					this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")",
 				this.tiddlerTitle,true);
-			$tw.popupper.popup(textRef);
+			$tw.popup.popup(textRef);
 		}
 	}
 };
