@@ -1,7 +1,9 @@
 title: Docs
 tags: docs introduction
 
-This is the main documentation hub for TiddlyWiki.
+This is the main documentation hub for TiddlyWiki. See also:
+
+* [[Internals]] for developer documentation
 
 ! Guides
 
@@ -88,89 +90,6 @@ When run under node.js, TiddlyWiki supports a [[command line interface|Getting s
 * VerboseCommand
 * VersionCommand
 * WikiTestCommand
-
-! Internal Objects and Mechanisms
-
-Internally, TiddlyWiki is built on a number of key objects and mechanisms:
-
-* TiddlerObject
-* WikiObject
-* BootMechanism
-* PluginMechanism
-* ParsingMechanism
-* RenderingMechanism
-* DependencyMechanism
-* RefreshMechanism
-* MacroMechanism
-* StoryMechanism
-* EditingMechanism
-* SavingMechanism
-* SyncMechanism
-* CommandMechanism
-* ConfigMechanism
-
-! Plugin Module Types
-
-TiddlyWiki is built on a [[tiny microkernel|BootMechanism]] with all functionality provided as various types of plugin module:
-
-* CommandModules
-* ConfigModules
-* EditorModules
-* GlobalModules
-* LibraryModules
-* MacroModules
-* ModuleModules
-* ParserModules
-* StartupModules
-* StoryViewModules
-* TiddlerDeserializerModules
-* TiddlerFieldModules
-* TiddlerMethodModules
-* TiddlerSerializerModules
-* TreeNodeModules
-* TreeUtilsModules
-* UtilsModules
-* WikiMethodModules
-* WikiTextRuleModules
-
-! Tree Nodes
-
-The ParsingMechanism and the RenderingMechanism use a simple tree structure to represent both parsed WikiText and the HTML DOM structure of rendered content.
-
-* TreeNode
-* ElementNode
-* EntityNode
-* MacroNode
-* RawNode
-* TextNode
-
-! Other Parsers
-
-TiddlyWiki processes other [[ContentTypes|ContentType]] than WikiText using these parsers:
-
-* OldWikiTextParser
-* JsonParser
-* ImageParser
-* PlainTextParser
-* TiddlyTextParser
-* JavaScriptParser
-
-! Deserializers
-
-Deserializers are modules that read tiddlers from different text formats:
-
-* RecipeFiles
-* TiddlerFiles
-* TiddlyWikiFiles
-
-! Serializers
-
-Serializers are modules that convert tiddlers to different text formats:
-
-! Developer Cookbooks
-
-* [[Using TiddlyWiki for GitHub Pages project documentation]]
-* [[Using TiddlyWiki as a component in node.js applications]]
 
 ! Miscellaneous
 

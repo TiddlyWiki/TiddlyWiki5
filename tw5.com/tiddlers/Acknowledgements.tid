@@ -2,9 +2,10 @@ title: Acknowledgements
 modifier: JeremyRuston
 tags: introduction
 
-TiddlyWiki5 wouldn't be possible without the ongoing support of the TiddlyWiki user and developer community. Their attention and feedback has made it possible for me to get a good understanding of what people want from the product, and their passion for the product has taught me that the project is worth the investment of effort that I am making.
+TiddlyWiki5 wouldn't be possible without the ongoing support of the TiddlyWiki user and developer community. Their attention and feedback has made it possible for get a good understanding of what people want from the product, and their passion for the product has taught me that the project is worth the investment of effort that I am making.
 
-Working in OpenSource has enabled me to stand on the shoulders of giants, by reusing these projects:
+TiddlyWiki5 stands on the shoulders of giants, by reusing these projects:
 
 * [[Twitter Bootstrap|http://twitter.github.com/bootstrap/]]'s CSS
+* [[LESS dynamic stylesheet language|http://lesscss.org/]], used by Bootstrap
 * [[Esprima|http://esprima.org]], a JavaScript parsing infrastructure for multipurpose analysis
