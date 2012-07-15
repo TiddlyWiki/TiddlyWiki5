@@ -14,29 +14,14 @@ This is the main application logic for both the client and server
 
 exports.startup = function() {
 	var modules,n,m,f,commander;
-	// This should be somewhere else
-	if($tw.browser) {
-		$tw.browser.unHyphenateCss = document.body.style["background-color"] === undefined;
-		$tw.browser.prefix = document.body.style.webkitTransform !== undefined ? "webkit" : 
-							document.body.style.MozTransform !== undefined ? "Moz" :
-							document.body.style.MSTransform !== undefined ? "MS" :
-							document.body.style.OTransform !== undefined ? "O" : "";
-		$tw.browser.transition = $tw.browser.prefix + "Transition";
-		$tw.browser.transform = $tw.browser.prefix + "Transform";
-		$tw.browser.transformorigin = $tw.browser.prefix + "TransformOrigin";
-		$tw.browser.transitionEnd = {		
-					"": "transitionEnd",
-					"O": "oTransitionEnd",
-					"MS": "msTransitionEnd",
-					"Moz": "transitionend",
-					"webkit": "webkitTransitionEnd"
-				}[$tw.browser.prefix];
-	}
-	// Set up additional global objects
+	// Load modules
 	$tw.plugins.applyMethods("global",$tw);
-	// Wire up plugin modules
 	$tw.plugins.applyMethods("config",$tw.config);
 	$tw.plugins.applyMethods("utils",$tw.utils);
+	if($tw.browser) {
+		$tw.utils.getBrowserInfo($tw.browser);
+	}
+	$tw.version = $tw.utils.extractVersionInfo();
 	$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
 	$tw.plugins.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.plugins.applyMethods("wikimethod",$tw.Wiki.prototype);
@@ -45,8 +30,6 @@ exports.startup = function() {
 	$tw.plugins.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerPlugins);
 	$tw.plugins.applyMethods("treeutils",$tw.Tree);
 	$tw.plugins.applyMethods("treenode",$tw.Tree);
-	// Get version information
-	$tw.version = $tw.utils.extractVersionInfo();
 	// Set up the wiki store
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();
@@ -56,11 +39,16 @@ exports.startup = function() {
 	$tw.Commander.initCommands();
 	// Host-specific startup
 	if($tw.browser) {
-		// Install the popup manage
+		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			wiki: $tw.wiki,
 			rootElement: document.body
 		});
+		// Install the modal message mechanism
+		$tw.modal = new $tw.utils.Modal(this);
+		document.addEventListener("tw-modal",function(event) {
+			$tw.modal.display(event.param);
+		},false);
 		// Install the scroller
 		$tw.scroller = new $tw.utils.Scroller();
 		// Install the save action handler
@@ -89,15 +77,22 @@ exports.startup = function() {
 		}
 		$tw.wiki.addTiddler(new $tw.Tiddler({title: storyTitle,text: JSON.stringify(story)}));
 		$tw.wiki.addTiddler(new $tw.Tiddler({title: historyTitle,text: JSON.stringify(history)}));
+		// If we're being viewed on a data: URI then give instructions for how to save
+		if(document.location.protocol === "data:") {
+			var event = document.createEvent("Event");
+			event.initEvent("tw-modal",true,true);
+			event.param = "$:/messages/SaveInstructions";
+			document.dispatchEvent(event);
+		} 
 		// Display the PageTemplate
-		var template = "$:/templates/PageTemplate";
+		var template = "$:/templates/PageTemplate",
+			title = template;
 		$tw.renderer = $tw.wiki.parseTiddler(template);
-		$tw.renderer.execute([],template);
+		$tw.renderer.execute([],title);
 		$tw.renderer.renderInDom(document.body);
 		$tw.wiki.addEventListener("",function(changes) {
 			$tw.renderer.refreshInDom(changes);
 		});
-		console.log("$tw",$tw);
 	} else {
 		// Start a commander with the command line arguments
 		commander = new $tw.Commander(
