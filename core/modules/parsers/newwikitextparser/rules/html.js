@@ -27,10 +27,13 @@ exports.regExpString = "<[A-Za-z]+\\s*[^>]*>";
 
 exports.parse = function(match,isBlock) {
 	var reStart = /<([A-Za-z]+)(\s*[^>]*)>/mg,
+		reLineBreak = /(\r?\n)/mg,
 		reAttr = /\s*([A-Za-z\-_]+)(?:\s*=\s*(?:("[^"]*")|('[^']*')|([^"'\s]+)))?/mg;
+	// Process the start regexp to get the attribute portion
 	reStart.lastIndex = this.pos;
 	var startMatch = reStart.exec(this.source);
 	if(startMatch && startMatch.index === this.pos) {
+		// Process the attributes
 		var attrMatch = reAttr.exec(startMatch[2]),
 			attributes = {};
 		while(attrMatch) {
@@ -49,6 +52,15 @@ exports.parse = function(match,isBlock) {
 			attrMatch = reAttr.exec(startMatch[2]);
 		}
 		this.pos = startMatch.index + startMatch[0].length;
+		// Check for a line break immediate after the opening tag
+		reLineBreak.lastIndex = this.pos;
+		var lineBreakMatch = reLineBreak.exec(this.source);
+		if(lineBreakMatch && lineBreakMatch.index === this.pos) {
+			this.pos = lineBreakMatch.index + lineBreakMatch[0].length;
+			isBlock = true;
+		} else {
+			isBlock = false;
+		}
 		var reEndString = "(</" + startMatch[1] + ">)",
 			reEnd = new RegExp(reEndString,"mg"),
 			content;
