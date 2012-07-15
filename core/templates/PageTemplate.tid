@@ -14,7 +14,6 @@ title: $:/templates/PageTemplate
 {{nav{
 
 * HelloThere
-* [[Introduction]]
 * [[Docs]]
 *{{divider-vertical}}
 
