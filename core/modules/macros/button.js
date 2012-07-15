@@ -17,6 +17,8 @@ exports.info = {
 	params: {
 		message: {byName: "default", type: "text"},
 		param: {byName: true, type: "text"},
+		set: {byName: true, type: "tiddler"},
+		setTo: {byName: true, type: "text"},
 		popup: {byName: true, type: "tiddler"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
@@ -58,6 +60,13 @@ exports.triggerPopup = function(event,cancel) {
 	}
 };
 
+exports.setTiddler = function() {
+	var set = this.params.set,
+		setTo = this.params.setTo,
+		tiddler = this.wiki.getTiddler(set);
+	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: set, text: setTo}));
+};
+
 exports.handleEvent = function(event) {
 	if(event.type === "click") {
 		if(this.hasParameter("message")) {
@@ -65,6 +74,9 @@ exports.handleEvent = function(event) {
 		}
 		if(this.hasParameter("popup")) {
 			this.triggerPopup(event);
+		}
+		if(this.hasParameter("set") && this.hasParameter("setTo")) {
+			this.setTiddler();
 		}
 		event.preventDefault();
 		return false;
