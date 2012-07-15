@@ -209,7 +209,7 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 };
 
 // Close a specified tiddler
-exports.eventMap["tw-CloseTiddler"] = function(event) {
+exports.eventMap["tw-close"] = function(event) {
 	if(this.hasParameter("story")) {
 		var t,storyElement;
 		this.getStory();
@@ -234,7 +234,7 @@ exports.executeMacro = function() {
 		this.content[t].execute(this.parents,this.tiddlerTitle);
 	}
 	return $tw.Tree.Element("div",attributes,this.content,{
-		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler","tw-NavigateBack"],
+		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-close","tw-NavigateBack"],
 		eventHandler: this
 	});
 };
