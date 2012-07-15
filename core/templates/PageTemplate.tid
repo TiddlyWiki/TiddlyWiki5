@@ -7,7 +7,9 @@ title: $:/templates/PageTemplate
 	<<list all>>
 >>
 }}}
+
 <<zoomer>>
+
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
@@ -17,12 +19,17 @@ title: $:/templates/PageTemplate
 * [[Docs]]
 *{{divider-vertical}}
 
-{{btn btn-danger{
-<<button popup:ViewDropDownState><View <span class="caret"></span>>>
+<<button popup:ViewDropDownState class:"btn btn-danger"><View <span class="caret"></span>>>
+
+{{pull-right{
+<<reveal state:[[$:/EditMode]] type:nomatch text:yes><
+<<button modal param:[[$:/messages/EnterEditMode]] set:[[$:/EditMode]] setTo:yes class:"btn btn-success"><Edit>>
+>>
+
+<<reveal state:[[$:/EditMode]] type:match text:yes><
+<<button save-wiki class:"btn pull-right"><Save Changes>>
+>>
 }}}
-
-
-<<button save-wiki class:"btn"><Save Changes>>
 
 }}}
 

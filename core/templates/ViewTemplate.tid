@@ -2,8 +2,7 @@ title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
 <div class="title">
-	<span><<view title>></span>
-	<<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>>
+	<span><<view title>></span> <<reveal state:[[$:/EditMode]] type:match text:yes>< <<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>> >>
 	<<button close class:"btn-invisible pull-right"><[img[$:/core/images/close-button.svg]]>>
 </div>
 <div class="small">
