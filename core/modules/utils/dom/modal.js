@@ -27,7 +27,6 @@ Modal.prototype.display = function(title) {
 		renderer.refreshInDom(changes);
 	});
 	wrapper.addEventListener("tw-close",function(event) {
-console.log("Got tw-close event");
 		document.body.removeChild(wrapper);
 		event.stopPropogation();
 		return false;
