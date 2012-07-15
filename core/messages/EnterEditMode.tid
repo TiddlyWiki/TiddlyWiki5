@@ -1,0 +1,14 @@
+title: $:/messages/EnterEditMode
+type: text/x-tiddlywiki
+subtitle: Editing this wiki
+
+You can edit this wiki and save your changes. You are strongly advised to verify that saving is working correctly before working.
+
+Running in this browser with this configuration, ~TiddlyWiki can use these methods of saving changes:
+
+* Using Firefox's built-in file system access
+* Uploading to a simple server script
+* Using HTML5's data URI and download attribute
+
+
+[x] Don't show this message again
