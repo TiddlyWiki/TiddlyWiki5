@@ -5,7 +5,7 @@ type: text/x-tiddlywiki
 <div class="container">
 <div class="modal">
 <div class="modal-header">
-!!! <<view subtitle text>>
+! <<view subtitle text>>
 </div>
 <div class="modal-body">
 <<view text wikified>>
