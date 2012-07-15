@@ -118,7 +118,7 @@ exports.executeMacro = function() {
 			attributes["class"].push("tw-popup");
 			break;
 	}
-	attributes.style = {display: this.isOpen ? "block" : "none"};
+	attributes.style = {display: this.isOpen ? (this.isBlock ? "block" : "inline") : "none"};
 	var child = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,this.isOpen ? this.content : [],{
 		events: ["click"],
 		eventHandler: this
@@ -182,7 +182,7 @@ exports.refreshInDom = function(changes) {
 		}
 	}
 	// Set the visibility of the children
-	this.child.domNode.style.display = this.isOpen ? "block" : "none";
+	this.child.domNode.style.display = this.isOpen ? (this.isBlock ? "block" : "inline") : "none";
 	// Position the content if required
 	this.postRenderInDom();
 };
