@@ -73,7 +73,7 @@ exports.handleEvent = function(event) {
 };
 
 exports.executeMacro = function() {
-	var attributes = {"class": ["tw-popup-controller"]};
+	var attributes = {"class": []};
 	if(this.hasParameter("class")) {
 		$tw.utils.pushTop(attributes["class"],this.params["class"].split(" "));
 	}
