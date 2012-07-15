@@ -52,6 +52,10 @@ exports.readState = function() {
 			case "match":
 				this.readMatchState(state);
 				break;
+			case "nomatch":
+				this.readMatchState(state);
+				this.isOpen = !this.isOpen;
+				break;
 		}
 	}
 };
