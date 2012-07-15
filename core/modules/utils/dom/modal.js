@@ -28,7 +28,7 @@ Modal.prototype.display = function(title) {
 	});
 	wrapper.addEventListener("tw-close",function(event) {
 		document.body.removeChild(wrapper);
-		event.stopPropogation();
+		event.stopPropagation();
 		return false;
 	},false);
 	document.body.appendChild(wrapper);
