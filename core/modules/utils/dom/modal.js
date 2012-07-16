@@ -25,8 +25,9 @@ Modal.prototype.display = function(title) {
 		headerTitle = document.createElement("h1"),
 		modalBody = document.createElement("div"),
 		modalFooter = document.createElement("div"),
-		modalFooterHelp = document.createElement("div"),
-		modalFooterButtons = document.createElement("div");
+		modalFooterHelp = document.createElement("span"),
+		modalFooterButtons = document.createElement("span"),
+		tiddler = this.wiki.getTiddler(title);
 	// Add classes
 	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
 	$tw.utils.addClass(modalWrapper,"modal");
@@ -57,6 +58,14 @@ Modal.prototype.display = function(title) {
 		bodyRenderer.refreshInDom(changes);
 	});
 	// Render the footer of the message
+	if(tiddler && tiddler.fields && tiddler.fields.help) {
+		var link = document.createElement("a");
+		link.setAttribute("href",tiddler.fields.help);
+		link.setAttribute("target","_blank");
+		link.appendChild(document.createTextNode("Help"));
+		modalFooterHelp.appendChild(link);
+		modalFooterHelp.style.float = "left";
+	}
 	var footerRenderer = this.wiki.parseText("text/x-tiddlywiki-run","<<view footer wikified>>");
 	footerRenderer.execute([],title);
 	footerRenderer.renderInDom(modalFooterButtons);
