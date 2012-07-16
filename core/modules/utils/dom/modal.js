@@ -44,7 +44,13 @@ Modal.prototype.display = function(title) {
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
 	// Render the title of the message
-	var headerRenderer = this.wiki.parseText("text/x-tiddlywiki-run","<<view subtitle wikified>>");
+	var titleText;
+	if(tiddler && tiddler.fields && tiddler.fields.subtitle) {
+		titleText = tiddler.fields.subtitle;
+	} else {
+		titleText = title;
+	}
+	var headerRenderer = this.wiki.parseText("text/x-tiddlywiki-run",titleText);
 	headerRenderer.execute([],title);
 	headerRenderer.renderInDom(headerTitle);
 	this.wiki.addEventListener("",function(changes) {
@@ -66,7 +72,13 @@ Modal.prototype.display = function(title) {
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
-	var footerRenderer = this.wiki.parseText("text/x-tiddlywiki-run","<<view footer wikified>>");
+	var footerText;
+	if(tiddler && tiddler.fields && tiddler.fields.footer) {
+		footerText = tiddler.fields.footer;
+	} else {
+		footerText = "<<button close class:'btn btn-primary'><Close>>";
+	}
+	var footerRenderer = this.wiki.parseText("text/x-tiddlywiki-run",footerText);
 	footerRenderer.execute([],title);
 	footerRenderer.renderInDom(modalFooterButtons);
 	this.wiki.addEventListener("",function(changes) {
