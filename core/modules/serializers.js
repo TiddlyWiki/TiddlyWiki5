@@ -113,7 +113,7 @@ exports["application/x-tiddler-html-div"] = function(tiddler) {
 	pullField("title");
 	// Output the fields
 	for(f=0; f<fields.length; f++) {
-		result.push(" " + fields[f] + "=\"" + tiddler.getFieldString(fields[f]) + "\"");
+		result.push(" " + fields[f] + "=\"" + $tw.utils.htmlEncode(tiddler.getFieldString(fields[f])) + "\"");
 	}
 	result.push(">\n<pre>");
 	result.push($tw.utils.htmlEncode(tiddler.fields.text));
