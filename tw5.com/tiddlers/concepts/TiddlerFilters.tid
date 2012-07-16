@@ -5,19 +5,21 @@ TiddlyWiki has a special syntax for expressing filters. They can be used to sele
 
 The mechanism is easiest to understand by first presenting some example filter strings:
 
-* `HelloThere` - the single tiddler titled `HelloThere` (if it exists)
-* `[[A Title With Several Words]]` - the single tiddler titled `A Title With Several Words` (if it exists)
-* `[title[MyTiddler]]` - the single tiddler titled `MyTiddler` (if it exists)
-* `HelloThere Introduction` - The tiddlers titled `HelloThere` and `Introduction` (if they exist)
-* `[tag[important]]` - any tiddlers with the tag `important`
-* `[!tag[important]]` - any tiddlers not with the tag `important`
-* `[tag[important]sort[title]]` - any tiddlers with the tag `important` sorted by title
-* `[tag[important]!sort[title]]` - any tiddlers with the tag `important` reverse sorted by title
-* `[[one][two][three]tag[tom]]` - any of the tiddlers called `one`, `two` or `three` that exist and are tagged with tom`
-* `[[one][two][three]] [tag[tom]]` - any of the tiddlers called `one`, `two` or `three` that exist, along with all of the source tiddlers that are tagged with `tom`
-* `[tag[tom]] [tag[harry]] -[[one][two][three]]` - all tiddlers tagged either `tom` or `harry`, but excluding `one`, two` and `three`
-* `[[MyTiddler]tags[]]` - all tiddlers being used as tags on the tiddler `MyTiddler`
-* `[[MyTiddler]tagging[]]` - all tiddlers being tagged with `MyTiddler`
+|!Filter |!Results |
+|`HelloThere` |The single tiddler titled `HelloThere` (if it exists) |
+|`[[A Title With Several Words]]` |The single tiddler titled `A Title With Several Words` (if it exists) |
+|`[title[MyTiddler]]` |The single tiddler titled `MyTiddler` (if it exists) |
+|`HelloThere Introduction` |The tiddlers titled `HelloThere` and `Introduction` (if they exist) |
+|`[tag[important]]` |Any tiddlers with the tag `important` |
+|`[!tag[important]]` |Any tiddlers not with the tag `important` |
+|`[tag[important]sort[title]]` |Any tiddlers with the tag `important` sorted by title |
+|`[tag[important]!sort[title]]` |Any tiddlers with the tag `important` reverse sorted by title |
+|`[[one][two][three]tag[tom]]` |Any of the tiddlers called `one`, `two` or `three` that exist and are tagged with `tom` |
+|`[[one][two][three]] [tag[tom]]` |Any of the tiddlers called `one`, `two` or `three` that exist, along with all of the source tiddlers that are tagged with `tom` |
+|`[tag[tom]] [tag[harry]] -[[one][two][three]]` |All tiddlers tagged either `tom` or `harry`, but excluding `one`, `two` and `three` |
+|`[[MyTiddler]tags[]]` |all tiddlers being used as tags on the tiddler `MyTiddler` |
+|`[[MyTiddler]tagging[]]` |all tiddlers being tagged with `MyTiddler` |
+
 
 ! Explanation
 
