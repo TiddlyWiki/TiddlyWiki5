@@ -1,7 +1,7 @@
 title: $:/templates/ModalMessage
 type: text/x-tiddlywiki
 
-<div class="modal-backdrop fade in"></div>
+<div class="modal-backdrop"></div>
 <div class="container">
 <div class="modal">
 <div class="modal-header">

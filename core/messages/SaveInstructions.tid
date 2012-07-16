@@ -1,6 +1,7 @@
 title: $:/messages/SaveInstructions
 type: text/x-tiddlywiki
 subtitle: Save your work
+help: http://alpha.tiddlywiki.com/#help:SavingChanges
 
 Your changes to this wiki need to be saved as a ~TiddlyWiki HTML file.
 
@@ -8,13 +9,13 @@ Your changes to this wiki need to be saved as a ~TiddlyWiki HTML file.
 
 # Select ''Save As'' from the ''File'' menu
 # Choose a filename and location
-## Some browsers also require you to explicitly specify the file saving format as ''Webpage, HTML only'' or similar
+#* Some browsers also require you to explicitly specify the file saving format as ''Webpage, HTML only'' or similar
 # Close this tab
 
 !!! Smartphone browsers
 
 # Create a bookmark to this page
+#* If you've got iCloud or Google Sync set up then the bookmark will automatically sync to your desktop where you can open it and save it as above
 # Close this tab
 
-* If you've got iCloud set up then the bookmark will automatically sync to your desktop where you can open it and save it as above
-* If you open the bookmark again in Mobile Safari you will see this message again. If you want to go ahead and use the file, just click the close button below
+//If you open the bookmark again in Mobile Safari you will see this message again. If you want to go ahead and use the file, just click the ''close'' button below//
