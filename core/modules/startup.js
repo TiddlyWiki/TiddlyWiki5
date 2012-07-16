@@ -45,7 +45,7 @@ exports.startup = function() {
 			rootElement: document.body
 		});
 		// Install the modal message mechanism
-		$tw.modal = new $tw.utils.Modal(this);
+		$tw.modal = new $tw.utils.Modal($tw.wiki);
 		document.addEventListener("tw-modal",function(event) {
 			$tw.modal.display(event.param);
 		},false);

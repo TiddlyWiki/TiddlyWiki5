@@ -1,6 +1,7 @@
 title: $:/messages/SaveInstructions
 type: text/x-tiddlywiki
 subtitle: Save your work
+footer: <<button close class:"btn btn-primary"><Close>>
 help: http://alpha.tiddlywiki.com/#help:SavingChanges
 
 Your changes to this wiki need to be saved as a ~TiddlyWiki HTML file.
