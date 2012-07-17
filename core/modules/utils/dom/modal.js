@@ -90,8 +90,20 @@ Modal.prototype.display = function(title) {
 		event.stopPropagation();
 		return false;
 	},false);
+	// Set the initial styles for the message
+	modalBackdrop.style.opacity = 0;
+	modalWrapper.style[$tw.browser.transformorigin] = "0% 0%";
+	modalWrapper.style[$tw.browser.transform] = "translateY(-500px)";
 	// Put the message into the document
 	document.body.appendChild(wrapper);
+	// Animate the styles
+	var d = $tw.config.preferences.animationDuration + "ms";
+	modalBackdrop.style[$tw.browser.transition] = "opacity " + d + " ease-out";
+	modalWrapper.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out";
+	$tw.utils.nextTick(function() {
+		modalBackdrop.style.opacity = 1;
+		modalWrapper.style[$tw.browser.transform] = "translateY(0px)";
+	});
 };
 
 exports.Modal = Modal;
