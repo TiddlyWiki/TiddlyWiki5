@@ -67,17 +67,17 @@ SidewaysView.prototype.remove = function(storyElementNode) {
 	wrapperElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
 															"opacity " + d + " ease-out, " +
 															"width " + d + " ease-in-out";
-	$tw.utils.nextTick(function() {
-		wrapperElement.style[$tw.browser.transform] = "translateY(" + window.innerHeight + "px)";
-		wrapperElement.style.opacity = "0.0";
-		wrapperElement.style.width = "0px";
-	});
 	// Attach an event handler for th eend of the transition
 	wrapperElement.addEventListener($tw.browser.transitionEnd,function(event) {
 		if(wrapperElement.parentNode) {
 			wrapperElement.parentNode.removeChild(wrapperElement);
 		}
 	},true);
+	// Animate
+	wrapperElement.offsetWidth; // Force layout
+	wrapperElement.style[$tw.browser.transform] = "translateY(" + window.innerHeight + "px)";
+	wrapperElement.style.opacity = "0.0";
+	wrapperElement.style.width = "0px";
 	// Returning true causes the DOM node not to be deleted
 	return true;
 };

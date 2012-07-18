@@ -27,7 +27,8 @@ Modal.prototype.display = function(title) {
 		modalFooter = document.createElement("div"),
 		modalFooterHelp = document.createElement("span"),
 		modalFooterButtons = document.createElement("span"),
-		tiddler = this.wiki.getTiddler(title);
+		tiddler = this.wiki.getTiddler(title),
+		d = $tw.config.preferences.animationDuration + "ms";
 	// Add classes
 	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
 	$tw.utils.addClass(modalWrapper,"modal");
@@ -86,24 +87,37 @@ Modal.prototype.display = function(title) {
 	});
 	// Add the close event handler
 	wrapper.addEventListener("tw-close",function(event) {
-		document.body.removeChild(wrapper);
+		// Force layout and animate the modal message away
+		modalBackdrop.offsetWidth;
+		modalWrapper.offsetWidth;
+		modalBackdrop.style.opacity = 0;
+		modalWrapper.style[$tw.browser.transform] = "translateY(" + window.innerHeight + "px)";
+		// Set up an event for the transition end
+		modalWrapper.addEventListener($tw.browser.transitionEnd,function(event) {
+			if(wrapper.parentNode) {
+				// Remove the modal message from the DOM
+				document.body.removeChild(wrapper);
+			}
+		},false);
+		// Don't let anyone else handle the tw-close message
 		event.stopPropagation();
 		return false;
 	},false);
 	// Set the initial styles for the message
 	modalBackdrop.style.opacity = 0;
 	modalWrapper.style[$tw.browser.transformorigin] = "0% 0%";
-	modalWrapper.style[$tw.browser.transform] = "translateY(-500px)";
+	modalWrapper.style[$tw.browser.transform] = "translateY(" + (-window.innerHeight) + "px)";
 	// Put the message into the document
 	document.body.appendChild(wrapper);
-	// Animate the styles
-	var d = $tw.config.preferences.animationDuration + "ms";
+	// Set up animation for the styles
 	modalBackdrop.style[$tw.browser.transition] = "opacity " + d + " ease-out";
 	modalWrapper.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out";
-	$tw.utils.nextTick(function() {
-		modalBackdrop.style.opacity = 1;
-		modalWrapper.style[$tw.browser.transform] = "translateY(0px)";
-	});
+	// Force layout
+	modalBackdrop.offsetWidth;
+	modalWrapper.offsetWidth;
+	// Set final animated styles
+	modalBackdrop.style.opacity = 1;
+	modalWrapper.style[$tw.browser.transform] = "translateY(0px)";
 };
 
 exports.Modal = Modal;

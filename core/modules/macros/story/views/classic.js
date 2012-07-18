@@ -39,11 +39,10 @@ ClassicScroller.prototype.remove = function(storyElementNode) {
 	wrapperElement.style[$tw.browser.transform] = "translateX(0px)";
 	wrapperElement.style.opacity = "1.0";
 	wrapperElement.style.height = currHeight + "px";
-	$tw.utils.nextTick(function() {
-		wrapperElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
-		wrapperElement.style.opacity = "0.0";
-		wrapperElement.style.height = "0px";
-	});
+	wrapperElement.offsetWidth; // Force layout
+	wrapperElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
+	wrapperElement.style.opacity = "0.0";
+	wrapperElement.style.height = "0px";
 	// Returning true causes the DOM node not to be deleted
 	return true;
 };
