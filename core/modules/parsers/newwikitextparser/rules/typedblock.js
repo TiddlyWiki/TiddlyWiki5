@@ -48,7 +48,7 @@ exports.parse = function(match,isBlock) {
 			text = this.source.substr(this.pos);
 			this.pos = this.sourceLength;
 		}
-		var renderer = this.wiki.parseText(mimeType,text);
+		var renderer = this.wiki.parseText(mimeType,text,{defaultType: "text/plain"});
 		this.dependencies.mergeDependencies(renderer.dependencies);
 		return renderer.tree;
 	} else {
