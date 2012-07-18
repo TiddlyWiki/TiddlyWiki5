@@ -57,7 +57,7 @@ short lines
 
 Available character formatting includes:
 
-* backticks for `code`
+* {{{`backticks`}}} for `code`
 * `''bold''` for ''bold text''
 * `//italic//` for //italic text//
 * `__underscore__` for __underscored text__

@@ -4,6 +4,7 @@ tags: introduction
 Here are a few features of TiddlyWiki that you can explore:
 
 * Try editing some tiddlers here on tiddlywiki.com to try out the new WikiText. Your changes will not be visible to other users
+* Invoke a demonstration <<button modal param:[[Motovun Jack.jpg]] class:"btn btn-inverse"><wizard>>
 * Use TiddlySpot to host an instance of TiddlyWiki5
 * Save this wiki as a static HTML file: <<button save-wiki param:"$:/core/templates/static.template.html" class:"btn"><Save Static>>
 * If you're running on a touch browser like Mobile Safari on the iPad or iPhone:
