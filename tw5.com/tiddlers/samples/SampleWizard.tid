@@ -1,0 +1,10 @@
+title: SampleWizard
+tags: demo
+subtitle: I'm a modal wizard
+footer: <<button close class:"btn btn-primary"><Close>>
+
+This is a modal wizard dialogue, stored in the tiddler SampleWizard.
+
+[img[Motovun Jack.jpg]]
+
+You can <<button modal param:[[Introduction]] class:"btn btn-inverse"><nest wizards>>.
