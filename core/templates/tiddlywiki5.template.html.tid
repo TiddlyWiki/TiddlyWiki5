@@ -16,16 +16,18 @@ type: text/x-tiddlywiki-html
 " />
 <title><<tiddler "$:/core/wiki/title">></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
-<div id="styleArea">
-<<serialize "[is[shadow]type[text/css]]" application/x-tiddler-css>>
-</div>
+
 <!----------- Raw markup ----------->
 <<serialize "[tag[$:/core/wiki/rawmarkup]]" text/plain>>
 </head>
 <body>
+<!----------- Static styles ----------->
+<div id="styleArea">
+<<serialize "[is[shadow]type[text/css]]" application/x-tiddler-css>>
+</div>
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
-<div id="splashArea" style="display:none;">
+<div id="splashArea">
 <<serialize "$:/templates/StaticContent" text/html>>
 </div>
 </noscript>

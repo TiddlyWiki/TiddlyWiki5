@@ -13,8 +13,8 @@ Some of the features and fixes required before the beta is declared include:
 * Synchronisation via HTTP in the browser
 * Synchronisation via direct file access under node.js
 * Preliminary integration with TiddlySpace
-* Preliminary integration with TiddlySpot
-* Saving changes to a file URI:// using Firefox
+* --Preliminary integration with TiddlySpot--
+* --Saving changes to a file URI using Firefox--
 * Move default tiddler storage from TiddlyWiki-style `<div>` elements to JSON
 * Aliases/inheritance
 * Lazy loading

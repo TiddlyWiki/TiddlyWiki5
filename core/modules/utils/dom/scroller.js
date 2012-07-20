@@ -33,13 +33,14 @@ Scroller.prototype.cancel = function() {
 Smoothly scroll an element back into view if needed
 */
 Scroller.prototype.scrollIntoView = function(element) {
-	var scrollPosition = $tw.utils.getScrollPosition();
+	var scrollPosition = $tw.utils.getScrollPosition(),
+		elementBounds = element.getBoundingClientRect();
 	this.cancel();
 	this.startTime = new Date();
 	this.startX = scrollPosition.x;
 	this.startY = scrollPosition.y;
-	this.endX = element.offsetLeft;
-	this.endY = element.offsetTop;
+	this.endX = elementBounds.left;
+	this.endY = elementBounds.top;
 	if((this.endX < this.startX) || (this.endX > (this.startX + window.innerWidth)) || (this.endY < this.startY) || (this.endY > (this.startY + window.innerHeight))) {
 		var self = this;
 		this.timerId = window.setInterval(function() {
