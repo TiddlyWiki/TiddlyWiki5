@@ -52,21 +52,11 @@ exports.info = {
 Get the data from the JSON story tiddler
 */
 exports.getStory = function() {
-	var storyTiddler = this.wiki.getTiddler(this.params.story);
-	this.story = {
-		tiddlers: []
-	};
-	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
-		this.story = JSON.parse(storyTiddler.fields.text);
-	}
+	this.story = this.wiki.getTiddlerData(this.params.story,{tiddlers: []});
 };
 
 exports.getHistory = function() {
-	var historyTiddler = this.wiki.getTiddler(this.params.history);
-	this.history = {stack: []};
-	if(historyTiddler && $tw.utils.hop(historyTiddler.fields,"text")) {
-		this.history = JSON.parse(historyTiddler.fields.text);
-	}
+	this.history = this.wiki.getTiddlerData(this.params.history,{stack: []});
 };
 
 exports.getViewTemplate = function() {

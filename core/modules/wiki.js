@@ -317,6 +317,36 @@ exports.getTiddlersWithTag = function(tag) {
 	return titles;
 };
 
+/*
+Get a tiddlers content as a JavaScript object. How this is done depends on the type of the tiddler:
+
+application/json: the tiddler JSON is parsed into an object
+
+Other types currently just return null.
+*/
+exports.getTiddlerData = function(title,defaultData) {
+	var tiddler = this.tiddlers[title],
+		data;
+	if(tiddler && tiddler.fields.text && tiddler.fields.type === "application/json") {
+		// JSON tiddler
+		try {
+			data = JSON.parse(tiddler.fields.text);
+		} catch(ex) {
+			return defaultData;
+		}
+		return data;
+	}
+	return defaultData;
+};
+
+/*
+Set a tiddlers content to a JavaScript object. Currently this is done by setting the tiddler's type to "application/json" and setting the text to the JSON text of the data.
+*/
+exports.setTiddlerData = function(title,data) {
+	var tiddler = this.getTiddler(title);
+	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data)}));
+};
+
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || {};
@@ -398,7 +428,7 @@ Parse text in a specified format and render it into another format
 	outputType: content type for the output
 	textType: content type of the input text
 	text: input text
-	options: see below
+	options: see wiki.parseText()
 Options are:
 	defaultType: Default MIME type to use if the specified one is unknown
 */

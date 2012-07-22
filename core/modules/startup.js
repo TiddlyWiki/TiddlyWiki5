@@ -75,8 +75,8 @@ exports.startup = function() {
 			story.tiddlers[t] = {title: defaultTiddlers[t]};
 			history.stack[defaultTiddlers.length - t - 1] = {title: defaultTiddlers[t], fromTitle: defaultTiddlers[t+1]};
 		}
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: storyTitle,text: JSON.stringify(story)}));
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: historyTitle,text: JSON.stringify(history)}));
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: storyTitle,type: "application/json", text: JSON.stringify(story)}));
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: historyTitle,type: "application/json", text: JSON.stringify(history)}));
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			var event = document.createEvent("Event");

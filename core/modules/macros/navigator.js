@@ -22,30 +22,22 @@ exports.info = {
 };
 
 exports.getStory = function() {
-	var storyTiddler = this.wiki.getTiddler(this.params.story);
-	this.story = {tiddlers: []};
-	if(storyTiddler && $tw.utils.hop(storyTiddler.fields,"text")) {
-		this.story = JSON.parse(storyTiddler.fields.text);
-	}
+	this.story = this.wiki.getTiddlerData(this.params.story,{tiddlers: []});
 };
 
 exports.saveStory = function() {
 	if(this.hasParameter("story")) {
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.story),{title: this.params.story, text: JSON.stringify(this.story)}));
+		this.wiki.setTiddlerData(this.params.story,this.story);
 	}
 };
 
 exports.getHistory = function() {
-	var historyTiddler = this.wiki.getTiddler(this.params.history);
-	this.history = {stack: []};
-	if(historyTiddler && $tw.utils.hop(historyTiddler.fields,"text")) {
-		this.history = JSON.parse(historyTiddler.fields.text);
-	}
+	this.history = this.wiki.getTiddlerData(this.params.history,{stack: []});
 };
 
 exports.saveHistory = function() {
 	if(this.hasParameter("history")) {
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getTiddler(this.params.history),{title: this.params.history, text: JSON.stringify(this.history)}));
+		this.wiki.setTiddlerData(this.params.history,this.history);
 	}
 };
 
