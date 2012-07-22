@@ -1,7 +1,7 @@
 title: SubStories
 tags: samples
 
-It is possible to have multiple `story` macro pointing to the same story tiddler, and it is even possible to nest them.
+It is possible to have multiple instances of the `story` macro pointing to the same story tiddler, and it is even possible to nest them.
 
 For example, this macro displays the same tiddlers as the main story but through the template used to display tags, which makes each tiddler appear as a tiny panel: 
 
@@ -9,6 +9,6 @@ For example, this macro displays the same tiddlers as the main story but through
 <<story story:"$:/StoryTiddlers" defaultViewTemplate:[[$:/templates/TagTemplate]] storyview:classic >>
 }}}
 
-Try opening and closing some other tiddlers and see how this second story animates when tiddlers are added and removed from the main story. (It's also interesting to view the story tiddler alongside this one: [[$:/StoryTiddlers]])
+Select //Classic// or //Sideways// view in the navigation bar, and then try opening and closing  other tiddlers and see how this second story animates when tiddlers are added and removed from the main story. It's also interesting to view the story tiddler alongside this one: [[$:/StoryTiddlers]].
 
 <<story story:"$:/StoryTiddlers" defaultViewTemplate:[[$:/templates/TagTemplate]] storyview:classic >>
