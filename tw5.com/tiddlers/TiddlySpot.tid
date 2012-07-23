@@ -6,7 +6,7 @@ TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Dan
 TiddlyWiki5 isn't yet built in to TiddlySpot but you can use it by following these steps:
 
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
-# Open TiddlyWiki5 in your browser from http://alpha.tiddlywiki.com/
+# Open TiddlyWiki5 in your browser from http://five.tiddlywiki.com/
 # Fill in the information listed below
 # Click the "Save Changes" button in the top navigation bar to trigger a save. You should get a confirmation message `0 - Fileindex.html`
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/

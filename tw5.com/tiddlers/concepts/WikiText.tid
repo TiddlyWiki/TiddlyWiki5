@@ -11,7 +11,7 @@ A key capability of WikiText is the ability to make links to other tiddlers or t
 * To link to a tiddler by title: `[[Tiddler Title]]`
 * To link to a tiddler and specify the text of the link: `[[Tiddler Title|Displayed Link Title]]`
 * For tiddler titles that match the CamelCase rules, just typing the title will automatically create a link
-* To link to an external website, type the full URL of the site: `http://alpha.tiddlywiki.com/`
+* To link to an external website, type the full URL of the site: `http://five.tiddlywiki.com/`
 
 You can suppress a link from being recognised by preceding it with `~`. For example:
 
