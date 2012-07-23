@@ -4,7 +4,7 @@
 
 pushd tw5.com > /dev/null
 
-echo "alpha.tiddlywiki.com" > ../../jermolene.github.com/CNAME
+echo "five.tiddlywiki.com" > ../../jermolene.github.com/CNAME
 
 node ../core/boot.js \
 	--verbose \
