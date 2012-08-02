@@ -271,8 +271,7 @@ exports.extractVersionInfo = function() {
 
 // Server version
 exports.extractVersionInfo = function() {
-	var fs = require("fs");
-	return JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json")).version;
+	return $tw.packageInfo.version;
 };
 
 }

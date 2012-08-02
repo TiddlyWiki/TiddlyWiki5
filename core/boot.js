@@ -39,6 +39,26 @@ if(typeof(window) === "undefined" && !global.$tw) {
 // Boot information
 $tw.boot = {};
 
+// Server initialisation
+if(!$tw.browser) {
+	// Standard node libraries
+	var fs = require("fs"),
+		path = require("path"),
+		vm = require("vm");
+	// System paths and filenames
+	$tw.boot.bootFile = path.basename(module.filename);
+	$tw.boot.bootPath = path.dirname(module.filename);
+	$tw.boot.wikiPath = process.cwd();
+	// Read package info
+	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
+	// Check node version number
+	var targetVersion = $tw.packageInfo.engine.node.substr(2).split("."),
+		currVersion = process.version.substr(1).split(".");
+	if(targetVersion[0] > currVersion[0] || targetVersion[1] > currVersion[1] || targetVersion[2] > currVersion[2]) {
+		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
+	}
+}
+
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
@@ -549,14 +569,6 @@ $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementByI
 /////////////////////////// Server definitions
 
 if(!$tw.browser) {
-
-var fs = require("fs"),
-	path = require("path"),
-	vm = require("vm");
-
-$tw.boot.bootFile = path.basename(module.filename);
-$tw.boot.bootPath = path.dirname(module.filename);
-$tw.boot.wikiPath = process.cwd();
 
 /*
 Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
