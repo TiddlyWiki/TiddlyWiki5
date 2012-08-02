@@ -39,7 +39,7 @@ ClassicScroller.prototype.remove = function(storyElementNode) {
 	wrapperElement.style[$tw.browser.transform] = "translateX(0px)";
 	wrapperElement.style.opacity = "1.0";
 	wrapperElement.style.height = currHeight + "px";
-	wrapperElement.offsetWidth; // Force layout
+	$tw.utils.forceLayout(wrapperElement);
 	wrapperElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
 	wrapperElement.style.opacity = "0.0";
 	wrapperElement.style.height = "0px";

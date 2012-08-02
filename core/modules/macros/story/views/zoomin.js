@@ -94,7 +94,7 @@ Zoomin.prototype.navigateForward = function(toStoryElement,fromStoryElement,hist
 		prevCurrentTiddler = this.currentTiddler;
 	this.currentTiddler = toStoryElement;
 	// Force layout
-	this.storyNode.offsetWidth;
+	$tw.utils.forceLayout(this.storyNode);
 	// Transform the target tiddler to its natural size
 	toStoryElement.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
 	toStoryElement.domNode.style.opacity = "1.0";
@@ -102,7 +102,7 @@ Zoomin.prototype.navigateForward = function(toStoryElement,fromStoryElement,hist
 	toStoryElement.domNode.style.zIndex = "500";
 	// Transform the previous tiddler out of the way and then hide it
 	if(prevCurrentTiddler && prevCurrentTiddler !== toStoryElement) {
-		var scale = titleBounds.width / sourceBounds.width;
+		scale = titleBounds.width / sourceBounds.width;
 		x =  titleBounds.left - targetBounds.left - (sourceBounds.left - targetBounds.left) * scale;
 		y =  titleBounds.top - targetBounds.top - (sourceBounds.top - targetBounds.top) * scale;
 		prevCurrentTiddler.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
@@ -154,8 +154,7 @@ Zoomin.prototype.remove = function(storyElement,storyElementIndex) {
 		this.currentTiddler = toStoryElement;
 	}
 	// Animate them both
-	// Force layout
-	this.storyNode.offsetWidth;
+	$tw.utils.forceLayout(this.storyNode);
 	// First, the tiddler we're closing
 	storyElement.domNode.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, opacity " + d + " ease-out";
 	storyElement.domNode.style.opacity = "0.0";

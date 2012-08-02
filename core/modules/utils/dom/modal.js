@@ -88,8 +88,8 @@ Modal.prototype.display = function(title) {
 	// Add the close event handler
 	wrapper.addEventListener("tw-close",function(event) {
 		// Force layout and animate the modal message away
-		modalBackdrop.offsetWidth;
-		modalWrapper.offsetWidth;
+		$tw.utils.forceLayout(modalBackdrop);
+		$tw.utils.forceLayout(modalWrapper);
 		modalBackdrop.style.opacity = 0;
 		modalWrapper.style[$tw.browser.transform] = "translateY(" + window.innerHeight + "px)";
 		// Set up an event for the transition end
@@ -113,8 +113,8 @@ Modal.prototype.display = function(title) {
 	modalBackdrop.style[$tw.browser.transition] = "opacity " + d + " ease-out";
 	modalWrapper.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out";
 	// Force layout
-	modalBackdrop.offsetWidth;
-	modalWrapper.offsetWidth;
+	$tw.utils.forceLayout(modalBackdrop);
+	$tw.utils.forceLayout(modalWrapper);
 	// Set final animated styles
 	modalBackdrop.style.opacity = 1;
 	modalWrapper.style[$tw.browser.transform] = "translateY(0px)";

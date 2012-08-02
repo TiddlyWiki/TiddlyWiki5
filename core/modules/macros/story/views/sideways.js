@@ -74,7 +74,7 @@ SidewaysView.prototype.remove = function(storyElementNode) {
 		}
 	},true);
 	// Animate
-	wrapperElement.offsetWidth; // Force layout
+	$tw.utils.forceLayout(wrapperElement);
 	wrapperElement.style[$tw.browser.transform] = "translateY(" + window.innerHeight + "px)";
 	wrapperElement.style.opacity = "0.0";
 	wrapperElement.style.width = "0px";

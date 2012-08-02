@@ -105,4 +105,11 @@ exports.getPassword = function(name) {
 	return localStorage.getItem("tw5-password-" + name);
 };
 
+/*
+Force layout of a dom node and its descendents
+*/
+exports.forceLayout = function(element) {
+	var dummy = element.offsetWidth;
+};
+
 })();
