@@ -1,31 +1,39 @@
 title: $:/templates/PageTemplate
 
+<!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <<navigator story:"$:/StoryTiddlers" history:"$:/History" ><
 
+<!--  Zooming chooser -->
 {{navigation-panel{
 <<chooser><
 	<<list all>>
 >>
 }}}
 
+<!--  Zooming navigator -->
 <<zoomer>>
 
+<!-- The top navigation bar -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
 {{nav{
 
+<!-- Navigation menu -->
 * HelloThere
 * [[Docs]]
 *{{divider-vertical}}
 
+<!-- View button -->
 <<button popup:ViewDropDownState class:"btn btn-danger"><View <span class="caret"></span>>>
 
+<!-- View dropdown -->
 {{pull-right{
 <<reveal state:[[$:/EditMode]] type:nomatch text:yes><
 <<button modal param:[[$:/messages/EnterEditMode]] set:[[$:/EditMode]] setTo:yes class:"btn btn-success"><Edit>>
 >>
 
+<!-- Save changes is only visible in edit mode -->
 <<reveal state:[[$:/EditMode]] type:match text:yes><
 <<button save-wiki class:"btn pull-right"><Save Changes>>
 >>
@@ -33,6 +41,7 @@ title: $:/templates/PageTemplate
 
 }}}
 
+<!-- This navigator intercepts navigation events and sets the text of the specified tiddler to the target tiddler title -->
 <<navigator set:[[$:/CurrentView]]><
 <<reveal state:ViewDropDownState type:popup position:below><
 <div class="open">
@@ -48,6 +57,7 @@ title: $:/templates/PageTemplate
 </div>
 </div>
 
+<!-- The main story references the same story and history tiddlers as the outer navigator -->
 <div class="container">
 <<story story:"$:/StoryTiddlers" history:"$:/History" storyviewTiddler:[[$:/CurrentView]] storyview:classic >>
 </div>
