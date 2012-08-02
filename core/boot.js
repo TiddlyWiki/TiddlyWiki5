@@ -40,11 +40,12 @@ if(typeof(window) === "undefined" && !global.$tw) {
 $tw.boot = {};
 
 // Server initialisation
+var fs, path, vm;
 if(!$tw.browser) {
 	// Standard node libraries
-	var fs = require("fs"),
-		path = require("path"),
-		vm = require("vm");
+	fs = require("fs");
+	path = require("path");
+	vm = require("vm");
 	// System paths and filenames
 	$tw.boot.bootFile = path.basename(module.filename);
 	$tw.boot.bootPath = path.dirname(module.filename);
