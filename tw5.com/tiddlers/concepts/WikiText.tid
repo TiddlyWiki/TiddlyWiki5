@@ -219,11 +219,12 @@ See ImageWikiText for more details.
 
 ! HTML in WikiText
 
-HTML tags can be used directly in WikiText. For example:
+HTML tags and comments can be used directly in WikiText. For example:
 
 {{{
 <article class="hello">
 This is my nice and simple block of text. HelloThere
+<!-- This comment will not appear in the wikified output -->
 </article>
 }}}
 
