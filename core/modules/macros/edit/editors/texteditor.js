@@ -3,7 +3,7 @@ title: $:/core/modules/macros/edit/editors/texteditor.js
 type: application/javascript
 module-type: editor
 
-An editor plugin for editting text
+An editor module for editting text
 
 \*/
 (function(){

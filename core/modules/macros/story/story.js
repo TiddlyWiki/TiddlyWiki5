@@ -13,7 +13,7 @@ Displays a sequence of tiddlers defined in two JSON structures. The story tiddle
 
 The optional `draft` member indicates that the tiddler is in edit mode, and the value is the title of the tiddler being used as the draft.
 
-When the story tiddler changes, the story macro adjusts the DOM to match. An optional storyview plugin can be used to visualise the changes.
+When the story tiddler changes, the story macro adjusts the DOM to match. An optional storyview module can be used to visualise the changes.
 
 And the history tiddler is the stack of tiddlers that were navigated to in turn:
 
@@ -27,7 +27,7 @@ And the history tiddler is the stack of tiddlers that were navigated to in turn:
 		]
 	}
 
-The history stack is updated during navigation, and again the storyview plugin is given an opportunity to animate the navigation.
+The history stack is updated during navigation, and again the storyview module is given an opportunity to animate the navigation.
 
 \*/
 (function(){

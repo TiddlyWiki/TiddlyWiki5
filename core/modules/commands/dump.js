@@ -97,13 +97,13 @@ Command.prototype.subcommands.config = function() {
 		};
 	this.output.write("Configuration:\n");
 	dumpConfig($tw.config,"  $tw.config");
-	dumpObject("Tiddler field plugins:",$tw.Tiddler.fieldPlugins);
+	dumpObject("Tiddler field modules:",$tw.Tiddler.fieldModules);
 	dumpObject("Loaded modules:",$tw.modules.titles);
-	dumpObject("Loaded plugins:",$tw.plugins.moduleTypes);
-	dumpObject("Command plugins:",$tw.commands);
-	dumpObject("Parser plugins:",$tw.wiki.parsers);
-	dumpObject("Macro plugins:",$tw.wiki.macros);
-	dumpObject("Deserializer plugins:",$tw.Wiki.tiddlerDeserializerPlugins);
+	dumpObject("Loaded modules:",$tw.modules.moduleTypes);
+	dumpObject("Command modules:",$tw.commands);
+	dumpObject("Parser modules:",$tw.wiki.parsers);
+	dumpObject("Macro modules:",$tw.wiki.macros);
+	dumpObject("Deserializer modules:",$tw.Wiki.tiddlerDeserializerModules);
 	return null; // No error
 };
 

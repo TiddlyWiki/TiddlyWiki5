@@ -3,7 +3,7 @@ title: $:/core/modules/utils/dom/popup.js
 type: application/javascript
 module-type: utils
 
-Plugin that creates a $tw.utils.Popup object prototype that manages popups in the browser
+Module that creates a $tw.utils.Popup object prototype that manages popups in the browser
 
 \*/
 (function(){

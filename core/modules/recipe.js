@@ -3,7 +3,7 @@ title: $:/core/modules/recipe.js
 type: application/javascript
 module-type: tiddlerdeserializer
 
-Plugin to deserialize tiddlers from an old school TiddlyWiki recipe file.
+Module to deserialize tiddlers from an old school TiddlyWiki recipe file.
 
 The idea is to process the recipe file recursively, loading tiddlers into the main store using synchronous file operations. The tiddlers have their titles prefixed with the associated marker in curly brackets ("{shadow}", "{tiddler}" etc).
 

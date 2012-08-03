@@ -3,7 +3,7 @@ title: $:/core/modules/deserializers.js
 type: application/javascript
 module-type: tiddlerdeserializer
 
-Plugins to deserialise tiddlers from a block of text
+Functions to deserialise tiddlers from a block of text
 
 \*/
 (function(){

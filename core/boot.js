@@ -3,7 +3,7 @@ title: $:/core/boot.js
 type: application/javascript
 
 The main boot kernel for TiddlyWiki. This single file creates a barebones TW environment that is just
-sufficient to bootstrap the plugins containing the main logic of the applicaiton.
+sufficient to bootstrap the modules containing the main logic of the applicaiton.
 
 On the server this file is executed directly to boot TiddlyWiki. In the browser, this file is packed
 into a single HTML file along with other elements:
@@ -63,10 +63,7 @@ if(!$tw.browser) {
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
-
-// Plugins store organises module exports by module type
-$tw.plugins = $tw.plugins || {};
-$tw.plugins.moduleTypes = $tw.plugins.moduleTypes || {}; // hashmap by module type of array of exports
+$tw.modules.types = $tw.modules.types || {}; // hashmap by module type of array of exports
 
 // Config object
 $tw.config = $tw.config || {};
@@ -228,50 +225,50 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 	}
 };
 
-/////////////////////////// Plugin mechanism
+/////////////////////////// Module mechanism
 
 /*
-Register a single plugin module in the $tw.plugins.moduleTypes hashmap
+Register a single module in the $tw.modules.types hashmap
 */
-$tw.plugins.registerPlugin = function(name,moduleType,moduleExports) {
-	if(!(moduleType in $tw.plugins.moduleTypes)) {
-		$tw.plugins.moduleTypes[moduleType] = [];
+$tw.modules.registerTypedModule = function(name,moduleType,moduleExports) {
+	if(!(moduleType in $tw.modules.types)) {
+		$tw.modules.types[moduleType] = [];
 	}
-	$tw.plugins.moduleTypes[moduleType].push(moduleExports);
+	$tw.modules.types[moduleType].push(moduleExports);
 };
 
 /*
-Register all plugin module tiddlers
+Register all the module tiddlers that have a module type
 */
-$tw.plugins.registerPluginModules = function() {
+$tw.modules.registerTypedModules = function() {
 	for(var title in $tw.wiki.tiddlers) {
 		var tiddler = $tw.wiki.getTiddler(title);
 		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
-			$tw.plugins.registerPlugin(title,tiddler.fields["module-type"],$tw.modules.execute(title));
+			$tw.modules.registerTypedModule(title,tiddler.fields["module-type"],$tw.modules.execute(title));
 		}
 	}
 };
 
 /*
-Get all the plugins of a particular type in a hashmap by their `name` field
+Get all the modules of a particular type in a hashmap by their `name` field
 */
-$tw.plugins.getPluginsByTypeAsHashmap = function(moduleType,nameField) {
+$tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 	nameField = nameField || "name";
-	var plugins = $tw.plugins.moduleTypes[moduleType],
+	var modules = $tw.modules.types[moduleType],
 		results = {};
-	if(plugins) {
-		for(var t=0; t<plugins.length; t++) {
-			results[plugins[t][nameField]] =  plugins[t];
+	if(modules) {
+		for(var t=0; t<modules.length; t++) {
+			results[modules[t][nameField]] =  modules[t];
 		}
 	}
 	return results;
 };
 
 /*
-Apply the exports of the plugin modules of a particular type to a target object
+Apply the exports of the modules of a particular type to a target object
 */
-$tw.plugins.applyMethods = function(moduleType,object) {
-	var modules = $tw.plugins.moduleTypes[moduleType],
+$tw.modules.applyMethods = function(moduleType,object) {
+	var modules = $tw.modules.types[moduleType],
 		n,m,f;
 	if(modules) {
 		for(n=0; n<modules.length; n++) {
@@ -300,10 +297,10 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 					delete this.fields[t]; // If we get a field that's undefined, delete any previous field value
 				}
 			} else {
-				// Parse the field with the associated plugin (if any)
-				var fieldPlugin = $tw.Tiddler.fieldPlugins[t];
-				if(fieldPlugin) {
-					this.fields[t] = fieldPlugin.parse.call(this,src[t]);
+				// Parse the field with the associated field module (if any)
+				var fieldModule = $tw.Tiddler.fieldModules[t];
+				if(fieldModule) {
+					this.fields[t] = fieldModule.parse.call(this,src[t]);
 				} else {
 					this.fields[t] = src[t];
 				}
@@ -313,24 +310,24 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 };
 
 /*
-Hashmap of field plugins by plugin name
+Hashmap of field modules by field name
 */
-$tw.Tiddler.fieldPlugins = {};
+$tw.Tiddler.fieldModules = {};
 
 /*
-Register and install the built in tiddler field plugins
+Register and install the built in tiddler field modules
 */
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerfields/modified","tiddlerfield",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerfields/modified","tiddlerfield",{
 	name: "modified",
 	parse: $tw.utils.parseDate,
 	stringify: $tw.utils.stringifyDate
 });
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerfields/created","tiddlerfield",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerfields/created","tiddlerfield",{
 	name: "created",
 	parse: $tw.utils.parseDate,
 	stringify: $tw.utils.stringifyDate
 });
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerfields/tags","tiddlerfield",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerfields/tags","tiddlerfield",{
 	name: "tags",
 	parse: $tw.utils.parseStringArray,
 	stringify: function(value) {
@@ -345,8 +342,8 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerfields/tags","tiddl
 		return result.join(" ");
 	}
 });
-// Install built in tiddler fields plugins so that they are available immediately
-$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
+// Install built in tiddler fields module so that they are available immediately
+$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 
 /////////////////////////// Barebones wiki store
 
@@ -383,25 +380,25 @@ $tw.Wiki.prototype.getTiddler = function(title) {
 };
 
 /*
-Hashmap of field plugins by plugin name
+Hashmap of field modules by serializer name
 */
-$tw.Wiki.tiddlerDeserializerPlugins = {};
+$tw.Wiki.tiddlerDeserializerModules = {};
 
 /*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	srcFields = srcFields || {};
-	var deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type],
+	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
 		fields = {};
 	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.config.fileExtensionInfo[type].type;
-		deserializer = $tw.Wiki.tiddlerDeserializerPlugins[type];
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer) {
 		// If we still don't have a deserializer, treat it as plain text
-		deserializer = $tw.Wiki.tiddlerDeserializerPlugins["text/plain"];
+		deserializer = $tw.Wiki.tiddlerDeserializerModules["text/plain"];
 	}
 	for(var f in srcFields) {
 		fields[f] = srcFields[f];
@@ -416,9 +413,9 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 };
 
 /*
-Register the built in tiddler deserializer plugins
+Register the built in tiddler deserializer modules
 */
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","tiddlerdeserializer",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/js","tiddlerdeserializer",{
 	"application/javascript": function(text,fields) {
 		var headerCommentRegExp = /^\/\*\\\n((?:^[^\n]*\n)+?)(^\\\*\/$\n?)/mg,
 			match = headerCommentRegExp.exec(text);
@@ -429,7 +426,7 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/js","t
 		return [fields];
 	}
 });
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
 		var split = text.split(/\r?\n\r?\n/mg);
 		if(split.length > 1) {
@@ -441,14 +438,14 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/tid","
 		return [fields];
 	}
 });
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/txt","tiddlerdeserializer",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/txt","tiddlerdeserializer",{
 	"text/plain": function(text,fields) {
 		fields.text = text;
 		fields.type = "text/plain";
 		return [fields];
 	}
 });
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/html","tiddlerdeserializer",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/html","tiddlerdeserializer",{
 	"text/html": function(text,fields) {
 		fields.text = text;
 		fields.type = "text/html";
@@ -456,8 +453,8 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/html",
 	}
 });
 
-// Install the tiddler deserializer plugins so they are immediately available
-$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
+// Install the tiddler deserializer modules so they are immediately available
+$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 
 /////////////////////////// Intermediate initialisation
 
@@ -495,7 +492,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 /*
 Register a deserializer that can extract tiddlers from the DOM
 */
-$tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","tiddlerdeserializer",{
+$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/dom","tiddlerdeserializer",{
 	"(DOM)": function(node) {
 		var extractTextTiddler = function(node) {
 				var e = node.firstChild;
@@ -549,12 +546,12 @@ $tw.plugins.registerPlugin($tw.config.root + "/kernel/tiddlerdeserializer/dom","
 		return tiddlers;
 	}
 });
-// Install the tiddler deserializer plugin
-$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
+// Install the tiddler deserializer modules
+$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 
 // Load the JavaScript system tiddlers from the DOM
 $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("libraryModules")),true);
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("pluginModules")),true);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("modules")),true);
 $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernelPrefix")),true);
 $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernel")),true);
 // Load the stylesheet tiddlers from the DOM
@@ -591,7 +588,7 @@ $tw.loadTiddlersFromFile = function(file,fields,isShadow) {
 };
 
 /*
-Load all the plugins from the plugins directory
+Load all the tiddlers from a directory
 */
 $tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow) {
 	basetitle = basetitle || "$:/plugins";
@@ -664,7 +661,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 	return module.exports;
 };
 
-// Load plugins from the plugins directory
+// Load modules from the modules directory
 $tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir),null,null,true);
 
 // Load up the shadow tiddlers in the root of the core directory
@@ -684,11 +681,11 @@ $tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddler
 
 /////////////////////////// Final initialisation
 
-// Register plugins from the tiddlers we've just loaded
-$tw.plugins.registerPluginModules();
+// Register typed modules from the tiddlers we've just loaded
+$tw.modules.registerTypedModules();
 
-// Run any startup plugin modules
-var mainModules = $tw.plugins.moduleTypes.startup;
+// Run any startup modules
+var mainModules = $tw.modules.types.startup;
 for(var m=0; m<mainModules.length; m++) {
 	mainModules[m].startup.call($tw);
 }

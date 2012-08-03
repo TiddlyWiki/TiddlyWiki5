@@ -196,7 +196,7 @@ exports.addTiddler = function(tiddler,isShadow) {
 Serialise a tiddler to a specified text serialization format
 */
 exports.serializeTiddler = function(tiddler,type) {
-	var serializer = $tw.Wiki.tiddlerSerializerPlugins[type];
+	var serializer = $tw.Wiki.tiddlerSerializerModules[type];
 	if(typeof tiddler === "string") {
 		tiddler = this.getTiddler(tiddler);
 	}
@@ -375,7 +375,7 @@ exports.initParsers = function(moduleType) {
 	// Install the parser modules
 	moduleType = moduleType || "parser";
 	$tw.wiki.parsers = {}; 
-	var modules = $tw.plugins.moduleTypes[moduleType],
+	var modules = $tw.modules.types[moduleType],
 		n,m,f;
 	if(modules) {
 		for(n=0; n<modules.length; n++) {
@@ -445,8 +445,8 @@ exports.renderTiddler = function(outputType,title) {
 };
 
 /*
-Install macro plugins into this wiki
-	moduleType: Plugin type to install (defaults to "macro")
+Install macro modules into this wiki
+	moduleType: Module type to install (defaults to "macro")
 
 It's useful to remember what the `new` keyword does. It:
 
@@ -460,7 +460,7 @@ exports.initMacros = function(moduleType) {
 	moduleType = moduleType || "macro";
 	$tw.wiki.macros = {}; 
 	var MacroClass = require("./treenodes/macro.js").Macro,
-		modules = $tw.plugins.moduleTypes[moduleType],
+		modules = $tw.modules.types[moduleType],
 		n,m,f,
 		subclassMacro = function(module) {
 			// Make a copy of the Macro() constructor function
@@ -485,26 +485,26 @@ exports.initMacros = function(moduleType) {
 };
 
 /*
-Install editor plugins for the edit macro
+Install editor modules for the edit macro
 */
 exports.initEditors = function(moduleType) {
 	moduleType = moduleType || "editor";
 	var editMacro = this.macros.edit;
 	if(editMacro) {
 		editMacro.editors = {};
-		$tw.plugins.applyMethods(moduleType,editMacro.editors);
+		$tw.modules.applyMethods(moduleType,editMacro.editors);
 	}
 };
 
 /*
-Install view plugins for the story macro
+Install view modules for the story macro
 */
 exports.initStoryViews = function(moduleType) {
 	moduleType = moduleType || "storyview";
 	var storyMacro = this.macros.story;
 	if(storyMacro) {
 		storyMacro.viewers = {};
-		$tw.plugins.applyMethods(moduleType,storyMacro.viewers);
+		$tw.modules.applyMethods(moduleType,storyMacro.viewers);
 	}
 };
 
@@ -515,8 +515,8 @@ exports.initSavers = function(moduleType) {
 	moduleType = moduleType || "saver";
 	// Instantiate the available savers
 	this.savers = [];
-	for(var t=0; t<$tw.plugins.moduleTypes[moduleType].length; t++) {
-		var saver = $tw.plugins.moduleTypes[moduleType][t];
+	for(var t=0; t<$tw.modules.types[moduleType].length; t++) {
+		var saver = $tw.modules.types[moduleType][t];
 		if(saver.canSave(this)) {
 			this.savers.push(saver.create(this));
 		}

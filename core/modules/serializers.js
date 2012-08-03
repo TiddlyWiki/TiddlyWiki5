@@ -3,7 +3,7 @@ title: $:/core/modules/serializers.js
 type: application/javascript
 module-type: tiddlerserializer
 
-Plugins to serialise tiddlers to a block of text
+Functions to serialise tiddlers to a block of text
 
 \*/
 (function(){

@@ -3,7 +3,7 @@ title: $:/core/modules/utils/dom/scroller.js
 type: application/javascript
 module-type: utils
 
-Plugin that creates a $tw.utils.Scroller object prototype that manages scrolling in the browser
+Module that creates a $tw.utils.Scroller object prototype that manages scrolling in the browser
 
 \*/
 (function(){

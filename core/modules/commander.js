@@ -96,7 +96,7 @@ Commander.initCommands = function(moduleType) {
 	// Install the command modules
 	moduleType = moduleType || "command";
 	$tw.commands = {};
-	var modules = $tw.plugins.moduleTypes[moduleType],
+	var modules = $tw.modules.types[moduleType],
 		n,m,f,c;
 	if(modules) {
 		for(n=0; n<modules.length; n++) {

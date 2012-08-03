@@ -15,27 +15,27 @@ This is the main application logic for both the client and server
 exports.startup = function() {
 	var modules,n,m,f,commander;
 	// Load modules
-	$tw.plugins.applyMethods("global",$tw);
-	$tw.plugins.applyMethods("config",$tw.config);
-	$tw.plugins.applyMethods("utils",$tw.utils);
+	$tw.modules.applyMethods("global",$tw);
+	$tw.modules.applyMethods("config",$tw.config);
+	$tw.modules.applyMethods("utils",$tw.utils);
 	if($tw.browser) {
 		$tw.utils.getBrowserInfo($tw.browser);
 	}
 	$tw.version = $tw.utils.extractVersionInfo();
-	$tw.Tiddler.fieldPlugins = $tw.plugins.getPluginsByTypeAsHashmap("tiddlerfield");
-	$tw.plugins.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
-	$tw.plugins.applyMethods("wikimethod",$tw.Wiki.prototype);
-	$tw.plugins.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerPlugins);
-	$tw.Wiki.tiddlerSerializerPlugins = {};
-	$tw.plugins.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerPlugins);
-	$tw.plugins.applyMethods("treeutils",$tw.Tree);
-	$tw.plugins.applyMethods("treenode",$tw.Tree);
+	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
+	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
+	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
+	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	$tw.Wiki.tiddlerSerializerModules = {};
+	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
+	$tw.modules.applyMethods("treeutils",$tw.Tree);
+	$tw.modules.applyMethods("treenode",$tw.Tree);
 	// Set up the wiki store
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();
 	$tw.wiki.initStoryViews();
 	$tw.wiki.initParsers();
-	// Set up the command plugins
+	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Host-specific startup
 	if($tw.browser) {

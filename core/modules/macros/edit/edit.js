@@ -47,7 +47,7 @@ exports.executeMacro = function() {
 	var tiddler = this.wiki.getTiddler(this.editTiddler),
 		Editor;
 	// Figure out which editor to use
-	// TODO: Tiddler field plugins should be able to specify a field type from which the editor is derived
+	// TODO: Tiddler field modules should be able to specify a field type from which the editor is derived
 	if(this.editField === "text" && tiddler && tiddler.fields.type) {
 		Editor = this.wiki.macros.edit.editors[tiddler.fields.type];
 	}

@@ -3,7 +3,7 @@ title: $:/core/modules/macros/edit/editors/bitmapeditor.js
 type: application/javascript
 module-type: editor
 
-An editor plugin for editting bitmaps
+An editor module for editting bitmaps
 
 \*/
 (function(){

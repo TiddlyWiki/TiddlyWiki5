@@ -266,7 +266,7 @@ var WikiTextParser = function(options) {
 	this.runRules = [];
 	var blockRegExpStrings = [],
 		runRegExpStrings = [],
-		rules = ($tw.plugins.moduleTypes.wikitextrule || []).slice(0);
+		rules = ($tw.modules.types.wikitextrule || []).slice(0);
 	for(var t=0; t<rules.length; t++) {
 		if(rules[t].blockParser) {
 			this.blockRules.push(rules[t]);

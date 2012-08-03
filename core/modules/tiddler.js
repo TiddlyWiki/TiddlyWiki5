@@ -22,10 +22,10 @@ exports.getFieldString = function(field) {
 	if(value === undefined) {
 		return undefined;
 	}
-	// Parse the field with the associated plugin (if any)
-	var fieldPlugin = $tw.Tiddler.fieldPlugins[field];
-	if(fieldPlugin) {
-		return fieldPlugin.stringify.call(this,value);
+	// Parse the field with the associated module (if any)
+	var fieldModule = $tw.Tiddler.fieldModules[field];
+	if(fieldModule) {
+		return fieldModule.stringify.call(this,value);
 	} else {
 		return value.toString();
 	}
