@@ -19,14 +19,17 @@ In the browser, any constituent tiddlers that are static styles (ie shadow tiddl
 
 On both the server and in the browser, the constituent tiddlers are created with the `tiddler.fromPlugin` flag. They can be filtered out with `[is[fromPlugin]]`.
 
+Note that plugins can contain any tiddler content, and so can be used to distribute documentation, templates, or clip art.
+
 ! Plugins stored in folders
 
-A plugin folder contains files containing the tiddlers comprising the plugin. Subfolders are read recursively. The folder must also contain a `tiddlywiki.plugin` file containing the following JSON structure describing the plugin:
+A plugin folder contains files containing the tiddlers comprising the plugin. Subfolders are read recursively. The folder must also contain a `plugin.tiddlywiki` file containing the following JSON structure describing the plugin:
 
 {{{
 {
 	"metadata": {
 		"title": "MyPlugin",
+		"pluginType": "plugin"
 		"description": "An exemplary plugin for demonstration purposes",
 		"author": "JeremyRuston",
 		"version": "1.2.3-alpha3",
@@ -64,7 +67,7 @@ The title specified in the metadata block of the plugin must match the actual ti
 
 ! Loading plugins
 
-A folder containing an exploded TiddlyWiki can contain a `tiddlywiki.plugins` file that identifies the plugins to be included in this wiki:
+A folder containing an exploded TiddlyWiki can contain a `wiki.tiddlywiki` file that identifies the plugins to be included in this wiki:
 
 {{{
 {
@@ -77,3 +80,6 @@ A folder containing an exploded TiddlyWiki can contain a `tiddlywiki.plugins` fi
 }}}
 
 Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki. 
+
+
+
