@@ -3,9 +3,7 @@ tags: docs mechanism
 
 Plugins are bundles of tiddlers that are distributed and managed as a single unit.
 
-Plugins are named with their distribution URL, for example "http://tiddlytools.com/plugins/slider". Relative URLs are parsed to the base URI "http://tiddlywiki.com/plugins/".
-
-Plugins have other metadata such as a description, version number, etc.
+Plugins usually have a title of the form `$:/plugins/publisher/name`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/core/plugins/name`.
 
 Plugins that define macros, views or other named entities are expected to prefix the name with their publisher identifier, for example: "tiddlytools.slider".
 
@@ -15,6 +13,67 @@ Plugins have dependencies on other plugins which means that the other plugins ar
 
 On the server, plugins are folders containing a `tiddlywiki.plugin` file that contains the metadata for the plugin and specifies the files comprising it. It can also optionally override any metadata provided by the files themselves. Loading a plugin creates the JSON tiddler containing the plugin. It only creates the constituent tiddlers if they do not already exist.
 
-In the browser, plugins are tiddlers of type application/x-tiddlywiki-plugin containing a JSON structure encoding the plugin metadata and the list of tiddlers within it. After tiddlers have been loaded, plugins are loaded by iterating through the plugin tiddlers and creating the individual constituent tiddlers that they contain. Any tiddlers that already exist are preserved, and not overwritten.
+In the browser, plugins are tiddlers of type `application/x-tiddlywiki-plugin` containing a JSON structure encoding the plugin metadata and the list of tiddlers within it. After tiddlers have been loaded, plugins are exploded by iterating through the plugin tiddlers and creating the individual constituent tiddlers that they contain. Any tiddlers that already exist are preserved, and not overwritten.
 
-On both the server and in the browser, the constuent tiddlers are created with the `tiddler.fromPlugin` flag. They can be filtered out with `[is[fromPlugin]]`.
+In the browser, any constituent tiddlers that are static styles (ie shadow tiddlers of content type `text/css`) or javascript library modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `library`) are added to the DOM during processing.
+
+On both the server and in the browser, the constituent tiddlers are created with the `tiddler.fromPlugin` flag. They can be filtered out with `[is[fromPlugin]]`.
+
+! Plugins stored in folders
+
+A plugin folder contains files containing the tiddlers comprising the plugin. Subfolders are read recursively. The folder must also contain a `tiddlywiki.plugin` file containing the following JSON structure describing the plugin:
+
+{{{
+{
+	"metadata": {
+		"title": "MyPlugin",
+		"description": "An exemplary plugin for demonstration purposes",
+		"author": "JeremyRuston",
+		"version": "1.2.3-alpha3",
+		"coreVersion": ">=5.0.0",
+		"source": "http://tiddlywiki.com/MyPlugin"
+		"dependencies": [
+			"dependent-plugin-1",
+			"dependent-plugin-2"
+		]
+	},
+	"externalTiddlers": [
+		{"file": "../MyFile.png", "fields": {"title": "MyTitle", "type": "image/png"}},
+		{"file": "../MyFile.txt", "fields": {"title": "MyTitle2"}}
+	]
+}
+}}}
+
+! Plugins stored in tiddlers
+
+In the browser, plugins are stored in tiddlers of type `application/x-tiddlywiki-plugin` containing a JSON structure as follows:
+
+{{{
+{
+	"metadata": {
+		<as in the `tiddlywiki.plugin` file described above>
+	},
+	"tiddlers": [
+		{"title": "MyTitle", "type": "image/png", "text": "<base64>"},
+		{"title": "MyTitle2", "text": "Text"}
+	]
+}
+}}}
+
+The title specified in the metadata block of the plugin must match the actual title of the tiddler in which the plugin is stored.
+
+! Loading plugins
+
+A folder containing an exploded TiddlyWiki can contain a `tiddlywiki.plugins` file that identifies the plugins to be included in this wiki:
+
+{{{
+{
+	"plugins": [
+		"slider",
+		"chooser",
+		"tiddlytools.superslider"
+	]
+}
+}}}
+
+Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki. 
