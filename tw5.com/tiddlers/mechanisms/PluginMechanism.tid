@@ -1,0 +1,20 @@
+title: PluginMechanism
+tags: docs mechanism
+
+Plugins are bundles of tiddlers that are distributed and managed as a single unit.
+
+Plugins are named with their distribution URL, for example "http://tiddlytools.com/plugins/slider". Relative URLs are parsed to the base URI "http://tiddlywiki.com/plugins/".
+
+Plugins have other metadata such as a description, version number, etc.
+
+Plugins that define macros, views or other named entities are expected to prefix the name with their publisher identifier, for example: "tiddlytools.slider".
+
+Plugins can contain tiddlers with arbitrary titles but are expected to sandbox their tiddlers into the shadow tiddler namespace, for example "$:/plugins/tiddlytools/superslider/handle.js".
+
+Plugins have dependencies on other plugins which means that the other plugins are guaranteed to be loaded first.
+
+On the server, plugins are folders containing a `tiddlywiki.plugin` file that contains the metadata for the plugin and specifies the files comprising it. It can also optionally override any metadata provided by the files themselves. Loading a plugin creates the JSON tiddler containing the plugin. It only creates the constituent tiddlers if they do not already exist.
+
+In the browser, plugins are tiddlers of type application/x-tiddlywiki-plugin containing a JSON structure encoding the plugin metadata and the list of tiddlers within it. After tiddlers have been loaded, plugins are loaded by iterating through the plugin tiddlers and creating the individual constituent tiddlers that they contain. Any tiddlers that already exist are preserved, and not overwritten.
+
+On both the server and in the browser, the constuent tiddlers are created with the `tiddler.fromPlugin` flag. They can be filtered out with `[is[fromPlugin]]`.
