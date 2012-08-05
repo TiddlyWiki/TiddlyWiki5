@@ -28,7 +28,7 @@ The JSON structure for plugin tiddlers is as follows:
 		"author": "JeremyRuston",
 		"version": "1.2.3-alpha3",
 		"coreVersion": ">=5.0.0",
-		"source": "http://tiddlywiki.com/MyPlugin"
+		"source": "http://tiddlywiki.com/MyPlugin",
 		"dependencies": [
 			"dependent-plugin-1",
 			"dependent-plugin-2"
