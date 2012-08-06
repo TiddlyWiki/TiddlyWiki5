@@ -1,0 +1,93 @@
+title: PluginMechanism
+tags: docs mechanism
+
+Plugins are bundles of tiddlers that are distributed and managed as a single unit.
+
+Plugins usually have a title of the form `$:/plugins/publisher/name`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/core/plugins/name`.
+
+Plugins that define macros, views or other named entities are expected to prefix the name with their publisher identifier, for example: "tiddlytools.slider".
+
+Plugins can contain tiddlers with arbitrary titles but are expected to sandbox their tiddlers into the shadow tiddler namespace, for example "$:/plugins/tiddlytools/superslider/handle.js".
+
+On both the server and in the browser, the constituent tiddlers of a plugin are created with the `tiddler.fromPlugin` member containing the title of the plugin. They can be filtered out with `[is[fromPlugin]]` and `[plugin[$:/plugins/name]]` (the latter selects all the tiddlers that are constituents of the plugin, regardless of whether they still hold the value specified in the plugin).
+
+Note that plugins can contain any tiddler content, and so can be used to distribute documentation, templates, or clip art.
+
+! Plugin format
+
+Plugins are stored as tiddlers of type `application/x-tiddlywiki-plugin` containing a JSON structure encoding the plugin metadata and the list of tiddlers within it. After tiddlers have been loaded, plugins are exploded by iterating through the plugin tiddlers and creating the individual constituent tiddlers that they contain. Any tiddlers that already exist are preserved, and not overwritten.
+
+The JSON structure for plugin tiddlers is as follows:
+
+{{{
+{
+	"metadata": {
+		"title": "MyPlugin",
+		"pluginType": "plugin"
+		"description": "An exemplary plugin for demonstration purposes",
+		"author": "JeremyRuston",
+		"version": "1.2.3-alpha3",
+		"coreVersion": ">=5.0.0",
+		"source": "http://tiddlywiki.com/MyPlugin",
+		"dependencies": [
+			"dependent-plugin-1",
+			"dependent-plugin-2"
+		]
+	},
+	"tiddlers": [
+		{"title": "MyTitle", "type": "image/png", "text": "<base64>"},
+		{"title": "MyTitle2", "text": "Text"}
+	]
+}
+}}}
+
+The title specified in the metadata block of the plugin must match the actual title of the tiddler in which the plugin is stored.
+
+! Plugin folders
+
+On the server, plugins can be stored in folders containing a `plugin.tiddlywiki` file that contains the metadata for the plugin and specifies the files comprising it. It can also optionally override any metadata provided by the files themselves. Loading a plugin creates the JSON tiddler containing the plugin. It only creates the constituent tiddlers if they do not already exist.
+
+The `plugin.tiddlywiki` file should contain the following JSON structure:
+
+{{{
+{
+	"metadata": {
+		<as described above>
+	},
+	"externalTiddlers": [
+		{"file": "../MyFile.png", "fields": {"title": "MyTitle", "type": "image/png"}},
+		{"file": "../MyFile.txt", "fields": {"title": "MyTitle2"}}
+	]
+}
+}}}
+
+! Plugin types
+
+Plugins can have an optional plugin type:
+
+* ''plugin'' - an ordinary plugin loaded at boot time
+* ''pagetheme'' - a dynamically loaded page theme
+* ''tiddlertheme'' - a dynamically loaded tiddler theme
+* ''translation'' - a dynamically loaded translation
+
+In the browser, any constituent tiddlers that are static styles (ie shadow tiddlers of content type `text/css`) or javascript library modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `library`) are added to the DOM during processing.
+
+! Loading plugins
+
+A folder containing an exploded TiddlyWiki can contain a `wiki.tiddlywiki` file that identifies the plugins to be included in this wiki, and specifies the load order:
+
+{{{
+{
+	"plugins": [
+		"slider",
+		"chooser",
+		"tiddlytools.superslider"
+	]
+}
+}}}
+
+Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
+
+! Plugin implementation
+
+The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.

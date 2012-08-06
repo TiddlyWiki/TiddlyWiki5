@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/macros/zoomer.js
+title: $:/core/plugins/zoomigator/zoomigator.js
 type: application/javascript
 module-type: macro
 
@@ -13,22 +13,22 @@ Zooming navigator macro
 "use strict";
 
 exports.info = {
-	name: "zoomer",
+	name: "zoomigator",
 	params: {
 	}
 };
 
-exports.startZoomer = function(x,y) {
-	this.inZoomer = true;
+exports.startZoomigator = function(x,y) {
+	this.inZoomigator = true;
 	this.startX = x;
 	this.startY = y;
-	$tw.utils.addClass(document.body,"in-zoomer");
+	$tw.utils.addClass(document.body,"in-zoomigator");
 };
 
 /*
 Zoom the body element given a touch/mouse position in screen coordinates
 */
-exports.hoverZoomer = function(x,y) {
+exports.hoverZoomigator = function(x,y) {
 	// Put the transform origin at the top in the middle
 	document.body.style[$tw.browser.transformorigin] = "50% 0";
 	// Some shortcuts
@@ -68,37 +68,37 @@ exports.hoverZoomer = function(x,y) {
 	document.body.style[$tw.browser.transform] = transform;
 };
 
-exports.stopZoomer = function() {
+exports.stopZoomigator = function() {
 	var newScrollY = this.yFactor * (this.bodyHeight - this.windowHeight);
-	this.inZoomer = false;
+	this.inZoomigator = false;
 	window.scrollTo(0,newScrollY);
 	document.body.style[$tw.browser.transform] = "translateY(" + newScrollY * this.xFactor + "px) " + 
 		"scale(" + this.scale + ") " +
 		"translateY(" + ((this.windowHeight / this.scale) - this.bodyHeight) * this.yFactor * this.xFactor + "px)";
-	$tw.utils.removeClass(document.body,"in-zoomer");
+	$tw.utils.removeClass(document.body,"in-zoomigator");
 	document.body.style[$tw.browser.transform] = "translateY(0) scale(1) translateY(0)";
 };
 
 exports.handleEvent = function(event) {
 	switch(event.type) {
 		case "touchstart":
-			this.startZoomer(event.touches[0].clientX,event.touches[0].clientY);
-			this.hoverZoomer(event.touches[0].clientX,event.touches[0].clientY);
+			this.startZoomigator(event.touches[0].clientX,event.touches[0].clientY);
+			this.hoverZoomigator(event.touches[0].clientX,event.touches[0].clientY);
 			event.preventDefault();
 			return false;
 		case "touchmove":
-			this.hoverZoomer(event.touches[0].clientX,event.touches[0].clientY);
+			this.hoverZoomigator(event.touches[0].clientX,event.touches[0].clientY);
 			event.preventDefault();
 			return false;
 		case "touchend":
-			this.stopZoomer();
+			this.stopZoomigator();
 			event.preventDefault();
 			return false;
 	}
 };
 
 exports.executeMacro = function() {
-	this.inZoomer = false;
+	this.inZoomigator = false;
 	var attributes = {
 			style: {
 				"position": "absolute",
