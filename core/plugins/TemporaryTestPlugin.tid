@@ -1,0 +1,9 @@
+title: TemporaryTestPlugin
+type: application/x-tiddlywiki-plugin
+
+{
+	"tiddlers": [
+		{"title": "Test1", "text": "Some text"},
+		{"title": "Test2", "type": "Some more text"}
+	]
+}

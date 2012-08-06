@@ -88,3 +88,6 @@ A folder containing an exploded TiddlyWiki can contain a `wiki.tiddlywiki` file 
 
 Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
 
+! Plugin implementation
+
+The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.

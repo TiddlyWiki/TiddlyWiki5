@@ -241,8 +241,27 @@ $tw.modules.registerTypedModule = function(name,moduleType,moduleExports) {
 Register all the module tiddlers that have a module type
 */
 $tw.modules.registerTypedModules = function() {
-	for(var title in $tw.wiki.tiddlers) {
-		var tiddler = $tw.wiki.getTiddler(title);
+	var title, tiddler;
+	// Execute and register any modules from plugins
+	for(title in $tw.wiki.pluginTiddlers) {
+		tiddler = $tw.wiki.getTiddler(title);
+		if(!(title in $tw.wiki.tiddlers)) {
+			if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
+				// Execute the module
+				var source = [
+					"(function(module,exports,require) {",
+					tiddler.fields.text,
+					"})"
+				];
+				$tw.modules.define(tiddler.fields.text,tiddler.fields["module-type"],window.eval(source.join("")));
+				// Register the module
+				$tw.modules.registerTypedModule(title,tiddler.fields["module-type"],$tw.modules.execute(title));
+			}
+		}
+	}
+	// Register any modules in ordinary tiddlers
+	for(title in $tw.wiki.tiddlers) {
+		tiddler = $tw.wiki.getTiddler(title);
 		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
 			$tw.modules.registerTypedModule(title,tiddler.fields["module-type"],$tw.modules.execute(title));
 		}
@@ -370,10 +389,37 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers,isShadow) {
 	}	
 };
 
+/*
+Install tiddlers contained in plugin tiddlers
+*/
+$tw.Wiki.prototype.installPlugins = function() {
+	this.plugins = {}; // Hashmap of plugin information by title
+	this.pluginTiddlers = {}; // Hashmap of constituent tiddlers from plugins by title
+	// Collect up all the plugin tiddlers
+	for(var title in this.tiddlers) {
+		var tiddler = this.tiddlers[title];
+		if(tiddler.fields.type === "application/x-tiddlywiki-plugin") {
+			// Save the plugin information
+			var pluginInfo = this.plugins[title] = JSON.parse(tiddler.fields.text);
+			// Extract the constituent tiddlers
+			for(var t=0; t<pluginInfo.tiddlers.length; t++) {
+				var constituentTiddler = pluginInfo.tiddlers[t];
+				// Don't overwrite tiddlers that already exist
+				if(!(constituentTiddler.title in this.pluginTiddlers)) {
+					// Save the tiddler object
+					this.pluginTiddlers[constituentTiddler.title] = new $tw.Tiddler(constituentTiddler);
+				}
+			}
+		}
+	}
+};
+
 $tw.Wiki.prototype.getTiddler = function(title) {
 	var t = this.tiddlers[title];
 	if(t instanceof $tw.Tiddler) {
 		return t;
+	} else if(title in this.pluginTiddlers) {
+		return this.pluginTiddlers[title];
 	} else {
 		return null;
 	}
@@ -680,6 +726,9 @@ $tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddler
 }
 
 /////////////////////////// Final initialisation
+
+// Install plugins
+$tw.wiki.installPlugins();
 
 // Register typed modules from the tiddlers we've just loaded
 $tw.modules.registerTypedModules();
