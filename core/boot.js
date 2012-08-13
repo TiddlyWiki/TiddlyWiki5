@@ -55,8 +55,10 @@ if(!$tw.browser) {
 	// Check node version number
 	var targetVersion = $tw.packageInfo.engine.node.substr(2).split("."),
 		currVersion = process.version.substr(1).split(".");
-	if(targetVersion[0] > currVersion[0] || targetVersion[1] > currVersion[1] || targetVersion[2] > currVersion[2]) {
-		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
+	//remove -pre, -alpha, -beta etc from patch
+	currVersion[2] = currVersion[2].split("-", 1);
+	if((targetVersion[0]*10000 + targetVersion[0]*100 + targetVersion[0]) > (currVersion[0]*10000 + currVersion[0]*100 + currVersion[0])) {
+		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node + " have " + currVersion[0] + ";" + currVersion[1] + ";" + currVersion[2];
 	}
 }
 
