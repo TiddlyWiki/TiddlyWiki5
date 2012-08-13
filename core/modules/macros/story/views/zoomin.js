@@ -19,6 +19,9 @@ Navigating between tiddlers is accomplished by switching the story nodes between
 function Zoomin(story) {
 	// Save the story
 	this.story = story;
+	var wrapper = this.story.child.domNode;
+	wrapper.className += " storyViewZoomin";
+	
 	this.storyNode = this.story.child.domNode;
 	// Set the current tiddler
 	this.currentTiddler = this.story.child.children[0];

@@ -14,17 +14,25 @@ A storyview that shows a sequence of tiddlers as horizontally stacked blocks
 
 function setStoryElementStyles(e) {
 	e.style.display = "inline-block";
-	e.style.width = "380px";
+	e.style.width = "32em";
+	//need to set the heights for each page
+	//massive fudge factor for all the paddings, will remove when there are a few more div layers
+	//TODO: set up a $.resize(function(){}); to automate this
+	//TODO: oh FFS. use css classes and this all becomes trivial.
+	e.style.height = document.documentElement.clientHeight-(150)+"px";
 	e.style.verticalAlign = "top";
 	e.style.whiteSpace = "normal";
+	//put the vertical scrollbar near to the content
+  e.style["overflow-y"] = "auto";
 }
 
 function SidewaysView(story) {
 	this.story = story;
 	var wrapper = this.story.child.domNode;
+	wrapper.className += " storyViewSideways";
 	// Scroll horizontally
 	wrapper.style.whiteSpace = "nowrap";
-	// Make all the tiddlers position absolute, and hide all but the first one
+	// Make all the tiddlers the same height, and a good reading width
 	for(var t=0; t<wrapper.children.length; t++) {
 		setStoryElementStyles(wrapper.children[t]);
 	}
