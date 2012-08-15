@@ -18,6 +18,10 @@
     "type": "git",
     "url": "https://github.com/Jermolene/TiddlyWiki5.git"
   },
+  "scripts": {
+    "test": "",
+    "start": "cd tw5.com; node ../core/boot.js --verbose --server 8080 $:/core/templates/tiddlywiki5.template.html text/plain text/html"
+  },
   "keywords": [
     "tiddlywiki",
     "tiddlywiki5",
