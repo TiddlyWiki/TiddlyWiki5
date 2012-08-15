@@ -12,30 +12,49 @@ A storyview that shows a sequence of tiddlers as horizontally stacked blocks
 /*global $tw: false */
 "use strict";
 
-function setStoryElementStyles(e) {
-	e.style.display = "inline-block";
-	e.style.width = "32em";
-	//need to set the heights for each page
-	//massive fudge factor for all the paddings, will remove when there are a few more div layers
-	//TODO: set up a $.resize(function(){}); to automate this
-	//TODO: oh FFS. use css classes and this all becomes trivial.
-	e.style.height = document.documentElement.clientHeight-(150)+"px";
-	e.style.verticalAlign = "top";
-	e.style.whiteSpace = "normal";
-	//put the vertical scrollbar near to the content
-  e.style["overflow-y"] = "auto";
-}
+//TODO: should make an applyStyleSheet that can leverage templated css? or add hrefs to css - so users can customise
+
+
+var timeOut = null;
+var resizeHeight = function() { 
+   clearTimeout(timeOut);
+   //set the tw-story-element's height (need to work out the 150, and remove the constant)
+   var height = document.documentElement.clientHeight-150;
+   $tw.utils.applyStyleSheet('storyViewSideways_height', '.storyViewSideways .tw-story-element {height : '+height+'px; }');
+};
 
 function SidewaysView(story) {
 	this.story = story;
-	var wrapper = this.story.child.domNode;
-	wrapper.className += " storyViewSideways";
+	
+	//add storyView class to 'body' element to enable UI tweaks
+	$tw.utils.addClass(document.body, "storyViewSideways");
+	
+	//TODO: as these are not dynamic, we should really be able to move them out of the code
 	// Scroll horizontally
-	wrapper.style.whiteSpace = "nowrap";
+	// hide vertical scrollbar for body, use one inside the stories
 	// Make all the tiddlers the same height, and a good reading width
-	for(var t=0; t<wrapper.children.length; t++) {
-		setStoryElementStyles(wrapper.children[t]);
-	}
+  $tw.utils.applyStyleSheet('storyViewSideways', '.storyViewSideways .tw-story-element {\
+    display: inline-block;\
+    width: 32em;\
+    vertical-align: top;\
+    white-space: normal;\
+    overflow-y: auto;\
+  }\
+  .storyViewSideways .tw-story-frame{\
+    white-space: nowrap;\
+  body.storyViewSideways {\
+    overflow-y: hidden;\
+  }');
+	
+  resizeHeight();
+  window.onresize = function(){
+     if(timeOut != null) clearTimeout(timeOut);
+     timeOut = setTimeout(resizeHeight, 100);
+  };
+}
+
+SidewaysView.prototype.removeView = function() {
+	$tw.utils.removeClass(document.body, "storyViewSideways");
 }
 
 /*

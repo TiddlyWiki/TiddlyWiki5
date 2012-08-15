@@ -20,7 +20,7 @@ function Zoomin(story) {
 	// Save the story
 	this.story = story;
 	var wrapper = this.story.child.domNode;
-	wrapper.className += " storyViewZoomin";
+	$tw.utils.addClass(document.body, "storyViewZoomin");	
 	
 	this.storyNode = this.story.child.domNode;
 	// Set the current tiddler
@@ -34,6 +34,10 @@ function Zoomin(story) {
 		this.storyNode.children[t].style.position = "absolute";
 	}
 }
+Zoomin.prototype.removeView = function() {
+	$tw.utils.removeClass(document.body, "storyViewZoomin");
+}
+
 
 /*
 Find the first descendent node that is a <<view title>> macro
