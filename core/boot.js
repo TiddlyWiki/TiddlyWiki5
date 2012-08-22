@@ -3,7 +3,7 @@ title: $:/core/boot.js
 type: application/javascript
 
 The main boot kernel for TiddlyWiki. This single file creates a barebones TW environment that is just
-sufficient to bootstrap the modules containing the main logic of the applicaiton.
+sufficient to bootstrap the modules containing the main logic of the application.
 
 On the server this file is executed directly to boot TiddlyWiki. In the browser, this file is packed
 into a single HTML file along with other elements:
@@ -32,7 +32,7 @@ In practice, each module is wrapped in a separate script block.
 
 // Set up $tw global for the server
 if(typeof(window) === "undefined" && !global.$tw) {
-	global.$tw = {}; // No ``browser`` member for the server
+	global.$tw = {}; // No `browser` member for the server
 	exports.$tw = $tw;
 }
 
@@ -74,6 +74,8 @@ $tw.config.bootModuleSubDir = $tw.config.bootModuleSubDir || "./modules";
 $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
 $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
+
+$tw.config.jsModuleHeaderRegExpString = "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)"
 
 // File extension mappings
 $tw.config.fileExtensionInfo = {
@@ -463,7 +465,7 @@ Register the built in tiddler deserializer modules
 */
 $tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/js","tiddlerdeserializer",{
 	"application/javascript": function(text,fields) {
-		var headerCommentRegExp = /^\/\*\\\n((?:^[^\n]*\n)+?)(^\\\*\/$\n?)/mg,
+		var headerCommentRegExp = new RegExp($tw.config.jsModuleHeaderRegExpString,"mg"),
 			match = headerCommentRegExp.exec(text);
 		fields.text = text;
 		if(match) {
