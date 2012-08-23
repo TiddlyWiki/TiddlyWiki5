@@ -64,6 +64,18 @@ exports.executeMacro = function() {
 				return link;
 			}
 			break;
+		case "transclude":
+			if(tiddler && this.params.field && (this.params.field in tiddler.fields)) {
+				children = this.wiki.parseTiddler(tiddler.fields[this.params.field]).tree;
+				for(t=0; t<children.length; t++) {
+					childrenClone.push(children[t].clone());
+				}
+				for(t=0; t<childrenClone.length; t++) {
+					childrenClone[t].execute(parents,this.tiddlerTitle);
+				}
+				return $tw.Tree.Element(this.isBlock ? "div" : "span",{},childrenClone);
+			}
+			break;
 		case "wikified":
 			if(tiddler && this.params.field === "text") {
 				if(parents.indexOf(tiddler.fields.title) !== -1) {
