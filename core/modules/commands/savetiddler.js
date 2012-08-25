@@ -35,7 +35,7 @@ Command.prototype.execute = function() {
 		type = this.params[2] || "text/html",
 		options = {},
 		t;
-	for(var t=3; t<this.params.length; t++) {
+	for(t=3; t<this.params.length; t++) {
 		options["with"] = options["with"] || [];
 		options["with"][t-2] = this.params[t];
 	}
