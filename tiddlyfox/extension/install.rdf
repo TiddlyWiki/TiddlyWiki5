@@ -5,16 +5,15 @@
   <Description about="urn:mozilla:install-manifest">
   
     <em:id>tiddlyfox@tiddlywiki.org</em:id>
-    <em:type>2</em:type>
     <em:name>TiddlyFox extension for Firefox</em:name>
     <em:version>1.0</em:version>
     <em:description>A Firefox extension to enable TiddlyWiki to save changes directly to the file system</em:description>
     <em:creator>Jeremy Ruston</em:creator>
-    <em:homepageURL>https://jermolene.github.com/TiddlyWiki5</em:homepageURL>
+    <em:homepageURL>https://five.tiddlywiki.com/tiddlyfox</em:homepageURL>
+    <em:iconURL>chrome://tiddlyfox/content/tiddlyfox_32x32.png</em:iconURL>
     <!--em:optionsURL>chrome://tiddlyfox/content/settings.xul</em:optionsURL>
     <em:aboutURL>chrome://tiddlyfox/content/about.xul</em:aboutURL>
-    <em:iconURL>chrome://tiddlyfox/skin/mainicon.png</em:iconURL>
-    <em:updateURL>http://tiddlywiki.com/tiddlyfox/update.rdf</em:updateURL-->
+    <em:updateURL>http://five.tiddlywiki.com/tiddlyfox/update.rdf</em:updateURL-->
 
     <!-- Firefox -->
     <em:targetApplication>

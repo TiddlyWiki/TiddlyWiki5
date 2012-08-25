@@ -1,7 +1,7 @@
-content	helloworld	content/
-overlay	chrome://browser/content/browser.xul	chrome://helloworld/content/overlay.xul
+content	tiddlyfox	content/
+overlay	chrome://browser/content/browser.xul	chrome://tiddlyfox/content/overlay.xul
 
-locale	helloworld	en-US	locale/en-US/
+locale	tiddlyfox	en-US	locale/en-US/
 
-skin	helloworld	classic/1.0	skin/
-style	chrome://global/content/customizeToolbar.xul	chrome://helloworld/skin/overlay.css
+skin	tiddlyfox	classic/1.0	skin/
+style	chrome://global/content/customizeToolbar.xul	chrome://tiddlyfox/skin/overlay.css
