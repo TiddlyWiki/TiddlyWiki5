@@ -4,5 +4,7 @@ tags: docs command
 Save an individual tiddler as a specified ContentType, defaults to `text/html` 
 
 {{{
---savetiddler <title> <filename> [<type>]
+--savetiddler <title> <filename> [<type>] [<withparam> <withparam>...]
 }}}
+
+The optional `<withparams>` are substituted for `$1`, `$2` etc before parsing.
