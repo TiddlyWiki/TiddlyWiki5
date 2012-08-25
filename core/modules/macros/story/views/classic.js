@@ -14,7 +14,13 @@ A storyview that shows a sequence of tiddlers and navigates by smoothly scrollin
 
 function ClassicScroller(story) {
 	this.story = story;
+	var wrapper = this.story.child.domNode;
+	$tw.utils.addClass(document.body, "storyViewClassic");	
 }
+ClassicScroller.prototype.removeView = function() {
+	$tw.utils.removeClass(document.body, "storyViewClassic");
+}
+
 
 ClassicScroller.prototype.remove = function(storyElementNode) {
 	var targetElement = storyElementNode.domNode;

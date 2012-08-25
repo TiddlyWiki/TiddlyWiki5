@@ -19,6 +19,9 @@ Navigating between tiddlers is accomplished by switching the story nodes between
 function Zoomin(story) {
 	// Save the story
 	this.story = story;
+	var wrapper = this.story.child.domNode;
+	$tw.utils.addClass(document.body, "storyViewZoomin");	
+	
 	this.storyNode = this.story.child.domNode;
 	// Set the current tiddler
 	this.currentTiddler = this.story.child.children[0];
@@ -31,6 +34,10 @@ function Zoomin(story) {
 		this.storyNode.children[t].style.position = "absolute";
 	}
 }
+Zoomin.prototype.removeView = function() {
+	$tw.utils.removeClass(document.body, "storyViewZoomin");
+}
+
 
 /*
 Find the first descendent node that is a <<view title>> macro

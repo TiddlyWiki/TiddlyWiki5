@@ -180,6 +180,9 @@ exports.postRenderInDom = function() {
 	}
 	var StoryView = this.wiki.macros.story.viewers[storyviewName];
 	if(StoryView) {
+  	if (this.storyview) {
+  	  this.storyview.removeView();
+  	}
 		this.storyview = new StoryView(this);
 	}
 	if(!this.storyview) {
