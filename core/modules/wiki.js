@@ -579,7 +579,8 @@ exports.callSaver = function(method /*, args */ ) {
 };
 
 /*
-Save the wiki contents
+Save the wiki contents. Options are:
+	saveEmpty: causes the wiki to be saved without any content
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
 */
@@ -587,7 +588,11 @@ exports.saveWiki = function(options) {
 	options = options || {};
 	var template = options.template || "$:/core/templates/tiddlywiki5.template.html",
 		downloadType = options.downloadType || "text/plain",
-		text = this.renderTiddler(downloadType,template);
+		renderOptions = {};
+	renderOptions["with"] = options.saveEmpty ?
+								[undefined,"[!is[shadow]is[shadow]]"] :
+								[undefined,"[!is[shadow]]"];
+	var text = this.renderTiddler(downloadType,template,renderOptions);
 	this.callSaver("save",text);
 };
 
