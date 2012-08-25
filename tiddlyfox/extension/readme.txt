@@ -1,3 +1,7 @@
+In order to test the extension, edit the file `tiddlyfox@tiddlywiki.org` to contain the path to the TiddlyFox extension folder, and then drop the file in your `[firefox profile folder]\extensions\` folder.
+
+----
+
 This package accompanies the article at MozillaZine Knowledge Base, which can be
 found at <http://kb.mozillazine.org/Getting_started_with_extension_development>
 

@@ -1,1 +1,1 @@
-/Users/nickolay/dev/helloworld
+/path/to/this/folder

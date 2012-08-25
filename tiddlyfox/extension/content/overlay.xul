@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<?xml-stylesheet href="chrome://helloworld/skin/overlay.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://helloworld/locale/overlay.dtd">
-<overlay id="helloworld-overlay"
+<?xml-stylesheet href="chrome://tiddlyfox/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://tiddlyfox/locale/overlay.dtd">
+<overlay id="tiddlyfox-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script src="overlay.js"/>
 
   <menupopup id="menu_ToolsPopup">
-    <menuitem id="helloworld-hello" label="&helloworld;" 
-              oncommand="HelloWorld.onMenuItemCommand(event);"/>
+    <menuitem id="tiddlyfox-hello" label="&tiddlyfox;" 
+              oncommand="TiddlyFox.onMenuItemCommand(event);"/>
   </menupopup>
 </overlay>
