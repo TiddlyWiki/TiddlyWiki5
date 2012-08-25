@@ -75,7 +75,8 @@ exports.executeMacro = function() {
 		children,
 		childrenClone = [],
 		t,
-		parents = this.parents.slice(0);
+		parents = this.parents.slice(0),
+		parseOptions = {};
 	// If there's no render title specified then use the current tiddler title
 	if(typeof renderTitle !== "string") {
 		renderTitle = this.tiddlerTitle;
@@ -88,21 +89,13 @@ exports.executeMacro = function() {
 	if(parents.indexOf(renderTemplate) !== -1) {
 		children = [$tw.Tree.errorNode("Tiddler recursion error in <<tiddler>> macro")];	
 	} else {
+		// Check for substitution parameters
 		if(this.hasParameter("with")) {
-			// Parameterised transclusion
-			var targetTiddler = this.wiki.getTiddler(renderTemplate),
-				text = targetTiddler.fields.text;
-			var withTokens = [this.params["with"]]; // TODO: Allow for more than one with: parameter
-			for(t=0; t<withTokens.length; t++) {
-				var placeholderRegExp = new RegExp("\\$"+(t+1),"mg");
-				text = text.replace(placeholderRegExp,withTokens[t]);
-			}
-			children = this.wiki.parseText(targetTiddler.fields.type,text).tree;
-		} else {
-			// There's no parameterisation, so we can just render the target tiddler directly
-			var parseTree = this.wiki.parseTiddler(renderTemplate);
-			children = parseTree ? parseTree.tree : [];
+			parseOptions["with"] = [undefined,this.params["with"]]; // TODO: Allow for more than one with: parameter
 		}
+		// Render the target tiddler
+		var parseTree = this.wiki.parseTiddler(renderTemplate,parseOptions);
+		children = parseTree ? parseTree.tree : [];
 	}
 	// Update the stack of tiddler titles for recursion detection
 	parents.push(renderTemplate);
