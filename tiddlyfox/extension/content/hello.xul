@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/global.css" type="text/css"?>
+<!DOCTYPE window SYSTEM "chrome://helloworld/locale/hello.dtd">
+
+<window xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+        title="&title.label;">
+
+<hbox align="center">
+  <description flex="1">&separate.label;</description>
+  <button label="&close.label;" oncommand="close();"/>
+</hbox>
+
+</window>

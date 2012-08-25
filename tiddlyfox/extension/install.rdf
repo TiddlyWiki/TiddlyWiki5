@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+  
+    <em:id>helloworld@mozilla.doslash.org</em:id>
+    <em:name>Hello World extension for Firefox</em:name>
+    <em:version>1.0</em:version>
+    <em:description>Demo extension.</em:description>
+    <em:creator>Nickolay Ponomarev</em:creator>
+    <!-- optional items -->
+    <em:contributor>A person who helped you</em:contributor>
+    <em:contributor>Another one</em:contributor>
+    <em:homepageURL>http://kb.mozillazine.org/Getting_started_with_extension_development</em:homepageURL>
+    <!--em:optionsURL>chrome://sampleext/content/settings.xul</em:optionsURL>
+    <em:aboutURL>chrome://sampleext/content/about.xul</em:aboutURL>
+    <em:iconURL>chrome://sampleext/skin/mainicon.png</em:iconURL>
+    <em:updateURL>http://sampleextension.mozdev.org/update.rdf</em:updateURL-->
+
+    <!-- Firefox -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>3.6</em:minVersion>
+        <em:maxVersion>4.0.*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+
+  </Description>
+
+</RDF>
