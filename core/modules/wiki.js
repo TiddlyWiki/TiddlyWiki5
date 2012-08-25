@@ -398,9 +398,11 @@ Parse a block of text of a specified MIME type
 
 Options are:
 	defaultType: Default MIME type to use if the specified one is unknown
+	with: Optional array of strings to be substituted for $1, $2 etc.
 */
 exports.parseText = function(type,text,options) {
 	options = options || {};
+	// Select a parser
 	var parser = this.parsers[type];
 	if(!parser && $tw.config.fileExtensionInfo[type]) {
 		parser = this.parsers[$tw.config.fileExtensionInfo[type].type];
@@ -408,19 +410,37 @@ exports.parseText = function(type,text,options) {
 	if(!parser) {
 		parser = this.parsers[options.defaultType || "text/x-tiddlywiki"];
 	}
-	if(parser) {
-		return parser.parse(type,text);
-	} else {
+	if(!parser) {
 		return null;
 	}
+	// Substitute any `with` tokens
+	if("with" in options) {
+		for(var token in options["with"]) {
+			var placeholderRegExp = new RegExp("\\$"+token,"mg");
+			text = text.replace(placeholderRegExp,options["with"][token]);
+		}
+	}
+	return parser.parse(type,text);
 };
 
-exports.parseTiddler = function(title) {
+/*
+Parse a tiddler according to its MIME type
+
+Options are:
+	defaultType: Default MIME type to use if the specified one is unknown
+	with: Optional array of strings to be substituted for $1, $2 etc.
+*/
+exports.parseTiddler = function(title,options) {
+	options = options || {};
 	var me = this,
 		tiddler = this.getTiddler(title);
-	return tiddler ? this.getCacheForTiddler(title,"parseTree",function() {
-			return me.parseText(tiddler.fields.type,tiddler.fields.text);
-		}) : null;
+	if("with" in options) {
+		return this.parseText(tiddler.fields.type,tiddler.fields.text,options);
+	} else {
+		return tiddler ? this.getCacheForTiddler(title,"parseTree",function() {
+				return me.parseText(tiddler.fields.type,tiddler.fields.text,options);
+			}) : null;
+	}
 };
 
 /*
@@ -431,6 +451,7 @@ Parse text in a specified format and render it into another format
 	options: see wiki.parseText()
 Options are:
 	defaultType: Default MIME type to use if the specified one is unknown
+	with: Optional array of strings to be substituted for $1, $2 etc.
 */
 exports.renderText = function(outputType,textType,text,options) {
 	var renderer = this.parseText(textType,text,options);
@@ -438,8 +459,17 @@ exports.renderText = function(outputType,textType,text,options) {
 	return renderer.render(outputType);
 };
 
-exports.renderTiddler = function(outputType,title) {
-	var renderer = this.parseTiddler(title);
+/*
+Parse text from a tiddler and render it into another format
+	outputType: content type for the output
+	title: title of the tiddler to be rendered
+	options: see wiki.parseText()
+Options are:
+	defaultType: Default MIME type to use if the specified one is unknown
+	with: Optional array of strings to be substituted for $1, $2 etc.
+*/
+exports.renderTiddler = function(outputType,title,options) {
+	var renderer = this.parseTiddler(title,options);
 	renderer.execute([],title);
 	return renderer.render(outputType);
 };
