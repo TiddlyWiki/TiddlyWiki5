@@ -75,7 +75,7 @@ $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
 $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
 
-$tw.config.jsModuleHeaderRegExpString = "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)"
+$tw.config.jsModuleHeaderRegExpString = "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)";
 
 // File extension mappings
 $tw.config.fileExtensionInfo = {
