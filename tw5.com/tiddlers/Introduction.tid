@@ -4,6 +4,7 @@ tags: introduction
 Here are a few features of TiddlyWiki that you can explore:
 
 * Try editing some tiddlers here on five.tiddlywiki.com to try out the new WikiText. Your changes will not be visible to other users
+* Download an empty copy of TiddlyWiki5 from http://five.tiddlywiki.com/empty.html
 * Invoke a demonstration wizard: <<button modal param:[[SampleWizard]] class:"btn btn-inverse"><demo>>
 * Use TiddlySpot to host an instance of TiddlyWiki5
 * Save this wiki as a static HTML file: <<button save-wiki param:"$:/core/templates/static.template.html" class:"btn"><Save Static>>
