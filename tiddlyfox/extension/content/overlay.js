@@ -22,8 +22,9 @@ var TiddlyFox = {
 			win = doc.defaultView;
 		// If it is a TiddlyWiki
 		if(TiddlyFox.isTiddlyWiki(doc,win)) {
-			alert("TiddlyFox: Enabling TiddlyWiki file saving");
-			TiddlyFox.injectPage(doc);
+			if(confirm("TiddlyFox: Enabling TiddlyWiki file saving capability")) {
+				TiddlyFox.injectPage(doc);
+			}
 		}
 	},
 
