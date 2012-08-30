@@ -17,7 +17,6 @@ var TiddlyFoxSaver = function(wiki) {
 
 TiddlyFoxSaver.prototype.save = function(text) {
 	var messageBox = document.getElementById("tiddlyfox-message-box");
-console.log("messageBox",messageBox);
 	if(messageBox) {
 		// Create the message element and put it in the message box
 		var message = document.createElement("div");
