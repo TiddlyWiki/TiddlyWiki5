@@ -54,8 +54,13 @@ if(!$tw.browser) {
 	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
 	// Check node version number
 	var targetVersion = $tw.packageInfo.engine.node.substr(2).split("."),
-		currVersion = process.version.substr(1).split(".");
-	if(parseInt(targetVersion[0],10) > parseInt(currVersion[0],10) || parseInt(targetVersion[1],10) > parseInt(currVersion[1],10) || parseInt(targetVersion[2],10) > parseInt(currVersion[2],10)) {
+		currVersion = process.version.substr(1).split("."),
+		diff = [parseInt(targetVersion[0],10) - parseInt(currVersion[0],10),
+				parseInt(targetVersion[1],10) - parseInt(currVersion[1],10),
+				parseInt(targetVersion[2],10) - parseInt(currVersion[2],10)];
+	if((diff[0] > 0) ||
+		(diff[0] === 0 && diff[1] > 0) ||
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0)) {
 		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
 	}
 }
