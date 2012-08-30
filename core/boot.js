@@ -742,7 +742,7 @@ $tw.wiki.registerModuleTiddlers();
 // Run any startup modules
 var mainModules = $tw.modules.types.startup;
 for(var m=0; m<mainModules.length; m++) {
-	mainModules[m].startup.call($tw);
+	mainModules[m].startup();
 }
 
 })();
