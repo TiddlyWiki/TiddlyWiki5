@@ -432,7 +432,7 @@ $tw.Wiki.prototype.getTiddler = function(title) {
 };
 
 /*
-Hashmap of field modules by serializer name
+Hashmap of serializer modules by serializer name
 */
 $tw.Wiki.tiddlerDeserializerModules = {};
 
