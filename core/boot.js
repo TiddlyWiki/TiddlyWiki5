@@ -168,7 +168,7 @@ $tw.utils.parseDate = function(value) {
 	}
 };
 
-// Parse a string array from a bracketted list
+// Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
 $tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
 		var memberRegExp = /(?:\[\[([^\]]+)\]\])|([^\s]+)/mg,
