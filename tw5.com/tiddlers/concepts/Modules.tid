@@ -1,0 +1,4 @@
+title: Modules
+tags: docs concepts
+
+A //module// in TiddlyWiki5 is a tiddler containing executable JavaScript, of the type `application/javascript` and with the field `module-type` set to the ModuleType of the module.

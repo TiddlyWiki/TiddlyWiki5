@@ -29,7 +29,8 @@ The machinery tying those concepts together includes:
 * TiddlerTemplates
 * ContentType
 * ShadowTiddlers
-* TiddlerModules
+* [[Plugins]]
+* [[Modules]] and [[ModuleType]]
 
 ! Wiki Text Rules
 
