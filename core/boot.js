@@ -74,7 +74,6 @@ $tw.modules.types = $tw.modules.types || {}; // hashmap by module type of array 
 $tw.config = $tw.config || {};
 
 // Constants
-$tw.config.root = $tw.config.root || "$:"; // Root for module titles (eg, "$:/core/boot.js")
 $tw.config.bootModuleSubDir = $tw.config.bootModuleSubDir || "./modules";
 $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
@@ -343,17 +342,17 @@ $tw.Tiddler.fieldModules = {};
 /*
 Register and install the built in tiddler field modules
 */
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerfields/modified","tiddlerfield",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerfields/modified","tiddlerfield",{
 	name: "modified",
 	parse: $tw.utils.parseDate,
 	stringify: $tw.utils.stringifyDate
 });
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerfields/created","tiddlerfield",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerfields/created","tiddlerfield",{
 	name: "created",
 	parse: $tw.utils.parseDate,
 	stringify: $tw.utils.stringifyDate
 });
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerfields/tags","tiddlerfield",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerfields/tags","tiddlerfield",{
 	name: "tags",
 	parse: $tw.utils.parseStringArray,
 	stringify: function(value) {
@@ -468,7 +467,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 /*
 Register the built in tiddler deserializer modules
 */
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/js","tiddlerdeserializer",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerdeserializer/js","tiddlerdeserializer",{
 	"application/javascript": function(text,fields) {
 		var headerCommentRegExp = new RegExp($tw.config.jsModuleHeaderRegExpString,"mg"),
 			match = headerCommentRegExp.exec(text);
@@ -479,7 +478,7 @@ $tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/j
 		return [fields];
 	}
 });
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
 		var split = text.split(/\r?\n\r?\n/mg);
 		if(split.length > 1) {
@@ -491,14 +490,14 @@ $tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/t
 		return [fields];
 	}
 });
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/txt","tiddlerdeserializer",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerdeserializer/txt","tiddlerdeserializer",{
 	"text/plain": function(text,fields) {
 		fields.text = text;
 		fields.type = "text/plain";
 		return [fields];
 	}
 });
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/html","tiddlerdeserializer",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerdeserializer/html","tiddlerdeserializer",{
 	"text/html": function(text,fields) {
 		fields.text = text;
 		fields.type = "text/html";
@@ -545,7 +544,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 /*
 Register a deserializer that can extract tiddlers from the DOM
 */
-$tw.modules.registerTypedModule($tw.config.root + "/kernel/tiddlerdeserializer/dom","tiddlerdeserializer",{
+$tw.modules.registerTypedModule("$:/kernel/tiddlerdeserializer/dom","tiddlerdeserializer",{
 	"(DOM)": function(node) {
 		var extractTextTiddler = function(node) {
 				var e = node.firstChild;
