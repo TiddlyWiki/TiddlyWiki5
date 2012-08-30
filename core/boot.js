@@ -621,7 +621,7 @@ $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementByI
 if(!$tw.browser) {
 
 /*
-Load the tiddlers contained in a particular file (and optionally the accompanying .meta file)
+Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file)
 */
 $tw.loadTiddlersFromFile = function(file,fields,isShadow) {
 	var ext = path.extname(file),
