@@ -33,7 +33,7 @@ In practice, each module is wrapped in a separate script block.
 // Set up $tw global for the server
 if(typeof(window) === "undefined" && !global.$tw) {
 	global.$tw = {}; // No `browser` member for the server
-	exports.$tw = $tw;
+	exports.$tw = $tw; // Export $tw for when boot.js is required directly in node.js
 }
 
 // Boot information
@@ -55,7 +55,7 @@ if(!$tw.browser) {
 	// Check node version number
 	var targetVersion = $tw.packageInfo.engine.node.substr(2).split("."),
 		currVersion = process.version.substr(1).split(".");
-	if(targetVersion[0] > currVersion[0] || targetVersion[1] > currVersion[1] || targetVersion[2] > currVersion[2]) {
+	if(parseInt(targetVersion[0],10) > parseInt(currVersion[0],10) || parseInt(targetVersion[1],10) > parseInt(currVersion[1],10) || parseInt(targetVersion[2],10) > parseInt(currVersion[2],10)) {
 		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
 	}
 }
