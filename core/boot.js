@@ -244,37 +244,6 @@ $tw.modules.registerModuleExports = function(name,moduleType,moduleExports) {
 };
 
 /*
-Register all the module tiddlers that have a module type
-*/
-$tw.modules.registerModuleTiddlers = function() {
-	var title, tiddler;
-	// Execute and register any modules from plugins
-	for(title in $tw.wiki.pluginTiddlers) {
-		tiddler = $tw.wiki.getTiddler(title);
-		if(!(title in $tw.wiki.tiddlers)) {
-			if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
-				// Execute the module
-				var source = [
-					"(function(module,exports,require) {",
-					tiddler.fields.text,
-					"})"
-				];
-				$tw.modules.define(tiddler.fields.text,tiddler.fields["module-type"],window.eval(source.join("")));
-				// Register the module
-				$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
-			}
-		}
-	}
-	// Register any modules in ordinary tiddlers
-	for(title in $tw.wiki.tiddlers) {
-		tiddler = $tw.wiki.getTiddler(title);
-		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
-			$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
-		}
-	}
-};
-
-/*
 Get all the modules of a particular type in a hashmap by their `name` field
 */
 $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
@@ -416,6 +385,37 @@ $tw.Wiki.prototype.installPlugins = function() {
 					this.pluginTiddlers[constituentTiddler.title] = new $tw.Tiddler(constituentTiddler);
 				}
 			}
+		}
+	}
+};
+
+/*
+Register all the module tiddlers that have a module type
+*/
+$tw.Wiki.prototype.registerModuleTiddlers = function() {
+	var title, tiddler;
+	// Execute and register any modules from plugins
+	for(title in $tw.wiki.pluginTiddlers) {
+		tiddler = $tw.wiki.getTiddler(title);
+		if(!(title in $tw.wiki.tiddlers)) {
+			if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
+				// Execute the module
+				var source = [
+					"(function(module,exports,require) {",
+					tiddler.fields.text,
+					"})"
+				];
+				$tw.modules.define(tiddler.fields.text,tiddler.fields["module-type"],window.eval(source.join("")));
+				// Register the module
+				$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
+			}
+		}
+	}
+	// Register any modules in ordinary tiddlers
+	for(title in $tw.wiki.tiddlers) {
+		tiddler = $tw.wiki.getTiddler(title);
+		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
+			$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
 		}
 	}
 };
@@ -737,7 +737,7 @@ $tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddler
 $tw.wiki.installPlugins();
 
 // Register typed modules from the tiddlers we've just loaded
-$tw.modules.registerModuleTiddlers();
+$tw.wiki.registerModuleTiddlers();
 
 // Run any startup modules
 var mainModules = $tw.modules.types.startup;
