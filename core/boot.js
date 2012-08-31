@@ -661,9 +661,9 @@ $tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow)
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
-				for(var p=0; p<pluginInfo.tiddlers.length; p++) {
-					var tidInfo = pluginInfo.tiddlers[p],
+				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
+				for(var p=0; p<filesInfo.tiddlers.length; p++) {
+					var tidInfo = filesInfo.tiddlers[p],
 						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						text = fs.readFileSync(path.resolve(filepath,tidInfo.file)).toString(typeInfo ? typeInfo.encoding : "utf8");
 					$tw.wiki.addTiddler(new $tw.Tiddler({text: text},tidInfo.fields),isShadow);
