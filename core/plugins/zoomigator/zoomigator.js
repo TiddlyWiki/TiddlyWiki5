@@ -1,5 +1,5 @@
 /*\
-title: $:/core/plugins/zoomigator/zoomigator.js
+title: $:/plugins/tiddlywiki/zoomigator/zoomigator.js
 type: application/javascript
 module-type: macro
 
