@@ -558,9 +558,7 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdese
 							text: $tw.utils.htmlDecode(e.innerHTML)
 						};
 					for(var i=attrs.length-1; i >= 0; i--) {
-						if(attrs[i].specified) {
-							tiddler[attrs[i].name] = attrs[i].value;
-						}
+						tiddler[attrs[i].name] = attrs[i].value;
 					}
 					return tiddler;
 				} else {
@@ -579,7 +577,7 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdese
 						attributes = node.attributes;
 					for(var a=0; a<attributes.length; a++) {
 						if(attributes[a].nodeName.substr(0,13) === "data-tiddler-") {
-							fields[attributes[a].nodeName.substr(13)] = attributes[a].nodeValue;
+							fields[attributes[a].nodeName.substr(13)] = attributes[a].value;
 						}
 					}
 					return fields;
