@@ -632,55 +632,68 @@ if(!$tw.browser) {
 /*
 Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file)
 */
-$tw.loadTiddlersFromFile = function(file,fields,isShadow) {
-	var ext = path.extname(file),
+$tw.extractTiddlersFromFile = function(filepath,fields) {
+	var ext = path.extname(filepath),
 		extensionInfo = $tw.config.fileExtensionInfo[ext],
 		typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
-		data = fs.readFileSync(file).toString(typeInfo ? typeInfo.encoding : "utf8"),
+		data = fs.readFileSync(filepath).toString(typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
-		metafile = file + ".meta";
+		metafile = filepath + ".meta";
 	if(ext !== ".json" && tiddlers.length === 1 && fs.existsSync(metafile)) {
 		var metadata = fs.readFileSync(metafile).toString("utf8");
 		if(metadata) {
 			tiddlers = [$tw.utils.parseFields(metadata,tiddlers[0])];
 		}
 	}
-	$tw.wiki.addTiddlers(tiddlers,isShadow);
+	return tiddlers;
 };
 
 /*
 Load all the tiddlers from a directory
 */
-$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow) {
+$tw.extractTiddlersFromFolder = function(filepath,basetitle,excludeRegExp) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
+	var tiddlers = [];
 	if(fs.existsSync(filepath)) {
 		var stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			var files = fs.readdirSync(filepath);
+			// Look for a tiddlywiki.plugin file
+			if(files.indexOf("tiddlywiki.plugin") !== -1) {
+				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
+				tiddlers.push(new $tw.Tiddler({title: pluginInfo.title, type: "application/json", plugin: "yes", text: JSON.stringify(pluginInfo)}));
 			// Look for a tiddlywiki.files file
-			if(files.indexOf("tiddlywiki.files") !== -1) {
+			} else if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
 				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
 				for(var p=0; p<filesInfo.tiddlers.length; p++) {
 					var tidInfo = filesInfo.tiddlers[p],
 						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						text = fs.readFileSync(path.resolve(filepath,tidInfo.file)).toString(typeInfo ? typeInfo.encoding : "utf8");
-					$tw.wiki.addTiddler(new $tw.Tiddler({text: text},tidInfo.fields),isShadow);
+					tiddlers.push(new $tw.Tiddler({text: text},tidInfo.fields));
 				}
 			} else {
 				// If not, read all the files in the directory
 				for(var f=0; f<files.length; f++) {
 					var file = files[f];
 					if(!excludeRegExp.test(file)) {
-						$tw.loadTiddlersFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp,isShadow);
+						tiddlers.push.apply(tiddlers,$tw.extractTiddlersFromFolder(filepath + "/" + file,basetitle + "/" + file,excludeRegExp));
 					}
 				}
 			}
 		} else if(stat.isFile()) {
-			$tw.loadTiddlersFromFile(filepath,{title: basetitle},isShadow);
+			tiddlers.push.apply(tiddlers,$tw.extractTiddlersFromFile(filepath,{title: basetitle}));
 		}
 	}
+	return tiddlers;
+};
+
+/*
+Load all the tiddlers from a directory
+*/
+$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow) {
+	$tw.wiki.addTiddlers($tw.extractTiddlersFromFolder(filepath,basetitle,excludeRegExp),isShadow);
 };
 
 /*

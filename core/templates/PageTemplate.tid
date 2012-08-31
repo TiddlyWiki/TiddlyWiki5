@@ -11,7 +11,9 @@ title: $:/templates/PageTemplate
 }}}
 
 <!--  Zooming navigator -->
+<!--
 <<zoomigator>>
+-->
 
 <!-- The top navigation bar -->
 <div class="navbar navbar-fixed-top">
