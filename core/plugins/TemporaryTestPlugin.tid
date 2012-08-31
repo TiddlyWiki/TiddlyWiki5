@@ -3,10 +3,15 @@ type: application/json
 plugin: yes
 
 {
-	"tiddlers": [
-		{"title": "Test1", "text": "Some text"},
-		{"title": "Test2", "text": "Some more text"},
-		{"title": "Test3", "text": "console.log(require('Test4').string);", "type": "application/javascript", "module-type": "custom"},
-		{"title": "Test4", "text": "exports.string = 'Plugin I am in You!';", "type": "application/javascript", "module-type": "custom"}
-	]
+	"title": "$:/plugins/tiddlywiki/test",
+	"description": "An exemplary plugin for demonstration purposes",
+	"author": "JeremyRuston",
+	"version": "0.0.0-alpha0",
+	"coreVersion": ">=5.0.0",
+	"tiddlers": {
+		"Test1": {"text": "Some text"},
+		"Test2": {"text": "Some more text"},
+		"Test3": {"text": "console.log(require('$:/plugins/tiddlywiki/test/Test4').string);", "type": "application/javascript", "module-type": "custom"},
+		"Test4": {"text": "exports.string = 'Plugin I am in You!';", "type": "application/javascript", "module-type": "custom"}
+	}
 }

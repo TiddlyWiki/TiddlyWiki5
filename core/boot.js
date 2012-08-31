@@ -377,12 +377,13 @@ $tw.Wiki.prototype.installPlugins = function() {
 			// Save the plugin information
 			var pluginInfo = this.plugins[title] = JSON.parse(tiddler.fields.text);
 			// Extract the constituent tiddlers
-			for(var t=0; t<pluginInfo.tiddlers.length; t++) {
-				var constituentTiddler = pluginInfo.tiddlers[t];
+			for(var t in pluginInfo.tiddlers) {
+				var constituentTiddler = pluginInfo.tiddlers[t],
+					constituentTitle = pluginInfo.title + "/" + t;
 				// Don't overwrite tiddlers that already exist
-				if(!(constituentTiddler.title in this.pluginTiddlers)) {
+				if(!(constituentTitle in this.pluginTiddlers)) {
 					// Save the tiddler object
-					this.pluginTiddlers[constituentTiddler.title] = new $tw.Tiddler(constituentTiddler);
+					this.pluginTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
 				}
 			}
 		}

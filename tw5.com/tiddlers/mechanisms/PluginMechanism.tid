@@ -17,14 +17,12 @@ The JSON structure for plugin tiddlers is as follows:
 
 {{{
 {
-	"metadata": {
-		"title": "$:/plugins/publisher/name",
-		"description": "An exemplary plugin for demonstration purposes",
-		"author": "JeremyRuston",
-		"version": "1.2.3-alpha3",
-		"coreVersion": ">=5.0.0",
-		"source": "http://tiddlywiki.com/MyPlugin"
-	},
+	"title": "$:/plugins/publisher/name",
+	"description": "An exemplary plugin for demonstration purposes",
+	"author": "JeremyRuston",
+	"version": "1.2.3-alpha3",
+	"coreVersion": ">=5.0.0",
+	"source": "http://tiddlywiki.com/MyPlugin",
 	"tiddlers": {
 		"title1": {"type": "image/png", "text": "<base64>"},
 		"title2": {"text": "Text"}
