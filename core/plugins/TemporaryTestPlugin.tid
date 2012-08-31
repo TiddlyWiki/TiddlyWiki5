@@ -1,9 +1,12 @@
 title: TemporaryTestPlugin
-type: application/x-tiddlywiki-plugin
+type: application/json
+plugin: yes
 
 {
 	"tiddlers": [
 		{"title": "Test1", "text": "Some text"},
-		{"title": "Test2", "type": "Some more text"}
+		{"title": "Test2", "text": "Some more text"},
+		{"title": "Test3", "text": "console.log(require('Test4').string);", "type": "application/javascript", "module-type": "custom"},
+		{"title": "Test4", "text": "exports.string = 'Plugin I am in You!';", "type": "application/javascript", "module-type": "custom"}
 	]
 }

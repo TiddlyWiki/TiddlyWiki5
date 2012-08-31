@@ -365,7 +365,7 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers,isShadow) {
 };
 
 /*
-Install tiddlers contained in plugin tiddlers
+Extract tiddlers stored in plugins so that we can easily access them in getTiddler()
 */
 $tw.Wiki.prototype.installPlugins = function() {
 	this.plugins = {}; // Hashmap of plugin information by title
@@ -373,7 +373,7 @@ $tw.Wiki.prototype.installPlugins = function() {
 	// Collect up all the plugin tiddlers
 	for(var title in this.tiddlers) {
 		var tiddler = this.tiddlers[title];
-		if(tiddler.fields.type === "application/x-tiddlywiki-plugin") {
+		if(tiddler.fields.type === "application/json" && "plugin" in tiddler.fields) {
 			// Save the plugin information
 			var pluginInfo = this.plugins[title] = JSON.parse(tiddler.fields.text);
 			// Extract the constituent tiddlers
@@ -394,24 +394,34 @@ Register all the module tiddlers that have a module type
 */
 $tw.Wiki.prototype.registerModuleTiddlers = function() {
 	var title, tiddler;
-	// Execute and register any modules from plugins
+	// If in the browser, define any modules from plugins
+	if($tw.browser) {
+		for(title in $tw.wiki.pluginTiddlers) {
+			tiddler = $tw.wiki.getTiddler(title);
+			if(!(title in $tw.wiki.tiddlers)) {
+				if(tiddler.fields.type === "application/javascript" && "module-type" in tiddler.fields) {
+					// Define the module
+					var source = [
+						"(function(module,exports,require) {",
+						tiddler.fields.text,
+						"})"
+					];
+					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],window.eval(source.join("")));
+				}
+			}
+		}
+	}
+	// Register and execute any modules from plugins
 	for(title in $tw.wiki.pluginTiddlers) {
 		tiddler = $tw.wiki.getTiddler(title);
 		if(!(title in $tw.wiki.tiddlers)) {
-			if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
-				// Execute the module
-				var source = [
-					"(function(module,exports,require) {",
-					tiddler.fields.text,
-					"})"
-				];
-				$tw.modules.define(tiddler.fields.text,tiddler.fields["module-type"],window.eval(source.join("")));
-				// Register the module
+			if(tiddler.fields.type === "application/javascript" && "module-type" in tiddler.fields) {
+				// Execute and register the module
 				$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
 			}
 		}
 	}
-	// Register any modules in ordinary tiddlers
+	// Register and execute any modules in ordinary tiddlers
 	for(title in $tw.wiki.tiddlers) {
 		tiddler = $tw.wiki.getTiddler(title);
 		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
