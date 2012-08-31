@@ -658,10 +658,10 @@ $tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow)
 		var stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			var files = fs.readdirSync(filepath);
-			// Look for a tiddlywiki.plugin file
-			if(files.indexOf("tiddlywiki.plugin") !== -1) {
+			// Look for a tiddlywiki.files file
+			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
+				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
 				for(var p=0; p<pluginInfo.tiddlers.length; p++) {
 					var tidInfo = pluginInfo.tiddlers[p],
 						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
