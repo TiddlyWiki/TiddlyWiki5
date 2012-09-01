@@ -64,14 +64,12 @@ var TiddlyFox = {
 	saveFile: function(filePath,content) {
 		// Attempt to convert the filepath to a proper UTF-8 string
 		try {
-			netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
 			var converter = Components.classes["@mozilla.org/intl/utf8converterservice;1"].getService(Components.interfaces.nsIUTF8ConverterService);
 			filePath = converter.convertURISpecToUTF8(filePath,"UTF-8");
 		} catch(ex) {
 		}
 		// Save the file
 		try {
-			netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
 			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 			file.initWithPath(filePath);
 			if(!file.exists())
