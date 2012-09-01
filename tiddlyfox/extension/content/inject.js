@@ -13,8 +13,8 @@ The JavaScript in this file is injected into each TiddlyWiki page that loads
 		if(messageBox) {
 			// Create the message element and put it in the message box
 			var message = document.createElement("div");
-			message.setAttribute("tiddlyfox-path",path);
-			message.setAttribute("tiddlyfox-content",content);
+			message.setAttribute("data-tiddlyfox-path",path);
+			message.setAttribute("data-tiddlyfox-content",content);
 			messageBox.appendChild(message);
 			// Create and dispatch the custom event to the extension
 			var event = document.createEvent("Events");
@@ -31,7 +31,7 @@ The JavaScript in this file is injected into each TiddlyWiki page that loads
 		try {
 			// Just the read the file synchronously
 			var xhReq = new XMLHttpRequest();
-			xhReq.open("GET", "file://" + path, false);
+			xhReq.open("GET", "file://" + escape(path), false);
 			xhReq.send(null);
 			return xhReq.responseText;
 		} catch(ex) {
@@ -39,7 +39,12 @@ The JavaScript in this file is injected into each TiddlyWiki page that loads
 		}
 	};
 
+	var injectedConvertUriToUTF8 = function(path) {
+		return path;
+	}
+
 	window.mozillaSaveFile = injectedSaveFile;
 	window.mozillaLoadFile = injectedLoadFile;
+	window.convertUriToUTF8 = injectedConvertUriToUTF8;
 
 })();

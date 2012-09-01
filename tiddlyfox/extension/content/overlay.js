@@ -62,6 +62,14 @@ var TiddlyFox = {
 	},
 
 	saveFile: function(filePath,content) {
+		// Attempt to convert the filepath to a proper UTF-8 string
+		try {
+			netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+			var converter = Components.classes["@mozilla.org/intl/utf8converterservice;1"].getService(Components.interfaces.nsIUTF8ConverterService);
+			filePath = converter.convertURISpecToUTF8(filePath,"UTF-8");
+		} catch(ex) {
+		}
+		// Save the file
 		try {
 			netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
 			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
@@ -82,8 +90,8 @@ var TiddlyFox = {
 	onSaveFile: function(event) {
 		// Get the details from the message
 		var message = event.target,
-			path = message.getAttribute("tiddlyfox-path"),
-			content = message.getAttribute("tiddlyfox-content");
+			path = message.getAttribute("data-tiddlyfox-path"),
+			content = message.getAttribute("data-tiddlyfox-content");
 		// Save the file
 		TiddlyFox.saveFile(path,content);
 		// Remove the message element from the message box
