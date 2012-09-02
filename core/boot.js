@@ -36,6 +36,44 @@ if(typeof(window) === "undefined" && !global.$tw) {
 	exports.$tw = $tw; // Export $tw for when boot.js is required directly in node.js
 }
 
+// Crypto helper object
+
+// Setup crypto
+$tw.crypto = new function() {
+	var password = null,
+		callSjcl = function(method,inputText) {
+			var outputText;
+			if(!password) {
+				getPassword();
+			}
+			try {
+				outputText = method(password,inputText);
+			} catch(ex) {
+				console.log("Crypto error:" + ex)
+				outputText = null;	
+			}
+			return outputText;
+		},
+		getPassword = function() {
+			if($tw.browser) {
+				password = prompt("Enter password to decrypt TiddlyWiki");
+			} else {
+				password = "password";
+			}
+		};
+
+	this.encrypt = function(text) {
+		return callSjcl($tw.crypto.sjcl.encrypt,text);
+	};
+	this.decrypt = function(text) {
+		return callSjcl($tw.crypto.sjcl.decrypt,text);
+	};
+};
+
+$tw.crypto.sjcl = $tw.browser ? sjcl : require("./sjcl.js");
+
+console.log("sjcl is " + $tw.crypto.sjcl);
+
 // Boot information
 $tw.boot = {};
 
@@ -557,7 +595,7 @@ Register a deserializer that can extract tiddlers from the DOM
 */
 $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 	"(DOM)": function(node) {
-		var extractTextTiddler = function(node) {
+		var extractTextTiddlers = function(node) {
 				var e = node.firstChild;
 				while(e && e.nodeName.toLowerCase() !== "pre") {
 					e = e.nextSibling;
@@ -571,12 +609,12 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdese
 					for(var i=attrs.length-1; i >= 0; i--) {
 						tiddler[attrs[i].name] = attrs[i].value;
 					}
-					return tiddler;
+					return [tiddler];
 				} else {
 					return null;
 				}
 			},
-			extractModuleTiddler = function(node) {
+			extractModuleTiddlers = function(node) {
 				if(node.hasAttribute && node.hasAttribute("data-tiddler-title")) {
 					var text = node.innerHTML,
 						s = text.indexOf("{"),
@@ -591,20 +629,39 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdese
 							fields[attributes[a].nodeName.substr(13)] = attributes[a].value;
 						}
 					}
-					return fields;
+					return [fields];
 				} else {
 					return null;
 				}
 			},
-			t,tiddlers = [];
+			extractEncryptedTiddlers = function(node) {
+				if(node.hasAttribute && node.hasAttribute("data-tw-encrypted-tiddlers")) {
+					var e = node.firstChild;
+					while(e && e.nodeName.toLowerCase() !== "pre") {
+						e = e.nextSibling;
+					}
+					var jsonTiddlers = JSON.parse($tw.crypto.decrypt($tw.utils.htmlDecode(e.innerHTML))),
+						title,
+						result = [];
+					for(title in jsonTiddlers) {
+						result.push(jsonTiddlers[title]);
+					}
+					return result;
+				} else {
+					return null;
+				}
+			},
+			t,result = [];
 		for(t = 0; t < node.childNodes.length; t++) {
-				var tiddler = extractTextTiddler(node.childNodes[t]);
-				tiddler = tiddler || extractModuleTiddler(node.childNodes[t]);
-				if(tiddler) {
-					tiddlers.push(tiddler);
+				var tiddlers = extractTextTiddlers(node.childNodes[t]),
+					childNode = node.childNodes[t];
+				tiddlers = tiddlers || extractModuleTiddlers(childNode);
+				tiddlers = tiddlers || extractEncryptedTiddlers(childNode);
+				if(tiddlers) {
+					result.push.apply(result,tiddlers);
 				}
 		}
-		return tiddlers;
+		return result;
 	}
 });
 // Install the tiddler deserializer modules
