@@ -193,15 +193,12 @@ exports.addTiddler = function(tiddler,isShadow) {
 };
 
 /*
-Serialise a tiddler to a specified text serialization format
+Serialise tiddlers to a specified text serialization format
 */
-exports.serializeTiddler = function(tiddler,type) {
+exports.serializeTiddlers = function(tiddlers,type) {
 	var serializer = $tw.Wiki.tiddlerSerializerModules[type];
-	if(typeof tiddler === "string") {
-		tiddler = this.getTiddler(tiddler);
-	}
-	if(serializer && tiddler) {
-		return serializer.call(this,tiddler);
+	if(serializer) {
+		return serializer.call(this,tiddlers);
 	} else {
 		return null;
 	}

@@ -26,6 +26,7 @@ exports.executeMacro = function() {
 		t;
 	if(this.hasParameter("filter")) {
 		var titles = this.wiki.filterTiddlers(this.params.filter),
+			tiddlers = [],
 			result = [];
 		if(this.hasParameter("removePrefix")) {
 			for(t=0; t<titles.length; t++) {
@@ -33,15 +34,15 @@ exports.executeMacro = function() {
 					title = titles[t];
 				if(title.indexOf(this.params.removePrefix) === 0) {
 					title = title.substr(this.params.removePrefix.length);
-					var modifiedTiddler = new $tw.Tiddler(originalTiddler,{title: title});
-					result.push(this.wiki.serializeTiddler(modifiedTiddler,as));
+					tiddlers.push(new $tw.Tiddler(originalTiddler,{title: title}));
 				}
 			}
 		} else {
 			for(t=0; t<titles.length; t++) {
-				result.push(this.wiki.serializeTiddler(titles[t],as));
+				tiddlers.push(this.wiki.getTiddler(titles[t]));
 			}
 		}
+		result.push(this.wiki.serializeTiddlers(tiddlers,as));
 		return $tw.Tree.Element("pre",{},[
 				$tw.Tree.Text(result.join("\n"))
 			]);
