@@ -35,6 +35,9 @@ title: $:/templates/PageTemplate
 
 <!-- Save changes is only visible in edit mode -->
 <<reveal state:[[$:/EditMode]] type:match text:yes><
+<<button save-wiki param:"$:/core/templates/tiddlywiki5.encrypted.template.html" class:"btn pull-right"><Save Changes (encrypted)>>
+>>
+<<reveal state:[[$:/EditMode]] type:match text:yes><
 <<button save-wiki class:"btn pull-right"><Save Changes>>
 >>
 }}}
