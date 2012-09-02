@@ -57,11 +57,12 @@ $tw.crypto = new function() {
 		getPassword = function() {
 			if($tw.browser) {
 				password = prompt("Enter password to decrypt TiddlyWiki");
-			} else {
-				password = "password";
 			}
 		};
 
+	this.setPassword = function(newPassword) {
+		password = newPassword;
+	}
 	this.encrypt = function(text) {
 		return callSjcl($tw.crypto.sjcl.encrypt,text);
 	};
@@ -71,8 +72,6 @@ $tw.crypto = new function() {
 };
 
 $tw.crypto.sjcl = $tw.browser ? sjcl : require("./sjcl.js");
-
-console.log("sjcl is " + $tw.crypto.sjcl);
 
 // Boot information
 $tw.boot = {};

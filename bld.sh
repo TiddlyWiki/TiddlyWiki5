@@ -8,6 +8,7 @@ echo "five.tiddlywiki.com" > ../../jermolene.github.com/CNAME
 
 node ../core/boot.js \
 	--verbose \
+	--password password \
 	--savetiddler ReadMe ../readme.md text/html \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../jermolene.github.com/index.html text/plain [!is[shadow]]\
 	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../jermolene.github.com/empty.html text/plain [!is[shadow]is[shadow]]\
