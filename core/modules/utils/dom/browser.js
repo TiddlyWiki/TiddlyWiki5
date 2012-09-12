@@ -28,6 +28,15 @@ exports.getBrowserInfo = function(info) {
 				"Moz": "transitionend",
 				"webkit": "webkitTransitionEnd"
 			}[info.prefix];
+	info.requestFullScreen = document.body.webkitRequestFullScreen !== undefined ? "webkitRequestFullScreen" :
+							document.body.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
+							document.body.requestFullScreen !== undefined ? "requestFullScreen" : "";
+	info.cancelFullScreen = document.webkitCancelFullScreen !== undefined ? "webkitCancelFullScreen" :
+							document.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
+							document.cancelFullScreen !== undefined ? "cancelFullScreen" : "";
+	info.isFullScreen = document.webkitIsFullScreen !== undefined ? "webkitIsFullScreen" :
+							document.mozFullScreen !== undefined ? "mozFullScreen" :
+							document.fullScreen !== undefined ? "fullScreen" : "";
 };
 
 })();
