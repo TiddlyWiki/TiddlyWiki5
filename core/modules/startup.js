@@ -39,6 +39,11 @@ exports.startup = function() {
 	$tw.Commander.initCommands();
 	// Host-specific startup
 	if($tw.browser) {
+		// Call browser startup modules
+		var modules = $tw.modules.types["browser-startup"];
+		for(var m=0; m<modules.length; m++) {
+			modules[m].startup();
+		}
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			wiki: $tw.wiki,
