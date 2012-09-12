@@ -24,6 +24,9 @@ title: $:/templates/PageTemplate
 * [[Docs]]
 *{{divider-vertical}}
 
+<!-- Full screen button -->
+<<button full-screen class:"btn btn-warning"><Full screen>>
+
 <!-- View button -->
 <<button popup:ViewDropDownState class:"btn btn-danger"><View <span class="caret"></span>>>
 
