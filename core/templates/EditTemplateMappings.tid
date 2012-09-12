@@ -1,0 +1,5 @@
+title: $:/templates/EditTemplateMappings
+tags: $:/tag/edit-template-mapping
+type: application/json
+
+{"rules":[{"filter":"[has[title]]","template":"$:/templates/EditTemplate","missingTiddler":true,"priority":0}]}

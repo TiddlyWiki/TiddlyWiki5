@@ -41,8 +41,8 @@ exports.info = {
 	params: {
 		story: {byName: "default", type: "tiddler"},
 		history: {byName: "default", type: "tiddler"},
-		defaultViewTemplate: {byName: true, type: "tiddler"},
-		defaultEditTemplate: {byName: true, type: "tiddler"},
+		viewTemplateMappings: {byName: true, type: "filter"},
+		editTemplateMappings: {byName: true, type: "filter"},
 		storyviewTiddler: {byName: true, type: "tiddler"},
 		storyview: {byName: true, type: "text"}
 	}
@@ -59,20 +59,48 @@ exports.getHistory = function() {
 	this.history = this.wiki.getTiddlerData(this.params.history,{stack: []});
 };
 
-exports.getViewTemplate = function() {
-	if(this.hasParameter("defaultViewTemplate")) {
-		return this.params.defaultViewTemplate;
-	} else {
-		return "$:/templates/ViewTemplate";
+exports.getTemplate = function(title,mappingFilter) {
+	var tiddler = this.wiki.getTiddler(title), tiddlers = {};
+	// Get the mapping tiddlers
+	var mappingTiddlers = this.wiki.filterTiddlers(mappingFilter),
+		rules = [], t, json, r, rule;
+	// Pull out the rules from each tiddler
+	for(t=0; t<mappingTiddlers.length; t++) {
+		json = this.wiki.getTiddlerData(mappingTiddlers[t],{rules: []});
+		for(r=0; r<json.rules.length; r++) {
+			rules.push(json.rules[r]);
+		}
 	}
+	// Sort the rules by priority
+	rules.sort(function(a,b) {
+		return a.priority - b.priority;
+	});
+	// Apply the rules
+	if(tiddler) {
+		tiddlers[title] = tiddler;
+		for(r=rules.length-1; r>=0; r--) {
+			rule = rules[r];
+			if(this.wiki.filterTiddlers(rule.filter,null,tiddlers).length > 0) {
+				return rule.template;
+			}
+		}
+	} else {
+		for(r=rules.length-1; r>=0; r--) {
+			rule = rules[r];
+			if(rule.missingTiddler) {
+				return rule.template;
+			}
+		}
+	}
+	return null;
 };
 
-exports.getEditTemplate = function() {
-	if(this.hasParameter("defaultEditTemplate")) {
-		return this.params.defaultEditTemplate;
-	} else {
-		return "$:/templates/EditTemplate";
-	}
+exports.getViewTemplate = function(title) {
+	return this.getTemplate(title,this.params.viewTemplateMappings || "[tag[$:/tag/view-template-mapping]]");
+};
+
+exports.getEditTemplate = function(title) {
+	return this.getTemplate(title,this.params.editTemplateMappings || "[tag[$:/tag/edit-template-mapping]]");
 };
 
 /*
@@ -105,9 +133,9 @@ Create the tiddler macro needed to represent a given tiddler and its draft statu
 exports.createStoryElementMacro = function(title,draft) {
 	var srcParams;
 	if(draft) {
-		srcParams = {target: draft, template: this.getEditTemplate()};
+		srcParams = {target: draft, template: this.getEditTemplate(title)};
 	} else {
-		srcParams = {target: title, template: this.getViewTemplate()};
+		srcParams = {target: title, template: this.getViewTemplate(title)};
 	}
 	return $tw.Tree.Macro("tiddler",{
 			srcParams: srcParams,
