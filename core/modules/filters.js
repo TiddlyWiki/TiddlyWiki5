@@ -12,9 +12,9 @@ Adds tiddler filtering to the $tw.Wiki object.
 /*global $tw: false */
 "use strict";
 
-exports.filterTiddlers = function(filterString,currTiddlerTitle) {
+exports.filterTiddlers = function(filterString,currTiddlerTitle,tiddlerList) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,this.tiddlers,currTiddlerTitle);
+	return fn.call(this,tiddlerList || this.tiddlers,currTiddlerTitle);
 };
 
 /*
