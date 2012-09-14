@@ -22,13 +22,13 @@ var TiddlyFox = {
 			win = doc.defaultView;
 		// If it is a TiddlyWiki classic
 		if(TiddlyFox.isTiddlyWikiClassic(doc,win)) {
-			if(confirm("TiddlyFox: Enabling TiddlyWiki file saving capability")) {
+			if(confirm("TiddlyFox: Enabling TiddlyWiki file saving capability for:\n" + doc.location)) {
 				TiddlyFox.injectScript(doc);
 				TiddlyFox.injectMessageBox(doc);
 			}
 		// If it is a TiddlyWiki5
 		} else if(TiddlyFox.isTiddlyWiki5(doc,win)) {
-			if(confirm("TiddlyFox: Enabling TiddlyWiki5 file saving capability")) {
+			if(confirm("TiddlyFox: Enabling TiddlyWiki5 file saving capability for:\n" + doc.location)) {
 				TiddlyFox.injectMessageBox(doc);
 			}
 		}
