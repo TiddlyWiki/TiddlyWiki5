@@ -43,6 +43,8 @@ exports.info = {
 		history: {byName: "default", type: "tiddler"},
 		viewTemplateMappings: {byName: true, type: "filter"},
 		editTemplateMappings: {byName: true, type: "filter"},
+		viewTemplate: {byName: true, type: "tiddler"},
+		editTemplate: {byName: true, type: "tiddler"},
 		storyviewTiddler: {byName: true, type: "tiddler"},
 		storyview: {byName: true, type: "text"}
 	}
@@ -96,11 +98,19 @@ exports.getTemplate = function(title,mappingFilter) {
 };
 
 exports.getViewTemplate = function(title) {
-	return this.getTemplate(title,this.params.viewTemplateMappings || "[tag[$:/tag/view-template-mapping]]");
+	if(this.hasParameter("viewTemplate")) {
+		return this.params.viewTemplate;
+	} else {
+		return this.getTemplate(title,this.params.viewTemplateMappings || "[tag[$:/tag/view-template-mapping]]");
+	}
 };
 
 exports.getEditTemplate = function(title) {
-	return this.getTemplate(title,this.params.editTemplateMappings || "[tag[$:/tag/edit-template-mapping]]");
+	if(this.hasParameter("editTemplate")) {
+		return this.params.editTemplate;
+	} else {
+		return this.getTemplate(title,this.params.editTemplateMappings || "[tag[$:/tag/edit-template-mapping]]");
+	}
 };
 
 /*
