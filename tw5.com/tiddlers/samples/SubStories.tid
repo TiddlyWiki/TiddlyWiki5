@@ -6,9 +6,9 @@ It is possible to have multiple instances of the `story` macro pointing to the s
 For example, this macro displays the same tiddlers as the main story but through the template used to display tags, which makes each tiddler appear as a tiny panel: 
 
 {{{
-<<story story:"$:/StoryTiddlers" defaultViewTemplate:[[$:/templates/TagTemplate]] storyview:classic >>
+<<story story:"$:/StoryTiddlers" viewTemplate:[[$:/templates/TagTemplate]] storyview:classic >>
 }}}
 
 Select //Classic// or //Sideways// view in the navigation bar, and then try opening and closing  other tiddlers and see how this second story animates when tiddlers are added and removed from the main story. It's also interesting to view the story tiddler alongside this one: [[$:/StoryTiddlers]].
 
-<<story story:"$:/StoryTiddlers" defaultViewTemplate:[[$:/templates/TagTemplate]] storyview:classic >>
+<<story story:"$:/StoryTiddlers" viewTemplate:[[$:/templates/TagTemplate]] storyview:classic >>
