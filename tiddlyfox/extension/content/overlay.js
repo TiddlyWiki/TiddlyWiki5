@@ -105,7 +105,8 @@ var TiddlyFox = {
 	isTiddlyWikiClassic: function(doc,win) {
 		// Test whether the document is a TiddlyWiki (we don't have access to JS objects in it)
 		return (doc.location.protocol === "file:") &&
-			(doc.scripts[0].id === "versionArea");
+			doc.getElementById("storeArea") &&
+			(/TiddlyWiki/.test(doc.scripts[0].text));
 	},
 
 	isTiddlyWiki5: function(doc,win) {
