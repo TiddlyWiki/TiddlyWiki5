@@ -6,7 +6,7 @@
   
     <em:id>tiddlyfox@tiddlywiki.org</em:id>
     <em:name>TiddlyFox extension for Firefox</em:name>
-    <em:version>1.0alpha4</em:version>
+    <em:version>1.0alpha5</em:version>
     <em:description>A Firefox extension to enable TiddlyWiki to save changes directly to the file system.</em:description>
     <em:creator>Jeremy Ruston</em:creator>
     <em:homepageURL>https://five.tiddlywiki.com/tiddlyfox</em:homepageURL>
@@ -22,6 +22,14 @@
         <em:minVersion>3.5</em:minVersion>
         <em:maxVersion>4.0.*</em:maxVersion>
       </Description>
+    </em:targetApplication>
+    <!-- Firefox for Android (experimental) -->
+    <em:targetApplication>
+        <Description>
+            <em:id>{aa3c5121-dab2-40e2-81ca-7ea25febc110}</em:id>
+            <em:minVersion>10.0</em:minVersion>
+            <em:maxVersion>15.*</em:maxVersion>
+        </Description>
     </em:targetApplication>
 
   </Description>
