@@ -76,32 +76,6 @@ $tw.crypto.sjcl = $tw.browser ? sjcl : require("./sjcl.js");
 // Boot information
 $tw.boot = {};
 
-// Server initialisation
-var fs, path, vm;
-if(!$tw.browser) {
-	// Standard node libraries
-	fs = require("fs");
-	path = require("path");
-	vm = require("vm");
-	// System paths and filenames
-	$tw.boot.bootFile = path.basename(module.filename);
-	$tw.boot.bootPath = path.dirname(module.filename);
-	$tw.boot.wikiPath = process.cwd();
-	// Read package info
-	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
-	// Check node version number
-	var targetVersion = $tw.packageInfo.engine.node.substr(2).split("."),
-		currVersion = process.version.substr(1).split("."),
-		diff = [parseInt(targetVersion[0],10) - parseInt(currVersion[0],10),
-				parseInt(targetVersion[1],10) - parseInt(currVersion[1],10),
-				parseInt(targetVersion[2],10) - parseInt(currVersion[2],10)];
-	if((diff[0] > 0) ||
-		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0)) {
-		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
-	}
-}
-
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
@@ -267,6 +241,40 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 		return sourcepath;
 	}
 };
+
+/*
+Returns true if the `actual` version is greater than or equal to the `required` version. Both are in `x.y.` format.
+*/
+$tw.utils.checkVersions = function(required,actual) {
+	var targetVersion = required.split("."),
+		currVersion = actual.split("."),
+		diff = [parseInt(targetVersion[0],10) - parseInt(currVersion[0],10),
+				parseInt(targetVersion[1],10) - parseInt(currVersion[1],10),
+				parseInt(targetVersion[2],10) - parseInt(currVersion[2],10)];
+	return (diff[0] > 0) ||
+		(diff[0] === 0 && diff[1] > 0) ||
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+};
+
+/////////////////////////// Server initialisation
+
+var fs, path, vm;
+if(!$tw.browser) {
+	// Standard node libraries
+	fs = require("fs");
+	path = require("path");
+	vm = require("vm");
+	// System paths and filenames
+	$tw.boot.bootFile = path.basename(module.filename);
+	$tw.boot.bootPath = path.dirname(module.filename);
+	$tw.boot.wikiPath = process.cwd();
+	// Read package info
+	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
+	// Check node version number
+	if($tw.utils.checkVersions($tw.packageInfo.engine.node.substr(2),process.version.substr(1))) {
+		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
+	}
+}
 
 /////////////////////////// Module mechanism
 
