@@ -1,7 +1,0 @@
-content	tiddlyfox	content/
-overlay	chrome://browser/content/browser.xul	chrome://tiddlyfox/content/overlay.xul
-
-locale	tiddlyfox	en-US	locale/en-US/
-
-skin	tiddlyfox	classic/1.0	skin/
-style	chrome://global/content/customizeToolbar.xul	chrome://tiddlyfox/skin/overlay.css
