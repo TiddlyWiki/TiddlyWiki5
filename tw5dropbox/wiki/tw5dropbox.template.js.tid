@@ -1,0 +1,7 @@
+title: $:/core/templates/tw5dropbox.template.js
+type: text/x-tiddlywiki-html
+
+<<serialize "[is[shadow]type[application/javascript]library[yes]] -[[$:/library/sjcl.js]]" text/plain>>
+<<serialize "$:/core/bootprefix.js" text/plain>>
+<<serialize "[is[shadow]type[application/javascript]has[module-type]]" application/x-tiddler-module-plain>>
+<<serialize "$:/core/boot.js" text/plain>>

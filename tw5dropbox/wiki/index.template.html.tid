@@ -1,4 +1,4 @@
-title: $:/core/templates/tw5dropbox.template.html
+title: $:/core/templates/index.template.html
 type: text/x-tiddlywiki-html
 
 <!doctype html>
@@ -14,7 +14,6 @@ type: text/x-tiddlywiki-html
 <meta name="copyright" content="
 <<serialize "$:/core/copyright.txt" text/plain>>
 " />
-<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.6.1/dropbox.min.js"></script>
 <title><<tiddler "$:/core/wiki/title">></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 
@@ -23,15 +22,7 @@ type: text/x-tiddlywiki-html
 </head>
 <body>
 <!----------- Static styles ----------->
-<div id="styleArea">
-<<serialize "[is[shadow]type[text/css]]" application/x-tiddler-css>>
-</div>
-<!----------- Static content for Google and browsers without JavaScript ----------->
-<noscript>
-<div id="splashArea">
-<<serialize "$:/templates/StaticContent" text/html>>
-</div>
-</noscript>
+<link rel="stylesheet" type="text/css" href="styles.css" />
 <!----------- Miscellaneous shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
 <<serialize "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div>>
@@ -40,22 +31,7 @@ type: text/x-tiddlywiki-html
 <div id="storeArea" style="display:none;">
 <<serialize "$1" application/x-tiddler-html-div>>
 </div>
-<!----------- Library modules ----------->
-<div id="libraryModules" style="display:none;">
-<<serialize "[[$:/core/lib/jquery.min.js]]" application/x-tiddler-library>>
-<<serialize "[is[shadow]type[application/javascript]library[yes]] -[[$:/core/lib/jquery.min.js]]" application/x-tiddler-library>>
-</div>
-<!----------- Boot kernel prologue ----------->
-<div id="bootKernelPrefix" style="display:none;">
-<<serialize "$:/core/bootprefix.js" application/javascript>>
-</div>
-<!----------- Plugin modules ----------->
-<div id="modules" style="display:none;">
-<<serialize "[is[shadow]type[application/javascript]has[module-type]]" application/x-tiddler-module>>
-</div>
-<!----------- Boot kernel ----------->
-<div id="bootKernel" style="display:none;">
-<<serialize "$:/core/boot.js" application/javascript>>
-</div>
 </body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.6.1/dropbox.min.js"></script>
+<script src="tw5dropbox.js"></script>
 </html>
