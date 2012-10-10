@@ -82,7 +82,6 @@ $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 		if(error) {
 			return $tw.plugins.dropbox.showError(error);
 		}
-console.log(stats);
 		// Create a tiddler for each folder
 		for(var s=0; s<stats.length; s++) {
 			var stat = stats[s];
