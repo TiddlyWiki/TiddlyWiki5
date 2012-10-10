@@ -35,7 +35,7 @@ exports.executeMacro = function() {
 	} else {
 		switch(field) {
 			case "text":
-				value = "The tiddler '" + this.tiddlerTitle + "' does not exist";
+				value = "";
 				break;
 			case "title":
 				value = this.tiddlerTitle;
