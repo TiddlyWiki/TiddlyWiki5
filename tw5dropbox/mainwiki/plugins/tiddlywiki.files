@@ -1,0 +1,28 @@
+{
+	"tiddlers": [
+		{
+			"file": "../../plugins/async.js", 
+			"fields": {
+				"title": "$:/plugins/dropbox/async.js",
+				"type": "application/javascript",
+				"library": "yes"
+			}
+		},
+		{
+			"file": "../../plugins/dropbox.js",
+			"fields": {
+				"title": "$:/plugins/dropbox/dropbox.js",
+				"type": "application/javascript",
+				"module-type": "startup"
+			}
+		},
+		{
+			"file": "../../plugins/logoutmacro.js",
+			"fields": {
+				"title": "$:/plugins/dropbox/logoutmacro.js",
+				"type": "application/javascript",
+				"module-type": "macro"
+			}
+		}
+	]
+}

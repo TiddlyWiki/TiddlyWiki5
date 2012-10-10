@@ -1,4 +1,4 @@
 title: $:/core/templates/styles.template.css
 type: text/x-tiddlywiki-html
 
-<<serialize "[is[shadow]type[text/css]]" application/x-tiddler-css>>
+<<serialize "[is[shadow]type[text/css]]" text/plain>>
