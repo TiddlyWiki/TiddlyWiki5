@@ -12,11 +12,6 @@ Various static utility functions.
 /*global $tw: false */
 "use strict";
 
-// Check if an object has a property
-exports.hop = function(object,property) {
-	return Object.prototype.hasOwnProperty.call(object,property);
-};
-
 /*
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify

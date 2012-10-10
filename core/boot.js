@@ -47,7 +47,7 @@ $tw.crypto = new function() {
 				getPassword();
 			}
 			try {
-				outputText = method(password,inputText);
+				outputText = $tw.crypto.sjcl[method](password,inputText);
 			} catch(ex) {
 				console.log("Crypto error:" + ex)
 				outputText = null;	
@@ -64,14 +64,14 @@ $tw.crypto = new function() {
 		password = newPassword;
 	}
 	this.encrypt = function(text) {
-		return callSjcl($tw.crypto.sjcl.encrypt,text);
+		return callSjcl("encrypt",text);
 	};
 	this.decrypt = function(text) {
-		return callSjcl($tw.crypto.sjcl.decrypt,text);
+		return callSjcl("decrypt",text);
 	};
 };
 
-$tw.crypto.sjcl = $tw.browser ? sjcl : require("./sjcl.js");
+$tw.crypto.sjcl = $tw.browser ? window.sjcl : require("./sjcl.js");
 
 // Boot information
 $tw.boot = {};
@@ -134,6 +134,15 @@ $tw.config.contentTypeInfo = {
 
 $tw.utils = $tw.utils || {};
 
+
+
+/*
+Check if an object has a property
+*/
+$tw.utils.hop = function(object,property) {
+	return Object.prototype.hasOwnProperty.call(object,property);
+};
+
 /*
 Determine if a value is an array
 */
@@ -141,7 +150,9 @@ $tw.utils.isArray = function(value) {
 	return Object.prototype.toString.call(value) == "[object Array]";
 };
 
-// Convert "&amp;" to &, "&lt;" to <, "&gt;" to > and "&quot;" to "
+/*
+Convert "&amp;" to &, "&lt;" to <, "&gt;" to > and "&quot;" to "
+*/
 $tw.utils.htmlDecode = function(s) {
 	return s.toString().replace(/&lt;/mg,"<").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
@@ -473,10 +484,16 @@ $tw.Wiki.prototype.registerModuleTiddlers = function() {
 		}
 	}
 	// Register and execute any modules in ordinary tiddlers
-	for(title in $tw.wiki.tiddlers) {
-		tiddler = $tw.wiki.getTiddler(title);
-		if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
-			$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
+	if($tw.browser) {
+		for(title in $tw.modules.titles) {
+			$tw.modules.registerModuleExports(title,$tw.modules.titles[title].moduleType,$tw.modules.execute(title));
+		}
+	} else {
+		for(title in $tw.wiki.tiddlers) {
+			tiddler = $tw.wiki.getTiddler(title);
+			if(tiddler.fields.type === "application/javascript" && tiddler.fields["module-type"] !== undefined) {
+				$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
+			}
 		}
 	}
 };
@@ -664,14 +681,16 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdese
 				}
 			},
 			t,result = [];
-		for(t = 0; t < node.childNodes.length; t++) {
-				var tiddlers = extractTextTiddlers(node.childNodes[t]),
-					childNode = node.childNodes[t];
-				tiddlers = tiddlers || extractModuleTiddlers(childNode);
-				tiddlers = tiddlers || extractEncryptedTiddlers(childNode);
-				if(tiddlers) {
-					result.push.apply(result,tiddlers);
-				}
+		if(node) {
+			for(t = 0; t < node.childNodes.length; t++) {
+					var tiddlers = extractTextTiddlers(node.childNodes[t]),
+						childNode = node.childNodes[t];
+					tiddlers = tiddlers || extractModuleTiddlers(childNode);
+					tiddlers = tiddlers || extractEncryptedTiddlers(childNode);
+					if(tiddlers) {
+						result.push.apply(result,tiddlers);
+					}
+			}
 		}
 		return result;
 	}
