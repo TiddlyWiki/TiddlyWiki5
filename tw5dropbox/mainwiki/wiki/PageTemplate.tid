@@ -3,16 +3,6 @@ title: $:/templates/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <<navigator story:"$:/StoryTiddlers" history:"$:/History" ><
 
-<!--  Zooming chooser -->
-{{navigation-panel{
-<<chooser><
-	<<list all>>
->>
-}}}
-
-<!--  Zooming navigator -->
-<<zoomigator>>
-
 <!-- The top navigation bar -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
@@ -27,48 +17,10 @@ Logged in as (($:/plugins/dropbox/UserName))
 <<dropbox.logout>< Log me out >>
 >>
 
-((Bugger))
-
-<!-- Navigation menu -->
-* HelloThere
-* [[Docs]]
-*{{divider-vertical}}
-
-<!-- Full screen button -->
-<<button full-screen class:"btn btn-warning"><Full screen>>
-
-<!-- View button -->
-<<button popup:ViewDropDownState class:"btn btn-danger"><View <span class="caret"></span>>>
-
-<!-- View dropdown -->
-{{pull-right{
-<<reveal state:[[$:/EditMode]] type:nomatch text:yes><
-<<button modal param:[[$:/messages/EnterEditMode]] set:[[$:/EditMode]] setTo:yes class:"btn btn-success"><Edit>>
->>
-
-<!-- Save changes is only visible in edit mode -->
-<<reveal state:[[$:/EditMode]] type:match text:yes><
-<<button save-wiki param:"$:/core/templates/tiddlywiki5.encrypted.template.html" class:"btn pull-right"><Save Changes (encrypted)>>
->>
-<<reveal state:[[$:/EditMode]] type:match text:yes><
-<<button save-wiki class:"btn pull-right"><Save Changes>>
->>
-}}}
+[[App|TiddlyWiki5 in the Sky with Dropbox]]
 
 }}}
 
-<!-- This navigator intercepts navigation events and sets the text of the specified tiddler to the target tiddler title -->
-<<navigator set:[[$:/CurrentView]]><
-<<reveal state:ViewDropDownState type:popup position:below><
-<div class="open">
-{{dropdown-menu tw-suppress-missing-tiddlylink{
-* <<link to:classic>< <<reveal state:[[$:/CurrentView]] type:match text:classic>< <span class="tw-ticked-menu-item"></span> >> Classic>>
-* <<link to:sideways>< <<reveal state:[[$:/CurrentView]] type:match text:sideways>< <span class="tw-ticked-menu-item"></span> >> Sideways>>
-* <<link to:zoomin>< <<reveal state:[[$:/CurrentView]] type:match text:zoomin>< <span class="tw-ticked-menu-item"></span> >> Zoomin>>
-}}}
-</div>
->>
->>
 </div>
 </div>
 </div>

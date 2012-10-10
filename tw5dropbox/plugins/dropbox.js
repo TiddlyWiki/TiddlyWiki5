@@ -17,7 +17,8 @@ var apiKey = "m+qwjj8wFRA=|1TSoitGS9Nz2RTwv+jrUJnsAj0yy57NhQJ4TkZ/+Hw==";
 
 // Tiddler titles
 var titleIsLoggedIn = "$:/plugins/dropbox/IsLoggedIn",
-	titleUserName = "$:/plugins/dropbox/UserName";
+	titleUserName = "$:/plugins/dropbox/UserName",
+	titlePublicAppUrl = "$:/plugins/dropbox/PublicAppUrl";
 
 $tw.plugins.dropbox = {
 	client: null // Dropbox.js client object
@@ -38,22 +39,27 @@ $tw.plugins.dropbox.login = function() {
 		// Mark us as logged in
 		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "yes"});
 		// Get user information
-		$tw.plugins.dropbox.getUserInfo();
-		// Get tiddler file metadata
-		$tw.plugins.dropbox.loadTiddlerFiles("/My TiddlyWiki/tiddlers",function() {
-			console.log("Loaded all tiddlers",$tw.wiki.tiddlers);
+		$tw.plugins.dropbox.getUserInfo(function() {
+			// Invoke any dropbox-startup modules
+			var mods = $tw.modules.types["dropbox-startup"];
+			for(var m=0; m<mods.length; m++) {
+				mods[m].startup();
+			}
 		});
 	});
 };
 
 // Get user information
-$tw.plugins.dropbox.getUserInfo = function() {
+$tw.plugins.dropbox.getUserInfo = function(callback) {
 	$tw.plugins.dropbox.client.getUserInfo(function(error,userInfo) {
 		if(error) {
+			callback(error);
 			return $tw.plugins.dropbox.showError(error);
 		}
+		$tw.plugins.dropbox.userInfo = userInfo;
 		// Save the username
 		$tw.wiki.addTiddler({title: titleUserName, text: userInfo.name});
+		callback();
 	});
 };
 
@@ -66,6 +72,25 @@ $tw.plugins.dropbox.logout = function() {
 		// Mark us as logged out
 		$tw.wiki.deleteTiddler(titleUserName);
 		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"});
+	});
+};
+
+// Load tiddlers representing each wiki in a folder
+$tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
+	// First get the list of tiddler files
+	$tw.plugins.dropbox.client.stat(path,{readDir: true},function(error,stat,stats) {
+		if(error) {
+			return $tw.plugins.dropbox.showError(error);
+		}
+console.log(stats);
+		// Create a tiddler for each folder
+		for(var s=0; s<stats.length; s++) {
+			var stat = stats[s];
+			if(!stat.isFile && stat.isFolder) {
+				$tw.wiki.addTiddler({title: stat.name, text: "wiki", tags: ["wiki"], url: $tw.plugins.dropbox.userInfo.publicAppUrl + stat.path + "/index.html"});
+			}
+		}
+		callback();
 	});
 };
 
@@ -148,6 +173,7 @@ $tw.plugins.dropbox.loadTiddlerFile = function(path,mimeType,stats,callback) {
 		}
 	});
 };
+
 // Encode a binary file as returned by Dropbox into the base 64 equivalent
 // Adapted from Jon Leighton, https://gist.github.com/958841
 $tw.plugins.dropbox.base64EncodeString = function(data) {

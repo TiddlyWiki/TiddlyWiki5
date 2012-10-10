@@ -25,9 +25,9 @@
 			}
 		},
 		{
-			"file": "dropbox-main.js",
+			"file": "dropbox-app.js",
 			"fields": {
-				"title": "$:/plugins/dropbox/dropbox-main.js",
+				"title": "$:/plugins/dropbox/dropbox-app.js",
 				"type": "application/javascript",
 				"module-type": "dropbox-startup"
 			}

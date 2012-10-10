@@ -1,0 +1,10 @@
+title: WikiTemplate
+
+<div class="alert">
+<div>
+<<view title>>
+</div>
+<div>
+<<view url link>>
+</div>
+</div>
