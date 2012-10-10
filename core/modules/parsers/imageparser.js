@@ -17,13 +17,17 @@ var ImageParser = function(options) {
 };
 
 ImageParser.prototype.parse = function(type,text) {
-    var src;
-    if(type === "image/svg+xml" || type === ".svg") {
+    var element = "img",
+    	src;
+    if(type === "application/pdf" || type === ".pdf") {
+    	src = "data:application/pdf;base64," + text;
+    	element = "embed";
+    } else if(type === "image/svg+xml" || type === ".svg") {
         src = "data:image/svg+xml," + encodeURIComponent(text);
 	} else {
         src = "data:" + type + ";base64," + text;
 	}
-	return new $tw.Renderer([$tw.Tree.Element("img",{src: src})],new $tw.Dependencies());
+	return new $tw.Renderer([$tw.Tree.Element(element,{src: src})],new $tw.Dependencies());
 };
 
 exports["image/svg+xml"] = ImageParser;
@@ -31,5 +35,6 @@ exports["image/jpg"] = ImageParser;
 exports["image/jpeg"] = ImageParser;
 exports["image/png"] = ImageParser;
 exports["image/gif"] = ImageParser;
+exports["application/pdf"] = ImageParser;
 
 })();

@@ -81,6 +81,9 @@ $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
 $tw.modules.types = $tw.modules.types || {}; // hashmap by module type of array of exports
 
+// Plugin information
+$tw.plugins = $tw.plugins || {};
+
 // Config object
 $tw.config = $tw.config || {};
 
@@ -102,6 +105,7 @@ $tw.config.fileExtensionInfo = {
 	".html": {type: "text/html"},
 	".js": {type: "application/javascript"},
 	".json": {type: "application/json"},
+	".pdf": {type: "application/pdf"},
 	".jpg": {type: "image/jpeg"},
 	".jpeg": {type: "image/jpeg"},
 	".png": {type: "image/png"},
@@ -119,6 +123,7 @@ $tw.config.contentTypeInfo = {
 	"text/html": {encoding: "utf8"},
 	"application/javascript": {encoding: "utf8"},
 	"application/json": {encoding: "utf8"},
+	"application/pdf": {encoding: "base64"},
 	"image/jpeg": {encoding: "base64"},
 	"image/png": {encoding: "base64"},
 	"image/gif": {encoding: "base64"},
