@@ -37,7 +37,7 @@ $tw.plugins.dropbox.login = function() {
 			return $tw.plugins.dropbox.showError(error);
 		}
 		// Mark us as logged in
-		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "yes"});
+		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "yes"},true);
 		// Get user information
 		$tw.plugins.dropbox.getUserInfo(function() {
 			// Invoke any dropbox-startup modules
@@ -58,7 +58,7 @@ $tw.plugins.dropbox.getUserInfo = function(callback) {
 		}
 		$tw.plugins.dropbox.userInfo = userInfo;
 		// Save the username
-		$tw.wiki.addTiddler({title: titleUserName, text: userInfo.name});
+		$tw.wiki.addTiddler({title: titleUserName, text: userInfo.name},true);
 		callback();
 	});
 };
@@ -71,7 +71,7 @@ $tw.plugins.dropbox.logout = function() {
 		}
 		// Mark us as logged out
 		$tw.wiki.deleteTiddler(titleUserName);
-		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"});
+		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"},true);
 	});
 };
 
@@ -217,7 +217,7 @@ exports.startup = function() {
 		return;
 	}
 	// Mark us as not logged in
-	$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"});
+	$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"},true);
 	// Initialise Dropbox for sandbox access
 	$tw.plugins.dropbox.client = new Dropbox.Client({key: apiKey, sandbox: true});
 	// Use the basic redirection authentication driver

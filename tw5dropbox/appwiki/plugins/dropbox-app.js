@@ -26,7 +26,7 @@ exports.startup = function() {
 	}
 	if(wikiName) {
 		$tw.plugins.dropbox.wikiName = wikiName;
-		$tw.wiki.addTiddler({title: titleWikiName, text: $tw.plugins.dropbox.wikiName});
+		$tw.wiki.addTiddler({title: titleWikiName, text: $tw.plugins.dropbox.wikiName},true);
 		// Load tiddlers
 		$tw.plugins.dropbox.loadTiddlerFiles("/" + $tw.plugins.dropbox.wikiName + "/tiddlers",function() {
 			console.log("Loaded all tiddlers",$tw.wiki.tiddlers);
