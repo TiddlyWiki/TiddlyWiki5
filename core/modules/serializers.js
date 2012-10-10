@@ -22,7 +22,7 @@ var mapEachTiddler = function(wiki,tiddlers,callback) {
 		}
 	}
 	return result.join("");
-}
+};
 
 exports["text/plain"] = function(tiddlers) {
 	return mapEachTiddler(this,tiddlers,function(tiddler) {
@@ -86,6 +86,12 @@ exports["application/x-tiddler-module"] = function(tiddlers) {
 				attributes,
 				[$tw.Tree.Raw(text)]
 			).render("text/html");
+	});
+};
+
+exports["application/x-tiddler-module-plain"] = function(tiddlers) {
+	return mapEachTiddler(this,tiddlers,function(tiddler) {
+		return "$tw.modules.define(\"" + tiddler.fields.title + "\",\"" + tiddler.fields["module-type"] + "\",function(module,exports,require) {" + tiddler.fields.text + "});\n";
 	});
 };
 
