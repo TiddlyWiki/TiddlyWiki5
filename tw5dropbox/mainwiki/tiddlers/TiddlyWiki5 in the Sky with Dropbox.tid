@@ -2,9 +2,15 @@ title: TiddlyWiki5 in the Sky with Dropbox
 
 Welcome to TiddlyWiki5 in the Sky with Dropbox.
 
+<<reveal state:[[$:/plugins/dropbox/LoadedWikis]] type:nomatch text:yes><
+Loading your wikis from Dropbox
+>>
+
+<<reveal state:[[$:/plugins/dropbox/LoadedWikis]] type:match text:yes><
 ! Your ~TiddlyWikis
 
-((( [tag[wiki]] ))(WikiTemplate))
+<<transclude filter:[tag[wiki]] templateTitle:WikiTemplate emptyMessage:"You haven't created any wikis yet">>
+>>
 
 ! Create new ~TiddlyWiki
 

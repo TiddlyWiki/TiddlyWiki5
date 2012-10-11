@@ -86,7 +86,8 @@ $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 		for(var s=0; s<stats.length; s++) {
 			var stat = stats[s];
 			if(!stat.isFile && stat.isFolder) {
-				$tw.wiki.addTiddler({title: stat.name, text: "wiki", tags: ["wiki"], url: $tw.plugins.dropbox.userInfo.publicAppUrl + stat.path + "/index.html"});
+				var url = $tw.plugins.dropbox.userInfo.publicAppUrl + stat.path + "/index.html";
+				$tw.wiki.addTiddler({title: stat.name, text: "wiki", tags: ["wiki"], urlView: url, urlEdit: url + "?edit=true"});
 			}
 		}
 		callback();
