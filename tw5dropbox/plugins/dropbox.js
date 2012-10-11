@@ -20,6 +20,9 @@ var titleIsLoggedIn = "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName = "$:/plugins/dropbox/UserName",
 	titlePublicAppUrl = "$:/plugins/dropbox/PublicAppUrl";
 
+// Query string marker for forcing authentication
+var queryLoginMarker = "login=true";
+
 $tw.plugins.dropbox = {
 	client: null // Dropbox.js client object
 };
@@ -72,6 +75,8 @@ $tw.plugins.dropbox.logout = function() {
 		// Mark us as logged out
 		$tw.wiki.deleteTiddler(titleUserName);
 		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"},true);
+		// Remove any marker from the query string
+		document.location.search = "";
 	});
 };
 
@@ -87,7 +92,7 @@ $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 			var stat = stats[s];
 			if(!stat.isFile && stat.isFolder) {
 				var url = $tw.plugins.dropbox.userInfo.publicAppUrl + stat.path + "/index.html";
-				$tw.wiki.addTiddler({title: stat.name, text: "wiki", tags: ["wiki"], urlView: url, urlEdit: url + "?edit=true"});
+				$tw.wiki.addTiddler({title: stat.name, text: "wiki", tags: ["wiki"], urlView: url, urlEdit: url + "?login=true"});
 			}
 		}
 		callback();
@@ -213,6 +218,13 @@ $tw.plugins.dropbox.base64EncodeString = function(data) {
 	return base64.join("");
 };
 
+// Rewrite the document location to include a force login marker
+$tw.plugins.dropbox.forceLogin = function() {
+	if(document.location.search.indexOf(queryLoginMarker) === -1) {
+		document.location.search = queryLoginMarker;
+	}
+};
+
 exports.startup = function() {
 	if(!$tw.browser) {
 		return;
@@ -223,8 +235,10 @@ exports.startup = function() {
 	$tw.plugins.dropbox.client = new Dropbox.Client({key: apiKey, sandbox: true});
 	// Use the basic redirection authentication driver
 	$tw.plugins.dropbox.client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
-	// Authenticate ourselves
-	$tw.plugins.dropbox.login();
+	// Authenticate ourselves if the marker is in the document query string
+	if(document.location.search.indexOf(queryLoginMarker) !== -1) {
+		$tw.plugins.dropbox.login();
+	}
 };
 
 })();

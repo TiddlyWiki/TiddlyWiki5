@@ -3,7 +3,7 @@ title: $:/plugins/dropbox/logoutmacro.js
 type: application/javascript
 module-type: macro
 
-Dropbox logout plugin
+Dropbox login plugin
 
 \*/
 (function(){
@@ -13,13 +13,13 @@ Dropbox logout plugin
 "use strict";
 
 exports.info = {
-	name: "dropbox.logout",
+	name: "dropbox.login",
 	params: {}
 };
 
 exports.handleEvent = function (event) {
 	if(event.type === "click") {
-		$tw.plugins.dropbox.logout();
+		$tw.plugins.dropbox.forceLogin();
 	}
 };
 

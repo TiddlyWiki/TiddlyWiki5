@@ -19,13 +19,8 @@ title: $:/templates/PageTemplate
 <div class="container">
 {{nav{
 
-<<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:no><
-Not logged in
->>
-<<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:yes><
-Logged in as (($:/plugins/dropbox/UserName))
-<<dropbox.logout>< Log me out >>
->>
+<<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:no>< <<dropbox.login>< Log me in >> >>
+<<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:yes>< Logged in as (($:/plugins/dropbox/UserName)) - <<dropbox.logout>< Log me out >> >>
 
 <!-- Navigation menu -->
 * HelloThere
