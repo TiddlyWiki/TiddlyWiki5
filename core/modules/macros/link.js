@@ -28,7 +28,7 @@ exports.info = {
 
 exports.handleEvent = function (event) {
 	if(event.type === "click") {
-		if(isLinkExternal(this.params.to)) {
+		if(isLinkExternal(this.linkInfo.to)) {
 			event.target.setAttribute("target","_blank");
 			return true;
 		} else {
