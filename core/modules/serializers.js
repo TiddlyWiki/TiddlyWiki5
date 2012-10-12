@@ -167,4 +167,10 @@ exports["application/x-tiddler-encrypted-div"] = function(tiddlers) {
 	return "<div data-tw-encrypted-tiddlers='yes'><pre>" + $tw.utils.htmlEncode($tw.crypto.encrypt(JSON.stringify(jsonTiddlers))) + "</pre></div>";
 };
 
+exports["application/x-tiddler-javascript"] = function(tiddlers) {
+	return mapEachTiddler(this,tiddlers,function(tiddler) {
+		return "$tw.preloadTiddler(" + JSON.stringify(tiddler.fields) + ");\n"	
+	});
+};
+
 })();
