@@ -709,6 +709,10 @@ $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementByI
 $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("storeArea")));
 // Load the shadow tiddlers from the DOM
 $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("shadowArea")),true);
+// Load any preloaded tiddlers
+if($tw.preloadTiddlers) {
+	$tw.wiki.addTiddlers($tw.preloadTiddlers,true);
+}
 
 // End of if($tw.browser)
 }

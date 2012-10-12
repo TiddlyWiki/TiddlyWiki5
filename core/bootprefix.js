@@ -31,3 +31,13 @@ $tw.modules.define = function(moduleName,moduleType,fn) {
 		fn: fn
 	};
 };
+
+/*
+Define a tiddler
+*/
+$tw.preloadTiddlers = $tw.preloadTiddlers || [];
+
+$tw.preloadTiddler = function(fields) {
+	$tw.preloadTiddlers.push(fields);
+};
+
