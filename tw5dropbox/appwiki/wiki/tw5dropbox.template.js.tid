@@ -3,5 +3,7 @@ type: text/x-tiddlywiki-html
 
 <<serialize "[is[shadow]type[application/javascript]library[yes]] -[[$:/library/sjcl.js]]" text/plain>>
 <<serialize "$:/core/bootprefix.js" text/plain>>
+<<serialize "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-javascript>>
 <<serialize "[is[shadow]type[application/javascript]has[module-type]]" application/x-tiddler-module-plain>>
 <<serialize "$:/core/boot.js" text/plain>>
+

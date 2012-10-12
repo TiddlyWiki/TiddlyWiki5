@@ -15,22 +15,10 @@ type: text/x-tiddlywiki-html
 <<serialize "$:/core/copyright.txt" text/plain>>
 " />
 <title><<tiddler "$:/core/wiki/title">></title>
-<!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
-
-<!----------- Raw markup ----------->
 <<serialize "[tag[$:/core/wiki/rawmarkup]]" text/plain>>
 </head>
 <body>
-<!----------- Static styles ----------->
 <link rel="stylesheet" href="//dl-web.dropbox.com/spa/4f6lw6nhu5zn5pr/TiddlyWiki5/public/styles.css" type="text/css" />
-<!----------- Miscellaneous shadow tiddlers ----------->
-<div id="shadowArea" style="display:none;">
-<<serialize "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div>>
-</div>
-<!----------- Ordinary tiddlers ----------->
-<div id="storeArea" style="display:none;">
-<<serialize "$1" application/x-tiddler-html-div>>
-</div>
 </body>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.6.1/dropbox.min.js"></script>
 <script src="//dl-web.dropbox.com/spa/4f6lw6nhu5zn5pr/TiddlyWiki5/public/tw5dropbox.js"></script>

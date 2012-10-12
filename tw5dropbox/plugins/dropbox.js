@@ -229,7 +229,7 @@ $tw.plugins.dropbox.forceLogin = function() {
 // Create a new empty TiddlyWiki
 $tw.plugins.dropbox.createWiki = function(wikiName) {
 	// Remove any dodgy characters from the wiki name
-	wikiName = wikiName.replace(/[\$\:\?\#\/\\]/g,"");
+	wikiName = wikiName.replace(/[\!\@\€\£\%\^\*\+\$\:\?\#\/\\\<\>\|\"\'\`\~\=]/g,"");
 	// Check that the name isn't now empty
 	if(wikiName.length === 0) {
 		return alert("Bad wiki name");
@@ -261,8 +261,12 @@ $tw.plugins.dropbox.createWiki = function(wikiName) {
 	    }
 	],
 	// optional callback
-	function(err,results) {
-		alert("Created wiki " + wikiName + " error " + err);
+	function(error,results) {
+		if(error) {
+			$tw.plugins.dropbox.showError(error);
+		} else {
+			alert("Created wiki " + wikiName);
+		}
 	});
 };
 
