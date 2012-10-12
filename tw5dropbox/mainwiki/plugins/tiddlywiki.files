@@ -33,6 +33,14 @@
 			}
 		},
 		{
+			"file": "../../plugins/newwikimacro.js",
+			"fields": {
+				"title": "$:/plugins/dropbox/newwikimacro.js",
+				"type": "application/javascript",
+				"module-type": "macro"
+			}
+		},
+		{
 			"file": "dropbox-main.js",
 			"fields": {
 				"title": "$:/plugins/dropbox/dropbox-main.js",

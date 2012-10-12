@@ -1,17 +1,15 @@
 title: TiddlyWiki5 in the Sky with Dropbox
 
-Welcome to TiddlyWiki5 in the Sky with Dropbox.
+This app enables you to edit [[TiddlyWikis|TiddlyWiki]] in your [[Dropbox]].
 
 <<reveal state:[[$:/plugins/dropbox/LoadedWikis]] type:nomatch text:yes><
 Loading your wikis from Dropbox
 >>
 
 <<reveal state:[[$:/plugins/dropbox/LoadedWikis]] type:match text:yes><
-! Your ~TiddlyWikis
+!!! Your ~TiddlyWikis
 
 <<transclude filter:[tag[wiki]] templateTitle:WikiTemplate emptyMessage:"You haven't created any wikis yet">>
+
+<<dropbox.newwiki>>
 >>
-
-! Create new ~TiddlyWiki
-
-+

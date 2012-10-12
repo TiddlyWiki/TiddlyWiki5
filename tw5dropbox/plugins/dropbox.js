@@ -18,7 +18,8 @@ var apiKey = "m+qwjj8wFRA=|1TSoitGS9Nz2RTwv+jrUJnsAj0yy57NhQJ4TkZ/+Hw==";
 // Tiddler titles
 var titleIsLoggedIn = "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName = "$:/plugins/dropbox/UserName",
-	titlePublicAppUrl = "$:/plugins/dropbox/PublicAppUrl";
+	titlePublicAppUrl = "$:/plugins/dropbox/PublicAppUrl",
+	titleAppTemplateHtml = "$:/plugins/dropbox/apptemplate.html";
 
 // Query string marker for forcing authentication
 var queryLoginMarker = "login=true";
@@ -92,7 +93,7 @@ $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 			var stat = stats[s];
 			if(!stat.isFile && stat.isFolder) {
 				var url = $tw.plugins.dropbox.userInfo.publicAppUrl + stat.path + "/index.html";
-				$tw.wiki.addTiddler({title: stat.name, text: "wiki", tags: ["wiki"], urlView: url, urlEdit: url + "?login=true"});
+				$tw.wiki.addTiddler({title: "'" + stat.name + "'", text: "wiki", tags: ["wiki"], wikiName: stat.name, urlView: url, urlEdit: url + "?login=true"});
 			}
 		}
 		callback();
@@ -223,6 +224,46 @@ $tw.plugins.dropbox.forceLogin = function() {
 	if(document.location.search.indexOf(queryLoginMarker) === -1) {
 		document.location.search = queryLoginMarker;
 	}
+};
+
+// Create a new empty TiddlyWiki
+$tw.plugins.dropbox.createWiki = function(wikiName) {
+	// Remove any dodgy characters from the wiki name
+	wikiName = wikiName.replace(/[\$\:\?\#\/\\]/g,"");
+	// Check that the name isn't now empty
+	if(wikiName.length === 0) {
+		return alert("Bad wiki name");
+	}
+	// Create the wiki
+	async.series([
+	    function(callback) {
+	        // First create the wiki folder
+	        $tw.plugins.dropbox.client.mkdir(wikiName,function(error,stat) {
+		        callback(error);
+	        });
+	    },
+	    function(callback) {
+	        // Second create the tiddlers folder
+	        $tw.plugins.dropbox.client.mkdir(wikiName + "/tiddlers",function(error,stat) {
+		        callback(error);
+	        });
+	    },
+	    function(callback) {
+	        // Third save the template app HTML file
+	        var tiddler = $tw.wiki.getTiddler(titleAppTemplateHtml);
+	        if(!tiddler) {
+	        	callback("Cannot find app template tiddler");
+	        } else {
+		        $tw.plugins.dropbox.client.writeFile(wikiName + "/index.html",tiddler.fields.text,function(error,stat) {
+			        callback(error);
+		        });
+	        }
+	    }
+	],
+	// optional callback
+	function(err,results) {
+		alert("Created wiki " + wikiName + " error " + err);
+	});
 };
 
 exports.startup = function() {
