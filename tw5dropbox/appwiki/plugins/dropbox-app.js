@@ -31,7 +31,7 @@ exports.startup = function() {
 		if(index) {
 			$tw.wiki.addTiddlers(index.tiddlers);
 			$tw.wiki.addTiddlers(index.shadows,true);
-			$tw.plugins.dropbox.fileRevisions = index.fileRevisions;
+			$tw.plugins.dropbox.fileInfo = index.fileInfo;
 		}
 		// Check for later versions of files on Dropbox
 		$tw.plugins.dropbox.loadTiddlerFiles("/" + $tw.plugins.dropbox.wikiName + "/tiddlers",function(hadChanges) {

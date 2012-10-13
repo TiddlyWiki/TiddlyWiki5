@@ -20,7 +20,7 @@ var queryLoginMarker = "login=true";
 
 $tw.plugins.dropbox = {
 	client: null, // Dropbox.js client object
-	fileRevisions: {}, // Hashmap of revision strings for each tiddler file that has been retrieved from Dropbox
+	fileInfo: {}, // Hashmap of each file as retrieved from Dropbox: {versionTag:,title:}
 	titleIsLoggedIn: "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName: "$:/plugins/dropbox/UserName",
 	titlePublicAppUrl: "$:/plugins/dropbox/PublicAppUrl",
@@ -124,13 +124,15 @@ $tw.plugins.dropbox.loadTiddlerFiles = function(path,callback) {
 				isMetaFile = stat.path.lastIndexOf(".meta") === stat.path.length - 5;
 			if(stat.isFile && !stat.isFolder && !isMetaFile) {
 				// Don't load the file if the version tag shows it hasn't changed
-				var hasChanged = stat.versionTag !== $tw.plugins.dropbox.fileRevisions[stat.name];
+				var fileInfo = $tw.plugins.dropbox.fileInfo[stat.name] || {},
+					hasChanged = stat.versionTag !== fileInfo.versionTag;
 				if(!hasChanged) {
 					// Check if there is a metafile and whether it has changed
 					var metafileName = stat.name + ".meta";
 					for(var p=0; p<stats.length; p++) {
 						if(stats[p].name === metafileName) {
-							hasChanged = stats[p].versionTag !== $tw.plugins.dropbox.fileRevisions[metafileName];
+							fileInfo = $tw.plugins.dropbox.fileInfo[metafileName] || {};
+							hasChanged = stats[p].versionTag !== fileInfo.versionTag;
 						}
 					}
 				}
@@ -184,7 +186,7 @@ console.log("loading tiddler from",path);
 			tiddlers = $tw.wiki.deserializeTiddlers(mimeType,data,{title: defaultTitle});
 		}
 		// Save the revision of this file so we can detect changes
-		$tw.plugins.dropbox.fileRevisions[stat.name] = stat.versionTag;
+		$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag};
 		// Check to see if there's a metafile
 		var	metafilePath = path + ".meta",
 			metafileIndex = null;
@@ -201,7 +203,7 @@ console.log("loading tiddler from",path);
 					return $tw.plugins.dropbox.showError(error);
 				}
 				// Save the revision of the metafile so we can detect changes later
-				$tw.plugins.dropbox.fileRevisions[stat.name] = stat.versionTag;
+				$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag};
 				// Extract the metadata and add the tiddlers
 				tiddlers = [$tw.utils.parseFields(data,tiddlers[0])];
 				$tw.wiki.addTiddlers(tiddlers);
@@ -308,7 +310,7 @@ $tw.plugins.dropbox.createWiki = function(wikiName) {
 // Save the index file
 $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
 	// Get the tiddler index information
-	var index = {tiddlers: [],shadows: [], fileRevisions: $tw.plugins.dropbox.fileRevisions};
+	var index = {tiddlers: [],shadows: [], fileInfo: $tw.plugins.dropbox.fileInfo};
 	// First all the tiddlers
 	$tw.wiki.forEachTiddler(function(title,tiddler) {
 		if(tiddler.isShadow) {
