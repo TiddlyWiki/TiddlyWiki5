@@ -1,4 +1,4 @@
-title: $:/core/templates/index.template.html
+title: $:/plugins/dropbox/index.template.html
 type: text/x-tiddlywiki-html
 
 <!doctype html>
@@ -16,9 +16,12 @@ type: text/x-tiddlywiki-html
 " />
 <title><<tiddler "$:/core/wiki/title">></title>
 <<serialize "[tag[$:/core/wiki/rawmarkup]]" text/plain>>
+<link rel="stylesheet" href="//dl-web.dropbox.com/spa/4f6lw6nhu5zn5pr/TiddlyWiki5/public/styles.css" type="text/css" />
 </head>
 <body>
-<link rel="stylesheet" href="//dl-web.dropbox.com/spa/4f6lw6nhu5zn5pr/TiddlyWiki5/public/styles.css" type="text/css" />
+<div id="shadowArea" style="display:none;">
+<<serialize "[[$:/plugins/dropbox/Index]]" application/x-tiddler-html-div>>
+</div>
 </body>
 <script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.6.1/dropbox.min.js"></script>
 <script src="//dl-web.dropbox.com/spa/4f6lw6nhu5zn5pr/TiddlyWiki5/public/tw5dropbox.js"></script>

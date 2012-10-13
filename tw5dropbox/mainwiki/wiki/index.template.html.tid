@@ -1,4 +1,4 @@
-title: $:/core/templates/index.template.html
+title: $:/plugins/dropbox/index.template.html
 type: text/x-tiddlywiki-html
 
 <!doctype html>

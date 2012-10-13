@@ -28,8 +28,11 @@ exports.startup = function() {
 		$tw.plugins.dropbox.wikiName = wikiName;
 		$tw.wiki.addTiddler({title: titleWikiName, text: $tw.plugins.dropbox.wikiName},true);
 		// Load tiddlers
-		$tw.plugins.dropbox.loadTiddlerFiles("/" + $tw.plugins.dropbox.wikiName + "/tiddlers",function() {
-			console.log("Loaded all tiddlers",$tw.wiki.tiddlers);
+		$tw.plugins.dropbox.loadTiddlerFiles("/" + $tw.plugins.dropbox.wikiName + "/tiddlers",function(fileRevisions) {
+			// Save the tiddler index
+			$tw.plugins.dropbox.saveTiddlerIndex("/" + $tw.plugins.dropbox.wikiName + "/index.html",fileRevisions,function(error) {
+				console.log("Saved tiddler index");
+			});
 		});	
 	} else {
 		alert("This TiddlyWiki file must be in Dropbox");

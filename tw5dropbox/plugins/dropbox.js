@@ -19,7 +19,9 @@ var apiKey = "m+qwjj8wFRA=|1TSoitGS9Nz2RTwv+jrUJnsAj0yy57NhQJ4TkZ/+Hw==";
 var titleIsLoggedIn = "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName = "$:/plugins/dropbox/UserName",
 	titlePublicAppUrl = "$:/plugins/dropbox/PublicAppUrl",
-	titleAppTemplateHtml = "$:/plugins/dropbox/apptemplate.html";
+	titleAppTemplateHtml = "$:/plugins/dropbox/apptemplate.html",
+	titleTiddlerIndex = "$:/plugins/dropbox/Index",
+	titleAppIndexTemplate = "$:/plugins/dropbox/index.template.html";
 
 // Query string marker for forcing authentication
 var queryLoginMarker = "login=true";
@@ -112,7 +114,13 @@ $tw.plugins.dropbox.loadTiddlerFiles = function(path,callback) {
 			$tw.plugins.dropbox.loadTiddlerFile(task.path,task.type,task.stats,callback);
 		}, 2);
 		// Call the callback when we've processed all the files
-		q.drain = callback;
+		q.drain = function() {
+			var fileRevisions = {};
+			for(var t=0; t<stats.length; t++) {
+				fileRevisions[stats[t].name] = stats[t].versionTag;
+			}
+			callback(fileRevisions);
+		};
 		// Push a task onto the queue for each file to be processed
 		for(var s=0; s<stats.length; s++) {
 			var stat = stats[s],
@@ -274,6 +282,30 @@ $tw.plugins.dropbox.createWiki = function(wikiName) {
 			alert("Created wiki " + wikiName);
 		}
 	});
+};
+
+// Save the index file
+$tw.plugins.dropbox.saveTiddlerIndex = function(path,fileRevisions,callback) {
+	// Get the tiddler index information
+	var index = {tiddlers: [],shadows: [], fileRevisions: {}}
+	// First all the tiddlers
+	$tw.wiki.forEachTiddler(function(title,tiddler) {
+		if(tiddler.isShadow) {
+			index.tiddlers.push(tiddler.fields);
+		} else {
+			index.shadows.push(tiddler.fields);
+		}
+	});
+	// Then all the revision information
+	index.fileRevisions = fileRevisions;
+	// Save everything to a tiddler
+	$tw.wiki.addTiddler({title: titleTiddlerIndex, type: "application/json", text: JSON.stringify(index)});
+	// Generate the index file
+	var file = $tw.wiki.renderTiddler("text/plain",titleAppIndexTemplate);
+	// Save the index to Dropbox
+    $tw.plugins.dropbox.client.writeFile(path,file,function(error,stat) {
+        callback(error);
+    });
 };
 
 exports.startup = function() {

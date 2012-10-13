@@ -1,4 +1,4 @@
-title: $:/core/templates/tw5dropbox.template.js
+title: $:/plugins/dropbox/tw5dropbox.template.js
 type: text/x-tiddlywiki-html
 
 <<serialize "[is[shadow]type[application/javascript]library[yes]] -[[$:/library/sjcl.js]]" text/plain>>
