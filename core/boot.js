@@ -134,8 +134,6 @@ $tw.config.contentTypeInfo = {
 
 $tw.utils = $tw.utils || {};
 
-
-
 /*
 Check if an object has a property
 */
