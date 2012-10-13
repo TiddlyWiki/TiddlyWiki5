@@ -12,13 +12,15 @@ Startup the Dropbox main app
 /*global $tw: false */
 "use strict";
 
-exports.startup = function() {
-	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleLoadedWikis, text: "no"},true);
-	// Load tiddlers
-	$tw.plugins.dropbox.loadWikiFiles("/",function() {
-		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleLoadedWikis, text: "yes"},true);
-		console.log("Loaded all wikis",$tw.wiki.tiddlers);
-	});
+exports.startup = function(loggedIn) {
+	if(loggedIn) {
+		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleLoadedWikis, text: "no"},true);
+		// Load tiddlers
+		$tw.plugins.dropbox.loadWikiFiles("/",function() {
+			$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleLoadedWikis, text: "yes"},true);
+			console.log("Loaded all wikis",$tw.wiki.tiddlers);
+		});
+	}
 };
 
 })();

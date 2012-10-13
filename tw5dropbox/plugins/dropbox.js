@@ -48,12 +48,17 @@ $tw.plugins.dropbox.login = function() {
 		// Get user information
 		$tw.plugins.dropbox.getUserInfo(function() {
 			// Invoke any dropbox-startup modules
-			var mods = $tw.modules.types["dropbox-startup"];
-			for(var m=0; m<mods.length; m++) {
-				mods[m].startup();
-			}
+			$tw.plugins.dropbox.invokeDropboxStartupModules(true);
 		});
 	});
+};
+
+// Invoke any dropbox-startup modules
+$tw.plugins.dropbox.invokeDropboxStartupModules = function(loggedIn) {
+	var mods = $tw.modules.types["dropbox-startup"];
+	for(var m=0; m<mods.length; m++) {
+		mods[m].startup(loggedIn);
+	}
 };
 
 // Get user information
@@ -103,12 +108,26 @@ $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 	});
 };
 
-// Load tiddler files from a folder
-$tw.plugins.dropbox.loadTiddlerFiles = function(path,callback) {
+// Synchronise the local state with the files in Dropbox
+$tw.plugins.dropbox.refreshTiddlerFiles = function(path,callback) {
 	// First get the list of tiddler files
 	$tw.plugins.dropbox.client.stat(path,{readDir: true},function(error,stat,stats) {
 		if(error) {
 			return $tw.plugins.dropbox.showError(error);
+		}
+		// Make a hashmap of each of the file names
+		var filenames = {},f,hadDeletions;
+		for(f=0; f<stats.length; f++) {
+			filenames[stats[f].name] = true;
+		}
+console.log("filenames",filenames);
+console.log("fileinfo",$tw.plugins.dropbox.fileInfo)
+		// Check to see if any files have been deleted, and remove the associated tiddlers
+		for(f in $tw.plugins.dropbox.fileInfo) {
+			if(!$tw.utils.hop(filenames,f)) {
+				$tw.wiki.deleteTiddler($tw.plugins.dropbox.fileInfo[f].title);
+				hadDeletions = true;
+			}
 		}
 		// Process the files via an asynchronous queue, with concurrency set to 2 at a time
 		var q = async.queue(function(task,callback) {
@@ -143,7 +162,7 @@ $tw.plugins.dropbox.loadTiddlerFiles = function(path,callback) {
 		}
 		// If we didn't queue anything for loading we'll have to manually trigger our callback
 		if(q.length() === 0) {
-			callback(false); // And tell it that there weren't any changes
+			callback(hadDeletions); // And tell it that there are changes if there were deletions
 		}
 	});
 };
@@ -185,8 +204,6 @@ console.log("loading tiddler from",path);
 		} else {
 			tiddlers = $tw.wiki.deserializeTiddlers(mimeType,data,{title: defaultTitle});
 		}
-		// Save the revision of this file so we can detect changes
-		$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag};
 		// Check to see if there's a metafile
 		var	metafilePath = path + ".meta",
 			metafileIndex = null;
@@ -197,21 +214,25 @@ console.log("loading tiddler from",path);
 		}
 		// Process the metafile if it's there
 		if(tiddlers.length === 1 && metafileIndex !== null) {
+			var mainStat = stat;
 			$tw.plugins.dropbox.client.readFile(metafilePath,function(error,data,stat) {
 				if(error) {
 					callback(error);
 					return $tw.plugins.dropbox.showError(error);
 				}
-				// Save the revision of the metafile so we can detect changes later
-				$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag};
 				// Extract the metadata and add the tiddlers
 				tiddlers = [$tw.utils.parseFields(data,tiddlers[0])];
 				$tw.wiki.addTiddlers(tiddlers);
+				// Save the revision of the files so we can detect changes later
+				$tw.plugins.dropbox.fileInfo[mainStat.name] = {versionTag: mainStat.versionTag,title: tiddlers[0].title};
+				$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag,title: tiddlers[0].title};
 				callback();
 			});
 		} else {
 			// Add the tiddlers
 			$tw.wiki.addTiddlers(tiddlers);
+			// Save the revision of this file so we can detect changes
+			$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag,title: tiddlers[0].title};
 			callback();
 		}
 	});
@@ -342,6 +363,8 @@ exports.startup = function() {
 	// Authenticate ourselves if the marker is in the document query string
 	if(document.location.search.indexOf(queryLoginMarker) !== -1) {
 		$tw.plugins.dropbox.login();
+	} else {
+		$tw.plugins.dropbox.invokeDropboxStartupModules(false);
 	}
 };
 
