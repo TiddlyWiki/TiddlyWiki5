@@ -143,16 +143,22 @@ $tw.plugins.dropbox.loadTiddlerFile = function(path,mimeType,stats,callback) {
 			callback(error);
 			return $tw.plugins.dropbox.showError(error);
 		}
+		// Compute the default title
+		var defaultTitle = path,
+			p = path.lastIndexOf("/");
+		if(p !== -1) {
+			defaultTitle = path.substr(p+1);
+		}
 		// Deserialise the tiddler(s) out of the text
 		var tiddlers;
 		if(isBinary) {
 			tiddlers = [{
-				title: path,
+				title: defaultTitle,
 				text: $tw.plugins.dropbox.base64EncodeString(data),
 				type: mimeType
 			}];
 		} else {
-			tiddlers = $tw.wiki.deserializeTiddlers(mimeType,data,{title: path});
+			tiddlers = $tw.wiki.deserializeTiddlers(mimeType,data,{title: defaultTitle});
 		}
 		// Check to see if there's a metafile
 		var	metafilePath = path + ".meta",
