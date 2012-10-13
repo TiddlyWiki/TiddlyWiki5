@@ -12,13 +12,11 @@ Startup the Dropbox main app
 /*global $tw: false */
 "use strict";
 
-var titleLoadedWikis = "$:/plugins/dropbox/LoadedWikis";
-
 exports.startup = function() {
-	$tw.wiki.addTiddler({title: titleLoadedWikis, text: "no"},true);
+	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleLoadedWikis, text: "no"},true);
 	// Load tiddlers
 	$tw.plugins.dropbox.loadWikiFiles("/",function() {
-		$tw.wiki.addTiddler({title: titleLoadedWikis, text: "yes"},true);
+		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleLoadedWikis, text: "yes"},true);
 		console.log("Loaded all wikis",$tw.wiki.tiddlers);
 	});
 };

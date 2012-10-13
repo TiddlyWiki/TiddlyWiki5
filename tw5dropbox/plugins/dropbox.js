@@ -15,19 +15,19 @@ Startup the Dropbox integration plugin
 // Obfuscated API key
 var apiKey = "m+qwjj8wFRA=|1TSoitGS9Nz2RTwv+jrUJnsAj0yy57NhQJ4TkZ/+Hw==";
 
-// Tiddler titles
-var titleIsLoggedIn = "$:/plugins/dropbox/IsLoggedIn",
-	titleUserName = "$:/plugins/dropbox/UserName",
-	titlePublicAppUrl = "$:/plugins/dropbox/PublicAppUrl",
-	titleAppTemplateHtml = "$:/plugins/dropbox/apptemplate.html",
-	titleTiddlerIndex = "$:/plugins/dropbox/Index",
-	titleAppIndexTemplate = "$:/plugins/dropbox/index.template.html";
-
 // Query string marker for forcing authentication
 var queryLoginMarker = "login=true";
 
 $tw.plugins.dropbox = {
-	client: null // Dropbox.js client object
+	client: null, // Dropbox.js client object
+	titleIsLoggedIn: "$:/plugins/dropbox/IsLoggedIn",
+	titleUserName: "$:/plugins/dropbox/UserName",
+	titlePublicAppUrl: "$:/plugins/dropbox/PublicAppUrl",
+	titleAppTemplateHtml: "$:/plugins/dropbox/apptemplate.html",
+	titleTiddlerIndex: "$:/plugins/dropbox/Index",
+	titleAppIndexTemplate: "$:/plugins/dropbox/index.template.html",
+	titleWikiName: "$:/plugins/dropbox/WikiName",
+	titleLoadedWikis: "$:/plugins/dropbox/LoadedWikis"
 };
 
 // Error handling
@@ -43,7 +43,7 @@ $tw.plugins.dropbox.login = function() {
 			return $tw.plugins.dropbox.showError(error);
 		}
 		// Mark us as logged in
-		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "yes"},true);
+		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleIsLoggedIn, text: "yes"},true);
 		// Get user information
 		$tw.plugins.dropbox.getUserInfo(function() {
 			// Invoke any dropbox-startup modules
@@ -64,7 +64,7 @@ $tw.plugins.dropbox.getUserInfo = function(callback) {
 		}
 		$tw.plugins.dropbox.userInfo = userInfo;
 		// Save the username
-		$tw.wiki.addTiddler({title: titleUserName, text: userInfo.name},true);
+		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleUserName, text: userInfo.name},true);
 		callback();
 	});
 };
@@ -76,8 +76,8 @@ $tw.plugins.dropbox.logout = function() {
 			return $tw.plugins.dropbox.showError(error);
 		}
 		// Mark us as logged out
-		$tw.wiki.deleteTiddler(titleUserName);
-		$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"},true);
+		$tw.wiki.deleteTiddler($tw.plugins.dropbox.titleUserName);
+		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleIsLoggedIn, text: "no"},true);
 		// Remove any marker from the query string
 		document.location.search = "";
 	});
@@ -264,7 +264,7 @@ $tw.plugins.dropbox.createWiki = function(wikiName) {
 	    },
 	    function(callback) {
 	        // Third save the template app HTML file
-	        var tiddler = $tw.wiki.getTiddler(titleAppTemplateHtml);
+	        var tiddler = $tw.wiki.getTiddler($tw.plugins.dropbox.titleAppTemplateHtml);
 	        if(!tiddler) {
 	        	callback("Cannot find app template tiddler");
 	        } else {
@@ -291,17 +291,17 @@ $tw.plugins.dropbox.saveTiddlerIndex = function(path,fileRevisions,callback) {
 	// First all the tiddlers
 	$tw.wiki.forEachTiddler(function(title,tiddler) {
 		if(tiddler.isShadow) {
-			index.tiddlers.push(tiddler.fields);
-		} else {
 			index.shadows.push(tiddler.fields);
+		} else {
+			index.tiddlers.push(tiddler.fields);
 		}
 	});
 	// Then all the revision information
 	index.fileRevisions = fileRevisions;
 	// Save everything to a tiddler
-	$tw.wiki.addTiddler({title: titleTiddlerIndex, type: "application/json", text: JSON.stringify(index)});
+	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleTiddlerIndex, type: "application/json", text: JSON.stringify(index)});
 	// Generate the index file
-	var file = $tw.wiki.renderTiddler("text/plain",titleAppIndexTemplate);
+	var file = $tw.wiki.renderTiddler("text/plain",$tw.plugins.dropbox.titleAppIndexTemplate);
 	// Save the index to Dropbox
     $tw.plugins.dropbox.client.writeFile(path,file,function(error,stat) {
         callback(error);
@@ -313,7 +313,7 @@ exports.startup = function() {
 		return;
 	}
 	// Mark us as not logged in
-	$tw.wiki.addTiddler({title: titleIsLoggedIn, text: "no"},true);
+	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleIsLoggedIn, text: "no"},true);
 	// Initialise Dropbox for sandbox access
 	$tw.plugins.dropbox.client = new Dropbox.Client({key: apiKey, sandbox: true});
 	// Use the basic redirection authentication driver

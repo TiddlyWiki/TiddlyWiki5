@@ -12,8 +12,6 @@ Startup the Dropbox wiki app
 /*global $tw: false */
 "use strict";
 
-var titleWikiName = "$:/plugins/dropbox/WikiName";
-
 exports.startup = function() {
 	// Check that we've been loaded from the dropbox
 	var url = (window.location.protocol + "//" + window.location.host + window.location.pathname),
@@ -25,9 +23,16 @@ exports.startup = function() {
 		}
 	}
 	if(wikiName) {
+		// Save the wiki name for later
 		$tw.plugins.dropbox.wikiName = wikiName;
-		$tw.wiki.addTiddler({title: titleWikiName, text: $tw.plugins.dropbox.wikiName},true);
-		// Load tiddlers
+		$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleWikiName, text: $tw.plugins.dropbox.wikiName},true);
+		// Load any tiddlers embedded in the index file
+		var index = $tw.wiki.getTiddlerData($tw.plugins.dropbox.titleTiddlerIndex);
+		if(index) {
+			$tw.wiki.addTiddlers(index.tiddlers);
+			$tw.wiki.addTiddlers(index.shadows,true);
+		}
+		// Check for later versions of files on Dropbox
 		$tw.plugins.dropbox.loadTiddlerFiles("/" + $tw.plugins.dropbox.wikiName + "/tiddlers",function(fileRevisions) {
 			// Save the tiddler index
 			$tw.plugins.dropbox.saveTiddlerIndex("/" + $tw.plugins.dropbox.wikiName + "/index.html",fileRevisions,function(error) {
