@@ -51,6 +51,7 @@ exports.info = {
 	params: {
 		target: {byName: "default", type: "tiddler"},
 		template: {byName: true, type: "tiddler"},
+		templateText: {byName: true, type: "text"},
 		"with": {byName: true, type: "text", dependentAll: true}
 	}
 };
@@ -70,75 +71,73 @@ exports.evaluateDependencies = function() {
 };
 
 exports.executeMacro = function() {
-	var renderTitle = this.params.target,
-		renderTemplate = this.params.template,
-		children,
-		childrenClone = [],
+	var renderTitle, renderTemplateTitle, renderTemplateTree,
+		children, parseTree,
 		t,
 		parents = this.parents.slice(0),
 		parseOptions = {};
 	// If there's no render title specified then use the current tiddler title
-	if(typeof renderTitle !== "string") {
+	if(this.hasParameter("target")) {
+		renderTitle = this.params.target;
+	} else {
 		renderTitle = this.tiddlerTitle;
 	}
-	// If there's no template specified then use the target tiddler title
-	if(typeof renderTemplate !== "string") {
-		renderTemplate = renderTitle;
-	}
-	// Check for recursion
-	if(parents.indexOf(renderTemplate) !== -1) {
-		children = [$tw.Tree.errorNode("Tiddler recursion error in <<tiddler>> macro")];	
+	// Get the render tree for the template
+	if(this.hasParameter("templateText")) {
+		renderTemplateTree = this.wiki.parseText("text/x-tiddlywiki",this.params.templateText).tree;
 	} else {
-		// Check for substitution parameters
-		if(this.hasParameter("with")) {
-			parseOptions["with"] = [undefined,this.params["with"]]; // TODO: Allow for more than one with: parameter
+		if(this.hasParameter("template")) {
+			renderTemplateTitle = this.params.template;
+		} else {
+			renderTemplateTitle = renderTitle;
 		}
-		// Render the target tiddler
-		var parseTree = this.wiki.parseTiddler(renderTemplate,parseOptions);
-		children = parseTree ? parseTree.tree : [];
-	}
-	// Update the stack of tiddler titles for recursion detection
-	parents.push(renderTemplate);
-	// Clone the children
-	for(t=0; t<children.length; t++) {
-		childrenClone.push(children[t].clone());
+		// Check for recursion
+		if(parents.indexOf(this.params.templateTitle) !== -1) {
+			renderTemplateTree = $tw.Tree.errorNode("Tiddler recursion error in <<transclude>> macro");	
+		} else {
+			parents.push(renderTemplateTitle);
+			renderTemplateTree = [];
+			// Check for substitution parameters
+			if(this.hasParameter("with")) {
+				parseOptions["with"] = [undefined,this.params["with"]]; // TODO: Allow for more than one with: parameter
+			}
+			parseTree = this.wiki.parseTiddler(renderTemplateTitle,parseOptions);
+			children = parseTree ? parseTree.tree : [];
+			for(t=0; t<children.length; t++) {
+				renderTemplateTree.push(children[t].clone());
+			}
+		}
 	}
 	// Execute macros within the children
-	for(t=0; t<childrenClone.length; t++) {
-		childrenClone[t].execute(parents,renderTitle);
+	for(t=0; t<renderTemplateTree.length; t++) {
+		renderTemplateTree[t].execute(parents,renderTitle);
 	}
 	// Set up the attributes for the wrapper element
 	var attributes = {
-		"data-tiddler-target": renderTitle,
-		"data-tiddler-template": renderTemplate,
 		"class": ["tw-tiddler-frame"]
 	};
 	if(!this.wiki.tiddlerExists(renderTitle)) {
 		attributes["class"].push("tw-tiddler-missing");
 	}
 	// Return the children
-	return $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,childrenClone);
+	return $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,renderTemplateTree);
 };
 
 exports.refreshInDom = function(changes) {
-	var t;
+	var renderTitle;
 	// Set the class for missing tiddlers
-	var renderTitle = this.params.target;
-	if(typeof renderTitle !== "string") {
-		renderTitle = this.params.template;
+	if(this.hasParameter("target")) {
+		renderTitle = this.params.target;
+	} else {
+		renderTitle = this.tiddlerTitle;
 	}
 	if(renderTitle) {
 		$tw.utils.toggleClass(this.child.domNode,"tw-tiddler-missing",!this.wiki.tiddlerExists(renderTitle));
 	}
 	// Rerender the tiddler if it is impacted by the changes
-	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
+	if(this.dependencies.hasChanged(changes,this.renderTitle)) {
 		// Manually reexecute and rerender this macro
-		var parent = this.child.domNode.parentNode,
-			nextSibling = this.child.domNode.nextSibling;
-		parent.removeChild(this.child.domNode);
-		this.execute(this.parents,this.tiddlerTitle);
-		this.child.renderInDom(parent,nextSibling);
-		this.domNode = this.child.domNode;
+		this.reexecuteInDom();
 	} else {
 		this.child.refreshInDom(changes);
 	}
