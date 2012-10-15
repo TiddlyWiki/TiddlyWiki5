@@ -207,22 +207,29 @@ Macro.prototype.refreshInDom = function(changes) {
 	// Check if any of the dependencies of this macro node have changed
 	if(this.dependencies.hasChanged(changes,this.tiddlerTitle)) {
 		// Re-execute the macro if so
-		// Macros can only auto-refresh if on of their descendent child has a DOM node
-		var child = this.child;
-		while(!child.domNode && child.child) {
-			child = child.child;
-		}
-		var parentDomNode = child.domNode.parentNode,
-			insertBefore = child.domNode.nextSibling;
-		parentDomNode.removeChild(child.domNode);
-		this.execute(this.parents,this.tiddlerTitle);
-		this.renderInDom(parentDomNode,insertBefore);
+		this.reexecuteInDom();
 	} else {
 		// Refresh any child
 		if(this.child) {
 			this.child.refreshInDom(changes);
 		}
 	}
+};
+
+/*
+Re-execute a macro in the DOM
+*/
+Macro.prototype.reexecuteInDom = function() {
+	// Macros can only auto-refresh if one of their descendent child has a DOM node
+	var child = this.child;
+	while(!child.domNode && child.child) {
+		child = child.child;
+	}
+	var parentDomNode = child.domNode.parentNode,
+		insertBefore = child.domNode.nextSibling;
+	parentDomNode.removeChild(child.domNode);
+	this.execute(this.parents,this.tiddlerTitle);
+	this.renderInDom(parentDomNode,insertBefore);
 };
 
 Macro.prototype.addClass = function(className) {
