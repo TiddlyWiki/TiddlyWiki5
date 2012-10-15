@@ -1,0 +1,51 @@
+
+@-webkit-keyframes pulse {
+	0% {background-color: #ffff80;}
+	100% {background-color: #ffffff;}
+}
+
+@-moz-keyframes pulse {
+	0% {background-color: #ffff80;}
+	100% {background-color: #ffffff;}
+}
+
+@-o-keyframes pulse {
+	0% {background-color: #ffff80;}
+	100% {background-color: #ffffff;}
+}
+
+@keyframes pulse {
+	0% {background-color: #ffff80;}
+	100% {background-color: #ffffff;}
+}
+
+.pulse {
+	-webkit-animation-name: pulse;
+	-moz-animation-name: pulse;
+	-o-animation-name: pulse;
+	animation-name: pulse;
+	-webkit-animation-iteration-count: 5;
+	-moz-animation-iteration-count: 5;
+	-o-animation-iteration-count: 5;
+	animation-iteration-count: 5;
+	-webkit-animation-duration: 0.4s;
+	-moz-animation-duration: 0.4s;
+	-o-animation-duration: 0.4s;
+	animation-duration: 0.4s;
+	-webkit-animation-delay: 0s;
+	-moz-animation-delay: 0s;
+	-o-animation-delay: 0s;
+	animation-delay: 0s;
+	-webkit-animation-fill-mode: both;
+	-moz-animation-fill-mode: both;
+	-o-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-timing-mode: ease-in-out;
+	-moz-animation-timing-mode: ease-in-out;
+	-o-animation-timing-mode: ease-in-out;
+	animation-timing-mode: ease-in-out;
+	-webkit-animation-direction: alternate;
+	-moz-animation-direction: alternate;
+	-o-animation-direction: alternate;
+	animation-direction: alternate;
+}
