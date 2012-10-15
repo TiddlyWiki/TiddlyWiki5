@@ -112,4 +112,19 @@ exports.forceLayout = function(element) {
 	var dummy = element.offsetWidth;
 };
 
+/*
+Pulse an element for debugging purposes
+*/
+exports.pulseElement = function(element) {
+	// Event handler to remove the class at the end
+	element.addEventListener($tw.browser.animationEnd,function handler(event) {
+		element.removeEventListener($tw.browser.animationEnd,handler,false);
+		$tw.utils.removeClass(element,"pulse");
+	},false);
+	// Apply the pulse class
+	$tw.utils.removeClass(element,"pulse");
+	element.offsetWidth;
+	$tw.utils.addClass(element,"pulse");
+};
+
 })();

@@ -14,6 +14,7 @@ Transclude macro
 
 exports.info = {
 	name: "transclude",
+	dependentAll: true, // Tiddlers containing <<transclude>> macro are dependent on every tiddler
 	params: {
 		filter: {byPos: 0, type: "filter"},
 		title: {byPos: 1, type: "tiddler"},
@@ -24,6 +25,7 @@ exports.info = {
 };
 
 exports.executeMacro = function() {
+console.log("Executing transclude macro",this.params.filter,this.tiddlerTitle);
 	var titles,templateTiddler,templateText,t,title,templateParseTree,
 		nodes,node,c,
 		parents = this.parents.slice(0);

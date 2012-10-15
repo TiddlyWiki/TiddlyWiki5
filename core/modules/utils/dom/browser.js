@@ -28,6 +28,13 @@ exports.getBrowserInfo = function(info) {
 				"Moz": "transitionend",
 				"webkit": "webkitTransitionEnd"
 			}[info.prefix];
+	info.animationEnd = {		
+				"": "animationEnd",
+				"O": "oAnimationEnd",
+				"MS": "msAnimationEnd",
+				"Moz": "animationend",
+				"webkit": "webkitAnimationEnd"
+			}[info.prefix];
 	info.requestFullScreen = document.body.webkitRequestFullScreen !== undefined ? "webkitRequestFullScreen" :
 							document.body.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
 							document.body.requestFullScreen !== undefined ? "requestFullScreen" : "";
