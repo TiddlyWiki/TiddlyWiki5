@@ -231,16 +231,7 @@ exports.postRenderInDom = function() {
 exports.refreshInDom = function(changes) {
 	// If the storyview has changed we'll have to completely re-execute the macro
 	if(this.hasParameter("storyviewTiddler") && $tw.utils.hop(changes,this.params.storyviewTiddler)) {
-		// This logic should be reused from the base macro class, and not duplicated
-		var child = this.child;
-		while(!child.domNode && child.child) {
-			child = child.child;
-		}
-		var parentDomNode = child.domNode.parentNode,
-			insertBefore = child.domNode.nextSibling;
-		parentDomNode.removeChild(child.domNode);
-		this.execute(this.parents,this.tiddlerTitle);
-		this.renderInDom(parentDomNode,insertBefore);
+		this.reexecuteInDom();
 		return;
 	}
 	// If the story tiddler has changed we need to sync the story elements
