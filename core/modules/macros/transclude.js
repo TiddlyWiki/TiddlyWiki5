@@ -18,7 +18,7 @@ exports.info = {
 	params: {
 		filter: {byPos: 0, type: "filter"},
 		title: {byPos: 1, type: "tiddler"},
-		templateTitle: {byName: true, type: "tiddler"},
+		template: {byName: true, type: "tiddler"},
 		templateText: {byName: true, type: "text"},
 		emptyMessage: {byName: true, type: "text"}
 	}
@@ -46,13 +46,13 @@ exports.getTemplateParseTree = function(parents) {
 		// Parse the template
 		return this.wiki.parseText("text/x-tiddlywiki",this.params.templateText);
 	} else {
-		if(this.hasParameter("templateTitle")) {
+		if(this.hasParameter("template")) {
 			// Check for recursion
-			if(parents.indexOf(this.params.templateTitle) !== -1) {
+			if(parents.indexOf(this.params.template) !== -1) {
 				return $tw.Tree.errorNode("Tiddler recursion error in <<transclude>> macro");	
 			}
-			parents.push(this.params.templateTitle);
-			return this.wiki.parseTiddler(this.params.templateTitle);
+			parents.push(this.params.template);
+			return this.wiki.parseTiddler(this.params.template);
 		} else {
 			return this.wiki.parseText("text/x-tiddlywiki","<<view text wikified>>");
 		}
@@ -101,7 +101,7 @@ exports.refreshInDom = function(changes) {
 console.log("Refreshing transclude macro",this.params.filter,this.tiddlerTitle);
 	var doRefresh = false;
 	// Do a refresh if any of our parameters have changed
-	doRefresh = doRefresh || (this.hasParameter("templateTitle") && $tw.utils.hop(changes,this.params.templateTitle));
+	doRefresh = doRefresh || (this.hasParameter("template") && $tw.utils.hop(changes,this.params.template));
 	// Check if we need to do a full refresh
 	if(doRefresh) {
 		// Re-execute the macro to refresh it
