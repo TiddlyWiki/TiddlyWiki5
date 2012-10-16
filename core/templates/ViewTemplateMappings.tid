@@ -1,5 +1,0 @@
-title: $:/templates/ViewTemplateMappings
-tags: $:/tag/view-template-mapping
-type: application/json
-
-{"rules":[{"filter":"[has[title]]","template":"$:/templates/ViewTemplate","missingTiddler":true,"priority":0}]}

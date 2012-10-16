@@ -41,8 +41,6 @@ exports.info = {
 	params: {
 		story: {byName: "default", type: "tiddler"},
 		history: {byName: "default", type: "tiddler"},
-		viewTemplateMappings: {byName: true, type: "filter"},
-		editTemplateMappings: {byName: true, type: "filter"},
 		viewTemplate: {byName: true, type: "tiddler"},
 		editTemplate: {byName: true, type: "tiddler"},
 		storyviewTiddler: {byName: true, type: "tiddler"},
@@ -61,47 +59,11 @@ exports.getHistory = function() {
 	this.history = this.wiki.getTiddlerData(this.params.history,{stack: []});
 };
 
-exports.getTemplate = function(title,mappingFilter) {
-	var tiddler = this.wiki.getTiddler(title), tiddlers = {};
-	// Get the mapping tiddlers
-	var mappingTiddlers = this.wiki.filterTiddlers(mappingFilter),
-		rules = [], t, json, r, rule;
-	// Pull out the rules from each tiddler
-	for(t=0; t<mappingTiddlers.length; t++) {
-		json = this.wiki.getTiddlerData(mappingTiddlers[t],{rules: []});
-		for(r=0; r<json.rules.length; r++) {
-			rules.push(json.rules[r]);
-		}
-	}
-	// Sort the rules by priority
-	rules.sort(function(a,b) {
-		return a.priority - b.priority;
-	});
-	// Apply the rules
-	if(tiddler) {
-		tiddlers[title] = tiddler;
-		for(r=rules.length-1; r>=0; r--) {
-			rule = rules[r];
-			if(this.wiki.filterTiddlers(rule.filter,null,tiddlers).length > 0) {
-				return rule.template;
-			}
-		}
-	} else {
-		for(r=rules.length-1; r>=0; r--) {
-			rule = rules[r];
-			if(rule.missingTiddler) {
-				return rule.template;
-			}
-		}
-	}
-	return null;
-};
-
 exports.getViewTemplate = function(title) {
 	if(this.hasParameter("viewTemplate")) {
 		return this.params.viewTemplate;
 	} else {
-		return this.getTemplate(title,this.params.viewTemplateMappings || "[tag[$:/tag/view-template-mapping]]");
+		return "$:/templates/ViewTemplate";
 	}
 };
 
@@ -109,7 +71,7 @@ exports.getEditTemplate = function(title) {
 	if(this.hasParameter("editTemplate")) {
 		return this.params.editTemplate;
 	} else {
-		return this.getTemplate(title,this.params.editTemplateMappings || "[tag[$:/tag/edit-template-mapping]]");
+		return "$:/templates/EditTemplate";
 	}
 };
 
