@@ -26,6 +26,16 @@ exports.info = {
 	}
 };
 
+/*
+These types are shorthands for particular filters
+*/
+var typeMappings = {
+	all: "[!is[shadow]]",
+	missing: "[is[missing]]",
+	orphans: "[is[orphan]]",
+	shadowed: "[is[shadow]]"
+};
+
 exports.executeMacro = function() {
 	// Get the list of tiddlers object
 	this.getTiddlerList();
@@ -43,7 +53,16 @@ exports.executeMacro = function() {
 };
 
 exports.getTiddlerList = function() {
-	this.list = this.wiki.filterTiddlers(this.params.filter,this.tiddlerTitle);
+	var filter;
+	if(this.hasParameter("type")) {
+		filter = typeMappings[this.params.type];
+	} else if(this.hasParameter("filter")) {
+		filter = this.params.filter;
+	}
+	if(!filter) {
+		filter = "[!is[shadow]]";
+	}
+	this.list = this.wiki.filterTiddlers(filter,this.tiddlerTitle);
 };
 
 /*
@@ -82,6 +101,10 @@ exports.createListElementMacro = function(title) {
 	}
 	if(draft && this.hasParameter("editTemplateText")) {
 		template = this.params.editTemplateText;
+	}
+	// Check for no template specified
+	if(!template && !templateText) {
+		templateText = "<<view title link>>";
 	}
 	// Create the tiddler macro
 	return $tw.Tree.Macro("tiddler",{
