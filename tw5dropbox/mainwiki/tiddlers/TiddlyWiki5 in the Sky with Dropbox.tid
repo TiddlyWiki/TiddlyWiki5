@@ -9,7 +9,7 @@ Loading your wikis from Dropbox
 <<reveal state:[[$:/plugins/dropbox/LoadedWikis]] type:match text:yes><
 !!! Your ~TiddlyWikis
 
-<<transclude filter:[tag[wiki]] template:WikiTemplate emptyMessage:"You haven't created any wikis yet">>
+<<list filter:[tag[wiki]] template:WikiTemplate emptyMessage:"You haven't created any wikis yet">>
 
 <<dropbox.newwiki>>
 >>
