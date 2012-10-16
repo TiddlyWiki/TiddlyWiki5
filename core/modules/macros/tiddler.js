@@ -93,7 +93,7 @@ exports.executeMacro = function() {
 		}
 		// Check for recursion
 		if(parents.indexOf(this.params.templateTitle) !== -1) {
-			renderTemplateTree = $tw.Tree.errorNode("Tiddler recursion error in <<transclude>> macro");	
+			renderTemplateTree = $tw.Tree.errorNode("Tiddler recursion error in <<tiddler>> macro");	
 		} else {
 			parents.push(renderTemplateTitle);
 			renderTemplateTree = [];
