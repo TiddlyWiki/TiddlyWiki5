@@ -25,7 +25,6 @@ var Popup = function(options) {
 };
 
 Popup.prototype.popup = function(stateTextRef) {
-	var popupState;
 	this.cancel();
 	this.popupTextRef = stateTextRef;
 	this.rootElement.addEventListener("click",this,true);
