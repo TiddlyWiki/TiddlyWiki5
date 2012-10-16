@@ -108,6 +108,7 @@ console.log("Refreshing transclude macro",this.params.filter,this.tiddlerTitle);
 		this.reexecuteInDom();
 	} else {
 		// Do a selective refresh
+		this.reexecuteInDom();
 	}
 };
 
