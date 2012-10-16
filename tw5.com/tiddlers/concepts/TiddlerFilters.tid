@@ -22,6 +22,7 @@ The mechanism is easiest to understand by first presenting some example filter s
 |`[tag[tom]] [tag[harry]] -[[one][two][three]]` |All tiddlers tagged either `tom` or `harry`, but excluding `one`, `two` and `three` |
 |`[[MyTiddler]tags[]]` |All tiddlers being used as tags on the tiddler `MyTiddler` |
 |`[[MyTiddler]tagging[]]` |All tiddlers being tagged with `MyTiddler` |
+|`[list[MyList]]` |All tiddlers listed in `MyList` |
 }}}
 
 ! Operators
@@ -39,6 +40,7 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''{field}'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
 * ''tags'': selects the tags on the currently selected tiddlers
 * ''tagging'': selects the tiddlers tagged with the currently selected tiddlers
+* ''list'': selects the tiddlers listed in a specified tiddler (newline delimited)
 
 An operator can be negated with by preceding it with `!`, for example `[!tag[Tommy]]` selects the tiddlers that are not tagged with `Tommy`.
 

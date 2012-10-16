@@ -76,7 +76,7 @@ exports.filterFragments = {
 };
 
 exports.operators = {
-	"title": {
+	"title": { // Filter by title
 		selector: function(operator) {
 			return "$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");";
 		},
@@ -84,7 +84,7 @@ exports.operators = {
 			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") !== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}";
 		}
 	},
-	"prefix": {
+	"prefix": { // Filter by title prefix
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
 			return "for(title in source) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
@@ -94,7 +94,7 @@ exports.operators = {
 			return "for(r=subResults.length-1; r>=0; r--) {if(title.substr(0," + operator.operand.length + ")" + op + "==\"" + $tw.utils.stringify(operator.operand) + "\") {subResults.splice(r,1);}}";
 		}
 	},
-	"is": {
+	"is": { // Filter by status
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "";
 			switch(operator.operand) {
@@ -128,7 +128,7 @@ exports.operators = {
 			}
 		}
 	},
-	"tag": {
+	"tag": { // Filter by tag
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "";
 			return "for(title in source) {if(" + op + "this.getTiddler(title).hasTag(\"" + $tw.utils.stringify(operator.operand) + "\")) {$tw.utils.pushTop(subResults,title);}}";
@@ -138,7 +138,7 @@ exports.operators = {
 			return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).hasTag(\"" + $tw.utils.stringify(operator.operand) + "\")) {subResults.splice(r,1);}}";
 		}
 	},
-	"tags": {
+	"tags": { // Return all tags used on selected tiddlers
 		selector: function(operator) {
 			return "for(title in source) {r = this.getTiddler(title); if(r && r.fields.tags) {$tw.utils.pushTop(subResults,r.fields.tags);}}";
 		},
@@ -146,7 +146,7 @@ exports.operators = {
 			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {r = this.getTiddler(subResultsTemp[t]); if(r && r.fields.tags) {$tw.utils.pushTop(subResults,r.fields.tags);}}";
 		}
 	},
-	"tagging": {
+	"tagging": { // Return all tiddlers tagged with any of the selected tags
 		selector: function(operator) {
 			return "for(title in source) {$tw.utils.pushTop(subResults,this.getTiddlersWithTag(title));}";
 		},
@@ -154,7 +154,7 @@ exports.operators = {
 			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {$tw.utils.pushTop(subResults,this.getTiddlersWithTag(subResultsTemp[t]));}";
 		}
 	},
-	"has": {
+	"has": { // Filter by presence of a particular field
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "=" : "!";
 			return "for(title in source) {if(this.getTiddler(title).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {$tw.utils.pushTop(subResults,title);}}";
@@ -164,7 +164,7 @@ exports.operators = {
 			return "for(r=subResults.length-1; r>=0; r--) {if(this.getTiddler(subResults[r]).fields[\"" + $tw.utils.stringify(operator.operand) + "\"] " + op + "== undefined) {subResults.splice(r,1);}}";
 		}
 	},
-	"sort": {
+	"sort": { // Sort selected tiddlers
 		selector: function(operator) {
 			throw "Cannot use sort operator at the start of a filter operation";
 		},
@@ -172,7 +172,7 @@ exports.operators = {
 			var desc = operator.prefix === "!" ? "true" : "false";
 			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ");";
 		}
-	},
+	}, // Case insensitive sort of selected tiddlers
 	"sort-case-sensitive": {
 		selector: function(operator) {
 			throw "Cannot use sort operator at the start of a filter operation";
@@ -182,7 +182,7 @@ exports.operators = {
 			return "this.sortTiddlers(subResults,\"" + $tw.utils.stringify(operator.operand) + "\"," + desc + ",true);";
 		}
 	},
-	"limit": {
+	"limit": { // Limit number of members of selection
 		selector: function(operator) {
 			throw "Cannot use limit operator at the start of a filter operation";
 		},
@@ -192,7 +192,22 @@ exports.operators = {
 			return "if(subResults.length > " + limit + ") {subResults.splice(" + base + ",subResults.length-" + limit + ");}";
 		}
 	},
-	"field": {
+	"list": { // Select all tiddlers that are listed (or not listed) in the specified tiddler
+		selector: function(operator) {
+			if(operator.prefix === "!") {
+				return "var list = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text.split(\"\\n\");" +
+					"for(title in source) {if(list.indexOf(title) === -1) {$tw.utils.pushTop(subResults,title);}}";
+			} else {
+				return "$tw.utils.pushTop(subResults,this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text.split(\"\\n\"));";
+			}
+		},
+		filter: function(operator) {
+			var op = operator.prefix === "!" ? "!==" : "===";
+			return "var list = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text.split(\"\\n\");" +
+				"for(r=subResults.length-1; r>=0; r--) {if(list.indexOf(title) " + op + " -1) {subResults.splice(r,1);}}";
+		}
+	},
+	"field": { // Special handler for field comparisons
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
 			return "for(title in source) {if(this.getTiddler(title).fields[\"" + $tw.utils.stringify(operator.operator) + "\"] " + op + "== \"" + operator.operand + "\") {$tw.utils.pushTop(subResults,title);}}";
