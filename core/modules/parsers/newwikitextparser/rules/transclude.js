@@ -41,7 +41,7 @@ exports.parse = function(match,isBlock) {
 			params.target = match[1];
 		} else {
 			// Else it is a filter
-			macro = "transclude";
+			macro = "list";
 			params.filter = match[2];
 		}
 		if(match[3]) {
