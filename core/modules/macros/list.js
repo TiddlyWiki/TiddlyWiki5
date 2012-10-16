@@ -44,7 +44,7 @@ exports.executeMacro = function() {
 	if(this.classes) {
 		$tw.utils.pushTop(attributes["class"],this.classes);
 	}
-	this.listFrame = $tw.Tree.Element("div",attributes,[]);
+	this.listFrame = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,[]);
 	// Create each list element
 	for(var t=0; t<this.list.length; t++) {
 		this.listFrame.children.push(this.createListElement(this.list[t]));
@@ -77,7 +77,7 @@ exports.createListElement = function(title) {
 			return true;
 		}};
 	node.execute(this.parents,this.tiddlerTitle);
-	var listElement = $tw.Tree.Element("div",{"class": ["tw-list-element"]},[node],{
+	var listElement = $tw.Tree.Element(this.isBlock ? "div" : "span",{"class": ["tw-list-element"]},[node],{
 			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
 			eventHandler: eventHandler
 		});
