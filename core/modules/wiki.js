@@ -216,8 +216,8 @@ exports.getTiddlers = function(sortField,excludeTag) {
 		}
 	}
 	tiddlers.sort(function(a,b) {
-		var aa = a.fields[sortField].toLowerCase() || 0,
-			bb = b.fields[sortField].toLowerCase() || 0;
+		var aa = a.fields[sortField].toLowerCase() || "",
+			bb = b.fields[sortField].toLowerCase() || "";
 		if(aa < bb) {
 			return -1;
 		} else {
@@ -247,8 +247,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive) {
 	var self = this;
 	titles.sort(function(a,b) {
 		if(sortField !== "title") {
-			a = self.getTiddler(a).fields[sortField] || 0;
-			b = self.getTiddler(b).fields[sortField] || 0;
+			a = self.getTiddler(a).fields[sortField] || "";
+			b = self.getTiddler(b).fields[sortField] || "";
 		}
 		if(!isCaseSensitive) {
 			a = a.toLowerCase();
