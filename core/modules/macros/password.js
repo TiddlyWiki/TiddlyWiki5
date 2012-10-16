@@ -20,8 +20,7 @@ exports.info = {
 };
 
 exports.executeMacro = function() {
-	var password = $tw.utils.getPassword(this.params.name);
-	password = password || "";
+	var password = $tw.browser ? $tw.utils.getPassword(this.params.name) : "";
 	var attributes = {
 		type: "password",
 		value: password
