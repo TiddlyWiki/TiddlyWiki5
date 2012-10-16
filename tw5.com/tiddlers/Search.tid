@@ -1,0 +1,21 @@
+title: Search
+
+Search: <<edit tiddler:[[$:/search/text]]>>
+
+<div style="position:absolute; z-index:1000;">
+
+<<reveal state:[[$:/search/text]] type:nomatch text:""><
+
+<div class="open">
+<div class="dropdown-menu">
+(((
+
+[tag[docs]sort[title]]
+
+)) <<view title link>> )
+</div>
+</div>
+
+>>
+
+</div>
