@@ -45,9 +45,15 @@ exports.executeMacro = function() {
 		$tw.utils.pushTop(attributes["class"],this.classes);
 	}
 	this.listFrame = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,[]);
-	// Create each list element
-	for(var t=0; t<this.list.length; t++) {
-		this.listFrame.children.push(this.createListElement(this.list[t]));
+	// Create the list
+	if(this.list.length === 0) {
+		// Check for an empty list
+		this.listFrame.children = [this.getEmptyMessage()];
+	} else {
+		// Create the list
+		for(var t=0; t<this.list.length; t++) {
+			this.listFrame.children.push(this.createListElement(this.list[t]));
+		}		
 	}
 	return this.listFrame;
 };
@@ -63,6 +69,17 @@ exports.getTiddlerList = function() {
 		filter = "[!is[shadow]]";
 	}
 	this.list = this.wiki.filterTiddlers(filter,this.tiddlerTitle);
+};
+
+/*
+Create and execute the nodes representing the empty message
+*/
+exports.getEmptyMessage = function() {
+	var nodes = this.wiki.parseText("text/x-tiddlywiki",this.params.emptyMessage).tree;
+	for(var c=0; c<nodes.length; c++) {
+		nodes[c].execute(this.parents,this.tiddlerTitle);
+	}
+	return $tw.Tree.Element("span",{},nodes);
 };
 
 /*
@@ -120,7 +137,7 @@ exports.createListElementMacro = function(title) {
 /*
 Remove a list element from the list, along with the attendant DOM nodes
 */
-exports.removelistElement = function(index) {
+exports.removeListElement = function(index) {
 	// Get the list element
 	var listElement = this.listFrame.children[index];
 	// Remove the dom node
@@ -156,8 +173,32 @@ exports.refreshInDom = function(changes) {
 			return;
 		}
 	}
-	// Get the list of tiddlers
+	// Get the list of tiddlers, saving the previous length
+	var prevListLength = this.list.length;
 	this.getTiddlerList();
+	// Check if the list is empty
+	if(this.list.length === 0) {
+		// Check if it was empty before
+		if(prevListLength === 0) {
+			// If so, just refresh the empty message
+			this.listFrame.refreshInDom(changes);
+			return;
+		} else {
+			// If the list wasn't empty before, empty it
+			for(t=prevListLength-1; t>=0; t--) {
+				this.removeListElement(t);
+			}
+			// Insert the empty message
+			this.listFrame.children = [this.getEmptyMessage()];
+			this.listFrame.children[0].renderInDom(this.listFrame.domNode,this.listFrame.domNode.childNodes[0]);
+			return;
+		}
+	} else {
+		// If it is not empty now, but was empty previously, then remove the empty message
+		if(prevListLength === 0) {
+			this.removeListElement(0);
+		}
+	}
 	// Step through the list and adjust our child list elements appropriately
 	for(t=0; t<this.list.length; t++) {
 		// Check to see if the list element is already there
@@ -170,7 +211,7 @@ exports.refreshInDom = function(changes) {
 			// Delete any list elements preceding the one we want
 			if(index > t) {
 				for(var n=index-1; n>=t; n--) {
-					this.removelistElement(n);
+					this.removeListElement(n);
 				}
 			}
 			// Refresh the node we're reusing
@@ -180,7 +221,7 @@ exports.refreshInDom = function(changes) {
 	// Remove any left over elements
 	if(this.listFrame.children.length > this.list.length) {
 		for(t=this.listFrame.children.length-1; t>=this.list.length; t--) {
-			this.removeStoryElement(t);
+			this.removeListElement(t);
 		}
 	}
 };
