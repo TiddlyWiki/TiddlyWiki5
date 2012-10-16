@@ -33,30 +33,25 @@ exports.dispatchMessage = function(event) {
 	event.target.dispatchEvent(buttonEvent);
 };
 
-exports.triggerPopup = function(event,cancel) {
+exports.triggerPopup = function(event) {
 	// Get the textref of the popup state tiddler
 	var textRef = this.params.popup;
 	if(this.hasParameter("qualifyTiddlerTitles") && this.params.qualifyTiddlerTitles === "yes") {
 		textRef = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + textRef;
 	}
-	// Check for cancelling
-	if(cancel) {
+	// Get the current popup state tiddler 
+	var value = this.wiki.getTextReference(textRef,"",this.tiddlerTitle);
+	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
+	if(popupLocationRegExp.test(value)) {
 		$tw.popup.cancel();
 	} else {
-		// Get the current popup state tiddler 
-		var value = this.wiki.getTextReference(textRef,"",this.tiddlerTitle);
-		// Check if the popup is open by checking whether it matches "(<x>,<y>)"
-		var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
-		if(popupLocationRegExp.test(value)) {
-			$tw.popup.cancel();
-		} else {
-			// Set the position if we're opening it
-			this.wiki.setTextReference(textRef,
-				"(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + 
-					this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")",
-				this.tiddlerTitle,true);
-			$tw.popup.popup(textRef);
-		}
+		// Set the position if we're opening it
+		this.wiki.setTextReference(textRef,
+			"(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + 
+				this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")",
+			this.tiddlerTitle,true);
+		$tw.popup.popup(textRef);
 	}
 };
 
