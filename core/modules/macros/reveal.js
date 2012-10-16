@@ -11,11 +11,12 @@ The parameters are:
 * ''type'' - type of the hide/reveal state:
 ** //popup// - a popup - the state tiddler should contain the page coordinates of the button that triggered the popup
 ** //match// - reveals if the state tiddler matches the match text
+** //nomatch// - reveals if the state tiddler does not match the match text
 * ''position'' - popup position: //left//, //above//, //right//, //below// or //belowleft//
 * ''text'' - match text
 * ''qualifyTiddlerTitles'' - if present, causes the title of the state tiddler to be qualified with the current tiddler stack
 * ''default'' - default hide/reveal state: `open` if visible, otherwise hidden
-* ''class'' - CSS class(es) to be assigned to the 
+* ''class'' - CSS class(es) to be assigned to the revealed element
 
 \*/
 (function(){
