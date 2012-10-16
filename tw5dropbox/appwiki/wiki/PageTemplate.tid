@@ -6,7 +6,7 @@ title: $:/templates/PageTemplate
 <!--  Zooming chooser -->
 {{navigation-panel{
 <<chooser><
-	<<list all>>
+((( [!is[shadow]sort[title]] )) <div><<view title link>></div> )
 >>
 }}}
 

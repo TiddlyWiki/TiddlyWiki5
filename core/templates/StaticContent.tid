@@ -2,4 +2,4 @@ title: $:/templates/StaticContent
 type: text/x-tiddlywiki
 
 <<! For Google, and people without JavaScript >>
-<<list all>>
+((( [!is[shadow]sort[title]] )) <div><<view title text>></div> )
