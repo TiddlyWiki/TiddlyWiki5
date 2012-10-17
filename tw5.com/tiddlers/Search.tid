@@ -10,7 +10,7 @@ Search: <<edit tiddler:[[$:/search/text]]>>
 <div class="dropdown-menu">
 (((
 
-[tag[docs]sort[title]]
+[searchVia[$:/search/text]!is[shadow]sort[title]]
 
 )) <<view title link>> )
 </div>
