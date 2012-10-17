@@ -211,12 +211,12 @@ exports.operators = {
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "true" : "false";
 			return "var term = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text;" +
-				"$tw.utils.pushTop(subResults,this.search(term,source," + op + "));";
+				"$tw.utils.pushTop(subResults,this.search(term,{titles: source, invert: " + op + ", exclude: [\"" + $tw.utils.stringify(operator.operand) + "\"]}));";
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "true" : "false";
 			return "var term = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text;" +
-				"$tw.utils.pushTop(subResults,this.search(term,subResults," + op + "));";
+				"subResults = this.search(term,{titles: subResults, invert: " + op + ", exclude: [\"" + $tw.utils.stringify(operator.operand) + "\"]});"
 		}
 	},
 	"field": { // Special handler for field comparisons

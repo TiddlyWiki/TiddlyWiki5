@@ -596,29 +596,43 @@ exports.saveWiki = function(options) {
 /*
 Return an array of tiddler titles that match a search string
 	text: The text string to search for
-	titles: Optional hashmap or array of tiddler titles to limit search
-	exclude: Optional; if true returns tiddlers that do not contain the specified string
+	options: see below
+Options available:
+	titles:  Hashmap or array of tiddler titles to limit search
+	exclude: An array of tiddler titles to exclude from the search
+	invert: If true returns tiddlers that do not contain the specified string
 */
-exports.search = function(text,titles,exclude) {
+exports.search = function(text,options) {
+	options = options || {};
 	var me = this;
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
-		var tiddler = me.getTiddler(title);
-		return tiddler ? tiddler.fields.text.indexOf(text) !== -1 : false;
+		var tiddler = me.getTiddler(title),
+			match = tiddler ? tiddler.fields.text.indexOf(text) !== -1 : false;
+		return options.invert ? !match : match;
 	}
 	// Loop through all the tiddlers doing the search
 	var results = [],t;
-	if($tw.utils.isArray(titles)) {
-		for(t=0; t<titles.length; t++) {
-			if(searchTiddler(titles[t])) {
-				results.push(titles[t]);
+	if($tw.utils.isArray(options.titles)) {
+		for(t=0; t<options.titles.length; t++) {
+			if(searchTiddler(options.titles[t])) {
+				results.push(options.titles[t]);
 			}
 		}
 	} else {
-		titles = titles || this.tiddlers;
-		for(t in titles) {
+		var source = options.titles || this.tiddlers;
+		for(t in source) {
 			if(searchTiddler(t)) {
 				results.push(t);
+			}
+		}
+	}
+	// Remove any of the results we have to exclude
+	if(options.exclude) {
+		for(t=0; t<options.exclude.length; t++) {
+			var p = results.indexOf(options.exclude[t]);
+			if(p !== -1) {
+				results.splice(p,1);
 			}
 		}
 	}
