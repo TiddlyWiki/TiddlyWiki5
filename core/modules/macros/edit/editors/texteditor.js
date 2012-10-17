@@ -106,9 +106,9 @@ console.log("event type",event.type);
 TextEditor.prototype.saveChanges = function() {
 	var text = this.macroNode.child.children[0].domNode.value,
 		tiddler = this.macroNode.wiki.getTiddler(this.macroNode.editTiddler);
-	if(this.macroNode.params.requireFocus === "yes" && document.activeElement !== this.macroNode.child.children[0].domNode) {
-		text = this.macroNode.params["default"] || "";
-	}
+//	if(this.macroNode.params.requireFocus === "yes" && document.activeElement !== this.macroNode.child.children[0].domNode) {
+//		text = this.macroNode.params["default"] || "";
+//	}
 	if(!tiddler) {
 		tiddler = new $tw.Tiddler({title: this.macroNode.editTiddler});
 	}
