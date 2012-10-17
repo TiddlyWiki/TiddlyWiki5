@@ -36,9 +36,11 @@ title: $:/templates/PageTemplate
 <<reveal state:[[$:/search/text]] type:nomatch text:""><
 
 <div class="open">
-<div class="dropdown-menu">
-<<list filter:"[!is[shadow]searchVia[$:/search/text]sort[title]limit[50]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
-</div>
+
+{{dropdown-menu{
+* <<list filter:"[!is[shadow]searchVia[$:/search/text]sort[title]limit[50]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
+}}}
+
 </div>
 
 >>

@@ -10,15 +10,22 @@ title: $:/templates/TagTemplate
 >>
 }}}
 <<reveal state:TagDropDownLocation type:popup qualifyTiddlerTitles:yes><
+
 <div class="open">
-<div class="dropdown-menu">
-<<view title link>>
-<div class="divider"></div>
-(((
+
+{{dropdown-menu{
+
+* <<view title link>>
+*{{divider}} 
+
+* (((
 
 [is[current]tagging[]]
 
-)) <<view title link>> )
+)) <li><<view title link>></li> )
+
+}}}
+
 </div>
-</div>
+
 >>

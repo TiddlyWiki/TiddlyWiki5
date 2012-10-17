@@ -1,3 +1,3 @@
 title: $:/templates/SearchResultTemplate
 
-<<view title link>>
+<li><<view title link>></li>
