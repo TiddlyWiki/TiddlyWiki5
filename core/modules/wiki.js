@@ -593,4 +593,36 @@ exports.saveWiki = function(options) {
 	this.callSaver("save",text);
 };
 
+/*
+Return an array of tiddler titles that match a search string
+	text: The text string to search for
+	titles: Optional hashmap or array of tiddler titles to limit search
+	exclude: Optional; if true returns tiddlers that do not contain the specified string
+*/
+exports.search = function(text,titles,exclude) {
+	var me = this;
+	// Function to check a given tiddler for the search term
+	var searchTiddler = function(title) {
+		var tiddler = me.getTiddler(title);
+		return tiddler ? tiddler.fields.text.indexOf(text) !== -1 : false;
+	}
+	// Loop through all the tiddlers doing the search
+	var results = [],t;
+	if($tw.utils.isArray(titles)) {
+		for(t=0; t<titles.length; t++) {
+			if(searchTiddler(titles[t])) {
+				results.push(titles[t]);
+			}
+		}
+	} else {
+		titles = titles || this.tiddlers;
+		for(t in titles) {
+			if(searchTiddler(t)) {
+				results.push(t);
+			}
+		}
+	}
+	return results;
+};
+
 })();
