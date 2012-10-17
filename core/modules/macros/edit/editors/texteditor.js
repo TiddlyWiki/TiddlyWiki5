@@ -81,28 +81,34 @@ TextEditor.prototype.getChild = function() {
 			break;
 	}
 	// Wrap the editor control in a div
-	return $tw.Tree.Element(this.macroNode.isBlock ? "div" : "span",{},[$tw.Tree.Element(tagName,attributes,content)],{
-		events: ["focus","keyup"],
+	return $tw.Tree.Element(this.macroNode.isBlock ? "div" : "span",{},[$tw.Tree.Element(tagName,attributes,content,{
+		events: ["focus","blur","keyup"],
 		eventHandler: this
-	});
+	})]);
 };
 
 TextEditor.prototype.handleEvent = function(event) {
+console.log("event type",event.type);
 	// Get the value of the field if it might have changed
-	if("keyup".split(" ").indexOf(event.type) !== -1) {
+	if("keyup focus blur".split(" ").indexOf(event.type) !== -1) {
 		this.saveChanges();
 	}
-	// Whatever the event, fix the height of the textarea if required
-	var self = this;
-	window.setTimeout(function() {
-		self.fixHeight();
-	},5);
+	// Fix the height of the textarea if required
+	if("keyup focus".split(" ").indexOf(event.type) !== -1) {
+		var self = this;
+		window.setTimeout(function() {
+			self.fixHeight();
+		},5);
+	}
 	return true;
 };
 
 TextEditor.prototype.saveChanges = function() {
 	var text = this.macroNode.child.children[0].domNode.value,
 		tiddler = this.macroNode.wiki.getTiddler(this.macroNode.editTiddler);
+	if(this.macroNode.params.requireFocus === "yes" && document.activeElement !== this.macroNode.child.children[0].domNode) {
+		text = this.macroNode.params["default"] || "";
+	}
 	if(!tiddler) {
 		tiddler = new $tw.Tiddler({title: this.macroNode.editTiddler});
 	}

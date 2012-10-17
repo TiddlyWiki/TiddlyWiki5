@@ -15,10 +15,11 @@ Edit macro for editting fields and tiddlers
 exports.info = {
 	name: "edit",
 	params: {
-		field: {byPos: 0, type: "text"},
 		tiddler: {byName: true, type: "tiddler"},
+		field: {byPos: 0, type: "text"},
 		type: {byName: true, type: "text"},
-		"default": {byName: true, type: "text"}
+		"default": {byName: true, type: "text"},
+		requireFocus: {byName: true, type: "text"}
 	}
 };
 

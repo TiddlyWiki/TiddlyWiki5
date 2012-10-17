@@ -24,10 +24,11 @@ title: $:/templates/PageTemplate
 * [[Docs]]
 *{{divider-vertical}}
 
+<!-- Search box -->
 <form class="form-search">
 
 {{search-query{
-<<edit tiddler:[[$:/search/text]] type:search>>
+<<edit tiddler:[[$:/search/text]] type:search requireFocus:yes>>
 }}}
 
 <div style="position:absolute; z-index:1000;">
