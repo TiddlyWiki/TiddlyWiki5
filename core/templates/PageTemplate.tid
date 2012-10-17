@@ -37,7 +37,7 @@ title: $:/templates/PageTemplate
 
 <div class="open">
 <div class="dropdown-menu">
-<<list filter:"[searchVia[$:/search/text]!is[shadow]sort[title]limit[10]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
+<<list filter:"[searchVia[$:/search/text]!is[shadow]sort[title]limit[50]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
 </div>
 </div>
 
