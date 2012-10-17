@@ -4,6 +4,7 @@ type: text/x-tiddlywiki-html
 <!doctype html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="utf8beacon" content="éçñøåá—" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="<<version>>" />
@@ -14,7 +15,7 @@ type: text/x-tiddlywiki-html
 <meta name="copyright" content="
 <<serialize "$:/core/copyright.txt" text/plain>>
 " />
-<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.6.1/dropbox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/dropbox.js/0.6.3/dropbox.min.js"></script>
 <title><<tiddler "$:/core/wiki/title">></title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 

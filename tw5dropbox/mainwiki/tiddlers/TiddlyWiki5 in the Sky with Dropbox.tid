@@ -1,6 +1,8 @@
 title: TiddlyWiki5 in the Sky with Dropbox
 
-This app enables you to edit [[TiddlyWikis|TiddlyWiki]] in your [[Dropbox]].
+This [[beta|Beta]] app enables you to edit [[TiddlyWikis|TiddlyWiki]] in your [[Dropbox]]. The wikis are stored as separate folders within the `Apps/TiddlyWiki5/` folder sandbox in your Dropbox.
+
+This service is entirely hosted by Dropbox, and your information never leaves the secure channel between your browser and Dropbox.
 
 <<reveal state:[[$:/plugins/dropbox/LoadedWikis]] type:nomatch text:yes><
 Loading your wikis from Dropbox
