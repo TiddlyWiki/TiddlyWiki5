@@ -221,6 +221,13 @@ exports.stringify = function(s) {
 		.replace(/[\x80-\uFFFF]/g, exports.escape); // non-ASCII characters
 };
 
+/*
+Escape the RegExp special characters with a preceding backslash
+*/
+exports.escapeRegExp = function(s) {
+    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+};
+
 exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof window !== "undefined") {
