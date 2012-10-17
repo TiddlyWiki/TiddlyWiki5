@@ -207,6 +207,18 @@ exports.operators = {
 				"for(r=subResults.length-1; r>=0; r--) {if(list.indexOf(title) " + op + " -1) {subResults.splice(r,1);}}";
 		}
 	},
+	"searchVia": { // Search for the string in the operand tiddler
+		selector: function(operator) {
+			var op = operator.prefix === "!" ? "true" : "false";
+			return "var term = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text;" +
+				"$tw.utils.pushTop(subResults,this.search(term,source," + op + "));";
+		},
+		filter: function(operator) {
+			var op = operator.prefix === "!" ? "true" : "false";
+			return "var term = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text;" +
+				"$tw.utils.pushTop(subResults,this.search(term,subResults," + op + "));";
+		}
+	},
 	"field": { // Special handler for field comparisons
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "!" : "=";
