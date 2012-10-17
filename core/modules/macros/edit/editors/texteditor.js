@@ -56,14 +56,29 @@ TextEditor.prototype.getChild = function() {
 		},
 		tagName,
 		content = [];
-	// Make a textarea for text fields and an input box for other fields
-	if(edit.field !== "text" || this.macroNode.hasParameter("singleline")) {
-		tagName = "input";
-		attributes.type = "text";
-		attributes.value = edit.value;
-	} else {
-		tagName = "textarea";
-		content.push($tw.Tree.Text(edit.value));
+	if(this.macroNode.classes) {
+		$tw.utils.pushTop(attributes["class"],this.macroNode.classes);
+	}
+	// Figure out what element to use for this editor
+	var type = this.macroNode.params.type;
+	if(type === undefined) {
+		type = edit.field === "text" ? "textarea" : "input";
+	}
+	switch(type) {
+		case "textarea":
+			tagName = "textarea";
+			content.push($tw.Tree.Text(edit.value));
+			break;
+		case "search":
+			tagName = "input";
+			attributes.type = "search";
+			attributes.value = edit.value;
+			break;
+		default: // "input"
+			tagName = "input";
+			attributes.type = "text";
+			attributes.value = edit.value;
+			break;
 	}
 	// Wrap the editor control in a div
 	return $tw.Tree.Element(this.macroNode.isBlock ? "div" : "span",{},[$tw.Tree.Element(tagName,attributes,content)],{

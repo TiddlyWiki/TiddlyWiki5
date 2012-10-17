@@ -24,6 +24,28 @@ title: $:/templates/PageTemplate
 * [[Docs]]
 *{{divider-vertical}}
 
+<form class="form-search">
+
+{{search-query{
+<<edit tiddler:[[$:/search/text]] type:search>>
+}}}
+
+<div style="position:absolute; z-index:1000;">
+
+<<reveal state:[[$:/search/text]] type:nomatch text:""><
+
+<div class="open">
+<div class="dropdown-menu">
+<<list filter:"[searchVia[$:/search/text]!is[shadow]sort[title]limit[10]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
+</div>
+</div>
+
+>>
+
+</div>
+
+</form>
+
 <!-- Full screen button -->
 <<button full-screen class:"btn btn-warning"><Full screen>>
 

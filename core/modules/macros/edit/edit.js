@@ -17,7 +17,7 @@ exports.info = {
 	params: {
 		field: {byPos: 0, type: "text"},
 		tiddler: {byName: true, type: "tiddler"},
-		singleline: {byName: true, type: "text"},
+		type: {byName: true, type: "text"},
 		"default": {byName: true, type: "text"}
 	}
 };
