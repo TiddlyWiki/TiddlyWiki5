@@ -601,18 +601,50 @@ Options available:
 	titles:  Hashmap or array of tiddler titles to limit search
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
+	caseSensitive: If true forces a case sensitive search
+	literal: If true, searches for literal string, rather than separate search terms
 */
 exports.search = function(text,options) {
 	options = options || {};
-	var me = this;
+	var me = this,t;
+	// Convert the search string into a regexp for each term
+	var terms, searchTermsRegExps,
+		flags = options.caseSensitive ? "" : "i";
+	if(options.literal) {
+		if(text.length === 0) {
+			return [];
+		}
+		searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
+	} else {
+		terms = text.replace(/( +)/g," ").split(" ");
+		searchTermsRegExps = [];
+		if(terms.length === 0) {
+			return [];
+		}
+		for(t=0; t<terms.length; t++) {
+			searchTermsRegExps.push(new RegExp("(" + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
+		}
+	}
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
-		var tiddler = me.getTiddler(title),
-			match = tiddler ? tiddler.fields.text.indexOf(text) !== -1 : false;
-		return options.invert ? !match : match;
+		var tiddler = me.getTiddler(title);
+		if(!tiddler) {
+			return !!options.invert;
+		}
+		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type];
+		if(contentTypeInfo ? contentTypeInfo.encoding === "utf8" : true) {
+			var match = true;
+			for(var t=0; t<searchTermsRegExps.length; t++) {
+				if(match) {
+					match = searchTermsRegExps[t].test(tiddler.fields.text);
+				}
+			}
+			return options.invert ? !match : match;
+		}
+		return false;			
 	}
 	// Loop through all the tiddlers doing the search
-	var results = [],t;
+	var results = [];
 	if($tw.utils.isArray(options.titles)) {
 		for(t=0; t<options.titles.length; t++) {
 			if(searchTiddler(options.titles[t])) {
