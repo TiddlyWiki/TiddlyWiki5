@@ -635,8 +635,13 @@ exports.search = function(text,options) {
 		if(contentTypeInfo ? contentTypeInfo.encoding === "utf8" : true) {
 			var match = true;
 			for(var t=0; t<searchTermsRegExps.length; t++) {
+				// Search body
 				if(match) {
 					match = searchTermsRegExps[t].test(tiddler.fields.text);
+				}
+				// Search title
+				if(match) {
+					match = searchTermsRegExps[t].test(tiddler.fields.title);
 				}
 			}
 			return options.invert ? !match : match;
