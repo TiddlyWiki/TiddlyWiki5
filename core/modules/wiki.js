@@ -26,7 +26,10 @@ last dispatched. Each entry is a hashmap containing two fields:
 "use strict";
 
 /*
-Get the value of a text reference
+Get the value of a text reference. Text references can have any of these forms:
+	<tiddlertitle>
+	<tiddlertitle>##<fieldname>
+	##<fieldname> - specifies a field of the current tiddlers
 */
 exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	var tr = this.parseTextReference(textRef),
@@ -85,12 +88,14 @@ exports.parseTextReference = function(textRef,currTiddlerTitle) {
 	var pos = textRef.indexOf("!!");
 	if(pos !== -1) {
 		if(pos === 0) {
+			// Just a field
 			return {
-				field: textRef
+				field: textRef.substring(2)
 			};
 		} else {
+			// Field and title
 			return {
-				title: textRef.substring(0,pos - 1),
+				title: textRef.substring(0,pos),
 				field: textRef.substring(pos + 2)
 			};	
 		}
