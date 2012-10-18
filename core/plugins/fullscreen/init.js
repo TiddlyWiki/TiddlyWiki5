@@ -16,7 +16,7 @@ var toggleFullScreen = function() {
 	if(document[$tw.browser.isFullScreen]) {
 		document[$tw.browser.cancelFullScreen]();
 	} else {
-		document.documentElement[$tw.browser.requestFullScreen]();
+		document.documentElement[$tw.browser.requestFullScreen](Element.ALLOW_KEYBOARD_INPUT);
 	}
 };
 
