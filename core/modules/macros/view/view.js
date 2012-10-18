@@ -25,14 +25,11 @@ exports.info = {
 exports.executeMacro = function() {
 	var tiddler = this.wiki.getTiddler(this.tiddlerTitle),
 		field = this.hasParameter("field") ? this.params.field : "title",
-		value,
-		children,
-		t,
-		childrenClone = [],
-		parents = this.parents;
+		value;
+	// Get the value to display
 	if(tiddler) {
 		value = tiddler.fields[field];
-	} else {
+	} else { // Use a special value if the tiddler is missing
 		switch(field) {
 			case "text":
 				value = "";
@@ -49,72 +46,16 @@ exports.executeMacro = function() {
 				break;
 		}
 	}
-	switch(this.params.format) {
-		case "link":
-			if(value === undefined) {
-				return $tw.Tree.Text("");
-			} else {
-				var link = $tw.Tree.Macro("link",{
-											srcParams: {to: value},
-											content: [$tw.Tree.Text(value)],
-											isBlock: this.isBlock,
-											wiki: this.wiki
-										});
-				link.execute(parents,this.tiddlerTitle);
-				return link;
-			}
-			break;
-		case "transclude":
-			if(tiddler && this.params.field && (this.params.field in tiddler.fields)) {
-				children = this.wiki.parseTiddler(tiddler.fields[this.params.field]).tree;
-				for(t=0; t<children.length; t++) {
-					childrenClone.push(children[t].clone());
-				}
-				for(t=0; t<childrenClone.length; t++) {
-					childrenClone[t].execute(parents,this.tiddlerTitle);
-				}
-				return $tw.Tree.Element(this.isBlock ? "div" : "span",{},childrenClone);
-			}
-			break;
-		case "wikified":
-			if(tiddler && this.params.field === "text") {
-				if(parents.indexOf(tiddler.fields.title) !== -1) {
-					children = [$tw.Tree.errorNode("Tiddler recursion error in <<view>> macro")];
-				} else {
-					children = this.wiki.parseTiddler(tiddler.fields.title).tree;
-				}
-				parents = parents.slice(0);
-				parents.push(tiddler.fields.title);
-			} else {
-				children = this.wiki.parseText("text/x-tiddlywiki",value).tree;
-			}
-			for(t=0; t<children.length; t++) {
-				childrenClone.push(children[t].clone());
-			}
-			for(t=0; t<childrenClone.length; t++) {
-				childrenClone[t].execute(parents,this.tiddlerTitle);
-			}
-			return $tw.Tree.Element(this.isBlock ? "div" : "span",{},childrenClone);
-		case "date":
-			var template = this.params.template || "DD MMM YYYY";
-			if(value === undefined) {
-				return $tw.Tree.Text("");
-			} else {
-				return $tw.Tree.Text($tw.utils.formatDateString(value,template));
-			}
-			break;
-		default: // "text"
-			// Get the stringified version of the field value
-			if(field !== "text" && tiddler) {
-				value = tiddler.getFieldString(field);
-			}
-			if(value === undefined || value === null) {
-				return $tw.Tree.Text("");
-			} else {
-				return $tw.Tree.Text(value);
-			}
+	// Figure out which viewer to use
+	// TODO: Tiddler field modules should be able to specify a field type from which the viewer is derived
+	if(tiddler && this.params.format) {
+		var viewer = this.wiki.macros.view.viewers[this.params.format];
 	}
-	return $tw.Tree.Text("");
+	if(!viewer) {
+		viewer = this.wiki.macros.view.viewers["text"];
+	}
+	// Call the viewer to generate the content
+	return viewer(tiddler,field,value,this);
 };
 
 })();

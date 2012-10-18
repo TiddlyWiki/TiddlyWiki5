@@ -524,6 +524,18 @@ exports.initEditors = function(moduleType) {
 };
 
 /*
+Install viewer modules for the edit macro
+*/
+exports.initViewers = function(moduleType) {
+	moduleType = moduleType || "viewer";
+	var viewMacro = this.macros.view;
+	if(viewMacro) {
+		viewMacro.viewers = {};
+		$tw.modules.applyMethods(moduleType,viewMacro.viewers);
+	}
+};
+
+/*
 Install view modules for the story macro
 */
 exports.initStoryViews = function(moduleType) {
