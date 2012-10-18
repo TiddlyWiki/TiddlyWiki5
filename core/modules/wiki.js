@@ -647,13 +647,9 @@ exports.search = function(text,options) {
 		if(contentTypeInfo ? contentTypeInfo.encoding === "utf8" : true) {
 			var match = true;
 			for(var t=0; t<searchTermsRegExps.length; t++) {
-				// Search body
+				// Search title and body
 				if(match) {
-					match = searchTermsRegExps[t].test(tiddler.fields.text);
-				}
-				// Search title
-				if(match) {
-					match = searchTermsRegExps[t].test(tiddler.fields.title);
+					match = searchTermsRegExps[t].test(tiddler.fields.title) || searchTermsRegExps[t].test(tiddler.fields.text);
 				}
 			}
 			return options.invert ? !match : match;
