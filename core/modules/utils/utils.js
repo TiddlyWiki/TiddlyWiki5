@@ -151,6 +151,37 @@ exports.getHours12 = function(date) {
 	return h > 12 ? h-12 : ( h > 0 ? h : 12 );
 };
 
+/*
+Convert a date delta in milliseconds into a string representation of "23 seconds ago", "27 minutes ago" etc.
+	delta: delta in milliseconds
+Returns an object with these members:
+	description: string describing the delta period
+	updatePeriod: time in millisecond until the string will be inaccurate
+*/
+exports.getRelativeDate = function(delta) {
+	var units = [
+		{name: "years",   duration:      365 * 24 * 60 * 60 * 1000},
+		{name: "months",  duration: (365/12) * 24 * 60 * 60 * 1000},
+		{name: "days",    duration:            24 * 60 * 60 * 1000},
+		{name: "hours",   duration:                 60 * 60 * 1000},
+		{name: "minutes", duration:                      60 * 1000},
+		{name: "seconds", duration:                           1000}
+	];
+	for(var t=0; t<units.length; t++) {
+		var result = Math.floor(delta / units[t].duration);
+		if(result >= 2) {
+			return {
+				description: result + " " + units[t].name + " ago",
+				updatePeriod: units[t].duration
+			};
+		}
+	}
+	return {
+		description: "1 second ago",
+		updatePeriod: 1000
+	};
+};
+
 // Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
 exports.htmlEncode = function(s)
 {
