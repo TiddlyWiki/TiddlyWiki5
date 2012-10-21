@@ -88,7 +88,7 @@ exports.createStoryElement = function(title,draft) {
 		}};
 	node.execute(this.parents,this.tiddlerTitle);
 	var storyElement = $tw.Tree.Element("div",{"class": ["tw-story-element"]},[node],{
-			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
+			events: ["tw-NewTiddler","tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
 			eventHandler: eventHandler
 		});
 	// Save our data inside the story element node

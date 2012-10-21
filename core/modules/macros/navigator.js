@@ -163,6 +163,61 @@ exports.eventMap["tw-EditTiddler"] = function(event) {
 	return false;
 };
 
+// Create a new draft tiddler
+exports.eventMap["tw-NewTiddler"] = function(event) {
+	var t;
+	if(this.hasParameter("story")) {
+		// Get the story details
+		this.getStory();
+		// Create the new tiddler
+		for(var t=0; true; t++) {
+			var title = "New Tiddler" + (t ? " " + t : "");
+			if(!this.wiki.tiddlerExists(title)) {
+				break;
+			}
+		}
+		var tiddler = new $tw.Tiddler({
+			title: title,
+			text: "Newly created tiddler"
+		});
+		this.wiki.addTiddler(tiddler);
+		// Create the draft tiddler
+		var draftTitle = "New Tiddler at " + (new Date()),
+			draftTiddler = new $tw.Tiddler({
+				text: "Type the text for the new tiddler",
+				title: draftTitle,
+				"draft.title": title,
+				"draft.of": title
+			});
+		this.wiki.addTiddler(draftTiddler);
+		// Update the story to put the new draft at the top
+		this.story.tiddlers.splice(0,0,{
+			title: title,
+			draft: draftTitle
+		});
+		// Save the updated story
+		this.saveStory();
+		// Add a new record to the top of the history stack
+		this.getHistory();
+		this.history.stack.push({
+			title: title,
+			fromTitle: "HelloThere",
+			fromPosition: {
+				top: 0,
+				left: 0,
+				right: 100,
+				bottom: 100,
+				width: 100,
+				height: 100
+			},
+			scrollPosition: $tw.utils.getScrollPosition()
+		});
+		this.saveHistory();
+	}
+	event.stopPropagation();
+	return false;
+};
+
 // Take a tiddler out of edit mode, saving the changes
 exports.eventMap["tw-SaveTiddler"] = function(event) {
 	if(this.hasParameter("story")) {
@@ -226,7 +281,7 @@ exports.executeMacro = function() {
 		this.content[t].execute(this.parents,this.tiddlerTitle);
 	}
 	return $tw.Tree.Element("div",attributes,this.content,{
-		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-close","tw-NavigateBack"],
+		events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-close","tw-NavigateBack","tw-NewTiddler"],
 		eventHandler: this
 	});
 };

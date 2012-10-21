@@ -49,6 +49,9 @@ title: $:/templates/PageTemplate
 
 </form>
 
+<!-- New tiddler button -->
+<<button NewTiddler class:"btn btn-success"><New>>
+
 <!-- Full screen button -->
 <<button full-screen class:"btn btn-warning"><Full screen>>
 
