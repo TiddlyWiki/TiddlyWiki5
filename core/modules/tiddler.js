@@ -24,7 +24,7 @@ exports.getFieldString = function(field) {
 	var value = this.fields[field];
 	// Check for a missing field
 	if(value === undefined) {
-		return undefined;
+		return "";
 	}
 	// Parse the field with the associated module (if any)
 	var fieldModule = $tw.Tiddler.fieldModules[field];
