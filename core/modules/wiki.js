@@ -256,8 +256,12 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive) {
 			b = self.getTiddler(b).fields[sortField] || "";
 		}
 		if(!isCaseSensitive) {
-			a = a.toLowerCase();
-			b = b.toLowerCase();
+			if(typeof a === "string") {
+				a = a.toLowerCase();
+			}
+			if(typeof b === "string") {
+				b = b.toLowerCase();
+			}
 		}
 		if(a < b) {
 			return isDescending ? +1 : -1;
