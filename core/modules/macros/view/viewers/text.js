@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/view/viewers/text.js
 type: application/javascript
-module-type: viewer
+module-type: fieldviewer
 
 A viewer for viewing tiddler fields as plain text
 

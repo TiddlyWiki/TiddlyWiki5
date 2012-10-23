@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/macros/view/viewers/transclude.js
 type: application/javascript
-module-type: viewer
+module-type: fieldviewer
 
 A viewer that transcludes the tiddler whose title is specified in the viewed field
 

@@ -533,14 +533,14 @@ exports.initEditors = function(moduleType) {
 };
 
 /*
-Install viewer modules for the edit macro
+Install field viewer modules for the edit macro
 */
-exports.initViewers = function(moduleType) {
-	moduleType = moduleType || "viewer";
+exports.initFieldViewers = function(moduleType) {
+	moduleType = moduleType || "fieldviewer";
 	var viewMacro = this.macros.view;
 	if(viewMacro) {
-		viewMacro.viewers = {};
-		$tw.modules.applyMethods(moduleType,viewMacro.viewers);
+		viewMacro.fieldviewers = {};
+		$tw.modules.applyMethods(moduleType,viewMacro.fieldviewers);
 	}
 };
 
