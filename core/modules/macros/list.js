@@ -30,10 +30,11 @@ exports.info = {
 These types are shorthands for particular filters
 */
 var typeMappings = {
-	all: "[!is[shadow]]",
-	missing: "[is[missing]]",
-	orphans: "[is[orphan]]",
-	shadowed: "[is[shadow]]"
+	all: "[!is[shadow]sort[title]]",
+	recent: "[!is[shadow]sort[modified]]",
+	missing: "[is[missing]sort[title]]",
+	orphans: "[is[orphan]sort[title]]",
+	shadowed: "[is[shadow]sort[title]]"
 };
 
 exports.executeMacro = function() {
