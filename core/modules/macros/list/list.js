@@ -62,6 +62,13 @@ exports.executeMacro = function() {
 };
 
 exports.postRenderInDom = function() {
+	this.listview = this.chooseListView();
+};
+
+/*
+Select the appropriate list viewer
+*/
+exports.chooseListView = function() {
 	// Instantiate the list view
 	var listviewName;
 	if(this.hasParameter("listviewTiddler")) {
@@ -71,10 +78,7 @@ exports.postRenderInDom = function() {
 		listviewName = this.params.listview;
 	}
 	var ListView = this.wiki.macros.list.listviews[listviewName];
-	this.listview = ListView ? new ListView(this) : null;
-	if(this.listview) {
-		this.listview.test();
-	}
+	return ListView ? new ListView(this) : null;
 };
 
 exports.getTiddlerList = function() {
@@ -159,8 +163,16 @@ Remove a list element from the list, along with the attendant DOM nodes
 exports.removeListElement = function(index) {
 	// Get the list element
 	var listElement = this.listFrame.children[index];
-	// Remove the dom node
-	listElement.domNode.parentNode.removeChild(listElement.domNode);
+	// Invoke the listview to animate the removal
+	if(this.listview && this.listview.remove) {
+		if(!this.listview.remove(index)) {
+			// Only delete the DOM element if the listview.remove() returned false
+			listElement.domNode.parentNode.removeChild(listElement.domNode);
+		}
+	} else {
+		// Always remove the DOM node if we didn't invoke the listview
+		listElement.domNode.parentNode.removeChild(listElement.domNode);
+	}
 	// Then delete the actual renderer node
 	this.listFrame.children.splice(index,1);
 };
@@ -226,6 +238,9 @@ exports.refreshInDom = function(changes) {
 			// The list element isn't there, so we need to insert it
 			this.listFrame.children.splice(t,0,this.createListElement(this.list[t]));
 			this.listFrame.children[t].renderInDom(this.listFrame.domNode,this.listFrame.domNode.childNodes[t]);
+			if(this.listview && this.listview.insert) {
+				this.listview.insert(t);
+			}
 		} else {
 			// Delete any list elements preceding the one we want
 			if(index > t) {
