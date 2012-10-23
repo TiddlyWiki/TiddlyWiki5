@@ -23,14 +23,15 @@ ClassicListView.prototype.insert = function(index) {
 	var currHeight = targetElement.offsetHeight;
 	// Animate the closure
 	var d = $tw.config.preferences.animationDuration + "ms";
-	targetElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
-															"opacity " + d + " ease-out, " +
-															"height " + d + " ease-in-out";
+	targetElement.style[$tw.browser.transition] = "";
 	targetElement.style[$tw.browser.transformorigin] = "0% 0%";
 	targetElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
 	targetElement.style.opacity = "0.0";
 	targetElement.style.height = "0px";
 	$tw.utils.forceLayout(targetElement);
+	targetElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
+														"opacity " + d + " ease-out, " +
+														"height " + d + " ease-in-out";
 	targetElement.style[$tw.browser.transform] = "translateX(0px)";
 	targetElement.style.opacity = "1.0";
 	targetElement.style.height = currHeight + "px";
@@ -61,7 +62,7 @@ ClassicListView.prototype.remove = function(index) {
 	wrapperElement.style.opacity = "1.0";
 	wrapperElement.style.height = currHeight + "px";
 	$tw.utils.forceLayout(wrapperElement);
-	wrapperElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
+	wrapperElement.style[$tw.browser.transform] = "translateX(-" + window.innerWidth + "px)";
 	wrapperElement.style.opacity = "0.0";
 	wrapperElement.style.height = "0px";
 	// Returning true causes the DOM node not to be deleted
