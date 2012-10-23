@@ -533,7 +533,7 @@ exports.initEditors = function(moduleType) {
 };
 
 /*
-Install field viewer modules for the edit macro
+Install field viewer modules for the view macro
 */
 exports.initFieldViewers = function(moduleType) {
 	moduleType = moduleType || "fieldviewer";
@@ -541,6 +541,18 @@ exports.initFieldViewers = function(moduleType) {
 	if(viewMacro) {
 		viewMacro.fieldviewers = {};
 		$tw.modules.applyMethods(moduleType,viewMacro.fieldviewers);
+	}
+};
+
+/*
+Install list viewer modules for the list macro
+*/
+exports.initListViews = function(moduleType) {
+	moduleType = moduleType || "listview";
+	var listMacro = this.macros.list;
+	if(listMacro) {
+		listMacro.listviews = {};
+		$tw.modules.applyMethods(moduleType,listMacro.listviews);
 	}
 };
 

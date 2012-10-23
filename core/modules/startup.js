@@ -35,6 +35,7 @@ exports.startup = function() {
 	$tw.wiki.initEditors();
 	$tw.wiki.initFieldViewers();
 	$tw.wiki.initStoryViews();
+	$tw.wiki.initListViews();
 	$tw.wiki.initParsers();
 	// Set up the command modules
 	$tw.Commander.initCommands();

@@ -22,7 +22,9 @@ exports.info = {
 		templateText: {byName: true, type: "text"},
 		editTemplate: {byName: true, type: "tiddler"},
 		editTemplateText: {byName: true, type: "text"},
-		emptyMessage: {byName: true, type: "text"}
+		emptyMessage: {byName: true, type: "text"},
+		listviewTiddler: {byName: true, type: "tiddler"},
+		listview: {byName: true, type: "text"}
 	}
 };
 
@@ -57,6 +59,22 @@ exports.executeMacro = function() {
 		}		
 	}
 	return this.listFrame;
+};
+
+exports.postRenderInDom = function() {
+	// Instantiate the list view
+	var listviewName;
+	if(this.hasParameter("listviewTiddler")) {
+		listviewName = this.wiki.getTextReference(this.params.listviewTiddler);
+	}
+	if(!listviewName && this.hasParameter("listview")) {
+		listviewName = this.params.listview;
+	}
+	var ListView = this.wiki.macros.list.listviews[listviewName];
+	this.listview = ListView ? new ListView(this) : null;
+	if(this.listview) {
+		this.listview.test();
+	}
 };
 
 exports.getTiddlerList = function() {
