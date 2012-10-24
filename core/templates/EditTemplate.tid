@@ -1,6 +1,8 @@
 title: $:/templates/EditTemplate
 modifier: JeremyRuston
 
+
+<div class="tw-tiddler-frame">
 <<view title>> <<button SaveTiddler class:"btn btn-mini btn-success"><done>>
 {{title{
 <<edit draft.title>>
@@ -9,3 +11,4 @@ modifier: JeremyRuston
 {{body{
 <<edit text>>
 }}}
+</div>
