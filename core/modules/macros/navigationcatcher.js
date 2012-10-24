@@ -161,7 +161,7 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 // Create a new draft tiddler
 exports.eventMap["tw-NewTiddler"] = function(event) {
 	// Get the story details
-	this.getStory();
+	this.story = this.getList(this.storyTitle);
 	// Create the new tiddler
 	for(var t=0; true; t++) {
 		var title = "New Tiddler" + (t ? " " + t : "");
@@ -184,28 +184,13 @@ exports.eventMap["tw-NewTiddler"] = function(event) {
 		});
 	this.wiki.addTiddler(draftTiddler);
 	// Update the story to put the new draft at the top
-	this.story.tiddlers.splice(0,0,{
-		title: title,
-		draft: draftTitle
-	});
+	this.story.splice(0,0,draftTitle);
 	// Save the updated story
-	this.saveStory();
+	this.saveList(this.storyTitle,this.story);
 	// Add a new record to the top of the history stack
-	this.getHistory();
-	this.history.stack.push({
-		title: title,
-		fromTitle: "HelloThere",
-		fromPosition: {
-			top: 0,
-			left: 0,
-			right: 100,
-			bottom: 100,
-			width: 100,
-			height: 100
-		},
-		scrollPosition: $tw.utils.getScrollPosition()
-	});
-	this.saveHistory();
+	this.history = this.getList(this.historyTitle);
+	this.history.push(draftTitle);
+	this.saveList(this.historyTitle,this.history);
 	event.stopPropagation();
 	return false;
 };
