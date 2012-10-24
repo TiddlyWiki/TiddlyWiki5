@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
-<<navigator story:"$:/StoryTiddlers" history:"$:/History" ><
+<<navigationcatcher ><
 
 <!--  Zooming chooser -->
 {{navigation-panel{
@@ -93,7 +93,7 @@ title: $:/templates/PageTemplate
 
 <!-- The main story references the same story and history tiddlers as the outer navigator -->
 <div class="container">
-<<story story:"$:/StoryTiddlers" history:"$:/History" storyviewTiddler:[[$:/CurrentView]] storyview:classic >>
+<<list filter:"[list[$:/StoryList]]" template:"$:/templates/ViewTemplate" editTemplate:"$:/templates/EditTemplate" listview:classic >>
 </div>
 
 >>
