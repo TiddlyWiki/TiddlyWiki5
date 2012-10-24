@@ -76,7 +76,7 @@ title: $:/templates/PageTemplate
 }}}
 
 <!-- This navigator intercepts navigation events and sets the text of the specified tiddler to the target tiddler title -->
-<<navigator set:[[$:/CurrentView]]><
+<<navigationcatcher set:[[$:/CurrentView]]><
 <<reveal state:ViewDropDownState type:popup position:below><
 <div class="open">
 {{dropdown-menu tw-suppress-missing-tiddlylink{
