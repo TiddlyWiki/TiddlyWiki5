@@ -117,7 +117,7 @@ exports.createListElement = function(title) {
 		}};
 	node.execute(this.parents,this.tiddlerTitle);
 	var listElement = $tw.Tree.Element(this.isBlock ? "div" : "span",{"class": ["tw-list-element"]},[node],{
-			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler"],
+			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler","tw-NewTiddler"],
 			eventHandler: eventHandler
 		});
 	// Save our data inside the list element node

@@ -32,6 +32,15 @@ exports.saveList = function(title,list) {
 	},storyTiddler,{text: list.join("\n")}));
 };
 
+exports.findTitleInStory = function(title,defaultIndex) {
+	for(var t=0; t<this.story.length; t++) {
+		if(this.story[t] === title) {
+			return t;
+		}
+	}	
+	return defaultIndex;
+};
+
 exports.handleEvent = function(event) {
 	if(this.eventMap[event.type]) {
 		this.eventMap[event.type].call(this,event);
@@ -54,14 +63,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 	// If not we need to add it
 	if(tiddler === undefined) {
 		// First we try to find the position of the story element we navigated from
-		slot = 0;
-		if(event.navigateFromTitle !== undefined) {
-			for(t=0; t<this.story.length; t++) {
-				if(this.story[t] === event.navigateFromTitle) {
-					slot = t + 1;
-				}
-			}	
-		}
+		slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
 		// Add the tiddler
 		this.story.splice(slot,0,event.navigateTo);
 		// Save the story
@@ -179,8 +181,9 @@ exports.eventMap["tw-NewTiddler"] = function(event) {
 			"draft.of": title
 		});
 	this.wiki.addTiddler(draftTiddler);
-	// Update the story to put the new draft at the top
-	this.story.splice(0,0,draftTitle);
+	// Update the story to insert the new draft at the top
+	var slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
+	this.story.splice(slot,0,draftTitle);
 	// Save the updated story
 	this.saveList(this.storyTitle,this.story);
 	// Add a new record to the top of the history stack
