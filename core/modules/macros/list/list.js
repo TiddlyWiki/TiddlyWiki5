@@ -112,7 +112,6 @@ exports.createListElement = function(title) {
 	var node = this.createListElementMacro(title),
 		eventHandler = {handleEvent: function(event) {
 			// Add context information to the event
-			event.navigateFromListElement = node;
 			event.navigateFromTitle = title;
 			return true;
 		}};

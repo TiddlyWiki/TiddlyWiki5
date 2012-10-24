@@ -47,21 +47,17 @@ exports.eventMap["tw-navigate"] = function(event) {
 	var t,tiddler,slot;
 	// See if the tiddler is already there
 	for(t=0; t<this.story.length; t++) {
-		if(this.story[t].title === event.navigateTo) {
+		if(this.story[t] === event.navigateTo) {
 			tiddler = t;
 		}
 	}
 	// If not we need to add it
 	if(tiddler === undefined) {
 		// First we try to find the position of the story element we navigated from
-		var navigateFromTitle;
-		if(event.navigateFromStoryElement) {
-			navigateFromTitle = event.navigateFromStoryElement.params.target;
-		}
 		slot = 0;
-		if(navigateFromTitle !== undefined) {
+		if(event.navigateFromTitle !== undefined) {
 			for(t=0; t<this.story.length; t++) {
-				if(this.story[t].title === navigateFromTitle) {
+				if(this.story[t] === event.navigateFromTitle) {
 					slot = t + 1;
 				}
 			}	
