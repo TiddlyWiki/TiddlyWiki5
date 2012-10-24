@@ -132,7 +132,7 @@ Create the tiddler macro needed to represent a given tiddler
 exports.createListElementMacro = function(title) {
 	// Check if the tiddler is a draft
 	var tiddler = this.wiki.getTiddler(title),
-		draft = tiddler ? tiddler.hasField("draft-of") : false;
+		draft = tiddler ? tiddler.hasField("draft.of") : false;
 	// Figure out the template to use
 	var template = this.params.template,
 		templateText = this.params.templateText;
