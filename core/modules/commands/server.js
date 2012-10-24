@@ -57,7 +57,9 @@ Command.prototype.execute = function() {
 			case "GET":
 				if(path === "/") {
 					response.writeHead(200, {"Content-Type": serveType});
-					var text = self.commander.wiki.renderTiddler(renderType,rootTiddler);
+					var text = self.commander.wiki.renderTiddler(renderType,rootTiddler,{
+						"with": ["","[!is[shadow]]"]
+					});
 					response.end(text, "utf8");	
 				} else {
 					response.writeHead(404);
