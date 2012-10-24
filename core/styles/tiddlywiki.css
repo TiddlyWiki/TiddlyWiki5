@@ -5837,7 +5837,7 @@ Tiddler styles
 }
 
 @media (min-width: 767px) {
-  .tw-story-element {
+  .tw-tiddler-frame {
     padding: 30px 30px 30px 30px;
     margin: 30px 5px 30px 5px;
     background-color: #fff;
@@ -5854,7 +5854,7 @@ Tiddler styles
   
 }
 
-.tw-story-element .body {
+.tw-tiddler-frame .body {
   margin-top: 12px;
 }
 

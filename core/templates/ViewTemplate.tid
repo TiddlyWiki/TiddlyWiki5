@@ -1,7 +1,8 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-<div class="title"> 
+<div class="tw-tiddler-frame">
+<div class="title">
 	<span><<view title>></span> <span> <<reveal state:[[$:/EditMode]] type:match text:yes>< <<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>> >> </span>
 	<<button close class:"btn-invisible pull-right"><[img[$:/core/images/close-button.svg]]>>
 </div>
@@ -13,4 +14,5 @@ modifier: JeremyRuston
 }}}
 <div class="body">
 	<<view text wikified>>
+</div>
 </div>

@@ -114,7 +114,7 @@ exports.executeMacro = function() {
 	}
 	// Set up the attributes for the wrapper element
 	var attributes = {
-		"class": ["tw-tiddler-frame"]
+		"class": []
 	};
 	if(!this.wiki.tiddlerExists(renderTitle)) {
 		attributes["class"].push("tw-tiddler-missing");
