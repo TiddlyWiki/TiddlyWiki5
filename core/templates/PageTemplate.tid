@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
-<<navigationcatcher ><
+<<navigator ><
 
 <!--  Zooming chooser -->
 {{navigation-panel{
@@ -76,7 +76,7 @@ title: $:/templates/PageTemplate
 }}}
 
 <!-- This navigator intercepts navigation events and sets the text of the specified tiddler to the target tiddler title -->
-<<navigationcatcher set:[[$:/CurrentView]]><
+<<navigator set:[[$:/CurrentView]]><
 <<reveal state:ViewDropDownState type:popup position:below><
 <div class="open">
 {{dropdown-menu tw-suppress-missing-tiddlylink{

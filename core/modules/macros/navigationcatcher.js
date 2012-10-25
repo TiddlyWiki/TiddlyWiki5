@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/macros/navigationcatcher.js
+title: $:/core/modules/macros/navigator.js
 type: application/javascript
 module-type: macro
 
@@ -13,7 +13,7 @@ Traps navigation events to update a story tiddler and history tiddler. Can also 
 "use strict";
 
 exports.info = {
-	name: "navigationcatcher",
+	name: "navigator",
 	params: {
 		story: {byName: "default", type: "text"}, // Actually a tiddler, but we don't want it to be a dependency
 		history: {byName: "default", type: "text"}, // Actually a tiddler, but we don't want it to be a dependency
