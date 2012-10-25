@@ -1,0 +1,3 @@
+title: CecilyView
+
+<<list filter:"[tag[docs]]" template:"$:/templates/ViewTemplate" listview:cecily>>

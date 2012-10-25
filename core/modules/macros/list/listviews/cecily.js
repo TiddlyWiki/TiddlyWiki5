@@ -61,7 +61,7 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 				w: 300,
 				h: 300
 			};
-			this.newTiddlerPosition.x += domNode.offsetWidth/2;
+			this.newTiddlerPosition.x += domNode.offsetWidth;
 			break;
 	}
 	// Return the position
