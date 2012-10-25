@@ -273,13 +273,9 @@ exports.nextTick = function(fn) {
 Convert a hyphenated CSS property name into a camel case one
 */
 exports.unHyphenateCss = function(propName) {
-	if($tw.browser.unHyphenateCss) {
-		return propName.replace(/-([a-z])/gi, function(match0,match1) {
-			return match1.toUpperCase();
-		});
-	} else {
-		return propName;
-	}
+	return propName.replace(/-([a-z])/gi, function(match0,match1) {
+		return match1.toUpperCase();
+	});
 };
 
 /*
