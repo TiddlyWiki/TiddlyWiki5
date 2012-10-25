@@ -53,15 +53,10 @@ exports.eventMap = {};
 exports.eventMap["tw-navigate"] = function(event) {
 	// Update the story tiddler if specified
 	this.story = this.getList(this.storyTitle);
-	var t,tiddler,slot;
 	// See if the tiddler is already there
-	for(t=0; t<this.story.length; t++) {
-		if(this.story[t] === event.navigateTo) {
-			tiddler = t;
-		}
-	}
+	var slot = this.findTitleInStory(event.navigateTo,-1);
 	// If not we need to add it
-	if(tiddler === undefined) {
+	if(slot === -1) {
 		// First we try to find the position of the story element we navigated from
 		slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
 		// Add the tiddler
@@ -85,12 +80,11 @@ exports.eventMap["tw-navigate"] = function(event) {
 exports.eventMap["tw-close"] = function(event) {
 	this.story = this.getList(this.storyTitle);
 	// Look for tiddlers with this title to close
-	for(var t=this.story.length-1; t>=0; t--) {
-		if(this.story[t] === event.tiddlerTitle) {
-			this.story.splice(t,1);
-		}
+	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
+	if(slot !== -1) {
+		this.story.splice(slot,1);
+		this.saveList(this.storyTitle,this.story);
 	}
-	this.saveList(this.storyTitle,this.story);
 	event.stopPropagation();
 	return false;
 };
