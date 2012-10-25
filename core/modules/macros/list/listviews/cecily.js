@@ -83,12 +83,11 @@ CecilyListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode;
 	// Animate the insertion
-	var d = $tw.config.preferences.animationDuration + "ms";
 	targetElement.style[$tw.browser.transition] = "";
 	targetElement.style[$tw.browser.transformorigin] = "0% 0%";
 	targetElement.style.opacity = "0.0";
 	$tw.utils.forceLayout(targetElement);
-	targetElement.style[$tw.browser.transition] = "opacity " + d + " ease-out";
+	targetElement.style[$tw.browser.transition] = "opacity " + $tw.config.preferences.animationDurationMs + " ease-out";
 	targetElement.style.opacity = "1.0";
 	// Position the dom node
 	this.positionTiddler(listElementNode.listElementInfo.title,targetElement);

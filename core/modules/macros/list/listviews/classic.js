@@ -22,16 +22,15 @@ ClassicListView.prototype.insert = function(index) {
 	// Get the current height of the tiddler
 	var currHeight = targetElement.offsetHeight;
 	// Animate the closure
-	var d = $tw.config.preferences.animationDuration + "ms";
 	targetElement.style[$tw.browser.transition] = "";
 	targetElement.style[$tw.browser.transformorigin] = "0% 0%";
 	targetElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
 	targetElement.style.opacity = "0.0";
 	targetElement.style.height = "0px";
 	$tw.utils.forceLayout(targetElement);
-	targetElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
-														"opacity " + d + " ease-out, " +
-														"height " + d + " ease-in-out";
+	targetElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+														"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
+														"height " + $tw.config.preferences.animationDurationMs + " ease-in-out";
 	targetElement.style[$tw.browser.transform] = "translateX(0px)";
 	targetElement.style.opacity = "1.0";
 	targetElement.style.height = currHeight + "px";
@@ -53,10 +52,9 @@ ClassicListView.prototype.remove = function(index) {
 		}
 	},false);
 	// Animate the closure
-	var d = $tw.config.preferences.animationDuration + "ms";
-	wrapperElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out, " +
-															"opacity " + d + " ease-out, " +
-															"height " + d + " ease-in-out";
+	wrapperElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+															"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
+															"height " + $tw.config.preferences.animationDurationMs + " ease-in-out";
 	wrapperElement.style[$tw.browser.transformorigin] = "0% 0%";
 	wrapperElement.style[$tw.browser.transform] = "translateX(0px)";
 	wrapperElement.style.opacity = "1.0";
