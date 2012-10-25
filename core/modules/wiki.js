@@ -353,6 +353,17 @@ exports.setTiddlerData = function(title,data) {
 	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data)}));
 };
 
+/*
+Return the content of a tiddler as an array containing each line
+*/
+exports.getTiddlerList = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler.fields.text && tiddler.fields.text.length > 0) {
+		return tiddler.fields.text.split("\n");
+	}
+	return [];
+};
+
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	this.caches = this.caches || {};
