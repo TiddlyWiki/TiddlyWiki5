@@ -74,16 +74,16 @@ exports.startup = function() {
 			defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
 		}
 		// Initialise the story and history
-		var storyTitle = "$:/StoryTiddlers",
-			historyTitle = "$:/History",
-			story = {tiddlers: []},
-			history = {stack: []};
+		var storyTitle = "$:/StoryList",
+			historyTitle = "$:/HistoryList",
+			story = [],
+			history = [];
 		for(var t=0; t<defaultTiddlers.length; t++) {
-			story.tiddlers[t] = {title: defaultTiddlers[t]};
-			history.stack[defaultTiddlers.length - t - 1] = {title: defaultTiddlers[t], fromTitle: defaultTiddlers[t+1]};
+			story[t] = defaultTiddlers[t];
+			history[defaultTiddlers.length - t - 1] = defaultTiddlers[t];
 		}
-		$tw.wiki.setTiddlerData(storyTitle,story);
-		$tw.wiki.setTiddlerData(historyTitle,history);
+		$tw.wiki.addTiddler({title: storyTitle, text: story.join("\n")});
+		$tw.wiki.addTiddler({title: historyTitle, text: history.join("\n")});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			var event = document.createEvent("Event");
