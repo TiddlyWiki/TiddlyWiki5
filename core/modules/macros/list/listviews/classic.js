@@ -22,6 +22,13 @@ ClassicListView.prototype.insert = function(index) {
 	// Get the current height of the tiddler
 	var currHeight = targetElement.offsetHeight;
 	// Animate the closure
+	// $tw.utils.setStyle(targetElement,[
+	// 	{transition: ""},
+	// 	{transformOrigin: "0% 0%"},
+	// 	{transform: "translateX(" + window.innerWidth + "px)"},
+	// 	{opacity: "0.0"},
+	// 	{height: "0px"}
+	// ]);
 	targetElement.style[$tw.browser.transition] = "";
 	targetElement.style[$tw.browser.transformorigin] = "0% 0%";
 	targetElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";

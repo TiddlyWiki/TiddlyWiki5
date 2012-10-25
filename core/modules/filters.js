@@ -195,15 +195,15 @@ exports.operators = {
 	"list": { // Select all tiddlers that are listed (or not listed) in the specified tiddler
 		selector: function(operator) {
 			if(operator.prefix === "!") {
-				return "var list = this.getTextReference(\"" + $tw.utils.stringify(operator.operand) + "\",\"\").split(\"\\n\");" +
+				return "var list = this.getTiddlerList(\"" + $tw.utils.stringify(operator.operand) + "\");" +
 					"for(title in source) {if(list.indexOf(title) === -1) {$tw.utils.pushTop(subResults,title);}}";
 			} else {
-				return "$tw.utils.pushTop(subResults,this.getTextReference(\"" + $tw.utils.stringify(operator.operand) + "\",\"\").split(\"\\n\"));";
+				return "$tw.utils.pushTop(subResults,this.getTiddlerList(\"" + $tw.utils.stringify(operator.operand) + "\"));";
 			}
 		},
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "!==" : "===";
-			return "var list = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text.split(\"\\n\");" +
+			return "var list = this.getTiddlerList(\"" + $tw.utils.stringify(operator.operand) + "\");" +
 				"for(r=subResults.length-1; r>=0; r--) {if(list.indexOf(title) " + op + " -1) {subResults.splice(r,1);}}";
 		}
 	},
