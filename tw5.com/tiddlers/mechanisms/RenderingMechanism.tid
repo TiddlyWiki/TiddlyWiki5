@@ -1,38 +1,3 @@
 title: RenderingMechanism
 tags: docs mechanism
 
-The `parseTree.compile(type)` method returns a renderer object that contains a JavaScript function that generates the new representation of the original parsed text.
-
-The renderer is invoked as follows:
-
-$$$.js
-var renderer = parseTree.compile("text/html");
-var html = renderer.render(tiddler,store);
-$$$
-
-The `tiddler` parameter to the `render` method identifies the tiddler that is acting as the context for this rendering -- for example, it provides the fields displayed by the `<<view>>` macro. The `store` parameter is used to resolve any references to other tiddlers.
-
-!! Rerendering
-
-When rendering to the HTML/SVG DOM in the browser, TiddlyWiki5 also allows a previous rendering to be selectively updated in response to changes in dependent tiddlers. At the moment, only the WikiTextRenderer supports rerendering.
-
-The rerender method on the renderer is called as follows:
-
-{{{
-var node = document.getElementById("myNode");
-var renderer = parseTree.compile("text/html");
-myNode.innerHTML = renderer.render(tiddler,store);
-// And then, later:
-renderer.rerender(node,changes,tiddler,store,renderStep);
-}}}
-
-The parameters to `rerender()` are:
-
-|!Name |!Description |
-|node |A reference to the DOM node containing the rendering to be rerendered |
-|changes |A hashmap of `{title: "created|modified|deleted"}` indicating which tiddlers have changed since the original rendering |
-|tiddler |The tiddler providing the rendering context |
-|store |The store to use for resolving references to other tiddlers |
-|renderStep |See below |
-
-Currently, the only macro that supports rerendering is the `<<story>>` macro; all other macros are rerendered by calling the ordinary `render()` method again. The reason that the `<<story>>` macro goes to the trouble of having a `rerender()` method is so that it can be carefully selective about not disturbing tiddlers in the DOM that aren't affected by the change. If there were, for instance, a video playing in one of the open tiddlers it would be reset to the beginning if the tiddler were rerendered.
