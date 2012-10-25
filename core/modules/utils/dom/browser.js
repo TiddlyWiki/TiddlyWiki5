@@ -18,7 +18,11 @@ Set style properties of an element
 	styles: ordered array of {name: value} pairs
 */
 exports.setStyle = function(element,styles) {
-
+	for(var t=0; t<styles.length; t++) {
+		for(var styleName in styles[t]) {
+			element.style[$tw.utils.convertStyleNameToPropertyName(styleName)] = styles[t][styleName];
+		}
+	}
 };
 
 /*
@@ -29,28 +33,53 @@ Converts a standard CSS property name into the local browser-specific equivalent
 
 var styleNameCache = {}; // We'll cache the style name conversions
 
-exports.convertStyleName = function(styleName) {
+exports.convertStyleNameToPropertyName = function(styleName) {
 	// Return from the cache if we can
 	if(styleNameCache[styleName]) {
 		return styleNameCache[styleName];
 	}
 	// Convert it by first removing any hyphens
-	var newStyleName = $tw.utils.unHyphenateCss(styleName);
+	var propertyName = $tw.utils.unHyphenateCss(styleName);
 	// Then check if it needs a prefix
-	if(document.body.style[newStyleName] === undefined) {
+	if(document.body.style[propertyName] === undefined) {
 		var prefixes = ["O","MS","Moz","webkit"];
 		for(var t=0; t<prefixes.length; t++) {
-			var prefixedName = prefixes[t] + newStyleName.substr(0,1).toUpperCase() + newStyleName.substr(1);
+			var prefixedName = prefixes[t] + propertyName.substr(0,1).toUpperCase() + propertyName.substr(1);
 			if(document.body.style[prefixedName] !== undefined) {
-				newStyleName = prefixedName;
+				propertyName = prefixedName;
 				break;
 			}
 		}
 	}
 	// Put it in the cache too
-	styleNameCache[styleName] = newStyleName
-	return newStyleName;
-}
+	styleNameCache[styleName] = propertyName
+	return propertyName;
+};
+
+/*
+Converts a JS format CSS property name back into the dashed form used in CSS declarations. For example:
+	"backgroundColor" --> "background-color"
+	"webkitTransform" --> "-webkit-transform"
+*/
+exports.convertPropertyNameToStyleName = function(propertyName) {
+	// Rehyphenate the name
+	var styleName = $tw.utils.hyphenateCss(propertyName);
+	// If there's a webkit prefix, add a dash (other browsers have uppercase prefixes, and so get the dash automatically)
+	if(styleName.indexOf("webkit") === 0) {
+		styleName = "-" + styleName;
+	} else if(styleName.indexOf("-m-s") === 0) {
+		styleName = "-ms" + styleName.substr(4);
+	}
+	return styleName;
+};
+
+/*
+Round trip a stylename to a property name and back again. For example:
+	"transform" --> "webkitTransform" --> "-webkit-transform"
+*/
+exports.roundTripPropertyName = function(propertyName) {
+	return $tw.utils.convertPropertyNameToStyleName($tw.utils.convertStyleNameToPropertyName(propertyName));
+};
 
 /*
 Converts a standard event name into the local browser specific equivalent. For example:
@@ -99,8 +128,8 @@ exports.convertEventName = function(eventName) {
 	return newEventName;
 };
 
-// For backwards compatibility, this will all be removed 
-var getBrowserInfo = function(info) {
+// Setup constants for the current browser
+exports.getBrowserInfo = function(info) {
 	info.prefix = document.body.style.webkitTransform !== undefined ? "webkit" : 
 						document.body.style.MozTransform !== undefined ? "Moz" :
 						document.body.style.MSTransform !== undefined ? "MS" :
@@ -132,9 +161,5 @@ var getBrowserInfo = function(info) {
 							document.mozFullScreen !== undefined ? "mozFullScreen" :
 							document.fullScreen !== undefined ? "fullScreen" : "";
 };
-
-if($tw.browser) {
-	getBrowserInfo($tw.browser);
-}
 
 })();

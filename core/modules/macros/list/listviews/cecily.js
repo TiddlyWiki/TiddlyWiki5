@@ -54,14 +54,14 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 	// If the tiddler wasn't in the map we'll have to compute it
 	var newPosition;
 	switch(this.map.positionNew) {
-		default: // "below"
+		default: // "right"
 			newPosition = {
 				x: this.newTiddlerPosition.x,
 				y: this.newTiddlerPosition.y,
 				w: 300,
 				h: 300
 			};
-			this.newTiddlerPosition.y += domNode.offsetHeight/2;
+			this.newTiddlerPosition.x += domNode.offsetWidth/2;
 			break;
 	}
 	// Return the position
@@ -83,12 +83,16 @@ CecilyListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode;
 	// Animate the insertion
-	targetElement.style[$tw.browser.transition] = "";
-	targetElement.style[$tw.browser.transformorigin] = "0% 0%";
-	targetElement.style.opacity = "0.0";
+	$tw.utils.setStyle(targetElement,[
+		{transition: ""},
+		{transformOrigin: "0% 0%"},
+		{opacity: "0.0"}
+	]);
 	$tw.utils.forceLayout(targetElement);
-	targetElement.style[$tw.browser.transition] = "opacity " + $tw.config.preferences.animationDurationMs + " ease-out";
-	targetElement.style.opacity = "1.0";
+	$tw.utils.setStyle(targetElement,[
+		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
+		{opacity: "1.0"}
+	]);
 	// Position the dom node
 	this.positionTiddler(listElementNode.listElementInfo.title,targetElement);
 };

@@ -279,6 +279,15 @@ exports.unHyphenateCss = function(propName) {
 };
 
 /*
+Convert a camelcase CSS property name into a dashed one ("backgroundColor" --> "background-color")
+*/
+exports.hyphenateCss = function(propName) {
+	return propName.replace(/([A-Z])/g, function(match0,match1) {
+		return "-" + match1.toLowerCase();
+	});
+};
+
+/*
 Extract the version number from the meta tag or from the boot file
 */
 

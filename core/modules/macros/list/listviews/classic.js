@@ -14,7 +14,7 @@ Views the list as a linear sequence
 
 function ClassicListView(listMacro) {
 	this.listMacro = listMacro;
-};
+}
 
 ClassicListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
@@ -22,25 +22,23 @@ ClassicListView.prototype.insert = function(index) {
 	// Get the current height of the tiddler
 	var currHeight = targetElement.offsetHeight;
 	// Animate the closure
-	// $tw.utils.setStyle(targetElement,[
-	// 	{transition: ""},
-	// 	{transformOrigin: "0% 0%"},
-	// 	{transform: "translateX(" + window.innerWidth + "px)"},
-	// 	{opacity: "0.0"},
-	// 	{height: "0px"}
-	// ]);
-	targetElement.style[$tw.browser.transition] = "";
-	targetElement.style[$tw.browser.transformorigin] = "0% 0%";
-	targetElement.style[$tw.browser.transform] = "translateX(" + window.innerWidth + "px)";
-	targetElement.style.opacity = "0.0";
-	targetElement.style.height = "0px";
+	$tw.utils.setStyle(targetElement,[
+		{transition: ""},
+		{transformOrigin: "0% 0%"},
+		{transform: "translateX(" + window.innerWidth + "px)"},
+		{opacity: "0.0"},
+		{height: "0px"}
+	]);
 	$tw.utils.forceLayout(targetElement);
-	targetElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-														"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
-														"height " + $tw.config.preferences.animationDurationMs + " ease-in-out";
-	targetElement.style[$tw.browser.transform] = "translateX(0px)";
-	targetElement.style.opacity = "1.0";
-	targetElement.style.height = currHeight + "px";
+	$tw.utils.setStyle(targetElement,[
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
+					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transform: "translateX(0px)"},
+		{opacity: "1.0"},
+		{height: currHeight + "px"}
+	]);
+
 };
 
 ClassicListView.prototype.remove = function(index) {
@@ -59,17 +57,21 @@ ClassicListView.prototype.remove = function(index) {
 		}
 	},false);
 	// Animate the closure
-	wrapperElement.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-															"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
-															"height " + $tw.config.preferences.animationDurationMs + " ease-in-out";
-	wrapperElement.style[$tw.browser.transformorigin] = "0% 0%";
-	wrapperElement.style[$tw.browser.transform] = "translateX(0px)";
-	wrapperElement.style.opacity = "1.0";
-	wrapperElement.style.height = currHeight + "px";
+	$tw.utils.setStyle(wrapperElement,[
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
+					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transformOrigin: "0% 0%"},
+		{transform: "translateX(0px)"},
+		{opacity: "1.0"},
+		{height: currHeight + "px"}
+	]);
 	$tw.utils.forceLayout(wrapperElement);
-	wrapperElement.style[$tw.browser.transform] = "translateX(-" + window.innerWidth + "px)";
-	wrapperElement.style.opacity = "0.0";
-	wrapperElement.style.height = "0px";
+	$tw.utils.setStyle(wrapperElement,[
+		{transform: "translateX(-" + window.innerWidth + "px)"},
+		{opacity: "0.0"},
+		{height: "0px"}
+	]);
 	// Returning true causes the DOM node not to be deleted
 	return true;
 };

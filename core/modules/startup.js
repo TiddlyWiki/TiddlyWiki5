@@ -18,6 +18,9 @@ exports.startup = function() {
 	$tw.modules.applyMethods("global",$tw);
 	$tw.modules.applyMethods("config",$tw.config);
 	$tw.modules.applyMethods("utils",$tw.utils);
+	if($tw.browser) {
+		$tw.utils.getBrowserInfo($tw.browser);
+	}
 	$tw.version = $tw.utils.extractVersionInfo();
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
