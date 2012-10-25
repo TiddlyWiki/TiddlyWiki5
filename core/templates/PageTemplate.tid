@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
-<<navigator ><
+<<navigator><
 
 <!--  Zooming chooser -->
 {{navigation-panel{
