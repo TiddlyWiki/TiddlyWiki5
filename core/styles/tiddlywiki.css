@@ -5832,10 +5832,6 @@ html:full-screen {
 Tiddler styles
 */
 
-.tw-story-element {
-  position: relative;
-}
-
 @media (min-width: 767px) {
   .tw-tiddler-frame {
     padding: 30px 30px 30px 30px;
@@ -5920,6 +5916,33 @@ a.tw-tiddlylink-missing {
 
 .tw-suppress-missing-tiddlylink a.tw-tiddlylink-missing {
   font-style: inherit;
+}
+
+/*
+Cecily views
+*/
+
+.mediumCecily {
+  overflow-x: scroll;
+  white-space: nowrap;
+  background: #ccc;
+  -webkit-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
+     -moz-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
+          box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
+}
+
+.mediumCecily * {
+  overflow-x: auto;
+}
+
+.mediumCecily .tw-cecily-tiddler-frame {
+  width: 300px;
+  padding: 30px 30px 30px 30px;
+  margin: 30px 5px 30px 5px;
+  background-color: #fff;
+  -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+     -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+          box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
 }
 
 /*

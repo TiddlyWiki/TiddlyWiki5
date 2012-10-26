@@ -1,0 +1,15 @@
+title: CecilyTemplate
+
+<div class="title">
+	<span><<view title>></span>
+	<<button close class:"btn-invisible pull-right"><[img[$:/core/images/close-button.svg]]>>
+</div>
+<div class="small">
+	<<view modifier link>> <<view modified date>>
+</div>
+{{tw-tags-wrapper{
+((([is[current]tags[]]))($:/templates/TagTemplate))
+}}}
+<div class="body">
+	<<view text wikified>>
+</div>
