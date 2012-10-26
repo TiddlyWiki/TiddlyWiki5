@@ -92,6 +92,22 @@ exports.getScrollPosition = function() {
 };
 
 /*
+Gets the bounding rectangle of an element in absolute page coordinates
+*/
+exports.getBoundingPageRect = function(element) {
+	var scrollPos = $tw.utils.getScrollPosition(),
+		clientRect = element.getBoundingClientRect();
+	return {
+		left: clientRect.left + scrollPos.x,
+		width: clientRect.width,
+		right: clientRect.right + scrollPos.x,
+		top: clientRect.top + scrollPos.y,
+		height: clientRect.height,
+		bottom: clientRect.bottom + scrollPos.y
+	};
+};
+
+/*
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {

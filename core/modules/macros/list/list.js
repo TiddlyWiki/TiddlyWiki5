@@ -294,7 +294,7 @@ exports.handleHistoryChanges = function() {
 	// Navigate forwards to each of the new tiddlers
 	while(entry < newHistory.length) {
 		if(this.listview && this.listview.navigateTo) {
-			this.listview.navigateTo(newHistory[entry].title);
+			this.listview.navigateTo(newHistory[entry]);
 		}
 		entry++;
 	}

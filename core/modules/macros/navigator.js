@@ -70,7 +70,7 @@ exports.eventMap["tw-navigate"] = function(event) {
 	}
 	// Add a new record to the top of the history stack
 	this.history = this.wiki.getTiddlerData(this.historyTitle,[]);
-	this.history.push({title: event.navigateTo});
+	this.history.push({title: event.navigateTo, fromPageRect: event.navigateFromPageRect});
 	this.wiki.setTiddlerData(this.historyTitle,this.history);
 	event.stopPropagation();
 	return false;

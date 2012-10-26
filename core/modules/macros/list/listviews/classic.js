@@ -16,19 +16,46 @@ function ClassicListView(listMacro) {
 	this.listMacro = listMacro;
 }
 
-ClassicListView.prototype.navigateTo = function(title) {
-	var listElementIndex = this.listMacro.findListElementByTitle(0,title),
+ClassicListView.prototype.navigateTo = function(historyInfo) {
+	var listElementIndex = this.listMacro.findListElementByTitle(0,historyInfo.title),
 		listElementNode = this.listMacro.listFrame.children[listElementIndex],
 		targetElement = listElementNode.domNode;
-	// Replace any previous transition on the target element
+	// Remove any transform on the target element
 	$tw.utils.setStyle(targetElement,[
-		{transition: ""}
+		{transition: "none"},
+		{transformOrigin: "0% 0%"},
+		{transform: "none"},
+		{height: "auto"}
+	]);
+	// Compute the start and end positions of the target element
+	var srcRect = historyInfo.fromPageRect;
+	if(!srcRect) {
+		var scrollPos = $tw.utils.getScrollPosition();
+		srcRect.width = window.innerWidth;
+		srcRect.height = window.innerHeight;
+		srcRect = {
+			left: scrollPos.x,
+			top: scrollPos.y,
+			right: scrollPos.x + srcRect.width,
+			bottom: scrollPos.y + srcRect.height
+		};
+	};
+$tw.utils.forceLayout(targetElement);
+	var dstRect = $tw.utils.getBoundingPageRect(targetElement);
+	// Compute the transformations
+	var scale = srcRect.width / dstRect.width;
+	// Position the target element over the source rectangle
+	$tw.utils.setStyle(targetElement,[
+		{transition: "none"},
+		{transform: "translateX(" + (srcRect.left-dstRect.left) + "px) translateY(" + (srcRect.top-dstRect.top) + "px) scale(" + scale + ")"}
 	]);
 	$tw.utils.forceLayout(targetElement);
+	// Transition the target element to its final resting place
 	$tw.utils.setStyle(targetElement,[
-		{transform: ""},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
+		{transform: "none"}
 	]);
-	$tw.utils.forceLayout(targetElement);
 	// Scroll the target element into view
 	$tw.scroller.scrollIntoView(targetElement);
 };
@@ -38,21 +65,23 @@ ClassicListView.prototype.insert = function(index) {
 		targetElement = listElementNode.domNode;
 	// Get the current height of the tiddler
 	var currHeight = targetElement.offsetHeight;
-	// Animate the closure
+	// Reset the height once the transition is over
+	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		$tw.utils.setStyle(targetElement,[
+			{transition: "none"},
+			{height: "auto"}
+		]);
+	},false);
+	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
-		{transition: ""},
+		{transition: "none"},
 		{transformOrigin: "0% 0%"},
 		{transform: "translateX(" + window.innerWidth + "px)"},
 		{opacity: "0.0"},
 		{height: "0px"}
 	]);
 	$tw.utils.forceLayout(targetElement);
-	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
-		$tw.utils.setStyle(targetElement,[
-			{transition: ""},
-			{height: "auto"}
-		]);
-	},false);
+	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +

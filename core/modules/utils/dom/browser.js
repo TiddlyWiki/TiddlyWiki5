@@ -92,20 +92,20 @@ var eventNameMappings = {
 	"transitionEnd": {
 		correspondingCssProperty: "transition",
 		mappings: {
-			transition: "transitionEnd",
+			transition: "transitionend",
 			OTransition: "oTransitionEnd",
 			MSTransition: "msTransitionEnd",
-			MozTransition: "transitionEnd",
+			MozTransition: "transitionend",
 			webkitTransition: "webkitTransitionEnd"
 		}
 	},
 	"animationEnd": {
 		correspondingCssProperty: "animation",
 		mappings: {
-			animation: "animationEnd",
+			animation: "animationend",
 			OAnimation: "oAnimationEnd",
 			MSAnimation: "msAnimationEnd",
-			MozAnimation: "animationEnd",
+			MozAnimation: "animationend",
 			webkitAnimation: "webkitAnimationEnd"
 		}
 	}
