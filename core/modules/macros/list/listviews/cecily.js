@@ -36,7 +36,7 @@ CecilyListView.prototype.getMapTiddlerTitle = function() {
 };
 
 CecilyListView.prototype.loadMap = function() {
-	this.map = this.listMacro.wiki.getTiddlerData(this.getMapTiddlerTitle(),{positions: []});
+	this.map = this.listMacro.wiki.getTiddlerData(this.getMapTiddlerTitle(),{positions: {}});
 };
 
 CecilyListView.prototype.saveMap = function() {
@@ -62,13 +62,17 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 			this.newTiddlerPosition.x += newPosition.w * 1.2;
 			break;
 	}
-	// Return the position
-	return newPosition || {
+	// A default position
+	newPosition = newPosition || {
 		x: 0,
 		y: 0,
 		w: 100,
 		h: 100
 	};
+	// Save the position back to the map
+	this.map.positions[title] = newPosition;
+	this.saveMap();
+	return newPosition;
 };
 
 CecilyListView.prototype.positionTiddler = function(title,domNode) {
