@@ -12,7 +12,9 @@ Parameters:
 
 The simplest case is to just supply a target tiddler:
 
+{{{
 <<tiddler Foo>> or <<transclude target:Foo>>
+}}}
 
 This will render the tiddler Foo within the current tiddler. If the tiddler Foo includes
 the view macro (or other macros that reference the fields of the current tiddler), then the
@@ -22,14 +24,18 @@ If you want to transclude the tiddler as a template, so that the fields referenc
 macro are those of the tiddler doing the transcluding, then you can instead specify the tiddler
 as a template:
 
+{{{
 <<tiddler template:Foo>>
+}}}
 
 The effect is the same as the previous example: the text of the tiddler Foo is rendered. The
 difference is that the view macro will access the fields of the tiddler doing the transcluding.
 
 The `target` and `template` parameters may be combined:
 
+{{{
 <<tiddler target:Foo template:Bar>>
+}}}
 
 Here, the text of the tiddler `Bar` will be transcluded, with the macros within it accessing the fields
 of the tiddler `Foo`.
