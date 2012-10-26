@@ -24,7 +24,8 @@ exports.info = {
 		editTemplateText: {byName: true, type: "text"},
 		emptyMessage: {byName: true, type: "text"},
 		listviewTiddler: {byName: true, type: "tiddler"},
-		listview: {byName: true, type: "text"}
+		listview: {byName: true, type: "text"},
+		itemClass: {byName: true, type: "text"}
 	}
 };
 
@@ -110,13 +111,18 @@ Create a list element representing a given tiddler
 */
 exports.createListElement = function(title) {
 	var node = this.createListElementMacro(title),
+		attributes = {"class": ["tw-list-element"]},
 		eventHandler = {handleEvent: function(event) {
 			// Add context information to the event
 			event.navigateFromTitle = title;
 			return true;
 		}};
 	node.execute(this.parents,this.tiddlerTitle);
-	var listElement = $tw.Tree.Element(this.isBlock ? "div" : "span",{"class": ["tw-list-element"]},[node],{
+	// Add any specified classes
+	if(this.hasParameter("itemClass")) {
+		attributes["class"].push(this.params["itemClass"]);
+	}
+	var listElement = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,[node],{
 			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler","tw-NewTiddler"],
 			eventHandler: eventHandler
 		});
