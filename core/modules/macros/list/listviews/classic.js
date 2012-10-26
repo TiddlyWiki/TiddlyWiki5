@@ -57,7 +57,7 @@ $tw.utils.forceLayout(targetElement);
 		{transform: "none"}
 	]);
 	// Scroll the target element into view
-	$tw.scroller.scrollIntoView(targetElement);
+	$tw.scroller.scrollIntoView(dstRect);
 };
 
 ClassicListView.prototype.insert = function(index) {
