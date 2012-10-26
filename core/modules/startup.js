@@ -75,15 +75,11 @@ exports.startup = function() {
 		}
 		// Initialise the story and history
 		var storyTitle = "$:/StoryList",
-			historyTitle = "$:/HistoryList",
-			story = [],
-			history = [];
+			story = [];
 		for(var t=0; t<defaultTiddlers.length; t++) {
 			story[t] = defaultTiddlers[t];
-			history[defaultTiddlers.length - t - 1] = defaultTiddlers[t];
 		}
 		$tw.wiki.addTiddler({title: storyTitle, text: story.join("\n")});
-		$tw.wiki.addTiddler({title: historyTitle, text: history.join("\n")});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			var event = document.createEvent("Event");
