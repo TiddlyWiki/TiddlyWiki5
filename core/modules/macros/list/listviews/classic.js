@@ -51,7 +51,7 @@ ClassicListView.prototype.remove = function(index) {
 	targetElement.parentNode.insertBefore(wrapperElement,targetElement);
 	wrapperElement.appendChild(targetElement);
 	// Attach an event handler for the end of the transition
-	wrapperElement.addEventListener($tw.browser.transitionEnd,function(event) {
+	wrapperElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 		if(wrapperElement.parentNode) {
 			wrapperElement.parentNode.removeChild(wrapperElement);
 		}
