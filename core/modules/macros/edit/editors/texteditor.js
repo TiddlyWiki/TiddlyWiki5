@@ -88,7 +88,6 @@ TextEditor.prototype.getChild = function() {
 };
 
 TextEditor.prototype.handleEvent = function(event) {
-console.log("event type",event.type);
 	// Get the value of the field if it might have changed
 	if("keyup focus blur".split(" ").indexOf(event.type) !== -1) {
 		this.saveChanges();
