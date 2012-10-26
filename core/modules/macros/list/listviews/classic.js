@@ -47,6 +47,12 @@ ClassicListView.prototype.insert = function(index) {
 		{height: "0px"}
 	]);
 	$tw.utils.forceLayout(targetElement);
+	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		$tw.utils.setStyle(targetElement,[
+			{transition: ""},
+			{height: "auto"}
+		]);
+	},false);
 	$tw.utils.setStyle(targetElement,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
@@ -55,7 +61,6 @@ ClassicListView.prototype.insert = function(index) {
 		{opacity: "1.0"},
 		{height: currHeight + "px"}
 	]);
-
 };
 
 ClassicListView.prototype.remove = function(index) {
