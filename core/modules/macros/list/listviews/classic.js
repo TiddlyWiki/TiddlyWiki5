@@ -16,6 +16,23 @@ function ClassicListView(listMacro) {
 	this.listMacro = listMacro;
 }
 
+ClassicListView.prototype.navigateTo = function(title) {
+	var listElementIndex = this.listMacro.findListElementByTitle(0,title),
+		listElementNode = this.listMacro.listFrame.children[listElementIndex],
+		targetElement = listElementNode.domNode;
+	// Replace any previous transition on the target element
+	$tw.utils.setStyle(targetElement,[
+		{transition: ""}
+	]);
+	$tw.utils.forceLayout(targetElement);
+	$tw.utils.setStyle(targetElement,[
+		{transform: ""},
+	]);
+	$tw.utils.forceLayout(targetElement);
+	// Scroll the target element into view
+	$tw.scroller.scrollIntoView(targetElement);
+};
+
 ClassicListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode;

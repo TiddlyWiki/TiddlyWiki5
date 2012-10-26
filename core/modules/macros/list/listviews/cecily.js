@@ -74,12 +74,15 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 CecilyListView.prototype.positionTiddler = function(title,domNode) {
 	var pos = this.lookupTiddlerInMap(title,domNode),
 		scale = pos.w/domNode.offsetWidth;
-console.log("positioning",title,"domNode.offsetWidth",domNode.offsetWidth);
 	domNode.style.position = "absolute";
 	$tw.utils.setStyle(domNode,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: ""},
 		{transformOrigin: "0% 0%"},
 		{transform: "translateX(" + pos.x + "px) translateY(" + pos.y + "px) scale(" + scale + ")"}
+	]);
+	$tw.utils.forceLayout(domNode);
+	$tw.utils.setStyle(domNode,[
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, opacity " + $tw.config.preferences.animationDurationMs + " ease-out"}
 	]);
 };
 
@@ -88,13 +91,10 @@ CecilyListView.prototype.insert = function(index) {
 		targetElement = listElementNode.domNode;
 	// Animate the insertion
 	$tw.utils.setStyle(targetElement,[
-		{transition: ""},
-		{transformOrigin: "0% 0%"},
 		{opacity: "0.0"}
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
 		{opacity: "1.0"}
 	]);
 	// Position the dom node

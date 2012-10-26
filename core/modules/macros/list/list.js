@@ -18,6 +18,7 @@ exports.info = {
 	params: {
 		type: {byPos: 0, type: "text"},
 		filter: {byName: true, type: "filter"},
+		history: {byName: true, type: "tiddler"},
 		template: {byName: true, type: "tiddler"},
 		templateText: {byName: true, type: "text"},
 		editTemplate: {byName: true, type: "tiddler"},
@@ -64,6 +65,7 @@ exports.executeMacro = function() {
 
 exports.postRenderInDom = function() {
 	this.listview = this.chooseListView();
+	this.history = [];
 };
 
 /*
@@ -209,8 +211,21 @@ exports.refreshInDom = function(changes) {
 			return;
 		}
 	}
+	// Reflect any changes in the list
+	this.handleListChanges(changes);
+	// Process any history list changes
+	if(this.hasParameter("history") && $tw.utils.hop(changes,this.params.history)) {
+		this.handleHistoryChanges();
+	}
+};
+
+/*
+Handle changes to the content of the list
+*/
+exports.handleListChanges = function(changes) {
 	// Get the list of tiddlers, saving the previous length
-	var prevListLength = this.list.length;
+	var t,
+		prevListLength = this.list.length;
 	this.getTiddlerList();
 	// Check if the list is empty
 	if(this.list.length === 0) {
@@ -263,6 +278,28 @@ exports.refreshInDom = function(changes) {
 			this.removeListElement(t);
 		}
 	}
+};
+
+/*
+Handle any changes to the history list
+*/
+exports.handleHistoryChanges = function() {
+	// Get the history data
+	var newHistory = this.wiki.getTiddlerData(this.params.history,[]);
+	// Ignore any entries of the history that match the previous history
+	var entry = 0;
+	while(entry < newHistory.length && entry < this.history.length && newHistory[entry].title === this.history[entry].title) {
+		entry++;
+	}
+	// Navigate forwards to each of the new tiddlers
+	while(entry < newHistory.length) {
+		if(this.listview && this.listview.navigateTo) {
+			this.listview.navigateTo(newHistory[entry].title);
+		}
+		entry++;
+	}
+	// Update the history
+	this.history = newHistory;
 };
 
 })();

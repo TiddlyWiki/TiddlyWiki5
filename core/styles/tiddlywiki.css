@@ -5931,8 +5931,9 @@ Cecily views
           box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
 }
 
-.mediumCecily * {
+.mediumCecily .tw-list-element {
   overflow-x: auto;
+  white-space: normal;
 }
 
 .mediumCecily .tw-cecily-tiddler-frame {

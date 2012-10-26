@@ -69,9 +69,9 @@ exports.eventMap["tw-navigate"] = function(event) {
 		this.wiki.setTextReference(this.params.set,event.navigateTo);
 	}
 	// Add a new record to the top of the history stack
-	this.history = this.getList(this.historyTitle);
-	this.history.push(event.navigateTo);
-	this.saveList(this.historyTitle,this.history);
+	this.history = this.wiki.getTiddlerData(this.historyTitle,[]);
+	this.history.push({title: event.navigateTo});
+	this.wiki.setTiddlerData(this.historyTitle,this.history);
 	event.stopPropagation();
 	return false;
 };
@@ -181,9 +181,9 @@ exports.eventMap["tw-NewTiddler"] = function(event) {
 	// Save the updated story
 	this.saveList(this.storyTitle,this.story);
 	// Add a new record to the top of the history stack
-	this.history = this.getList(this.historyTitle);
-	this.history.push(draftTitle);
-	this.saveList(this.historyTitle,this.history);
+	this.history = this.wiki.getTiddlerData(this.historyTitle,[]);
+	this.history.push({title: draftTitle});
+	this.wiki.setTiddlerData(this.historyTitle,this.history);
 	event.stopPropagation();
 	return false;
 };
