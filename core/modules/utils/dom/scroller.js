@@ -39,8 +39,8 @@ Scroller.prototype.scrollIntoView = function(element) {
 	this.startTime = new Date();
 	this.startX = scrollPosition.x;
 	this.startY = scrollPosition.y;
-	this.endX = elementBounds.left;
-	this.endY = elementBounds.top;
+	this.endX = elementBounds.left + scrollPosition.x;
+	this.endY = elementBounds.top + scrollPosition.y;
 	if((this.endX < this.startX) || (this.endX > (this.startX + window.innerWidth)) || (this.endY < this.startY) || (this.endY > (this.startY + window.innerHeight))) {
 		var self = this;
 		this.timerId = window.setInterval(function() {
