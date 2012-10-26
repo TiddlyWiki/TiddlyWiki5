@@ -97,7 +97,6 @@ Modal.prototype.display = function(title) {
 			{transform: "translateY(" + window.innerHeight + "px)"}
 		]);
 		// Set up an event for the transition end
-console.log("Listening for ",$tw.utils.convertEventName("transitionEnd"))
 		modalWrapper.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
