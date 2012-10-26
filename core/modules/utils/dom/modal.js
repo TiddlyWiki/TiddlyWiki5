@@ -90,10 +90,15 @@ Modal.prototype.display = function(title) {
 		// Force layout and animate the modal message away
 		$tw.utils.forceLayout(modalBackdrop);
 		$tw.utils.forceLayout(modalWrapper);
-		modalBackdrop.style.opacity = 0;
-		modalWrapper.style[$tw.browser.transform] = "translateY(" + window.innerHeight + "px)";
+		$tw.utils.setStyle(modalBackdrop,[
+			{opacity: "0"}
+		]);
+		$tw.utils.setStyle(modalWrapper,[
+			{transform: "translateY(" + window.innerHeight + "px)"}
+		]);
 		// Set up an event for the transition end
-		modalWrapper.addEventListener($tw.browser.transitionEnd,function(event) {
+console.log("Listening for ",$tw.utils.convertEventName("transitionEnd"))
+		modalWrapper.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
 				document.body.removeChild(wrapper);
@@ -104,20 +109,32 @@ Modal.prototype.display = function(title) {
 		return false;
 	},false);
 	// Set the initial styles for the message
-	modalBackdrop.style.opacity = 0;
-	modalWrapper.style[$tw.browser.transformorigin] = "0% 0%";
-	modalWrapper.style[$tw.browser.transform] = "translateY(" + (-window.innerHeight) + "px)";
+	$tw.utils.setStyle(modalBackdrop,[
+		{opacity: "0"}
+	]);
+	$tw.utils.setStyle(modalWrapper,[
+		{transformOrigin: "0% 0%"},
+		{transform: "translateY(" + (-window.innerHeight) + "px)"}
+	]);
 	// Put the message into the document
 	document.body.appendChild(wrapper);
 	// Set up animation for the styles
-	modalBackdrop.style[$tw.browser.transition] = "opacity " + d + " ease-out";
-	modalWrapper.style[$tw.browser.transition] = "-" + $tw.browser.prefix.toLowerCase() + "-transform " + d + " ease-in-out";
+	$tw.utils.setStyle(modalBackdrop,[
+		{transition: "opacity " + d + " ease-out"}
+	]);
+	$tw.utils.setStyle(modalWrapper,[
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+	]);
 	// Force layout
 	$tw.utils.forceLayout(modalBackdrop);
 	$tw.utils.forceLayout(modalWrapper);
 	// Set final animated styles
-	modalBackdrop.style.opacity = 1;
-	modalWrapper.style[$tw.browser.transform] = "translateY(0px)";
+	$tw.utils.setStyle(modalBackdrop,[
+		{opacity: "1"}
+	]);
+	$tw.utils.setStyle(modalWrapper,[
+		{transform: "translateY(0px)"}
+	]);
 };
 
 exports.Modal = Modal;

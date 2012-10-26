@@ -24,8 +24,6 @@ function CecilyListView(listMacro) {
 	this.newTiddlerPosition = {x: 0, y: 0};
 	// Position the initial list entries on the map
 	this.loadMap();
-	this.map.positions["HelloThere"] = {x: 250, y: 50, w: 300, h: 300};
-	this.saveMap();
 	for(var t=0; t<listFrameDomNode.children.length; t++) {
 		var title = this.listMacro.listFrame.children[t].listElementInfo.title,
 			domNode = listFrameDomNode.children[t];
@@ -61,7 +59,7 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 				w: 300,
 				h: 300
 			};
-			this.newTiddlerPosition.x += domNode.offsetWidth;
+			this.newTiddlerPosition.x += 320;
 			break;
 	}
 	// Return the position
@@ -74,9 +72,14 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 };
 
 CecilyListView.prototype.positionTiddler = function(title,domNode) {
-	var pos = this.lookupTiddlerInMap(title,domNode);
+	var pos = this.lookupTiddlerInMap(title,domNode),
+		scale = pos.w/domNode.offsetWidth;
 	domNode.style.position = "absolute";
-	domNode.style[$tw.browser.transform] = "translateX(" + pos.x + "px) translateY(" + pos.y + "px)";
+	$tw.utils.setStyle(domNode,[
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transformOrigin: "0% 0%"},
+		{transform: "scale(" + scale + ") translateX(" + pos.x + "px) translateY(" + pos.y + "px)"}
+	]);
 };
 
 CecilyListView.prototype.insert = function(index) {

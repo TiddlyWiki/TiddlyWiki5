@@ -1,3 +1,5 @@
 title: CecilyView
 
-<<list filter:"[tag[docs]]" template:"$:/templates/ViewTemplate" listview:cecily>>
+"Cecily" provides a customisable ZoomableUserInterface to your tiddlers.
+
+<<list filter:"[tag[introduction]]" template:"$:/templates/ViewTemplate" listview:cecily>>

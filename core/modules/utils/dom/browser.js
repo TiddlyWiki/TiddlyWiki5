@@ -118,7 +118,7 @@ exports.convertEventName = function(eventName) {
 	var newEventName = eventName,
 		mappings = eventNameMappings[eventName];
 	if(mappings) {
-		var convertedProperty = $tw.utils.convertStyleName(mappings.correspondingCssProperty);
+		var convertedProperty = $tw.utils.convertStyleNameToPropertyName(mappings.correspondingCssProperty);
 		if(mappings.mappings[convertedProperty]) {
 			newEventName = mappings.mappings[convertedProperty];
 		}
@@ -130,27 +130,6 @@ exports.convertEventName = function(eventName) {
 
 // Setup constants for the current browser
 exports.getBrowserInfo = function(info) {
-	info.prefix = document.body.style.webkitTransform !== undefined ? "webkit" : 
-						document.body.style.MozTransform !== undefined ? "Moz" :
-						document.body.style.MSTransform !== undefined ? "MS" :
-						document.body.style.OTransform !== undefined ? "O" : "";
-	info.transition = info.prefix + "Transition";
-	info.transform = info.prefix + "Transform";
-	info.transformorigin = info.prefix + "TransformOrigin";
-	info.transitionEnd = {		
-				"": "transitionEnd",
-				"O": "oTransitionEnd",
-				"MS": "msTransitionEnd",
-				"Moz": "transitionend",
-				"webkit": "webkitTransitionEnd"
-			}[info.prefix];
-	info.animationEnd = {		
-				"": "animationEnd",
-				"O": "oAnimationEnd",
-				"MS": "msAnimationEnd",
-				"Moz": "animationend",
-				"webkit": "webkitAnimationEnd"
-			}[info.prefix];
 	info.requestFullScreen = document.body.webkitRequestFullScreen !== undefined ? "webkitRequestFullScreen" :
 							document.body.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
 							document.body.requestFullScreen !== undefined ? "requestFullScreen" : "";
