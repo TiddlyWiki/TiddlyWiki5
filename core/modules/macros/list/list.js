@@ -26,7 +26,8 @@ exports.info = {
 		emptyMessage: {byName: true, type: "text"},
 		listviewTiddler: {byName: true, type: "tiddler"},
 		listview: {byName: true, type: "text"},
-		itemClass: {byName: true, type: "text"}
+		itemClass: {byName: true, type: "text"},
+		map: {byName: true, type: "tiddler"}
 	}
 };
 
