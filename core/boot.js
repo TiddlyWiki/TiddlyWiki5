@@ -580,6 +580,12 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/html","tiddlerdes
 		return [fields];
 	}
 });
+$tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
+	"application/json": function(text,fields) {
+		var tiddlers = JSON.parse(text);
+		return tiddlers;
+	}
+});
 
 // Install the tiddler deserializer modules so they are immediately available
 $tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
