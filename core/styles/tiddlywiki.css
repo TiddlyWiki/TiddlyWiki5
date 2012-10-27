@@ -5923,6 +5923,7 @@ Cecily views
 */
 
 .mediumCecily {
+  padding: 10px 10px 10px 10px;
   overflow-x: scroll;
   white-space: nowrap;
   background: #ccc;
@@ -5939,7 +5940,6 @@ Cecily views
 .mediumCecily .tw-cecily-tiddler-frame {
   width: 300px;
   padding: 30px 30px 30px 30px;
-  margin: 30px 5px 30px 5px;
   background-color: #fff;
   -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
      -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
