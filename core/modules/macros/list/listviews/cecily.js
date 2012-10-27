@@ -27,6 +27,7 @@ function CecilyListView(listMacro) {
 	for(var t=0; t<listFrameDomNode.children.length; t++) {
 		var title = this.listMacro.listFrame.children[t].listElementInfo.title,
 			domNode = listFrameDomNode.children[t];
+		domNode.style.position = "absolute";
 		this.positionTiddler(title,domNode);
 	}
 };
@@ -63,12 +64,7 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 			break;
 	}
 	// A default position
-	newPosition = newPosition || {
-		x: 0,
-		y: 0,
-		w: 100,
-		h: 100
-	};
+	newPosition = newPosition || {x: 0,y: 0,w: 100,h: 100};
 	// Save the position back to the map
 	this.map.positions[title] = newPosition;
 	this.saveMap();
@@ -78,31 +74,48 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 CecilyListView.prototype.positionTiddler = function(title,domNode) {
 	var pos = this.lookupTiddlerInMap(title,domNode),
 		scale = pos.w/domNode.offsetWidth;
-	domNode.style.position = "absolute";
 	$tw.utils.setStyle(domNode,[
-		{transition: ""},
 		{transformOrigin: "0% 0%"},
 		{transform: "translateX(" + pos.x + "px) translateY(" + pos.y + "px) scale(" + scale + ")"}
-	]);
-	$tw.utils.forceLayout(domNode);
-	$tw.utils.setStyle(domNode,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, opacity " + $tw.config.preferences.animationDurationMs + " ease-out"}
 	]);
 };
 
 CecilyListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode;
-	// Animate the insertion
+	targetElement.style.position = "absolute";
 	$tw.utils.setStyle(targetElement,[
+		{transition: ""},
 		{opacity: "0.0"}
+	]);
+	this.positionTiddler(listElementNode.listElementInfo.title,targetElement);
+	$tw.utils.forceLayout(targetElement);
+	$tw.utils.setStyle(targetElement,[
+		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
+		{opacity: "1.0"}
+	]);
+};
+
+CecilyListView.prototype.remove = function(index) {
+	var listElementNode = this.listMacro.listFrame.children[index],
+		targetElement = listElementNode.domNode;
+	// Attach an event handler for the end of the transition
+	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		if(targetElement.parentNode) {
+			targetElement.parentNode.removeChild(targetElement);
+		}
+	},false);
+	// Animate the closure
+	$tw.utils.setStyle(targetElement,[
+		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
+		{opacity: "1.0"}
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{opacity: "1.0"}
+		{opacity: "0.0"}
 	]);
-	// Position the dom node
-	this.positionTiddler(listElementNode.listElementInfo.title,targetElement);
+	// Returning true causes the DOM node not to be deleted
+	return true;
 };
 
 exports["cecily"] = CecilyListView;
