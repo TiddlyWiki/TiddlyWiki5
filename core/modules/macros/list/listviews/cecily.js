@@ -18,8 +18,6 @@ function CecilyListView(listMacro) {
 	// Prepare the list frame
 	var listFrameDomNode = this.listMacro.listFrame.domNode;
 	listFrameDomNode.style.position = "relative";
-	// Prepare the nozzle for dispensing new tiddlers onto the map
-	this.newTiddlerPosition = {x: 0, y: 0};
 	// Position the initial list entries on the map
 	this.loadMap();
 	for(var t=0; t<listFrameDomNode.children.length; t++) {
@@ -35,7 +33,10 @@ CecilyListView.prototype.getMapTiddlerTitle = function() {
 };
 
 CecilyListView.prototype.loadMap = function() {
-	this.map = this.listMacro.wiki.getTiddlerData(this.getMapTiddlerTitle(),{positions: {}});
+	this.map = this.listMacro.wiki.getTiddlerData(this.getMapTiddlerTitle(),{
+		positions: {},
+		newTiddlerPosition: {x: 0, y: 0}
+	});
 };
 
 CecilyListView.prototype.saveMap = function() {
@@ -53,12 +54,12 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 	switch(this.map.positionNew) {
 		default: // "right"
 			newPosition = {
-				x: this.newTiddlerPosition.x,
-				y: this.newTiddlerPosition.y,
+				x: this.map.newTiddlerPosition.x,
+				y: this.map.newTiddlerPosition.y,
 				w: 100,
 				h: 100
 			};
-			this.newTiddlerPosition.x += newPosition.w * 1.2;
+			this.map.newTiddlerPosition.x += newPosition.w * 1.2;
 			break;
 	}
 	// A default position

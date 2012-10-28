@@ -117,7 +117,9 @@ exports.createListElement = function(title) {
 		attributes = {"class": ["tw-list-element"]},
 		eventHandler = {handleEvent: function(event) {
 			// Add context information to the event
-			event.navigateFromTitle = title;
+			if(!event.navigateFromTitle) {
+				event.navigateFromTitle = title;
+			}
 			return true;
 		}};
 	node.execute(this.parents,this.tiddlerTitle);
