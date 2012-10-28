@@ -5932,7 +5932,7 @@ Cecily views
   -webkit-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
      -moz-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
           box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
-  -webkit-overflow-scroll: touch;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mediumCecilyView .tw-list-element {
@@ -5963,7 +5963,7 @@ Sideways views
   -webkit-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
      -moz-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
           box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
-  -webkit-overflow-scroll: touch;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mediumSidewaysView .tw-list-element {
