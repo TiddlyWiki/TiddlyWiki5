@@ -16,10 +16,8 @@ function CecilyListView(listMacro) {
 	// The list macro we're attached to
 	this.listMacro = listMacro;
 	// Prepare the list frame
-	var listFrameDomNode = this.listMacro.listFrame.domNode
+	var listFrameDomNode = this.listMacro.listFrame.domNode;
 	listFrameDomNode.style.position = "relative";
-	listFrameDomNode.style.width = "100%"; // TODO: This isn't the best way to set the width and height
-	listFrameDomNode.style.height = "400px";
 	// Prepare the nozzle for dispensing new tiddlers onto the map
 	this.newTiddlerPosition = {x: 0, y: 0};
 	// Position the initial list entries on the map
