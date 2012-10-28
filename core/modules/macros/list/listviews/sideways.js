@@ -25,13 +25,13 @@ SidewaysListView.prototype.navigateTo = function(historyInfo) {
 	var srcRect = historyInfo.fromPageRect;
 	if(!srcRect) {
 		var scrollPos = $tw.utils.getScrollPosition();
-		srcRect.width = window.innerWidth;
-		srcRect.height = window.innerHeight;
 		srcRect = {
 			left: scrollPos.x,
 			top: scrollPos.y,
-			right: scrollPos.x + srcRect.width,
-			bottom: scrollPos.y + srcRect.height
+			right: scrollPos.x + window.innerWidth,
+			bottom: scrollPos.y + window.innerHeight,
+			width: window.innerWidth,
+			height: window.innerHeight
 		};
 	};
 	var dstRect = $tw.utils.getBoundingPageRect(targetElement);
