@@ -16,13 +16,14 @@ function CecilyListView(listMacro) {
 	// The list macro we're attached to
 	this.listMacro = listMacro;
 	// Prepare the list frame
-	var listFrameDomNode = this.listMacro.listFrame.domNode;
+	var listFrame = this.listMacro.listFrame,
+		listFrameDomNode = listFrame.domNode;
 	listFrameDomNode.style.position = "relative";
 	// Position the initial list entries on the map
 	this.loadMap();
-	for(var t=0; t<listFrameDomNode.children.length; t++) {
-		var title = this.listMacro.listFrame.children[t].listElementInfo.title,
-			domNode = listFrameDomNode.children[t];
+	for(var t=0; t<listFrame.children.length; t++) {
+		var title = listFrame.children[t].listElementInfo.title,
+			domNode = listFrame.children[t].domNode;
 		domNode.style.position = "absolute";
 		this.positionTiddler(title,domNode);
 	}
