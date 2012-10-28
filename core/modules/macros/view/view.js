@@ -49,7 +49,7 @@ exports.executeMacro = function() {
 	// Figure out which viewer to use
 	// TODO: Tiddler field modules should be able to specify a field type from which the viewer is derived
 	var Viewer;
-	if(tiddler && this.params.format) {
+	if(this.params.format) {
 		Viewer = this.wiki.macros.view.fieldviewers[this.params.format];
 	}
 	if(!Viewer) {
