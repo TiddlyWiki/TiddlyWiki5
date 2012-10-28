@@ -26,7 +26,7 @@ ClassicListView.prototype.navigateTo = function(historyInfo) {
 		{transformOrigin: "0% 0%"},
 		{height: "auto"}
 	]);
-	// Get the current height of the elmeent
+	// Get the current height of the element
 	var currHeight = targetElement.offsetHeight;
 	// Compute the start and end positions of the target element
 	var srcRect = historyInfo.fromPageRect;
@@ -41,7 +41,6 @@ ClassicListView.prototype.navigateTo = function(historyInfo) {
 			bottom: scrollPos.y + srcRect.height
 		};
 	};
-$tw.utils.forceLayout(targetElement);
 	var dstRect = $tw.utils.getBoundingPageRect(targetElement);
 	// Compute the transformations
 	var scale = srcRect.width / dstRect.width;
@@ -67,7 +66,7 @@ $tw.utils.forceLayout(targetElement);
 		{height: currHeight + "px"}
 	]);
 	// Scroll the target element into view
-	$tw.scroller.scrollIntoView(dstRect);
+	//$tw.scroller.scrollIntoView(dstRect);
 };
 
 ClassicListView.prototype.insert = function(index) {
