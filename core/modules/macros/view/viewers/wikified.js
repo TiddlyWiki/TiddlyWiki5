@@ -32,7 +32,7 @@ WikifiedViewer.prototype.render = function() {
 		parents = parents.slice(0);
 		parents.push(this.tiddler.fields.title);
 	} else {
-		children = this.viewMacro.wiki.parseText("text/x-tiddlywiki",value).tree;
+		children = this.viewMacro.wiki.parseText("text/x-tiddlywiki",this.value).tree;
 	}
 	// Clone and execute the parsed wikitext
 	for(t=0; t<children.length; t++) {
