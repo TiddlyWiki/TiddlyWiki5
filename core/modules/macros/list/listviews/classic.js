@@ -24,9 +24,10 @@ ClassicListView.prototype.navigateTo = function(historyInfo) {
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
 		{transformOrigin: "0% 0%"},
-		{transform: "none"},
 		{height: "auto"}
 	]);
+	// Get the current height of the elmeent
+	var currHeight = targetElement.offsetHeight;
 	// Compute the start and end positions of the target element
 	var srcRect = historyInfo.fromPageRect;
 	if(!srcRect) {
@@ -44,17 +45,26 @@ $tw.utils.forceLayout(targetElement);
 	var dstRect = $tw.utils.getBoundingPageRect(targetElement);
 	// Compute the transformations
 	var scale = srcRect.width / dstRect.width;
+	// Reset the height once the transition is over
+	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		$tw.utils.setStyle(targetElement,[
+			{transition: "none"},
+			{height: "auto"}
+		]);
+	},false);
 	// Position the target element over the source rectangle
 	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
-		{transform: "translateX(" + (srcRect.left-dstRect.left) + "px) translateY(" + (srcRect.top-dstRect.top) + "px) scale(" + scale + ")"}
+		{transform: "translateX(" + (srcRect.left-dstRect.left) + "px) translateY(" + (srcRect.top-dstRect.top) + "px) scale(" + scale + ")"},
+		{height: "0px"}
 	]);
 	$tw.utils.forceLayout(targetElement);
 	// Transition the target element to its final resting place
 	$tw.utils.setStyle(targetElement,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
-		{transform: "none"}
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
+					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transform: "none"},
+		{height: currHeight + "px"}
 	]);
 	// Scroll the target element into view
 	$tw.scroller.scrollIntoView(dstRect);
