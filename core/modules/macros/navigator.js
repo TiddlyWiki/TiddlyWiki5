@@ -22,7 +22,12 @@ exports.info = {
 };
 
 exports.getList = function(title) {
-	return this.wiki.getTextReference(title,"").split("\n");
+	var text = this.wiki.getTextReference(title,"");
+	if(text && text.length > 0) {
+		return text.split("\n");
+	} else {
+		return [];
+	}
 };
 
 exports.saveList = function(title,list) {
