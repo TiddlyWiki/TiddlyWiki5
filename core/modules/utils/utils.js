@@ -171,12 +171,14 @@ exports.getRelativeDate = function(delta) {
 		var result = Math.floor(delta / units[t].duration);
 		if(result >= 2) {
 			return {
+				delta: delta,
 				description: result + " " + units[t].name + " ago",
 				updatePeriod: units[t].duration
 			};
 		}
 	}
 	return {
+		delta: delta,
 		description: "1 second ago",
 		updatePeriod: 1000
 	};

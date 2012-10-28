@@ -37,7 +37,7 @@ Trigger the timer when the relative date is put into the DOM
 */
 RelativeDateViewer.prototype.postRenderInDom = function() {
 	if(this.relativeDate) {
-		this.setTimer();
+		this.update();
 	}
 };
 
@@ -60,12 +60,15 @@ RelativeDateViewer.prototype.setTimer = function() {
 Update the relative date display, and trigger the timer for the next update
 */
 RelativeDateViewer.prototype.update = function() {
-	while(this.viewMacro.child.domNode.hasChildNodes()) {
-		this.viewMacro.child.domNode.removeChild(this.viewMacro.child.domNode.firstChild);
-	}
 	this.relativeDate = $tw.utils.getRelativeDate((new Date()) - this.value);
-	this.viewMacro.child.domNode.appendChild(document.createTextNode(this.relativeDate.description));
-	this.setTimer();
+	if(this.relativeDate.delta > 0) {
+console.log("updating",this.relativeDate.description);
+		while(this.viewMacro.child.domNode.hasChildNodes()) {
+			this.viewMacro.child.domNode.removeChild(this.viewMacro.child.domNode.firstChild);
+		}
+		this.viewMacro.child.domNode.appendChild(document.createTextNode(this.relativeDate.description));
+		this.setTimer();
+	}
 };
 
 exports["relativedate"] = RelativeDateViewer;
