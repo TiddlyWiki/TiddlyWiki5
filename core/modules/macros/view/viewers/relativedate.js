@@ -62,7 +62,6 @@ Update the relative date display, and trigger the timer for the next update
 RelativeDateViewer.prototype.update = function() {
 	this.relativeDate = $tw.utils.getRelativeDate((new Date()) - this.value);
 	if(this.relativeDate.delta > 0) {
-console.log("updating",this.relativeDate.description);
 		while(this.viewMacro.child.domNode.hasChildNodes()) {
 			this.viewMacro.child.domNode.removeChild(this.viewMacro.child.domNode.firstChild);
 		}
