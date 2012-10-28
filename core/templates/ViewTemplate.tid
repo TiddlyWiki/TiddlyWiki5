@@ -7,7 +7,7 @@ modifier: JeremyRuston
 	<<button close class:"btn-invisible pull-right"><[img[$:/core/images/close-button.svg]]>>
 </div>
 <div class="small">
-	<<view modifier link>> <<view modified date>>
+	<<view modifier link>> <<view modified relativedate>>
 </div>
 {{tw-tags-wrapper{
 ((([is[current]tags[]]))($:/templates/TagTemplate))

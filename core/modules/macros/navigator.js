@@ -127,7 +127,12 @@ exports.eventMap["tw-SaveTiddler"] = function(event) {
 			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
 			if(tiddler && $tw.utils.hop(tiddler.fields,"draft.title")) {
 				// Save the draft tiddler as the real tiddler
-				this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: tiddler.fields["draft.title"],"draft.title": undefined, "draft.of": undefined}));
+				this.wiki.addTiddler(new $tw.Tiddler(tiddler,{
+					title: tiddler.fields["draft.title"],
+					modified: new Date(),
+					"draft.title": undefined, 
+					"draft.of": undefined
+				}));
 				// Remove the draft tiddler
 				this.wiki.deleteTiddler(event.tiddlerTitle);
 				// Remove the original tiddler if we're renaming it
