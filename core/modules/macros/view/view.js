@@ -48,14 +48,22 @@ exports.executeMacro = function() {
 	}
 	// Figure out which viewer to use
 	// TODO: Tiddler field modules should be able to specify a field type from which the viewer is derived
+	var Viewer;
 	if(tiddler && this.params.format) {
-		var viewer = this.wiki.macros.view.fieldviewers[this.params.format];
+		Viewer = this.wiki.macros.view.fieldviewers[this.params.format];
 	}
-	if(!viewer) {
-		viewer = this.wiki.macros.view.fieldviewers["text"];
+	if(!Viewer) {
+		Viewer = this.wiki.macros.view.fieldviewers["text"];
 	}
+	this.viewer = new Viewer(this,tiddler,field,value);
 	// Call the viewer to generate the content
-	return viewer(tiddler,field,value,this);
+	return this.viewer.render();
+};
+
+exports.postRenderInDom = function() {
+	if(this.viewer.postRenderInDom) {
+		this.viewer.postRenderInDom();
+	}
 };
 
 })();

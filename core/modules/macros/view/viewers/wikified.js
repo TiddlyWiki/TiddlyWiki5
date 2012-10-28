@@ -12,31 +12,38 @@ A viewer for viewing tiddler fields as wikified text
 /*global $tw: false */
 "use strict";
 
-function renderValue(tiddler,field,value,viewMacro) {
+var WikifiedViewer = function(viewMacro,tiddler,field,value) {
+	this.viewMacro = viewMacro;
+	this.tiddler = tiddler;
+	this.field = field;
+	this.value = value;
+};
+
+WikifiedViewer.prototype.render = function() {
 	// Check for recursion
-	var parents = viewMacro.parents,
+	var parents = this.viewMacro.parents,
 		children,t,childrenClone = [];
-	if(tiddler && viewMacro.params.field === "text") {
-		if(parents.indexOf(tiddler.fields.title) !== -1) {
+	if(this.tiddler && this.viewMacro.params.field === "text") {
+		if(parents.indexOf(this.tiddler.fields.title) !== -1) {
 			children = [$tw.Tree.errorNode("Tiddler recursion error in <<view>> macro")];
 		} else {
-			children = viewMacro.wiki.parseTiddler(tiddler.fields.title).tree;
+			children = this.viewMacro.wiki.parseTiddler(this.tiddler.fields.title).tree;
 		}
 		parents = parents.slice(0);
-		parents.push(tiddler.fields.title);
+		parents.push(this.tiddler.fields.title);
 	} else {
-		children = viewMacro.wiki.parseText("text/x-tiddlywiki",value).tree;
+		children = this.viewMacro.wiki.parseText("text/x-tiddlywiki",value).tree;
 	}
 	// Clone and execute the parsed wikitext
 	for(t=0; t<children.length; t++) {
 		childrenClone.push(children[t].clone());
 	}
 	for(t=0; t<childrenClone.length; t++) {
-		childrenClone[t].execute(parents,viewMacro.tiddlerTitle);
+		childrenClone[t].execute(parents,this.viewMacro.tiddlerTitle);
 	}
-	return $tw.Tree.Element(viewMacro.isBlock ? "div" : "span",{},childrenClone);
+	return $tw.Tree.Element(this.viewMacro.isBlock ? "div" : "span",{},childrenClone);
 }
 
-exports["wikified"] = renderValue;
+exports["wikified"] = WikifiedViewer;
 
 })();

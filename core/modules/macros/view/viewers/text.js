@@ -12,19 +12,26 @@ A viewer for viewing tiddler fields as plain text
 /*global $tw: false */
 "use strict";
 
-function renderValue(tiddler,field,value,viewMacro) {
+var TextViewer = function(viewMacro,tiddler,field,value) {
+	this.viewMacro = viewMacro;
+	this.tiddler = tiddler;
+	this.field = field;
+	this.value = value;
+};
+
+TextViewer.prototype.render = function() {
 	// Get the value as a string
-	if(field !== "text" && tiddler) {
-		value = tiddler.getFieldString(field);
+	if(this.field !== "text" && this.tiddler) {
+		this.value = this.tiddler.getFieldString(this.field);
 	}
 	// Return the text
-	if(value === undefined || value === null) {
+	if(this.value === undefined || this.value === null) {
 		return $tw.Tree.Text("");
 	} else {
-		return $tw.Tree.Text(value);
+		return $tw.Tree.Text(this.value);
 	}
 }
 
-exports["text"] = renderValue;
+exports["text"] = TextViewer;
 
 })();

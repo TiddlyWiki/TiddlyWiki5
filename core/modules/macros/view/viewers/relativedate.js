@@ -12,16 +12,62 @@ A viewer for viewing tiddler fields as a relative date
 /*global $tw: false */
 "use strict";
 
-function renderValue(tiddler,field,value,viewMacro) {
-	if(value === undefined) {
+var RelativeDateViewer = function(viewMacro,tiddler,field,value) {
+	this.viewMacro = viewMacro;
+	this.tiddler = tiddler;
+	this.field = field;
+	this.value = value;
+};
+
+RelativeDateViewer.prototype.render = function() {
+	if(this.value === undefined) {
 		return $tw.Tree.Text("");
 	} else {
-		return $tw.Tree.Text(
-			$tw.utils.getRelativeDate((new Date()) - value).description
-		);
+		this.relativeDate = $tw.utils.getRelativeDate((new Date()) - this.value);
+		return $tw.Tree.Element(this.viewMacro.isBlock ? "div" : "span",{},[
+			$tw.Tree.Text(
+				this.relativeDate.description
+			)
+		]);
 	}
-}
+};
 
-exports["relativedate"] = renderValue;
+/*
+Trigger the timer when the relative date is put into the DOM
+*/
+RelativeDateViewer.prototype.postRenderInDom = function() {
+	if(this.relativeDate) {
+		this.setTimer();
+	}
+};
+
+/*
+Trigger the timer for the next update of the relative date
+*/
+RelativeDateViewer.prototype.setTimer = function() {
+	var self = this;
+	if(this.relativeDate.updatePeriod < 24 * 60 * 60 * 1000) {
+		window.setTimeout(function() {
+			// Only call the update function if the dom node is still in the document
+			if($tw.utils.domContains(document,self.viewMacro.child.domNode)) {
+				self.update.call(self);
+			}
+		},this.relativeDate.updatePeriod);
+	}
+};
+
+/*
+Update the relative date display, and trigger the timer for the next update
+*/
+RelativeDateViewer.prototype.update = function() {
+	while(this.viewMacro.child.domNode.hasChildNodes()) {
+		this.viewMacro.child.domNode.removeChild(this.viewMacro.child.domNode.firstChild);
+	}
+	this.relativeDate = $tw.utils.getRelativeDate((new Date()) - this.value);
+	this.viewMacro.child.domNode.appendChild(document.createTextNode(this.relativeDate.description));
+	this.setTimer();
+};
+
+exports["relativedate"] = RelativeDateViewer;
 
 })();
