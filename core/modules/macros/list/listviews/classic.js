@@ -66,7 +66,7 @@ ClassicListView.prototype.navigateTo = function(historyInfo) {
 		{height: currHeight + "px"}
 	]);
 	// Scroll the target element into view
-	//$tw.scroller.scrollIntoView(dstRect);
+	$tw.scroller.scrollIntoView(dstRect);
 };
 
 ClassicListView.prototype.insert = function(index) {
