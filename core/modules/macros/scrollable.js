@@ -35,7 +35,7 @@ exports.executeMacro = function() {
 			"class": outerClasses,
 			style: {
 				overflow: "auto",
-				webkitOverflowScrolling: "touch",
+				"-webkit-overflow-scrolling": "touch",
 				"white-space": "nowrap"
 			}
 		};
