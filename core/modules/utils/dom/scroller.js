@@ -30,17 +30,35 @@ Scroller.prototype.cancel = function() {
 };
 
 /*
-Smoothly scroll an element into view if needed
+Smoothly scroll an tree node into view if needed
 */
-Scroller.prototype.scrollIntoView = function(element) {
-	var elementBounds = element instanceof HTMLElement ? $tw.utils.getBoundingPageRect(element) : element,
-		scrollPosition = $tw.utils.getScrollPosition();
+Scroller.prototype.scrollIntoView = function(domNode) {
+	// Get the offset bounds of the element
+	var bounds = {
+			left: domNode.offsetLeft,
+			top: domNode.offsetTop,
+			width: domNode.offsetWidth,
+			height: domNode.offsetHeight
+		};
+	// Walk up the tree adjusting the offset bounds by each offsetParent
+	while(domNode.offsetParent) {
+		domNode = domNode.offsetParent;
+		// If the node is scrollable, tell it to scroll
+		if(domNode.scrollTo) {
+			domNode.scrollTo(bounds);
+			return;
+		}
+		bounds.left += domNode.offsetLeft;
+		bounds.top += domNode.offsetTop;
+	}
+	// If we got to the top of the tree then we need to scroll the body
+	var scrollPosition = $tw.utils.getScrollPosition();
 	this.cancel();
 	this.startTime = new Date();
 	this.startX = scrollPosition.x;
 	this.startY = scrollPosition.y;
-	this.endX = elementBounds.left;
-	this.endY = elementBounds.top;
+	this.endX = bounds.left;
+	this.endY = bounds.top;
 	if((this.endX < this.startX) || (this.endX > (this.startX + window.innerWidth)) || (this.endY < this.startY) || (this.endY > (this.startY + window.innerHeight))) {
 		var self = this;
 		this.timerId = window.setInterval(function() {

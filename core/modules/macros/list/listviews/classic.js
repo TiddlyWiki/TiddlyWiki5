@@ -25,20 +25,8 @@ ClassicListView.prototype.navigateTo = function(historyInfo) {
 	var listElementIndex = this.listMacro.findListElementByTitle(0,historyInfo.title),
 		listElementNode = this.listMacro.listFrame.children[listElementIndex],
 		targetElement = listElementNode.domNode;
-	// Get the current height of the element
-	var currHeight = targetElement.offsetHeight;
-	// Compute the start and end positions of the target element
-	var srcRect = historyInfo.fromPageRect;
-	if(!srcRect) {
-		srcRect = {left: 0, top: 0, width: window.innerWidth, height: window.innerHeight};
-	};
-	var dstRect = targetElement.getBoundingClientRect();
-	// $tw.sprite.fly(srcRect,dstRect,{
-	// 	text: "Flying along at the speed of pixels\n\n\nBoo",
-	// 	style: "background:red;"
-	// });
-	// Scroll the target element into view
-//	$tw.scroller.scrollIntoView(dstRect);
+	// Scroll the node into view
+	$tw.scroller.scrollIntoView(targetElement);
 };
 
 ClassicListView.prototype.insert = function(index) {

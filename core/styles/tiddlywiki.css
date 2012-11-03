@@ -6037,15 +6037,11 @@ a.tw-tiddlylink-missing {
   font-style: inherit;
 }
 
-.tw-sideways-item {
-  width: 300px;
-}
-
 .tw-list-element {
   white-space: normal;
 }
 
-.tw-scrollable-outer {
+.tw-well {
   background: #ccc;
   -webkit-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
      -moz-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);

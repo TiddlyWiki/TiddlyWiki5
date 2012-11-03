@@ -27,6 +27,14 @@ function SidewaysListView(listMacro) {
 	}
 }
 
+SidewaysListView.prototype.navigateTo = function(historyInfo) {
+	var listElementIndex = this.listMacro.findListElementByTitle(0,historyInfo.title),
+		listElementNode = this.listMacro.listFrame.children[listElementIndex],
+		targetElement = listElementNode.domNode;
+	// Scroll the node into view
+	$tw.scroller.scrollIntoView(targetElement);
+};
+
 SidewaysListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode,

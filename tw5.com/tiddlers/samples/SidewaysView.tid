@@ -2,6 +2,6 @@ title: SidewaysView
 
 This view shows your tiddlers stacked horizontally.
 
-<<scrollable width:"100%" height:"400px"><
+<<scrollable width:"100%" height:"400px" class:"tw-well"><
 <<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"CecilyTemplate" listview:sideways itemClass:"tw-tiddler-frame">>
 >>
