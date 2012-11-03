@@ -34,7 +34,7 @@ exports.executeMacro = function() {
 		outerAttributes = {
 			"class": outerClasses,
 			style: {
-				overflow: "scroll",
+				overflow: "auto",
 				webkitOverflowScrolling: "touch",
 				"white-space": "nowrap"
 			}
