@@ -36,7 +36,7 @@ exports.handleEvent = function (event) {
 			navEvent.initEvent("tw-navigate",true,true);
 			navEvent.navigateTo = this.linkInfo.to;
 			navEvent.navigateFromNode = this;
-			navEvent.navigateFromPageRect = $tw.utils.getBoundingPageRect(this.child.domNode);
+			navEvent.navigateFromClientRect = this.child.domNode.getBoundingClientRect();
 			event.target.dispatchEvent(navEvent); 
 			event.preventDefault();
 			return false;

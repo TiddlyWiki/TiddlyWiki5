@@ -18,7 +18,6 @@ function CecilyListView(listMacro) {
 	// Prepare the list frame
 	var listFrame = this.listMacro.listFrame,
 		listFrameDomNode = listFrame.domNode;
-	listFrameDomNode.style.position = "relative";
 	// Position the initial list entries on the map
 	this.loadMap();
 	for(var t=0; t<listFrame.children.length; t++) {

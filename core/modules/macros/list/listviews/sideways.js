@@ -14,54 +14,27 @@ Views the list as a sideways linear sequence
 
 function SidewaysListView(listMacro) {
 	this.listMacro = listMacro;
+	// Prepare the list frame
+	var listFrame = this.listMacro.listFrame,
+		listFrameDomNode = listFrame.domNode;
+	for(var t=0; t<listFrame.children.length; t++) {
+		var title = listFrame.children[t].listElementInfo.title,
+			domNode = listFrame.children[t].domNode;
+		$tw.utils.setStyle(domNode,[
+			{verticalAlign: "top"},
+			{display: "inline-block"}
+		]);
+	}
 }
-
-SidewaysListView.prototype.navigateTo = function(historyInfo) {
-	var listElementIndex = this.listMacro.findListElementByTitle(0,historyInfo.title),
-		listElementNode = this.listMacro.listFrame.children[listElementIndex],
-		targetElement = listElementNode.domNode,
-		currWidth = targetElement.offsetWidth;
-	// Compute the start and end positions of the target element
-	var srcRect = historyInfo.fromPageRect;
-	if(!srcRect) {
-		var scrollPos = $tw.utils.getScrollPosition();
-		srcRect = {
-			left: scrollPos.x,
-			top: scrollPos.y,
-			right: scrollPos.x + window.innerWidth,
-			bottom: scrollPos.y + window.innerHeight,
-			width: window.innerWidth,
-			height: window.innerHeight
-		};
-	};
-	var dstRect = $tw.utils.getBoundingPageRect(targetElement);
-	// Compute the transformations
-	var scale = srcRect.width / dstRect.width;
-	// Position the target element over the source rectangle
-	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
-		{transform: "translateX(" + (srcRect.left-dstRect.left) + "px) translateY(" + (srcRect.top-dstRect.top) + "px) scale(" + scale + ")"},
-		{marginRight: (-currWidth) + "px"}
-	]);
-	$tw.utils.forceLayout(targetElement);
-	// Transition the target element to its final resting place
-	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
-					"margin-right " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
-		{transform: "none"},
-		{marginRight: "0px"}
-	]);
-	// Scroll the target element into view
-	//$tw.scroller.scrollIntoView(dstRect);
-};
 
 SidewaysListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode,
-		currWidth = targetElement.offsetWidth;
+		currWidth = targetElement.offsetWidth + parseInt(window.getComputedStyle(targetElement).marginLeft,10);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
+		{verticalAlign: "top"},
+		{display: "inline-block"},
 		{transition: "none"},
 		{opacity: "0.0"},
 		{marginRight: (-currWidth) + "px"}
@@ -79,7 +52,7 @@ SidewaysListView.prototype.insert = function(index) {
 SidewaysListView.prototype.remove = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode,
-		currWidth = targetElement.offsetWidth;
+		currWidth = targetElement.offsetWidth + parseInt(window.getComputedStyle(targetElement).marginLeft,10);
 	// Attach an event handler for the end of the transition
 	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 		if(targetElement.parentNode) {

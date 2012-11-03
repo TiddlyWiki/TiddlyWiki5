@@ -6037,65 +6037,25 @@ a.tw-tiddlylink-missing {
   font-style: inherit;
 }
 
-/*
-Cecily views
-*/
+.tw-sideways-item {
+  width: 300px;
+}
 
-.mediumCecilyView {
-  width: 100%;
-  height: 400px;
-  padding: 10px 10px 10px 10px;
-  overflow: scroll;
-  white-space: nowrap;
+.tw-list-element {
+  white-space: normal;
+}
+
+.tw-scrollable-outer {
   background: #ccc;
   -webkit-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
      -moz-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
           box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
-  -webkit-overflow-scrolling: touch;
 }
 
-.mediumCecilyView .tw-list-element {
-  overflow: auto;
-  white-space: normal;
-}
-
-.mediumCecilyView .tw-cecily-tiddler-frame {
-  width: 400px;
-  padding: 30px 30px 30px 30px;
-  background-color: #fff;
-  -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-     -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-          box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
-}
-
-/*
-Sideways views
-*/
-
-.mediumSidewaysView {
-  width: 100%;
-  height: 400px;
-  padding: 10px 10px 10px 10px;
-  overflow: scroll;
-  white-space: nowrap;
-  background: #ccc;
-  -webkit-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
-     -moz-box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
-          box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
-  -webkit-overflow-scrolling: touch;
-}
-
-.mediumSidewaysView .tw-list-element {
-  overflow: auto;
-  white-space: normal;
-}
-
-.mediumSidewaysView .tw-sideways-tiddler-frame {
-  display: inline-block;
+.tw-scrollable .tw-tiddler-frame {
   width: 400px;
   padding: 30px 30px 30px 30px;
   margin: 10px 10px 10px 10px;
-  vertical-align: top;
   background-color: #fff;
   -webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
      -moz-box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);

@@ -30,8 +30,7 @@ Scroller.prototype.cancel = function() {
 };
 
 /*
-Smoothly scroll an element back into view if needed
-	element: element or clientrect object
+Smoothly scroll an element into view if needed
 */
 Scroller.prototype.scrollIntoView = function(element) {
 	var elementBounds = element instanceof HTMLElement ? $tw.utils.getBoundingPageRect(element) : element,

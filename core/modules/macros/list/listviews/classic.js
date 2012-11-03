@@ -14,90 +14,59 @@ Views the list as a linear sequence
 
 function ClassicListView(listMacro) {
 	this.listMacro = listMacro;
+	var listFrame = this.listMacro.listFrame,
+		listFrameDomNode = listFrame.domNode;
+	$tw.utils.setStyle(listFrameDomNode,[
+		{perspective: 50000},
+	]);
 }
 
 ClassicListView.prototype.navigateTo = function(historyInfo) {
 	var listElementIndex = this.listMacro.findListElementByTitle(0,historyInfo.title),
 		listElementNode = this.listMacro.listFrame.children[listElementIndex],
 		targetElement = listElementNode.domNode;
-	// Remove any transform on the target element
-	$tw.utils.setStyle(targetElement,[
-		{transition: "none"},
-		{transformOrigin: "0% 0%"},
-		{height: "auto"}
-	]);
 	// Get the current height of the element
 	var currHeight = targetElement.offsetHeight;
 	// Compute the start and end positions of the target element
 	var srcRect = historyInfo.fromPageRect;
 	if(!srcRect) {
-		var scrollPos = $tw.utils.getScrollPosition();
-		srcRect = {
-			left: scrollPos.x,
-			top: scrollPos.y,
-			right: scrollPos.x + window.innerWidth,
-			bottom: scrollPos.y + window.innerHeight,
-			width: window.innerWidth,
-			height: window.innerHeight
-		};
+		srcRect = {left: 0, top: 0, width: window.innerWidth, height: window.innerHeight};
 	};
-	var dstRect = $tw.utils.getBoundingPageRect(targetElement);
-	// Compute the transformations
-	var scale = srcRect.width / dstRect.width;
-	// Reset the height once the transition is over
-	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
-		$tw.utils.setStyle(targetElement,[
-			{transition: "none"},
-			{height: "auto"}
-		]);
-	},false);
-	// Position the target element over the source rectangle
-	$tw.utils.setStyle(targetElement,[
-		{transform: "translateX(" + (srcRect.left-dstRect.left) + "px) translateY(" + (srcRect.top-dstRect.top) + "px) scale(" + scale + ")"},
-		{height: "0px"}
-	]);
-	$tw.utils.forceLayout(targetElement);
-	// Transition the target element to its final resting place
-	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
-		{transform: "none"},
-		{height: currHeight + "px"}
-	]);
+	var dstRect = targetElement.getBoundingClientRect();
+	// $tw.sprite.fly(srcRect,dstRect,{
+	// 	text: "Flying along at the speed of pixels\n\n\nBoo",
+	// 	style: "background:red;"
+	// });
 	// Scroll the target element into view
-	$tw.scroller.scrollIntoView(dstRect);
+//	$tw.scroller.scrollIntoView(dstRect);
 };
 
 ClassicListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode;
 	// Get the current height of the tiddler
-	var currHeight = targetElement.offsetHeight;
-	// Reset the height once the transition is over
+	var currHeight = targetElement.offsetHeight + parseInt(window.getComputedStyle(targetElement).marginTop,10);
+	// Reset the margin once the transition is over
 	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
-			{height: "auto"}
+			{marginBottom: "auto"}
 		]);
 	},false);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
-		{transformOrigin: "0% 0%"},
-		{transform: "translateX(" + window.innerWidth + "px)"},
-		{opacity: "0.0"},
-		{height: "0px"}
+		{marginBottom: (-currHeight) + "px"},
+		{opacity: "0.0"}
 	]);
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
-		{transform: "translateX(0px)"},
-		{opacity: "1.0"},
-		{height: currHeight + "px"}
+		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transform: "rotateX(0deg)"},
+		{marginBottom: "0px"},
+		{opacity: "1.0"}
 	]);
 };
 
@@ -105,32 +74,29 @@ ClassicListView.prototype.remove = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
 		targetElement = listElementNode.domNode;
 	// Get the current height of the tiddler
-	var currHeight = targetElement.offsetHeight;
-	// Put a wrapper around the dom node we're closing
-	var wrapperElement = document.createElement("div");
-	targetElement.parentNode.insertBefore(wrapperElement,targetElement);
-	wrapperElement.appendChild(targetElement);
+	var currWidth = targetElement.offsetWidth,
+		currHeight = targetElement.offsetHeight + parseInt(window.getComputedStyle(targetElement).marginTop,10);
 	// Attach an event handler for the end of the transition
-	wrapperElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
-		if(wrapperElement.parentNode) {
-			wrapperElement.parentNode.removeChild(wrapperElement);
+	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		if(targetElement.parentNode) {
+			targetElement.parentNode.removeChild(targetElement);
 		}
 	},false);
 	// Animate the closure
-	$tw.utils.setStyle(wrapperElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
-		{transformOrigin: "0% 0%"},
+	$tw.utils.setStyle(targetElement,[
+		{transition: "none"},
 		{transform: "translateX(0px)"},
-		{opacity: "1.0"},
-		{height: currHeight + "px"}
+		{marginBottom:  "0px"},
+		{opacity: "1.0"}
 	]);
-	$tw.utils.forceLayout(wrapperElement);
-	$tw.utils.setStyle(wrapperElement,[
-		{transform: "translateX(-" + window.innerWidth + "px)"},
-		{opacity: "0.0"},
-		{height: "0px"}
+	$tw.utils.forceLayout(targetElement);
+	$tw.utils.setStyle(targetElement,[
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transform: "translateX(" + currWidth + "px)"},
+		{marginBottom: (-currHeight) + "px"},
+		{opacity: "0.0"}
 	]);
 	// Returning true causes the DOM node not to be deleted
 	return true;

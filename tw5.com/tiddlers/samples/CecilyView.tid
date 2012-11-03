@@ -2,6 +2,6 @@ title: CecilyView
 
 "Cecily" provides a customisable ZoomableUserInterface to your tiddlers.
 
-{{mediumCecilyView{
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"CecilyTemplate" listview:cecily itemClass:"tw-cecily-tiddler-frame">>
-}}}
+<<scrollable width:"100%" height:"400px"><
+<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"CecilyTemplate" listview:cecily itemClass:"tw-tiddler-frame">>
+>>

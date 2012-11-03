@@ -2,6 +2,6 @@ title: SidewaysView
 
 This view shows your tiddlers stacked horizontally.
 
-{{mediumSidewaysView{
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"CecilyTemplate" listview:sideways itemClass:"tw-sideways-tiddler-frame">>
-}}}
+<<scrollable width:"100%" height:"400px"><
+<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"CecilyTemplate" listview:sideways itemClass:"tw-tiddler-frame">>
+>>
