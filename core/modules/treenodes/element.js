@@ -158,7 +158,7 @@ Element.prototype.addClass = function(className) {
 	this.attributes["class"].push(className);
 };
 
-Node.prototype.addStyles = function(styles) {
+Element.prototype.addStyles = function(styles) {
 	this.attributes.style = this.attributes.style || {};
 	for(var t in styles) {
 		this.attributes.style[t] = styles[t];
