@@ -17,6 +17,7 @@ title: $:/templates/PageTemplate
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
+
 {{nav{
 
 <!-- Navigation menu -->
@@ -93,7 +94,16 @@ title: $:/templates/PageTemplate
 
 <!-- The main story references the same story and history tiddlers as the outer navigator -->
 <div class="container">
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"$:/templates/ViewTemplate" editTemplate:"$:/templates/EditTemplate" listview:classic >>
+<div class="row">
+<div class="span2">
+<div style="position:fixed;">
+<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" listview:classic >>
+</div>
+</div>
+<div class="span10">
+<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"$:/templates/ViewTemplate" editTemplate:"$:/templates/EditTemplate" listview:classic itemClass:"tw-tiddler-frame">>
+</div>
+</div>
 </div>
 
 >>
