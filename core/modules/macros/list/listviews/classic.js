@@ -16,9 +16,6 @@ function ClassicListView(listMacro) {
 	this.listMacro = listMacro;
 	var listFrame = this.listMacro.listFrame,
 		listFrameDomNode = listFrame.domNode;
-	$tw.utils.setStyle(listFrameDomNode,[
-		{perspective: 50000},
-	]);
 }
 
 ClassicListView.prototype.navigateTo = function(historyInfo) {
