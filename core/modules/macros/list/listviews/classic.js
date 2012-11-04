@@ -35,6 +35,7 @@ ClassicListView.prototype.insert = function(index) {
 	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
+			{transform: "none"},
 			{marginBottom: "auto"}
 		]);
 	},false);
