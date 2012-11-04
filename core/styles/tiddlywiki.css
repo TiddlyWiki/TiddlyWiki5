@@ -6058,6 +6058,11 @@ a.tw-tiddlylink-missing {
           box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
 }
 
+.tw-menu-list-item {
+  padding-bottom: 0.5em;
+  word-wrap: break-word;
+}
+
 /*
 Dropdown menus
 */

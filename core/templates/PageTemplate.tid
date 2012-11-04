@@ -98,7 +98,7 @@ title: $:/templates/PageTemplate
 <div class="span2">
 <div style="position:fixed;">
 <<scrollable width:"104px"><
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" listview:classic >>
+<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" listview:classic itemClass:"tw-menu-list-item">>
 >>
 </div>
 </div>
