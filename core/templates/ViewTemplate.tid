@@ -1,11 +1,28 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-<div class="title">
-	<span><<view title>></span> <span> <<reveal state:[[$:/EditMode]] type:match text:yes>< <<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>> >> </span>
+<<button popup:FieldsDropDownLocation qualifyTiddlerTitles:yes class:"btn-invisible"><
+<span class="title"><<view title>> </span>
+>>
+<span> <<reveal state:[[$:/EditMode]] type:match text:yes>< <<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>> >> </span>
 	<<button close class:"btn-invisible pull-right"><[img[$:/core/images/close-button.svg]]>>
+
+<div class:"small"><<view modifier link>> <<view modified relativedate>></div>
+
+<<reveal state:FieldsDropDownLocation type:popup qualifyTiddlerTitles:yes><
+
+<div class="open">
+
+{{dropdown-menu table table-condensed{
+
+<<fields>>
+
+}}}
+
 </div>
-<div class="small"><<view modifier link>> <<view modified relativedate>></div>
+
+>>
+
 {{tw-tags-wrapper{
 ((([is[current]tags[]]))($:/templates/TagTemplate))
 }}}
