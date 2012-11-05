@@ -192,7 +192,8 @@ title: tiddler title to seach for
 */
 exports.findListElementByTitle = function(startIndex,title) {
 	while(startIndex < this.listFrame.children.length) {
-		if(this.listFrame.children[startIndex].listElementInfo.title === title) {
+		var listElementInfo = this.listFrame.children[startIndex].listElementInfo;
+		if(listElementInfo && listElementInfo.title === title) {
 			return startIndex;
 		}
 		startIndex++;
