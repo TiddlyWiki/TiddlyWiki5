@@ -17,13 +17,16 @@ function SidewaysListView(listMacro) {
 	// Prepare the list frame
 	var listFrame = this.listMacro.listFrame,
 		listFrameDomNode = listFrame.domNode;
-	for(var t=0; t<listFrame.children.length; t++) {
-		var title = listFrame.children[t].listElementInfo.title,
-			domNode = listFrame.children[t].domNode;
-		$tw.utils.setStyle(domNode,[
-			{verticalAlign: "top"},
-			{display: "inline-block"}
-		]);
+	// Prepare any list elements
+	for(var t=0; t<this.listMacro.list.length; t++) {
+		var index = this.listMacro.findListElementByTitle(0,this.listMacro.list[t]);
+		if(index !== undefined) {
+			var listElement = listFrame.children[index];
+			$tw.utils.setStyle(listElement.domNode,[
+				{verticalAlign: "top"},
+				{display: "inline-block"}
+			]);
+		}
 	}
 }
 
@@ -37,14 +40,16 @@ SidewaysListView.prototype.navigateTo = function(historyInfo) {
 
 SidewaysListView.prototype.insert = function(index) {
 	var listElementNode = this.listMacro.listFrame.children[index],
-		targetElement = listElementNode.domNode,
-		currWidth = targetElement.offsetWidth + parseInt(window.getComputedStyle(targetElement).marginLeft,10);
+		targetElement = listElementNode.domNode;
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{verticalAlign: "top"},
 		{display: "inline-block"},
 		{transition: "none"},
 		{opacity: "0.0"},
+	]);
+	var	currWidth = targetElement.offsetWidth + parseInt(window.getComputedStyle(targetElement).marginLeft,10);
+	$tw.utils.setStyle(targetElement,[
 		{marginRight: (-currWidth) + "px"}
 	]);
 	$tw.utils.forceLayout(targetElement);
