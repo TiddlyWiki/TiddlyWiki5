@@ -12,7 +12,7 @@ The parameters are:
 ** //popup// - a popup - the state tiddler should contain the page coordinates of the button that triggered the popup
 ** //match// - reveals if the state tiddler matches the match text
 ** //nomatch// - reveals if the state tiddler does not match the match text
-* ''position'' - popup position: //left//, //above//, //right//, //below// or //belowleft//
+* ''position'' - popup position: //left//, //above//, //aboveright//, //right//, //below// or //belowleft//
 * ''text'' - match text
 * ''qualifyTiddlerTitles'' - if present, causes the title of the state tiddler to be qualified with the current tiddler stack
 * ''default'' - default hide/reveal state: `open` if visible, otherwise hidden
@@ -142,6 +142,10 @@ exports.postRenderInDom = function() {
 					case "above":
 						this.child.domNode.style.left = this.popup.left + "px";
 						this.child.domNode.style.top = (this.popup.top - this.child.domNode.offsetHeight) + "px";
+						break;
+					case "aboveright":
+						this.child.domNode.style.left = (this.popup.left + this.popup.width) + "px";
+						this.child.domNode.style.top = (this.popup.top + this.popup.height - this.child.domNode.offsetHeight) + "px";
 						break;
 					case "right":
 						this.child.domNode.style.left = (this.popup.left + this.popup.width) + "px";
