@@ -1,3 +1,22 @@
 title: $:/templates/SearchResultTemplate
 
-<li><<view title link>></li>
+{{tw-search-result{
+<li>
+
+<<link throughField:title hover:SearchPreviewDropDownLocation qualifyHoverTitle:yes><
+<<view title text>>
+>>
+
+</li>
+}}}
+
+<<reveal state:SearchPreviewDropDownLocation type:popup position:right qualifyTiddlerTitles:yes><
+
+<div class="tw-tiddler-frame" style="color: black; width: 400px;">
+
+<<tiddler template:SearchPreviewTemplate>>
+
+</div>
+
+>>
+

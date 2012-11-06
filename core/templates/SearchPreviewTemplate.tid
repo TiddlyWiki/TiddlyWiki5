@@ -1,0 +1,6 @@
+title: SearchPreviewTemplate
+
+<div class="title">
+<<view title text>>
+</div>
+<<view text wikified>>
