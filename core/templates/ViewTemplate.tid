@@ -13,7 +13,7 @@ modifier: JeremyRuston
 
 <div class="open">
 
-{{dropdown-menu table table-condensed{
+{{dropdown-menu table table-condensed table-bordered{
 
 <<fields>>
 
