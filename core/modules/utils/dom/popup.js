@@ -44,6 +44,37 @@ Popup.prototype.cancel = function() {
 	}
 };
 
+/*
+Trigger a popup open or closed. Parameters are in a hashmap:
+	textRef: text reference where the popup details are stored
+	domNode: dom node to which the popup will be positioned
+	qualifyTiddlerTitles: "yes" if state tiddler titles are to be qualified
+	contextTiddlerTitle: title of tiddler providing context for text references
+	contextParents: parent stack
+	wiki: wiki
+*/
+Popup.prototype.triggerPopup = function(options) {
+	// Get the textref of the popup state tiddler
+	var textRef = options.textRef;
+	if(options.qualifyTiddlerTitles === "yes") {
+		textRef = "(" + options.contextParents.join(",") + "," + options.contextTiddlerTitle + ")" + textRef;
+	}
+	// Get the current popup state tiddler
+	var value = options.wiki.getTextReference(textRef,"",options.contextTiddlerTitle);
+	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
+	if(popupLocationRegExp.test(value)) {
+		this.cancel();
+	} else {
+		// Set the position if we're opening it
+		options.wiki.setTextReference(textRef,
+			"(" + options.domNode.offsetLeft + "," + options.domNode.offsetTop + "," + 
+				options.domNode.offsetWidth + "," + options.domNode.offsetHeight + ")",
+			options.contextTiddlerTitle,true);
+		this.popup(textRef);
+	}
+};
+
 exports.Popup = Popup;
 
 })();
