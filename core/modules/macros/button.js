@@ -20,6 +20,7 @@ exports.info = {
 		set: {byName: true, type: "tiddler"},
 		setTo: {byName: true, type: "text"},
 		popup: {byName: true, type: "tiddler"},
+		hover: {byName: true, type: "text"},
 		qualifyTiddlerTitles: {byName: true, type: "text"},
 		"class": {byName: true, type: "text"}
 	}
@@ -34,25 +35,14 @@ exports.dispatchMessage = function(event) {
 };
 
 exports.triggerPopup = function(event) {
-	// Get the textref of the popup state tiddler
-	var textRef = this.params.popup;
-	if(this.hasParameter("qualifyTiddlerTitles") && this.params.qualifyTiddlerTitles === "yes") {
-		textRef = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + textRef;
-	}
-	// Get the current popup state tiddler 
-	var value = this.wiki.getTextReference(textRef,"",this.tiddlerTitle);
-	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
-	if(popupLocationRegExp.test(value)) {
-		$tw.popup.cancel();
-	} else {
-		// Set the position if we're opening it
-		this.wiki.setTextReference(textRef,
-			"(" + this.child.domNode.offsetLeft + "," + this.child.domNode.offsetTop + "," + 
-				this.child.domNode.offsetWidth + "," + this.child.domNode.offsetHeight + ")",
-			this.tiddlerTitle,true);
-		$tw.popup.popup(textRef);
-	}
+	$tw.popup.triggerPopup({
+		textRef: this.params.popup,
+		domNode: this.child.domNode,
+		qualifyTiddlerTitles: this.params.qualifyTiddlerTitles,
+		contextTiddlerTitle: this.tiddlerTitle,
+		contextParents: this.parents,
+		wiki: this.wiki
+	});
 };
 
 exports.setTiddler = function() {
@@ -76,6 +66,13 @@ exports.handleEvent = function(event) {
 		event.preventDefault();
 		return false;
 	}
+	if(event.type === "mouseover" || event.type === "mouseout") {
+		if(this.hasParameter("popup")) {
+			this.triggerPopup(event);
+		}
+		event.preventDefault();
+		return false;
+	}
 	return true;
 };
 
@@ -90,8 +87,12 @@ exports.executeMacro = function() {
 	for(var t=0; t<this.content.length; t++) {
 		this.content[t].execute(this.parents,this.tiddlerTitle);
 	}
+	var events = ["click"];
+	if(this.hasParameter("hover") && this.params.hover === "yes") {
+		events.push("mouseover","mouseout");
+	}
 	return $tw.Tree.Element("button",attributes,this.content,{
-		events: ["click"],
+		events: events,
 		eventHandler: this
 	});
 };

@@ -22,7 +22,9 @@ exports.info = {
 	params: {
 		to: {byName: "default", type: "tiddler", skinny: true},
 		throughField: {byname: true, type: "text"},
-		space: {byName: true, type: "text"}
+		space: {byName: true, type: "text"},
+		qualifyHoverTitle: {byName: true, type: "text"},
+		hover: {byName: true, type: "tiddler"}
 	}
 };
 
@@ -41,6 +43,20 @@ exports.handleEvent = function (event) {
 			event.preventDefault();
 			return false;
 		}
+	}
+	if(event.type === "mouseover" || event.type === "mouseout") {
+		if(this.hasParameter("hover")) {
+			$tw.popup.triggerPopup({
+				textRef: this.params.hover,
+				domNode: this.child.domNode,
+				qualifyTiddlerTitles: this.params.qualifyHoverTitle,
+				contextTiddlerTitle: this.tiddlerTitle,
+				contextParents: this.parents,
+				wiki: this.wiki
+			});
+		}
+		event.preventDefault();
+		return false;
 	}
 };
 
@@ -84,11 +100,15 @@ exports.executeMacro = function() {
 		$tw.utils.pushTop(this.linkInfo.attributes["class"],this.classes);
 	}
 	// Create the link
+	var events = ["click"];
+	if(this.hasParameter("hover")) {
+		events.push("mouseover","mouseout");
+	}
 	var child;
 	if(this.linkInfo.suppressLink) {
 		child = $tw.Tree.Element("span",{},this.content);
 	} else { 
-		child = $tw.Tree.Element("a",this.linkInfo.attributes,this.content,{events: ["click"], eventHandler: this});
+		child = $tw.Tree.Element("a",this.linkInfo.attributes,this.content,{events: events, eventHandler: this});
 	}
 	child.execute(this.parents,this.tiddlerTitle);
 	return child;
