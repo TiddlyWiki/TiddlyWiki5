@@ -28,6 +28,6 @@ DateViewer.prototype.render = function() {
 	}
 };
 
-exports["date"] = DateViewer;
+exports.date = DateViewer;
 
 })();

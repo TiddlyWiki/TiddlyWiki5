@@ -32,8 +32,8 @@ LinkViewer.prototype.render = function() {
 		link.execute(this.viewMacro.parents,this.viewMacro.tiddlerTitle);
 		return link;
 	}
-}
+};
 
-exports["link"] = LinkViewer;
+exports.link = LinkViewer;
 
 })();

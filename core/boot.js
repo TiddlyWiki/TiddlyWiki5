@@ -39,7 +39,7 @@ if(typeof(window) === "undefined" && !global.$tw) {
 // Crypto helper object
 
 // Setup crypto
-$tw.crypto = new function() {
+var Crypto = function() {
 	var password = null,
 		callSjcl = function(method,inputText) {
 			var outputText;
@@ -49,20 +49,20 @@ $tw.crypto = new function() {
 			try {
 				outputText = $tw.crypto.sjcl[method](password,inputText);
 			} catch(ex) {
-				console.log("Crypto error:" + ex)
+				console.log("Crypto error:" + ex);
 				outputText = null;	
 			}
 			return outputText;
 		},
 		getPassword = function() {
 			if($tw.browser) {
-				password = prompt("Enter password to decrypt TiddlyWiki");
+				password = window.prompt("Enter password to decrypt TiddlyWiki");
 			}
 		};
 
 	this.setPassword = function(newPassword) {
 		password = newPassword;
-	}
+	};
 	this.encrypt = function(text) {
 		return callSjcl("encrypt",text);
 	};
@@ -70,6 +70,7 @@ $tw.crypto = new function() {
 		return callSjcl("decrypt",text);
 	};
 };
+$tw.crypto = new Crypto();
 
 $tw.crypto.sjcl = $tw.browser ? window.sjcl : require("./sjcl.js");
 
@@ -453,6 +454,7 @@ $tw.Wiki.prototype.installPlugins = function() {
 Register all the module tiddlers that have a module type
 */
 $tw.Wiki.prototype.registerModuleTiddlers = function() {
+	/*jslint evil: true */
 	var title, tiddler;
 	// If in the browser, define any modules from plugins
 	if($tw.browser) {
@@ -466,7 +468,7 @@ $tw.Wiki.prototype.registerModuleTiddlers = function() {
 						tiddler.fields.text,
 						"})"
 					];
-					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],window.eval(source.join("")));
+					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],window["eval"](source.join("")));
 				}
 			}
 		}
@@ -750,27 +752,28 @@ Load all the tiddlers from a directory
 $tw.extractTiddlersFromPath = function(filepath,basetitle,excludeRegExp) {
 	basetitle = basetitle || "$:/plugins";
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
-	var tiddlers = [];
+	var tiddlers = [],
+		stat, files, pluginInfo, pluginTiddlers, f, file, titlePrefix, t, filesInfo, p, tidInfo, typeInfo, text;
 	if(fs.existsSync(filepath)) {
-		var stat = fs.statSync(filepath);
+		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
-			var files = fs.readdirSync(filepath);
+			files = fs.readdirSync(filepath);
 			// Look for a tiddlywiki.plugin file
 			if(files.indexOf("tiddlywiki.plugin") !== -1) {
 				// Read the plugin information
-				var pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
+				pluginInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.plugin").toString("utf8"));
 				// Read the plugin files
-				var pluginTiddlers = [];
-				for(var f=0; f<files.length; f++) {
-					var file = files[f];
+				pluginTiddlers = [];
+				for(f=0; f<files.length; f++) {
+					file = files[f];
 					if(!excludeRegExp.test(file) && file !== "tiddlywiki.plugin" && file !== "tiddlywiki.files") {
 						pluginTiddlers.push.apply(pluginTiddlers,$tw.extractTiddlersFromPath(filepath + "/" + file,basetitle + "/" + file,excludeRegExp));
 					}
 				}
 				// Save the plugin tiddlers into the plugin
 				pluginInfo.tiddlers = pluginInfo.tiddlers || {};
-				var titlePrefix = pluginInfo.title + "/";
-				for(var t=0; t<pluginTiddlers.length; t++) {
+				titlePrefix = pluginInfo.title + "/";
+				for(t=0; t<pluginTiddlers.length; t++) {
 					// Check that the constituent tiddler has the plugin title as a prefix
 					if(pluginTiddlers[t].title.indexOf(titlePrefix) === 0 && pluginTiddlers[t].title.length > titlePrefix.length) {
 						pluginInfo.tiddlers[pluginTiddlers[t].title.substr(titlePrefix.length)] = pluginTiddlers[t];
@@ -783,18 +786,18 @@ $tw.extractTiddlersFromPath = function(filepath,basetitle,excludeRegExp) {
 			// Look for a tiddlywiki.files file
 			} else if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
-				for(var p=0; p<filesInfo.tiddlers.length; p++) {
-					var tidInfo = filesInfo.tiddlers[p],
-						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
-						text = fs.readFileSync(path.resolve(filepath,tidInfo.file)).toString(typeInfo ? typeInfo.encoding : "utf8");
+				filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
+				for(p=0; p<filesInfo.tiddlers.length; p++) {
+					tidInfo = filesInfo.tiddlers[p];
+					typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"];
+					text = fs.readFileSync(path.resolve(filepath,tidInfo.file)).toString(typeInfo ? typeInfo.encoding : "utf8");
 					tidInfo.fields.text = text;
 					tiddlers.push(tidInfo.fields);
 				}
 			} else {
 				// If not, read all the files in the directory
-				for(var f=0; f<files.length; f++) {
-					var file = files[f];
+				for(f=0; f<files.length; f++) {
+					file = files[f];
 					if(!excludeRegExp.test(file)) {
 						tiddlers.push.apply(tiddlers,$tw.extractTiddlersFromPath(filepath + "/" + file,basetitle + "/" + file,excludeRegExp));
 					}

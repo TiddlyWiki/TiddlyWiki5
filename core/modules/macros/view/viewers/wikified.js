@@ -42,8 +42,8 @@ WikifiedViewer.prototype.render = function() {
 		childrenClone[t].execute(parents,this.viewMacro.tiddlerTitle);
 	}
 	return $tw.Tree.Element(this.viewMacro.isBlock ? "div" : "span",{},childrenClone);
-}
+};
 
-exports["wikified"] = WikifiedViewer;
+exports.wikified = WikifiedViewer;
 
 })();

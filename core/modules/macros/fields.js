@@ -61,7 +61,6 @@ exports.executeMacro = function() {
 	]);
 	child.execute(this.parents,this.tiddlerTitle);
 	return child;
-	return this.viewer.render();
 };
 
 })();

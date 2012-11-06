@@ -216,7 +216,7 @@ exports.operators = {
 		filter: function(operator) {
 			var op = operator.prefix === "!" ? "true" : "false";
 			return "var term = this.getTiddler(\"" + $tw.utils.stringify(operator.operand) + "\").fields.text;" +
-				"subResults = this.search(term,{titles: subResults, invert: " + op + ", exclude: [\"" + $tw.utils.stringify(operator.operand) + "\"]});"
+				"subResults = this.search(term,{titles: subResults, invert: " + op + ", exclude: [\"" + $tw.utils.stringify(operator.operand) + "\"]});";
 		}
 	},
 	"field": { // Special handler for field comparisons

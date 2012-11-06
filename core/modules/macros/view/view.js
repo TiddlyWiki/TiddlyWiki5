@@ -53,7 +53,7 @@ exports.executeMacro = function() {
 		Viewer = this.wiki.macros.view.fieldviewers[this.params.format];
 	}
 	if(!Viewer) {
-		Viewer = this.wiki.macros.view.fieldviewers["text"];
+		Viewer = this.wiki.macros.view.fieldviewers.text;
 	}
 	this.viewer = new Viewer(this,tiddler,field,value);
 	// Call the viewer to generate the content

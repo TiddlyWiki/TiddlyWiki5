@@ -165,8 +165,9 @@ exports.eventMap["tw-NewTiddler"] = function(event) {
 	// Get the story details
 	this.story = this.getList(this.storyTitle);
 	// Create the new tiddler
+	var title;
 	for(var t=0; true; t++) {
-		var title = "New Tiddler" + (t ? " " + t : "");
+		title = "New Tiddler" + (t ? " " + t : "");
 		if(!this.wiki.tiddlerExists(title)) {
 			break;
 		}

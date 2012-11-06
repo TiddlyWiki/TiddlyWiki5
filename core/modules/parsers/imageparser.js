@@ -13,19 +13,19 @@ Parses an image into a parse tree containing an HTML img element
 "use strict";
 
 var ImageParser = function(options) {
-    this.wiki = options.wiki;
+	this.wiki = options.wiki;
 };
 
 ImageParser.prototype.parse = function(type,text) {
-    var element = "img",
-    	src;
-    if(type === "application/pdf" || type === ".pdf") {
-    	src = "data:application/pdf;base64," + text;
-    	element = "embed";
-    } else if(type === "image/svg+xml" || type === ".svg") {
-        src = "data:image/svg+xml," + encodeURIComponent(text);
+	var element = "img",
+		src;
+	if(type === "application/pdf" || type === ".pdf") {
+		src = "data:application/pdf;base64," + text;
+		element = "embed";
+	} else if(type === "image/svg+xml" || type === ".svg") {
+		src = "data:image/svg+xml," + encodeURIComponent(text);
 	} else {
-        src = "data:" + type + ";base64," + text;
+		src = "data:" + type + ";base64," + text;
 	}
 	return new $tw.Renderer([$tw.Tree.Element(element,{src: src})],new $tw.Dependencies());
 };

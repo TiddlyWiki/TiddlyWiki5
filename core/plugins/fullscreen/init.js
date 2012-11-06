@@ -9,7 +9,7 @@ Message handler for full screen mode
 (function(){
 
 /*jslint node: true, browser: true */
-/*global $tw: false */
+/*global $tw: false, Element: false */
 "use strict";
 
 var toggleFullScreen = function() {

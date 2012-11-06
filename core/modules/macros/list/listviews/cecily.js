@@ -26,7 +26,7 @@ function CecilyListView(listMacro) {
 		domNode.style.position = "absolute";
 		this.positionTiddler(title,domNode);
 	}
-};
+}
 
 CecilyListView.prototype.getMapTiddlerTitle = function() {
 	return this.listMacro.params.map || "$:/TiddlerMap";
@@ -117,6 +117,6 @@ CecilyListView.prototype.remove = function(index) {
 	return true;
 };
 
-exports["cecily"] = CecilyListView;
+exports.cecily = CecilyListView;
 
 })();

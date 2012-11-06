@@ -52,7 +52,7 @@ exports.convertStyleNameToPropertyName = function(styleName) {
 		}
 	}
 	// Put it in the cache too
-	styleNameCache[styleName] = propertyName
+	styleNameCache[styleName] = propertyName;
 	return propertyName;
 };
 
@@ -124,7 +124,7 @@ exports.convertEventName = function(eventName) {
 		}
 	}
 	// Put it in the cache too
-	eventNameCache[eventName] = newEventName
+	eventNameCache[eventName] = newEventName;
 	return newEventName;
 };
 

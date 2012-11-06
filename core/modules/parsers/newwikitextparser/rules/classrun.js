@@ -29,7 +29,7 @@ exports.regExpString = "\\{\\{(?:[^\\{\\r\\n]+)\\{";
 
 exports.parse = function(match,isBlock) {
 	var tree,
-		reStart = /\{\{([^\{\r\n]+){/mg,
+		reStart = /\{\{([^\{\r\n]+)\{/mg,
 		reEnd = /(\}\}\})/g;
 	reStart.lastIndex = this.pos;
 	match = reStart.exec(this.source);

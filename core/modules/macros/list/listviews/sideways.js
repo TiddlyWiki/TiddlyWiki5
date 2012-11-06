@@ -46,7 +46,7 @@ SidewaysListView.prototype.insert = function(index) {
 		{verticalAlign: "top"},
 		{display: "inline-block"},
 		{transition: "none"},
-		{opacity: "0.0"},
+		{opacity: "0.0"}
 	]);
 	var	currWidth = targetElement.offsetWidth + parseInt(window.getComputedStyle(targetElement).marginLeft,10);
 	$tw.utils.setStyle(targetElement,[
@@ -89,6 +89,6 @@ SidewaysListView.prototype.remove = function(index) {
 	return true;
 };
 
-exports["sideways"] = SidewaysListView;
+exports.sideways = SidewaysListView;
 
 })();

@@ -123,7 +123,7 @@ exports.createListElement = function(title) {
 	node.execute(this.parents,this.tiddlerTitle);
 	// Add any specified classes
 	if(this.hasParameter("itemClass")) {
-		attributes["class"].push(this.params["itemClass"]);
+		attributes["class"].push(this.params.itemClass);
 	}
 	var listElement = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,[node],{
 			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler","tw-NewTiddler"],

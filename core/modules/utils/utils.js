@@ -258,7 +258,7 @@ exports.stringify = function(s) {
 Escape the RegExp special characters with a preceding backslash
 */
 exports.escapeRegExp = function(s) {
-    return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+    return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
 exports.nextTick = function(fn) {

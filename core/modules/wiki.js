@@ -687,7 +687,7 @@ exports.search = function(text,options) {
 			return options.invert ? !match : match;
 		}
 		return false;			
-	}
+	};
 	// Loop through all the tiddlers doing the search
 	var results = [];
 	if($tw.utils.isArray(options.titles)) {

@@ -56,7 +56,7 @@ UploadSaver.prototype.save = function(text) {
 	http.setRequestHeader("Content-Type","multipart/form-data; ;charset=UTF-8; boundary=" + boundary);
 	http.onreadystatechange = function() {
 		if(http.readyState == 4 && http.status == 200) {
-			alert(http.responseText);
+			window.alert(http.responseText);
 		}
 	};
 	http.send(data);

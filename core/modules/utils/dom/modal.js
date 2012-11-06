@@ -122,7 +122,7 @@ Modal.prototype.display = function(title) {
 		{transition: "opacity " + d + " ease-out"}
 	]);
 	$tw.utils.setStyle(modalWrapper,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"}
 	]);
 	// Force layout
 	$tw.utils.forceLayout(modalBackdrop);

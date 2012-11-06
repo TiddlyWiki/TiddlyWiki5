@@ -169,7 +169,7 @@ exports["application/x-tiddler-encrypted-div"] = function(tiddlers) {
 
 exports["application/x-tiddler-javascript"] = function(tiddlers) {
 	return mapEachTiddler(this,tiddlers,function(tiddler) {
-		return "$tw.preloadTiddler(" + JSON.stringify(tiddler.fields) + ");\n"	
+		return "$tw.preloadTiddler(" + JSON.stringify(tiddler.fields) + ");\n";
 	});
 };
 

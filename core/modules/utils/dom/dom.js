@@ -139,7 +139,7 @@ exports.pulseElement = function(element) {
 	},false);
 	// Apply the pulse class
 	$tw.utils.removeClass(element,"pulse");
-	element.offsetWidth;
+	$tw.utils.forceLayout(element);
 	$tw.utils.addClass(element,"pulse");
 };
 

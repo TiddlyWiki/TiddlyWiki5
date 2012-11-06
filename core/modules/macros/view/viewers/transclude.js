@@ -31,8 +31,8 @@ TranscludeViewer.prototype.render = function() {
 		}
 		return $tw.Tree.Element(this.viewMacro.isBlock ? "div" : "span",{},childrenClone);
 	}
-}
+};
 
-exports["transclude"] = TranscludeViewer;
+exports.transclude = TranscludeViewer;
 
 })();

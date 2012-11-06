@@ -88,6 +88,6 @@ ClassicListView.prototype.remove = function(index) {
 	return true;
 };
 
-exports["classic"] = ClassicListView;
+exports.classic = ClassicListView;
 
 })();

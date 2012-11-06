@@ -70,6 +70,6 @@ RelativeDateViewer.prototype.update = function() {
 	}
 };
 
-exports["relativedate"] = RelativeDateViewer;
+exports.relativedate = RelativeDateViewer;
 
 })();

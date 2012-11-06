@@ -46,10 +46,10 @@ exports.executeMacro = function() {
 		$tw.utils.pushTop(outerClasses,this.classes);
 	}
 	if(this.hasParameter("width")) {
-		outerAttributes.style.width = this.params["width"];
+		outerAttributes.style.width = this.params.width;
 	}
 	if(this.hasParameter("height")) {
-		outerAttributes.style.height = this.params["height"];
+		outerAttributes.style.height = this.params.height;
 	}
 	var innerFrame = $tw.Tree.Element("div",innerAttributes,this.content),
 		outerFrame = $tw.Tree.Element("div",outerAttributes,[innerFrame]);
@@ -85,7 +85,7 @@ exports.scrollTo = function(bounds) {
 				t = 1;
 			}
 			t = slowInSlowOut(t);
-			self.child.domNode.scrollLeft = self.startX + (self.endX - self.startX) * t
+			self.child.domNode.scrollLeft = self.startX + (self.endX - self.startX) * t;
 			self.child.domNode.scrollTop = self.startY + (self.endY - self.startY) * t;
 		}, 10);
 	}

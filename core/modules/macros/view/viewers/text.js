@@ -30,8 +30,8 @@ TextViewer.prototype.render = function() {
 	} else {
 		return $tw.Tree.Text(this.value);
 	}
-}
+};
 
-exports["text"] = TextViewer;
+exports.text = TextViewer;
 
 })();
