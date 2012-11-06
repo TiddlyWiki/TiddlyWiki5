@@ -60,7 +60,6 @@ These are the individual rules that make up WikiText:
 Macros give WikiText dynamic functionality:
 
 * ButtonMacro
-* ChooserMacro
 * ColorMacro
 * CommentMacro
 * DownloadMacro
@@ -78,7 +77,6 @@ Macros give WikiText dynamic functionality:
 * TranscludeMacro
 * VideoMacro
 * ViewMacro
-* ZoomerMacro
 
 ! Commands
 
