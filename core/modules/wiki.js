@@ -216,7 +216,7 @@ exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		if(!this.tiddlers[t].isShadow) {
+		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isShadow) {
 			tiddlers.push(this.tiddlers[t]);
 		}
 	}
