@@ -22,7 +22,7 @@ title: $:/templates/PageTemplate
 
 <!-- The main story references the same story and history tiddlers as the outer navigator -->
 <div class="container">
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"$:/templates/ViewTemplate" editTemplate:"$:/templates/EditTemplate" listview:classic >>
+<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"$:/templates/ViewTemplate" editTemplate:"$:/templates/EditTemplate" listview:classic itemClass:"tw-tiddler-frame">>
 </div>
 
 >>

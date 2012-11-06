@@ -3,16 +3,6 @@ title: $:/templates/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <<navigator><
 
-<!--  Zooming chooser -->
-{{navigation-panel{
-<<chooser><
-	((( [!is[shadow]sort[title]] )) <div><<view title link>></div> )
->>
-}}}
-
-<!--  Zooming navigator -->
-<<zoomigator>>
-
 <!-- The top navigation bar -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
@@ -56,10 +46,7 @@ title: $:/templates/PageTemplate
 <!-- Full screen button -->
 <<button full-screen class:"btn btn-warning"><Full screen>>
 
-<!-- View button -->
-<<button popup:ViewDropDownState class:"btn btn-danger"><View <span class="caret"></span>>>
-
-<!-- View dropdown -->
+<!-- Edit button dropdown -->
 {{pull-right{
 <<reveal state:[[$:/EditMode]] type:nomatch text:yes><
 <<button modal param:[[$:/messages/EnterEditMode]] set:[[$:/EditMode]] setTo:yes class:"btn btn-success"><Edit>>
@@ -76,18 +63,6 @@ title: $:/templates/PageTemplate
 
 }}}
 
-<!-- This navigator intercepts navigation events and sets the text of the specified tiddler to the target tiddler title -->
-<<navigator set:[[$:/CurrentView]]><
-<<reveal state:ViewDropDownState type:popup position:below><
-<div class="open">
-{{dropdown-menu tw-suppress-missing-tiddlylink{
-* <<link to:classic>< <<reveal state:[[$:/CurrentView]] type:match text:classic>< <span class="tw-ticked-menu-item"></span> >> Classic>>
-* <<link to:sideways>< <<reveal state:[[$:/CurrentView]] type:match text:sideways>< <span class="tw-ticked-menu-item"></span> >> Sideways>>
-* <<link to:zoomin>< <<reveal state:[[$:/CurrentView]] type:match text:zoomin>< <span class="tw-ticked-menu-item"></span> >> Zoomin>>
-}}}
-</div>
->>
->>
 </div>
 </div>
 </div>
