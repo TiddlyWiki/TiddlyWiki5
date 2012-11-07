@@ -56,6 +56,7 @@ exports.info = {
 	cascadeParams: true, // Cascade names of named parameters to following anonymous parameters
 	params: {
 		target: {byName: "default", type: "tiddler"},
+		targetVia: {byName: true, type: "tiddler"},
 		template: {byName: true, type: "tiddler"},
 		templateText: {byName: true, type: "text"},
 		"with": {byName: true, type: "text", dependentAll: true}
@@ -73,6 +74,12 @@ exports.evaluateDependencies = function() {
 	} else {
 		dependencies.addDependency(template,true);
 	}
+	var targetVia = this.srcParams.targetVia;
+	if(typeof targetVia === "function") {
+		dependencies.dependentAll = true;
+	} else {
+		dependencies.addDependency(targetVia,true);
+	}
 	return dependencies;
 };
 
@@ -85,6 +92,8 @@ exports.executeMacro = function() {
 	// If there's no render title specified then use the current tiddler title
 	if(this.hasParameter("target")) {
 		renderTitle = this.params.target;
+	} else if(this.hasParameter("targetVia")) {
+		renderTitle = this.wiki.getTextReference(this.params.targetVia,null,this.tiddlerTitle);
 	} else {
 		renderTitle = this.tiddlerTitle;
 	}
