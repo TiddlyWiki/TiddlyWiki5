@@ -40,9 +40,6 @@ title: $:/templates/PageTemplate
 
 </form>
 
-<!-- New tiddler button -->
-<<button NewTiddler class:"btn btn-success"><New>>
-
 <!-- Full screen button -->
 <<button full-screen class:"btn btn-warning"><Full screen>>
 
@@ -52,12 +49,15 @@ title: $:/templates/PageTemplate
 <<button modal param:[[$:/messages/EnterEditMode]] set:[[$:/EditMode]] setTo:yes class:"btn btn-success"><Edit>>
 >>
 
-<!-- Save changes is only visible in edit mode -->
+<!-- These buttons are only visible in edit mode -->
 <<reveal state:[[$:/EditMode]] type:match text:yes><
+<!-- New tiddler button -->
+<<button NewTiddler class:"btn btn-success"><New>>
+
+<!-- Save buttons -->
 <<button save-wiki param:"$:/core/templates/tiddlywiki5.encrypted.template.html" class:"btn pull-right"><Save Changes (encrypted)>>
->>
-<<reveal state:[[$:/EditMode]] type:match text:yes><
-<<button save-wiki class:"btn pull-right"><Save Changes>>
+
+ <<button save-wiki class:"btn pull-right"><Save Changes>>
 >>
 }}}
 
