@@ -56,27 +56,31 @@ exports.eventMap = {};
 
 // Navigate to a specified tiddler
 exports.eventMap["tw-navigate"] = function(event) {
-	// Update the story tiddler if specified
-	this.story = this.getList(this.storyTitle);
-	// See if the tiddler is already there
-	var slot = this.findTitleInStory(event.navigateTo,-1);
-	// If not we need to add it
-	if(slot === -1) {
-		// First we try to find the position of the story element we navigated from
-		slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
-		// Add the tiddler
-		this.story.splice(slot,0,event.navigateTo);
-		// Save the story
-		this.saveList(this.storyTitle,this.story);
+	if(this.hasParameter("story")) {
+		// Update the story tiddler if specified
+		this.story = this.getList(this.storyTitle);
+		// See if the tiddler is already there
+		var slot = this.findTitleInStory(event.navigateTo,-1);
+		// If not we need to add it
+		if(slot === -1) {
+			// First we try to find the position of the story element we navigated from
+			slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
+			// Add the tiddler
+			this.story.splice(slot,0,event.navigateTo);
+			// Save the story
+			this.saveList(this.storyTitle,this.story);
+		}
 	}
 	// Set the tiddler if specified
 	if(this.hasParameter("set")) {
 		this.wiki.setTextReference(this.params.set,event.navigateTo);
 	}
 	// Add a new record to the top of the history stack
-	this.history = this.wiki.getTiddlerData(this.historyTitle,[]);
-	this.history.push({title: event.navigateTo, fromPageRect: event.navigateFromClientRect});
-	this.wiki.setTiddlerData(this.historyTitle,this.history);
+	if(this.hasParameter("history")) {
+		this.history = this.wiki.getTiddlerData(this.historyTitle,[]);
+		this.history.push({title: event.navigateTo, fromPageRect: event.navigateFromClientRect});
+		this.wiki.setTiddlerData(this.historyTitle,this.history);
+	}
 	event.stopPropagation();
 	return false;
 };
