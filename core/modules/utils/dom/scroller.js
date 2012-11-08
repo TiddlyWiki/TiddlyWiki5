@@ -12,10 +12,6 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 /*global $tw: false */
 "use strict";
 
-var slowInSlowOut = function(t) {
-	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
-};
-
 /*
 Creates a Scroller object
 */
@@ -67,7 +63,7 @@ Scroller.prototype.scrollIntoView = function(domNode) {
 				self.cancel();
 				t = 1;
 			}
-			t = slowInSlowOut(t);
+			t = $tw.utils.slowInSlowOut(t);
 			window.scrollTo(self.startX + (self.endX - self.startX) * t,self.startY + (self.endY - self.startY) * t);
 		}, 10);
 	}

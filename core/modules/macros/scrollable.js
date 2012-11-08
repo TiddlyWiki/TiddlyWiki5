@@ -65,10 +65,6 @@ exports.postRenderInDom = function() {
 	};
 };
 
-var slowInSlowOut = function(t) {
-	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
-};
-
 exports.scrollTo = function(bounds) {
 	this.cancelScroll();
 	this.startTime = new Date();
@@ -84,7 +80,7 @@ exports.scrollTo = function(bounds) {
 				self.cancelScroll();
 				t = 1;
 			}
-			t = slowInSlowOut(t);
+			t = $tw.utils.slowInSlowOut(t);
 			self.child.domNode.scrollLeft = self.startX + (self.endX - self.startX) * t;
 			self.child.domNode.scrollTop = self.startY + (self.endY - self.startY) * t;
 		}, 10);
