@@ -43,13 +43,13 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	}
 };
 
-exports.setTextReference = function(textRef,value,currTiddlerTitle,isShadow) {
+exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	var tr = this.parseTextReference(textRef),
 		title,tiddler,fields;
 	// Check if it is a reference to a tiddler
 	if(tr.title && !tr.field) {
 		tiddler = this.getTiddler(tr.title);
-		this.addTiddler(new $tw.Tiddler(tiddler,{title: tr.title,text: value}),isShadow);
+		this.addTiddler(new $tw.Tiddler(tiddler,{title: tr.title,text: value}));
 	// Else check for a field reference
 	} else if(tr.field) {
 		title = tr.title || currTiddlerTitle;
@@ -179,7 +179,7 @@ exports.tiddlerExists = function(title) {
 	return !!this.tiddlers[title];
 };
 
-exports.addTiddler = function(tiddler,isShadow) {
+exports.addTiddler = function(tiddler) {
 	// Check if we're passed a fields hashmap instead of a tiddler
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
@@ -187,10 +187,6 @@ exports.addTiddler = function(tiddler,isShadow) {
 	// Get the title, and the current tiddler with that title
 	var title = tiddler.fields.title,
 		prevTiddler = this.tiddlers[title];
-	// Make it be a shadow if indicated or if it is already a shadow
-	if(isShadow || (prevTiddler && prevTiddler.isShadow)) {
-		tiddler.isShadow = true;
-	}
 	// Save the tiddler
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
@@ -216,7 +212,7 @@ exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isShadow) {
+		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isShadow()) {
 			tiddlers.push(this.tiddlers[t]);
 		}
 	}
@@ -301,7 +297,7 @@ exports.getOrphanTitles = function() {
 exports.getShadowTitles = function() {
 	var titles = [];
 	for(var title in this.tiddlers) {
-		if(this.tiddlers[title].isShadow) {
+		if(this.tiddlers[title].isShadow()) {
 			titles.push(title);
 		}
 	}

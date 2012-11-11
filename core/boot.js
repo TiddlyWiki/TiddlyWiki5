@@ -409,19 +409,16 @@ $tw.Wiki = function() {
 	this.tiddlers = {};
 };
 
-$tw.Wiki.prototype.addTiddler = function(tiddler,isShadow) {
+$tw.Wiki.prototype.addTiddler = function(tiddler) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
-	}
-	if(isShadow) {
-		tiddler.isShadow = true;
 	}
 	this.tiddlers[tiddler.fields.title] = tiddler;
 };
 
-$tw.Wiki.prototype.addTiddlers = function(tiddlers,isShadow) {
+$tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 	for(var t=0; t<tiddlers.length; t++) {
-		this.addTiddler(tiddlers[t],isShadow);
+		this.addTiddler(tiddlers[t]);
 	}	
 };
 
@@ -706,19 +703,19 @@ $tw.modules.registerModuleExports("$:/boot/tiddlerdeserializer/dom","tiddlerdese
 $tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 
 // Load the JavaScript system tiddlers from the DOM
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("libraryModules")),true);
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("modules")),true);
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernelPrefix")),true);
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernel")),true);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("libraryModules")));
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("modules")));
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernelPrefix")));
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("bootKernel")));
 // Load the stylesheet tiddlers from the DOM
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("styleArea")),true);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("styleArea")));
 // Load the main store tiddlers from the DOM
 $tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("storeArea")));
 // Load the shadow tiddlers from the DOM
-$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("shadowArea")),true);
+$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById("shadowArea")));
 // Load any preloaded tiddlers
 if($tw.preloadTiddlers) {
-	$tw.wiki.addTiddlers($tw.preloadTiddlers,true);
+	$tw.wiki.addTiddlers($tw.preloadTiddlers);
 }
 
 // End of if($tw.browser)
@@ -814,8 +811,8 @@ $tw.extractTiddlersFromPath = function(filepath,basetitle,excludeRegExp) {
 /*
 Load all the tiddlers from a directory
 */
-$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp,isShadow) {
-	$tw.wiki.addTiddlers($tw.extractTiddlersFromPath(filepath,basetitle,excludeRegExp),isShadow);
+$tw.loadTiddlersFromFolder = function(filepath,basetitle,excludeRegExp) {
+	$tw.wiki.addTiddlers($tw.extractTiddlersFromPath(filepath,basetitle,excludeRegExp));
 };
 
 /*
@@ -858,17 +855,17 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 };
 
 // Load modules from the modules directory
-$tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir),null,null,true);
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.bootPath,$tw.config.bootModuleSubDir));
 
 // Load up the shadow tiddlers in the root of the core directory
-$tw.loadTiddlersFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/,true);
+$tw.loadTiddlersFromFolder($tw.boot.bootPath,"$:/core",/^\.DS_Store$|.meta$|^modules$/);
 
 // Load any plugins in the wiki plugins directory
-$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir),null,null,true);
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
 
 // HACK: to be replaced when we re-establish sync plugins
 // Load shadow tiddlers from wiki shadows directory
-$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiShadowsSubDir),null,null,true);
+$tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiShadowsSubDir));
 // Load tiddlers from wiki tiddlers directory
 $tw.loadTiddlersFromFolder(path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir));
 

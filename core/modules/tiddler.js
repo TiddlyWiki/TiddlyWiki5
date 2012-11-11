@@ -20,6 +20,17 @@ exports.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
 };
 
+exports.isShadow = function() {
+	if(!$tw.utils.hop(this,"shadowFlag")) {
+		this.shadowFlag = this.fields.title.indexOf("$:/") === 0;
+	}
+	return this.shadowFlag;
+};
+
+exports.isTemporary = function() {
+	return this.fields.title.indexOf("$:/temp/") === 0;
+};
+
 exports.getFieldString = function(field) {
 	var value = this.fields[field];
 	// Check for a missing field

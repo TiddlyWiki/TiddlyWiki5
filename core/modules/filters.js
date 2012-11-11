@@ -106,7 +106,7 @@ exports.operators = {
 					}
 					break;
 				case "shadow":
-					return "for(title in source) {if(" + op + "this.getTiddler(title).isShadow) {$tw.utils.pushTop(subResults,title);}}";
+					return "for(title in source) {if(" + op + "this.getTiddler(title).isShadow()) {$tw.utils.pushTop(subResults,title);}}";
 				default:
 					throw "Unknown operand for 'is' filter operator";
 			}
@@ -122,7 +122,7 @@ exports.operators = {
 					}
 					break;
 				case "shadow":
-					return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow) {subResults.splice(r,1);}}";
+					return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow()) {subResults.splice(r,1);}}";
 				default:
 					throw "Unknown operand for 'is' filter operator";
 			}
