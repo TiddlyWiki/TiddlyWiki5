@@ -57,7 +57,7 @@ Popup.prototype.triggerPopup = function(options) {
 	// Get the textref of the popup state tiddler
 	var textRef = options.textRef;
 	if(options.qualifyTiddlerTitles === "yes") {
-		textRef = "(" + options.contextParents.join(",") + "," + options.contextTiddlerTitle + ")" + textRef;
+		textRef = textRef + "(" + options.contextParents.join(",") + "," + options.contextTiddlerTitle + ")";
 	}
 	// Get the current popup state tiddler
 	var value = options.wiki.getTextReference(textRef,"",options.contextTiddlerTitle);

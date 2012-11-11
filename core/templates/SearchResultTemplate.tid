@@ -3,14 +3,14 @@ title: $:/templates/SearchResultTemplate
 {{tw-search-result{
 <li>
 
-<<link throughField:title hover:SearchPreviewDropDownLocation qualifyHoverTitle:yes><
+<<link throughField:title hover:"$:/temp/SearchPreviewDropDownLocation" qualifyHoverTitle:yes><
 <<view title text>>
 >>
 
 </li>
 }}}
 
-<<reveal state:SearchPreviewDropDownLocation type:popup position:right qualifyTiddlerTitles:yes><
+<<reveal state:"$:/temp/SearchPreviewDropDownLocation" type:popup position:right qualifyTiddlerTitles:yes><
 
 <div class="tw-tiddler-frame" style="color: black; width: 400px;">
 

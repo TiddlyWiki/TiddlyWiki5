@@ -1,7 +1,7 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-<<button popup:FieldsDropDownLocation qualifyTiddlerTitles:yes class:"btn-invisible"><
+<<button popup:"$:/temp/FieldsDropDownLocation" qualifyTiddlerTitles:yes class:"btn-invisible"><
 <span class="title"><<view title>> </span>
 >>
 <span> <<reveal state:[[$:/EditMode]] type:match text:yes>< <<button EditTiddler class:"btn-invisible"><[img[$:/core/images/edit-button.svg]]>> >> </span>
@@ -9,7 +9,7 @@ modifier: JeremyRuston
 
 <div class:"small"><<view modifier link>> <<view modified relativedate>></div>
 
-<<reveal state:FieldsDropDownLocation type:popup qualifyTiddlerTitles:yes><
+<<reveal state:"$:/temp/FieldsDropDownLocation" type:popup qualifyTiddlerTitles:yes><
 
 <div class="open">
 

@@ -100,7 +100,7 @@ exports.handleEvent = function(event) {
 exports.executeMacro = function() {
 	this.stateTextRef = this.params.state;
 	if(this.hasParameter("qualifyTiddlerTitles")) {
-		this.stateTextRef = "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")" + this.stateTextRef;
+		this.stateTextRef = this.stateTextRef + "(" + this.parents.join(",") + "," + this.tiddlerTitle + ")";
 	}
 	this.readState();
 	var attributes = {
