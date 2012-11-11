@@ -116,19 +116,20 @@ $tw.config.fileExtensionInfo = {
 
 // Content type mappings
 $tw.config.contentTypeInfo = {
-	"application/x-tiddler": {encoding: "utf8"},
-	"application/x-tiddler-html-div": {encoding: "utf8"},
-	"application/x-tiddlywiki-recipe": {encoding: "utf8"},
-	"text/plain": {encoding: "utf8"},
-	"text/css": {encoding: "utf8"},
-	"text/html": {encoding: "utf8"},
-	"application/javascript": {encoding: "utf8"},
-	"application/json": {encoding: "utf8"},
-	"application/pdf": {encoding: "base64"},
-	"image/jpeg": {encoding: "base64"},
-	"image/png": {encoding: "base64"},
-	"image/gif": {encoding: "base64"},
-	"image/svg+xml": {encoding: "utf8"}
+	"text/x-tiddlywiki": {encoding: "utf8", extension: ".tid"},
+	"application/x-tiddler": {encoding: "utf8", extension: ".tid"},
+	"application/x-tiddler-html-div": {encoding: "utf8", extension: ".tiddler"},
+	"application/x-tiddlywiki-recipe": {encoding: "utf8", extension: ".recipe"},
+	"text/plain": {encoding: "utf8", extension: ".txt"},
+	"text/css": {encoding: "utf8", extension: ".css"},
+	"text/html": {encoding: "utf8", extension: ".html"},
+	"application/javascript": {encoding: "utf8", extension: ".js"},
+	"application/json": {encoding: "utf8", extension: ".json"},
+	"application/pdf": {encoding: "base64", extension: ".pdf"},
+	"image/jpeg": {encoding: "base64", extension: ".jpg"},
+	"image/png": {encoding: "base64", extension: ".png"},
+	"image/gif": {encoding: "base64", extension: ".gif"},
+	"image/svg+xml": {encoding: "utf8", extension: ".svg"}
 };
 
 /////////////////////////// Utility functions

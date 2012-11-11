@@ -3,7 +3,9 @@ title: $:/plugins/dropbox/dropbox.js
 type: application/javascript
 module-type: startup
 
-Startup the Dropbox integration plugin
+Main Dropbox integration plugin
+
+
 
 \*/
 (function(){
@@ -20,7 +22,8 @@ var queryLoginMarker = "login=true";
 
 $tw.plugins.dropbox = {
 	client: null, // Dropbox.js client object
-	fileInfo: {}, // Hashmap of each file as retrieved from Dropbox: {versionTag:,title:}
+	fileInfo: {}, // Hashmap of each filename as retrieved from Dropbox: {versionTag:,title:}
+	titleInfo: {}, // Hashmap of each tiddler title retrieved from Dropbox to filename
 	titleIsLoggedIn: "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName: "$:/plugins/dropbox/UserName",
 	titlePublicAppUrl: "$:/plugins/dropbox/PublicAppUrl",
@@ -225,6 +228,7 @@ console.log("loading tiddler from",path);
 				$tw.wiki.addTiddlers(tiddlers);
 				// Save the revision of the files so we can detect changes later
 				$tw.plugins.dropbox.fileInfo[mainStat.name] = {versionTag: mainStat.versionTag,title: tiddlers[0].title};
+				$tw.plugins.dropbox.titleInfo[tiddlers[0].title] = mainStat.name;
 				$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag,title: tiddlers[0].title};
 				callback();
 			});
@@ -233,6 +237,9 @@ console.log("loading tiddler from",path);
 			$tw.wiki.addTiddlers(tiddlers);
 			// Save the revision of this file so we can detect changes
 			$tw.plugins.dropbox.fileInfo[stat.name] = {versionTag: stat.versionTag,title: tiddlers[0].title};
+			for(t=0; t<tiddlers.length; t++) {
+				$tw.plugins.dropbox.titleInfo[tiddlers[t].title] = stat.name;
+			}
 			callback();
 		}
 	});
@@ -348,6 +355,75 @@ $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
     $tw.plugins.dropbox.client.writeFile(path,file,function(error,stat) {
         callback(error);
     });
+};
+
+// Setup synchronisation back to Dropbox
+$tw.plugins.dropbox.setupSyncer = function(wiki) {
+	wiki.addEventListener("",function(changes) {
+		$tw.plugins.dropbox.syncChanges(changes,wiki);
+	});
+};
+
+$tw.plugins.dropbox.syncChanges = function(changes,wiki) {
+	// Create a queue of tasks to save or delete tiddlers
+	var q = async.queue($tw.plugins.dropbox.syncTask,2);
+	// Called when we've processed all the files
+	q.drain = function () {
+	};
+	// Process each of the changes
+	for(var title in changes) {
+		var tiddler = wiki.getTiddler(title),
+			filename = $tw.plugins.dropbox.titleInfo[title],
+			contentType = tiddler ? tiddler.fields.type : null;
+		contentType = contentType || "text/x-tiddlywiki";
+		var contentTypeInfo = $tw.config.contentTypeInfo[contentType],
+			isNew = false;
+		// Figure out the pathname of the tiddler
+		if(!filename) {
+			var extension = contentTypeInfo ? contentTypeInfo.extension : "";
+			filename = encodeURIComponent(title) + extension;
+			$tw.plugins.dropbox.titleInfo[title] = filename;
+			isNew = true;
+		}
+		// Push the appropriate task
+		if(tiddler) {
+			if(contentType === "text/x-tiddlywiki") {
+				// .tid file
+				q.push({
+					type: "save",
+					title: title,
+					path: $tw.plugins.dropbox.titleInfo[title],
+					content: wiki.serializeTiddlers([tiddler],"application/x-tiddler"),
+					isNew: isNew
+				});
+			} else {
+				// main file plus meta file
+				q.push({
+					type: "save",
+					title: title,
+					path: $tw.plugins.dropbox.titleInfo[title],
+					content: tiddler.fields.text,
+					metadata: tiddler.getFieldStringBlock({exclude: ["text"]}),
+					isNew: isNew
+				});
+			}
+		} else {
+			q.push({
+				type: "delete",
+				title: title,
+				path: $tw.plugins.dropbox.titleInfo[title]
+			});
+		}
+	}
+};
+
+// Perform a single sync task
+$tw.plugins.dropbox.syncTask = function(task,callback) {
+	if(task.type === "delete") {
+console.log("Deleting",task.path);
+	} else if(task.type === "save") {
+console.log("Saving",task.path,task);
+	}
 };
 
 exports.startup = function() {

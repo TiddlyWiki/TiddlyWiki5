@@ -40,6 +40,8 @@ exports.startup = function(loggedIn) {
 				if(hadChanges) {
 					$tw.plugins.dropbox.saveTiddlerIndex("/" + $tw.plugins.dropbox.wikiName + "/index.html",function(error) {
 						console.log("Saved tiddler index");
+						// Sync any subsequent tiddler changes
+						$tw.plugins.dropbox.setupSyncer($tw.wiki);
 					});
 				}
 			});
