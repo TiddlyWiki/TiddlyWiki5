@@ -35,4 +35,22 @@ exports.getFieldString = function(field) {
 	}
 };
 
+/*
+Get all the fields as a name:value block. Options:
+	exclude: an array of field names to exclude
+*/
+exports.getFieldStringBlock = function(options) {
+	options = options || {};
+	var exclude = options.exclude || [];
+	var fields = [];
+	for(var field in this.fields) {
+		if($tw.utils.hop(this.fields,field)) {
+			if(exclude.indexOf(field) === -1) {
+				fields.push(field + ": " + this.getFieldString(field));
+			}
+		}
+	}
+	return fields.join("\n");
+};
+
 })();
