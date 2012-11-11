@@ -3,9 +3,7 @@ title: $:/plugins/dropbox/dropbox.js
 type: application/javascript
 module-type: startup
 
-Main Dropbox integration plugin
-
-
+Main Dropbox integration module. It creates the `$tw.plugins.dropbox` object that includes static methods for various Dropbox operations. It also contains a startup function that kicks off the login process
 
 \*/
 (function(){
@@ -21,9 +19,11 @@ var apiKey = "m+qwjj8wFRA=|1TSoitGS9Nz2RTwv+jrUJnsAj0yy57NhQJ4TkZ/+Hw==";
 var queryLoginMarker = "login=true";
 
 $tw.plugins.dropbox = {
+	// State data
 	client: null, // Dropbox.js client object
 	fileInfo: {}, // Hashmap of each filename as retrieved from Dropbox: {versionTag:,title:}
 	titleInfo: {}, // Hashmap of each tiddler title retrieved from Dropbox to filename
+	// Titles of various shadow tiddlers used by the plugin
 	titleIsLoggedIn: "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName: "$:/plugins/dropbox/UserName",
 	titlePublicAppUrl: "$:/plugins/dropbox/PublicAppUrl",
@@ -34,13 +34,38 @@ $tw.plugins.dropbox = {
 	titleLoadedWikis: "$:/plugins/dropbox/LoadedWikis"
 };
 
-// Error handling
+/*
+Startup function that sets up Dropbox and, if the queryLoginMarker is present, logs the user in. After login, any dropbox-startup modules are executed.
+*/
+exports.startup = function() {
+	if(!$tw.browser) {
+		return;
+	}
+	// Mark us as not logged in
+	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleIsLoggedIn, text: "no"},true);
+	// Initialise Dropbox for sandbox access
+	$tw.plugins.dropbox.client = new Dropbox.Client({key: apiKey, sandbox: true});
+	// Use the basic redirection authentication driver
+	$tw.plugins.dropbox.client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
+	// Authenticate ourselves if the marker is in the document query string
+	if(document.location.search.indexOf(queryLoginMarker) !== -1) {
+		$tw.plugins.dropbox.login();
+	} else {
+		$tw.plugins.dropbox.invokeDropboxStartupModules(false);
+	}
+};
+
+/*
+Error handling
+*/
 $tw.plugins.dropbox.showError = function(error) {
 	alert("Dropbox error: " + error);
 	console.log("Dropbox error: " + error);
 };
 
-// Authenticate
+/*
+Authenticate
+*/
 $tw.plugins.dropbox.login = function() {
 	$tw.plugins.dropbox.client.authenticate(function(error, client) {
 		if(error) {
@@ -56,7 +81,9 @@ $tw.plugins.dropbox.login = function() {
 	});
 };
 
-// Invoke any dropbox-startup modules
+/*
+Invoke any dropbox-startup modules
+*/
 $tw.plugins.dropbox.invokeDropboxStartupModules = function(loggedIn) {
 	var mods = $tw.modules.types["dropbox-startup"];
 	for(var m=0; m<mods.length; m++) {
@@ -64,7 +91,9 @@ $tw.plugins.dropbox.invokeDropboxStartupModules = function(loggedIn) {
 	}
 };
 
-// Get user information
+/*
+Get user information
+*/
 $tw.plugins.dropbox.getUserInfo = function(callback) {
 	$tw.plugins.dropbox.client.getUserInfo(function(error,userInfo) {
 		if(error) {
@@ -78,7 +107,9 @@ $tw.plugins.dropbox.getUserInfo = function(callback) {
 	});
 };
 
-// Logout
+/*
+Logout
+*/
 $tw.plugins.dropbox.logout = function() {
 	$tw.plugins.dropbox.client.signOut(function(error) {
 		if(error) {
@@ -92,7 +123,9 @@ $tw.plugins.dropbox.logout = function() {
 	});
 };
 
-// Load tiddlers representing each wiki in a folder
+/*
+Load tiddlers representing each wiki in a folder
+*/
 $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 	// First get the list of tiddler files
 	$tw.plugins.dropbox.client.stat(path,{readDir: true},function(error,stat,stats) {
@@ -111,7 +144,9 @@ $tw.plugins.dropbox.loadWikiFiles = function(path,callback) {
 	});
 };
 
-// Synchronise the local state with the files in Dropbox
+/*
+Synchronise the local state with the files in Dropbox
+*/
 $tw.plugins.dropbox.refreshTiddlerFiles = function(path,callback) {
 	// First get the list of tiddler files
 	$tw.plugins.dropbox.client.stat(path,{readDir: true},function(error,stat,stats) {
@@ -170,7 +205,9 @@ console.log("fileinfo",$tw.plugins.dropbox.fileInfo)
 	});
 };
 
-// Load a tiddler file
+/*
+Load a tiddler file
+*/
 $tw.plugins.dropbox.loadTiddlerFile = function(path,mimeType,stats,callback) {
 console.log("loading tiddler from",path);
 	// If the mime type is "application/octet-stream" then we'll take the type from the extension
@@ -245,8 +282,10 @@ console.log("loading tiddler from",path);
 	});
 };
 
-// Encode a binary file as returned by Dropbox into the base 64 equivalent
-// Adapted from Jon Leighton, https://gist.github.com/958841
+/*
+Encode a binary file as returned by Dropbox into the base 64 equivalent
+Adapted from Jon Leighton, https://gist.github.com/958841
+*/
 $tw.plugins.dropbox.base64EncodeString = function(data) {
 	var base64 = [],
 		charmap = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",
@@ -284,14 +323,18 @@ $tw.plugins.dropbox.base64EncodeString = function(data) {
 	return base64.join("");
 };
 
-// Rewrite the document location to include a force login marker
+/*
+Rewrite the document location to include a force login marker
+*/
 $tw.plugins.dropbox.forceLogin = function() {
 	if(document.location.search.indexOf(queryLoginMarker) === -1) {
 		document.location.search = queryLoginMarker;
 	}
 };
 
-// Create a new empty TiddlyWiki
+/*
+Create a new empty TiddlyWiki
+*/
 $tw.plugins.dropbox.createWiki = function(wikiName) {
 	// Remove any dodgy characters from the wiki name
 	wikiName = wikiName.replace(/[\!\@\€\£\%\^\*\+\$\:\?\#\/\\\<\>\|\"\'\`\~\=]/g,"");
@@ -335,7 +378,9 @@ $tw.plugins.dropbox.createWiki = function(wikiName) {
 	});
 };
 
-// Save the index file
+/*
+Save the index file
+*/
 $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
 	// Get the tiddler index information
 	var index = {tiddlers: [],shadows: [], fileInfo: $tw.plugins.dropbox.fileInfo};
@@ -357,7 +402,9 @@ $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
     });
 };
 
-// Setup synchronisation back to Dropbox
+/*
+Setup synchronisation back to Dropbox
+*/
 $tw.plugins.dropbox.setupSyncer = function(wiki) {
 	wiki.addEventListener("",function(changes) {
 		$tw.plugins.dropbox.syncChanges(changes,wiki);
@@ -417,30 +464,14 @@ $tw.plugins.dropbox.syncChanges = function(changes,wiki) {
 	}
 };
 
-// Perform a single sync task
+/*
+Perform a single sync task
+*/
 $tw.plugins.dropbox.syncTask = function(task,callback) {
 	if(task.type === "delete") {
 console.log("Deleting",task.path);
 	} else if(task.type === "save") {
 console.log("Saving",task.path,task);
-	}
-};
-
-exports.startup = function() {
-	if(!$tw.browser) {
-		return;
-	}
-	// Mark us as not logged in
-	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleIsLoggedIn, text: "no"},true);
-	// Initialise Dropbox for sandbox access
-	$tw.plugins.dropbox.client = new Dropbox.Client({key: apiKey, sandbox: true});
-	// Use the basic redirection authentication driver
-	$tw.plugins.dropbox.client.authDriver(new Dropbox.Drivers.Redirect({rememberUser: true}));
-	// Authenticate ourselves if the marker is in the document query string
-	if(document.location.search.indexOf(queryLoginMarker) !== -1) {
-		$tw.plugins.dropbox.login();
-	} else {
-		$tw.plugins.dropbox.invokeDropboxStartupModules(false);
 	}
 };
 
