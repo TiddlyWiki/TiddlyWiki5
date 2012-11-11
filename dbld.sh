@@ -2,6 +2,13 @@
 
 # build TiddlyWiki5 in the Sky for Dropbox
 
+# Copy the dummy content
+
+rm ../../../Apps/TiddlyWiki5/My\ TiddlyWiki/tiddlers/*.*
+cp tw5dropbox/dummycontent/*.* ../../../Apps/TiddlyWiki5/My\ TiddlyWiki/tiddlers
+
+# Build the app wiki
+
 pushd tw5dropbox/appwiki > /dev/null
 
 node ../../core/boot.js \
@@ -13,6 +20,8 @@ node ../../core/boot.js \
 	|| exit 1
 
 popd > /dev/null
+
+# Build the main wiki
 
 pushd tw5dropbox/mainwiki > /dev/null
 
