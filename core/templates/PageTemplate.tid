@@ -19,17 +19,17 @@ title: $:/templates/PageTemplate
 <form class="form-search">
 
 {{search-query{
-<<edit tiddler:[[$:/search/text]] type:search requireFocus:yes>>
+<<edit tiddler:[[$:/temp/search]] type:search requireFocus:yes>>
 }}}
 
 <div style="position:absolute; z-index:1000;">
 
-<<reveal state:[[$:/search/text]] type:nomatch text:""><
+<<reveal state:[[$:/temp/search]] type:nomatch text:""><
 
 <div class="open">
 
 {{dropdown-menu{
-* <<list filter:"[!is[shadow]searchVia[$:/search/text]sort[title]limit[50]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
+* <<list filter:"[!is[shadow]searchVia[$:/temp/search]sort[title]limit[50]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
 }}}
 
 </div>
