@@ -20,7 +20,7 @@ var RelativeDateViewer = function(viewMacro,tiddler,field,value) {
 };
 
 RelativeDateViewer.prototype.render = function() {
-	if(this.value === undefined) {
+	if(!this.tiddler ||this.value === undefined) {
 		return $tw.Tree.Text("");
 	} else {
 		this.relativeDate = $tw.utils.getRelativeDate((new Date()) - this.value);
