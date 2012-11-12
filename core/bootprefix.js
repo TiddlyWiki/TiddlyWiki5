@@ -10,7 +10,7 @@ This file sets up the globals that need to be available when JavaScript modules 
 
 See Boot.js for further details of the boot process.
 
-*/
+\*/
 
 // Set up $tw global for the browser
 if(window && !window.$tw) {
