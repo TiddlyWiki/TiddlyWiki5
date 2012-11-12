@@ -1,6 +1,6 @@
 title: TemporaryTestPlugin
 type: application/json
-plugin: yes
+bundle: yes
 
 {
 	"title": "$:/plugins/tiddlywiki/test",

@@ -16,10 +16,6 @@ exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
 
-exports.hasField = function(field) {
-	return $tw.utils.hop(this.fields,field);
-};
-
 exports.isShadow = function() {
 	if(!$tw.utils.hop(this,"shadowFlag")) {
 		this.shadowFlag = this.fields.title.indexOf("$:/") === 0;
