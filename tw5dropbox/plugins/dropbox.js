@@ -21,7 +21,7 @@ var queryLoginMarker = "login=true";
 $tw.plugins.dropbox = {
 	// State data
 	client: null, // Dropbox.js client object
-	fileInfo: {}, // Hashmap of each filename as retrieved from Dropbox: {versionTag:,title:}
+	fileInfo: {}, // Hashmap of each filename as retrieved from Dropbox (including .meta files): {versionTag:,title:}
 	titleInfo: {}, // Hashmap of each tiddler title retrieved from Dropbox to filename
 	// Titles of various shadow tiddlers used by the plugin
 	titleIsLoggedIn: "$:/plugins/dropbox/IsLoggedIn",
