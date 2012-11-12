@@ -43,8 +43,10 @@ exports.startup = function() {
 	if($tw.browser) {
 		// Call browser startup modules
 		modules = $tw.modules.types["browser-startup"];
-		for(m=0; m<modules.length; m++) {
-			modules[m].startup();
+		if(modules) {
+			for(m=0; m<modules.length; m++) {
+				modules[m].startup();
+			}
 		}
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
