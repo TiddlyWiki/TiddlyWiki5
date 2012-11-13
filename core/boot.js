@@ -77,6 +77,9 @@ $tw.crypto.sjcl = $tw.browser ? window.sjcl : require("./sjcl.js");
 // Boot information
 $tw.boot = {};
 
+// Plugin state
+$tw.plugins = {};
+
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
@@ -296,7 +299,7 @@ if(!$tw.browser) {
 Register the exports of a single module in the $tw.modules.types hashmap
 */
 $tw.modules.registerModuleExports = function(name,moduleType,moduleExports) {
-	if(!(moduleType in $tw.modules.types)) {
+	if(!$tw.utils.hop($tw.modules.types,moduleType)) {
 		$tw.modules.types[moduleType] = [];
 	}
 	$tw.modules.types[moduleType].push(moduleExports);
@@ -487,19 +490,11 @@ $tw.Wiki.prototype.registerModuleTiddlers = function() {
 		}
 	}
 	// Register and execute any modules in ordinary tiddlers
-	if($tw.browser) {
-		for(title in $tw.modules.titles) {
-			if($tw.utils.hop($tw.modules.titles,title)) {
-				$tw.modules.registerModuleExports(title,$tw.modules.titles[title].moduleType,$tw.modules.execute(title));
-			}
-		}
-	} else {
-		for(title in $tw.wiki.tiddlers) {
-			if($tw.utils.hop($tw.wiki.tiddlers,title)) {
-				tiddler = $tw.wiki.getTiddler(title);
-				if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
-					$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
-				}
+	for(title in $tw.wiki.tiddlers) {
+		if($tw.utils.hop($tw.wiki.tiddlers,title)) {
+			tiddler = $tw.wiki.getTiddler(title);
+			if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
+				$tw.modules.registerModuleExports(title,tiddler.fields["module-type"],$tw.modules.execute(title));
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/dropbox/dropbox-main.js
+title: $:/plugins/tiddlywiki/dropbox-main/dropbox-main.js
 type: application/javascript
 module-type: dropbox-startup
 

@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/dropbox/logoutmacro.js
+title: $:/plugins/tiddlywiki/dropbox/logoutmacro.js
 type: application/javascript
 module-type: macro
 
-Dropbox login plugin
+Dropbox logout plugin
 
 \*/
 (function(){
@@ -13,13 +13,13 @@ Dropbox login plugin
 "use strict";
 
 exports.info = {
-	name: "dropbox.login",
+	name: "dropbox.logout",
 	params: {}
 };
 
 exports.handleEvent = function (event) {
 	if(event.type === "click") {
-		$tw.plugins.dropbox.forceLogin();
+		$tw.plugins.dropbox.logout();
 	}
 };
 

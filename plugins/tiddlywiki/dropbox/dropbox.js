@@ -1,7 +1,7 @@
 /*\
-title: $:/plugins/dropbox/dropbox.js
+title: $:/plugins/tiddlywiki/dropbox/dropbox.js
 type: application/javascript
-module-type: startup
+module-type: browser-startup
 
 Main Dropbox integration module. It creates the `$tw.plugins.dropbox` object that includes static methods for various Dropbox operations. It also contains a startup function that kicks off the login process
 
@@ -17,6 +17,9 @@ var apiKey = "m+qwjj8wFRA=|1TSoitGS9Nz2RTwv+jrUJnsAj0yy57NhQJ4TkZ/+Hw==";
 
 // Query string marker for forcing authentication
 var queryLoginMarker = "login=true";
+
+// Require async.js
+var async = require("./async.js");
 
 $tw.plugins.dropbox = {
 	// State data

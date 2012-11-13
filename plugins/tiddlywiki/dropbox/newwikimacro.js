@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/dropbox/newwikimacro.js
+title: $:/plugins/tiddlywiki/dropbox/newwikimacro.js
 type: application/javascript
 module-type: macro
 

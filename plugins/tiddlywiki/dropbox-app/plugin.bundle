@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/dropbox-app",
+	"description": "Dropbox app components",
+	"author": "JeremyRuston",
+	"version": "0.0.0",
+	"coreVersion": ">=5.0.0"
+}
