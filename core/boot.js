@@ -86,7 +86,8 @@ $tw.modules.types = $tw.modules.types || {}; // hashmap by module type of array 
 $tw.config = $tw.config || {};
 
 // Constants
-$tw.config.bootModuleSubDir = $tw.config.bootModuleSubDir || "./modules";
+$tw.config.pluginsPath = "../plugins/";
+$tw.config.wikiInfo = $tw.config.wikiInfo || "./tiddlywiki.info";
 $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
 $tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
 $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
@@ -724,11 +725,11 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
 		extensionInfo = $tw.config.fileExtensionInfo[ext],
 		typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
-		data = fs.readFileSync(filepath).toString(typeInfo ? typeInfo.encoding : "utf8"),
+		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metafile = filepath + ".meta";
 	if(ext !== ".json" && tiddlers.length === 1 && fs.existsSync(metafile)) {
-		var metadata = fs.readFileSync(metafile).toString("utf8");
+		var metadata = fs.readFileSync(metafile,"utf8");
 		if(metadata) {
 			tiddlers = [$tw.utils.parseFields(metadata,tiddlers[0])];
 		}
@@ -750,11 +751,11 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files").toString("utf8"));
+				filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files","utf8"));
 				for(p=0; p<filesInfo.tiddlers.length; p++) {
 					tidInfo = filesInfo.tiddlers[p];
 					typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"];
-					text = fs.readFileSync(path.resolve(filepath,tidInfo.file)).toString(typeInfo ? typeInfo.encoding : "utf8");
+					text = fs.readFileSync(path.resolve(filepath,tidInfo.file),typeInfo ? typeInfo.encoding : "utf8");
 					tidInfo.fields.text = text;
 					tiddlers.push(tidInfo.fields);
 				}
@@ -778,25 +779,32 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 Load the tiddlers from a bundle folder, and package them up into a proper JSON bundle tiddler
 */
 $tw.loadBundleFolder = function(filepath,excludeRegExp) {
-	// Read the plugin information
-	var bundleInfo = JSON.parse(fs.readFileSync(filepath).toString("utf8"));
-	// Read the bundle files
-	var bundleTiddlers = [];
-	for(f=0; f<files.length; f++) {
-		file = files[f];
-		if(!excludeRegExp.test(file) && file !== "plugin.bundle" && file !== "tiddlywiki.files") {
-			bundleTiddlers.push.apply(bundleTiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
-		}
-	}
-	// Save the bundle tiddlers into the bundle
-	bundleInfo.tiddlers = bundleInfo.tiddlers || {};
-	var titlePrefix = bundleInfo.title + "/";
-	for(t=0; t<bundleTiddlers.length; t++) {
-		// Check that the constituent tiddler has the bundle title as a prefix
-		if(bundleTiddlers[t].title.indexOf(titlePrefix) === 0 && bundleTiddlers[t].title.length > titlePrefix.length) {
-			bundleInfo.tiddlers[bundleTiddlers[t].title.substr(titlePrefix.length)] = bundleTiddlers[t];
-		} else {
-			throw "The bundle '" + bundleInfo.title + "' cannot contain a tiddler titled '" + bundleTiddlers[t].title + "'";
+	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
+	var stat, files, bundleInfo = {tiddlers: []}, bundleTiddlers = [], f, file, titlePrefix, t;
+	if(fs.existsSync(filepath)) {
+		stat = fs.statSync(filepath);
+		if(stat.isDirectory()) {
+			files = fs.readdirSync(filepath);
+			// Read the plugin information
+			bundleInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.bundle","utf8"));
+			// Read the bundle files
+			for(f=0; f<files.length; f++) {
+				file = files[f];
+				if(!excludeRegExp.test(file) && file !== "plugin.bundle" && file !== "tiddlywiki.files") {
+					bundleTiddlers.push.apply(bundleTiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
+				}
+			}
+			// Save the bundle tiddlers into the bundle
+			bundleInfo.tiddlers = bundleInfo.tiddlers || {};
+			titlePrefix = bundleInfo.title + "/";
+			for(t=0; t<bundleTiddlers.length; t++) {
+				// Check that the constituent tiddler has the bundle title as a prefix
+				if(bundleTiddlers[t].title.indexOf(titlePrefix) === 0 && bundleTiddlers[t].title.length > titlePrefix.length) {
+					bundleInfo.tiddlers[bundleTiddlers[t].title.substr(titlePrefix.length)] = bundleTiddlers[t];
+				} else {
+					console.log("Error extracting plugin bundle: The bundle '" + bundleInfo.title + "' cannot contain a tiddler titled '" + bundleTiddlers[t].title + "'");
+				}
+			}
 		}
 	}
 	// Save the bundle tiddler
@@ -882,6 +890,15 @@ if($tw.browser) {
 	];
 	for(t=0; t<folders.length; t++) {
 		$tw.wiki.addTiddlers($tw.loadTiddlersFromPath(folders[t]));
+	}
+	// Load any plugins specified within the wiki folder
+	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo);
+	if(fs.existsSync(wikiInfoPath)) {
+		var wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8")),
+			pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
+		for(t=0; t<wikiInfo.plugins.length; t++) {
+			$tw.wiki.addTiddler($tw.loadBundleFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t])));
+		}
 	}
 }
 
