@@ -387,21 +387,18 @@ exports.clearCache = function(title) {
 exports.initParsers = function(moduleType) {
 	// Install the parser modules
 	moduleType = moduleType || "parser";
-	$tw.wiki.parsers = {}; 
-	var modules = $tw.modules.types[moduleType],
-		n,m,f;
-	if(modules) {
-		for(n=0; n<modules.length; n++) {
-			m = modules[n];
-			// Add the parsers defined by the module
-			for(f in m) {
-				$tw.wiki.parsers[f] = new m[f]({wiki: this}); // Store an instance of the parser
+	$tw.wiki.parsers = {};
+	var self = this;
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		for(var f in module) {
+			if($tw.utils.hop(module,f)) {
+				$tw.wiki.parsers[f] = new module[f]({wiki: self}); // Store an instance of the parser
 			}
 		}
-	}
+	});
 	// Install the rules for the old wikitext parser rules
 	var wikitextparser = this.parsers["text/x-tiddlywiki-old"];
-	if(modules && wikitextparser) {
+	if(wikitextparser) {
 		wikitextparser.installRules();
 	}
 };
@@ -501,10 +498,8 @@ It's useful to remember what the `new` keyword does. It:
 */
 exports.initMacros = function(moduleType) {
 	moduleType = moduleType || "macro";
-	$tw.wiki.macros = {}; 
+	$tw.wiki.macros = {};
 	var MacroClass = require("./treenodes/macro.js").Macro,
-		modules = $tw.modules.types[moduleType],
-		n,m,f,
 		subclassMacro = function(module) {
 			// Make a copy of the Macro() constructor function
 			var MacroMaker = function Macro() {
@@ -514,17 +509,16 @@ exports.initMacros = function(moduleType) {
 			MacroMaker.prototype = new MacroClass();
 			// Add the prototype methods for this instance of the macro
 			for(var f in module) {
-				MacroMaker.prototype[f] = module[f];
+				if($tw.utils.hop(module,f)) {
+					MacroMaker.prototype[f] = module[f];
+				}
 			}
 			// Make a more convenient reference to the macro info
 			return MacroMaker;
 		};
-	if(modules) {
-		for(n=0; n<modules.length; n++) {
-			m = modules[n];
-			$tw.wiki.macros[m.info.name] = subclassMacro(m);
-		}
-	}
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		$tw.wiki.macros[module.info.name] = subclassMacro(module);
+	});
 };
 
 /*
@@ -582,12 +576,12 @@ exports.initSavers = function(moduleType) {
 	moduleType = moduleType || "saver";
 	// Instantiate the available savers
 	this.savers = [];
-	for(var t=0; t<$tw.modules.types[moduleType].length; t++) {
-		var saver = $tw.modules.types[moduleType][t];
-		if(saver.canSave(this)) {
-			this.savers.push(saver.create(this));
+	var self = this;
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		if(module.canSave(self)) {
+			self.savers.push(module.create(self));
 		}
-	}
+	});
 	// Sort the savers into priority order
 	this.savers.sort(function(a,b) {
 		if(a.info.priority < b.info.priority) {

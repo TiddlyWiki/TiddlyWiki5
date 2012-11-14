@@ -42,12 +42,11 @@ exports.startup = function() {
 	// Host-specific startup
 	if($tw.browser) {
 		// Call browser startup modules
-		modules = $tw.modules.types["browser-startup"];
-		if(modules) {
-			for(m=0; m<modules.length; m++) {
-				modules[m].startup();
+		$tw.modules.forEachModuleOfType("browser-startup",function(title,module) {
+			if(module.startup) {
+				module.startup();
 			}
-		}
+		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			wiki: $tw.wiki,
@@ -113,7 +112,6 @@ exports.startup = function() {
 			{output: process.stdout, error: process.stderr}
 		);
 		commander.execute();
-
 	}
 
 };

@@ -26,6 +26,9 @@ Define a JavaScript tiddler module for later execution
 	fn: function defining the module, called with the arguments (module,require,exports)
 */
 $tw.modules.define = function(moduleName,moduleType,fn) {
+	if(Object.prototype.hasOwnProperty.call($tw.modules.titles,moduleName)) {
+		console.log("Warning: Redefined module - " + moduleName);
+	}
 	$tw.modules.titles[moduleName] = {
 		moduleType: moduleType,
 		fn: fn

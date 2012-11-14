@@ -93,23 +93,17 @@ Commander.prototype.executeNextCommand = function() {
 };
 
 Commander.initCommands = function(moduleType) {
-	// Install the command modules
 	moduleType = moduleType || "command";
 	$tw.commands = {};
-	var modules = $tw.modules.types[moduleType],
-		n,m,f,c;
-	if(modules) {
-		for(n=0; n<modules.length; n++) {
-			m = modules[n];
-			$tw.commands[m.info.name] = {};
-			c = $tw.commands[m.info.name];
-			// Add the methods defined by the module
-			for(f in m) {
-				c[f] = m[f];
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		var c = $tw.commands[module.info.name] = {};
+		// Add the methods defined by the module
+		for(var f in module) {
+			if($tw.utils.hop(module,f)) {
+				c[f] = module[f];
 			}
 		}
-	}
-
+	});
 };
 
 exports.Commander = Commander;

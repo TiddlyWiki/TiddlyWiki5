@@ -88,10 +88,9 @@ $tw.plugins.dropbox.login = function() {
 Invoke any dropbox-startup modules
 */
 $tw.plugins.dropbox.invokeDropboxStartupModules = function(loggedIn) {
-	var mods = $tw.modules.types["dropbox-startup"];
-	for(var m=0; m<mods.length; m++) {
-		mods[m].startup(loggedIn);
-	}
+	$tw.modules.forEachModuleOfType("dropbox-startup",function(title,module) {
+		module.startup(loggedIn);
+	});
 };
 
 /*

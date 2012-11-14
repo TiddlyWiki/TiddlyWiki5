@@ -266,17 +266,17 @@ var WikiTextParser = function(options) {
 	this.runRules = [];
 	var blockRegExpStrings = [],
 		runRegExpStrings = [],
-		rules = ($tw.modules.types.wikitextrule || []).slice(0);
-	for(var t=0; t<rules.length; t++) {
-		if(rules[t].blockParser) {
-			this.blockRules.push(rules[t]);
-			blockRegExpStrings.push("(" + rules[t].regExpString + ")");
+		self = this;
+	$tw.modules.forEachModuleOfType("wikitextrule",function(title,module) {
+		if(module.blockParser) {
+			self.blockRules.push(module);
+			blockRegExpStrings.push("(" + module.regExpString + ")");
 		}
-		if(rules[t].runParser) {
-			this.runRules.push(rules[t]);
-			runRegExpStrings.push("(" + rules[t].regExpString + ")");
+		if(module.runParser) {
+			self.runRules.push(module);
+			runRegExpStrings.push("(" + module.regExpString + ")");
 		}
-	}
+	});
 	this.blockRegExp = new RegExp(blockRegExpStrings.join("|"),"mg");
 	this.runRegExp = new RegExp(runRegExpStrings.join("|"),"mg");
 };

@@ -2,11 +2,9 @@
 title: $:/core/boot.js
 type: application/javascript
 
-The main boot kernel for TiddlyWiki. This single file creates a barebones TW environment that is just
-sufficient to bootstrap the modules containing the main logic of the application.
+The main boot kernel for TiddlyWiki. This single file creates a barebones TW environment that is just sufficient to bootstrap the modules containing the main logic of the application.
 
-On the server this file is executed directly to boot TiddlyWiki. In the browser, this file is packed
-into a single HTML file along with other elements:
+On the server this file is executed directly to boot TiddlyWiki. In the browser, this file is packed into a single HTML file along with other elements:
 
 # bootprefix.js
 # <module definitions>
@@ -83,7 +81,7 @@ $tw.plugins = {};
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
 $tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
-$tw.modules.types = $tw.modules.types || {}; // hashmap by module type of array of exports
+$tw.modules.types = $tw.modules.types || {}; // hashmap by module type of hashmap of exports
 
 // Config object
 $tw.config = $tw.config || {};
@@ -300,9 +298,28 @@ Register the exports of a single module in the $tw.modules.types hashmap
 */
 $tw.modules.registerModuleExports = function(name,moduleType,moduleExports) {
 	if(!$tw.utils.hop($tw.modules.types,moduleType)) {
-		$tw.modules.types[moduleType] = [];
+		$tw.modules.types[moduleType] = {};
 	}
-	$tw.modules.types[moduleType].push(moduleExports);
+	if($tw.utils.hop($tw.modules.types[moduleType],name)) {
+		console.log("Warning: Reregistering module - " + name);
+	}
+	$tw.modules.types[moduleType][name] = moduleExports;
+};
+
+/*
+Apply a callback to each module of a particular type
+	moduleType: type of modules to enumerate
+	callback: function called as callback(title,moduleExports) for each module
+*/
+$tw.modules.forEachModuleOfType = function(moduleType,callback) {
+	var modules = $tw.modules.types[moduleType];
+	if(modules) {
+		for(var title in modules) {
+			if($tw.utils.hop(modules,title)) {
+				callback(title,modules[title]);
+			}
+		}
+	}
 };
 
 /*
@@ -310,13 +327,10 @@ Get all the modules of a particular type in a hashmap by their `name` field
 */
 $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 	nameField = nameField || "name";
-	var modules = $tw.modules.types[moduleType],
-		results = {};
-	if(modules) {
-		for(var t=0; t<modules.length; t++) {
-			results[modules[t][nameField]] =  modules[t];
-		}
-	}
+	var results = {};
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		results[module[nameField]] = module;
+	});
 	return results;
 };
 
@@ -324,16 +338,13 @@ $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 Apply the exports of the modules of a particular type to a target object
 */
 $tw.modules.applyMethods = function(moduleType,object) {
-	var modules = $tw.modules.types[moduleType],
-		n,m,f;
-	if(modules) {
-		for(n=0; n<modules.length; n++) {
-			m = modules[n];
-			for(f in m) {
-				object[f] = m[f];
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		for(var field in module) {
+			if($tw.utils.hop(module,field)) {
+				object[field] = module[field];
 			}
 		}
-	}
+	});
 };
 
 /////////////////////////// Barebones tiddler object
@@ -775,7 +786,7 @@ Load the tiddlers from a bundle folder, and package them up into a proper JSON b
 */
 $tw.loadBundleFolder = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
-	var stat, files, bundleInfo = {tiddlers: []}, bundleTiddlers = [], f, file, titlePrefix, t;
+	var stat, files, bundleInfo, bundleTiddlers = [], f, file, titlePrefix, t;
 	if(fs.existsSync(filepath)) {
 		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
@@ -803,12 +814,12 @@ $tw.loadBundleFolder = function(filepath,excludeRegExp) {
 		}
 	}
 	// Save the bundle tiddler
-	return {
+	return bundleInfo ? {
 		title: bundleInfo.title,
 		type: "application/json",
 		bundle: "yes",
 		text: JSON.stringify(bundleInfo)
-	};
+	} : null;
 };
 
 /*
@@ -879,20 +890,33 @@ if($tw.browser) {
 	// On the server, we load tiddlers from specified folders
 	var folders = [
 		$tw.boot.bootPath,
-		path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir),
 		path.resolve($tw.boot.wikiPath,$tw.config.wikiShadowsSubDir),
 		path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir)
 	];
 	for(t=0; t<folders.length; t++) {
 		$tw.wiki.addTiddlers($tw.loadTiddlersFromPath(folders[t]));
 	}
-	// Load any plugins specified within the wiki folder
+	// Load any plugins listed in the wiki info file
 	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo);
 	if(fs.existsSync(wikiInfoPath)) {
 		var wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8")),
 			pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
 		for(t=0; t<wikiInfo.plugins.length; t++) {
-			$tw.wiki.addTiddler($tw.loadBundleFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t])));
+			var bundle = $tw.loadBundleFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
+			if(bundle) {
+				$tw.wiki.addTiddler(bundle);
+			}
+		}
+	}
+	// Load any plugins within the wiki folder
+	var wikiPluginsPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir);
+	if(fs.existsSync(wikiPluginsPath)) {
+		var pluginFolders = fs.readdirSync(wikiPluginsPath);
+		for(t=0; t<pluginFolders.length; t++) {
+			var bundle = $tw.loadBundleFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
+			if(bundle) {
+				$tw.wiki.addTiddler(bundle);
+			}
 		}
 	}
 }
@@ -904,9 +928,10 @@ $tw.wiki.unpackBundleTiddlers();
 $tw.wiki.registerModuleTiddlers();
 
 // Run any startup modules
-var mainModules = $tw.modules.types.startup;
-for(var m=0; m<mainModules.length; m++) {
-	mainModules[m].startup();
-}
+$tw.modules.forEachModuleOfType("startup",function(title,module) {
+	if(module.startup) {
+		module.startup();
+	}
+});
 
 })();
