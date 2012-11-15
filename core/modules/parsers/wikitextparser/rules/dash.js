@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/rules/dash.js
+title: $:/core/modules/parsers/wikitextparser/rules/dash.js
 type: application/javascript
 module-type: wikitextrule
 

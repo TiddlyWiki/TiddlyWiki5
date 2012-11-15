@@ -1,13 +1,17 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/rules/coderun.js
+title: $:/core/modules/parsers/wikitextparser/rules/codeblock.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for code runs. For example:
+Wiki text run rule for code blocks. For example:
 
 {{{
-	This is a {{{code run}} and `so is this`.
+	{{{
+	This text will not be //wikified//
+	}}}
 }}}
+
+Note that the opening curly braces and the closing curly braces must each be on a line of their own, and not be preceded or followed by white space.
 
 \*/
 (function(){
@@ -16,21 +20,16 @@ Wiki text run rule for code runs. For example:
 /*global $tw: false */
 "use strict";
 
-exports.name = "coderun";
+exports.name = "codeblock";
 
-exports.runParser = true;
+exports.blockParser = true;
 
-exports.regExpString = "(?:\\{\\{\\{)|(?:`)";
+exports.regExpString = "\\{\\{\\{\\r?\\n";
 
 exports.parse = function(match,isBlock) {
 	this.pos = match.index + match[0].length;
-	var regExp,
+	var regExp = /(\r?\n\}\}\}$)/mg,
 		text;
-	if(match[0] === "{{{") {
-		regExp = /(\}\}\})/mg;
-	} else {
-		regExp = /(`)/mg;
-	}
 	regExp.lastIndex = this.pos;
 	match = regExp.exec(this.source);
 	if(match) {
@@ -40,7 +39,7 @@ exports.parse = function(match,isBlock) {
 		text = this.source.substr(this.pos);
 		this.pos = this.sourceLength;
 	}
-	return [$tw.Tree.Element("code",{},[$tw.Tree.Text(text)])];
+	return [$tw.Tree.Element("pre",{},[$tw.Tree.Text(text)])];
 };
 
 })();

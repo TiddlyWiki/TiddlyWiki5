@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/rules/comment.js
+title: $:/core/modules/parsers/wikitextparser/rules/comment.js
 type: application/javascript
 module-type: wikitextrule
 

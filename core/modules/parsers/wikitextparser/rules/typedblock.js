@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/rules/typedblock.js
+title: $:/core/modules/parsers/wikitextparser/rules/typedblock.js
 type: application/javascript
 module-type: wikitextrule
 

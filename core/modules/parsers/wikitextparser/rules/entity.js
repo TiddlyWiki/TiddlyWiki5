@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/newwikitextparser/rules/entity.js
+title: $:/core/modules/parsers/wikitextparser/rules/entity.js
 type: application/javascript
 module-type: wikitextrule
 
