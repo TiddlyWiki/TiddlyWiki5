@@ -13,26 +13,58 @@ See Boot.js for further details of the boot process.
 \*/
 
 // Set up $tw global for the browser
-if(window && !window.$tw) {
-	window.$tw = {browser: {}};
+if(typeof(window) === "undefined") {
+	global.$tw = global.$tw || {}; // No `browser` member for the server
+} else {
+	window.$tw = window.$tw || {browser: {}};
 }
 
-$tw.modules = {titles: {}}; // hashmap by module name of {fn:, exports:, moduleType:}
+/*
+Information about each module is kept in an object with these members:
+	moduleType: type of module
+	definition: object, function or string defining the module; see below
+	exports: exports of the module, filled in after execution
+
+The `definition` can be of several types:
+
+* An object can be used to directly specify the exports of the module
+* A function with the arguments `module,require,exports` that returns `exports`
+* A string function body with the same arguments
+
+Each moduleInfo object is stored in two hashmaps: $tw.modules.titles and $tw.modules.types. The first is indexed by title and the second is indexed by type and then title
+*/
+$tw.modules = {
+	titles: {}, // hashmap by module name of moduleInfo
+	types: {} // hashmap by module type and then name of moduleInfo
+};
 
 /*
 Define a JavaScript tiddler module for later execution
 	moduleName: name of module being defined
 	moduleType: type of module
-	fn: function defining the module, called with the arguments (module,require,exports)
+	definition: module definition; see discussion above
 */
-$tw.modules.define = function(moduleName,moduleType,fn) {
+$tw.modules.define = function(moduleName,moduleType,definition) {
+	/*jslint evil: true */
+	// Create the moduleInfo
+	var moduleInfo = {
+		moduleType: moduleType,
+		definition: definition,
+		exports: undefined
+	};
+	// Store the module in the titles hashmap
 	if(Object.prototype.hasOwnProperty.call($tw.modules.titles,moduleName)) {
 		console.log("Warning: Redefined module - " + moduleName);
 	}
-	$tw.modules.titles[moduleName] = {
-		moduleType: moduleType,
-		fn: fn
-	};
+	$tw.modules.titles[moduleName] = moduleInfo;
+	// Store the module in the types hashmap
+	if(!Object.prototype.hasOwnProperty.call($tw.modules.types,moduleType)) {
+		$tw.modules.types[moduleType] = {};
+	}
+	if(Object.prototype.hasOwnProperty.call($tw.modules.types[moduleType],moduleName)) {
+		console.log("Warning: Redefined module - " + moduleName);
+	}
+	$tw.modules.types[moduleType][moduleName] = moduleInfo;
 };
 
 /*
