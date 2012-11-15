@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikitextparser/rules/wikitextrules.js
+title: $:/plugins/tiddlywiki/tw2parser/wikitextrules.js
 type: application/javascript
 module-type: module
 

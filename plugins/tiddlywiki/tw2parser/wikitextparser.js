@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikitextparser/wikitextparser.js
+title: $:/plugins/tiddlywiki/tw2parser/wikitextparser.js
 type: application/javascript
 module-type: parser
 
@@ -54,7 +54,7 @@ var WikiTextParser = function(options) {
 };
 
 WikiTextParser.prototype.installRules = function() {
-	var rules = require("./rules/wikitextrules.js").rules,
+	var rules = require("./wikitextrules.js").rules,
 		pattern = [];
 	for(var n=0; n<rules.length; n++) {
 		pattern.push("(" + rules[n].match + ")");
