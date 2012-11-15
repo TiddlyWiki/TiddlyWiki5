@@ -591,6 +591,7 @@ if($tw.browser) {
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
 */
 $tw.modules.execute = function(moduleName,moduleRoot) {
+	/*jslint evil: true */
 	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
 		require = function(modRequire) {
 			return $tw.modules.execute(modRequire,name);

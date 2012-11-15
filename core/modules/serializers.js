@@ -40,7 +40,7 @@ exports["application/x-tiddler"] = function(tiddlers) {
 	return mapEachTiddler(this,tiddlers,function(tiddler) {
 		return tiddler.getFieldStringBlock({exclude: ["text"]}) + "\n\n" + tiddler.fields.text;
 	});
-}
+};
 
 exports["application/x-tiddler-css"] = function(tiddlers) {
 	return mapEachTiddler(this,tiddlers,function(tiddler) {

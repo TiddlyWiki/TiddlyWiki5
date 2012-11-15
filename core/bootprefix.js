@@ -45,7 +45,6 @@ Define a JavaScript tiddler module for later execution
 	definition: module definition; see discussion above
 */
 $tw.modules.define = function(moduleName,moduleType,definition) {
-	/*jslint evil: true */
 	// Create the moduleInfo
 	var moduleInfo = {
 		moduleType: moduleType,
