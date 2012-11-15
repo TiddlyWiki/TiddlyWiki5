@@ -99,7 +99,6 @@ Command.prototype.subcommands.config = function() {
 	dumpConfig($tw.config,"  $tw.config");
 	dumpObject("Tiddler field modules:",$tw.Tiddler.fieldModules);
 	dumpObject("Loaded modules:",$tw.modules.titles);
-	dumpObject("Loaded modules:",$tw.modules.moduleTypes);
 	dumpObject("Command modules:",$tw.commands);
 	dumpObject("Parser modules:",$tw.wiki.parsers);
 	dumpObject("Macro modules:",$tw.wiki.macros);
