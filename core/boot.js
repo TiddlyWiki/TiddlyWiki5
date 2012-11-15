@@ -870,12 +870,13 @@ $tw.loadTiddlers = function() {
 		$tw.wiki.addTiddlers($tw.loadTiddlersFromPath(folders[t]));
 	}
 	// Load any plugins listed in the wiki info file
-	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo);
+	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo),
+		bundle;
 	if(fs.existsSync(wikiInfoPath)) {
 		var wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8")),
 			pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
 		for(t=0; t<wikiInfo.plugins.length; t++) {
-			var bundle = $tw.loadBundleFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
+			bundle = $tw.loadBundleFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
 			if(bundle) {
 				$tw.wiki.addTiddler(bundle);
 			}
@@ -886,7 +887,7 @@ $tw.loadTiddlers = function() {
 	if(fs.existsSync(wikiPluginsPath)) {
 		var pluginFolders = fs.readdirSync(wikiPluginsPath);
 		for(t=0; t<pluginFolders.length; t++) {
-			var bundle = $tw.loadBundleFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
+			bundle = $tw.loadBundleFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
 			if(bundle) {
 				$tw.wiki.addTiddler(bundle);
 			}
