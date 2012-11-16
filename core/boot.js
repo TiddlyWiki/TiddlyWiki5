@@ -268,16 +268,20 @@ Adds a new password prompt
 */
 $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	// Create and add the prompt to the DOM
-	var form = document.createElement("form"),
+	var submitText = options.submitText || "Login",
+		form = document.createElement("form"),
 		html = ["<h1>" + options.serviceName + "</h1>"];
 	if(!options.noUserName) {
 		html.push("<input type='text' name='username' class='input-small' placeholder='Username'>");
 	}
 	html.push("<input type='password' name='password' class='input-small' placeholder='Password'>",
-			"<button type='submit' class='btn'>Login</button>");
+			"<button type='submit' class='btn'>" + submitText + "</button>");
 	form.className = "form-inline";
 	form.innerHTML = html.join("\n");
 	this.promptWrapper.appendChild(form);
+	window.setTimeout(function() {
+		form.elements[0].focus();
+	},10);
 	// Add a submit event handler
 	var self = this;
 	form.addEventListener("submit",function(event) {
@@ -653,7 +657,7 @@ if($tw.browser) {
 /*
 Get any encrypted tiddlers
 */
-$tw.boot.getEncryptedTiddlers = function() {
+$tw.boot.decryptEncryptedTiddlers = function(callback) {
 	var encryptedArea = document.getElementById("encryptedArea"),
 		encryptedTiddlers = [];
 	if(encryptedArea) {
@@ -667,9 +671,41 @@ $tw.boot.getEncryptedTiddlers = function() {
 				encryptedTiddlers.push($tw.utils.htmlDecode(e.innerHTML));
 			}
 		}
-		return encryptedTiddlers;
+		// Prompt for the password
+		$tw.passwordPrompt.createPrompt({
+			serviceName: "Enter a password to decrypt this TiddlyWiki",
+			noUserName: true,
+			submitText: "Decrypt",
+			callback: function(data) {
+				// Attempt to decrypt the tiddlers
+				$tw.crypto.setPassword(data.password);
+				for(var t=encryptedTiddlers.length-1; t>=0; t--) {
+					var decrypted = $tw.crypto.decrypt(encryptedTiddlers[t]);
+					if(decrypted) {
+						var json = JSON.parse(decrypted);
+						for(var title in json) {
+							if($tw.utils.hop(json,title)) {
+								$tw.preloadTiddler(json[title]);
+							}
+						}
+						encryptedTiddlers.splice(t,1);
+					}
+				}
+				// Check if we're all done
+				if(encryptedTiddlers.length === 0) {
+					// Call the callback
+					callback();
+					// Exit and remove the password prompt
+					return true;
+				} else {
+					// We didn't decrypt everything, so continue to prompt for password
+					return false;
+				}
+			}
+		});
 	} else {
-		return null;
+		// Just invoke the callback straight away if there wasn't any encrypted tiddlers
+		callback();
 	}
 };
 
@@ -791,9 +827,9 @@ if(!$tw.browser) {
 /*
 Get any encrypted tiddlers
 */
-$tw.boot.getEncryptedTiddlers = function() {
+$tw.boot.decryptEncryptedTiddlers = function(callback) {
 	// Storing encrypted tiddlers on the server isn't supported yet
-	return null;
+	callback();
 };
 
 /*
@@ -1002,7 +1038,7 @@ $tw.boot.startup = function() {
 };
 
 /*
-Starting up
+Initialise crypto and then startup
 */
 // Initialise crypto object
 $tw.crypto = new $tw.utils.Crypto();
@@ -1011,42 +1047,8 @@ if($tw.browser) {
 	$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
 }
 // Get any encrypted tiddlers
-var encryptedTiddlers = $tw.boot.getEncryptedTiddlers();
-// Check if we need a password to decrypt tiddlers
-if($tw.browser && encryptedTiddlers) {
-	// Prompt for the password
-	$tw.passwordPrompt.createPrompt({
-		serviceName: "Enter a password to decrypt this TiddlyWiki",
-		noUserName: true,
-		callback: function(data) {
-			// Attempt to decrypt the tiddlers
-			$tw.crypto.setPassword(data.password);
-			for(var t=encryptedTiddlers.length-1; t>=0; t--) {
-				var decrypted = $tw.crypto.decrypt(encryptedTiddlers[t]);
-				if(decrypted) {
-					var json = JSON.parse(decrypted);
-					for(var title in json) {
-						if($tw.utils.hop(json,title)) {
-							$tw.preloadTiddler(json[title]);
-						}
-					}
-					encryptedTiddlers.splice(t,1);
-				}
-			}
-			// Check if we're all done
-			if(encryptedTiddlers.length === 0) {
-				// Continue startup
-				$tw.boot.startup();
-				// Exit and remove the password prompt
-				return true;
-			} else {
-				// We didn't decrypt everything, so continue to prompt for password
-				return false;
-			}
-		}
-	});
-} else {
+$tw.boot.decryptEncryptedTiddlers(function() {
 	$tw.boot.startup();
-}
+});
 
 })();
