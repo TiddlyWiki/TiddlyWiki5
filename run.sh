@@ -2,11 +2,11 @@
 
 # run TiddlyWiki5
 
-pushd tw5.com > /dev/null
+pushd editions/tw5.com > /dev/null
 
-node ../core/boot.js \
+node ../../core/boot.js \
 	--verbose \
-	--wikitest ../tests/wikitests/ \
+	--wikitest ../../tests/wikitests/ \
 	|| exit 1
 
 popd > /dev/null
