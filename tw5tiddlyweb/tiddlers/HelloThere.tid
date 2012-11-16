@@ -1,0 +1,7 @@
+title: HelloThere
+
+Experimenting with TiddlyWeb integration for TiddlyWiki5.
+
+TiddlyWeb login status: (($:/plugins/tiddlyweb/IsLoggedIn))
+
+TiddlyWeb username: (($:/plugins/tiddlyweb/UserName))
