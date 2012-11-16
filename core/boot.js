@@ -299,8 +299,8 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	var self = this;
 	form.addEventListener("submit",function(event) {
 		// Collect the form data
-		var data = {};
-		for(var t=0; t<form.elements.length; t++) {
+		var data = {},t;
+		for(t=0; t<form.elements.length; t++) {
 			var e = form.elements[t];
 			if(e.name && e.value) {
 				data[e.name] = e.value;
@@ -314,6 +314,14 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 				self.passwordPrompts.splice(i,1);
 				promptInfo.form.parentNode.removeChild(promptInfo.form);
 				self.setWrapperDisplay();
+			}
+		} else {
+			// Clear the password if the callback returned false
+			for(t=0; t<form.elements.length; t++) {
+				var e = form.elements[t];
+				if(e.name === "password") {
+					form.elements[t].value = "";
+				}
 			}
 		}
 		event.preventDefault();
