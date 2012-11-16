@@ -37,7 +37,7 @@ type: text/x-tiddlywiki-html
 </div>
 <!----------- Ordinary tiddlers ----------->
 <div id="storeArea" style="display:none;">
-<<serialize "$1" application/x-tiddler-html-div>>
+<<serialize "[!is[shadow]]" application/x-tiddler-html-div>>
 </div>
 <!----------- Library modules ----------->
 <div id="libraryModules" style="display:none;">

@@ -9,7 +9,7 @@ pushd editions/tw5tiddlyweb > /dev/null
 
 node ../../core/boot.js \
 	--verbose \
-	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../../jermolene.github.com/tiddlyweb.html text/plain [!is[shadow]]\
+	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../../jermolene.github.com/tiddlyweb.html text/plain \
 	|| exit 1
 
 popd > /dev/null

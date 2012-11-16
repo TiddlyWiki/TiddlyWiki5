@@ -34,7 +34,7 @@ type: text/x-tiddlywiki-html
 <!----------- Encrypted tiddlers ----------->
 <div id="encryptedArea" style="display:none;">
 <<serialize "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-encrypted-div>>
-<<serialize "$1" application/x-tiddler-encrypted-div>>
+<<serialize "[!is[shadow]]" application/x-tiddler-encrypted-div>>
 </div>
 <!----------- Library modules ----------->
 <div id="libraryModules" style="display:none;">
