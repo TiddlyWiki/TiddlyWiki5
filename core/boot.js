@@ -110,6 +110,19 @@ $tw.utils.hop = function(object,property) {
 };
 
 /*
+Iterate through all the own properties of an object. Callback is invoked with (element,title,object)
+*/
+$tw.utils.each = function(object,callback) {
+	if(object) {
+		for(var f in object) {
+			if($tw.utils.hop(object,f)) {
+				callback(object[f],f,object);
+			}
+		}
+	}
+}
+
+/*
 Determine if a value is an array
 */
 $tw.utils.isArray = function(value) {
@@ -371,13 +384,9 @@ Apply a callback to each module of a particular type
 */
 $tw.modules.forEachModuleOfType = function(moduleType,callback) {
 	var modules = $tw.modules.types[moduleType];
-	if(modules) {
-		for(var title in modules) {
-			if($tw.utils.hop(modules,title)) {
-				callback(title,$tw.modules.execute(title));
-			}
-		}
-	}
+	$tw.utils.each(modules,function(element,title,object) {
+		callback(title,$tw.modules.execute(title));
+	});
 };
 
 /*
@@ -395,13 +404,11 @@ $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 /*
 Apply the exports of the modules of a particular type to a target object
 */
-$tw.modules.applyMethods = function(moduleType,object) {
+$tw.modules.applyMethods = function(moduleType,targetObject) {
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
-		for(var field in module) {
-			if($tw.utils.hop(module,field)) {
-				object[field] = module[field];
-			}
-		}
+		$tw.utils.each(module,function(element,title,object) {
+			targetObject[title] = module[title];
+		});
 	});
 };
 
@@ -501,55 +508,51 @@ Extract constituent tiddlers from bundle tiddlers so that we can easily access t
 */
 $tw.Wiki.prototype.unpackBundleTiddlers = function() {
 	// Collect up all the plugin tiddlers
-	for(var title in this.tiddlers) {
-		var tiddler = this.tiddlers[title];
+	var self = this;
+	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
 		if(tiddler.fields.type === "application/json" && tiddler.hasField("bundle")) {
 			// Save the bundle information
-			var bundleInfo = this.bundles[title] = JSON.parse(tiddler.fields.text);
+			var bundleInfo = self.bundles[title] = JSON.parse(tiddler.fields.text);
 			// Extract the constituent tiddlers
 			for(var t in bundleInfo.tiddlers) {
 				var constituentTiddler = bundleInfo.tiddlers[t],
 					constituentTitle = bundleInfo.title + "/" + t;
 				// Don't overwrite tiddlers that already exist
-				if(!(constituentTitle in this.bundledTiddlers)) {
+				if(!$tw.utils.hop(self.bundledTiddlers,constituentTitle)) {
 					// Save the tiddler object
-					this.bundledTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
+					self.bundledTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
 				}
 			}
 		}
-	}
+	});
 };
 
 /*
 Define all modules stored in ordinary tiddlers
 */
 $tw.Wiki.prototype.defineTiddlerModules = function() {
-	for(var title in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,title)) {
-			var tiddler = this.getTiddler(title);
-			if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
-				// Define the module
-				$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
-			}
+	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
+		if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
+			// Define the module
+			$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 		}
-	}
+	});
 };
 
 /*
 Register all the module tiddlers that have a module type
 */
 $tw.Wiki.prototype.defineBundledModules = function() {
-	for(var title in this.bundledTiddlers) {
-		if($tw.utils.hop(this.bundledTiddlers,title)) {
-			var tiddler = this.getTiddler(title);
-			if(!$tw.utils.hop(this.tiddlers,title)) {
-				if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
-					// Define the module
-					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
-				}
+	var self = this;
+	$tw.utils.each(this.bundledTiddlers,function(element,title,object) {
+		var tiddler = self.getTiddler(title);
+		if(!$tw.utils.hop(self.tiddlers,title)) { // Don't define the module if it is overidden by an ordinary tiddler
+			if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
+				// Define the module
+				$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 			}
 		}
-	}
+	});
 };
 
 $tw.Wiki.prototype.getTiddler = function(title) {
@@ -684,9 +687,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 					if(decrypted) {
 						var json = JSON.parse(decrypted);
 						for(var title in json) {
-							if($tw.utils.hop(json,title)) {
-								$tw.preloadTiddler(json[title]);
-							}
+							$tw.preloadTiddler(json[title]);
 						}
 						encryptedTiddlers.splice(t,1);
 					}
