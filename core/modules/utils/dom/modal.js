@@ -77,7 +77,7 @@ Modal.prototype.display = function(title,options) {
 	// Setup the link if present
 	if(options.downloadLink) {
 		modalLink.href = options.downloadLink
-		modalLink.appendChild(document.createTextNode("Download"));
+		modalLink.appendChild(document.createTextNode("Right-click to save changes"));
 		modalBody.appendChild(modalLink);
 	}
 	// Render the footer of the message
