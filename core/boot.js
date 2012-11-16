@@ -39,43 +39,6 @@ if(!$tw.browser) {
 	require("./bootprefix.js");
 }
 
-// Crypto helper object
-
-// Setup crypto
-var Crypto = function() {
-	var password = null,
-		callSjcl = function(method,inputText) {
-			var outputText;
-			if(!password) {
-				getPassword();
-			}
-			try {
-				outputText = $tw.crypto.sjcl[method](password,inputText);
-			} catch(ex) {
-				console.log("Crypto error:" + ex);
-				outputText = null;	
-			}
-			return outputText;
-		},
-		getPassword = function() {
-			if($tw.browser) {
-				password = window.prompt("Enter password to decrypt TiddlyWiki");
-			}
-		};
-	this.setPassword = function(newPassword) {
-		password = newPassword;
-	};
-	this.encrypt = function(text) {
-		return callSjcl("encrypt",text);
-	};
-	this.decrypt = function(text) {
-		return callSjcl("decrypt",text);
-	};
-};
-$tw.crypto = new Crypto();
-
-$tw.crypto.sjcl = $tw.browser ? window.sjcl : require("./sjcl.js");
-
 // Boot information
 $tw.boot = {};
 
@@ -273,6 +236,106 @@ $tw.utils.checkVersions = function(required,actual) {
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
 		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+};
+
+/*
+Creates a PasswordPrompt object
+*/
+$tw.utils.PasswordPrompt = function() {
+	// Store of pending password prompts
+	this.passwordPrompts = [];
+	// Create the wrapper
+	this.promptWrapper = document.createElement("div");
+	this.promptWrapper.className = "tw-password-wrapper";
+	document.body.appendChild(this.promptWrapper);
+	// Hide the empty wrapper
+	this.setWrapperDisplay();
+};
+
+/*
+Hides or shows the wrapper depending on whether there are any outstanding prompts
+*/
+$tw.utils.PasswordPrompt.prototype.setWrapperDisplay = function() {
+	if(this.passwordPrompts.length) {
+		this.promptWrapper.style.display = "block";
+	} else {
+		this.promptWrapper.style.display = "none";
+	}
+};
+
+/*
+Adds a new password prompt
+*/
+$tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
+	// Create and add the prompt to the DOM
+	var form = document.createElement("form"),
+		html = ["<h1>" + options.serviceName + "</h1>"];
+	if(!options.noUserName) {
+		html.push("<input type='text' name='username' class='input-small' placeholder='Username'>");
+	}
+	html.push("<input type='password' name='password' class='input-small' placeholder='Password'>",
+			"<button type='submit' class='btn'>Login</button>");
+	form.className = "form-inline";
+	form.innerHTML = html.join("\n");
+	this.promptWrapper.appendChild(form);
+	// Add a submit event handler
+	var self = this;
+	form.addEventListener("submit",function(event) {
+		// Collect the form data
+		var data = {};
+		for(var t=0; t<form.elements.length; t++) {
+			var e = form.elements[t];
+			if(e.name && e.value) {
+				data[e.name] = e.value;
+			}
+		}
+		// Call the callback
+		if(options.callback(data)) {
+			// Remove the prompt if the callback returned true
+			var i = self.passwordPrompts.indexOf(promptInfo);
+			if(i !== -1) {
+				self.passwordPrompts.splice(i,1);
+				promptInfo.form.parentNode.removeChild(promptInfo.form);
+				self.setWrapperDisplay();
+			}
+		}
+		event.preventDefault();
+		return false;
+	},true);
+	// Add the prompt to the list
+	var promptInfo = {
+		serviceName: options.serviceName,
+		callback: options.callback,
+		form: form
+	};
+	this.passwordPrompts.push(promptInfo);
+	// Make sure the wrapper is displayed
+	this.setWrapperDisplay();
+};
+
+// Crypto helper object for encrypted content
+$tw.utils.Crypto = function() {
+	var sjcl = $tw.browser ? window.sjcl : require("./sjcl.js"),
+		password = null,
+		callSjcl = function(method,inputText) {
+			var outputText;
+			try {
+				outputText = sjcl[method](password,inputText);
+			} catch(ex) {
+				console.log("Crypto error:" + ex);
+				outputText = null;	
+			}
+			return outputText;
+		};
+	this.setPassword = function(newPassword) {
+		password = newPassword;
+	};
+	this.encrypt = function(text) {
+		return callSjcl("encrypt",text);
+	};
+	this.decrypt = function(text) {
+		return callSjcl("decrypt",text);
+	};
 };
 
 /////////////////////////// Server initialisation
@@ -588,6 +651,29 @@ $tw.wiki = new $tw.Wiki();
 if($tw.browser) {
 
 /*
+Get any encrypted tiddlers
+*/
+$tw.boot.getEncryptedTiddlers = function() {
+	var encryptedArea = document.getElementById("encryptedArea"),
+		encryptedTiddlers = [];
+	if(encryptedArea) {
+		for(var t = 0; t <encryptedArea.childNodes.length; t++) {
+			var childNode = encryptedArea.childNodes[t];
+			if(childNode.hasAttribute && childNode.hasAttribute("data-tw-encrypted-tiddlers")) {
+				var e = childNode.firstChild;
+				while(e && e.nodeName.toLowerCase() !== "pre") {
+					e = e.nextSibling;
+				}
+				encryptedTiddlers.push($tw.utils.htmlDecode(e.innerHTML));
+			}
+		}
+		return encryptedTiddlers;
+	} else {
+		return null;
+	}
+};
+
+/*
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
 */
 $tw.modules.execute = function(moduleName,moduleRoot) {
@@ -660,30 +746,12 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 					return null;
 				}
 			},
-			extractEncryptedTiddlers = function(node) {
-				if(node.hasAttribute && node.hasAttribute("data-tw-encrypted-tiddlers")) {
-					var e = node.firstChild;
-					while(e && e.nodeName.toLowerCase() !== "pre") {
-						e = e.nextSibling;
-					}
-					var jsonTiddlers = JSON.parse($tw.crypto.decrypt($tw.utils.htmlDecode(e.innerHTML))),
-						title,
-						result = [];
-					for(title in jsonTiddlers) {
-						result.push(jsonTiddlers[title]);
-					}
-					return result;
-				} else {
-					return null;
-				}
-			},
 			t,result = [];
 		if(node) {
 			for(t = 0; t < node.childNodes.length; t++) {
 					var tiddlers = extractTextTiddlers(node.childNodes[t]),
 						childNode = node.childNodes[t];
 					tiddlers = tiddlers || extractModuleTiddlers(childNode);
-					tiddlers = tiddlers || extractEncryptedTiddlers(childNode);
 					if(tiddlers) {
 						result.push.apply(result,tiddlers);
 					}
@@ -719,6 +787,14 @@ $tw.loadTiddlers = function() {
 /////////////////////////// Server definitions
 
 if(!$tw.browser) {
+
+/*
+Get any encrypted tiddlers
+*/
+$tw.boot.getEncryptedTiddlers = function() {
+	// Storing encrypted tiddlers on the server isn't supported yet
+	return null;
+};
 
 /*
 Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file)
@@ -898,27 +974,79 @@ $tw.loadTiddlers = function() {
 // End of if(!$tw.browser)	
 }
 
-/////////////////////////// Final initialisation
+/////////////////////////// Starting up
 
-
-// Install built in tiddler fields modules
-$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
-// Install the tiddler deserializer modules
-$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
-// Load tiddlers
-$tw.loadTiddlers();
-// Unpack bundle tiddlers
-$tw.wiki.unpackBundleTiddlers();
-// Register typed modules from the tiddlers we've just loaded
-if(!$tw.browser) {
-	$tw.wiki.defineTiddlerModules();
-}
-$tw.wiki.defineBundledModules();
-// Run any startup modules
-$tw.modules.forEachModuleOfType("startup",function(title,module) {
-	if(module.startup) {
-		module.startup();
+/*
+Main startup function
+*/
+$tw.boot.startup = function() {
+	// Install built in tiddler fields modules
+	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
+	// Install the tiddler deserializer modules
+	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Load tiddlers
+	$tw.loadTiddlers();
+	// Unpack bundle tiddlers
+	$tw.wiki.unpackBundleTiddlers();
+	// Register typed modules from the tiddlers we've just loaded
+	if(!$tw.browser) {
+		$tw.wiki.defineTiddlerModules();
 	}
-});
+	$tw.wiki.defineBundledModules();
+	// Run any startup modules
+	$tw.modules.forEachModuleOfType("startup",function(title,module) {
+		if(module.startup) {
+			module.startup();
+		}
+	});
+};
+
+/*
+Starting up
+*/
+// Initialise crypto object
+$tw.crypto = new $tw.utils.Crypto();
+// Initialise password prompter
+if($tw.browser) {
+	$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
+}
+// Get any encrypted tiddlers
+var encryptedTiddlers = $tw.boot.getEncryptedTiddlers();
+// Check if we need a password to decrypt tiddlers
+if($tw.browser && encryptedTiddlers) {
+	// Prompt for the password
+	$tw.passwordPrompt.createPrompt({
+		serviceName: "Enter a password to decrypt this TiddlyWiki",
+		noUserName: true,
+		callback: function(data) {
+			// Attempt to decrypt the tiddlers
+			$tw.crypto.setPassword(data.password);
+			for(var t=encryptedTiddlers.length-1; t>=0; t--) {
+				var decrypted = $tw.crypto.decrypt(encryptedTiddlers[t]);
+				if(decrypted) {
+					var json = JSON.parse(decrypted);
+					for(var title in json) {
+						if($tw.utils.hop(json,title)) {
+							$tw.preloadTiddler(json[title]);
+						}
+					}
+					encryptedTiddlers.splice(t,1);
+				}
+			}
+			// Check if we're all done
+			if(encryptedTiddlers.length === 0) {
+				// Continue startup
+				$tw.boot.startup();
+				// Exit and remove the password prompt
+				return true;
+			} else {
+				// We didn't decrypt everything, so continue to prompt for password
+				return false;
+			}
+		}
+	});
+} else {
+	$tw.boot.startup();
+}
 
 })();

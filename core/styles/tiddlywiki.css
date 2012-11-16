@@ -5919,6 +5919,37 @@ body {
 }
 
 /*
+Password prompts
+*/
+
+.tw-password-wrapper {
+  position: fixed;
+  top: 1em;
+  left: 50%;
+  z-index: 20000;
+  width: 480px;
+  padding: 16px 16px 16px 16px;
+  margin-left: -264px;
+  color: #000;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  background-color: #c5ebb7;
+  border: 8px solid #a4c598;
+  -webkit-border-radius: 8px;
+     -moz-border-radius: 8px;
+          border-radius: 8px;
+}
+
+.tw-password-wrapper form {
+  text-align: left;
+}
+
+.tw-password-wrapper h1 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+/*
 Tweaks for full screen mode
 */
 
