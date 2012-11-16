@@ -1,0 +1,13 @@
+title: $:/messages/Download
+type: text/x-tiddlywiki
+subtitle: Download changes
+footer: <<button close class:"btn btn-primary"><Close>>
+help: http://five.tiddlywiki.com/#help:DownloadingChanges
+
+Your browser only supports manual saving.
+
+To save your modified wiki, right click on the download link below and select "Download file" or "Save file", and then choose the folder and filename.
+
+//You can marginally speed things up by clicking the link with the control key (Windows) or the options/alt key (Mac OS X). You will not be prompted for the folder or filename, but your browser is likely to give it an unrecognisable name -- you may need to rename the file to include an `.html` extension before you can do anything useful with it.//
+
+On smartphones that do not allow files to be downloaded you can instead bookmark the link, and then sync your bookmarks to a desktop computer from where the wiki can be saved normally.
