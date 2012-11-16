@@ -3,7 +3,7 @@ tags: docs mechanism
 
 !Introduction
 
-TiddlyWiki5 is based on a 600-line boot kernel that runs on node.js or in the browser, with all other functionality dynamically loaded as plugins.
+TiddlyWiki5 is based on a 1,000 line boot kernel that runs on node.js or in the browser, with all other functionality added via dynamically loaded modules.
 
 The kernel boots just enough of the TiddlyWiki environment to allow it to load tiddlers and execute JavaScript modules. Plugin modules are written like `node.js` modules.
 
