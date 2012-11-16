@@ -13,3 +13,4 @@ popd > /dev/null
 
 # run jshint
 jshint core
+jshint plugins
