@@ -32,7 +32,13 @@ exports.startup = function() {
 	// Get the login status
 	$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
 		if(!isLoggedIn) {
-//			$tw.plugins.tiddlyweb.login(username,password);
+			$tw.passwordPrompt.createPrompt({
+				serviceName: "Login to TiddlySpace",
+				callback: function(data) {
+					$tw.plugins.tiddlyweb.login(data.username,data.password);
+					return true; // Get rid of the password prompt
+				}
+			});
 		}
 	});
 };
@@ -138,7 +144,6 @@ $tw.plugins.tiddlyweb.httpRequest = function(options) {
 	}
 	client.onreadystatechange = function() {
 		if(this.readyState === 4) {
-console.log("onreadystatechange",this.status,this.statusText,this.getAllResponseHeaders());
 			if(this.status === 200) {
 				// success!
 				options.callback(null,this.responseText);
