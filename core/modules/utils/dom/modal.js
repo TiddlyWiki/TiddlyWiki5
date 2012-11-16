@@ -16,7 +16,15 @@ var Modal = function(wiki) {
 	this.wiki = wiki;
 };
 
-Modal.prototype.display = function(title) {
+/*
+Display a modal dialogue
+	title: Title of tiddler to display
+	options: see below
+Options include:
+	downloadLink: Text of a big download link to include
+*/
+Modal.prototype.display = function(title,options) {
+	options = options || {};
 	// Create the wrapper divs
 	var wrapper = document.createElement("div"),
 		modalBackdrop = document.createElement("div"),
@@ -24,6 +32,7 @@ Modal.prototype.display = function(title) {
 		modalHeader = document.createElement("div"),
 		headerTitle = document.createElement("h1"),
 		modalBody = document.createElement("div"),
+		modalLink = document.createElement("a"),
 		modalFooter = document.createElement("div"),
 		modalFooterHelp = document.createElement("span"),
 		modalFooterButtons = document.createElement("span"),
@@ -34,6 +43,7 @@ Modal.prototype.display = function(title) {
 	$tw.utils.addClass(modalWrapper,"modal");
 	$tw.utils.addClass(modalHeader,"modal-header");
 	$tw.utils.addClass(modalBody,"modal-body");
+	$tw.utils.addClass(modalLink,"btn btn-large btn-block btn-success");
 	$tw.utils.addClass(modalFooter,"modal-footer");
 	// Join them together
 	wrapper.appendChild(modalBackdrop);
@@ -64,6 +74,12 @@ Modal.prototype.display = function(title) {
 	this.wiki.addEventListener("",function(changes) {
 		bodyRenderer.refreshInDom(changes);
 	});
+	// Setup the link if present
+	if(options.downloadLink) {
+		modalLink.href = options.downloadLink
+		modalLink.appendChild(document.createTextNode("Download"));
+		modalBody.appendChild(modalLink);
+	}
 	// Render the footer of the message
 	if(tiddler && tiddler.fields && tiddler.fields.help) {
 		var link = document.createElement("a");
