@@ -5924,7 +5924,7 @@ Password prompts
 
 .tw-password-wrapper {
   position: fixed;
-  top: 1em;
+  top: 4em;
   left: 50%;
   z-index: 20000;
   width: 480px;
