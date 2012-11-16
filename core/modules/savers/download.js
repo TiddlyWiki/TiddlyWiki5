@@ -23,10 +23,7 @@ DownloadSaver.prototype.save = function(text) {
 	var link = document.createElement("a");
 	link.setAttribute("target","_blank");
 	link.setAttribute("href","data:text/html," + encodeURIComponent(text));
-	// Use the download attribute to download it if it is supported
-	if(link.download !== undefined) {
-		link.setAttribute("download","tiddlywiki.html");
-	}
+	link.setAttribute("download","tiddlywiki.html");
 	link.click();
 	return true;
 };
@@ -36,14 +33,14 @@ Information about this saver
 */
 DownloadSaver.prototype.info = {
 	name: "download",
-	priority: 0
+	priority: 100
 };
 
 /*
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
-	return true;
+	return document.createElement("a").download !== undefined;
 };
 
 /*
