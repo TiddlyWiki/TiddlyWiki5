@@ -20,8 +20,8 @@ TiddlyFoxSaver.prototype.save = function(text) {
 	if(messageBox) {
 		// Create the message element and put it in the message box
 		var message = document.createElement("div");
-		message.setAttribute("tiddlyfox-path",document.location.pathname);
-		message.setAttribute("tiddlyfox-content",text);
+		message.setAttribute("data-tiddlyfox-path",document.location.pathname);
+		message.setAttribute("data-tiddlyfox-content",text);
 		messageBox.appendChild(message);
 		// Create and dispatch the custom event to the extension
 		var event = document.createEvent("Events");
