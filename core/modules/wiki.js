@@ -711,7 +711,22 @@ exports.initServerConnections = function() {
 	this.serverConnections = {};
 	var self = this;
 	$tw.modules.forEachModuleOfType("serverconnection",function(title,module) {
-		self.serverConnections[title] = module;
+		// Get the associated syncer
+		if(module.syncer) {
+			var syncer = self.syncers[module.syncer];
+			if(syncer) {
+				// Add the connection and save information about it
+				var connection = syncer.addConnection(module);
+				if(connection instanceof Error) {
+					console.log("Error adding connection: " + connection);
+				} else {
+					self.serverConnections[title] = {
+						syncer: syncer,
+						connection: connection
+					};
+				}
+			}
+		}
 	});
 };
 

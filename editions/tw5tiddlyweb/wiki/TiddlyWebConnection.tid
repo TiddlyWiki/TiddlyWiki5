@@ -4,4 +4,5 @@ module-type: serverconnection
 
 syncer: tiddlywebsyncer
 # replace with a tiddlyspace to which you have write access
-server: http://tw5tiddlyweb.tiddlyspace.com/
+host: http://tw5tiddlyweb.tiddlyspace.com/
+recipe: tw5tiddlyweb_public

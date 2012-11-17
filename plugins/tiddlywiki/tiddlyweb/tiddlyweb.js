@@ -16,13 +16,7 @@ Main TiddlyWeb integration module
 Creates a TiddlyWebSyncer object
 */
 var TiddlyWebSyncer = function(options) {
-	// Mark us as not logged in
-	$tw.wiki.addTiddler({
-		title: TiddlyWebSyncer.titleIsLoggedIn,
-		text: "no"
-	});
-	// Get the login status
-	this.getStatus();
+	this.connection = undefined;
 };
 
 TiddlyWebSyncer.titleIsLoggedIn = "$:/plugins/tiddlyweb/IsLoggedIn";
@@ -34,6 +28,27 @@ Error handling
 TiddlyWebSyncer.prototype.showError = function(error) {
 	alert("TiddlyWeb error: " + error);
 	console.log("TiddlyWeb error: " + error);
+};
+
+TiddlyWebSyncer.prototype.addConnection = function(connection) {
+	// Check if we've already got a connection
+	if(this.connection) {
+		return Error("TiddlyWebSyncer can only handle a single connection");
+	}
+	// Check the connection has its constituent parts
+	if(!connection.host || !connection.recipe) {
+		return Error("Missing connection data")
+	}
+	// Mark us as not logged in
+	$tw.wiki.addTiddler({
+		title: TiddlyWebSyncer.titleIsLoggedIn,
+		text: "no"
+	});
+	// Save and return the connection object
+	this.connection = connection;
+	// Get the login status
+	this.getStatus();
+	return ""; // We only support a single connection
 };
 
 /*
@@ -74,7 +89,7 @@ TiddlyWebSyncer.prototype.getCsrfToken = function() {
 TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	// Get status
 	this.httpRequest({
-		url: "http://tw5tiddlyweb.tiddlyspace.com/status",
+		url: this.connection.host + "status",
 		callback: function(err,data) {
 			// Decode the status JSON
 			var json = null;
@@ -134,7 +149,7 @@ Attempt to login to TiddlyWeb.
 TiddlyWebSyncer.prototype.login = function(username,password,callback) {
 	var self = this;
 	var httpRequest = this.httpRequest({
-		url: "http://tw5tiddlyweb.tiddlyspace.com/challenge/tiddlywebplugins.tiddlyspace.cookie_form",
+		url: this.connection.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
 		type: "POST",
 		data: {
 			user: username,
@@ -164,7 +179,7 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 	options = options || {};
 	var self = this;
 	var httpRequest = this.httpRequest({
-		url: "http://tw5tiddlyweb.tiddlyspace.com/logout",
+		url: this.connection.host + "logout",
 		type: "POST",
 		data: {
 			csrf_token: this.getCsrfToken(),
