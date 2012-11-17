@@ -3,10 +3,10 @@ title: HelloThere
 Experimenting with TiddlyWeb integration for TiddlyWiki5.
 
 <<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:nomatch text:yes><
-Log in to TiddlyWeb: <<button message:login><Login>>
+Log in to TiddlyWeb: <<button message:login class:"btn btn-info"><Login>>
 >>
 <<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:match text:yes><
-Log out of TiddlyWeb: <<button message:logout><Logout>>
+Log out of TiddlyWeb: <<button message:logout class:"btn btn-warning"><Logout>>
 >>
 
 TiddlyWeb [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: (($:/plugins/tiddlyweb/IsLoggedIn))
