@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/tiddlyweb/tiddlyweb.js
 type: application/javascript
-module-type: browser-startup
+module-type: syncer
 
 Main TiddlyWeb integration module
 
@@ -12,45 +12,55 @@ Main TiddlyWeb integration module
 /*global $tw: false */
 "use strict";
 
-$tw.plugins.tiddlyweb = {
-	titleIsLoggedIn: "$:/plugins/tiddlyweb/IsLoggedIn",
-	titleUserName: "$:/plugins/tiddlyweb/UserName"
-};
-
 /*
-Startup function that sets up TiddlyWeb and logs the user in. After login, any tiddlyweb-startup modules are executed.
+Creates a TiddlyWebSyncer object
 */
-exports.startup = function() {
-	if(!$tw.browser) {
-		return;
-	}
+var TiddlyWebSyncer = function(options) {
 	// Mark us as not logged in
 	$tw.wiki.addTiddler({
-		title: $tw.plugins.tiddlyweb.titleIsLoggedIn,
+		title: TiddlyWebSyncer.titleIsLoggedIn,
 		text: "no"
 	});
 	// Get the login status
-	$tw.plugins.tiddlyweb.getStatus();
+	this.getStatus();
 };
+
+TiddlyWebSyncer.titleIsLoggedIn = "$:/plugins/tiddlyweb/IsLoggedIn";
+TiddlyWebSyncer.titleUserName = "$:/plugins/tiddlyweb/UserName";
 
 /*
 Error handling
 */
-$tw.plugins.tiddlyweb.showError = function(error) {
+TiddlyWebSyncer.prototype.showError = function(error) {
 	alert("TiddlyWeb error: " + error);
 	console.log("TiddlyWeb error: " + error);
 };
 
 /*
+Handle syncer messages
+*/
+TiddlyWebSyncer.prototype.handleEvent = function(event) {
+	switch(event.type) {
+		case "tw-login":
+			this.promptLogin();
+			break;
+		case "tw-logout":
+			this.logout();
+			break;
+	}
+};
+
+/*
 Invoke any tiddlyweb-startup modules
 */
-$tw.plugins.tiddlyweb.invokeTiddlyWebStartupModules = function(loggedIn) {
+TiddlyWebSyncer.prototype.invokeTiddlyWebStartupModules = function(loggedIn) {
 	$tw.modules.forEachModuleOfType("tiddlyweb-startup",function(title,module) {
 		module.startup(loggedIn);
 	});
+
 };
 
-$tw.plugins.tiddlyweb.getCsrfToken = function() {
+TiddlyWebSyncer.prototype.getCsrfToken = function() {
 	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
 		match = regex.exec(document.cookie),
 		csrf = null;
@@ -58,11 +68,12 @@ $tw.plugins.tiddlyweb.getCsrfToken = function() {
 		csrf = match[1];
 	}
 	return csrf;
+
 };
 
-$tw.plugins.tiddlyweb.getStatus = function(callback) {
+TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	// Get status
-	$tw.plugins.tiddlyweb.httpRequest({
+	this.httpRequest({
 		url: "http://tw5tiddlyweb.tiddlyspace.com/status",
 		callback: function(err,data) {
 			// Decode the status JSON
@@ -76,16 +87,16 @@ $tw.plugins.tiddlyweb.getStatus = function(callback) {
 				var isLoggedIn = json.username !== "GUEST";
 				// Set the various status tiddlers
 				$tw.wiki.addTiddler({
-					title: $tw.plugins.tiddlyweb.titleIsLoggedIn,
+					title: TiddlyWebSyncer.titleIsLoggedIn,
 					text: isLoggedIn ? "yes" : "no"
 				});
 				if(isLoggedIn) {
 					$tw.wiki.addTiddler({
-						title: $tw.plugins.tiddlyweb.titleUserName,
+						title: TiddlyWebSyncer.titleUserName,
 						text: json.username
 					});
 				} else {
-					$tw.wiki.deleteTiddler($tw.plugins.tiddlyweb.titleUserName);
+					$tw.wiki.deleteTiddler(TiddlyWebSyncer.titleUserName);
 				}
 			}
 			// Invoke the callback if present
@@ -99,13 +110,14 @@ $tw.plugins.tiddlyweb.getStatus = function(callback) {
 /*
 Dispay a password prompt and allow the user to login
 */
-$tw.plugins.tiddlyweb.promptLogin = function() {
-	$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
+TiddlyWebSyncer.prototype.promptLogin = function() {
+	var self = this;
+	this.getStatus(function(isLoggedIn,json) {
 		if(!isLoggedIn) {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: "Login to TiddlySpace",
 				callback: function(data) {
-					$tw.plugins.tiddlyweb.login(data.username,data.password);
+					self.login(data.username,data.password);
 					return true; // Get rid of the password prompt
 				}
 			});
@@ -119,8 +131,9 @@ Attempt to login to TiddlyWeb.
 	password: password
 	callback: invoked with arguments (err,isLoggedIn)
 */
-$tw.plugins.tiddlyweb.login = function(username,password,callback) {
-	var httpRequest = $tw.plugins.tiddlyweb.httpRequest({
+TiddlyWebSyncer.prototype.login = function(username,password,callback) {
+	var self = this;
+	var httpRequest = this.httpRequest({
 		url: "http://tw5tiddlyweb.tiddlyspace.com/challenge/tiddlywebplugins.tiddlyspace.cookie_form",
 		type: "POST",
 		data: {
@@ -134,7 +147,7 @@ $tw.plugins.tiddlyweb.login = function(username,password,callback) {
 					callback(err);
 				}
 			} else {
-				$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
+				self.getStatus(function(isLoggedIn,json) {
 					if(callback) {
 						callback(null,isLoggedIn);
 					}
@@ -147,20 +160,21 @@ $tw.plugins.tiddlyweb.login = function(username,password,callback) {
 /*
 Attempt to log out of TiddlyWeb
 */
-$tw.plugins.tiddlyweb.logout = function(options) {
+TiddlyWebSyncer.prototype.logout = function(options) {
 	options = options || {};
-	var httpRequest = $tw.plugins.tiddlyweb.httpRequest({
+	var self = this;
+	var httpRequest = this.httpRequest({
 		url: "http://tw5tiddlyweb.tiddlyspace.com/logout",
 		type: "POST",
 		data: {
-			csrf_token: $tw.plugins.tiddlyweb.getCsrfToken(),
+			csrf_token: this.getCsrfToken(),
 			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
 		},
 		callback: function(err,data) {
 			if(err) {
 				console.log("logout error",err);
 			} else {
-				$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
+				self.getStatus(function(isLoggedIn,json) {
 					console.log("after logout, isLoggedIn",isLoggedIn);
 				});
 				console.log("Result of logout",data,httpRequest);
@@ -175,7 +189,7 @@ Some quick and dirty HTTP functions; to be refactored later. Options are:
 	type: GET, PUT, POST etc
 	callback: function invoked with (err,data)
 */
-$tw.plugins.tiddlyweb.httpRequest = function(options) {
+TiddlyWebSyncer.prototype.httpRequest = function(options) {
 	var type = options.type || "GET",
 		client = new XMLHttpRequest(),
 		data = "",
@@ -211,5 +225,11 @@ $tw.plugins.tiddlyweb.httpRequest = function(options) {
 	client.send(data);
 	return client;
 };
+
+// Only export anything on the browser
+if($tw.browser) {
+	exports.name = "tiddlywebsyncer";
+	exports.syncer = TiddlyWebSyncer;
+}
 
 })();

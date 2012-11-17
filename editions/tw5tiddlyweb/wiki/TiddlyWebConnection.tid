@@ -2,5 +2,6 @@ title: TiddlyWebConnection
 type: application/x-tiddler-dictionary
 module-type: serverconnection
 
-protocol: http
-host: tiddlyspace.com
+syncer: tiddlywebsyncer
+# replace with a tiddlyspace to which you have write access
+server: http://tw5tiddlyweb.tiddlyspace.com/

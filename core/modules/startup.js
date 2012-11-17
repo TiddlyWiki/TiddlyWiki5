@@ -34,9 +34,10 @@ exports.startup = function() {
 	$tw.wiki.initMacros();
 	$tw.wiki.initEditors();
 	$tw.wiki.initFieldViewers();
-	$tw.wiki.initStoryViews();
 	$tw.wiki.initListViews();
 	$tw.wiki.initParsers();
+	$tw.wiki.initSyncers();
+	$tw.wiki.initServerConnections();
 	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Host-specific startup
@@ -57,6 +58,12 @@ exports.startup = function() {
 		document.addEventListener("tw-modal",function(event) {
 			$tw.modal.display(event.param);
 		},false);
+		// Install the syncer message mechanism
+		var handleSyncerEvent = function(event) {
+			$tw.wiki.handleSyncerEvent.call($tw.wiki,event);
+		};
+		document.addEventListener("tw-login",handleSyncerEvent,false);
+		document.addEventListener("tw-logout",handleSyncerEvent,false);
 		// Install the scroller
 		$tw.scroller = new $tw.utils.Scroller();
 		// Install the sprite factory
@@ -100,7 +107,7 @@ exports.startup = function() {
 			$tw.renderer.refreshInDom(changes);
 		});
 	} else {
-		// Start a commander with the command line arguments
+		// On the server, start a commander with the command line arguments
 		commander = new $tw.Commander(
 			Array.prototype.slice.call(process.argv,2),
 			function(err) {

@@ -558,18 +558,6 @@ exports.initListViews = function(moduleType) {
 };
 
 /*
-Install view modules for the story macro
-*/
-exports.initStoryViews = function(moduleType) {
-	moduleType = moduleType || "storyview";
-	var storyMacro = this.macros.story;
-	if(storyMacro) {
-		storyMacro.viewers = {};
-		$tw.modules.applyMethods(moduleType,storyMacro.viewers);
-	}
-};
-
-/*
 Select the appropriate saver modules and set them up
 */
 exports.initSavers = function(moduleType) {
@@ -699,6 +687,41 @@ exports.search = function(text,options) {
 		}
 	}
 	return results;
+};
+
+/*
+Initialise syncers
+*/
+exports.initSyncers = function() {
+	this.syncers = {};
+	var self = this;
+	$tw.modules.forEachModuleOfType("syncer",function(title,module) {
+		if(module.name && module.syncer) {
+			self.syncers[module.name] = new module.syncer({
+				wiki: self
+			});
+		}
+	});
+};
+
+/*
+Initialise server connections
+*/
+exports.initServerConnections = function() {
+	this.serverConnections = {};
+	var self = this;
+	$tw.modules.forEachModuleOfType("serverconnection",function(title,module) {
+		self.serverConnections[title] = module;
+	});
+};
+
+/*
+Handle a syncer message
+*/
+exports.handleSyncerEvent = function(event) {
+	for(var syncer in this.syncers) {
+		this.syncers[syncer].handleEvent(event);
+	}
 };
 
 })();
