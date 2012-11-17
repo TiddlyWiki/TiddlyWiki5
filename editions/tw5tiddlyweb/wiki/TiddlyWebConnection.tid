@@ -1,0 +1,6 @@
+title: TiddlyWebConnection
+type: application/x-tiddler-dictionary
+module-type: serverconnection
+
+protocol: http
+host: tiddlyspace.com
