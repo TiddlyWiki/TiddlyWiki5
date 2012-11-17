@@ -30,49 +30,7 @@ exports.startup = function() {
 		text: "no"
 	});
 	// Get the login status
-	$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
-		if(!isLoggedIn) {
-			$tw.passwordPrompt.createPrompt({
-				serviceName: "Login to TiddlySpace",
-				callback: function(data) {
-					$tw.plugins.tiddlyweb.login(data.username,data.password);
-					return true; // Get rid of the password prompt
-				}
-			});
-		}
-	});
-};
-
-$tw.plugins.tiddlyweb.getStatus = function(callback) {
-	// Get status
-	$tw.plugins.tiddlyweb.httpRequest({
-		url: "http://tw5tiddlyweb.tiddlyspace.com/status",
-		callback: function(err,data) {
-			var json = null;
-			try {
-				json = JSON.parse(data);
-			} catch (e) {
-			}
-			if(json) {
-				var isLoggedIn = json.username !== "GUEST";
-				$tw.wiki.addTiddler({
-					title: $tw.plugins.tiddlyweb.titleIsLoggedIn,
-					text: isLoggedIn ? "yes" : "no"
-				});
-				if(isLoggedIn) {
-					$tw.wiki.addTiddler({
-						title: $tw.plugins.tiddlyweb.titleUserName,
-						text: json.username
-					});
-				} else {
-					$tw.wiki.deleteTiddler($tw.plugins.tiddlyweb.titleUserName);
-				}
-			}
-			if(callback) {
-				callback(isLoggedIn,json);
-			}
-		}
-	});
+	$tw.plugins.tiddlyweb.getStatus();
 };
 
 /*
@@ -92,11 +50,76 @@ $tw.plugins.tiddlyweb.invokeTiddlyWebStartupModules = function(loggedIn) {
 	});
 };
 
+$tw.plugins.tiddlyweb.getCsrfToken = function() {
+	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
+		match = regex.exec(document.cookie),
+		csrf = null;
+	if (match && (match.length === 2)) {
+		csrf = match[1];
+	}
+	return csrf;
+};
+
+$tw.plugins.tiddlyweb.getStatus = function(callback) {
+	// Get status
+	$tw.plugins.tiddlyweb.httpRequest({
+		url: "http://tw5tiddlyweb.tiddlyspace.com/status",
+		callback: function(err,data) {
+			// Decode the status JSON
+			var json = null;
+			try {
+				json = JSON.parse(data);
+			} catch (e) {
+			}
+			if(json) {
+				// Check if we're logged in
+				var isLoggedIn = json.username !== "GUEST";
+				// Set the various status tiddlers
+				$tw.wiki.addTiddler({
+					title: $tw.plugins.tiddlyweb.titleIsLoggedIn,
+					text: isLoggedIn ? "yes" : "no"
+				});
+				if(isLoggedIn) {
+					$tw.wiki.addTiddler({
+						title: $tw.plugins.tiddlyweb.titleUserName,
+						text: json.username
+					});
+				} else {
+					$tw.wiki.deleteTiddler($tw.plugins.tiddlyweb.titleUserName);
+				}
+			}
+			// Invoke the callback if present
+			if(callback) {
+				callback(isLoggedIn,json);
+			}
+		}
+	});
+};
+
 /*
-Attempt to login to TiddlyWeb
+Dispay a password prompt and allow the user to login
 */
-$tw.plugins.tiddlyweb.login = function(username,password,options) {
-	options = options || {};
+$tw.plugins.tiddlyweb.promptLogin = function() {
+	$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
+		if(!isLoggedIn) {
+			$tw.passwordPrompt.createPrompt({
+				serviceName: "Login to TiddlySpace",
+				callback: function(data) {
+					$tw.plugins.tiddlyweb.login(data.username,data.password);
+					return true; // Get rid of the password prompt
+				}
+			});
+		}
+	});
+};
+
+/*
+Attempt to login to TiddlyWeb.
+	username: username
+	password: password
+	callback: invoked with arguments (err,isLoggedIn)
+*/
+$tw.plugins.tiddlyweb.login = function(username,password,callback) {
 	var httpRequest = $tw.plugins.tiddlyweb.httpRequest({
 		url: "http://tw5tiddlyweb.tiddlyspace.com/challenge/tiddlywebplugins.tiddlyspace.cookie_form",
 		type: "POST",
@@ -107,12 +130,40 @@ $tw.plugins.tiddlyweb.login = function(username,password,options) {
 		},
 		callback: function(err,data) {
 			if(err) {
-				console.log("login error",err);
+				if(callback) {
+					callback(err);
+				}
 			} else {
 				$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
-					console.log("isLoggedIn",isLoggedIn);
+					if(callback) {
+						callback(null,isLoggedIn);
+					}
 				});
-				console.log("Result of login",data,httpRequest);
+			}
+		}
+	});
+};
+
+/*
+Attempt to log out of TiddlyWeb
+*/
+$tw.plugins.tiddlyweb.logout = function(options) {
+	options = options || {};
+	var httpRequest = $tw.plugins.tiddlyweb.httpRequest({
+		url: "http://tw5tiddlyweb.tiddlyspace.com/logout",
+		type: "POST",
+		data: {
+			csrf_token: $tw.plugins.tiddlyweb.getCsrfToken(),
+			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
+		},
+		callback: function(err,data) {
+			if(err) {
+				console.log("logout error",err);
+			} else {
+				$tw.plugins.tiddlyweb.getStatus(function(isLoggedIn,json) {
+					console.log("after logout, isLoggedIn",isLoggedIn);
+				});
+				console.log("Result of logout",data,httpRequest);
 			}
 		}
 	});

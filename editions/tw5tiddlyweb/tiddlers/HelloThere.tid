@@ -2,6 +2,14 @@ title: HelloThere
 
 Experimenting with TiddlyWeb integration for TiddlyWiki5.
 
-TiddlyWeb login status: (($:/plugins/tiddlyweb/IsLoggedIn))
+<<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:nomatch text:yes><
+Log in to TiddlyWeb: <<tiddlyweb.login><Login>>
+>>
+<<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:match text:yes><
+Log out of TiddlyWeb: <<tiddlyweb.logout><Logout>>
+>>
 
-TiddlyWeb username: (($:/plugins/tiddlyweb/UserName))
+TiddlyWeb [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: (($:/plugins/tiddlyweb/IsLoggedIn))
+
+TiddlyWeb [[username|$:/plugins/tiddlyweb/UserName]]: (($:/plugins/tiddlyweb/UserName))
+
