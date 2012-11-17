@@ -198,11 +198,13 @@ $tw.utils.parseStringArray = function(value) {
 $tw.utils.parseFields = function(text,fields) {
 	fields = fields || {};
 	text.split(/\r?\n/mg).forEach(function(line) {
-		var p = line.indexOf(":");
-		if(p !== -1) {
-			var field = line.substr(0, p).trim(),
-				value = line.substr(p+1).trim();
-			fields[field] = value;
+		if(line.charAt(0) !== "#") {
+			var p = line.indexOf(":");
+			if(p !== -1) {
+				var field = line.substr(0, p).trim(),
+					value = line.substr(p+1).trim();
+				fields[field] = value;
+			}
 		}
 	});
 	return fields;
