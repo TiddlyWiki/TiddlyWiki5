@@ -172,12 +172,9 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 		},
 		callback: function(err,data) {
 			if(err) {
-				console.log("logout error",err);
+				self.showError("logout error: " + err);
 			} else {
-				self.getStatus(function(isLoggedIn,json) {
-					console.log("after logout, isLoggedIn",isLoggedIn);
-				});
-				console.log("Result of logout",data,httpRequest);
+				self.getStatus();
 			}
 		}
 	});
