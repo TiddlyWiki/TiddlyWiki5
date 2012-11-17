@@ -196,6 +196,7 @@ $tw.utils.parseStringArray = function(value) {
 
 // Parse a block of name:value fields. The `fields` object is used as the basis for the return value
 $tw.utils.parseFields = function(text,fields) {
+	fields = fields || {};
 	text.split(/\r?\n/mg).forEach(function(line) {
 		var p = line.indexOf(":");
 		if(p !== -1) {
@@ -540,9 +541,21 @@ Define all modules stored in ordinary tiddlers
 */
 $tw.Wiki.prototype.defineTiddlerModules = function() {
 	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
-		if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
-			// Define the module
-			$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
+		if(tiddler.hasField("module-type")) {
+			switch (tiddler.fields.type) {
+				case "application/javascript":
+					// We don't need to register JavaScript tiddlers in the browser
+					if(!$tw.browser) {
+						$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
+					}
+					break;
+				case "application/json":
+					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],JSON.parse(tiddler.fields.text));
+					break;
+				case "application/x-tiddler-dictionary":
+					$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],$tw.utils.parseFields(tiddler.fields.text));
+					break;
+			}
 		}
 	});
 };
@@ -1034,9 +1047,8 @@ $tw.boot.startup = function() {
 	// Unpack bundle tiddlers
 	$tw.wiki.unpackBundleTiddlers();
 	// Register typed modules from the tiddlers we've just loaded
-	if(!$tw.browser) {
-		$tw.wiki.defineTiddlerModules();
-	}
+	$tw.wiki.defineTiddlerModules();
+	// And any modules within bundles
 	$tw.wiki.defineBundledModules();
 	// Run any startup modules
 	$tw.modules.forEachModuleOfType("startup",function(title,module) {

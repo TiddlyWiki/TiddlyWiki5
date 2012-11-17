@@ -51,6 +51,10 @@ $tw.modules.define = function(moduleName,moduleType,definition) {
 		definition: definition,
 		exports: undefined
 	};
+	// If the definition is already an object we can use it as the exports
+	if(typeof moduleInfo.definition === "object") {
+		moduleInfo.exports = definition;
+	}
 	// Store the module in the titles hashmap
 	if(Object.prototype.hasOwnProperty.call($tw.modules.titles,moduleName)) {
 		console.log("Warning: Redefined module - " + moduleName);
