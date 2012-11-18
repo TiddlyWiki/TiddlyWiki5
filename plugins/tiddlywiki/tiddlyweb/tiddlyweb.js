@@ -16,6 +16,7 @@ Main TiddlyWeb integration module
 Creates a TiddlyWebSyncer object
 */
 var TiddlyWebSyncer = function(options) {
+	this.wiki = options.wiki;
 	this.connection = undefined;
 };
 
@@ -40,14 +41,16 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 		return Error("Missing connection data")
 	}
 	// Mark us as not logged in
-	$tw.wiki.addTiddler({
-		title: TiddlyWebSyncer.titleIsLoggedIn,
-		text: "no"
-	});
+	$tw.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
 	// Save and return the connection object
 	this.connection = connection;
 	// Get the login status
-	this.getStatus();
+	var self = this;
+	this.getStatus(function (err,isLoggedIn,json) {
+		if(isLoggedIn) {
+			self.syncFromServer();
+		}
+	});
 	return ""; // We only support a single connection
 };
 
@@ -91,6 +94,9 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	this.httpRequest({
 		url: this.connection.host + "status",
 		callback: function(err,data) {
+			if(err) {
+				return callback(err);
+			}
 			// Decode the status JSON
 			var json = null;
 			try {
@@ -101,22 +107,16 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 				// Check if we're logged in
 				var isLoggedIn = json.username !== "GUEST";
 				// Set the various status tiddlers
-				$tw.wiki.addTiddler({
-					title: TiddlyWebSyncer.titleIsLoggedIn,
-					text: isLoggedIn ? "yes" : "no"
-				});
+				$tw.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 				if(isLoggedIn) {
-					$tw.wiki.addTiddler({
-						title: TiddlyWebSyncer.titleUserName,
-						text: json.username
-					});
+					$tw.wiki.addTiddler({title: TiddlyWebSyncer.titleUserName,text: json.username});
 				} else {
 					$tw.wiki.deleteTiddler(TiddlyWebSyncer.titleUserName);
 				}
 			}
 			// Invoke the callback if present
 			if(callback) {
-				callback(isLoggedIn,json);
+				callback(null,isLoggedIn,json);
 			}
 		}
 	});
@@ -132,7 +132,9 @@ TiddlyWebSyncer.prototype.promptLogin = function() {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: "Login to TiddlySpace",
 				callback: function(data) {
-					self.login(data.username,data.password);
+					self.login(data.username,data.password,function(err,isLoggedIn) {
+						self.syncFromServer();
+					});
 					return true; // Get rid of the password prompt
 				}
 			});
@@ -162,7 +164,7 @@ TiddlyWebSyncer.prototype.login = function(username,password,callback) {
 					callback(err);
 				}
 			} else {
-				self.getStatus(function(isLoggedIn,json) {
+				self.getStatus(function(err,isLoggedIn,json) {
 					if(callback) {
 						callback(null,isLoggedIn);
 					}
@@ -190,6 +192,37 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 				self.showError("logout error: " + err);
 			} else {
 				self.getStatus();
+			}
+		}
+	});
+};
+
+/*
+Synchronise from the server by reading the tiddler list from the recipe and queuing up GETs for any tiddlers that we don't already have
+*/
+TiddlyWebSyncer.prototype.syncFromServer = function() {
+	var self = this;
+	this.httpRequest({
+		url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers.json",
+		callback: function(err,data) {
+			if(err) {
+console.log("error in syncFromServer",err);
+				return;
+			}
+			var json = JSON.parse(data);
+			for(var t=0; t<json.length; t++) {
+				var jsonTiddler = json[t],
+					fields = {};
+				for(var f in jsonTiddler) {
+					switch(f) {
+						case "fields":
+							break;
+						default:
+							fields[f] = jsonTiddler[f];
+							break;
+					}
+				}
+				self.wiki.addTiddler(new $tw.Tiddler(fields));
 			}
 		}
 	});
