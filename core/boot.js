@@ -585,7 +585,7 @@ $tw.Wiki.prototype.getTiddler = function(title) {
 	} else if($tw.utils.hop(this.bundledTiddlers,title)) {
 		return this.bundledTiddlers[title];
 	} else {
-		return null;
+		return undefined;
 	}
 };
 

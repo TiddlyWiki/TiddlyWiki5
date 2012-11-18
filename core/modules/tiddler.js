@@ -30,7 +30,7 @@ exports.isTemporary = function() {
 exports.getFieldString = function(field) {
 	var value = this.fields[field];
 	// Check for a missing field
-	if(value === undefined) {
+	if(value === undefined || value === null) {
 		return "";
 	}
 	// Parse the field with the associated module (if any)

@@ -198,6 +198,26 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 };
 
 /*
+Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler
+*/
+TiddlyWebSyncer.prototype.convertTiddler = function(tiddlerFields) {
+	var result = {};
+	for(var f in tiddlerFields) {
+		switch(f) {
+			case "fields":
+				for(var ff in tiddlerFields[f]) {
+					result[ff] = tiddlerFields[f][ff];
+				}
+				break;
+			default:
+				result[f] = tiddlerFields[f];
+				break;
+		}
+	}
+	return result;
+};
+
+/*
 Synchronise from the server by reading the tiddler list from the recipe and queuing up GETs for any tiddlers that we don't already have
 */
 TiddlyWebSyncer.prototype.syncFromServer = function() {
@@ -211,34 +231,42 @@ console.log("error in syncFromServer",err);
 			}
 			var json = JSON.parse(data);
 			for(var t=0; t<json.length; t++) {
-				var jsonTiddler = json[t],
-					fields = {};
-				for(var f in jsonTiddler) {
-					switch(f) {
-						case "fields":
-							break;
-						default:
-							fields[f] = jsonTiddler[f];
-							break;
-					}
-				}
-				self.wiki.addTiddler(new $tw.Tiddler(fields));
+				self.wiki.addTiddler(new $tw.Tiddler(self.convertTiddler(json[t])));
 			}
 		}
 	});
 };
 
 /*
-Some quick and dirty HTTP functions; to be refactored later. Options are:
+Lazily load a skinny tiddler if we can
+*/
+TiddlyWebSyncer.prototype.lazyLoad = function(connection,title,tiddler) {
+	var self = this;
+	this.httpRequest({
+		url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + title,
+		callback: function(err,data) {
+			if(err) {
+console.log("error in lazyLoad",err);
+				return;
+			}
+			self.wiki.addTiddler(new $tw.Tiddler(self.convertTiddler(JSON.parse(data))));
+		}
+	});
+};
+
+/*
+A quick and dirty HTTP function; to be refactored later. Options are:
 	url: URL to retrieve
 	type: GET, PUT, POST etc
 	callback: function invoked with (err,data)
 */
 TiddlyWebSyncer.prototype.httpRequest = function(options) {
 	var type = options.type || "GET",
+		headers = options.headers || {accept: "application/json"},
 		client = new XMLHttpRequest(),
 		data = "",
 		f,results;
+	// Massage the data hashmap into a string
 	if(options.data) {
 		if(typeof options.data === "string") { // Already a string
 			data = options.data;
@@ -252,6 +280,7 @@ TiddlyWebSyncer.prototype.httpRequest = function(options) {
 			data = results.join("&")
 		}
 	}
+	// Set up the state change handler
 	client.onreadystatechange = function() {
 		if(this.readyState === 4) {
 			if(this.status === 200) {
@@ -263,7 +292,13 @@ TiddlyWebSyncer.prototype.httpRequest = function(options) {
 		options.callback(new Error("XMLHttpRequest error: " + this.status));
 		}
 	};
+	// Make the request
 	client.open(type,options.url,true);
+	if(headers) {
+		for(var h in headers) {
+			client.setRequestHeader(h,headers[h]);
+		}
+	}
 	if(data) {
 		client.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
 	}

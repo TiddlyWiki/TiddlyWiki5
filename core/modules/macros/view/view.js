@@ -28,7 +28,11 @@ exports.executeMacro = function() {
 		value;
 	// Get the value to display
 	if(tiddler) {
-		value = tiddler.fields[field];
+		if(field === "text") {
+			value = this.wiki.getTiddlerText(this.tiddlerTitle);
+		} else {
+			value = tiddler.fields[field];
+		}
 	} else { // Use a special value if the tiddler is missing
 		switch(field) {
 			case "text":

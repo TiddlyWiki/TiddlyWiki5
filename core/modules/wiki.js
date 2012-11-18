@@ -731,11 +731,42 @@ exports.initServerConnections = function() {
 };
 
 /*
+Invoke all the active server connections
+*/
+exports.invokeServerConnections = function(method /* ,args */) {
+	var args = Array.prototype.slice.call(arguments,1);
+	for(var title in this.serverConnections) {
+		var connection = this.serverConnections[title];
+		connection.syncer[method].apply(connection.syncer,[connection.connection].concat(args));
+	}
+};
+
+/*
 Handle a syncer message
 */
 exports.handleSyncerEvent = function(event) {
 	for(var syncer in this.syncers) {
 		this.syncers[syncer].handleEvent(event);
+	}
+};
+
+/*
+Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
+*/
+exports.getTiddlerText = function(title) {
+	var tiddler = this.getTiddler(title);
+	// Return undefined if the tiddler isn't found
+	if(!tiddler) {
+		return undefined;
+	}
+	if(tiddler.fields.text) {
+		// Just return the text if we've got it
+		return tiddler.fields.text;
+	} else {
+		// Ask all the server connections to load the tiddler if they can
+		this.invokeServerConnections("lazyLoad",title,tiddler);
+		// Indicate that the text is being loaded
+		return null;
 	}
 };
 
