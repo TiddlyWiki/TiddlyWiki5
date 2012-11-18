@@ -22,6 +22,13 @@ var JavaScriptParser = function(options) {
 // Parse a string of JavaScript code and return the parse tree as a wikitext parse tree
 JavaScriptParser.prototype.parse = function(type,code) {
     // Try to parse the code
+    if(!code) {
+        return new $tw.Renderer([
+            $tw.Tree.Element("pre",{"class": "javascript-source"},[
+                $tw.Tree.Text("")
+            ])
+        ],new $tw.Dependencies(),this.wiki);
+    }
     var parseTree;
     try {
         parseTree = esprima.parse(code,{comment: true,tokens: true,range: true});
