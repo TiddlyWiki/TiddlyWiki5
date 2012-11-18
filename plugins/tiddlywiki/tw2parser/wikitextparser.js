@@ -64,6 +64,7 @@ WikiTextParser.prototype.installRules = function() {
 };
 
 WikiTextParser.prototype.parse = function(type,text) {
+	text = text || "";
 	this.source = text;
 	this.nextMatch = 0;
 	this.children = [];
