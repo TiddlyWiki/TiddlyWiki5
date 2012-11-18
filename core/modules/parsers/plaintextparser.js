@@ -21,5 +21,6 @@ PlainTextParser.prototype.parse = function(type,text) {
 };
 
 exports["text/plain"] = PlainTextParser;
+exports["text/html"] = PlainTextParser;
 
 })();
