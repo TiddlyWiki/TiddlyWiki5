@@ -1,6 +1,7 @@
 {
 	"plugins": [
 		"tiddlywiki/fullscreen",
-		"tiddlywiki/tiddlyweb"
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/tw2parser"
 	]
 }

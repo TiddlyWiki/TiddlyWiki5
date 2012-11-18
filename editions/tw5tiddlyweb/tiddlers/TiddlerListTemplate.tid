@@ -1,0 +1,3 @@
+title: TiddlerListTemplate
+
+<<view title link>> <small><<view type>></small>

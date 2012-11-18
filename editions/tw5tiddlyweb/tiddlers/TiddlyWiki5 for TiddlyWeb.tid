@@ -1,4 +1,4 @@
-title: HelloThere
+title: TiddlyWiki5 for TiddlyWeb
 
 Experimenting with ~TiddlyWeb integration for ~TiddlyWiki5.
 
@@ -23,4 +23,4 @@ Log out of ~TiddlyWeb: <<button message:logout class:"btn btn-warning"><Logout>>
 
 All tiddlers:
 
-<<list all>>
+<<list all template:TiddlerListTemplate>>
