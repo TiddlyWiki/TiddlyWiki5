@@ -36,7 +36,7 @@ Command.prototype.execute = function() {
 		} else {
 			var fields = {title: self.params[0]},
 				extname = path.extname(self.params[0]),
-				type = extname === ".html" ? "application/x-tiddlywiki" : extname;
+				type = extname === ".html" ? "application/vnd.tiddlywiki2" : extname;
 			var tiddlers = self.commander.wiki.deserializeTiddlers(type,data,fields);
 			if(!tiddlers) {
 				self.callback("No tiddlers found in file \"" + self.params[0] + "\"");

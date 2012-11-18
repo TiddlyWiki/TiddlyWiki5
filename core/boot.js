@@ -66,7 +66,7 @@ $tw.config.jsModuleHeaderRegExpString = "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\
 $tw.config.fileExtensionInfo = {
 	".tid": {type: "application/x-tiddler"},
 	".tiddler": {type: "application/x-tiddler-html-div"},
-	".recipe": {type: "application/x-tiddlywiki-recipe"},
+	".recipe": {type: "application/vnd.tiddlywiki2-recipe"},
 	".txt": {type: "text/plain"},
 	".css": {type: "text/css"},
 	".html": {type: "text/html"},
@@ -85,7 +85,7 @@ $tw.config.contentTypeInfo = {
 	"text/vnd.tiddlywiki": {encoding: "utf8", extension: ".tid"},
 	"application/x-tiddler": {encoding: "utf8", extension: ".tid"},
 	"application/x-tiddler-html-div": {encoding: "utf8", extension: ".tiddler"},
-	"application/x-tiddlywiki-recipe": {encoding: "utf8", extension: ".recipe"},
+	"application/vnd.tiddlywiki2-recipe": {encoding: "utf8", extension: ".recipe"},
 	"text/plain": {encoding: "utf8", extension: ".txt"},
 	"text/css": {encoding: "utf8", extension: ".css"},
 	"text/html": {encoding: "utf8", extension: ".html"},

@@ -54,4 +54,4 @@ These files are a straightforward array of hashmaps of name:value fields. Curren
 
 TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
 
-//The ContentType `application/x-tiddlywiki` is used internally for these files//
+//The ContentType `application/vnd.tiddlywiki2` is used internally for these files//

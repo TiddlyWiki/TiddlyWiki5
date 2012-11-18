@@ -14,7 +14,7 @@ The idea is to process the recipe file recursively, loading tiddlers into the ma
 /*global $tw: false */
 "use strict";
 
-exports["application/x-tiddlywiki-recipe"] = function(text,fields) {
+exports["application/vnd.tiddlywiki2-recipe"] = function(text,fields) {
 	var self = this,
 		path = require("path"),
 		fs = require("fs"),

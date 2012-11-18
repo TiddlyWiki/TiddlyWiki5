@@ -75,7 +75,7 @@ exports["application/json"] = function(text,fields) {
 	return result;
 };
 
-exports["application/x-tiddlywiki"] = function(text,fields) {
+exports["application/vnd.tiddlywiki2"] = function(text,fields) {
 	var locateStoreArea = function(tiddlywikidoc) {
 			var startSaveArea = '<div id="' + 'storeArea">',
 				startSaveAreaRegExp = /<div id=["']?storeArea['"]?>/gi,
