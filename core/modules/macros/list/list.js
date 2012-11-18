@@ -102,7 +102,7 @@ exports.getTiddlerList = function() {
 Create and execute the nodes representing the empty message
 */
 exports.getEmptyMessage = function() {
-	var nodes = this.wiki.parseText("text/x-tiddlywiki",this.params.emptyMessage).tree;
+	var nodes = this.wiki.parseText("text/vnd.tiddlywiki",this.params.emptyMessage).tree;
 	for(var c=0; c<nodes.length; c++) {
 		nodes[c].execute(this.parents,this.tiddlerTitle);
 	}

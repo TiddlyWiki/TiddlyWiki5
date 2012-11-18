@@ -219,7 +219,7 @@ TiddlyWebSyncer.prototype.convertTiddler = function(tiddlerFields) {
 	if(result.type === "text/javascript") {
 		result.type = "application/javascript";
 	} else if(!result.type || result.type === "None") {
-		result.type = "text/x-tiddlywiki-old";
+		result.type = "text/vnd.tiddlywiki2";
 	}
 	return result;
 };

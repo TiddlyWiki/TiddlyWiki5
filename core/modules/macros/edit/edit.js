@@ -53,7 +53,7 @@ exports.executeMacro = function() {
 		Editor = this.wiki.macros.edit.editors[tiddler.fields.type];
 	}
 	if(!Editor) {
-		Editor = this.wiki.macros.edit.editors["text/x-tiddlywiki"];
+		Editor = this.wiki.macros.edit.editors["text/vnd.tiddlywiki"];
 	}
 	this.editor = new Editor(this);
 	// Call the editor to generate the child nodes

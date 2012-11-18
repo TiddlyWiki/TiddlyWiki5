@@ -61,7 +61,7 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		titleText = title;
 	}
-	var headerRenderer = this.wiki.parseText("text/x-tiddlywiki-run",titleText);
+	var headerRenderer = this.wiki.parseText("text/vnd.tiddlywiki-run",titleText);
 	headerRenderer.execute([],title);
 	headerRenderer.renderInDom(headerTitle);
 	this.wiki.addEventListener("",function(changes) {
@@ -95,7 +95,7 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		footerText = "<<button close class:'btn btn-primary'><Close>>";
 	}
-	var footerRenderer = this.wiki.parseText("text/x-tiddlywiki-run",footerText);
+	var footerRenderer = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText);
 	footerRenderer.execute([],title);
 	footerRenderer.renderInDom(modalFooterButtons);
 	this.wiki.addEventListener("",function(changes) {

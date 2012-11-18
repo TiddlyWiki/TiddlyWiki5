@@ -183,6 +183,6 @@ WikiTextParser.prototype.subWikifyTerm = function(output,terminatorRegExp) {
 	this.output = oldOutput;
 };
 
-exports["text/x-tiddlywiki-old"] = WikiTextParser;
+exports["text/vnd.tiddlywiki2"] = WikiTextParser;
 
 })();

@@ -424,7 +424,7 @@ $tw.plugins.dropbox.syncChanges = function(changes,wiki) {
 		var tiddler = wiki.getTiddler(title),
 			filename = $tw.plugins.dropbox.titleInfo[title],
 			contentType = tiddler ? tiddler.fields.type : null;
-		contentType = contentType || "text/x-tiddlywiki";
+		contentType = contentType || "text/vnd.tiddlywiki";
 		var contentTypeInfo = $tw.config.contentTypeInfo[contentType],
 			isNew = false;
 		// Figure out the pathname of the tiddler
@@ -436,7 +436,7 @@ $tw.plugins.dropbox.syncChanges = function(changes,wiki) {
 		}
 		// Push the appropriate task
 		if(tiddler) {
-			if(contentType === "text/x-tiddlywiki") {
+			if(contentType === "text/vnd.tiddlywiki") {
 				// .tid file
 				q.push({
 					type: "save",

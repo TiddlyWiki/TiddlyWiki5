@@ -99,7 +99,7 @@ exports.executeMacro = function() {
 	}
 	// Get the render tree for the template
 	if(this.hasParameter("templateText")) {
-		renderTemplateTree = this.wiki.parseText("text/x-tiddlywiki",this.params.templateText).tree;
+		renderTemplateTree = this.wiki.parseText("text/vnd.tiddlywiki",this.params.templateText).tree;
 	} else {
 		if(this.hasParameter("template")) {
 			renderTemplateTitle = this.params.template;

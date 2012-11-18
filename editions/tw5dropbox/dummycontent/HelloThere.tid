@@ -1,7 +1,7 @@
 title: HelloThere
 modifier: JeremyRuston
 tags: introduction greetings
-type: text/x-tiddlywiki
+type: text/vnd.tiddlywiki
 
 Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the reusable non-linear personal web notebook [[first released in 2004|History]]. It is a complete interactive wiki in JavaScript that can be run from a single HTML file in the browser or as a powerful [[node.js application|node.js]].
 

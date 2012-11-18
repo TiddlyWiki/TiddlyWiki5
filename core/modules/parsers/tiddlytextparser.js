@@ -58,7 +58,7 @@ TiddlyTextParser.prototype.parse = function(type,text) {
 	return new $tw.Renderer(output,dependencies);
 };
 
-exports["text/x-tiddlywiki-css"] = TiddlyTextParser;
-exports["text/x-tiddlywiki-html"] = TiddlyTextParser;
+exports["text/vnd.tiddlywiki-css"] = TiddlyTextParser;
+exports["text/vnd.tiddlywiki-html"] = TiddlyTextParser;
 
 })();

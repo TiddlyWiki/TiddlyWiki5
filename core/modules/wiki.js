@@ -397,7 +397,7 @@ exports.initParsers = function(moduleType) {
 		}
 	});
 	// Install the rules for the old wikitext parser rules
-	var wikitextparser = this.parsers["text/x-tiddlywiki-old"];
+	var wikitextparser = this.parsers["text/vnd.tiddlywiki2"];
 	if(wikitextparser) {
 		wikitextparser.installRules();
 	}
@@ -418,7 +418,7 @@ exports.parseText = function(type,text,options) {
 		parser = this.parsers[$tw.config.fileExtensionInfo[type].type];
 	}
 	if(!parser) {
-		parser = this.parsers[options.defaultType || "text/x-tiddlywiki"];
+		parser = this.parsers[options.defaultType || "text/vnd.tiddlywiki"];
 	}
 	if(!parser) {
 		return null;

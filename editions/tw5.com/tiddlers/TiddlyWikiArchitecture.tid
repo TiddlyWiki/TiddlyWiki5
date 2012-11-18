@@ -6,7 +6,7 @@ tags: docs internals
 
 The heart of TiddlyWiki can be seen as an extensible representation transformation engine. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
-The most important transformations are from `text/x-tiddlywiki` wikitext into `text/html` or `text/plain` but the engine is used throughout the system for other transformations, such as converting images for display in HTML, sanitising fragments of JavaScript, and processing CSS.
+The most important transformations are from `text/vnd.tiddlywiki` wikitext into `text/html` or `text/plain` but the engine is used throughout the system for other transformations, such as converting images for display in HTML, sanitising fragments of JavaScript, and processing CSS.
 
 You can explore this mechanism by opening the JavaScript console in your browser. Typing this command will replace the text of the tiddler `HelloThere` with new content:
 

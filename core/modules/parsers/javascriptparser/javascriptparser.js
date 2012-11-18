@@ -63,13 +63,13 @@ JavaScriptParser.prototype.parse = function(type,code) {
                 element = "div";
                 classes.push("javascript-block-comment");
                 content.push($tw.Tree.Text("/*"));
-                content.push.apply(content,self.wiki.parseText("text/x-tiddlywiki",text).tree);
+                content.push.apply(content,self.wiki.parseText("text/vnd.tiddlywiki",text).tree);
                 content.push($tw.Tree.Text("*/"));
             } else {
                 element = "span";
                 classes.push("javascript-line-comment");
                 content.push($tw.Tree.Text("//"));
-                content.push.apply(content,self.wiki.parseText("text/x-tiddlywiki-run",text).tree);
+                content.push.apply(content,self.wiki.parseText("text/vnd.tiddlywiki-run",text).tree);
                 content.push($tw.Tree.Text("\n"));
             }
             result.push($tw.Tree.Element(element,{"class": classes},content));

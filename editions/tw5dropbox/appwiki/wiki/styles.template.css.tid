@@ -1,5 +1,5 @@
 title: $:/plugins/dropbox/styles.template.css
-type: text/x-tiddlywiki-html
+type: text/vnd.tiddlywiki-html
 
 /* utf8beacon: éçñøåá— */
 <<serialize "[is[shadow]type[text/css]]" text/plain>>

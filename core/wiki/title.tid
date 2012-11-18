@@ -1,4 +1,4 @@
 title: $:/core/wiki/title
-type: text/x-tiddlywiki
+type: text/vnd.tiddlywiki
 
 <<tiddler SiteTitle>> --- <<tiddler SiteSubtitle>>

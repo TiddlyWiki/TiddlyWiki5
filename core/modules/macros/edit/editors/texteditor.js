@@ -145,7 +145,7 @@ TextEditor.prototype.refreshInDom = function() {
 	this.fixHeight();
 };
 
-exports["text/x-tiddlywiki"] = TextEditor;
+exports["text/vnd.tiddlywiki"] = TextEditor;
 exports["text/plain"] = TextEditor;
 
 })();

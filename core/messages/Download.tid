@@ -1,5 +1,5 @@
 title: $:/messages/Download
-type: text/x-tiddlywiki
+type: text/vnd.tiddlywiki
 subtitle: Download changes
 footer: <<button close class:"btn btn-primary"><Close>>
 help: http://five.tiddlywiki.com/#help:DownloadingChanges

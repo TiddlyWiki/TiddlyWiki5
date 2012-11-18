@@ -1,5 +1,5 @@
 title: $:/core/templates/static.template.html
-type: text/x-tiddlywiki-html
+type: text/vnd.tiddlywiki-html
 
 <!doctype html>
 <head>

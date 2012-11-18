@@ -13,13 +13,13 @@ The parse tree is built when needed, and then cached by the WikiStore until the 
 
 TiddlyWiki5 uses multiple parsers:
 
-* Wikitext ({{{text/x-tiddlywiki}}}) in `js/WikiTextParser.js`
+* Wikitext ({{{text/vnd.tiddlywiki}}}) in `js/WikiTextParser.js`
 * JavaScript ({{{text/javascript}}}) in `js/JavaScriptParser.js`
 * Images ({{{image/png}}} and {{{image/jpg}}}) in `js/ImageParser.js`
 * JSON ({{{application/json}}}) in `js/JSONParser.js`
 Additional parsers are planned:
 * CSS ({{{text/css}}})
-* Recipe ({{{text/x-tiddlywiki-recipe}}})
+* Recipe ({{{text/vnd.tiddlywiki-recipe}}})
 
 One global instance of each parser is instantiated in `js/App.js` and registered with the main WikiStore object.
 

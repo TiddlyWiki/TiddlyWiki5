@@ -288,12 +288,12 @@ WikiTextParser.prototype.parse = function(type,text) {
 	return new WikiTextRenderer(text,{
 		wiki: this.wiki,
 		parser: this,
-		isRun: type === "text/x-tiddlywiki-run"
+		isRun: type === "text/vnd.tiddlywiki-run"
 	});
 };
 
-exports["text/x-tiddlywiki"] = WikiTextParser;
+exports["text/vnd.tiddlywiki"] = WikiTextParser;
 
-exports["text/x-tiddlywiki-run"] = WikiTextParser;
+exports["text/vnd.tiddlywiki-run"] = WikiTextParser;
 
 })();

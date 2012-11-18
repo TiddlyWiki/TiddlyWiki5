@@ -82,7 +82,7 @@ $tw.config.fileExtensionInfo = {
 
 // Content type mappings
 $tw.config.contentTypeInfo = {
-	"text/x-tiddlywiki": {encoding: "utf8", extension: ".tid"},
+	"text/vnd.tiddlywiki": {encoding: "utf8", extension: ".tid"},
 	"application/x-tiddler": {encoding: "utf8", extension: ".tid"},
 	"application/x-tiddler-html-div": {encoding: "utf8", extension: ".tiddler"},
 	"application/x-tiddlywiki-recipe": {encoding: "utf8", extension: ".recipe"},
