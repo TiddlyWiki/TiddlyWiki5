@@ -202,6 +202,7 @@ Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler
 */
 TiddlyWebSyncer.prototype.convertTiddler = function(tiddlerFields) {
 	var result = {};
+	// Transfer the fields, pulling down the `fields` hashmap
 	for(var f in tiddlerFields) {
 		switch(f) {
 			case "fields":
@@ -213,6 +214,12 @@ TiddlyWebSyncer.prototype.convertTiddler = function(tiddlerFields) {
 				result[f] = tiddlerFields[f];
 				break;
 		}
+	}
+	// Some unholy freaking of content types
+	if(result.type === "text/javascript") {
+		result.type = "application/javascript";
+	} else if(!result.type || result.type === "None") {
+		result.type = "text/x-tiddlywiki-old";
 	}
 	return result;
 };
