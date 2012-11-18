@@ -32,6 +32,7 @@ TiddlyWebSyncer.prototype.showError = function(error) {
 };
 
 TiddlyWebSyncer.prototype.addConnection = function(connection) {
+	var self = this;
 	// Check if we've already got a connection
 	if(this.connection) {
 		return Error("TiddlyWebSyncer can only handle a single connection");
@@ -41,11 +42,14 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 		return Error("Missing connection data")
 	}
 	// Mark us as not logged in
-	$tw.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
+	this.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
 	// Save and return the connection object
 	this.connection = connection;
+	// Listen out for changes to tiddlers
+	this.wiki.addEventListener("",function(changes) {
+		self.syncToServer(changes);
+	});
 	// Get the login status
-	var self = this;
 	this.getStatus(function (err,isLoggedIn,json) {
 		if(isLoggedIn) {
 			self.syncFromServer();
@@ -91,6 +95,7 @@ TiddlyWebSyncer.prototype.getCsrfToken = function() {
 
 TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	// Get status
+	var self = this;
 	this.httpRequest({
 		url: this.connection.host + "status",
 		callback: function(err,data) {
@@ -107,11 +112,11 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 				// Check if we're logged in
 				var isLoggedIn = json.username !== "GUEST";
 				// Set the various status tiddlers
-				$tw.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
+				self.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 				if(isLoggedIn) {
-					$tw.wiki.addTiddler({title: TiddlyWebSyncer.titleUserName,text: json.username});
+					self.wiki.addTiddler({title: TiddlyWebSyncer.titleUserName,text: json.username});
 				} else {
-					$tw.wiki.deleteTiddler(TiddlyWebSyncer.titleUserName);
+					self.wiki.deleteTiddler(TiddlyWebSyncer.titleUserName);
 				}
 			}
 			// Invoke the callback if present
@@ -242,6 +247,14 @@ console.log("error in syncFromServer",err);
 			}
 		}
 	});
+};
+
+/*
+Synchronise a set of changes to the server
+*/
+TiddlyWebSyncer.prototype.syncToServer = function(changes) {
+	var self = this;
+console.log("changes",changes);
 };
 
 /*
