@@ -1,17 +1,25 @@
 title: HelloThere
 
-Experimenting with TiddlyWeb integration for TiddlyWiki5.
+Experimenting with ~TiddlyWeb integration for ~TiddlyWiki5.
+
+----
+
+Current [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: (($:/plugins/tiddlyweb/IsLoggedIn))
+
+Current [[username|$:/plugins/tiddlyweb/UserName]]: (($:/plugins/tiddlyweb/UserName))
+
+
+----
 
 <<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:nomatch text:yes><
-Log in to TiddlyWeb: <<button message:login class:"btn btn-info"><Login>>
+Log in to ~TiddlyWeb: <<button message:login class:"btn btn-info"><Login>>
 >>
 <<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:match text:yes><
-Log out of TiddlyWeb: <<button message:logout class:"btn btn-warning"><Logout>>
+Log out of ~TiddlyWeb: <<button message:logout class:"btn btn-warning"><Logout>>
 >>
 
-TiddlyWeb [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: (($:/plugins/tiddlyweb/IsLoggedIn))
 
-TiddlyWeb [[username|$:/plugins/tiddlyweb/UserName]]: (($:/plugins/tiddlyweb/UserName))
+----
 
 All tiddlers:
 
