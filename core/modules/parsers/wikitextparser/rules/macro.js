@@ -3,15 +3,7 @@ title: $:/core/modules/parsers/wikitextparser/rules/macro.js
 type: application/javascript
 module-type: wikitextrule
 
-Wiki text run rule for pretty links. For example:
-
-{{{
-<<version>>
-
-<<link to:HelloThere><
-A macro with a bunch of content inside it. The content can include //formatting//.
->>
-}}}
+Wiki text rule for macros
 
 \*/
 (function(){
@@ -52,14 +44,19 @@ exports.parse = function(match,isBlock) {
 				content = this.parseRun(/(>>)/mg);
 			}
 		}
-		var macroNode = $tw.Tree.Macro(match[1] || match[2],{
-				srcParams: match[3],
-				content: content,
-				isBlock: isBlock,
-				wiki: this.wiki
-			});
-		this.dependencies.mergeDependencies(macroNode.dependencies);
-		return [macroNode];
+		var macroName = match[1] || match[2];
+		if(macroName in $tw.wiki.macros) {
+			var macroNode = $tw.Tree.Macro(match[1] || match[2],{
+					srcParams: match[3],
+					content: content,
+					isBlock: isBlock,
+					wiki: this.wiki
+				});
+			this.dependencies.mergeDependencies(macroNode.dependencies);
+			return [macroNode];
+		} else {
+			console.log("Missing macro '" + macroName + "'");
+		}
 	}
 	return [];
 };
