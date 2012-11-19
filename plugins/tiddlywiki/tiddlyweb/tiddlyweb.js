@@ -506,6 +506,10 @@ TiddlyWebSyncer.prototype.convertTiddlerToTiddlyWebFormat = function(title) {
 			}
 		});
 	}
+	// Convert the type "text/x-tiddlywiki" into null
+	if(result.type === "text/x-tiddlywiki") {
+		result.type = null;
+	}
 	return JSON.stringify(result);
 };
 
