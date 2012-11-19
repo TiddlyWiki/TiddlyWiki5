@@ -40,6 +40,15 @@ TiddlyWebSyncer.prototype.showError = function(error) {
 	console.log("TiddlyWeb error: " + error);
 };
 
+/*
+Message logging
+*/
+TiddlyWebSyncer.prototype.log = function(/* arguments */) {
+	var args = Array.prototype.slice.call(arguments,0);
+	args[0] = "TiddlyWeb: " + args[0];
+	$tw.utils.log.apply(null,args);
+};
+
 TiddlyWebSyncer.prototype.addConnection = function(connection) {
 	var self = this;
 	// Check if we've already got a connection
@@ -58,6 +67,7 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 	this.wiki.addEventListener("",function(changes) {
 		self.syncToServer(changes);
 	});
+	this.log("Adding connection with recipe:",connection.recipe,"host:",connection.host);
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn,json) {
 		if(isLoggedIn) {
@@ -99,6 +109,7 @@ Get the current status of the TiddlyWeb connection
 TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	// Get status
 	var self = this;
+	this.log("Getting status");
 	this.httpRequest({
 		url: this.connection.host + "status",
 		callback: function(err,data) {
@@ -158,6 +169,7 @@ Attempt to login to TiddlyWeb.
 	callback: invoked with arguments (err,isLoggedIn)
 */
 TiddlyWebSyncer.prototype.login = function(username,password,callback) {
+	this.log("Attempting to login as",username);
 	var self = this,
 		httpRequest = this.httpRequest({
 			url: this.connection.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
@@ -173,6 +185,7 @@ TiddlyWebSyncer.prototype.login = function(username,password,callback) {
 						callback(err);
 					}
 				} else {
+					self.log("Returned from logging in with data:",data);
 					self.getStatus(function(err,isLoggedIn,json) {
 						if(callback) {
 							callback(null,isLoggedIn);
@@ -188,8 +201,9 @@ Attempt to log out of TiddlyWeb
 */
 TiddlyWebSyncer.prototype.logout = function(options) {
 	options = options || {};
-	var self = this;
-	var httpRequest = this.httpRequest({
+	this.log("Attempting to logout");
+	var self = this,
+		httpRequest = this.httpRequest({
 		url: this.connection.host + "logout",
 		type: "POST",
 		data: {
@@ -200,6 +214,7 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 			if(err) {
 				self.showError("logout error: " + err);
 			} else {
+				self.log("Returned from logging out with data:",data);
 				self.getStatus();
 			}
 		}
@@ -210,13 +225,14 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 Synchronise from the server by reading the tiddler list from the recipe and queuing up GETs for any tiddlers that we don't already have
 */
 TiddlyWebSyncer.prototype.syncFromServer = function() {
+	this.log("Retrieving skinny tiddler list");
 	var self = this;
 	this.httpRequest({
 		url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers.json",
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
-console.log("error in syncFromServer",err);
+				self.log("Error retrieving skinny tiddler list:",err);
 				return;
 			}
 			// Store the skinny versions of these tiddlers
@@ -228,7 +244,7 @@ console.log("error in syncFromServer",err);
 				var tiddler = self.wiki.getTiddler(tiddlerFields.title),
 					isFat = tiddler && tiddler.fields.text !== undefined;
 				// Store the tiddler
-				var wasTiddlerStored = self.storeTiddler(tiddlerFields,tiddlerFields.revision);
+				var wasTiddlerStored = self.storeTiddler(tiddlerFields,tiddlerFields.revision.toString());
 				// Load the body of the tiddler if it was already fat, and we actually stored something
 				if(isFat && wasTiddlerStored) {
 					self.enqueueSyncTask({
@@ -280,6 +296,7 @@ TiddlyWebSyncer.prototype.enqueueSyncTask = function(task) {
 	}
 	// Check if this tiddler is already in the queue
 	if($tw.utils.hop(this.taskQueue,task.title)) {
+		this.log("Re-queueing up sync task with type:",task.type,"title:",task.title);
 		var existingTask = this.taskQueue[task.title];
 		// If so, just update the last modification time
 		existingTask.lastModificationTime = task.lastModificationTime;
@@ -288,6 +305,7 @@ TiddlyWebSyncer.prototype.enqueueSyncTask = function(task) {
 			existingTask.type = "save";
 		}
 	} else {
+		this.log("Queuing up sync task with type:",task.type,"title:",task.title);
 		// If it is not in the queue, insert it
 		this.taskQueue[task.title] = task;
 	}
@@ -338,7 +356,6 @@ TiddlyWebSyncer.prototype.processTaskQueue = function() {
 			this.taskInProgress[task.title] = task;
 			// Dispatch the task
 			this.dispatchTask(task,function(err) {
-console.log("Done task",task.title,"error",err);
 				// Mark that this task is no longer in progress
 				delete self.taskInProgress[task.title];
 				// Process the next task
@@ -388,6 +405,7 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 	var self = this;
 	if(task.type === "save") {
 		var changeCount = this.wiki.getChangeCount(task.title);
+		this.log("Dispatching 'save' task:",task.title);
 		this.httpRequest({
 			url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + task.title,
 			type: "PUT",
@@ -409,6 +427,7 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 		});
 	} else if(task.type === "load") {
 		// Load the tiddler
+		this.log("Dispatching 'load' task:",task.title);
 		this.httpRequest({
 			url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + task.title,
 			callback: function(err,data,request) {
@@ -430,8 +449,10 @@ Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler and save it in the s
 TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
 	var self = this,
 		result = {};
-	// Don't update if we've already got this revision
-	if(this.tiddlerInfo[tiddlerFields.title] && this.tiddlerInfo[tiddlerFields.title].revision === revision) {
+	// Don't update if we've already got this revision and it's not skinny
+	var tiddler = this.wiki.getTiddler(tiddlerFields.title),
+		isCurrentlyFat = !!tiddler && !!tiddler.fields.text;
+	if(isCurrentlyFat && this.tiddlerInfo[tiddlerFields.title] && this.tiddlerInfo[tiddlerFields.title].revision === revision) {
 		return false;
 	}
 	// Transfer the fields, pulling down the `fields` hashmap
@@ -471,7 +492,10 @@ TiddlyWebSyncer.prototype.convertTiddlerToTiddlyWebFormat = function(title) {
 		];
 	if(tiddler) {
 		$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {
-			var fieldString = tiddler.getFieldString(fieldName);
+			var fieldString = fieldName === "tags" ?
+								tiddler.fields.tags :
+								tiddler.getFieldString(fieldName); // Tags must be passed as an array, not a string
+
 			if(knownFields.indexOf(fieldName) !== -1) {
 				// If it's a known field, just copy it across
 				result[fieldName] = fieldString;
