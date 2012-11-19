@@ -30,6 +30,7 @@ TiddlyWebSyncer.titleUserName = "$:/plugins/tiddlyweb/UserName";
 TiddlyWebSyncer.taskTimerInterval = 1 * 1000; // Interval for sync timer
 TiddlyWebSyncer.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
 TiddlyWebSyncer.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
+TiddlyWebSyncer.pollTimerInterval = 60 * 1000; // Interval for polling for changes on the server
 
 /*
 Error handling
@@ -60,7 +61,12 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn,json) {
 		if(isLoggedIn) {
+			// Do a sync now
 			self.syncFromServer();
+			// And every so often
+			window.setInterval(function() {
+				self.syncFromServer.call(self);
+			},TiddlyWebSyncer.pollTimerInterval)
 		}
 	});
 	return ""; // We only support a single connection
@@ -211,10 +217,15 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 };
 
 /*
-Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler and save it in the store
+Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler and save it in the store. Returns true if the tiddler was actually stored
 */
 TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
-	var result = {};
+	var self = this,
+		result = {};
+	// Don't update if we've already got this revision
+	if(this.tiddlerInfo[tiddlerFields.title] && this.tiddlerInfo[tiddlerFields.title].revision === revision) {
+		return false;
+	}
 	// Transfer the fields, pulling down the `fields` hashmap
 	$tw.utils.each(tiddlerFields,function(element,title,object) {
 		switch(title) {
@@ -235,12 +246,13 @@ TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
 		result.type = "text/vnd.tiddlywiki2";
 	}
 	// Save the tiddler
-	this.wiki.addTiddler(new $tw.Tiddler(result));
+	self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(result.title),result));
 	// Save the tiddler revision and changeCount details
-	this.tiddlerInfo[result.title] = {
+	self.tiddlerInfo[result.title] = {
 		revision: revision,
-		changeCount: this.wiki.getChangeCount(result.title)
+		changeCount: self.wiki.getChangeCount(result.title)
 	};
+	return true;
 };
 
 /*
@@ -251,13 +263,27 @@ TiddlyWebSyncer.prototype.syncFromServer = function() {
 	this.httpRequest({
 		url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers.json",
 		callback: function(err,data) {
+			// Check for errors
 			if(err) {
 console.log("error in syncFromServer",err);
 				return;
 			}
+			// Store the skinny versions of these tiddlers
 			var json = JSON.parse(data);
 			for(var t=0; t<json.length; t++) {
-				self.storeTiddler(json[t],json[t].revision);
+				var tiddlerFields = json[t];
+				// Check if the tiddler is already present and not skinny
+				var tiddler = self.wiki.getTiddler(tiddlerFields.title),
+					isFat = tiddler && tiddler.fields.text !== undefined;
+				// Store the tiddler
+				var wasStored = self.storeTiddler(tiddlerFields,tiddlerFields.revision);
+				// Load the body of the tiddler if it was already fat, and we actually stored something
+				if(isFat && wasStored) {
+					self.enqueueSyncTask({
+						type: "load",
+						title: tiddlerFields.title
+					});
+				}
 			}
 		}
 	});
