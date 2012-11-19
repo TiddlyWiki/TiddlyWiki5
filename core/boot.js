@@ -103,6 +103,16 @@ $tw.config.contentTypeInfo = {
 $tw.utils = $tw.utils || {};
 
 /*
+Log a message
+*/
+$tw.utils.log = function(/* args */) {
+	if(console !== undefined && console.log !== undefined) {
+		return window.console && console.log
+			&& Function.apply.call(console.log, console, arguments);
+	}
+};
+
+/*
 Check if an object has a property
 */
 $tw.utils.hop = function(object,property) {
