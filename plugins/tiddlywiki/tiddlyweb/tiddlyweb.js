@@ -469,7 +469,7 @@ TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
 	if(result.type === "text/javascript") {
 		result.type = "application/javascript";
 	} else if(!result.type || result.type === "None") {
-		result.type = "text/vnd.tiddlywiki2";
+		result.type = "text/x-tiddlywiki";
 	}
 	// Save the tiddler
 	self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(result.title),result));

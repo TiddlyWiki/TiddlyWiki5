@@ -1,5 +1,5 @@
 title: ThirdTiddler
-type: text/vnd.tiddlywiki2
+type: text/x-tiddlywiki
 
 An explicit link [[Fourth Tiddler]] and [[a pretty link|Fourth Tiddler]] and a transclusion <<tiddler [[Fourth Tiddler]] with:Stringy>>
 

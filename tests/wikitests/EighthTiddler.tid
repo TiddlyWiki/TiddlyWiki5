@@ -1,5 +1,5 @@
 title: EighthTiddler
-type: text/vnd.tiddlywiki2
+type: text/x-tiddlywiki
 
 <<tiddler SixthTiddler>>
 <<tiddler target:SixthTiddler>>
