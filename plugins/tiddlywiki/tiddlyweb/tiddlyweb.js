@@ -61,12 +61,8 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn,json) {
 		if(isLoggedIn) {
-			// Do a sync now
+			// Do a sync
 			self.syncFromServer();
-			// And every so often
-			window.setInterval(function() {
-				self.syncFromServer.call(self);
-			},TiddlyWebSyncer.pollTimerInterval)
 		}
 	});
 	return ""; // We only support a single connection
@@ -269,22 +265,28 @@ console.log("error in syncFromServer",err);
 				return;
 			}
 			// Store the skinny versions of these tiddlers
-			var json = JSON.parse(data);
+			var json = JSON.parse(data),
+				wasAnyTiddlerStored = false;
 			for(var t=0; t<json.length; t++) {
 				var tiddlerFields = json[t];
 				// Check if the tiddler is already present and not skinny
 				var tiddler = self.wiki.getTiddler(tiddlerFields.title),
 					isFat = tiddler && tiddler.fields.text !== undefined;
 				// Store the tiddler
-				var wasStored = self.storeTiddler(tiddlerFields,tiddlerFields.revision);
+				var wasTiddlerStored = self.storeTiddler(tiddlerFields,tiddlerFields.revision);
 				// Load the body of the tiddler if it was already fat, and we actually stored something
-				if(isFat && wasStored) {
+				if(isFat && wasTiddlerStored) {
 					self.enqueueSyncTask({
 						type: "load",
 						title: tiddlerFields.title
 					});
 				}
+				wasAnyTiddlerStored = wasTiddlerStored || wasAnyTiddlerStored;
 			}
+			// Trigger another sync
+			window.setTimeout(function() {
+				self.syncFromServer.call(self);
+			},TiddlyWebSyncer.pollTimerInterval);
 		}
 	});
 };
