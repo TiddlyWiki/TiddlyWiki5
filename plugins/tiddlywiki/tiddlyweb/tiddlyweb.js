@@ -21,11 +21,15 @@ var TiddlyWebSyncer = function(options) {
 	this.tiddlerInfo = {}; // Hashmap of {revision:,changeCount:}
 	// Tasks are {type: "load"/"save", title:, queueTime:, lastModificationTime:}
 	this.taskQueue = {}; // Hashmap of tasks to be performed
-	this.taskInProgress = {}; // Hashmap of tasks in progress
+	this.taskInProgress = {}; // Hash of tasks in progress
+	this.taskTimerId = null; // Sync timer
 };
 
 TiddlyWebSyncer.titleIsLoggedIn = "$:/plugins/tiddlyweb/IsLoggedIn";
 TiddlyWebSyncer.titleUserName = "$:/plugins/tiddlyweb/UserName";
+TiddlyWebSyncer.taskTimerInterval = 1 * 1000; // Interval for sync timer
+TiddlyWebSyncer.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
+TiddlyWebSyncer.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
 
 /*
 Error handling
@@ -158,29 +162,29 @@ Attempt to login to TiddlyWeb.
 	callback: invoked with arguments (err,isLoggedIn)
 */
 TiddlyWebSyncer.prototype.login = function(username,password,callback) {
-	var self = this;
-	var httpRequest = this.httpRequest({
-		url: this.connection.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
-		type: "POST",
-		data: {
-			user: username,
-			password: password,
-			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
-		},
-		callback: function(err,data) {
-			if(err) {
-				if(callback) {
-					callback(err);
-				}
-			} else {
-				self.getStatus(function(err,isLoggedIn,json) {
+	var self = this,
+		httpRequest = this.httpRequest({
+			url: this.connection.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
+			type: "POST",
+			data: {
+				user: username,
+				password: password,
+				tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
+			},
+			callback: function(err,data) {
+				if(err) {
 					if(callback) {
-						callback(null,isLoggedIn);
+						callback(err);
 					}
-				});
+				} else {
+					self.getStatus(function(err,isLoggedIn,json) {
+						if(callback) {
+							callback(null,isLoggedIn);
+						}
+					});
+				}
 			}
-		}
-	});
+		});
 };
 
 /*
@@ -269,9 +273,7 @@ TiddlyWebSyncer.prototype.syncToServer = function(changes) {
 		// Queue a task to sync this tiddler
 		self.enqueueSyncTask({
 			type: "save",
-			title: title,
-			queueTime: now,
-			lastModificationTime: now
+			title: title
 		});
 	});
 };
@@ -280,20 +282,199 @@ TiddlyWebSyncer.prototype.syncToServer = function(changes) {
 Queue up a sync task. If there is already a pending task for the tiddler, just update the last modification time
 */
 TiddlyWebSyncer.prototype.enqueueSyncTask = function(task) {
+	var self = this,
+		now = new Date();
+	// Set the timestamps on this task
+	task.queueTime = now;
+	task.lastModificationTime = now;
 	// Bail if it's not a tiddler we know about
 	if(!$tw.utils.hop(this.tiddlerInfo,task.title)) {
 		return;
 	}
-	// Bail if the tiddler is already at the changeCount that the server has
-	if(this.wiki.getChangeCount(task.title) <= this.tiddlerInfo[task.title].changeCount) {
+	// Bail if this is a save and the tiddler is already at the changeCount that the server has
+	if(task.type === "save" && this.wiki.getChangeCount(task.title) <= this.tiddlerInfo[task.title].changeCount) {
 		return;
 	}
 	// Check if this tiddler is already in the queue
 	if($tw.utils.hop(this.taskQueue,task.title)) {
-		this.taskQueue[task.title].lastModificationTime = task.lastModificationTime;
+		var existingTask = this.taskQueue[task.title];
+		// If so, just update the last modification time
+		existingTask.lastModificationTime = task.lastModificationTime;
+		// If the new task is a save then we upgrade the existing task to a save. Thus a pending GET is turned into a PUT if the tiddler changes locally in the meantime. But a pending save is not modified to become a GET
+		if(task.type === "save") {
+			existingTask.type = "save";
+		}
 	} else {
 		// If it is not in the queue, insert it
 		this.taskQueue[task.title] = task;
+	}
+	// Process the queue
+	$tw.utils.nextTick(function() {self.processTaskQueue.call(self);});
+};
+
+/*
+Return the number of tasks in progress
+*/
+TiddlyWebSyncer.prototype.numTasksInProgress = function() {
+	return $tw.utils.count(this.taskInProgress);
+};
+
+/*
+Return the number of tasks in the queue
+*/
+TiddlyWebSyncer.prototype.numTasksInQueue = function() {
+	return $tw.utils.count(this.taskQueue);
+};
+
+/*
+Trigger a timeout if one isn't already outstanding
+*/
+TiddlyWebSyncer.prototype.triggerTimeout = function() {
+	var self = this;
+	if(!this.taskTimerId) {
+		this.taskTimerId = window.setTimeout(function() {
+			self.taskTimerId = null;
+			self.processTaskQueue.call(self);
+		},TiddlyWebSyncer.taskTimerInterval);
+	}
+};
+
+/*
+Process the task queue, performing the next task if appropriate
+*/
+TiddlyWebSyncer.prototype.processTaskQueue = function() {
+	var self = this;
+	// Only process a task if we're not already performing a task. If we are already performing a task then we'll dispatch the next one when it completes
+	if(this.numTasksInProgress() === 0) {
+		// Choose the next task to perform
+		var task = this.chooseNextTask();
+		// Perform the task if we had one
+		if(task) {
+			// Remove the task from the queue and add it to the in progress list
+			delete this.taskQueue[task.title];
+			this.taskInProgress[task.title] = task;
+			// Dispatch the task
+			this.dispatchTask(task,function(err) {
+console.log("Done task",task.title,"error",err);
+				// Mark that this task is no longer in progress
+				delete self.taskInProgress[task.title];
+				// Process the next task
+				self.processTaskQueue.call(self);
+			});
+		} else {
+			// Make sure we've set a time if there wasn't a task to perform, but we've still got tasks in the queue
+			if(this.numTasksInQueue() > 0) {
+				this.triggerTimeout();
+			}
+		}
+	}
+};
+
+/*
+Choose the next applicable task
+*/
+TiddlyWebSyncer.prototype.chooseNextTask = function() {
+	var self = this,
+		candidateTask = null,
+		now = new Date();
+	// Select the best candidate task
+	$tw.utils.each(this.taskQueue,function(task,title) {
+		// Exclude the task if there's one of the same name in progress
+		if($tw.utils.hop(self.taskInProgress,title)) {
+			return;
+		}
+		// Exclude the task if it is a save and the tiddler has been modified recently, but not hit the fallback time
+		if(task.type === "save" && (now - task.lastModificationTime) < TiddlyWebSyncer.throttleInterval &&
+			(now - task.queueTime) < TiddlyWebSyncer.fallbackInterval) {
+			return;	
+		}
+		// Exclude the task if it is newer than the current best candidate
+		if(candidateTask && candidateTask.queueTime < task.queueTime) {
+			return;
+		}
+		// Now this is our best candidate
+		candidateTask = task;
+	});
+	return candidateTask;
+};
+
+/*
+Dispatch a task and invoke the callback
+*/
+TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
+	var self = this;
+	if(task.type === "save") {
+		var changeCount = this.wiki.getChangeCount(task.title);
+		this.httpRequest({
+			url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + task.title,
+			type: "PUT",
+			headers: {
+				"Content-type": "application/json"
+			},
+			data: this.convertTiddlerToTiddlyWebFormat(task.title),
+			callback: function(err,data,request) {
+				if(err) {
+					return callback(err);
+				}
+				// Save the details of the new revision of the tiddler
+				var tiddlerInfo = self.tiddlerInfo[task.title];
+				tiddlerInfo.changeCount = changeCount;
+				tiddlerInfo.revision = self.getRevisionFromEtag(request);
+				// Invoke the callback
+				callback(null);	
+			}
+		});
+	} else if(task.type === "load") {
+		// Load the tiddler
+		this.httpRequest({
+			url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + task.title,
+			callback: function(err,data,request) {
+				if(err) {
+					return callback(err);
+				}
+				// Store the tiddler and revision number
+				self.storeTiddler(JSON.parse(data),self.getRevisionFromEtag(request));
+				// Invoke the callback
+				callback(null);
+			}
+		});
+	}
+};
+
+/*
+Convert a tiddler to a field set suitable for PUTting to TiddlyWeb
+*/
+TiddlyWebSyncer.prototype.convertTiddlerToTiddlyWebFormat = function(title) {
+	var result = {},
+		tiddler = this.wiki.getTiddler(title),
+		knownFields = [
+			"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
+		];
+	if(tiddler) {
+		$tw.utils.each(tiddler.fields,function(fieldValue,fieldName) {
+			var fieldString = tiddler.getFieldString(fieldName);
+			if(knownFields.indexOf(fieldName) !== -1) {
+				// If it's a known field, just copy it across
+				result[fieldName] = fieldString;
+			} else {
+				// If it's unknown, put it in the "fields" field
+				result.fields = result.fields || {};
+				result.fields[fieldName] = fieldString;
+			}
+		});
+	}
+	return JSON.stringify(result);
+};
+
+/*
+Extract the revision from the Etag header of a request
+*/
+TiddlyWebSyncer.prototype.getRevisionFromEtag = function(request) {
+	var etag = request.getResponseHeader("Etag");
+	if(etag) {
+		return etag.split("/")[2].split(":")[0]; // etags are like "system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04"
+	} else {
+		return 0;
 	}
 };
 
@@ -301,18 +482,10 @@ TiddlyWebSyncer.prototype.enqueueSyncTask = function(task) {
 Lazily load a skinny tiddler if we can
 */
 TiddlyWebSyncer.prototype.lazyLoad = function(connection,title,tiddler) {
-	var self = this;
-	this.httpRequest({
-		url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + title,
-		callback: function(err,data,request) {
-			if(err) {
-console.log("error in lazyLoad",err);
-				return;
-			}
-			var etag = request.getResponseHeader("Etag"),
-				revision = etag.split("/")[2].split(":")[0]; // etags are like "system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04"
-			self.storeTiddler(JSON.parse(data),revision);
-		}
+	// Queue up a sync task to load this tiddler
+	this.enqueueSyncTask({
+		type: "load",
+		title: title
 	});
 };
 
@@ -359,7 +532,7 @@ TiddlyWebSyncer.prototype.httpRequest = function(options) {
 			request.setRequestHeader(title,element);
 		});
 	}
-	if(data) {
+	if(data && !$tw.utils.hop(headers,"Content-type")) {
 		request.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
 	request.send(data);
