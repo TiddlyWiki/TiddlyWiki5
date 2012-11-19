@@ -235,24 +235,29 @@ TiddlyWebSyncer.prototype.syncFromServer = function() {
 				self.log("Error retrieving skinny tiddler list:",err);
 				return;
 			}
-			// Store the skinny versions of these tiddlers
-			var json = JSON.parse(data),
-				wasAnyTiddlerStored = false;
+			// Process each incoming tiddler
+			var json = JSON.parse(data);
 			for(var t=0; t<json.length; t++) {
-				var tiddlerFields = json[t];
-				// Check if the tiddler is already present and not skinny
-				var tiddler = self.wiki.getTiddler(tiddlerFields.title),
-					isFat = tiddler && tiddler.fields.text !== undefined;
-				// Store the tiddler
-				var wasTiddlerStored = self.storeTiddler(tiddlerFields,tiddlerFields.revision.toString());
-				// Load the body of the tiddler if it was already fat, and we actually stored something
-				if(isFat && wasTiddlerStored) {
-					self.enqueueSyncTask({
-						type: "load",
-						title: tiddlerFields.title
-					});
+				// Get the incoming tiddler fields, and the existing tiddler
+				var tiddlerFields = json[t],
+					incomingRevision = tiddlerFields.revision.toString(),
+					tiddler = self.wiki.getTiddler(tiddlerFields.title),
+					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
+					currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
+				// Ignore the incoming tiddler if it's the same as the revision we've already got
+				if(currRevision !== incomingRevision) {
+					// Do a full load if we've already got a fat version of the tiddler
+					if(tiddler && tiddler.fields.text) {
+						// Do a full load of this tiddler
+						self.enqueueSyncTask({
+							type: "load",
+							title: tiddlerFields.title
+						});
+					} else {
+						// Load the skinny version of the tiddler
+						self.storeTiddler(tiddlerFields,incomingRevision);
+					}
 				}
-				wasAnyTiddlerStored = wasTiddlerStored || wasAnyTiddlerStored;
 			}
 			// Trigger another sync
 			window.setTimeout(function() {
@@ -449,12 +454,6 @@ Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler and save it in the s
 TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
 	var self = this,
 		result = {};
-	// Don't update if we've already got this revision and it's not skinny
-	var tiddler = this.wiki.getTiddler(tiddlerFields.title),
-		isCurrentlyFat = !!tiddler && !!tiddler.fields.text;
-	if(isCurrentlyFat && this.tiddlerInfo[tiddlerFields.title] && this.tiddlerInfo[tiddlerFields.title].revision === revision) {
-		return false;
-	}
 	// Transfer the fields, pulling down the `fields` hashmap
 	$tw.utils.each(tiddlerFields,function(element,title,object) {
 		if(title === "fields") {
@@ -478,7 +477,6 @@ TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
 		revision: revision,
 		changeCount: self.wiki.getChangeCount(result.title)
 	};
-	return true;
 };
 
 /*
