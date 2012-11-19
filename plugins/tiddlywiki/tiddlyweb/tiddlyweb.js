@@ -83,26 +83,19 @@ TiddlyWebSyncer.prototype.handleEvent = function(event) {
 };
 
 /*
-Invoke any tiddlyweb-startup modules
+Lazily load a skinny tiddler if we can
 */
-TiddlyWebSyncer.prototype.invokeTiddlyWebStartupModules = function(loggedIn) {
-	$tw.modules.forEachModuleOfType("tiddlyweb-startup",function(title,module) {
-		module.startup(loggedIn);
+TiddlyWebSyncer.prototype.lazyLoad = function(connection,title,tiddler) {
+	// Queue up a sync task to load this tiddler
+	this.enqueueSyncTask({
+		type: "load",
+		title: title
 	});
-
 };
 
-TiddlyWebSyncer.prototype.getCsrfToken = function() {
-	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
-		match = regex.exec(document.cookie),
-		csrf = null;
-	if (match && (match.length === 2)) {
-		csrf = match[1];
-	}
-	return csrf;
-
-};
-
+/*
+Get the current status of the TiddlyWeb connection
+*/
 TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	// Get status
 	var self = this;
@@ -113,14 +106,15 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 				return callback(err);
 			}
 			// Decode the status JSON
-			var json = null;
+			var json = null,
+				isLoggedIn = false;
 			try {
 				json = JSON.parse(data);
 			} catch (e) {
 			}
 			if(json) {
 				// Check if we're logged in
-				var isLoggedIn = json.username !== "GUEST";
+				isLoggedIn = json.username !== "GUEST";
 				// Set the various status tiddlers
 				self.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 				if(isLoggedIn) {
@@ -210,45 +204,6 @@ TiddlyWebSyncer.prototype.logout = function(options) {
 			}
 		}
 	});
-};
-
-/*
-Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler and save it in the store. Returns true if the tiddler was actually stored
-*/
-TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
-	var self = this,
-		result = {};
-	// Don't update if we've already got this revision
-	if(this.tiddlerInfo[tiddlerFields.title] && this.tiddlerInfo[tiddlerFields.title].revision === revision) {
-		return false;
-	}
-	// Transfer the fields, pulling down the `fields` hashmap
-	$tw.utils.each(tiddlerFields,function(element,title,object) {
-		switch(title) {
-			case "fields":
-				$tw.utils.each(element,function(element,subTitle,object) {
-					result[subTitle] = element;
-				});
-				break;
-			default:
-				result[title] = tiddlerFields[title];
-				break;
-		}
-	});
-	// Some unholy freaking of content types
-	if(result.type === "text/javascript") {
-		result.type = "application/javascript";
-	} else if(!result.type || result.type === "None") {
-		result.type = "text/vnd.tiddlywiki2";
-	}
-	// Save the tiddler
-	self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(result.title),result));
-	// Save the tiddler revision and changeCount details
-	self.tiddlerInfo[result.title] = {
-		revision: revision,
-		changeCount: self.wiki.getChangeCount(result.title)
-	};
-	return true;
 };
 
 /*
@@ -470,6 +425,42 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 };
 
 /*
+Convert a TiddlyWeb JSON tiddler into a TiddlyWiki5 tiddler and save it in the store. Returns true if the tiddler was actually stored
+*/
+TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields,revision) {
+	var self = this,
+		result = {};
+	// Don't update if we've already got this revision
+	if(this.tiddlerInfo[tiddlerFields.title] && this.tiddlerInfo[tiddlerFields.title].revision === revision) {
+		return false;
+	}
+	// Transfer the fields, pulling down the `fields` hashmap
+	$tw.utils.each(tiddlerFields,function(element,title,object) {
+		if(title === "fields") {
+			$tw.utils.each(element,function(element,subTitle,object) {
+				result[subTitle] = element;
+			});
+		} else {
+			result[title] = tiddlerFields[title];
+		}
+	});
+	// Some unholy freaking of content types
+	if(result.type === "text/javascript") {
+		result.type = "application/javascript";
+	} else if(!result.type || result.type === "None") {
+		result.type = "text/vnd.tiddlywiki2";
+	}
+	// Save the tiddler
+	self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getTiddler(result.title),result));
+	// Save the tiddler revision and changeCount details
+	self.tiddlerInfo[result.title] = {
+		revision: revision,
+		changeCount: self.wiki.getChangeCount(result.title)
+	};
+	return true;
+};
+
+/*
 Convert a tiddler to a field set suitable for PUTting to TiddlyWeb
 */
 TiddlyWebSyncer.prototype.convertTiddlerToTiddlyWebFormat = function(title) {
@@ -507,17 +498,6 @@ TiddlyWebSyncer.prototype.getRevisionFromEtag = function(request) {
 };
 
 /*
-Lazily load a skinny tiddler if we can
-*/
-TiddlyWebSyncer.prototype.lazyLoad = function(connection,title,tiddler) {
-	// Queue up a sync task to load this tiddler
-	this.enqueueSyncTask({
-		type: "load",
-		title: title
-	});
-};
-
-/*
 A quick and dirty HTTP function; to be refactored later. Options are:
 	url: URL to retrieve
 	type: GET, PUT, POST etc
@@ -535,29 +515,29 @@ TiddlyWebSyncer.prototype.httpRequest = function(options) {
 			data = options.data;
 		} else { // A hashmap of strings
 			results = [];
-			$tw.utils.each(options.data,function(element,title,object) {
-				results.push(title + "=" + encodeURIComponent(element));
+			$tw.utils.each(options.data,function(dataItem,dataItemTitle) {
+				results.push(dataItemTitle + "=" + encodeURIComponent(dataItem));
 			});
-			data = results.join("&")
+			data = results.join("&");
 		}
 	}
 	// Set up the state change handler
 	request.onreadystatechange = function() {
 		if(this.readyState === 4) {
 			if(this.status === 200) {
-				// success!
+				// Success!
 				options.callback(null,this.responseText,this);
 				return;
 			}
-		// something went wrong
+		// Something went wrong
 		options.callback(new Error("XMLHttpRequest error: " + this.status));
 		}
 	};
 	// Make the request
 	request.open(type,options.url,true);
 	if(headers) {
-		$tw.utils.each(headers,function(element,title,object) {
-			request.setRequestHeader(title,element);
+		$tw.utils.each(headers,function(header,headerTitle,object) {
+			request.setRequestHeader(headerTitle,header);
 		});
 	}
 	if(data && !$tw.utils.hop(headers,"Content-type")) {
@@ -565,6 +545,20 @@ TiddlyWebSyncer.prototype.httpRequest = function(options) {
 	}
 	request.send(data);
 	return request;
+};
+
+/*
+Retrieve the CSRF token from its cookie
+*/
+TiddlyWebSyncer.prototype.getCsrfToken = function() {
+	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
+		match = regex.exec(document.cookie),
+		csrf = null;
+	if (match && (match.length === 2)) {
+		csrf = match[1];
+	}
+	return csrf;
+
 };
 
 // Only export anything on the browser
