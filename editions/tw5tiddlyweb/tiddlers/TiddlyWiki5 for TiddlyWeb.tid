@@ -1,6 +1,15 @@
 title: TiddlyWiki5 for TiddlyWeb
 
-Experimenting with ~TiddlyWeb integration for ~TiddlyWiki5.
+Experimenting with ~TiddlyWeb integration for ~TiddlyWiki5. Features:
+
+* Loads skinny tiddlers from entire recipe at startup/login
+* Subsequently syncs changes back to the server
+* Polls for changes from the server
+
+To do:
+
+* Use of `if-match` header
+* Deleting tiddlers
 
 ----
 
