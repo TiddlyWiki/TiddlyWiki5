@@ -13,6 +13,15 @@ Various static utility functions.
 "use strict";
 
 /*
+Return the number of keys in an object
+*/
+exports.count = function(object) {
+	var s = 0;
+	$tw.utils.each(object,function() {s++;});
+	return s;
+};
+
+/*
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify
 	value: a single value to push or an array of values to push
