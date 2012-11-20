@@ -55,13 +55,13 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 	if(this.connection) {
 		return new Error("TiddlyWebSyncer can only handle a single connection");
 	}
-	// Check the connection has its constituent parts
-	if(!connection.host || !connection.recipe) {
-		return new Error("Missing connection data");
+	// If we don't have a host then substitute the host of the page
+	if(!connection.host) {
+		connection.host = document.location.protocol + "//" + document.location.host + "/";
 	}
 	// Mark us as not logged in
 	this.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
-	// Save and return the connection object
+	// Save the connection object
 	this.connection = connection;
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("",function(changes) {
@@ -124,6 +124,10 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 			} catch (e) {
 			}
 			if(json) {
+				// Use the recipe if we don't already have one
+				if(!self.connection.recipe) {
+					self.connection.recipe = json.space.recipe;
+				}
 				// Check if we're logged in
 				isLoggedIn = json.username !== "GUEST";
 				// Set the various status tiddlers
