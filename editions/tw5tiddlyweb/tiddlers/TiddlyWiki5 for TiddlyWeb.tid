@@ -10,6 +10,9 @@ To do:
 
 * Use of `if-match` header
 * Deleting tiddlers
+* Routing newly created tiddlers to TiddlyWeb
+
+To try it out, create a new space, include the space `tw5tiddlyweb`, and then visit `<myspace>.tiddlyspace.com/tw5`.
 
 ----
 
