@@ -2,7 +2,11 @@ title: TiddlyWebConnection
 type: application/x-tiddler-dictionary
 module-type: serverconnection
 
+# Which syncer is used for this connection
 syncer: tiddlywebsyncer
-# replace with a tiddlyspace to which you have write access
-host: http://tw5tiddlyweb.tiddlyspace.com/
-recipe: tw5tiddlyweb_public
+
+# The server host. If not specified, defaults to the host from which the page was loaded
+# host: http://tw5tiddlyweb.tiddlyspace.com/
+
+# The recipe to use. If not specified, defaults to the recipe used to serve the page
+# recipe: tw5tiddlyweb_public
