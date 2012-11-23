@@ -251,7 +251,7 @@ TiddlyWebSyncer.prototype.syncFromServer = function() {
 				// Ignore the incoming tiddler if it's the same as the revision we've already got
 				if(currRevision !== incomingRevision) {
 					// Do a full load if we've already got a fat version of the tiddler
-					if(tiddler && tiddler.fields.text) {
+					if(tiddler && tiddler.fields.text !== undefined) {
 						// Do a full load of this tiddler
 						self.enqueueSyncTask({
 							type: "load",

@@ -759,7 +759,7 @@ exports.getTiddlerText = function(title) {
 	if(!tiddler) {
 		return undefined;
 	}
-	if(tiddler.fields.text) {
+	if(tiddler.fields.text !== undefined) {
 		// Just return the text if we've got it
 		return tiddler.fields.text;
 	} else {
