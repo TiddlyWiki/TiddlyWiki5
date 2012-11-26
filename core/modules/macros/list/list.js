@@ -27,7 +27,8 @@ exports.info = {
 		listviewTiddler: {byName: true, type: "tiddler"},
 		listview: {byName: true, type: "text"},
 		itemClass: {byName: true, type: "text"},
-		map: {byName: true, type: "tiddler"}
+		map: {byName: true, type: "tiddler"},
+		forceBlock: {ByName: true, type: "text"} // HACK: To be removed...
 	}
 };
 
@@ -43,6 +44,10 @@ var typeMappings = {
 };
 
 exports.executeMacro = function() {
+	this.useBlock = this.isBlock ? "div" : "span";
+	if(this.hasParameter("forceBlock")) {
+		this.useBlock = true;
+	}
 	// Get the list of tiddlers object
 	this.getTiddlerList();
 	// Create the list frame element
@@ -50,7 +55,7 @@ exports.executeMacro = function() {
 	if(this.classes) {
 		$tw.utils.pushTop(attributes["class"],this.classes);
 	}
-	this.listFrame = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,[]);
+	this.listFrame = $tw.Tree.Element(this.useBlock ? "div" : "span",attributes,[]);
 	// Create the list
 	if(this.list.length === 0) {
 		// Check for an empty list
@@ -125,7 +130,7 @@ exports.createListElement = function(title) {
 	if(this.hasParameter("itemClass")) {
 		attributes["class"].push(this.params.itemClass);
 	}
-	var listElement = $tw.Tree.Element(this.isBlock ? "div" : "span",attributes,[node],{
+	var listElement = $tw.Tree.Element(this.useBlock ? "div" : "span",attributes,[node],{
 			events: ["tw-navigate","tw-EditTiddler","tw-SaveTiddler","tw-CloseTiddler","tw-NewTiddler"],
 			eventHandler: eventHandler
 		});
