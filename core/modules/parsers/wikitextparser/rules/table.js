@@ -86,7 +86,7 @@ var processRow = function(prevColumns) {
 			// Parse the cell
 			cell.children = this.parseRun(cellTermRegExp);
 			// Set the alignment for the cell
-			if(cellMatch[1].substr(cellMatch[1].length-2,1) === " ") { // spaceRight
+			if(cellMatch[1].substr(cellMatch[1].length-1,1) === " ") { // spaceRight
 				cell.attributes.align = spaceLeft ? "center" : "left";
 			} else if(spaceLeft) {
 				cell.attributes.align = "right";
@@ -151,7 +151,6 @@ exports.parse = function(match,isBlock) {
 				rowCount++;
 			}
 		}
-		rowRegExp.lastIndex = this.pos;
 		rowMatch = rowRegExp.exec(this.source);
 	}
 	return [table];
