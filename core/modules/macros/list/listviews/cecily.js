@@ -21,10 +21,12 @@ function CecilyListView(listMacro) {
 	// Position the initial list entries on the map
 	this.loadMap();
 	for(var t=0; t<listFrame.children.length; t++) {
-		var title = listFrame.children[t].listElementInfo.title,
-			domNode = listFrame.children[t].domNode;
-		domNode.style.position = "absolute";
-		this.positionTiddler(title,domNode);
+		if(listFrame.children[t].listElementInfo) {
+			var domNode = listFrame.children[t].domNode,
+				title = listFrame.children[t].listElementInfo.title;
+			domNode.style.position = "absolute";
+			this.positionTiddler(title,domNode);
+		}
 	}
 }
 
