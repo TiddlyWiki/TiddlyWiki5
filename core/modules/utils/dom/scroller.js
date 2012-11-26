@@ -13,12 +13,13 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 "use strict";
 
 /*
-Creates a Scroller object
+Event handler for when the `tw-scroll` event hits the document body
 */
-var Scroller = function() {
+var PageScroller = function() {
+	this.timerId = null;
 };
 
-Scroller.prototype.cancel = function() {
+PageScroller.prototype.cancelScroll = function() {
 	if(this.timerId) {
 		window.clearInterval(this.timerId);
 		this.timerId = null;
@@ -26,11 +27,22 @@ Scroller.prototype.cancel = function() {
 };
 
 /*
-Smoothly scroll an tree node into view if needed
+Handle an event
 */
-Scroller.prototype.scrollIntoView = function(domNode) {
+PageScroller.prototype.handleEvent = function(event) {
+	if(event.type === "tw-scroll") {
+		return this.handleScrollEvent(event);
+	}
+	return true;
+};
+
+/*
+Handle a scroll event hitting the page document
+*/
+PageScroller.prototype.handleScrollEvent = function(event) {
 	// Get the offset bounds of the element
-	var bounds = {
+	var domNode = event.target,
+		bounds = {
 			left: domNode.offsetLeft,
 			top: domNode.offsetTop,
 			width: domNode.offsetWidth,
@@ -39,17 +51,12 @@ Scroller.prototype.scrollIntoView = function(domNode) {
 	// Walk up the tree adjusting the offset bounds by each offsetParent
 	while(domNode.offsetParent) {
 		domNode = domNode.offsetParent;
-		// If the node is scrollable, tell it to scroll
-		if(domNode.scrollTo) {
-			domNode.scrollTo(bounds);
-			return;
-		}
 		bounds.left += domNode.offsetLeft;
 		bounds.top += domNode.offsetTop;
 	}
-	// If we got to the top of the tree then we need to scroll the body
+	// Now scroll the body
 	var scrollPosition = $tw.utils.getScrollPosition();
-	this.cancel();
+	this.cancelScroll();
 	this.startTime = new Date();
 	this.startX = scrollPosition.x;
 	this.startY = scrollPosition.y;
@@ -60,7 +67,7 @@ Scroller.prototype.scrollIntoView = function(domNode) {
 		this.timerId = window.setInterval(function() {
 			var t = ((new Date()) - self.startTime) / $tw.config.preferences.animationDuration;
 			if(t >= 1) {
-				self.cancel();
+				self.cancelScroll();
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
@@ -69,6 +76,6 @@ Scroller.prototype.scrollIntoView = function(domNode) {
 	}
 };
 
-exports.Scroller = Scroller;
+exports.PageScroller = PageScroller;
 
 })();

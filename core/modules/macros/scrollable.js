@@ -51,21 +51,36 @@ exports.executeMacro = function() {
 	if(this.hasParameter("height")) {
 		outerAttributes.style.height = this.params.height;
 	}
-	var innerFrame = $tw.Tree.Element("div",innerAttributes,this.content),
-		outerFrame = $tw.Tree.Element("div",outerAttributes,[innerFrame]);
-	outerFrame.execute(this.parents,this.tiddlerTitle);
-	return outerFrame;
+	this.innerFrame = $tw.Tree.Element("div",innerAttributes,this.content);
+	this.outerFrame = $tw.Tree.Element("div",outerAttributes,[this.innerFrame],{
+		events: ["tw-scroll"],
+		eventHandler: this
+	});
+	this.outerFrame.execute(this.parents,this.tiddlerTitle);
+	return this.outerFrame;
 };
 
-exports.postRenderInDom = function() {
-	// Attach a scrollTo() method to the outer wrapper
-	var self = this;
-	this.child.children[0].domNode.scrollTo = function(bounds) {
-		self.scrollTo.call(self,bounds);
-	};
-};
+exports.handleEvent = function(event) {
+	if(event.type === "tw-scroll") {
+		return this.handleScrollEvent(event);
+	}
+	return true;
+}
 
-exports.scrollTo = function(bounds) {
+exports.handleScrollEvent = function(event) {
+	var domNode = event.target,
+		bounds = {
+			left: domNode.offsetLeft,
+			top: domNode.offsetTop,
+			width: domNode.offsetWidth,
+			height: domNode.offsetHeight
+		};
+	// Walk up the tree adjusting the offset bounds by each offsetParent
+	while(domNode.offsetParent && domNode.offsetParent !== this.innerFrame.domNode) {
+		domNode = domNode.offsetParent;
+		bounds.left += domNode.offsetLeft;
+		bounds.top += domNode.offsetTop;
+	}
 	this.cancelScroll();
 	this.startTime = new Date();
 	this.startX = this.child.domNode.scrollLeft;
@@ -85,6 +100,8 @@ exports.scrollTo = function(bounds) {
 			self.child.domNode.scrollTop = self.startY + (self.endY - self.startY) * t;
 		}, 10);
 	}
+	event.stopPropagation();
+	return false;
 };
 
 exports.cancelScroll = function() {

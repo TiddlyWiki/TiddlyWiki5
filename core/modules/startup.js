@@ -65,7 +65,8 @@ exports.startup = function() {
 		document.addEventListener("tw-login",handleSyncerEvent,false);
 		document.addEventListener("tw-logout",handleSyncerEvent,false);
 		// Install the scroller
-		$tw.scroller = new $tw.utils.Scroller();
+		$tw.pageScroller = new $tw.utils.PageScroller();
+		document.addEventListener("tw-scroll",$tw.pageScroller,false);
 		// Install the sprite factory
 		$tw.sprite = new $tw.utils.Sprite();
 		// Install the save action handler

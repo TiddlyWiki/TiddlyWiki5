@@ -35,7 +35,9 @@ SidewaysListView.prototype.navigateTo = function(historyInfo) {
 		listElementNode = this.listMacro.listFrame.children[listElementIndex],
 		targetElement = listElementNode.domNode;
 	// Scroll the node into view
-	$tw.scroller.scrollIntoView(targetElement);
+	var scrollEvent = document.createEvent("Event");
+	scrollEvent.initEvent("tw-scroll",true,true);
+	targetElement.dispatchEvent(scrollEvent);
 };
 
 SidewaysListView.prototype.insert = function(index) {
