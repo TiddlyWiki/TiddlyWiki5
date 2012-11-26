@@ -1,0 +1,13 @@
+title: SidewaysSubView
+
+<<navigator story:"$:/SubStoryList" history:"$:/SubHistoryList"><
+
+This view shows a different list of tiddlers stacked horizontally. Links are opened within the sideways view.
+
+[[Docs]] - HelloThere - AllTiddlers
+
+<<scrollable width:"100%" height:"400px" class:"tw-well"><
+<<list filter:"[list[$:/SubStoryList]]" history:"$:/SubHistoryList" template:"CecilyTemplate" editTemplate:"$:/templates/EditTemplate" listview:sideways itemClass:"tw-tiddler-frame">>
+>>
+
+>>
