@@ -44,7 +44,7 @@ var typeMappings = {
 };
 
 exports.executeMacro = function() {
-	this.useBlock = this.isBlock ? "div" : "span";
+	this.useBlock = this.isBlock;
 	if(this.hasParameter("forceBlock")) {
 		this.useBlock = true;
 	}
