@@ -22,7 +22,7 @@ exports.info = {
 };
 
 exports.executeMacro = function() {
-	var innerClasses = ["tw-scrollable-inner"],
+	var innerClasses = ["tw-zoomable-inner"],
 		innerAttributes = {
 			"class": innerClasses,
 			style: {
@@ -30,7 +30,7 @@ exports.executeMacro = function() {
 				position: "relative"
 			}
 		},
-		outerClasses = ["tw-scrollable","tw-scrollable-outer"],
+		outerClasses = ["tw-zoomable","tw-zoomable-outer"],
 		outerAttributes = {
 			"class": outerClasses,
 			style: {
@@ -82,7 +82,7 @@ exports.setViewPort = function(domNode) {
 			$tw.utils.setStyle(this.innerFrame.domNode,[
 				{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
 				{transformOrigin: "0% 0%"},
-				{transform: "scale(" + this.scale + ") translateX(" + this.translateX + "px) translateY(" + this.translateY + "px)"}
+				{transform: "translate(" + this.translateX * this.scale + "px," + this.translateY * this.scale + "px) scale(" + this.scale + ")"}
 			]);
 		}
 	}
@@ -122,7 +122,7 @@ exports.zoomAll = function() {
 	$tw.utils.setStyle(this.innerFrame.domNode,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
 		{transformOrigin: "0% 0%"},
-		{transform: "scale(" + this.scale + ") translateX(" + this.translateX + "px) translateY(" + this.translateY + "px)"}
+		{transform: "translate(" + this.translateX * this.scale + "px," + this.translateY * this.scale + "px) scale(" + this.scale + ")"}
 	]);
 };
 
@@ -138,7 +138,6 @@ exports.handleEvent = function(event) {
 }
 
 exports.handleScrollEvent = function(event) {
-console.log("Zoomable got scroll event to",event.target);
 	this.setViewPort(event.target);
 	event.stopPropagation();
 	return false;
