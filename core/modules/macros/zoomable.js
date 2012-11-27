@@ -63,6 +63,10 @@ exports.executeMacro = function() {
 	return this.outerFrame;
 };
 
+exports.postRenderInDom = function() {
+	this.zoomAll();
+};
+
 /*
 Bring a dom node into view by setting the viewport (translation and scale factors) appropriately.
 
@@ -95,19 +99,25 @@ exports.zoomAll = function() {
 				var node = nodes[c];
 				if(node.getAttribute && node.getAttribute("data-tw-zoom")) {
 					var zoom = JSON.parse(node.getAttribute("data-tw-zoom"));
-					if(zoom) {
-						if(zoom.x < bounds.left) {
-							bounds.left = zoom.x;
-						}
-						if(zoom.y < bounds.top) {
-							bounds.top = zoom.y;
-						}
-						if((zoom.x + zoom.w) > bounds.right) {
-							bounds.right = zoom.x + zoom.w;
-						}
-						if((zoom.y + zoom.h) > bounds.bottom) {
-							bounds.bottom = zoom.y + zoom.h;
-						}
+					if(zoom === true) {
+						zoom = {
+							x: node.offsetLeft,
+							y: node.offsetTop,
+							w: node.scrollWidth,
+							h: node.scrollHeight
+						};
+					}
+					if(zoom.x < bounds.left) {
+						bounds.left = zoom.x;
+					}
+					if(zoom.y < bounds.top) {
+						bounds.top = zoom.y;
+					}
+					if((zoom.x + zoom.w) > bounds.right) {
+						bounds.right = zoom.x + zoom.w;
+					}
+					if((zoom.y + zoom.h) > bounds.bottom) {
+						bounds.bottom = zoom.y + zoom.h;
 					}
 				}
 				if(node.hasChildNodes()) {
