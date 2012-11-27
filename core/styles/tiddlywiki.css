@@ -6090,7 +6090,7 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-zoomable .tw-tiddler-frame {
-  width: auto;
+  width: 400px;
   padding: 30px 30px 30px 30px;
   margin: 0 0px 0px 0px;
   background-color: #fff;
