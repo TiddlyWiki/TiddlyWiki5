@@ -75,10 +75,21 @@ CecilyListView.prototype.lookupTiddlerInMap = function(title,domNode) {
 CecilyListView.prototype.positionTiddler = function(title,domNode) {
 	var pos = this.lookupTiddlerInMap(title,domNode),
 		scale = pos.w/domNode.offsetWidth;
+	domNode.setAttribute("data-tw-zoom",JSON.stringify(pos));
 	$tw.utils.setStyle(domNode,[
 		{transformOrigin: "0% 0%"},
 		{transform: "translateX(" + pos.x + "px) translateY(" + pos.y + "px) scale(" + scale + ")"}
 	]);
+};
+
+CecilyListView.prototype.navigateTo = function(historyInfo) {
+	var listElementIndex = this.listMacro.findListElementByTitle(0,historyInfo.title),
+		listElementNode = this.listMacro.listFrame.children[listElementIndex],
+		targetElement = listElementNode.domNode;
+	// Scroll the node into view
+	var scrollEvent = document.createEvent("Event");
+	scrollEvent.initEvent("tw-scroll",true,true);
+	targetElement.dispatchEvent(scrollEvent);
 };
 
 CecilyListView.prototype.insert = function(index) {
