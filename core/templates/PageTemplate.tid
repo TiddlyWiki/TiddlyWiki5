@@ -13,7 +13,7 @@ title: $:/templates/PageTemplate
 <!-- Navigation menu -->
 * HelloThere
 * [[Docs]]
-*{{divider-vertical}}
+*.divider-vertical
 
 <!-- Search box -->
 <form class="form-search">

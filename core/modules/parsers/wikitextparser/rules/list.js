@@ -35,7 +35,7 @@ A CSS class can be applied to a list item as follows:
 
 {{{
 * List item one
-*{{active}} List item two has the class `active`
+*.active List item two has the class `active`
 * List item three
 }}}
 

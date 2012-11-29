@@ -238,20 +238,21 @@ WikiTextRenderer.prototype.parseRunTerminated = function(terminatorRegExp,option
 };
 
 /*
-Parse a run of text preceded by an optional class specifier `{{class}}`
+Parse a run of text preceded by an optional class specifier `.classname`
 */
 WikiTextRenderer.prototype.parseClassedRun = function(terminatorRegExp) {
-	var classRegExp = /\{\{([^\}]*)\}\}/mg,
-		className;
+	var classRegExp = /\.([^\s\.]+)/mg,
+		classNames = [];
 	classRegExp.lastIndex = this.pos;
 	var match = classRegExp.exec(this.source);
-	if(match && match.index === this.pos) {
-		className = match[1];
+	while(match && match.index === this.pos) {
 		this.pos = match.index + match[0].length;
+		classNames.push(match[1]);
+		var match = classRegExp.exec(this.source);
 	}
 	var tree = this.parseRun(terminatorRegExp);
 	return {
-		"class": className,
+		"class": classNames.join(" "),
 		tree: tree
 	};
 };

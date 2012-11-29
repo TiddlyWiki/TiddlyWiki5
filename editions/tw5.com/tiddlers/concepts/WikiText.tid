@@ -169,7 +169,7 @@ You can also assign a CSS class to an individual member of a list with this nota
 
 {{{
 * List One
-*{{MyClass}} List Two
+*.MyClass List Two
 * List Three
 }}}
 
@@ -186,7 +186,7 @@ The resulting HTML looks like this:
 The same syntax can be used with headings:
 
 {{{
-!{{myStyle}} This heading has the class `myStyle`
+!.myStyle This heading has the class `myStyle`
 }}}
 
 ! Typographic Features
