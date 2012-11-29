@@ -1,6 +1,6 @@
 title: $:/templates/TagTemplate
 
-{{btn-invisible{
+{{btn-invisible tw-tag-button{
 <<button popup:"$:/temp/TagDropDownLocation" qualifyTiddlerTitles:yes><
 {{label{
 <<color background:yes default:#aaa><
@@ -16,13 +16,12 @@ title: $:/templates/TagTemplate
 {{dropdown-menu{
 
 * <<view title link>>
-*{{divider}} 
+*.divider
+* <<list filter:"[is[current]tagging[]]"><
 
-* (((
+<li><<view title link>></li>
 
-[is[current]tagging[]]
-
-)) <li><<view title link>></li> )
+>>
 
 }}}
 

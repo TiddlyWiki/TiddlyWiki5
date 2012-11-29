@@ -26,7 +26,7 @@ exports.info = {
 		listview: {byName: true, type: "text"},
 		itemClass: {byName: true, type: "text"},
 		map: {byName: true, type: "tiddler"},
-		forceBlock: {ByName: true, type: "text"} // HACK: To be removed...
+		block: {ByName: true, type: "text"} // HACK: To be removed...
 	}
 };
 
@@ -43,8 +43,8 @@ var typeMappings = {
 
 exports.executeMacro = function() {
 	this.useBlock = this.isBlock;
-	if(this.hasParameter("forceBlock")) {
-		this.useBlock = true;
+	if(this.hasParameter("block")) {
+		this.useBlock = this.params.block === "yes";
 	}
 	// Get the list of tiddlers object
 	this.getTiddlerList();
@@ -154,7 +154,10 @@ exports.createListElementMacro = function(title) {
 	if(!template) {
 		if(this.content.length > 0) {
 			// Use our content as the template
-			templateTree = this.content;
+			templateTree = [];
+			for(var t=0; t<this.content.length; t++) {
+				templateTree.push(this.content[t].clone());
+			}
 		} else {
 			// Use default content
 			var defaultTemplate = "<<view title link>>";

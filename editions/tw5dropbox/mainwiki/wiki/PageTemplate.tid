@@ -10,7 +10,7 @@ title: $:/templates/PageTemplate
 {{nav{
 
 <<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:no>< <<dropbox.login>< Log me in >> >>
-<<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:yes>< Logged in as (($:/plugins/dropbox/UserName)) - <<dropbox.logout>< Log me out >> >>
+<<reveal state:[[$:/plugins/dropbox/IsLoggedIn]] type:match text:yes>< Logged in as {{$:/plugins/dropbox/UserName}} - <<dropbox.logout>< Log me out >> >>
 
 [[App|TiddlyWiki5 in the Sky with Dropbox]]
 

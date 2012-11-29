@@ -77,13 +77,12 @@ You can also use `{{{` to mark code blocks:
 
 You can incorporate the content of one tiddler within another using the transclusion notation:
 
-* `((JeremyRuston))` transcludes a single tiddler
-* `((( [tag[docs]] )))`, with triple parenthesis, transcludes all the tiddlers that match a [[TiddlerFilter|TiddlerFilters]]
+* `{{JeremyRuston}}` transcludes a single tiddler
 
 A template can also be specified, in which case the tiddler(s) are rendered through that [[TiddlerTemplate|TiddlerTemplates]]. Templates can either be specified directly or instead a tiddler can be specified from which the template is extracted.
 
-* `((MyTiddler) <<view title>> by <<view modified>>)` renders the tiddler `MyTiddler` through a template that will yield `MyTiddler by JeremyRuston`, if the `modified` field is set to "JeremyRuston"
-* `((MyTiddler)(MyTemplate))` renders the tiddler `MyTiddler` through the template `MyTemplate`
+* `{{MyTiddler} <<view title>> by <<view modified>>}` renders the tiddler `MyTiddler` through a template that will yield `MyTiddler by JeremyRuston`, if the `modified` field is set to "JeremyRuston"
+* `{{MyTiddler}{MyTemplate}}` renders the tiddler `MyTiddler` through the template `MyTemplate`
 
 ! Lists
 

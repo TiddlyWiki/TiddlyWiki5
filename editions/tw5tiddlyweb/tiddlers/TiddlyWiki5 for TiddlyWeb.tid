@@ -16,9 +16,9 @@ To try it out, create a new space, include the space `tw5tiddlyweb`, and then vi
 
 ----
 
-Current [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: (($:/plugins/tiddlyweb/IsLoggedIn))
+Current [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: {{$:/plugins/tiddlyweb/IsLoggedIn}}
 
-Current [[username|$:/plugins/tiddlyweb/UserName]]: (($:/plugins/tiddlyweb/UserName))
+Current [[username|$:/plugins/tiddlyweb/UserName]]: {{$:/plugins/tiddlyweb/UserName}}
 
 
 ----

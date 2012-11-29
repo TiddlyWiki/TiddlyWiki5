@@ -6,12 +6,9 @@ module-type: wikitextrule
 Wiki text rule for transclusion. For example:
 
 {{{
-((MyTiddler))
-((MyTiddler)(MyTemplate))
-((MyTiddler)Template <<view text>>)
-(((My filter expression)))
-(((My filter expression))(MyTemplate))
-(((My filter expression))Template <<view text>>)
+{{MyTiddler}}
+{{MyTiddler}{MyTemplate}}
+{{MyTiddler}Template <<view text>>}
 }}}
 
 \*/
@@ -26,31 +23,25 @@ exports.name = "transclude";
 exports.runParser = true;
 exports.blockParser = true;
 
-exports.regExpString = "\\(\\((?:(?:[^\\(\\)]+)|(?:\\([^\\(\\)]+\\)))\\)(?:\\([^\\)]+\\)|(?:[^\\)]+))?\\)";
+exports.regExpString = "\\{\\{(?:(?:[^\\{\\}]+)|(?:\\{[^\\{\\}]+\\}))\\}(?:\\{[^\\}]+\\}|(?:[^\\}]+))?\\}";
 
 exports.parse = function(match,isBlock) {
-	var regExp = /\(\((?:([^\(\)]+)|(?:\(([^\(\)]+)\)))\)(?:\(([^\)]+)\)|([^\)]+))?\)((?:\r?\n)?)/mg;
+	var regExp = /\{\{([^\{\}]+)\}(?:\{([^\}]+)\}|([^\}]+))?\}((?:\r?\n)?)/mg;
 	regExp.lastIndex = this.pos;
 	match = regExp.exec(this.source);
 	if(match && match.index === this.pos) {
 		this.pos = match.index + match[0].length;
 		var macro, params = {}, parseTree;
-		// Check if it is a single tiddler
 		if(match[1]) {
-			macro = "tiddler";
 			params.target = match[1];
-		} else {
-			// Else it is a filter
-			macro = "list";
-			params.filter = match[2];
+		}
+		if(match[2]) {
+			params.template = match[2];
 		}
 		if(match[3]) {
-			params.template = match[3];
+			parseTree = this.wiki.parseText("text/vnd.tiddlywiki",match[3]).tree;
 		}
-		if(match[4]) {
-			parseTree = this.wiki.parseText("text/vnd.tiddlywiki",match[4]).tree;
-		}
-		return [$tw.Tree.Macro(macro,{
+		return [$tw.Tree.Macro("tiddler",{
 			srcParams: params,
 			wiki: this.wiki,
 			content: parseTree

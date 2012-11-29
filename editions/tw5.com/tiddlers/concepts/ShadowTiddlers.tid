@@ -7,4 +7,4 @@ Thus, even an apparently empty TiddlyWiki actually contains dozens of tiddlers t
 
 The current shadow tiddlers are:
 
-((( [is[shadow]sort[title]] )) <div><<view title link>></div> )
+<<list shadows>>
