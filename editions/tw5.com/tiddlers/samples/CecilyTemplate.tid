@@ -8,7 +8,7 @@ title: CecilyTemplate
 	<<view modifier link>> <<view modified date>>
 </div>
 {{tw-tags-wrapper{
-{{{[is[current]tags[]]}}{$:/templates/TagTemplate}}
+<<list filter:[is[current]tags[]] template:"$:/templates/TagTemplate" block:no>>
 }}}
 <div class="body">
 	<<view text wikified>>
