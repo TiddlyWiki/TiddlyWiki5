@@ -4,7 +4,7 @@
 
 pushd editions/tw5.com > /dev/null
 
-node ../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--server 8080 $:/core/templates/tiddlywiki5.template.html text/plain text/html \
 	|| exit 1

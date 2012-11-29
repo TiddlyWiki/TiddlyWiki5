@@ -4,7 +4,7 @@
 
 pushd editions/tw5.com > /dev/null
 
-node ../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--wikitest ../../tests/wikitests/ \
 	|| exit 1

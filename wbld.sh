@@ -7,7 +7,7 @@
 
 pushd editions/tw5tiddlyweb > /dev/null
 
-node ../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../../jermolene.github.com/tiddlyweb.html text/plain \
 	|| exit 1
@@ -20,3 +20,5 @@ echo "" >> tmp/tmp.txt
 cat ../jermolene.github.com/tiddlyweb.html >> tmp/tmp.txt
 
 curl -u $1:$2 -X PUT -H "content-type: text/plain" http://tw5tiddlyweb.tiddlyspace.com/bags/tw5tiddlyweb_public/tiddlers/tw5 --data-binary @tmp/tmp.txt
+
+rm tmp/tmp.txt

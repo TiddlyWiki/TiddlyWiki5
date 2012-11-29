@@ -11,7 +11,7 @@ cp tw5dropbox/dummycontent/*.* ../../../Apps/TiddlyWiki5/My\ TiddlyWiki/tiddlers
 
 pushd editions/tw5dropbox/appwiki > /dev/null
 
-node ../../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--savetiddler $:/plugins/dropbox/tw5dropbox.template.js ../../../../../../Apps/Static\ Web\ Apps/TiddlyWiki5/public/tw5dropbox.js text/plain \
 	--savetiddler $:/plugins/dropbox/index.template.html ../../../../../../Apps/TiddlyWiki5/My\ TiddlyWiki/index.html text/plain \
@@ -25,7 +25,7 @@ popd > /dev/null
 
 pushd editions/tw5dropbox/mainwiki > /dev/null
 
-node ../../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--savetiddler $:/plugins/dropbox/index.template.html ../../../../../../Apps/Static\ Web\ Apps/TiddlyWiki5/public/index.html text/plain \
 	|| exit 1

@@ -8,7 +8,7 @@ pushd editions/tw5.com > /dev/null
 
 echo "five.tiddlywiki.com" > ../../../jermolene.github.com/CNAME
 
-node ../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--password password \
 	--savetiddler ReadMe ../../readme.md text/html \
@@ -23,7 +23,7 @@ popd > /dev/null
 
 pushd editions/empty > /dev/null
 
-node ../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--password password \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../../jermolene.github.com/empty.html text/plain \

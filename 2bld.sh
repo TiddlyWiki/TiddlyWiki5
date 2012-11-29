@@ -10,7 +10,7 @@ mkdir -p tmp/tw2
 
 pushd editions/tw2 > /dev/null
 
-node ../../core/boot.js \
+node ../../tiddlywiki.js \
 	--verbose \
 	--load source/tiddlywiki.com/index.html.recipe \
 	--savetiddler $:/core/templates/tiddlywiki2.template.html ../../tmp/tw2/index.html text/plain \
