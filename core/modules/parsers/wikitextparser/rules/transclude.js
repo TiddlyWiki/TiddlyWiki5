@@ -34,7 +34,7 @@ exports.parse = function(match,isBlock) {
 	match = regExp.exec(this.source);
 	if(match && match.index === this.pos) {
 		this.pos = match.index + match[0].length;
-		var macro, params = {};
+		var macro, params = {}, parseTree;
 		// Check if it is a single tiddler
 		if(match[1]) {
 			macro = "tiddler";
@@ -48,11 +48,12 @@ exports.parse = function(match,isBlock) {
 			params.template = match[3];
 		}
 		if(match[4]) {
-			params.templateText = match[4];
+			parseTree = this.wiki.parseText("text/vnd.tiddlywiki",match[4]).tree;
 		}
 		return [$tw.Tree.Macro(macro,{
 			srcParams: params,
-			wiki: this.wiki
+			wiki: this.wiki,
+			content: parseTree
 		})];
 	}
 	return [];

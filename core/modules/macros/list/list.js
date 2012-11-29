@@ -20,9 +20,7 @@ exports.info = {
 		filter: {byName: true, type: "filter"},
 		history: {byName: true, type: "tiddler"},
 		template: {byName: true, type: "tiddler"},
-		templateText: {byName: true, type: "text"},
 		editTemplate: {byName: true, type: "tiddler"},
-		editTemplateText: {byName: true, type: "text"},
 		emptyMessage: {byName: true, type: "text"},
 		listviewTiddler: {byName: true, type: "tiddler"},
 		listview: {byName: true, type: "text"},
@@ -145,28 +143,32 @@ Create the tiddler macro needed to represent a given tiddler
 exports.createListElementMacro = function(title) {
 	// Check if the tiddler is a draft
 	var tiddler = this.wiki.getTiddler(title),
-		draft = tiddler ? tiddler.hasField("draft.of") : false;
+		isDraft = tiddler ? tiddler.hasField("draft.of") : false;
 	// Figure out the template to use
 	var template = this.params.template,
-		templateText = this.params.templateText;
-	if(draft && this.hasParameter("editTemplate")) {
+		templateTree = undefined;
+	if(isDraft && this.hasParameter("editTemplate")) {
 		template = this.params.editTemplate;
 	}
-	if(draft && this.hasParameter("editTemplateText")) {
-		template = this.params.editTemplateText;
-	}
-	// Check for no template specified
-	if(!template && !templateText) {
-		templateText = "<<view title link>>";
+	// Check for not having a template
+	if(!template) {
+		if(this.content.length > 0) {
+			// Use our content as the template
+			templateTree = this.content;
+		} else {
+			// Use default content
+			var defaultTemplate = "<<view title link>>";
+			templateTree = this.wiki.parseText("text/vnd.tiddlywiki",defaultTemplate).tree;
+		}
 	}
 	// Create the tiddler macro
 	return $tw.Tree.Macro("tiddler",{
 			srcParams: {
 				target: title,
-				template: template,
-				templateText: templateText
+				template: template
 			},
-			wiki: this.wiki
+			wiki: this.wiki,
+			content: templateTree
 		});
 };
 

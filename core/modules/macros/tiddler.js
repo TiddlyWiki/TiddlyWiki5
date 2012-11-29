@@ -58,7 +58,6 @@ exports.info = {
 		target: {byName: "default", type: "tiddler"},
 		targetVia: {byName: true, type: "tiddler"},
 		template: {byName: true, type: "tiddler"},
-		templateText: {byName: true, type: "text"},
 		"with": {byName: true, type: "text", dependentAll: true}
 	}
 };
@@ -98,8 +97,8 @@ exports.executeMacro = function() {
 		renderTitle = this.tiddlerTitle;
 	}
 	// Get the render tree for the template
-	if(this.hasParameter("templateText")) {
-		renderTemplateTree = this.wiki.parseText("text/vnd.tiddlywiki",this.params.templateText).tree;
+	if(this.content.length > 0) {
+		renderTemplateTree = this.content;
 	} else {
 		if(this.hasParameter("template")) {
 			renderTemplateTitle = this.params.template;
