@@ -1,0 +1,17 @@
+title: TaskManagementExample
+
+! Outstanding tasks
+
+<<list filter:"[tag[task]!tag[done]sort[created]]"><
+
+<<checkbox tag:done>< <<view title link>> >>
+
+>>
+
+! Completed tasks
+
+<<list filter:"[tag[task]tag[done]sort[created]]"><
+
+<<checkbox tag:done>< <<view title link>> >>
+
+>>

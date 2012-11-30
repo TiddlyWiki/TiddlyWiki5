@@ -10,5 +10,6 @@ Here are a few features of TiddlyWiki that you can explore:
 * Save this wiki as a static HTML file: <<button save-wiki param:"$:/core/templates/static.template.html" class:"btn"><Save Static>>
 * Browse the list of AllTiddlers or the ShadowTiddlers
 * Examine the example [[bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]]
+* Check out the TaskManagementExample
 * Explore the RoadMap of TiddlyWiki5's ongoing development
 * Play with the new CecilyView
