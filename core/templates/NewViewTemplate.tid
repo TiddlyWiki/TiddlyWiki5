@@ -1,0 +1,16 @@
+title: $:/templates/NewViewTemplate
+modifier: JeremyRuston
+
+<span class="title">
+	<_view field="title"/>
+	<_button popup="HelloThere">close</_button>
+</span>
+
+<div class:"small">
+	<_view field="modifier" format="link"/>
+	<_view field="modified" format="date"/>
+</div>
+
+<div class="body">
+	<_view field="text" format="wikified"/>
+</div>

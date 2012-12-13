@@ -32,7 +32,7 @@ Get the value of a text reference. Text references can have any of these forms:
 	##<fieldname> - specifies a field of the current tiddlers
 */
 exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
-	var tr = this.parseTextReference(textRef),
+	var tr = $tw.utils.parseTextReference(textRef),
 		title = tr.title || currTiddlerTitle,
 		field = tr.field || "text",
 		tiddler = this.getTiddler(title);
@@ -44,7 +44,7 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 };
 
 exports.setTextReference = function(textRef,value,currTiddlerTitle) {
-	var tr = this.parseTextReference(textRef),
+	var tr = $tw.utils.parseTextReference(textRef),
 		title,tiddler,fields;
 	// Check if it is a reference to a tiddler
 	if(tr.title && !tr.field) {
@@ -63,7 +63,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 };
 
 exports.deleteTextReference = function(textRef,currTiddlerTitle) {
-	var tr = this.parseTextReference(textRef),
+	var tr = $tw.utils.parseTextReference(textRef),
 		title,tiddler,fields;
 	// Check if it is a reference to a tiddler
 	if(tr.title && !tr.field) {
@@ -77,33 +77,6 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 			fields[tr.field] = undefined;
 			this.addTiddler(new $tw.Tiddler(tiddler,fields));
 		}
-	}
-};
-
-/*
-Parse a text reference into its constituent parts
-*/
-exports.parseTextReference = function(textRef,currTiddlerTitle) {
-	// Look for a metadata field separator
-	var pos = textRef.indexOf("!!");
-	if(pos !== -1) {
-		if(pos === 0) {
-			// Just a field
-			return {
-				field: textRef.substring(2)
-			};
-		} else {
-			// Field and title
-			return {
-				title: textRef.substring(0,pos),
-				field: textRef.substring(pos + 2)
-			};	
-		}
-	} else {
-		// Otherwise, we've just got a title
-		return {
-			title: textRef
-		};
 	}
 };
 
@@ -184,9 +157,8 @@ exports.addTiddler = function(tiddler) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
 	}
-	// Get the title, and the current tiddler with that title
-	var title = tiddler.fields.title,
-		prevTiddler = this.tiddlers[title];
+	// Get the title
+	var title = tiddler.fields.title;
 	// Save the tiddler
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
@@ -382,6 +354,54 @@ exports.clearCache = function(title) {
 	if($tw.utils.hop(this.caches,title)) {
 		delete this.caches[title];
 	}
+};
+
+exports.new_initParsers = function() {
+	// Create a default vocabulary
+	this.vocabulary = new $tw.WikiVocabulary({wiki: this});
+};
+
+/*
+Parse a block of text of a specified MIME type
+*/
+exports.new_parseText = function(type,text) {
+	return this.vocabulary.parseText(type,text);
+};
+
+/*
+Parse a tiddler according to its MIME type
+*/
+exports.new_parseTiddler = function(title,options) {
+	var tiddler = this.getTiddler(title),
+		self = this;
+	return tiddler ? this.getCacheForTiddler(title,"newParseTree",function() {
+			return self.new_parseText(tiddler.fields.type,tiddler.fields.text);
+		}) : null;
+};
+
+/*
+Parse text in a specified format and render it into another format
+	outputType: content type for the output
+	textType: content type of the input text
+	text: input text
+*/
+exports.new_renderText = function(outputType,textType,text) {
+	var parser = this.new_parseText(textType,text),
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: this});
+	renderTree.execute();
+	return renderTree.render(outputType);
+};
+
+/*
+Parse text from a tiddler and render it into another format
+	outputType: content type for the output
+	title: title of the tiddler to be rendered
+*/
+exports.new_renderTiddler = function(outputType,title) {
+	var parser = this.new_parseTiddler(title),
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: this});
+	renderTree.execute();
+	return renderTree.render(outputType);
 };
 
 exports.initParsers = function(moduleType) {
