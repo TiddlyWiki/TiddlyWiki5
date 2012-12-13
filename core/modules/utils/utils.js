@@ -69,6 +69,19 @@ exports.removeArrayEntries = function(array,value) {
 	}
 };
 
+/*
+Check whether any members of a hashmap are present in another hashmap
+*/
+exports.checkDependencies = function(dependencies,changes) {
+	var hit = false;
+	$tw.utils.each(changes,function(change,title) {
+		if($tw.utils.hop(dependencies,title)) {
+			hit = true;
+		}
+	});
+	return hit;
+};
+
 exports.deepCopy = function(object) {
 	var result,t;
 	if($tw.utils.isArray(object)) {
@@ -300,6 +313,33 @@ exports.hyphenateCss = function(propName) {
 	return propName.replace(/([A-Z])/g, function(match0,match1) {
 		return "-" + match1.toLowerCase();
 	});
+};
+
+/*
+Parse a text reference in the format "title!!field" into its constituent parts
+*/
+exports.parseTextReference = function(textRef) {
+	// Look for a metadata field separator
+	var pos = textRef.indexOf("!!");
+	if(pos !== -1) {
+		if(pos === 0) {
+			// Just a field
+			return {
+				field: textRef.substring(2)
+			};
+		} else {
+			// Field and title
+			return {
+				title: textRef.substring(0,pos),
+				field: textRef.substring(pos + 2)
+			};	
+		}
+	} else {
+		// Otherwise, we've just got a title
+		return {
+			title: textRef
+		};
+	}
 };
 
 /*
