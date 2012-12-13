@@ -22,6 +22,12 @@ exports.domContains = function(a,b) {
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
+exports.removeChildren = function(node) {
+	while(node.hasChildNodes()) {
+		node.removeChild(node.firstChild);
+	}
+};
+
 exports.hasClass = function(el,className) {
 	return el.className.split(" ").indexOf(className) !== -1;
 };
@@ -142,5 +148,39 @@ exports.pulseElement = function(element) {
 	$tw.utils.forceLayout(element);
 	$tw.utils.addClass(element,"pulse");
 };
+
+/*
+Attach specified event handlers to a DOM node
+*/
+exports.addEventListeners = function(domNode,events) {
+	$tw.utils.each(events,function(eventInfo) {
+		var handler;
+		if(eventInfo.handlerFunction) {
+			handler = eventInfo.handlerFunction;
+		} else if(eventInfo.handlerObject) {
+			if(eventInfo.handlerMethod) {
+				handler = function(event) {
+					eventInfo.handlerObject[eventInfo.handlerMethod].call(eventInfo.handlerObject,event);
+				};	
+			} else {
+				handler = eventInfo.handlerObject;
+			}
+		}
+		domNode.addEventListener(eventInfo.name,handler,false);
+	});
+};
+
+/*
+Construct and dispatch a custom event
+*/
+exports.dispatchCustomEvent = function(target,name,members) {
+	var event = document.createEvent("Event");
+	event.initEvent(name,true,true);
+	$tw.utils.each(members,function(member,name) {
+		event[name] = member;
+	});
+	target.dispatchEvent(event); 
+};
+
 
 })();
