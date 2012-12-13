@@ -1,7 +1,7 @@
 title: ModuleType
 tags: docs concepts
 
-The `module-type` field of a [[JavaScript module|Modules]] is set to a string that identifies the type of the module. TiddlyWiki5 uses the following types:
+The `module-type` field of a [[JavaScript module|Modules]] is a string that identifies the type of the module. TiddlyWiki5 uses the following types:
 
 * `command` - individual commands for the `$tw.Commander` class 
 * `config` - values to be merged over the `$tw.config` global

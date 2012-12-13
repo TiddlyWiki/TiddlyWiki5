@@ -5,8 +5,6 @@ Groups of uniquely titled tiddlers are contained in WikiStore objects.
 
 The WikiStore also manages the plugin modules used for macros, and operations like serializing, deserializing, parsing and rendering tiddlers.
 
-Each WikiStore is connected to another shadow store that is used to provide default content. Under usual circumstances, when an attempt is made to retrieve a tiddler that doesn't exist in the store, the search continues into its shadow store (and so on, if the shadow store itself has a shadow store).
-
 !! ~WikiStore Events
 
 Clients can register event handlers with the WikiStore object. Event handlers can be registered to be triggered for modifications to any tiddler in the store, or with a filter to only be invoked when a particular tiddler or set of tiddlers changes.
