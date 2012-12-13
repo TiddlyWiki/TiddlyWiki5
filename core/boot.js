@@ -120,23 +120,30 @@ $tw.utils.hop = function(object,property) {
 };
 
 /*
-Iterate through all the own properties of an object. Callback is invoked with (element,title,object)
-*/
-$tw.utils.each = function(object,callback) {
-	if(object) {
-		for(var f in object) {
-			if($tw.utils.hop(object,f)) {
-				callback(object[f],f,object);
-			}
-		}
-	}
-}
-
-/*
 Determine if a value is an array
 */
 $tw.utils.isArray = function(value) {
 	return Object.prototype.toString.call(value) == "[object Array]";
+};
+
+/*
+Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)
+*/
+$tw.utils.each = function(object,callback) {
+	var f;
+	if(object) {
+		if($tw.utils.isArray(object)) {
+			for(f=0; f<object.length; f++) {
+				callback(object[f],f,object);
+			}
+		} else {
+			for(f in object) {
+				if($tw.utils.hop(object,f)) {
+					callback(object[f],f,object);
+				}
+			}
+		}
+	}
 };
 
 /*
@@ -426,11 +433,15 @@ $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 Apply the exports of the modules of a particular type to a target object
 */
 $tw.modules.applyMethods = function(moduleType,targetObject) {
+	if(!targetObject) {
+		targetObject = {};
+	}
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		$tw.utils.each(module,function(element,title,object) {
 			targetObject[title] = module[title];
 		});
 	});
+	return targetObject;
 };
 
 /////////////////////////// Barebones tiddler object
