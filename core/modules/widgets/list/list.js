@@ -12,6 +12,8 @@ The list widget
 /*global $tw: false */
 "use strict";
 
+exports.name = "list";
+
 /*
 These types are shorthands for particular filters
 */
@@ -23,14 +25,14 @@ var typeMappings = {
 	shadowed: "[is[shadow]sort[title]]"
 };
 
-var ListWidget = function(renderer) {
+exports.init = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-ListWidget.prototype.generateChildNodes = function() {
+exports.generateChildNodes = function() {
 	// We'll manage our own dependencies
 	this.renderer.dependencies = undefined;
 	// Get our attributes
@@ -66,7 +68,7 @@ ListWidget.prototype.generateChildNodes = function() {
 	}]);
 };
 
-ListWidget.prototype.getTiddlerList = function() {
+exports.getTiddlerList = function() {
 	var filter;
 	if(this.renderer.hasAttribute("type")) {
 		filter = typeMappings[this.renderer.getAttribute("type")];
@@ -82,7 +84,7 @@ ListWidget.prototype.getTiddlerList = function() {
 /*
 Create and execute the nodes representing the empty message
 */
-ListWidget.prototype.getEmptyMessage = function() {
+exports.getEmptyMessage = function() {
 	return {
 		type: "element",
 		tag: "span",
@@ -93,7 +95,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 /*
 Create a list element representing a given tiddler
 */
-ListWidget.prototype.createListElement = function(title) {
+exports.createListElement = function(title) {
 	// Define an event handler that adds navigation information to the event
 	var handleEvent = function(event) {
 			event.navigateFromTitle = title;
@@ -125,7 +127,7 @@ ListWidget.prototype.createListElement = function(title) {
 /*
 Create the tiddler macro needed to represent a given tiddler
 */
-ListWidget.prototype.createListElementMacro = function(title) {
+exports.createListElementMacro = function(title) {
 	// Check if the tiddler is a draft
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(title),
 		isDraft = tiddler ? tiddler.hasField("draft.of") : false;
@@ -167,7 +169,7 @@ ListWidget.prototype.createListElementMacro = function(title) {
 /*
 Remove a list element from the list, along with the attendant DOM nodes
 */
-ListWidget.prototype.removeListElement = function(index) {
+exports.removeListElement = function(index) {
 	// Get the list element
 	var listElement = this.children[0].children[index];
 	// Remove the DOM node
@@ -181,7 +183,7 @@ Return the index of the list element that corresponds to a particular title
 startIndex: index to start search (use zero to search from the top)
 title: tiddler title to seach for
 */
-ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
+exports.findListElementByTitle = function(startIndex,title) {
 	while(startIndex < this.children[0].children.length) {
 		if(this.children[0].children[startIndex].children[0].attributes.target === title) {
 			return startIndex;
@@ -191,7 +193,7 @@ ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
 	return undefined;
 };
 
-ListWidget.prototype.render = function(type) {
+exports.render = function(type) {
 	var output = [];
 	$tw.utils.each(this.children,function(node) {
 		if(node.render) {
@@ -201,7 +203,7 @@ ListWidget.prototype.render = function(type) {
 	return output.join("");
 };
 
-ListWidget.prototype.renderInDom = function(parentElement) {
+exports.renderInDom = function(parentElement) {
 	this.parentElement = parentElement;
 	// Render any child nodes
 	$tw.utils.each(this.children,function(node) {
@@ -211,7 +213,7 @@ ListWidget.prototype.renderInDom = function(parentElement) {
 	});
 };
 
-ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Reexecute the widget if any of our attributes have changed
 	if(changedAttributes.itemClass || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.type || changedAttributes.filter || changedAttributes.template) {
 		// Remove old child nodes
@@ -230,7 +232,7 @@ ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 	}
 };
 
-ListWidget.prototype.handleListChanges = function(changedTiddlers) {
+exports.handleListChanges = function(changedTiddlers) {
 	var t,
 		prevListLength = this.list.length,
 		frame = this.children[0];
@@ -289,7 +291,5 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		this.removeListElement(t);
 	}
 };
-
-exports.list = ListWidget;
 
 })();

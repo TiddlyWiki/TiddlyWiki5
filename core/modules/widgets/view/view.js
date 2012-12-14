@@ -12,6 +12,8 @@ The view widget displays a tiddler field.
 /*global $tw: false */
 "use strict";
 
+exports.name = "view";
+
 /*
 Define the "text" viewer here so that it is always available
 */
@@ -40,7 +42,7 @@ TextViewer.prototype.render = function() {
 // We'll cache the available field viewers here
 var fieldViewers = undefined;
 
-var ViewWidget = function(renderer) {
+exports.init = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Initialise the field viewers if they've not been done already
@@ -52,7 +54,7 @@ var ViewWidget = function(renderer) {
 	this.generateChildNodes();
 };
 
-ViewWidget.prototype.generateChildNodes = function() {
+exports.generateChildNodes = function() {
 	// We'll manage our own dependencies
 	this.renderer.dependencies = undefined;
 	// Get parameters from our attributes
@@ -93,7 +95,7 @@ ViewWidget.prototype.generateChildNodes = function() {
 	this.children = this.viewer.render();
 };
 
-ViewWidget.prototype.render = function(type) {
+exports.render = function(type) {
 	var output = [];
 	$tw.utils.each(this.children,function(node) {
 		if(node.render) {
@@ -103,7 +105,7 @@ ViewWidget.prototype.render = function(type) {
 	return output.join("");
 };
 
-ViewWidget.prototype.renderInDom = function(parentElement) {
+exports.renderInDom = function(parentElement) {
 	this.parentElement = parentElement;
 	// Render any child nodes
 	$tw.utils.each(this.children,function(node) {
@@ -113,7 +115,7 @@ ViewWidget.prototype.renderInDom = function(parentElement) {
 	});
 };
 
-ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || (this.tiddlerTitle && changedTiddlers[this.tiddlerTitle])) {
 		// Remove old child nodes
@@ -135,7 +137,5 @@ ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 		});
 	}
 };
-
-exports.view = ViewWidget;
 
 })();

@@ -12,14 +12,16 @@ Implements the button widget.
 /*global $tw: false */
 "use strict";
 
-var ButtonWidget = function(renderer) {
+exports.name = "button";
+
+exports.init = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-ButtonWidget.prototype.generateChildNodes = function() {
+exports.generateChildNodes = function() {
 	// Get the parameters from the attributes
 	this.message = this.renderer.getAttribute("message");
 	this.param = this.renderer.getAttribute("param");
@@ -53,7 +55,7 @@ ButtonWidget.prototype.generateChildNodes = function() {
 	}]);
 };
 
-ButtonWidget.prototype.render = function(type) {
+exports.render = function(type) {
 	var output = [];
 	$tw.utils.each(this.children,function(node) {
 		if(node.render) {
@@ -63,7 +65,7 @@ ButtonWidget.prototype.render = function(type) {
 	return output.join("");
 };
 
-ButtonWidget.prototype.renderInDom = function(parentElement) {
+exports.renderInDom = function(parentElement) {
 	this.parentElement = parentElement;
 	// Render any child nodes
 	$tw.utils.each(this.children,function(node) {
@@ -73,14 +75,14 @@ ButtonWidget.prototype.renderInDom = function(parentElement) {
 	});
 };
 
-ButtonWidget.prototype.dispatchMessage = function(event) {
+exports.dispatchMessage = function(event) {
 	$tw.utils.dispatchCustomEvent(event.target,this.message,{
 		param: this.param,
 		tiddlerTitle: this.renderer.getContextTiddlerTitle()
 	});
 };
 
-ButtonWidget.prototype.triggerPopup = function(event) {
+exports.triggerPopup = function(event) {
 	$tw.popup.triggerPopup({
 		textRef: this.popup,
 		domNode: this.renderer.domNode,
@@ -90,12 +92,12 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 	});
 };
 
-ButtonWidget.prototype.setTiddler = function() {
+exports.setTiddler = function() {
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.set);
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
 };
 
-ButtonWidget.prototype.handleClickEvent = function(event) {
+exports.handleClickEvent = function(event) {
 	if(this.message) {
 		this.dispatchMessage(event);
 	}
@@ -109,7 +111,7 @@ ButtonWidget.prototype.handleClickEvent = function(event) {
 	return false;
 };
 
-ButtonWidget.prototype.handleMouseOverOrOutEvent = function(event) {
+exports.handleMouseOverOrOutEvent = function(event) {
 	if(this.popup) {
 		this.triggerPopup(event);
 	}
@@ -117,7 +119,7 @@ ButtonWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 	return false;
 };
 
-ButtonWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
  	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		// Remove old child nodes
@@ -139,7 +141,5 @@ ButtonWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 		});
 	}
 };
-
-exports.button = ButtonWidget;
 
 })();

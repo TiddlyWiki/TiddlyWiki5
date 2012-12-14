@@ -12,14 +12,16 @@ Implements the navigator widget.
 /*global $tw: false */
 "use strict";
 
-var NavigatorWidget = function(renderer) {
+exports.name = "navigator";
+
+exports.init = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-NavigatorWidget.prototype.generateChildNodes = function() {
+exports.generateChildNodes = function() {
 	// We'll manage our own dependencies
 	this.renderer.dependencies = undefined;
 	// Get our parameters
@@ -29,7 +31,7 @@ NavigatorWidget.prototype.generateChildNodes = function() {
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
 };
 
-NavigatorWidget.prototype.render = function(type) {
+exports.render = function(type) {
 	var output = [];
 	$tw.utils.each(this.children,function(node) {
 		if(node.render) {
@@ -39,7 +41,7 @@ NavigatorWidget.prototype.render = function(type) {
 	return output.join("");
 };
 
-NavigatorWidget.prototype.renderInDom = function(parentElement) {
+exports.renderInDom = function(parentElement) {
 	this.parentElement = parentElement;
 	// Render any child nodes
 	$tw.utils.each(this.children,function(node) {
@@ -57,7 +59,7 @@ NavigatorWidget.prototype.renderInDom = function(parentElement) {
 	]);
 };
 
-NavigatorWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// We don't need to refresh ourselves, so just refresh any child nodes
 	$tw.utils.each(this.children,function(node) {
 		if(node.refreshInDom) {
@@ -66,7 +68,7 @@ NavigatorWidget.prototype.refreshInDom = function(changedAttributes,changedTiddl
 	});
 };
 
-NavigatorWidget.prototype.getStoryList = function() {
+exports.getStoryList = function() {
 	var text = this.renderer.renderTree.wiki.getTextReference(this.storyTitle,"");
 	if(text && text.length > 0) {
 		this.storyList = text.split("\n");
@@ -75,14 +77,14 @@ NavigatorWidget.prototype.getStoryList = function() {
 	}
 };
 
-NavigatorWidget.prototype.saveStoryList = function() {
+exports.saveStoryList = function() {
 	var storyTiddler = this.renderer.renderTree.wiki.getTiddler(this.storyTitle);
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler({
 		title: this.storyTitle
 	},storyTiddler,{text: this.storyList.join("\n")}));
 };
 
-NavigatorWidget.prototype.findTitleInStory = function(title,defaultIndex) {
+exports.findTitleInStory = function(title,defaultIndex) {
 	for(var t=0; t<this.storyList.length; t++) {
 		if(this.storyList[t] === title) {
 			return t;
@@ -92,7 +94,7 @@ NavigatorWidget.prototype.findTitleInStory = function(title,defaultIndex) {
 };
 
 // Navigate to a specified tiddler
-NavigatorWidget.prototype.handleNavigateEvent = function(event) {
+exports.handleNavigateEvent = function(event) {
 	if(this.storyTitle) {
 		// Update the story tiddler if specified
 		this.getStoryList();
@@ -119,7 +121,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 };
 
 // Close a specified tiddler
-NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
+exports.handleCloseTiddlerEvent = function(event) {
 	this.getStoryList();
 	// Look for tiddlers with this title to close
 	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
@@ -132,7 +134,7 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 };
 
 // Place a tiddler in edit mode
-NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
+exports.handleEditTiddlerEvent = function(event) {
 	this.getStoryList();
 	// Replace the specified tiddler with a draft in edit mode
 	for(var t=0; t<this.storyList.length; t++) {
@@ -161,7 +163,7 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 };
 
 // Take a tiddler out of edit mode, saving the changes
-NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
+exports.handleSaveTiddlerEvent = function(event) {
 	this.getStoryList();
 	var storyTiddlerModified = false;
 	for(var t=0; t<this.storyList.length; t++) {
@@ -198,7 +200,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 };
 
 // Create a new draft tiddler
-NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
+exports.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	this.getStoryList();
 	// Create the new tiddler
@@ -235,7 +237,5 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	event.stopPropagation();
 	return false;
 };
-
-exports.navigator = NavigatorWidget;
 
 })();

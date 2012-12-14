@@ -46,14 +46,16 @@ of the tiddler `Foo`.
 /*global $tw: false */
 "use strict";
 
-var TranscludeWidget = function(renderer) {
+exports.name = "transclude";
+
+exports.init = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-TranscludeWidget.prototype.generateChildNodes = function() {
+exports.generateChildNodes = function() {
 	var tr, templateParseTree, templateTiddler;
 	// We'll manage our own dependencies
 	this.renderer.dependencies = undefined;
@@ -98,7 +100,7 @@ TranscludeWidget.prototype.generateChildNodes = function() {
 	}]);
 };
 
-TranscludeWidget.prototype.render = function(type) {
+exports.render = function(type) {
 	var output = [];
 	$tw.utils.each(this.children,function(node) {
 		if(node.render) {
@@ -108,7 +110,7 @@ TranscludeWidget.prototype.render = function(type) {
 	return output.join("");
 };
 
-TranscludeWidget.prototype.renderInDom = function(parentElement) {
+exports.renderInDom = function(parentElement) {
 	this.parentElement = parentElement;
 	// Render any child nodes
 	$tw.utils.each(this.children,function(node) {
@@ -118,7 +120,7 @@ TranscludeWidget.prototype.renderInDom = function(parentElement) {
 	});
 };
 
-TranscludeWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Set the class for missing tiddlers
 	if(this.targetTitle) {
 		$tw.utils.toggleClass(this.children[0].domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
@@ -144,7 +146,5 @@ TranscludeWidget.prototype.refreshInDom = function(changedAttributes,changedTidd
 		});
 	}
 };
-
-exports.transclude = TranscludeWidget;
 
 })();

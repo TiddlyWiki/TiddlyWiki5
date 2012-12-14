@@ -39,7 +39,8 @@ var WidgetRenderer = function(renderTree,renderContext,parseTreeNode) {
 	// Create the widget object
 	var WidgetClass = this.renderTree.parser.vocabulary.widgetClasses[this.parseTreeNode.tag];
 	if(WidgetClass) {
-		this.widget = new WidgetClass(this);
+		this.widget = new WidgetClass();
+		this.widget.init(this);
 	} else {
 		// Error if we couldn't find the widget
 		this.children = this.renderTree.createRenderers(this.renderContext,[

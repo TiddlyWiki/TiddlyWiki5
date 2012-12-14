@@ -19,7 +19,7 @@ var WikiVocabulary = function(options) {
 	// Hashmap of the various renderer classes
 	this.rendererClasses = $tw.modules.applyMethods("wikirenderer");
 	// Hashmap of the available widgets
-	this.widgetClasses = $tw.modules.applyMethods("widget");
+	this.widgetClasses = $tw.modules.createClassesFromModules("widget");
 };
 
 WikiVocabulary.prototype.parseText = function(type,text) {
