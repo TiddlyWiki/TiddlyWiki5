@@ -13,13 +13,13 @@ module-type: global
 var WikiVocabulary = function(options) {
 	this.wiki = options.wiki;
 	// Hashmaps of the various parse rule classes
-	this.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikipragmarule",$tw.WikiRule);
-	this.blockRuleClasses = $tw.modules.createClassesFromModules("wikiblockrule",$tw.WikiRule);
-	this.runRuleClasses = $tw.modules.createClassesFromModules("wikirunrule",$tw.WikiRule);
+	this.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikipragmarule",$tw.WikiRuleBase);
+	this.blockRuleClasses = $tw.modules.createClassesFromModules("wikiblockrule",$tw.WikiRuleBase);
+	this.runRuleClasses = $tw.modules.createClassesFromModules("wikirunrule",$tw.WikiRuleBase);
 	// Hashmap of the various renderer classes
 	this.rendererClasses = $tw.modules.applyMethods("wikirenderer");
 	// Hashmap of the available widgets
-	this.widgetClasses = $tw.modules.createClassesFromModules("widget");
+	this.widgetClasses = $tw.modules.createClassesFromModules("widget",$tw.WidgetBase);
 };
 
 WikiVocabulary.prototype.parseText = function(type,text) {
