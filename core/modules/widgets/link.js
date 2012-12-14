@@ -68,26 +68,6 @@ exports.generateChildNodes = function() {
 	}]);
 };
 
-exports.render = function(type) {
-	var output = [];
-	$tw.utils.each(this.children,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
-		}
-	});
-	return output.join("");
-};
-
-exports.renderInDom = function(parentElement) {
-	this.parentElement = parentElement;
-	// Render any child nodes
-	$tw.utils.each(this.children,function(node) {
-		if(node.renderInDom) {
-			parentElement.appendChild(node.renderInDom());
-		}
-	});
-};
-
 exports.handleClickEvent = function(event) {
 	if(isLinkExternal(this.to)) {
 		event.target.setAttribute("target","_blank");

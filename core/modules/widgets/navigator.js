@@ -31,16 +31,6 @@ exports.generateChildNodes = function() {
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
 };
 
-exports.render = function(type) {
-	var output = [];
-	$tw.utils.each(this.children,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
-		}
-	});
-	return output.join("");
-};
-
 exports.renderInDom = function(parentElement) {
 	this.parentElement = parentElement;
 	// Render any child nodes

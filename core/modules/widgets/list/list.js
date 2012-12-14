@@ -193,26 +193,6 @@ exports.findListElementByTitle = function(startIndex,title) {
 	return undefined;
 };
 
-exports.render = function(type) {
-	var output = [];
-	$tw.utils.each(this.children,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
-		}
-	});
-	return output.join("");
-};
-
-exports.renderInDom = function(parentElement) {
-	this.parentElement = parentElement;
-	// Render any child nodes
-	$tw.utils.each(this.children,function(node) {
-		if(node.renderInDom) {
-			parentElement.appendChild(node.renderInDom());
-		}
-	});
-};
-
 exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Reexecute the widget if any of our attributes have changed
 	if(changedAttributes.itemClass || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.type || changedAttributes.filter || changedAttributes.template) {

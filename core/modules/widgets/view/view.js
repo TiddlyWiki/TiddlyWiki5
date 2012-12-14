@@ -95,26 +95,6 @@ exports.generateChildNodes = function() {
 	this.children = this.viewer.render();
 };
 
-exports.render = function(type) {
-	var output = [];
-	$tw.utils.each(this.children,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
-		}
-	});
-	return output.join("");
-};
-
-exports.renderInDom = function(parentElement) {
-	this.parentElement = parentElement;
-	// Render any child nodes
-	$tw.utils.each(this.children,function(node) {
-		if(node.renderInDom) {
-			parentElement.appendChild(node.renderInDom());
-		}
-	});
-};
-
 exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || (this.tiddlerTitle && changedTiddlers[this.tiddlerTitle])) {
