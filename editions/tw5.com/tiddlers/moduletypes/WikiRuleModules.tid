@@ -20,9 +20,9 @@ Parser rule modules extend the `$tw.WikiParserRule` class. This is done by insta
 
 The standard methods and properties of parser rules are as follows:
 
-* `parser`: automatically generated property pointing back to the parser containing this rule
-* `init()`: initialisation function called immediately after the constructor
+* `name`: a string containing the name of this parse rule
+* `init(parser)`: initialisation function called immediately after the constructor with a pointer back to the parser containing this rule
 * `findNextMatch(pos)`: returns the position of the next match after the specified position
 * `parse()`: parses the most recent match, returning an array of the generated parse tree nodes. Pragma rules don't return parse tree nodes but instead modify the parser object directly (for example, to add local macro definitions)
 
-The built in parser rules use regular expression matching. Such rules can take advantage of the implementation of `findNextMatch()` in the base `$tw.WikiParserRule` class by ensuring that their `init()` method creates a `matchRegExp` property containing the regular expression to match. The `match` property contains the details of the match for use in the `parse()` method.
+The built in parser rules use regular expression matching. Such rules can take advantage of the implementation of `findNextMatch()` in the base `$tw.WikiRule` class by ensuring that their `init()` method creates a `matchRegExp` property containing the regular expression to match. The `match` property contains the details of the match for use in the `parse()` method.
