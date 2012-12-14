@@ -13,25 +13,13 @@ module-type: global
 var WikiVocabulary = function(options) {
 	this.wiki = options.wiki;
 	// Hashmaps of the various parse rule classes
-	this.pragmaRules = this.createRuleClasses("wikipragmarule");
-	this.blockRules = this.createRuleClasses("wikiblockrule");
-	this.runRules = this.createRuleClasses("wikirunrule");
+	this.pragmaRuleClasses = $tw.modules.createSubclassesFromModules("wikipragmarule",$tw.WikiRule);
+	this.blockRuleClasses = $tw.modules.createSubclassesFromModules("wikiblockrule",$tw.WikiRule);
+	this.runRuleClasses = $tw.modules.createSubclassesFromModules("wikirunrule",$tw.WikiRule);
 	// Hashmap of the various renderer classes
 	this.rendererClasses = $tw.modules.applyMethods("wikirenderer");
 	// Hashmap of the available widgets
 	this.widgetClasses = $tw.modules.applyMethods("widget");
-};
-
-WikiVocabulary.prototype.createRuleClasses = function(moduleType) {
-	var ruleClasses = {};
-	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
-		var ruleClass = function(parser) {
-			this.parser = parser;
-		}
-		$tw.utils.extend(ruleClass.prototype,$tw.WikiRuleDefaultProperties,moduleExports);
-		ruleClasses[moduleExports.name] = ruleClass;
-	});
-	return ruleClasses;
 };
 
 WikiVocabulary.prototype.parseText = function(type,text) {

@@ -18,7 +18,8 @@ Wiki rule for macro calls
 
 exports.name = "macrocall";
 
-exports.init = function() {
+exports.init = function(parser) {
+	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /<<([^\s>]+)\s*([\s\S]*?)>>/mg;
 };

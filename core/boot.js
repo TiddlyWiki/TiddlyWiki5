@@ -444,6 +444,21 @@ $tw.modules.applyMethods = function(moduleType,targetObject) {
 	return targetObject;
 };
 
+/*
+Return an array of subclasses created from the modules of a specified type
+*/
+$tw.modules.createSubclassesFromModules = function(moduleType,baseClass) {
+	var classes = {};
+	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
+		var newClass = function() {};
+		newClass.prototype = new baseClass();
+		newClass.prototype.constructor = baseClass;
+		$tw.utils.extend(newClass.prototype,moduleExports);
+		classes[moduleExports.name] = newClass;
+	});
+	return classes;
+};
+
 /////////////////////////// Barebones tiddler object
 
 /*

@@ -27,7 +27,8 @@ exports.name = "html";
 
 var voidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr".split(",");
 
-exports.init = function() {
+exports.init = function(parser) {
+	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /<(_)?([A-Za-z]+)(\s*[^>]*?)(\/)?>/mg;
 };

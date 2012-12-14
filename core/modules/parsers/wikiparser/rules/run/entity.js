@@ -18,7 +18,8 @@ Wiki text run rule for HTML entities. For example:
 
 exports.name = "entity";
 
-exports.init = function() {
+exports.init = function(parser) {
+	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /(&#?[a-zA-Z0-9]{2,8};)/mg;
 };

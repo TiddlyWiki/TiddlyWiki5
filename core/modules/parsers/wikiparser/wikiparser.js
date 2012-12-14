@@ -38,12 +38,12 @@ var WikiParser = function(vocabulary,type,text,options) {
 	// Initialise the things that pragma rules can change
 	this.macroDefinitions = {}; // Hash map of macro definitions
 	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRules,0);
+	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,0);
 	// Parse any pragmas
 	this.parsePragmas();
 	// Instantiate the parser block and run rules
-	this.blockRules = this.instantiateRules(this.vocabulary.blockRules,this.pos);
-	this.runRules = this.instantiateRules(this.vocabulary.runRules,this.pos);
+	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,this.pos);
+	this.runRules = this.instantiateRules(this.vocabulary.runRuleClasses,this.pos);
 	// Parse the text into runs or blocks
 	if(this.type === "text/vnd.tiddlywiki-run") {
 		this.tree = this.parseRun();
@@ -61,7 +61,7 @@ WikiParser.prototype.instantiateRules = function(classes,startPos) {
 	$tw.utils.each(classes,function(RuleClass) {
 		// Instantiate the rule
 		var rule = new RuleClass(self);
-		rule.init();
+		rule.init(self);
 		var matchIndex = rule.findNextMatch(startPos);
 		if(matchIndex !== undefined) {
 			rulesInfo.push({

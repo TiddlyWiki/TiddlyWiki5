@@ -35,7 +35,8 @@ textPrimitives.wikiLink = textPrimitives.upperLetter + "+" +
 	textPrimitives.upperLetter +
 	textPrimitives.anyLetter + "*";
 
-exports.init = function() {
+exports.init = function(parser) {
+	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = new RegExp(textPrimitives.unWikiLink + "?" + textPrimitives.wikiLink,"mg");
 };

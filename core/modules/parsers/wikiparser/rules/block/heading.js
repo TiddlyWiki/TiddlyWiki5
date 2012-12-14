@@ -14,7 +14,8 @@ Wiki text block rule for headings
 
 exports.name = "heading";
 
-exports.init = function() {
+exports.init = function(parser) {
+	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /(!{1,6})/mg;
 };

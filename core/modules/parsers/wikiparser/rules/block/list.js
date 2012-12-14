@@ -48,7 +48,8 @@ A CSS class can be applied to a list item as follows:
 
 exports.name = "list";
 
-exports.init = function() {
+exports.init = function(parser) {
+	this.parser = parser;
 	// Regexp to match
 	this.matchRegExp = /([\\*#;:]+)/mg;
 };

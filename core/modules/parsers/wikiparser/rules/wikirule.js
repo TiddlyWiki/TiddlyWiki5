@@ -12,24 +12,28 @@ Base class for wiki parser rules
 /*global $tw: false */
 "use strict";
 
-var WikiRuleDefaultProperties = {};
+/*
+This constructor is always overridden with a blank constructor, and so shouldn't be used
+*/
+var WikiRule = function() {
+};
 
 /*
 To be overridden by individual rules
 */
-WikiRuleDefaultProperties.init = function() {
-
+WikiRule.prototype.init = function(parser) {
+	this.parser = parser;
 };
 
 /*
-Default implementation of findNextMatch looks uses RegExp matching
+Default implementation of findNextMatch uses RegExp matching
 */
-WikiRuleDefaultProperties.findNextMatch = function(startPos) {
+WikiRule.prototype.findNextMatch = function(startPos) {
 	this.matchRegExp.lastIndex = startPos;
 	this.match = this.matchRegExp.exec(this.parser.source);
 	return this.match ? this.match.index : undefined;
 };
 
-exports.WikiRuleDefaultProperties = WikiRuleDefaultProperties;
+exports.WikiRule = WikiRule;
 
 })();
