@@ -31,22 +31,14 @@ exports.generateChildNodes = function() {
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
 };
 
-exports.renderInDom = function(parentElement) {
-	this.parentElement = parentElement;
-	// Render any child nodes
-	$tw.utils.each(this.children,function(node) {
-		if(node.renderInDom) {
-			parentElement.appendChild(node.renderInDom());
-		}
-	});
-	// Attach our event handlers
-	$tw.utils.addEventListeners(this.renderer.domNode,[
+exports.getEventListeners = function() {
+	return [
 		{name: "tw-navigate", handlerObject: this, handlerMethod: "handleNavigateEvent"},
 		{name: "tw-EditTiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
 		{name: "tw-SaveTiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},
 		{name: "tw-close", handlerObject: this, handlerMethod: "handleCloseTiddlerEvent"},
 		{name: "tw-NewTiddler", handlerObject: this, handlerMethod: "handleNewTiddlerEvent"}
-	]);
+	];
 };
 
 exports.refreshInDom = function(changedAttributes,changedTiddlers) {

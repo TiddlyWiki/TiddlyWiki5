@@ -94,8 +94,12 @@ WidgetRenderer.prototype.renderInDom = function() {
 	this.domNode.setAttribute("data-widget-type",this.parseTreeNode.tag);
 	this.domNode.setAttribute("data-widget-attr",JSON.stringify(this.attributes));
 	// Render the widget if we've got one
-	if(this.widget && this.widget.renderInDom) {
+	if(this.widget) {
 		this.widget.renderInDom(this.domNode);
+		// Attach any event handlers
+		if(this.widget.getEventListeners) {
+			$tw.utils.addEventListeners(this.domNode,this.widget.getEventListeners());
+		}
 	}
 	// Return the dom node
 	return this.domNode;
