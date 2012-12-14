@@ -82,6 +82,17 @@ exports.checkDependencies = function(dependencies,changes) {
 	return hit;
 };
 
+exports.extend = function(object /* [, src] */) {
+	$tw.utils.each(Array.prototype.slice.call(arguments, 1), function(source) {
+		if(source) {
+			for(var property in source) {
+				object[property] = source[property];
+			}
+		}
+	});
+	return object;
+};
+
 exports.deepCopy = function(object) {
 	var result,t;
 	if($tw.utils.isArray(object)) {
