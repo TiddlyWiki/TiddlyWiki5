@@ -33,8 +33,6 @@ exports.init = function(renderer) {
 };
 
 exports.generateChildNodes = function() {
-	// We'll manage our own dependencies
-	this.renderer.dependencies = undefined;
 	// Get our attributes
 	this.itemClass = this.renderer.getAttribute("itemClass");
 	this.template = this.renderer.getAttribute("template");

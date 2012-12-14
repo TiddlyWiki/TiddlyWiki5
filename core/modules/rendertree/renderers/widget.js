@@ -20,19 +20,6 @@ var WidgetRenderer = function(renderTree,renderContext,parseTreeNode) {
 	this.renderTree = renderTree;
 	this.renderContext = renderContext;
 	this.parseTreeNode = parseTreeNode;
-	// Compute the default dependencies
-	this.dependencies = {};
-	var self = this;
-	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
-		if(attribute.type === "indirect") {
-			var tr = self.renderTree.wiki.parseTextReference(attribute.textReference);
-			if(tr.title) {
-				self.dependencies[tr.title] = true;
-			} else {
-				self.dependencies[renderContext.tiddlerTitle] = true;
-			}
-		}
-	});
 	// Compute our attributes
 	this.attributes = {};
 	this.computeAttributes();
@@ -106,23 +93,12 @@ WidgetRenderer.prototype.renderInDom = function() {
 };
 
 WidgetRenderer.prototype.refreshInDom = function(changedTiddlers) {
-	// Refresh if the widget cleared the depencies hashmap to indicate that it should always be refreshed, or if any of our dependencies have changed
-	if(!this.dependencies || $tw.utils.checkDependencies(this.dependencies,changedTiddlers)) {
-		// Update our attributes
-		var changedAttributes = this.computeAttributes();
-		// Refresh the widget
-		if(this.widget && this.widget.refreshInDom) {
-			this.widget.refreshInDom(changedAttributes,changedTiddlers);
-			return;
-		}
+	// Update our attributes
+	var changedAttributes = this.computeAttributes();
+	// Refresh the widget
+	if(this.widget && this.widget.refreshInDom) {
+		this.widget.refreshInDom(changedAttributes,changedTiddlers);
 	}
-	// If the widget itself didn't need refreshing, just refresh any child nodes
-	var self = this;
-	$tw.utils.each(this.children,function(node,index) {
-		if(node.refreshInDom) {
-			node.refreshInDom(changedTiddlers);
-		}
-	});
 };
 
 WidgetRenderer.prototype.getContextTiddlerTitle = function() {

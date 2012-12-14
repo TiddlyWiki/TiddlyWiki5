@@ -55,8 +55,6 @@ exports.init = function(renderer) {
 };
 
 exports.generateChildNodes = function() {
-	// We'll manage our own dependencies
-	this.renderer.dependencies = undefined;
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
 	this.fieldName = this.renderer.getAttribute("field","text");

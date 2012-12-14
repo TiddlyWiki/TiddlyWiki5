@@ -57,8 +57,6 @@ exports.init = function(renderer) {
 
 exports.generateChildNodes = function() {
 	var tr, templateParseTree, templateTiddler;
-	// We'll manage our own dependencies
-	this.renderer.dependencies = undefined;
 	// Get the render target details
 	this.targetTitle = this.renderer.getAttribute("target",this.renderer.getContextTiddlerTitle());
 	// Get the render tree for the template
@@ -102,7 +100,7 @@ exports.generateChildNodes = function() {
 
 exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Set the class for missing tiddlers
-	if(this.targetTitle) {
+	if(this.targetTitle && changedTiddlers[this.targetTitle]) {
 		$tw.utils.toggleClass(this.children[0].domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
 	}
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed

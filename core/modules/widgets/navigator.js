@@ -22,8 +22,6 @@ exports.init = function(renderer) {
 };
 
 exports.generateChildNodes = function() {
-	// We'll manage our own dependencies
-	this.renderer.dependencies = undefined;
 	// Get our parameters
 	this.storyTitle = this.renderer.getAttribute("story");
 	this.historyTitle = this.renderer.getAttribute("history");
