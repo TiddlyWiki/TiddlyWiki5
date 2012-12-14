@@ -3,7 +3,7 @@ modifier: JeremyRuston
 
 <span class="title">
 	<_view field="title"/>
-	<_button popup="HelloThere">close</_button>
+	<_button message="tw-close">close</_button>
 </span>
 
 <div class:"small">
