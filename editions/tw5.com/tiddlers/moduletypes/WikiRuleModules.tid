@@ -1,0 +1,28 @@
+title: WikiRuleModules
+
+WikiRuleModules cover the module types 'wikirunrule', 'wikiblockrule' and `wikipragmarule`. Modules of these types encapsulate the logic of individual parsing rules used by the WikiParser engine. For example, there is a `wikirunrule` module that identifies references to HTML entities by matching the pattern `&<chars>;`.
+
+Pragma rules are applied at the start of a block of text, and cover definitions and declarations that affect the parsing of the rest of the text. Block rules are only applied at the beginning of a block of wikitext, while run rules can appear anywhere. The only current example of a pragma rule is for macro definitions.
+
+Examples of block rules:
+
+* Headings
+* Tables
+* Lists
+
+Examples of run rules:
+
+* Entities
+* HTML tags
+* Wiki links
+
+Parser rule modules extend the `$tw.WikiParserRule` class. This is done by instantiating the class and then copying the exports of the rule module onto the instance. In this way, the parser rule can override the base behaviour of the `$tw.WikiParserRule` class. In particular, the base class incorporates logic for using regular expressions to match parse rules but this logic could be overridden by a parse rule that wanted to, say, use `indexOf()` instead of regular expressions.
+
+The standard methods and properties of parser rules are as follows:
+
+* `parser`: automatically generated property pointing back to the parser containing this rule
+* `init()`: initialisation function called immediately after the constructor
+* `findNextMatch(pos)`: returns the position of the next match after the specified position
+* `parse()`: parses the most recent match, returning an array of the generated parse tree nodes. Pragma rules don't return parse tree nodes but instead modify the parser object directly (for example, to add local macro definitions)
+
+The built in parser rules use regular expression matching. Such rules can take advantage of the implementation of `findNextMatch()` in the base `$tw.WikiParserRule` class by ensuring that their `init()` method creates a `matchRegExp` property containing the regular expression to match. The `match` property contains the details of the match for use in the `parse()` method.

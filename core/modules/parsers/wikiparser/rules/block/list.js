@@ -46,23 +46,11 @@ A CSS class can be applied to a list item as follows:
 /*global $tw: false */
 "use strict";
 
-var ListRule = function(parser,startPos) {
-	// Save state
-	this.parser = parser;
-	// Regexp to match
-	this.reMatch = /([\\*#;:]+)/mg;
-	// Get the first match
-	this.matchIndex = startPos-1;
-	this.findNextMatch(startPos);
-};
+exports.name = "list";
 
-ListRule.prototype.findNextMatch = function(startPos) {
-	if(this.matchIndex !== undefined && startPos > this.matchIndex) {
-		this.reMatch.lastIndex = startPos;
-		this.match = this.reMatch.exec(this.parser.source);
-		this.matchIndex = this.match ? this.match.index : undefined;
-	}
-	return this.matchIndex;
+exports.init = function() {
+	// Regexp to match
+	this.matchRegExp = /([\\*#;:]+)/mg;
 };
 
 var listTypes = {
@@ -75,7 +63,7 @@ var listTypes = {
 /*
 Parse the most recent match
 */
-ListRule.prototype.parse = function() {
+exports.parse = function() {
 	// Array of parse tree nodes for the previous row of the list
 	var listStack = [];
 	// Cycle through the items in the list
@@ -135,7 +123,5 @@ ListRule.prototype.parse = function() {
 	// Return the root element of the list
 	return [listStack[0]];
 };
-
-exports.ListRule = ListRule;
 
 })();

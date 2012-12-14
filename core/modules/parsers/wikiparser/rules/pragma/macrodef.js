@@ -18,34 +18,22 @@ definition text, including $param$ markers
 /*global $tw: false */
 "use strict";
 
+exports.name = "macrodef";
+
 /*
 Instantiate parse rule
 */
-var MacroDefRule = function(parser,startPos) {
-	// Save state
-	this.parser = parser;
+exports.init = function() {
 	// Regexp to match
-	this.reMatch = /^\\define\s*([^(\s]+)\(\s*([^)]*)\)(\r?\n)?/mg;
-	// Get the first match
-	this.matchIndex = startPos-1;
-	this.findNextMatch(startPos);
-};
-
-MacroDefRule.prototype.findNextMatch = function(startPos) {
-	if(this.matchIndex !== undefined && startPos > this.matchIndex) {
-		this.reMatch.lastIndex = startPos;
-		this.match = this.reMatch.exec(this.parser.source);
-		this.matchIndex = this.match ? this.match.index : undefined;
-	}
-	return this.matchIndex;
+	this.matchRegExp = /^\\define\s*([^(\s]+)\(\s*([^)]*)\)(\r?\n)?/mg;
 };
 
 /*
 Parse the most recent match
 */
-MacroDefRule.prototype.parse = function() {
+exports.parse = function() {
 	// Move past the macro name and parameters
-	this.parser.pos = this.reMatch.lastIndex;
+	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the parameters
 	var paramString = this.match[2],
 		params = [];
@@ -92,7 +80,5 @@ MacroDefRule.prototype.parse = function() {
 		text: text
 	};
 };
-
-exports.MacroDefRule = MacroDefRule;
 
 })();

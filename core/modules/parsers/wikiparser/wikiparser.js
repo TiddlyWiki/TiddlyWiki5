@@ -38,12 +38,12 @@ var WikiParser = function(vocabulary,type,text,options) {
 	// Initialise the things that pragma rules can change
 	this.macroDefinitions = {}; // Hash map of macro definitions
 	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,0);
+	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRules,0);
 	// Parse any pragmas
 	this.parsePragmas();
 	// Instantiate the parser block and run rules
-	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,this.pos);
-	this.runRules = this.instantiateRules(this.vocabulary.runRuleClasses,this.pos);
+	this.blockRules = this.instantiateRules(this.vocabulary.blockRules,this.pos);
+	this.runRules = this.instantiateRules(this.vocabulary.runRules,this.pos);
 	// Parse the text into runs or blocks
 	if(this.type === "text/vnd.tiddlywiki-run") {
 		this.tree = this.parseRun();
@@ -56,17 +56,21 @@ var WikiParser = function(vocabulary,type,text,options) {
 Instantiate an array of parse rules
 */
 WikiParser.prototype.instantiateRules = function(classes,startPos) {
-	var rules = [],
+	var rulesInfo = [],
 		self = this;
 	$tw.utils.each(classes,function(RuleClass) {
 		// Instantiate the rule
-		var rule = new RuleClass(self,startPos);
-		// Only save the rule if there is at least one match
-		if(rule.matchIndex !== undefined) {
-			rules.push(rule);
+		var rule = new RuleClass(self);
+		rule.init();
+		var matchIndex = rule.findNextMatch(startPos);
+		if(matchIndex !== undefined) {
+			rulesInfo.push({
+				rule: rule,
+				matchIndex: matchIndex
+			});
 		}
 	});
-	return rules;
+	return rulesInfo;
 };
 
 /*
@@ -87,16 +91,23 @@ WikiParser.prototype.skipWhitespace = function(options) {
 Get the next match out of an array of parse rule instances
 */
 WikiParser.prototype.findNextMatch = function(rules,startPos) {
-	var nextMatch = undefined,
-		nextMatchPos = this.sourceLength;
+	// Find the best matching rule by finding the closest match position
+	var matchingRule = undefined,
+		matchingRulePos = this.sourceLength;
+	// Step through each rule
 	for(var t=0; t<rules.length; t++) {
-		var matchPos = rules[t].findNextMatch(startPos);
-		if(matchPos !== undefined && matchPos <= nextMatchPos) {
-			nextMatch = rules[t];
-			nextMatchPos = matchPos;
+		var ruleInfo = rules[t];
+		// Ask the rule to get the next match if we've moved past the current one
+		if(ruleInfo.matchIndex !== undefined  && ruleInfo.matchIndex < startPos) {
+			ruleInfo.matchIndex = ruleInfo.rule.findNextMatch(startPos);
+		}
+		// Adopt this match if it's closer than the current best match
+		if(ruleInfo.matchIndex !== undefined && ruleInfo.matchIndex <= matchingRulePos) {
+			matchingRule = ruleInfo;
+			matchingRulePos = ruleInfo.matchIndex;
 		}
 	}
-	return nextMatch;
+	return matchingRule;
 };
 
 /*
@@ -117,7 +128,7 @@ WikiParser.prototype.parsePragmas = function() {
 			return;
 		}
 		// Process the pragma rule
-		nextMatch.parse();
+		nextMatch.rule.parse();
 	}
 };
 
@@ -134,7 +145,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 	// Look for a block rule that applies at the current position
 	var nextMatch = this.findNextMatch(this.blockRules,this.pos);
 	if(nextMatch && nextMatch.matchIndex === this.pos) {
-		return nextMatch.parse();
+		return nextMatch.rule.parse();
 	}
 	// Treat it as a paragraph if we didn't find a block rule
 	return [{type: "element", tag: "p", children: this.parseRun(terminatorRegExp)}];
@@ -214,7 +225,7 @@ WikiParser.prototype.parseRunUnterminated = function() {
 			this.pos = nextMatch.matchIndex;
 		}
 		// Process the run rule
-		tree.push.apply(tree,nextMatch.parse());
+		tree.push.apply(tree,nextMatch.rule.parse());
 		// Look for the next run rule
 		nextMatch = this.findNextMatch(this.runRules,this.pos);
 	}
@@ -253,7 +264,7 @@ WikiParser.prototype.parseRunTerminated = function(terminatorRegExp) {
 				this.pos = runRuleMatch.matchIndex;
 			}
 			// Process the run rule
-			tree.push.apply(tree,runRuleMatch.parse());
+			tree.push.apply(tree,runRuleMatch.rule.parse());
 			// Look for the next run rule
 			runRuleMatch = this.findNextMatch(this.runRules,this.pos);
 			// Look for the next terminator match

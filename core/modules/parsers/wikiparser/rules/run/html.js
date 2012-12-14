@@ -23,38 +23,26 @@ This is a widget invocation
 /*global $tw: false */
 "use strict";
 
+exports.name = "html";
+
 var voidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr".split(",");
 
-var HtmlRule = function(parser,startPos) {
-	// Save state
-	this.parser = parser;
+exports.init = function() {
 	// Regexp to match
-	this.reMatch = /<(_)?([A-Za-z]+)(\s*[^>]*?)(\/)?>/mg;
-	// Get the first match
-	this.matchIndex = startPos-1;
-	this.findNextMatch(startPos);
-};
-
-HtmlRule.prototype.findNextMatch = function(startPos) {
-	if(this.matchIndex !== undefined && startPos > this.matchIndex) {
-		this.reMatch.lastIndex = startPos;
-		this.match = this.reMatch.exec(this.parser.source);
-		this.matchIndex = this.match ? this.match.index : undefined;
-	}
-	return this.matchIndex;
+	this.matchRegExp = /<(_)?([A-Za-z]+)(\s*[^>]*?)(\/)?>/mg;
 };
 
 /*
 Parse the most recent match
 */
-HtmlRule.prototype.parse = function() {
+exports.parse = function() {
 	// Get all the details of the match in case this parser is called recursively
 	var isWidget = !!this.match[1],
 		tagName = this.match[2],
 		attributeString = this.match[3],
 		isSelfClosing = !!this.match[4];
 	// Move past the tag name and parameters
-	this.parser.pos = this.reMatch.lastIndex;
+	this.parser.pos = this.matchRegExp.lastIndex;
 	var reLineBreak = /(\r?\n)/mg,
 		reAttr = /\s*([A-Za-z\-_]+)(?:\s*=\s*(?:("[^"]*")|('[^']*')|(\{\{[^\}]*\}\})|([^"'\s]+)))?/mg,
 		isBlock;
@@ -107,7 +95,5 @@ HtmlRule.prototype.parse = function() {
 	var element = {type: isWidget ? "widget" : "element", tag: tagName, isBlock: isBlock, attributes: attributes, children: content};
 	return [element];
 };
-
-exports.HtmlRule = HtmlRule;
 
 })();

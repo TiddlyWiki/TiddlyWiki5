@@ -16,34 +16,22 @@ Wiki rule for macro calls
 /*global $tw: false */
 "use strict";
 
-var MacroCallRule = function(parser,startPos) {
-	// Save state
-	this.parser = parser;
-	// Regexp to match
-	this.reMatch = /<<([^\s>]+)\s*([\s\S]*?)>>/mg;
-	// Get the first match
-	this.matchIndex = startPos-1;
-	this.findNextMatch(startPos);
-};
+exports.name = "macrocall";
 
-MacroCallRule.prototype.findNextMatch = function(startPos) {
-	if(this.matchIndex !== undefined && startPos > this.matchIndex) {
-		this.reMatch.lastIndex = startPos;
-		this.match = this.reMatch.exec(this.parser.source);
-		this.matchIndex = this.match ? this.match.index : undefined;
-	}
-	return this.matchIndex;
+exports.init = function() {
+	// Regexp to match
+	this.matchRegExp = /<<([^\s>]+)\s*([\s\S]*?)>>/mg;
 };
 
 /*
 Parse the most recent match
 */
-MacroCallRule.prototype.parse = function() {
+exports.parse = function() {
 	// Get all the details of the match
 	var macroName = this.match[1],
 		paramString = this.match[2];
 	// Move past the macro call
-	this.parser.pos = this.reMatch.lastIndex;
+	this.parser.pos = this.matchRegExp.lastIndex;
 	var params = [],
 		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
 		paramMatch = reParam.exec(paramString);
@@ -65,7 +53,5 @@ MacroCallRule.prototype.parse = function() {
 		params: params
 	}];
 };
-
-exports.MacroCallRule = MacroCallRule;
 
 })();
