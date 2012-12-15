@@ -204,16 +204,19 @@ WikiParser.prototype.parseBlocksTerminated = function(terminatorRegExpString) {
 /*
 Parse a run of text at the current position
 	terminatorRegExp: a regexp at which to stop the run
+	options: see below
+Options available:
+	eatTerminator: move the parse position past any encountered terminator (default false)
 */
-WikiParser.prototype.parseRun = function(terminatorRegExp) {
+WikiParser.prototype.parseRun = function(terminatorRegExp,options) {
 	if(terminatorRegExp) {
-		return this.parseRunTerminated(terminatorRegExp);
+		return this.parseRunTerminated(terminatorRegExp,options);
 	} else {
-		return this.parseRunUnterminated();
+		return this.parseRunUnterminated(options);
 	}
 };
 
-WikiParser.prototype.parseRunUnterminated = function() {
+WikiParser.prototype.parseRunUnterminated = function(options) {
 	var tree = [];
 	// Find the next occurrence of a runrule
 	var nextMatch = this.findNextMatch(this.runRules,this.pos);
@@ -237,7 +240,8 @@ WikiParser.prototype.parseRunUnterminated = function() {
 	return tree;
 };
 
-WikiParser.prototype.parseRunTerminated = function(terminatorRegExp) {
+WikiParser.prototype.parseRunTerminated = function(terminatorRegExp,options) {
+	options = options || {};
 	var tree = [];
 	// Find the next occurrence of the terminator
 	terminatorRegExp.lastIndex = this.pos;
@@ -253,6 +257,9 @@ WikiParser.prototype.parseRunTerminated = function(terminatorRegExp) {
 					tree.push({type: "text", text: this.source.substring(this.pos,terminatorMatch.index)});
 				}
 				this.pos = terminatorMatch.index;
+				if(options.eatTerminator) {
+					this.pos += terminatorMatch[0].length;
+				}
 				return tree;
 			}
 		}
