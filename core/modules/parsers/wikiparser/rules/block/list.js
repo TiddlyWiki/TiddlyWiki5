@@ -112,11 +112,12 @@ exports.parse = function() {
 		// Process the body of the list item into the last list item
 		var lastListChildren = listStack[listStack.length-1].children,
 			lastListItem = lastListChildren[lastListChildren.length-1],
-			classedRun = this.parser.parseClassedRun(/(\r?\n)/mg);
-		lastListItem.children.push.apply(lastListItem.children,classedRun.tree);
-		if(classedRun["class"]) {
-			lastListItem.attributes = lastListItem.attributes || {};
-			lastListItem.attributes["class"] = {type: "string", value: classedRun["class"]};
+			classes = this.parser.parseClasses();
+		this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
+		var tree = this.parser.parseRun(/(\r?\n)/mg);
+		lastListItem.children.push.apply(lastListItem.children,tree);
+		if(classes.length > 0) {
+			$tw.utils.addClassToParseTreeNode(lastListItem,classes.join(" "));
 		}
 		// Consume any whitespace following the list item
 		this.parser.skipWhitespace();

@@ -288,9 +288,9 @@ WikiParser.prototype.parseRunTerminated = function(terminatorRegExp,options) {
 };
 
 /*
-Parse a run of text preceded by zero or more class specifiers `.classname`
+Parse zero or more class specifiers `.classname`
 */
-WikiParser.prototype.parseClassedRun = function(terminatorRegExp) {
+WikiParser.prototype.parseClasses = function() {
 	var classRegExp = /\.([^\s\.]+)/mg,
 		classNames = [];
 	classRegExp.lastIndex = this.pos;
@@ -300,12 +300,7 @@ WikiParser.prototype.parseClassedRun = function(terminatorRegExp) {
 		classNames.push(match[1]);
 		var match = classRegExp.exec(this.source);
 	}
-	this.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-	var tree = this.parseRun(terminatorRegExp);
-	return {
-		"class": classNames.join(" "),
-		tree: tree
-	};
+	return classNames;
 };
 
 exports.WikiParser = WikiParser;

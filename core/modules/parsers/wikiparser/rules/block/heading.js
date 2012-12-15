@@ -28,16 +28,18 @@ exports.parse = function() {
 	var headingLevel = this.match[1].length;
 	// Move past the !s
 	this.parser.pos = this.matchRegExp.lastIndex;
-	// Parse the heading
-	var classedRun = this.parser.parseClassedRun(/(\r?\n)/mg);
+	// Parse any classes, whitespace and then the heading itself
+	var classes = this.parser.parseClasses();
+	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
+	var tree = this.parser.parseRun(/(\r?\n)/mg);
 	// Return the heading
 	return [{
 		type: "element",
 		tag: "h" + this.match[1].length, 
 		attributes: {
-			"class": {type: "string", value: classedRun["class"]}
+			"class": {type: "string", value: classes.join(" ")}
 		},
-		children: classedRun.tree
+		children: tree
 	}];
 };
 })();
