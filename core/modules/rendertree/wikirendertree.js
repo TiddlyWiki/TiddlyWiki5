@@ -36,8 +36,10 @@ Create an array of renderers for an array of parse tree nodes
 */
 WikiRenderTree.prototype.createRenderers = function(renderContext,parseTreeNodes) {
 	var rendererNodes = [];
-	for(var t=0; t<parseTreeNodes.length; t++) {
-		rendererNodes.push(this.createRenderer(renderContext,parseTreeNodes[t]));
+	if(parseTreeNodes) {
+		for(var t=0; t<parseTreeNodes.length; t++) {
+			rendererNodes.push(this.createRenderer(renderContext,parseTreeNodes[t]));
+		}
 	}
 	return rendererNodes;
 };	
