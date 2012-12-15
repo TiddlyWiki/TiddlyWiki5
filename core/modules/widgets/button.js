@@ -33,9 +33,6 @@ exports.generateChildNodes = function() {
 	this["class"] = this.renderer.getAttribute("class");
 	// Compose the button
 	var classes = ["tw-tiddlybutton"];
-	if(this.classes) {
-		$tw.utils.pushTop(classes,this.classes);
-	}
 	if(this["class"]) {
 		$tw.utils.pushTop(classes,this["class"]);
 	}

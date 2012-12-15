@@ -48,9 +48,6 @@ exports.generateChildNodes = function() {
 			$tw.utils.pushTop(classes,"tw-tiddlylink-resolves");
 		}
 	}
-	if(this.classes) {
-		$tw.utils.pushTop(classes,this.classes);
-	}
 	var events = [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}];
 	if(this.hover) {
 		events.push({name: "mouseover", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});

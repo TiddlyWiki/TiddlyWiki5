@@ -53,9 +53,6 @@ exports.generateChildNodes = function() {
 	}
 	// Create the list frame element
 	var classes = ["tw-list-frame"];
-	if(this.classes) {
-		$tw.utils.pushTop(classes,this.classes);
-	}
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
 		type: "element",
 		tag: "div",
