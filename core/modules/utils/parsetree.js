@@ -29,4 +29,14 @@ exports.addClassToParseTreeNode = function(node,classString) {
 	}
 };
 
+exports.addStyleToParseTreeNode = function(node,name,value) {
+	if(node.type === "element") {
+		node.attributes = node.attributes || {};
+		node.attributes["style"] = node.attributes["style"] || {type: "string", value: ""};
+		if(node.attributes["style"].type === "string") {
+			node.attributes["style"].value += name + ":" + value + ";";
+		}
+	}
+};
+
 })();
