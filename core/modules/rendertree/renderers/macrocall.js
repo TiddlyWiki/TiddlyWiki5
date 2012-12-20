@@ -83,7 +83,7 @@ MacroCallRenderer.prototype.render = function(type) {
 
 MacroCallRenderer.prototype.renderInDom = function() {
 	// Create the element
-	this.domNode = document.createElement("div");
+	this.domNode = document.createElement("span");
 	this.domNode.setAttribute("data-macro-name",this.parseTreeNode.name);
 	// Render any child nodes
 	var self = this;
