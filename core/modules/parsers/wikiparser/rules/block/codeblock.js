@@ -28,7 +28,7 @@ exports.init = function(parser) {
 	this.matchRegExp = /\{\{\{\r?\n/mg;
 };
 
-exports.parse = function(match,isBlock) {
+exports.parse = function() {
 	var reEnd = /(\r?\n\}\}\}$)/mg;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;

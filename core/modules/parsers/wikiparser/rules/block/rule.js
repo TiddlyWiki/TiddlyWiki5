@@ -24,7 +24,7 @@ exports.init = function(parser) {
 	this.matchRegExp = /-{3,}\r?\n/mg;
 };
 
-exports.parse = function(match,isBlock) {
+exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	return [{type: "element", tag: "hr"}];

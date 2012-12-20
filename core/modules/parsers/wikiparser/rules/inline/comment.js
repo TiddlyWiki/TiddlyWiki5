@@ -24,7 +24,7 @@ exports.init = function(parser) {
 	this.matchRegExp = /\<![ \r\n\t]*(?:--(?:[^\-]|[\r\n]|-[^\-])*--[ \r\n\t]*)\>/mg;
 };
 
-exports.parse = function(match,isBlock) {
+exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Don't return any elements
