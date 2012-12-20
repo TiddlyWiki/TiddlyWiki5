@@ -77,7 +77,7 @@ WidgetRenderer.prototype.render = function(type) {
 
 WidgetRenderer.prototype.renderInDom = function() {
 	// Create the wrapper element
-	this.domNode = document.createElement("widget");
+	this.domNode = document.createElement("div");
 	this.domNode.setAttribute("data-widget-type",this.parseTreeNode.tag);
 	this.domNode.setAttribute("data-widget-attr",JSON.stringify(this.attributes));
 	// Render the widget if we've got one
