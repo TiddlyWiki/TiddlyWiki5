@@ -363,19 +363,26 @@ exports.new_initParsers = function() {
 
 /*
 Parse a block of text of a specified MIME type
+	type: content type of text to be parsed
+	text: text
+	options: see below
+Options include:
+	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 */
-exports.new_parseText = function(type,text) {
-	return this.vocabulary.parseText(type,text);
+exports.new_parseText = function(type,text,options) {
+	return this.vocabulary.parseText(type,text,options);
 };
 
 /*
 Parse a tiddler according to its MIME type
 */
 exports.new_parseTiddler = function(title,options) {
-	var tiddler = this.getTiddler(title),
+	options = options || {};
+	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
+		tiddler = this.getTiddler(title),
 		self = this;
-	return tiddler ? this.getCacheForTiddler(title,"newParseTree",function() {
-			return self.new_parseText(tiddler.fields.type,tiddler.fields.text);
+	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
+			return self.new_parseText(tiddler.fields.type,tiddler.fields.text,options);
 		}) : null;
 };
 

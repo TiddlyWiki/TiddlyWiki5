@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/block/transcludeblock.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/transcludeinline.js
 type: application/javascript
-module-type: wiki-block-rule
+module-type: wiki-inline-rule
 
-Wiki text rule for block-level transclusion. For example:
+Wiki text rule for inline-level transclusion. For example:
 
 {{{
 {{MyTiddler}}
@@ -23,7 +23,7 @@ exports.name = "transclude";
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{([^\{\}\|]+)(?:\|([^\{\}]+))?\}([^\}]*)\}(?:\.(\S+))?(?:\r?\n|$)/mg;
+	this.matchRegExp = /\{\{([^\{\}\|]+)(?:\|([^\{\}]+))?\}([^\}]*)\}(?:\.(\S+))?/mg;
 };
 
 exports.parse = function() {
@@ -40,8 +40,7 @@ exports.parse = function() {
 		tag: "transclude",
 		attributes: {
 			target: {type: "string", value: targetTitle}
-		},
-		isBlock: true
+		}
 	};
 	if(tooltip) {
 		node.attributes.tooltip = {type: "string", value: tooltip};

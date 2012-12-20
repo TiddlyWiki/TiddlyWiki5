@@ -45,7 +45,7 @@ var WikiParser = function(vocabulary,type,text,options) {
 	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,this.pos);
 	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,this.pos);
 	// Parse the text into inline runs or blocks
-	if(this.type === "text/vnd.tiddlywiki-run") {
+	if(options.parseAsInline) {
 		this.tree = this.parseInlineRun();
 	} else {
 		this.tree = this.parseBlocks();
@@ -218,8 +218,8 @@ WikiParser.prototype.parseInlineRun = function(terminatorRegExp,options) {
 
 WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	var tree = [];
-	// Find the next occurrence of a runrule
-	var nextMatch = this.findNextMatch(this.runRules,this.pos);
+	// Find the next occurrence of an inline rule
+	var nextMatch = this.findNextMatch(this.inlineRules,this.pos);
 	// Loop around the matches until we've reached the end of the text
 	while(this.pos < this.sourceLength && nextMatch) {
 		// Process the text preceding the run rule
@@ -230,7 +230,7 @@ WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 		// Process the run rule
 		tree.push.apply(tree,nextMatch.rule.parse());
 		// Look for the next run rule
-		nextMatch = this.findNextMatch(this.runRules,this.pos);
+		nextMatch = this.findNextMatch(this.inlineRules,this.pos);
 	}
 	// Process the remaining text
 	if(this.pos < this.sourceLength) {

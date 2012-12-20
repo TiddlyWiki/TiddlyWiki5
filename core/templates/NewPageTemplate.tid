@@ -17,6 +17,8 @@ some<br>thing
 
 {{Acknowledgements}width:40;height:50;}.one
 
+And this is an inline transclusion {{Acknowledgements}width:40;height:50;}.one
+
 ---
 
 {{{

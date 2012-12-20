@@ -22,8 +22,20 @@ var WikiVocabulary = function(options) {
 	this.widgetClasses = $tw.modules.createClassesFromModules("widget",$tw.WidgetBase);
 };
 
-WikiVocabulary.prototype.parseText = function(type,text) {
-	return new $tw.WikiParser(this,type,text,{wiki: this.wiki});
+/*
+Parse a block of text of a specified MIME type
+	type: content type of text to be parsed
+	text: text
+	options: see below
+Options include:
+	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
+*/
+WikiVocabulary.prototype.parseText = function(type,text,options) {
+	options = options || {};
+	return new $tw.WikiParser(this,type,text,{
+		parseAsInline: options.parseAsInline,
+		wiki: this.wiki
+	});
 };
 
 exports.WikiVocabulary = WikiVocabulary;
