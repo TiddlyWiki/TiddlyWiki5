@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/extlink.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for external links. For example:
 
@@ -21,6 +21,7 @@ External links can be suppressed by preceding them with `~`.
 "use strict";
 
 exports.name = "extlink";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/transcludeinline.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text rule for inline-level transclusion. For example:
 
@@ -19,6 +19,7 @@ Wiki text rule for inline-level transclusion. For example:
 "use strict";
 
 exports.name = "transclude";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

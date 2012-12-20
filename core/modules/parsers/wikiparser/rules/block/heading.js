@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/heading.js
 type: application/javascript
-module-type: wiki-block-rule
+module-type: wikirule
 
 Wiki text block rule for headings
 
@@ -13,6 +13,7 @@ Wiki text block rule for headings
 "use strict";
 
 exports.name = "heading";
+exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

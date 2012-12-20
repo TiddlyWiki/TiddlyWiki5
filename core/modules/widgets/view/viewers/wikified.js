@@ -28,7 +28,8 @@ WikifiedViewer.prototype.render = function() {
 			tag: "transclude",
 			attributes: {
 				target: {type: "string", value: this.tiddler.fields.title}
-			}
+			},
+			isBlock: this.viewWidget.renderer.parseTreeNode.isBlock
 		}];
 	} else {
 		parseTree = this.viewWidget.renderer.renderTree.wiki.new_parseText("text/vnd.tiddlywiki",this.value).tree;

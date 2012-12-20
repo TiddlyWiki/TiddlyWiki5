@@ -13,13 +13,32 @@ module-type: global
 var WikiVocabulary = function(options) {
 	this.wiki = options.wiki;
 	// Hashmaps of the various parse rule classes
-	this.pragmaRuleClasses = $tw.modules.createClassesFromModules("wiki-pragma-rule",$tw.WikiRuleBase);
-	this.blockRuleClasses = $tw.modules.createClassesFromModules("wiki-block-rule",$tw.WikiRuleBase);
-	this.inlineRuleClasses = $tw.modules.createClassesFromModules("wiki-inline-rule",$tw.WikiRuleBase);
+	this.pragmaRuleClasses = this.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+	this.blockRuleClasses = this.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+	this.inlineRuleClasses = this.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
 	// Hashmap of the various renderer classes
 	this.rendererClasses = $tw.modules.applyMethods("wikirenderer");
 	// Hashmap of the available widgets
-	this.widgetClasses = $tw.modules.createClassesFromModules("widget",$tw.WidgetBase);
+	this.widgetClasses = this.createClassesFromModules("widget",null,$tw.WidgetBase);
+};
+
+/*
+Return an array of classes created from the modules of a specified type. Each module should export the properties to be added to those of the optional base class
+*/
+WikiVocabulary.prototype.createClassesFromModules = function(moduleType,subType,baseClass) {
+	var classes = {};
+	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
+		if(!subType || moduleExports.types[subType]) {
+			var newClass = function() {};
+			if(baseClass) {
+				newClass.prototype = new baseClass();
+				newClass.prototype.constructor = baseClass;
+			}
+			$tw.utils.extend(newClass.prototype,moduleExports);
+			classes[moduleExports.name] = newClass;
+		}
+	});
+	return classes;
 };
 
 /*

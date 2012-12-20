@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/macrocall.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki rule for macro calls
 
@@ -17,6 +17,7 @@ Wiki rule for macro calls
 "use strict";
 
 exports.name = "macrocall";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

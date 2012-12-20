@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/html.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki rule for HTML elements and widgets. For example:
 
@@ -24,6 +24,7 @@ This is a widget invocation
 "use strict";
 
 exports.name = "html";
+exports.types = {inline: true};
 
 var voidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr".split(",");
 

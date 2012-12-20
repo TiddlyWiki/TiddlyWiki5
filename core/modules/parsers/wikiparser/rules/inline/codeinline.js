@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/codeinline.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for code runs. For example:
 
@@ -17,6 +17,7 @@ Wiki text inline rule for code runs. For example:
 "use strict";
 
 exports.name = "codeinline";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/pragma/macrodef.js
 type: application/javascript
-module-type: wiki-pragma-rule
+module-type: wikirule
 
 Wiki pragma rule for macro definitions
 
@@ -19,6 +19,7 @@ definition text, including $param$ markers
 "use strict";
 
 exports.name = "macrodef";
+exports.types = {pragma: true};
 
 /*
 Instantiate parse rule

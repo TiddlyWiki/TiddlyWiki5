@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/classinline.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for assigning classes to runs of text. For example:
 
@@ -22,6 +22,7 @@ List item 2}}}
 "use strict";
 
 exports.name = "classinline";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

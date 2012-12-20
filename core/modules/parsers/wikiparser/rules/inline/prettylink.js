@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/prettylink.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for pretty links. For example:
 
@@ -19,6 +19,7 @@ Wiki text inline rule for pretty links. For example:
 "use strict";
 
 exports.name = "prettylink";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

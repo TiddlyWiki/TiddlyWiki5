@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/codeblock.js
 type: application/javascript
-module-type: wiki-block-rule
+module-type: wikirule
 
 Wiki text rule for code blocks. For example:
 
@@ -21,6 +21,7 @@ Note that the opening curly braces and the closing curly braces must each be on 
 "use strict";
 
 exports.name = "codeblock";
+exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/emphasis.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for emphasis. For example:
 
@@ -27,6 +27,7 @@ Wiki text inline rule for emphasis. For example:
 "use strict";
 
 exports.name = "emphasis";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

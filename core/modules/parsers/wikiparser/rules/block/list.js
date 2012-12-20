@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/list.js
 type: application/javascript
-module-type: wiki-block-rule
+module-type: wikirule
 
 Wiki text block rule for lists. For example:
 
@@ -47,6 +47,7 @@ A CSS class can be applied to a list item as follows:
 "use strict";
 
 exports.name = "list";
+exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

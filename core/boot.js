@@ -444,23 +444,6 @@ $tw.modules.applyMethods = function(moduleType,targetObject) {
 	return targetObject;
 };
 
-/*
-Return an array of classes created from the modules of a specified type. Each module should export the properties to be added to those of the optional base class
-*/
-$tw.modules.createClassesFromModules = function(moduleType,baseClass) {
-	var classes = {};
-	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
-		var newClass = function() {};
-		if(baseClass) {
-			newClass.prototype = new baseClass();
-			newClass.prototype.constructor = baseClass;
-		}
-		$tw.utils.extend(newClass.prototype,moduleExports);
-		classes[moduleExports.name] = newClass;
-	});
-	return classes;
-};
-
 /////////////////////////// Barebones tiddler object
 
 /*

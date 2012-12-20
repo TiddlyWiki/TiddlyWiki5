@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/wikilink.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for wiki links. For example:
 
@@ -21,6 +21,7 @@ Precede a camel case word with `~` to prevent it from being recognised as a link
 "use strict";
 
 exports.name = "wikilink";
+exports.types = {inline: true};
 
 var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",

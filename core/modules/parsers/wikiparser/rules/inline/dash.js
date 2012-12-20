@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/inline/dash.js
 type: application/javascript
-module-type: wiki-inline-rule
+module-type: wikirule
 
 Wiki text inline rule for dashes. For example:
 
@@ -19,6 +19,7 @@ This is an em-dash: ---
 "use strict";
 
 exports.name = "dash";
+exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

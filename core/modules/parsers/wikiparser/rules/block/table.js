@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/table.js
 type: application/javascript
-module-type: wiki-block-rule
+module-type: wikirule
 
 Wiki text block rule for tables.
 
@@ -13,6 +13,7 @@ Wiki text block rule for tables.
 "use strict";
 
 exports.name = "table";
+exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

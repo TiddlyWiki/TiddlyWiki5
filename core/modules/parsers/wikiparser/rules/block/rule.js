@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/rule.js
 type: application/javascript
-module-type: wiki-block-rule
+module-type: wikirule
 
 Wiki text block rule for rules. For example:
 
@@ -17,6 +17,7 @@ Wiki text block rule for rules. For example:
 "use strict";
 
 exports.name = "rule";
+exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;

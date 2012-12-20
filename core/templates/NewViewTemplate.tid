@@ -12,5 +12,6 @@ modifier: JeremyRuston
 </div>
 
 <div class="body">
-	<_view field="text" format="wikified"/>
+	<_view field="text" format="wikified">
+	</_view>
 </div>
