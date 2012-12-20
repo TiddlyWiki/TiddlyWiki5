@@ -47,7 +47,7 @@ MacroCallRenderer.prototype.substituteParameters = function(text,macroCallParseT
 	for(var p=0; p<macroDefinition.params.length; p++) {
 		// Check if we've got a macro call parameter with the same name
 		var paramInfo = macroDefinition.params[p],
-			paramValue;
+			paramValue = undefined;
 		for(var m=0; m<macroCallParseTreeNode.params.length; m++) {
 			if(macroCallParseTreeNode.params[m].name === paramInfo.name) {
 				paramValue = macroCallParseTreeNode.params[m].value;
@@ -83,7 +83,7 @@ MacroCallRenderer.prototype.render = function(type) {
 
 MacroCallRenderer.prototype.renderInDom = function() {
 	// Create the element
-	this.domNode = document.createElement("macrocall");
+	this.domNode = document.createElement("div");
 	this.domNode.setAttribute("data-macro-name",this.parseTreeNode.name);
 	// Render any child nodes
 	var self = this;
