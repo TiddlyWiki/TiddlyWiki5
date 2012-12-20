@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/macrocallinline.js
+title: $:/core/modules/parsers/wikiparser/rules/macrocallblock.js
 type: application/javascript
 module-type: wikirule
 
-Wiki rule for macro calls
+Wiki rule for block macro calls
 
 {{{
 <<name value value2>>
@@ -17,12 +17,12 @@ Wiki rule for macro calls
 "use strict";
 
 exports.name = "macrocall";
-exports.types = {inline: true};
+exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /<<([^\s>]+)\s*([\s\S]*?)>>/mg;
+	this.matchRegExp = /<<([^\s>]+)\s*([\s\S]*?)>>(?:\r?\n|$)/mg;
 };
 
 /*
@@ -52,7 +52,8 @@ exports.parse = function() {
 	return [{
 		type: "macrocall",
 		name: macroName,
-		params: params
+		params: params,
+		isBlock: true
 	}];
 };
 

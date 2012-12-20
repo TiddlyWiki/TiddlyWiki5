@@ -32,7 +32,7 @@ var MacroCallRenderer = function(renderTree,renderContext,parseTreeNode) {
 		// Substitute the macro parameters
 		var text = this.substituteParameters(macro.text,this.parseTreeNode,macro);
 		// Parse the text
-		childTree = this.renderTree.wiki.new_parseText("text/vnd.tiddlywiki",text).tree;
+		childTree = this.renderTree.wiki.new_parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.parseTreeNode.isBlock}).tree;
 	}
 	// Create the renderers for the child nodes
 	this.children = this.renderTree.createRenderers(this.renderContext,childTree);
@@ -83,7 +83,7 @@ MacroCallRenderer.prototype.render = function(type) {
 
 MacroCallRenderer.prototype.renderInDom = function() {
 	// Create the element
-	this.domNode = document.createElement("span");
+	this.domNode = document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
 	this.domNode.setAttribute("data-macro-name",this.parseTreeNode.name);
 	// Render any child nodes
 	var self = this;

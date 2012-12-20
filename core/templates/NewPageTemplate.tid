@@ -3,6 +3,8 @@ title: $:/templates/NewPageTemplate
 \define coolmacro(p:ridiculously) This is my $p$ cool macro!
 \define me(one two)
 some<br>thing
+
+New paragraph
 \end
 \define another(first:default second third:default3) that is
 
@@ -10,6 +12,11 @@ some<br>thing
 * This
 *.disabled Is a 
 * List!!
+
+<<me red green>>
+
+Inline macro call: <<me red green>>
+
 
 |table|k
 | this | is | a | table |
