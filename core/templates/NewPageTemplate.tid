@@ -22,7 +22,7 @@ Inline macro call: <<me red green>>
 | this | is | a | table |
 | yes | indeed |>| it is |
 
-{{Acknowledgements}width:40;height:50;}.one
+{{Acknowledgements|with a tooltip}width:40;height:50;background-color:red;}.one
 
 And this is an inline transclusion {{Acknowledgements}width:40;height:50;}.one
 

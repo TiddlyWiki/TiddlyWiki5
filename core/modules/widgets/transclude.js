@@ -77,10 +77,28 @@ exports.generateChildNodes = function() {
 			templateParseTree = parser ? parser.tree : [];
 		}
 	}
+	// Create the wrapper node
+	var node = {
+		type: "element",
+		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
+		children: templateParseTree
+	};
 	// Set up the attributes for the wrapper element
 	var classes = [];
+	if(this.renderer.hasAttribute("class")) {
+		$tw.utils.pushTop(classes,this.renderer.getAttribute("class").split(" "));
+	}
 	if(!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle)) {
 		$tw.utils.pushTop(classes,"tw-tiddler-missing");
+	}
+	if(classes.length > 0) {
+		$tw.utils.addClassToParseTreeNode(node,classes.join(" "));
+	}
+	if(this.renderer.hasAttribute("style")) {
+		$tw.utils.addAttributeToParseTreeNode(node,"style",this.renderer.getAttribute("style"));
+	}
+	if(this.renderer.hasAttribute("tooltip")) {
+		$tw.utils.addAttributeToParseTreeNode(node,"title",this.renderer.getAttribute("tooltip"));
 	}
 	// Create the renderers for the wrapper and the children
 	var newRenderContext = {
@@ -88,14 +106,7 @@ exports.generateChildNodes = function() {
 		templateTitle: this.templateTitle,
 		parentContext: this.renderer.renderContext
 	};
-	this.children = this.renderer.renderTree.createRenderers(newRenderContext,[{
-		type: "element",
-		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
-		attributes: {
-			"class": {type: "string", value: classes.join(" ")}
-		},
-		children: templateParseTree
-	}]);
+	this.children = this.renderer.renderTree.createRenderers(newRenderContext,[node]);
 };
 
 exports.refreshInDom = function(changedAttributes,changedTiddlers) {
