@@ -11,8 +11,6 @@ This is an en-dash: --
 This is an em-dash: ---
 }}}
 
-Dashes must be followed by whitespace in order to be distinguished from strikethrough notation (`--strikethrough--`).
-
 \*/
 (function(){
 
@@ -25,7 +23,7 @@ exports.name = "dash";
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /-{2,3}(?=\s)/mg;
+	this.matchRegExp = /-{2,3}[^-]/mg;
 };
 
 exports.parse = function() {
