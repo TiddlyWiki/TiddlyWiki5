@@ -38,12 +38,12 @@ var WikiParser = function(vocabulary,type,text,options) {
 	// Initialise the things that pragma rules can change
 	this.macroDefinitions = {}; // Hash map of macro definitions
 	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,0);
+	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,"pragma",0);
 	// Parse any pragmas
 	this.parsePragmas();
 	// Instantiate the parser block and inline rules
-	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,this.pos);
-	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,this.pos);
+	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,"block",this.pos);
+	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,"inline",this.pos);
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {
 		this.tree = this.parseInlineRun();
@@ -55,12 +55,14 @@ var WikiParser = function(vocabulary,type,text,options) {
 /*
 Instantiate an array of parse rules
 */
-WikiParser.prototype.instantiateRules = function(classes,startPos) {
+WikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 	var rulesInfo = [],
 		self = this;
 	$tw.utils.each(classes,function(RuleClass) {
 		// Instantiate the rule
 		var rule = new RuleClass(self);
+		rule.is = {};
+		rule.is[type] = true;
 		rule.init(self);
 		var matchIndex = rule.findNextMatch(startPos);
 		if(matchIndex !== undefined) {
