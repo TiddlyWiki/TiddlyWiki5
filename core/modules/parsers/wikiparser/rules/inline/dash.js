@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/dash.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/dash.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for dashes. For example:
+Wiki text inline rule for dashes. For example:
 
 {{{
 This is an en-dash: --

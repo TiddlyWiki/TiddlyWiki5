@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/wikilink.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/wikilink.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for wiki links. For example:
+Wiki text inline rule for wiki links. For example:
 
 {{{
 AWikiLink

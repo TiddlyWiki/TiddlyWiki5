@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/table.js
 type: application/javascript
-module-type: wikiblockrule
+module-type: wiki-block-rule
 
 Wiki text block rule for tables.
 
@@ -86,7 +86,7 @@ var processRow = function(prevColumns) {
 				colSpanCount = 1;
 			}
 			// Parse the cell
-			cell.children = this.parser.parseRun(cellTermRegExp,{eatTerminator: true});
+			cell.children = this.parser.parseInlineRun(cellTermRegExp,{eatTerminator: true});
 			// Set the alignment for the cell
 			if(cellMatch[1].substr(cellMatch[1].length-1,1) === " ") { // spaceRight
 				$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
@@ -140,7 +140,7 @@ exports.parse = function() {
 				// Set the alignment - TODO: figure out why TW did this
 //				rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 				// Parse the caption
-				rowContainer.children = this.parser.parseRun(rowTermRegExp,{eatTerminator: true});
+				rowContainer.children = this.parser.parseInlineRun(rowTermRegExp,{eatTerminator: true});
 			} else {
 				// Create the row
 				var theRow = {type: "element", tag: "tr", children: []};

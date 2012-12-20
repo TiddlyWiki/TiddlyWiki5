@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/macrocall.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/macrocall.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
 Wiki rule for macro calls
 

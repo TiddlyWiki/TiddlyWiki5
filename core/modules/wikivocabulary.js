@@ -13,9 +13,9 @@ module-type: global
 var WikiVocabulary = function(options) {
 	this.wiki = options.wiki;
 	// Hashmaps of the various parse rule classes
-	this.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikipragmarule",$tw.WikiRuleBase);
-	this.blockRuleClasses = $tw.modules.createClassesFromModules("wikiblockrule",$tw.WikiRuleBase);
-	this.runRuleClasses = $tw.modules.createClassesFromModules("wikirunrule",$tw.WikiRuleBase);
+	this.pragmaRuleClasses = $tw.modules.createClassesFromModules("wiki-pragma-rule",$tw.WikiRuleBase);
+	this.blockRuleClasses = $tw.modules.createClassesFromModules("wiki-block-rule",$tw.WikiRuleBase);
+	this.inlineRuleClasses = $tw.modules.createClassesFromModules("wiki-inline-rule",$tw.WikiRuleBase);
 	// Hashmap of the various renderer classes
 	this.rendererClasses = $tw.modules.applyMethods("wikirenderer");
 	// Hashmap of the available widgets

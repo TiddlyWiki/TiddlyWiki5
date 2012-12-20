@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/html.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/html.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
 Wiki rule for HTML elements and widgets. For example:
 
@@ -83,7 +83,7 @@ exports.parse = function() {
 		if(isBlock) {
 			content = this.parser.parseBlocks(reEndString);
 		} else {
-			content = this.parser.parseRun(reEnd);
+			content = this.parser.parseInlineRun(reEnd);
 		}
 		reEnd.lastIndex = this.parser.pos;
 		var endMatch = reEnd.exec(this.parser.source);

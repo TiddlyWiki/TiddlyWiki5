@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/emphasis.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/emphasis.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for emphasis. For example:
+Wiki text inline rule for emphasis. For example:
 
 {{{
 	This is ''bold'' text
@@ -66,7 +66,7 @@ exports.parse = function() {
 			break;
 	}
 	// Parse the run including the terminator
-	var tree = this.parser.parseRun(reEnd,{eatTerminator: true});
+	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 	// Return the classed span
 	return [{
 		type: "element",

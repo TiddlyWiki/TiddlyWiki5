@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/transcludeblock.js
 type: application/javascript
-module-type: wikiblockrule
+module-type: wiki-block-rule
 
 Wiki text rule for block-level transclusion. For example:
 

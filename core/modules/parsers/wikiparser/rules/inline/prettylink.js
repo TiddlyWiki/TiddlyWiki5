@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/prettylink.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/prettylink.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for pretty links. For example:
+Wiki text inline rule for pretty links. For example:
 
 {{{
 [[Introduction]]

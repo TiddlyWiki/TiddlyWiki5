@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/pragma/macrodef.js
 type: application/javascript
-module-type: wikipragmarule
+module-type: wiki-pragma-rule
 
 Wiki pragma rule for macro definitions
 

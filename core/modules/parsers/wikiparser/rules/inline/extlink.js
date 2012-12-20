@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/extlink.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/extlink.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for external links. For example:
+Wiki text inline rule for external links. For example:
 
 {{{
 An external link: http://www.tiddlywiki.com/

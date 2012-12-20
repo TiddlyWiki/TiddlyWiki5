@@ -41,12 +41,12 @@ var WikiParser = function(vocabulary,type,text,options) {
 	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,0);
 	// Parse any pragmas
 	this.parsePragmas();
-	// Instantiate the parser block and run rules
+	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,this.pos);
-	this.runRules = this.instantiateRules(this.vocabulary.runRuleClasses,this.pos);
-	// Parse the text into runs or blocks
+	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,this.pos);
+	// Parse the text into inline runs or blocks
 	if(this.type === "text/vnd.tiddlywiki-run") {
-		this.tree = this.parseRun();
+		this.tree = this.parseInlineRun();
 	} else {
 		this.tree = this.parseBlocks();
 	}
@@ -148,7 +148,7 @@ WikiParser.prototype.parseBlock = function(terminatorRegExpString) {
 		return nextMatch.rule.parse();
 	}
 	// Treat it as a paragraph if we didn't find a block rule
-	return [{type: "element", tag: "p", children: this.parseRun(terminatorRegExp)}];
+	return [{type: "element", tag: "p", children: this.parseInlineRun(terminatorRegExp)}];
 };
 
 /*
@@ -208,15 +208,15 @@ Parse a run of text at the current position
 Options available:
 	eatTerminator: move the parse position past any encountered terminator (default false)
 */
-WikiParser.prototype.parseRun = function(terminatorRegExp,options) {
+WikiParser.prototype.parseInlineRun = function(terminatorRegExp,options) {
 	if(terminatorRegExp) {
-		return this.parseRunTerminated(terminatorRegExp,options);
+		return this.parseInlineRunTerminated(terminatorRegExp,options);
 	} else {
-		return this.parseRunUnterminated(options);
+		return this.parseInlineRunUnterminated(options);
 	}
 };
 
-WikiParser.prototype.parseRunUnterminated = function(options) {
+WikiParser.prototype.parseInlineRunUnterminated = function(options) {
 	var tree = [];
 	// Find the next occurrence of a runrule
 	var nextMatch = this.findNextMatch(this.runRules,this.pos);
@@ -240,19 +240,19 @@ WikiParser.prototype.parseRunUnterminated = function(options) {
 	return tree;
 };
 
-WikiParser.prototype.parseRunTerminated = function(terminatorRegExp,options) {
+WikiParser.prototype.parseInlineRunTerminated = function(terminatorRegExp,options) {
 	options = options || {};
 	var tree = [];
 	// Find the next occurrence of the terminator
 	terminatorRegExp.lastIndex = this.pos;
 	var terminatorMatch = terminatorRegExp.exec(this.source);
-	// Find the next occurrence of a runrule
-	var runRuleMatch = this.findNextMatch(this.runRules,this.pos);
+	// Find the next occurrence of a inlinerule
+	var inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
 	// Loop around until we've reached the end of the text
-	while(this.pos < this.sourceLength && (terminatorMatch || runRuleMatch)) {
-		// Return if we've found the terminator, and it precedes any run rule match
+	while(this.pos < this.sourceLength && (terminatorMatch || inlineRuleMatch)) {
+		// Return if we've found the terminator, and it precedes any inline rule match
 		if(terminatorMatch) {
-			if(!runRuleMatch || runRuleMatch.matchIndex >= terminatorMatch.index) {
+			if(!inlineRuleMatch || inlineRuleMatch.matchIndex >= terminatorMatch.index) {
 				if(terminatorMatch.index > this.pos) {
 					tree.push({type: "text", text: this.source.substring(this.pos,terminatorMatch.index)});
 				}
@@ -263,17 +263,17 @@ WikiParser.prototype.parseRunTerminated = function(terminatorRegExp,options) {
 				return tree;
 			}
 		}
-		// Process any run rule, along with the text preceding it
-		if(runRuleMatch) {
+		// Process any inline rule, along with the text preceding it
+		if(inlineRuleMatch) {
 			// Preceding text
-			if(runRuleMatch.matchIndex > this.pos) {
-				tree.push({type: "text", text: this.source.substring(this.pos,runRuleMatch.matchIndex)});
-				this.pos = runRuleMatch.matchIndex;
+			if(inlineRuleMatch.matchIndex > this.pos) {
+				tree.push({type: "text", text: this.source.substring(this.pos,inlineRuleMatch.matchIndex)});
+				this.pos = inlineRuleMatch.matchIndex;
 			}
-			// Process the run rule
-			tree.push.apply(tree,runRuleMatch.rule.parse());
-			// Look for the next run rule
-			runRuleMatch = this.findNextMatch(this.runRules,this.pos);
+			// Process the inline rule
+			tree.push.apply(tree,inlineRuleMatch.rule.parse());
+			// Look for the next inline rule
+			inlineRuleMatch = this.findNextMatch(this.inlineRules,this.pos);
 			// Look for the next terminator match
 			terminatorRegExp.lastIndex = this.pos;
 			terminatorMatch = terminatorRegExp.exec(this.source);

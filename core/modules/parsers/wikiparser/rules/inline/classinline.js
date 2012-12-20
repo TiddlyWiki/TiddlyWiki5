@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/classrun.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/classinline.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for assigning classes to runs of text. For example:
+Wiki text inline rule for assigning classes to runs of text. For example:
 
 {{{
 {{myClass{This text will have the CSS class `myClass`.
@@ -21,7 +21,7 @@ List item 2}}}
 /*global $tw: false */
 "use strict";
 
-exports.name = "classrun";
+exports.name = "classinline";
 
 exports.init = function(parser) {
 	this.parser = parser;
@@ -36,7 +36,7 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse the run up to the terminator
-	var tree = this.parser.parseRun(reEnd,{eatTerminator: true});
+	var tree = this.parser.parseInlineRun(reEnd,{eatTerminator: true});
 	// Return the classed span
 	return [{
 		type: "element",

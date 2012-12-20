@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/coderun.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/codeinline.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for code runs. For example:
+Wiki text inline rule for code runs. For example:
 
 {{{
 	This is a {{{code run}}} and `so is this`.
@@ -16,7 +16,7 @@ Wiki text run rule for code runs. For example:
 /*global $tw: false */
 "use strict";
 
-exports.name = "coderun";
+exports.name = "codeinline";
 
 exports.init = function(parser) {
 	this.parser = parser;

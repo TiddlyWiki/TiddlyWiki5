@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/rule.js
 type: application/javascript
-module-type: wikiblockrule
+module-type: wiki-block-rule
 
 Wiki text block rule for rules. For example:
 

@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/comment.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/comment.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for HTML comments. For example:
+Wiki text inline rule for HTML comments. For example:
 
 {{{
 <!-- This is a comment -->

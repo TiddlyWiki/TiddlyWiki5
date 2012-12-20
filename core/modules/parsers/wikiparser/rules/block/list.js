@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/list.js
 type: application/javascript
-module-type: wikiblockrule
+module-type: wiki-block-rule
 
 Wiki text block rule for lists. For example:
 
@@ -114,7 +114,7 @@ exports.parse = function() {
 			lastListItem = lastListChildren[lastListChildren.length-1],
 			classes = this.parser.parseClasses();
 		this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-		var tree = this.parser.parseRun(/(\r?\n)/mg);
+		var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
 		lastListItem.children.push.apply(lastListItem.children,tree);
 		if(classes.length > 0) {
 			$tw.utils.addClassToParseTreeNode(lastListItem,classes.join(" "));

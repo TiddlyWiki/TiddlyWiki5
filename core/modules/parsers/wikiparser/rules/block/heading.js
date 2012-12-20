@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/rules/block/heading.js
 type: application/javascript
-module-type: wikiblockrule
+module-type: wiki-block-rule
 
 Wiki text block rule for headings
 
@@ -31,7 +31,7 @@ exports.parse = function() {
 	// Parse any classes, whitespace and then the heading itself
 	var classes = this.parser.parseClasses();
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-	var tree = this.parser.parseRun(/(\r?\n)/mg);
+	var tree = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// Return the heading
 	return [{
 		type: "element",

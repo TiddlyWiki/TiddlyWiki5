@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/run/entity.js
+title: $:/core/modules/parsers/wikiparser/rules/inline/entity.js
 type: application/javascript
-module-type: wikirunrule
+module-type: wiki-inline-rule
 
-Wiki text run rule for HTML entities. For example:
+Wiki text inline rule for HTML entities. For example:
 
 {{{
 	This is a copyright symbol: &copy;
