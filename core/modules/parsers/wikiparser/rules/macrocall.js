@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/inline/macrocall.js
+title: $:/core/modules/parsers/wikiparser/rules/macrocall.js
 type: application/javascript
 module-type: wikirule
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/inline/transcludeinline.js
+title: $:/core/modules/parsers/wikiparser/rules/transcludeinline.js
 type: application/javascript
 module-type: wikirule
 

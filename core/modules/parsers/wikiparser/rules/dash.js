@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/inline/dash.js
+title: $:/core/modules/parsers/wikiparser/rules/dash.js
 type: application/javascript
 module-type: wikirule
 

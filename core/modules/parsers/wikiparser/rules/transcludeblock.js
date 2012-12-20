@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/block/transcludeblock.js
+title: $:/core/modules/parsers/wikiparser/rules/transcludeblock.js
 type: application/javascript
 module-type: wikirule
 

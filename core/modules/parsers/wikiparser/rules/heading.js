@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/block/heading.js
+title: $:/core/modules/parsers/wikiparser/rules/heading.js
 type: application/javascript
 module-type: wikirule
 

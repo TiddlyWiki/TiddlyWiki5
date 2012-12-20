@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/inline/classinline.js
+title: $:/core/modules/parsers/wikiparser/rules/classinline.js
 type: application/javascript
 module-type: wikirule
 

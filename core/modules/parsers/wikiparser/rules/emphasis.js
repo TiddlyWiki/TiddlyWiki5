@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/inline/emphasis.js
+title: $:/core/modules/parsers/wikiparser/rules/emphasis.js
 type: application/javascript
 module-type: wikirule
 

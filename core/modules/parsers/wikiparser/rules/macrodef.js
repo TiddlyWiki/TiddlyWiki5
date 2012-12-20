@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/pragma/macrodef.js
+title: $:/core/modules/parsers/wikiparser/rules/macrodef.js
 type: application/javascript
 module-type: wikirule
 
