@@ -677,11 +677,13 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/js","tiddlerdeserializer",{
 $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	"application/x-tiddler": function(text,fields) {
 		var split = text.split(/\r?\n\r?\n/mg);
-		if(split.length > 1) {
+		if(split.length >= 1) {
 			fields = $tw.utils.parseFields(split[0],fields);
+		}
+		if(split.length >= 2) {
 			fields.text = split.slice(1).join("\n\n");
 		} else {
-			fields.text = text;
+			fields.text = "";
 		}
 		return [fields];
 	}
