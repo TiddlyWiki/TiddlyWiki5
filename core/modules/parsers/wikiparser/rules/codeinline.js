@@ -5,9 +5,9 @@ module-type: wikirule
 
 Wiki text inline rule for code runs. For example:
 
-{{{
-	This is a {{{code run}}} and `so is this`.
-}}}
+```
+	This is a `code run`.
+```
 
 \*/
 (function(){
@@ -22,18 +22,13 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /(\{\{\{)|(`)/mg;
+	this.matchRegExp = /`/mg;
 };
 
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var reEnd;
-	if(this.match[0] === "{{{") {
-		reEnd = /(\}\}\})/mg;
-	} else {
-		reEnd = /(`)/mg;
-	}
+	var reEnd = /`/mg;
 	// Look for the end marker
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),

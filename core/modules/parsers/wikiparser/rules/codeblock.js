@@ -5,13 +5,11 @@ module-type: wikirule
 
 Wiki text rule for code blocks. For example:
 
-{{{
-	{{{
+```
+	```
 	This text will not be //wikified//
-	}}}
-}}}
-
-Note that the opening curly braces and the closing curly braces must each be on a line of their own, and not be preceded or followed by white space.
+	```
+```
 
 \*/
 (function(){
@@ -26,11 +24,11 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{\{\r?\n/mg;
+	this.matchRegExp = /```\r?\n/mg;
 };
 
 exports.parse = function() {
-	var reEnd = /(\r?\n\}\}\}$)/mg;
+	var reEnd = /(\r?\n```$)/mg;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Look for the end of the block
