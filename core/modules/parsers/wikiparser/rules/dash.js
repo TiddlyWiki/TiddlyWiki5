@@ -5,11 +5,11 @@ module-type: wikirule
 
 Wiki text inline rule for dashes. For example:
 
-{{{
+```
 This is an en-dash: --
 
 This is an em-dash: ---
-}}}
+```
 
 \*/
 (function(){

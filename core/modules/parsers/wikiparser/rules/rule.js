@@ -5,9 +5,9 @@ module-type: wikirule
 
 Wiki text block rule for rules. For example:
 
-{{{
+```
 ---
-}}}
+```
 
 \*/
 (function(){

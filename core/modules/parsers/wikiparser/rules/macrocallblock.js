@@ -5,9 +5,9 @@ module-type: wikirule
 
 Wiki rule for block macro calls
 
-{{{
+```
 <<name value value2>>
-}}}
+```
 
 \*/
 (function(){

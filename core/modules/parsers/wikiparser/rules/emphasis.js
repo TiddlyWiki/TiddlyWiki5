@@ -5,7 +5,7 @@ module-type: wikirule
 
 Wiki text inline rule for emphasis. For example:
 
-{{{
+```
 	This is ''bold'' text
 
 	This is //italic// text
@@ -17,7 +17,7 @@ Wiki text inline rule for emphasis. For example:
 	This is ,,subscript,, text
 
 	This is ~~strikethrough~~ text
-}}}
+```
 
 \*/
 (function(){

@@ -5,11 +5,11 @@ module-type: wikirule
 
 Wiki text inline rule for wiki links. For example:
 
-{{{
+```
 AWikiLink
 AnotherLink
 ~SuppressedLink
-}}}
+```
 
 Precede a camel case word with `~` to prevent it from being recognised as a link.
 

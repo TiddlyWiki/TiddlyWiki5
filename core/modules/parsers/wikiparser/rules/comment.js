@@ -5,9 +5,9 @@ module-type: wikirule
 
 Wiki text inline rule for HTML comments. For example:
 
-{{{
+```
 <!-- This is a comment -->
-}}}
+```
 
 \*/
 (function(){

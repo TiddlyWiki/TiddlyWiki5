@@ -5,11 +5,11 @@ module-type: wikirule
 
 Wiki text rule for inline-level transclusion. For example:
 
-{{{
+```
 {{MyTiddler}}
 {{MyTiddler|tooltip}}
 {{MyTiddler}width:40;height:50;}.class.class
-}}}
+```
 
 \*/
 (function(){

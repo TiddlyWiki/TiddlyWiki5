@@ -5,7 +5,7 @@ module-type: wikirule
 
 Wiki text block rule for lists. For example:
 
-{{{
+```
 * This is an unordered list
 * It has two items
 
@@ -15,11 +15,11 @@ Wiki text block rule for lists. For example:
 
 ; This is a term that is being defined
 : This is the definition of that term
-}}}
+```
 
 Note that lists can be nested arbitrarily:
 
-{{{
+```
 #** One
 #* Two
 #** Three
@@ -29,15 +29,15 @@ Note that lists can be nested arbitrarily:
 ## Seven
 ### Eight
 ## Nine
-}}}
+```
 
 A CSS class can be applied to a list item as follows:
 
-{{{
+```
 * List item one
 *.active List item two has the class `active`
 * List item three
-}}}
+```
 
 \*/
 (function(){

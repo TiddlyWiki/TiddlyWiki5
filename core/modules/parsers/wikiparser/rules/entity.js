@@ -5,9 +5,9 @@ module-type: wikirule
 
 Wiki text inline rule for HTML entities. For example:
 
-{{{
+```
 	This is a copyright symbol: &copy;
-}}}
+```
 
 \*/
 (function(){

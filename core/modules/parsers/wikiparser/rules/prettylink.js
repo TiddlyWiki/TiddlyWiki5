@@ -5,11 +5,11 @@ module-type: wikirule
 
 Wiki text inline rule for pretty links. For example:
 
-{{{
+```
 [[Introduction]]
 
 [[Link description|TiddlerTitle]]
-}}}
+```
 
 \*/
 (function(){

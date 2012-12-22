@@ -5,11 +5,11 @@ module-type: wikirule
 
 Wiki pragma rule for macro definitions
 
-{{{
+```
 /define name(param:defaultvalue,param2:defaultvalue)
 definition text, including $param$ markers
 /end
-}}}
+```
 
 \*/
 (function(){
