@@ -8,7 +8,8 @@ New paragraph
 \end
 \define another(first:default second third:default3) that is
 
-{{something{
+@@.something
+@@background-color:green;
 * This
 *.disabled Is a 
 * List!!
@@ -28,17 +29,17 @@ And this is an inline transclusion {{Acknowledgements}width:40;height:50;}.one
 
 ---
 
-{{{
+```
 Some monospaced
-}}}
+```
 
-This is a {{myClass{normal}}} para and one `with` so<!--and a comment-->me {{{code}}} blocks -- and both kinds of dashes --- just for the fun of it. And ''some bold'' text and //italics//, ^^superscript^^ and ,,subscript,, and even some __underlined text__. Oh a ~~strikethrough~~.
+This is a @@.myClass normal@@ para and @@background-color:red; one@@ `with` so<!--and a comment-->me `code` blocks -- and both kinds of dashes --- just for the fun of it. And ''some bold'' text and //italics//, ^^superscript^^ and ,,subscript,, and even some __underlined text__. Oh a ~~strikethrough~~.
 
 
 some text ~~strike start -- ndash --- mdash strike end~~  -> nok
 
 
-}}}
+@@
 
 <!--This is another comment-->
 
