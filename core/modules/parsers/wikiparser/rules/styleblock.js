@@ -38,7 +38,7 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(\.(?:[^\r\n\s]+))?\r?\n/mg;
+	this.matchRegExp = /@@((?:[^\.\r\n\s:]+:[^\r\n;]+;)+)?(?:\.([^\r\n\s]+))?\r?\n/mg;
 };
 
 exports.parse = function() {
@@ -50,7 +50,7 @@ exports.parse = function() {
 			styles.push(this.match[1]);
 		}
 		if(this.match[2]) {
-			classes.push(this.match[2]);
+			classes.push(this.match[2].split(".").join(" "));
 		}
 		// Move past the match
 		this.parser.pos = this.matchRegExp.lastIndex;
