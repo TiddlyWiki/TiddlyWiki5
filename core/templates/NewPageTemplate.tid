@@ -14,6 +14,8 @@ New paragraph
 *.disabled Is a 
 * List!!
 
+{{{ [tag[docs]tag[introduction]sort[title]] ||$:/templates/NewViewTemplate}}}.anotherClassy
+
 <<me red green>>
 
 Inline macro call: <<me red green>>
@@ -23,7 +25,7 @@ Inline macro call: <<me red green>>
 | this | is | a | table |
 | yes | indeed |>| it is |
 
-{{Acknowledgements|with a tooltip}width:40;height:50;background-color:red;}.one
+{{Acknowledgements|with a tooltip||$:/templates/NewViewTemplate}width:40;height:50;background-color:red;}.one
 
 And this is an inline transclusion {{Acknowledgements}width:40;height:50;}.one
 
