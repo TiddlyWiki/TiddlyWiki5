@@ -8,6 +8,8 @@ Wiki text rule for inline-level transclusion. For example:
 ```
 {{MyTiddler}}
 {{MyTiddler|tooltip}}
+{{MyTiddler||TemplateTitle}}
+{{MyTiddler|tooltip||TemplateTitle}}
 {{MyTiddler}width:40;height:50;}.class.class
 ```
 
@@ -24,7 +26,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{([^\{\}\|]+)(?:\|([^\{\}]+))?\}([^\}]*)\}(?:\.(\S+))?/mg;
+	this.matchRegExp = /\{\{([^\{\}\|]+)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}([^\}]*)\}(?:\.(\S+))?/mg;
 };
 
 exports.parse = function() {
@@ -33,8 +35,9 @@ exports.parse = function() {
 	// Get the match details
 	var targetTitle = this.match[1],
 		tooltip = this.match[2],
-		style = this.match[3],
-		classes = this.match[4];
+		template = this.match[3],
+		style = this.match[4],
+		classes = this.match[5];
 	// Return the transclude widget
 	var node = {
 		type: "widget",
@@ -45,6 +48,9 @@ exports.parse = function() {
 	};
 	if(tooltip) {
 		node.attributes.tooltip = {type: "string", value: tooltip};
+	}
+	if(template) {
+		node.attributes.template = {type: "string", value: template};
 	}
 	if(style) {
 		node.attributes.style = {type: "string", value: style};
