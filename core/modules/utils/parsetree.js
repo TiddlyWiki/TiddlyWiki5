@@ -20,11 +20,18 @@ exports.addAttributeToParseTreeNode = function(node,name,value) {
 };
 
 exports.addClassToParseTreeNode = function(node,classString) {
+	var classes = [];
 	if(node.type === "element") {
 		node.attributes = node.attributes || {};
 		node.attributes["class"] = node.attributes["class"] || {type: "string", value: ""};
 		if(node.attributes["class"].type === "string") {
-			node.attributes["class"].value += " " + classString;
+			if(node.attributes["class"].value !== "") {
+				classes = node.attributes["class"].value.split(" ");
+			}
+			if(classString !== "") {
+				$tw.utils.pushTop(classes,classString.split(" "));
+			}
+			node.attributes["class"].value = classes.join(" ");
 		}
 	}
 };
