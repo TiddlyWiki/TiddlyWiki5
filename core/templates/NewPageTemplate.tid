@@ -14,6 +14,8 @@ New paragraph
 *.disabled Is a 
 * List!!
 
+An inline {{{ [tag[docs]tag[introduction]sort[title]] }}}.anotherClassy yes it is!
+
 {{{ [tag[docs]tag[introduction]sort[title]] ||$:/templates/NewViewTemplate}}}.anotherClassy
 
 <<me red green>>

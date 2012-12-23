@@ -55,7 +55,7 @@ exports.generateChildNodes = function() {
 	var classes = ["tw-list-frame"];
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
 		type: "element",
-		tag: "div",
+		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
 		attributes: {
 			"class": {type: "string", value: classes.join(" ")}
 		},
@@ -104,7 +104,7 @@ exports.createListElement = function(title) {
 	// Return the list element
 	return {
 		type: "element",
-		tag: "div",
+		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
 		attributes: {
 			"class": {type: "string", value: classes.join(" ")}
 		},
