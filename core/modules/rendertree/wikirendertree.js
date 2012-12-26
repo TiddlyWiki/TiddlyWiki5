@@ -18,6 +18,11 @@ Create a render tree object for a parse tree
 var WikiRenderTree = function(parser,options) {
 	this.parser = parser;
 	this.wiki = options.wiki;
+	// Hashmap of the renderer classes
+	if(!this.rendererClasses) {
+		WikiRenderTree.prototype.rendererClasses = $tw.modules.applyMethods("wikirenderer");
+	}
+
 };
 
 /*
@@ -48,7 +53,7 @@ WikiRenderTree.prototype.createRenderers = function(renderContext,parseTreeNodes
 Create a renderer node for a parse tree node
 */
 WikiRenderTree.prototype.createRenderer = function(renderContext,parseTreeNode) {
-	var RenderNodeClass = this.parser.vocabulary.rendererClasses[parseTreeNode.type];
+	var RenderNodeClass = this.rendererClasses[parseTreeNode.type];
 	return new RenderNodeClass(this,renderContext,parseTreeNode);
 };
 

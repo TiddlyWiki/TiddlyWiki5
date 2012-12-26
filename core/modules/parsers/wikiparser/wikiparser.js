@@ -26,9 +26,18 @@ Attributes are stored as hashmaps of the following objects:
 /*global $tw: false */
 "use strict";
 
-var WikiParser = function(vocabulary,type,text,options) {
+var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
-	this.vocabulary = vocabulary;
+	// Initialise the classes if we don't have them already
+	if(!this.pragmaRuleClasses) {
+		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+	}
+	if(!this.blockRuleClasses) {
+		WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+	}
+	if(!this.inlineRuleClasses) {
+		WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
 	this.source = text || "";
@@ -38,10 +47,10 @@ var WikiParser = function(vocabulary,type,text,options) {
 	// Initialise the things that pragma rules can change
 	this.macroDefinitions = {}; // Hash map of macro definitions
 	// Instantiate the pragma parse rules
-	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,"pragma",0);
+	this.pragmaRules = this.instantiateRules(this.pragmaRuleClasses,"pragma",0);
 	// Instantiate the parser block and inline rules
-	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,"block",0);
-	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,"inline",0);
+	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
+	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
 	// Parse any pragmas
 	this.parsePragmas();
 	// Parse the text into inline runs or blocks

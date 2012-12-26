@@ -13,7 +13,6 @@ Test the new parser
 "use strict";
 
 var testNewParser = function() {
-	$tw.wiki.new_initParsers();
 	var templateTitle = "$:/templates/NewPageTemplate";
 	var parser = $tw.wiki.new_parseTiddler(templateTitle);
 	console.log("parsetree after execution",parser);

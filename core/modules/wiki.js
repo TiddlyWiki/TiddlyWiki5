@@ -356,11 +356,6 @@ exports.clearCache = function(title) {
 	}
 };
 
-exports.new_initParsers = function() {
-	// Create a default vocabulary
-	this.vocabulary = new $tw.WikiVocabulary({wiki: this});
-};
-
 /*
 Parse a block of text of a specified MIME type
 	type: content type of text to be parsed
@@ -370,7 +365,11 @@ Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 */
 exports.new_parseText = function(type,text,options) {
-	return this.vocabulary.parseText(type,text,options);
+	options = options || {};
+	return new $tw.WikiParser(type,text,{
+		parseAsInline: options.parseAsInline,
+		wiki: this.wiki
+	});
 };
 
 /*

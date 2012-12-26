@@ -27,13 +27,6 @@ Command.prototype.execute = function() {
 	if(this.params.length < 2) {
 		return "Missing filename";
 	}
-
-if(!this.commander.wiki.vocabulary) {
-	this.commander.wiki.new_initParsers();
-}
-
-
-
 	var self = this,
 		fs = require("fs"),
 		path = require("path"),

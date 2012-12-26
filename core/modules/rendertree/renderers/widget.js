@@ -20,11 +20,15 @@ var WidgetRenderer = function(renderTree,renderContext,parseTreeNode) {
 	this.renderTree = renderTree;
 	this.renderContext = renderContext;
 	this.parseTreeNode = parseTreeNode;
+	// Widget classes
+	if(!this.widgetClasses) {
+		WidgetRenderer.prototype.widgetClasses = $tw.modules.createClassesFromModules("widget",null,$tw.WidgetBase);
+	}
 	// Compute our attributes
 	this.attributes = {};
 	this.computeAttributes();
 	// Create the widget object
-	var WidgetClass = this.renderTree.parser.vocabulary.widgetClasses[this.parseTreeNode.tag];
+	var WidgetClass = this.widgetClasses[this.parseTreeNode.tag];
 	if(WidgetClass) {
 		this.widget = new WidgetClass();
 		this.widget.init(this);
