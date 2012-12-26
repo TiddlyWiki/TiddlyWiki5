@@ -6,7 +6,7 @@ modifier: JeremyRuston
 	<_button message="tw-close">close</_button>
 </span>
 
-<div class:"small">
+<div class="small">
 	<_view field="modifier" format="link"/>
 	<_view field="modified" format="date"/>
 </div>
