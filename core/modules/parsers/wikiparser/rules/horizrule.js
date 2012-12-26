@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/rule.js
+title: $:/core/modules/parsers/wikiparser/rules/horizrule.js
 type: application/javascript
 module-type: wikirule
 
@@ -16,7 +16,7 @@ Wiki text block rule for rules. For example:
 /*global $tw: false */
 "use strict";
 
-exports.name = "rule";
+exports.name = "horizrule";
 exports.types = {block: true};
 
 exports.init = function(parser) {
