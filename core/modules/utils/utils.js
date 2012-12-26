@@ -13,6 +13,18 @@ Various static utility functions.
 "use strict";
 
 /*
+Trim whitespace from the start and end of a string
+Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
+*/
+exports.trim = function(str) {
+	if(typeof str === "string") {
+		return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+	} else {
+		return str;
+	}
+};
+
+/*
 Return the number of keys in an object
 */
 exports.count = function(object) {
@@ -222,8 +234,7 @@ exports.getRelativeDate = function(delta) {
 };
 
 // Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
-exports.htmlEncode = function(s)
-{
+exports.htmlEncode = function(s) {
 	if(s) {
 		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
 	} else {
