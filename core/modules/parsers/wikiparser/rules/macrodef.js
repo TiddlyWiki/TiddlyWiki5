@@ -6,9 +6,9 @@ module-type: wikirule
 Wiki pragma rule for macro definitions
 
 ```
-/define name(param:defaultvalue,param2:defaultvalue)
+\define name(param:defaultvalue,param2:defaultvalue)
 definition text, including $param$ markers
-/end
+\end
 ```
 
 \*/
@@ -27,7 +27,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\define\s*([^(\s]+)\(\s*([^)]*)\)(\r?\n)?/mg;
+	this.matchRegExp = /^\\define\s+([^(\s]+)\(\s*([^)]*)\)(\r?\n)?/mg;
 };
 
 /*
