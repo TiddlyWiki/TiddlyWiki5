@@ -24,7 +24,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /-{2,3}[^-]/mg;
+	this.matchRegExp = /-{2,3}(?!-)/mg;
 };
 
 exports.parse = function() {
