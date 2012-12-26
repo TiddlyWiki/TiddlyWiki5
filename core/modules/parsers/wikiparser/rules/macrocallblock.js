@@ -16,7 +16,7 @@ Wiki rule for block macro calls
 /*global $tw: false */
 "use strict";
 
-exports.name = "macrocall";
+exports.name = "macrocallblock";
 exports.types = {block: true};
 
 exports.init = function(parser) {

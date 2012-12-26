@@ -16,7 +16,7 @@ Wiki rule for macro calls
 /*global $tw: false */
 "use strict";
 
-exports.name = "macrocall";
+exports.name = "macrocallinline";
 exports.types = {inline: true};
 
 exports.init = function(parser) {

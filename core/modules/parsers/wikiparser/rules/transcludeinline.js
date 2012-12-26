@@ -20,7 +20,7 @@ Wiki text rule for inline-level transclusion. For example:
 /*global $tw: false */
 "use strict";
 
-exports.name = "transclude";
+exports.name = "transcludeinline";
 exports.types = {inline: true};
 
 exports.init = function(parser) {
@@ -33,9 +33,9 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Get the match details
-	var targetTitle = this.match[1],
+	var targetTitle = $tw.utils.trim(this.match[1]),
 		tooltip = this.match[2],
-		template = this.match[3],
+		template = $tw.utils.trim(this.match[3]),
 		style = this.match[4],
 		classes = this.match[5];
 	// Return the transclude widget

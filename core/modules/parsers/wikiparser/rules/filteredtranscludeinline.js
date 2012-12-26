@@ -20,7 +20,7 @@ Wiki text rule for inline filtered transclusion. For example:
 /*global $tw: false */
 "use strict";
 
-exports.name = "filteredtransclude";
+exports.name = "filteredtranscludeinline";
 exports.types = {inline: true};
 
 exports.init = function(parser) {
@@ -35,7 +35,7 @@ exports.parse = function() {
 	// Get the match details
 	var filter = this.match[1],
 		tooltip = this.match[2],
-		template = this.match[3],
+		template = $tw.utils.trim(this.match[3]),
 		style = this.match[4],
 		classes = this.match[5];
 	// Return the list widget
