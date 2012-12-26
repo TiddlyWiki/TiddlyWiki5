@@ -39,11 +39,11 @@ var WikiParser = function(vocabulary,type,text,options) {
 	this.macroDefinitions = {}; // Hash map of macro definitions
 	// Instantiate the pragma parse rules
 	this.pragmaRules = this.instantiateRules(this.vocabulary.pragmaRuleClasses,"pragma",0);
+	// Instantiate the parser block and inline rules
+	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,"block",0);
+	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,"inline",0);
 	// Parse any pragmas
 	this.parsePragmas();
-	// Instantiate the parser block and inline rules
-	this.blockRules = this.instantiateRules(this.vocabulary.blockRuleClasses,"block",this.pos);
-	this.inlineRules = this.instantiateRules(this.vocabulary.inlineRuleClasses,"inline",this.pos);
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {
 		this.tree = this.parseInlineRun();
@@ -304,6 +304,40 @@ WikiParser.prototype.parseClasses = function() {
 	}
 	return classNames;
 };
+
+/*
+Amend the rules used by this instance of the parser
+	type: `only` keeps just the named rules, `except` keeps all but the named rules
+	names: array of rule names
+*/
+WikiParser.prototype.amendRules = function(type,names) {
+	names = names || [];
+	// Define the filter function
+	var keepFilter;
+	if(type === "only") {
+		keepFilter = function(name) {
+			return names.indexOf(name) !== -1;
+		};
+	} else if(type === "except") {
+		keepFilter = function(name) {
+			return names.indexOf(name) === -1;
+		};
+	} else {
+		return;
+	}
+	// Define a function to process each of our rule arrays
+	var processRuleArray = function(ruleArray) {
+		for(var t=ruleArray.length-1; t>=0; t--) {
+			if(!keepFilter(ruleArray[t].rule.name)) {
+				ruleArray.splice(t,1);
+			}
+		}
+	};
+	// Process each rule array
+	processRuleArray(this.pragmaRules);
+	processRuleArray(this.blockRules);
+	processRuleArray(this.inlineRules);
+}
 
 exports.WikiParser = WikiParser;
 
