@@ -1,0 +1,7 @@
+title: $:/templates/NewStaticContent
+type: text/vnd.tiddlywiki
+
+<!-- For Google, and people without JavaScript-->
+<_list filter="[!is[shadow]sort[title]]" >
+<_view field="title" format="text"></_view>
+</_list>

@@ -1,0 +1,7 @@
+title: $:/core/templates/css-tiddler
+
+<!--
+
+This template is used for saving CSS tiddlers as a style tag with data attributes representing the tiddler fields.
+
+-->`<style`<_fields template=' data-tiddler-$name$="$encoded_value$"'></_fields>` type="text/css">`<_view field="text" format="text" />`</style>`

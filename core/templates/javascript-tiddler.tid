@@ -1,0 +1,7 @@
+title: $:/core/templates/javascript-tiddler
+
+<!--
+
+This template is used for saving JavaScript tiddlers as a script tag with data attributes representing the tiddler fields.
+
+-->`<script`<_fields template=' data-tiddler-$name$="$encoded_value$"'></_fields>` type="text/javascript">`<_view field="text" format="text" />`</script>`

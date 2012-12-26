@@ -12,6 +12,7 @@ node ../../tiddlywiki.js \
 	--verbose \
 	--password password \
 	--savetiddler ReadMe ../../readme.md text/html \
+	--newsavetiddler $:/core/templates/new.tiddlywiki5.template.html ../../../jermolene.github.com/new.index.html text/plain \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../../jermolene.github.com/index.html text/plain \
 	--savetiddler $:/core/templates/tiddlywiki5.encrypted.template.html ../../../jermolene.github.com/encrypted.html text/plain \
 	--savetiddler $:/core/templates/static.template.html ../../../jermolene.github.com/static.html text/plain \
