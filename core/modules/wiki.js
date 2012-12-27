@@ -366,9 +366,21 @@ Options include:
 */
 exports.new_parseText = function(type,text,options) {
 	options = options || {};
-	return new $tw.WikiParser(type,text,{
+	// Select a parser
+	var Parser = this.newparsers[type];
+	if(!Parser && $tw.config.fileExtensionInfo[type]) {
+		Parser = this.newparsers[$tw.config.fileExtensionInfo[type].type];
+	}
+	if(!Parser) {
+		Parser = this.newparsers[options.defaultType || "text/vnd.tiddlywiki"];
+	}
+	if(!Parser) {
+		return null;
+	}
+	// Return the parser instance
+	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
-		wiki: this.wiki
+		wiki: this
 	});
 };
 
@@ -411,6 +423,16 @@ exports.new_renderTiddler = function(outputType,title) {
 };
 
 exports.initParsers = function(moduleType) {
+	// Install the new parser modules
+	$tw.wiki.newparsers = {};
+	var self = this;
+	$tw.modules.forEachModuleOfType("newparser",function(title,module) {
+		for(var f in module) {
+			if($tw.utils.hop(module,f)) {
+				$tw.wiki.newparsers[f] = module[f]; // Store the parser class
+			}
+		}
+	});
 	// Install the parser modules
 	moduleType = moduleType || "parser";
 	$tw.wiki.parsers = {};

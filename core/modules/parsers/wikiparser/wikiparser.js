@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/wikiparser.js
 type: application/javascript
-module-type: global
+module-type: newparser
 
 The wiki text parser processes blocks of source text into a parse tree.
 
@@ -348,7 +348,7 @@ WikiParser.prototype.amendRules = function(type,names) {
 	processRuleArray(this.inlineRules);
 }
 
-exports.WikiParser = WikiParser;
+exports["text/vnd.tiddlywiki"] = WikiParser;
 
 })();
 
