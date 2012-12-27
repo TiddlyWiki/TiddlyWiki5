@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/imageparser.js
+title: $:/core/modules/parsers/old/imageparser.js
 type: application/javascript
 module-type: parser
 
