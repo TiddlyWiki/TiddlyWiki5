@@ -22,7 +22,7 @@ var typeMappings = {
 	recent: "[!is[shadow]sort[modified]]",
 	missing: "[is[missing]sort[title]]",
 	orphans: "[is[orphan]sort[title]]",
-	shadowed: "[is[shadow]sort[title]]"
+	shadows: "[is[shadow]sort[title]]"
 };
 
 exports.init = function(renderer) {
