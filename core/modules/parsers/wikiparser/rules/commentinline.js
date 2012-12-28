@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/rules/comment.js
+title: $:/core/modules/parsers/wikiparser/rules/commentinline.js
 type: application/javascript
 module-type: wikirule
 
@@ -16,7 +16,7 @@ Wiki text inline rule for HTML comments. For example:
 /*global $tw: false */
 "use strict";
 
-exports.name = "comment";
+exports.name = "commentinline";
 exports.types = {inline: true};
 
 exports.init = function(parser) {

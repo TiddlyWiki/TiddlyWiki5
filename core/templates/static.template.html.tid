@@ -1,23 +1,21 @@
 title: $:/core/templates/static.template.html
 type: text/vnd.tiddlywiki-html
 
+\rules only filteredtranscludeinline transcludeinline
 <!doctype html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="<<serialize "$:/core/version.txt" text/plain>>" />
+<meta name="tiddlywiki-version" content="{{version}}" />
 <meta name="format-detection" content="telephone=no">
-<meta name="copyright" content="
-<<serialize "$:/core/copyright.txt" text/plain>>
-" />
-<title><<tiddler target:$:/shadows/title>></title>
-<!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
+<meta name="copyright" content="{{$:/core/copyright.txt}}" />
+<title>{{$:/core/wiki/title}}</title>
 <div id="styleArea">
-<<serialize "[type[text/css]]" application/x-tiddler-css>>
+{{{ [is[shadow]type[text/css]] ||$:/core/templates/css-tiddler}}}
 </div>
 </head>
 <body>
-<<serialize "$:/templates/PageTemplate" text/html>>
+{{$:/templates/PageTemplate||$:/core/templates/html-tiddler}}
 </body>
 </html>

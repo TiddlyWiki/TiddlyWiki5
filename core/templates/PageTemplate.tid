@@ -1,87 +1,37 @@
 title: $:/templates/PageTemplate
 
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
-<<navigator story:"$:/StoryList" history:"$:/HistoryList"><
+<_navigator story="$:/StoryList" history="$:/HistoryList">
 
 <!-- The top navigation bar -->
 <div class="navbar navbar-fixed-top">
 <div class="navbar-inner">
 <div class="container">
-
-{{nav{
-
 <!-- Navigation menu -->
+@@.nav
 * HelloThere
 * [[Docs]]
 *.divider-vertical
-
-<!-- Search box -->
-<form class="form-search">
-
-{{search-query{
-<<edit tiddler:[[$:/temp/search]] type:search requireFocus:yes>>
-}}}
-
-<div style="position:absolute; z-index:1000;">
-
-<<reveal state:[[$:/temp/search]] type:nomatch text:""><
-
-<div class="open">
-
-{{dropdown-menu{
-* <<list filter:"[!is[shadow]searchVia[$:/temp/search]sort[title]limit[50]]" template:"$:/templates/SearchResultTemplate" emptyMessage:"//No results//">>
-}}}
-
-</div>
-
->>
-
-</div>
-
-</form>
-
-<!-- Full screen button -->
-<<button full-screen class:"btn btn-warning"><Full screen>>
-
-<!-- Edit button dropdown -->
-{{pull-right{
-<<reveal state:[[$:/EditMode]] type:nomatch text:yes><
-<<button modal param:[[$:/messages/EnterEditMode]] set:[[$:/EditMode]] setTo:yes class:"btn btn-success"><Edit>>
->>
-
-<!-- These buttons are only visible in edit mode -->
-<<reveal state:[[$:/EditMode]] type:match text:yes><
-<!-- New tiddler button -->
-<<button NewTiddler class:"btn btn-success"><New>>
-
-<!-- Save buttons -->
-<<button save-wiki param:"$:/core/templates/tiddlywiki5.encrypted.template.html" class:"btn pull-right"><Save Changes (encrypted)>>
-
- <<button save-wiki class:"btn pull-right"><Save Changes>>
->>
-}}}
-
-}}}
-
+@@
 </div>
 </div>
 </div>
 
-<!-- The main story references the same story and history tiddlers as the outer navigator -->
+<!-- The main display container -->
 <div class="container">
 <div class="row">
 <div class="span2">
 <div style="position:fixed;">
-<<scrollable width:"104px"><
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" listview:classic itemClass:"tw-menu-list-item">>
->>
+<!-- The navigation menu -->
+<_list filter="[list[$:/StoryList]]" history="$:/HistoryList" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-menu-list-item"/>
 </div>
 </div>
 <div class="span10">
-<<list filter:"[list[$:/StoryList]]" history:"$:/HistoryList" template:"$:/templates/ViewTemplate" editTemplate:"$:/templates/EditTemplate" listview:classic itemClass:"tw-tiddler-frame">>
+<!-- The main display -->
+<_list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-tiddler-frame"/>
 </div>
 </div>
 </div>
 
->>
+</_navigator>
 

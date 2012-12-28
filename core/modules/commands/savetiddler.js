@@ -32,14 +32,8 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		title = this.params[0],
 		filename = this.params[1],
-		type = this.params[2] || "text/html",
-		options = {},
-		t;
-	for(t=3; t<this.params.length; t++) {
-		options["with"] = options["with"] || [];
-		options["with"][t-2] = this.params[t];
-	}
-	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title,options),"utf8",function(err) {
+		type = this.params[2] || "text/html";
+	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title),"utf8",function(err) {
 		self.callback(err);
 	});
 	return null;

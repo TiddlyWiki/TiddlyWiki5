@@ -32,7 +32,7 @@ WikifiedViewer.prototype.render = function() {
 			isBlock: this.viewWidget.renderer.parseTreeNode.isBlock
 		}];
 	} else {
-		parseTree = this.viewWidget.renderer.renderTree.wiki.new_parseText("text/vnd.tiddlywiki",this.value).tree;
+		parseTree = this.viewWidget.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",this.value).tree;
 	}
 	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,parseTree);
 };

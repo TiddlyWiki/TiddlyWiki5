@@ -73,7 +73,7 @@ exports.generateChildNodes = function() {
 		})) {
 			templateParseTree = [{type: "text", text: "Tiddler recursion error in transclude widget"}];	
 		} else {
-			var parser = this.renderer.renderTree.wiki.new_parseTiddler(this.templateTitle,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
+			var parser = this.renderer.renderTree.wiki.parseTiddler(this.templateTitle,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
 			templateParseTree = parser ? parser.tree : [];
 		}
 	}

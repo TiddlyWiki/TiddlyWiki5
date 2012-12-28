@@ -21,7 +21,7 @@ var HtmlWikifiedViewer = function(viewWidget,tiddler,field,value) {
 
 HtmlWikifiedViewer.prototype.render = function() {
 	// Parse the field text
-	var text = this.viewWidget.renderer.renderTree.wiki.new_renderText("text/html","text/vnd.tiddlywiki",this.value);
+	var text = this.viewWidget.renderer.renderTree.wiki.renderText("text/html","text/vnd.tiddlywiki",this.value);
 	// Create a node containing the HTML representation of the field
 	var node = {
 		type: "element",

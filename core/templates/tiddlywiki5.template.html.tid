@@ -1,60 +1,58 @@
 title: $:/core/templates/tiddlywiki5.template.html
-type: text/vnd.tiddlywiki-html
 
+\rules only filteredtranscludeinline transcludeinline
 <!doctype html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="application-name" content="TiddlyWiki" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="<<version>>" />
+<meta name="tiddlywiki-version" content="{{version}}" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no">
-<meta name="copyright" content="
-<<serialize "$:/core/copyright.txt" text/plain>>
-" />
-<title><<tiddler "$:/core/wiki/title">></title>
+<meta name="copyright" content="{{$:/core/copyright.txt}}" />
+<title>{{$:/core/wiki/title}}</title>
 <!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
 
 <!----------- Raw markup ----------->
-<<serialize "[tag[$:/core/wiki/rawmarkup]]" text/plain>>
+{{{ [tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}
 </head>
 <body>
 <!----------- Static styles ----------->
 <div id="styleArea">
-<<serialize "[is[shadow]type[text/css]]" application/x-tiddler-css>>
+{{{ [is[shadow]type[text/css]] ||$:/core/templates/css-tiddler}}}
 </div>
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
 <div id="splashArea">
-<<serialize "$:/templates/StaticContent" text/html>>
+{{$:/templates/NewStaticContent||$:/core/templates/html-tiddler}}
 </div>
 </noscript>
 <!----------- Miscellaneous shadow tiddlers ----------->
 <div id="shadowArea" style="display:none;">
-<<serialize "[is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]]" application/x-tiddler-html-div>>
+{{{ [is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]] ||$:/core/templates/html-div-tiddler}}}
 </div>
 <!----------- Ordinary tiddlers ----------->
 <div id="storeArea" style="display:none;">
-<<serialize "[!is[shadow]]" application/x-tiddler-html-div>>
+{{{ [!is[shadow]] ||$:/core/templates/html-div-tiddler}}}
 </div>
 <!----------- Library modules ----------->
 <div id="libraryModules" style="display:none;">
-<<serialize "[[$:/core/lib/jquery.min.js]]" application/x-tiddler-library>>
-<<serialize "[is[shadow]type[application/javascript]library[yes]] -[[$:/core/lib/jquery.min.js]]" application/x-tiddler-library>>
+{{$:/core/lib/jquery.min.js||$:/core/templates/javascript-tiddler}}
+{{{ [is[shadow]type[application/javascript]library[yes]] -[[$:/core/lib/jquery.min.js]] ||$:/core/templates/javascript-tiddler}}}
 </div>
 <!----------- Boot kernel prologue ----------->
 <div id="bootKernelPrefix" style="display:none;">
-<<serialize "$:/core/bootprefix.js" application/javascript>>
+{{ $:/core/bootprefix.js ||$:/core/templates/javascript-tiddler}}
 </div>
 <!----------- Plugin modules ----------->
 <div id="modules" style="display:none;">
-<<serialize "[is[shadow]type[application/javascript]has[module-type]]" application/x-tiddler-module>>
+{{{ [is[shadow]type[application/javascript]has[module-type]] ||$:/core/templates/module-tiddler}}}
 </div>
 <!----------- Boot kernel ----------->
 <div id="bootKernel" style="display:none;">
-<<serialize "$:/core/boot.js" application/javascript>>
+{{ $:/core/boot.js ||$:/core/templates/javascript-tiddler}}
 </div>
 </body>
 </html>

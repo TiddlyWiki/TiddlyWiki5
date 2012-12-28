@@ -1,7 +1,0 @@
-{
-	"title": "$:/plugins/tiddlywiki/tw2parser",
-	"description": "A parser for TiddlyWiki 2.x.x style wikitext",
-	"author": "JeremyRuston",
-	"version": "0.0.0",
-	"coreVersion": ">=5.0.0"
-}

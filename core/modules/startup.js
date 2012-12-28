@@ -28,13 +28,7 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.Wiki.tiddlerSerializerModules = {};
 	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
-	$tw.modules.applyMethods("treeutils",$tw.Tree);
-	$tw.modules.applyMethods("treenode",$tw.Tree);
 	// Set up the wiki store
-	$tw.wiki.initMacros();
-	$tw.wiki.initEditors();
-	$tw.wiki.initFieldViewers();
-	$tw.wiki.initListViews();
 	$tw.wiki.initParsers();
 	$tw.wiki.initSyncers();
 	$tw.wiki.initServerConnections();
@@ -99,13 +93,16 @@ exports.startup = function() {
 			document.dispatchEvent(event);
 		} 
 		// Display the PageTemplate
-		var template = "$:/templates/PageTemplate",
-			title = template;
-		$tw.renderer = $tw.wiki.parseTiddler(template);
-		$tw.renderer.execute([],title);
-		$tw.renderer.renderInDom(document.body);
+		var templateTitle = "$:/templates/PageTemplate",
+			parser = $tw.wiki.parseTiddler(templateTitle),
+			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki});
+console.log("Parse tree",parser);
+		renderTree.execute({tiddlerTitle: templateTitle});
+		var container = document.createElement("div");
+		document.body.insertBefore(container,document.body.firstChild);
+		renderTree.renderInDom(container);
 		$tw.wiki.addEventListener("",function(changes) {
-			$tw.renderer.refreshInDom(changes);
+			renderTree.refreshInDom(changes);
 		});
 	} else {
 		// On the server, start a commander with the command line arguments

@@ -8,6 +8,8 @@ Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the reusable non-linear personal
 
 TiddlyWiki is designed to fit around your brain, giving you a better way of managing information compared to traditional documents and emails. The fundamental idea is that information is more useful and reusable if we cut it up into the smallest semantically meaningful chunks -- [[tiddlers|Tiddlers]] -- and give them titles so that they can be structured with links, tags and macros.  TiddlyWiki aims to provide a fluid interface for working with tiddlers, allowing them to be aggregated and composed into longer narratives.
 
+//''28th December 2012'' - the TiddlyWiki5 core code is in the midst of some major refactoring upheavals, and there have been several regressions that will be fixed over the next few days, along with bringing the documentation back up to date//
+
 TiddlyWiki5 has many [[improvements|Improvements]] over the original. It is currently labelled alpha, meaning it is working but incomplete. It is the best possible time to get involved and support its future development. You can:
 
 * Explore its features online at http://five.tiddlywiki.com/

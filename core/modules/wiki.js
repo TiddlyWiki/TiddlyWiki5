@@ -356,6 +356,19 @@ exports.clearCache = function(title) {
 	}
 };
 
+exports.initParsers = function(moduleType) {
+	// Install the new parser modules
+	$tw.wiki.newparsers = {};
+	var self = this;
+	$tw.modules.forEachModuleOfType("newparser",function(title,module) {
+		for(var f in module) {
+			if($tw.utils.hop(module,f)) {
+				$tw.wiki.newparsers[f] = module[f]; // Store the parser class
+			}
+		}
+	});
+};
+
 /*
 Parse a block of text of a specified MIME type
 	type: content type of text to be parsed
@@ -364,7 +377,7 @@ Parse a block of text of a specified MIME type
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 */
-exports.new_parseText = function(type,text,options) {
+exports.parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
 	var Parser = this.newparsers[type];
@@ -387,13 +400,13 @@ exports.new_parseText = function(type,text,options) {
 /*
 Parse a tiddler according to its MIME type
 */
-exports.new_parseTiddler = function(title,options) {
+exports.parseTiddler = function(title,options) {
 	options = options || {};
 	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
 	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
-			return self.new_parseText(tiddler.fields.type,tiddler.fields.text,options);
+			return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
 		}) : null;
 };
 
@@ -403,8 +416,8 @@ Parse text in a specified format and render it into another format
 	textType: content type of the input text
 	text: input text
 */
-exports.new_renderText = function(outputType,textType,text) {
-	var parser = this.new_parseText(textType,text),
+exports.renderText = function(outputType,textType,text) {
+	var parser = this.parseText(textType,text),
 		renderTree = new $tw.WikiRenderTree(parser,{wiki: this});
 	renderTree.execute();
 	return renderTree.render(outputType);
@@ -415,194 +428,11 @@ Parse text from a tiddler and render it into another format
 	outputType: content type for the output
 	title: title of the tiddler to be rendered
 */
-exports.new_renderTiddler = function(outputType,title) {
-	var parser = this.new_parseTiddler(title),
+exports.renderTiddler = function(outputType,title) {
+	var parser = this.parseTiddler(title),
 		renderTree = new $tw.WikiRenderTree(parser,{wiki: this});
 	renderTree.execute();
 	return renderTree.render(outputType);
-};
-
-exports.initParsers = function(moduleType) {
-	// Install the new parser modules
-	$tw.wiki.newparsers = {};
-	var self = this;
-	$tw.modules.forEachModuleOfType("newparser",function(title,module) {
-		for(var f in module) {
-			if($tw.utils.hop(module,f)) {
-				$tw.wiki.newparsers[f] = module[f]; // Store the parser class
-			}
-		}
-	});
-	// Install the parser modules
-	moduleType = moduleType || "parser";
-	$tw.wiki.parsers = {};
-	var self = this;
-	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
-		for(var f in module) {
-			if($tw.utils.hop(module,f)) {
-				$tw.wiki.parsers[f] = new module[f]({wiki: self}); // Store an instance of the parser
-			}
-		}
-	});
-	// Install the rules for the old wikitext parser rules
-	var wikitextparser = this.parsers["text/x-tiddlywiki"];
-	if(wikitextparser) {
-		wikitextparser.installRules();
-	}
-};
-
-/*
-Parse a block of text of a specified MIME type
-
-Options are:
-	defaultType: Default MIME type to use if the specified one is unknown
-	with: Optional array of strings to be substituted for $1, $2 etc.
-*/
-exports.parseText = function(type,text,options) {
-	options = options || {};
-	// Select a parser
-	var parser = this.parsers[type];
-	if(!parser && $tw.config.fileExtensionInfo[type]) {
-		parser = this.parsers[$tw.config.fileExtensionInfo[type].type];
-	}
-	if(!parser) {
-		parser = this.parsers[options.defaultType || "text/vnd.tiddlywiki"];
-	}
-	if(!parser) {
-		return null;
-	}
-	// Substitute any `with` tokens
-	if("with" in options) {
-		for(var token in options["with"]) {
-			var placeholderRegExp = new RegExp("\\$"+token,"mg");
-			text = text.replace(placeholderRegExp,options["with"][token]);
-		}
-	}
-	return parser.parse(type,text);
-};
-
-/*
-Parse a tiddler according to its MIME type
-
-Options are:
-	defaultType: Default MIME type to use if the specified one is unknown
-	with: Optional array of strings to be substituted for $1, $2 etc.
-*/
-exports.parseTiddler = function(title,options) {
-	options = options || {};
-	var me = this,
-		tiddler = this.getTiddler(title);
-	if("with" in options) {
-		return this.parseText(tiddler.fields.type,tiddler.fields.text,options);
-	} else {
-		return tiddler ? this.getCacheForTiddler(title,"parseTree",function() {
-				return me.parseText(tiddler.fields.type,tiddler.fields.text,options);
-			}) : null;
-	}
-};
-
-/*
-Parse text in a specified format and render it into another format
-	outputType: content type for the output
-	textType: content type of the input text
-	text: input text
-	options: see wiki.parseText()
-Options are:
-	defaultType: Default MIME type to use if the specified one is unknown
-	with: Optional array of strings to be substituted for $1, $2 etc.
-*/
-exports.renderText = function(outputType,textType,text,options) {
-	var renderer = this.parseText(textType,text,options);
-	renderer.execute([]);
-	return renderer.render(outputType);
-};
-
-/*
-Parse text from a tiddler and render it into another format
-	outputType: content type for the output
-	title: title of the tiddler to be rendered
-	options: see wiki.parseText()
-Options are:
-	defaultType: Default MIME type to use if the specified one is unknown
-	with: Optional array of strings to be substituted for $1, $2 etc.
-*/
-exports.renderTiddler = function(outputType,title,options) {
-	var renderer = this.parseTiddler(title,options);
-	renderer.execute([],title);
-	return renderer.render(outputType);
-};
-
-/*
-Install macro modules into this wiki
-	moduleType: Module type to install (defaults to "macro")
-
-It's useful to remember what the `new` keyword does. It:
-
-# Creates a new object. It's type is a plain `object`
-# Sets the new objects internal, inaccessible, `[[prototype]]` property to the
-	constructor function's external, accessible, `prototype` object
-# Executes the constructor function, passing the new object as `this`
-
-*/
-exports.initMacros = function(moduleType) {
-	moduleType = moduleType || "macro";
-	$tw.wiki.macros = {};
-	var MacroClass = require("./treenodes/macro.js").Macro,
-		subclassMacro = function(module) {
-			// Make a copy of the Macro() constructor function
-			var MacroMaker = function Macro() {
-				MacroClass.apply(this,arguments);
-			};
-			// Set the prototype to a new instance of the prototype of the Macro class
-			MacroMaker.prototype = new MacroClass();
-			// Add the prototype methods for this instance of the macro
-			for(var f in module) {
-				if($tw.utils.hop(module,f)) {
-					MacroMaker.prototype[f] = module[f];
-				}
-			}
-			// Make a more convenient reference to the macro info
-			return MacroMaker;
-		};
-	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
-		$tw.wiki.macros[module.info.name] = subclassMacro(module);
-	});
-};
-
-/*
-Install editor modules for the edit macro
-*/
-exports.initEditors = function(moduleType) {
-	moduleType = moduleType || "editor";
-	var editMacro = this.macros.edit;
-	if(editMacro) {
-		editMacro.editors = {};
-		$tw.modules.applyMethods(moduleType,editMacro.editors);
-	}
-};
-
-/*
-Install field viewer modules for the view macro
-*/
-exports.initFieldViewers = function(moduleType) {
-	moduleType = moduleType || "fieldviewer";
-	var viewMacro = this.macros.view;
-	if(viewMacro) {
-		viewMacro.fieldviewers = {};
-		$tw.modules.applyMethods(moduleType,viewMacro.fieldviewers);
-	}
-};
-
-/*
-Install list viewer modules for the list macro
-*/
-exports.initListViews = function(moduleType) {
-	moduleType = moduleType || "listview";
-	var listMacro = this.macros.list;
-	if(listMacro) {
-		listMacro.listviews = {};
-		$tw.modules.applyMethods(moduleType,listMacro.listviews);
-	}
 };
 
 /*
