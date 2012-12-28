@@ -7,7 +7,7 @@ Filters are used in TiddlyWiki to choose tiddlers by specifying simple match cri
 
 The mechanism is easiest to understand by first presenting some example filter strings:
 
-{{table-condensed{
+@@.table-condensed
 |!Filter |!Results |
 |`HelloThere` |The single tiddler titled `HelloThere` (if it exists) |
 |`[[A Title With Several Words]]` |The single tiddler titled `A Title With Several Words` (if it exists) |
@@ -23,7 +23,7 @@ The mechanism is easiest to understand by first presenting some example filter s
 |`[[MyTiddler]tags[]]` |All tiddlers being used as tags on the tiddler `MyTiddler` |
 |`[[MyTiddler]tagging[]]` |All tiddlers being tagged with `MyTiddler` |
 |`[list[MyList]]` |All tiddlers listed in `MyList` |
-}}}
+@@
 
 ! Operators
 
@@ -55,9 +55,9 @@ The operands available with the `is` operator are:
 
 Operators are combined into runs that function as logically ANDed expressions by bashing them together and merging the square brackets:
 
-{{{
+```
 [tag[one]] [tag[two]] ---> [tag[one]tag[two]]
-}}}
+```
 
 Runs can be preceded with `-` to negate their action, removing the selected tiddlers from the results. For example, `[tag[Tommy]] -HelloThere -[[Another One]]` selects all tiddlers tagged with `Tommy` except those titled `HelloThere` or `Another One`.
 

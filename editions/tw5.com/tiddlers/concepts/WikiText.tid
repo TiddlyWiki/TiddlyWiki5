@@ -9,16 +9,16 @@ WikiText is a concise, expressive way of typing a wide range of text formatting,
 A key capability of WikiText is the ability to make links to other tiddlers or to external websites. There are several ways of doing this:
 
 * To link to a tiddler by title: `[[Tiddler Title]]`
-* To link to a tiddler and specify the text of the link: `[[Tiddler Title|Displayed Link Title]]`
+* To link to a tiddler and specify the text of the link: `[[Displayed Link Title|Tiddler Title]]`
 * For tiddler titles that match the CamelCase rules, just typing the title will automatically create a link
 * To link to an external website, type the full URL of the site: `http://five.tiddlywiki.com/`
 
 You can suppress a link from being recognised by preceding it with `~`. For example:
 
-{{{
+```
 * ~HelloThere is not a link
 * ~http://google.com/ is not a link
-}}}
+```
 
 Renders as:
 
@@ -29,22 +29,20 @@ Renders as:
 
 To mark the end of a paragraph in TiddlyWiki you need to type `enter` twice to create a double line break:
 
-{{{
+```
 This is the first paragraph.
 
 And this is the second paragraph.
-}}}
+```
 
 Single line breaks are ignored within paragraphs. For example:
 
-{{{
+```
 This is a
 paragraph made
 up of
 short lines
-
-
-}}}
+```
 
 Renders as:
 
@@ -57,43 +55,72 @@ short lines
 
 Available character formatting includes:
 
-* {{{`backticks`}}} for `code`
+* <code>&#96;backticks&#96;</code> for `code`
 * `''bold''` for ''bold text''
 * `//italic//` for //italic text//
 * `__underscore__` for __underscored text__
 * `^^superscript^^` for ^^superscript^^ text
-* `~~subscript~~` for ~~subscripted~~ text
-* `--strikethrough--` for --strikethrough-- text
+* `,,subscript,,` for ,,subscripted,, text
+* `~~strikethrough~~` for ~~strikethrough~~ text
 
-You can also use `{{{` to mark code blocks:
+You can also use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks:
 
-{{{
- {{{
- This will be monospaced
- }}}
-}}}
+<pre>
+&#96;&#96;&#96;
+This will be monospaced
+&#96;&#96;&#96;
+</pre>
+
+Renders as:
+
+```
+This will be monospaced
+```
 
 ! Transclusion
 
 You can incorporate the content of one tiddler within another using the transclusion notation:
 
-* `{{JeremyRuston}}` transcludes a single tiddler
+* `{{MyTiddler}}` transcludes a single tiddler
+* `{{MyTiddler|tooltip}}` adds a tooltip
+* `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TiddlerTemplate|TiddlerTemplates]]
+* `{{MyTiddler|tooltip||TemplateTitle}}` specifies both a tooltip and a template for the transcluded content
+* `{{MyTiddler}width:40;height:50;}.firstClass.secondClass` transcludes a single tiddler, adding the specified styles and classes to the transcluded content
 
-A template can also be specified, in which case the tiddler(s) are rendered through that [[TiddlerTemplate|TiddlerTemplates]]. Templates can either be specified directly or instead a tiddler can be specified from which the template is extracted.
+A similar syntax can be used to transclude a list of tiddlers matching a specified [[TiddlerFilter|TiddlerFilters]]:
 
-* `{{MyTiddler} <<view title>> by <<view modified>>}` renders the tiddler `MyTiddler` through a template that will yield `MyTiddler by JeremyRuston`, if the `modified` field is set to "JeremyRuston"
-* `{{MyTiddler}{MyTemplate}}` renders the tiddler `MyTiddler` through the template `MyTemplate`
+```
+{{{ [tag[docs]] }}}
+{{{ [tag[docs]] |tooltip}}}
+{{{ [tag[docs]] ||TemplateTitle}}}
+{{{ [tag[docs]] |tooltip||TemplateTitle}}}
+{{{ [tag[docs]] }}width:40;height:50;}.class.class
+```
+
+! Images
+
+To display an image stored in a tiddler just transclude that tiddler
+
+```
+{{Motovun Jack.jpg}}
+```
+
+Displays as:
+
+{{Motovun Jack.jpg}}
+
+See ImageWikiText for more details.
 
 ! Lists
 
 You can create unordered lists with `*` characters:
 
-{{{
+```
 * First list item
 * Second list item
 ** A subitem
 * Third list item
-}}}
+```
 
 Renders as:
 
@@ -110,14 +137,14 @@ Ordered lists use `#` instead of `*`:
 
 You can also mix ordered and unordered list items:
 
-{{{
+```
 * To do today
 *# Eat
 * To get someone else to do
 *# This
 *# That
 *## And the other
-}}}
+```
 
 Renders as:
 
@@ -130,12 +157,12 @@ Renders as:
 
 You can also create HTML definition lists:
 
-{{{
+```
 ; Term being defined
 : Definition of that term
 ; Another term
 : Another definition
-}}}
+```
 
 Renders as:
 
@@ -144,49 +171,70 @@ Renders as:
 ; Another term
 : Another definition
 
-! Cascading Stylesheets
+! Adding styles and classes
 
-You can use this construction to cause the wrapped content to be assigned a specified CSS class:
+You can use this construction to cause the wrapped content to be assigned specified CSS classes or styles:
 
-{{{
- {{myStyle{
- * List One
- * List Two	
- }}}
-}}}
+```
+@@.myStyle
+* List One
+* List Two	
+@@
+```
 
 The resulting HTML looks like this:
 
-{{{
+```
 <ul class="myStyle">
 	<li>List One</li>
 	<li>List Two</li>
 </ul>
-}}}
+```
 
-You can also assign a CSS class to an individual member of a list with this notation:
+Similar syntax is used to assign styles. For example:
 
-{{{
+```
+@@background-color:red;
 * List One
-*.MyClass List Two
-* List Three
-}}}
+* List Two	
+@@
+```
 
 The resulting HTML looks like this:
 
-{{{
+```
+<ul style="background-color:red;">
+	<li>List One</li>
+	<li>List Two</li>
+</ul>
+```
+
+Multiple styles and classes can be mixed. For example:
+
+```
+@@.aClass
+@@width:400px;
+Some text
+@@
+```
+
+You can also assign a CSS class to an individual member of a list with this notation:
+
+```
+* List One
+*.MyClass List Two
+* List Three
+```
+
+The resulting HTML looks like this:
+
+```
 <ul>
 	<li>List One</li>
 	<li class="MyClass">List Two</li>
 	<li> List Three</li>
 </ul>
-}}}
-
-The same syntax can be used with headings:
-
-{{{
-!.myStyle This heading has the class `myStyle`
-}}}
+```
 
 ! Typographic Features
 
@@ -194,60 +242,52 @@ You can create an n-dash with a double hyphen `--` and an m-dash with a triple h
 
 You can include a horizontal rule with three or more dashes on their own on a line:
 
-{{{
+```
 ---
-}}}
+```
 
 Renders as:
 
 ---
 
-! Images
-
-To display an image stored in a tiddler:
-
-{{{
-[img[Motovun Jack.jpg]]
-}}}
-
-Displays as:
-
-[img[Motovun Jack.jpg]]
-
-See ImageWikiText for more details.
-
 ! HTML in WikiText
 
 HTML tags and comments can be used directly in WikiText. For example:
 
-{{{
+```
 <article class="hello">
 This is my nice and simple block of text. HelloThere
 <!-- This comment will not appear in the wikified output -->
 </article>
-}}}
+```
 
-! Macros
+! Widgets
 
-Macros provide rich functionality within WikiText. For example, the `<<video>>` macro can be used to embed videos from YouTube, Vimeo or the Internet Archive:
+Macros provide rich functionality within WikiText. For example, the `<_video>` widget can be used to embed videos from YouTube, Vimeo or the Internet Archive:
 
-{{{
-<<video src:32001208 type:vimeo>>
-}}}
+```
+<_video src="32001208" type="vimeo" />
+```
 
-For full details of the available macros, see the [[Docs]].
+For full details of the available widgets, see the [[Docs]].
 
 ! Headings
 
 Headings are specified with one or more leading `!` characters:
 
-{{{
+```
 ! This is a level 1 heading
 
 !! This is a level 2 heading
 
 !!! This is a level 3 heading
-}}}
+```
+
+CSS classes can be assigned to individual headings like this:
+
+```
+!.myStyle This heading has the class `myStyle`
+```
 
 ! Other WikiText features
 
@@ -255,11 +295,11 @@ Headings are specified with one or more leading `!` characters:
 
 You can incorporate text of a different type within blocks of WikiText. For example:
 
-{{{
+```
 $$$.js
 return 2 + "string";
 $$$
-}}}
+```
 
 Renders as:
 
@@ -268,23 +308,3 @@ return 2 + "string";
 $$$
 
 See TypedBlockWikiText for more details
-
-!! Style Blocks
-
-You can apply HTML attributes to blocks of content with this syntax:
-
-{{{
-@@color:#f00;
-@@text-decoration:underline;
-This is in red!
-@@
-}}}
-
-Generates the results:
-
-@@color:#f00;
-@@text-decoration:underline;
-This is in red!
-@@
-
-See StyleBlockWikiText for more details.

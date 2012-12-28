@@ -8,4 +8,4 @@ TiddlyWiki5 stands on the shoulders of giants, by reusing these projects:
 
 * [[Twitter Bootstrap|http://twitter.github.com/bootstrap/]]'s CSS
 * [[LESS dynamic stylesheet language|http://lesscss.org/]], used by Bootstrap
-* [[Esprima|http://esprima.org]], a JavaScript parsing infrastructure for multipurpose analysis
+* [[The Stanford Javascript Crypto Library|http://crypto.stanford.edu/sjcl/]]
