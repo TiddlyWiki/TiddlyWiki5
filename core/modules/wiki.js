@@ -166,18 +166,6 @@ exports.addTiddler = function(tiddler) {
 };
 
 /*
-Serialise tiddlers to a specified text serialization format
-*/
-exports.serializeTiddlers = function(tiddlers,type) {
-	var serializer = $tw.Wiki.tiddlerSerializerModules[type];
-	if(serializer) {
-		return serializer.call(this,tiddlers);
-	} else {
-		return null;
-	}
-};
-
-/*
 Return a sorted array of tiddler titles, optionally filtered by a tag 
 */
 exports.getTiddlers = function(sortField,excludeTag) {

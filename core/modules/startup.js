@@ -26,8 +26,6 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
-	$tw.Wiki.tiddlerSerializerModules = {};
-	$tw.modules.applyMethods("tiddlerserializer",$tw.Wiki.tiddlerSerializerModules);
 	// Set up the wiki store
 	$tw.wiki.initParsers();
 	$tw.wiki.initSyncers();
@@ -96,7 +94,6 @@ exports.startup = function() {
 		var templateTitle = "$:/templates/PageTemplate",
 			parser = $tw.wiki.parseTiddler(templateTitle),
 			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki});
-console.log("Parse tree",parser);
 		renderTree.execute({tiddlerTitle: templateTitle});
 		var container = document.createElement("div");
 		document.body.insertBefore(container,document.body.firstChild);
