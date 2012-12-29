@@ -2,6 +2,23 @@ title: WikiText
 type: text/vnd.tiddlywiki
 tags: docs concepts
 
+\define wikitext-example(src)
+```
+$src$
+```
+
+Renders as:
+
+$src$
+
+In HTML:
+
+$$$text/vnd.tiddlywiki>text/html
+$src$
+$$$
+
+\end
+
 WikiText is a concise, expressive way of typing a wide range of text formatting, hypertext and interactive features. It allows you to focus on writing without a complex user interface getting in the way. It is designed to be familiar for users of [[MarkDown|http://daringfireball.net/projects/markdown/]], but with more of a focus on linking and the interactive features.
 
 ! Linking in WikiText
@@ -15,15 +32,8 @@ A key capability of WikiText is the ability to make links to other tiddlers or t
 
 You can suppress a link from being recognised by preceding it with `~`. For example:
 
-```
-* ~HelloThere is not a link
-* ~http://google.com/ is not a link
-```
-
-Renders as:
-
-* ~HelloThere is not a link
-* ~http://google.com/ is not a link
+<<wikitext-example src:"* ~HelloThere is not a link
+* ~http://google.com/ is not a link">>
 
 ! Paragraphs
 
@@ -37,19 +47,10 @@ And this is the second paragraph.
 
 Single line breaks are ignored within paragraphs. For example:
 
-```
-This is a
+<<wikitext-example src:"This is a
 paragraph made
 up of
-short lines
-```
-
-Renders as:
-
-This is a
-paragraph made
-up of
-short lines
+short lines">>
 
 ! Formatting
 
@@ -101,33 +102,17 @@ A similar syntax can be used to transclude a list of tiddlers matching a specifi
 
 To display an image stored in a tiddler just transclude that tiddler
 
-```
-{{Motovun Jack.jpg}}
-```
-
-Displays as:
-
-{{Motovun Jack.jpg}}
-
-See ImageWikiText for more details.
+<<wikitext-example src:"{{Motovun Jack.jpg}}">>
 
 ! Lists
 
 You can create unordered lists with `*` characters:
 
-```
-* First list item
+<<wikitext-example src:"* First list item
 * Second list item
 ** A subitem
 * Third list item
-```
-
-Renders as:
-
-* First list item
-* Second list item
-** A subitem
-* Third list item
+">>
 
 Ordered lists use `#` instead of `*`:
 
@@ -137,104 +122,54 @@ Ordered lists use `#` instead of `*`:
 
 You can also mix ordered and unordered list items:
 
-```
-* To do today
+<<wikitext-example src:"* To do today
 *# Eat
 * To get someone else to do
 *# This
 *# That
 *## And the other
-```
-
-Renders as:
-
-* To do today
-*# Eat
-* To get someone else to do
-*# This
-*# That
-*## And the other
+">>
 
 You can also create HTML definition lists:
 
-```
-; Term being defined
+<<wikitext-example src:"; Term being defined
 : Definition of that term
 ; Another term
 : Another definition
-```
-
-Renders as:
-
-; Term being defined
-: Definition of that term
-; Another term
-: Another definition
+">>
 
 ! Adding styles and classes
 
 You can use this construction to cause the wrapped content to be assigned specified CSS classes or styles:
 
-```
-@@.myStyle
+<<wikitext-example src:"@@.myStyle
 * List One
 * List Two	
 @@
-```
-
-The resulting HTML looks like this:
-
-```
-<ul class="myStyle">
-	<li>List One</li>
-	<li>List Two</li>
-</ul>
-```
+">>
 
 Similar syntax is used to assign styles. For example:
 
-```
-@@background-color:red;
+<<wikitext-example src:"@@background-color:red;
 * List One
 * List Two	
 @@
-```
-
-The resulting HTML looks like this:
-
-```
-<ul style="background-color:red;">
-	<li>List One</li>
-	<li>List Two</li>
-</ul>
-```
+">>
 
 Multiple styles and classes can be mixed. For example:
 
-```
-@@.aClass
+<<wikitext-example src:"@@.aClass
 @@width:400px;
 Some text
 @@
-```
+">>
 
 You can also assign a CSS class to an individual member of a list with this notation:
 
-```
-* List One
+<<wikitext-example src:"* List One
 *.MyClass List Two
 * List Three
-```
-
-The resulting HTML looks like this:
-
-```
-<ul>
-	<li>List One</li>
-	<li class="MyClass">List Two</li>
-	<li> List Three</li>
-</ul>
-```
+">>
 
 ! Typographic Features
 
@@ -242,13 +177,9 @@ You can create an n-dash with a double hyphen `--` and an m-dash with a triple h
 
 You can include a horizontal rule with three or more dashes on their own on a line:
 
-```
+<<wikitext-example src:"
 ---
-```
-
-Renders as:
-
----
+">>
 
 ! HTML in WikiText
 
@@ -263,7 +194,7 @@ This is my nice and simple block of text. HelloThere
 
 ! Widgets
 
-Macros provide rich functionality within WikiText. For example, the `<_video>` widget can be used to embed videos from YouTube, Vimeo or the Internet Archive:
+Widgets provide rich functionality within WikiText. For example, the `<_video>` widget can be used to embed videos from YouTube, Vimeo or the Internet Archive:
 
 ```
 <_video src="32001208" type="vimeo" />
