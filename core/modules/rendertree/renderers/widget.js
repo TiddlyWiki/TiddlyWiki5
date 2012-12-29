@@ -106,7 +106,14 @@ WidgetRenderer.prototype.refreshInDom = function(changedTiddlers) {
 };
 
 WidgetRenderer.prototype.getContextTiddlerTitle = function() {
-	return this.renderContext ? this.renderContext.tiddlerTitle : undefined;
+	var context = this.renderContext;
+	while(context) {
+		if($tw.utils.hop(context,"tiddlerTitle")) {
+			return context.tiddlerTitle;
+		}
+		context = context.parentContext;
+	}
+	return undefined;
 };
 
 /*

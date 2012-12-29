@@ -75,12 +75,12 @@ exports.parse = function() {
 		text = "";
 	}
 	// Save the macro definition
-	this.parser.macroDefinitions[this.match[1]] = {
-		type: "textmacro",
+	return [{
+		type: "macrodef",
 		name: this.match[1],
 		params: params,
 		text: text
-	};
+	}];
 };
 
 })();

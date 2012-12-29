@@ -57,6 +57,8 @@ exports.parse = function() {
 	if(tokens.length > 0) {
 		this.parser.amendRules(tokens[0],tokens.slice(1));
 	}
+	// No parse tree nodes to return
+	return [];
 };
 
 })();

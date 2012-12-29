@@ -44,21 +44,20 @@ var WikiParser = function(type,text,options) {
 	this.sourceLength = this.source.length;
 	// Set current parse position
 	this.pos = 0;
-	// Initialise the things that pragma rules can change
-	this.macroDefinitions = {}; // Hash map of macro definitions
 	// Instantiate the pragma parse rules
 	this.pragmaRules = this.instantiateRules(this.pragmaRuleClasses,"pragma",0);
 	// Instantiate the parser block and inline rules
 	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
 	// Parse any pragmas
-	this.parsePragmas();
+	this.tree = this.parsePragmas();
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {
-		this.tree = this.parseInlineRun();
+		this.tree.push.apply(this.tree,this.parseInlineRun());
 	} else {
-		this.tree = this.parseBlocks();
+		this.tree.push.apply(this.tree,this.parseBlocks());
 	}
+	// Return the parse tree
 };
 
 /*
@@ -125,22 +124,24 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 Parse any pragmas at the beginning of a block of parse text
 */
 WikiParser.prototype.parsePragmas = function() {
+	var tree = [];
 	while(true) {
 		// Skip whitespace
 		this.skipWhitespace();
 		// Check for the end of the text
 		if(this.pos >= this.sourceLength) {
-			return;
+			break;
 		}
 		// Check if we've arrived at a pragma rule match
 		var nextMatch = this.findNextMatch(this.pragmaRules,this.pos);
 		// If not, just exit
 		if(!nextMatch || nextMatch.matchIndex !== this.pos) {
-			return;
+			break;
 		}
 		// Process the pragma rule
-		nextMatch.rule.parse();
+		tree.push.apply(tree,nextMatch.rule.parse());
 	}
+	return tree;
 };
 
 /*

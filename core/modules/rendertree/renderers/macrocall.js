@@ -21,11 +21,9 @@ var MacroCallRenderer = function(renderTree,renderContext,parseTreeNode) {
 	this.renderContext = renderContext;
 	this.parseTreeNode = parseTreeNode;
 	// Find the macro definition
-	var macro,childTree;
-	if($tw.utils.hop(this.renderTree.parser.macroDefinitions,this.parseTreeNode.name)) {
-		macro = this.renderTree.parser.macroDefinitions[this.parseTreeNode.name];
-	}
+	var macro = this.findMacroDefinition(this.parseTreeNode.name);
 	// Insert an error message if we couldn't find the macro
+	var childTree;
 	if(!macro) {
 		childTree = [{type: "text", text: "<<Undefined macro: " + this.parseTreeNode.name + ">>"}];
 	} else {
@@ -36,6 +34,20 @@ var MacroCallRenderer = function(renderTree,renderContext,parseTreeNode) {
 	}
 	// Create the renderers for the child nodes
 	this.children = this.renderTree.createRenderers(this.renderContext,childTree);
+};
+
+/*
+Find a named macro definition
+*/
+MacroCallRenderer.prototype.findMacroDefinition = function(name) {
+	var context = this.renderContext;
+	while(context) {
+		if(context.macroDefinitions && context.macroDefinitions[name]) {
+			return context.macroDefinitions[name];
+		}
+		context = context.parentContext;
+	}
+	return undefined;
 };
 
 /*

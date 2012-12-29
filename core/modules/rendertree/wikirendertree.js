@@ -33,6 +33,7 @@ An renderContext consists of these fields:
 	parentContext: reference back to previous context in the stack
 */
 WikiRenderTree.prototype.execute = function(renderContext) {
+	renderContext = renderContext || {};
 	this.rendererTree = this.createRenderers(renderContext,this.parser.tree);
 };
 
