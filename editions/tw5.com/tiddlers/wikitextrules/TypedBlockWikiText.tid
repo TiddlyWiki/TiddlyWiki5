@@ -3,12 +3,12 @@ tags: docs wikitextrule
 
 WikiText can include blocks of text that are rendered with an explicit ContentType like this:
 
-{{{
+```
 $$$application/javascript
 //This is some JavaScript
 var thing = 2 + "one";
 $$$
-}}}
+```
 
 This renders as:
 
@@ -19,13 +19,13 @@ $$$
 
 It is also possible to abbreviate the ContentType to a file extension. For example:
 
-{{{
+```
 $$$.svg
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
 </svg>
 $$$
-}}}
+```
 
 This renders as:
 
@@ -37,11 +37,11 @@ $$$
 
 And, finally, a JSON example:
 
-{{{
+```
 $$$.json
 {"teapot": "brown","inside":["milk","sugar",23]}
 $$$
-}}}
+```
 
 Which renders as:
 
@@ -51,14 +51,36 @@ $$$
 
 Unknown types render as plain text:
 
-{{{
+```
 $$$text/unknown
 Some plain text, which will not be //formatted//.
 $$$
-}}}
+```
 
 Which renders as:
 
 $$$text/unknown
 Some plain text, which will not be //formatted//.
+$$$
+
+A render type can also be specified, causing a particular text rendering to be displayed. For example:
+
+```
+$$$text/vnd.tiddlywiki>text/html
+This is ''some'' wikitext
+$$$
+
+$$$text/vnd.tiddlywiki>text/plain
+This is ''some'' wikitext
+$$$
+```
+
+Renders as:
+
+$$$text/vnd.tiddlywiki>text/html
+This is ''some'' wikitext
+$$$
+
+$$$text/vnd.tiddlywiki>text/plain
+This is ''some'' wikitext
 $$$

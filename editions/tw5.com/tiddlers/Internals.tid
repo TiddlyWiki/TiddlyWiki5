@@ -48,7 +48,6 @@ TiddlyWiki is built on a [[tiny microkernel|BootMechanism]] with all functionali
 * TiddlerDeserializerModules
 * TiddlerFieldModules
 * TiddlerMethodModules
-* TiddlerSerializerModules
 * TreeNodeModules
 * TreeUtilsModules
 * UtilsModules
