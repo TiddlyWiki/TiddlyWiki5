@@ -56,7 +56,7 @@ exports.parse = function() {
 		this.parser.pos = this.matchRegExp.lastIndex;
 		// Look for another line of classes and styles
 		this.match = this.matchRegExp.exec(this.parser.source);
-	} while(this.match && this.match.index === this.parse.pos);
+	} while(this.match && this.match.index === this.parser.pos);
 	// Parse the body
 	var tree = this.parser.parseBlocks(reEndString);
 	for(var t=0; t<tree.length; t++) {
