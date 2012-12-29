@@ -68,7 +68,7 @@ exports.parse = function() {
 	var text,
 		endMatch = reEnd.exec(this.parser.source);
 	if(endMatch) {
-		text = this.parser.source.substring(this.parser.pos,endMatch.index).trim();
+		text = this.parser.source.substring(this.parser.pos,endMatch.index);
 		this.parser.pos = endMatch.index + endMatch[0].length;
 	} else {
 		// We didn't find the end of the definition, so we'll make it blank
