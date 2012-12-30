@@ -1,30 +1,5 @@
 title: $:/templates/TagTemplate
 
-{{btn-invisible tw-tag-button{
-<<button popup:"$:/temp/TagDropDownLocation" qualifyTiddlerTitles:yes><
-{{label{
-<<color background:yes default:#aaa><
-<<view title>>
->>
-}}}
->>
-}}}
-<<reveal state:"$:/temp/TagDropDownLocation" type:popup qualifyTiddlerTitles:yes><
-
-<div class="open">
-
-{{dropdown-menu{
-
-* <<view title link>>
-*.divider
-* <<list filter:"[is[current]tagging[]]"><
-
-<li><<view title link>></li>
-
->>
-
-}}}
-
-</div>
-
->>
+@@.label
+<_view field="title" format="text" />
+@@
