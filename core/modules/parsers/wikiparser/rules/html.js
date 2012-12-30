@@ -24,14 +24,18 @@ This is a widget invocation
 "use strict";
 
 exports.name = "html";
-exports.types = {inline: true};
+exports.types = {inline: true, block: true};
 
 var voidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr".split(",");
 
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>/mg;
+	if(this.is.block) {
+		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>(\r?\n)/mg;
+	} else {
+		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>(\r?\n)?/mg;
+	}
 };
 
 /*
@@ -42,12 +46,11 @@ exports.parse = function() {
 	var isWidget = !!this.match[1],
 		tagName = this.match[2],
 		attributeString = this.match[3],
-		isSelfClosing = !!this.match[4];
+		isSelfClosing = !!this.match[4],
+		hasLineBreak = !!this.match[5];
 	// Move past the tag name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var reLineBreak = /(\r?\n)/mg,
-		reAttr = /\s*([A-Za-z\-_]+)(?:\s*=\s*(?:("[^"]*")|('[^']*')|(\{\{[^\}]*\}\})|([^"'\s]+)))?/mg,
-		isBlock;
+	var reAttr = /\s*([A-Za-z\-_]+)(?:\s*=\s*(?:("[^"]*")|('[^']*')|(\{\{[^\}]*\}\})|([^"'\s]+)))?/mg;
 	// Process the attributes
 	var attrMatch = reAttr.exec(attributeString),
 		attributes = {};
@@ -68,20 +71,12 @@ exports.parse = function() {
 		attributes[name] = value;
 		attrMatch = reAttr.exec(attributeString);
 	}
-	// Check for a line break immediate after the opening tag
-	reLineBreak.lastIndex = this.parser.pos;
-	var lineBreakMatch = reLineBreak.exec(this.parser.source);
-	if(lineBreakMatch && lineBreakMatch.index === this.parser.pos) {
-		this.parser.pos = lineBreakMatch.index + lineBreakMatch[0].length;
-		isBlock = true;
-	} else {
-		isBlock = false;
-	}
+	// Process the end tag
 	if(!isSelfClosing && (isWidget || voidElements.indexOf(tagName) === -1)) {
 		var reEndString = "(</" + (isWidget ? "\\$" : "") + tagName + ">)",
 			reEnd = new RegExp(reEndString,"mg"),
 			content;
-		if(isBlock) {
+		if(hasLineBreak) {
 			content = this.parser.parseBlocks(reEndString);
 		} else {
 			content = this.parser.parseInlineRun(reEnd);
@@ -94,7 +89,13 @@ exports.parse = function() {
 	} else {
 		content = [];
 	}
-	var element = {type: isWidget ? "widget" : "element", tag: tagName, isBlock: isBlock, attributes: attributes, children: content};
+	var element = {
+		type: isWidget ? "widget" : "element",
+		tag: tagName,
+		isBlock: this.is.block || hasLineBreak,
+		attributes: attributes,
+		children: content
+	};
 	return [element];
 };
 
