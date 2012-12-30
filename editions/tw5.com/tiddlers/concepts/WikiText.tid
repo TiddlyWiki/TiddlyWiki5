@@ -100,9 +100,15 @@ A similar syntax can be used to transclude a list of tiddlers matching a specifi
 
 ! Images
 
-To display an image stored in a tiddler just transclude that tiddler
+To display an image stored in a tiddler just transclude that tiddler:
 
-<<wikitext-example src:"{{Motovun Jack.jpg}}">>
+```
+{{Motovun Jack.jpg}}
+```
+
+Renders as:
+
+{{Motovun Jack.jpg}}
 
 ! Lists
 
