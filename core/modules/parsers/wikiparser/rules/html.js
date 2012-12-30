@@ -10,9 +10,9 @@ Wiki rule for HTML elements and widgets. For example:
 This is an HTML5 aside element
 </aside>
 
-<_slider target="MyTiddler">
+<$slider target="MyTiddler">
 This is a widget invocation
-</_slider>
+</$slider>
 
 }}}
 
@@ -31,7 +31,7 @@ var voidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /<(_)?([A-Za-z]+)(\s*[^>]*?)(\/)?>/mg;
+	this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>/mg;
 };
 
 /*
@@ -78,7 +78,7 @@ exports.parse = function() {
 		isBlock = false;
 	}
 	if(!isSelfClosing && (isWidget || voidElements.indexOf(tagName) === -1)) {
-		var reEndString = "(</" + (isWidget ? "_" : "") + tagName + ">)",
+		var reEndString = "(</" + (isWidget ? "\\$" : "") + tagName + ">)",
 			reEnd = new RegExp(reEndString,"mg"),
 			content;
 		if(isBlock) {

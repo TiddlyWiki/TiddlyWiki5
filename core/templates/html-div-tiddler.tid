@@ -4,6 +4,6 @@ title: $:/core/templates/html-div-tiddler
 
 This template is used for saving tiddlers as an HTML DIV tag with attributes representing the tiddler fields.
 
--->`<div`<_fields template=' $name$="$encoded_value$"'></_fields>`>
-<pre>`<_view field="text" format="htmlencoded" />`</pre>
+-->`<div`<$fields template=' $name$="$encoded_value$"'></$fields>`>
+<pre>`<$view field="text" format="htmlencoded" />`</pre>
 </div>`

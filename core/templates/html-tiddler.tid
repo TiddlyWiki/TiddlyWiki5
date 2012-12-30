@@ -4,4 +4,4 @@ title: $:/core/templates/html-tiddler
 
 This template is used for saving tiddlers as raw HTML
 
---><_view field="text" format="htmlwikified" />
+--><$view field="text" format="htmlwikified" />

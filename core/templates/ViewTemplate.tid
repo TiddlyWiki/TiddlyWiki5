@@ -2,18 +2,18 @@ title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
 <span class="title">
-	<_view field="title"/>
-	<_button message="tw-close">close</_button>
+	<$view field="title"/>
+	<$button message="tw-close">close</$button>
 </span>
 
 <div class="small">
-	<_view field="modifier" format="link"/>
-	<_view field="modified" format="date"/>
+	<$view field="modifier" format="link"/>
+	<$view field="modified" format="date"/>
 </div>
 
-@@.tw-tags-wrapper <_list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" />@@
+@@.tw-tags-wrapper <$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" />@@
 
 <div class="body">
-	<_view field="text" format="wikified">
-	</_view>
+	<$view field="text" format="wikified">
+	</$view>
 </div>

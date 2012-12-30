@@ -1,5 +1,5 @@
 title: $:/templates/TagTemplate
 
 @@.label
-<_view field="title" format="text" />
+<$view field="title" format="text" />
 @@

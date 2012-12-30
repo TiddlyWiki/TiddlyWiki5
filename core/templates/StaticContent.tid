@@ -2,6 +2,6 @@ title: $:/templates/StaticContent
 type: text/vnd.tiddlywiki
 
 <!-- For Google, and people without JavaScript-->
-<_list filter="[!is[shadow]sort[title]]" >
-<_view field="title" format="text"></_view>
-</_list>
+<$list filter="[!is[shadow]sort[title]]" >
+<$view field="title" format="text"></$view>
+</$list>

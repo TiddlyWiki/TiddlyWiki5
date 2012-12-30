@@ -1,7 +1,7 @@
 title: $:/templates/PageTemplate
 
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
-<_navigator story="$:/StoryList" history="$:/HistoryList">
+<$navigator story="$:/StoryList" history="$:/HistoryList">
 
 <!-- The top navigation bar -->
 <div class="navbar navbar-fixed-top">
@@ -23,15 +23,15 @@ title: $:/templates/PageTemplate
 <div class="span2">
 <div style="position:fixed;">
 <!-- The navigation menu -->
-<_list filter="[list[$:/StoryList]]" history="$:/HistoryList" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-menu-list-item"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-menu-list-item"/>
 </div>
 </div>
 <div class="span10">
 <!-- The main display -->
-<_list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-tiddler-frame"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-tiddler-frame"/>
 </div>
 </div>
 </div>
 
-</_navigator>
+</$navigator>
 
