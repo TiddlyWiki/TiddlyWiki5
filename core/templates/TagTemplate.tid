@@ -1,5 +1,9 @@
 title: $:/templates/TagTemplate
 
-@@.label
-<$view field="title" format="text" />
-@@
+<$popup class="btn-invisible"><$handle>
+@@.label <$view field="title" format="text" />@@
+</$handle><$body>
+Some popup
+</$body>
+</$popup>
+

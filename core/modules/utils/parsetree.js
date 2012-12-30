@@ -46,4 +46,13 @@ exports.addStyleToParseTreeNode = function(node,name,value) {
 	}
 };
 
+exports.findParseTreeNode = function(nodeArray,search) {
+	for(var t=0; t<nodeArray.length; t++) {
+		if(nodeArray[t].type === search.type && nodeArray[t].tag === search.tag) {
+			return nodeArray[t];
+		}
+	}
+	return undefined;
+};
+
 })();
