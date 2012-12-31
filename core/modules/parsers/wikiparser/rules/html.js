@@ -34,7 +34,7 @@ exports.init = function(parser) {
 	if(this.is.block) {
 		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>(\r?\n)/mg;
 	} else {
-		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>(\r?\n)?/mg;
+		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(?:(\/>)|(?:>(\r?\n)?))/mg;
 	}
 };
 
