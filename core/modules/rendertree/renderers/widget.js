@@ -92,6 +92,10 @@ WidgetRenderer.prototype.renderInDom = function() {
 			$tw.utils.addEventListeners(this.domNode,this.widget.getEventListeners());
 		}
 	}
+	// Call the postRenderInDom hook if the widget has one
+	if(this.widget.postRenderInDom) {
+		this.widget.postRenderInDom();
+	}
 	// Return the dom node
 	return this.domNode;
 };
@@ -137,6 +141,22 @@ WidgetRenderer.prototype.checkContextRecursion = function(newRenderContext) {
 	}
 	return false;
 };
+
+WidgetRenderer.prototype.getContextScopeId = function() {
+	var guidBits = [],
+		context = this.renderContext;
+	while(context) {
+		$tw.utils.each(context,function(field,name) {
+			if(name !== "parentContext") {
+				guidBits.push(name + ":" + field + ";");
+			}
+		});
+		guidBits.push("-");
+		context = context.parentContext;
+	}
+	return $tw.utils.toBase64(guidBits.join(""));
+};
+
 
 exports.widget = WidgetRenderer
 

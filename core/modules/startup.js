@@ -42,7 +42,6 @@ exports.startup = function() {
 		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
-			wiki: $tw.wiki,
 			rootElement: document.body
 		});
 		// Install the modal message mechanism

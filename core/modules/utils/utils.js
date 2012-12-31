@@ -25,6 +25,17 @@ exports.trim = function(str) {
 };
 
 /*
+Convert a string to base64 encoding
+*/
+exports.toBase64 = function(str) {
+	if($tw.browser) {
+		return window.btoa(str);
+	} else {
+		new Buffer(str).toString("base64");
+	}
+};
+
+/*
 Return the number of keys in an object
 */
 exports.count = function(object) {

@@ -60,11 +60,13 @@ exports.dispatchMessage = function(event) {
 };
 
 exports.triggerPopup = function(event) {
+	var title = this.popup;
+	if(this.qualifyTiddlerTitles) {
+		title =  title + "-" + this.renderer.getContextScopeId();
+	}
 	$tw.popup.triggerPopup({
-		textRef: this.popup,
 		domNode: this.renderer.domNode,
-		qualifyTiddlerTitles: this.qualifyTiddlerTitles,
-		renderContext: this.renderer.renderContext,
+		title: title,
 		wiki: this.renderer.renderTree.wiki
 	});
 };

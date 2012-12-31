@@ -1,9 +1,14 @@
 title: $:/templates/TagTemplate
 
-<$popup class="btn-invisible"><$handle>
-@@.label <$view field="title" format="text" />@@
-</$handle><$body>
-Some popup
-</$body>
-</$popup>
+<$button popup="tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible">@@.label <$view field="title" format="text" />@@</$button>
+<$reveal state="tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="open">
 
+@@.dropdown-menu
+
+* <$view field="title" format="link" />
+*.divider
+* <$list filter="[is[current]tagging[]]" ><li><$view field="title" format="link" /></li></$list>
+
+@@
+
+</div></$reveal>
