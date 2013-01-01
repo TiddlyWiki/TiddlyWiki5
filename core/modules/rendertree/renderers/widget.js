@@ -32,10 +32,10 @@ var WidgetRenderer = function(renderTree,renderContext,parseTreeNode) {
 	if(WidgetClass) {
 		this.widget = new WidgetClass(this);
 	} else {
-		// Error if we couldn't find the widget
-		this.children = this.renderTree.createRenderers(this.renderContext,[
-				{type: "text", text: "Unknown widget type '" + this.parseTreeNode.tag + "'"}
-			]);
+		WidgetClass = this.widgetClasses.error;
+		if(WidgetClass) {
+			this.widget = new WidgetClass(this,"Unknown widget '" + this.parseTreeNode.tag + "'");
+		}
 	}
 };
 

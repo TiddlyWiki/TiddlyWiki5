@@ -6079,6 +6079,13 @@ a.tw-tiddlylink-missing {
           box-shadow: inset 1px 1px 4px 1px rgba(0, 0, 0, 0.15);
 }
 
+.tw-error-widget {
+  padding: 5px 5px 5px 5px;
+  margin: 15px 15px 15px 15px;
+  color: white;
+  background-color: red;
+}
+
 .tw-scrollable .tw-tiddler-frame {
   width: 400px;
   padding: 30px 30px 30px 30px;
