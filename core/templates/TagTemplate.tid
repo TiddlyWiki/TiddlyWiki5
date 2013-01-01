@@ -7,7 +7,9 @@ title: $:/templates/TagTemplate
 
 * <$view field="title" format="link" />
 *.divider
-* <$list filter="[is[current]tagging[]]" ><li><$view field="title" format="link" /></li></$list>
+* <div>
+<$list filter="[is[current]tagging[]sort[title]]"/>
+</div>
 
 @@
 

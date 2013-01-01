@@ -25,17 +25,18 @@ Popup.prototype.show = function(options) {
 	this.cancel();
 	this.title = options.title;
 	this.wiki = options.wiki;
-	// this.rootElement.addEventListener("click",this,true);
+	this.anchorDomNode = options.domNode;
+	this.rootElement.addEventListener("click",this,true);
 };
 
 Popup.prototype.handleEvent = function(event) {
-	if(event.type === "click") {
+	if(event.type === "click" && !$tw.utils.domContains(this.anchorDomNode,event.target)) {
 		this.cancel();
 	}
 };
 
 Popup.prototype.cancel = function() {
-	// this.rootElement.removeEventListener("click",this,true);
+	this.rootElement.removeEventListener("click",this,true);
 	if(this.title) {
 		this.wiki.deleteTiddler(this.title);
 		this.title = null;
@@ -51,7 +52,6 @@ Trigger a popup open or closed. Parameters are in a hashmap:
 Popup.prototype.triggerPopup = function(options) {
 	// Get the current popup state tiddler
 	var value = options.wiki.getTextReference(options.title,"");
-console.log("Value is",value)
 	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
 	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 	if(popupLocationRegExp.test(value)) {

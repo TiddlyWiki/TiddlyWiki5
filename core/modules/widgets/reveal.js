@@ -40,7 +40,7 @@ exports.generateChildNodes = function() {
 	var node = {
 		type: "element",
 		tag: "div",
-		children: this.renderer.parseTreeNode.children,
+		children: this.isOpen ? this.renderer.parseTreeNode.children : [],
 		events: [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}]
 	};
 	$tw.utils.addClassToParseTreeNode(node,"tw-reveal");
@@ -122,7 +122,7 @@ exports.handleClickEvent = function(event) {
 
 exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || (this.stateTitle && changedTiddlers[this.stateTitle])) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"]) {
 		// Remove old child nodes
 		$tw.utils.removeChildren(this.parentElement);
 		// Regenerate and render children
@@ -134,12 +134,28 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 			}
 		});
 	} else {
-		// We don't need to refresh ourselves, so just refresh any child nodes
-		$tw.utils.each(this.children,function(node) {
-			if(node.refreshInDom) {
-				node.refreshInDom(changedTiddlers);
-			}
-		});
+		var needChildrenRefresh = true; // Avoid refreshing the children nodes if we don't need to
+		// Get the open state
+		this.readState();
+		// Construct the child nodes if  required
+		if(this.isOpen && this.children[0].children.length === 0) {
+			this.children[0].children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+			var parentNode = this.children[0].domNode;
+			$tw.utils.each(this.children[0].children,function(child) {
+				parentNode.appendChild(child.renderInDom());
+			});
+			needChildrenRefresh = false;
+		}
+		// Refresh any child nodes
+		if(needChildrenRefresh) {
+			$tw.utils.each(this.children,function(node) {
+				if(node.refreshInDom) {
+					node.refreshInDom(changedTiddlers);
+				}
+			});
+		}
+		// Set the visibility of the children
+		this.children[0].domNode.style.display = this.isOpen ? (this.isBlock ? "block" : "inline") : "none";
 	}
 	// Position the content if required
 	this.postRenderInDom();
