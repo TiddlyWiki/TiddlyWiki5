@@ -12,16 +12,14 @@ Implements the navigator widget.
 /*global $tw: false */
 "use strict";
 
-exports.name = "navigator";
-
-exports.init = function(renderer) {
+var NavigatorWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+NavigatorWidget.prototype.generateChildNodes = function() {
 	// Get our parameters
 	this.storyTitle = this.renderer.getAttribute("story");
 	this.historyTitle = this.renderer.getAttribute("history");
@@ -29,7 +27,7 @@ exports.generateChildNodes = function() {
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
 };
 
-exports.getEventListeners = function() {
+NavigatorWidget.prototype.getEventListeners = function() {
 	return [
 		{name: "tw-navigate", handlerObject: this, handlerMethod: "handleNavigateEvent"},
 		{name: "tw-EditTiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
@@ -39,7 +37,7 @@ exports.getEventListeners = function() {
 	];
 };
 
-exports.refreshInDom = function(changedAttributes,changedTiddlers) {
+NavigatorWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// We don't need to refresh ourselves, so just refresh any child nodes
 	$tw.utils.each(this.children,function(node) {
 		if(node.refreshInDom) {
@@ -48,7 +46,7 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	});
 };
 
-exports.getStoryList = function() {
+NavigatorWidget.prototype.getStoryList = function() {
 	var text = this.renderer.renderTree.wiki.getTextReference(this.storyTitle,"");
 	if(text && text.length > 0) {
 		this.storyList = text.split("\n");
@@ -57,14 +55,14 @@ exports.getStoryList = function() {
 	}
 };
 
-exports.saveStoryList = function() {
+NavigatorWidget.prototype.saveStoryList = function() {
 	var storyTiddler = this.renderer.renderTree.wiki.getTiddler(this.storyTitle);
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler({
 		title: this.storyTitle
 	},storyTiddler,{text: this.storyList.join("\n")}));
 };
 
-exports.findTitleInStory = function(title,defaultIndex) {
+NavigatorWidget.prototype.findTitleInStory = function(title,defaultIndex) {
 	for(var t=0; t<this.storyList.length; t++) {
 		if(this.storyList[t] === title) {
 			return t;
@@ -74,7 +72,7 @@ exports.findTitleInStory = function(title,defaultIndex) {
 };
 
 // Navigate to a specified tiddler
-exports.handleNavigateEvent = function(event) {
+NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	if(this.storyTitle) {
 		// Update the story tiddler if specified
 		this.getStoryList();
@@ -101,7 +99,7 @@ exports.handleNavigateEvent = function(event) {
 };
 
 // Close a specified tiddler
-exports.handleCloseTiddlerEvent = function(event) {
+NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 	this.getStoryList();
 	// Look for tiddlers with this title to close
 	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
@@ -114,7 +112,7 @@ exports.handleCloseTiddlerEvent = function(event) {
 };
 
 // Place a tiddler in edit mode
-exports.handleEditTiddlerEvent = function(event) {
+NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	this.getStoryList();
 	// Replace the specified tiddler with a draft in edit mode
 	for(var t=0; t<this.storyList.length; t++) {
@@ -143,7 +141,7 @@ exports.handleEditTiddlerEvent = function(event) {
 };
 
 // Take a tiddler out of edit mode, saving the changes
-exports.handleSaveTiddlerEvent = function(event) {
+NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	this.getStoryList();
 	var storyTiddlerModified = false;
 	for(var t=0; t<this.storyList.length; t++) {
@@ -180,7 +178,7 @@ exports.handleSaveTiddlerEvent = function(event) {
 };
 
 // Create a new draft tiddler
-exports.handleNewTiddlerEvent = function(event) {
+NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	this.getStoryList();
 	// Create the new tiddler
@@ -217,5 +215,7 @@ exports.handleNewTiddlerEvent = function(event) {
 	event.stopPropagation();
 	return false;
 };
+
+exports.navigator = NavigatorWidget;
 
 })();

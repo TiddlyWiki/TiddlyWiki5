@@ -46,16 +46,14 @@ of the tiddler `Foo`.
 /*global $tw: false */
 "use strict";
 
-exports.name = "transclude";
-
-exports.init = function(renderer) {
+var TranscludeWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+TranscludeWidget.prototype.generateChildNodes = function() {
 	var tr, templateParseTree, templateTiddler;
 	// Get the render target details
 	this.targetTitle = this.renderer.getAttribute("target",this.renderer.getContextTiddlerTitle());
@@ -109,7 +107,7 @@ exports.generateChildNodes = function() {
 	this.children = this.renderer.renderTree.createRenderers(newRenderContext,[node]);
 };
 
-exports.refreshInDom = function(changedAttributes,changedTiddlers) {
+TranscludeWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Set the class for missing tiddlers
 	if(this.targetTitle && changedTiddlers[this.targetTitle]) {
 		$tw.utils.toggleClass(this.children[0].domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
@@ -135,5 +133,7 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 		});
 	}
 };
+
+exports.transclude = TranscludeWidget;
 
 })();

@@ -12,16 +12,14 @@ Implements the button widget.
 /*global $tw: false */
 "use strict";
 
-exports.name = "button";
-
-exports.init = function(renderer) {
+var ButtonWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+ButtonWidget.prototype.generateChildNodes = function() {
 	// Get the parameters from the attributes
 	this.message = this.renderer.getAttribute("message");
 	this.param = this.renderer.getAttribute("param");
@@ -52,14 +50,14 @@ exports.generateChildNodes = function() {
 	}]);
 };
 
-exports.dispatchMessage = function(event) {
+ButtonWidget.prototype.dispatchMessage = function(event) {
 	$tw.utils.dispatchCustomEvent(event.target,this.message,{
 		param: this.param,
 		tiddlerTitle: this.renderer.getContextTiddlerTitle()
 	});
 };
 
-exports.triggerPopup = function(event) {
+ButtonWidget.prototype.triggerPopup = function(event) {
 	var title = this.popup;
 	if(this.qualifyTiddlerTitles) {
 		title =  title + "-" + this.renderer.getContextScopeId();
@@ -71,12 +69,12 @@ exports.triggerPopup = function(event) {
 	});
 };
 
-exports.setTiddler = function() {
+ButtonWidget.prototype.setTiddler = function() {
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.set);
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
 };
 
-exports.handleClickEvent = function(event) {
+ButtonWidget.prototype.handleClickEvent = function(event) {
 	if(this.message) {
 		this.dispatchMessage(event);
 	}
@@ -90,7 +88,7 @@ exports.handleClickEvent = function(event) {
 	return false;
 };
 
-exports.handleMouseOverOrOutEvent = function(event) {
+ButtonWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 	if(this.popup) {
 		this.triggerPopup(event);
 	}
@@ -98,7 +96,7 @@ exports.handleMouseOverOrOutEvent = function(event) {
 	return false;
 };
 
-exports.refreshInDom = function(changedAttributes,changedTiddlers) {
+ButtonWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
  	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		// Remove old child nodes
@@ -120,5 +118,7 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 		});
 	}
 };
+
+exports.button = ButtonWidget;
 
 })();

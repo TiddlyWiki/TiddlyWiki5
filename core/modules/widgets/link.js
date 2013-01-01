@@ -12,21 +12,19 @@ Implements the link widget.
 /*global $tw: false */
 "use strict";
 
-exports.name = "link";
-
 var isLinkExternal = function(to) {
 	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
-exports.init = function(renderer) {
+var LinkWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+LinkWidget.prototype.generateChildNodes = function() {
 	// Get the parameters from the attributes
 	this.to = this.renderer.getAttribute("to");
 	this.hover = this.renderer.getAttribute("hover");
@@ -65,7 +63,7 @@ exports.generateChildNodes = function() {
 	}]);
 };
 
-exports.handleClickEvent = function(event) {
+LinkWidget.prototype.handleClickEvent = function(event) {
 	if(isLinkExternal(this.to)) {
 		event.target.setAttribute("target","_blank");
 		return true;
@@ -80,7 +78,7 @@ exports.handleClickEvent = function(event) {
 	}
 };
 
-exports.handleMouseOverOrOutEvent = function(event) {
+LinkWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 	if(this.hover) {
 		$tw.popup.triggerPopup({
 			textRef: this.hover,
@@ -94,7 +92,7 @@ exports.handleMouseOverOrOutEvent = function(event) {
 	return false;
 };
 
-exports.refreshInDom = function(changedAttributes,changedTiddlers) {
+LinkWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Set the class for missing tiddlers
 	if(this.targetTitle && changedTiddlers[this.targetTitle]) {
 		$tw.utils.toggleClass(this.children[0].domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
@@ -120,5 +118,7 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 		});
 	}
 };
+
+exports.link = LinkWidget;
 
 })();

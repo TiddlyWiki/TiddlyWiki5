@@ -12,8 +12,6 @@ The view widget displays a tiddler field.
 /*global $tw: false */
 "use strict";
 
-exports.name = "view";
-
 /*
 Define the "text" viewer here so that it is always available
 */
@@ -42,7 +40,7 @@ TextViewer.prototype.render = function() {
 // We'll cache the available field viewers here
 var fieldViewers = undefined;
 
-exports.init = function(renderer) {
+var ViewWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Initialise the field viewers if they've not been done already
@@ -54,7 +52,7 @@ exports.init = function(renderer) {
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+ViewWidget.prototype.generateChildNodes = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
 	this.fieldName = this.renderer.getAttribute("field","text");
@@ -93,7 +91,7 @@ exports.generateChildNodes = function() {
 	this.children = this.viewer.render();
 };
 
-exports.refreshInDom = function(changedAttributes,changedTiddlers) {
+ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || (this.tiddlerTitle && changedTiddlers[this.tiddlerTitle])) {
 		// Remove old child nodes
@@ -115,5 +113,7 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 		});
 	}
 };
+
+exports.view = ViewWidget;
 
 })();

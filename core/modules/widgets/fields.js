@@ -12,16 +12,14 @@ The view widget displays the fields of a tiddler through a text substitution tem
 /*global $tw: false */
 "use strict";
 
-exports.name = "fields";
-
-exports.init = function(renderer) {
+var FieldsWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+FieldsWidget.prototype.generateChildNodes = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
 	this.template = this.renderer.getAttribute("template");
@@ -74,5 +72,7 @@ exports.generateChildNodes = function() {
 	// Create the renderers for the wrapper and the children
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[node]);
 };
+
+exports.fields = FieldsWidget;
 
 })();

@@ -1,5 +1,7 @@
 title: $:/templates/PageTemplate
 
+<$nosuchwidget />
+
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 

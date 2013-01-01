@@ -22,7 +22,7 @@ var WidgetRenderer = function(renderTree,renderContext,parseTreeNode) {
 	this.parseTreeNode = parseTreeNode;
 	// Widget classes
 	if(!this.widgetClasses) {
-		WidgetRenderer.prototype.widgetClasses = $tw.modules.createClassesFromModules("widget",null,$tw.WidgetBase);
+		WidgetRenderer.prototype.widgetClasses = $tw.modules.applyMethods("widget");
 	}
 	// Compute our attributes
 	this.attributes = {};
@@ -30,8 +30,7 @@ var WidgetRenderer = function(renderTree,renderContext,parseTreeNode) {
 	// Create the widget object
 	var WidgetClass = this.widgetClasses[this.parseTreeNode.tag];
 	if(WidgetClass) {
-		this.widget = new WidgetClass();
-		this.widget.init(this);
+		this.widget = new WidgetClass(this);
 	} else {
 		// Error if we couldn't find the widget
 		this.children = this.renderTree.createRenderers(this.renderContext,[
@@ -74,26 +73,46 @@ WidgetRenderer.prototype.getAttribute = function(name,defaultValue) {
 
 WidgetRenderer.prototype.render = function(type) {
 	// Render the widget if we've got one
-	if(this.widget && this.widget.render) {
-		return this.widget.render(type);
+	if(this.widget) {
+		if(this.widget.render) {
+			return this.widget.render(type);
+		} else if(this.widget.children) {
+			var output = [];
+			$tw.utils.each(this.widget.children,function(node) {
+				if(node.render) {
+					output.push(node.render(type));
+				}
+			});
+			return output.join("");
+		}
 	}
 };
 
 WidgetRenderer.prototype.renderInDom = function() {
+	var self = this;
 	// Create the wrapper element
 	this.domNode = document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
 	this.domNode.setAttribute("data-widget-type",this.parseTreeNode.tag);
 	this.domNode.setAttribute("data-widget-attr",JSON.stringify(this.attributes));
 	// Render the widget if we've got one
 	if(this.widget) {
-		this.widget.renderInDom(this.domNode);
+		if(this.widget.renderInDom) {
+			this.widget.renderInDom(this.domNode);
+		} else if(this.widget.children) {
+			// Render any child nodes
+			$tw.utils.each(this.widget.children,function(node) {
+				if(node.renderInDom) {
+					self.domNode.appendChild(node.renderInDom());
+				}
+			});
+		}
 		// Attach any event handlers
 		if(this.widget.getEventListeners) {
 			$tw.utils.addEventListeners(this.domNode,this.widget.getEventListeners());
 		}
 	}
 	// Call the postRenderInDom hook if the widget has one
-	if(this.widget.postRenderInDom) {
+	if(this.widget && this.widget.postRenderInDom) {
 		this.widget.postRenderInDom();
 	}
 	// Return the dom node

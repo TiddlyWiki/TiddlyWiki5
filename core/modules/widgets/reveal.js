@@ -12,16 +12,14 @@ Implements the reveal widget.
 /*global $tw: false */
 "use strict";
 
-exports.name = "reveal";
-
-exports.init = function(renderer) {
+var RevealWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
 	this.generateChildNodes();
 };
 
-exports.generateChildNodes = function() {
+RevealWidget.prototype.generateChildNodes = function() {
 	// Get the parameters from the attributes
 	this.state = this.renderer.getAttribute("state");
 	this.type = this.renderer.getAttribute("type");
@@ -61,7 +59,7 @@ exports.generateChildNodes = function() {
 /*
 Read the state tiddler
 */
-exports.readState = function() {
+RevealWidget.prototype.readState = function() {
 	// Start with the default value for being open or closed
 	if(this["default"]) {
 		this.isOpen = this["default"] === "open";
@@ -84,11 +82,11 @@ exports.readState = function() {
 	}
 };
 
-exports.readMatchState = function(state) {
+RevealWidget.prototype.readMatchState = function(state) {
 	this.isOpen = state === this.text;
 };
 
-exports.readPopupState = function(state) {
+RevealWidget.prototype.readPopupState = function(state) {
 	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
 		match = popupLocationRegExp.exec(state);
 	// Check if the state matches the location regexp
@@ -108,7 +106,7 @@ exports.readPopupState = function(state) {
 	}
 };
 
-exports.handleClickEvent = function(event) {
+RevealWidget.prototype.handleClickEvent = function(event) {
 	if(event.type === "click" && this.type === "popup") {
 		// Cancel the popup if we get a click on it
 		if(this.stateTitle) {
@@ -120,7 +118,7 @@ exports.handleClickEvent = function(event) {
 	return true;
 };
 
-exports.refreshInDom = function(changedAttributes,changedTiddlers) {
+RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"]) {
 		// Remove old child nodes
@@ -161,7 +159,7 @@ exports.refreshInDom = function(changedAttributes,changedTiddlers) {
 	this.postRenderInDom();
 };
 
-exports.postRenderInDom = function() {
+RevealWidget.prototype.postRenderInDom = function() {
 	switch(this.type) {
 		case "popup":
 			if(this.isOpen) {
@@ -197,5 +195,7 @@ exports.postRenderInDom = function() {
 			break;
 	}
 };
+
+exports.reveal = RevealWidget;
 
 })();
