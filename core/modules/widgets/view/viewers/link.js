@@ -21,11 +21,8 @@ var LinkViewer = function(viewWidget,tiddler,field,value) {
 
 LinkViewer.prototype.render = function() {
 	var text = this.value === undefined ? "" : this.value;
-	// Set the element details
-	this.viewWidget.tag = "span";
-	this.viewWidget.attributes = {
-		"class": "tw-view-link"
-	};
+	// Indicate that we're not generating an element
+	this.viewWidget.tag = undefined;
 	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
 			type: "element",
 			tag: "$link",
