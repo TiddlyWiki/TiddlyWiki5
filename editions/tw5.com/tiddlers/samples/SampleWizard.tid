@@ -1,10 +1,10 @@
 title: SampleWizard
 tags: demo
 subtitle: I'm a modal wizard
-footer: <<button close class:"btn btn-primary"><Close>>
+footer: <$button message="tw-close" class="btn btn-primary">Close</$button>
 
 This is a modal wizard dialogue, stored in the tiddler SampleWizard.
 
-[img[Motovun Jack.jpg]]
+{{Motovun Jack.jpg}}
 
-You can <<button modal param:[[Introduction]] class:"btn btn-inverse"><nest wizards>>.
+You can <$button message="tw-modal" param="Introduction" class="btn btn-inverse">nest wizards</$button>.

@@ -38,6 +38,10 @@ Modal.prototype.display = function(title,options) {
 		modalFooterButtons = document.createElement("span"),
 		tiddler = this.wiki.getTiddler(title),
 		d = $tw.config.preferences.animationDuration + "ms";
+	// Don't do anything if the tiddler doesn't exist
+	if(!tiddler) {
+		return;
+	}
 	// Add classes
 	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
 	$tw.utils.addClass(modalWrapper,"modal");
@@ -61,18 +65,20 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		titleText = title;
 	}
-	var headerRenderer = this.wiki.parseText("text/vnd.tiddlywiki-run",titleText);
-	headerRenderer.execute([],title);
-	headerRenderer.renderInDom(headerTitle);
+	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",titleText),
+		headerRenderTree = new $tw.WikiRenderTree(headerParser,{wiki: $tw.wiki});
+	headerRenderTree.execute({tiddlerTitle: title});
+	headerRenderTree.renderInDom(headerTitle);
 	this.wiki.addEventListener("",function(changes) {
-		headerRenderer.refreshInDom(changes);
+		headerRenderTree.refreshInDom(changes);
 	});
 	// Render the body of the message
-	var bodyRenderer = this.wiki.parseTiddler(title);
-	bodyRenderer.execute([],title);
-	bodyRenderer.renderInDom(modalBody);
+	var bodyParser = this.wiki.parseTiddler(title),
+		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki});
+	bodyRenderTree.execute({tiddlerTitle: title});
+	bodyRenderTree.renderInDom(modalBody);
 	this.wiki.addEventListener("",function(changes) {
-		bodyRenderer.refreshInDom(changes);
+		bodyRenderTree.refreshInDom(changes);
 	});
 	// Setup the link if present
 	if(options.downloadLink) {
@@ -93,13 +99,14 @@ Modal.prototype.display = function(title,options) {
 	if(tiddler && tiddler.fields && tiddler.fields.footer) {
 		footerText = tiddler.fields.footer;
 	} else {
-		footerText = "<<button close class:'btn btn-primary'><Close>>";
+		footerText = '<$button message="tw-close" class="btn btn-primary">Close</$button>';
 	}
-	var footerRenderer = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText);
-	footerRenderer.execute([],title);
-	footerRenderer.renderInDom(modalFooterButtons);
+	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText),
+		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki});
+	footerRenderTree.execute({tiddlerTitle: title});
+	footerRenderTree.renderInDom(modalFooterButtons);
 	this.wiki.addEventListener("",function(changes) {
-		footerRenderer.refreshInDom(changes);
+		footerRenderTree.refreshInDom(changes);
 	});
 	// Add the close event handler
 	wrapper.addEventListener("tw-close",function(event) {
