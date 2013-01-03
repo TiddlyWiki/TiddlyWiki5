@@ -16,10 +16,10 @@ var FieldsWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-FieldsWidget.prototype.generateChildNodes = function() {
+FieldsWidget.prototype.generate = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
 	this.template = this.renderer.getAttribute("template");
@@ -46,14 +46,10 @@ FieldsWidget.prototype.generateChildNodes = function() {
 			}
 		}
 	}
-	// Create the wrapper node
-	var node = {
-		type: "element",
-		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
-		children: [{
-			type: "text",
-			text: text.join("")
-		}]
+	// Set the element
+	this.tag = "pre";
+	this.attributes = {
+		"class": "tw-fields"
 	};
 	// Set up the attributes for the wrapper element
 	var classes = [];
@@ -61,16 +57,19 @@ FieldsWidget.prototype.generateChildNodes = function() {
 		$tw.utils.pushTop(classes,this.renderer.getAttribute("class").split(" "));
 	}
 	if(classes.length > 0) {
-		$tw.utils.addClassToParseTreeNode(node,classes.join(" "));
+		this.attributes["class"] = classes.join(" ");
 	}
 	if(this.renderer.hasAttribute("style")) {
-		$tw.utils.addAttributeToParseTreeNode(node,"style",this.renderer.getAttribute("style"));
+		this.attributes.style = this.renderer.getAttribute("style");
 	}
 	if(this.renderer.hasAttribute("tooltip")) {
-		$tw.utils.addAttributeToParseTreeNode(node,"title",this.renderer.getAttribute("tooltip"));
+		this.attributes.title = this.renderer.getAttribute("tooltip");
 	}
 	// Create the renderers for the wrapper and the children
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[node]);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+		type: "text",
+		text: text.join("")
+	}]);
 };
 
 exports.fields = FieldsWidget;

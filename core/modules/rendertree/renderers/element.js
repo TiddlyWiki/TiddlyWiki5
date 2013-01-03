@@ -13,6 +13,31 @@ Element renderer
 "use strict";
 
 /*
+Element widget. A degenerate widget that renders ordinary HTML elements
+*/
+var ElementWidget = function(renderer) {
+	this.renderer = renderer;
+	this.tag = this.renderer.parseTreeNode.tag;
+	this.attributes = this.renderer.attributes;
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.events = this.renderer.parseTreeNode.events;
+};
+
+ElementWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+	// Check if any of our attribute dependencies have changed
+	if($tw.utils.count(changedAttributes) > 0) {
+		// Update our attributes
+		this.renderer.assignAttributes();
+	}
+	// Refresh any child nodes
+	$tw.utils.each(this.children,function(node) {
+		if(node.refreshInDom) {
+			node.refreshInDom(changedTiddlers);
+		}
+	});
+};
+
+/*
 Element renderer
 */
 var ElementRenderer = function(renderTree,renderContext,parseTreeNode) {
@@ -20,50 +45,87 @@ var ElementRenderer = function(renderTree,renderContext,parseTreeNode) {
 	this.renderTree = renderTree;
 	this.renderContext = renderContext;
 	this.parseTreeNode = parseTreeNode;
+	// Initialise widget classes
+	if(!this.widgetClasses) {
+		ElementRenderer.prototype.widgetClasses = $tw.modules.applyMethods("widget");
+	}
 	// Compute our dependencies
 	this.dependencies = {};
 	var self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
 			var tr = $tw.utils.parseTextReference(attribute.textReference);
-			if(tr.title) {
-				self.dependencies[tr.title] = true;
-			} else {
-				self.dependencies[renderContext.tiddlerTitle] = true;
-			}
+			self.dependencies[tr.title ? tr.title : renderContext.tiddlerTitle] = true;
 		}
 	});
 	// Compute our attributes
+	this.attributes = {};
 	this.computeAttributes();
-	// Create the renderers for the child nodes
-	this.children = this.renderTree.createRenderers(this.renderContext,this.parseTreeNode.children);
+	// Create the parasite widget object if required
+	if(this.parseTreeNode.tag.charAt(0) === "$") {
+		// Choose the class
+		var WidgetClass = this.widgetClasses[this.parseTreeNode.tag.substr(1)];
+		// Instantiate the widget
+		if(WidgetClass) {
+			this.widget = new WidgetClass(this);
+		} else {
+			WidgetClass = this.widgetClasses.error;
+			if(WidgetClass) {
+				this.widget = new WidgetClass(this,"Unknown widget '<" + this.parseTreeNode.tag + ">'");
+			}
+		}
+	}
+	// If we haven't got a widget, use the generic HTML element widget
+	if(!this.widget) {
+		this.widget = new ElementWidget(this);
+	}
 };
 
 ElementRenderer.prototype.computeAttributes = function() {
-	this.attributes = {};
+	var changedAttributes = {};
 	var self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
-			self.attributes[name] = self.renderTree.wiki.getTextReference(attribute.textReference,self.renderContext.tiddlerTitle);
+			var value = self.renderTree.wiki.getTextReference(attribute.textReference,self.renderContext.tiddlerTitle);
+			if(self.attributes[name] !== value) {
+				self.attributes[name] = value;
+				changedAttributes[name] = true;
+			}
 		} else { // String attribute
-			self.attributes[name] = attribute.value;
+			if(self.attributes[name] !== attribute.value) {
+				self.attributes[name] = attribute.value;
+				changedAttributes[name] = true;
+			}
 		}
 	});
+	return changedAttributes;
+};
+
+ElementRenderer.prototype.hasAttribute = function(name) {
+	return $tw.utils.hop(this.attributes,name);
+};
+
+ElementRenderer.prototype.getAttribute = function(name,defaultValue) {
+	if($tw.utils.hop(this.attributes,name)) {
+		return this.attributes[name];
+	} else {
+		return defaultValue;
+	}
 };
 
 ElementRenderer.prototype.render = function(type) {
 	var isHtml = type === "text/html",
 		output = [],attr,a,v;
 	if(isHtml) {
-		output.push("<",this.parseTreeNode.tag);
-		if(this.attributes) {
+		output.push("<",this.widget.tag);
+		if(this.widget.attributes) {
 			attr = [];
-			for(a in this.attributes) {
+			for(a in this.widget.attributes) {
 				attr.push(a);
 			}
 			attr.sort();
 			for(a=0; a<attr.length; a++) {
-				v = this.attributes[attr[a]];
+				v = this.widget.attributes[attr[a]];
 				if(v !== undefined) {
 					if($tw.utils.isArray(v)) {
 						v = v.join(" ");
@@ -78,19 +140,19 @@ ElementRenderer.prototype.render = function(type) {
 				}
 			}
 		}
-		if(!this.children || this.children.length === 0) {
+		if(!this.widget.children || this.widget.children.length === 0) {
 			output.push("/");
 		}
 		output.push(">");
 	}
-	if(this.children && this.children.length > 0) {
-		$tw.utils.each(this.children,function(node) {
+	if(this.widget.children && this.widget.children.length > 0) {
+		$tw.utils.each(this.widget.children,function(node) {
 			if(node.render) {
 				output.push(node.render(type));
 			}
 		});
 		if(isHtml) {
-			output.push("</",this.parseTreeNode.tag,">");
+			output.push("</",this.widget.tag,">");
 		}
 	}
 	return output.join("");
@@ -98,25 +160,29 @@ ElementRenderer.prototype.render = function(type) {
 
 ElementRenderer.prototype.renderInDom = function() {
 	// Create the element
-	this.domNode = document.createElement(this.parseTreeNode.tag);
+	this.domNode = document.createElement(this.widget.tag);
 	// Assign the attributes
 	this.assignAttributes();
 	// Render any child nodes
 	var self = this;
-	$tw.utils.each(this.children,function(node) {
+	$tw.utils.each(this.widget.children,function(node) {
 		if(node.renderInDom) {
 			self.domNode.appendChild(node.renderInDom());
 		}
 	});
 	// Assign any specified event handlers
-	$tw.utils.addEventListeners(this.domNode,this.parseTreeNode.events);
+	$tw.utils.addEventListeners(this.domNode,this.widget.events);
+	// Call postRenderInDom if the widget provides it
+	if(this.widget.postRenderInDom) {
+		this.widget.postRenderInDom();
+	}
 	// Return the dom node
 	return this.domNode;
 };
 
 ElementRenderer.prototype.assignAttributes = function() {
 	var self = this;
-	$tw.utils.each(this.attributes,function(v,a) {
+	$tw.utils.each(this.widget.attributes,function(v,a) {
 		if(v !== undefined) {
 			if($tw.utils.isArray(v)) { // Ahem, could there be arrays other than className?
 				self.domNode.className = v.join(" "); 
@@ -131,19 +197,73 @@ ElementRenderer.prototype.assignAttributes = function() {
 	});
 };
 
-ElementRenderer.prototype.refreshInDom = function(changes) {
-	// Check if any of our dependencies have changed
-	if($tw.utils.checkDependencies(this.dependencies,changes)) {
-		// Update our attributes
-		this.computeAttributes();
-		this.assignAttributes();
+ElementRenderer.prototype.refreshInDom = function(changedTiddlers) {
+	// Update our attributes if required
+	var changedAttributes = {};
+	if($tw.utils.checkDependencies(this.dependencies,changedTiddlers)) {
+		changedAttributes = this.computeAttributes();
 	}
-	// Refresh any child nodes
-	$tw.utils.each(this.children,function(node) {
-		if(node.refreshInDom) {
-			node.refreshInDom(changes);
+	// Check if the widget has a refreshInDom method
+	if(this.widget.refreshInDom) {
+		// Let the widget refresh itself
+		this.widget.refreshInDom(changedAttributes,changedTiddlers);
+	} else {
+		// If not, assign the attributes and refresh any child nodes
+		this.assignAttributes();
+		$tw.utils.each(this.widget.children,function(node) {
+			if(node.refreshInDom) {
+				node.refreshInDom(changedTiddlers);
+			}
+		});
+	}
+};
+
+ElementRenderer.prototype.getContextTiddlerTitle = function() {
+	var context = this.renderContext;
+	while(context) {
+		if($tw.utils.hop(context,"tiddlerTitle")) {
+			return context.tiddlerTitle;
 		}
-	});
+		context = context.parentContext;
+	}
+	return undefined;
+};
+
+/*
+Check for render context recursion by returning true if the members of a proposed new render context are already present in the render context chain
+*/
+ElementRenderer.prototype.checkContextRecursion = function(newRenderContext) {
+	var context = this.renderContext;
+	while(context) {
+		var match = true;
+		for(var member in newRenderContext) {
+			if($tw.utils.hop(newRenderContext,member)) {
+				if(newRenderContext[member] && newRenderContext[member] !== context[member]) {
+					match = false;
+				}
+			}
+		}
+		if(match) {
+			return true;
+		}
+		context = context.parentContext;
+	}
+	return false;
+};
+
+ElementRenderer.prototype.getContextScopeId = function() {
+	var guidBits = [],
+		context = this.renderContext;
+	while(context) {
+		$tw.utils.each(context,function(field,name) {
+			if(name !== "parentContext") {
+				guidBits.push(name + ":" + field + ";");
+			}
+		});
+		guidBits.push("-");
+		context = context.parentContext;
+	}
+	return $tw.utils.toBase64(guidBits.join(""));
 };
 
 exports.element = ElementRenderer

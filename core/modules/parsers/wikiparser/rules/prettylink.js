@@ -34,8 +34,8 @@ exports.parse = function() {
 	var text = this.match[1],
 		link = this.match[2] || text;
 	return [{
-		type: "widget",
-		tag: "link",
+		type: "element",
+		tag: "$link",
 		attributes: {
 			to: {type: "string", value: link}
 		},

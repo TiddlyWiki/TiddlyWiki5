@@ -16,10 +16,10 @@ var RevealWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-RevealWidget.prototype.generateChildNodes = function() {
+RevealWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.state = this.renderer.getAttribute("state");
 	this.type = this.renderer.getAttribute("type");
@@ -34,26 +34,27 @@ RevealWidget.prototype.generateChildNodes = function() {
 		this.stateTitle =  this.stateTitle + "-" + this.renderer.getContextScopeId();
 	}
 	this.readState();
-	// Compose the node
-	var node = {
-		type: "element",
-		tag: "div",
-		children: this.isOpen ? this.renderer.parseTreeNode.children : [],
-		events: [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}]
-	};
-	$tw.utils.addClassToParseTreeNode(node,"tw-reveal");
+	// Set up the element attributes
+	var classes = ["tw-reveal"],
+		styles = [];
 	if(this["class"]) {
-		$tw.utils.addClassToParseTreeNode(node,this["class"].join(" "));
+		$tw.utils.pushTop(classes,this["class"]);
 	}
 	switch(this.type) {
 		case "popup":
-			$tw.utils.addStyleToParseTreeNode(node,"position","absolute");
-			$tw.utils.addClassToParseTreeNode(node,"tw-popup");
+			styles.push("position:absolute;");
+			classes.push("tw-popup");
 			break;
 	}
-	$tw.utils.addStyleToParseTreeNode(node,"display",this.isOpen ? (this.isBlock ? "block" : "inline") : "none");
-	// Return the node
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[node]);
+	styles.push("display:" + (this.isOpen ? (this.renderer.parseTreeNode.isBlock ? "block" : "inline") : "none") + ";");
+	// Set the element
+	this.tag =  "div";
+	this.attributes = {
+		"class": classes.join(" "),
+		style: styles.join("")
+	};
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.isOpen ? this.renderer.parseTreeNode.children : []);
+	this.events = [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}];
 };
 
 /*
@@ -121,25 +122,20 @@ RevealWidget.prototype.handleClickEvent = function(event) {
 RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"]) {
-		// Remove old child nodes
-		$tw.utils.removeChildren(this.parentElement);
-		// Regenerate and render children
-		this.generateChildNodes();
-		var self = this;
-		$tw.utils.each(this.children,function(node) {
-			if(node.renderInDom) {
-				self.parentElement.appendChild(node.renderInDom());
-			}
-		});
+		// Regenerate and rerender the widget and replace the existing DOM node
+		this.generate();
+		var oldDomNode = this.renderer.domNode,
+			newDomNode = this.renderer.renderInDom();
+		oldDomNode.parentNode.replaceChild(newDomNode,oldDomNode);
 	} else {
 		var needChildrenRefresh = true; // Avoid refreshing the children nodes if we don't need to
 		// Get the open state
 		this.readState();
 		// Construct the child nodes if  required
-		if(this.isOpen && this.children[0].children.length === 0) {
-			this.children[0].children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
-			var parentNode = this.children[0].domNode;
-			$tw.utils.each(this.children[0].children,function(child) {
+		if(this.isOpen && this.children.length === 0) {
+			this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+			var parentNode = this.renderer.domNode;
+			$tw.utils.each(this.children,function(child) {
 				parentNode.appendChild(child.renderInDom());
 			});
 			needChildrenRefresh = false;
@@ -153,42 +149,44 @@ RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 			});
 		}
 		// Set the visibility of the children
-		this.children[0].domNode.style.display = this.isOpen ? (this.isBlock ? "block" : "inline") : "none";
+		this.renderer.domNode.style.display = this.isOpen ? (this.renderer.parseTreeNode.isBlock ? "block" : "inline") : "none";
 	}
 	// Position the content if required
-	this.postRenderInDom();
+	if(this.isOpen) {
+		this.postRenderInDom();
+	}
 };
 
 RevealWidget.prototype.postRenderInDom = function() {
 	switch(this.type) {
 		case "popup":
 			if(this.isOpen) {
-				this.children[0].domNode.style.position = "absolute";
-				this.children[0].domNode.style.zIndex = "1000";
+				this.renderer.domNode.style.position = "absolute";
+				this.renderer.domNode.style.zIndex = "1000";
 				switch(this.position) {
 					case "left":
-						this.children[0].domNode.style.left = (this.popup.left - this.children[0].domNode.offsetWidth) + "px";
-						this.children[0].domNode.style.top = this.popup.top + "px";
+						this.renderer.domNode.style.left = (this.popup.left - this.renderer.domNode.offsetWidth) + "px";
+						this.renderer.domNode.style.top = this.popup.top + "px";
 						break;
 					case "above":
-						this.children[0].domNode.style.left = this.popup.left + "px";
-						this.children[0].domNode.style.top = (this.popup.top - this.children[0].domNode.offsetHeight) + "px";
+						this.renderer.domNode.style.left = this.popup.left + "px";
+						this.renderer.domNode.style.top = (this.popup.top - this.renderer.domNode.offsetHeight) + "px";
 						break;
 					case "aboveright":
-						this.children[0].domNode.style.left = (this.popup.left + this.popup.width) + "px";
-						this.children[0].domNode.style.top = (this.popup.top + this.popup.height - this.children[0].domNode.offsetHeight) + "px";
+						this.renderer.domNode.style.left = (this.popup.left + this.popup.width) + "px";
+						this.renderer.domNode.style.top = (this.popup.top + this.popup.height - this.renderer.domNode.offsetHeight) + "px";
 						break;
 					case "right":
-						this.children[0].domNode.style.left = (this.popup.left + this.popup.width) + "px";
-						this.children[0].domNode.style.top = this.popup.top + "px";
+						this.renderer.domNode.style.left = (this.popup.left + this.popup.width) + "px";
+						this.renderer.domNode.style.top = this.popup.top + "px";
 						break;
 					case "belowleft":
-						this.children[0].domNode.style.left = (this.popup.left + this.popup.width - this.children[0].domNode.offsetWidth) + "px";
-						this.children[0].domNode.style.top = (this.popup.top + this.popup.height) + "px";
+						this.renderer.domNode.style.left = (this.popup.left + this.popup.width - this.renderer.domNode.offsetWidth) + "px";
+						this.renderer.domNode.style.top = (this.popup.top + this.popup.height) + "px";
 						break;
 					default: // Below
-						this.children[0].domNode.style.left = this.popup.left + "px";
-						this.children[0].domNode.style.top = (this.popup.top + this.popup.height) + "px";
+						this.renderer.domNode.style.left = this.popup.left + "px";
+						this.renderer.domNode.style.top = (this.popup.top + this.popup.height) + "px";
 						break;
 				}
 			}

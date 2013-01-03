@@ -16,10 +16,10 @@ var ButtonWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-ButtonWidget.prototype.generateChildNodes = function() {
+ButtonWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.message = this.renderer.getAttribute("message");
 	this.param = this.renderer.getAttribute("param");
@@ -30,7 +30,7 @@ ButtonWidget.prototype.generateChildNodes = function() {
 	this.qualifyTiddlerTitles = this.renderer.getAttribute("qualifyTiddlerTitles");
 	this["class"] = this.renderer.getAttribute("class");
 	// Compose the button
-	var classes = ["tw-tiddlybutton"];
+	var classes = ["tw-button"];
 	if(this["class"]) {
 		$tw.utils.pushTop(classes,this["class"]);
 	}
@@ -39,15 +39,11 @@ ButtonWidget.prototype.generateChildNodes = function() {
 		events.push({name: "mouseover", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 		events.push({name: "mouseout", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 	}
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
-		type: "element",
-		tag: "button",
-		attributes: {
-			"class": {type: "string", value: classes.join(" ")}
-		},
-		children: this.renderer.parseTreeNode.children,
-		events: events
-	}]);
+	// Set the return element
+	this.tag = "button";
+	this.attributes ={"class": classes.join(" ")};
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.events = events;
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
@@ -99,16 +95,11 @@ ButtonWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 ButtonWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
  	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
-		// Remove old child nodes
-		$tw.utils.removeChildren(this.parentElement);
-		// Regenerate and render children
-		this.generateChildNodes();
-		var self = this;
-		$tw.utils.each(this.children,function(node) {
-			if(node.renderInDom) {
-				self.parentElement.appendChild(node.renderInDom());
-			}
-		});
+		// Regenerate and rerender the widget and replace the existing DOM node
+		this.generate();
+		var oldDomNode = this.renderer.domNode,
+			newDomNode = this.renderer.renderInDom();
+		oldDomNode.parentNode.replaceChild(newDomNode,oldDomNode);
 	} else {
 		// We don't need to refresh ourselves, so just refresh any child nodes
 		$tw.utils.each(this.children,function(node) {

@@ -32,9 +32,9 @@ exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
 	if(this.is.block) {
-		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(\/)?>(\r?\n)/mg;
+		this.matchRegExp = /<([A-Za-z\$]+)(\s*[^>]*?)(\/)?>(\r?\n)/mg;
 	} else {
-		this.matchRegExp = /<(\$)?([A-Za-z]+)(\s*[^>]*?)(?:(\/>)|(?:>(\r?\n)?))/mg;
+		this.matchRegExp = /<([A-Za-z\$]+)(\s*[^>]*?)(?:(\/>)|(?:>(\r?\n)?))/mg;
 	}
 };
 
@@ -43,11 +43,10 @@ Parse the most recent match
 */
 exports.parse = function() {
 	// Get all the details of the match in case this parser is called recursively
-	var isWidget = !!this.match[1],
-		tagName = this.match[2],
-		attributeString = this.match[3],
-		isSelfClosing = !!this.match[4],
-		hasLineBreak = !!this.match[5];
+	var tagName = this.match[1],
+		attributeString = this.match[2],
+		isSelfClosing = !!this.match[3],
+		hasLineBreak = !!this.match[4];
 	// Move past the tag name and parameters
 	this.parser.pos = this.matchRegExp.lastIndex;
 	var reAttr = /\s*([A-Za-z\-_]+)(?:\s*=\s*(?:("[^"]*")|('[^']*')|(\{\{[^\}]*\}\})|([^"'\s]+)))?/mg;
@@ -72,8 +71,8 @@ exports.parse = function() {
 		attrMatch = reAttr.exec(attributeString);
 	}
 	// Process the end tag
-	if(!isSelfClosing && (isWidget || voidElements.indexOf(tagName) === -1)) {
-		var reEndString = "(</" + (isWidget ? "\\$" : "") + tagName + ">)",
+	if(!isSelfClosing && voidElements.indexOf(tagName) === -1) {
+		var reEndString = "(</" + $tw.utils.escapeRegExp(tagName) + ">)",
 			reEnd = new RegExp(reEndString,"mg"),
 			content;
 		if(hasLineBreak) {
@@ -90,7 +89,7 @@ exports.parse = function() {
 		content = [];
 	}
 	var element = {
-		type: isWidget ? "widget" : "element",
+		type: "element",
 		tag: tagName,
 		isBlock: this.is.block || hasLineBreak,
 		attributes: attributes,

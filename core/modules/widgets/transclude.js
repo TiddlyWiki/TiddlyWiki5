@@ -12,7 +12,7 @@ Attributes:
 The simplest case is to just supply a target tiddler:
 
 {{{
-<_transclude target="Foo"/>
+<$transclude target="Foo"/>
 }}}
 
 This will render the tiddler Foo within the current tiddler. If the tiddler Foo includes
@@ -24,7 +24,7 @@ widget are those of the tiddler doing the transcluding, then you can instead spe
 as a template:
 
 {{{
-<_transclude template="Foo"/>
+<$transclude template="Foo"/>
 }}}
 
 The effect is the same as the previous example: the text of the tiddler Foo is rendered. The
@@ -33,7 +33,7 @@ difference is that the view widget will access the fields of the tiddler doing t
 The `target` and `template` attributes may be combined:
 
 {{{
-<_transclude template="Bar" target="Foo"/>
+<$transclude template="Bar" target="Foo"/>
 }}}
 
 Here, the text of the tiddler `Bar` will be transcluded, with the widgets within it accessing the fields
@@ -50,13 +50,14 @@ var TranscludeWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-TranscludeWidget.prototype.generateChildNodes = function() {
+TranscludeWidget.prototype.generate = function() {
 	var tr, templateParseTree, templateTiddler;
 	// Get the render target details
 	this.targetTitle = this.renderer.getAttribute("target",this.renderer.getContextTiddlerTitle());
+	this.targetField = this.renderer.getAttribute("field","text");
 	// Get the render tree for the template
 	this.templateTitle = undefined;
 	if(this.renderer.parseTreeNode.children && this.renderer.parseTreeNode.children.length > 0) {
@@ -71,32 +72,27 @@ TranscludeWidget.prototype.generateChildNodes = function() {
 		})) {
 			templateParseTree = [{type: "text", text: "Tiddler recursion error in transclude widget"}];	
 		} else {
-			var parser = this.renderer.renderTree.wiki.parseTiddler(this.templateTitle,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
+			var parser;
+			if(this.targetField === "text") {
+				parser = this.renderer.renderTree.wiki.parseTiddler(this.templateTitle,{parseAsInline: !this.renderer.parseTreeNode.isBlock})
+			} else {
+				var tiddler = this.renderer.renderTree.wiki.getTiddler(this.targetTitle),
+					text = tiddler ? tiddler.fields[this.targetField] : "";
+				if(text === undefined) {
+					text = ""
+				}
+				parser = this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
+			}
 			templateParseTree = parser ? parser.tree : [];
 		}
 	}
-	// Create the wrapper node
-	var node = {
-		type: "element",
-		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
-		children: templateParseTree
-	};
 	// Set up the attributes for the wrapper element
-	var classes = [];
+	var classes = ["tw-transclude"];
 	if(this.renderer.hasAttribute("class")) {
 		$tw.utils.pushTop(classes,this.renderer.getAttribute("class").split(" "));
 	}
 	if(!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle)) {
 		$tw.utils.pushTop(classes,"tw-tiddler-missing");
-	}
-	if(classes.length > 0) {
-		$tw.utils.addClassToParseTreeNode(node,classes.join(" "));
-	}
-	if(this.renderer.hasAttribute("style")) {
-		$tw.utils.addAttributeToParseTreeNode(node,"style",this.renderer.getAttribute("style"));
-	}
-	if(this.renderer.hasAttribute("tooltip")) {
-		$tw.utils.addAttributeToParseTreeNode(node,"title",this.renderer.getAttribute("tooltip"));
 	}
 	// Create the renderers for the wrapper and the children
 	var newRenderContext = {
@@ -104,7 +100,19 @@ TranscludeWidget.prototype.generateChildNodes = function() {
 		templateTitle: this.templateTitle,
 		parentContext: this.renderer.renderContext
 	};
-	this.children = this.renderer.renderTree.createRenderers(newRenderContext,[node]);
+	// Set the element
+	this.tag = this.renderer.parseTreeNode.isBlock ? "div" : "span";
+	this.attributes = {};
+	if(classes.length > 0) {
+		this.attributes["class"] = classes.join(" ");
+	}
+	if(this.renderer.hasAttribute("style")) {
+		this.attributes.style = this.renderer.getAttribute("style");
+	}
+	if(this.renderer.hasAttribute("tooltip")) {
+		this.attributes.title = this.renderer.getAttribute("tooltip");
+	}
+	this.children = this.renderer.renderTree.createRenderers(newRenderContext,templateParseTree);
 };
 
 TranscludeWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
@@ -114,16 +122,11 @@ TranscludeWidget.prototype.refreshInDom = function(changedAttributes,changedTidd
 	}
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.target || changedAttributes.template || (this.targetTitle && changedTiddlers[this.targetTitle]) || (this.templateTitle && changedTiddlers[this.templateTitle])) {
-		// Remove old child nodes
-		$tw.utils.removeChildren(this.parentElement);
-		// Regenerate and render children
-		this.generateChildNodes();
-		var self = this;
-		$tw.utils.each(this.children,function(node) {
-			if(node.renderInDom) {
-				self.parentElement.appendChild(node.renderInDom());
-			}
-		});
+		// Regenerate and rerender the widget and replace the existing DOM node
+		this.generate();
+		var oldDomNode = this.renderer.domNode,
+			newDomNode = this.renderer.renderInDom();
+		oldDomNode.parentNode.replaceChild(newDomNode,oldDomNode);
 	} else {
 		// We don't need to refresh ourselves, so just refresh any child nodes
 		$tw.utils.each(this.children,function(node) {

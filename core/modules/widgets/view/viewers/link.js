@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/widgets/view/viewers/link.js
 type: application/javascript
-module-type: newfieldviewer
+module-type: fieldviewer
 
 A viewer for viewing tiddler fields as a link
 
@@ -20,23 +20,23 @@ var LinkViewer = function(viewWidget,tiddler,field,value) {
 };
 
 LinkViewer.prototype.render = function() {
-	var parseTree = [];
-	if(this.value === undefined) {
-		parseTree.push({type: "text", text: ""});
-	} else {
-		parseTree.push({
-			type: "widget",
-			tag: "link",
+	var text = this.value === undefined ? "" : this.value;
+	// Set the element details
+	this.viewWidget.tag = "span";
+	this.viewWidget.attributes = {
+		"class": "tw-view-link"
+	};
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+			type: "element",
+			tag: "$link",
 			attributes: {
-				to: {type: "string", value: this.value}
+				to: {type: "string", value: text}
 			},
 			children: [{
 				type: "text",
-				text: this.value
+				text: text
 			}]
-		})
-	}
-	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,parseTree);
+		}]);
 };
 
 exports.link = LinkViewer;

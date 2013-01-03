@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/widgets/view/viewers/htmlencoded.js
 type: application/javascript
-module-type: newfieldviewer
+module-type: fieldviewer
 
 A viewer for viewing tiddler fields as HTML encoded text
 
@@ -28,7 +28,12 @@ HtmlEncodedViewer.prototype.render = function() {
 	if(this.value !== undefined && this.value !== null) {
 		value = this.value;
 	}
-	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	// Set the element details
+	this.viewWidget.tag = "span";
+	this.viewWidget.attributes = {
+		"class": "tw-view-htmlencoded"
+	};
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
 		type: "text",
 		text: $tw.utils.htmlEncode(value)
 	}]);

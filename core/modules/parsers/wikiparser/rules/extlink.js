@@ -37,8 +37,8 @@ exports.parse = function() {
 		return [{type: "text", text: this.match[0].substr(1)}];
 	} else {
 		return [{
-			type: "widget",
-			tag: "link",
+			type: "element",
+			tag: "$link",
 			attributes: {
 				to: {type: "string", value: this.match[0]}
 			},

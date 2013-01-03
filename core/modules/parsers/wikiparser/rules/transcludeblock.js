@@ -40,8 +40,8 @@ exports.parse = function() {
 		classes = this.match[5];
 	// Return the transclude widget
 	var node = {
-		type: "widget",
-		tag: "transclude",
+		type: "element",
+		tag: "$transclude",
 		attributes: {
 			target: {type: "string", value: targetTitle}
 		},

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/widgets/view/viewers/date.js
 type: application/javascript
-module-type: newfieldviewer
+module-type: fieldviewer
 
 A viewer for viewing tiddler fields as a date
 
@@ -25,7 +25,12 @@ DateViewer.prototype.render = function() {
 	if(this.value !== undefined) {
 		value = $tw.utils.formatDateString(this.value,template);
 	}
-	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	// Set the element details
+	this.viewWidget.tag = "span";
+	this.viewWidget.attributes = {
+		"class": "tw-view-date"
+	};
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
 		type: "text",
 		text: value
 	}]);

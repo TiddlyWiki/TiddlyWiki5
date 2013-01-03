@@ -16,19 +16,20 @@ var NavigatorWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-NavigatorWidget.prototype.generateChildNodes = function() {
+NavigatorWidget.prototype.generate = function() {
 	// Get our parameters
 	this.storyTitle = this.renderer.getAttribute("story");
 	this.historyTitle = this.renderer.getAttribute("history");
-	// Render our children
+	// Set the element
+	this.tag = "div";
+	this.attributes = {
+		"class": "tw-navigator"
+	};
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
-};
-
-NavigatorWidget.prototype.getEventListeners = function() {
-	return [
+	this.events = [
 		{name: "tw-navigate", handlerObject: this, handlerMethod: "handleNavigateEvent"},
 		{name: "tw-EditTiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
 		{name: "tw-SaveTiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},

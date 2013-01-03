@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/widgets/view/viewers/jsencoded.js
 type: application/javascript
-module-type: newfieldviewer
+module-type: fieldviewer
 
 A viewer for viewing tiddler fields as JavaScript stringified text
 
@@ -28,10 +28,15 @@ JsEncodedViewer.prototype.render = function() {
 	if(this.value !== undefined && this.value !== null) {
 		value = this.value;
 	}
-	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
-		type: "text",
-		text: $tw.utils.stringify(value)
-	}]);
+	// Set the element details
+	this.viewWidget.tag = "pre";
+	this.viewWidget.attributes = {
+		"class": "tw-view-jsencoded"
+	};
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+			type: "text",
+			text: $tw.utils.stringify(value)
+		}]);
 };
 
 exports.jsencoded = JsEncodedViewer;

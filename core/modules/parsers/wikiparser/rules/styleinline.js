@@ -41,6 +41,9 @@ exports.parse = function() {
 	var node = {
 		type: "element",
 		tag: "span",
+		attributes: {
+			"class": {type: "string", value: "tw-inline-style"}
+		},
 		children: tree
 	};
 	if(classString) {

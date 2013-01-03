@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/widgets/view/viewers/wikified.js
 type: application/javascript
-module-type: newfieldviewer
+module-type: fieldviewer
 
 A viewer for viewing tiddler fields as wikified text
 
@@ -20,21 +20,22 @@ var WikifiedViewer = function(viewWidget,tiddler,field,value) {
 };
 
 WikifiedViewer.prototype.render = function() {
-	var parseTree;
-	// If we're viewing the text field of a tiddler then we'll transclude it
-	if(this.tiddler && this.field === "text") {
-		parseTree = [{
-			type: "widget",
-			tag: "transclude",
+	// Set the element details
+	this.viewWidget.tag = this.viewWidget.renderer.parseTreeNode.isBlock ? "div" : "span";
+	this.viewWidget.attributes = {};
+	var node = {
+			type: "element",
+			tag: "$transclude",
 			attributes: {
-				target: {type: "string", value: this.tiddler.fields.title}
+				"class": "tw-view-wikified",
+				field: {type: "string", value: this.field}
 			},
 			isBlock: this.viewWidget.renderer.parseTreeNode.isBlock
-		}];
-	} else {
-		parseTree = this.viewWidget.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",this.value).tree;
+		};
+	if(this.tiddler && this.tiddler.fields.title) {
+		node.attributes.target = {type: "string", value: this.tiddler.fields.title}
 	}
-	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,parseTree);
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[node]);
 };
 
 exports.wikified = WikifiedViewer;

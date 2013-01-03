@@ -17,23 +17,19 @@ var ErrorWidget = function(renderer,errorMessage) {
 	this.renderer = renderer;
 	this.errorMessage = errorMessage;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-ErrorWidget.prototype.generateChildNodes = function() {
-	// Create the wrapper node
-	var node = {
-		type: "element",
-		tag: "span",
-		children: [{
+ErrorWidget.prototype.generate = function() {
+	// Set the element details
+	this.tag = "span";
+	this.attributes = {
+		"class": "tw-error-widget"
+	};
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
 			type: "text",
 			text: this.errorMessage
-		}]
-	};
-	// Set up the attributes for the wrapper element
-	$tw.utils.addClassToParseTreeNode(node,"tw-error-widget");
-	// Create the renderers for the wrapper and the children
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[node]);
+		}]);
 };
 
 exports.error = ErrorWidget;

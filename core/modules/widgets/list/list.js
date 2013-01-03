@@ -15,8 +15,8 @@ The list widget
 var ListWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
-	// Generate child nodes
-	this.generateChildNodes();
+	// Generate widget elements
+	this.generate();
 };
 
 /*
@@ -30,7 +30,7 @@ var typeMappings = {
 	shadows: "[is[shadow]sort[title]]"
 };
 
-ListWidget.prototype.generateChildNodes = function() {
+ListWidget.prototype.generate = function() {
 	// Get our attributes
 	this.itemClass = this.renderer.getAttribute("itemClass");
 	this.template = this.renderer.getAttribute("template");
@@ -50,15 +50,11 @@ ListWidget.prototype.generateChildNodes = function() {
 		}		
 	}
 	// Create the list frame element
-	var classes = ["tw-list-frame"];
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
-		type: "element",
-		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
-		attributes: {
-			"class": {type: "string", value: classes.join(" ")}
-		},
-		children: listMembers
-	}]);
+	this.tag = this.renderer.parseTreeNode.isBlock ? "div" : "span";
+	this.attributes = {
+		"class": "tw-list-frame"
+	};
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,listMembers);
 };
 
 ListWidget.prototype.getTiddlerList = function() {
@@ -138,8 +134,8 @@ ListWidget.prototype.createListElementMacro = function(title) {
 		} else {
 			// Use default content
 			templateTree = [{
-				type: "widget",
-				tag: "view",
+				type: "element",
+				tag: "$view",
 				attributes: {
 					field: {type: "string", value: "title"},
 					format: {type: "string", value: "link"}
@@ -147,10 +143,10 @@ ListWidget.prototype.createListElementMacro = function(title) {
 			}];
 		}
 	}
-	// Create the tiddler macro
+	// Create the transclude widget
 	return {
-		type: "widget",
-		tag: "transclude",
+		type: "element",
+		tag: "$transclude",
 		attributes: {
 			target: {type: "string", value: title},
 			template: {type: "string", value: template}
@@ -164,11 +160,11 @@ Remove a list element from the list, along with the attendant DOM nodes
 */
 ListWidget.prototype.removeListElement = function(index) {
 	// Get the list element
-	var listElement = this.children[0].children[index];
+	var listElement = this.children[index];
 	// Remove the DOM node
 	listElement.domNode.parentNode.removeChild(listElement.domNode);
 	// Then delete the actual renderer node
-	this.children[0].children.splice(index,1);
+	this.children.splice(index,1);
 };
 
 /*
@@ -177,8 +173,8 @@ startIndex: index to start search (use zero to search from the top)
 title: tiddler title to seach for
 */
 ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
-	while(startIndex < this.children[0].children.length) {
-		if(this.children[0].children[startIndex].children[0].attributes.target === title) {
+	while(startIndex < this.children.length) {
+		if(this.children[startIndex].widget.children[0].attributes.target === title) {
 			return startIndex;
 		}
 		startIndex++;
@@ -189,16 +185,11 @@ ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
 ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Reexecute the widget if any of our attributes have changed
 	if(changedAttributes.itemClass || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.type || changedAttributes.filter || changedAttributes.template) {
-		// Remove old child nodes
-		$tw.utils.removeChildren(this.parentElement);
-		// Regenerate and render children
-		this.generateChildNodes();
-		var self = this;
-		$tw.utils.each(this.children,function(node) {
-			if(node.renderInDom) {
-				self.parentElement.appendChild(node.renderInDom());
-			}
-		});
+		// Regenerate and rerender the widget and replace the existing DOM node
+		this.generate();
+		var oldDomNode = this.renderer.domNode,
+			newDomNode = this.renderer.renderInDom();
+		oldDomNode.parentNode.replaceChild(newDomNode,oldDomNode);
 	} else {
 		// Handle any changes to the list, and refresh any nodes we're reusing
 		this.handleListChanges(changedTiddlers);
@@ -207,8 +198,7 @@ ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 
 ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	var t,
-		prevListLength = this.list.length,
-		frame = this.children[0];
+		prevListLength = this.list.length;
 	// Get the list of tiddlers, having saved the previous length
 	this.getTiddlerList();
 	// Check if the list is empty
@@ -228,10 +218,10 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 				this.removeListElement(t);
 			}
 			// Insert the empty message
-			frame.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[this.getEmptyMessage()]);
-			$tw.utils.each(frame.children,function(node) {
+			this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[this.getEmptyMessage()]);
+			$tw.utils.each(this.children,function(node) {
 				if(node.renderInDom) {
-					frame.domNode.appendChild(node.renderInDom());
+					this.renderer.domNode.appendChild(node.renderInDom());
 				}
 			});
 			return;
@@ -248,19 +238,19 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		var index = this.findListElementByTitle(t,this.list[t]);
 		if(index === undefined) {
 			// The list element isn't there, so we need to insert it
-			frame.children.splice(t,0,this.renderer.renderTree.createRenderer(this.renderer.renderContext,this.createListElement(this.list[t])));
-			frame.domNode.insertBefore(frame.children[t].renderInDom(),frame.domNode.childNodes[t]);
+			this.children.splice(t,0,this.renderer.renderTree.createRenderer(this.renderer.renderContext,this.createListElement(this.list[t])));
+			this.renderer.domNode.insertBefore(this.children[t].renderInDom(),this.renderer.domNode.childNodes[t]);
 		} else {
 			// Delete any list elements preceding the one we want
 			for(var n=index-1; n>=t; n--) {
 				this.removeListElement(n);
 			}
 			// Refresh the node we're reusing
-			frame.children[t].refreshInDom(changedTiddlers);
+			this.children[t].refreshInDom(changedTiddlers);
 		}
 	}
 	// Remove any left over elements
-	for(t=frame.children.length-1; t>=this.list.length; t--) {
+	for(t=this.children.length-1; t>=this.list.length; t--) {
 		this.removeListElement(t);
 	}
 };

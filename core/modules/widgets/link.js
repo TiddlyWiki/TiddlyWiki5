@@ -21,10 +21,10 @@ var LinkWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-LinkWidget.prototype.generateChildNodes = function() {
+LinkWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.to = this.renderer.getAttribute("to");
 	this.hover = this.renderer.getAttribute("hover");
@@ -51,16 +51,14 @@ LinkWidget.prototype.generateChildNodes = function() {
 		events.push({name: "mouseover", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 		events.push({name: "mouseout", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 	}
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
-		type: "element",
-		tag: "a",
-		attributes: {
-			href: {type: "string", value: this.isExternal ? this.to : encodeURIComponent(this.to)},
-			"class": {type: "string", value: classes.join(" ")}
-		},
-		children: this.renderer.parseTreeNode.children,
-		events: events
-	}]);
+	// Set up the element
+	this.tag = "a";
+	this.attributes = {
+		href: this.isExternal ? this.to : encodeURIComponent(this.to),
+		"class": classes.join(" ")
+	};
+	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.events = events;
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {
@@ -71,7 +69,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		$tw.utils.dispatchCustomEvent(event.target,"tw-navigate",{
 			navigateTo: this.to,
 			navigateFromNode: this,
-			navigateFromClientRect: this.children[0].domNode.getBoundingClientRect()
+			navigateFromClientRect: this.renderer.domNode.getBoundingClientRect()
 		});
 		event.preventDefault();
 		return false;
@@ -81,10 +79,8 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 LinkWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 	if(this.hover) {
 		$tw.popup.triggerPopup({
-			textRef: this.hover,
-			domNode: this.children[0].domNode,
-			qualifyTiddlerTitles: this.qualifyHoverTitle,
-			contextTiddlerTitle: this.renderer.getContextTiddlerTitle(),
+			title: this.hover,
+			domNode: this.renderer.domNode,
 			wiki: this.renderer.renderTree.wiki
 		});
 	}
@@ -95,20 +91,15 @@ LinkWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 LinkWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Set the class for missing tiddlers
 	if(this.targetTitle && changedTiddlers[this.targetTitle]) {
-		$tw.utils.toggleClass(this.children[0].domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
+		$tw.utils.toggleClass(this.renderer.domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
 	}
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.to || changedAttributes.hover || (this.to && changedTiddlers[this.to]) || (this.hover && changedTiddlers[this.hover])) {
-		// Remove old child nodes
-		$tw.utils.removeChildren(this.parentElement);
-		// Regenerate and render children
-		this.generateChildNodes();
-		var self = this;
-		$tw.utils.each(this.children,function(node) {
-			if(node.renderInDom) {
-				self.parentElement.appendChild(node.renderInDom());
-			}
-		});
+		// Regenerate and rerender the widget and replace the existing DOM node
+		this.generate();
+		var oldDomNode = this.renderer.domNode,
+			newDomNode = this.renderer.renderInDom();
+		oldDomNode.parentNode.replaceChild(newDomNode,oldDomNode);
 	} else {
 		// We don't need to refresh ourselves, so just refresh any child nodes
 		$tw.utils.each(this.children,function(node) {

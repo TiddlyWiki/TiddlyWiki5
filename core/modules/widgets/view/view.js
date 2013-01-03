@@ -31,28 +31,28 @@ TextViewer.prototype.render = function() {
 	if(this.value !== undefined && this.value !== null) {
 		value = this.value;
 	}
-	return this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	// Set the element details
+	this.viewWidget.tag = "span";
+	this.viewWidget.attributes = {};
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
 		type: "text",
 		text: value
 	}]);
 };
 
-// We'll cache the available field viewers here
-var fieldViewers = undefined;
-
 var ViewWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
 	// Initialise the field viewers if they've not been done already
-	if(!fieldViewers) {
-		fieldViewers = {text: TextViewer}; // Start with the built-in text viewer
-		$tw.modules.applyMethods("newfieldviewer",fieldViewers);
+	if(!this.fieldViewers) {
+		ViewWidget.prototype.fieldViewers = {text: TextViewer}; // Start with the built-in text viewer
+		$tw.modules.applyMethods("fieldviewer",this.fieldViewers);
 	}
 	// Generate child nodes
-	this.generateChildNodes();
+	this.generate();
 };
 
-ViewWidget.prototype.generateChildNodes = function() {
+ViewWidget.prototype.generate = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
 	this.fieldName = this.renderer.getAttribute("field","text");
@@ -82,13 +82,13 @@ ViewWidget.prototype.generateChildNodes = function() {
 		}
 	}
 	// Choose the viewer to use
-	var Viewer = fieldViewers.text;
-	if($tw.utils.hop(fieldViewers,this.format)) {
-		Viewer = fieldViewers[this.format];
+	var Viewer = this.fieldViewers.text;
+	if($tw.utils.hop(this.fieldViewers,this.format)) {
+		Viewer = this.fieldViewers[this.format];
 	}
 	this.viewer = new Viewer(this,tiddler,this.fieldName,value);
-	// Ask the viewer to create the children
-	this.children = this.viewer.render();
+	// Ask the viewer to create the widget element
+	this.viewer.render();
 };
 
 ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
@@ -96,14 +96,11 @@ ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || (this.tiddlerTitle && changedTiddlers[this.tiddlerTitle])) {
 		// Remove old child nodes
 		$tw.utils.removeChildren(this.parentElement);
-		// Regenerate and render children
-		this.generateChildNodes();
-		var self = this;
-		$tw.utils.each(this.children,function(node) {
-			if(node.renderInDom) {
-				self.parentElement.appendChild(node.renderInDom());
-			}
-		});
+		// Regenerate and rerender the widget and replace the existing DOM node
+		this.generate();
+		var oldDomNode = this.renderer.domNode,
+			newDomNode = this.renderer.renderInDom();
+		oldDomNode.parentNode.replaceChild(newDomNode,oldDomNode);
 	} else {
 		// We don't need to refresh ourselves, so just refresh any child nodes
 		$tw.utils.each(this.children,function(node) {
