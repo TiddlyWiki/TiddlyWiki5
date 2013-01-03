@@ -200,10 +200,10 @@ This is my nice and simple block of text. HelloThere
 
 ! Widgets
 
-Widgets provide rich functionality within WikiText. For example, the `<_video>` widget can be used to embed videos from YouTube, Vimeo or the Internet Archive:
+Widgets provide rich functionality within WikiText. For example, the `<$video>` widget can be used to embed videos from YouTube, Vimeo or the Internet Archive:
 
 ```
-<_video src="32001208" type="vimeo" />
+<$video src="32001208" type="vimeo" />
 ```
 
 For full details of the available widgets, see the [[Docs]].
