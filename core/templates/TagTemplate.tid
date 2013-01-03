@@ -9,7 +9,7 @@ title: $:/templates/TagTemplate
 *.divider
 * <div>
 <$list filter="[is[current]tagging[]sort[title]]">
-<$view field="title" format="link" />
+<li><$view field="title" format="link" /></li>
 </$list>
 </div>
 
