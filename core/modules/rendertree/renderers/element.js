@@ -86,7 +86,7 @@ ElementRenderer.prototype.computeAttributes = function() {
 	var self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
-			var value = self.renderTree.wiki.getTextReference(attribute.textReference,self.renderContext.tiddlerTitle);
+			var value = self.renderTree.wiki.getTextReference(attribute.textReference,"",self.renderContext.tiddlerTitle);
 			if(self.attributes[name] !== value) {
 				self.attributes[name] = value;
 				changedAttributes[name] = true;
