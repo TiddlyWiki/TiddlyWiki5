@@ -114,70 +114,82 @@ ElementRenderer.prototype.getAttribute = function(name,defaultValue) {
 };
 
 ElementRenderer.prototype.render = function(type) {
-	var isHtml = type === "text/html",
-		output = [],attr,a,v;
-	if(isHtml) {
-		output.push("<",this.widget.tag);
-		if(this.widget.attributes) {
-			attr = [];
-			for(a in this.widget.attributes) {
-				attr.push(a);
-			}
-			attr.sort();
-			for(a=0; a<attr.length; a++) {
-				v = this.widget.attributes[attr[a]];
-				if(v !== undefined) {
-					if($tw.utils.isArray(v)) {
-						v = v.join(" ");
-					} else if(typeof v === "object") {
-						var s = [];
-						for(var p in v) {
-							s.push(p + ":" + v[p] + ";");
+	// Check if our widget is providing an element
+	if(this.widget.tag) {
+		var isHtml = type === "text/html",
+			output = [],attr,a,v;
+		if(isHtml) {
+			output.push("<",this.widget.tag);
+			if(this.widget.attributes) {
+				attr = [];
+				for(a in this.widget.attributes) {
+					attr.push(a);
+				}
+				attr.sort();
+				for(a=0; a<attr.length; a++) {
+					v = this.widget.attributes[attr[a]];
+					if(v !== undefined) {
+						if($tw.utils.isArray(v)) {
+							v = v.join(" ");
+						} else if(typeof v === "object") {
+							var s = [];
+							for(var p in v) {
+								s.push(p + ":" + v[p] + ";");
+							}
+							v = s.join("");
 						}
-						v = s.join("");
+						output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
 					}
-					output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
 				}
 			}
-		}
-		if(!this.widget.children || this.widget.children.length === 0) {
-			output.push("/");
-		}
-		output.push(">");
-	}
-	if(this.widget.children && this.widget.children.length > 0) {
-		$tw.utils.each(this.widget.children,function(node) {
-			if(node.render) {
-				output.push(node.render(type));
+			if(!this.widget.children || this.widget.children.length === 0) {
+				output.push("/");
 			}
-		});
-		if(isHtml) {
-			output.push("</",this.widget.tag,">");
+			output.push(">");
 		}
+		if(this.widget.children && this.widget.children.length > 0) {
+			$tw.utils.each(this.widget.children,function(node) {
+				if(node.render) {
+					output.push(node.render(type));
+				}
+			});
+			if(isHtml) {
+				output.push("</",this.widget.tag,">");
+			}
+		}
+		return output.join("");
+	} else {
+		// Just render our first child if we're not generating an element
+		return this.widget.children[0].render(type);
 	}
-	return output.join("");
 };
 
 ElementRenderer.prototype.renderInDom = function() {
-	// Create the element
-	this.domNode = document.createElement(this.widget.tag);
-	// Assign the attributes
-	this.assignAttributes();
-	// Render any child nodes
-	var self = this;
-	$tw.utils.each(this.widget.children,function(node) {
-		if(node.renderInDom) {
-			self.domNode.appendChild(node.renderInDom());
+	// Check if our widget is providing an element
+	if(this.widget.tag) {
+		// Create the element
+		this.domNode = document.createElement(this.widget.tag);
+		// Assign any specified event handlers
+		$tw.utils.addEventListeners(this.domNode,this.widget.events);
+		// Assign the attributes
+		this.assignAttributes();
+		// Render any child nodes
+		var self = this;
+		$tw.utils.each(this.widget.children,function(node) {
+			if(node.renderInDom) {
+				self.domNode.appendChild(node.renderInDom());
+			}
+		});
+		// Call postRenderInDom if the widget provides it
+		if(this.widget.postRenderInDom) {
+			this.widget.postRenderInDom();
 		}
-	});
-	// Assign any specified event handlers
-	$tw.utils.addEventListeners(this.domNode,this.widget.events);
-	// Call postRenderInDom if the widget provides it
-	if(this.widget.postRenderInDom) {
-		this.widget.postRenderInDom();
+		// Return the dom node
+		return this.domNode;
+	} else {
+		// If we're not generating an element, just render our first child
+		return this.widget.children[0].renderInDom();
 	}
-	// Return the dom node
-	return this.domNode;
 };
 
 ElementRenderer.prototype.assignAttributes = function() {
