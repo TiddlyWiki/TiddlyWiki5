@@ -1,15 +1,9 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-<span class="title">
-	<$view field="title"/>
-	<$button message="tw-close">close</$button>
-</span>
+<span class="title"><$button message="tw-close" class="btn-invisible pull-right">{{$:/core/images/close-button.svg}}</$button><$view field="title"/></span>
 
-<div class="small">
-	<$view field="modifier" format="link"/>
-	<$view field="modified" format="date"/>
-</div>
+<div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="date"/></div>
 
 @@.tw-tags-wrapper <$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" />@@
 
