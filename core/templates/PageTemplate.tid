@@ -3,18 +3,12 @@ title: $:/templates/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
-<!-- The top navigation bar -->
-<div class="navbar navbar-fixed-top">
-<div class="navbar-inner">
-<div class="container">
-<!-- Navigation menu -->
-@@.nav
-* HelloThere
-* [[Docs]]
-*.divider-vertical
-@@
+<!-- The page header -->
+<div class="pull-right">
+<$button class="btn btn-mini btn-primary">EDIT</$button>
 </div>
-</div>
+<div class="page-header">
+  ! {{SiteTitle}} <small>{{SiteSubtitle}}</small>
 </div>
 
 <!-- The main display container -->
@@ -23,6 +17,7 @@ title: $:/templates/PageTemplate
 <div class="span2">
 <div style="position:fixed;">
 <!-- The navigation menu -->
+
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-menu-list-item"/>
 </div>
 </div>
