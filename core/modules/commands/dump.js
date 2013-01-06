@@ -42,6 +42,9 @@ Command.prototype.subcommands.tiddler = function() {
 		return "Too few parameters for dump tiddler command";
 	}
 	var tiddler = this.commander.wiki.getTiddler(this.params[1]);
+	if(!tiddler) {
+		return "No such tiddler as '" + this.params[1] + "'";
+	}
 	this.output.write("Tiddler '" + this.params[1] + "' contains these fields:\n");
 	for(var t in tiddler.fields) {
 		this.output.write("  " + t + ": " + tiddler.getFieldString(t) + "\n");
