@@ -68,6 +68,18 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		},false);
+		// Apply stylesheets
+		var styleTiddlers = $tw.wiki.getTiddlersWithTag("$:/core/styles");
+		$tw.utils.each(styleTiddlers,function(title) {
+			// Stylesheets don't refresh, yet
+			var parser = $tw.wiki.parseTiddler(title),
+				renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki});
+			renderTree.execute({tiddlerTitle: title});
+			var styleNode = document.createElement("style");
+			styleNode.type = "text/css";
+			styleNode.appendChild(document.createTextNode(renderTree.render("text/plain")));
+			document.getElementsByTagName("head")[0].appendChild(styleNode);
+		});
 		// Get the default tiddlers
 		var defaultTiddlersTitle = "$:/DefaultTiddlers",
 			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
