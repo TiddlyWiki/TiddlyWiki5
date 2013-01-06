@@ -1,0 +1,32 @@
+title: $:/core/styles/base
+tags: $:/core/styles
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define border-radius(radius)
+```
+  -webkit-border-radius: $radius$;
+     -moz-border-radius: $radius$;
+          border-radius: $radius$;
+```
+\end
+\define box-shadow(shadow)
+```
+  -webkit-box-shadow: $shadow$;
+     -moz-box-shadow: $shadow$;
+          box-shadow: $shadow$;
+```
+\end
+
+html body {
+	position: relative; /* So that height: 100% will fit to the body */
+}
+
+.tw-tiddler-frame {
+	padding: 30px 30px 30px 30px;
+	margin: 0px;
+	background-color: #fff;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	<<border-radius 4px>>
+}
