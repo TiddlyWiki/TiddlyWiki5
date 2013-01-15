@@ -24,7 +24,7 @@ html body {
 .tw-tiddler-frame {
 	padding: 30px 30px 30px 30px;
 	margin: 0px;
-	background-color: #fff;
+	background-color: {{$:/core/styles/colours##primary}};
 	border-left: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;

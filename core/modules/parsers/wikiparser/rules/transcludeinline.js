@@ -33,7 +33,11 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Get the match details
-	var targetTitle = $tw.utils.trim(this.match[1]),
+	var textRef = $tw.utils.trim(this.match[1]),
+		tr = $tw.utils.parseTextReference(textRef),
+		targetTitle = tr.title,
+		targetField = tr.field,
+		targetIndex = tr.index,
 		tooltip = this.match[2],
 		template = $tw.utils.trim(this.match[3]),
 		style = this.match[4],
@@ -46,6 +50,12 @@ exports.parse = function() {
 			target: {type: "string", value: targetTitle}
 		}
 	};
+	if(targetField) {
+		node.attributes.field = {type: "string", value: targetField};
+	}
+	if(targetIndex) {
+		node.attributes.index = {type: "string", value: targetIndex};
+	}
 	if(tooltip) {
 		node.attributes.tooltip = {type: "string", value: tooltip};
 	}

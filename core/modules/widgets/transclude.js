@@ -57,7 +57,8 @@ TranscludeWidget.prototype.generate = function() {
 	var tr, templateParseTree, templateTiddler;
 	// Get the render target details
 	this.targetTitle = this.renderer.getAttribute("target",this.renderer.getContextTiddlerTitle());
-	this.targetField = this.renderer.getAttribute("field","text");
+	this.targetField = this.renderer.getAttribute("field");
+	this.targetIndex = this.renderer.getAttribute("index");
 	// Get the render tree for the template
 	this.templateTitle = undefined;
 	if(this.renderer.parseTreeNode.children && this.renderer.parseTreeNode.children.length > 0) {
@@ -67,21 +68,27 @@ TranscludeWidget.prototype.generate = function() {
 		this.templateTitle = this.renderer.getAttribute("template",this.targetTitle);
 		// Check for recursion
 		if(this.renderer.checkContextRecursion({
-			tiddlerTitle: this.targetTitle,
-			templateTitle: this.templateTitle
-		})) {
+				tiddlerTitle: this.targetTitle,
+				templateTitle: this.templateTitle
+			})) {
 			templateParseTree = [{type: "text", text: "Tiddler recursion error in transclude widget"}];	
 		} else {
 			var parser;
-			if(this.targetField === "text") {
-				parser = this.renderer.renderTree.wiki.parseTiddler(this.templateTitle,{parseAsInline: !this.renderer.parseTreeNode.isBlock})
+			if(this.targetField === "text" || (!this.targetField && !this.targetIndex)) {
+				parser = this.renderer.renderTree.wiki.parseTiddler(this.templateTitle,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
 			} else {
-				var tiddler = this.renderer.renderTree.wiki.getTiddler(this.targetTitle),
+				var tiddler,text;
+				if(this.targetField) {
+					tiddler = this.renderer.renderTree.wiki.getTiddler(this.targetTitle);
 					text = tiddler ? tiddler.fields[this.targetField] : "";
-				if(text === undefined) {
-					text = ""
+					if(text === undefined) {
+						text = "";
+					}
+					parser = this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
+				} else if(this.targetIndex) {
+					text = this.renderer.renderTree.wiki.extractTiddlerDataItem(this.targetTitle,this.targetIndex,"");
+					parser = this.renderer.renderTree.wiki.parseText("text/plain",text);
 				}
-				parser = this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
 			}
 			templateParseTree = parser ? parser.tree : [];
 		}

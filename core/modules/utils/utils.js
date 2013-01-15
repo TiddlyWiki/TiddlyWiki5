@@ -349,26 +349,30 @@ exports.hyphenateCss = function(propName) {
 };
 
 /*
-Parse a text reference in the format "title!!field" into its constituent parts
+Parse a text reference of one of these forms:
+* title
+* !!field
+* title!!field
+* title##index
+* etc
+Returns an object with the following fields, all optional:
+* title: tiddler title
+* field: tiddler field name
+* index: JSON property index
 */
 exports.parseTextReference = function(textRef) {
-	// Look for a metadata field separator
-	var pos = textRef.indexOf("!!");
-	if(pos !== -1) {
-		if(pos === 0) {
-			// Just a field
-			return {
-				field: textRef.substring(2)
-			};
-		} else {
-			// Field and title
-			return {
-				title: textRef.substring(0,pos),
-				field: textRef.substring(pos + 2)
-			};	
-		}
+	// Separate out the title, field name and/or JSON indices
+	var reTextRef = /^\s*([^\s!#]+)?(?:(?:!!([^\s]+))|(?:##([^\s]+)))?\s*/mg,
+		match = reTextRef.exec(textRef);
+	if(match && reTextRef.lastIndex === textRef.length) {
+		// Return the parts
+		return {
+			title: match[1],
+			field: match[2],
+			index: match[3]
+		};
 	} else {
-		// Otherwise, we've just got a title
+		// If we couldn't parse it (eg it started with a)
 		return {
 			title: textRef
 		};

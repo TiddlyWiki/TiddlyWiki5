@@ -28,18 +28,24 @@ last dispatched. Each entry is a hashmap containing two fields:
 /*
 Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
-	<tiddlertitle>##<fieldname>
-	##<fieldname> - specifies a field of the current tiddlers
+	<tiddlertitle>!!<fieldname>
+	!!<fieldname> - specifies a field of the current tiddlers
+	<tiddlertitle>##<field>
 */
 exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	var tr = $tw.utils.parseTextReference(textRef),
-		title = tr.title || currTiddlerTitle,
-		field = tr.field || "text",
-		tiddler = this.getTiddler(title);
-	if(tiddler && $tw.utils.hop(tiddler.fields,field)) {
-		return tiddler.fields[field];
+		title = tr.title || currTiddlerTitle;
+	if(tr.field) {
+		var tiddler = this.getTiddler(title);
+		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
+			return tiddler.fields[tr.field];
+		} else {
+			return defaultText;
+		}
+	} else if(tr.index) {
+		return this.extractTiddlerDataItem(title,tr.index,defaultText);
 	} else {
-		return defaultText;
+		return this.getTiddlerText(title);
 	}
 };
 
@@ -283,22 +289,44 @@ exports.getTiddlersWithTag = function(tag) {
 Get a tiddlers content as a JavaScript object. How this is done depends on the type of the tiddler:
 
 application/json: the tiddler JSON is parsed into an object
+application/x-tiddler-dictionary: the tiddler is parsed as sequence of name:value pairs
 
 Other types currently just return null.
 */
 exports.getTiddlerData = function(title,defaultData) {
 	var tiddler = this.tiddlers[title],
 		data;
-	if(tiddler && tiddler.fields.text && tiddler.fields.type === "application/json") {
-		// JSON tiddler
-		try {
-			data = JSON.parse(tiddler.fields.text);
-		} catch(ex) {
-			return defaultData;
+	if(tiddler && tiddler.fields.text) {
+		switch(tiddler.fields.type) {
+			case "application/json":
+				// JSON tiddler
+				try {
+					data = JSON.parse(tiddler.fields.text);
+				} catch(ex) {
+					return defaultData;
+				}
+				return data;
+			case "application/x-tiddler-dictionary":
+				return $tw.utils.parseFields(tiddler.fields.text);
 		}
-		return data;
 	}
 	return defaultData;
+};
+
+/*
+Extract an indexed field from within a data tiddler
+*/
+exports.extractTiddlerDataItem = function(title,index,defaultText) {
+	var data = this.getTiddlerData(title,{}),
+		text;
+	if(data && $tw.utils.hop(data,index)) {
+		text = data[index];
+	}
+	if(typeof text === "string" || typeof text === "number") {
+		return text.toString();
+	} else {
+		return defaultText;
+	}
 };
 
 /*
@@ -619,11 +647,11 @@ exports.handleSyncerEvent = function(event) {
 /*
 Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
 */
-exports.getTiddlerText = function(title) {
+exports.getTiddlerText = function(title,defaultText) {
 	var tiddler = this.getTiddler(title);
 	// Return undefined if the tiddler isn't found
 	if(!tiddler) {
-		return undefined;
+		return defaultText;
 	}
 	if(tiddler.fields.text !== undefined) {
 		// Just return the text if we've got it
