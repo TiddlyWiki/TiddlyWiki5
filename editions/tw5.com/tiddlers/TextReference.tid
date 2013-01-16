@@ -8,3 +8,4 @@ TextReferences are made up of several parts, most of which can be optional:
 * `<tiddler title>` - the text field of the specified tiddler
 * `<tiddler title>!!<metadata field>` - a tiddler metadata field (eg, `modified`, `modifier`, `type` etc)
 * `!!<metadata field>` - a metadata field of the current tiddler
+* `<tiddler title>##<property index>` - extracts a named property from DataTiddlers

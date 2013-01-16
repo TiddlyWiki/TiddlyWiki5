@@ -5,30 +5,30 @@ tags: docs command
 
 Dump the titles of the tiddlers in the wiki store 
 
-{{{
+```
 --dump tiddlers
-}}}
+```
 
 !!! dump tiddler
 
 Dump the fields of an individual tiddler 
 
-{{{
+```
 --dump tiddler <title>
-}}}
+```
 
 !!! dump shadows
 
 Dump the titles of the shadow tiddlers in the wiki store 
 
-{{{
+```
 --dump shadows
-}}}
+```
 
 !!! dump config
 
 Dump the current core configuration 
 
-{{{
+```
 --dump config
-}}}
+```

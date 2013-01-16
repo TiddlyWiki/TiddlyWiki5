@@ -27,6 +27,7 @@ The machinery tying those concepts together includes:
 * TiddlerFilters
 * TiddlerFields
 * TiddlerTemplates
+* DataTiddlers
 * ContentType
 * ShadowTiddlers
 * [[Plugins]]
@@ -88,7 +89,6 @@ When run under node.js, TiddlyWiki supports a [[command line interface|Getting s
 * ServerCommand
 * VerboseCommand
 * VersionCommand
-* WikiTestCommand
 
 ! Miscellaneous
 

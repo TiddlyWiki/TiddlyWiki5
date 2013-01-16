@@ -54,26 +54,14 @@ TiddlyWiki is built on a [[tiny microkernel|BootMechanism]] with all functionali
 * WikiMethodModules
 * WikiTextRuleModules
 
-! Tree Nodes
+! Parsers
 
-The ParsingMechanism and the RenderingMechanism use a simple tree structure to represent both parsed WikiText and the HTML DOM structure of rendered content.
+TiddlyWiki processes [[ContentTypes|ContentType]] such as WikiText using these parsers:
 
-* TreeNode
-* ElementNode
-* EntityNode
-* MacroNode
-* RawNode
-* TextNode
-
-! Other Parsers
-
-TiddlyWiki processes other [[ContentTypes|ContentType]] than WikiText using these parsers:
-
-* OldWikiTextParser
+* WikiTextParser
 * JsonParser
 * ImageParser
 * PlainTextParser
-* TiddlyTextParser
 * JavaScriptParser
 
 ! Deserializers
@@ -83,7 +71,3 @@ Deserializers are modules that read tiddlers from different text formats:
 * RecipeFiles
 * TiddlerFiles
 * TiddlyWikiFiles
-
-! Serializers
-
-Serializers are modules that convert tiddlers to different text formats:

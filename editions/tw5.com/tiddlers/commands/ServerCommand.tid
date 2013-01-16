@@ -3,21 +3,21 @@ tags: docs command
 
 The server is very simple. At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for `GET`, `PUT` and `DELETE`.
 
-{{{
+```
 --server <port> <roottiddler> <rendertype> <servetype>
-}}}
+```
 
 For example:
 
-{{{
+```
 --server 8080 $:/core/tiddlywiki5.template.html text/plain text/html
-}}}
+```
 
 The parameters are:
 
-{{{
+```
 --server <port> <roottiddler> <rendertype> <servetype>
-}}}
+```
 
 * ''port'' - port number to serve from (defaults to "8080")
 * ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/tiddlywiki5.template.html") 

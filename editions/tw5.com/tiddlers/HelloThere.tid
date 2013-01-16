@@ -4,10 +4,6 @@ tags: introduction greetings
 type: text/vnd.tiddlywiki
 modified: 201208121934
 
-@@.alert.alert-block
-''6th January 2013'' -- the TiddlyWiki5 core code is emerging from some major refactoring upheavals, and there may still be regressions that will be fixed over the next few days, along with bringing the documentation back up to date
-@@
-
 Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the reusable non-linear personal web notebook [[first released in 2004|History]]. It is a complete interactive wiki in JavaScript that can be run from a single HTML file in the browser or as a powerful [[node.js application|node.js]].
 
 TiddlyWiki is designed to fit around your brain, giving you a better way of managing information than traditional documents and emails. The fundamental idea is that information is more useful and reusable if we cut it up into the smallest semantically meaningful chunks -- [[tiddlers|Tiddlers]] -- and give them titles so that they can be structured with links, tags and macros.  TiddlyWiki aims to provide a fluid interface for working with tiddlers, allowing them to be aggregated and composed into longer narratives.
