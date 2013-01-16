@@ -1,7 +1,0 @@
-title: EighthTiddler
-type: text/x-tiddlywiki
-
-<<tiddler SixthTiddler>>
-<<tiddler target:SixthTiddler>>
-<<tiddler template:SixthTiddler>>
-<<tiddler template:SixthTiddler target:FirstTiddler>>

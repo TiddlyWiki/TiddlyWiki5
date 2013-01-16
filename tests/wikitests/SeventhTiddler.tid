@@ -1,8 +1,0 @@
-title: SeventhTiddler
-type: text/x-tiddlywiki
-
-<<echo {{2+2}}>>
-
-<<echo {{tiddler.title}}>>
-
-<<echo {{"window"}}>>
