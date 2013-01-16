@@ -374,12 +374,12 @@ exports.clearCache = function(title) {
 
 exports.initParsers = function(moduleType) {
 	// Install the new parser modules
-	$tw.wiki.newparsers = {};
+	$tw.wiki.parsers = {};
 	var self = this;
-	$tw.modules.forEachModuleOfType("newparser",function(title,module) {
+	$tw.modules.forEachModuleOfType("parser",function(title,module) {
 		for(var f in module) {
 			if($tw.utils.hop(module,f)) {
-				$tw.wiki.newparsers[f] = module[f]; // Store the parser class
+				$tw.wiki.parsers[f] = module[f]; // Store the parser class
 			}
 		}
 	});
@@ -396,12 +396,12 @@ Options include:
 exports.parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
-	var Parser = this.newparsers[type];
+	var Parser = this.parsers[type];
 	if(!Parser && $tw.config.fileExtensionInfo[type]) {
-		Parser = this.newparsers[$tw.config.fileExtensionInfo[type].type];
+		Parser = this.parsers[$tw.config.fileExtensionInfo[type].type];
 	}
 	if(!Parser) {
-		Parser = this.newparsers[options.defaultType || "text/vnd.tiddlywiki"];
+		Parser = this.parsers[options.defaultType || "text/vnd.tiddlywiki"];
 	}
 	if(!Parser) {
 		return null;

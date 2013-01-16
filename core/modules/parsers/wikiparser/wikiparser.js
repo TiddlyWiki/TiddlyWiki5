@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/wikiparser.js
 type: application/javascript
-module-type: newparser
+module-type: parser
 
 The wiki text parser processes blocks of source text into a parse tree.
 

@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/textparser.js
 type: application/javascript
-module-type: newparser
+module-type: parser
 
 The plain text parser processes blocks of source text into a degenerate parse tree consisting of a single text node
 

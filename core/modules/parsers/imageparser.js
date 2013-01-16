@@ -1,7 +1,7 @@
 /*\
 title: $:/core/modules/parsers/imageparser.js
 type: application/javascript
-module-type: newparser
+module-type: parser
 
 The image parser parses an image into an embeddable HTML element
 
