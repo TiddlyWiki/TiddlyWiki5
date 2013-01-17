@@ -94,8 +94,6 @@ ViewWidget.prototype.generate = function() {
 ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || (this.tiddlerTitle && changedTiddlers[this.tiddlerTitle])) {
-		// Remove old child nodes
-		$tw.utils.removeChildren(this.parentElement);
 		// Regenerate and rerender the widget and replace the existing DOM node
 		this.generate();
 		var oldDomNode = this.renderer.domNode,
