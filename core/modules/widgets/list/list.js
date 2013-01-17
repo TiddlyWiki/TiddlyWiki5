@@ -15,6 +15,11 @@ The list widget
 var ListWidget = function(renderer) {
 	// Save state
 	this.renderer = renderer;
+	// Initialise the listviews if they've not been done already
+	if(!this.listViews) {
+		ListWidget.prototype.listViews = {};
+		$tw.modules.applyMethods("listview",this.listViews);
+	}
 	// Generate widget elements
 	this.generate();
 };
@@ -182,9 +187,24 @@ ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
 	return undefined;
 };
 
+ListWidget.prototype.postRenderInDom = function() {
+	this.listview = this.chooseListView();
+	this.history = [];
+};
+
+/*
+Select the appropriate list viewer
+*/
+ListWidget.prototype.chooseListView = function() {
+	// Instantiate the list view
+	var listviewName = this.renderer.getAttribute("listview");
+	var ListView = this.listViews[listviewName];
+	return ListView ? new ListView(this) : null;
+};
+
 ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// Reexecute the widget if any of our attributes have changed
-	if(changedAttributes.itemClass || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.type || changedAttributes.filter || changedAttributes.template) {
+	if(changedAttributes.itemClass || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.type || changedAttributes.filter || changedAttributes.template || changedAttributes.history || changedAttributes.listview) {
 		// Regenerate and rerender the widget and replace the existing DOM node
 		this.generate();
 		var oldDomNode = this.renderer.domNode,
@@ -193,6 +213,11 @@ ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 	} else {
 		// Handle any changes to the list, and refresh any nodes we're reusing
 		this.handleListChanges(changedTiddlers);
+		// Update the history list
+		var history = this.renderer.getAttribute("history");
+		if(history && changedTiddlers[history]) {
+			this.handleHistoryChanges();
+		}
 	}
 };
 
@@ -253,6 +278,29 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	for(t=this.children.length-1; t>=this.list.length; t--) {
 		this.removeListElement(t);
 	}
+};
+
+/*
+Handle any changes to the history list
+*/
+ListWidget.prototype.handleHistoryChanges = function() {
+	// Get the history data
+	var historyAtt = this.renderer.getAttribute("history"),
+		newHistory = this.renderer.renderTree.wiki.getTiddlerData(historyAtt,[]);
+	// Ignore any entries of the history that match the previous history
+	var entry = 0;
+	while(entry < newHistory.length && entry < this.history.length && newHistory[entry].title === this.history[entry].title) {
+		entry++;
+	}
+	// Navigate forwards to each of the new tiddlers
+	while(entry < newHistory.length) {
+		if(this.listview && this.listview.navigateTo) {
+			this.listview.navigateTo(newHistory[entry]);
+		}
+		entry++;
+	}
+	// Update the history
+	this.history = newHistory;
 };
 
 exports.list = ListWidget;

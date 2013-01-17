@@ -24,7 +24,7 @@ title: $:/templates/PageTemplate
 </div>
 <div class="span10">
 <!-- The main display -->
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-tiddler-frame"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="scroller" itemClass="tw-tiddler-frame"/>
 </div>
 </div>
 </div>
