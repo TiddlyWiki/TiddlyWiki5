@@ -212,7 +212,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Add a new record to the top of the history stack
 	var history = this.renderer.renderTree.wiki.getTiddlerData(this.historyTitle,[]);
 	history.push({title: draftTitle});
-	this.renderer.renderTree.wiki.setTiddlerData(this.historyTitle,historyList);
+	this.renderer.renderTree.wiki.setTiddlerData(this.historyTitle,history);
 	event.stopPropagation();
 	return false;
 };
