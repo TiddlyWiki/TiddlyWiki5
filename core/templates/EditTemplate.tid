@@ -2,12 +2,17 @@ title: $:/templates/EditTemplate
 modifier: JeremyRuston
 
 <div class="tw-tiddler-frame">
-<<view title>> <<button SaveTiddler class:"btn btn-mini btn-success"><done>>
-{{title{
-<<edit draft.title>>
-}}}
-<<edit tags>>
-{{body{
-<<edit text>>
-}}}
+
+<$view field="title"/> <$button message="tw-SaveTiddler" class="btn btn-mini btn-success">done</$button>
+
+@@.title
+<$edit field="draft.title"/>
+@@
+
+<$edit field="tags"/>
+
+@@.body
+<$edit field="text"/>
+@@
+
 </div>

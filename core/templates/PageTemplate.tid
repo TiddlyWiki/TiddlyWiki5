@@ -18,7 +18,7 @@ title: $:/templates/PageTemplate
 <div style="position:fixed;">
 <!-- The navigation menu -->
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" editTemplate="$:/templates/EditTemplate" listview=classic itemClass="tw-menu-list-item"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview=classic itemClass="tw-menu-list-item"/>
 </div>
 </div>
 <div class="span10">

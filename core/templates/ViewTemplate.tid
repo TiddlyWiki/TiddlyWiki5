@@ -1,7 +1,11 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-<span class="title"><$button message="tw-close" class="btn-invisible pull-right">{{$:/core/images/close-button.svg}}</$button><$view field="title"/></span>
+<span class="title">
+<$button message="tw-close" class="btn-invisible pull-right">{{$:/core/images/close-button.svg}}</$button>
+<$button message="tw-EditTiddler" class="btn-invisible pull-right">{{$:/core/images/edit-button.svg}}</$button>
+<$view field="title"/>
+</span>
 
 <div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="date"/></div>
 
