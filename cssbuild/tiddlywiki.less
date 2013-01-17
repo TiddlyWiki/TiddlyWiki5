@@ -131,7 +131,7 @@ textarea.tw-edit-field {
 	width: 100%;
 }
 
-canvas.tw-edit-field  {
+canvas.tw-edit-bitmapeditor  {
 	cursor: crosshair;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -218,21 +218,15 @@ Dropdown menus
 	left: 4px;
 }
 
-.dropdown-menu {
-	position: static;
-}
-
-.dropdown-menu a {
-	position: relative;
-}
-
-/* This is needed to make the dropdown arrows abut to the dropdown itself */
-.navbar .dropdown-menu::before {
-	top: -4px;
-}
-.navbar .dropdown-menu::after {
-	top: -3px;
-}
+.dropdown-menu li > .tw-view-link > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: @baseLineHeight;
+    color: @dropdownLinkColor;
+    white-space: nowrap;
+  }
 
 /*
 Buttons
