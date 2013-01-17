@@ -128,7 +128,7 @@ TranscludeWidget.prototype.refreshInDom = function(changedAttributes,changedTidd
 		$tw.utils.toggleClass(this.renderer.domNode,"tw-tiddler-missing",!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle));
 	}
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
-	if(changedAttributes.target || changedAttributes.template || (this.targetTitle && changedTiddlers[this.targetTitle]) || (this.templateTitle && changedTiddlers[this.templateTitle])) {
+	if(changedAttributes.target || changedAttributes.template || (this.templateTitle && changedTiddlers[this.templateTitle])) {
 		// Regenerate and rerender the widget and replace the existing DOM node
 		this.generate();
 		var oldDomNode = this.renderer.domNode,
