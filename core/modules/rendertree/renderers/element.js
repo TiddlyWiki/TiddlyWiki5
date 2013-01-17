@@ -114,54 +114,48 @@ ElementRenderer.prototype.getAttribute = function(name,defaultValue) {
 };
 
 ElementRenderer.prototype.render = function(type) {
-	// Check if our widget is providing an element
-	if(this.widget.tag) {
-		var isHtml = type === "text/html",
-			output = [],attr,a,v;
-		if(isHtml) {
-			output.push("<",this.widget.tag);
-			if(this.widget.attributes) {
-				attr = [];
-				for(a in this.widget.attributes) {
-					attr.push(a);
-				}
-				attr.sort();
-				for(a=0; a<attr.length; a++) {
-					v = this.widget.attributes[attr[a]];
-					if(v !== undefined) {
-						if($tw.utils.isArray(v)) {
-							v = v.join(" ");
-						} else if(typeof v === "object") {
-							var s = [];
-							for(var p in v) {
-								s.push(p + ":" + v[p] + ";");
-							}
-							v = s.join("");
+	var isHtml = type === "text/html",
+		output = [],attr,a,v;
+	if(isHtml) {
+		output.push("<",this.widget.tag);
+		if(this.widget.attributes) {
+			attr = [];
+			for(a in this.widget.attributes) {
+				attr.push(a);
+			}
+			attr.sort();
+			for(a=0; a<attr.length; a++) {
+				v = this.widget.attributes[attr[a]];
+				if(v !== undefined) {
+					if($tw.utils.isArray(v)) {
+						v = v.join(" ");
+					} else if(typeof v === "object") {
+						var s = [];
+						for(var p in v) {
+							s.push(p + ":" + v[p] + ";");
 						}
-						output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
+						v = s.join("");
 					}
+					output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
 				}
 			}
-			if(!this.widget.children || this.widget.children.length === 0) {
-				output.push("/");
-			}
-			output.push(">");
 		}
-		if(this.widget.children && this.widget.children.length > 0) {
-			$tw.utils.each(this.widget.children,function(node) {
-				if(node.render) {
-					output.push(node.render(type));
-				}
-			});
-			if(isHtml) {
-				output.push("</",this.widget.tag,">");
-			}
+		if(!this.widget.children || this.widget.children.length === 0) {
+			output.push("/");
 		}
-		return output.join("");
-	} else {
-		// Just render our first child if we're not generating an element
-		return this.widget.children[0].render(type);
+		output.push(">");
 	}
+	if(this.widget.children && this.widget.children.length > 0) {
+		$tw.utils.each(this.widget.children,function(node) {
+			if(node.render) {
+				output.push(node.render(type));
+			}
+		});
+		if(isHtml) {
+			output.push("</",this.widget.tag,">");
+		}
+	}
+	return output.join("");
 };
 
 ElementRenderer.prototype.renderInDom = function() {
