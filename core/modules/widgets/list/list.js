@@ -223,7 +223,8 @@ ListWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 
 ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 	var t,
-		prevListLength = this.list.length;
+		prevListLength = this.list.length,
+		self = this;
 	// Get the list of tiddlers, having saved the previous length
 	this.getTiddlerList();
 	// Check if the list is empty
@@ -246,7 +247,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[this.getEmptyMessage()]);
 			$tw.utils.each(this.children,function(node) {
 				if(node.renderInDom) {
-					this.renderer.domNode.appendChild(node.renderInDom());
+					self.renderer.domNode.appendChild(node.renderInDom());
 				}
 			});
 			return;
