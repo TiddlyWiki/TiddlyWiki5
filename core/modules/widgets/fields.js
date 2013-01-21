@@ -24,6 +24,7 @@ FieldsWidget.prototype.generate = function() {
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
 	this.template = this.renderer.getAttribute("template");
 	this.exclude = this.renderer.getAttribute("exclude");
+	this.stripTitlePrefix = this.renderer.getAttribute("stripTitlePrefix","no") === "yes";
 	// Get the tiddler we're displaying
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
 	// Get the exclusion list
@@ -36,12 +37,20 @@ FieldsWidget.prototype.generate = function() {
 	// Compose the template
 	var text = [];
 	if(this.template && tiddler) {
-		for(var field in tiddler.fields) {
-			if(exclude.indexOf(field) === -1) {
-				var row = this.template;
-				row = row.replace("$name$",field);
-				row = row.replace("$value$",tiddler.getFieldString(field));
-				row = row.replace("$encoded_value$",$tw.utils.htmlEncode(tiddler.getFieldString(field)));
+		for(var fieldName in tiddler.fields) {
+			if(exclude.indexOf(fieldName) === -1) {
+				var row = this.template,
+					value = tiddler.getFieldString(fieldName);
+				if(this.stripTitlePrefix && fieldName === "title") {
+					var reStrip = /^\{[^\}]+\}(.+)/mg,
+						reMatch = reStrip.exec(value);
+					if(reMatch) {
+						value = reMatch[1];
+					}
+				}
+				row = row.replace("$name$",fieldName);
+				row = row.replace("$value$",value);
+				row = row.replace("$encoded_value$",$tw.utils.htmlEncode(value));
 				text.push(row)
 			}
 		}
