@@ -1,40 +1,41 @@
 title: $:/core/templates/tiddlywiki2.template.html
-type: text/vnd.tiddlywiki-html
 
+\rules only filteredtranscludeinline transcludeinline
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <script id="versionArea" type="text/javascript">
 //<![CDATA[
-<<serialize "[prefix[{version}]]" text/plain>>
+{{{ [prefix[{version}]] ||$:/core/templates/plain-text-tiddler}}}
 //]]>
 </script>
+<meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="copyright" content="
-<<serialize "[prefix[{copyright}]]" text/plain>>
+{{{ [prefix[{copyright}]] ||$:/core/templates/plain-text-tiddler}}}
 " />
 <!--PRE-HEAD-START-->
-<<serialize "[prefix[{prehead}]]" text/plain>>
+{{{ [prefix[{prehead}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--PRE-HEAD-END-->
 <title>
-<<serialize "[prefix[{title}]]" text/plain>>
+{{{ [prefix[{title}]] ||$:/core/templates/plain-text-tiddler}}}
 </title>
 <style id="styleArea" type="text/css">
-<<serialize "[prefix[{style}]]" text/plain>>
+{{{ [prefix[{style}]] ||$:/core/templates/plain-text-tiddler}}}
 </style>
 <!--POST-HEAD-START-->
-<<serialize "[prefix[{posthead}]]" text/plain>>
+{{{ [prefix[{posthead}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--POST-HEAD-END-->
 </head>
 <body onload="main();" onunload="if(window.unload) unload();">
 <!--PRE-BODY-START-->
-<<serialize "[prefix[{prebody}]]" text/plain>>
+{{{ [prefix[{prebody}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--PRE-BODY-END-->
 <div id="copyright">
 Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jeremy Ruston, Copyright &copy; 2007-2011 UnaMesa Association
 </div>
 <noscript>
-<<serialize "[prefix[{noscript}]]" text/plain>>
+{{{ [prefix[{noscript}]] ||$:/core/templates/plain-text-tiddler}}}
 </noscript>
 <div id="saveTest"></div>
 <div id="backstageCloak"></div>
@@ -46,39 +47,39 @@ Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jerem
 <div id="contentWrapper"></div>
 <div id="contentStash"></div>
 <div id="shadowArea">
-<<serialize "[prefix[{shadow}]] +[sort-case-sensitive[title]]" application/x-tiddler-html-div removePrefix:"{shadow}">>
+{{{ [prefix[{shadow}]] +[sort-case-sensitive[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">
-<<serialize "[prefix[{tiddler}]] +[sort-case-sensitive[title]]" application/x-tiddler-html-div removePrefix:"{tiddler}">>
-<<serialize "[prefix[{plugin}]]" text/plain>>
-<<serialize "[prefix[{posttiddlers}]]" text/plain>>
+{{{ [prefix[{tiddler}]] +[sort-case-sensitive[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
+{{{ [prefix[{plugin}]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [prefix[{posttiddlers}]] ||$:/core/templates/plain-text-tiddler}}}
 </div>
 <!--POST-STOREAREA-->
 <!--POST-BODY-START-->
-<<serialize "[prefix[{postbody}]]" text/plain>>
+{{{ [prefix[{postbody}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--POST-BODY-END-->
 <script id="jsArea" type="text/javascript">
 //<![CDATA[
-<<serialize "[prefix[{prejs}]]" text/plain-strip-comments>>
-<<serialize "[prefix[{js}]]" text/plain-strip-comments>>
-<<serialize "[prefix[{postjs}]]" text/plain-strip-comments>>
+{{{ [prefix[{prejs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [prefix[{js}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [prefix[{postjs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
-<<serialize "[prefix[{jsext}]]" text/plain-strip-comments>>
+{{{ [prefix[{jsext}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 <script id="jsdeprecatedArea" type="text/javascript">
 //<![CDATA[
-<<serialize "[prefix[{jsdeprecated}]]" text/plain-strip-comments>>
+{{{ [prefix[{jsdeprecated}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
 <script id="jslibArea" type="text/javascript">
 //<![CDATA[
-<<serialize "[prefix[{jslib}]]" text/plain-strip-comments>>
+{{{ [prefix[{jslib}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
 <script id="jqueryArea" type="text/javascript">
 //<![CDATA[
-<<serialize "[prefix[{jquery}]]" text/plain-strip-comments>>
+{{{ [prefix[{jquery}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
 //]]>
 </script>
 <script type="text/javascript">
@@ -88,7 +89,7 @@ if(useJavaSaver)
 //]]>
 </script>
 <!--POST-SCRIPT-START-->
-<<serialize "[prefix[{postscript}]]" text/plain>>
+{{{ [prefix[{postscript}]] ||$:/core/templates/plain-text-tiddler}}}
 <!--POST-SCRIPT-END-->
 </body>
 </html>
