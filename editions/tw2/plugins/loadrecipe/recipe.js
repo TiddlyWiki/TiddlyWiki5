@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/recipe.js
+title: $:/plugins/tiddlywiki2/loadrecipe/recipe.js
 type: application/javascript
 module-type: tiddlerdeserializer
 

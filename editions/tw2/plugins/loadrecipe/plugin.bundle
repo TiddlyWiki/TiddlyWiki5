@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki2/loadrecipe",
+	"description": "Loads tiddlers from an old-style TiddlyWiki 2.x.x recipe file",
+	"author": "JeremyRuston",
+	"version": "0.0.0",
+	"coreVersion": ">=5.0.0"
+}
