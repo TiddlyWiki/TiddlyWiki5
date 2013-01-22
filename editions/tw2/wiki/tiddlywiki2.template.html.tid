@@ -9,7 +9,6 @@ title: $:/core/templates/tiddlywiki2.template.html
 {{{ [prefix[{version}]] ||$:/core/templates/plain-text-tiddler}}}
 //]]>
 </script>
-<meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="copyright" content="
 {{{ [prefix[{copyright}]] ||$:/core/templates/plain-text-tiddler}}}
