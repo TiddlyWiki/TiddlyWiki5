@@ -6,7 +6,18 @@
 mkdir -p tmp
 mkdir -p tmp/tw2
 
-# cook TiddlyWiki5
+# Prepare the readme file from the revelant content in the tw5.com content
+
+pushd editions/tw5.com > /dev/null
+
+node ../../tiddlywiki.js \
+	--verbose \
+	--savetiddler TiddlyWiki2ReadMe ../tw2/readme.md text/html \
+	|| exit 1
+
+popd > /dev/null
+
+# cook the TiddlyWiki 2.x.x index file
 
 pushd editions/tw2 > /dev/null
 

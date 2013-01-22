@@ -1,0 +1,10 @@
+title: TiddlyWiki2ReadMe
+
+! Using TiddlyWiki5 to build TiddlyWikiClassic
+
+TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWiki from their constituent components. Doing so involves these additional features over and above those used for building TiddlyWiki5:
+
+* The `tiddlywiki2/loadrecipe` plugin, which allows tiddlers to be loaded from TiddlyWiki 2.x.x `.recipe` files
+* The `tiddlywiki2/stripcomments` plugin, which adds a new viewer format for the `<$view>` macro that strips single line JavaScript comments starting `//#`
+* The `stripTitlePrefix='yes'` attribute of the `<$fields>` widget, which removes prefixes wrapped in curly braces from the `title` attribute
+
