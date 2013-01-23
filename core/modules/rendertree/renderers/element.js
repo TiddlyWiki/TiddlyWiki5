@@ -269,7 +269,7 @@ ElementRenderer.prototype.getContextScopeId = function() {
 		guidBits.push("-");
 		context = context.parentContext;
 	}
-	return $tw.utils.toBase64(guidBits.join(""));
+	return guidBits.join("");
 };
 
 exports.element = ElementRenderer
