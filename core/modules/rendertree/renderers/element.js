@@ -140,20 +140,15 @@ ElementRenderer.prototype.render = function(type) {
 				}
 			}
 		}
-		if(!this.widget.children || this.widget.children.length === 0) {
-			output.push("/");
-		}
 		output.push(">");
 	}
-	if(this.widget.children && this.widget.children.length > 0) {
-		$tw.utils.each(this.widget.children,function(node) {
-			if(node.render) {
-				output.push(node.render(type));
-			}
-		});
-		if(isHtml) {
-			output.push("</",this.widget.tag,">");
+	$tw.utils.each(this.widget.children,function(node) {
+		if(node.render) {
+			output.push(node.render(type));
 		}
+	});
+	if(isHtml) {
+		output.push("</",this.widget.tag,">");
 	}
 	return output.join("");
 };
