@@ -32,6 +32,20 @@ exports.startup = function() {
 	$tw.wiki.initServerConnections();
 	// Set up the command modules
 	$tw.Commander.initCommands();
+	// Get the default tiddlers
+	var defaultTiddlersTitle = "$:/DefaultTiddlers",
+		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
+		defaultTiddlers = [];
+	if(defaultTiddlersTiddler) {
+		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
+	}
+	// Initialise the story and history
+	var storyTitle = "$:/StoryList",
+		story = [];
+	for(var t=0; t<defaultTiddlers.length; t++) {
+		story[t] = defaultTiddlers[t];
+	}
+	$tw.wiki.addTiddler({title: storyTitle, text: story.join("\n")});
 	// Host-specific startup
 	if($tw.browser) {
 		// Call browser startup modules
@@ -80,20 +94,6 @@ exports.startup = function() {
 			styleNode.appendChild(document.createTextNode(renderTree.render("text/plain")));
 			document.getElementsByTagName("head")[0].appendChild(styleNode);
 		});
-		// Get the default tiddlers
-		var defaultTiddlersTitle = "$:/DefaultTiddlers",
-			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
-			defaultTiddlers = [];
-		if(defaultTiddlersTiddler) {
-			defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
-		}
-		// Initialise the story and history
-		var storyTitle = "$:/StoryList",
-			story = [];
-		for(var t=0; t<defaultTiddlers.length; t++) {
-			story[t] = defaultTiddlers[t];
-		}
-		$tw.wiki.addTiddler({title: storyTitle, text: story.join("\n")});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			var event = document.createEvent("Event");
