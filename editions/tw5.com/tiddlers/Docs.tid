@@ -83,12 +83,7 @@ Macros give WikiText dynamic functionality:
 
 When run under node.js, TiddlyWiki supports a [[command line interface|Getting started with TiddlyWiki under node.js]] with the following built-in commands:
 
-* DumpCommand
-* LoadCommand
-* SaveTiddlerCommand
-* ServerCommand
-* VerboseCommand
-* VersionCommand
+{{{ [tag[command]sort[title]] }}}
 
 ! Miscellaneous
 

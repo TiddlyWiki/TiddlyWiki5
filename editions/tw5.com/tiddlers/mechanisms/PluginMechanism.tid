@@ -36,7 +36,7 @@ The titles of the individual tiddlers within a plugin are automatically prefixed
 
 On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.tiddlywiki` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
 
-The `plugin.tiddlywiki` file should contain the following JSON structure:
+The `plugin.bundle` file should contain the following JSON structure:
 
 {{{
 {
