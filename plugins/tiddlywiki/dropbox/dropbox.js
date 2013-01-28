@@ -395,7 +395,7 @@ $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
 		}
 	});
 	// Save everything to a tiddler
-	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleTiddlerIndex, type: "application/json", text: JSON.stringify(index)},true);
+	$tw.wiki.addTiddler({title: $tw.plugins.dropbox.titleTiddlerIndex, type: "application/json", text: JSON.stringify(index,null,$tw.config.preferences.jsonSpaces)},true);
 	// Generate the index file
 	var file = $tw.wiki.renderTiddler("text/plain",$tw.plugins.dropbox.titleAppIndexTemplate);
 	// Save the index to Dropbox

@@ -992,7 +992,7 @@ $tw.loadBundleFolder = function(filepath,excludeRegExp) {
 		title: bundleInfo.title,
 		type: "application/json",
 		bundle: "yes",
-		text: JSON.stringify(bundleInfo)
+		text: JSON.stringify(bundleInfo,null,4)
 	} : null;
 };
 

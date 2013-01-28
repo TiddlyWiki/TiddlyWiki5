@@ -334,7 +334,7 @@ Set a tiddlers content to a JavaScript object. Currently this is done by setting
 */
 exports.setTiddlerData = function(title,data) {
 	var tiddler = this.getTiddler(title);
-	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data)}));
+	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)}));
 };
 
 /*

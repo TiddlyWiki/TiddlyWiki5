@@ -16,6 +16,7 @@ exports.preferences = {};
 
 exports.preferences.animationDuration = 400;
 exports.preferences.animationDurationMs = exports.preferences.animationDuration + "ms";
+exports.preferences.jsonSpaces = 4;
 
 exports.dateFormats = {
 	months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November","December"],

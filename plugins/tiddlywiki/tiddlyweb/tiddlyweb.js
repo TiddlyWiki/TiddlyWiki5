@@ -512,7 +512,7 @@ TiddlyWebSyncer.prototype.convertTiddlerToTiddlyWebFormat = function(title) {
 	if(result.type === "text/x-tiddlywiki") {
 		result.type = null;
 	}
-	return JSON.stringify(result);
+	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
 };
 
 /*
