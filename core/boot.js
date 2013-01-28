@@ -398,7 +398,7 @@ if(!$tw.browser) {
 	// Read package info
 	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
 	// Check node version number
-	if($tw.utils.checkVersions($tw.packageInfo.engine.node.substr(2),process.version.substr(1))) {
+	if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
 		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
 	}
 }

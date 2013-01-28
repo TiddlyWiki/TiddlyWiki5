@@ -31,7 +31,7 @@
   "bundleDependencies": [
   ],
   "license": "BSD",
-  "engine": {
+  "engines": {
     "node": ">=0.8.2"
   }
 }
