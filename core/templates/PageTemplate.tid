@@ -5,8 +5,8 @@ title: $:/templates/PageTemplate
 
 <!-- The page header -->
 <div class="pull-right">
-<$button class="btn btn-mini btn-primary">Edit</$button>
 <$button message="tw-NewTiddler" class="btn btn-mini btn-success">New</$button>
+<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
 </div>
 <div class="page-header">
   ! {{SiteTitle}} <small>{{SiteSubtitle}}</small>
