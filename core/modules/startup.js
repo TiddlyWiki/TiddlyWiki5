@@ -82,6 +82,21 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		},false);
+		// Install the crypto event handler
+		document.addEventListener("tw-set-password",function(event) {
+			$tw.passwordPrompt.createPrompt({
+				serviceName: "Set new password for this TiddlyWiki",
+				noUserName: true,
+				submitText: "Set password",
+				callback: function(data) {
+					$tw.crypto.setPassword(data.password);
+					return true; // Get rid of the password prompt
+				}
+			});
+		});
+		document.addEventListener("tw-clear-password",function(event) {
+			$tw.crypto.setPassword(null);
+		});
 		// Apply stylesheets
 		var styleTiddlers = $tw.wiki.getTiddlersWithTag("$:/core/styles");
 		$tw.utils.each(styleTiddlers,function(title) {

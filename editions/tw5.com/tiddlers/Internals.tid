@@ -28,6 +28,7 @@ Internally, TiddlyWiki is built on a number of key objects and mechanisms:
 * SyncMechanism
 * CommandMechanism
 * ConfigMechanism
+* EncryptionMechanism
 
 ! Plugin Module Types
 

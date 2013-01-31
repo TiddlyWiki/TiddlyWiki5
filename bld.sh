@@ -21,28 +21,35 @@ echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 
 echo "five.tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
 
-# First, index.html: the main file, including content
+# First,
+#  readme.md: the readme file for GitHub
+#  index.html: the main file, including content
+#  static.html: the static version of the default tiddlers
+
+node ../../tiddlywiki.js \
+	--verbose \
+	--savetiddler ReadMe ../../readme.md text/html \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
+	--savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+	|| exit 1
+
+# Second, encrypted.html: a version of the main file encrypted with the password "password"
 
 node ../../tiddlywiki.js \
 	--verbose \
 	--password password \
-	--savetiddler ReadMe ../../readme.md text/html \
-	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
-	--savetiddler $:/core/templates/tiddlywiki5.encrypted.template.html $TW5_BUILD_OUTPUT/encrypted.html text/plain \
-	--savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/encrypted.html text/plain \
 	|| exit 1
 
 popd > /dev/null
 
-# Second, empty.html: empty wiki for reuse
+# Third, empty.html: empty wiki for reuse
 
 pushd editions/empty > /dev/null
 
 node ../../tiddlywiki.js \
 	--verbose \
-	--password password \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/empty.html text/plain \
-	--savetiddler $:/core/templates/tiddlywiki5.encrypted.template.html $TW5_BUILD_OUTPUT/empty_encrypted.html text/plain \
 	|| exit 1
 
 popd > /dev/null

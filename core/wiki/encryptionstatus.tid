@@ -1,0 +1,11 @@
+title: $:/snippets/encryptionstatus
+
+<$reveal type="match" state="$:/isEncrypted" text="yes">
+This wiki is encrypted.
+<$button message="tw-clear-password">Clear password</$button>
+<$button message="tw-set-password">Change password</$button>
+</$reveal>
+<$reveal type="nomatch" state="$:/isEncrypted" text="yes">
+This wiki is not encrypted.
+<$button message="tw-set-password">Set password</$button>
+</$reveal>

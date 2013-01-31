@@ -358,7 +358,10 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	this.setWrapperDisplay();
 };
 
-// Crypto helper object for encrypted content
+/*
+Crypto helper object for encrypted content. It maintains the password text in a closure, and provides methods to change
+the password, and to encrypt/decrypt a block of text
+*/
 $tw.utils.Crypto = function() {
 	var sjcl = $tw.browser ? window.sjcl : require("./sjcl.js"),
 		password = null,
@@ -374,7 +377,14 @@ $tw.utils.Crypto = function() {
 		};
 	this.setPassword = function(newPassword) {
 		password = newPassword;
+		this.updateCryptoStateTiddler();
 	};
+	this.updateCryptoStateTiddler = function() {
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: password ? "yes" : "no"}));
+	};
+	this.hasPassword = function() {
+		return !!password;
+	}
 	this.encrypt = function(text) {
 		return callSjcl("encrypt",text);
 	};
@@ -723,22 +733,13 @@ $tw.wiki = new $tw.Wiki();
 if($tw.browser) {
 
 /*
-Get any encrypted tiddlers
+Decrypt any tiddlers stored within the element with the ID "encryptedArea". The function is asynchronous to allow the user to be prompted for a password
+	callback: function to be called the decryption is complete
 */
 $tw.boot.decryptEncryptedTiddlers = function(callback) {
-	var encryptedArea = document.getElementById("encryptedArea"),
-		encryptedTiddlers = [];
+	var encryptedArea = document.getElementById("encryptedStoreArea");
 	if(encryptedArea) {
-		for(var t = 0; t <encryptedArea.childNodes.length; t++) {
-			var childNode = encryptedArea.childNodes[t];
-			if(childNode.hasAttribute && childNode.hasAttribute("data-tw-encrypted-tiddlers")) {
-				var e = childNode.firstChild;
-				while(e && e.nodeName.toLowerCase() !== "pre") {
-					e = e.nextSibling;
-				}
-				encryptedTiddlers.push($tw.utils.htmlDecode(e.innerHTML));
-			}
-		}
+		var encryptedText = encryptedArea.innerHTML;
 		// Prompt for the password
 		$tw.passwordPrompt.createPrompt({
 			serviceName: "Enter a password to decrypt this TiddlyWiki",
@@ -747,18 +748,12 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 			callback: function(data) {
 				// Attempt to decrypt the tiddlers
 				$tw.crypto.setPassword(data.password);
-				for(var t=encryptedTiddlers.length-1; t>=0; t--) {
-					var decrypted = $tw.crypto.decrypt(encryptedTiddlers[t]);
-					if(decrypted) {
-						var json = JSON.parse(decrypted);
-						for(var title in json) {
-							$tw.preloadTiddler(json[title]);
-						}
-						encryptedTiddlers.splice(t,1);
+				var decryptedText = $tw.crypto.decrypt(encryptedText);
+				if(decryptedText) {
+					var json = JSON.parse(decryptedText);
+					for(var title in json) {
+						$tw.preloadTiddler(json[title]);
 					}
-				}
-				// Check if we're all done
-				if(encryptedTiddlers.length === 0) {
 					// Call the callback
 					callback();
 					// Exit and remove the password prompt
@@ -770,7 +765,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 			}
 		});
 	} else {
-		// Just invoke the callback straight away if there wasn't any encrypted tiddlers
+		// Just invoke the callback straight away if there weren't any encrypted tiddlers
 		callback();
 	}
 };
@@ -1094,6 +1089,8 @@ $tw.boot.startup = function() {
 	$tw.wiki.defineTiddlerModules();
 	// And any modules within bundles
 	$tw.wiki.defineBundledModules();
+	// Make sure the crypto state tiddler is up to date
+	$tw.crypto.updateCryptoStateTiddler();
 	// Run any startup modules
 	$tw.modules.forEachModuleOfType("startup",function(title,module) {
 		if(module.startup) {

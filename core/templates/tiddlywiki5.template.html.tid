@@ -34,9 +34,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 {{{ [is[shadow]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]] ||$:/core/templates/html-div-tiddler}}}
 </div>
 <!----------- Ordinary tiddlers ----------->
-<div id="storeArea" style="display:none;">
-{{{ [!is[shadow]] ||$:/core/templates/html-div-tiddler}}}
-</div>
+{{$:/core/templates/store.area.template.html}}
 <!----------- Library modules ----------->
 <div id="libraryModules" style="display:none;">
 {{$:/core/lib/jquery.min.js||$:/core/templates/javascript-tiddler}}
