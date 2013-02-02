@@ -85,7 +85,7 @@ exports.startup = function() {
 		// Install the crypto event handler
 		document.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
-				serviceName: "Set new password for this TiddlyWiki",
+				serviceName: "Set a new password for this TiddlyWiki",
 				noUserName: true,
 				submitText: "Set password",
 				callback: function(data) {
