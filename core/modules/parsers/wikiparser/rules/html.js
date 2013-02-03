@@ -26,8 +26,6 @@ This is a widget invocation
 exports.name = "html";
 exports.types = {inline: true, block: true};
 
-var voidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr".split(",");
-
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
@@ -71,7 +69,7 @@ exports.parse = function() {
 		attrMatch = reAttr.exec(attributeString);
 	}
 	// Process the end tag
-	if(!isSelfClosing && voidElements.indexOf(tagName) === -1) {
+	if(!isSelfClosing && $tw.config.htmlVoidElements.indexOf(tagName) === -1) {
 		var reEndString = "(</" + $tw.utils.escapeRegExp(tagName) + ">)",
 			reEnd = new RegExp(reEndString,"mg"),
 			content;
