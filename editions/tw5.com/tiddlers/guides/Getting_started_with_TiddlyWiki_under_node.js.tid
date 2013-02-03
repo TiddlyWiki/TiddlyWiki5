@@ -4,22 +4,21 @@ tags: guide
 
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlerFiles and TiddlyWikiFiles. For example, this loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 
-{{{
+```
 node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html
-}}}
+```
 !!Usage
 
 Running `tiddlywiki.js` from the command line boots the TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces. The commands are identified by the prefix `--`.
 
-{{{
-node tiddlywiki.js [--<option> [<arg>[,<arg>]]]
-}}}
+```
+node tiddlywiki.js [--<command> [<arg>[,<arg>]]]
+```
 
 !! Batch Files
 
 For trying TiddlyWiki5 out under node.js, two batch files are provided:
 
-* `run.sh` runs the wikitests
 * `bld.sh` builds the new TiddlyWiki 5 HTML file (placed in the `tmp/tw5/` directory by default)
 
 !!Commands

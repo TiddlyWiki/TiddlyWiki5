@@ -1,0 +1,7 @@
+title: $:/core/styles/colours
+type: application/x-tiddler-dictionary
+
+primary: `#65d`
+background: `#fff`
+pagebackground: `#ececec`
+medium: `#888`

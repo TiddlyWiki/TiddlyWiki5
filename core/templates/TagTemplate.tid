@@ -1,20 +1,10 @@
 title: $:/templates/TagTemplate
 
 <$button popup="tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible"><$setstyle name="background-color" value={{!!color}} class="label"><$view field="title" format="text" /></$setstyle></$button>
-<$reveal state="tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="open">
-
-@@.dropdown-menu
-
-* <$view field="title" format="link" />
-*.divider
-* <div>
-<$list filter="[is[current]tagging[]sort[title]]">
-<li>
+<$reveal state="tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
 <$view field="title" format="link" />
-</li>
+<hr>
+<$list filter="[is[current]tagging[]sort[title]]">
+<$view field="title" format="link" />
 </$list>
-</div>
-
-@@
-
 </div></$reveal>

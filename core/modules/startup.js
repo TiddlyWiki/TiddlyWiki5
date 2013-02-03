@@ -106,7 +106,9 @@ exports.startup = function() {
 			renderTree.execute({tiddlerTitle: title});
 			var styleNode = document.createElement("style");
 			styleNode.type = "text/css";
-			styleNode.appendChild(document.createTextNode(renderTree.render("text/plain")));
+			var text = renderTree.render("text/plain");
+			console.log(text)
+			styleNode.appendChild(document.createTextNode(text));
 			document.getElementsByTagName("head")[0].appendChild(styleNode);
 		});
 		// If we're being viewed on a data: URI then give instructions for how to save

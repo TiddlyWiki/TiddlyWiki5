@@ -1,0 +1,9 @@
+title: $:/core/styles/colourmappings
+type: application/x-tiddler-dictionary
+
+tiddlerbackground: {{$:/core/styles/colours##background}}
+pagebackground: {{$:/core/styles/colours##pagebackground}}
+linkbackground: {{$:/core/styles/colours##background}}
+linkforeground: {{$:/core/styles/colours##primary}}
+dropdownbackground: {{$:/core/styles/colours##background}}
+dropdownborder: {{$:/core/styles/colours##medium}}

@@ -3,32 +3,34 @@ title: $:/templates/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
-<!-- The page header -->
-<div class="pull-right">
-{{$:/snippets/encryptionstatus}}
-<$button message="tw-NewTiddler" class="btn btn-mini btn-success">New</$button>
-<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
-</div>
-<div class="page-header">
-  ! {{SiteTitle}} <small>{{SiteSubtitle}}</small>
-</div>
+<!-- The sidebar header -->
+<header class="sidebar-header">
 
-<!-- The main display container -->
-<div class="container">
-<div class="row">
-<div class="span2">
-<div style="position:fixed;">
-<!-- The navigation menu -->
+<div>
+{{SiteTitle}}<br><small>{{SiteSubtitle}}</small>
+</div>
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview=classic itemClass="tw-menu-list-item"/>
-</div>
-</div>
-<div class="span10">
-<!-- The main display -->
+</header>
+
+<!-- The story river -->
+<section class="story-river">
+
+<!-- The edit bar -->
+<header class="edit-header">
+<$button message="tw-NewTiddler" class="btn btn-mini btn-success">New</$button>
+<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
+</header>
+
+
+<!-- The main story -->
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="scroller" itemClass="tw-tiddler-frame"/>
-</div>
-</div>
-</div>
+
+<!-- Config area -->
+{{$:/snippets/encryptionstatus}}
+
+<!-- End of story river -->
+</section>
 
 </$navigator>
 

@@ -1,0 +1,133 @@
+title: $:/core/styles/base
+tags: $:/core/styles
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define border-radius(radius)
+```
+  -webkit-border-radius: $radius$;
+     -moz-border-radius: $radius$;
+          border-radius: $radius$;
+```
+\end
+\define box-shadow(shadow)
+```
+  -webkit-box-shadow: $shadow$;
+     -moz-box-shadow: $shadow$;
+          box-shadow: $shadow$;
+```
+\end
+
+{{$:/core/styles/reset}}
+
+body {
+	font-size: {{$:/core/styles/metrics##fontsize}};
+	line-height: {{$:/core/styles/metrics##lineheight}};
+	background-color: {{$:/core/styles/colourmappings##pagebackground}}
+}
+
+a.tw-tiddlylink {
+	text-decoration: none;
+	font-style: normal;
+	font-weight: normal;
+	color: {{$:/core/styles/colourmappings##linkforeground}};
+}
+
+a.tw-tiddlylink:hover {
+	color: {{$:/core/styles/colourmappings##linkbackground}};
+	background-color: {{$:/core/styles/colourmappings##linkforeground}};
+}
+
+a.tw-tiddlylink-resolves {
+	font-style: normal;
+	font-weight: bold;
+}
+
+a.tw-tiddlylink-missing {
+	font-style: italic;
+}
+
+.btn-invisible {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+}
+
+.label {
+	display: inline-block;
+	padding: 2px 4px;
+	font-size: 11.844px;
+	font-weight: bold;
+	line-height: 14px;
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #999999;
+	<<border-radius 3px>>
+}
+
+.edit-header {
+	padding: 1em;	
+	background-color: #000;
+	color: #fff;
+}
+
+.sidebar-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 10em;
+	overflow-y: auto;
+	overflow-x: auto;
+	padding: 1em;
+}
+
+.story-river {
+	margin-left: 10em;
+	padding: 2em;
+}
+
+.tw-tiddler-frame {
+	padding: 2em;
+	margin-bottom: 2em;
+	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
+	max-width: 40em;
+}
+
+.tw-tiddler-frame .title {
+	font-weight: bold;
+	font-size: 33px;
+	line-height: 40px;
+	color: #182955;
+}
+
+.tw-tiddler-missing .title {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.tw-tiddler-frame .tw-tiddler-controls {
+	float: right;
+}
+
+.tw-drop-down {
+	display: block;
+	position: absolute;
+	border: 1px solid {{$:/core/styles/colourmappings##dropdownborder}};
+	background-color: {{$:/core/styles/colourmappings##dropdownbackground}};
+	<<border-radius 4px>>
+	<<box-shadow "0 5px 10px rgba(0, 0, 0, 0.2)">>
+	padding: 0.5em 0em 0.5em 0em;
+}
+
+.tw-drop-down a {
+	display: block;
+	padding: 0em 1em 0em 1em;
+}
+
+.tw-edit-texteditor input, .tw-edit-texteditor textarea {
+	width: 100%;	
+}
+
