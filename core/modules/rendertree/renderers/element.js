@@ -142,13 +142,15 @@ ElementRenderer.prototype.render = function(type) {
 		}
 		output.push(">\n");
 	}
-	$tw.utils.each(this.widget.children,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
+	if($tw.config.htmlVoidElements.indexOf(this.widget.tag) === -1) {
+		$tw.utils.each(this.widget.children,function(node) {
+			if(node.render) {
+				output.push(node.render(type));
+			}
+		});
+		if(isHtml) {
+			output.push("</",this.widget.tag,">\n");
 		}
-	});
-	if(isHtml) {
-		output.push("</",this.widget.tag,">\n");
 	}
 	return output.join("");
 };
