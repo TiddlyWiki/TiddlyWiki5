@@ -140,7 +140,7 @@ ElementRenderer.prototype.render = function(type) {
 				}
 			}
 		}
-		output.push(">");
+		output.push(">\n");
 	}
 	$tw.utils.each(this.widget.children,function(node) {
 		if(node.render) {
@@ -148,7 +148,7 @@ ElementRenderer.prototype.render = function(type) {
 		}
 	});
 	if(isHtml) {
-		output.push("</",this.widget.tag,">");
+		output.push("</",this.widget.tag,">\n");
 	}
 	return output.join("");
 };
