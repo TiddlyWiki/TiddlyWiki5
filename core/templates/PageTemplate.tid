@@ -6,9 +6,7 @@ title: $:/templates/PageTemplate
 <!-- The sidebar header -->
 <header class="sidebar-header">
 
-<div>
-{{SiteTitle}}<br><small>{{SiteSubtitle}}</small>
-</div>
+{{SiteTitle}}.title <br><small>{{SiteSubtitle}}</small>
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview=classic itemClass="tw-menu-list-item"/>
 

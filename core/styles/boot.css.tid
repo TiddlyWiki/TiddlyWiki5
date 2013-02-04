@@ -4,14 +4,12 @@ type: text/css
 /*
 Basic styles used before we boot up the parsing engine
 */
-html {
-    font-family: sans-serif;
-}
 
 /*
-Password prompts
+Password prompt
 */
 .tw-password-wrapper {
+    font-family: sans-serif;
 	z-index: 20000;
 	position: fixed;
 	text-align: center;

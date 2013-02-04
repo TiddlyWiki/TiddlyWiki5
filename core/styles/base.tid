@@ -19,6 +19,10 @@ tags: $:/core/styles
 
 {{$:/core/styles/reset}}
 
+html {
+	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
 body {
 	font-size: {{$:/core/styles/metrics##fontsize}};
 	line-height: {{$:/core/styles/metrics##lineheight}};
@@ -102,7 +106,8 @@ a.tw-tiddlylink-missing {
 	width: {{$:/core/styles/metrics##sidebarwidth}};
 	overflow-y: auto;
 	overflow-x: auto;
-	padding: 1em;
+	padding: 4em 0em 2em 2em;
+	margin: 0;
 }
 
 .tw-menu-list-item {
@@ -122,7 +127,7 @@ a.tw-tiddlylink-missing {
 	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
 }
 
-.tw-tiddler-frame .title {
+.title {
 	font-weight: bold;
 	font-size: 33px;
 	line-height: 40px;
@@ -138,6 +143,10 @@ a.tw-tiddlylink-missing {
 	float: right;
 }
 
+.tw-tiddler-controls .tw-button {
+	margin: 0 0 0 0.5em;
+}
+
 .tw-drop-down {
 	display: block;
 	position: absolute;
@@ -145,8 +154,9 @@ a.tw-tiddlylink-missing {
 	border: 1px solid {{$:/core/styles/colourmappings##dropdownborder}};
 	background-color: {{$:/core/styles/colourmappings##dropdownbackground}};
 	<<border-radius 4px>>
-	<<box-shadow "5px 5px 10px rgba(0, 0, 0, 0.2)">>
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 	padding: 0.5em 0em 0.5em 0em;
+	margin: 0.25em 0 0 0;
 	white-space: nowrap;
 }
 
@@ -156,6 +166,21 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
-	width: 100%;	
+	width: 100%;
 }
 
+canvas.tw-edit-bitmapeditor  {
+	cursor: crosshair;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+img, canvas, embed {
+	max-width: 100%;
+}
+
+embed {
+	width: 100%;
+	height: 20em;
+}
