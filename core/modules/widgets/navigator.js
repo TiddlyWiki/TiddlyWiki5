@@ -119,7 +119,7 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	for(var t=0; t<this.storyList.length; t++) {
 		if(this.storyList[t] === event.tiddlerTitle) {
 			// Compute the title for the draft
-			var draftTitle = "Draft " + (new Date()) + " of " + event.tiddlerTitle;
+			var draftTitle = this.generateDraftTitle(event.tiddlerTitle);
 			this.storyList[t] = draftTitle;
 			// Get the current value of the tiddler we're editing
 			var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
@@ -139,6 +139,18 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	this.saveStoryList();
 	event.stopPropagation();
 	return false;
+};
+
+/*
+Generate a title for the draft of a given tiddler
+*/
+NavigatorWidget.prototype.generateDraftTitle = function(title) {
+	var c = 0;
+	do {
+		var draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
+		c++;
+	} while(this.renderer.renderTree.wiki.tiddlerExists(draftTitle));
+	return draftTitle;
 };
 
 // Take a tiddler out of edit mode, saving the changes
