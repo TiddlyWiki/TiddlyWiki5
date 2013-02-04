@@ -11,17 +11,16 @@ title: $:/templates/PageTemplate
 </div>
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview=classic itemClass="tw-menu-list-item"/>
+
+<div class="edit-controls">
+<$button message="tw-NewTiddler" class="btn btn-mini btn-success">New</$button>
+<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
+</div>
+
 </header>
 
 <!-- The story river -->
 <section class="story-river">
-
-<!-- The edit bar -->
-<header class="edit-header">
-<$button message="tw-NewTiddler" class="btn btn-mini btn-success">New</$button>
-<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
-</header>
-
 
 <!-- The main story -->
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="scroller" itemClass="tw-tiddler-frame"/>

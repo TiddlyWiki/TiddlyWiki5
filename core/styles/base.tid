@@ -68,9 +68,6 @@ a.tw-tiddlylink-missing {
 }
 
 .edit-header {
-	padding: 1em;	
-	background-color: #000;
-	color: #fff;
 }
 
 .sidebar-header {
@@ -78,14 +75,18 @@ a.tw-tiddlylink-missing {
 	top: 0;
 	left: 0;
 	bottom: 0;
-	width: 10em;
+	width: {{$:/core/styles/metrics##sidebarwidth}};
 	overflow-y: auto;
 	overflow-x: auto;
 	padding: 1em;
 }
 
+.tw-menu-list-item {
+	white-space: nowrap;
+}
+
 .story-river {
-	margin-left: 10em;
+	margin-left: {{$:/core/styles/metrics##sidebarwidth}};
 	padding: 2em;
 }
 
@@ -94,6 +95,7 @@ a.tw-tiddlylink-missing {
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
 	max-width: 40em;
+	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
 }
 
 .tw-tiddler-frame .title {
@@ -119,7 +121,7 @@ a.tw-tiddlylink-missing {
 	border: 1px solid {{$:/core/styles/colourmappings##dropdownborder}};
 	background-color: {{$:/core/styles/colourmappings##dropdownbackground}};
 	<<border-radius 4px>>
-	<<box-shadow "0 5px 10px rgba(0, 0, 0, 0.2)">>
+	<<box-shadow "5px 5px 10px rgba(0, 0, 0, 0.2)">>
 	padding: 0.5em 0em 0.5em 0em;
 	white-space: nowrap;
 }
