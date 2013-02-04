@@ -2,12 +2,12 @@ title: StyleBlockWikiText
 
 This syntax enables you to assign arbitrary styles to generated elements. For example:
 
-{{{
+```
 @@color:#f00;
 @@text-decoration:underline;
 This is in red!
 @@
-}}}
+```
 
 Generates the results:
 
@@ -18,26 +18,26 @@ This is in red!
 
 The HTML looks like this:
 
-{{{
+```
 <p style="color:rgb(255, 0, 0); text-decoration:underline;">This is in red!</p>
-}}}
+```
 
 Note that the style block doesn't generate any HTML elements itself, but instead causes the styles to be applied to all of the elements contained within the style block. This means that you can assign styles to elements generated from WikiText. For example, here is a list with some additional styles applied:
 
-{{{
+```
 @@background-color:#00f;
 * First item
 * Second item
 * Third item
 @@
-}}}
+```
 
 The generated HTML is:
 
-{{{
-<ul style="background-color: rgb(0, 0, 255);">
+```
+<ul style="background-color: #00f;">
 <li>First item</li>
 <li>Second item</li>
 <li>Third item</li></ul>
-}}}
+```
 
