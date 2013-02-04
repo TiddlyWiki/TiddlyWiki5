@@ -3,7 +3,7 @@ title: $:/templates/TagTemplate
 <$button popup="tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible"><$setstyle name="background-color" value={{!!color}} class="label"><$view field="title" format="text" /></$setstyle></$button>
 <$reveal state="tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
 <$view field="title" format="link" />
-<hr>
+----
 <$list filter="[is[current]tagging[]sort[title]]">
 <$view field="title" format="link" />
 </$list>
