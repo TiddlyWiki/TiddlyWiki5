@@ -13,7 +13,7 @@ title: $:/templates/PageTemplate
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview=classic itemClass="tw-menu-list-item"/>
 
 <div class="edit-controls">
-<$button message="tw-NewTiddler" class="btn btn-mini btn-success">New</$button>
+<$button message="tw-new-tiddler" class="btn btn-mini btn-success">New</$button>
 <$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
 </div>
 

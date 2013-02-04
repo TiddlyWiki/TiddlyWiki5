@@ -1,9 +1,7 @@
 title: $:/templates/EditTemplate
 modifier: JeremyRuston
 
-<div class="tw-tiddler-frame">
-
-<$view field="title"/> <$button message="tw-SaveTiddler" class="btn btn-mini btn-success">done</$button>
+<$view field="title"/> <$button message="tw-save-tiddler" class="btn btn-mini btn-success">done</$button>
 
 @@.title
 <$edit field="draft.title"/>
@@ -14,5 +12,3 @@ modifier: JeremyRuston
 @@.body
 <$edit field="text"/>
 @@
-
-</div>

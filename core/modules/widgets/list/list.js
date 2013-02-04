@@ -110,10 +110,10 @@ ListWidget.prototype.createListElement = function(title) {
 		children: [this.createListElementMacro(title)],
 		events: [
 			{name: "tw-navigate", handlerFunction: handleEvent},
-			{name: "tw-EditTiddler", handlerFunction: handleEvent},
-			{name: "tw-SaveTiddler", handlerFunction: handleEvent},
-			{name: "tw-CloseTiddler", handlerFunction: handleEvent},
-			{name: "tw-NewTiddler", handlerFunction: handleEvent}
+			{name: "tw-edit-tiddler", handlerFunction: handleEvent},
+			{name: "tw-save-tiddler", handlerFunction: handleEvent},
+			{name: "tw-close-tiddler", handlerFunction: handleEvent},
+			{name: "tw-new-tiddler", handlerFunction: handleEvent}
 		]
 	};
 };

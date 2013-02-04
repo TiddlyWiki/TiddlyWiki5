@@ -99,7 +99,7 @@ Modal.prototype.display = function(title,options) {
 	if(tiddler && tiddler.fields && tiddler.fields.footer) {
 		footerText = tiddler.fields.footer;
 	} else {
-		footerText = '<$button message="tw-close" class="btn btn-primary">Close</$button>';
+		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
 	}
 	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText),
 		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki});
@@ -109,7 +109,7 @@ Modal.prototype.display = function(title,options) {
 		footerRenderTree.refreshInDom(changes);
 	});
 	// Add the close event handler
-	wrapper.addEventListener("tw-close",function(event) {
+	wrapper.addEventListener("tw-close-tiddler",function(event) {
 		// Force layout and animate the modal message away
 		$tw.utils.forceLayout(modalBackdrop);
 		$tw.utils.forceLayout(modalWrapper);
@@ -126,7 +126,7 @@ Modal.prototype.display = function(title,options) {
 				document.body.removeChild(wrapper);
 			}
 		},false);
-		// Don't let anyone else handle the tw-close message
+		// Don't let anyone else handle the tw-close-tiddler message
 		event.stopPropagation();
 		return false;
 	},false);

@@ -2,8 +2,8 @@ title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
 <span class="tw-tiddler-controls">
-<$button message="tw-close" class="btn-invisible">{{$:/core/images/close-button.svg}}</$button>
-<$button message="tw-EditTiddler" class="btn-invisible">{{$:/core/images/edit-button.svg}}</$button>
+<$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button.svg}}</$button>
+<$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button.svg}}</$button>
 </span>
 <span class="title">
 <$view field="title"/>

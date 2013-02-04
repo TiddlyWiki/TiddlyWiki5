@@ -31,10 +31,10 @@ NavigatorWidget.prototype.generate = function() {
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
 	this.events = [
 		{name: "tw-navigate", handlerObject: this, handlerMethod: "handleNavigateEvent"},
-		{name: "tw-EditTiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
-		{name: "tw-SaveTiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},
-		{name: "tw-close", handlerObject: this, handlerMethod: "handleCloseTiddlerEvent"},
-		{name: "tw-NewTiddler", handlerObject: this, handlerMethod: "handleNewTiddlerEvent"}
+		{name: "tw-edit-tiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
+		{name: "tw-save-tiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},
+		{name: "tw-close-tiddler", handlerObject: this, handlerMethod: "handleCloseTiddlerEvent"},
+		{name: "tw-new-tiddler", handlerObject: this, handlerMethod: "handleNewTiddlerEvent"}
 	];
 };
 
