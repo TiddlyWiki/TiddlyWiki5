@@ -25,6 +25,30 @@ body {
 	background-color: {{$:/core/styles/colourmappings##pagebackground}}
 }
 
+code, pre {
+	padding: 0 3px 2px;
+	<<border-radius 3px>>
+}
+
+code {
+	padding: 2px 4px;
+	color: #d14;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+}
+
+pre {
+	display: block;
+	padding: 9.5px;
+	margin: 0 0 10px;
+	word-break: break-all;
+	word-wrap: break-word;
+	white-space: pre;
+	white-space: pre-wrap;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+}
+
 a.tw-tiddlylink {
 	text-decoration: none;
 	font-style: normal;
@@ -91,7 +115,7 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-tiddler-frame {
-	padding: 2em;
+	padding: 3em;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
 	max-width: 40em;
