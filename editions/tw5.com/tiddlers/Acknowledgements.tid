@@ -6,6 +6,4 @@ TiddlyWiki5 wouldn't be possible without the ongoing support of the TiddlyWiki u
 
 TiddlyWiki5 stands on the shoulders of giants, by reusing these projects:
 
-* [[Twitter Bootstrap|http://twitter.github.com/bootstrap/]]'s CSS
-* [[LESS dynamic stylesheet language|http://lesscss.org/]], used by Bootstrap
 * [[The Stanford Javascript Crypto Library|http://crypto.stanford.edu/sjcl/]]
