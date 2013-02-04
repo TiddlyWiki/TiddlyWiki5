@@ -115,11 +115,13 @@ a.tw-tiddlylink-missing {
 .tw-drop-down {
 	display: block;
 	position: absolute;
+	min-width: 20em;
 	border: 1px solid {{$:/core/styles/colourmappings##dropdownborder}};
 	background-color: {{$:/core/styles/colourmappings##dropdownbackground}};
 	<<border-radius 4px>>
 	<<box-shadow "0 5px 10px rgba(0, 0, 0, 0.2)">>
 	padding: 0.5em 0em 0.5em 0em;
+	white-space: nowrap;
 }
 
 .tw-drop-down a {
