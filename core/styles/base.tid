@@ -106,6 +106,7 @@ a.tw-tiddlylink-missing {
 	width: {{$:/core/styles/metrics##sidebarwidth}};
 	overflow-y: auto;
 	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
 	padding: 4em 0em 2em 2em;
 	margin: 0;
 }
