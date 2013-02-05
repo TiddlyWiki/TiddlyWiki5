@@ -14,8 +14,6 @@ All of these thoughts came together when I saw GMail in April 2004, which used A
 
 I started experimenting with HTML and JavaScript to explore the idea further. I'd had virtually no experience of either, just having put together some static pages and simple ASP sites in previous lives. Getting my head around these client-side technologies was painful; like everyone else, I was horrified to discover how appalling were the incompatibilities and inconsistencies of web programming.
 
-Then I could show the idea with a static HTML file. So, I didn't need a serverside to demonstrate how this simple user interface idea worked. Or indeed a proper grown-up server with the ability to run cgi scripts.
-
 ! Launch of TiddlyWiki
 
 So, in September 2004 I released a primitive [[first version of TiddlyWiki|http://tiddlywiki.com/firstversion.html]]. It was the smallest possible thing that demonstrated the idea that I had: it was a simple, self-contained static 48KB HTML file sitting on a dusty old Sun server in my friend Steph's attic.

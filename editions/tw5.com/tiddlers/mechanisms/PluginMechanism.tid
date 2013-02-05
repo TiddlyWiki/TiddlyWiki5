@@ -15,7 +15,7 @@ Plugins are stored as tiddlers of type `application/json` with the field `plugin
 
 The JSON structure for plugin tiddlers is as follows:
 
-{{{
+```
 {
 	"title": "$:/plugins/publisher/name",
 	"description": "An exemplary plugin for demonstration purposes",
@@ -28,7 +28,7 @@ The JSON structure for plugin tiddlers is as follows:
 		"title2": {"text": "Text"}
 	}
 }
-}}}
+```
 
 The titles of the individual tiddlers within a plugin are automatically prefixed with the title of the plugin itself and a slash `/`. Thus, in the example above the two tiddlers within the plugin will have the titles `$:/plugins/publisher/name/title1` and `$:/plugins/publisher/name/title2`.
 
@@ -38,7 +38,7 @@ On the server, plugins can be stored as ordinary JSON tiddlers but it is often m
 
 The `plugin.bundle` file should contain the following JSON structure:
 
-{{{
+```
 {
 	"metadata": {
 		<as described above>
@@ -48,7 +48,7 @@ The `plugin.bundle` file should contain the following JSON structure:
 		{"file": "../MyFile.txt", "fields": {"title": "MyTitle2"}}
 	]
 }
-}}}
+```
 
 The titles of the external tiddlers are again relative to the title of the plugin. Constituent tiddler files must specify the full title of the tiddler, including the name of the plugin.
 
@@ -62,7 +62,7 @@ To be usable in the browser, plugins just need to be included in the wiki. This 
 
 A folder containing an exploded TiddlyWiki can contain a `wiki.tiddlywiki` file that identifies the plugins to be included in this wiki:
 
-{{{
+```
 {
 	"plugins": [
 		"slider",
@@ -72,7 +72,7 @@ A folder containing an exploded TiddlyWiki can contain a `wiki.tiddlywiki` file 
 		"/mylib/another",
 	]
 }
-}}}
+```
 
 Plugins can be identified in several ways:
 

@@ -2,7 +2,7 @@ title: TaskManagementExample
 
 ! Outstanding tasks
 
-<$list filter="[tag[task]!tag[done]sort[created]]">
+<$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
 
 <$checkbox tag="done"> <$view field="title" format="link"/></$checkbox>
 
@@ -10,7 +10,7 @@ title: TaskManagementExample
 
 ! Completed tasks
 
-<$list filter="[tag[task]tag[done]sort[created]]">
+<$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
 
 <$checkbox tag="done"> <$view field="title" format="link"/></$checkbox>
 
