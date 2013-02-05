@@ -14,10 +14,10 @@ You can explore this mechanism by opening the JavaScript console in your browser
 $tw.wiki.addTiddler({title: "HelloThere", text: "This is some new content"});
 ```
 
-If the tiddler `HelloThere` is visible then you'll see it instantly change to reflect the new content. If you create a tiddler that doesn't currently exist then you'll see any displayed links to it instantly change from italicised to normal:
+If the tiddler `HelloThere` is visible then you'll see it instantly change to reflect the new content. If you create a tiddler that doesn't currently exist (like IntentionallyMissingTiddler) then you'll see any displayed links to it instantly change from italicised to normal:
 
 ```
-$tw.wiki.addTiddler({title: "TiddlyWiki5", text: "This tiddler now exists"});
+$tw.wiki.addTiddler({title: "IntentionallyMissingTiddler", text: "This tiddler now exists"});
 ```
 
 If you're interested in understanding more about the internal operation of TiddlyWiki, it is recommended that you review the [[Docs]] and read the code -- start with the boot kernel [[$:/core/boot.js]].
