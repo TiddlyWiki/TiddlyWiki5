@@ -241,15 +241,15 @@ Returns the new start position, after the parsed operation
 function parseFilterOperation(operators,filterString,p) {
 	var operator, operand, bracketPos;
 	// Skip the starting square bracket
-	if(filterString[p++] !== "[") {
+	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
 	}
 	// Process each operator in turn
 	do {
 		operator = {};
 		// Check for an operator prefix
-		if(filterString[p] === "!") {
-			operator.prefix = filterString[p++];
+		if(filterString.charAt(p) === "!") {
+			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
 		bracketPos = filterString.indexOf("[",p);
@@ -270,9 +270,9 @@ function parseFilterOperation(operators,filterString,p) {
 		p = bracketPos + 1;
 		// Push this operator
 		operators.push(operator);
-	} while(filterString[p] !== "]");
+	} while(filterString.charAt(p) !== "]");
 	// Skip the ending square bracket
-	if(filterString[p++] !== "]") {
+	if(filterString.charAt(p++) !== "]") {
 		throw "Missing ] in filter expression";
 	}
 	// Return the parsing position
