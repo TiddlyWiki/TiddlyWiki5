@@ -30,13 +30,14 @@ ClassicListView.prototype.insert = function(index) {
 	var listElementNode = this.listWidget.children[index],
 		targetElement = listElementNode.domNode;
 	// Get the current height of the tiddler
-	var currHeight = targetElement.offsetHeight + parseInt(window.getComputedStyle(targetElement).marginTop,10);
+	var currMarginBottom = parseInt(window.getComputedStyle(targetElement).marginBottom,10),
+		currMarginTop = parseInt(window.getComputedStyle(targetElement).marginTop,10),
+		currHeight = targetElement.offsetHeight + currMarginTop;
 	// Reset the margin once the transition is over
 	var transitionEventName = $tw.utils.convertEventName("transitionEnd");
 	targetElement.addEventListener(transitionEventName,function handler(event) {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
-			{transform: "none"},
 			{marginBottom: ""}
 		]);
 		targetElement.removeEventListener(transitionEventName,handler,false);
@@ -52,8 +53,7 @@ ClassicListView.prototype.insert = function(index) {
 	$tw.utils.setStyle(targetElement,[
 		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
-		{transform: "rotateX(0deg)"},
-		{marginBottom: "0px"},
+		{marginBottom: currMarginBottom + "px"},
 		{opacity: "1.0"}
 	]);
 };
