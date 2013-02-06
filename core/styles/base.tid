@@ -61,8 +61,7 @@ a.tw-tiddlylink {
 }
 
 a.tw-tiddlylink:hover {
-	color: {{$:/core/styles/colourmappings##linkbackground}};
-	background-color: {{$:/core/styles/colourmappings##linkforeground}};
+	text-decoration: underline;
 }
 
 a.tw-tiddlylink-resolves {
