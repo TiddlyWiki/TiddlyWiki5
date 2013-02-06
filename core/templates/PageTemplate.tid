@@ -8,7 +8,7 @@ title: $:/templates/PageTemplate
 
 {{SiteTitle}}.title <br><small>{{SiteSubtitle}}</small>
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview=classic itemClass="tw-menu-list-item"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" itemClass="tw-menu-list-item"/>
 
 <div class="edit-controls">
 <$button message="tw-new-tiddler" class="btn btn-mini btn-success">New</$button>
@@ -21,7 +21,7 @@ title: $:/templates/PageTemplate
 <section class="story-river">
 
 <!-- The main story -->
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="scroller" itemClass="tw-tiddler-frame"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="classic" itemClass="tw-tiddler-frame"/>
 
 <!-- Config area -->
 {{$:/snippets/encryptionstatus}}

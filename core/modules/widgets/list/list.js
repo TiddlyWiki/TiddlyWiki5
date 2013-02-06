@@ -166,8 +166,16 @@ Remove a list element from the list, along with the attendant DOM nodes
 ListWidget.prototype.removeListElement = function(index) {
 	// Get the list element
 	var listElement = this.children[index];
-	// Remove the DOM node
-	listElement.domNode.parentNode.removeChild(listElement.domNode);
+	// Invoke the listview to animate the removal
+	if(this.listview && this.listview.remove) {
+		if(!this.listview.remove(index)) {
+			// Only delete the DOM element if the listview.remove() returned false
+			listElement.domNode.parentNode.removeChild(listElement.domNode);
+		}
+	} else {
+		// Always remove the DOM node if we didn't invoke the listview
+		listElement.domNode.parentNode.removeChild(listElement.domNode);
+	}
 	// Then delete the actual renderer node
 	this.children.splice(index,1);
 };
@@ -266,6 +274,10 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			// The list element isn't there, so we need to insert it
 			this.children.splice(t,0,this.renderer.renderTree.createRenderer(this.renderer.renderContext,this.createListElement(this.list[t])));
 			this.renderer.domNode.insertBefore(this.children[t].renderInDom(),this.renderer.domNode.childNodes[t]);
+			// Ask the listview to animate the insertion
+			if(this.listview && this.listview.insert) {
+				this.listview.insert(t);
+			}
 		} else {
 			// Delete any list elements preceding the one we want
 			for(var n=index-1; n>=t; n--) {
