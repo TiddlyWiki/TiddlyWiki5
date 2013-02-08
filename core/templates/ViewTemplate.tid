@@ -11,7 +11,7 @@ modifier: JeremyRuston
 
 <div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="date"/></div>
 
-@@.tw-tags-wrapper <$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" />@@
+<div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" /></div>
 
 <div class="body">
 	<$view field="text" format="wikified">

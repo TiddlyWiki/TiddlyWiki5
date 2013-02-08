@@ -80,6 +80,10 @@ a.tw-tiddlylink-missing {
 	border: none;
 }
 
+.tw-tags-wrapper {
+	margin: 0.25em 0 1em 0;
+}
+
 .tw-tag-label {
 	display: inline-block;
 	padding: 2px 4px;
@@ -91,9 +95,13 @@ a.tw-tiddlylink-missing {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: #999999;
-	border: 1px solid rgba(0,0,0,0.22);
+	border: 1px solid rgba(0,0,0,0.0);
 	<<border-radius 3px>>
 	<<box-shadow "inset 1px 1px 0 rgba(255,255,255,0.22)">>
+}
+
+.tw-tag-label:hover {
+	<<box-shadow "inset 0px 2em 0 rgba(0,0,0,0.22)">>
 }
 
 .edit-header {
@@ -165,6 +173,12 @@ a.tw-tiddlylink-missing {
 .tw-drop-down a {
 	display: block;
 	padding: 0em 1em 0em 1em;
+}
+
+.tw-drop-down a:hover {
+	color: {{$:/core/styles/colourmappings##linkbackground}};
+	background-color: {{$:/core/styles/colourmappings##linkforeground}};
+	text-decoration: none;
 }
 
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
