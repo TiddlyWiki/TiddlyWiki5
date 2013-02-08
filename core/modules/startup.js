@@ -72,8 +72,6 @@ exports.startup = function() {
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
 		document.addEventListener("tw-scroll",$tw.pageScroller,false);
-		// Install the sprite factory
-		$tw.sprite = new $tw.utils.Sprite();
 		// Install the save action handler
 		$tw.wiki.initSavers();
 		document.addEventListener("tw-save-wiki",function(event) {
