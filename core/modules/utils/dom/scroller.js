@@ -31,7 +31,7 @@ Handle an event
 */
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tw-scroll") {
-		return this.handleScrollEvent(event);
+		return this.scrollIntoView(event);
 	}
 	return true;
 };
@@ -39,7 +39,7 @@ PageScroller.prototype.handleEvent = function(event) {
 /*
 Handle a scroll event hitting the page document
 */
-PageScroller.prototype.handleScrollEvent = function(event) {
+PageScroller.prototype.scrollIntoView = function(event) {
 	// Get the offset bounds of the element
 	var domNode = event.target,
 		bounds = {
