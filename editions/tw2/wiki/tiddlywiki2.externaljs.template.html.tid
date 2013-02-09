@@ -1,0 +1,7 @@
+title: $:/core/templates/tiddlywiki2.externaljs.template.html
+
+{{{ [prefix[{prejs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [prefix[{js}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [prefix[{postjs}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+{{{ [prefix[{jsext}]] ||$:/core/templates/plain-text-tiddler-strip-comments}}}
+
