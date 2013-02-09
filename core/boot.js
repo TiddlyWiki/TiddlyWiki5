@@ -404,7 +404,16 @@ if(!$tw.browser) {
 	// System paths and filenames
 	$tw.boot.bootFile = path.basename(module.filename);
 	$tw.boot.bootPath = path.dirname(module.filename);
-	$tw.boot.wikiPath = process.cwd();
+	// If the first command line argument doesn't start with `--` then we
+	// interpret it as the path to the wiki folder, which will otherwise default
+	// to the current folder
+	$tw.boot.argv = Array.prototype.slice.call(process.argv,2);
+	if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+		$tw.boot.wikiPath = $tw.boot.argv[0];
+		$tw.boot.argv = $tw.boot.argv.slice(1);
+	} else {
+		$tw.boot.wikiPath = process.cwd();
+	}
 	// Read package info
 	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
 	// Check node version number

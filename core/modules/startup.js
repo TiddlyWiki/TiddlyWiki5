@@ -130,7 +130,7 @@ exports.startup = function() {
 	} else {
 		// On the server, start a commander with the command line arguments
 		commander = new $tw.Commander(
-			Array.prototype.slice.call(process.argv,2),
+			$tw.boot.argv,
 			function(err) {
 				if(err) {
 					console.log("Error: " + err);
