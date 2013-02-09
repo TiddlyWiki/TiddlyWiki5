@@ -63,7 +63,9 @@ ClassicListView.prototype.remove = function(index) {
 		targetElement = listElementNode.domNode;
 	// Get the current height of the tiddler
 	var currWidth = targetElement.offsetWidth,
-		currHeight = targetElement.offsetHeight + parseInt(window.getComputedStyle(targetElement).marginTop,10);
+		currMarginBottom = parseInt(window.getComputedStyle(targetElement).marginBottom,10),
+		currMarginTop = parseInt(window.getComputedStyle(targetElement).marginTop,10),
+		currHeight = targetElement.offsetHeight + currMarginTop;
 	// Attach an event handler for the end of the transition
 	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
 		if(targetElement.parentNode) {
@@ -74,7 +76,7 @@ ClassicListView.prototype.remove = function(index) {
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
 		{transform: "translateX(0px)"},
-		{marginBottom:  "0px"},
+		{marginBottom:  currMarginBottom + "px"},
 		{opacity: "1.0"}
 	]);
 	$tw.utils.forceLayout(targetElement);
