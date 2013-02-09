@@ -6,27 +6,21 @@
 mkdir -p tmp
 mkdir -p tmp/tw2
 
-# Prepare the readme file from the revelant content in the tw5.com content
+# Prepare the readme file from the revelant content in the tw5.com wiki
 
-pushd editions/tw5.com > /dev/null
-
-node ../../tiddlywiki.js \
+node ./tiddlywiki.js \
+	editions/tw5.com \
 	--verbose \
-	--savetiddler TiddlyWiki2ReadMe ../tw2/readme.md text/html \
+	--savetiddler TiddlyWiki2ReadMe editions/tw2/readme.md text/html \
 	|| exit 1
-
-popd > /dev/null
 
 # cook the TiddlyWiki 2.x.x index file
 
-pushd editions/tw2 > /dev/null
-
-node ../../tiddlywiki.js \
+node ./tiddlywiki.js \
+	editions/tw2 \
 	--verbose \
-	--load source/tiddlywiki.com/index.html.recipe \
-	--savetiddler $:/core/templates/tiddlywiki2.template.html ../../tmp/tw2/index.html text/plain \
+	--load editions/tw2/source/tiddlywiki.com/index.html.recipe \
+	--savetiddler $:/core/templates/tiddlywiki2.template.html ./tmp/tw2/index.html text/plain \
 	|| exit 1
-
-popd > /dev/null
 
 opendiff tmp/tw2/index.html editions/tw2/target/index.2.6.5.html
