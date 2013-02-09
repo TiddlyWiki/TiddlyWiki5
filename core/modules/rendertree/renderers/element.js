@@ -149,7 +149,7 @@ ElementRenderer.prototype.render = function(type) {
 			}
 		});
 		if(isHtml) {
-			output.push("</",this.widget.tag,">\n");
+			output.push("</",this.widget.tag,">");
 		}
 	}
 	return output.join("");
