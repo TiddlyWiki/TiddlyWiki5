@@ -65,7 +65,7 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		titleText = title;
 	}
-	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",titleText),
+	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",titleText,{parseAsInline: true}),
 		headerRenderTree = new $tw.WikiRenderTree(headerParser,{wiki: $tw.wiki});
 	headerRenderTree.execute({tiddlerTitle: title});
 	headerRenderTree.renderInDom(headerTitle);
@@ -101,7 +101,7 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
 	}
-	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText),
+	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText,{parseAsInline: true}),
 		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki});
 	footerRenderTree.execute({tiddlerTitle: title});
 	footerRenderTree.renderInDom(modalFooterButtons);
@@ -152,7 +152,7 @@ Modal.prototype.display = function(title,options) {
 	$tw.utils.forceLayout(modalWrapper);
 	// Set final animated styles
 	$tw.utils.setStyle(modalBackdrop,[
-		{opacity: "1"}
+		{opacity: "0.7"}
 	]);
 	$tw.utils.setStyle(modalWrapper,[
 		{transform: "translateY(0px)"}
