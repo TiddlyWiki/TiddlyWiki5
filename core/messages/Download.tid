@@ -1,7 +1,7 @@
 title: $:/messages/Download
 type: text/vnd.tiddlywiki
 subtitle: Download changes
-footer: <<button close class:"btn btn-primary"><Close>>
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>
 help: http://five.tiddlywiki.com/#help:DownloadingChanges
 
 Your browser only supports manual saving.
