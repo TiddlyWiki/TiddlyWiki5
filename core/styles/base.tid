@@ -133,7 +133,7 @@ a.tw-tiddlylink-missing {
 	padding: 3em;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
-	max-width: 40em;
+	max-width: 50em;
 	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
 }
 
