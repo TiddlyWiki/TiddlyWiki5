@@ -36,12 +36,12 @@ exports["application/vnd.tiddlywiki2-recipe"] = function(text,fields) {
 			var ext = path.extname(sourcePath),
 				extensionInfo = $tw.config.fileExtensionInfo[ext],
 				typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
-				data = fs.readFileSync(sourcePath).toString(typeInfo ? typeInfo.encoding : "utf8"),
+				data = fs.readFileSync(sourcePath,typeInfo ? typeInfo.encoding : "utf8"),
 				fields = {title: sourcePath},
 				tids = self.deserializeTiddlers(ext,data,fields),
 				metafile = sourcePath + ".meta";
 			if(ext !== ".json" && tids.length === 1 && fs.existsSync(metafile)) {
-				var metadata = fs.readFileSync(metafile).toString("utf8");
+				var metadata = fs.readFileSync(metafile,"utf8");
 				if(metadata) {
 					tids = [$tw.utils.parseFields(metadata,tids[0])];
 				}
@@ -56,7 +56,7 @@ exports["application/vnd.tiddlywiki2-recipe"] = function(text,fields) {
 			for(var t=0; t<recipe.length; t++) {
 				if(recipe[t].name === "recipe") {
 					var recipeFile = path.resolve(path.dirname(sourcePath),recipe[t].value);
-					processRecipe(recipeFile,fs.readFileSync(recipeFile));
+					processRecipe(recipeFile,fs.readFileSync(recipeFile,"utf8"));
 				} else {
 					var tiddlerFile = path.resolve(path.dirname(sourcePath),recipe[t].value);
 					loadTiddlersFromFile(tiddlerFile,"{" + recipe[t].name + "}");
