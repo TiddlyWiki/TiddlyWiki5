@@ -51,12 +51,19 @@ LinkWidget.prototype.generate = function() {
 		events.push({name: "mouseover", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 		events.push({name: "mouseout", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 	}
+	// Get the value of the tw-wikilinks configuration macro
+	var wikiLinksMacro = this.findMacroDefinition("tw-wikilinks"),
+		useWikiLinks = wikiLinksMacro ? !(wikiLinksMacro.text.trim() === "no") : true;
 	// Set up the element
-	this.tag = "a";
-	this.attributes = {
-		href: this.isExternal ? this.to : encodeURIComponent(this.to),
-		"class": classes.join(" ")
-	};
+	if(useWikiLinks) {
+		this.tag = "a";
+		this.attributes = {
+			href: this.isExternal ? this.to : encodeURIComponent(this.to),
+			"class": classes.join(" ")
+		};
+	} else {
+		this.tag = "span";
+	}
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
 	this.events = events;
 };
@@ -108,6 +115,20 @@ LinkWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 			}
 		});
 	}
+};
+
+/*
+Find a named macro definition
+*/
+LinkWidget.prototype.findMacroDefinition = function(name) {
+	var context = this.renderer.renderContext;
+	while(context) {
+		if(context.macroDefinitions && context.macroDefinitions[name]) {
+			return context.macroDefinitions[name];
+		}
+		context = context.parentContext;
+	}
+	return undefined;
 };
 
 exports.link = LinkWidget;
