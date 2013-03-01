@@ -24,7 +24,8 @@ Join the discussions on <a class='tw-tiddlylink tw-tiddlylink-external' href='ht
 the TiddlyWikiDev Google Group</a></li><li>
 Follow <a class='tw-tiddlylink tw-tiddlylink-external' href='http://twitter.com/#!/TiddlyWiki'>
 @TiddlyWiki on Twitter</a> for the latest news</li></ul></div><h1 class=''>
-Usage</h1><div class='tw-transclude'>
+Getting started with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='TiddlyWiki'>
+TiddlyWiki</a> under node.js</h1><div class='tw-transclude'>
 <p>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='TiddlyWiki5'>
 TiddlyWiki5</a> can be used on the command line to perform an extensive set of operations based on tiddlers, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='TiddlerFiles'>
@@ -54,29 +55,93 @@ Commands</h2><p>
 The following commands are available:</p><div class='tw-list-frame'>
 <div class='tw-list-element'>
 <span class='tw-transclude'>
+<h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='DumpCommand'>
-DumpCommand</a></span></span></div><div class='tw-list-element'>
+DumpCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<h3 class=''>
+dump tiddlers</h3><p>
+Dump the titles of the tiddlers in the wiki store </p><pre>
+--dump tiddlers</pre><h3 class=''>
+dump tiddler</h3><p>
+Dump the fields of an individual tiddler </p><pre>
+--dump tiddler &lt;title&gt;</pre><h3 class=''>
+dump shadows</h3><p>
+Dump the titles of the shadow tiddlers in the wiki store </p><pre>
+--dump shadows</pre><h3 class=''>
+dump config</h3><p>
+Dump the current core configuration </p><pre>
+--dump config</pre></div></div></span></div><div class='tw-list-element'>
 <span class='tw-transclude'>
+<h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='LoadCommand'>
-LoadCommand</a></span></span></div><div class='tw-list-element'>
+LoadCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+Load tiddlers from 2.x.x <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='TiddlyWiki'>
+TiddlyWiki</a> files (<code>
+.html</code>), <code>
+.tiddler</code>, <code>
+.tid</code>, <code>
+.json</code> or other files </p><pre>
+--load &lt;filepath&gt;</pre></div></div></span></div><div class='tw-list-element'>
 <span class='tw-transclude'>
+<h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='SaveTiddlerCommand'>
-SaveTiddlerCommand</a></span></span></div><div class='tw-list-element'>
+SaveTiddlerCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+Save an individual tiddler as a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='ContentType'>
+ContentType</a>, defaults to <code>
+text/html</code> </p><pre>
+--savetiddler &lt;title&gt; &lt;filename&gt; [&lt;type&gt;]</pre></div></div></span></div><div class='tw-list-element'>
 <span class='tw-transclude'>
+<h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='ServerCommand'>
-ServerCommand</a></span></span></div><div class='tw-list-element'>
+ServerCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+The server is very simple. At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for <code>
+GET</code>, <code>
+PUT</code> and <code>
+DELETE</code>.</p><pre>
+--server &lt;port&gt; &lt;roottiddler&gt; &lt;rendertype&gt; &lt;servetype&gt;</pre><p>
+For example:</p><pre>
+--server 8080 $:/core/tiddlywiki5.template.html text/plain text/html</pre><p>
+The parameters are:</p><pre>
+--server &lt;port&gt; &lt;roottiddler&gt; &lt;rendertype&gt; &lt;servetype&gt;</pre><ul>
+<li>
+<strong>
+port</strong> - port number to serve from (defaults to &quot;8080&quot;)</li><li>
+<strong>
+roottiddler</strong> - the tiddler to serve at the root (defaults to &quot;$:/core/tiddlywiki5.template.html&quot;) </li><li>
+<strong>
+rendertype</strong> - the content type to which the root tiddler should be rendered (defaults to &quot;text/plain&quot;)</li><li>
+<strong>
+servetype</strong> - the content type with which the root tiddler should be served (defaults to &quot;text/html&quot;)</li></ul></div></div></span></div><div class='tw-list-element'>
 <span class='tw-transclude'>
+<h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='VerboseCommand'>
-VerboseCommand</a></span></span></div><div class='tw-list-element'>
+VerboseCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+Triggers verbose output, useful for debugging </p><pre>
+--verbose</pre></div></div></span></div><div class='tw-list-element'>
 <span class='tw-transclude'>
+<h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='VersionCommand'>
-VersionCommand</a></span></span></div></div></div><p>
+VersionCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+Displays the version number of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='TiddlyWiki'>
+TiddlyWiki</a>.</p><pre>
+--version</pre></div></div></span></div></div></div><p>
 <em>
 This <code>
 readme</code> file was automatically generated by <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='TiddlyWiki5'>

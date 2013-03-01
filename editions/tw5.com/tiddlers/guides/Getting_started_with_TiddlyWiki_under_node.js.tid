@@ -30,4 +30,7 @@ For trying TiddlyWiki5 out under node.js, several batch files are provided:
 
 The following commands are available:
 
-{{{ [tag[command]sort[title]] }}}
+<$list filter="[tag[command]sort[title]]">
+	!!! <$view field="title" format="link"/>
+	<$view field="text" format="wikified"/>
+</$list>
