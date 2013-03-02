@@ -7,4 +7,4 @@ This is a modal wizard dialogue, stored in the tiddler SampleWizard.
 
 {{Motovun Jack.jpg}}
 
-You can <$button message="tw-modal" param="Introduction" class="btn btn-inverse">nest wizards</$button>.
+You can <$button message="tw-modal" param="Demos" class="btn btn-inverse">nest wizards</$button>.
