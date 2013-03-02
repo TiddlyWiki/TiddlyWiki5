@@ -1,6 +1,6 @@
-title: Getting started with TiddlyWiki under node.js
+title: TiddlyWiki5 Node Edition
 modifier: JeremyRuston
-tags: guide
+tags: docs edition
 
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlerFiles and TiddlyWikiFiles. For example, this loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 

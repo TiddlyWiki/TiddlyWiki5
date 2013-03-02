@@ -7,4 +7,4 @@ For TiddlyWiki, [[node.js]] means that we can have a single code base that can r
 
 For end users, [[node.js]] is no more complicated to install than a web browser, but unlocks powerful capabilities such as the ability to run TiddlyWiki as a web server that you can connect to from other devices.
 
-See [[Getting started with TiddlyWiki under node.js]] for more details.
+See [[TiddlyWiki5 Node Edition]] for more details.

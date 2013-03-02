@@ -1,0 +1,5 @@
+title: TiddlyWiki2ReadMe
+
+\define tw-wikilinks() no
+! Building classic TiddlyWiki with TiddlyWiki5
+{{Building classic TiddlyWiki with TiddlyWiki5}}

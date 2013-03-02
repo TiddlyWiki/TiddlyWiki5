@@ -1,7 +1,5 @@
-title: TiddlyWiki2ReadMe
-
-\define tw-wikilinks() no
-! Using TiddlyWiki5 to build TiddlyWikiClassic
+title: Building classic TiddlyWiki with TiddlyWiki5
+tags: docs
 
 TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWiki from their constituent components. Doing so involves these additional features over and above those used for building TiddlyWiki5:
 

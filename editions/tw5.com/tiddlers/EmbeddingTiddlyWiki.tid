@@ -1,6 +1,0 @@
-title: EmbeddingTiddlyWiki
-tags: docs scenarios dev
-
-TiddlyWiki can be embedded into a desktop or mobile application to enable it to perform operations that are not possible from a conventional browser.
-
-For example, Mobile Safari on iOS runs TiddlyWiki well but doesn't provide any practical means to persistently save changes on the device. A wrapper application can embed TiddlyWiki using the ~UIWebView control.

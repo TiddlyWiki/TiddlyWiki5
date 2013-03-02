@@ -14,7 +14,8 @@ tiddlers</span> &ndash; and give them titles so that they can be structured with
 TiddlyWiki</span> aims to provide a fluid interface for working with tiddlers, allowing them to be aggregated and composed into longer narratives.</p><p>
 <span>
 TiddlyWiki5</span> has many <span>
-improvements</span> over the original. It is currently labelled alpha, meaning it is working but incomplete. It is the best possible time to get involved and support its future development. You can:</p><ul>
+improvements</span> over the original. It is currently labelled alpha, meaning it is working but incomplete. It is a great time to get involved and support its <span>
+future development</span>. You can:</p><ul>
 <li>
 Explore its features online at <span>
 http://five.tiddlywiki.com/</span></li><li>
@@ -23,7 +24,9 @@ development on GitHub</span></li><li>
 Join the discussions on <span>
 the TiddlyWikiDev Google Group</span></li><li>
 Follow <span>
-@TiddlyWiki on Twitter</span> for the latest news</li></ul></div><h1 class=''>
+@TiddlyWiki on Twitter</span> for the latest news</li><li>
+Learn how to <span>
+help the TiddlyWiki project and community</span></li></ul></div><h1 class=''>
 Getting started with <span>
 TiddlyWiki</span> under node.js</h1><div class='tw-transclude'>
 <p>

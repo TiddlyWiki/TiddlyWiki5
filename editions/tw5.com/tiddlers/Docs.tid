@@ -1,17 +1,13 @@
 title: Docs
 tags: docs introduction
 
-This is the main documentation hub for TiddlyWiki. See also:
+This is the main documentation hub for TiddlyWiki. See also the DeveloperDocs.
 
-* [[Internals]] for developer documentation
+! Editions
 
-! Guides
+TiddlyWiki5 can be used via these editions:
 
-How to get things done with TiddlyWiki:
-
-* [[Getting started with TiddlyWiki in the browser]]
-* [[Getting started with TiddlyWiki under node.js]]
-* [[Getting involved in TiddlyWiki development]]
+{{{ [tag[edition]sort[title]] }}}
 
 ! Concepts
 
@@ -37,51 +33,17 @@ The machinery tying those concepts together includes:
 
 These are the individual rules that make up WikiText:
 
-* ClassBlockWikiText
-* CodeBlockWikiText
-* CodeRunWikiText
-* DashWikiText
-* EmphasisWikiText
-* EntityWikiText
-* ExternalLinkWikiText
-* HeadingWikiText
-* HtmlWikiText
-* ImageWikiText
-* ListWikiText
-* MacroWikiText
-* PrettyLinkWikiText
-* RuleWikiText
-* StyleBlockWikiText
-* TranscludeWikiText
-* TypedBlockWikiText
-* WikiLinkWikiText
+{{{ [tag[wikitextrule]sort[title]] }}}
 
-! Macros
+! Widgets
 
-Macros give WikiText dynamic functionality:
+Widgets give WikiText dynamic functionality:
 
-* ButtonMacro
-* ColorMacro
-* CommentMacro
-* DownloadMacro
-* EchoMacro
-* EditMacro
-* HideMacro
-* ImageMacro
-* IncludeMacro
-* LinkMacro
-* LinkCatcherMacro
-* ListMacro
-* SliderMacro
-* StoryMacro
-* TiddlerMacro
-* TranscludeMacro
-* VideoMacro
-* ViewMacro
+{{{ [tag[widget]sort[title]] }}}
 
 ! Commands
 
-When run under node.js, TiddlyWiki supports a [[command line interface|Getting started with TiddlyWiki under node.js]] with the following built-in commands:
+When run under node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki5 Node Edition]] with the following built-in commands:
 
 {{{ [tag[command]sort[title]] }}}
 
