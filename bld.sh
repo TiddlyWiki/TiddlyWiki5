@@ -44,7 +44,7 @@ node ./tiddlywiki.js \
 # Third, empty.html: empty wiki for reuse
 
 node ./tiddlywiki.js \
-	./editions/tw5.com \
+	./editions/empty \
 	--verbose \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/empty.html text/plain \
 	|| exit 1
