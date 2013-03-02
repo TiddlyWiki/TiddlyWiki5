@@ -34,7 +34,7 @@ The titles of the individual tiddlers within a plugin are automatically prefixed
 
 ! Plugin folders
 
-On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.tiddlywiki` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
+On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.bundle` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
 
 The `plugin.bundle` file should contain the following JSON structure:
 
@@ -60,7 +60,7 @@ The standard distribution of TiddlyWiki includes a number of standard plugins in
 
 To be usable in the browser, plugins just need to be included in the wiki. This is done when the wiki is generated on the server.
 
-A folder containing an exploded TiddlyWiki can contain a `wiki.tiddlywiki` file that identifies the plugins to be included in this wiki:
+A folder containing an exploded TiddlyWiki can contain a `tiddlywiki.info` file that identifies the plugins to be included in this wiki:
 
 ```
 {
