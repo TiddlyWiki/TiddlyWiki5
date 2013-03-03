@@ -54,15 +54,30 @@ PageScroller.prototype.scrollIntoView = function(event) {
 		bounds.left += domNode.offsetLeft;
 		bounds.top += domNode.offsetTop;
 	}
-	// Now scroll the body
-	var scrollPosition = $tw.utils.getScrollPosition();
+	// Now get ready to scroll the body
 	this.cancelScroll();
 	this.startTime = new Date();
-	this.startX = scrollPosition.x;
-	this.startY = scrollPosition.y;
-	this.endX = bounds.left;
-	this.endY = bounds.top;
-	if((this.endX < this.startX) || (this.endX > (this.startX + window.innerWidth)) || (this.endY < this.startY) || (this.endY > (this.startY + window.innerHeight))) {
+	var scrollPosition = $tw.utils.getScrollPosition(),
+		// We'll consider the horizontal and vertical scroll directions separately via this function
+		getEndPos = function(targetPos,targetSize,currentPos,currentSize) {
+			// If the target is above/left of the current view, then scroll to it's top/left
+			if(targetPos <= currentPos) {
+				return targetPos;
+			// If the target is smaller than the window and the scroll position is too far up, then scroll till the target is at the bottom of the window
+			} else if(targetSize < currentSize && currentPos < (targetPos + targetSize - currentSize)) {
+				return targetPos + targetSize - currentSize;
+			// If the target is big, then just scroll to the top
+			} else if(currentPos < targetPos) {
+				return targetPos;
+			// Otherwise, stay where we are
+			} else {
+				return currentPos;
+			}
+		},
+		endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
+		endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
+	// Only scroll if necessary
+	if(endX !== scrollPosition.x || endY !== scrollPosition.y) {
 		var self = this;
 		this.timerId = window.setInterval(function() {
 			var t = ((new Date()) - self.startTime) / $tw.config.preferences.animationDuration;
@@ -71,7 +86,7 @@ PageScroller.prototype.scrollIntoView = function(event) {
 				t = 1;
 			}
 			t = $tw.utils.slowInSlowOut(t);
-			window.scrollTo(self.startX + (self.endX - self.startX) * t,self.startY + (self.endY - self.startY) * t);
+			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
 		}, 10);
 	}
 };
