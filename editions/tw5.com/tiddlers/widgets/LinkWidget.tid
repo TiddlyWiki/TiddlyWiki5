@@ -1,20 +1,54 @@
 title: LinkWidget
 tags: docs widget
 
-The `link` widget generates links to tiddlers and external URIs.
+The `link` widget generates links to tiddlers and external URIs. Optionally, hovering over a link can trigger the display of another tiddler as a popup.
 
 ! Attributes
 
-* ```to``` - link target can be a URL 
-* ```hover``` - the title of a tiddler to display when hovering over the link
+* `to` - link target can be a URL 
+* `hover` - the title of a tiddler containing the popup state to set when hovering over the link
+
+The `to` attribute is interpreted as an external link if it matches this regular expression:
+
+```
+/(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i
+```
+
+! Examples
+
+The `hover` attribute is part of the PopupMechanism.
+
+For example:
+
+```
+`$:/MyHover` is {{$:/MyHover}}
+
+<$link to="HelloThere" hover="$:/MyHover">Hover me to see ~HelloThere!</$link>
+<$reveal state="$:/MyHover" type="popup">
+<div class="tw-drop-down">
+{{HelloThere}}
+</div>
+</$reveal>
+```
+
+Renders as:
+
+`$:/MyHover` is {{$:/MyHover}}
+
+<$link to="HelloThere" hover="$:/MyHover">Hover me to see ~HelloThere!</$link>
+<$reveal state="$:/MyHover" type="popup">
+<div class="tw-drop-down">
+{{HelloThere}}
+</div>
+</$reveal>
 
 ! CSS Classes
 
-* ```tw-tiddlylink``` - applied to all links
-* ```tw-tiddlylink-external``` - applied to external, non-tiddler links
-* ```tw-tiddlylink-internal``` - applied to tiddler links
-* ```tw-tiddlylink-missing``` - applied to tiddler links where the target tiddler doesn't exist
-* ```tw-tiddlylink-resolves``` - applied to tiddler links when the target tiddler does exist
+* `tw-tiddlylink` - applied to all links
+* `tw-tiddlylink-external` - applied to external, non-tiddler links
+* `tw-tiddlylink-internal` - applied to tiddler links
+* `tw-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
+* `tw-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
 
 ! Configuration macros
 
