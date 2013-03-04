@@ -34,6 +34,7 @@ node ./tiddlywiki.js \
 	--savetiddler ReadMe ./readme.md text/html \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
 	--savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+	--savetiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
 	--savetiddlers [!is[shadow]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 	|| exit 1
 

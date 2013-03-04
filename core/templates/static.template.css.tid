@@ -1,0 +1,4 @@
+title: $:/core/templates/static.template.css
+
+{{{ [is[shadow]type[text/css]] ||$:/core/templates/css-tiddler}}}
+{{$:/core/styles/base}}
