@@ -19,16 +19,7 @@ title: $:/core/templates/static.tiddler.html
 <body>
 <section class="story-river">
 <div class="tw-tiddler-frame">
-<span class="title">
-`<$view field="title"/>`
-</span>
-<div class="small">`<$view field="modifier" format="link"/>` `<$view field="modified" format="date"/>`</div>
-
-<div class="tw-tags-wrapper">`<$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" />`</div>
-
-<div class="body">
-	`<$transclude template="$:/core/templates/html-tiddler" />`
-</div>
+`<$view tiddler="$:/templates/ViewTemplate" format="htmlwikified"/>`
 </div>
 </section>
 </body>
