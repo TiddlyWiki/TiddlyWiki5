@@ -7,7 +7,6 @@ title: $:/core/templates/static.tiddler.html
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="`{{$:/core/templates/version}}`" />
 <meta name="format-detection" content="telephone=no">
-<meta name="copyright" content="`{{$:/core/copyright.txt}}`" />
 <link rel="stylesheet" href="static.css">
 <title>`{{$:/core/wiki/title}}`</title>
 </head>
