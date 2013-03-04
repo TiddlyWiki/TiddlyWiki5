@@ -1,12 +1,13 @@
 title: $:/core/templates/static.template.html
 type: text/vnd.tiddlywiki-html
 
+\define tw-wikilink-template() static/$uri_encoded$.html
 \rules only filteredtranscludeinline transcludeinline
 <!doctype html>
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="generator" content="TiddlyWiki" />
-<meta name="tiddlywiki-version" content="{{version}}" />
+<meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
 <meta name="format-detection" content="telephone=no">
 <meta name="copyright" content="{{$:/core/copyright.txt}}" />
 <title>{{$:/core/wiki/title}}</title>

@@ -105,6 +105,20 @@ text/html</code> </p><pre>
 <h3 class=''>
 <span class='tw-view-link'>
 <span>
+SaveTiddlersCommand</span></span></h3><div>
+<div class='tw-transclude'>
+<p>
+Save a set of tiddlers matching a filter as separate files of a specified <span>
+ContentType</span> (defaults to <code>
+text/html</code>) and extension (defaults to <code>
+.html</code>).</p><pre>
+--savetiddlers &lt;filter&gt; &lt;template&gt; &lt;pathname&gt; [&lt;type&gt;] [&lt;extension&gt;]</pre><p>
+For example:</p><pre>
+--savetiddlers [!is[shadow]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></span></div><div class='tw-list-element'>
+<span class='tw-transclude'>
+<h3 class=''>
+<span class='tw-view-link'>
+<span>
 ServerCommand</span></span></h3><div>
 <div class='tw-transclude'>
 <p>

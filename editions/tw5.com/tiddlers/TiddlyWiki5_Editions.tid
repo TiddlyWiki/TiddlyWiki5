@@ -5,6 +5,7 @@ The core TiddlyWiki5 code is packaged into several distinct editions designed fo
 
 * [[TiddlyWiki5 Standalone Edition]] for working purely within the browser
 ** Including [[TiddlyWiki5 in the Sky for TiddlySpot|TiddlySpot]]
+** And incorporating [[TiddlyWiki5 Static Site Generation]]
 * [[TiddlyWiki5 Node Edition]] for advanced command line work
 ** Including [[Building classic TiddlyWiki with TiddlyWiki5]]
 * [[TiddlyWiki5 in the Sky for TiddlyWeb]] (and TiddlySpace)

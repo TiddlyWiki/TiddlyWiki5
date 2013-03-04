@@ -19,6 +19,10 @@ echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 
 echo "five.tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
 
+# Create the `static` directory if necessary
+
+mkdir -p $TW5_BUILD_OUTPUT/static
+
 # First,
 #  readme.md: the readme file for GitHub
 #  index.html: the main file, including content
@@ -30,6 +34,7 @@ node ./tiddlywiki.js \
 	--savetiddler ReadMe ./readme.md text/html \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
 	--savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+	--savetiddlers [!is[shadow]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 	|| exit 1
 
 # Second, encrypted.html: a version of the main file encrypted with the password "password"

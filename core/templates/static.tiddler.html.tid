@@ -1,0 +1,36 @@
+title: $:/core/templates/static.tiddler.html
+
+\define tw-wikilink-template() $uri_encoded$.html
+`<!doctype html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="generator" content="TiddlyWiki" />
+<meta name="tiddlywiki-version" content="`{{$:/core/templates/version}}`" />
+<meta name="format-detection" content="telephone=no">
+<meta name="copyright" content="`{{$:/core/copyright.txt}}`" />
+<title>`{{$:/core/wiki/title}}`</title>
+<div id="styleArea">
+`{{{ [is[shadow]type[text/css]] ||$:/core/templates/css-tiddler}}}`
+</div>
+<style type="text/css">
+`{{$:/core/styles/base}}`
+</style>
+</head>
+<body>
+<section class="story-river">
+<div class="tw-tiddler-frame">
+<span class="title">
+`<$view field="title"/>`
+</span>
+<div class="small">`<$view field="modifier" format="link"/>` `<$view field="modified" format="date"/>`</div>
+
+<div class="tw-tags-wrapper">`<$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" />`</div>
+
+<div class="body">
+	`<$transclude template="$:/core/templates/html-tiddler" />`
+</div>
+</div>
+</section>
+</body>
+</html>
+`
