@@ -1,0 +1,37 @@
+title: LinkWidget
+tags: docs widget
+
+The `link` widget generates links to tiddlers and external URIs.
+
+! Attributes
+
+* ```to``` - link target can be a URL 
+* ```hover``` - the title of a tiddler to display when hovering over the link
+
+! CSS Classes
+
+* ```tw-tiddlylink``` - applied to all links
+* ```tw-tiddlylink-external``` - applied to external, non-tiddler links
+* ```tw-tiddlylink-internal``` - applied to tiddler links
+* ```tw-tiddlylink-missing``` - applied to tiddler links where the target tiddler doesn't exist
+* ```tw-tiddlylink-resolves``` - applied to tiddler links when the target tiddler does exist
+
+! Configuration macros
+
+Configuration macros can be used to modify the behaviour of the link widget.
+
+!! tw-wikilinks
+
+Links are suppressed if the macro `tw-wikilinks` evaluates to the string `no`. For example:
+
+```
+\define tw-wikilinks() no
+```
+
+!! tw-wikilink-template
+
+Link targets default to the URL encoded title of the tiddler. The `href` can be templated by defining the configuration macro `tw-wikilink-template`, and including within it the token `$uri_encoded$`. For example:
+
+```
+\define tw-wikilink-template() http://tiddlywiki.com/#$uri_encoded$
+```

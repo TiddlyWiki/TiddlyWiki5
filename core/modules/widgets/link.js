@@ -28,7 +28,6 @@ LinkWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.to = this.renderer.getAttribute("to");
 	this.hover = this.renderer.getAttribute("hover");
-	this.qualifyHoverTitle = this.renderer.getAttribute("qualifyHoverTitle");
 	// Determine the default link characteristics
 	this.isExternal = isLinkExternal(this.to);
 	if(!this.isExternal) {
@@ -52,15 +51,22 @@ LinkWidget.prototype.generate = function() {
 		events.push({name: "mouseout", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 	}
 	// Get the value of the tw-wikilinks configuration macro
-	var wikiLinksMacro = this.findMacroDefinition("tw-wikilinks"),
+	var wikiLinksMacro = this.renderer.findMacroDefinition("tw-wikilinks"),
 		useWikiLinks = wikiLinksMacro ? !(wikiLinksMacro.text.trim() === "no") : true;
 	// Set up the element
 	if(useWikiLinks) {
 		this.tag = "a";
 		this.attributes = {
-			href: this.isExternal ? this.to : encodeURIComponent(this.to),
 			"class": classes.join(" ")
 		};
+		if(this.isExternal) {
+			this.attributes.href = this.to;
+		} else {
+			var wikiLinkTemplateMacro = this.renderer.findMacroDefinition("tw-wikilink-template"),
+				wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.text.trim() : "$uri_encoded$",
+				wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
+			this.attributes.href = wikiLinkText;
+		}
 	} else {
 		this.tag = "span";
 	}
@@ -115,20 +121,6 @@ LinkWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 			}
 		});
 	}
-};
-
-/*
-Find a named macro definition
-*/
-LinkWidget.prototype.findMacroDefinition = function(name) {
-	var context = this.renderer.renderContext;
-	while(context) {
-		if(context.macroDefinitions && context.macroDefinitions[name]) {
-			return context.macroDefinitions[name];
-		}
-		context = context.parentContext;
-	}
-	return undefined;
 };
 
 exports.link = LinkWidget;

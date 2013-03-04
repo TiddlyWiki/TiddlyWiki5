@@ -269,6 +269,20 @@ ElementRenderer.prototype.getContextScopeId = function() {
 	return guidBits.join("");
 };
 
+/*
+Find a named macro definition
+*/
+ElementRenderer.prototype.findMacroDefinition = function(name) {
+	var context = this.renderContext;
+	while(context) {
+		if(context.macroDefinitions && context.macroDefinitions[name]) {
+			return context.macroDefinitions[name];
+		}
+		context = context.parentContext;
+	}
+	return undefined;
+};
+
 exports.element = ElementRenderer
 
 })();
