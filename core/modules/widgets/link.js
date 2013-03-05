@@ -28,6 +28,11 @@ LinkWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.to = this.renderer.getAttribute("to");
 	this.hover = this.renderer.getAttribute("hover");
+	this.qualifyHoverTitles = this.renderer.getAttribute("qualifyHoverTitles");
+	// Qualify the hover tiddler title if needed
+	if(this.qualifyHoverTitles) {
+		this.hover =  this.hover + "-" + this.renderer.getContextScopeId();
+	}
 	// Determine the default link characteristics
 	this.isExternal = isLinkExternal(this.to);
 	if(!this.isExternal) {
