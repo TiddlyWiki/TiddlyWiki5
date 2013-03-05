@@ -110,7 +110,7 @@ This method should be called after the changes it describes have been made to th
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been created
 */
-exports.touchTiddler = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || {};
 	this.changedTiddlers[title] = this.changedTiddlers[title] || [];
@@ -151,7 +151,7 @@ exports.getChangeCount = function(title) {
 exports.deleteTiddler = function(title) {
 	delete this.tiddlers[title];
 	this.clearCache(title);
-	this.touchTiddler(title,true);
+	this.enqueueTiddlerEvent(title,true);
 };
 
 exports.tiddlerExists = function(title) {
@@ -168,7 +168,7 @@ exports.addTiddler = function(tiddler) {
 	// Save the tiddler
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
-	this.touchTiddler(title);
+	this.enqueueTiddlerEvent(title);
 };
 
 /*
