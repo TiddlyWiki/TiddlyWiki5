@@ -118,15 +118,15 @@ TextEditor.prototype.fixHeight = function() {
 	var self = this;
 	if(this.editWidget.children[0].domNode && this.editWidget.children[0].domNode.type === "textarea") {
 		$tw.utils.nextTick(function() {
-			var wrapper = self.editWidget.renderer.domNode,
-				textarea = self.editWidget.children[0].domNode;
-			// Set the text area height to 1px temporarily, which allows us to read the true scrollHeight
-			var prevWrapperHeight = wrapper.style.height;
-			wrapper.style.height = textarea.style.height + "px";
-			textarea.style.overflow = "hidden";
-			textarea.style.height = "1px";
-			textarea.style.height = Math.max(textarea.scrollHeight,MIN_TEXT_AREA_HEIGHT) + "px";
-			wrapper.style.height = prevWrapperHeight;
+			// Resize the textarea to fit its content
+			var textarea = self.editWidget.children[0].domNode,
+				scrollTop = document.body.scrollTop;
+			textarea.style.height = "auto";
+			var newHeight = Math.max(textarea.scrollHeight + textarea.offsetHeight - textarea.clientHeight,MIN_TEXT_AREA_HEIGHT);
+			if(newHeight !== textarea.offsetHeight) {
+				textarea.style.height =  newHeight + "px";
+				document.body.scrollTop = scrollTop;
+			}
 		});
 	}
 };
