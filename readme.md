@@ -40,7 +40,8 @@ Usage</h2><p>
 Running <code>
 tiddlywiki.js</code> from the command line boots the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a> kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.</p><p>
-The first argument is the optional path to the wiki directory to be loaded. If not present, then the current directory is used.</p><p>
+The first argument is the optional path to the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/WikiDirectory.html'>
+WikiDirectory</a> to be loaded. If not present, then the current directory is used.</p><p>
 The commands and their individual arguments follow, each command being identified by the prefix <code>
 --</code>.</p><pre>
 node tiddlywiki.js [&lt;wikipath&gt;] [--&lt;command&gt; [&lt;arg&gt;[,&lt;arg&gt;]]]</pre><h2 class=''>
