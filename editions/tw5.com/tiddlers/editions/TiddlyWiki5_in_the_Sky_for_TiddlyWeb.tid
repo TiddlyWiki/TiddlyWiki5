@@ -1,0 +1,23 @@
+title: TiddlyWiki5 in the Sky for TiddlyWeb
+modifier: JeremyRuston
+tags: edition docs
+
+The TiddlyWiki5 in the Sky for TiddlyWeb allows content to be synchronised between TiddlyWiki5 running in the browser and a TiddlyWeb (or TiddlySpace) server. Features include:
+
+* Lazy loading
+* Two way synchronisation between the browser and the server
+** Synchronising from the server is accomplished by polling (currently every 60 seconds)
+* Throttling so that rapidly changing tiddlers don't overwhelm the server
+
+The implementation is somewhat experimental, and includes these limitations:
+
+* Only works with tiddlers written in TiddlyWiki5 WikiText. Tiddlers in the old syntax will be parsed as TiddlyWiki5 syntax
+* New tiddlers are not saved to the server
+* No way to delete tiddlers
+
+To try out TiddlyWiki5 in the Sky for TiddlyWeb:
+
+# If necessary, create an account at http://tiddlyspace.com/
+# Create a new space, eg `myspace`
+# Include the space `tw5tiddlyweb`
+# Visit `http://myspace.tiddlyspace.com/tw5`

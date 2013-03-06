@@ -1,24 +1,29 @@
 #!/bin/bash
 
-# build the TiddlyWeb edition of TiddlyWiki5 and upload to TiddlySpace
+# build the TiddlyWeb edition of TiddlyWiki5 and upload it to TiddlySpace. Requires the TiddlySpace credentials
+# of a member of the tw5tiddlyweb space
 
 # usage:
 # ./wbld.sh <tiddlyspace username> <tiddlyspace password>
 
-pushd editions/tw5tiddlyweb > /dev/null
-
-node ../../tiddlywiki.js \
-	--verbose \
-	--savetiddler $:/core/templates/tiddlywiki5.template.html ../../../jermolene.github.com/tiddlyweb.html text/plain \
-	|| exit 1
-
-popd > /dev/null
+# Create the tmp directory if needed
 
 mkdir -p tmp
-echo "type: text/html" > tmp/tmp.txt
-echo "" >> tmp/tmp.txt
-cat ../jermolene.github.com/tiddlyweb.html >> tmp/tmp.txt
 
-curl -u $1:$2 -X PUT -H "content-type: text/plain" http://tw5tiddlyweb.tiddlyspace.com/bags/tw5tiddlyweb_public/tiddlers/tw5 --data-binary @tmp/tmp.txt
+# Open the tw5tiddlyweb edition in TW5 and save the template for the main HTML file
 
-rm tmp/tmp.txt
+node ./tiddlywiki.js \
+	editions/tw5tiddlyweb \
+	--verbose \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html tmp/tiddlyweb.html text/plain \
+	|| exit 1
+
+# Prepend the type information that TiddlyWeb needs to turn the .html file into a .tid file
+
+echo "type: text/html" > tmp/tiddlerforupload.txt
+echo "" >> tmp/tiddlerforupload.txt
+cat tmp/tiddlyweb.html >> tmp/tiddlerforupload.txt
+
+# Upload the tiddler file
+
+curl -u $1:$2 -X PUT -H "content-type: text/plain" http://tw5tiddlyweb.tiddlyspace.com/bags/tw5tiddlyweb_public/tiddlers/tw5 --data-binary @tmp/tiddlerforupload.txt

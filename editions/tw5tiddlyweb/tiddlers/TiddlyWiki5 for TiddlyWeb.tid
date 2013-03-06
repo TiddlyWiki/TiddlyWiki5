@@ -20,19 +20,17 @@ Current [[login status|$:/plugins/tiddlyweb/IsLoggedIn]]: {{$:/plugins/tiddlyweb
 
 Current [[username|$:/plugins/tiddlyweb/UserName]]: {{$:/plugins/tiddlyweb/UserName}}
 
-
 ----
 
-<<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:nomatch text:yes><
-Log in to ~TiddlyWeb: <<button message:login class:"btn btn-info"><Login>>
->>
-<<reveal state:[[$:/plugins/tiddlyweb/IsLoggedIn]] type:match text:yes><
-Log out of ~TiddlyWeb: <<button message:logout class:"btn btn-warning"><Logout>>
->>
-
+<$reveal state="$:/plugins/tiddlyweb/IsLoggedIn" type="nomatch" text="yes">
+Log in to ~TiddlyWeb: <$button message="tw-login" class="btn btn-info">Login</$button>
+</$reveal>
+<$reveal state="$:/plugins/tiddlyweb/IsLoggedIn" type="match" text="yes">
+Log out of ~TiddlyWeb: <$button message="tw-logout" class="btn btn-warning">Logout</$button>
+</$reveal>
 
 ----
 
 All tiddlers:
 
-<<list all template:TiddlerListTemplate>>
+<$list type="all" template="TiddlerListTemplate"/>
