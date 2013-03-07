@@ -12,6 +12,7 @@ Handles saving changes via HTML5's download APIs
 /*global $tw: false */
 "use strict";
 
+// Title of the tiddler containing the download message
 var downloadInstructionsTitle = "$:/messages/Download"
 
 /*
