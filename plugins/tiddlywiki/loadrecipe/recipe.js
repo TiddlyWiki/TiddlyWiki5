@@ -22,12 +22,16 @@ exports["application/vnd.tiddlywiki2-recipe"] = function(text,fields) {
 		parseRecipe = function(text) {
 			var recipe = [];
 			text.toString().split(/\r?\n/mg).forEach(function(line) {
-				var p = line.indexOf(":");
-				if(p !== -1) {
-					recipe.push({
-						name: line.substr(0,p).trim(),
-						value: line.substr(p+1).trim()
-					});
+				// Check if the line is a comment
+				if(line.charAt(0) !== "#") {
+					// Find the colon splitting the name from the value
+					var p = line.indexOf(":");
+					if(p !== -1) {
+						recipe.push({
+							name: line.substr(0,p).trim(),
+							value: line.substr(p+1).trim()
+						});
+					}
 				}
 			});
 			return recipe;
