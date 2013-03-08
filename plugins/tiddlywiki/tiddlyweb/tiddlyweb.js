@@ -79,23 +79,9 @@ TiddlyWebSyncer.prototype.addConnection = function(connection) {
 };
 
 /*
-Handle syncer messages
-*/
-TiddlyWebSyncer.prototype.handleEvent = function(event) {
-	switch(event.type) {
-		case "tw-login":
-			this.promptLogin();
-			break;
-		case "tw-logout":
-			this.logout();
-			break;
-	}
-};
-
-/*
 Lazily load a skinny tiddler if we can
 */
-TiddlyWebSyncer.prototype.lazyLoad = function(connection,title,tiddler) {
+TiddlyWebSyncer.prototype.lazyLoad = function(title,tiddler) {
 	// Queue up a sync task to load this tiddler
 	this.enqueueSyncTask({
 		type: "load",
@@ -149,7 +135,7 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 /*
 Dispay a password prompt and allow the user to login
 */
-TiddlyWebSyncer.prototype.promptLogin = function() {
+TiddlyWebSyncer.prototype.handleLoginEvent = function() {
 	var self = this;
 	this.getStatus(function(isLoggedIn,json) {
 		if(!isLoggedIn) {
@@ -203,7 +189,7 @@ TiddlyWebSyncer.prototype.login = function(username,password,callback) {
 /*
 Attempt to log out of TiddlyWeb
 */
-TiddlyWebSyncer.prototype.logout = function(options) {
+TiddlyWebSyncer.prototype.handleLogoutEvent = function(options) {
 	options = options || {};
 	this.log("Attempting to logout");
 	var self = this,

@@ -627,20 +627,11 @@ exports.initServerConnections = function() {
 /*
 Invoke all the active server connections
 */
-exports.invokeServerConnections = function(method /* ,args */) {
+exports.invokeSyncers = function(method /* ,args */) {
 	var args = Array.prototype.slice.call(arguments,1);
-	for(var title in this.serverConnections) {
-		var connection = this.serverConnections[title];
-		connection.syncer[method].apply(connection.syncer,[connection.connection].concat(args));
-	}
-};
-
-/*
-Handle a syncer message
-*/
-exports.handleSyncerEvent = function(event) {
-	for(var syncer in this.syncers) {
-		this.syncers[syncer].handleEvent(event);
+	for(var name in this.syncers) {
+		var syncer = this.syncers[name];
+		syncer[method].apply(syncer,args);
 	}
 };
 
@@ -658,7 +649,7 @@ exports.getTiddlerText = function(title,defaultText) {
 		return tiddler.fields.text;
 	} else {
 		// Ask all the server connections to load the tiddler if they can
-		this.invokeServerConnections("lazyLoad",title,tiddler);
+		this.invokeSyncers("lazyLoad",title,tiddler);
 		// Indicate that the text is being loaded
 		return null;
 	}

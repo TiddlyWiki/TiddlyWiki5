@@ -64,11 +64,12 @@ exports.startup = function() {
 			$tw.modal.display(event.param);
 		},false);
 		// Install the syncer message mechanism
-		var handleSyncerEvent = function(event) {
-			$tw.wiki.handleSyncerEvent.call($tw.wiki,event);
-		};
-		document.addEventListener("tw-login",handleSyncerEvent,false);
-		document.addEventListener("tw-logout",handleSyncerEvent,false);
+		document.addEventListener("tw-login",function(event) {
+			$tw.wiki.invokeSyncers("handleLoginEvent",event);
+		},false);
+		document.addEventListener("tw-logout",function(event) {
+			$tw.wiki.invokeSyncers("handleLogoutEvent",event);
+		},false);
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
 		document.addEventListener("tw-scroll",$tw.pageScroller,false);
