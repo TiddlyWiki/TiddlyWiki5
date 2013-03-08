@@ -297,7 +297,11 @@ $tw.utils.PasswordPrompt.prototype.setWrapperDisplay = function() {
 };
 
 /*
-Adds a new password prompt
+Adds a new password prompt. Options are:
+submitText: text to use for submit button (defaults to "Login")
+serviceName: text of the human readable service name
+noUserName: set true to disable username prompt
+callback: function to be called on submission with parameter of object {username:,password:}. Callback must return `true` to remove the password prompt
 */
 $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	// Create and add the prompt to the DOM
