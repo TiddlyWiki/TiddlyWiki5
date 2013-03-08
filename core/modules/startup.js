@@ -105,7 +105,6 @@ exports.startup = function() {
 			var styleNode = document.createElement("style");
 			styleNode.type = "text/css";
 			var text = renderTree.render("text/plain");
-			console.log(text)
 			styleNode.appendChild(document.createTextNode(text));
 			document.getElementsByTagName("head")[0].appendChild(styleNode);
 		});
