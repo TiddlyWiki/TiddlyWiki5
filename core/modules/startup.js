@@ -29,7 +29,6 @@ exports.startup = function() {
 	// Set up the wiki store
 	$tw.wiki.initParsers();
 	$tw.wiki.initSyncers();
-	$tw.wiki.initServerConnections();
 	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Get the default tiddlers
@@ -81,7 +80,7 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		},false);
-		// Install the crypto event handler
+		// Install the crypto event handlers
 		document.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: "Set a new password for this TiddlyWiki",

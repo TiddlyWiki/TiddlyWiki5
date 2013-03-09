@@ -599,39 +599,15 @@ exports.initSyncers = function() {
 };
 
 /*
-Initialise server connections
-*/
-exports.initServerConnections = function() {
-	this.serverConnections = {};
-	var self = this;
-	$tw.modules.forEachModuleOfType("serverconnection",function(title,module) {
-		// Get the associated syncer
-		if(module.syncer) {
-			var syncer = self.syncers[module.syncer];
-			if(syncer) {
-				// Add the connection and save information about it
-				var connection = syncer.addConnection(module);
-				if(connection instanceof Error) {
-					console.log("Error adding connection: " + connection);
-				} else {
-					self.serverConnections[title] = {
-						syncer: syncer,
-						connection: connection
-					};
-				}
-			}
-		}
-	});
-};
-
-/*
-Invoke all the active server connections
+Invoke all the active syncers
 */
 exports.invokeSyncers = function(method /* ,args */) {
 	var args = Array.prototype.slice.call(arguments,1);
 	for(var name in this.syncers) {
 		var syncer = this.syncers[name];
-		syncer[method].apply(syncer,args);
+		if(syncer[method]) {
+			syncer[method].apply(syncer,args);
+		}
 	}
 };
 
@@ -648,7 +624,7 @@ exports.getTiddlerText = function(title,defaultText) {
 		// Just return the text if we've got it
 		return tiddler.fields.text;
 	} else {
-		// Ask all the server connections to load the tiddler if they can
+		// Ask all the syncers to load the tiddler if they can
 		this.invokeSyncers("lazyLoad",title,tiddler);
 		// Indicate that the text is being loaded
 		return null;

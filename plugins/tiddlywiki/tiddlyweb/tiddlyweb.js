@@ -17,12 +17,29 @@ Creates a TiddlyWebSyncer object
 */
 var TiddlyWebSyncer = function(options) {
 	this.wiki = options.wiki;
-	this.connection = undefined;
 	this.tiddlerInfo = {}; // Hashmap of {revision:,changeCount:}
 	// Tasks are {type: "load"/"save", title:, queueTime:, lastModificationTime:}
 	this.taskQueue = {}; // Hashmap of tasks to be performed
 	this.taskInProgress = {}; // Hash of tasks in progress
 	this.taskTimerId = null; // Sync timer
+	// Compute the host and recipe
+	this.host = document.location.protocol + "//" + document.location.host + "/";
+	this.recipe = undefined; // Filled in by getStatus()
+	// Mark us as not logged in
+	this.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
+	// Listen out for changes to tiddlers
+	this.wiki.addEventListener("",function(changes) {
+		self.syncToServer(changes);
+	});
+	this.log("Initialising with host:",this.host);
+	// Get the login status
+	var self = this;
+	this.getStatus(function (err,isLoggedIn,json) {
+		if(isLoggedIn) {
+			// Do a sync
+			self.syncFromServer();
+		}
+	});
 };
 
 TiddlyWebSyncer.titleIsLoggedIn = "$:/plugins/tiddlyweb/IsLoggedIn";
@@ -49,35 +66,6 @@ TiddlyWebSyncer.prototype.log = function(/* arguments */) {
 	$tw.utils.log.apply(null,args);
 };
 
-TiddlyWebSyncer.prototype.addConnection = function(connection) {
-	var self = this;
-	// Check if we've already got a connection
-	if(this.connection) {
-		return new Error("TiddlyWebSyncer can only handle a single connection");
-	}
-	// If we don't have a host then substitute the host of the page
-	if(!connection.host) {
-		connection.host = document.location.protocol + "//" + document.location.host + "/";
-	}
-	// Mark us as not logged in
-	this.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
-	// Save the connection object
-	this.connection = connection;
-	// Listen out for changes to tiddlers
-	this.wiki.addEventListener("",function(changes) {
-		self.syncToServer(changes);
-	});
-	this.log("Adding connection with recipe:",connection.recipe,"host:",connection.host);
-	// Get the login status
-	this.getStatus(function (err,isLoggedIn,json) {
-		if(isLoggedIn) {
-			// Do a sync
-			self.syncFromServer();
-		}
-	});
-	return ""; // We only support a single connection
-};
-
 /*
 Lazily load a skinny tiddler if we can
 */
@@ -97,7 +85,7 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 	var self = this;
 	this.log("Getting status");
 	this.httpRequest({
-		url: this.connection.host + "status",
+		url: this.host + "status",
 		callback: function(err,data) {
 			if(err) {
 				return callback(err);
@@ -110,10 +98,8 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 			} catch (e) {
 			}
 			if(json) {
-				// Use the recipe if we don't already have one
-				if(!self.connection.recipe) {
-					self.connection.recipe = json.space.recipe;
-				}
+				// Record the recipe
+				self.recipe = json.space.recipe;
 				// Check if we're logged in
 				isLoggedIn = json.username !== "GUEST";
 				// Set the various status tiddlers
@@ -162,7 +148,7 @@ TiddlyWebSyncer.prototype.login = function(username,password,callback) {
 	this.log("Attempting to login as",username);
 	var self = this,
 		httpRequest = this.httpRequest({
-			url: this.connection.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
+			url: this.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
 			type: "POST",
 			data: {
 				user: username,
@@ -194,7 +180,7 @@ TiddlyWebSyncer.prototype.handleLogoutEvent = function(options) {
 	this.log("Attempting to logout");
 	var self = this,
 		httpRequest = this.httpRequest({
-		url: this.connection.host + "logout",
+		url: this.host + "logout",
 		type: "POST",
 		data: {
 			csrf_token: this.getCsrfToken(),
@@ -218,7 +204,7 @@ TiddlyWebSyncer.prototype.syncFromServer = function() {
 	this.log("Retrieving skinny tiddler list");
 	var self = this;
 	this.httpRequest({
-		url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers.json",
+		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
@@ -402,7 +388,7 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 		var changeCount = this.wiki.getChangeCount(task.title);
 		this.log("Dispatching 'save' task:",task.title);
 		this.httpRequest({
-			url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + task.title,
+			url: this.host + "recipes/" + this.recipe + "/tiddlers/" + task.title,
 			type: "PUT",
 			headers: {
 				"Content-type": "application/json"
@@ -424,7 +410,7 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 		// Load the tiddler
 		this.log("Dispatching 'load' task:",task.title);
 		this.httpRequest({
-			url: this.connection.host + "recipes/" + this.connection.recipe + "/tiddlers/" + task.title,
+			url: this.host + "recipes/" + this.recipe + "/tiddlers/" + task.title,
 			callback: function(err,data,request) {
 				if(err) {
 					return callback(err);
