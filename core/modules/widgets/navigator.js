@@ -32,6 +32,7 @@ NavigatorWidget.prototype.generate = function() {
 	this.events = [
 		{name: "tw-navigate", handlerObject: this, handlerMethod: "handleNavigateEvent"},
 		{name: "tw-edit-tiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
+		{name: "tw-delete-tiddler", handlerObject: this, handlerMethod: "handleDeleteTiddlerEvent"},
 		{name: "tw-save-tiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},
 		{name: "tw-close-tiddler", handlerObject: this, handlerMethod: "handleCloseTiddlerEvent"},
 		{name: "tw-new-tiddler", handlerObject: this, handlerMethod: "handleNewTiddlerEvent"}
@@ -141,6 +142,29 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	return false;
 };
 
+// Delete a tiddler
+NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
+	// Get the tiddler title we're deleting
+	var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
+	// Check if the tiddler we're deleting is in draft mode
+	if(tiddler.hasField("draft.title")) {
+		// Delete the original tiddler
+		this.renderer.renderTree.wiki.deleteTiddler(tiddler.fields["draft.of"]);
+	}
+	// Delete this tiddler
+	this.renderer.renderTree.wiki.deleteTiddler(event.tiddlerTitle);
+	// Remove the closed tiddler from the story
+	this.getStoryList();
+	// Look for tiddler with this title to close
+	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
+	if(slot !== -1) {
+		this.storyList.splice(slot,1);
+		this.saveStoryList();
+	}
+	event.stopPropagation();
+	return false;
+};
+
 /*
 Generate a title for the draft of a given tiddler
 */
@@ -160,7 +184,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	for(var t=0; t<this.storyList.length; t++) {
 		if(this.storyList[t] === event.tiddlerTitle) {
 			var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
-			if(tiddler && $tw.utils.hop(tiddler.fields,"draft.title")) {
+			if(tiddler.hasField("draft.title")) {
 				// Save the draft tiddler as the real tiddler
 				this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{
 					title: tiddler.fields["draft.title"],
