@@ -35,7 +35,8 @@ Command.prototype.execute = function() {
 		renderType = this.params[2] || "text/plain",
 		serveType = this.params[3] || "text/html";
 	http.createServer(function(request, response) {
-		var path = url.parse(request.url).pathname;
+		var requestPath = url.parse(request.url).pathname,
+			text;
 		switch(request.method) {
 			case "PUT":
 				var data = "";
@@ -43,22 +44,68 @@ Command.prototype.execute = function() {
 					data += chunk.toString();
 				});
 				request.on("end",function() {
-					var title = decodeURIComponent(path.substr(1));
-					self.commander.wiki.addTiddler(new $tw.Tiddler(JSON.parse(data),{title: title}));
-					response.writeHead(204, "OK");
-					response.end();
+					var prefix = "/tiddlers/";
+					if(requestPath.indexOf(prefix) === 0) {
+						var title = decodeURIComponent(requestPath.substr(prefix.length)),
+							fields = JSON.parse(data);
+						// Use the title from the PUT URL if we don't have one
+						if(!fields.title) {
+							fields.title = title;
+						}
+						// Pull up any subfields in the `fields` object
+						if(fields.fields) {
+							$tw.utils.each(fields.fields,function(field,name) {
+								fields[name] = field;
+							});
+							delete fields.fields;
+						}
+						// Remove any revision field
+						if(fields["revision"]) {
+							delete fields["revision"];
+						}
+console.log("PUT tiddler",title,fields)
+//						self.commander.wiki.addTiddler(new $tw.Tiddler(JSON.parse(data),{title: title}));
+						response.writeHead(204, "OK");
+						response.end();
+					} else {
+						response.writeHead(404);
+						response.end();
+					}
 				});
 				break;
 			case "DELETE":
-				self.commander.wiki.deleteTiddler(decodeURIComponent(path.substr(1)));
+console.log("DELETE tiddler",requestPath.substr(1))
+//				self.commander.wiki.deleteTiddler(decodeURIComponent(requestPath.substr(1)));
 				response.writeHead(204, "OK");
 				response.end();
 				break;
 			case "GET":
-				if(path === "/") {
+				if(requestPath === "/") {
 					response.writeHead(200, {"Content-Type": serveType});
-					var text = self.commander.wiki.renderTiddler(renderType,rootTiddler);
-					response.end(text, "utf8");	
+					text = self.commander.wiki.renderTiddler(renderType,rootTiddler);
+					response.end(text,"utf8");
+				} else if(requestPath === "/status") {
+					response.writeHead(200, {"Content-Type": "application/json"});
+					text = JSON.stringify({
+						username: "ANONYMOUS",
+						tiddlywiki_version: $tw.version
+					});
+					response.end(text,"utf8");
+				} else if(requestPath === "/tiddlers.json") {
+					response.writeHead(200, {"Content-Type": "application/json"});
+					var tiddlers = [];
+					$tw.wiki.forEachTiddler("title",function(title,tiddler) {
+						var tiddlerFields = {};
+						$tw.utils.each(tiddler.fields,function(field,name) {
+							if(name !== "text") {
+								tiddlerFields[name] = tiddler.getFieldString(name);
+							}
+						});
+						tiddlerFields["revision"] = $tw.wiki.getChangeCount(title);
+						tiddlers.push(tiddlerFields);
+					});
+					text = JSON.stringify(tiddlers);
+					response.end(text,"utf8");
 				} else {
 					response.writeHead(404);
 					response.end();
