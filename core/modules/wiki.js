@@ -16,7 +16,6 @@ last dispatched. Each entry is a hashmap containing two fields:
 	incremented each time a tiddler is created changed or deleted
 * `caches` is a hashmap by tiddler title containing a further hashmap of named cache objects. Caches
 	are automatically cleared when a tiddler is modified or deleted
-* `macros` is a hashmap by macro name containing an object class inheriting from the Macro tree node
 
 \*/
 (function(){
