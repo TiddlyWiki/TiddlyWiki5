@@ -9,6 +9,10 @@ TiddlyWiki5 can be used via these editions:
 
 {{{ [tag[edition]sort[title]] }}}
 
+! How to use TiddlyWiki5
+
+{{{ [tag[howto]sort[title]] }}}
+
 ! Concepts
 
 The core concepts underlying TiddlyWiki are:
