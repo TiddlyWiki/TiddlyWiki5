@@ -8,6 +8,8 @@ The standalone edition of TiddlyWiki5 is a single HTML file that contains both y
 * Using the HTML `<a>` element letting the user manually save the modified file
 ** Recent browsers supporting the `download` attribute can automatically force the download at the cost of losing control of the location of the downloaded file
 
-You can start with an empty copy of TiddlyWiki5 from http://five.tiddlywiki.com/empty.html
+See these guides for different ways of using the standalone edition of TiddlyWiki5:
 
-The standalone edition of TiddlyWiki supports encryption of content using the StanfordJavaScriptCryptoLibrary.
+* [[How to use TiddlyWiki5 as a standalone HTML file]]
+* [[How to use TiddlyWiki5 as a standalone HTML file with TiddlyFox]]
+* [[How to use TiddlyWiki5 as a standalone HTML file with encryption]]
