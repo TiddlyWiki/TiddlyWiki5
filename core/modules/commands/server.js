@@ -74,10 +74,16 @@ console.log("PUT tiddler",title,fields)
 				});
 				break;
 			case "DELETE":
-console.log("DELETE tiddler",requestPath.substr(1))
-//				self.commander.wiki.deleteTiddler(decodeURIComponent(requestPath.substr(1)));
-				response.writeHead(204, "OK");
-				response.end();
+				var prefix = "/tiddlers/";
+				if(requestPath.indexOf(prefix) === 0) {
+console.log("DELETE tiddler",requestPath.substr(prefix.length))
+//					self.commander.wiki.deleteTiddler(decodeURIComponent(requestPath.substr(prefix.length)));
+					response.writeHead(204, "OK");
+					response.end();
+				} else {
+					response.writeHead(404);
+					response.end();
+				}
 				break;
 			case "GET":
 				if(requestPath === "/") {
