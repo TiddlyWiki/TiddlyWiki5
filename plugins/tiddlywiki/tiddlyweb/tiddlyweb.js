@@ -63,7 +63,7 @@ Creates a TiddlyWebSyncer object
 */
 var TiddlyWebSyncer = function(options) {
 	this.wiki = options.wiki;
-	// Hashmap of {revision:,changeCount:}
+	// Hashmap of {revision:,bag:,changeCount:}
 	this.tiddlerInfo = {};
 	var self = this;
 	// Record information for known tiddlers
@@ -71,6 +71,7 @@ var TiddlyWebSyncer = function(options) {
 		if(tiddler.fields["revision"]) {
 			self.tiddlerInfo[title] = {
 				revision: tiddler.fields["revision"],
+				bag: tiddler.fields["bag"],
 				changeCount: self.wiki.getChangeCount(title)
 			}
 		}
@@ -484,8 +485,10 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 	} else if(task.type === "delete") {
 		// Delete the tiddler
 		this.log("Dispatching 'delete' task:",task.title);
+		var bag = this.tiddlerInfo[task.title].bag,
+			bagFragment = bag ? "bags/" + bag + "/tiddlers/"  : "tiddlers/";
 		this.httpRequest({
-			url: this.host + this.recipe + "tiddlers/" + task.title,
+			url: this.host + bagFragment + task.title,
 			type: "DELETE",
 			callback: function(err,data,request) {
 				if(err) {
@@ -525,6 +528,7 @@ TiddlyWebSyncer.prototype.storeTiddler = function(tiddlerFields) {
 	// Save the tiddler revision and changeCount details
 	self.tiddlerInfo[result.title] = {
 		revision: tiddlerFields.revision,
+		bag: tiddlerFields.bag,
 		changeCount: self.wiki.getChangeCount(result.title)
 	};
 };
