@@ -4,6 +4,6 @@ title: $:/core/templates/html-div-tiddler
 
 This template is used for saving tiddlers as an HTML DIV tag with attributes representing the tiddler fields. This version includes the tiddler changecount as the field `revision`.
 
--->`<div`<$fields exclude='text revision' template=' $name$="$encoded_value$"'></$fields>` revision="`<$info type='changecount'/>`">
+-->`<div`<$fields exclude='text revision bag' template=' $name$="$encoded_value$"'></$fields>` revision="`<$info type='changecount'/>`" bag="default">
 <pre>`<$view field="text" format="htmlencoded" />`</pre>
 </div>`

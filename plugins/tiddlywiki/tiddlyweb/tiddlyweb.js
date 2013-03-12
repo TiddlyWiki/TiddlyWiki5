@@ -76,7 +76,7 @@ var TiddlyWebSyncer = function(options) {
 			}
 		}
 	});
-	// Tasks are {type: "load"/"save", title:, queueTime:, lastModificationTime:}
+	// Tasks are {type: "load"/"save"/"delete", title:, queueTime:, lastModificationTime:}
 	this.taskQueue = {}; // Hashmap of tasks to be performed
 	this.taskInProgress = {}; // Hash of tasks in progress
 	this.taskTimerId = null; // Sync timer
@@ -157,9 +157,7 @@ TiddlyWebSyncer.prototype.getStatus = function(callback) {
 			if(json) {
 				// Record the recipe
 				if(json.space) {
-					self.recipe = "recipes/" + json.space.recipe + "/";
-				} else {
-					self.recipe = "";
+					self.recipe = json.space.recipe;
 				}
 				// Check if we're logged in
 				isLoggedIn = json.username !== "GUEST";
@@ -265,7 +263,7 @@ TiddlyWebSyncer.prototype.syncFromServer = function() {
 	this.log("Retrieving skinny tiddler list");
 	var self = this;
 	this.httpRequest({
-		url: this.host + this.recipe + "tiddlers.json",
+		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
@@ -328,9 +326,13 @@ TiddlyWebSyncer.prototype.enqueueSyncTask = function(task) {
 	// Set the timestamps on this task
 	task.queueTime = now;
 	task.lastModificationTime = now;
-	// Bail if it's not a tiddler we know about
+	// Fill in some tiddlerInfo if the tiddler is one we haven't seen before
 	if(!$tw.utils.hop(this.tiddlerInfo,task.title)) {
-		return;
+		this.tiddlerInfo[task.title] = {
+			revision: "0",
+			bag: "bag-not-set",
+			changeCount: -1
+		}
 	}
 	// Bail if this is a save and the tiddler is already at the changeCount that the server has
 	if(task.type === "save" && this.wiki.getChangeCount(task.title) <= this.tiddlerInfo[task.title].changeCount) {
@@ -449,7 +451,7 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 		var changeCount = this.wiki.getChangeCount(task.title);
 		this.log("Dispatching 'save' task:",task.title);
 		this.httpRequest({
-			url: this.host + this.recipe + "tiddlers/" + task.title,
+			url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(task.title),
 			type: "PUT",
 			headers: {
 				"Content-type": "application/json"
@@ -460,9 +462,11 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 					return callback(err);
 				}
 				// Save the details of the new revision of the tiddler
-				var tiddlerInfo = self.tiddlerInfo[task.title];
+				var etagInfo = self.parseEtag(request.getResponseHeader("Etag")),
+					tiddlerInfo = self.tiddlerInfo[task.title];
 				tiddlerInfo.changeCount = changeCount;
-				tiddlerInfo.revision = self.getRevisionFromEtag(request);
+				tiddlerInfo.bag = etagInfo.bag;
+				tiddlerInfo.revision = etagInfo.revision;
 				// Invoke the callback
 				callback(null);	
 			}
@@ -471,7 +475,7 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 		// Load the tiddler
 		this.log("Dispatching 'load' task:",task.title);
 		this.httpRequest({
-			url: this.host + this.recipe + "tiddlers/" + task.title,
+			url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(task.title),
 			callback: function(err,data,request) {
 				if(err) {
 					return callback(err);
@@ -485,10 +489,9 @@ TiddlyWebSyncer.prototype.dispatchTask = function(task,callback) {
 	} else if(task.type === "delete") {
 		// Delete the tiddler
 		this.log("Dispatching 'delete' task:",task.title);
-		var bag = this.tiddlerInfo[task.title].bag,
-			bagFragment = bag ? "bags/" + bag + "/tiddlers/"  : "tiddlers/";
+		var bag = this.tiddlerInfo[task.title].bag;
 		this.httpRequest({
-			url: this.host + bagFragment + task.title,
+			url: this.host + "bags/" + encodeURIComponent(bag) + "/tiddlers/" + encodeURIComponent(task.title),
 			type: "DELETE",
 			callback: function(err,data,request) {
 				if(err) {
@@ -566,14 +569,32 @@ TiddlyWebSyncer.prototype.convertTiddlerToTiddlyWebFormat = function(title) {
 };
 
 /*
-Extract the revision from the Etag header of a request
+Split a TiddlyWeb Etag into its constituent parts. For example:
+
+```
+"system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04"
+```
+
+Note that the value includes the opening and closing double quotes.
+
+The parts are:
+
+```
+<bag>/<title>/<revision>:<hash>
+```
 */
-TiddlyWebSyncer.prototype.getRevisionFromEtag = function(request) {
-	var etag = request.getResponseHeader("Etag");
-	if(etag) {
-		return etag.split("/")[2].split(":")[0]; // etags are like "system-images_public/unsyncedIcon/946151:9f11c278ccde3a3149f339f4a1db80dd4369fc04"
+TiddlyWebSyncer.prototype.parseEtag = function(etag) {
+	var firstSlash = etag.indexOf("/"),
+		lastSlash = etag.lastIndexOf("/"),
+		colon = etag.lastIndexOf(":");
+	if(firstSlash === -1 || lastSlash === -1 || colon === -1) {
+		return null;
 	} else {
-		return 0;
+		return {
+			bag: decodeURIComponent(etag.substring(1,firstSlash)),
+			title: decodeURIComponent(etag.substring(firstSlash + 1,lastSlash)),
+			revision: etag.substring(lastSlash + 1,colon)
+		}
 	}
 };
 
@@ -604,7 +625,7 @@ TiddlyWebSyncer.prototype.httpRequest = function(options) {
 	// Set up the state change handler
 	request.onreadystatechange = function() {
 		if(this.readyState === 4) {
-			if(this.status === 200) {
+			if(this.status === 200 || this.status === 204) {
 				// Success!
 				options.callback(null,this.responseText,this);
 				return;

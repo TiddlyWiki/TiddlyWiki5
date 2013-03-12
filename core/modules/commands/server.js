@@ -44,7 +44,7 @@ Command.prototype.execute = function() {
 					data += chunk.toString();
 				});
 				request.on("end",function() {
-					var prefix = "/tiddlers/";
+					var prefix = "/recipes/default/tiddlers/";
 					if(requestPath.indexOf(prefix) === 0) {
 						var title = decodeURIComponent(requestPath.substr(prefix.length)),
 							fields = JSON.parse(data);
@@ -65,7 +65,10 @@ Command.prototype.execute = function() {
 						}
 console.log("PUT tiddler",title,fields)
 //						self.commander.wiki.addTiddler(new $tw.Tiddler(JSON.parse(data),{title: title}));
-						response.writeHead(204, "OK");
+						var changeCount = self.commander.wiki.getChangeCount(title).toString();
+						response.writeHead(204, "OK",{
+							Etag: "\"default/" + title + "/" + changeCount + ":\""
+						});
 						response.end();
 					} else {
 						response.writeHead(404);
@@ -74,10 +77,11 @@ console.log("PUT tiddler",title,fields)
 				});
 				break;
 			case "DELETE":
-				var prefix = "/tiddlers/";
+				var prefix = "/bags/default/tiddlers/";
 				if(requestPath.indexOf(prefix) === 0) {
-console.log("DELETE tiddler",requestPath.substr(prefix.length))
-//					self.commander.wiki.deleteTiddler(decodeURIComponent(requestPath.substr(prefix.length)));
+					var title = decodeURIComponent(requestPath.substr(prefix.length));
+console.log("DELETE tiddler",title)
+//					self.commander.wiki.deleteTiddler(decodeURIComponent(title));
 					response.writeHead(204, "OK");
 					response.end();
 				} else {
@@ -94,10 +98,13 @@ console.log("DELETE tiddler",requestPath.substr(prefix.length))
 					response.writeHead(200, {"Content-Type": "application/json"});
 					text = JSON.stringify({
 						username: "ANONYMOUS",
+						space: {
+							recipe: "default"
+						},
 						tiddlywiki_version: $tw.version
 					});
 					response.end(text,"utf8");
-				} else if(requestPath === "/tiddlers.json") {
+				} else if(requestPath === "/recipes/default/tiddlers.json") {
 					response.writeHead(200, {"Content-Type": "application/json"});
 					var tiddlers = [];
 					$tw.wiki.forEachTiddler("title",function(title,tiddler) {
