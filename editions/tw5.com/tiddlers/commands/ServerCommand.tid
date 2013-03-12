@@ -1,7 +1,9 @@
 title: ServerCommand
 tags: docs command
 
-The server is very simple. At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for `GET`, `PUT` and `DELETE`.
+The server built in to TiddlyWiki5 is very simple. Although compatible with TiddlyWeb it doesn't support many of the features needed for robust Internet-facing usage - in particular, TiddlyWiki5 is an old-school wiki in the sense that it offers no authentication.
+
+At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for `GET`, `PUT` and `DELETE`.
 
 ```
 --server <port> <roottiddler> <rendertype> <servetype>

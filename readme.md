@@ -123,7 +123,11 @@ For example:</p><pre>
 ServerCommand</a></span></h3><div>
 <div class='tw-transclude'>
 <p>
-The server is very simple. At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for <code>
+The server built in to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> is very simple. Although compatible with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
+TiddlyWeb</a> it doesn't support many of the features needed for robust Internet-facing usage - in particular, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> is an old-school wiki in the sense that it offers no authentication.</p><p>
+At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for <code>
 GET</code>, <code>
 PUT</code> and <code>
 DELETE</code>.</p><pre>

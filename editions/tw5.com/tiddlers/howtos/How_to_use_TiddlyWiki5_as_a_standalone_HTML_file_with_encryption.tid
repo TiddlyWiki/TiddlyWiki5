@@ -1,0 +1,11 @@
+title: How to use TiddlyWiki5 as a standalone HTML file with encryption
+tags: docs howto
+
+[[TiddlyWiki5 Standalone Edition]] allows content to be encrypted using the [[Stanford JavaScript Crypto Library]].
+
+1. Scroll to the bottom of the page where you should see the words "This wiki is not encrypted" and a button labelled "Set password"
+2. Click "Set password"
+3. Type a password and click the "Set" button (or use the enter key)
+4. The control panel should now say "This wiki is encrypted" with buttons for changing and clearing the password
+5. Save the wiki using the "Save" button in the left sidebar
+6. Optionally, open the saved file in a text editor and verify that your data is encrypted
