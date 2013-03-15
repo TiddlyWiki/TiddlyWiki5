@@ -71,9 +71,9 @@ Dump the titles of the tiddlers in the wiki store </p><pre>
 dump tiddler</h3><p>
 Dump the fields of an individual tiddler </p><pre>
 --dump tiddler &lt;title&gt;</pre><h3 class=''>
-dump shadows</h3><p>
-Dump the titles of the shadow tiddlers in the wiki store </p><pre>
---dump shadows</pre><h3 class=''>
+dump system</h3><p>
+Dump the titles of the system tiddlers in the wiki store </p><pre>
+--dump systems</pre><h3 class=''>
 dump config</h3><p>
 Dump the current core configuration </p><pre>
 --dump config</pre></div></div></span></div><div class='tw-list-element'>
@@ -115,7 +115,7 @@ text/html</code>) and extension (defaults to <code>
 .html</code>).</p><pre>
 --savetiddlers &lt;filter&gt; &lt;template&gt; &lt;pathname&gt; [&lt;type&gt;] [&lt;extension&gt;]</pre><p>
 For example:</p><pre>
---savetiddlers [!is[shadow]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></span></div><div class='tw-list-element'>
+--savetiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></span></div><div class='tw-list-element'>
 <span class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>

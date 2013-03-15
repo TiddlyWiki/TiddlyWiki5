@@ -17,7 +17,7 @@ exports.startup = function(loggedIn) {
 	var index = $tw.wiki.getTiddlerData($tw.plugins.dropbox.titleTiddlerIndex);
 	if(index) {
 		$tw.wiki.addTiddlers(index.tiddlers);
-		$tw.wiki.addTiddlers(index.shadows,true);
+		$tw.wiki.addTiddlers(index.systemTiddlers,true);
 		$tw.plugins.dropbox.fileInfo = index.fileInfo;
 	}
 	if(loggedIn) {

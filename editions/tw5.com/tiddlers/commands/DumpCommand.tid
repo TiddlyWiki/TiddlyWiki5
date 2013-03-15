@@ -17,12 +17,12 @@ Dump the fields of an individual tiddler
 --dump tiddler <title>
 ```
 
-!!! dump shadows
+!!! dump system
 
-Dump the titles of the shadow tiddlers in the wiki store 
+Dump the titles of the system tiddlers in the wiki store 
 
 ```
---dump shadows
+--dump systems
 ```
 
 !!! dump config

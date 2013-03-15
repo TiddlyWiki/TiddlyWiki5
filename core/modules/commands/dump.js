@@ -61,9 +61,9 @@ Command.prototype.subcommands.tiddlers = function() {
 	return null; // No error
 };
 
-Command.prototype.subcommands.shadows = function() {
-	var tiddlers = this.commander.wiki.getShadowTitles();
-	this.output.write("Wiki contains these shadow tiddlers:\n");
+Command.prototype.subcommands.system = function() {
+	var tiddlers = this.commander.wiki.getSystemTitles();
+	this.output.write("Wiki contains these system tiddlers:\n");
 	for(var t=0; t<tiddlers.length; t++) {
 		this.output.write(tiddlers[t] + "\n");
 	}

@@ -26,7 +26,7 @@ $tw.plugins.dropbox = {
 	client: null, // Dropbox.js client object
 	fileInfo: {}, // Hashmap of each filename as retrieved from Dropbox (including .meta files): {versionTag:,title:}
 	titleInfo: {}, // Hashmap of each tiddler title retrieved from Dropbox to filename
-	// Titles of various shadow tiddlers used by the plugin
+	// Titles of various system tiddlers used by the plugin
 	titleIsLoggedIn: "$:/plugins/dropbox/IsLoggedIn",
 	titleUserName: "$:/plugins/dropbox/UserName",
 	titlePublicAppUrl: "$:/plugins/dropbox/PublicAppUrl",
@@ -385,11 +385,11 @@ Save the index file
 */
 $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
 	// Get the tiddler index information
-	var index = {tiddlers: [],shadows: [], fileInfo: $tw.plugins.dropbox.fileInfo};
+	var index = {tiddlers: [],systemTiddlers: [], fileInfo: $tw.plugins.dropbox.fileInfo};
 	// First all the tiddlers
 	$tw.wiki.forEachTiddler(function(title,tiddler) {
-		if(tiddler.isShadow) {
-			index.shadows.push(tiddler.fields);
+		if(tiddler.isSystem) {
+			index.systemTiddlers.push(tiddler.fields);
 		} else {
 			index.tiddlers.push(tiddler.fields);
 		}

@@ -57,7 +57,7 @@ $tw.config = $tw.config || {};
 $tw.config.pluginsPath = "../plugins/";
 $tw.config.wikiInfo = $tw.config.wikiInfo || "./tiddlywiki.info";
 $tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
-$tw.config.wikiShadowsSubDir = $tw.config.wikiShadowsSubDir || "./wiki";
+$tw.config.wikiSystemSubDir = $tw.config.wikiSystemSubDir || "./wiki";
 $tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
 
 $tw.config.jsModuleHeaderRegExpString = "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)";
@@ -880,7 +880,7 @@ $tw.loadTiddlers = function() {
 		"bootKernel",
 		"styleArea",
 		"storeArea",
-		"shadowArea"
+		"systemArea"
 	];
 	for(var t=0; t<containerIds.length; t++) {
 		$tw.wiki.addTiddlers($tw.wiki.deserializeTiddlers("(DOM)",document.getElementById(containerIds[t])));
@@ -1049,7 +1049,7 @@ $tw.loadTiddlers = function() {
 	// On the server, we load tiddlers from specified folders
 	var folders = [
 		$tw.boot.bootPath,
-		path.resolve($tw.boot.wikiPath,$tw.config.wikiShadowsSubDir),
+		path.resolve($tw.boot.wikiPath,$tw.config.wikiSystemSubDir),
 		path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir)
 	];
 	for(var t=0; t<folders.length; t++) {

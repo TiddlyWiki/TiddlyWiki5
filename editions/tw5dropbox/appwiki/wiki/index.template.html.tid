@@ -20,7 +20,7 @@ type: text/vnd.tiddlywiki-html
 <link rel="stylesheet" href="//dl-web.dropbox.com/spa/4f6lw6nhu5zn5pr/TiddlyWiki5/public/styles.css" type="text/css" />
 </head>
 <body>
-<div id="shadowArea" style="display:none;">
+<div id="systemArea" style="display:none;">
 <<serialize "[[$:/plugins/dropbox/Index]]" application/x-tiddler-html-div>>
 </div>
 </body>

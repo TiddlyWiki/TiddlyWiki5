@@ -171,13 +171,13 @@ exports.addTiddler = function(tiddler) {
 };
 
 /*
-Return a sorted array of non-shadow tiddler titles, optionally filtered by a tag 
+Return a sorted array of non-system tiddler titles, optionally filtered by a tag 
 */
 exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isShadow() && (!excludeTag || !this.tiddlers[t].hasTag(excludeTag))) {
+		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isSystem() && (!excludeTag || !this.tiddlers[t].hasTag(excludeTag))) {
 			tiddlers.push(this.tiddlers[t]);
 		}
 	}
@@ -257,10 +257,10 @@ exports.getOrphanTitles = function() {
 	return []; // Todo
 };
 
-exports.getShadowTitles = function() {
+exports.getSystemTitles = function() {
 	var titles = [];
 	for(var title in this.tiddlers) {
-		if(this.tiddlers[title].isShadow()) {
+		if(this.tiddlers[title].isSystem()) {
 			titles.push(title);
 		}
 	}

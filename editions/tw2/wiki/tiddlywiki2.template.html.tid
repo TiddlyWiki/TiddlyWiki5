@@ -45,8 +45,8 @@ Welcome to TiddlyWiki created by Jeremy Ruston; Copyright &copy; 2004-2007 Jerem
 </div>
 <div id="contentWrapper"></div>
 <div id="contentStash"></div>
-<div id="shadowArea">
-{{{ [prefix[{shadow}]] +[sort-case-sensitive[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
+<div id="systemArea">
+{{{ [prefix[{system}]] +[sort-case-sensitive[title]] ||$:/core/templates/html-div-tiddler-remove-prefix}}}
 </div>
 <!--POST-SHADOWAREA-->
 <div id="storeArea">

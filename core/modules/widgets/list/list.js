@@ -28,11 +28,11 @@ var ListWidget = function(renderer) {
 These types are shorthands for particular filters
 */
 var typeMappings = {
-	all: "[!is[shadow]sort[title]]",
-	recent: "[!is[shadow]sort[modified]]",
+	all: "[!is[system]sort[title]]",
+	recent: "[!is[system]sort[modified]]",
 	missing: "[is[missing]sort[title]]",
 	orphans: "[is[orphan]sort[title]]",
-	shadows: "[is[shadow]sort[title]]"
+	system: "[is[system]sort[title]]"
 };
 
 ListWidget.prototype.generate = function() {
@@ -70,7 +70,7 @@ ListWidget.prototype.getTiddlerList = function() {
 		filter = this.renderer.getAttribute("filter");
 	}
 	if(!filter) {
-		filter = "[!is[shadow]]";
+		filter = "[!is[system]]";
 	}
 	this.list = this.renderer.renderTree.wiki.filterTiddlers(filter,this.renderer.getContextTiddlerTitle());
 };

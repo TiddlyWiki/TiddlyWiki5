@@ -3,4 +3,4 @@ tags: navigation
 
 Current tiddlers:
 
-{{{ [!is[shadow]sort[title]] }} <div><<view title link>></div> }
+{{{ [!is[system]sort[title]] }} <div><<view title link>></div> }

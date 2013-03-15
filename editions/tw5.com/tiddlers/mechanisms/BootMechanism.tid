@@ -30,7 +30,7 @@ Each module is an ordinary `node.js`-style module, using the `require()` functio
 
 In the browser, `core/boot.js` is packed into a template HTML file that contains the following elements in order:
 
-* Ordinary and shadow tiddlers, packed as HTML `<DIV>` elements
+* Ordinary and system tiddlers, packed as HTML `<DIV>` elements
 * `core/bootprefix.js`, containing a few lines to set up the plugin environment
 * JavaScript modules, packed as HTML `<SCRIPT>` blocks
 * `core/boot.js`, containing the boot kernel

@@ -10,5 +10,5 @@ Save a set of tiddlers matching a filter as separate files of a specified Conten
 For example:
 
 ```
---savetiddlers [!is[shadow]] $:/core/templates/static.tiddler.html ./static text/plain
+--savetiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```

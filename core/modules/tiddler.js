@@ -16,11 +16,11 @@ exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
 
-exports.isShadow = function() {
-	if(!$tw.utils.hop(this,"shadowFlag")) {
-		this.shadowFlag = this.fields.title.indexOf("$:/") === 0;
+exports.isSystem = function() {
+	if(!$tw.utils.hop(this,"systemFlag")) {
+		this.systemFlag = this.fields.title.indexOf("$:/") === 0;
 	}
-	return this.shadowFlag;
+	return this.systemFlag;
 };
 
 exports.isTemporary = function() {

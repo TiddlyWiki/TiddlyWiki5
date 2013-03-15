@@ -1,4 +1,4 @@
 title: $:/core/templates/static.template.css
 
-{{{ [is[shadow]type[text/css]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [is[system]type[text/css]] ||$:/core/templates/plain-text-tiddler}}}
 {{$:/core/styles/base}}

@@ -2,12 +2,12 @@ title: $:/core/templates/store.area.template.html
 
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
 `<div id="storeArea" style="display:none;">`
-{{{ [!is[shadow]] ||$:/core/templates/html-div-tiddler}}}
+{{{ [!is[system]] ||$:/core/templates/html-div-tiddler}}}
 `</div>`
 </$reveal>
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 `<!------------- Encrypted tiddlers --------->`
 `<pre id="encryptedStoreArea" type="text/plain" style="display:none;">`
-<$encrypt filter="[!is[shadow]]"/>
+<$encrypt filter="[!is[system]]"/>
 `</pre>`
 </$reveal>

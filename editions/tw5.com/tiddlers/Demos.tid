@@ -5,7 +5,7 @@ Here are a few features of TiddlyWiki that you can explore:
 
 * Invoke a demonstration wizard: <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">demo</$button> (the text of the wizard is in the tiddler SampleWizard)
 * Save this wiki as a static HTML file: <$button message="tw-save-wiki" param="$:/core/templates/static.template.html" class="btn">Save Static</$button>
-* Browse the list of AllTiddlers or the ShadowTiddlers
+* Browse the list of AllTiddlers or the SystemTiddlers
 * Examine the example [[bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]]
 * Check out the TaskManagementExample
 

@@ -48,7 +48,7 @@ The operator defaults to `title` if omitted, so `[[HelloThere]]` is equivalent t
 
 The operands available with the `is` operator are:
 
-* ''shadow'': selects all shadow tiddlers
+* ''system'': selects all system tiddlers
 * ''current'': selects the current ContextTiddler
 
 ! Runs

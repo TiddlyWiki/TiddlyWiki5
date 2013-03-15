@@ -105,8 +105,8 @@ exports.operators = {
 						return "$tw.utils.pushTop(subResults,currTiddlerTitle);";
 					}
 					break;
-				case "shadow":
-					return "for(title in source) {if(" + op + "this.getTiddler(title).isShadow()) {$tw.utils.pushTop(subResults,title);}}";
+				case "system":
+					return "for(title in source) {if(" + op + "this.getTiddler(title).isSystem()) {$tw.utils.pushTop(subResults,title);}}";
 				default:
 					throw "Unknown operand for 'is' filter operator";
 			}
@@ -121,8 +121,8 @@ exports.operators = {
 						return "r = subResults.indexOf(currTiddlerTitle);\nif(r !== -1) {subResults = [currTiddlerTitle];} else {subResults = [];}";
 					}
 					break;
-				case "shadow":
-					return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isShadow()) {subResults.splice(r,1);}}";
+				case "system":
+					return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isSystem()) {subResults.splice(r,1);}}";
 				default:
 					throw "Unknown operand for 'is' filter operator";
 			}

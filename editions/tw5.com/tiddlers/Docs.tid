@@ -29,7 +29,7 @@ The machinery tying those concepts together includes:
 * TiddlerTemplates
 * DataTiddlers
 * ContentType
-* ShadowTiddlers
+* SystemTiddlers
 * [[Plugins]]
 * [[Modules]] and [[ModuleType]]
 

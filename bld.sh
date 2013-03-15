@@ -35,7 +35,7 @@ node ./tiddlywiki.js \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
 	--savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
 	--savetiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
-	--savetiddlers [!is[shadow]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
+	--savetiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 	|| exit 1
 
 # Second, encrypted.html: a version of the main file encrypted with the password "password"

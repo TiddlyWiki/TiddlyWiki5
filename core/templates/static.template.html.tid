@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki-html
 <meta name="format-detection" content="telephone=no">
 <title>{{$:/core/wiki/title}}</title>
 <div id="styleArea">
-{{{ [is[shadow]type[text/css]] ||$:/core/templates/css-tiddler}}}
+{{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
 </div>
 <style type="text/css">
 {{$:/core/styles/base}}
