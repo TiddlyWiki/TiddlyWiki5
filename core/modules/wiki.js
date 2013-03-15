@@ -171,13 +171,13 @@ exports.addTiddler = function(tiddler) {
 };
 
 /*
-Return a sorted array of tiddler titles, optionally filtered by a tag 
+Return a sorted array of non-shadow tiddler titles, optionally filtered by a tag 
 */
 exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isShadow()) {
+		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isShadow() && (!excludeTag || !this.tiddlers[t].hasTag(excludeTag))) {
 			tiddlers.push(this.tiddlers[t]);
 		}
 	}
@@ -195,9 +195,7 @@ exports.getTiddlers = function(sortField,excludeTag) {
 		}
 	});
 	for(t=0; t<tiddlers.length; t++) {
-		if(!excludeTag || !tiddlers[t].hasTag(excludeTag)) {
-			titles.push(tiddlers[t].fields.title);
-		}
+		titles.push(tiddlers[t].fields.title);
 	}
 	return titles;
 };
