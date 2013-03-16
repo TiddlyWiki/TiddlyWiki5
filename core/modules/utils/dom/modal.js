@@ -69,7 +69,7 @@ Modal.prototype.display = function(title,options) {
 		headerRenderTree = new $tw.WikiRenderTree(headerParser,{wiki: $tw.wiki});
 	headerRenderTree.execute({tiddlerTitle: title});
 	headerRenderTree.renderInDom(headerTitle);
-	this.wiki.addEventListener("",function(changes) {
+	this.wiki.addEventListener("change",function(changes) {
 		headerRenderTree.refreshInDom(changes);
 	});
 	// Render the body of the message
@@ -77,7 +77,7 @@ Modal.prototype.display = function(title,options) {
 		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki});
 	bodyRenderTree.execute({tiddlerTitle: title});
 	bodyRenderTree.renderInDom(modalBody);
-	this.wiki.addEventListener("",function(changes) {
+	this.wiki.addEventListener("change",function(changes) {
 		bodyRenderTree.refreshInDom(changes);
 	});
 	// Setup the link if present
@@ -105,7 +105,7 @@ Modal.prototype.display = function(title,options) {
 		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki});
 	footerRenderTree.execute({tiddlerTitle: title});
 	footerRenderTree.renderInDom(modalFooterButtons);
-	this.wiki.addEventListener("",function(changes) {
+	this.wiki.addEventListener("change",function(changes) {
 		footerRenderTree.refreshInDom(changes);
 	});
 	// Add the close event handler

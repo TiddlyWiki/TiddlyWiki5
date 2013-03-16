@@ -86,7 +86,7 @@ var TiddlyWebSyncer = function(options) {
 	// Mark us as not logged in
 	this.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
 	// Listen out for changes to tiddlers
-	this.wiki.addEventListener("",function(changes) {
+	this.wiki.addEventListener("change",function(changes) {
 		self.syncToServer(changes);
 	});
 	this.log("Initialising with host:",this.host);

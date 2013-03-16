@@ -7,7 +7,7 @@ Extension methods for the $tw.Wiki object
 
 Adds the following properties to the wiki object:
 
-* `eventListeners` is an array of {filter: <string>, listener: fn}
+* `eventListeners` is a hashmap by type of arrays of listener functions
 * `changedTiddlers` is a hashmap describing changes to named tiddlers since wiki change events were
 last dispatched. Each entry is a hashmap containing two fields:
 	modified: true/false
@@ -85,19 +85,29 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 	}
 };
 
-exports.addEventListener = function(filter,listener) {
-	this.eventListeners = this.eventListeners || [];
-	this.eventListeners.push({
-		filter: filter,
-		listener: listener
-	});	
+exports.addEventListener = function(type,listener) {
+	this.eventListeners = this.eventListeners || {};
+	this.eventListeners[type] = this.eventListeners[type]  || [];
+	this.eventListeners[type].push(listener);	
 };
 
-exports.removeEventListener = function(filter,listener) {
-	for(var c=this.eventListeners.length-1; c>=0; c--) {
-		var l = this.eventListeners[c];
-		if(l.filter === filter && l.listener === listener) {
-			this.eventListeners.splice(c,1);
+exports.removeEventListener = function(type,listener) {
+	var listeners = this.eventListeners[type];
+	if(listeners) {
+		var p = listeners.indexOf(listener);
+		if(p !== -1) {
+			listeners.splice(p,1);
+		}
+	}
+};
+
+exports.dispatchEvent = function(type /*, args */) {
+	var args = Array.prototype.slice.call(arguments,1),
+		listeners = this.eventListeners[type];
+	if(listeners) {
+		for(var p=0; p<listeners.length; p++) {
+			var listener = listeners[p];
+			listener.apply(listener,args);
 		}
 	}
 };
@@ -124,15 +134,12 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Trigger events
 	this.eventListeners = this.eventListeners || [];
 	if(!this.eventsTriggered) {
-		var me = this;
+		var self = this;
 		$tw.utils.nextTick(function() {
-			var changes = me.changedTiddlers;
-			me.changedTiddlers = {};
-			me.eventsTriggered = false;
-			for(var e=0; e<me.eventListeners.length; e++) {
-				var listener = me.eventListeners[e];
-				listener.listener(changes);
-			}
+			var changes = self.changedTiddlers;
+			self.changedTiddlers = {};
+			self.eventsTriggered = false;
+			self.dispatchEvent("change",changes);
 		});
 		this.eventsTriggered = true;
 	}

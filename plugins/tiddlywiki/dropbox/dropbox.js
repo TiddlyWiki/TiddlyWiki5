@@ -408,7 +408,7 @@ $tw.plugins.dropbox.saveTiddlerIndex = function(path,callback) {
 Setup synchronisation back to Dropbox
 */
 $tw.plugins.dropbox.setupSyncer = function(wiki) {
-	wiki.addEventListener("",function(changes) {
+	wiki.addEventListener("change",function(changes) {
 		$tw.plugins.dropbox.syncChanges(changes,wiki);
 	});
 };

@@ -123,7 +123,7 @@ exports.startup = function() {
 		var container = document.createElement("div");
 		document.body.insertBefore(container,document.body.firstChild);
 		renderTree.renderInDom(container);
-		$tw.wiki.addEventListener("",function(changes) {
+		$tw.wiki.addEventListener("change",function(changes) {
 			renderTree.refreshInDom(changes);
 		});
 	} else {
