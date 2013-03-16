@@ -628,8 +628,8 @@ exports.getTiddlerText = function(title,defaultText) {
 		// Just return the text if we've got it
 		return tiddler.fields.text;
 	} else {
-		// Ask all the syncers to load the tiddler if they can
-		this.invokeSyncers("lazyLoad",title,tiddler);
+		// Tell any listeners about the need to lazily load this tiddler
+		this.dispatchEvent("lazyLoad",title);
 		// Indicate that the text is being loaded
 		return null;
 	}

@@ -89,6 +89,10 @@ var TiddlyWebSyncer = function(options) {
 	this.wiki.addEventListener("change",function(changes) {
 		self.syncToServer(changes);
 	});
+	// Listen out for lazyLoad events
+	this.wiki.addEventListener("lazyLoad",function(title) {
+		self.lazyLoad(title);
+	});
 	this.log("Initialising with host:",this.host);
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn,json) {
@@ -126,7 +130,7 @@ TiddlyWebSyncer.prototype.log = function(/* arguments */) {
 /*
 Lazily load a skinny tiddler if we can
 */
-TiddlyWebSyncer.prototype.lazyLoad = function(title,tiddler) {
+TiddlyWebSyncer.prototype.lazyLoad = function(title) {
 	// Queue up a sync task to load this tiddler
 	this.enqueueSyncTask({
 		type: "load",
