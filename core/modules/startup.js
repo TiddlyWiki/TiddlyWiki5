@@ -62,13 +62,6 @@ exports.startup = function() {
 		document.addEventListener("tw-modal",function(event) {
 			$tw.modal.display(event.param);
 		},false);
-		// Install the syncer message mechanism
-		document.addEventListener("tw-login",function(event) {
-			$tw.wiki.invokeSyncers("handleLoginEvent",event);
-		},false);
-		document.addEventListener("tw-logout",function(event) {
-			$tw.wiki.invokeSyncers("handleLogoutEvent",event);
-		},false);
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
 		document.addEventListener("tw-scroll",$tw.pageScroller,false);

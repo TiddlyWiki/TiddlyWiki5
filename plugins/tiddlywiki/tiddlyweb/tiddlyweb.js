@@ -91,9 +91,15 @@ var TiddlyWebSyncer = function(options) {
 	});
 	// Listen out for lazyLoad events
 	this.wiki.addEventListener("lazyLoad",function(title) {
-		self.lazyLoad(title);
+		self.handleLazyLoadEvent(title);
 	});
-	this.log("Initialising with host:",this.host);
+	// Listen our for login/logout events
+	document.addEventListener("tw-login",function(event) {
+		self.handleLoginEvent(event);
+	},false);
+	document.addEventListener("tw-logout",function(event) {
+		self.handleLogoutEvent(event);
+	},false);
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn,json) {
 		if(isLoggedIn) {
@@ -101,6 +107,7 @@ var TiddlyWebSyncer = function(options) {
 			self.syncFromServer();
 		}
 	});
+	this.log("Initialising with host:",this.host);
 };
 
 TiddlyWebSyncer.titleIsLoggedIn = "$:/plugins/tiddlyweb/IsLoggedIn";
@@ -130,7 +137,7 @@ TiddlyWebSyncer.prototype.log = function(/* arguments */) {
 /*
 Lazily load a skinny tiddler if we can
 */
-TiddlyWebSyncer.prototype.lazyLoad = function(title) {
+TiddlyWebSyncer.prototype.handleLazyLoadEvent = function(title) {
 	// Queue up a sync task to load this tiddler
 	this.enqueueSyncTask({
 		type: "load",

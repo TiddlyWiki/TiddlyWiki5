@@ -603,19 +603,6 @@ exports.initSyncers = function() {
 };
 
 /*
-Invoke all the active syncers
-*/
-exports.invokeSyncers = function(method /* ,args */) {
-	var args = Array.prototype.slice.call(arguments,1);
-	for(var name in this.syncers) {
-		var syncer = this.syncers[name];
-		if(syncer[method]) {
-			syncer[method].apply(syncer,args);
-		}
-	}
-};
-
-/*
 Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
 */
 exports.getTiddlerText = function(title,defaultText) {
