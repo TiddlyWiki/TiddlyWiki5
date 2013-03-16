@@ -588,21 +588,6 @@ exports.search = function(text,options) {
 };
 
 /*
-Initialise syncers
-*/
-exports.initSyncers = function() {
-	this.syncers = {};
-	var self = this;
-	$tw.modules.forEachModuleOfType("syncer",function(title,module) {
-		if(module.name && module.syncer) {
-			self.syncers[module.name] = new module.syncer({
-				wiki: self
-			});
-		}
-	});
-};
-
-/*
 Trigger a load for a tiddler if it is skinny. Returns the text, or undefined if the tiddler is missing, null if the tiddler is being lazily loaded.
 */
 exports.getTiddlerText = function(title,defaultText) {

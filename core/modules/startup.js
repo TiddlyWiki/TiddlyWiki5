@@ -28,7 +28,6 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Set up the wiki store
 	$tw.wiki.initParsers();
-	$tw.wiki.initSyncers();
 	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Get the default tiddlers
@@ -73,6 +72,15 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		},false);
+		// Install syncers
+		$tw.syncers = {};
+		$tw.modules.forEachModuleOfType("syncer",function(title,module) {
+			if(module.name && module.syncer) {
+				$tw.syncers[module.name] = new module.syncer({
+					wiki: $tw.wiki
+				});
+			}
+		});
 		// Install the crypto event handlers
 		document.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
