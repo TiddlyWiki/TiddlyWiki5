@@ -82,7 +82,7 @@ var TiddlyWebSyncer = function(options) {
 	this.taskTimerId = null; // Sync timer
 	// Compute the host and recipe
 	this.host = document.location.protocol + "//" + document.location.host + "/";
-	this.recipe = undefined; // Filled in by getStatus() to be either "" or "recipes/<recipename>/"
+	this.recipe = undefined; // Filled in by getStatus()
 	// Mark us as not logged in
 	this.wiki.addTiddler({title: TiddlyWebSyncer.titleIsLoggedIn,text: "no"});
 	// Listen out for changes to tiddlers
@@ -670,7 +670,6 @@ TiddlyWebSyncer.prototype.getCsrfToken = function() {
 		csrf = match[1];
 	}
 	return csrf;
-
 };
 
 // Only export anything on the browser
