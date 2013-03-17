@@ -74,15 +74,6 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		},false);
-		// Install syncers
-		$tw.syncers = {};
-		$tw.modules.forEachModuleOfType("syncer",function(title,module) {
-			if(module.name && module.syncer) {
-				$tw.syncers[module.name] = new module.syncer({
-					wiki: $tw.wiki
-				});
-			}
-		});
 		// Install the crypto event handlers
 		document.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
