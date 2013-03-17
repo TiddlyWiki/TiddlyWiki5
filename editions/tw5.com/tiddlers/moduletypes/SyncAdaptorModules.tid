@@ -1,0 +1,95 @@
+title: SyncAdaptorModules
+tags: internals
+
+! Introduction
+
+SyncAdaptorModules encapsulate storage mechanisms that can be used by the SyncMechanism. Two examples are:
+
+* The TiddlyWebAdaptor interfaces with servers compatible with TiddlyWeb's HTTP API, such as TiddlyWeb itself and TiddlyWiki5's built-in ServerMechanism.
+
+* The LocalFileAdaptor interfaces with file systems with an API compatible with node.js's `fs` module
+
+SyncAdaptorModules are represented as JavaScript tiddlers with the field `module-type` set to `syncadaptor`.
+
+! Exports
+
+The following properties should be exposed via the `exports` object:
+
+|!Property |!Description |
+|adaptorClass |The JavaScript class for the adaptor |
+
+Nothing should be exported if the adaptor detects that it isn't capable of operating successfully (eg, because it only runs on either the browser or the server, or because a dependency is missing).
+
+! Adaptor Module Methods
+
+Adaptor modules must handle the following methods.
+
+!! `Constructor(syncer)`
+
+Initialises a new adaptor instance.
+
+|!Parameter |!Description |
+|syncer |Syncer object that is using this adaptor |
+
+!! `getTiddlerInfo(tiddler)`
+
+Gets the supplemental information that the adaptor needs to keep track of for a particular tiddler. For example, the TiddlyWeb adaptor includes a `bag` field indicating the original bag of the tiddler.
+
+|!Parameter |!Description |
+|tiddler |Target tiddler |
+
+Returns an object storing any additional information required by the adaptor.
+
+!! `getStatus(callback)`
+
+Retrieves status information from the server.
+
+|!Parameter |!Description |
+|callback |Callback function invoked with parameters `err,isLoggedIn,userName` |
+
+!! `login(username,password,callback)`
+
+Attempts to login to the server with specified credentials.
+
+|!Parameter |!Description |
+|username |Username |
+|password |Password |
+|callback |Callback function invoked with parameter `err` |
+
+!! `logout(callback)`
+
+Attempts to logout of the server.
+
+|!Parameter |!Description |
+|callback |Callback function invoked with parameter `err` |
+
+!! `getSkinnyTiddlers(callback)`
+
+Retrieves a list of skinny tiddlers from the server.
+
+|!Parameter |!Description |
+|callback |Callback function invoked with parameter `err,tiddlers`, where `tiddlers` is an array of tiddler field objects |
+
+!! `saveTiddler(tiddler,callback)`
+
+Saves a tiddler to the server.
+
+|!Parameter |!Description |
+|tiddler |Tiddler to be saved |
+|callback |Callback function invoked with parameter `err,adaptorInfo,revision` |
+
+!! `loadTiddler(title,callback)`
+
+Loads a tiddler from the server.
+
+|!Parameter |!Description |
+|title |Title of tiddler to be retrieved |
+|callback |Callback function invoked with parameter `err,tiddlerFields` |
+
+!! `deleteTiddler(title,callback)`
+
+Delete a tiddler from the server.
+
+|!Parameter |!Description |
+|title |Title of tiddler to be deleted |
+|callback |Callback function invoked with parameter `err` |

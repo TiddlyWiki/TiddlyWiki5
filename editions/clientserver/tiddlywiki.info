@@ -1,6 +1,6 @@
 {
 	"plugins": [
-		"tiddlywiki/tiddlyweb"
+		"tiddlywiki/tiddlyweb2"
 	],
 	"parentWiki": "../tw5.com"
 }

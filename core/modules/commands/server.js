@@ -33,7 +33,8 @@ Command.prototype.execute = function() {
 		port = this.params[0] || "8080",
 		rootTiddler = this.params[1] || "$:/core/templates/tiddlywiki5.template.html",
 		renderType = this.params[2] || "text/plain",
-		serveType = this.params[3] || "text/html";
+		serveType = this.params[3] || "text/html",
+		prefix;
 	http.createServer(function(request, response) {
 		var requestPath = url.parse(request.url).pathname,
 			text;
@@ -44,7 +45,7 @@ Command.prototype.execute = function() {
 					data += chunk.toString();
 				});
 				request.on("end",function() {
-					var prefix = "/recipes/default/tiddlers/";
+					prefix = "/recipes/default/tiddlers/";
 					if(requestPath.indexOf(prefix) === 0) {
 						var title = decodeURIComponent(requestPath.substr(prefix.length)),
 							fields = JSON.parse(data);
@@ -64,7 +65,7 @@ Command.prototype.execute = function() {
 							delete fields["revision"];
 						}
 console.log("PUT tiddler",title,fields)
-//						self.commander.wiki.addTiddler(new $tw.Tiddler(JSON.parse(data),{title: title}));
+						self.commander.wiki.addTiddler(new $tw.Tiddler(JSON.parse(data),{title: title}));
 						var changeCount = self.commander.wiki.getChangeCount(title).toString();
 						response.writeHead(204, "OK",{
 							Etag: "\"default/" + title + "/" + changeCount + ":\""
@@ -77,11 +78,11 @@ console.log("PUT tiddler",title,fields)
 				});
 				break;
 			case "DELETE":
-				var prefix = "/bags/default/tiddlers/";
+				prefix = "/bags/default/tiddlers/";
 				if(requestPath.indexOf(prefix) === 0) {
 					var title = decodeURIComponent(requestPath.substr(prefix.length));
 console.log("DELETE tiddler",title)
-//					self.commander.wiki.deleteTiddler(decodeURIComponent(title));
+					self.commander.wiki.deleteTiddler(decodeURIComponent(title));
 					response.writeHead(204, "OK");
 					response.end();
 				} else {
@@ -120,9 +121,39 @@ console.log("DELETE tiddler",title)
 					text = JSON.stringify(tiddlers);
 					response.end(text,"utf8");
 				} else {
-					response.writeHead(404);
-					response.end();
+					prefix = "/recipes/default/tiddlers/";
+					if(requestPath.indexOf(prefix) === 0) {
+						var title = decodeURIComponent(requestPath.substr(prefix.length)),
+							tiddler = $tw.wiki.getTiddler(title),
+							tiddlerFields = {},
+							knownFields = [
+								"bag", "created", "creator", "modified", "modifier", "permissions", "recipe", "revision", "tags", "text", "title", "type", "uri"
+							];
+						if(tiddler) {
+							$tw.utils.each(tiddler.fields,function(field,name) {
+								var value = tiddler.getFieldString(name)
+								if(knownFields.indexOf(name) !== -1) {
+									tiddlerFields[name] = value;
+								} else {
+									tiddlerFields.fields = tiddlerFields.fields || {};
+									tiddlerFields.fields[name] = value;
+								}
+							});
+							response.writeHead(200, {"Content-Type": "application/json"});
+							response.end(JSON.stringify(tiddlerFields),"utf8");
+						} else {
+							response.writeHead(404);
+							response.end();
+						}
+					} else {
+						response.writeHead(404);
+						response.end();
+					}
 				}
+				break;
+			case "POST":
+				response.writeHead(404);
+				response.end();
 				break;
 			}
 	}).listen(port);

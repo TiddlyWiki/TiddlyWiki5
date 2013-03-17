@@ -26,8 +26,10 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
-	// Set up the wiki store
+	// Set up the parsers
 	$tw.wiki.initParsers();
+	// Set up the syncer object
+	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Get the default tiddlers
