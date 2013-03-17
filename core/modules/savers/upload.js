@@ -24,24 +24,24 @@ var UploadSaver = function(wiki) {
 UploadSaver.prototype.save = function(text) {
 	// Get the various parameters we need
 	var backupDir = ".",
-		userName = this.wiki.getTextReference("$:/UploadName"),
+		username = this.wiki.getTextReference("$:/UploadName"),
 		password = $tw.utils.getPassword("upload"),
 		uploadDir = ".",
 		url = this.wiki.getTextReference("$:/UploadURL");
 	// Bail out if we don't have the bits we need
-	if(!userName || userName.toString().trim() === "" || !password || password.toString().trim() === "") {
+	if(!username || username.toString().trim() === "" || !password || password.toString().trim() === "") {
 		return false;
 	}
 	// Construct the url if not provided
 	if(!url) {
-		url = "http://" + userName + ".tiddlyspot.com/store.cgi";
+		url = "http://" + username + ".tiddlyspot.com/store.cgi";
 	}
 	// Assemble the header
 	var boundary = "---------------------------" + "AaB03x";	
 	var uploadFormName = "UploadPlugin";
 	var head = [];
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");
-	head.push("backupDir=" + backupDir + ";user=" + userName + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 
+	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 
 	head.push("\r\n" + "--" + boundary);
 	head.push("Content-disposition: form-data; name=\"userfile\"; filename=\"index.html\"");
 	head.push("Content-Type: text/html;charset=UTF-8");
@@ -52,7 +52,7 @@ UploadSaver.prototype.save = function(text) {
 		data = head.join("\r\n") + text + tail;
 	// Do the HTTP post
 	var http = new XMLHttpRequest();
-	http.open("POST",url,true,userName,password);
+	http.open("POST",url,true,username,password);
 	http.setRequestHeader("Content-Type","multipart/form-data; ;charset=UTF-8; boundary=" + boundary);
 	http.onreadystatechange = function() {
 		if(http.readyState == 4 && http.status == 200) {

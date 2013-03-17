@@ -45,7 +45,7 @@ Returns an object storing any additional information required by the adaptor.
 Retrieves status information from the server.
 
 |!Parameter |!Description |
-|callback |Callback function invoked with parameters `err,isLoggedIn,userName` |
+|callback |Callback function invoked with parameters `err,isLoggedIn,username` |
 
 !! `login(username,password,callback)`
 

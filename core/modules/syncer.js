@@ -127,7 +127,7 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 
 Syncer.prototype.getStatus = function(callback) {
 	var self = this;
-	this.syncadaptor.getStatus(function(err,isLoggedIn,userName) {
+	this.syncadaptor.getStatus(function(err,isLoggedIn,username) {
 		if(err) {
 			self.showError(err);
 			return;
@@ -135,13 +135,13 @@ Syncer.prototype.getStatus = function(callback) {
 		// Set the various status tiddlers
 		self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
 		if(isLoggedIn) {
-			self.wiki.addTiddler({title: self.titleUserName,text: userName});
+			self.wiki.addTiddler({title: self.titleUserName,text: username});
 		} else {
 			self.wiki.deleteTiddler(self.titleUserName);
 		}
 		// Invoke the callback
 		if(callback) {
-			callback(err,isLoggedIn,userName);
+			callback(err,isLoggedIn,username);
 		}
 	});
 };
@@ -224,7 +224,7 @@ Dispay a password prompt and allow the user to login
 */
 Syncer.prototype.handleLoginEvent = function() {
 	var self = this;
-	this.getStatus(function(err,isLoggedIn,userName) {
+	this.getStatus(function(err,isLoggedIn,username) {
 		if(!isLoggedIn) {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: "Login to TiddlySpace",
@@ -252,7 +252,7 @@ Syncer.prototype.login = function(username,password,callback) {
 		if(err) {
 			return callback(err);
 		}
-		self.getStatus(function(err,isLoggedIn,userName) {
+		self.getStatus(function(err,isLoggedIn,username) {
 			if(callback) {
 				callback(null,isLoggedIn);
 			}
