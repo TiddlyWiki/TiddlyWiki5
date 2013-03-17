@@ -171,7 +171,7 @@ Syncer.prototype.syncFromServer = function() {
 		for(var t=0; t<tiddlers.length; t++) {
 			// Get the incoming tiddler fields, and the existing tiddler
 			var tiddlerFields = tiddlers[t],
-				incomingRevision = tiddlerFields.revision.toString(),
+				incomingRevision = tiddlerFields.revision,
 				tiddler = self.wiki.getTiddler(tiddlerFields.title),
 				tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
 				currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
