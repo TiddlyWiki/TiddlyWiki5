@@ -181,7 +181,7 @@ console.log("DELETE tiddler",title)
 						tiddlerFields[name] = tiddler.getFieldString(name);
 					}
 				});
-				tiddlerFields["revision"] = $tw.wiki.getChangeCount(title);
+				tiddlerFields["revision"] = state.wiki.getChangeCount(title);
 				tiddlers.push(tiddlerFields);
 			});
 			var text = JSON.stringify(tiddlers);
@@ -208,6 +208,7 @@ console.log("DELETE tiddler",title)
 						tiddlerFields.fields[name] = value;
 					}
 				});
+				tiddlerFields["revision"] = state.wiki.getChangeCount(title);
 				response.writeHead(200, {"Content-Type": "application/json"});
 				response.end(JSON.stringify(tiddlerFields),"utf8");
 			} else {
