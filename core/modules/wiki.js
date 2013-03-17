@@ -521,7 +521,7 @@ Options available:
 */
 exports.search = function(text,options) {
 	options = options || {};
-	var me = this,t;
+	var self = this,t;
 	// Convert the search string into a regexp for each term
 	var terms, searchTermsRegExps,
 		flags = options.caseSensitive ? "" : "i";
@@ -542,7 +542,7 @@ exports.search = function(text,options) {
 	}
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
-		var tiddler = me.getTiddler(title);
+		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
 			return !!options.invert;
 		}
