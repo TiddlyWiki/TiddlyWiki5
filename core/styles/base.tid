@@ -231,6 +231,21 @@ a.tw-tiddlylink-missing {
 	<<box-shadow "inset 0 1px 0 #fff">>;
 }
 
+.config-area {
+	max-width: 50em;
+	padding: 1em;
+	border: 1px solid #aaa;
+	background: #ddd;
+	<<box-shadow "inset 1px 1px 4px rgba(0,0,0,0.8)">>
+	<<border-radius 3px>>
+}
+
+.config-area h1 {
+	font-size: 1.2em;
+	text-align: center;
+	color: #888;
+}
+
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
 	width: 100%;
 }
