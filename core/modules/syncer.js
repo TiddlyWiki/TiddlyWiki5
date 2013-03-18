@@ -294,7 +294,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 	// Fill in some tiddlerInfo if the tiddler is one we haven't seen before
 	if(!$tw.utils.hop(this.tiddlerInfo,task.title)) {
 		this.tiddlerInfo[task.title] = {
-			revision: "0",
+			revision: null,
 			adaptorInfo: {},
 			changeCount: -1
 		}

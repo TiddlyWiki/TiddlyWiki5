@@ -121,8 +121,16 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			if(err) {
 				return callback(err);
 			}
+			// Process the tiddlers to make sure the revision is a string
+			var tiddlers = JSON.parse(data);
+			for(var t=0; t<tiddlers.length; t++) {
+				var tiddlerFields = tiddlers[t];
+				if(typeof tiddlerFields.revision === "number") {
+					tiddlerFields.revision = tiddlerFields.revision.toString();
+				}
+			}
 			// Invoke the callback with the skinny tiddlers
-			callback(null,JSON.parse(data));
+			callback(null,tiddlers);
 		}
 	});
 };
@@ -237,6 +245,10 @@ TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(data) {
 			result[title] = tiddlerFields[title];
 		}
 	});
+	// Make sure the revision is expressed as a string
+	if(typeof result.revision === "number") {
+		result.revision = result.revision.toString();
+	}
 	// Some unholy freaking of content types
 	if(result.type === "text/javascript") {
 		result.type = "application/javascript";
