@@ -42,7 +42,7 @@ Command.prototype.execute = function() {
 		var renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki});
 		renderTree.execute({tiddlerTitle: title});
 		var text = renderTree.render(type);
-		fs.writeFileSync(path.resolve(pathname,title + extension),text,"utf8");
+		fs.writeFileSync(path.resolve(pathname,encodeURIComponent(title) + extension),text,"utf8");
 	});
 	return null;
 };
