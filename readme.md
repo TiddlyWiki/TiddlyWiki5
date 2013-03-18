@@ -35,7 +35,11 @@ TiddlyWiki5</a> can be used on the command line to perform an extensive set of o
 TiddlerFiles</a> and <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWikiFiles.html'>
 TiddlyWikiFiles</a>. For example, this loads the tiddlers from a <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a> HTML file and then saves one of them in HTML:</p><pre>
-node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html</pre><h2 class=''>
+node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html</pre><p>
+In order to use <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> on the command line you must first install node.js:</p><p>
+<a class='tw-tiddlylink tw-tiddlylink-external' href='http://nodejs.org/'>
+http://nodejs.org/</a></p><h2 class=''>
 Usage</h2><p>
 Running <code>
 tiddlywiki.js</code> from the command line boots the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
@@ -54,7 +58,7 @@ This batch file builds several variants of <a class='tw-tiddlylink tw-tiddlylink
 TiddlyWiki5</a> for deployment on tiddlywiki.com.</p><p>
 By default, files are output to a folder called <code>
 jermolene.github.com</code> in the same directory as the main <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> directory. For example:</p><pre>
+TiddlyWiki5</a> directory. You will need to create the directory before running the batch file. For example:</p><pre>
 * /TiddlyWork/ - Directory for working with TiddlyWiki5
 * /TiddlyWork/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
 * /TiddlyWork/jermolene.github.com/ - Directory for output files</pre><p>
