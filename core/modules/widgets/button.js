@@ -29,6 +29,7 @@ ButtonWidget.prototype.generate = function() {
 	this.hover = this.renderer.getAttribute("hover");
 	this.qualifyTiddlerTitles = this.renderer.getAttribute("qualifyTiddlerTitles");
 	this["class"] = this.renderer.getAttribute("class");
+	this.selectedClass = this.renderer.getAttribute("selectedClass");
 	// Compose the button
 	var classes = ["tw-button"];
 	if(this["class"]) {
@@ -38,6 +39,11 @@ ButtonWidget.prototype.generate = function() {
 	if(this.hover === "yes") {
 		events.push({name: "mouseover", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 		events.push({name: "mouseout", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
+	}
+	if(this.set && this.setTo && this.selectedClass) {
+		if(this.isSelected()) {
+			classes.push(this.selectedClass);
+		}
 	}
 	// Set the return element
 	this.tag = "button";
@@ -65,9 +71,22 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 	});
 };
 
+ButtonWidget.prototype.isSelected = function() {
+	var title = this.set;
+	if(this.qualifyTiddlerTitles) {
+		title =  title + "-" + this.renderer.getContextScopeId();
+	}
+	var tiddler = this.renderer.renderTree.wiki.getTiddler(title);
+	return tiddler ? tiddler.fields.text === this.setTo : false;
+};
+
 ButtonWidget.prototype.setTiddler = function() {
-	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.set);
-	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
+	var title = this.set;
+	if(this.qualifyTiddlerTitles) {
+		title =  title + "-" + this.renderer.getContextScopeId();
+	}
+	var tiddler = this.renderer.renderTree.wiki.getTiddler(title);
+	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: this.setTo}));
 };
 
 ButtonWidget.prototype.handleClickEvent = function(event) {
@@ -93,8 +112,19 @@ ButtonWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 };
 
 ButtonWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+	var setTitle = this.set,
+		popupTitle = this.popup;
+	if(this.qualifyTiddlerTitles) {
+		var scopeId = this.renderer.getContextScopeId();
+		if(setTitle) {
+			setTitle =  setTitle + "-" + scopeId;
+		}
+		if(popupTitle) {
+			popupTitle =  popupTitle + "-" + scopeId;
+		}
+	}
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
- 	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
+ 	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || (setTitle && changedTiddlers[setTitle]) || (popupTitle && changedTiddlers[popupTitle])) {
 		// Regenerate and rerender the widget and replace the existing DOM node
 		this.generate();
 		var oldDomNode = this.renderer.domNode,

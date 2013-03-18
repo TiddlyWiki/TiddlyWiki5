@@ -231,6 +231,36 @@ a.tw-tiddlylink-missing {
 	<<box-shadow "inset 0 1px 0 #fff">>;
 }
 
+.tw-tab-set {
+}
+
+.tw-tab-buttons {
+	font-size: 0.7em;
+	line-height: 100%;
+	margin-bottom: -1px;
+}
+
+.tw-tab-buttons button {
+	color: #666;
+	background-color: #ccc;
+	border-left: 1px solid #aaa;
+	border-top: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #aaa;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
+}
+
+.tw-tab-buttons button.tw-tab-selected {
+	background-color: #ececec;
+	border-bottom: 1px solid #ececec;
+}
+
+.tw-tab-contents {
+	border-top: 1px solid #aaa;
+	padding: 1em;
+}
+
 .config-area {
 	max-width: 50em;
 	padding: 1em 3em 3em 3em;
