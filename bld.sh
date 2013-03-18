@@ -9,7 +9,7 @@ if [  -z "$TW5_BUILD_OUTPUT" ]; then
 fi
 
 if [  ! -d "$TW5_BUILD_OUTPUT" ]; then
-    echo 'A valid TW5_BUILD_OUTPUT directory must be set'
+    echo 'A valid TW5_BUILD_OUTPUT environment variable must be set'
     exit 1
 fi
 
