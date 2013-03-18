@@ -232,7 +232,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	});
 	this.renderer.renderTree.wiki.addTiddler(tiddler);
 	// Create the draft tiddler
-	var draftTitle = "New Tiddler at " + (new Date()),
+	var draftTitle = this.generateDraftTitle(title),
 		draftTiddler = new $tw.Tiddler({
 			text: "Type the text for the new tiddler",
 			title: draftTitle,
