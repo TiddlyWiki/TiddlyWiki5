@@ -2,7 +2,7 @@ title: $:/templates/SideBar
 
 <!-- The implementation of tabs here is currently a bit unreadable -->
 <div class="tw-tab-set">
-<div class="tw-tab-buttons"><$button type="set" set="myTabset" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button><$button type="set" set="myTabset" setTo="allTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">All</$button><$button type="set" set="myTabset" setTo="systemTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">System</$button></div>
+<div class="tw-tab-buttons"><$button type="set" set="myTabset" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button><$button type="set" set="myTabset" setTo="allTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">All</$button><$button type="set" set="myTabset" setTo="systemTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">System</$button><$button type="set" set="myTabset" setTo="toolsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tools</$button></div>
 <div class="tw-tab-contents">
 <$reveal type="match" state="myTabset" text="openTab" qualifyTiddlerTitles="yes">
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" itemClass="tw-menu-list-item"/>
@@ -13,9 +13,8 @@ title: $:/templates/SideBar
 <$reveal type="match" state="myTabset" text="systemTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[system]sort[title]]" itemClass="tw-menu-list-item"/>
 </$reveal>
+<$reveal type="match" state="myTabset" text="toolsTab" qualifyTiddlerTitles="yes">
+{{$:/templates/ControlPanel}}
+</$reveal>
 </div>
 
-<div class="edit-controls">
-<$button message="tw-new-tiddler" class="btn btn-mini btn-success">New</$button>
-<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save</$button>
-</div>

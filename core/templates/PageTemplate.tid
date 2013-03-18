@@ -18,13 +18,6 @@ title: $:/templates/PageTemplate
 <!-- The main story -->
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="classic" itemClass="tw-tiddler-frame"/>
 
-<!-- Config area -->
-<div class="config-area">
-! Temporary Control Panel
-
-{{$:/snippets/encryptionstatus}}
-</div>
-
 <!-- End of story river -->
 </section>
 
