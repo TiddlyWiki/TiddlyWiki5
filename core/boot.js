@@ -314,6 +314,7 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	html.push("<input type='password' name='password' class='input-small' placeholder='Password'>",
 			"<button type='submit' class='btn'>" + submitText + "</button>");
 	form.className = "form-inline";
+	form.setAttribute("autocomplete","off");
 	form.innerHTML = html.join("\n");
 	this.promptWrapper.appendChild(form);
 	window.setTimeout(function() {
