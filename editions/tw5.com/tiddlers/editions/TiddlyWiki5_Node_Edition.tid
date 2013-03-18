@@ -24,8 +24,42 @@ node tiddlywiki.js [<wikipath>] [--<command> [<arg>[,<arg>]]]
 
 For trying TiddlyWiki5 out under node.js, several batch files are provided:
 
-* `bld.sh` builds the new TiddlyWiki 5 HTML file
-* `2bld.sh` builds TiddlyWiki 2.6.5 from its original source
+!!! `bld.sh` builds tw5.com
+
+This batch file builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
+
+By default, files are output to a folder called `jermolene.github.com` in the same directory as the main TiddlyWiki5 directory. For example:
+
+```
+* /TiddlyWork/ - Directory for working with TiddlyWiki5
+* /TiddlyWork/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
+* /TiddlyWork/jermolene.github.com/ - Directory for output files
+```
+
+You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWik5i that first sets the environment variable and then invokes `bld.sh`.
+
+The files output by `bld.sh` are:
+
+* `readme.md` main readme file, output to the TiddlyWiki5 directory
+* `index.html` TiddlyWiki5 standalone HTML file with content from the `tw5.com` edition
+* `empty.html` TiddlyWiki5 standalone HTML file with no content
+* `encrypted.html` TiddlyWiki5 standalone HTML file encrypted with the password `password`
+* `static.html` static HTML version of the DefaultTiddlers of the `tw5.com` edition
+* `static/*.html` and `static/static.css` static HTML versions of individual tiddlers
+
+!!! `serve.sh` serves tw5.com
+
+This batch file starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the script serves on port 8080.
+
+To experiment with this configuration, run the script and then visit `http://0.0.0.0:8080` in a browser. Currently changes do get synced to the server but the server doesn't yet save the changes back to the file system. Thus the best way to experiment with this edition is by visiting it in two different browsers, exploring how the changes made in one browser propogate to the other.
+
+!!! `wbld.sh` builds TiddlyWiki5 for TiddlyWeb
+
+This batch file builds and deploys the code for [[TiddlyWiki5 in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
+
+!!! `2bld.sh` builds TiddlyWiki 2.6.5
+
+This batch file builds TiddlyWiki 2.6.5 from the original source and then uses the `opendiff` program to display the differences between them.
 
 !!Commands
 

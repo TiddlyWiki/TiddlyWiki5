@@ -47,14 +47,66 @@ The commands and their individual arguments follow, each command being identifie
 node tiddlywiki.js [&lt;wikipath&gt;] [--&lt;command&gt; [&lt;arg&gt;[,&lt;arg&gt;]]]</pre><h2 class=''>
 Batch Files</h2><p>
 For trying <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> out under node.js, several batch files are provided:</p><ul>
+TiddlyWiki5</a> out under node.js, several batch files are provided:</p><h3 class=''>
+<code>
+bld.sh</code> builds tw5.com</h3><p>
+This batch file builds several variants of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> for deployment on tiddlywiki.com.</p><p>
+By default, files are output to a folder called <code>
+jermolene.github.com</code> in the same directory as the main <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> directory. For example:</p><pre>
+* /TiddlyWork/ - Directory for working with TiddlyWiki5
+* /TiddlyWork/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
+* /TiddlyWork/jermolene.github.com/ - Directory for output files</pre><p>
+You can override the build output directory by defining the environment variable <code>
+TW5_BUILD_OUTPUT</code>. The easiest way to do this is to create a personal batch file to invoke <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWik5i.html'>
+TiddlyWik5i</a> that first sets the environment variable and then invokes <code>
+bld.sh</code>.</p><p>
+The files output by <code>
+bld.sh</code> are:</p><ul>
 <li>
 <code>
-bld.sh</code> builds the new <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
-TiddlyWiki</a> 5 HTML file</li><li>
+readme.md</code> main readme file, output to the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> directory</li><li>
+<code>
+index.html</code> <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> standalone HTML file with content from the <code>
+tw5.com</code> edition</li><li>
+<code>
+empty.html</code> <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> standalone HTML file with no content</li><li>
+<code>
+encrypted.html</code> <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> standalone HTML file encrypted with the password <code>
+password</code></li><li>
+<code>
+static.html</code> static HTML version of the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/DefaultTiddlers.html'>
+DefaultTiddlers</a> of the <code>
+tw5.com</code> edition</li><li>
+<code>
+static/*.html</code> and <code>
+static/static.css</code> static HTML versions of individual tiddlers</li></ul><h3 class=''>
+<code>
+serve.sh</code> serves tw5.com</h3><p>
+This batch file starts <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> running as an HTTP server with the content from the <code>
+clientserver</code> edition. By default, the script serves on port 8080.</p><p>
+To experiment with this configuration, run the script and then visit <code>
+http://0.0.0.0:8080</code> in a browser. Currently changes do get synced to the server but the server doesn't yet save the changes back to the file system. Thus the best way to experiment with this edition is by visiting it in two different browsers, exploring how the changes made in one browser propogate to the other.</p><h3 class=''>
+<code>
+wbld.sh</code> builds <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
+TiddlyWeb</a></h3><p>
+This batch file builds and deploys the code for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5%20in%20the%20Sky%20for%20TiddlyWeb.html'>
+TiddlyWiki5 in the Sky for TiddlyWeb</a>. If you want to experiment with your own builds of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
+TiddlyWeb</a> you could use this batch file as a base.</p><h3 class=''>
 <code>
 2bld.sh</code> builds <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
-TiddlyWiki</a> 2.6.5 from its original source</li></ul><h2 class=''>
+TiddlyWiki</a> 2.6.5</h3><p>
+This batch file builds <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
+TiddlyWiki</a> 2.6.5 from the original source and then uses the <code>
+opendiff</code> program to display the differences between them.</p><h2 class=''>
 Commands</h2><p>
 The following commands are available:</p><div class='tw-list-frame'>
 <div class='tw-list-element'>
