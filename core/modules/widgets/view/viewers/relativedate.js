@@ -20,9 +20,10 @@ var RelativeDateViewer = function(viewWidget,tiddler,field,value) {
 };
 
 RelativeDateViewer.prototype.render = function() {
-	this.relativeDate = undefined;
+	var template = this.viewWidget.renderer.getAttribute("template","DD MMM YYYY"),
+		value = "";
 	if(this.value !== undefined) {
-		this.relativeDate = $tw.utils.getRelativeDate((new Date()) - this.value);
+		value = $tw.utils.formatDateString(this.value,template);
 	}
 	// Set the element details
 	this.viewWidget.tag = "span";
@@ -31,7 +32,7 @@ RelativeDateViewer.prototype.render = function() {
 	};
 	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
 		type: "text",
-		text: this.relativeDate ? this.relativeDate.description : ""
+		text: value
 	}]);
 };
 
@@ -39,9 +40,7 @@ RelativeDateViewer.prototype.render = function() {
 Trigger the timer when the relative date is put into the DOM
 */
 RelativeDateViewer.prototype.postRenderInDom = function() {
-	if(this.relativeDate) {
-		this.update();
-	}
+	this.update();
 };
 
 /*
