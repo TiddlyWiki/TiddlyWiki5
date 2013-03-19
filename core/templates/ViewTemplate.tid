@@ -1,16 +1,14 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-<span class="tw-tiddler-controls">
-<$button popup="tiddlerDropdown" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button.svg}}</$button>
+<span class="tw-tiddler-controls"><$button popup="tiddlerDropdown" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button.svg}}</$button>
 <$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button.svg}}</$button>
 <$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button.svg}}</$button>
+<$reveal type="popup" state="tiddlerDropdown" qualifyTiddlerTitles="yes"><div class="tw-drop-down"><$transclude template="$:/templates/TiddlerDropdown"></$transclude></div>
+</$reveal>
+
 </span>
 <span class="title"><$view field="title"/></span>
-
-<$reveal type="popup" state="tiddlerDropdown" qualifyTiddlerTitles="yes">
-<div class="tw-drop-down"><$transclude template="$:/templates/TiddlerDropdown"></$transclude></div>
-</$reveal>
 
 <div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
 
