@@ -26,7 +26,7 @@ Popup.prototype.show = function(options) {
 	this.title = options.title;
 	this.wiki = options.wiki;
 	this.anchorDomNode = options.domNode;
-	this.rootElement.addEventListener("click",this,true);
+	this.rootElement.addEventListener("click",this,false);
 };
 
 Popup.prototype.handleEvent = function(event) {
@@ -36,7 +36,7 @@ Popup.prototype.handleEvent = function(event) {
 };
 
 Popup.prototype.cancel = function() {
-	this.rootElement.removeEventListener("click",this,true);
+	this.rootElement.removeEventListener("click",this,false);
 	if(this.title) {
 		this.wiki.deleteTiddler(this.title);
 		this.title = null;
