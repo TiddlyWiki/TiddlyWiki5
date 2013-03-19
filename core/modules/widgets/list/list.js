@@ -82,7 +82,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 	return {
 		type: "element",
 		tag: "span",
-		children: this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",this.emptyMessage).tree
+		children: this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",this.emptyMessage,{parseAsInline: true}).tree
 	};
 };
 
