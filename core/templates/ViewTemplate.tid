@@ -12,7 +12,7 @@ modifier: JeremyRuston
 <div class="tw-drop-down"><$transclude template="$:/templates/TiddlerDropdown"></$transclude></div>
 </$reveal>
 
-<div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="date"/></div>
+<div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
 
 <div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/templates/TagTemplate" /></div>
 
