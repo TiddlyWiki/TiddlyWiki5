@@ -289,6 +289,21 @@ exports.getTiddlerLinks = function(title) {
 };
 
 /*
+Return an array of tiddler titles that link to the specified tiddler
+*/
+exports.getTiddlerBacklinks = function(targetTitle) {
+	var self = this,
+		backlinks = [];
+	this.forEachTiddler(function(title,tiddler) {
+		var links = self.getTiddlerLinks(title);
+		if(links.indexOf(targetTitle) !== -1) {
+			backlinks.push(title);
+		}
+	});
+	return backlinks;
+};
+
+/*
 Return a hashmap of tiddler titles that are referenced but not defined. Each value is the number of times the missing tiddler is referenced
 */
 exports.getMissingTitles = function() {

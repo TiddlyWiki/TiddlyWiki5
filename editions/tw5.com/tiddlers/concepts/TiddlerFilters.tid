@@ -40,6 +40,8 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''{field}'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
 * ''tags'': selects the tags on the currently selected tiddlers
 * ''tagging'': selects the tiddlers tagged with the currently selected tiddlers
+* ''links'': selects the outgoing links on the currently selected tiddlers
+* ''backlinks'': selects the tiddlers that link to the currently selected tiddlers
 * ''list'': selects the tiddlers listed in a specified tiddler (newline delimited)
 
 An operator can be negated with by preceding it with `!`, for example `[!tag[Tommy]]` selects the tiddlers that are not tagged with `Tommy`.
@@ -50,6 +52,8 @@ The operands available with the `is` operator are:
 
 * ''system'': selects all system tiddlers
 * ''current'': selects the current ContextTiddler
+* ''missing'': selects all missing tiddlers
+* ''orphan'': selects all orphan tiddlers
 
 ! Runs
 

@@ -174,6 +174,22 @@ exports.operators = {
 			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {$tw.utils.pushTop(subResults,this.getTiddlersWithTag(subResultsTemp[t]));}";
 		}
 	},
+	"links": { // Return outgoing links on selected tiddlers
+		selector: function(operator) {
+			return "for(title in source) {r = this.getTiddlerLinks(title); $tw.utils.pushTop(subResults,r);}";
+		},
+		filter: function(operator) {
+			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {r = this.getTiddlerLinks(subResultsTemp[t]); $tw.utils.pushTop(subResults,r);}";
+		}
+	},
+	"backlinks": { // Return incoming links on selected tiddlers
+		selector: function(operator) {
+			return "for(title in source) {r = this.getTiddlerBacklinks(title); $tw.utils.pushTop(subResults,r);}";
+		},
+		filter: function(operator) {
+			return "subResultsTemp = subResults;\nsubResults = [];for(t=subResultsTemp.length-1; t>=0; t--) {r = this.getTiddlerBacklinks(subResultsTemp[t]); $tw.utils.pushTop(subResults,r);}";
+		}
+	},
 	"has": { // Filter by presence of a particular field
 		selector: function(operator) {
 			var op = operator.prefix === "!" ? "=" : "!";

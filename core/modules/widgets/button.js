@@ -90,17 +90,22 @@ ButtonWidget.prototype.setTiddler = function() {
 };
 
 ButtonWidget.prototype.handleClickEvent = function(event) {
+	var handled = false;
 	if(this.message) {
 		this.dispatchMessage(event);
+		handled = true;
 	}
 	if(this.popup) {
 		this.triggerPopup(event);
+		handled = true;
 	}
 	if(this.set && this.setTo) {
 		this.setTiddler();
+		handled = true;
 	}
+	event.stopPropagation();
 	event.preventDefault();
-	return false;
+	return handled;
 };
 
 ButtonWidget.prototype.handleMouseOverOrOutEvent = function(event) {

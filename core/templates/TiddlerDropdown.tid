@@ -1,0 +1,16 @@
+title: $:/templates/TiddlerDropdown
+
+<div class="tw-tab-set"><div class="tw-tab-buttons"><$button type="set" set="$:/state/moreSideBarTabSet" setTo="refTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">References</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="taggingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tagging</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="fieldsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Fields</$button></div>
+<div class="tw-tab-contents">
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="refTab" qualifyTiddlerTitles="yes">
+<$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one">
+</$list>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="taggingTab" qualifyTiddlerTitles="yes">
+<$list filter="[is[current]tagging[]sort[title]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one"/>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="fieldsTab" qualifyTiddlerTitles="yes">
+Fields...
+</$reveal>
+</div>
+</div>

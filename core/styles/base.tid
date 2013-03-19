@@ -130,6 +130,7 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-tiddler-frame {
+	position: relative;
 	padding: 3em;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
@@ -235,7 +236,7 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-tab-buttons {
-	font-size: 0.7em;
+	font-size: 0.85em;
 	line-height: 100%;
 	margin-bottom: -1px;
 }
@@ -261,19 +262,13 @@ a.tw-tiddlylink-missing {
 	padding: 1em;
 }
 
-.config-area {
-	max-width: 50em;
-	padding: 1em 3em 3em 3em;
-	border: 1px solid #aaa;
-	background: #ddd;
-	<<box-shadow "inset 1px 1px 4px rgba(0,0,0,0.8)">>
-	<<border-radius 3px>>
+.tw-drop-down .tw-tab-buttons button {
+	background-color: #ececec;
 }
 
-.config-area h1 {
-	font-size: 1.2em;
-	text-align: center;
-	color: #888;
+.tw-drop-down .tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
 }
 
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
