@@ -1,4 +1,4 @@
-title: SearchPreviewTemplate
+title: $:/templates/SearchPreviewTemplate
 
 <div class="title">
 <<view title text>>

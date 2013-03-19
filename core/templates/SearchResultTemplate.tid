@@ -14,7 +14,7 @@ title: $:/templates/SearchResultTemplate
 
 <div class="tw-tiddler-frame" style="color: black; width: 400px;">
 
-<<tiddler template:SearchPreviewTemplate>>
+<<tiddler template:$:/templates/SearchPreviewTemplate>>
 
 </div>
 
