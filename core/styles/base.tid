@@ -60,6 +60,10 @@ a.tw-tiddlylink {
 	color: {{$:/core/styles/colourmappings##linkforeground}};
 }
 
+.sidebar-header a.tw-tiddlylink {
+	color: #69699B;
+}
+
 a.tw-tiddlylink:hover {
 	text-decoration: underline;
 }
