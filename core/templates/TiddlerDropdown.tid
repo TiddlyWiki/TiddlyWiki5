@@ -10,7 +10,7 @@ title: $:/templates/TiddlerDropdown
 <$list filter="[is[current]tagging[]sort[title]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one"/>
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="fieldsTab" qualifyTiddlerTitles="yes">
-Fields...
+<$fieldgrid />
 </$reveal>
 </div>
 </div>

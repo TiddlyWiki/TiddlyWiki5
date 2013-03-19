@@ -53,6 +53,18 @@ pre {
 	border: 1px solid #ccc;
 }
 
+table {
+	border: 1px solid #ddd;
+	width: 100%;
+}
+
+table th, table td {
+	text-align: left;
+	padding: 0 0.5em 0 0.5em;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+}
+
 a.tw-tiddlylink {
 	text-decoration: none;
 	font-style: normal;
@@ -273,6 +285,10 @@ a.tw-tiddlylink-missing {
 .tw-drop-down .tw-tab-buttons button.tw-tab-selected {
 	background-color: #fff;
 	border-bottom: 1px solid #fff;
+}
+
+.tw-drop-down .tw-tab-contents a {
+	padding: 0 0.5em 0 0.5em;
 }
 
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
