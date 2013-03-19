@@ -273,6 +273,12 @@ a.tw-tiddlylink-missing {
 
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
 	width: 100%;
+	padding: 0.2em 0.2em 0.2em 0.2em;
+	background-color: #f8f8f8;
+	border: 1px solid #888;
+	-webkit-appearance: none;
+	margin: 0.25em 0 0.25em 0;
+	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
 }
 
 canvas.tw-edit-bitmapeditor  {
