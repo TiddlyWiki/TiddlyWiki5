@@ -109,6 +109,12 @@ ViewWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) 
 	}
 };
 
+ViewWidget.prototype.postRenderInDom = function() {
+	if(this.viewer && this.viewer.postRenderInDom) {
+		this.viewer.postRenderInDom();
+	}
+};
+
 exports.view = ViewWidget;
 
 })();
