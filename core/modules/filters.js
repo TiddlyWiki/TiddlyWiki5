@@ -107,6 +107,18 @@ exports.operators = {
 					break;
 				case "system":
 					return "for(title in source) {if(" + op + "this.getTiddler(title).isSystem()) {$tw.utils.pushTop(subResults,title);}}";
+				case "missing":
+					if(operator.prefix === "!") {
+						return "for(title in source) {$tw.utils.pushTop(subResults,title);}";
+					} else {
+						return "var m = this.getMissingTitles(); for(t=0; t<m.length; t++) {$tw.utils.pushTop(subResults,m[t]);}";
+					}
+				case "orphan":
+					if(operator.prefix === "!") {
+						return "var m = this.getOrphanTitles(); for(title in source) {if(m.indexOf(title) === -1) {$tw.utils.pushTop(subResults,title);}}";
+					} else {
+						return "var m = this.getOrphanTitles(); for(t=0; t<m.length; t++) {$tw.utils.pushTop(subResults,m[t]);}";
+					}
 				default:
 					throw "Unknown operand for 'is' filter operator";
 			}
@@ -123,6 +135,14 @@ exports.operators = {
 					break;
 				case "system":
 					return "for(r=subResults.length-1; r>=0; r--) {if(" + op + "this.getTiddler(subResults[r]).isSystem()) {subResults.splice(r,1);}}";
+				case "missing":
+					return "t = this.getMissingTitles(); for(r=subResults.length-1; r>=0; r--) {if(" + op + "!$tw.utils.hop(t,subResults[r])) {subResults.splice(r,1);}}";
+				case "orphan":
+					if(operator.prefix === "!") {
+						return "t = this.getOrphanTitles(); for(r=subResults.length-1; r>=0; r--) {if(t.indexOf(subResults[r]) === -1) {subResults.splice(r,1);}}";
+					} else {
+						return "t = this.getOrphanTitles(); for(r=subResults.length-1; r>=0; r--) {if(t.indexOf(subResults[r]) !== -1) {subResults.splice(r,1);}}";
+					}
 				default:
 					throw "Unknown operand for 'is' filter operator";
 			}

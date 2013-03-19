@@ -256,12 +256,69 @@ exports.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
 	}
 };
 
+/*
+Return an array of tiddler titles that are directly linked from the specified tiddler
+*/
+exports.getTiddlerLinks = function(title) {
+	var self = this;
+	// We'll cache the links so they only get computed if the tiddler changes
+	return this.getCacheForTiddler(title,"links",function() {
+		// Parse the tiddler
+		var parser = self.parseTiddler(title);
+		// Count up the links
+		var links = [],
+			checkParseTree = function(parseTree) {
+				for(var t=0; t<parseTree.length; t++) {
+					var parseTreeNode = parseTree[t];
+					if(parseTreeNode.type === "element" && parseTreeNode.tag === "$link" && parseTreeNode.attributes.to.type === "string") {
+						var value = parseTreeNode.attributes.to.value;
+						if(links.indexOf(value) === -1) {
+							links.push(value);
+						}
+					}
+					if(parseTreeNode.children) {
+						checkParseTree(parseTreeNode.children);
+					}
+				}
+			};
+		if(parser) {
+			checkParseTree(parser.tree)
+		}
+		return links;
+	});
+};
+
+/*
+Return a hashmap of tiddler titles that are referenced but not defined. Each value is the number of times the missing tiddler is referenced
+*/
 exports.getMissingTitles = function() {
-	return []; // Todo
+	var self = this,
+		missing = [];
+// We should cache the missing tiddler list, even if we recreate it every time any tiddler is modified
+	this.forEachTiddler(function(title,tiddler) {
+		var links = self.getTiddlerLinks(title);
+		$tw.utils.each(links,function(link) {
+			if(!self.tiddlerExists(link) && missing.indexOf(link) === -1) {
+				missing.push(link);
+			}
+		});
+	});
+	return missing;
 };
 
 exports.getOrphanTitles = function() {
-	return []; // Todo
+	var self = this,
+		orphans = this.getTiddlers();
+	this.forEachTiddler(function(title,tiddler) {
+		var links = self.getTiddlerLinks(title);
+		$tw.utils.each(links,function(link) {
+			var p = orphans.indexOf(link);
+			if(p !== -1) {
+				orphans.splice(p,1);
+			}
+		});
+	});
+	return orphans; // Todo
 };
 
 exports.getSystemTitles = function() {
