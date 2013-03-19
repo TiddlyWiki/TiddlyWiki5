@@ -3,7 +3,7 @@
   "preferGlobal": "true",
   "version": "5.0.0-alpha.9",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
-  "description": "a reusable non-linear personal web notebook",
+  "description": "a non-linear personal web notebook",
   "contributors": [ 
     {
       "name": "Jeremy Ruston",
