@@ -1,7 +1,7 @@
 title: $:/templates/TagTemplate
 
-<$button popup="tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible"><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text" /></$setstyle></$button>
-<$reveal state="tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
+<$button popup="$:/state/tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible"><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text" /></$setstyle></$button>
+<$reveal state="$:/state/tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
 <$view field="title" format="link" />
 ----
 <$list filter="[is[current]tagging[]sort[title]]">
