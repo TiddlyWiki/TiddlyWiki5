@@ -18,12 +18,12 @@ tags: talkytalky
 # Open http://five.tiddlywiki.com/
 # Now left BT, rebooting TiddlyWiki while freelance consulting as part of 25 year plan
 # An open source project for end users
-# Technically, html file is data plus a javascript application to manipulate it
-#* Server is static, hosted on GitHub Pages
 # Show reading experience
 # Show editting, including editing bitmaps
 # Tiddler model: a bag of tiddlers, each a set of name:value pairs, with some fields being standardised
 # Information is more reusable if cut up into the smallest semantic units, and made addressable by name/URI
+# Technically, html file is data plus a javascript application to manipulate it
+#* Server is static, hosted on GitHub Pages
 
 ! API
 
@@ -52,6 +52,12 @@ tags: talkytalky
 # Demo task management
 # Algebra of tiddlers
 
+! Saving online
+
+# Open http://tiddlyspot.com/
+# Simple PHP scripts
+# Show TiddlySpot integration
+
 ! Using the node.js edition
 
 # Open http://five.tiddlywiki.com/static.html
@@ -66,6 +72,7 @@ tags: talkytalky
 # Start `./serve.sh`
 # Open http://0.0.0.0:8080/
 # Open network console
+# Note same code on client and server
 
 ! Wrap-up
 
