@@ -2,8 +2,6 @@ title: $:/templates/SideBar
 
 <!-- The implementation of tabs here is currently a bit unreadable -->
 
-<form class="form-search">
-
 @@.search-query
 <$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/>
 @@
@@ -17,8 +15,6 @@ title: $:/templates/SideBar
 </div>
 
 </$reveal>
-
-</form>
 
 <$reveal state="$:/temp/search" type="match" text="">
 
