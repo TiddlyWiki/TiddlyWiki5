@@ -25,7 +25,7 @@ mkdir -p $TW5_BUILD_OUTPUT/static
 
 # Delete any existing content
 
-rm -v $TW5_BUILD_OUTPUT/static/*
+rm $TW5_BUILD_OUTPUT/static/*
 
 # First,
 #  readme.md: the readme file for GitHub
