@@ -70,6 +70,7 @@ LinkWidget.prototype.generate = function() {
 			var wikiLinkTemplateMacro = this.renderer.findMacroDefinition("tw-wikilink-template"),
 				wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.text.trim() : "$uri_encoded$",
 				wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
+				wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 			this.attributes.href = wikiLinkText;
 		}
 	} else {
