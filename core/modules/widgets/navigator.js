@@ -34,6 +34,7 @@ NavigatorWidget.prototype.generate = function() {
 		{name: "tw-edit-tiddler", handlerObject: this, handlerMethod: "handleEditTiddlerEvent"},
 		{name: "tw-delete-tiddler", handlerObject: this, handlerMethod: "handleDeleteTiddlerEvent"},
 		{name: "tw-save-tiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},
+		{name: "tw-cancel-tiddler", handlerObject: this, handlerMethod: "handleCancelTiddlerEvent"},
 		{name: "tw-close-tiddler", handlerObject: this, handlerMethod: "handleCloseTiddlerEvent"},
 		{name: "tw-new-tiddler", handlerObject: this, handlerMethod: "handleNewTiddlerEvent"}
 	];
@@ -199,6 +200,32 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					this.renderer.renderTree.wiki.deleteTiddler(tiddler.fields["draft.of"]);
 				}
 				// Make the story record point to the newly saved tiddler
+				this.storyList[t] = tiddler.fields["draft.title"];
+				// Check if we're modifying the story tiddler itself
+				if(tiddler.fields["draft.title"] === this.storyTitle) {
+					storyTiddlerModified = true;
+				}
+			}
+		}
+	}
+	if(!storyTiddlerModified) {
+		this.saveStoryList();
+	}
+	event.stopPropagation();
+	return false;
+};
+
+// Take a tiddler out of edit mode without saving the changes
+NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
+	this.getStoryList();
+	var storyTiddlerModified = false;
+	for(var t=0; t<this.storyList.length; t++) {
+		if(this.storyList[t] === event.tiddlerTitle) {
+			var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
+			if(tiddler.hasField("draft.title")) {
+				// Remove the draft tiddler
+				this.renderer.renderTree.wiki.deleteTiddler(event.tiddlerTitle);
+				// Make the story record point to the original tiddler
 				this.storyList[t] = tiddler.fields["draft.title"];
 				// Check if we're modifying the story tiddler itself
 				if(tiddler.fields["draft.title"] === this.storyTitle) {

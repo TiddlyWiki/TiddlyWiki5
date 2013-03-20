@@ -1,7 +1,9 @@
 title: $:/templates/EditTemplate
 modifier: JeremyRuston
 
-<$view field="title"/> <$button message="tw-delete-tiddler" class="btn btn-mini btn-success">delete</$button> <$button message="tw-save-tiddler" class="btn btn-mini btn-success">done</$button>
+<span class="tw-tiddler-controls"> <$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button.svg}}</$button> <$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button.svg}}</$button> <$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button.svg}}</$button> </span>
+
+<$view field="title"/> 
 
 @@.title
 <$edit field="draft.title"/>
