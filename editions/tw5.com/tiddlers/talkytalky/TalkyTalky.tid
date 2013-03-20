@@ -1,0 +1,78 @@
+title: TalkyTalky
+tags: talkytalky
+
+! Intro
+
+# Open http://en.wikipedia.org/wiki/Oxford
+# Show how advanced wiki users open pages in separate tabs
+# TiddlyWiki started with the idea of making a wiki like GMail
+#* First version of TiddlyWiki in 2004: http://tiddlywiki.com/firstversion.html
+#* Turned out to be interesting because it encourages short writing
+# It was just a demo, feedback provoked making it practical
+#* http://deferentialgeometry.org/ - the open notebook of a theoretical physicist
+#* http://oxkunengroup.tiddlyspace.com/ -- group of Oxford recreational mathematicians
+# Jeremy's company Osmosoft acquired by BT in 2007 - http://osmosoft.com/
+
+! User experience
+
+# Open http://five.tiddlywiki.com/
+# Now left BT, rebooting TiddlyWiki while freelance consulting as part of 25 year plan
+# An open source project for end users
+# Technically, html file is data plus a javascript application to manipulate it
+#* Server is static, hosted on GitHub Pages
+# Show reading experience
+# Show editting, including editing bitmaps
+# Tiddler model: a bag of tiddlers, each a set of name:value pairs, with some fields being standardised
+# Information is more reusable if cut up into the smallest semantic units, and made addressable by name/URI
+
+! API
+
+# Open dev tools console
+# Show api
+# Adding a tiddler
+# Get links from a tiddler
+
+! Using the standalone edition
+
+# Open http://five.tiddlywiki.com/empty.html in Chrome Canary
+# Create tiddlers, show links, missing, orphans, tags, tagging, references
+# Use missing tiddlers to find a typo
+# Show transclusion and templates
+# Click Save, click `accept`
+# Open file in text editor, see content within it
+# Set password
+# Click Save again, click `accept`
+# Open file in text editor, verify content is encrypted
+
+# Open saved file in Firefox, show TiddlyFox dialogue
+# Enter password to decrypt
+# Start adding tasks
+# Save using TiddlyFox, refresh to show changes
+# Import and demo TaskManagementDemo
+# Demo task management
+# Algebra of tiddlers
+
+! Using the node.js edition
+
+# Open http://five.tiddlywiki.com/static.html
+# Click links to show individual tiddlers
+
+! Server integration
+
+# Open http://http://tw5test.tiddlyspace.com/tw5
+# Open network console
+# Show lazy loading
+
+# Start `./serve.sh`
+# Open http://0.0.0.0:8080/
+# Open network console
+
+! Wrap-up
+
+# Open http://federatial.com/
+# TiddlyWiki looking for sponsorship
+# Federatial looking for opportunities to adapt TW5 for corporate use
+
+! Coda
+
+# Cecily: http://jermolene.tiddlyspace.com/cecily
