@@ -7,6 +7,7 @@ tags: talkytalky
 # Show how advanced wiki users open pages in separate tabs
 # TiddlyWiki started with the idea of making a wiki like GMail
 #* First version of TiddlyWiki in 2004: http://tiddlywiki.com/firstversion.html
+#* Current version: http://tiddlywiki.com/
 #* Turned out to be interesting because it encourages short writing
 # It was just a demo, feedback provoked making it practical
 #* http://deferentialgeometry.org/ - the open notebook of a theoretical physicist
@@ -59,8 +60,8 @@ tags: talkytalky
 
 ! Task management demo
 
+# Create some tasks
 # Import and demo TaskManagementDemo
-# Demo task management
 # Algebra of tiddlers
 
 ! Saving online
@@ -74,21 +75,25 @@ tags: talkytalky
 # Open http://five.tiddlywiki.com/static.html
 # Click links to show individual tiddlers
 
-! Server integration
+! Server integration with TiddlyWeb/TiddlySpace
 
 # Open http://tw5test.tiddlyspace.com/tw5
 # Open network console
 # Show lazy loading
 
+! TiddlyWiki5 ClientServer edition
+
 # Start `./serve.sh`
 # Open http://0.0.0.0:8080/
 # Open network console
 # Note same code on client and server
+#* Same sync engine, too
 
 ! Wrap-up
 
-# Open http://federatial.com/
+# Open https://github.com/Jermolene/TiddlyWiki5
 # TiddlyWiki looking for sponsorship
+# Open http://federatial.com/
 # Federatial looking for opportunities to adapt TW5 for corporate use
 
 ! Coda
