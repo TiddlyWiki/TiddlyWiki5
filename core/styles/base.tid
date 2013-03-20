@@ -278,6 +278,10 @@ a.tw-tiddlylink-missing {
 	padding: 1em;
 }
 
+.tw-search-results {
+	padding: 1em;
+}
+
 .tw-drop-down .tw-tab-buttons button {
 	background-color: #ececec;
 }
@@ -299,6 +303,10 @@ a.tw-tiddlylink-missing {
 	-webkit-appearance: none;
 	margin: 0.25em 0 0.25em 0;
 	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
+}
+
+.sidebar-header .tw-edit-texteditor input, .tw-edit-texteditor textarea {
+	width: 90%;
 }
 
 canvas.tw-edit-bitmapeditor  {

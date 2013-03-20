@@ -1,6 +1,27 @@
 title: $:/templates/SideBar
 
 <!-- The implementation of tabs here is currently a bit unreadable -->
+
+<form class="form-search">
+
+@@.search-query
+<$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/>
+@@
+
+<$reveal state="$:/temp/search" type="nomatch" text="">
+
+<div class="tw-search-results">
+
+<$list filter="[!is[system]searchVia[$:/temp/search]sort[title]limit[50]]" emptyMessage="//No results//"/>
+
+</div>
+
+</$reveal>
+
+</form>
+
+<$reveal state="$:/temp/search" type="match" text="">
+
 <div class="tw-tab-set">
 <div class="tw-tab-buttons"><$button type="set" set="$:/state/sideBarTabSet" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="allTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">All</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="toolsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tools</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="moreTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">More</$button></div>
 <div class="tw-tab-contents">
@@ -19,3 +40,4 @@ title: $:/templates/SideBar
 </$reveal>
 </div>
 
+</$reveal>
