@@ -29,8 +29,10 @@ tags: talkytalky
 
 # Open dev tools console
 # Show api
-# Adding a tiddler
-# Get links from a tiddler
+#* `$tw.wiki.deleteTiddler("HelloThere")`
+#* `$tw.wiki.addTiddler({title: "HelloThere", text: "This is a new Tiddler, linking to a TiddlerThatDoesntCurrentlyExist"})`
+#* `$tw.wiki.getTiddlerLinks("HelloThere")`
+#* `$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
 
 ! Using the standalone edition
 
@@ -40,14 +42,23 @@ tags: talkytalky
 # Show transclusion and templates
 # Click Save, click `accept`
 # Open file in text editor, see content within it
+# Note that saving technique works in virtually all browsers
+
+! Using the encrypted edition
+
 # Set password
 # Click Save again, click `accept`
 # Open file in text editor, verify content is encrypted
+
+! Using TiddlyFox
 
 # Open saved file in Firefox, show TiddlyFox dialogue
 # Enter password to decrypt
 # Start adding tasks
 # Save using TiddlyFox, refresh to show changes
+
+! Task management demo
+
 # Import and demo TaskManagementDemo
 # Demo task management
 # Algebra of tiddlers
@@ -65,7 +76,7 @@ tags: talkytalky
 
 ! Server integration
 
-# Open http://http://tw5test.tiddlyspace.com/tw5
+# Open http://tw5test.tiddlyspace.com/tw5
 # Open network console
 # Show lazy loading
 
