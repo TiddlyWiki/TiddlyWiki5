@@ -207,6 +207,11 @@ exports.getTiddlers = function(sortField,excludeTag) {
 	return titles;
 };
 
+exports.countTiddlers = function(excludeTag) {
+	var tiddlers = this.getTiddlers(null,excludeTag);
+	return $tw.utils.count(tiddlers);
+};
+
 /*
 Sort an array of tiddler titles by a specified field
 	titles: array of titles (sorted in place)
@@ -282,7 +287,7 @@ exports.getTiddlerLinks = function(title) {
 				}
 			};
 		if(parser) {
-			checkParseTree(parser.tree)
+			checkParseTree(parser.tree);
 		}
 		return links;
 	});
