@@ -2,7 +2,7 @@ title: $:/messages/EnterEditMode
 type: text/vnd.tiddlywiki
 subtitle: Editing this wiki
 footer: <<button close class:"btn btn-primary"><Close>>
-help: http://five.tiddlywiki.com/#help:EditMode
+help: http://five.tiddlywiki.com/static/EditMode
 
 You can edit this wiki and save your changes. You are strongly advised to verify that saving is working properly before trusting ~TiddlyWiki with your data.
 
