@@ -107,8 +107,7 @@ Log a message
 */
 $tw.utils.log = function(/* args */) {
 	if(console !== undefined && console.log !== undefined) {
-		return window.console && console.log
-			&& Function.apply.call(console.log, console, arguments);
+		return Function.apply.call(console.log, console, arguments);
 	}
 };
 
