@@ -104,11 +104,15 @@ exports.startup = function() {
 		});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
-			var event = document.createEvent("Event");
-			event.initEvent("tw-modal",true,true);
-			event.param = "$:/messages/SaveInstructions";
-			document.dispatchEvent(event);
-		} 
+			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
+				param: "$:/messages/SaveInstructions"
+			});
+		} else if($tw.wiki.countTiddlers() === 0){
+			// Otherwise, if give instructions if this is an empty TiddlyWiki
+			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
+				param: "$:/messages/GettingStarted"
+			});
+		}
 		// Display the PageTemplate
 		var templateTitle = "$:/templates/PageTemplate",
 			parser = $tw.wiki.parseTiddler(templateTitle),
