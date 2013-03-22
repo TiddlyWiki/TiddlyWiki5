@@ -3,15 +3,17 @@ modifier: JeremyRuston
 
 <span class="tw-tiddler-controls"> <$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button.svg}}</$button> <$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button.svg}}</$button> <$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button.svg}}</$button> </span>
 
-<$view field="title"/> 
+<$view field="title"/>
 
 @@.title
 <$edit field="draft.title"/>
 @@
 
-Type tags separated with spaces, `[[`using double square brackets`]]` if necessary:
+<div class="tw-tiddler-help">Type tags separated with spaces, &#91;&#91;using double square brackets&#93;&#93; if necessary</div>
 
 <$edit field="tags"/>
+
+<div class="tw-tiddler-help">Use WikiText to add formatting, images, and dynamic features</div>
 
 @@.body
 <$edit field="text"/>
