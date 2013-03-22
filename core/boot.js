@@ -255,6 +255,14 @@ $tw.utils.checkVersions = function(required,actual) {
 };
 
 /*
+Register file type information
+*/
+$tw.utils.registerFileType = function(type,encoding,extension) {
+	$tw.config.fileExtensionInfo[extension] = {type: type};
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension};
+}
+
+/*
 Creates a PasswordPrompt object
 */
 $tw.utils.PasswordPrompt = function() {
@@ -308,12 +316,11 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	form.addEventListener("submit",function(event) {
 		// Collect the form data
 		var data = {},t;
-		for(t=0; t<form.elements.length; t++) {
-			var e = form.elements[t];
-			if(e.name && e.value) {
-				data[e.name] = e.value;
+		$tw.utils.each(form.elements,function(element) {
+			if(element.name && element.value) {
+				data[element.name] = element.value;
 			}
-		}
+		});
 		// Call the callback
 		if(options.callback(data)) {
 			// Remove the prompt if the callback returned true
@@ -325,12 +332,11 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 			}
 		} else {
 			// Clear the password if the callback returned false
-			for(t=0; t<form.elements.length; t++) {
-				var e = form.elements[t];
-				if(e.name === "password") {
+			$tw.utils.each(form.elements,function(element) {
+				if(element.name === "password") {
 					form.elements[t].value = "";
 				}
-			}
+			});
 		}
 		event.preventDefault();
 		return false;
@@ -1029,7 +1035,6 @@ $tw.loadTiddlers = function() {
 $tw.boot.startup = function() {
 	if(!$tw.browser) {
 		// System paths and filenames
-		$tw.boot.bootFile = path.basename(module.filename);
 		$tw.boot.bootPath = path.dirname(module.filename);
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
@@ -1061,40 +1066,25 @@ $tw.boot.startup = function() {
 			wikiSystemSubDir: "./wiki",
 			wikiTiddlersSubDir: "./tiddlers",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)",
-			fileExtensionInfo: { // File extension mappings
-				".tid": {type: "application/x-tiddler"},
-				".tiddler": {type: "application/x-tiddler-html-div"},
-				".recipe": {type: "application/vnd.tiddlywiki2-recipe"},
-				".txt": {type: "text/plain"},
-				".css": {type: "text/css"},
-				".html": {type: "text/html"},
-				".js": {type: "application/javascript"},
-				".json": {type: "application/json"},
-				".pdf": {type: "application/pdf"},
-				".jpg": {type: "image/jpeg"},
-				".jpeg": {type: "image/jpeg"},
-				".png": {type: "image/png"},
-				".gif": {type: "image/gif"},
-				".svg": {type: "image/svg+xml"}
-			},
-			contentTypeInfo: {
-				"text/vnd.tiddlywiki": {encoding: "utf8", extension: ".tid"},
-				"application/x-tiddler": {encoding: "utf8", extension: ".tid"},
-				"application/x-tiddler-html-div": {encoding: "utf8", extension: ".tiddler"},
-				"application/vnd.tiddlywiki2-recipe": {encoding: "utf8", extension: ".recipe"},
-				"text/plain": {encoding: "utf8", extension: ".txt"},
-				"text/css": {encoding: "utf8", extension: ".css"},
-				"text/html": {encoding: "utf8", extension: ".html"},
-				"application/javascript": {encoding: "utf8", extension: ".js"},
-				"application/json": {encoding: "utf8", extension: ".json"},
-				"application/pdf": {encoding: "base64", extension: ".pdf"},
-				"image/jpeg": {encoding: "base64", extension: ".jpg"},
-				"image/png": {encoding: "base64", extension: ".png"},
-				"image/gif": {encoding: "base64", extension: ".gif"},
-				"image/svg+xml": {encoding: "utf8", extension: ".svg"}
-			}
+			fileExtensionInfo: {}, // Map file extension to {type:}
+			contentTypeInfo: {} // Map type to {encoding:,extension:}
 		}
 	});
+	// Add file extension information
+	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
+	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
+	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");
+	$tw.utils.registerFileType("application/vnd.tiddlywiki2-recipe","utf8",".recipe");
+	$tw.utils.registerFileType("text/plain","utf8",".txt");
+	$tw.utils.registerFileType("text/css","utf8",".css");
+	$tw.utils.registerFileType("text/html","utf8",".html");
+	$tw.utils.registerFileType("application/javascript","utf8",".js");
+	$tw.utils.registerFileType("application/json","utf8",".json");
+	$tw.utils.registerFileType("application/pdf","base64",".pdf");
+	$tw.utils.registerFileType("image/jpeg","base64",".jpg");
+	$tw.utils.registerFileType("image/png","base64",".png");
+	$tw.utils.registerFileType("image/gif","base64",".gif");
+	$tw.utils.registerFileType("image/svg+xml","utf8",".svg");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
