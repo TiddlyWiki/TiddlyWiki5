@@ -196,8 +196,6 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-drop-down {
-	display: block;
-	position: absolute;
 	min-width: 20em;
 	border: 1px solid {{$:/core/styles/colourmappings##dropdownborder}};
 	background-color: {{$:/core/styles/colourmappings##dropdownbackground}};
