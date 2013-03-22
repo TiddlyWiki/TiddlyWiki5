@@ -71,11 +71,13 @@ $tw.modules.define = function(moduleName,moduleType,definition) {
 };
 
 /*
-Define a tiddler
+External JavaScript can populate this array before calling boot.js in order to preload tiddlers
 */
 $tw.preloadTiddlers = $tw.preloadTiddlers || [];
 
+/*
+Convenience function for pushing a tiddler onto the preloading array
+*/
 $tw.preloadTiddler = function(fields) {
 	$tw.preloadTiddlers.push(fields);
 };
-
