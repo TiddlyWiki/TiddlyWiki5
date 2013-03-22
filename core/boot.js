@@ -42,6 +42,15 @@ if(!$tw.browser) {
 $tw.utils = $tw.utils || {};
 $tw.boot = $tw.boot || {};
 
+/////////////////////////// Standard node.js libraries
+
+var fs, path, vm;
+if(!$tw.browser) {
+	fs = require("fs");
+	path = require("path");
+	vm = require("vm");
+}
+
 /////////////////////////// Utility functions
 
 /*
@@ -1015,69 +1024,78 @@ $tw.loadTiddlers = function() {
 // End of if(!$tw.browser)	
 }
 
-/////////////////////////// Starting up
+/////////////////////////// Main startup function called once tiddlers have been decrypted
 
-/*
-Main startup function that is called once tiddlers have been decrypted
-*/
 $tw.boot.startup = function() {
-
-// Modules store registers all the modules the system has seen
-$tw.modules = $tw.modules || {};
-$tw.modules.titles = $tw.modules.titles || {}; // hashmap by module title of {fn:, exports:, moduleType:}
-$tw.modules.types = $tw.modules.types || {}; // hashmap by module type of hashmap of exports
-
-// Config object
-$tw.config = $tw.config || {};
-
-// Constants
-$tw.config.pluginsPath = "../plugins/";
-$tw.config.wikiInfo = $tw.config.wikiInfo || "./tiddlywiki.info";
-$tw.config.wikiPluginsSubDir = $tw.config.wikiPluginsSubDir || "./plugins";
-$tw.config.wikiSystemSubDir = $tw.config.wikiSystemSubDir || "./wiki";
-$tw.config.wikiTiddlersSubDir = $tw.config.wikiTiddlersSubDir || "./tiddlers";
-
-$tw.config.jsModuleHeaderRegExpString = "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)";
-
-// File extension mappings
-$tw.config.fileExtensionInfo = {
-	".tid": {type: "application/x-tiddler"},
-	".tiddler": {type: "application/x-tiddler-html-div"},
-	".recipe": {type: "application/vnd.tiddlywiki2-recipe"},
-	".txt": {type: "text/plain"},
-	".css": {type: "text/css"},
-	".html": {type: "text/html"},
-	".js": {type: "application/javascript"},
-	".json": {type: "application/json"},
-	".pdf": {type: "application/pdf"},
-	".jpg": {type: "image/jpeg"},
-	".jpeg": {type: "image/jpeg"},
-	".png": {type: "image/png"},
-	".gif": {type: "image/gif"},
-	".svg": {type: "image/svg+xml"}
-};
-
-// Content type mappings
-$tw.config.contentTypeInfo = {
-	"text/vnd.tiddlywiki": {encoding: "utf8", extension: ".tid"},
-	"application/x-tiddler": {encoding: "utf8", extension: ".tid"},
-	"application/x-tiddler-html-div": {encoding: "utf8", extension: ".tiddler"},
-	"application/vnd.tiddlywiki2-recipe": {encoding: "utf8", extension: ".recipe"},
-	"text/plain": {encoding: "utf8", extension: ".txt"},
-	"text/css": {encoding: "utf8", extension: ".css"},
-	"text/html": {encoding: "utf8", extension: ".html"},
-	"application/javascript": {encoding: "utf8", extension: ".js"},
-	"application/json": {encoding: "utf8", extension: ".json"},
-	"application/pdf": {encoding: "base64", extension: ".pdf"},
-	"image/jpeg": {encoding: "base64", extension: ".jpg"},
-	"image/png": {encoding: "base64", extension: ".png"},
-	"image/gif": {encoding: "base64", extension: ".gif"},
-	"image/svg+xml": {encoding: "utf8", extension: ".svg"}
-};
-
-	/*
-	Create the wiki store for the app
-	*/
+	if(!$tw.browser) {
+		// System paths and filenames
+		$tw.boot.bootFile = path.basename(module.filename);
+		$tw.boot.bootPath = path.dirname(module.filename);
+		// If the first command line argument doesn't start with `--` then we
+		// interpret it as the path to the wiki folder, which will otherwise default
+		// to the current folder
+		$tw.boot.argv = Array.prototype.slice.call(process.argv,2);
+		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+			$tw.boot.wikiPath = $tw.boot.argv[0];
+			$tw.boot.argv = $tw.boot.argv.slice(1);
+		} else {
+			$tw.boot.wikiPath = process.cwd();
+		}
+		// Read package info
+		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
+		// Check node version number
+		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
+			throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
+		}
+	}
+	// Initialise some more $tw properties
+	$tw.utils.deepDefaults($tw,{
+		modules: { // Information about each module
+			titles: {}, // hashmap by module title of {fn:, exports:, moduleType:}
+			types: {} // hashmap by module type of hashmap of exports
+		},
+		config: { // Configuration overridables
+			pluginsPath: "../plugins/",
+			wikiInfo: "./tiddlywiki.info",
+			wikiPluginsSubDir: "./plugins",
+			wikiSystemSubDir: "./wiki",
+			wikiTiddlersSubDir: "./tiddlers",
+			jsModuleHeaderRegExpString: "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)",
+			fileExtensionInfo: { // File extension mappings
+				".tid": {type: "application/x-tiddler"},
+				".tiddler": {type: "application/x-tiddler-html-div"},
+				".recipe": {type: "application/vnd.tiddlywiki2-recipe"},
+				".txt": {type: "text/plain"},
+				".css": {type: "text/css"},
+				".html": {type: "text/html"},
+				".js": {type: "application/javascript"},
+				".json": {type: "application/json"},
+				".pdf": {type: "application/pdf"},
+				".jpg": {type: "image/jpeg"},
+				".jpeg": {type: "image/jpeg"},
+				".png": {type: "image/png"},
+				".gif": {type: "image/gif"},
+				".svg": {type: "image/svg+xml"}
+			},
+			contentTypeInfo: {
+				"text/vnd.tiddlywiki": {encoding: "utf8", extension: ".tid"},
+				"application/x-tiddler": {encoding: "utf8", extension: ".tid"},
+				"application/x-tiddler-html-div": {encoding: "utf8", extension: ".tiddler"},
+				"application/vnd.tiddlywiki2-recipe": {encoding: "utf8", extension: ".recipe"},
+				"text/plain": {encoding: "utf8", extension: ".txt"},
+				"text/css": {encoding: "utf8", extension: ".css"},
+				"text/html": {encoding: "utf8", extension: ".html"},
+				"application/javascript": {encoding: "utf8", extension: ".js"},
+				"application/json": {encoding: "utf8", extension: ".json"},
+				"application/pdf": {encoding: "base64", extension: ".pdf"},
+				"image/jpeg": {encoding: "base64", extension: ".jpg"},
+				"image/png": {encoding: "base64", extension: ".png"},
+				"image/gif": {encoding: "base64", extension: ".gif"},
+				"image/svg+xml": {encoding: "utf8", extension: ".svg"}
+			}
+		}
+	});
+	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
@@ -1102,38 +1120,7 @@ $tw.config.contentTypeInfo = {
 	});
 };
 
-/*
-Initialise crypto and then startup
-*/
-
-/////////////////////////// Server initialisation
-
-var fs, path, vm;
-if(!$tw.browser) {
-	// Standard node libraries
-	fs = require("fs");
-	path = require("path");
-	vm = require("vm");
-	// System paths and filenames
-	$tw.boot.bootFile = path.basename(module.filename);
-	$tw.boot.bootPath = path.dirname(module.filename);
-	// If the first command line argument doesn't start with `--` then we
-	// interpret it as the path to the wiki folder, which will otherwise default
-	// to the current folder
-	$tw.boot.argv = Array.prototype.slice.call(process.argv,2);
-	if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
-		$tw.boot.wikiPath = $tw.boot.argv[0];
-		$tw.boot.argv = $tw.boot.argv.slice(1);
-	} else {
-		$tw.boot.wikiPath = process.cwd();
-	}
-	// Read package info
-	$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
-	// Check node version number
-	if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
-		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
-	}
-}
+/////////////////////////// Decrypt tiddlers and then startup
 
 // Initialise crypto object
 $tw.crypto = new $tw.utils.Crypto();
@@ -1141,8 +1128,9 @@ $tw.crypto = new $tw.utils.Crypto();
 if($tw.browser) {
 	$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
 }
-// Get any encrypted tiddlers
+// Preload any encrypted tiddlers
 $tw.boot.decryptEncryptedTiddlers(function() {
+	// Startup
 	$tw.boot.startup();
 });
 
