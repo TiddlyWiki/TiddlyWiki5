@@ -995,7 +995,6 @@ $tw.loadTiddlers = function() {
 	// On the server, we load tiddlers from specified folders
 	var folders = [
 		$tw.boot.bootPath,
-		path.resolve($tw.boot.wikiPath,$tw.config.wikiSystemSubDir),
 		path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir)
 	];
 	for(var t=0; t<folders.length; t++) {
@@ -1063,7 +1062,6 @@ $tw.boot.startup = function() {
 			pluginsPath: "../plugins/",
 			wikiInfo: "./tiddlywiki.info",
 			wikiPluginsSubDir: "./plugins",
-			wikiSystemSubDir: "./wiki",
 			wikiTiddlersSubDir: "./tiddlers",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\\\n((?:^[^\\n]*\\n)+?)(^\\\\\\*\\/$\\n?)",
 			fileExtensionInfo: {}, // Map file extension to {type:}
