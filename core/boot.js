@@ -359,7 +359,9 @@ $tw.utils.Crypto = function() {
 		this.updateCryptoStateTiddler();
 	};
 	this.updateCryptoStateTiddler = function() {
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: password ? "yes" : "no"}));
+		if($tw.wiki && $tw.wiki.addTiddler) {
+			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: password ? "yes" : "no"}));
+		}
 	};
 	this.hasPassword = function() {
 		return !!password;
@@ -1019,35 +1021,6 @@ $tw.loadTiddlers = function() {
 Main startup function that is called once tiddlers have been decrypted
 */
 $tw.boot.startup = function() {
-	// Install built in tiddler fields modules
-	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
-	// Install the tiddler deserializer modules
-	$tw.Wiki.tiddlerDeserializerModules = {};
-	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
-	// Load tiddlers
-	$tw.loadTiddlers();
-	// Unpack bundle tiddlers
-	$tw.wiki.unpackBundleTiddlers();
-	// Register typed modules from the tiddlers we've just loaded
-	$tw.wiki.defineTiddlerModules();
-	// And any modules within bundles
-	$tw.wiki.defineBundledModules();
-	// Make sure the crypto state tiddler is up to date
-	$tw.crypto.updateCryptoStateTiddler();
-	// Run any startup modules
-	$tw.modules.forEachModuleOfType("startup",function(title,module) {
-		if(module.startup) {
-			module.startup();
-		}
-	});
-};
-
-/*
-Initialise crypto and then startup
-*/
-
-// Plugin state
-$tw.plugins = {};
 
 // Modules store registers all the modules the system has seen
 $tw.modules = $tw.modules || {};
@@ -1102,6 +1075,37 @@ $tw.config.contentTypeInfo = {
 	"image/svg+xml": {encoding: "utf8", extension: ".svg"}
 };
 
+	/*
+	Create the wiki store for the app
+	*/
+	$tw.wiki = new $tw.Wiki();
+	// Install built in tiddler fields modules
+	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
+	// Install the tiddler deserializer modules
+	$tw.Wiki.tiddlerDeserializerModules = {};
+	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Load tiddlers
+	$tw.loadTiddlers();
+	// Unpack bundle tiddlers
+	$tw.wiki.unpackBundleTiddlers();
+	// Register typed modules from the tiddlers we've just loaded
+	$tw.wiki.defineTiddlerModules();
+	// And any modules within bundles
+	$tw.wiki.defineBundledModules();
+	// Make sure the crypto state tiddler is up to date
+	$tw.crypto.updateCryptoStateTiddler();
+	// Run any startup modules
+	$tw.modules.forEachModuleOfType("startup",function(title,module) {
+		if(module.startup) {
+			module.startup();
+		}
+	});
+};
+
+/*
+Initialise crypto and then startup
+*/
+
 /////////////////////////// Server initialisation
 
 var fs, path, vm;
@@ -1130,11 +1134,6 @@ if(!$tw.browser) {
 		throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
 	}
 }
-
-/*
-Create the wiki store for the app
-*/
-$tw.wiki = new $tw.Wiki();
 
 // Initialise crypto object
 $tw.crypto = new $tw.utils.Crypto();
