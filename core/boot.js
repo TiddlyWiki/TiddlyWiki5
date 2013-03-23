@@ -518,8 +518,8 @@ Construct a wiki store object
 */
 $tw.Wiki = function() {
 	this.tiddlers = {};
-	this.bundles = {}; // Hashmap of plugin information by title
-	this.bundledTiddlers = {}; // Hashmap of constituent tiddlers from plugins by title
+	this.plugins = {}; // Hashmap of plugin information by title
+	this.pluginTiddlers = {}; // Hashmap of constituent tiddlers from plugins by title
 };
 
 $tw.Wiki.prototype.addTiddler = function(tiddler) {
@@ -536,23 +536,23 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 };
 
 /*
-Extract constituent tiddlers from bundle tiddlers so that we can easily access them in getTiddler()
+Extract constituent tiddlers from plugin tiddlers so that we can easily access them in getTiddler()
 */
-$tw.Wiki.prototype.unpackBundleTiddlers = function() {
+$tw.Wiki.prototype.unpackPluginTiddlers = function() {
 	// Collect up all the plugin tiddlers
 	var self = this;
 	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
-		if(tiddler.fields.type === "application/json" && tiddler.hasField("bundle")) {
-			// Save the bundle information
-			var bundleInfo = self.bundles[title] = JSON.parse(tiddler.fields.text);
+		if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin")) {
+			// Save the plugin information
+			var pluginInfo = self.plugins[title] = JSON.parse(tiddler.fields.text);
 			// Extract the constituent tiddlers
-			for(var t in bundleInfo.tiddlers) {
-				var constituentTiddler = bundleInfo.tiddlers[t],
-					constituentTitle = bundleInfo.title + "/" + t;
+			for(var t in pluginInfo.tiddlers) {
+				var constituentTiddler = pluginInfo.tiddlers[t],
+					constituentTitle = pluginInfo.title + "/" + t;
 				// Don't overwrite tiddlers that already exist
-				if(!$tw.utils.hop(self.bundledTiddlers,constituentTitle)) {
+				if(!$tw.utils.hop(self.pluginTiddlers,constituentTitle)) {
 					// Save the tiddler object
-					self.bundledTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
+					self.pluginTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
 				}
 			}
 		}
@@ -586,9 +586,9 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 /*
 Register all the module tiddlers that have a module type
 */
-$tw.Wiki.prototype.defineBundledModules = function() {
+$tw.Wiki.prototype.definePluginModules = function() {
 	var self = this;
-	$tw.utils.each(this.bundledTiddlers,function(element,title,object) {
+	$tw.utils.each(this.pluginTiddlers,function(element,title,object) {
 		var tiddler = self.getTiddler(title);
 		if(!$tw.utils.hop(self.tiddlers,title)) { // Don't define the module if it is overidden by an ordinary tiddler
 			if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
@@ -603,8 +603,8 @@ $tw.Wiki.prototype.getTiddler = function(title) {
 	var t = this.tiddlers[title];
 	if(t instanceof $tw.Tiddler) {
 		return t;
-	} else if($tw.utils.hop(this.bundledTiddlers,title)) {
-		return this.bundledTiddlers[title];
+	} else if($tw.utils.hop(this.pluginTiddlers,title)) {
+		return this.pluginTiddlers[title];
 	} else {
 		return undefined;
 	}
@@ -951,43 +951,43 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 };
 
 /*
-Load the tiddlers from a bundle folder, and package them up into a proper JSON bundle tiddler
+Load the tiddlers from a plugin folder, and package them up into a proper JSON plugin tiddler
 */
-$tw.loadBundleFolder = function(filepath,excludeRegExp) {
+$tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
-	var stat, files, bundleInfo, bundleTiddlers = [], f, file, titlePrefix, t;
+	var stat, files, pluginInfo, pluginTiddlers = [], f, file, titlePrefix, t;
 	if(fs.existsSync(filepath)) {
 		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			files = fs.readdirSync(filepath);
 			// Read the plugin information
-			bundleInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.bundle","utf8"));
-			// Read the bundle files
+			pluginInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.info","utf8"));
+			// Read the plugin files
 			for(f=0; f<files.length; f++) {
 				file = files[f];
-				if(!excludeRegExp.test(file) && file !== "plugin.bundle" && file !== "tiddlywiki.files") {
-					bundleTiddlers.push.apply(bundleTiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
+				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
+					pluginTiddlers.push.apply(pluginTiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
 				}
 			}
-			// Save the bundle tiddlers into the bundle
-			bundleInfo.tiddlers = bundleInfo.tiddlers || {};
-			titlePrefix = bundleInfo.title + "/";
-			for(t=0; t<bundleTiddlers.length; t++) {
-				// Check that the constituent tiddler has the bundle title as a prefix
-				if(bundleTiddlers[t].title.indexOf(titlePrefix) === 0 && bundleTiddlers[t].title.length > titlePrefix.length) {
-					bundleInfo.tiddlers[bundleTiddlers[t].title.substr(titlePrefix.length)] = bundleTiddlers[t];
+			// Save the plugin tiddlers into the plugin info
+			pluginInfo.tiddlers = pluginInfo.tiddlers || {};
+			titlePrefix = pluginInfo.title + "/";
+			for(t=0; t<pluginTiddlers.length; t++) {
+				// Check that the constituent tiddler has the plugin title as a prefix
+				if(pluginTiddlers[t].title.indexOf(titlePrefix) === 0 && pluginTiddlers[t].title.length > titlePrefix.length) {
+					pluginInfo.tiddlers[pluginTiddlers[t].title.substr(titlePrefix.length)] = pluginTiddlers[t];
 				} else {
-					console.log("Error extracting plugin bundle: The bundle '" + bundleInfo.title + "' cannot contain a tiddler titled '" + bundleTiddlers[t].title + "'");
+					console.log("Error extracting plugin: The plugin '" + pluginInfo.title + "' cannot contain a tiddler titled '" + pluginTiddlers[t].title + "'");
 				}
 			}
 		}
 	}
-	// Save the bundle tiddler
-	return bundleInfo ? {
-		title: bundleInfo.title,
+	// Save the plugin tiddler
+	return pluginInfo ? {
+		title: pluginInfo.title,
 		type: "application/json",
-		bundle: "yes",
-		text: JSON.stringify(bundleInfo,null,4)
+		plugin: "yes",
+		text: JSON.stringify(pluginInfo,null,4)
 	} : null;
 };
 
@@ -1002,14 +1002,14 @@ $tw.loadTiddlers = function() {
 	}
 	// Load any plugins listed in the wiki info file
 	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo),
-		bundle;
+		pluginFields;
 	if(fs.existsSync(wikiInfoPath)) {
 		var wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8")),
 			pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
 		for(t=0; t<wikiInfo.plugins.length; t++) {
-			bundle = $tw.loadBundleFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
-			if(bundle) {
-				$tw.wiki.addTiddler(bundle);
+			pluginFields = $tw.loadPluginFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
 			}
 		}
 	}
@@ -1018,9 +1018,9 @@ $tw.loadTiddlers = function() {
 	if(fs.existsSync(wikiPluginsPath)) {
 		var pluginFolders = fs.readdirSync(wikiPluginsPath);
 		for(t=0; t<pluginFolders.length; t++) {
-			bundle = $tw.loadBundleFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
-			if(bundle) {
-				$tw.wiki.addTiddler(bundle);
+			pluginFields = $tw.loadPluginFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
 			}
 		}
 	}
@@ -1092,12 +1092,12 @@ $tw.boot.startup = function() {
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Load tiddlers
 	$tw.loadTiddlers();
-	// Unpack bundle tiddlers
-	$tw.wiki.unpackBundleTiddlers();
+	// Unpack plugin tiddlers
+	$tw.wiki.unpackPluginTiddlers();
 	// Register typed modules from the tiddlers we've just loaded
 	$tw.wiki.defineTiddlerModules();
-	// And any modules within bundles
-	$tw.wiki.defineBundledModules();
+	// And any modules within plugins
+	$tw.wiki.definePluginModules();
 	// Make sure the crypto state tiddler is up to date
 	$tw.crypto.updateCryptoStateTiddler();
 	// Run any startup modules
