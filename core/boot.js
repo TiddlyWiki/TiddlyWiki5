@@ -915,7 +915,7 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 };
 
 /*
-Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}
+Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}. Note that no file information is returned for externally loaded tiddlers, just the `tiddlers` property.
 */
 $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
@@ -933,7 +933,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 						pathname = path.resolve(filepath,tidInfo.file),
 						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
 					tidInfo.fields.text = text;
-					tiddlers.push({filepath: pathname, tiddlers: tidInfo.fields});
+					tiddlers.push({tiddlers: tidInfo.fields});
 				});
 			} else {
 				// If not, read all the files in the directory
@@ -1003,13 +1003,15 @@ $tw.loadTiddlers = function() {
 	var wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(wikiTiddlersPath),function(tiddlerFile) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
-		$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
-			$tw.boot.files[tiddler.title] = {
-				filepath: tiddlerFile.filepath,
-				type: tiddlerFile.type,
-				hasMetaFile: tiddlerFile.hasMetaFile
-			};
-		});
+		if(tiddlerFile.filepath) {
+			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
+				$tw.boot.files[tiddler.title] = {
+					filepath: tiddlerFile.filepath,
+					type: tiddlerFile.type,
+					hasMetaFile: tiddlerFile.hasMetaFile
+				};
+			});
+		}
 	});
 	// Load any plugins listed in the wiki info file
 	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo),
