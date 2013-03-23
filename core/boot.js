@@ -894,7 +894,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 };
 
 /*
-Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file)
+Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file) returned as a hashmap of fields
 */
 $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
@@ -913,38 +913,38 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 };
 
 /*
-Load all the tiddlers from a directory
+Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,tiddlers: [{..fields...}]}
 */
 $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
-	var tiddlers = [],
-		stat, files, pluginInfo, pluginTiddlers, f, file, titlePrefix, t, filesInfo, p, tidInfo, typeInfo, text;
+	var tiddlers = [];
 	if(fs.existsSync(filepath)) {
-		stat = fs.statSync(filepath);
+		var stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
-			files = fs.readdirSync(filepath);
+			var files = fs.readdirSync(filepath);
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files","utf8"));
-				for(p=0; p<filesInfo.tiddlers.length; p++) {
-					tidInfo = filesInfo.tiddlers[p];
-					typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"];
-					text = fs.readFileSync(path.resolve(filepath,tidInfo.file),typeInfo ? typeInfo.encoding : "utf8");
+				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files","utf8"));
+				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
+					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
+						pathname = path.resolve(filepath,tidInfo.file),
+						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
 					tidInfo.fields.text = text;
-					tiddlers.push(tidInfo.fields);
-				}
+					tiddlers.push({filepath: pathname, tiddlers: tidInfo.fields});
+				});
 			} else {
 				// If not, read all the files in the directory
-				for(f=0; f<files.length; f++) {
-					file = files[f];
+				$tw.utils.each(files,function(file) {
 					if(!excludeRegExp.test(file)) {
 						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
 					}
-				}
+				});
 			}
 		} else if(stat.isFile()) {
-			tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromFile(filepath));
+			tiddlers.push({
+				filepath: filepath,
+				tiddlers: $tw.loadTiddlersFromFile(filepath)});
 		}
 	}
 	return tiddlers;
@@ -966,7 +966,10 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			for(f=0; f<files.length; f++) {
 				file = files[f];
 				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
-					pluginTiddlers.push.apply(pluginTiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
+					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp);
+					$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
+						pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
+					});
 				}
 			}
 			// Save the plugin tiddlers into the plugin info
@@ -997,16 +1000,19 @@ $tw.loadTiddlers = function() {
 		$tw.boot.bootPath,
 		path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir)
 	];
-	for(var t=0; t<folders.length; t++) {
-		$tw.wiki.addTiddlers($tw.loadTiddlersFromPath(folders[t]));
-	}
+	$tw.utils.each(folders,function(folder) {
+		var tiddlerFiles = $tw.loadTiddlersFromPath(folder);
+		$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
+			$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
+		});
+	});
 	// Load any plugins listed in the wiki info file
 	var wikiInfoPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiInfo),
 		pluginFields;
 	if(fs.existsSync(wikiInfoPath)) {
 		var wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8")),
 			pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
-		for(t=0; t<wikiInfo.plugins.length; t++) {
+		for(var t=0; t<wikiInfo.plugins.length; t++) {
 			pluginFields = $tw.loadPluginFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
