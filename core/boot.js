@@ -853,6 +853,47 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 };
 
 /*
+Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
+*/
+$tw.modules.execute = function(moduleName,moduleRoot) {
+	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
+		moduleInfo = $tw.modules.titles[name],
+		tiddler = $tw.wiki.getTiddler(name),
+		sandbox = {
+			module: moduleInfo,
+			exports: {},
+			console: console,
+			process: process,
+			$tw: $tw,
+			require: function(title) {
+				return $tw.modules.execute(title,name);
+			}
+		};
+	if(!moduleInfo) {
+		// If we don't have a module with that name, let node.js try to find it
+		return require(moduleName);
+	}
+	// Execute the module if we haven't already done so
+	if(!moduleInfo.exports) {
+		try {
+			// Check the type of the definition
+			if(typeof moduleInfo.definition === "string") { // String
+				vm.runInNewContext(moduleInfo.definition,sandbox,tiddler.fields.title);
+				moduleInfo.exports = sandbox.exports;
+			} else if(typeof moduleInfo.definition === "function") { // Function
+				moduleInfo.exports = moduleInfo.definition(moduleInfo,sandbox.require,moduleInfo.exports);
+			} else { // Object
+				moduleInfo.exports = moduleInfo.definition;
+			}
+		} catch(e) {
+			throw "Error executing boot module " + name + ":\n" + e;
+		}
+	}
+	// Return the exports of the module
+	return moduleInfo.exports;
+};
+
+/*
 Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file)
 */
 $tw.loadTiddlersFromFile = function(filepath,fields) {
@@ -948,47 +989,6 @@ $tw.loadBundleFolder = function(filepath,excludeRegExp) {
 		bundle: "yes",
 		text: JSON.stringify(bundleInfo,null,4)
 	} : null;
-};
-
-/*
-Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
-*/
-$tw.modules.execute = function(moduleName,moduleRoot) {
-	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		moduleInfo = $tw.modules.titles[name],
-		tiddler = $tw.wiki.getTiddler(name),
-		sandbox = {
-			module: moduleInfo,
-			exports: {},
-			console: console,
-			process: process,
-			$tw: $tw,
-			require: function(title) {
-				return $tw.modules.execute(title,name);
-			}
-		};
-	if(!moduleInfo) {
-		// If we don't have a module with that name, let node.js try to find it
-		return require(moduleName);
-	}
-	// Execute the module if we haven't already done so
-	if(!moduleInfo.exports) {
-		try {
-			// Check the type of the definition
-			if(typeof moduleInfo.definition === "string") { // String
-				vm.runInNewContext(moduleInfo.definition,sandbox,tiddler.fields.title);
-				moduleInfo.exports = sandbox.exports;
-			} else if(typeof moduleInfo.definition === "function") { // Function
-				moduleInfo.exports = moduleInfo.definition(moduleInfo,sandbox.require,moduleInfo.exports);
-			} else { // Object
-				moduleInfo.exports = moduleInfo.definition;
-			}
-		} catch(e) {
-			throw "Error executing boot module " + name + ":\n" + e;
-		}
-	}
-	// Return the exports of the module
-	return moduleInfo.exports;
 };
 
 $tw.loadTiddlers = function() {
