@@ -894,26 +894,28 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 };
 
 /*
-Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file) returned as a hashmap of fields
+Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file) returned as {filepath:,type:,tiddlers:[],hasMetaFile:}
 */
 $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
 		extensionInfo = $tw.config.fileExtensionInfo[ext],
-		typeInfo = extensionInfo ? $tw.config.contentTypeInfo[extensionInfo.type] : null,
+		type = extensionInfo ? extensionInfo.type : null,
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
 		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
-		metafile = filepath + ".meta";
+		metafile = filepath + ".meta",
+		metadata;
 	if(ext !== ".json" && tiddlers.length === 1 && fs.existsSync(metafile)) {
-		var metadata = fs.readFileSync(metafile,"utf8");
+		metadata = fs.readFileSync(metafile,"utf8");
 		if(metadata) {
 			tiddlers = [$tw.utils.parseFields(metadata,tiddlers[0])];
 		}
 	}
-	return tiddlers;
+	return {filepath: filepath, type: type, tiddlers: tiddlers, hasMetaFile: !!metadata};
 };
 
 /*
-Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,tiddlers: [{..fields...}]}
+Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}
 */
 $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
@@ -942,9 +944,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				});
 			}
 		} else if(stat.isFile()) {
-			tiddlers.push({
-				filepath: filepath,
-				tiddlers: $tw.loadTiddlersFromFile(filepath)});
+			tiddlers.push($tw.loadTiddlersFromFile(filepath));
 		}
 	}
 	return tiddlers;
@@ -959,10 +959,10 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	if(fs.existsSync(filepath)) {
 		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
-			files = fs.readdirSync(filepath);
 			// Read the plugin information
 			pluginInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.info","utf8"));
 			// Read the plugin files
+			files = fs.readdirSync(filepath);
 			for(f=0; f<files.length; f++) {
 				file = files[f];
 				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
@@ -995,15 +995,20 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 $tw.loadTiddlers = function() {
-	// On the server, we load tiddlers from specified folders
-	var folders = [
-		$tw.boot.bootPath,
-		path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir)
-	];
-	$tw.utils.each(folders,function(folder) {
-		var tiddlerFiles = $tw.loadTiddlersFromPath(folder);
-		$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
-			$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
+	// Load the core tiddlers
+	$tw.utils.each($tw.loadTiddlersFromPath($tw.boot.bootPath),function(tiddlerFile) {
+		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
+	});
+	// Load the wiki files, registering them as writable
+	var wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
+	$tw.utils.each($tw.loadTiddlersFromPath(wikiTiddlersPath),function(tiddlerFile) {
+		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
+		$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
+			$tw.boot.files[tiddler.title] = {
+				filepath: tiddlerFile.filepath,
+				type: tiddlerFile.type,
+				hasMetaFile: tiddlerFile.hasMetaFile
+			};
 		});
 	});
 	// Load any plugins listed in the wiki info file
@@ -1039,6 +1044,8 @@ $tw.loadTiddlers = function() {
 
 $tw.boot.startup = function() {
 	if(!$tw.browser) {
+		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
+		$tw.boot.files = {};
 		// System paths and filenames
 		$tw.boot.bootPath = path.dirname(module.filename);
 		// If the first command line argument doesn't start with `--` then we
