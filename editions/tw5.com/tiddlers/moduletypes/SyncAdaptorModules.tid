@@ -42,14 +42,14 @@ Returns an object storing any additional information required by the adaptor.
 
 !! `getStatus(callback)`
 
-Retrieves status information from the server.
+Retrieves status information from the server. This method is optional.
 
 |!Parameter |!Description |
 |callback |Callback function invoked with parameters `err,isLoggedIn,username` |
 
 !! `login(username,password,callback)`
 
-Attempts to login to the server with specified credentials.
+Attempts to login to the server with specified credentials. This method is optional.
 
 |!Parameter |!Description |
 |username |Username |
@@ -58,7 +58,7 @@ Attempts to login to the server with specified credentials.
 
 !! `logout(callback)`
 
-Attempts to logout of the server.
+Attempts to logout of the server. This method is optional.
 
 |!Parameter |!Description |
 |callback |Callback function invoked with parameter `err` |
@@ -66,6 +66,8 @@ Attempts to logout of the server.
 !! `getSkinnyTiddlers(callback)`
 
 Retrieves a list of skinny tiddlers from the server.
+
+This method is optional. If an adaptor doesn't implement it then synchronisation will be unidirectional from the TiddlyWiki store to the adaptor, but not the other way.
 
 |!Parameter |!Description |
 |callback |Callback function invoked with parameter `err,tiddlers`, where `tiddlers` is an array of tiddler field objects |
