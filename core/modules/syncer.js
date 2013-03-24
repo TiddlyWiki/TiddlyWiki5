@@ -46,7 +46,8 @@ Message logging
 Syncer.prototype.log = function(/* arguments */) {
 	var args = Array.prototype.slice.call(arguments,0);
 	args[0] = "Syncer: " + args[0];
-	$tw.utils.log.apply(null,args);
+	// Temporarily disable logging to help the wood vs. trees situation; we need better filtering of log messages
+	//$tw.utils.log.apply(null,args);
 };
 
 /*

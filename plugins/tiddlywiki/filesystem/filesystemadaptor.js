@@ -27,7 +27,9 @@ FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
-console.log("FileSystem: Saving",tiddler.fields);
+var filepathInfo = $tw.boot.files[tiddler.fields.title],
+	filepath = filepathInfo ? $tw.boot.files[tiddler.fields.title].filepath : undefined;
+console.log("FileSystem: Saving",filepath,tiddler.fields);
 	callback(null,{},0);
 };
 
