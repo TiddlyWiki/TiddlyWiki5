@@ -864,6 +864,10 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			exports: {},
 			console: console,
 			process: process,
+			setInterval: setInterval,
+			clearInterval: clearInterval,
+			setTimeout: setTimeout,
+			clearTimeout: clearTimeout,
 			$tw: $tw,
 			require: function(title) {
 				return $tw.modules.execute(title,name);
