@@ -81,8 +81,6 @@ Syncer.prototype.init = function() {
 	this.taskInProgress = {}; // Hash of tasks in progress
 	this.taskTimerId = null; // Timer for task dispatch
 	this.pollTimerId = null; // Timer for polling server
-	// Mark us as not logged in
-	this.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
 	// Listen out for changes to tiddlers
 	this.wiki.addEventListener("change",function(changes) {
 		self.syncToServer(changes);
@@ -91,16 +89,18 @@ Syncer.prototype.init = function() {
 	this.wiki.addEventListener("lazyLoad",function(title) {
 		self.handleLazyLoadEvent(title);
 	});
-	// Listen our for login/logout/refresh events
-	document.addEventListener("tw-login",function(event) {
-		self.handleLoginEvent(event);
-	},false);
-	document.addEventListener("tw-logout",function(event) {
-		self.handleLogoutEvent(event);
-	},false);
-	document.addEventListener("tw-server-refresh",function(event) {
-		self.handleRefreshEvent(event);
-	},false);
+	// Listen out for login/logout/refresh events in the browser
+	if($tw.browser) {
+		document.addEventListener("tw-login",function(event) {
+			self.handleLoginEvent(event);
+		},false);
+		document.addEventListener("tw-logout",function(event) {
+			self.handleLogoutEvent(event);
+		},false);
+		document.addEventListener("tw-server-refresh",function(event) {
+			self.handleRefreshEvent(event);
+		},false);
+	}
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn) {
 		if(isLoggedIn) {
@@ -127,70 +127,80 @@ Syncer.prototype.storeTiddler = function(tiddlerFields) {
 
 Syncer.prototype.getStatus = function(callback) {
 	var self = this;
-	this.syncadaptor.getStatus(function(err,isLoggedIn,username) {
-		if(err) {
-			self.showError(err);
-			return;
-		}
-		// Set the various status tiddlers
-		self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
-		if(isLoggedIn) {
-			self.wiki.addTiddler({title: self.titleUserName,text: username});
-		} else {
-			self.wiki.deleteTiddler(self.titleUserName);
-		}
-		// Invoke the callback
-		if(callback) {
-			callback(err,isLoggedIn,username);
-		}
-	});
+	// Check if the adaptor supports getStatus()
+	if(this.syncadaptor.getStatus) {
+		// Mark us as not logged in
+		this.wiki.addTiddler({title: this.titleIsLoggedIn,text: "no"});
+		// Get login status
+		this.syncadaptor.getStatus(function(err,isLoggedIn,username) {
+			if(err) {
+				self.showError(err);
+				return;
+			}
+			// Set the various status tiddlers
+			self.wiki.addTiddler({title: self.titleIsLoggedIn,text: isLoggedIn ? "yes" : "no"});
+			if(isLoggedIn) {
+				self.wiki.addTiddler({title: self.titleUserName,text: username});
+			} else {
+				self.wiki.deleteTiddler(self.titleUserName);
+			}
+			// Invoke the callback
+			if(callback) {
+				callback(err,isLoggedIn,username);
+			}
+		});
+	} else {
+		callback(null,true,"UNAUTHENTICATED");
+	}
 };
 
 /*
 Synchronise from the server by reading the skinny tiddler list and queuing up loads for any tiddlers that we don't already have up to date
 */
 Syncer.prototype.syncFromServer = function() {
-	this.log("Retrieving skinny tiddler list");
-	var self = this;
-	if(this.pollTimerId) {
-		clearTimeout(this.pollTimerId);
-		this.pollTimerId = null;
-	}
-	this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-		// Trigger another sync
-		self.pollTimerId = window.setTimeout(function() {
-			self.pollTimerId = null;
-			self.syncFromServer.call(self);
-		},self.pollTimerInterval);
-		// Check for errors
-		if(err) {
-			self.log("Error retrieving skinny tiddler list:",err);
-			return;
+	if(this.syncadaptor.getSkinnyTiddlers) {
+		this.log("Retrieving skinny tiddler list");
+		var self = this;
+		if(this.pollTimerId) {
+			clearTimeout(this.pollTimerId);
+			this.pollTimerId = null;
 		}
-		// Process each incoming tiddler
-		for(var t=0; t<tiddlers.length; t++) {
-			// Get the incoming tiddler fields, and the existing tiddler
-			var tiddlerFields = tiddlers[t],
-				incomingRevision = tiddlerFields.revision,
-				tiddler = self.wiki.getTiddler(tiddlerFields.title),
-				tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
-				currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
-			// Ignore the incoming tiddler if it's the same as the revision we've already got
-			if(currRevision !== incomingRevision) {
-				// Do a full load if we've already got a fat version of the tiddler
-				if(tiddler && tiddler.fields.text !== undefined) {
-					// Do a full load of this tiddler
-					self.enqueueSyncTask({
-						type: "load",
-						title: tiddlerFields.title
-					});
-				} else {
-					// Load the skinny version of the tiddler
-					self.storeTiddler(tiddlerFields);
+		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
+			// Trigger another sync
+			self.pollTimerId = setTimeout(function() {
+				self.pollTimerId = null;
+				self.syncFromServer.call(self);
+			},self.pollTimerInterval);
+			// Check for errors
+			if(err) {
+				self.log("Error retrieving skinny tiddler list:",err);
+				return;
+			}
+			// Process each incoming tiddler
+			for(var t=0; t<tiddlers.length; t++) {
+				// Get the incoming tiddler fields, and the existing tiddler
+				var tiddlerFields = tiddlers[t],
+					incomingRevision = tiddlerFields.revision,
+					tiddler = self.wiki.getTiddler(tiddlerFields.title),
+					tiddlerInfo = self.tiddlerInfo[tiddlerFields.title],
+					currRevision = tiddlerInfo ? tiddlerInfo.revision : null;
+				// Ignore the incoming tiddler if it's the same as the revision we've already got
+				if(currRevision !== incomingRevision) {
+					// Do a full load if we've already got a fat version of the tiddler
+					if(tiddler && tiddler.fields.text !== undefined) {
+						// Do a full load of this tiddler
+						self.enqueueSyncTask({
+							type: "load",
+							title: tiddlerFields.title
+						});
+					} else {
+						// Load the skinny version of the tiddler
+						self.storeTiddler(tiddlerFields);
+					}
 				}
 			}
-		}
-	});
+		});
+	}
 };
 
 /*
@@ -248,16 +258,20 @@ Attempt to login to TiddlyWeb.
 Syncer.prototype.login = function(username,password,callback) {
 	this.log("Attempting to login as",username);
 	var self = this;
-	this.syncadaptor.login(username,password,function(err) {
-		if(err) {
-			return callback(err);
-		}
-		self.getStatus(function(err,isLoggedIn,username) {
-			if(callback) {
-				callback(null,isLoggedIn);
+	if(this.syncadaptor.login) {
+		this.syncadaptor.login(username,password,function(err) {
+			if(err) {
+				return callback(err);
 			}
+			self.getStatus(function(err,isLoggedIn,username) {
+				if(callback) {
+					callback(null,isLoggedIn);
+				}
+			});
 		});
-	});
+	} else {
+		callback(null,true);
+	}
 };
 
 /*
@@ -266,13 +280,15 @@ Attempt to log out of TiddlyWeb
 Syncer.prototype.handleLogoutEvent = function() {
 	this.log("Attempting to logout");
 	var self = this;
-	this.syncadaptor.logout(function(err) {
-		if(err) {
-			self.showError(err);
-		} else {
-			self.getStatus();
-		}
-	});
+	if(this.syncadaptor.logout) {
+		this.syncadaptor.logout(function(err) {
+			if(err) {
+				self.showError(err);
+			} else {
+				self.getStatus();
+			}
+		});
+	}
 };
 
 /*
@@ -342,7 +358,7 @@ Trigger a timeout if one isn't already outstanding
 Syncer.prototype.triggerTimeout = function() {
 	var self = this;
 	if(!this.taskTimerId) {
-		this.taskTimerId = window.setTimeout(function() {
+		this.taskTimerId = setTimeout(function() {
 			self.taskTimerId = null;
 			self.processTaskQueue.call(self);
 		},self.taskTimerInterval);
