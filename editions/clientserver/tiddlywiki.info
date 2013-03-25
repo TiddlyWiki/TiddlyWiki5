@@ -3,6 +3,12 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem"
 	],
+	"doNotSave": [
+		"$:/StoryList",
+		"$:/HistoryList",
+		"$:/status/IsLoggedIn",
+		"$:/status/UserName"
+	],
 	"includeWikis": [
 		"../tw5.com"
 	]

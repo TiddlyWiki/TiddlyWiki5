@@ -101,7 +101,10 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if(err) {
 			return callback(err);
 		}
-		if(fileInfo.hasMetaFile) {
+		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(tiddler.fields.title) !== -1) {
+			// Don't save the tiddler if it's on the blacklist
+			callback(null,{},0);
+		} else if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
 			var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
