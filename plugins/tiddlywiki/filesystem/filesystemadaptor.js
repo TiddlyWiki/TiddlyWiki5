@@ -26,8 +26,7 @@ FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 $tw.config.typeInfo = {
 	"text/vnd.tiddlywiki": {
 		fileType: "application/x-tiddler",
-		extension: ".tid",
-		template: "$:/core/templates/tid-tiddler"
+		extension: ".tid"
 	},
 	"image/jpeg" : {
 		hasMetaFile: true
@@ -104,9 +103,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		}
 		if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
-console.log("Saving fileInfo",fileInfo)
 			var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
-console.log("Saving typeInfo",typeInfo)
 			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
 				if(err) {
 					return callback(err);
