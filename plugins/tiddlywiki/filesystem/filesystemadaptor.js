@@ -102,7 +102,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 			return callback(err);
 		}
 		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(tiddler.fields.title) !== -1) {
-			// Don't save the tiddler if it's on the blacklist
+			// Don't save the tiddler if it is on the blacklist
 			callback(null,{},0);
 		} else if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
