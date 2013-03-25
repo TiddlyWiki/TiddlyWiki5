@@ -23,14 +23,88 @@ FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	return {};
 };
 
+$tw.config.typeInfo = {
+	"text/vnd.tiddlywiki": {
+		fileType: "application/x-tiddler",
+		extension: ".tid"},
+	"image/jpeg" : {
+		fileType: "application/x-tiddler-binary",
+		hasMetaFile: true
+	}
+};
+
+FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
+	// See if we've already got information about this file
+	var self = this,
+		title = tiddler.fields.title,
+		fileInfo = $tw.boot.files[title];
+	if(!fileInfo) {
+		// If not, we'll need to generate it
+		// Start by getting a list of the existing files in the directory
+		fs.readdir($tw.boot.wikiTiddlersPath,function(err,files) {
+			if(err) {
+				return callback(err);
+			}
+			// Get information about how to save tiddlers of this type
+			var type = tiddler.fields.type || "text/vnd.tiddlywiki",
+				typeInfo = $tw.config.typeInfo[type];
+			if(!typeInfo) {
+				typeInfo = $tw.config.typeInfo["text/vnd.tiddlywiki"];
+			}
+			var extension = typeInfo.extension || "";
+			// Assemble the new fileInfo
+			fileInfo = {};
+			fileInfo.filepath = $tw.boot.wikiTiddlersPath + "/" + self.generateTiddlerFilename(title,extension,files);
+			fileInfo.type = typeInfo.fileType;
+			fileInfo.hasMetaFile = typeInfo.hasMetaFile;
+			// Save the newly created fileInfo
+			$tw.boot.files[title] = fileInfo;
+			// Pass it to the callback
+			callback(null,fileInfo);
+		});
+	} else {
+		// Otherwise just invoke the callback
+		callback(null,fileInfo);
+	}
+};
+
+/*
+Given a tiddler title and an array of existing filenames, generate a new legal filename for the title, case insensitively avoiding the array of existing filenames
+*/
+FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
+	// First remove any of the characters that are illegal in Windows filenames
+	var baseFilename = title.replace(/\<|\>|\:|\"|\/|\\|\||\?|\*|\^/g,"_");
+	// Truncate the filename if it is too long
+	if(baseFilename.length > 200) {
+		baseFilename = baseFilename.substr(0,200) + extension;
+	}
+	// Start with the base filename plus the extension
+	var filename = baseFilename + extension,
+		count = 1;
+	// Add a discriminator if we're clashing with an existing filename
+	while(existingFilenames.indexOf(filename) !== -1) {
+		filename = baseFilename + " " + (count++) + extension;
+	}
+	return filename;
+};
+
 /*
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
-var filepathInfo = $tw.boot.files[tiddler.fields.title],
-	filepath = filepathInfo ? $tw.boot.files[tiddler.fields.title].filepath : undefined;
-console.log("FileSystem: Saving",filepath,tiddler.fields);
-	callback(null,{},0);
+	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
+		if(err) {
+			return callback(err);
+		}
+		var content = $tw.wiki.renderTiddler("text/plain","$:/core/templates/tid-tiddler",{tiddlerTitle: tiddler.fields.title});
+		fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
+			if(err) {
+				return callback(err);
+			}
+console.log("FileSystem: Saved file",fileInfo.filepath);
+			callback(null,{},0);
+		});
+	});
 };
 
 /*

@@ -1,0 +1,9 @@
+title: $:/core/templates/tid-tiddler
+
+<!--
+
+This template is used for saving tiddlers in TiddlyWeb *.tid format
+
+--><$fields exclude='text' template='$name$: $value$
+'></$fields>`
+`<$view field="text" format="text" />
