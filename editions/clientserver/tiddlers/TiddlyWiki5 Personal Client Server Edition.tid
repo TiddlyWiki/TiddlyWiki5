@@ -1,4 +1,4 @@
-title: HelloThere
+title: TiddlyWiki5 Personal Client Server Edition
 
 Experimental clientserver edition of TiddlyWiki5.
 
@@ -18,9 +18,3 @@ Log out of ~TiddlyWeb: <$button message="tw-logout" class="btn btn-warning">Logo
 </$reveal>
 
 <$button message="tw-server-refresh" class="btn btn-warning">Refresh</$button>
-
-----
-
-All tiddlers:
-
-<$list type="all"/>
