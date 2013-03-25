@@ -147,8 +147,36 @@ console.log("FileSystem: Loading",title);
 Delete a tiddler and invoke the callback with (err)
 */
 FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
-console.log("FileSystem: Deleting",title);
-	callback(null);
+	var self = this,
+		fileInfo = $tw.boot.files[title];
+	// Only delete the tiddler if we have writable information for the file
+	if(fileInfo) {
+		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(title) !== -1) {
+			// Don't delete the tiddler if it is on the blacklist
+			callback(null);
+		} else {
+			// Delete the file
+			fs.unlink(fileInfo.filepath,function(err) {
+				if(err) {
+					return callback(err);
+				}
+console.log("FileSystem: Deleted file",fileInfo.filepath);
+				// Delete the metafile if present
+				if(fileInfo.hasMetaFile) {
+					fs.unlink(fileInfo.filepath + ".meta",function(err) {
+						if(err) {
+							return callback(err);
+						}
+						callback(null);
+					});
+				} else {
+					callback(null);
+				}
+			});
+		}
+	} else {
+		callback(null);
+	}
 };
 
 if(fs) {
