@@ -124,7 +124,6 @@ var Command = function(params,commander,callback) {
 			if(fields["revision"]) {
 				delete fields["revision"];
 			}
-console.log("PUT tiddler",title)
 			state.wiki.addTiddler(new $tw.Tiddler(fields,{title: title}));
 			var changeCount = state.wiki.getChangeCount(title).toString();
 			response.writeHead(204, "OK",{
@@ -138,7 +137,6 @@ console.log("PUT tiddler",title)
 		path: /^\/bags\/default\/tiddlers\/(.+)$/,
 		handler: function(request,response,state) {
 			var title = decodeURIComponent(state.params[0]);
-console.log("DELETE tiddler",title)
 			state.wiki.deleteTiddler(title);
 			response.writeHead(204, "OK");
 			response.end();
