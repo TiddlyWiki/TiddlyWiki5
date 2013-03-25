@@ -1004,8 +1004,7 @@ $tw.loadTiddlers = function() {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
 	// Load the wiki files, registering them as writable
-	var wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
-	$tw.utils.each($tw.loadTiddlersFromPath(wikiTiddlersPath),function(tiddlerFile) {
+	$tw.utils.each($tw.loadTiddlersFromPath($tw.boot.wikiTiddlersPath),function(tiddlerFile) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 		if(tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
@@ -1049,28 +1048,6 @@ $tw.loadTiddlers = function() {
 /////////////////////////// Main startup function called once tiddlers have been decrypted
 
 $tw.boot.startup = function() {
-	if(!$tw.browser) {
-		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
-		$tw.boot.files = {};
-		// System paths and filenames
-		$tw.boot.bootPath = path.dirname(module.filename);
-		// If the first command line argument doesn't start with `--` then we
-		// interpret it as the path to the wiki folder, which will otherwise default
-		// to the current folder
-		$tw.boot.argv = Array.prototype.slice.call(process.argv,2);
-		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
-			$tw.boot.wikiPath = $tw.boot.argv[0];
-			$tw.boot.argv = $tw.boot.argv.slice(1);
-		} else {
-			$tw.boot.wikiPath = process.cwd();
-		}
-		// Read package info
-		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
-		// Check node version number
-		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
-			throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
-		}
-	}
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
@@ -1087,6 +1064,29 @@ $tw.boot.startup = function() {
 			contentTypeInfo: {} // Map type to {encoding:,extension:}
 		}
 	});
+	if(!$tw.browser) {
+		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
+		$tw.boot.files = {};
+		// System paths and filenames
+		$tw.boot.bootPath = path.dirname(module.filename);
+		// If the first command line argument doesn't start with `--` then we
+		// interpret it as the path to the wiki folder, which will otherwise default
+		// to the current folder
+		$tw.boot.argv = Array.prototype.slice.call(process.argv,2);
+		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+			$tw.boot.wikiPath = $tw.boot.argv[0];
+			$tw.boot.argv = $tw.boot.argv.slice(1);
+		} else {
+			$tw.boot.wikiPath = process.cwd();
+		}
+		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
+		// Read package info
+		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
+		// Check node version number
+		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
+			throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
+		}
+	}
 	// Add file extension information
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
