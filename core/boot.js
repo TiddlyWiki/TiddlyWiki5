@@ -1018,6 +1018,8 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 				var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
 				if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
 					$tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				} else {
+					console.log("Cannot recursively include wiki",resolvedIncludedWikiPath);
 				}
 			});
 		}
