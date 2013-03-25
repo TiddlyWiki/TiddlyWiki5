@@ -17,4 +17,4 @@ Log in to ~TiddlyWeb: <$button message="tw-login" class="btn btn-info">Login</$b
 Log out of ~TiddlyWeb: <$button message="tw-logout" class="btn btn-warning">Logout</$button>
 </$reveal>
 
-<$button message="tw-server-refresh" class="btn btn-warning">Refresh</$button>
+<$button message="tw-server-refresh" class="btn btn-warning">Refresh</$button> to fetch changes from the server immediately
