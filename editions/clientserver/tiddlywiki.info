@@ -3,5 +3,7 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem"
 	],
-	"parentWiki": "../tw5.com"
+	"includeWikis": [
+		"../tw5.com"
+	]
 }
