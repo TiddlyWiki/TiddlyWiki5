@@ -30,7 +30,6 @@ $tw.config.typeInfo = {
 		template: "$:/core/templates/tid-tiddler"
 	},
 	"image/jpeg" : {
-		fileType: "application/x-tiddler-binary",
 		hasMetaFile: true
 	}
 };
@@ -44,6 +43,13 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 	var self = this,
 		title = tiddler.fields.title,
 		fileInfo = $tw.boot.files[title];
+	// Get information about how to save tiddlers of this type
+	var type = tiddler.fields.type || "text/vnd.tiddlywiki",
+		typeInfo = $tw.config.typeInfo[type];
+	if(!typeInfo) {
+		typeInfo = $tw.config.typeInfo["text/vnd.tiddlywiki"];
+	}
+	var extension = typeInfo.extension || "";
 	if(!fileInfo) {
 		// If not, we'll need to generate it
 		// Start by getting a list of the existing files in the directory
@@ -51,17 +57,10 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			if(err) {
 				return callback(err);
 			}
-			// Get information about how to save tiddlers of this type
-			var type = tiddler.fields.type || "text/vnd.tiddlywiki",
-				typeInfo = $tw.config.typeInfo[type];
-			if(!typeInfo) {
-				typeInfo = $tw.config.typeInfo["text/vnd.tiddlywiki"];
-			}
-			var extension = typeInfo.extension || "";
 			// Assemble the new fileInfo
 			fileInfo = {};
 			fileInfo.filepath = $tw.boot.wikiTiddlersPath + "/" + self.generateTiddlerFilename(title,extension,files);
-			fileInfo.type = typeInfo.fileType;
+			fileInfo.type = typeInfo.fileType || tiddler.fields.type;
 			fileInfo.hasMetaFile = typeInfo.hasMetaFile;
 			// Save the newly created fileInfo
 			$tw.boot.files[title] = fileInfo;
@@ -99,19 +98,40 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
+		var template, content, encoding;
 		if(err) {
 			return callback(err);
 		}
-		var template = $tw.config.typeTemplates[fileInfo.type];
-console.log(fileInfo,template)
-		var content = $tw.wiki.renderTiddler("text/plain",template,{tiddlerTitle: tiddler.fields.title});
-		fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
-			if(err) {
-				return callback(err);
-			}
+		if(fileInfo.hasMetaFile) {
+			// Save the tiddler as a separate body and meta file
+console.log("Saving fileInfo",fileInfo)
+			var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
+console.log("Saving typeInfo",typeInfo)
+			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
+				if(err) {
+					return callback(err);
+				}
+				content = $tw.wiki.renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{tiddlerTitle: tiddler.fields.title});
+				fs.writeFile(fileInfo.filepath + ".meta",content,{encoding: "utf8"},function (err) {
+					if(err) {
+						return callback(err);
+					}
 console.log("FileSystem: Saved file",fileInfo.filepath);
-			callback(null,{},0);
-		});
+					callback(null,{},0);
+				});
+			});
+		} else {
+			// Save the tiddler as a self contained templated file
+			template = $tw.config.typeTemplates[fileInfo.type];
+			content = $tw.wiki.renderTiddler("text/plain",template,{tiddlerTitle: tiddler.fields.title});
+			fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
+				if(err) {
+					return callback(err);
+				}
+console.log("FileSystem: Saved file",fileInfo.filepath);
+				callback(null,{},0);
+			});
+		}
 	});
 };
 

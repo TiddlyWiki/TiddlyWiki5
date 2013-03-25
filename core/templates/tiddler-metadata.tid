@@ -1,0 +1,8 @@
+title: $:/core/templates/tiddler-metadata
+
+<!--
+
+This template is used for saving tiddler metadata *.meta files
+
+--><$fields exclude='text' template='$name$: $value$
+'></$fields>
