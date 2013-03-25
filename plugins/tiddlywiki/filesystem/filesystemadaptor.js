@@ -26,11 +26,17 @@ FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 $tw.config.typeInfo = {
 	"text/vnd.tiddlywiki": {
 		fileType: "application/x-tiddler",
-		extension: ".tid"},
+		extension: ".tid",
+		template: "$:/core/templates/tid-tiddler"
+	},
 	"image/jpeg" : {
 		fileType: "application/x-tiddler-binary",
 		hasMetaFile: true
 	}
+};
+
+$tw.config.typeTemplates = {
+	"application/x-tiddler": "$:/core/templates/tid-tiddler"
 };
 
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
@@ -96,7 +102,9 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if(err) {
 			return callback(err);
 		}
-		var content = $tw.wiki.renderTiddler("text/plain","$:/core/templates/tid-tiddler",{tiddlerTitle: tiddler.fields.title});
+		var template = $tw.config.typeTemplates[fileInfo.type];
+console.log(fileInfo,template)
+		var content = $tw.wiki.renderTiddler("text/plain",template,{tiddlerTitle: tiddler.fields.title});
 		fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
 			if(err) {
 				return callback(err);
