@@ -61,13 +61,12 @@ RevealWidget.prototype.generate = function() {
 Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
-	// Start with the default value for being open or closed
-	if(this["default"]) {
-		this.isOpen = this["default"] === "open";
-	}
 	// Read the information from the state tiddler
 	if(this.stateTitle) {
-		var state = this.renderer.renderTree.wiki.getTextReference(this.stateTitle);
+		var state = this.renderer.renderTree.wiki.getTextReference(this.stateTitle,this["default"],this.renderer.getContextTiddlerTitle());
+if(this["default"]) {
+	console.log(this.stateTitle,this["default"],state)
+}
 		switch(this.type) {
 			case "popup":
 				this.readPopupState(state);
