@@ -44,7 +44,7 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	} else if(tr.index) {
 		return this.extractTiddlerDataItem(title,tr.index,defaultText);
 	} else {
-		return this.getTiddlerText(title);
+		return this.getTiddlerText(title,defaultText);
 	}
 };
 
