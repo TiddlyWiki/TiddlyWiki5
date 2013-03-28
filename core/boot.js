@@ -63,6 +63,14 @@ $tw.utils.log = function(/* args */) {
 };
 
 /*
+Display an error and exit
+*/
+$tw.utils.error = function(err) {
+	console.error(err);
+	process.exit(1);
+};
+
+/*
 Check if an object has a property
 */
 $tw.utils.hop = function(object,property) {
@@ -741,7 +749,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		exports = {},
 		moduleInfo = $tw.modules.titles[name];
 	if(!moduleInfo) {
-		throw new Error("Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name);
+		$tw.utils.error("Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name);
 	}
 	if(!moduleInfo.exports) {
 		if(typeof moduleInfo.definition === "string") { // String
@@ -890,7 +898,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.exports = moduleInfo.definition;
 			}
 		} catch(e) {
-			throw "Error executing boot module " + name + ":\n" + e;
+			$tw.utils.error("Error executing boot module " + name + ":\n" + e);
 		}
 	}
 	// Return the exports of the module
@@ -1007,30 +1015,31 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	var wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
 		wikiInfo = {},
 		pluginFields;
-	// Load the wiki info file
-	if(fs.existsSync(wikiInfoPath)) {
-		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
-		// Load any parent wikis
-		if(wikiInfo.includeWikis) {
-			parentPaths = parentPaths.slice(0);
-			parentPaths.push(wikiPath);
-			$tw.utils.each(wikiInfo.includeWikis,function(includedWikiPath) {
-				var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
-				if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
-					$tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
-				} else {
-					console.log("Cannot recursively include wiki",resolvedIncludedWikiPath);
-				}
-			});
-		}
-		// Load any plugins listed in the wiki info file
-		if(wikiInfo.plugins) {
-			var pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
-			for(var t=0; t<wikiInfo.plugins.length; t++) {
-				pluginFields = $tw.loadPluginFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
-				if(pluginFields) {
-					$tw.wiki.addTiddler(pluginFields);
-				}
+	// Bail if we don't have a wiki info file
+	if(!fs.existsSync(wikiInfoPath)) {
+		$tw.utils.error("Missing tiddlywiki.info file at " + wikiPath);
+	}
+	wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
+	// Load any parent wikis
+	if(wikiInfo.includeWikis) {
+		parentPaths = parentPaths.slice(0);
+		parentPaths.push(wikiPath);
+		$tw.utils.each(wikiInfo.includeWikis,function(includedWikiPath) {
+			var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
+			if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
+				$tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+			} else {
+				$tw.utils.error("Cannot recursively include wiki " + resolvedIncludedWikiPath);
+			}
+		});
+	}
+	// Load any plugins listed in the wiki info file
+	if(wikiInfo.plugins) {
+		var pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
+		for(var t=0; t<wikiInfo.plugins.length; t++) {
+			pluginFields = $tw.loadPluginFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
 			}
 		}
 	}
@@ -1113,7 +1122,7 @@ $tw.boot.startup = function() {
 		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
 		// Check node version number
 		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
-			throw "TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node;
+			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node);
 		}
 	}
 	// Add file extension information
