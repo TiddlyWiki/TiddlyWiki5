@@ -554,15 +554,13 @@ $tw.Wiki.prototype.unpackPluginTiddlers = function() {
 			// Save the plugin information
 			var pluginInfo = self.plugins[title] = JSON.parse(tiddler.fields.text);
 			// Extract the constituent tiddlers
-			for(var t in pluginInfo.tiddlers) {
-				var constituentTiddler = pluginInfo.tiddlers[t],
-					constituentTitle = pluginInfo.title + "/" + t;
+			$tw.utils.each(pluginInfo.tiddlers,function(constituentTiddler,constituentTitle) {
 				// Don't overwrite tiddlers that already exist
 				if(!$tw.utils.hop(self.shadowTiddlers,constituentTitle)) {
 					// Save the tiddler object
 					self.shadowTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
 				}
-			}
+			});
 		}
 	});
 };
@@ -986,14 +984,8 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			}
 			// Save the plugin tiddlers into the plugin info
 			pluginInfo.tiddlers = pluginInfo.tiddlers || {};
-			titlePrefix = pluginInfo.title + "/";
 			for(t=0; t<pluginTiddlers.length; t++) {
-				// Check that the constituent tiddler has the plugin title as a prefix
-				if(pluginTiddlers[t].title.indexOf(titlePrefix) === 0 && pluginTiddlers[t].title.length > titlePrefix.length) {
-					pluginInfo.tiddlers[pluginTiddlers[t].title.substr(titlePrefix.length)] = pluginTiddlers[t];
-				} else {
-					console.log("Error extracting plugin: The plugin '" + pluginInfo.title + "' cannot contain a tiddler titled '" + pluginTiddlers[t].title + "'");
-				}
+				pluginInfo.tiddlers[pluginTiddlers[t].title] = pluginTiddlers[t];
 			}
 		}
 	}
