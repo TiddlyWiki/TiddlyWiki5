@@ -81,6 +81,12 @@ TextEditor.prototype.render = function() {
 	this.editWidget.attributes = {
 		"class": "tw-edit-texteditor"
 	};
+	if(this.editWidget.renderer.parseTreeNode.attributes["class"]) {
+		this.editWidget.attributes["class"] += " " + this.editWidget.renderer.parseTreeNode.attributes["class"].value;
+	}
+	if(this.editWidget.renderer.parseTreeNode.attributes.style) {
+		this.editWidget.attributes.style += this.editWidget.renderer.parseTreeNode.attributes.style.value;
+	}
 	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer.renderContext,[node]);
 	this.editWidget.events = [
 		{name: "focus", handlerObject: this},
