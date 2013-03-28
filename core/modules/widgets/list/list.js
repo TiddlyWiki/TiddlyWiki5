@@ -152,6 +152,7 @@ ListWidget.prototype.createListElementMacro = function(title) {
 	return {
 		type: "element",
 		tag: "$transclude",
+		isBlock: this.renderer.parseTreeNode.isBlock,
 		attributes: {
 			target: {type: "string", value: title},
 			template: {type: "string", value: template}
