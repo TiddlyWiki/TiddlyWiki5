@@ -19,6 +19,10 @@ module-type: stylesheet
 
 {{$:/core/styles/reset}}
 
+* {
+	box-sizing: border-box;
+}
+
 html {
 	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -162,7 +166,7 @@ a.tw-tiddlylink-missing {
 
 .story-river {
 	margin-left: {{$:/core/styles/metrics##sidebarwidth}};
-	padding: 2em;
+	padding: 2em 2em 2em 0;
 }
 
 @media print {
@@ -330,8 +334,9 @@ a.tw-tiddlylink-missing {
 
 .tw-edit-texteditor input, .tw-edit-texteditor textarea {
 	width: 100%;
-	padding: 0.2em 0.2em 0.2em 0.2em;
+	padding: 3px 3px 3px 3px;
 	border: 1px solid #888;
+	line-height: 1.3em;
 	-webkit-appearance: none;
 	margin: 0.25em 0 0.25em 0;
 }
@@ -342,7 +347,7 @@ a.tw-tiddlylink-missing {
 }
 
 .sidebar-header .tw-edit-texteditor input, .sidebar-header .tw-edit-texteditor textarea {
-	width: 90%;
+	width: 80%;
 }
 
 canvas.tw-edit-bitmapeditor  {
