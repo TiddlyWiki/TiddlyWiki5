@@ -1,5 +1,5 @@
 title: $:/core/styles/base
-tags: $:/core/styles
+module-type: stylesheet
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 \define border-radius(radius)

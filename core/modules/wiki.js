@@ -375,7 +375,7 @@ application/x-tiddler-dictionary: the tiddler is parsed as sequence of name:valu
 Other types currently just return null.
 */
 exports.getTiddlerData = function(title,defaultData) {
-	var tiddler = this.tiddlers[title],
+	var tiddler = this.getTiddler(title),
 		data;
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {

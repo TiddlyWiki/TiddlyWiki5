@@ -599,7 +599,7 @@ $tw.Wiki.prototype.definePluginModules = function() {
 	$tw.utils.each(this.shadowTiddlers,function(element,title,object) {
 		var tiddler = self.getTiddler(title);
 		if(!$tw.utils.hop(self.tiddlers,title)) { // Don't define the module if it is overidden by an ordinary tiddler
-			if(tiddler.fields.type === "application/javascript" && tiddler.hasField("module-type")) {
+			if(tiddler.hasField("module-type")) {
 				// Define the module
 				$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 			}
@@ -1035,7 +1035,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	}
 	// Load any plugins listed in the wiki info file
 	if(wikiInfo.plugins) {
-		var pluginBasePath = path.resolve($tw.boot.bootPath,$tw.config.pluginsPath);
+		var pluginBasePath = path.resolve($tw.boot.corePath,$tw.config.pluginsPath);
 		for(var t=0; t<wikiInfo.plugins.length; t++) {
 			pluginFields = $tw.loadPluginFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
 			if(pluginFields) {
@@ -1072,10 +1072,12 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 };
 
 $tw.loadTiddlers = function() {
-	// Load the core tiddlers
+	// Load the boot tiddlers
 	$tw.utils.each($tw.loadTiddlersFromPath($tw.boot.bootPath),function(tiddlerFile) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
+	// Load the core tiddlers
+	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
 	// Load the tiddlers from the wiki directory
 	$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
 };
@@ -1107,6 +1109,7 @@ $tw.boot.startup = function() {
 		$tw.boot.files = {};
 		// System paths and filenames
 		$tw.boot.bootPath = path.dirname(module.filename);
+		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
@@ -1119,7 +1122,7 @@ $tw.boot.startup = function() {
 		}
 		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
 		// Read package info
-		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.bootPath + "/../package.json"));
+		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.corePath + "/../package.json"));
 		// Check node version number
 		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
 			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node);
