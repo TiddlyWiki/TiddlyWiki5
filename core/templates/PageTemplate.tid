@@ -3,6 +3,13 @@ title: $:/templates/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
+
+<$import browse="no">
+
+<div class="tw-drag-target">
+Drop files here to import them as tiddlers
+</div>
+
 <!-- The sidebar header -->
 <header class="sidebar-header">
 
@@ -20,6 +27,8 @@ title: $:/templates/PageTemplate
 
 <!-- End of story river -->
 </section>
+
+</$import>
 
 </$navigator>
 
