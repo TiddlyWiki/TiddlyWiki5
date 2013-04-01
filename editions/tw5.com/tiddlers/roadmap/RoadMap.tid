@@ -1,6 +1,7 @@
-title: RoadMap
-modifier: JeremyRuston
 tags: docs planning
+modifier: JeremyRuston
+title: RoadMap
+modified: 201304012030
 
 TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and subject to change.
 
@@ -11,13 +12,12 @@ There has already been a series of alpha releases of TiddlyWiki5. The goal of th
 Some of the features and fixes required before the beta is declared include:
 
 * ~~Synchronisation via HTTP in the browser~~
-* Synchronisation via direct file access under node.js
+* ~~Synchronisation via direct file access under node.js~~
 * ~~Preliminary integration with TiddlySpace~~
 * ~~Preliminary integration with TiddlySpot~~
 * ~~Saving changes to a file URI using Firefox~~
-* Move default tiddler storage from TiddlyWiki-style `<div>` elements to JSON
 * ~~Lazy loading~~
-* Better handling of binary tiddlers
+* ~~Better handling of binary tiddlers~~
 
 ! Beta Release
 
@@ -28,9 +28,8 @@ Some of the additional features under consideration during the beta include:
 * Ability to ~~inspect and~~ edit tiddler fields
 * Aliases/inheritance
 * WikiText ~~table and~~ block quote support
-* More user interface widgets, including: tabs, popovers, toolbars, carousel, dropdown,
+* More user interface widgets, including: ~tabs~, popovers, toolbars, carousel, ~dropdown~,
 * ~~Checkbox support~~
-** For example, `<<checkbox {tag}>>` in a template displays a checkbox representing whether or not each tiddler carries the specified tag
 * ~~Search~~
 * Tiddler themes and wiki themes
 * Text references: slices and sections, JSON references
