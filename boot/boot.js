@@ -636,7 +636,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		fields[f] = srcFields[f];
 	}
 	if(deserializer) {
-		return deserializer.call(this,text,fields);
+		return deserializer.call(this,text,fields,type);
 	} else {
 		// Return a raw tiddler for unknown types
 		fields.text = text;
@@ -673,9 +673,9 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 	}
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/txt","tiddlerdeserializer",{
-	"text/plain": function(text,fields) {
+	"text/plain": function(text,fields,type) {
 		fields.text = text;
-		fields.type = "text/plain";
+		fields.type = type || "text/plain";
 		return [fields];
 	}
 });
