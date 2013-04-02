@@ -17,8 +17,11 @@ var ClassicListView = function(listWidget) {
 }
 
 ClassicListView.prototype.navigateTo = function(historyInfo) {
-	var listElementIndex = this.listWidget.findListElementByTitle(0,historyInfo.title),
-		listElementNode = this.listWidget.children[listElementIndex],
+	var listElementIndex = this.listWidget.findListElementByTitle(0,historyInfo.title);
+	if(listElementIndex === undefined) {
+		return;
+	}
+	var listElementNode = this.listWidget.children[listElementIndex],
 		targetElement = listElementNode.domNode;
 	// Scroll the node into view
 	var scrollEvent = document.createEvent("Event");
