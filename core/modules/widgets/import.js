@@ -136,10 +136,6 @@ ImportWidget.prototype.importFiles = function(files) {
 				}
 			}
 		}
-		// Override HTML files so that they're recognised as TiddlyWiki files
-		if(type === "text/html") {
-			type = "application/vnd.tiddlywiki2";
-		}
 		// Figure out if we're reading a binary file
 		var contentTypeInfo = $tw.config.contentTypeInfo[type],
 			isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
