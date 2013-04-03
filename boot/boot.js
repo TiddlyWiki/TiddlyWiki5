@@ -527,7 +527,7 @@ Construct a wiki store object
 $tw.Wiki = function() {
 	this.tiddlers = {};
 	this.plugins = {}; // Hashmap of plugin information by title
-	this.shadowTiddlers = {}; // Hashmap of constituent tiddlers from plugins by title
+	this.shadowTiddlers = {}; // Hashmap by title of {source:, tiddler:}
 };
 
 $tw.Wiki.prototype.addTiddler = function(tiddler) {
@@ -558,7 +558,10 @@ $tw.Wiki.prototype.unpackPluginTiddlers = function() {
 				// Don't overwrite tiddlers that already exist
 				if(!$tw.utils.hop(self.shadowTiddlers,constituentTitle)) {
 					// Save the tiddler object
-					self.shadowTiddlers[constituentTitle] = new $tw.Tiddler(constituentTiddler,{title: constituentTitle});
+					self.shadowTiddlers[constituentTitle] = {
+						source: title,
+						tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+					};
 				}
 			});
 		}
@@ -594,7 +597,7 @@ Register all the module tiddlers that have a module type
 */
 $tw.Wiki.prototype.definePluginModules = function() {
 	var self = this;
-	$tw.utils.each(this.shadowTiddlers,function(element,title,object) {
+	$tw.utils.each(this.shadowTiddlers,function(element,title) {
 		var tiddler = self.getTiddler(title);
 		if(!$tw.utils.hop(self.tiddlers,title)) { // Don't define the module if it is overidden by an ordinary tiddler
 			if(tiddler.hasField("module-type")) {
@@ -610,7 +613,7 @@ $tw.Wiki.prototype.getTiddler = function(title) {
 	if(t instanceof $tw.Tiddler) {
 		return t;
 	} else if($tw.utils.hop(this.shadowTiddlers,title)) {
-		return this.shadowTiddlers[title];
+		return this.shadowTiddlers[title].tiddler;
 	} else {
 		return undefined;
 	}
