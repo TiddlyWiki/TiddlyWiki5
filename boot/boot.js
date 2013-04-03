@@ -946,7 +946,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 						pathname = path.resolve(filepath,tidInfo.file),
 						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
 					tidInfo.fields.text = text;
-					tiddlers.push({tiddlers: tidInfo.fields});
+					tiddlers.push({tiddlers: [tidInfo.fields]});
 				});
 			} else {
 				// If not, read all the files in the directory
