@@ -1,6 +1,7 @@
-title: OpenSource
-modifier: JeremyRuston
 tags: definitions
+modifier: JeremyRuston
+title: OpenSource
+modified: 201304021921
 
 OpenSource is [[defined by Wikipedia|http://en.wikipedia.org/wiki/Open_source]] as //a philosophy, or pragmatic methodology that promotes free redistribution and access to an end product's design and implementation details//.
 
@@ -10,7 +11,7 @@ As it has turned out, programming isn't like engineering at all. With an endeavo
 
 OpenSource doesn't change the  nature of software, but instead incorporates it into the philosophy of its production. The most fundamental insight is that programming is hard, and that the best way to mitigate the problem is to have lots and lots of smart brains working on it. But open source doesn't seek to do that by prescribing a reductionist, hierarchical breakdown of the required tasks that can be allocated to an army of programmers. Instead, OpenSource suggests that our code should be accessible to everyone, to create the widest possible surface area for potential collaborators.
 
-This leads to an intense, organic, chaotic way of working, but the results are undeniably impressive.
+This leads to an intense, organic, chaotic way of working, but the results can be impressive.
 
 TiddlyWiki is part of a small band of OpenSource projects like Firefox that don't just target software developers, but provide something that end users can use themselves, without any special programming ability.
 
