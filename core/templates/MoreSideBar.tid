@@ -1,7 +1,7 @@
 title: $:/templates/MoreSideBar
 
 <div class="tw-tab-set">
-<div class="tw-tab-buttons"><$button type="set" set="$:/state/moreSideBarTabSet" setTo="tagsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tags</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="missingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Missing</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="orphanTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Orphans</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="systemTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">System</$button></div>
+<div class="tw-tab-buttons"><$button type="set" set="$:/state/moreSideBarTabSet" setTo="tagsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tags</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="missingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Missing</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="orphanTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Orphans</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="systemTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">System</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="shadowsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Shadows</$button></div>
 <div class="tw-tab-contents">
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="tagsTab" qualifyTiddlerTitles="yes">
 <$list filter="[tags[]sort[title]]" itemClass="tw-menu-list-item" template="$:/templates/TagTemplate"/>
@@ -14,6 +14,9 @@ title: $:/templates/MoreSideBar
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="systemTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[system]sort[title]]" itemClass="tw-menu-list-item"/>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="shadowsTab" qualifyTiddlerTitles="yes">
+<$list filter="[is[shadow]sort[title]]" itemClass="tw-menu-list-item"/>
 </$reveal>
 </div>
 </div>

@@ -16,17 +16,6 @@ exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
 
-exports.isSystem = function() {
-	if(!$tw.utils.hop(this,"systemFlag")) {
-		this.systemFlag = this.fields.title.indexOf("$:/") === 0;
-	}
-	return this.systemFlag;
-};
-
-exports.isTemporary = function() {
-	return this.fields.title.indexOf("$:/temp/") === 0;
-};
-
 exports.getFieldString = function(field) {
 	var value = this.fields[field];
 	// Check for a missing field

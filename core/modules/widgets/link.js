@@ -37,6 +37,7 @@ LinkWidget.prototype.generate = function() {
 	this.isExternal = isLinkExternal(this.to);
 	if(!this.isExternal) {
 		this.isMissing = !this.renderer.renderTree.wiki.tiddlerExists(this.to);
+		this.isShadow = this.renderer.renderTree.wiki.isShadowTiddler(this.to);
 	}
 	// Compose the link
 	var classes = ["tw-tiddlylink"]
@@ -44,10 +45,15 @@ LinkWidget.prototype.generate = function() {
 		$tw.utils.pushTop(classes,"tw-tiddlylink-external");
 	} else {
 		$tw.utils.pushTop(classes,"tw-tiddlylink-internal");
-		if(this.isMissing) {
+		if(this.isShadow) {
+			$tw.utils.pushTop(classes,"tw-tiddlylink-shadow");
+		}
+		if(this.isMissing && !this.isShadow) {
 			$tw.utils.pushTop(classes,"tw-tiddlylink-missing");
 		} else {
-			$tw.utils.pushTop(classes,"tw-tiddlylink-resolves");
+			if(!this.isMissing) {
+				$tw.utils.pushTop(classes,"tw-tiddlylink-resolves");
+			}
 		}
 	}
 	var events = [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}];

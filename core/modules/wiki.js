@@ -164,6 +164,18 @@ exports.tiddlerExists = function(title) {
 	return !!this.tiddlers[title];
 };
 
+exports.isSystemTiddler = function(title) {
+	return title.indexOf("$:/") === 0;
+};
+
+exports.isTemporaryTiddler = function(title) {
+	return title.indexOf("$:/temp/") === 0;
+};
+
+exports.isShadowTiddler = function(title) {
+	return $tw.utils.hop(this.shadowTiddlers,title);
+};
+
 exports.addTiddler = function(tiddler) {
 	// Check if we're passed a fields hashmap instead of a tiddler
 	if(!(tiddler instanceof $tw.Tiddler)) {
@@ -184,7 +196,7 @@ exports.getTiddlers = function(sortField,excludeTag) {
 	sortField = sortField || "title";
 	var tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t) && !this.tiddlers[t].isSystem() && (!excludeTag || !this.tiddlers[t].hasTag(excludeTag))) {
+		if($tw.utils.hop(this.tiddlers,t) && !this.isSystemTiddler(t) && (!excludeTag || !this.tiddlers[t].hasTag(excludeTag))) {
 			tiddlers.push(this.tiddlers[t]);
 		}
 	}
@@ -344,9 +356,18 @@ exports.getOrphanTitles = function() {
 exports.getSystemTitles = function() {
 	var titles = [];
 	for(var title in this.tiddlers) {
-		if(this.tiddlers[title].isSystem()) {
+		if(this.isSystemTiddler(title)) {
 			titles.push(title);
 		}
+	}
+	titles.sort();
+	return titles;
+};
+
+exports.getShadowTitles = function() {
+	var titles = [];
+	for(var title in this.shadowTiddlers) {
+		titles.push(title);
 	}
 	titles.sort();
 	return titles;

@@ -98,7 +98,7 @@ TranscludeWidget.prototype.generate = function() {
 	if(this.renderer.hasAttribute("class")) {
 		$tw.utils.pushTop(classes,this.renderer.getAttribute("class").split(" "));
 	}
-	if(!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle)) {
+	if(!this.renderer.renderTree.wiki.tiddlerExists(this.targetTitle) && !this.renderer.renderTree.wiki.isShadowTiddler(this.targetTitle)) {
 		$tw.utils.pushTop(classes,"tw-tiddler-missing");
 	}
 	// Create the renderers for the wrapper and the children
