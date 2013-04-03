@@ -155,9 +155,9 @@ a.tw-tiddlylink-missing {
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
 
-.sidebar-header p {
-	margin-top: 0;
-	margin-bottom: 0;
+.sidebar-header .tw-tab-set p {
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
 }
 
 @media print {
@@ -296,6 +296,7 @@ a.tw-tiddlylink-missing {
 .tw-tab-buttons {
 	font-size: 0.85em;
 	line-height: 100%;
+	padding-top: 1em;
 	margin-bottom: -1px;
 }
 
@@ -315,13 +316,16 @@ a.tw-tiddlylink-missing {
 	border-bottom: 1px solid #ececec;
 }
 
-.tw-tab-contents {
+.tw-tab-divider {
 	border-top: 1px solid #aaa;
-	padding: 1em;
+}
+
+.tw-tab-content {
+	padding-top: 1em;
 }
 
 .tw-search-results {
-	padding: 1em;
+	padding-top: 1em;
 }
 
 .tw-drop-down .tw-tab-buttons button {
