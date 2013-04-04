@@ -1,7 +1,9 @@
 title: $:/templates/TiddlerDropdown
 
 <div class="tw-tab-set"><div class="tw-tab-buttons"><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="refTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">References</$button><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="taggingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tagging</$button><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="fieldsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Fields</$button></div>
-<div class="tw-tab-contents">
+<div class="tw-tab-divider">
+</div>
+<div class="tw-tab-content">
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="refTab" default="refTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one">
 </$list>
