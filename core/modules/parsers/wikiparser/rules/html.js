@@ -70,8 +70,8 @@ exports.parse = function() {
 	}
 	// Process the end tag
 	if(!isSelfClosing && $tw.config.htmlVoidElements.indexOf(tagName) === -1) {
-		var reEndString = "(</" + $tw.utils.escapeRegExp(tagName) + ">)",
-			reEnd = new RegExp(reEndString,"mg"),
+		var reEndString = "</" + $tw.utils.escapeRegExp(tagName) + ">",
+			reEnd = new RegExp("(" + reEndString + ")","mg"),
 			content;
 		if(hasLineBreak) {
 			content = this.parser.parseBlocks(reEndString);
