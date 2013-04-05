@@ -91,27 +91,31 @@ ImportWidget.prototype.handleDropEvent  = function(event) {
 };
 
 ImportWidget.prototype.handlePasteEvent  = function(event) {
-	var self = this,
-		items = event.clipboardData.items;
-	for(var t = 0; t<items.length; t++) {
-		var item = items[t];
-		if(item.kind === "file") {
-			var file = item.getAsFile();
-			this.importFiles([file]);
-		} else if(item.kind === "string") {
-			item.getAsString(function(str) {
-				var fields = {
-					title: self.generateTitle("Untitled"),
-					text: str
-				}
-				self.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
-				self.openTiddler(fields.title);
-			});
+	if(["TEXTAREA","INPUT"].indexOf(event.srcElement.tagName) == -1) {
+		var self = this,
+			items = event.clipboardData.items;
+		for(var t = 0; t<items.length; t++) {
+			var item = items[t];
+			if(item.kind === "file") {
+				var file = item.getAsFile();
+				this.importFiles([file]);
+			} else if(item.kind === "string") {
+				item.getAsString(function(str) {
+					var fields = {
+						title: self.generateTitle("Untitled"),
+						text: str
+					}
+					self.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
+					self.openTiddler(fields.title);
+				});
+			}
 		}
+		event.stopPropagation();
+		event.preventDefault();
+		return false;
+	} else {
+		return true;
 	}
-	event.stopPropagation();
-	event.preventDefault();
-	return false;
 };
 
 ImportWidget.prototype.openTiddler = function(title) {
