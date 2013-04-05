@@ -1,5 +1,7 @@
-title: How to use TiddlyWiki5 as a standalone HTML file
 tags: docs howto
+title: How to use TiddlyWiki5 as a standalone HTML file
+type: 
+modified: 201304050948
 
 ! On desktop browsers
 
@@ -11,6 +13,7 @@ tags: docs howto
 #* Edit existing tiddlers by clicking the `Edit` button at their upper right
 # Save your changes by clicking the `Save` button in the left sidebar. What happens next depends on your browser:
 ## Newer browsers will ask for confirmation and then begin downloading your newly modified TiddlyWiki file, placing it in the default `Downloads` directory.
+##* See GoogleChromeTips for some suggestions to streamline this process
 ## For older browsers, TiddlyWiki displays a dialogue including a link that you need to right-click and save
 
 ! On mobile browsers

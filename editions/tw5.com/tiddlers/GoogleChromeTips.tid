@@ -1,0 +1,12 @@
+title: GoogleChromeTips
+modified: 201304050954
+tags: docs
+
+Some suggestions for streamlining [[using TiddlyWiki as a single file|How to use TiddlyWiki5 as a standalone HTML file]] with GoogleChrome.
+
+! Download Prompts
+
+By default, GoogleChrome displays a confirmation prompt at the bottom of the browser window before downloading the TiddlyWiki file. Once confirmed, the file is downloaded to the default `Downloads` folder under a filename determined by the browser.
+
+In Chrome settings, the advanced option "Ask where to save each file before downloading" changes this behaviour so that when you click the ''save'' button the browser displays a file picker dialogue that lets the user choose the name and location of the file, thus making it more straightforward to replace the current version of the file with the new one.
+
