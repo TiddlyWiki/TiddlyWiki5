@@ -30,7 +30,8 @@ html {
 body {
 	font-size: {{$:/core/styles/metrics##fontsize}};
 	line-height: {{$:/core/styles/metrics##lineheight}};
-	background-color: {{$:/core/styles/colourmappings##pagebackground}}
+	background-color: {{$:/core/styles/colourmappings##pagebackground}};
+	word-wrap: break-word;
 }
 
 code, pre {
