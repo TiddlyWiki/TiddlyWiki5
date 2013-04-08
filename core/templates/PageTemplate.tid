@@ -4,11 +4,7 @@ title: $:/templates/PageTemplate
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
 
-<$import browse="no">
-
-<div class="tw-drag-target">
-Drop files here to import them as tiddlers
-</div>
+<$import browse="no" mutate="global importer" class="tw-drop-zone-fullscreen">
 
 <!-- The sidebar header -->
 <header class="sidebar-header">

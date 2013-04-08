@@ -94,6 +94,20 @@ a.tw-tiddlylink-missing {
 	font-style: italic;
 }
 
+.tw-tiddler-dragger {
+	display: inline-block;
+	padding: 8px 20px;
+	font-size: 16.9px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #000;
+	<<border-radius 20px>>
+}
+
 .btn-invisible {
 	padding: 0;
 	margin: 0;
@@ -376,13 +390,30 @@ embed {
 	height: 20em;
 }
 
-.tw-dragover .tw-drag-target {
-	display: block;
-	background: red;
-	position: absolute;
+.tw-import {
+	position: relative;
 }
 
-.tw-drag-target {
-	display: none;
+.tw-drop-zone-fullscreen.tw-dragover:before {
+	z-index: 10000;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,200,0,0.7);
+	text-align: center;
+	content: "Drop here";
+}
+
+.tw-drop-zone.tw-dragover:before {
+	z-index: 10000;
+	display: block;
 	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,200,0,0.7);
+	text-align: center;
+	content: "Drop here";
 }

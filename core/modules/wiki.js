@@ -388,6 +388,22 @@ exports.getTiddlersWithTag = function(tag) {
 };
 
 /*
+Retrieve a tiddler as a JSON string of the fields
+*/
+exports.getTiddlerAsJson = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler) {
+		var fields = {};
+		$tw.utils.each(tiddler.fields,function(value,name) {
+			fields[name] = tiddler.getFieldString(name);
+		});
+		return JSON.stringify(fields);
+	} else {
+		return JSON.stringify({title: title});
+	}
+};
+
+/*
 Get a tiddlers content as a JavaScript object. How this is done depends on the type of the tiddler:
 
 application/json: the tiddler JSON is parsed into an object

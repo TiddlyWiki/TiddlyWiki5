@@ -28,6 +28,7 @@ var ImportWidget = function(renderer) {
 ImportWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.browse = this.renderer.getAttribute("browse","yes");
+	this.mutate = this.renderer.getAttribute("mutate","yes");
 	this["class"] = this.renderer.getAttribute("class");
 	// Compute classes
 	var classes = ["tw-import"];
@@ -69,52 +70,76 @@ ImportWidget.prototype.handleChangeEvent  = function(event) {
 };
 
 ImportWidget.prototype.handleDragEnterEvent  = function(event) {
-	this.renderer.domNode.classList.add("tw-dragover");
+	// We count enter/leave events
+	this.dragEnterCount = (this.dragEnterCount || 0) + 1;
+	// If we're entering for the first time we need to apply highlighting
+	if(this.dragEnterCount === 1) {
+		$tw.utils.addClass(this.renderer.domNode,"tw-dragover");
+	}
+	// Tell the browser that we're ready to handle the drop
+	event.preventDefault();
+	// Tell the browser not to ripple the drag up to any parent drop handlers
+	event.stopPropagation();
 };
 
 ImportWidget.prototype.handleDragOverEvent  = function(event) {
-	event.stopPropagation();
+	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
-	event.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
+	event.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy
 };
 
 ImportWidget.prototype.handleDragLeaveEvent  = function(event) {
-	this.renderer.domNode.classList.remove("tw-dragover");
+	// Reduce the enter count
+	this.dragEnterCount = (this.dragEnterCount || 0) - 1;
+	// Remove highlighting if we're leaving externally
+	if(this.dragEnterCount <= 0) {
+		$tw.utils.removeClass(this.renderer.domNode,"tw-dragover");
+	}
 };
 
 ImportWidget.prototype.handleDropEvent  = function(event) {
-	this.renderer.domNode.classList.remove("tw-dragover");
-	event.stopPropagation();
+	var dataTransfer = event.dataTransfer;
+	// Reset the enter count
+	this.dragEnterCount = 0;
+	// Remove highlighting
+	$tw.utils.removeClass(this.renderer.domNode,"tw-dragover");
+	// Try to import the various data types we understand
+	this.importData(dataTransfer);
+	// Import any files in the drop
+	this.importFiles(dataTransfer.files);
+	// Tell the browser that we handled the drop
 	event.preventDefault();
-	this.importFiles(event.dataTransfer.files);
-	return false;
+	// Stop the drop ripple up to any parent handlers
+	event.stopPropagation();
 };
 
 ImportWidget.prototype.handlePasteEvent  = function(event) {
-	if(["TEXTAREA","INPUT"].indexOf(event.srcElement.tagName) == -1) {
+	// Let the browser handle it if we're in a textarea or input box
+	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) == -1) {
 		var self = this,
 			items = event.clipboardData.items;
+		// Enumerate the clipboard items
 		for(var t = 0; t<items.length; t++) {
 			var item = items[t];
 			if(item.kind === "file") {
+				// Import any files
 				var file = item.getAsFile();
 				this.importFiles([file]);
 			} else if(item.kind === "string") {
+				// Create tiddlers from string items
 				item.getAsString(function(str) {
 					var fields = {
 						title: self.generateTitle("Untitled"),
 						text: str
-					}
+					};
 					self.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
 					self.openTiddler(fields.title);
 				});
 			}
 		}
+		// Tell the browser that we've handled the paste
 		event.stopPropagation();
 		event.preventDefault();
-		return false;
-	} else {
-		return true;
 	}
 };
 
@@ -125,6 +150,38 @@ ImportWidget.prototype.openTiddler = function(title) {
 		navigateFromClientRect: this.renderer.domNode.getBoundingClientRect()
 	});
 };
+
+ImportWidget.prototype.importData = function(dataTransfer) {
+	for(var t=0; t<this.importDataTypes.length; t++) {
+		var dataType = this.importDataTypes[t];
+		var data = dataTransfer.getData(dataType.type);
+		if(data !== "") {
+			var fields = dataType.handler(data);
+			if(!fields.title) {
+				fields.title = this.generateTitle("Untitled");
+			}
+			this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
+			this.openTiddler(fields.title);
+			return;
+		}
+	};
+};
+
+ImportWidget.prototype.importDataTypes = [
+	{type: "text/vnd.tiddler", handler: function(data) {
+		return JSON.parse(data);
+	}},
+	{type: "text/plain", handler: function(data) {
+		return {
+			text: data
+		};
+	}},
+	{type: "text/uri-list", handler: function(data) {
+		return {
+			text: data
+		};
+	}}
+];
 
 ImportWidget.prototype.importFiles = function(files) {
 	var self = this,

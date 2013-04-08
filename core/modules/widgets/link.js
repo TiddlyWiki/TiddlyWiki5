@@ -56,7 +56,11 @@ LinkWidget.prototype.generate = function() {
 			}
 		}
 	}
-	var events = [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}];
+	var events = [
+		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
+		{name: "dragstart", handlerObject: this, handlerMethod: "handleDragStartEvent"},
+		{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
+	];
 	if(this.hover) {
 		events.push({name: "mouseover", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
 		events.push({name: "mouseout", handlerObject: this, handlerMethod: "handleMouseOverOrOutEvent"});
@@ -79,11 +83,11 @@ LinkWidget.prototype.generate = function() {
 				wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 			this.attributes.href = wikiLinkText;
 		}
+		this.events = events;
 	} else {
 		this.tag = "span";
 	}
 	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
-	this.events = events;
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {
@@ -111,6 +115,44 @@ LinkWidget.prototype.handleMouseOverOrOutEvent = function(event) {
 	}
 	event.preventDefault();
 	return false;
+};
+
+LinkWidget.prototype.handleDragStartEvent = function(event) {
+	if(this.to) {
+		// Set the dragging class on the element being dragged
+		$tw.utils.addClass(event.target,"tw-tiddlylink-dragging");
+		// Create the drag image element
+		this.dragImage = document.createElement("div");
+		this.dragImage.className = "tw-tiddler-dragger";
+		this.dragImage.appendChild(document.createTextNode(this.to));
+		document.body.appendChild(this.dragImage);
+		// Set the data transfer properties
+		var dataTransfer = event.dataTransfer;
+		dataTransfer.effectAllowed = "copy";
+		dataTransfer.setDragImage(this.dragImage,-16,-16);
+		dataTransfer.clearData();
+		dataTransfer.setData("text/vnd.tiddler",this.renderer.renderTree.wiki.getTiddlerAsJson(this.to));
+		dataTransfer.setData("text/plain",this.renderer.renderTree.wiki.getTiddlerText(this.to,""));
+		event.stopPropagation();
+	} else {
+		event.preventDefault();
+	}
+};
+
+LinkWidget.prototype.handleDragEndEvent = function(event) {
+	// Remove the dragging class on the element being dragged
+	$tw.utils.removeClass(event.target,"tw-tiddlylink-dragging");
+	// Delete the drag image element
+	if(this.dragImage) {
+		this.dragImage.parentNode.removeChild(this.dragImage);
+	}
+};
+
+LinkWidget.prototype.postRenderInDom = function() {
+	// Add the draggable attribute to links (we don't include it in the static HTML representation)
+	if(this.renderer.domNode.tagName === "A") {
+		this.renderer.domNode.setAttribute("draggable",true);
+	}
 };
 
 LinkWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
