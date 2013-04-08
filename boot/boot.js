@@ -547,24 +547,42 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 Extract constituent tiddlers from plugin tiddlers so that we can easily access them in getTiddler()
 */
 $tw.Wiki.prototype.unpackPluginTiddlers = function() {
-	// Collect up all the plugin tiddlers
-	var self = this;
+	// Collect up the titles of all the plugin tiddlers
+	var self = this,
+		pluginInfoList = [];
 	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
 		if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin")) {
-			// Save the plugin information
-			var pluginInfo = self.plugins[title] = JSON.parse(tiddler.fields.text);
-			// Extract the constituent tiddlers
-			$tw.utils.each(pluginInfo.tiddlers,function(constituentTiddler,constituentTitle) {
-				// Don't overwrite tiddlers that already exist
-				if(!$tw.utils.hop(self.shadowTiddlers,constituentTitle)) {
-					// Save the tiddler object
-					self.shadowTiddlers[constituentTitle] = {
-						source: title,
-						tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-					};
-				}
-			});
+			pluginInfoList.push(tiddler);
 		}
+	});
+	// Sort the titles by the `pluginPriority` field
+	pluginInfoList.sort(function(a,b) {
+		if("pluginPriority" in a.fields && "pluginPriority" in b.fields) {
+			return a.fields.pluginPriority - b.fields.pluginPriority;
+		} else if("pluginPriority" in a.fields) {
+			return -1;
+		} else if("pluginPriority" in b.fields) {
+			return +1;
+		} else if(a.fields.title < b.fields.title) {
+			return -1;
+		} else if(a.fields.title === b.fields.title) {
+			return 0;
+		} else {
+			return +1;
+		}
+	});
+	// Now go through the plugins in ascending order
+	$tw.utils.each(pluginInfoList,function(tiddler) {
+		// Save the plugin information
+		var pluginInfo = self.plugins[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+		// Extract the constituent tiddlers
+		$tw.utils.each(pluginInfo.tiddlers,function(constituentTiddler,constituentTitle) {
+			// Save the tiddler object
+			self.shadowTiddlers[constituentTitle] = {
+				source: tiddler.fields.title,
+				tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+			};
+		});
 	});
 };
 
@@ -993,12 +1011,20 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		}
 	}
 	// Save the plugin tiddler
-	return pluginInfo ? {
-		title: pluginInfo.title,
-		type: "application/json",
-		plugin: "yes",
-		text: JSON.stringify(pluginInfo,null,4)
-	} : null;
+	if(pluginInfo) {
+		var fields = {
+			title: pluginInfo.title,
+			type: "application/json",
+			plugin: "yes",
+			text: JSON.stringify(pluginInfo,null,4)
+		}
+		if("pluginPriority" in pluginInfo) {
+			fields.pluginPriority = pluginInfo.pluginPriority;
+		}
+		return fields;
+	} else {
+		return null;
+	}
 };
 
 /*
