@@ -24,7 +24,6 @@ var TextParser = function(type,text,options) {
 };
 
 exports["text/plain"] = TextParser;
-exports["text/html"] = TextParser;
 exports["application/vnd.tiddlywiki2"] = TextParser;
 exports["application/javascript"] = TextParser;
 exports["application/json"] = TextParser;
