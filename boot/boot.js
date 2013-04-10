@@ -594,8 +594,8 @@ $tw.Wiki.prototype.defineTiddlerModules = function() {
 		if(tiddler.hasField("module-type")) {
 			switch (tiddler.fields.type) {
 				case "application/javascript":
-					// We don't need to register JavaScript tiddlers in the browser
-					if(!$tw.browser) {
+					// We only define modules that haven't already been defined, because in the browser modules in system tiddlers are defined in inline script
+					if(!$tw.utils.hop($tw.modules.titles,tiddler.fields.title)) {
 						$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 					}
 					break;
