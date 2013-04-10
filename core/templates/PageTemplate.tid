@@ -3,8 +3,7 @@ title: $:/templates/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
-
-<$import browse="no" mutate="global importer" class="tw-drop-zone-fullscreen">
+<$import browse="no" class="tw-drop-zone-fullscreen">
 
 <!-- The sidebar header -->
 <header class="sidebar-header">

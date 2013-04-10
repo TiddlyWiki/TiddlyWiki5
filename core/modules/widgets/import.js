@@ -28,7 +28,6 @@ var ImportWidget = function(renderer) {
 ImportWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
 	this.browse = this.renderer.getAttribute("browse","yes");
-	this.mutate = this.renderer.getAttribute("mutate","yes");
 	this["class"] = this.renderer.getAttribute("class");
 	// Compute classes
 	var classes = ["tw-import"];
@@ -132,7 +131,7 @@ ImportWidget.prototype.handlePasteEvent  = function(event) {
 						title: self.generateTitle("Untitled"),
 						text: str
 					};
-					self.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
+					self.storeTiddler(fields);
 					self.openTiddler(fields.title);
 				});
 			}
@@ -160,7 +159,7 @@ ImportWidget.prototype.importData = function(dataTransfer) {
 			if(!fields.title) {
 				fields.title = this.generateTitle("Untitled");
 			}
-			this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
+			this.storeTiddler(fields);
 			this.openTiddler(fields.title);
 			return;
 		}
@@ -212,7 +211,7 @@ ImportWidget.prototype.importFiles = function(files) {
 				var commaPos = event.target.result.indexOf(",");
 				if(commaPos !== -1) {
 					fields.text = event.target.result.substr(commaPos+1);
-					self.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
+					self.storeTiddler(fields);
 					self.openTiddler(fields.title);
 				}
 			} else {
@@ -221,8 +220,8 @@ ImportWidget.prototype.importFiles = function(files) {
 					console.log("No tiddlers found in file ",file.name);
 				} else {
 					$tw.utils.each(tiddlers,function(tiddlerFields) {
-						var title = self.generateTitle(tiddlerFields.title);
-						self.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddlerFields,{title: title}));
+						tiddlerFields.title = self.generateTitle(tiddlerFields.title);
+						self.storeTiddler(tiddlerFields);
 						self.openTiddler(title);
 					});
 				}
@@ -237,6 +236,10 @@ ImportWidget.prototype.importFiles = function(files) {
 	for(var f=0; f<files.length; f++) {
 		importFile(files[f]);
 	};
+};
+
+ImportWidget.prototype.storeTiddler = function(fields) {
+	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
 };
 
 ImportWidget.prototype.generateTitle = function(baseTitle) {

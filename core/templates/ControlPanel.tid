@@ -4,7 +4,7 @@ title: $:/templates/ControlPanel
 
 ---
 
-Import: <$import mutate="sidebar importer" class="tw-drop-zone">
+Import: <$import class="tw-drop-zone">
 
 Drop files here
 
