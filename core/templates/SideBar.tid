@@ -31,6 +31,7 @@ title: $:/templates/SideBar
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="toolsTab" qualifyTiddlerTitles="yes">
 {{$:/templates/ControlPanel}}
+{{$:/templates/ServerControlPanel}}
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="moreTab" qualifyTiddlerTitles="yes">
 {{$:/templates/MoreSideBar}}
