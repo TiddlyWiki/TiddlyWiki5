@@ -1,5 +1,6 @@
-title: PluginMechanism
 tags: docs mechanism
+title: PluginMechanism
+modified: 201304152135
 
 [[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the loaded plugins are searched for it instead.
 
@@ -65,20 +66,13 @@ A folder containing an exploded TiddlyWiki can contain a `tiddlywiki.info` file 
 ```
 {
 	"plugins": [
-		"slider",
-		"chooser",
-		"tiddlytools/superslider",
-		"../../myplugins/specialone",
-		"/mylib/another",
+		"tiddlywiki/slider",
+		"tiddlytools/chooser"
 	]
 }
 ```
 
-Plugins can be identified in several ways:
-
-* Names that do not contain a slash are interpreted as the name of a TiddlyWiki core plugin (ie, `$:/plugins/tiddlywiki/<name>`)
-* Names that start with a slash or dot are interpreted as pathnames to a plugin file or folder
-* Names that contain a single slash that is not at the start or end are interpreted as names of plugins from the core plugin library (ie, `$:/plugins/<publisher/name>`)
+Plugins names refer to plugin folders listed in TiddlyWiki5's root `plugins` folder.
 
 Plugins can also be included manually by copying them into the `plugins` subfolder of the wiki.
 
