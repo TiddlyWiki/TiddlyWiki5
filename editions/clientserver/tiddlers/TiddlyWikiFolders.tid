@@ -1,0 +1,43 @@
+modified: 201304161845
+tags: docs
+title: TiddlyWikiFolders
+
+As well as traditional single file wikis, TiddlyWiki5 [[under node.js|TiddlyWiki5 Node Edition]] supports wikis that are stored as a folder of individual tiddler files.
+
+! Wiki folder files and folders
+
+Wiki folders can contain the following files and folders:
+
+* ''\tiddlers'' - folder containing tiddler files comprising the wiki
+* ''\plugins'' - folder containing [[plugin folders|PluginMechanism]] to be included in the wiki
+* ''tiddlywiki.info'' - JSON file containing metadata for the wiki. See below
+
+Only the ''tiddlywiki.info'' file is required, the ''tiddlers'' and ''plugins'' folders are optional. Any files and folders not listed above are ignored.
+
+! Content of `tiddlywiki.info`
+
+The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising the following fields:
+
+* ''plugins'' - an array of CorePlugins to be included in the wiki
+* ''doNotSave'' - an array of tiddler titles that should not be saved by the FileSystemAdaptorPlugin
+* ''includeWikis'' - an array of relative paths to external wiki folders to be included in the wiki
+
+For example:
+
+```
+{
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"doNotSave": [
+		"$:/StoryList",
+		"$:/HistoryList",
+		"$:/status/IsLoggedIn",
+		"$:/status/UserName"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	]
+}
+```

@@ -1,22 +1,21 @@
-title: TiddlyWiki5 Node Edition
-modifier: JeremyRuston
 tags: docs edition
+modifier: JeremyRuston
+title: TiddlyWiki5 Node Edition
+modified: 201304161918
 
-TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlerFiles and TiddlyWikiFiles. For example, this loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
+TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles. For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 
 ```
 node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html
 ```
 
-In order to use TiddlyWiki5 on the command line you must first install node.js:
-
-http://nodejs.org/
+In order to use TiddlyWiki5 on the command line you must first install node.js from http://nodejs.org/
 
 !!Usage
 
 Running `tiddlywiki.js` from the command line boots the TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.
 
-The first argument is the optional path to the WikiDirectory to be loaded. If not present, then the current directory is used.
+The first argument is the optional path to the [[TiddlyWikiFolder|TiddlyWikiFolders]] to be loaded. If not present, then the current directory is used.
 
 The commands and their individual arguments follow, each command being identified by the prefix `--`.
 
