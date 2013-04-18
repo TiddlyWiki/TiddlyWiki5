@@ -31,7 +31,7 @@ Getting started with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylin
 TiddlyWiki</a> under node.js</h1><div class='tw-transclude'>
 <p>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> can be used on the command line to perform an extensive set of operations based on tiddlers, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWikiFolders.html'>
+TiddlyWiki5</a> can be used on the command line to perform an extensive set of operations based on tiddlers, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWikiFolders.html'>
 TiddlyWikiFolders</a>, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlerFiles.html'>
 TiddlerFiles</a> and <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWikiFiles.html'>
 TiddlyWikiFiles</a>. For example, the following command loads the tiddlers from a <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
@@ -44,7 +44,7 @@ Usage</h2><p>
 Running <code>
 tiddlywiki.js</code> from the command line boots the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a> kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.</p><p>
-The first argument is the optional path to the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWikiFolders.html'>
+The first argument is the optional path to the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWikiFolders.html'>
 TiddlyWikiFolder</a> to be loaded. If not present, then the current directory is used.</p><p>
 The commands and their individual arguments follow, each command being identified by the prefix <code>
 --</code>.</p><pre>
