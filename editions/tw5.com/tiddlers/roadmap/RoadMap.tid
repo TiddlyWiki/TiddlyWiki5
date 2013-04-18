@@ -1,7 +1,7 @@
-tags: docs planning
-modifier: JeremyRuston
+modified: 201304181001
 title: RoadMap
-modified: 201304012030
+modifier: JeremyRuston
+tags: docs planning
 
 TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and subject to change.
 
@@ -18,6 +18,8 @@ Some of the features and fixes required before the beta is declared include:
 * ~~Saving changes to a file URI using Firefox~~
 * ~~Lazy loading~~
 * ~~Better handling of binary tiddlers~~
+* Usability improvements to sidebar
+* A decent ReleaseProcess
 
 ! Beta Release
 

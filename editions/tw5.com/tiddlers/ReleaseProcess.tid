@@ -1,0 +1,15 @@
+title: ReleaseProcess
+tags: dev docs
+modified: 201304181008
+
+To move from ''alpha'' to ''beta'', TiddlyWiki5 needs a better release and deployment process. At a minimum:
+
+* Each release should be automatically assigned a unique revision number, with a simple manual process to bump the major or minor version number
+* Each release should be available as a zip download on GitHub and tiddlywiki.com
+* A release note for end users should be automatically generated from the commits
+** The process should allow for manual editing of the release note
+* A clear distinction between a new release of the TW5 core plugins and revised content for the tw5.com website
+
+It would also be nice to have:
+
+* Automatic tweets from @TiddlyWiki announcing each release
