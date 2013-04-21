@@ -63,8 +63,8 @@ TiddlyWiki5</a> directory. You will need to create the directory before running 
 * /TiddlyWork/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
 * /TiddlyWork/jermolene.github.com/ - Directory for output files</pre><p>
 You can override the build output directory by defining the environment variable <code>
-TW5_BUILD_OUTPUT</code>. The easiest way to do this is to create a personal batch file to invoke <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWik5i.html'>
-TiddlyWik5i</a> that first sets the environment variable and then invokes <code>
+TW5_BUILD_OUTPUT</code>. The easiest way to do this is to create a personal batch file to invoke <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> that first sets the environment variable and then invokes <code>
 bld.sh</code>.</p><p>
 The files output by <code>
 bld.sh</code> are:</p><ul>
