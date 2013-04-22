@@ -1,45 +1,10 @@
 title: TiddlyWikiArchitecture
 modifier: JeremyRuston
 tags: docs internals
+modified: 201304212156
 
 The heart of TiddlyWiki can be seen as an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
 The primary use of the engine is to convert raw `text/vnd.tiddlywiki` WikiText into a `text/html` or `text/plain` representation for display. The transclusion and templating features of WikiText allow the engine to also be used to generate TiddlyWiki HTML files from raw tiddlers.
-
-You can explore this mechanism by opening the JavaScript console in your browser. Typing this command will replace the text of the tiddler `HelloThere` with new content:
-
-```
-$tw.wiki.addTiddler({title: "HelloThere", text: "This is some new content"});
-```
-
-If the tiddler `HelloThere` is visible then you'll see it instantly change to reflect the new content. If you create a tiddler that doesn't currently exist (like IntentionallyMissingTiddler) then you'll see any displayed links to it instantly change from italicised to normal:
-
-```
-$tw.wiki.addTiddler({title: "IntentionallyMissingTiddler", text: "This tiddler now exists"});
-```
-
-This example deletes a tiddler:
-
-```
-$tw.wiki.deleteTiddler("HelloThere")
-```
-
-This example retrieves all the outgoing links from a tiddler:
-
-```
-$tw.wiki.getTiddlerLinks("HelloThere")
-```
-
-This example retrieves all the incoming links to a tiddler:
-
-```
-$tw.wiki.getTiddlerLinks("HelloThere")
-```
-
-This example retrieves the titles of all the tiddlers matching a TiddlerFilter expression:
-
-```
-$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
-```
 
 If you're interested in understanding more about the internal operation of TiddlyWiki, it is recommended that you review the DeveloperDocs and read the code -- start with the boot kernel [[$:/core/boot.js]].

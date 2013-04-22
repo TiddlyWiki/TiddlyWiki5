@@ -1,7 +1,7 @@
-modified: 201304181001
-title: RoadMap
-modifier: JeremyRuston
 tags: docs planning
+modifier: JeremyRuston
+title: RoadMap
+modified: 201304212151
 
 TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and subject to change.
 
@@ -39,6 +39,7 @@ Some of the additional features under consideration during the beta include:
 * Encrypted tiddlers and ~~encrypted TiddlyWikis~~
 * Facebook, Twitter, G+ and LinkedIn macros
 * Integration with the browser back and forwards buttons
+* Minification of plugins (JS and CSS)
 
 ! 1.0 Release
 
