@@ -67,7 +67,11 @@ Display an error and exit
 */
 $tw.utils.error = function(err) {
 	console.error(err);
-	process.exit(1);
+	if($tw.browser) {
+		return null;
+	} else {
+		process.exit(1);
+	}
 };
 
 /*
@@ -271,6 +275,44 @@ $tw.utils.registerFileType = function(type,encoding,extension) {
 }
 
 /*
+Run code globally with specified context variables in scope
+*/
+$tw.utils.evalGlobal = function(code,context,filename) {
+	var contextCopy = $tw.utils.extend({},context,{
+		exports: {}
+	});
+	// Get the context variables as a pair of arrays of names and values
+	var contextNames = [], contextValues = [];
+	$tw.utils.each(contextCopy,function(value,name) {
+		contextNames.push(name);
+		contextValues.push(value);
+	});
+	// Add the code prologue and epilogue
+	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + ";})();\nreturn exports;\n})\n";
+	// Compile the code into a function
+	var fn;
+	if($tw.browser) {
+		fn = window["eval"](code);
+	} else {
+		fn = vm.runInThisContext(code,filename);		
+	}
+	// Call the function and return the exports
+	return fn.apply(null,contextValues);
+};
+
+/*
+Run code in a sandbox with only the specified context variables in scope
+*/
+$tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
+	var sandbox = $tw.utils.extend({},context);
+	$tw.utils.extend(sandbox,{
+		exports: {}		
+	});
+	vm.runInNewContext(code,sandbox,filename);
+	return sandbox.exports;
+};
+
+/*
 Creates a PasswordPrompt object
 */
 $tw.utils.PasswordPrompt = function() {
@@ -398,6 +440,57 @@ $tw.utils.Crypto = function() {
 };
 
 /////////////////////////// Module mechanism
+
+/*
+Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
+*/
+$tw.modules.execute = function(moduleName,moduleRoot) {
+	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
+		moduleInfo = $tw.modules.titles[name],
+		tiddler = $tw.wiki.getTiddler(name),
+		sandbox = {
+			module: moduleInfo,
+			exports: {},
+			console: console,
+			setInterval: setInterval,
+			clearInterval: clearInterval,
+			setTimeout: setTimeout,
+			clearTimeout: clearTimeout,
+			$tw: $tw,
+			require: function(title) {
+				return $tw.modules.execute(title,name);
+			}
+		};
+	if(!$tw.browser) {
+		$tw.utils.extend(sandbox,{
+			process: process
+		});
+	}
+	if(!moduleInfo) {
+		if($tw.browser) {
+			return $tw.utils.error("Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name);
+
+		} else {
+			// If we don't have a module with that name, let node.js try to find it
+			return require(moduleName);
+		}
+	}
+	// Execute the module if we haven't already done so
+	if(!moduleInfo.exports) {
+		try {
+			// Check the type of the definition
+			if(typeof moduleInfo.definition === "string") { // String
+				moduleInfo.exports = $tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+			} else { // Object
+				moduleInfo.exports = moduleInfo.definition;
+			}
+		} catch(e) {
+			$tw.utils.error("Error executing boot module " + name + ":\n" + e);
+		}
+	}
+	// Return the exports of the module
+	return moduleInfo.exports;
+};
 
 /*
 Apply a callback to each module of a particular type
@@ -757,35 +850,6 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 };
 
 /*
-Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
-*/
-$tw.modules.execute = function(moduleName,moduleRoot) {
-	/*jslint evil: true */
-	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		require = function(modRequire) {
-			return $tw.modules.execute(modRequire,name);
-		},
-		exports = {},
-		moduleInfo = $tw.modules.titles[name];
-	if(!moduleInfo) {
-		$tw.utils.error("Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name);
-	}
-	if(!moduleInfo.exports) {
-		if(typeof moduleInfo.definition === "string") { // String
-			moduleInfo.definition = window["eval"]("(function(module,exports,require) {" + moduleInfo.definition + "})");
-			moduleInfo.exports = {};
-			moduleInfo.definition(moduleInfo,moduleInfo.exports,require);
-		} else if(typeof moduleInfo.definition === "function") { // Function
-			moduleInfo.exports = {};
-			moduleInfo.definition(moduleInfo,moduleInfo.exports,require);
-		} else { // Object
-			moduleInfo.exports = moduleInfo.definition;
-		}
-	}
-	return moduleInfo.exports;
-};
-
-/*
 Register a deserializer that can extract tiddlers from the DOM
 */
 $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
@@ -880,51 +944,6 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 };
 
 /*
-Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
-*/
-$tw.modules.execute = function(moduleName,moduleRoot) {
-	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		moduleInfo = $tw.modules.titles[name],
-		tiddler = $tw.wiki.getTiddler(name),
-		sandbox = {
-			module: moduleInfo,
-			exports: {},
-			console: console,
-			process: process,
-			setInterval: setInterval,
-			clearInterval: clearInterval,
-			setTimeout: setTimeout,
-			clearTimeout: clearTimeout,
-			$tw: $tw,
-			require: function(title) {
-				return $tw.modules.execute(title,name);
-			}
-		};
-	if(!moduleInfo) {
-		// If we don't have a module with that name, let node.js try to find it
-		return require(moduleName);
-	}
-	// Execute the module if we haven't already done so
-	if(!moduleInfo.exports) {
-		try {
-			// Check the type of the definition
-			if(typeof moduleInfo.definition === "string") { // String
-				vm.runInNewContext(moduleInfo.definition,sandbox,tiddler.fields.title);
-				moduleInfo.exports = sandbox.exports;
-			} else if(typeof moduleInfo.definition === "function") { // Function
-				moduleInfo.exports = moduleInfo.definition(moduleInfo,sandbox.require,moduleInfo.exports);
-			} else { // Object
-				moduleInfo.exports = moduleInfo.definition;
-			}
-		} catch(e) {
-			$tw.utils.error("Error executing boot module " + name + ":\n" + e);
-		}
-	}
-	// Return the exports of the module
-	return moduleInfo.exports;
-};
-
-/*
 Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file) returned as {filepath:,type:,tiddlers:[],hasMetaFile:}
 */
 $tw.loadTiddlersFromFile = function(filepath,fields) {
@@ -963,6 +982,9 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						pathname = path.resolve(filepath,tidInfo.file),
 						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
+					if(tidInfo.prefix) {
+						text = tidInfo.prefix + text;
+					}
 					tidInfo.fields.text = text;
 					tiddlers.push({tiddlers: [tidInfo.fields]});
 				});
