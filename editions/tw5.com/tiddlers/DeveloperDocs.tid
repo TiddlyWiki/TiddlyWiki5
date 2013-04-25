@@ -1,5 +1,6 @@
-title: DeveloperDocs
 tags: docs introduction dev
+title: DeveloperDocs
+modified: 201304251644
 
 This is the developer documentation hub for TiddlyWiki.
 
@@ -29,6 +30,7 @@ Internally, TiddlyWiki is built on a number of key objects and mechanisms:
 * CommandMechanism
 * ConfigMechanism
 * EncryptionMechanism
+* TestingMechanism
 
 ! Plugin Module Types
 

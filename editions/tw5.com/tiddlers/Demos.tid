@@ -1,5 +1,6 @@
-title: Demos
 tags: introduction
+title: Demos
+modified: 201304251654
 
 Here are a few features of TiddlyWiki that you can explore:
 
@@ -8,6 +9,7 @@ Here are a few features of TiddlyWiki that you can explore:
 * Browse the list of AllTiddlers or the SystemTiddlers
 * Examine the example [[bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]]
 * Check out the TaskManagementExample
+* Run the TiddlyWiki5 [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
 
 Learn more about using TiddlyWiki5:
 

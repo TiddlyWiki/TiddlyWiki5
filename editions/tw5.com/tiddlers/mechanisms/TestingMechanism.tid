@@ -1,0 +1,35 @@
+title: TestingMechanism
+tags: docs dev
+modified: 201304251652
+
+TiddlyWiki5 incorporates the Jasmine JavaScript testing framework (see http://pivotal.github.io/jasmine/). It allows the same tests to be run both in the browser and under node.js.
+
+! TiddlyWiki5 Testing Components
+
+There are two main elements to the TiddlyWiki5 testing mechanism:
+* The plugin `tiddlywiki/jasmine` that wraps Jasmine up into a plugin along with some glue code
+* The TiddlyWiki5 edition `test` that contains the core test specifications and includes the Jasmine plugin
+
+! Running the Tests in node.js
+
+To run the tests under node.js just load up the `test` wiki:
+
+```
+node ./tiddlywiki.js \
+	./editions/test \
+```
+
+! Running the Tests in the Browser
+
+To generate a wiki containing the browser tests load up the `test` wiki and save it as an HTML file:
+
+```
+node ./tiddlywiki.js \
+	./editions/test \
+	--verbose \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/test.html text/plain \
+```
+
+Then, open the `test.html` file in the browser to see the test results. There is a prebuilt version of `test.html` at:
+
+http://five.tiddlywiki.com/test.html
