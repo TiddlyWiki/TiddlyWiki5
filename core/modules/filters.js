@@ -78,10 +78,15 @@ exports.filterFragments = {
 exports.operators = {
 	"title": { // Filter by title
 		selector: function(operator) {
-			return "$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");";
+			if(operator.prefix === "!") {
+				return "for(title in source) {if(title !== \"" + $tw.utils.stringify(operator.operand) + "\") {$tw.utils.pushTop(subResults,title);}}";
+			} else {
+				return "$tw.utils.pushTop(subResults,\"" + $tw.utils.stringify(operator.operand) + "\");";
+			}
 		},
 		filter: function(operator) {
-			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") !== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}";
+			var op = operator.prefix === "!" ? "!" : "=";
+			return "if(subResults.indexOf(\"" + $tw.utils.stringify(operator.operand) + "\") " + op + "== -1) {subResults = [\"" + $tw.utils.stringify(operator.operand) + "\"];} else {subResults = [];}";
 		}
 	},
 	"prefix": { // Filter by title prefix
