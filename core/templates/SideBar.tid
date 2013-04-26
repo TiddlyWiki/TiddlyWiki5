@@ -2,6 +2,7 @@ title: $:/templates/SideBar
 
 <!-- The implementation of tabs here is currently a bit unreadable -->
 
+<div class="tw-sidebar-lists">
 @@.search-query
 <$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/>
 @@
@@ -40,3 +41,4 @@ title: $:/templates/SideBar
 </div>
 
 </$reveal>
+</div>

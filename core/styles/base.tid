@@ -19,8 +19,10 @@ module-type: stylesheet
 
 {{$:/core/styles/reset}}
 
-* {
+*, input[type="search"] {
 	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 }
 
 html {
@@ -78,7 +80,19 @@ a.tw-tiddlylink {
 }
 
 .sidebar-header a.tw-tiddlylink {
-	color: #69699B;
+	color: #d00;
+}
+
+.sidebar-header a.tw-tiddlylink:hover {
+	color: #f66;
+}
+
+.tw-sidebar-lists a.tw-tiddlylink {
+	color: #999;
+}
+
+.tw-sidebar-lists a.tw-tiddlylink:hover {
+	color: #444;
 }
 
 a.tw-tiddlylink:hover {
@@ -159,13 +173,12 @@ a.tw-tiddlylink-missing {
 .sidebar-header {
 	position: fixed;
 	top: 0;
-	left: 0;
+	left: 55em;
 	bottom: 0;
-	width: {{$:/core/styles/metrics##sidebarwidth}};
 	overflow-y: auto;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
-	padding: 5em 0em 2em 2em;
+	padding: 6em 0 2em 0;
 	margin: 0;
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
@@ -185,8 +198,8 @@ a.tw-tiddlylink-missing {
 }
 
 .story-river {
-	margin-left: {{$:/core/styles/metrics##sidebarwidth}};
-	padding: 2em 2em 2em 0;
+	width: 55em;
+	padding: 3em;
 }
 
 @media print {
@@ -199,7 +212,6 @@ a.tw-tiddlylink-missing {
 	padding: 3em;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
-	max-width: 50em;
 	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
 }
 
@@ -220,8 +232,12 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-tiddler-controls .tw-button {
-	margin: 0 0 0 0.5em;
-	vertical-align: middle;
+	margin: 0 0 0 0.33em;
+	vertical-align: baseline;
+}
+
+.tw-tiddler-controls .tw-button img {
+	height: 0.75em;
 }
 
 .tw-tiddler-help {
@@ -356,7 +372,7 @@ a.tw-tiddlylink-missing {
 	padding: 0 0.5em 0 0.5em;
 }
 
-.tw-edit-texteditor input, .tw-edit-texteditor textarea {
+.tw-tiddler-frame .tw-edit-texteditor input, .tw-tiddler-frame .tw-edit-texteditor textarea {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
 	border: 1px solid #888;
@@ -365,13 +381,9 @@ a.tw-tiddlylink-missing {
 	margin: 0.25em 0 0.25em 0;
 }
 
-.tw-edit-texteditor input {
+.tw-tiddler-frame .tw-edit-texteditor input {
 	background-color: #f8f8f8;
 	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
-}
-
-.sidebar-header .tw-edit-texteditor input, .sidebar-header .tw-edit-texteditor textarea {
-	width: 80%;
 }
 
 canvas.tw-edit-bitmapeditor  {
