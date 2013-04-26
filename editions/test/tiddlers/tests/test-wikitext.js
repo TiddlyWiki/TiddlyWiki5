@@ -21,15 +21,24 @@ describe("WikiText tests", function() {
 	wiki.addTiddler({title: "TiddlerTwo", text: "The rain in Spain\nfalls mainly on the plain"});
 	wiki.addTiddler({title: "TiddlerThree", text: "The speed of sound\n\nThe light of speed"});
 
-	it("should render tiddlers in plain text", function() {
+	it("should render tiddlers with no special markup render as-is", function() {
 		expect(wiki.renderTiddler("text/plain","TiddlerOne")).toBe("The quick brown fox");
+	});
+	it("should preserve single new lines", function() {
 		expect(wiki.renderTiddler("text/plain","TiddlerTwo")).toBe("The rain in Spain\nfalls mainly on the plain");
+	});
+	it("should use double new lines to create paragraphs", function() {
+		// The paragraphs are lost in the conversion to plain text
 		expect(wiki.renderTiddler("text/plain","TiddlerThree")).toBe("The speed of soundThe light of speed");
 	});
 
-	it("should render tiddlers in HTML", function() {
+	it("should render plain text tiddlers as a paragraph", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerOne")).toBe("<p>\nThe quick brown fox</p>");
+	});
+	it("should preserve single new lines", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerTwo")).toBe("<p>\nThe rain in Spain\nfalls mainly on the plain</p>");
+	});
+	it("should use double new lines to create paragraphs", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerThree")).toBe("<p>\nThe speed of sound</p><p>\nThe light of speed</p>");
 	});
 
