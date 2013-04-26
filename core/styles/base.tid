@@ -175,10 +175,11 @@ a.tw-tiddlylink-missing {
 	top: 0;
 	left: 55em;
 	bottom: 0;
+	right: 0;
 	overflow-y: auto;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
-	padding: 6em 0 2em 0;
+	padding: 5em 0 2em 0;
 	margin: 0;
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
@@ -209,7 +210,7 @@ a.tw-tiddlylink-missing {
 
 .tw-tiddler-frame {
 	position: relative;
-	padding: 3em;
+	padding: 2em 3em 3em 3em;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
 	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
@@ -353,6 +354,17 @@ a.tw-tiddlylink-missing {
 
 .tw-tab-content {
 	padding-top: 1em;
+}
+
+.tw-more-sidebar .tw-tab-buttons {
+	display: inline-block;
+	vertical-align: top;
+	text-align: right;
+}
+
+.tw-more-sidebar .tw-tab-content {
+	display: inline-block;
+	vertical-align: top;
 }
 
 .tw-search-results {

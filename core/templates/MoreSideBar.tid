@@ -1,15 +1,44 @@
 title: $:/templates/MoreSideBar
 
-<div class="tw-tab-set">
-<div class="tw-tab-buttons"><$button type="set" set="$:/state/moreSideBarTabSet" setTo="tagsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tags</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="missingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Missing</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="orphanTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Orphans</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="systemTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">System</$button><$button type="set" set="$:/state/moreSideBarTabSet" setTo="shadowsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Shadows</$button></div>
-<div class="tw-tab-divider">
-</div>
-<div class="tw-tab-content">
+<div class="tw-tab-set tw-more-sidebar">
+<div class="tw-tab-buttons">
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="allTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">All</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="recentTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Recent</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="tagsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tags</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="missingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Missing</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="draftsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Drafts</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="orphanTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Orphans</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="systemTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">System</$button>
+
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="shadowsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Shadows</$button>
+
+</div><div class="tw-tab-content">
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="openTab" qualifyTiddlerTitles="yes">
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" itemClass="tw-menu-list-item"/>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="allTab" qualifyTiddlerTitles="yes">
+<$list filter="[!is[system]sort[title]]" itemClass="tw-menu-list-item"/>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="recentTab" qualifyTiddlerTitles="yes">
+<$list filter="[!is[system]!sort[modified]]" itemClass="tw-menu-list-item"/>
+</$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="tagsTab" qualifyTiddlerTitles="yes">
 <$list filter="[tags[]sort[title]]" itemClass="tw-menu-list-item" template="$:/templates/TagTemplate"/>
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="missingTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[missing]sort[title]]" itemClass="tw-menu-list-item" template="$:/templates/MissingTemplate"/>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="draftsTab" qualifyTiddlerTitles="yes">
+<$list filter="[has[draft.of]sort[title]]" itemClass="tw-menu-list-item" />
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="orphanTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[orphan]sort[title]]" itemClass="tw-menu-list-item"/>
