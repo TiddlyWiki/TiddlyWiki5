@@ -59,7 +59,15 @@ node ./tiddlywiki.js \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/empty.html text/plain \
 	|| exit 1
 
-# Fourth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
+# Fourth, tahoelafs.html: empty wiki with plugin for Tahoe-LAFS
+
+node ./tiddlywiki.js \
+	./editions/tahoelafs \
+	--verbose \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/tahoelafs.html text/plain \
+	|| exit 1
+
+# Fifth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
 node ./tiddlywiki.js \
 	./editions/test \
