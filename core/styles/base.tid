@@ -250,15 +250,6 @@ a.tw-tiddlylink-missing {
 */
 
 .sidebar-header {
-	position: fixed;
-	top: 0;
-	left: 55em;
-	bottom: 0;
-	right: 0;
-	overflow-y: auto;
-	overflow-x: auto;
-	-webkit-overflow-scrolling: touch;
-	padding: 5em 0 2em 0;
 	margin: 0;
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
@@ -268,11 +259,6 @@ a.tw-tiddlylink-missing {
 	margin-bottom: 0.2em;
 }
 
-@media print {
-.sidebar-header {
-	display: none;
-}}
-
 .tw-search-results {
 	padding-top: 1em;
 }
@@ -281,15 +267,47 @@ a.tw-tiddlylink-missing {
 	white-space: nowrap;
 }
 
-.story-river {
-	width: 55em;
-	padding: 3em;
+@media (max-width: 55em) {
+	.sidebar-header {
+		padding: 1em;
+	}
+
+	.story-river {
+		padding: 0;
+	}
+}
+
+@media (min-width: 55em) {
+	.sidebar-header {
+		position: fixed;
+		top: 0;
+		left: 55em;
+		bottom: 0;
+		right: 0;
+		overflow-y: auto;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		padding: 5em 0 2em 0;
+	}
+
+	.story-river {
+		width: 55em;
+		padding: 3em;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
 }
 
 @media print {
-.story-river {
-	margin-left: 1em;
-}}
+	.sidebar-header {
+		display: none;
+	}
+
+	.story-river {
+		margin-left: 1em;
+	}
+}
 
 /*
 ** Tiddler styles
@@ -297,10 +315,21 @@ a.tw-tiddlylink-missing {
 
 .tw-tiddler-frame {
 	position: relative;
-	padding: 2em 3em 3em 3em;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
 	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
+}
+
+@media (max-width: 55em) {
+	.tw-tiddler-frame {
+		padding: 1em 1em 1em 1em;
+	}
+}
+
+@media (min-width: 55em) {
+	.tw-tiddler-frame {
+		padding: 2em 3em 3em 3em;
+	}
 }
 
 .title {
