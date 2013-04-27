@@ -26,6 +26,10 @@ background-image: -ms-linear-gradient($gradient$);
 ```
 \end
 
+/*
+** Start with the normalize CSS reset, and then belay some of its effects
+*/
+
 {{$:/core/styles/reset}}
 
 *, input[type="search"] {
@@ -33,6 +37,10 @@ background-image: -ms-linear-gradient($gradient$);
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
+
+/*
+** Basic element styles
+*/
 
 html {
 	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -81,6 +89,19 @@ table th, table td {
 	border-left: 1px solid #ddd;
 }
 
+img, canvas, embed {
+	max-width: 100%;
+}
+
+embed {
+	width: 100%;
+	height: 20em;
+}
+
+/*
+** Links
+*/
+
 a.tw-tiddlylink {
 	text-decoration: none;
 	font-style: normal;
@@ -117,6 +138,10 @@ a.tw-tiddlylink-missing {
 	font-style: italic;
 }
 
+/*
+** Drag and drop styles
+*/
+
 .tw-tiddler-dragger {
 	display: inline-block;
 	padding: 8px 20px;
@@ -130,6 +155,38 @@ a.tw-tiddlylink-missing {
 	background-color: #000;
 	<<border-radius 20px>>
 }
+
+.tw-import {
+	position: relative;
+}
+
+.tw-drop-zone-fullscreen.tw-dragover:before {
+	z-index: 10000;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,200,0,0.7);
+	text-align: center;
+	content: "Drop here";
+}
+
+.tw-drop-zone.tw-dragover:before {
+	z-index: 10000;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,200,0,0.7);
+	text-align: center;
+	content: "Drop here";
+}
+
+/*
+** Buttons
+*/
 
 .btn-invisible {
 	padding: 0;
@@ -145,6 +202,10 @@ a.tw-tiddlylink-missing {
 .tw-menu-list-item:hover .btn-mini-close {
 	color: #444;
 }
+
+/*
+** Tags and missing tiddlers
+*/
 
 .tw-tags-wrapper {
 	margin: 0.25em 0 1em 0;
@@ -184,6 +245,10 @@ a.tw-tiddlylink-missing {
 	<<box-shadow "inset 0px 2em 0 rgba(0,0,0,0.22)">>
 }
 
+/*
+** Page layout
+*/
+
 .edit-header {
 }
 
@@ -211,6 +276,10 @@ a.tw-tiddlylink-missing {
 	display: none;
 }}
 
+.tw-search-results {
+	padding-top: 1em;
+}
+
 .tw-menu-list-item {
 	white-space: nowrap;
 }
@@ -224,6 +293,10 @@ a.tw-tiddlylink-missing {
 .story-river {
 	margin-left: 1em;
 }}
+
+/*
+** Tiddler styles
+*/
 
 .tw-tiddler-frame {
 	position: relative;
@@ -258,7 +331,7 @@ a.tw-tiddlylink-missing {
 	height: 0.75em;
 }
 
-.tw-tiddler-help {
+.tw-tiddler-help { /* Help prompts within tiddler template */
 	color: #999;
 	margin-top: 1em;
 }
@@ -266,6 +339,31 @@ a.tw-tiddlylink-missing {
 .tw-tiddler-help a.tw-tiddlylink {
 	color: #888888;
 }
+
+.tw-tiddler-frame .tw-edit-texteditor input, .tw-tiddler-frame .tw-edit-texteditor textarea {
+	width: 100%;
+	padding: 3px 3px 3px 3px;
+	border: 1px solid #888;
+	line-height: 1.3em;
+	-webkit-appearance: none;
+	margin: 0.25em 0 0.25em 0;
+}
+
+.tw-tiddler-frame .tw-edit-texteditor input {
+	background-color: #f8f8f8;
+	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
+}
+
+canvas.tw-edit-bitmapeditor  {
+	cursor: crosshair;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+
+/*
+** Dropdowns
+*/
 
 .tw-drop-down {
 	min-width: 20em;
@@ -288,6 +386,23 @@ a.tw-tiddlylink-missing {
 	background-color: {{$:/core/styles/colourmappings##linkforeground}};
 	text-decoration: none;
 }
+
+.tw-drop-down .tw-tab-buttons button {
+	background-color: #ececec;
+}
+
+.tw-drop-down .tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.tw-drop-down .tw-tab-contents a {
+	padding: 0 0.5em 0 0.5em;
+}
+
+/*
+** Modals
+*/
 
 .modal-backdrop {
 	position: fixed;
@@ -338,6 +453,10 @@ a.tw-tiddlylink-missing {
 	<<border-radius "0 0 6px 6px">>
 	<<box-shadow "inset 0 1px 0 #fff">>;
 }
+
+/*
+** Tabs
+*/
 
 .tw-tab-set {
 }
@@ -411,79 +530,4 @@ a.tw-tiddlylink-missing {
 	background-color: #fff;
 	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(255,255,255) 100%">>
 	border: none;
-}
-
-.tw-search-results {
-	padding-top: 1em;
-}
-
-.tw-drop-down .tw-tab-buttons button {
-	background-color: #ececec;
-}
-
-.tw-drop-down .tw-tab-buttons button.tw-tab-selected {
-	background-color: #fff;
-	border-bottom: 1px solid #fff;
-}
-
-.tw-drop-down .tw-tab-contents a {
-	padding: 0 0.5em 0 0.5em;
-}
-
-.tw-tiddler-frame .tw-edit-texteditor input, .tw-tiddler-frame .tw-edit-texteditor textarea {
-	width: 100%;
-	padding: 3px 3px 3px 3px;
-	border: 1px solid #888;
-	line-height: 1.3em;
-	-webkit-appearance: none;
-	margin: 0.25em 0 0.25em 0;
-}
-
-.tw-tiddler-frame .tw-edit-texteditor input {
-	background-color: #f8f8f8;
-	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
-}
-
-canvas.tw-edit-bitmapeditor  {
-	cursor: crosshair;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-}
-
-img, canvas, embed {
-	max-width: 100%;
-}
-
-embed {
-	width: 100%;
-	height: 20em;
-}
-
-.tw-import {
-	position: relative;
-}
-
-.tw-drop-zone-fullscreen.tw-dragover:before {
-	z-index: 10000;
-	display: block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	background: rgba(0,200,0,0.7);
-	text-align: center;
-	content: "Drop here";
-}
-
-.tw-drop-zone.tw-dragover:before {
-	z-index: 10000;
-	display: block;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	background: rgba(0,200,0,0.7);
-	text-align: center;
-	content: "Drop here";
 }
