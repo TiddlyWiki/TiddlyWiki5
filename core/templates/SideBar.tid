@@ -21,7 +21,7 @@ title: $:/templates/SideBar
 
 <div class="tw-tab-set">
 <div class="tw-tab-buttons"><$button type="set" set="$:/state/sideBarTabSet" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="allTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">All</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="toolsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tools</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="moreTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">More</$button></div>
-<div class="tw-tab-divider">
+<div class="tw-tab-divider tw-sidebar-tab-divider">
 </div>
 <div class="tw-tab-content">
 <$reveal type="match" state="$:/state/sideBarTabSet" text="openTab" qualifyTiddlerTitles="yes">

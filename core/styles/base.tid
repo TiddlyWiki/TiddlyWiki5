@@ -365,6 +365,12 @@ a.tw-tiddlylink-missing {
 	padding-top: 1em;
 }
 
+.tw-sidebar-tab-divider.tw-tab-divider {
+	border-top: none;
+	height: 1px;
+	<<background-linear-gradient "left, rgb(160,160,160) 0%, rgb(236,236,236) 250px">>
+}
+
 .tw-more-sidebar.tw-tab-set {
 	white-space: nowrap;
 }

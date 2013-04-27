@@ -18,8 +18,6 @@ title: $:/templates/MoreSideBar
 
 <$button type="set" set="$:/state/moreSideBarTabSet" setTo="shadowsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Shadows</$button>
 
-
-
 </div><div class="tw-tab-content">
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="allTab" qualifyTiddlerTitles="yes">
 <$list filter="[!is[system]sort[title]]" itemClass="tw-menu-list-item"/>
