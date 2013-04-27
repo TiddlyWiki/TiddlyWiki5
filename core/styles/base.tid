@@ -138,6 +138,14 @@ a.tw-tiddlylink-missing {
 	border: none;
 }
 
+.tw-menu-list-item .btn-mini-close {
+	color: #e0e0e0;
+}
+
+.tw-menu-list-item:hover .btn-mini-close {
+	color: #444;
+}
+
 .tw-tags-wrapper {
 	margin: 0.25em 0 1em 0;
 }

@@ -25,7 +25,9 @@ title: $:/templates/SideBar
 </div>
 <div class="tw-tab-content">
 <$reveal type="match" state="$:/state/sideBarTabSet" text="openTab" qualifyTiddlerTitles="yes">
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" itemClass="tw-menu-list-item"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" itemClass="tw-menu-list-item">
+<$button message="tw-close-tiddler" class="btn-invisible btn-mini-close">&times;</$button> <$view field="title" format="link"/>
+</$list>
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="allTab" qualifyTiddlerTitles="yes">
 <$list filter="[!is[system]sort[title]]" itemClass="tw-menu-list-item"/>
