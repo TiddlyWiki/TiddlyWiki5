@@ -2,5 +2,5 @@ title: HelloThere
 
 This is an experimental edition of TiddlyWiki5 for use with [[Tahoe-LAFS|https://tahoe-lafs.org/]]. At this point it is largely for experimentation by @zooko. Click the ''save changes'' button to PUT the updated TiddlyWiki HTML file back to the server.
 
-<$button message="tw-new-tiddler" class="btn btn-mini btn-success">New Tiddler</$button>
-<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save Changes</$button>
+<$button message="tw-new-tiddler" class="btn btn-success">New Tiddler</$button>
+<$button message="tw-save-wiki" class="btn btn-primary">Save Changes</$button>

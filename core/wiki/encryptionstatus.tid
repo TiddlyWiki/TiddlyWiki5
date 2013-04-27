@@ -2,10 +2,10 @@ title: $:/snippets/encryptionstatus
 
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 This wiki is encrypted.
-<$button message="tw-clear-password" class="btn btn-mini btn-danger">Clear password</$button>
-<$button message="tw-set-password" class="btn btn-mini btn-warning">Change password</$button>
+<$button message="tw-clear-password" class="btn btn-danger">Clear password</$button>
+<$button message="tw-set-password" class="btn btn-warning">Change password</$button>
 </$reveal>
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
 This wiki is not encrypted.
-<$button message="tw-set-password" class="btn btn-mini btn-warning">Set password</$button>
+<$button message="tw-set-password" class="btn btn-warning">Set password</$button>
 </$reveal>

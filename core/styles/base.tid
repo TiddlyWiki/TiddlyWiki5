@@ -249,9 +249,6 @@ a.tw-tiddlylink-missing {
 ** Page layout
 */
 
-.edit-header {
-}
-
 .sidebar-header {
 	position: fixed;
 	top: 0;

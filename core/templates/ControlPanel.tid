@@ -1,6 +1,6 @@
 title: $:/templates/ControlPanel
 
-<$button message="tw-new-tiddler" class="btn btn-mini btn-success">New Tiddler</$button>
+<$button message="tw-new-tiddler" class="btn btn-success">New Tiddler</$button>
 
 ---
 
@@ -12,7 +12,7 @@ Drop files here
 
 ---
 
-<$button message="tw-save-wiki" class="btn btn-mini btn-primary">Save Changes</$button>
+<$button message="tw-save-wiki" class="btn btn-primary">Save Changes</$button>
 
 ---
 
