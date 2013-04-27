@@ -87,7 +87,7 @@ ClassicListView.prototype.remove = function(index) {
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
-		{transform: "translateX(" + currWidth + "px)"},
+		{transform: "translateX(-" + currWidth + "px)"},
 		{marginBottom: (-currHeight) + "px"},
 		{opacity: "0.0"}
 	]);
