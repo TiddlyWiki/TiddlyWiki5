@@ -16,6 +16,15 @@ module-type: stylesheet
           box-shadow: $shadow$;
 ```
 \end
+\define background-linear-gradient(gradient)
+```
+background-image: linear-gradient($gradient$);
+background-image: -o-linear-gradient($gradient$);
+background-image: -moz-linear-gradient($gradient$);
+background-image: -webkit-linear-gradient($gradient$);
+background-image: -ms-linear-gradient($gradient$);
+```
+\end
 
 {{$:/core/styles/reset}}
 
@@ -356,15 +365,38 @@ a.tw-tiddlylink-missing {
 	padding-top: 1em;
 }
 
+.tw-more-sidebar.tw-tab-set {
+	white-space: nowrap;
+}
+
 .tw-more-sidebar .tw-tab-buttons {
 	display: inline-block;
 	vertical-align: top;
 	text-align: right;
+	padding-top: 0em;
+	padding-left: 1em;
 }
 
 .tw-more-sidebar .tw-tab-content {
 	display: inline-block;
 	vertical-align: top;
+	padding-top: 0em;
+	padding-left: 1em;
+}
+
+.tw-more-sidebar .tw-tab-buttons button {
+	background-color: #ececec;
+	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(224,224,224) 100%">>
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #ccc;
+}
+
+.tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(255,255,255) 100%">>
+	border: none;
 }
 
 .tw-search-results {
