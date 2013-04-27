@@ -36,6 +36,7 @@ NavigatorWidget.prototype.generate = function() {
 		{name: "tw-save-tiddler", handlerObject: this, handlerMethod: "handleSaveTiddlerEvent"},
 		{name: "tw-cancel-tiddler", handlerObject: this, handlerMethod: "handleCancelTiddlerEvent"},
 		{name: "tw-close-tiddler", handlerObject: this, handlerMethod: "handleCloseTiddlerEvent"},
+		{name: "tw-close-all-tiddlers", handlerObject: this, handlerMethod: "handleCloseAllTiddlersEvent"},
 		{name: "tw-new-tiddler", handlerObject: this, handlerMethod: "handleNewTiddlerEvent"}
 	];
 };
@@ -110,6 +111,14 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 		this.storyList.splice(slot,1);
 		this.saveStoryList();
 	}
+	event.stopPropagation();
+	return false;
+};
+
+// Close all tiddlers
+NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
+	this.storyList = [];
+	this.saveStoryList();
 	event.stopPropagation();
 	return false;
 };

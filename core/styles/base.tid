@@ -195,11 +195,11 @@ a.tw-tiddlylink-missing {
 	border: none;
 }
 
-.tw-menu-list-item .btn-mini-close {
+.btn-mini {
 	color: #e0e0e0;
 }
 
-.tw-menu-list-item:hover .btn-mini-close {
+.btn-mini:hover {
 	color: #444;
 }
 
