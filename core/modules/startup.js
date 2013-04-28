@@ -89,8 +89,10 @@ exports.startup = function() {
 		document.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
+		// Unpack the current theme tiddlers
+		$tw.wiki.unpackPluginTiddlers("theme");
 		// Apply stylesheets
-		var stylesheetTiddlers = $tw.wiki.filterTiddlers("[tag[$:/tags/stylesheet]]");
+		var stylesheetTiddlers = $tw.wiki.filterTiddlers("[is[shadow]tag[$:/tags/stylesheet]]");
 		$tw.utils.each(stylesheetTiddlers,function(title,index) {
 			// Stylesheets don't refresh, yet
 			var parser = $tw.wiki.parseTiddler(title),

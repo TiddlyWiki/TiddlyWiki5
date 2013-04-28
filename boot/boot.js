@@ -639,22 +639,22 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 /*
 Extract constituent tiddlers from plugin tiddlers so that we can easily access them in getTiddler()
 */
-$tw.Wiki.prototype.unpackPluginTiddlers = function() {
+$tw.Wiki.prototype.unpackPluginTiddlers = function(pluginType) {
 	// Collect up the titles of all the plugin tiddlers
 	var self = this,
 		pluginInfoList = [];
 	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
-		if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin")) {
+		if(tiddler.fields.type === "application/json" && tiddler.hasField("plugin") && tiddler.fields["plugin-type"] === pluginType) {
 			pluginInfoList.push(tiddler);
 		}
 	});
-	// Sort the titles by the `pluginPriority` field
+	// Sort the titles by the `plugin-priority` field
 	pluginInfoList.sort(function(a,b) {
-		if("pluginPriority" in a.fields && "pluginPriority" in b.fields) {
-			return a.fields.pluginPriority - b.fields.pluginPriority;
-		} else if("pluginPriority" in a.fields) {
+		if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
+			return a.fields["plugin-priority"] - b.fields["plugin-priority"];
+		} else if("plugin-priority" in a.fields) {
 			return -1;
-		} else if("pluginPriority" in b.fields) {
+		} else if("plugin-priority" in b.fields) {
 			return +1;
 		} else if(a.fields.title < b.fields.title) {
 			return -1;
@@ -1039,8 +1039,8 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			type: "application/json",
 			plugin: "yes",
 			text: JSON.stringify(pluginInfo,null,4),
-			pluginPriority: pluginInfo.pluginPriority,
-			pluginType: pluginInfo.pluginType || "plugin"
+			"plugin-priority": pluginInfo["plugin-priority"],
+			"plugin-type": pluginInfo["plugin-type"] || "plugin"
 		}
 		return fields;
 	} else {
@@ -1206,7 +1206,7 @@ $tw.boot.startup = function() {
 	// Load tiddlers
 	$tw.loadTiddlers();
 	// Unpack plugin tiddlers
-	$tw.wiki.unpackPluginTiddlers();
+	$tw.wiki.unpackPluginTiddlers("plugin");
 	// Register typed modules from the tiddlers we've just loaded
 	$tw.wiki.defineTiddlerModules();
 	// And any modules within plugins
