@@ -1038,10 +1038,9 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			title: pluginInfo.title,
 			type: "application/json",
 			plugin: "yes",
-			text: JSON.stringify(pluginInfo,null,4)
-		}
-		if("pluginPriority" in pluginInfo) {
-			fields.pluginPriority = pluginInfo.pluginPriority;
+			text: JSON.stringify(pluginInfo,null,4),
+			pluginPriority: pluginInfo.pluginPriority,
+			pluginType: pluginInfo.pluginType || "plugin"
 		}
 		return fields;
 	} else {
