@@ -3,6 +3,9 @@
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem"
 	],
+	"themes": [
+		"tiddlywiki/snowwhite"
+	],
 	"doNotSave": [
 		"$:/StoryList",
 		"$:/HistoryList",

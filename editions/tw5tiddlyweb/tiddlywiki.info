@@ -2,5 +2,8 @@
 	"plugins": [
 		"tiddlywiki/fullscreen",
 		"tiddlywiki/tiddlyweb"
+	],
+	"themes": [
+		"tiddlywiki/snowwhite"
 	]
 }

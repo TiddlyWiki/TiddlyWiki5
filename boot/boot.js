@@ -1086,6 +1086,16 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 			}
 		}
 	}
+	// Load any themes listed in the wiki info file
+	if(wikiInfo.themes) {
+		var themesBasePath = path.resolve($tw.boot.corePath,$tw.config.themesPath);
+		for(var t=0; t<wikiInfo.themes.length; t++) {
+			pluginFields = $tw.loadPluginFolder(path.resolve(themesBasePath,"./" + wikiInfo.themes[t]));
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
+			}
+		}
+	}
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
@@ -1139,6 +1149,7 @@ $tw.boot.startup = function() {
 		},
 		config: { // Configuration overridables
 			pluginsPath: "../plugins/",
+			themesPath: "../themes/",
 			wikiInfo: "./tiddlywiki.info",
 			wikiPluginsSubDir: "./plugins",
 			wikiTiddlersSubDir: "./tiddlers",

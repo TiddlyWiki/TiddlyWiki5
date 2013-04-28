@@ -1,0 +1,7 @@
+{
+	"title": "$:/themes/tiddlywiki/snowwhite",
+	"description": "A simple, plain layout",
+	"author": "JeremyRuston",
+	"version": "0.0.0",
+	"coreVersion": ">=5.0.0"
+}

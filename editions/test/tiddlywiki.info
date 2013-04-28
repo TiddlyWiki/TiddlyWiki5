@@ -1,5 +1,8 @@
 {
 	"plugins": [
 		"tiddlywiki/jasmine"
+	],
+	"themes": [
+		"tiddlywiki/snowwhite"
 	]
 }
