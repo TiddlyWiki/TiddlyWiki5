@@ -90,7 +90,8 @@ exports.startup = function() {
 			$tw.crypto.setPassword(null);
 		});
 		// Apply stylesheets
-		$tw.utils.each($tw.modules.types.stylesheet,function(moduleInfo,title) {
+		var stylesheetTiddlers = $tw.wiki.filterTiddlers("[tag[$:/tags/stylesheet]]");
+		$tw.utils.each(stylesheetTiddlers,function(title,index) {
 			// Stylesheets don't refresh, yet
 			var parser = $tw.wiki.parseTiddler(title),
 				renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki});
