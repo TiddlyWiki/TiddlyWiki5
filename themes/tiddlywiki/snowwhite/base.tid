@@ -296,9 +296,6 @@ a.tw-tiddlylink-missing {
 	}
 }
 
-@media (min-width: 768px) and (max-width: 979px) {
-}
-
 @media print {
 	.sidebar-header {
 		display: none;
@@ -526,7 +523,12 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-more-sidebar.tw-tab-set {
 	white-space: nowrap;
-	margin-left: -3em;
+}
+
+@media (min-width: 55em) {
+	.tw-more-sidebar.tw-tab-set {
+		margin-left: -3em;
+	}
 }
 
 .tw-more-sidebar .tw-tab-buttons {
