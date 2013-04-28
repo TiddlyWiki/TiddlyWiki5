@@ -250,7 +250,6 @@ a.tw-tiddlylink-missing {
 */
 
 .sidebar-header {
-	margin: 0;
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
 
@@ -287,7 +286,8 @@ a.tw-tiddlylink-missing {
 		overflow-y: auto;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
-		padding: 5em 0 2em 0;
+		margin: 0 0 0 -3em;
+		padding: 5em 0 2em 3em;
 	}
 
 	.story-river {
@@ -526,6 +526,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-more-sidebar.tw-tab-set {
 	white-space: nowrap;
+	margin-left: -3em;
 }
 
 .tw-more-sidebar .tw-tab-buttons {
@@ -533,7 +534,7 @@ canvas.tw-edit-bitmapeditor  {
 	vertical-align: top;
 	text-align: right;
 	padding-top: 0em;
-	padding-left: 1em;
+	padding-left: 0em;
 }
 
 .tw-more-sidebar .tw-tab-content {
