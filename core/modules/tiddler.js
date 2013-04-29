@@ -16,6 +16,10 @@ exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
 
+exports.hasField = function(field) {
+	return $tw.utils.hop(this.fields,field);
+}
+
 exports.getFieldString = function(field) {
 	var value = this.fields[field];
 	// Check for a missing field
