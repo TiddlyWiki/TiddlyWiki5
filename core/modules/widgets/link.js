@@ -78,10 +78,10 @@ LinkWidget.prototype.generate = function() {
 			this.attributes.href = this.to;
 		} else {
 			var wikiLinkTemplateMacro = this.renderer.findMacroDefinition("tw-wikilink-template"),
-				wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.text.trim() : "$uri_encoded$",
-				wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
-				wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
-			this.attributes.href = wikiLinkText;
+				wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.text.trim() : "$uri_encoded$";
+			this.wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
+			this.wikiLinkText = this.wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+			this.attributes.href = this.wikiLinkText;
 		}
 		this.events = events;
 	} else {
@@ -101,6 +101,7 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 			navigateFromClientRect: this.renderer.domNode.getBoundingClientRect()
 		});
 		event.preventDefault();
+		event.stopPropagation();
 		return false;
 	}
 };
@@ -152,6 +153,10 @@ LinkWidget.prototype.postRenderInDom = function() {
 	// Add the draggable attribute to links (we don't include it in the static HTML representation)
 	if(this.renderer.domNode.tagName === "A") {
 		this.renderer.domNode.setAttribute("draggable",true);
+	}
+	// Hack the href of internal links to include a #, again omitted from the static representation. This helps the browser see it as an internal link (eg it prevents Mobile Safari on iPhone from sliding the address bar into view)
+	if(!this.isExternal) {
+		this.renderer.domNode.setAttribute("href","#" + this.wikiLinkText);
 	}
 };
 
