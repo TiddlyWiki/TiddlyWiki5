@@ -227,7 +227,7 @@ a.tw-tiddlylink-missing {
 
 .tw-tag-label {
 	display: inline-block;
-	padding: 2px 4px;
+	padding: 2px 6px;
 	font-size: 11.844px;
 	font-weight: bold;
 	line-height: 14px;
@@ -236,13 +236,7 @@ a.tw-tiddlylink-missing {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: #999999;
-	border: 1px solid rgba(0,0,0,0.0);
-	<<border-radius 3px>>
-	<<box-shadow "inset 1px 1px 0 rgba(255,255,255,0.22)">>
-}
-
-.tw-tag-label:hover {
-	<<box-shadow "inset 0px 2em 0 rgba(0,0,0,0.22)">>
+	<<border-radius 5px>>
 }
 
 /*
