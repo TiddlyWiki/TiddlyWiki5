@@ -211,11 +211,14 @@ Syncer.prototype.syncToServer = function(changes) {
 	var self = this,
 		now = new Date();
 	$tw.utils.each(changes,function(change,title,object) {
-		// Queue a task to sync this tiddler
-		self.enqueueSyncTask({
-			type: change.deleted ? "delete" : "save",
-			title: title
-		});
+		// Ignore the change if it is a shadow tiddler
+		if((change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) || (!change.deleted && self.wiki.tiddlerExists(title))) {
+			// Queue a task to sync this tiddler
+			self.enqueueSyncTask({
+				type: change.deleted ? "delete" : "save",
+				title: title
+			});
+		}
 	});
 };
 
