@@ -84,19 +84,28 @@ encrypted.html</code> <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlyli
 TiddlyWiki5</a> standalone HTML file encrypted with the password <code>
 password</code></li><li>
 <code>
+test.html</code> <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> browser-based test suite (see <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TestingMechanism.html'>
+TestingMechanism</a>)</li><li>
+<code>
 static.html</code> static HTML version of the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/DefaultTiddlers.html'>
 DefaultTiddlers</a> of the <code>
 tw5.com</code> edition</li><li>
 <code>
 static/*.html</code> and <code>
-static/static.css</code> static HTML versions of individual tiddlers</li></ul><h3 class=''>
+static/static.css</code> static HTML versions of individual tiddlers</li></ul><p>
+<code>
+bld.sh</code> also runs the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+TiddlyWiki5</a> node.js-based test suite (see <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TestingMechanism.html'>
+TestingMechanism</a>)</p><h3 class=''>
 <code>
 serve.sh</code> serves tw5.com</h3><p>
 This batch file starts <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> running as an HTTP server with the content from the <code>
 clientserver</code> edition. By default, the script serves on port 8080.</p><p>
 To experiment with this configuration, run the script and then visit <code>
-http://0.0.0.0:8080</code> in a browser. Currently changes do get synced to the server but the server doesn't yet save the changes back to the file system. Thus the best way to experiment with this edition is by visiting it in two different browsers, exploring how the changes made in one browser propogate to the other.</p><h3 class=''>
+http://0.0.0.0:8080</code> in a browser.</p><p>
+Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).</p><h3 class=''>
 <code>
 wbld.sh</code> builds <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
