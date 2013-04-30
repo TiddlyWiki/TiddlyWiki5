@@ -32,6 +32,8 @@ exports.startup = function() {
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Set up the command modules
 	$tw.Commander.initCommands();
+	// Kick off the theme manager
+	$tw.themeManager = new $tw.ThemeManager($tw.wiki);
 	// Get the default tiddlers
 	var defaultTiddlersTitle = "$:/DefaultTiddlers",
 		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
@@ -89,8 +91,7 @@ exports.startup = function() {
 		document.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
-		// Kick off the theme and the stylesheet manager
-		$tw.themeManager = new $tw.ThemeManager($tw.wiki);
+		// Kick off the stylesheet manager
 		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
