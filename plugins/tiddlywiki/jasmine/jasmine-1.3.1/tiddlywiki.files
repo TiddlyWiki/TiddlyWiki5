@@ -13,7 +13,7 @@
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/jasmine/jasmine.css",
-				"module-type": "stylesheet"
+				"tags": "[[$:/tags/stylesheet]]"
 			}
 		},{
 			"file": "jasmine.js",
