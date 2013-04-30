@@ -3,7 +3,7 @@ title: $:/core/modules/tiddler.js
 type: application/javascript
 module-type: tiddlermethod
 
-Extension methods for the $tw.Tiddler object
+Extension methods for the $tw.Tiddler object (constructor and methods required at boot time are in boot/boot.js)
 
 \*/
 (function(){
@@ -16,8 +16,8 @@ exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
 
-exports.hasField = function(field) {
-	return $tw.utils.hop(this.fields,field);
+exports.isPlugin = function() {
+	return this.fields.type === "application/json" && this.hasField("plugin") && this.hasField("plugin-type");
 }
 
 exports.getFieldString = function(field) {
