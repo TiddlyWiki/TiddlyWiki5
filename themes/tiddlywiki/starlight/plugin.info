@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/starlight",
+	"description": "A simple, dark layout",
+	"author": "JeremyRuston",
+	"version": "0.0.0",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
+}

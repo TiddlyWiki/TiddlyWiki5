@@ -3,6 +3,7 @@
 		"tiddlywiki/fullscreen"
 	],
 	"themes": [
-		"tiddlywiki/snowwhite"
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/starlight"
 	]
 }
