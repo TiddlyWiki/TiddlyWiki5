@@ -1,0 +1,17 @@
+title: $:/snippets/themeswitcher
+
+Current theme: {{$:/theme}}
+
+<$linkcatcher to="$:/theme">
+
+<$list filter="[plugin-type[theme]]">
+
+<$link to={{##title}}>
+
+<$view field="name" format="text"/>
+
+</$link>
+
+</$list>
+
+</$linkcatcher>
