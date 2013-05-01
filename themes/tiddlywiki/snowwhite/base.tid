@@ -109,14 +109,6 @@ a.tw-tiddlylink {
 	color: {{$:/core/styles/colourmappings##linkforeground}};
 }
 
-.sidebar-header a.tw-tiddlylink {
-	color: #d00;
-}
-
-.sidebar-header a.tw-tiddlylink:hover {
-	color: #f66;
-}
-
 .tw-sidebar-lists a.tw-tiddlylink {
 	color: #999;
 }
