@@ -6,7 +6,7 @@ Current theme: {{$:/theme}}
 
 <$list filter="[plugin-type[theme]]">
 
-<$link to={{##title}}>
+<$reveal state="$:/theme" type="match" text={{##title}}>&bull;</$reveal><$reveal state="$:/theme" type="nomatch" text={{##title}}>&nbsp;</$reveal> <$link to={{##title}}>
 
 <$view field="name" format="text"/>
 
