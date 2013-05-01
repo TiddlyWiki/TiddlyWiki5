@@ -3,9 +3,12 @@ title: $:/templates/SideBar
 <!-- The implementation of tabs here is currently a bit unreadable -->
 
 <div class="tw-sidebar-lists">
-@@.search-query
-<$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/>
-@@
+
+<$linkcatcher to="$:/temp/search">
+
+<div class="tw-search"><$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/><$reveal state="$:/temp/search" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button.svg}}</$link></$reveal></div>
+
+</$linkcatcher>
 
 <$reveal state="$:/temp/search" type="nomatch" text="">
 

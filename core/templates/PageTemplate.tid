@@ -8,7 +8,7 @@ title: $:/templates/PageTemplate
 <!-- The sidebar header -->
 <header class="sidebar-header">
 
-{{SiteTitle}}.title <br><small>{{SiteSubtitle}}</small><br><br>
+{{SiteTitle}}.title <br><small>{{SiteSubtitle}}</small>
 
 {{$:/templates/SideBar}}
 
