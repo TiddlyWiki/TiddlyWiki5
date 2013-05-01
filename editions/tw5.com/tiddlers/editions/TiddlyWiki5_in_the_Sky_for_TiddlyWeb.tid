@@ -1,6 +1,7 @@
-title: TiddlyWiki5 in the Sky for TiddlyWeb
-modifier: JeremyRuston
 tags: edition docs
+modifier: JeremyRuston
+title: TiddlyWiki5 in the Sky for TiddlyWeb
+modified: 201305011456
 
 The TiddlyWiki5 in the Sky for TiddlyWeb allows content to be synchronised between TiddlyWiki5 running in the browser and a TiddlyWeb (or TiddlySpace) server. Features include:
 
@@ -18,6 +19,6 @@ The implementation is somewhat experimental, and includes these limitations:
 To try out TiddlyWiki5 in the Sky for TiddlyWeb:
 
 # If necessary, create an account at http://tiddlyspace.com/
-# Create a new space, eg `myspace`
+# Create a new space, eg `<myspace>`
 # Include the space `tw5tiddlyweb`
-# Visit `http://myspace.tiddlyspace.com/tw5`
+# Visit `http://<myspace>.tiddlyspace.com/tw5`

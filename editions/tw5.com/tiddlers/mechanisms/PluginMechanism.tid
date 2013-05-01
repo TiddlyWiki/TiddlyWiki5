@@ -1,10 +1,17 @@
-tags: docs mechanism
+modified: 201305011454
 title: PluginMechanism
-modified: 201304152135
+tags: docs mechanism
 
-[[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the loaded plugins are searched for it instead.
+[[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the registered plugins are searched for it instead.
 
 Tiddlers within plugins behave something like shadow tiddlers in classic TiddlyWiki: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
+
+Plugins also have a `plugin-type` field that may be:
+
+* `plugin` //(default)// - a plain plugin
+* `theme` - a theme plugin (see ThemeMechanism)
+
+Plugins can be used to package ordinary content, or can include JavaScript [[modules|Modules]] that extend and enhance the core TiddlyWiki5 functionality.
 
 Plugins conventionally have a title of the form `$:/plugins/publisher/name`. Plugins that are part of the core TiddlyWiki distribution have titles of the form `$:/plugins/tiddlywiki/name`.
 
@@ -24,34 +31,21 @@ The JSON structure for plugin tiddlers is as follows:
 	"version": "1.2.3-alpha3",
 	"coreVersion": ">=5.0.0",
 	"source": "http://tiddlywiki.com/MyPlugin",
+	"plugin-type": "plugin",
 	"tiddlers": {
-		"title1": {"type": "image/png", "text": "<base64>"},
+		"$:/plugins/publisher/name/title1": {"type": "image/png", "text": "<base64>"},
 		"title2": {"text": "Text"}
 	}
 }
 ```
 
-The titles of the individual tiddlers within a plugin are automatically prefixed with the title of the plugin itself and a slash `/`. Thus, in the example above the two tiddlers within the plugin will have the titles `$:/plugins/publisher/name/title1` and `$:/plugins/publisher/name/title2`.
+The titles of the individual tiddlers are typically prefixed with the title of the containing plugin (as in the **title1** example above), but they are not restricted to do so (the second example specifies a tiddler with the raw title **title2**).
 
 ! Plugin folders
 
-On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.bundle` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
+On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
 
-The `plugin.bundle` file should contain the following JSON structure:
-
-```
-{
-	"metadata": {
-		<as described above>
-	},
-	"externalTiddlers": [
-		{"file": "../MyFile.png", "fields": {"title": "MyTitle", "type": "image/png"}},
-		{"file": "../MyFile.txt", "fields": {"title": "MyTitle2"}}
-	]
-}
-```
-
-The titles of the external tiddlers are again relative to the title of the plugin. Constituent tiddler files must specify the full title of the tiddler, including the name of the plugin.
+The `plugin.info` file should contain the same JSON as given for plugin tiddlers above, with the `tiddlers` object omitted.
 
 ! Plugin library
 
@@ -80,4 +74,4 @@ Plugins can also be included manually by copying them into the `plugins` subfold
 
 The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.
 
-In the browser, any constituent tiddlers that are static styles (ie shadow tiddlers of content type `text/css`) or JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are added to the DOM during startup processing.
+In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are executed during startup processing.

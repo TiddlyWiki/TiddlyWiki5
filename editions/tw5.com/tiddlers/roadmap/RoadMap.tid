@@ -1,7 +1,7 @@
-tags: docs planning
-modifier: JeremyRuston
+modified: 201305011440
 title: RoadMap
-modified: 201304212151
+modifier: JeremyRuston
+tags: docs planning
 
 TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and subject to change.
 
@@ -18,7 +18,7 @@ Some of the features and fixes required before the beta is declared include:
 * ~~Saving changes to a file URI using Firefox~~
 * ~~Lazy loading~~
 * ~~Better handling of binary tiddlers~~
-* Usability improvements to sidebar
+* ~~Usability improvements to sidebar~~
 * A decent ReleaseProcess
 
 ! Beta Release
@@ -41,6 +41,6 @@ Some of the additional features under consideration during the beta include:
 * Integration with the browser back and forwards buttons
 * Minification of plugins (JS and CSS)
 
-! 1.0 Release
+! 5.0 Release
 
-Hopefully, TiddlyWiki5 will reach version 1.0 while we're still early in 2013. This is the point at which it is declared stable enough for general use. It will continue to improve and evolve after 1.0, although constrained to remain backwards compatible so that plugins and content created for version 1.0 will continue to work into the indefinite future.
+Hopefully, TiddlyWiki5 will leave beta and become a full release while we're still in the middle of 2013. This is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
