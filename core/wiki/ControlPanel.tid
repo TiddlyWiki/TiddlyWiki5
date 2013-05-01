@@ -1,0 +1,23 @@
+title: $:/ControlPanel
+
+! Import tiddlers
+
+Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately).
+
+<$import class="tw-drop-zone"/>
+
+! Save changes
+
+<$button message="tw-save-wiki" class="btn btn-primary">Save Changes</$button>
+
+! Encryption
+
+The tiddlers in TiddlyWiki documents can be securely encrypted by specifying a password before saving changes.
+
+{{$:/snippets/encryptionstatus}}
+
+! Theme
+
+{{$:/snippets/themeswitcher}}
+
+{{$:/templates/ServerControlPanel}}

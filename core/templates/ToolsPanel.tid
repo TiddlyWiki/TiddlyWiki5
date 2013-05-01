@@ -1,0 +1,15 @@
+title: $:/templates/ToolsPanel
+
+Import: <$import class="tw-drop-zone"/>
+
+---
+
+<$button message="tw-save-wiki" class="btn btn-primary">Save Changes</$button>
+
+---
+
+{{$:/snippets/encryptionstatus}}
+
+---
+
+{{$:/snippets/themeswitcher}}

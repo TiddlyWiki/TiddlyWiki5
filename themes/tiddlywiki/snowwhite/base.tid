@@ -252,8 +252,12 @@ a.tw-tiddlylink-missing {
 	padding-top: 1em;
 }
 
-.tw-page-controls .tw-button img {
-	height: 1em;
+.tw-page-controls {
+	margin-top: 1em;
+}
+
+.tw-page-controls img {
+	height: 1.5em;
 }
 
 .tw-menu-list-item {
