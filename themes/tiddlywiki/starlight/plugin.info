@@ -5,7 +5,6 @@
 	"version": "0.0.0",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "$:/themes/tiddlywiki/starlight/description",
-	"thumbnail": "$:/themes/tiddlywiki/starlight/thumbnail",
+	"description": "An alternate theme",
 	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
 }

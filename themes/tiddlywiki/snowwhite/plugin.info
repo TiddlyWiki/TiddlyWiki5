@@ -5,6 +5,5 @@
 	"version": "0.0.0",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "$:/themes/tiddlywiki/snowwhite/description",
-	"thumbnail": "$:/themes/tiddlywiki/snowwhite/thumbnail"
+	"description": "A plain simple theme that emphasises individual tiddlers"
 }
