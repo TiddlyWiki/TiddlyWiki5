@@ -521,7 +521,7 @@ canvas.tw-edit-bitmapeditor  {
 
 @media (min-width: 55em) {
 	.tw-more-sidebar.tw-tab-set {
-		margin-left: -3em;
+		margin-left: -1em;
 	}
 }
 
