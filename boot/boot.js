@@ -1076,6 +1076,9 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			plugin: "yes",
 			text: JSON.stringify(pluginInfo,null,4),
 			"plugin-priority": pluginInfo["plugin-priority"],
+			"name": pluginInfo["name"],
+			"thumbnail": pluginInfo["thumbnail"],
+			"description": pluginInfo["description"],
 			"plugin-type": pluginInfo["plugin-type"] || "plugin"
 		}
 		return fields;
