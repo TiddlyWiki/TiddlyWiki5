@@ -30,6 +30,13 @@ background-image: -ms-linear-gradient($gradient$);
 Placeholder for a more thorough refinement of Snow White
 */
 
+@font-face {
+  font-family: "Arvo";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Arvo"), url({{$:/themes/tiddlywiki/starlight/arvo.woff}}) format("woff");
+}
+
 html body {
-	font-family: "Georgia", "Times";
+	font-family: "Arvo", "Times";
 }
