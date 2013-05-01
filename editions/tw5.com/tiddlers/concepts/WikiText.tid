@@ -1,6 +1,7 @@
-title: WikiText
-type: text/vnd.tiddlywiki
 tags: docs concepts
+type: text/vnd.tiddlywiki
+title: WikiText
+modified: 201305011529
 
 \define wikitext-example(src)
 ```
@@ -150,7 +151,7 @@ You can use this construction to cause the wrapped content to be assigned specif
 
 <<wikitext-example src:"@@.myStyle
 * List One
-* List Two	
+* List Two
 @@
 ">>
 
@@ -158,13 +159,13 @@ Similar syntax is used to assign styles. For example:
 
 <<wikitext-example src:"@@background-color:red;
 * List One
-* List Two	
+* List Two
 @@
 ">>
 
 Multiple styles and classes can be mixed. For example:
 
-<<wikitext-example src:"@@.aClass
+<<wikitext-example src:"@@.tw-tiddler-frame
 @@width:400px;
 Some text
 @@
