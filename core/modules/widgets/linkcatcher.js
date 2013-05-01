@@ -3,7 +3,9 @@ title: $:/core/modules/widget/linkcatcher.js
 type: application/javascript
 module-type: widget
 
-Implements the linkcatcher widget.
+Implements the linkcatcher widget. It intercepts navigation events from its children, preventing normal navigation, and instead stores the name of the target tiddler in the text reference specified in the `to` attribute.
+
+Using the linkcatcher widget allows the linking mechanism to be used for tasks like selecting the current theme tiddler from a list.
 
 \*/
 (function(){
