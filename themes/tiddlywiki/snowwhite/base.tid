@@ -258,6 +258,7 @@ a.tw-tiddlylink-missing {
 
 .tw-page-controls img {
 	height: 1.5em;
+	padding-right: 0.5em;
 }
 
 .tw-menu-list-item {
@@ -312,7 +313,12 @@ a.tw-tiddlylink-missing {
 	position: relative;
 	margin-bottom: 2em;
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
-	<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
+}
+
+@media screen {
+	.tw-tiddler-frame {
+		<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
+	}
 }
 
 @media (max-width: 55em) {
@@ -350,6 +356,12 @@ a.tw-tiddlylink-missing {
 
 .tw-tiddler-controls .tw-button img {
 	height: 0.75em;
+}
+
+@media print {
+	.tw-tiddler-controls {
+		display: none;
+	}
 }
 
 .tw-tiddler-help { /* Help prompts within tiddler template */
