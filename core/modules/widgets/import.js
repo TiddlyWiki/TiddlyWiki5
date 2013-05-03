@@ -222,7 +222,7 @@ ImportWidget.prototype.importFiles = function(files) {
 					$tw.utils.each(tiddlers,function(tiddlerFields) {
 						tiddlerFields.title = self.generateTitle(tiddlerFields.title);
 						self.storeTiddler(tiddlerFields);
-						self.openTiddler(title);
+						self.openTiddler(tiddlerFields.title);
 					});
 				}
 			}
