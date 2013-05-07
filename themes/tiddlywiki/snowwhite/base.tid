@@ -487,6 +487,25 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 /*
+** Notifications
+*/
+
+.tw-notification {
+	position: fixed;
+	top: 1em;
+	right: 1em;
+	z-index: 1000;
+	max-width: 20em;
+	padding: 0em 1em 0em 1em;
+	background-color: #ffd;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,.3);
+	<<border-radius 6px>>
+	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
+	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
+}
+
+/*
 ** Tabs
 */
 

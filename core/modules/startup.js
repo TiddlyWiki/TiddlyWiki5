@@ -65,6 +65,11 @@ exports.startup = function() {
 		document.addEventListener("tw-modal",function(event) {
 			$tw.modal.display(event.param);
 		},false);
+		// Install the notification  mechanism
+		$tw.notifier = new $tw.utils.Notifier($tw.wiki);
+		document.addEventListener("tw-notify",function(event) {
+			$tw.notifier.display(event.param);
+		},false);
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
 		document.addEventListener("tw-scroll",$tw.pageScroller,false);
