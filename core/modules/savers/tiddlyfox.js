@@ -15,7 +15,7 @@ Handles saving changes via the TiddlyFox file extension
 var TiddlyFoxSaver = function(wiki) {
 };
 
-TiddlyFoxSaver.prototype.save = function(text) {
+TiddlyFoxSaver.prototype.save = function(text,callback) {
 	var messageBox = document.getElementById("tiddlyfox-message-box");
 	if(messageBox) {
 		// Create the message element and put it in the message box
@@ -23,6 +23,10 @@ TiddlyFoxSaver.prototype.save = function(text) {
 		message.setAttribute("data-tiddlyfox-path",decodeURIComponent(document.location.pathname));
 		message.setAttribute("data-tiddlyfox-content",text);
 		messageBox.appendChild(message);
+		// Add an event handler for when the file has been saved
+		message.addEventListener("tiddlyfox-have-saved-file",function(event) {
+			callback(null);
+		}, false);
 		// Create and dispatch the custom event to the extension
 		var event = document.createEvent("Events");
 		event.initEvent("tiddlyfox-save-file",true,false);

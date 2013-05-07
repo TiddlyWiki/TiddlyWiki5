@@ -622,7 +622,9 @@ exports.saveWiki = function(options) {
 	var template = options.template || "$:/core/templates/tiddlywiki5.template.html",
 		downloadType = options.downloadType || "text/plain";
 	var text = this.renderTiddler(downloadType,template);
-	this.callSaver("save",text);
+	this.callSaver("save",text,function(err) {
+		$tw.notifier.display("$:/messages/Saved");
+	});
 };
 
 /*
