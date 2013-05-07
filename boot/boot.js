@@ -384,7 +384,7 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 			// Clear the password if the callback returned false
 			$tw.utils.each(form.elements,function(element) {
 				if(element.name === "password") {
-					form.elements[t].value = "";
+					element.value = "";
 				}
 			});
 		}
