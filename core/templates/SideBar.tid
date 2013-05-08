@@ -23,8 +23,7 @@ title: $:/templates/SideBar
 <$reveal state="$:/temp/search" type="match" text="">
 
 <div class="tw-page-controls">
-<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button.svg}}</$button> 
-<$link to="$:/ControlPanel">{{$:/core/images/options-button.svg}}</$link> <$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button.svg}}</$button>
+<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button.svg}}</$button><$link to="$:/ControlPanel">{{$:/core/images/options-button.svg}}</$link><$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button.svg}}</$button>
 </div>
 
 <div class="tw-tab-set">

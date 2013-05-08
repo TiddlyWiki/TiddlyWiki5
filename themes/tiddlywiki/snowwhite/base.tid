@@ -88,7 +88,7 @@ table th, table td {
 	border-left: 1px solid #ddd;
 }
 
-img, canvas, embed {
+.tw-tiddler-frame img, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
 	max-width: 100%;
 }
 
@@ -257,6 +257,7 @@ a.tw-tiddlylink-missing {
 
 .tw-page-controls img {
 	height: 1.5em;
+	min-width: 1px;
 	padding-right: 0.5em;
 }
 
