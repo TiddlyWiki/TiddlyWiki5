@@ -64,7 +64,7 @@ Notifier.prototype.display = function(title,options) {
 		$tw.utils.forceLayout(notification);
 		$tw.utils.setStyle(notification,[
 			{opacity: "0.0"},
-			{transform: "translateY(" + (-window.innerHeight) + "px)"}
+			{transform: "translateX(" + (notification.offsetWidth) + "px)"}
 		]);
 		// Set up an event for the transition end
 		notification.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
