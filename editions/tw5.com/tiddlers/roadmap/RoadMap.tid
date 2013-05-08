@@ -1,7 +1,7 @@
-modified: 201305011440
-title: RoadMap
-modifier: JeremyRuston
 tags: docs planning
+modifier: JeremyRuston
+title: RoadMap
+modified: 201305081237
 
 TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and subject to change.
 
@@ -28,6 +28,7 @@ TiddlyWiki5 will progress to a beta release when it is practical for cautious ev
 Some of the additional features under consideration during the beta include:
 
 * Ability to ~~inspect and~~ edit tiddler fields
+* Seamless editing
 * Aliases/inheritance
 * WikiText ~~table and~~ block quote support
 * More user interface widgets, including: ~tabs~, popovers, toolbars, carousel, ~dropdown~,

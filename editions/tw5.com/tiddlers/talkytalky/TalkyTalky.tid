@@ -1,68 +1,87 @@
-title: TalkyTalky
 tags: talkytalky
+title: TalkyTalky
+modified: 201305081420
 
-!!! Intro
+@@text-align:center;
+! http://five.tiddlywiki.com/
 
-# Open http://en.wikipedia.org/wiki/Oxford
-# Show how advanced wiki users open pages in separate tabs
-# TiddlyWiki started with the idea of making a wiki like GMail
-#* First version of TiddlyWiki in 2004: http://tiddlywiki.com/firstversion.html
-#* Current version: http://tiddlywiki.com/
-#* Turned out to be interesting because it encourages short writing
-# It was just a demo, feedback provoked making it practical
-#* http://deferentialgeometry.org/ - the open notebook of a theoretical physicist
-#* http://oxkunengroup.tiddlyspace.com/ -- group of Oxford recreational mathematicians
-# Jeremy's company Osmosoft acquired by BT in 2007 - http://osmosoft.com/
+! Jeremy Ruston
 
-!!! User experience
+!! @~TiddlyWiki & @Jermolene
+@@
+
+TiddlyWiki5 is a JavaScript wiki that can run entirely in the browser, or under ''node.js''. TiddlyWiki is a representation transformation engine. Parses WikiText and renders it as text, or straight to the DOM with selective refresh of subsequent changes. WikiText is used to render the user interface as well as the content of tiddlers. Once you know how to edit a tiddler you know how to customise TiddlyWiki, with no limits - it's only JavaScript.
+
+Why is this different? It frees you from the monopoly platforms of the web: store stuff in TW5 and you can pretty much guarantee you'll still have it in 100 years. Freedom, into the far future.
+
+!!! Single-file Edition
+
+Store your tiddlers in a single HTML file along with the JS
 
 # Open http://five.tiddlywiki.com/
-# Now left BT, rebooting TiddlyWiki while freelance consulting as part of 25 year plan
-# An open source project for end users
-# Show reading experience
-# Show editting, including editing bitmaps
-# Tiddler model: a bag of tiddlers, each a set of name:value pairs, with some fields being standardised
-# Information is more reusable if cut up into the smallest semantic units, and made addressable by name/URI
-# Technically, html file is data plus a javascript application to manipulate it
-#* Server is static, hosted on GitHub Pages
-
-!!! API
-
-# Open dev tools console
-# Show api
-#* `$tw.wiki.deleteTiddler("HelloThere")`
-#* `$tw.wiki.addTiddler({title: "HelloThere", text: "This is a new Tiddler, linking to a TiddlerThatDoesntCurrentlyExist"})`
-#* `$tw.wiki.getTiddlerLinks("HelloThere")`
-#* `$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
-
-!!! Using the standalone edition
-
+# Show reading experience, search and tags
+# Responsive response to phone and tablet
 # Open http://five.tiddlywiki.com/empty.html in Chrome Canary
 # Create tiddlers, show links, missing, orphans, tags, tagging, references
 # Use missing tiddlers to find a typo
-# Show transclusion and templates
-# Click Save, click `accept`
+# Show shadow tiddlers and system tiddlers
+# Show stylesheet handling - [[$:/core/styles/base]]
+# Drag an image from the file system
+# Use the image in a tiddler
+# Edit the image
+# Click Save, select file destination
 # Open file in text editor, see content within it
 # Note that saving technique works in virtually all browsers
-
-!!! Using the encrypted edition
-
 # Set password
 # Click Save again, click `accept`
 # Open file in text editor, verify content is encrypted
-
-!!! Using TiddlyFox
-
 # Open saved file in Firefox, show TiddlyFox dialogue
 # Enter password to decrypt
 # Start adding tasks
 # Save using TiddlyFox, refresh to show changes
-
-!!! Task management demo
-
 # Create some tasks
-# Import and demo TaskManagementDemo
+# Drag in TaskManagementDemo, show source
 # Algebra of tiddlers
+
+!!! node.js Edition
+
+Store your tiddlers in separate files in a chain of linked directories.
+
+# Run `./bld.sh`
+# Open http://five.tiddlywiki.com/static.html
+#* Click links to show individual tiddlers
+# Open http://five.tiddlywiki.com/test.html
+# Start `./serve.sh`
+# Open http://0.0.0.0:8080/
+# Open network console
+# Note same sync code on client and server
+
+!!! Other Editions
+
+* Dropbox et al
+* TiddlySpot
+* TiddlyWeb
+* TiddlyEdit for iOS
+
+!!! API
+
+# Open dev tools console
+#* `$tw.wiki.deleteTiddler("HelloThere")`
+#* `$tw.wiki.addTiddler({title: "HelloThere", text: "This is a new [[Tiddler]], linking to a TiddlerThatDoesntCurrentlyExist"})`
+#* `$tw.wiki.getTiddlerLinks("HelloThere")`
+#* `$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
+
+!!! Wrap-up
+
+# This is the start of a 25-year journey to perfect a tool that anyone can user forever
+# Open https://github.com/Jermolene/TiddlyWiki5
+# TiddlyWiki looking for sponsorship
+# Open http://federatial.com/
+# Federatial looking for opportunities to adapt TW5 for corporate use
+
+---
+
+//Below the line...//
 
 !!! Saving online
 
@@ -70,32 +89,8 @@ tags: talkytalky
 # Simple PHP scripts
 # Show TiddlySpot integration
 
-!!! Using the node.js edition
-
-# Open http://five.tiddlywiki.com/static.html
-# Click links to show individual tiddlers
-
 !!! Server integration with TiddlyWeb/TiddlySpace
 
 # Open http://tw5test.tiddlyspace.com/tw5
 # Open network console
 # Show lazy loading
-
-!!! TiddlyWiki5 ClientServer edition
-
-# Start `./serve.sh`
-# Open http://0.0.0.0:8080/
-# Open network console
-# Note same code on client and server
-#* Same sync engine, too
-
-!!! Wrap-up
-
-# Open https://github.com/Jermolene/TiddlyWiki5
-# TiddlyWiki looking for sponsorship
-# Open http://federatial.com/
-# Federatial looking for opportunities to adapt TW5 for corporate use
-
-!!! Coda
-
-# Cecily: http://jermolene.tiddlyspace.com/cecily
