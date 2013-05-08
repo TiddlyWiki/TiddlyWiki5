@@ -1,14 +1,16 @@
-title: How to use TiddlyWiki5 as a standalone HTML file with TiddlyFox
 tags: docs howto
+title: How to use TiddlyWiki5 as a standalone HTML file with TiddlyFox
+modified: 201305071714
 
 TiddlyFox is an extension for Mozilla Firefox that allows TiddlyWiki5 to save changes directly to the file system. It can be downloaded from: https://github.com/TiddlyWiki/TiddlyFox/raw/master/tiddlyfox.xpi
 
 # Right-click on this link to an empty TiddlyWiki5 file and select "Save Link" to save it to your hard drive:
 #* http://five.tiddlywiki.com/empty
-# Open the file in your browser. If this is the first time you've used a file with this name and location you will see a confirmation dialogue from TiddlyFox
+# Open the file in Firefox. If this is the first time you've used a file with this name and location you will see a confirmation dialogue from TiddlyFox
 # Make some changes to it. For example:
-#* Create new tiddlers by clicking the `New` button in the left sidebar
-#* Edit existing tiddlers by clicking the `Edit` button at their upper right
-# Save your changes by clicking the `Save` button in the left sidebar
+#* Create new tiddlers by clicking the plus button in the sidebar
+#* Edit existing tiddlers by clicking the edit button at their upper right
+# Save your changes by clicking the `Save` button in the sidebar in the 'tools' tab
+#* You should see a confirmation message appear at the upper right of the browser window
 
 With TiddlyFox, your changes are directly applied to the original file that you opened in your browser.
