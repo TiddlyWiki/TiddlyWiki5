@@ -1,6 +1,6 @@
 tags: talkytalky
 title: TalkyTalky
-modified: 201305081420
+modified: 201305081626
 
 @@text-align:center;
 ! http://five.tiddlywiki.com/
@@ -10,9 +10,9 @@ modified: 201305081420
 !! @~TiddlyWiki & @Jermolene
 @@
 
-TiddlyWiki5 is a JavaScript wiki that can run entirely in the browser, or under ''node.js''. TiddlyWiki is a representation transformation engine. Parses WikiText and renders it as text, or straight to the DOM with selective refresh of subsequent changes. WikiText is used to render the user interface as well as the content of tiddlers. Once you know how to edit a tiddler you know how to customise TiddlyWiki, with no limits - it's only JavaScript.
+TiddlyWiki5 is a JavaScript wiki that can run entirely in the browser, or under ''node.js''. Internally, it is a representation transformation engine. It parses WikiText and renders it as text, or straight to the DOM with selective refresh to reflect subsequent changes. WikiText is used to render the user interface as well as the content of tiddlers. Once you know how to edit a tiddler you know how to customise TiddlyWiki, with no limits - it's only JavaScript.
 
-Why is this different? It frees you from the monopoly platforms of the web: store stuff in TW5 and you can pretty much guarantee you'll still have it in 100 years. Freedom, into the far future.
+Why is TiddlyWiki different? It frees you from the monopoly platforms of the web: store stuff in TW5 and you can pretty much guarantee you'll still have it in 100 years. Freedom, into the far future.
 
 !!! Single-file Edition
 
@@ -39,9 +39,8 @@ Store your tiddlers in a single HTML file along with the JS
 # Enter password to decrypt
 # Start adding tasks
 # Save using TiddlyFox, refresh to show changes
-# Create some tasks
+# Drag in the task tiddlers
 # Drag in TaskManagementDemo, show source
-# Algebra of tiddlers
 
 !!! node.js Edition
 
@@ -63,14 +62,6 @@ Store your tiddlers in separate files in a chain of linked directories.
 * TiddlyWeb
 * TiddlyEdit for iOS
 
-!!! API
-
-# Open dev tools console
-#* `$tw.wiki.deleteTiddler("HelloThere")`
-#* `$tw.wiki.addTiddler({title: "HelloThere", text: "This is a new [[Tiddler]], linking to a TiddlerThatDoesntCurrentlyExist"})`
-#* `$tw.wiki.getTiddlerLinks("HelloThere")`
-#* `$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
-
 !!! Wrap-up
 
 # This is the start of a 25-year journey to perfect a tool that anyone can user forever
@@ -82,6 +73,14 @@ Store your tiddlers in separate files in a chain of linked directories.
 ---
 
 //Below the line...//
+
+!!! API
+
+# Open dev tools console
+#* `$tw.wiki.deleteTiddler("HelloThere")`
+#* `$tw.wiki.addTiddler({title: "HelloThere", text: "This is a new [[Tiddler]], linking to a TiddlerThatDoesntCurrentlyExist"})`
+#* `$tw.wiki.getTiddlerLinks("HelloThere")`
+#* `$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
 
 !!! Saving online
 
