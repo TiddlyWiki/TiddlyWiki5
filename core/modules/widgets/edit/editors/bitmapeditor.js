@@ -134,6 +134,7 @@ BitmapEditor.prototype.strokeMove = function(x,y) {
 	// Redraw the previous image
 	ctx.drawImage(this.currCanvas,0,0);
 	// Render the stroke
+	ctx.strokeStyle = "#ff0";
 	ctx.lineWidth = 3;
 	ctx.lineCap = "round";
 	ctx.lineJoin = "round";
