@@ -1,0 +1,12 @@
+title: GettingStarted
+
+Welcome to TiddlyWiki, the non-linear personal web notebook.
+
+To get started, first verify that you can save changes successfully - see http://five.tiddlywiki.com/ for detailed instructions.
+
+Then you can:
+
+* Create new tiddlers using the 'plus' button in the sidebar
+* Save changes using the 'download' button in the sidebar
+* Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to determine which tiddlers appear when you open this wiki
+* Edit the SiteTitle and SiteSubtitle
