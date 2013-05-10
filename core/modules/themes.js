@@ -33,12 +33,6 @@ function ThemeManager(wiki) {
 ThemeManager.prototype.switchTheme = function() {
 	// Get the name of the current theme
 	var themePluginTitle = this.wiki.getTiddlerText(THEME_PLUGIN_TITLE,DEFAULT_THEME_PLUGIN);
-	// Get the theme plugin
-	var themePluginTiddler = this.wiki.getTiddler(themePluginTitle);
-	// Complain if we don't have a theme
-	if(!themePluginTiddler || !themePluginTiddler.isPlugin()) {
-		return $tw.utils.error("Cannot load theme " + themePluginTitle);
-	}
 	// Accumulate the titles of the plugins that we need to load
 	var themePlugins = [],
 		self = this,
