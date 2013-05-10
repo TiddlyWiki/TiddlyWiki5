@@ -4,11 +4,11 @@
   "version": "5.0.0-alpha.9",
   "author": "Jeremy Ruston <jeremy@jermolene.com>",
   "description": "a non-linear personal web notebook",
-  "contributors": [ 
+  "contributors": [
     {
       "name": "Jeremy Ruston",
       "email": "jeremy@jermolene.com"
-    } 
+    }
   ],
   "bin": {
     "tiddlywiki": "./tiddlywiki.js"
@@ -22,12 +22,6 @@
     "tiddlywiki",
     "tiddlywiki5",
     "wiki"
-  ],
-  "dependencies" : {
-  },
-  "devDependencies": {
-  },
-  "bundleDependencies": [
   ],
   "license": "BSD",
   "engines": {
