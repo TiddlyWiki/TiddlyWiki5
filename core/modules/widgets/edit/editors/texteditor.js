@@ -92,17 +92,17 @@ TextEditor.prototype.render = function() {
 	this.editWidget.events = [
 		{name: "focus", handlerObject: this},
 		{name: "blur", handlerObject: this},
-		{name: "keyup", handlerObject: this}
+		{name: "input", handlerObject: this}
 	];
 };
 
 TextEditor.prototype.handleEvent = function(event) {
 	// Get the value of the field if it might have changed
-	if(["keyup","focus","blur"].indexOf(event.type) !== -1) {
+	if(["input","focus","blur"].indexOf(event.type) !== -1) {
 		this.saveChanges();
 	}
 	// Fix the height of the textarea if required
-	if(["keyup","focus"].indexOf(event.type) !== -1) {
+	if(["input","focus"].indexOf(event.type) !== -1) {
 		this.fixHeight();
 	}
 	return true;
