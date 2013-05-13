@@ -1224,7 +1224,7 @@ $tw.boot.startup = function() {
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");
-	$tw.utils.registerFileType("application/vnd.tiddlywiki2-recipe","utf8",".recipe");
+	$tw.utils.registerFileType("text/vnd.tiddlywiki2-recipe","utf8",".recipe");
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
