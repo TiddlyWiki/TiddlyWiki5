@@ -1,0 +1,20 @@
+title: How to use TiddlyWiki5 as a standalone HTML file with TWEdit
+tags: docs howto
+modified: 201305141919
+
+The iPad/iPhone app ''TWEdit'' makes it possible to edit and save changes to TiddlyWiki5, including working offline without a network connection. [[Download it here|https://itunes.apple.com/gb/app/twedit/id409607956?mt=8]].
+
+Instructions for use:
+
+# Open TWEdit
+# Touch the title in the centre of the toolbar in order
+#* A text box should appear allowing you to enter a URL
+# Enter the URL `http://five.tiddlywiki.com/empty.html`
+# When the empty TiddlyWiki5 has loaded, touch the ''save'' icon (it's the second icon from the right on the top toolbar)
+#* An alert box should appear allowing you to enter a local filename
+# Enter the filename you wish to use for the document (ending with `.html`)
+# Edit your TiddlyWiki as normal
+# To save changes, click the ''save'' button in the sidebar
+#* A confirmation message should appear at the upper right
+
+//Note that TWEdit is published independently of TiddlyWiki//

@@ -1,10 +1,14 @@
-title: TiddlyWiki5 Editions
 tags: introduction
+title: TiddlyWiki5 Editions
+modified: 201305141912
 
 The core TiddlyWiki5 code is packaged into several distinct editions designed for different situations:
 
 * [[TiddlyWiki5 Standalone Edition]] for working purely within the browser
-** Including [[TiddlyWiki5 in the Sky for TiddlySpot|TiddlySpot]]
+** [[Using TiddlyFox|How to use TiddlyWiki5 as a standalone HTML file with TiddlyFox]]
+** [[Encrypting TiddlyWiki5|How to use TiddlyWiki5 as a standalone HTML file with encryption]]
+** [[Using TWEdit on iPad and iPhone|How to use TiddlyWiki5 as a standalone HTML file with TWEdit]]
+** [[Using TiddlyWiki5 with TiddlySpot|TiddlySpot]]
 * [[TiddlyWiki5 Node Edition]] for advanced command line work
 ** Including [[TiddlyWiki5 Static Site Generation]]
 ** Including [[Building classic TiddlyWiki with TiddlyWiki5]]
