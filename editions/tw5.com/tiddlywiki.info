@@ -4,6 +4,9 @@
 	],
 	"themes": [
 		"tiddlywiki/snowwhite",
-		"tiddlywiki/starlight"
+		"tiddlywiki/starlight",
+		"giffmex/rocker",
+		"giffmex/blue",
+		"giffmex/bianca"
 	]
 }

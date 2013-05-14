@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/giffmex/bianca",
+	"name": "Bianca",
+	"author": "DaveGifford",
+	"version": "0.0.0",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "A clean white theme to let you focus",
+	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
+}
