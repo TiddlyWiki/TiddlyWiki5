@@ -101,14 +101,14 @@ WikiRenderTree.prototype.refreshInDom = function(changes) {
 /*
 Find the value of a given context variable for a particular renderer node
 */
-WikiRenderTree.prototype.getContextVariable = function(renderer,name) {
+WikiRenderTree.prototype.getContextVariable = function(renderer,name,defaultValue) {
 	while(renderer) {
 		if($tw.utils.hop(renderer.context,name)) {
 			return renderer.context[name];
 		}
 		renderer = renderer.parentRenderer;
 	};
-	return undefined;
+	return defaultValue;
 };
 
 /*
