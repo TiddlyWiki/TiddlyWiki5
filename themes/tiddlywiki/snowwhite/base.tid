@@ -16,6 +16,13 @@ tags: [[$:/tags/stylesheet]]
           box-shadow: $shadow$;
 ```
 \end
+\define filter(filter)
+```
+  -webkit-filter: $filter$;
+     -moz-filter: $filter$;
+          filter: $filter$;
+```
+\end
 \define background-linear-gradient(gradient)
 ```
 background-image: linear-gradient($gradient$);
@@ -260,6 +267,7 @@ a.tw-tiddlylink-missing {
 	min-width: 1px;
 	padding-right: 0.5em;
 	fill: #fff;
+	<<filter "drop-shadow(1px 1px 2px rgba(0,0,0,0.15))">>
 }
 
 .tw-page-controls svg:hover {
