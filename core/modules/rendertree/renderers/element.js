@@ -49,6 +49,17 @@ var ElementRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	if(!this.widgetClasses) {
 		ElementRenderer.prototype.widgetClasses = $tw.modules.applyMethods("widget");
 	}
+	// Select the namespace for the tag
+	var tagNameSpaces = {
+		svg: "http://www.w3.org/2000/svg"
+	};
+	this.namespace = tagNameSpaces[this.parseTreeNode.tag];
+	if(this.namespace) {
+		this.context = this.context || {};
+		this.context.namespace = this.namespace;
+	} else {
+		this.namespace = this.renderTree.getContextVariable(this.parentRenderer,"namespace","http://www.w3.org/1999/xhtml");
+	}
 	// Get the context tiddler title
 	this.tiddlerTitle = this.renderTree.getContextVariable(this.parentRenderer,"tiddlerTitle");
 	// Compute our dependencies
@@ -161,7 +172,7 @@ ElementRenderer.prototype.renderInDom = function() {
 	// Check if our widget is providing an element
 	if(this.widget.tag) {
 		// Create the element
-		this.domNode = document.createElement(this.widget.tag);
+		this.domNode = document.createElementNS(this.namespace,this.widget.tag);
 		// Assign any specified event handlers
 		$tw.utils.addEventListeners(this.domNode,this.widget.events);
 		// Assign the attributes
@@ -196,7 +207,11 @@ ElementRenderer.prototype.assignAttributes = function() {
 					self.domNode.style[$tw.utils.unHyphenateCss(p)] = v[p];
 				}
 			} else {
-				self.domNode.setAttribute(a,v);
+				// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
+				try {
+					self.domNode.setAttributeNS(null,a,v);
+				} catch(e) {
+				}
 			}
 		}
 	});
