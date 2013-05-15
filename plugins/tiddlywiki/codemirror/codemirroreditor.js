@@ -83,15 +83,19 @@ CodeMirrorEditor.prototype.render = function() {
 	this.editWidget.attributes = {
 		"class": "tw-edit-CodeMirrorEditor"
 	};
-	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer.renderContext,[node]);
+	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer,[node]);
 };
 
 CodeMirrorEditor.prototype.postRenderInDom = function() {
 	if(this.type === "textarea") {
-		CodeMirror.fromTextArea(this.editWidget.children[0].domNode,{
-			lineWrapping: true,
-			lineNumbers: true
-		});
+		var self = this;
+		// HACK: We use the timeout because postRenderInDom is called before the dom nodes have been added to the document
+		window.setTimeout(function() {
+			self.codemirrorInstance = CodeMirror.fromTextArea(self.editWidget.children[0].domNode,{
+				lineWrapping: true,
+				lineNumbers: true
+			});
+		},1);
 	}
 };
 

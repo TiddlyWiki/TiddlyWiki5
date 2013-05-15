@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/codemirror/styles
+tags: [[$:/tags/stylesheet]]
+
+/* Make the editor resize to fit its content */
+
+.CodeMirror {
+	height: auto;
+}
+
+.CodeMirror-scroll {
+	overflow-x: auto;
+	overflow-y: hidden;	
+}
