@@ -565,10 +565,10 @@ Parse text from a tiddler and render it into another format
 	outputType: content type for the output
 	title: title of the tiddler to be rendered
 */
-exports.renderTiddler = function(outputType,title,renderContext) {
+exports.renderTiddler = function(outputType,title,context) {
 	var parser = this.parseTiddler(title),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: this});
-	renderTree.execute(renderContext);
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: this, context: context});
+	renderTree.execute();
 	return renderTree.render(outputType);
 };
 

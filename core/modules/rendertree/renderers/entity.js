@@ -15,10 +15,10 @@ Entity renderer
 /*
 Entity renderer
 */
-var EntityRenderer = function(renderTree,renderContext,parseTreeNode) {
+var EntityRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	// Store state information
 	this.renderTree = renderTree;
-	this.renderContext = renderContext;
+	this.parentRenderer = parentRenderer;
 	this.parseTreeNode = parseTreeNode;
 };
 

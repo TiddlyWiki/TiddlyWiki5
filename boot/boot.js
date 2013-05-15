@@ -78,7 +78,7 @@ $tw.utils.error = function(err) {
 Check if an object has a property
 */
 $tw.utils.hop = function(object,property) {
-	return Object.prototype.hasOwnProperty.call(object,property);
+	return object ? Object.prototype.hasOwnProperty.call(object,property) : false;
 };
 
 /*

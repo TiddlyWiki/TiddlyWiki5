@@ -21,20 +21,17 @@ var HtmlWikifiedViewer = function(viewWidget,tiddler,field,value) {
 
 HtmlWikifiedViewer.prototype.render = function() {
 	// Parse the field text
-	var newRenderContext = {
-		parentContext: this.viewWidget.renderer.renderContext
-	};
 	var wiki = this.viewWidget.renderer.renderTree.wiki,
 		parser = wiki.parseText("text/vnd.tiddlywiki",this.value),
 		renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki});
-	renderTree.execute(newRenderContext);
+	renderTree.execute();
 	var text = renderTree.render("text/html");
 	// Set the element details
 	this.viewWidget.tag = "pre";
 	this.viewWidget.attributes = {
 		"class": "tw-view-htmlwikified"
 	};
-	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer,[{
 			type: "text",
 			text: text
 		}]);

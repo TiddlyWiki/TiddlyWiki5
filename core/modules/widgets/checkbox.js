@@ -31,7 +31,7 @@ var CheckboxWidget = function(renderer) {
 
 CheckboxWidget.prototype.generate = function() {
 	// Get the parameters from the attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
+	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
 	this.tagName = this.renderer.getAttribute("tag");
 	this["class"] = this.renderer.getAttribute("class");
 	// Compute classes
@@ -59,7 +59,7 @@ CheckboxWidget.prototype.generate = function() {
 	// Set the return element
 	this.tag = "label";
 	this.attributes ={"class": classes.join(" ")};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[nodeCheckbox,nodeSpan]);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[nodeCheckbox,nodeSpan]);
 	this.events = [{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}];
 };
 

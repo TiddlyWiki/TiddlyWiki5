@@ -57,7 +57,7 @@ VideoWidget.prototype.generate = function() {
 		default:
 			this.tag = "div";
 			this.attributes = {};
-			this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+			this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
 				type: "text",
 				text: "Unknown video type"
 			}]);

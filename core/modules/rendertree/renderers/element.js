@@ -19,7 +19,7 @@ var ElementWidget = function(renderer) {
 	this.renderer = renderer;
 	this.tag = this.renderer.parseTreeNode.tag;
 	this.attributes = this.renderer.attributes;
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,this.renderer.parseTreeNode.children);
 	this.events = this.renderer.parseTreeNode.events;
 };
 
@@ -40,22 +40,24 @@ ElementWidget.prototype.refreshInDom = function(changedAttributes,changedTiddler
 /*
 Element renderer
 */
-var ElementRenderer = function(renderTree,renderContext,parseTreeNode) {
+var ElementRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	// Store state information
 	this.renderTree = renderTree;
-	this.renderContext = renderContext;
+	this.parentRenderer = parentRenderer;
 	this.parseTreeNode = parseTreeNode;
 	// Initialise widget classes
 	if(!this.widgetClasses) {
 		ElementRenderer.prototype.widgetClasses = $tw.modules.applyMethods("widget");
 	}
+	// Get the context tiddler title
+	this.tiddlerTitle = this.renderTree.getContextVariable(this.parentRenderer,"tiddlerTitle");
 	// Compute our dependencies
 	this.dependencies = {};
 	var self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
 			var tr = $tw.utils.parseTextReference(attribute.textReference);
-			self.dependencies[tr.title ? tr.title : renderContext.tiddlerTitle] = true;
+			self.dependencies[tr.title ? tr.title : self.tiddlerTitle] = true;
 		}
 	});
 	// Compute our attributes
@@ -86,7 +88,7 @@ ElementRenderer.prototype.computeAttributes = function() {
 	var self = this;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
-			var value = self.renderTree.wiki.getTextReference(attribute.textReference,"",self.renderContext.tiddlerTitle);
+			var value = self.renderTree.wiki.getTextReference(attribute.textReference,"",self.tiddlerTitle);
 			if(self.attributes[name] !== value) {
 				self.attributes[name] = value;
 				changedAttributes[name] = true;
@@ -219,68 +221,6 @@ ElementRenderer.prototype.refreshInDom = function(changedTiddlers) {
 			}
 		});
 	}
-};
-
-ElementRenderer.prototype.getContextTiddlerTitle = function() {
-	var context = this.renderContext;
-	while(context) {
-		if($tw.utils.hop(context,"tiddlerTitle")) {
-			return context.tiddlerTitle;
-		}
-		context = context.parentContext;
-	}
-	return undefined;
-};
-
-/*
-Check for render context recursion by returning true if the members of a proposed new render context are already present in the render context chain
-*/
-ElementRenderer.prototype.checkContextRecursion = function(newRenderContext) {
-	var context = this.renderContext;
-	while(context) {
-		var match = true;
-		for(var member in newRenderContext) {
-			if($tw.utils.hop(newRenderContext,member)) {
-				if(newRenderContext[member] && newRenderContext[member] !== context[member]) {
-					match = false;
-				}
-			}
-		}
-		if(match) {
-			return true;
-		}
-		context = context.parentContext;
-	}
-	return false;
-};
-
-ElementRenderer.prototype.getContextScopeId = function() {
-	var guidBits = [],
-		context = this.renderContext;
-	while(context) {
-		$tw.utils.each(context,function(field,name) {
-			if(name !== "parentContext") {
-				guidBits.push(name + ":" + field + ";");
-			}
-		});
-		guidBits.push("-");
-		context = context.parentContext;
-	}
-	return guidBits.join("");
-};
-
-/*
-Find a named macro definition
-*/
-ElementRenderer.prototype.findMacroDefinition = function(name) {
-	var context = this.renderContext;
-	while(context) {
-		if(context.macroDefinitions && context.macroDefinitions[name]) {
-			return context.macroDefinitions[name];
-		}
-		context = context.parentContext;
-	}
-	return undefined;
 };
 
 exports.element = ElementRenderer

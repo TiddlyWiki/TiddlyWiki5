@@ -33,7 +33,7 @@ JsEncodedViewer.prototype.render = function() {
 	this.viewWidget.attributes = {
 		"class": "tw-view-jsencoded"
 	};
-	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer,[{
 			type: "text",
 			text: $tw.utils.stringify(value)
 		}]);

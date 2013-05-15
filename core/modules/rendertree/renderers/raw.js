@@ -15,10 +15,10 @@ Raw HTML renderer
 /*
 Raw HTML renderer
 */
-var RawRenderer = function(renderTree,renderContext,parseTreeNode) {
+var RawRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	// Store state information
 	this.renderTree = renderTree;
-	this.renderContext = renderContext;
+	this.parentRenderer = parentRenderer;
 	this.parseTreeNode = parseTreeNode;
 };
 

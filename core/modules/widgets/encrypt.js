@@ -40,7 +40,7 @@ EncryptWidget.prototype.generate = function() {
 	// Set the return element
 	this.tag = "pre";
 	this.attributes ={"class": "tw-encrypt"};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
 		type: "text",
 		text: encryptedText
 	}]);

@@ -35,7 +35,7 @@ WikifiedViewer.prototype.render = function() {
 	if(this.tiddler && this.tiddler.fields.title) {
 		node.attributes.target = {type: "string", value: this.tiddler.fields.title}
 	}
-	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[node]);
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer,[node]);
 };
 
 exports.wikified = WikifiedViewer;

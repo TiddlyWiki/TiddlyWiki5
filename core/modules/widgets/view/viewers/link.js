@@ -26,7 +26,7 @@ LinkViewer.prototype.render = function() {
 	this.viewWidget.attributes = {
 		"class": "tw-view-link"
 	};
-	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer,[{
 			type: "element",
 			tag: "$link",
 			attributes: {

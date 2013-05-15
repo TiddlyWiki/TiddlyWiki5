@@ -25,7 +25,7 @@ InfoWidget.types = {
 
 InfoWidget.prototype.generate = function() {
 	// Get attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
+	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.tiddlerTitle);
 	this.type = this.renderer.getAttribute("type","changecount");
 	// Get the appropriate value for the current tiddler
 	var value = "",
@@ -39,7 +39,7 @@ InfoWidget.prototype.generate = function() {
 	// Set the element
 	this.tag = "span";
 	this.attributes = {};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
 		type: "text",
 		text: value
 	}]);

@@ -32,7 +32,7 @@ SetStyleWidget.prototype.generate = function() {
 	if(this["class"]) {
 		this.attributes["class"] = this["class"];
 	}
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,this.renderer.parseTreeNode.children);
 };
 
 exports.setstyle = SetStyleWidget;

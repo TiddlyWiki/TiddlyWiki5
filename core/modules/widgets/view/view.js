@@ -54,7 +54,7 @@ var ViewWidget = function(renderer) {
 
 ViewWidget.prototype.generate = function() {
 	// Get parameters from our attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
+	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
 	this.fieldName = this.renderer.getAttribute("field","text");
 	this.format = this.renderer.getAttribute("format","text");
 	// Get the value to display

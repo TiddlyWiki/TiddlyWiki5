@@ -29,7 +29,7 @@ LinkCatcherWidget.prototype.generate = function() {
 	this.attributes = {
 		"class": "tw-linkcatcher"
 	};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,this.renderer.parseTreeNode.children);
 	this.events = [
 		{name: "tw-navigate", handlerObject: this, handlerMethod: "handleNavigateEvent"}
 	];
@@ -47,7 +47,7 @@ LinkCatcherWidget.prototype.refreshInDom = function(changedAttributes,changedTid
 // Navigate to a specified tiddler
 LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 	if(this.to) {
-		this.renderer.renderTree.wiki.setTextReference(this.to,event.navigateTo,this.renderer.getContextTiddlerTitle());
+		this.renderer.renderTree.wiki.setTextReference(this.to,event.navigateTo,this.renderer.tiddlerTitle);
 	}
 	event.stopPropagation();
 	return false;

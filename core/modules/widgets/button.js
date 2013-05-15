@@ -48,21 +48,21 @@ ButtonWidget.prototype.generate = function() {
 	// Set the return element
 	this.tag = "button";
 	this.attributes ={"class": classes.join(" ")};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,this.renderer.parseTreeNode.children);
 	this.events = events;
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
 	$tw.utils.dispatchCustomEvent(event.target,this.message,{
 		param: this.param,
-		tiddlerTitle: this.renderer.getContextTiddlerTitle()
+		tiddlerTitle: this.renderer.tiddlerTitle
 	});
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
 	var title = this.popup;
 	if(this.qualifyTiddlerTitles) {
-		title =  title + "-" + this.renderer.getContextScopeId();
+		title =  title + "-" + this.renderer.renderTree.getContextScopeId(this.renderer.parentRenderer);
 	}
 	$tw.popup.triggerPopup({
 		domNode: this.renderer.domNode,
@@ -74,7 +74,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 ButtonWidget.prototype.isSelected = function() {
 	var title = this.set;
 	if(this.qualifyTiddlerTitles) {
-		title =  title + "-" + this.renderer.getContextScopeId();
+		title =  title + "-" + this.renderer.renderTree.getContextScopeId(this.renderer.parentRenderer);
 	}
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(title);
 	return tiddler ? tiddler.fields.text === this.setTo : false;
@@ -83,7 +83,7 @@ ButtonWidget.prototype.isSelected = function() {
 ButtonWidget.prototype.setTiddler = function() {
 	var title = this.set;
 	if(this.qualifyTiddlerTitles) {
-		title =  title + "-" + this.renderer.getContextScopeId();
+		title =  title + "-" + this.renderer.renderTree.getContextScopeId(this.renderer.parentRenderer);
 	}
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(title);
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: this.setTo}));
@@ -120,7 +120,7 @@ ButtonWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 	var setTitle = this.set,
 		popupTitle = this.popup;
 	if(this.qualifyTiddlerTitles) {
-		var scopeId = this.renderer.getContextScopeId();
+		var scopeId = this.renderer.renderTree.getContextScopeId(this.renderer.parentRenderer);
 		if(setTitle) {
 			setTitle =  setTitle + "-" + scopeId;
 		}

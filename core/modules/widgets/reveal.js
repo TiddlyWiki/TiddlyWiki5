@@ -31,7 +31,7 @@ RevealWidget.prototype.generate = function() {
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
 	if(this.qualifyTiddlerTitles) {
-		this.stateTitle =  this.stateTitle + "-" + this.renderer.getContextScopeId();
+		this.stateTitle =  this.stateTitle + "-" + this.renderer.renderTree.getContextScopeId(this.renderer.parentRenderer);
 	}
 	this.readState();
 	// Set up the element attributes
@@ -53,7 +53,7 @@ RevealWidget.prototype.generate = function() {
 		"class": classes.join(" "),
 		style: styles.join("")
 	};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.isOpen ? this.renderer.parseTreeNode.children : []);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,this.isOpen ? this.renderer.parseTreeNode.children : []);
 	this.events = [{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}];
 };
 
@@ -63,7 +63,7 @@ Read the state tiddler
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
 	if(this.stateTitle) {
-		var state = this.renderer.renderTree.wiki.getTextReference(this.stateTitle,this["default"],this.renderer.getContextTiddlerTitle());
+		var state = this.renderer.renderTree.wiki.getTextReference(this.stateTitle,this["default"],this.renderer.tiddlerTitle);
 		switch(this.type) {
 			case "popup":
 				this.readPopupState(state);
@@ -129,7 +129,7 @@ RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 		this.readState();
 		// Construct the child nodes if  required
 		if(this.isOpen && this.children.length === 0) {
-			this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,this.renderer.parseTreeNode.children);
+			this.children = this.renderer.renderTree.createRenderers(this.renderer,this.renderer.parseTreeNode.children);
 			var parentNode = this.renderer.domNode;
 			$tw.utils.each(this.children,function(child) {
 				parentNode.appendChild(child.renderInDom());

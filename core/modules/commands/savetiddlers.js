@@ -39,8 +39,8 @@ Command.prototype.execute = function() {
 		parser = wiki.parseTiddler(template),
 		tiddlers = wiki.filterTiddlers(filter);
 	$tw.utils.each(tiddlers,function(title) {
-		var renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki});
-		renderTree.execute({tiddlerTitle: title});
+		var renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki, context: {tiddlerTitle: title}});
+		renderTree.execute();
 		var text = renderTree.render(type);
 		fs.writeFileSync(path.resolve(pathname,encodeURIComponent(title) + extension),text,"utf8");
 	});

@@ -43,7 +43,7 @@ StripCommentsViewer.prototype.render = function() {
 	// Set the element details
 	this.viewWidget.tag = "span";
 	this.viewWidget.attributes = {};
-	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer.renderContext,[{
+	this.viewWidget.children = this.viewWidget.renderer.renderTree.createRenderers(this.viewWidget.renderer,[{
 		type: "text",
 		text: value
 	}]);

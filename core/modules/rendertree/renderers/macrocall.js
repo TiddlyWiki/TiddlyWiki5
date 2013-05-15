@@ -15,13 +15,13 @@ Macro call renderer
 /*
 Macro call renderer
 */
-var MacroCallRenderer = function(renderTree,renderContext,parseTreeNode) {
+var MacroCallRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	// Store state information
 	this.renderTree = renderTree;
-	this.renderContext = renderContext;
+	this.parentRenderer = parentRenderer;
 	this.parseTreeNode = parseTreeNode;
 	// Find the macro definition
-	var macro = this.findMacroDefinition(this.parseTreeNode.name);
+	var macro = this.renderTree.findMacroDefinition(this.parentRenderer,this.parseTreeNode.name);
 	// Insert an error message if we couldn't find the macro
 	var childTree;
 	if(!macro) {
@@ -33,21 +33,7 @@ var MacroCallRenderer = function(renderTree,renderContext,parseTreeNode) {
 		childTree = this.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.parseTreeNode.isBlock}).tree;
 	}
 	// Create the renderers for the child nodes
-	this.children = this.renderTree.createRenderers(this.renderContext,childTree);
-};
-
-/*
-Find a named macro definition
-*/
-MacroCallRenderer.prototype.findMacroDefinition = function(name) {
-	var context = this.renderContext;
-	while(context) {
-		if(context.macroDefinitions && context.macroDefinitions[name]) {
-			return context.macroDefinitions[name];
-		}
-		context = context.parentContext;
-	}
-	return undefined;
+	this.children = this.renderTree.createRenderers(this,childTree);
 };
 
 /*

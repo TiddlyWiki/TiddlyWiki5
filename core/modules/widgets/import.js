@@ -60,7 +60,7 @@ ImportWidget.prototype.generate = function() {
 	this.attributes = {
 		"class": classes.join(" ")
 	};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[fileInput,container]);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[fileInput,container]);
 };
 
 ImportWidget.prototype.handleChangeEvent  = function(event) {

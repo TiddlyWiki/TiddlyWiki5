@@ -21,7 +21,7 @@ var FieldGridWidget = function(renderer) {
 
 FieldGridWidget.prototype.generate = function() {
 	// Get attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
+	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
 	this.exclude = this.renderer.getAttribute("exclude");
 	this["class"] = this.renderer.getAttribute("class");
 	// Set up the exclusion array
@@ -73,7 +73,7 @@ FieldGridWidget.prototype.generate = function() {
 	// Return the table element
 	this.tag = "table";
 	this.attributes ={"class": classes.join(" ")};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
 		type: "element",
 		tag: "tbody",
 		children: rows

@@ -21,7 +21,7 @@ var FieldsWidget = function(renderer) {
 
 FieldsWidget.prototype.generate = function() {
 	// Get parameters from our attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
+	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
 	this.template = this.renderer.getAttribute("template");
 	this.exclude = this.renderer.getAttribute("exclude");
 	this.stripTitlePrefix = this.renderer.getAttribute("stripTitlePrefix","no") === "yes";
@@ -75,7 +75,7 @@ FieldsWidget.prototype.generate = function() {
 		this.attributes.title = this.renderer.getAttribute("tooltip");
 	}
 	// Create the renderers for the wrapper and the children
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
 		type: "text",
 		text: text.join("")
 	}]);

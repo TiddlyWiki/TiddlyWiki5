@@ -66,16 +66,16 @@ Modal.prototype.display = function(title,options) {
 		titleText = title;
 	}
 	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",titleText,{parseAsInline: true}),
-		headerRenderTree = new $tw.WikiRenderTree(headerParser,{wiki: $tw.wiki});
-	headerRenderTree.execute({tiddlerTitle: title});
+		headerRenderTree = new $tw.WikiRenderTree(headerParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}});
+	headerRenderTree.execute();
 	headerRenderTree.renderInDom(headerTitle);
 	this.wiki.addEventListener("change",function(changes) {
 		headerRenderTree.refreshInDom(changes);
 	});
 	// Render the body of the message
 	var bodyParser = this.wiki.parseTiddler(title),
-		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki});
-	bodyRenderTree.execute({tiddlerTitle: title});
+		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}});
+	bodyRenderTree.execute();
 	bodyRenderTree.renderInDom(modalBody);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyRenderTree.refreshInDom(changes);
@@ -102,8 +102,8 @@ Modal.prototype.display = function(title,options) {
 		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
 	}
 	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki-run",footerText,{parseAsInline: true}),
-		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki});
-	footerRenderTree.execute({tiddlerTitle: title});
+		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}});
+	footerRenderTree.execute();
 	footerRenderTree.renderInDom(modalFooterButtons);
 	this.wiki.addEventListener("change",function(changes) {
 		footerRenderTree.refreshInDom(changes);

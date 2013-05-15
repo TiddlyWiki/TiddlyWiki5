@@ -26,7 +26,7 @@ ErrorWidget.prototype.generate = function() {
 	this.attributes = {
 		"class": "tw-error-widget"
 	};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer.renderContext,[{
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
 			type: "text",
 			text: this.errorMessage
 		}]);

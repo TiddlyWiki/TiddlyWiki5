@@ -15,10 +15,10 @@ Text renderer
 /*
 Text renderer
 */
-var TextRenderer = function(renderTree,renderContext,parseTreeNode) {
+var TextRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	// Store state information
 	this.renderTree = renderTree;
-	this.renderContext = renderContext;
+	this.parentRenderer = parentRenderer;
 	this.parseTreeNode = parseTreeNode;
 };
 

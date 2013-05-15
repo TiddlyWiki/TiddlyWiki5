@@ -15,14 +15,14 @@ Macro definition renderer
 /*
 Macro definition renderer
 */
-var MacroDefRenderer = function(renderTree,renderContext,parseTreeNode) {
+var MacroDefRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	// Store state information
 	this.renderTree = renderTree;
-	this.renderContext = renderContext;
+	this.parentRenderer = parentRenderer;
 	this.parseTreeNode = parseTreeNode;
-	// Save the macro definition into the render context
-	this.renderContext.macroDefinitions = this.renderContext.macroDefinitions || {};
-	this.renderContext.macroDefinitions[this.parseTreeNode.name] = this.parseTreeNode;
+	// Save the macro definition into the context of the rendertree
+	this.renderTree.context.macroDefinitions = this.renderTree.context.macroDefinitions || {};
+	this.renderTree.context.macroDefinitions[this.parseTreeNode.name] = this.parseTreeNode;
 };
 
 exports.macrodef = MacroDefRenderer

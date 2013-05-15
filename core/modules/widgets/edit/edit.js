@@ -26,7 +26,7 @@ var EditWidget = function(renderer) {
 
 EditWidget.prototype.generate = function() {
 	// Get parameters from our attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.getContextTiddlerTitle());
+	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
 	this.fieldName = this.renderer.getAttribute("field","text");
 	// Choose the editor to use
 	// TODO: Tiddler field modules should be able to specify a field type from which the editor is derived
