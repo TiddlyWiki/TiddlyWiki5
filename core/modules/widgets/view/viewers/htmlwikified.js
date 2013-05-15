@@ -23,7 +23,7 @@ HtmlWikifiedViewer.prototype.render = function() {
 	// Parse the field text
 	var wiki = this.viewWidget.renderer.renderTree.wiki,
 		parser = wiki.parseText("text/vnd.tiddlywiki",this.value),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki, context: this.viewWidget.renderer.renderTree.context});
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki, parentRenderer: this.viewWidget.renderer});
 	renderTree.execute();
 	var text = renderTree.render("text/html");
 	// Set the element details

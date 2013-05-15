@@ -19,6 +19,7 @@ Create a render tree object for a parse tree
 Options include:
 	wiki: mandatory reference to wiki associated with this render tree
 	context: optional hashmap of context variables (see below)
+	parentRenderer: optional reference to a parent renderer node for the context chain
 Context variables include:
 	tiddlerTitle: title of the tiddler providing the context
 	templateTitle: title of the tiddler providing the current template
@@ -28,6 +29,7 @@ var WikiRenderTree = function(parser,options) {
 	this.parser = parser;
 	this.wiki = options.wiki;
 	this.context = options.context || {};
+	this.parentRenderer = options.parentRenderer;
 	// Hashmap of the renderer classes
 	if(!this.rendererClasses) {
 		WikiRenderTree.prototype.rendererClasses = $tw.modules.applyMethods("wikirenderer");
