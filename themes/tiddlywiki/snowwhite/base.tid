@@ -88,7 +88,7 @@ table th, table td {
 	border-left: 1px solid #ddd;
 }
 
-.tw-tiddler-frame img, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
+.tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
 	max-width: 100%;
 }
 
@@ -243,7 +243,7 @@ a.tw-tiddlylink-missing {
 	margin-bottom: 0.2em;
 }
 
-.tw-search a img {
+.tw-search a svg {
 	height: 0.75em;
 }
 
@@ -255,10 +255,15 @@ a.tw-tiddlylink-missing {
 	margin-top: 1em;
 }
 
-.tw-page-controls img {
+.tw-page-controls svg {
 	height: 1.5em;
 	min-width: 1px;
 	padding-right: 0.5em;
+	fill: #fff;
+}
+
+.tw-page-controls svg:hover {
+	fill: #000;
 }
 
 .tw-menu-list-item {
@@ -354,8 +359,13 @@ a.tw-tiddlylink-missing {
 	vertical-align: baseline;
 }
 
-.tw-tiddler-controls .tw-button img {
+.tw-tiddler-controls .tw-button svg {
 	height: 0.75em;
+	fill: #ccc;
+}
+
+.tw-tiddler-controls .tw-button svg:hover {
+	fill: #888;
 }
 
 @media print {

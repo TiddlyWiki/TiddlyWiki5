@@ -2,7 +2,7 @@ title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
 
-<span class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerDropdown" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button.svg}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button.svg}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button.svg}}</$button>
+<span class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerDropdown" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
 
 </span><$view field="title"/></span>
 

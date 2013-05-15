@@ -6,7 +6,7 @@ title: $:/templates/SideBar
 
 <$linkcatcher to="$:/temp/search">
 
-<div class="tw-search"><$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/><$reveal state="$:/temp/search" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button.svg}}</$link></$reveal></div>
+<div class="tw-search"><$edit tiddler="$:/temp/search" type="search" requireFocus="yes"/><$reveal state="$:/temp/search" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
 </$linkcatcher>
 
@@ -23,7 +23,7 @@ title: $:/templates/SideBar
 <$reveal state="$:/temp/search" type="match" text="">
 
 <div class="tw-page-controls">
-<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button.svg}}</$button><$link to="$:/ControlPanel">{{$:/core/images/options-button.svg}}</$link><$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button.svg}}</$button>
+<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button}}</$button><$link to="$:/ControlPanel">{{$:/core/images/options-button}}</$link><$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button}}</$button>
 </div>
 
 <div class="tw-tab-set">
