@@ -550,10 +550,10 @@ canvas.tw-edit-bitmapeditor  {
 .tw-tab-buttons button {
 	color: #666;
 	background-color: #ccc;
-	border-left: 1px solid #aaa;
-	border-top: 1px solid #aaa;
-	border-right: 1px solid #aaa;
-	border-bottom: 1px solid #aaa;
+	border-left: 1px solid #bbb;
+	border-top: 1px solid #bbb;
+	border-right: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 	margin-left: 0.25em;
 	margin-right: 0.25em;
 }
@@ -564,7 +564,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-divider {
-	border-top: 1px solid #aaa;
+	border-top: 1px solid #bbb;
 }
 
 .tw-tab-content {
@@ -574,7 +574,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-sidebar-tab-divider.tw-tab-divider {
 	border-top: none;
 	height: 1px;
-	<<background-linear-gradient "left, rgb(160,160,160) 0%, rgb(236,236,236) 250px">>
+	<<background-linear-gradient "left, rgb(176,176,176) 0%, rgb(236,236,236) 250px">>
 }
 
 .tw-more-sidebar.tw-tab-set {
