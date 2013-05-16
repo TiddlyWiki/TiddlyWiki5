@@ -269,6 +269,10 @@ a.tw-tiddlylink-missing {
 	margin-top: 1em;
 }
 
+.tw-page-controls a.tw-tiddlylink:hover {
+	text-decoration: none;
+}
+
 .tw-page-controls svg {
 	height: 1.5em;
 	min-width: 1px;
