@@ -42,4 +42,5 @@ Placeholder for a more thorough refinement of Snow White
 
 html body {
 	font-family: "Arvo", "Times";
+  background: url(<<datauri "$:/themes/tiddlywiki/starlight/ltbg.jpg">>);
 }
