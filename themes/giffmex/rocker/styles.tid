@@ -1,4 +1,4 @@
-title: $:/themes/giffmex/rocker/styles.tid
+title: $:/themes/giffmex/rocker/styles
 tags: [[$:/tags/stylesheet]]
 
 body { font-size:14px;line-height:20px; background-color:#000000;}
