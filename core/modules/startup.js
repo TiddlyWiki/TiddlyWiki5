@@ -112,7 +112,7 @@ exports.startup = function() {
 		// Display the PageTemplate
 		var templateTitle = "$:/templates/PageTemplate",
 			parser = $tw.wiki.parseTiddler(templateTitle),
-			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, context: {tiddlerTitle: templateTitle}});
+			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, context: {tiddlerTitle: templateTitle}, document: document});
 		renderTree.execute();
 		var container = document.createElement("div");
 		document.body.insertBefore(container,document.body.firstChild);

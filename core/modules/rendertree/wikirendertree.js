@@ -31,7 +31,7 @@ var WikiRenderTree = function(parser,options) {
 	this.wiki = options.wiki;
 	this.context = options.context || {};
 	this.parentRenderer = options.parentRenderer;
-	this.document = options.document || (typeof(document) === "object" ? document : null);
+	this.document = options.document;
 	// Hashmap of the renderer classes
 	if(!this.rendererClasses) {
 		WikiRenderTree.prototype.rendererClasses = $tw.modules.applyMethods("wikirenderer");

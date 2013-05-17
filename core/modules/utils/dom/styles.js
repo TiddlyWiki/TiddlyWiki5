@@ -35,7 +35,7 @@ StylesheetManager.prototype.addStylesheet = function(title) {
 	this.stylesheets[title] = true;
 	// Parse the tiddler and render as plain text
 	var parser = this.wiki.parseTiddler(title),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: this.wiki, context: {tiddlerTitle: title}});
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: this.wiki, context: {tiddlerTitle: title}, document: $tw.document});
 	renderTree.execute();
 	var container = $tw.document.createElement("div");
 	renderTree.renderInDom(container);
