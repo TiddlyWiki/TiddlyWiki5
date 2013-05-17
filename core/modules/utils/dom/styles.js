@@ -37,7 +37,9 @@ StylesheetManager.prototype.addStylesheet = function(title) {
 	var parser = this.wiki.parseTiddler(title),
 		renderTree = new $tw.WikiRenderTree(parser,{wiki: this.wiki, context: {tiddlerTitle: title}});
 	renderTree.execute();
-	var text = renderTree.render("text/plain");
+	var container = $tw.document.createElement("div");
+	renderTree.renderInDom(container);
+	var text = container.textContent;
 	// Create a style element and put it in the document
 	var styleNode = document.createElement("style");
 	styleNode.setAttribute("type","text/css");

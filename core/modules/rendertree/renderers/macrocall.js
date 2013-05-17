@@ -69,19 +69,9 @@ MacroCallRenderer.prototype.substituteParameters = function(text,macroCallParseT
 	return text;
 };
 
-MacroCallRenderer.prototype.render = function(type) {
-	var output = [];
-	$tw.utils.each(this.children,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
-		}
-	});
-	return output.join("");
-};
-
 MacroCallRenderer.prototype.renderInDom = function() {
 	// Create the element
-	this.domNode = document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
+	this.domNode = this.renderTree.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
 	this.domNode.setAttribute("data-macro-name",this.parseTreeNode.name);
 	// Render any child nodes
 	var self = this;

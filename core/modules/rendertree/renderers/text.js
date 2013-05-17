@@ -22,12 +22,8 @@ var TextRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	this.parseTreeNode = parseTreeNode;
 };
 
-TextRenderer.prototype.render = function(type) {
-	return type === "text/html" ? $tw.utils.htmlEncode(this.parseTreeNode.text) : this.parseTreeNode.text;
-};
-
 TextRenderer.prototype.renderInDom = function() {
-	return document.createTextNode(this.parseTreeNode.text);
+	return this.renderTree.document.createTextNode(this.parseTreeNode.text);
 };
 
 exports.text = TextRenderer

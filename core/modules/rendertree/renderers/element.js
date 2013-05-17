@@ -126,53 +126,11 @@ ElementRenderer.prototype.getAttribute = function(name,defaultValue) {
 	}
 };
 
-ElementRenderer.prototype.render = function(type) {
-	var isHtml = type === "text/html",
-		output = [],attr,a,v;
-	if(isHtml) {
-		output.push("<",this.widget.tag);
-		if(this.widget.attributes) {
-			attr = [];
-			for(a in this.widget.attributes) {
-				attr.push(a);
-			}
-			attr.sort();
-			for(a=0; a<attr.length; a++) {
-				v = this.widget.attributes[attr[a]];
-				if(v !== undefined) {
-					if($tw.utils.isArray(v)) {
-						v = v.join(" ");
-					} else if(typeof v === "object") {
-						var s = [];
-						for(var p in v) {
-							s.push(p + ":" + v[p] + ";");
-						}
-						v = s.join("");
-					}
-					output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
-				}
-			}
-		}
-		output.push(">\n");
-	}
-	if($tw.config.htmlVoidElements.indexOf(this.widget.tag) === -1) {
-		$tw.utils.each(this.widget.children,function(node) {
-			if(node.render) {
-				output.push(node.render(type));
-			}
-		});
-		if(isHtml) {
-			output.push("</",this.widget.tag,">");
-		}
-	}
-	return output.join("");
-};
-
 ElementRenderer.prototype.renderInDom = function() {
 	// Check if our widget is providing an element
 	if(this.widget.tag) {
 		// Create the element
-		this.domNode = document.createElementNS(this.namespace,this.widget.tag);
+		this.domNode = this.renderTree.document.createElementNS(this.namespace,this.widget.tag);
 		// Assign any specified event handlers
 		$tw.utils.addEventListeners(this.domNode,this.widget.events);
 		// Assign the attributes
@@ -184,8 +142,8 @@ ElementRenderer.prototype.renderInDom = function() {
 				self.domNode.appendChild(node.renderInDom());
 			}
 		});
-		// Call postRenderInDom if the widget provides it
-		if(this.widget.postRenderInDom) {
+		// Call postRenderInDom if the widget provides it and we're in the browser
+		if($tw.browser && this.widget.postRenderInDom) {
 			this.widget.postRenderInDom();
 		}
 		// Return the dom node

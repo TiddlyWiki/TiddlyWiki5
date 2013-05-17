@@ -22,12 +22,8 @@ var EntityRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	this.parseTreeNode = parseTreeNode;
 };
 
-EntityRenderer.prototype.render = function(type) {
-	return type === "text/html" ? this.parseTreeNode.entity : $tw.utils.entityDecode(this.parseTreeNode.entity);
-};
-
 EntityRenderer.prototype.renderInDom = function() {
-	return document.createTextNode($tw.utils.entityDecode(this.parseTreeNode.entity));
+	return this.renderTree.document.createTextNode($tw.utils.entityDecode(this.parseTreeNode.entity));
 };
 
 exports.entity = EntityRenderer

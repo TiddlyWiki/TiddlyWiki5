@@ -553,11 +553,13 @@ Parse text in a specified format and render it into another format
 	textType: content type of the input text
 	text: input text
 */
-exports.renderText = function(outputType,textType,text) {
+exports.renderText = function(outputType,textType,text,context) {
 	var parser = this.parseText(textType,text),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: this});
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: this, context: context, document: $tw.document});
 	renderTree.execute();
-	return renderTree.render(outputType);
+	var container = $tw.document.createElement("div");
+	renderTree.renderInDom(container)
+	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
 
 /*
@@ -567,9 +569,11 @@ Parse text from a tiddler and render it into another format
 */
 exports.renderTiddler = function(outputType,title,context) {
 	var parser = this.parseTiddler(title),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: this, context: context});
+		renderTree = new $tw.WikiRenderTree(parser,{wiki: this, context: context, document: $tw.document});
 	renderTree.execute();
-	return renderTree.render(outputType);
+	var container = $tw.document.createElement("div");
+	renderTree.renderInDom(container)
+	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
 
 /*

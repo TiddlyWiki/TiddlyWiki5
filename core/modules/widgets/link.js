@@ -123,10 +123,10 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		// Set the dragging class on the element being dragged
 		$tw.utils.addClass(event.target,"tw-tiddlylink-dragging");
 		// Create the drag image element
-		this.dragImage = document.createElement("div");
+		this.dragImage = this.listWidget.renderer.renderTree.document.createElement("div");
 		this.dragImage.className = "tw-tiddler-dragger";
-		this.dragImage.appendChild(document.createTextNode(this.to));
-		document.body.appendChild(this.dragImage);
+		this.dragImage.appendChild(this.listWidget.renderer.renderTree.document.createTextNode(this.to));
+		this.listWidget.renderer.renderTree.document.body.appendChild(this.dragImage);
 		// Set the data transfer properties
 		var dataTransfer = event.dataTransfer;
 		dataTransfer.effectAllowed = "copy";

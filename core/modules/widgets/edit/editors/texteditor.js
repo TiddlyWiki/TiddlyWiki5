@@ -127,12 +127,12 @@ TextEditor.prototype.fixHeight = function() {
 		$tw.utils.nextTick(function() {
 			// Resize the textarea to fit its content
 			var textarea = self.editWidget.children[0].domNode,
-				scrollTop = document.body.scrollTop;
+				scrollTop = self.editWidget.renderer.renderTree.document.body.scrollTop;
 			textarea.style.height = "auto";
 			var newHeight = Math.max(textarea.scrollHeight + textarea.offsetHeight - textarea.clientHeight,MIN_TEXT_AREA_HEIGHT);
 			if(newHeight !== textarea.offsetHeight) {
 				textarea.style.height =  newHeight + "px";
-				document.body.scrollTop = scrollTop;
+				self.editWidget.renderer.renderTree.document.body.scrollTop = scrollTop;
 			}
 		});
 	}
@@ -143,7 +143,7 @@ TextEditor.prototype.postRenderInDom = function() {
 };
 
 TextEditor.prototype.refreshInDom = function() {
-	if(document.activeElement !== this.editWidget.children[0].domNode) {
+	if(this.editWidget.renderer.renderTree.document.activeElement !== this.editWidget.children[0].domNode) {
 		var editInfo = this.getEditInfo();
 		this.editWidget.children[0].domNode.value = editInfo.value;
 	}

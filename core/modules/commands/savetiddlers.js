@@ -39,9 +39,11 @@ Command.prototype.execute = function() {
 		parser = wiki.parseTiddler(template),
 		tiddlers = wiki.filterTiddlers(filter);
 	$tw.utils.each(tiddlers,function(title) {
-		var renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki, context: {tiddlerTitle: title}});
+		var renderTree = new $tw.WikiRenderTree(parser,{wiki: wiki, context: {tiddlerTitle: title}, document: $tw.document});
 		renderTree.execute();
-		var text = renderTree.render(type);
+		var container = $tw.document.createElement("div");
+		renderTree.renderInDom(container);
+		var text = type === "text/html" ? container.innerHTML : container.textContent;
 		fs.writeFileSync(path.resolve(pathname,encodeURIComponent(title) + extension),text,"utf8");
 	});
 	return null;

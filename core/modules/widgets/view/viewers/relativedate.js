@@ -51,7 +51,7 @@ RelativeDateViewer.prototype.setTimer = function() {
 	if(this.relativeDate.updatePeriod < 24 * 60 * 60 * 1000) {
 		window.setTimeout(function() {
 			// Only call the update function if the dom node is still in the document
-			if($tw.utils.domContains(document,self.viewWidget.renderer.domNode)) {
+			if($tw.utils.domContains(self.listWidget.renderer.renderTree.document,self.viewWidget.renderer.domNode)) {
 				self.update.call(self);
 			}
 		},this.relativeDate.updatePeriod);
@@ -67,7 +67,7 @@ RelativeDateViewer.prototype.update = function() {
 		while(this.viewWidget.renderer.domNode.hasChildNodes()) {
 			this.viewWidget.renderer.domNode.removeChild(this.viewWidget.renderer.domNode.firstChild);
 		}
-		this.viewWidget.renderer.domNode.appendChild(document.createTextNode(this.relativeDate.description));
+		this.viewWidget.renderer.domNode.appendChild(this.viewWidget.renderer.renderTree.document.createTextNode(this.relativeDate.description));
 		this.setTimer();
 	}
 };

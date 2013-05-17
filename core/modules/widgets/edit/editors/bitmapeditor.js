@@ -49,7 +49,7 @@ BitmapEditor.prototype.postRenderInDom = function() {
 		var ctx = canvas.getContext("2d");
 		ctx.drawImage(currImage,0,0);
 		// And also copy the current bitmap to the off-screen canvas
-		self.currCanvas = document.createElement("canvas");
+		self.currCanvas = self.editWidget.renderer.renderTree.document.createElement("canvas");
 		self.currCanvas.width = currImage.width;
 		self.currCanvas.height = currImage.height;
 		ctx = self.currCanvas.getContext("2d");

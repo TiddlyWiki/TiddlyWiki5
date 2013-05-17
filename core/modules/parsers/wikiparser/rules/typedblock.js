@@ -63,14 +63,17 @@ exports.parse = function() {
 		return parser.tree;
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
-		var renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki});
+		var renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, document: $tw.document});
 		renderTree.execute();
+		var container = $tw.document.createElement("div");
+		renderTree.renderInDom(container);
+		var text = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
 			type: "element",
 			tag: "pre",
 			children: [{
 				type: "text",
-				text: renderTree.render(renderType)
+				text: text
 			}]
 		}];
 	}

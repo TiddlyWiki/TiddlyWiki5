@@ -22,12 +22,8 @@ var RawRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	this.parseTreeNode = parseTreeNode;
 };
 
-RawRenderer.prototype.render = function(type) {
-	return this.parseTreeNode.html;
-};
-
 RawRenderer.prototype.renderInDom = function() {
-	var domNode = document.createElement("div");
+	var domNode = this.renderTree.document.createElement("div");
 	domNode.innerHTML = this.parseTreeNode.html;
 	return domNode;
 };

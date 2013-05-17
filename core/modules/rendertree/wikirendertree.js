@@ -20,6 +20,7 @@ Options include:
 	wiki: mandatory reference to wiki associated with this render tree
 	context: optional hashmap of context variables (see below)
 	parentRenderer: optional reference to a parent renderer node for the context chain
+	document: optional document object to use instead of global document
 Context variables include:
 	tiddlerTitle: title of the tiddler providing the context
 	templateTitle: title of the tiddler providing the current template
@@ -30,6 +31,7 @@ var WikiRenderTree = function(parser,options) {
 	this.wiki = options.wiki;
 	this.context = options.context || {};
 	this.parentRenderer = options.parentRenderer;
+	this.document = options.document || (typeof(document) === "object" ? document : null);
 	// Hashmap of the renderer classes
 	if(!this.rendererClasses) {
 		WikiRenderTree.prototype.rendererClasses = $tw.modules.applyMethods("wikirenderer");
@@ -62,19 +64,6 @@ Create a renderer node for a parse tree node
 WikiRenderTree.prototype.createRenderer = function(parentRenderer,parseTreeNode) {
 	var RenderNodeClass = this.rendererClasses[parseTreeNode.type];
 	return new RenderNodeClass(this,parentRenderer,parseTreeNode);
-};
-
-/*
-Render as a string
-*/
-WikiRenderTree.prototype.render = function(type) {
-	var output = [];
-	$tw.utils.each(this.rendererTree,function(node) {
-		if(node.render) {
-			output.push(node.render(type));
-		}
-	});
-	return output.join("");
 };
 
 /*
