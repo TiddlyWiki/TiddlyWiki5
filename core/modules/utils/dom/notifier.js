@@ -36,7 +36,7 @@ Notifier.prototype.display = function(title,options) {
 	$tw.utils.addClass(notification,"tw-notification");
 	// Render the body of the notification
 	var bodyParser = this.wiki.parseTiddler(title),
-		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}});
+		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}, document: document});
 	bodyRenderTree.execute();
 	bodyRenderTree.renderInDom(notification);
 	this.wiki.addEventListener("change",function(changes) {
