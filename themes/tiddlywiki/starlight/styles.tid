@@ -25,6 +25,9 @@ background-image: -webkit-linear-gradient($gradient$);
 background-image: -ms-linear-gradient($gradient$);
 ```
 \end
+\define datauri(title)
+<$datauri tiddler="$title$"/>
+\end
 
 /*
 Placeholder for a more thorough refinement of Snow White
@@ -34,7 +37,7 @@ Placeholder for a more thorough refinement of Snow White
   font-family: "Arvo";
   font-style: normal;
   font-weight: 400;
-  src: local("Arvo"), url({{$:/themes/tiddlywiki/starlight/arvo.woff}}) format("woff");
+  src: local("Arvo"), url(<<datauri "$:/themes/tiddlywiki/starlight/arvo.woff">>) format("woff");
 }
 
 html body {
