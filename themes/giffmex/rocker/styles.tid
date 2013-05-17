@@ -43,3 +43,7 @@ table th {color: #000;background-color:#eee;font-weight:normal;}
 table th {border-color:#000;}
 table td {border-color:#000;}
 table {border-color:#000;}
+
+.sidebar-header {
+	color: #ccc;	
+}
