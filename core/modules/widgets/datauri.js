@@ -28,8 +28,13 @@ DataUriWidget.prototype.generate = function() {
 	if(tiddler) {
 		var type = tiddler.fields.type || "text/vnd.tiddlywiki",
 			typeInfo = $tw.config.contentTypeInfo[type],
-			isBase64 = typeInfo && typeInfo.encoding === "base64";
-		uri = "data:" + type + (isBase64 ? ";base64" : "") + "," + tiddler.fields.text;
+			isBase64 = typeInfo && typeInfo.encoding === "base64",
+			parts = ["data:"];
+		parts.push(type);
+		parts.push(isBase64 ? ";base64" : "");
+		parts.push(",");
+		parts.push(isBase64 ? tiddler.fields.text : encodeURIComponent(tiddler.fields.text));
+		uri = parts.join("");
 	}
 	// Set the element
 	this.tag = "pre";
