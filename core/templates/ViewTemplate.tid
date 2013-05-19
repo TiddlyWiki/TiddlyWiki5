@@ -1,12 +1,11 @@
 title: $:/templates/ViewTemplate
 modifier: JeremyRuston
 
-
-<span class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerDropdown" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
+<span class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
 
 </span><$view field="title"/></span>
 
-<$reveal type="popup" state="$:/state/tiddlerDropdown" position="belowleft" qualifyTiddlerTitles="yes"><div class="tw-drop-down"><$transclude template="$:/templates/TiddlerDropdown"></$transclude></div>
+<$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes"><$transclude template="$:/templates/TiddlerInfo"/>
 </$reveal>
 
 <div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>

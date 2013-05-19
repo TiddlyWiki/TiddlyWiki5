@@ -40,6 +40,9 @@ RevealWidget.prototype.generate = function() {
 	if(this["class"]) {
 		$tw.utils.pushTop(classes,this["class"]);
 	}
+	if(this.isOpen) {
+		$tw.utils.pushTop(classes,"tw-reveal-open");
+	}
 	switch(this.type) {
 		case "popup":
 			styles.push("position:absolute;");
@@ -146,6 +149,8 @@ RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 		}
 		// Set the visibility of the children
 		this.renderer.domNode.style.display = this.isOpen ? (this.renderer.parseTreeNode.isBlock ? "block" : "inline") : "none";
+		// Add or remove the tw-reveal-open class
+		$tw.utils.toggleClass(this.renderer.domNode,"tw-reveal-open",this.isOpen);
 	}
 	// Position the content if required
 	if(this.isOpen) {
