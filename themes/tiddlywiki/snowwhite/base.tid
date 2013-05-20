@@ -340,6 +340,14 @@ a.tw-tiddlylink-missing {
 	background-color: {{$:/core/styles/colourmappings##tiddlerbackground}};
 }
 
+.tw-tiddler-info {
+	padding: 1em 3em 1em 3em;
+	background-color: #f8f8f8;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
+}
+
 @media screen {
 	.tw-tiddler-frame {
 		<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
@@ -350,11 +358,19 @@ a.tw-tiddlylink-missing {
 	.tw-tiddler-frame {
 		padding: 1em 1em 1em 1em;
 	}
+
+	.tw-tiddler-info {
+		margin: 0 -1em 0 -1em;
+	}
 }
 
 @media (min-width: 55em) {
 	.tw-tiddler-frame {
 		padding: 2em 3em 3em 3em;
+	}
+
+	.tw-tiddler-info {
+		margin: 0 -3em 0 -3em;
 	}
 }
 
@@ -387,15 +403,6 @@ a.tw-tiddlylink-missing {
 
 .tw-tiddler-controls .tw-button svg:hover {
 	fill: #888;
-}
-
-.tw-tiddler-info {
-	margin: 0 -3em 0 -3em;
-	padding: 1em 3em 1em 3em;
-	background-color: #f8f8f8;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
 }
 
 @media print {
