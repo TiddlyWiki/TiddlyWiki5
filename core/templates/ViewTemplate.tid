@@ -5,7 +5,10 @@ modifier: JeremyRuston
 
 </span><$view field="title"/></span>
 
-<$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes"><$transclude template="$:/templates/TiddlerInfo"/>
+<$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes">
+
+<$transclude template="$:/templates/TiddlerInfo"/>
+
 </$reveal>
 
 <div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
