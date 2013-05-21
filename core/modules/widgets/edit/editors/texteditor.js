@@ -127,12 +127,20 @@ TextEditor.prototype.fixHeight = function() {
 		$tw.utils.nextTick(function() {
 			// Resize the textarea to fit its content
 			var textarea = self.editWidget.children[0].domNode,
-				scrollTop = self.editWidget.renderer.renderTree.document.body.scrollTop;
+				scrollPosition = $tw.utils.getScrollPosition(),
+				scrollTop = scrollPosition.y;
+			// Set its height to auto so that it snaps to the correct height
 			textarea.style.height = "auto";
+			// Calculate the revised height
 			var newHeight = Math.max(textarea.scrollHeight + textarea.offsetHeight - textarea.clientHeight,MIN_TEXT_AREA_HEIGHT);
+			// Only try to change the height if it has changed
 			if(newHeight !== textarea.offsetHeight) {
 				textarea.style.height =  newHeight + "px";
-				self.editWidget.renderer.renderTree.document.body.scrollTop = scrollTop;
+				// Make sure that the dimensions of the textarea are recalculated
+				$tw.utils.forceLayout(textarea);
+				// Check that the scroll position is still visible before trying to scroll back to it
+				scrollTop = Math.min(scrollTop,self.editWidget.renderer.renderTree.document.body.scrollHeight - window.innerHeight);
+				window.scrollTo(scrollPosition.x,scrollTop);
 			}
 		});
 	}
