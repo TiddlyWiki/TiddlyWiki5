@@ -1,22 +1,26 @@
+modified: 201305201828
 title: HelpingTiddlyWiki
-modified: 201304021949
 
-Here are some ideas for how you can join in helping to make TiddlyWiki better.
+If you find TiddlyWiki useful, there are lots of ways you can help assure its future and make it better.
 
-! 1. Tell The World
+! 1. Teach other people to use TiddlyWiki
+
+OpenSource projects like TiddlyWiki thrive on the feedback and engagement of users. TiddlyWiki becomes more useful to everyone as more and more people use it.
+
+! 2. Tell the world
 
 If you find TiddlyWiki useful, spread the word. The best possible way to assure its future is for it to become a hundred times more popular than before.
 
 * [[Tweet about TiddlyWiki|https://twitter.com/intent/tweet?text=I+love+TiddlyWiki+because...&source=tiddlywiki5]]
 
-! 2. Join the discussion
+! 3. Join the discussion
 
 There's lively discussion about TiddlyWiki in the Google Groups:
 
 * The main TiddlyWiki group: http://groups.google.com/group/TiddlyWiki
 * The TiddlyWikiDev group for developers: http://groups.google.com/group/TiddlyWikiDev
 
-! 3. Improve the Documentation and Code
+! 4. Improve the Documentation and Code
 
 The main TiddlyWiki documentation and code lives on GitHub, and so can be forked and pulled freely:
 
