@@ -24,7 +24,9 @@ DownloadSaver.prototype.save = function(text) {
 	link.setAttribute("target","_blank");
 	link.setAttribute("href","data:text/html," + encodeURIComponent(text));
 	link.setAttribute("download","tiddlywiki.html");
+	document.body.appendChild(link);
 	link.click();
+	document.body.removeChild(link);
 	return true;
 };
 
