@@ -20,7 +20,7 @@ function StylesheetManager(wiki) {
 	this.stylesheets = {}; // Hashmap of currently rendered stylesheets
 	// Apply initial stylesheets
 	var self = this,
-		stylesheetTiddlers = this.wiki.filterTiddlers("[!has[draft.of]tag[" + STYLESHEET_TAG + "]]");
+		stylesheetTiddlers = this.wiki.filterTiddlers("[is[shadow]!has[draft.of]tag[" + STYLESHEET_TAG + "]] [!is[shadow]!has[draft.of]tag[" + STYLESHEET_TAG + "]]");
 	$tw.utils.each(stylesheetTiddlers,function(title,index) {
 		self.addStylesheet(title);
 	});
