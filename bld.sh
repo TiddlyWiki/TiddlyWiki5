@@ -69,9 +69,4 @@ node ./tiddlywiki.js \
 
 # Fifth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
-node ./tiddlywiki.js \
-	./editions/test \
-	--verbose \
-	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/test.html text/plain \
-	|| exit 1
-
+./test.sh
