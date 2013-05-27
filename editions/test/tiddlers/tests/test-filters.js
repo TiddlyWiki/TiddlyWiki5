@@ -28,19 +28,25 @@ describe("Filter tests", function() {
 		title: "TiddlerOne",
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
-		modifier: "JoeBloggs"});
+		modifier: "JoeBloggs",
+		modified: "201304152219"});
 	wiki.addTiddler({
 		title: "$:/TiddlerTwo",
 		text: "The rain in Spain\nfalls mainly on the plain and [[a fourth tiddler]]",
-		tags: ["two"]});
+		tags: ["two"],
+		modifier: "JohnDoe",
+		modified: "201304151756"});
 	wiki.addTiddler({
 		title: "Tiddler Three",
 		text: "The speed of sound in light\n\nThere is no TiddlerZero but TiddlerSix",
-		tags: ["one","two"]});
+		tags: ["one","two"],
+		modifier: "JohnDoe",
+		modified: "201304161643"});
 	wiki.addTiddler({
 		title: "a fourth tiddler",
 		text: "The quality of mercy is not drained by [[Tiddler Three]]",
-		tags: []});
+		tags: [],
+		modifier: "JohnDoe"});
 	// And some shadows
 	addShadowTiddler({
 		title: "$:/TiddlerFive",
@@ -57,7 +63,8 @@ describe("Filter tests", function() {
 	addShadowTiddler({
 		title: "Tiddler8",
 		text: "Tidd",
-		tags: []});
+		tags: [],
+		"test-field": "JoeBloggs"});
 
 	// Our tests
 
@@ -115,8 +122,8 @@ describe("Filter tests", function() {
 	});
 
 	it("should handle the has operator", function() {
-		expect(wiki.filterTiddlers("[has[modifier]sort[title]]").join(",")).toBe("TiddlerOne");
-		expect(wiki.filterTiddlers("[!has[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three");
+		expect(wiki.filterTiddlers("[has[modified]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[!has[modified]sort[title]]").join(",")).toBe("a fourth tiddler");
 	});
 
 	it("should handle the limit operator", function() {
@@ -129,8 +136,21 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[tag[one]list[TiddlerSeventh]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
-	it("should handle the searchVia operator", function() {
-		expect(wiki.filterTiddlers("[searchVia[Tiddler8]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three,TiddlerOne");
+	it("should handle the search operator", function() {
+		expect(wiki.filterTiddlers("[search[the]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[search{Tiddler8}sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three,TiddlerOne");
+	});
+
+	it("should handle the each operator", function() {
+		expect(wiki.filterTiddlers("[each[modifier]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
+	});
+
+	it("should handle the eachday operator", function() {
+		expect(wiki.filterTiddlers("[eachday[modified]sort[title]]").join(",")).toBe("a fourth tiddler,Tiddler Three,TiddlerOne");
+	});
+
+	it("should handle the sameday operator", function() {
+		expect(wiki.filterTiddlers("[sameday[201304151312]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
 	});
 
 	describe("testing the is operator",function() {
@@ -174,6 +194,12 @@ describe("Filter tests", function() {
 
 	it("should handle the operand prefixes", function() {
 		expect(wiki.filterTiddlers("[prefix[Tiddler]] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+	});
+
+	it("should handle indirect operands", function() {
+		expect(wiki.filterTiddlers("[prefix{Tiddler8}] +[sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]","Tiddler Three").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three");
 	});
 
 });
