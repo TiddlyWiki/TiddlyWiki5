@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/searchVia.js
+title: $:/core/modules/filters/search.js
 type: application/javascript
 module-type: filteroperator
 
@@ -15,10 +15,9 @@ Filter operator for searching for the text in the operand tiddler
 /*
 Export our filter function
 */
-exports.searchVia = function(source,operator,options) {
-	var term = options.wiki.getTiddlerText(operator.operand,""),
-		invert = operator.prefix === "!";
-	return options.wiki.search(term,{
+exports.search = function(source,operator,options) {
+	var invert = operator.prefix === "!";
+	return options.wiki.search(operator.operand,{
 		titles: source,
 		invert: invert,
 		exclude: [operator.operand]
