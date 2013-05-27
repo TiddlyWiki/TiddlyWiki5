@@ -37,7 +37,7 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	if(tr.field) {
 		var tiddler = this.getTiddler(title);
 		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
-			return tiddler.fields[tr.field];
+			return tiddler.getFieldString(tr.field);
 		} else {
 			return defaultText;
 		}
