@@ -249,6 +249,7 @@ a.tw-tiddlylink-missing {
 */
 
 .sidebar-header {
+	color: #acacac;
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
 
@@ -288,6 +289,10 @@ a.tw-tiddlylink-missing {
 
 .tw-menu-list-item {
 	white-space: nowrap;
+}
+
+.tw-menu-list-subitem {
+	padding-left: 0.5em;
 }
 
 @media (max-width: 55em) {
