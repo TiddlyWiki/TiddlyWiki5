@@ -20,7 +20,7 @@ Parses an operation within a filter string
 Returns the new start position, after the parsed operation
 */
 function parseFilterOperation(operators,filterString,p) {
-	var operator, operand, bracketPos;
+	var operator, operand, bracketPos, curlyBracketPos;
 	// Skip the starting square bracket
 	if(filterString.charAt(p++) !== "[") {
 		throw "Missing [ in filter expression";
@@ -34,18 +34,27 @@ function parseFilterOperation(operators,filterString,p) {
 		}
 		// Get the operator name
 		bracketPos = filterString.indexOf("[",p);
-		if(bracketPos === -1) {
+		curlyBracketPos = filterString.indexOf("{",p);
+		if((bracketPos === -1) && (curlyBracketPos === -1)) {
 			throw "Missing [ in filter expression";
 		}
-		operator.operator = filterString.substring(p,bracketPos);
+		if(bracketPos === -1 || (curlyBracketPos !== -1 && curlyBracketPos < bracketPos)) {
+			// Curly brackets
+			operator.indirect = true;
+			operator.operator = filterString.substring(p,curlyBracketPos);
+			p = curlyBracketPos + 1;
+		} else {
+			// Square brackets
+			operator.operator = filterString.substring(p,bracketPos);
+			p = bracketPos + 1;
+		}
 		if(operator.operator === "") {
 			operator.operator = "title";
 		}
-		p = bracketPos + 1;
 		// Get the operand
-		bracketPos = filterString.indexOf("]",p);
+		bracketPos = filterString.indexOf(operator.indirect ? "}" : "]",p);
 		if(bracketPos === -1) {
-			throw "Missing ] in filter expression";
+			throw "Missing closing bracket in filter expression";
 		}
 		operator.operand = filterString.substring(p,bracketPos);
 		p = bracketPos + 1;
@@ -136,9 +145,20 @@ exports.compileFilter = function(filterString) {
 				results = [];
 			$tw.utils.each(operation.operators,function(operator) {
 				var operatorFunction = filterOperators[operator.operator] || filterOperators.field || function(source,operator,operations) {
-					return ["Filter Error: unknown operator '" + operator.operator + "'"];
-				};
-				results = operatorFunction(accumulator,operator,{wiki: self, currTiddlerTitle: currTiddlerTitle});
+						return ["Filter Error: unknown operator '" + operator.operator + "'"];
+					},
+					operand = operator.operand;
+				if(operator.indirect) {
+					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
+				}
+				results = operatorFunction(accumulator,{
+							operator: operator.operator,
+							operand: operand,
+							prefix: operator.prefix
+						},{
+							wiki: self,
+							currTiddlerTitle: currTiddlerTitle
+						});
 				accumulator = results;
 			});
 			return results;
