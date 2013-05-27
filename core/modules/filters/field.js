@@ -21,7 +21,7 @@ exports.field = function(source,operator,options) {
 	function checkTiddler(title) {
 		var tiddler = options.wiki.getTiddler(title);
 		if(tiddler) {
-			var match = tiddler.fields[operator.operator] === operator.operand;
+			var match = tiddler.getFieldString(operator.operator) === operator.operand;
 			if(operator.prefix === "!") {
 				match = !match;
 			}
