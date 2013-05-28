@@ -346,6 +346,7 @@ a.tw-tiddlylink-missing {
 }
 
 .tw-tiddler-info {
+	overflow: hidden;
 	padding: 1em 3em 1em 3em;
 	background-color: #f8f8f8;
 	border-top: 1px solid #ddd;

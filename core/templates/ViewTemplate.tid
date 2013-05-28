@@ -5,7 +5,7 @@ modifier: JeremyRuston
 
 </span><$view field="title"/></span>
 
-<$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes">
+<$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="tw-tiddler-info">
 
 <$transclude template="$:/templates/TiddlerInfo"/>
 
