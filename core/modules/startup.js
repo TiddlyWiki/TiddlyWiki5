@@ -96,6 +96,8 @@ exports.startup = function() {
 		document.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
+		// Install the animator
+		$tw.anim = new $tw.utils.Animator();
 		// Kick off the stylesheet manager
 		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
 		// If we're being viewed on a data: URI then give instructions for how to save
