@@ -38,13 +38,7 @@ title: $:/templates/SideBar
 <$button message="tw-close-all-tiddlers" class="btn-invisible btn-mini">close all</$button>
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="recentTab" qualifyTiddlerTitles="yes">
-<$list filter="[has[modified]!sort[modified]limit[100]eachday[modified]]" itemClass="tw-menu-list-item">
-<$view field="modified" format="date" template="DDth MMM YYYY"/>
-<$list filter="[sameday{!!modified}!sort[modified]]" itemClass="tw-menu-list-subitem">
-<$view field="title" format="link"/>
-</$list>
-</$list>
-
+{{$:/snippets/recentchanges}}
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="toolsTab" qualifyTiddlerTitles="yes">
 {{$:/templates/ToolsPanel}}
