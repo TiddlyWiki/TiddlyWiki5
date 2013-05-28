@@ -28,6 +28,7 @@ RevealWidget.prototype.generate = function() {
 	this["default"] = this.renderer.getAttribute("default");
 	this.qualifyTiddlerTitles = this.renderer.getAttribute("qualifyTiddlerTitles");
 	this["class"] = this.renderer.getAttribute("class");
+	this.animate = this.renderer.getAttribute("animate","no");
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
 	if(this.qualifyTiddlerTitles) {
@@ -151,13 +152,17 @@ RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 		}
 		// Animate the opening or closing
 		if(this.isOpen !== previousState) {
-			if(this.isOpen) {
-				this.renderer.domNode.style.display = this.renderer.parseTreeNode.isBlock ? "block" : "inline";
-				$tw.anim.perform("open",this.renderer.domNode);
+			if(this.animate !== "no") {
+				if(this.isOpen) {
+					this.renderer.domNode.style.display = this.renderer.parseTreeNode.isBlock ? "block" : "inline";
+					$tw.anim.perform("open",this.renderer.domNode);
+				} else {
+					$tw.anim.perform("close",this.renderer.domNode,{callback: function() {
+						self.renderer.domNode.style.display = "none";
+					}});
+				}
 			} else {
-				$tw.anim.perform("close",this.renderer.domNode,{callback: function() {
-					self.renderer.domNode.style.display = "none";
-				}});
+				this.renderer.domNode.style.display = this.isOpen ? (this.renderer.parseTreeNode.isBlock ? "block" : "inline") : "none";
 			}
 		}
 		// Add or remove the tw-reveal-open class

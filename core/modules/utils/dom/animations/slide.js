@@ -29,7 +29,8 @@ function slideOpen(domNode,options) {
 			{marginTop: ""},
 			{paddingBottom: ""},
 			{paddingTop: ""},
-			{height: "auto"}
+			{height: "auto"},
+			{opacity: ""}
 		]);
 		domNode.removeEventListener(transitionEventName,handler,false);
 		if(options.callback) {
@@ -43,7 +44,8 @@ function slideOpen(domNode,options) {
 		{marginBottom: "0px"},
 		{paddingTop: "0px"},
 		{paddingBottom: "0px"},
-		{height: "0px"}
+		{height: "0px"},
+		{opacity: "0"}
 	]);
 	$tw.utils.forceLayout(domNode);
 	// Transition to the final position
@@ -52,12 +54,14 @@ function slideOpen(domNode,options) {
 					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"padding-top " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"padding-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
 		{marginBottom: currMarginBottom + "px"},
 		{marginTop: currMarginTop + "px"},
 		{paddingBottom: currPaddingBottom + "px"},
 		{paddingTop: currPaddingTop + "px"},
-		{height: currHeight + "px"}
+		{height: currHeight + "px"},
+		{opacity: "1"}
 	]);
 }
 
@@ -72,7 +76,8 @@ function slideClosed(domNode,options) {
 			{marginTop: ""},
 			{paddingBottom: ""},
 			{paddingTop: ""},
-			{height: "auto"}
+			{height: "auto"},
+			{opacity: ""}
 		]);
 		domNode.removeEventListener(transitionEventName,handler,false);
 		if(options.callback) {
@@ -81,7 +86,8 @@ function slideClosed(domNode,options) {
 	},false);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(domNode,[
-		{height: currHeight + "px"}
+		{height: currHeight + "px"},
+		{opacity: "1"}
 	]);
 	$tw.utils.forceLayout(domNode);
 	// Transition to the final position
@@ -90,12 +96,14 @@ function slideClosed(domNode,options) {
 					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"padding-top " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
 					"padding-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
+					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
 		{marginTop: "0px"},
 		{marginBottom: "0px"},
 		{paddingTop: "0px"},
 		{paddingBottom: "0px"},
-		{height: "0px"}
+		{height: "0px"},
+		{opacity: "0"}
 	]);
 }
 
