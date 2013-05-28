@@ -119,6 +119,7 @@ RevealWidget.prototype.handleClickEvent = function(event) {
 };
 
 RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
+	var self = this;
 	// Check if any of our attributes have changed, or if a tiddler we're interested in has changed
 	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"]) {
 		// Regenerate and rerender the widget and replace the existing DOM node
@@ -129,6 +130,7 @@ RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 	} else {
 		var needChildrenRefresh = true; // Avoid refreshing the children nodes if we don't need to
 		// Get the open state
+		var previousState = this.isOpen
 		this.readState();
 		// Construct the child nodes if  required
 		if(this.isOpen && this.children.length === 0) {
@@ -147,8 +149,17 @@ RevealWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers
 				}
 			});
 		}
-		// Set the visibility of the children
-		this.renderer.domNode.style.display = this.isOpen ? (this.renderer.parseTreeNode.isBlock ? "block" : "inline") : "none";
+		// Animate the opening or closing
+		if(this.isOpen !== previousState) {
+			if(this.isOpen) {
+				this.renderer.domNode.style.display = this.renderer.parseTreeNode.isBlock ? "block" : "inline";
+				$tw.anim.perform("open",this.renderer.domNode);
+			} else {
+				$tw.anim.perform("close",this.renderer.domNode,{callback: function() {
+					self.renderer.domNode.style.display = "none";
+				}});
+			}
+		}
 		// Add or remove the tw-reveal-open class
 		$tw.utils.toggleClass(this.renderer.domNode,"tw-reveal-open",this.isOpen);
 	}
