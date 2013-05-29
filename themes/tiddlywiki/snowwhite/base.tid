@@ -429,7 +429,7 @@ a.tw-tiddlylink-missing {
 .tw-tiddler-frame .tw-edit-texteditor input, .tw-tiddler-frame .tw-edit-texteditor textarea {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
-	border: 1px solid #888;
+	border: 1px solid #ccc;
 	line-height: 1.3em;
 	-webkit-appearance: none;
 	margin: 0.25em 0 0.25em 0;
@@ -445,6 +445,26 @@ canvas.tw-edit-bitmapeditor  {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+}
+
+/*
+** Tiddler edit mode
+*/
+
+.tw-tiddler-preview {
+	overflow: auto;
+}
+
+.tw-tiddler-preview-preview {
+	float: right;
+	width: 48%;
+	border: 1px solid #ccc;
+	margin: 4px 3px 3px 3px;
+	padding: 3px 3px 3px 3px;
+}
+
+.tw-tiddler-preview-edit {
+	width: 48%;
 }
 
 /*

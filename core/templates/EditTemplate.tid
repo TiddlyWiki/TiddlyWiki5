@@ -13,8 +13,18 @@ modifier: JeremyRuston
 
 <$edit field="tags"/>
 
-<div class="tw-tiddler-help">Use WikiText to add formatting, images, and dynamic features</div>
-
-@@.body
+<$reveal state="$:/ShowEditPreview" type="match" text="yes">
+<span class="tw-tiddler-help">Use WikiText to add formatting, images, and dynamic features</span> <$button type="set" set="$:/ShowEditPreview" setTo="no" >Hide preview</$button>
+<div class="tw-tiddler-preview">
+<div class="tw-tiddler-preview-preview">
+<$view field="text" format="wikified"/>
+</div>
+<div class="tw-tiddler-preview-edit">
 <$edit field="text"/>
-@@
+</div>
+</div>
+</$reveal>
+<$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
+<span class="tw-tiddler-help">Use WikiText to add formatting, images, and dynamic features</span> <$button type="set" set="$:/ShowEditPreview" setTo="yes" >Show preview</$button>
+<$edit field="text"/>
+</$reveal>
