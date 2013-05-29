@@ -1,4 +1,0 @@
-title: WikiTemplate
-
-<div class="alert"><<view wikiName>> - <<link throughField:urlView><View>> <<link throughField:urlEdit><Edit>>
-</div>

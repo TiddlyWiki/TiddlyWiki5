@@ -1,7 +1,0 @@
-{
-	"plugins": [
-		"tiddlywiki/fullscreen",
-		"tiddlywiki/dropbox",
-		"tiddlywiki/dropbox-app"
-	]
-}

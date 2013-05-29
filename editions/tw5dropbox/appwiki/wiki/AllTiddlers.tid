@@ -1,6 +1,0 @@
-title: AllTiddlers
-tags: navigation
-
-Current tiddlers:
-
-{{{ [!is[system]sort[title]] }} <div><<view title link>></div> }
