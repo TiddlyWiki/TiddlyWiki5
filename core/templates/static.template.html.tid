@@ -14,10 +14,11 @@ type: text/vnd.tiddlywiki-html
 {{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
 </div>
 <style type="text/css">
-{{$:/core/styles/base}}
+{{{ [tag[$:/tags/stylesheet]] [is[shadow]tag[$:/tags/stylesheet]] ||$:/core/templates/wikified-tiddler}}}
 </style>
 </head>
 <body>
+{{$:/StaticBanner||$:/core/templates/html-tiddler}}
 {{$:/core/ui/PageTemplate||$:/core/templates/html-tiddler}}
 </body>
 </html>

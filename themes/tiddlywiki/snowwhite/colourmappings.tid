@@ -1,9 +1,9 @@
-title: $:/core/styles/colourmappings
+title: $:/themes/tiddlywiki/snowwhite/colourmappings
 type: application/x-tiddler-dictionary
 
-tiddlerbackground: {{$:/core/styles/colours##background}}
-pagebackground: {{$:/core/styles/colours##pagebackground}}
-linkbackground: {{$:/core/styles/colours##background}}
-linkforeground: {{$:/core/styles/colours##primary}}
-dropdownbackground: {{$:/core/styles/colours##background}}
-dropdownborder: {{$:/core/styles/colours##medium}}
+tiddlerbackground: {{$:/themes/tiddlywiki/snowwhite/colours##background}}
+pagebackground: {{$:/themes/tiddlywiki/snowwhite/colours##pagebackground}}
+linkbackground: {{$:/themes/tiddlywiki/snowwhite/colours##background}}
+linkforeground: {{$:/themes/tiddlywiki/snowwhite/colours##primary}}
+dropdownbackground: {{$:/themes/tiddlywiki/snowwhite/colours##background}}
+dropdownborder: {{$:/themes/tiddlywiki/snowwhite/colours##medium}}
