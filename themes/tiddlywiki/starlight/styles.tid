@@ -44,3 +44,44 @@ html body {
 	font-family: "Arvo", "Times";
   background: url(<<datauri "$:/themes/tiddlywiki/starlight/ltbg.jpg">>);
 }
+
+/*
+** Some rainbow icon colours
+*/
+
+svg.tw-image-new-button {
+  fill: #5eb95e; /* Green */
+}
+
+svg.tw-image-options-button {
+  fill: rgb(128, 88, 165); /* Purple */
+}
+
+svg.tw-image-save-button {
+  fill: #0e90d2; /* Light blue */
+}
+
+svg.tw-image-info-button {
+  fill: #0e90d2; /* Light blue */
+}
+
+svg.tw-image-edit-button {
+  fill: rgb(243, 123, 29); /* Orange */
+}
+
+svg.tw-image-close-button {
+  fill: #dd514c; /* Red */
+}
+
+svg.tw-image-delete-button {
+  fill: #dd514c; /* Red */
+}
+
+svg.tw-image-cancel-button {
+  fill: rgb(243, 123, 29); /* Orange */
+}
+
+svg.tw-image-done-button {
+  fill: #5eb95e; /* Green */
+}
+
