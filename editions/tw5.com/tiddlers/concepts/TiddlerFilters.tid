@@ -1,5 +1,6 @@
-title: TiddlerFilters
 tags: docs concepts
+title: TiddlerFilters
+modified: 201305311232
 
 Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria.
 
@@ -54,6 +55,12 @@ The operands available with the `is` operator are:
 * ''current'': selects the current ContextTiddler
 * ''missing'': selects all missing tiddlers
 * ''orphan'': selects all orphan tiddlers
+
+! Indirect Operands
+
+If a filter operator is written with curly brackets around the operand then it is taken to be a TiddlerTextReference to the actual value. For example:
+
+''[search{$:/temp/search}]'': selects all tiddlers containing the string contained in the tiddler titled ''$:/temp/search''.
 
 ! Runs
 
