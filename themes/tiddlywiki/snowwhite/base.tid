@@ -401,13 +401,13 @@ a.tw-tiddlylink-missing {
 	vertical-align: baseline;
 }
 
-.tw-tiddler-controls .tw-button svg {
+.tw-tiddler-controls svg {
 	height: 0.75em;
 	fill: #ccc;
 	<<transition "fill 150ms ease-in-out">>
 }
 
-.tw-tiddler-controls .tw-button svg:hover {
+.tw-tiddler-controls svg:hover {
 	fill: #888;
 }
 
