@@ -31,7 +31,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 </noscript>
 <!----------- Miscellaneous system tiddlers ----------->
 <div id="systemArea" style="display:none;">
-{{{ [is[system]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/core/boot.js]] -[[$:/core/bootprefix.js]] ||$:/core/templates/html-div-tiddler}}}
+{{{ [is[system]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] ||$:/core/templates/html-div-tiddler}}}
 </div>
 <!----------- Ordinary tiddlers ----------->
 {{$:/core/templates/store.area.template.html}}
@@ -42,7 +42,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 </div>
 <!----------- Boot kernel prologue ----------->
 <div id="bootKernelPrefix" style="display:none;">
-{{ $:/core/bootprefix.js ||$:/core/templates/javascript-tiddler}}
+{{ $:/boot/bootprefix.js ||$:/core/templates/javascript-tiddler}}
 </div>
 <!----------- Plugin modules ----------->
 <div id="modules" style="display:none;">
@@ -50,7 +50,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 </div>
 <!----------- Boot kernel ----------->
 <div id="bootKernel" style="display:none;">
-{{ $:/core/boot.js ||$:/core/templates/javascript-tiddler}}
+{{ $:/boot/boot.js ||$:/core/templates/javascript-tiddler}}
 </div>
 </body>
 </html>

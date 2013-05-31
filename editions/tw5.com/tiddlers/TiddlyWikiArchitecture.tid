@@ -7,4 +7,4 @@ The heart of TiddlyWiki can be seen as an extensible representation transformati
 
 The primary use of the engine is to convert raw `text/vnd.tiddlywiki` WikiText into a `text/html` or `text/plain` representation for display. The transclusion and templating features of WikiText allow the engine to also be used to generate TiddlyWiki HTML files from raw tiddlers.
 
-If you're interested in understanding more about the internal operation of TiddlyWiki, it is recommended that you review the DeveloperDocs and read the code -- start with the boot kernel [[$:/core/boot.js]].
+If you're interested in understanding more about the internal operation of TiddlyWiki, it is recommended that you review the DeveloperDocs and read the code -- start with the boot kernel [[$:/boot/boot.js]].

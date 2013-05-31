@@ -15,7 +15,7 @@ Some plugin modules have further sub-plugins: the wikitext parser, for instance,
 
 In TiddlyWiki5, [[Plugins]] are bundles of tiddlers that are distributed and managed as one; [[Modules]] are JavaScript tiddlers with a module type identifying when and how they should be executed.
 
-The tiddler [[$:/core/boot.js]] is a barebones TiddlyWiki kernel that is just sufficient to load the core plugin modules and trigger a startup module to load up the rest of the application.
+The tiddler [[$:/boot/boot.js]] is a barebones TiddlyWiki kernel that is just sufficient to load the core plugin modules and trigger a startup module to load up the rest of the application.
 
 The kernel includes:
 
