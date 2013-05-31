@@ -67,6 +67,10 @@ body {
 	word-wrap: break-word;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1em;
+}
+
 code, pre {
 	padding: 0 3px 2px;
 	<<border-radius 3px>>
