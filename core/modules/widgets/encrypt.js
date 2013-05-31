@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widget/encrypt.js
+title: $:/core/modules/widgets/encrypt.js
 type: application/javascript
 module-type: widget
 

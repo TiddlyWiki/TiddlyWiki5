@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widget/link.js
+title: $:/core/modules/widgets/link.js
 type: application/javascript
 module-type: widget
 

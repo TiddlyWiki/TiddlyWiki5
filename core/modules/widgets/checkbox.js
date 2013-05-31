@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widget/checkbox.js
+title: $:/core/modules/widgets/checkbox.js
 type: application/javascript
 module-type: widget
 

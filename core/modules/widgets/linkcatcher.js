@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widget/linkcatcher.js
+title: $:/core/modules/widgets/linkcatcher.js
 type: application/javascript
 module-type: widget
 

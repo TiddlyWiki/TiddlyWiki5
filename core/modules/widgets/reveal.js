@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widget/reveal.js
+title: $:/core/modules/widgets/reveal.js
 type: application/javascript
 module-type: widget
 

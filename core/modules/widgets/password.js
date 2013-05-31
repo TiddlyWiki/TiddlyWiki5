@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widget/password.js
+title: $:/core/modules/widgets/password.js
 type: application/javascript
 module-type: widget
 
