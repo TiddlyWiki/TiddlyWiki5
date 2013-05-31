@@ -333,7 +333,7 @@ exports.getMissingTitles = function() {
 	this.forEachTiddler(function(title,tiddler) {
 		var links = self.getTiddlerLinks(title);
 		$tw.utils.each(links,function(link) {
-			if(!self.tiddlerExists(link) && missing.indexOf(link) === -1) {
+			if((!self.tiddlerExists(link) && !self.isShadowTiddler(link)) && missing.indexOf(link) === -1) {
 				missing.push(link);
 			}
 		});

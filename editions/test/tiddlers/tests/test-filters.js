@@ -173,7 +173,7 @@ describe("Filter tests", function() {
 		});
 
 		it("should handle the '[is[missing]]' operator", function() {
-			expect(wiki.filterTiddlers("[is[missing]]").join(",")).toBe("TiddlerZero,TiddlerSix,TiddlerTwo");
+			expect(wiki.filterTiddlers("[is[missing]]").join(",")).toBe("TiddlerZero,TiddlerTwo");
 			expect(wiki.filterTiddlers("[!is[missing]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[[TiddlerOne]is[missing]]").join(",")).toBe("");
 			expect(wiki.filterTiddlers("[[TiddlerZero]is[missing]]").join(",")).toBe("TiddlerZero");
