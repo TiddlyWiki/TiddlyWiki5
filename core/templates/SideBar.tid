@@ -14,7 +14,7 @@ title: $:/templates/SideBar
 
 <div class="tw-search-results">
 
-<$list filter="[!is[system]search[$:/temp/search]sort[title]limit[50]]" emptyMessage="//No results//"/>
+<$list filter="[!is[system]search{$:/temp/search}sort[title]limit[50]]" emptyMessage="//No results//"/>
 
 </div>
 
