@@ -26,7 +26,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
 <div id="splashArea">
-{{$:/templates/NewStaticContent||$:/core/templates/html-tiddler}}
+{{$:/templates/static.content||$:/core/templates/html-tiddler}}
 </div>
 </noscript>
 <!----------- Miscellaneous system tiddlers ----------->

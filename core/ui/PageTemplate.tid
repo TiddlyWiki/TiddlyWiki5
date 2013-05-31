@@ -1,4 +1,4 @@
-title: $:/templates/PageTemplate
+title: $:/core/ui/PageTemplate
 
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
@@ -10,7 +10,7 @@ title: $:/templates/PageTemplate
 
 {{SiteTitle}}.title <br><small>{{SiteSubtitle}}</small>
 
-{{$:/templates/SideBar}}
+{{$:/core/ui/SideBar}}
 
 </header>
 
@@ -18,7 +18,7 @@ title: $:/templates/PageTemplate
 <section class="story-river">
 
 <!-- The main story -->
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/templates/ViewTemplate" editTemplate="$:/templates/EditTemplate" listview="classic" itemClass="tw-tiddler-frame"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" listview="classic" itemClass="tw-tiddler-frame"/>
 
 <!-- End of story river -->
 </section>

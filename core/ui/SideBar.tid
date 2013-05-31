@@ -1,4 +1,4 @@
-title: $:/templates/SideBar
+title: $:/core/ui/SideBar
 
 <!-- The implementation of tabs here is currently a bit unreadable -->
 
@@ -41,10 +41,10 @@ title: $:/templates/SideBar
 {{$:/snippets/recentchanges}}
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="toolsTab" qualifyTiddlerTitles="yes">
-{{$:/templates/ToolsPanel}}
+{{$:/core/ui/ToolsPanel}}
 </$reveal>
 <$reveal type="match" state="$:/state/sideBarTabSet" text="moreTab" qualifyTiddlerTitles="yes">
-{{$:/templates/MoreSideBar}}
+{{$:/core/ui/MoreSideBar}}
 </$reveal>
 </div>
 </div>

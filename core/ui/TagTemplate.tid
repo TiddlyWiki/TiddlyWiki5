@@ -1,4 +1,4 @@
-title: $:/templates/TagTemplate
+title: $:/core/ui/TagTemplate
 
 <$button popup="$:/state/tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible"><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text" /></$setstyle></$button>
 <$reveal state="$:/state/tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">

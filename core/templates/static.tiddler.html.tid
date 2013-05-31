@@ -13,7 +13,7 @@ title: $:/core/templates/static.tiddler.html
 <body>
 <section class="story-river">
 <div class="tw-tiddler-frame">
-`<$view tiddler="$:/templates/ViewTemplate" format="htmlwikified"/>`
+`<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
 </div>
 </section>
 </body>

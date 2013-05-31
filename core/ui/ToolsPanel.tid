@@ -1,4 +1,4 @@
-title: $:/templates/ToolsPanel
+title: $:/core/ui/ToolsPanel
 
 Import: <$import class="tw-drop-zone"/>
 

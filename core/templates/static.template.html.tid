@@ -18,6 +18,6 @@ type: text/vnd.tiddlywiki-html
 </style>
 </head>
 <body>
-{{$:/templates/PageTemplate||$:/core/templates/html-tiddler}}
+{{$:/core/ui/PageTemplate||$:/core/templates/html-tiddler}}
 </body>
 </html>
