@@ -20,12 +20,12 @@ var InfoWidget = function(renderer) {
 };
 
 InfoWidget.types = {
-	changecount: function(options) {return options.wiki.getChangeCount(options.title);}
+	changecount: function(options) {return options.wiki.getChangeCount(options.widget.renderer.tiddlerTitle);},
+	currentField: function(options) {return options.widget.renderer.renderTree.getContextVariable(options.widget.renderer,"field","text");}
 };
 
 InfoWidget.prototype.generate = function() {
 	// Get attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.tiddlerTitle);
 	this.type = this.renderer.getAttribute("type","changecount");
 	// Get the appropriate value for the current tiddler
 	var value = "",
@@ -33,7 +33,7 @@ InfoWidget.prototype.generate = function() {
 	if(fn) {
 		value = fn({
 			wiki: this.renderer.renderTree.wiki,
-			title: this.tiddlerTitle
+			widget: this
 		});
 	}
 	// Set the element
