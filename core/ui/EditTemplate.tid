@@ -28,3 +28,7 @@ modifier: JeremyRuston
 <span class="tw-tiddler-help">Use WikiText to add formatting, images, and dynamic features</span> <$button type="set" set="$:/ShowEditPreview" setTo="yes" >Show preview</$button>
 <$edit field="text"/>
 </$reveal>
+
+<$fieldlist exclude="title tags text draft.title draft.of">
+<$info type="currentField"/>: <$edit/>
+</$fieldlist>
