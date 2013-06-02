@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/fields.js
 type: application/javascript
 module-type: widget
 
-The view widget displays the fields of a tiddler through a text substitution template.
+The fields widget displays the fields of a tiddler through a text substitution template.
 
 \*/
 (function(){
