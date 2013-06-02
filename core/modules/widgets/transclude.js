@@ -59,6 +59,7 @@ TranscludeWidget.prototype.generate = function() {
 	this.targetTitle = this.renderer.getAttribute("target",this.renderer.tiddlerTitle);
 	this.targetField = this.renderer.getAttribute("field");
 	this.targetIndex = this.renderer.getAttribute("index");
+	this.currentField = this.renderer.getAttribute("currentField");
 	// Get the render tree for the template
 	this.templateTitle = undefined;
 	if(this.renderer.parseTreeNode.children && this.renderer.parseTreeNode.children.length > 0) {
@@ -106,6 +107,9 @@ TranscludeWidget.prototype.generate = function() {
 		tiddlerTitle: this.targetTitle,
 		templateTitle: this.templateTitle
 	};
+	if(this.currentField) {
+		this.renderer.context.field = this.currentField;
+	}
 	// Set the element
 	this.tag = this.renderer.parseTreeNode.isBlock ? "div" : "span";
 	this.attributes = {};
