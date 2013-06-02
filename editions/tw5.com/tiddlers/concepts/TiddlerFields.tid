@@ -1,0 +1,32 @@
+modified: 201306011656
+title: TiddlerFields
+
+TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. The standard fields are:
+
+* `title` - The unique title of the tiddler
+* `modified` - The date of the last modification to the tiddler
+* `modifier` - The name of the last person to modify the tiddler
+* `created` - The date the tiddler was created
+* `creator` - The name of the person who created the tiddler
+* `tags` - A list of tags applied to the tiddler
+* `type` - The ContentType that should used to interpret the content of the tiddler
+
+Other fields used by the core are:
+
+* `color` - The colour associated with a tiddler (expressed as a valid CSS value like `#fea` or `rgb(100,100,100)`)
+* `description` - The description of a plugin
+* `draft.of` - For draft tiddlers, contains the title of the tiddler of which this is a draft
+* `draft.title` - For draft tiddlers, contains the proposed new title of the tiddler
+* `footer` - The footer for a modal dialogue (interpreted as WikiText)
+* `library` - Set to `yes` if the tiddler should be loaded in the browser as a `<script>` tag
+* `name` - Human-readable name of a plugin
+* `plugin` - Set to `yes` if the tiddler is a plugin
+* `plugin-priority` - An integer giving the priority for loading plugin tiddlers
+* `plugin-type` - The type of a plugin (currently can be `plugin` or `theme`)
+* `source` - The original URL associated with a tiddler
+* `subtitle` - The subtitle for a modal dialogue (interpreted as WikiText)
+
+The TiddlyWebAdaptor uses a few more fields:
+
+* `bag` - The name of the bag from which a tiddler came
+* `revision` - The revision of the tiddler held at the server

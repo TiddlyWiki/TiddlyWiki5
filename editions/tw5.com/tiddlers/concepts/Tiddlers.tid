@@ -1,9 +1,10 @@
-title: Tiddlers
 tags: docs concepts
+title: Tiddlers
+modified: 201306010741
 
 Tiddlers are the smallest unit of information in TiddlyWiki.
 
-Internally, tiddlers are an immutable dictionary of name:value pairs called fields. The only field that is required is the `title` field, but useful tiddlers also have a `text` field, and some or all of the standard fields listed below. The behaviour and type of each field is determined by special TiddlerFieldModules.
+Internally, tiddlers are an immutable dictionary of name:value pairs called fields. The only field that is required is the `title` field, but useful tiddlers also have a `text` field, and some or all of the standard fields listed below:
 
 * `title` - The unique title of the tiddler
 * `modified` - The date of the last modification to the tiddler
@@ -12,3 +13,6 @@ Internally, tiddlers are an immutable dictionary of name:value pairs called fiel
 * `creator` - The name of the person who created the tiddler
 * `tags` - A list of tags applied to the tiddler
 * `type` - The ContentType that should used to interpret the content of the tiddler
+
+See TiddlerFields for a complete list of fields used in TiddlyWiki5.
+
