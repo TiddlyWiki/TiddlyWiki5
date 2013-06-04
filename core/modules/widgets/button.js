@@ -99,7 +99,7 @@ ButtonWidget.prototype.handleClickEvent = function(event) {
 		this.triggerPopup(event);
 		handled = true;
 	}
-	if(this.set && this.setTo) {
+	if(this.set) {
 		this.setTiddler();
 		handled = true;
 	}
