@@ -29,6 +29,11 @@ modifier: JeremyRuston
 <$edit field="text"/>
 </$reveal>
 
-<$fieldlist exclude="title tags text draft.title draft.of">
-<$info type="currentField"/>: <$edit/>
+<$fieldmangler>
+<$fieldlist exclude="title tags text modified modifier draft.title draft.of">
+<span class="tw-edit-field-name"><$info type="currentField"/>:</span> <span class="tw-edit-field-value"><$edit/></span> <span class="tw-edit-field-remove"><$button message="tw-remove-field" class="">remove</$button></span>
 </$fieldlist>
+
+<div class="tw-edit-field-add">Add a new field: <span class="tw-edit-field-add-name"><$edit tiddler="$:/NewFieldName" type="input" default=""/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
+
+</$fieldmangler>

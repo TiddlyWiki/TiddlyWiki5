@@ -472,6 +472,32 @@ canvas.tw-edit-bitmapeditor  {
 	width: 48%;
 }
 
+.tw-edit-field-name {
+	display: inline-block;
+	width: 15%;
+	text-align: right;
+}
+
+.tw-edit-field-value {
+	display: inline-block;
+	width: 70%;
+}
+
+.tw-edit-field-remove {
+	display: inline-block;
+	width: 10%;
+}
+
+.tw-edit-field-add-name {
+	display: inline-block;
+	width: 15%;
+}
+
+.tw-edit-field-add-button {
+	display: inline-block;
+	width: 10%;
+}
+
 /*
 ** Dropdowns
 */
