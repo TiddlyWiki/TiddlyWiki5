@@ -36,7 +36,7 @@ FieldListWidget.prototype.generate = function() {
 	// Set the element
 	this.tag = "div";
 	this.attributes = {
-		"class": "tw-fields"
+		"class": "tw-fieldlist"
 	};
 	// Set up the attributes for the wrapper element
 	var classes = [];
