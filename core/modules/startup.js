@@ -116,9 +116,10 @@ exports.startup = function() {
 			parser = $tw.wiki.parseTiddler(templateTitle),
 			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, context: {tiddlerTitle: templateTitle}, document: document});
 		renderTree.execute();
-		var container = document.createElement("div");
-		document.body.insertBefore(container,document.body.firstChild);
-		renderTree.renderInDom(container);
+		$tw.pageContainer = document.createElement("div");
+		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
+		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+		renderTree.renderInDom($tw.pageContainer);
 		$tw.wiki.addEventListener("change",function(changes) {
 			renderTree.refreshInDom(changes);
 		});

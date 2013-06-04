@@ -14,6 +14,7 @@ Modal message mechanism
 
 var Modal = function(wiki) {
 	this.wiki = wiki;
+	this.modalCount = 0;
 };
 
 /*
@@ -25,6 +26,10 @@ Options include:
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
+	var self = this;
+	// Up the modal count and adjust the body class
+	this.modalCount++;
+	this.adjustPageClass();
 	// Create the wrapper divs
 	var wrapper = document.createElement("div"),
 		modalBackdrop = document.createElement("div"),
@@ -43,6 +48,7 @@ Modal.prototype.display = function(title,options) {
 		return;
 	}
 	// Add classes
+	$tw.utils.addClass(wrapper,"modal-wrapper");
 	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
 	$tw.utils.addClass(modalWrapper,"modal");
 	$tw.utils.addClass(modalHeader,"modal-header");
@@ -110,6 +116,9 @@ Modal.prototype.display = function(title,options) {
 	});
 	// Add the close event handler
 	wrapper.addEventListener("tw-close-tiddler",function(event) {
+		// Decrease the modal count and adjust the body class
+		self.modalCount--;
+		self.adjustPageClass();
 		// Force layout and animate the modal message away
 		$tw.utils.forceLayout(modalBackdrop);
 		$tw.utils.forceLayout(modalWrapper);
@@ -157,6 +166,12 @@ Modal.prototype.display = function(title,options) {
 	$tw.utils.setStyle(modalWrapper,[
 		{transform: "translateY(0px)"}
 	]);
+};
+
+Modal.prototype.adjustPageClass = function() {
+	if($tw.pageContainer) {
+		$tw.utils.toggleClass($tw.pageContainer,"tw-modal-displayed",this.modalCount > 0);
+	}
 };
 
 exports.Modal = Modal;
