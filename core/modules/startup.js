@@ -100,17 +100,6 @@ exports.startup = function() {
 		$tw.anim = new $tw.utils.Animator();
 		// Kick off the stylesheet manager
 		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
-		// If we're being viewed on a data: URI then give instructions for how to save
-		if(document.location.protocol === "data:") {
-			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
-				param: "$:/messages/SaveInstructions"
-			});
-		} else if($tw.wiki.countTiddlers() === 0){
-			// Otherwise, if give instructions if this is an empty TiddlyWiki
-			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
-				param: "$:/messages/GettingStarted"
-			});
-		}
 		// Display the PageTemplate
 		var templateTitle = "$:/core/ui/PageTemplate",
 			parser = $tw.wiki.parseTiddler(templateTitle),
@@ -123,6 +112,17 @@ exports.startup = function() {
 		$tw.wiki.addEventListener("change",function(changes) {
 			renderTree.refreshInDom(changes);
 		});
+		// If we're being viewed on a data: URI then give instructions for how to save
+		if(document.location.protocol === "data:") {
+			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
+				param: "$:/messages/SaveInstructions"
+			});
+		} else if($tw.wiki.countTiddlers() === 0){
+			// Otherwise, if give instructions if this is an empty TiddlyWiki
+			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
+				param: "$:/messages/GettingStarted"
+			});
+		}
 	} else {
 		// On the server, start a commander with the command line arguments
 		commander = new $tw.Commander(
