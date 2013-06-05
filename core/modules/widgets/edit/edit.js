@@ -30,18 +30,23 @@ EditWidget.prototype.generate = function() {
 	this.fieldName = this.renderer.getAttribute("field",this.renderer.renderTree.getContextVariable(this.renderer,"field","text"));
 	// Choose the editor to use
 	// TODO: Tiddler field modules should be able to specify a field type from which the editor is derived
-	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
-		Editor;
-	if(this.fieldName === "text" && tiddler && tiddler.fields.type) {
-		Editor = this.editors[tiddler.fields.type];
-	}
-	if(!Editor) {
-		Editor = this.editors["text/vnd.tiddlywiki"];
-	}
+	this.editorName = this.chooseEditor();
+	var Editor = this.editors[this.editorName];
 	// Instantiate the editor
 	this.editor = new Editor(this,this.tiddlerTitle,this.fieldName);
 	// Ask the editor to create the widget element
 	this.editor.render();
+};
+
+/*
+Return the name of the editor that should handle this tiddler field
+*/
+EditWidget.prototype.chooseEditor = function() {
+	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
+	if(this.fieldName === "text" && tiddler && tiddler.fields.type && this.editors[tiddler.fields.type]) {
+		return tiddler.fields.type;
+	}
+	return "text/vnd.tiddlywiki";
 };
 
 EditWidget.prototype.postRenderInDom = function() {
@@ -52,7 +57,7 @@ EditWidget.prototype.postRenderInDom = function() {
 
 EditWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// We'll completely regenerate ourselves if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || this.chooseEditor() !== this.editorName) {
 		// Regenerate and rerender the widget and replace the existing DOM node
 		this.generate();
 		var oldDomNode = this.renderer.domNode,
