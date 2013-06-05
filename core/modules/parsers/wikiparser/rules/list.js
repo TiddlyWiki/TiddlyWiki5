@@ -52,7 +52,7 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /([\\*#;:]+)/mg;
+	this.matchRegExp = /([\*#;:]+)/mg;
 };
 
 var listTypes = {
@@ -71,7 +71,7 @@ exports.parse = function() {
 	// Cycle through the items in the list
 	while(true) {
 		// Match the list marker
-		var reMatch = /(^[\*#;:]+)/mg;
+		var reMatch = /([\*#;:]+)/mg;
 		reMatch.lastIndex = this.parser.pos;
 		var match = reMatch.exec(this.parser.source);
 		if(!match || match.index !== this.parser.pos) {
