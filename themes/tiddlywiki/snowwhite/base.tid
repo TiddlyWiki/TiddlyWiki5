@@ -446,6 +446,7 @@ a.tw-tiddlylink-missing {
 }
 
 canvas.tw-edit-bitmapeditor  {
+	border: 3px dashed #F0F0F0;
 	cursor: crosshair;
 	-moz-user-select: none;
 	-webkit-user-select: none;
