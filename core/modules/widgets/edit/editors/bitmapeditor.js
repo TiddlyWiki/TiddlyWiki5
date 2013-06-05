@@ -12,6 +12,9 @@ A bitmap editor
 /*global $tw: false */
 "use strict";
 
+var DEFAULT_IMAGE_WIDTH = 300,
+	DEFAULT_IMAGE_HEIGHT = 182;
+
 var BitmapEditor = function(editWidget,tiddlerTitle,fieldName) {
 	this.editWidget = editWidget;
 	this.tiddlerTitle = tiddlerTitle;
@@ -38,24 +41,37 @@ BitmapEditor.prototype.postRenderInDom = function() {
 	var tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
 		canvas = this.editWidget.renderer.domNode,
 		currImage = new Image();
-	// Get the current bitmap into an image object
-	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
-	// Wait until the image is loaded
+	// Set up event handlers for loading the image
 	var self = this;
 	currImage.onload = function() {
 		// Copy the image to the on-screen canvas
-		canvas.width = currImage.width;
-		canvas.height = currImage.height;
-		var ctx = canvas.getContext("2d");
-		ctx.drawImage(currImage,0,0);
+		self.initCanvas(canvas,currImage.width,currImage.height,currImage);
 		// And also copy the current bitmap to the off-screen canvas
 		self.currCanvas = self.editWidget.renderer.renderTree.document.createElement("canvas");
-		self.currCanvas.width = currImage.width;
-		self.currCanvas.height = currImage.height;
-		ctx = self.currCanvas.getContext("2d");
-		ctx.drawImage(currImage,0,0);
+		self.initCanvas(self.currCanvas,currImage.width,currImage.height,currImage);
 	};
+	currImage.onerror = function() {
+		// Set the on-screen canvas size and clear it
+		self.initCanvas(canvas,DEFAULT_IMAGE_WIDTH,DEFAULT_IMAGE_HEIGHT);
+		// Set the off-screen canvas size and clear it
+		self.currCanvas = self.editWidget.renderer.renderTree.document.createElement("canvas");
+		self.initCanvas(self.currCanvas,DEFAULT_IMAGE_WIDTH,DEFAULT_IMAGE_HEIGHT);
+	}
+	// Get the current bitmap into an image object
+	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
 };
+
+BitmapEditor.prototype.initCanvas = function(canvas,width,height,image) {
+	canvas.width = width;
+	canvas.height = height;
+	var ctx = canvas.getContext("2d");
+	if(image) {
+		ctx.drawImage(image,0,0);
+	} else {
+		ctx.fillStyle = "#fff";
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+	}
+}
 
 BitmapEditor.prototype.handleTouchStartEvent = function(event) {
 	this.brushDown = true;
