@@ -37,7 +37,15 @@ FieldsWidget.prototype.generate = function() {
 	// Compose the template
 	var text = [];
 	if(this.template && tiddler) {
+		var fields = [];
 		for(var fieldName in tiddler.fields) {
+			if(exclude.indexOf(fieldName) === -1) {
+				fields.push(fieldName);
+			}
+		}
+		fields.sort();
+		for(var f=0; f<fields.length; f++) {
+			fieldName = fields[f];
 			if(exclude.indexOf(fieldName) === -1) {
 				var row = this.template,
 					value = tiddler.getFieldString(fieldName);
