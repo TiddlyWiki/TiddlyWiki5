@@ -23,23 +23,48 @@ var BitmapEditor = function(editWidget,tiddlerTitle,fieldName) {
 
 BitmapEditor.prototype.render = function() {
 	// Set the element details
-	this.editWidget.tag = "canvas";
+	this.editWidget.tag = "div";
 	this.editWidget.attributes = {
-		"class": "tw-edit-bitmapeditor"
+		"class": "tw-edit-bitmapeditor-wrapper"
 	};
-	this.editWidget.events = [
-		{name: "touchstart", handlerObject: this, handlerMethod: "handleTouchStartEvent"},
-		{name: "touchmove", handlerObject: this, handlerMethod: "handleTouchMoveEvent"},
-		{name: "touchend", handlerObject: this, handlerMethod: "handleTouchEndEvent"},
-		{name: "mousedown", handlerObject: this, handlerMethod: "handleMouseDownEvent"},
-		{name: "mousemove", handlerObject: this, handlerMethod: "handleMouseMoveEvent"},
-		{name: "mouseup", handlerObject: this, handlerMethod: "handleMouseUpEvent"}
-	];
+	var children = [{
+		type: "element",
+		tag: "canvas",
+		attributes: {
+			"class": {type: "string", value: "tw-edit-bitmapeditor"}
+		},
+		events: [{
+			name: "touchstart",
+			handlerObject: this,
+			handlerMethod: "handleTouchStartEvent"
+		},{
+			name: "touchmove",
+			handlerObject: this,
+			handlerMethod: "handleTouchMoveEvent"
+		},{
+			name: "touchend",
+			handlerObject: this,
+			handlerMethod: "handleTouchEndEvent"
+		},{
+			name: "mousedown",
+			handlerObject: this,
+			handlerMethod: "handleMouseDownEvent"
+		},{
+			name: "mousemove",
+			handlerObject: this,
+			handlerMethod: "handleMouseMoveEvent"
+		},{
+			name: "mouseup",
+			handlerObject: this,
+			handlerMethod: "handleMouseUpEvent"
+		}]
+	}];
+	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer,children);
 };
 
 BitmapEditor.prototype.postRenderInDom = function() {
 	var tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
-		canvas = this.editWidget.renderer.domNode,
+		canvas = this.editWidget.renderer.domNode.firstChild,
 		currImage = new Image();
 	// Set up event handlers for loading the image
 	var self = this;
@@ -130,7 +155,7 @@ BitmapEditor.prototype.handleMouseUpEvent = function(event) {
 };
 
 BitmapEditor.prototype.adjustCoordinates = function(x,y) {
-	var canvas = this.editWidget.renderer.domNode,
+	var canvas = this.editWidget.renderer.domNode.firstChild,
 		canvasRect = canvas.getBoundingClientRect(),
 		scale = canvas.width/canvasRect.width;
 	return {x: (x - canvasRect.left) * scale, y: (y - canvasRect.top) * scale};
@@ -142,7 +167,7 @@ BitmapEditor.prototype.strokeStart = function(x,y) {
 };
 
 BitmapEditor.prototype.strokeMove = function(x,y) {
-	var canvas = this.editWidget.renderer.domNode,
+	var canvas = this.editWidget.renderer.domNode.firstChild,
 		ctx = canvas.getContext("2d"),
 		t;
 	// Add the new position to the end of the stroke
@@ -168,7 +193,7 @@ BitmapEditor.prototype.strokeMove = function(x,y) {
 
 BitmapEditor.prototype.strokeEnd = function() {
 	// Copy the bitmap to the off-screen canvas
-	var canvas = this.editWidget.renderer.domNode,
+	var canvas = this.editWidget.renderer.domNode.firstChild,
 		ctx = this.currCanvas.getContext("2d");
 	ctx.drawImage(canvas,0,0);
 	// Save the image into the tiddler
@@ -179,7 +204,7 @@ BitmapEditor.prototype.saveChanges = function() {
 	var tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
 	if(tiddler) {
 		// data URIs look like "data:<type>;base64,<text>"
-		var dataURL = this.editWidget.renderer.domNode.toDataURL(tiddler.fields.type,1.0),
+		var dataURL = this.editWidget.renderer.domNode.firstChild.toDataURL(tiddler.fields.type,1.0),
 			posColon = dataURL.indexOf(":"),
 			posSemiColon = dataURL.indexOf(";"),
 			posComma = dataURL.indexOf(","),
