@@ -453,6 +453,14 @@ canvas.tw-edit-bitmapeditor  {
 	-ms-user-select: none;
 }
 
+.tw-edit-bitmapeditor-width {
+	display: block;
+}
+
+.tw-edit-bitmapeditor-height {
+	display: block;
+}
+
 /*
 ** Tiddler edit mode
 */
