@@ -8,7 +8,11 @@ title: $:/core/ui/PageTemplate
 <!-- The sidebar header -->
 <header class="sidebar-header">
 
-{{SiteTitle}}.title <br><small>{{SiteSubtitle}}</small>
+<div class="title">{{SiteTitle}}</div><div class="tw-subtitle">{{SiteSubtitle}}</div>
+
+<div class="tw-page-controls">
+<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button}}</$button><$link to="$:/ControlPanel">{{$:/core/images/options-button}}</$link><$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button}}</$button>
+</div>
 
 {{$:/core/ui/SideBar}}
 

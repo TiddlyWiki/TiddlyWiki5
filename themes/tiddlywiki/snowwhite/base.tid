@@ -392,6 +392,11 @@ a.tw-tiddlylink-missing {
 	color: #182955;
 }
 
+.tw-subtitle {
+	font-size: 0.9em;
+	color: #c0c0c0;
+}
+
 .tw-tiddler-missing .title {
   font-style: italic;
   font-weight: normal;

@@ -22,10 +22,6 @@ title: $:/core/ui/SideBar
 
 <$reveal state="$:/temp/search" type="match" text="">
 
-<div class="tw-page-controls">
-<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button}}</$button><$link to="$:/ControlPanel">{{$:/core/images/options-button}}</$link><$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button}}</$button>
-</div>
-
 <div class="tw-tab-set">
 <div class="tw-tab-buttons"><$button type="set" set="$:/state/sideBarTabSet" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="recentTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Recent</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="toolsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tools</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="moreTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">More</$button></div>
 <div class="tw-tab-divider tw-sidebar-tab-divider">

@@ -1,7 +1,7 @@
 title: $:/core/ui/ViewTemplate
 modifier: JeremyRuston
 
-<span class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
+<div class="tw-tiddler-view"><span class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
 
 </span><$view field="title"/></span>
 
@@ -11,11 +11,11 @@ modifier: JeremyRuston
 
 </$reveal>
 
-<div class="small"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
+<div class="tw-subtitle"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
 
 <div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/core/ui/TagTemplate" /></div>
 
 <div class="body">
 	<$view field="text" format="wikified">
 	</$view>
-</div>
+</div></div>
