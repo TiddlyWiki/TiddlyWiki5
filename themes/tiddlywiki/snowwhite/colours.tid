@@ -3,5 +3,6 @@ type: application/x-tiddler-dictionary
 
 primary: `#5959C0`
 background: `#fff`
+foreground: `#333`
 pagebackground: `#ececec`
 medium: `#bbb`
