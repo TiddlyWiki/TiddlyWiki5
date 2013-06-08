@@ -76,17 +76,21 @@ TextEditor.prototype.render = function() {
 			node.attributes.value = {type: "string", value: editInfo.value};
 			break;
 	}
+	// Add a placeholder if specified
+	if(this.editWidget.renderer.hasAttribute("placeholder")) {
+		node.attributes.placeholder = {type: "string", value: this.editWidget.renderer.getAttribute("placeholder")};
+	}
 	// Set the element details
 	this.editWidget.tag = this.editWidget.renderer.parseTreeNode.isBlock ? "div" : "span";
 	this.editWidget.attributes = {
 		"class": "tw-edit-texteditor"
 	};
-	if(this.editWidget.renderer.parseTreeNode.attributes["class"]) {
-		this.editWidget.attributes["class"] += " " + this.editWidget.renderer.parseTreeNode.attributes["class"].value;
+	if(this.editWidget.renderer.hasAttribute("class")) {
+		this.editWidget.attributes["class"] += " " + this.editWidget.renderer.getAttribute("class");
 	}
-	if(this.editWidget.renderer.parseTreeNode.attributes.style) {
+	if(this.editWidget.renderer.hasAttribute("style")) {
 		this.editWidget.attributes.style = this.editWidget.attributes.style || "";
-		this.editWidget.attributes.style += this.editWidget.renderer.parseTreeNode.attributes.style.value;
+		this.editWidget.attributes.style += this.editWidget.renderer.getAttribute("style");
 	}
 	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer,[node]);
 	this.editWidget.events = [
