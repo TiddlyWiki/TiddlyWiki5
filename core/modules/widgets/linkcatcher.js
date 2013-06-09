@@ -24,6 +24,9 @@ var LinkCatcherWidget = function(renderer) {
 LinkCatcherWidget.prototype.generate = function() {
 	// Get our attributes
 	this.to = this.renderer.getAttribute("to");
+	this.message = this.renderer.getAttribute("message");
+	this.set = this.renderer.getAttribute("set");
+	this.setTo = this.renderer.getAttribute("setTo");
 	// Set the element
 	this.tag = "div";
 	this.attributes = {
@@ -48,6 +51,16 @@ LinkCatcherWidget.prototype.refreshInDom = function(changedAttributes,changedTid
 LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 	if(this.to) {
 		this.renderer.renderTree.wiki.setTextReference(this.to,event.navigateTo,this.renderer.tiddlerTitle);
+	}
+	if(this.message) {
+		$tw.utils.dispatchCustomEvent(this.renderer.domNode,this.message,{
+			param: event.navigateTo,
+			tiddlerTitle: this.renderer.tiddlerTitle
+		});
+	}
+	if(this.set) {
+		var tiddler = this.renderer.renderTree.wiki.getTiddler(this.set);
+		this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
 	}
 	event.stopPropagation();
 	return false;
