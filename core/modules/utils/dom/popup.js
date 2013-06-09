@@ -48,21 +48,26 @@ Trigger a popup open or closed. Parameters are in a hashmap:
 	title: title of the tiddler where the popup details are stored
 	domNode: dom node to which the popup will be positioned
 	wiki: wiki
+	force: if specified, forces the popup state to true or false
 */
 Popup.prototype.triggerPopup = function(options) {
 	// Get the current popup state tiddler
 	var value = options.wiki.getTextReference(options.title,"");
 	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
-	if(popupLocationRegExp.test(value)) {
-		this.cancel();
-	} else {
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+		state = !popupLocationRegExp.test(value);
+	if("force" in options) {
+		state = options.force;
+	}
+	if(state) {
 		// Set the position if we're opening it
 		this.cancel();
 		options.wiki.setTextReference(options.title,
 			"(" + options.domNode.offsetLeft + "," + options.domNode.offsetTop + "," + 
 				options.domNode.offsetWidth + "," + options.domNode.offsetHeight + ")");
 		this.show(options);
+	} else {
+		this.cancel();
 	}
 };
 
