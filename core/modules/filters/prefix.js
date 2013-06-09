@@ -19,15 +19,12 @@ exports.prefix = function(source,operator,options) {
 	var results = [];
 	// Function to check an individual title
 	function checkTiddler(title) {
-		var tiddler = options.wiki.getTiddler(title);
-		if(tiddler) {
-			var match = tiddler.fields.title.substr(0,operator.operand.length) === operator.operand;
-			if(operator.prefix === "!") {
-				match = !match;
-			}
-			if(match) {
-				results.push(title);
-			}
+		var match = title.substr(0,operator.operand.length).toLowerCase() === operator.operand.toLowerCase();
+		if(operator.prefix === "!") {
+			match = !match;
+		}
+		if(match) {
+			results.push(title);
 		}
 	};
 	// Iterate through the source tiddlers
