@@ -511,6 +511,11 @@ canvas.tw-edit-bitmapeditor  {
 	color: #999;
 }
 
+.tw-add-tag svg {
+	height: 1em;
+	fill: #999;
+}
+
 .tw-add-tag-name {
 	display: inline-block;
 	width: 15%;
