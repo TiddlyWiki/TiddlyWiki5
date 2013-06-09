@@ -108,17 +108,23 @@ TranscludeWidget.prototype.generate = function() {
 		tiddlerTitle: this.targetTitle,
 		templateTitle: this.templateTitle
 	};
+	// Initialise events
+	this.events = [];
 	// If a current field is specified
 	if(this.currentField) {
 		// Record the current field in the render context
 		this.renderer.context.field = this.currentField;
 		// Add an event handler to record the current field
-		var addCurrentField = function(event) {
+		this.events.push({name: "tw-remove-field", handlerFunction: function(event) {
 			event.currentField = self.currentField;
 			return true;
-		}
-		this.events = [{name: "tw-remove-field", handlerFunction: addCurrentField}];
+		}});
 	}
+	// Trap and update tag modification events
+	this.events.push({name: "tw-remove-tag", handlerFunction: function(event) {
+		event.currentTag = self.targetTitle;
+		return true;
+	}});
 	// Set the element
 	this.tag = this.renderer.parseTreeNode.isBlock ? "div" : "span";
 	this.attributes = {};
