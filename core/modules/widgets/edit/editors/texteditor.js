@@ -76,6 +76,11 @@ TextEditor.prototype.render = function() {
 			node.attributes.value = {type: "string", value: editInfo.value};
 			break;
 	}
+	node.events = [
+		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
+		{name: "blur", handlerObject: this, handlerMethod: "handleBlurEvent"},
+		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+	];
 	// Add a placeholder if specified
 	if(this.editWidget.renderer.hasAttribute("placeholder")) {
 		node.attributes.placeholder = {type: "string", value: this.editWidget.renderer.getAttribute("placeholder")};
@@ -93,22 +98,38 @@ TextEditor.prototype.render = function() {
 		this.editWidget.attributes.style += this.editWidget.renderer.getAttribute("style");
 	}
 	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer,[node]);
-	this.editWidget.events = [
-		{name: "focus", handlerObject: this},
-		{name: "blur", handlerObject: this},
-		{name: "input", handlerObject: this}
-	];
 };
 
-TextEditor.prototype.handleEvent = function(event) {
-	// Get the value of the field if it might have changed
-	if(["input","focus","blur"].indexOf(event.type) !== -1) {
-		this.saveChanges();
+TextEditor.prototype.setFocus = function() {
+	if(this.editWidget.renderer.hasAttribute("focusSet")) {
+		var title = this.editWidget.renderer.getAttribute("focusSet");
+		if(this.editWidget.renderer.getAttribute("qualifyTiddlerTitles") === "yes") {
+			title =  title + "-" + this.editWidget.renderer.renderTree.getContextScopeId(this.editWidget.renderer.parentRenderer);
+		}
+		$tw.popup.triggerPopup({
+			domNode: this.editWidget.renderer.domNode,
+			title: title,
+			wiki: this.editWidget.renderer.renderTree.wiki,
+			force: true
+		});
 	}
-	// Fix the height of the textarea if required
-	if(["input","focus"].indexOf(event.type) !== -1) {
-		this.fixHeight();
-	}
+};
+
+TextEditor.prototype.handleFocusEvent = function(event) {
+//	this.saveChanges();
+//	this.fixHeight();
+	this.setFocus();
+	return true;
+};
+
+TextEditor.prototype.handleBlurEvent = function(event) {
+//	this.saveChanges();
+	return true;
+};
+
+TextEditor.prototype.handleInputEvent = function(event) {
+	this.saveChanges();
+	this.fixHeight();
 	return true;
 };
 
