@@ -41,6 +41,12 @@ ListWidget.prototype.generate = function() {
 	this.template = this.renderer.getAttribute("template");
 	this.editTemplate = this.renderer.getAttribute("editTemplate");
 	this.emptyMessage = this.renderer.getAttribute("emptyMessage");
+	this["class"] = this.renderer.getAttribute("class");
+	// Set up the classes
+	var classes = ["tw-list-frame"];
+	if(this["class"]) {
+		$tw.utils.pushTop(classes,this["class"]);
+	}
 	// Get the list of tiddlers object
 	this.getTiddlerList();
 	// Create the list
@@ -57,7 +63,7 @@ ListWidget.prototype.generate = function() {
 	// Create the list frame element
 	this.tag = this.renderer.parseTreeNode.isBlock ? "div" : "span";
 	this.attributes = {
-		"class": "tw-list-frame"
+		"class": classes.join(" ")
 	};
 	this.children = this.renderer.renderTree.createRenderers(this.renderer,listMembers);
 };
