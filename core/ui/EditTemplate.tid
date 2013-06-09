@@ -9,9 +9,7 @@ modifier: JeremyRuston
 <$edit field="draft.title"/>
 @@
 
-<div class="tw-tiddler-help">Type tags separated with spaces, &#91;&#91;using double square brackets&#93;&#93; if necessary</div>
-
-<$edit field="tags"/>
+<$transclude template="$:/core/ui/TagsEditor"/>
 
 <$reveal state="$:/ShowEditPreview" type="match" text="yes">
 <span class="tw-tiddler-help">Use WikiText to add formatting, images, and dynamic features</span> <$button type="set" set="$:/ShowEditPreview" setTo="no" >Hide preview</$button>
@@ -29,4 +27,4 @@ modifier: JeremyRuston
 <$edit field="text"/>
 </$reveal>
 
-{{$:/core/ui/FieldEditor}}
+<$transclude template="$:/core/ui/FieldEditor"/>

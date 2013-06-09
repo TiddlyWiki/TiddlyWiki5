@@ -471,6 +471,51 @@ canvas.tw-edit-bitmapeditor  {
 ** Tiddler edit mode
 */
 
+.tw-edit-tags-list {
+	margin: 1em 0 1em 0;
+}
+
+.tw-remove-tag-button {
+	padding-left: 4px;
+}
+
+.tw-tags-autocomplete-wrapper {
+	position: relative;
+}
+
+.tw-tags-autocomplete {
+	position: absolute;
+	min-width: 20em;
+	border: 1px solid {{$:/themes/tiddlywiki/snowwhite/colourmappings##dropdownborder}};
+	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##dropdownbackground}};
+	<<border-radius 4px>>
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
+	padding: 0 0 0 0;
+	margin: 0.25em 0 0 0;
+	white-space: nowrap;
+	z-index: 1000;
+}
+
+.tw-tags-autocomplete a {
+	display: block;
+	padding: 0.25em 1em 0.25em 1em;
+}
+
+.tw-tags-autocomplete a:hover {
+	color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkbackground}};
+	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkforeground}};
+	text-decoration: none;
+}
+
+.tw-add-tag {
+	color: #999;
+}
+
+.tw-add-tag-name {
+	display: inline-block;
+	width: 15%;
+}
+
 .tw-tiddler-preview {
 	overflow: auto;
 }
@@ -515,6 +560,10 @@ canvas.tw-edit-bitmapeditor  {
 	height: 1em;
 	fill: #888;
 	vertical-align: middle;
+}
+
+.tw-edit-field-add {
+	color: #999;
 }
 
 .tw-edit-field-add-name {
