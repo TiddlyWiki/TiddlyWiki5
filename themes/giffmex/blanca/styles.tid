@@ -54,3 +54,7 @@ border-style:solid;border-color:#eee;border-width:1px;
 	background-color: #ffffff;
 	border-bottom: 1px solid #ffffff;
 }
+
+svg.tw-image-new-button, svg.tw-image-options-button, svg.tw-image-save-button {
+  fill: #cccccc;
+}
