@@ -16,13 +16,27 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 Event handler for when the `tw-scroll` event hits the document body
 */
 var PageScroller = function() {
-	this.timerId = null;
+	this.idRequestFrame = null;
+	this.requestAnimationFrame = window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		function(callback) {
+			return window.setTimeout(callback, 1000/60);
+		};
+	this.cancelAnimationFrame = window.cancelAnimationFrame ||
+		window.webkitCancelAnimationFrame ||
+		window.webkitCancelRequestAnimationFrame ||
+		window.mozCancelAnimationFrame ||
+		window.mozCancelRequestAnimationFrame ||
+		function(id) {
+			window.clearTimeout(id);
+		};
 };
 
 PageScroller.prototype.cancelScroll = function() {
-	if(this.timerId) {
-		window.clearInterval(this.timerId);
-		this.timerId = null;
+	if(this.idRequestFrame) {
+		this.cancelAnimationFrame.call(window,this.idRequestFrame);
+		this.idRequestFrame = null;
 	}
 };
 
@@ -78,8 +92,9 @@ PageScroller.prototype.scrollIntoView = function(event) {
 		endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
 	// Only scroll if necessary
 	if(endX !== scrollPosition.x || endY !== scrollPosition.y) {
-		var self = this;
-		this.timerId = window.setInterval(function() {
+		var self = this,
+			drawFrame;
+		drawFrame = function () {
 			var t = ((new Date()) - self.startTime) / $tw.config.preferences.animationDuration;
 			if(t >= 1) {
 				self.cancelScroll();
@@ -87,7 +102,9 @@ PageScroller.prototype.scrollIntoView = function(event) {
 			}
 			t = $tw.utils.slowInSlowOut(t);
 			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
-		}, 10);
+			self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
+		};
+		drawFrame();
 	}
 };
 
