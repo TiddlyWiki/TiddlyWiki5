@@ -102,7 +102,9 @@ PageScroller.prototype.scrollIntoView = function(event) {
 			}
 			t = $tw.utils.slowInSlowOut(t);
 			window.scrollTo(scrollPosition.x + (endX - scrollPosition.x) * t,scrollPosition.y + (endY - scrollPosition.y) * t);
-			self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
+			if(t < 1) {
+				self.idRequestFrame = self.requestAnimationFrame.call(window,drawFrame);
+			}
 		};
 		drawFrame();
 	}
