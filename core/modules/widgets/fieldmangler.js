@@ -63,7 +63,7 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 		var p = tiddler.fields.tags.indexOf(event.currentTag);
 		if(p !== -1) {
 			var modification = {};
-			modification.tags = tiddler.fields.tags.slice(0);
+			modification.tags = (tiddler.fields.tags || []).slice(0);
 			modification.tags.splice(p,1);
 		this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
@@ -75,7 +75,7 @@ FieldManglerWidget.prototype.handleAddTagEvent = function(event) {
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
 	if(tiddler && typeof event.param === "string" && event.param !== "") {
 		var modification = {};
-		modification.tags = tiddler.fields.tags.slice(0);
+		modification.tags = (tiddler.fields.tags || []).slice(0);
 		$tw.utils.pushTop(modification.tags,event.param);
 		this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 	}
