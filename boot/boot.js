@@ -66,13 +66,50 @@ $tw.utils.log = function(/* args */) {
 Display an error and exit
 */
 $tw.utils.error = function(err) {
+	// Prepare the error message
+	var errHeading = "Internal JavaScript Error",
+		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
+	// Log the error to the console
 	console.error(err);
 	if($tw.browser) {
+		// Display an error message to the user
+		var form = document.createElement("form"),
+			heading = document.createElement("h1"),
+			prompt = document.createElement("div"),
+			message = document.createElement("div"),
+			button = document.createElement("button");
+		heading.appendChild(document.createTextNode(errHeading));
+		prompt.appendChild(document.createTextNode(promptMsg));
+		prompt.className = "tw-error-prompt";
+		message.appendChild(document.createTextNode(err));
+		button.appendChild(document.createTextNode("close"));
+		form.className = "tw-error-form";
+		form.appendChild(heading);
+		form.appendChild(prompt);
+		form.appendChild(message);
+		form.appendChild(button);
+		document.body.insertBefore(form,document.body.firstChild);
+		form.addEventListener("submit",function(event) {
+			document.body.removeChild(form);
+			event.preventDefault();
+			return false;
+		},true);
 		return null;
 	} else {
+		// Exit if we're under node.js
 		process.exit(1);
 	}
 };
+
+/*
+Use our custom error handler if we're in the browser
+*/
+if($tw.browser) {
+	window.addEventListener("error",function(event) {
+		$tw.utils.error(event.message);
+		return false;
+	});
+}
 
 /*
 Check if an object has a property
@@ -1275,5 +1312,6 @@ $tw.boot.decryptEncryptedTiddlers(function() {
 	// Startup
 	$tw.boot.startup();
 });
+
 
 })();

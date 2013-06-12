@@ -6,9 +6,10 @@ Basic styles used before we boot up the parsing engine
 */
 
 /*
-Password prompt
+Error message and password prompt
 */
-.tw-password-wrapper {
+
+.tw-password-wrapper, .tw-error-form {
     font-family: sans-serif;
 	z-index: 20000;
 	position: fixed;
@@ -21,6 +22,25 @@ Password prompt
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
 	border-radius: 8px;
+}
+
+.tw-error-form {
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+	background-color: rgb(255, 75, 75);
+	border: 8px solid rgb(255, 0, 0);
+}
+
+.tw-error-form div {
+	padding-bottom: 1em;
+}
+
+.tw-error-prompt {
+	color: #000;
+	text-shadow: none;
+}
+
+.tw-password-wrapper {
 	color: #000;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	background-color: rgb(197, 235, 183);
@@ -35,4 +55,3 @@ Password prompt
 	font-size: 16px;
 	line-height: 20px;
 }
-
