@@ -56,7 +56,17 @@ TextEditor.prototype.render = function() {
 		type: "element",
 		attributes: {}
 	};
-	var type = this.editWidget.renderer.getAttribute("type",this.fieldName === "text" ? "textarea" : "input");
+	// Get the edit type associated with this field
+	var type = "input";
+	if(this.fieldName === "text") {
+		type = "textarea";
+	} else {
+		var fieldModule = $tw.Tiddler.fieldModules[this.fieldName];
+		if(fieldModule && fieldModule.editType) {
+			type = fieldModule.editType;
+		}
+	}
+	var type = this.editWidget.renderer.getAttribute("type",type);
 	switch(type) {
 		case "textarea":
 			node.tag = "textarea";
@@ -64,6 +74,11 @@ TextEditor.prototype.render = function() {
 				type: "text",
 				text: editInfo.value
 			}];
+			break;
+		case "color":
+			node.tag = "input";
+			node.attributes.type = {type: "string", value: "color"};
+			node.attributes.value = {type: "string", value: editInfo.value};
 			break;
 		case "search":
 			node.tag = "input";
