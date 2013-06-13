@@ -105,10 +105,10 @@ $tw.utils.error = function(err) {
 Use our custom error handler if we're in the browser
 */
 if($tw.browser) {
-	window.addEventListener("error",function(event) {
-		$tw.utils.error(event.message);
+	window.onerror = function(errorMsg,url,lineNumber) {
+		$tw.utils.error(errorMsg);
 		return false;
-	});
+	};
 }
 
 /*
