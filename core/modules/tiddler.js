@@ -28,7 +28,7 @@ exports.getFieldString = function(field) {
 	}
 	// Parse the field with the associated module (if any)
 	var fieldModule = $tw.Tiddler.fieldModules[field];
-	if(fieldModule) {
+	if(fieldModule && fieldModule.stringify) {
 		return fieldModule.stringify.call(this,value);
 	} else {
 		return value.toString();
