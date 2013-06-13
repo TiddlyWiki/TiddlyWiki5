@@ -606,7 +606,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 			} else {
 				// Parse the field with the associated field module (if any)
 				var fieldModule = $tw.Tiddler.fieldModules[t];
-				if(fieldModule) {
+				if(fieldModule && fieldModule.parse) {
 					this.fields[t] = fieldModule.parse.call(this,src[t]);
 				} else {
 					this.fields[t] = src[t];
@@ -632,6 +632,10 @@ $tw.modules.define("$:/boot/tiddlerfields/created","tiddlerfield",{
 	name: "created",
 	parse: $tw.utils.parseDate,
 	stringify: $tw.utils.stringifyDate
+});
+$tw.modules.define("$:/boot/tiddlerfields/color","tiddlerfield",{
+	name: "color",
+	editType: "color"
 });
 $tw.modules.define("$:/boot/tiddlerfields/tags","tiddlerfield",{
 	name: "tags",
