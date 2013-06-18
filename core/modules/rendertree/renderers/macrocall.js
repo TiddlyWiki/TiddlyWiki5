@@ -28,45 +28,12 @@ var MacroCallRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 		childTree = [{type: "text", text: "<<Undefined macro: " + this.parseTreeNode.name + ">>"}];
 	} else {
 		// Substitute the macro parameters
-		var text = this.substituteParameters(macro.text,this.parseTreeNode,macro);
+		var text = this.renderTree.substituteParameters(macro,this.parseTreeNode);
 		// Parse the text
 		childTree = this.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.parseTreeNode.isBlock}).tree;
 	}
 	// Create the renderers for the child nodes
 	this.children = this.renderTree.createRenderers(this,childTree);
-};
-
-/*
-Expand the parameters in a block of text
-*/
-MacroCallRenderer.prototype.substituteParameters = function(text,macroCallParseTreeNode,macroDefinition) {
-	var nextAnonParameter = 0; // Next candidate anonymous parameter in macro call
-	// Step through each of the parameters in the macro definition
-	for(var p=0; p<macroDefinition.params.length; p++) {
-		// Check if we've got a macro call parameter with the same name
-		var paramInfo = macroDefinition.params[p],
-			paramValue = undefined;
-		for(var m=0; m<macroCallParseTreeNode.params.length; m++) {
-			if(macroCallParseTreeNode.params[m].name === paramInfo.name) {
-				paramValue = macroCallParseTreeNode.params[m].value;
-			}
-		}
-		// If not, use the next available anonymous macro call parameter
-		if(!paramValue && macroCallParseTreeNode.params.length > 0) {
-			while(macroCallParseTreeNode.params[nextAnonParameter].name && nextAnonParameter < macroCallParseTreeNode.params.length-1) {
-				nextAnonParameter++;
-			}
-			if(!macroCallParseTreeNode.params[nextAnonParameter].name) {
-				paramValue = macroCallParseTreeNode.params[nextAnonParameter].value;
-				nextAnonParameter++;
-			}
-		}
-		// If we've still not got a value, use the default, if any
-		paramValue = paramValue || paramInfo["default"] || "";
-		// Replace any instances of this parameter
-		text = text.replace(new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
-	}
-	return text;
 };
 
 MacroCallRenderer.prototype.renderInDom = function() {

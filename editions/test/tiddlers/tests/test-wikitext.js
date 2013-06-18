@@ -20,8 +20,9 @@ describe("WikiText tests", function() {
 	wiki.addTiddler({title: "TiddlerOne", text: "The quick brown fox"});
 	wiki.addTiddler({title: "TiddlerTwo", text: "The rain in Spain\nfalls mainly on the plain"});
 	wiki.addTiddler({title: "TiddlerThree", text: "The speed of sound\n\nThe light of speed"});
+	wiki.addTiddler({title: "TiddlerFour", text: "\\define my-macro(adjective:'groovy')\nThis is my ''amazingly'' $adjective$ macro!\n\\end\n\n<$link to=<<my-macro>>>This is a link</$link>"});
 
-	it("should render tiddlers with no special markup render as-is", function() {
+	it("should render tiddlers with no special markup as-is", function() {
 		expect(wiki.renderTiddler("text/plain","TiddlerOne")).toBe("The quick brown fox");
 	});
 	it("should preserve single new lines", function() {
@@ -41,6 +42,10 @@ describe("WikiText tests", function() {
 	it("should use double new lines to create paragraphs", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerThree")).toBe("<p>\nThe speed of sound</p><p>\nThe light of speed</p>");
 	});
+	it("should support attributes specified as macro invocations", function() {
+		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<p>\n<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='This%20is%20my%20amazingly%20groovy%20macro!'>\nThis is a link</a></p>");
+	});
+
 
 });
 

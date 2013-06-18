@@ -190,13 +190,13 @@ exports.parseMacroParameter = function(source,pos) {
 };
 
 /*
-Look for a macro invocation. Returns null if not found, or {type: "macro-invocation", name:, parameters:, start:, end:}
+Look for a macro invocation. Returns null if not found, or {type: "macrocall", name:, parameters:, start:, end:}
 */
 exports.parseMacroInvocation = function(source,pos) {
 	var node = {
-		type: "macro-invocation",
+		type: "macrocall",
 		start: pos,
-		parameters: []
+		params: []
 	}
 	// Define our regexps
 	var reMacroName = /([^\s>"'=]+)/g;
@@ -218,7 +218,7 @@ exports.parseMacroInvocation = function(source,pos) {
 	// Process parameters
 	var parameter = this.parseMacroParameter(source,pos);
 	while(parameter) {
-		node.parameters.push(parameter);
+		node.params.push(parameter);
 		pos = parameter.end;
 		// Get the next parameter
 		parameter = this.parseMacroParameter(source,pos);

@@ -95,20 +95,30 @@ var ElementRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 };
 
 ElementRenderer.prototype.computeAttributes = function() {
-	var changedAttributes = {};
-	var self = this;
+	var changedAttributes = {},
+		self = this,
+		value;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
-			var value = self.renderTree.wiki.getTextReference(attribute.textReference,"",self.tiddlerTitle);
-			if(self.attributes[name] !== value) {
-				self.attributes[name] = value;
-				changedAttributes[name] = true;
+			value = self.renderTree.wiki.getTextReference(attribute.textReference,"",self.tiddlerTitle);
+		} else if(attribute.type === "macro") {
+			// Get the macro definition
+			var macro = self.renderTree.findMacroDefinition(self.parentRenderer,attribute.value.name);
+			if(!macro) {
+				value = "";
+			} else {
+				// Substitute the macro parameters
+				value = self.renderTree.substituteParameters(macro,attribute.value);
+				// Parse the text and render it as text
+				value = self.renderTree.wiki.renderText("text/plain","text/vnd.tiddlywiki",value,self.context);
 			}
 		} else { // String attribute
-			if(self.attributes[name] !== attribute.value) {
-				self.attributes[name] = attribute.value;
-				changedAttributes[name] = true;
-			}
+			value = attribute.value;
+		}
+		// Check whether the attribute has changed
+		if(self.attributes[name] !== value) {
+			self.attributes[name] = value;
+			changedAttributes[name] = true;
 		}
 	});
 	return changedAttributes;

@@ -230,6 +230,20 @@ This is my nice and simple block of text. HelloThere
 </article>
 ```
 
+Attributes in HTML tags can be specified as a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
+
+```
+<a href={{MyLinkDestination}}>link</a>
+```
+
+Here an attribute is specified as a macro invocation:
+
+```
+<a href=<<MyMacro "Brian">>>link</a>
+```
+
+* As a macro invocation 
+
 ! Widgets
 
 Widgets provide rich functionality within WikiText. For example, the `<$video>` widget can be used to embed videos from YouTube, Vimeo or the Internet Archive:

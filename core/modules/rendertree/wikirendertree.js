@@ -155,6 +155,40 @@ WikiRenderTree.prototype.findMacroDefinition = function(renderer,name) {
 	return undefined;
 };
 
+/*
+Expand the parameters of a macro
+*/
+WikiRenderTree.prototype.substituteParameters = function(macroDefinition,macroCallParseTreeNode) {
+	var text = macroDefinition.text,
+		nextAnonParameter = 0; // Next candidate anonymous parameter in macro call
+	// Step through each of the parameters in the macro definition
+	for(var p=0; p<macroDefinition.params.length; p++) {
+		// Check if we've got a macro call parameter with the same name
+		var paramInfo = macroDefinition.params[p],
+			paramValue = undefined;
+		for(var m=0; m<macroCallParseTreeNode.params.length; m++) {
+			if(macroCallParseTreeNode.params[m].name === paramInfo.name) {
+				paramValue = macroCallParseTreeNode.params[m].value;
+			}
+		}
+		// If not, use the next available anonymous macro call parameter
+		if(!paramValue && macroCallParseTreeNode.params.length > 0) {
+			while(macroCallParseTreeNode.params[nextAnonParameter].name && nextAnonParameter < macroCallParseTreeNode.params.length-1) {
+				nextAnonParameter++;
+			}
+			if(!macroCallParseTreeNode.params[nextAnonParameter].name) {
+				paramValue = macroCallParseTreeNode.params[nextAnonParameter].value;
+				nextAnonParameter++;
+			}
+		}
+		// If we've still not got a value, use the default, if any
+		paramValue = paramValue || paramInfo["default"] || "";
+		// Replace any instances of this parameter
+		text = text.replace(new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
+	}
+	return text;
+};
+
 exports.WikiRenderTree = WikiRenderTree;
 
 })();
