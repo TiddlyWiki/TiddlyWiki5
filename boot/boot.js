@@ -63,55 +63,6 @@ $tw.utils.log = function(/* args */) {
 };
 
 /*
-Display an error and exit
-*/
-$tw.utils.error = function(err) {
-	// Prepare the error message
-	var errHeading = "Internal JavaScript Error",
-		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
-	// Log the error to the console
-	console.error(err);
-	if($tw.browser) {
-		// Display an error message to the user
-		var form = document.createElement("form"),
-			heading = document.createElement("h1"),
-			prompt = document.createElement("div"),
-			message = document.createElement("div"),
-			button = document.createElement("button");
-		heading.appendChild(document.createTextNode(errHeading));
-		prompt.appendChild(document.createTextNode(promptMsg));
-		prompt.className = "tw-error-prompt";
-		message.appendChild(document.createTextNode(err));
-		button.appendChild(document.createTextNode("close"));
-		form.className = "tw-error-form";
-		form.appendChild(heading);
-		form.appendChild(prompt);
-		form.appendChild(message);
-		form.appendChild(button);
-		document.body.insertBefore(form,document.body.firstChild);
-		form.addEventListener("submit",function(event) {
-			document.body.removeChild(form);
-			event.preventDefault();
-			return false;
-		},true);
-		return null;
-	} else {
-		// Exit if we're under node.js
-		process.exit(1);
-	}
-};
-
-/*
-Use our custom error handler if we're in the browser
-*/
-if($tw.browser) {
-	window.onerror = function(errorMsg,url,lineNumber) {
-		$tw.utils.error(errorMsg);
-		return false;
-	};
-}
-
-/*
 Check if an object has a property
 */
 $tw.utils.hop = function(object,property) {
@@ -144,6 +95,79 @@ $tw.utils.each = function(object,callback) {
 		}
 	}
 };
+
+/*
+Helper for making DOM elements
+tag: tag name
+options: see below
+Options include:
+attributes: hashmap of attribute values
+text: text to add as a child node
+children: array of further child nodes
+innerHTML: optional HTML for element
+class: class name(s)
+document: defaults to current document
+*/
+$tw.utils.domMaker = function(tag,options) {
+	var doc = options.document || document;
+	var element = doc.createElement(tag);
+	if(options["class"]) {
+		element.className = options["class"];
+	}
+	if(options.text) {
+		element.appendChild(document.createTextNode(options.text));
+	}
+	$tw.utils.each(options.children,function(child) {
+		element.appendChild(child);
+	});
+	if(options.innerHTML) {
+		element.innerHTML = options.innerHTML;
+	}
+	$tw.utils.each(options.attributes,function(attribute,name) {
+		element.setAttribute(name,attribute);
+	});
+	return element;
+};
+
+/*
+Display an error and exit
+*/
+$tw.utils.error = function(err) {
+	// Prepare the error message
+	var errHeading = "Internal JavaScript Error",
+		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
+	// Log the error to the console
+	console.error(err);
+	if($tw.browser) {
+		// Display an error message to the user
+		var dm = $tw.utils.domMaker,
+			heading = dm("h1",{text: errHeading}),
+			prompt = dm("div",{text: promptMsg, "class": "tw-error-prompt"}),
+			message = dm("div",{text: err}),
+			button = dm("button",{text: "close"}),
+			form = dm("form",{children: [heading,prompt,message,button], "class": "tw-error-form"});
+		document.body.insertBefore(form,document.body.firstChild);
+		form.addEventListener("submit",function(event) {
+			document.body.removeChild(form);
+			event.preventDefault();
+			return false;
+		},true);
+		return null;
+	} else {
+		// Exit if we're under node.js
+		process.exit(1);
+	}
+};
+
+/*
+Use our custom error handler if we're in the browser
+*/
+if($tw.browser) {
+	window.onerror = function(errorMsg,url,lineNumber) {
+		$tw.utils.error(errorMsg);
+		return false;
+	};
+}
 
 /*
 Extend an object with the properties from a list of source objects
@@ -356,8 +380,7 @@ $tw.utils.PasswordPrompt = function() {
 	// Store of pending password prompts
 	this.passwordPrompts = [];
 	// Create the wrapper
-	this.promptWrapper = document.createElement("div");
-	this.promptWrapper.className = "tw-password-wrapper";
+	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tw-password-wrapper"});
 	document.body.appendChild(this.promptWrapper);
 	// Hide the empty wrapper
 	this.setWrapperDisplay();
@@ -384,16 +407,28 @@ callback: function to be called on submission with parameter of object {username
 $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	// Create and add the prompt to the DOM
 	var submitText = options.submitText || "Login",
-		form = document.createElement("form"),
-		html = ["<h1>" + options.serviceName + "</h1>"];
+		dm = $tw.utils.domMaker,
+		children = [dm("h1",{text: options.serviceName})];
 	if(!options.noUserName) {
-		html.push("<input type='text' name='username' class='input-small' placeholder='Username'>");
+		children.push(dm("input",{
+			attributes: {type: "text", name: "username", placeholder: "Username"},
+			"class": "input-small"
+		}));
 	}
-	html.push("<input type='password' name='password' class='input-small' placeholder='Password'>",
-			"<button type='submit' class='btn'>" + submitText + "</button>");
-	form.className = "form-inline";
-	form.setAttribute("autocomplete","off");
-	form.innerHTML = html.join("\n");
+	children.push(dm("input",{
+		attributes: {type: "password", name: "password", placeholder: "Password"},
+		"class": "input-small"
+	}));
+	children.push(dm("button",{
+		attributes: {type: "submit"},
+		text: submitText,
+		"class": "btn"
+	}));
+	var form = dm("form",{
+		"class": "form-inline",
+		attributes: {autocomplete: "off"},
+		children: children
+	});
 	this.promptWrapper.appendChild(form);
 	window.setTimeout(function() {
 		form.elements[0].focus();
