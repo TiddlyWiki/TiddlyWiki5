@@ -1255,7 +1255,7 @@ $tw.boot.startup = function() {
 		}
 		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
 		// Read package info
-		$tw.packageInfo = JSON.parse(fs.readFileSync($tw.boot.corePath + "/../package.json"));
+		$tw.packageInfo = require("../package");
 		// Check node version number
 		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
 			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node);
