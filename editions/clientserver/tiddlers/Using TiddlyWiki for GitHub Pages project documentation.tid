@@ -1,0 +1,34 @@
+modified: 201306251332
+tags: docs dev
+title: Using TiddlyWiki for GitHub Pages project documentation
+
+TiddlyWiki5 can be used to produce documentation for GitHub projects. It lets you maintain a single set of documentation as a [[TiddlyWikiFolder|TiddlyWikiFolders]] containing separate tiddler files under source code control, and then use it to produce  `readme.md` files for inclusion in project folders, or HTML files for storage in [[GitHub Pages|http://pages.github.com/]]. Both features are demonstrated by TiddlyWiki5 itself.
+
+! Generating `readme.md` files
+
+When displaying the contents of a folder GitHub will look for a `readme.md` file and display it. Note that it will not display full HTML files in this way, just static MarkDown files (this is a security measure). Happily MarkDown permits a safe subset of HTML, and thus to generate a `readme.md` file that is suitable for GitHub it is just necessary for TiddlyWiki5 to generate the content of the `<body>` element of an HTML document, and give it the appropriate filename.
+
+This is done in `bld.sh` by this command:
+
+```
+--savetiddler ReadMe ./readme.md text/html
+```
+
+It saves the tiddler ReadMe to the file `./readme.md` in the `text/html` format.
+
+By default, tiddler links will be rendered as `<a>` links to a relative URI consisting of the title of the tiddler. This behaviour can be overridden by defining the macro `tw-wikilink-template`, as is done at the top of the tiddler ReadMe:
+
+```
+\define tw-wikilink-template() http://five.tiddlywiki.com/static/$uri_encoded$.html
+```
+
+See the LinkWidget for more details.
+
+In this example, tiddler links are rendered as links to the static rendering of tw5.com.
+
+! Publishing to GitHub Pages
+
+Publishing to GitHub Pages is very straightforward. In the case of TiddlyWiki5, several different build products are published.
+
+The `bld.sh` script deposits the build products directly into the local clone of the repo associated with the GitHub Pages account. There is then a manual step to review changes and push them up to github.com.
+
