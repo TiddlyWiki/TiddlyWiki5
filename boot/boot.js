@@ -1008,8 +1008,8 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 			t,result = [];
 		if(node) {
 			for(t = 0; t < node.childNodes.length; t++) {
-					var tiddlers = extractTextTiddlers(node.childNodes[t]),
-						childNode = node.childNodes[t];
+					var childNode = node.childNodes[t],
+						tiddlers = extractTextTiddlers(childNode);
 					tiddlers = tiddlers || extractModuleTiddlers(childNode);
 					if(tiddlers) {
 						result.push.apply(result,tiddlers);
