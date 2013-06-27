@@ -1267,7 +1267,7 @@ $tw.boot.startup = function() {
 			wikiInfo: "./tiddlywiki.info",
 			wikiPluginsSubDir: "./plugins",
 			wikiTiddlersSubDir: "./tiddlers",
-			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^(?:\\r?\\n)]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
+			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
 			fileExtensionInfo: {}, // Map file extension to {type:}
 			contentTypeInfo: {} // Map type to {encoding:,extension:}
 		}
