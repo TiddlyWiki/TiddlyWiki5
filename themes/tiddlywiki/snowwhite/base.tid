@@ -344,7 +344,6 @@ a.tw-tiddlylink-missing {
 */
 
 .tw-tiddler-frame {
-	position: relative;
 	margin-bottom: 2em;
 	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##tiddlerbackground}};
 }
