@@ -1,0 +1,14 @@
+title: $:/themes/tiddlywiki/stickytitles/styles.tid
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tw-tiddler-title {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  top: 0px;
+  background: #fff;
+}
