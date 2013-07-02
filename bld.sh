@@ -36,6 +36,7 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--savetiddler ReadMe ./readme.md text/html \
+	--savetiddler ContributingTemplate ./contributing.md text/html \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
 	--savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
 	--savetiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
