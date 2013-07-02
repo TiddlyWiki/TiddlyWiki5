@@ -5,8 +5,7 @@ TiddlyWiki5</a></h1><div class='tw-transclude'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> welcomes contributions to its code and documentation <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5'>
 via GitHub</a>. Please take a moment to read these notes to help make the process as smooth as possible.</p><h1 class=''>
-<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/Bug%20Reports.html'>
-https://github.com/Jermolene/TiddlyWiki5/issues?state=open</a></h1><p>
+Bug Reports</h1><p>
 From a programmers perspective, a bug report that just says &quot;it doesn't work&quot; is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:</p><ul>
 <li>
 A descriptive title</li><li>
