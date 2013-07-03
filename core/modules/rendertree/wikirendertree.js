@@ -129,11 +129,14 @@ WikiRenderTree.prototype.checkContextRecursion = function(renderer,newContext) {
 };
 
 WikiRenderTree.prototype.getContextScopeId = function(renderer) {
-	var guidBits = [];
+	var guidBits = [],
+		scopeComponents = ["tiddlerTitle","templateTitle"];
 	while(renderer) {
 		if(renderer.context) {
 			$tw.utils.each(renderer.context,function(field,name) {
-				guidBits.push(name + ":" + field + ";");
+				if(scopeComponents.indexOf(name) !== -1) {
+					guidBits.push(name + ":" + field + ";");
+				}
 			});
 			guidBits.push("-");
 		}
