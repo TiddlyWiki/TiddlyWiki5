@@ -122,7 +122,7 @@ This method should be called after the changes it describes have been made to th
 exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || {};
-	this.changedTiddlers[title] = this.changedTiddlers[title] || [];
+	this.changedTiddlers[title] = this.changedTiddlers[title] || {};
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
 	// Increment the change count
 	this.changeCount = this.changeCount || {};
