@@ -51,6 +51,15 @@ MacroCallRenderer.prototype.renderInDom = function() {
 	return this.domNode;
 };
 
+MacroCallRenderer.prototype.refreshInDom = function(changedTiddlers) {
+	// Refresh any child nodes
+	$tw.utils.each(this.children,function(node) {
+		if(node.refreshInDom) {
+			node.refreshInDom(changedTiddlers);
+		}
+	});
+};
+
 exports.macrocall = MacroCallRenderer
 
 })();
