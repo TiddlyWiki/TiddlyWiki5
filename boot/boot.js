@@ -551,7 +551,10 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 	if(!moduleInfo.exports) {
 		try {
 			// Check the type of the definition
-			if(typeof moduleInfo.definition === "string") { // String
+			if(typeof moduleInfo.definition === "function") { // Function
+				moduleInfo.exports = {};
+				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
+			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = $tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
 			} else { // Object
 				moduleInfo.exports = moduleInfo.definition;
