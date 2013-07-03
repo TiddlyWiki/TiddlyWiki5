@@ -1,0 +1,25 @@
+title: $:/themes/tiddlywiki/centralised/styles.tid
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+@media (min-width: 55em) {
+
+	.tw-page-container {
+		text-align: center;
+	}
+
+	.story-river {
+		width: 55em;
+		padding: 3em;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.sidebar-header {
+		text-align: left;
+		left: 50%;
+		right: 0;
+		padding-left: 29.5em;
+	}
+}

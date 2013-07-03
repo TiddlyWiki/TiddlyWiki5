@@ -1,0 +1,10 @@
+{
+	"title": "$:/themes/tiddlywiki/centralised",
+	"name": "Centralised",
+	"author": "JeremyRuston",
+	"version": "0.0.0",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Experimental theme with a centred text column",
+	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
+}
