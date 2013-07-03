@@ -1,0 +1,15 @@
+modified: 201307022116
+tags: docs dev
+title: TiddlyWiki5 Development Environment
+
+//This information is for people who are working on the development of TiddlyWiki5 itself, and isn't relevant for end users//
+
+! Setting up npm
+
+[[Installing TiddlyWiki5]] with NPM essentially downloads a 
+
+To use a development copy of the TiddlyWiki5 repository instead of the copy installed by [[NPM]], use this command within the root of the TiddlyWiki5 repo:
+
+```
+npm link
+```
