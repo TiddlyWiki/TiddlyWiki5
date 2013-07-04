@@ -1,6 +1,6 @@
 title: $:/core/ui/TagsEditor
 
-<$fieldmangler><div class="tw-edit-tags-list"><$list filter="[is[current]tags[]sort[title]]"><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text" /><$button message="tw-remove-tag" class="btn-invisible tw-remove-tag-button">&times;</$button></$setstyle>
+<$fieldmangler><div class="tw-edit-tags-list"><$list filter="[is[current]tags[]sort[title]]" listview="pop" itemClass="tw-tag-editor-label"><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text" /><$button message="tw-remove-tag" class="btn-invisible tw-remove-tag-button">&times;</$button></$setstyle>
 </$list></div>
 
 <div class="tw-add-tag">Add a new tag: <span class="tw-add-tag-name"><$edit tiddler="$:/NewTagName" type="input" default="" placeholder="tag name" focusSet="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes"/></span> <$button popup="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button"><$button message="tw-add-tag" param={{$:/NewTagName}} set="$:/NewTagName" setTo="" class="">add</$button></span></div>

@@ -472,6 +472,11 @@ canvas.tw-edit-bitmapeditor  {
 	margin: 1em 0 1em 0;
 }
 
+.tw-tag-editor-label {
+	display: inline-block;
+	margin-right: 0.5em;
+}
+
 .tw-remove-tag-button {
 	padding-left: 4px;
 }
