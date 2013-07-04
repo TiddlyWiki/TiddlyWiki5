@@ -13,7 +13,7 @@ modifier: JeremyRuston
 
 <div class="tw-subtitle"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
 
-<div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/core/ui/TagTemplate" /></div>
+<div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/core/ui/TagTemplate" listview="pop" itemClass="tw-tag-list-item"/></div>
 
 <div class="body">
 	<$view field="text" format="wikified">

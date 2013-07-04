@@ -217,6 +217,11 @@ a.tw-tiddlylink-missing {
 ** Tags and missing tiddlers
 */
 
+.tw-tag-list-item {
+	display: inline-block;
+	margin-right: 0.5em;
+}
+
 .tw-tags-wrapper {
 	margin: 0.25em 0 1em 0;
 }
