@@ -30,6 +30,13 @@ tags: [[$:/tags/stylesheet]]
           transition: $transition$;
 ```
 \end
+\define transform-origin(origin)
+```
+  -webkit-transform-origin: $origin$;
+     -moz-transform-origin: $origin$;
+          transform-origin: $origin$;
+```
+\end
 \define background-linear-gradient(gradient)
 ```
 background-image: linear-gradient($gradient$);
@@ -298,6 +305,10 @@ a.tw-tiddlylink-missing {
 
 .tw-menu-list-item {
 	white-space: nowrap;
+}
+
+.tw-open-tiddler-list {
+	<<transform-origin "0% 0%">>
 }
 
 .tw-menu-list-subitem {
