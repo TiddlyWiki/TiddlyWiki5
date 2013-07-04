@@ -256,7 +256,10 @@ $tw.utils.parseStringArray = function(value) {
 		do {
 			match = memberRegExp.exec(value);
 			if(match) {
-				results.push(match[1] || match[2]);
+				var item = match[1] || match[2];
+				if(results.indexOf(item) === -1) {
+					results.push(item);
+				}
 			}
 		} while(match);
 		return results;
