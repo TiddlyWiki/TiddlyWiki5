@@ -148,11 +148,14 @@ a.tw-tiddlylink:hover {
 
 a.tw-tiddlylink-resolves {
 	font-style: normal;
-	font-weight: bold;
 }
 
 a.tw-tiddlylink-missing {
 	font-style: italic;
+}
+
+a.tw-tiddlylink-external {
+	font-weight: bold;
 }
 
 /*
@@ -266,6 +269,10 @@ a.tw-tiddlylink-missing {
 .sidebar-header {
 	color: #acacac;
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
+}
+
+.sidebar-header .title a.tw-tiddlylink-resolves {
+	font-weight: 300;
 }
 
 .sidebar-header .tw-sidebar-lists p {
@@ -400,7 +407,7 @@ a.tw-tiddlylink-missing {
 }
 
 .title {
-	font-weight: bold;
+	font-weight: 300;
 	font-size: 33px;
 	line-height: 40px;
 	color: #182955;
@@ -409,6 +416,7 @@ a.tw-tiddlylink-missing {
 .tw-subtitle {
 	font-size: 0.9em;
 	color: #c0c0c0;
+	font-weight: 300;
 }
 
 .tw-tiddler-missing .title {
