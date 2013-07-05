@@ -39,6 +39,23 @@ TW_Element.prototype.appendChild = function(node) {
 	node.parentNode = this;
 };
 
+TW_Element.prototype.removeChild = function(node) {
+	var p = this.children.indexOf(node);
+	if(p !== -1) {
+		this.children.splice(p,1);
+	}
+};
+
+TW_Element.prototype.hasChildNodes = function() {
+	return !!this.children.length;
+};
+
+Object.defineProperty(TW_Element.prototype, "firstChild", {
+    get: function() {
+    	return this.children[0];
+    }
+});
+
 TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 	// Do nothing
 };
