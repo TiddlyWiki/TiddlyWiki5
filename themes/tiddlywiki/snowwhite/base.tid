@@ -264,6 +264,12 @@ a.tw-tiddlylink-external {
 	<<border-radius 8px>>
 }
 
+.tw-tag-label svg {
+	height: 1em;
+	width: 1em;
+	fill: #fff;
+}
+
 /*
 ** Page layout
 */
@@ -541,6 +547,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-add-tag svg {
 	height: 1em;
+	width: 1em;
 	fill: #999;
 }
 
@@ -591,6 +598,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-edit-field-remove svg {
 	height: 1em;
+	width: 1em;
 	fill: #888;
 	vertical-align: middle;
 }
