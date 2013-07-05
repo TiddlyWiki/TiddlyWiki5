@@ -756,6 +756,7 @@ canvas.tw-edit-bitmapeditor  {
 	border-bottom: 1px solid #bbb;
 	margin-left: 0.25em;
 	margin-right: 0.25em;
+	font-weight: 300;
 }
 
 .tw-tab-buttons button.tw-tab-selected {
