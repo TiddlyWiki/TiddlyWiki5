@@ -160,7 +160,7 @@ exports.parseMacroParameter = function(source,pos) {
 	var node = {
 		type: "macro-parameter",
 		start: pos
-	}
+	};
 	// Define our regexp
 	var reMacroParameter = /(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^\s>"'=]+)))/g;
 	// Skip whitespace
@@ -197,7 +197,7 @@ exports.parseMacroInvocation = function(source,pos) {
 		type: "macrocall",
 		start: pos,
 		params: []
-	}
+	};
 	// Define our regexps
 	var reMacroName = /([^\s>"'=]+)/g;
 	// Skip whitespace

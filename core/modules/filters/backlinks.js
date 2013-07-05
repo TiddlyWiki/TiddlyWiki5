@@ -20,7 +20,7 @@ exports.backlinks = function(source,operator,options) {
 	// Function to check an individual title
 	function checkTiddler(title) {
 		$tw.utils.pushTop(results,options.wiki.getTiddlerBacklinks(title));
-	};
+	}
 	// Iterate through the source tiddlers
 	if($tw.utils.isArray(source)) {
 		$tw.utils.each(source,function(title) {

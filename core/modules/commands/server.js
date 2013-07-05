@@ -198,7 +198,7 @@ var Command = function(params,commander,callback) {
 				];
 			if(tiddler) {
 				$tw.utils.each(tiddler.fields,function(field,name) {
-					var value = tiddler.getFieldString(name)
+					var value = tiddler.getFieldString(name);
 					if(knownFields.indexOf(name) !== -1) {
 						tiddlerFields[name] = value;
 					} else {

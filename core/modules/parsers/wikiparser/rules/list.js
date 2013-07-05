@@ -122,7 +122,7 @@ exports.parse = function() {
 		}
 		// Consume any whitespace following the list item
 		this.parser.skipWhitespace();
-	};
+	}
 	// Return the root element of the list
 	return [listStack[0]];
 };

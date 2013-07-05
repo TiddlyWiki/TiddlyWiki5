@@ -23,7 +23,7 @@ exports.tags = function(source,operator,options) {
 		if(tiddler && tiddler.fields.tags) {
 			$tw.utils.pushTop(results,tiddler.fields.tags);
 		}
-	};
+	}
 	// Iterate through the source tiddlers
 	if($tw.utils.isArray(source)) {
 		$tw.utils.each(source,function(title) {

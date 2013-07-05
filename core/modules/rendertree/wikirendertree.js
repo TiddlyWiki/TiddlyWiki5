@@ -130,14 +130,15 @@ WikiRenderTree.prototype.checkContextRecursion = function(renderer,newContext) {
 
 WikiRenderTree.prototype.getContextScopeId = function(renderer) {
 	var guidBits = [],
-		scopeComponents = ["tiddlerTitle","templateTitle"];
-	while(renderer) {
-		if(renderer.context) {
-			$tw.utils.each(renderer.context,function(field,name) {
+		scopeComponents = ["tiddlerTitle","templateTitle"],
+		processContext = function(field,name) {
 				if(scopeComponents.indexOf(name) !== -1) {
 					guidBits.push(name + ":" + field + ";");
 				}
-			});
+			};
+	while(renderer) {
+		if(renderer.context) {
+			$tw.utils.each(renderer.context,processContext);
 			guidBits.push("-");
 		}
 		renderer = renderer.parentRenderer;

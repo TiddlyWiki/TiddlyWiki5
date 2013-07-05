@@ -26,7 +26,7 @@ exports.prefix = function(source,operator,options) {
 		if(match) {
 			results.push(title);
 		}
-	};
+	}
 	// Iterate through the source tiddlers
 	if($tw.utils.isArray(source)) {
 		$tw.utils.each(source,function(title) {
