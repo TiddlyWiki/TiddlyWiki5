@@ -48,10 +48,12 @@ PopListView.prototype.remove = function(index) {
 	var listElementNode = this.listWidget.children[index],
 		targetElement = listElementNode.domNode;
 	// Attach an event handler for the end of the transition
-	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+	var transitionEventName = $tw.utils.convertEventName("transitionEnd");
+	targetElement.addEventListener(transitionEventName,function handler(event) {
 		if(targetElement.parentNode) {
 			targetElement.parentNode.removeChild(targetElement);
 		}
+		targetElement.removeEventListener(transitionEventName,handler,false);
 	},false);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
