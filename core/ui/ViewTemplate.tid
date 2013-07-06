@@ -1,7 +1,7 @@
 title: $:/core/ui/ViewTemplate
 modifier: JeremyRuston
 
-<div class="tw-tiddler-view"><div class="tw-tiddler-title title"><$setstyle name="fill" value={{!!color}}><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
+<div class="tw-tiddler-view"><div class="tw-tiddler-title"><div class="title"><$setstyle name="fill" value={{!!color}}><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
 
 </span><$transclude target={{!!icon}}/> <$view field="title"/></$setstyle></div>
 
@@ -9,7 +9,7 @@ modifier: JeremyRuston
 
 <$transclude template="$:/core/ui/TiddlerInfo"/>
 
-</$reveal>
+</$reveal></div>
 
 <div class="tw-subtitle"><$view field="modifier" format="link"/> <$view field="modified" format="relativedate"/></div>
 
