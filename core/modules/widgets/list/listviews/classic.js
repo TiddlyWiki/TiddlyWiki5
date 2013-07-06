@@ -37,14 +37,12 @@ ClassicListView.prototype.insert = function(index) {
 		currMarginTop = parseInt(window.getComputedStyle(targetElement).marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop;
 	// Reset the margin once the transition is over
-	var transitionEventName = $tw.utils.convertEventName("transitionEnd");
-	targetElement.addEventListener(transitionEventName,function handler(event) {
+	setTimeout(function() {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
 			{marginBottom: ""}
 		]);
-		targetElement.removeEventListener(transitionEventName,handler,false);
-	},false);
+	},$tw.config.preferences.animationDuration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -69,12 +67,12 @@ ClassicListView.prototype.remove = function(index) {
 		currMarginBottom = parseInt(window.getComputedStyle(targetElement).marginBottom,10),
 		currMarginTop = parseInt(window.getComputedStyle(targetElement).marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop;
-	// Attach an event handler for the end of the transition
-	targetElement.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+	// Remove the element at the end of the transition
+	setTimeout(function() {
 		if(targetElement.parentNode) {
 			targetElement.parentNode.removeChild(targetElement);
 		}
-	},false);
+	},$tw.config.preferences.animationDuration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},

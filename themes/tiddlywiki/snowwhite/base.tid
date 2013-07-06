@@ -421,6 +421,10 @@ a.tw-tiddlylink-external {
 	color: #182955;
 }
 
+.title img {
+	height: 1em;
+}
+
 .tw-subtitle {
 	font-size: 0.9em;
 	color: #c0c0c0;

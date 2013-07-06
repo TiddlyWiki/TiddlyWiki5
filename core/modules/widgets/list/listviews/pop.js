@@ -20,14 +20,12 @@ PopListView.prototype.insert = function(index) {
 	var listElementNode = this.listWidget.children[index],
 		targetElement = listElementNode.domNode;
 	// Reset once the transition is over
-	var transitionEventName = $tw.utils.convertEventName("transitionEnd");
-	targetElement.addEventListener(transitionEventName,function handler(event) {
+	setTimeout(function() {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
 			{transform: "none"}
 		]);
-		targetElement.removeEventListener(transitionEventName,handler,false);
-	},false);
+	},$tw.config.preferences.animationDuration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -47,14 +45,12 @@ PopListView.prototype.insert = function(index) {
 PopListView.prototype.remove = function(index) {
 	var listElementNode = this.listWidget.children[index],
 		targetElement = listElementNode.domNode;
-	// Attach an event handler for the end of the transition
-	var transitionEventName = $tw.utils.convertEventName("transitionEnd");
-	targetElement.addEventListener(transitionEventName,function handler(event) {
+	// Remove the element at the end of the transition
+	setTimeout(function() {
 		if(targetElement.parentNode) {
 			targetElement.parentNode.removeChild(targetElement);
 		}
-		targetElement.removeEventListener(transitionEventName,handler,false);
-	},false);
+	},$tw.config.preferences.animationDuration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
