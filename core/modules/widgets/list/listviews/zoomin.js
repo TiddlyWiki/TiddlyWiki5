@@ -27,8 +27,6 @@ var ZoominListView = function(listWidget) {
 	}
 };
 
-
-
 /*
 Find the first descendent node that is a <$view field="title"> widget
 */
@@ -113,7 +111,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	this.currentTiddler = listElementNode;
 	// Transform the target tiddler to its natural size
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in, opacity " + $tw.config.preferences.animationDurationMs + " ease-in"},
 		{opacity: "1.0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{zIndex: "500"},
@@ -124,7 +122,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		x =  zoomBounds.left - targetBounds.left - (sourceBounds.left - targetBounds.left) * scale;
 		y =  zoomBounds.top - targetBounds.top - (sourceBounds.top - targetBounds.top) * scale;
 		$tw.utils.setStyle(prevCurrentTiddler.domNode,[
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, opacity " + $tw.config.preferences.animationDurationMs + " ease-out"},
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in, opacity " + $tw.config.preferences.animationDurationMs + " ease-in"},
 			{opacity: "0.0"},
 			{transformOrigin: "0 0"},
 			{transform: "translateX(" + x + "px) translateY(" + y + "px) scale(" + scale + ")"},
