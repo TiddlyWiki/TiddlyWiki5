@@ -45,7 +45,7 @@ Handle an event
 */
 PageScroller.prototype.handleEvent = function(event) {
 	if(event.type === "tw-scroll") {
-		return this.scrollIntoView(event);
+		return this.scrollIntoView(event.target);
 	}
 	return true;
 };
@@ -53,20 +53,19 @@ PageScroller.prototype.handleEvent = function(event) {
 /*
 Handle a scroll event hitting the page document
 */
-PageScroller.prototype.scrollIntoView = function(event) {
+PageScroller.prototype.scrollIntoView = function(element) {
 	// Get the offset bounds of the element
-	var domNode = event.target,
-		bounds = {
-			left: domNode.offsetLeft,
-			top: domNode.offsetTop,
-			width: domNode.offsetWidth,
-			height: domNode.offsetHeight
+	var bounds = {
+			left: element.offsetLeft,
+			top: element.offsetTop,
+			width: element.offsetWidth,
+			height: element.offsetHeight
 		};
 	// Walk up the tree adjusting the offset bounds by each offsetParent
-	while(domNode.offsetParent) {
-		domNode = domNode.offsetParent;
-		bounds.left += domNode.offsetLeft;
-		bounds.top += domNode.offsetTop;
+	while(element.offsetParent) {
+		element = element.offsetParent;
+		bounds.left += element.offsetLeft;
+		bounds.top += element.offsetTop;
 	}
 	// Now get ready to scroll the body
 	this.cancelScroll();
