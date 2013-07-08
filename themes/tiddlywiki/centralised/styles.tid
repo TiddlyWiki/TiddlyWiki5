@@ -10,6 +10,7 @@ tags: [[$:/tags/stylesheet]]
 	}
 
 	.story-river {
+		position: relative;
 		width: 55em;
 		padding: 3em;
 		margin: 0 auto;
