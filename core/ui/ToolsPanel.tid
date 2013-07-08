@@ -1,15 +1,18 @@
 title: $:/core/ui/ToolsPanel
 
-Import: <$import class="tw-drop-zone"/>
+---
+
+{{$:/snippets/viewswitcher}}
 
 ---
 
-<$button message="tw-save-wiki" class="btn btn-primary">Save Changes</$button>
+{{$:/snippets/themeswitcher}}
+
+---
+
+Import: <$import class="tw-drop-zone"/>
 
 ---
 
 {{$:/snippets/encryptionstatus}}
 
----
-
-{{$:/snippets/themeswitcher}}

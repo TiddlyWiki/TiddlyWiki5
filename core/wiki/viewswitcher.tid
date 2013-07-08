@@ -1,0 +1,13 @@
+title: $:/snippets/viewswitcher
+
+Current theme: {{$:/view}}
+
+<$linkcatcher to="$:/view">
+
+<$list filter="classic zoomin">
+
+<$reveal state="$:/view" type="match" text={{##title}}>&bull;</$reveal><$reveal state="$:/view" type="nomatch" text={{##title}}>&nbsp;</$reveal> <$view field="title" format="link"/>
+
+</$list>
+
+</$linkcatcher>
