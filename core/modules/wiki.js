@@ -29,7 +29,7 @@ Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
 	<tiddlertitle>!!<fieldname>
 	!!<fieldname> - specifies a field of the current tiddlers
-	<tiddlertitle>##<field>
+	<tiddlertitle>##<index>
 */
 exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 	var tr = $tw.utils.parseTextReference(textRef),
