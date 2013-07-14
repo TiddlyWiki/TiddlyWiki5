@@ -1,6 +1,6 @@
 title: $:/snippets/viewswitcher
 
-Current theme: {{$:/view}}
+Current view: {{$:/view}}
 
 <$linkcatcher to="$:/view">
 
