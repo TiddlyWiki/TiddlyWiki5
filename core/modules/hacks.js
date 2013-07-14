@@ -22,6 +22,7 @@ exports.slowmo = function(status) {
 		$tw.config.preferences.animationDuration = 400;
 	}
 	$tw.config.preferences.animationDurationMs = $tw.config.preferences.animationDuration + "ms";
+	return "Slowmo is " + ($tw.config.preferences.animationDuration === 400 ? "dis" : "") + "engaged."
 };
 
 })();
