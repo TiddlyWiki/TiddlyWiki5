@@ -1103,6 +1103,9 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 					if(tidInfo.prefix) {
 						text = tidInfo.prefix + text;
 					}
+					if(tidInfo.suffix) {
+						text = text + tidInfo.suffix;
+					}
 					tidInfo.fields.text = text;
 					tiddlers.push({tiddlers: [tidInfo.fields]});
 				});
