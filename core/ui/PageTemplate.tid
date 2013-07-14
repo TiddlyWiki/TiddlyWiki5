@@ -5,6 +5,12 @@ title: $:/core/ui/PageTemplate
 
 <$import browse="no" class="tw-drop-zone-fullscreen">
 
+<!-- The optional topbar -->
+{{$:/TopSideBar}}
+
+<!-- The optional leftsidebar -->
+{{$:/LeftSideBar}}
+
 <!-- The sidebar header -->
 <header class="sidebar-header">
 
