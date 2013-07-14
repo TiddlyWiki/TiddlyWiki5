@@ -330,7 +330,7 @@ a.tw-tiddlylink-external {
 	padding-left: 0.5em;
 }
 
-@media (max-width: 55em) {
+@media (max-width: {{$:/themes/tiddlywiki/snowwhite/metrics##storywidth}}) {
 	.sidebar-header {
 		padding: 1em;
 	}
@@ -340,11 +340,11 @@ a.tw-tiddlylink-external {
 	}
 }
 
-@media (min-width: 55em) {
+@media (min-width: {{$:/themes/tiddlywiki/snowwhite/metrics##storywidth}}) {
 	.sidebar-header {
 		position: fixed;
-		top: 0;
-		left: 55em;
+		top: {{$:/themes/tiddlywiki/snowwhite/metrics##storytop}};
+		left: {{$:/themes/tiddlywiki/snowwhite/metrics##storyright}};
 		bottom: 0;
 		right: 0;
 		overflow-y: auto;
@@ -355,7 +355,10 @@ a.tw-tiddlylink-external {
 	}
 
 	.story-river {
-		width: 55em;
+		position: absolute;
+		left: {{$:/themes/tiddlywiki/snowwhite/metrics##storyleft}};
+		top: {{$:/themes/tiddlywiki/snowwhite/metrics##storytop}};
+		width: {{$:/themes/tiddlywiki/snowwhite/metrics##storywidth}};
 		padding: 3em;
 	}
 }

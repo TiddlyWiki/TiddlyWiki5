@@ -3,4 +3,7 @@ type: application/x-tiddler-dictionary
 
 fontsize: `14px`
 lineheight: `20px`
-sidebarwidth: `20%`
+storyleft: `0em`
+storytop: `0em`
+storyright: `55em`
+storywidth: `55em`
