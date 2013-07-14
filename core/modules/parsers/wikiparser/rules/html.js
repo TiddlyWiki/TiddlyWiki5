@@ -319,7 +319,7 @@ exports.parseTag = function(source,pos,options) {
 			attributes: {}
 		};
 	// Define our regexps
-	var reTagName = /([a-zA-Z\-\$]+)/g;
+	var reTagName = /([a-zA-Z0-9\-\$]+)/g;
 	// Skip whitespace
 	pos = this.skipWhiteSpace(source,pos);
 	// Look for a less than sign
