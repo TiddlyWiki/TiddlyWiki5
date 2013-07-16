@@ -68,6 +68,14 @@ node ./tiddlywiki.js \
 	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/tahoelafs.html text/plain \
 	|| exit 1
 
-# Fifth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
+# Fifth, d3demo.html: wiki to demo d3 plugin
+
+node ./tiddlywiki.js \
+	./editions/d3demo \
+	--verbose \
+	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/d3demo.html text/plain \
+	|| exit 1
+
+# Sixth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
 ./test.sh

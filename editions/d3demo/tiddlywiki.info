@@ -1,0 +1,16 @@
+{
+	"plugins": [
+		"tiddlywiki/d3"
+	],
+	"themes": [
+		"tiddlywiki/snowwhite"
+	],
+	"doNotSave": [
+		"$:/StoryList",
+		"$:/HistoryList",
+		"$:/status/IsLoggedIn",
+		"$:/status/UserName"
+	],
+	"includeWikis": [
+	]
+}

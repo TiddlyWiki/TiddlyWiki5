@@ -1,0 +1,14 @@
+{
+	"tiddlers": [
+		{
+			"file": "d3.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.js",
+				"module-type": "library"
+			},
+			"prefix": "var d3;if($tw.browser){\n",
+			"suffix": "}\nexports.d3 = d3;\n"
+		}
+	]
+}

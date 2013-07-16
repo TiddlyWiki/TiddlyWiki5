@@ -1,0 +1,18 @@
+title: $:/plugins/tiddlywiki/d3/base.tid
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+.tw-barwidget {
+}
+
+.tw-barwidget text {
+  font: 8px sans-serif;
+}
+
+.tw-barwidget .axis path,
+.tw-barwidget .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
