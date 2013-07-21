@@ -1314,7 +1314,7 @@ $tw.boot.startup = function() {
 		$tw.packageInfo = require("../package");
 		// Check node version number
 		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
-			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engine.node);
+			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engines.node);
 		}
 	}
 	// Add file extension information
