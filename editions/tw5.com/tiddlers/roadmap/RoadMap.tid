@@ -1,50 +1,37 @@
-modified: 201305132202
+modified: 201307181215
 title: RoadMap
 modifier: JeremyRuston
 tags: docs planning
 
-TiddlyWiki5 is currently an alpha release, meaning that it is incomplete and subject to change.
+TiddlyWiki5 is under rapid development at the moment, moving through a series of stages from alpha, via beta into a stable release.
 
 ! Alpha Release
 
-There has already been a series of alpha releases of TiddlyWiki5. The goal of these releases is to test the new technical architecture and to explore user interface features.
-
-Some of the features and fixes required before the beta is declared include:
-
-* ~~Synchronisation via HTTP in the browser~~
-* ~~Synchronisation via direct file access under node.js~~
-* ~~Preliminary integration with TiddlySpace~~
-* ~~Preliminary integration with TiddlySpot~~
-* ~~Saving changes to a file URI using Firefox~~
-* ~~Lazy loading~~
-* ~~Better handling of binary tiddlers~~
-* ~~Usability improvements to sidebar~~
-* A decent ReleaseProcess
+The one significant piece of work required before TiddlyWiki5 can move out of alpha into beta is to upgrade the ReleaseProcess so that end users can more easily keep track of the new features.
 
 ! Beta Release
 
-TiddlyWiki5 will progress to a beta release when it is practical for cautious everyday use.
+During the beta TiddlyWiki5 will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
 
-Some of the additional features under consideration during the beta include:
+The following additional features are under consideration for implementation during the beta:
 
 * Warning when attempting to close window without saving
 * Use browser local storage to preserve changes in case browser crashes before saving/sync
 * Multilanguage support
-* Ability to ~~inspect and~~ edit tiddler fields
-* Seamless editing
-* Aliases/inheritance
-* WikiText ~~table and~~ block quote support
-* More user interface widgets, including: ~tabs~, popovers, toolbars, carousel, ~dropdown~,
-* ~~Checkbox support~~
-* ~~Search~~
-* Tiddler themes and ~~wiki themes~~
-* Text references: slices and sections, JSON references
-* ~~Timed refreshed relative dates (eg, 'last modified 30 minutes ago')~~
-* Encrypted tiddlers and ~~encrypted TiddlyWikis~~
-* Facebook, Twitter, G+ and LinkedIn macros
+* Aliases
+* Search and replace
+* Tiddler renaming
+* Link tooltips
+* Keyboard shortcuts
+* Proper use of ARIA roles
+* Import wizard allowing individual tiddlers to be selected for import
+* Switching to more MarkDown-like syntax for basic formatting such as headings and lists
+* `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
+* Further WikiText features including block quotes
+* Facebook, Twitter, G+ and LinkedIn widgets
 * Integration with the browser back and forwards buttons
 * Minification of plugins (JS and CSS)
 
 ! 5.0 Release
 
-Hopefully, TiddlyWiki5 will leave beta and become a full release while we're still in the middle of 2013. This is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
+Hopefully, TiddlyWiki5 will leave beta and become a full release while we're still in 2013. This is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
