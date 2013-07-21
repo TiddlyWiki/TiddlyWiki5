@@ -128,14 +128,18 @@ BarWidget.prototype.createChart = function() {
 		.attr("transform", "translate(0," + height + ")")
 		.call(xAxis);
 
-	var self = this;
-	return function updateChart() {
+	var self = this,
+		updateChart = function() {
 	  if (self.grouped !== "no") {
 		transitionGrouped();
 	  } else {
 		transitionStacked();
 	  }
 	};
+	// Update the chart according to the grouped setting
+	updateChart();
+	// Return the update function
+	return updateChart;
 
 	function transitionGrouped() {
 	  y.domain([0, yGroupMax]);
