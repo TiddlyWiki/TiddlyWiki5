@@ -1,4 +1,4 @@
-modified: 201307181215
+modified: 201307212212
 title: RoadMap
 modifier: JeremyRuston
 tags: docs planning
@@ -24,6 +24,7 @@ The following additional features are under consideration for implementation dur
 * Link tooltips
 * Keyboard shortcuts
 * Proper use of ARIA roles
+* Simpler upgrading to new core versions
 * Import wizard allowing individual tiddlers to be selected for import
 * Switching to more MarkDown-like syntax for basic formatting such as headings and lists
 * `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
