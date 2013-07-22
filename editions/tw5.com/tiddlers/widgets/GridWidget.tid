@@ -1,0 +1,18 @@
+title: GridWidget
+tags: docs widget
+
+The grid widget assembles tiddlers into a tabular grid based on their titles. For example:
+
+```
+<$grid prefix="GridDemo" rows=3 cols=3/>
+```
+
+In this case, the following tiddlers will be rendered:
+
+|GridDemo_A_1 |GridDemo_A_2 |GridDemo_A_3 |
+|GridDemo_B_1 |GridDemo_B_2 |GridDemo_B_3 |
+|GridDemo_C_1 |GridDemo_C_2 |GridDemo_C_3 |
+
+The result is:
+
+<$grid prefix="GridDemo" rows=3 cols=3/>

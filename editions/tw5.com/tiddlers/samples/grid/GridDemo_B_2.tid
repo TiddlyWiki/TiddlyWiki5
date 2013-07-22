@@ -1,0 +1,4 @@
+title: GridDemo_B_2
+tags: demo
+
+This is cell B2, which is also transcluding A2: {{GridDemo_A_2}}.

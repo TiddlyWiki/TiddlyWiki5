@@ -837,3 +837,11 @@ canvas.tw-edit-bitmapeditor  {
 	background-color: rgb(250, 210, 50);
 }
 
+/*
+** Grids
+*/
+
+.tw-grid-frame td {
+	width: 1em;
+	height: 1em;
+}
