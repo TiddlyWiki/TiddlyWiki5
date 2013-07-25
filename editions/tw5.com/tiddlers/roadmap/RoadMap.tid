@@ -21,7 +21,7 @@ The following additional features are under consideration for implementation dur
 * Aliases
 * Search and replace
 * Tiddler renaming
-* Link tooltips
+* Rich link tooltips, incorporating a preview
 * Keyboard shortcuts
 * Proper use of ARIA roles
 * Simpler upgrading to new core versions
