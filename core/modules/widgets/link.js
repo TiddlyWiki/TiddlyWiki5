@@ -95,10 +95,18 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		event.target.setAttribute("target","_blank");
 		return true;
 	} else {
+		var bounds = this.renderer.domNode.getBoundingClientRect();
 		$tw.utils.dispatchCustomEvent(event.target,"tw-navigate",{
 			navigateTo: this.to,
 			navigateFromNode: this,
-			navigateFromClientRect: this.renderer.domNode.getBoundingClientRect()
+			navigateFromClientRect: {
+				top: bounds.top,
+				left: bounds.left,
+				width: bounds.width,
+				right: bounds.right,
+				bottom: bounds.bottom,
+				height: bounds.height
+			}
 		});
 		event.preventDefault();
 		event.stopPropagation();
