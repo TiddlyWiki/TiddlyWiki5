@@ -2,6 +2,12 @@ title: HelloThere
 
 This is a demo of TiddlyWiki5 incorporating a plugin for the [[D3.js]] visualization library.
 
+! Word Cloud
+
+<$d3cloud/>
+
+! Bar Chart
+
 <$d3bar grouped={{$:/grouped}} data="GraphData"/>
 <$button set="$:/grouped" setTo="yes">grouped</$button> <$button set="$:/grouped" setTo="no">stacked</$button>
 
