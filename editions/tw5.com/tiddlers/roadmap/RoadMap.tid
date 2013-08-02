@@ -1,4 +1,4 @@
-modified: 201307212212
+modified: 201307310911
 title: RoadMap
 modifier: JeremyRuston
 tags: docs planning
@@ -20,6 +20,7 @@ The following additional features are under consideration for implementation dur
 * Multilanguage support
 * Aliases
 * Search and replace
+* Generalise tag handling so that any field can be a list of tiddler titles, and add mechanisms for manipulating lists
 * Tiddler renaming
 * Rich link tooltips, incorporating a preview
 * Keyboard shortcuts
