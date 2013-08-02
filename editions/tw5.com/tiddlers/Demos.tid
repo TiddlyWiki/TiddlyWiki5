@@ -1,4 +1,4 @@
-modified: 201305081130
+modified: 201308021022
 title: Demos
 tags: introduction
 
@@ -10,6 +10,7 @@ Here are a few features of TiddlyWiki that you can explore:
 * Examine the example [[bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]]
 * Check out the TaskManagementExample
 * Run the TiddlyWiki5 [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
+* Explore the  [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
 
 Learn more about using TiddlyWiki5:
 
