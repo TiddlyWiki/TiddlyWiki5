@@ -12,6 +12,6 @@ title: TaskManagementExample
 
 <$list filter="[!has[draft.of]tag[task]tag[done]sort[created]]">
 
-<$checkbox tag="done"> <$view field="title" format="link"/></$checkbox>
+<$checkbox tag="done"> ~~<$view field="title" format="link"/>~~</$checkbox>
 
 </$list>
