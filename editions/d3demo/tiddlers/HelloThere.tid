@@ -4,7 +4,10 @@ This is a demo of TiddlyWiki5 incorporating a plugin for the [[D3.js]] visualiza
 
 ! Word Cloud
 
-<$d3cloud/>
+<$d3cloud data="CloudData" spiral={{$:/spiral}}/>
+
+
+//[[Raw data|CloudData]]//
 
 ! Bar Chart
 
