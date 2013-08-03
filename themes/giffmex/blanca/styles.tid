@@ -1,36 +1,36 @@
 title: $:/themes/giffmex/blanca/styles
 tags: [[$:/tags/stylesheet]]
 
-body { 
+html body { 
 font-size:14px;
 line-height:20px; 
 background-color:#ffffff;
 }
 
-.tw-page-controls {background-color:#ffffff;
+html .tw-page-controls {background-color:#ffffff;
 padding:8px;}
 
-.tw-sidebar-lists a.tw-tiddlylink {
+html .tw-sidebar-lists a.tw-tiddlylink {
 color: #5959c0;
 }
 
-h1 {
+html h1 {
     font-size: 1.5em;
     margin: 0.67em 0;
 padding-top:1em;}
 
 
-table th {padding:10px;vertical-align:top;} 
-table td {padding:10px;vertical-align:top; background-color:#ffffff;}
-table th {color: #000;background-color:#eee;font-weight:normal;}
-table th {border-color:#000;}
-table td {border-color:#000;}
-table {border-color:#000;}
+html table th {padding:10px;vertical-align:top;} 
+html table td {padding:10px;vertical-align:top; background-color:#ffffff;}
+html table th {color: #000;background-color:#eee;font-weight:normal;}
+html table th {border-color:#000;}
+html table td {border-color:#000;}
+html table {border-color:#000;}
 
-.blueTable td {background-color:#eeeeff;}
-.blueTable th {background-color: #cccccc;}
+html .blueTable td {background-color:#eeeeff;}
+html .blueTable th {background-color: #cccccc;}
 
-.tw-tag-label {
+html .tw-tag-label {
 font-weight:normal;
 	padding: 4px 6px;
 	color: #000000;
@@ -38,23 +38,23 @@ font-weight:normal;
 	background-color: #ffeebb;
 }
 
-.title {
+html .title {
 	color: #ff9900;
 }
 
-.tw-tiddler-frame {
+html .tw-tiddler-frame {
 border-style:solid;border-color:#eee;border-width:1px;
 }
 
-.tw-tab-buttons button {
+html .tw-tab-buttons button {
 	background-color: #eee;
 }
 
-.tw-tab-buttons button.tw-tab-selected {
+html .tw-tab-buttons button.tw-tab-selected {
 	background-color: #ffffff;
 	border-bottom: 1px solid #ffffff;
 }
 
-svg.tw-image-new-button, svg.tw-image-options-button, svg.tw-image-save-button {
+html svg.tw-image-new-button, html svg.tw-image-options-button, html svg.tw-image-save-button {
   fill: #cccccc;
 }
