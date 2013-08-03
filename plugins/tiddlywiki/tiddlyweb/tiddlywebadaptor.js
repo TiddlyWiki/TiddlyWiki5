@@ -12,11 +12,27 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 /*global $tw: false */
 "use strict";
 
+var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
+	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
+
 function TiddlyWebAdaptor(syncer) {
 	this.syncer = syncer;
-	this.host = document.location.protocol + "//" + document.location.host + "/";
+	this.host = this.getHost();
 	this.recipe = undefined;
 }
+
+TiddlyWebAdaptor.prototype.getHost = function() {
+	var text = this.syncer.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
+		substitutions = [
+			{name: "protocol", value: document.location.protocol},
+			{name: "host", value: document.location.host}
+		];
+	for(var t=0; t<substitutions.length; t++) {
+		var s = substitutions[t];
+		text = text.replace(new RegExp("\\$" + s.name + "\\$","mg"),s.value);
+	}
+	return text;
+};
 
 TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	return {
