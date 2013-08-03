@@ -837,6 +837,11 @@ canvas.tw-edit-bitmapeditor  {
 	background-color: rgb(250, 210, 50);
 }
 
+.tw-static-alert {
+	padding: 0em 0.2em 0.2em 3em;
+	color: #AAA;
+}
+
 /*
 ** Grids
 */
