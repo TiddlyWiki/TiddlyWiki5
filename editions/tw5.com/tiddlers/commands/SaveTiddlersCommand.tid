@@ -1,14 +1,14 @@
-title: SaveTiddlersCommand
+title: RenderTiddlersCommand
 tags: docs command
 
-Save a set of tiddlers matching a filter as separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
+Render a set of tiddlers matching a filter to separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
 
 ```
---savetiddlers <filter> <template> <pathname> [<type>] [<extension>]
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
 ```
 
 For example:
 
 ```
---savetiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```

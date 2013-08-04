@@ -11,7 +11,7 @@ mkdir -p tmp/tw2
 node ./tiddlywiki.js \
 	editions/tw5.com \
 	--verbose \
-	--savetiddler TiddlyWiki2ReadMe editions/tw2/readme.md text/html \
+	--rendertiddler TiddlyWiki2ReadMe editions/tw2/readme.md text/html \
 	|| exit 1
 
 # cook the TiddlyWiki 2.x.x index file
@@ -20,7 +20,7 @@ node ./tiddlywiki.js \
 	editions/tw2 \
 	--verbose \
 	--load editions/tw2/source/tiddlywiki.com/index.html.recipe \
-	--savetiddler $:/core/templates/tiddlywiki2.template.html ./tmp/tw2/index.html text/plain \
+	--rendertiddler $:/core/templates/tiddlywiki2.template.html ./tmp/tw2/index.html text/plain \
 	|| exit 1
 
 opendiff tmp/tw2/index.html editions/tw2/target/index.2.6.5.html

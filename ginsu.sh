@@ -9,6 +9,6 @@ node ./tiddlywiki.js \
 	./editions/empty \
 	--verbose \
 	--load $1 \
-	--savetiddler $:/core/templates/split-recipe tmp/ginsu/split.recipe text/plain \
-	--savetiddlers [!is[system]] $:/core/templates/tid-tiddler tmp/ginsu text/plain .tid \
+	--rendertiddler $:/core/templates/split-recipe tmp/ginsu/split.recipe text/plain \
+	--rendertiddlers [!is[system]] $:/core/templates/tid-tiddler tmp/ginsu text/plain .tid \
 	|| exit 1

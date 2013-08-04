@@ -1,8 +1,8 @@
-title: SaveTiddlerCommand
+title: RenderTiddlerCommand
 tags: docs command
 
-Save an individual tiddler as a specified ContentType, defaults to `text/html` 
+Render an individual tiddler as a specified ContentType, defaults to `text/html` and save it to the specified filename 
 
 ```
---savetiddler <title> <filename> [<type>]
+--rendertiddler <title> <filename> [<type>]
 ```

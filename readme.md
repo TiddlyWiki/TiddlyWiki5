@@ -159,28 +159,28 @@ TiddlyWiki</a> files (<code>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>
-<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/SaveTiddlerCommand.html'>
-SaveTiddlerCommand</a></span></h3><div>
+<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RenderTiddlerCommand.html'>
+RenderTiddlerCommand</a></span></h3><div>
 <div class='tw-transclude'>
 <p>
-Save an individual tiddler as a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/ContentType.html'>
+Render an individual tiddler as a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/ContentType.html'>
 ContentType</a>, defaults to <code>
-text/html</code> </p><pre>
---savetiddler &lt;title&gt; &lt;filename&gt; [&lt;type&gt;]</pre></div></div></div></div><div class='tw-list-element'>
+text/html</code> and save it to the specified filename </p><pre>
+--rendertiddler &lt;title&gt; &lt;filename&gt; [&lt;type&gt;]</pre></div></div></div></div><div class='tw-list-element'>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>
-<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/SaveTiddlersCommand.html'>
-SaveTiddlersCommand</a></span></h3><div>
+<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RenderTiddlersCommand.html'>
+RenderTiddlersCommand</a></span></h3><div>
 <div class='tw-transclude'>
 <p>
-Save a set of tiddlers matching a filter as separate files of a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/ContentType.html'>
+Render a set of tiddlers matching a filter to separate files of a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/ContentType.html'>
 ContentType</a> (defaults to <code>
 text/html</code>) and extension (defaults to <code>
 .html</code>).</p><pre>
---savetiddlers &lt;filter&gt; &lt;template&gt; &lt;pathname&gt; [&lt;type&gt;] [&lt;extension&gt;]</pre><p>
+--rendertiddlers &lt;filter&gt; &lt;template&gt; &lt;pathname&gt; [&lt;type&gt;] [&lt;extension&gt;]</pre><p>
 For example:</p><pre>
---savetiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></div></div><div class='tw-list-element'>
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></div></div><div class='tw-list-element'>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>

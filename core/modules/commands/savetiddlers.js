@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/commands/savetiddlers.js
+title: $:/core/modules/commands/rendertiddlers.js
 type: application/javascript
 module-type: command
 
-Command to save several tiddlers to a file
+Command to render several tiddlers to a folder of files
 
 \*/
 (function(){
@@ -13,7 +13,7 @@ Command to save several tiddlers to a file
 "use strict";
 
 exports.info = {
-	name: "savetiddlers",
+	name: "rendertiddlers",
 	synchronous: true
 };
 
