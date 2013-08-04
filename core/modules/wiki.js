@@ -24,6 +24,8 @@ last dispatched. Each entry is a hashmap containing two fields:
 /*global $tw: false */
 "use strict";
 
+var USER_NAME_TITLE = "$:/status/UserName";
+
 /*
 Get the value of a text reference. Text references can have any of these forms:
 	<tiddlertitle>
@@ -56,7 +58,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	// Check if it is a reference to a tiddler
 	if(tr.title && !tr.field) {
 		tiddler = this.getTiddler(tr.title);
-		this.addTiddler(new $tw.Tiddler(tiddler,{title: tr.title,text: value}));
+		this.addTiddler(new $tw.Tiddler(tiddler,{title: tr.title,text: value},this.getModificationFields()));
 	// Else check for a field reference
 	} else if(tr.field) {
 		title = tr.title || currTiddlerTitle;
@@ -64,7 +66,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 		if(tiddler) {
 			fields = {};
 			fields[tr.field] = value;
-			this.addTiddler(new $tw.Tiddler(tiddler,fields));
+			this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 		}
 	}
 };
@@ -82,7 +84,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
 			fields = {};
 			fields[tr.field] = undefined;
-			this.addTiddler(new $tw.Tiddler(tiddler,fields));
+			this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 		}
 	}
 };
@@ -192,6 +194,34 @@ exports.addTiddler = function(tiddler) {
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
 	this.enqueueTiddlerEvent(title);
+};
+
+/*
+Return a hashmap of the fields that should be set when a tiddler is modified
+*/
+exports.getCreationFields = function() {
+	var fields = {
+			created: new Date()
+		},
+		creator = this.getTiddlerText(USER_NAME_TITLE);
+	if(creator) {
+		fields.creator = creator;
+	}
+	return fields;
+};
+
+/*
+Return a hashmap of the fields that should be set when a tiddler is created
+*/
+exports.getModificationFields = function() {
+	var fields = {
+			modified: new Date()
+		},
+		modifier = this.getTiddlerText(USER_NAME_TITLE);
+	if(modifier) {
+		fields.modifier = modifier;
+	}
+	return fields;
 };
 
 /*
@@ -457,7 +487,7 @@ Set a tiddlers content to a JavaScript object. Currently this is done by setting
 */
 exports.setTiddlerData = function(title,data) {
 	var tiddler = this.getTiddler(title);
-	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)}));
+	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
 };
 
 /*

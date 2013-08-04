@@ -144,7 +144,9 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 					title: draftTitle,
 					"draft.title": event.tiddlerTitle,
 					"draft.of": event.tiddlerTitle
-				}));
+				},
+				this.renderer.renderTree.wiki.getModificationFields()
+				));
 		}
 	}
 	this.saveStoryList();
@@ -196,12 +198,11 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 			var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
 			if(tiddler.hasField("draft.title")) {
 				// Save the draft tiddler as the real tiddler
-				this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,{
+				this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(this.renderer.renderTree.wiki.getCreationFields(),tiddler,{
 					title: tiddler.fields["draft.title"],
-					modified: new Date(),
 					"draft.title": undefined, 
 					"draft.of": undefined
-				}));
+				},this.renderer.renderTree.wiki.getModificationFields()));
 				// Remove the draft tiddler
 				this.renderer.renderTree.wiki.deleteTiddler(event.tiddlerTitle);
 				// Remove the original tiddler if we're renaming it
@@ -262,10 +263,10 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 			break;
 		}
 	}
-	var tiddler = new $tw.Tiddler({
+	var tiddler = new $tw.Tiddler(this.renderer.renderTree.wiki.getCreationFields(),{
 		title: title,
 		text: "Newly created tiddler"
-	});
+	},this.renderer.renderTree.wiki.getModificationFields());
 	this.renderer.renderTree.wiki.addTiddler(tiddler);
 	// Create the draft tiddler
 	var draftTitle = this.generateDraftTitle(title),
@@ -274,7 +275,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 			title: draftTitle,
 			"draft.title": title,
 			"draft.of": title
-		});
+		},this.renderer.renderTree.wiki.getModificationFields());
 	this.renderer.renderTree.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top
 	var slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;

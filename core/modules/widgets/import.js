@@ -239,7 +239,7 @@ ImportWidget.prototype.importFiles = function(files) {
 };
 
 ImportWidget.prototype.storeTiddler = function(fields) {
-	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields));
+	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(fields,this.renderer.renderTree.wiki.getModificationFields()));
 };
 
 ImportWidget.prototype.generateTitle = function(baseTitle) {

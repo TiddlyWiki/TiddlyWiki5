@@ -47,7 +47,7 @@ exports.startup = function() {
 	for(var t=0; t<defaultTiddlers.length; t++) {
 		story[t] = defaultTiddlers[t];
 	}
-	$tw.wiki.addTiddler({title: storyTitle, text: story.join("\n")});
+	$tw.wiki.addTiddler({title: storyTitle, text: story.join("\n")},$tw.wiki.getModificationFields());
 	// Host-specific startup
 	if($tw.browser) {
 		// Call browser startup modules
