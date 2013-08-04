@@ -1,6 +1,5 @@
 {
 	"plugins": [
-		"tiddlywiki/loadrecipe",
-		"tiddlywiki/stripcomments"
+		"tiddlywiki/classictools"
 	]
 }

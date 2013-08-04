@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki2/stripcomments/stripcomments.js
+title: $:/plugins/tiddlywiki/classictools/stripcomments.js
 type: application/javascript
 module-type: fieldviewer
 

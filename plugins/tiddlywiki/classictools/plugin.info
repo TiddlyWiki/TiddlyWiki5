@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/classictools",
+	"description": "Tools for working with classic TiddlyWiki documents",
+	"author": "JeremyRuston",
+	"version": "0.0.0",
+	"core-version": ">=5.0.0"
+}
