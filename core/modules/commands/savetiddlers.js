@@ -14,7 +14,7 @@ Command to save several tiddlers to a file
 
 exports.info = {
 	name: "savetiddlers",
-	synchronous: false
+	synchronous: true
 };
 
 var Command = function(params,commander,callback) {
