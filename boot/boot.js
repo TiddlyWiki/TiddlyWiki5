@@ -77,6 +77,13 @@ $tw.utils.isArray = function(value) {
 };
 
 /*
+Determine if a value is a date
+*/
+$tw.utils.isDate = function(value) {
+	return Object.prototype.toString.call(value) === "[object Date]";
+};
+
+/*
 Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)
 */
 $tw.utils.each = function(object,callback) {
@@ -240,7 +247,7 @@ $tw.utils.parseDate = function(value) {
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
 				parseInt(value.substr(14,3)||"000",10)));
-	} else if (value instanceof Date) {
+	} else if ($tw.utils.isDate(value)) {
 		return value;
 	} else {
 		return null;
