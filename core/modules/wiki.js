@@ -197,7 +197,7 @@ exports.addTiddler = function(tiddler) {
 };
 
 /*
-Return a hashmap of the fields that should be set when a tiddler is modified
+Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
 	var fields = {
@@ -211,13 +211,12 @@ exports.getCreationFields = function() {
 };
 
 /*
-Return a hashmap of the fields that should be set when a tiddler is created
+Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = {
-			modified: new Date()
-		},
+	var fields = {},
 		modifier = this.getTiddlerText(USER_NAME_TITLE);
+	fields.modified = new Date();
 	if(modifier) {
 		fields.modifier = modifier;
 	}
