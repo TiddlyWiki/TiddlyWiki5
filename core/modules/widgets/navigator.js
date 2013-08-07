@@ -51,19 +51,14 @@ NavigatorWidget.prototype.refreshInDom = function(changedAttributes,changedTiddl
 };
 
 NavigatorWidget.prototype.getStoryList = function() {
-	var text = this.renderer.renderTree.wiki.getTextReference(this.storyTitle,"");
-	if(text && text.length > 0) {
-		this.storyList = text.split("\n");
-	} else {
-		this.storyList = [];
-	}
+	this.storyList = this.renderer.renderTree.wiki.getTiddlerList(this.storyTitle);
 };
 
 NavigatorWidget.prototype.saveStoryList = function() {
 	var storyTiddler = this.renderer.renderTree.wiki.getTiddler(this.storyTitle);
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler({
 		title: this.storyTitle
-	},storyTiddler,{text: this.storyList.join("\n")}));
+	},storyTiddler,{list: this.storyList}));
 };
 
 NavigatorWidget.prototype.findTitleInStory = function(title,defaultIndex) {

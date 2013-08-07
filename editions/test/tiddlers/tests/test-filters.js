@@ -64,7 +64,8 @@ describe("Filter tests", function() {
 		tags: []});
 	addShadowTiddler({
 		title: "TiddlerSeventh",
-		text: "TiddlerOne\nTiddler Three\na fourth tiddler\nMissingTiddler",
+		text: "",
+		list: "TiddlerOne [[Tiddler Three]] [[a fourth tiddler]] MissingTiddler",
 		tags: []});
 	addShadowTiddler({
 		title: "Tiddler8",
@@ -113,13 +114,14 @@ describe("Filter tests", function() {
 
 	it("should handle the tagging operator", function() {
 		expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("TiddlerOne,Tiddler Three");
 		expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
 		expect(wiki.filterTiddlers("[is[current]tagging[]sort[title]]","one").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the links operator", function() {
 		expect(wiki.filterTiddlers("[!is[shadow]links[]sort[title]]").join(",")).toBe("a fourth tiddler,one,Tiddler Three,TiddlerSix,TiddlerTwo,TiddlerZero");
-		expect(wiki.filterTiddlers("[is[shadow]links[]sort[title]]").join(",")).toBe("MissingTiddler,TiddlerOne");
+		expect(wiki.filterTiddlers("[is[shadow]links[]sort[title]]").join(",")).toBe("TiddlerOne");
 	});
 
 	it("should handle the backlinks operator", function() {

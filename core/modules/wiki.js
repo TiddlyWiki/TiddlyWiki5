@@ -494,8 +494,8 @@ Return the content of a tiddler as an array containing each line
 */
 exports.getTiddlerList = function(title) {
 	var tiddler = this.getTiddler(title);
-	if(tiddler && tiddler.fields.text && tiddler.fields.text.length > 0) {
-		return tiddler.fields.text.split("\n");
+	if(tiddler && $tw.utils.isArray(tiddler.fields.list)) {
+		return tiddler.fields.list;
 	}
 	return [];
 };
