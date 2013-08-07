@@ -36,7 +36,7 @@ TiddlyWikiFolders</a>, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlyl
 TiddlerFiles</a> and <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWikiFiles.html'>
 TiddlyWikiFiles</a>. For example, the following command loads the tiddlers from a <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a> HTML file and then saves one of them in HTML:</p><pre>
-node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html</pre><p>
+node tiddlywiki.js --verbose --load mywiki.html --rendertiddler ReadMe ./readme.html</pre><p>
 In order to use <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> on the command line you must first install node.js from <a class='tw-tiddlylink tw-tiddlylink-external' href='http://nodejs.org/'>
 http://nodejs.org/</a></p><h2 class=''>
