@@ -6,7 +6,7 @@ tags: docs edition
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles. For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 
 ```
-node tiddlywiki.js --verbose --load mywiki.html --savetiddler ReadMe ./readme.html
+node tiddlywiki.js --verbose --load mywiki.html --rendertiddler ReadMe ./readme.html
 ```
 
 In order to use TiddlyWiki5 on the command line you must first install node.js from http://nodejs.org/

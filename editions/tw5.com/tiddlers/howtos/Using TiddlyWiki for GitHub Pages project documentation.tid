@@ -11,7 +11,7 @@ When displaying the contents of a folder GitHub will look for a `readme.md` file
 This is done in `bld.sh` by this command:
 
 ```
---savetiddler ReadMe ./readme.md text/html
+--rendertiddler ReadMe ./readme.md text/html
 ```
 
 It saves the tiddler ReadMe to the file `./readme.md` in the `text/html` format.

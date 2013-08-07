@@ -16,7 +16,7 @@ TiddlyWikiClassic is built from the command line by running TiddlyWiki5 under no
 node ../../tiddlywiki.js \
 	--verbose \
 	--load <path_to_recipe_file> \
-	--savetiddler $:/core/templates/tiddlywiki2.template.html <path_to_write_index_file> text/plain \
+	--rendertiddler $:/core/templates/tiddlywiki2.template.html <path_to_write_index_file> text/plain \
 	|| exit 1
 ```
 

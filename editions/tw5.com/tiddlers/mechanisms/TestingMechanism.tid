@@ -28,7 +28,7 @@ To generate a wiki containing the browser tests load up the `test` wiki and save
 node ./tiddlywiki.js \
 	./editions/test \
 	--verbose \
-	--savetiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/test.html text/plain \
+	--rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/test.html text/plain \
 ```
 
 Then, open the `test.html` file in the browser to see the test results. There is a prebuilt version of `test.html` at:

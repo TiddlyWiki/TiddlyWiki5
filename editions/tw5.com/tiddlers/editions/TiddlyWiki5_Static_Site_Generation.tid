@@ -10,8 +10,8 @@ You can explore a static representation of the TiddlyWiki5 site at <a href="stat
 The included `bld.sh` script includes these commands that are involved in generating the sample static version of the TiddlyWiki5 site:
 
 ```
---savetiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
---savetiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
---savetiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
+--rendertiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+--rendertiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 ```
-The first SaveTiddlerCommand saves the static version of the DefaulTiddlers, the second saves the stylesheet, and the final SaveTiddlersCommand generates the HTML representations of individual tiddlers.
+The first RenderTiddlerCommand saves the static version of the DefaulTiddlers, the second saves the stylesheet, and the final RenderTiddlersCommand generates the HTML representations of individual tiddlers.
