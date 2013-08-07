@@ -254,6 +254,19 @@ $tw.utils.parseDate = function(value) {
 	}
 };
 
+// Stringify an array of tiddler titles into a list string
+$tw.utils.stringifyList = function(value) {
+	var result = [];
+	for(var t=0; t<value.length; t++) {
+		if(value[t].indexOf(" ") !== -1) {
+			result.push("[[" + value[t] + "]]");
+		} else {
+			result.push(value[t]);
+		}
+	}
+	return result.join(" ");
+};
+
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
 $tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
@@ -688,17 +701,12 @@ $tw.modules.define("$:/boot/tiddlerfields/color","tiddlerfield",{
 $tw.modules.define("$:/boot/tiddlerfields/tags","tiddlerfield",{
 	name: "tags",
 	parse: $tw.utils.parseStringArray,
-	stringify: function(value) {
-		var result = [];
-		for(var t=0; t<value.length; t++) {
-			if(value[t].indexOf(" ") !== -1) {
-				result.push("[[" + value[t] + "]]");
-			} else {
-				result.push(value[t]);
-			}
-		}
-		return result.join(" ");
-	}
+	stringify: $tw.utils.stringifyList
+});
+$tw.modules.define("$:/boot/tiddlerfields/list","tiddlerfield",{
+	name: "list",
+	parse: $tw.utils.parseStringArray,
+	stringify: $tw.utils.stringifyList
 });
 
 /////////////////////////// Barebones wiki store
