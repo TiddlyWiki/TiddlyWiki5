@@ -3,7 +3,7 @@ title: $:/core/modules/filters/tags.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator returning all tiddlers tagging the selected tiddlers
+Filter operator returning all the tags of the selected tiddlers
 
 \*/
 (function(){
