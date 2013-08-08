@@ -114,7 +114,7 @@ describe("Filter tests", function() {
 
 	it("should handle the tagging operator", function() {
 		expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
-		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("TiddlerOne,Tiddler Three");
+		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
 		expect(wiki.filterTiddlers("[is[current]tagging[]sort[title]]","one").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});

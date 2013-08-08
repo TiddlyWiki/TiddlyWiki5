@@ -40,6 +40,10 @@ exports.tag = function(source,operator,options) {
 			checkTiddler(title);
 		});
 	}
+	// Sort the results if we are matching a tag
+	if(operator.prefix !== "!") {
+		results = options.wiki.sortByList(results,operator.operand);
+	}
 	return results;
 };
 

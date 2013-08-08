@@ -411,6 +411,7 @@ exports.getShadowTitles = function() {
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
+	// Get the list associated with the tag
 	var titles = [];
 	for(var title in this.tiddlers) {
 		var tiddler = this.tiddlers[title];
@@ -418,7 +419,34 @@ exports.getTiddlersWithTag = function(tag) {
 			titles.push(title);
 		}
 	}
-	return titles;
+	return this.sortByList(titles,tag);
+};
+
+/*
+Sorts an array of tiddler titles according to an ordered list
+*/
+exports.sortByList = function(array,listTitle) {
+	var list = this.getTiddlerList(listTitle);
+	if(list) {
+		var titles = [], t, title;
+		// First place any entries that are present in the list
+		for(t=0; t<list.length; t++) {
+			title = list[t];
+			if(array.indexOf(title) !== -1) {
+				titles.push(title);
+			}
+		}
+		// Then place any remaining entries
+		for(t=0; t<array.length; t++) {
+			title = array[t];
+			if(list.indexOf(title) === -1) {
+				titles.push(title);
+			}
+		}
+		return titles;
+	} else {
+		return array;
+	}
 };
 
 /*

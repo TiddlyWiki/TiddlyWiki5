@@ -4,7 +4,7 @@ title: $:/core/ui/TagTemplate
 <$reveal state="$:/state/tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
 <$view field="title" format="link" />
 ----
-<$list filter="[is[current]tagging[]sort[title]]">
+<$list filter="[is[current]tagging[]]">
 <$view field="title" format="link" />
 </$list>
 </div></$reveal>
