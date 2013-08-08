@@ -130,15 +130,27 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 	if(this.to) {
 		// Set the dragging class on the element being dragged
 		$tw.utils.addClass(event.target,"tw-tiddlylink-dragging");
-		// Create the drag image element
+		// Create the drag image elements
 		this.dragImage = this.renderer.renderTree.document.createElement("div");
 		this.dragImage.className = "tw-tiddler-dragger";
-		this.dragImage.appendChild(this.renderer.renderTree.document.createTextNode(this.to));
+		var inner = this.renderer.renderTree.document.createElement("div");
+		inner.className = "tw-tiddler-dragger-inner";
+		inner.appendChild(this.renderer.renderTree.document.createTextNode(this.to));
+		this.dragImage.appendChild(inner);
 		this.renderer.renderTree.document.body.appendChild(this.dragImage);
+		// Astoundingly, we need to cover the dragger up: http://www.kryogenix.org/code/browser/custom-drag-image.html
+		var bounds = this.dragImage.firstChild.getBoundingClientRect(),
+			cover = this.renderer.renderTree.document.createElement("div");
+		cover.className = "tw-tiddler-dragger-cover";
+		cover.style.left = (bounds.left - 8) + "px";
+		cover.style.top = (bounds.top - 8) + "px";
+		cover.style.width = (bounds.width + 16) + "px";
+		cover.style.height = (bounds.height + 16) + "px";
+		this.dragImage.appendChild(cover);
 		// Set the data transfer properties
 		var dataTransfer = event.dataTransfer;
 		dataTransfer.effectAllowed = "copy";
-		dataTransfer.setDragImage(this.dragImage,-16,-16);
+		dataTransfer.setDragImage(this.dragImage.firstChild,-16,-16);
 		dataTransfer.clearData();
 		dataTransfer.setData("text/vnd.tiddler",this.renderer.renderTree.wiki.getTiddlerAsJson(this.to));
 		dataTransfer.setData("text/plain",this.renderer.renderTree.wiki.getTiddlerText(this.to,""));

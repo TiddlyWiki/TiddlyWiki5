@@ -164,6 +164,12 @@ a.tw-tiddlylink-external {
 */
 
 .tw-tiddler-dragger {
+	position: relative;
+	z-index: -10000;
+}
+
+.tw-tiddler-dragger-inner {
+	position: absolute;
 	display: inline-block;
 	padding: 8px 20px;
 	font-size: 16.9px;
@@ -175,6 +181,11 @@ a.tw-tiddlylink-external {
 	vertical-align: baseline;
 	background-color: #000;
 	<<border-radius 20px>>
+}
+
+.tw-tiddler-dragger-cover {
+	position: absolute;
+	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##pagebackground}};
 }
 
 .tw-import {
