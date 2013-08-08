@@ -9,7 +9,7 @@ title: $:/core/ui/TiddlerInfo
 </$list>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="taggingTab" qualifyTiddlerTitles="yes">
-<$list filter="[is[current]tagging[]sort[title]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one"/>
+<$list filter="[is[current]tagging[]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one"/>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="fieldsTab" qualifyTiddlerTitles="yes">
 <$fieldgrid />
