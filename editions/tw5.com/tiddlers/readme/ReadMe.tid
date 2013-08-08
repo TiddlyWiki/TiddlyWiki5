@@ -1,5 +1,4 @@
 title: ReadMe
-tags: introduction
 
 \define tw-wikilink-template() http://five.tiddlywiki.com/static/$uri_encoded$.html
 ! Welcome to TiddlyWiki5
