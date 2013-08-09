@@ -1,6 +1,11 @@
 title: Plugins
 tags: docs concepts
+modified: 201308091623
 
-A plugin in TiddlyWiki5 is a bundle of tiddlers packaged together as a single tiddler. Plugins are used to distribute optional, custom components for TiddlyWiki. Plugins can contain JavaScript modules, style sheets, and templates to extend the functionality of TiddlyWiki itself. Plugins can also be used to distribute ordinary text, images or other content. Plugins can be updated from their source as a unit.
+A plugin in TiddlyWiki5 is a bundle of tiddlers packaged together as a single tiddler. Plugins are used to distribute optional, custom components for TiddlyWiki.
+
+The tiddlers within a plugin appear as ShadowTiddlers.
+
+Plugins can contain JavaScript modules, style sheets, and templates to extend the functionality of TiddlyWiki itself. Plugins can also be used to distribute ordinary text, images or other content. Plugins can be updated from their source as a unit.
 
 See the PluginMechanism discussion for more details about how plugins are implemented internally.

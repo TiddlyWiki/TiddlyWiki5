@@ -1,4 +1,4 @@
-modified: 201306011656
+modified: 201308091623
 title: TiddlerFields
 
 TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. The standard fields are:
@@ -10,6 +10,7 @@ TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. The stan
 * `creator` - The name of the person who created the tiddler
 * `tags` - A list of tags applied to the tiddler
 * `type` - The ContentType that should used to interpret the content of the tiddler
+* `list` - A list of tiddler titles
 
 Other fields used by the core are:
 
@@ -30,3 +31,5 @@ The TiddlyWebAdaptor uses a few more fields:
 
 * `bag` - The name of the bag from which a tiddler came
 * `revision` - The revision of the tiddler held at the server
+
+See [[$:/ConfigInfo]] for details of the fields used in this wiki.

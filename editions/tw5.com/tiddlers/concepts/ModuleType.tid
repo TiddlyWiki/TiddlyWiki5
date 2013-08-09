@@ -1,25 +1,7 @@
 title: ModuleType
 tags: docs concepts
+modified: 201308091623
 
-The `module-type` field of a [[JavaScript module|Modules]] is a string that identifies the type of the module. TiddlyWiki5 uses the following types:
+The `module-type` field of a [[JavaScript module|Modules]] is a string that identifies the type of the module.
 
-* `command` - individual commands for the `$tw.Commander` class 
-* `config` - values to be merged over the `$tw.config` global
-* `editor` - interactive editors for different types of content
-* `global` - members of the `$tw` global
-* `library` - external global JavaScript library, such as Esprima or jQuery
-* `macro` - macro definitions
-* `module` - generic type for modules `require`d by other modules
-* `parser` - parsers for different types of content
-* `saver` - functions for saving TiddlyWiki content on different platforms
-* `startup` - functions to be called by the kernel after booting
-* `storyview` - visualisations for the `story` macro
-* `tiddlerdeserializer` - methods to extract tiddlers from text representations or the DOM
-* `tiddlerfield` - defines the characteristics of tiddler fields of a particular name
-* `tiddlermethod` - additional methods for the `$tw.Tiddler` class
-* `tiddlerserializer` - methods to serialise tiddlers to text representations
-* `treenode` - classes of parser tree nodes
-* `treeutils` - static utility methods for parser tree nodes 
-* `utils` - general purpose utility functions residing in `$tw.utils`
-* `wikimethod` - additional methods for the `$tw.Wiki` class
-* `wikitextrule` - individual rules for the wikitext parser
+See [[$:/ConfigInfo]] for a list of the module types used in this wiki.

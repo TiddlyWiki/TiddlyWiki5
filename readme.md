@@ -140,6 +140,15 @@ TiddlyWiki</a> files (<code>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>
+<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PasswordCommand.html'>
+PasswordCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+Set a password for subsequent crypto operations</p><pre>
+--password &lt;password&gt;</pre></div></div></div></div><div class='tw-list-element'>
+<div class='tw-transclude'>
+<h3 class=''>
+<span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PrintCommand.html'>
 PrintCommand</a></span></h3><div>
 <div class='tw-transclude'>
