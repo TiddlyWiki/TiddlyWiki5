@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/commands/dump.js
+title: $:/core/modules/commands/print.js
 type: application/javascript
 module-type: command
 
-Dump command for inspecting TiddlyWiki internals
+Print command for inspecting TiddlyWiki internals
 
 \*/
 (function(){
@@ -13,7 +13,7 @@ Dump command for inspecting TiddlyWiki internals
 "use strict";
 
 exports.info = {
-	name: "dump",
+	name: "print",
 	synchronous: true
 };
 
@@ -25,13 +25,13 @@ var Command = function(params,commander) {
 
 Command.prototype.execute = function() {
 	if(this.params.length < 1) {
-		return "Too few parameters for dump command";
+		return "Too few parameters for print command";
 	}
 	var subcommand = this.subcommands[this.params[0]];
 	if(subcommand) {
 		return subcommand.call(this);
 	} else {
-		return "Unknown subcommand (" + this.params[0] + ") for dump command";
+		return "Unknown subcommand (" + this.params[0] + ") for print command";
 	}
 };
 
@@ -39,7 +39,7 @@ Command.prototype.subcommands = {};
 
 Command.prototype.subcommands.tiddler = function() {
 	if(this.params.length < 2) {
-		return "Too few parameters for dump tiddler command";
+		return "Too few parameters for print tiddler command";
 	}
 	var tiddler = this.commander.wiki.getTiddler(this.params[1]);
 	if(!tiddler) {
@@ -80,11 +80,11 @@ Command.prototype.subcommands.config = function() {
 				return "[\"" + $tw.utils.stringify(p) + "\"]";
 			}
 		},
-		dumpConfig = function(object,prefix) {
+		printConfig = function(object,prefix) {
 			for(var n in object) {
 				var v = object[n];
 				if(typeof v === "object") {
-					dumpConfig(v,prefix + "." + quotePropertyName(n));
+					printConfig(v,prefix + "." + quotePropertyName(n));
 				} else if(typeof v === "string") {
 					self.output.write(prefix + "." + quotePropertyName(n) + ": \"" + $tw.utils.stringify(v) + "\"\n");
 				} else {
@@ -92,20 +92,20 @@ Command.prototype.subcommands.config = function() {
 				}
 			}
 		},
-		dumpObject = function(heading,object) {
+		printObject = function(heading,object) {
 			self.output.write(heading +"\n");
 			for(var n in object) {
 				self.output.write("  " + n + "\n");
 			}
 		};
 	this.output.write("Configuration:\n");
-	dumpConfig($tw.config,"  $tw.config");
-	dumpObject("Tiddler field modules:",$tw.Tiddler.fieldModules);
-	dumpObject("Loaded modules:",$tw.modules.titles);
-	dumpObject("Command modules:",$tw.commands);
-	dumpObject("Parser modules:",$tw.wiki.parsers);
-	dumpObject("Macro modules:",$tw.wiki.macros);
-	dumpObject("Deserializer modules:",$tw.Wiki.tiddlerDeserializerModules);
+	printConfig($tw.config,"  $tw.config");
+	printObject("Tiddler field modules:",$tw.Tiddler.fieldModules);
+	printObject("Loaded modules:",$tw.modules.titles);
+	printObject("Command modules:",$tw.commands);
+	printObject("Parser modules:",$tw.wiki.parsers);
+	printObject("Macro modules:",$tw.wiki.macros);
+	printObject("Deserializer modules:",$tw.Wiki.tiddlerDeserializerModules);
 	return null; // No error
 };
 

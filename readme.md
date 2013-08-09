@@ -126,25 +126,6 @@ The following commands are available:</p><div class='tw-list-frame'>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>
-<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/DumpCommand.html'>
-DumpCommand</a></span></h3><div>
-<div class='tw-transclude'>
-<h3 class=''>
-dump tiddlers</h3><p>
-Dump the titles of the tiddlers in the wiki store </p><pre>
---dump tiddlers</pre><h3 class=''>
-dump tiddler</h3><p>
-Dump the fields of an individual tiddler </p><pre>
---dump tiddler &lt;title&gt;</pre><h3 class=''>
-dump system</h3><p>
-Dump the titles of the system tiddlers in the wiki store </p><pre>
---dump systems</pre><h3 class=''>
-dump config</h3><p>
-Dump the current core configuration </p><pre>
---dump config</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
-<h3 class=''>
-<span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/LoadCommand.html'>
 LoadCommand</a></span></h3><div>
 <div class='tw-transclude'>
@@ -156,6 +137,27 @@ TiddlyWiki</a> files (<code>
 .tid</code>, <code>
 .json</code> or other files </p><pre>
 --load &lt;filepath&gt;</pre></div></div></div></div><div class='tw-list-element'>
+<div class='tw-transclude'>
+<h3 class=''>
+<span class='tw-view-link'>
+<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PrintCommand.html'>
+PrintCommand</a></span></h3><div>
+<div class='tw-transclude'>
+<p>
+The <code>
+print</code> command outputs specified information. </p><h3 class=''>
+print tiddlers</h3><p>
+Output the titles of the tiddlers in the wiki store</p><pre>
+--print tiddlers</pre><h3 class=''>
+print tiddler</h3><p>
+Print the fields of an individual tiddler </p><pre>
+--print tiddler &lt;title&gt;</pre><h3 class=''>
+print system</h3><p>
+Print the titles of the system tiddlers in the wiki store </p><pre>
+--print system</pre><h3 class=''>
+print config</h3><p>
+Print the current core configuration </p><pre>
+--print config</pre></div></div></div></div><div class='tw-list-element'>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>
