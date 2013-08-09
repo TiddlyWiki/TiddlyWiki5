@@ -590,11 +590,11 @@ canvas.tw-edit-bitmapeditor  {
 	width: 48%;
 }
 
-.tw-fieldlist > div:nth-child(odd) {
+.tw-edit-fields .tw-fieldlist > div:nth-child(odd) {
 	background-color: #f0f4f0;
 }
 
-.tw-fieldlist > div:nth-child(even) {
+.tw-edit-fields .tw-fieldlist > div:nth-child(even) {
 	background-color: #e0e8e0;
 }
 
