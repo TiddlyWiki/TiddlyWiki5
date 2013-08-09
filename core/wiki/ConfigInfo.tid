@@ -6,9 +6,7 @@ This tiddler displays the internal configuration of this wiki, which can be usef
 
 This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
 
-<$fieldlist all>
-<$info type="currentField"/>
-</$fieldlist>
+{{$:/snippets/allfields}}
 
 ! Loaded Modules
 

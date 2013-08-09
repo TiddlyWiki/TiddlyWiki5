@@ -27,9 +27,26 @@ InfoWidget.types.changecount = function(options) {
 };
 
 InfoWidget.types.currentfield = function(options) {
-	var text = options.widget.renderer.renderTree.getContextVariable(options.widget.renderer,"field","text");
-	return [{type: "text", text: text}];
+	var fieldName = options.widget.renderer.renderTree.getContextVariable(options.widget.renderer,"field","text");
+	return [{type: "text", text: fieldName}];
 };
+
+var FIELD_DESCRIPTION_PREFIX = "$:/docs/fields/";
+
+InfoWidget.types.currentfielddescription = function(options) {
+	var fieldName = options.widget.renderer.renderTree.getContextVariable(options.widget.renderer,"field","text"),
+		descriptionTitle = FIELD_DESCRIPTION_PREFIX + fieldName;
+	return [{
+		type: "element",
+		tag: "$transclude",
+		isBlock: false,
+		attributes: {
+			target: {type: "string", value: descriptionTitle}
+		}
+	}];
+};
+
+var MODULE_TYPE_DESCRIPTION_PREFIX = "$:/docs/moduletypes/";
 
 /*
 Return a list of all the currently loaded modules grouped by type
@@ -45,9 +62,18 @@ InfoWidget.types.modules = function(options) {
 	// Output the module types
 	$tw.utils.each(types,function(moduleType) {
 		// Heading
-		output.push({type: "element", tag: "h3", children: [
+		output.push({type: "element", tag: "h2", children: [
 				{type: "text", text: moduleType}
 			]})
+		// Description
+		output.push({
+			type: "element",
+			tag: "$transclude",
+			isBlock: false,
+			attributes: {
+				target: {type: "string", value: MODULE_TYPE_DESCRIPTION_PREFIX + moduleType}
+			}
+		});
 		// List each module
 		var list = {type: "element", tag: "ul", children: []},
 			modules = [];
