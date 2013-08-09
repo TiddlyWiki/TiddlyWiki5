@@ -22,6 +22,7 @@ var FieldListWidget = function(renderer) {
 FieldListWidget.prototype.generate = function() {
 	var self = this;
 	// Get parameters from our attributes
+	this.allTiddlers = this.renderer.hasAttribute("all");
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
 	this.exclude = this.renderer.getAttribute("exclude");
 	// Get the exclusion list
@@ -85,7 +86,11 @@ FieldListWidget.prototype.removeListElement = function(index) {
 FieldListWidget.prototype.getFieldList = function() {
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
 		fieldList = [];
-	if(tiddler) {
+	// If requested, return all fields used on all tiddlers
+	if(this.allTiddlers) {
+		fieldList = this.renderer.renderTree.wiki.getAllTiddlerFields();
+	} else if(tiddler) {
+		// Return the fields on the specified tiddler
 		for(var fieldName in tiddler.fields) {
 			if(this.excludeList.indexOf(fieldName) === -1) {
 				fieldList.push(fieldName);
