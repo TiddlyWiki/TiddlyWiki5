@@ -19,14 +19,56 @@ var InfoWidget = function(renderer) {
 	this.generate();
 };
 
-InfoWidget.types = {
-	changecount: function(options) {return options.wiki.getChangeCount(options.widget.renderer.tiddlerTitle);},
-	currentField: function(options) {return options.widget.renderer.renderTree.getContextVariable(options.widget.renderer,"field","text");}
+InfoWidget.types = {};
+
+InfoWidget.types.changecount = function(options) {
+	var text = options.wiki.getChangeCount(options.widget.renderer.tiddlerTitle);
+	return [{type: "text", text: text}];
+};
+
+InfoWidget.types.currentfield = function(options) {
+	var text = options.widget.renderer.renderTree.getContextVariable(options.widget.renderer,"field","text");
+	return [{type: "text", text: text}];
+};
+
+/*
+Return a list of all the currently loaded modules grouped by type
+*/
+InfoWidget.types.modules = function(options) {
+	var output = [],
+		types = [];
+	// Collect and sort the module types
+	$tw.utils.each($tw.modules.types,function(moduleInfo,type) {
+		types.push(type);
+	});
+	types.sort();
+	// Output the module types
+	$tw.utils.each(types,function(moduleType) {
+		// Heading
+		output.push({type: "element", tag: "h3", children: [
+				{type: "text", text: moduleType}
+			]})
+		// List each module
+		var list = {type: "element", tag: "ul", children: []},
+			modules = [];
+		$tw.utils.each($tw.modules.types[moduleType],function(moduleInfo,moduleName) {
+			var listItem = {type: "element", tag: "li", children: [
+				{type: "element", tag: "$link", attributes: {
+					to: {type: "string", value: moduleName}
+				}, children: [
+					{type: "text", text: moduleName}
+				]}
+			]}
+			list.children.push(listItem);
+		});
+		output.push(list);
+	});
+	return output;
 };
 
 InfoWidget.prototype.generate = function() {
 	// Get attributes
-	this.type = this.renderer.getAttribute("type","changecount");
+	this.type = this.renderer.getAttribute("type","changecount").toLowerCase();
 	// Get the appropriate value for the current tiddler
 	var value = "",
 		fn = InfoWidget.types[this.type];
@@ -39,10 +81,7 @@ InfoWidget.prototype.generate = function() {
 	// Set the element
 	this.tag = "span";
 	this.attributes = {};
-	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
-		type: "text",
-		text: value
-	}]);
+	this.children = this.renderer.renderTree.createRenderers(this.renderer,value);
 };
 
 exports.info = InfoWidget;
