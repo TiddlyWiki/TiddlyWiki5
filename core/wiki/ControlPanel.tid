@@ -31,3 +31,7 @@ The tiddlers in TiddlyWiki documents can be securely encrypted by specifying a p
 {{$:/snippets/themeswitcher}}
 
 {{$:/core/ui/ServerControlPanel}}
+
+! Advanced
+
+[[Internal configuration information|$:/ConfigInfo]]

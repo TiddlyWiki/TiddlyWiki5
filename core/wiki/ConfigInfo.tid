@@ -1,0 +1,18 @@
+title: $:/ConfigInfo
+
+This tiddler displays the internal configuration of this wiki, which can be useful for troubleshooting, or just to help understand how TiddlyWiki5 works.
+
+! Tiddler fields
+
+This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+
+<$fieldlist all>
+<$info type="currentField"/>
+</$fieldlist>
+
+! Loaded Modules
+
+These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+
+<$info type="modules"/>
+
