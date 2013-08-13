@@ -37,6 +37,7 @@ var typeMappings = {
 
 ListWidget.prototype.generate = function() {
 	// Get our attributes
+	this.macro = this.renderer.getAttribute("macro");
 	this.itemClass = this.renderer.getAttribute("itemClass");
 	this.template = this.renderer.getAttribute("template");
 	this.editTemplate = this.renderer.getAttribute("editTemplate");
@@ -113,7 +114,7 @@ ListWidget.prototype.createListElement = function(title) {
 		attributes: {
 			"class": {type: "string", value: classes.join(" ")}
 		},
-		children: [this.createListElementMacro(title)],
+		children: [this.createListElementParseTree(title)],
 		events: [
 			{name: "tw-navigate", handlerFunction: handleEvent},
 			{name: "tw-edit-tiddler", handlerFunction: handleEvent},
@@ -125,9 +126,34 @@ ListWidget.prototype.createListElement = function(title) {
 };
 
 /*
-Create the tiddler macro needed to represent a given tiddler
+Create the parse tree nodes needed to represent a given list element
+*/
+ListWidget.prototype.createListElementParseTree = function(title) {
+	if(this.macro) {
+		return this.createListElementMacro(title);
+	} else {
+		return this.createListElementTransclusion(title);
+	}
+};
+
+/*
+Create a macro call to represent a list element
 */
 ListWidget.prototype.createListElementMacro = function(title) {
+	// Create the macrocall rendertree node
+	return {
+		type: "macrocall",
+		name: this.macro,
+		params: [
+			{name: "title", value: title}
+		]
+	};
+};
+
+/*
+Create a transclusion to represent a list element
+*/
+ListWidget.prototype.createListElementTransclusion = function(title) {
 	// Check if the tiddler is a draft
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(title),
 		isDraft = tiddler ? tiddler.hasField("draft.of") : false;
@@ -193,8 +219,16 @@ startIndex: index to start search (use zero to search from the top)
 title: tiddler title to seach for
 */
 ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
+	var testNode = this.macro ? function(node) {
+		// We're looking for a macro list element
+		return node.widget.children[0].parseTreeNode.params[0].value === title;
+	} : function(node) {
+		// We're looking for a transclusion list element
+		return node.widget.children[0].attributes.target === title;
+	};
+	// Search for the list element
 	while(startIndex < this.children.length) {
-		if(this.children[startIndex].widget.children[0].attributes.target === title) {
+		if(testNode(this.children[startIndex])) {
 			return startIndex;
 		}
 		startIndex++;

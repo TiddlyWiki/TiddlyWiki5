@@ -1,0 +1,17 @@
+title: ListWidget
+modified: 201308131914
+tags: widget
+
+\define demoMacro(title)
+This is the tiddler called [[Blah-$title$]]
+\end
+
+Example of using the list widget with the macro attribute:
+
+```
+<$list filter="[tag[introduction]]" macro="demoMacro"/>
+```
+
+Renders as:
+
+<$list filter="[tag[introduction]]" macro="demoMacro"/>
