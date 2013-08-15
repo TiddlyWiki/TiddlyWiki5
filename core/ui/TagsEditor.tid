@@ -8,7 +8,7 @@ title: $:/core/ui/TagsEditor
 <div class="tw-tags-autocomplete-wrapper">
 <$reveal state="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" type="nomatch" text="" default="" class="tw-tags-autocomplete">
 
-<$linkcatcher set="$:/NewTagName" setTo="" message="tw-add-tag"><$list filter="[!is[shadow]tags[]prefix{$:/NewTagName}sort[title]]"><$link><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text"/></$setstyle></$link>
+<$linkcatcher set="$:/NewTagName" setTo="" message="tw-add-tag"><$list filter="[!is[shadow]tags[]search{$:/NewTagName}sort[title]]"><$link><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$view field="title" format="text"/></$setstyle></$link>
 </$list>
 </$linkcatcher>
 
