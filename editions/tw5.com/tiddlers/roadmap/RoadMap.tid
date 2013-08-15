@@ -1,4 +1,4 @@
-modified: 201307310911
+modified: 201308141511
 title: RoadMap
 modifier: JeremyRuston
 tags: docs planning
@@ -32,6 +32,8 @@ The following additional features are under consideration for implementation dur
 * Further WikiText features including block quotes
 * Facebook, Twitter, G+ and LinkedIn widgets
 * Integration with the browser back and forwards buttons
+* Built in JavaScript syntax highlighting
+* Syntax highlighter plugin
 * Minification of plugins (JS and CSS)
 
 ! 5.0 Release
