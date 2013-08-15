@@ -1,0 +1,6 @@
+title: $:/core/ui/TiddlerFields
+
+\define renderfield(title)
+<div class="tw-view-field"><span class="tw-view-field-name">//$title$//:</span> <span class="tw-view-field-value"><$view field="$title$"/></span></div>
+\end
+<$list filter="[is[current]fields[]sort[title]] -text" macro="renderfield"/>

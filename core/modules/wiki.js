@@ -307,17 +307,6 @@ exports.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
 	}
 };
 
-exports.getAllTiddlerFields = function() {
-	var results = [];
-	for(var title in this.tiddlers) {
-		$tw.utils.each(this.tiddlers[title].fields,function(field,fieldName) {
-			$tw.utils.pushTop(results,fieldName);
-		});
-	}
-	results.sort();
-	return results;
-};
-
 /*
 Return an array of tiddler titles that are directly linked from the specified tiddler
 */

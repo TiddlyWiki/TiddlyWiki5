@@ -42,7 +42,7 @@ FieldManglerWidget.prototype.generate = function() {
 FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
 		deletion = {};
-	deletion[event.currentField] = undefined;
+	deletion[event.param] = undefined;
 	this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,deletion));
 	return true;
 };
@@ -60,7 +60,7 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
 	if(tiddler && tiddler.fields.tags) {
-		var p = tiddler.fields.tags.indexOf(event.currentTag);
+		var p = tiddler.fields.tags.indexOf(event.param);
 		if(p !== -1) {
 			var modification = {};
 			modification.tags = (tiddler.fields.tags || []).slice(0);

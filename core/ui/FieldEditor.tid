@@ -1,7 +1,10 @@
 title: $:/core/ui/FieldEditor
 
-<$fieldmangler><div class="tw-edit-fields"><$fieldlist exclude="title tags text modified modifier draft.title draft.of"><div class="tw-edit-field"><span class="tw-edit-field-name"><$info type="currentField"/>:</span> <span class="tw-edit-field-value"><$edit placeholder="field value"/></span> <span class="tw-edit-field-remove"><$button message="tw-remove-field" class="btn-invisible">{{$:/core/images/delete-button}}</$button></span></div>
-</$fieldlist>
+\define renderfield(title)
+<div class="tw-edit-field"><span class="tw-edit-field-name">$title$:</span> <span class="tw-edit-field-value"><$edit field="$title$" placeholder="field value"/></span> <span class="tw-edit-field-remove"><$button message="tw-remove-field" param="$title$" class="btn-invisible">{{$:/core/images/delete-button}}</$button></span></div>
+\end
+<$fieldmangler><div class="tw-edit-fields">
+<$list filter="[is[current]fields[]] -title -tags -text -creator -created -modified -modifier -[[draft.title]] -[[draft.of]]" macro="renderfield" itemClass="tw-fieldlist"/>
 </div>
 
 <div class="tw-edit-field-add">Add a new field: <span class="tw-edit-field-add-name"><$edit tiddler="$:/NewFieldName" type="input" default="" placeholder="field name"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>

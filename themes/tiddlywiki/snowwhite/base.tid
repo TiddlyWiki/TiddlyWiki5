@@ -402,6 +402,17 @@ a.tw-tiddlylink-external {
 	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
 }
 
+.tw-view-field-name {
+	display: inline-block;
+	width: 15%;
+	text-align: right;
+}
+
+.tw-view-field-value {
+	display: inline-block;
+	width: 75%;
+}
+
 @media screen {
 	.tw-tiddler-frame {
 		<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
@@ -590,11 +601,11 @@ canvas.tw-edit-bitmapeditor  {
 	width: 48%;
 }
 
-.tw-edit-fields .tw-fieldlist > div:nth-child(odd) {
+.tw-edit-fields > .tw-list-frame > div:nth-child(odd) {
 	background-color: #f0f4f0;
 }
 
-.tw-edit-fields .tw-fieldlist > div:nth-child(even) {
+.tw-edit-fields > .tw-list-frame > div:nth-child(even) {
 	background-color: #e0e8e0;
 }
 

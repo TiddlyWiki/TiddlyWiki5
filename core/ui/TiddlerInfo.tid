@@ -12,7 +12,7 @@ title: $:/core/ui/TiddlerInfo
 <$list filter="[is[current]tagging[]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one"/>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="fieldsTab" qualifyTiddlerTitles="yes">
-<$fieldgrid />
+<$transclude template="$:/core/ui/TiddlerFields"/>
 </$reveal>
 </div>
 </div>

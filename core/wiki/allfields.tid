@@ -1,5 +1,6 @@
 title: $:/snippets/allfields
 
-<$fieldlist all>
-''<$info type="currentField"/>'': //<$info type="currentFieldDescription"/>//
-</$fieldlist>
+\define renderfield(title)
+<div class="tw-view-field"><span class="tw-view-field-name">''$title$'':</span> <span class="tw-view-field-value">//{{$:/docs/fields/$title$}}//</span></div>
+\end
+<$list filter="[fields[]sort[title]]" macro="renderfield"/>

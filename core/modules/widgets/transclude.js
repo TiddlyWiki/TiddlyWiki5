@@ -60,7 +60,6 @@ TranscludeWidget.prototype.generate = function() {
 	this.targetTitle = this.renderer.getAttribute("target",this.renderer.tiddlerTitle);
 	this.targetField = this.renderer.getAttribute("field");
 	this.targetIndex = this.renderer.getAttribute("index");
-	this.currentField = this.renderer.getAttribute("currentField");
 	// Get the render tree for the template
 	this.templateTitle = undefined;
 	if(this.renderer.parseTreeNode.children && this.renderer.parseTreeNode.children.length > 0) {
@@ -110,16 +109,6 @@ TranscludeWidget.prototype.generate = function() {
 	};
 	// Initialise events
 	this.events = [];
-	// If a current field is specified
-	if(this.currentField) {
-		// Record the current field in the render context
-		this.renderer.context.field = this.currentField;
-		// Add an event handler to record the current field
-		this.events.push({name: "tw-remove-field", handlerFunction: function(event) {
-			event.currentField = self.currentField;
-			return true;
-		}});
-	}
 	// Trap and update tag modification events
 	this.events.push({name: "tw-remove-tag", handlerFunction: function(event) {
 		event.currentTag = self.targetTitle;
