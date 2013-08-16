@@ -88,7 +88,7 @@ TranscludeWidget.prototype.generate = function() {
 					parser = this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
 				} else if(this.targetIndex) {
 					text = this.renderer.renderTree.wiki.extractTiddlerDataItem(this.targetTitle,this.targetIndex,"");
-					parser = this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",text);
+					parser = this.renderer.renderTree.wiki.parseText("text/vnd.tiddlywiki",text,{parseAsInline: !this.renderer.parseTreeNode.isBlock});
 				}
 			}
 			templateParseTree = parser ? parser.tree : [];
