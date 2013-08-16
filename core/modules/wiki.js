@@ -415,11 +415,26 @@ exports.getTiddlersWithTag = function(tag) {
 	var titles = [];
 	for(var title in this.tiddlers) {
 		var tiddler = this.tiddlers[title];
-		if(tiddler.fields.tags && tiddler.fields.tags.indexOf(tag) !== -1) {
+		if($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.indexOf(tag) !== -1) {
 			titles.push(title);
 		}
 	}
 	return this.sortByList(titles,tag);
+};
+
+/*
+Lookup a given tiddler and return a list of all the tiddlers that include it in their list
+*/
+exports.findListingsOfTiddler = function(targetTitle) {
+	// Get the list associated with the tag
+	var titles = [];
+	for(var title in this.tiddlers) {
+		var tiddler = this.tiddlers[title];
+		if($tw.utils.isArray(tiddler.fields.list) && tiddler.fields.list.indexOf(targetTitle) !== -1) {
+			titles.push(title);
+		}
+	}
+	return titles;
 };
 
 /*
