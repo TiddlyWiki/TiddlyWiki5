@@ -5,6 +5,40 @@ tags: widget
 \define demoMacro(title)
 This is the tiddler called [[Blah-$title$]]
 \end
+! Introduction
+
+The list widget displays a sequence of tiddlers that match a TiddlerFilter. It can be used for many purposes:
+* Displaying custom lists of links, like in TiddlyWiki5's sidebar
+* Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"
+* Listing each of the tags applied to a tiddler
+* Handling the main story river
+
+The tiddlers can either be displayed by transcluding each in turn through an optional template, or by providing a macro to be rendered for each list element.
+
+! Content and Attributes
+
+The content of the `<$list>` widget is the optional template to use for rendering each tiddler in the list.
+
+|!Attribute |!Description |
+|filter |The TiddlerFilter to display |
+|template |The title of a template tiddler for rendering each tiddler in the list |
+|editTemplate |An alternative template to use for DraftTiddlers in edit mode |
+|emptyMessage |Message to be displayed when the list is empty |
+|class |Class to be applied to the list frame element|
+|itemClass |Class to be applied to the list member elements |
+|macro |Specifies a macro to use for rendering each tiddler |
+|listview |Optional name of module responsible for animating/processing the list |
+|history |The title of the tiddler containing the navigation history |
+
+!! Handling edit mode
+
+!! `listview` attribute
+
+!! Handling history and navigation
+
+! Examples
+
+!! Using the list widget with the `macro` attribute
 
 Example of using the list widget with the macro attribute:
 
