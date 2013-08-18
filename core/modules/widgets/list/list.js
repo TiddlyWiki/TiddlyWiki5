@@ -24,17 +24,6 @@ var ListWidget = function(renderer) {
 	this.generate();
 };
 
-/*
-These types are shorthands for particular filters
-*/
-var typeMappings = {
-	all: "[!is[system]sort[title]]",
-	recent: "[!is[system]sort[modified]]",
-	missing: "[is[missing]sort[title]]",
-	orphans: "[is[orphan]sort[title]]",
-	system: "[is[system]sort[title]]"
-};
-
 ListWidget.prototype.generate = function() {
 	// Get our attributes
 	this.macro = this.renderer.getAttribute("macro");
@@ -71,9 +60,7 @@ ListWidget.prototype.generate = function() {
 
 ListWidget.prototype.getTiddlerList = function() {
 	var filter;
-	if(this.renderer.hasAttribute("type")) {
-		filter = typeMappings[this.renderer.getAttribute("type")];
-	} else if(this.renderer.hasAttribute("filter")) {
+	if(this.renderer.hasAttribute("filter")) {
 		filter = this.renderer.getAttribute("filter");
 	}
 	if(!filter) {
