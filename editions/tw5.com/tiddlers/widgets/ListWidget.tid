@@ -8,6 +8,7 @@ This is the tiddler called [[Blah-$title$]]
 ! Introduction
 
 The list widget displays a sequence of tiddlers that match a TiddlerFilter. It can be used for many purposes:
+
 * Displaying custom lists of links, like in TiddlyWiki5's sidebar
 * Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"
 * Listing each of the tags applied to a tiddler
@@ -20,6 +21,7 @@ The tiddlers can either be displayed by transcluding each in turn through an opt
 The content of the `<$list>` widget is the optional template to use for rendering each tiddler in the list.
 
 |!Attribute |!Description |
+|type |Determines the HTML elements generated for the list: ''plain'', ''ul'' or ''ol'' |
 |filter |The TiddlerFilter to display |
 |template |The title of a template tiddler for rendering each tiddler in the list |
 |editTemplate |An alternative template to use for DraftTiddlers in edit mode |

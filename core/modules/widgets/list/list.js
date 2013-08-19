@@ -24,14 +24,44 @@ var ListWidget = function(renderer) {
 	this.generate();
 };
 
+var typeInfoByType = {
+	plain: {
+		frame: {
+			block: "div", inline: "span"
+		},
+		member: {
+			block: "div", inline: "span"
+		}
+	},
+	ul: {
+		frame: {
+			block: "ul", inline: "ul"
+		},
+		member: {
+			block: "li", inline: "li"
+		}
+	},
+	ol: {
+		frame: {
+			block: "ol", inline: "ol"
+		},
+		member: {
+			block: "li", inline: "li"
+		}
+	}
+};
+
 ListWidget.prototype.generate = function() {
 	// Get our attributes
 	this.macro = this.renderer.getAttribute("macro");
+	this.type = this.renderer.getAttribute("type","plain");
 	this.itemClass = this.renderer.getAttribute("itemClass");
 	this.template = this.renderer.getAttribute("template");
 	this.editTemplate = this.renderer.getAttribute("editTemplate");
 	this.emptyMessage = this.renderer.getAttribute("emptyMessage");
 	this["class"] = this.renderer.getAttribute("class");
+	// Get our type information
+	this.typeInfo = typeInfoByType[this.type] || typeInfoByType.plain;
 	// Set up the classes
 	var classes = ["tw-list-frame"];
 	if(this["class"]) {
@@ -51,7 +81,7 @@ ListWidget.prototype.generate = function() {
 		}		
 	}
 	// Create the list frame element
-	this.tag = this.renderer.parseTreeNode.isBlock ? "div" : "span";
+	this.tag = this.renderer.parseTreeNode.isBlock ? this.typeInfo.frame.block : this.typeInfo.frame.inline;
 	this.attributes = {
 		"class": classes.join(" ")
 	};
@@ -97,7 +127,7 @@ ListWidget.prototype.createListElement = function(title) {
 	// Return the list element
 	return {
 		type: "element",
-		tag: this.renderer.parseTreeNode.isBlock ? "div" : "span",
+		tag: this.renderer.parseTreeNode.isBlock ? this.typeInfo.member.block : this.typeInfo.member.inline,
 		attributes: {
 			"class": {type: "string", value: classes.join(" ")}
 		},

@@ -7,11 +7,11 @@ This is the main documentation hub for TiddlyWiki. See also the DeveloperDocs.
 
 TiddlyWiki5 can be used via these editions:
 
-{{{ [tag[edition]sort[title]] }}}
+<$list filter="[tag[edition]sort[title]]" type="ul"/>
 
 ! How to use ~TiddlyWiki5
 
-{{{ [tag[howto]sort[title]] }}}
+<$list filter="[tag[howto]sort[title]]" type="ul"/>
 
 ! Concepts
 
