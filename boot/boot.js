@@ -1374,19 +1374,26 @@ $tw.boot.startup = function() {
 	});
 };
 
-/////////////////////////// Decrypt tiddlers and then startup
+/////////////////////////// Main boot function to decrypt tiddlers and then startup
 
-// Initialise crypto object
-$tw.crypto = new $tw.utils.Crypto();
-// Initialise password prompter
+$tw.boot.boot = function() {
+	// Initialise crypto object
+	$tw.crypto = new $tw.utils.Crypto();
+	// Initialise password prompter
+	if($tw.browser) {
+		$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
+	}
+	// Preload any encrypted tiddlers
+	$tw.boot.decryptEncryptedTiddlers(function() {
+		// Startup
+		$tw.boot.startup();
+	});
+};
+
+/////////////////////////// Autoboot in the browser
+
 if($tw.browser) {
-	$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
+	$tw.boot.boot();
 }
-// Preload any encrypted tiddlers
-$tw.boot.decryptEncryptedTiddlers(function() {
-	// Startup
-	$tw.boot.startup();
-});
-
 
 })();
