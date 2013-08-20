@@ -1,9 +1,9 @@
 title: SystemTiddlers
 tags: docs concepts
 
-TiddlyWiki models everything as [[tiddlers|Tiddlers]], including its internal components and configuration.
+System tiddlers are any tiddler whose title starts with `$:/`; such tiddlers are automatically hidden from most operations. They don't show up in lists or search results, but linking to one directly works in the usual way.
 
-Thus, even an apparently empty TiddlyWiki actually contains dozens of tiddlers that are necessary to enable it function correctly. To prevent them from confusing casual users, these system tiddlers are hidden from most operations. They don't show up in lists or search results, but linking to one directly works in the usual way.
+TiddlyWiki models everything as [[tiddlers|Tiddlers]], including its internal components and configuration. Thus, even an apparently empty TiddlyWiki actually contains dozens of tiddlers that are necessary to enable it function correctly. Using system tiddlers prevents them from confusing casual users.
 
 The current system tiddlers are:
 

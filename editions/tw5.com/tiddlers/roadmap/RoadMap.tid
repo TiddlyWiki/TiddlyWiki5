@@ -1,4 +1,4 @@
-modified: 201308141511
+modified: 201308201324
 title: RoadMap
 modifier: JeremyRuston
 tags: docs planning
@@ -35,6 +35,8 @@ The following additional features are under consideration for implementation dur
 * Built in JavaScript syntax highlighting
 * Syntax highlighter plugin
 * Minification of plugins (JS and CSS)
+* List editor with drag and drop
+* Selective/weighted searching by title, body and fields
 
 ! 5.0 Release
 
