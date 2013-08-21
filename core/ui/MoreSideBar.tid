@@ -28,7 +28,9 @@ title: $:/core/ui/MoreSideBar
 {{$:/snippets/recentchanges}}
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="tagsTab" qualifyTiddlerTitles="yes">
-<$list filter="[tags[]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/TagTemplate"/>
+<$list filter="[tags[]sort[title]]" itemClass="tw-menu-list-item">
+<$transclude template="$:/core/ui/TagTemplate"/> <small><$count filter="[is[current]tagging[]]"/></small>
+</$list>
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="missingTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[missing]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/MissingTemplate"/>
