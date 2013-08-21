@@ -207,11 +207,8 @@ At the root, it serves a rendering of a specified tiddler. Away from the root, i
 GET</code>, <code>
 PUT</code> and <code>
 DELETE</code>.</p><pre>
---server &lt;port&gt; &lt;roottiddler&gt; &lt;rendertype&gt; &lt;servetype&gt;</pre><p>
-For example:</p><pre>
---server 8080 $:/core/tiddlywiki5.template.html text/plain text/html</pre><p>
-The parameters are:</p><pre>
---server &lt;port&gt; &lt;roottiddler&gt; &lt;rendertype&gt; &lt;servetype&gt;</pre><ul>
+--server &lt;port&gt; &lt;roottiddler&gt; &lt;rendertype&gt; &lt;servetype&gt; &lt;username&gt;</pre><p>
+The parameters are:</p><ul>
 <li>
 <strong>
 port</strong> - port number to serve from (defaults to &quot;8080&quot;)</li><li>
@@ -220,7 +217,11 @@ roottiddler</strong> - the tiddler to serve at the root (defaults to &quot;$:/co
 <strong>
 rendertype</strong> - the content type to which the root tiddler should be rendered (defaults to &quot;text/plain&quot;)</li><li>
 <strong>
-servetype</strong> - the content type with which the root tiddler should be served (defaults to &quot;text/html&quot;)</li></ul></div></div></div></div><div class='tw-list-element'>
+servetype</strong> - the content type with which the root tiddler should be served (defaults to &quot;text/html&quot;)</li><li>
+<strong>
+username</strong> - the default username for signing edits</li></ul><p>
+For example:</p><pre>
+--server 8080 $:/core/tiddlywiki5.template.html text/plain text/html MyUserName</pre></div></div></div></div><div class='tw-list-element'>
 <div class='tw-transclude'>
 <h3 class=''>
 <span class='tw-view-link'>
