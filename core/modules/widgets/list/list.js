@@ -198,16 +198,22 @@ ListWidget.prototype.createListElementTransclusion = function(title) {
 		}
 	}
 	// Create the transclude widget
-	return {
+	var widget = {
 		type: "element",
 		tag: "$transclude",
 		isBlock: this.renderer.parseTreeNode.isBlock,
-		attributes: {
-			target: {type: "string", value: title},
-			template: {type: "string", value: template}
-		},
+		attributes: {},
 		children: templateTree
 	};
+	// Set the target if needed
+	if(!this.renderer.hasAttribute("hackTemplate")) {
+		widget.attributes.target = {type: "string", value: title};
+		widget.attributes.template = {type: "string", value: template};
+	} else {
+		widget.attributes.template = {type: "string", value: title};
+		widget.children = undefined;
+	}
+	return widget;
 };
 
 /*
