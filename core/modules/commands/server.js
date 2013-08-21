@@ -157,7 +157,7 @@ var Command = function(params,commander,callback) {
 		handler: function(request,response,state) {
 			response.writeHead(200, {"Content-Type": "application/json"});
 			var text = JSON.stringify({
-				username: "ANONYMOUS",
+				username: state.server.get("username"),
 				space: {
 					recipe: "default"
 				},
@@ -221,11 +221,13 @@ Command.prototype.execute = function() {
 	var port = this.params[0] || "8080",
 		rootTiddler = this.params[1] || "$:/core/templates/tiddlywiki5.template.html",
 		renderType = this.params[2] || "text/plain",
-		serveType = this.params[3] || "text/html";
+		serveType = this.params[3] || "text/html",
+		username = this.params[4] || "ANONYMOUS";
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
-		serveType: serveType
+		serveType: serveType,
+		username: username
 	});
 	this.server.listen(port);
 	if(this.commander.verbose) {
