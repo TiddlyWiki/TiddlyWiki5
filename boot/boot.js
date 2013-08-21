@@ -28,7 +28,7 @@ In practice, each module is wrapped in a separate script block.
 
 /////////////////////////// Setting up $tw
 
-// Set up $tw global for the server
+// Set up $tw global for the server (set up for browser is in bootprefix.js)
 if(typeof(window) === "undefined") {
 	global.$tw = global.$tw || {}; // No `browser` member for the server
 	exports.$tw = $tw; // Export $tw for when boot.js is required directly in node.js
@@ -1248,6 +1248,8 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 			});
 		}
 	});
+	// Save the path to the tiddlers folder for the filesystemadaptor
+	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
@@ -1281,7 +1283,9 @@ $tw.loadTiddlers = function() {
 	// Load the core tiddlers
 	$tw.wiki.addTiddler($tw.loadPluginFolder($tw.boot.corePath));
 	// Load the tiddlers from the wiki directory
-	$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
+	if($tw.boot.wikiPath) {
+		$tw.boot.wikiInfo = $tw.loadWikiTiddlers($tw.boot.wikiPath);
+	}
 };
 
 // End of if(!$tw.browser)	
@@ -1317,14 +1321,15 @@ $tw.boot.startup = function() {
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
-		$tw.boot.argv = Array.prototype.slice.call(process.argv,2);
-		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+		if($tw.boot.argv[0] === "*") {
+			$tw.boot.wikiPath = undefined;
+			$tw.boot.argv = $tw.boot.argv.slice(1);
+		} else if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
 			$tw.boot.wikiPath = $tw.boot.argv[0];
 			$tw.boot.argv = $tw.boot.argv.slice(1);
 		} else {
 			$tw.boot.wikiPath = process.cwd();
 		}
-		$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
 		// Read package info
 		$tw.packageInfo = require("../package");
 		// Check node version number
