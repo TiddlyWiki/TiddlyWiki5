@@ -35,4 +35,4 @@ Log out of ~TiddlyWeb: <$button message="tw-logout" class="btn btn-warning">Logo
 
 All tiddlers:
 
-<$list type="all" template="TiddlerListTemplate"/>
+<$list filter="[!is[system]]" template="TiddlerListTemplate"/>

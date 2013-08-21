@@ -7,4 +7,4 @@ TiddlyWiki models everything as [[tiddlers|Tiddlers]], including its internal co
 
 The current system tiddlers are:
 
-<$list type="system" />
+<$list filter="[is[system]]"/>
