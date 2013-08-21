@@ -96,7 +96,7 @@ InfoWidget.prototype.generate = function() {
 	// Get attributes
 	this.type = this.renderer.getAttribute("type","changecount").toLowerCase();
 	// Get the appropriate value for the current tiddler
-	var value = "",
+	var value = [],
 		fn = InfoWidget.types[this.type];
 	if(fn) {
 		value = fn({
