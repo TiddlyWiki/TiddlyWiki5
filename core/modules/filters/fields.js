@@ -22,8 +22,10 @@ exports.fields = function(source,operator,options) {
 	function checkTiddler(title) {
 		// Return the fields on the specified tiddler
 		var tiddler = options.wiki.getTiddler(title);
-		for(var fieldName in tiddler.fields) {
-			$tw.utils.pushTop(results,fieldName);
+		if(tiddler) {
+			for(var fieldName in tiddler.fields) {
+				$tw.utils.pushTop(results,fieldName);
+			}
 		}
 	}
 	// Iterate through the source tiddlers
