@@ -15,8 +15,6 @@ The parse tree is made up of nested arrays of these JavaScript objects:
 Attributes are stored as hashmaps of the following objects:
 
 	{type: "string", value: <string>} - literal string
-	{type: "array", value: <string array>} - array of strings
-	{type: "styles", value: <object>} - hashmap of style strings
 	{type: "indirect", textReference: <textReference>} - indirect through a text reference
 
 \*/
