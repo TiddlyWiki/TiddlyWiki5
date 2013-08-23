@@ -6,7 +6,7 @@ tags: docs mechanism
 
 Tiddlers within plugins behave something like shadow tiddlers in classic TiddlyWiki: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
 
-Plugins also have a `plugin-type` field that may be:
+Plugins have a `plugin-type` field that may be:
 
 * `plugin` //(default)// - a plain plugin
 * `theme` - a theme plugin (see ThemeMechanism)
@@ -19,7 +19,7 @@ Plugins that define macros, views or other named entities are expected to prefix
 
 ! Plugin format
 
-Plugins are stored as tiddlers of type `application/json` with the field `plugin` present and the text containing a JSON structure encoding the plugin metadata and the list of tiddlers within it.
+Plugins are stored as tiddlers of type `application/json` with the field `plugin-type` present and the text containing a JSON structure encoding the plugin metadata and the list of tiddlers within it.
 
 The JSON structure for plugin tiddlers is as follows:
 
@@ -39,7 +39,7 @@ The JSON structure for plugin tiddlers is as follows:
 }
 ```
 
-The titles of the individual tiddlers are typically prefixed with the title of the containing plugin (as in the **title1** example above), but they are not restricted to do so (the second example specifies a tiddler with the raw title **title2**).
+The titles of the individual tiddlers are typically prefixed with the title of the containing plugin (as in the ''title1'' example above), but they are not restricted to do so (the second example specifies a tiddler with the raw title ''title2'').
 
 ! Plugin folders
 
