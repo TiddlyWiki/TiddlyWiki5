@@ -1,0 +1,13 @@
+created: 201308221740
+creator: JeremyRuston
+modified: 201308231751
+modifier: JeremyRuston
+tags: definitions
+title: SingleFileApplication
+
+A SingleFileApplication is a web application where all of the assets are delivered in a single static file.
+
+Every SingleFileApplication must also by definition be a SinglePageApplication, but the converse is not true.
+
+
+

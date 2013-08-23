@@ -1,0 +1,17 @@
+created: 201308220806
+creator: JeremyRuston
+modified: 201308220812
+modifier: JeremyRuston
+tags: docs
+title: SystemTags
+
+System tags are used to give special behaviour to tiddlers:
+
+* [[$:/tags/stylesheet]]: indicates that a tiddler should be applied as a CSS stylesheet
+* [[$:/tags/ViewTemplate]]: indicates that a tiddler is a template that should be included in the ViewTemplate
+
+! System tags in use
+
+These are the system tags in use in this wiki:
+
+{{{ [is[shadow]tags[]prefix[$:/]] [!is[shadow]tags[]prefix[$:/]] +[sort[title]] }}}

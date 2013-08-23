@@ -1,6 +1,9 @@
+created: 201308220803
+creator: JeremyRuston
+modified: 201308220803
+modifier: JeremyRuston
 tags: docs howto
 title: How to use TiddlyWiki5 as a standalone HTML file
-modified: 201304050948
 
 ! On desktop browsers
 
@@ -8,22 +11,10 @@ modified: 201304050948
 #* http://five.tiddlywiki.com/empty
 # Open the file in your browser
 # Make some changes to it. For example:
-#* Create new tiddlers by clicking the `New` button in the left sidebar
-#* Edit existing tiddlers by clicking the `Edit` button at their upper right
-# Save your changes by clicking the `Save` button in the left sidebar. What happens next depends on your browser:
+#* Create new tiddlers by clicking the new tiddler "+" icon in the sidebar
+#* Edit existing tiddlers by clicking the edit tiddler "pencil" icon at their upper right
+# Save your changes by clicking the "download" icon in the sidebar. What happens next depends on your browser:
 ## Newer browsers will ask for confirmation and then begin downloading your newly modified TiddlyWiki file, placing it in the default `Downloads` directory.
 ##* See GoogleChromeTips for some suggestions to streamline this process
 ## For older browsers, TiddlyWiki displays a dialogue including a link that you need to right-click and save
 
-! On mobile browsers
-
-# Visit http://five.tiddlywiki.com/empty in your browser
-# Make some changes. For example:
-#* Create new tiddlers by clicking the `New` button in the left sidebar
-#* Edit existing tiddlers by clicking the `Edit` button at their upper right
-# Save your changes by clicking the `Save` button in the left sidebar
-# TiddlyWiki displays a dialogue including a download link.
-## If your browser allows, add the link as a bookmark
-## Otherwise, open the link to open the page in a new browser tab, and then bookmark that page
-
-To re-open your file, simply open the bookmark.
