@@ -21,7 +21,6 @@ Other fields used by the core are:
 * `footer` - The footer for a modal dialogue (interpreted as WikiText)
 * `library` - Set to `yes` if the tiddler should be loaded in the browser as a `<script>` tag
 * `name` - Human-readable name of a plugin
-* `plugin` - Set to `yes` if the tiddler is a plugin
 * `plugin-priority` - An integer giving the priority for loading plugin tiddlers
 * `plugin-type` - The type of a plugin (currently can be `plugin` or `theme`)
 * `source` - The original URL associated with a tiddler

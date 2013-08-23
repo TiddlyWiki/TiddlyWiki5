@@ -741,7 +741,7 @@ $tw.Wiki.prototype.registerPluginTiddlers = function(pluginType,titles) {
 		registeredTitles = [];
 	// Go through the provided titles, or the entire tiddler list, looking for plugins of this type
 	var checkTiddler = function(tiddler) {
-		if(tiddler && tiddler.fields.type === "application/json" && tiddler.hasField("plugin") && tiddler.fields["plugin-type"] === pluginType) {
+		if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
 			self.plugins.push(tiddler);
 			registeredTitles.push(tiddler.fields.title);
 		}
@@ -1173,7 +1173,6 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		var fields = {
 			title: pluginInfo.title,
 			type: "application/json",
-			plugin: "yes",
 			text: JSON.stringify(pluginInfo,null,4),
 			"plugin-priority": pluginInfo["plugin-priority"],
 			"name": pluginInfo["name"],

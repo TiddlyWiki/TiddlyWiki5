@@ -17,7 +17,7 @@ exports.hasTag = function(tag) {
 };
 
 exports.isPlugin = function() {
-	return this.fields.type === "application/json" && this.hasField("plugin") && this.hasField("plugin-type");
+	return this.fields.type === "application/json" && this.hasField("plugin-type");
 }
 
 exports.getFieldString = function(field) {
