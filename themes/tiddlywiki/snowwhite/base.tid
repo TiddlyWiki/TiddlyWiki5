@@ -133,6 +133,7 @@ a.tw-tiddlylink {
 	font-style: normal;
 	font-weight: normal;
 	color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkforeground}};
+	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
 
 .tw-sidebar-lists a.tw-tiddlylink {
