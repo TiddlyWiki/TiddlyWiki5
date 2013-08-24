@@ -5,3 +5,7 @@ modified: 201308091623
 ShadowTiddlers are tiddlers that are loaded from within [[Plugins]]. Unlike ordinary tiddlers, they don't appear in most lists.
 
 ShadowTiddlers can be overridden with an ordinary tiddler of the same name. If that tiddler is subsequently deleted then the original shadow tiddler is automatically restored.
+
+The current shadow tiddlers are:
+
+<$list filter="[is[shadow]sort[title]]"/>
