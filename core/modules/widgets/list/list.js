@@ -354,7 +354,13 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 		if(index === undefined) {
 			// The list element isn't there, so we need to insert it
 			this.children.splice(t,0,this.renderer.renderTree.createRenderer(this.renderer,this.createListElement(this.list[t])));
-			this.renderer.domNode.insertBefore(this.children[t].renderInDom(),this.renderer.domNode.childNodes[t]);
+			var before = this.renderer.domNode.childNodes[t],
+				newNode = this.children[t].renderInDom();
+			if(before) {
+				this.renderer.domNode.insertBefore(newNode,before);
+			} else {
+				this.renderer.domNode.appendChild(newNode);
+			}
 			// Ask the listview to animate the insertion
 			if(this.listview && this.listview.insert) {
 				this.listview.insert(t);
