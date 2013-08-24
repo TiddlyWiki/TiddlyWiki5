@@ -96,7 +96,7 @@ pre {
 	display: block;
 	padding: 1em;
 	margin: 0 0 1em;
-	word-break: break-all;
+	word-break: normal;
 	word-wrap: break-word;
 	white-space: pre;
 	white-space: pre-wrap;
