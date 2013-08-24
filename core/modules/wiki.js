@@ -724,24 +724,29 @@ exports.search = function(text,options) {
 		flags = options.caseSensitive ? "" : "i";
 	if(options.literal) {
 		if(text.length === 0) {
-			return [];
+			searchTermsRegExps = null;
+		} else {
+			searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
 		}
-		searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
 	} else {
 		terms = text.replace(/( +)/g," ").split(" ");
-		searchTermsRegExps = [];
-		if(terms.length === 0) {
-			return [];
-		}
-		for(t=0; t<terms.length; t++) {
-			searchTermsRegExps.push(new RegExp("(" + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
+		if(terms.length === 1 && terms[0] === "") {
+			searchTermsRegExps = null;
+		} else {
+			searchTermsRegExps = [];
+			for(t=0; t<terms.length; t++) {
+				searchTermsRegExps.push(new RegExp("(" + $tw.utils.escapeRegExp(terms[t]) + ")",flags));
+			}
 		}
 	}
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
+		if(!searchTermsRegExps) {
+			return !options.invert;
+		}
 		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
-			return !!options.invert;
+			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type];
 		if(contentTypeInfo ? contentTypeInfo.encoding === "utf8" : true) {
