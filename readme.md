@@ -1,6 +1,7 @@
 <h1 class=''>
 Welcome to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a></h1><div class='tw-transclude'>
+TiddlyWiki5</a></h1><div class='tw-tiddler'>
+<div class='tw-transclude'>
 <p>
 Welcome to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a>, a reboot of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
@@ -8,27 +9,23 @@ TiddlyWiki</a>, the non-linear personal web notebook <a class='tw-tiddlylink tw-
 first released in 2004</a>. It is a complete interactive wiki in <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/JavaScript.html'>
 JavaScript</a> that can be run from a single HTML file in the browser or as a powerful <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/node.js.html'>
 node.js application</a>.</p><p>
-<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
-TiddlyWiki</a> is designed to fit around your brain, providing a better way of managing the overflow than traditional documents and emails. The fundamental idea is that information is more useful and reusable if we cut it up into the smallest semantically meaningful chunks – <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/Tiddlers.html'>
-tiddlers</a> – and give them titles so that they can be structured with links, tags and macros.  <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
-TiddlyWiki</a> aims to provide a fluid interface for working with tiddlers, allowing them to be aggregated and composed into longer narratives.</p><p>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> has many <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/Improvements.html'>
-improvements</a> over the original. It is currently in alpha, meaning it is working but incomplete. It is a great time to get involved and support its <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RoadMap.html'>
-future development</a>. You can:</p><ul>
+TiddlyWiki5</a> is currently in alpha, meaning it is working but incomplete. It is a great time to get involved and support its <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RoadMap.html'>
+future development</a>:</p><ul>
 <li>
 Explore its features online at <a class='tw-tiddlylink tw-tiddlylink-external' href='http://five.tiddlywiki.com/'>
 http://five.tiddlywiki.com/</a></li><li>
-Get involved in the <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5'>
-development on GitHub</a></li><li>
 Join the discussions on <a class='tw-tiddlylink tw-tiddlylink-external' href='http://groups.google.com/group/TiddlyWikiDev'>
 the TiddlyWikiDev Google Group</a></li><li>
+Get involved in the <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5'>
+development on GitHub</a></li><li>
 Follow <a class='tw-tiddlylink tw-tiddlylink-external' href='http://twitter.com/#!/TiddlyWiki'>
 @TiddlyWiki on Twitter</a> for the latest news</li><li>
 Learn how to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/HelpingTiddlyWiki.html'>
-help the TiddlyWiki project and community</a></li></ul></div><h1 class=''>
+help the TiddlyWiki project and community</a></li></ul></div></div><h1 class=''>
 Getting started with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
-TiddlyWiki</a> under node.js</h1><div class='tw-transclude'>
+TiddlyWiki</a> under node.js</h1><div class='tw-tiddler'>
+<div class='tw-transclude'>
 <p>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> can be used on the command line to perform an extensive set of operations based on tiddlers, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWikiFolders.html'>
@@ -123,7 +120,7 @@ opendiff</code> program to display the differences between them.</p><h2 class=''
 Commands</h2><p>
 The following commands are available:</p><div class='tw-list-frame'>
 <div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/LoadCommand.html'>
@@ -137,7 +134,7 @@ TiddlyWiki</a> files (<code>
 .tid</code>, <code>
 .json</code> or other files </p><pre>
 --load &lt;filepath&gt;</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PasswordCommand.html'>
@@ -146,7 +143,7 @@ PasswordCommand</a></span></h3><div>
 <p>
 Set a password for subsequent crypto operations</p><pre>
 --password &lt;password&gt;</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PrintCommand.html'>
@@ -167,7 +164,7 @@ Print the titles of the system tiddlers in the wiki store </p><pre>
 print config</h3><p>
 Print the current core configuration </p><pre>
 --print config</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RenderTiddlerCommand.html'>
@@ -178,7 +175,7 @@ Render an individual tiddler as a specified <a class='tw-tiddlylink tw-tiddlylin
 ContentType</a>, defaults to <code>
 text/html</code> and save it to the specified filename </p><pre>
 --rendertiddler &lt;title&gt; &lt;filename&gt; [&lt;type&gt;]</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RenderTiddlersCommand.html'>
@@ -192,7 +189,7 @@ text/html</code>) and extension (defaults to <code>
 --rendertiddlers &lt;filter&gt; &lt;template&gt; &lt;pathname&gt; [&lt;type&gt;] [&lt;extension&gt;]</pre><p>
 For example:</p><pre>
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/ServerCommand.html'>
@@ -222,7 +219,7 @@ servetype</strong> - the content type with which the root tiddler should be serv
 username</strong> - the default username for signing edits</li></ul><p>
 For example:</p><pre>
 --server 8080 $:/core/tiddlywiki5.template.html text/plain text/html MyUserName</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/VerboseCommand.html'>
@@ -231,7 +228,7 @@ VerboseCommand</a></span></h3><div>
 <p>
 Triggers verbose output, useful for debugging </p><pre>
 --verbose</pre></div></div></div></div><div class='tw-list-element'>
-<div class='tw-transclude'>
+<div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/VersionCommand.html'>
@@ -240,7 +237,7 @@ VersionCommand</a></span></h3><div>
 <p>
 Displays the version number of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a>.</p><pre>
---version</pre></div></div></div></div></div></div><p>
+--version</pre></div></div></div></div></div></div></div><p>
 <em>
 This readme file was automatically generated by <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a></em>

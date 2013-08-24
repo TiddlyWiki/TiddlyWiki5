@@ -1,10 +1,11 @@
 created: 201308221728
 creator: JeremyRuston
-modified: 201308231840
+modified: 201308231953
 modifier: JeremyRuston
 tags: docs introduction
 title: Features
 
+* The ability to save changes on almost any desktop HTML5 compatible-browser
 * [[Bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]] are first-class citizens alongside text
 * Concise and expressive WikiText that generates semantic HTML
 * Integrated [[AES encryption|How to use TiddlyWiki5 as a standalone HTML file with encryption]]
