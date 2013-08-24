@@ -1,4 +1,8 @@
 color: #8bbec7
-modified: 201306131057
+created: 201308241531
+creator: JeremyRuston
+modified: 201308241531
+modifier: JeremyRuston
 title: command
 
+When run under node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki5 Node Edition]] with these built-in commands.

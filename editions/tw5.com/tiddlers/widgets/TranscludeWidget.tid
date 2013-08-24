@@ -1,0 +1,23 @@
+created: 201308241425
+creator: JeremyRuston
+modified: 201308241530
+modifier: JeremyRuston
+tags: widget docs
+title: TranscludeWidget
+
+! Introduction
+
+The TranscludeWidget dynamically imports content from another tiddler.
+
+! Attributes
+
+|!Attribute |!Description |
+|title |The title of the tiddler to transclude (defaults to the current tiddler) |
+|field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
+|index |The index of a property in a [[DataTiddler|DataTiddlers]] |
+|class |CSS classes to added to the generated elements |
+|style |CSS styles to be added to the generated elements |
+|tooltip |Tooltip to be added to the generated elements |
+
+The TranscludeWidget ignores any contained content.
+

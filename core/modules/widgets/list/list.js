@@ -197,23 +197,37 @@ ListWidget.prototype.createListElementTransclusion = function(title) {
 			}];
 		}
 	}
-	// Create the transclude widget
-	var widget = {
-		type: "element",
-		tag: "$transclude",
-		isBlock: this.renderer.parseTreeNode.isBlock,
-		attributes: {},
-		children: templateTree
-	};
-	// Set the target if needed
-	if(!this.renderer.hasAttribute("hackTemplate")) {
-		widget.attributes.target = {type: "string", value: title};
-		widget.attributes.template = {type: "string", value: template};
+	// Create the element widgets
+	if(this.renderer.hasAttribute("hackTemplate")) {
+		return {
+			type: "element",
+			tag: "$transclude",
+			isBlock: this.renderer.parseTreeNode.isBlock,
+			attributes: {
+				title: {type: "string", value: title}
+			}
+		};
 	} else {
-		widget.attributes.template = {type: "string", value: title};
-		widget.children = undefined;
+		if(!templateTree) {
+			templateTree = [{
+				type: "element",
+				tag: "$transclude",
+				attributes: {
+					title: {type: "string", value: template}
+				},
+				children: templateTree
+			}];
+		}
+		return {
+			type: "element",
+			tag: "$tiddler",
+			isBlock: this.renderer.parseTreeNode.isBlock,
+			attributes: {
+				title: {type: "string", value: title}
+			},
+			children: templateTree
+		};
 	}
-	return widget;
 };
 
 /*
@@ -245,10 +259,13 @@ ListWidget.prototype.findListElementByTitle = function(startIndex,title) {
 	var testNode = this.macro ? function(node) {
 		// We're looking for a macro list element
 		return node.widget.children[0].parseTreeNode.params[0].value === title;
-	} : function(node) {
-		// We're looking for a transclusion list element
-		return node.widget.children[0].attributes.target === title;
-	};
+	} : (this.renderer.hasAttribute("hackTemplate") ? function(node) {
+			// We're looking for a transclusion list element
+			return node.widget.children[0].attributes.title === title;
+		} : function(node) {
+			// We're looking for a transclusion list element
+			return node.widget.children[0].attributes.title === title;
+		});
 	// Search for the list element
 	while(startIndex < this.children.length) {
 		if(testNode(this.children[startIndex])) {

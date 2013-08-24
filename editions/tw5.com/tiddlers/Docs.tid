@@ -1,6 +1,9 @@
-title: Docs
-modified: 201308201324
+created: 201308241418
+creator: JeremyRuston
+modified: 201308241531
+modifier: JeremyRuston
 tags: docs introduction
+title: Docs
 
 This is the main documentation hub for TiddlyWiki. See also the DeveloperDocs.
 
@@ -38,19 +41,19 @@ The machinery tying those concepts together includes:
 
 These are the individual rules that make up WikiText:
 
-{{{ [tag[wikitextrule]sort[title]] }}}
+<$list filter="[tag[wikitextrule]sort[title]]" type="ul"/>
 
 ! Widgets
 
 Widgets give WikiText dynamic functionality:
 
-{{{ [tag[widget]sort[title]] }}}
+<$list filter="[tag[widget]sort[title]]" type="ul"/>
 
 ! Commands
 
-When run under node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki5 Node Edition]] with the following built-in commands:
+{{command}}
 
-{{{ [tag[command]sort[title]] }}}
+<$list filter="[tag[command]sort[title]]" type="ul"/>
 
 ! Miscellaneous
 

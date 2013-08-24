@@ -41,7 +41,7 @@ InfoWidget.types.currentfielddescription = function(options) {
 		tag: "$transclude",
 		isBlock: false,
 		attributes: {
-			target: {type: "string", value: descriptionTitle}
+			title: {type: "string", value: descriptionTitle}
 		}
 	}];
 };
@@ -71,7 +71,7 @@ InfoWidget.types.modules = function(options) {
 			tag: "$transclude",
 			isBlock: false,
 			attributes: {
-				target: {type: "string", value: MODULE_TYPE_DESCRIPTION_PREFIX + moduleType}
+				title: {type: "string", value: MODULE_TYPE_DESCRIPTION_PREFIX + moduleType}
 			}
 		});
 		// List each module

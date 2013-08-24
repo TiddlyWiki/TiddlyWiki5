@@ -61,7 +61,7 @@ GridWidget.prototype.generateTable = function() {
 						type: "element",
 						tag: "$transclude",
 						attributes: {
-							target: {type: "string", value: this.getTableCellTitle(col,row)}
+							title: {type: "string", value: this.getTableCellTitle(col,row)}
 						}
 					}]
 				};

@@ -9,10 +9,10 @@ modifier: JeremyRuston
 <$edit field="draft.title"/>
 @@
 
-<$transclude template="$:/core/ui/TagsEditor"/>
+<$transclude title="$:/core/ui/TagsEditor"/>
 
 <$reveal state="$:/ShowEditPreview" type="match" text="yes">
-<$transclude template="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
+<$transclude title="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
 <div class="tw-tiddler-preview">
 <div class="tw-tiddler-preview-preview">
 <$view field="text" format="wikified"/>
@@ -23,8 +23,8 @@ modifier: JeremyRuston
 </div>
 </$reveal>
 <$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
-<$transclude template="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
+<$transclude title="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
 <$edit field="text"/>
 </$reveal>
 
-<$transclude template="$:/core/ui/FieldEditor"/>
+<$transclude title="$:/core/ui/FieldEditor"/>

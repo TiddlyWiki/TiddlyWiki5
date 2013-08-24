@@ -1,0 +1,16 @@
+created: 201308241543
+creator: JeremyRuston
+modified: 201308241543
+modifier: JeremyRuston
+tags: docs widget
+title: TiddlerWidget
+
+! Introduction
+
+The TiddlerWidget sets the ContextTiddler that applies for processing its content.
+
+! Content and Attributes
+
+|!Attribute |!Description |
+|title |The title of the tiddler to become the new ContextTiddler |
+|class |CSS classes to added to the generated elements |

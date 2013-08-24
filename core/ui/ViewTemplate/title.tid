@@ -3,10 +3,10 @@ tags: $:/tags/ViewTemplate
 
 <div class="tw-tiddler-title"><div class="title"><$setstyle name="fill" value={{!!color}}><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
 
-</span><$transclude target={{!!icon}}/> <$view field="title"/></$setstyle></div>
+</span><$transclude title={{!!icon}}/> <$view field="title"/></$setstyle></div>
 
 <$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="tw-tiddler-info" animate="yes">
 
-<$transclude template="$:/core/ui/TiddlerInfo"/>
+<$transclude title="$:/core/ui/TiddlerInfo"/>
 
 </$reveal></div>

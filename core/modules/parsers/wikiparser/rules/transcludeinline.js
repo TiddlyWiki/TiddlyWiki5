@@ -42,33 +42,38 @@ exports.parse = function() {
 		template = $tw.utils.trim(this.match[3]),
 		style = this.match[4],
 		classes = this.match[5];
-	// Return the transclude widget
-	var node = {
+	// Prepare the transclude widget
+	var transcludeNode = {
+			type: "element",
+			tag: "$transclude",
+			attributes: {
+				title: {type: "string", value: template || targetTitle}
+			}
+		};
+	var tiddlerNode = {
 		type: "element",
-		tag: "$transclude",
+		tag: "$tiddler",
 		attributes: {
-			target: {type: "string", value: targetTitle}
-		}
+			title: {type: "string", value: targetTitle}
+		},
+		children: [transcludeNode]
 	};
 	if(targetField) {
-		node.attributes.field = {type: "string", value: targetField};
+		transcludeNode.attributes.field = {type: "string", value: targetField};
 	}
 	if(targetIndex) {
-		node.attributes.index = {type: "string", value: targetIndex};
+		transcludeNode.attributes.index = {type: "string", value: targetIndex};
 	}
 	if(tooltip) {
-		node.attributes.tooltip = {type: "string", value: tooltip};
-	}
-	if(template) {
-		node.attributes.template = {type: "string", value: template};
+		transcludeNode.attributes.tooltip = {type: "string", value: tooltip};
 	}
 	if(style) {
-		node.attributes.style = {type: "string", value: style};
+		transcludeNode.attributes.style = {type: "string", value: style};
 	}
 	if(classes) {
-		node.attributes["class"] = {type: "string", value: classes.split(".").join(" ")};
+		transcludeNode.attributes["class"] = {type: "string", value: classes.split(".").join(" ")};
 	}
-	return [node];
+	return [tiddlerNode];
 };
 
 })();
