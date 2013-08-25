@@ -86,7 +86,7 @@ exports["application/json"] = function(text,fields) {
 
 /*
 Parse an HTML file into tiddlers. There are three possibilities:
-# A TiddlyWiki classic HTML file containing `text/vnd.tiddlywiki2` tiddlers
+# A TiddlyWiki classic HTML file containing `text/x-tiddlywiki` tiddlers
 # A TiddlyWiki5 HTML file containing `text/vnd.tiddlywiki` tiddlers
 # An ordinary HTML file
 */
@@ -117,7 +117,7 @@ function deserializeTiddlyWikiFile(text,storeAreaEnd,isTiddlyWiki5,fields) {
 	var results = [],
 		endOfDivRegExp = /(<\/div>\s*)/gi,
 		startPos = storeAreaEnd,
-		defaultType = isTiddlyWiki5 ? "text/vnd.tiddlywiki": "text/vnd.tiddlywiki2";
+		defaultType = isTiddlyWiki5 ? undefined : "text/x-tiddlywiki";
 	endOfDivRegExp.lastIndex = startPos;
 	var match = endOfDivRegExp.exec(text);
 	while(match) {
