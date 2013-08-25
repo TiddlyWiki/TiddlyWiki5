@@ -1,76 +1,27 @@
+created: 201308251537
+creator: JeremyRuston
+modified: 201308251539
+modifier: JeremyRuston
 tags: docs introduction dev
 title: DeveloperDocs
-modified: 201304251644
 
 This is the developer documentation hub for TiddlyWiki.
 
 ! Developer Cookbooks
 
-* [[Using TiddlyWiki for GitHub Pages project documentation]]
-* [[Using TiddlyWiki as a component in node.js applications]]
-* [[Constructing TiddlyWiki documents in other applications]]
+<$list filter="[tag[dev]tag[howto]sort[title]]" type="ul"/>
 
 ! Internal Objects and Mechanisms
 
-Internally, TiddlyWiki is built on a number of key objects and mechanisms:
+{{mechanism}}
 
-* TiddlerObject
-* WikiObject
-* BootMechanism
-* PluginMechanism
-* ParsingMechanism
-* RenderingMechanism
-* DependencyMechanism
-* RefreshMechanism
-* MacroMechanism
-* StoryMechanism
-* EditingMechanism
-* SavingMechanism
-* SyncMechanism
-* CommandMechanism
-* ConfigMechanism
-* EncryptionMechanism
-* TestingMechanism
-
-! Plugin Module Types
-
-TiddlyWiki is built on a [[tiny microkernel|BootMechanism]] with all functionality provided as various types of plugin module:
-
-* CommandModules
-* ConfigModules
-* EditorModules
-* GlobalModules
-* LibraryModules
-* MacroModules
-* ModuleModules
-* ParserModules
-* SaverModules
-* StartupModules
-* StoryViewModules
-* SyncerModules
-* TiddlerDeserializerModules
-* TiddlerFieldModules
-* TiddlerMethodModules
-* TreeNodeModules
-* TreeUtilsModules
-* UtilsModules
-* WikiMethodModules
-* WikiTextRuleModules
-
-! Parsers
-
-TiddlyWiki processes [[ContentTypes|ContentType]] such as WikiText using these parsers:
-
-* WikiTextParser
-* JsonParser
-* ImageParser
-* PlainTextParser
-* JavaScriptParser
+<$list filter="[tag[mechanism]sort[title]]" type="ul"/>
 
 ! Deserializers
 
+
 Deserializers are modules that read tiddlers from different text formats:
 
-* RecipeFiles
-* TiddlerFiles
-* TiddlyWikiFiles
+{{deserializers}}
+
+<$list filter="[tag[deserializers]sort[title]]" type="ul"/>

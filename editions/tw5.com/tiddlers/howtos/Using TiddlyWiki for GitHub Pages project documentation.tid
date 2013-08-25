@@ -1,5 +1,8 @@
-modified: 201306251332
-tags: docs dev
+created: 201308251501
+creator: JeremyRuston
+modified: 201308251501
+modifier: JeremyRuston
+tags: docs dev howto
 title: Using TiddlyWiki for GitHub Pages project documentation
 
 TiddlyWiki5 can be used to produce documentation for GitHub projects. It lets you maintain a single set of documentation as a [[TiddlyWikiFolder|TiddlyWikiFolders]] containing separate tiddler files under source code control, and then use it to produce  `readme.md` files for inclusion in project folders, or HTML files for storage in [[GitHub Pages|http://pages.github.com/]]. Both features are demonstrated by TiddlyWiki5 itself.

@@ -1,6 +1,6 @@
 created: 201308241418
 creator: JeremyRuston
-modified: 201308241531
+modified: 201308251303
 modifier: JeremyRuston
 tags: docs introduction
 title: Docs
@@ -55,10 +55,15 @@ Widgets give WikiText dynamic functionality:
 
 <$list filter="[tag[command]sort[title]]" type="ul"/>
 
+! Tips
+
+{{tips}}
+
+<$list filter="[tag[tips]sort[title]]" type="ul"/>
+
 ! Miscellaneous
 
 * ReportingBugs
 * JeremyRuston (aka [[Jermolene]])
 * FederatialLimited
-* [[History]]
 * [[Acknowledgements]]

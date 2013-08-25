@@ -1,7 +1,9 @@
-title: TiddlyWikiArchitecture
+created: 201308251621
+creator: JeremyRuston
+modified: 201308251621
 modifier: JeremyRuston
-tags: docs internals
-modified: 201304212156
+tags: docs dev
+title: TiddlyWikiArchitecture
 
 The heart of TiddlyWiki can be seen as an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 

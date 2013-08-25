@@ -1,4 +1,8 @@
-modified: 201305201828
+created: 201308251605
+creator: JeremyRuston
+modified: 201308251605
+modifier: JeremyRuston
+tags: docs community
 title: HelpingTiddlyWiki
 
 If you find TiddlyWiki useful, there are lots of ways you can help assure its future and make it better.
@@ -20,7 +24,7 @@ There's lively discussion about TiddlyWiki in the Google Groups:
 * The main TiddlyWiki group: http://groups.google.com/group/TiddlyWiki
 * The TiddlyWikiDev group for developers: http://groups.google.com/group/TiddlyWikiDev
 
-! 4. Improve the Documentation and Code
+! 4. Improve the documentation and code
 
 The main TiddlyWiki documentation and code lives on GitHub, and welcomes [[contributions||Contributing]]:
 

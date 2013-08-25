@@ -1,7 +1,13 @@
-title: EncryptionMechanism
+created: 201308251542
+creator: JeremyRuston
+modified: 201308251543
+modifier: JeremyRuston
 tags: docs mechanism
+title: EncryptionMechanism
 
 TiddlyWiki5 allows the entire content of a TiddlyWiki HTML file to be encrypted with the Stanford JavaScript Crypto Library. Opening an encrypted TiddlyWiki in the browser prompts for a password before decrypting and displaying the content.
+
+For instructions on how to use TiddlyWiki5's encryption features, see [[How to use TiddlyWiki5 as a standalone HTML file with encryption]].
 
 The EncryptionMechanism is implemented with the following elements:
 
@@ -11,4 +17,4 @@ The EncryptionMechanism is implemented with the following elements:
 * The `<$encrypt>` widget within the main file template that encrypts a filtered list of tiddlers with the currently held password
 * The [[$:/isEncrypted]] tiddler that contains "yes" or "no" according to whether there is a password in the password vault
 ** The availability of this tiddler allows the RevealWidget to be used to selectively display user interface elements according to whether encryption is in force
-* The [[$:/snippets/encryptionstatus]] snippet that displays the current encryption status
+* The [[$:/snippets/encryptionstatus]] snippet displays the current encryption status

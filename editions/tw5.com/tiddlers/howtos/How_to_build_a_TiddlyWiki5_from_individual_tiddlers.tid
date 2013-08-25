@@ -1,11 +1,15 @@
-title: How to build a TiddlyWiki5 from individual tiddlers
+created: 201308251606
+creator: JeremyRuston
+modified: 201308251607
+modifier: JeremyRuston
 tags: docs howto
+title: How to build a TiddlyWiki5 from individual tiddlers
 
-# Create an empty TiddlyWikiDirectory
+# Create an empty [[TiddlyWikiFolder|TiddlyWikiFolders]]
 ## Create a new folder in a convenient place (for example `~/MyWiki`)
 ## Create a file called `tiddlywiki.info` containing just a pair of braces: `{}`
 ## Create a subfolder called `tiddlers`
 ##* Alternatively, just copy the `editions/empty` folder from the TiddlyWiki5 repo
-# Create individual tiddler files in the `~/MyWiki/tiddlers` directory
+# Create individual TiddlerFiles in the `~/MyWiki/tiddlers` directory
 # Execute the following command from the TiddlyWiki5 root directory to build a TiddlyWiki5 file from the tiddlers:
 ## `node ./tiddlywiki.js ~/MyWiki --rendertiddler $:/core/templates/tiddlywiki5.template.html index.html text/plain`

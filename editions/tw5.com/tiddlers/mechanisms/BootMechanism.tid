@@ -1,26 +1,28 @@
-title: BootMechanism
+created: 201308251429
+creator: JeremyRuston
+modified: 201308251429
+modifier: JeremyRuston
 tags: docs mechanism
+title: BootMechanism
 
 !Introduction
 
-TiddlyWiki5 is based on a 1,000 line boot kernel that runs on node.js or in the browser, with all other functionality added via dynamically loaded modules.
+It its heart, TiddlyWiki5 is a relatively small boot kernel that runs on node.js or in the browser with all other functionality added via dynamically loaded [[modules|Modules]].
 
-The kernel boots just enough of the TiddlyWiki environment to allow it to load tiddlers and execute JavaScript modules. Plugin modules are written like `node.js` modules.
+The kernel boots just enough of the TiddlyWiki environment to allow it to load and execute module tiddlers. The module system is compatible with CommonJS and [[node.js]].
 
-There are many [[different types of module|ModuleType]]: parsers, deserializers, widgets etc. It goes much further than you might expect. For example, individual tiddler fields are modules, too: there's a module that knows how to handle the `tags` field, and another that knows how to handle the special behaviour of the `modified` and `created` fields.
+There are many [[different types of module|ModuleType]]: parsers, deserializers, widgets etc. It goes much further than you might expect. For example, individual tiddler fields are modules, too: there's a module that knows how to handle the `tags` field, and another that knows how to handle the special behaviour of the `modified` and `created` fields. Some plugin modules have further sub-plugins: the wikitext parser, for instance, accepts parsing rules as individual plugin modules.
 
-Some plugin modules have further sub-plugins: the wikitext parser, for instance, accepts rules as individual plugin modules.
-
-!Plugins and Modules
+!Plugins
 
 In TiddlyWiki5, [[Plugins]] are bundles of tiddlers that are distributed and managed as one; [[Modules]] are JavaScript tiddlers with a module type identifying when and how they should be executed.
 
 The tiddler [[$:/boot/boot.js]] is a barebones TiddlyWiki kernel that is just sufficient to load the core plugin modules and trigger a startup module to load up the rest of the application.
 
-The kernel includes:
+The boot kernel includes:
 
 * Several short shared utility functions
-* A handful of methods implementing the plugin module mechanism
+* A handful of methods implementing the module mechanism
 * The `$tw.Tiddler` class (and field definition plugins)
 * The `$tw.Wiki` class (and tiddler deserialization methods)
 * Code for the browser to load tiddlers from the HTML DOM

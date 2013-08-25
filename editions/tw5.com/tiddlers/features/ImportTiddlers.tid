@@ -1,10 +1,13 @@
-title: ImportTiddlers
+created: 201308251620
+creator: JeremyRuston
+modified: 201308251620
+modifier: JeremyRuston
 tags: docs features
-modified: 201304011804
+title: ImportTiddlers
 
 You can import content into a TiddlyWiki file in several ways:
 
-* Use the ''browse'' button to select one or more local files
+* Use the ''browse'' button (under the ''Tools'' tab in the sidebar, or in the [[ControlPanel|$:/ControlPanel]]) to select one or more local files
 * Drag and drop files from Windows Explorer or Mac OS X Finder into the TiddlyWiki5 browser window
 * Paste content directly from the clipboard using the keyboard shortcut (control-V or command-V)
 ** Pasting is currently only supported in GoogleChrome

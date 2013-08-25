@@ -1,6 +1,9 @@
-title: TiddlerFiles
+created: 201308251500
+creator: JeremyRuston
+modified: 201308251621
 modifier: JeremyRuston
-tags: internals
+tags: deserializers dev
+title: TiddlerFiles
 
 Tiddlers can be stored in text files in several different formats. Files containing single tiddlers can also have an auxiliary `.meta` file formatted as a sequence of name:value pairs:
 

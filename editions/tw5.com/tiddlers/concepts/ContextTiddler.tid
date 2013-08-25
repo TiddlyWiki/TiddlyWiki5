@@ -1,4 +1,8 @@
-title: ContextTiddler
+created: 201308251449
+creator: JeremyRuston
+modified: 201308251449
+modifier: JeremyRuston
 tags: docs concepts
+title: ContextTiddler
 
-The ContextTiddler is the current tiddler during WikiText processing. It allows you to write a widget like `<$view field="title" format="link"/>` in TiddlerTemplates without explicitly specifying the tiddler that it applies to.
+The ContextTiddler is the current tiddler during WikiText processing. A context tiddler is set by the TiddlerWidget. It allows you to write references like `<$view field="title" format="link"/>` in TiddlerTemplates without explicitly specifying the tiddler that it applies to.
