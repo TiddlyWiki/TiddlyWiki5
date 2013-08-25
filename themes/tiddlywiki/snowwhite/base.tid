@@ -130,7 +130,6 @@ embed {
 
 a.tw-tiddlylink {
 	text-decoration: none;
-	font-style: normal;
 	font-weight: normal;
 	color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkforeground}};
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
@@ -149,7 +148,7 @@ a.tw-tiddlylink:hover {
 }
 
 a.tw-tiddlylink-resolves {
-	font-style: normal;
+	font-weight: bold;
 }
 
 a.tw-tiddlylink-missing {
@@ -157,7 +156,6 @@ a.tw-tiddlylink-missing {
 }
 
 a.tw-tiddlylink-external {
-	font-weight: bold;
 }
 
 /*

@@ -1,0 +1,20 @@
+created: 201308252029
+creator: JeremyRuston
+modified: 201308252029
+modifier: JeremyRuston
+tags: concepts
+title: TiddlerLinks
+
+Links between tiddlers are the foundation of structuring information within TiddlyWiki.
+
+TiddlyWiki5 alters the appearance of tiddler links to convey additional information about the target of the link:
+
+|!Link description |!Link appearance |
+|To a tiddler that exists |[[LikeThis|TiddlerLinks]] |
+|To a tiddler that doesn't exist |[[LikeThis|ATiddlerThatDoesntExist]] |
+|To a shadow tiddler that has not been overridden |[[LikeThis|$:/core/copyright.txt]] |
+|To a shadow tiddler that has been overridden by an ordinary tiddler |[[LikeThis|SiteTitle]] |
+
+External links are shown like this: http://tiddlywiki.com/ or [[like this|http://tiddlywiki.com/]].
+
+
