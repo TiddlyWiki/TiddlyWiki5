@@ -1,0 +1,48 @@
+created: 201308252217
+creator: JeremyRuston
+modified: 201308252225
+modifier: JeremyRuston
+tags: dev
+title: Plan for moving from Alpha to Beta
+
+! Goals for moving to Beta
+
+To move from alpha to beta, TiddlyWiki5 needs a better release and deployment process. At a minimum:
+
+* Each release should be automatically assigned a unique revision number, with a simple manual process to bump the major or minor version number
+* Each release should be available as a zip download on GitHub and tiddlywiki.com
+* Releases should be automatically pushed to NPM
+* A release note for end users should be automatically generated from the commits
+** The process should allow for manual editing of the release note
+* A clear distinction between a new release of the TW5 core plugins and revised content for the tw5.com website
+
+It would also be nice to have:
+
+* Automatic tweets from @TiddlyWiki announcing each release
+
+! Tasks for moving to Beta
+
+!! Update https://github.com/Jermolene/tiddlywiki.com
+
+This is the repository for the content and build tools for tiddlywiki.com, forked from https://github.com/TiddlyWiki/tiddlywiki.com. It needs updating to includes both TW5 and TW classic, with a unified build and deployment process for the website.
+
+The pull request will be merged when we switch into beta. Until then, we'll build to http://jermolene.github.com, meaning that http://five.tiddlywiki.com will be a replica of tiddlywiki.com post-beta switchover.
+
+The basic build process for tw5.com is:
+
+Preparation
+
+* Update the content and commit as needed
+* Pull down the correct version of TW5 for the build
+* Pull down the content repos
+* Fork tiddlywiki.github.com and pull it down
+
+Build cycle
+
+* Run the build scripts
+* Review pull request for tiddlywiki.github.com
+
+Deployment
+
+* Merge pull request on github.com
+
