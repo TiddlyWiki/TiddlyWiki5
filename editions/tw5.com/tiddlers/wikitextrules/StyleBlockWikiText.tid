@@ -1,5 +1,5 @@
 title: StyleBlockWikiText
-tags: docs wikitextrule
+tags: wikitextrule
 
 This syntax enables you to assign arbitrary styles and classes to generated elements. For example:
 

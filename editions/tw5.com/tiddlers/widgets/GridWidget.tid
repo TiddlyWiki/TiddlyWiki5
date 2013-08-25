@@ -1,5 +1,5 @@
 title: GridWidget
-tags: docs widget
+tags: widget
 
 The grid widget assembles tiddlers into a tabular grid based on their titles. For example:
 

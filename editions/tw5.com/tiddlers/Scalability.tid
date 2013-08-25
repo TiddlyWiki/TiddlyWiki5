@@ -2,7 +2,7 @@ created: 201308221734
 creator: JeremyRuston
 modified: 201308221734
 modifier: JeremyRuston
-tags: docs features
+tags: features
 title: Scalability
 
 You might expect that TiddlyWiki's architecture as a SinglePageApplication would make it unsuitable for large amounts of data. In fact, TiddlyWiki users regularly work with files that are 20 or 30 megabytes without problems - and successful experiments have been done up into the gigabytes.

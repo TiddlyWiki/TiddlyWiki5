@@ -1,5 +1,5 @@
 title: SystemTiddlers
-tags: docs concepts
+tags: concepts
 
 System tiddlers are any tiddler whose title starts with `$:/`; such tiddlers are automatically hidden from most operations. They don't show up in lists or search results, but linking to one directly works in the usual way.
 

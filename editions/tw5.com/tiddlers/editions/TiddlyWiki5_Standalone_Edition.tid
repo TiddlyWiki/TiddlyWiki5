@@ -1,5 +1,5 @@
 title: TiddlyWiki5 Standalone Edition
-tags: docs edition
+tags: edition
 
 The standalone edition of TiddlyWiki5 is a single HTML file that contains both your content and the JavaScript code needed to provide a user interface for viewing and editting it. Your changes are preserved by generating an updated HTML file which can be saved in various ways, depending on your browser and configuration:
 

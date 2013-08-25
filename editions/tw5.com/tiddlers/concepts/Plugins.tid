@@ -1,5 +1,5 @@
 title: Plugins
-tags: docs concepts
+tags: concepts
 modified: 201308091623
 
 A plugin in TiddlyWiki5 is a bundle of tiddlers packaged together as a single tiddler. Plugins are used to distribute optional, custom components for TiddlyWiki.

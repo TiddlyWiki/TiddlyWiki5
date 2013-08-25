@@ -1,6 +1,6 @@
 modified: 201305011454
 title: PluginMechanism
-tags: docs mechanism
+tags: mechanism
 
 [[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the registered plugins are searched for it instead.
 

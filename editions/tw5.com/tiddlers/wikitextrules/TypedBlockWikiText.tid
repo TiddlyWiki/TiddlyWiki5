@@ -1,5 +1,5 @@
 title: TypedBlockWikiText
-tags: docs wikitextrule
+tags: wikitextrule
 
 WikiText can include blocks of text that are rendered with an explicit ContentType like this:
 

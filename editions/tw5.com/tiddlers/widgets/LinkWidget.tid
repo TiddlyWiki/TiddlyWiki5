@@ -1,5 +1,5 @@
 title: LinkWidget
-tags: docs widget
+tags: widget
 
 The `link` widget generates links to tiddlers and external URIs. Optionally, hovering over a link can trigger the display of another tiddler as a popup.
 

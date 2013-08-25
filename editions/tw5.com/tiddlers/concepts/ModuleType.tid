@@ -1,5 +1,5 @@
 title: ModuleType
-tags: docs concepts
+tags: concepts
 modified: 201308091623
 
 The `module-type` field of a [[JavaScript module|Modules]] is a string that identifies the type of the module.

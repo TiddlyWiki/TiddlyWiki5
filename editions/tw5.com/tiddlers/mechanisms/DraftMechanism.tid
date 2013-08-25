@@ -1,6 +1,6 @@
 title: DraftMechanism
 modified: 201308201324
-tags: mechanism docs
+tags: mechanism
 
 Tiddlers that have a `draft.of` field are treated as pending drafts of the tiddler specified in the field. Draft tiddlers should also have a `draft.title` field that specifies the title that will be given to the tiddler when it is saved.
 

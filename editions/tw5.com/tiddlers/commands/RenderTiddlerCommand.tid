@@ -1,5 +1,5 @@
 title: RenderTiddlerCommand
-tags: docs command
+tags: command
 
 Render an individual tiddler as a specified ContentType, defaults to `text/html` and save it to the specified filename 
 

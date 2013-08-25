@@ -1,5 +1,5 @@
 title: ReleaseProcess
-tags: dev docs
+tags: dev
 modified: 201304181008
 
 To move from ''alpha'' to ''beta'', TiddlyWiki5 needs a better release and deployment process. At a minimum:

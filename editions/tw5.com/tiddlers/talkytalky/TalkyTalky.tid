@@ -80,7 +80,7 @@ Store your tiddlers in separate files in a chain of linked directories.
 #* `$tw.wiki.deleteTiddler("HelloThere")`
 #* `$tw.wiki.addTiddler({title: "HelloThere", text: "This is a new [[Tiddler]], linking to a TiddlerThatDoesntCurrentlyExist"})`
 #* `$tw.wiki.getTiddlerLinks("HelloThere")`
-#* `$tw.wiki.filterTiddlers("[tag[docs]sort[modified]]")`
+#* `$tw.wiki.filterTiddlers("[tag[mechanism]sort[modified]]")`
 
 !!! Saving online
 

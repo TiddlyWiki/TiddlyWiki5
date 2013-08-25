@@ -1,5 +1,5 @@
 title: ShadowTiddlers
-tags: docs concepts
+tags: concepts
 modified: 201308091623
 
 ShadowTiddlers are tiddlers that are loaded from within [[Plugins]]. Unlike ordinary tiddlers, they don't appear in most lists.

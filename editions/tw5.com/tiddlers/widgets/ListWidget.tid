@@ -2,7 +2,7 @@ created: 201308241419
 creator: JeremyRuston
 modified: 201308241419
 modifier: JeremyRuston
-tags: widget docs
+tags: widget
 title: ListWidget
 
 \define demoMacro(title)

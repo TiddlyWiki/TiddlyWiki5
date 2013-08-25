@@ -1,5 +1,5 @@
 title: TiddlyWiki5 Static Site Generation
-tags: edition docs
+tags: edition
 
 TiddlyWiki5 can be used to generate a static HTML representation of a TiddlyWiki that doesn't need JavaScript.
 

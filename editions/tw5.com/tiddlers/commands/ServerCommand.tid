@@ -1,5 +1,5 @@
 title: ServerCommand
-tags: docs command
+tags: command
 
 The server built in to TiddlyWiki5 is very simple. Although compatible with TiddlyWeb it doesn't support many of the features needed for robust Internet-facing usage - in particular, TiddlyWiki5 is an old-school wiki in the sense that it offers no authentication.
 

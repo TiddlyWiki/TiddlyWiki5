@@ -1,7 +1,7 @@
 modified: 201304291301
 title: TiddlyWiki5 Node Edition
 modifier: JeremyRuston
-tags: docs edition
+tags: edition
 
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles. For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 

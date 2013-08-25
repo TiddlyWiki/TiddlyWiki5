@@ -2,7 +2,7 @@ created: 201308251609
 creator: JeremyRuston
 modified: 201308251609
 modifier: JeremyRuston
-tags: docs howto
+tags: howto
 title: How to use TiddlyWiki5 as a standalone HTML file with encryption
 
 [[TiddlyWiki5 Standalone Edition]] allows content to be encrypted using the [[Stanford JavaScript Crypto Library]].

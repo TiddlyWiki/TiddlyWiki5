@@ -1,5 +1,5 @@
 modified: 201304251659
-tags: docs dev
+tags: dev
 title: TestingMechanism
 
 TiddlyWiki5 incorporates the Jasmine JavaScript testing framework (see http://pivotal.github.io/jasmine/). It allows the same tests to be run both in the browser and under node.js.

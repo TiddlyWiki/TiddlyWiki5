@@ -1,5 +1,5 @@
 title: VerboseCommand
-tags: docs command
+tags: command
 
 Triggers verbose output, useful for debugging 
 

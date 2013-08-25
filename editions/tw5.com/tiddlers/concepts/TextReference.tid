@@ -1,5 +1,5 @@
 title: TextReference
-tags: docs concepts
+tags: concepts
 
 A TextReference identifies a chunk of text from a tiddler that can be retrieved or modified depending on the context.
 

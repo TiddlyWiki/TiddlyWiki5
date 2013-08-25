@@ -2,7 +2,7 @@ created: 201308251542
 creator: JeremyRuston
 modified: 201308251543
 modifier: JeremyRuston
-tags: docs mechanism
+tags: mechanism
 title: EncryptionMechanism
 
 TiddlyWiki5 allows the entire content of a TiddlyWiki HTML file to be encrypted with the Stanford JavaScript Crypto Library. Opening an encrypted TiddlyWiki in the browser prompts for a password before decrypting and displaying the content.

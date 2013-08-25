@@ -2,7 +2,7 @@ created: 201308251033
 creator: JeremyRuston
 modified: 201308251418
 modifier: JeremyRuston
-tags: docs tips
+tags: tips
 title: TitlesPolicy
 
 As the structures within your TiddlyWiki documents get more complex it can be hard to keep the titles of tiddlers consistent. For example, should terms be defined in the plural or the singular? Camel case or separate words?

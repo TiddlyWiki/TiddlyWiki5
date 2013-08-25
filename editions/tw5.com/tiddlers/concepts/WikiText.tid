@@ -1,4 +1,4 @@
-tags: docs concepts
+tags: concepts
 type: text/vnd.tiddlywiki
 title: WikiText
 modified: 201305011529
@@ -92,11 +92,11 @@ You can incorporate the content of one tiddler within another using the transclu
 A similar syntax can be used to transclude a list of tiddlers matching a specified [[TiddlerFilter|TiddlerFilters]]:
 
 ```
-{{{ [tag[docs]] }}}
-{{{ [tag[docs]] |tooltip}}}
-{{{ [tag[docs]] ||TemplateTitle}}}
-{{{ [tag[docs]] |tooltip||TemplateTitle}}}
-{{{ [tag[docs]] }}width:40;height:50;}.class.class
+{{{ [tag[mechanism]] }}}
+{{{ [tag[mechanism]] |tooltip}}}
+{{{ [tag[mechanism]] ||TemplateTitle}}}
+{{{ [tag[mechanism]] |tooltip||TemplateTitle}}}
+{{{ [tag[mechanism]] }}width:40;height:50;}.class.class
 ```
 
 ! Images

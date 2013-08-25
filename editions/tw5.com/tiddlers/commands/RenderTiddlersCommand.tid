@@ -1,5 +1,5 @@
 title: RenderTiddlersCommand
-tags: docs command
+tags: command
 
 Render a set of tiddlers matching a filter to separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
 

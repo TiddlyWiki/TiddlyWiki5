@@ -2,7 +2,7 @@ created: 201308251611
 creator: JeremyRuston
 modified: 201308251611
 modifier: JeremyRuston
-tags: docs definitions
+tags: definitions
 title: TiddlyFox
 
 TiddlyFox is an extension for Firefox that allows standalone TiddlyWiki files to save their changes directly to the file system. TiddlyFox works on both desktop and smartphone versions of Firefox.
