@@ -1,6 +1,9 @@
+created: 201308252131
+creator: JeremyRuston
+modified: 201308252131
+modifier: JeremyRuston
 tags: talkytalky
 title: TalkyTalky
-modified: 201305081626
 
 @@text-align:center;
 ! http://five.tiddlywiki.com/
@@ -40,7 +43,7 @@ Store your tiddlers in a single HTML file along with the JS
 # Start adding tasks
 # Save using TiddlyFox, refresh to show changes
 # Drag in the task tiddlers
-# Drag in TaskManagementDemo, show source
+# Drag in TaskManagementExample, show source
 
 !!! node.js Edition
 
@@ -50,17 +53,10 @@ Store your tiddlers in separate files in a chain of linked directories.
 # Open http://five.tiddlywiki.com/static.html
 #* Click links to show individual tiddlers
 # Open http://five.tiddlywiki.com/test.html
-# Start `./serve.sh`
+# Start `./serve.sh UserName`
 # Open http://0.0.0.0:8080/
 # Open network console
 # Note same sync code on client and server
-
-!!! Other Editions
-
-* Dropbox et al
-* TiddlySpot
-* TiddlyWeb
-* TiddlyEdit for iOS
 
 !!! Wrap-up
 

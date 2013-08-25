@@ -1,6 +1,8 @@
-title: TiddlyWiki5
+created: 201308252136
+creator: JeremyRuston
+modified: 201308252136
 modifier: JeremyRuston
-modified: 201302051920
 tags: concepts
+title: TiddlyWiki5
 
 TiddlyWiki5 is a reboot of TiddlyWiki for the next 25 years. It is a complete interactive wiki in JavaScript that can be run in the browser or on the server under [[node.js]].

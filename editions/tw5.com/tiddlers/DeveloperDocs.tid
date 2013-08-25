@@ -1,11 +1,15 @@
 created: 201308251537
 creator: JeremyRuston
-modified: 201308251539
+modified: 201308252143
 modifier: JeremyRuston
 tags: introduction dev
 title: DeveloperDocs
 
 This is the developer documentation hub for TiddlyWiki.
+
+! Overview
+
+TiddlyWikiArchitecture
 
 ! Developer Cookbooks
 
@@ -17,8 +21,12 @@ This is the developer documentation hub for TiddlyWiki.
 
 <$list filter="[tag[mechanism]sort[title]]" type="ul"/>
 
-! Deserializers
+! Module types
+!! SyncAdaptorModules
 
+See SyncAdaptorModules.
+
+!! DeserializerModules
 
 Deserializers are modules that read tiddlers from different text formats:
 

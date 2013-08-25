@@ -1,6 +1,6 @@
 created: 201308221728
 creator: JeremyRuston
-modified: 201308231953
+modified: 201308252125
 modifier: JeremyRuston
 tags: introduction
 title: Features
@@ -19,5 +19,6 @@ title: Features
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules
 ** TiddlyWiki5 can directly build both itself and previous (2.x.x) versions of TiddlyWiki from their constituent separate files, without needing external tools
 ** Run the TiddlyWiki5 [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
+* Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]
 
 The deep internal changes mean that TiddlyWiki5 is not compatible with previous versions, using different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly in TiddlyWiki5.

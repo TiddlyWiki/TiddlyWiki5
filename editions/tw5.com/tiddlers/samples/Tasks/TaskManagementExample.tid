@@ -1,4 +1,10 @@
+created: 201308252133
+creator: JeremyRuston
+modified: 201308252133
+modifier: JeremyRuston
 title: TaskManagementExample
+
+TiddlyWiki5 can be used as a simple task management system without further customisation. The idea is that tasks be tagged `task`, with those that are completed also tagged `done`. In this way it is straightforward to generate task lists.
 
 ! Outstanding tasks
 

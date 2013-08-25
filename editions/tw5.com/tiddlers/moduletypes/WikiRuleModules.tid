@@ -1,6 +1,11 @@
+created: 201308252147
+creator: JeremyRuston
+modified: 201308252147
+modifier: JeremyRuston
+tags: dev moduletypes
 title: WikiRuleModules
 
-WikiRuleModules cover the module types 'wikirunrule', 'wikiblockrule' and `wikipragmarule`. Modules of these types encapsulate the logic of individual parsing rules used by the WikiParser engine. For example, there is a `wikirunrule` module that identifies references to HTML entities by matching the pattern `&<chars>;`.
+WikiRuleModules cover the module types `wikirunrule`, `wikiblockrule` and `wikipragmarule`. Modules of these types encapsulate the logic of individual parsing rules used by the WikiParser engine. For example, there is a `wikirunrule` module that identifies references to HTML entities by matching the pattern `&<chars>;`.
 
 Pragma rules are applied at the start of a block of text, and cover definitions and declarations that affect the parsing of the rest of the text. Block rules are only applied at the beginning of a block of wikitext, while run rules can appear anywhere. The only current example of a pragma rule is for macro definitions.
 

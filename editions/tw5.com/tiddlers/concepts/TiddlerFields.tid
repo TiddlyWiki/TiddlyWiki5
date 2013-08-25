@@ -1,4 +1,8 @@
-modified: 201308091623
+created: 201308252133
+creator: JeremyRuston
+modified: 201308252133
+modifier: JeremyRuston
+tags: concepts
 title: TiddlerFields
 
 TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. The standard fields are:

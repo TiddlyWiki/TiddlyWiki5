@@ -1,6 +1,6 @@
 created: 201308232038
 creator: JeremyRuston
-modified: 201308232040
+modified: 201308252127
 modifier: JeremyRuston
 tags: planning
 title: RoadMap
@@ -15,7 +15,7 @@ The one significant piece of work required before TiddlyWiki5 can move out of al
 
 During the beta TiddlyWiki5 will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
 
-The following additional features are under consideration for implementation during the beta:
+The following additional features are planned or under consideration for implementation during the beta:
 
 * Warning when attempting to close window without saving
 * Use browser local storage to preserve changes in case browser crashes before saving/sync

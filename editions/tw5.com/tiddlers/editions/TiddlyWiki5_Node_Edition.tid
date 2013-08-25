@@ -1,7 +1,9 @@
-modified: 201304291301
-title: TiddlyWiki5 Node Edition
+created: 201308252145
+creator: JeremyRuston
+modified: 201308252145
 modifier: JeremyRuston
 tags: edition
+title: TiddlyWiki5 Node Edition
 
 TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles. For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
 
@@ -56,6 +58,12 @@ The files output by `bld.sh` are:
 !!! `serve.sh` serves tw5.com
 
 This batch file starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the script serves on port 8080.
+
+```
+./server.sh UserName
+```
+
+The single parameter to the script is the username to use for signing edits.
 
 To experiment with this configuration, run the script and then visit `http://0.0.0.0:8080` in a browser.
 
