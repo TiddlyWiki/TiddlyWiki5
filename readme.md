@@ -101,7 +101,9 @@ TestingMechanism</a>)</p><h3 class=''>
 serve.sh</code> serves tw5.com</h3><p>
 This batch file starts <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> running as an HTTP server with the content from the <code>
-clientserver</code> edition. By default, the script serves on port 8080.</p><p>
+clientserver</code> edition. By default, the script serves on port 8080.</p><pre>
+./server.sh UserName</pre><p>
+The single parameter to the script is the username to use for signing edits.</p><p>
 To experiment with this configuration, run the script and then visit <code>
 http://0.0.0.0:8080</code> in a browser.</p><p>
 Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).</p><h3 class=''>
