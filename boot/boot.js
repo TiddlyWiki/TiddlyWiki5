@@ -1168,6 +1168,10 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			}
 		}
 	}
+	// Give the plugin the same version number as the core if it doesn't have one
+	if(!("version" in pluginInfo)) {
+		pluginInfo.version = $tw.packageInfo.version;
+	}
 	// Save the plugin tiddler
 	if(pluginInfo) {
 		var fields = {
@@ -1176,6 +1180,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			text: JSON.stringify(pluginInfo,null,4),
 			"plugin-priority": pluginInfo["plugin-priority"],
 			"name": pluginInfo["name"],
+			"version": pluginInfo["version"],
 			"thumbnail": pluginInfo["thumbnail"],
 			"description": pluginInfo["description"],
 			"plugin-type": pluginInfo["plugin-type"] || "plugin"

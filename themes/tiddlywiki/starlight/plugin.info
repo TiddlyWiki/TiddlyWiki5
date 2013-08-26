@@ -2,7 +2,6 @@
 	"title": "$:/themes/tiddlywiki/starlight",
 	"name": "Starlight",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
 	"description": "An alternate theme",

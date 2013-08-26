@@ -2,6 +2,5 @@
 	"title": "$:/plugins/tiddlywiki/tahoelafs",
 	"description": "Support for saving changes to Tahoe-LAFS",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0"
 }

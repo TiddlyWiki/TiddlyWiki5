@@ -1,6 +1,9 @@
-modified: 201305011454
-title: PluginMechanism
+created: 201308261220
+creator: JeremyRuston
+modified: 201308261220
+modifier: JeremyRuston
 tags: mechanism
+title: PluginMechanism
 
 [[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the registered plugins are searched for it instead.
 
@@ -46,6 +49,8 @@ The titles of the individual tiddlers are typically prefixed with the title of t
 On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
 
 The `plugin.info` file should contain the same JSON as given for plugin tiddlers above, with the `tiddlers` object omitted.
+
+Note that if the `version` field is omitted from a `plugin.info` file when the plugin folder is packed then it is automatically filled in by the core to the current core version number. This is to ensure that all the core plugins carry the correct version number. Generally plugin authors will want to ensure that they do explicitly specify a version number.
 
 ! Plugin library
 

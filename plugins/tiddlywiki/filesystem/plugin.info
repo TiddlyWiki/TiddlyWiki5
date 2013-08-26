@@ -2,6 +2,5 @@
 	"title": "$:/plugins/tiddlywiki/filesystem",
 	"description": "File system synchronisation",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0"
 }

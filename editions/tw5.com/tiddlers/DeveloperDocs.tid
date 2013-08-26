@@ -1,6 +1,6 @@
 created: 201308251537
 creator: JeremyRuston
-modified: 201308252143
+modified: 201308260831
 modifier: JeremyRuston
 tags: introduction dev
 title: DeveloperDocs
@@ -9,7 +9,8 @@ This is the developer documentation hub for TiddlyWiki.
 
 ! Overview
 
-TiddlyWikiArchitecture
+* TiddlyWikiArchitecture
+* [[TiddlyWiki5 Development Environment]]
 
 ! Developer Cookbooks
 

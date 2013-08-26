@@ -2,6 +2,5 @@
 	"title": "$:/plugins/tiddlywiki/tiddlyweb",
 	"description": "TiddlyWeb and TiddlySpace components",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0"
 }

@@ -2,7 +2,6 @@
 	"title": "$:/themes/tiddlywiki/stickytitles",
 	"name": "Sticky Titles",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
 	"description": "Experimental theme with titles that stick to the top of the window",

@@ -2,6 +2,5 @@
 	"title": "$:/plugins/tiddlywiki/fullscreen",
 	"description": "Adds support for HTML5 full screen mode",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0"
 }

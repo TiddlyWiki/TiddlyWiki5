@@ -2,7 +2,6 @@
 	"title": "$:/core",
 	"description": "TiddlyWiki5 core plugin",
 	"author": "JeremyRuston",
-	"version": "0.0.0",
 	"core-version": ">=5.0.0",
 	"plugin-priority": "0"
 }
