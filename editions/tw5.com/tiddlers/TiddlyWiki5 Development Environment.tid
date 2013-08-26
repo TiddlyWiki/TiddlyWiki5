@@ -1,6 +1,6 @@
 created: 201308251618
 creator: JeremyRuston
-modified: 201308260848
+modified: 201308262048
 modifier: JeremyRuston
 tags: dev
 title: TiddlyWiki5 Development Environment
@@ -17,5 +17,10 @@ npm link
 
 ! Bumping version numbers
 
-As releases are made during development it is necessary to adjust the version number of various TiddlyWiki5 components. This is done with the [[npm version|https://npmjs.org/doc/version.html]] command.
-** As described in #10 in [[this article by npm's author|http://blog.izs.me/post/1675072029/10-cool-things-you-probably-didnt-realize-npm-could-do]], when run from within a git repo this command will also commit the change and tag it
+As releases are made during development it is necessary to adjust the version number of the TiddlyWiki5 core. This is done with the [[npm version|https://npmjs.org/doc/version.html]] command. For example:
+
+```
+npm version 5.0.0-alpha.10
+```
+
+As described in #10 in [[this article by npm's author|http://blog.izs.me/post/1675072029/10-cool-things-you-probably-didnt-realize-npm-could-do]], when run from within a git repo this command will also commit the change and tag it
