@@ -1,6 +1,6 @@
 created: 201308252217
 creator: JeremyRuston
-modified: 201308252225
+modified: 201308270750
 modifier: JeremyRuston
 tags: dev
 title: Plan for moving from Alpha to Beta
@@ -24,7 +24,7 @@ It would also be nice to have:
 
 !! Update https://github.com/Jermolene/tiddlywiki.com
 
-This is the repository for the content and build tools for tiddlywiki.com, forked from https://github.com/TiddlyWiki/tiddlywiki.com. It needs updating to includes both TW5 and TW classic, with a unified build and deployment process for the website.
+This is the repository for the content and build tools for tiddlywiki.com, forked from https://github.com/TiddlyWiki/tiddlywiki.com. It needs updating to include both TW5 and TW classic, with a unified build and deployment process for the website. The content from `TiddlyWiki5/editions/tw5.com` would be moved here.
 
 The pull request will be merged when we switch into beta. Until then, we'll build to http://jermolene.github.com, meaning that http://five.tiddlywiki.com will be a replica of tiddlywiki.com post-beta switchover.
 

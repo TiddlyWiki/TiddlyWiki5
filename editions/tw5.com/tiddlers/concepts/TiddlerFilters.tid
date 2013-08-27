@@ -1,6 +1,9 @@
+created: 201308270800
+creator: JeremyRuston
+modified: 201308270800
+modifier: JeremyRuston
 tags: concepts
 title: TiddlerFilters
-modified: 201308201405
 
 Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria.
 
@@ -64,7 +67,7 @@ The operands available with the `is` operator are:
 
 ! Indirect Operands
 
-If a filter operator is written with curly brackets around the operand then it is taken to be a TiddlerTextReference to the actual value. For example:
+If a filter operator is written with curly brackets around the operand then it is taken to be a TextReference to the actual value. For example:
 
 ''[search{$:/temp/search}]'': selects all tiddlers containing the string contained in the tiddler titled ''$:/temp/search''.
 
