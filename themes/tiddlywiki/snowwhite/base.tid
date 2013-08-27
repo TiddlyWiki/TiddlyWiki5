@@ -361,7 +361,7 @@ a.tw-tiddlylink-external {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -3em;
-		padding: 5em 0 2em 3em;
+		padding: 6em 0 2em 3em;
 	}
 
 	.story-river {
