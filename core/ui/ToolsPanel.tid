@@ -16,3 +16,6 @@ Import: <$import class="tw-drop-zone"/>
 
 {{$:/snippets/encryptionstatus}}
 
+---
+
+TiddlyWiki5 version <$version/>
