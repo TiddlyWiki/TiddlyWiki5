@@ -148,7 +148,14 @@ a.tw-tiddlylink:hover {
 }
 
 a.tw-tiddlylink-resolves {
+}
+
+a.tw-tiddlylink-shadow {
 	font-weight: bold;
+}
+
+a.tw-tiddlylink-shadow.tw-tiddlylink-resolves {
+	font-weight: normal;
 }
 
 a.tw-tiddlylink-missing {
@@ -156,6 +163,7 @@ a.tw-tiddlylink-missing {
 }
 
 a.tw-tiddlylink-external {
+	text-decoration: underline;
 }
 
 /*
