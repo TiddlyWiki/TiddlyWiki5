@@ -14,7 +14,9 @@ title: $:/core/ui/SideBar
 
 <div class="tw-search-results">
 
-<$list filter="[!is[system]search{$:/temp/search}sort[title]limit[250]]" emptyMessage="//No results//"/>
+//<small><$count filter="[!is[system]search{$:/temp/search}]"/> matches</small>//
+
+<$list filter="[!is[system]search{$:/temp/search}sort[title]limit[250]]"/>
 
 </div>
 
