@@ -126,8 +126,12 @@ function deserializeTiddlyWikiFile(text,storeAreaEnd,isTiddlyWiki5,fields) {
 		if(!tiddlerFields) {
 			break;
 		}
+		$tw.utils.each(tiddlerFields,function(value,name) {
+			if(typeof value === "string") {
+				tiddlerFields[name] = $tw.utils.htmlDecode(value);
+			}
+		});
 		if(tiddlerFields.text !== null) {
-			tiddlerFields.text = $tw.utils.htmlDecode(tiddlerFields.text);
 			results.push(tiddlerFields);
 		}
 		startPos = endPos;
