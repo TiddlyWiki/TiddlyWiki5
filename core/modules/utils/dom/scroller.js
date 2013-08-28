@@ -54,6 +54,7 @@ PageScroller.prototype.handleEvent = function(event) {
 Handle a scroll event hitting the page document
 */
 PageScroller.prototype.scrollIntoView = function(element) {
+	var duration = $tw.utils.getAnimationDuration()
 	// Get the offset bounds of the element
 	var bounds = {
 			left: element.offsetLeft,
@@ -94,7 +95,7 @@ PageScroller.prototype.scrollIntoView = function(element) {
 		var self = this,
 			drawFrame;
 		drawFrame = function () {
-			var t = ((new Date()) - self.startTime) / $tw.config.preferences.animationDuration;
+			var t = ((new Date()) - self.startTime) / duration;
 			if(t >= 1) {
 				self.cancelScroll();
 				t = 1;

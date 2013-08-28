@@ -13,6 +13,7 @@ A simple slide animation that varies the height of the element
 "use strict";
 
 function slideOpen(domNode,options) {
+	var duration = $tw.utils.getAnimationDuration();
 	// Get the current height of the domNode
 	var computedStyle = window.getComputedStyle(domNode),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
@@ -34,7 +35,7 @@ function slideOpen(domNode,options) {
 		if(options.callback) {
 			options.callback();
 		}
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(domNode,[
 		{transition: "none"},
@@ -48,12 +49,12 @@ function slideOpen(domNode,options) {
 	$tw.utils.forceLayout(domNode);
 	// Transition to the final position
 	$tw.utils.setStyle(domNode,[
-		{transition: "margin-top " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"padding-top " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"padding-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: "margin-top " + duration + "ms ease-in-out, " +
+					"margin-bottom " + duration + "ms ease-in-out, " +
+					"padding-top " + duration + "ms ease-in-out, " +
+					"padding-bottom " + duration + "ms ease-in-out, " +
+					"height " + duration + "ms ease-in-out, " +
+					"opacity " + duration + "ms ease-in-out"},
 		{marginBottom: currMarginBottom + "px"},
 		{marginTop: currMarginTop + "px"},
 		{paddingBottom: currPaddingBottom + "px"},
@@ -64,7 +65,8 @@ function slideOpen(domNode,options) {
 }
 
 function slideClosed(domNode,options) {
-	var currHeight = domNode.offsetHeight;
+	var duration = $tw.utils.getAnimationDuration(),
+		currHeight = domNode.offsetHeight;
 	// Clear the properties we've set when the animation is over
 	setTimeout(function() {
 		$tw.utils.setStyle(domNode,[
@@ -79,7 +81,7 @@ function slideClosed(domNode,options) {
 		if(options.callback) {
 			options.callback();
 		}
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(domNode,[
 		{height: currHeight + "px"},
@@ -88,12 +90,12 @@ function slideClosed(domNode,options) {
 	$tw.utils.forceLayout(domNode);
 	// Transition to the final position
 	$tw.utils.setStyle(domNode,[
-		{transition: "margin-top " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"padding-top " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"padding-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"height " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: "margin-top " + duration + "ms ease-in-out, " +
+					"margin-bottom " + duration + "ms ease-in-out, " +
+					"padding-top " + duration + "ms ease-in-out, " +
+					"padding-bottom " + duration + "ms ease-in-out, " +
+					"height " + duration + "ms ease-in-out, " +
+					"opacity " + duration + "ms ease-in-out"},
 		{marginTop: "0px"},
 		{marginBottom: "0px"},
 		{paddingTop: "0px"},

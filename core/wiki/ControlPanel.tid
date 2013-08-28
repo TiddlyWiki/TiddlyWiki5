@@ -8,6 +8,8 @@ title: $:/ControlPanel
 
 * [[Username for signing edits|$:/status/UserName]]: <$edit tiddler="$:/status/UserName" default="" type="input"/>
 
+* [[Animation duration|$:/config/AnimationDuration]]: <$edit tiddler="$:/config/AnimationDuration" default="" type="input"/>
+
 * Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to choose which tiddlers are displayed at startup
 
 ! Import tiddlers

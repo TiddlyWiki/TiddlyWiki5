@@ -31,7 +31,8 @@ ClassicListView.prototype.navigateTo = function(historyInfo) {
 
 ClassicListView.prototype.insert = function(index) {
 	var listElementNode = this.listWidget.children[index],
-		targetElement = listElementNode.domNode;
+		targetElement = listElementNode.domNode,
+		duration = $tw.utils.getAnimationDuration();
 	// Get the current height of the tiddler
 	var currMarginBottom = parseInt(window.getComputedStyle(targetElement).marginBottom,10),
 		currMarginTop = parseInt(window.getComputedStyle(targetElement).marginTop,10),
@@ -42,7 +43,7 @@ ClassicListView.prototype.insert = function(index) {
 			{transition: "none"},
 			{marginBottom: ""}
 		]);
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -52,8 +53,8 @@ ClassicListView.prototype.insert = function(index) {
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
-		{transition: "opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: "opacity " + duration + "ms ease-in-out, " +
+					"margin-bottom " + duration + "ms ease-in-out"},
 		{marginBottom: currMarginBottom + "px"},
 		{opacity: "1.0"}
 	]);
@@ -61,7 +62,8 @@ ClassicListView.prototype.insert = function(index) {
 
 ClassicListView.prototype.remove = function(index) {
 	var listElementNode = this.listWidget.children[index],
-		targetElement = listElementNode.domNode;
+		targetElement = listElementNode.domNode,
+		duration = $tw.utils.getAnimationDuration();
 	// Get the current height of the tiddler
 	var currWidth = targetElement.offsetWidth,
 		currMarginBottom = parseInt(window.getComputedStyle(targetElement).marginBottom,10),
@@ -72,7 +74,7 @@ ClassicListView.prototype.remove = function(index) {
 		if(targetElement.parentNode) {
 			targetElement.parentNode.removeChild(targetElement);
 		}
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -82,9 +84,9 @@ ClassicListView.prototype.remove = function(index) {
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"margin-bottom " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
+					"opacity " + duration + "ms ease-in-out, " +
+					"margin-bottom " + duration + "ms ease-in-out"},
 		{transform: "translateX(-" + currWidth + "px)"},
 		{marginBottom: (-currHeight) + "px"},
 		{opacity: "0.0"}

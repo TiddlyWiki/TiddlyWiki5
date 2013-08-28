@@ -18,14 +18,15 @@ var PopListView = function(listWidget) {
 
 PopListView.prototype.insert = function(index) {
 	var listElementNode = this.listWidget.children[index],
-		targetElement = listElementNode.domNode;
+		targetElement = listElementNode.domNode,
+		duration = $tw.utils.getAnimationDuration();
 	// Reset once the transition is over
 	setTimeout(function() {
 		$tw.utils.setStyle(targetElement,[
 			{transition: "none"},
 			{transform: "none"}
 		]);
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Set up the initial position of the element
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -35,8 +36,8 @@ PopListView.prototype.insert = function(index) {
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
+					"opacity " + duration + "ms ease-in-out"},
 		{transform: "scale(1)"},
 		{opacity: "1.0"}
 	]);
@@ -44,13 +45,14 @@ PopListView.prototype.insert = function(index) {
 
 PopListView.prototype.remove = function(index) {
 	var listElementNode = this.listWidget.children[index],
-		targetElement = listElementNode.domNode;
+		targetElement = listElementNode.domNode,
+		duration = $tw.utils.getAnimationDuration();
 	// Remove the element at the end of the transition
 	setTimeout(function() {
 		if(targetElement.parentNode) {
 			targetElement.parentNode.removeChild(targetElement);
 		}
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},
@@ -59,8 +61,8 @@ PopListView.prototype.remove = function(index) {
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out, " +
-					"opacity " + $tw.config.preferences.animationDurationMs + " ease-in-out"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
+					"opacity " + duration + "ms ease-in-out"},
 		{transform: "scale(0.1)"},
 		{opacity: "0.0"}
 	]);

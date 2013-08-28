@@ -27,7 +27,7 @@ Notifier.prototype.display = function(title,options) {
 	// Create the wrapper divs
 	var notification = document.createElement("div"),
 		tiddler = this.wiki.getTiddler(title),
-		d = $tw.config.preferences.animationDuration + "ms";
+		d = $tw.utils.getAnimationDuration() + "ms";
 	// Don't do anything if the tiddler doesn't exist
 	if(!tiddler) {
 		return;
@@ -47,7 +47,7 @@ Notifier.prototype.display = function(title,options) {
 		{opacity: "0"},
 		{transformOrigin: "0% 0%"},
 		{transform: "translateY(" + (-window.innerHeight) + "px)"},
-		{transition: "opacity " + d + " ease-out, " + $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"}
+		{transition: "opacity " + d + " ease-out, " + $tw.utils.roundTripPropertyName("transform") + " " + d + " ease-in-out"}
 	]);
 	// Add the notification to the DOM
 	document.body.appendChild(notification);

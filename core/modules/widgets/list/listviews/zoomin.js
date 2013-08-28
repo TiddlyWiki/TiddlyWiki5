@@ -74,7 +74,8 @@ Visualise navigating back to the previous tiddler
 */
 ZoominListView.prototype.remove = function(index) {
 	var listElementNode = this.listWidget.children[index],
-		targetElement = listElementNode.domNode;
+		targetElement = listElementNode.domNode,
+		duration = $tw.utils.getAnimationDuration();
 	// Set up the tiddler that is being closed
 	$tw.utils.setStyle(targetElement,[
 		{position: "absolute"},
@@ -96,7 +97,7 @@ ZoominListView.prototype.remove = function(index) {
 			{display: "block"},
 			{transformOrigin: "50% 50%"},
 			{transform: "translateX(0px) translateY(0px) scale(10)"},
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in, opacity " + $tw.config.preferences.animationDurationMs + " ease-in"},
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
 			{opacity: "0"},
 			{zIndex: "500"}
 		]);
@@ -109,7 +110,7 @@ ZoominListView.prototype.remove = function(index) {
 	$tw.utils.setStyle(targetElement,[
 		{transformOrigin: "50% 50%"},
 		{transform: "translateX(0px) translateY(0px) scale(0.1)"},
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in, opacity " + $tw.config.preferences.animationDurationMs + " ease-in"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);
@@ -118,7 +119,7 @@ ZoominListView.prototype.remove = function(index) {
 		if(targetElement.parentNode) {
 			targetElement.parentNode.removeChild(targetElement);
 		}
-	},$tw.config.preferences.animationDuration);
+	},duration);
 	// Now the tiddler we're going back to
 	if(toElement) {
 		$tw.utils.setStyle(toElement,[
@@ -130,7 +131,8 @@ ZoominListView.prototype.remove = function(index) {
 };
 
 ZoominListView.prototype.navigateTo = function(historyInfo) {
-	var listElementIndex = this.listWidget.findListElementByTitle(0,historyInfo.title);
+	var listElementIndex = this.listWidget.findListElementByTitle(0,historyInfo.title),
+		duration = $tw.utils.getAnimationDuration();
 	if(listElementIndex === undefined) {
 		return;
 	}
@@ -172,7 +174,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	this.currentTiddler = targetElement;
 	// Transform the target tiddler to its natural size
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in, opacity " + $tw.config.preferences.animationDurationMs + " ease-in"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
 		{opacity: "1.0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{zIndex: "500"},
@@ -183,7 +185,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 		x =  zoomBounds.left - targetBounds.left - (sourceBounds.left - targetBounds.left) * scale;
 		y =  zoomBounds.top - targetBounds.top - (sourceBounds.top - targetBounds.top) * scale;
 		$tw.utils.setStyle(prevCurrentTiddler,[
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in, opacity " + $tw.config.preferences.animationDurationMs + " ease-in"},
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
 			{opacity: "0.0"},
 			{transformOrigin: "0 0"},
 			{transform: "translateX(" + x + "px) translateY(" + y + "px) scale(" + scale + ")"},
@@ -194,7 +196,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 			if(self.currentTiddler !== prevCurrentTiddler) {
 				prevCurrentTiddler.style.display = "none";
 			}
-		},$tw.config.preferences.animationDuration);
+		},duration);
 	}
 	// Scroll the target into view
 //	$tw.pageScroller.scrollIntoView(targetElement);

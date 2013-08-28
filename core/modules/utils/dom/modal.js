@@ -26,7 +26,8 @@ Options include:
 */
 Modal.prototype.display = function(title,options) {
 	options = options || {};
-	var self = this;
+	var self = this,
+		duration = $tw.utils.getAnimationDuration();
 	// Up the modal count and adjust the body class
 	this.modalCount++;
 	this.adjustPageClass();
@@ -42,7 +43,7 @@ Modal.prototype.display = function(title,options) {
 		modalFooterHelp = document.createElement("span"),
 		modalFooterButtons = document.createElement("span"),
 		tiddler = this.wiki.getTiddler(title),
-		d = $tw.config.preferences.animationDuration + "ms";
+		d = duration + "ms";
 	// Don't do anything if the tiddler doesn't exist
 	if(!tiddler) {
 		return;
@@ -154,7 +155,7 @@ Modal.prototype.display = function(title,options) {
 		{transition: "opacity " + d + " ease-out"}
 	]);
 	$tw.utils.setStyle(modalWrapper,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + $tw.config.preferences.animationDurationMs + " ease-in-out"}
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out"}
 	]);
 	// Force layout
 	$tw.utils.forceLayout(modalBackdrop);

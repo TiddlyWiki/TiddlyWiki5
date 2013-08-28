@@ -14,8 +14,6 @@ Core configuration constants
 
 exports.preferences = {};
 
-exports.preferences.animationDuration = 400;
-exports.preferences.animationDurationMs = exports.preferences.animationDuration + "ms";
 exports.preferences.notificationDuration = 3 * 1000;
 exports.preferences.jsonSpaces = 4;
 
