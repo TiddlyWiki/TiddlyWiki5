@@ -160,10 +160,10 @@ TextEditor.prototype.saveChanges = function() {
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: this.tiddlerTitle});
 		}
-		var newValue = tiddler.getFieldString(this.fieldName);
-		if(text !== newValue) {
+		var oldValue = tiddler.getFieldString(this.fieldName);
+		if(text !== oldValue) {
 			var update = {};
-			update[this.fieldName] = newValue;
+			update[this.fieldName] = text;
 			this.editWidget.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
 		}
 	} else {
