@@ -191,7 +191,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	for(var t=0; t<this.storyList.length; t++) {
 		if(this.storyList[t] === event.tiddlerTitle) {
 			var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
-			if(tiddler.hasField("draft.title")) {
+			if(tiddler.hasField("draft.title") && tiddler.fields["draft.title"]) {
 				// Save the draft tiddler as the real tiddler
 				this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(this.renderer.renderTree.wiki.getCreationFields(),tiddler,{
 					title: tiddler.fields["draft.title"],
