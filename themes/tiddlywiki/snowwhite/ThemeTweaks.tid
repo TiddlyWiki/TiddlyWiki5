@@ -1,0 +1,34 @@
+title: $:/ControlPanel/ThemeTweaks
+
+You can tweak certain aspects of the ''Snow White'' theme.
+
+//Currently, you need to ''save and restart'' TiddlyWiki before these changes take effect//
+
+! Colours
+
+* Primary colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="primary" default="" type="color"/>
+* Background colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="background" default="" type="color"/>
+* Foreground colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="foreground" default="" type="color"/>
+* Page background colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="pagebackground" default="" type="color"/>
+* Medium contrast color: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="medium" default="" type="color"/>
+
+! Colour mappings
+
+* Tiddler background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="tiddlerbackground" default="" type="input"/>
+* Tiddler foreground colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="foreground" default="" type="input"/>
+* Page background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="pagebackground" default="" type="input"/>
+* Link background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="linkbackground" default="" type="input"/>
+* Link foreground colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="linkforeground" default="" type="input"/>
+* Dropdown background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="dropdownbackground" default="" type="input"/>
+* Dropdown border colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="dropdownborder" default="" type="input"/>
+
+! Sizes
+
+* Font size: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="fontsize" default="" type="input"/>
+* Line height: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="lineheight" default="" type="input"/>
+* Story left position: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storyleft" default="" type="input"/>
+* Story top position: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storytop" default="" type="input"/>
+* Story right: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storyright" default="" type="input"/>
+* Story width: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storywidth" default="" type="input"/>
+
+
