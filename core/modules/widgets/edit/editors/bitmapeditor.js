@@ -21,7 +21,7 @@ var DOM_CANVAS = 0,
 	DOM_WIDTH = 1,
 	DOM_HEIGHT = 2;
 
-var BitmapEditor = function(editWidget,tiddlerTitle,fieldName) {
+var BitmapEditor = function(editWidget,tiddlerTitle,fieldName,indexName) {
 	this.editWidget = editWidget;
 	this.tiddlerTitle = tiddlerTitle;
 	this.fieldName = fieldName;

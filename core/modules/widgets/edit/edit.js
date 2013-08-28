@@ -27,13 +27,17 @@ var EditWidget = function(renderer) {
 EditWidget.prototype.generate = function() {
 	// Get parameters from our attributes
 	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
-	this.fieldName = this.renderer.getAttribute("field","text");
+	this.fieldName = this.renderer.getAttribute("field");
+	this.indexName = this.renderer.getAttribute("index");
+	if(!this.fieldName && !this.indexName) {
+		this.fieldName = "text";
+	}
 	// Choose the editor to use
 	// TODO: Tiddler field modules should be able to specify a field type from which the editor is derived
 	this.editorName = this.chooseEditor();
 	var Editor = this.editors[this.editorName];
 	// Instantiate the editor
-	this.editor = new Editor(this,this.tiddlerTitle,this.fieldName);
+	this.editor = new Editor(this,this.tiddlerTitle,this.fieldName,this.indexName);
 	// Ask the editor to create the widget element
 	this.editor.render();
 };
@@ -57,7 +61,7 @@ EditWidget.prototype.postRenderInDom = function() {
 
 EditWidget.prototype.refreshInDom = function(changedAttributes,changedTiddlers) {
 	// We'll completely regenerate ourselves if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.format || this.chooseEditor() !== this.editorName) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.format || this.chooseEditor() !== this.editorName) {
 		// Regenerate and rerender the widget and replace the existing DOM node
 		this.generate();
 		var oldDomNode = this.renderer.domNode,

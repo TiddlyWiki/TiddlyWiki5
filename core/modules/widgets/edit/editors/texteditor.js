@@ -14,36 +14,41 @@ A plain text editor
 
 var MIN_TEXT_AREA_HEIGHT = 100;
 
-var TextEditor = function(editWidget,tiddlerTitle,fieldName) {
+var TextEditor = function(editWidget,tiddlerTitle,fieldName,indexName) {
 	this.editWidget = editWidget;
 	this.tiddlerTitle = tiddlerTitle;
 	this.fieldName = fieldName;
+	this.indexName = indexName;
 };
 
 /*
 Get the tiddler being edited and current value
 */
 TextEditor.prototype.getEditInfo = function() {
-	// Get the current tiddler and the field name
 	var tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
 		value;
-	// If we've got a tiddler, the value to display is the field string value
-	if(tiddler) {
-		value = tiddler.getFieldString(this.fieldName);
-	} else {
-		// Otherwise, we need to construct a default value for the editor
-		switch(this.fieldName) {
-			case "text":
-				value = "Type the text for the tiddler '" + this.tiddlerTitle + "'";
-				break;
-			case "title":
-				value = this.tiddlerTitle;
-				break;
-			default:
-				value = "";
-				break;
+	if(this.fieldName) {
+		// Get the current tiddler and the field name
+		if(tiddler) {
+			// If we've got a tiddler, the value to display is the field string value
+			value = tiddler.getFieldString(this.fieldName);
+		} else {
+			// Otherwise, we need to construct a default value for the editor
+			switch(this.fieldName) {
+				case "text":
+					value = "Type the text for the tiddler '" + this.tiddlerTitle + "'";
+					break;
+				case "title":
+					value = this.tiddlerTitle;
+					break;
+				default:
+					value = "";
+					break;
+			}
+			value = this.editWidget.renderer.getAttribute("default",value);
 		}
-		value = this.editWidget.renderer.getAttribute("default",value);
+	} else {
+		value = this.editWidget.renderer.renderTree.wiki.extractTiddlerDataItem(this.tiddlerTitle,this.indexName,this.editWidget.renderer.getAttribute("default"));
 	}
 	return {tiddler: tiddler, value: value};
 };
@@ -149,15 +154,24 @@ TextEditor.prototype.handleInputEvent = function(event) {
 };
 
 TextEditor.prototype.saveChanges = function() {
-	var text = this.editWidget.children[0].domNode.value,
-		tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
-	if(!tiddler) {
-		tiddler = new $tw.Tiddler({title: this.tiddlerTitle});
-	}
-	if(text !== tiddler.fields[this.fieldName]) {
-		var update = {};
-		update[this.fieldName] = text;
-		this.editWidget.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
+	var text = this.editWidget.children[0].domNode.value
+	if(this.fieldName) {
+		var tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
+		if(!tiddler) {
+			tiddler = new $tw.Tiddler({title: this.tiddlerTitle});
+		}
+		var newValue = tiddler.getFieldString(this.fieldName);
+		if(text !== newValue) {
+			var update = {};
+			update[this.fieldName] = newValue;
+			this.editWidget.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
+		}
+	} else {
+		var data = this.editWidget.renderer.renderTree.wiki.getTiddlerData(this.tiddlerTitle,{});
+		if(data[this.indexName] !== text) {
+			data[this.indexName] = text;
+			this.editWidget.renderer.renderTree.wiki.setTiddlerData(this.tiddlerTitle,data);
+		}
 	}
 };
 
