@@ -1,5 +1,9 @@
-title: TiddlyWiki5 Static Site Generation
+created: 201308281902
+creator: JeremyRuston
+modified: 201308281902
+modifier: JeremyRuston
 tags: edition
+title: TiddlyWiki5 Static Site Generation
 
 TiddlyWiki5 can be used to generate a static HTML representation of a TiddlyWiki that doesn't need JavaScript.
 
@@ -14,4 +18,4 @@ The included `bld.sh` script includes these commands that are involved in genera
 --rendertiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 ```
-The first RenderTiddlerCommand saves the static version of the DefaulTiddlers, the second saves the stylesheet, and the final RenderTiddlersCommand generates the HTML representations of individual tiddlers.
+The first RenderTiddlerCommand saves the static version of the DefaultTiddlers, the second saves the stylesheet, and the final RenderTiddlersCommand generates the HTML representations of individual tiddlers.

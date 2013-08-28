@@ -1,6 +1,6 @@
 created: 201308252142
 creator: JeremyRuston
-modified: 201308252142
+modified: 201308281907
 modifier: JeremyRuston
 tags: dev
 title: TiddlyWikiFolders
@@ -21,7 +21,7 @@ Only the ''tiddlywiki.info'' file is required, the ''tiddlers'' and ''plugins'' 
 
 The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising the following fields:
 
-* ''plugins'' - an array of CorePlugins to be included in the wiki
+* ''plugins'' - an array of plugin names to be included in the wiki
 * ''doNotSave'' - an array of tiddler titles that should not be saved by the FileSystemAdaptorPlugin
 * ''includeWikis'' - an array of relative paths to external wiki folders to be included in the wiki
 
