@@ -1,0 +1,50 @@
+created: 201308291647
+creator: JeremyRuston
+modified: 201308291647
+modifier: JeremyRuston
+tags: concepts
+title: DataTiddlers
+
+Data tiddlers provide a way to access blocks of [[JSON]] data within the `text` field of a tiddler.
+
+//The implementation of data tiddlers is preliminary, with some intentional limitations.//
+
+! Data tiddler format
+
+A native data tiddler must have:
+
+* The ContentType field `type` set to `application/json`
+* Valid JSON data in the `text` field 
+
+For example, the [[history list|$:/HistoryList]] tiddler is a data tiddler.
+
+Other tiddler types with alternative formats can also be parsed to yield a block of data that behaves like a data tiddler.
+
+!! Tiddler dictionary format
+
+The tiddler dictionary format is an alternative syntax for data tiddlers:
+
+* The ContentType field `type` is set to `application/x-tiddler-dictionary`
+* The `text` field consists of one or more lines of the form `<name>:<value>`
+
+For example, the [[metrics of the Snow White theme|$:/themes/tiddlywiki/snowwhite/metrics]] are a tiddler dictionary.
+
+! Accessing data within data tiddlers
+
+Currently, it is only possible to access the top level properties of the data using TextReference syntax.
+
+For example, given a `application/json` tiddler containing:
+
+```
+{"a":"one","b":"two","c":"three"}
+```
+
+Or the equivalent tiddler dictionary of type `application/x-tiddler-dictionary`:
+
+```
+a:one
+b:two
+c:three
+```
+
+With either of those definitions `{{TiddlerTitle##b}}` would have the value `two`.
