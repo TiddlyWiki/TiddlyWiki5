@@ -42,8 +42,7 @@ Modal.prototype.display = function(title,options) {
 		modalFooter = document.createElement("div"),
 		modalFooterHelp = document.createElement("span"),
 		modalFooterButtons = document.createElement("span"),
-		tiddler = this.wiki.getTiddler(title),
-		d = duration + "ms";
+		tiddler = this.wiki.getTiddler(title);
 	// Don't do anything if the tiddler doesn't exist
 	if(!tiddler) {
 		return;
@@ -130,12 +129,12 @@ Modal.prototype.display = function(title,options) {
 			{transform: "translateY(" + window.innerHeight + "px)"}
 		]);
 		// Set up an event for the transition end
-		modalWrapper.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		window.setTimeout(function() {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
 				document.body.removeChild(wrapper);
 			}
-		},false);
+		},duration);
 		// Don't let anyone else handle the tw-close-tiddler message
 		event.stopPropagation();
 		return false;
@@ -152,7 +151,7 @@ Modal.prototype.display = function(title,options) {
 	document.body.appendChild(wrapper);
 	// Set up animation for the styles
 	$tw.utils.setStyle(modalBackdrop,[
-		{transition: "opacity " + d + " ease-out"}
+		{transition: "opacity " + duration + "ms ease-out"}
 	]);
 	$tw.utils.setStyle(modalWrapper,[
 		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out"}
