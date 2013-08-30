@@ -1,38 +1,41 @@
 created: 201308252133
 creator: JeremyRuston
-modified: 201308252133
+modified: 201308300902
 modifier: JeremyRuston
 tags: concepts
 title: TiddlerFields
 
 TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. The standard fields are:
 
-* `title` - The unique title of the tiddler
-* `modified` - The date of the last modification to the tiddler
-* `modifier` - The name of the last person to modify the tiddler
-* `created` - The date the tiddler was created
-* `creator` - The name of the person who created the tiddler
-* `tags` - A list of tags applied to the tiddler
-* `type` - The ContentType that should used to interpret the content of the tiddler
-* `list` - A list of tiddler titles
+|!Field Name |!Reference |!Description |
+|`title` |TitleField |{{$:/docs/fields/title}} |
+|`modified` |ModifiedField |{{$:/docs/fields/modified}} |
+|`modifier` |ModifierField |{{$:/docs/fields/modifier}} |
+|`created` |CreatedField |{{$:/docs/fields/created}} |
+|`creator` |CreatorField |{{$:/docs/fields/creator}} |
+|`tags` |TagsField |{{$:/docs/fields/tags}} |
+|`type` |TypeField |{{$:/docs/fields/type}} |
+|`list` |ListField |{{$:/docs/fields/list}} |
 
 Other fields used by the core are:
 
-* `color` - The colour associated with a tiddler (expressed as a valid CSS value like `#fea` or `rgb(100,100,100)`)
-* `description` - The description of a plugin
-* `draft.of` - For draft tiddlers, contains the title of the tiddler of which this is a draft
-* `draft.title` - For draft tiddlers, contains the proposed new title of the tiddler
-* `footer` - The footer for a modal dialogue (interpreted as WikiText)
-* `library` - Set to `yes` if the tiddler should be loaded in the browser as a `<script>` tag
-* `name` - Human-readable name of a plugin
-* `plugin-priority` - An integer giving the priority for loading plugin tiddlers
-* `plugin-type` - The type of a plugin (currently can be `plugin` or `theme`)
-* `source` - The original URL associated with a tiddler
-* `subtitle` - The subtitle for a modal dialogue (interpreted as WikiText)
+|!Field Name |!Reference |!Description |
+|`color` |ColorField |{{$:/docs/fields/color}} |
+|`description` |DescriptionField |{{$:/docs/fields/description}} |
+|`draft.of` |DraftOfField |{{$:/docs/fields/draft.of}} |
+|`draft.title` |DraftTitleField |{{$:/docs/fields/draft.title}} |
+|`footer` |FooterField |{{$:/docs/fields/footer}} |
+|`library` |LibraryField |{{$:/docs/fields/library}} |
+|`name` |NameField |{{$:/docs/fields/name}} |
+|`plugin-priority` |PluginPriorityField |{{$:/docs/fields/plugin-priority}} |
+|`plugin-type` |PluginTypeField |{{$:/docs/fields/plugin-type}} |
+|`source` |SourceField |{{$:/docs/fields/source}} |
+|`subtitle` |SubtitleField |{{$:/docs/fields/subtitle}} |
 
 The TiddlyWebAdaptor uses a few more fields:
 
-* `bag` - The name of the bag from which a tiddler came
-* `revision` - The revision of the tiddler held at the server
+|!Field Name |!Reference |!Description |
+|`bag` |BagField |{{$:/docs/fields/bag}} |
+|`revision` |RevisionField |{{$:/docs/fields/revision}} |
 
 See [[$:/ConfigInfo]] for details of the fields used in this wiki.

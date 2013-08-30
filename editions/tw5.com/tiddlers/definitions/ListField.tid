@@ -1,0 +1,12 @@
+created: 201308300925
+creator: JeremyRuston
+modified: 201308300927
+modifier: JeremyRuston
+tags: fields
+title: ListField
+
+The `list` [[field of a tiddler|TiddlerFields]] is an optional feature that can be used to help structure your content. It is defined as an ordered sequence of tiddler titles, and it can be used in several ways:
+
+* The `list` [[filter|TiddlerFilters]] selects the entries from a list
+* The `listed` [[filter|TiddlerFilters]] selects the tiddlers that list the selected tiddler(s)
+* The NavigatorWidget manipulates a StoryList tiddler containing a `list` field of the tiddlers that are displayed in the main story column

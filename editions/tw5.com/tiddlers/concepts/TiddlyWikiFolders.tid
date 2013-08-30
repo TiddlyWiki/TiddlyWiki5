@@ -1,6 +1,6 @@
 created: 201308252142
 creator: JeremyRuston
-modified: 201308281907
+modified: 201308300920
 modifier: JeremyRuston
 tags: dev
 title: TiddlyWikiFolders
@@ -11,13 +11,13 @@ As well as traditional single file wikis, TiddlyWiki5 [[under node.js|TiddlyWiki
 
 Wiki folders can contain the following files and folders:
 
+* ''tiddlywiki.info'' - JSON file containing metadata for the wiki
 * ''\tiddlers'' - folder containing tiddler files comprising the wiki
 * ''\plugins'' - folder containing [[plugin folders|PluginMechanism]] to be included in the wiki
-* ''tiddlywiki.info'' - JSON file containing metadata for the wiki. See below
 
 Only the ''tiddlywiki.info'' file is required, the ''tiddlers'' and ''plugins'' folders are optional. Any files and folders not listed above are ignored.
 
-! Content of `tiddlywiki.info`
+!! Content of `tiddlywiki.info` file
 
 The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising the following fields:
 
@@ -29,18 +29,55 @@ For example:
 
 ```
 {
-	"plugins": [
-		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
-	],
-	"doNotSave": [
-		"$:/StoryList",
-		"$:/HistoryList",
-		"$:/status/IsLoggedIn",
-		"$:/status/UserName"
-	],
-	"includeWikis": [
-		"../tw5.com"
-	]
+  "plugins": [
+    "tiddlywiki/tiddlyweb",
+    "tiddlywiki/filesystem"
+  ],
+  "doNotSave": [
+    "$:/StoryList",
+    "$:/HistoryList",
+    "$:/status/IsLoggedIn",
+    "$:/status/UserName"
+  ],
+  "includeWikis": [
+    "../tw5.com"
+  ]
 }
 ```
+
+!! Content of `tiddlers` folder
+
+All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles.
+
+Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` JSON file that overrides the default processing for that folder. The file format is illustrated with this example from the D3 plugin:
+
+```
+{
+  "tiddlers": [
+    {
+      "file": "d3.min.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/tiddlywiki/d3/d3.js",
+        "module-type": "library"
+      },
+      "prefix": "var d3;if($tw.browser){\n",
+      "suffix": "}\nexports.d3 = d3;\n"
+    },
+    {
+      "file": "cloud/d3.layout.cloud.js",
+      "fields": {
+        "type": "application/javascript",
+        "title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
+        "module-type": "library"
+      }
+    }
+  ]
+}
+```
+
+The JSON data consists of an object with a `tiddlers` property that contains an array of information about each tiddler to be loaded into the wiki. That information consists of:
+
+* `file`: the relative or absolute path to the file to include
+* `fields`: an object containing fields that override any provided in the tiddler file
+* `prefix` & `suffix`: (optional) specify strings to be prefixed and suffixed to the tiddler file text content

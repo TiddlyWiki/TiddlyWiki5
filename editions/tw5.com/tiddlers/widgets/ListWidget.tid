@@ -1,6 +1,6 @@
 created: 201308241419
 creator: JeremyRuston
-modified: 201308241419
+modified: 201308300837
 modifier: JeremyRuston
 tags: widget
 title: ListWidget
@@ -10,7 +10,7 @@ This is the tiddler called [[Blah-$title$]]
 \end
 ! Introduction
 
-The list widget displays a sequence of tiddlers that match a TiddlerFilter. It can be used for many purposes:
+The list widget displays a sequence of tiddlers that match a [[tiddler filter|TiddlerFilters]]. It can be used for many purposes:
 
 * Displaying custom lists of links, like in TiddlyWiki5's sidebar
 * Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"

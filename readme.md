@@ -109,11 +109,11 @@ http://0.0.0.0:8080</code> in a browser.</p><p>
 Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).</p><h3 class=''>
 <code>
 wbld.sh</code> builds <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
+TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
 TiddlyWeb</a></h3><p>
 This batch file builds and deploys the code for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5%20in%20the%20Sky%20for%20TiddlyWeb.html'>
 TiddlyWiki5 in the Sky for TiddlyWeb</a>. If you want to experiment with your own builds of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
+TiddlyWiki5</a> for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
 TiddlyWeb</a> you could use this batch file as a base.</p><h3 class=''>
 <code>
 2bld.sh</code> builds <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
@@ -201,7 +201,7 @@ ServerCommand</a></span></h3><div>
 <div class='tw-transclude'>
 <p>
 The server built in to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> is very simple. Although compatible with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
+TiddlyWiki5</a> is very simple. Although compatible with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
 TiddlyWeb</a> it doesn't support many of the features needed for robust Internet-facing usage - in particular, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> is an old-school wiki in the sense that it offers no authentication.</p><p>
 At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for <code>
