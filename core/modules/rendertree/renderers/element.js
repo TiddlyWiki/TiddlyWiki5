@@ -51,7 +51,8 @@ var ElementRenderer = function(renderTree,parentRenderer,parseTreeNode) {
 	}
 	// Select the namespace for the tag
 	var tagNameSpaces = {
-		svg: "http://www.w3.org/2000/svg"
+		svg: "http://www.w3.org/2000/svg",
+		math: "http://www.w3.org/1998/Math/MathML"
 	};
 	this.namespace = tagNameSpaces[this.parseTreeNode.tag];
 	if(this.namespace) {
