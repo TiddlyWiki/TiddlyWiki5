@@ -1,6 +1,6 @@
 created: 201308232038
 creator: JeremyRuston
-modified: 201308252219
+modified: 201308310847
 modifier: JeremyRuston
 tags: planning
 title: RoadMap
@@ -39,6 +39,7 @@ The following additional features are planned or under consideration for impleme
 * Minification of plugins (JS and CSS)
 * List editor with drag and drop
 * Selective/weighted searching by title, body and fields
+* Maths notation
 
 ! 5.0 Release
 
