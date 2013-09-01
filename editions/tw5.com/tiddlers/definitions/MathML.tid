@@ -2,8 +2,10 @@ created: 201309012131
 creator: JeremyRuston
 modified: 201309012131
 modifier: JeremyRuston
-tags: demo
+tags: demo definitions
 title: MathML
+
+MathML is a markup language for mathematical notation that can be used with HTML.
 
 If your browser supports it, MathML elements can be used in TiddlyWiki5 WikiText just like HTML.
 
