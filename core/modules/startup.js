@@ -117,11 +117,6 @@ exports.startup = function() {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
 				param: "$:/messages/SaveInstructions"
 			});
-		} else if($tw.wiki.countTiddlers() === 0){
-			// Otherwise, if give instructions if this is an empty TiddlyWiki
-			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
-				param: "$:/messages/GettingStarted"
-			});
 		}
 	} else {
 		// On the server, start a commander with the command line arguments
