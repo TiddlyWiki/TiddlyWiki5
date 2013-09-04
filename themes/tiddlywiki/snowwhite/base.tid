@@ -64,7 +64,7 @@ background-image: -ms-linear-gradient($gradient$);
 */
 
 html {
-	font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	font-family: {{$:/themes/tiddlywiki/snowwhite/settings##fontfamily}};
 }
 
 body {
