@@ -1,0 +1,8 @@
+title: SampleWizard2
+tags: demo
+subtitle: I'm another modal wizard
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>
+
+This is another modal wizard dialogue, stored in the tiddler SampleWizard2.
+
+You can <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">nest wizards</$button>.
