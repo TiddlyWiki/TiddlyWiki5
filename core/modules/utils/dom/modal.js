@@ -27,10 +27,12 @@ Options include:
 Modal.prototype.display = function(title,options) {
 	options = options || {};
 	var self = this,
-		duration = $tw.utils.getAnimationDuration();
-	// Up the modal count and adjust the body class
-	this.modalCount++;
-	this.adjustPageClass();
+		duration = $tw.utils.getAnimationDuration(),
+		tiddler = this.wiki.getTiddler(title);
+	// Don't do anything if the tiddler doesn't exist
+	if(!tiddler) {
+		return;
+	}
 	// Create the wrapper divs
 	var wrapper = document.createElement("div"),
 		modalBackdrop = document.createElement("div"),
@@ -41,12 +43,10 @@ Modal.prototype.display = function(title,options) {
 		modalLink = document.createElement("a"),
 		modalFooter = document.createElement("div"),
 		modalFooterHelp = document.createElement("span"),
-		modalFooterButtons = document.createElement("span"),
-		tiddler = this.wiki.getTiddler(title);
-	// Don't do anything if the tiddler doesn't exist
-	if(!tiddler) {
-		return;
-	}
+		modalFooterButtons = document.createElement("span");
+	// Up the modal count and adjust the body class
+	this.modalCount++;
+	this.adjustPageClass();
 	// Add classes
 	$tw.utils.addClass(wrapper,"modal-wrapper");
 	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
