@@ -176,7 +176,7 @@ WikiRenderTree.prototype.substituteParameters = function(macroDefinition,macroCa
 			}
 		}
 		// If not, use the next available anonymous macro call parameter
-		if(!paramValue && macroCallParseTreeNode.params.length > 0) {
+		if(!paramValue && nextAnonParameter < macroCallParseTreeNode.params.length) {
 			while(macroCallParseTreeNode.params[nextAnonParameter].name && nextAnonParameter < macroCallParseTreeNode.params.length-1) {
 				nextAnonParameter++;
 			}
