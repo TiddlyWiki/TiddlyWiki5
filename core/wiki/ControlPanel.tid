@@ -15,7 +15,6 @@ title: $:/ControlPanel
 
 ''Add plugins and tiddlers to your ~TiddlyWiki''
 
-:Go to our [[TiddlerMall]] for our growing collection of plugins, themes and more<br><br>
 :Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). <$import class="tw-drop-zone"/>
 
 ''Visual appearance''
