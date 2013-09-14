@@ -50,7 +50,6 @@ describe("Filter tests", function() {
 	wiki.addTiddler({
 		title: "one",
 		text: "This is the text of tiddler [[one]]",
-		tags: [],
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
 		modifier: "JohnDoe"});
 	// And some shadows
@@ -117,6 +116,11 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
 		expect(wiki.filterTiddlers("[is[current]tagging[]sort[title]]","one").join(",")).toBe("Tiddler Three,TiddlerOne");
+	});
+
+	it("should handle the untagged operator", function() {
+		expect(wiki.filterTiddlers("[untagged[]sort[title]]").join(",")).toBe("a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!untagged[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the links operator", function() {
