@@ -151,6 +151,12 @@ exports.pulseElement = function(element) {
 
 /*
 Attach specified event handlers to a DOM node
+domNode: where to attach the event handlers
+events: array of event handlers to be added (see below)
+Each entry in the events array is an object with these properties:
+handlerFunction: optional event handler function
+handlerObject: optional event handler object
+handlerMethod: optionally specifies object handler method name (defaults to `handleEvent`)
 */
 exports.addEventListeners = function(domNode,events) {
 	$tw.utils.each(events,function(eventInfo) {
