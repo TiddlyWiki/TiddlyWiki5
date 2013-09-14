@@ -1,6 +1,6 @@
 created: 201308221728
 creator: JeremyRuston
-modified: 201308252125
+modified: 201309102146
 modifier: JeremyRuston
 tags: introduction
 title: Features
@@ -21,4 +21,4 @@ title: Features
 ** Run the TiddlyWiki5 [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
 * Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]
 
-The deep internal changes mean that TiddlyWiki5 is not compatible with previous versions, using different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly in TiddlyWiki5.
+The deep internal changes mean that TiddlyWiki5 is not compatible with previous versions, using different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly in TiddlyWiki5. When asking or searching for help be sure to specify TiddlyWiki5 (or TW5).
