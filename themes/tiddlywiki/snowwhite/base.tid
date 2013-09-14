@@ -106,7 +106,9 @@ pre {
 
 table {
 	border: 1px solid #ddd;
-	width: 100%;
+	width: auto;
+	max-width: 100%;
+	caption-side: bottom;
 }
 
 table th, table td {
@@ -115,12 +117,21 @@ table th, table td {
 	border-left: 1px solid #ddd;
 }
 
+table thead tr td, table th {
+	background-color: #f0f0f0;
+	font-weight: bold;
+}
+
+table tfoot tr td {
+	background-color: #a8a8a8;
+}
+
 .tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
 	max-width: 100%;
 }
 
 embed {
-	width: 100%;
+	max-width: 100%;
 	height: 20em;
 }
 

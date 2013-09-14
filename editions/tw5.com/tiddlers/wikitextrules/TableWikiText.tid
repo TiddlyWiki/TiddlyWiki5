@@ -1,0 +1,76 @@
+created: 201309141321
+creator: JeremyRuston
+modified: 201309141355
+modifier: JeremyRuston
+tags: wikitextrule
+title: TableWikiText
+
+! Basics
+
+TiddlyWiki5 formats tables using vertical bar characters like so:
+
+```
+|!Cell1 |!Cell2 |
+|Cell3 |Cell3 |
+```
+
+Exclamation marks are used to indicate header cells. The example renders as:
+
+|!Cell1 |!Cell2 |
+|Cell3 |Cell3 |
+
+! Cell Alignment
+
+Table cell alignment is controlled by inserting space characters before and/or after the cell content. For example:
+
+```
+|Left aligned content |
+| Right aligned content|
+| Centred content |
+|+++ a very wide column so we can see the alignment +++|
+```
+
+The example renders as:
+
+|Left aligned content |
+| Right aligned content|
+| Centred content |
+|+++ a very wide column so we can see the alignment +++|
+
+! Cell Merging
+
+To merge a table cell with the one above, use the special cell text `~`. To merge a cell with the one to its left use the text `>`. For example:
+
+```
+|Cell1 |Cell2 |Cell3 |Cell4 |
+|Cell5 |Cell6 |Cell7 |>|
+|Cell5 |~|Cell7 |Cell8 |
+```
+
+Renders as:
+
+|Cell1 |Cell2 |Cell3 |Cell4 |
+|Cell5 |Cell6 |Cell7 |>|
+|Cell5 |~|Cell7 |Cell8 |
+
+! Table Classes, Captions, Headers and Footers
+
+Table CSS classes, captions, headers and footers can be specified as special pseudo-rows:
+
+```
+|myclass anotherClass|k
+|This is a caption |c
+|Cell1 |Cell2 |
+|Cell3 |Cell3 |
+|Header|Header|h
+|Footer|Footer|f
+```
+
+Renders as:
+
+|myclass anotherClass|k
+|This is a caption |c
+|Cell1 |Cell2 |
+|Cell3 |Cell3 |
+|Header|Header|h
+|Footer|Footer|f
