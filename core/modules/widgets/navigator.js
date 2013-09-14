@@ -187,28 +187,39 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 // Take a tiddler out of edit mode, saving the changes
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	this.getStoryList();
-	var storyTiddlerModified = false;
+	var storyTiddlerModified = false; // We have to special case saving the story tiddler itself
 	for(var t=0; t<this.storyList.length; t++) {
 		if(this.storyList[t] === event.tiddlerTitle) {
 			var tiddler = this.renderer.renderTree.wiki.getTiddler(event.tiddlerTitle);
-			if(tiddler.hasField("draft.title") && tiddler.fields["draft.title"]) {
-				// Save the draft tiddler as the real tiddler
-				this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(this.renderer.renderTree.wiki.getCreationFields(),tiddler,{
-					title: tiddler.fields["draft.title"],
-					"draft.title": undefined, 
-					"draft.of": undefined
-				},this.renderer.renderTree.wiki.getModificationFields()));
-				// Remove the draft tiddler
-				this.renderer.renderTree.wiki.deleteTiddler(event.tiddlerTitle);
-				// Remove the original tiddler if we're renaming it
-				if(tiddler.fields["draft.of"] !== tiddler.fields["draft.title"]) {
-					this.renderer.renderTree.wiki.deleteTiddler(tiddler.fields["draft.of"]);
-				}
-				// Make the story record point to the newly saved tiddler
-				this.storyList[t] = tiddler.fields["draft.title"];
-				// Check if we're modifying the story tiddler itself
-				if(tiddler.fields["draft.title"] === this.storyTitle) {
-					storyTiddlerModified = true;
+			if(tiddler) {
+				var draftTitle = tiddler.fields["draft.title"],
+					draftOf = tiddler.fields["draft.of"];
+				if(draftTitle) {
+					var isRename = draftOf !== draftTitle,
+						isConfirmed = true;
+					if(isRename && this.renderer.renderTree.wiki.tiddlerExists(draftTitle)) {
+						isConfirmed = confirm("Do you wish to overwrite the tiddler '" + draftTitle + "'?");
+					}
+					if(isConfirmed) {
+						// Save the draft tiddler as the real tiddler
+						this.renderer.renderTree.wiki.addTiddler(new $tw.Tiddler(this.renderer.renderTree.wiki.getCreationFields(),tiddler,{
+							title: draftTitle,
+							"draft.title": undefined, 
+							"draft.of": undefined
+						},this.renderer.renderTree.wiki.getModificationFields()));
+						// Remove the draft tiddler
+						this.renderer.renderTree.wiki.deleteTiddler(event.tiddlerTitle);
+						// Remove the original tiddler if we're renaming it
+						if(isRename) {
+							this.renderer.renderTree.wiki.deleteTiddler(draftOf);
+						}
+						// Make the story record point to the newly saved tiddler
+						this.storyList[t] = draftTitle;
+						// Check if we're modifying the story tiddler itself
+						if(draftTitle === this.storyTitle) {
+							storyTiddlerModified = true;
+						}
+					}
 				}
 			}
 		}
