@@ -3,7 +3,7 @@ tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-@media (min-width: 55em) {
+@media (min-width: 770px) {
 
 	.tw-page-container {
 		text-align: center;
@@ -11,8 +11,8 @@ tags: [[$:/tags/stylesheet]]
 
 	.story-river {
 		position: relative;
-		width: 55em;
-		padding: 3em;
+		width: 770px;
+		padding: 42px;
 		margin: 0 auto;
 		text-align: left;
 	}
@@ -21,6 +21,6 @@ tags: [[$:/tags/stylesheet]]
 		text-align: left;
 		left: 50%;
 		right: 0;
-		padding-left: 29.5em;
+		padding-left: 413px;
 	}
 }
