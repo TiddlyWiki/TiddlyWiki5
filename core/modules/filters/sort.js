@@ -18,7 +18,7 @@ Export our filter function
 exports.sort = function(source,operator,options) {
 	var results;
 	if($tw.utils.isArray(source)) {
-		results = source.slice(0);
+		results = source;
 	} else {
 		results = [];
 		$tw.utils.each(source,function(element,title) {
