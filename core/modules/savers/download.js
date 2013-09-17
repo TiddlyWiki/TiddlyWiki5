@@ -22,7 +22,12 @@ DownloadSaver.prototype.save = function(text) {
 	// Set up the link
 	var link = document.createElement("a");
 	link.setAttribute("target","_blank");
-	link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+	if(Blob != undefined) {
+		var blob = new Blob([encodeURIComponent(text)], {type: "text/html"});
+		link.setAttribute("href", URL.createObjectURL(blob));
+	} else {
+		link.setAttribute("href","data:text/html," + encodeURIComponent(text));
+	}
 	link.setAttribute("download","tiddlywiki.html");
 	document.body.appendChild(link);
 	link.click();
