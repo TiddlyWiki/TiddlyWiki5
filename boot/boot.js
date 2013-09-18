@@ -313,6 +313,7 @@ name `.` refers to the current directory
 */
 $tw.utils.resolvePath = function(sourcepath,rootpath) {
 	// If the source path starts with ./ or ../ then it is relative to the root
+	
 	if(sourcepath.substr(0,2) === "./" || sourcepath.substr(0,3) === "../" ) {
 		var src = sourcepath.split("/"),
 			root = rootpath.split("/");
@@ -332,7 +333,14 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 		return root.join("/");
 	} else {
 		// If it isn't relative, just return the path
-		return sourcepath;
+		if(rootpath) {
+			var root = rootpath.split("/");
+			// Remove the filename part of the root
+			root.splice(root.length-1,1);
+			return root.join('/')+'/'+sourcepath
+		} else {
+			return sourcepath;
+		}
 	}
 };
 
@@ -362,9 +370,9 @@ $tw.utils.registerFileType = function(type,encoding,extension) {
 Run code globally with specified context variables in scope
 */
 $tw.utils.evalGlobal = function(code,context,filename) {
-	var contextCopy = $tw.utils.extend({},context,{
+	var contextCopy = $tw.utils.extend({},context/*,{
 		exports: {}
-	});
+	}*/);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
 	$tw.utils.each(contextCopy,function(value,name) {
@@ -389,9 +397,9 @@ Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
 	var sandbox = $tw.utils.extend({},context);
-	$tw.utils.extend(sandbox,{
-		exports: {}		
-	});
+	//$tw.utils.extend(sandbox,{
+	//	exports: {}		
+	//});
 	vm.runInNewContext(code,sandbox,filename);
 	return sandbox.exports;
 };
@@ -540,12 +548,13 @@ $tw.utils.Crypto = function() {
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
 */
 $tw.modules.execute = function(moduleName,moduleRoot) {
-	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		moduleInfo = $tw.modules.titles[name],
-		tiddler = $tw.wiki.getTiddler(name),
+	var name = moduleName[0] == '.' ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
+		moduleInfo = $tw.modules.titles[name] || $tw.modules.titles[name+'.js'] || $tw.modules.titles[moduleName] || $tw.modules.titles[moduleName+'.js'] ,
+		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name+'.js') || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName+'.js') ,
+		_exports = {},
 		sandbox = {
 			module: moduleInfo,
-			exports: {},
+			exports: _exports,
 			console: console,
 			setInterval: setInterval,
 			clearInterval: clearInterval,
@@ -553,7 +562,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			clearTimeout: clearTimeout,
 			$tw: $tw,
 			require: function(title) {
-				return $tw.modules.execute(title,name);
+				return $tw.modules.execute(title, name);
 			}
 		};
 	if(!$tw.browser) {
@@ -562,12 +571,19 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		});
 	}
 	if(!moduleInfo) {
+		//we could not find the module on this path
+		//try to defer to browserify etc, or node
+		var deferredModule;
 		if($tw.browser) {
-			return $tw.utils.error("Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name);
-
+			if(window.require) {
+				try {
+					return window.require(moduleName)
+				} catch(e) {}
+			}
+			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;				
 		} else {
 			// If we don't have a module with that name, let node.js try to find it
-			return require(moduleName);
+			return require(moduleName)
 		}
 	}
 	// Execute the module if we haven't already done so
@@ -575,10 +591,17 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		try {
 			// Check the type of the definition
 			if(typeof moduleInfo.definition === "function") { // Function
-				moduleInfo.exports = {};
+				moduleInfo.exports = _exports;
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
-				moduleInfo.exports = $tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				var temp;
+				moduleInfo.exports = _exports;
+				temp = $tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				for(var k in temp) {
+					moduleInfo.exports[k] = temp[k]
+				}
+				//$tw.utils.extend(exports, temp)
+				//moduleInfo.exports = temp;
 			} else { // Object
 				moduleInfo.exports = moduleInfo.definition;
 			}
