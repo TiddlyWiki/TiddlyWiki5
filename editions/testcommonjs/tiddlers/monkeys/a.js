@@ -3,7 +3,7 @@ title: monkeys/a.js
 type: application/javascript
 module-type: library
 
-Missing test A
+Monkeys test A
 
 \*/
 
