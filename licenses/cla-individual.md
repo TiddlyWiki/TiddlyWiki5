@@ -12,7 +12,7 @@ This contributor agreement ("Agreement") documents the rights granted by contrib
 
 "CLA" means Contributor License Agreement (this document)
 
-"Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in .
+"Contribution" means any work of authorship that is Submitted by You to Us in which You own or assert ownership of the Copyright. If You do not own the Copyright in the entire work of authorship, please follow the instructions in https://github.com/Jermolene/TiddlyWiki5/blob/master/contributing.md.
 
 "Copyright" means all rights protecting works of authorship owned or controlled by You, including copyright, moral and neighboring rights, as appropriate, for the full term of their existence including any extensions by You.
 
@@ -45,17 +45,20 @@ As a condition on the grant of rights in Sections 2.1 and 2.2, We agree to licen
 
 In addition, We may use the following licenses for Media in the Contribution: Creative Commons Attribution 3.0 (including any right to adopt any future version of a license if permitted).
 
-### 2.4 Moral Rights. 
+### 2.4 Moral Rights.
 
 If moral rights apply to the Contribution, to the maximum extent permitted by law, You waive and agree not to assert such moral rights against Us or our successors in interest, or any of our licensees, either direct or indirect.
 
-### 2.5 Our Rights. 
+### 2.5 Our Rights.
+
 You acknowledge that We are not obligated to use Your Contribution as part of the Material and may decide to include any Contribution We consider appropriate.
 
 ### 2.6 Reservation of Rights.
+
 Any rights not expressly licensed under this section are expressly reserved by You.
 
 ### 2.7 3rd Party Libraries and Plugins
+
 We may use 3rd party libraries to create TiddlyWiki5 plugins. These libraries may have there own licenses. 3rd party software and licenses are not subject in this CLA, while TiddlyWiki5 plugins, that use these libraries are. 3rd party libraries may be included everywhere, especially in the following directories and there subdirectories: `plugins/` and `editions/`.
 
 3. Agreement
@@ -72,7 +75,7 @@ You confirm that:
 (d) You have followed the instructions in , if You do not own the Copyright in the entire work of authorship Submitted.
 
 4. Disclaimer
---------------
+-------------
 
 EXCEPT FOR THE EXPRESS WARRANTIES IN SECTION 3, THE CONTRIBUTION IS PROVIDED "AS IS". MORE PARTICULARLY, ALL EXPRESS OR IMPLIED WARRANTIES INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTY OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT ARE EXPRESSLY DISCLAIMED BY YOU TO US. TO THE EXTENT THAT ANY SUCH WARRANTIES CANNOT BE DISCLAIMED, SUCH WARRANTY IS LIMITED IN DURATION TO THE MINIMUM PERIOD PERMITTED BY LAW.
 
