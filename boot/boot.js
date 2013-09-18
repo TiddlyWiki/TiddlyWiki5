@@ -370,9 +370,7 @@ $tw.utils.registerFileType = function(type,encoding,extension) {
 Run code globally with specified context variables in scope
 */
 $tw.utils.evalGlobal = function(code,context,filename) {
-	var contextCopy = $tw.utils.extend({},context/*,{
-		exports: {}
-	}*/);
+	var contextCopy = $tw.utils.extend({},context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
 	$tw.utils.each(contextCopy,function(value,name) {
@@ -397,9 +395,6 @@ Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
 	var sandbox = $tw.utils.extend({},context);
-	//$tw.utils.extend(sandbox,{
-	//	exports: {}		
-	//});
 	vm.runInNewContext(code,sandbox,filename);
 	return sandbox.exports;
 };
@@ -594,14 +589,8 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.exports = _exports;
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
-				var temp;
 				moduleInfo.exports = _exports;
-				temp = $tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
-				for(var k in temp) {
-					moduleInfo.exports[k] = temp[k]
-				}
-				//$tw.utils.extend(exports, temp)
-				//moduleInfo.exports = temp;
+				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
 			} else { // Object
 				moduleInfo.exports = moduleInfo.definition;
 			}
