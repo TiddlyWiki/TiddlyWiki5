@@ -46,3 +46,7 @@ git push origin sign-cla
 **Go to your github repo and create a pull request.**
 
 Thank you!
+
+#### Attribution
+
+The CLA documents used for this project where created using [Harmony Project Templates](http://www.harmonyagreements.org). "HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "HA-CLA-E-LIST Version 1.0" for "CLA-entity"

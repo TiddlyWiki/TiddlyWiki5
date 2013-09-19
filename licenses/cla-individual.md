@@ -97,15 +97,15 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABL
 
 6.5 If any provision of this Agreement is found void and unenforceable, such provision will be replaced to the extent possible with a provision that comes closest to the meaning of the original provision and which is enforceable. The terms and conditions set forth in this Agreement shall apply notwithstanding any failure of essential purpose of this Agreement or any limited remedy to the maximum extent possible under law.
 
-6.6 This document text was created using [Harmony (HA-CLA-I-LIST) Version 1.0](http://www.harmonyagreements.org)
-
 List of Contributors
 ====================
 
-The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Individual Contributor License Agreement" as of the date beside his or her name.
+The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Individual Contributor License Agreement" as of **the date** beside his or her **real name** and **github account name**.
+
+eg: Jeremy Ruston, Jermolene, 2011/11/22
 
 Contributors
 ------------
 
-Mario Pietsch, 2013/09/18
+Mario Pietsch, pmario, 2013/09/19
 
