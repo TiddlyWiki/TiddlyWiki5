@@ -59,7 +59,7 @@ Any rights not expressly licensed under this section are expressly reserved by Y
 
 ### 2.7 3rd Party Libraries and Plugins
 
-We may use 3rd party libraries to create TiddlyWiki5 plugins. These libraries may have there own licenses. 3rd party software and licenses are not subject in this CLA, while TiddlyWiki5 plugins, that use these libraries are. 3rd party libraries may be included everywhere, especially in the following directories and there subdirectories: `plugins/` and `editions/`.
+We may use 3rd party libraries to create TiddlyWiki5 plugins. These libraries may have their own licenses. 3rd party software and licenses are not subject in this CLA, while TiddlyWiki5 plugins that use these libraries are. 3rd party libraries may be included everywhere, especially in the following directories and their subdirectories: `plugins/` and `editions/`.
 
 3. Agreement
 ------------
