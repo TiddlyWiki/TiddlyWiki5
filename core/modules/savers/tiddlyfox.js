@@ -21,7 +21,7 @@ TiddlyFoxSaver.prototype.save = function(text,callback) {
 		// Get the pathname of this document
 		var pathname = document.location.pathname;
 		// Test for a Windows path of the form /x:/blah/blah
-		if(/^\/[A-Z]\:\//.test(pathname)) {
+		if(/^\/[A-Z]\:\//i.test(pathname)) {
 			// Remove the leading slash
 			pathname = pathname.substr(1);
 			// Convert slashes to backslashes
