@@ -1,7 +1,7 @@
 TiddlyWiki5 Entity Contributor License Agreement
 ================================================
 
-Thank you for your interest in contributing to TiddlyWiki5 ("We" or "Us").
+Thank you for your interest in contributing to TiddlyWiki5. TiddlyWiki is owned by the UnaMesa Association ("We" or "Us").
 
 This contributor agreement ("Agreement") documents the rights granted by contributors to Us. To make this document effective, please sign it and send it to Us by electronic submission, following the instructions in `contributing.md`, which is in the root directory of the project repository. This is a legally binding document, so please read it carefully before agreeing to it. The Agreement may cover more than one software project managed by Us.
 
