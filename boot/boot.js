@@ -228,7 +228,7 @@ $tw.utils.pad = function(value,length) {
 	return s;
 };
 
-// Convert a date into YYYYMMDDHHMM format
+// Convert a date into UTC YYYYMMDDHHMM format
 $tw.utils.stringifyDate = function(value) {
 	return value.getUTCFullYear() +
 			$tw.utils.pad(value.getUTCMonth() + 1) +
@@ -237,7 +237,7 @@ $tw.utils.stringifyDate = function(value) {
 			$tw.utils.pad(value.getUTCMinutes());
 };
 
-// Parse a date from a YYYYMMDDHHMMSSMMM format string
+// Parse a date from a UTC YYYYMMDDHHMMSSMMM format string
 $tw.utils.parseDate = function(value) {
 	if(typeof value === "string") {
 		return new Date(Date.UTC(parseInt(value.substr(0,4),10),
