@@ -25,6 +25,8 @@ Like other OpenSource projects, TiddlyWiki5 needs a signed ContributorLicenseAgr
 * For individuals use: [[CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
 * For entities use: [[CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
 
+//This is a first pass at a CLA for TiddlyWiki. Please let us know if we missed something important. If we do have to make essential changes to the CLA, there is a possibility that all contributors will need to sign it again//
+
 !!! How to sign the CLA
 
 ```
@@ -34,7 +36,7 @@ git checkout -b sign-cla
 ```
 
 ''Add your name and the date to cla-individual.md or cla-entity.md''. Date format (YYYY/MM/DD)
-eg: `Jermy Ruston - 2011/11/22`
+eg: `Jeremy Ruston, @Jermolene, 2011/11/22`
 
 ```
 git add .
@@ -43,10 +45,6 @@ git push origin sign-cla
 ```
 
 ''Go to your github repo and create a pull request.''
-
-!!!! Remark for Alpha and Beta Sontributors
-
-This is the first CLA, TiddlyWiki uses. So if we did miss something important, please let us know. If we make essential changes to the CLA, all contributors will need to sign it again. So we should get it right as soon as possible.
 
 ''Thank you!''
 

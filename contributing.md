@@ -27,7 +27,10 @@ ContributorLicenseAgreement</a> from individual contributors before contribution
 For individuals use: <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md'>
 CLA-individual</a></li><li>
 For entities use: <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md'>
-CLA-entity</a></li></ul><h3 class=''>
+CLA-entity</a></li></ul><p>
+<em>
+This is a first pass at a CLA for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
+TiddlyWiki</a>. Please let us know if we missed something important. If we do have to make essential changes to the CLA, there is a possibility that all contributors will need to sign it again</em></p><h3 class=''>
 How to sign the CLA</h3><pre>
 git clone https://github.com/Jermolene/TiddlyWiki5.git TiddlyWiki5
 cd TiddlyWiki5
@@ -35,15 +38,12 @@ git checkout -b sign-cla</pre><p>
 <strong>
 Add your name and the date to cla-individual.md or cla-entity.md</strong>. Date format (YYYY/MM/DD)
 eg: <code>
-Jermy Ruston - 2011/11/22</code></p><pre>
+Jeremy Ruston, @Jermolene, 2011/11/22</code></p><pre>
 git add .
 git commit -m &quot;sign contributor license agreement&quot;
 git push origin sign-cla</pre><p>
 <strong>
-Go to your github repo and create a pull request.</strong></p><h4 class=''>
-Remark for Alpha and Beta Sontributors</h4><p>
-This is the first CLA, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
-TiddlyWiki</a> uses. So if we did miss something important, please let us know. If we make essential changes to the CLA, all contributors will need to sign it again. So we should get it right as soon as possible.</p><p>
+Go to your github repo and create a pull request.</strong></p><p>
 <strong>
 Thank you!</strong></p><h4 class=''>
 Attribution</h4><p>
