@@ -158,7 +158,7 @@ describe("Filter tests", function() {
 	});
 
 	it("should handle the eachday operator", function() {
-		expect(wiki.filterTiddlers("[eachday[modified]sort[title]]").join(",")).toBe("a fourth tiddler,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[eachday[modified]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the sameday operator", function() {
