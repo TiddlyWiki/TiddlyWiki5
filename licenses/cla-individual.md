@@ -100,12 +100,12 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU BE LIABL
 List of Contributors
 ====================
 
-The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Individual Contributor License Agreement" as of **the date** beside his or her **real name** and **github account name**.
+The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Individual Contributor License Agreement" as of **the date** beside his or her **real name** and **GitHub account name**.
 
-eg: Jeremy Ruston, Jermolene, 2011/11/22
+eg: Jeremy Ruston, @Jermolene, 2011/11/22
 
 Contributors
 ------------
 
-Mario Pietsch, pmario, 2013/09/21
+Mario Pietsch, @pmario, 2013/09/21
 

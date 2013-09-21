@@ -106,10 +106,11 @@ TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL YOU OR US BE
 List of Contributors
 ====================
 
-The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Entity Contributor License Agreement" as of **the date** beside his or her **real name**, the **github account name** and the **Entity name**.
+The below-signed are contributors to a code repository that is part of the project named "TiddlyWiki5". Each below-signed contributor has read, understand and agrees to the terms above in the section within this document entitled "TiddlyWiki5 Entity Contributor License Agreement" as of **the date** beside his or her **real name**, **GitHub account name** and **Entity name**.
 
-eg: Jeremy Ruston, Jermolene for Federatial Limited, 2011/11/22
+eg: Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
 
 Contributors
 ------------
 
+Jeremy Ruston, @Jermolene for Federatial Limited, 2011/11/22
