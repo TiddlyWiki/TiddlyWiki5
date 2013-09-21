@@ -19,11 +19,17 @@ var DownloadSaver = function(wiki) {
 };
 
 DownloadSaver.prototype.save = function(text) {
+	// Get the current filename
+	var filename = "tiddlywiki.html",
+		p = document.location.pathname.lastIndexOf("/");
+	if(p !== -1) {
+		filename = document.location.pathname.substr(p+1);
+	}
 	// Set up the link
 	var link = document.createElement("a");
 	link.setAttribute("target","_blank");
 	link.setAttribute("href","data:text/html," + encodeURIComponent(text));
-	link.setAttribute("download","tiddlywiki.html");
+	link.setAttribute("download",filename);
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);

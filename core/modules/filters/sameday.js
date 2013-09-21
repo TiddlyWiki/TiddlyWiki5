@@ -16,12 +16,17 @@ Filter operator that selects tiddlers with a modified date field on the same day
 Export our filter function
 */
 exports.sameday = function(source,operator,options) {
-	var results = [];
+	var results = [],
+		isSameDay = function(dateField,dateString) {
+			var date1 = (new Date(dateField)).setHours(0,0,0,0),
+				date2 = (new Date($tw.utils.parseDate(dateString))).setHours(0,0,0,0);
+			return date1 === date2;
+		};
 	// Function to check an individual title
 	function checkTiddler(title) {
 		var tiddler = options.wiki.getTiddler(title);
 		if(tiddler) {
-			var match = tiddler.getFieldString("modified").substr(0,8) === operator.operand.substr(0,8);
+			var match = isSameDay(tiddler.fields.modified,operator.operand);
 			if(operator.prefix === "!") {
 				match = !match;
 			}

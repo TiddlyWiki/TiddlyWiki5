@@ -1,6 +1,6 @@
 created: 201308232038
 creator: JeremyRuston
-modified: 201309141821
+modified: 201309181617
 modifier: JeremyRuston
 tags: planning
 title: RoadMap
@@ -26,6 +26,7 @@ The following additional features are planned or under consideration for impleme
 * Tiddler renaming
 * Rich link tooltips, incorporating a preview
 * Keyboard shortcuts
+* Keyboard macro expansion in the text editor
 * Proper use of ARIA roles
 * Simpler upgrading to new core versions
 * Import wizard allowing individual tiddlers to be selected for import
