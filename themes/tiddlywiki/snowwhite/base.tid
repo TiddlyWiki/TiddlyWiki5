@@ -289,6 +289,10 @@ a.tw-tiddlylink-external {
 	<<border-radius 8px>>
 }
 
+.tw-untagged-label {
+	background-color: #999;
+}
+
 .tw-tag-label svg {
 	height: 1em;
 	width: 1em;
