@@ -6,7 +6,7 @@ TiddlyWiki5 welcomes contributions to its code and documentation via [[GitHub|ht
 
 !! Bug Reports
 
-From a programmers perspective, a bug report that just says "it doesn't work" is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:
+From the perspective of a programmer, a bug report that just says "it doesn't work" is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:
 
 * A descriptive title
 * A summary

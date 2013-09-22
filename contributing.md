@@ -7,7 +7,7 @@ TiddlyWiki5</a></h1><div class='tw-tiddler'>
 TiddlyWiki5</a> welcomes contributions to its code and documentation via <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5'>
 GitHub</a>. Please take a moment to read these notes to help make the process as smooth as possible.</p><h2 class=''>
 Bug Reports</h2><p>
-From a programmers perspective, a bug report that just says &quot;it doesn't work&quot; is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:</p><ul>
+From the perspective of a programmer, a bug report that just says &quot;it doesn't work&quot; is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:</p><ul>
 <li>
 A descriptive title</li><li>
 A summary</li><li>
