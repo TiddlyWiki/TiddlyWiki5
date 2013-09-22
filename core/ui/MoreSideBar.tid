@@ -8,6 +8,8 @@ title: $:/core/ui/MoreSideBar
 
 <$button type="set" set="$:/state/moreSideBarTabSet" setTo="tagsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tags</$button>
 
+<$button type="set" set="$:/state/moreSideBarTabSet" setTo="untaggedTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Untagged</$button>
+
 <$button type="set" set="$:/state/moreSideBarTabSet" setTo="missingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Missing</$button>
 
 <$button type="set" set="$:/state/moreSideBarTabSet" setTo="draftsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Drafts</$button>
@@ -31,6 +33,9 @@ title: $:/core/ui/MoreSideBar
 <$list filter="[tags[]sort[title]]" itemClass="tw-menu-list-item">
 <$transclude title="$:/core/ui/TagTemplate"/> <small class="tw-menu-list-count"><$count filter="[is[current]tagging[]]"/></small>
 </$list>
+</$reveal>
+<$reveal type="match" state="$:/state/moreSideBarTabSet" text="untaggedTab" qualifyTiddlerTitles="yes">
+<$list filter="[untagged[]!is[system]] -[tags[]] +[sort[title]]" itemClass="tw-menu-list-item"/>
 </$reveal>
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="missingTab" qualifyTiddlerTitles="yes">
 <$list filter="[is[missing]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/MissingTemplate"/>

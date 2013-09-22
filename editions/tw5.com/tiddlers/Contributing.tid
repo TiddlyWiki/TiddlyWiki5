@@ -1,12 +1,12 @@
-modified: 201307020736
+modified: 201309210933
 title: Contributing
 tags: introduction
 
-TiddlyWiki5 welcomes contributions to its code and documentation [[via GitHub|https://github.com/Jermolene/TiddlyWiki5]]. Please take a moment to read these notes to help make the process as smooth as possible.
+TiddlyWiki5 welcomes contributions to its code and documentation via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]. Please take a moment to read these notes to help make the process as smooth as possible.
 
-! Bug Reports
+!! Bug Reports
 
-From a programmers perspective, a bug report that just says "it doesn't work" is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:
+From the perspective of a programmer, a bug report that just says "it doesn't work" is highly frustrating. For effective debugging, we need as much information as possible. At a minimum, please ensure that you include:
 
 * A descriptive title
 * A summary
@@ -16,11 +16,39 @@ From a programmers perspective, a bug report that just says "it doesn't work" is
 
 There's a lot of good material on the web about bug reports:
 
-http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
-http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
+* http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
+* http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
 
-! Pull Requests
+!! Pull Requests
 
-Like other OpenSource projects, TiddlyWiki5 needs a signed ContributorLicenseAgreement from individual contributors before contributions of code can be accepted.
+Like other OpenSource projects, TiddlyWiki5 needs a signed ContributorLicenseAgreement from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
 
-//As of July 2013, TiddlyWiki5 does not yet have the necessary infrastructure to permit CLAs to be signed and retained.//
+* For individuals use: [[CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
+* For entities use: [[CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
+
+//This is a first pass at a CLA for TiddlyWiki. Please let us know if we missed something important. If we do have to make essential changes to the CLA, there is a possibility that all contributors will need to sign it again//
+
+!!! How to sign the CLA
+
+```
+git clone https://github.com/Jermolene/TiddlyWiki5.git TiddlyWiki5
+cd TiddlyWiki5
+git checkout -b sign-cla
+```
+
+''Add your name and the date to cla-individual.md or cla-entity.md''. Date format (YYYY/MM/DD)
+eg: `Jeremy Ruston, @Jermolene, 2011/11/22`
+
+```
+git add .
+git commit -m "sign contributor license agreement"
+git push origin sign-cla
+```
+
+''Go to your github repo and create a pull request.''
+
+''Thank you!''
+
+!!!! Attribution
+
+The CLA documents used for this project where created using [[Harmony Project Templates|http://www.harmonyagreements.org]]. "~HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "~HA-CLA-E-LIST Version 1.0" for "CLA-entity"

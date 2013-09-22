@@ -50,7 +50,6 @@ describe("Filter tests", function() {
 	wiki.addTiddler({
 		title: "one",
 		text: "This is the text of tiddler [[one]]",
-		tags: [],
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
 		modifier: "JohnDoe"});
 	// And some shadows
@@ -119,6 +118,11 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[is[current]tagging[]sort[title]]","one").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
+	it("should handle the untagged operator", function() {
+		expect(wiki.filterTiddlers("[untagged[]sort[title]]").join(",")).toBe("a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[!untagged[]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three,TiddlerOne");
+	});
+
 	it("should handle the links operator", function() {
 		expect(wiki.filterTiddlers("[!is[shadow]links[]sort[title]]").join(",")).toBe("a fourth tiddler,one,Tiddler Three,TiddlerSix,TiddlerTwo,TiddlerZero");
 		expect(wiki.filterTiddlers("[is[shadow]links[]sort[title]]").join(",")).toBe("TiddlerOne");
@@ -154,7 +158,7 @@ describe("Filter tests", function() {
 	});
 
 	it("should handle the eachday operator", function() {
-		expect(wiki.filterTiddlers("[eachday[modified]sort[title]]").join(",")).toBe("a fourth tiddler,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[eachday[modified]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the sameday operator", function() {

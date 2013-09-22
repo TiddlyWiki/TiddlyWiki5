@@ -1,6 +1,6 @@
 created: 201308270800
 creator: JeremyRuston
-modified: 201308300906
+modified: 201309141606
 modifier: JeremyRuston
 tags: concepts
 title: TiddlerFilters
@@ -44,6 +44,7 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''{field}'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
 * ''tags'': selects the tags on the currently selected tiddlers
 * ''tagging'': selects the tiddlers tagged with the currently selected tiddlers
+* ''untagged'': selects the any of the selected tiddlers that do not have at least one tag
 * ''links'': selects the outgoing links on the currently selected tiddlers
 * ''backlinks'': selects the tiddlers that link to the currently selected tiddlers
 * ''list'': selects the tiddlers listed in a specified [[TiddlerList|TiddlerLists]]
