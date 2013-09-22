@@ -154,7 +154,7 @@ describe("Filter tests", function() {
   	});
 
   	it("should handle the previous operator", function() {
-    		expect(wiki.filterTiddlers("[[Tiddler Three]previous[iddlerSeventh]]").join(",")).toBe("TiddlerOne");
+    		expect(wiki.filterTiddlers("[[Tiddler Three]previous[TiddlerSeventh]]").join(",")).toBe("TiddlerOne");
     		expect(wiki.filterTiddlers("[[TiddlerOne]previous[TiddlerSeventh]]").join(",")).toBe("");
   	});
 
