@@ -48,6 +48,8 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''links'': selects the outgoing links on the currently selected tiddlers
 * ''backlinks'': selects the tiddlers that link to the currently selected tiddlers
 * ''list'': selects the tiddlers listed in a specified [[TiddlerList|TiddlerLists]]
+* ''next'': selects the next item in a TiddlerList after the current tiddler
+* ''previous'': selects the previous item in a TiddlerList before the current tiddler
 * ''listed'': selects the TiddlerLists that include the current tiddler
 * ''each'': selects one tiddler for each discrete value of the specified field
 * ''eachday'': selects one tiddler for each discrete day in the specified date field
