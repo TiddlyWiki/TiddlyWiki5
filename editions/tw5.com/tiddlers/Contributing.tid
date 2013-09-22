@@ -1,4 +1,4 @@
-modified: 201309191633
+modified: 201309210933
 title: Contributing
 tags: introduction
 
@@ -20,7 +20,7 @@ http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report http://www
 
 !! Pull Requests
 
-Like other OpenSource projects, TiddlyWiki5 needs a signed ContributorLicenseAgreement from individual contributors before contributions of code can be accepted.
+Like other OpenSource projects, TiddlyWiki5 needs a signed ContributorLicenseAgreement from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
 
 * For individuals use: [[CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
 * For entities use: [[CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]

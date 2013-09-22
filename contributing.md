@@ -22,7 +22,9 @@ Pull Requests</h2><p>
 Like other <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/OpenSource.html'>
 OpenSource</a> projects, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> needs a signed <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/ContributorLicenseAgreement.html'>
-ContributorLicenseAgreement</a> from individual contributors before contributions of code can be accepted.</p><ul>
+ContributorLicenseAgreement</a> from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/UnaMesa.html'>
+UnaMesa</a> Association (the legal entity that owns <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
+TiddlyWiki</a> on behalf of the community).</p><ul>
 <li>
 For individuals use: <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md'>
 CLA-individual</a></li><li>
