@@ -14,10 +14,12 @@ A summary</li><li>
 Steps to reproduce</li><li>
 Expected behaviour</li><li>
 Context (OS, browser etc.)</li></ul><p>
-There's a lot of good material on the web about bug reports:</p><p>
+There's a lot of good material on the web about bug reports:</p><ul>
+<li>
 <a class='tw-tiddlylink tw-tiddlylink-external' href='http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report'>
-http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report</a> <a class='tw-tiddlylink tw-tiddlylink-external' href='http://www.chiark.greenend.org.uk/~sgtatham/bugs.html'>
-http://www.chiark.greenend.org.uk/~sgtatham/bugs.html</a></p><h2 class=''>
+http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report</a></li><li>
+<a class='tw-tiddlylink tw-tiddlylink-external' href='http://www.chiark.greenend.org.uk/~sgtatham/bugs.html'>
+http://www.chiark.greenend.org.uk/~sgtatham/bugs.html</a></li></ul><h2 class=''>
 Pull Requests</h2><p>
 Like other <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/OpenSource.html'>
 OpenSource</a> projects, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>

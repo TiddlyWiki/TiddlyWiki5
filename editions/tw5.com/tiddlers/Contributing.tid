@@ -16,7 +16,8 @@ From a programmers perspective, a bug report that just says "it doesn't work" is
 
 There's a lot of good material on the web about bug reports:
 
-http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
+* http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
+* http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
 
 !! Pull Requests
 
