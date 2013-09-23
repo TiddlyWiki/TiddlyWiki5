@@ -235,8 +235,8 @@ exports.getTiddlers = function(sortField,excludeTag) {
 		}
 	}
 	tiddlers.sort(function(a,b) {
-		var aa = a.fields[sortField].toLowerCase() || "",
-			bb = b.fields[sortField].toLowerCase() || "";
+		var aa = (a.fields[sortField] || "").toLowerCase(),
+			bb = (b.fields[sortField] || "").toLowerCase();
 		if(aa < bb) {
 			return -1;
 		} else {
