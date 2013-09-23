@@ -1,6 +1,6 @@
 created: 201308232038
 creator: JeremyRuston
-modified: 201309181617
+modified: 201309232017
 modifier: JeremyRuston
 tags: planning
 title: RoadMap
@@ -42,6 +42,7 @@ The following additional features are planned or under consideration for impleme
 * Selective/weighted searching by title, body and fields
 * Maths notation
 * A "safe mode" to disable customisations
+* Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
 
 ! 5.0 Release
 
