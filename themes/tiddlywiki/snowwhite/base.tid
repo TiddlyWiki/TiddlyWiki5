@@ -444,7 +444,7 @@ a.tw-tiddlylink-external {
 	}
 }
 
-@media (max-width: 77px) {
+@media (max-width: 770px) {
 	.tw-tiddler-frame {
 		padding: 14px 14px 14px 14px;
 	}
@@ -454,7 +454,7 @@ a.tw-tiddlylink-external {
 	}
 }
 
-@media (min-width: 77px) {
+@media (min-width: 770px) {
 	.tw-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 	}
