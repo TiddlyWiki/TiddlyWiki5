@@ -183,7 +183,7 @@ describe("Widget module", function() {
 
 	it("should deal with the setvariable widget", function() {
 		var wiki = new $tw.Wiki();
-		// Add a tiddler
+		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
 			{title: "TiddlerTwo", text: "<$transclude title={{TiddlerThree}}/>"},
@@ -232,6 +232,25 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>\n<div class='My something something,  or other thing'>\nContent</div></p>");
+	});
+
+	it("should deal with the list widget", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "Jolly Old World"},
+			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
+			{title: "TiddlerThree", text: "TiddlerOne"},
+			{title: "TiddlerFour", text: "TiddlerTwo"}
+		]);
+		// Construct the widget node
+		var text = "<$list><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\nTiddlerTwoJolly Old WorldTiddlerOneWorldly Old Jelly</p>");
+
 	});
 
 });
