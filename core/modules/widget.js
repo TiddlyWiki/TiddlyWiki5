@@ -166,6 +166,13 @@ Widget.prototype.computeAttributes = function() {
 };
 
 /*
+Check for the presence of an attribute
+*/
+Widget.prototype.hasAttribute = function(name) {
+	return $tw.utils.hop(this.attributes,name);
+};
+
+/*
 Get the value of an attribute
 */
 Widget.prototype.getAttribute = function(name,defaultText) {
@@ -349,6 +356,78 @@ TextNodeWidget.prototype.removeChildDomNodes = function() {
 
 exports.text = TextNodeWidget;
 
+var ViewWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
+/*
+Inherit from the base widget class
+*/
+ViewWidget.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+ViewWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	this.execute();
+	var textNode = this.document.createTextNode(this.text);
+	parent.insertBefore(textNode,nextSibling);
+	this.domNodes.push(textNode);
+};
+
+/*
+Compute the internal state of the widget
+*/
+ViewWidget.prototype.execute = function() {
+	// Get parameters from our attributes
+	this.viewTitle = this.getAttribute("title",this.getVariable("tiddlerTitle"));
+	this.viewField = this.getAttribute("field","text");
+	this.viewIndex = this.getAttribute("index");
+	this.viewFormat = this.getAttribute("format","text");
+	// Get the value to display
+	var tiddler = this.wiki.getTiddler(this.viewTitle);
+	if(tiddler) {
+		if(this.viewField === "text") {
+			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
+			this.text = this.wiki.getTiddlerText(this.viewTitle);
+		} else {
+			this.text = tiddler.fields[this.viewField];
+		}
+	} else { // Use a special value if the tiddler is missing
+		switch(this.viewField) {
+			case "title":
+				this.text = this.getVariable("tiddlerTitle");
+				break;
+			case "modified":
+			case "created":
+				this.text = new Date();
+				break;
+			default:
+				this.text = "";
+				break;
+		}
+	}
+};
+
+/*
+Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+*/
+ViewWidget.prototype.refresh = function(changedTiddlers) {
+	return false;
+};
+
+/*
+Remove any DOM nodes created by this widget
+*/
+ViewWidget.prototype.removeChildDomNodes = function() {
+	$tw.utils.each(this.domNodes,function(domNode) {
+		domNode.parentNode.removeChild(domNode);
+	});
+};
+
+exports.view = ViewWidget;
+
 var ElementWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
@@ -511,5 +590,103 @@ SetVariableWidget.prototype.refresh = function(changedTiddlers) {
 };
 
 exports.setvariable = SetVariableWidget;
+
+/*
+The list widget creates list element sub-widgets that reach back into the list widget for their configuration
+*/
+
+var ListWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
+/*
+Inherit from the base widget class
+*/
+ListWidget.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+ListWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
+	this.renderChildren(parent,nextSibling);
+};
+
+/*
+Compute the internal state of the widget
+*/
+ListWidget.prototype.execute = function() {
+	// Get our attributes
+	this.preserveCurrentTiddler = this.getAttribute("preserveCurrentTiddler","no") === "yes";
+	// Compose the list elements
+	var list = this.getTiddlerList(),
+		members = [],
+		self = this;
+	$tw.utils.each(list,function(title,index) {
+		members.push({type: "listitem", itemTitle: title, children: self.parseTreeNode.children})
+	});
+	// Construct the child widgets
+	this.makeChildWidgets(members);
+};
+
+ListWidget.prototype.getTiddlerList = function() {
+	var defaultFilter = "[!is[system]sort[title]]";
+	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this.getVariable("tiddlerTitle"));
+};
+
+/*
+Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+*/
+ListWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.name || changedAttributes.value) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return this.refreshChildren(changedTiddlers);		
+	}
+};
+
+exports.list = ListWidget;
+
+var ListItemWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+};
+
+/*
+Inherit from the base widget class
+*/
+ListItemWidget.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+ListItemWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
+	this.renderChildren(parent,nextSibling);
+};
+
+/*
+Compute the internal state of the widget
+*/
+ListItemWidget.prototype.execute = function() {
+	// Set the current list item title
+	this.setVariable("listItem",this.parseTreeNode.itemTitle);
+	// Construct the child widgets
+	this.makeChildWidgets();
+};
+
+/*
+Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+*/
+ListItemWidget.prototype.refresh = function(changedTiddlers) {
+	return this.refreshChildren(changedTiddlers);
+};
+
+exports.listitem = ListItemWidget;
 
 })();
