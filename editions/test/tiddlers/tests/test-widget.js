@@ -240,8 +240,8 @@ describe("Widget module", function() {
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
 			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
-			{title: "TiddlerThree", text: "TiddlerOne"},
-			{title: "TiddlerFour", text: "TiddlerTwo"}
+			{title: "TiddlerThree", text: "Golly Gosh"},
+			{title: "TiddlerFour", text: "Lemon Squash"}
 		]);
 		// Construct the widget node
 		var text = "<$list><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
@@ -249,8 +249,63 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nTiddlerTwoJolly Old WorldTiddlerOneWorldly Old Jelly</p>");
+		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		// Add another tiddler
+		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
+			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
+		});
+	});
 
+	it("should deal with the list widget and empty lists", function() {
+		var wiki = new $tw.Wiki();
+		// Construct the widget node
+		var text = "<$list emptyMessage='nothing'><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\nnothing</p>");
+	});
+
+	it("should refresh lists that become empty", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "Jolly Old World"},
+			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
+			{title: "TiddlerThree", text: "Golly Gosh"},
+			{title: "TiddlerFour", text: "Lemon Squash"}
+		]);
+		// Construct the widget node
+		var text = "<$list emptyMessage='nothing'><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		// Get rid of the tiddlers
+		wiki.deleteTiddler("TiddlerOne");
+		wiki.deleteTiddler("TiddlerTwo");
+		wiki.deleteTiddler("TiddlerThree");
+		wiki.deleteTiddler("TiddlerFour");
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nnothing</p>");
+		});
 	});
 
 });
