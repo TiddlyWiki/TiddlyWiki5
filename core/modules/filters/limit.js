@@ -28,7 +28,7 @@ exports.limit = function(source,operator,options) {
 	// Slice the array if necessary
 	var limit = Math.min(source.length,parseInt(operator.operand,10));
 	if(operator.prefix === "!") {
-		results = source.slice(source.length - limit,limit);
+		results = source.slice(source.length - limit);
 	} else {
 		results = source.slice(0,limit);
 	}
