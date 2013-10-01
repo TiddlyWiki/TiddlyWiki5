@@ -141,6 +141,7 @@ describe("Filter tests", function() {
 	it("should handle the limit operator", function() {
 		expect(wiki.filterTiddlers("[!is[system]sort[title]limit[2]]").join(",")).toBe("a fourth tiddler,one");
 		expect(wiki.filterTiddlers("[prefix[Tid]sort[title]limit[1]]").join(",")).toBe("Tiddler Three");
+		expect(wiki.filterTiddlers("[prefix[Tid]sort[title]!limit[1]]").join(",")).toBe("TiddlerOne");
 	});
 
 	it("should handle the list operator", function() {
