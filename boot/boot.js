@@ -336,8 +336,8 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 		if(rootpath) {
 			var root = rootpath.split("/");
 			// Remove the filename part of the root
-			root.splice(root.length-1,1);
-			return root.join('/')+'/'+sourcepath
+			root.splice(root.length - 1, 1);
+			return root.join("/") + "/" + sourcepath;
 		} else {
 			return sourcepath;
 		}
@@ -543,9 +543,9 @@ $tw.utils.Crypto = function() {
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
 */
 $tw.modules.execute = function(moduleName,moduleRoot) {
-	var name = moduleName[0] == '.' ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		moduleInfo = $tw.modules.titles[name] || $tw.modules.titles[name+'.js'] || $tw.modules.titles[moduleName] || $tw.modules.titles[moduleName+'.js'] ,
-		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name+'.js') || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName+'.js') ,
+	var name = moduleName[0] === "." ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
+		moduleInfo = $tw.modules.titles[name] || $tw.modules.titles[name + ".js"] || $tw.modules.titles[moduleName] || $tw.modules.titles[moduleName + ".js"] ,
+		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name + ".js") || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName + ".js") ,
 		_exports = {},
 		sandbox = {
 			module: moduleInfo,
@@ -566,19 +566,19 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		});
 	}
 	if(!moduleInfo) {
-		//we could not find the module on this path
-		//try to defer to browserify etc, or node
+		// We could not find the module on this path
+		// Try to defer to browserify etc, or node
 		var deferredModule;
 		if($tw.browser) {
 			if(window.require) {
 				try {
-					return window.require(moduleName)
+					return window.require(moduleName);
 				} catch(e) {}
 			}
 			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;				
 		} else {
 			// If we don't have a module with that name, let node.js try to find it
-			return require(moduleName)
+			return require(moduleName);
 		}
 	}
 	// Execute the module if we haven't already done so
