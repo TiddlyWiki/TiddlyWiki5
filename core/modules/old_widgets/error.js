@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/error.js
+title: $:/core/modules/old_widgets/error.js
 type: application/javascript
 module-type: widget
 

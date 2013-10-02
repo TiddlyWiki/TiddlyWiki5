@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/video.js
+title: $:/core/modules/old_widgets/video.js
 type: application/javascript
 module-type: widget
 

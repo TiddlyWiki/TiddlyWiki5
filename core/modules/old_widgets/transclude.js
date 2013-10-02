@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/transclude.js
+title: $:/core/modules/old_widgets/transclude.js
 type: application/javascript
 module-type: widget
 

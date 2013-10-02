@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/version.js
+title: $:/core/modules/old_widgets/version.js
 type: application/javascript
 module-type: widget
 

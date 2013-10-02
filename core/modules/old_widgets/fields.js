@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/fields.js
+title: $:/core/modules/old_widgets/fields.js
 type: application/javascript
 module-type: widget
 

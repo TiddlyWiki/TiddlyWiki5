@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/datauri.js
+title: $:/core/modules/old_widgets/datauri.js
 type: application/javascript
 module-type: widget
 

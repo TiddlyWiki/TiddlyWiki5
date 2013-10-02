@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/tiddler.js
+title: $:/core/modules/old_widgets/tiddler.js
 type: application/javascript
 module-type: widget
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/setstyle.js
+title: $:/core/modules/old_widgets/setstyle.js
 type: application/javascript
 module-type: widget
 
