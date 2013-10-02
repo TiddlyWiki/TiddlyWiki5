@@ -173,6 +173,10 @@ ListWidget.prototype.insertListItem = function(index,title) {
 Remvoe the specified list item
 */
 ListWidget.prototype.removeListItem = function(index) {
+	// Remove the DOM nodes owned by this item
+	this.children[index].removeChildDomNodes();
+	// Remove the child widget
+	this.children.splice(index,1);
 };
 
 exports.list = ListWidget;

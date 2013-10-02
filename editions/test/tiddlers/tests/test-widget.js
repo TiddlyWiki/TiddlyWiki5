@@ -266,6 +266,21 @@ describe("Widget module", function() {
 			expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
 			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
 		});
+		// Remove a tiddler
+		wiki.deleteTiddler("TiddlerThree");
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerTwo</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
+		});
 	});
 
 	it("should deal with the list widget and empty lists", function() {
