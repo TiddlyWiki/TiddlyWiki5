@@ -315,7 +315,7 @@ if(index === -1) {
 	// Go back and look for later siblings of our parent if it has the same parent dom node
 	parent = parent.parentWidget;
 	if(parent && parent.parentWidget && parent.parentWidget.parentDomNode === this.parentDomNode) {
-		index = parent.parentWidget.children.indexOf(parent)
+		index = parent.parentWidget.children.indexOf(parent);
 		return parent.findNextSibling(index);
 	}
 	return null;
