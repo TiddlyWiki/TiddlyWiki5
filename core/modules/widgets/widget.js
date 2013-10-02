@@ -46,6 +46,7 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.attributes = {};
 	this.children = [];
 	this.domNodes = [];
+	this.eventListeners = {};
 	// Hashmap of the widget classes
 	if(!this.widgetClasses) {
 		Widget.prototype.widgetClasses = $tw.modules.applyMethods("new_widget");
@@ -231,6 +232,42 @@ Widget.prototype.renderChildren = function(parent,nextSibling) {
 };
 
 /*
+Add a list of event listeners from an array [{type:,listener:},...]
+*/
+Widget.prototype.addEventListeners = function(listeners) {
+	var self = this;
+	$tw.utils.each(listeners,function(listenerInfo) {
+		self.eventListeners[listenerInfo.type] = listenerInfo.listener;		
+	});
+};
+
+/*
+Add an event listener
+*/
+Widget.prototype.addEventListener = function(type,listener) {
+	this.eventListeners[type] = listener;
+};
+
+/*
+Dispatch an event to a widget. If the widget doesn't handle the event then it is also dispatched to the parent widget
+*/
+Widget.prototype.dispatchEvent = function(event) {
+	// Dispatch the event if this widget handles it
+	var listener = this.eventListeners[event.type];
+	if(listener) {
+		// Don't propogate the event if the listener returned false
+		if(!listener(event)) {
+			return false;
+		}
+	}
+	// Dispatch the event to the parent widget
+	if(this.parentWidget) {
+		return this.parentWidget.dispatchEvent(event);
+	}
+	return true;
+};
+
+/*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 Widget.prototype.refresh = function(changedTiddlers) {
@@ -243,8 +280,7 @@ Rebuild a previously rendered widget
 Widget.prototype.refreshSelf = function() {
 	var nextSibling = this.findNextSibling();
 	this.removeChildDomNodes();
-	this.execute();
-	this.renderChildren(this.parentDomNode,nextSibling);
+	this.render(this.parentDomNode,nextSibling);
 };
 
 /*
