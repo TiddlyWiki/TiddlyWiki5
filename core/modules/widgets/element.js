@@ -65,6 +65,7 @@ ElementWidget.prototype.removeChildDomNodes = function() {
 	$tw.utils.each(this.domNodes,function(domNode) {
 		domNode.parentNode.removeChild(domNode);
 	});
+	this.domNodes = [];
 };
 
 exports.element = ElementWidget;
