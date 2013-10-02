@@ -73,7 +73,13 @@ ViewWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ViewWidget.prototype.refresh = function(changedTiddlers) {
-	return false;
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.title || changedAttributes.field || changedAttributes.index || changedTiddlers[this.viewTitle]) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return false;	
+	}
 };
 
 /*

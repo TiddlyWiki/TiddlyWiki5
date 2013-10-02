@@ -37,8 +37,13 @@ describe("Widget module", function() {
 		return wrapper;
 	}
 
-	function refreshWidgetNode(widgetNode,wrapper) {
-		var changedTiddlers = {TiddlerOne:true};
+	function refreshWidgetNode(widgetNode,wrapper,changes) {
+		var changedTiddlers = {};
+		if(changes) {
+			$tw.utils.each(changes,function(title) {
+				changedTiddlers[title] = true;
+			});
+		}
 		widgetNode.refresh(changedTiddlers,wrapper,null);
 // console.log(require("util").inspect(wrapper,{depth: 8}));
 	}
@@ -124,7 +129,7 @@ describe("Widget module", function() {
 		// Change the transcluded tiddler
 		wiki.addTiddler({title: "TiddlerOne", text: "jumps over the lazy dog"});
 		// Refresh
-		refreshWidgetNode(widgetNode,wrapper);
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
 		describe("should refresh", function() {
 			// Test the refreshing
 			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='jumps over the lazy dog'>\n and the content of a DIV<div>\n and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
@@ -181,6 +186,37 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>\nMy Jolly Old World is Jolly</p>");
 	});
 
+	it("should render the view widget", function() {
+		var wiki = new $tw.Wiki();
+		// Add a tiddler
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "Jolly Old World"}
+		]);
+		// Construct the widget node
+		var text = "<$view title='TiddlerOne'/>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\nJolly Old World</p>");
+		// Test the sequence numbers in the DOM
+		expect(wrapper.sequenceNumber).toBe(0);
+		expect(wrapper.children[0].sequenceNumber).toBe(1);
+		expect(wrapper.children[0].children[0].sequenceNumber).toBe(2);
+		// Change the transcluded tiddler
+		wiki.addTiddler({title: "TiddlerOne", text: "World-wide Jelly"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nWorld-wide Jelly</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(3);
+		});
+	});
+
 	it("should deal with the setvariable widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
@@ -200,7 +236,7 @@ describe("Widget module", function() {
 		// Change the transcluded tiddler
 		wiki.addTiddler({title: "TiddlerFour", text: "TiddlerOne"});
 		// Refresh
-		refreshWidgetNode(widgetNode,wrapper);
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerFour"]);
 		describe("should refresh", function() {
 			// Test the refreshing
 			expect(wrapper.innerHTML).toBe("<p>\nMy Jolly Old World is Jolly</p>");
@@ -253,7 +289,7 @@ describe("Widget module", function() {
 		// Add another tiddler
 		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
 		// Refresh
-		refreshWidgetNode(widgetNode,wrapper);
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
 		describe("should refresh", function() {
 			// Test the refreshing
 			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
@@ -269,7 +305,7 @@ describe("Widget module", function() {
 		// Remove a tiddler
 		wiki.deleteTiddler("TiddlerThree");
 		// Refresh
-		refreshWidgetNode(widgetNode,wrapper);
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		describe("should refresh", function() {
 			// Test the refreshing
 			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerTwo</p>");
@@ -316,7 +352,7 @@ describe("Widget module", function() {
 		wiki.deleteTiddler("TiddlerThree");
 		wiki.deleteTiddler("TiddlerFour");
 		// Refresh
-		refreshWidgetNode(widgetNode,wrapper);
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne","TiddlerTwo","TiddlerThree","TiddlerFour"]);
 		describe("should refresh", function() {
 			// Test the refreshing
 			expect(wrapper.innerHTML).toBe("<p>\nnothing</p>");
