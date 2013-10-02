@@ -317,6 +317,22 @@ describe("Widget module", function() {
 			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
 			expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
 		});
+		// Add it back a tiddler
+		wiki.addTiddler({title: "TiddlerThree", text: "Something"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(6);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(7);
+			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
+		});
 	});
 
 	it("should deal with the list widget and empty lists", function() {
