@@ -356,7 +356,7 @@ Register file type information
 $tw.utils.registerFileType = function(type,encoding,extension) {
 	$tw.config.fileExtensionInfo[extension] = {type: type};
 	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension};
-}
+};
 
 /*
 Run code globally with specified context variables in scope
