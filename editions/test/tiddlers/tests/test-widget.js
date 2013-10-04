@@ -280,7 +280,7 @@ describe("Widget module", function() {
 			{title: "TiddlerFour", text: "Lemon Squash"}
 		]);
 		// Construct the widget node
-		var text = "<$list><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
+		var text = "<$list><$view field='title'/></$list>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -335,10 +335,29 @@ describe("Widget module", function() {
 		});
 	});
 
+	it("should deal with the list widget and external templates", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "$:/myTemplate", text: "<$tiddler title=<<listItem>>><$view field='title'/></$tiddler>"},
+			{title: "TiddlerOne", text: "Jolly Old World"},
+			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
+			{title: "TiddlerThree", text: "Golly Gosh"},
+			{title: "TiddlerFour", text: "Lemon Squash"}
+		]);
+		// Construct the widget node
+		var text = "<$list template='$:/myTemplate'></$list>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+	});
+
 	it("should deal with the list widget and empty lists", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node
-		var text = "<$list emptyMessage='nothing'><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
+		var text = "<$list emptyMessage='nothing'><$view field='title'/></$list>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -356,7 +375,7 @@ describe("Widget module", function() {
 			{title: "TiddlerFour", text: "Lemon Squash"}
 		]);
 		// Construct the widget node
-		var text = "<$list emptyMessage='nothing'><$setvariable name='tiddlerTitle' value=<<listItem>>><$view field='title'/></$setvariable></$list>";
+		var text = "<$list emptyMessage='nothing'><$view field='title'/></$list>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
