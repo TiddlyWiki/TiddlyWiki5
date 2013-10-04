@@ -24,6 +24,8 @@ last dispatched. Each entry is a hashmap containing two fields:
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/widgets/widget.js");
+
 var USER_NAME_TITLE = "$:/status/UserName";
 
 /*
@@ -545,6 +547,10 @@ exports.getTiddlerList = function(title) {
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
+
+// Temporarily disable caching so that tweakParseTreeNode() works
+return initializer();
+
 	this.caches = this.caches || {};
 	var caches = this.caches[title];
 	if(caches && caches[cacheName]) {
@@ -693,6 +699,23 @@ exports.renderTiddler = function(outputType,title,context) {
 	renderTree.execute();
 	var container = $tw.document.createElement("div");
 	renderTree.renderInDom(container)
+	return outputType === "text/html" ? container.innerHTML : container.textContent;
+};
+
+/*
+Parse text from a tiddler and render it into another format
+	outputType: content type for the output
+	title: title of the tiddler to be rendered
+*/
+exports.new_renderTiddler = function(outputType,title,context) {
+	var parser = $tw.wiki.new_parseTiddler(title),
+		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
+		widgetNode = new widget.widget(parseTreeNode,{
+			wiki: this,
+			document: $tw.document
+		});
+	var container = $tw.document.createElement("div");
+	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
 
