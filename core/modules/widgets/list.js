@@ -42,6 +42,8 @@ Compute the internal state of the widget
 */
 ListWidget.prototype.execute = function() {
 	// Get our attributes
+	this.template = this.getAttribute("template");
+	this.editTemplate = this.getAttribute("editTemplate");
 	this.preserveCurrentTiddler = this.getAttribute("preserveCurrentTiddler","no") === "yes";
 	// Compose the list elements
 	this.list = this.getTiddlerList();
@@ -52,7 +54,7 @@ ListWidget.prototype.execute = function() {
 		members = this.getEmptyMessage();
 	} else {
 		$tw.utils.each(this.list,function(title,index) {
-			members.push({type: "listitem", itemTitle: title, children: self.parseTreeNode.children});
+			members.push(self.makeItemTemplate(title));
 		});
 	}
 	// Construct the child widgets
@@ -72,6 +74,40 @@ ListWidget.prototype.getEmptyMessage = function() {
 	} else {
 		return [];
 	}
+};
+
+/*
+Compose the template for a list item
+*/
+ListWidget.prototype.makeItemTemplate = function(title) {
+	// Check if the tiddler is a draft
+	var tiddler = this.wiki.getTiddler(title),
+		isDraft = tiddler && tiddler.hasField("draft.of"),
+		template = this.template,
+		templateTree;
+	if(isDraft && this.editTemplate) {
+		template = this.editTemplate;
+	}
+	// Compose the transclusion of the template
+	if(this.hasAttribute("hackTemplate")) {
+		templateTree = [{type: "transclude", attributes: {title: {type: "string", value: title}}}];
+	} else {
+		if(template) {
+			templateTree = [{type: "transclude", attributes: {title: {type: "string", value: template}}}];
+		} else {
+			if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
+				templateTree = this.parseTreeNode.children;
+			} else {
+				// Default template is a link to the title
+				templateTree = [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
+						{type: "text", text: title}
+				]}];
+			}
+		}
+		templateTree = [{type: "tiddler", attributes: {title: {type: "string", value: title}}, children: templateTree}]
+	}
+	// Return the list item
+	return {type: "listitem", itemTitle: title, children: templateTree};
 };
 
 /*
@@ -161,7 +197,7 @@ ListWidget.prototype.findListItem = function(startIndex,title) {
 Insert a new list item at the specified index
 */
 ListWidget.prototype.insertListItem = function(index,title) {
-	var newItem = this.makeChildWidget({type: "listitem", itemTitle: title, children: this.parseTreeNode.children});
+	var newItem = this.makeChildWidget(this.makeItemTemplate(title));
 	newItem.parentDomNode = this.parentDomNode; // Hack to enable findNextSibling() to work
 	this.children.splice(index,0,newItem);
 	var nextSibling = newItem.findNextSibling();
