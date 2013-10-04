@@ -214,6 +214,10 @@ Construct the widget object for a parse tree node
 */
 Widget.prototype.makeChildWidget = function(parseTreeNode) {
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
+	if(!WidgetClass) {
+		WidgetClass = this.widgetClasses["text"];
+		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
+	}
 	return new WidgetClass(parseTreeNode,{
 		wiki: this.wiki,
 		variables: {},
