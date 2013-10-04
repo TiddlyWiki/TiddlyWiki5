@@ -84,6 +84,15 @@ TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 	// Do nothing
 };
 
+Object.defineProperty(TW_Element.prototype, "className", {
+	get: function() {
+		return this.attributes["class"] || "";
+	},
+    set: function(value) {
+    	this.attributes["class"] = value;
+    }
+});
+
 Object.defineProperty(TW_Element.prototype, "outerHTML", {
     get: function() {
 		var output = [],attr,a,v;
