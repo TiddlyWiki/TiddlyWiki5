@@ -1,9 +1,9 @@
 /*\
 title: $:/core/modules/widgets/fields.js
 type: application/javascript
-module-type: widget
+module-type: new_widget
 
-The fields widget displays the fields of a tiddler through a text substitution template.
+View widget
 
 \*/
 (function(){
@@ -12,21 +12,40 @@ The fields widget displays the fields of a tiddler through a text substitution t
 /*global $tw: false */
 "use strict";
 
-var FieldsWidget = function(renderer) {
-	// Save state
-	this.renderer = renderer;
-	// Generate child nodes
-	this.generate();
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
+
+var FieldsWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
 };
 
-FieldsWidget.prototype.generate = function() {
+/*
+Inherit from the base widget class
+*/
+FieldsWidget.prototype = new Widget();
+
+/*
+Render this widget into the DOM
+*/
+FieldsWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
+	var textNode = this.document.createTextNode(this.text);
+	parent.insertBefore(textNode,nextSibling);
+	this.domNodes.push(textNode);
+};
+
+/*
+Compute the internal state of the widget
+*/
+FieldsWidget.prototype.execute = function() {
 	// Get parameters from our attributes
-	this.tiddlerTitle = this.renderer.getAttribute("tiddler",this.renderer.tiddlerTitle);
-	this.template = this.renderer.getAttribute("template");
-	this.exclude = this.renderer.getAttribute("exclude");
-	this.stripTitlePrefix = this.renderer.getAttribute("stripTitlePrefix","no") === "yes";
-	// Get the tiddler we're displaying
-	var tiddler = this.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle);
+	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("tiddlerTitle"));
+	this.template = this.getAttribute("template");
+	this.exclude = this.getAttribute("exclude");
+	this.stripTitlePrefix = this.getAttribute("stripTitlePrefix","no") === "yes";
+	// Get the value to display
+	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
 	// Get the exclusion list
 	var exclude;
 	if(this.exclude) {
@@ -63,30 +82,30 @@ FieldsWidget.prototype.generate = function() {
 			}
 		}
 	}
-	// Set the element
-	this.tag = "pre";
-	this.attributes = {
-		"class": "tw-fields"
-	};
-	// Set up the attributes for the wrapper element
-	var classes = [];
-	if(this.renderer.hasAttribute("class")) {
-		$tw.utils.pushTop(classes,this.renderer.getAttribute("class").split(" "));
+	this.text = text.join("");
+};
+
+/*
+Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
+*/
+FieldsWidget.prototype.refresh = function(changedTiddlers) {
+	var changedAttributes = this.computeAttributes();
+	if(changedAttributes.tiddler || changedAttributes.template || changedAttributes.exclude || changedAttributes.stripTitlePrefix || changedTiddlers[this.tiddlerTitle]) {
+		this.refreshSelf();
+		return true;
+	} else {
+		return false;	
 	}
-	if(classes.length > 0) {
-		this.attributes["class"] = classes.join(" ");
-	}
-	if(this.renderer.hasAttribute("style")) {
-		this.attributes.style = this.renderer.getAttribute("style");
-	}
-	if(this.renderer.hasAttribute("tooltip")) {
-		this.attributes.title = this.renderer.getAttribute("tooltip");
-	}
-	// Create the renderers for the wrapper and the children
-	this.children = this.renderer.renderTree.createRenderers(this.renderer,[{
-		type: "text",
-		text: text.join("")
-	}]);
+};
+
+/*
+Remove any DOM nodes created by this widget
+*/
+FieldsWidget.prototype.removeChildDomNodes = function() {
+	$tw.utils.each(this.domNodes,function(domNode) {
+		domNode.parentNode.removeChild(domNode);
+	});
+	this.domNodes = [];
 };
 
 exports.fields = FieldsWidget;

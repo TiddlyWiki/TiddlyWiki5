@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/fieldmangler.js
+title: $:/core/modules/old_widgets/fieldmangler.js
 type: application/javascript
 module-type: widget
 

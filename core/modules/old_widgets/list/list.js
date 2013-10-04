@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/list/list.js
+title: $:/core/modules/old_widgets/list/list.js
 type: application/javascript
 module-type: widget
 

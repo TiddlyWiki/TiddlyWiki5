@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/widgets/tiddler.js
+title: $:/core/modules/widgets/setvariable.js
 type: application/javascript
 module-type: new_widget
 
-Tiddler widget
+Setvariable widget
 
 \*/
 (function(){
@@ -14,19 +14,19 @@ Tiddler widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var TiddlerWidget = function(parseTreeNode,options) {
+var SetVariableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-TiddlerWidget.prototype = new Widget();
+SetVariableWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-TiddlerWidget.prototype.render = function(parent,nextSibling) {
+SetVariableWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -36,11 +36,12 @@ TiddlerWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-TiddlerWidget.prototype.execute = function() {
+SetVariableWidget.prototype.execute = function() {
 	// Get our parameters
-	this.tiddlerTitle = this.getAttribute("title","");
+	this.setName = this.getAttribute("name","tiddlerTitle");
+	this.setValue = this.getAttribute("value");
 	// Set context variable
-	this.setVariable("tiddlerTitle",this.tiddlerTitle);
+	this.setVariable(this.setName,this.setValue);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -48,7 +49,7 @@ TiddlerWidget.prototype.execute = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-TiddlerWidget.prototype.refresh = function(changedTiddlers) {
+SetVariableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.name || changedAttributes.value) {
 		this.refreshSelf();
@@ -58,6 +59,6 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.tiddler = TiddlerWidget;
+exports.setvariable = SetVariableWidget;
 
 })();

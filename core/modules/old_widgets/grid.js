@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/grid.js
+title: $:/core/modules/old_widgets/grid.js
 type: application/javascript
 module-type: widget
 

@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/count.js
+title: $:/core/modules/old_widgets/count.js
 type: application/javascript
 module-type: widget
 

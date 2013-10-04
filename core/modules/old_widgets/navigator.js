@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/navigator.js
+title: $:/core/modules/old_widgets/navigator.js
 type: application/javascript
 module-type: widget
 
