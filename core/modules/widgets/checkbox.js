@@ -11,7 +11,7 @@ Implements the checkbox widget.
 <$checkbox tiddler="HelloThere" tag="red"/>
 
 <$checkbox tag="done">
-<$view title/>
+<$view field="title" format="link"/>
 </$checkbox>
 ```
 
