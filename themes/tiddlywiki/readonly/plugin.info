@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/readonly",
+	"name": "ReadOnly",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Theme for removing editing features",
+	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
+}
