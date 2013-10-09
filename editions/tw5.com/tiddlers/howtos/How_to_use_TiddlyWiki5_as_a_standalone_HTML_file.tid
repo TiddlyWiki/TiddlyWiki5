@@ -1,6 +1,6 @@
 created: 201308220803
 creator: JeremyRuston
-modified: 201308220803
+modified: 201310092150
 modifier: JeremyRuston
 tags: howto
 title: How to use TiddlyWiki5 as a standalone HTML file
@@ -8,7 +8,7 @@ title: How to use TiddlyWiki5 as a standalone HTML file
 ! On desktop browsers
 
 # Right-click on this link to an empty TiddlyWiki5 file and select "Save Link" to save it to your hard drive:
-#* http://five.tiddlywiki.com/empty
+#* http://five.tiddlywiki.com/empty.html
 # Open the file in your browser
 # Make some changes to it. For example:
 #* Create new tiddlers by clicking the new tiddler "+" icon in the sidebar
