@@ -44,29 +44,60 @@ ViewWidget.prototype.execute = function() {
 	this.viewField = this.getAttribute("field","text");
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");
+	switch(this.viewFormat) {
+		case "wikified":
+			this.text = this.getValueAsWikified();
+			break;
+		case "htmlwikified":
+			this.text = this.getValueAsHtmlWikified();
+			break;
+		case "htmlencoded":
+			this.text = this.getValueAsHtmlEncoded();
+			break;
+		default: // "text"
+			this.text = this.getValueAsText();
+			break;
+	}
+};
+
+/*
+The various formatter functions are baked into this widget for the moment. Eventually they will be replaced by macro functions
+*/
+
+ViewWidget.prototype.getValueAsText = function() {
 	// Get the value to display
-	var tiddler = this.wiki.getTiddler(this.viewTitle);
+	var text,
+		tiddler = this.wiki.getTiddler(this.viewTitle);
 	if(tiddler) {
 		if(this.viewField === "text") {
 			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
-			this.text = this.wiki.getTiddlerText(this.viewTitle);
+			text = this.wiki.getTiddlerText(this.viewTitle);
 		} else {
-			this.text = tiddler.fields[this.viewField];
+			text = tiddler.fields[this.viewField];
 		}
 	} else { // Use a special value if the tiddler is missing
 		switch(this.viewField) {
 			case "title":
-				this.text = this.getVariable("tiddlerTitle");
+				text = this.getVariable("tiddlerTitle");
 				break;
 			case "modified":
 			case "created":
-				this.text = new Date();
+				text = new Date();
 				break;
 			default:
-				this.text = "";
+				text = "";
 				break;
 		}
 	}
+	return text;
+};
+
+ViewWidget.prototype.getValueAsHtmlWikified = function() {
+	return this.wiki.new_renderText("text/plain","text/vnd.tiddlywiki",this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsHtmlEncoded = function() {
+	return $tw.utils.htmlEncode(this.getValueAsText());
 };
 
 /*
