@@ -21,6 +21,7 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/index.html text/plain \
+	|| exit 1
 
 # Run tests
 
