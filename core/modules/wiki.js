@@ -689,6 +689,24 @@ exports.renderText = function(outputType,textType,text,context) {
 };
 
 /*
+Parse text in a specified format and render it into another format
+	outputType: content type for the output
+	textType: content type of the input text
+	text: input text
+*/
+exports.new_renderText = function(outputType,textType,text,context) {
+	var parser = $tw.wiki.new_parseText(textType,text),
+		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
+		widgetNode = new widget.widget(parseTreeNode,{
+			wiki: this,
+			document: $tw.document
+		});
+	var container = $tw.document.createElement("div");
+	widgetNode.render(container,null);
+	return outputType === "text/html" ? container.innerHTML : container.textContent;
+};
+
+/*
 Parse text from a tiddler and render it into another format
 	outputType: content type for the output
 	title: title of the tiddler to be rendered
