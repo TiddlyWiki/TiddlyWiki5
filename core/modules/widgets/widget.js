@@ -252,20 +252,25 @@ Widget.prototype.renderChildren = function(parent,nextSibling) {
 };
 
 /*
-Add a list of event listeners from an array [{type:,listener:},...]
+Add a list of event listeners from an array [{type:,handler:},...]
 */
 Widget.prototype.addEventListeners = function(listeners) {
 	var self = this;
 	$tw.utils.each(listeners,function(listenerInfo) {
-		self.eventListeners[listenerInfo.type] = listenerInfo.listener;		
+		self.addEventListener(listenerInfo.type,listenerInfo.handler);		
 	});
 };
 
 /*
 Add an event listener
 */
-Widget.prototype.addEventListener = function(type,listener) {
-	this.eventListeners[type] = listener;
+Widget.prototype.addEventListener = function(type,handler) {
+	var self = this;
+	if(typeof handler === "string") { // The handler is a method name on this widget
+		this.eventListeners[type] = function(event) {
+			self[handler].call(self,event);
+		};
+	}
 };
 
 /*
