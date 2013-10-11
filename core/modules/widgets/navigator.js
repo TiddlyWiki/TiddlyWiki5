@@ -17,14 +17,14 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	this.addEventListeners([
-		{type: "tw-navigate", listener: this.handleNavigateEvent},
-		{type: "tw-edit-tiddler", listener: this.handleEditTiddlerEvent},
-		{type: "tw-delete-tiddler", listener: this.handleDeleteTiddlerEvent},
-		{type: "tw-save-tiddler", listener: this.handleSaveTiddlerEvent},
-		{type: "tw-cancel-tiddler", listener: this.handleCancelTiddlerEvent},
-		{type: "tw-close-tiddler", listener: this.handleCloseTiddlerEvent},
-		{type: "tw-close-all-tiddlers", listener: this.handleCloseAllTiddlersEvent},
-		{type: "tw-new-tiddler", listener: this.handleNewTiddlerEvent}
+		{type: "tw-navigate", handler: "handleNavigateEvent"},
+		{type: "tw-edit-tiddler", handler: "handleEditTiddlerEvent"},
+		{type: "tw-delete-tiddler", handler: "handleDeleteTiddlerEvent"},
+		{type: "tw-save-tiddler", handler: "handleSaveTiddlerEvent"},
+		{type: "tw-cancel-tiddler", handler: "handleCancelTiddlerEvent"},
+		{type: "tw-close-tiddler", handler: "handleCloseTiddlerEvent"},
+		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
+		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"}
 	]);
 };
 
@@ -67,12 +67,54 @@ NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.navigator = NavigatorWidget;
+NavigatorWidget.prototype.getStoryList = function() {
+	this.storyList = this.wiki.getTiddlerList(this.storyTitle);
+};
 
-// Temporarily make other widgets into the same no-op
-exports.import = NavigatorWidget;
-exports.button = NavigatorWidget;
-exports.linkcatcher = NavigatorWidget;
-exports.setstyle = NavigatorWidget;
+NavigatorWidget.prototype.saveStoryList = function() {
+	var storyTiddler = this.wiki.getTiddler(this.storyTitle);
+	this.wiki.addTiddler(new $tw.Tiddler({
+		title: this.storyTitle
+	},storyTiddler,{list: this.storyList}));
+};
+
+NavigatorWidget.prototype.findTitleInStory = function(title,defaultIndex) {
+	for(var t=0; t<this.storyList.length; t++) {
+		if(this.storyList[t] === title) {
+			return t;
+		}
+	}	
+	return defaultIndex;
+};
+
+/*
+Handle a tw-navigate event
+*/
+NavigatorWidget.prototype.handleNavigateEvent = function(event) {
+	if(this.storyTitle) {
+		// Update the story tiddler if specified
+		this.getStoryList();
+		// See if the tiddler is already there
+		var slot = this.findTitleInStory(event.navigateTo,-1);
+		// If not we need to add it
+		if(slot === -1) {
+			// First we try to find the position of the story element we navigated from
+			slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
+			// Add the tiddler
+			this.storyList.splice(slot,0,event.navigateTo);
+			// Save the story
+			this.saveStoryList();
+		}
+	}
+	// Add a new record to the top of the history stack
+	if(this.historyTitle) {
+		var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
+		historyList.push({title: event.navigateTo, fromPageRect: event.navigateFromClientRect});
+		this.wiki.setTiddlerData(this.historyTitle,historyList);
+	}
+	return false;
+};
+
+exports.navigator = NavigatorWidget;
 
 })();
