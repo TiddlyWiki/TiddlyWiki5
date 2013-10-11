@@ -141,6 +141,22 @@ Widget.prototype.hasVariable = function(name,value) {
 };
 
 /*
+Construct a qualifying string based on concatenating the values of a given variable in the parent chain
+*/
+Widget.prototype.getStateQualifier = function(name) {
+	name = name || "transclusion";
+	var output = [],
+		node = this;
+	while(node) {
+		if($tw.utils.hop(node.variables,name)) {
+			output.push(node.getVariable(name));
+		}
+		node = node.parentWidget;
+	}
+	return output.join("");
+};
+
+/*
 Compute the current values of the attributes of the widget. Returns a hashmap of the names of the attributes that have changed
 */
 Widget.prototype.computeAttributes = function() {
