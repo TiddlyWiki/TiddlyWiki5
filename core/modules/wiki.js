@@ -754,7 +754,8 @@ exports.search = function(text,options) {
 			for(var t=0; t<searchTermsRegExps.length; t++) {
 				// Search title and body
 				if(match) {
-					match = searchTermsRegExps[t].test(tiddler.fields.title) || searchTermsRegExps[t].test(tiddler.fields.text);
+					var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
+					match = searchTermsRegExps[t].test(tiddler.fields.title) || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.text);
 				}
 			}
 			return options.invert ? !match : match;
