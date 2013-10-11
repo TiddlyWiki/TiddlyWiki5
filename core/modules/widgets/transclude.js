@@ -42,7 +42,7 @@ TranscludeWidget.prototype.execute = function() {
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	// Check for recursion
-	var recursionMarker = "{" + this.transcludeTitle + "|" + this.transcludeField + "|" + this.transcludeIndex + "}";
+	var recursionMarker = this.makeRecursionMarker();;
 	if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
 		this.makeChildWidgets([{type: "text", text: "Tiddler recursion error in transclude widget"}]);
 		return;
@@ -54,10 +54,25 @@ TranscludeWidget.prototype.execute = function() {
 						this.transcludeTitle,
 						this.transcludeField,
 						this.transcludeIndex,
-						{parseAsInline: true}),
+						{parseAsInline: !this.parseTreeNode.isBlock}),
 		parseTreeNodes = parser ? parser.tree : [];
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
+};
+
+/*
+Compose a string comprising the title, field and/or index to identify this transclusion for recursion detection
+*/
+TranscludeWidget.prototype.makeRecursionMarker = function() {
+	var output = [];
+	output.push("{");
+	output.push(this.transcludeTitle || "");
+	output.push("|");
+	output.push(this.transcludeField || "");
+	output.push("|");
+	output.push(this.transcludeIndex || "");
+	output.push("}");
+	return output.join("");
 };
 
 /*
