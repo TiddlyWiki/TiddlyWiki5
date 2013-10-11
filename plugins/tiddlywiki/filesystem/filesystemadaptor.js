@@ -188,7 +188,9 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 		} else {
 			if(this.watchers[fileInfo.filepath]) {
 				this.watchers[fileInfo.filepath].close();
+				delete this.watchers[fileInfo.filepath];
 			}
+			delete this.pending[fileInfo.filepath];
 			// Delete the file
 			fs.unlink(fileInfo.filepath,function(err) {
 				if(err) {
