@@ -17,6 +17,7 @@ var fs = !$tw.browser ? require("fs") : null;
 
 
 function FileSystemAdaptor(syncer) {
+	var self = this;
 	this.syncer = syncer;
 	this.watchers = {};
 	this.pending = {};
@@ -28,7 +29,9 @@ function FileSystemAdaptor(syncer) {
 				if(e === "change") {
 					var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
 					for(var t in tiddlers) {
-						$tw.wiki.tiddlers[tiddlers[t].title] = new $tw.Tiddler(tiddlers[t]);
+						if(tiddlers[t].title) {
+							$tw.wiki.addTiddler(tiddlers[t]);
+						}
 					}
 				}
 			});
@@ -134,8 +137,14 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		}
 		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(tiddler.fields.title) !== -1) {
 			// Don't save the tiddler if it is on the blacklist
-			callback(null,{},0);
-		} else if(fileInfo.hasMetaFile) {
+			return callback(null,{},0);
+		}
+		if(self.watchers[fileInfo.filepath]) {
+			self.watchers[fileInfo.filepath].close();
+			delete self.watchers[fileInfo.filepath];
+			self.pending[fileInfo.filepath] = tiddler.fields.title;
+		}
+		if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
 			var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
