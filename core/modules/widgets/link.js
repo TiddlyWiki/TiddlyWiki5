@@ -27,6 +27,7 @@ LinkWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 LinkWidget.prototype.render = function(parent,nextSibling) {
+	var self = this;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -35,7 +36,8 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create our element
 	var domNode = this.document.createElement("a");
-	this.assignAttributes(domNode);
+	// Assign classes
+	$tw.utils.addClass(domNode,"tw-tiddlylink");
 	if(this.isShadow) {
 		$tw.utils.addClass(domNode,"tw-tiddlylink-shadow");
 	}
@@ -46,6 +48,30 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 			$tw.utils.addClass(domNode,"tw-tiddlylink-resolves");
 		}
 	}
+	// Set an href
+	domNode.setAttribute("href",this.to);
+	// Add a click event handler
+	domNode.addEventListener("click",function (event) {
+		// Send the click on it's way as a navigate event
+		var bounds = domNode.getBoundingClientRect();
+		self.dispatchEvent({
+			type: "tw-navigate",
+			navigateTo: self.to,
+			navigateFromNode: self,
+			navigateFromClientRect: {
+				top: bounds.top,
+				left: bounds.left,
+				width: bounds.width,
+				right: bounds.right,
+				bottom: bounds.bottom,
+				height: bounds.height
+			}
+		});
+		event.preventDefault();
+		event.stopPropagation();
+		return false;
+	},false);
+	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
