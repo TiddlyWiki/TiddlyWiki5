@@ -20,23 +20,16 @@ The module definitions on the browser look like this:
 In practice, each module is wrapped in a separate script block.
 
 \*/
-(function() {
+
+var _boot = (function($tw) {
 
 /*jslint node: true, browser: true */
 /*global modules: false, $tw: false */
 "use strict";
 
-/////////////////////////// Setting up $tw
-
-// Set up $tw global for the server (set up for browser is in bootprefix.js)
-if(typeof(window) === "undefined") {
-	global.$tw = global.$tw || {}; // No `browser` member for the server
-	exports.$tw = $tw; // Export $tw for when boot.js is required directly in node.js
-}
-
-// Include bootprefix if we're on the server
-if(!$tw.browser) {
-	require("./bootprefix.js");
+// Include bootprefix if we're not given module data
+if(!$tw) {
+	$tw = require("./bootprefix.js").bootprefix();
 }
 
 $tw.utils = $tw.utils || {};
@@ -548,7 +541,8 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name + ".js") || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName + ".js") ,
 		_exports = {},
 		sandbox = {
-			module: moduleInfo,
+			module: {},
+			//moduleInfo: moduleInfo,
 			exports: _exports,
 			console: console,
 			setInterval: setInterval,
@@ -560,9 +554,29 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				return $tw.modules.execute(title, name);
 			}
 		};
+
+	Object.defineProperty(sandbox.module, "id", {
+		value: name,
+		writable: false,
+		enumerable: true,
+		configurable: false
+	});
+
 	if(!$tw.browser) {
 		$tw.utils.extend(sandbox,{
 			process: process
+		});
+	} else {
+		/*
+		CommonJS optional require.main property:
+		 In a browser we offer a fake main module which points back to the boot function
+		 (Theoretically, this may allow TW to eventually load itself as a module in the browser)
+		*/
+		Object.defineProperty(sandbox.require, "main", {
+			value: (typeof(require) !== "undefined") ? require.main : {TiddlyWiki: _boot},
+			writable: false,
+			enumerable: true,
+			configurable: false
 		});
 	}
 	if(!moduleInfo) {
@@ -1417,4 +1431,15 @@ if($tw.browser) {
 	$tw.boot.boot();
 }
 
-})();
+return $tw;
+
+});
+
+if(typeof(exports) !== "undefined") {
+	exports.TiddlyWiki = _boot;
+} else {
+	_boot(window.$tw);
+}
+
+
+
