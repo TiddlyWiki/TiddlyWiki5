@@ -268,7 +268,7 @@ Widget.prototype.addEventListener = function(type,handler) {
 	var self = this;
 	if(typeof handler === "string") { // The handler is a method name on this widget
 		this.eventListeners[type] = function(event) {
-			self[handler].call(self,event);
+			return self[handler].call(self,event);
 		};
 	}
 };
@@ -280,7 +280,7 @@ Widget.prototype.dispatchEvent = function(event) {
 	// Dispatch the event if this widget handles it
 	var listener = this.eventListeners[event.type];
 	if(listener) {
-		// Don't propogate the event if the listener returned false
+		// Don't propagate the event if the listener returned false
 		if(!listener(event)) {
 			return false;
 		}

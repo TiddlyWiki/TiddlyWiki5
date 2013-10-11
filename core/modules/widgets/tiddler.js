@@ -16,6 +16,9 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var TiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+	this.addEventListeners([
+		{type: "tw-navigate", handler: "handleNavigateEvent"}
+	]);
 };
 
 /*
@@ -56,6 +59,15 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		return this.refreshChildren(changedTiddlers);		
 	}
+};
+
+/*
+Handle a tw-navigate event
+*/
+TiddlerWidget.prototype.handleNavigateEvent = function(event) {
+console.log("Setting navigateFromTitle to",this.tiddlerTitle)
+	event.navigateFromTitle = this.tiddlerTitle;
+	return true;
 };
 
 exports.tiddler = TiddlerWidget;
