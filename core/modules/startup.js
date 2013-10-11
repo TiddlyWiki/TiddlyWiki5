@@ -117,18 +117,18 @@ exports.startup = function() {
 		$tw.wiki.addEventListener("change",function(changes) {
 			widgetNode.refresh(changes,$tw.new_pageContainer,null);
 		});
-		// Display the old PageTemplate
-		var old_templateTitle = "$:/core/ui/PageTemplate",
-			old_parser = $tw.wiki.parseTiddler(old_templateTitle),
-			renderTree = new $tw.WikiRenderTree(old_parser,{wiki: $tw.wiki, context: {tiddlerTitle: old_templateTitle}, document: document});
-		renderTree.execute();
-		$tw.pageContainer = document.createElement("div");
-		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
-		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		renderTree.renderInDom($tw.pageContainer);
-		$tw.wiki.addEventListener("change",function(changes) {
-			renderTree.refreshInDom(changes);
-		});
+		// // Display the old PageTemplate
+		// var old_templateTitle = "$:/core/ui/PageTemplate",
+		// 	old_parser = $tw.wiki.parseTiddler(old_templateTitle),
+		// 	renderTree = new $tw.WikiRenderTree(old_parser,{wiki: $tw.wiki, context: {tiddlerTitle: old_templateTitle}, document: document});
+		// renderTree.execute();
+		// $tw.pageContainer = document.createElement("div");
+		// $tw.utils.addClass($tw.pageContainer,"tw-page-container");
+		// document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+		// renderTree.renderInDom($tw.pageContainer);
+		// $tw.wiki.addEventListener("change",function(changes) {
+		// 	renderTree.refreshInDom(changes);
+		// });
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
