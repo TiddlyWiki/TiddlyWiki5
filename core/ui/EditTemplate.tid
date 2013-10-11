@@ -15,7 +15,7 @@ modifier: JeremyRuston
 <$transclude title="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
 <div class="tw-tiddler-preview">
 <div class="tw-tiddler-preview-preview">
-<$view field="text" format="wikified"/>
+<$transclude/>
 </div>
 <div class="tw-tiddler-preview-edit">
 <$edit field="text"/>
