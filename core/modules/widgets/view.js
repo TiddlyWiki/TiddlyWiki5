@@ -54,6 +54,12 @@ ViewWidget.prototype.execute = function() {
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
 			break;
+		case "date":
+			this.text = this.getValueAsDate(this.viewFormat);
+			break;
+		case "relativedate":
+			this.text = this.getValueAsRelativeDate();
+			break;
 		default: // "text"
 			this.text = this.getValueAsText();
 			break;
@@ -98,6 +104,15 @@ ViewWidget.prototype.getValueAsHtmlWikified = function() {
 
 ViewWidget.prototype.getValueAsHtmlEncoded = function() {
 	return $tw.utils.htmlEncode(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsDate = function(format) {
+	return $tw.utils.formatDateString(this.getValueAsText(),format);
+};
+
+ViewWidget.prototype.getValueAsRelativeDate = function(format) {
+	var d = new Date(this.getValueAsText());
+	return $tw.utils.getRelativeDate((new Date()) - d).description;
 };
 
 /*
