@@ -86,6 +86,26 @@ RevealWidget.prototype.readMatchState = function(state) {
 	this.isOpen = state === this.text;
 };
 
+RevealWidget.prototype.readPopupState = function(state) {
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+		match = popupLocationRegExp.exec(state);
+	// Check if the state matches the location regexp
+	if(match) {
+		// If so, we're open
+		this.isOpen = true;
+		// Get the location
+		this.popup = {
+			left: parseFloat(match[1]),
+			top: parseFloat(match[2]),
+			width: parseFloat(match[3]),
+			height: parseFloat(match[4])
+		};
+	} else {
+		// If not, we're closed
+		this.isOpen = false;
+	}
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
