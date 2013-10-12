@@ -27,6 +27,7 @@ exports.startup = function() {
 			clearInterval: clearInterval,
 			setTimeout: setTimeout,
 			clearTimeout: clearTimeout,
+			exports: {},
 			$tw: $tw
 	});
 	// Prepare the Jasmine environment
