@@ -12,11 +12,12 @@ See Boot.js for further details of the boot process.
 
 \*/
 
-var _bootprefix = (function($tw) {
-
-"use strict";
-
-$tw = $tw || {browser: typeof(window) !== "undefined" ? {} : null};
+// Set up $tw global for the browser
+if(typeof(window) === "undefined") {
+	global.$tw = global.$tw || {}; // No `browser` member for the server
+} else {
+	window.$tw = window.$tw || {browser: {}};
+}
 
 /*
 Information about each module is kept in an object with these members:
@@ -80,18 +81,3 @@ Convenience function for pushing a tiddler onto the preloading array
 $tw.preloadTiddler = function(fields) {
 	$tw.preloadTiddlers.push(fields);
 };
-
-return $tw
-
-});
-
-if(typeof(exports) === "undefined") {
-	// Set up $tw global for the browser
-	window.$tw = _bootprefix();
-} else {
-	// Export functionality as a module
-	exports.bootprefix = _bootprefix;
-}
-
-
-

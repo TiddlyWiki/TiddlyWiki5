@@ -20,16 +20,23 @@ The module definitions on the browser look like this:
 In practice, each module is wrapped in a separate script block.
 
 \*/
-
-var _boot = (function($tw) {
+(function() {
 
 /*jslint node: true, browser: true */
 /*global modules: false, $tw: false */
 "use strict";
 
-// Include bootprefix if we're not given module data
-if(!$tw) {
-	$tw = require("./bootprefix.js").bootprefix();
+/////////////////////////// Setting up $tw
+
+// Set up $tw global for the server (set up for browser is in bootprefix.js)
+if(typeof(window) === "undefined") {
+	global.$tw = global.$tw || {}; // No `browser` member for the server
+	exports.$tw = $tw; // Export $tw for when boot.js is required directly in node.js
+}
+
+// Include bootprefix if we're on the server
+if(!$tw.browser) {
+	require("./bootprefix.js");
 }
 
 $tw.utils = $tw.utils || {};
@@ -306,7 +313,6 @@ name `.` refers to the current directory
 */
 $tw.utils.resolvePath = function(sourcepath,rootpath) {
 	// If the source path starts with ./ or ../ then it is relative to the root
-	
 	if(sourcepath.substr(0,2) === "./" || sourcepath.substr(0,3) === "../" ) {
 		var src = sourcepath.split("/"),
 			root = rootpath.split("/");
@@ -326,14 +332,7 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 		return root.join("/");
 	} else {
 		// If it isn't relative, just return the path
-		if(rootpath) {
-			var root = rootpath.split("/");
-			// Remove the filename part of the root
-			root.splice(root.length - 1, 1);
-			return root.join("/") + "/" + sourcepath;
-		} else {
-			return sourcepath;
-		}
+		return sourcepath;
 	}
 };
 
@@ -363,7 +362,9 @@ $tw.utils.registerFileType = function(type,encoding,extension) {
 Run code globally with specified context variables in scope
 */
 $tw.utils.evalGlobal = function(code,context,filename) {
-	var contextCopy = $tw.utils.extend({},context);
+	var contextCopy = $tw.utils.extend({},context,{
+		exports: {}
+	});
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
 	$tw.utils.each(contextCopy,function(value,name) {
@@ -388,6 +389,9 @@ Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
 	var sandbox = $tw.utils.extend({},context);
+	$tw.utils.extend(sandbox,{
+		exports: {}		
+	});
 	vm.runInNewContext(code,sandbox,filename);
 	return sandbox.exports;
 };
@@ -536,14 +540,12 @@ $tw.utils.Crypto = function() {
 Execute the module named 'moduleName'. The name can optionally be relative to the module named 'moduleRoot'
 */
 $tw.modules.execute = function(moduleName,moduleRoot) {
-	var name = moduleName[0] === "." ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
-		moduleInfo = $tw.modules.titles[name] || $tw.modules.titles[name + ".js"] || $tw.modules.titles[moduleName] || $tw.modules.titles[moduleName + ".js"] ,
-		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name + ".js") || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName + ".js") ,
-		_exports = {},
+	var name = moduleRoot ? $tw.utils.resolvePath(moduleName,moduleRoot) : moduleName,
+		moduleInfo = $tw.modules.titles[name],
+		tiddler = $tw.wiki.getTiddler(name),
 		sandbox = {
-			module: {},
-			//moduleInfo: moduleInfo,
-			exports: _exports,
+			module: moduleInfo,
+			exports: {},
 			console: console,
 			setInterval: setInterval,
 			clearInterval: clearInterval,
@@ -551,45 +553,18 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			clearTimeout: clearTimeout,
 			$tw: $tw,
 			require: function(title) {
-				return $tw.modules.execute(title, name);
+				return $tw.modules.execute(title,name);
 			}
 		};
-
-	Object.defineProperty(sandbox.module, "id", {
-		value: name,
-		writable: false,
-		enumerable: true,
-		configurable: false
-	});
-
 	if(!$tw.browser) {
 		$tw.utils.extend(sandbox,{
 			process: process
 		});
-	} else {
-		/*
-		CommonJS optional require.main property:
-		 In a browser we offer a fake main module which points back to the boot function
-		 (Theoretically, this may allow TW to eventually load itself as a module in the browser)
-		*/
-		Object.defineProperty(sandbox.require, "main", {
-			value: (typeof(require) !== "undefined") ? require.main : {TiddlyWiki: _boot},
-			writable: false,
-			enumerable: true,
-			configurable: false
-		});
 	}
 	if(!moduleInfo) {
-		// We could not find the module on this path
-		// Try to defer to browserify etc, or node
-		var deferredModule;
 		if($tw.browser) {
-			if(window.require) {
-				try {
-					return window.require(moduleName);
-				} catch(e) {}
-			}
-			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;				
+			return $tw.utils.error("Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name);
+
 		} else {
 			// If we don't have a module with that name, let node.js try to find it
 			return require(moduleName);
@@ -600,11 +575,10 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		try {
 			// Check the type of the definition
 			if(typeof moduleInfo.definition === "function") { // Function
-				moduleInfo.exports = _exports;
+				moduleInfo.exports = {};
 				moduleInfo.definition(moduleInfo,moduleInfo.exports,sandbox.require);
 			} else if(typeof moduleInfo.definition === "string") { // String
-				moduleInfo.exports = _exports;
-				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				moduleInfo.exports = $tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
 			} else { // Object
 				moduleInfo.exports = moduleInfo.definition;
 			}
@@ -1431,15 +1405,4 @@ if($tw.browser) {
 	$tw.boot.boot();
 }
 
-return $tw;
-
-});
-
-if(typeof(exports) !== "undefined") {
-	exports.TiddlyWiki = _boot;
-} else {
-	_boot(window.$tw);
-}
-
-
-
+})();

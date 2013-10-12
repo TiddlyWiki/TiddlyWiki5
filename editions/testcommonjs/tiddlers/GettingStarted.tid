@@ -1,7 +1,0 @@
-title: GettingStarted
-
-This wiki instance contains the CommonJS Modules/1.0 unit tests.
-
-To run them, open a console repl and execute "$tw.modules.execute('allTests')" there. You should see no exceptions or output starting with "FAIL" in the console.
-
-
