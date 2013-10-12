@@ -15,8 +15,33 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 // Get a reference to the file system
 var fs = !$tw.browser ? require("fs") : null;
 
+
 function FileSystemAdaptor(syncer) {
+	var self = this;
 	this.syncer = syncer;
+	this.watchers = {};
+	this.pending = {};
+
+	this.setwatcher = function(filename, title) {
+		return this.watchers[filename] = this.watchers[filename] ||
+			fs.watch(filename, {persistent: false}, function(e) {
+				console.log("Filesystem:", e, filename);
+				if(e === "change") {
+					var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
+					for(var t in tiddlers) {
+						if(tiddlers[t].title) {
+							$tw.wiki.addTiddler(tiddlers[t]);
+						}
+					}
+				}
+			});
+	}
+
+
+	for(var f in $tw.boot.files) {
+		var fileInfo = $tw.boot.files[f];
+		this.setwatcher(fileInfo.filepath, f);
+	}
 }
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
@@ -63,6 +88,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			fileInfo.hasMetaFile = typeInfo.hasMetaFile;
 			// Save the newly created fileInfo
 			$tw.boot.files[title] = fileInfo;
+			self.pending[fileInfo.filepath] = title;
 			// Pass it to the callback
 			callback(null,fileInfo);
 		});
@@ -96,15 +122,29 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
+	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
 		var template, content, encoding;
+		function _finish() {
+			if(self.pending[fileInfo.filepath]) {
+				self.setwatcher(fileInfo.filepath, tiddler.fields.title);
+				delete self.pending[fileInfo.filepath];
+			}
+			callback(null, {}, 0);
+		}
 		if(err) {
 			return callback(err);
 		}
 		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(tiddler.fields.title) !== -1) {
 			// Don't save the tiddler if it is on the blacklist
-			callback(null,{},0);
-		} else if(fileInfo.hasMetaFile) {
+			return callback(null,{},0);
+		}
+		if(self.watchers[fileInfo.filepath]) {
+			self.watchers[fileInfo.filepath].close();
+			delete self.watchers[fileInfo.filepath];
+			self.pending[fileInfo.filepath] = tiddler.fields.title;
+		}
+		if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
 			var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
@@ -117,7 +157,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 						return callback(err);
 					}
 console.log("FileSystem: Saved file",fileInfo.filepath);
-					callback(null,{},0);
+					_finish();
 				});
 			});
 		} else {
@@ -129,7 +169,7 @@ console.log("FileSystem: Saved file",fileInfo.filepath);
 					return callback(err);
 				}
 console.log("FileSystem: Saved file",fileInfo.filepath);
-				callback(null,{},0);
+				_finish();
 			});
 		}
 	});
@@ -155,6 +195,11 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 			// Don't delete the tiddler if it is on the blacklist
 			callback(null);
 		} else {
+			if(this.watchers[fileInfo.filepath]) {
+				this.watchers[fileInfo.filepath].close();
+				delete this.watchers[fileInfo.filepath];
+			}
+			delete this.pending[fileInfo.filepath];
 			// Delete the file
 			fs.unlink(fileInfo.filepath,function(err) {
 				if(err) {
