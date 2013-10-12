@@ -12,6 +12,8 @@ This is the main application logic for both the client and server
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/new_widgets/widget.js");
+
 exports.startup = function() {
 	var modules,n,m,f,commander;
 	// Load modules
@@ -102,16 +104,31 @@ exports.startup = function() {
 		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
 		// Display the PageTemplate
 		var templateTitle = "$:/core/ui/PageTemplate",
-			parser = $tw.wiki.parseTiddler(templateTitle),
-			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, context: {tiddlerTitle: templateTitle}, document: document});
-		renderTree.execute();
-		$tw.pageContainer = document.createElement("div");
-		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
-		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		renderTree.renderInDom($tw.pageContainer);
+			parser = $tw.wiki.new_parseTiddler(templateTitle),
+			parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
+			widgetNode = new widget.widget(parseTreeNode,{
+				wiki: $tw.wiki,
+				document: document
+			});
+		$tw.new_pageContainer = document.createElement("div");
+		$tw.utils.addClass($tw.new_pageContainer,"tw-page-container");
+		document.body.insertBefore($tw.new_pageContainer,document.body.firstChild);
+		widgetNode.render($tw.new_pageContainer,null);
 		$tw.wiki.addEventListener("change",function(changes) {
-			renderTree.refreshInDom(changes);
+			widgetNode.refresh(changes,$tw.new_pageContainer,null);
 		});
+		// // Display the old PageTemplate
+		// var old_templateTitle = "$:/core/ui/PageTemplate",
+		// 	old_parser = $tw.wiki.parseTiddler(old_templateTitle),
+		// 	renderTree = new $tw.WikiRenderTree(old_parser,{wiki: $tw.wiki, context: {tiddlerTitle: old_templateTitle}, document: document});
+		// renderTree.execute();
+		// $tw.pageContainer = document.createElement("div");
+		// $tw.utils.addClass($tw.pageContainer,"tw-page-container");
+		// document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+		// renderTree.renderInDom($tw.pageContainer);
+		// $tw.wiki.addEventListener("change",function(changes) {
+		// 	renderTree.refreshInDom(changes);
+		// });
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{

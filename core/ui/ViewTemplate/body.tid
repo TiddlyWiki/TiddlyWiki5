@@ -2,5 +2,5 @@ title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
 <div class="body">
-<$view field="text" format="wikified"/>
+<$transclude />
 </div>

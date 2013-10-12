@@ -83,5 +83,5 @@ The following commands are available:
 
 <$list filter="[tag[command]sort[title]]">
 	!!! <$view field="title" format="link"/>
-	<$view field="text" format="wikified"/>
+	<$transclude />
 </$list>
