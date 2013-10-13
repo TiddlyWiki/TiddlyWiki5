@@ -74,14 +74,15 @@ Get the prevailing value of a context variable
 name: name of variable
 params: array of {name:, value:} for each parameter
 */
-Widget.prototype.getVariable = function(name,params) {
+Widget.prototype.getVariable = function(name,params,defaultValue) {
+	params = params || [];
 	// Search up the widget tree for the variable name
 	var node = this;
 	while(node && !$tw.utils.hop(node.variables,name)) {
 		node = node.parentWidget;
 	}
 	if(!node) {
-		return undefined;
+		return defaultValue;
 	}
 	// Get the value
 	var value = node.variables[name].value;

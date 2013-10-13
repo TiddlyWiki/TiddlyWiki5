@@ -24,8 +24,8 @@ describe("Widget module", function() {
 			});
 	}
 
-	function parseText(text,wiki) {
-		var parser = wiki.new_parseText("text/vnd.tiddlywiki",text);
+	function parseText(text,wiki,options) {
+		var parser = wiki.new_parseText("text/vnd.tiddlywiki",text,options);
 		return parser ? {type: "widget", children: parser.tree} : undefined;
 	}
 
@@ -167,6 +167,18 @@ describe("Widget module", function() {
 			expect(wrapper.innerHTML).toBe("Tiddler recursion error in transclude widget\n");
 		});
 
+	});
+
+	it("should deal with SVG elements", function() {
+		var wiki = new $tw.Wiki();
+		// Construct the widget node
+		var text = "<svg class='tw-image-new-button' viewBox='83 81 50 50' width='22pt' height='22pt'><path d='M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z'/></svg>\n";
+		var widgetNode = createWidgetNode(parseText(text,wiki,{parseAsInline:true}),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<svg class='tw-image-new-button' height='22pt' viewBox='83 81 50 50' width='22pt'>\n<path d='M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z'>\n</path></svg>\n");
+		expect(wrapper.firstChild.namespaceURI).toBe("http://www.w3.org/2000/svg");
 	});
 
 	it("should parse and render transclusions", function() {

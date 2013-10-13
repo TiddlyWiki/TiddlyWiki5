@@ -26,12 +26,13 @@ var TW_TextNode = function(text) {
 	this.textContent = text;
 };
 
-var TW_Element = function(tag) {
+var TW_Element = function(tag,namespace) {
 	bumpSequenceNumber(this);
 	this.tag = tag;
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
+	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
 TW_Element.prototype.setAttribute = function(name,value) {
@@ -160,7 +161,7 @@ var document = {
 		sequenceNumber = value;
 	},
 	createElementNS: function(namespace,tag) {
-		return new TW_Element(tag);
+		return new TW_Element(tag,namespace);
 	},
 	createElement: function(tag) {
 		return new TW_Element(tag);

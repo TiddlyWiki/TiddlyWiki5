@@ -30,7 +30,7 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElement(this.parseTreeNode.tag);
+	var domNode = this.document.createElementNS(this.namespace,this.parseTreeNode.tag);
 	this.assignAttributes(domNode);
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -41,6 +41,18 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ElementWidget.prototype.execute = function() {
+	// Select the namespace for the tag
+	var tagNamespaces = {
+			svg: "http://www.w3.org/2000/svg",
+			math: "http://www.w3.org/1998/Math/MathML"
+		};
+	this.namespace = tagNamespaces[this.parseTreeNode.tag];
+	if(this.namespace) {
+		this.setVariable("namespace",this.namespace);
+	} else {
+		this.namespace = this.getVariable("namespace",null,"http://www.w3.org/1999/xhtml");
+	}
+	// Make the child widgets
 	this.makeChildWidgets();
 };
 
