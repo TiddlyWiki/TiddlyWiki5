@@ -1124,10 +1124,18 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 };
 
 /*
+A default set of files for TiddlyWiki to ignore during load.
+This matches what NPM ignores, and adds "*.meta" to ignore tiddler
+metadata files.
+*/
+$tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
+
+
+/*
 Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}. Note that no file information is returned for externally loaded tiddlers, just the `tiddlers` property.
 */
 $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
-	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
+	excludeRegExp = excludeRegExp || $tw.boot.excludeRegExp;
 	var tiddlers = [];
 	if(fs.existsSync(filepath)) {
 		var stat = fs.statSync(filepath);
@@ -1169,7 +1177,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 Load the tiddlers from a plugin folder, and package them up into a proper JSON plugin tiddler
 */
 $tw.loadPluginFolder = function(filepath,excludeRegExp) {
-	excludeRegExp = excludeRegExp || /^\.DS_Store$|.meta$/;
+	excludeRegExp = excludeRegExp || $tw.boot.excludeRegExp;
 	var stat, files, pluginInfo, pluginTiddlers = [], f, file, titlePrefix, t;
 	if(fs.existsSync(filepath)) {
 		stat = fs.statSync(filepath);
