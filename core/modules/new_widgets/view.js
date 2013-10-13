@@ -44,6 +44,7 @@ ViewWidget.prototype.execute = function() {
 	this.viewField = this.getAttribute("field","text");
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");
+	this.viewTemplate = this.getAttribute("template","");
 	switch(this.viewFormat) {
 		case "wikified":
 			this.text = this.getValueAsWikified();
@@ -55,7 +56,7 @@ ViewWidget.prototype.execute = function() {
 			this.text = this.getValueAsHtmlEncoded();
 			break;
 		case "date":
-			this.text = this.getValueAsDate(this.viewFormat);
+			this.text = this.getValueAsDate(this.viewTemplate);
 			break;
 		case "relativedate":
 			this.text = this.getValueAsRelativeDate();
@@ -120,7 +121,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ViewWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title || changedAttributes.field || changedAttributes.index || changedTiddlers[this.viewTitle]) {
+	if(changedAttributes.title || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedTiddlers[this.viewTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {

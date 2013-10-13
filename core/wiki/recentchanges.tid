@@ -1,8 +1,14 @@
 title: $:/snippets/recentchanges
 
 <$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]" itemClass="tw-menu-list-item">
+<div class="tw-menu-list-item">
 <$view field="modified" format="date" template="DDth MMM YYYY"/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]" itemClass="tw-menu-list-subitem">
-<$view field="title" format="link"/>
+<div class="tw-menu-list-subitem">
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</div>
 </$list>
+</div>
 </$list>
