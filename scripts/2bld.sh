@@ -8,7 +8,7 @@ mkdir -p tmp/tw2
 
 # Prepare the readme file from the revelant content in the tw5.com wiki
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	editions/tw5.com \
 	--verbose \
 	--rendertiddler TiddlyWiki2ReadMe editions/tw2/readme.md text/html \
@@ -16,7 +16,7 @@ node ./tiddlywiki.js \
 
 # cook the TiddlyWiki 2.x.x index file
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	editions/tw2 \
 	--verbose \
 	--load editions/tw2/source/tiddlywiki.com/index.html.recipe \
@@ -24,3 +24,5 @@ node ./tiddlywiki.js \
 	|| exit 1
 
 opendiff tmp/tw2/index.html editions/tw2/target/index.2.6.5.html
+
+

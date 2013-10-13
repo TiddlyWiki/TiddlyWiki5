@@ -17,7 +17,7 @@ echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 
 # Run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	./editions/test \
 	--verbose \
 	--rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/test.html text/plain \
