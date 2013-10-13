@@ -641,6 +641,11 @@ var tweakParseTreeNodes = function(nodeList) {
 
 var tweakMacroDefinition = function(nodeList) {
 	if(nodeList && nodeList[0] && nodeList[0].type === "macrodef") {
+		nodeList[0].type = "setvariable";
+		nodeList[0].attributes = {
+			name: {type: "string", value: nodeList[0].name},
+			value: {type: "string", value: nodeList[0].text}
+		};
 		nodeList[0].children = nodeList.slice(1);
 		nodeList.splice(1,nodeList.length-1);
 		tweakMacroDefinition(nodeList.children);

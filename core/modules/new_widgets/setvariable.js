@@ -41,7 +41,7 @@ SetVariableWidget.prototype.execute = function() {
 	this.setName = this.getAttribute("name","tiddlerTitle");
 	this.setValue = this.getAttribute("value");
 	// Set context variable
-	this.setVariable(this.setName,this.setValue);
+	this.setVariable(this.setName,this.setValue,this.parseTreeNode.params);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
