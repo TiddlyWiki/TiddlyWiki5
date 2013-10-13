@@ -1,5 +1,8 @@
 title: $:/core/ui/ViewTemplate
 modifier: JeremyRuston
 
-<div class="tw-tiddler-frame"><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/ViewTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/ViewTemplate]]" hackTemplate=true/>
+\define frame-classes()
+tw-tiddler-frame $(tiddlerMissing)$
+\end
+<div class=<<frame-classes>>><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/ViewTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/ViewTemplate]]" hackTemplate=true/>
 </div>
