@@ -58,13 +58,7 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 			type: "tw-navigate",
 			navigateTo: self.to,
 			navigateFromNode: self,
-			navigateFromClientRect: {
-				top: bounds.top,
-				left: bounds.left,
-				width: bounds.width,
-				right: bounds.right,
-				bottom: bounds.bottom,
-				height: bounds.height
+			navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 			}
 		});
 		event.preventDefault();

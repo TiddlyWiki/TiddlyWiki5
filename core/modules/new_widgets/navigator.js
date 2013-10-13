@@ -115,6 +115,18 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	return false;
 };
 
+// Close a specified tiddler
+NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
+	this.getStoryList();
+	// Look for tiddlers with this title to close
+	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
+	if(slot !== -1) {
+		this.storyList.splice(slot,1);
+		this.saveStoryList();
+	}
+	return false;
+};
+
 exports.navigator = NavigatorWidget;
 
 })();

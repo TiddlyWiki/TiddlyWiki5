@@ -42,8 +42,9 @@ Compute the internal state of the widget
 TiddlerWidget.prototype.execute = function() {
 	// Get our parameters
 	this.tiddlerTitle = this.getAttribute("title","");
-	// Set context variable
+	// Set context variables
 	this.setVariable("tiddlerTitle",this.tiddlerTitle);
+	this.setVariable("tiddlerMissing",this.wiki.tiddlerExists(this.tiddlerTitle) ? "tw-tiddler-exists" : "tw-tiddler-missing");
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -65,7 +66,6 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 Handle a tw-navigate event
 */
 TiddlerWidget.prototype.handleNavigateEvent = function(event) {
-console.log("Setting navigateFromTitle to",this.tiddlerTitle)
 	event.navigateFromTitle = this.tiddlerTitle;
 	return true;
 };

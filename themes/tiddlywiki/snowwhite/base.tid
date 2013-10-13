@@ -490,7 +490,7 @@ a.tw-tiddlylink-external {
 	float: right;
 }
 
-.tw-tiddler-controls .tw-button {
+.tw-tiddler-controls button {
 	margin: 0 0 0 5px;
 	vertical-align: baseline;
 }
