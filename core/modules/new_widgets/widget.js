@@ -74,8 +74,8 @@ Get the prevailing value of a context variable
 name: name of variable
 params: array of {name:, value:} for each parameter
 */
-Widget.prototype.getVariable = function(name,params,defaultValue) {
-	params = params || [];
+Widget.prototype.getVariable = function(name,actualParams,defaultValue) {
+	actualParams = actualParams || [];
 	// Search up the widget tree for the variable name
 	var node = this;
 	while(node && !$tw.utils.hop(node.variables,name)) {
@@ -87,34 +87,46 @@ Widget.prototype.getVariable = function(name,params,defaultValue) {
 	// Get the value
 	var value = node.variables[name].value;
 	// Substitute any parameters specified in the definition
-	var defParams = node.variables[name].params;
-	if(defParams) {
+	value = this.substituteVariableParameters(value,node.variables[name].params,actualParams);
+	value = this.substituteVariableReferences(value);
+	return value;
+};
+
+Widget.prototype.substituteVariableParameters = function(text,formalParams,actualParams) {
+	if(formalParams) {
 		var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
 			paramInfo, paramValue;
 		// Step through each of the parameters in the macro definition
-		for(var p=0; p<defParams.length; p++) {
+		for(var p=0; p<formalParams.length; p++) {
 			// Check if we've got a macro call parameter with the same name
-			paramInfo = defParams[p];
+			paramInfo = formalParams[p];
 			paramValue = undefined;
-			for(var m=0; m<params.length; m++) {
-				if(params[m].name === paramInfo.name) {
-					paramValue = params[m].value;
+			for(var m=0; m<actualParams.length; m++) {
+				if(actualParams[m].name === paramInfo.name) {
+					paramValue = actualParams[m].value;
 				}
 			}
 			// If not, use the next available anonymous macro call parameter
-			while(nextAnonParameter < params.length && params[nextAnonParameter].name) {
+			while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
 				nextAnonParameter++;
 			}
-			if(paramValue === undefined && nextAnonParameter < params.length) {
-				paramValue = params[nextAnonParameter++].value;
+			if(paramValue === undefined && nextAnonParameter < actualParams.length) {
+				paramValue = actualParams[nextAnonParameter++].value;
 			}
 			// If we've still not got a value, use the default, if any
 			paramValue = paramValue || paramInfo["default"] || "";
 			// Replace any instances of this parameter
-			value = value.replace(new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
+			text = text.replace(new RegExp("\\$" + $tw.utils.escapeRegExp(paramInfo.name) + "\\$","mg"),paramValue);
 		}
 	}
-	return value;
+	return text;
+};
+
+Widget.prototype.substituteVariableReferences = function(text) {
+	var self = this;
+	return text.replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
+		return self.getVariable(p1,"");
+	});
 };
 
 /*
