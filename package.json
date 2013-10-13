@@ -1,33 +1,155 @@
 {
+  "//": "It is",
   "name": "tiddlywiki",
-  "preferGlobal": "true",
+  
+  "//": "It is semantically versioned at revision",
   "version": "5.0.0-alpha.10",
-  "author": "Jeremy Ruston <jeremy@jermolene.com>",
+  
+  "//": "It is briefly described as",
   "description": "a non-linear personal web notebook",
-  "contributors": [
-    {
-      "name": "Jeremy Ruston",
-      "email": "jeremy@jermolene.com"
-    }
+
+  "//": "It is notably related to",
+  "keywords": [
+    "tiddlywiki",
+    "tiddlywiki5",
+	"CommonJS",
+    "wiki"
   ],
-  "bin": {
-    "tiddlywiki": "./tiddlywiki.js"
-  },
-  "main": "./core/boot.js",
+
+  "//": "The most useful URL is",
+  "homepage": "http://five.tiddlywiki.com/",
+
+  "//": "The most useful URL for developers is",
+  "bugs": "http://github.com/Jermolene/TiddlyWiki5/issues",
+
+  "//": "The most useful URL for machines is",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jermolene/TiddlyWiki5.git"
   },
-  "keywords": [
-    "tiddlywiki",
-    "tiddlywiki5",
-    "wiki"
-  ],
-  "dependencies": {},
-  "devDependencies": {},
-  "bundleDependencies": [],
+
+  "//": "The most useful URLs for lawyers are",
   "license": "BSD",
+  "licenses": [
+	{
+	  "type": "BSD 3-Clause",
+	  "url": "http://opensource.org/licenses/BSD-3-Clause"
+	}, {
+	  "type": "Copyright (C)",
+	  "url": "https://raw.github.com/Jermolene/TiddlyWiki5/master/core/copyright.tid"
+	}
+  ],
+
+  "//": "Initiated by",
+  "author": "Jeremy Ruston <jeremy@jermolene.com> (http://jermolene.com/)",
+
+  "//": "These people work on publishing it",
+  "maintainers": [
+    "Jeremy Ruston <jeremy@jermolene.com> (http://jermolene.com/)",
+	"Nate Cain (http://github.com/natecain)"
+  ],
+
+  "//": "It was written by",
+  "contributors": [
+    "Jeremy Ruston <jeremy@jermolene.com> (http://jermolene.com/)",
+	"Mario Pietsch (http://github.com/pmario)",
+	"David Johnston (http://github.com/Brennall)",
+	"Tobias Beer (http://github.com/tobibeer)",
+	"Nate Cain (http://github.com/natecain)",
+	"Federatial Limited (http://www.federatial.com/)"
+  ],
+
+  "//": "Primarily consisting of",
+  "files": [
+    "bin", "boot", "core", "editions", "licenses", "plugins", "themes",
+	"tiddlywiki.js"
+  ],
+
+  "//": "Start reading at",
+  "main": "./core/boot",
+  
+  "//": "Run with",
+  "bin": {
+    "tiddlywiki": "./bin/tiddlywiki.js"
+  },
+  
+  "//": "If you need to know where things are",
+  "directories": {
+    "lib": "core",
+	"bin": "bin",
+	"man": "",
+	"doc": ".",
+	"example": "editions"
+  },
+
+
+  "//": "If you need to take some canned actions",
+  "scripts": {
+    "test": "sh scripts/test.sh",
+    "start": "sh -c 'node bin/tiddlywiki.js editions/clientserver --verbose --server $NPM_PACKAGE_CONFIG_SERVER_PORT $:/core/templates/tiddlywiki5.template.html text/plain text/html'",
+	
+	"bld": "sh scripts/bld.sh",
+	"wbld": "sh scripts/wbld.sh",
+	"2bld": "sh scripts/2bld.sh",
+	"deploy": "sh scripts/deploy.sh",
+    "serve": "sh scripts/serve.sh"
+  },
+
+  "//": "It implements some common specifications",
+  "implements": ["CommonJS/Modules/1.0", "CommonJS/Modules/1.1"],
+
+  "//": "All it relies on for sure is",
+  "//": "(nothing, yet...)",
+  "dependencies": {
+  },
+
+  "//": "Developers may also need",
+  "devDependencies": {
+    "semver-sync": "=1.2.0"
+  },
+
+  "//": "It should be delivered bundled with",
+  "//": "(Bundling might be used to package 'stock' plugins/themes as submodules)",
+  "bundleDependencies": [],
+
+  "//": "Optionally, you can use it with",
+  "optionalDependencies": {
+    "express": "3.x.x"
+  },
+
+  "//": "You can probably use it reliably for most things with just",
   "engines": {
-    "node": ">=0.8.2"
-  }
+    "node": "~0.10.18 <0.12",
+	"npm": "~1.x.x"
+  },
+
+  "//": "It is known to run well on",
+  "os": ["linux", "macos", "solaris", "windows", "win32", "win64", "smartos", "*"],
+
+  "//": "Those OSes are known to run it well on",
+  "cpu": ["ia32", "ia64", "x86", "x86_64", "arm"],
+
+  "//": "(If you want to run on an untested/'unsupported' os or cpu you will need to force npm",
+  "//": " or request that the platform be added to the list of installable configurations!)",
+
+  "//": "It will probably run to some degree on other engines",
+  "engineStrict": false,
+
+  "//": "You should generally install it as a global module",
+  "preferGlobal": true,
+
+  "//": "To be used as a contextual environment for deployment",
+  "config": {
+    "server_port": 8080
+  },
+
+  "//": "To be used as a contextual environment for publishing TW itself",
+  "publishConfig": {
+    "//": "(Eventually TW5's own npm registry config will go here?)"
+  },
+
+  "//": "",
+  "//": null
 }
+
+
