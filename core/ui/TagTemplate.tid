@@ -1,6 +1,9 @@
 title: $:/core/ui/TagTemplate
 
-<$button popup="$:/state/tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible"><$setstyle name="background-color" value={{!!color}} class="tw-tag-label"><$transclude title={{!!icon}}/> <$view field="title" format="text" /></$setstyle></$button>
+\define tag-styles()
+background-color:$(backgroundColor)$;
+\end
+<$setvariable name="backgroundColor" value={{!!color}}><$button popup="$:/state/tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible tw-tag-label" style=<<tag-styles>>><$transclude title={{!!icon}}/> <$view field="title" format="text" /></$button></$setvariable>
 <$reveal state="$:/state/tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
 <$view field="title" format="link" />
 ----

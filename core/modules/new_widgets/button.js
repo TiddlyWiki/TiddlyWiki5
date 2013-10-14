@@ -46,6 +46,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		}
 	}
 	domNode.className = classes.join(" ");
+	// Assign classes
+	domNode.setAttribute("style",this.style);
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
@@ -114,6 +116,7 @@ ButtonWidget.prototype.execute = function() {
 	this.hover = this.getAttribute("hover");
 	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
 	this["class"] = this.getAttribute("class","");
+	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
 	// Qualify tiddler titles if required
 	if(this.qualifyTiddlerTitles) {
@@ -134,7 +137,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || changedAttributes.selectedClass || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		this.refreshSelf();
 		return true;
 	}
