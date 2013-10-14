@@ -71,6 +71,31 @@ ViewWidget.prototype.execute = function() {
 The various formatter functions are baked into this widget for the moment. Eventually they will be replaced by macro functions
 */
 
+ViewWidget.prototype.getValue = function() {
+	// Get the value to display
+	var value,
+		tiddler = this.wiki.getTiddler(this.viewTitle);
+	if(tiddler) {
+		if(this.viewField === "text") {
+			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
+			value = this.wiki.getTiddlerText(this.viewTitle);
+		} else {
+			if($tw.utils.hop(tiddler.fields,this.viewField)) {
+				value = tiddler.fields[this.viewField];				
+			} else {
+				value = "";
+			}
+		}
+	} else {
+		if(this.viewField === "title") {
+			value = this.viewTitle;
+		} else {
+			value = undefined;
+		}
+	}
+	return value;
+};
+
 ViewWidget.prototype.getValueAsText = function() {
 	// Get the value to display
 	var text,
@@ -80,24 +105,13 @@ ViewWidget.prototype.getValueAsText = function() {
 			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
 			text = this.wiki.getTiddlerText(this.viewTitle);
 		} else {
-			if($tw.utils.hop(tiddler.fields,this.viewField)) {
-				text = tiddler.fields[this.viewField];				
-			} else {
-				text = "";
-			}
+			text = tiddler.getFieldString(this.viewField);
 		}
 	} else { // Use a special value if the tiddler is missing
-		switch(this.viewField) {
-			case "title":
-				text = this.getVariable("tiddlerTitle");
-				break;
-			case "modified":
-			case "created":
-				text = new Date();
-				break;
-			default:
-				text = "";
-				break;
+		if(this.viewField === "title") {
+			text = this.viewTitle;
+		} else {
+			text = "";
 		}
 	}
 	return text;
@@ -112,11 +126,11 @@ ViewWidget.prototype.getValueAsHtmlEncoded = function() {
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {
-	return $tw.utils.formatDateString(this.getValueAsText(),format);
+	return $tw.utils.formatDateString(this.getValue(),format);
 };
 
 ViewWidget.prototype.getValueAsRelativeDate = function(format) {
-	var value = this.getValueAsText();
+	var value = this.getValue();
 	if(value) {
 		return $tw.utils.getRelativeDate((new Date()) - (new Date(value))).description;
 	} else {
