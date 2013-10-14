@@ -104,7 +104,9 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 				]}];
 			}
 		}
-		templateTree = [{type: "tiddler", attributes: {title: {type: "string", value: title}}, children: templateTree}]
+		if(!this.hasAttribute("hackCurrentTiddler")) {
+			templateTree = [{type: "tiddler", attributes: {title: {type: "string", value: title}}, children: templateTree}]
+		}
 	}
 	// Return the list item
 	return {type: "listitem", itemTitle: title, children: templateTree};

@@ -1,5 +1,4 @@
 title: $:/core/ui/ListItemTemplate
 
-<div class="tw-menu-list-item">
-<$link to={{!!title}}><$view field="title"/></$link>
+<div class="tw-menu-list-item"><$link to={{!!title}}><$view field="title"/></$link>
 </div>

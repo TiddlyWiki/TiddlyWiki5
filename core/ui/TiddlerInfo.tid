@@ -5,17 +5,17 @@ title: $:/core/ui/TiddlerInfo
 </div>
 <div class="tw-tab-content">
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="refTab" default="refTab" qualifyTiddlerTitles="yes">
-<$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one">
+<$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one" template="$:/core/ui/ListItemTemplate">
 </$list>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="taggingTab" qualifyTiddlerTitles="yes">
-<$list filter="[is[current]tagging[]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one"/>
+<$list filter="[is[current]tagging[]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="listTab" qualifyTiddlerTitles="yes">
-<$list filter="[list{!!title}]" itemClass="tw-menu-list-item" emptyMessage="This tiddler does not have a list"/>
+<$list filter="[list{!!title}]" itemClass="tw-menu-list-item" emptyMessage="This tiddler does not have a list" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="listedTab" qualifyTiddlerTitles="yes">
-<$list filter="[is[current]listed[]!is[system]]" itemClass="tw-menu-list-item" emptyMessage="This tiddler is not listed by any others"/>
+<$list filter="[is[current]listed[]!is[system]]" itemClass="tw-menu-list-item" emptyMessage="This tiddler is not listed by any others" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>
 <$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="fieldsTab" qualifyTiddlerTitles="yes">
 <$transclude title="$:/core/ui/TiddlerFields"/>

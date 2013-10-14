@@ -426,16 +426,10 @@ a.tw-tiddlylink-external {
 }
 
 .tw-view-field-name {
-	vertical-align: top;
-	display: inline-block;
-	width: 15%;
 	text-align: right;
 }
 
 .tw-view-field-value {
-	vertical-align: top;
-	display: inline-block;
-	width: 75%;
 }
 
 @media screen {
