@@ -108,6 +108,9 @@
     "semver-sync": "=1.2.0"
   },
 
+  "//": "(semver-sync tracks versioning in boot)",
+  "versionedSources": "./boot/boot.js,./boot/bootprefix.js",
+
   "//": "It should be delivered bundled with",
   "//": "(Bundling might be used to package 'stock' plugins/themes as submodules)",
   "bundleDependencies": [],

@@ -85,13 +85,14 @@ return $tw
 
 });
 
-if(typeof(exports) === "undefined") {
-	// Set up $tw global for the browser
-	window.$tw = _bootprefix();
-} else {
-	// Export functionality as a module
-	exports.bootprefix = _bootprefix;
+if(typeof(window) !== "undefined") {
+  // Set up $tw global for the browser
+  window.$tw = _bootprefix();
 }
 
-
+if(typeof(exports) !== "undefined") {
+  // Export functionality as a module
+  exports.bootprefix = _bootprefix;
+  exports.version = "5.0.0-alpha.10";
+}
 
