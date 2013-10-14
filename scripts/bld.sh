@@ -32,7 +32,7 @@ rm $TW5_BUILD_OUTPUT/static/*
 #  index.html: the main file, including content
 #  static.html: the static version of the default tiddlers
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--rendertiddler ReadMe ./readme.md text/html \
@@ -45,7 +45,7 @@ node ./tiddlywiki.js \
 
 # Second, encrypted.html: a version of the main file encrypted with the password "password"
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--password password \
@@ -54,7 +54,7 @@ node ./tiddlywiki.js \
 
 # Third, empty.html: empty wiki for reuse
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	./editions/empty \
 	--verbose \
 	--rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/empty.html text/plain \
@@ -62,7 +62,7 @@ node ./tiddlywiki.js \
 
 # Fourth, tahoelafs.html: empty wiki with plugin for Tahoe-LAFS
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	./editions/tahoelafs \
 	--verbose \
 	--rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/tahoelafs.html text/plain \
@@ -70,7 +70,7 @@ node ./tiddlywiki.js \
 
 # Fifth, d3demo.html: wiki to demo d3 plugin
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	./editions/d3demo \
 	--verbose \
 	--rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/d3demo.html text/plain \
@@ -78,4 +78,6 @@ node ./tiddlywiki.js \
 
 # Sixth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
-./test.sh
+./scripts/test.sh
+
+

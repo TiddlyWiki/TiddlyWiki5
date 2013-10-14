@@ -4,7 +4,7 @@
 
 # Optional parameter is the username for signing edits
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	editions/clientserver \
 	--verbose \
 	--server 8080 $:/core/templates/tiddlywiki5.template.html text/plain text/html $1\

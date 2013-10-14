@@ -12,7 +12,7 @@ mkdir -p tmp
 
 # Open the tw5tiddlyweb edition in TW5 and save the template for the main HTML file
 
-node ./tiddlywiki.js \
+node bin/tiddlywiki.js \
 	editions/tw5tiddlyweb \
 	--verbose \
 	--rendertiddler $:/core/templates/tiddlywiki5.template.html tmp/tiddlyweb.html text/plain \
@@ -27,3 +27,5 @@ cat tmp/tiddlyweb.html >> tmp/tiddlerforupload.txt
 # Upload the tiddler file
 
 curl -u $1:$2 -X PUT -H "content-type: text/plain" http://tw5tiddlyweb.tiddlyspace.com/bags/tw5tiddlyweb_public/tiddlers/tw5 --data-binary @tmp/tiddlerforupload.txt
+
+
