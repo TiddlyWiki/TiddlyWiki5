@@ -425,6 +425,10 @@ a.tw-tiddlylink-external {
 	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
 }
 
+.tw-view-field-table {
+	width: 100%;
+}
+
 .tw-view-field-name {
 	text-align: right;
 	font-style: italic;
