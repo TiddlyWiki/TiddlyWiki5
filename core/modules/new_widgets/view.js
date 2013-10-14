@@ -80,7 +80,11 @@ ViewWidget.prototype.getValueAsText = function() {
 			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
 			text = this.wiki.getTiddlerText(this.viewTitle);
 		} else {
-			text = tiddler.fields[this.viewField];
+			if($tw.utils.hop(tiddler.fields,this.viewField)) {
+				text = tiddler.fields[this.viewField];				
+			} else {
+				text = "";
+			}
 		}
 	} else { // Use a special value if the tiddler is missing
 		switch(this.viewField) {
@@ -112,8 +116,12 @@ ViewWidget.prototype.getValueAsDate = function(format) {
 };
 
 ViewWidget.prototype.getValueAsRelativeDate = function(format) {
-	var d = new Date(this.getValueAsText());
-	return $tw.utils.getRelativeDate((new Date()) - d).description;
+	var value = this.getValueAsText();
+	if(value) {
+		return $tw.utils.getRelativeDate((new Date()) - (new Date(value))).description;
+	} else {
+		return "";
+	}
 };
 
 /*
