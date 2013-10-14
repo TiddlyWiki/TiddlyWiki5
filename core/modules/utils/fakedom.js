@@ -28,6 +28,7 @@ var TW_TextNode = function(text) {
 
 var TW_Element = function(tag,namespace) {
 	bumpSequenceNumber(this);
+	this.isTiddlyWikiFakeDom = true;
 	this.tag = tag;
 	this.attributes = {};
 	this.isRaw = false;

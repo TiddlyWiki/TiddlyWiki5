@@ -33,7 +33,41 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement("div");
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
+	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
+		this.positionPopup(domNode);
+	}
 	this.domNodes.push(domNode);
+};
+
+RevealWidget.prototype.positionPopup = function(domNode) {
+	domNode.style.position = "absolute";
+	domNode.style.zIndex = "1000";
+	switch(this.position) {
+		case "left":
+			domNode.style.left = (this.popup.left - domNode.offsetWidth) + "px";
+			domNode.style.top = this.popup.top + "px";
+			break;
+		case "above":
+			domNode.style.left = this.popup.left + "px";
+			domNode.style.top = (this.popup.top - domNode.offsetHeight) + "px";
+			break;
+		case "aboveright":
+			domNode.style.left = (this.popup.left + this.popup.width) + "px";
+			domNode.style.top = (this.popup.top + this.popup.height - domNode.offsetHeight) + "px";
+			break;
+		case "right":
+			domNode.style.left = (this.popup.left + this.popup.width) + "px";
+			domNode.style.top = this.popup.top + "px";
+			break;
+		case "belowleft":
+			domNode.style.left = (this.popup.left + this.popup.width - domNode.offsetWidth) + "px";
+			domNode.style.top = (this.popup.top + this.popup.height) + "px";
+			break;
+		default: // Below
+			domNode.style.left = this.popup.left + "px";
+			domNode.style.top = (this.popup.top + this.popup.height) + "px";
+			break;
+	}
 };
 
 /*
