@@ -1437,7 +1437,7 @@ return $tw;
 
 if(typeof(exports) !== "undefined") {
 	exports.TiddlyWiki = _boot;
-	exports.version = "5.0.0-alpha.10";
+	exports.version = "5.0.0-alpha.11";
 }
 
 if(typeof(window) !== "undefined") {

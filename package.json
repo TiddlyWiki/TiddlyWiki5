@@ -3,7 +3,7 @@
   "name": "tiddlywiki",
   
   "//": "It is semantically versioned at revision",
-  "version": "5.0.0-alpha.10",
+  "version": "5.0.0-alpha.11",
   
   "//": "It is briefly described as",
   "description": "a non-linear personal web notebook",

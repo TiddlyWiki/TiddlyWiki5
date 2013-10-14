@@ -93,6 +93,6 @@ if(typeof(window) !== "undefined") {
 if(typeof(exports) !== "undefined") {
   // Export functionality as a module
   exports.bootprefix = _bootprefix;
-  exports.version = "5.0.0-alpha.10";
+  exports.version = "5.0.0-alpha.11";
 }
 
