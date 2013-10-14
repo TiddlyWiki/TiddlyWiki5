@@ -2,9 +2,7 @@ title: $:/core/ui/MissingTemplate
 
 <$button popup="$:/state/missingpopup" qualifyTiddlerTitles="yes" class="btn-invisible tw-missing-tiddler-label"><$view field="title" format="text" /></$button>
 <$reveal state="$:/state/missingpopup" type="popup" position="below" qualifyTiddlerTitles="yes" ><div class="tw-drop-down">
-<$view field="title" format="link" />
-----
-<$list filter="[is[current]backlinks[]sort[title]]">
-<$view field="title" format="link" />
-</$list>
+<$transclude title="$:/core/ui/ListItemTemplate"/>
+<hr>
+<$list filter="[is[current]backlinks[]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 </div></$reveal>
