@@ -37,9 +37,12 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement("button");
 	// Assign classes
 	var classes = this["class"].split(" ") || [];
-	if(this.set && this.setTo && this.selectedClass) {
-		if(this.isSelected()) {
-			classes.push(this.selectedClass.split(" "));
+	if(this.selectedClass) {
+		if(this.set && this.setTo && this.isSelected()) {
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
+		}
+		if(this.popup && this.isPoppedUp()) {
+			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
 		}
 	}
 	domNode.className = classes.join(" ");
@@ -73,6 +76,12 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 ButtonWidget.prototype.isSelected = function() {
 	var tiddler = this.wiki.getTiddler(this.set);
 	return tiddler ? tiddler.fields.text === this.setTo : false;
+};
+
+ButtonWidget.prototype.isPoppedUp = function() {
+	var tiddler = this.wiki.getTiddler(this.popup);
+	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(this.popup,tiddler.fields.text) : false;
+	return result;
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
