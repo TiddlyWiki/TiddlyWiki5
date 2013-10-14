@@ -71,11 +71,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-	var title = this.set;
-	if(this.qualifyTiddlerTitles) {
-		title =  title + "-" + this.getStateQualifier();
-	}
-	var tiddler = this.wiki.getTiddler(title);
+	var tiddler = this.wiki.getTiddler(this.set);
 	return tiddler ? tiddler.fields.text === this.setTo : false;
 };
 
@@ -84,24 +80,16 @@ ButtonWidget.prototype.dispatchMessage = function(event) {
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {
-	var title = this.popup;
-	if(this.qualifyTiddlerTitles) {
-		title =  title + "-" + this.getStateQualifier();
-	}
 	$tw.popup.triggerPopup({
 		domNode: this.domNodes[0],
-		title: title,
+		title: this.popup,
 		wiki: this.wiki
 	});
 };
 
 ButtonWidget.prototype.setTiddler = function() {
-	var title = this.set;
-	if(this.qualifyTiddlerTitles) {
-		title =  title + "-" + this.getStateQualifier();
-	}
-	var tiddler = this.wiki.getTiddler(title);
-	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: title, text: this.setTo}));
+	var tiddler = this.wiki.getTiddler(this.set);
+	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
 };
 
 /*
@@ -118,6 +106,16 @@ ButtonWidget.prototype.execute = function() {
 	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
 	this["class"] = this.getAttribute("class","");
 	this.selectedClass = this.getAttribute("selectedClass");
+	// Qualify tiddler titles if required
+	if(this.qualifyTiddlerTitles) {
+		var qualifier = this.getStateQualifier();
+		if(this.set) {
+			this.set = this.set + "-" + qualifier;
+		}
+		if(this.popup) {
+			this.popup = this.popup + "-" + qualifier;
+		}
+	}
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -127,7 +125,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || changedAttributes.selectedClass) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || changedAttributes.selectedClass || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		this.refreshSelf();
 		return true;
 	}
