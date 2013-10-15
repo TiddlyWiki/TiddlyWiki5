@@ -15,7 +15,6 @@ Temporary shim widgets
 var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
 
 exports.linkcatcher = Widget;
-exports.setstyle = Widget;
 exports["import"] = Widget;
 
 })();
