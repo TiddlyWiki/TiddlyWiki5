@@ -127,6 +127,184 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 	return false;
 };
 
+// Close all tiddlers
+NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
+	this.storyList = [];
+	this.saveStoryList();
+	return false;
+};
+
+// Place a tiddler in edit mode
+NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
+	this.getStoryList();
+	// Replace the specified tiddler with a draft in edit mode
+	for(var t=0; t<this.storyList.length; t++) {
+		if(this.storyList[t] === event.tiddlerTitle) {
+			// Compute the title for the draft
+			var draftTitle = this.generateDraftTitle(event.tiddlerTitle);
+			this.storyList[t] = draftTitle;
+			// Get the current value of the tiddler we're editing
+			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+			// Save the initial value of the draft tiddler
+			this.wiki.addTiddler(new $tw.Tiddler(
+				{text: "Type the text for the tiddler '" + event.tiddlerTitle + "'"},
+				tiddler,
+				{
+					title: draftTitle,
+					"draft.title": event.tiddlerTitle,
+					"draft.of": event.tiddlerTitle
+				},
+				this.wiki.getModificationFields()
+				));
+		}
+	}
+	this.saveStoryList();
+	return false;
+};
+
+// Delete a tiddler
+NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
+	// Get the tiddler we're deleting
+	var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+	// Check if the tiddler we're deleting is in draft mode
+	if(tiddler.hasField("draft.title")) {
+		// Delete the original tiddler
+		this.wiki.deleteTiddler(tiddler.fields["draft.of"]);
+	}
+	// Delete this tiddler
+	this.wiki.deleteTiddler(event.tiddlerTitle);
+	// Remove the closed tiddler from the story
+	this.getStoryList();
+	// Look for tiddler with this title to close
+	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
+	if(slot !== -1) {
+		this.storyList.splice(slot,1);
+		this.saveStoryList();
+	}
+	return false;
+};
+
+/*
+Generate a title for the draft of a given tiddler
+*/
+NavigatorWidget.prototype.generateDraftTitle = function(title) {
+	var c = 0;
+	do {
+		var draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
+		c++;
+	} while(this.wiki.tiddlerExists(draftTitle));
+	return draftTitle;
+};
+
+// Take a tiddler out of edit mode, saving the changes
+NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
+	this.getStoryList();
+	var storyTiddlerModified = false; // We have to special case saving the story tiddler itself
+	for(var t=0; t<this.storyList.length; t++) {
+		if(this.storyList[t] === event.tiddlerTitle) {
+			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+			if(tiddler) {
+				var draftTitle = tiddler.fields["draft.title"],
+					draftOf = tiddler.fields["draft.of"];
+				if(draftTitle) {
+					var isRename = draftOf !== draftTitle,
+						isConfirmed = true;
+					if(isRename && this.wiki.tiddlerExists(draftTitle)) {
+						isConfirmed = confirm("Do you wish to overwrite the tiddler '" + draftTitle + "'?");
+					}
+					if(isConfirmed) {
+						// Save the draft tiddler as the real tiddler
+						this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
+							title: draftTitle,
+							"draft.title": undefined, 
+							"draft.of": undefined
+						},this.wiki.getModificationFields()));
+						// Remove the draft tiddler
+						this.wiki.deleteTiddler(event.tiddlerTitle);
+						// Remove the original tiddler if we're renaming it
+						if(isRename) {
+							this.wiki.deleteTiddler(draftOf);
+						}
+						// Make the story record point to the newly saved tiddler
+						this.storyList[t] = draftTitle;
+						// Check if we're modifying the story tiddler itself
+						if(draftTitle === this.storyTitle) {
+							storyTiddlerModified = true;
+						}
+					}
+				}
+			}
+		}
+	}
+	if(!storyTiddlerModified) {
+		this.saveStoryList();
+	}
+	return false;
+};
+
+// Take a tiddler out of edit mode without saving the changes
+NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
+	this.getStoryList();
+	var storyTiddlerModified = false;
+	for(var t=0; t<this.storyList.length; t++) {
+		if(this.storyList[t] === event.tiddlerTitle) {
+			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+			if(tiddler.hasField("draft.title")) {
+				// Remove the draft tiddler
+				this.wiki.deleteTiddler(event.tiddlerTitle);
+				// Make the story record point to the original tiddler
+				this.storyList[t] = tiddler.fields["draft.title"];
+				// Check if we're modifying the story tiddler itself
+				if(tiddler.fields["draft.title"] === this.storyTitle) {
+					storyTiddlerModified = true;
+				}
+			}
+		}
+	}
+	if(!storyTiddlerModified) {
+		this.saveStoryList();
+	}
+	return false;
+};
+
+// Create a new draft tiddler
+NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
+	// Get the story details
+	this.getStoryList();
+	// Create the new tiddler
+	var title;
+	for(var t=0; true; t++) {
+		title = "New Tiddler" + (t ? " " + t : "");
+		if(!this.wiki.tiddlerExists(title)) {
+			break;
+		}
+	}
+	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
+		title: title,
+		text: "Newly created tiddler"
+	},this.wiki.getModificationFields());
+	this.wiki.addTiddler(tiddler);
+	// Create the draft tiddler
+	var draftTitle = this.generateDraftTitle(title),
+		draftTiddler = new $tw.Tiddler({
+			text: "Type the text for the new tiddler",
+			title: draftTitle,
+			"draft.title": title,
+			"draft.of": title
+		},this.wiki.getModificationFields());
+	this.wiki.addTiddler(draftTiddler);
+	// Update the story to insert the new draft at the top
+	var slot = this.findTitleInStory(event.navigateFromTitle,-1) + 1;
+	this.storyList.splice(slot,0,draftTitle);
+	// Save the updated story
+	this.saveStoryList();
+	// Add a new record to the top of the history stack
+	var history = this.wiki.getTiddlerData(this.historyTitle,[]);
+	history.push({title: draftTitle});
+	this.wiki.setTiddlerData(this.historyTitle,history);
+	return false;
+};
+
 exports.navigator = NavigatorWidget;
 
 })();
