@@ -36,6 +36,9 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
 		this.positionPopup(domNode);
 	}
+	if(!this.isOpen) {
+		domNode.setAttribute("hidden","true")
+	}
 	this.domNodes.push(domNode);
 };
 
