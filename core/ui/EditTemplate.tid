@@ -1,13 +1,14 @@
 title: $:/core/ui/EditTemplate
 modifier: JeremyRuston
 
-<span class="tw-tiddler-controls title"> <$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button> <$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button}}</$button> <$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button}}</$button> </span>
+\define frame-classes()
+tw-tiddler-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
+\end
+<div class=<<frame-classes>>><span class="tw-tiddler-controls title"> <$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button> <$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button}}</$button> <$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button}}</$button> </span>
 
 <$view field="title"/>
 
-@@.title
-<$edit field="draft.title"/>
-@@
+<$edit-text field="draft.title" class="title tw-edit-texteditor"/>
 
 <$transclude title="$:/core/ui/TagsEditor"/>
 
@@ -18,13 +19,13 @@ modifier: JeremyRuston
 <$transclude />
 </div>
 <div class="tw-tiddler-preview-edit">
-<$edit field="text"/>
+<$edit field="text" class="tw-edit-texteditor"/>
 </div>
 </div>
 </$reveal>
 <$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
 <$transclude title="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
-<$edit field="text"/>
+<$edit field="text" class="tw-edit-texteditor"/>
 </$reveal>
 
-<$transclude title="$:/core/ui/FieldEditor"/>
+<$transclude title="$:/core/ui/FieldEditor"/></div>

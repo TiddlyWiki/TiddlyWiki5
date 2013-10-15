@@ -524,7 +524,7 @@ a.tw-tiddlylink-external {
 	color: #888888;
 }
 
-.tw-tiddler-frame .tw-edit-texteditor input, .tw-tiddler-frame .tw-edit-texteditor textarea {
+.tw-tiddler-frame input.tw-edit-texteditor, .tw-tiddler-frame textarea.tw-edit-texteditor {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
 	border: 1px solid #ccc;
@@ -533,7 +533,7 @@ a.tw-tiddlylink-external {
 	margin: 4px 0 4px 0;
 }
 
-.tw-tiddler-frame .tw-edit-texteditor input {
+.tw-tiddler-frame input.tw-edit-texteditor {
 	background-color: #f8f8f8;
 	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
 }
