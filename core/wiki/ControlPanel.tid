@@ -2,13 +2,13 @@ title: $:/ControlPanel
 
 ''Initial setup''
 
-:[[Title of this TiddlyWiki|SiteTitle]]: <$edit tiddler="SiteTitle" default="" type="input"/>
+:[[Title of this TiddlyWiki|SiteTitle]]: <$edit-text title="SiteTitle" default="" tag="input"/>
 
-:[[Subtitle|SiteSubtitle]]: <$edit tiddler="SiteSubtitle" default="" type="input"/>
+:[[Subtitle|SiteSubtitle]]: <$edit-text title="SiteSubtitle" default="" tag="input"/>
 
-:[[Username for signing edits|$:/status/UserName]]: <$edit tiddler="$:/status/UserName" default="" type="input"/>
+:[[Username for signing edits|$:/status/UserName]]: <$edit-text title="$:/status/UserName" default="" tag="input"/>
 
-:[[Animation duration|$:/config/AnimationDuration]]: <$edit tiddler="$:/config/AnimationDuration" default="" type="input"/><br><br>
+:[[Animation duration|$:/config/AnimationDuration]]: <$edit-text title="$:/config/AnimationDuration" default="" tag="input"/><br><br>
 :Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to choose which tiddlers are displayed at startup
 
 :{{$:/snippets/encryptionstatus}}
