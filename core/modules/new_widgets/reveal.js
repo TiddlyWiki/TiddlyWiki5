@@ -30,7 +30,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElement("div");
+	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
