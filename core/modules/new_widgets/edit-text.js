@@ -68,7 +68,9 @@ EditTextWidget.prototype.getEditInfo = function() {
 	// Get the edit value
 	var tiddler = this.wiki.getTiddler(this.editTitle),
 		value;
-	if(this.editField) {
+	if(this.editIndex) {
+		value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
+	} else {
 		// Get the current tiddler and the field name
 		if(tiddler) {
 			// If we've got a tiddler, the value to display is the field string value
@@ -88,8 +90,6 @@ EditTextWidget.prototype.getEditInfo = function() {
 			}
 			value = this.editDefault;
 		}
-	} else {
-		value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
 	}
 	return {tiddler: tiddler, value: value};
 };
