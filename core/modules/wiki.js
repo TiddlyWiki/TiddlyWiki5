@@ -748,19 +748,19 @@ exports.search = function(text,options) {
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type];
-		if(contentTypeInfo ? contentTypeInfo.encoding === "utf8" : true) {
-			var match = true;
-			for(var t=0; t<searchTermsRegExps.length; t++) {
-				// Search title and body
-				if(match) {
-					var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
-					match = searchTermsRegExps[t].test(tiddler.fields.title) || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.text);
+		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"];
+		var match = true;
+		for(var t=0; t<searchTermsRegExps.length; t++) {
+			// Search title and body
+			if(match) {
+				var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
+				if(contentTypeInfo.encoding === "utf8") {
+					match = searchTermsRegExps[t].test(tiddler.fields.title);
 				}
+				match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.text);
 			}
-			return options.invert ? !match : match;
 		}
-		return false;			
+		return options.invert ? !match : match;
 	};
 	// Loop through all the tiddlers doing the search
 	var results = [];
