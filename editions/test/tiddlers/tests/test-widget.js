@@ -282,6 +282,21 @@ describe("Widget module", function() {
 		expect(wrapper.innerHTML).toBe("<p>\n<div class='My something something,  or other thing'>\nContent</div></p>");
 	});
 
+	it("should deal with built-in macros", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "Jolly Old World", type: "text/vnd.tiddlywiki"}
+		]);
+		// Construct the widget node
+		var text = "\\define makelink(text,type)\n<a href=<<makedatauri text:\"$text$\" type:\"$type$\">>>My linky link</a>\n\\end\n\n<$macrocall $name=\"makelink\" text={{TiddlerOne}} type={{TiddlerOne!!type}}/>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\n<a href='data:text/vnd.tiddlywiki,Jolly%20Old%20World'>\nMy linky link</a></p>");
+	});
+
 	it("should deal with the list widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers

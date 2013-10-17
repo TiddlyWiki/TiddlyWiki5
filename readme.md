@@ -128,8 +128,7 @@ The following commands are available:</p><div class='tw-list-frame'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/LoadCommand.html'>
-LoadCommand</a></span></h3><div>
-<div class='tw-transclude'>
+LoadCommand</a></span></h3><div class='tw-transclude'>
 <p>
 Load tiddlers from 2.x.x <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a> files (<code>
@@ -137,22 +136,20 @@ TiddlyWiki</a> files (<code>
 .tiddler</code>, <code>
 .tid</code>, <code>
 .json</code> or other files </p><pre>
---load &lt;filepath&gt;</pre></div></div></div></div><div class='tw-list-element'>
+--load &lt;filepath&gt;</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PasswordCommand.html'>
-PasswordCommand</a></span></h3><div>
-<div class='tw-transclude'>
+PasswordCommand</a></span></h3><div class='tw-transclude'>
 <p>
 Set a password for subsequent crypto operations</p><pre>
---password &lt;password&gt;</pre></div></div></div></div><div class='tw-list-element'>
+--password &lt;password&gt;</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/PrintCommand.html'>
-PrintCommand</a></span></h3><div>
-<div class='tw-transclude'>
+PrintCommand</a></span></h3><div class='tw-transclude'>
 <p>
 The <code>
 print</code> command outputs specified information. </p><h3 class=''>
@@ -167,24 +164,22 @@ Print the titles of the system tiddlers in the wiki store </p><pre>
 --print system</pre><h3 class=''>
 print config</h3><p>
 Print the current core configuration </p><pre>
---print config</pre></div></div></div></div><div class='tw-list-element'>
+--print config</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RenderTiddlerCommand.html'>
-RenderTiddlerCommand</a></span></h3><div>
-<div class='tw-transclude'>
+RenderTiddlerCommand</a></span></h3><div class='tw-transclude'>
 <p>
 Render an individual tiddler as a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/ContentType.html'>
 ContentType</a>, defaults to <code>
 text/html</code> and save it to the specified filename </p><pre>
---rendertiddler &lt;title&gt; &lt;filename&gt; [&lt;type&gt;]</pre></div></div></div></div><div class='tw-list-element'>
+--rendertiddler &lt;title&gt; &lt;filename&gt; [&lt;type&gt;]</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RenderTiddlersCommand.html'>
-RenderTiddlersCommand</a></span></h3><div>
-<div class='tw-transclude'>
+RenderTiddlersCommand</a></span></h3><div class='tw-transclude'>
 <p>
 Render a set of tiddlers matching a filter to separate files of a specified <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/ContentType.html'>
 ContentType</a> (defaults to <code>
@@ -192,13 +187,12 @@ text/html</code>) and extension (defaults to <code>
 .html</code>).</p><pre>
 --rendertiddlers &lt;filter&gt; &lt;template&gt; &lt;pathname&gt; [&lt;type&gt;] [&lt;extension&gt;]</pre><p>
 For example:</p><pre>
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></div></div><div class='tw-list-element'>
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/ServerCommand.html'>
-ServerCommand</a></span></h3><div>
-<div class='tw-transclude'>
+ServerCommand</a></span></h3><div class='tw-transclude'>
 <p>
 The server built in to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a> is very simple. Although compatible with <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWeb.html'>
@@ -222,26 +216,24 @@ servetype</strong> - the content type with which the root tiddler should be serv
 <strong>
 username</strong> - the default username for signing edits</li></ul><p>
 For example:</p><pre>
---server 8080 $:/core/tiddlywiki5.template.html text/plain text/html MyUserName</pre></div></div></div></div><div class='tw-list-element'>
+--server 8080 $:/core/tiddlywiki5.template.html text/plain text/html MyUserName</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/VerboseCommand.html'>
-VerboseCommand</a></span></h3><div>
-<div class='tw-transclude'>
+VerboseCommand</a></span></h3><div class='tw-transclude'>
 <p>
 Triggers verbose output, useful for debugging </p><pre>
---verbose</pre></div></div></div></div><div class='tw-list-element'>
+--verbose</pre></div></div></div><div class='tw-list-element'>
 <div class='tw-tiddler'>
 <h3 class=''>
 <span class='tw-view-link'>
 <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/VersionCommand.html'>
-VersionCommand</a></span></h3><div>
-<div class='tw-transclude'>
+VersionCommand</a></span></h3><div class='tw-transclude'>
 <p>
 Displays the version number of <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
 TiddlyWiki</a>.</p><pre>
---version</pre></div></div></div></div></div></div></div><p>
+--version</pre></div></div></div></div></div></div><p>
 <em>
 This readme file was automatically generated by <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
 TiddlyWiki5</a></em>

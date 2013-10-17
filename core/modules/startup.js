@@ -28,6 +28,7 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	// Set up the parsers
 	$tw.wiki.initParsers();
 	// Set up the syncer object
