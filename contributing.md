@@ -1,10 +1,8 @@
 <h1 class=''>
-Contributing to <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a></h1><div class='tw-tiddler'>
-<div class='tw-transclude'>
-<p>
-<a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> welcomes contributions to its code and documentation via <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5'>
+Contributing to <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='TiddlyWiki5'>
+TiddlyWiki5</a></h1><p>
+<a class=' tw-tiddlylink tw-tiddlylink-resolves' href='TiddlyWiki5'>
+TiddlyWiki5</a> welcomes contributions to its code and documentation via <a class=' tw-tiddlylink tw-tiddlylink-missing' href='https://github.com/Jermolene/TiddlyWiki5'>
 GitHub</a>. Please take a moment to read these notes to help make the process as smooth as possible.</p><h2 class=''>
 Bug Reports</h2><p>
 From the perspective of the developers, a bug report that says little more than &quot;it doesn't work&quot; can be frustrating. For effective debugging, we need as much information as possible. At a minimum, please try to include:</p><ul>
@@ -16,24 +14,24 @@ Expected behaviour</li><li>
 Context (OS, browser etc.)</li></ul><p>
 There's a lot of good material on the web about bug reports:</p><ul>
 <li>
-<a class='tw-tiddlylink tw-tiddlylink-external' href='http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report'>
+<a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report'>
 http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report</a></li><li>
-<a class='tw-tiddlylink tw-tiddlylink-external' href='http://www.chiark.greenend.org.uk/~sgtatham/bugs.html'>
+<a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://www.chiark.greenend.org.uk/~sgtatham/bugs.html'>
 http://www.chiark.greenend.org.uk/~sgtatham/bugs.html</a></li></ul><h2 class=''>
 Pull Requests</h2><p>
-Like other <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/OpenSource.html'>
-OpenSource</a> projects, <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> needs a signed <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/ContributorLicenseAgreement.html'>
-ContributorLicenseAgreement</a> from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/UnaMesa.html'>
-UnaMesa</a> Association (the legal entity that owns <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
+Like other <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='OpenSource'>
+OpenSource</a> projects, <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='TiddlyWiki5'>
+TiddlyWiki5</a> needs a signed <a class=' tw-tiddlylink tw-tiddlylink-missing' href='ContributorLicenseAgreement'>
+ContributorLicenseAgreement</a> from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the <a class=' tw-tiddlylink tw-tiddlylink-missing' href='UnaMesa'>
+UnaMesa</a> Association (the legal entity that owns <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='TiddlyWiki'>
 TiddlyWiki</a> on behalf of the community).</p><ul>
 <li>
-For individuals use: <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md'>
+For individuals use: <a class=' tw-tiddlylink tw-tiddlylink-missing' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md'>
 CLA-individual</a></li><li>
-For entities use: <a class='tw-tiddlylink tw-tiddlylink-external' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md'>
+For entities use: <a class=' tw-tiddlylink tw-tiddlylink-missing' href='https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md'>
 CLA-entity</a></li></ul><p>
 <em>
-This is a first pass at a CLA for <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
+This is a first pass at a CLA for <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='TiddlyWiki'>
 TiddlyWiki</a>. Please let us know if we missed something important. If we do have to make essential changes to the CLA, there is a possibility that all contributors will need to sign it again</em></p><h3 class=''>
 How to sign the CLA</h3><pre>
 git clone https://github.com/Jermolene/TiddlyWiki5.git TiddlyWiki5
@@ -51,10 +49,10 @@ Go to your github repo and create a pull request.</strong></p><p>
 <strong>
 Thank you!</strong></p><h4 class=''>
 Attribution</h4><p>
-The CLA documents used for this project where created using <a class='tw-tiddlylink tw-tiddlylink-external' href='http://www.harmonyagreements.org'>
+The CLA documents used for this project where created using <a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://www.harmonyagreements.org'>
 Harmony Project Templates</a>. &quot;HA-CLA-I-LIST Version 1.0&quot; for &quot;CLA-individual&quot; and &quot;HA-CLA-E-LIST Version 1.0&quot; for &quot;CLA-entity&quot;
-</p></div></div><p>
+</p><p>
 <em>
-This file was automatically generated by <a class='tw-tiddlylink tw-tiddlylink-internal tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
+This file was automatically generated by <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='TiddlyWiki5'>
 TiddlyWiki5</a></em>
 </p>
