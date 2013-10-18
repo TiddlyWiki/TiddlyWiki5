@@ -742,38 +742,40 @@ exports.search = function(text,options) {
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
 		if(!searchTermsRegExps) {
-			return !options.invert;
+			return false;
 		}
 		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
-		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"];
-		var match = true;
+		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
+			match;
 		for(var t=0; t<searchTermsRegExps.length; t++) {
-			// Search title and body
-			if(match) {
-				var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
-				if(contentTypeInfo.encoding === "utf8") {
-					match = searchTermsRegExps[t].test(tiddler.fields.title);
-				}
-				match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.text);
+			// Search title, tags and body
+			match = false;
+			if(contentTypeInfo.encoding === "utf8") {
+				match = match || searchTermsRegExps[t].test(tiddler.fields.text);
+			}
+			var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
+			match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
+			if(!match) {
+				return false;
 			}
 		}
-		return options.invert ? !match : match;
+		return true;
 	};
 	// Loop through all the tiddlers doing the search
 	var results = [];
 	if($tw.utils.isArray(options.titles)) {
 		for(t=0; t<options.titles.length; t++) {
-			if(searchTiddler(options.titles[t])) {
+			if(!!searchTiddler(options.titles[t]) === !options.invert) {
 				results.push(options.titles[t]);
 			}
 		}
 	} else {
 		var source = options.titles || this.tiddlers;
 		for(t in source) {
-			if(searchTiddler(t)) {
+			if(!!searchTiddler(t) === !options.invert) {
 				results.push(t);
 			}
 		}
