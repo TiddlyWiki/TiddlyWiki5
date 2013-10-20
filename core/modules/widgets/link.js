@@ -13,7 +13,7 @@ Implements the link widget.
 "use strict";
 
 var isLinkExternal = function(to) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"]+(?:\/|\b)/i;
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s'"]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
