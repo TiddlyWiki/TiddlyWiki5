@@ -99,9 +99,9 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 				templateTree = this.parseTreeNode.children;
 			} else {
 				// Default template is a link to the title
-				templateTree = [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
+				templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
 						{type: "text", text: title}
-				]}];
+				]}]}];
 			}
 		}
 		if(!this.hasAttribute("hackCurrentTiddler")) {
