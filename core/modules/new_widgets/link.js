@@ -27,7 +27,6 @@ LinkWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 LinkWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -53,6 +52,7 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 Render this widget into the DOM
 */
 LinkWidget.prototype.renderLink = function(parent,nextSibling) {
+	var self = this;
 	// Create our element
 	var domNode = this.document.createElement("a");
 	// Assign classes
