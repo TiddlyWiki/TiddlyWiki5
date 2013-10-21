@@ -648,7 +648,7 @@ var tweakMacroDefinition = function(nodeList) {
 		};
 		nodeList[0].children = nodeList.slice(1);
 		nodeList.splice(1,nodeList.length-1);
-		tweakMacroDefinition(nodeList.children);
+		tweakMacroDefinition(nodeList[0].children);
 	}
 };
 
