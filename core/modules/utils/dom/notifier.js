@@ -12,6 +12,8 @@ Notifier mechanism
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/new_widgets/widget.js");
+
 var Notifier = function(wiki) {
 	this.wiki = wiki;
 };
@@ -35,12 +37,16 @@ Notifier.prototype.display = function(title,options) {
 	// Add classes
 	$tw.utils.addClass(notification,"tw-notification");
 	// Render the body of the notification
-	var bodyParser = this.wiki.parseTiddler(title),
-		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}, document: document});
-	bodyRenderTree.execute();
-	bodyRenderTree.renderInDom(notification);
+	var parser = this.wiki.new_parseTiddler(title),
+		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
+		widgetNode = new widget.widget(parseTreeNode,{
+			wiki: this.wiki,
+			parentWidget: $tw.rootWidget,
+			document: document
+		});
+	widgetNode.render(notification,null);
 	this.wiki.addEventListener("change",function(changes) {
-		bodyRenderTree.refreshInDom(changes);
+		widgetNode.refresh(changes,notification,null);
 	});
 	// Set the initial styles for the notification
 	$tw.utils.setStyle(notification,[

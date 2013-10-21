@@ -12,6 +12,8 @@ Modal message mechanism
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/new_widgets/widget.js");
+
 var Modal = function(wiki) {
 	this.wiki = wiki;
 	this.modalCount = 0;
@@ -71,20 +73,28 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		titleText = title;
 	}
-	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
-		headerRenderTree = new $tw.WikiRenderTree(headerParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}, document: document});
-	headerRenderTree.execute();
-	headerRenderTree.renderInDom(headerTitle);
+	var headerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
+		headerParseTreeNode = headerParser ? {type: "widget", children: headerParser.tree} : undefined,
+		headerWidgetNode = new widget.widget(headerParseTreeNode,{
+			wiki: this.wiki,
+			parentWidget: $tw.rootWidget,
+			document: document
+		});
+	headerWidgetNode.render(modalHeader,null);
 	this.wiki.addEventListener("change",function(changes) {
-		headerRenderTree.refreshInDom(changes);
+		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
 	// Render the body of the message
-	var bodyParser = this.wiki.parseTiddler(title),
-		bodyRenderTree = new $tw.WikiRenderTree(bodyParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}, document: document});
-	bodyRenderTree.execute();
-	bodyRenderTree.renderInDom(modalBody);
+	var bodyParser = this.wiki.new_parseTiddler(title),
+		bodyParseTreeNode = bodyParser ? {type: "widget", children: bodyParser.tree} : undefined,
+		bodyWidgetNode = new widget.widget(bodyParseTreeNode,{
+			wiki: this.wiki,
+			parentWidget: $tw.rootWidget,
+			document: document
+		});
+	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
-		bodyRenderTree.refreshInDom(changes);
+		bodyWidgetNode.refresh(changes,modalBody,null);
 	});
 	// Setup the link if present
 	if(options.downloadLink) {
@@ -107,15 +117,19 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
 	}
-	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
-		footerRenderTree = new $tw.WikiRenderTree(footerParser,{wiki: $tw.wiki, context: {tiddlerTitle: title}, document: document});
-	footerRenderTree.execute();
-	footerRenderTree.renderInDom(modalFooterButtons);
+	var footerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
+		footerParseTreeNode = footerParser ? {type: "widget", children: footerParser.tree} : undefined,
+		footerWidgetNode = new widget.widget(footerParseTreeNode,{
+			wiki: this.wiki,
+			parentWidget: $tw.rootWidget,
+			document: document
+		});
+	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
-		footerRenderTree.refreshInDom(changes);
+		footerWidgetNode.refresh(changes,modalFooterButtons,null);
 	});
 	// Add the close event handler
-	wrapper.addEventListener("tw-close-tiddler",function(event) {
+	var closeHandler = function(event) {
 		// Decrease the modal count and adjust the body class
 		self.modalCount--;
 		self.adjustPageClass();
@@ -136,9 +150,11 @@ Modal.prototype.display = function(title,options) {
 			}
 		},duration);
 		// Don't let anyone else handle the tw-close-tiddler message
-		event.stopPropagation();
 		return false;
-	},false);
+	};
+	headerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
+	bodyWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
+	footerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}

@@ -63,29 +63,38 @@ exports.startup = function() {
 		$tw.popup = new $tw.utils.Popup({
 			rootElement: document.body
 		});
+		// Install the animator
+		$tw.anim = new $tw.utils.Animator();
+		// Kick off the stylesheet manager
+		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
+		// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+		$tw.rootWidget = new widget.widget({type: "widget", children: []},{
+				wiki: $tw.wiki,
+				document: document
+			});
 		// Install the modal message mechanism
 		$tw.modal = new $tw.utils.Modal($tw.wiki);
-		document.addEventListener("tw-modal",function(event) {
+		$tw.rootWidget.addEventListener("tw-modal",function(event) {
 			$tw.modal.display(event.param);
-		},false);
+		});
 		// Install the notification  mechanism
 		$tw.notifier = new $tw.utils.Notifier($tw.wiki);
-		document.addEventListener("tw-notify",function(event) {
+		$tw.rootWidget.addEventListener("tw-notify",function(event) {
 			$tw.notifier.display(event.param);
-		},false);
+		});
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
-		document.addEventListener("tw-scroll",$tw.pageScroller,false);
+		$tw.rootWidget.addEventListener("tw-scroll",$tw.pageScroller);
 		// Install the save action handler
 		$tw.wiki.initSavers();
-		document.addEventListener("tw-save-wiki",function(event) {
+		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
 			$tw.wiki.saveWiki({
 				template: event.param,
 				downloadType: "text/plain"
 			});
-		},false);
+		});
 		// Install the crypto event handlers
-		document.addEventListener("tw-set-password",function(event) {
+		$tw.rootWidget.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: "Set a new password for this TiddlyWiki",
 				noUserName: true,
@@ -96,19 +105,16 @@ exports.startup = function() {
 				}
 			});
 		});
-		document.addEventListener("tw-clear-password",function(event) {
+		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
-		// Install the animator
-		$tw.anim = new $tw.utils.Animator();
-		// Kick off the stylesheet manager
-		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
 		// Display the PageTemplate
 		var templateTitle = "$:/core/ui/PageTemplate",
 			parser = $tw.wiki.new_parseTiddler(templateTitle),
 			parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
 			widgetNode = new widget.widget(parseTreeNode,{
 				wiki: $tw.wiki,
+				parentWidget: $tw.rootWidget,
 				document: document
 			});
 		$tw.new_pageContainer = document.createElement("div");
@@ -118,18 +124,6 @@ exports.startup = function() {
 		$tw.wiki.addEventListener("change",function(changes) {
 			widgetNode.refresh(changes,$tw.new_pageContainer,null);
 		});
-		// // Display the old PageTemplate
-		// var old_templateTitle = "$:/core/ui/PageTemplate",
-		// 	old_parser = $tw.wiki.parseTiddler(old_templateTitle),
-		// 	renderTree = new $tw.WikiRenderTree(old_parser,{wiki: $tw.wiki, context: {tiddlerTitle: old_templateTitle}, document: document});
-		// renderTree.execute();
-		// $tw.pageContainer = document.createElement("div");
-		// $tw.utils.addClass($tw.pageContainer,"tw-page-container");
-		// document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		// renderTree.renderInDom($tw.pageContainer);
-		// $tw.wiki.addEventListener("change",function(changes) {
-		// 	renderTree.refreshInDom(changes);
-		// });
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
