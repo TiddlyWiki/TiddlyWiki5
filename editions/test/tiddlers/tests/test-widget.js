@@ -362,6 +362,89 @@ describe("Widget module", function() {
 		});
 	});
 
+	it("should deal with the list widget followed by other widgets", function() {
+		var wiki = new $tw.Wiki();
+		// Add some tiddlers
+		wiki.addTiddlers([
+			{title: "TiddlerOne", text: "Jolly Old World"},
+			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
+			{title: "TiddlerThree", text: "Golly Gosh"},
+			{title: "TiddlerFour", text: "Lemon Squash"}
+		]);
+		// Construct the widget node
+		var text = "<$list><$view field='title'/></$list>Something";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
+		// Render the widget node to the DOM
+		var wrapper = renderWidgetNode(widgetNode);
+		// Test the rendering
+		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+		// Check the next siblings of each of the list elements
+		var listWidget = widgetNode.children[0].children[0];
+		// Add another tiddler
+		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(4);
+			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
+		});
+		// Remove a tiddler
+		wiki.deleteTiddler("TiddlerThree");
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerTwoSomething</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(5);
+		});
+		// Add it back a tiddler
+		wiki.addTiddler({title: "TiddlerThree", text: "Something"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(8);
+			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
+		});
+		// Add another a tiddler to the end of the list
+		wiki.addTiddler({title: "YetAnotherTiddler", text: "Something"});
+		// Refresh
+		refreshWidgetNode(widgetNode,wrapper,["YetAnotherTiddler"]);
+		describe("should refresh", function() {
+			// Test the refreshing
+			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoYetAnotherTiddlerSomething</p>");
+			// Test the sequence numbers in the DOM
+			expect(wrapper.sequenceNumber).toBe(0);
+			expect(wrapper.children[0].sequenceNumber).toBe(1);
+			expect(wrapper.children[0].children[0].sequenceNumber).toBe(7);
+			expect(wrapper.children[0].children[1].sequenceNumber).toBe(2);
+			expect(wrapper.children[0].children[2].sequenceNumber).toBe(3);
+			expect(wrapper.children[0].children[3].sequenceNumber).toBe(8);
+			expect(wrapper.children[0].children[4].sequenceNumber).toBe(5);
+		});
+	});
+
 	it("should deal with the list widget and external templates", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
