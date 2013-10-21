@@ -41,6 +41,9 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(this.editType) {
 		domNode.setAttribute("type",this.editType);
 	}
+	if(this.editPlaceholder) {
+		domNode.setAttribute("placeholder",this.editPlaceholder);
+	}
 	// Assign classes
 	domNode.className = this.editClass;
 	// Set the text
@@ -104,6 +107,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editIndex = this.getAttribute("index");
 	this.editDefault = this.getAttribute("default","");
 	this.editClass = this.getAttribute("class");
+	this.editPlaceholder = this.getAttribute("placeholder");
 	// Get the editor element tag and type
 	var tag,type;
 	if(this.editField === "text") {
