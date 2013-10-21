@@ -34,6 +34,25 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
+	// Get the value of the tw-wikilinks configuration macro
+	var wikiLinksMacro = this.getVariable("tw-wikilinks"),
+		useWikiLinks = wikiLinksMacro ? !(wikiLinksMacro.trim() === "no") : true;
+	// Render the link if required
+	if(useWikiLinks) {
+		this.renderLink(parent,nextSibling);
+	} else {
+		// Just insert the link text
+		var domNode = this.document.createElement("span");
+		parent.insertBefore(domNode,nextSibling);
+		this.renderChildren(domNode,null);
+		this.domNodes.push(domNode);
+	}
+};
+
+/*
+Render this widget into the DOM
+*/
+LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Create our element
 	var domNode = this.document.createElement("a");
 	// Assign classes
@@ -49,7 +68,11 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 		}
 	}
 	// Set an href
-	domNode.setAttribute("href",this.to);
+	var wikiLinkTemplateMacro = this.getVariable("tw-wikilink-template"),
+		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
+		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
+	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+	domNode.setAttribute("href",wikiLinkText);
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		// Send the click on it's way as a navigate event
