@@ -318,6 +318,11 @@ Widget.prototype.addEventListener = function(type,handler) {
 		this.eventListeners[type] = function(event) {
 			return self[handler].call(self,event);
 		};
+	} else { // The handler is a function
+		this.eventListeners[type] = function(event) {
+			return handler.call(self,event);
+		}
+
 	}
 };
 
