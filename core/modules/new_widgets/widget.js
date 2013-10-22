@@ -356,7 +356,7 @@ Widget.prototype.refresh = function(changedTiddlers) {
 Rebuild a previously rendered widget
 */
 Widget.prototype.refreshSelf = function() {
-	var nextSibling = this.findNextSibling();
+	var nextSibling = this.findNextSiblingDomNode();
 	this.removeChildDomNodes();
 	this.render(this.parentDomNode,nextSibling);
 };
@@ -376,7 +376,7 @@ Widget.prototype.refreshChildren = function(changedTiddlers) {
 /*
 Find the next sibling in the DOM to this widget. This is done by scanning the widget tree through all next siblings and their descendents that share the same parent DOM node
 */
-Widget.prototype.findNextSibling = function(startIndex) {
+Widget.prototype.findNextSiblingDomNode = function(startIndex) {
 	// Refer to this widget by its index within its parents children
 	var parent = this.parentWidget,
 		index = startIndex !== undefined ? startIndex : parent.children.indexOf(this);
@@ -394,7 +394,7 @@ if(index === -1) {
 	var grandParent = parent.parentWidget;
 	if(grandParent && parent.parentDomNode === this.parentDomNode) {
 		index = grandParent.children.indexOf(parent);
-		return parent.findNextSibling(index);
+		return parent.findNextSiblingDomNode(index);
 	}
 	return null;
 };

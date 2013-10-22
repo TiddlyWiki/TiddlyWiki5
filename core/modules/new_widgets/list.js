@@ -142,7 +142,7 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			return this.refreshChildren(changedTiddlers);
 		} else {
 			// Replace the previous content with the empty message
-			var nextSibling = this.findNextSibling();
+			var nextSibling = this.findNextSiblingDomNode();
 			this.removeChildDomNodes();
 			this.makeChildWidgets(this.getEmptyMessage());
 			this.renderChildren(this.parentDomNode,nextSibling);
@@ -200,9 +200,9 @@ Insert a new list item at the specified index
 */
 ListWidget.prototype.insertListItem = function(index,title) {
 	var newItem = this.makeChildWidget(this.makeItemTemplate(title));
-	newItem.parentDomNode = this.parentDomNode; // Hack to enable findNextSibling() to work
+	newItem.parentDomNode = this.parentDomNode; // Hack to enable findNextSiblingDomNode() to work
 	this.children.splice(index,0,newItem);
-	var nextSibling = newItem.findNextSibling();
+	var nextSibling = newItem.findNextSiblingDomNode();
 	newItem.render(this.parentDomNode,nextSibling);
 	return true;
 };
