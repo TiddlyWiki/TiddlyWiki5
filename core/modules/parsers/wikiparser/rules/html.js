@@ -379,7 +379,7 @@ exports.findNextTag = function(source,pos,options) {
 		// Try to parse the candidate as a tag
 		var tag = this.parseTag(source,match.index,options);
 		// Return success
-		if(tag) {
+		if(tag && this.isLegalTag(tag.tag)) {
 			return tag;
 		}
 		// Look for the next match
@@ -388,6 +388,19 @@ exports.findNextTag = function(source,pos,options) {
 	}
 	// Failed
 	return null;
+};
+
+exports.isLegalTag = function(tag) {
+	// If it starts with a $ then we'll let anything go
+	if(tag.charAt(0) === "$") {
+		return true;
+	// If it starts with a dash then it's not legal
+	} else if(tag.charAt(0) === "-") {
+		return false;
+	} else {
+		// Otherwise it's OK
+		return true;
+	}
 };
 
 })();
