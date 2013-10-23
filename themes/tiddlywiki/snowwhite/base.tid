@@ -630,28 +630,33 @@ canvas.tw-edit-bitmapeditor  {
 	width: 48%;
 }
 
-.tw-edit-fields > .tw-list-frame > div:nth-child(odd) {
+.tw-edit-fields {
+	width: 100%;
+}
+
+
+.tw-edit-fields table, .tw-edit-fields tr, .tw-edit-fields td {
+	border: none;
+	padding: 4px;
+}
+
+.tw-edit-fields > tbody > .tw-edit-field:nth-child(odd) {
 	background-color: #f0f4f0;
 }
 
-.tw-edit-fields > .tw-list-frame > div:nth-child(even) {
+.tw-edit-fields > tbody > .tw-edit-field:nth-child(even) {
 	background-color: #e0e8e0;
 }
 
 .tw-edit-field-name {
-	display: inline-block;
-	width: 15%;
 	text-align: right;
 }
 
-.tw-edit-field-value {
-	display: inline-block;
-	width: 75%;
+.tw-edit-field-value input {
+	width: 100%;
 }
 
 .tw-edit-field-remove {
-	display: inline-block;
-	width: 5%;
 }
 
 .tw-edit-field-remove svg {
