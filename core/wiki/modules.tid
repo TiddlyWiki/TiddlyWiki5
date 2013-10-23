@@ -1,0 +1,13 @@
+title: $:/snippets/modules
+
+\define describeModuleType(type)
+{{$:/docs/moduletypes/$type$}}
+\end
+<$list filter="[moduletypes[]]">
+!! <<listItem>>
+<$macrocall $name="describeModuleType" type=<<listItem>>/>
+<ul><$list filter="[is[current]modules[]]"><li><$link><<tiddlerTitle>></$link>
+</li>
+</$list>
+</ul>
+</$list>
