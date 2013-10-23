@@ -54,9 +54,10 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("value",editInfo.value)
 	}
 	// Add an input event handler
-	domNode.addEventListener("input",function (event) {
-		return self.handleInputEvent(event);
-	},false);
+	$tw.utils.addEventListeners(domNode,[
+		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
+		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+	]);
 	// Insert the element into the DOM
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
@@ -108,6 +109,15 @@ EditTextWidget.prototype.execute = function() {
 	this.editDefault = this.getAttribute("default","");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
+	this.editFocusSet = this.getAttribute("focusSet");
+	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");;
+	// Qualify tiddler titles if required
+	if(this.qualifyTiddlerTitles) {
+		var qualifier = this.getStateQualifier();
+		if(this.editFocusSet) {
+			this.editFocusSet = this.editFocusSet + "-" + qualifier;
+		}
+	}
 	// Get the editor element tag and type
 	var tag,type;
 	if(this.editField === "text") {
@@ -183,6 +193,24 @@ Handle a dom "input" event
 EditTextWidget.prototype.handleInputEvent = function(event) {
 	this.saveChanges();
 	this.fixHeight();
+	return true;
+};
+
+EditTextWidget.prototype.handleFocusEvent = function(event) {
+	if(this.editFocusSet) {
+console.log("Focus",{
+			domNode: this.domNodes[0],
+			title: this.editFocusSet,
+			wiki: this.wiki,
+			force: true
+		})
+		$tw.popup.triggerPopup({
+			domNode: this.domNodes[0],
+			title: this.editFocusSet,
+			wiki: this.wiki,
+			force: true
+		});
+	}
 	return true;
 };
 

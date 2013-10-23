@@ -30,7 +30,7 @@ Popup.prototype.show = function(options) {
 };
 
 Popup.prototype.handleEvent = function(event) {
-	if(event.type === "click" && !$tw.utils.domContains(this.anchorDomNode,event.target)) {
+	if(event.type === "click" && this.anchorDomNode !== event.target && !$tw.utils.domContains(this.anchorDomNode,event.target)) {
 		this.cancel();
 	}
 };
