@@ -198,12 +198,6 @@ EditTextWidget.prototype.handleInputEvent = function(event) {
 
 EditTextWidget.prototype.handleFocusEvent = function(event) {
 	if(this.editFocusSet) {
-console.log("Focus",{
-			domNode: this.domNodes[0],
-			title: this.editFocusSet,
-			wiki: this.wiki,
-			force: true
-		})
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
 			title: this.editFocusSet,
