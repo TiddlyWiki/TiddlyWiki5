@@ -91,11 +91,15 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title || changedAttributes.tag || changedAttributes["class"] || changedTiddlers[this.checkboxTitle]) {
+	if(changedAttributes.title || changedAttributes.tag || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
+	} else {
+		if(changedTiddlers[this.checkboxTitle]) {
+			this.inputDomNode.checked = this.getValue();
+		}
+		return this.refreshChildren(changedTiddlers);
 	}
-	return this.refreshChildren(changedTiddlers);
 };
 
 /*
