@@ -37,6 +37,14 @@ node ./tiddlywiki.js \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/encrypted.html text/plain \
 	|| exit 1
 
+# Fifth, d3demo.html: wiki to demo d3 plugin
+
+node ./tiddlywiki.js \
+	./editions/d3demo \
+	--verbose \
+	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/d3demo.html text/plain \
+	|| exit 1
+
 # Run tests
 
 ./test.sh
