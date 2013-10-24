@@ -27,22 +27,41 @@ exports.init = function(parser) {
 	this.matchRegExp = /\[\[(.*?)(?:\|(.*?))?\]\]/mg;
 };
 
+var isLinkExternal = function(to) {
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s'"]+(?:\/|\b)/i;
+	return externalRegExp.test(to);
+};
+
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Process the link
 	var text = this.match[1],
 		link = this.match[2] || text;
-	return [{
-		type: "element",
-		tag: "$link",
-		attributes: {
-			to: {type: "string", value: link}
-		},
-		children: [{
-			type: "text", text: text
-		}]
-	}];
+	if(isLinkExternal(link)) {
+		return [{
+			type: "element",
+			tag: "a",
+			attributes: {
+				href: {type: "string", value: link},
+				target: {type: "string", value: "_blank"}
+			},
+			children: [{
+				type: "text", text: text
+			}]
+		}];
+	} else {
+		return [{
+			type: "element",
+			tag: "$link",
+			attributes: {
+				to: {type: "string", value: link}
+			},
+			children: [{
+				type: "text", text: text
+			}]
+		}];
+	}
 };
 
 })();

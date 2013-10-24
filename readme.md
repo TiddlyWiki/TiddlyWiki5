@@ -10,13 +10,13 @@ node.js application</a>.</p><p>
 TiddlyWiki5</a> is currently in alpha, meaning it is working but incomplete. It is a great time to get involved and support its <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/RoadMap.html'>
 future development</a>:</p><ul>
 <li>
-Explore its features online at <a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/http%3A%2F%2Ffive.tiddlywiki.com%2F.html'>
+Explore its features online at <a href='http://five.tiddlywiki.com/' target='_blank'>
 http://five.tiddlywiki.com/</a></li><li>
-Join the discussions on <a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/http%3A%2F%2Fgroups.google.com%2Fgroup%2FTiddlyWikiDev.html'>
+Join the discussions on <a href='http://groups.google.com/group/TiddlyWikiDev' target='_blank'>
 the TiddlyWikiDev Google Group</a></li><li>
-Get involved in the <a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/https%3A%2F%2Fgithub.com%2FJermolene%2FTiddlyWiki5.html'>
+Get involved in the <a href='https://github.com/Jermolene/TiddlyWiki5' target='_blank'>
 development on GitHub</a></li><li>
-Follow <a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/http%3A%2F%2Ftwitter.com%2F%23!%2FTiddlyWiki.html'>
+Follow <a href='http://twitter.com/#!/TiddlyWiki' target='_blank'>
 @TiddlyWiki on Twitter</a> for the latest news</li></ul><p>
 <em>
 <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki.html'>
@@ -33,7 +33,7 @@ TiddlyWikiFiles</a>. For example, the following command loads the tiddlers from 
 TiddlyWiki</a> HTML file and then saves one of them in HTML:</p><pre>
 node tiddlywiki.js --verbose --load mywiki.html --rendertiddler ReadMe ./readme.html</pre><p>
 In order to use <a class=' tw-tiddlylink tw-tiddlylink-resolves' href='http://five.tiddlywiki.com/static/TiddlyWiki5.html'>
-TiddlyWiki5</a> on the command line you must first install node.js from <a class=' tw-tiddlylink tw-tiddlylink-missing' href='http://five.tiddlywiki.com/static/http%3A%2F%2Fnodejs.org%2F.html'>
+TiddlyWiki5</a> on the command line you must first install node.js from <a href='http://nodejs.org/' target='_blank'>
 http://nodejs.org/</a></p><h2 class=''>
 Usage</h2><p>
 Running <code>

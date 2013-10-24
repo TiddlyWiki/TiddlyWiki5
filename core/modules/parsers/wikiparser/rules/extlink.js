@@ -26,7 +26,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /~?(?:file|http|https|mailto|ftp|irc|news|data):[^\s'"<>]+(?:\/|\b)/mg;
+	this.matchRegExp = /~?(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s'"<>]+(?:\/|\b)/mg;
 };
 
 exports.parse = function() {
@@ -38,9 +38,10 @@ exports.parse = function() {
 	} else {
 		return [{
 			type: "element",
-			tag: "$link",
+			tag: "a",
 			attributes: {
-				to: {type: "string", value: this.match[0]}
+				href: {type: "string", value: this.match[0]},
+				target: {type: "string", value: "_blank"}
 			},
 			children: [{
 				type: "text", text: this.match[0]
