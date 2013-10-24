@@ -28,6 +28,15 @@ node ./tiddlywiki.js \
 	--new_rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 	|| exit 1
 
+# Second, encrypted.html: a version of the main file encrypted with the password "password"
+
+node ./tiddlywiki.js \
+	./editions/tw5.com \
+	--verbose \
+	--password password \
+	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/encrypted.html text/plain \
+	|| exit 1
+
 # Run tests
 
 ./test.sh
