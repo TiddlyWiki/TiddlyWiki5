@@ -61,6 +61,9 @@ ViewWidget.prototype.execute = function() {
 		case "relativedate":
 			this.text = this.getValueAsRelativeDate();
 			break;
+		case "stripcomments":
+			this.text = this.getValueAsStrippedComments();
+			break;
 		default: // "text"
 			this.text = this.getValueAsText();
 			break;
@@ -136,6 +139,18 @@ ViewWidget.prototype.getValueAsRelativeDate = function(format) {
 	} else {
 		return "";
 	}
+};
+
+ViewWidget.prototype.getValueAsStrippedComments = function() {
+	var lines = this.getValueAsText().split("\n"),
+		out = [];
+	for(var line=0; line<lines.length; line++) {
+		var text = lines[line];
+		if(!/^\s*\/\/#/.test(text)) {
+			out.push(text);
+		}
+	}
+	return out.join("\n");
 };
 
 /*

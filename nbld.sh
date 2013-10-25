@@ -53,6 +53,17 @@ node ./tiddlywiki.js \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/codemirrordemo.html text/plain \
 	|| exit 1
 
+# cook the TiddlyWiki 2.x.x index file
+
+node ./tiddlywiki.js \
+	editions/tw2 \
+	--verbose \
+	--load editions/tw2/source/tiddlywiki.com/index.html.recipe \
+	--new_rendertiddler $:/core/templates/tiddlywiki2.template.html ./tmp/tw2/index.html text/plain \
+	|| exit 1
+
+opendiff tmp/tw2/index.html editions/tw2/target/pre-widgetredux2.html
+
 # Run tests
 
 ./test.sh
