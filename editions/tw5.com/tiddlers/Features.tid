@@ -1,6 +1,6 @@
 created: 201308221728
 creator: JeremyRuston
-modified: 201309102146
+modified: 201310250846
 modifier: JeremyRuston
 tags: introduction
 title: Features
@@ -13,7 +13,8 @@ title: Features
 * Familiar user interface elements like <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">wizards</$button> and <$button message="tw-notify" param="SampleNotification" class="btn btn-inverse">notifications</$button>
 * Easily [[import|ImportTiddlers]] content via drag and drop, copy and paste, or browsing for local files 
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
-* Explore the  [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
+* Explore the [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
+* Try out the [[CodeMirror plugin|http://five.tiddlywiki.com/codemirrordemo.html]]
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules
