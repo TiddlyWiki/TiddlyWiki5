@@ -74,24 +74,28 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
 	// Add a click event handler
-	domNode.addEventListener("click",function (event) {
-		// Send the click on it's way as a navigate event
-		var bounds = domNode.getBoundingClientRect();
-		self.dispatchEvent({
-			type: "tw-navigate",
-			navigateTo: self.to,
-			navigateFromNode: self,
-			navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
-			}
-		});
-		event.preventDefault();
-		event.stopPropagation();
-		return false;
-	},false);
+	$tw.utils.addEventListeners(domNode,[
+		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}
+	]);
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+};
+
+LinkWidget.prototype.handleClickEvent = function (event) {
+	// Send the click on it's way as a navigate event
+	var bounds = this.domNodes[0].getBoundingClientRect();
+	this.dispatchEvent({
+		type: "tw-navigate",
+		navigateTo: this.to,
+		navigateFromNode: this,
+		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		}
+	});
+	event.preventDefault();
+	event.stopPropagation();
+	return false;
 };
 
 /*
