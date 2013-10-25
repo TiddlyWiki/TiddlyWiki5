@@ -61,6 +61,9 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	// Insert the element into the DOM
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
+	if(this.postRender) {
+		this.postRender();
+	}
 	// Fix height
 	this.fixHeight();
 };
@@ -141,22 +144,37 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely rerender if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index) {
+	if(changedAttributes.title || changedAttributes.field || changedAttributes.index) {
 		this.refreshSelf();
 		return true;
-	} else if(changedTiddlers[this.editTitle]){
-		// Replace the edit value if the tiddler we're editing has changed
-		var domNode = this.domNodes[0];
-		if(!domNode.isTiddlyWikiFakeDom) {
-			if(this.document.activeElement !== domNode) {
-				var editInfo = this.getEditInfo();
-				domNode.value = editInfo.value;
-			}
-			// Fix the height if needed
-			this.fixHeight();
-		}
+	} else if(changedTiddlers[this.editTitle]) {
+		this.updateEditor(this.getEditInfo().value);
+		return true;
 	}
 	return false;
+};
+
+/*
+Update the editor with new text. This method is separate from updateEditorDomNode()
+so that subclasses can override updateEditor() and still use updateEditorDomNode()
+*/
+EditTextWidget.prototype.updateEditor = function(text) {
+	this.updateEditorDomNode(text);
+};
+
+/*
+Update the editor dom node with new text
+*/
+EditTextWidget.prototype.updateEditorDomNode = function(text) {
+	// Replace the edit value if the tiddler we're editing has changed
+	var domNode = this.domNodes[0];
+	if(!domNode.isTiddlyWikiFakeDom) {
+		if(this.document.activeElement !== domNode) {
+			domNode.value = text;
+		}
+		// Fix the height if needed
+		this.fixHeight();
+	}
 };
 
 /*
@@ -191,7 +209,7 @@ EditTextWidget.prototype.fixHeight = function() {
 Handle a dom "input" event
 */
 EditTextWidget.prototype.handleInputEvent = function(event) {
-	this.saveChanges();
+	this.saveChanges(this.domNodes[0].value);
 	this.fixHeight();
 	return true;
 };
@@ -208,8 +226,7 @@ EditTextWidget.prototype.handleFocusEvent = function(event) {
 	return true;
 };
 
-EditTextWidget.prototype.saveChanges = function() {
-	var text = this.domNodes[0].value
+EditTextWidget.prototype.saveChanges = function(text) {
 	if(this.editField) {
 		var tiddler = this.wiki.getTiddler(this.editTitle);
 		if(!tiddler) {
