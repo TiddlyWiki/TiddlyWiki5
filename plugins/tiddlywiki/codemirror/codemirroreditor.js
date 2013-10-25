@@ -1,9 +1,9 @@
 /*\
-title: $:/plugins/tiddlywiki/codemirror/codemirroreditor.js
+title: $:/core/modules/new_widgets/edit-text-codemirror.js
 type: application/javascript
-module-type: editor
+module-type: new_widget
 
-A Codemirror text editor
+Extend the edit-text widget to use CodeMirror
 
 \*/
 (function(){
@@ -13,100 +13,40 @@ A Codemirror text editor
 "use strict";
 
 if($tw.browser) {
-	require("./codemirror.js")
+    require("$:/plugins/tiddlywiki/codemirror/codemirror.js");
 }
 
-var CodeMirrorEditor = function(editWidget,tiddlerTitle,fieldName) {
-	this.editWidget = editWidget;
-	this.tiddlerTitle = tiddlerTitle;
-	this.fieldName = fieldName;
-};
+var EditTextWidget = require("$:/core/modules/new_widgets/edit-text.js")["edit-text"];
 
 /*
-Get the tiddler being edited and current value
+The edit-text widget calls this method just after inserting its dom nodes
 */
-CodeMirrorEditor.prototype.getEditInfo = function() {
-	// Get the current tiddler and the field name
-	var tiddler = this.editWidget.renderer.renderTree.wiki.getTiddler(this.tiddlerTitle),
-		value;
-	// If we've got a tiddler, the value to display is the field string value
-	if(tiddler) {
-		value = tiddler.getFieldString(this.fieldName);
+EditTextWidget.prototype.postRender = function() {
+	var self = this,
+		cm;
+	if($tw.browser && window.CodeMirror && this.editTag === "textarea") {
+		cm = CodeMirror.fromTextArea(this.domNodes[0],{
+			lineWrapping: true,
+			lineNumbers: true
+		});
+		cm.on("change",function() {
+			self.saveChanges(cm.getValue());
+		});
 	} else {
-		// Otherwise, we need to construct a default value for the editor
-		switch(this.fieldName) {
-			case "text":
-				value = "Type the text for the tiddler '" + this.tiddlerTitle + "'";
-				break;
-			case "title":
-				value = this.tiddlerTitle;
-				break;
-			default:
-				value = "";
-				break;
+		cm = undefined;
+	}
+	this.codemirrorInstance = cm;
+};
+
+EditTextWidget.prototype.updateEditor = function(text) {
+	// Replace the edit value if the tiddler we're editing has changed
+	if(this.codemirrorInstance) {
+		if(!this.codemirrorInstance.hasFocus()) {
+			this.codemirrorInstance.setValue(text);
 		}
-		value = this.editWidget.renderer.getAttribute("default",value);
-	}
-	return {tiddler: tiddler, value: value};
-};
-
-CodeMirrorEditor.prototype.render = function() {
-	// Get the initial value of the editor
-	var editInfo = this.getEditInfo();
-	// Create the editor nodes
-	var node = {
-		type: "element",
-		attributes: {}
-	};
-	this.type = this.editWidget.renderer.getAttribute("type",this.fieldName === "text" ? "textarea" : "input");
-	switch(this.type) {
-		case "textarea":
-			node.tag = "textarea";
-			node.children = [{
-				type: "text",
-				text: editInfo.value
-			}];
-			break;
-		case "search":
-			node.tag = "input";
-			node.attributes.type = {type: "string", value: "search"};
-			node.attributes.value = {type: "string", value: editInfo.value};
-			break;
-		default: // "input"
-			node.tag = "input";
-			node.attributes.type = {type: "string", value: "text"};
-			node.attributes.value = {type: "string", value: editInfo.value};
-			break;
-	}
-	// Set the element details
-	this.editWidget.tag = this.editWidget.renderer.parseTreeNode.isBlock ? "div" : "span";
-	this.editWidget.attributes = {
-		"class": "tw-edit-CodeMirrorEditor"
-	};
-	this.editWidget.children = this.editWidget.renderer.renderTree.createRenderers(this.editWidget.renderer,[node]);
-};
-
-CodeMirrorEditor.prototype.postRenderInDom = function() {
-	if(this.type === "textarea") {
-		var self = this;
-		// HACK: We use the timeout because postRenderInDom is called before the dom nodes have been added to the document
-		window.setTimeout(function() {
-			self.codemirrorInstance = CodeMirror.fromTextArea(self.editWidget.children[0].domNode,{
-				lineWrapping: true,
-				lineNumbers: true
-			});
-		},1);
+	} else {
+		this.updateEditorDomNode();
 	}
 };
-
-CodeMirrorEditor.prototype.refreshInDom = function() {
-	if(document.activeElement !== this.editWidget.children[0].domNode) {
-		var editInfo = this.getEditInfo();
-		this.editWidget.children[0].domNode.value = editInfo.value;
-	}
-};
-
-exports["text/vnd.tiddlywiki"] = CodeMirrorEditor;
-exports["text/plain"] = CodeMirrorEditor;
 
 })();
