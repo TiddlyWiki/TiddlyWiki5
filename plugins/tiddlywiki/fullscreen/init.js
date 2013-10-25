@@ -22,9 +22,9 @@ var toggleFullScreen = function() {
 
 exports.startup = function() {
 	// Install the full screen handler
-	document.addEventListener("tw-full-screen",function(event) {
+	$tw.rootWidget.addEventListener("tw-full-screen",function(event) {
 		toggleFullScreen();
-	},false);
+	});
 };
 
 })();

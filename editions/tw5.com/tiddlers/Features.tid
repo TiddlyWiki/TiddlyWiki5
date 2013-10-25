@@ -13,6 +13,7 @@ title: Features
 * Familiar user interface elements like <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">wizards</$button> and <$button message="tw-notify" param="SampleNotification" class="btn btn-inverse">notifications</$button>
 * Easily [[import|ImportTiddlers]] content via drag and drop, copy and paste, or browsing for local files 
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
+* Try out the <$button message="tw-full-screen">full screen support</$button>
 * Explore the [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
 * Try out the [[CodeMirror plugin|http://five.tiddlywiki.com/codemirrordemo.html]]
 * Many internal improvements:
