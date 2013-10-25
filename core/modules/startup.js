@@ -53,12 +53,6 @@ exports.startup = function() {
 	$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
 	// Host-specific startup
 	if($tw.browser) {
-		// Call browser startup modules
-		$tw.modules.forEachModuleOfType("browser-startup",function(title,module) {
-			if(module.startup) {
-				module.startup();
-			}
-		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			rootElement: document.body
@@ -130,6 +124,12 @@ exports.startup = function() {
 				param: "$:/messages/SaveInstructions"
 			});
 		}
+		// Call browser startup modules
+		$tw.modules.forEachModuleOfType("browser-startup",function(title,module) {
+			if(module.startup) {
+				module.startup();
+			}
+		});
 	} else {
 		// On the server, start a commander with the command line arguments
 		commander = new $tw.Commander(
