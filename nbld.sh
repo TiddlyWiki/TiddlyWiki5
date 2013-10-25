@@ -62,7 +62,10 @@ node ./tiddlywiki.js \
 	--new_rendertiddler $:/core/templates/tiddlywiki2.template.html ./tmp/tw2/index.html text/plain \
 	|| exit 1
 
-opendiff tmp/tw2/index.html editions/tw2/target/pre-widgetredux2.html
+# Compare what we've built to the prebuilt standard
+# TODO: We should exit the batch file if there are any differences
+
+diff -q tmp/tw2/index.html editions/tw2/target/prebuilt.html
 
 # Run tests
 
