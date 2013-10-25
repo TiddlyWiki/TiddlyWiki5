@@ -162,7 +162,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 			// Save the parameter
 			args.push(paramValue);
 		}
-		return macro.run.apply(null,args)
+		return macro.run.apply(this,args)
 	} else {
 		return defaultValue;
 	}
