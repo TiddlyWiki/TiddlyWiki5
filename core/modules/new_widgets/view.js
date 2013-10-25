@@ -64,6 +64,9 @@ ViewWidget.prototype.execute = function() {
 		case "stripcomments":
 			this.text = this.getValueAsStrippedComments();
 			break;
+		case "jsencoded":
+			this.text = this.getValueAsJsEncoded();
+			break;
 		default: // "text"
 			this.text = this.getValueAsText();
 			break;
@@ -151,6 +154,10 @@ ViewWidget.prototype.getValueAsStrippedComments = function() {
 		}
 	}
 	return out.join("\n");
+};
+
+ViewWidget.prototype.getValueAsJsEncoded = function() {
+	return $tw.utils.stringify(this.getValueAsText());
 };
 
 /*
