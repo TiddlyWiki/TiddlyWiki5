@@ -207,23 +207,11 @@ a.tw-tiddlylink-external {
 	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##pagebackground}};
 }
 
-.tw-import {
+.tw-dropzone {
 	position: relative;
 }
 
-.tw-drop-zone-fullscreen.tw-dragover:before {
-	z-index: 10000;
-	display: block;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	background: rgba(0,200,0,0.7);
-	text-align: center;
-	content: "Drop here";
-}
-
-.tw-drop-zone.tw-dragover:before {
+.tw-dropzone.tw-dragover:before {
 	z-index: 10000;
 	display: block;
 	position: absolute;

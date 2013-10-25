@@ -3,7 +3,7 @@ title: $:/core/ui/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
-<$import browse="no" class="tw-drop-zone-fullscreen">
+<$dropzone>
 
 <!-- The optional topbar -->
 {{$:/TopSideBar}}
@@ -31,7 +31,7 @@ title: $:/core/ui/PageTemplate
 <!-- End of story river -->
 </section>
 
-</$import>
+</$dropzone>
 
 </$navigator>
 
