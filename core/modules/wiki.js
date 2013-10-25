@@ -170,6 +170,18 @@ exports.tiddlerExists = function(title) {
 	return !!this.tiddlers[title];
 };
 
+/*
+Generate an unused title from the specified base
+*/
+exports.generateNewTitle = function(baseTitle) {
+	var c = 0;
+	do {
+		var title = baseTitle + (c ? " " + (c + 1) : "");
+		c++;
+	} while(this.tiddlerExists(title));
+	return title;
+};
+
 exports.isSystemTiddler = function(title) {
 	return title.indexOf("$:/") === 0;
 };
@@ -917,6 +929,65 @@ exports.getTiddlerText = function(title,defaultText) {
 		this.dispatchEvent("lazyLoad",title);
 		// Indicate that the text is being loaded
 		return null;
+	}
+};
+
+/*
+Read an array of browser File objects, invoking callback(tiddlerFields) for each loaded file
+*/
+exports.readFiles = function(files,callback) {
+	for(var f=0; f<files.length; f++) {
+		this.readFile(files[f],callback);
+	};
+};
+
+/*
+Read a browser File object, invoking callback(tiddlerFields) with the tiddler fields object
+*/
+exports.readFile = function(file,callback) {
+	// Get the type, falling back to the filename extension
+	var self = this,
+		type = file.type;
+	if(type === "" || !type) {
+		var dotPos = file.name.lastIndexOf(".");
+		if(dotPos !== -1) {
+			var fileExtensionInfo = $tw.config.fileExtensionInfo[file.name.substr(dotPos)];
+			if(fileExtensionInfo) {
+				type = fileExtensionInfo.type;
+			}
+		}
+	}
+	// Figure out if we're reading a binary file
+	var contentTypeInfo = $tw.config.contentTypeInfo[type],
+		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
+	// Create the FileReader
+	var reader = new FileReader();
+	// Onload
+	reader.onload = function(event) {
+		// Deserialise the file contents
+		var tiddlerFields = {title: file.name || "Untitled", type: type};
+		// Are we binary?
+		if(isBinary) {
+			// The base64 section starts after the first comma in the data URI
+			var commaPos = event.target.result.indexOf(",");
+			if(commaPos !== -1) {
+				tiddlerFields.text = event.target.result.substr(commaPos+1);
+				callback(tiddlerFields);
+			}
+		} else {
+			var tiddlers = self.deserializeTiddlers(type,event.target.result,tiddlerFields);
+			if(tiddlers) {
+				$tw.utils.each(tiddlers,function(tiddlerFields) {
+					callback(tiddlerFields);
+				});
+			}
+		}
+	};
+	// Kick off the read
+	if(isBinary) {
+		reader.readAsDataURL(file);
+	} else {
+		reader.readAsText(file);
 	}
 };
 
