@@ -50,7 +50,7 @@ ElementWidget.prototype.execute = function() {
 	if(this.namespace) {
 		this.setVariable("namespace",this.namespace);
 	} else {
-		this.namespace = this.getVariable("namespace",null,"http://www.w3.org/1999/xhtml");
+		this.namespace = this.getVariable("namespace",{defaultValue: "http://www.w3.org/1999/xhtml"});
 	}
 	// Make the child widgets
 	this.makeChildWidgets();

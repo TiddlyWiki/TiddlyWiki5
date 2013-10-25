@@ -43,7 +43,7 @@ MacroCallWidget.prototype.execute = function() {
 		params.push({name: name, value: attribute});
 	});
 	// Get the macro value
-	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),params);
+	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),{params: params});
 	// Parse the macro
 	var parser = this.wiki.new_parseText("text/vnd.tiddlywiki",text,
 						{parseAsInline: !this.parseTreeNode.isBlock}),

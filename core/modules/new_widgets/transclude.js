@@ -66,7 +66,7 @@ Compose a string comprising the title, field and/or index to identify this trans
 TranscludeWidget.prototype.makeRecursionMarker = function() {
 	var output = [];
 	output.push("{");
-	output.push(this.getVariable("tiddlerTitle",""));
+	output.push(this.getVariable("tiddlerTitle",{defaultValue: ""}));
 	output.push("|");
 	output.push(this.transcludeTitle || "");
 	output.push("|");

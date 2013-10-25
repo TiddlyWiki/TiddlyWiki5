@@ -72,10 +72,14 @@ Widget.prototype.execute = function() {
 /*
 Get the prevailing value of a context variable
 name: name of variable
+options: see below
+Options include
 params: array of {name:, value:} for each parameter
+defaultValue: default value if the variable is not defined
 */
-Widget.prototype.getVariable = function(name,actualParams,defaultValue) {
-	actualParams = actualParams || [];
+Widget.prototype.getVariable = function(name,options) {
+	options = options || {};
+	var actualParams = options.params || [];
 	// Search up the widget tree for the variable name
 	var node = this;
 	while(node && !$tw.utils.hop(node.variables,name)) {
@@ -83,7 +87,7 @@ Widget.prototype.getVariable = function(name,actualParams,defaultValue) {
 	}
 	// If we get to the root then look for a macro module
 	if(!node) {
-		return this.evaluateMacroModule(name,actualParams,defaultValue);
+		return this.evaluateMacroModule(name,actualParams,options.defaultValue);
 	}
 	// Get the value
 	var value = node.variables[name].value;
@@ -126,7 +130,7 @@ Widget.prototype.substituteVariableParameters = function(text,formalParams,actua
 Widget.prototype.substituteVariableReferences = function(text) {
 	var self = this;
 	return text.replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
-		return self.getVariable(p1,null,"");
+		return self.getVariable(p1,{defaultValue: ""});
 	});
 };
 
@@ -215,7 +219,7 @@ Widget.prototype.computeAttributes = function() {
 		if(attribute.type === "indirect") {
 			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("tiddlerTitle"));
 		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,attribute.value.params);
+			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
 		} else { // String attribute
 			value = attribute.value;
 		}
