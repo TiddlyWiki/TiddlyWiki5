@@ -24,7 +24,8 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tw-cancel-tiddler", handler: "handleCancelTiddlerEvent"},
 		{type: "tw-close-tiddler", handler: "handleCloseTiddlerEvent"},
 		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
-		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"}
+		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"},
+		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"},
 	]);
 };
 
@@ -301,6 +302,42 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Add a new record to the top of the history stack
 	var history = this.wiki.getTiddlerData(this.historyTitle,[]);
 	history.push({title: draftTitle});
+	this.wiki.setTiddlerData(this.historyTitle,history);
+	return false;
+};
+
+// Import JSON tiddlers
+NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
+	var self = this;
+	// Get the story and history details
+	this.getStoryList();
+	var history = this.wiki.getTiddlerData(this.historyTitle,[]);
+	// Get the tiddlers
+	var tiddlers = [];
+	try {
+		tiddlers = JSON.parse(event.param);	
+	} catch(e) {
+	}
+	// Process each tiddler
+	$tw.utils.each(tiddlers,function(tiddlerFields) {
+		// Generate a unique title for the tiddler
+		var title = self.wiki.generateNewTitle(tiddlerFields.title);
+		// Add it to the store
+		self.wiki.addTiddler(new $tw.Tiddler(
+			self.wiki.getCreationFields(),
+			tiddlerFields,
+			self.wiki.getModificationFields(),
+			{title: title}
+		));
+		// Add it to the story
+		if(self.storyList.indexOf(title) === -1) {
+			self.storyList.unshift(title);
+		}
+		// And to history
+		history.push({title: title});
+	});
+	// Save the updated story and history
+	this.saveStoryList();
 	this.wiki.setTiddlerData(this.historyTitle,history);
 	return false;
 };
