@@ -45,6 +45,14 @@ node ./tiddlywiki.js \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/d3demo.html text/plain \
 	|| exit 1
 
+# Seventh, codemirrordemo.html: wiki to demo codemirror plugin
+
+node ./tiddlywiki.js \
+	./editions/codemirrordemo \
+	--verbose \
+	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/codemirrordemo.html text/plain \
+	|| exit 1
+
 # Run tests
 
 ./test.sh

@@ -1,0 +1,12 @@
+{
+	"plugins": [
+		"tiddlywiki/codemirror"
+	],
+	"themes": [
+		"tiddlywiki/snowwhite"
+	],
+	"doNotSave": [
+	],
+	"includeWikis": [
+	]
+}

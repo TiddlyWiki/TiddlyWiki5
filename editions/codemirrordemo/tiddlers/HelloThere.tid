@@ -1,0 +1,9 @@
+title: HelloThere
+
+This is a demo of TiddlyWiki5 incorporating a plugin for the [[CodeMirror|http://codemirror.net/]] text editor for the web.
+
+Try editing the tiddler LoremIpsum to try out the editor.
+
+To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+
+[[$:/plugins/tiddlywiki/codemirror]]
