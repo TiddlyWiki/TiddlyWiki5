@@ -75,7 +75,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	domNode.setAttribute("href",wikiLinkText);
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
-		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"}
+		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
+		{name: "dragstart", handlerObject: this, handlerMethod: "handleDragStartEvent"},
+		{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
 	]);
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
@@ -96,6 +98,49 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 	event.preventDefault();
 	event.stopPropagation();
 	return false;
+};
+
+LinkWidget.prototype.handleDragStartEvent = function(event) {
+	if(this.to) {
+		// Set the dragging class on the element being dragged
+		$tw.utils.addClass(event.target,"tw-tiddlylink-dragging");
+		// Create the drag image elements
+		this.dragImage = this.document.createElement("div");
+		this.dragImage.className = "tw-tiddler-dragger";
+		var inner = this.document.createElement("div");
+		inner.className = "tw-tiddler-dragger-inner";
+		inner.appendChild(this.document.createTextNode(this.to));
+		this.dragImage.appendChild(inner);
+		this.document.body.appendChild(this.dragImage);
+		// Astoundingly, we need to cover the dragger up: http://www.kryogenix.org/code/browser/custom-drag-image.html
+		var bounds = this.dragImage.firstChild.getBoundingClientRect(),
+			cover = this.document.createElement("div");
+		cover.className = "tw-tiddler-dragger-cover";
+		cover.style.left = (bounds.left - 8) + "px";
+		cover.style.top = (bounds.top - 8) + "px";
+		cover.style.width = (bounds.width + 16) + "px";
+		cover.style.height = (bounds.height + 16) + "px";
+		this.dragImage.appendChild(cover);
+		// Set the data transfer properties
+		var dataTransfer = event.dataTransfer;
+		dataTransfer.effectAllowed = "copy";
+		dataTransfer.setDragImage(this.dragImage.firstChild,-16,-16);
+		dataTransfer.clearData();
+		dataTransfer.setData("text/vnd.tiddler",this.wiki.getTiddlerAsJson(this.to));
+		dataTransfer.setData("text/plain",this.wiki.getTiddlerText(this.to,""));
+		event.stopPropagation();
+	} else {
+		event.preventDefault();
+	}
+};
+
+LinkWidget.prototype.handleDragEndEvent = function(event) {
+	// Remove the dragging class on the element being dragged
+	$tw.utils.removeClass(event.target,"tw-tiddlylink-dragging");
+	// Delete the drag image element
+	if(this.dragImage) {
+		this.dragImage.parentNode.removeChild(this.dragImage);
+	}
 };
 
 /*
