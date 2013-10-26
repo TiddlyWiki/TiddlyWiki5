@@ -116,10 +116,10 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		var bounds = this.dragImage.firstChild.getBoundingClientRect(),
 			cover = this.document.createElement("div");
 		cover.className = "tw-tiddler-dragger-cover";
-		cover.style.left = (bounds.left - 8) + "px";
-		cover.style.top = (bounds.top - 8) + "px";
-		cover.style.width = (bounds.width + 16) + "px";
-		cover.style.height = (bounds.height + 16) + "px";
+		cover.style.left = (bounds.left - 16) + "px";
+		cover.style.top = (bounds.top - 16) + "px";
+		cover.style.width = (bounds.width + 32) + "px";
+		cover.style.height = (bounds.height + 32) + "px";
 		this.dragImage.appendChild(cover);
 		// Set the data transfer properties
 		var dataTransfer = event.dataTransfer;
