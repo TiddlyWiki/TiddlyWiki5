@@ -33,7 +33,7 @@ background-image: -ms-linear-gradient($gradient$);
 ```
 \end
 \define datauri(title)
-<$datauri tiddler="$title$"/>
+<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
 \end
 
 /*
