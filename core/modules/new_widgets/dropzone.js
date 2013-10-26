@@ -88,7 +88,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tw-dragover");
 	// Try to import the various data types we understand
-//	this.importData(dataTransfer);
+	this.importData(dataTransfer);
 	// Import any files in the drop
 	this.wiki.readFiles(dataTransfer.files,function(tiddlerFields) {
 		self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
@@ -98,6 +98,37 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	// Stop the drop ripple up to any parent handlers
 	event.stopPropagation();
 };
+
+DropZoneWidget.prototype.importData = function(dataTransfer) {
+	for(var t=0; t<this.importDataTypes.length; t++) {
+		var dataType = this.importDataTypes[t];
+		var data = dataTransfer.getData(dataType.type);
+		if(data !== "") {
+			var tiddlerFields = dataType.convertToFields(data);
+			if(!tiddlerFields.title) {
+				tiddlerFields.title = this.generateTitle("Untitled");
+			}
+			this.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+			return;
+		}
+	};
+};
+
+DropZoneWidget.prototype.importDataTypes = [
+	{type: "text/vnd.tiddler", convertToFields: function(data) {
+		return JSON.parse(data);
+	}},
+	{type: "text/plain", convertToFields: function(data) {
+		return {
+			text: data
+		};
+	}},
+	{type: "text/uri-list", convertToFields: function(data) {
+		return {
+			text: data
+		};
+	}}
+];
 
 DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 	// Let the browser handle it if we're in a textarea or input box
