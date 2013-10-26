@@ -527,11 +527,14 @@ a.tw-tiddlylink-external {
 }
 
 canvas.tw-edit-bitmapeditor  {
-	border: 3px dashed #F0F0F0;
+	border: 6px solid #fff;
 	cursor: crosshair;
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+	<<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.5)">>
+	margin-top: 6px;
+	margin-bottom: 6px;
 }
 
 .tw-edit-bitmapeditor-width {
