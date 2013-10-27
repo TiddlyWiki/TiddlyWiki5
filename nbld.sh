@@ -37,6 +37,14 @@ node ./tiddlywiki.js \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/encrypted.html text/plain \
 	|| exit 1
 
+# Third, empty.html: empty wiki for reuse
+
+node ./tiddlywiki.js \
+	./editions/empty \
+	--verbose \
+	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/empty.html text/plain \
+	|| exit 1
+
 # Fifth, d3demo.html: wiki to demo d3 plugin
 
 node ./tiddlywiki.js \
