@@ -19,7 +19,7 @@ describe("WikiText parser tests", function() {
 
 	// Define a parsing shortcut
 	var parse = function(text) {
-		return wiki.parseText("text/vnd.tiddlywiki",text).tree;
+		return wiki.new_parseText("text/vnd.tiddlywiki",text).tree;
 	};
 
 	it("should parse tags", function() {
@@ -70,7 +70,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=''>")).toEqual(
 
-			[ { type : 'element', tag : 'p', children : [ { type : 'element', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 54 } }, tag : '$reveal', end : 55, children : [  ], isBlock : false } ] } ]
+			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 54 } }, end : 55, isBlock : false, children : [  ] } ] } ]
 
 		);
 		expect(parse("<div attribute={{TiddlerTitle!!field}}>some text</div>")).toEqual(
@@ -93,7 +93,7 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'macrodef', name : 'myMacro', params : [  ], text : 'nothing' } ]
+			[ { type : 'setvariable', name : 'myMacro', params : [  ], text : 'nothing', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ] } ]
 
 		);
 

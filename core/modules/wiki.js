@@ -329,13 +329,13 @@ exports.getTiddlerLinks = function(title) {
 	// We'll cache the links so they only get computed if the tiddler changes
 	return this.getCacheForTiddler(title,"links",function() {
 		// Parse the tiddler
-		var parser = self.parseTiddler(title);
+		var parser = self.new_parseTiddler(title);
 		// Count up the links
 		var links = [],
 			checkParseTree = function(parseTree) {
 				for(var t=0; t<parseTree.length; t++) {
 					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "element" && parseTreeNode.tag === "$link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
+					if(parseTreeNode.type === "link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
 						var value = parseTreeNode.attributes.to.value;
 						if(links.indexOf(value) === -1) {
 							links.push(value);
@@ -606,7 +606,7 @@ Parse a block of text of a specified MIME type
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 */
-exports.parseText = function(type,text,options) {
+exports.old_parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
@@ -629,13 +629,13 @@ exports.parseText = function(type,text,options) {
 /*
 Parse a tiddler according to its MIME type
 */
-exports.parseTiddler = function(title,options) {
+exports.old_parseTiddler = function(title,options) {
 	options = options || {};
 	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
 	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
-			return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
+			return self.old_parseText(tiddler.fields.type,tiddler.fields.text,options);
 		}) : null;
 };
 
@@ -643,6 +643,7 @@ exports.parseTiddler = function(title,options) {
 var tweakParseTreeNode = function(node) {
 	if(node.type === "element" && node.tag.charAt(0) === "$") {
 		node.type = node.tag.substr(1);
+		delete node.tag;
 	}
 	tweakParseTreeNodes(node.children);
 };
@@ -672,7 +673,7 @@ var tweakParser = function(parser) {
 };
 
 exports.new_parseText = function(type,text,options) {
-	var parser = this.parseText(type,text,options);
+	var parser = this.old_parseText(type,text,options);
 	if(parser) {
 		tweakParser(parser)
 	};
@@ -680,7 +681,7 @@ exports.new_parseText = function(type,text,options) {
 };
 
 exports.new_parseTiddler = function(title,options) {
-	var parser = this.parseTiddler(title,options);
+	var parser = this.old_parseTiddler(title,options);
 	if(parser) {
 		tweakParser(parser)
 	};
@@ -712,21 +713,6 @@ Parse text in a specified format and render it into another format
 	textType: content type of the input text
 	text: input text
 */
-exports.renderText = function(outputType,textType,text,context) {
-	var parser = this.parseText(textType,text),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: this, context: context, document: $tw.document});
-	renderTree.execute();
-	var container = $tw.document.createElement("div");
-	renderTree.renderInDom(container)
-	return outputType === "text/html" ? container.innerHTML : container.textContent;
-};
-
-/*
-Parse text in a specified format and render it into another format
-	outputType: content type for the output
-	textType: content type of the input text
-	text: input text
-*/
 exports.new_renderText = function(outputType,textType,text,parentWidget) {
 	var parser = $tw.wiki.new_parseText(textType,text),
 		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
@@ -745,22 +731,8 @@ Parse text from a tiddler and render it into another format
 	outputType: content type for the output
 	title: title of the tiddler to be rendered
 */
-exports.renderTiddler = function(outputType,title,context) {
-	var parser = this.parseTiddler(title),
-		renderTree = new $tw.WikiRenderTree(parser,{wiki: this, context: context, document: $tw.document});
-	renderTree.execute();
-	var container = $tw.document.createElement("div");
-	renderTree.renderInDom(container)
-	return outputType === "text/html" ? container.innerHTML : container.textContent;
-};
-
-/*
-Parse text from a tiddler and render it into another format
-	outputType: content type for the output
-	title: title of the tiddler to be rendered
-*/
 exports.new_renderTiddler = function(outputType,title,parentWidget) {
-	var parser = $tw.wiki.new_parseTiddler(title),
+	var parser = this.new_parseTiddler(title),
 		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
 		widgetNode = new widget.widget(parseTreeNode,{
 			wiki: this,
@@ -821,7 +793,7 @@ exports.saveWiki = function(options) {
 	options = options || {};
 	var template = options.template || "$:/core/templates/tiddlywiki5.template.html",
 		downloadType = options.downloadType || "text/plain";
-	var text = this.renderTiddler(downloadType,template);
+	var text = this.new_renderTiddler(downloadType,template);
 	this.callSaver("save",text,function(err) {
 		$tw.notifier.display("$:/messages/Saved");
 	});
