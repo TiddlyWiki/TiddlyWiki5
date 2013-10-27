@@ -217,7 +217,8 @@ Widget.prototype.computeAttributes = function() {
 		if(attribute.type === "indirect") {
 			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("tiddlerTitle"));
 		} else if(attribute.type === "macro") {
-			value = self.getVariable(attribute.value.name,{params: attribute.value.params});
+			var text = self.getVariable(attribute.value.name,{params: attribute.value.params});
+			value = self.wiki.new_renderText("text/plain","text/vnd.tiddlywiki",text);
 		} else { // String attribute
 			value = attribute.value;
 		}
