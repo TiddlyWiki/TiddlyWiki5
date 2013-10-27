@@ -23,8 +23,6 @@ Options include:
 	document: optional document object to use instead of global document
 Context variables include:
 	tiddlerTitle: title of the tiddler providing the context
-	templateTitle: title of the tiddler providing the current template
-	macroDefinitions: hashmap of macro definitions
 */
 var Widget = function(parseTreeNode,options) {
 	if(arguments.length > 0) {
