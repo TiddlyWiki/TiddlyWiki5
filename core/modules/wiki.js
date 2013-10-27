@@ -335,7 +335,7 @@ exports.getTiddlerLinks = function(title) {
 			checkParseTree = function(parseTree) {
 				for(var t=0; t<parseTree.length; t++) {
 					var parseTreeNode = parseTree[t];
-					if(parseTreeNode.type === "element" && parseTreeNode.tag === "$link" && parseTreeNode.attributes.to.type === "string") {
+					if(parseTreeNode.type === "element" && parseTreeNode.tag === "$link" && parseTreeNode.attributes.to && parseTreeNode.attributes.to.type === "string") {
 						var value = parseTreeNode.attributes.to.value;
 						if(links.indexOf(value) === -1) {
 							links.push(value);
