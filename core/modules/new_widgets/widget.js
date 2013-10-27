@@ -271,7 +271,7 @@ Make child widgets correspondng to specified parseTreeNodes
 Widget.prototype.makeChildWidgets = function(parseTreeNodes) {
 	this.children = [];
 	var self = this;
-	$tw.utils.each(parseTreeNodes || this.parseTreeNode.children,function(childNode) {
+	$tw.utils.each(parseTreeNodes || (this.parseTreeNode && this.parseTreeNode.children),function(childNode) {
 		self.children.push(self.makeChildWidget(childNode));
 	});
 };
