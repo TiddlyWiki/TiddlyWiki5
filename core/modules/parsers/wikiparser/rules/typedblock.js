@@ -28,6 +28,8 @@ $$$
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/new_widgets/widget.js");
+
 exports.name = "typedblock";
 exports.types = {block: true};
 
@@ -63,10 +65,13 @@ exports.parse = function() {
 		return parser.tree;
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
-		var renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, document: $tw.document});
-		renderTree.execute();
+		var parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
+			widgetNode = new widget.widget(parseTreeNode,{
+				wiki: $tw.wiki,
+				document: $tw.document
+			});
 		var container = $tw.document.createElement("div");
-		renderTree.renderInDom(container);
+		widgetNode.render(container,null);
 		var text = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
 			type: "element",
