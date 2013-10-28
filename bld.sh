@@ -76,6 +76,14 @@ node ./tiddlywiki.js \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/d3demo.html text/plain \
 	|| exit 1
 
-# Sixth, run the test edition to run the node.js tests and to generate test.html for tests in the browser
+# Sixth, codemirrordemo.html: wiki to demo codemirror plugin
+
+node ./tiddlywiki.js \
+	./editions/codemirrordemo \
+	--verbose \
+	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/codemirrordemo.html text/plain \
+	|| exit 1
+
+# Seventh, run the test edition to run the node.js tests and to generate test.html for tests in the browser
 
 ./test.sh

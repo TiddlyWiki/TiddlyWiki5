@@ -22,4 +22,3 @@ node ./tiddlywiki.js \
 	--verbose \
 	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html $TW5_BUILD_OUTPUT/test.html text/plain \
 	|| exit 1
-
