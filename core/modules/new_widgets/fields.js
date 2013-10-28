@@ -40,7 +40,7 @@ Compute the internal state of the widget
 */
 FieldsWidget.prototype.execute = function() {
 	// Get parameters from our attributes
-	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("tiddlerTitle"));
+	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.template = this.getAttribute("template");
 	this.exclude = this.getAttribute("exclude");
 	this.stripTitlePrefix = this.getAttribute("stripTitlePrefix","no") === "yes";

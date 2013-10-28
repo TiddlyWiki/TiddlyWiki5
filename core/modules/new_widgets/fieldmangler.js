@@ -44,7 +44,7 @@ Compute the internal state of the widget
 */
 FieldManglerWidget.prototype.execute = function() {
 	// Get our parameters
-	this.mangleTitle = this.getAttribute("title",this.getVariable("tiddlerTitle"));
+	this.mangleTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
 	// Construct the child widgets
 	this.makeChildWidgets();
 };

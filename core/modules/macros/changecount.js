@@ -24,7 +24,7 @@ exports.params = [];
 Run the macro
 */
 exports.run = function() {
-	return this.wiki.getChangeCount(this.getVariable("tiddlerTitle")) + "";
+	return this.wiki.getChangeCount(this.getVariable("currentTiddler")) + "";
 };
 
 })();

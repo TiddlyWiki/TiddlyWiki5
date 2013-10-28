@@ -43,7 +43,7 @@ TiddlerWidget.prototype.execute = function() {
 	// Get our parameters
 	this.tiddlerTitle = this.getAttribute("title","");
 	// Set context variables
-	this.setVariable("tiddlerTitle",this.tiddlerTitle);
+	this.setVariable("currentTiddler",this.tiddlerTitle);
 	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tw-tiddler-exists" : "tw-tiddler-missing");
 	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tw-tiddler-shadow" : "");
 	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tw-tiddler-system" : "");

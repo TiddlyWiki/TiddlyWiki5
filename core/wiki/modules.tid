@@ -6,7 +6,7 @@ title: $:/snippets/modules
 <$list filter="[moduletypes[]]">
 !! <<listItem>>
 <$macrocall $name="describeModuleType" type=<<listItem>>/>
-<ul><$list filter="[is[current]modules[]]"><li><$link><<tiddlerTitle>></$link>
+<ul><$list filter="[is[current]modules[]]"><li><$link><<currentTiddler>></$link>
 </li>
 </$list>
 </ul>

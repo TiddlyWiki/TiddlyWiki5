@@ -40,7 +40,7 @@ Compute the internal state of the widget
 */
 ViewWidget.prototype.execute = function() {
 	// Get parameters from our attributes
-	this.viewTitle = this.getAttribute("title",this.getVariable("tiddlerTitle"));
+	this.viewTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
 	this.viewField = this.getAttribute("field","text");
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");

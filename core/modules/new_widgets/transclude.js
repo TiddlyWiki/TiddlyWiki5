@@ -38,7 +38,7 @@ Compute the internal state of the widget
 */
 TranscludeWidget.prototype.execute = function() {
 	// Get our parameters
-	this.transcludeTitle = this.getAttribute("title",this.getVariable("tiddlerTitle"));
+	this.transcludeTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	// Check for recursion
@@ -66,7 +66,7 @@ Compose a string comprising the title, field and/or index to identify this trans
 TranscludeWidget.prototype.makeRecursionMarker = function() {
 	var output = [];
 	output.push("{");
-	output.push(this.getVariable("tiddlerTitle",{defaultValue: ""}));
+	output.push(this.getVariable("currentTiddler",{defaultValue: ""}));
 	output.push("|");
 	output.push(this.transcludeTitle || "");
 	output.push("|");

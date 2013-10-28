@@ -63,7 +63,7 @@ ListWidget.prototype.execute = function() {
 
 ListWidget.prototype.getTiddlerList = function() {
 	var defaultFilter = "[!is[system]sort[title]]";
-	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this.getVariable("tiddlerTitle"));
+	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this.getVariable("currentTiddler"));
 };
 
 ListWidget.prototype.getEmptyMessage = function() {

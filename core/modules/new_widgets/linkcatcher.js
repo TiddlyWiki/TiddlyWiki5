@@ -67,7 +67,7 @@ Handle a tw-navigate event
 */
 LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 	if(this.catchTo) {
-		this.wiki.setTextReference(this.catchTo,event.navigateTo,this.getVariable("tiddlerTitle"));
+		this.wiki.setTextReference(this.catchTo,event.navigateTo,this.getVariable("currentTiddler"));
 	}
 	if(this.catchMessage) {
 		this.dispatchEvent({

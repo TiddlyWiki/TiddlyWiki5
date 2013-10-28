@@ -239,7 +239,7 @@ describe("Widget module", function() {
 			{title: "TiddlerFour", text: "TiddlerTwo"}
 		]);
 		// Construct the widget node
-		var text = "My <$setvariable name='tiddlerTitle' value={{TiddlerFour}}><$transclude title={{!!title}}/></$setvariable> is Jolly"
+		var text = "My <$setvariable name='currentTiddler' value={{TiddlerFour}}><$transclude title={{!!title}}/></$setvariable> is Jolly"
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);

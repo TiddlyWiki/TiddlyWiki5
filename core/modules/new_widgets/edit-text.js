@@ -106,7 +106,7 @@ Compute the internal state of the widget
 */
 EditTextWidget.prototype.execute = function() {
 	// Get our parameters
-	this.editTitle = this.getAttribute("title",this.getVariable("tiddlerTitle"));
+	this.editTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
 	this.editDefault = this.getAttribute("default","");

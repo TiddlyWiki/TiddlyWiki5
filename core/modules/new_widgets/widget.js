@@ -22,7 +22,7 @@ Options include:
 	parentWidget: optional reference to a parent renderer node for the context chain
 	document: optional document object to use instead of global document
 Context variables include:
-	tiddlerTitle: title of the tiddler providing the context
+	currentTiddler: title of the tiddler providing the context
 */
 var Widget = function(parseTreeNode,options) {
 	if(arguments.length > 0) {
@@ -215,7 +215,7 @@ Widget.prototype.computeAttributes = function() {
 		value;
 	$tw.utils.each(this.parseTreeNode.attributes,function(attribute,name) {
 		if(attribute.type === "indirect") {
-			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("tiddlerTitle"));
+			value = self.wiki.getTextReference(attribute.textReference,"",self.getVariable("currentTiddler"));
 		} else if(attribute.type === "macro") {
 			var text = self.getVariable(attribute.value.name,{params: attribute.value.params});
 			value = self.wiki.new_renderText("text/plain","text/vnd.tiddlywiki",text);

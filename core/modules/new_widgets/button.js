@@ -87,7 +87,7 @@ ButtonWidget.prototype.isPoppedUp = function() {
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
-	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("tiddlerTitle")});
+	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
 };
 
 ButtonWidget.prototype.triggerPopup = function(event) {

@@ -44,7 +44,7 @@ Command.prototype.execute = function() {
 			parseTreeNode = parser ? {type: "widget", children: [{
 				type: "setvariable",
 				attributes: {
-					name: {type: "string", value: "tiddlerTitle"},
+					name: {type: "string", value: "currentTiddler"},
 					value: {type: "string", value: title}
 				},
 				children: parser.tree

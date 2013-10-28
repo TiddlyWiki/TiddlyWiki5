@@ -148,7 +148,7 @@ Compute the internal state of the widget
 */
 LinkWidget.prototype.execute = function() {
 	// Get the target tiddler title
-	this.to = this.getAttribute("to",this.getVariable("tiddlerTitle"));
+	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);

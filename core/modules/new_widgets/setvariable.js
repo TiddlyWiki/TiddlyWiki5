@@ -38,7 +38,7 @@ Compute the internal state of the widget
 */
 SetVariableWidget.prototype.execute = function() {
 	// Get our parameters
-	this.setName = this.getAttribute("name","tiddlerTitle");
+	this.setName = this.getAttribute("name","currentTiddler");
 	this.setValue = this.getAttribute("value");
 	// Set context variable
 	this.setVariable(this.setName,this.setValue,this.parseTreeNode.params);
