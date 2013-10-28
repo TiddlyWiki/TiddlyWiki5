@@ -67,7 +67,7 @@ html {
 	font-family: {{$:/themes/tiddlywiki/snowwhite/settings##fontfamily}};
 }
 
-body {
+body.tw-body {
 	font-size: {{$:/themes/tiddlywiki/snowwhite/metrics##fontsize}};
 	line-height: {{$:/themes/tiddlywiki/snowwhite/metrics##lineheight}};
 	color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##foreground}};
