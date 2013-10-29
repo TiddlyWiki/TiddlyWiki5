@@ -117,14 +117,16 @@ exports.getBoundingPageRect = function(element) {
 Saves a named password in the browser
 */
 exports.savePassword = function(name,password) {
-	localStorage.setItem("tw5-password-" + name,password);
+	if(window.localStorage) {
+		localStorage.setItem("tw5-password-" + name,password);
+	}
 };
 
 /*
 Retrieve a named password from the browser
 */
 exports.getPassword = function(name) {
-	return localStorage.getItem("tw5-password-" + name);
+	return window.localStorage ? localStorage.getItem("tw5-password-" + name) : "";
 };
 
 /*
