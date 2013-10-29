@@ -75,7 +75,7 @@ Modal.prototype.display = function(title,options) {
 	}
 	var headerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
 		headerWidgetNode = this.wiki.makeWidget(headerParser,{parentWidget: $tw.rootWidget, document: document});
-	headerWidgetNode.render(modalHeader,null);
+	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
