@@ -70,7 +70,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		if(checked) {
 			newTags.push(this.checkboxTag);
 		}
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{tags: newTags}));
+		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{tags: newTags},this.wiki.getModificationFields()));
 	}
 };
 
