@@ -708,19 +708,58 @@ exports.new_parseTextReference = function(title,field,index,options) {
 };
 
 /*
+Make a widget tree for a parse tree
+parser: parser object
+options: see below
+Options include:
+document: optional document to use
+variables: hashmap of variables to set
+parentWidget: optional parent widget for the root node
+*/
+exports.makeWidget = function(parser,options) {
+	options = options || {};
+	var widgetNode = {
+			type: "widget",
+			children: []
+		},
+		currWidgetNode = widgetNode;
+	// Create setvariable widgets for each variable
+	$tw.utils.each(options.variables,function(value,name) {
+		var setVariableWidget = {
+			type: "setvariable",
+			attributes: {
+				name: {type: "string", value: name},
+				value: {type: "string", value: value}
+			},
+			children: []
+		};
+		currWidgetNode.children = [setVariableWidget];
+		currWidgetNode = setVariableWidget;
+	});
+	// Add in the supplied parse tree nodes
+	currWidgetNode.children = parser ? parser.tree : [];
+	// Create the widget
+	return new widget.widget(widgetNode,{
+		wiki: this,
+		document: options.document || $tw.document,
+		parentWidget: options.parentWidget
+	});
+};
+
+/*
 Parse text in a specified format and render it into another format
 	outputType: content type for the output
 	textType: content type of the input text
 	text: input text
+	options: see below
+Options include:
+variables: hashmap of variables to set
+parentWidget: optional parent widget for the root node
 */
-exports.new_renderText = function(outputType,textType,text,parentWidget) {
+exports.new_renderText = function(outputType,textType,text,options) {
+	options = options || {};
 	var parser = $tw.wiki.new_parseText(textType,text),
-		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
-		widgetNode = new widget.widget(parseTreeNode,{
-			wiki: this,
-			parentWidget: parentWidget,
-			document: $tw.document
-		});
+		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
 	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
@@ -730,15 +769,15 @@ exports.new_renderText = function(outputType,textType,text,parentWidget) {
 Parse text from a tiddler and render it into another format
 	outputType: content type for the output
 	title: title of the tiddler to be rendered
+	options: see below
+Options include:
+variables: hashmap of variables to set
+parentWidget: optional parent widget for the root node
 */
-exports.new_renderTiddler = function(outputType,title,parentWidget) {
+exports.new_renderTiddler = function(outputType,title,options) {
+	options = options || {};
 	var parser = this.new_parseTiddler(title),
-		parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
-		widgetNode = new widget.widget(parseTreeNode,{
-			wiki: this,
-			parentWidget: parentWidget,
-			document: $tw.document
-		});
+		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
 	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
