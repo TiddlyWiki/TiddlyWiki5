@@ -23,6 +23,7 @@ function FileSystemAdaptor(syncer) {
 	this.pending = {};
 
 	this.setwatcher = function(filename, title) {
+		return undefined;
 		return this.watchers[filename] = this.watchers[filename] ||
 			fs.watch(filename, {persistent: false}, function(e) {
 				console.log("Filesystem:", e, filename);
