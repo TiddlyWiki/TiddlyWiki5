@@ -106,12 +106,12 @@ exports.startup = function() {
 		var templateTitle = "$:/core/ui/PageTemplate",
 			parser = $tw.wiki.new_parseTiddler(templateTitle),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
-		$tw.new_pageContainer = document.createElement("div");
-		$tw.utils.addClass($tw.new_pageContainer,"tw-page-container");
-		document.body.insertBefore($tw.new_pageContainer,document.body.firstChild);
-		widgetNode.render($tw.new_pageContainer,null);
+		$tw.pageContainer = document.createElement("div");
+		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
+		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+		widgetNode.render($tw.pageContainer,null);
 		$tw.wiki.addEventListener("change",function(changes) {
-			widgetNode.refresh(changes,$tw.new_pageContainer,null);
+			widgetNode.refresh(changes,$tw.pageContainer,null);
 		});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
