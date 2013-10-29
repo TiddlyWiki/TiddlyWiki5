@@ -70,7 +70,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		describe("should render", function() {
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='myTitle'>\n and the content of a DIV<div>\n and an inner DIV</div> and back in the outer DIV</div>");
+			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='myTitle'> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIV</div>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -114,7 +114,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		describe("should render", function() {
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='the quick brown fox'>\n and the content of a DIV<div>\n and an inner DIV</div> and back in the outer DIVthe quick brown fox</div>the quick brown fox");
+			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='the quick brown fox'> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVthe quick brown fox</div>the quick brown fox");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -132,7 +132,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='jumps over the lazy dog'>\n and the content of a DIV<div>\n and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
+			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='jumps over the lazy dog'> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -177,7 +177,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<svg class='tw-image-new-button' height='22pt' viewBox='83 81 50 50' width='22pt'>\n<path d='M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z'>\n</path></svg>\n");
+		expect(wrapper.innerHTML).toBe("<svg class='tw-image-new-button' height='22pt' viewBox='83 81 50 50' width='22pt'><path d='M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z'></path></svg>\n");
 		expect(wrapper.firstChild.namespaceURI).toBe("http://www.w3.org/2000/svg");
 	});
 
@@ -195,7 +195,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nMy Jolly Old World is Jolly</p>");
+		expect(wrapper.innerHTML).toBe("<p>My Jolly Old World is Jolly</p>");
 	});
 
 	it("should render the view widget", function() {
@@ -210,7 +210,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nJolly Old World</p>");
+		expect(wrapper.innerHTML).toBe("<p>Jolly Old World</p>");
 		// Test the sequence numbers in the DOM
 		expect(wrapper.sequenceNumber).toBe(0);
 		expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -221,7 +221,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nWorld-wide Jelly</p>");
+			expect(wrapper.innerHTML).toBe("<p>World-wide Jelly</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -244,14 +244,14 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nMy Jolly Old World is Jolly</p>");
+		expect(wrapper.innerHTML).toBe("<p>My Jolly Old World is Jolly</p>");
 		// Change the transcluded tiddler
 		wiki.addTiddler({title: "TiddlerFour", text: "TiddlerOne"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFour"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nMy Jolly Old World is Jolly</p>");
+			expect(wrapper.innerHTML).toBe("<p>My Jolly Old World is Jolly</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -279,7 +279,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\n<div class='My something something,  or other thing'>\nContent</div></p>");
+		expect(wrapper.innerHTML).toBe("<p><div class='My something something,  or other thing'>Content</div></p>");
 	});
 
 	it("should deal with built-in macros", function() {
@@ -294,7 +294,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\n<a href='data:text/vnd.tiddlywiki,Jolly%20Old%20World'>\nMy linky link</a></p>");
+		expect(wrapper.innerHTML).toBe("<p><a href='data:text/vnd.tiddlywiki,Jolly%20Old%20World'>My linky link</a></p>");
 	});
 
 	it("should deal with the list widget", function() {
@@ -312,14 +312,14 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 		// Add another tiddler
 		wiki.addTiddler({title: "TiddlerFive", text: "Jalapeno Peppers"});
 		// Refresh
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -335,7 +335,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerTwo</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerTwo</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -350,7 +350,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -377,7 +377,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
 		// Check the next siblings of each of the list elements
 		var listWidget = widgetNode.children[0].children[0];
 		// Add another tiddler
@@ -386,7 +386,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerFive"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -402,7 +402,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerTwoSomething</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerTwoSomething</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -417,7 +417,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerThree"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoSomething</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -433,7 +433,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["YetAnotherTiddler"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nTiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoYetAnotherTiddlerSomething</p>");
+			expect(wrapper.innerHTML).toBe("<p>TiddlerFiveTiddlerFourTiddlerOneTiddlerThreeTiddlerTwoYetAnotherTiddlerSomething</p>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -461,7 +461,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 	});
 
 	it("should deal with the list widget and empty lists", function() {
@@ -472,7 +472,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nnothing</p>");
+		expect(wrapper.innerHTML).toBe("<p>nothing</p>");
 	});
 
 	it("should refresh lists that become empty", function() {
@@ -490,7 +490,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>\nTiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 		// Get rid of the tiddlers
 		wiki.deleteTiddler("TiddlerOne");
 		wiki.deleteTiddler("TiddlerTwo");
@@ -500,7 +500,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne","TiddlerTwo","TiddlerThree","TiddlerFour"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("<p>\nnothing</p>");
+			expect(wrapper.innerHTML).toBe("<p>nothing</p>");
 		});
 	});
 

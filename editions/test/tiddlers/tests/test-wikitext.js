@@ -34,16 +34,16 @@ describe("WikiText tests", function() {
 	});
 
 	it("should render plain text tiddlers as a paragraph", function() {
-		expect(wiki.new_renderTiddler("text/html","TiddlerOne")).toBe("<p>\nThe quick brown fox</p>");
+		expect(wiki.new_renderTiddler("text/html","TiddlerOne")).toBe("<p>The quick brown fox</p>");
 	});
 	it("should preserve single new lines", function() {
-		expect(wiki.new_renderTiddler("text/html","TiddlerTwo")).toBe("<p>\nThe rain in Spain\nfalls mainly on the plain</p>");
+		expect(wiki.new_renderTiddler("text/html","TiddlerTwo")).toBe("<p>The rain in Spain\nfalls mainly on the plain</p>");
 	});
 	it("should use double new lines to create paragraphs", function() {
-		expect(wiki.new_renderTiddler("text/html","TiddlerThree")).toBe("<p>\nThe speed of sound</p><p>\nThe light of speed</p>");
+		expect(wiki.new_renderTiddler("text/html","TiddlerThree")).toBe("<p>The speed of sound</p><p>The light of speed</p>");
 	});
 	it("should support attributes specified as macro invocations", function() {
-		expect(wiki.new_renderTiddler("text/html","TiddlerFour")).toBe("<p>\n<a class=' tw-tiddlylink tw-tiddlylink-missing' href='#This%20is%20my%20amazingly%20groovy%20macro!'>\nThis is a link</a></p>");
+		expect(wiki.new_renderTiddler("text/html","TiddlerFour")).toBe("<p><a class=' tw-tiddlylink tw-tiddlylink-missing' href='#This%20is%20my%20amazingly%20groovy%20macro!'>This is a link</a></p>");
 	});
 
 });

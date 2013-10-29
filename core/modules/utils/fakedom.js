@@ -112,7 +112,7 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				}
 			}
 		}
-		output.push(">\n");
+		output.push(">");
 		if($tw.config.htmlVoidElements.indexOf(this.tag) === -1) {
 			output.push(this.innerHTML);
 			output.push("</",this.tag,">");
