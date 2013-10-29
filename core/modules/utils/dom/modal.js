@@ -74,24 +74,14 @@ Modal.prototype.display = function(title,options) {
 		titleText = title;
 	}
 	var headerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
-		headerParseTreeNode = headerParser ? {type: "widget", children: headerParser.tree} : undefined,
-		headerWidgetNode = new widget.widget(headerParseTreeNode,{
-			wiki: this.wiki,
-			parentWidget: $tw.rootWidget,
-			document: document
-		});
+		headerWidgetNode = this.wiki.makeWidget(headerParser,{parentWidget: $tw.rootWidget, document: document});
 	headerWidgetNode.render(modalHeader,null);
 	this.wiki.addEventListener("change",function(changes) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
 	// Render the body of the message
 	var bodyParser = this.wiki.new_parseTiddler(title),
-		bodyParseTreeNode = bodyParser ? {type: "widget", children: bodyParser.tree} : undefined,
-		bodyWidgetNode = new widget.widget(bodyParseTreeNode,{
-			wiki: this.wiki,
-			parentWidget: $tw.rootWidget,
-			document: document
-		});
+		bodyWidgetNode = this.wiki.makeWidget(bodyParser,{parentWidget: $tw.rootWidget, document: document});
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyWidgetNode.refresh(changes,modalBody,null);
@@ -118,12 +108,7 @@ Modal.prototype.display = function(title,options) {
 		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
 	}
 	var footerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
-		footerParseTreeNode = footerParser ? {type: "widget", children: footerParser.tree} : undefined,
-		footerWidgetNode = new widget.widget(footerParseTreeNode,{
-			wiki: this.wiki,
-			parentWidget: $tw.rootWidget,
-			document: document
-		});
+		footerWidgetNode = this.wiki.makeWidget(footerParser,{parentWidget: $tw.rootWidget, document: document});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);

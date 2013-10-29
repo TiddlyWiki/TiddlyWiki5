@@ -41,18 +41,7 @@ Command.prototype.execute = function() {
 		tiddlers = wiki.filterTiddlers(filter);
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.new_parseTiddler(template),
-			parseTreeNode = parser ? {type: "widget", children: [{
-				type: "setvariable",
-				attributes: {
-					name: {type: "string", value: "currentTiddler"},
-					value: {type: "string", value: title}
-				},
-				children: parser.tree
-			}]} : undefined,
-			widgetNode = new widget.widget(parseTreeNode,{
-				wiki: wiki,
-				document: $tw.document
-			});
+			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
 		var container = $tw.document.createElement("div");
 		widgetNode.render(container,null);
 		var text = type === "text/html" ? container.innerHTML : container.textContent;

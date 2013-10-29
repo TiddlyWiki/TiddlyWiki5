@@ -105,12 +105,7 @@ exports.startup = function() {
 		// Display the PageTemplate
 		var templateTitle = "$:/core/ui/PageTemplate",
 			parser = $tw.wiki.new_parseTiddler(templateTitle),
-			parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
-			widgetNode = new widget.widget(parseTreeNode,{
-				wiki: $tw.wiki,
-				parentWidget: $tw.rootWidget,
-				document: document
-			});
+			widgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 		$tw.new_pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.new_pageContainer,"tw-page-container");
 		document.body.insertBefore($tw.new_pageContainer,document.body.firstChild);

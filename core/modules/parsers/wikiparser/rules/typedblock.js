@@ -65,12 +65,8 @@ exports.parse = function() {
 		return parser.tree;
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
-		var parseTreeNode = parser ? {type: "widget", children: parser.tree} : undefined,
-			widgetNode = new widget.widget(parseTreeNode,{
-				wiki: $tw.wiki,
-				document: $tw.document
-			});
-		var container = $tw.document.createElement("div");
+		var widgetNode = this.parser.wiki.makeWidget(parser),
+			container = $tw.document.createElement("div");
 		widgetNode.render(container,null);
 		var text = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
