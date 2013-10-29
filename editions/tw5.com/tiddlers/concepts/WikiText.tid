@@ -1,7 +1,7 @@
 tags: concepts
 type: text/vnd.tiddlywiki
 title: WikiText
-modified: 201305011529
+modified: 201310291329
 
 \define wikitext-example(src)
 ```
@@ -72,6 +72,8 @@ You can also use triple backticks <code>&#96;&#96;&#96;</code> to mark code bloc
 This will be monospaced
 &#96;&#96;&#96;
 </pre>
+
+The three backticks need to be at the start of the line and immediately followed by a newline, otherwise they won't be interpreted correctly.
 
 Renders as:
 
