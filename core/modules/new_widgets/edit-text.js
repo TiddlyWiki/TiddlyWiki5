@@ -95,7 +95,9 @@ EditTextWidget.prototype.getEditInfo = function() {
 					value = "";
 					break;
 			}
-			value = this.editDefault;
+			if(this.editDefault) {
+				value = this.editDefault;
+			}
 		}
 	}
 	return {tiddler: tiddler, value: value};
