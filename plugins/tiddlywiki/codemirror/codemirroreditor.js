@@ -45,7 +45,7 @@ EditTextWidget.prototype.updateEditor = function(text) {
 			this.codemirrorInstance.setValue(text);
 		}
 	} else {
-		this.updateEditorDomNode();
+		this.updateEditorDomNode(this.getEditInfo().value);
 	}
 };
 
