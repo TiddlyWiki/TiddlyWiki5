@@ -81,7 +81,6 @@ CheckboxWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
-	this.checkboxClass = this.getAttribute("class");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
