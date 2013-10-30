@@ -36,6 +36,7 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	// Create element
 	var domNode = this.document.createElement("input");
 	domNode.setAttribute("type","file");
+	domNode.setAttribute("multiple","multiple");
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		self.wiki.readFiles(event.target.files,function(tiddlerFields) {
