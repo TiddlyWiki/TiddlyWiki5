@@ -1,7 +1,8 @@
 {
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
+		"tiddlywiki/filesystem",
+		"tiddlywiki/codemirror"
 	],
 	"themes": [
 		"tiddlywiki/snowwhite"
