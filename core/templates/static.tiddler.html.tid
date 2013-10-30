@@ -14,7 +14,7 @@ title: $:/core/templates/static.tiddler.html
 <body class="tw-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="story-river">
-`<$view title="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
+`<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
 </section>
 </body>
 </html>

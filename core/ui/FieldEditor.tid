@@ -1,7 +1,7 @@
 title: $:/core/ui/FieldEditor
 
 <$fieldmangler><$setvariable name="targetTiddler" value=<<currentTiddler>>><div class="tw-edit-fields">
-<table class="tw-edit-fields"><tbody><$list filter="[is[current]fields[]] -title -tags -text -creator -created -modified -modifier -[[draft.title]] -[[draft.of]]"><tr class="tw-edit-field"><td class="tw-edit-field-name"><<listItem>>:</td><td class="tw-edit-field-value"><$edit-text title=<<targetTiddler>> field=<<listItem>> placeholder="field value"/></td><td class="tw-edit-field-remove"><$button message="tw-remove-field" param=<<listItem>> class="btn-invisible">{{$:/core/images/delete-button}}</$button></td>
+<table class="tw-edit-fields"><tbody><$list filter="[is[current]fields[]] -title -tags -text -creator -created -modified -modifier -[[draft.title]] -[[draft.of]]"><tr class="tw-edit-field"><td class="tw-edit-field-name"><<listItem>>:</td><td class="tw-edit-field-value"><$edit-text tiddler=<<targetTiddler>> field=<<listItem>> placeholder="field value"/></td><td class="tw-edit-field-remove"><$button message="tw-remove-field" param=<<listItem>> class="btn-invisible">{{$:/core/images/delete-button}}</$button></td>
 </tr>
 </$list>
 </tbody>
@@ -9,6 +9,6 @@ title: $:/core/ui/FieldEditor
 </div>
 </$setvariable>
 
-<div class="tw-edit-field-add">Add a new field: <span class="tw-edit-field-add-name"><$edit-text title="$:/NewFieldName" tag="input" default="" placeholder="field name" class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
+<div class="tw-edit-field-add">Add a new field: <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/NewFieldName" tag="input" default="" placeholder="field name" class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
 
 </$fieldmangler>

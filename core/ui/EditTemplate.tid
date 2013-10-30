@@ -10,10 +10,10 @@ tw-tiddler-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerC
 
 <$edit-text field="draft.title" class="title tw-edit-texteditor"/>
 
-<$transclude title="$:/core/ui/TagsEditor"/>
+<$transclude tiddler="$:/core/ui/TagsEditor"/>
 
 <$reveal state="$:/ShowEditPreview" type="match" text="yes">
-<$transclude title="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
+<$transclude tiddler="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
 <div class="tw-tiddler-preview">
 <div class="tw-tiddler-preview-preview">
 <$transclude />
@@ -24,8 +24,8 @@ tw-tiddler-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerC
 </div>
 </$reveal>
 <$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
-<$transclude title="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
+<$transclude tiddler="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
 <$edit field="text" class="tw-edit-texteditor"/>
 </$reveal>
 
-<$transclude title="$:/core/ui/FieldEditor"/></div>
+<$transclude tiddler="$:/core/ui/FieldEditor"/></div>

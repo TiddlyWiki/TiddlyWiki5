@@ -38,7 +38,7 @@ Compute the internal state of the widget
 */
 TranscludeWidget.prototype.execute = function() {
 	// Get our parameters
-	this.transcludeTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
+	this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	// Check for recursion
@@ -82,7 +82,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TranscludeWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.transcludeTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {

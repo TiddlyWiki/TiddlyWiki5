@@ -3,5 +3,5 @@ title: $:/snippets/allfields
 \define renderfield(title)
 <tr class="tw-view-field"><td class="tw-view-field-name">''$title$'':</td><td class="tw-view-field-value">//{{$:/docs/fields/$title$}}//</td></tr>
 \end
-<table class="tw-view-field-table"><tbody><$list filter="[fields[]sort[title]]"><$macrocall $name="renderfield" title=<<listItem>>/></$list>
+<table class="tw-view-field-table"><tbody><$list filter="[fields[]sort[title]]"><$macrocall $name="renderfield" tiddler=<<listItem>>/></$list>
 </tbody></table>

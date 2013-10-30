@@ -49,7 +49,7 @@ Compute the internal state of the widget
 */
 EditWidget.prototype.execute = function() {
 	// Get our parameters
-	this.editTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
+	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
 	this.editClass = this.getAttribute("class");
@@ -81,7 +81,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EditWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title || changedAttributes.field || changedAttributes.index) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index) {
 		this.refreshSelf();
 		return true;
 	} else {

@@ -6,10 +6,10 @@ fill:$(foregroundColor)$;
 \end
 <div class="tw-tiddler-title"><div class="title"><span class="tw-tiddler-controls"><$button popup="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
 
-</span><$setvariable name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude title={{!!icon}}/></span></$setvariable> <$view field="title"/></div>
+</span><$setvariable name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude tiddler={{!!icon}}/></span></$setvariable> <$view field="title"/></div>
 
 <$reveal type="nomatch" text="" default="" state="$:/state/tiddlerInfo" qualifyTiddlerTitles="yes" class="tw-tiddler-info" animate="yes">
 
-<$transclude title="$:/core/ui/TiddlerInfo"/>
+<$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 
 </$reveal></div>

@@ -90,10 +90,10 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 	}
 	// Compose the transclusion of the template
 	if(this.hasAttribute("hackTemplate")) {
-		templateTree = [{type: "transclude", attributes: {title: {type: "string", value: title}}}];
+		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: title}}}];
 	} else {
 		if(template) {
-			templateTree = [{type: "transclude", attributes: {title: {type: "string", value: template}}}];
+			templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
 		} else {
 			if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
 				templateTree = this.parseTreeNode.children;
@@ -105,7 +105,7 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 			}
 		}
 		if(!this.hasAttribute("hackCurrentTiddler")) {
-			templateTree = [{type: "tiddler", attributes: {title: {type: "string", value: title}}, children: templateTree}]
+			templateTree = [{type: "tiddler", attributes: {tiddler: {type: "string", value: title}}, children: templateTree}]
 		}
 	}
 	// Return the list item

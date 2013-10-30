@@ -46,4 +46,4 @@ When embedding SVG elements you can also use WikiText features like transclusion
 
 <svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
 
-You can edit the value of the radius here: <$edit-text title="$:/SVGExampleRadius" tag="input"/>
+You can edit the value of the radius here: <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>

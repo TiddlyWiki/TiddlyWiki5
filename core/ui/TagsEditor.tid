@@ -6,7 +6,7 @@ background-color:$(backgroundColor)$;
 <$fieldmangler><div class="tw-edit-tags-list"><$list filter="[is[current]tags[]sort[title]]" listview="pop" itemClass="tw-tag-editor-label"><$setvariable name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label"><$view field="title" format="text" /><$button message="tw-remove-tag" param={{!!title}} class="btn-invisible tw-remove-tag-button">&times;</$button></span></$setvariable>
 </$list></div>
 
-<div class="tw-add-tag">Add a new tag: <span class="tw-add-tag-name"><$edit-text title="$:/NewTagName" tag="input" default="" placeholder="tag name" focusSet="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" class="tw-edit-texteditor"/></span> <$button popup="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button"><$button message="tw-add-tag" param={{$:/NewTagName}} set="$:/NewTagName" setTo="" class="">add</$button></span></div>
+<div class="tw-add-tag">Add a new tag: <span class="tw-add-tag-name"><$edit-text tiddler="$:/NewTagName" tag="input" default="" placeholder="tag name" focusSet="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" class="tw-edit-texteditor"/></span> <$button popup="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" class="btn-invisible">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button"><$button message="tw-add-tag" param={{$:/NewTagName}} set="$:/NewTagName" setTo="" class="">add</$button></span></div>
 
 <div class="tw-tags-autocomplete-wrapper">
 <$reveal state="$:/state/tagsAutoComplete" qualifyTiddlerTitles="yes" type="nomatch" text="" default="">

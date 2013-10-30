@@ -41,7 +41,7 @@ Compute the internal state of the widget
 */
 TiddlerWidget.prototype.execute = function() {
 	// Get our parameters
-	this.tiddlerTitle = this.getAttribute("title","");
+	this.tiddlerTitle = this.getAttribute("tiddler","");
 	// Set context variables
 	this.setVariable("currentTiddler",this.tiddlerTitle);
 	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tw-tiddler-exists" : "tw-tiddler-missing");
@@ -56,7 +56,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title) {
+	if(changedAttributes.tiddler) {
 		this.refreshSelf();
 		return true;
 	} else {

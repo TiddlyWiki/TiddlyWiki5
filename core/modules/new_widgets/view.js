@@ -40,7 +40,7 @@ Compute the internal state of the widget
 */
 ViewWidget.prototype.execute = function() {
 	// Get parameters from our attributes
-	this.viewTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
+	this.viewTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.viewField = this.getAttribute("field","text");
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");
@@ -165,7 +165,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ViewWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedTiddlers[this.viewTitle]) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes.template || changedAttributes.format || changedTiddlers[this.viewTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {

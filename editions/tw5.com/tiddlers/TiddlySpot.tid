@@ -18,7 +18,7 @@ TiddlyWiki5 isn't yet built in to TiddlySpot but you can use it by following the
 
 ! TiddlySpot details
 
-Wiki name: <$edit-text title="$:/UploadName" default="" tag="input"/>
+Wiki name: <$edit-text tiddler="$:/UploadName" default="" tag="input"/>
 
 Password: <$password name="upload"/>
 
@@ -26,6 +26,6 @@ Password: <$password name="upload"/>
 
 If you're using a server other than TiddlySpot, you can set the server URL here:
 
-Service URL: <$edit-text title="$:/UploadURL" default="" tag="input"/>
+Service URL: <$edit-text tiddler="$:/UploadURL" default="" tag="input"/>
 
 //(by default, the server URL is `http://<wikiname>.tiddlyspot.com/store.cgi`)//

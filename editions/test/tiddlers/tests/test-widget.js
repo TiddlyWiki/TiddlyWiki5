@@ -101,11 +101,11 @@ describe("Widget module", function() {
 									]},
 										{type: "text", text: " and back in the outer DIV"},
 										{type: "transclude", attributes: {
-										"title": {type: "string", value: "TiddlerOne"}
+										"tiddler": {type: "string", value: "TiddlerOne"}
 									}}
 								]},
 								{type: "transclude", attributes: {
-										"title": {type: "string", value: "TiddlerOne"}
+										"tiddler": {type: "string", value: "TiddlerOne"}
 									}}
 							]};
 		// Construct the widget node
@@ -150,12 +150,12 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add a tiddler
 		wiki.addTiddlers([
-			{title: "TiddlerOne", text: "<$transclude title='TiddlerOne'/>\n"}
+			{title: "TiddlerOne", text: "<$transclude tiddler='TiddlerOne'/>\n"}
 		]);
 		// Test parse tree
 		var parseTreeNode = {type: "widget", children: [
 								{type: "transclude", attributes: {
-										"title": {type: "string", value: "TiddlerOne"}
+										"tiddler": {type: "string", value: "TiddlerOne"}
 									}}
 							]};
 		// Construct the widget node
@@ -186,11 +186,11 @@ describe("Widget module", function() {
 		// Add a tiddler
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
-			{title: "TiddlerTwo", text: "<$transclude title={{TiddlerThree}}/>"},
+			{title: "TiddlerTwo", text: "<$transclude tiddler={{TiddlerThree}}/>"},
 			{title: "TiddlerThree", text: "TiddlerOne"}
 		]);
 		// Construct the widget node
-		var text = "My <$transclude title='TiddlerTwo'/> is Jolly"
+		var text = "My <$transclude tiddler='TiddlerTwo'/> is Jolly"
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -205,7 +205,7 @@ describe("Widget module", function() {
 			{title: "TiddlerOne", text: "Jolly Old World"}
 		]);
 		// Construct the widget node
-		var text = "<$view title='TiddlerOne'/>";
+		var text = "<$view tiddler='TiddlerOne'/>";
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -234,12 +234,12 @@ describe("Widget module", function() {
 		// Add some tiddlers
 		wiki.addTiddlers([
 			{title: "TiddlerOne", text: "Jolly Old World"},
-			{title: "TiddlerTwo", text: "<$transclude title={{TiddlerThree}}/>"},
+			{title: "TiddlerTwo", text: "<$transclude tiddler={{TiddlerThree}}/>"},
 			{title: "TiddlerThree", text: "TiddlerOne"},
 			{title: "TiddlerFour", text: "TiddlerTwo"}
 		]);
 		// Construct the widget node
-		var text = "My <$setvariable name='currentTiddler' value={{TiddlerFour}}><$transclude title={{!!title}}/></$setvariable> is Jolly"
+		var text = "My <$setvariable name='currentTiddler' value={{TiddlerFour}}><$transclude tiddler={{!!title}}/></$setvariable> is Jolly"
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
@@ -449,7 +449,7 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
-			{title: "$:/myTemplate", text: "<$tiddler title=<<listItem>>><$view field='title'/></$tiddler>"},
+			{title: "$:/myTemplate", text: "<$tiddler tiddler=<<listItem>>><$view field='title'/></$tiddler>"},
 			{title: "TiddlerOne", text: "Jolly Old World"},
 			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
 			{title: "TiddlerThree", text: "Golly Gosh"},
@@ -460,6 +460,7 @@ describe("Widget module", function() {
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
+console.log(require("util").inspect(widgetNode,{depth:8,colors:true}));
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 	});

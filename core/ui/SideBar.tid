@@ -6,7 +6,7 @@ title: $:/core/ui/SideBar
 
 <$linkcatcher to="$:/temp/search">
 
-<div class="tw-search"><$edit-text title="$:/temp/search" type="search" tag="input"/><$reveal state="$:/temp/search" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tw-search"><$edit-text tiddler="$:/temp/search" type="search" tag="input"/><$reveal state="$:/temp/search" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
 </$linkcatcher>
 

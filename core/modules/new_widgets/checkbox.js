@@ -79,7 +79,7 @@ Compute the internal state of the widget
 */
 CheckboxWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
-	this.checkboxTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
+	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
 	this.checkboxClass = this.getAttribute("class");
 	// Make the child widgets
@@ -91,7 +91,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.title || changedAttributes.tag || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {

@@ -106,7 +106,7 @@ Compute the internal state of the widget
 */
 EditTextWidget.prototype.execute = function() {
 	// Get our parameters
-	this.editTitle = this.getAttribute("title",this.getVariable("currentTiddler"));
+	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
 	this.editDefault = this.getAttribute("default","");
@@ -144,7 +144,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely rerender if any of our attributes have changed
-	if(changedAttributes.title || changedAttributes.field || changedAttributes.index) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {
