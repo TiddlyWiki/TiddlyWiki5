@@ -1,6 +1,6 @@
 created: 201308241543
 creator: JeremyRuston
-modified: 201308241543
+modified: 201310301351
 modifier: JeremyRuston
 tags: widget
 title: TiddlerWidget
@@ -12,5 +12,5 @@ The TiddlerWidget sets the ContextTiddler that applies for processing its conten
 ! Content and Attributes
 
 |!Attribute |!Description |
-|title |The title of the tiddler to become the new ContextTiddler |
+|tiddler |The title of the tiddler to become the new ContextTiddler |
 |class |CSS classes to added to the generated elements |
