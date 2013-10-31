@@ -44,7 +44,6 @@ ListWidget.prototype.execute = function() {
 	// Get our attributes
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
-	this.preserveCurrentTiddler = this.getAttribute("preserveCurrentTiddler","no") === "yes";
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -118,7 +117,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 ListWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.preserveCurrentTiddler) {
+	if(changedAttributes.filter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage) {
 		this.refreshSelf();
 		return true;
 	} else {
