@@ -46,9 +46,6 @@ ViewWidget.prototype.execute = function() {
 	this.viewFormat = this.getAttribute("format","text");
 	this.viewTemplate = this.getAttribute("template","");
 	switch(this.viewFormat) {
-		case "wikified":
-			this.text = this.getValueAsWikified();
-			break;
 		case "htmlwikified":
 			this.text = this.getValueAsHtmlWikified();
 			break;
