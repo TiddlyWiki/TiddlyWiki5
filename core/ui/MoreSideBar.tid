@@ -46,7 +46,7 @@ title: $:/core/ui/MoreSideBar
 <$reveal type="match" state="$:/state/moreSideBarTabSet" text="typeTab" qualifyTiddlerTitles="yes">
 <$list filter="[!is[system]has[type]each[type]sort[type]]">
 <div class="tw-menu-list-item">
-<$view field="type" default="untyped"/>
+<$view field="type"/>
 <$list filter="[type{!!type}!is[system]sort[title]]">
 <div class="tw-menu-list-subitem">
 <$link to={{!!title}}><$view field="title"/></$link>
