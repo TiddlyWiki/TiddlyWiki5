@@ -3,7 +3,7 @@ title: $:/core/modules/new_widgets/fields.js
 type: application/javascript
 module-type: new_widget
 
-View widget
+Fields widget
 
 \*/
 (function(){
