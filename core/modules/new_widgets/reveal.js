@@ -84,7 +84,6 @@ RevealWidget.prototype.execute = function() {
 	this.position = this.getAttribute("position");
 	this["default"] = this.getAttribute("default","");
 	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
-	this["class"] = this.getAttribute("class");
 	this.animate = this.getAttribute("animate","no");
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
@@ -148,7 +147,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || changedAttributes.animate || changedTiddlers[this.stateTitle]) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes.animate || changedTiddlers[this.stateTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
