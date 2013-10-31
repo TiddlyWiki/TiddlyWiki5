@@ -1,0 +1,29 @@
+title: ButtonWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The button widget displays an HTML `<button>` element that can perform a combination optional actions when clicked:
+
+* Dispatch a user defined [[widget message|WidgetMessages]]
+* Trigger a user defined [[popup|PopupMechanism]]
+* Assign new text to a specified tiddler
+
+! Content and Attributes
+
+The content of the `<$button>` widget is displayed within the button.
+
+|!Attribute |!Description |
+|message |The name of the [[widget message|WidgetMessages]] to send when the button is clicked |
+|param |The optional parameter to the message |
+|set |The title of a tiddler to which a new value will be assigned |
+|setTo |The new value to assign to the tiddler identified in the `set` attribute |
+|popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
+|qualifyTiddlerTitles |If this attribute is present then the state tiddler titles specified in the `set` and `popup` attributes are qualified as described in HandlingUserInterfaceState |
+|class |An optional CSS class name to be assigned to the HTML element |
+|style |An optional CSS style attribute to be assigned to the HTML element |
+|selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |

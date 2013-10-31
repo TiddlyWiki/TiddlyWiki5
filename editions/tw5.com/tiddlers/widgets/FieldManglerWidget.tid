@@ -1,0 +1,23 @@
+title: FieldManglerWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The field manager widget manipulates the fields and tags of a tiddler. It does so in response to the following WidgetMessages:
+
+|!Message |!Description
+|''tw-remove-field'' |Remove the field specified in `event.param` |
+|''tw-add-field'' |Add the field specified in `event.param` |
+|''tw-remove-tag'' |Remove the tag specified in `event.param` |
+|''tw-add-tag'' |Add the tag specified in `event.param` |
+
+! Content and Attributes
+
+The field mangler widget displays any contained content, and responds to WidgetMessages dispatched within it.
+
+|!Attribute |!Description |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[TiddlerVariable: currentTiddler]]) |

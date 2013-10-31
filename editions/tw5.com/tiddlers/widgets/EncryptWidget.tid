@@ -1,0 +1,17 @@
+title: EncryptWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The encrypt widget renders a filtered list of tiddlers to an encrypted block with the password currently held in the PasswordVault. The encrypted block can subsequently be decrypted by the TiddlyWiki5 BootMechanism. See the EncryptionMechanism for more details.
+
+! Content and Attributes
+
+The content of the `<$encrypt>` widget is ignored.
+
+|!Attribute |!Description |
+|filter |Filter defining the tiddlers to be included in the encrypted block. If not specified then all non-system tiddlers are used |

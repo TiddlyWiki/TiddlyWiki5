@@ -1,13 +1,10 @@
-created: 201308241419
+created: 201310241419
 creator: JeremyRuston
-modified: 201308300837
+modified: 201310300837
 modifier: JeremyRuston
 tags: widget
 title: ListWidget
 
-\define demoMacro(title)
-This is the tiddler called [[Blah-$title$]]
-\end
 ! Introduction
 
 The list widget displays a sequence of tiddlers that match a [[tiddler filter|TiddlerFilters]]. It can be used for many purposes:
@@ -17,27 +14,29 @@ The list widget displays a sequence of tiddlers that match a [[tiddler filter|Ti
 * Listing each of the tags applied to a tiddler
 * Handling the main story river
 
-The tiddlers can either be displayed by transcluding each in turn through an optional template, or by providing a macro to be rendered for each list element.
+The tiddlers can either be displayed by transcluding each in turn through an optional template.
 
 ! Content and Attributes
 
-The content of the `<$list>` widget is the optional template to use for rendering each tiddler in the list (alternatively, the template can be specified as a tiddler title in the ``template`` attribute).
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list (alternatively, the template can be specified as a tiddler title in the ``template`` attribute).
 
 |!Attribute |!Description |
-|type |Determines the HTML elements generated for the list: ''plain'', ''ul'' or ''ol'' |
 |filter |The TiddlerFilter to display |
 |template |The title of a template tiddler for rendering each tiddler in the list |
 |editTemplate |An alternative template to use for DraftTiddlers in edit mode |
 |emptyMessage |Message to be displayed when the list is empty |
-|class |Class to be applied to the list frame element|
-|itemClass |Class to be applied to the list member elements |
-|macro |Specifies an optional macro to use for rendering each tiddler |
 |listview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |
+|hackTemplate |If this attribute is present then the list items are directly transcluded without altering the current tiddler or using a template |
+|hackCurrentTiddler |If this attribute is present then the template is directly transcluded without altering the current tiddler |
+
+//`listview` and `history` are temporarily unimplemented //
+
+//`hackTemplate` and `hackCurrentTiddler` are temporary hacks that will be removed//
 
 !! Handling edit mode
 
-The `<$list>` widget can optionally render draft tiddlers through a different tiddler than ordinary tiddlers -- see DraftMechanism for a discussion of how this capability is used.
+The `<$list>` widget can optionally render draft tiddlers through a different template tiddler than ordinary tiddlers -- see DraftMechanism for a discussion of how this capability is used.
 
 !! `listview` attribute
 
@@ -52,18 +51,6 @@ The optional `history` attribute specifies the name of a tiddler that is used to
 
 ! Examples
 
-!! Using the `macro` attribute
-
-Example of using the `<$list>` widget with the macro attribute:
-
-```
-<$list filter="[tag[introduction]]" macro="demoMacro"/>
-```
-
-Renders as:
-
-<$list filter="[tag[introduction]]" macro="demoMacro"/>
-
 !! Creating nested lists
 
 The ''types'' and ''recent'' tabs in the sidebar give two examples of a grouped list created by nesting.
@@ -72,11 +59,16 @@ The ''types'' listing is performed with this markup:
 
 ```
 <$list filter="[!is[system]has[type]each[type]sort[type]]">
-<$view field="type" default="untyped"/>
+<div class="tw-menu-list-item">
+<$view field="type"/>
 <$list filter="[type{!!type}!is[system]sort[title]]">
-<$view field="title" format="link"/>
+<div class="tw-menu-list-subitem">
+<$link to={{!!title}}><$view field="title"/></$link>
+</div>
 </$list>
+</div>
 </$list>
+
 ```
 
 The outer list filter selects each discrete value found in the `type` field. The inner list filter selects all the (non-system) tiddlers with that type.
@@ -85,10 +77,14 @@ The ''recent'' listing is performed with this markup:
 
 ```
 <$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]" itemClass="tw-menu-list-item">
+<div class="tw-menu-list-item">
 <$view field="modified" format="date" template="DDth MMM YYYY"/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]" itemClass="tw-menu-list-subitem">
-<$view field="title" format="link"/>
+<div class="tw-menu-list-subitem">
+<$link to={{!!title}}><$view field="title"/></$link>
+</div>
 </$list>
+</div>
 </$list>
 ```
 

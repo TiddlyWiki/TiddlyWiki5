@@ -1,0 +1,17 @@
+title: EditBitmapWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The edit bitmap widget provides a user interface in the browser for editing bitmap tiddlers. It is currently a primitive proof-of-concept, supporting resizing and painting with a single color and line width.
+
+! Content and Attributes
+
+The content of the `<$edit-bitmap>` widget is ignored.
+
+|!Attribute |!Description |
+|tiddler |The tiddler to edit (defaults to the [[TiddlerVariable: currentTiddler]]) |

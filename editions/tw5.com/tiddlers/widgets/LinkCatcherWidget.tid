@@ -1,0 +1,24 @@
+title: LinkCatcherWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The link catcher widget responds to navigation WidgetMessages dispatched within its child content by performing any or all of these actions:
+
+* sending a different widget message
+* setting a tiddler to the title of the navigated tiddler
+* setting a tiddler to a specified value
+
+! Content and Attributes
+
+The content of the `<$linkcatcher>` widget is displayed normally.
+
+|!Attribute |!Description |
+|to |Optional title of the tiddler to be set to the title of the navigated tiddler |
+|message |Optional identifier for a [[widget message|WidgetMessages]] to be sent when a navigation is caught  |
+|set |Optional title of the tiddler to be set to a specified value when navigation occurs |
+|setTo |Value to be assigned by the `set` attribute |

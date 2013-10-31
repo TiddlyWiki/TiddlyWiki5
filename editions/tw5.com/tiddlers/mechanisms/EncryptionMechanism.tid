@@ -1,6 +1,6 @@
 created: 201308251542
 creator: JeremyRuston
-modified: 201308251543
+modified: 201310311543
 modifier: JeremyRuston
 tags: mechanism
 title: EncryptionMechanism
@@ -11,10 +11,10 @@ For instructions on how to use TiddlyWiki5's encryption features, see [[How to u
 
 The EncryptionMechanism is implemented with the following elements:
 
-* A crypto "password vault" within the BootMechanism that holds the current encryption password
+* A PasswordVault within the BootMechanism that holds the current encryption password
 * The ability of the BootMechanism to read a block of encrypted tiddlers from the TiddlyWiki file, to prompt the user for a password, and to decrypt the tiddlers
 * Handlers for the messages SetPasswordMessage and ClearPasswordMessage that handle the user interface for password changes
-* The `<$encrypt>` widget within the main file template that encrypts a filtered list of tiddlers with the currently held password
+* The EncryptWidget within the main file template that encrypts a filtered list of tiddlers with the currently held password
 * The [[$:/isEncrypted]] tiddler that contains "yes" or "no" according to whether there is a password in the password vault
 ** The availability of this tiddler allows the RevealWidget to be used to selectively display user interface elements according to whether encryption is in force
 * The [[$:/snippets/encryptionstatus]] snippet displays the current encryption status

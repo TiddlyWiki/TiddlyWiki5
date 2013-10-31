@@ -1,0 +1,26 @@
+title: RevealWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateTiddlers]]. The type of the widget determines the condition for the content being displayed:
+
+* ''match'': the content is displayed if the state tiddler matches a specified value
+* ''nomatch'': the content is displayed if the state tiddler doesn't match a specified value
+* ''popup'': the content is displayed as a popup as described in the PopupMechanism
+
+! Content and Attributes
+
+The content of the `<$reveal>` widget is displayed according to the rules given above.
+
+|!Attribute |!Description |
+|state |The title of the tiddler containing the state |
+|type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
+|text |The text to match when the type is ''match'' and ''nomatch'' |
+|position |The position used for the popup when the type is ''popup''. Can be ''left'',''above'',''aboveright'',''right'',''belowleft'' or ''below'' |
+|default |Default value to use when the state tiddler |
+|qualifyTiddlerTitles |If this attribute is present then the state tiddler title is qualified as described in HandlingUserInterfaceState |
