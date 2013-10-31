@@ -114,13 +114,13 @@ EditTextWidget.prototype.execute = function() {
 	this.editDefault = this.getAttribute("default","");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
-	this.editFocusSet = this.getAttribute("focusSet");
+	this.editFocusPopup = this.getAttribute("focusPopup");
 	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");;
 	// Qualify tiddler titles if required
 	if(this.qualifyTiddlerTitles) {
 		var qualifier = this.getStateQualifier();
-		if(this.editFocusSet) {
-			this.editFocusSet = this.editFocusSet + "-" + qualifier;
+		if(this.editFocusPopup) {
+			this.editFocusPopup = this.editFocusPopup + "-" + qualifier;
 		}
 	}
 	// Get the editor element tag and type
@@ -217,10 +217,10 @@ EditTextWidget.prototype.handleInputEvent = function(event) {
 };
 
 EditTextWidget.prototype.handleFocusEvent = function(event) {
-	if(this.editFocusSet) {
+	if(this.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
-			title: this.editFocusSet,
+			title: this.editFocusPopup,
 			wiki: this.wiki,
 			force: true
 		});
