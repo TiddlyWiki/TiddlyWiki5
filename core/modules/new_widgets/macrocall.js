@@ -40,7 +40,9 @@ MacroCallWidget.prototype.execute = function() {
 	// Merge together the parameters specified in the parse tree with the specified attributes
 	var params = this.parseTreeNode.params ? this.parseTreeNode.params.slice(0) : [];
 	$tw.utils.each(this.attributes,function(attribute,name) {
-		params.push({name: name, value: attribute});
+		if(name !== "$name") {
+			params.push({name: name, value: attribute});			
+		}
 	});
 	// Get the macro value
 	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),{params: params});
