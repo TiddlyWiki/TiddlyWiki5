@@ -85,7 +85,6 @@ Compute the internal state of the widget
 EditBitmapWidget.prototype.execute = function() {
 	// Get our parameters
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	this.editClass = this.getAttribute("class");
 };
 
 /*
