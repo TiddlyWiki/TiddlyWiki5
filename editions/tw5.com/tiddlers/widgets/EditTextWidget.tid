@@ -16,7 +16,7 @@ By default, the edit text widget generates a `<textarea>` as the HTML editing el
 The content of the `<$edit-text>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the [[TiddlerVariable: currentTiddler]]) |
+|tiddler |The tiddler to edit (defaults to the [[WidgetVariable: currentTiddler]]) |
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |default |The default text to be provided when the target tiddler doesn't exist |

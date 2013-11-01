@@ -20,4 +20,4 @@ The field manager widget manipulates the fields and tags of a tiddler. It does s
 The field mangler widget displays any contained content, and responds to WidgetMessages dispatched within it.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the [[TiddlerVariable: currentTiddler]]) |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |

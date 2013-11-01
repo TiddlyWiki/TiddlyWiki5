@@ -14,4 +14,4 @@ The edit bitmap widget provides a user interface in the browser for editing bitm
 The content of the `<$edit-bitmap>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the [[TiddlerVariable: currentTiddler]]) |
+|tiddler |The tiddler to edit (defaults to the [[WidgetVariable: currentTiddler]]) |

@@ -23,7 +23,7 @@ The provided template is rendered with the following special substitutions:
 The content of the `<$fields>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler from which the fields are to be displayed (defaults to the [[TiddlerVariable: currentTiddler]]) |
+|tiddler |Title of the tiddler from which the fields are to be displayed (defaults to the [[WidgetVariable: currentTiddler]]) |
 |template |Text of the template (see above) |
 |exclude |Lists of fields to be excluded (defaults to "text") |
 |stripTitlePrefix |If set to "yes" then curly bracketed prefixes are removed from titles (for example `{prefix}HelloThere` converts to `HelloThere`) |

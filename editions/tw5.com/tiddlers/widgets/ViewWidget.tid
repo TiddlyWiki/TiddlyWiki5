@@ -14,7 +14,7 @@ The view widget displays the contents of a tiddler field in a specified format.
 The content of the `<$view>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The title of the tiddler (defaults to the [[TiddlerVariable: currentTiddler]]) |
+|tiddler |The title of the tiddler (defaults to the [[WidgetVariable: currentTiddler]]) |
 |field |The name of the field to view (defaults to "text") |
 |format |The format for displaying the field (see below) |
 |template |The optional template used with certain formats |

@@ -7,7 +7,7 @@ tags: widget
 
 ! Introduction
 
-The set variable widget assigns a value to a specified [[variable|TiddlerVariables]]. The new value of the variable is availale to the content within the set variable widget.
+The set variable widget assigns a value to a specified [[variable|WidgetVariables]]. The new value of the variable is availale to the content within the set variable widget.
 
 ! Content and Attributes
 

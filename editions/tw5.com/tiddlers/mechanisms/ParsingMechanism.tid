@@ -1,4 +1,45 @@
 title: ParsingMechanism
 tags: mechanism
+created: 201311011307
+modified: 201311011307
 
+! Introduction
 
+The parsing mechanism analyses the text of a tiddler against a set of parsing rules, producing a tree representing the structure of the text. The RenderingMechanism is used to transform parse trees into render trees of widget nodes.
+
+TiddlyWiki5 includes ParserModules for several types of tiddler:
+
+* WikiText
+* Raw HTML
+* Plain text
+* Images (bitmap, SVG and PDF)
+
+The WikiText parser is the most complex, comprising separate individual WikiRuleModules encapsulating each parsing rule.
+
+! Parse Trees
+
+The output of parsing a tiddler is an object containing a tree of parse nodes corresponding to the original text. For example:
+
+```
+> JSON.stringify($tw.wiki.parseText("text/vnd.tiddlywiki","Some //italics// and a {{Transclusion}}.").tree)
+
+[
+	{type: "element", tag: "p", children: [
+		{type: "text", text: "Some "},
+		{type: "element", tag: "em", children: [
+			{type: "text", text: "italics"}
+		]},
+		{type: "text", text: " and a "},
+		{type: "tiddler", attributes:{
+			tiddler: {type: "string", value: "Transclusion"}
+		}, children:[
+			{type: "transclude", attributes:{
+				tiddler: {type: "string", value: "Transclusion"}
+			}}
+		]},
+		{type: "text", text: "."}
+	]}
+]
+```
+
+Parse tree nodes are plain JavaScript objects, and do not have a prototype.

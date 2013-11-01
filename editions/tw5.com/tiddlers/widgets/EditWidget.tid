@@ -14,7 +14,7 @@ The edit widget provides a general purpose interface for editing a tiddler. It d
 The content of the `<$edit>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the [[TiddlerVariable: currentTiddler]]) |
+|tiddler |The tiddler to edit (defaults to the [[WidgetVariable: currentTiddler]]) |
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |class |A CSS class to be added the generated editing widget |
