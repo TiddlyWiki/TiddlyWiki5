@@ -67,8 +67,7 @@ ElementWidget.prototype.refresh = function(changedTiddlers) {
 		// Update our attributes
 		this.assignAttributes(this.domNodes[0]);
 	}
-	var hasRefreshed = this.refreshChildren(changedTiddlers);
-	return hasRefreshed || hasChangedAttributes;
+	return this.refreshChildren(changedTiddlers) || hasChangedAttributes;
 };
 
 /*
