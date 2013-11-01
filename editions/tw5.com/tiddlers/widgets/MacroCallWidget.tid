@@ -15,7 +15,15 @@ For example, a macro called `italicise` that takes a single parameter called `te
 <<italicise "Text to be made into italics">>
 <<italicise text:"Text to be made into italics">>
 <$macrocall $name="italicise" text="Text to be made into italics"/>
+<$macrocall $name="italicise" text={{Title of tiddler containing text to be italicised}}/>
+<$macrocall $name="italicise" text=<<textMaker "Another macro to generate the text to be italicised">>/>
 ```
+
+You can see several examples of the macro call widget within the core:
+
+* Listing module information: [[$:/snippets/modules]]
+* Listing field information: [[$:/snippets/allfields]]
+* Generating `data:` URIs: [[$:/themes/tiddlywiki/starlight/styles.tid]]
 
 ! Content and Attributes
 
