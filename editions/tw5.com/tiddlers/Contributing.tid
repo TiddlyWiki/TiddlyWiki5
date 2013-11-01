@@ -1,6 +1,9 @@
-modified: 201309210933
-title: Contributing
+created: 201311011114
+creator: JeremyRuston
+modified: 201311011114
+modifier: JeremyRuston
 tags: introduction
+title: Contributing
 
 TiddlyWiki5 welcomes contributions to its code and documentation via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]. Please take a moment to read these notes to help make the process as smooth as possible.
 
@@ -21,7 +24,7 @@ There's a lot of good material on the web about bug reports:
 
 !! Pull Requests
 
-Like other OpenSource projects, TiddlyWiki5 needs a signed ContributorLicenseAgreement from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
+Like other OpenSource projects, TiddlyWiki5 needs a signed contributor license agreement from individual contributors before contributions of code can be accepted. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
 
 * For individuals use: [[CLA-individual|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
 * For entities use: [[CLA-entity|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]

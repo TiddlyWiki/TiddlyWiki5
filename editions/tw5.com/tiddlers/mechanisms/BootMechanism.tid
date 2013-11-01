@@ -1,13 +1,13 @@
 created: 201308251429
 creator: JeremyRuston
-modified: 201308251429
+modified: 201310312218
 modifier: JeremyRuston
 tags: mechanism
 title: BootMechanism
 
 !Introduction
 
-It its heart, TiddlyWiki5 is a relatively small boot kernel that runs on node.js or in the browser with all other functionality added via dynamically loaded [[modules|Modules]].
+At its heart, TiddlyWiki5 is a relatively small boot kernel that runs either under node.js or in the browser with all other functionality added via dynamically loaded [[modules|Modules]].
 
 The kernel boots just enough of the TiddlyWiki environment to allow it to load and execute module tiddlers. The module system is compatible with CommonJS and [[node.js]].
 
