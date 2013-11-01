@@ -104,14 +104,14 @@ exports.startup = function() {
 		});
 		// Display the PageTemplate
 		var templateTitle = "$:/core/ui/PageTemplate",
-			parser = $tw.wiki.new_parseTiddler(templateTitle),
-			widgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
+			parser = $tw.wiki.new_parseTiddler(templateTitle);
+		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		widgetNode.render($tw.pageContainer,null);
+		$tw.pageWidgetNode.render($tw.pageContainer,null);
 		$tw.wiki.addEventListener("change",function(changes) {
-			widgetNode.refresh(changes,$tw.pageContainer,null);
+			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
 		});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
