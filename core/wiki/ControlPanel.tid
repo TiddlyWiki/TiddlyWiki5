@@ -23,6 +23,6 @@ Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to choose which tiddlers are display
 
 ''Additional information about this ~TiddlyWiki''
 
-*~TiddlyWiki5 version <$version/>
+*~TiddlyWiki5 version <<version>>
 *[[Wiki Info|$:/WikiInfo]]
 *[[Internal configuration information|$:/ConfigInfo]]

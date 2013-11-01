@@ -20,4 +20,4 @@ Import: <$browse/>
 
 ---
 
-TiddlyWiki5 version <$version/>
+TiddlyWiki5 version <<version>>
