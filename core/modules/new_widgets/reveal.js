@@ -31,6 +31,9 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
+	var classes = this["class"].split(" ") || [];
+	classes.push("tw-reveal");
+	domNode.className = classes.join(" ");
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
@@ -82,6 +85,7 @@ RevealWidget.prototype.execute = function() {
 	this.type = this.getAttribute("type");
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
+	this["class"] = this.getAttribute("class","");
 	this["default"] = this.getAttribute("default","");
 	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
 	this.animate = this.getAttribute("animate","no");
@@ -93,6 +97,7 @@ RevealWidget.prototype.execute = function() {
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
+	this.hasChildNodes = this.isOpen;
 	this.makeChildWidgets(childNodes);
 };
 
@@ -147,11 +152,43 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes.animate || changedTiddlers[this.stateTitle]) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes.animate) {
 		this.refreshSelf();
 		return true;
 	} else {
-		return this.refreshChildren(changedTiddlers);		
+		var refreshed = false;
+		if(changedTiddlers[this.stateTitle]) {
+			this.updateState();
+			refreshed = true;
+		}
+		return this.refreshChildren(changedTiddlers) || refreshed;
+	}
+};
+
+/*
+Called by refresh() to dynamically show or hide the content
+*/
+RevealWidget.prototype.updateState = function() {
+	// Read the current state
+	this.readState();
+	// Construct the child nodes if needed
+	var domNode = this.domNodes[0];
+	if(this.isOpen && !this.hasChildNodes) {
+		this.hasChildNodes = true;
+		this.makeChildWidgets(this.parseTreeNode.children);
+		this.renderChildren(domNode,null);
+	}
+	// Animate our DOM node
+	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
+		this.positionPopup(domNode);
+	}
+	if(this.isOpen) {
+		domNode.removeAttribute("hidden");
+        $tw.anim.perform("open",domNode);
+	} else {
+		$tw.anim.perform("close",domNode,{callback: function() {
+			domNode.setAttribute("hidden","true");
+        }});
 	}
 };
 

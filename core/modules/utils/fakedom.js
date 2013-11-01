@@ -47,6 +47,15 @@ TW_Element.prototype.setAttributeNS = function(namespace,name,value) {
 	this.setAttribute(name,value);
 };
 
+TW_Element.prototype.removeAttribute = function(name) {
+	if(this.isRaw) {
+		throw "Cannot removeAttribute on a raw TW_Element";
+	}
+	if($tw.utils.hop(this.attributes,name)) {
+		delete this.attributes[name];
+	}
+};
+
 TW_Element.prototype.appendChild = function(node) {
 	this.children.push(node);
 	node.parentNode = this;
