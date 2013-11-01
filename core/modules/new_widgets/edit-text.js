@@ -95,7 +95,7 @@ EditTextWidget.prototype.getEditInfo = function() {
 					value = "";
 					break;
 			}
-			if(this.editDefault) {
+			if(this.editDefault !== undefined) {
 				value = this.editDefault;
 			}
 		}
@@ -111,7 +111,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
-	this.editDefault = this.getAttribute("default","");
+	this.editDefault = this.getAttribute("default");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editFocusPopup = this.getAttribute("focusPopup");
