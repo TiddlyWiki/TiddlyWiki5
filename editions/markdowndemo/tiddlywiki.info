@@ -1,0 +1,12 @@
+{
+	"plugins": [
+		"tiddlywiki/markdown"
+	],
+	"themes": [
+		"tiddlywiki/snowwhite"
+	],
+	"doNotSave": [
+	],
+	"includeWikis": [
+	]
+}

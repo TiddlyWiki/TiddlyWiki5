@@ -16,6 +16,7 @@ title: Features
 * Try out the <$button message="tw-full-screen">full screen support</$button>
 * Explore the [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
 * Try out the [[CodeMirror plugin|http://five.tiddlywiki.com/codemirrordemo.html]]
+* Try out the [[Markdown plugin|http://five.tiddlywiki.com/markdowndemo.html]]
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules

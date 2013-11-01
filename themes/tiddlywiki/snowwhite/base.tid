@@ -80,19 +80,6 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: 300;
 }
 
-code, pre {
-	padding: 0 3px 2px;
-	<<border-radius 3px>>
-}
-
-code {
-	padding: 1px 2px;
-	color: #d14;
-	background-color: #f7f7f9;
-	border: 1px solid #e1e1e8;
-    white-space: pre-wrap;
-}
-
 pre {
 	display: block;
 	padding: 14px;
@@ -103,6 +90,27 @@ pre {
 	white-space: pre-wrap;
 	background-color: #f5f5f5;
 	border: 1px solid #ccc;
+	padding: 0 3px 2px;
+	<<border-radius 3px>>
+}
+
+code {
+	color: #d14;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+    white-space: pre-wrap;
+	padding: 0 3px 2px;
+	<<border-radius 3px>>
+}
+
+/*
+Markdown likes putting code elements inside pre elements
+*/
+pre > code {
+	padding: 0;
+	border: none;
+	background-color: inherit;
+	color: inherit;
 }
 
 table {
