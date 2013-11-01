@@ -460,7 +460,7 @@ describe("Widget module", function() {
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
-console.log(require("util").inspect(widgetNode,{depth:8,colors:true}));
+//console.log(require("util").inspect(widgetNode,{depth:8,colors:true}));
 		// Test the rendering
 		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
 	});
