@@ -94,10 +94,12 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else {
+		var refreshed = false;
 		if(changedTiddlers[this.checkboxTitle]) {
 			this.inputDomNode.checked = this.getValue();
+			refreshed = true;
 		}
-		return this.refreshChildren(changedTiddlers);
+		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
 };
 
