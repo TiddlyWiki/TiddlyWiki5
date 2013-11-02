@@ -89,6 +89,8 @@ RevealWidget.prototype.execute = function() {
 	this["default"] = this.getAttribute("default","");
 	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
 	this.animate = this.getAttribute("animate","no");
+	this.openAnimation = this.animate === "no" ? undefined : "open";
+	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
 	if(this.qualifyTiddlerTitles) {
@@ -184,9 +186,9 @@ RevealWidget.prototype.updateState = function() {
 	}
 	if(this.isOpen) {
 		domNode.removeAttribute("hidden");
-        $tw.anim.perform("open",domNode);
+        $tw.anim.perform(this.openAnimation,domNode);
 	} else {
-		$tw.anim.perform("close",domNode,{callback: function() {
+		$tw.anim.perform(this.closeAnimation,domNode,{callback: function() {
 			domNode.setAttribute("hidden","true");
         }});
 	}

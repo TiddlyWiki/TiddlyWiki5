@@ -27,10 +27,15 @@ Animator.prototype.perform = function(type,domNode,options) {
 			chosenAnimation = animation[type];
 		}
 	});
-	// Call the animation
-	if(chosenAnimation) {
-		chosenAnimation(domNode,options);
+	if(!chosenAnimation) {
+		chosenAnimation = function(domNode,options) {
+			if(options.callback) {
+				options.callback();
+			}
+		};
 	}
+	// Call the animation
+	chosenAnimation(domNode,options);
 };
 
 exports.Animator = Animator;
