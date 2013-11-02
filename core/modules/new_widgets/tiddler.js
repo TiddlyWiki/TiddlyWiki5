@@ -16,9 +16,6 @@ var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
 
 var TiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
-	this.addEventListeners([
-		{type: "tw-navigate", handler: "handleNavigateEvent"}
-	]);
 };
 
 /*
@@ -41,7 +38,7 @@ Compute the internal state of the widget
 */
 TiddlerWidget.prototype.execute = function() {
 	// Get our parameters
-	this.tiddlerTitle = this.getAttribute("tiddler","");
+	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	// Set context variables
 	this.setVariable("currentTiddler",this.tiddlerTitle);
 	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tw-tiddler-exists" : "tw-tiddler-missing");
@@ -62,14 +59,6 @@ TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		return this.refreshChildren(changedTiddlers);		
 	}
-};
-
-/*
-Handle a tw-navigate event
-*/
-TiddlerWidget.prototype.handleNavigateEvent = function(event) {
-	event.navigateFromTitle = this.tiddlerTitle;
-	return true;
 };
 
 exports.tiddler = TiddlerWidget;
