@@ -25,23 +25,23 @@ title: $:/core/ui/SideBar
 <$reveal state="$:/temp/search" type="match" text="">
 
 <div class="tw-tab-set">
-<div class="tw-tab-buttons"><$button type="set" set="$:/state/sideBarTabSet" setTo="openTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Open</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="recentTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Recent</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="toolsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tools</$button><$button type="set" set="$:/state/sideBarTabSet" setTo="moreTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">More</$button></div>
+<div class="tw-tab-buttons"><$button type="set" set=<<qualify "$:/state/sideBarTabSet">> setTo="openTab" selectedClass="tw-tab-selected">Open</$button><$button type="set" set=<<qualify "$:/state/sideBarTabSet">> setTo="recentTab" selectedClass="tw-tab-selected">Recent</$button><$button type="set" set=<<qualify "$:/state/sideBarTabSet">> setTo="toolsTab" selectedClass="tw-tab-selected">Tools</$button><$button type="set" set=<<qualify "$:/state/sideBarTabSet">> setTo="moreTab" selectedClass="tw-tab-selected">More</$button></div>
 <div class="tw-tab-divider tw-sidebar-tab-divider">
 </div>
 <div class="tw-tab-content">
-<$reveal type="match" state="$:/state/sideBarTabSet" text="openTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/sideBarTabSet">> text="openTab">
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview="pop" itemClass="tw-menu-list-item tw-open-tiddler-list">
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 </$list>
 <$button message="tw-close-all-tiddlers" class="btn-invisible btn-mini">close all</$button>
 </$reveal>
-<$reveal type="match" state="$:/state/sideBarTabSet" text="recentTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/sideBarTabSet">> text="recentTab">
 {{$:/snippets/recentchanges}}
 </$reveal>
-<$reveal type="match" state="$:/state/sideBarTabSet" text="toolsTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/sideBarTabSet">> text="toolsTab">
 {{$:/core/ui/ToolsPanel}}
 </$reveal>
-<$reveal type="match" state="$:/state/sideBarTabSet" text="moreTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/sideBarTabSet">> text="moreTab">
 {{$:/core/ui/MoreSideBar}}
 </$reveal>
 </div>

@@ -1,23 +1,23 @@
 title: $:/core/ui/TiddlerInfo
 
-<div class="tw-tab-set"><div class="tw-tab-buttons"><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="refTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">References</$button><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="taggingTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Tagging</$button><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="listTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">List</$button><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="listedTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Listed</$button><$button type="set" set="$:/state/tiddlerDropDownTabSet" setTo="fieldsTab" qualifyTiddlerTitles="yes" selectedClass="tw-tab-selected">Fields</$button></div>
+<div class="tw-tab-set"><div class="tw-tab-buttons"><$button type="set" set=<<qualify "$:/state/tiddlerDropDownTabSet">> setTo="refTab" selectedClass="tw-tab-selected">References</$button><$button type="set" set=<<qualify "$:/state/tiddlerDropDownTabSet">> setTo="taggingTab" selectedClass="tw-tab-selected">Tagging</$button><$button type="set" set=<<qualify "$:/state/tiddlerDropDownTabSet">> setTo="listTab" selectedClass="tw-tab-selected">List</$button><$button type="set" set=<<qualify "$:/state/tiddlerDropDownTabSet">> setTo="listedTab" selectedClass="tw-tab-selected">Listed</$button><$button type="set" set=<<qualify "$:/state/tiddlerDropDownTabSet">> setTo="fieldsTab" selectedClass="tw-tab-selected">Fields</$button></div>
 <div class="tw-tab-divider">
 </div>
 <div class="tw-tab-content">
-<$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="refTab" default="refTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/tiddlerDropDownTabSet">> text="refTab" default="refTab">
 <$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one" template="$:/core/ui/ListItemTemplate">
 </$list>
 </$reveal>
-<$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="taggingTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/tiddlerDropDownTabSet">> text="taggingTab">
 <$list filter="[is[current]tagging[]]" itemClass="tw-menu-list-item" emptyMessage="No tiddlers are tagged with this one" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>
-<$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="listTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/tiddlerDropDownTabSet">> text="listTab">
 <$list filter="[list{!!title}]" itemClass="tw-menu-list-item" emptyMessage="This tiddler does not have a list" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>
-<$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="listedTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/tiddlerDropDownTabSet">> text="listedTab">
 <$list filter="[is[current]listed[]!is[system]]" itemClass="tw-menu-list-item" emptyMessage="This tiddler is not listed by any others" template="$:/core/ui/ListItemTemplate"/>
 </$reveal>
-<$reveal type="match" state="$:/state/tiddlerDropDownTabSet" text="fieldsTab" qualifyTiddlerTitles="yes">
+<$reveal type="match" state=<<qualify "$:/state/tiddlerDropDownTabSet">> text="fieldsTab">
 <$transclude tiddler="$:/core/ui/TiddlerFields"/>
 </$reveal>
 </div>

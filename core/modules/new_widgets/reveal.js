@@ -87,15 +87,11 @@ RevealWidget.prototype.execute = function() {
 	this.position = this.getAttribute("position");
 	this["class"] = this.getAttribute("class","");
 	this["default"] = this.getAttribute("default","");
-	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
 	this.animate = this.getAttribute("animate","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
-	if(this.qualifyTiddlerTitles) {
-		this.stateTitle =  this.stateTitle + "-" + this.getStateQualifier();
-	}
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -154,7 +150,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 RevealWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.qualifyTiddlerTitles || changedAttributes.animate) {
+	if(changedAttributes.state || changedAttributes.type || changedAttributes.text || changedAttributes.position || changedAttributes["default"] || changedAttributes.animate) {
 		this.refreshSelf();
 		return true;
 	} else {

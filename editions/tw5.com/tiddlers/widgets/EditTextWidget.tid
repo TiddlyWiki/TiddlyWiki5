@@ -23,6 +23,5 @@ The content of the `<$edit-text>` widget is ignored.
 |class |A CSS class to be assigned to the generated HTML editing element |
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
-|qualifyTiddlerTitles |If this attribute is present then the state tiddler title specified in the `focusPopup` attributes are qualified as described in HandlingUserInterfaceState |
 |tag |Overrides the generated HTML editing element tag |
 |type |Overrides the generated HTML editing element `type` attribute |

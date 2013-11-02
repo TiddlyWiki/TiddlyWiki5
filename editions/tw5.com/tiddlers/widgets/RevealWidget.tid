@@ -23,4 +23,3 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'',''above'',''aboveright'',''right'',''belowleft'' or ''below'' |
 |default |Default value to use when the state tiddler |
-|qualifyTiddlerTitles |If this attribute is present then the state tiddler title is qualified as described in HandlingUserInterfaceState |

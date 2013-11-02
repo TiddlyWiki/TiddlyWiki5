@@ -1,6 +1,6 @@
 title: $:/core/ui/UntaggedTemplate
 
-<$button popup="$:/state/tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible tw-untagged-label tw-tag-label">untagged</$button>
-<$reveal state="$:/state/tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes"><div class="tw-drop-down">
+<$button popup=<<qualify "$:/state/tagpopup">> class="btn-invisible tw-untagged-label tw-tag-label">untagged</$button>
+<$reveal state=<<qualify "$:/state/tagpopup">> type="popup" position="below"><div class="tw-drop-down">
 <$list filter="[untagged[]!is[system]] -[tags[]] +[sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 </div></$reveal>

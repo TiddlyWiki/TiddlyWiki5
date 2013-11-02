@@ -115,14 +115,6 @@ EditTextWidget.prototype.execute = function() {
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editFocusPopup = this.getAttribute("focusPopup");
-	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");;
-	// Qualify tiddler titles if required
-	if(this.qualifyTiddlerTitles) {
-		var qualifier = this.getStateQualifier();
-		if(this.editFocusPopup) {
-			this.editFocusPopup = this.editFocusPopup + "-" + qualifier;
-		}
-	}
 	// Get the editor element tag and type
 	var tag,type;
 	if(this.editField === "text") {

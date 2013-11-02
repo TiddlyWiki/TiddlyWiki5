@@ -3,8 +3,8 @@ title: $:/core/ui/TagTemplate
 \define tag-styles()
 background-color:$(backgroundColor)$;
 \end
-<span class="tw-tag-list-item"><$setvariable name="backgroundColor" value={{!!color}}><$button popup="$:/state/tagpopup" qualifyTiddlerTitles="yes" class="btn-invisible tw-tag-label" style=<<tag-styles>>><$transclude tiddler={{!!icon}}/> <$view field="title" format="text" /></$button></$setvariable>
-<$reveal state="$:/state/tagpopup" type="popup" position="below" qualifyTiddlerTitles="yes" animate="yes"><div class="tw-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<span class="tw-tag-list-item"><$setvariable name="backgroundColor" value={{!!color}}><$button popup=<<qualify "$:/state/tagpopup">> class="btn-invisible tw-tag-label" style=<<tag-styles>>><$transclude tiddler={{!!icon}}/> <$view field="title" format="text" /></$button></$setvariable>
+<$reveal state=<<qualify "$:/state/tagpopup">> type="popup" position="below" animate="yes"><div class="tw-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
 <$list filter="[is[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
 </div></$reveal></span>

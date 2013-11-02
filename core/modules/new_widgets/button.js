@@ -114,20 +114,9 @@ ButtonWidget.prototype.execute = function() {
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
-	this.qualifyTiddlerTitles = this.getAttribute("qualifyTiddlerTitles");
 	this["class"] = this.getAttribute("class","");
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
-	// Qualify tiddler titles if required
-	if(this.qualifyTiddlerTitles) {
-		var qualifier = this.getStateQualifier();
-		if(this.set) {
-			this.set = this.set + "-" + qualifier;
-		}
-		if(this.popup) {
-			this.popup = this.popup + "-" + qualifier;
-		}
-	}
 	// Make child widgets
 	this.makeChildWidgets();
 };
@@ -137,7 +126,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes.qualifyTiddlerTitles || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
+	if(changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		this.refreshSelf();
 		return true;
 	}
