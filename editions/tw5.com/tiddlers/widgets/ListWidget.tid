@@ -24,15 +24,12 @@ The content of the `<$list>` widget is an optional template to use for rendering
 |filter |The TiddlerFilter to display |
 |template |The title of a template tiddler for rendering each tiddler in the list |
 |editTemplate |An alternative template to use for DraftTiddlers in edit mode |
+|variable |The [[widget variable|WidgetVariables]] name to be assigned the title of each tiddler in the list. Defaults to ''currentTiddler'' |
 |emptyMessage |Message to be displayed when the list is empty |
 |listview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |
-|hackTemplate |If this attribute is present then the list items are directly transcluded without altering the current tiddler or using a template |
-|hackCurrentTiddler |If this attribute is present then the template is directly transcluded without altering the current tiddler |
 
 //`listview` and `history` are temporarily unimplemented //
-
-//`hackTemplate` and `hackCurrentTiddler` are temporary hacks that will be removed//
 
 !! Handling edit mode
 

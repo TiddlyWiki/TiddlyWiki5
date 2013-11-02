@@ -449,7 +449,7 @@ describe("Widget module", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
-			{title: "$:/myTemplate", text: "<$tiddler tiddler=<<listItem>>><$view field='title'/></$tiddler>"},
+			{title: "$:/myTemplate", text: "(<$view field='title'/>)"},
 			{title: "TiddlerOne", text: "Jolly Old World"},
 			{title: "TiddlerTwo", text: "Worldly Old Jelly"},
 			{title: "TiddlerThree", text: "Golly Gosh"},
@@ -462,7 +462,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 //console.log(require("util").inspect(widgetNode,{depth:8,colors:true}));
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p>TiddlerFourTiddlerOneTiddlerThreeTiddlerTwo</p>");
+		expect(wrapper.innerHTML).toBe("<p>(TiddlerFour)(TiddlerOne)(TiddlerThree)(TiddlerTwo)</p>");
 	});
 
 	it("should deal with the list widget and empty lists", function() {

@@ -1,5 +1,5 @@
 title: $:/core/ui/TiddlerFields
 
-<table class="tw-view-field-table"><tbody><$list filter="[is[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" hackCurrentTiddler=true/>
+<table class="tw-view-field-table"><tbody><$list filter="[is[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
 </tbody>
 </table>

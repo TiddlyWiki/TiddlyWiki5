@@ -44,6 +44,7 @@ ListWidget.prototype.execute = function() {
 	// Get our attributes
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
+	this.variableName = this.getAttribute("variable","currentTiddler");
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -88,27 +89,20 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 		template = this.editTemplate;
 	}
 	// Compose the transclusion of the template
-	if(this.hasAttribute("hackTemplate")) {
-		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: title}}}];
+	if(template) {
+		templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
 	} else {
-		if(template) {
-			templateTree = [{type: "transclude", attributes: {tiddler: {type: "string", value: template}}}];
+		if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
+			templateTree = this.parseTreeNode.children;
 		} else {
-			if(this.parseTreeNode.children && this.parseTreeNode.children.length > 0) {
-				templateTree = this.parseTreeNode.children;
-			} else {
-				// Default template is a link to the title
-				templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
-						{type: "text", text: title}
-				]}]}];
-			}
-		}
-		if(!this.hasAttribute("hackCurrentTiddler")) {
-			templateTree = [{type: "tiddler", attributes: {tiddler: {type: "string", value: title}}, children: templateTree}]
+			// Default template is a link to the title
+			templateTree = [{type: "element", tag: this.parseTreeNode.isBlock ? "div" : "span", children: [{type: "link", attributes: {to: {type: "string", value: title}}, children: [
+					{type: "text", text: title}
+			]}]}];
 		}
 	}
 	// Return the list item
-	return {type: "listitem", itemTitle: title, children: templateTree};
+	return {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
 };
 
 /*
@@ -242,7 +236,7 @@ Compute the internal state of the widget
 */
 ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
-	this.setVariable("listItem",this.parseTreeNode.itemTitle);
+	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
