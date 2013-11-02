@@ -1,6 +1,6 @@
 title: HelloThere
 
-This is a demo of TiddlyWiki5 incorporating a plugin for the [[markdown-js|https://github.com/evilstreak/markdown-js]] Markdown parser.
+This is a demo of TiddlyWiki5 incorporating a plugin for the [[markdown-js|https://github.com/evilstreak/markdown-js]] Markdown parser from Dominic Baggott.
 
 The MarkdownExample tiddler below is written in Markdown.
 
