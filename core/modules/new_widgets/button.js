@@ -47,7 +47,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	}
 	domNode.className = classes.join(" ");
 	// Assign classes
-	domNode.setAttribute("style",this.style);
+	if(this.style) {
+		domNode.setAttribute("style",this.style);
+	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
