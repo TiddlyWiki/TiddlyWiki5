@@ -78,7 +78,9 @@ exports.startup = function() {
 		});
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
-		$tw.rootWidget.addEventListener("tw-scroll",$tw.pageScroller);
+		$tw.rootWidget.addEventListener("tw-scroll",function(event) {
+			$tw.pageScroller.handleEvent(event);
+		});
 		// Install the save action handler
 		$tw.wiki.initSavers();
 		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {

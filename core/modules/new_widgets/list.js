@@ -19,6 +19,12 @@ The list widget creates list element sub-widgets that reach back into the list w
 */
 
 var ListWidget = function(parseTreeNode,options) {
+	// Initialise the storyviews if they've not been done already
+	if(!this.storyViews) {
+		ListWidget.prototype.storyViews = {};
+		$tw.modules.applyMethods("storyview",this.storyViews);
+	}
+	// Main initialisation inherited from widget.js
 	this.initialise(parseTreeNode,options);
 };
 
@@ -45,6 +51,8 @@ ListWidget.prototype.execute = function() {
 	this.template = this.getAttribute("template");
 	this.editTemplate = this.getAttribute("editTemplate");
 	this.variableName = this.getAttribute("variable","currentTiddler");
+	this.storyViewName = this.getAttribute("storyview");
+	this.historyTitle = this.getAttribute("history");
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
@@ -59,6 +67,11 @@ ListWidget.prototype.execute = function() {
 	}
 	// Construct the child widgets
 	this.makeChildWidgets(members);
+	// Clear the last history
+	this.history = [];
+	// Construct the storyview
+	var StoryView = this.storyViews[this.storyViewName];
+	this.storyview = StoryView ? new StoryView(this) : null;
 };
 
 ListWidget.prototype.getTiddlerList = function() {
@@ -111,13 +124,40 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 ListWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely refresh if any of our attributes have changed
-	if(changedAttributes.filter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage) {
+	if(changedAttributes.filter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
 		return true;
 	} else {
 		// Handle any changes to the list
-		return this.handleListChanges(changedTiddlers);	
+		var hasChanged = this.handleListChanges(changedTiddlers);
+		// Handle any changes to the history stack
+		if(this.historyTitle && changedTiddlers[this.historyTitle]) {
+			this.handleHistoryChanges();
+		}
+		return hasChanged;
 	}
+};
+
+/*
+Handle any changes to the history list
+*/
+ListWidget.prototype.handleHistoryChanges = function() {
+	// Get the history data
+	var newHistory = this.wiki.getTiddlerData(this.historyTitle,[]);
+	// Ignore any entries of the history that match the previous history
+	var entry = 0;
+	while(entry < newHistory.length && entry < this.history.length && newHistory[entry].title === this.history[entry].title) {
+		entry++;
+	}
+	// Navigate forwards to each of the new tiddlers
+	while(entry < newHistory.length) {
+		if(this.storyview && this.storyview.navigateTo) {
+			this.storyview.navigateTo(newHistory[entry]);
+		}
+		entry++;
+	}
+	// Update the history
+	this.history = newHistory;
 };
 
 /*
@@ -192,20 +232,30 @@ ListWidget.prototype.findListItem = function(startIndex,title) {
 Insert a new list item at the specified index
 */
 ListWidget.prototype.insertListItem = function(index,title) {
-	var newItem = this.makeChildWidget(this.makeItemTemplate(title));
-	newItem.parentDomNode = this.parentDomNode; // Hack to enable findNextSiblingDomNode() to work
-	this.children.splice(index,0,newItem);
-	var nextSibling = newItem.findNextSiblingDomNode();
-	newItem.render(this.parentDomNode,nextSibling);
+	// Create, insert and render the new child widgets
+	var widget = this.makeChildWidget(this.makeItemTemplate(title));
+	widget.parentDomNode = this.parentDomNode; // Hack to enable findNextSiblingDomNode() to work
+	this.children.splice(index,0,widget);
+	var nextSibling = widget.findNextSiblingDomNode();
+	widget.render(this.parentDomNode,nextSibling);
+	// Animate the insertion if required
+	if(this.storyview && this.storyview.insert) {
+		this.storyview.insert(widget);
+	}
 	return true;
 };
 
 /*
-Remvoe the specified list item
+Remove the specified list item
 */
 ListWidget.prototype.removeListItem = function(index) {
-	// Remove the DOM nodes owned by this item
-	this.children[index].removeChildDomNodes();
+	var widget = this.children[index];
+	// Animate the removal if required
+	if(this.storyview && this.storyview.remove) {
+		this.storyview.remove(widget);
+	} else {
+		widget.removeChildDomNodes();
+	}
 	// Remove the child widget
 	this.children.splice(index,1);
 };
