@@ -88,7 +88,7 @@ Widget.prototype.getVariable = function(name,options) {
 		return this.evaluateMacroModule(name,actualParams,options.defaultValue);
 	}
 	// Get the value
-	var value = node.variables[name].value;
+	var value = node.variables[name].value || "";
 	// Substitute any parameters specified in the definition
 	value = this.substituteVariableParameters(value,node.variables[name].params,actualParams);
 	value = this.substituteVariableReferences(value);
