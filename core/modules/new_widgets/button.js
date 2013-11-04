@@ -79,7 +79,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 
 ButtonWidget.prototype.isSelected = function() {
 	var tiddler = this.wiki.getTiddler(this.set);
-	return tiddler ? tiddler.fields.text === this.setTo : false;
+	return tiddler ? tiddler.fields.text === this.setTo : this.defaultSetValue === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
@@ -119,6 +119,7 @@ ButtonWidget.prototype.execute = function() {
 	this["class"] = this.getAttribute("class","");
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
+	this.defaultSetValue = this.getAttribute("default");
 	// Make child widgets
 	this.makeChildWidgets();
 };
