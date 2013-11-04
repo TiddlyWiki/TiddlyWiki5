@@ -421,6 +421,11 @@ a.tw-tiddlylink-external {
 	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
 }
 
+.tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #f8f8f8;
+}
+
 .tw-view-field-table {
 	width: 100%;
 }
@@ -833,33 +838,45 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: #666;
-	background-color: #ccc;
-	border-left: 1px solid #bbb;
-	border-top: 1px solid #bbb;
-	border-right: 1px solid #bbb;
-	border-bottom: 1px solid #bbb;
 	margin-left: 4px;
 	margin-right: 4px;
 	font-weight: 300;
+	border: none;
+	background: inherit;
 }
 
 .tw-tab-buttons button.tw-tab-selected {
-	background-color: #ececec;
-	border-bottom: 1px solid #ececec;
+	background-color: #fff;
+	border-left: 1px solid #d8d8d8;
+	border-top: 1px solid #d8d8d8;
+	border-right: 1px solid #d8d8d8;
+	margin-bottom: -1px;
+}
+
+.tw-tab-buttons button:not(.tw-tab-selected) {
+	background-color: #d8d8d8;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
 }
 
 .tw-tab-divider {
-	border-top: 1px solid #bbb;
+	border-top: 1px solid #d8d8d8;
 }
 
 .tw-tab-content {
 	padding-top: 14px;
 }
 
+.tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
+	background-color: #ececec;
+	border-bottom: 1px solid #ececec;
+}
+
 .tw-sidebar-tab-divider.tw-tab-divider {
 	border-top: none;
 	height: 1px;
-	<<background-linear-gradient "left, rgb(176,176,176) 0%, rgb(236,236,236) 250px">>
+	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
 }
 
 .tw-more-sidebar.tw-tab-set {
