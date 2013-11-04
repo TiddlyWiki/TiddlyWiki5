@@ -1,0 +1,17 @@
+title: $:/core/ui/PageMacros
+
+\define tabs(tabsList,default,state:"$:/currentTab")
+<div class="tw-tab-buttons"><$list filter="$tabsList$" variable="currentTab"><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tw-tab-selected"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/> </$button>
+</$list>
+</div>
+<div class="tw-tab-divider">
+</div>
+<div class="tw-tab-content">
+<$list filter="$tabsList$" variable="currentTab">
+<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
+<$transclude tiddler=<<currentTab>>/>
+</$reveal>
+</$list>
+</div>
+\end
+{{$:/core/ui/PageTemplate}}

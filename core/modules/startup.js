@@ -102,8 +102,8 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
-		// Display the PageTemplate
-		var templateTitle = "$:/core/ui/PageTemplate",
+		// Display the PageMacros, which includes the PageTemplate
+		var templateTitle = "$:/core/ui/PageMacros",
 			parser = $tw.wiki.new_parseTiddler(templateTitle);
 		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
