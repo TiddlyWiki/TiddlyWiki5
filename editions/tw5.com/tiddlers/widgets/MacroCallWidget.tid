@@ -31,4 +31,6 @@ The content of the `<$macrocall>` widget is ignored.
 
 |!Attribute |!Description |
 |$name |Name of the macro to invoke |
+|$type |ContentType with which the macro text should be parsed (defaults to `text/vnd.tiddlywiki`) |
+|$output |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain`) |
 |//parameters// |Macro parameters specified as attributes |

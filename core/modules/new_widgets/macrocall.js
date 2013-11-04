@@ -37,19 +37,30 @@ MacroCallWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 MacroCallWidget.prototype.execute = function() {
+	// Get the parse type if specified
+	this.parseType = this.getAttribute("$type","text/vnd.tiddlywiki");
+	this.renderOutput = this.getAttribute("$output","text/html");
 	// Merge together the parameters specified in the parse tree with the specified attributes
 	var params = this.parseTreeNode.params ? this.parseTreeNode.params.slice(0) : [];
 	$tw.utils.each(this.attributes,function(attribute,name) {
-		if(name !== "$name") {
+		if(name.charAt(0) !== "$") {
 			params.push({name: name, value: attribute});			
 		}
 	});
 	// Get the macro value
-	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),{params: params});
-	// Parse the macro
-	var parser = this.wiki.new_parseText("text/vnd.tiddlywiki",text,
-						{parseAsInline: !this.parseTreeNode.isBlock}),
+	var text = this.getVariable(this.parseTreeNode.name || this.getAttribute("$name"),{params: params}),
+		parseTreeNodes;
+	// Are we rendering to HTML?
+	if(this.renderOutput === "text/html") {
+		// If so we'll return the parsed macro
+		var parser = this.wiki.new_parseText(this.parseType,text,
+							{parseAsInline: !this.parseTreeNode.isBlock});
 		parseTreeNodes = parser ? parser.tree : [];
+	} else {
+		// Otherwise, we'll render the text
+		var plainText = this.wiki.new_renderText("text/plain",this.parseType,text,{parentWidget: this});
+		parseTreeNodes = [{type: "text", text: plainText}];
+	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };
