@@ -16,7 +16,7 @@ var PopStoryView = function(listWidget) {
 	this.listWidget = listWidget;
 }
 
-ClassicStoryView.prototype.navigateTo = function(historyInfo) {
+PopStoryView.prototype.navigateTo = function(historyInfo) {
 	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
 	if(listElementIndex === undefined) {
 		return;
