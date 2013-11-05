@@ -175,8 +175,10 @@ ListWidget.prototype.handleListChanges = function(changedTiddlers) {
 			return this.refreshChildren(changedTiddlers);
 		} else {
 			// Replace the previous content with the empty message
+			for(t=this.children.length-1; t>=0; t--) {
+				this.removeListItem(t);
+			}
 			var nextSibling = this.findNextSiblingDomNode();
-			this.removeChildDomNodes();
 			this.makeChildWidgets(this.getEmptyMessage());
 			this.renderChildren(this.parentDomNode,nextSibling);
 			return true;
