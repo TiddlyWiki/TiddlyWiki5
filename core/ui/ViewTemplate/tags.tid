@@ -1,4 +1,4 @@
 title: $:/core/ui/ViewTemplate/tags
 tags: $:/tags/ViewTemplate
 
-<div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/core/ui/TagTemplate" listview="pop" itemClass="tw-tag-list-item"/></div>
+<div class="tw-tags-wrapper"><$list filter="[is[current]tags[]]" template="$:/core/ui/TagTemplate" storyview="pop" itemClass="tw-tag-list-item"/></div>

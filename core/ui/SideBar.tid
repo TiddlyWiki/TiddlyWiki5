@@ -30,7 +30,7 @@ title: $:/core/ui/SideBar
 </div>
 <div class="tw-tab-content">
 <$reveal type="match" state=<<qualify "$:/state/sideBarTabSet">> text="openTab">
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" listview="pop" itemClass="tw-menu-list-item tw-open-tiddler-list">
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop" itemClass="tw-menu-list-item tw-open-tiddler-list">
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 </$list>
 <$button message="tw-close-all-tiddlers" class="btn-invisible btn-mini">close all</$button>
