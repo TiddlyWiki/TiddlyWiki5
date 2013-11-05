@@ -26,21 +26,20 @@ The content of the `<$list>` widget is an optional template to use for rendering
 |editTemplate |An alternative template to use for DraftTiddlers in edit mode |
 |variable |The [[widget variable|WidgetVariables]] name to be assigned the title of each tiddler in the list. Defaults to ''currentTiddler'' |
 |emptyMessage |Message to be displayed when the list is empty |
-|listview |Optional name of module responsible for animating/processing the list |
+|storyview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |
-
-//`listview` and `history` are temporarily unimplemented //
 
 !! Handling edit mode
 
 The `<$list>` widget can optionally render draft tiddlers through a different template tiddler than ordinary tiddlers -- see DraftMechanism for a discussion of how this capability is used.
 
-!! `listview` attribute
+!! `storyview` attribute
 
-The `listview` attribute gives the specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following listview modules:
+The `storyview` attribute gives the specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following storyview modules:
 
 * `classic`: renders the list as an ordered sequence of tiddlers
 * `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers
+* `pop`: shrinks items in and out of place
 
 !! Handling history and navigation
 
