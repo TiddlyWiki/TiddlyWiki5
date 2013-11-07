@@ -465,14 +465,14 @@ a.tw-tiddlylink-external {
 	}
 }
 
-.title {
+.titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
 	line-height: 1.2em;
 	color: #182955;
 }
 
-.title img {
+.titlebar img {
 	height: 1em;
 }
 
