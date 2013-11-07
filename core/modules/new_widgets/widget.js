@@ -294,6 +294,32 @@ Widget.prototype.makeChildWidget = function(parseTreeNode) {
 };
 
 /*
+Get the next sibling of this widget
+*/
+Widget.prototype.nextSibling = function() {
+	if(this.parentWidget) {
+		var index = this.parentWidget.children.indexOf(this);
+		if(index !== -1 && index < this.parentWidget.children.length-1) {
+			return this.parentWidget.children[index+1];
+		}
+	}
+	return null;
+};
+
+/*
+Get the previous sibling of this widget
+*/
+Widget.prototype.previousSibling = function() {
+	if(this.parentWidget) {
+		var index = this.parentWidget.children.indexOf(this);
+		if(index !== -1 && index > 0) {
+			return this.parentWidget.children[index-1];
+		}
+	}
+	return null;
+};
+
+/*
 Render the children of this widget into the DOM
 */
 Widget.prototype.renderChildren = function(parent,nextSibling) {

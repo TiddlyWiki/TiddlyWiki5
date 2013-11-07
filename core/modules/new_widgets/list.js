@@ -41,6 +41,9 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	this.renderChildren(parent,nextSibling);
+	// Construct the storyview
+	var StoryView = this.storyViews[this.storyViewName];
+	this.storyview = StoryView ? new StoryView(this) : null;
 };
 
 /*
@@ -69,9 +72,6 @@ ListWidget.prototype.execute = function() {
 	this.makeChildWidgets(members);
 	// Clear the last history
 	this.history = [];
-	// Construct the storyview
-	var StoryView = this.storyViews[this.storyViewName];
-	this.storyview = StoryView ? new StoryView(this) : null;
 };
 
 ListWidget.prototype.getTiddlerList = function() {

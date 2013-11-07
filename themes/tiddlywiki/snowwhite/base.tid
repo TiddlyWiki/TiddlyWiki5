@@ -366,6 +366,7 @@ a.tw-tiddlylink-external {
 	}
 
 	.story-river {
+		position: relative;
 		padding: 0;
 	}
 }
@@ -385,7 +386,7 @@ a.tw-tiddlylink-external {
 	}
 
 	.story-river {
-		position: absolute;
+		position: relative;
 		left: {{$:/themes/tiddlywiki/snowwhite/metrics##storyleft}};
 		top: {{$:/themes/tiddlywiki/snowwhite/metrics##storytop}};
 		width: {{$:/themes/tiddlywiki/snowwhite/metrics##storywidth}};
@@ -408,6 +409,7 @@ a.tw-tiddlylink-external {
 */
 
 .tw-tiddler-frame {
+	width: {{$:/themes/tiddlywiki/snowwhite/metrics##tiddlerwidth}};
 	margin-bottom: 28px;
 	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##tiddlerbackground}};
 }
