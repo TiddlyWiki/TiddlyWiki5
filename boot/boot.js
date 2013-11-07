@@ -700,6 +700,7 @@ $tw.modules.define("$:/boot/tiddlerfields/created","tiddlerfield",{
 });
 $tw.modules.define("$:/boot/tiddlerfields/color","tiddlerfield",{
 	name: "color",
+	editTag: "input",
 	editType: "color"
 });
 $tw.modules.define("$:/boot/tiddlerfields/tags","tiddlerfield",{

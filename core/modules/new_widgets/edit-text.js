@@ -122,6 +122,9 @@ EditTextWidget.prototype.execute = function() {
 	} else {
 		tag = "input";
 		var fieldModule = $tw.Tiddler.fieldModules[this.editField];
+		if(fieldModule && fieldModule.editTag) {
+			tag = fieldModule.editTag;
+		}
 		if(fieldModule && fieldModule.editType) {
 			type = fieldModule.editType;
 		}
