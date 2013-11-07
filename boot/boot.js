@@ -238,7 +238,8 @@ $tw.utils.stringifyDate = function(value) {
 			$tw.utils.pad(value.getUTCMonth() + 1) +
 			$tw.utils.pad(value.getUTCDate()) + 
 			$tw.utils.pad(value.getUTCHours()) + 
-			$tw.utils.pad(value.getUTCMinutes());
+			$tw.utils.pad(value.getUTCMinutes()) +
+			$tw.utils.pad(value.getUTCMilliseconds(),3);
 };
 
 // Parse a date from a UTC YYYYMMDDHHMMSSMMM format string
