@@ -27,10 +27,6 @@ var ZoominListView = function(listWidget) {
 	});
 }
 
-function findTitleWidget() {
-	return null;
-}
-
 ZoominListView.prototype.navigateTo = function(historyInfo) {
 	var duration = $tw.utils.getAnimationDuration(),
 		listElementIndex = this.listWidget.findListItem(0,historyInfo.title);
@@ -56,8 +52,8 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 			height: window.innerHeight/8
 		};
 	// Try to find the title node in the target tiddler
-	var titleWidget = findTitleWidget(listItemWidget) || listItemWidget,
-		zoomBounds = titleWidget.findFirstDomNode().getBoundingClientRect();
+	var titleDomNode = findTitleDomNode(listItemWidget) || listItemWidget.findFirstDomNode(),
+		zoomBounds = titleDomNode.getBoundingClientRect();
 	// Compute the transform for the target tiddler to make the title lie over the source rectange
 	var targetBounds = targetElement.getBoundingClientRect(),
 		scale = sourceBounds.width / zoomBounds.width,
@@ -102,6 +98,18 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	// Scroll the target into view
 //	$tw.pageScroller.scrollIntoView(targetElement);
 };
+
+/*
+Find the first child DOM node of a widget that has the class "title"
+*/
+function findTitleDomNode(widget,targetClass) {
+	targetClass = targetClass || "title";
+	var domNode = widget.findFirstDomNode();
+	if(domNode && domNode.querySelector) {
+		return domNode.querySelector("." + targetClass);
+	}
+	return null;
+}
 
 ZoominListView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode();
