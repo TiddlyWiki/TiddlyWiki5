@@ -11,7 +11,8 @@ title: Features
 * Integrated [[AES encryption|How to use TiddlyWiki5 as a standalone HTML file with encryption]]
 * TiddlyWiki isn't just a wiki - you can build custom applications with it like this TaskManagementExample
 * Familiar user interface elements like <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">wizards</$button> and <$button message="tw-notify" param="SampleNotification" class="btn btn-inverse">notifications</$button>
-* Easily [[import|ImportTiddlers]] content via drag and drop, copy and paste, or browsing for local files 
+* Easily [[import|ImportTiddlers]] content via drag and drop, copy and paste, or browsing for local files
+* Clone existing tiddlers (for example, <$button message="tw-new-tiddler" param=<<currentTiddler>>>clone this tiddler</$button>)
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
 * Try out the <$button message="tw-full-screen">full screen support</$button>
 * Explore the [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
