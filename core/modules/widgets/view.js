@@ -121,7 +121,7 @@ ViewWidget.prototype.getValueAsText = function() {
 };
 
 ViewWidget.prototype.getValueAsHtmlWikified = function() {
-	return this.wiki.new_renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),this);
+	return this.wiki.renderText("text/html","text/vnd.tiddlywiki",this.getValueAsText(),this);
 };
 
 ViewWidget.prototype.getValueAsHtmlEncoded = function() {

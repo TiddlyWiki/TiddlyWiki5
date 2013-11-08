@@ -106,7 +106,7 @@ exports.startup = function() {
 		});
 		// Display the PageMacros, which includes the PageTemplate
 		var templateTitle = "$:/core/ui/PageMacros",
-			parser = $tw.wiki.new_parseTiddler(templateTitle);
+			parser = $tw.wiki.parseTiddler(templateTitle);
 		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tw-page-container");

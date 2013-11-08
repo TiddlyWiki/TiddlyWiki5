@@ -59,7 +59,7 @@ exports.parse = function() {
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Parse the block according to the specified type
-	var parser = this.parser.wiki.new_parseText(parseType,text,{defaultType: "text/plain"});
+	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
 	// If there's no render type, just return the parse tree
 	if(!renderType) {
 		return parser.tree;

@@ -50,7 +50,7 @@ TranscludeWidget.prototype.execute = function() {
 	// Set context variables for recursion detection
 	this.setVariable("transclusion",recursionMarker);
 	// Parse the text reference
-	var parser = this.wiki.new_parseTextReference(
+	var parser = this.wiki.parseTextReference(
 						this.transcludeTitle,
 						this.transcludeField,
 						this.transcludeIndex,

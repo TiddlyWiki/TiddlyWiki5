@@ -147,7 +147,7 @@ var Command = function(params,commander,callback) {
 		path: /^\/$/,
 		handler: function(request,response,state) {
 			response.writeHead(200, {"Content-Type": state.server.get("serveType")});
-			var text = state.wiki.new_renderTiddler(state.server.get("renderType"),state.server.get("rootTiddler"));
+			var text = state.wiki.renderTiddler(state.server.get("renderType"),state.server.get("rootTiddler"));
 			response.end(text,"utf8");
 		}
 	});

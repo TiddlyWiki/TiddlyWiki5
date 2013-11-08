@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/commands/new_rendertiddlers.js
+title: $:/core/modules/commands/rendertiddlers.js
 type: application/javascript
 module-type: command
 
@@ -15,7 +15,7 @@ Command to render several tiddlers to a folder of files
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.info = {
-	name: "new_rendertiddlers",
+	name: "rendertiddlers",
 	synchronous: true
 };
 
@@ -40,7 +40,7 @@ Command.prototype.execute = function() {
 		extension = this.params[4] || ".html",
 		tiddlers = wiki.filterTiddlers(filter);
 	$tw.utils.each(tiddlers,function(title) {
-		var parser = wiki.new_parseTiddler(template),
+		var parser = wiki.parseTiddler(template),
 			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
 		var container = $tw.document.createElement("div");
 		widgetNode.render(container,null);

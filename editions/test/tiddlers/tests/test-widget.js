@@ -25,7 +25,7 @@ describe("Widget module", function() {
 	}
 
 	function parseText(text,wiki,options) {
-		var parser = wiki.new_parseText("text/vnd.tiddlywiki",text,options);
+		var parser = wiki.parseText("text/vnd.tiddlywiki",text,options);
 		return parser ? {type: "widget", children: parser.tree} : undefined;
 	}
 

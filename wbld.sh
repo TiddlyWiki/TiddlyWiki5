@@ -15,7 +15,7 @@ mkdir -p tmp
 node ./tiddlywiki.js \
 	editions/tw5tiddlyweb \
 	--verbose \
-	--new_rendertiddler $:/core/templates/tiddlywiki5.template.html tmp/tiddlyweb.html text/plain \
+	--rendertiddler $:/core/templates/tiddlywiki5.template.html tmp/tiddlyweb.html text/plain \
 	|| exit 1
 
 # Prepend the type information that TiddlyWeb needs to turn the .html file into a .tid file

@@ -329,7 +329,7 @@ exports.getTiddlerLinks = function(title) {
 	// We'll cache the links so they only get computed if the tiddler changes
 	return this.getCacheForTiddler(title,"links",function() {
 		// Parse the tiddler
-		var parser = self.new_parseTiddler(title);
+		var parser = self.parseTiddler(title);
 		// Count up the links
 		var links = [],
 			checkParseTree = function(parseTree) {
@@ -672,7 +672,7 @@ var tweakParser = function(parser) {
 	tweakParseTreeNodes(parser.tree);
 };
 
-exports.new_parseText = function(type,text,options) {
+exports.parseText = function(type,text,options) {
 	var parser = this.old_parseText(type,text,options);
 	if(parser) {
 		tweakParser(parser)
@@ -680,7 +680,7 @@ exports.new_parseText = function(type,text,options) {
 	return parser;
 };
 
-exports.new_parseTiddler = function(title,options) {
+exports.parseTiddler = function(title,options) {
 	var parser = this.old_parseTiddler(title,options);
 	if(parser) {
 		tweakParser(parser)
@@ -688,9 +688,9 @@ exports.new_parseTiddler = function(title,options) {
 	return parser;
 };
 
-exports.new_parseTextReference = function(title,field,index,options) {
+exports.parseTextReference = function(title,field,index,options) {
 	if(field === "text" || (!field && !index)) {
-		return this.new_parseTiddler(title,options);
+		return this.parseTiddler(title,options);
 	} else {
 		var tiddler,text;
 		if(field) {
@@ -699,10 +699,10 @@ exports.new_parseTextReference = function(title,field,index,options) {
 			if(text === undefined) {
 				text = "";
 			}
-			return this.new_parseText("text/vnd.tiddlywiki",text,options);
+			return this.parseText("text/vnd.tiddlywiki",text,options);
 		} else if(index) {
 			text = this.extractTiddlerDataItem(title,index,"");
-			return this.new_parseText("text/vnd.tiddlywiki",text,options);
+			return this.parseText("text/vnd.tiddlywiki",text,options);
 		}
 	}
 };
@@ -756,9 +756,9 @@ Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
 */
-exports.new_renderText = function(outputType,textType,text,options) {
+exports.renderText = function(outputType,textType,text,options) {
 	options = options || {};
-	var parser = $tw.wiki.new_parseText(textType,text),
+	var parser = $tw.wiki.parseText(textType,text),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
 	widgetNode.render(container,null);
@@ -774,9 +774,9 @@ Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
 */
-exports.new_renderTiddler = function(outputType,title,options) {
+exports.renderTiddler = function(outputType,title,options) {
 	options = options || {};
-	var parser = this.new_parseTiddler(title),
+	var parser = this.parseTiddler(title),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
 	widgetNode.render(container,null);
@@ -832,7 +832,7 @@ exports.saveWiki = function(options) {
 	options = options || {};
 	var template = options.template || "$:/core/templates/tiddlywiki5.template.html",
 		downloadType = options.downloadType || "text/plain";
-	var text = this.new_renderTiddler(downloadType,template);
+	var text = this.renderTiddler(downloadType,template);
 	this.callSaver("save",text,function(err) {
 		$tw.notifier.display("$:/messages/Saved");
 	});

@@ -19,7 +19,7 @@ describe("WikiText parser tests", function() {
 
 	// Define a parsing shortcut
 	var parse = function(text) {
-		return wiki.new_parseText("text/vnd.tiddlywiki",text).tree;
+		return wiki.parseText("text/vnd.tiddlywiki",text).tree;
 	};
 
 	it("should parse tags", function() {

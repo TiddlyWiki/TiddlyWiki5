@@ -81,7 +81,7 @@ ListWidget.prototype.getTiddlerList = function() {
 
 ListWidget.prototype.getEmptyMessage = function() {
 	var emptyMessage = this.getAttribute("emptyMessage",""),
-		parser = this.wiki.new_parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
+		parser = this.wiki.parseText("text/vnd.tiddlywiki",emptyMessage,{parseAsInline: true});
 	if(parser) {
 		return parser.tree;
 	} else {

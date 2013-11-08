@@ -73,14 +73,14 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		titleText = title;
 	}
-	var headerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
+	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
 		headerWidgetNode = this.wiki.makeWidget(headerParser,{parentWidget: $tw.rootWidget, document: document});
 	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
 	// Render the body of the message
-	var bodyParser = this.wiki.new_parseTiddler(title),
+	var bodyParser = this.wiki.parseTiddler(title),
 		bodyWidgetNode = this.wiki.makeWidget(bodyParser,{parentWidget: $tw.rootWidget, document: document});
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
@@ -107,7 +107,7 @@ Modal.prototype.display = function(title,options) {
 	} else {
 		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
 	}
-	var footerParser = this.wiki.new_parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
+	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
 		footerWidgetNode = this.wiki.makeWidget(footerParser,{parentWidget: $tw.rootWidget, document: document});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {

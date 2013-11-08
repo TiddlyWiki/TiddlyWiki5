@@ -53,12 +53,12 @@ MacroCallWidget.prototype.execute = function() {
 	// Are we rendering to HTML?
 	if(this.renderOutput === "text/html") {
 		// If so we'll return the parsed macro
-		var parser = this.wiki.new_parseText(this.parseType,text,
+		var parser = this.wiki.parseText(this.parseType,text,
 							{parseAsInline: !this.parseTreeNode.isBlock});
 		parseTreeNodes = parser ? parser.tree : [];
 	} else {
 		// Otherwise, we'll render the text
-		var plainText = this.wiki.new_renderText("text/plain",this.parseType,text,{parentWidget: this});
+		var plainText = this.wiki.renderText("text/plain",this.parseType,text,{parentWidget: this});
 		parseTreeNodes = [{type: "text", text: plainText}];
 	}
 	// Construct the child widgets

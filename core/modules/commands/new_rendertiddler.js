@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/commands/new_rendertiddler.js
+title: $:/core/modules/commands/rendertiddler.js
 type: application/javascript
 module-type: command
 
@@ -13,7 +13,7 @@ Command to render a tiddler and save it to a file
 "use strict";
 
 exports.info = {
-	name: "new_rendertiddler",
+	name: "rendertiddler",
 	synchronous: false
 };
 
@@ -33,7 +33,7 @@ Command.prototype.execute = function() {
 		title = this.params[0],
 		filename = this.params[1],
 		type = this.params[2] || "text/html";
-	fs.writeFile(filename,this.commander.wiki.new_renderTiddler(type,title),"utf8",function(err) {
+	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title),"utf8",function(err) {
 		self.callback(err);
 	});
 	return null;
