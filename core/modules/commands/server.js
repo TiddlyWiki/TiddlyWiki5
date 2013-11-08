@@ -180,6 +180,7 @@ var Command = function(params,commander,callback) {
 					}
 				});
 				tiddlerFields["revision"] = state.wiki.getChangeCount(title);
+				tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 				tiddlers.push(tiddlerFields);
 			});
 			var text = JSON.stringify(tiddlers);
@@ -207,6 +208,7 @@ var Command = function(params,commander,callback) {
 					}
 				});
 				tiddlerFields["revision"] = state.wiki.getChangeCount(title);
+				tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 				response.writeHead(200, {"Content-Type": "application/json"});
 				response.end(JSON.stringify(tiddlerFields),"utf8");
 			} else {

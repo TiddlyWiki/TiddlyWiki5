@@ -130,6 +130,7 @@ TiddlyWebAdaptor.prototype.getCsrfToken = function() {
 Get an array of skinny tiddler fields from the server
 */
 TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
+	var self = this;
 	$tw.utils.httpRequest({
 		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
 		callback: function(err,data) {
@@ -140,10 +141,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			// Process the tiddlers to make sure the revision is a string
 			var tiddlers = JSON.parse(data);
 			for(var t=0; t<tiddlers.length; t++) {
-				var tiddlerFields = tiddlers[t];
-				if(typeof tiddlerFields.revision === "number") {
-					tiddlerFields.revision = tiddlerFields.revision.toString();
-				}
+				var tiddlerFields = self.convertTiddlerFromTiddlyWebFormat(tiddlers[t]);
 			}
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
@@ -189,7 +187,7 @@ TiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {
 				return callback(err);
 			}
 			// Invoke the callback
-			callback(null,self.convertTiddlerFromTiddlyWebFormat(data));
+			callback(null,self.convertTiddlerFromTiddlyWebFormat(JSON.parse(data)));
 		}
 	});
 };
@@ -237,19 +235,19 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 			}
 		});
 	}
-	// Convert the type "text/x-tiddlywiki" into null
+	// Default the content type and convert the type "text/x-tiddlywiki" into null
 	if(result.type === "text/x-tiddlywiki") {
 		result.type = null;
-	}
+	};
+	result.type = result.type || "text/vnd.tiddlywiki";
 	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
 };
 
 /*
 Convert a field set in TiddlyWeb format into ordinary TiddlyWiki5 format
 */
-TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(data) {
-	var tiddlerFields = JSON.parse(data),
-		self = this,
+TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerFields) {
+	var self = this,
 		result = {};
 	// Transfer the fields, pulling down the `fields` hashmap
 	$tw.utils.each(tiddlerFields,function(element,title,object) {

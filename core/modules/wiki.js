@@ -690,6 +690,9 @@ exports.parseTiddler = function(title,options) {
 
 exports.parseTextReference = function(title,field,index,options) {
 	if(field === "text" || (!field && !index)) {
+		// Force the tiddler to be lazily loaded
+		this.getTiddlerText(title);
+		// Parse it
 		return this.parseTiddler(title,options);
 	} else {
 		var tiddler,text;
