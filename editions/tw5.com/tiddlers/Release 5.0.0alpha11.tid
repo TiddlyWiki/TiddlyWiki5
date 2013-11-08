@@ -1,0 +1,28 @@
+created: 201311081754007
+creator: JeremyRuston
+modified: 201311081754007
+modifier: JeremyRuston
+title: Release 5.0.0alpha11
+
+This release is the culmination of a large scale refactoring of the widget mechanism of TiddlyWiki5. There are several changes to be aware of if upgrading from earlier versions:
+
+* The following widgets have been removed:
+** `<$setstyle>` - use `<div style=<<macroName Param>>>` instead
+** `<$video>` - will return in a later release
+** `<$datauri>` - use the `<<makedatauri>>` built-in macro instead
+** `<$error>` - may return in a later release
+** `<$import>` - use the BrowseWidget, DropzoneWidget and NavigatorWidget instead
+** `<$info>` - use the `<<changecount>>` built-in macro instead
+** `<$version>` - use the `<<version>>` built-in macro instead
+* The following widgets have had significant changes:
+** EditWidget
+** ListWidget
+** ViewWidget - `<$view format="link"/>` is no longer available; use an explicit `<$link>` widget instead
+* The following new widgets have been added:
+** BrowseWidget
+** DropzoneWidget
+** EditTextWidget and EditBitmapWidget
+** SetVariableWidget
+* Widget attribute names have been made more consistent. In particular, `tiddler` is used to reference a tiddler by title, not `title`
+
+
