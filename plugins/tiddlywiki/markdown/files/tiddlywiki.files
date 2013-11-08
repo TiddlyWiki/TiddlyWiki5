@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "../../../../node_modules/markdown/lib/markdown.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/markdown/markdown.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

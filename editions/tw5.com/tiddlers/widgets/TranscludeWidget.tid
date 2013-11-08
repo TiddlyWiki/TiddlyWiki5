@@ -1,6 +1,6 @@
 created: 201308241425
 creator: JeremyRuston
-modified: 201308241530
+modified: 201310301349
 modifier: JeremyRuston
 tags: widget
 title: TranscludeWidget
@@ -12,7 +12,7 @@ The TranscludeWidget dynamically imports content from another tiddler.
 ! Attributes
 
 |!Attribute |!Description |
-|title |The title of the tiddler to transclude (defaults to the current tiddler) |
+|tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
 |field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] |
 |class |CSS classes to added to the generated elements |

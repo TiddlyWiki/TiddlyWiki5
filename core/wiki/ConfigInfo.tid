@@ -12,5 +12,4 @@ This is the full set of TiddlerFields in use in this wiki (including system tidd
 
 These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
 
-<$info type="modules"/>
-
+{{$:/snippets/modules}}

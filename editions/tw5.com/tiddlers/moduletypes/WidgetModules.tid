@@ -1,2 +1,81 @@
 title: WidgetModules
+tags: dev moduletypes
+created: 201311011307
+modified: 201311011307
 
+! Introduction
+
+Widget modules are used as part of the RenderingMechanism to implement each type of renderable entity. As well as the widgets that are familiar to end users, the following primitives are also implemented as widgets:
+
+* HTML text nodes
+* HTML element nodes
+* HTML entities
+
+All widgets inherit from a base widget class that is defined in [[$:/core/modules/new_widgets/widget.js]].
+
+! Widget Properties
+
+The following widget properties are defined by the core. The lifecycle of a widget object is largely a matter of maintaining the consistency of these internal properties in the face of external state changes. Individual widgets usually add their own additional properties too.
+
+|!Name |!Description |
+|''parseTreeNode'' |Reference to the parse tree node corresponding to this widget |
+|''wiki'' |Reference to the [[Wiki]] object associated with this widget |
+|''variables'' |Hashmap of information about each [[widget variable|WidgetVariables]] (see below) |
+|''parentWidget'' |Reference to the parent widget |
+|''document'' |Reference to the document object associated with this widget. Usually either the browser global `document` variable or a reference to the FakeDomMechanism's `$tw.document` |
+|''attributes'' |Hashmap of information about each attribute attached to this widget (see below) |
+|''children'' |Array of child widgets |
+|''domNodes'' |For widgets that directly generate DOM nodes, an array of the generated nodes |
+|''eventListeners'' |Array of event listener definitions |
+
+!! Widget Variables
+
+The widget variables defined on a widget are stored in a hashmap of the variable name. The hashmap contains:
+
+* `name`: name of variable
+* `params`: array of parameters for macro definitions, each `{name: "<name>", default: "<optionaldefault>"}`
+* `value`: string value of variable
+
+!! Widget Attributes
+
+The widget attributes associated with a widget are stored in a hashmap of the attribute name. The hashmap contains an object that describes the attribute value. Currently three attribute value types are supported:
+
+* Strings: `{type: "string", value: "<value>"}`
+* Tiddler text reference indirection: `{type: "indirect", textReference: "<textref>"}`
+* Macro invocation: `{type: "macro", value: {name: "<macroname>", params: [{name: "<paramname>", value: "<paramvalue>"}, ... ]}`
+
+!! Widget Event Listeners
+
+The event listeners attached to a widget are stored as a hashmap by event type. Each value is a handler function that accepts a single `event` parameter.
+
+! Widget methods
+
+The individual methods defined by the widget object are documented in the source code of [[$:/core/modules/new_widgets/widget.js]]. Here we give an overview of the overall lifecycle, and how the methods fit together
+
+!! Widget `initialise` method
+!! Widget `widgetClasses` method
+!! Widget `render` method
+!! Widget `execute` method
+!! Widget `getVariable` method
+!! Widget `substituteVariableParameters` method
+!! Widget `substituteVariableReferences` method
+!! Widget `evaluateMacroModule` method
+!! Widget `setVariable` method
+!! Widget `hasVariable` method
+!! Widget `getStateQualifier` method
+!! Widget `computeAttributes` method
+!! Widget `hasAttribute` method
+!! Widget `getAttribute` method
+!! Widget `assignAttributes` method
+!! Widget `makeChildWidgets` method
+!! Widget `makeChildWidget` method
+!! Widget `renderChildren` method
+!! Widget `addEventListeners` method
+!! Widget `addEventListener` method
+!! Widget `dispatchEvent` method
+!! Widget `refresh` method
+!! Widget `refreshSelf` method
+!! Widget `refreshChildren` method
+!! Widget `findNextSiblingDomNode` method
+!! Widget `findFirstDomNode` method
+!! Widget `removeChildDomNodes` method

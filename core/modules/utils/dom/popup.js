@@ -30,7 +30,7 @@ Popup.prototype.show = function(options) {
 };
 
 Popup.prototype.handleEvent = function(event) {
-	if(event.type === "click" && !$tw.utils.domContains(this.anchorDomNode,event.target)) {
+	if(event.type === "click" && this.anchorDomNode !== event.target && !$tw.utils.domContains(this.anchorDomNode,event.target)) {
 		this.cancel();
 	}
 };
@@ -54,8 +54,7 @@ Popup.prototype.triggerPopup = function(options) {
 	// Get the current popup state tiddler
 	var value = options.wiki.getTextReference(options.title,"");
 	// Check if the popup is open by checking whether it matches "(<x>,<y>)"
-	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
-		state = !popupLocationRegExp.test(value);
+	var state = !this.readPopupState(options.title,value);
 	if("force" in options) {
 		state = options.force;
 	}
@@ -69,6 +68,18 @@ Popup.prototype.triggerPopup = function(options) {
 	} else {
 		this.cancel();
 	}
+};
+
+/*
+Returns true if the specified title and text identifies an active popup
+*/
+Popup.prototype.readPopupState = function(title,text) {
+	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/,
+		result = false;
+	if(this.title === title) {
+		result = popupLocationRegExp.test(text);
+	}
+	return result;
 };
 
 exports.Popup = Popup;

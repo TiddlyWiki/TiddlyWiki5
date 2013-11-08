@@ -1,0 +1,18 @@
+title: CheckboxWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The checkbox widget displays an HTML `<input type="checkbox">` element that is dynamically bound to the presence or absence of a specified tag on a specified tiddler.
+
+! Content and Attributes
+
+The content of the `<$checkbox>` widget is displayed within an HTML `<label>` element immediately after the checkbox itself. This means that clicking on the content will toggle the checkbox.
+
+|!Attribute |!Description |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |
+|tag |The name of the tag to which the checkbox should be bound |

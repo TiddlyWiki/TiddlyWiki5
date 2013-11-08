@@ -47,14 +47,14 @@ exports.parse = function() {
 			type: "element",
 			tag: "$transclude",
 			attributes: {
-				title: {type: "string", value: template || targetTitle}
+				tiddler: {type: "string", value: template || targetTitle}
 			}
 		};
 	var tiddlerNode = {
 		type: "element",
 		tag: "$tiddler",
 		attributes: {
-			title: {type: "string", value: targetTitle}
+			tiddler: {type: "string", value: targetTitle}
 		},
 		children: [transcludeNode]
 	};

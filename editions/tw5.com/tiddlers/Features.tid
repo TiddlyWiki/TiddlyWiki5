@@ -1,19 +1,22 @@
 created: 201308221728
 creator: JeremyRuston
-modified: 201309102146
+modified: 201310281322
 modifier: JeremyRuston
 tags: introduction
 title: Features
 
 * The ability to save changes on almost any desktop HTML5 compatible-browser
-* [[Bitmap images|Motovun Jack.jpg]] and [[SVG images|Motovun Jack.svg]] are first-class citizens alongside text
+* [[Bitmap images|Motovun Jack.jpg]] and [[SVG images|UsingSVG]] are first-class citizens alongside text
 * Concise and expressive WikiText that generates semantic HTML
 * Integrated [[AES encryption|How to use TiddlyWiki5 as a standalone HTML file with encryption]]
 * TiddlyWiki isn't just a wiki - you can build custom applications with it like this TaskManagementExample
 * Familiar user interface elements like <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">wizards</$button> and <$button message="tw-notify" param="SampleNotification" class="btn btn-inverse">notifications</$button>
 * Easily [[import|ImportTiddlers]] content via drag and drop, copy and paste, or browsing for local files 
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
-* Explore the  [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
+* Try out the <$button message="tw-full-screen">full screen support</$button>
+* Explore the [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
+* Try out the [[CodeMirror plugin|http://five.tiddlywiki.com/codemirrordemo.html]]
+* Try out the [[Markdown plugin|http://five.tiddlywiki.com/markdowndemo.html]]
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules

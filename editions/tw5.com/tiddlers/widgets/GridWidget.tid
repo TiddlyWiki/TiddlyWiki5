@@ -1,11 +1,12 @@
 title: GridWidget
 tags: widget
 
-The grid widget assembles tiddlers into a tabular grid based on their titles. For example:
+The video widget is not yet (re)implemented.
 
 ```
+The grid widget assembles tiddlers into a tabular grid based on their titles. For example:
+
 <$grid prefix="GridDemo" rows=3 cols=3/>
-```
 
 In this case, the following tiddlers will be rendered:
 
@@ -16,3 +17,4 @@ In this case, the following tiddlers will be rendered:
 The result is:
 
 <$grid prefix="GridDemo" rows=3 cols=3/>
+```

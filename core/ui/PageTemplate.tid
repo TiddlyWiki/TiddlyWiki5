@@ -3,7 +3,7 @@ title: $:/core/ui/PageTemplate
 <!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
-<$import browse="no" class="tw-drop-zone-fullscreen">
+<$dropzone>
 
 <!-- The optional topbar -->
 {{$:/TopSideBar}}
@@ -12,7 +12,7 @@ title: $:/core/ui/PageTemplate
 {{$:/LeftSideBar}}
 
 <!-- The sidebar header -->
-<header class="sidebar-header"><div class="title">{{SiteTitle}}</div><div class="tw-subtitle">{{SiteSubtitle}}</div>
+<header class="sidebar-header"><div class="titlebar">{{SiteTitle}}</div><div class="tw-subtitle">{{SiteSubtitle}}</div>
 
 <div class="tw-page-controls">
 <$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button}}</$button><$link to="$:/ControlPanel">{{$:/core/images/options-button}}</$link><$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button}}</$button>
@@ -26,12 +26,12 @@ title: $:/core/ui/PageTemplate
 <section class="story-river">
 
 <!-- The main story -->
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" listview={{$:/view}} itemClass="tw-tiddler-frame"/>
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} />
 
 <!-- End of story river -->
 </section>
 
-</$import>
+</$dropzone>
 
 </$navigator>
 

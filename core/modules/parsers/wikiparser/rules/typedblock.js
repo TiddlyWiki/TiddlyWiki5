@@ -28,6 +28,8 @@ $$$
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/new_widgets/widget.js");
+
 exports.name = "typedblock";
 exports.types = {block: true};
 
@@ -57,16 +59,15 @@ exports.parse = function() {
 		this.parser.pos = this.parser.sourceLength;
 	}
 	// Parse the block according to the specified type
-	var parser = this.parser.wiki.parseText(parseType,text,{defaultType: "text/plain"});
+	var parser = this.parser.wiki.new_parseText(parseType,text,{defaultType: "text/plain"});
 	// If there's no render type, just return the parse tree
 	if(!renderType) {
 		return parser.tree;
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
-		var renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, document: $tw.document});
-		renderTree.execute();
-		var container = $tw.document.createElement("div");
-		renderTree.renderInDom(container);
+		var widgetNode = this.parser.wiki.makeWidget(parser),
+			container = $tw.document.createElement("div");
+		widgetNode.render(container,null);
 		var text = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
 			type: "element",

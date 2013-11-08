@@ -12,16 +12,29 @@ A barebones implementation of DOM interfaces needed by the rendering mechanism.
 /*global $tw: false */
 "use strict";
 
-var TW_TextNode = function(text) {
-	this.textContent = text;
+// Sequence number used to enable us to track objects for testing
+var sequenceNumber = null;
+
+var bumpSequenceNumber = function(object) {
+	if(sequenceNumber !== null) {
+		object.sequenceNumber = sequenceNumber++;
+	}
 }
 
-var TW_Element = function(tag) {
+var TW_TextNode = function(text) {
+	bumpSequenceNumber(this);
+	this.textContent = text;
+};
+
+var TW_Element = function(tag,namespace) {
+	bumpSequenceNumber(this);
+	this.isTiddlyWikiFakeDom = true;
 	this.tag = tag;
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
-}
+	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
+};
 
 TW_Element.prototype.setAttribute = function(name,value) {
 	if(this.isRaw) {
@@ -34,10 +47,32 @@ TW_Element.prototype.setAttributeNS = function(namespace,name,value) {
 	this.setAttribute(name,value);
 };
 
+TW_Element.prototype.removeAttribute = function(name) {
+	if(this.isRaw) {
+		throw "Cannot removeAttribute on a raw TW_Element";
+	}
+	if($tw.utils.hop(this.attributes,name)) {
+		delete this.attributes[name];
+	}
+};
+
 TW_Element.prototype.appendChild = function(node) {
 	this.children.push(node);
 	node.parentNode = this;
 };
+
+TW_Element.prototype.insertBefore = function(node,nextSibling) {
+	if(nextSibling) {
+		var p = this.children.indexOf(nextSibling);
+		if(p !== -1) {
+			this.children.splice(p,0,node);
+		} else {
+			this.appendChild(node);
+		}
+	} else {
+		this.appendChild(node);
+	}
+}
 
 TW_Element.prototype.removeChild = function(node) {
 	var p = this.children.indexOf(node);
@@ -60,6 +95,15 @@ TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 	// Do nothing
 };
 
+Object.defineProperty(TW_Element.prototype, "className", {
+	get: function() {
+		return this.attributes["class"] || "";
+	},
+    set: function(value) {
+    	this.attributes["class"] = value;
+    }
+});
+
 Object.defineProperty(TW_Element.prototype, "outerHTML", {
     get: function() {
 		var output = [],attr,a,v;
@@ -77,7 +121,7 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				}
 			}
 		}
-		output.push(">\n");
+		output.push(">");
 		if($tw.config.htmlVoidElements.indexOf(this.tag) === -1) {
 			output.push(this.innerHTML);
 			output.push("</",this.tag,">");
@@ -123,8 +167,11 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 });
 
 var document = {
+	setSequenceNumber: function(value) {
+		sequenceNumber = value;
+	},
 	createElementNS: function(namespace,tag) {
-		return new TW_Element(tag);
+		return new TW_Element(tag,namespace);
 	},
 	createElement: function(tag) {
 		return new TW_Element(tag);

@@ -12,7 +12,7 @@ title: $:/core/ui/ToolsPanel
 
 ---
 
-Import: <$import class="tw-drop-zone"/>
+Import: <$browse/>
 
 ---
 
@@ -20,4 +20,4 @@ Import: <$import class="tw-drop-zone"/>
 
 ---
 
-TiddlyWiki5 version <$version/>
+TiddlyWiki5 version <<version>>

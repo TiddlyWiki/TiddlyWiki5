@@ -1,6 +1,6 @@
 created: 201308270759
 creator: JeremyRuston
-modified: 201308270759
+modified: 201311011115
 modifier: JeremyRuston
 tags: concepts
 title: TextReference
@@ -20,5 +20,3 @@ Text references can be used in several places:
 * As IndirectAttributes of an element or widget (eg, `<$widget attrib={{Title!!description}}/>`)
 * As the operand of a shortcut transclusion (eg, `{{MyTiddler!!title}}`)
 * As the `state` attribute of the RevealWidget and the LinkCatcherWidget
-
-//There are probably other places where a title is being used but it would be more flexible to support arbitrary text references//

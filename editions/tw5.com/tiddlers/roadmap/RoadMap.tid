@@ -1,6 +1,6 @@
 created: 201308232038
 creator: JeremyRuston
-modified: 201309232017
+modified: 201311011116
 modifier: JeremyRuston
 tags: planning
 title: RoadMap
@@ -30,7 +30,6 @@ The following additional features are planned or under consideration for impleme
 * Proper use of ARIA roles
 * Simpler upgrading to new core versions
 * Import wizard allowing individual tiddlers to be selected for import
-* Switching to more MarkDown-like syntax for basic formatting such as headings and lists
 * `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
 * Further WikiText features including block quotes
 * Facebook, Twitter, G+ and LinkedIn widgets

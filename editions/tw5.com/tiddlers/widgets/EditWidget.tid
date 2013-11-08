@@ -1,0 +1,20 @@
+title: EditWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The edit widget provides a general purpose interface for editing a tiddler. It dynamically chooses the appropriate widget depending on the type of the tiddler (currently either the EditTextWidget or the EditBitmapWidget).
+
+! Content and Attributes
+
+The content of the `<$edit>` widget is ignored.
+
+|!Attribute |!Description |
+|tiddler |The tiddler to edit (defaults to the [[WidgetVariable: currentTiddler]]) |
+|field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
+|index |The index to edit |
+|class |A CSS class to be added the generated editing widget |

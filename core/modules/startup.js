@@ -12,6 +12,8 @@ This is the main application logic for both the client and server
 /*global $tw: false */
 "use strict";
 
+var widget = require("$:/core/modules/new_widgets/widget.js");
+
 exports.startup = function() {
 	var modules,n,m,f,commander;
 	// Load modules
@@ -26,6 +28,7 @@ exports.startup = function() {
 	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	// Set up the parsers
 	$tw.wiki.initParsers();
 	// Set up the syncer object
@@ -50,39 +53,44 @@ exports.startup = function() {
 	$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
 	// Host-specific startup
 	if($tw.browser) {
-		// Call browser startup modules
-		$tw.modules.forEachModuleOfType("browser-startup",function(title,module) {
-			if(module.startup) {
-				module.startup();
-			}
-		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			rootElement: document.body
 		});
+		// Install the animator
+		$tw.anim = new $tw.utils.Animator();
+		// Kick off the stylesheet manager
+		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
+		// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+		$tw.rootWidget = new widget.widget({type: "widget", children: []},{
+				wiki: $tw.wiki,
+				document: document
+			});
 		// Install the modal message mechanism
 		$tw.modal = new $tw.utils.Modal($tw.wiki);
-		document.addEventListener("tw-modal",function(event) {
+		$tw.rootWidget.addEventListener("tw-modal",function(event) {
 			$tw.modal.display(event.param);
-		},false);
+		});
 		// Install the notification  mechanism
 		$tw.notifier = new $tw.utils.Notifier($tw.wiki);
-		document.addEventListener("tw-notify",function(event) {
+		$tw.rootWidget.addEventListener("tw-notify",function(event) {
 			$tw.notifier.display(event.param);
-		},false);
+		});
 		// Install the scroller
 		$tw.pageScroller = new $tw.utils.PageScroller();
-		document.addEventListener("tw-scroll",$tw.pageScroller,false);
+		$tw.rootWidget.addEventListener("tw-scroll",function(event) {
+			$tw.pageScroller.handleEvent(event);
+		});
 		// Install the save action handler
 		$tw.wiki.initSavers();
-		document.addEventListener("tw-save-wiki",function(event) {
+		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
 			$tw.wiki.saveWiki({
 				template: event.param,
 				downloadType: "text/plain"
 			});
-		},false);
+		});
 		// Install the crypto event handlers
-		document.addEventListener("tw-set-password",function(event) {
+		$tw.rootWidget.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
 				serviceName: "Set a new password for this TiddlyWiki",
 				noUserName: true,
@@ -93,24 +101,19 @@ exports.startup = function() {
 				}
 			});
 		});
-		document.addEventListener("tw-clear-password",function(event) {
+		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
-		// Install the animator
-		$tw.anim = new $tw.utils.Animator();
-		// Kick off the stylesheet manager
-		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
-		// Display the PageTemplate
-		var templateTitle = "$:/core/ui/PageTemplate",
-			parser = $tw.wiki.parseTiddler(templateTitle),
-			renderTree = new $tw.WikiRenderTree(parser,{wiki: $tw.wiki, context: {tiddlerTitle: templateTitle}, document: document});
-		renderTree.execute();
+		// Display the PageMacros, which includes the PageTemplate
+		var templateTitle = "$:/core/ui/PageMacros",
+			parser = $tw.wiki.new_parseTiddler(templateTitle);
+		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		renderTree.renderInDom($tw.pageContainer);
+		$tw.pageWidgetNode.render($tw.pageContainer,null);
 		$tw.wiki.addEventListener("change",function(changes) {
-			renderTree.refreshInDom(changes);
+			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
 		});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
@@ -118,6 +121,12 @@ exports.startup = function() {
 				param: "$:/messages/SaveInstructions"
 			});
 		}
+		// Call browser startup modules
+		$tw.modules.forEachModuleOfType("browser-startup",function(title,module) {
+			if(module.startup) {
+				module.startup();
+			}
+		});
 	} else {
 		// On the server, start a commander with the command line arguments
 		commander = new $tw.Commander(

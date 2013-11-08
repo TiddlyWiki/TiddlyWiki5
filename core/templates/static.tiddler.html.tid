@@ -11,12 +11,10 @@ title: $:/core/templates/static.tiddler.html
 <link rel="stylesheet" href="static.css">
 <title>`{{$:/core/wiki/title}}`</title>
 </head>
-<body>
+<body class="tw-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="story-river">
-<div class="tw-tiddler-frame">
 `<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>`
-</div>
 </section>
 </body>
 </html>

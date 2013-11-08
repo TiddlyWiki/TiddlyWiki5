@@ -107,6 +107,7 @@ children: array of further child nodes
 innerHTML: optional HTML for element
 class: class name(s)
 document: defaults to current document
+eventListeners: array of event listeners (this option won't work until $tw.utils.addEventListeners() has been loaded)
 */
 $tw.utils.domMaker = function(tag,options) {
 	var doc = options.document || document;
@@ -126,6 +127,9 @@ $tw.utils.domMaker = function(tag,options) {
 	$tw.utils.each(options.attributes,function(attribute,name) {
 		element.setAttribute(name,attribute);
 	});
+	if(options.eventListeners) {
+		$tw.utils.addEventListeners(element,options.eventListeners);
+	}
 	return element;
 };
 
@@ -227,7 +231,8 @@ $tw.utils.stringifyDate = function(value) {
 			$tw.utils.pad(value.getUTCMonth() + 1) +
 			$tw.utils.pad(value.getUTCDate()) + 
 			$tw.utils.pad(value.getUTCHours()) + 
-			$tw.utils.pad(value.getUTCMinutes());
+			$tw.utils.pad(value.getUTCMinutes()) +
+			$tw.utils.pad(value.getUTCMilliseconds(),3);
 };
 
 // Parse a date from a UTC YYYYMMDDHHMMSSMMM format string
@@ -722,6 +727,7 @@ $tw.modules.define("$:/boot/tiddlerfields/created","tiddlerfield",{
 });
 $tw.modules.define("$:/boot/tiddlerfields/color","tiddlerfield",{
 	name: "color",
+	editTag: "input",
 	editType: "color"
 });
 $tw.modules.define("$:/boot/tiddlerfields/tags","tiddlerfield",{

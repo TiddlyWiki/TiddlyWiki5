@@ -1,9 +1,7 @@
 <h1 class=''>
 Building classic <span>
 TiddlyWiki</span> with <span>
-TiddlyWiki5</span></h1><div class='tw-tiddler'>
-<div class='tw-transclude'>
-<p>
+TiddlyWiki5</span></h1><p>
 <span>
 TiddlyWiki5</span> can be used to build older 2.x.x versions of <span>
 TiddlyWiki</span> from their constituent components. Doing so involves these additional features over and above those used for building <span>
@@ -34,4 +32,4 @@ node ../../tiddlywiki.js \
 	--verbose \
 	--load &lt;path_to_recipe_file&gt; \
 	--rendertiddler $:/core/templates/tiddlywiki2.template.html &lt;path_to_write_index_file&gt; text/plain \
-	|| exit 1</pre></div></div>
+	|| exit 1</pre>

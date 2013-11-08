@@ -1,0 +1,33 @@
+title: ViewWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The view widget displays the contents of a tiddler field in a specified format.
+
+! Content and Attributes
+
+The content of the `<$view>` widget is ignored.
+
+|!Attribute |!Description |
+|tiddler |The title of the tiddler (defaults to the [[WidgetVariable: currentTiddler]]) |
+|field |The name of the field to view (defaults to "text") |
+|format |The format for displaying the field (see below) |
+|template |The optional template used with certain formats |
+
+!! Formats
+
+The following formats can be specified in the `format` attribute:
+
+|!Format |!Description |
+|''text'' |Plain text |
+|''htmlwikified'' |The field is wikified and the resulting HTML returned as plain text |
+|''htmlencoded'' |The field is displayed with HTML encoding issues |
+|''date'' |The field is interpreted as a UTC date and displayed according to the DateFormat specified in the `template` attribute |
+|''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
+|''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
+|''jsencoded'' |The field is displayed as a JavaScript encoded string |

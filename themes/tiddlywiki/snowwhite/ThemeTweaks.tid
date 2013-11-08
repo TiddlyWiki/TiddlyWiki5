@@ -6,32 +6,33 @@ You can tweak certain aspects of the ''Snow White'' theme.
 
 ! Colours
 
-* Primary colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="primary" default="" type="color"/>
-* Background colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="background" default="" type="color"/>
-* Foreground colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="foreground" default="" type="color"/>
-* Page background colour: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="pagebackground" default="" type="color"/>
-* Medium contrast color: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="medium" default="" type="color"/>
+* Primary colour: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="primary" default="" tag="input" type="color"/>
+* Background colour: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="background" default="" tag="input" type="color"/>
+* Foreground colour: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="foreground" default="" tag="input" type="color"/>
+* Page background colour: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="pagebackground" default="" tag="input" type="color"/>
+* Medium contrast color: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colours" index="medium" default="" tag="input" type="color"/>
 
 ! Colour mappings
 
-* Tiddler background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="tiddlerbackground" default="" type="input"/>
-* Tiddler foreground colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="foreground" default="" type="input"/>
-* Page background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="pagebackground" default="" type="input"/>
-* Link background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="linkbackground" default="" type="input"/>
-* Link foreground colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="linkforeground" default="" type="input"/>
-* Dropdown background colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="dropdownbackground" default="" type="input"/>
-* Dropdown border colour mapping: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="dropdownborder" default="" type="input"/>
+* Tiddler background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="tiddlerbackground" default="" tag="input"/>
+* Tiddler foreground colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="foreground" default="" tag="input"/>
+* Page background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="pagebackground" default="" tag="input"/>
+* Link background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="linkbackground" default="" tag="input"/>
+* Link foreground colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="linkforeground" default="" tag="input"/>
+* Dropdown background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="dropdownbackground" default="" tag="input"/>
+* Dropdown border colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/colourmappings" index="dropdownborder" default="" tag="input"/>
 
 ! Settings
 
-* Font family: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/settings" index="fontfamily" default="" type="input"/>
+* Font family: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/settings" index="fontfamily" default="" tag="input"/>
 
 ! Sizes
 
-* Font size: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="fontsize" default="" type="input"/>
-* Line height: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="lineheight" default="" type="input"/>
-* Story left position //(the distance between the left of the screen and the left margin of the story river or tiddler area)//: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storyleft" default="" type="input"/>
-* Story top position //(the distance between the top of the screen ad the top margin of the story river or tiddler area)//: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storytop" default="" type="input"/>
-* Story right //(the distance between the left side of the screen and the left margin of the sidebar area)//: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storyright" default="" type="input"/>
-* Story width //(the width of the story river or tiddler area)//: <$edit tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storywidth" default="" type="input"/>
+* Font size: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="fontsize" default="" tag="input"/>
+* Line height: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="lineheight" default="" tag="input"/>
+* Story left position //(the distance between the left of the screen and the left margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storyleft" default="" tag="input"/>
+* Story top position //(the distance between the top of the screen ad the top margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storytop" default="" tag="input"/>
+* Story right //(the distance between the left side of the screen and the left margin of the sidebar area)//: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storyright" default="" tag="input"/>
+* Story width //(the width of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="storywidth" default="" tag="input"/>
+* Tiddler width //(the width of individual tiddlers -- used for zoomin storyview)//: <$edit-text tiddler="$:/themes/tiddlywiki/snowwhite/metrics" index="tiddlerwidth" default="" tag="input"/>
 

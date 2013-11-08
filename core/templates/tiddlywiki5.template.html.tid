@@ -19,7 +19,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 <!----------- Raw markup ----------->
 {{{ [tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}
 </head>
-<body>
+<body class="tw-body">
 <!----------- Static styles ----------->
 <div id="styleArea">
 {{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}

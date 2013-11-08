@@ -13,7 +13,8 @@ A simple slide animation that varies the height of the element
 "use strict";
 
 function slideOpen(domNode,options) {
-	var duration = $tw.utils.getAnimationDuration();
+	options = options || {};
+	var duration = options.duration || $tw.utils.getAnimationDuration();
 	// Get the current height of the domNode
 	var computedStyle = window.getComputedStyle(domNode),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
@@ -65,7 +66,8 @@ function slideOpen(domNode,options) {
 }
 
 function slideClosed(domNode,options) {
-	var duration = $tw.utils.getAnimationDuration(),
+	options = options || {};
+	var duration = options.duration || $tw.utils.getAnimationDuration(),
 		currHeight = domNode.offsetHeight;
 	// Clear the properties we've set when the animation is over
 	setTimeout(function() {

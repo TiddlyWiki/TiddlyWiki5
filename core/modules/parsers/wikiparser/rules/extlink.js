@@ -38,9 +38,10 @@ exports.parse = function() {
 	} else {
 		return [{
 			type: "element",
-			tag: "$link",
+			tag: "a",
 			attributes: {
-				to: {type: "string", value: this.match[0]}
+				href: {type: "string", value: this.match[0]},
+				target: {type: "string", value: "_blank"}
 			},
 			children: [{
 				type: "text", text: this.match[0]

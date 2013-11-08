@@ -23,6 +23,7 @@ function FileSystemAdaptor(syncer) {
 	this.pending = {};
 
 	this.setwatcher = function(filename, title) {
+		return undefined;
 		return this.watchers[filename] = this.watchers[filename] ||
 			fs.watch(filename, {persistent: false}, function(e) {
 				console.log("Filesystem:", e, filename);
@@ -151,7 +152,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				if(err) {
 					return callback(err);
 				}
-				content = $tw.wiki.renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{tiddlerTitle: tiddler.fields.title});
+				content = $tw.wiki.new_renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{variables: {currentTiddler: tiddler.fields.title}});
 				fs.writeFile(fileInfo.filepath + ".meta",content,{encoding: "utf8"},function (err) {
 					if(err) {
 						return callback(err);
@@ -163,7 +164,7 @@ console.log("FileSystem: Saved file",fileInfo.filepath);
 		} else {
 			// Save the tiddler as a self contained templated file
 			template = $tw.config.typeTemplates[fileInfo.type];
-			content = $tw.wiki.renderTiddler("text/plain",template,{tiddlerTitle: tiddler.fields.title});
+			content = $tw.wiki.new_renderTiddler("text/plain",template,{variables: {currentTiddler: tiddler.fields.title}});
 			fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
 				if(err) {
 					return callback(err);

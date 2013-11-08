@@ -1,0 +1,31 @@
+title: FieldsWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The fields widget renders each field of a specified tiddler through a simple text template. A list of fields to exclude can be provided. It is used internally by TiddlyWiki5, notably by the FileSavingMechanism.
+
+!! Template Handling
+
+The provided template is rendered with the following special substitutions:
+
+|!Symbol |!Substitution |
+|$name$ |Field name |
+|$value$ |Field value |
+|$encoded_value$ |HTML encoded form of field value |
+
+! Content and Attributes
+
+The content of the `<$fields>` widget is ignored.
+
+|!Attribute |!Description |
+|tiddler |Title of the tiddler from which the fields are to be displayed (defaults to the [[WidgetVariable: currentTiddler]]) |
+|template |Text of the template (see above) |
+|exclude |Lists of fields to be excluded (defaults to "text") |
+|stripTitlePrefix |If set to "yes" then curly bracketed prefixes are removed from titles (for example `{prefix}HelloThere` converts to `HelloThere`) |
+
+The `stripTitlePrefix` attribute is used when building TiddlyWiki Classic; see `editions/tw2` in the TiddlyWiki5 repo.

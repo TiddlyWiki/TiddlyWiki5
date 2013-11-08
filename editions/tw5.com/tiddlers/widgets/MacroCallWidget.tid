@@ -1,0 +1,36 @@
+title: MacroCallWidget
+created: 201310241419
+creator: JeremyRuston
+modified: 201310300837
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The macro call widget provides an alternative syntax for invoking macros. The advantage of the widget form is that it allows macro parameters to be specified as widget attributes, thus allowing indirection and macro values to be set.
+
+For example, a macro called `italicise` that takes a single parameter called `text` can be invoked in any of these ways:
+
+```
+<<italicise "Text to be made into italics">>
+<<italicise text:"Text to be made into italics">>
+<$macrocall $name="italicise" text="Text to be made into italics"/>
+<$macrocall $name="italicise" text={{Title of tiddler containing text to be italicised}}/>
+<$macrocall $name="italicise" text=<<textMaker "Another macro to generate the text to be italicised">>/>
+```
+
+You can see several examples of the macro call widget within the core:
+
+* Listing module information: [[$:/snippets/modules]]
+* Listing field information: [[$:/snippets/allfields]]
+* Generating `data:` URIs: [[$:/themes/tiddlywiki/starlight/styles.tid]]
+
+! Content and Attributes
+
+The content of the `<$macrocall>` widget is ignored.
+
+|!Attribute |!Description |
+|$name |Name of the macro to invoke |
+|$type |ContentType with which the macro text should be parsed (defaults to `text/vnd.tiddlywiki`) |
+|$output |ContentType for the output rendering (defaults to `text/html`, can also be `text/plain`) |
+|//parameters// |Macro parameters specified as attributes |

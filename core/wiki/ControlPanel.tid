@@ -2,20 +2,18 @@ title: $:/ControlPanel
 
 ''Initial setup''
 
-:[[Title of this TiddlyWiki|SiteTitle]]: <$edit tiddler="SiteTitle" default="" type="input"/>
+| ![[Title of this TiddlyWiki|SiteTitle]]|<$edit-text tiddler="SiteTitle" default="" tag="input"/> |
+| ![[Subtitle|SiteSubtitle]]|<$edit-text tiddler="SiteSubtitle" default="" tag="input"/> |
+| ![[Username for signing edits|$:/status/UserName]]|<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
+| ![[Animation duration|$:/config/AnimationDuration]]|<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
 
-:[[Subtitle|SiteSubtitle]]: <$edit tiddler="SiteSubtitle" default="" type="input"/>
+Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to choose which tiddlers are displayed at startup
 
-:[[Username for signing edits|$:/status/UserName]]: <$edit tiddler="$:/status/UserName" default="" type="input"/>
-
-:[[Animation duration|$:/config/AnimationDuration]]: <$edit tiddler="$:/config/AnimationDuration" default="" type="input"/><br><br>
-:Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to choose which tiddlers are displayed at startup
-
-:{{$:/snippets/encryptionstatus}}
+{{$:/snippets/encryptionstatus}}
 
 ''Add plugins and tiddlers to your ~TiddlyWiki''
 
-:Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). <$import class="tw-drop-zone"/>
+:Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). <$browse/>
 
 ''Visual appearance''
 
@@ -25,6 +23,6 @@ title: $:/ControlPanel
 
 ''Additional information about this ~TiddlyWiki''
 
-*~TiddlyWiki5 version <$version/>
+*~TiddlyWiki5 version <<version>>
 *[[Wiki Info|$:/WikiInfo]]
 *[[Internal configuration information|$:/ConfigInfo]]
