@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/fields.js
+title: $:/core/modules/widgets/fields.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Fields widget
 
@@ -12,7 +12,7 @@ Fields widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var FieldsWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

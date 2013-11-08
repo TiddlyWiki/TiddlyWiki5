@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/view.js
+title: $:/core/modules/widgets/view.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 View widget
 
@@ -12,7 +12,7 @@ View widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ViewWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

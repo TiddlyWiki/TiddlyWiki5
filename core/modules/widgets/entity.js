@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/entity.js
+title: $:/core/modules/widgets/entity.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 HTML entity widget
 
@@ -12,7 +12,7 @@ HTML entity widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EntityWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

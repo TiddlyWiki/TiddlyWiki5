@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/macrocall.js
+title: $:/core/modules/widgets/macrocall.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Macrocall widget
 
@@ -12,7 +12,7 @@ Macrocall widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var MacroCallWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

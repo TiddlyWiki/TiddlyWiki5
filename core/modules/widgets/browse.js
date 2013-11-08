@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/browse.js
+title: $:/core/modules/widgets/browse.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Browse widget for browsing for files to import
 
@@ -12,7 +12,7 @@ Browse widget for browsing for files to import
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var BrowseWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

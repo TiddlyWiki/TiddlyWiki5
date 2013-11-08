@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/edit.js
+title: $:/core/modules/widgets/edit.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Edit widget is a meta-widget chooses the appropriate actual editting widget
 
@@ -12,7 +12,7 @@ Edit widget is a meta-widget chooses the appropriate actual editting widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

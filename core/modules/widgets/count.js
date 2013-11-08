@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/count.js
+title: $:/core/modules/widgets/count.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Count widget
 
@@ -12,7 +12,7 @@ Count widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var CountWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

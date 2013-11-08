@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/encrypt.js
+title: $:/core/modules/widgets/encrypt.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Encrypt widget
 
@@ -12,7 +12,7 @@ Encrypt widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EncryptWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

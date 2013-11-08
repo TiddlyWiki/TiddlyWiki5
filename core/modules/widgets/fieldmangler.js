@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/fieldmangler.js
+title: $:/core/modules/widgets/fieldmangler.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Field mangler widget
 
@@ -12,7 +12,7 @@ Field mangler widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var FieldManglerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

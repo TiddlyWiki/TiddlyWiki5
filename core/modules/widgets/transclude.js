@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/transclude.js
+title: $:/core/modules/widgets/transclude.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Transclude widget
 
@@ -12,7 +12,7 @@ Transclude widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var TranscludeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

@@ -11,7 +11,7 @@ Widget modules are used as part of the RenderingMechanism to implement each type
 * HTML element nodes
 * HTML entities
 
-All widgets inherit from a base widget class that is defined in [[$:/core/modules/new_widgets/widget.js]].
+All widgets inherit from a base widget class that is defined in [[$:/core/modules/widgets/widget.js]].
 
 ! Widget Properties
 
@@ -50,7 +50,7 @@ The event listeners attached to a widget are stored as a hashmap by event type. 
 
 ! Widget methods
 
-The individual methods defined by the widget object are documented in the source code of [[$:/core/modules/new_widgets/widget.js]]. Here we give an overview of the overall lifecycle, and how the methods fit together
+The individual methods defined by the widget object are documented in the source code of [[$:/core/modules/widgets/widget.js]]. Here we give an overview of the overall lifecycle, and how the methods fit together
 
 !! Widget `initialise` method
 !! Widget `widgetClasses` method

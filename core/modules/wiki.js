@@ -24,7 +24,7 @@ last dispatched. Each entry is a hashmap containing two fields:
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/new_widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js");
 
 var USER_NAME_TITLE = "$:/status/UserName";
 

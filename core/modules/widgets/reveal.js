@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/reveal.js
+title: $:/core/modules/widgets/reveal.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Reveal widget
 
@@ -12,7 +12,7 @@ Reveal widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var RevealWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

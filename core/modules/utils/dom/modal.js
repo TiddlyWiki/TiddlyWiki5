@@ -12,7 +12,7 @@ Modal message mechanism
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/new_widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js");
 
 var Modal = function(wiki) {
 	this.wiki = wiki;

@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/text.js
+title: $:/core/modules/widgets/text.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Text node widget
 
@@ -12,7 +12,7 @@ Text node widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var TextNodeWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/tiddler.js
+title: $:/core/modules/widgets/tiddler.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Tiddler widget
 
@@ -12,7 +12,7 @@ Tiddler widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var TiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

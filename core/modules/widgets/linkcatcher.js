@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/linkcatcher.js
+title: $:/core/modules/widgets/linkcatcher.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Linkcatcher widget
 
@@ -12,7 +12,7 @@ Linkcatcher widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var LinkCatcherWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

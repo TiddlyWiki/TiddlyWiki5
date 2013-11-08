@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/edit-text.js
+title: $:/core/modules/widgets/edit-text.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Edit-text widget
 
@@ -14,7 +14,7 @@ Edit-text widget
 
 var MIN_TEXT_AREA_HEIGHT = 100; // Minimum height of textareas in pixels
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditTextWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

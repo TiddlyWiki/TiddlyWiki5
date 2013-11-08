@@ -12,7 +12,7 @@ Command to render several tiddlers to a folder of files
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/new_widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.info = {
 	name: "new_rendertiddlers",

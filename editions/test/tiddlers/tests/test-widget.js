@@ -14,7 +14,7 @@ Tests the wikitext rendering pipeline end-to-end. We also need tests that indivi
 
 describe("Widget module", function() {
 
-	var widget = require("$:/core/modules/new_widgets/widget.js");
+	var widget = require("$:/core/modules/widgets/widget.js");
 
 	function createWidgetNode(parseTreeNode,wiki,variables) {
 		return new widget.widget(parseTreeNode,{

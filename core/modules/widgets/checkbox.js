@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/checkbox.js
+title: $:/core/modules/widgets/checkbox.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Checkbox widget
 
@@ -12,7 +12,7 @@ Checkbox widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var CheckboxWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

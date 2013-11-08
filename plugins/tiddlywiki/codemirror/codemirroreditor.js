@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/edit-text-codemirror.js
+title: $:/core/modules/widgets/edit-text-codemirror.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Extend the edit-text widget to use CodeMirror
 
@@ -16,7 +16,7 @@ if($tw.browser) {
     require("$:/plugins/tiddlywiki/codemirror/codemirror.js");
 }
 
-var EditTextWidget = require("$:/core/modules/new_widgets/edit-text.js")["edit-text"];
+var EditTextWidget = require("$:/core/modules/widgets/edit-text.js")["edit-text"];
 
 /*
 The edit-text widget calls this method just after inserting its dom nodes

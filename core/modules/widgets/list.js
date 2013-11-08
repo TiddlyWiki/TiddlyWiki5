@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/list.js
+title: $:/core/modules/widgets/list.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 List and list item widgets
 
@@ -12,7 +12,7 @@ List and list item widgets
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 /*
 The list widget creates list element sub-widgets that reach back into the list widget for their configuration

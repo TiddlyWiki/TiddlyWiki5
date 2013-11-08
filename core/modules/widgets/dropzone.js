@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/dropzone.js
+title: $:/core/modules/widgets/dropzone.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Dropzone widget
 
@@ -12,7 +12,7 @@ Dropzone widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var DropZoneWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

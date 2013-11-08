@@ -12,7 +12,7 @@ This is the main application logic for both the client and server
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/new_widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	var modules,n,m,f,commander;

@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/link.js
+title: $:/core/modules/widgets/link.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Link widget
 
@@ -12,7 +12,7 @@ Link widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var LinkWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

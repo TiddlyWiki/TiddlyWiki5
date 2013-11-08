@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/d3/barwidget.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 A widget for displaying stacked or grouped bar charts. Derived from http://bl.ocks.org/mbostock/3943967
 
@@ -12,7 +12,7 @@ A widget for displaying stacked or grouped bar charts. Derived from http://bl.oc
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget,
+var Widget = require("$:/core/modules/widgets/widget.js").widget,
 	d3 = require("$:/plugins/tiddlywiki/d3/d3.js").d3;
 
 var BarWidget = function(parseTreeNode,options) {

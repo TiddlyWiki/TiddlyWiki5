@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/widget.js
+title: $:/core/modules/widgets/widget.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Widget base class
 
@@ -47,7 +47,7 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	this.eventListeners = {};
 	// Hashmap of the widget classes
 	if(!this.widgetClasses) {
-		Widget.prototype.widgetClasses = $tw.modules.applyMethods("new_widget");
+		Widget.prototype.widgetClasses = $tw.modules.applyMethods("widget");
 	}
 };
 

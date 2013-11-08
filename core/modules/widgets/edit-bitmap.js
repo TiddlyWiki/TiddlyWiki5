@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/edit-bitmap.js
+title: $:/core/modules/widgets/edit-bitmap.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Edit-bitmap widget
 
@@ -16,7 +16,7 @@ Edit-bitmap widget
 var DEFAULT_IMAGE_WIDTH = 300,
 	DEFAULT_IMAGE_HEIGHT = 185;
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

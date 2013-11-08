@@ -1,7 +1,7 @@
 /*\
-title: $:/core/modules/new_widgets/navigator.js
+title: $:/core/modules/widgets/navigator.js
 type: application/javascript
-module-type: new_widget
+module-type: widget
 
 Navigator widget
 
@@ -12,7 +12,7 @@ Navigator widget
 /*global $tw: false */
 "use strict";
 
-var Widget = require("$:/core/modules/new_widgets/widget.js").widget;
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);

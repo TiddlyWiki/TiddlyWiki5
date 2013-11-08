@@ -12,7 +12,7 @@ Notifier mechanism
 /*global $tw: false */
 "use strict";
 
-var widget = require("$:/core/modules/new_widgets/widget.js");
+var widget = require("$:/core/modules/widgets/widget.js");
 
 var Notifier = function(wiki) {
 	this.wiki = wiki;
