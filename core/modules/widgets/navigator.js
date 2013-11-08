@@ -300,23 +300,27 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	this.getStoryList();
+	// Get the template tiddler if there is one
+	var templateTiddler = this.wiki.getTiddler(event.param);
 	// Create the new tiddler
-	var title;
+	var baseTitle = (templateTiddler && templateTiddler.fields.title) || "New Tiddler",
+		title;
 	for(var t=0; true; t++) {
-		title = "New Tiddler" + (t ? " " + t : "");
+		title =  baseTitle + (t ? " " + t : "");
 		if(!this.wiki.tiddlerExists(title)) {
 			break;
 		}
 	}
 	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
-		title: title,
-		text: "Newly created tiddler"
+		text: "Newly created tiddler",
+		title: title
 	},this.wiki.getModificationFields());
 	this.wiki.addTiddler(tiddler);
 	// Create the draft tiddler
 	var draftTitle = this.generateDraftTitle(title),
 		draftTiddler = new $tw.Tiddler({
-			text: "Type the text for the new tiddler",
+			text: "Type the text for the new tiddler"
+		},templateTiddler,{
 			title: draftTitle,
 			"draft.title": title,
 			"draft.of": title
