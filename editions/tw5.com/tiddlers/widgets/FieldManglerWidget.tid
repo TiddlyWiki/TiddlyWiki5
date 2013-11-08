@@ -9,7 +9,7 @@ tags: widget
 
 The field manager widget manipulates the fields and tags of a tiddler. It does so in response to the following WidgetMessages:
 
-|!Message |!Description
+|!Message |!Description |
 |''tw-remove-field'' |Remove the field specified in `event.param` |
 |''tw-add-field'' |Add the field specified in `event.param` |
 |''tw-remove-tag'' |Remove the tag specified in `event.param` |
