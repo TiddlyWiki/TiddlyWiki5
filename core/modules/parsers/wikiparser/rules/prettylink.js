@@ -44,6 +44,7 @@ exports.parse = function() {
 			tag: "a",
 			attributes: {
 				href: {type: "string", value: link},
+				"class": {type: "string", value: "tw-tiddlylink-external"},
 				target: {type: "string", value: "_blank"}
 			},
 			children: [{
