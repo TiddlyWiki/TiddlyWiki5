@@ -17,7 +17,7 @@ This release is the culmination of a large scale refactoring of the widget mecha
 ** `<$version>` - use the `<<version>>` built-in macro instead
 * The following widgets have had significant changes:
 ** EditWidget
-** ListWidget
+** ListWidget - the list widget itself no longer generates HTML nodes, so you'll often need to wrap the template in a `<div>` or a `<span>` to be able to style the content
 ** ViewWidget - `<$view format="link"/>` is no longer available; use an explicit `<$link>` widget instead
 * The following new widgets have been added:
 ** BrowseWidget
@@ -26,3 +26,5 @@ This release is the culmination of a large scale refactoring of the widget mecha
 ** SetVariableWidget
 * Widget attribute names have been made more consistent. In particular, `tiddler` is used to reference a tiddler by title, not `title`
 * It is no longer possible to import the macro definitions within another tiddler by transcluding that tiddler
+* The `body` element now has the class `tw-body`, which will need to be specified in any overrides
+** This was done due to the new support for HTML foreign objects, which makes it possible to have multiple `<body>` elements in a document
