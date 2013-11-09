@@ -175,16 +175,6 @@ DropZoneWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-/*
-Remove any DOM nodes created by this widget or its children
-*/
-DropZoneWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 exports.dropzone = DropZoneWidget;
 
 })();

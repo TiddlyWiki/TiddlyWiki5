@@ -247,16 +247,6 @@ EditTextWidget.prototype.saveChanges = function(text) {
 	}
 };
 
-/*
-Remove any DOM nodes created by this widget or its children
-*/
-EditTextWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 exports["edit-text"] = EditTextWidget;
 
 })();

@@ -47,16 +47,6 @@ EntityWidget.prototype.refresh = function(changedTiddlers) {
 	return false;
 };
 
-/*
-Remove any DOM nodes created by this widget
-*/
-EntityWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 exports.entity = EntityWidget;
 
 })();

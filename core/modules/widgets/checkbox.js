@@ -103,16 +103,6 @@ CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-/*
-Remove any DOM nodes created by this widget or its children
-*/
-CheckboxWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 exports.checkbox = CheckboxWidget;
 
 })();

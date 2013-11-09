@@ -63,16 +63,6 @@ BrowseWidget.prototype.refresh = function(changedTiddlers) {
 	return false;
 };
 
-/*
-Remove any DOM nodes created by this widget or its children
-*/
-BrowseWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 exports.browse = BrowseWidget;
 
 })();

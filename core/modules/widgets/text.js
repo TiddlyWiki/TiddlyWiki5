@@ -48,16 +48,6 @@ TextNodeWidget.prototype.refresh = function(changedTiddlers) {
 	return false;
 };
 
-/*
-Remove any DOM nodes created by this widget
-*/
-TextNodeWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 exports.text = TextNodeWidget;
 
 })();

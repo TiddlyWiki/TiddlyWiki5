@@ -94,16 +94,6 @@ EditBitmapWidget.prototype.refresh = function(changedTiddlers) {
 	return false;
 };
 
-/*
-Remove any DOM nodes created by this widget or its children
-*/
-EditBitmapWidget.prototype.removeChildDomNodes = function() {
-	$tw.utils.each(this.domNodes,function(domNode) {
-		domNode.parentNode.removeChild(domNode);
-	});
-	this.domNodes = [];
-};
-
 EditBitmapWidget.prototype.loadCanvas = function() {
 	var tiddler = this.wiki.getTiddler(this.editTitle),
 		currImage = new Image();
