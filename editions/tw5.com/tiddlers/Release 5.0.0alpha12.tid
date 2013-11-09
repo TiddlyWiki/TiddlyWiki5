@@ -1,8 +1,11 @@
-created: 201311081754007
+created: 201311081854007
 creator: JeremyRuston
-modified: 201311081754007
+modified: 201311081854007
 modifier: JeremyRuston
 title: Release 5.0.0-alpha.12
 tags: releasenote
+
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.11...v5.0.0-alpha.12]]//
 
 This minor release just contains fixes for the syncer and related adaptor modules for the TiddlyWeb edition and for TiddlyWiki5's integrated server.

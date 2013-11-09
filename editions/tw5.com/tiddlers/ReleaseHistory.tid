@@ -1,0 +1,16 @@
+created: 201311091054007
+creator: JeremyRuston
+modified: 201311091054007
+modifier: JeremyRuston
+title: ReleaseHistory
+
+Here are the details of recent releases of TiddlyWiki5.
+
+<$list filter="[tag[releasenote]!sort[created]]">
+<div>
+<h1><$link to={{!!title}}><$view field="title"/></$link></h1>
+<div>
+<$transclude/>
+</div>
+</div>
+</$list>

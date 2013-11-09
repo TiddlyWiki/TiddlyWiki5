@@ -18,7 +18,9 @@ This release is the culmination of a large scale refactoring of the widget mecha
 * The following widgets have had significant changes:
 ** EditWidget
 ** ListWidget - the list widget itself no longer generates HTML nodes, so you'll often need to wrap the template in a `<div>` or a `<span>` to be able to style the content
-** ViewWidget - `<$view format="link"/>` is no longer available; use an explicit `<$link>` widget instead
+** ViewWidget - has several changes:
+*** `<$view format="link"/>` is no longer available; use an explicit `<$link>` widget instead
+*** `<$view format="link"/>` is no longer available; use the TranscludeWidget instead
 * The following new widgets have been added:
 ** BrowseWidget
 ** DropzoneWidget
