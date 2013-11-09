@@ -1,11 +1,10 @@
 #!/bin/bash
 
+# Publish to NPM
+
+npm publish || exit 1
+
 # Deploy latest build to github
-
-# This deployment script needs several improvements:
-
-# 1) deploying to NPM
-# 2) deploying to TiddlySpace
 
 pushd ../jermolene.github.com
 
