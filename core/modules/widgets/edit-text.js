@@ -79,10 +79,10 @@ EditTextWidget.prototype.getEditInfo = function() {
 	if(this.editIndex) {
 		value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
 		update = function(value) {
-			var data = this.wiki.getTiddlerData(this.editTitle,{});
-			if(data[this.editIndex] !== text) {
-				data[this.editIndex] = text;
-				this.wiki.setTiddlerData(this.editTitle,data);
+			var data = self.wiki.getTiddlerData(self.editTitle,{});
+			if(data[self.editIndex] !== text) {
+				data[self.editIndex] = text;
+				self.wiki.setTiddlerData(self.editTitle,data);
 			}
 		};
 	} else {
