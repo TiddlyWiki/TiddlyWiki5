@@ -73,12 +73,21 @@ Get the tiddler being edited and current value
 */
 EditTextWidget.prototype.getEditInfo = function() {
 	// Get the edit value
-	var tiddler = this.wiki.getTiddler(this.editTitle),
-		value;
+	var self = this,
+		value,
+		update;
 	if(this.editIndex) {
 		value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
+		update = function(value) {
+			var data = this.wiki.getTiddlerData(this.editTitle,{});
+			if(data[this.editIndex] !== text) {
+				data[this.editIndex] = text;
+				this.wiki.setTiddlerData(this.editTitle,data);
+			}
+		};
 	} else {
 		// Get the current tiddler and the field name
+		var tiddler = this.wiki.getTiddler(this.editTitle);
 		if(tiddler) {
 			// If we've got a tiddler, the value to display is the field string value
 			value = tiddler.getFieldString(this.editField);
@@ -99,8 +108,16 @@ EditTextWidget.prototype.getEditInfo = function() {
 				value = this.editDefault;
 			}
 		}
+		update = function(value) {
+			var tiddler = self.wiki.getTiddler(self.editTitle),
+				updateFields = {
+					title: self.editTitle
+				};
+			updateFields[self.editField] = value;
+			self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+		};
 	}
-	return {tiddler: tiddler, value: value};
+	return {value: value, update: update};
 };
 
 /*
@@ -224,23 +241,9 @@ EditTextWidget.prototype.handleFocusEvent = function(event) {
 };
 
 EditTextWidget.prototype.saveChanges = function(text) {
-	if(this.editField) {
-		var tiddler = this.wiki.getTiddler(this.editTitle);
-		if(!tiddler) {
-			tiddler = new $tw.Tiddler({title: this.editTitle});
-		}
-		var oldValue = tiddler.getFieldString(this.editField);
-		if(text !== oldValue) {
-			var update = {};
-			update[this.editField] = text;
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
-		}
-	} else {
-		var data = this.wiki.getTiddlerData(this.editTitle,{});
-		if(data[this.editIndex] !== text) {
-			data[this.editIndex] = text;
-			this.wiki.setTiddlerData(this.editTitle,data);
-		}
+	var editInfo = this.getEditInfo();
+	if(text !== editInfo.value) {
+		editInfo.update(text);
 	}
 };
 
