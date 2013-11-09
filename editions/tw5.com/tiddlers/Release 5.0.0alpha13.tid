@@ -14,3 +14,4 @@ This release has several bug fixes:
 * Documentation updates
 * Improved deployment scripts
 * Made the modifier field in the subtitle be a link
+* Styling improvements for the CodeMirror plugin

@@ -1,15 +1,16 @@
-created: 201308232038
+created: 201308232038000
 creator: JeremyRuston
-modified: 201311011116
+modified: 201311091553002
 modifier: JeremyRuston
 tags: planning
 title: RoadMap
+type: text/vnd.tiddlywiki
 
 TiddlyWiki5 is under rapid development at the moment, moving through a series of stages from alpha, via beta into a stable release.
 
 ! Alpha Release
 
-The most significant piece of work required before TiddlyWiki5 can move out of alpha into beta is to upgrade the release process so that end users can more easily keep track of the new features. See the [[Plan for moving from Alpha to Beta]] for details of the work that is required.
+The last remaining improvement before TiddlyWiki5 moves to beta is an easier upgrade mechanism.
 
 ! Beta Release
 
