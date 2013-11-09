@@ -30,9 +30,14 @@ ViewWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var textNode = this.document.createTextNode(this.text);
-	parent.insertBefore(textNode,nextSibling);
-	this.domNodes.push(textNode);
+	if(this.text) {
+		var textNode = this.document.createTextNode(this.text);
+		parent.insertBefore(textNode,nextSibling);
+		this.domNodes.push(textNode);
+	} else {
+		this.makeChildWidgets();
+		this.renderChildren(parent,nextSibling);
+	}
 };
 
 /*

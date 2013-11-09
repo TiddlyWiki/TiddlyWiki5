@@ -11,7 +11,7 @@ The view widget displays the contents of a tiddler field in a specified format.
 
 ! Content and Attributes
 
-The content of the `<$view>` widget is ignored.
+The content of the `<$view>` widget is displayed if the field or property is missing or empty.
 
 |!Attribute |!Description |
 |tiddler |The title of the tiddler (defaults to the [[WidgetVariable: currentTiddler]]) |
