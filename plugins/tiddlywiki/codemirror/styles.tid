@@ -6,6 +6,8 @@ tags: [[$:/tags/stylesheet]]
 .CodeMirror {
 	height: auto;
 	border: 1px solid #ddd;
+	line-height: 1.5;
+	font-family: "Monaco", monospace;
 }
 
 .CodeMirror-scroll {
