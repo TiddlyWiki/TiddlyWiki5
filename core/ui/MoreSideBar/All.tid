@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/All
+tags: $:/tags/MoreSideBar
+caption: All
+
+<$list filter="[!is[system]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/ListItemTemplate"/>

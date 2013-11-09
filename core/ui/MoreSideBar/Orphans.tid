@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Orphans
+tags: $:/tags/MoreSideBar
+caption: Orphans
+
+<$list filter="[is[orphan]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/ListItemTemplate"/>

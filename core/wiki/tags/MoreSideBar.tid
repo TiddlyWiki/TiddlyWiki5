@@ -1,0 +1,3 @@
+title: $:/tags/MoreSideBar
+list: [[$:/core/ui/MoreSideBar/All]] [[$:/core/ui/MoreSideBar/Recent]] [[$:/core/ui/MoreSideBar/Tags]] [[$:/core/ui/MoreSideBar/Missing]] [[$:/core/ui/MoreSideBar/Drafts]] [[$:/core/ui/MoreSideBar/Orphans]] [[$:/core/ui/MoreSideBar/Types]] [[$:/core/ui/MoreSideBar/System]] [[$:/core/ui/MoreSideBar/Shadows]]
+

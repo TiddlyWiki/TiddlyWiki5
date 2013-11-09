@@ -875,18 +875,18 @@ canvas.tw-edit-bitmapeditor  {
 	border-bottom: 1px solid #ececec;
 }
 
-.tw-sidebar-tab-divider.tw-tab-divider {
+.tw-sidebar-lists .tw-tab-divider {
 	border-top: none;
 	height: 1px;
 	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
 }
 
-.tw-more-sidebar.tw-tab-set {
+.tw-more-sidebar {
 	white-space: nowrap;
 }
 
 @media (min-width: 770px) {
-	.tw-more-sidebar.tw-tab-set {
+	.tw-more-sidebar {
 		margin-left: -14px;
 	}
 }
@@ -897,6 +897,16 @@ canvas.tw-edit-bitmapeditor  {
 	text-align: right;
 	padding-top: 0;
 	padding-left: 0;
+}
+
+.tw-more-sidebar .tw-tab-buttons button {
+	display: block;
+	width: 100%;
+	text-align: right;
+}
+
+.tw-sidebar-lists .tw-more-sidebar .tw-tab-divider {
+	display: none;
 }
 
 .tw-more-sidebar .tw-tab-content {
@@ -917,7 +927,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
 	background-color: #fff;
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(255,255,255) 100%">>
+	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
 	border: none;
 }
 

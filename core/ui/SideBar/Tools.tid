@@ -1,4 +1,6 @@
-title: $:/core/ui/ToolsPanel
+title: $:/core/ui/SideBar/Tools
+tags: $:/tags/SideBar
+caption: Tools
 
 [[Wiki Info|$:/WikiInfo]]
 

@@ -1,0 +1,6 @@
+title: $:/core/ui/TiddlerInfo/References
+tags: $:/tags/TiddlerInfo
+caption: References
+
+<$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one" template="$:/core/ui/ListItemTemplate">
+</$list>

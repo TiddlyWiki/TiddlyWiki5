@@ -16,3 +16,10 @@ This release has several bug fixes:
 * Made the modifier field in the subtitle be a link
 * Styling improvements for the CodeMirror plugin
 * Improved the ViewWidget so that it falls back to displaying its content if the field/property is missing or empty
+* Extend use of the built-in `<<tabs>>` macro to the tiddler info panel, the control panel and the sidebar
+** This means that you can add new tabs by creating tiddlers with these tags, and optionally a `caption` field for the text of the tab:
+*** [[$:/tags/TiddlerInfo]] for tiddler info panel tabs
+*** [[$:/tags/ControlPanel]] for control panel tabs
+*** [[$:/tags/SideBar]] for sidebar tabs
+*** [[$:/tags/MoreSideBar]] for tabs in the "more" sidebar
+*** Change the order of tabs by adjusting the `list` field of the corresponding tag tiddler

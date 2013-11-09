@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Recent
+tags: $:/tags/MoreSideBar
+caption: Recent
+
+{{$:/snippets/recentchanges}}

@@ -1,0 +1,5 @@
+title: $:/core/ui/MoreSideBar/Drafts
+tags: $:/tags/MoreSideBar
+caption: Drafts
+
+<$list filter="[has[draft.of]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/ListItemTemplate"/>

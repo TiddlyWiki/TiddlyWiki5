@@ -1,3 +1,3 @@
-title: $:/state/moreSideBarTabSet-{$:/core/ui/MoreSideBar|$:/core/ui/MoreSideBar||}{$:/core/ui/SideBar|$:/core/ui/SideBar||}{$:/core/ui/PageTemplate|$:/core/ui/PageTemplate||}
+title: $:/moresidebartab-{$:/core/ui/SideBar|$:/core/ui/SideBar/More||}{$:/core/ui/SideBar|$:/core/ui/SideBar||}{$:/core/ui/PageTemplate|$:/core/ui/PageTemplate||}
 
-tagsTab
+$:/core/ui/MoreSideBar/Tags
