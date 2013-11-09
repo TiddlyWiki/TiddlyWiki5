@@ -1,7 +1,7 @@
 title: $:/themes/giffmex/blanca/styles
 tags: [[$:/tags/stylesheet]]
 
-html body { 
+html body.tw-body { 
 font-size:14px;
 line-height:20px; 
 background-color:#ffffff;

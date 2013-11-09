@@ -1,7 +1,7 @@
 title: $:/themes/giffmex/rocker/styles
 tags: [[$:/tags/stylesheet]]
 
-html body { font-size:14px;line-height:20px; background-color:#000000;}
+html body.tw-body { font-size:14px;line-height:20px; background-color:#000000;}
 html .tw-page-controls {background-color:#000000; padding:8px;}
 
 html .title {color: #cc0000;}
