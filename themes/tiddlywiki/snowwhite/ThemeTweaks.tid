@@ -2,7 +2,7 @@ title: $:/ControlPanel/ThemeTweaks
 
 You can tweak certain aspects of the ''Snow White'' theme.
 
-//Currently, you need to ''save and restart'' TiddlyWiki before these changes take effect. Also take care to preserve any backticks (&#96;) in the settings//
+//Currently, you need to toggle to a different theme and back (or save and restart) TiddlyWiki before these changes take effect. Also take care to preserve any backticks (&#96;) in the settings//
 
 ! Colours
 
