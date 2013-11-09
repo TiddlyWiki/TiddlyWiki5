@@ -13,3 +13,4 @@ This release has several bug fixes:
 * Fix an issue with the `<$edit-text>` widget
 * Documentation updates
 * Improved deployment scripts
+* Made the modifier field in the subtitle be a link
