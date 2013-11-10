@@ -86,19 +86,13 @@ This will be monospaced
 You can incorporate the content of one tiddler within another using the transclusion notation:
 
 * `{{MyTiddler}}` transcludes a single tiddler
-* `{{MyTiddler|tooltip}}` adds a tooltip
 * `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TiddlerTemplate|TiddlerTemplates]]
-* `{{MyTiddler|tooltip||TemplateTitle}}` specifies both a tooltip and a template for the transcluded content
-* `{{MyTiddler}width:40;height:50;}.firstClass.secondClass` transcludes a single tiddler, adding the specified styles and classes to the transcluded content
 
 A similar syntax can be used to transclude a list of tiddlers matching a specified [[TiddlerFilter|TiddlerFilters]]:
 
 ```
 {{{ [tag[mechanism]] }}}
-{{{ [tag[mechanism]] |tooltip}}}
 {{{ [tag[mechanism]] ||TemplateTitle}}}
-{{{ [tag[mechanism]] |tooltip||TemplateTitle}}}
-{{{ [tag[mechanism]] }}width:40;height:50;}.class.class
 ```
 
 ! Images
@@ -243,8 +237,6 @@ Here an attribute is specified as a macro invocation:
 ```
 <a href=<<MyMacro "Brian">>>link</a>
 ```
-
-* As a macro invocation 
 
 ! Widgets
 

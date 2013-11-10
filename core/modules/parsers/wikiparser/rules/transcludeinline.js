@@ -7,10 +7,7 @@ Wiki text rule for inline-level transclusion. For example:
 
 ```
 {{MyTiddler}}
-{{MyTiddler|tooltip}}
 {{MyTiddler||TemplateTitle}}
-{{MyTiddler|tooltip||TemplateTitle}}
-{{MyTiddler}width:40;height:50;}.class.class
 ```
 
 \*/
@@ -26,7 +23,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /\{\{([^\{\}\|]+)(?:\|([^\|\{\}]+))?(?:\|\|([^\|\{\}]+))?\}([^\}]*)\}(?:\.(\S+))?/mg;
+	this.matchRegExp = /\{\{([^\{\}\|]+)(?:\|\|([^\|\{\}]+))?\}\}/mg;
 };
 
 exports.parse = function() {
@@ -38,10 +35,7 @@ exports.parse = function() {
 		targetTitle = tr.title,
 		targetField = tr.field,
 		targetIndex = tr.index,
-		tooltip = this.match[2],
-		template = $tw.utils.trim(this.match[3]),
-		style = this.match[4],
-		classes = this.match[5];
+		template = $tw.utils.trim(this.match[2]);
 	// Prepare the transclude widget
 	var transcludeNode = {
 			type: "element",
@@ -63,15 +57,6 @@ exports.parse = function() {
 	}
 	if(targetIndex) {
 		transcludeNode.attributes.index = {type: "string", value: targetIndex};
-	}
-	if(tooltip) {
-		transcludeNode.attributes.tooltip = {type: "string", value: tooltip};
-	}
-	if(style) {
-		transcludeNode.attributes.style = {type: "string", value: style};
-	}
-	if(classes) {
-		transcludeNode.attributes["class"] = {type: "string", value: classes.split(".").join(" ")};
 	}
 	return [tiddlerNode];
 };
