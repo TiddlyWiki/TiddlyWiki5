@@ -840,8 +840,8 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: #666;
-	margin-left: 4px;
-	margin-right: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
 	font-weight: 300;
 	border: none;
 	background: inherit;
