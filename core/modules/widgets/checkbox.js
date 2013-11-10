@@ -62,7 +62,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	var checked = this.inputDomNode.checked,
 		tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler && tiddler.hasTag(this.checkboxTag) !== checked) {
-		var newTags = tiddler.fields.tags.slice(0),
+		var newTags = (tiddler.fields.tags || []).slice(0),
 			pos = newTags.indexOf(this.checkboxTag);
 		if(pos !== -1) {
 			newTags.splice(pos,1);
