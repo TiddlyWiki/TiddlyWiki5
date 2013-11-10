@@ -9,5 +9,6 @@ tags: releasenote
 
 This release has several bug fixes:
 
+* Improved the layout of the [[control panel|$:/ControlPanel]]
 * Fixed problem with using the CheckboxWidget to apply tags to tiddlers that don't have any existing tags
 * Fixed problem with default password for the PasswordWidget being the string "null"

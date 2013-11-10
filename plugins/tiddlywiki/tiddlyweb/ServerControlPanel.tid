@@ -1,6 +1,6 @@
-title: $:/core/ui/ServerControlPanel
-
-----
+title: $:/plugins/tiddlywiki/tiddlyweb/ServerControlPanel
+caption: Server
+tags: $:/tags/ControlPanel
 
 <$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
 Log in to ~TiddlyWeb: <$button message="tw-login" class="btn btn-info">Login</$button>
