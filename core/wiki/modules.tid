@@ -4,7 +4,7 @@ title: $:/snippets/modules
 {{$:/docs/moduletypes/$type$}}
 \end
 <$list filter="[moduletypes[]]">
-!! <<listItem>>
+!! <$macrocall $name="listItem" $type="text/plain" $output="text/plain"/>
 <$macrocall $name="describeModuleType" type=<<listItem>>/>
 <ul><$list filter="[is[current]modules[]]"><li><$link><<currentTiddler>></$link>
 </li>
