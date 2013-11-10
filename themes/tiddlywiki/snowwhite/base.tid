@@ -956,3 +956,15 @@ canvas.tw-edit-bitmapeditor  {
 	width: 1em;
 	height: 1em;
 }
+
+/*
+** Control panel
+*/
+
+.tw-control-panel td {
+	padding: 4px;
+}
+
+.tw-control-panel table, .tw-control-panel table input, .tw-control-panel table textarea {
+	width: 100%;
+}

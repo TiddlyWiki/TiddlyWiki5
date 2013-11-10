@@ -1,0 +1,11 @@
+title: $:/core/ui/ControlPanel/Appearance
+tags: $:/tags/ControlPanel
+caption: Appearance
+
+! Theme
+
+{{$:/snippets/themeswitcher}}
+
+! Story View
+
+{{$:/snippets/viewswitcher}}

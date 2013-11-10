@@ -1,6 +1,0 @@
-title: $:/WikiInfo
-
-* Tiddlers: <$count filter="[!is[system]]"/>
-* System tiddlers: <$count filter="[is[system]]"/>
-* Shadow tiddlers: <$count filter="[is[shadow]]"/>
-** Over-ridden shadow tiddlers: <$count filter="[!is[system]is[shadow]]"/>

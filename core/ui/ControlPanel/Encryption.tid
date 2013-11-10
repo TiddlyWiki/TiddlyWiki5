@@ -1,0 +1,5 @@
+title: $:/core/ui/ControlPanel/Encryption
+tags: $:/tags/ControlPanel
+caption: Encryption
+
+{{$:/snippets/encryptionstatus}}

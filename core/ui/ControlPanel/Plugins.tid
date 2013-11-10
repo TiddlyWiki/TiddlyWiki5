@@ -1,0 +1,7 @@
+title: $:/core/ui/ControlPanel/Plugins
+tags: $:/tags/ControlPanel
+caption: Plugins
+
+<table><tbody><tr><th>Title</th><th>Description</th></tr><$list filter="[!has[draft.of]has[plugin-type]sort[title]]"><tr><td><$link to={{!!title}}><$view field="title"/></$link></td><td><$view field="description"/></td></tr></$list>
+</tbody>
+</table>

@@ -18,8 +18,6 @@ This is the developer documentation hub for TiddlyWiki.
 
 ! Internal Objects and Mechanisms
 
-{{mechanism}}
-
 <$list filter="[tag[mechanism]sort[title]]" type="ul"/>
 
 ! Module types
@@ -29,8 +27,6 @@ See SyncAdaptorModules.
 
 !! DeserializerModules
 
-Deserializers are modules that read tiddlers from different text formats:
-
-{{deserializers}}
+Deserializers are modules that load tiddlers from different text formats:
 
 <$list filter="[tag[deserializers]sort[title]]" type="ul"/>

@@ -1,6 +1,6 @@
-title: $:/ConfigInfo
-
-This tiddler displays the internal configuration of this wiki, which can be useful for troubleshooting, or just to help understand how TiddlyWiki5 works.
+title: $:/core/ui/ControlPanel/Internals
+tags: $:/tags/ControlPanel
+caption: Internals
 
 ! Tiddler fields
 
