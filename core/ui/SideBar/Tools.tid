@@ -2,10 +2,6 @@ title: $:/core/ui/SideBar/Tools
 tags: $:/tags/SideBar
 caption: Tools
 
-[[Wiki Info|$:/WikiInfo]]
-
----
-
 {{$:/snippets/viewswitcher}}
 
 ---
