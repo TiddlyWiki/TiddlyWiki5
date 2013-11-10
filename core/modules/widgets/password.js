@@ -34,7 +34,7 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Get the current password
-	var password = $tw.browser ? $tw.utils.getPassword(this.passwordName) : "";
+	var password = $tw.browser ? $tw.utils.getPassword(this.passwordName) || "" : "";
 	// Create our element
 	var domNode = this.document.createElement("input");
 	domNode.setAttribute("type","password");
