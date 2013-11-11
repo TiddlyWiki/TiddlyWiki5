@@ -40,8 +40,7 @@ exports.parse = function() {
 	var transcludeNode = {
 			type: "element",
 			tag: "$transclude",
-			attributes: {},
-			isBlock: true
+			attributes: {}
 		};
 	var tiddlerNode = {
 		type: "element",
@@ -49,7 +48,6 @@ exports.parse = function() {
 		attributes: {
 			tiddler: {type: "string", value: targetTitle}
 		},
-		isBlock: true,
 		children: [transcludeNode]
 	};
 	if(template) {
