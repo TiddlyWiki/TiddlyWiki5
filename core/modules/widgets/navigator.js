@@ -24,6 +24,7 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tw-cancel-tiddler", handler: "handleCancelTiddlerEvent"},
 		{type: "tw-close-tiddler", handler: "handleCloseTiddlerEvent"},
 		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
+		{type: "tw-close-all-other-tiddlers", handler: "handleCloseAllOtherTiddlersEvent"},
 		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"},
 		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"},
 	]);
@@ -131,6 +132,12 @@ NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
 // Close all tiddlers
 NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 	this.storyList = [];
+	this.saveStoryList();
+	return false;
+};
+// Close all other tiddlers
+NavigatorWidget.prototype.handleCloseAllOtherTiddlersEvent = function(event) {
+	this.storyList = [event.tiddlerTitle];
 	this.saveStoryList();
 	return false;
 };
