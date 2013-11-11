@@ -135,7 +135,7 @@ NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
 	this.saveStoryList();
 	return false;
 };
-// Close all other tiddlers
+// Close other tiddlers
 NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 	this.storyList = [event.tiddlerTitle];
 	this.saveStoryList();
