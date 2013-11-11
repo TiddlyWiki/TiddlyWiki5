@@ -878,7 +878,7 @@ exports.search = function(text,options) {
 	// Function to check a given tiddler for the search term
 	var searchTiddler = function(title) {
 		if(!searchTermsRegExps) {
-			return false;
+			return true;
 		}
 		var tiddler = self.getTiddler(title);
 		if(!tiddler) {
