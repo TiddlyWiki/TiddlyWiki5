@@ -233,8 +233,8 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 		if(this.storyList[t] === event.tiddlerTitle) {
 			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
 			if(tiddler) {
-				var draftTitle = tiddler.fields["draft.title"],
-					draftOf = tiddler.fields["draft.of"];
+				var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
+					draftOf = (tiddler.fields["draft.of"] || "").trim();
 				if(draftTitle) {
 					var isRename = draftOf !== draftTitle,
 						isConfirmed = true;
