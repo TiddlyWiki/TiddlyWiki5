@@ -40,9 +40,8 @@ exports.parse = function() {
 	var transcludeNode = {
 			type: "element",
 			tag: "$transclude",
-			attributes: {
-				tiddler: {type: "string", value: template || targetTitle}
-			}
+			attributes: {},
+			isBlock: true
 		};
 	var tiddlerNode = {
 		type: "element",
@@ -50,13 +49,19 @@ exports.parse = function() {
 		attributes: {
 			tiddler: {type: "string", value: targetTitle}
 		},
+		isBlock: true,
 		children: [transcludeNode]
 	};
-	if(targetField) {
-		transcludeNode.attributes.field = {type: "string", value: targetField};
-	}
-	if(targetIndex) {
-		transcludeNode.attributes.index = {type: "string", value: targetIndex};
+	if(template) {
+		transcludeNode.attributes.tiddler = {type: "string", value: template};
+	} else {
+		transcludeNode.attributes.tiddler = {type: "string", value: targetTitle};
+		if(targetField) {
+			transcludeNode.attributes.field = {type: "string", value: targetField};
+		}
+		if(targetIndex) {
+			transcludeNode.attributes.index = {type: "string", value: targetIndex};
+		}
 	}
 	return [tiddlerNode];
 };
