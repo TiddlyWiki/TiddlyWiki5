@@ -1,0 +1,17 @@
+title: $:/themes/grayeul/etch/colourmappings
+type: application/x-tiddler-dictionary
+
+/* This is used to map the functional elements to a specific
+   list of individually defined colours found in the colours.td
+   which makes it easier to set several functional items to a
+   common color.
+*/
+
+tiddlerbackground: {{$:/themes/grayeul/etch/colours##background}}
+foreground: {{$:/themes/grayeul/etch/colours##foreground}}
+pagebackground: {{$:/themes/grayeul/etch/colours##pagebackground}}
+linkbackground: {{$:/themes/grayeul/etch/colours##background}}
+linkforeground: {{$:/themes/grayeul/etch/colours##primary}}
+dropdownbackground: whitesmoke;
+dropdownborder: {{$:/themes/grayeul/etch/colours##medium}}
+hoverbut: {{$:/themes/grayeul/etch/colours##hoverbut}}

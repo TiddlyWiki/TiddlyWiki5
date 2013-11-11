@@ -1,0 +1,489 @@
+title: $:/themes/grayeul/etch/base
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+\define border-radius(radius)
+```
+  -webkit-border-radius: $radius$;
+     -moz-border-radius: $radius$;
+          border-radius: $radius$;
+```
+\end
+\define box-shadow(shadow)
+```
+  -webkit-box-shadow: $shadow$;
+     -moz-box-shadow: $shadow$;
+          box-shadow: $shadow$;
+```
+\end
+\define filter(filter)
+```
+  -webkit-filter: $filter$;
+     -moz-filter: $filter$;
+          filter: $filter$;
+```
+\end
+\define transition(transition)
+```
+  -webkit-transition: $transition$;
+     -moz-transition: $transition$;
+          transition: $transition$;
+```
+\end
+\define transform-origin(origin)
+```
+  -webkit-transform-origin: $origin$;
+     -moz-transform-origin: $origin$;
+          transform-origin: $origin$;
+```
+\end
+\define background-linear-gradient(gradient)
+```
+background-image: linear-gradient($gradient$);
+background-image: -o-linear-gradient($gradient$);
+background-image: -moz-linear-gradient($gradient$);
+background-image: -webkit-linear-gradient($gradient$);
+background-image: -ms-linear-gradient($gradient$);
+```
+\end
+
+/*
+** Start with the normalize CSS reset, and then belay some of its effects
+*/
+
+{{$:/themes/tiddlywiki/snowwhite/reset}}
+
+*, input[type="search"] {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+/*
+** Basic element styles
+*/
+
+html {
+        font-family: {{$:/themes/grayeul/etch/settings##fontfamily}};
+}
+
+body.tw-body {
+        font-size: {{$:/themes/grayeul/etch/settings##fontsize}};
+        line-height: {{$:/themes/grayeul/etch/settings##lineheight}};
+        color: {{$:/themes/grayeul/etch/colourmappings##foreground}};
+        background-color: {{$:/themes/grayeul/etch/colourmappings##pagebackground}};
+        word-wrap: break-word;
+}
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1em;
+	font-weight: 300;
+}
+
+pre {
+	display: block;
+	padding: 14px;
+	margin: 0 0 14px;
+	word-break: normal;
+	word-wrap: break-word;
+	white-space: pre;
+	white-space: pre-wrap;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	padding: 0 3px 2px;
+	<<border-radius 3px>> 
+}
+
+
+code {
+        color: #d14;
+        background-color: #f7f7f9;
+        border: 1px solid #e1e1e8;
+        white-space: pre-wrap;
+        padding: 0 3px 2px;
+}
+.tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
+	max-width: 100%;
+}
+embed {
+	max-width: 100%;
+	max-height: 280px;
+}
+
+/*
+** Links
+*/
+
+a.tw-tiddlylink {
+        text-decoration: none;
+        font-weight: normal;
+        color: {{$:/themes/grayeul/etch/colourmappings##linkforeground}};
+        -webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
+}
+
+.tw-sidebar-lists a.tw-tiddlylink {
+        color: #999;
+}
+
+.tw-sidebar-lists a.tw-tiddlylink:hover {
+        color: #444;
+}
+
+a.tw-tiddlylink:hover {
+        text-decoration: underline;
+}
+
+a.tw-tiddlylink-resolves {
+}
+
+a.tw-tiddlylink-shadow {
+        font-weight: bold;
+}
+
+a.tw-tiddlylink-shadow.tw-tiddlylink-resolves {
+	font-weight: normal;
+}
+
+a.tw-tiddlylink-missing {
+	font-style: italic;
+}
+
+a.tw-tiddlylink-external {
+	text-decoration: underline;
+}
+/*
+** Buttons
+*/
+
+.btn-invisible {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+}
+
+.btn-mini {
+	color: #e0e0e0;
+}
+
+.btn-mini:hover {
+	color: #444;
+}
+
+/*
+** Page layout
+*/
+
+.sidebar-header {
+        color: #acacac;
+        text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
+}
+
+.sidebar-header .title a.tw-tiddlylink-resolves {
+        font-weight: 300;
+}
+
+.sidebar-header .tw-sidebar-lists p {
+        margin-top: 3px;
+        margin-bottom: 3px;
+}
+
+.tw-search a svg {
+	height: 0.75em;
+}
+
+.tw-search-results {
+	padding-top: 14px;
+}
+
+.tw-page-controls {
+	margin-top: 14px;
+}
+
+.tw-page-controls a.tw-tiddlylink:hover {
+	text-decoration: none;
+}
+
+.tw-page-controls svg {
+	height: 1.5em;
+	min-width: 1px;
+	padding-right: 0.5em;
+	fill: #fff;
+	<<filter "drop-shadow(1px 1px 2px rgba(0,0,0,0.15))">>
+	<<transition "fill 150ms ease-in-out">>
+}
+
+.tw-page-controls svg:hover {
+	fill: #000;
+	<<filter "drop-shadow(1px 1px 2px rgba(255,255,255,0.9))">>
+}
+
+.tw-menu-list-item {
+	white-space: nowrap;
+}
+
+.tw-menu-list-count {
+	font-weight: bold;
+}
+
+.tw-open-tiddler-list {
+	<<transform-origin "0% 0%">>
+}
+
+.tw-menu-list-subitem {
+	padding-left: 7px;
+}
+
+/*
+** Tiddler styles
+*/
+
+.tw-tiddler-frame {
+	padding: 14px;
+	margin-bottom: 28px;
+	background-color: {{$:/themes/grayeul/etch/colourmappings##tiddlerbackground}};
+}
+
+.tw-tiddler-info {
+	overflow: hidden;
+	padding: 14px 42px 14px 42px;
+	background-color: #f8f8f8;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
+}
+
+.tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #f8f8f8;
+}
+
+.tw-view-field-table {
+	width: 100%;
+}
+
+.tw-view-field-name {
+	width: 1%; /* Makes this column be as narrow as possible */
+	text-align: right;
+	font-style: italic;
+}
+
+.tw-view-field-value {
+}
+
+@media screen {
+	.tw-tiddler-frame {
+		<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
+	}
+}
+
+.tw-tag-label {
+	display: inline-block;
+	padding: 0px 3px;
+	font-size: 0.9em;
+	color: black;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #D5AD34;
+ 	<<border-radius 8px>>
+}
+.tw-tag-label:hover{
+	display: inline-block;
+	padding: 2px 4px;
+	font-size: 1.0em;
+	color: black;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #D5AD34;
+ 	<<border-radius 8px>>
+}
+.tw-image-down-arrow {
+  height: 1em;
+}
+
+@media (max-width: {{$:/themes/grayeul/etch/settings##storywidth}}) {
+	.sidebar-header {
+     width: {{$:/themes/grayeul/etch/settings##sidewidth}};
+	}
+
+	.story-river {
+     position: relative;
+     left: 0;
+     right: {{$:/themes/grayeul/etch/settings##sidewidth}};
+     padding-left: {{$:/themes/grayeul/etch/settings##storypad}};
+     padding-right: {{$:/themes/grayeul/etch/settings##storypad}};
+     min-width: {{$:/themes/grayeul/etch/settings##minstorywidth}};
+	}
+}
+
+.titlebar {
+	font-weight: 300;
+	font-size: 2.35em;
+	line-height: 1.2em;
+	color: #182955;
+}
+
+.titlebar img {
+	height: 1em;
+}
+
+@media (min-width: {{$:/themes/grayeul/etch/settings##storywidth}}) {
+       .sidebar-header {
+          float: right;
+          width: {{$:/themes/grayeul/etch/settings##sidewidth}};
+       }
+        .oldsidebar-header {
+                position: fixed;
+                top: {{$:/themes/grayeul/etch/settings##storytop}};
+                left: {{$:/themes/grayeul/etch/settings##storyright}};
+                bottom: 0;
+                right: 0;
+                overflow-y: auto;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                margin: 0 0 0 0;
+                padding: 20px 0 20px 20px;
+        }
+
+        .story-river {
+           position: absolute;
+           top: {{$:/themes/grayeul/etch/settings##storytop}};
+           left: 0;
+           right: {{$:/themes/grayeul/etch/settings##sidewidth}};
+           padding-left: {{$:/themes/grayeul/etch/settings##storypad}};
+           padding-right: {{$:/themes/grayeul/etch/settings##storypad}};
+           min-width: 400px;
+        }
+}
+.tweak-wideinput {
+    width: 25em;
+    text-align: center;
+}
+.tw-tiddler-missing .title {
+  font-style: italic;
+  font-weight: normal;
+}
+.tw-subtitle {
+	font-size: 0.9em;
+	color: #c0c0c0;
+	font-weight: 300;
+}
+
+.tw-tiddler-frame .tw-tiddler-controls {
+	float: right;
+  height: 1em;
+}
+
+/* .tw-image-info-button used for buttons at top of tiddler
+ * Heirarchy is tw-tiddler-controls->button->svg
+ */
+.tw-image-info-button {
+}
+/* For any svg within tw-tiddler-controls class, set fill and height */
+.tw-tiddler-controls svg {
+  fill: #ccc;
+  height:20px;
+}
+/* For anything within tw-tiddler-controls that gets hovered (like button/svg)
+ * Set fill to a darker color */
+.tw-tiddler-controls :hover {
+	fill: {{$:/themes/grayeul/etch/colourmappings##hoverbut}};
+}
+.tw-tiddler-controls button {
+	margin: 0 0 0 5px;
+	vertical-align: baseline;
+}
+
+/*
+.tw-tiddler-controls button.tw-selected svg {
+	fill: #444;
+	<<filter "drop-shadow(0px -1px 2px rgba(0,0,0,0.25))">>
+}
+*/
+/*
+** Dropdowns
+*/
+
+.tw-drop-down {
+	min-width: 280px;
+	border: 1px solid {{$:/themes/grayeul/etch/colourmappings##dropdownborder}};
+	background-color: {{$:/themes/grayeul/etch/colourmappings##dropdownbackground}};
+	<<border-radius 4px>>
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
+	padding: 7px 0 7px 0;
+	margin: 4px 0 0 0;
+	white-space: nowrap;
+}
+
+.tw-drop-down a {
+	display: block;
+	padding: 0 14px 0 14px;
+}
+
+.tw-drop-down a:hover {
+	color: {{$:/themes/grayeul/etch/colourmappings##linkbackground}};
+	background-color: {{$:/themes/grayeul/etch/colourmappings##linkforeground}};
+	text-decoration: none;
+}
+
+
+/*
+** Tabs
+*/
+
+.tw-tab-set {
+}
+
+.tw-tab-buttons {
+	font-size: 0.85em;
+	line-height: 100%;
+	padding-top: 1em;
+	margin-bottom: -1px;
+}
+
+.tw-tab-buttons button {
+	color: #666;
+	margin-left: 4px;
+	margin-right: 4px;
+	font-weight: 300;
+	border: none;
+	background: inherit;
+}
+
+.tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	border-left: 1px solid #d8d8d8;
+	border-top: 1px solid #d8d8d8;
+	border-right: 1px solid #d8d8d8;
+	margin-bottom: -1px;
+}
+
+.tw-tab-buttons button:not(.tw-tab-selected) {
+	background-color: #d8d8d8;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.tw-tab-divider {
+	border-top: 1px solid #d8d8d8;
+}
+
+.tw-tab-content {
+	padding-top: 14px;
+}
+
+.tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
+	background-color: #ececec;
+	border-bottom: 1px solid #ececec;
+}
+
+.tw-sidebar-tab-divider.tw-tab-divider {
+	border-top: none;
+	height: 1px;
+	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
+}
+
+.tw-more-sidebar.tw-tab-set {
+	white-space: nowrap;
+}
