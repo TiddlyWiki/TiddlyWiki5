@@ -43,7 +43,6 @@ MsDownloadSaver.prototype.info = {
 Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
-	alert("Boo")
 	return !!window.navigator.msSaveBlob;
 };
 
