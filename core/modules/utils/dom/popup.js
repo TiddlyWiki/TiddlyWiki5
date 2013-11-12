@@ -26,16 +26,28 @@ Popup.prototype.show = function(options) {
 	this.title = options.title;
 	this.wiki = options.wiki;
 	this.anchorDomNode = options.domNode;
+	$tw.utils.addClass(this.anchorDomNode,"tw-popup");
 	this.rootElement.addEventListener("click",this,false);
 };
 
 Popup.prototype.handleEvent = function(event) {
-	if(event.type === "click" && this.anchorDomNode !== event.target && !$tw.utils.domContains(this.anchorDomNode,event.target)) {
-		this.cancel();
+	// Dismiss the popup if we get a click on an element that doesn't have .tw-popup class
+	if(event.type === "click") {
+		var node = event.target;
+		while(node && !$tw.utils.hasClass(node,"tw-popup")) {
+			node = node.parentNode;
+		}
+		if(!node) {
+			this.cancel();
+		}
 	}
 };
 
 Popup.prototype.cancel = function() {
+	if(this.anchorDomNode) {
+		$tw.utils.removeClass(this.anchorDomNode,"tw-popup");
+		this.anchorDomNode = null;		
+	}
 	this.rootElement.removeEventListener("click",this,false);
 	if(this.title) {
 		this.wiki.deleteTiddler(this.title);
