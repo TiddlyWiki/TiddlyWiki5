@@ -1,0 +1,12 @@
+title: $:/editions/tw5.com/TiddlerInfo/StaticLink
+tags: $:/tags/TiddlerInfo
+caption: Static Link
+
+\define makeLink()
+http://five.tiddlywiki.com/static/{$currentTiddler$}/<$view tiddler=<<currentTiddler>> field="title" format="htmlencoded"/>.html
+\end
+Copy this link to this tiddler on <a href=<<makeLink>>>http://tiddlywiki.com/static/<$view field="title" format="htmlencoded"/>.html</a>:
+
+<input value=<<makeLink>> size="80"/>
+
+//Note that editing the URL here won't have any effect; it is presented in a text box just to make it easier to copy and paste//
