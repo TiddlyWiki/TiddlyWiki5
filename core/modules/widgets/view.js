@@ -57,6 +57,12 @@ ViewWidget.prototype.execute = function() {
 		case "htmlencoded":
 			this.text = this.getValueAsHtmlEncoded();
 			break;
+		case "urlencoded":
+			this.text = this.getValueAsUrlEncoded();
+			break;
+		case "doubleurlencoded":
+			this.text = this.getValueAsDoubleUrlEncoded();
+			break;
 		case "date":
 			this.text = this.getValueAsDate(this.viewTemplate);
 			break;
@@ -131,6 +137,14 @@ ViewWidget.prototype.getValueAsHtmlWikified = function() {
 
 ViewWidget.prototype.getValueAsHtmlEncoded = function() {
 	return $tw.utils.htmlEncode(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsUrlEncoded = function() {
+	return encodeURIComponent(this.getValueAsText());
+};
+
+ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
+	return encodeURIComponent(encodeURIComponent(this.getValueAsText()));
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {
