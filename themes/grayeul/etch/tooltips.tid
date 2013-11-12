@@ -1,0 +1,45 @@
+title: $:/themes/grayeul/etch/tooltips
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*==================================================*/
+/*  $Tooltips                                       */
+/*==================================================*/
+
+[tip-text] {
+        position:relative;
+}
+
+[tip-text]:before {
+        display:none;
+        content:attr(tip-text);
+        position:absolute;
+        top:0;
+        right:24px;
+        padding:2px;
+        background:whitesmoke;
+        color:black;
+        font-size: 10pt;
+        line-height:1em;
+        border-style: solid;
+        border-width:1pt;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        z-index=8;
+        white-space:nowrap;
+        word-wrap:normal;
+        transition-property:display;
+        -webkit-transition-property:display;
+        transition-delay: 0s;
+        -webkit-transition-delay:0s;
+}
+[tip-text]:hover:before {
+        display:block;
+        transition-property:display;
+        -webkit-transition-property:display;
+        transition-duration: 2s;
+        -webkit-transition-delay: 2s;
+        transition-delay: 2s;
+}

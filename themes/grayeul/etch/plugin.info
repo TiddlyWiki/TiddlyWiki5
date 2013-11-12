@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/grayeul/etch",
+	"name": "etch",
+	"author": "Bob Robison",
+	"version": "0.0.1",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "A compressed/compact theme with adjustable theme options, and auto-expanding story-width"
+}

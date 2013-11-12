@@ -1,0 +1,127 @@
+title: $:/ControlPanel/ThemeTweaks
+tags: $:/tags/ControlPanel
+caption: ThemeTweaks
+
+You can tweak certain aspects of the etch theme
+
+//Currently, you need to ''save and restart'' TiddlyWiki before these changes take effect. Also take care to preserve any backticks (&#96;) in the settings//
+
+! Base Colours
+
+* Primary colour: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colours"
+    index="primary"
+    type="color"
+    default=""
+    tag="input"/>
+* Background colour: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colours"
+    index="background"
+    type="color"
+    default=""
+    tag="input"/>
+* Foreground colour: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colours"
+    index="foreground"
+    type="color"
+    default=""
+    tag="input"/>
+* Page background colour: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colours"
+    index="pagebackground"
+    type="color"
+    default=""
+    tag="input"/>
+* Medium contrast color: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colours"
+    index="medium"
+    type="color"
+    default=""
+    tag="input"/>
+
+! Colour mappings
+
+* Tiddler background colour mapping:<$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="tiddlerbackground"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Tiddler foreground colour mapping: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="foreground"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Page background colour mapping: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="pagebackground"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Link background colour mapping: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="linkbackground"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Link foreground colour mapping: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="linkforeground"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Dropdown background colour mapping: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="dropdownbackground"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Dropdown border colour mapping: <$edit-text
+    tiddler="$:/themes/grayeul/etch/colourmappings"
+    index="dropdownborder"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+
+! Settings
+
+* Font family: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="fontfamily"
+    class="tweak-wideinput"
+    default=""
+    tag="input"/>
+* Font size: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="fontsize"
+    default=""
+    tag="input"/>
+* Line height: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="lineheight"
+    default=""
+    tag="input"/>
+* Story top position: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="storytop"
+    default=""
+    tag="input"/>
+** //(the distance between the top of the screen ad the top margin of the story river or tiddler area)//
+* MinStory width: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="minstorywidth"
+    default=""
+    tag="input"/>
+* Sidebar width: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="sidewidth"
+    default=""
+    tag="input"/>
+** //(the width of the right-hand sidebar)//
+* Story width: <$edit-text
+    tiddler="$:/themes/grayeul/etch/settings"
+    index="storywidth"
+    default=""
+    tag="input"/>
+**  //(actually used for window width to change modes )//

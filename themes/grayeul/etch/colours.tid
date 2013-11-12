@@ -1,0 +1,13 @@
+title: $:/themes/grayeul/etch/colours
+type: application/x-tiddler-dictionary
+
+/* This is where basic colours used are defined
+   The functional definitions (which colours used where)
+   is found in the colourmappings.tid
+*/
+primary: `#5959C0`
+background: `#fff`
+foreground: `#333`
+pagebackground: `#ececec`
+medium: `#bbb`
+hoverbut: `blue`

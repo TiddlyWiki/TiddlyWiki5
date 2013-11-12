@@ -1,0 +1,13 @@
+title: $:/themes/grayeul/etch/settings
+type: application/x-tiddler-dictionary
+
+fontfamily: `Helvetica, Arial, sans-serif`
+fontsize: `14px`
+lineheight: `0.94em`
+storyleft: `20px`
+storytop: `20px`
+mintiddlerwidth: `400px`
+minstorywidth: `450px`
+storywidth: `700px`
+storypad: `20px`
+sidewidth: `20em`
