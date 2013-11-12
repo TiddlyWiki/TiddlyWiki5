@@ -29,7 +29,7 @@ exports.removeChildren = function(node) {
 };
 
 exports.hasClass = function(el,className) {
-	return el.className.split(" ").indexOf(className) !== -1;
+	return el && el.className && el.className.split(" ").indexOf(className) !== -1;
 };
 
 exports.addClass = function(el,className) {
