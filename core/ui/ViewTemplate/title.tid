@@ -8,7 +8,7 @@ fill:$(foregroundColor)$;
 
 </span><$setvariable name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude tiddler={{!!icon}}/></span></$setvariable> <span class="title"><$view field="title"/></span></div>
 
-<$reveal type="nomatch" text="" default="" state=<<qualify "$:/state/tiddlerInfo">> class="tw-tiddler-info" animate="yes">
+<$reveal type="nomatch" text="" default="" state=<<qualify "$:/state/tiddlerInfo">> class="tw-tiddler-info tw-popup" animate="yes">
 
 <$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 
