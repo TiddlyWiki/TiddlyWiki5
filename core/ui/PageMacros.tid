@@ -1,6 +1,6 @@
 title: $:/core/ui/PageMacros
 
-\define tabs(tabsList,default,state:"$:/currentTab")
+\define tabs(tabsList,default,state:"$:/state/tab")
 <div class="tw-tab-buttons"><$list filter="$tabsList$" variable="currentTab"><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tw-tab-selected"><$view tiddler=<<currentTab>> field="caption"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/></$view> </$button>
 </$list>
 </div>
