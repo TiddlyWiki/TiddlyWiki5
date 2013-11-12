@@ -16,7 +16,7 @@ fill:$(foregroundColor)$;
  */
 -->
 
-<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><span tip-text="Info"><$button popup=<<qualify "$:/state/tiddlerInfo">> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button></span><<buttontip "tw-edit-tiddler" "edit-button" "Edit Tiddler">><<buttontip "tw-close-all-other" "close-others-button" "Close other Tiddlers">><<buttontip "tw-close-tiddler" "close-button" "Close this Tiddlers">>
+<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><span tip-text="Info"><$button popup=<<qualify "$:/state/tiddlerInfo">> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button></span><<buttontip "tw-edit-tiddler" "edit-button" "Edit Tiddler">><<buttontip "tw-close-other-tiddlers" "close-others-button" "Close other Tiddlers">><<buttontip "tw-close-tiddler" "close-button" "Close this Tiddlers">>
 </span><$setvariable name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude tiddler={{!!icon}}/></span></$setvariable> <span class="title"><$view field="title"/></span></div>
 
 <$reveal type="nomatch" text="" default="" state=<<qualify "$:/state/tiddlerInfo">> class="tw-tiddler-info" animate="yes">
