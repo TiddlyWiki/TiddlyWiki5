@@ -3,10 +3,15 @@ tags: $:/tags/TiddlerInfo
 caption: Static Link
 
 \define makeLink()
-http://five.tiddlywiki.com/static/{$currentTiddler$}/<$view tiddler=<<currentTiddler>> field="title" format="htmlencoded"/>.html
+http://five.tiddlywiki.com/static/<$view tiddler=<<currentTiddler>> field="title" format="doubleurlencoded"/>.html
 \end
-Copy this link to this tiddler on <a href=<<makeLink>>>http://tiddlywiki.com/static/<$view field="title" format="htmlencoded"/>.html</a>:
+\define outerMakeLink()
+<$macrocall $name="makeLink" $output="text/plain"/>
+\end
+A static HTML representation of this tiddler is available at the URL:
 
-<input value=<<makeLink>> size="80"/>
+<<outerMakeLink>>
+
+<input value=<<outerMakeLink>> size="80"/>
 
 //Note that editing the URL here won't have any effect; it is presented in a text box just to make it easier to copy and paste//
