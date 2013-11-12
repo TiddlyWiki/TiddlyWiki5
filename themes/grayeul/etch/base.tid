@@ -208,7 +208,6 @@ a.tw-tiddlylink-external {
 	height: 1.5em;
 	min-width: 1px;
 	padding-right: 0.5em;
-	fill: #fff;
 	<<filter "drop-shadow(1px 1px 2px rgba(0,0,0,0.15))">>
 	<<transition "fill 150ms ease-in-out">>
 }
@@ -377,8 +376,21 @@ a.tw-tiddlylink-external {
 /* .tw-image-info-button used for buttons at top of tiddler
  * Heirarchy is tw-tiddler-controls->button->svg
  */
+
 .tw-image-info-button {
 }
+/* Following are the three buttons at top of sidebar */
+
+svg.tw-image-new-button {
+  fill: #e76d1c;
+}
+svg.tw-image-options-button {
+  fill: rgb(82, 72, 232);
+}
+svg.tw-image-save-button {
+  fill: #62aa55;
+}
+
 /* For any svg within tw-tiddler-controls class, set fill and height */
 .tw-tiddler-controls svg {
   fill: #ccc;

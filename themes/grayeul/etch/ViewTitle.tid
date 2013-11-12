@@ -12,11 +12,11 @@ fill:$(foregroundColor)$;
 /* This is a modified version of ViewTemplate/title that is used by the grayeul/etch theme
  *   It defines a buttontip macro that is used to modify the control buttons on the top of
  *   a tiddler, and allow them to reference tooltip info.  Also, an additional button
- *   is added, to allow 'close all other tiddlers' option.
+ *   is added, to allow 'close other tiddlers' option.
  */
 -->
 
-<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><span tip-text="Info"><$button popup=<<qualify "$:/state/tiddlerInfo">> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button></span><<buttontip "tw-edit-tiddler" "edit-button" "Edit Tiddler">><<buttontip "tw-close-all-other" "close-others-button" "Close all other Tiddlers">><<buttontip "tw-close-tiddler" "close-button" "Close this Tiddlers">>
+<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><span tip-text="Info"><$button popup=<<qualify "$:/state/tiddlerInfo">> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button></span><<buttontip "tw-edit-tiddler" "edit-button" "Edit Tiddler">><<buttontip "tw-close-all-other" "close-others-button" "Close other Tiddlers">><<buttontip "tw-close-tiddler" "close-button" "Close this Tiddlers">>
 </span><$setvariable name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude tiddler={{!!icon}}/></span></$setvariable> <span class="title"><$view field="title"/></span></div>
 
 <$reveal type="nomatch" text="" default="" state=<<qualify "$:/state/tiddlerInfo">> class="tw-tiddler-info" animate="yes">
