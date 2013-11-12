@@ -761,7 +761,7 @@ parentWidget: optional parent widget for the root node
 */
 exports.renderText = function(outputType,textType,text,options) {
 	options = options || {};
-	var parser = $tw.wiki.parseText(textType,text),
+	var parser = this.parseText(textType,text,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
 	widgetNode.render(container,null);
