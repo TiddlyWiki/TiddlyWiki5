@@ -38,8 +38,10 @@ Widget.prototype.initialise = function(parseTreeNode,options) {
 	// Save widget info
 	this.parseTreeNode = parseTreeNode;
 	this.wiki = options.wiki;
-	this.variables = options.variables || {};
 	this.parentWidget = options.parentWidget;
+	this.variablesConstructor = function() {};
+	this.variablesConstructor.prototype = this.parentWidget ? this.parentWidget.variables : {};
+	this.variables = new this.variablesConstructor();
 	this.document = options.document;
 	this.attributes = {};
 	this.children = [];
@@ -68,6 +70,16 @@ Widget.prototype.execute = function() {
 };
 
 /*
+Set the value of a context variable
+name: name of the variable
+value: value of the variable
+params: array of {name:, default:} for each parameter
+*/
+Widget.prototype.setVariable = function(name,value,params) {
+	this.variables[name] = {value: value, params: params};
+};
+
+/*
 Get the prevailing value of a context variable
 name: name of variable
 options: see below
@@ -78,19 +90,14 @@ defaultValue: default value if the variable is not defined
 Widget.prototype.getVariable = function(name,options) {
 	options = options || {};
 	var actualParams = options.params || [];
-	// Search up the widget tree for the variable name
-	var node = this;
-	while(node && !$tw.utils.hop(node.variables,name)) {
-		node = node.parentWidget;
-	}
-	// If we get to the root then look for a macro module
-	if(!node) {
+	// If the variable doesn't exist then look for a macro module
+	if(!(name in this.variables)) {
 		return this.evaluateMacroModule(name,actualParams,options.defaultValue);
 	}
-	// Get the value
-	var value = node.variables[name].value || "";
+	var variable = this.variables[name],
+		value = variable.value || "";
 	// Substitute any parameters specified in the definition
-	value = this.substituteVariableParameters(value,node.variables[name].params,actualParams);
+	value = this.substituteVariableParameters(value,variable.params,actualParams);
 	value = this.substituteVariableReferences(value);
 	return value;
 };
@@ -164,16 +171,6 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 	} else {
 		return defaultValue;
 	}
-};
-
-/*
-Set the value of a context variable
-name: name of the variable
-value: value of the variable
-params: array of {name:, default:} for each parameter
-*/
-Widget.prototype.setVariable = function(name,value,params) {
-	this.variables[name] = {value: value, params: params};
 };
 
 /*
