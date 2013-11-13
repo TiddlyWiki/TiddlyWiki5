@@ -148,7 +148,12 @@ ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {
-	return $tw.utils.formatDateString(this.getValue(),format);
+	var value = this.getValue();
+	if(value) {
+		return $tw.utils.formatDateString(value,format);
+	} else {
+		return "";
+	}
 };
 
 ViewWidget.prototype.getValueAsRelativeDate = function(format) {
