@@ -8,14 +8,12 @@ Extension methods for the $tw.Wiki object
 Adds the following properties to the wiki object:
 
 * `eventListeners` is a hashmap by type of arrays of listener functions
-* `changedTiddlers` is a hashmap describing changes to named tiddlers since wiki change events were
-last dispatched. Each entry is a hashmap containing two fields:
+* `changedTiddlers` is a hashmap describing changes to named tiddlers since wiki change events were last dispatched. Each entry is a hashmap containing two fields:
 	modified: true/false
 	deleted: true/false
-* `changeCount` is a hashmap by tiddler title containing a numerical index that starts at zero and is
-	incremented each time a tiddler is created changed or deleted
-* `caches` is a hashmap by tiddler title containing a further hashmap of named cache objects. Caches
-	are automatically cleared when a tiddler is modified or deleted
+* `changeCount` is a hashmap by tiddler title containing a numerical index that starts at zero and is incremented each time a tiddler is created changed or deleted
+* `caches` is a hashmap by tiddler title containing a further hashmap of named cache objects. Caches are automatically cleared when a tiddler is modified or deleted
+* `globalCache` is a hashmap by cache name of cache objects that are cleared whenever any tiddler change occurs
 
 \*/
 (function(){
@@ -163,6 +161,7 @@ exports.getChangeCount = function(title) {
 exports.deleteTiddler = function(title) {
 	delete this.tiddlers[title];
 	this.clearCache(title);
+	this.clearGlobalCache();
 	this.enqueueTiddlerEvent(title,true);
 };
 
@@ -207,6 +206,7 @@ exports.addTiddler = function(tiddler) {
 	// Save the tiddler
 	this.tiddlers[title] = tiddler;
 	this.clearCache(title);
+	this.clearGlobalCache();
 	this.enqueueTiddlerEvent(title);
 };
 
@@ -425,15 +425,36 @@ exports.getShadowTitles = function() {
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
 exports.getTiddlersWithTag = function(tag) {
-	// Get the list associated with the tag
-	var titles = [];
-	for(var title in this.tiddlers) {
-		var tiddler = this.tiddlers[title];
-		if($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.indexOf(tag) !== -1) {
-			titles.push(title);
+	var self = this;
+	return this.getGlobalCache("taglist-" + tag,function() {
+		var tagmap = self.getTagMap();
+		return self.sortByList(tagmap[tag],tag);
+	});
+};
+
+/*
+Get a hashmap by tag of arrays of tiddler titles
+*/
+exports.getTagMap = function() {
+	var self = this;
+	return this.getGlobalCache("tagmap",function() {
+		var tags = {};
+		// Collect up all the tags
+		for(var title in self.tiddlers) {
+			var tiddler = self.tiddlers[title];
+			if(tiddler.fields.tags) {
+				for(var index=0; index<tiddler.fields.tags.length; index++) {
+					var tag = tiddler.fields.tags[index];
+					if(tags[tag]) {
+						tags[tag].push(title)
+					} else {
+						tags[tag] = [title];
+					}
+				}
+			}
 		}
-	}
-	return this.sortByList(titles,tag);
+		return tags;
+	});
 };
 
 /*
@@ -456,7 +477,9 @@ Sorts an array of tiddler titles according to an ordered list
 */
 exports.sortByList = function(array,listTitle) {
 	var list = this.getTiddlerList(listTitle);
-	if(list) {
+	if(!array || array.length === 0) {
+		return [];
+	} else if(list) {
 		var titles = [], t, title;
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
@@ -556,6 +579,21 @@ exports.getTiddlerList = function(title) {
 	}
 	return [];
 };
+
+// Return a named global cache object. Global cache objects are cleared whenever a tiddler change occurs
+exports.getGlobalCache = function(cacheName,initializer) {
+	this.globalCache = this.globalCache || {};
+	if($tw.utils.hop(this.globalCache,cacheName)) {
+		return this.globalCache[cacheName];
+	} else {
+		this.globalCache[cacheName] = initializer();
+		return this.globalCache[cacheName];
+	}
+};
+
+exports.clearGlobalCache = function() {
+	this.globalCache = {};
+}
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
