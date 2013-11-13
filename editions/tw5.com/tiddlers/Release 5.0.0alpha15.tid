@@ -9,4 +9,14 @@ tags: releasenote
 
 This release has several bug fixes and improvements:
 
-* A saver module for Microsoft Internet Explorer version 10 and above. Clicking save in the sidebar pulls up an unobtrusive bar at the bottom of the window where you can click ''save''. You then get a new copy of your wiki in the downloads folder.
+* A saver module for Microsoft Internet Explorer version 10 and above. Clicking save in the sidebar causes the browser to pull up a bar at the bottom of the window where you can click ''save''. You then get a new copy of your wiki in the downloads folder.
+* Support for new `tw-close-other-tiddlers` message (eg, <$button message="tw-close-other-tiddlers">close others</$button>)
+* Added host configuration option to TiddlyWeb control panel
+* Fixed bug when creating a tiddler title starting or ending with a space
+* Fixed behaviour of tags editor dropdown when search box is empty
+* Fixed problem with interpretation of `fields` and `index` attributes of the TranscludeWidget
+* For http://five.tiddlywiki.com, add a tiddler info tab with a link to the static representation of the tiddler
+* Add support for saving changes on Microsoft Internet Explorer 10 and above
+* Improve the popup mechanism so that the tiddler info panel doesn't close so easily
+
+Contributors to this release include @jermolene and @grayeul.
