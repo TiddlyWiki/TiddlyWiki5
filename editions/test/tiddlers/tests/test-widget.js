@@ -16,10 +16,9 @@ describe("Widget module", function() {
 
 	var widget = require("$:/core/modules/widgets/widget.js");
 
-	function createWidgetNode(parseTreeNode,wiki,variables) {
+	function createWidgetNode(parseTreeNode,wiki) {
 		return new widget.widget(parseTreeNode,{
 				wiki: wiki,
-				variables: variables || {},
 				document: $tw.document
 			});
 	}
@@ -264,18 +263,8 @@ describe("Widget module", function() {
 	it("should deal with attributes specified as macro invocations", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node
-		var text = "<div class=<<myMacro 'something' three:'thing'>>>Content</div>";
-		var variables = {
-			myMacro: {
-				value: "My something $one$, $two$ or other $three$",
-				params: [
-					{name: "one", "default": "paramOne"},
-					{name: "two"},
-					{name: "three", "default": "paramTwo"}
-				]
-			}
-		};
-		var widgetNode = createWidgetNode(parseText(text,wiki),wiki,variables);
+		var text = "\\define myMacro(one:\"paramOne\",two,three:\"paramTwo\")\nMy something $one$, $two$ or other $three$\n\\end\n<div class=<<myMacro 'something' three:'thing'>>>Content</div>";
+		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
