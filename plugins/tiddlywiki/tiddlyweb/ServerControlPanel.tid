@@ -6,7 +6,7 @@ tags: $:/tags/ControlPanel
 Log in to ~TiddlyWeb: <$button message="tw-login" class="btn btn-info">Login</$button>
 </$reveal>
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
-Log out of ~TiddlyWeb: <$button message="tw-logout" class="btn btn-warning">Logout</$button>
+Logged in as {{$:/status/UserName}} <$button message="tw-logout" class="btn btn-warning">Logout</$button>
 </$reveal>
 
 Host configuration: <$edit-text tiddler="$:/config/tiddlyweb/host" tag="input" default=""/>
