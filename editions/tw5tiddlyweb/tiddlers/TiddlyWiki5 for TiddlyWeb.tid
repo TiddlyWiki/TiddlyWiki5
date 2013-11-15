@@ -1,38 +1,26 @@
 title: TiddlyWiki5 for TiddlyWeb
+created: 201311152153
+creator: JeremyRuston
+modified: 201311152153
+modifier: JeremyRuston
 
-Experimenting with ~TiddlyWeb integration for ~TiddlyWiki5. Features:
+! Features
 
 * Loads skinny tiddlers from entire recipe at startup/login
 * Subsequently syncs changes back to the server
 * Polls for changes from the server
 
-To do:
+! Getting Started
 
-* Use of `if-match` header
-* Deleting tiddlers
-* Routing newly created tiddlers to TiddlyWeb
+To try it out, create a new space, include the space ''tw5tiddlyweb'', and then visit ''{myspace}.tiddlyspace.com/tw5''.
 
-To try it out, create a new space, include the space `tw5tiddlyweb`, and then visit `<myspace>.tiddlyspace.com/tw5`.
+If you want to make TiddlyWiki5 the default view for your space, then create a tiddler called ''ServerSettings'' and give it the text:
 
-----
+```
+index: tw5
+```
 
-Current [[login status|$:/status/IsLoggedIn]]: {{$:/status/IsLoggedIn}}
+! Issues
 
-Current [[username|$:/status/UserName]]: {{$:/status/UserName}}
-
-----
-
-<$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
-Log in to ~TiddlyWeb: <$button message="tw-login" class="btn btn-info">Login</$button>
-</$reveal>
-<$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
-Log out of ~TiddlyWeb: <$button message="tw-logout" class="btn btn-warning">Logout</$button>
-</$reveal>
-
-<$button message="tw-server-refresh" class="btn btn-warning">Refresh</$button>
-
-----
-
-All tiddlers:
-
-<$list filter="[!is[system]]" template="TiddlerListTemplate"/>
+* ''$:/DefaultTiddlers'' doesn't work because thanks to lazy loading it is only loaded after it is needed
+* Ignores ''if-match'' header, so doesn't detect clashes on save
