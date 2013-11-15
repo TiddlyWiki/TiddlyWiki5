@@ -228,7 +228,7 @@ describe("Widget module", function() {
 		});
 	});
 
-	it("should deal with the setvariable widget", function() {
+	it("should deal with the set widget", function() {
 		var wiki = new $tw.Wiki();
 		// Add some tiddlers
 		wiki.addTiddlers([
@@ -238,7 +238,7 @@ describe("Widget module", function() {
 			{title: "TiddlerFour", text: "TiddlerTwo"}
 		]);
 		// Construct the widget node
-		var text = "My <$setvariable name='currentTiddler' value={{TiddlerFour}}><$transclude tiddler={{!!title}}/></$setvariable> is Jolly"
+		var text = "My <$set name='currentTiddler' value={{TiddlerFour}}><$transclude tiddler={{!!title}}/></$set> is Jolly"
 		var widgetNode = createWidgetNode(parseText(text,wiki),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);

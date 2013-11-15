@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/widgets/setvariable.js
+title: $:/core/modules/widgets/set.js
 type: application/javascript
 module-type: widget
 
-Setvariable widget
+Set variable widget
 
 \*/
 (function(){
@@ -14,19 +14,19 @@ Setvariable widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SetVariableWidget = function(parseTreeNode,options) {
+var SetWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-SetVariableWidget.prototype = new Widget();
+SetWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-SetVariableWidget.prototype.render = function(parent,nextSibling) {
+SetWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
@@ -36,7 +36,7 @@ SetVariableWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-SetVariableWidget.prototype.execute = function() {
+SetWidget.prototype.execute = function() {
 	// Get our parameters
 	this.setName = this.getAttribute("name","currentTiddler");
 	this.setValue = this.getAttribute("value");
@@ -49,7 +49,7 @@ SetVariableWidget.prototype.execute = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-SetVariableWidget.prototype.refresh = function(changedTiddlers) {
+SetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.name || changedAttributes.value) {
 		this.refreshSelf();
@@ -59,6 +59,7 @@ SetVariableWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.setvariable = SetVariableWidget;
+exports.setvariable = SetWidget;
+exports.set = SetWidget;
 
 })();

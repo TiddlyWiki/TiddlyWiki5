@@ -1,0 +1,18 @@
+title: SetWidget
+created: 201311151827
+creator: JeremyRuston
+modified: 201311151827
+modifier: JeremyRuston
+tags: widget
+
+! Introduction
+
+The set variable widget assigns a value to a specified [[variable|WidgetVariables]]. The new value of the variable is availale to the content within the set variable widget.
+
+! Content and Attributes
+
+The content of the `<$set>` widget is the scope for the value assigned to the variable.
+
+|!Attribute |!Description |
+|name |The name of the variable to assign |
+|value |The value to assign to the variable |

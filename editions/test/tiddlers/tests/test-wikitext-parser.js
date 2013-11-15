@@ -98,7 +98,7 @@ describe("WikiText parser tests", function() {
 	it("should parse macro definitions", function() {
 		expect(parse("\\define myMacro()\nnothing\n\\end\n")).toEqual(
 
-			[ { type : 'setvariable', name : 'myMacro', params : [  ], text : 'nothing', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ] } ]
+			[ { type : 'set', name : 'myMacro', params : [  ], text : 'nothing', attributes : { name : { type : 'string', value : 'myMacro' }, value : { type : 'string', value : 'nothing' } }, children : [  ] } ]
 
 		);
 
