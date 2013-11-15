@@ -413,7 +413,6 @@ a.tw-tiddlylink-external {
 }
 
 .tw-tiddler-info {
-	overflow: hidden;
 	padding: 14px 42px 14px 42px;
 	background-color: #f8f8f8;
 	border-top: 1px solid #ddd;
