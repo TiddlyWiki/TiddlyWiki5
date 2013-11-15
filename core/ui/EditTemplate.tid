@@ -4,28 +4,4 @@ modifier: JeremyRuston
 \define frame-classes()
 tw-tiddler-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
-<div class=<<frame-classes>>><span class="tw-tiddler-controls titlebar"> <$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button> <$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button}}</$button> <$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button}}</$button> </span>
-
-<$view field="title"/>
-
-<$edit-text field="draft.title" class="titlebar tw-edit-texteditor"/>
-
-<$transclude tiddler="$:/core/ui/TagsEditor"/>
-
-<$reveal state="$:/ShowEditPreview" type="match" text="yes">
-<$transclude tiddler="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
-<div class="tw-tiddler-preview">
-<div class="tw-tiddler-preview-preview">
-<$transclude />
-</div>
-<div class="tw-tiddler-preview-edit">
-<$edit field="text" class="tw-edit-texteditor"/>
-</div>
-</div>
-</$reveal>
-<$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
-<$transclude tiddler="$:/core/ui/EditorHint"/> <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
-<$edit field="text" class="tw-edit-texteditor"/>
-</$reveal>
-
-<$transclude tiddler="$:/core/ui/FieldEditor"/></div>
+<div class=<<frame-classes>>><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list></div>

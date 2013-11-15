@@ -1,4 +1,5 @@
-title: $:/core/ui/FieldEditor
+title: $:/core/ui/EditTemplate/fields
+tags: $:/tags/EditTemplate
 
 <$fieldmangler><div class="tw-edit-fields">
 <table class="tw-edit-fields"><tbody><$list filter="[is[current]fields[]] -title -tags -text -creator -created -modified -modifier -[[draft.title]] -[[draft.of]]" variable="currentField"><tr class="tw-edit-field"><td class="tw-edit-field-name"><<currentField>>:</td><td class="tw-edit-field-value"><$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder="field value"/></td><td class="tw-edit-field-remove"><$button message="tw-remove-field" param=<<currentField>> class="btn-invisible">{{$:/core/images/delete-button}}</$button></td>

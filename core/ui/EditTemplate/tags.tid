@@ -1,4 +1,5 @@
-title: $:/core/ui/TagsEditor
+title: $:/core/ui/EditTemplate/tags
+tags: $:/tags/EditTemplate
 
 \define tag-styles()
 background-color:$(backgroundColor)$;

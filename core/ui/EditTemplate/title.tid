@@ -1,0 +1,6 @@
+title: $:/core/ui/EditTemplate/title
+tags: $:/tags/EditTemplate
+
+<$view field="title"/>
+
+<$edit-text field="draft.title" class="titlebar tw-edit-texteditor"/>

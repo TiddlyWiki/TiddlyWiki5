@@ -1,0 +1,4 @@
+title: $:/core/ui/EditTemplate/controls
+tags: $:/tags/EditTemplate
+
+<span class="tw-tiddler-controls titlebar"> <$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button> <$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button}}</$button> <$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button}}</$button> </span>
