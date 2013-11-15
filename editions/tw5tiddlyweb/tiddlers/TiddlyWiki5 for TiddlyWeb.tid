@@ -24,3 +24,4 @@ index: tw5
 
 * ''$:/DefaultTiddlers'' doesn't work because thanks to lazy loading it is only loaded after it is needed
 * Ignores ''if-match'' header, so doesn't detect clashes on save
+* UI state (eg current tab status) is shared between all users of the wiki, meaning that the UI can spontaneously change in response to a server sync
