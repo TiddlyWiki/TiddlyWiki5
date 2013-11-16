@@ -9,14 +9,20 @@ tags: releasenote
 
 This release has several bug fixes and improvements:
 
+* Rename the `<$setvariable>` to `<$set>`
+** `<$setvariable>` will temporarily remain as a synonym for `<$set>` for the next few releases
 * A saver module for Microsoft Internet Explorer version 10 and above. Clicking save in the sidebar causes the browser to pull up a bar at the bottom of the window where you can click ''save''. You then get a new copy of your wiki in the downloads folder.
 * Support for new `tw-close-other-tiddlers` message (eg, <$button message="tw-close-other-tiddlers">close others</$button>)
-* Added host configuration option to TiddlyWeb control panel
 * Fixed bug when creating a tiddler title starting or ending with a space
 * Fixed behaviour of tags editor dropdown when search box is empty
 * Fixed problem with interpretation of `fields` and `index` attributes of the TranscludeWidget
 * For http://five.tiddlywiki.com, add a tiddler info tab with a link to the static representation of the tiddler
-* Add support for saving changes on Microsoft Internet Explorer 10 and above
 * Improve the popup mechanism so that the tiddler info panel doesn't close so easily
+* Make more UI elements extensible via system tags:
+** [[$:/tags/EditTemplate]] for the edit template
+* Various improvements for working with TiddlyWeb, including:
+** Updated control panel
+* Fixed the module type names in the internal tab of the control panel
+* Improved styling for embedded PDFs
 
 Contributors to this release include @jermolene and @grayeul.
