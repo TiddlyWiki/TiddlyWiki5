@@ -22,7 +22,7 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /<<([^\s>]+)\s*([\s\S]*?)>>(?:\r?\n|$)/mg;
+	this.matchRegExp = /<<([^>\s]+)(?:\s*)((?:[^>]|(?:>(?!>)))*?)>>(?:\r?\n|$)/mg;
 };
 
 /*

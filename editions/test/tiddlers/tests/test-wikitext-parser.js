@@ -104,6 +104,15 @@ describe("WikiText parser tests", function() {
 
 	});
 
+	it("should parse macro calls", function() {
+		expect(parse("<<john>><<paul>><<george>><<ringo>>")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'macrocall', name : 'john', params : [  ] }, { type : 'macrocall', name : 'paul', params : [  ] }, { type : 'macrocall', name : 'george', params : [  ] }, { type : 'macrocall', name : 'ringo', params : [  ] } ] } ]
+
+		);
+
+	});
+
 });
 
 })();
