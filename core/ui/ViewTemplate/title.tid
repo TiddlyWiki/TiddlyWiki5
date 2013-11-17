@@ -4,11 +4,11 @@ tags: $:/tags/ViewTemplate
 \define title-styles()
 fill:$(foregroundColor)$;
 \end
-<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><$button popup=<<qualify "$:/state/tiddlerInfo">> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button><$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button><$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
+<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] [!is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 
 </span><$set name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude tiddler={{!!icon}}/></span></$set> <span class="title"><$view field="title"/></span></div>
 
-<$reveal type="nomatch" text="" default="" state=<<qualify "$:/state/tiddlerInfo">> class="tw-tiddler-info tw-popup" animate="yes">
+<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tw-tiddler-info tw-popup" animate="yes">
 
 <$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 

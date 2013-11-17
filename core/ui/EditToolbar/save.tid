@@ -1,0 +1,4 @@
+title: $:/core/ui/EditToolbar/save
+tags: $:/tags/EditToolbar
+
+<$button message="tw-save-tiddler" class="btn-invisible">{{$:/core/images/done-button}}</$button>

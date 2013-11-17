@@ -1,0 +1,4 @@
+title: $:/core/ui/PageControls/control-panel
+tags: $:/tags/PageControls
+
+<$link to="$:/ControlPanel">{{$:/core/images/options-button}}</$link>

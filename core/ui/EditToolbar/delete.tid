@@ -1,0 +1,4 @@
+title: $:/core/ui/EditToolbar/delete
+tags: $:/tags/EditToolbar
+
+<$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button>

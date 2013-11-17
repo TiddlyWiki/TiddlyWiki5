@@ -19,7 +19,10 @@ This release has several bug fixes and improvements:
 * For http://five.tiddlywiki.com, add a tiddler info tab with a link to the static representation of the tiddler
 * Improve the popup mechanism so that the tiddler info panel doesn't close so easily
 * Make more UI elements extensible via system tags:
+** [[$:/tags/ViewToolbar]] for the view mode tiddler toolbar
 ** [[$:/tags/EditTemplate]] for the edit template
+** [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
+** [[$:/tags/PageControls]] for the page control tools in the sidebar
 * Various improvements for working with TiddlyWeb, including:
 ** Updated control panel
 * Fixed the module type names in the internal tab of the control panel

@@ -1,0 +1,4 @@
+title: $:/core/ui/EditToolbar/cancel
+tags: $:/tags/EditToolbar
+
+<$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button}}</$button>

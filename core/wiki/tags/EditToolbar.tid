@@ -1,0 +1,2 @@
+title: $:/tags/EditToolbar
+list: [[$:/core/ui/EditToolbar/delete]] [[$:/core/ui/EditToolbar/cancel]] [[$:/core/ui/EditToolbar/save]]

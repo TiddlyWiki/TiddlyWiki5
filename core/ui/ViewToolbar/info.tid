@@ -1,0 +1,4 @@
+title: $:/core/ui/ViewToolbar/info
+tags: $:/tags/ViewToolbar
+
+<$button popup=<<tiddlerInfoState>> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button>

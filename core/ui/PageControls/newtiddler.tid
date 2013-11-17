@@ -1,0 +1,4 @@
+title: $:/core/ui/PageControls/new-tiddler
+tags: $:/tags/PageControls
+
+<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button}}</$button>
