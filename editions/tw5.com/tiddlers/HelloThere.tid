@@ -1,12 +1,12 @@
 created: 201308221702000
 creator: JeremyRuston
-modified: 201311091512009
-modifier: JeremyRuston
+modified: 201311171740
+modifier: AdrianSampaleanu
 tags: introduction
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the non-linear personal web notebook first released in 2004. It is a complete interactive wiki in JavaScript that can be run from a single HTML file in the browser or as a powerful [[node.js application|node.js]].
+Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the non-linear personal web notebook first released in 2004. It is a complete interactive wiki in JavaScript that can be run from a single HTML file in the browser or as a powerful [[Node.js application|node.js]].
 
 This is TiddlyWiki5 version //<<version>>//. It is drawing to the end of the alpha phase, meaning it is almost ready for everyday use. It is a great time to get involved and support its [[future development|RoadMap]]:
 

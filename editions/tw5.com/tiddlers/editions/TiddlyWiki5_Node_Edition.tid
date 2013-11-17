@@ -1,7 +1,7 @@
 created: 201308252145
 creator: JeremyRuston
-modified: 201308252145
-modifier: JeremyRuston
+modified: 201311171740
+modifier: AdrianSampaleanu
 tags: edition
 title: TiddlyWiki5 Node Edition
 
@@ -25,25 +25,25 @@ The commands and their individual arguments follow, each command being identifie
 node tiddlywiki.js [<wikipath>] [--<command> [<arg>[,<arg>]]]
 ```
 
-!! Batch Files
+!! Script Files
 
-For trying TiddlyWiki5 out under node.js, several batch files are provided:
+For trying TiddlyWiki5 out under Node.js, several scripts are provided (.sh for *nix and .cmd for Windows):
 
-!!! `bld.sh` builds tw5.com
+!!! `bld`: builds tw5.com
 
-This batch file builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
+This script builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
 
-By default, files are output to a folder called `jermolene.github.com` in the same directory as the main TiddlyWiki5 directory. You will need to create the directory before running the batch file. For example:
+By default, files are output to a folder called `jermolene.github.com`, sibling to the to the TiddlyWiki5 source directory. For example:
 
 ```
-* /TiddlyWork/ - Directory for working with TiddlyWiki5
-* /TiddlyWork/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
-* /TiddlyWork/jermolene.github.com/ - Directory for output files
+/TiddlyWork/ - Directory for working with TiddlyWiki5
+	/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
+	/jermolene.github.com/ - Directory for output files
 ```
 
-You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `bld.sh`.
+You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `bld`.
 
-The files output by `bld.sh` are:
+The files output by `bld` are:
 
 * `readme.md` main readme file, output to the TiddlyWiki5 directory
 * `index.html` TiddlyWiki5 standalone HTML file with content from the `tw5.com` edition
@@ -53,29 +53,23 @@ The files output by `bld.sh` are:
 * `static.html` static HTML version of the DefaultTiddlers of the `tw5.com` edition
 * `static/*.html` and `static/static.css` static HTML versions of individual tiddlers
 
-`bld.sh` also runs the TiddlyWiki5 node.js-based test suite (see TestingMechanism)
+`bld` also runs the TiddlyWiki5 Node.js-based test suite (see TestingMechanism)
 
-!!! `serve.sh` serves tw5.com
+!!! `serve.sh <username>` or `serve.cmd <username>`: serves tw5.com
 
-This batch file starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the script serves on port 8080.
-
-```
-./server.sh UserName
-```
-
-The single parameter to the script is the username to use for signing edits.
+This script starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits.
 
 To experiment with this configuration, run the script and then visit `http://0.0.0.0:8080` in a browser.
 
 Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).
 
-!!! `wbld.sh` builds TiddlyWiki5 for TiddlyWeb
+!!! `wbld`: builds TiddlyWiki5 for TiddlyWeb
 
-This batch file builds and deploys the code for [[TiddlyWiki5 in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
+This script builds and deploys the code for [[TiddlyWiki5 in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
 
-!!! `2bld.sh` builds TiddlyWiki 2.6.5
+!!! `2bld`: builds TiddlyWiki 2.6.5
 
-This batch file builds TiddlyWiki 2.6.5 from the original source and then uses the `opendiff` program to display the differences between them.
+This script builds TiddlyWiki 2.6.5 from the original source and then displays the differences between them (`diff` is used for *nix, `fc` for Windows).
 
 !!Commands
 
