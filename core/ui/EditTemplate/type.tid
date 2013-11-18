@@ -1,0 +1,15 @@
+title: $:/core/ui/EditTemplate/type
+tags: $:/tags/EditTemplate
+
+<p>//Type:// <$edit-text field="type" tag="input" default="" placeholder="type" focusPopup=<<qualify "$:/state/typeDropdown">> class="tw-edit-typeeditor"/> <$button popup=<<qualify "$:/state/typeDropdown">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button></p>
+
+<div class="tw-block-dropdown-wrapper">
+<$reveal state=<<qualify "$:/state/typeDropdown">> type="nomatch" text="" default="">
+<div class="tw-block-dropdown tw-edit-type-dropdown">
+<$linkcatcher to="!!type">
+<$list filter="[is[shadow]prefix[$:/docs/types/]] [!is[shadow]prefix[$:/docs/types/]] +[sort[description]]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>
+</$list>
+</$linkcatcher>
+</div>
+</$reveal>
+</div>
