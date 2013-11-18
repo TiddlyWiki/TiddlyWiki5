@@ -2,13 +2,13 @@ title: $:/core/ui/EditTemplate/fields
 tags: $:/tags/EditTemplate
 
 <$fieldmangler><div class="tw-edit-fields">
-<table class="tw-edit-fields"><tbody><$list filter="[is[current]fields[]] -title -tags -text -creator -created -modified -modifier -[[draft.title]] -[[draft.of]]" variable="currentField"><tr class="tw-edit-field"><td class="tw-edit-field-name"><<currentField>>:</td><td class="tw-edit-field-value"><$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder="field value"/></td><td class="tw-edit-field-remove"><$button message="tw-remove-field" param=<<currentField>> class="btn-invisible">{{$:/core/images/delete-button}}</$button></td>
+<table class="tw-edit-fields"><tbody><$list filter="[is[current]fields[]] -title -tags -text -creator -created -modified -modifier -type -[[draft.title]] -[[draft.of]]" variable="currentField"><tr class="tw-edit-field"><td class="tw-edit-field-name"><<currentField>>:</td><td class="tw-edit-field-value"><$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder="field value"/></td><td class="tw-edit-field-remove"><$button message="tw-remove-field" param=<<currentField>> class="btn-invisible">{{$:/core/images/delete-button}}</$button></td>
 </tr>
 </$list>
 </tbody>
 </table>
 </div>
 
-<div class="tw-edit-field-add">Add a new field: <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/NewFieldName" tag="input" default="" placeholder="field name" class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
+<div class="tw-edit-field-add">//Add a new field:// <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/NewFieldName" tag="input" default="" placeholder="field name" class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
 
 </$fieldmangler>

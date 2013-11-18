@@ -562,6 +562,15 @@ canvas.tw-edit-bitmapeditor  {
 ** Tiddler edit mode
 */
 
+.tw-tiddler-edit-frame em {
+	color: #999;
+	font-style: normal;
+}
+
+.tw-edit-type-dropdown a.tw-tiddlylink-missing {
+	font-style: normal;
+}
+
 .tw-edit-tags-list {
 	margin: 14px 0 14px 0;
 }
@@ -573,44 +582,6 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-remove-tag-button {
 	padding-left: 4px;
-}
-
-.tw-tags-autocomplete-wrapper {
-	position: relative;
-}
-
-.tw-tags-autocomplete {
-	position: absolute;
-	min-width: 280px;
-	border: 1px solid {{$:/themes/tiddlywiki/snowwhite/colourmappings##dropdownborder}};
-	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##dropdownbackground}};
-	<<border-radius 4px>>
-	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
-	padding: 0 0 0 0;
-	margin: 4px 0 0 0;
-	white-space: nowrap;
-	z-index: 1000;
-}
-
-.tw-tags-autocomplete a {
-	display: block;
-	padding: 4px 14px 4px 14px;
-}
-
-.tw-tags-autocomplete a:hover {
-	color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkbackground}};
-	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkforeground}};
-	text-decoration: none;
-}
-
-.tw-add-tag {
-	color: #999;
-}
-
-.tw-add-tag svg {
-	height: 1em;
-	width: 1em;
-	fill: #999;
 }
 
 .tw-add-tag-name {
@@ -670,10 +641,6 @@ canvas.tw-edit-bitmapeditor  {
 	vertical-align: middle;
 }
 
-.tw-edit-field-add {
-	color: #999;
-}
-
 .tw-edit-field-add-name {
 	display: inline-block;
 	width: 15%;
@@ -687,6 +654,12 @@ canvas.tw-edit-bitmapeditor  {
 /*
 ** Dropdowns
 */
+
+.btn-dropdown svg {
+	height: 1em;
+	width: 1em;
+	fill: #999;
+}
 
 .tw-drop-down {
 	min-width: 280px;
@@ -721,6 +694,34 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-drop-down .tw-tab-contents a {
 	padding: 0 0.5em 0 0.5em;
+}
+
+.tw-block-dropdown-wrapper {
+	position: relative;
+}
+
+.tw-block-dropdown {
+	position: absolute;
+	min-width: 280px;
+	border: 1px solid {{$:/themes/tiddlywiki/snowwhite/colourmappings##dropdownborder}};
+	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##dropdownbackground}};
+	<<border-radius 4px>>
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
+	padding: 0 0 0 0;
+	margin: 4px 0 0 0;
+	white-space: nowrap;
+	z-index: 1000;
+}
+
+.tw-block-dropdown a {
+	display: block;
+	padding: 4px 14px 4px 14px;
+}
+
+.tw-block-dropdown a:hover {
+	color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkbackground}};
+	background-color: {{$:/themes/tiddlywiki/snowwhite/colourmappings##linkforeground}};
+	text-decoration: none;
 }
 
 /*

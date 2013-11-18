@@ -2,6 +2,6 @@ title: $:/core/ui/EditTemplate
 modifier: JeremyRuston
 
 \define frame-classes()
-tw-tiddler-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
+tw-tiddler-frame tw-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
 <div class=<<frame-classes>>><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list></div>
