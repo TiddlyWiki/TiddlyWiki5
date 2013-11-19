@@ -7,3 +7,7 @@ caption: Tools
 <$browse/>
 
 Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). You can also drag and drop files directly to the browser window.
+
+! Encryption
+
+{{$:/snippets/encryptionstatus}}

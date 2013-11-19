@@ -10,22 +10,8 @@ TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Dan
 TiddlyWiki5 isn't yet built in to TiddlySpot but you can use it by following these steps:
 
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
-# Open TiddlyWiki5 in your browser from http://five.tiddlywiki.com/
-# Fill in the information listed below
+# Open TiddlyWiki5 in your browser from http://five.tiddlywiki.com/empty.html
+# Fill in the TiddlySpot wikiname and password in the control panel
 # Click the "Save Changes" button. You should get a confirmation message `0 - Fileindex.html`
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
 # You should see a copy of TiddlyWiki5. You can edit and create tiddlers, and click "Save Changes" to save changes back up to TiddlySpot (you'll need to re-enter your password the first time you visit the wiki on TiddlySpot)
-
-! TiddlySpot details
-
-Wiki name: <$edit-text tiddler="$:/UploadName" default="" tag="input"/>
-
-Password: <$password name="upload"/>
-
-----
-
-If you're using a server other than TiddlySpot, you can set the server URL here:
-
-Service URL: <$edit-text tiddler="$:/UploadURL" default="" tag="input"/>
-
-//(by default, the server URL is `http://<wikiname>.tiddlyspot.com/store.cgi`)//

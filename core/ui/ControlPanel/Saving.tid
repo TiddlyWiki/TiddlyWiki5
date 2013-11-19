@@ -1,0 +1,11 @@
+title: $:/core/ui/ControlPanel/Saving
+tags: $:/tags/ControlPanel
+caption: Saving
+
+! TiddlySpot
+
+|[[Wiki name|$:/UploadName]] |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
+|Password |<$password name="upload"/> |
+|Server URL |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
+
+//The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
