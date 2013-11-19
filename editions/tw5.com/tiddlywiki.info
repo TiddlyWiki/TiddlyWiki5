@@ -1,6 +1,7 @@
 {
 	"plugins": [
-		"tiddlywiki/fullscreen"
+		"tiddlywiki/fullscreen",
+		"tiddlywiki/github-fork-ribbon"
 	],
 	"themes": [
 		"tiddlywiki/snowwhite",
