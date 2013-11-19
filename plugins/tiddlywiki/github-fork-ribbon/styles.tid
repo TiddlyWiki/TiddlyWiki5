@@ -29,8 +29,8 @@ tags: [[$:/tags/stylesheet]]
   pointer-events: auto;
 }
 
-.github-fork-ribbon a,
-.github-fork-ribbon a:hover {
+.github-fork-ribbon a, .github-fork-ribbon a.tw-tiddlylink,
+.github-fork-ribbon a:hover, .github-fork-ribbon a.tw-tiddlylink:hover  {
   /* Set the font */
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
