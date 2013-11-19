@@ -225,17 +225,18 @@ $tw.utils.pad = function(value,length) {
 	return s;
 };
 
-// Convert a date into UTC YYYYMMDDHHMM format
+// Convert a date into UTC YYYYMMDDHHMMSSmmm format
 $tw.utils.stringifyDate = function(value) {
 	return value.getUTCFullYear() +
 			$tw.utils.pad(value.getUTCMonth() + 1) +
 			$tw.utils.pad(value.getUTCDate()) + 
 			$tw.utils.pad(value.getUTCHours()) + 
 			$tw.utils.pad(value.getUTCMinutes()) +
+			$tw.utils.pad(value.getUTCSeconds()) +
 			$tw.utils.pad(value.getUTCMilliseconds(),3);
 };
 
-// Parse a date from a UTC YYYYMMDDHHMMSSMMM format string
+// Parse a date from a UTC YYYYMMDDHHMMSSmmm format string
 $tw.utils.parseDate = function(value) {
 	if(typeof value === "string") {
 		return new Date(Date.UTC(parseInt(value.substr(0,4),10),
