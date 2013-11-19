@@ -12,7 +12,9 @@ title: $:/core/ui/PageTemplate
 {{$:/LeftSideBar}}
 
 <!-- The sidebar header -->
-<header class="sidebar-header"><div class="titlebar">{{SiteTitle}}</div><div class="tw-subtitle">{{SiteSubtitle}}</div>
+<header class="sidebar-header">
+<div class="titlebar">{{SiteTitle}}</div>
+<div class="tw-subtitle">{{SiteSubtitle}}</div>
 
 <div class="tw-page-controls">
 <$list filter="[is[shadow]!has[draft.of]tag[$:/tags/PageControls]] [!is[shadow]!has[draft.of]tag[$:/tags/PageControls]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
