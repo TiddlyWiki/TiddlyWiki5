@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/github-fork-ribbon",
+	"description": "Codemirror plugin",
+	"author": "Simon Whitaker, adapted for TiddlyWiki by JeremyRuston",
+	"coreVersion": ">=5.0.0"
+}
