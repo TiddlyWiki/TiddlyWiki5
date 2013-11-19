@@ -28,5 +28,6 @@ This release has several bug fixes and improvements:
 * Fixed the module type names in the internal tab of the control panel
 * Improved styling for embedded PDFs
 * Added a dropdown to the edit template for setting the tiddler type
+* Fixed bug with second being omitted from serialised date formats
 
 Contributors to this release include @jermolene and @grayeul.
