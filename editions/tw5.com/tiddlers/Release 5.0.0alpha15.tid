@@ -7,27 +7,33 @@ tags: releasenote
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.14...v5.0.0-alpha.15]]//
 
-This release has several bug fixes and improvements:
+!! New Features
 
-* Rename the `<$setvariable>` to `<$set>`
-** `<$setvariable>` will temporarily remain as a synonym for `<$set>` for the next few releases
+* Added a dropdown to the edit template for setting the tiddler type
 * A saver module for Microsoft Internet Explorer version 10 and above. Clicking save in the sidebar causes the browser to pull up a bar at the bottom of the window where you can click ''save''. You then get a new copy of your wiki in the downloads folder.
 * Support for new `tw-close-other-tiddlers` message (eg, <$button message="tw-close-other-tiddlers">close others</$button>)
-* Fixed bug when creating a tiddler title starting or ending with a space
-* Fixed behaviour of tags editor dropdown when search box is empty
-* Fixed problem with interpretation of `fields` and `index` attributes of the TranscludeWidget
 * For http://five.tiddlywiki.com, add a tiddler info tab with a link to the static representation of the tiddler
-* Improve the popup mechanism so that the tiddler info panel doesn't close so easily
 * Make more UI elements extensible via system tags:
 ** [[$:/tags/ViewToolbar]] for the view mode tiddler toolbar
 ** [[$:/tags/EditTemplate]] for the edit template
 ** [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
 ** [[$:/tags/PageControls]] for the page control tools in the sidebar
+
+!! Improvements
+
+* Rename the `<$setvariable>` to `<$set>`
+** `<$setvariable>` will temporarily remain as a synonym for `<$set>` for the next few releases
+* Improve the popup mechanism so that the tiddler info panel doesn't close so easily
 * Various improvements for working with TiddlyWeb, including:
 ** Updated control panel
+
+!! Bug fixes
+
+* Fixed bug when creating a tiddler title starting or ending with a space
+* Fixed behaviour of tags editor dropdown when search box is empty
+* Fixed problem with interpretation of `fields` and `index` attributes of the TranscludeWidget
 * Fixed the module type names in the internal tab of the control panel
 * Improved styling for embedded PDFs
-* Added a dropdown to the edit template for setting the tiddler type
 * Fixed bug with second being omitted from serialised date formats
 
 Contributors to this release include @jermolene and @grayeul.
