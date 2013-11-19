@@ -1,37 +1,14 @@
 title: $:/core/ui/PageTemplate
 
-<!-- The navigator catches navigation events and updates the story and history tiddlers -->
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
 <$dropzone>
 
-<!-- The optional topbar -->
-{{$:/TopSideBar}}
+<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/PageTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/PageTemplate]]" variable="listItem">
 
-<!-- The optional leftsidebar -->
-{{$:/LeftSideBar}}
+<$transclude tiddler=<<listItem>>/>
 
-<!-- The sidebar header -->
-<header class="sidebar-header">
-<div class="titlebar">{{SiteTitle}}</div>
-<div class="tw-subtitle">{{SiteSubtitle}}</div>
-
-<div class="tw-page-controls">
-<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/PageControls]] [!is[shadow]!has[draft.of]tag[$:/tags/PageControls]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
-</div>
-
-{{$:/core/ui/SideBar}}
-
-</header>
-
-<!-- The story river -->
-<section class="story-river">
-
-<!-- The main story -->
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} />
-
-<!-- End of story river -->
-</section>
+</$list>
 
 </$dropzone>
 

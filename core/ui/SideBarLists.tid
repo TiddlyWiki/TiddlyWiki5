@@ -1,6 +1,4 @@
-title: $:/core/ui/SideBar
-
-<!-- The implementation of tabs here is currently a bit unreadable -->
+title: $:/core/ui/SideBarLists
 
 <div class="tw-sidebar-lists">
 

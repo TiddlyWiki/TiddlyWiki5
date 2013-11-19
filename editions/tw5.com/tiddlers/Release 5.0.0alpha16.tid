@@ -13,10 +13,12 @@ tags: releasenote
 
 !! Improvements
 
+* The page building blocks are now driven by the system tag `$:/tags/PageTemplate`
+** [[$:/TopSideBar]] and [[$:/LeftSideBar]] are no longer specially treated; use the new tag instead
 * Refactored control panel to add ''Saving'' tab that includes TiddlySpot options
 
 !! Bug fixes
 
 * 
 
-Contributors to this release include @jermolene and @grayeul.
+Contributors to this release include @jermolene.
