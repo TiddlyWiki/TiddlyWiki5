@@ -13,7 +13,7 @@ title: TalkyTalky
 !! @~TiddlyWiki & @Jermolene
 @@
 
-TiddlyWiki5 is a JavaScript wiki that can run entirely in the browser, or under ''node.js''. Internally, it is a representation transformation engine. It parses WikiText and renders it as text, or straight to the DOM with selective refresh to reflect subsequent changes. WikiText is used to render the user interface as well as the content of tiddlers. Once you know how to edit a tiddler you know how to customise TiddlyWiki, with no limits - it's only JavaScript.
+TiddlyWiki5 is a JavaScript wiki that can run entirely in the browser, or under ''Node.js''. Internally, it is a representation transformation engine. It parses WikiText and renders it as text, or straight to the DOM with selective refresh to reflect subsequent changes. WikiText is used to render the user interface as well as the content of tiddlers. Once you know how to edit a tiddler you know how to customise TiddlyWiki, with no limits - it's only JavaScript.
 
 Why is TiddlyWiki different? It frees you from the monopoly platforms of the web: store stuff in TW5 and you can pretty much guarantee you'll still have it in 100 years. Freedom, into the far future.
 
@@ -45,7 +45,7 @@ Store your tiddlers in a single HTML file along with the JS
 # Drag in the task tiddlers
 # Drag in TaskManagementExample, show source
 
-!!! node.js Edition
+!!! Node.js Edition
 
 Store your tiddlers in separate files in a chain of linked directories.
 

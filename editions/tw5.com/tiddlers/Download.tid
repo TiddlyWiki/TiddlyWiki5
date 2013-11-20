@@ -12,9 +12,9 @@ Right click and download these links to single file editions of TiddlyWiki5:
 * [[empty|http://five.tiddlywiki.com/empty]]
 * [[tw5.com|http://five.tiddlywiki.com/]]
 
-! Download node.js Edition
+! Download Node.js Edition
 
-For working on the command line with the node.js edition of TiddlyWiki5, you can install TiddlyWiki via [[npm|http://npmjs.org]]:
+For working on the command line with the Node.js edition of TiddlyWiki5, you can install TiddlyWiki via [[npm|http://npmjs.org]]:
 
 ```
 npm -g install tiddlywiki

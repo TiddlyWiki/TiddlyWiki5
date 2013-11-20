@@ -7,9 +7,9 @@ title: BootMechanism
 
 !Introduction
 
-At its heart, TiddlyWiki5 is a relatively small boot kernel that runs either under node.js or in the browser with all other functionality added via dynamically loaded [[modules|Modules]].
+At its heart, TiddlyWiki5 is a relatively small boot kernel that runs either under Node.js or in the browser with all other functionality added via dynamically loaded [[modules|Modules]].
 
-The kernel boots just enough of the TiddlyWiki environment to allow it to load and execute module tiddlers. The module system is compatible with CommonJS and [[node.js]].
+The kernel boots just enough of the TiddlyWiki environment to allow it to load and execute module tiddlers. The module system is compatible with CommonJS and [[Node.js]].
 
 There are many [[different types of module|ModuleType]]: parsers, deserializers, widgets etc. It goes much further than you might expect. For example, individual tiddler fields are modules, too: there's a module that knows how to handle the `tags` field, and another that knows how to handle the special behaviour of the `modified` and `created` fields. Some plugin modules have further sub-plugins: the wikitext parser, for instance, accepts parsing rules as individual plugin modules.
 
@@ -28,7 +28,7 @@ The boot kernel includes:
 * Code for the browser to load tiddlers from the HTML DOM
 * Code for the server to load tiddlers from the file system
 
-Each module is an ordinary `node.js`-style module, using the `require()` function to access other modules and the `exports` global to return JavaScript values. The boot kernel smooths over the differences between `node.js` and the browser, allowing the same plugin modules to execute in both environments.
+Each module is an ordinary `Node.js`-style module, using the `require()` function to access other modules and the `exports` global to return JavaScript values. The boot kernel smooths over the differences between `Node.js` and the browser, allowing the same plugin modules to execute in both environments.
 
 In the browser, `core/boot.js` is packed into a template HTML file that contains the following elements in order:
 
@@ -37,6 +37,6 @@ In the browser, `core/boot.js` is packed into a template HTML file that contains
 * JavaScript modules, packed as HTML `<SCRIPT>` blocks
 * `core/boot.js`, containing the boot kernel
 
-On the server, `core/boot.js` is executed directly. It uses the `node.js` local file API to load plugins directly from the file system in the `core/modules` directory. The code loading is performed synchronously for brevity (and because the system is in any case inherently blocked until plugins are loaded).
+On the server, `core/boot.js` is executed directly. It uses the `Node.js` local file API to load plugins directly from the file system in the `core/modules` directory. The code loading is performed synchronously for brevity (and because the system is in any case inherently blocked until plugins are loaded).
 
 The boot kernel sets up the `$tw` global variable that is used to store all the state data of the system.

@@ -9,7 +9,7 @@ TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWiki from their c
 
 ! Usage
 
-TiddlyWikiClassic is built from the command line by running TiddlyWiki5 under node.js. A typical usage would be:
+TiddlyWikiClassic is built from the command line by running TiddlyWiki5 under Node.js. A typical usage would be:
 
 ```
 node ../../tiddlywiki.js \

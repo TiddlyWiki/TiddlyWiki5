@@ -11,7 +11,7 @@ SyncAdaptorModules encapsulate storage mechanisms that can be used by the SyncMe
 
 * The TiddlyWebAdaptor interfaces with servers compatible with TiddlyWeb's HTTP API, such as TiddlyWeb itself and TiddlyWiki5's built-in ServerMechanism.
 
-* The LocalFileAdaptor interfaces with file systems with an API compatible with node.js's `fs` module
+* The LocalFileAdaptor interfaces with file systems with an API compatible with Node.js's `fs` module
 
 SyncAdaptorModules are represented as JavaScript tiddlers with the field `module-type` set to `syncadaptor`.
 

@@ -33,7 +33,7 @@ For trying TiddlyWiki5 out under Node.js, several scripts are provided (.sh for 
 
 This script builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
 
-By default, files are output to a folder called `jermolene.github.com`, sibling to the to the TiddlyWiki5 source directory. For example:
+By default, files are output to a folder called `jermolene.github.com`, sibling to the TiddlyWiki5 source directory. For example:
 
 ```
 /TiddlyWork/ - Directory for working with TiddlyWiki5
