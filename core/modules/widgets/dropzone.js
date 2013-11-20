@@ -106,7 +106,7 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 		if(data !== "") {
 			var tiddlerFields = dataType.convertToFields(data);
 			if(!tiddlerFields.title) {
-				tiddlerFields.title = this.generateTitle("Untitled");
+				tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
 			}
 			this.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 			return;
