@@ -364,8 +364,8 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		// Add it to the store
 		self.wiki.addTiddler(new $tw.Tiddler(
 			self.wiki.getCreationFields(),
-			tiddlerFields,
 			self.wiki.getModificationFields(),
+			tiddlerFields,
 			{title: title}
 		));
 		// Add it to the story
