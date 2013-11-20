@@ -116,3 +116,6 @@ Tobias Beer, @tobibeer, 2013/09/21
 Nate Cain, @natecain, 2013/09/30
 
 Bob Robison, @grayeul, 2013/11/11
+
+Adrian Sampaleanu, @asampal, 2013/11/17
+
