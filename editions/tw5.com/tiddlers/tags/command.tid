@@ -5,4 +5,4 @@ modified: 201308241531
 modifier: JeremyRuston
 title: command
 
-When run under node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki5 Node Edition]] with these built-in commands.
+When run under Node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki5 Node Edition]] with these built-in commands.

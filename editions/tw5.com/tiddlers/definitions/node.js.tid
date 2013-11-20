@@ -1,10 +1,10 @@
-title: node.js
+title: Node.js
 tags: definitions
 
-[[node.js]] is a downloadable application for your PC, Mac or Linux computer that lets it run JavaScript applications. Unlike JavaScript applications running in a web browser, [[node.js]] code has full access to the file system and other resources of the computer, enabling it to perform the roles that have traditionally been the preserve of languages like Java, PHP and Python. See http://nodejs.org/ for more details.
+[[Node.js]] is a downloadable application for your PC, Mac or Linux computer that lets it run JavaScript applications. Unlike JavaScript applications running in a web browser, [[Node.js]] code has full access to the file system and other resources of the computer, enabling it to perform the roles that have traditionally been the preserve of languages like Java, PHP and Python. See http://nodejs.org for more details.
 
-For TiddlyWiki, [[node.js]] means that we can have a single code base that can run in the browser or on the server, giving great flexibility in how it is used.
+For TiddlyWiki, [[Node.js]] means that we can have a single code base that can run in the browser or on the server, giving great flexibility in how it is used.
 
-For end users, [[node.js]] is no more complicated to install than a web browser, but unlocks powerful capabilities such as the ability to run TiddlyWiki as a web server that you can connect to from other devices.
+For end users, [[Node.js]] is no more complicated to install than a web browser, but unlocks powerful capabilities such as the ability to run TiddlyWiki as a web server that you can connect to from other devices.
 
 See [[TiddlyWiki5 Node Edition]] for more details.
