@@ -131,7 +131,14 @@ exports.filterTiddlers = function(filterString,currTiddlerTitle,tiddlerList) {
 };
 
 exports.compileFilter = function(filterString) {
-	var filterParseTree = this.parseFilter(filterString);
+	var filterParseTree;
+	try {
+		filterParseTree = this.parseFilter(filterString);
+	} catch(e) {
+		return function(source,currTiddlerTitle) {
+			return ["Filter error: " + e];
+		};
+	}
 	// Get the hashmap of filter operator functions
 	var filterOperators = this.getFilterOperators();
 	// Assemble array of functions, one for each operation
