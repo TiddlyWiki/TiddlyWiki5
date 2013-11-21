@@ -1,8 +1,0 @@
-title: TabsExample
-tags: samples
-
-Here is an example of the tabs macro:
-
-<<tabs "Docs WikiText Features RoadMap" "WikiText" 1>>
-
-<<tabs "[tag[tips]]" "GoogleChromeTips" 2>>
