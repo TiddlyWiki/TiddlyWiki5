@@ -19,6 +19,6 @@ tags: releasenote
 
 !! Bug fixes
 
-* 
+* Fixed problem with displaying tiddler titles that contain WikiText syntax
 
 Contributors to this release include @jermolene.
