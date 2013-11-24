@@ -1,13 +1,16 @@
 title: $:/core/templates/store.area.template.html
 
+\define saveFilter()
+[is[tiddler]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]]
+\end
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
 `<div id="storeArea" style="display:none;">`
-{{{ [!is[system]] ||$:/core/templates/html-div-tiddler}}}
+<$list filter=<<saveFilter>> template="$:/core/templates/html-div-tiddler"/>
 `</div>`
 </$reveal>
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 `<!------------- Encrypted tiddlers --------->`
 `<pre id="encryptedStoreArea" type="text/plain" style="display:none;">`
-<$encrypt filter="[!is[system]]"/>
+<$encrypt filter=<<saveFilter>>/>
 `</pre>`
 </$reveal>

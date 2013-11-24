@@ -30,10 +30,6 @@ title: $:/core/templates/tiddlywiki5.template.html
 {{$:/core/templates/static.content||$:/core/templates/html-tiddler}}
 </div>
 </noscript>
-<!----------- Miscellaneous system tiddlers ----------->
-<div id="systemArea" style="display:none;">
-{{{ [is[system]] -[type[text/css]] -[type[application/javascript]has[module-type]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] ||$:/core/templates/html-div-tiddler}}}
-</div>
 <!----------- Ordinary tiddlers ----------->
 {{$:/core/templates/store.area.template.html}}
 <!----------- Library modules ----------->
