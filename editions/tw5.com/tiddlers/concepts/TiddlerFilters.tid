@@ -1,6 +1,6 @@
 created: 201308270800
 creator: JeremyRuston
-modified: 201309141606
+modified: 201311242006
 modifier: JeremyRuston
 tags: concepts
 title: TiddlerFilters
@@ -63,6 +63,7 @@ The operator defaults to `title` if omitted, so `[[HelloThere]]` is equivalent t
 
 The operands available with the `is` operator are:
 
+* ''tiddler'': selects all tiddlers excluding shadows, whether or not they are SystemTiddlers
 * ''system'': selects all SystemTiddlers
 * ''shadow'': selects all ShadowTiddlers
 * ''current'': selects the current ContextTiddler
