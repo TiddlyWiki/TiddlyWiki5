@@ -38,8 +38,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 {{$:/core/templates/store.area.template.html}}
 <!----------- Library modules ----------->
 <div id="libraryModules" style="display:none;">
-{{$:/core/lib/jquery.min.js||$:/core/templates/javascript-tiddler}}
-{{{ [is[system]type[application/javascript]library[yes]] -[[$:/core/lib/jquery.min.js]] ||$:/core/templates/javascript-tiddler}}}
+{{{ [is[system]type[application/javascript]library[yes]] ||$:/core/templates/javascript-tiddler}}}
 </div>
 <!----------- Boot kernel prologue ----------->
 <div id="bootKernelPrefix" style="display:none;">
