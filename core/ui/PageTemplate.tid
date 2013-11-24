@@ -4,7 +4,7 @@ title: $:/core/ui/PageTemplate
 
 <$dropzone>
 
-<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/PageTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/PageTemplate]]" variable="listItem">
+<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/PageTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/PageTemplate]] +[tag[$:/tags/PageTemplate]]" variable="listItem">
 
 <$transclude tiddler=<<listItem>>/>
 

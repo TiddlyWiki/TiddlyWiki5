@@ -3,5 +3,5 @@ tags: $:/tags/SideBar
 caption: More
 
 <div class="tw-more-sidebar">
-<<tabs "[is[shadow]!has[draft.of]tag[$:/tags/MoreSideBar]] [!is[shadow]!has[draft.of]tag[$:/tags/MoreSideBar]]" "$:/core/ui/MoreSideBar/Open" "$:/state/tab/moresidebar">>
+<<tabs "[is[shadow]!has[draft.of]tag[$:/tags/MoreSideBar]] [!is[shadow]!has[draft.of]tag[$:/tags/MoreSideBar]] +[tag[$:/tags/MoreSideBar]]" "$:/core/ui/MoreSideBar/Open" "$:/state/tab/moresidebar">>
 </div>
