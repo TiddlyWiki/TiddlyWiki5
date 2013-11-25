@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/googleanalytics",
+	"description": "Google Analytics plugin for TiddlyWiki5",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}

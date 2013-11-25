@@ -1,6 +1,7 @@
 {
 	"plugins": [
 		"tiddlywiki/fullscreen",
+		"tiddlywiki/googleanalytics",
 		"tiddlywiki/github-fork-ribbon"
 	],
 	"themes": [
