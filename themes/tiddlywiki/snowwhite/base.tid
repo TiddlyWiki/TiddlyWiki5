@@ -160,7 +160,6 @@ a.tw-tiddlylink {
 }
 
 .tw-sidebar-lists a.tw-tiddlylink:hover {
-	color: #444;
 }
 
 a.tw-tiddlylink:hover {
@@ -302,7 +301,6 @@ a.tw-tiddlylink-external {
 
 .sidebar-header {
 	color: #acacac;
-	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
 
 .sidebar-header .title a.tw-tiddlylink-resolves {
@@ -479,6 +477,8 @@ a.tw-tiddlylink-external {
 	font-size: 2.35em;
 	line-height: 1.2em;
 	color: #182955;
+	
+	/* text-shadow: 0 1px 0 rgba(255,255,255, 0.8); */
 }
 
 .titlebar img {
