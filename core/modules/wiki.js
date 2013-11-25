@@ -871,7 +871,7 @@ Save the wiki contents. Options are:
 */
 exports.saveWiki = function(options) {
 	options = options || {};
-	var template = options.template || "$:/core/templates/tiddlywiki5.template.html",
+	var template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain";
 	var text = this.renderTiddler(downloadType,template);
 	this.callSaver("save",text,function(err) {

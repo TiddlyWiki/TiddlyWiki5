@@ -1,0 +1,8 @@
+title: $:/core/templates/static.area
+
+<$reveal type="nomatch" state="$:/isEncrypted" text="yes">
+{{$:/core/templates/static.content||$:/core/templates/html-tiddler}}
+</$reveal>
+<$reveal type="match" state="$:/isEncrypted" text="yes">
+This file contains an encrypted ~TiddlyWiki. Enable ~JavaScript and enter the decryption password when prompted.
+</$reveal>

@@ -1,4 +1,4 @@
-title: $:/core/templates/tiddlywiki5.template.html
+title: $:/core/templates/tiddlywiki5.html
 
 \rules only filteredtranscludeinline transcludeinline
 <!doctype html>
@@ -27,7 +27,7 @@ title: $:/core/templates/tiddlywiki5.template.html
 <!----------- Static content for Google and browsers without JavaScript ----------->
 <noscript>
 <div id="splashArea">
-{{$:/core/templates/static.content||$:/core/templates/html-tiddler}}
+{{$:/core/templates/static.area}}
 </div>
 </noscript>
 <!----------- Ordinary tiddlers ----------->

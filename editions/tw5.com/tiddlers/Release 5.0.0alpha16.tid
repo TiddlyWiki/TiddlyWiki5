@@ -21,4 +21,8 @@ tags: releasenote
 
 * Fixed problem with displaying tiddler titles that contain WikiText syntax
 
+!! Internal changes
+
+* The main HTML file template used for saving TiddlyWiki5 documents has changed from `$:/core/templates/tiddlywiki5.template.html` to `$:/core/save/all`
+
 Contributors to this release include @jermolene.

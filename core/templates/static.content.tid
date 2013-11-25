@@ -1,12 +1,11 @@
 title: $:/core/templates/static.content
 type: text/vnd.tiddlywiki
 
-<$reveal type="nomatch" state="$:/isEncrypted" text="yes">
 <!-- For Google, and people without JavaScript-->
-<$list filter="[!is[system]sort[title]]" >
-<$view field="title" format="text"></$view>
+This [[TiddlyWiki|http://tiddlywiki.com]] contains the following tiddlers:
+
+<ul>
+<$list filter=<<saveTiddlerFilter>>>
+<li><$view field="title" format="text"></$view></li>
 </$list>
-</$reveal>
-<$reveal type="match" state="$:/isEncrypted" text="yes">
-This file contains an encrypted ~TiddlyWiki. Enable ~JavaScript and enter the decryption password when prompted.
-</$reveal>
+</ul>

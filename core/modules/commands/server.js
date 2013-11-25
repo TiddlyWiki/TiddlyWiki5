@@ -221,7 +221,7 @@ var Command = function(params,commander,callback) {
 
 Command.prototype.execute = function() {
 	var port = this.params[0] || "8080",
-		rootTiddler = this.params[1] || "$:/core/templates/tiddlywiki5.template.html",
+		rootTiddler = this.params[1] || "$:/core/save/all",
 		renderType = this.params[2] || "text/plain",
 		serveType = this.params[3] || "text/html",
 		username = this.params[4] || "ANONYMOUS";
