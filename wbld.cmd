@@ -1,4 +1,4 @@
-@echo
+@echo off
 
 rem build the TiddlyWeb edition of TiddlyWiki5 and upload it to TiddlySpace. Requires the TiddlySpace credentials
 rem of a member of the tw5tiddlyweb space

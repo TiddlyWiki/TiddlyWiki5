@@ -4,9 +4,14 @@ rem build TiddlyWiki5 for five.tiddlywiki.com
 
 rem Set up the build output directory
 
-if "x%TW5_BUILD_OUTPUT%" == "x" (set TW5_BUILD_OUTPUT=..\jermolene.github.com)
+if "x%TW5_BUILD_OUTPUT%" == "x" (
+	set TW5_BUILD_OUTPUT=..\jermolene.github.com
+)
 
-if not exist %TW5_BUILD_OUTPUT%\nul echo A valid TW5_BUILD_OUTPUT environment variable must be set
+if not exist %TW5_BUILD_OUTPUT%\nul (
+	echo A valid TW5_BUILD_OUTPUT environment variable must be set
+	exit 1
+)
 
 echo Using TW5_BUILD_OUTPUT as %TW5_BUILD_OUTPUT%
 echo.
@@ -32,6 +37,7 @@ node .\tiddlywiki.js ^
 	--rendertiddler ReadMe .\readme.md text/html ^
 	--rendertiddler ContributingTemplate .\contributing.md text/html ^
 	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\index.html text/plain ^
+	--rendertiddler $:/editions/tw5.com/save-empty %TW5_BUILD_OUTPUT%\empty2.html text/plain ^
 	--rendertiddler $:/core/templates/static.template.html %TW5_BUILD_OUTPUT%\static.html text/plain ^
 	--rendertiddler $:/core/templates/static.template.css %TW5_BUILD_OUTPUT%\static\static.css text/plain ^
 	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html %TW5_BUILD_OUTPUT%\static text/plain ^
