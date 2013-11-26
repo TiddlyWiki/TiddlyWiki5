@@ -30,6 +30,7 @@ rm $TW5_BUILD_OUTPUT/static/*
 # First,
 #  readme.md: the readme file for GitHub
 #  index.html: the main file, including content
+#  empty.html: the main file, excluding content
 #  static.html: the static version of the default tiddlers
 
 node ./tiddlywiki.js \
@@ -38,7 +39,7 @@ node ./tiddlywiki.js \
 	--rendertiddler ReadMe ./readme.md text/html \
 	--rendertiddler ContributingTemplate ./contributing.md text/html \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/index.html text/plain \
-	--rendertiddler $:/editions/tw5.com/save-empty $TW5_BUILD_OUTPUT/empty2.html text/plain \
+	--rendertiddler $:/editions/tw5.com/save-empty $TW5_BUILD_OUTPUT/empty.html text/plain \
 	--rendertiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
 	--rendertiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
 	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
@@ -53,15 +54,7 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/encrypted.html text/plain \
 	|| exit 1
 
-# Third, empty.html: empty wiki for reuse
-
-node ./tiddlywiki.js \
-	./editions/empty \
-	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/empty.html text/plain \
-	|| exit 1
-
-# Fourth, tahoelafs.html: empty wiki with plugin for Tahoe-LAFS
+# Third, tahoelafs.html: empty wiki with plugin for Tahoe-LAFS
 
 node ./tiddlywiki.js \
 	./editions/tahoelafs \
@@ -69,7 +62,7 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/tahoelafs.html text/plain \
 	|| exit 1
 
-# Fifth, d3demo.html: wiki to demo d3 plugin
+# Fourth, d3demo.html: wiki to demo d3 plugin
 
 node ./tiddlywiki.js \
 	./editions/d3demo \
@@ -77,7 +70,7 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/d3demo.html text/plain \
 	|| exit 1
 
-# Sixth, codemirrordemo.html: wiki to demo codemirror plugin
+# Fifth, codemirrordemo.html: wiki to demo codemirror plugin
 
 node ./tiddlywiki.js \
 	./editions/codemirrordemo \
@@ -85,7 +78,7 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/codemirrordemo.html text/plain \
 	|| exit 1
 
-# Seventh, codemirrordemo.html: wiki to demo codemirror plugin
+# Sixth, codemirrordemo.html: wiki to demo codemirror plugin
 
 node ./tiddlywiki.js \
 	./editions/markdowndemo \
@@ -93,6 +86,6 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/markdowndemo.html text/plain \
 	|| exit 1
 
-# Eighth, run the test edition to run the Node.js tests and to generate test.html for tests in the browser
+# Seventh, run the test edition to run the Node.js tests and to generate test.html for tests in the browser
 
 ./test.sh
