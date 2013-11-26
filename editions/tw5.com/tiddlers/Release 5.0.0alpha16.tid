@@ -17,6 +17,7 @@ tags: releasenote
 ** [[$:/TopSideBar]] and [[$:/LeftSideBar]] are no longer specially treated; use the new tag instead
 * Fixed problem that prevented tag configured items from shadow tiddlers interleaving with items from ordinary tiddlers
 * Refactored control panel to add ''Saving'' tab that includes TiddlySpot options
+* Added backup URL to TiddlySpot control panel tab
 
 !! Bug fixes
 

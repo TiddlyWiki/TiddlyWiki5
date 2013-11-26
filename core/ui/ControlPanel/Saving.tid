@@ -2,10 +2,21 @@ title: $:/core/ui/ControlPanel/Saving
 tags: $:/tags/ControlPanel
 caption: Saving
 
+\define backupURL()
+http://$(userName)$.tiddlyspot.com/backup/
+\end
+\define backupLink()
+<$reveal type="nomatch" state="$:/UploadName" text="">
+<$set name="userName" value={{$:/UploadName}}>
+<a href=<<backupURL>>><$macrocall $name="backupURL" $type="text/plain" $output="text/plain"/></a>
+</$set>
+</$reveal>
+\end
 ! TiddlySpot
 
 |[[Wiki name|$:/UploadName]] |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
 |Password |<$password name="upload"/> |
 |Server URL |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
+|Backups |<<backupLink>> |
 
 //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
