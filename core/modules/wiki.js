@@ -875,7 +875,11 @@ exports.saveWiki = function(options) {
 		downloadType = options.downloadType || "text/plain";
 	var text = this.renderTiddler(downloadType,template);
 	this.callSaver("save",text,function(err) {
-		$tw.notifier.display("$:/messages/Saved");
+		if(err) {
+			alert("Error while saving:\n\n" + err);
+		} else {
+			$tw.notifier.display("$:/messages/Saved");
+		}
 	});
 };
 

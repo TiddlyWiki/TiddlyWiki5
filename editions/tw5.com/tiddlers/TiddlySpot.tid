@@ -12,6 +12,6 @@ TiddlyWiki5 isn't yet built in to TiddlySpot but you can use it by following the
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
 # Open TiddlyWiki5 in your browser from http://five.tiddlywiki.com/empty.html
 # Fill in the TiddlySpot wikiname and password in the control panel
-# Click the "Save Changes" button. You should get a confirmation message `0 - Fileindex.html`
+# Click the "Save Changes" button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
 # You should see a copy of TiddlyWiki5. You can edit and create tiddlers, and click "Save Changes" to save changes back up to TiddlySpot (you'll need to re-enter your password the first time you visit the wiki on TiddlySpot)
