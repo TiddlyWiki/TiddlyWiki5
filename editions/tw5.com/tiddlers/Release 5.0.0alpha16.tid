@@ -15,14 +15,22 @@ tags: releasenote
 
 * The page building blocks are now driven by the system tag `$:/tags/PageTemplate`
 ** [[$:/TopSideBar]] and [[$:/LeftSideBar]] are no longer specially treated; use the new tag instead
+* Fixed problem that prevented tag configured items from shadow tiddlers interleaving with items from ordinary tiddlers
 * Refactored control panel to add ''Saving'' tab that includes TiddlySpot options
 
 !! Bug fixes
 
 * Fixed problem with displaying tiddler titles that contain WikiText syntax
+* No longer crashes when encountering an error in a filter string
+* Fixed a crash when dragging and dropping tiddlers within TiddlyWiki5
+* No longer update the modified date for imported tiddlers
 
 !! Internal changes
 
+* Added Windows-compatible build scripts
+* Changes to the SavingMechanism to allow the tiddlers that are saved to be selected
+** This enables the wiki at http://five.tiddlywiki.com/index.html to generate an empty wiki
 * The main HTML file template used for saving TiddlyWiki5 documents has changed from `$:/core/templates/tiddlywiki5.template.html` to `$:/core/save/all`
+* Moved tw5.com's Google Analytics integration into a proper plugin
 
-Contributors to this release include @jermolene.
+Contributors to this release include @jermolene, @asampal and @pmario.
