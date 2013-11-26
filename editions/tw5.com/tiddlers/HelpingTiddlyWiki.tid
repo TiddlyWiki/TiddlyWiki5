@@ -1,27 +1,21 @@
-created: 201308251605
+created: 20130825160500000
 creator: JeremyRuston
-modified: 201308281850
+modified: 20131126195146799
 modifier: JeremyRuston
 tags: community
 title: HelpingTiddlyWiki
+type: text/vnd.tiddlywiki
 
 If you find TiddlyWiki useful, there are lots of ways you can help assure its future and make it better.
 
-! 1. Teach and Tell
+! Teach and Tell
 
 OpenSource projects like TiddlyWiki thrive on the feedback and engagement of users. TiddlyWiki becomes more useful to everyone as more and more people use it. So, if you find TiddlyWiki useful, spread the word. The best possible way to assure its future is for it to become a hundred times more popular than before.
 
 * [[Tweet about TiddlyWiki|https://twitter.com/intent/tweet?text=I+love+TiddlyWiki+because...&source=tiddlywiki5]]
 * [[Star the TiddlyWiki5 GitHub Repository|https://github.com/Jermolene/TiddlyWiki5/star]]
 
-! 2. Join the discussion
-
-There's lively discussion about TiddlyWiki in the Google Groups:
-
-* The main TiddlyWiki group: http://groups.google.com/group/TiddlyWiki
-* The TiddlyWikiDev group for developers: http://groups.google.com/group/TiddlyWikiDev
-
-! 3. Improve the documentation and code
+! Help improve the documentation and code
 
 The main TiddlyWiki documentation and code lives on GitHub, and welcomes [[contributions|Contributing]]:
 

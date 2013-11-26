@@ -1,10 +1,21 @@
-created: 201309091516000
+created: 20130909151600000
 creator: JeremyRuston
-modified: 201311221855003
+modified: 20131126195933719
 modifier: JeremyRuston
 tags: community
 title: Community
 type: text/vnd.tiddlywiki
+
+TiddlyWiki is made much more useful by its vibrant community of users and OpenSource developers.
+
+! Community Forums
+
+The TiddlyWiki discussion groups are mailing lists for talking about TiddlyWiki: requests for help, announcements of new releases and plugins, debating new features, or just sharing experiences.
+
+* The main TiddlyWiki group: http://groups.google.com/group/TiddlyWiki
+* The TiddlyWikiDev group for developers: http://groups.google.com/group/TiddlyWikiDev
+* Follow [[@TiddlyWiki on Twitter|http://twitter.com/#!/TiddlyWiki]] for the latest news
+* Get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]]
 
 ! Resources for TiddlyWiki5
 

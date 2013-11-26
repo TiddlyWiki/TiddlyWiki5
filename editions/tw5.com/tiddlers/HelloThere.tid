@@ -1,18 +1,17 @@
-created: 201308221702000
+created: 20130822170200000
 creator: JeremyRuston
-modified: 201311171740
-modifier: AdrianSampaleanu
+modified: 20131126220042886
+modifier: JeremyRuston
 tags: introduction
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the non-linear personal web notebook first released in 2004. It is a complete interactive wiki in JavaScript that can be run from a single HTML file in the browser or as a powerful [[Node.js application|Node.js]].
+Welcome to TiddlyWiki5, a reboot of TiddlyWiki, the non-linear personal web notebook first released in 2004. It is a complete interactive wiki in JavaScript that can be run from a [[single HTML file in the browser|How to use TiddlyWiki5 as a standalone HTML file]] or as a powerful [[Node.js application|Node.js]].
 
-This is TiddlyWiki5 version //<<version>>//. It is drawing to the end of the alpha phase, meaning it is almost ready for everyday use. It is a great time to get involved and support its [[future development|RoadMap]]:
+<div class="tw-message-box">
+{{TiddlyWiki Classic.png}}The deep internal changes mean that TiddlyWiki5 is not fully compatible with previous versions with different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly in TiddlyWiki5.
 
-* Explore its features online at http://five.tiddlywiki.com/
-* Join the discussions on [[the TiddlyWikiDev Google Group|http://groups.google.com/group/TiddlyWikiDev]]
-* Get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]]
-* Follow [[@TiddlyWiki on Twitter|http://twitter.com/#!/TiddlyWiki]] for the latest news
+The original TiddlyWiki Classic is still available at http://tiddlywiki.com/. 
+</div>
 
-//TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//
+This is TiddlyWiki5 version ''<<version>>'' (see the detailed ReleaseHistory and the RoadMap for getting to the full release). It is a great time to get involved and support the future development of TiddlyWiki5. //TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//.
