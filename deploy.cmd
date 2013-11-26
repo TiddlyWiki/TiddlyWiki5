@@ -1,4 +1,4 @@
-@echo
+@echo off
 
 rem Publish to NPM
 
@@ -6,7 +6,7 @@ npm publish || exit 1
 
 rem Deploy latest build to github
 
-pushd ..\mytiddlywiki.github.com
+pushd ..\jermolene.github.com
 
 git add --all || exit 1
 

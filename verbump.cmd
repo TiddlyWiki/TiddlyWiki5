@@ -1,8 +1,11 @@
-@echo
+@echo off
 
 rem Bump to a new version number
 
-if "x%1" == "x" echo "Missing version (eg '5.0.0-alpha.99')" && exit 1
+if "x%1" == "x" (
+	echo Missing version (eg '5.0.0-alpha.99'^)
+	exit 1
+)
 
 rem Set the new version number (will also commit and tag the release)
 

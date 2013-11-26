@@ -1,4 +1,4 @@
-@echo
+@echo off
 
 rem Split the tiddlers out of a TiddlyWiki file
 
