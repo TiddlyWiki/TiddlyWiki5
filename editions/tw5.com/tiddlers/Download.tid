@@ -7,10 +7,8 @@ title: Download
 
 ! Download Single File Editions
 
-Right click and download these links to single file editions of TiddlyWiki5:
-
-* [[empty|http://five.tiddlywiki.com/empty]]
-* [[tw5.com|http://five.tiddlywiki.com/]]
+|<$button message="tw-save-wiki" param="$:/editions/tw5.com/save-empty" class="btn-big-green">Save Empty {{$:/core/images/save-button}}</$button>|Get started with an empty wiki |
+|<$button message="tw-save-wiki" param="$:/core/save/all" class="btn-big-green">Save Full {{$:/core/images/save-button}}</$button>|Download a full copy of this site, including all the documentation |
 
 ! Download Node.js Edition
 

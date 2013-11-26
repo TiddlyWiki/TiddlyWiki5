@@ -242,6 +242,17 @@ a.tw-tiddlylink-external {
 	border: none;
 }
 
+.btn-big-green {
+	padding: 8px;
+	margin: 8px;
+	background: #34C734;
+	color: #fff;
+	fill: #fff;
+	border: none;
+	font-size: 1.2em;
+	line-height: 1.4em;
+}
+
 .btn-mini {
 	color: #e0e0e0;
 }
