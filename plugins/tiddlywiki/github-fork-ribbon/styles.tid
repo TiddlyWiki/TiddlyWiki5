@@ -25,7 +25,7 @@ tags: [[$:/tags/stylesheet]]
   -webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
 
-  z-index: 9999;
+  z-index: 999;
   pointer-events: auto;
 }
 
@@ -62,7 +62,7 @@ tags: [[$:/tags/stylesheet]]
   position: absolute;
   overflow: hidden;
   top: 0;
-  z-index: 9999;
+  z-index: 999;
   pointer-events: none;
 }
 
