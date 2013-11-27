@@ -27,7 +27,7 @@ The tiddler dictionary format is an alternative syntax for data tiddlers:
 * The ContentType field `type` is set to `application/x-tiddler-dictionary`
 * The `text` field consists of one or more lines of the form `<name>:<value>`
 
-For example, the [[metrics of the Snow White theme|$:/themes/tiddlywiki/snowwhite/metrics]] are a tiddler dictionary.
+For example, the [[metrics of the Vanilla theme|$:/themes/tiddlywiki/vanilla/metrics]] are a tiddler dictionary.
 
 ! Accessing data within data tiddlers
 

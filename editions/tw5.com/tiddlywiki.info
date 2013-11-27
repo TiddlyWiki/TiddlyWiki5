@@ -5,6 +5,7 @@
 		"tiddlywiki/github-fork-ribbon"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite",
 		"tiddlywiki/starlight",
 		"tiddlywiki/stickytitles",

@@ -1,0 +1,923 @@
+title: $:/themes/tiddlywiki/vanilla/base
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define border-radius(radius)
+```
+  -webkit-border-radius: $radius$;
+     -moz-border-radius: $radius$;
+          border-radius: $radius$;
+```
+\end
+
+/*
+** Start with the normalize CSS reset, and then belay some of its effects
+*/
+
+{{$:/themes/tiddlywiki/vanilla/reset}}
+
+*, input[type="search"] {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+/*
+** Basic element styles
+*/
+
+html {
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings##fontfamily}};
+}
+
+body.tw-body {
+	font-size: {{$:/themes/tiddlywiki/vanilla/metrics##fontsize}};
+	line-height: {{$:/themes/tiddlywiki/vanilla/metrics##lineheight}};
+	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##foreground}};
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##pagebackground}};
+	word-wrap: break-word;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1em;
+	font-weight: 300;
+}
+
+pre {
+	display: block;
+	padding: 14px;
+	margin: 0 0 14px;
+	word-break: normal;
+	word-wrap: break-word;
+	white-space: pre;
+	white-space: pre-wrap;
+	background-color: #f5f5f5;
+	border: 1px solid #ccc;
+	padding: 0 3px 2px;
+	<<border-radius 3px>>
+}
+
+code {
+	color: #d14;
+	background-color: #f7f7f9;
+	border: 1px solid #e1e1e8;
+    white-space: pre-wrap;
+	padding: 0 3px 2px;
+	<<border-radius 3px>>
+}
+
+/*
+Markdown likes putting code elements inside pre elements
+*/
+pre > code {
+	padding: 0;
+	border: none;
+	background-color: inherit;
+	color: inherit;
+}
+
+table {
+	border: 1px solid #ddd;
+	width: auto;
+	max-width: 100%;
+	caption-side: bottom;
+}
+
+table th, table td {
+	padding: 0 7px 0 7px;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+}
+
+table thead tr td, table th {
+	background-color: #f0f0f0;
+	font-weight: bold;
+}
+
+table tfoot tr td {
+	background-color: #a8a8a8;
+}
+
+.tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
+	max-width: 100%;
+}
+
+.tw-tiddler-frame embed {
+	width: 100%;
+	height: 600px;
+}
+
+/*
+** Links
+*/
+
+a.tw-tiddlylink {
+	text-decoration: none;
+	font-weight: normal;
+	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkforeground}};
+	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
+}
+
+.tw-sidebar-lists a.tw-tiddlylink {
+	color: #999;
+}
+
+.tw-sidebar-lists a.tw-tiddlylink:hover {
+	color: #444;
+}
+
+a.tw-tiddlylink:hover {
+	text-decoration: underline;
+}
+
+a.tw-tiddlylink-resolves {
+}
+
+a.tw-tiddlylink-shadow {
+	font-weight: bold;
+}
+
+a.tw-tiddlylink-shadow.tw-tiddlylink-resolves {
+	font-weight: normal;
+}
+
+a.tw-tiddlylink-missing {
+	font-style: italic;
+}
+
+a.tw-tiddlylink-external {
+	text-decoration: underline;
+}
+
+/*
+** Drag and drop styles
+*/
+
+.tw-tiddler-dragger {
+	position: relative;
+	z-index: -10000;
+}
+
+.tw-tiddler-dragger-inner {
+	position: absolute;
+	display: inline-block;
+	padding: 8px 20px;
+	font-size: 16.9px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #fff;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #000;
+	<<border-radius 20px>>
+}
+
+.tw-tiddler-dragger-cover {
+	position: absolute;
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##pagebackground}};
+}
+
+.tw-dropzone {
+	position: relative;
+}
+
+.tw-dropzone.tw-dragover:before {
+	z-index: 10000;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,200,0,0.7);
+	text-align: center;
+	content: "Drop here";
+}
+
+/*
+** Buttons
+*/
+
+.btn-invisible {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+}
+
+.btn-big-green {
+	padding: 8px;
+	margin: 8px;
+	background: #34C734;
+	color: #fff;
+	fill: #fff;
+	border: none;
+	font-size: 1.2em;
+	line-height: 1.4em;
+}
+
+.btn-mini {
+	color: #e0e0e0;
+}
+
+.btn-mini:hover {
+	color: #444;
+}
+
+/*
+** Tags and missing tiddlers
+*/
+
+.tw-tag-list-item {
+	display: inline-block;
+	margin-right: 7px;
+}
+
+.tw-tags-wrapper {
+	margin: 4px 0 14px 0;
+}
+
+.tw-missing-tiddler-label {
+	font-style: italic;
+	font-weight: normal;
+	display: inline-block;
+	font-size: 11.844px;
+	line-height: 14px;
+	white-space: nowrap;
+	vertical-align: baseline;
+}
+
+.tw-tag-label {
+	display: inline-block;
+	padding: 2px 9px;
+	font-size: 0.9em;
+	font-weight: 300;
+	line-height: 1.2em;
+	color: #fff;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #D5AD34;
+	<<border-radius 8px>>
+}
+
+.tw-untagged-label {
+	background-color: #999;
+}
+
+.tw-tag-label svg {
+	height: 1em;
+	width: 1em;
+	fill: #fff;
+}
+
+/*
+** Page layout
+*/
+
+.sidebar-header {
+	color: #acacac;
+}
+
+.sidebar-header .title a.tw-tiddlylink-resolves {
+	font-weight: 300;
+}
+
+.sidebar-header .tw-sidebar-lists p {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+
+.tw-search a svg {
+	height: 0.75em;
+}
+
+.tw-search-results {
+	padding-top: 14px;
+}
+
+.tw-page-controls {
+	margin-top: 14px;
+}
+
+.tw-page-controls a.tw-tiddlylink:hover {
+	text-decoration: none;
+}
+
+.tw-page-controls svg {
+	height: 1.75em;
+	min-width: 1px;
+	padding-right: 0.5em;
+	fill: #fff;
+}
+
+.tw-page-controls svg:hover {
+	fill: #000;
+}
+
+.tw-menu-list-item {
+	white-space: nowrap;
+}
+
+.tw-menu-list-count {
+	font-weight: bold;
+}
+
+.tw-open-tiddler-list {
+	<<transform-origin "0% 0%">>
+}
+
+.tw-menu-list-subitem {
+	padding-left: 7px;
+}
+
+.story-river {
+	position: relative;
+}
+
+.tw-story-spacer {
+	position: absolute;
+	min-height: 100%;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+	.sidebar-header {
+		padding: 14px;
+	}
+
+	.story-river {
+		position: relative;
+		padding: 0;
+	}
+}
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+	.sidebar-header {
+		position: fixed;
+		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
+		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyright}};
+		bottom: 0;
+		right: 0;
+		overflow-y: auto;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		margin: 0 0 0 -42px;
+		padding: 70px 0 28px 42px;
+	}
+
+	.story-river {
+		position: relative;
+		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyleft}};
+		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
+		width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}};
+		padding: 56px 42px 42px 42px;
+	}
+}
+
+@media print {
+	.sidebar-header {
+		display: none;
+	}
+
+	.story-river {
+		margin-left: 14px;
+	}
+}
+
+/*
+** Tiddler styles
+*/
+
+.tw-tiddler-frame {
+	width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
+	margin-bottom: 28px;
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##tiddlerbackground}};
+}
+
+.tw-tiddler-info {
+	padding: 14px 42px 14px 42px;
+	background-color: #f8f8f8;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
+	background-color: #f8f8f8;
+	border-bottom: 1px solid #f8f8f8;
+}
+
+.tw-view-field-table {
+	width: 100%;
+}
+
+.tw-view-field-name {
+	width: 1%; /* Makes this column be as narrow as possible */
+	text-align: right;
+	font-style: italic;
+}
+
+.tw-view-field-value {
+}
+
+@media (max-width: 770px) {
+	.tw-tiddler-frame {
+		padding: 14px 14px 14px 14px;
+	}
+
+	.tw-tiddler-info {
+		margin: 0 -14px 0 -14px;
+	}
+}
+
+@media (min-width: 770px) {
+	.tw-tiddler-frame {
+		padding: 28px 42px 42px 42px;
+	}
+
+	.tw-tiddler-info {
+		margin: 0 -42px 0 -42px;
+	}
+}
+
+.titlebar {
+	font-weight: 300;
+	font-size: 2.35em;
+	line-height: 1.2em;
+	color: #182955;
+}
+
+.titlebar img {
+	height: 1em;
+}
+
+.tw-subtitle {
+	font-size: 0.9em;
+	color: #c0c0c0;
+	font-weight: 300;
+}
+
+.tw-tiddler-missing .title {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.tw-tiddler-frame .tw-tiddler-controls {
+	float: right;
+}
+
+.tw-tiddler-controls button {
+	margin: 0 0 0 5px;
+	vertical-align: baseline;
+}
+
+.tw-tiddler-controls button svg {
+	height: 0.75em;
+	fill: #ccc;
+}
+
+.tw-tiddler-controls button.tw-selected svg {
+	fill: #444;
+}
+
+.tw-tiddler-controls svg:hover {
+	fill: #888;
+}
+
+@media print {
+	.tw-tiddler-controls {
+		display: none;
+	}
+}
+
+.tw-tiddler-help { /* Help prompts within tiddler template */
+	color: #999;
+	margin-top: 14px;
+}
+
+.tw-tiddler-help a.tw-tiddlylink {
+	color: #888888;
+}
+
+.tw-tiddler-frame input.tw-edit-texteditor, .tw-tiddler-frame textarea.tw-edit-texteditor {
+	width: 100%;
+	padding: 3px 3px 3px 3px;
+	border: 1px solid #ccc;
+	line-height: 1.3em;
+	-webkit-appearance: none;
+	margin: 4px 0 4px 0;
+}
+
+.tw-tiddler-frame input.tw-edit-texteditor {
+	background-color: #f8f8f8;
+}
+
+canvas.tw-edit-bitmapeditor  {
+	border: 6px solid #fff;
+	cursor: crosshair;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+
+.tw-edit-bitmapeditor-width {
+	display: block;
+}
+
+.tw-edit-bitmapeditor-height {
+	display: block;
+}
+
+/*
+** Tiddler edit mode
+*/
+
+.tw-tiddler-edit-frame em {
+	color: #999;
+	font-style: normal;
+}
+
+.tw-edit-type-dropdown a.tw-tiddlylink-missing {
+	font-style: normal;
+}
+
+.tw-edit-tags-list {
+	margin: 14px 0 14px 0;
+}
+
+.tw-tag-editor-label {
+	display: inline-block;
+	margin-right: 7px;
+}
+
+.tw-remove-tag-button {
+	padding-left: 4px;
+}
+
+.tw-add-tag-name {
+	display: inline-block;
+	width: 15%;
+}
+
+.tw-tiddler-preview {
+	overflow: auto;
+}
+
+.tw-tiddler-preview-preview {
+	float: right;
+	width: 48%;
+	border: 1px solid #ccc;
+	margin: 4px 3px 3px 3px;
+	padding: 3px 3px 3px 3px;
+}
+
+.tw-tiddler-preview-edit {
+	width: 48%;
+}
+
+.tw-edit-fields {
+	width: 100%;
+}
+
+
+.tw-edit-fields table, .tw-edit-fields tr, .tw-edit-fields td {
+	border: none;
+	padding: 4px;
+}
+
+.tw-edit-fields > tbody > .tw-edit-field:nth-child(odd) {
+	background-color: #f0f4f0;
+}
+
+.tw-edit-fields > tbody > .tw-edit-field:nth-child(even) {
+	background-color: #e0e8e0;
+}
+
+.tw-edit-field-name {
+	text-align: right;
+}
+
+.tw-edit-field-value input {
+	width: 100%;
+}
+
+.tw-edit-field-remove {
+}
+
+.tw-edit-field-remove svg {
+	height: 1em;
+	width: 1em;
+	fill: #888;
+	vertical-align: middle;
+}
+
+.tw-edit-field-add-name {
+	display: inline-block;
+	width: 15%;
+}
+
+.tw-edit-field-add-button {
+	display: inline-block;
+	width: 10%;
+}
+
+/*
+** Dropdowns
+*/
+
+.btn-dropdown svg {
+	height: 1em;
+	width: 1em;
+	fill: #999;
+}
+
+.tw-drop-down {
+	min-width: 280px;
+	border: 1px solid {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownborder}};
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownbackground}};
+	padding: 7px 0 7px 0;
+	margin: 4px 0 0 0;
+	white-space: nowrap;
+}
+
+.tw-drop-down a {
+	display: block;
+	padding: 0 14px 0 14px;
+}
+
+.tw-drop-down a:hover {
+	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkbackground}};
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkforeground}};
+	text-decoration: none;
+}
+
+.tw-drop-down .tw-tab-buttons button {
+	background-color: #ececec;
+}
+
+.tw-drop-down .tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	border-bottom: 1px solid #fff;
+}
+
+.tw-drop-down .tw-tab-contents a {
+	padding: 0 0.5em 0 0.5em;
+}
+
+.tw-block-dropdown-wrapper {
+	position: relative;
+}
+
+.tw-block-dropdown {
+	position: absolute;
+	min-width: 280px;
+	border: 1px solid {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownborder}};
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownbackground}};
+	padding: 0 0 0 0;
+	margin: 4px 0 0 0;
+	white-space: nowrap;
+	z-index: 1000;
+}
+
+.tw-block-dropdown a {
+	display: block;
+	padding: 4px 14px 4px 14px;
+}
+
+.tw-block-dropdown a:hover {
+	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkbackground}};
+	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkforeground}};
+	text-decoration: none;
+}
+
+/*
+** Modals
+*/
+
+.tw-modal-displayed {
+	-webkit-filter: blur(4px);
+}
+
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	background-color: #000;
+}
+
+.modal {
+	z-index: 1100;
+	background-color: #fff;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,.3);
+}
+
+@media (max-width: 55em) {
+	.modal {
+		position: absolute;
+		top: 1em;
+		left: 1em;
+		right: 1em;
+	}
+
+	.modal-body {
+		overflow-y: auto;
+		max-height: 400px;
+	}
+}
+
+@media (min-width: 55em) {
+	.modal {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		width: 560px;
+		margin: -250px 0 0 -280px;
+	}
+}
+
+.modal-header {
+	padding: 9px 15px;
+	border-bottom: 1px solid #eee;
+}
+
+.modal-header h3 {
+	margin: 0;
+	line-height: 30px;
+}
+
+.modal-body {
+	padding: 15px;
+}
+
+.modal-footer {
+	padding: 14px 15px 15px;
+	margin-bottom: 0;
+	text-align: right;
+	background-color: #f5f5f5;
+	border-top: 1px solid #ddd;
+}
+
+/*
+** Notifications
+*/
+
+.tw-notification {
+	position: fixed;
+	top: 14px;
+	right: 14px;
+	z-index: 1000;
+	max-width: 280px;
+	padding: 0 14px 0 14px;
+	background-color: #ffd;
+	border: 1px solid #999;
+	border: 1px solid rgba(0,0,0,.3);
+}
+
+/*
+** Tabs
+*/
+
+.tw-tab-set {
+}
+
+.tw-tab-buttons {
+	font-size: 0.85em;
+	line-height: 100%;
+	padding-top: 1em;
+	margin-bottom: -1px;
+}
+
+.tw-tab-buttons button {
+	color: #666;
+	margin-left: 2px;
+	margin-right: 2px;
+	font-weight: 300;
+	border: none;
+	background: inherit;
+}
+
+.tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	border-left: 1px solid #d8d8d8;
+	border-top: 1px solid #d8d8d8;
+	border-right: 1px solid #d8d8d8;
+	margin-bottom: -1px;
+}
+
+.tw-tab-buttons button:not(.tw-tab-selected) {
+	background-color: #d8d8d8;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+}
+
+.tw-tab-divider {
+	border-top: 1px solid #d8d8d8;
+}
+
+.tw-tab-content {
+	padding-top: 14px;
+}
+
+.tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
+	background-color: #ececec;
+	border-bottom: 1px solid #ececec;
+}
+
+.tw-sidebar-lists .tw-tab-divider {
+	border-top: none;
+	height: 1px;
+	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
+}
+
+.tw-more-sidebar {
+	white-space: nowrap;
+}
+
+@media (min-width: 770px) {
+	.tw-more-sidebar {
+		margin-left: -14px;
+	}
+}
+
+.tw-more-sidebar .tw-tab-buttons {
+	display: inline-block;
+	vertical-align: top;
+	text-align: right;
+	padding-top: 0;
+	padding-left: 0;
+}
+
+.tw-more-sidebar .tw-tab-buttons button {
+	display: block;
+	width: 100%;
+	text-align: right;
+}
+
+.tw-sidebar-lists .tw-more-sidebar .tw-tab-divider {
+	display: none;
+}
+
+.tw-more-sidebar .tw-tab-content {
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 0;
+	padding-left: 14px;
+}
+
+.tw-more-sidebar .tw-tab-buttons button {
+	background-color: #ececec;
+	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(224,224,224) 100%">>
+	border-top: none;
+	border-left: none;
+	border-bottom: none;
+	border-right: 1px solid #ccc;
+}
+
+.tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
+	background-color: #fff;
+	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
+	border: none;
+}
+
+/*
+** Alerts
+*/
+
+.tw-alert {
+	<<border-radius 6px>>
+	margin: 7px 7px 7px 7px;
+	padding: 14px 14px 14px 14px;
+	border: 3px solid #DBB727;
+	background-color: rgb(250, 210, 50);
+}
+
+.tw-static-alert {
+	padding: 0 2px 2px 42px;
+	color: #AAA;
+}
+
+/*
+** Grids
+*/
+
+.tw-grid-frame td {
+	width: 1em;
+	height: 1em;
+}
+
+/*
+** Control panel
+*/
+
+.tw-control-panel td {
+	padding: 4px;
+}
+
+.tw-control-panel table, .tw-control-panel table input, .tw-control-panel table textarea {
+	width: 100%;
+}

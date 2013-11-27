@@ -13,7 +13,7 @@ Manages themes and styling.
 "use strict";
 
 var THEME_PLUGIN_TITLE = "$:/theme", // This tiddler contains the title of the current theme plugin
-	DEFAULT_THEME_PLUGIN = "$:/themes/tiddlywiki/snowwhite";
+	DEFAULT_THEME_PLUGIN = "$:/themes/tiddlywiki/vanilla";
 
 function ThemeManager(wiki) {
 	this.wiki = wiki;

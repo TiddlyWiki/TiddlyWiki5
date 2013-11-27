@@ -5,7 +5,8 @@
 		"tiddlywiki/github-fork-ribbon"
 	],
 	"themes": [
-		"tiddlywiki/snowwhite"
+		"tiddlywiki/nighttime",
+		"tiddlywiki/vanilla"
 	],
 	"includeWikis": [
 		"../tw5.com"

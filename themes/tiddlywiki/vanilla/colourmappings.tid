@@ -1,0 +1,10 @@
+title: $:/themes/tiddlywiki/vanilla/colourmappings
+type: application/x-tiddler-dictionary
+
+tiddlerbackground: {{$:/themes/tiddlywiki/vanilla/colours##background}}
+foreground: {{$:/themes/tiddlywiki/vanilla/colours##foreground}}
+pagebackground: {{$:/themes/tiddlywiki/vanilla/colours##pagebackground}}
+linkbackground: {{$:/themes/tiddlywiki/vanilla/colours##background}}
+linkforeground: {{$:/themes/tiddlywiki/vanilla/colours##primary}}
+dropdownbackground: {{$:/themes/tiddlywiki/vanilla/colours##background}}
+dropdownborder: {{$:/themes/tiddlywiki/vanilla/colours##medium}}

@@ -1,0 +1,8 @@
+title: $:/themes/tiddlywiki/nighttime/base
+tags: [[$:/tags/stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+html body.tw-body {
+	background-color: #5C5D8E;
+}

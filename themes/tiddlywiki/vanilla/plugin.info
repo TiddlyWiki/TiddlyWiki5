@@ -1,0 +1,8 @@
+{
+	"title": "$:/themes/tiddlywiki/vanilla",
+	"name": "Vanilla",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "A basic default theme"
+}
