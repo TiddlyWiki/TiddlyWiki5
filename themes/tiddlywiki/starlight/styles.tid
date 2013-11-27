@@ -72,27 +72,27 @@ svg.tw-image-save-button {
   fill: #0e90d2; /* Light blue */
 }
 
-svg.tw-image-info-button {
+.tw-tiddler-controls button svg.tw-image-info-button {
   fill: #0e90d2; /* Light blue */
 }
 
-svg.tw-image-edit-button {
+.tw-tiddler-controls button svg.tw-image-edit-button {
   fill: rgb(243, 123, 29); /* Orange */
 }
 
-svg.tw-image-close-button {
+.tw-tiddler-controls button svg.tw-image-close-button {
   fill: #dd514c; /* Red */
 }
 
-svg.tw-image-delete-button {
+.tw-tiddler-controls button svg.tw-image-delete-button {
   fill: #dd514c; /* Red */
 }
 
-svg.tw-image-cancel-button {
+.tw-tiddler-controls button svg.tw-image-cancel-button {
   fill: rgb(243, 123, 29); /* Orange */
 }
 
-svg.tw-image-done-button {
+.tw-tiddler-controls button svg.tw-image-done-button {
   fill: #5eb95e; /* Green */
 }
 
