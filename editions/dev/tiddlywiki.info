@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		"tiddlywiki/fullscreen",
+		"tiddlywiki/googleanalytics",
+		"tiddlywiki/github-fork-ribbon"
+	],
+	"themes": [
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	]
+}
