@@ -18,7 +18,7 @@ Select the appropriate saver module and set it up
 var MsDownloadSaver = function(wiki) {
 };
 
-MsDownloadSaver.prototype.save = function(text) {
+MsDownloadSaver.prototype.save = function(text,method,callback) {
 	// Get the current filename
 	var filename = "tiddlywiki.html",
 		p = document.location.pathname.lastIndexOf("/");

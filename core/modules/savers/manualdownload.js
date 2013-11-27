@@ -21,7 +21,7 @@ Select the appropriate saver module and set it up
 var ManualDownloadSaver = function(wiki) {
 };
 
-ManualDownloadSaver.prototype.save = function(text) {
+ManualDownloadSaver.prototype.save = function(text,method,callback) {
 	$tw.modal.display(downloadInstructionsTitle,{
 		downloadLink: "data:text/html," + encodeURIComponent(text)
 	});

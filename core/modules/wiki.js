@@ -866,15 +866,17 @@ exports.callSaver = function(method /*, args */ ) {
 
 /*
 Save the wiki contents. Options are:
+	method: "save" or "download"
 	template: the tiddler containing the template to save
 	downloadType: the content type for the saved file
 */
 exports.saveWiki = function(options) {
 	options = options || {};
-	var template = options.template || "$:/core/save/all",
+	var method = options.method || "save",
+		template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain";
 	var text = this.renderTiddler(downloadType,template);
-	this.callSaver("save",text,function(err) {
+	this.callSaver("save",text,method,function(err) {
 		if(err) {
 			alert("Error while saving:\n\n" + err);
 		} else {

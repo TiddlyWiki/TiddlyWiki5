@@ -15,7 +15,11 @@ Handles saving changes via the AndTidWiki Android app
 var AndTidWiki = function(wiki) {
 };
 
-AndTidWiki.prototype.save = function(text,callback) {
+AndTidWiki.prototype.save = function(text,method,callback) {
+	// Bail out unless this is a save (rather than a download)
+	if(method !== "save") {
+		return false;
+	}
 	// Get the pathname of this document
 	var pathname = decodeURIComponent(document.location.toString());
 	// Strip the file://

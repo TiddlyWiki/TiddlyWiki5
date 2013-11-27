@@ -15,7 +15,11 @@ Handles saving changes via the TWEdit iOS app
 var TWEditSaver = function(wiki) {
 };
 
-TWEditSaver.prototype.save = function(text,callback) {
+TWEditSaver.prototype.save = function(text,method,callback) {
+	// Bail out unless this is a save (rather than a download)
+	if(method !== "save") {
+		return false;
+	}
 	// Bail if we're not running under TWEdit
 	if(typeof DeviceInfo !== "object") {
 		return false;

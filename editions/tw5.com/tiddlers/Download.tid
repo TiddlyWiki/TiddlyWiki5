@@ -7,8 +7,8 @@ title: Download
 
 ! Download Single File Editions
 
-|<$button message="tw-save-wiki" param="$:/editions/tw5.com/save-empty" class="btn-big-green">Save Empty {{$:/core/images/save-button}}</$button>|Get started with an empty wiki |
-|<$button message="tw-save-wiki" param="$:/core/save/all" class="btn-big-green">Save Full {{$:/core/images/save-button}}</$button>|Download a full copy of this site, including all the documentation |
+|<$button message="tw-download-file" param="$:/editions/tw5.com/save-empty" class="btn-big-green">Download Empty {{$:/core/images/save-button}}</$button>|Get started with an empty wiki |
+|<$button message="tw-download-file" param="$:/core/save/all" class="btn-big-green">Download Full {{$:/core/images/save-button}}</$button>|Download a full copy of this site, including all the documentation |
 
 ! Download Node.js Edition
 

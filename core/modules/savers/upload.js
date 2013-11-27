@@ -21,7 +21,11 @@ var UploadSaver = function(wiki) {
 	this.wiki = wiki;
 };
 
-UploadSaver.prototype.save = function(text,callback) {
+UploadSaver.prototype.save = function(text,method,callback) {
+	// Bail out unless this is a save (rather than a download)
+	if(method !== "save") {
+		return false;
+	}
 	// Get the various parameters we need
 	var backupDir = ".",
 		username = this.wiki.getTextReference("$:/UploadName"),

@@ -89,6 +89,13 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		});
+		$tw.rootWidget.addEventListener("tw-download-file",function(event) {
+			$tw.wiki.saveWiki({
+				method: "download",
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
 		// Install the crypto event handlers
 		$tw.rootWidget.addEventListener("tw-set-password",function(event) {
 			$tw.passwordPrompt.createPrompt({
