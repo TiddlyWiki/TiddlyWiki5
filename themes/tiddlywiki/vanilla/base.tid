@@ -921,3 +921,19 @@ canvas.tw-edit-bitmapeditor  {
 .tw-control-panel table, .tw-control-panel table input, .tw-control-panel table textarea {
 	width: 100%;
 }
+
+/*
+** Message boxes
+*/
+
+.tw-message-box {
+	border: 1px solid #CFD6E6;
+	background: #ECF2FF;
+	padding: 0px 21px 0px 21px;
+	margin: 0 -21px 0 -21px;
+}
+
+.tw-message-box img {
+	float: right;
+	width: 150px;
+}
