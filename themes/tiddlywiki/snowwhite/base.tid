@@ -124,3 +124,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
 	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
 }
+
+.tw-message-box img {
+	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
+}

@@ -931,6 +931,9 @@ canvas.tw-edit-bitmapeditor  {
 	background: #ECF2FF;
 	padding: 0px 21px 0px 21px;
 	margin: 0 -21px 0 -21px;
+	font-size: 12px;
+	line-height: 18px;
+	color: #547599;
 }
 
 .tw-message-box img {
