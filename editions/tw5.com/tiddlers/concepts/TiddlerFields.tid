@@ -1,11 +1,14 @@
-created: 201308252133
+created: 20130825213300000
 creator: JeremyRuston
-modified: 201308300902
+modified: 20131128094009627
 modifier: JeremyRuston
 tags: concepts
 title: TiddlerFields
+type: text/vnd.tiddlywiki
 
-TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. The standard fields are:
+TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names must be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period).
+
+The standard fields are:
 
 |!Field Name |!Reference |!Description |
 |`title` |TitleField |{{$:/docs/fields/title}} |

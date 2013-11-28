@@ -1,11 +1,21 @@
-created: 201308252029
+created: 20130825202900000
 creator: JeremyRuston
-modified: 201308252029
+modified: 20131128093306317
 modifier: JeremyRuston
 tags: concepts
 title: TiddlerLinks
+type: text/vnd.tiddlywiki
 
-Links between tiddlers are the foundation of structuring information within TiddlyWiki.
+Links are regions of a tiddler that can be clicked to cause navigation to a different tiddler. The navigation behaviour is determined by the current StoryView; the classic TiddlyWiki view displays the story as a linear sequence of tiddlers.
+
+Links are useful for modelling organic relationships between tiddlers, and particularly for expressing the navigational paths between tiddlers.
+
+The TiddlerInfoPanel lists incoming links to a tiddler in the tab ''References''.
+
+TiddlerFilters can include the following FilterOperators that work with links:
+
+* `[links[]]` - returns the titles of the tiddlers that are linked from the currently selected tiddler(s)
+* `[backlinks[]]` - returns the titles of the tiddlers that link to the currently selected tiddler(s)
 
 TiddlyWiki5 alters the appearance of tiddler links to convey additional information about the target of the link:
 
@@ -16,5 +26,3 @@ TiddlyWiki5 alters the appearance of tiddler links to convey additional informat
 |To a shadow tiddler that has been overridden by an ordinary tiddler |[[LikeThis|SiteTitle]] |
 
 External links are shown like this: http://tiddlywiki.com/ or [[like this|http://tiddlywiki.com/]].
-
-

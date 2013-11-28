@@ -28,6 +28,7 @@ tags: releasenote
 * No longer crashes when encountering an error in a filter string
 * Fixed a crash when dragging and dropping tiddlers within TiddlyWiki5
 * No longer update the modified date for imported tiddlers
+* Automatically forces field names to be lower case
 
 !! Internal changes
 
