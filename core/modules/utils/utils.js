@@ -402,4 +402,15 @@ exports.getAnimationDuration = function() {
 	return parseInt($tw.wiki.getTiddlerText("$:/config/AnimationDuration","400"),10);
 };
 
+/*
+Hash a string to a number
+Derived from http://stackoverflow.com/a/15710692
+*/
+exports.hashString = function(str) {
+	return str.split("").reduce(function(a,b) {
+		a = ((a << 5) - a) + b.charCodeAt(0);
+		return a & a;
+	},0);
+};
+
 })();

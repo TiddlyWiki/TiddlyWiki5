@@ -188,7 +188,7 @@ Widget.prototype.hasVariable = function(name,value) {
 };
 
 /*
-Construct a qualifying string based on concatenating the values of a given variable in the parent chain
+Construct a qualifying string based on a hash of concatenating the values of a given variable in the parent chain
 */
 Widget.prototype.getStateQualifier = function(name) {
 	name = name || "transclusion";
@@ -200,7 +200,7 @@ Widget.prototype.getStateQualifier = function(name) {
 		}
 		node = node.parentWidget;
 	}
-	return output.join("");
+	return "{" + $tw.utils.hashString(output.join("")) + "}";
 };
 
 /*
