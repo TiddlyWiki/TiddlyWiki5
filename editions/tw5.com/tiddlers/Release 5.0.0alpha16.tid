@@ -7,13 +7,9 @@ tags: releasenote
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.15...v5.0.0-alpha.16]]//
 
-!! New Features
+!! New Features and Improvements
 
 * Added a new plugin for displaying corner ribbons; currently used for a version banner on tw5.com
-
-!! Improvements
-
-* Separated developer content into new wiki at http://five.tiddlywiki.com/dev/
 * Split ''Snow White'' theme into a base ''Vanilla'' theme with all the basic formatting, leaving the decorative bits to ''Snow White''
 ** Existing WikiFolders will need updating to include ''Vanilla'' as an additional theme
 * The page building blocks are now driven by the system tag `$:/tags/PageTemplate`
