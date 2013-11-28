@@ -72,10 +72,13 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 	var tiddler = this.wiki.getTiddler(this.mangleTitle);
-	if(tiddler && typeof event.param === "string" && event.param !== "" && !$tw.utils.hop(tiddler.fields,event.param)) {
-		var addition = {};
-		addition[event.param] = "";
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
+	if(tiddler && typeof event.param === "string") {
+		var name = event.param.toLowerCase();
+		if(name !== "" && !$tw.utils.hop(tiddler.fields,name)) {
+			var addition = {};
+			addition[name] = "";
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
+		}
 	}
 	return true;
 };
