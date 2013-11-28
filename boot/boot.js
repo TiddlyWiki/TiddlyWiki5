@@ -555,6 +555,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			clearInterval: clearInterval,
 			setTimeout: setTimeout,
 			clearTimeout: clearTimeout,
+			Buffer: $tw.browser ? {} : Buffer,
 			$tw: $tw,
 			require: function(title) {
 				return $tw.modules.execute(title, name);

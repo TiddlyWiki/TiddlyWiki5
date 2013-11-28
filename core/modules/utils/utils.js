@@ -413,4 +413,16 @@ exports.hashString = function(str) {
 	},0);
 };
 
+/*
+Decode a base64 string
+*/
+exports.base64Decode = function(string64) {
+	if($tw.browser) {
+		// TODO
+		throw "$tw.utils.base64Decode() doesn't work in the browser";
+	} else {
+		return (new Buffer(string64,"base64")).toString();
+	}
+};
+
 })();

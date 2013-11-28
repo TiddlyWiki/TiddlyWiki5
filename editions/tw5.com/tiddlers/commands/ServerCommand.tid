@@ -16,6 +16,9 @@ The parameters are:
 * ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
 * ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
 * ''username'' - the default username for signing edits
+* ''password'' - optional password for basic authentication
+
+If the password parameter is specified then the browser will prompt the user for the username and password. Note that the password is transmitted in plain text so this implementation isn't suitable for general use.
 
 For example:
 

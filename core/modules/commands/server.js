@@ -49,27 +49,58 @@ SimpleServer.prototype.addRoute = function(route) {
 	this.routes.push(route);
 };
 
+SimpleServer.prototype.findMatchingRoute = function(request,state) {
+	for(var t=0; t<this.routes.length; t++) {
+		var potentialRoute = this.routes[t],
+			pathRegExp = potentialRoute.path,
+			match = potentialRoute.path.exec(state.urlInfo.pathname);
+		if(match && request.method === potentialRoute.method) {
+			state.params = [];
+			for(var p=1; p<match.length; p++) {
+				state.params.push(match[p]);
+			}
+			return potentialRoute;
+		}
+	}
+	return null;
+};
+
+SimpleServer.prototype.checkCredentials = function(request,incomingUsername,incomingPassword) {
+	var header = request.headers["authorization"] || "",
+		token = header.split(/\s+/).pop() || "",
+		auth = $tw.utils.base64Decode(token),
+		parts = auth.split(/:/),
+		username = parts[0],
+		password = parts[1];
+	if(incomingUsername === username && incomingPassword === password) {
+		return "ALLOWED";
+	} else {
+		return "DENIED";
+	}
+}
+
 SimpleServer.prototype.listen = function(port) {
 	var self = this;
-	http.createServer(function(request, response) {
+	http.createServer(function(request,response) {
 		// Compose the state object
 		var state = {};
 		state.wiki = self.wiki;
 		state.server = self;
 		state.urlInfo = url.parse(request.url);
 		// Find the route that matches this path
-		var route;
-		for(var t=0; t<self.routes.length; t++) {
-			var potentialRoute = self.routes[t],
-				pathRegExp = potentialRoute.path,
-				match = potentialRoute.path.exec(state.urlInfo.pathname);
-			if(request.method === potentialRoute.method && match) {
-				state.params = [];
-				for(var p=1; p<match.length; p++) {
-					state.params.push(match[p]);
-				}
-				route = potentialRoute;
-				break;
+		var route = self.findMatchingRoute(request,state);
+		// Check for the username and password if we've got one
+		var username = self.get("username"),
+			password = self.get("password");
+		if(username && password) {
+			// Check they match
+			if(self.checkCredentials(request,username,password) !== "ALLOWED") {
+				response.setHeader("WWW-Authenticate", 'Basic realm="Admin Area"');
+				response.writeHead(401,"Authentication required",{
+					"WWW-Authenticate": 'Basic realm="TiddlyWiki5"'
+				});
+				response.end();
+				return;
 			}
 		}
 		// Return a 404 if we didn't find a route
@@ -224,12 +255,14 @@ Command.prototype.execute = function() {
 		rootTiddler = this.params[1] || "$:/core/save/all",
 		renderType = this.params[2] || "text/plain",
 		serveType = this.params[3] || "text/html",
-		username = this.params[4] || "ANONYMOUS";
+		username = this.params[4] || "ANONYMOUS",
+		password = this.params[5];
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
 		serveType: serveType,
-		username: username
+		username: username,
+		password: password
 	});
 	this.server.listen(port);
 	if(this.commander.verbose) {
