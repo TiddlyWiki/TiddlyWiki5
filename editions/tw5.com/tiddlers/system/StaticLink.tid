@@ -11,7 +11,3 @@ http://five.tiddlywiki.com/static/<$view tiddler=<<currentTiddler>> field="title
 A static HTML representation of this tiddler is available at the URL:
 
 <<outerMakeLink>>
-
-<input value=<<outerMakeLink>> size="80"/>
-
-//Note that editing the URL here won't have any effect; it is presented in a text box just to make it easier to copy and paste//
