@@ -1,6 +1,6 @@
 created: 20130822170200000
 creator: JeremyRuston
-modified: 20131127214126464
+modified: 20131128180705677
 modifier: JeremyRuston
 tags: introduction
 title: HelloThere
@@ -15,4 +15,6 @@ The deep internal improvements mean that TiddlyWiki5 is not fully compatible wit
 The original TiddlyWiki Classic is still available at http://tiddlywiki.com/. 
 </div>
 
-This is TiddlyWiki5 version ''<<version>>'' (see the detailed ReleaseHistory and the RoadMap for getting to the full release). It is a great time to get involved and support the future development of TiddlyWiki5. //TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//.
+TiddlyWiki5 is currently in alpha at version //<<version>>// (see the detailed ReleaseHistory). There is a RoadMap for moving to beta and getting to the full release. It is a great time to get involved and support the future development of TiddlyWiki5.
+
+//TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//.

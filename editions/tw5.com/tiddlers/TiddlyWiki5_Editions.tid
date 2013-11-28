@@ -1,9 +1,10 @@
-created: 201308251457
+created: 20130825145700000
 creator: JeremyRuston
-modified: 201308251457
+modified: 20131128181325694
 modifier: JeremyRuston
 tags: introduction
 title: TiddlyWiki5 Editions
+type: text/vnd.tiddlywiki
 
 The core TiddlyWiki5 code is packaged into several distinct editions designed for different situations:
 
@@ -18,6 +19,3 @@ The core TiddlyWiki5 code is packaged into several distinct editions designed fo
 * [[TiddlyWiki5 in the Sky for TiddlyWeb]] (and TiddlySpace)
 * [[TiddlyWiki5 in the Sky for Dropbox]]
 
-Learn more about using TiddlyWiki5:
-
-{{{ [tag[howto]sort[title]] }}}
