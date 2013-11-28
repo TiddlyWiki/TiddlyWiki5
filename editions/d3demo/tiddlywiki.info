@@ -3,6 +3,7 @@
 		"tiddlywiki/d3"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
 	"doNotSave": [

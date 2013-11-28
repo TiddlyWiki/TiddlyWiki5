@@ -3,6 +3,7 @@
 		"tiddlywiki/markdown"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
 	"doNotSave": [

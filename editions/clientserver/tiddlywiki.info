@@ -5,6 +5,7 @@
 		"tiddlywiki/codemirror"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
 	"doNotSave": [

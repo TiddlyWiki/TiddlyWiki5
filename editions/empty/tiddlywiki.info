@@ -3,6 +3,7 @@
 		"tiddlywiki/fullscreen"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	]
 }

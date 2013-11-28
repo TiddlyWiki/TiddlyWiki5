@@ -4,6 +4,7 @@
 		"tiddlywiki/tiddlyweb"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	]
 }

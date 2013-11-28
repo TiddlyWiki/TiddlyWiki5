@@ -3,6 +3,7 @@
 		"tiddlywiki/tahoelafs"
 	],
 	"themes": [
+		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	]
 }
