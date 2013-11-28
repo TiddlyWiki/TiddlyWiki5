@@ -15,6 +15,7 @@ tags: releasenote
 
 * Separated developer content into new wiki at http://five.tiddlywiki.com/dev/
 * Split ''Snow White'' theme into a base ''Vanilla'' theme with all the basic formatting, leaving the decorative bits to ''Snow White''
+** Existing WikiFolders will need updating to include ''Vanilla'' as an additional theme
 * The page building blocks are now driven by the system tag `$:/tags/PageTemplate`
 ** [[$:/TopSideBar]] and [[$:/LeftSideBar]] are no longer specially treated; use the new tag instead
 * Fixed problem that prevented tag configured items from shadow tiddlers interleaving with items from ordinary tiddlers
