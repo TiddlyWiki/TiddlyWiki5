@@ -1,14 +1,23 @@
-created: 201308220806
+created: 20130822080600000
 creator: JeremyRuston
-modified: 201308252130
+modified: 20131129163429930
 modifier: JeremyRuston
 tags: concepts
 title: SystemTags
+type: text/vnd.tiddlywiki
 
 System tags are used to give special behaviour to tiddlers:
 
-* [[$:/tags/stylesheet]]: indicates that a tiddler should be applied as a CSS stylesheet
-* [[$:/tags/ViewTemplate]]: indicates that a tiddler is a template that should be included in the ViewTemplate
+* [[$:/tags/stylesheet]] to indicate that a tiddler should be applied as a CSS stylesheet
+* [[$:/tags/TiddlerInfo]] for tiddler info panel tabs
+* [[$:/tags/ControlPanel]] for control panel tabs
+* [[$:/tags/SideBar]] for sidebar tabs
+* [[$:/tags/MoreSideBar]] for tabs in the "more" sidebar
+* [[$:/tags/ViewToolbar]] for the view mode tiddler toolbar
+* [[$:/tags/EditTemplate]] for the edit template
+* [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
+* [[$:/tags/PageControls]] for the page control tools in the sidebar
+* [[$:/tags/PageTemplate]] for the main page elements
 
 ! System tags in use
 

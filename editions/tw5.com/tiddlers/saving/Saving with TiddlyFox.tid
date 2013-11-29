@@ -1,6 +1,6 @@
 created: 20131129092753119
 creator: JeremyRuston
-modified: 20131129093227679
+modified: 20131129170056537
 modifier: JeremyRuston
 tags: howto
 title: Saving with TiddlyFox
@@ -17,7 +17,7 @@ type: text/vnd.tiddlywiki
 ## You may rename it, but be sure to keep the `.html` extension
 # Open the file in [[Firefox]]
 # Click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
-# Try creating a new tiddler using the ''plus'' button in the sidebar. Type some content for the tiddler, and click the ''tick'' button
-# Save your changes by clicking the ''download'' button in the sidebar
+# Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
+# Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
 #* Look for the yellow notification ''Saved wiki'' at the top right of the window
 # Refresh the browser window to verify that your changes have been saved correctly

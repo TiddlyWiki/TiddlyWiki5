@@ -1,6 +1,6 @@
 created: 20131129092604900
 creator: JeremyRuston
-modified: 20131129093507691
+modified: 20131129170043809
 modifier: JeremyRuston
 tags: howto
 title: Saving with the HTML5 fallback saver
@@ -14,10 +14,10 @@ This method of saving changes is clunky but has the advantage of working on almo
 # Locate the file you just downloaded
 ## You may rename it, but be sure to keep the `.html` extension
 # Open the file in your browser
-# Try creating a new tiddler using the ''plus'' button in the sidebar. Type some content for the tiddler, and click the ''tick'' button
-# Save your changes by clicking the ''download'' button in the sidebar
+# Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
+# Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
 # Your browser will download a new copy of the wiki incorporating your changes
 # Locate the newly downloaded file and open it in your browser
-# Refresh the browser window to verify that your changes have been saved correctly
+# Verify that your changes have been saved correctly
 
 ''Tip'': most browsers have an option to prompt each time for the download location. This allows you to select the existing version of the file and replace it.

@@ -1,7 +1,11 @@
-title: ModuleType
+created: 20131129162847412
+creator: JeremyRuston
+modified: 20131129162908445
+modifier: JeremyRuston
 tags: concepts
-modified: 201308091623
+title: ModuleType
+type: text/vnd.tiddlywiki
 
 The `module-type` field of a [[JavaScript module|Modules]] is a string that identifies the type of the module.
 
-See [[$:/ConfigInfo]] for a list of the module types used in this wiki.
+See the ''Internals'' tab of the [[control panel|$:/ControlPanel]] for a list of the module types used in this wiki.

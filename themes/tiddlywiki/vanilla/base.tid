@@ -224,6 +224,10 @@ a.tw-tiddlylink-external {
 	color: #444;
 }
 
+.tw-image-button {
+	height: 1em;
+}
+
 /*
 ** Tags and missing tiddlers
 */
@@ -897,8 +901,13 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-static-alert {
+	position: relative;
+}
+
+.tw-static-alert-inner {
 	padding: 0 2px 2px 42px;
 	color: #AAA;
+	position: absolute;
 }
 
 /*

@@ -1,3 +1,3 @@
 title: $:/core/images/down-arrow
 
-<svg class="tw-image-down-arrow" viewBox="441 306 59 45" width="24pt" height="22pt"><path d="M 441 306 L 470.25 351 L 499.5 306 Z"/></svg>
+<svg class="tw-image-down-arrow tw-image-button" viewBox="441 306 59 45" width="24pt" height="22pt"><path d="M 441 306 L 470.25 351 L 499.5 306 Z"/></svg>
