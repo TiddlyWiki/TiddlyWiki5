@@ -1,11 +1,11 @@
 created: 20131129090249275
 creator: JeremyRuston
-modified: 20131129101018342
+modified: 20131129171927975
 modifier: JeremyRuston
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-TiddlyWiki is highly flexible, and there are many different ways to use it. Here we're focussing on using it as a standalone file in the browser, which is a good choice for most users as it doesn't require any special knowledge or tools. For more options you can also run [[TiddlyWiki5 on Node.js]].
+TiddlyWiki is highly flexible, and there are many different ways to use it. Here we're focusing on using it as a standalone file in the browser, which is a good choice for most users as it doesn't require any special knowledge or tools. For more options you can also run [[TiddlyWiki5 on Node.js]].
 
 ! The 'works anywhere' method
 
@@ -13,7 +13,7 @@ TiddlyWiki is highly flexible, and there are many different ways to use it. Here
 
 ! The convenient and fast method
 
-Saving changes as described above is quite a high friction process, and so this method is recommended for everyone who is able to use Mozilla's [[Firefox]] browser (including [[Firefox for Android]]).
+Saving changes as described above is quite inconvenient because of the degree of manual intervention that browsers require. The following alternative method is recommended for everyone who is able to use Mozilla's [[Firefox]] browser (including [[Firefox for Android]]).
 
 {{Saving with TiddlyFox}}
 

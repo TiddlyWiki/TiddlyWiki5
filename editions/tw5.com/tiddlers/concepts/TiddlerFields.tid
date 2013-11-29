@@ -1,6 +1,6 @@
 created: 20130825213300000
 creator: JeremyRuston
-modified: 20131128094009627
+modified: 20131129162830410
 modifier: JeremyRuston
 tags: concepts
 title: TiddlerFields
@@ -41,4 +41,4 @@ The TiddlyWebAdaptor uses a few more fields:
 |`bag` |BagField |{{$:/docs/fields/bag}} |
 |`revision` |RevisionField |{{$:/docs/fields/revision}} |
 
-See [[$:/ConfigInfo]] for details of the fields used in this wiki.
+See the ''Internals'' tab of the [[control panel|$:/ControlPanel]] for details of the fields used in this wiki.
