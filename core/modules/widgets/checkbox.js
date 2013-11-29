@@ -36,7 +36,13 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
 	this.inputDomNode = this.document.createElement("input");
-	this.inputDomNode.setAttribute("type","checkbox");
+	if (this.checkboxRadio == "") {
+		this.inputDomNode.setAttribute("type","checkbox");
+	}
+	else  {
+		this.inputDomNode.setAttribute("type","radio");
+		this.inputDomNode.setAttribute("name",this.checkboxRadio);
+	}
 	if(this.getValue()) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
@@ -71,6 +77,22 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 			newTags.push(this.checkboxTag);
 		}
 		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{tags: newTags},this.wiki.getModificationFields()));
+		// If it was a radio button, and it was checked,
+		// it was the one clicked upon
+		// Now we need to remove the unchecked tags
+		if (checked && this.checkboxRadio) {
+			// get all the other radiobuttons
+			var radios= document.getElementsByName(this.checkboxRadio);
+			// We will fire change events to all unchecked radios buttons
+			var evt = document.createEvent("HTMLEvents");
+			evt.initEvent("change", true, true ); // event type,bubbling,cancelable
+			for (var i=radios.length; i--;) {
+				// just unchecked ones are interesting
+				if (! radios[i].checked) {
+					 radios[i].dispatchEvent(evt);
+				}
+			}
+		}
 	}
 };
 
@@ -81,6 +103,8 @@ CheckboxWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
+	// Is it supposed to be a radio button?
+	this.checkboxRadio = this.getAttribute("radio") ? this.checkboxTitle + "::" + this.getAttribute("radio") : "";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
