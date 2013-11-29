@@ -1,0 +1,17 @@
+created: 20130825160900000
+creator: JeremyRuston
+modified: 20131129095928309
+modifier: JeremyRuston
+tags: howto
+title: Saving with Encryption
+type: text/vnd.tiddlywiki
+
+When used as a single HTML file, TiddlyWiki5 allows content to be encrypted using the [[Stanford JavaScript Crypto Library]].
+
+# Switch to the ''Tools'' tab in the sidebar and look for the words //This wiki is not encrypted// and a button labelled ''Set password''
+# Click ''Set password''
+# Type a password and click the ''Set'' button (or use the enter key)
+# The control panel should now say //This wiki is encrypted// with buttons for changing and clearing the password
+# Save the wiki using the button in the sidebar
+# Optionally, open the saved file in a text editor and verify that your data is encrypted
+# Open the file in your browser. You will be prompted for a password before the content is displayed

@@ -1,0 +1,23 @@
+created: 20131129092604900
+creator: JeremyRuston
+modified: 20131129093507691
+modifier: JeremyRuston
+tags: howto
+title: Saving with the HTML5 fallback saver
+type: text/vnd.tiddlywiki
+
+This method of saving changes is clunky but has the advantage of working on almost all desktop browsers, and many mobile browsers.
+
+# [[Download]] an empty TiddlyWiki by clicking this button:
+#* {{$:/editions/tw5.com/snippets/download-empty-button}}
+#* Your browser may ask you to accept the download before it begins
+# Locate the file you just downloaded
+## You may rename it, but be sure to keep the `.html` extension
+# Open the file in your browser
+# Try creating a new tiddler using the ''plus'' button in the sidebar. Type some content for the tiddler, and click the ''tick'' button
+# Save your changes by clicking the ''download'' button in the sidebar
+# Your browser will download a new copy of the wiki incorporating your changes
+# Locate the newly downloaded file and open it in your browser
+# Refresh the browser window to verify that your changes have been saved correctly
+
+''Tip'': most browsers have an option to prompt each time for the download location. This allows you to select the existing version of the file and replace it.

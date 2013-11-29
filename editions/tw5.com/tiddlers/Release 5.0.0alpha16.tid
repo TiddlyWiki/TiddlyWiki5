@@ -1,17 +1,19 @@
-created: 201311191256007
+created: 20131119125600007
 creator: JeremyRuston
-modified: 201311191256007
+modified: 20131129095531749
 modifier: JeremyRuston
-title: Release 5.0.0-alpha.16
 tags: releasenote
+title: Release 5.0.0-alpha.16
+type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.15...v5.0.0-alpha.16]]//
 
 !! New Features and Improvements
 
+* Significant updates to the structure and content of the user documentation
 * Added a new plugin for displaying corner ribbons; currently used for a version banner on tw5.com
 * Split ''Snow White'' theme into a base ''Vanilla'' theme with all the basic formatting, leaving the decorative bits to ''Snow White''
-** Existing WikiFolders will need updating to include ''Vanilla'' as an additional theme
+** Existing TiddlyWikiFolders will need updating to include ''Vanilla'' as an additional theme
 * The page building blocks are now driven by the system tag `$:/tags/PageTemplate`
 ** [[$:/TopSideBar]] and [[$:/LeftSideBar]] are no longer specially treated; use the new tag instead
 * Fixed problem that prevented tag configured items from shadow tiddlers interleaving with items from ordinary tiddlers

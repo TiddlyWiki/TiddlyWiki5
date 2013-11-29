@@ -1,0 +1,23 @@
+created: 20131129092753119
+creator: JeremyRuston
+modified: 20131129093227679
+modifier: JeremyRuston
+tags: howto
+title: Saving with TiddlyFox
+type: text/vnd.tiddlywiki
+
+# Ensure you have the latest version of [[Firefox]]
+# Install the TiddlyFox extension from:
+#* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+# Restart [[Firefox]]
+# [[Download]] an empty TiddlyWiki by clicking this button:
+#* {{$:/editions/tw5.com/snippets/download-empty-button}}
+#* Your browser may ask you to accept the download before it begins
+# Locate the file you just downloaded
+## You may rename it, but be sure to keep the `.html` extension
+# Open the file in [[Firefox]]
+# Click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
+# Try creating a new tiddler using the ''plus'' button in the sidebar. Type some content for the tiddler, and click the ''tick'' button
+# Save your changes by clicking the ''download'' button in the sidebar
+#* Look for the yellow notification ''Saved wiki'' at the top right of the window
+# Refresh the browser window to verify that your changes have been saved correctly

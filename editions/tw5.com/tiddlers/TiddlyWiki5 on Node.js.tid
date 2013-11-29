@@ -1,0 +1,20 @@
+created: 20131129094353704
+creator: JeremyRuston
+modified: 20131129100329076
+modifier: JeremyRuston
+title: TiddlyWiki5 on Node.js
+type: text/vnd.tiddlywiki
+
+! Installation
+
+For working on the command line with Node.js, you can install TiddlyWiki via [[npm|http://npmjs.org]]:
+
+```
+npm -g install tiddlywiki
+```
+
+The `-g` flag causes TiddlyWiki to be installed globally.
+
+! Working with the TiddlyWiki5 repository
+
+[[Working with the TiddlyWiki5 repository]] is recommended if you plan on forking the TiddlyWiki5 source code.

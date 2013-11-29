@@ -1,9 +1,10 @@
-created: 201308281902
+created: 20130828190200000
 creator: JeremyRuston
-modified: 201308281902
+modified: 20131129095228854
 modifier: JeremyRuston
-tags: edition
+tags: howto
 title: TiddlyWiki5 Static Site Generation
+type: text/vnd.tiddlywiki
 
 TiddlyWiki5 can be used to generate a static HTML representation of a TiddlyWiki that doesn't need JavaScript.
 

@@ -1,4 +1,10 @@
+created: 20131129094452285
+creator: JeremyRuston
+modified: 20131129094514823
+modifier: JeremyRuston
+tags: howto
 title: Building classic TiddlyWiki with TiddlyWiki5
+type: text/vnd.tiddlywiki
 
 TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWiki from their constituent components. Doing so involves these additional features over and above those used for building TiddlyWiki5:
 
@@ -9,7 +15,7 @@ TiddlyWiki5 can be used to build older 2.x.x versions of TiddlyWiki from their c
 
 ! Usage
 
-TiddlyWikiClassic is built from the command line by running TiddlyWiki5 under Node.js. A typical usage would be:
+TiddlyWikiClassic is built from the command line by running [[TiddlyWiki5 on Node.js]]. A typical usage would be:
 
 ```
 node ../../tiddlywiki.js \

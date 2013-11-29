@@ -1,9 +1,10 @@
-created: 201308251033
+created: 20130825103300000
 creator: JeremyRuston
-modified: 201308251418
+modified: 20131129100159005
 modifier: JeremyRuston
 tags: tips
 title: TitlesPolicy
+type: text/vnd.tiddlywiki
 
 As the structures within your TiddlyWiki documents get more complex it can be hard to keep the titles of tiddlers consistent. For example, should terms be defined in the plural or the singular? Camel case or separate words?
 
@@ -16,4 +17,4 @@ Recording a formal titling policy can help to reduce confusion. For example, the
 * Use separate words for titles that are full phrases or sentences, such as FAQs, howtos or tasks
 ** e.g. [[How to build a TiddlyWiki5 from individual tiddlers]]
 * Where TiddlyWiki or TiddlyWiki5 is used as a qualifier at the start of the title, always use separate words
-** e.g. [[TiddlyWiki5 Editions]]
+** e.g. [[Saving with TiddlyFox]]
