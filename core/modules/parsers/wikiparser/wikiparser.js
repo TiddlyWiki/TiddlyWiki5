@@ -122,22 +122,59 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 Parse any pragmas at the beginning of a block of parse text
 */
 WikiParser.prototype.parsePragmas = function() {
-	var tree = [];
-	while(true) {
-		// Skip whitespace
-		this.skipWhitespace();
-		// Check for the end of the text
-		if(this.pos >= this.sourceLength) {
-			break;
+	var tree = [],
+	    imports = [],
+	    oldpos = -1,
+	    oldsource, oldpragmaRules;
+	IMPORTS:while(true) {
+		while(true) {
+			// Skip whitespace
+			this.skipWhitespace();
+			// Check for the end of the text
+			if(this.pos >= this.sourceLength) {
+				break;
+			}
+			// Check if we've arrived at a pragma rule match
+			var nextMatch = this.findNextMatch(this.pragmaRules,this.pos);
+			// If not, just exit
+			if(!nextMatch || nextMatch.matchIndex !== this.pos) {
+				break;
+			}
+			// Process the pragma rule
+			var parseResult= nextMatch.rule.parse();
+			if (parseResult) {
+				for (var i=0; i<parseResult.length; ++i) {
+					if (parseResult[i].type == "import") {
+						imports[parseResult[i].name] |= false;
+					}
+					else {
+						tree.push(parseResult[i]);
+					}
+				}
+			}
 		}
-		// Check if we've arrived at a pragma rule match
-		var nextMatch = this.findNextMatch(this.pragmaRules,this.pos);
-		// If not, just exit
-		if(!nextMatch || nextMatch.matchIndex !== this.pos) {
-			break;
+		// check imports
+		for (var k in imports) {
+			if (imports[k]) continue;
+			if (oldpos < 0) {
+				oldpos= this.pos;
+				oldsource= this.source;
+				oldpragmaRules = this.pragmaRules;
+			}
+			this.pos=0;
+			this.source= $tw.wiki.getTiddlerText(k);
+			this.sourceLength= this.source.length;
+			this.pragmaRules= this.instantiateRules(this.pragmaRuleClasses,"pragma",0);
+			imports[k]= true;
+			continue IMPORTS;
 		}
-		// Process the pragma rule
-		tree.push.apply(tree,nextMatch.rule.parse());
+		if (oldpos >= 0) {
+			this.pos= oldpos;
+			this.source= oldsource;
+			this.sourceLength= this.source.length;
+			this.pragmaRules= oldpragmaRules;
+		}
+		break;
 	}
 	return tree;
 };
