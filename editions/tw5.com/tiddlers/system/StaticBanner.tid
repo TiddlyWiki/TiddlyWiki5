@@ -1,3 +1,3 @@
 title: $:/StaticBanner
 
-<div class="tw-static-alert">This page is part of a static HTML representation of the ~TiddlyWiki at http://five.tiddlywiki.com/</div>
+<div class="tw-static-alert"><div class="tw-static-alert-inner">This page is part of a static HTML representation of the ~TiddlyWiki at http://five.tiddlywiki.com/</div></div>

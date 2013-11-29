@@ -901,8 +901,13 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-static-alert {
+	position: relative;
+}
+
+.tw-static-alert-inner {
 	padding: 0 2px 2px 42px;
 	color: #AAA;
+	position: absolute;
 }
 
 /*
