@@ -1,0 +1,15 @@
+created: 20131130132123707
+creator: JeremyRuston
+modified: 20131130132123707
+modifier: JeremyRuston
+tags: dev
+title: Releasing a new version of TiddlyWiki5
+type: text/vnd.tiddlywiki
+
+# Make sure the ''Jermolene/TiddlyWiki5'' is fully committed
+# Edit `package.json` to the new version number
+# Run `bld.sh` to build the deployment files
+# Restore `package.json` to the previous version number
+# Run `verbump "5.0.0-alpha.16"`, substituting the new version number
+# Run `deploy.sh`
+# Run `wbld.sh <username> <password>`
