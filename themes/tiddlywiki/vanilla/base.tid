@@ -545,6 +545,23 @@ canvas.tw-edit-bitmapeditor  {
 	font-style: normal;
 }
 
+.tw-edit-tags {
+	border: 1px solid #ddd;
+	padding: 4px 8px 4px 8px;
+}
+
+.tw-edit-add-tag {
+	display: inline-block;
+}
+
+.tw-edit-add-tag .tw-add-tag-name input {
+	width: 50%;
+}
+
+.tw-edit-tags .tw-tag-label {
+	display: inline-block;
+}
+
 .tw-edit-tags-list {
 	margin: 14px 0 14px 0;
 }
@@ -556,11 +573,6 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-remove-tag-button {
 	padding-left: 4px;
-}
-
-.tw-add-tag-name {
-	display: inline-block;
-	width: 15%;
 }
 
 .tw-tiddler-preview {

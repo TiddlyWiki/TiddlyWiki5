@@ -83,6 +83,16 @@ background-image: -ms-linear-gradient($gradient$);
 	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
 }
 
+.tw-edit-tags {
+	<<box-shadow "inset 0 1px 8px rgba(0, 0, 0, 0.15)">>
+}
+
+.tw-tiddler-frame .tw-edit-tags input.tw-edit-texteditor {
+	<<box-shadow "none">>
+	border: none;
+	outline: none;
+}
+
 canvas.tw-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 5px rgba(0, 0, 0, 0.5)">>
 }
