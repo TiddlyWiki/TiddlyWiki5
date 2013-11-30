@@ -1,6 +1,6 @@
 created: 20131129092604900
 creator: JeremyRuston
-modified: 20131129170043809
+modified: 20131130073142081
 modifier: JeremyRuston
 tags: howto
 title: Saving with the HTML5 fallback saver
@@ -12,7 +12,7 @@ This method of saving changes is clunky but has the advantage of working on almo
 #* {{$:/editions/tw5.com/snippets/download-empty-button}}
 #* Your browser may ask you to accept the download before it begins
 # Locate the file you just downloaded
-## You may rename it, but be sure to keep the `.html` extension
+#* You may rename it, but be sure to keep the `.html` extension
 # Open the file in your browser
 # Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
 # Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
