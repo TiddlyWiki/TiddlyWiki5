@@ -8,6 +8,11 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.17...v5.0.0-alpha.18]]//
 
+!! Improvements
+
+* If `$:/theme` isn't defined or refers to a missing tiddler, then fallback through ''Snow White'' to ''Vanilla''. This means that `empty.html` now defaults to ''Snow White''
+
 !! Bug fixes
 
-* Fixed bug that was preventing `$:/tags/PageControls` tiddlers from being rearranged
+* Fixed bug that was preventing `$:/tags/PageControls` tiddlers from being reordered
+
