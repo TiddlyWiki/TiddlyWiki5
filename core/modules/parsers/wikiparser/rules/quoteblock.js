@@ -69,10 +69,9 @@ exports.parse = function() {
 
 	// Move past the <s
 	this.parser.pos = this.matchRegExp.lastIndex;
-	
 	// Parse any optional cite
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-	cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// If we got a cite, push it
 	if ( cite.length > 0 ) {
 		tree.push({
