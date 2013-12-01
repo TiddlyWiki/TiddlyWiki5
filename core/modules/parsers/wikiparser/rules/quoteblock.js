@@ -67,8 +67,6 @@ exports.parse = function() {
 		});
 	}
 
-	// Move past the <s
-	this.parser.pos = this.matchRegExp.lastIndex;
 	// Parse any optional cite
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
