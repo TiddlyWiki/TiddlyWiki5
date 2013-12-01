@@ -13,7 +13,10 @@ Manages themes and styling.
 "use strict";
 
 var THEME_PLUGIN_TITLE = "$:/theme", // This tiddler contains the title of the current theme plugin
-	DEFAULT_THEME_PLUGIN = "$:/themes/tiddlywiki/vanilla";
+	DEFAULT_THEME_PLUGINS = [
+		"$:/themes/tiddlywiki/snowwhite",
+		"$:/themes/tiddlywiki/vanilla"
+	];
 
 function ThemeManager(wiki) {
 	this.wiki = wiki;
@@ -32,7 +35,12 @@ function ThemeManager(wiki) {
 
 ThemeManager.prototype.switchTheme = function() {
 	// Get the name of the current theme
-	var themePluginTitle = this.wiki.getTiddlerText(THEME_PLUGIN_TITLE,DEFAULT_THEME_PLUGIN);
+	var themePluginTitle = this.wiki.getTiddlerText(THEME_PLUGIN_TITLE);
+	// If it doesn't exist, then fallback to one of the default themes
+	var index = 0;
+	while(!this.wiki.getTiddler(themePluginTitle) && index < DEFAULT_THEME_PLUGINS.length) {
+		themePluginTitle = DEFAULT_THEME_PLUGINS[index++];
+	}
 	// Accumulate the titles of the plugins that we need to load
 	var themePlugins = [],
 		self = this,
