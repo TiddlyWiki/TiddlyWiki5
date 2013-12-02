@@ -359,21 +359,21 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	}
 	// Process each tiddler
 	$tw.utils.each(tiddlers,function(tiddlerFields) {
-		// Generate a unique title for the tiddler
-		var title = self.wiki.generateNewTitle(tiddlerFields.title);
+		var title = tiddlerFields.title;
 		// Add it to the store
-		self.wiki.addTiddler(new $tw.Tiddler(
+		var imported = self.wiki.importTiddler(new $tw.Tiddler(
 			self.wiki.getCreationFields(),
 			self.wiki.getModificationFields(),
-			tiddlerFields,
-			{title: title}
+			tiddlerFields
 		));
-		// Add it to the story
-		if(self.storyList.indexOf(title) === -1) {
-			self.storyList.unshift(title);
+		if(imported) {
+			// Add it to the story
+			if(self.storyList.indexOf(title) === -1) {
+				self.storyList.unshift(title);
+			}
+			// And to history
+			history.push({title: title});
 		}
-		// And to history
-		history.push({title: title});
 	});
 	// Save the updated story and history
 	this.saveStoryList();
