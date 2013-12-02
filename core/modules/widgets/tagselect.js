@@ -63,9 +63,8 @@ TagselectWidget.prototype.render = function(parent,nextSibling) {
 	}
 	else {
 		this.inputDomNode.setAttribute("type", "radio");
-		this.inputDomNode.setAttribute("name",this.tagselectGroup);
+		this.inputDomNode.setAttribute("name",this.tagselectGroup + this.getStateQualifier());
 		this.inputDomNode.setAttribute("value",this.tagselectTag);
-console.log(this.getStateQualifier(this.tagselectGroup));
 	}
 	if(this.getValue()) {
 		this.inputDomNode.setAttribute("checked","true");
@@ -105,7 +104,7 @@ TagselectWidget.prototype.handleChangeEvent = function(event) {
 		// Now we need to remove the unchecked tags
 		if (checked && this.tagselectGroup) {
 			// get all the other radiobuttons
-			var radios= document.getElementsByName(this.tagselectGroup);
+			var radios= document.getElementsByName(event.target.name);
 			for (var i=radios.length; i--;) {
 				if (radios[i].value != this.tagselectTag) {
 					pos = newTags.indexOf(radios[i].value);
@@ -127,7 +126,7 @@ TagselectWidget.prototype.execute = function() {
 	this.tagselectTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.tagselectTag = this.getAttribute("tag");
 	// group defined?
-	this.tagselectGroup = this.getAttribute("group") ? this.tagselectTitle + "::" + this.getAttribute("group") : "";
+	this.tagselectGroup = this.getAttribute("group") || "";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
