@@ -211,6 +211,23 @@ exports.addTiddler = function(tiddler) {
 };
 
 /*
+Like addTiddler() except it will silently reject any plugin tiddlers that are older than the currently loaded version. Returns true if the tiddler was imported
+*/
+exports.importTiddler = function(tiddler) {
+	var existingTiddler = this.getTiddler(tiddler.fields.title);
+	// Check if we're dealing with a plugin
+	if(tiddler && tiddler.hasField("plugin-type") && tiddler.hasField("version") && existingTiddler && existingTiddler.hasField("plugin-type") && existingTiddler.hasField("version")) {
+		// Reject the incoming plugin if it is older
+		if($tw.utils.checkVersions(existingTiddler.fields.version,tiddler.fields.version)) {
+			return false;
+		}
+	}
+	// Fall through to adding the tiddler
+	this.addTiddler(tiddler);
+	return true;
+};
+
+/*
 Return a hashmap of the fields that should be set when a tiddler is created
 */
 exports.getCreationFields = function() {
