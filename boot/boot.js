@@ -344,14 +344,35 @@ $tw.utils.resolvePath = function(sourcepath,rootpath) {
 };
 
 /*
-Returns true if the `actual` version is greater than or equal to the `required` version. Both are in `x.y.z` format.
+Parse a semantic version string into its constituent parts
 */
-$tw.utils.checkVersions = function(required,actual) {
-	var targetVersion = required.split("."),
-		currVersion = actual.split("."),
-		diff = [parseInt(targetVersion[0],10) - parseInt(currVersion[0],10),
-				parseInt(targetVersion[1],10) - parseInt(currVersion[1],10),
-				parseInt(targetVersion[2],10) - parseInt(currVersion[2],10)];
+$tw.utils.parseVersion = function(version) {
+	var match = /^((\d+)\.(\d+)\.(\d+))(?:-([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?(?:\+([\dA-Za-z\-]+(?:\.[\dA-Za-z\-]+)*))?$/.exec(version);
+	if(match) {
+		return {
+			version: match[1],
+			major: parseInt(match[2],10),
+			minor: parseInt(match[3],10),
+			patch: parseInt(match[4],10),
+			prerelease: match[5],
+			build: match[6]
+		};
+	} else {
+		return null;
+	}
+};
+
+/*
+Returns true if the version string A is greater than the version string B
+*/
+$tw.utils.checkVersions = function(versionStringA,versionStringB) {
+	var versionA = $tw.utils.parseVersion(versionStringA),
+		versionB = $tw.utils.parseVersion(versionStringB),
+		diff = [
+			versionA.major - versionB.major,
+			versionA.minor - versionB.minor,
+			versionA.patch - versionB.patch
+		];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
 		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
