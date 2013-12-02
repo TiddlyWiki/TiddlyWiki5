@@ -3,7 +3,28 @@ title: $:/core/modules/widgets/tagselect.js
 type: application/javascript
 module-type: widget
 
-Checkbox widget
+Tagselect widget
+
+Used to create checkboxes or radiobuttons to set or remove tags
+
+To create a checkbox:
+
+```
+	<$tagselect tag="mytag" tiddler="mytiddler>my label</$tagselect>
+	
+```
+
+To create radiobuttons, introduce a group:
+
+```
+	<$tagselect group="mygroup" tag="check 1" tiddler="mytiddler>label one</$tagselect>
+	<$tagselect group="mygroup" tag="check 2" tiddler="mytiddler>label two</$tagselect>
+	<$tagselect group="mygroup" tag="check 3" tiddler="mytiddler>label three</$tagselect>
+	
+```
+
+Just one of them can be selected and so just one of the tags "check 1", "check 2" or 
+"check 3" can be set..
 
 \*/
 (function(){
