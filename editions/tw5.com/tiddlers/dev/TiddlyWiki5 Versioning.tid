@@ -1,0 +1,42 @@
+created: 20131202081424080
+creator: JeremyRuston
+modified: 20131202082237877
+modifier: JeremyRuston
+tags: dev
+title: TiddlyWiki5 Versioning
+type: text/vnd.tiddlywiki
+
+Each release of TiddlyWiki5 is identified by a version number that complies with the [[Semantic Versioning 2.0.0|http://semver.org/]] standard.
+
+! TiddlyWiki Core Version
+
+According to the standard:
+
+```
+Given a version number MAJOR.MINOR.PATCH, increment the:
+
+MAJOR version when you make incompatible API changes,
+MINOR version when you add functionality in a backwards-compatible manner, and
+PATCH version when you make backwards-compatible bug fixes.
+Additional labels for pre-release and build metadata are available as extensions to the MAJOR.MINOR.PATCH format.
+```
+
+!! Alpha and Beta versions
+
+While in alpha TiddlyWiki5 uses the pre-release label "alpha", for example:
+
+```
+5.0.1-alpha
+```
+
+Each new alpha or beta release will bump the `PATCH` version number. This breaks the strict semantics of versioning because `PATCH` increments are supposed to be reserved for compatible changes.
+
+!! Interim versions
+
+During development when a new release is being prepared, the pre-release label is set to `prerelease`.
+
+! Plugin Versions
+
+Version numbers
+
+TiddlyWiki5 uses the version information attached to plugins for determining which of two plugins is more recent during an upgrade or import. The pre-release label is ignored when performing these comparisons.

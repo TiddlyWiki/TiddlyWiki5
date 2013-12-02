@@ -11,8 +11,15 @@ type: text/vnd.tiddlywiki
 !! Improvements
 
 * If `$:/theme` isn't defined or refers to a missing tiddler, then fallback through ''Snow White'' to ''Vanilla''. This means that `empty.html` now defaults to ''Snow White''
+* Changes to the importing process to enable a smoother [[TiddlyWiki5 Upgrade Process]]
+** Ignores attempts to import plugins that are older than currently installed plugins
+** System tiddlers are now imported as usual
 
 !! Bug fixes
 
 * Fixed bug that was preventing `$:/tags/PageControls` tiddlers from being reordered
 
+!! Internal changes
+
+* Changed the [[TiddlyWiki5 Versioning]] policy
+** New alpha releases will be `5.0.x-alpha`, beta releases will be `5.1.x-beta` and the final release will be `5.2.x`
