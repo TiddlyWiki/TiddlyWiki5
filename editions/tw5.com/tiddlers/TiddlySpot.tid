@@ -1,9 +1,10 @@
-created: 201308252135
+created: 20130825213500000
 creator: JeremyRuston
-modified: 201308252135
+modified: 20131202202932619
 modifier: JeremyRuston
 tags: definitions
 title: TiddlySpot
+type: text/vnd.tiddlywiki
 
 TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Daniel Baird. It has been in operation almost as long as TiddlyWiki itself.
 
@@ -13,5 +14,6 @@ TiddlyWiki5 isn't yet built in to TiddlySpot but you can use it by following the
 # Open TiddlyWiki5 in your browser from http://five.tiddlywiki.com/empty.html
 # Fill in the TiddlySpot wikiname and password in the control panel
 # Click the "Save Changes" button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
+#* //This step won't work in Firefox thanks to its default security policy. Google Chrome works fine//
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
 # You should see a copy of TiddlyWiki5. You can edit and create tiddlers, and click "Save Changes" to save changes back up to TiddlySpot (you'll need to re-enter your password the first time you visit the wiki on TiddlySpot)

@@ -10,12 +10,15 @@ There are several methods for upgrading an existing TiddlyWiki5 document to a ne
 
 ! Online updating
 
+Note that none of your personal data leaves your browser with this process.
+
 # Visit http://five.tiddlywiki.com/empty.html
 # Drag your old TiddlyWiki5 HTML file into the browser window
 #* Your tiddlers should be imported
 # Save changes to save the new version
 
-Note that none of your personal data leaves your browser with this process.
+//Currently you'll have to manually update any plugins you're using that are not included in empty.html//
+
 
 ! Offline updating
 
