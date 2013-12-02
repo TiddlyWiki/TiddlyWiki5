@@ -96,7 +96,15 @@ exports["text/html"] = function(text,fields) {
 		match = storeAreaMarkerRegExp.exec(text);
 	if(match) {
 		// If so, it's either a classic TiddlyWiki file or a TW5 file
-		return deserializeTiddlyWikiFile(text,storeAreaMarkerRegExp.lastIndex,!!match[1],fields);
+		// First read the normal tiddlers
+		var results = deserializeTiddlyWikiFile(text,storeAreaMarkerRegExp.lastIndex,!!match[1],fields);
+		// Then any system tiddlers
+		var systemAreaMarkerRegExp = /<div id=["']?systemArea['"]?( style=["']?display:none;["']?)?>/gi,
+			sysMatch = systemAreaMarkerRegExp.exec(text);
+		if(sysMatch) {
+			results.push.apply(results,deserializeTiddlyWikiFile(text,systemAreaMarkerRegExp.lastIndex,!!sysMatch[1],fields));
+		}
+		return results
 	} else {
 		// It's not a TiddlyWiki so we'll return the entire HTML file as a tiddler
 		return deserializeHtmlFile(text,fields);
