@@ -35,6 +35,7 @@ TagselectWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
+	this.labelDomNode.setAttribute("class", "tw-tagselect");
 	this.inputDomNode = this.document.createElement("input");
 	if (this.tagselectGroup == "") {
 		this.inputDomNode.setAttribute("type", "checkbox");
