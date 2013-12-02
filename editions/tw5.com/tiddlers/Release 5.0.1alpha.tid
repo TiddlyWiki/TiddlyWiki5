@@ -1,19 +1,19 @@
 created: 20131201132300007
 creator: JeremyRuston
-modified: 20131201132331749
+modified: 20131202102409399
 modifier: JeremyRuston
 tags: releasenote
-title: Release 5.0.0-alpha.18
+title: Release 5.0.1-alpha
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.17...v5.0.0-alpha.18]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.0-alpha.17...v5.0.1-alpha]]//
 
 !! Improvements
 
-* If `$:/theme` isn't defined or refers to a missing tiddler, then fallback through ''Snow White'' to ''Vanilla''. This means that `empty.html` now defaults to ''Snow White''
-* Changes to the importing process to enable a smoother [[TiddlyWiki5 Upgrade Process]]
+* Changes to the importing process to enable a smoother [[Upgrading]]
 ** Ignores attempts to import plugins that are older than currently installed plugins
 ** System tiddlers are now imported as usual
+* If `$:/theme` isn't defined or refers to a missing tiddler, then fallback through ''Snow White'' to ''Vanilla''. This means that `empty.html` now defaults to ''Snow White''
 
 !! Bug fixes
 
