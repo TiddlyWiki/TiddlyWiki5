@@ -1,0 +1,26 @@
+created: 20131203074550710
+creator: JeremyRuston
+modified: 20131203075203153
+modifier: JeremyRuston
+tags: introduction dev
+title: TiddlyWiki5 for Developers
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 is published as OpenSource which means that anyone can read the code and contribute to its development. It's a big, complex piece of software and can be overwhelming to newcomers.
+
+! Resources
+
+! The one thing you need to know
+
+TiddlyWiki5's architecture is very different from an HTML page written using jQuery. This section concisely explains what TiddlyWiki5 does differently. It may not make much sense on the first reading.
+
+The key to understanding how TW5 works internally is to see that the RefreshMechanism requires that any region of the DOM can be regenerated at any time. This means that the entire state of the user interface must reside in the tiddler store, and not in the DOM.
+
+It also determines the standard UI flow:
+
+# An event handler on a widget is triggered
+# The event handler can manipulate the DOM nodes directly created by the widget, and/or modify the state of the tiddler store
+# The core then issues a store change event which triggers the refresh cycle
+# Each widget in the tree then gets a chance to refresh itself to reflect the changes in the store if they need to
+
+From a technical perspective, TiddlyWiki5 is a fairly classic MVC architecture, with strict separation of concerns. The model is the tiddler store, the view is a rendering tree (such as the one created from $:/core/ui/PageMacros in startup.js), and the controller is the TW5 core code itself.
