@@ -1,14 +1,16 @@
-created: 201311091054007
+created: 20131109105400007
 creator: JeremyRuston
-modified: 201311091054007
+modified: 20131203093653197
 modifier: JeremyRuston
 title: ReleaseHistory
+type: text/vnd.tiddlywiki
 
-Here are the details of recent releases of TiddlyWiki5.
+Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
 
 <$list filter="[tag[releasenote]!sort[created]]">
 <div>
 <h1><$link to={{!!title}}><$view field="title"/></$link></h1>
+<div>''Release date: <$view field="released" format="date" template="DDth MMM YYYY at 0hh:0mm">TBA</$view>''</div>
 <div>
 <$transclude/>
 </div>
