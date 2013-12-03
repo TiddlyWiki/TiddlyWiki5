@@ -1,6 +1,6 @@
 created: 20131202102427114
 creator: JeremyRuston
-modified: 20131202102732309
+modified: 20131203101500020
 modifier: JeremyRuston
 tags: howto
 title: Upgrading
@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 There are several methods for upgrading an existing TiddlyWiki5 document to a new release.
 
-! Online updating
+! Online upgrading
 
 Note that none of your personal data leaves your browser with this process.
 
@@ -20,6 +20,6 @@ Note that none of your personal data leaves your browser with this process.
 //Currently you'll have to manually update any plugins you're using that are not included in empty.html//
 
 
-! Offline updating
+! Offline upgrading
 
 You can also download http://five.tiddlywiki.com/empty.html locally and perform the same drag-and-drop procedure to upgrade your files.
