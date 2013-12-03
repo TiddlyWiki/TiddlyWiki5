@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 !! Improvements
 
-* Changes to the importing process to enable a smoother [[Upgrading]]
+* Changes to the importing process to enable a smoother [[Upgrading]] process
 ** Ignores attempts to import plugins that are older than currently installed plugins
 ** System tiddlers are now imported as usual
 * If `$:/theme` isn't defined or refers to a missing tiddler, then fallback through ''Snow White'' to ''Vanilla''. This means that `empty.html` now defaults to ''Snow White''

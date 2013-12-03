@@ -1,12 +1,12 @@
 created: 20130822172800000
 creator: JeremyRuston
-modified: 20131129163630584
+modified: 20131203112520519
 modifier: JeremyRuston
 tags: introduction
 title: Features
 type: text/vnd.tiddlywiki
 
-* The ability to save changes on almost any desktop HTML5 compatible-browser, with custom apps to enable [[Saving on iPad/iPhone]] and [[Android|How to use TiddlyWiki5 as a standalone HTML file with AndTidWiki]], and a cross-platform [[Firefox extension|Saving with TiddlyFox]] that even runs on Android
+* The ability to save changes on almost any desktop HTML5 compatible-browser, with custom apps to enable [[Saving on iPad/iPhone]] and [[Android|Saving on Android]], and a cross-platform [[Firefox extension|Saving with TiddlyFox]] that even runs on Android
 * [[Bitmap images|Motovun Jack.jpg]] and [[SVG images|UsingSVG]] are first-class citizens alongside text
 * Concise and expressive WikiText that generates semantic HTML
 * Integrated [[AES encryption|Saving with Encryption]]
