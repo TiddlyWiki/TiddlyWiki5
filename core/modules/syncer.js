@@ -385,6 +385,9 @@ Syncer.prototype.processTaskQueue = function() {
 			this.taskInProgress[task.title] = task;
 			// Dispatch the task
 			this.dispatchTask(task,function(err) {
+				if(err) {
+					console.log("Sync error while processing '" + task.title + "':\n" + err);
+				}
 				// Mark that this task is no longer in progress
 				delete self.taskInProgress[task.title];
 				// Process the next task
