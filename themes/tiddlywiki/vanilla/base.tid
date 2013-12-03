@@ -392,7 +392,6 @@ a.tw-tiddlylink-external {
 */
 
 .tw-tiddler-frame {
-	width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
 	margin-bottom: 28px;
 	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##tiddlerbackground}};
 }
@@ -435,6 +434,7 @@ a.tw-tiddlylink-external {
 @media (min-width: 770px) {
 	.tw-tiddler-frame {
 		padding: 28px 42px 42px 42px;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
 	}
 
 	.tw-tiddler-info {
