@@ -1,6 +1,6 @@
 created: 20131202081424080
 creator: JeremyRuston
-modified: 20131202082237877
+modified: 20131203093908677
 modifier: JeremyRuston
 tags: dev
 title: TiddlyWiki5 Versioning
@@ -30,6 +30,8 @@ While in alpha TiddlyWiki5 uses the pre-release label "alpha", for example:
 ```
 
 Each new alpha or beta release will bump the `PATCH` version number. This breaks the strict semantics of versioning because `PATCH` increments are supposed to be reserved for compatible changes.
+
+//Note that prior to ''5.0.1-alpha'', TiddlyWiki5 used version numbers formatted as ''5.0.0-alpha.19''. The change was made to enable the upgrade mechanism to recognise plugin updates from the version information.//
 
 !! Interim versions
 
