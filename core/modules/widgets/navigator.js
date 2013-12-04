@@ -146,11 +146,12 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 	this.getStoryList();
 	// Replace the specified tiddler with a draft in edit mode
-	var draftTiddler = this.getDraftTiddler(event.tiddlerTitle),
+	var title = event.param || event.tiddlerTitle,
+		draftTiddler = this.getDraftTiddler(title),
 		gotOne = false;
 	for(var t=this.storyList.length-1; t>=0; t--) {
 		// Replace the first story instance of the original tiddler name with the draft title
-		if(this.storyList[t] === event.tiddlerTitle) {
+		if(this.storyList[t] === title) {
 			if(!gotOne) {
 				this.storyList[t] = draftTiddler.fields.title;
 				gotOne = true;
@@ -169,18 +170,19 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 // Delete a tiddler
 NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Get the tiddler we're deleting
-	var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+	var title = event.param || event.tiddlerTitle,
+		tiddler = this.wiki.getTiddler(title);
 	// Check if the tiddler we're deleting is in draft mode
 	if(tiddler.hasField("draft.title")) {
 		// Delete the original tiddler
 		this.wiki.deleteTiddler(tiddler.fields["draft.of"]);
 	}
 	// Delete this tiddler
-	this.wiki.deleteTiddler(event.tiddlerTitle);
+	this.wiki.deleteTiddler(title);
 	// Remove the closed tiddler from the story
 	this.getStoryList();
 	// Look for tiddler with this title to close
-	var slot = this.findTitleInStory(event.tiddlerTitle,-1);
+	var slot = this.findTitleInStory(title,-1);
 	if(slot !== -1) {
 		this.storyList.splice(slot,1);
 		this.saveStoryList();
@@ -235,10 +237,11 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 // Take a tiddler out of edit mode, saving the changes
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	this.getStoryList();
-	var storyTiddlerModified = false; // We have to special case saving the story tiddler itself
+	var title = event.param || event.tiddlerTitle,
+		storyTiddlerModified = false; // We have to special case saving the story tiddler itself
 	for(var t=0; t<this.storyList.length; t++) {
-		if(this.storyList[t] === event.tiddlerTitle) {
-			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+		if(this.storyList[t] === title) {
+			var tiddler = this.wiki.getTiddler(title);
 			if(tiddler) {
 				var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
 					draftOf = (tiddler.fields["draft.of"] || "").trim();
@@ -256,7 +259,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 							"draft.of": undefined
 						},this.wiki.getModificationFields()));
 						// Remove the draft tiddler
-						this.wiki.deleteTiddler(event.tiddlerTitle);
+						this.wiki.deleteTiddler(title);
 						// Remove the original tiddler if we're renaming it
 						if(isRename) {
 							this.wiki.deleteTiddler(draftOf);
@@ -281,13 +284,14 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	this.getStoryList();
-	var storyTiddlerModified = false;
+	var title = event.param || event.tiddlerTitle,
+		storyTiddlerModified = false;
 	for(var t=0; t<this.storyList.length; t++) {
-		if(this.storyList[t] === event.tiddlerTitle) {
-			var tiddler = this.wiki.getTiddler(event.tiddlerTitle);
+		if(this.storyList[t] === title) {
+			var tiddler = this.wiki.getTiddler(title);
 			if(tiddler && tiddler.hasField("draft.title")) {
 				// Remove the draft tiddler
-				this.wiki.deleteTiddler(event.tiddlerTitle);
+				this.wiki.deleteTiddler(title);
 				// Make the story record point to the original tiddler
 				this.storyList[t] = tiddler.fields["draft.title"];
 				// Check if we're modifying the story tiddler itself
