@@ -66,6 +66,12 @@ code {
 	<<border-radius 3px>>
 }
 
+blockquote {
+	border-left: 5px solid #ddd;
+	margin-left: 25px;
+	padding-left: 10px;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
@@ -207,7 +213,7 @@ a.tw-tiddlylink-external {
 
 .btn-big-green {
 	padding: 8px;
-	margin: 8px;
+	margin: 4px 8px 4px 8px;
 	background: #34C734;
 	color: #fff;
 	fill: #fff;
