@@ -68,7 +68,7 @@ EditWidget.prototype.execute = function() {
 	this.makeChildWidgets([{
 		type: "edit-" + editorType,
 		attributes: {
-			title: {type: "string", value: this.editTitle},
+			tiddler: {type: "string", value: this.editTitle},
 			field: {type: "string", value: this.editField},
 			index: {type: "string", value: this.editIndex},
 			"class": {type: "string", value: this.editClass}
