@@ -59,7 +59,7 @@ var listTypes = {
 	"*": {listTag: "ul", itemTag: "li"},
 	"#": {listTag: "ol", itemTag: "li"},
 	";": {listTag: "dl", itemTag: "dt"},
-	":": {listTag: "dl", itemTag: "dd"}
+	":": {listTag: "dl", itemTag: "dd"},
 	">": {listTag: "blockquote", itemTag: "p"}
 };
 
