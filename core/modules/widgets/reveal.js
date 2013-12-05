@@ -83,6 +83,14 @@ Compute the internal state of the widget
 RevealWidget.prototype.execute = function() {
 	// Get our parameters
 	this.state = this.getAttribute("state");
+	if (this.state) {
+		this.tiddler= this.state;
+	} else {
+		this.field = this.getAttribute("field");
+		this.tiddler = this.getAttribute("tiddler") || this.getVariable("currentTiddler");
+		this.state= this.tiddler;
+		if (this.field) this.state+= '!!'+this.field;
+	}
 	this.type = this.getAttribute("type");
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
@@ -92,7 +100,7 @@ RevealWidget.prototype.execute = function() {
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
-	this.stateTitle = this.state;
+	this.stateTitle = this.tiddler;
 	this.readState();
 	// Construct the child widgets
 	var childNodes = this.isOpen ? this.parseTreeNode.children : [];
@@ -106,7 +114,7 @@ Read the state tiddler
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
 	if(this.stateTitle) {
-		var state = this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler"));
+		var state = this.wiki.getTextReference(this.state,this["default"],this.getVariable("currentTiddler"));
 		switch(this.type) {
 			case "popup":
 				this.readPopupState(state);
