@@ -84,11 +84,11 @@ RevealWidget.prototype.execute = function() {
 	// Get our parameters
 	this.state = this.getAttribute("state");
 	if (this.state) {
-		this.tiddler= this.state;
+		this.tiddler = this.state;
 	} else {
 		this.field = this.getAttribute("field");
 		this.tiddler = this.getAttribute("tiddler") || this.getVariable("currentTiddler");
-		this.state= this.tiddler;
+		this.state = this.tiddler;
 		if (this.field) this.state+= '!!'+this.field;
 	}
 	this.type = this.getAttribute("type");
