@@ -1,0 +1,19 @@
+created: 20131205160146648
+creator: JeremyRuston
+modified: 20131205160204570
+modifier: JeremyRuston
+tags: wikitext
+title: Transclusion in WikiText
+type: text/vnd.tiddlywiki
+
+You can incorporate the content of one tiddler within another using the transclusion notation:
+
+* `{{MyTiddler}}` transcludes a single tiddler
+* `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TiddlerTemplate|TiddlerTemplates]]
+
+A similar syntax can be used to transclude a list of tiddlers matching a specified [[TiddlerFilter|TiddlerFilters]]:
+
+```
+{{{ [tag[mechanism]] }}}
+{{{ [tag[mechanism]] ||TemplateTitle}}}
+```

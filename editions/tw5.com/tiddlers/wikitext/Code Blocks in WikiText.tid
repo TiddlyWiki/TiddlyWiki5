@@ -1,0 +1,23 @@
+created: 20131205160047557
+creator: JeremyRuston
+modified: 20131205160108132
+modifier: JeremyRuston
+tags: wikitext
+title: Code Blocks in WikiText
+type: text/vnd.tiddlywiki
+
+You can  use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks:
+
+<pre>
+&#96;&#96;&#96;
+This will be monospaced
+&#96;&#96;&#96;
+</pre>
+
+The three backticks need to be at the start of the line and immediately followed by a newline, otherwise they won't be interpreted correctly.
+
+Renders as:
+
+```
+This will be monospaced
+```

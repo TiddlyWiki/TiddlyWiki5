@@ -1,0 +1,17 @@
+created: 20131205160221762
+creator: JeremyRuston
+modified: 20131205160234142
+modifier: JeremyRuston
+tags: wikitext
+title: Images in WikiText
+type: text/vnd.tiddlywiki
+
+To display an image stored in a tiddler just transclude that tiddler:
+
+```
+{{Motovun Jack.jpg}}
+```
+
+Renders as:
+
+{{Motovun Jack.jpg}}

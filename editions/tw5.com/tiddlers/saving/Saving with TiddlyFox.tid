@@ -1,6 +1,6 @@
 created: 20131129092753119
 creator: JeremyRuston
-modified: 20131130073126246
+modified: 20131205151815248
 modifier: JeremyRuston
 tags: howto
 title: Saving with TiddlyFox
@@ -11,8 +11,8 @@ type: text/vnd.tiddlywiki
 #* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
 # Restart [[Firefox]]
 # [[Download]] an empty TiddlyWiki by clicking this button:
-#* {{$:/editions/tw5.com/snippets/download-empty-button}}
-#* Your browser may ask you to accept the download before it begins
+#> {{$:/editions/tw5.com/snippets/download-empty-button}}
+#> Your browser may ask you to accept the download before it begins
 # Locate the file you just downloaded
 #* You may rename it, but be sure to keep the `.html` extension
 # Open the file in [[Firefox]]

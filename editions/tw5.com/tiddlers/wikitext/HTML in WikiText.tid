@@ -1,0 +1,28 @@
+created: 20131205160816081
+creator: JeremyRuston
+modified: 20131205160828313
+modifier: JeremyRuston
+tags: wikitext
+title: HTML in WikiText
+type: text/vnd.tiddlywiki
+
+HTML tags and comments can be used directly in WikiText. For example:
+
+```
+<article class="hello">
+This is my nice and simple block of text. HelloThere
+<!-- This comment will not appear in the wikified output -->
+</article>
+```
+
+Attributes in HTML tags can be specified as a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
+
+```
+<a href={{MyLinkDestination}}>link</a>
+```
+
+Here an attribute is specified as a macro invocation:
+
+```
+<a href=<<MyMacro "Brian">>>link</a>
+```

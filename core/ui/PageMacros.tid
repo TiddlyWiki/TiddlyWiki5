@@ -14,4 +14,20 @@ title: $:/core/ui/PageMacros
 </$list>
 </div>
 \end
+\define wikitext-example(src)
+```
+$src$
+```
+
+Renders as:
+
+$src$
+
+In HTML:
+
+$$$text/vnd.tiddlywiki>text/html
+$src$
+$$$
+
+\end
 {{$:/core/ui/PageTemplate}}

@@ -1,0 +1,13 @@
+created: 20131205160706975
+creator: JeremyRuston
+modified: 20131205160719633
+modifier: JeremyRuston
+tags: wikitext
+title: Horizontal Rules in WikiText
+type: text/vnd.tiddlywiki
+
+You can include a horizontal rule with three or more dashes on their own on a line:
+
+<<wikitext-example src:"
+---
+">>

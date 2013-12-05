@@ -1,0 +1,31 @@
+created: 20131205160532119
+creator: JeremyRuston
+modified: 20131205160549129
+modifier: JeremyRuston
+tags: wikitext
+title: Styles and Classes in WikiText
+type: text/vnd.tiddlywiki
+
+You can use this construction to cause the wrapped content to be assigned specified CSS classes or styles:
+
+<<wikitext-example src:"@@.myStyle
+* List One
+* List Two
+@@
+">>
+
+Similar syntax is used to assign styles. For example:
+
+<<wikitext-example src:"@@background-color:red;
+* List One
+* List Two
+@@
+">>
+
+Multiple styles and classes can be mixed. For example:
+
+<<wikitext-example src:"@@.tw-tiddler-frame
+@@width:400px;
+Some text
+@@
+">>

@@ -1,0 +1,19 @@
+created: 20131205155230596
+creator: JeremyRuston
+modified: 20131205155813974
+modifier: JeremyRuston
+tags: wikitext
+title: Linking in WikiText
+type: text/vnd.tiddlywiki
+
+A key capability of WikiText is the ability to make links to other tiddlers or to external websites. There are several ways of doing this:
+
+* To link to a tiddler by title: `[[Tiddler Title]]`
+* To link to a tiddler and specify the text of the link: `[[Displayed Link Title|Tiddler Title]]`
+* For tiddler titles that match the CamelCase rules, just typing the title will automatically create a link
+* To link to an external website, type the full URL of the site: `http://five.tiddlywiki.com/` or `[[TW5|http://five.tiddlywiki.com/]]`
+
+You can suppress a link from being recognised by preceding it with `~`. For example:
+
+<<wikitext-example src:"* ~HelloThere is not a link
+* ~http://google.com/ is not a link">>

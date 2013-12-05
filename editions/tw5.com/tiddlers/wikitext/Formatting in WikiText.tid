@@ -1,0 +1,19 @@
+created: 20131205155959399
+creator: JeremyRuston
+modified: 20131205160130832
+modifier: JeremyRuston
+tags: wikitext
+title: Formatting in WikiText
+type: text/vnd.tiddlywiki
+
+Available character formatting includes:
+
+* <code>&#96;backticks&#96;</code> for `code`
+* `''bold''` for ''bold text''
+* `//italic//` for //italic text//
+* `__underscore__` for __underscored text__
+* `^^superscript^^` for ^^superscript^^ text
+* `,,subscript,,` for ,,subscripted,, text
+* `~~strikethrough~~` for ~~strikethrough~~ text
+
+See also: [[Code Blocks in WikiText]]

@@ -41,7 +41,7 @@ The machinery tying those concepts together includes:
 
 These are the individual rules that make up WikiText:
 
-<$list filter="[tag[wikitextrule]sort[title]]" type="ul"/>
+<$list filter="[tag[wikitext]sort[title]]" type="ul"/>
 
 ! Widgets
 

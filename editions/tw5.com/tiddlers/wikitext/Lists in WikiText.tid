@@ -1,0 +1,40 @@
+created: 20131205160257619
+creator: JeremyRuston
+modified: 20131205160620014
+modifier: JeremyRuston
+tags: wikitext
+title: Lists in WikiText
+type: text/vnd.tiddlywiki
+
+You can create unordered lists with `*` characters:
+
+<<wikitext-example src:"* First list item
+* Second list item
+** A subitem
+* Third list item
+">>
+
+Ordered lists use `#` instead of `*`:
+
+# First item
+# Second item
+# Third item
+
+You can also mix ordered and unordered list items:
+
+<<wikitext-example src:"* To do today
+*# Eat
+* To get someone else to do
+*# This
+*# That
+*## And the other
+">>
+
+You can also assign a CSS class to an individual member of a list with this notation:
+
+<<wikitext-example src:"* List One
+*.MyClass List Two
+* List Three
+">>
+
+Note that [[Block Quotes in WikiText]] can be mixed with lists.
