@@ -1,0 +1,15 @@
+created: 20131206172428247
+creator: JeremyRuston
+modified: 20131206172436204
+modifier: JeremyRuston
+tags: howto
+title: Video Tutorials
+type: text/vnd.tiddlywiki
+
+The aim is to curate a series of videos to guide people through getting up and running with TiddlyWiki. [[Contributions|HelpingTiddlyWiki]] are welcome.
+
+! Getting Started
+
+This brief tutorial takes you through the basics of saving changes with a standalone TiddlyWiki5 file.
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/1g66s7UbyuU" frameborder="0" allowfullscreen></iframe>

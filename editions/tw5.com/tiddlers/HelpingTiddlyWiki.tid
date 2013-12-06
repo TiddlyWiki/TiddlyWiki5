@@ -1,6 +1,6 @@
 created: 20130825160500000
 creator: JeremyRuston
-modified: 20131126195146799
+modified: 20131206172505397
 modifier: JeremyRuston
 tags: community
 title: HelpingTiddlyWiki
@@ -17,6 +17,14 @@ OpenSource projects like TiddlyWiki thrive on the feedback and engagement of use
 
 ! Help improve the documentation and code
 
+There are many ways you can contribute to TiddlyWiki:
+
+* Writing tutorials
+* Contributing to the documentation on tiddlywiki.com
+* Making video screencasts
+* Curating relevant links, hints and tips on a wiki
+
 The main TiddlyWiki documentation and code lives on GitHub, and welcomes [[contributions|Contributing]]:
 
 * https://github.com/Jermolene/TiddlyWiki5
+
