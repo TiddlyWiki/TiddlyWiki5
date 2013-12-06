@@ -1,6 +1,6 @@
 created: 20131202102427114
 creator: JeremyRuston
-modified: 20131203101500020
+modified: 20131205175047321
 modifier: JeremyRuston
 tags: howto
 title: Upgrading
@@ -17,8 +17,17 @@ Note that none of your personal data leaves your browser with this process.
 #* Your tiddlers should be imported
 # Save changes to save the new version
 
-//Currently you'll have to manually update any plugins you're using that are not included in empty.html//
+//For the moment you'll also need to manually update any plugins that are not included in empty.html://
 
+># Open the control panel to the ''Plugins'' tab in your upgraded wiki
+># Check the version numbers of the plugins you are using; any plugins with an older version than the version of [[$:/core]] will probably need updating
+># Locate a wiki with the plugins you need to update and open the control panel ''Plugins'' tab
+>#* http://five.tiddlywiki.com/d3demo.html for the D3 plugin
+>#* http://five.tiddlywiki.com/codemirrordemo.html for the CodeMirror plugin
+>#* http://five.tiddlywiki.com/markdowndemo.html for the MarkDown plugin
+>#* http://five.tiddlywiki.com/ for most of the others
+># Drag the plugin links one by one back to your own wiki. You should see the version numbers update in the control panel
+># Save your wiki
 
 ! Offline upgrading
 
