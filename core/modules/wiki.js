@@ -590,26 +590,6 @@ exports.setTiddlerData = function(title,data) {
 Return the content of a tiddler as an array containing each line
 */
 exports.getTiddlerList = function(title) {
-	console.log("1. title: ", title);
-	var pos = title.indexOf('!!');
-	var list;
-	if (pos > -1) {
-		list = title.substr(pos+2);
-		title = title.substr(0, pos);
-		console.log("2. list : ", list);
-		console.log("2. title: ", title);
-	}
-	else {
-	}
-	var tiddler = this.getTiddler(title);
-	if (tiddler) console.log("Found tiddler. List is: ",tiddler.fields[list]);
-	if(tiddler && $tw.utils.isArray(tiddler.fields[list])) {
-		return tiddler.fields[list].slice(0);
-	}
-	return [];
-};
-
-exports.getTiddlerList = function(title) {
 	var list;
 	// do we want a stringlist?
 	var pos = title.indexOf('!!');
