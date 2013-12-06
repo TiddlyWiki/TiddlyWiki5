@@ -1,0 +1,68 @@
+created: 20131206154636572
+creator: JeremyRuston
+modified: 20131206162157596
+modifier: JeremyRuston
+tags: wikitext
+title: Block Quotes in WikiText
+type: text/vnd.tiddlywiki
+
+There are two ways to produce HTML block quotes in TiddlyWiki5, one for content spread across multiple lines, and one for single line content.
+
+! Multi-line Block Quotes
+
+The syntax for multi-line block quotes is:
+
+<<wikitext-example src:"<<<
+This is a block quoted paragraph
+written in English
+<<<
+">>
+
+!! Citation
+
+A citation can be added to the quote like this:
+
+<<wikitext-example src:"<<<
+Computers are like a bicycle for our minds
+<<< Steve Jobs
+">>
+
+!! CSS Classes
+
+CSS classes can be added to a block quote:
+
+<<wikitext-example src:"<<<.myClass.another-class
+Operating systems are like a brick wall for our minds
+<<< Nobody
+">>
+
+! Single-line Block Quotes
+
+The single-line syntax for block quotes is actually an extension of the syntax for [[Lists in WikiText]]. For example:
+
+<<wikitext-example src:"> Quoted text
+> Another line of quoted text
+">>
+
+You can also nest quotes like this:
+
+```
+> A top quote
+>> A subquote
+> Another top quote
+```
+
+Which renders as:
+
+> A top quote
+>> A subquote
+> Another top quote
+
+You can also mix block quotes with other list items. For example:
+
+<<wikitext-example src:"* List One
+** List Two
+**> A quote
+**> Another quote
+* List Three
+">>

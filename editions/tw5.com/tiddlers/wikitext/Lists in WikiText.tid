@@ -1,10 +1,12 @@
 created: 20131205160257619
 creator: JeremyRuston
-modified: 20131205160620014
+modified: 20131206154613715
 modifier: JeremyRuston
 tags: wikitext
 title: Lists in WikiText
 type: text/vnd.tiddlywiki
+
+! Unordered Lists
 
 You can create unordered lists with `*` characters:
 
@@ -13,6 +15,8 @@ You can create unordered lists with `*` characters:
 ** A subitem
 * Third list item
 ">>
+
+! Ordered Lists
 
 Ordered lists use `#` instead of `*`:
 
@@ -30,6 +34,8 @@ You can also mix ordered and unordered list items:
 *## And the other
 ">>
 
+! CSS Classes
+
 You can also assign a CSS class to an individual member of a list with this notation:
 
 <<wikitext-example src:"* List One
@@ -37,4 +43,13 @@ You can also assign a CSS class to an individual member of a list with this nota
 * List Three
 ">>
 
-Note that [[Block Quotes in WikiText]] can be mixed with lists.
+! Mixing Lists and Block Quotes
+
+Note that [[Block Quotes in WikiText]] can be mixed with lists. For example:
+
+<<wikitext-example src:"* List One
+** List Two
+**> A quote
+**> Another quote
+* List Three
+">>
