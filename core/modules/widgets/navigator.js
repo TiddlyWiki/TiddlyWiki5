@@ -284,24 +284,24 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 // Take a tiddler out of edit mode without saving the changes
 NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	this.getStoryList();
-	var title = event.param || event.tiddlerTitle,
-		storyTiddlerModified = false;
-	for(var t=0; t<this.storyList.length; t++) {
-		if(this.storyList[t] === title) {
-			var tiddler = this.wiki.getTiddler(title);
-			if(tiddler && tiddler.hasField("draft.title")) {
-				// Remove the draft tiddler
-				this.wiki.deleteTiddler(title);
+	var storyTiddlerModified = false;
+	// Flip the specified tiddler from draft back to the original
+	var draftTitle = event.param || event.tiddlerTitle,
+		draftTiddler = this.wiki.getTiddler(draftTitle);
+	if(draftTiddler && draftTiddler.hasField("draft.of")) {
+		var originalTitle = draftTiddler.fields["draft.of"];
+		// Remove the draft tiddler
+		this.wiki.deleteTiddler(draftTitle);
+		// Swap the draft for the original in the story
+		for(var t=0; t<this.storyList.length; t++) {
+			if(this.storyList[t] === draftTitle) {
 				// Make the story record point to the original tiddler
-				this.storyList[t] = tiddler.fields["draft.title"];
-				// Check if we're modifying the story tiddler itself
-				if(tiddler.fields["draft.title"] === this.storyTitle) {
-					storyTiddlerModified = true;
-				}
+				this.storyList[t] = originalTitle;
+				storyTiddlerModified = true;
 			}
 		}
 	}
-	if(!storyTiddlerModified) {
+	if(storyTiddlerModified) {
 		this.saveStoryList();
 	}
 	return false;
