@@ -1,65 +1,41 @@
-created: 201308241418
+created: 20130824141800000
 creator: JeremyRuston
-modified: 201308251303
+modified: 20131206163714703
 modifier: JeremyRuston
 tags: introduction
 title: Docs
+type: text/vnd.tiddlywiki
 
+\define bulletList(tag)
+{{$tag$}}
+
+<ul><$list filter="[tag[$tag$]]"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
+\end
 This is the main documentation hub for TiddlyWiki. See also the DeveloperDocs.
-
-! Editions
-
-TiddlyWiki5 can be used via these editions:
-
-<$list filter="[tag[edition]sort[title]]" type="ul"/>
 
 ! How to use ~TiddlyWiki5
 
-<$list filter="[tag[howto]sort[title]]" type="ul"/>
+<<bulletList "howto">>
 
 ! Concepts
 
-The core concepts underlying TiddlyWiki are:
-
-* [[Tiddlers]]
-* [[Wiki]]
-* TiddlyWiki
-* WikiText
-
-The machinery tying those concepts together includes:
-
-* TiddlerFilters
-* TiddlerFields
-* TiddlerTemplates
-* DataTiddlers
-* ContentType
-* SystemTiddlers
-* [[Plugins]]
-* [[Modules]] and [[ModuleType]]
+<<bulletList "concepts">>
 
 ! Wiki Text Rules
 
-These are the individual rules that make up WikiText:
-
-<$list filter="[tag[wikitext]sort[title]]" type="ul"/>
+<<bulletList "wikitext">>
 
 ! Widgets
 
-Widgets give WikiText dynamic functionality:
-
-<$list filter="[tag[widget]sort[title]]" type="ul"/>
+<<bulletList "widget">>
 
 ! Commands
 
-{{command}}
-
-<$list filter="[tag[command]sort[title]]" type="ul"/>
+<<bulletList "command">>
 
 ! Tips
 
-{{tips}}
-
-<$list filter="[tag[tips]sort[title]]" type="ul"/>
+<<bulletList "tips">>
 
 ! Miscellaneous
 
