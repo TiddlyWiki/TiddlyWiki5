@@ -36,7 +36,23 @@ function FileSystemAdaptor(syncer) {
 					}
 				}
 			});
-	}
+	};
+
+    // list any older tiddler files which are replaced when the title is changed
+    this.draftCleanup = function(fileInfo) {
+        var toClean = [];
+        var tiddlers = $tw.loadTiddlersFromFile(fileInfo.filepath).tiddlers;
+        for(var t in tiddlers) {
+            if(tiddlers[t].title) {
+                if ( tiddlers[t]['draft.of'] &&
+                     tiddlers[t]['draft.title'] &&
+                     tiddlers[t]['draft.of'] != tiddlers[t]['draft.title'] ) {
+                    toClean.push(tiddlers[t]['draft.of']);
+                }
+            }
+        }
+        return toClean;
+    };
 
 
 	for(var f in $tw.boot.files) {
@@ -201,6 +217,9 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 				delete this.watchers[fileInfo.filepath];
 			}
 			delete this.pending[fileInfo.filepath];
+            self.draftCleanup(fileInfo).forEach(function(title) {
+                self.deleteTiddler(title, callback);
+            }, self);
 			// Delete the file
 			fs.unlink(fileInfo.filepath,function(err) {
 				if(err) {
