@@ -460,7 +460,9 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 				return callback(err);
 			}
 			// Store the tiddler
-			self.storeTiddler(tiddlerFields);
+			if(tiddlerFields) {
+				self.storeTiddler(tiddlerFields);
+			}
 			// Invoke the callback
 			callback(null);
 		});

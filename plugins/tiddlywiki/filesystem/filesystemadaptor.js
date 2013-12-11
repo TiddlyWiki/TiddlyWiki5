@@ -178,10 +178,12 @@ console.log("FileSystem: Saved file",fileInfo.filepath);
 
 /*
 Load a tiddler and invoke the callback with (err,tiddlerFields)
+
+We don't need to implement loading for the file system adaptor, because all the tiddler files will have been loaded during the boot process.
 */
 FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 console.log("FileSystem: Loading",title);
-	callback(null,{title: title, text: "Fake tiddler: " + title});
+	callback(null,null);
 };
 
 /*
