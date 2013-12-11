@@ -68,13 +68,11 @@ Syncer.prototype.init = function() {
 	// Hashmap by title of {revision:,changeCount:,adaptorInfo:}
 	this.tiddlerInfo = {};
 	// Record information for known tiddlers
-	this.wiki.forEachTiddler(function(title,tiddler) {
-		if(tiddler.fields["revision"]) {
-			self.tiddlerInfo[title] = {
-				revision: tiddler.fields["revision"],
-				adaptorInfo: self.syncadaptor.getTiddlerInfo(tiddler),
-				changeCount: self.wiki.getChangeCount(title)
-			}
+	this.wiki.forEachTiddler({includeSystem: true},function(title,tiddler) {
+		self.tiddlerInfo[title] = {
+			revision: tiddler.fields["revision"],
+			adaptorInfo: self.syncadaptor.getTiddlerInfo(tiddler),
+			changeCount: self.wiki.getChangeCount(title)
 		}
 	});
 	// Tasks are {type: "load"/"save"/"delete", title:, queueTime:, lastModificationTime:}
