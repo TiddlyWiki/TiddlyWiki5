@@ -12,6 +12,7 @@ type: text/vnd.tiddlywiki
 
 !! Bug fixes
 
+* Fixed problem with transcluding fields containing lists or dates (eg, `{{!!tags}}`)
 * Fixed problem with re-ordering page control tiddlers (ie tiddlers tagged `$:/tags/PageControls`)
 * Update template used for deploying to TiddlyWeb
 
