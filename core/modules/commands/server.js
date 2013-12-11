@@ -203,7 +203,7 @@ var Command = function(params,commander,callback) {
 		handler: function(request,response,state) {
 			response.writeHead(200, {"Content-Type": "application/json"});
 			var tiddlers = [];
-			state.wiki.forEachTiddler("title",function(title,tiddler) {
+			state.wiki.forEachTiddler({sortField: "title"},function(title,tiddler) {
 				var tiddlerFields = {};
 				$tw.utils.each(tiddler.fields,function(field,name) {
 					if(name !== "text") {
