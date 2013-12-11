@@ -255,14 +255,23 @@ exports.getModificationFields = function() {
 };
 
 /*
-Return a sorted array of non-system tiddler titles, optionally filtered by a tag 
+Return a sorted array of tiddler titles.  Options include:
+sortField: field to sort by
+excludeTag: tag to exclude
+includeSystem: whether to include system tiddlers (defaults to false)
 */
-exports.getTiddlers = function(sortField,excludeTag) {
-	sortField = sortField || "title";
-	var tiddlers = [], t, titles = [];
+exports.getTiddlers = function(options) {
+	options = options || {};
+	var self = this,
+		sortField = options.sortField || "title",
+		tiddlers = [], t, titles = [];
 	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t) && !this.isSystemTiddler(t) && (!excludeTag || !this.tiddlers[t].hasTag(excludeTag))) {
-			tiddlers.push(this.tiddlers[t]);
+		if($tw.utils.hop(this.tiddlers,t)) {
+			if(options.includeSystem || !this.isSystemTiddler(t)) {
+				if(!options.excludeTag || !this.tiddlers[t].hasTag(excludeTag)) {
+					tiddlers.push(this.tiddlers[t]);
+				}
+			}
 		}
 	}
 	tiddlers.sort(function(a,b) {
@@ -285,7 +294,7 @@ exports.getTiddlers = function(sortField,excludeTag) {
 };
 
 exports.countTiddlers = function(excludeTag) {
-	var tiddlers = this.getTiddlers(null,excludeTag);
+	var tiddlers = this.getTiddlers({excludeTag: excludeTag});
 	return $tw.utils.count(tiddlers);
 };
 
@@ -323,12 +332,17 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive) {
 	});
 };
 
-exports.forEachTiddler = function(/* [sortField,[excludeTag,]]callback */) {
+/*
+For every tiddler invoke a callback(title,tiddler) with `this` set to the wiki object. Options include:
+sortField: field to sort by
+excludeTag: tag to exclude
+includeSystem: whether to include system tiddlers (defaults to false)
+*/
+exports.forEachTiddler = function(/* [options,]callback */) {
 	var arg = 0,
-		sortField = arguments.length > 1 ? arguments[arg++] : null,
-		excludeTag = arguments.length > 2 ? arguments[arg++] : null,
+		options = arguments.length >= 2 ? arguments[arg++] : {},
 		callback = arguments[arg++],
-		titles = this.getTiddlers(sortField,excludeTag),
+		titles = this.getTiddlers(options),
 		t, tiddler;
 	for(t=0; t<titles.length; t++) {
 		tiddler = this.tiddlers[titles[t]];
