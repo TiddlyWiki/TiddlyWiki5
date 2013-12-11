@@ -53,16 +53,16 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
+		if(self.set) {
+			self.setTiddler();
+			handled = true;
+		}
 		if(self.message) {
 			self.dispatchMessage(event);
 			handled = true;
 		}
 		if(self.popup) {
 			self.triggerPopup(event);
-			handled = true;
-		}
-		if(self.set) {
-			self.setTiddler();
 			handled = true;
 		}
 		if(handled) {
