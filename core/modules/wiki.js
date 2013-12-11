@@ -757,7 +757,7 @@ exports.parseTextReference = function(title,field,index,options) {
 			if(text === undefined) {
 				text = "";
 			}
-			return this.parseText("text/vnd.tiddlywiki",text,options);
+			return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 		} else if(index) {
 			text = this.extractTiddlerDataItem(title,index,"");
 			return this.parseText("text/vnd.tiddlywiki",text,options);
