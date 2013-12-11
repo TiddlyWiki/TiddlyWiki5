@@ -90,6 +90,18 @@ NavigatorWidget.prototype.findTitleInStory = function(title,defaultIndex) {
 };
 
 /*
+Add a new record to the top of the history stack
+*/
+NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
+	// Add a new record to the top of the history stack
+	if(this.historyTitle) {
+		var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
+		historyList.push({title: title, fromPageRect: fromPageRect});
+		this.wiki.setTiddlerData(this.historyTitle,historyList);
+	}
+};
+
+/*
 Handle a tw-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
@@ -108,12 +120,7 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 			this.saveStoryList();
 		}
 	}
-	// Add a new record to the top of the history stack
-	if(this.historyTitle) {
-		var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
-		historyList.push({title: event.navigateTo, fromPageRect: event.navigateFromClientRect});
-		this.wiki.setTiddlerData(this.historyTitle,historyList);
-	}
+	this.addToHistory(event.navigateTo,event.navigateFromClientRect);
 	return false;
 };
 
@@ -163,6 +170,7 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 			this.storyList.splice(t,1);
 		}
 	}
+	this.addToHistory(draftTiddler.fields.title,event.navigateFromClientRect);
 	this.saveStoryList();
 	return false;
 };
@@ -270,6 +278,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 						if(draftTitle === this.storyTitle) {
 							storyTiddlerModified = true;
 						}
+						this.addToHistory(draftTitle,event.navigateFromClientRect);
 					}
 				}
 			}
@@ -300,6 +309,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 				storyTiddlerModified = true;
 			}
 		}
+		this.addToHistory(originalTitle,event.navigateFromClientRect);
 	}
 	if(storyTiddlerModified) {
 		this.saveStoryList();
@@ -343,9 +353,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Save the updated story
 	this.saveStoryList();
 	// Add a new record to the top of the history stack
-	var history = this.wiki.getTiddlerData(this.historyTitle,[]);
-	history.push({title: draftTitle});
-	this.wiki.setTiddlerData(this.historyTitle,history);
+	this.addToHistory(draftTitle);
 	return false;
 };
 
