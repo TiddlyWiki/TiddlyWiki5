@@ -1,5 +1,4 @@
 title: $:/core/ui/EditTemplate
-modifier: JeremyRuston
 
 \define frame-classes()
 tw-tiddler-frame tw-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$

@@ -1,8 +1,6 @@
 title: SetVariableWidget
 created: 201310241419
-creator: JeremyRuston
 modified: 201311151827
-modifier: JeremyRuston
 tags: widget
 
 The `<$setvariable>` widget has been renamed `<$set/>`; see SetWidget for more details.

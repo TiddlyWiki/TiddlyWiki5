@@ -1,5 +1,4 @@
 title: $:/core/ui/ViewTemplate
-modifier: JeremyRuston
 
 \define frame-classes()
 tw-tiddler-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
