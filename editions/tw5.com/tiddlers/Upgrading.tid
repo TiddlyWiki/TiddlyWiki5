@@ -1,5 +1,5 @@
 created: 20131202102427114
-modified: 20131205175047321
+modified: 20131211142951319
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
@@ -13,7 +13,9 @@ Note that none of your personal data leaves your browser with this process.
 # Visit http://five.tiddlywiki.com/empty.html
 # Drag your old TiddlyWiki5 HTML file into the browser window
 #* Your tiddlers should be imported
-# Save changes to save the new version
+# Save changes to save the new version.
+
+This will download a file called ''empty.html'' to your computer. This file is the upgrade of your old file. You may need to open the location where ''empty.html'' was downloaded, rename ''empty.html'' with the name of the old file you are upgrading, and replace the old file by moving the new file in its place.
 
 //For the moment you'll also need to manually update any plugins that are not included in empty.html://
 
