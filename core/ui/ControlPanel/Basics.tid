@@ -2,22 +2,13 @@ title: $:/core/ui/ControlPanel/Basics
 tags: $:/tags/ControlPanel
 caption: Basics
 
-! Settings
-
+|TiddlyWiki version |''<<version>>'' |
 |[[Title of this TiddlyWiki|SiteTitle]] |<$edit-text tiddler="SiteTitle" default="" tag="input"/> |
 |[[Subtitle|SiteSubtitle]] |<$edit-text tiddler="SiteSubtitle" default="" tag="input"/> |
 |[[Username for signing edits|$:/status/UserName]] |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
 |[[Animation duration|$:/config/AnimationDuration]] |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
 |[[DefaultTiddlers|$:/DefaultTiddlers]] |Choose which tiddlers are displayed at startup:<br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/> |
-
-! Info
-
-!! Your Stuff
-
-* Number of tiddlers: <$count filter="[!is[system]]"/>
-
-!! TiddlyWiki's Stuff
-
-* Number of system tiddlers: <$count filter="[is[system]]"/>
-* Number of shadow tiddlers: <$count filter="[is[shadow]]"/>
-** Number of over-ridden shadow tiddlers: <$count filter="[!is[system]is[shadow]]"/>
+|Tiddlers |''<$count filter="[!is[system]]"/>'' |
+|System tiddlers |''<$count filter="[is[system]]"/>'' |
+|Shadow tiddlers |''<$count filter="[is[shadow]]"/>'' |
+|Overridden shadow tiddlers |''<$count filter="[!is[system]is[shadow]]"/>'' |
