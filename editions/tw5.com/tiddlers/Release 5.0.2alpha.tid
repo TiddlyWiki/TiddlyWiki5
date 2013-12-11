@@ -1,0 +1,20 @@
+created: 20131211074600007
+modified: 20131211074600007
+tags: releasenote
+title: Release 5.0.2-alpha
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.1-alpha...v5.0.2-alpha]]//
+
+!! Improvements
+
+* 
+
+!! Bug fixes
+
+* Fixed problem with re-ordering page control tiddlers (ie tiddlers tagged `$:/tags/PageControls`)
+* Update template used for deploying to TiddlyWeb
+
+!! Internal changes
+
+* 
