@@ -1,0 +1,9 @@
+created: 20131211220000000
+modified: 20131211224200000
+tags: definitions
+title: TiddlyIE
+type: text/vnd.tiddlywiki
+
+TiddlyIE is an extension for Internet Explorer that allows standalone TiddlyWiki files to save their changes directly to the file system. TiddlyIE works with the desktop version of Internet Explorer.
+
+See [[Saving with TiddlyIE]].
