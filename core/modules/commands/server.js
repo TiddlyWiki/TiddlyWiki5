@@ -255,7 +255,7 @@ Command.prototype.execute = function() {
 		rootTiddler = this.params[1] || "$:/core/save/all",
 		renderType = this.params[2] || "text/plain",
 		serveType = this.params[3] || "text/html",
-		username = this.params[4] || "ANONYMOUS",
+		username = this.params[4],
 		password = this.params[5];
 	this.server.set({
 		rootTiddler: rootTiddler,
