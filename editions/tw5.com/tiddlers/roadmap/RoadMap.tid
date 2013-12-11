@@ -1,23 +1,20 @@
 created: 20130823203800000
-modified: 20131129100749891
+modified: 20131211145629137
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 is under rapid development at the moment, moving through a series of stages from alpha, via beta into a stable release.
+TiddlyWiki is under rapid development at the moment as it moves through beta to a full release.
 
-! Alpha Release
+! Beta
 
-The last remaining improvement before TiddlyWiki5 moves to beta is an easier upgrade mechanism.
-
-! Beta Release
-
-During the beta TiddlyWiki5 will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
+During the beta TiddlyWiki will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
 
 The following additional features are planned or under consideration for implementation during the beta:
 
 * Warning when attempting to close window without saving
 * Use browser local storage to preserve changes in case browser crashes before saving/sync
+* Automatic saving for saver modules that can support it
 * Multilanguage support
 * Aliases
 * Search and replace
@@ -28,17 +25,15 @@ The following additional features are planned or under consideration for impleme
 * Proper use of ARIA roles
 * Import wizard allowing individual tiddlers to be selected for import
 * `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
-* Further WikiText features including block quotes
-* Facebook, Twitter, G+ and LinkedIn widgets
+* Further WikiText features
 * Integration with the browser back and forwards buttons
 * Syntax highlighter plugin
-* Minification of plugins (JS and CSS)
 * List editor with drag and drop
 * Selective/weighted searching by title, body and fields
 * Maths notation
 * A "safe mode" to disable customisations
 * Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
 
-! 5.0 Release
+! General Release
 
-TiddlyWiki5 will leave beta and become a full release early in 2014. That is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
+TiddlyWiki will leave beta and become a full release early in 2014. That is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
