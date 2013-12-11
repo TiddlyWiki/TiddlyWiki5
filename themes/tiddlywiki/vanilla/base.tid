@@ -72,6 +72,11 @@ blockquote {
 	padding-left: 10px;
 }
 
+dl dt {
+	font-weight: bold;
+	margin-top: 6px;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
