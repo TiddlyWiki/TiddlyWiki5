@@ -143,29 +143,34 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 	if($tw.utils.hop($tw.macros,name)) {
 		var macro = $tw.macros[name],
 			args = [];
-		var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
-			paramInfo, paramValue;
-		// Step through each of the parameters in the macro definition
-		for(var p=0; p<macro.params.length; p++) {
-			// Check if we've got a macro call parameter with the same name
-			paramInfo = macro.params[p];
-			paramValue = undefined;
-			for(var m=0; m<actualParams.length; m++) {
-				if(actualParams[m].name === paramInfo.name) {
-					paramValue = actualParams[m].value;
+		if(macro.params.length > 0) {
+			var nextAnonParameter = 0, // Next candidate anonymous parameter in macro call
+				paramInfo, paramValue;
+			// Step through each of the parameters in the macro definition
+			for(var p=0; p<macro.params.length; p++) {
+				// Check if we've got a macro call parameter with the same name
+				paramInfo = macro.params[p];
+				paramValue = undefined;
+				for(var m=0; m<actualParams.length; m++) {
+					if(actualParams[m].name === paramInfo.name) {
+						paramValue = actualParams[m].value;
+					}
 				}
+				// If not, use the next available anonymous macro call parameter
+				while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
+					nextAnonParameter++;
+				}
+				if(paramValue === undefined && nextAnonParameter < actualParams.length) {
+					paramValue = actualParams[nextAnonParameter++].value;
+				}
+				// If we've still not got a value, use the default, if any
+				paramValue = paramValue || paramInfo["default"] || "";
+				// Save the parameter
+				args.push(paramValue);
 			}
-			// If not, use the next available anonymous macro call parameter
-			while(nextAnonParameter < actualParams.length && actualParams[nextAnonParameter].name) {
-				nextAnonParameter++;
-			}
-			if(paramValue === undefined && nextAnonParameter < actualParams.length) {
-				paramValue = actualParams[nextAnonParameter++].value;
-			}
-			// If we've still not got a value, use the default, if any
-			paramValue = paramValue || paramInfo["default"] || "";
-			// Save the parameter
-			args.push(paramValue);
+		}
+		else for(var i=0; i<actualParams.length; ++i) {
+			args.push(actualParams[i].value);
 		}
 		return macro.run.apply(this,args)
 	} else {
