@@ -1,0 +1,19 @@
+created: 20131211220000000
+modified: 20131211224900000
+tags: howto
+title: Saving with TiddlyIE
+type: text/vnd.tiddlywiki
+
+# Install the TiddlyIE add-on from:
+#* https://github.com/davidjade/TiddlyIE/releases
+# Restart Internet Explorer. IE will prompt you to enable the TiddlyIE add-on.
+#> You may also see a prompt to enable the //Microsoft Script Runtime//
+# [[Download]] an empty TiddlyWiki by clicking this button:
+#> {{$:/editions/tw5.com/snippets/download-empty-button}}
+#> Your browser may ask you to accept the download before it begins
+# Locate the file you just downloaded
+#* You may rename it, but be sure to keep the `.html` extension
+# Open the file in Internet Explorer
+# Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
+# Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar. Internet Explorer will ask for your consent to save the file locally by presenting a file ''Save As'' dialog.
+# Refresh the browser window to verify that your changes have been saved correctly
