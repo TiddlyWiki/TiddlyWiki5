@@ -1,7 +1,7 @@
 color: #8bbec7
 created: 20130824153100000
-modified: 20131129094148475
+modified: 20131212094158519
 title: command
 type: text/vnd.tiddlywiki
 
-When run under Node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki5 on Node.js]] with these built-in commands.
+When run under Node.js, TiddlyWiki supports a [[command line interface|TiddlyWiki on Node.js]] with these built-in commands.

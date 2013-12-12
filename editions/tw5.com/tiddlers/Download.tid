@@ -1,13 +1,13 @@
 created: 20131119194500000
-modified: 20131129094606811
+modified: 20131212094150331
 tags: introduction
 title: Download
 type: text/vnd.tiddlywiki
 
-Download single file editions of version ''<<version>>'' of TiddlyWiki5:
+Download single file editions of version ''<<version>>'' of TiddlyWiki:
 
 |{{$:/editions/tw5.com/snippets/download-empty-button}}|Get started with an empty wiki |
 |{{$:/snippets/download-wiki-button}}|Download a full copy of this site, including all the documentation |
 
-For more advanced configurations, you can run [[TiddlyWiki5 on Node.js]].
+For more advanced configurations, you can run [[TiddlyWiki on Node.js]].
 

@@ -1,17 +1,17 @@
 created: 20131202102427114
-modified: 20131211142951319
+modified: 20131212094500689
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
 
-There are several methods for upgrading an existing TiddlyWiki5 document to a new release.
+There are several methods for upgrading an existing TiddlyWiki document to a new release.
 
 ! Online upgrading
 
 Note that none of your personal data leaves your browser with this process.
 
 # Visit http://five.tiddlywiki.com/empty.html
-# Drag your old TiddlyWiki5 HTML file into the browser window
+# Drag your old TiddlyWiki HTML file into the browser window
 #* Your tiddlers should be imported
 # Save changes to save the new version.
 

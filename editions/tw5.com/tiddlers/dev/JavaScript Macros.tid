@@ -1,0 +1,17 @@
+created: 20131211222303769
+modified: 20131211225411570
+tags: dev
+title: JavaScript Macros
+type: text/vnd.tiddlywiki
+
+Macros can be implemented as JavaScript modules as well as via the [[wikitext syntax|Macros in WikiText]].
+
+JavaScript macros are modules with their ''module-type'' field set to ''macro''. They must export these three properties:
+
+* ''name'': A string giving the name used to invoke the macro
+* ''params'': An array of objects with the following properties:
+** //name//: name of the parameter
+** //default//: (optional) default value for the parameter
+* ''run'': Function called when the macro requires evaluation. The parameters are pulled from the macro call and arranged according to the ''params'' array. The ''run'' function should return the string value of the macro. When invoked, `this` points to the widget node invoking the macro.
+
+Note that if the ''params'' array is missing or blank, then all the supplied parameters are passed to the `run()` method.

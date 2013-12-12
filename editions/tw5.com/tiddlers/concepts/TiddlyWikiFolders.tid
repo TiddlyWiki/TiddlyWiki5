@@ -1,10 +1,10 @@
 created: 20130825214200000
-modified: 20131129095040600
+modified: 20131212094058729
 tags: dev
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
 
-As well as traditional single file wikis, [[TiddlyWiki5 on Node.js]] supports wikis that are stored as a folder of individual tiddler files.
+As well as traditional single file wikis, [[TiddlyWiki on Node.js]] supports wikis that are stored as a folder of individual tiddler files.
 
 ! Wiki folder files and folders
 

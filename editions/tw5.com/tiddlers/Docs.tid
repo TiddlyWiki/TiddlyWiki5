@@ -1,5 +1,5 @@
 created: 20130824141800000
-modified: 20131206163714703
+modified: 20131212093542990
 tags: introduction
 title: Docs
 type: text/vnd.tiddlywiki
@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 <ul><$list filter="[tag[$tag$]]"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
 \end
-This is the main documentation hub for TiddlyWiki. See also the DeveloperDocs.
+This is the main documentation hub for TiddlyWiki. See also [[TiddlyWiki for Developers]].
 
 ! How to use ~TiddlyWiki5
 

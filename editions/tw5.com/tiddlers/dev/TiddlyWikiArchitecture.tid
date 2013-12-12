@@ -1,5 +1,5 @@
 created: 20130825162100000
-modified: 20131203074943344
+modified: 20131212093605368
 tags: dev
 title: TiddlyWikiArchitecture
 type: text/vnd.tiddlywiki
@@ -7,5 +7,3 @@ type: text/vnd.tiddlywiki
 The heart of TiddlyWiki can be seen as an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
 
 The primary use of the engine is to convert raw `text/vnd.tiddlywiki` WikiText into a `text/html` or `text/plain` representation for display. The transclusion and templating features of WikiText allow the engine to also be used to generate TiddlyWiki HTML files from raw tiddlers.
-
-If you're interested in understanding more about the internal operation of TiddlyWiki, start by reviewing [[TiddlyWiki5 for Developers]] and then read the code -- start with the boot kernel [[$:/boot/boot.js]].
