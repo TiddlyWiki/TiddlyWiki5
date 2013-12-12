@@ -45,7 +45,9 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("placeholder",this.editPlaceholder);
 	}
 	// Assign classes
-	domNode.className = this.editClass;
+	if(this.editClass) {
+		domNode.className = this.editClass;
+	}
 	// Set the text
 	var editInfo = this.getEditInfo();
 	if(this.editTag === "textarea") {
