@@ -50,7 +50,7 @@ FieldradioWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class", this.fieldradioClass);
+	this.labelDomNode.setAttribute("class",this.fieldradioClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
 	if(this.getValue() == this.fieldradioValue) {
@@ -76,14 +76,18 @@ FieldradioWidget.prototype.getValue = function() {
 
 FieldradioWidget.prototype.setValue = function() {
 	var tiddler = this.wiki.getTiddler(this.fieldradioTitle);
-	if (this.fieldradioField == "") return;
+	if(this.fieldradioField == "") {
+		return;
+	}
 	var addition = {};
 	addition[this.fieldradioField] = this.fieldradioValue;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
 };
 
 FieldradioWidget.prototype.handleChangeEvent = function(event) {
-	if (this.inputDomNode.checked) this.setValue();
+	if (this.inputDomNode.checked) {
+		this.setValue();
+	}
 };
 
 /*
@@ -95,9 +99,10 @@ FieldradioWidget.prototype.execute = function() {
 	this.fieldradioField = this.getAttribute("field");
 	this.fieldradioValue = this.getAttribute("value");
 	this.fieldradioClass = this.getAttribute("class","");
-	if (this.fieldradioClass != "")
-		this.fieldradioClass+= " ";
-	this.fieldradioClass+= "tw-fieldradio";
+	if (this.fieldradioClass !== "") {
+		this.fieldradioClass += " ";
+	}
+	this.fieldradioClass += "tw-fieldradio";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
