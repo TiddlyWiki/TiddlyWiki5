@@ -16,7 +16,9 @@ type: text/vnd.tiddlywiki
 * Fixed problem with transcluding fields containing lists or dates (eg, `{{!!tags}}`)
 * Fixed problem with re-ordering page control tiddlers (ie tiddlers tagged `$:/tags/PageControls`)
 * Update template used for deploying to TiddlyWeb
+* Fixed problem with tiddler deletions via the file system adaptor
 
 !! Internal changes
 
-* 
+* Allowed variable number of arguments to [[JavaScript Macros]]
+** Contributed by StephanHradek (@Skeeve on GitHub)

@@ -1,5 +1,5 @@
 created: 20130825213300000
-modified: 20131129162830410
+modified: 20131212095204933
 tags: concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
@@ -10,6 +10,7 @@ The standard fields are:
 
 |!Field Name |!Reference |!Description |
 |`title` |TitleField |{{$:/docs/fields/title}} |
+|`text` |TextField |{{$:/docs/fields/text}} |
 |`modified` |ModifiedField |{{$:/docs/fields/modified}} |
 |`modifier` |ModifierField |{{$:/docs/fields/modifier}} |
 |`created` |CreatedField |{{$:/docs/fields/created}} |
