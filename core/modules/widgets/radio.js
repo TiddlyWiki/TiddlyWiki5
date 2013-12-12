@@ -75,13 +75,12 @@ RadioWidget.prototype.getValue = function() {
 };
 
 RadioWidget.prototype.setValue = function() {
-	var tiddler = this.wiki.getTiddler(this.radioTitle);
-	if(this.radioField == "") {
-		return;
+	if(this.radioField) {
+		var tiddler = this.wiki.getTiddler(this.radioTitle),
+			addition = {};
+		addition[this.radioField] = this.radioValue;
+		this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
 	}
-	var addition = {};
-	addition[this.radioField] = this.radioValue;
-	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
