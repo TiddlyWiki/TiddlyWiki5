@@ -14,7 +14,7 @@ Will set a field to the selected value:
 ```
 
 |Parameter |Description |h
-|tiddler |Name of the tiddler in which the field should be set. Defaults to current tiddelr |
+|tiddler |Name of the tiddler in which the field should be set. Defaults to current tiddler |
 |field |The name of the field to be set |
 |value |The value to set |
 |class |Optional class name(s) |
