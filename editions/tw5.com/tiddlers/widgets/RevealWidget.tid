@@ -1,15 +1,16 @@
-title: RevealWidget
-created: 201310241419
-modified: 201310300837
+created: 20131024141900000
+modified: 20131212181426191
 tags: widget
+title: RevealWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
 The reveal widget hides or shows its content depending upon the value of a [[state tiddler|StateTiddlers]]. The type of the widget determines the condition for the content being displayed:
 
-* ''match'': the content is displayed if the state tiddler matches a specified value
-* ''nomatch'': the content is displayed if the state tiddler doesn't match a specified value
-* ''popup'': the content is displayed as a popup as described in the PopupMechanism
+* type=''match'': the content is displayed if the state tiddler matches a specified value
+* type=''nomatch'': the content is displayed if the state tiddler doesn't match a specified value
+* type=''popup'': the content is displayed as a popup as described in the PopupMechanism
 
 ! Content and Attributes
 
@@ -19,5 +20,57 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |state |The title of the tiddler containing the state |
 |type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
-|position |The position used for the popup when the type is ''popup''. Can be ''left'',''above'',''aboveright'',''right'',''belowleft'' or ''below'' |
+|position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
 |default |Default value to use when the state tiddler |
+
+! Examples
+
+!! Simple content reveal
+
+Here's a simple example of showing and hiding content with buttons:
+
+```
+<$button set="$:/SampleRevealState" setTo="show">Show me</$button>
+<$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
+
+<$reveal type="match" state="$:/SampleRevealState" text="show">
+! This is the revealed content
+And this is some text
+</$reveal>
+```
+
+It renders as:
+
+<$button set="$:/SampleRevealState" setTo="show">Show me</$button>
+<$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
+
+<$reveal type="match" state="$:/SampleRevealState" text="show">
+! This is the revealed content
+And this is some text
+</$reveal>
+
+!! Popup
+
+Here is a simple example of a popup built with the RevealWidget:
+
+```
+<$button popup="$:/SamplePopupState">Pop me up!</$button>
+
+<$reveal type="popup" state="$:/SamplePopupState">
+<div class="tw-drop-down">
+! This is the popup
+And this is some text
+</div>
+</$reveal>
+```
+
+It renders as:
+
+<$button popup="$:/SamplePopupState">Pop me up!</$button>
+
+<$reveal type="popup" state="$:/SamplePopupState">
+<div class="tw-drop-down">
+! This is the popup
+And this is some text
+</div>
+</$reveal>
