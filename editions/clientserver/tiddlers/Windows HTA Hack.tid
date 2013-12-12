@@ -1,0 +1,11 @@
+created: 20131212223146250
+modified: 20131212223450147
+tags: howto
+title: Windows HTA Hack
+type: text/vnd.tiddlywiki
+
+Under Windows it is possible to convert TiddlyWiki into a true local application by renaming the HTML file to have the extension `*.hta`. The ''fsosaver'' module can then use the ~ActiveX ~FileSystemObject to save changes.
+
+Note that one disadvantage of this approach is that the TiddlyWiki file is saved in UTF-16 format, making it up to twice as large as it would be with the usual UTF-8 encoding. However, opening and saving the file via another saving method will re-encode the file to UTF-8.
+
+See Wikipedia for more details: http://en.wikipedia.org/wiki/HTML_Application

@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20131212094132526
+modified: 20131212222628625
 tags: introduction
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -26,4 +26,5 @@ You can also try:
 
 * [[Saving on iPad/iPhone]] with the custom ''TWEdit'' app
 * [[Saving on Android]] with the custom ''~AndTidWiki'' app
+* [[Saving on InternetExplorer]] with the [[TiddlyIE]] extension, or via the [[Windows HTA Hack]] 
 * [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
