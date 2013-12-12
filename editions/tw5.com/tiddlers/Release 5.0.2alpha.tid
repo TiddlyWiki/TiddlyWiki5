@@ -1,5 +1,5 @@
 created: 20131211074600007
-modified: 20131211074600007
+modified: 20131212182646223
 tags: releasenote
 title: Release 5.0.2-alpha
 type: text/vnd.tiddlywiki
@@ -8,7 +8,9 @@ type: text/vnd.tiddlywiki
 
 !! Improvements
 
-* 
+* Two new savers for InternetExplorer, both contributed by DavidJade (@davidjade on GitHub)
+** ''tiddlyie'' for [[saving with TiddlyIE|Saving with TiddlyIE]], an equivalent of TiddlyFox for InternetExplorer
+** ''fsosaver'' that can [[save changes directly with InternetExplorer|Saving with InternetExplorer]] but requires the HTML file to be renamed `*.hta`
 
 !! Bug fixes
 

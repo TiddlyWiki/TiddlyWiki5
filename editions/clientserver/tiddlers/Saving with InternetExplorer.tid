@@ -1,0 +1,7 @@
+created: 20131212182652334
+modified: 20131212184252971
+tags: howto
+title: Saving with InternetExplorer
+type: text/vnd.tiddlywiki
+
+TiddlyWiki can save changes directly under InternetExplorer as long as the HTML file is renamed to have the extension `*.hta`.
