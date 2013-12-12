@@ -1,16 +1,16 @@
 /*\
-title: $:/core/modules/widgets/fieldradio.js
+title: $:/core/modules/widgets/radio.js
 type: application/javascript
 module-type: widget
 
-Fieldradio widget
+Radio widget
 
 Will set a field to the selected value:
 
 ```
-	<$fieldradio field="myfield" value="check 1">one</$fieldradio>
-	<$fieldradio field="myfield" value="check 2">two</$fieldradio>
-	<$fieldradio field="myfield" value="check 3">three</$fieldradio>
+	<$radio field="myfield" value="check 1">one</$radio>
+	<$radio field="myfield" value="check 2">two</$radio>
+	<$radio field="myfield" value="check 3">three</$radio>
 ```
 
 |Parameter |Description |h
@@ -29,19 +29,19 @@ Will set a field to the selected value:
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var FieldradioWidget = function(parseTreeNode,options) {
+var RadioWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-FieldradioWidget.prototype = new Widget();
+RadioWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-FieldradioWidget.prototype.render = function(parent,nextSibling) {
+RadioWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -50,10 +50,10 @@ FieldradioWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
-	this.labelDomNode.setAttribute("class",this.fieldradioClass);
+	this.labelDomNode.setAttribute("class",this.radioClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","radio");
-	if(this.getValue() == this.fieldradioValue) {
+	if(this.getValue() == this.radioValue) {
 		this.inputDomNode.setAttribute("checked","true");
 	}
 	this.labelDomNode.appendChild(this.inputDomNode);
@@ -69,22 +69,22 @@ FieldradioWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(this.labelDomNode);
 };
 
-FieldradioWidget.prototype.getValue = function() {
-	var tiddler = this.wiki.getTiddler(this.fieldradioTitle);
-	return tiddler && tiddler.getFieldString(this.fieldradioField);
+RadioWidget.prototype.getValue = function() {
+	var tiddler = this.wiki.getTiddler(this.radioTitle);
+	return tiddler && tiddler.getFieldString(this.radioField);
 };
 
-FieldradioWidget.prototype.setValue = function() {
-	var tiddler = this.wiki.getTiddler(this.fieldradioTitle);
-	if(this.fieldradioField == "") {
+RadioWidget.prototype.setValue = function() {
+	var tiddler = this.wiki.getTiddler(this.radioTitle);
+	if(this.radioField == "") {
 		return;
 	}
 	var addition = {};
-	addition[this.fieldradioField] = this.fieldradioValue;
+	addition[this.radioField] = this.radioValue;
 	this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
 };
 
-FieldradioWidget.prototype.handleChangeEvent = function(event) {
+RadioWidget.prototype.handleChangeEvent = function(event) {
 	if (this.inputDomNode.checked) {
 		this.setValue();
 	}
@@ -93,16 +93,16 @@ FieldradioWidget.prototype.handleChangeEvent = function(event) {
 /*
 Compute the internal state of the widget
 */
-FieldradioWidget.prototype.execute = function() {
+RadioWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
-	this.fieldradioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	this.fieldradioField = this.getAttribute("field");
-	this.fieldradioValue = this.getAttribute("value");
-	this.fieldradioClass = this.getAttribute("class","");
-	if (this.fieldradioClass !== "") {
-		this.fieldradioClass += " ";
+	this.radioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.radioField = this.getAttribute("field");
+	this.radioValue = this.getAttribute("value");
+	this.radioClass = this.getAttribute("class","");
+	if (this.radioClass !== "") {
+		this.radioClass += " ";
 	}
-	this.fieldradioClass += "tw-fieldradio";
+	this.radioClass += "tw-radio";
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -110,14 +110,14 @@ FieldradioWidget.prototype.execute = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-FieldradioWidget.prototype.refresh = function(changedTiddlers) {
+RadioWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.value || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {
 		var refreshed = false;
-		if(changedTiddlers[this.fieldradioTitle]) {
+		if(changedTiddlers[this.radioTitle]) {
 			this.inputDomNode.checked = this.getValue();
 			refreshed = true;
 		}
@@ -125,6 +125,6 @@ FieldradioWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.fieldradio = FieldradioWidget;
+exports.radio = RadioWidget;
 
 })();
