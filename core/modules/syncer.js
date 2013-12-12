@@ -437,19 +437,21 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 		var changeCount = this.wiki.getChangeCount(task.title),
 			tiddler = this.wiki.getTiddler(task.title);
 		this.log("Dispatching 'save' task:",task.title);
-		this.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
-			if(err) {
-				return callback(err);
-			}
-			// Adjust the info stored about this tiddler
-			self.tiddlerInfo[task.title] = {
-				changeCount: changeCount,
-				adaptorInfo: adaptorInfo,
-				revision: revision
-			};
-			// Invoke the callback
-			callback(null);
-		});
+		if(tiddler) {
+			this.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
+				if(err) {
+					return callback(err);
+				}
+				// Adjust the info stored about this tiddler
+				self.tiddlerInfo[task.title] = {
+					changeCount: changeCount,
+					adaptorInfo: adaptorInfo,
+					revision: revision
+				};
+				// Invoke the callback
+				callback(null);
+			});
+		}
 	} else if(task.type === "load") {
 		// Load the tiddler
 		this.log("Dispatching 'load' task:",task.title);
