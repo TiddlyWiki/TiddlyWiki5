@@ -117,6 +117,9 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 };
 
 DropZoneWidget.prototype.importDataTypes = [
+	{type: "text/vnd.tiddler", convertToFields: function(data) {
+		return JSON.parse(data);
+	}},
 	{type: "URL", convertToFields: function(data) {
 		// check for tiddler data URI
 		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
@@ -128,15 +131,12 @@ DropZoneWidget.prototype.importDataTypes = [
 			};
 		}
 	}},
-	{type: "Text", convertToFields: function(data) {
+	{type: "text/plain", convertToFields: function(data) {
 		return {
 			text: data
 		};
 	}},
-	{type: "text/vnd.tiddler", convertToFields: function(data) {
-		return JSON.parse(data);
-	}},
-	{type: "text/plain", convertToFields: function(data) {
+	{type: "Text", convertToFields: function(data) {
 		return {
 			text: data
 		};
