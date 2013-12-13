@@ -1,5 +1,5 @@
 created: 20130822172800000
-modified: 20131203112520519
+modified: 20131213100612914
 tags: introduction
 title: Features
 type: text/vnd.tiddlywiki
@@ -20,8 +20,8 @@ type: text/vnd.tiddlywiki
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[Node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules
-** TiddlyWiki5 can directly build both itself and previous (2.x.x) versions of TiddlyWiki from their constituent separate files, without needing external tools
-** Run the TiddlyWiki5 [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
+** TiddlyWiki version 5 can directly build both itself and previous (2.x.x) versions of TiddlyWiki from their constituent separate files, without needing external tools
+** Run the TiddlyWiki [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
 * Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]
 
-The deep internal changes mean that TiddlyWiki5 is not compatible with previous versions, using different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly in TiddlyWiki5. When asking or searching for help be sure to specify TiddlyWiki5 (or TW5).
+The deep internal changes mean that TiddlyWiki version 5 is not compatible with previous versions, using different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly. When asking or searching for help be sure to specify TiddlyWiki5 (or TW5).
