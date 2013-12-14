@@ -1,6 +1,5 @@
 {
 	"title": "$:/plugins/tiddlywiki/codemirror",
 	"description": "Codemirror plugin",
-	"author": "JeremyRuston",
-	"coreVersion": ">=5.0.0"
+	"author": "JeremyRuston"
 }

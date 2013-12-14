@@ -1,5 +1,5 @@
 created: 20130826122000000
-modified: 20131214094401992
+modified: 20131214094840608
 tags: mechanism
 title: PluginMechanism
 type: text/vnd.tiddlywiki
@@ -30,7 +30,6 @@ Plugins are stored as tiddlers with the following fields:
 |version |Version string (must conform to SemanticVersioning convention) |
 |source |Source URL of plugin |
 |type |Must be ''application/json'' |
-|core-version |Optional minimum compatible core version |
 |plugin-type |Can be ''plugin'' (default) or ''theme'' |
 |text |JSON encoding of the list of tiddlers comprising the plugin |
 |dependents |List of dependent plugins (currently only implemented for themes) |
