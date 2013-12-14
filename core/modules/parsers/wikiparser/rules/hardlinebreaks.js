@@ -29,7 +29,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /"""(?:\r?\n)+/mg;
+	this.matchRegExp = /"""(?:\r?\n)?/mg;
 };
 
 exports.parse = function() {
