@@ -113,6 +113,15 @@ describe("WikiText parser tests", function() {
 
 	});
 
+	it("should parse hard linebreak areas", function() {
+		expect(parse("\"\"\"Something\nin the\nway she moves\n\"\"\"\n\n")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'text', text : 'Something' }, { type : 'element', tag : 'br' }, { type : 'text', text : 'in the' }, { type : 'element', tag : 'br' }, { type : 'text', text : 'way she moves' }, { type : 'element', tag : 'br' } ] } ]
+
+		);
+
+	});
+
 });
 
 })();

@@ -1,0 +1,17 @@
+created: 20131214165710101
+modified: 20131214170106553
+tags: wikitext
+title: Hard Linebreaks in WikiText
+type: text/vnd.tiddlywiki
+
+The usual handling of [[paragraphs in wikitext|Paragraphs in WikiText]] causes single line breaks to be ignored, and double linebreaks to be interpreted as the end of a paragraph.
+
+This behaviour isn't convenient when dealing with material that incorporates hard linebreaks - for instance, poetry. You can mark a block of content as containing hard line breaks like this:
+
+<<wikitext-example src:'"""
+This is a line
+and this is a new line
+while this is yet another line
+and this is the final one
+apart from this one
+"""'>>
