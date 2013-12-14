@@ -323,7 +323,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	var baseTitle = (templateTiddler && templateTiddler.fields.title) || "New Tiddler",
 		title;
 	for(var t=0; true; t++) {
-		title =  baseTitle + (t ? " " + t : "");
+		title = baseTitle + (t ? " " + t : "");
 		if(!this.wiki.tiddlerExists(title)) {
 			break;
 		}
