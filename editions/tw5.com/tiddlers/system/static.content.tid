@@ -1,0 +1,13 @@
+title: $:/core/templates/static.content
+type: text/vnd.tiddlywiki
+
+<!-- For Google, and people without JavaScript-->
+{{HelloThere}}
+
+{{TiddlyWiki}}
+
+{{Features}}
+
+{{Community}}
+
+{{HelpingTiddlyWiki}}
