@@ -1,7 +1,8 @@
-created: 201308261220
-modified: 201308261220
+created: 20130826122000000
+modified: 20131214094401992
 tags: mechanism
 title: PluginMechanism
+type: text/vnd.tiddlywiki
 
 [[Plugins]] are bundles of tiddlers that are distributed and managed as a single unit by being packed into a single JSON tiddler. If a tiddler isn't found in the main store, then the registered plugins are searched for it instead.
 
@@ -18,9 +19,27 @@ Plugins conventionally have a title of the form `$:/plugins/publisher/name`. Plu
 
 Plugins that define macros, views or other named entities are expected to prefix the name with their publisher identifier, for example: `tiddlytools.slider`.
 
-! Plugin format
+! Plugin fields
 
-Plugins are stored as tiddlers of type `application/json` with the field `plugin-type` present and the text containing a JSON structure encoding the plugin metadata and the list of tiddlers within it.
+Plugins are stored as tiddlers with the following fields:
+
+|!Field |!Description |
+|title |Title of plugin |
+|description |Description of plugin |
+|author |Author of plugin |
+|version |Version string (must conform to SemanticVersioning convention) |
+|source |Source URL of plugin |
+|type |Must be ''application/json'' |
+|core-version |Optional minimum compatible core version |
+|plugin-type |Can be ''plugin'' (default) or ''theme'' |
+|text |JSON encoding of the list of tiddlers comprising the plugin |
+|dependents |List of dependent plugins (currently only implemented for themes) |
+
+! Plugin folders
+
+On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
+
+The `plugin.info` file should contain the following JSON structure:
 
 The JSON structure for plugin tiddlers is as follows:
 
@@ -30,23 +49,13 @@ The JSON structure for plugin tiddlers is as follows:
 	"description": "An exemplary plugin for demonstration purposes",
 	"author": "JeremyRuston",
 	"version": "1.2.3-alpha3",
-	"coreVersion": ">=5.0.0",
+	"core-version": ">=5.0.0",
 	"source": "http://tiddlywiki.com/MyPlugin",
-	"plugin-type": "plugin",
-	"tiddlers": {
-		"$:/plugins/publisher/name/title1": {"type": "image/png", "text": "<base64>"},
-		"title2": {"text": "Text"}
-	}
+	"plugin-type": "plugin"
 }
 ```
 
-The titles of the individual tiddlers are typically prefixed with the title of the containing plugin (as in the ''title1'' example above), but they are not restricted to do so (the second example specifies a tiddler with the raw title ''title2'').
-
-! Plugin folders
-
-On the server, plugins can be stored as ordinary JSON tiddlers but it is often more convenient to store them as separate tiddler files within folders. Plugin folders must contain a `plugin.info` file that contains the metadata for the plugin. It can also optionally identify files external to the plugin folder that should be loaded as tiddlers.
-
-The `plugin.info` file should contain the same JSON as given for plugin tiddlers above, with the `tiddlers` object omitted.
+By convention, the titles of the individual tiddlers are prefixed with the title of the containing plugin, but they are not restricted to do so.
 
 Note that if the `version` field is omitted from a `plugin.info` file when the plugin folder is packed then it is automatically filled in by the core to the current core version number. This is to ensure that all the core plugins carry the correct version number. Generally plugin authors will want to ensure that they do explicitly specify a version number.
 
@@ -56,9 +65,7 @@ The standard distribution of TiddlyWiki includes a number of standard plugins in
 
 ! Including plugins in a wiki
 
-To be usable in the browser, plugins just need to be included in the wiki. This is done when the wiki is generated on the server.
-
-A folder containing an exploded TiddlyWiki can contain a `tiddlywiki.info` file that identifies the plugins to be included in this wiki:
+To be usable in the browser, plugins just need to be included in the wiki. For wikis that are generated on the server, TiddlyWikiFolders can contain a `tiddlywiki.info` file that identifies the plugins to be included in this wiki:
 
 ```
 {

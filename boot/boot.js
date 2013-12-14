@@ -1232,13 +1232,14 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		var fields = {
 			title: pluginInfo.title,
 			type: "application/json",
-			text: JSON.stringify(pluginInfo,null,4),
+			text: JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4),
 			"plugin-priority": pluginInfo["plugin-priority"],
 			"name": pluginInfo["name"],
 			"version": pluginInfo["version"],
 			"thumbnail": pluginInfo["thumbnail"],
 			"description": pluginInfo["description"],
-			"plugin-type": pluginInfo["plugin-type"] || "plugin"
+			"plugin-type": pluginInfo["plugin-type"] || "plugin",
+			"dependents": $tw.utils.stringifyList(pluginInfo["dependents"] || [])
 		}
 		return fields;
 	} else {

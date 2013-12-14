@@ -48,8 +48,9 @@ ThemeManager.prototype.switchTheme = function() {
 			var tiddler = self.wiki.getTiddler(title);
 			if(tiddler && tiddler.isPlugin() && themePlugins.indexOf(title) === -1) {
 				themePlugins.push(title);
-				var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title));
-				$tw.utils.each(pluginInfo.dependents,function(title) {
+				var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title)),
+					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
+				$tw.utils.each(dependents,function(title) {
 					accumulatePlugin(title);
 				});
 			}

@@ -25,3 +25,4 @@ type: text/vnd.tiddlywiki
 
 * Allowed variable number of arguments to [[JavaScript Macros]]
 ** Contributed by StephanHradek (@Skeeve on GitHub)
+* Changed the format of plugin tiddlers to remove duplicated information (see the PluginMechanism)
