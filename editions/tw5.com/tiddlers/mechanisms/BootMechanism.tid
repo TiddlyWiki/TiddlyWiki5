@@ -1,7 +1,8 @@
-created: 201308251429
-modified: 201310312218
+created: 20130825142900000
+modified: 20131214093453953
 tags: mechanism
 title: BootMechanism
+type: text/vnd.tiddlywiki
 
 !Introduction
 
@@ -26,15 +27,15 @@ The boot kernel includes:
 * Code for the browser to load tiddlers from the HTML DOM
 * Code for the server to load tiddlers from the file system
 
-Each module is an ordinary `Node.js`-style module, using the `require()` function to access other modules and the `exports` global to return JavaScript values. The boot kernel smooths over the differences between `Node.js` and the browser, allowing the same plugin modules to execute in both environments.
+Each module is an ordinary CommonJS module, using the `require()` function to access other modules and the `exports` global to return JavaScript values. The boot kernel smooths over the differences between `Node.js` and the browser, allowing the same plugin modules to execute in both environments.
 
 In the browser, `core/boot.js` is packed into a template HTML file that contains the following elements in order:
 
 * Ordinary and system tiddlers, packed as HTML `<DIV>` elements
 * `core/bootprefix.js`, containing a few lines to set up the plugin environment
-* JavaScript modules, packed as HTML `<SCRIPT>` blocks
+* Optional JavaScript modules, packed as HTML `<SCRIPT>` blocks
 * `core/boot.js`, containing the boot kernel
 
 On the server, `core/boot.js` is executed directly. It uses the `Node.js` local file API to load plugins directly from the file system in the `core/modules` directory. The code loading is performed synchronously for brevity (and because the system is in any case inherently blocked until plugins are loaded).
 
-The boot kernel sets up the `$tw` global variable that is used to store all the state data of the system.
+The boot process sets up the `$tw` global variable that is used to store all the state data of the system.
