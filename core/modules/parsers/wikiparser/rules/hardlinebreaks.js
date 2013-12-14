@@ -43,7 +43,6 @@ exports.parse = function() {
 		// Redo the terminator match
 		reEnd.lastIndex = this.parser.pos;
 		var match = reEnd.exec(this.parser.source);
-console.log("Match",match,reEnd.lastIndex)
 		if(match) {
 			this.parser.pos = reEnd.lastIndex;
 			// Add a line break if the terminator was a line break
@@ -52,7 +51,6 @@ console.log("Match",match,reEnd.lastIndex)
 			}
 		}
 	} while(match && !match[1]);
-console.log("Generating",tree)
 	// Return the nodes
 	return tree;
 };
