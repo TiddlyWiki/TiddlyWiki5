@@ -17,7 +17,7 @@ echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 
 # Make the CNAME file that GitHub Pages requires
 
-echo "five.tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
+echo "tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
 
 # Create the `static` directories if necessary
 

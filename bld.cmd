@@ -88,7 +88,7 @@ node .\tiddlywiki.js ^
 
 rem Make the CNAME file that GitHub Pages requires
 
-echo five.tiddlywiki.com > %TW5_BUILD_OUTPUT%\CNAME
+echo tiddlywiki.com > %TW5_BUILD_OUTPUT%\CNAME
 
 rem Run the test edition to run the Node.js tests and to generate test.html for tests in the browser
 
