@@ -33,4 +33,4 @@ node ./tiddlywiki.js \
 
 Then, open the `test.html` file in the browser to see the test results. There is a prebuilt version of `test.html` at:
 
-http://five.tiddlywiki.com/test.html
+http://tiddlywiki.com/test.html

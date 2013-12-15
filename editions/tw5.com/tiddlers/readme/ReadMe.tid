@@ -3,7 +3,7 @@ modified: 20131129094808390
 title: ReadMe
 type: text/vnd.tiddlywiki
 
-\define tw-wikilink-template() http://five.tiddlywiki.com/static/$uri_encoded$.html
+\define tw-wikilink-template() http://tiddlywiki.com/static/$uri_encoded$.html
 ! Welcome to TiddlyWiki5
 
 {{HelloThere}}

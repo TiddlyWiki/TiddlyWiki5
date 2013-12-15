@@ -3,7 +3,7 @@ tags: $:/tags/TiddlerInfo
 caption: Static Link
 
 \define makeLink()
-http://five.tiddlywiki.com/static/<$view tiddler=<<currentTiddler>> field="title" format="doubleurlencoded"/>.html
+http://tiddlywiki.com/static/<$view tiddler=<<currentTiddler>> field="title" format="doubleurlencoded"/>.html
 \end
 \define outerMakeLink()
 <$macrocall $name="makeLink" $output="text/plain"/>

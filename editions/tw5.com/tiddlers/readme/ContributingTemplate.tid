@@ -2,7 +2,7 @@ created: 201308251449
 modified: 201308251449
 title: ContributingTemplate
 
-\define tw-wikilink-template() http://five.tiddlywiki.com/static/$uri_encoded$.html
+\define tw-wikilink-template() http://tiddlywiki.com/static/$uri_encoded$.html
 ! Contributing to TiddlyWiki5
 
 {{Contributing}}

@@ -1,6 +1,6 @@
 @echo off
 
-rem build TiddlyWiki5 for five.tiddlywiki.com
+rem build TiddlyWiki5 for tiddlywiki.com
 
 rem Set up the build output directory
 

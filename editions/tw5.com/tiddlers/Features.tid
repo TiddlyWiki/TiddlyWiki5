@@ -14,14 +14,14 @@ type: text/vnd.tiddlywiki
 * Clone existing tiddlers (for example, <$button message="tw-new-tiddler" param=<<currentTiddler>>>clone this tiddler</$button>)
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
 * Try out the <$button message="tw-full-screen">full screen support</$button>
-* Explore the [[D3.js visualisation plugin|http://five.tiddlywiki.com/d3demo.html]]
-* [[CodeMirror support via a plugin|http://five.tiddlywiki.com/codemirrordemo.html]]
-* [[Markdown support via a plugin|http://five.tiddlywiki.com/markdowndemo.html]]
+* Explore the [[D3.js visualisation plugin|http://tiddlywiki.com/d3demo.html]]
+* [[CodeMirror support via a plugin|http://tiddlywiki.com/codemirrordemo.html]]
+* [[Markdown support via a plugin|http://tiddlywiki.com/markdowndemo.html]]
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[Node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules
 ** TiddlyWiki version 5 can directly build both itself and previous (2.x.x) versions of TiddlyWiki from their constituent separate files, without needing external tools
-** Run the TiddlyWiki [[test suite|TestingMechanism]] from http://five.tiddlywiki.com/test.html
+** Run the TiddlyWiki [[test suite|TestingMechanism]] from http://tiddlywiki.com/test.html
 * Last but not least, TiddlyWiki is a rare example of a practical [[quine|Quine]]
 
 The deep internal changes mean that TiddlyWiki version 5 is not compatible with previous versions, using different plugins, themes and so on. Content prepared for previous versions of TiddlyWiki will need massaging to work properly. When asking or searching for help be sure to specify TiddlyWiki5 (or TW5).

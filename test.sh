@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# test TiddlyWiki5 for five.tiddlywiki.com
+# test TiddlyWiki5 for tiddlywiki.com
 
 # Set up the build output directory
 

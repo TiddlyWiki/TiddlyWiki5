@@ -11,7 +11,7 @@ Instructions for use:
 # Open TWEdit
 # Touch the title in the centre of the toolbar in order
 #* A text box should appear allowing you to enter a URL
-# Enter the URL `http://five.tiddlywiki.com/empty.html`
+# Enter the URL `http://tiddlywiki.com/empty.html`
 # When the empty TiddlyWiki5 has loaded, touch the ''save'' icon (it's the second icon from the right on the top toolbar)
 #* An alert box should appear allowing you to enter a local filename
 # Enter the filename you wish to use for the document (ending with `.html`)
