@@ -1,13 +1,14 @@
 created: 20131211074600007
-modified: 20131212222654713
+modified: 20131215142414174
 tags: releasenote
-title: Release 5.0.2-alpha
+title: Release 5.0.2-beta
 type: text/vnd.tiddlywiki
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.1-alpha...v5.0.2-alpha]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.1-alpha...v5.0.2-beta]]//
 
 !! Improvements
 
+* Added support for [[Hard Linebreaks in WikiText]]
 * Added a new RadioWidget, contributed by StephanHradek (@Skeeve on GitHub)
 * Two new savers for InternetExplorer, both contributed by DavidJade (@davidjade on GitHub)
 ** ''tiddlyie'' for [[saving with TiddlyIE|Saving with TiddlyIE]], an equivalent of TiddlyFox for InternetExplorer
