@@ -1,5 +1,5 @@
 created: 20130909151600000
-modified: 20131211130139832
+modified: 20131215145730549
 tags: community
 title: Community
 type: text/vnd.tiddlywiki
@@ -24,6 +24,7 @@ The TiddlyWiki discussion groups are mailing lists for talking about TiddlyWiki:
 * A new theme from [[BobRobison|http://tw5gray.tiddlyspot.com]]
 * [[Bestrew|http://nocategories.net/tiddlywiki/bestrew.html]] -- DylanKinnett's adaptation of TiddlyWiki5 as a writers manuscript submission tracker
 * [[tw5-zh|http://tw5-zh.tiddlyspot.com]], a Chinese translation of TiddlyWiki5 by BramChen
+* [[Coding for TiddlyWiki5|http://cjhunt.github.io]], an introduction to developing extensions and plugins from ChrisHunt
 
 ! Blog posts and articles about TiddlyWiki5
 
