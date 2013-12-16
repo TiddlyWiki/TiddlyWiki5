@@ -98,7 +98,7 @@ RadioWidget.prototype.execute = function() {
 	this.radioField = this.getAttribute("field");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
-	if (this.radioClass !== "") {
+	if(this.radioClass !== "") {
 		this.radioClass += " ";
 	}
 	this.radioClass += "tw-radio";
@@ -117,7 +117,7 @@ RadioWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.radioTitle]) {
-			this.inputDomNode.checked = this.getValue();
+			this.inputDomNode.checked = this.getValue() === this.radioValue;
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
