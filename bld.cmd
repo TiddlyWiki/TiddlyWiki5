@@ -26,6 +26,10 @@ rem Delete any existing content
 
 del /q /s %TW5_BUILD_OUTPUT%\static
 
+rem Copy the favicon
+
+copy favicon.ico %TW5_BUILD_OUTPUT%\favicon.ico
+
 rem The tw5.com wiki
 rem  index.html: the main file, including content
 rem  empty.html: the main file, excluding content

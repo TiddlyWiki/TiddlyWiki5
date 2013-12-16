@@ -27,6 +27,10 @@ mkdir -p $TW5_BUILD_OUTPUT/static
 
 rm $TW5_BUILD_OUTPUT/static/*
 
+# Copy the favicon
+
+cp favicon.ico $TW5_BUILD_OUTPUT/favicon.ico
+
 # The tw5.com wiki
 #  index.html: the main file, including content
 #  empty.html: the main file, excluding content
