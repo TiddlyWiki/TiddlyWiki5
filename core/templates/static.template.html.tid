@@ -20,6 +20,6 @@ type: text/vnd.tiddlywiki-html
 </head>
 <body class="tw-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
-{{$:/core/ui/PageTemplate||$:/core/templates/html-tiddler}}
+{{$:/core/ui/PageMacros||$:/core/templates/html-tiddler}}
 </body>
 </html>
