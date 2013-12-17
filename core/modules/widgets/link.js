@@ -125,10 +125,16 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		// Set the data transfer properties
 		var dataTransfer = event.dataTransfer;
 		dataTransfer.effectAllowed = "copy";
-		dataTransfer.setDragImage(this.dragImage.firstChild,-16,-16);
+		if(dataTransfer.setDragImage) {
+			dataTransfer.setDragImage(this.dragImage.firstChild,-16,-16);
+		}
 		dataTransfer.clearData();
-		dataTransfer.setData("text/vnd.tiddler",this.wiki.getTiddlerAsJson(this.to));
-		dataTransfer.setData("text/plain",this.wiki.getTiddlerText(this.to,""));
+		if(!(/msie|trident/i.test(navigator.userAgent))) {
+			dataTransfer.setData("text/vnd.tiddler",this.wiki.getTiddlerAsJson(this.to));
+			dataTransfer.setData("text/plain",this.wiki.getTiddlerText(this.to,""));
+		}
+		dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(this.wiki.getTiddlerAsJson(this.to)));
+		dataTransfer.setData("Text",this.wiki.getTiddlerText(this.to,""));
 		event.stopPropagation();
 	} else {
 		event.preventDefault();
