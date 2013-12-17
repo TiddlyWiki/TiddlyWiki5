@@ -3,4 +3,4 @@ title: $:/core/ui/EditTemplate
 \define frame-classes()
 tw-tiddler-frame tw-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
-<div class=<<frame-classes>>><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]] +[tag[$:/tags/EditTemplate]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list></div>
+<$set name="storyTiddler" value=<<currentTiddler>>><div class=<<frame-classes>>><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]] [!is[shadow]!has[draft.of]tag[$:/tags/EditTemplate]] +[tag[$:/tags/EditTemplate]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list></div></$set>

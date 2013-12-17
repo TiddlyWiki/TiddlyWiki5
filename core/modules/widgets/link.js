@@ -91,7 +91,7 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 	this.dispatchEvent({
 		type: "tw-navigate",
 		navigateTo: this.to,
-		navigateFromTitle: this.getVariable("currentTiddler"),
+		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		}
