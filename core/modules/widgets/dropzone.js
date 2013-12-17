@@ -102,8 +102,10 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.importData = function(dataTransfer) {
 	for(var t=0; t<this.importDataTypes.length; t++) {
 		var dataType = this.importDataTypes[t];
-		var data = dataTransfer.getData(dataType.type);
-		if(data !== "") {
+		try {
+			var data = dataTransfer.getData(dataType.type);
+		} catch(e) { if(e.description !== "Invalid argument.") throw e; }	// deal with formats that IE doesn't support
+		if(data !== "" && data != null) {
 			var tiddlerFields = dataType.convertToFields(data);
 			if(!tiddlerFields.title) {
 				tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
@@ -118,7 +120,23 @@ DropZoneWidget.prototype.importDataTypes = [
 	{type: "text/vnd.tiddler", convertToFields: function(data) {
 		return JSON.parse(data);
 	}},
+	{type: "URL", convertToFields: function(data) {
+		// check for tiddler data URI
+		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		if(match) {
+			return JSON.parse(match[1]);
+		} else {
+			return {	// as URL string
+				text: data
+			};
+		}
+	}},
 	{type: "text/plain", convertToFields: function(data) {
+		return {
+			text: data
+		};
+	}},
+	{type: "Text", convertToFields: function(data) {
 		return {
 			text: data
 		};
