@@ -8,6 +8,9 @@ type: text/vnd.tiddlywiki
 
 !! Bug Fixes
 
-* Fixed problem with refreshing RadioWidget 
+* Fixed problem with refreshing RadioWidget
+* Fixed problem with the dragger image being visible in some circumstances
+* Fixed drag and drop support on InternetExplorer, contributed by DavidJade (@davidjade on GitHub)
+* Fixed crash on modifying page template
 
 This release includes minor bug fixes and documentation updates.
