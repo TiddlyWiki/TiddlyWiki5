@@ -62,10 +62,13 @@ exports.startup = function() {
 		// Kick off the stylesheet manager
 		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
 		// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-		$tw.rootWidget = new widget.widget({type: "widget", children: []},{
-				wiki: $tw.wiki,
-				document: document
-			});
+		$tw.rootWidget = new widget.widget({
+			type: "widget",
+			children: []
+		},{
+			wiki: $tw.wiki,
+			document: document
+		});
 		// Install the modal message mechanism
 		$tw.modal = new $tw.utils.Modal($tw.wiki);
 		$tw.rootWidget.addEventListener("tw-modal",function(event) {
@@ -122,6 +125,9 @@ exports.startup = function() {
 		$tw.wiki.addEventListener("change",function(changes) {
 			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
 		});
+		// Fix up the link between the root widget and the page container
+		$tw.rootWidget.domNodes = [$tw.pageContainer];
+		$tw.rootWidget.children = [$tw.pageWidgetNode];
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
