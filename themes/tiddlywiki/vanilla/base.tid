@@ -325,7 +325,7 @@ a.tw-tiddlylink-external {
 	fill: #fff;
 }
 
-.tw-page-controls svg:hover {
+.tw-page-controls button:hover svg, .tw-page-controls a:hover svg {
 	fill: #000;
 }
 
@@ -493,7 +493,7 @@ a.tw-tiddlylink-external {
 	fill: #444;
 }
 
-.tw-tiddler-controls svg:hover {
+.tw-tiddler-controls button:hover svg {
 	fill: #888;
 }
 
