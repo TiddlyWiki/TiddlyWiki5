@@ -100,12 +100,19 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.importData = function(dataTransfer) {
+	// Try each provided data type in turn
 	for(var t=0; t<this.importDataTypes.length; t++) {
+		// Get the data
 		var dataType = this.importDataTypes[t];
 		try {
 			var data = dataTransfer.getData(dataType.type);
-		} catch(e) { if(e.description !== "Invalid argument.") throw e; }	// deal with formats that IE doesn't support
-		if(data !== "" && data != null) {
+		} catch(e) {
+			if(e.description !== "Invalid argument.") {
+				throw e; // Deal with formats that IE doesn't support
+			}
+		}
+		// Import the tiddlers in the data
+		if(data !== "" && data !== null) {
 			var tiddlerFields = dataType.convertToFields(data);
 			if(!tiddlerFields.title) {
 				tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
@@ -121,12 +128,12 @@ DropZoneWidget.prototype.importDataTypes = [
 		return JSON.parse(data);
 	}},
 	{type: "URL", convertToFields: function(data) {
-		// check for tiddler data URI
+		// Check for tiddler data URI
 		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return JSON.parse(match[1]);
 		} else {
-			return {	// as URL string
+			return { // As URL string
 				text: data
 			};
 		}

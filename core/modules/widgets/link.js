@@ -124,17 +124,22 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		this.dragImage.appendChild(cover);
 		// Set the data transfer properties
 		var dataTransfer = event.dataTransfer;
+		// First the image
 		dataTransfer.effectAllowed = "copy";
 		if(dataTransfer.setDragImage) {
 			dataTransfer.setDragImage(this.dragImage.firstChild,-16,-16);
 		}
+		// Then the data
 		dataTransfer.clearData();
+		var jsonData = this.wiki.getTiddlerAsJson(this.to),
+			textData = this.wiki.getTiddlerText(this.to,"");
+		// IE doesn't like these content types
 		if(!(/msie|trident/i.test(navigator.userAgent))) {
-			dataTransfer.setData("text/vnd.tiddler",this.wiki.getTiddlerAsJson(this.to));
-			dataTransfer.setData("text/plain",this.wiki.getTiddlerText(this.to,""));
+			dataTransfer.setData("text/vnd.tiddler",jsonData);
+			dataTransfer.setData("text/plain",textData);
 		}
-		dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(this.wiki.getTiddlerAsJson(this.to)));
-		dataTransfer.setData("Text",this.wiki.getTiddlerText(this.to,""));
+		dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(jsonData));
+		dataTransfer.setData("Text",textData);
 		event.stopPropagation();
 	} else {
 		event.preventDefault();
