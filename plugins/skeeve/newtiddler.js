@@ -74,7 +74,25 @@ NewtiddlerWidget.prototype.handleClickEvent = function(event) {
 		skeletonClone[modificationField] = created[creationField];
 	}
 	this.wiki.addTiddler(skeletonClone);
-	this.dispatchEvent({type: "tw-edit-tiddler", tiddlerTitle: title});
+	switch(this.newtiddlerEdit) {
+	case "yes":
+		var bounds = this.domNodes[0].getBoundingClientRect();
+		this.dispatchEvent({
+			type: "tw-navigate",
+			navigateTo: title,
+			navigateFromTitle: this.getVariable("currentTiddler"),
+			navigateFromNode: this,
+			navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+			}
+		});
+		this.dispatchEvent({type: "tw-edit-tiddler", tiddlerTitle: title});
+		break;
+	case "no":
+		break;
+	case "inline":
+		// not implemented yet
+		break;
+	}
 };
 
 
@@ -85,6 +103,7 @@ NewtiddlerWidget.prototype.execute = function() {
 	// Get attributes
 	this.newtiddlerTitle = this.getAttribute("title");
 	this.newtiddlerSkeleton = this.getAttribute("skeleton");
+	this.newtiddlerEdit = this.getAttribute("edit", "yes");
 	this.newtiddlerClass = this.getAttribute("class","");
 	this.newtiddlerStyle = this.getAttribute("style");
 	if(this.newtiddlerClass != "") {
