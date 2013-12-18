@@ -274,9 +274,8 @@ Command.prototype.execute = function() {
 		password: password
 	});
 	this.server.listen(port);
-	if(this.commander.verbose) {
-		console.log("Serving on port " + port);
-	}
+	console.log("Serving on port " + port);
+	console.log("(press ctrl-C to exit)");
 	return null;
 };
 
