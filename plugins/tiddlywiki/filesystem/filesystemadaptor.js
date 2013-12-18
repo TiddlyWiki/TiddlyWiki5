@@ -38,10 +38,14 @@ function FileSystemAdaptor(syncer) {
 			});
 	}
 
-
 	for(var f in $tw.boot.files) {
 		var fileInfo = $tw.boot.files[f];
 		this.setwatcher(fileInfo.filepath, f);
+	}
+	// Create the <wiki>/tiddlers folder if it doesn't exist
+	// TODO: we should create the path recursively
+	if(!fs.existsSync($tw.boot.wikiTiddlersPath)) {
+		fs.mkdirSync($tw.boot.wikiTiddlersPath);
 	}
 }
 
