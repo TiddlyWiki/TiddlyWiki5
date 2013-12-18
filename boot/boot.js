@@ -1159,7 +1159,6 @@ metadata files.
 */
 $tw.boot.excludeRegExp = /^\.DS_Store$|^.*\.meta$|^\..*\.swp$|^\._.*$|^\.git$|^\.hg$|^\.lock-wscript$|^\.svn$|^\.wafpickle-.*$|^CVS$|^npm-debug\.log$/;
 
-
 /*
 Load all the tiddlers recursively from a directory, including honouring `tiddlywiki.files` files for drawing in external files. Returns an array of {filepath:,type:,tiddlers: [{..fields...}],hasMetaFile:}. Note that no file information is returned for externally loaded tiddlers, just the `tiddlers` property.
 */
@@ -1256,19 +1255,34 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 /*
+Fallback tiddlywiki.info content
+*/
+$tw.boot.defaultWikiInfo = {
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	]
+};
+
+/*
 path: path of wiki directory
 parentPaths: array of parent paths that we mustn't recurse into
 */
 $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	parentPaths = parentPaths || [];
 	var wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
-		wikiInfo = {},
+		wikiInfo,
 		pluginFields;
 	// Bail if we don't have a wiki info file
-	if(!fs.existsSync(wikiInfoPath)) {
-		$tw.utils.error("Missing tiddlywiki.info file at " + wikiPath);
+	if(fs.existsSync(wikiInfoPath)) {
+		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
+	} else {
+		wikiInfo = $tw.boot.defaultWikiInfo;
 	}
-	wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
 		parentPaths = parentPaths.slice(0);
