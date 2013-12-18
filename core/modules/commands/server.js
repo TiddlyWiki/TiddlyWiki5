@@ -199,6 +199,15 @@ var Command = function(params,commander,callback) {
 	});
 	this.server.addRoute({
 		method: "GET",
+		path: /^\/favicon.ico$/,
+		handler: function(request,response,state) {
+			response.writeHead(200, {"Content-Type": "image/x-icon"});
+			var buffer = state.wiki.getTiddlerText("$:/favicon.ico","");
+			response.end(buffer,"base64");
+		}
+	});
+	this.server.addRoute({
+		method: "GET",
 		path: /^\/recipes\/default\/tiddlers.json$/,
 		handler: function(request,response,state) {
 			response.writeHead(200, {"Content-Type": "application/json"});
