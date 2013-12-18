@@ -15,7 +15,7 @@ This is version <<version>> of TiddlyWiki, a major reboot designed [[for the nex
 
 !! TiddlyWikiClassic - http://classic.tiddlywiki.com
 
-On this site, unless noted otherwise, "~TiddlyWiki" refers to the new version 5, and ~TiddlyWikiClassic is used to identify the older version.
+On this site, unless noted otherwise, "~TiddlyWiki" refers to the new version 5, and "~TiddlyWikiClassic" is used to identify the older version.
 
 The deep internal improvements mean that the new version of TiddlyWiki is not fully compatible with TiddlyWikiClassic. Existing content will need massaging, while plugins and themes will have to be completely rewritten. The upgrade path will get smoother as the new version matures.
 </div>
