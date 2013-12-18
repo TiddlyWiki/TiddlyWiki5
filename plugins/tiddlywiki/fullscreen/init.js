@@ -12,18 +12,33 @@ Message handler for full screen mode
 /*global $tw: false, Element: false */
 "use strict";
 
-var toggleFullScreen = function() {
-	if(document[$tw.browser.isFullScreen]) {
-		document[$tw.browser.cancelFullScreen]();
+var d = document,
+	db = d.body,
+	_requestFullscreen = db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
+						db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
+						db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
+						db.requestFullscreen !== undefined ? "requestFullscreen" : "",
+	_exitFullscreen = d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
+							d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
+							d.msExitFullscreen !== undefined ? "msExitFullscreen" :
+							d.exitFullscreen !== undefined ? "exitFullscreen" : "",
+	_fullscreenElement = d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
+							d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
+							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
+							d.fullscreenElement !== undefined ? "fullscreenElement" : "";
+
+var toggleFullscreen = function() {
+	if(document[_fullscreenElement]) {
+		document[_exitFullscreen]();
 	} else {
-		document.documentElement[$tw.browser.requestFullScreen](Element.ALLOW_KEYBOARD_INPUT);
+		document.documentElement[_requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
 	}
 };
 
 exports.startup = function() {
 	// Install the full screen handler
 	$tw.rootWidget.addEventListener("tw-full-screen",function(event) {
-		toggleFullScreen();
+		toggleFullscreen();
 	});
 };
 
