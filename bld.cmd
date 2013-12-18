@@ -26,10 +26,6 @@ rem Delete any existing content
 
 del /q /s %TW5_BUILD_OUTPUT%\static
 
-rem Copy the favicon
-
-copy favicon.ico %TW5_BUILD_OUTPUT%\favicon.ico
-
 rem The tw5.com wiki
 rem  index.html: the main file, including content
 rem  empty.html: the main file, excluding content
@@ -39,6 +35,7 @@ node .\tiddlywiki.js ^
 	.\editions\tw5.com ^
 	--verbose ^
 	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\index.html text/plain ^
+	--savetiddler $:/favicon.ico %TW5_BUILD_OUTPUT%\favicon.ico ^
 	--rendertiddler ReadMe .\readme.md text/html ^
 	--rendertiddler ContributingTemplate .\contributing.md text/html ^
 	--rendertiddler $:/editions/tw5.com/download-empty %TW5_BUILD_OUTPUT%\empty.html text/plain ^

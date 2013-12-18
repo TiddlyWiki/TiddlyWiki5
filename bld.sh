@@ -27,10 +27,6 @@ mkdir -p $TW5_BUILD_OUTPUT/static
 
 rm $TW5_BUILD_OUTPUT/static/*
 
-# Copy the favicon
-
-cp favicon.ico $TW5_BUILD_OUTPUT/favicon.ico
-
 # The tw5.com wiki
 #  index.html: the main file, including content
 #  empty.html: the main file, excluding content
@@ -40,6 +36,7 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/index.html text/plain \
+	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
 	--rendertiddler ReadMe ./readme.md text/html \
 	--rendertiddler ContributingTemplate ./contributing.md text/html \
 	--rendertiddler $:/editions/tw5.com/download-empty $TW5_BUILD_OUTPUT/empty.html text/plain \

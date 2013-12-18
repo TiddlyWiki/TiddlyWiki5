@@ -1420,6 +1420,7 @@ $tw.boot.startup = function() {
 	$tw.utils.registerFileType("image/png","base64",".png");
 	$tw.utils.registerFileType("image/gif","base64",".gif");
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg");
+	$tw.utils.registerFileType("image/x-icon","base64",".ico");
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
