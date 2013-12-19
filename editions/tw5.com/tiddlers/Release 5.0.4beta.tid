@@ -6,11 +6,22 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.3-beta...v5.0.4-beta]]//
 
+!! Improvements
+
+* Several improvements for running [[TiddlyWiki on Node.js]]:
+** The `tiddlywiki.info` file in the root of [[wiki folder|TiddlyWikiFolders]] file is now optional, falling back to a default configuration suitable for serverside use ([[commit|https://github.com/Jermolene/TiddlyWiki5/commit/0ec2224757dd07f009246ec9ea97cd859d077e72]])
+** The file system plugin now automatically creates the `tiddlers` subfolder in the [[wiki folder|TiddlyWikiFolders]]
+* Added [[favicon.ico support|Using favicons]]
+* Added SaveTiddlerCommand
+
 !! Bug Fixes
 
+* Fixed problem with tiddlers sometimes wrongly opening at the top of the story ([[commit|https://github.com/Jermolene/TiddlyWiki5/commit/b50eb8da302431cdfa7c37ac9ef1414a33d00292]])
 * Fixed problem with refreshing RadioWidget
 * Fixed problem with the dragger image being visible in some circumstances
 * Fixed drag and drop support on InternetExplorer, contributed by DavidJade (@davidjade on GitHub)
-* Fixed crash on modifying page template
+* Fixed crash on modifying page template ([[commit|https://github.com/Jermolene/TiddlyWiki5/commit/a5f33d875b1339b08838203a4885f8a3a7d10353]])
+* Updated fullscreen plugin to latest version of the API ([[commit|https://github.com/Jermolene/TiddlyWiki5/commit/638c8b207033f8cb01ac9efdca104d282fd4cffe]])
+* Improved handling of double square brackets within tags (thanks to StephanHradek)
 
 This release includes minor bug fixes and documentation updates.
