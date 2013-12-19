@@ -173,10 +173,10 @@ exports.tiddlerExists = function(title) {
 Generate an unused title from the specified base
 */
 exports.generateNewTitle = function(baseTitle) {
-	var c = 0
+	var c = 0,
 	    title = baseTitle;
 	while(this.tiddlerExists(title) {
-		var title = baseTitle + " " + (++c);
+		title = baseTitle + " " + (++c);
 	};
 	return title;
 };
