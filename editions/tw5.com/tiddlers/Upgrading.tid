@@ -1,10 +1,10 @@
 created: 20131202102427114
-modified: 20131212094500689
+modified: 20131219100250559
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
 
-There are several methods for upgrading an existing TiddlyWiki document to a new release.
+There are several methods for upgrading an existing TiddlyWiki document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
 
 ! Online upgrading
 

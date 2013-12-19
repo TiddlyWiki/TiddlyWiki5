@@ -1,80 +1,14 @@
-created: 20130825214500000
-modified: 20131129095206930
-tags: edition
+created: 20131219100444289
+modified: 20131219100506819
+tags: dev howto
 title: Working with the TiddlyWiki5 repository
 type: text/vnd.tiddlywiki
 
-TiddlyWiki5 can be used on the command line to perform an extensive set of operations based on tiddlers, TiddlyWikiFolders, TiddlerFiles and TiddlyWikiFiles. For example, the following command loads the tiddlers from a TiddlyWiki HTML file and then saves one of them in HTML:
+If you plan on working with the TiddlyWiki5 source code then follow these steps:
 
-```
-node tiddlywiki.js --verbose --load mywiki.html --rendertiddler ReadMe ./readme.html
-```
+# Fork the TiddlyWiki5 GitHub repository from https://github.com/Jermolene/TiddlyWiki5
+# Clone a local copy of the repo
+# Open a command line terminal and change the current working directory to the root of the repo
+# Type `sudo npm link` to tell [[npm]] to use this copy of the repo as the globally installed one
 
-In order to use TiddlyWiki5 on the command line you must first install node.js from http://nodejs.org/
-
-!!Usage
-
-Running `tiddlywiki.js` from the command line boots the TiddlyWiki kernel, loads the core plugins and establishes an empty wiki store. It then sequentially processes the command line arguments from left to right. The arguments are separated with spaces.
-
-The first argument is the optional path to the [[TiddlyWikiFolder|TiddlyWikiFolders]] to be loaded. If not present, then the current directory is used.
-
-The commands and their individual arguments follow, each command being identified by the prefix `--`.
-
-```
-node tiddlywiki.js [<wikipath>] [--<command> [<arg>[,<arg>]]]
-```
-
-!! Script Files
-
-For trying TiddlyWiki5 out under Node.js, several scripts are provided (.sh for *nix and .cmd for Windows):
-
-!!! `bld`: builds tw5.com
-
-This script builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
-
-By default, files are output to a folder called `jermolene.github.com`, sibling to the TiddlyWiki5 source directory. For example:
-
-```
-/TiddlyWork/ - Directory for working with TiddlyWiki5
-	/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
-	/jermolene.github.com/ - Directory for output files
-```
-
-You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `bld`.
-
-The files output by `bld` are:
-
-* `readme.md` main readme file, output to the TiddlyWiki5 directory
-* `index.html` TiddlyWiki5 standalone HTML file with content from the `tw5.com` edition
-* `empty.html` TiddlyWiki5 standalone HTML file with no content
-* `encrypted.html` TiddlyWiki5 standalone HTML file encrypted with the password `password`
-* `test.html` TiddlyWiki5 browser-based test suite (see TestingMechanism)
-* `static.html` static HTML version of the DefaultTiddlers of the `tw5.com` edition
-* `static/*.html` and `static/static.css` static HTML versions of individual tiddlers
-
-`bld` also runs the TiddlyWiki5 Node.js-based test suite (see TestingMechanism)
-
-!!! `serve.sh <username>` or `serve.cmd <username>`: serves tw5.com
-
-This script starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits.
-
-To experiment with this configuration, run the script and then visit `http://0.0.0.0:8080` in a browser.
-
-Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).
-
-!!! `wbld`: builds TiddlyWiki5 for TiddlyWeb
-
-This script builds and deploys the code for [[TiddlyWiki5 in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
-
-!!! `2bld`: builds TiddlyWiki 2.6.5
-
-This script builds TiddlyWiki 2.6.5 from the original source and then displays the differences between them (`diff` is used for *nix, `fc` for Windows).
-
-!!Commands
-
-The following commands are available:
-
-<$list filter="[tag[command]sort[title]]">
-	!!! <$view field="title" format="link"/>
-	<$transclude />
-</$list>
+After this procedure you can work with TiddlyWiki5 via [[npm]] as though it were installed in the usual way with `npm -g install tiddlywiki`. See also [[Scripts for TiddlyWiki on Node.js]].

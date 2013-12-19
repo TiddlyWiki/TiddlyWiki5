@@ -1,0 +1,61 @@
+created: 20131219100637788
+modified: 20131219100657540
+tags: howto dev
+title: Scripts for TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+! Script Files
+
+The TiddlyWiki5 repo contains several scripts that are used to build and deploy TiddlyWiki5 (.sh for *nix and .cmd for Windows). They can serve as a useful starting point for your own scripts.
+
+!! `bld`: builds tw5.com
+
+This script builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
+
+By default, files are output to a folder called `jermolene.github.com`, sibling to the TiddlyWiki5 repo directory. For example:
+
+```
+/TiddlyWork/ - Directory for working with TiddlyWiki5
+	/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
+	/jermolene.github.com/ - Directory for output files
+```
+
+You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `bld`.
+
+The files output by `bld` are:
+
+* `readme.md` main readme file, output to the TiddlyWiki5 directory
+* `index.html` TiddlyWiki5 standalone HTML file with content from the `tw5.com` edition
+* `empty.html` TiddlyWiki5 standalone HTML file with no content
+* `encrypted.html` TiddlyWiki5 standalone HTML file encrypted with the password `password`
+* `test.html` TiddlyWiki5 browser-based test suite (see TestingMechanism)
+* `static.html` static HTML version of the DefaultTiddlers of the `tw5.com` edition
+* `static/*.html` and `static/static.css` static HTML versions of individual tiddlers
+
+`bld` also runs the TiddlyWiki5 Node.js-based test suite (see TestingMechanism)
+
+!! `serve`: serves tw5.com
+
+```
+serve.sh <username> [<password>]
+```
+
+Or:
+
+```
+serve.cmd <username> [<password>]
+```
+
+This script starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used.
+
+To experiment with this configuration, run the script and then visit `http://0.0.0.0:8080` in a browser.
+
+Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).
+
+!! `wbld`: builds TiddlyWiki5 for TiddlyWeb
+
+This script builds and deploys the code for [[TiddlyWiki5 in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
+
+!! `2bld`: builds TiddlyWiki 2.6.5
+
+This script builds TiddlyWiki 2.6.5 from the original source and then displays the differences between them (`diff` is used for *nix, `fc` for Windows).

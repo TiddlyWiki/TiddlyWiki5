@@ -1,18 +1,28 @@
 created: 20131129094353704
-modified: 20131212094217023
+modified: 20131219100410583
 title: TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
+Running TiddlyWiki on [[Node.js]] brings several important benefits over and above the single file version:
+
+* You can edit your content on any suitably compatible HTML5 browser, including smartphones and tablets
+* Individual tiddlers are stored in separate files, which you can organise as you wish
+* The ability to build multiple wikis that blend different combinations of shared and unique content
+
 ! Installation
 
-For working on the command line with Node.js, you can install TiddlyWiki via [[npm|http://npmjs.org]]:
+{{Installing TiddlyWiki on Node.js}}
 
-```
-npm -g install tiddlywiki
-```
+! Usage
 
-The `-g` flag causes TiddlyWiki to be installed globally.
+{{Using TiddlyWiki on Node.js}}
 
-! Working with the TiddlyWiki5 repository
+! Upgrading
 
-[[Working with the TiddlyWiki5 repository]] is recommended if you plan on forking the TiddlyWiki5 source code.
+{{Upgrading TiddlyWiki on Node.js}}
+
+! Commands
+
+The following commands are available:
+
+<ul><$list filter="[tag[command]]"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
