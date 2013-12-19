@@ -1,5 +1,5 @@
 created: 20131219100520659
-modified: 20131219100534483
+modified: 20131219163807594
 tags: howto
 title: Using TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -19,5 +19,9 @@ The first argument is the optional path to the [[TiddlyWikiFolder|TiddlyWikiFold
 The commands and their individual arguments follow, each command being identified by the prefix `--`.
 
 ```
-node tiddlywiki.js [<wikipath>] [--<command> [<arg>[,<arg>]]]
+tiddlywiki [<wikipath>] [--<command> [<arg>[,<arg>]]]
 ```
+
+The available commands are:
+
+<ul><$list filter="[tag[command]]"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
