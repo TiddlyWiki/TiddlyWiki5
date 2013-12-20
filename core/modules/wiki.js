@@ -175,7 +175,7 @@ Generate an unused title from the specified base
 exports.generateNewTitle = function(baseTitle) {
 	var c = 0,
 	    title = baseTitle;
-	while(this.tiddlerExists(title) {
+	while(this.tiddlerExists(title)) {
 		title = baseTitle + " " + (++c);
 	};
 	return title;
