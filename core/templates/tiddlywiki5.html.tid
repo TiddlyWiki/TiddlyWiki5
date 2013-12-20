@@ -16,37 +16,37 @@ title: $:/core/templates/tiddlywiki5.html
 <meta name="copyright" content="{{$:/core/copyright.txt}}" />
 <link rel="shortcut icon" href="favicon.ico">
 <title>{{$:/core/wiki/title}}</title>
-<!----------- This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ----------->
+<!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 
-<!----------- Raw markup ----------->
+<!--~~ Raw markup ~~-->
 {{{ [tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}
 </head>
 <body class="tw-body">
-<!----------- Static styles ----------->
+<!--~~ Static styles ~~-->
 <div id="styleArea">
 {{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
 </div>
-<!----------- Static content for Google and browsers without JavaScript ----------->
+<!--~~ Static content for Google and browsers without JavaScript ~~-->
 <noscript>
 <div id="splashArea">
 {{$:/core/templates/static.area}}
 </div>
 </noscript>
-<!----------- Ordinary tiddlers ----------->
+<!--~~ Ordinary tiddlers ~~-->
 {{$:/core/templates/store.area.template.html}}
-<!----------- Library modules ----------->
+<!--~~ Library modules ~~-->
 <div id="libraryModules" style="display:none;">
 {{{ [is[system]type[application/javascript]library[yes]] ||$:/core/templates/javascript-tiddler}}}
 </div>
-<!----------- Boot kernel prologue ----------->
+<!--~~ Boot kernel prologue ~~-->
 <div id="bootKernelPrefix" style="display:none;">
 {{ $:/boot/bootprefix.js ||$:/core/templates/javascript-tiddler}}
 </div>
-<!----------- Plugin modules ----------->
+<!--~~ Plugin modules ~~-->
 <div id="modules" style="display:none;">
 {{{ [is[system]type[application/javascript]has[module-type]] ||$:/core/templates/module-tiddler}}}
 </div>
-<!----------- Boot kernel ----------->
+<!--~~ Boot kernel ~~-->
 <div id="bootKernel" style="display:none;">
 {{ $:/boot/boot.js ||$:/core/templates/javascript-tiddler}}
 </div>

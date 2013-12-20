@@ -6,7 +6,7 @@ title: $:/core/templates/store.area.template.html
 `</div>`
 </$reveal>
 <$reveal type="match" state="$:/isEncrypted" text="yes">
-`<!------------- Encrypted tiddlers --------->`
+`<!--~~ Encrypted tiddlers ~~-->`
 `<pre id="encryptedStoreArea" type="text/plain" style="display:none;">`
 <$encrypt filter=<<saveTiddlerFilter>>/>
 `</pre>`
