@@ -329,7 +329,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Create the draft tiddler
 	var draftTitle = this.generateDraftTitle(title),
 		draftTiddler = new $tw.Tiddler({
-			text: "Type the text for the new tiddler"
+			text: ""
 		},templateTiddler,{
 			title: draftTitle,
 			"draft.title": title,

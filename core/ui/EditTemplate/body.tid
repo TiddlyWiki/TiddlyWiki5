@@ -1,6 +1,9 @@
 title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
+\define prompt()
+Type the text for this tiddler
+\end
 <$reveal state="$:/ShowEditPreview" type="match" text="yes">
 //<$transclude tiddler="$:/core/ui/EditorHint"/>// <$button type="set" set="$:/ShowEditPreview" setTo="no">hide preview</$button>
 <div class="tw-tiddler-preview">
@@ -8,11 +11,11 @@ tags: $:/tags/EditTemplate
 <$transclude />
 </div>
 <div class="tw-tiddler-preview-edit">
-<$edit field="text" class="tw-edit-texteditor"/>
+<$edit field="text" class="tw-edit-texteditor" placeholder=<<prompt>>/>
 </div>
 </div>
 </$reveal>
 <$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
 //<$transclude tiddler="$:/core/ui/EditorHint"/>// <$button type="set" set="$:/ShowEditPreview" setTo="yes">show preview</$button>
-<$edit field="text" class="tw-edit-texteditor"/>
+<$edit field="text" class="tw-edit-texteditor" placeholder=<<prompt>>/>
 </$reveal>
