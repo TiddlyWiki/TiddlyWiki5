@@ -322,11 +322,10 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Create the new tiddler
 	var baseTitle = (templateTiddler && templateTiddler.fields.title) || "New Tiddler",
 		title;
-	for(var t=0; true; t++) {
-		title = baseTitle + (t ? " " + t : "");
-		if(!this.wiki.tiddlerExists(title)) {
-			break;
-		}
+	var t = 0,
+	    title = baseTitle;
+	while (this.wiki.tiddlerExists(title)) {
+		title = baseTitle + " " + (++t);
 	}
 	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
 		text: "Newly created tiddler",
