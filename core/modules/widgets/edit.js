@@ -53,6 +53,7 @@ EditWidget.prototype.execute = function() {
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
 	this.editClass = this.getAttribute("class");
+	this.editPlaceholder = this.getAttribute("placeholder");
 	// Get the content type of the thing we're editing
 	var type;
 	if(this.editField === "text") {
@@ -71,7 +72,8 @@ EditWidget.prototype.execute = function() {
 			tiddler: {type: "string", value: this.editTitle},
 			field: {type: "string", value: this.editField},
 			index: {type: "string", value: this.editIndex},
-			"class": {type: "string", value: this.editClass}
+			"class": {type: "string", value: this.editClass},
+			"placeholder": {type: "string", value: this.editPlaceholder}
 		}
 	}]);
 };
