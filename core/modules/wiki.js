@@ -940,7 +940,7 @@ exports.search = function(text,options) {
 			searchTermsRegExps = [new RegExp("(" + $tw.utils.escapeRegExp(text) + ")",flags)];
 		}
 	} else {
-		terms = text.replace(/( +)/g," ").split(" ");
+		terms = text.split(/ +/);
 		if(terms.length === 1 && terms[0] === "") {
 			searchTermsRegExps = null;
 		} else {
