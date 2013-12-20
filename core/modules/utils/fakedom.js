@@ -66,6 +66,7 @@ TW_Element.prototype.insertBefore = function(node,nextSibling) {
 		var p = this.children.indexOf(nextSibling);
 		if(p !== -1) {
 			this.children.splice(p,0,node);
+			node.parentNode = this;
 		} else {
 			this.appendChild(node);
 		}
