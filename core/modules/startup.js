@@ -59,8 +59,6 @@ exports.startup = function() {
 		});
 		// Install the animator
 		$tw.anim = new $tw.utils.Animator();
-		// Kick off the stylesheet manager
-		$tw.stylesheetManager = new $tw.utils.StylesheetManager($tw.wiki);
 		// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
 		$tw.rootWidget = new widget.widget({
 			type: "widget",
@@ -113,6 +111,20 @@ exports.startup = function() {
 		});
 		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
+		});
+		// Set up the styles
+		var styleTemplateTitle = "$:/core/ui/PageStylesheet",
+			styleParser = $tw.wiki.parseTiddler(styleTemplateTitle);
+		$tw.styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: $tw.document});
+		$tw.styleContainer = $tw.document.createElement("style");
+		$tw.styleWidgetNode.render($tw.styleContainer,null);
+		$tw.styleElement = document.createElement("style");
+		$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+		document.head.insertBefore($tw.styleElement,document.head.firstChild);
+		$tw.wiki.addEventListener("change",function(changes) {
+			if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
+				$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
+			}
 		});
 		// Display the PageMacros, which includes the PageTemplate
 		var templateTitle = "$:/core/ui/PageMacros",

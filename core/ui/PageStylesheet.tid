@@ -1,0 +1,5 @@
+title: $:/core/ui/PageStylesheet
+
+<$list filter="[is[shadow]tag[$:/tags/stylesheet]] [!is[shadow]tag[$:/tags/stylesheet]]">
+<$transclude/>
+</$list>
