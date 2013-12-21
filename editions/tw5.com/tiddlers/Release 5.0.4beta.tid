@@ -1,5 +1,5 @@
-created: 201312161000
-modified: 201312161000
+created: 20131216100000000
+modified: 20131221205551616
 tags: releasenote
 title: Release 5.0.4-beta
 type: text/vnd.tiddlywiki
@@ -8,6 +8,8 @@ type: text/vnd.tiddlywiki
 
 !! Improvements
 
+* Switched to using an HTML5 placeholder for the default text of a new tiddler
+* Refactored stylesheet handling so that theme tweaks are now applied immediately, and some ordering issues have been resolved
 * Several improvements for running [[TiddlyWiki on Node.js]]:
 ** The `tiddlywiki.info` file in the root of [[wiki folder|TiddlyWikiFolders]] file is now optional, falling back to a default configuration suitable for serverside use ([[commit|https://github.com/Jermolene/TiddlyWiki5/commit/0ec2224757dd07f009246ec9ea97cd859d077e72]])
 ** The file system plugin now automatically creates the `tiddlers` subfolder in the [[wiki folder|TiddlyWikiFolders]]
