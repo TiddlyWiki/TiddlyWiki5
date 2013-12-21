@@ -133,9 +133,10 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		var jsonData = this.wiki.getTiddlerAsJson(this.to),
 			textData = this.wiki.getTiddlerText(this.to,"");
 		// IE doesn't like these content types
-		if(!(/msie|trident/i.test(navigator.userAgent))) {
+		if(!$tw.browser.isIE) {
 			dataTransfer.setData("text/vnd.tiddler",jsonData);
 			dataTransfer.setData("text/plain",textData);
+			dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURI(jsonData));
 		}
 		dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(jsonData));
 		dataTransfer.setData("Text",textData);
