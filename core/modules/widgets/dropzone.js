@@ -103,18 +103,18 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 	// Try each provided data type in turn
 	for(var t=0; t<this.importDataTypes.length; t++) {
 		if(!$tw.browser.isIE || this.importDataTypes[t].IECompatible) {
-		// Get the data
-		var dataType = this.importDataTypes[t];
-			var data = dataTransfer.getData(dataType.type);
-		// Import the tiddlers in the data
-		if(data !== "" && data !== null) {
-			var tiddlerFields = dataType.convertToFields(data);
-			if(!tiddlerFields.title) {
-				tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
+			// Get the data
+			var dataType = this.importDataTypes[t];
+				var data = dataTransfer.getData(dataType.type);
+			// Import the tiddlers in the data
+			if(data !== "" && data !== null) {
+				var tiddlerFields = dataType.convertToFields(data);
+				if(!tiddlerFields.title) {
+					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
+				}
+				this.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+				return;
 			}
-			this.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
-			return;
-		}
 		}
 	};
 };
