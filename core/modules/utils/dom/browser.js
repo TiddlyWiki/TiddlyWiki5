@@ -130,6 +130,7 @@ exports.convertEventName = function(eventName) {
 
 // Setup constants for the current browser
 exports.getBrowserInfo = function(info) {
+	info.isIE = (/msie|trident/i.test(navigator.userAgent));
 };
 
 })();

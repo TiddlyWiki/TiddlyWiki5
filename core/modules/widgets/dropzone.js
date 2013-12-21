@@ -102,15 +102,10 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 DropZoneWidget.prototype.importData = function(dataTransfer) {
 	// Try each provided data type in turn
 	for(var t=0; t<this.importDataTypes.length; t++) {
+		if(!$tw.browser.isIE || this.importDataTypes[t].IECompatible) {
 		// Get the data
 		var dataType = this.importDataTypes[t];
-		try {
 			var data = dataTransfer.getData(dataType.type);
-		} catch(e) {
-			if(e.description !== "Invalid argument.") {
-				throw e; // Deal with formats that IE doesn't support
-			}
-		}
 		// Import the tiddlers in the data
 		if(data !== "" && data !== null) {
 			var tiddlerFields = dataType.convertToFields(data);
@@ -120,14 +115,15 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 			this.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 			return;
 		}
+		}
 	};
 };
 
 DropZoneWidget.prototype.importDataTypes = [
-	{type: "text/vnd.tiddler", convertToFields: function(data) {
+	{type: "text/vnd.tiddler", IECompatible: false, convertToFields: function(data) {
 		return JSON.parse(data);
 	}},
-	{type: "URL", convertToFields: function(data) {
+	{type: "URL", IECompatible: true, convertToFields: function(data) {
 		// Check for tiddler data URI
 		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
@@ -138,17 +134,28 @@ DropZoneWidget.prototype.importDataTypes = [
 			};
 		}
 	}},
-	{type: "text/plain", convertToFields: function(data) {
+	{type: "text/x-moz-url", IECompatible: false, convertToFields: function(data) {
+		// Check for tiddler data URI
+		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		if(match) {
+			return JSON.parse(match[1]);
+		} else {
+			return { // As URL string
+				text: data
+			};
+		}
+	}},
+	{type: "text/plain", IECompatible: false, convertToFields: function(data) {
 		return {
 			text: data
 		};
 	}},
-	{type: "Text", convertToFields: function(data) {
+	{type: "Text", IECompatible: true, convertToFields: function(data) {
 		return {
 			text: data
 		};
 	}},
-	{type: "text/uri-list", convertToFields: function(data) {
+	{type: "text/uri-list", IECompatible: false, convertToFields: function(data) {
 		return {
 			text: data
 		};
