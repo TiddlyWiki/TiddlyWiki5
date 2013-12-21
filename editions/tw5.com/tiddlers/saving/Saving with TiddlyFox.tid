@@ -1,11 +1,11 @@
-created: 20131129092753119
-modified: 20131205151815248
+created: 20131221085742684
+modified: 20131221091154254
 tags: howto
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki
 
 # Ensure you have the latest version of [[Firefox]]
-# Install the TiddlyFox extension from:
+# Install the latest release of the TiddlyFox extension from:
 #* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
 # Restart [[Firefox]]
 # [[Download]] an empty TiddlyWiki by clicking this button:
@@ -19,3 +19,9 @@ type: text/vnd.tiddlywiki
 # Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
 #* Look for the yellow notification ''Saved wiki'' at the top right of the window
 # Refresh the browser window to verify that your changes have been saved correctly
+
+You can also install the latest development version of TiddlyFox direct from GitHub:
+
+https://github.com/TiddlyWiki/TiddlyFox/raw/master/tiddlyfox.xpi
+
+In case of difficulties downloading the empty wiki, you can download this [[direct link to empty.html|http://tiddlywiki.com/empty.html]].
