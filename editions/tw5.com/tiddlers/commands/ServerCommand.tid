@@ -1,5 +1,5 @@
 created: 20131219163923630
-modified: 20131219164420569
+modified: 20131222150651114
 tags: command
 title: ServerCommand
 type: text/vnd.tiddlywiki
@@ -15,7 +15,7 @@ At the root, it serves a rendering of a specified tiddler. Away from the root, i
 The parameters are:
 
 * ''port'' - port number to serve from (defaults to "8080")
-* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/tiddlywiki5.template.html") 
+* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all") 
 * ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
 * ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
 * ''username'' - the default username for signing edits
@@ -26,7 +26,7 @@ If the password parameter is specified then the browser will prompt the user for
 For example:
 
 ```
---server 8080 $:/core/tiddlywiki5.template.html text/plain text/html MyUserName passw0rd
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
 To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port.
