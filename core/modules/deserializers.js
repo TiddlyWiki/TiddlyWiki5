@@ -36,8 +36,8 @@ var parseTiddlerDiv = function(text /* [,fields] */) {
 		}
 	}
 	// Parse the DIV body
-	var divRegExp = /^\s*<div\s+([^>]*)>((?:\s|\S)*)<\/div>\s*$/gi,
-		subDivRegExp = /^\s*<pre>((?:\s|\S)*)<\/pre>\s*$/gi,
+	var divRegExp = /^\s*<div\s+([^>]*)>([(?:\s|\S)]*)<\/div>\s*$/gi,
+		subDivRegExp = /^\s*<pre>([(?:\s|\S)]*)<\/pre>\s*$/gi,
 		attrRegExp = /\s*([^=\s]+)\s*=\s*"([^"]*)"/gi,
 		match = divRegExp.exec(text);
 	if(match) {
