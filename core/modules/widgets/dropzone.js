@@ -90,8 +90,8 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	// Try to import the various data types we understand
 	this.importData(dataTransfer);
 	// Import any files in the drop
-	this.wiki.readFiles(dataTransfer.files,function(tiddlerFields) {
-		self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+	this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
+		self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 	});
 	// Tell the browser that we handled the drop
 	event.preventDefault();

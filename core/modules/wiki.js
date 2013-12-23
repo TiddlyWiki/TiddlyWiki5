@@ -1024,16 +1024,23 @@ exports.getTiddlerText = function(title,defaultText) {
 };
 
 /*
-Read an array of browser File objects, invoking callback(tiddlerFields) for each loaded file
+Read an array of browser File objects, invoking callback(tiddlerFieldsArray) once they're all read
 */
 exports.readFiles = function(files,callback) {
+	var result = [],
+		outstanding = files.length;
 	for(var f=0; f<files.length; f++) {
-		this.readFile(files[f],callback);
+		this.readFile(files[f],function(tiddlerFieldsArray) {
+			result.push.apply(result,tiddlerFieldsArray);
+			if(--outstanding === 0) {
+				callback(result);
+			}
+		});
 	};
 };
 
 /*
-Read a browser File object, invoking callback(tiddlerFields) with the tiddler fields object
+Read a browser File object, invoking callback(tiddlerFieldsArray) with an array of tiddler fields objects
 */
 exports.readFile = function(file,callback) {
 	// Get the type, falling back to the filename extension
@@ -1063,15 +1070,10 @@ exports.readFile = function(file,callback) {
 			var commaPos = event.target.result.indexOf(",");
 			if(commaPos !== -1) {
 				tiddlerFields.text = event.target.result.substr(commaPos+1);
-				callback(tiddlerFields);
+				callback([tiddlerFields]);
 			}
 		} else {
-			var tiddlers = self.deserializeTiddlers(type,event.target.result,tiddlerFields);
-			if(tiddlers) {
-				$tw.utils.each(tiddlers,function(tiddlerFields) {
-					callback(tiddlerFields);
-				});
-			}
+			callback(self.deserializeTiddlers(type,event.target.result,tiddlerFields));
 		}
 	};
 	// Kick off the read
