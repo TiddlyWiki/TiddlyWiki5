@@ -38,6 +38,7 @@ exports["image/jpeg"] = ImageParser;
 exports["image/png"] = ImageParser;
 exports["image/gif"] = ImageParser;
 exports["application/pdf"] = ImageParser;
+exports["image/x-icon"] = ImageParser;
 
 })();
 

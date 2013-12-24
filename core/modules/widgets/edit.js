@@ -41,7 +41,8 @@ var editorTypeMappings = {
 	"image/jpg": "bitmap",
 	"image/jpeg": "bitmap",
 	"image/gif": "bitmap",
-	"image/png": "bitmap"
+	"image/png": "bitmap",
+	"image/x-icon": "bitmap"
 };
 
 /*
