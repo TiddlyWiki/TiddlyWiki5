@@ -744,7 +744,7 @@ canvas.tw-edit-bitmapeditor  {
 
 @media (max-width: 55em) {
 	.modal {
-		position: absolute;
+		position: fixed;
 		top: 1em;
 		left: 1em;
 		right: 1em;
