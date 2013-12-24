@@ -23,4 +23,4 @@ released: 201312061753
 !! Internal changes
 
 * Changed the [[TiddlyWiki5 Versioning]] policy
-** New alpha releases will be `5.0.x-alpha`, beta releases will be `5.1.x-beta` and the final release will be `5.2.x`
+** Beta releases will be `5.0.x-beta` and the final release will be `5.1.x`
