@@ -10,6 +10,7 @@ type: text/vnd.tiddlywiki-html
 <meta name="generator" content="TiddlyWiki" />
 <meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
 <meta name="format-detection" content="telephone=no">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <title>{{$:/core/wiki/title}}</title>
 <div id="styleArea">
 {{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
