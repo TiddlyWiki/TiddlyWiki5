@@ -1,0 +1,17 @@
+created: 20131224074240979
+modified: 20131224075348329
+tags: howto
+title: Setting a favicon
+type: text/vnd.tiddlywiki
+
+"favicons" are small icons that most browsers display to help users identify websites.
+
+! favicons in the Browser
+
+When TiddlyWiki starts up in the browser it looks for a tiddler called [[$:/favicon.ico]] and dynamically uses it as the favicon for the page. If you modify the image then the favicon changes instantly to reflect it.
+
+! favicons on the Server
+
+On the server, the ServerCommand will serve the tiddler [[$:/favicon.ico]] at the path `/favicon.ico`.
+
+

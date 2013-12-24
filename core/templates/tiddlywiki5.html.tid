@@ -14,7 +14,7 @@ title: $:/core/templates/tiddlywiki5.html
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="format-detection" content="telephone=no" />
 <meta name="copyright" content="{{$:/core/copyright.txt}}" />
-<link rel="shortcut icon" href="favicon.ico">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <title>{{$:/core/wiki/title}}</title>
 <!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 

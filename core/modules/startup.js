@@ -112,6 +112,21 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
+		// Set up the favicon
+		var faviconTitle = "$:/favicon.ico",
+			faviconLink = document.getElementById("faviconLink"),
+			setFavicon = function() {
+				var tiddler = $tw.wiki.getTiddler(faviconTitle);
+				if(tiddler) {
+					faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);
+				}
+			};
+		setFavicon();
+		$tw.wiki.addEventListener("change",function(changes) {
+			if($tw.utils.hop(changes,faviconTitle)) {
+				setFavicon();
+			}
+		});
 		// Set up the styles
 		var styleTemplateTitle = "$:/core/ui/PageStylesheet",
 			styleParser = $tw.wiki.parseTiddler(styleTemplateTitle);
