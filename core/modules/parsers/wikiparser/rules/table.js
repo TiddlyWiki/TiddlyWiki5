@@ -18,11 +18,11 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\|(?:[^\n]*)\|(?:[fhck]?)\r?\n/mg;
+	this.matchRegExp = /^\|(?:[^\n]*)\|(?:[fhck]?)\r?(?:\n|$)/mg;
 };
 
 var processRow = function(prevColumns) {
-	var cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?\n)/mg,
+	var cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?(?:\n|$))/mg,
 		cellTermRegExp = /((?:\x20*)\|)/mg,
 		tree = [],
 		col = 0,
@@ -107,8 +107,8 @@ var processRow = function(prevColumns) {
 exports.parse = function() {
 	var rowContainerTypes = {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 		table = {type: "element", tag: "table", children: []},
-		rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?\n/mg,
-		rowTermRegExp = /(\|(?:[fhck]?)\r?\n)/mg,
+		rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?(?:\n|$)/mg,
+		rowTermRegExp = /(\|(?:[fhck]?)\r?(?:\n|$))/mg,
 		prevColumns = [],
 		currRowType,
 		rowContainer,
