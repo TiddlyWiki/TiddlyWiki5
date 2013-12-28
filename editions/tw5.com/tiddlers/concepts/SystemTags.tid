@@ -1,5 +1,5 @@
 created: 20130822080600000
-modified: 20131129163429930
+modified: 20131228161338857
 tags: concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
@@ -11,6 +11,7 @@ System tags are used to give special behaviour to tiddlers:
 * [[$:/tags/ControlPanel]] for control panel tabs
 * [[$:/tags/SideBar]] for sidebar tabs
 * [[$:/tags/MoreSideBar]] for tabs in the "more" sidebar
+* [[$:/tags/ViewTemplate]] for the view template
 * [[$:/tags/ViewToolbar]] for the view mode tiddler toolbar
 * [[$:/tags/EditTemplate]] for the edit template
 * [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar

@@ -1,0 +1,20 @@
+created: 20131228162825226
+modified: 20131228163922307
+tags: macros
+title: ChangeCountMacro
+type: text/vnd.tiddlywiki
+
+The changecount macro returns a counter maintained by the TiddlyWiki core that tracks the number of modifications made to each tiddler. The changecount macro always applies to the tiddler named in the [[currentTiddler|WidgetVariable: currentTiddler]] variable.
+
+For example:
+
+```
+<<changecount>>
+```
+
+Displays as:
+
+<<changecount>>
+
+Note how the changecount increases every time this tiddler is modified.
+

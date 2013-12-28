@@ -1,0 +1,25 @@
+created: 20131228164411884
+modified: 20131228164955084
+tags: macros
+title: QualifyMacro
+type: text/vnd.tiddlywiki
+
+The qualify macro is part of the StateMechanism. Given a base tiddler title it generates a unique string that includes a hashed encoding of a position within the widget render tree, identified by the stack of transcluded tiddlers that leads to that position.
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |title |Base tiddler title | |
+
+! Examples
+
+The results returned by the qualify macro will depend upon where it is used. For example:
+
+```
+<<qualify "base">>
+```
+
+Returns:
+
+<<qualify "base">>
+

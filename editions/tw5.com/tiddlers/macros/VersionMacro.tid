@@ -1,0 +1,17 @@
+created: 20131228162448664
+modified: 20131228162605081
+tags: macros
+title: VersionMacro
+type: text/vnd.tiddlywiki
+
+The version macro returns the current TiddlyWiki version number.
+
+! Example
+
+The version macro takes no parameters:
+
+```
+Version number: <<version>>
+```
+
+Version number: <<version>>

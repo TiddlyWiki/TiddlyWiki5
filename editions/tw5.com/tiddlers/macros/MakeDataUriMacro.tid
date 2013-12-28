@@ -1,0 +1,37 @@
+created: 20131228163141555
+modified: 20131228163843163
+tags: macros
+title: MakeDataUriMacro
+type: text/vnd.tiddlywiki
+
+The makedatauri macro constructs a data URI from a block of text and an associated ContentType. It is commonly used within stylesheets to generate an inline image or font.
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |text |Text to be converted to a data URI | |
+|2nd |type |ContentType of text | |
+
+! Examples
+
+A trivial example to show how the macro works:
+
+```
+<<makedatauri "HelloThere" "text/plain">>
+```
+
+<<makedatauri "HelloThere" "text/plain">>
+
+A user-defined macro such as this would typically be used within a stylesheet:
+
+```
+\define datauri(title)
+<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
+\end
+```
+
+Then one can write CSS rules like this:
+
+```
+background: url(<<datauri "$:/themes/tiddlywiki/starlight/ltbg.jpg">>);
+```
