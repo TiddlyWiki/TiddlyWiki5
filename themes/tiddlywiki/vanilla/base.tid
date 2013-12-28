@@ -547,7 +547,7 @@ canvas.tw-edit-bitmapeditor  {
 ** Tiddler edit mode
 */
 
-.tw-tiddler-edit-frame em {
+.tw-tiddler-edit-frame em.tw-edit {
 	color: #999;
 	font-style: normal;
 }
