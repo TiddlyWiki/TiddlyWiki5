@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/nsort.js
+title: $:/core/modules/filters/sort.js
 type: application/javascript
 module-type: filteroperator
 
