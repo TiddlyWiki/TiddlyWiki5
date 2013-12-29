@@ -1,10 +1,19 @@
 created: 20131202102427114
-modified: 20131219100250559
+modified: 20131229220836002
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
 
-There are several methods for upgrading an existing TiddlyWiki document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
+There are several methods for upgrading an existing TiddlyWiki version 5 document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
+
+<div class="tw-message-box">
+<a class="tw-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
+
+!! Upgrading from TiddlyWikiClassic
+
+Remember that TiddlyWiki version 5 is not fully backwards compatible with the older TiddlyWikiClassic. It is recommended that users of TiddlyWikiClassic should not attempt to upgrade their existing files until the new version is more mature.
+
+</div>
 
 ! Online upgrading
 
