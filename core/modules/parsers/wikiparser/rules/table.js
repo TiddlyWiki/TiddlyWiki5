@@ -51,6 +51,16 @@ var processRow = function(prevColumns) {
 			colSpanCount++;
 			// Move to just before the `|` terminating the cell
 			this.parser.pos = cellRegExp.lastIndex - 1;
+		} else if(cellMatch[1] === "<" && prevCell) {
+			try {
+				colSpanCount = 1+prevCell.attributes.colspan.value;
+			} catch (e) {
+				colSpanCount = 2;
+			}
+			$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
+			colSpanCount = 1;
+			// Move to just before the `|` terminating the cell
+			this.parser.pos = cellRegExp.lastIndex - 1;
 		} else if(cellMatch[2]) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
