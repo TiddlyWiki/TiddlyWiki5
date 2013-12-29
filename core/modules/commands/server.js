@@ -79,7 +79,7 @@ SimpleServer.prototype.checkCredentials = function(request,incomingUsername,inco
 	}
 }
 
-SimpleServer.prototype.listen = function(port) {
+SimpleServer.prototype.listen = function(port,host) {
 	var self = this;
 	http.createServer(function(request,response) {
 		// Compose the state object
@@ -125,7 +125,7 @@ SimpleServer.prototype.listen = function(port) {
 				});
 				break;
 		}
-	}).listen(port);
+	}).listen(port,host);
 };
 
 var Command = function(params,commander,callback) {
@@ -264,7 +264,8 @@ Command.prototype.execute = function() {
 		renderType = this.params[2] || "text/plain",
 		serveType = this.params[3] || "text/html",
 		username = this.params[4],
-		password = this.params[5];
+		password = this.params[5],
+		host = this.params[6];
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
@@ -272,8 +273,8 @@ Command.prototype.execute = function() {
 		username: username,
 		password: password
 	});
-	this.server.listen(port);
-	console.log("Serving on port " + port);
+	this.server.listen(port,host);
+	console.log("Serving on " + host + ":" + port);
 	console.log("(press ctrl-C to exit)");
 	return null;
 };
