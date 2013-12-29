@@ -971,4 +971,5 @@ canvas.tw-edit-bitmapeditor  {
 .tw-message-box img {
 	float: right;
 	width: 150px;
+	margin: 0px 0px 12px 12px;
 }
