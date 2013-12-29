@@ -104,7 +104,7 @@ var processRow = function(prevColumns) {
 			// Parse the cell
 			cell.children = this.parser.parseInlineRun(cellTermRegExp,{eatTerminator: true});
 			// Set the alignment for the cell
-			if(cellMatch[1].substr(cellMatch[1].length-1,1) === " ") { // spaceRight
+			if(this.parser.source.substr(this.parser.pos-2,1) === " ") { // spaceRight
 				$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 			} else if(spaceLeft) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
