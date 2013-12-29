@@ -64,6 +64,11 @@ var processRow = function(prevColumns) {
 		} else if(cellMatch[2]) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
+				try {
+					colSpanCount+= prevCell.attributes.colspan.value;
+				} catch (e) {
+					colSpanCount-= 1;
+				}
 				$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			}
 			this.parser.pos = cellRegExp.lastIndex - 1;
