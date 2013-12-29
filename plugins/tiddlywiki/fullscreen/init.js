@@ -37,9 +37,11 @@ var toggleFullscreen = function() {
 
 exports.startup = function() {
 	// Install the full screen handler
-	$tw.rootWidget.addEventListener("tw-full-screen",function(event) {
-		toggleFullscreen();
-	});
+	if(_requestFullscreen) {
+		$tw.rootWidget.addEventListener("tw-full-screen",function(event) {
+			toggleFullscreen();
+		});
+	}
 };
 
 })();
