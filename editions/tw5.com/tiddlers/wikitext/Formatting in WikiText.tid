@@ -1,5 +1,5 @@
 created: 20131205155959399
-modified: 20131205160130832
+modified: 20131230120942930
 tags: wikitext
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
@@ -7,6 +7,7 @@ type: text/vnd.tiddlywiki
 Available character formatting includes:
 
 * <code>&#96;backticks&#96;</code> for `code`
+** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>
 * `''bold''` for ''bold text''
 * `//italic//` for //italic text//
 * `__underscore__` for __underscored text__
