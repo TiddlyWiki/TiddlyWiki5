@@ -158,8 +158,8 @@ ViewWidget.prototype.getValueAsDate = function(format) {
 };
 
 ViewWidget.prototype.getValueAsRelativeDate = function(format) {
-	var value = this.getValue();
-	if(value) {
+	var value = $tw.utils.parseDate(this.getValue());
+	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
 		return $tw.utils.getRelativeDate((new Date()) - (new Date(value))).description;
 	} else {
 		return "";
