@@ -37,11 +37,12 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Create our element
+	var editInfo = this.getEditInfo();
 	var domNode = this.document.createElement(this.editTag);
 	if(this.editType) {
 		domNode.setAttribute("type",this.editType);
 	}
-	if(this.editPlaceholder) {
+	if(editInfo.value === "" && this.editPlaceholder) {
 		domNode.setAttribute("placeholder",this.editPlaceholder);
 	}
 	// Assign classes
@@ -49,7 +50,6 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 		domNode.className = this.editClass;
 	}
 	// Set the text
-	var editInfo = this.getEditInfo();
 	if(this.editTag === "textarea") {
 		domNode.appendChild(this.document.createTextNode(editInfo.value));
 	} else {
