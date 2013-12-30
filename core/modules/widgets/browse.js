@@ -39,8 +39,8 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	domNode.setAttribute("multiple","multiple");
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
-		self.wiki.readFiles(event.target.files,function(tiddlerFields) {
-			self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+		self.wiki.readFiles(event.target.files,function(tiddlerFieldsArray) {
+			self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 		});
 		return false;
 	},false);
