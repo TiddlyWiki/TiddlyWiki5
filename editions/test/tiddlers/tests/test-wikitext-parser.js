@@ -113,6 +113,15 @@ describe("WikiText parser tests", function() {
 
 	});
 
+	it("should parse horizontal rules", function() {
+		expect(parse("---Not a rule\n\n----\n\nBetween\n\n---")).toEqual(
+
+			[ { type : 'element', tag : 'p', children : [ { type : 'entity', entity : '&mdash;' }, { type : 'text', text : 'Not a rule' } ] }, { type : 'element', tag : 'hr' }, { type : 'element', tag : 'p', children : [ { type : 'text', text : 'Between' } ] }, { type : 'element', tag : 'hr' } ]
+
+		);
+
+	});
+
 	it("should parse hard linebreak areas", function() {
 		expect(parse("\"\"\"Something\nin the\nway she moves\n\"\"\"\n\n")).toEqual(
 
