@@ -38,19 +38,21 @@ The example renders as:
 
 ! Cell Merging
 
-To merge a table cell with the one above, use the special cell text `~`. To merge a cell with the one to its left use the text `>`. For example:
+To merge a table cell with the one above, use the special cell text `~`. To merge a cell with the one to its left use the text `<`. To merge one to its right use `>`. For example:
 
 ```
 |Cell1 |Cell2 |Cell3 |Cell4 |
-|Cell5 |Cell6 |Cell7 |>|
+|Cell5 |Cell6 |Cell7 |<|
 |Cell5 |~|Cell7 |Cell8 |
+|>|Cell9 |Cell10 |Cell11 |
 ```
 
 Renders as:
 
 |Cell1 |Cell2 |Cell3 |Cell4 |
-|Cell5 |Cell6 |Cell7 |>|
+|Cell5 |Cell6 |Cell7 |<|
 |Cell5 |~|Cell7 |Cell8 |
+|>|Cell9 |Cell10 |Cell11 |
 
 ! Table Classes, Captions, Headers and Footers
 
