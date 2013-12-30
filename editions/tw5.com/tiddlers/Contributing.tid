@@ -1,14 +1,24 @@
 created: 20131101111400000
-modified: 20131218121606089
+modified: 20131230101537722
 tags: introduction
 title: Contributing
 type: text/vnd.tiddlywiki
 
 TiddlyWiki5 welcomes contributions to its code and documentation via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]. Please take a moment to read these notes to help make the process as smooth as possible.
 
-!! Bug Reports
+!! GitHub Issues
 
-For effective debugging, we need as much information as possible. At a minimum, please try to include:
+We use GitHub Issues to manage bug reports, feature requests for TiddlyWiki. To maintain their effectiveness we endeavour to have as few open issues as possible.
+
+!!! Policies for Managing Issues
+
+Open issues must be actionable: generally either a reproducible bug report, or a specific feature request. From the perspective of the core developers, the issues list behaves like a shared todo list. Every item on the list requires a little bit of attention each time we check the list.
+
+GitHub Issues are not very good for managing ideas that are not immediately actionable. Better to use the [[TiddlyWiki discussion groups|Community]] for open ended questions, or speculative discussions of new features.
+
+!!! Creating Issues
+
+When you do create an issue, remember that for effective debugging, we need as much information as possible. At a minimum, please try to include:
 
 * A descriptive title
 * A summary
