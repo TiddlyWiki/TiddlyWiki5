@@ -51,9 +51,24 @@ var processRow = function(prevColumns) {
 			colSpanCount++;
 			// Move to just before the `|` terminating the cell
 			this.parser.pos = cellRegExp.lastIndex - 1;
+		} else if(cellMatch[1] === "<" && prevCell) {
+			try {
+				colSpanCount = 1+prevCell.attributes.colspan.value;
+			} catch (e) {
+				colSpanCount = 2;
+			}
+			$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
+			colSpanCount = 1;
+			// Move to just before the `|` terminating the cell
+			this.parser.pos = cellRegExp.lastIndex - 1;
 		} else if(cellMatch[2]) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
+				try {
+					colSpanCount+= prevCell.attributes.colspan.value;
+				} catch (e) {
+					colSpanCount-= 1;
+				}
 				$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			}
 			this.parser.pos = cellRegExp.lastIndex - 1;
@@ -89,7 +104,7 @@ var processRow = function(prevColumns) {
 			// Parse the cell
 			cell.children = this.parser.parseInlineRun(cellTermRegExp,{eatTerminator: true});
 			// Set the alignment for the cell
-			if(cellMatch[1].substr(cellMatch[1].length-1,1) === " ") { // spaceRight
+			if(this.parser.source.substr(this.parser.pos-2,1) === " ") { // spaceRight
 				$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 			} else if(spaceLeft) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
