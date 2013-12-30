@@ -667,6 +667,10 @@ canvas.tw-edit-bitmapeditor  {
 	white-space: nowrap;
 }
 
+.tw-drop-down p {
+	padding: 0 14px 0 14px;
+}
+
 .tw-drop-down a {
 	display: block;
 	padding: 0 14px 0 14px;
