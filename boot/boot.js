@@ -210,7 +210,7 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 Convert "&amp;" to &, "&lt;" to <, "&gt;" to > and "&quot;" to "
 */
 $tw.utils.htmlDecode = function(s) {
-	return s.toString().replace(/&lt;/mg,"<").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
+	return s.toString().replace(/&lt;/mg,"<").replace(/&nbsp;/mg," ").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
 };
 
 /*

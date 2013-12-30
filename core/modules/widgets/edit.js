@@ -36,8 +36,8 @@ EditWidget.prototype.render = function(parent,nextSibling) {
 // Mappings from content type to editor type
 // TODO: This information should be configurable/extensible
 var editorTypeMappings = {
-	"text/vnd.tiddlywiki": "text",
-	"image/svg+xml": "text",
+	"text/vnd.tiddlywiki": "html",
+	"text/html": "html",
 	"image/jpg": "bitmap",
 	"image/jpeg": "bitmap",
 	"image/gif": "bitmap",
