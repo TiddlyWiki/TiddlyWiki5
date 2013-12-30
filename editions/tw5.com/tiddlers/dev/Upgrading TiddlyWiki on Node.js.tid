@@ -1,5 +1,5 @@
 created: 20131219100544073
-modified: 20131219100558017
+modified: 20131230121459582
 tags: howto
 title: Upgrading TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -7,5 +7,5 @@ type: text/vnd.tiddlywiki
 If you've installed [[TiddlyWiki on Node.js]] on the usual way, when a new version is released you can upgrade it with this command:
 
 ```
-sudo npm -g upgrade tiddlywiki
+sudo npm -g update tiddlywiki
 ```
