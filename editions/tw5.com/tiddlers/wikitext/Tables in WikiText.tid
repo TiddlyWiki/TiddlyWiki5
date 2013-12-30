@@ -1,5 +1,5 @@
 created: 20130914132100000
-modified: 20131205161224607
+modified: 20131230104954234
 tags: wikitext
 title: Tables in WikiText
 type: text/vnd.tiddlywiki
@@ -38,18 +38,18 @@ The example renders as:
 
 ! Cell Merging
 
-To merge a table cell with the one above, use the special cell text `~`. To merge a cell with the one to its left use the text `>`. For example:
+To merge a table cell with the one above, use the special cell text `~`. To merge a cell with the one to its right use the text `>`. For example:
 
 ```
 |Cell1 |Cell2 |Cell3 |Cell4 |
-|Cell5 |Cell6 |Cell7 |>|
+|Cell5 |Cell6 |>|Cell7 |
 |Cell5 |~|Cell7 |Cell8 |
 ```
 
 Renders as:
 
 |Cell1 |Cell2 |Cell3 |Cell4 |
-|Cell5 |Cell6 |Cell7 |>|
+|Cell5 |Cell6 |>|Cell7 |
 |Cell5 |~|Cell7 |Cell8 |
 
 ! Table Classes, Captions, Headers and Footers
