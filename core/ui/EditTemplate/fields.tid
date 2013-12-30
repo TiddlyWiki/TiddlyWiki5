@@ -9,6 +9,6 @@ tags: $:/tags/EditTemplate
 </table>
 </div>
 
-<div class="tw-edit-field-add">//Add a new field:// <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/NewFieldName" tag="input" default="" placeholder="field name" class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
+<div class="tw-edit-field-add"><em class="tw-edit">Add a new field:</em> <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/NewFieldName" tag="input" default="" placeholder="field name" class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/NewFieldName}} set="$:/NewFieldName" setTo="" class="">add</$button></span></div>
 
 </$fieldmangler>
