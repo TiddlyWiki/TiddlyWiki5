@@ -7,6 +7,7 @@ Wiki text inline rule for code runs. For example:
 
 ```
 	This is a `code run`.
+	This is another ``code run``
 ```
 
 \*/
@@ -22,13 +23,13 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /`/mg;
+	this.matchRegExp = /(``?)/mg;
 };
 
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
-	var reEnd = /`/mg;
+	var reEnd = new RegExp(this.match[1], "mg");
 	// Look for the end marker
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
