@@ -22,7 +22,7 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /-{3,}\r?\n/mg;
+	this.matchRegExp = /-{3,}\r?(?:\n|$)/mg;
 };
 
 exports.parse = function() {
