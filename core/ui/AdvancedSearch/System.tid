@@ -1,0 +1,27 @@
+title: $:/core/ui/AdvancedSearch/System
+tags: $:/tags/AdvancedSearch
+caption: System
+
+<$linkcatcher to="$:/temp/advancedsearch">
+
+Search for system tiddlers:
+
+<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+
+</$linkcatcher>
+
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+
+<div class="tw-search-results">
+
+//<small><$count filter="[search{$:/temp/advancedsearch}]"/> matches</small>//
+
+<$list filter="[search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+</div>
+
+</$reveal>
+
+<$reveal state="$:/temp/advancedsearch" type="match" text="">
+
+</$reveal>

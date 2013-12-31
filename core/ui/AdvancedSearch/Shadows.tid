@@ -1,0 +1,27 @@
+title: $:/core/ui/AdvancedSearch/Shadows
+tags: $:/tags/AdvancedSearch
+caption: Shadows
+
+<$linkcatcher to="$:/temp/advancedsearch">
+
+Search for shadow tiddlers:
+
+<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+
+</$linkcatcher>
+
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+
+<div class="tw-search-results">
+
+//<small><$count filter="[is[shadow]search{$:/temp/advancedsearch}]"/> matches</small>//
+
+<$list filter="[is[shadow]search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+</div>
+
+</$reveal>
+
+<$reveal state="$:/temp/advancedsearch" type="match" text="">
+
+</$reveal>
