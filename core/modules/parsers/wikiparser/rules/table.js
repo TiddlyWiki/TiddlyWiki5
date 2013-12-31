@@ -76,7 +76,7 @@ var processRow = function(prevColumns) {
 			// Look for a space at the start of the cell
 			var spaceLeft = false,
 				chr = this.parser.source.substr(this.parser.pos,1);
-			var vAlign;
+			var vAlign = null;
 			if (chr === "^") {
 				vAlign = "top";
 			} else if(chr === ",") {
