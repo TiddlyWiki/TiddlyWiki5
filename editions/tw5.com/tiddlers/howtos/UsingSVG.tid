@@ -39,7 +39,7 @@ You can include simple text strings in SVG images using the `<text>` element:
 
 HTML or WikiText content can be included within inline SVG images using the `<foreignObject>` element. For example:
 
-<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body style="background:#dec;">Here is some text that requires a word wrap, and includes a [[link to a tiddler|HelloThere]].</body></foreignObject></svg>
+<svg width="260px" height="260px"><circle cx="150" cy="150" r="100" fill="blue" stoke="red"/><foreignObject x="70" y="110" width="150" height="180"><body>Here is some text that requires a word wrap, and includes a [[link to a tiddler|HelloThere]].</body></foreignObject></svg>
 
 ! Transcluding SVG elements
 

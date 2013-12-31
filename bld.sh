@@ -43,6 +43,7 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/editions/tw5.com/download-empty $TW5_BUILD_OUTPUT/empty.hta text/plain \
 	--savetiddler $:/green_favicon.ico $TW5_BUILD_OUTPUT/static/favicon.ico \
 	--rendertiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+	--rendertiddler $:/core/templates/alltiddlers.template.html $TW5_BUILD_OUTPUT/alltiddlers.html text/plain \
 	--rendertiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
 	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
 	|| exit 1

@@ -1,0 +1,26 @@
+title: $:/core/templates/alltiddlers.template.html
+type: text/vnd.tiddlywiki-html
+
+\define tw-wikilink-template() #$uri_encoded$
+\rules only filteredtranscludeinline transcludeinline
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="generator" content="TiddlyWiki" />
+<meta name="tiddlywiki-version" content="{{$:/core/templates/version}}" />
+<meta name="format-detection" content="telephone=no">
+<link id="faviconLink" rel="shortcut icon" href="favicon.ico">
+<title>{{$:/core/wiki/title}}</title>
+<div id="styleArea">
+{{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
+</div>
+<style type="text/css">
+{{{ [tag[$:/tags/stylesheet]] [is[shadow]tag[$:/tags/stylesheet]] ||$:/core/templates/wikified-tiddler}}}
+</style>
+</head>
+<body class="tw-body">
+{{$:/StaticBanner||$:/core/templates/html-tiddler}}
+{{$:/core/templates/alltiddlers.content||$:/core/templates/html-tiddler}}
+</body>
+</html>

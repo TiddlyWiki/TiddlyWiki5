@@ -9,6 +9,8 @@ type: text/vnd.tiddlywiki
 !! Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bd7db62da052ec6262c3319eaa11f00e5c452a7b]] support for specifying hostname for the ServerCommand
+* Added a first pass at generating an all-in-one static HTML representation of a wiki, complete with internal anchor links for wiki links
+** See http://tiddlywiki.com/alltiddlers.html
 
 !! Bug Fixes
 
