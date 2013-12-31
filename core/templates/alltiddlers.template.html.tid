@@ -21,6 +21,8 @@ type: text/vnd.tiddlywiki-html
 </head>
 <body class="tw-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
+<section class="story-river">
 {{$:/core/templates/alltiddlers.content||$:/core/templates/html-tiddler}}
+</section>
 </body>
 </html>
