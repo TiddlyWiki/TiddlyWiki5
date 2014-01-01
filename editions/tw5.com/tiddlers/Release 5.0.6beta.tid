@@ -1,5 +1,5 @@
 created: 20131228164411884
-modified: 20131230094336051
+modified: 20140101174018406
 tags: releasenote
 title: Release 5.0.6-beta
 type: text/vnd.tiddlywiki
@@ -8,8 +8,9 @@ type: text/vnd.tiddlywiki
 
 !! Improvements
 
+* Added experimental support for running [[TiddlyWiki on node-webkit]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bd7db62da052ec6262c3319eaa11f00e5c452a7b]] support for specifying hostname for the ServerCommand
-* Added a first pass at generating an all-in-one static HTML representation of a wiki, complete with internal anchor links for wiki links
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b9e80a270b7f67db816e9b06e2f71f9c9dd86c17]] a first pass at generating an all-in-one static HTML representation of a wiki, complete with internal anchor links for wiki links
 ** See http://tiddlywiki.com/alltiddlers.html
 
 !! Bug Fixes

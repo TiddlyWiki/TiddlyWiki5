@@ -1,0 +1,10 @@
+created: 20140101164042231
+modified: 20140101173537147
+tags: definitions
+title: node-webkit
+type: text/vnd.tiddlywiki
+
+node-webkit is an OpenSource application that fuses the functionality of a web browser with that of [[Node.js]]. It makes it possible to use web applications as though they were native apps, with full access to the file system and other native facilities. Learn more from the [[official site|https://github.com/rogerwang/node-webkit]] or [[this introductory blog post|http://dev.tutsplus.com/tutorials/introduction-to-html5-desktop-apps-with-node-webkit--net-36296]].
+
+See [[TiddlyWiki on node-webkit]] for details of how to use TiddlyWiki with node-webkit.
+
