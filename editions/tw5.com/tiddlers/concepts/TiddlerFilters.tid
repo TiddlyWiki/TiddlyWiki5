@@ -57,6 +57,10 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''sameday'': selects all the tiddlers falling into the same day as the provided date in the specified date field
 * ''fields'': returns the names of the fields present on the selected tiddlers
 * ''search'': returns all tiddlers that contain the specified text
+* ''reverse'': reverses the list
+* ''first'': selects the first tiddler of the list (or the first n if the operand is n)
+* ''last'': selects the last tiddler of the list (or the last n if the operand is n)
+* ''rest'': selects all but the first tiddler of the list (or all but the first n if the operand is n)
 
 An operator can be negated with by preceding it with `!`, for example `[!tag[Tommy]]` selects the tiddlers that are not tagged with `Tommy`.
 
