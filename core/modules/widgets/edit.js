@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/edit.js
 type: application/javascript
 module-type: widget
 
-Edit widget is a meta-widget chooses the appropriate actual editting widget
+Edit widget is a meta-widget chooses the appropriate actual editting widget 
 
 \*/
 (function(){
@@ -36,8 +36,8 @@ EditWidget.prototype.render = function(parent,nextSibling) {
 // Mappings from content type to editor type
 // TODO: This information should be configurable/extensible
 var editorTypeMappings = {
-	"text/vnd.tiddlywiki": "html",
-	"text/html": "html",
+	"text/vnd.tiddlywiki": "text",
+	"text/html": "text",
 	"image/jpg": "bitmap",
 	"image/jpeg": "bitmap",
 	"image/gif": "bitmap",
@@ -45,11 +45,16 @@ var editorTypeMappings = {
 	"image/x-icon": "bitmap"
 };
 
+
 /*
 Compute the internal state of the widget
 */
 EditWidget.prototype.execute = function() {
 	// Get our parameters
+	var self = this;
+	function existsEditor(name) {
+		return((!!self.widgetClasses[name])?name:null);
+	}
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
@@ -65,10 +70,14 @@ EditWidget.prototype.execute = function() {
 	}
 	type = type || "text/vnd.tiddlywiki";
 	// Choose the appropriate edit widget
-	var editorType = editorTypeMappings[type] || "text";
+	// look to see if there is an editor name with an appendage that matches this types extension string  
+	var contentTypeInfo=$tw.config.contentTypeInfo[type];
+	var extensionString=contentTypeInfo?contentTypeInfo.extension.substr(1):null;//to be safe
+	var targetEditor = existsEditor("edit-" + extensionString)||  //return the given string if exists
+					   "edit-" + (editorTypeMappings[type]||"text");
 	// Make the child widgets
 	this.makeChildWidgets([{
-		type: "edit-" + editorType,
+		type: targetEditor,
 		attributes: {
 			tiddler: {type: "string", value: this.editTitle},
 			field: {type: "string", value: this.editField},
