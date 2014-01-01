@@ -1,7 +1,8 @@
-created: 201308270800
-modified: 201311242006
+created: 20130827080000000
+modified: 20140101183713761
 tags: concepts
 title: TiddlerFilters
+type: text/vnd.tiddlywiki
 
 Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria.
 
@@ -16,6 +17,8 @@ The mechanism is easiest to understand by first presenting some example filter s
 |`[title[MyTiddler]]` |The single tiddler titled `MyTiddler` (if it exists) |
 |`HelloThere Introduction` |The tiddlers titled `HelloThere` and `Introduction` (if they exist) |
 |`[tag[important]]` |All tiddlers with the tag `important` |
+|`[tag[important]tag[secret]]` |All tiddlers with both the tag `important` and the tag `secret` |
+|`[tag[important]!tag[secret]]` |All tiddlers with the tag `important` but not the tag `secret` |
 |`[!tag[important]]` |All tiddlers not with the tag `important` |
 |`[tag[important]sort[title]]` |All tiddlers with the tag `important` sorted by title |
 |`[tag[important]!sort[title]]` |All tiddlers with the tag `important` reverse sorted by title |
