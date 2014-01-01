@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20131215165204528
+modified: 20140101180801947
 tags: introduction
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -28,3 +28,4 @@ You can also try:
 * [[Saving on Android]] with the custom ''~AndTidWiki'' app
 * [[Saving on InternetExplorer]] with the [[TiddlyIE]] extension, or via the [[Windows HTA Hack]] 
 * [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
+* Running [[TiddlyWiki on node-webkit]], turning it into a native application on your desktop

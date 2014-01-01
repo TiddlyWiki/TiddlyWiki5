@@ -8,11 +8,17 @@ type: text/vnd.tiddlywiki
 
 !! Improvements
 
-* Added experimental support for running [[TiddlyWiki on node-webkit]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/87fbd988f1fb0164411af190adfe6b6a2404eef3]] experimental support for running [[TiddlyWiki on node-webkit]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3d79eb87d1c609195b8c518c08e167994b20a346]] an [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bd7db62da052ec6262c3319eaa11f00e5c452a7b]] support for specifying hostname for the ServerCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b9e80a270b7f67db816e9b06e2f71f9c9dd86c17]] a first pass at generating an all-in-one static HTML representation of a wiki, complete with internal anchor links for wiki links
 ** See http://tiddlywiki.com/alltiddlers.html
+* [[Hide|https://github.com/Jermolene/TiddlyWiki5/commit/44568dc6ef64be8c1370df8f682777c2c805fee7]] encryption features when running on the server
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2ee50939447cf2948e49e5905520943ea4075975]] [[double backticks|Formatting in WikiText]] as an alternative for delimitting inline code (thanks to StephanHradek)
 
 !! Bug Fixes
 
-* [[Fix|https://github.com/Jermolene/TiddlyWiki5/commit/ef59a3743f02c726f20e035c5d28665000fda79a]] crash when attempting full screen mode on browsers that don't support it
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ec7dff291dadb3e128e1db34b4ded6b57bc8ed46]] import ''browse'' button
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/ef59a3743f02c726f20e035c5d28665000fda79a]] crash when attempting full screen mode on browsers that don't support it
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/307]] requirement for a newline immediately after a horizontal rule, table or typed block (thanks to StephanHradek)
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/318]] problem with ''placeholder'' attibute on InternetExplorer (thanks to DavidJade)
