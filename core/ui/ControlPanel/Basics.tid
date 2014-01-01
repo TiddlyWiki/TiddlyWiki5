@@ -7,7 +7,7 @@ caption: Basics
 |[[Subtitle|SiteSubtitle]] |<$edit-text tiddler="SiteSubtitle" default="" tag="input"/> |
 |[[Username for signing edits|$:/status/UserName]] |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
 |[[Animation duration|$:/config/AnimationDuration]] |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
-|[[DefaultTiddlers|$:/DefaultTiddlers]] |Choose which tiddlers are displayed at startup:<br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/> |
+|[[DefaultTiddlers|$:/DefaultTiddlers]] |Choose which tiddlers are displayed at startup:<br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces// |
 |Tiddlers |''<$count filter="[!is[system]]"/>'' |
 |System tiddlers |''<$count filter="[is[system]]"/>'' |
 |Shadow tiddlers |''<$count filter="[is[shadow]]"/>'' |
