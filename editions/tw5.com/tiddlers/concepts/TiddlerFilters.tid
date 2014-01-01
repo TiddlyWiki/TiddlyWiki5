@@ -36,6 +36,8 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''has'': tests whether a tiddler has the field specified in the operand
 * ''sort'': sorts the tiddlers by the field specified in the operand
 * ''sortcs'': a case sensitive sort of the current tiddlers by the field specified in the operand
+* ''nsort'': sorts the tiddlers numerically by the field specified in the operand
+* ''nsortcs'': a case sensitive (for the non-numerical elements) numerical sort of the current tiddlers by the field specified in the operand
 * ''prefix'': tests whether a tiddlers title starts with the prefix specified in the operand
 * ''limit'': limits the number of subresults to the integer specified in the operand
 * ''tag'': tests whether a given tag is (`[tag[mytag]]`) or is not (`[!tag[mytag]]`) present on the tiddler
