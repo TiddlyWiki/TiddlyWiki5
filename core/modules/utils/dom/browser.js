@@ -18,9 +18,11 @@ Set style properties of an element
 	styles: ordered array of {name: value} pairs
 */
 exports.setStyle = function(element,styles) {
-	for(var t=0; t<styles.length; t++) {
-		for(var styleName in styles[t]) {
-			element.style[$tw.utils.convertStyleNameToPropertyName(styleName)] = styles[t][styleName];
+	if(element.nodeType === Element.ELEMENT_NODE) {
+		for(var t=0; t<styles.length; t++) {
+			for(var styleName in styles[t]) {
+				element.style[$tw.utils.convertStyleNameToPropertyName(styleName)] = styles[t][styleName];
+			}
 		}
 	}
 };
