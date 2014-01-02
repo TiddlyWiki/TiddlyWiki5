@@ -1,5 +1,5 @@
 created: 20131219100608529
-modified: 20131231113631968
+modified: 20140102200617777
 tags: howto
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 ## `mkdir mywiki` to create a folder for a new wiki
 ## `cd mywiki` to move into the new folder
 ## `tiddlywiki --server` to start TiddlyWiki
-## Visit http://0.0.0.0:8080/ in your browser
+## Visit http://127.0.0.1:8080/ in your browser
 ## Try editing and creating tiddlers
 
 The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.

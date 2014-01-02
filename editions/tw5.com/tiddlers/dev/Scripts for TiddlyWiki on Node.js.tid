@@ -1,5 +1,5 @@
 created: 20131219100637788
-modified: 20131219100657540
+modified: 20140102200458024
 tags: howto dev
 title: Scripts for TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -48,7 +48,7 @@ serve.cmd <username> [<password>]
 
 This script starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used.
 
-To experiment with this configuration, run the script and then visit `http://0.0.0.0:8080` in a browser.
+To experiment with this configuration, run the script and then visit `http://127.0.0.1:8080` in a browser.
 
 Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).
 
