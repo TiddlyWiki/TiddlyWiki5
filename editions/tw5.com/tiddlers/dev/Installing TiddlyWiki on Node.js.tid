@@ -1,5 +1,5 @@
 created: 20131219100608529
-modified: 20140102200617777
+modified: 20140102214547249
 tags: howto
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -8,7 +8,8 @@ type: text/vnd.tiddlywiki
 # Open a command line terminal and type:
 #> `npm install -g tiddlywiki`
 #> If it fails with an error you may need to re-run the command as an administrator:
-#> `sudo npm install -g tiddlywiki`
+#> `npm install -g tiddlywiki` (Windows)
+#> `sudo npm install -g tiddlywiki` (Mac/Linux)
 # Check TiddlyWiki is installed by typing:
 #> `tiddlywiki --version`
 # In response, you should see TiddlyWiki report its current version (eg `5.0.4-beta`; you may also see other debugging information reported)

@@ -1,5 +1,5 @@
 created: 20131219100444289
-modified: 20131219163213430
+modified: 20140102214438862
 tags: dev howto
 title: Working with the TiddlyWiki5 repository
 type: text/vnd.tiddlywiki
@@ -11,7 +11,7 @@ If you plan on working with the TiddlyWiki5 source code then follow these steps:
 # Fork the TiddlyWiki5 GitHub repository from https://github.com/Jermolene/TiddlyWiki5
 # Clone a local copy of your fork
 # Open a command line terminal and change the current working directory to the root of the repo
-# Type `sudo npm link` to tell [[npm]] to use this copy of the repo as the globally installed one
+# Type `npm link` (Windows) or `sudo npm link` (Mac/Linux) to tell [[npm]] to use this copy of the repo as the globally installed one
 
 After this procedure you can work with TiddlyWiki5 via [[npm]] as though it were installed in the usual way with `npm -g install tiddlywiki`.
 
