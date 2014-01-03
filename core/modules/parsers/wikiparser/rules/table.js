@@ -53,7 +53,7 @@ var processRow = function(prevColumns) {
 			// Move to just before the `|` terminating the cell
 			this.parser.pos = cellRegExp.lastIndex - 1;
 		} else if(cellMatch[1] === "<" && prevCell) {
-			colSpanCount = 1+$tw.utils.getAttributeValueFromParseTreeNode(prevCell, "colspan", 1);
+			colSpanCount = 1 + $tw.utils.getAttributeValueFromParseTreeNode(prevCell,"colspan",1);
 			$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			colSpanCount = 1;
 			// Move to just before the `|` terminating the cell
@@ -62,9 +62,9 @@ var processRow = function(prevColumns) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
 				try {
-					colSpanCount+= prevCell.attributes.colspan.value;
-				} catch (e) {
-					colSpanCount-= 1;
+					colSpanCount += prevCell.attributes.colspan.value;
+				} catch(e) {
+					colSpanCount -= 1;
 				}
 				$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			}
@@ -77,7 +77,7 @@ var processRow = function(prevColumns) {
 			var spaceLeft = false,
 				chr = this.parser.source.substr(this.parser.pos,1);
 			var vAlign = null;
-			if (chr === "^") {
+			if(chr === "^") {
 				vAlign = "top";
 			} else if(chr === ",") {
 				vAlign = "bottom";
@@ -114,7 +114,7 @@ var processRow = function(prevColumns) {
 			if(vAlign) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"valign",vAlign);
 			}
-			if(this.parser.source.substr(this.parser.pos-2,1) === " ") { // spaceRight
+			if(this.parser.source.substr(this.parser.pos - 2,1) === " ") { // spaceRight
 				$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 			} else if(spaceLeft) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
