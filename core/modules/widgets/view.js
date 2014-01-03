@@ -148,7 +148,7 @@ ViewWidget.prototype.getValueAsDoubleUrlEncoded = function() {
 };
 
 ViewWidget.prototype.getValueAsDate = function(format) {
-	format = format || "YYYY MM DD 0hh:0ss";
+	format = format || "YYYY MM DD 0hh:0mm";
 	var value = $tw.utils.parseDate(this.getValue());
 	if(value && $tw.utils.isDate(value) && value.toString() !== "Invalid Date") {
 		return $tw.utils.formatDateString(value,format);
