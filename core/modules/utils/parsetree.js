@@ -20,7 +20,7 @@ exports.addAttributeToParseTreeNode = function(node,name,value) {
 };
 
 exports.getAttributeValueFromParseTreeNode = function(node,name,defaultValue) {
-	if(node.type === "element" && node.attributes && node.attributes[name] && node.attributes[name].value != undefined) {
+	if(node.type === "element" && node.attributes && node.attributes[name] && node.attributes[name].value !== undefined) {
 		return node.attributes[name].value;
 	}
 	return defaultValue;
