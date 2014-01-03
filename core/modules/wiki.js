@@ -312,7 +312,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			a = self.getTiddler(a).fields[sortField] || "";
 			b = self.getTiddler(b).fields[sortField] || "";
 		}
-		if (!isNumeric || isNaN(a) || isNaN(b)) {
+		if(!isNumeric || isNaN(a) || isNaN(b)) {
 			if(!isCaseSensitive) {
 				if(typeof a === "string") {
 					a = a.toLowerCase();

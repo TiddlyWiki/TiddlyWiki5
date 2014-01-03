@@ -84,7 +84,7 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
-	if (this.inputDomNode.checked) {
+	if(this.inputDomNode.checked) {
 		this.setValue();
 	}
 };

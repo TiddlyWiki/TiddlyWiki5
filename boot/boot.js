@@ -246,7 +246,7 @@ $tw.utils.parseDate = function(value) {
 				parseInt(value.substr(10,2)||"00",10),
 				parseInt(value.substr(12,2)||"00",10),
 				parseInt(value.substr(14,3)||"000",10)));
-	} else if ($tw.utils.isDate(value)) {
+	} else if($tw.utils.isDate(value)) {
 		return value;
 	} else {
 		return null;
@@ -282,7 +282,7 @@ $tw.utils.parseStringArray = function(value) {
 			}
 		} while(match);
 		return results;
-	} else if ($tw.utils.isArray(value)) {
+	} else if($tw.utils.isArray(value)) {
 		return value;
 	} else {
 		return null;

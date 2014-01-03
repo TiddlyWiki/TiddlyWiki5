@@ -275,7 +275,7 @@ exports.unescapeLineBreaks = function(s) {
 // Copied from peg.js, thanks to David Majda
 exports.escape = function(ch) {
 	var charCode = ch.charCodeAt(0);
-	if (charCode <= 0xFF) {
+	if(charCode <= 0xFF) {
 		return '\\x' + $tw.utils.pad(charCode.toString(16).toUpperCase());
 	} else {
 		return '\\u' + $tw.utils.pad(charCode.toString(16).toUpperCase(),4);

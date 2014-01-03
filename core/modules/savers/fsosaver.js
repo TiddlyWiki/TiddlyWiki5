@@ -32,7 +32,7 @@ FSOSaver.prototype.save = function(text,method,callback) {
 	if(/^\/[A-Z]\:\\[^\\]+/i.test(pathname)) {	// ie: ^/[a-z]:/[^/]+
 		// Remove the leading slash
 		pathname = pathname.substr(1);
-	} else if (document.location.hostname !== "" && /^\/\\[^\\]+\\[^\\]+/i.test(pathname)) {	// test for \\server\share\blah... - ^/[^/]+/[^/]+
+	} else if(document.location.hostname !== "" && /^\/\\[^\\]+\\[^\\]+/i.test(pathname)) {	// test for \\server\share\blah... - ^/[^/]+/[^/]+
 		// Remove the leading slash
 		pathname = pathname.substr(1);
 		// reconstruct UNC path

@@ -59,7 +59,7 @@ exports.parse = function() {
 	// before handling the cite, parse the body of the quote
 	var tree= this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
-	if ( cite.length > 0 ) {
+	if(cite.length > 0) {
 		tree.unshift({
 			type: "element",
 			tag: "cite",
@@ -71,7 +71,7 @@ exports.parse = function() {
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// If we got a cite, push it
-	if ( cite.length > 0 ) {
+	if(cite.length > 0) {
 		tree.push({
 			type: "element",
 			tag: "cite",
