@@ -28,7 +28,7 @@ DownloadSaver.prototype.save = function(text,method,callback) {
 	// Set up the link
 	var link = document.createElement("a");
 	link.setAttribute("target","_blank");
-	if(Blob != undefined) {
+	if(Blob !== undefined) {
 		var blob = new Blob([text], {type: "text/html"});
 		link.setAttribute("href", URL.createObjectURL(blob));
 	} else {

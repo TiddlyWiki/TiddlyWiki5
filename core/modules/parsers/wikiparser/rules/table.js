@@ -149,7 +149,7 @@ exports.parse = function() {
 			this.parser.pos = rowMatch.index + rowMatch[0].length;
 		} else {
 			// Otherwise, create a new row if this one is of a different type
-			if(rowType != currRowType) {
+			if(rowType !== currRowType) {
 				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: []};
 				table.children.push(rowContainer);
 				currRowType = rowType;

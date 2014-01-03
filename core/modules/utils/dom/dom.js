@@ -18,7 +18,7 @@ Code thanks to John Resig, http://ejohn.org/blog/comparing-document-position/
 */
 exports.domContains = function(a,b) {
 	return a.contains ?
-		a != b && a.contains(b) :
+		a !== b && a.contains(b) :
 		!!(a.compareDocumentPosition(b) & 16);
 };
 
