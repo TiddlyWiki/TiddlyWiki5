@@ -1,27 +1,22 @@
-created: 20131221085742684
-modified: 20140103135046386
+created: 20140103134551508
+modified: 20140103134920538
 tags: howto
-title: Saving with TiddlyFox
+title: Saving with TiddlyFox on Android
 type: text/vnd.tiddlywiki
 
-If you're using [[Firefox for Android]], see the instructions for [[Saving with TiddlyFox on Android]].
-
-# Ensure you have the latest version of [[Firefox]]
+# Ensure you have the latest version of [[Firefox for Android]]
 #* http://getfirefox.com
 # Install the latest release of the TiddlyFox extension from:
 #* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
-# Restart [[Firefox]]
-# [[Download]] an empty TiddlyWiki by clicking this button:
-#> {{$:/editions/tw5.com/snippets/download-empty-button}}
-# Locate the file you just downloaded
-#* You may rename it, but be sure to keep the `.html` extension
-# Open the file in [[Firefox]]
+# Install this extension to be able to save the TiddlyWiki file locally:
+#* https://addons.mozilla.org/en-US/android/addon/save-link-menus/
+# [[Download]] an empty TiddlyWiki by saving this link:
+#* http://tiddlywiki.com/empty.html
+#> (to save the link, ensure you've installed the "save-link-menus" extension and then long-press on the link and choose "Save link")
+# When the file has downloaded, click on it within the notification tray or the download manager application
+# Choose to open the file in Firefox (rather than the default Android viewer)
 # Click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
 # Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
 # Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
 #* Look for the yellow notification ''Saved wiki'' at the top right of the window
 # Refresh the browser window to verify that your changes have been saved correctly
-
-In case of difficulties downloading the empty wiki, you can download this direct link to empty.html:
-
-http://tiddlywiki.com/empty.html
