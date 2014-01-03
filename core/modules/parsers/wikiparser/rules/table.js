@@ -38,7 +38,8 @@ var processRow = function(prevColumns) {
 			if(last) {
 				last.rowSpanCount++;
 				$tw.utils.addAttributeToParseTreeNode(last.element,"rowspan",last.rowSpanCount);
-				$tw.utils.addAttributeToParseTreeNode(last.element,"valign","center");
+				var vAlign = $tw.utils.getAttributeValueFromParseTreeNode(last.element,"valign","center");
+				$tw.utils.addAttributeToParseTreeNode(last.element,"valign",vAlign);
 				if(colSpanCount > 1) {
 					$tw.utils.addAttributeToParseTreeNode(last.element,"colspan",colSpanCount);
 					colSpanCount = 1;
@@ -51,9 +52,20 @@ var processRow = function(prevColumns) {
 			colSpanCount++;
 			// Move to just before the `|` terminating the cell
 			this.parser.pos = cellRegExp.lastIndex - 1;
+		} else if(cellMatch[1] === "<" && prevCell) {
+			colSpanCount = 1+$tw.utils.getAttributeValueFromParseTreeNode(prevCell, "colspan", 1);
+			$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
+			colSpanCount = 1;
+			// Move to just before the `|` terminating the cell
+			this.parser.pos = cellRegExp.lastIndex - 1;
 		} else if(cellMatch[2]) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
+				try {
+					colSpanCount+= prevCell.attributes.colspan.value;
+				} catch (e) {
+					colSpanCount-= 1;
+				}
 				$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			}
 			this.parser.pos = cellRegExp.lastIndex - 1;
@@ -64,6 +76,16 @@ var processRow = function(prevColumns) {
 			// Look for a space at the start of the cell
 			var spaceLeft = false,
 				chr = this.parser.source.substr(this.parser.pos,1);
+			var vAlign = null;
+			if (chr === "^") {
+				vAlign = "top";
+			} else if(chr === ",") {
+				vAlign = "bottom";
+			}
+			if(vAlign) {
+				this.parser.pos++;
+				chr = this.parser.source.substr(this.parser.pos,1);
+			}
 			while(chr === " ") {
 				spaceLeft = true;
 				this.parser.pos++;
@@ -89,7 +111,10 @@ var processRow = function(prevColumns) {
 			// Parse the cell
 			cell.children = this.parser.parseInlineRun(cellTermRegExp,{eatTerminator: true});
 			// Set the alignment for the cell
-			if(cellMatch[1].substr(cellMatch[1].length-1,1) === " ") { // spaceRight
+			if(vAlign) {
+				$tw.utils.addAttributeToParseTreeNode(cell,"valign",vAlign);
+			}
+			if(this.parser.source.substr(this.parser.pos-2,1) === " ") { // spaceRight
 				$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 			} else if(spaceLeft) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
