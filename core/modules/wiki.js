@@ -305,20 +305,26 @@ Sort an array of tiddler titles by a specified field
 	isDescending: true if the sort should be descending
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
-exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive) {
+exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
 		if(sortField !== "title") {
 			a = self.getTiddler(a).fields[sortField] || "";
 			b = self.getTiddler(b).fields[sortField] || "";
 		}
-		if(!isCaseSensitive) {
-			if(typeof a === "string") {
-				a = a.toLowerCase();
+		if (!isNumeric || isNaN(a) || isNaN(b)) {
+			if(!isCaseSensitive) {
+				if(typeof a === "string") {
+					a = a.toLowerCase();
+				}
+				if(typeof b === "string") {
+					b = b.toLowerCase();
+				}
 			}
-			if(typeof b === "string") {
-				b = b.toLowerCase();
-			}
+		}
+		else {
+			a-= 0;
+			b-= 0;
 		}
 		if(a < b) {
 			return isDescending ? +1 : -1;
