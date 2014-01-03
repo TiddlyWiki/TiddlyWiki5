@@ -61,6 +61,12 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''first'': selects the first tiddler of the list (or the first n if the operand is n)
 * ''last'': selects the last tiddler of the list (or the last n if the operand is n)
 * ''rest'': selects all but the first tiddler of the list (or all but the first n if the operand is n)
+* ''butfirst'': synonym for ''rest''
+* ''bf'': another synonym for ''rest''
+* ''butlast'': selects all but the last tiddler of the list (or all but the last n if the operand is n)
+* ''bl'': another synonym for ''butlast''
+* ''nth'': selects the n-th tiddler of the list. Defaults to n = 1.
+
 
 An operator can be negated with by preceding it with `!`, for example `[!tag[Tommy]]` selects the tiddlers that are not tagged with `Tommy`.
 

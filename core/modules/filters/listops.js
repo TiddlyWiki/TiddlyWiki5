@@ -76,4 +76,41 @@ exports.rest = function(source,operator,options) {
 	return results;
 };
 
+exports.butfirst = exports.rest;
+exports.bf = exports.rest;
+
+exports.butlast = function(source,operator,options) {
+	var results = [];
+	var count = operator.operand || 1;
+	// Iterate through the source tiddlers
+	if($tw.utils.isArray(source)) {
+		results = source.slice(0,-count);
+	} else {
+		for(var title in source) {
+			results.push(title);
+		};
+		results = results.slice(0,-count);
+	}
+	return results;
+};
+exports.bl = exports.butlast;
+
+exports.nth = function(source,operator,options) {
+	var results = [];
+	var count = operator.operand || 1;
+	// Iterate through the source tiddlers
+	if($tw.utils.isArray(source)) {
+		results = source.slice(count-1,count);
+	} else {
+		for(var title in source) {
+			--count;
+			if(count > 0) continue;
+			if(count < 0) break;
+			results.push(title);
+			break;
+		};
+	}
+	return results;
+};
+
 })();
