@@ -1,5 +1,5 @@
 created: 20131228164411884
-modified: 20140101174018406
+modified: 20140103164959903
 tags: releasenote
 title: Release 5.0.6-beta
 type: text/vnd.tiddlywiki
@@ -9,6 +9,7 @@ type: text/vnd.tiddlywiki
 !! Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/324]] support for numeric sorting to TiddlerFilters (thanks to StephanHradek)
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/pull/321]] [[Tables in WikiText]] to allow for vertical alignment of cells (thanks to StephanHradek)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/87fbd988f1fb0164411af190adfe6b6a2404eef3]] experimental support for running [[TiddlyWiki on node-webkit]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3d79eb87d1c609195b8c518c08e167994b20a346]] an [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bd7db62da052ec6262c3319eaa11f00e5c452a7b]] support for specifying hostname for the ServerCommand

@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20131211145629137
+modified: 20140103170732095
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -12,27 +12,36 @@ During the beta TiddlyWiki will be practical for cautious everyday use but as we
 
 The following additional features are planned or under consideration for implementation during the beta:
 
-* Warning when attempting to close window without saving
-* Use browser local storage to preserve changes in case browser crashes before saving/sync
-* Automatic saving for saver modules that can support it
-* Multilanguage support
-* Aliases
-* Search and replace
-* Tiddler renaming
-* Rich link tooltips, incorporating a preview
-* Keyboard shortcuts
-* Keyboard snippet expansion in the text editor
-* Proper use of ARIA roles
-* Import wizard allowing individual tiddlers to be selected for import
-* `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
-* Further WikiText features
-* Integration with the browser back and forwards buttons
-* Syntax highlighter plugin
-* List editor with drag and drop
-* Selective/weighted searching by title, body and fields
-* Maths notation
-* A "safe mode" to disable customisations
-* Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
+* Features affecting user data integrity
+** Warning when attempting to close window without saving
+** Use browser local storage to preserve changes in case browser crashes before saving/sync
+** Automatic saving for saver modules that can support it
+* Features required for large scale adoption
+** Multilanguage support
+** Proper use of ARIA roles
+* Features required by TiddlyWiki hackers
+** Making plugins in the browser
+** Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
+** A "safe mode" to disable customisations
+* Fixing hangovers from TiddlyWikiClassic
+** TiddlyWiki file format (to avoid illegal attribute names)
+** Tiddler object format (to provide true polymorphism of field values)
+* Perfecting WikiText
+** `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
+** Further WikiText features
+* Productivity features
+** Import wizard allowing individual tiddlers to be selected for import
+** Aliases
+** Search and replace
+** Tiddler renaming
+** Rich link tooltips, incorporating a preview
+** Keyboard shortcuts
+** Keyboard snippet expansion in the text editor
+** Syntax highlighter plugin
+** Integration with the browser back and forwards buttons
+** List editor with drag and drop
+** Selective/weighted searching by title, body and fields
+** Maths notation
 
 ! General Release
 

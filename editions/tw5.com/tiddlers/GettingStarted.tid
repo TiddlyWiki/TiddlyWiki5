@@ -1,10 +1,10 @@
 created: 20131129090249275
-modified: 20140101180801947
+modified: 20140103165133720
 tags: introduction
 title: GettingStarted
 type: text/vnd.tiddlywiki
 
-TiddlyWiki is highly flexible, and there are many different ways to use it. Here we're focusing on using it as a standalone file in the browser, which is a good choice for most users as it doesn't require any special knowledge or tools. For more options you can also run [[TiddlyWiki on Node.js]].
+TiddlyWiki is very flexible, and there are many different ways to use it. Here we're focusing on using it as a standalone file in the browser, which is a good choice for most users as it doesn't require any special knowledge or tools. For more options you can also run [[TiddlyWiki on Node.js]].
 
 [[Video Tutorials]] are available, too.
 
