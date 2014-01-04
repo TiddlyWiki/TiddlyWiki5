@@ -1,5 +1,5 @@
 created: 20131206172428247
-modified: 20131206172436204
+modified: 20140104135043382
 tags: howto
 title: Video Tutorials
 type: text/vnd.tiddlywiki
@@ -8,6 +8,8 @@ The aim is to curate a series of videos to guide people through getting up and r
 
 ! Getting Started
 
-This brief tutorial takes you through the basics of saving changes with a standalone TiddlyWiki5 file.
+{{Getting Started Video}}
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/1g66s7UbyuU" frameborder="0" allowfullscreen></iframe>
+! Using TiddlyWiki on Firefox for Android
+
+{{TiddlyWiki on Firefox for Android Video}}
