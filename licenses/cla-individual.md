@@ -126,3 +126,5 @@ Stephan Hradek, @Skeeve, 2013/11/30
 Brian Shaver, @shakerlxxv, 2013/12/07
 
 Paul Bond, @willover, 2013/12/17
+
+João Bolila, @jbolila, 2014/01/05
