@@ -1,5 +1,5 @@
 created: 20131222152210279
-modified: 20131222153004673
+modified: 20140105163248574
 tags: definitions
 title: TiddlyWikiClassic
 type: text/vnd.tiddlywiki
@@ -7,3 +7,7 @@ type: text/vnd.tiddlywiki
 "~TiddlyWiki Classic" refers to versions prior to 5.0, when TiddlyWiki was completely rewritten from the ground up. TiddlyWiki Classic is still being maintained at:
 
 http://classic.tiddlywiki.com/
+
+MarioPietsch has started a site comparing the syntax and other changes between TiddlyWikiClassic and TiddlyWiki version 5:
+
+http://compare-tw2-tw5.tiddlyspace.com
