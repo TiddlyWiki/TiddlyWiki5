@@ -18,11 +18,11 @@ exports.types = {block: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\|(?:[^\n]*)\|(?:[fhck]?)\r?\n/mg;
+	this.matchRegExp = /^\|(?:[^\n]*)\|(?:[fhck]?)\r?(?:\n|$)/mg;
 };
 
 var processRow = function(prevColumns) {
-	var cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?\n)/mg,
+	var cellRegExp = /(?:\|([^\n\|]*)\|)|(\|[fhck]?\r?(?:\n|$))/mg,
 		cellTermRegExp = /((?:\x20*)\|)/mg,
 		tree = [],
 		col = 0,
@@ -53,7 +53,7 @@ var processRow = function(prevColumns) {
 			// Move to just before the `|` terminating the cell
 			this.parser.pos = cellRegExp.lastIndex - 1;
 		} else if(cellMatch[1] === "<" && prevCell) {
-			colSpanCount = 1+$tw.utils.getAttributeValueFromParseTreeNode(prevCell, "colspan", 1);
+			colSpanCount = 1 + $tw.utils.getAttributeValueFromParseTreeNode(prevCell,"colspan",1);
 			$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			colSpanCount = 1;
 			// Move to just before the `|` terminating the cell
@@ -61,10 +61,10 @@ var processRow = function(prevColumns) {
 		} else if(cellMatch[2]) {
 			// End of row
 			if(prevCell && colSpanCount > 1) {
-				try {
-					colSpanCount+= prevCell.attributes.colspan.value;
-				} catch (e) {
-					colSpanCount-= 1;
+				if(prevCell.attributes && prevCell.attributes && prevCell.attributes.colspan) {
+						colSpanCount += prevCell.attributes.colspan.value;
+				} else {
+					colSpanCount -= 1;
 				}
 				$tw.utils.addAttributeToParseTreeNode(prevCell,"colspan",colSpanCount);
 			}
@@ -74,18 +74,17 @@ var processRow = function(prevColumns) {
 			// For ordinary cells, step beyond the opening `|`
 			this.parser.pos++;
 			// Look for a space at the start of the cell
-			var spaceLeft = false,
-				chr = this.parser.source.substr(this.parser.pos,1);
+			var spaceLeft = false;
 			var vAlign = null;
-			if (chr === "^") {
+			if(this.parser.source.substr(this.parser.pos).search(/^\^([^\^]|\^\^)/) === 0) {
 				vAlign = "top";
-			} else if(chr === ",") {
+			} else if(this.parser.source.substr(this.parser.pos).search(/^,([^,]|,,)/) === 0) {
 				vAlign = "bottom";
 			}
 			if(vAlign) {
 				this.parser.pos++;
-				chr = this.parser.source.substr(this.parser.pos,1);
 			}
+			var chr = this.parser.source.substr(this.parser.pos,1);
 			while(chr === " ") {
 				spaceLeft = true;
 				this.parser.pos++;
@@ -114,7 +113,7 @@ var processRow = function(prevColumns) {
 			if(vAlign) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"valign",vAlign);
 			}
-			if(this.parser.source.substr(this.parser.pos-2,1) === " ") { // spaceRight
+			if(this.parser.source.substr(this.parser.pos - 2,1) === " ") { // spaceRight
 				$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 			} else if(spaceLeft) {
 				$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
@@ -132,8 +131,8 @@ var processRow = function(prevColumns) {
 exports.parse = function() {
 	var rowContainerTypes = {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 		table = {type: "element", tag: "table", children: []},
-		rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?\n/mg,
-		rowTermRegExp = /(\|(?:[fhck]?)\r?\n)/mg,
+		rowRegExp = /^\|([^\n]*)\|([fhck]?)\r?(?:\n|$)/mg,
+		rowTermRegExp = /(\|(?:[fhck]?)\r?(?:\n|$))/mg,
 		prevColumns = [],
 		currRowType,
 		rowContainer,
@@ -149,7 +148,7 @@ exports.parse = function() {
 			this.parser.pos = rowMatch.index + rowMatch[0].length;
 		} else {
 			// Otherwise, create a new row if this one is of a different type
-			if(rowType != currRowType) {
+			if(rowType !== currRowType) {
 				rowContainer = {type: "element", tag: rowContainerTypes[rowType], children: []};
 				table.children.push(rowContainer);
 				currRowType = rowType;
