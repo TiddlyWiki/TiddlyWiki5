@@ -1,0 +1,40 @@
+created: 20140107114355828
+modified: 20140107114636001
+tags: concepts
+title: TemplateTiddlers
+type: text/vnd.tiddlywiki
+
+A template tiddler is not in fact a type of tiddler, it is a role in which a tiddler can be used.
+
+When text is wikified there is the concept of the CurrentTiddler. Certain widgets (like the ViewWidget) can use the current tiddler implicitly. For example:
+
+```
+<$view tiddler="HelloThere" field="myfield"/> - displays the field "myfield" of the tiddler HelloThere
+<$view field="myfield"/> - displays the field "myfield" of the current tiddler
+```
+
+When the TranscludeWidget pulls in the content from another tiddler, by default it does not change the current tiddler, so the transcluded content behaves as if it were in the context of the transcluding tiddler.
+
+So, if we have a tiddler "A" that contains:
+
+```
+<$view field="myfield"/>
+```
+
+And then transclude it from a tiddler "B" like so:
+
+```
+My field value is: <$transclude tiddler="A"/>
+```
+
+The result will be that the field from the tiddler "B" is displayed; in other words, tiddler "A" is acting as a template for displaying information from tiddler "B".
+
+The TiddlerWidget is used to change the current tiddler. Consider a tiddler "C" containing:
+
+```
+<$tiddler tiddler="A"><$transclude tiddler="A"/></$tiddler>
+```
+
+It is still transcluding tiddler "A", but now it is also setting the current tiddler to "A". The result is therefore that the field "myfield" for tiddler "A" is displayed.
+
+The shorthand syntax for transcluding actually generates both a TiddlerWidget and a TranscludeWidget.
