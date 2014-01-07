@@ -908,7 +908,7 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 };
 
 $tw.Wiki.prototype.getTiddler = function(title) {
-	//if (typeof title === "undefined") return undefined; 
+	if (typeof title === "undefined") return undefined; 
 	var t = this.tiddlers[title];
 	if(t instanceof $tw.Tiddler) {
 		return t;
