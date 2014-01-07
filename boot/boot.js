@@ -908,6 +908,7 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 };
 
 $tw.Wiki.prototype.getTiddler = function(title) {
+	//if (typeof title === "undefined") return undefined; 
 	var t = this.tiddlers[title];
 	if(t instanceof $tw.Tiddler) {
 		return t;
@@ -1138,11 +1139,14 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
 		extensionInfo = $tw.config.fileExtensionInfo[ext],
 		type = extensionInfo ? extensionInfo.type : null,
-		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
-		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
-		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
-		metafile = filepath + ".meta",
-		metadata;
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null, 
+		data, tiddlers, metafile = filepath + ".meta", metadata;
+		
+	if (!typeInfo && !fs.existsSync(metafile)) return null; 
+			
+	data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8");
+	tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields);
+	metadata;
 	if(ext !== ".json" && tiddlers.length === 1 && fs.existsSync(metafile)) {
 		metadata = fs.readFileSync(metafile,"utf8");
 		if(metadata) {
@@ -1219,7 +1223,8 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
 					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp);
 					$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
-						pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
+						if (!!tiddlerFile)
+							pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
 					});
 				}
 			}
