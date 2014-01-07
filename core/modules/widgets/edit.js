@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/edit.js
 type: application/javascript
 module-type: widget
 
-Edit widget is a meta-widget chooses the appropriate actual editting widget 
+Edit widget is a meta-widget chooses the appropriate actual editting widget
 
 \*/
 (function(){
@@ -37,6 +37,7 @@ EditWidget.prototype.render = function(parent,nextSibling) {
 // TODO: This information should be configurable/extensible
 var editorTypeMappings = {
 	"text/vnd.tiddlywiki": "text",
+	"image/svg+xml": "text",
 	"text/html": "text",
 	"image/jpg": "bitmap",
 	"image/jpeg": "bitmap",
