@@ -2,11 +2,11 @@ title: $:/core/ui/SideBarLists
 
 <div class="tw-sidebar-lists">
 
-<$linkcatcher to="$:/temp/search">
 
-<div class="tw-search"><$edit-text tiddler="$:/temp/search" type="search" tag="input"/><$reveal state="$:/temp/search" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
-</$linkcatcher>
+<div class="tw-search"><$edit-text tiddler="$:/temp/search" type="search" tag="input"/> <$reveal state="$:/temp/search" type="nomatch" text=""><$linkcatcher to="$:/temp/search"><$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$linkcatcher></$reveal><$reveal state="$:/temp/search" type="match" text=""> &nbsp;<$link to="$:/AdvancedSearch" class="btn-invisible">...</$link></$reveal></div>
+
+
 
 <$reveal state="$:/temp/search" type="nomatch" text="">
 
