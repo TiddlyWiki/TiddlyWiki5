@@ -1,0 +1,7 @@
+created: 20130825144900000
+modified: 20140107114307809
+tags: concepts
+title: CurrentTiddler
+type: text/vnd.tiddlywiki
+
+The CurrentTiddler is the current tiddler during WikiText processing. A context tiddler is set by the TiddlerWidget. It allows you to write references like `<$view field="title" format="link"/>` in TemplateTiddlers without explicitly specifying the tiddler that it applies to.

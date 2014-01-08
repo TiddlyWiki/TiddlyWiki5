@@ -5,11 +5,11 @@ tags: [[$:/tags/stylesheet]]
 
 @media (min-width: 770px) {
 
-	.tw-page-container {
+	html .tw-page-container {
 		text-align: center;
 	}
 
-	.story-river {
+	html .story-river {
 		position: relative;
 		width: 770px;
 		padding: 42px;
@@ -17,7 +17,7 @@ tags: [[$:/tags/stylesheet]]
 		text-align: left;
 	}
 
-	.sidebar-header {
+	html .sidebar-header {
 		text-align: left;
 		left: 50%;
 		right: 0;

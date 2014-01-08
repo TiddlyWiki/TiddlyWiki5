@@ -1,5 +1,5 @@
 created: 20130827080000000
-modified: 20140101183713761
+modified: 20140107114229585
 tags: concepts
 title: TiddlerFilters
 type: text/vnd.tiddlywiki
@@ -69,7 +69,7 @@ The operands available with the `is` operator are:
 * ''tiddler'': selects all tiddlers excluding shadows, whether or not they are SystemTiddlers
 * ''system'': selects all SystemTiddlers
 * ''shadow'': selects all ShadowTiddlers
-* ''current'': selects the current ContextTiddler
+* ''current'': selects the CurrentTiddler
 * ''missing'': selects all MissingTiddlers
 * ''orphan'': selects all OrphanTiddlers
 
