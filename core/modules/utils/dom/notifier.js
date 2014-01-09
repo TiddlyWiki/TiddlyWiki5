@@ -67,13 +67,12 @@ Notifier.prototype.display = function(title,options) {
 			{opacity: "0.0"},
 			{transform: "translateX(" + (notification.offsetWidth) + "px)"}
 		]);
-		// Set up an event for the transition end
-		notification.addEventListener($tw.utils.convertEventName("transitionEnd"),function(event) {
+		// Remove the modal message from the DOM once the transition ends
+		setTimeout(function() {
 			if(notification.parentNode) {
-				// Remove the modal message from the DOM
 				document.body.removeChild(notification);
 			}
-		},false);
+		},duration);
 	},$tw.config.preferences.notificationDuration);
 };
 
