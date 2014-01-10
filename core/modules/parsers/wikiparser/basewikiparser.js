@@ -1,21 +1,9 @@
 /*\
 title: $:/core/modules/parsers/wikiparser/basewikiparser.js
 type: application/javascript
-module-type: parser
+module-type: global
 
-The wiki text parser processes blocks of source text into a parse tree.
-
-The parse tree is made up of nested arrays of these JavaScript objects:
-
-	{type: "element", tag: <string>, attributes: {}, children: []} - an HTML element
-	{type: "text", text: <string>} - a text node
-	{type: "entity", value: <string>} - an entity
-	{type: "raw", html: <string>} - raw HTML
-
-Attributes are stored as hashmaps of the following objects:
-
-	{type: "string", value: <string>} - literal string
-	{type: "indirect", textReference: <textReference>} - indirect through a text reference
+base class- individual wikiparser inherit from this class
 
 \*/
 (function(){

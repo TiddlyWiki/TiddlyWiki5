@@ -3,6 +3,8 @@ title: $:/core/modules/parsers/wikiparser/wikiparser.js
 type: application/javascript
 module-type: parser
 
+The full wiki text parser
+
 The wiki text parser processes blocks of source text into a parse tree.
 
 The parse tree is made up of nested arrays of these JavaScript objects:
@@ -16,6 +18,7 @@ Attributes are stored as hashmaps of the following objects:
 
 	{type: "string", value: <string>} - literal string
 	{type: "indirect", textReference: <textReference>} - indirect through a text reference
+
 
 \*/
 (function(){
