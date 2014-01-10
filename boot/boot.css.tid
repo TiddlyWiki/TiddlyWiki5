@@ -14,10 +14,10 @@ Error message and password prompt
 	z-index: 20000;
 	position: fixed;
 	text-align: center;
-	width: 480px;
+	width: 200px;
 	top: 4em;
     left: 50%;
-    margin-left: -264px; /* - width/2 - paddingHorz/2 - border */
+    margin-left: -144px; /* - width/2 - paddingHorz/2 - border */
 	padding: 16px 16px 16px 16px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
@@ -54,4 +54,5 @@ Error message and password prompt
 .tw-password-wrapper h1 {
 	font-size: 16px;
 	line-height: 20px;
+	padding-bottom: 16px;
 }
