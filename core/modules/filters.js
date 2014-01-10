@@ -52,12 +52,25 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.operator = "title";
 		}
 		// Get the operand
-		bracketPos = filterString.indexOf(operator.indirect ? "}" : "]",p);
-		if(bracketPos === -1) {
-			throw "Missing closing bracket in filter expression";
+		if(!operator.indirect && filterString.charAt(p) === "/") {
+			// regexp
+			var rex = /^\/((?:[^\\\/]*|\\.))*\/([igm]*)\]/g;
+			var rexMatch = rex.exec(filterString.substring(p));
+			if(!rexMatch) {
+				throw "Incomplete regular expression in filter expression";
+			}
+			operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
+			operator.operand = filterString.substr(p,rex.lastIndex-1);
+			p += rex.lastIndex;
 		}
-		operator.operand = filterString.substring(p,bracketPos);
-		p = bracketPos + 1;
+		else {
+			bracketPos = filterString.indexOf(operator.indirect ? "}" : "]",p);
+			if(bracketPos === -1) {
+				throw "Missing closing bracket in filter expression";
+			}
+			operator.operand = filterString.substring(p,bracketPos);
+			p = bracketPos + 1;
+		}
 		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
@@ -161,7 +174,8 @@ exports.compileFilter = function(filterString) {
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
 							operand: operand,
-							prefix: operator.prefix
+							prefix: operator.prefix,
+							regexp: operator.regexp
 						},{
 							wiki: self,
 							currTiddlerTitle: currTiddlerTitle
