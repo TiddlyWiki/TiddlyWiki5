@@ -1,5 +1,5 @@
 created: 20131101111400000
-modified: 20131230101537722
+modified: 20140110101537722
 tags: introduction
 title: Contributing
 type: text/vnd.tiddlywiki
@@ -33,7 +33,7 @@ There's a lot of good material on the web about bug reports:
 * http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
 * http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
 
-!! Pull Requests
+!! Contributor License Agreement
 
 Like other OpenSource projects, TiddlyWiki5 needs a signed contributor license agreement from individual contributors. This is a legal agreement that allows contributors  to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
 
@@ -44,22 +44,9 @@ Like other OpenSource projects, TiddlyWiki5 needs a signed contributor license a
 
 !!! How to sign the CLA
 
-```
-git clone https://github.com/Jermolene/TiddlyWiki5.git TiddlyWiki5
-cd TiddlyWiki5
-git checkout -b sign-cla
-```
+Create a GitHub pull request to add your name to `cla-individual.md` or `cla-entity.md`, with the date in the format (YYYY/MM/DD).
 
-''Add your name and the date to cla-individual.md or cla-entity.md''. Date format (YYYY/MM/DD)
 eg: `Jeremy Ruston, @Jermolene, 2011/11/22`
-
-```
-git add .
-git commit -m "sign contributor license agreement"
-git push origin sign-cla
-```
-
-''Go to your github repo and create a pull request.''
 
 ''Thank you!''
 
