@@ -18,4 +18,11 @@ The built-in TiddlySpot saver can also be used to save changes to a simple PHP s
 # In TiddlyWiki, go to the ''Saving'' tab of the control panel and enter the following information:
 #* Your username as the wiki name
 #* Your password
-#* The URL of the ''store.php'' file
+#* The URL of the ''store.php'' file (//''not'' the URL of the wiki, this must the full URL to the ''store.php'' file)
+
+! Hosting multiple TiddlyWiki documents on the same domain
+
+Additional steps are needed to enable you to work with multiple TiddlyWiki documents each in their own folder on the server.
+
+# A directory for each TiddlyWiki (''store.php'' currently stores the TiddlyWiki as ''index.html'')
+# Place a copy of ''store.php'' in each directory
