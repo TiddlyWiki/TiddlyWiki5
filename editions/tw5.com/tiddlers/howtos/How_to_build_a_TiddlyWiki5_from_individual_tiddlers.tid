@@ -1,5 +1,5 @@
 created: 20131124220600000
-modified: 20140111095008013
+modified: 20140111102136779
 tags: howto
 title: How to build a TiddlyWiki5 from individual tiddlers
 type: text/vnd.tiddlywiki
@@ -8,7 +8,8 @@ First install TiddlyWiki as described in [[Installing TiddlyWiki on Node.js]].
 
 # Create an empty [[TiddlyWikiFolder|TiddlyWikiFolders]]
 ## Create a new folder in a convenient place (for example `~/MyWiki`)
-## Create a file called `tiddlywiki.info` containing just a pair of braces: `{}`
+## Create a file called `tiddlywiki.info` containing the following text:
+##* `{"themes": ["tiddlywiki/vanilla","tiddlywiki/snowwhite"]}`
 ## Create a subfolder called `tiddlers`
 ##* Alternatively, just copy the `editions/empty` folder from the TiddlyWiki5 repo
 # Create individual TiddlerFiles in the `~/MyWiki/tiddlers` directory
