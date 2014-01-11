@@ -1,0 +1,21 @@
+created: 20140111091844267
+modified: 20140111093905918
+tags: howto
+title: Saving on a PHP Server
+type: text/vnd.tiddlywiki
+
+The built-in TiddlySpot saver can also be used to save changes to a simple PHP script that you can run on most hosting providers.
+
+//These are preliminary instructions that need verification//
+
+# Download a copy of ''store.php'' from:
+#* https://code.google.com/p/bidix/source/browse/trunk/TiddlyHome/_th/lib/store.php
+# Edit your copy of ''store.php'' to add your username(s) and password(s). Find the line `$USERS = array( 'UserName1'=>'Password1', etc)` and replace Username1 and Password1 with your desired username and password
+#* Make sure you leave all the punctuation and code, such as the single quotes, intact
+# Save the file
+# Using FTP or your web interface, upload ''store.php'' to your server. Make sure that the filename is correct
+#* If you've uploaded the file correctly you should be able to view it in your browser (eg, http://example.com/store.php)
+# In TiddlyWiki, go to the ''Saving'' tab of the control panel and enter the following information:
+#* Your username as the wiki name
+#* Your password
+#* The URL of the ''store.php'' file
