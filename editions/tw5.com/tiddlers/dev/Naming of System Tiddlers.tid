@@ -1,0 +1,34 @@
+created: 20140112190154121
+modified: 20140112190154121
+tags: dev
+title: Naming of System Tiddlers
+type: text/vnd.tiddlywiki
+
+The system tiddlers provided as part of the core are named according to the following rules:
+
+|!Namespace |!Format |!Description |
+|`$:/*` |~CamelCase |Root user interface tiddlers (eg control panel, advanced search) |
+|`$:/config/*` |~CamelCase |User-oriented configuration setting |
+|`$:/core/images/*` |hyphen-case |Core images |
+|`$:/core/modules/*` |lowercase |JavaScript module tiddlers |
+|`$:/core/save/*` |lowercase |Saving templates for creating TiddlyWiki documents |
+|`$:/core/templates/*` |//inconsistent// |Templates needed for TiddlyWiki to operate. Currently uses a mix of dashes and periods to separate words |
+|`$:/core/ui/*` |//inconsistent// |Tiddlers comprising the default user interface of TiddlyWiki. Currently uses a mix of ~CamelCase and lowercase naming conventions |
+|`$:/core/wiki/*` |lowercase |Metadata about the entire wiki |
+|`$:/docs/*` |lowercase |Documentation tiddlers |
+|`$:/messages/*` |~CamelCase |System messages |
+|`$:/plugins/*` |lowercase |Plugin tiddlers, and plugin content |
+|`$:/snippets/*` |//inconsistent// |Reusable snippets (will be replaced by macros) |
+|`$:/state/*` |lowercase |User interface state tiddlers |
+|`$:/tags/*` |~CamelCase |User interface configuration tags (currently `$:/tags/stylesheet` is inconsistent) |
+|`$:/temp/*` |lowercase |Temporary tiddlers that shouldn't be saved |
+|`$:/themes/*` |lowercase |Theme plugins |
+
+The tiddler `$:/view` is inconsistently named and should be renamed `$:/config/View`
+
+In the format column:
+
+* ''hyphen-case'' refers to joining multiple lowercase words with hyphens
+* ''~CamelCase'' refers to joining mulitple initial capitaled words with hyphens
+* ''lowercase'' refers to directly joining multiple lowercase words
+* ''inconsistent'' marks namespaces that are currently titled inconsistently
