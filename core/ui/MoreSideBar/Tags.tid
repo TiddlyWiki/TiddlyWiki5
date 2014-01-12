@@ -2,7 +2,7 @@ title: $:/core/ui/MoreSideBar/Tags
 tags: $:/tags/MoreSideBar
 caption: Tags
 
-<$list filter="[tags[]sort[title]]" itemClass="tw-menu-list-item">
+<$list filter="[tags[]sort[title]]">
 <$transclude tiddler="$:/core/ui/TagTemplate"/> <small class="tw-menu-list-count"><$count filter="[is[current]tagging[]]"/></small>
 </$list>
 ----

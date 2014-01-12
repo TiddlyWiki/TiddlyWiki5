@@ -2,7 +2,7 @@ title: $:/core/ui/SideBar/Open
 tags: $:/tags/SideBar
 caption: Open
 
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop" itemClass="tw-menu-list-item tw-open-tiddler-list">
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 </$list>
 <$button message="tw-close-all-tiddlers" class="btn-invisible btn-mini">close all</$button>

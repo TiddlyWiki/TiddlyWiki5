@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Missing
 tags: $:/tags/MoreSideBar
 caption: Missing
 
-<$list filter="[is[missing]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/MissingTemplate"/>
+<$list filter="[is[missing]sort[title]]" template="$:/core/ui/MissingTemplate"/>

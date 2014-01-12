@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Shadows
 tags: $:/tags/MoreSideBar
 caption: Shadows
 
-<$list filter="[is[shadow]sort[title]]" itemClass="tw-menu-list-item" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[is[shadow]sort[title]]" template="$:/core/ui/ListItemTemplate"/>

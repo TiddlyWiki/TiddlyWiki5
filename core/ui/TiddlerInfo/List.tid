@@ -2,4 +2,4 @@ title: $:/core/ui/TiddlerInfo/List
 tags: $:/tags/TiddlerInfo
 caption: List
 
-<$list filter="[list{!!title}]" itemClass="tw-menu-list-item" emptyMessage="This tiddler does not have a list" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[list{!!title}]" emptyMessage="This tiddler does not have a list" template="$:/core/ui/ListItemTemplate"/>

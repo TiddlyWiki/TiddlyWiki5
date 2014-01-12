@@ -27,7 +27,7 @@ The [[$:/StoryList]] tiddler is an example of a StateTiddler: a tiddler that is 
 Note how this approach makes the ''open'' tab in the sidebar very easy to implement: it is just another list widget referencing the same state tiddler, but with a different template:
 
 ```
-<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop" itemClass="tw-menu-list-item tw-open-tiddler-list">
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 </$list>
 ```

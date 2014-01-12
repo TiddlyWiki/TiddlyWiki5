@@ -2,4 +2,4 @@ title: $:/core/ui/TiddlerInfo/Listed
 tags: $:/tags/TiddlerInfo
 caption: Listed
 
-<$list filter="[is[current]listed[]!is[system]]" itemClass="tw-menu-list-item" emptyMessage="This tiddler is not listed by any others" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[is[current]listed[]!is[system]]" emptyMessage="This tiddler is not listed by any others" template="$:/core/ui/ListItemTemplate"/>

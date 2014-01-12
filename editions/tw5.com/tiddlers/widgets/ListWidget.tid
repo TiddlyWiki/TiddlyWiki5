@@ -70,10 +70,10 @@ The outer list filter selects each discrete value found in the `type` field. The
 The ''recent'' listing is performed with this markup:
 
 ```
-<$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]" itemClass="tw-menu-list-item">
+<$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
 <div class="tw-menu-list-item">
 <$view field="modified" format="date" template="DDth MMM YYYY"/>
-<$list filter="[sameday{!!modified}!is[system]!sort[modified]]" itemClass="tw-menu-list-subitem">
+<$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
 <div class="tw-menu-list-subitem">
 <$link to={{!!title}}><$view field="title"/></$link>
 </div>
