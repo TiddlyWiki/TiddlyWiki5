@@ -24,7 +24,8 @@ Multiline comments are used to introduce a block of code such as a function defi
 function demoFunction(param,more) {
 	// Proper sentence capitalisation for comments
 	if(condition == "something") {
-		// No space between "if" and the brackets; always spaces around operators
+		// No space between "if" and the brackets; always spaces around binary operators
+		something = somethingElse;
 		myOtherFunction(one,two); // No whitespace within function parameters
 		do {
 			myCondition.explore(); // Always use semicolons
