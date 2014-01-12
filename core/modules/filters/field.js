@@ -21,12 +21,13 @@ exports.field = function(source,operator,options) {
 	function checkTiddler(title) {
 		var tiddler = options.wiki.getTiddler(title);
 		if(tiddler) {
-			var match;
+			var match,
+				text = tiddler.getFieldString(operator.operator.replace(/:$/, ""));
 			if(operator.regexp) {
-				match = !! operator.regexp.exec(tiddler.getFieldString(operator.operator));
+				match = !! operator.regexp.exec(text);
 			}
 			else {
-				match = tiddler.getFieldString(operator.operator) === operator.operand;
+				match = text === operator.operand;
 			}
 			if(operator.prefix === "!") {
 				match = !match;
