@@ -204,10 +204,12 @@ exports.addTiddler = function(tiddler) {
 	// Get the title
 	var title = tiddler.fields.title;
 	// Save the tiddler
-	this.tiddlers[title] = tiddler;
-	this.clearCache(title);
-	this.clearGlobalCache();
-	this.enqueueTiddlerEvent(title);
+	if(title) {
+		this.tiddlers[title] = tiddler;
+		this.clearCache(title);
+		this.clearGlobalCache();
+		this.enqueueTiddlerEvent(title);
+	}
 };
 
 /*

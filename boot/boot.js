@@ -779,7 +779,9 @@ $tw.Wiki.prototype.addTiddler = function(tiddler) {
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
 	}
-	this.tiddlers[tiddler.fields.title] = tiddler;
+	if(tiddler.fields.title) {
+		this.tiddlers[tiddler.fields.title] = tiddler;
+	}
 };
 
 $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
@@ -859,10 +861,12 @@ $tw.Wiki.prototype.unpackPluginTiddlers = function() {
 		// Extract the constituent tiddlers
 		$tw.utils.each(pluginInfo.tiddlers,function(constituentTiddler,constituentTitle) {
 			// Save the tiddler object
-			self.shadowTiddlers[constituentTitle] = {
-				source: tiddler.fields.title,
-				tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-			};
+			if(constituentTitle) {
+				self.shadowTiddlers[constituentTitle] = {
+					source: tiddler.fields.title,
+					tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+				};
+			}
 		});
 	});
 };
@@ -911,7 +915,7 @@ $tw.Wiki.prototype.getTiddler = function(title) {
 	var t = this.tiddlers[title];
 	if(t instanceof $tw.Tiddler) {
 		return t;
-	} else if($tw.utils.hop(this.shadowTiddlers,title)) {
+	} else if(title !== undefined && $tw.utils.hop(this.shadowTiddlers,title)) {
 		return this.shadowTiddlers[title].tiddler;
 	} else {
 		return undefined;
@@ -1226,7 +1230,9 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 			// Save the plugin tiddlers into the plugin info
 			pluginInfo.tiddlers = pluginInfo.tiddlers || {};
 			for(t=0; t<pluginTiddlers.length; t++) {
-				pluginInfo.tiddlers[pluginTiddlers[t].title] = pluginTiddlers[t];
+				if(pluginTiddlers[t].title) {
+					pluginInfo.tiddlers[pluginTiddlers[t].title] = pluginTiddlers[t];
+				}
 			}
 		}
 	}
