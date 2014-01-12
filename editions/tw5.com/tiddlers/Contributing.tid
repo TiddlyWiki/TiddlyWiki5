@@ -1,10 +1,14 @@
 created: 20131101111400000
-modified: 20140110101537722
+modified: 20140112164329806
 tags: introduction
 title: Contributing
 type: text/vnd.tiddlywiki
 
 TiddlyWiki5 welcomes contributions to its code and documentation via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]. Please take a moment to read these notes to help make the process as smooth as possible.
+
+!! Coding Style
+
+Code contributions should follow the [[TiddlyWiki Coding Style Guidelines]].
 
 !! GitHub Issues
 
