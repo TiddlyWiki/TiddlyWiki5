@@ -13,21 +13,21 @@ Extend the edit-text widget to use CodeMirror
 "use strict";
 
 var CODEMIRROR_KEYMAP = "$:/CodeMirrorKeymap",
-		mode, modesAllowed = /^(vim|emacs)$/i;
+		kbinding, kbindingsAllowed = /^(vim|emacs)$/i;
 
 var EditTextWidget = require("$:/core/modules/widgets/edit-text.js")["edit-text"];
 
 if($tw.browser) {
 	require("$:/plugins/tiddlywiki/codemirror/codemirror.js");
-	mode = ($tw.wiki.getTiddlerText(CODEMIRROR_KEYMAP) || '').match(modesAllowed);
-	if (mode) {
+	kbinding = ($tw.wiki.getTiddlerText(CODEMIRROR_KEYMAP) || '').match(kbindingsAllowed);
+	if (kbinding) {
 		require("$:/plugins/tiddlywiki/codemirror/addon/dialog.js");
 		require("$:/plugins/tiddlywiki/codemirror/addon/searchcursor.js");
-		if (mode[0].toLowerCase() === 'emacs') {
+		if (kbinding[0].toLowerCase() === 'emacs') {
 			require("$:/plugins/tiddlywiki/codemirror/keymap/emacs.js");
 			EditTextWidget._codemirrorMode = 'emacs';
 		}
-		else {
+		else if (kbinding[0].toLowerCase() === 'vim') {
 			require("$:/plugins/tiddlywiki/codemirror/keymap/vim.js");
 			EditTextWidget._codemirrorMode = 'vim';
 		}
