@@ -19,7 +19,7 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 						lang = this.domNodes[0].getElementsByTagName('code')[0].className,
 						hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js").hljs;
 
-				if ($tw.browser && lang !== 'no-highlight') {
+				if($tw.browser && lang !== 'no-highlight') {
 						hljs.tabReplace = '    ';
 						hljs.highlightBlock(this.domNodes[0]);
 				}

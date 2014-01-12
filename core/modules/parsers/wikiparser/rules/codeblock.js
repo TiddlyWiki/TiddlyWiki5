@@ -49,8 +49,8 @@ exports.parse = function() {
 			type: "element",
 			tag: "$codeblock",
 			attributes: {
-					code: {tye: "string", value: text},
-					language: {tye: "string", value: this.match[1]}
+					code: {type: "string", value: text},
+					language: {type: "string", value: this.match[1]}
 			}
 	}];
 };

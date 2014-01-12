@@ -31,7 +31,7 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	var codeNode = this.document.createElement("code");
-	if (this.getAttribute("language")) {
+	if(this.getAttribute("language")) {
 		codeNode.setAttribute("class",this.getAttribute("language"));
 	}
 	var domNode = this.document.createElement("pre");

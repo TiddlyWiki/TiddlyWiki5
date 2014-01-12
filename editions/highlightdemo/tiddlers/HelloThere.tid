@@ -10,4 +10,4 @@ To add the plugin to your own TiddlyWiki5, just drag this link to the browser wi
 
 To add your prefered [[theme|http://highlightjs.org/static/test.html]] append to your:
 
-[[$:/boot/boot.css]]
+[[$:/tags/stylesheet]]
