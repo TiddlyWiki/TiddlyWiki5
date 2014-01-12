@@ -20,14 +20,14 @@ var EditTextWidget = require("$:/core/modules/widgets/edit-text.js")["edit-text"
 if($tw.browser) {
 	require("$:/plugins/tiddlywiki/codemirror/codemirror.js");
 	kbinding = ($tw.wiki.getTiddlerText(CODEMIRROR_KEYMAP) || '').match(kbindingsAllowed);
-	if (kbinding) {
+	if(kbinding) {
 		require("$:/plugins/tiddlywiki/codemirror/addon/dialog.js");
 		require("$:/plugins/tiddlywiki/codemirror/addon/searchcursor.js");
-		if (kbinding[0].toLowerCase() === 'emacs') {
+		if(kbinding[0].toLowerCase() === 'emacs') {
 			require("$:/plugins/tiddlywiki/codemirror/keymap/emacs.js");
 			EditTextWidget._codemirrorMode = 'emacs';
 		}
-		else if (kbinding[0].toLowerCase() === 'vim') {
+		else if(kbinding[0].toLowerCase() === 'vim') {
 			require("$:/plugins/tiddlywiki/codemirror/keymap/vim.js");
 			EditTextWidget._codemirrorMode = 'vim';
 		}
@@ -44,7 +44,7 @@ EditTextWidget.prototype.postRender = function() {
 			lineNumbers: true
 		};
 	if($tw.browser && window.CodeMirror && this.editTag === "textarea") {
-		if (EditTextWidget._codemirrorMode) {
+		if(EditTextWidget._codemirrorMode) {
 			cm_opts["keyMap"] = EditTextWidget._codemirrorMode;
 			cm_opts["showCursorWhenSelecting"] = true;
 		}
