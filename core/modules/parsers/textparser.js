@@ -28,6 +28,7 @@ exports["text/x-tiddlywiki"] = TextParser;
 exports["application/javascript"] = TextParser;
 exports["application/json"] = TextParser;
 exports["text/css"] = TextParser;
+exports["application/x-tiddler-dictionary"] = TextParser;
 
 })();
 
