@@ -42,7 +42,7 @@ title: $:/core/templates/tiddlywiki5.html
 <div id="bootKernelPrefix" style="display:none;">
 {{ $:/boot/bootprefix.js ||$:/core/templates/javascript-tiddler}}
 </div>
-<!--~~ Plugin modules ~~-->
+<!--~~ Static modules ~~-->
 <div id="modules" style="display:none;">
 {{{ [is[system]type[application/javascript]has[module-type]] ||$:/core/templates/module-tiddler}}}
 </div>
