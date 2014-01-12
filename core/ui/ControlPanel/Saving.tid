@@ -16,7 +16,14 @@ http://$(userName)$.tiddlyspot.com/backup/
 
 |[[Wiki name|$:/UploadName]] |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
 |Password |<$password name="upload"/> |
-|Server URL |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
 |Backups |<<backupLink>> |
+
+!! Advanced settings
+
+|Server URL |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
+|Upload filename |<$edit-text tiddler="$:/UploadFilename" default="index.html" tag="input"/> |
+|Upload directory |<$edit-text tiddler="$:/UploadDir" default="." tag="input"/> |
+|Backup directory |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
+
 
 //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//

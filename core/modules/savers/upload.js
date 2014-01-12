@@ -27,10 +27,11 @@ UploadSaver.prototype.save = function(text,method,callback) {
 		return false;
 	}
 	// Get the various parameters we need
-	var backupDir = ".",
+	var backupDir = this.wiki.getTextReference("$:/UploadBackupDir") || ".",
 		username = this.wiki.getTextReference("$:/UploadName"),
 		password = $tw.utils.getPassword("upload"),
-		uploadDir = ".",
+		uploadDir = this.wiki.getTextReference("$:/UploadDir") || ".",
+		uploadFilename = this.wiki.getTextReference("$:/UploadFilename") || "index.html",
 		url = this.wiki.getTextReference("$:/UploadURL");
 	// Bail out if we don't have the bits we need
 	if(!username || username.toString().trim() === "" || !password || password.toString().trim() === "") {
@@ -47,7 +48,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	head.push("--" + boundary + "\r\nContent-disposition: form-data; name=\"UploadPlugin\"\r\n");
 	head.push("backupDir=" + backupDir + ";user=" + username + ";password=" + password + ";uploaddir=" + uploadDir + ";;"); 
 	head.push("\r\n" + "--" + boundary);
-	head.push("Content-disposition: form-data; name=\"userfile\"; filename=\"index.html\"");
+	head.push("Content-disposition: form-data; name=\"userfile\"; filename=\"" + uploadFilename + "\"");
 	head.push("Content-Type: text/html;charset=UTF-8");
 	head.push("Content-Length: " + text.length + "\r\n");
 	head.push("");
@@ -60,7 +61,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	http.setRequestHeader("Content-Type","multipart/form-data; ;charset=UTF-8; boundary=" + boundary);
 	http.onreadystatechange = function() {
 		if(http.readyState == 4 && http.status == 200) {
-			if(http.responseText.trim() === "0 - Fileindex.html") {
+			if(http.responseText.substr(0,4) === "0 - ") {
 				callback(null);
 			} else {
 				callback(http.responseText);
