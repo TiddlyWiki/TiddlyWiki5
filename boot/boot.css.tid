@@ -29,6 +29,8 @@ Error message and password prompt
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 	background-color: rgb(255, 75, 75);
 	border: 8px solid rgb(255, 0, 0);
+	width: 480px;
+    margin-left: -244px; /* - width/2 - paddingHorz/2 - border */
 }
 
 .tw-error-form div {
