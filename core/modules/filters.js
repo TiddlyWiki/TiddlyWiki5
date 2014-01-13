@@ -51,19 +51,24 @@ function parseFilterOperation(operators,filterString,p) {
 		if(operator.operator === "") {
 			operator.operator = "title";
 		}
-		// Get the operand
+		var rexMatch;
+		// regexp?
 		if(!operator.indirect && filterString.charAt(p) === "/") {
-			// regexp
 			var rex = /^\/((?:[^\\\/]*|\\.))*\/([igm]*)\]/g;
-			var rexMatch = rex.exec(filterString.substring(p));
-			if(!rexMatch) {
-				throw "Incomplete regular expression in filter expression";
+			rexMatch = rex.exec(filterString.substring(p));
+			if(rexMatch) {
+				try {
+					operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
+				}
+				catch(e) {
+					// an error in the regexp -> Will do string matching
+				}
+				operator.operand = filterString.substr(p,rex.lastIndex-1);
+				p += rex.lastIndex;
 			}
-			operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-			operator.operand = filterString.substr(p,rex.lastIndex-1);
-			p += rex.lastIndex;
 		}
-		else {
+		// Get the operand
+		if(!rexMatch) {
 			bracketPos = filterString.indexOf(operator.indirect ? "}" : "]",p);
 			if(bracketPos === -1) {
 				throw "Missing closing bracket in filter expression";
