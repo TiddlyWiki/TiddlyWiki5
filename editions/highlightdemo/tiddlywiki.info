@@ -1,0 +1,13 @@
+{
+	"plugins": [
+		"tiddlywiki/highlight"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"doNotSave": [
+	],
+	"includeWikis": [
+	]
+}

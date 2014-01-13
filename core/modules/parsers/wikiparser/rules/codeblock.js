@@ -23,14 +23,15 @@ exports.types = {block: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	// Regexp to match
-	this.matchRegExp = /```\r?\n/mg;
+	// Regexp to match and get language if defined
+	this.matchRegExp = /```([\w-]*)\r?\n/mg;
 };
 
 exports.parse = function() {
 	var reEnd = /(\r?\n```$)/mg;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
+
 	// Look for the end of the block
 	reEnd.lastIndex = this.parser.pos;
 	var match = reEnd.exec(this.parser.source),
@@ -43,14 +44,14 @@ exports.parse = function() {
 		text = this.parser.source.substr(this.parser.pos);
 		this.parser.pos = this.parser.sourceLength;
 	}
-	// Return the pre element
+	// Return the $codeblock widget
 	return [{
-		type: "element",
-		tag: "pre",
-		children: [{
-			type: "text",
-			text: text
-		}]
+			type: "element",
+			tag: "$codeblock",
+			attributes: {
+					code: {type: "string", value: text},
+					language: {type: "string", value: this.match[1]}
+			}
 	}];
 };
 
