@@ -265,7 +265,7 @@ Command.prototype.execute = function() {
 		serveType = this.params[3] || "text/html",
 		username = this.params[4],
 		password = this.params[5],
-		host = this.params[6];
+		host = this.params[6] || "127.0.0.1";
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
