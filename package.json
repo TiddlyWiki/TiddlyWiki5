@@ -13,7 +13,7 @@
   "bin": {
     "tiddlywiki": "./tiddlywiki.js"
   },
-  "main": "./core/boot.js",
+  "main": "./boot/boot.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Jermolene/TiddlyWiki5.git"
