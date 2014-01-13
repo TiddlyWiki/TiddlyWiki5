@@ -128,3 +128,5 @@ Brian Shaver, @shakerlxxv, 2013/12/07
 Paul Bond, @willover, 2013/12/17
 
 João Bolila, @jbolila, 2014/01/05
+
+Chris Sugden, @csugden, 2014/01/13
