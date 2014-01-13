@@ -89,6 +89,8 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/markdowndemo.html text/plain \
 	|| exit 1
 
+# highlightdemo.html: wiki to demo highlight plugin
+
 node ./tiddlywiki.js \
 	./editions/highlightdemo \
 	--verbose \

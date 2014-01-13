@@ -89,6 +89,14 @@ node .\tiddlywiki.js ^
 	|| exit 1
 
 
+rem highlightdemo.html: wiki to demo highlight plugin
+
+node .\tiddlywiki.js ^
+	.\editions\highlightdemo ^
+	--verbose ^
+	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\highlightdemo.html text/plain ^
+	|| exit 1
+
 rem Make the CNAME file that GitHub Pages requires
 
 echo tiddlywiki.com > %TW5_BUILD_OUTPUT%\CNAME
