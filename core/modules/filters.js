@@ -48,6 +48,11 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.operator = filterString.substring(p,bracketPos);
 			p = bracketPos + 1;
 		}
+		var colon = operator.operator.indexOf(':');
+		if(colon > -1) {
+			operator.field = operator.operator.substring(colon+1);
+			operator.operator = operator.operator.substring(0,colon);
+		}
 		if(operator.operator === "") {
 			operator.operator = "title";
 		}
@@ -180,6 +185,7 @@ exports.compileFilter = function(filterString) {
 							operator: operator.operator,
 							operand: operand,
 							prefix: operator.prefix,
+							field: operator.field,
 							regexp: operator.regexp
 						},{
 							wiki: self,
