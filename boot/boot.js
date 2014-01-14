@@ -38,7 +38,7 @@ $tw.boot = $tw.boot || {};
 /////////////////////////// Standard node.js libraries
 
 var fs, path, vm;
-if(!$tw.browser) {
+if($tw.node) {
 	fs = require("fs");
 	path = require("path");
 	vm = require("vm");
@@ -1100,7 +1100,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/dom","tiddlerdeserializer",{
 	}
 });
 
-$tw.loadTiddlers = function() {
+$tw.loadTiddlersBrowser = function() {
 	// In the browser, we load tiddlers from certain elements
 	var containerIds = [
 		"libraryModules",
@@ -1134,6 +1134,12 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	// Storing encrypted tiddlers on the server isn't supported yet
 	callback();
 };
+
+}
+
+/////////////////////////// Node definitions
+
+if($tw.node) {
 
 /*
 Load the tiddlers contained in a particular file (and optionally extract fields from the accompanying .meta file) returned as {filepath:,type:,tiddlers:[],hasMetaFile:}
@@ -1363,7 +1369,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	return wikiInfo;
 };
 
-$tw.loadTiddlers = function() {
+$tw.loadTiddlersNode = function() {
 	// Load the boot tiddlers
 	$tw.utils.each($tw.loadTiddlersFromPath($tw.boot.bootPath),function(tiddlerFile) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
@@ -1376,12 +1382,19 @@ $tw.loadTiddlers = function() {
 	}
 };
 
-// End of if(!$tw.browser)	
+// End of if($tw.node)	
 }
 
 /////////////////////////// Main startup function called once tiddlers have been decrypted
 
-$tw.boot.startup = function() {
+/*
+Startup TiddlyWiki. Options are:
+readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing within
+readNodeTiddlers: whether to read tiddlers from the file system
+wikiFolderPath: the path to the wiki folder in the file system
+*/
+$tw.boot.startup = function(options) {
+	options = options || {};
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
@@ -1450,7 +1463,11 @@ $tw.boot.startup = function() {
 	$tw.Wiki.tiddlerDeserializerModules = {};
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Load tiddlers
-	$tw.loadTiddlers();
+	if($tw.browser) {
+		$tw.loadTiddlersBrowser();
+	} else {
+		$tw.loadTiddlersNode();
+	}
 	// Unpack plugin tiddlers
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
@@ -1459,7 +1476,9 @@ $tw.boot.startup = function() {
 	// And any modules within plugins
 	$tw.wiki.defineShadowModules();
 	// Make sure the crypto state tiddler is up to date
-	$tw.crypto.updateCryptoStateTiddler();
+	if($tw.crypto) {
+		$tw.crypto.updateCryptoStateTiddler();
+	}
 	// Run any startup modules
 	$tw.modules.forEachModuleOfType("startup",function(title,module) {
 		if(module.startup) {
@@ -1486,7 +1505,7 @@ $tw.boot.boot = function() {
 
 /////////////////////////// Autoboot in the browser
 
-if($tw.browser) {
+if($tw.browser && !$tw.boot.suppressBoot) {
 	$tw.boot.boot();
 }
 

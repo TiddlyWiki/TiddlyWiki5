@@ -16,7 +16,12 @@ var _bootprefix = (function($tw) {
 
 "use strict";
 
-$tw = $tw || {browser: typeof(window) !== "undefined" ? {} : null};
+$tw = $tw || {};
+
+// Detect platforms
+$tw.browser = typeof(window) !== "undefined" ? {} : null;
+$tw.node = typeof(process) === "object" ? {} : null;
+$tw.nodeWebKit = $tw.node && global.window && global.window.nwDispatcher ? {} : null;
 
 /*
 Information about each module is kept in an object with these members:
@@ -92,6 +97,3 @@ if(typeof(exports) === "undefined") {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;
 }
-
-
-
