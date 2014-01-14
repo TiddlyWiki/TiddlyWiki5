@@ -44,7 +44,8 @@ A filter string consists of one or more runs of filter operators that each look 
 * ''prefix'': tests whether a tiddlers title starts with the prefix specified in the operand
 * ''limit'': limits the number of subresults to the integer specified in the operand
 * ''tag'': tests whether a given tag is (`[tag[mytag]]`) or is not (`[!tag[mytag]]`) present on the tiddler
-* ''{field}'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
+* ''field:{field}'': or
+* ''{field}'': tests whether a tiddler field has a specified value (`[modifier[Jeremy]]` or `[field:modifier[Jeremy]]`) or not (`[!modifier[Jeremy]]`)
 * ''tags'': selects the tags on the currently selected tiddlers
 * ''tagging'': selects the tiddlers tagged with the currently selected tiddlers
 * ''untagged'': selects the any of the selected tiddlers that do not have at least one tag
@@ -78,6 +79,16 @@ The operands available with the `is` operator are:
 If a filter operator is written with curly brackets around the operand then it is taken to be a TextReference to the actual value. For example:
 
 ''[search{$:/temp/search}]'': selects all tiddlers containing the string contained in the tiddler titled ''$:/temp/search''.
+
+! Regular Expression Filters
+
+The field-filter also accepts regular expressions in the form `/regexp/(modifier)`. Please refer to you favourite JavaScript documentation to learn more about regular expressions and modifiers.
+
+In the easiest form, regular expressions allow you do do a search on substrings for every field:
+
+* `field:title/example/`: searches for all tiddlers having "example" in its title.
+* `field:title:/example$/`: `$` is an "anchor" for the end of the text. So "example" has to be the end of the title.
+* `field:text/jeremy|ruston/(i)`: Searches for tiddlers containing Jeremy's first or last name, ignoring the case.
 
 ! Runs
 
