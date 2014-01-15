@@ -42,7 +42,7 @@ Command.prototype.execute = function() {
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
 			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
-		var container = $tw.document.createElement("div");
+		var container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var text = type === "text/html" ? container.innerHTML : container.textContent;
 		fs.writeFileSync(path.resolve(pathname,encodeURIComponent(title) + extension),text,"utf8");

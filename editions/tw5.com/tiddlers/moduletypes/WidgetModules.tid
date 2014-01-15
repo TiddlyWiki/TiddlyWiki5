@@ -22,7 +22,7 @@ The following widget properties are defined by the core. The lifecycle of a widg
 |''wiki'' |Reference to the [[Wiki]] object associated with this widget |
 |''variables'' |Hashmap of information about each [[widget variable|WidgetVariables]] (see below) |
 |''parentWidget'' |Reference to the parent widget |
-|''document'' |Reference to the document object associated with this widget. Usually either the browser global `document` variable or a reference to the FakeDomMechanism's `$tw.document` |
+|''document'' |Reference to the document object associated with this widget. Usually either the browser global `document` variable or a reference to the FakeDomMechanism's `$tw.fakeDocument` |
 |''attributes'' |Hashmap of information about each attribute attached to this widget (see below) |
 |''children'' |Array of child widgets |
 |''domNodes'' |For widgets that directly generate DOM nodes, an array of the generated nodes |

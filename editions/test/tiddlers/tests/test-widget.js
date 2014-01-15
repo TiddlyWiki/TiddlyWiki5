@@ -19,7 +19,7 @@ describe("Widget module", function() {
 	function createWidgetNode(parseTreeNode,wiki) {
 		return new widget.widget(parseTreeNode,{
 				wiki: wiki,
-				document: $tw.document
+				document: $tw.fakeDocument
 			});
 	}
 
@@ -29,8 +29,8 @@ describe("Widget module", function() {
 	}
 
 	function renderWidgetNode(widgetNode) {
-		$tw.document.setSequenceNumber(0);
-		var wrapper = $tw.document.createElement("div");
+		$tw.fakeDocument.setSequenceNumber(0);
+		var wrapper = $tw.fakeDocument.createElement("div");
 		widgetNode.render(wrapper,null);
 // console.log(require("util").inspect(wrapper,{depth: 8}));
 		return wrapper;

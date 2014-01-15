@@ -821,7 +821,7 @@ exports.makeWidget = function(parser,options) {
 	// Create the widget
 	return new widget.widget(widgetNode,{
 		wiki: this,
-		document: options.document || $tw.document,
+		document: options.document || $tw.fakeDocument,
 		parentWidget: options.parentWidget
 	});
 };
@@ -840,7 +840,7 @@ exports.renderText = function(outputType,textType,text,options) {
 	options = options || {};
 	var parser = this.parseText(textType,text,options),
 		widgetNode = this.makeWidget(parser,options);
-	var container = $tw.document.createElement("div");
+	var container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
@@ -858,7 +858,7 @@ exports.renderTiddler = function(outputType,title,options) {
 	options = options || {};
 	var parser = this.parseTiddler(title),
 		widgetNode = this.makeWidget(parser,options);
-	var container = $tw.document.createElement("div");
+	var container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };

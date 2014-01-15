@@ -130,8 +130,8 @@ exports.startup = function() {
 		// Set up the styles
 		var styleTemplateTitle = "$:/core/ui/PageStylesheet",
 			styleParser = $tw.wiki.parseTiddler(styleTemplateTitle);
-		$tw.styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: $tw.document});
-		$tw.styleContainer = $tw.document.createElement("style");
+		$tw.styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: $tw.fakeDocument});
+		$tw.styleContainer = $tw.fakeDocument.createElement("style");
 		$tw.styleWidgetNode.render($tw.styleContainer,null);
 		$tw.styleElement = document.createElement("style");
 		$tw.styleElement.innerHTML = $tw.styleContainer.textContent;

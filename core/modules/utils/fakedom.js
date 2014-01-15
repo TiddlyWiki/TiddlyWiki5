@@ -182,6 +182,6 @@ var document = {
 	},
 };
 
-exports.document = document;
+exports.fakeDocument = document;
 
 })();

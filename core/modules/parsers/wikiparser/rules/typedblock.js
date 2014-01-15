@@ -66,7 +66,7 @@ exports.parse = function() {
 	} else {
 		// Otherwise, render to the rendertype and return in a <PRE> tag
 		var widgetNode = this.parser.wiki.makeWidget(parser),
-			container = $tw.document.createElement("div");
+			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var text = renderType === "text/html" ? container.innerHTML : container.textContent;
 		return [{
