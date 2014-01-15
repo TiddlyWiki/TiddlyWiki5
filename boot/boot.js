@@ -1389,9 +1389,7 @@ $tw.loadTiddlersNode = function() {
 
 /*
 Startup TiddlyWiki. Options are:
-readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing within
-readNodeTiddlers: whether to read tiddlers from the file system
-wikiFolderPath: the path to the wiki folder in the file system
+readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing within; if not, tiddlers are read from the file system with Node.js APIs
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
@@ -1413,7 +1411,7 @@ $tw.boot.startup = function(options) {
 			contentTypeInfo: {} // Map type to {encoding:,extension:}
 		}
 	});
-	if(!$tw.browser) {
+	if($tw.node) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = {};
 		// System paths and filenames
@@ -1432,7 +1430,7 @@ $tw.boot.startup = function(options) {
 			$tw.boot.wikiPath = process.cwd();
 		}
 		// Read package info
-		$tw.packageInfo = require("../package");
+		$tw.packageInfo = require("../package.json");
 		// Check node version number
 		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
 			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engines.node);
@@ -1463,7 +1461,7 @@ $tw.boot.startup = function(options) {
 	$tw.Wiki.tiddlerDeserializerModules = {};
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Load tiddlers
-	if($tw.browser) {
+	if(options.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
 	} else {
 		$tw.loadTiddlersNode();
@@ -1499,7 +1497,9 @@ $tw.boot.boot = function() {
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup();
+		$tw.boot.startup({
+			readBrowserTiddlers: !!$tw.browser
+		});
 	});
 };
 
