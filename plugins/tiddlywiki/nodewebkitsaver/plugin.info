@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/nodewebkitsaver",
+	"description": "Native saving for node-webkit",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}

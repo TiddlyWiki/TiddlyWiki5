@@ -3,7 +3,7 @@ title: $:/core/modules/savers/nodewebkit.js
 type: application/javascript
 module-type: saver
 
-Handles saving changes in the node-webkit environment
+Handles saving changes in the node-webkit environment. Not required by TiddlyDesktop, which re-uses the TiddlyFox saver, but useful if you're embedding a single TiddlyWiki document into a node-webkit app.
 
 \*/
 (function(){
