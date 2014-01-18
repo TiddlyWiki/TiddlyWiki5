@@ -1411,7 +1411,7 @@ $tw.boot.startup = function(options) {
 			contentTypeInfo: {} // Map type to {encoding:,extension:}
 		}
 	});
-	if($tw.node) {
+	if(!options.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = {};
 		// System paths and filenames
