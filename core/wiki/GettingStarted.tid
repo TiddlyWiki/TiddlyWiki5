@@ -7,7 +7,6 @@ To get started, first verify that you can save changes successfully - see http:/
 Then you can:
 
 * Create new tiddlers using the 'plus' button in the sidebar
+* Visit the [[control panel|$:/ControlPanel]] using the 'cog' button in the sidebar to customise your wiki
 * Save changes using the 'download' button in the sidebar
-* Edit [[DefaultTiddlers|$:/DefaultTiddlers]] to determine which tiddlers appear when you open this wiki
-* Edit the SiteTitle and SiteSubtitle
 * Learn more about [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
