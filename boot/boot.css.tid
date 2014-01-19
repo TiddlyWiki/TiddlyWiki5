@@ -58,3 +58,7 @@ Error message and password prompt
 	line-height: 20px;
 	padding-bottom: 16px;
 }
+
+.tw-password-wrapper input {
+	width: 100%;
+}

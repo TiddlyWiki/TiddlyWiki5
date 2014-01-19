@@ -448,11 +448,13 @@ Adds a new password prompt. Options are:
 submitText: text to use for submit button (defaults to "Login")
 serviceName: text of the human readable service name
 noUserName: set true to disable username prompt
+canCancel: set true to enable a cancel button (callback called with null)
 callback: function to be called on submission with parameter of object {username:,password:}. Callback must return `true` to remove the password prompt
 */
 $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	// Create and add the prompt to the DOM
-	var submitText = options.submitText || "Login",
+	var self = this,
+		submitText = options.submitText || "Login",
 		dm = $tw.utils.domMaker,
 		children = [dm("h1",{text: options.serviceName})];
 	if(!options.noUserName) {
@@ -465,6 +467,19 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		attributes: {type: "password", name: "password", placeholder: "Password"},
 		"class": "input-small"
 	}));
+	if(options.canCancel) {
+		children.push(dm("button",{
+			text: "Cancel",
+			"class": "btn",
+			eventListeners: [{
+					name: "click",
+					handlerFunction: function(event) {
+						self.removePrompt(promptInfo);
+						options.callback(null);
+					}
+				}]
+		}));
+	}
 	children.push(dm("button",{
 		attributes: {type: "submit"},
 		text: submitText,
@@ -492,12 +507,7 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		// Call the callback
 		if(options.callback(data)) {
 			// Remove the prompt if the callback returned true
-			var i = self.passwordPrompts.indexOf(promptInfo);
-			if(i !== -1) {
-				self.passwordPrompts.splice(i,1);
-				promptInfo.form.parentNode.removeChild(promptInfo.form);
-				self.setWrapperDisplay();
-			}
+			self.removePrompt(promptInfo);
 		} else {
 			// Clear the password if the callback returned false
 			$tw.utils.each(form.elements,function(element) {
@@ -520,6 +530,15 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	this.setWrapperDisplay();
 };
 
+$tw.utils.PasswordPrompt.prototype.removePrompt = function(promptInfo) {
+	var i = this.passwordPrompts.indexOf(promptInfo);
+	if(i !== -1) {
+		this.passwordPrompts.splice(i,1);
+		promptInfo.form.parentNode.removeChild(promptInfo.form);
+		this.setWrapperDisplay();
+	}
+}
+
 /*
 Crypto helper object for encrypted content. It maintains the password text in a closure, and provides methods to change
 the password, and to encrypt/decrypt a block of text
@@ -530,7 +549,9 @@ $tw.utils.Crypto = function() {
 		callSjcl = function(method,inputText) {
 			var outputText;
 			try {
-				outputText = sjcl[method](password,inputText);
+				if(password) {
+					outputText = sjcl[method](password,inputText);
+				}
 			} catch(ex) {
 				console.log("Crypto error:" + ex);
 				outputText = null;	

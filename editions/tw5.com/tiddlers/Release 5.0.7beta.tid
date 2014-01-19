@@ -16,6 +16,7 @@ type: text/vnd.tiddlywiki
 
 !! Improvements
 
+* Added support for importing encrypted TiddlyWiki documents
 * Added the [[highlight.js|http://highlightjs.org/]] syntax highlighting plugin: http://tiddlywiki.com/highlightdemo.html (thanks to João Bolila, @jbolila on GitHub)
 * Added the first export option to the ''Tools'' tab of the [[control panel|$:/ControlPanel]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ffcc215e8f8896be96093579abc5bcfb76335e66]] an ellipsis for [[advanced search|$:/AdvancedSearch]] next to the search box in the sidebar
