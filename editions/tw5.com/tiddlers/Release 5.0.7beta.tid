@@ -12,11 +12,13 @@ type: text/vnd.tiddlywiki
 * A first pass at [[TiddlyWiki Coding Style Guidelines]]
 * Added an explanation of TemplateTiddlers
 * Added documentation for [[saving on a custom PHP server|Saving on a PHP Server]]
+* Added documentation for TextWidget
 * Summary of the approach for [[Naming of System Tiddlers]]
 
 !! Improvements
 
 * Added support for importing encrypted TiddlyWiki documents
+* Added shortcut in $:/ControlPanel ''Basics'' tab for setting $:/DefaultTiddlers to retain tiddler story ordering
 * Added the [[highlight.js|http://highlightjs.org/]] syntax highlighting plugin: http://tiddlywiki.com/highlightdemo.html (thanks to João Bolila, @jbolila on GitHub)
 * Added the first export option to the ''Tools'' tab of the [[control panel|$:/ControlPanel]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ffcc215e8f8896be96093579abc5bcfb76335e66]] an ellipsis for [[advanced search|$:/AdvancedSearch]] next to the search box in the sidebar
