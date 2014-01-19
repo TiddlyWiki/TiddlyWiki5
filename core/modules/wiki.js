@@ -1083,56 +1083,14 @@ exports.readFile = function(file,callback) {
 			}
 		} else {
 			// Check whether this is an encrypted TiddlyWiki file
-			var encryptedStoreAreaStartMarker = "<pre id=\"encryptedStoreArea\" type=\"text/plain\" style=\"display:none;\">",
-				encryptedStoreAreaStart = text.indexOf(encryptedStoreAreaStartMarker),
-				encryptedStoreAreaEnd = encryptedStoreAreaStart !== -1 ? text.indexOf("</pre>",encryptedStoreAreaStart) : -1;
-			if(encryptedStoreAreaStart !== -1 && encryptedStoreAreaEnd !== -1) {
-				var encryptedJson = $tw.utils.htmlDecode(text.substring(encryptedStoreAreaStart + encryptedStoreAreaStartMarker.length,encryptedStoreAreaEnd-1)),
-					attemptDecryption = function() {
-						var decryptedText = $tw.crypto.decrypt(encryptedJson);
-						if(decryptedText) {
-							var json = JSON.parse(decryptedText),
-								tiddlers = [];
-							for(var title in json) {
-								tiddlers.push(json[title]);
-							}
-							return tiddlers;
-						} else {
-							return null;
-						}
-					};
-				// Try to decrypt with the current password
-				var tiddlers = attemptDecryption();
-				if(tiddlers) {
+			var encryptedJson = $tw.utils.extractEncryptedStoreArea(text);
+			if(encryptedJson) {
+				// If so, attempt to decrypt it with the current password
+				$tw.utils.decryptStoreAreaInteractive(encryptedJson,function(tiddlers) {
 					callback(tiddlers);
-				} else {
-					// Prompt for a new password and keep trying
-					$tw.passwordPrompt.createPrompt({
-						serviceName: "Enter a password to decrypt the imported TiddlyWiki",
-						noUserName: true,
-						canCancel: true,
-						submitText: "Decrypt",
-						callback: function(data) {
-							// Exit if the user cancelled
-							if(!data) {
-								return false;
-							}
-							// Attempt to decrypt the tiddlers
-							$tw.crypto.setPassword(data.password);
-							var tiddlers = attemptDecryption();
-							if(tiddlers) {
-								callback(tiddlers);
-								// Exit and remove the password prompt
-								return true;
-							} else {
-								// We didn't decrypt everything, so continue to prompt for password
-								return false;
-							}
-						}
-					});
-				}
+				});
 			} else {
-				// Try to deserialise any tiddlers in the file
+				// Otherwise, just try to deserialise any tiddlers in the file
 				callback(self.deserializeTiddlers(type,text,tiddlerFields));
 			}
 		}

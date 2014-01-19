@@ -100,7 +100,7 @@ exports["text/html"] = function(text,fields) {
 	var storeAreaMarkerRegExp = /<div id=["']?storeArea['"]?( style=["']?display:none;["']?)?>/gi,
 		match = storeAreaMarkerRegExp.exec(text);
 	if(match) {
-		// If so, it's either a classic TiddlyWiki file or a TW5 file
+		// If so, it's either a classic TiddlyWiki file or an unencrypted TW5 file
 		// First read the normal tiddlers
 		var results = deserializeTiddlyWikiFile(text,storeAreaMarkerRegExp.lastIndex,!!match[1],fields);
 		// Then any system tiddlers
@@ -111,8 +111,15 @@ exports["text/html"] = function(text,fields) {
 		}
 		return results
 	} else {
-		// It's not a TiddlyWiki so we'll return the entire HTML file as a tiddler
-		return deserializeHtmlFile(text,fields);
+		// Check whether we've got an encrypted file
+		var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);
+		if(encryptedStoreArea) {
+			// If so, attempt to decrypt it using the current password
+			return $tw.utils.decryptStoreArea(encryptedStoreArea);
+		} else {
+			// It's not a TiddlyWiki so we'll return the entire HTML file as a tiddler
+			return deserializeHtmlFile(text,fields);
+		}
 	}
 };
 
