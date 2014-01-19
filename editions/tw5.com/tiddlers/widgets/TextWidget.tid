@@ -1,0 +1,15 @@
+created: 201401191419
+modified: 201401190837
+tags: widget
+title: TextWidget
+
+! Introduction
+
+The text widget displays plain text.
+
+! Content and Attributes
+
+The content of the `<$text>` widget is not used.
+
+|!Attribute |!Description |
+|text |The text to display |

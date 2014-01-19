@@ -28,8 +28,10 @@ Render this widget into the DOM
 */
 TextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
+	this.computeAttributes();
 	this.execute();
-	var textNode = this.document.createTextNode(this.parseTreeNode.text);
+	var text = this.getAttribute("text",this.parseTreeNode.text),
+		textNode = this.document.createTextNode(text);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };
