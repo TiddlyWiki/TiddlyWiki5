@@ -1,5 +1,5 @@
 created: 20131205161051792
-modified: 20131205161130352
+modified: 20140120171407764
 tags: wikitext
 title: Typed Blocks in WikiText
 type: text/vnd.tiddlywiki
@@ -7,17 +7,19 @@ type: text/vnd.tiddlywiki
 WikiText can include blocks of text that are rendered with an explicit ContentType like this:
 
 ```
-$$$application/javascript
-//This is some JavaScript
-var thing = 2 + "one";
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
 $$$
 ```
 
 This renders as:
 
-$$$application/javascript
-//This is some JavaScript
-var thing = 2 + "one";
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
 $$$
 
 It is also possible to abbreviate the ContentType to a file extension. For example:
@@ -36,20 +38,6 @@ $$$.svg
 <svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
   <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
 </svg>
-$$$
-
-And, finally, a JSON example:
-
-```
-$$$.json
-{"teapot": "brown","inside":["milk","sugar",23]}
-$$$
-```
-
-Which renders as:
-
-$$$.json
-{"teapot": "brown","inside":["milk","sugar",23]}
 $$$
 
 Unknown types render as plain text:
