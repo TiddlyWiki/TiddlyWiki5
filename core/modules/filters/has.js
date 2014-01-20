@@ -21,7 +21,7 @@ exports.has = function(source,operator,options) {
 	function checkTiddler(title) {
 		var tiddler = options.wiki.getTiddler(title);
 		if(tiddler) {
-			var match = $tw.utils.hop(tiddler.fields,operator.operand);
+			var match = $tw.utils.hop(tiddler.fields,operator.operand) && tiddler.fields[operator.operand] !== "";
 			if(operator.prefix === "!") {
 				match = !match;
 			}
