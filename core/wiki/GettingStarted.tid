@@ -8,5 +8,6 @@ Then you can:
 
 * Create new tiddlers using the 'plus' button in the sidebar
 * Visit the [[control panel|$:/ControlPanel]] using the 'cog' button in the sidebar to customise your wiki
+** Stop this message appearing by changing the default tiddlers under the ''Basics'' tab
 * Save changes using the 'download' button in the sidebar
 * Learn more about [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
