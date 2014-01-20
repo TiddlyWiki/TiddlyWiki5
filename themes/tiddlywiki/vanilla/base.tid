@@ -216,6 +216,12 @@ a.tw-tiddlylink-external {
 	border: none;
 }
 
+.btn-icon svg {
+	height: 1em;
+	width: 1em;
+	fill: #999;
+}
+
 .btn-big-green {
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
