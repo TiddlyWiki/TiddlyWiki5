@@ -28,15 +28,17 @@ exports.extractEncryptedStoreArea = function(text) {
 };
 
 /*
-Attempt to extract the tiddlers from an encrypted store area using the current password
+Attempt to extract the tiddlers from an encrypted store area using the current password. If the password is not provided then the password in the password store will be used
 */
-exports.decryptStoreArea = function(encryptedStoreArea) {
-	var decryptedText = $tw.crypto.decrypt(encryptedStoreArea);
+exports.decryptStoreArea = function(encryptedStoreArea,password) {
+	var decryptedText = $tw.crypto.decrypt(encryptedStoreArea,password);
 	if(decryptedText) {
 		var json = JSON.parse(decryptedText),
 			tiddlers = [];
 		for(var title in json) {
-			tiddlers.push(json[title]);
+			if(title !== "$:/isEncrypted") {
+				tiddlers.push(json[title]);
+			}
 		}
 		return tiddlers;
 	} else {
@@ -62,8 +64,7 @@ exports.decryptStoreAreaInteractive = function(encryptedStoreArea,callback) {
 					return false;
 				}
 				// Attempt to decrypt the tiddlers
-				$tw.crypto.setPassword(data.password);
-				var tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea);
+				var tiddlers = $tw.utils.decryptStoreArea(encryptedStoreArea,data.password);
 				if(tiddlers) {
 					callback(tiddlers);
 					// Exit and remove the password prompt
