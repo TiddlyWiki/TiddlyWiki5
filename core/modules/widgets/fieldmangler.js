@@ -91,6 +91,9 @@ FieldManglerWidget.prototype.handleRemoveTagEvent = function(event) {
 			var modification = this.wiki.getModificationFields();
 			modification.tags = (tiddler.fields.tags || []).slice(0);
 			modification.tags.splice(p,1);
+			if(modification.tags.length === 0) {
+				modification.tags = undefined;
+			}
 		this.wiki.addTiddler(new $tw.Tiddler(tiddler,modification));
 		}
 	}
