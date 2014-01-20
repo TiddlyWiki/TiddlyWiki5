@@ -1,5 +1,5 @@
 created: 20131202102427114
-modified: 20140119144721900
+modified: 20140120133820317
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
@@ -21,7 +21,9 @@ Note that none of your personal data leaves your browser with this process.
 
 # Visit http://tiddlywiki.com/empty.html
 # Drag your old TiddlyWiki HTML file into the browser window
+#* If the file is encrypted you will be prompted for the password
 #* Your tiddlers should be imported
+# Set a password if you want to use encryption
 # Save changes to save the new version
 
 This will download a file called ''empty.html'' to your computer. This file is the upgrade of your old file. You may need to open the location where ''empty.html'' was downloaded, rename ''empty.html'' with the name of the old file you are upgrading, and replace the old file by moving the new file in its place.
