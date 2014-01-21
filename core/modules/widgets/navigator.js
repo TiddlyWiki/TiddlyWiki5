@@ -330,7 +330,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	var draftTitle = this.generateDraftTitle(title),
 		draftTiddler = new $tw.Tiddler({
 			text: ""
-		},templateTiddler,{
+		},templateTiddler,
+		this.wiki.getCreationFields(),
+		{
 			title: draftTitle,
 			"draft.title": title,
 			"draft.of": title
