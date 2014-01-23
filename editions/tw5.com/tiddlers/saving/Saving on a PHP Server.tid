@@ -1,5 +1,5 @@
 created: 20140111091844267
-modified: 20140111093905918
+modified: 20140122173431599
 tags: howto
 title: Saving on a PHP Server
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ The built-in TiddlySpot saver can also be used to save changes to a simple PHP s
 # In TiddlyWiki, go to the ''Saving'' tab of the control panel and enter the following information:
 #* Your username as the wiki name
 #* Your password
-#* The URL of the ''store.php'' file (//''not'' the URL of the wiki, this must the full URL to the ''store.php'' file)
+#* The URL of the ''store.php'' file (//''not'' the URL of the wiki, this must the full URL to the ''store.php'' file//)
 
 The control panel ''Saving'' tab includes the following configuration options:
 
