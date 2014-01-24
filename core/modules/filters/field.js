@@ -21,7 +21,14 @@ exports.field = function(source,operator,options) {
 	function checkTiddler(title) {
 		var tiddler = options.wiki.getTiddler(title);
 		if(tiddler) {
-			var match = tiddler.getFieldString(operator.operator) === operator.operand;
+			var match,
+				text = tiddler.getFieldString(operator.field);
+			if(operator.regexp) {
+				match = !! operator.regexp.exec(text);
+			}
+			else {
+				match = text === operator.operand;
+			}
 			if(operator.prefix === "!") {
 				match = !match;
 			}
@@ -31,6 +38,10 @@ exports.field = function(source,operator,options) {
 		}
 	}
 	// Iterate through the source tiddlers
+	if(!operator.field) {
+		operator.field = operator.operator;
+	}
+	operator.field.toLowerCase();
 	if($tw.utils.isArray(source)) {
 		$tw.utils.each(source,function(title) {
 			checkTiddler(title);

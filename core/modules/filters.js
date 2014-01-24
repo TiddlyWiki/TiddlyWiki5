@@ -32,32 +32,57 @@ function parseFilterOperation(operators,filterString,p) {
 		if(filterString.charAt(p) === "!") {
 			operator.prefix = filterString.charAt(p++);
 		}
+
 		// Get the operator name
-		bracketPos = filterString.indexOf("[",p);
-		curlyBracketPos = filterString.indexOf("{",p);
-		if((bracketPos === -1) && (curlyBracketPos === -1)) {
+		var nextBracketPos = filterString.substring(p).search(/[\[\{\/]/);
+		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
-		if(bracketPos === -1 || (curlyBracketPos !== -1 && curlyBracketPos < bracketPos)) {
-			// Curly brackets
-			operator.indirect = true;
-			operator.operator = filterString.substring(p,curlyBracketPos);
-			p = curlyBracketPos + 1;
-		} else {
-			// Square brackets
-			operator.operator = filterString.substring(p,bracketPos);
-			p = bracketPos + 1;
+		nextBracketPos += p;
+		var bracket = filterString.charAt(nextBracketPos);
+		operator.operator = filterString.substring(p,nextBracketPos);
+		
+		// Any suffix?
+		var colon = operator.operator.indexOf(':');
+		if(colon > -1) {
+			operator.field = operator.operator.substring(colon+1);
+			operator.operator = operator.operator.substring(0,colon) || "field";
 		}
-		if(operator.operator === "") {
+		// Empty operator means: title
+		else if(operator.operator === "") {
 			operator.operator = "title";
 		}
-		// Get the operand
-		bracketPos = filterString.indexOf(operator.indirect ? "}" : "]",p);
-		if(bracketPos === -1) {
+
+		p = nextBracketPos + 1;
+		switch (bracket) {
+		case '{': // Curly brackets
+			operator.indirect = true;
+			nextBracketPos = filterString.indexOf('}',p);
+			break;
+		case '[': // Square brackets
+			nextBracketPos = filterString.indexOf(']',p);
+			break;
+		case '/': // regexp brackets
+			var rex = /^((?:[^\\\/]*|\\.))*\/(?:\(([mygi]+)\))?/g,
+				rexMatch = rex.exec(filterString.substring(p));
+			if(rexMatch) {
+				operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
+				nextBracketPos = p + rex.lastIndex - 1;
+			}
+			else {
+				throw "Unterminated regular expression in filter expression";
+			}
+			break;
+		}
+		
+		if(nextBracketPos === -1) {
 			throw "Missing closing bracket in filter expression";
 		}
-		operator.operand = filterString.substring(p,bracketPos);
-		p = bracketPos + 1;
+		if(!operator.regexp) {
+			operator.operand = filterString.substring(p,nextBracketPos);
+		}
+		p = nextBracketPos + 1;
+			
 		// Push this operator
 		operators.push(operator);
 	} while(filterString.charAt(p) !== "]");
@@ -161,7 +186,9 @@ exports.compileFilter = function(filterString) {
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
 							operand: operand,
-							prefix: operator.prefix
+							prefix: operator.prefix,
+							field: operator.field,
+							regexp: operator.regexp
 						},{
 							wiki: self,
 							currTiddlerTitle: currTiddlerTitle
