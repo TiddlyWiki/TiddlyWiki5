@@ -39,6 +39,7 @@ node ./tiddlywiki.js \
 	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
 	--rendertiddler ReadMe ./readme.md text/html \
 	--rendertiddler ContributingTemplate ./contributing.md text/html \
+	--rendertiddler $:/core/copyright.txt ./licenses/copyright.md text/plain \
 	--rendertiddler $:/editions/tw5.com/download-empty $TW5_BUILD_OUTPUT/empty.html text/plain \
 	--rendertiddler $:/editions/tw5.com/download-empty $TW5_BUILD_OUTPUT/empty.hta text/plain \
 	--savetiddler $:/green_favicon.ico $TW5_BUILD_OUTPUT/static/favicon.ico \
