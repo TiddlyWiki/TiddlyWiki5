@@ -1045,6 +1045,7 @@ exports.readFiles = function(files,callback) {
 			}
 		});
 	};
+	return files.length;
 };
 
 /*

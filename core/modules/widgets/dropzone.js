@@ -87,12 +87,14 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	this.dragEnterCount = 0;
 	// Remove highlighting
 	$tw.utils.removeClass(this.domNodes[0],"tw-dragover");
-	// Try to import the various data types we understand
-	this.importData(dataTransfer);
 	// Import any files in the drop
-	this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
+	var numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
 		self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 	});
+	// Try to import the various data types we understand
+	if(numFiles === 0) {
+		this.importData(dataTransfer);
+	}
 	// Tell the browser that we handled the drop
 	event.preventDefault();
 	// Stop the drop ripple up to any parent handlers
