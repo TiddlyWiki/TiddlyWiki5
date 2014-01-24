@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140103170732095
+modified: 20140124204012349
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -27,6 +27,7 @@ The following additional features are planned or under consideration for impleme
 ** TiddlyWiki file format (to avoid illegal attribute names)
 ** Tiddler object format (to provide true polymorphism of field values)
 * Perfecting WikiText
+** Global macros
 ** `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
 ** Further WikiText features
 * Productivity features
