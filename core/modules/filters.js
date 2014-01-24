@@ -32,7 +32,6 @@ function parseFilterOperation(operators,filterString,p) {
 		if(filterString.charAt(p) === "!") {
 			operator.prefix = filterString.charAt(p++);
 		}
-
 		// Get the operator name
 		var nextBracketPos = filterString.substring(p).search(/[\[\{\/]/);
 		if(nextBracketPos === -1) {
@@ -45,7 +44,7 @@ function parseFilterOperation(operators,filterString,p) {
 		// Any suffix?
 		var colon = operator.operator.indexOf(':');
 		if(colon > -1) {
-			operator.field = operator.operator.substring(colon+1);
+			operator.field = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
 		}
 		// Empty operator means: title
