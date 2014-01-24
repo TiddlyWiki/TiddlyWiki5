@@ -16,17 +16,17 @@ Filter operator for comparing fields for equality
 Export our filter function
 */
 exports.field = function(source,operator,options) {
-	var results = [];
+	var results = [],
+		fieldname = (operator.suffix || operator.operator).toLowerCase();
 	// Function to check an individual title
 	function checkTiddler(title) {
 		var tiddler = options.wiki.getTiddler(title);
 		if(tiddler) {
 			var match,
-				text = tiddler.getFieldString(operator.field);
+				text = tiddler.getFieldString(fieldname);
 			if(operator.regexp) {
-				match = !! operator.regexp.exec(text);
-			}
-			else {
+				match = !!operator.regexp.exec(text);
+			} else {
 				match = text === operator.operand;
 			}
 			if(operator.prefix === "!") {
@@ -38,10 +38,6 @@ exports.field = function(source,operator,options) {
 		}
 	}
 	// Iterate through the source tiddlers
-	if(!operator.field) {
-		operator.field = operator.operator;
-	}
-	operator.field.toLowerCase();
 	if($tw.utils.isArray(source)) {
 		$tw.utils.each(source,function(title) {
 			checkTiddler(title);

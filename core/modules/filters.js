@@ -44,7 +44,7 @@ function parseFilterOperation(operators,filterString,p) {
 		// Any suffix?
 		var colon = operator.operator.indexOf(':');
 		if(colon > -1) {
-			operator.field = operator.operator.substring(colon + 1);
+			operator.suffix = operator.operator.substring(colon + 1);
 			operator.operator = operator.operator.substring(0,colon) || "field";
 		}
 		// Empty operator means: title
@@ -186,7 +186,7 @@ exports.compileFilter = function(filterString) {
 							operator: operator.operator,
 							operand: operand,
 							prefix: operator.prefix,
-							field: operator.field,
+							suffix: operator.suffix,
 							regexp: operator.regexp
 						},{
 							wiki: self,
