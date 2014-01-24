@@ -13,19 +13,20 @@ Extend the edit-text widget to use CodeMirror
 "use strict";
 
 var CODEMIRROR_OPTIONS = "$:/config/CodeMirror", configOptions;
-/* e.g. to allow vim key bindings
- * {
- *	"require": [
- *		"$:/plugins/tiddlywiki/codemirror/addon/dialog.js",
- *		"$:/plugins/tiddlywiki/codemirror/addon/searchcursor.js",
- *		"$:/plugins/tiddlywiki/codemirror/keymap/vim.js"
- *	],
- *	"configuration": {
- *			"keyMap": "vim",
- *			"showCursorWhenSelecting": true
- *	}
- *}
- */
+/*
+e.g. to allow vim key bindings
+ {
+	"require": [
+		"$:/plugins/tiddlywiki/codemirror/addon/dialog.js",
+		"$:/plugins/tiddlywiki/codemirror/addon/searchcursor.js",
+		"$:/plugins/tiddlywiki/codemirror/keymap/vim.js"
+	],
+	"configuration": {
+			"keyMap": "vim",
+			"showCursorWhenSelecting": true
+	}
+}
+*/
 
 var EditTextWidget = require("$:/core/modules/widgets/edit-text.js")["edit-text"];
 
@@ -36,17 +37,16 @@ if($tw.browser) {
 
 	if(configOptions) {
 		if(configOptions["require"]) {
-				if(typeof configOptions["require"] === 'object' &&
-						Object.prototype.toString.call(configOptions["require"]) == '[object Array]') {
-					for (var idx=0; idx < configOptions["require"].length; idx++) {
-						require(configOptions["require"][idx]);
+				if($tw.utils.isArray(configOptions["require"]) {
+					for (var index=0; index < configOptions["require"].length; index++) {
+						require(configOptions["require"][index]);
 					}
 				}
 				else {
 					require(configOptions["require"]);
 				}
 		}
-		EditTextWidget._configuration = configOptions["configuration"];
+		EditTextWidget.configuration = configOptions["configuration"];
 	}
 }
 
@@ -61,8 +61,8 @@ EditTextWidget.prototype.postRender = function() {
 		};
 
 	if($tw.browser && window.CodeMirror && this.editTag === "textarea") {
-		if(EditTextWidget._configuration) {
-			for (cv in EditTextWidget._configuration) { cm_opts[cv] = EditTextWidget._configuration[cv]; }
+		if(EditTextWidget.configuration) {
+			for (cv in EditTextWidget.configuration) { cm_opts[cv] = EditTextWidget.configuration[cv]; }
 		}
 		cm = CodeMirror.fromTextArea(this.domNodes[0], cm_opts);
 		cm.on("change",function() {
