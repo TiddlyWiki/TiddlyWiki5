@@ -33,17 +33,8 @@ EditWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 };
 
-// Mappings from content type to editor type
-// TODO: This information should be configurable/extensible
-var editorTypeMappings = {
-	"text/vnd.tiddlywiki": "text",
-	"image/svg+xml": "text",
-	"image/jpg": "bitmap",
-	"image/jpeg": "bitmap",
-	"image/gif": "bitmap",
-	"image/png": "bitmap",
-	"image/x-icon": "bitmap"
-};
+// Mappings from content type to editor type are stored in tiddlers with this prefix
+var EDITOR_MAPPING_PREFIX = "$:/config/EditorTypeMappings/";
 
 /*
 Compute the internal state of the widget
@@ -65,7 +56,7 @@ EditWidget.prototype.execute = function() {
 	}
 	type = type || "text/vnd.tiddlywiki";
 	// Choose the appropriate edit widget
-	var editorType = editorTypeMappings[type] || "text";
+	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type) || "text";
 	// Make the child widgets
 	this.makeChildWidgets([{
 		type: "edit-" + editorType,
