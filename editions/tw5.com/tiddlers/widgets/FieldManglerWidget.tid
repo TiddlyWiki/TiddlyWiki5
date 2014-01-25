@@ -1,11 +1,12 @@
-title: FieldManglerWidget
-created: 201310241419
-modified: 201310300837
+created: 20131024141900000
+modified: 20140125140636123
 tags: widget
+title: FieldManglerWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The field manager widget manipulates the fields and tags of a tiddler. It does so in response to the following WidgetMessages:
+The field mangler widget manipulates the fields and tags of a tiddler. It does so in response to the following WidgetMessages:
 
 |!Message |!Description |
 |''tw-remove-field'' |Remove the field specified in `event.param` |
