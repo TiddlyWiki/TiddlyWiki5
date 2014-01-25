@@ -3,7 +3,7 @@ title: $:/core/modules/filters/listops.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for manipulating lists
+Filter operators for manipulating the current selection list
 
 \*/
 (function(){
@@ -13,104 +13,75 @@ Filter operator for manipulating lists
 "use strict";
 
 /*
-Export our filter function
+Reverse list
 */
 exports.reverse = function(source,operator,options) {
 	var results = [];
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			results.unshift(title);
-		});
-	} else {
-		$tw.utils.each(source,function(element,title) {
-			results.unshift(title);
-		});
+	if(!$tw.utils.isArray(source)) {
+		source = Object.keys(source).sort();
 	}
+	$tw.utils.each(source,function(title) {
+		results.unshift(title);
+	});
 	return results;
 };
 
+/*
+First entry/entries in list
+*/
 exports.first = function(source,operator,options) {
-	var results = [];
-	var count = operator.operand || 1;
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		results = source.slice(0, Math.min(count, source.length));
-	} else {
-		for(var title in source) {
-			if(count-- < 1) break;
-			results.push(title);
-		};
+	var count = parseInt(operator.operand) || 1;
+	if(!$tw.utils.isArray(source)) {
+		source = Object.keys(source).sort();
 	}
-	return results;
+	return source.slice(0,Math.min(count,source.length));
 };
 
+/*
+Last entry/entries in list
+*/
 exports.last = function(source,operator,options) {
-	var results = [];
-	var count = operator.operand || 1;
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		results = source.slice(-count);
-	} else {
-		for(var title in source) {
-			results.push(title);
-		};
-		results = results.slice(-count);
+	var count = parseInt(operator.operand) || 1;
+	if(!$tw.utils.isArray(source)) {
+		source = Object.keys(source).sort();
 	}
-	return results;
+	return source.slice(-count);
 };
 
+/*
+All but the first entry/entries of the list
+*/
 exports.rest = function(source,operator,options) {
-	var results = [];
-	var count = operator.operand || 1;
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		results = source.slice(count);
-	} else {
-		for(var title in source) {
-			if(--count < 0) {
-				results.push(title);
-			}
-		};
+	var count = parseInt(operator.operand) || 1;
+	if(!$tw.utils.isArray(source)) {
+		source = Object.keys(source).sort();
 	}
-	return results;
+	return source.slice(count);
 };
-
 exports.butfirst = exports.rest;
 exports.bf = exports.rest;
 
+/*
+All but the last entry/entries of the list
+*/
 exports.butlast = function(source,operator,options) {
-	var results = [];
-	var count = operator.operand || 1;
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		results = source.slice(0,-count);
-	} else {
-		for(var title in source) {
-			results.push(title);
-		};
-		results = results.slice(0,-count);
+	var count = parseInt(operator.operand) || 1;
+	if(!$tw.utils.isArray(source)) {
+		source = Object.keys(source).sort();
 	}
-	return results;
+	return source.slice(0,-count);
 };
 exports.bl = exports.butlast;
 
+/*
+The nth member of the list
+*/
 exports.nth = function(source,operator,options) {
-	var results = [];
-	var count = operator.operand || 1;
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		results = source.slice(count-1,count);
-	} else {
-		for(var title in source) {
-			--count;
-			if(count > 0) continue;
-			if(count < 0) break;
-			results.push(title);
-			break;
-		};
+	var count = parseInt(operator.operand) || 1;
+	if(!$tw.utils.isArray(source)) {
+		source = Object.keys(source).sort();
 	}
-	return results;
+	return source.slice(count-1,count);
 };
 
 })();
