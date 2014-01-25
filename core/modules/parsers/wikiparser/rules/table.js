@@ -75,17 +75,16 @@ var processRow = function(prevColumns) {
 			this.parser.pos++;
 			// Look for a space at the start of the cell
 			var spaceLeft = false,
-				chr = this.parser.source.substr(this.parser.pos,1);
-			var vAlign = null;
-			if(chr === "^") {
+				vAlign = null;
+			if(this.parser.source.substr(this.parser.pos).search(/^\^([^\^]|\^\^)/) === 0) {
 				vAlign = "top";
-			} else if(chr === ",") {
+			} else if(this.parser.source.substr(this.parser.pos).search(/^,([^,]|,,)/) === 0) {
 				vAlign = "bottom";
 			}
 			if(vAlign) {
 				this.parser.pos++;
-				chr = this.parser.source.substr(this.parser.pos,1);
 			}
+			var chr = this.parser.source.substr(this.parser.pos,1);
 			while(chr === " ") {
 				spaceLeft = true;
 				this.parser.pos++;
