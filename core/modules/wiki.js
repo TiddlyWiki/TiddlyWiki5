@@ -611,10 +611,14 @@ exports.setTiddlerData = function(title,data) {
 /*
 Return the content of a tiddler as an array containing each line
 */
-exports.getTiddlerList = function(title) {
+exports.getTiddlerList = function(title,field,index) {
+	if(index) {
+		return $tw.utils.parseStringArray(this.extractTiddlerDataItem(title,index,""));
+	}
+	field = field || "list";
 	var tiddler = this.getTiddler(title);
-	if(tiddler && $tw.utils.isArray(tiddler.fields.list)) {
-		return tiddler.fields.list.slice(0);
+	if(tiddler) {
+		return ($tw.utils.parseStringArray(tiddler.fields[field]) || []).slice(0);
 	}
 	return [];
 };
