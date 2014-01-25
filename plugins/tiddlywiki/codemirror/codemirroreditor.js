@@ -37,7 +37,7 @@ if($tw.browser) {
 
 	if(configOptions) {
 		if(configOptions["require"]) {
-				if($tw.utils.isArray(configOptions["require"]) {
+				if($tw.utils.isArray(configOptions["require"])) {
 					for (var index=0; index < configOptions["require"].length; index++) {
 						require(configOptions["require"][index]);
 					}
