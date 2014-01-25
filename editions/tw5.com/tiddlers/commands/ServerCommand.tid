@@ -20,7 +20,7 @@ The parameters are:
 * ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
 * ''username'' - the default username for signing edits
 * ''password'' - optional password for basic authentication
-* ''host'' - optional hostname to serve from (defaults to "0.0.0.0")
+* ''host'' - optional hostname to serve from (defaults to "127.0.0.1" aka "localhost")
 
 If the password parameter is specified then the browser will prompt the user for the username and password. Note that the password is transmitted in plain text so this implementation isn't suitable for general use.
 
