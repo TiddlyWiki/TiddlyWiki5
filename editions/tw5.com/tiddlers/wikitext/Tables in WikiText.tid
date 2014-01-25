@@ -1,5 +1,5 @@
 created: 20130914132100000
-modified: 20131230104954234
+modified: 20140125144616046
 tags: wikitext
 title: Tables in WikiText
 type: text/vnd.tiddlywiki
@@ -38,9 +38,7 @@ The example renders as:
 
 ! Cell vertical Alignment
 
-Vertical alignment of cells is done by inserting either a `^` for top alignment or a `,` for bottom alignment as the first character of a cell. The normal horizontal alignment is still possible.
-
-A shortned example:
+Vertical alignment of cells is done by inserting either a `^` for top alignment or a `,` for bottom alignment as the first character of a cell. The normal horizontal alignment is still possible. For example:
 
 ```
 |^top left |^ top center |^ top right|
@@ -56,11 +54,10 @@ The example renders as:
 | ::<br>:: |,bottom left |, bottom center |, bottom right| ::<br>:: |
 | :: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | :: |
 
-Should you ever want to have a `^`or a `,` as the first character of a left aligned cell, you need to use html-escaping.
+If you need to have a `^`or a `,` as the first character of a left aligned cell, you can use HTML escaping:
 
 | `^` | &amp;#94; |
 | `,` | &amp;#44; |
-
 
 ! Cell Merging
 
