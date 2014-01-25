@@ -18,7 +18,7 @@ Export our filter function
 exports.list = function(source,operator,options) {
 	var results = [],
 		tr = $tw.utils.parseTextReference(operator.operand),
-		list = $tw.wiki.getTiddlerList(tr.title,tr.field,tr.index);
+		list = options.wiki.getTiddlerList(tr.title,tr.field,tr.index);
 	function checkTiddler(title) {
 		var match = list.indexOf(title) !== -1;
 		if(operator.prefix === "!") {
