@@ -2,6 +2,7 @@
 	"plugins": [
 		"tiddlywiki/fullscreen",
 		"tiddlywiki/googleanalytics",
+		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon"
 	],
 	"themes": [
