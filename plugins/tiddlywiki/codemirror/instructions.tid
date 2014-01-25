@@ -2,7 +2,10 @@ title: $:/plugins/tiddlywiki/codemirror/instructions
 
 ! Configuration
 
-You can configure the CodeMirror plugin by creating a tiddler called [[$:/config/CodeMirror]] containing a JSON configuration object. For example:
+* You can configure the CodeMirror plugin by creating a tiddler called [[$:/config/CodeMirror]] containing a JSON configuration object.
+* The configuration tiddler needs to be `type: application/json`, to take effect.
+
+For example:
 
 ```
 {
