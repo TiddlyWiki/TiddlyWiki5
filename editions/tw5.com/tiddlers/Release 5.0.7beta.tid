@@ -1,10 +1,16 @@
 created: 20140113173652456
-modified: 20140113173652456
+modified: 20140125191028534
 tags: releasenote
 title: Release 5.0.7-beta
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.6-beta...v5.0.7-beta]]//
+
+!! Breaking
+
+These are changes that might affect users upgrading from previous betas.
+
+* The [[node-webkit]] saver has been moved into a plugin - [[$:/plugins/tiddlywiki/nodewebkitsaver]]. The plugin is only needed when embedding a single TiddlyWiki in [[node-webkit]] and is not required for TiddlyDesktop, which as of v.0.0.2 uses the existing TiddlyFox saver.
 
 !! Documentation updates
 
@@ -18,7 +24,10 @@ type: text/vnd.tiddlywiki
 !! Improvements
 
 * Added support for importing encrypted TiddlyWiki documents
+* Added several new [[filter operators|TiddlerFilters]], including ''reverse'', ''first'', ''last'', ''butlast'', ''rest'', ''nth''
+* Extend ''list'' filter operator to allow other fields to be used via a TextReference
 * Added shortcut in [[$:/ControlPanel]] ''Basics'' tab for setting [[$:/DefaultTiddlers]] to retain tiddler story ordering
+* Added emacs and vim keymapping support to the [[CodeMirror plugin|http://tiddlywiki.com/codemirrordemo.html]], (thanks to João Bolila, @jbolila on GitHub)
 * Added the [[highlight.js|http://highlightjs.org/]] syntax highlighting plugin: http://tiddlywiki.com/highlightdemo.html (thanks to João Bolila, @jbolila on GitHub)
 * Added the first export option to the ''Tools'' tab of the [[control panel|$:/ControlPanel]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ffcc215e8f8896be96093579abc5bcfb76335e66]] an ellipsis for [[advanced search|$:/AdvancedSearch]] next to the search box in the sidebar
