@@ -103,8 +103,11 @@ exports.startup = function() {
 				serviceName: "Set a new password for this TiddlyWiki",
 				noUserName: true,
 				submitText: "Set password",
+				canCancel: true,
 				callback: function(data) {
-					$tw.crypto.setPassword(data.password);
+					if(data) {
+						$tw.crypto.setPassword(data.password);
+					}
 					return true; // Get rid of the password prompt
 				}
 			});
