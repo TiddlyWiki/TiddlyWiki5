@@ -611,13 +611,23 @@ exports.setTiddlerData = function(title,data) {
 /*
 Return the content of a tiddler as an array containing each line
 */
-exports.getTiddlerList = function(title) {
+exports.getTiddlerList = function(title, field, index) {
+	if (field) {
+		var tiddler = this.getTiddler(title);
+		if(tiddler) { 
+			return $tw.utils.parseStringArray(tiddler.fields[field]);
+		}
+	}
+	else if(index) {
+		 return $tw.utils.parseStringArray(this.extractTiddlerDataItem(title,index,""));
+	}
 	var tiddler = this.getTiddler(title);
 	if(tiddler && $tw.utils.isArray(tiddler.fields.list)) {
 		return tiddler.fields.list.slice(0);
 	}
 	return [];
 };
+
 
 // Return a named global cache object. Global cache objects are cleared whenever a tiddler change occurs
 exports.getGlobalCache = function(cacheName,initializer) {
