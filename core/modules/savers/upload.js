@@ -78,7 +78,7 @@ Information about this saver
 */
 UploadSaver.prototype.info = {
 	name: "upload",
-	priority: 500
+	priority: 2000
 };
 
 /*
