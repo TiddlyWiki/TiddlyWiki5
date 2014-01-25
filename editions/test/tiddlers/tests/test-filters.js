@@ -106,6 +106,31 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[!sortcs[title]]").join(",")).toBe("one,a fourth tiddler,TiddlerOne,Tiddler Three,$:/TiddlerTwo");
 	});
 
+	it("should handle the reverse, first, last, butfirst, butlast, rest and nth operators", function() {
+		expect(wiki.filterTiddlers("[sort[title]first[]]").join(",")).toBe("$:/TiddlerTwo");
+		expect(wiki.filterTiddlers("[sort[title]first[2]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler");
+		expect(wiki.filterTiddlers("[sort[title]first[8]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]first[x]]").join(",")).toBe("$:/TiddlerTwo");
+		expect(wiki.filterTiddlers("[sort[title]last[]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]last[2]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]last[8]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]last[x]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]reverse[]]").join(",")).toBe("TiddlerOne,Tiddler Three,one,a fourth tiddler,$:/TiddlerTwo");
+		expect(wiki.filterTiddlers("[sort[title]reverse[x]]").join(",")).toBe("TiddlerOne,Tiddler Three,one,a fourth tiddler,$:/TiddlerTwo");
+		expect(wiki.filterTiddlers("[sort[title]butlast[]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
+		expect(wiki.filterTiddlers("[sort[title]butlast[2]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one");
+		expect(wiki.filterTiddlers("[sort[title]butlast[8]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[sort[title]butlast[x]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
+		expect(wiki.filterTiddlers("[sort[title]rest[]]").join(",")).toBe("a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]rest[2]]").join(",")).toBe("one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]rest[8]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[sort[title]rest[x]]").join(",")).toBe("a fourth tiddler,one,Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[sort[title]nth[]]").join(",")).toBe("$:/TiddlerTwo");
+		expect(wiki.filterTiddlers("[sort[title]nth[2]]").join(",")).toBe("a fourth tiddler");
+		expect(wiki.filterTiddlers("[sort[title]nth[8]]").join(",")).toBe("");
+		expect(wiki.filterTiddlers("[sort[title]nth[x]]").join(",")).toBe("$:/TiddlerTwo");
+	});
+
 	it("should handle the tag operator", function() {
 		expect(wiki.filterTiddlers("[tag[one]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[!tag[one]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one");
