@@ -19,6 +19,8 @@ wiki: wiki to be synced
 function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
+	// Make a logger
+	this.log = $tw.logger.makeLog("syncer");
 	// Find a working syncadaptor
 	this.syncadaptor = undefined;
 	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
@@ -37,17 +39,7 @@ Error handling
 */
 Syncer.prototype.showError = function(error) {
 	alert("Syncer error: " + error);
-	$tw.utils.log("Syncer error: " + error);
-};
-
-/*
-Message logging
-*/
-Syncer.prototype.log = function(/* arguments */) {
-	var args = Array.prototype.slice.call(arguments,0);
-	args[0] = "Syncer: " + args[0];
-	// Temporarily disable logging to help the wood vs. trees situation; we need better filtering of log messages
-	//$tw.utils.log.apply(null,args);
+	this.log("Syncer error: " + error);
 };
 
 /*
@@ -384,7 +376,7 @@ Syncer.prototype.processTaskQueue = function() {
 			// Dispatch the task
 			this.dispatchTask(task,function(err) {
 				if(err) {
-					console.log("Sync error while processing '" + task.title + "':\n" + err);
+					self.showError("Sync error while processing '" + task.title + "':\n" + err);
 				}
 				// Mark that this task is no longer in progress
 				delete self.taskInProgress[task.title];

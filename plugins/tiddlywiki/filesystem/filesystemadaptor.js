@@ -21,12 +21,12 @@ function FileSystemAdaptor(syncer) {
 	this.syncer = syncer;
 	this.watchers = {};
 	this.pending = {};
-
+	this.log = $tw.logger.makeLog("FileSystem");
 	this.setwatcher = function(filename, title) {
 		return undefined;
 		return this.watchers[filename] = this.watchers[filename] ||
 			fs.watch(filename, {persistent: false}, function(e) {
-				console.log("Filesystem:", e, filename);
+				self.log("Error:",e,filename);
 				if(e === "change") {
 					var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
 					for(var t in tiddlers) {
@@ -161,7 +161,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 					if(err) {
 						return callback(err);
 					}
-console.log("FileSystem: Saved file",fileInfo.filepath);
+					self.log("Saved file",fileInfo.filepath);
 					_finish();
 				});
 			});
@@ -173,7 +173,7 @@ console.log("FileSystem: Saved file",fileInfo.filepath);
 				if(err) {
 					return callback(err);
 				}
-console.log("FileSystem: Saved file",fileInfo.filepath);
+				self.log("Saved file",fileInfo.filepath);
 				_finish();
 			});
 		}
@@ -211,7 +211,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 				if(err) {
 					return callback(err);
 				}
-console.log("FileSystem: Deleted file",fileInfo.filepath);
+				self.log("Deleted file",fileInfo.filepath);
 				// Delete the metafile if present
 				if(fileInfo.hasMetaFile) {
 					fs.unlink(fileInfo.filepath + ".meta",function(err) {

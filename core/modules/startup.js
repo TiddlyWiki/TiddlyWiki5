@@ -16,10 +16,13 @@ var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	var modules,n,m,f,commander;
-	// Load modules
+	// Load utility modules and initialise the logger
+	$tw.modules.applyMethods("utils",$tw.utils);
+	$tw.logger = new $tw.utils.Logger();
+	$tw.log = $tw.logger.log;
+	// Load other modules
 	$tw.modules.applyMethods("global",$tw);
 	$tw.modules.applyMethods("config",$tw.config);
-	$tw.modules.applyMethods("utils",$tw.utils);
 	if($tw.browser) {
 		$tw.utils.getBrowserInfo($tw.browser);
 	}

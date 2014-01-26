@@ -47,15 +47,6 @@ if($tw.node) {
 /////////////////////////// Utility functions
 
 /*
-Log a message
-*/
-$tw.utils.log = function(/* args */) {
-	if(console !== undefined && console.log !== undefined) {
-		return Function.apply.call(console.log, console, arguments);
-	}
-};
-
-/*
 Check if an object has a property
 */
 $tw.utils.hop = function(object,property) {
