@@ -157,7 +157,8 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.stateTitle]) {
-			this.updateState();
+			// this.updateState();
+			this.refreshSelf();
 			refreshed = true;
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
