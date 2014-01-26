@@ -19,6 +19,7 @@ function TiddlyWebAdaptor(syncer) {
 	this.syncer = syncer;
 	this.host = this.getHost();
 	this.recipe = undefined;
+	this.log = $tw.logger.makeLog("TiddlyWebAdaptor");
 }
 
 TiddlyWebAdaptor.prototype.getHost = function() {
@@ -47,7 +48,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 	// Get status
 	var self = this,
 		wiki = self.syncer.wiki;
-	this.syncer.log("Getting status");
+	this.log("Getting status");
 	$tw.utils.httpRequest({
 		url: this.host + "status",
 		callback: function(err,data) {
@@ -62,6 +63,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			} catch (e) {
 			}
 			if(json) {
+				self.log("Status:",data);
 				// Record the recipe
 				if(json.space) {
 					self.recipe = json.space.recipe;
@@ -81,8 +83,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 Attempt to login and invoke the callback(err)
 */
 TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
-	var self = this;
-	$tw.utils.httpRequest({
+	var options = {
 		url: this.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
 		type: "POST",
 		data: {
@@ -93,14 +94,15 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 		callback: function(err) {
 			callback(err);
 		}
-	});
+	};
+	this.log("Logging in:",options);
+	$tw.utils.httpRequest(options);
 };
 
 /*
 */
 TiddlyWebAdaptor.prototype.logout = function(callback) {
-	var self = this;
-	$tw.utils.httpRequest({
+	var options = {
 		url: this.host + "logout",
 		type: "POST",
 		data: {
@@ -110,7 +112,9 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 		callback: function(err,data) {
 			callback(err);
 		}
-	});
+	};
+	this.log("Logging out:",options);
+	$tw.utils.httpRequest(options);
 };
 
 /*
@@ -198,6 +202,11 @@ Delete a tiddler and invoke the callback with (err)
 TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback) {
 	var self = this,
 		bag = this.syncer.tiddlerInfo[title].adaptorInfo.bag;
+	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
+	if(!bag) {
+		return callback(null);
+	}
+	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
 		url: this.host + "bags/" + encodeURIComponent(bag) + "/tiddlers/" + encodeURIComponent(title),
 		type: "DELETE",

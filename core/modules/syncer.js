@@ -38,8 +38,7 @@ function Syncer(options) {
 Error handling
 */
 Syncer.prototype.showError = function(error) {
-	alert("Syncer error: " + error);
-	this.log("Syncer error: " + error);
+	this.log("Error: " + error);
 };
 
 /*
