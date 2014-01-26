@@ -47,7 +47,23 @@ Instantiate an array of parse rules
 baseWikiParser.prototype.instantiateRules = function(classes,type,startPos) {
 	var rulesInfo = [],
 		self = this;
-	$tw.utils.each(classes,function(RuleClass) {
+	if (classes instanceof Array) {
+		for (var i=0; i < classes.length; i++) {
+			// Instantiate the rule
+			var rule = new classes[i](self);
+			rule.is = {};
+			rule.is[type] = true;
+			rule.init(self);
+			var matchIndex = rule.findNextMatch(startPos);
+			if(matchIndex !== undefined) {
+				rulesInfo.push({
+					rule: rule,
+					matchIndex: matchIndex
+				});
+			}
+		}
+	}
+	else $tw.utils.each(classes,function(RuleClass) {
 		// Instantiate the rule
 		var rule = new RuleClass(self);
 		rule.is = {};

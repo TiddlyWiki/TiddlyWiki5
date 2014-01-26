@@ -26,28 +26,53 @@ Attributes are stored as hashmaps of the following objects:
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
+var createClassesFromList= function (ruleList) {
+	var classes = [],mylist=" ";
+	for (var i=0;i<ruleList.length;i++) {
+		var moduleExports=$tw.modules.execute("$:/core/modules/parsers/wikiparser/rules/"+ruleList[i]+".js");
+		var newClass = function() {};
+		newClass.prototype = new $tw.WikiRuleBase();
+		newClass.prototype.constructor = $tw.WikiRuleBase;
+		$tw.utils.extend(newClass.prototype,moduleExports);
+		classes[i] = newClass;
+		mylist +=moduleExports.name+" ";
+	}
+	//alert(mylist);
+	return classes;
+};
 var ParserPrimer = function(type,text,options) {
+	//BJ meditation if I pass in the complete type here, then I could use this to cache the 
+	//Parser objects.
 	var returns={};
-
-	// Initialise the classes if we don't have them already
-	if(!this.pragmaRuleClasses) {
-		ParserPrimer.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
-	}
-	if(!this.blockRuleClasses) {
-		ParserPrimer.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
-	}
-	if(!this.inlineRuleClasses) {
-		ParserPrimer.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+    if (!!options.parserrulelists) {
+		returns.pragmaRuleClasses=createClassesFromList(options.parserrulelists.pragmaRuleList);
+		returns.blockRuleClasses=createClassesFromList(options.parserrulelists.blockRuleList);
+		returns.inlineRuleClasses=createClassesFromList(options.parserrulelists.inlineRuleList);
+	} else {
+		// Initialise the classes if we don't have them already
+		if(!this.pragmaRuleClasses) {
+			ParserPrimer.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+		}
+		if(!this.blockRuleClasses) {
+			ParserPrimer.prototype.blockRuleClasses = [];
+			var classes = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+			$tw.utils.each(classes,function(Rule_Class) {
+				ParserPrimer.prototype.blockRuleClasses.push(Rule_Class);
+			});
+		}
+		if(!this.inlineRuleClasses) {
+			ParserPrimer.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+		}
+		returns.pragmaRuleClasses=this.pragmaRuleClasses;
+		returns.blockRuleClasses=this.blockRuleClasses;
+		returns.inlineRuleClasses=this.inlineRuleClasses;
 	}
 	// Save the parse text
 	returns.type = type || "text/vnd.tiddlywiki";
 	returns.source = text || "";
 	returns.options = options;
 	
-	returns.pragmaRuleClasses=this.pragmaRuleClasses;
-	returns.blockRuleClasses=this.blockRuleClasses;
-	returns.inlineRuleClasses=this.inlineRuleClasses;
+
 	return returns;
 	
 };

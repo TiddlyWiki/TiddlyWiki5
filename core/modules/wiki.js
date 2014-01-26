@@ -672,7 +672,62 @@ exports.initParsers = function(moduleType) {
 		}
 	});
 };
+var mergelist = function(listbases, adjuntlists) {
+	if (!adjuntlists) return;//nothing to do
+	$tw.utils.each(listbases,function(listbase, listname) {
+		if (!!adjuntlists[listname]) {
+			var i,baselen=listbase.length;
+			for (var j=0; j<adjuntlists[listname].length; j++){
+				for ( i=0; i<baselen; i++) {
+					if (adjuntlists[listname][j]===listbase[i]) break;
+				}
+				if (i===baselen) listbase.push(adjuntlists[listname][j]);
+			}
+		}
+	})
+}
+/*
+recursive function, retrives parseroptions from tiddlers/files
+returns preparser, baseparser type and parserrulelists
+*/
+var makeparsers=function(type,text,options){
+	var returns={};
+		
+		var typeParts = type.split(":");
+		if (typeParts.length >1) {
+			var typeDialog =typeParts[1];alert(typeDialog);
+			var  readdata=$tw.wiki.getTiddlerData(typeDialog);
+			//read json tid (typeDialog )containing:
+				// one string var of preparser eg text/type>html  
+				// baseparser
+				// parserdata
+				// concaternate parserdata with baseparser -recursive
+				// overload baserparser's preparser with this preparser
+			if (!!readdata.baserules) 
+				returns=makeparsers(readdata.baserules,text,options);
+			if (!returns.parserrulelists) returns.parserrulelists = readdata.parserrulelists;
+			else mergelist(returns.parserrulelists,readdata.parserrulelists);
+			returns.type = typeParts[0];//overrides basetype of baserules
+			if (!!readdata.preparser) returns.preparser =readdata.preparser;//override baserule preparser
+			
+			//alert(parserdata);
 
+				
+		} else {
+			returns.type=type;
+			returns.parserrulelists=null;
+			returns.preparser=null;
+		}
+		return returns;
+
+}
+var prepasertext =function(preparser,text, options) {
+	var preparserpart = preparser.split(">");
+	//var parserdata=makeparsers(preparserpart[0],text,options);
+	//if (!!parserdata.preparser) text = prepasertext.call(this, parserdata.preparser,text, options);
+	//alert ("pre "+ parserdata.type + " "+preparserpart[1]);
+	return this.renderText(preparserpart[1],preparserpart[0],text,options);
+}
 /*
 Parse a block of text of a specified MIME type
 	type: content type of text to be parsed
@@ -683,7 +738,14 @@ Options include:
 */
 exports.old_parseText = function(type,text,options) {
 	options = options || {};
+	
+	var parserdata;
 	// Select a parser
+		if(type !== undefined) { //get type is undefined when built
+			parserdata=makeparsers(type,text,options);
+			type=parserdata.type;
+			if (!!parserdata.preparser) text = prepasertext.call(this,parserdata.preparser,text, options);
+		}
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.config.fileExtensionInfo[type]) {
 		Parser = $tw.Wiki.parsers[$tw.config.fileExtensionInfo[type].type];
@@ -697,7 +759,8 @@ exports.old_parseText = function(type,text,options) {
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
-		wiki: this
+		wiki: this,
+		parserrulelists:(type !== undefined)?parserdata.parserrulelists:null //BJ added this 
 	});
 };
 
@@ -834,15 +897,15 @@ Options include:
 variables: hashmap of variables to set
 parentWidget: optional parent widget for the root node
 */
-exports.renderText = function(outputType,textType,text,options) {
+var renderText = function(outputType,textType,text,options) {
 	options = options || {};
 	var parser = this.parseText(textType,text,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
-	widgetNode.render(container,null);
+	widgetNode.render(container,null);if($tw.browser) alert("rend "+outputType);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
-
+exports.renderText=renderText;
 /*
 Parse text from a tiddler and render it into another format
 	outputType: content type for the output
