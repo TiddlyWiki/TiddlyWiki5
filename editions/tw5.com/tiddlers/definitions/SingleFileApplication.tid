@@ -1,11 +1,11 @@
-created: 201308221740
-modified: 201308231751
+created: 20130822174000000
+modified: 20140126160359657
 tags: definitions
 title: SingleFileApplication
+type: text/vnd.tiddlywiki
 
-A SingleFileApplication is a web application where all of the assets are delivered in a single static file.
+A single file application is a web application where all of the assets are delivered in a single static file. This means that it can be downloaded and used offline without losing functionality. It can also be hosted on almost any type of web server.
 
-Every SingleFileApplication must also by definition be a SinglePageApplication, but the converse is not true.
+TiddlyWiki is an unusual single file application because it stores its data within the same file, and is capable of saving changes to itself.
 
-
-
+Every single file application must also by definition be a SinglePageApplication, but the converse is not true.
