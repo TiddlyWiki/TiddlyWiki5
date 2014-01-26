@@ -1,5 +1,5 @@
 created: 20131202102427114
-modified: 20140120133820317
+modified: 20140126135354379
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
@@ -17,9 +17,10 @@ Remember that TiddlyWiki version 5 is not fully backwards compatible with the ol
 
 ! Online upgrading
 
-Note that none of your personal data leaves your browser with this process.
+This process will work on most desktop browsers. Note that none of your personal data leaves your browser with this process.
 
-# Visit http://tiddlywiki.com/empty.html
+# Locate your TiddlyWiki file in the file system (ie using Windows Explorer, the Finder on Mac OS X, or your file manager on Linux)
+# Visit http://tiddlywiki.com/empty.html in your browser
 # Drag your old TiddlyWiki HTML file into the browser window
 #* If the file is encrypted you will be prompted for the password
 #* Your tiddlers should be imported
