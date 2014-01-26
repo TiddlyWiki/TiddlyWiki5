@@ -1,10 +1,10 @@
 created: 20130822170200000
-modified: 20140108165207217
+modified: 20140126124733950
 tags: introduction
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-Welcome to TiddlyWiki, a complete interactive wiki in JavaScript. It can be used as a [[single HTML file in the browser|SingleFileApplication]] or as a powerful [[Node.js application|Node.js]]. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
+Welcome to TiddlyWiki, a complete interactive wiki in JavaScript. It can be used as a [[single HTML file in the browser|GettingStarted]] or as a powerful [[Node.js application|Node.js]]. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
 
 This is version <<version>> of TiddlyWiki, a major reboot designed [[for the next 25 years|Future of TiddlyWiki]]. It is currently in beta (see the detailed ReleaseHistory). There is a RoadMap for moving to the full release. It is a great time to [[get involved|Community]] and support the future development of TiddlyWiki.
 

@@ -1,0 +1,14 @@
+created: 20140126125532723
+modified: 20140126130037656
+tags: howto
+title: Using TiddlyWiki on TiddlyDesktop
+type: text/vnd.tiddlywiki
+
+TiddlyDesktop is an app for Windows, Mac OS X and Linux that lets you work with TiddlyWiki files.
+
+# Install the latest release of TiddlyDesktop from https://github.com/Jermolene/TiddlyDesktop/releases
+# Run TiddlyDesktop
+# Use the browse button to open TiddlyWiki files
+# Save changes within TiddlyWiki in the usual way
+
+See the [[Introducing TiddlyDesktop Video]]

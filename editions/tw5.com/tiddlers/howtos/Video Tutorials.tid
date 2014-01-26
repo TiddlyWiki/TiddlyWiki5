@@ -1,5 +1,5 @@
 created: 20131206172428247
-modified: 20140104135043382
+modified: 20140126125217934
 tags: howto
 title: Video Tutorials
 type: text/vnd.tiddlywiki
@@ -13,3 +13,7 @@ The aim is to curate a series of videos to guide people through getting up and r
 ! Using TiddlyWiki on Firefox for Android
 
 {{TiddlyWiki on Firefox for Android Video}}
+
+! Introduction to TiddlyDesktop
+
+{{Introducing TiddlyDesktop Video}}
