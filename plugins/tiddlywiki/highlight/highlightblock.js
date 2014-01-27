@@ -31,7 +31,7 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 			parent.insertBefore(domNode,nextSibling);
 			this.domNodes.push(domNode);
 
-			if($tw.browser && lang !== 'no-highlight') {
+			if($tw.browser && this.document !== $tw.fakeDocument && lang !== 'no-highlight') {
 					hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js").hljs,
 					hljs.tabReplace = '    ';
 					hljs.highlightBlock(domNode);
