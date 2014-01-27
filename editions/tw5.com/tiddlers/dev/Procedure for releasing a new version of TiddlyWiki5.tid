@@ -1,13 +1,14 @@
 created: 20131130132123707
-modified: 20131130132123707
+modified: 20140126212123707
 tags: dev
 title: Releasing a new version of TiddlyWiki5
 type: text/vnd.tiddlywiki
 
+# Adjust the release date of the latest release tiddler (eg, [[Release 5.0.7-beta]])
 # Make sure the ''Jermolene/TiddlyWiki5'' is fully committed
 # Edit `package.json` to the new version number
 # Run `bld.sh` to build the deployment files
 # Restore `package.json` to the previous version number
-# Run `verbump "5.0.0-alpha.16"`, substituting the new version number
+# Run `verbump "5.0.8-beta"`, substituting the new version number
 # Run `deploy.sh`
 # Run `wbld.sh <username> <password>`
