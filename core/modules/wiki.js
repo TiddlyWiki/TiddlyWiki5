@@ -688,14 +688,14 @@ var mergelist = function(listbases, adjuntlists) {
 }
 /*
 recursive function, retrives parseroptions from tiddlers/files
-returns preparser, baseparser type and parserrulelists
+returns preparser, baseparser type and parserrules
 */
 var makeparsers=function(type,text,options){
 	var returns={};
 		
-		var typeParts = type.split(":");
+		var typeParts = type.split("<");
 		if (typeParts.length >1) {
-			var typeDialog =typeParts[1];alert(typeDialog);
+			var typeDialog =typeParts[1];//alert(typeDialog);
 			var  readdata=$tw.wiki.getTiddlerData(typeDialog);
 			//read json tid (typeDialog )containing:
 				// one string var of preparser eg text/type>html  
@@ -705,27 +705,22 @@ var makeparsers=function(type,text,options){
 				// overload baserparser's preparser with this preparser
 			if (!!readdata.baserules) 
 				returns=makeparsers(readdata.baserules,text,options);
-			if (!returns.parserrulelists) returns.parserrulelists = readdata.parserrulelists;
-			else mergelist(returns.parserrulelists,readdata.parserrulelists);
+			if (!!readdata.parseAsInline) returns.parseAsInline =readdata.parseAsInline;
+			if (!returns.parserrules) returns.parserrules = readdata.parserrules;
+			else mergelist(returns.parserrules,readdata.parserrules);
 			returns.type = typeParts[0];//overrides basetype of baserules
-			if (!!readdata.preparser) returns.preparser =readdata.preparser;//override baserule preparser
-			
-			//alert(parserdata);
-
-				
+			if (!!readdata.preparser) returns.preparser =readdata.preparser;//override baserule preparser	
+			//alert(parserdata);	
 		} else {
 			returns.type=type;
-			returns.parserrulelists=null;
+			returns.parserrules=null;
 			returns.preparser=null;
 		}
 		return returns;
 
 }
-var prepasertext =function(preparser,text, options) {
+var prepasstext =function(preparser,text, options) {
 	var preparserpart = preparser.split(">");
-	//var parserdata=makeparsers(preparserpart[0],text,options);
-	//if (!!parserdata.preparser) text = prepasertext.call(this, parserdata.preparser,text, options);
-	//alert ("pre "+ parserdata.type + " "+preparserpart[1]);
 	return this.renderText(preparserpart[1],preparserpart[0],text,options);
 }
 /*
@@ -744,7 +739,8 @@ exports.old_parseText = function(type,text,options) {
 		if(type !== undefined) { //get type is undefined when built
 			parserdata=makeparsers(type,text,options);
 			type=parserdata.type;
-			if (!!parserdata.preparser) text = prepasertext.call(this,parserdata.preparser,text, options);
+			if (!!parserdata.parseAsInline) options.parseAsInline =parserdata.parseAsInline;
+			if (!!parserdata.preparser) text = prepasstext.call(this,parserdata.preparser,text, options);
 		}
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.config.fileExtensionInfo[type]) {
@@ -760,7 +756,7 @@ exports.old_parseText = function(type,text,options) {
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
 		wiki: this,
-		parserrulelists:(type !== undefined)?parserdata.parserrulelists:null //BJ added this 
+		parserrules:(type !== undefined)?parserdata.parserrules:null //BJ added this 
 	});
 };
 
@@ -902,7 +898,7 @@ var renderText = function(outputType,textType,text,options) {
 	var parser = this.parseText(textType,text,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.document.createElement("div");
-	widgetNode.render(container,null);if($tw.browser) alert("rend "+outputType);
+	widgetNode.render(container,null);//if($tw.browser) alert("rend "+outputType);
 	return outputType === "text/html" ? container.innerHTML : container.textContent;
 };
 exports.renderText=renderText;

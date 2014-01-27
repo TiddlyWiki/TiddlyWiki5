@@ -1,19 +1,9 @@
 {
 	"plugins": [
-		"tiddlywiki/fullscreen",
-		"tiddlywiki/googleanalytics",
-		"tiddlywiki/github-fork-ribbon"
+		"tiddlywiki/markdown"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
-		"tiddlywiki/snowwhite",
-		"tiddlywiki/nighttime",
-		"tiddlywiki/starlight",
-		"tiddlywiki/stickytitles",
-		"tiddlywiki/centralised",
-		"tiddlywiki/readonly",
-		"giffmex/rocker",
-		"giffmex/blue",
-		"giffmex/blanca"
+		"tiddlywiki/snowwhite"
 	]
 }

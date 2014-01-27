@@ -11,8 +11,17 @@ The plain text parser processes blocks of source text into a degenerate parse tr
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-
+var include=function(text){
+		text = 	text.replace(/<\$include ([\s\S]*?)>/mg,
+		function(m,key,offset,str){//alert(key);
+			return include($tw.wiki.getTiddlerText(key));
+		});
+		return text;
+}
 var TextParser = function(type,text,options) {
+	if (!!options.parserrules&&!!options.parserrules.include) {
+		text=include(text);
+	}
 	this.tree = [{
 		type: "element",
 		tag: "pre",
