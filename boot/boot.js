@@ -1256,7 +1256,7 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		}
 	}
 	// Give the plugin the same version number as the core if it doesn't have one
-	if(!("version" in pluginInfo)) {
+	if(pluginInfo && !("version" in pluginInfo)) {
 		pluginInfo.version = $tw.packageInfo.version;
 	}
 	// Save the plugin tiddler
