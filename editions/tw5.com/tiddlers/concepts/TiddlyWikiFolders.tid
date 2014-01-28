@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20131212094058729
+modified: 20140128194546203
 tags: dev
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -33,7 +33,6 @@ For example:
     "tiddlywiki/filesystem"
   ],
   "doNotSave": [
-    "$:/StoryList",
     "$:/HistoryList",
     "$:/status/IsLoggedIn",
     "$:/status/UserName"
