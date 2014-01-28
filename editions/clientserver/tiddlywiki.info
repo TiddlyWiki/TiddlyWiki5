@@ -10,7 +10,6 @@
 		"tiddlywiki/snowwhite"
 	],
 	"doNotSave": [
-		"$:/StoryList",
 		"$:/HistoryList",
 		"$:/status/IsLoggedIn",
 		"$:/status/UserName"
