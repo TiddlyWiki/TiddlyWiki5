@@ -13,23 +13,23 @@ The image parser parses an image into an embeddable HTML element
 "use strict";
 
 var ImageParser = function(type,text,options) {
-	var element = "img",
+	var element = {
+			type: "element",
+			tag: "img",
+			attributes: {}
+		},
 		src;
-	if(type === "application/pdf" || type === ".pdf") {
-		src = "data:application/pdf;base64," + text;
-		element = "embed";
-	} else if(type === "image/svg+xml" || type === ".svg") {
-		src = "data:image/svg+xml," + encodeURIComponent(text);
-	} else {
-		src = "data:" + type + ";base64," + text;
-	}
-	this.tree = [{
-		type: "element",
-		tag: element,
-		attributes: {
-			"src": {type: "string", value: src}
+	if(text) {
+		if(type === "application/pdf" || type === ".pdf") {
+			element.attributes.src = {type: "string", value: "data:application/pdf;base64," + text};
+			element.tag = "embed";
+		} else if(type === "image/svg+xml" || type === ".svg") {
+			element.attributes.src = {type: "string", value: "data:image/svg+xml," + encodeURIComponent(text)};
+		} else {
+			element.attributes.src = {type: "string", value: "data:" + type + ";base64," + text};
 		}
-	}];
+	}
+	this.tree = [element];
 };
 
 exports["image/svg+xml"] = ImageParser;
