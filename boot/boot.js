@@ -371,10 +371,11 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 
 /*
 Register file type information
+flags: "image" for image types
 */
-$tw.utils.registerFileType = function(type,encoding,extension) {
+$tw.utils.registerFileType = function(type,encoding,extension,flags) {
 	$tw.config.fileExtensionInfo[extension] = {type: type};
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension};
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: flags || []};
 };
 
 /*
@@ -1459,12 +1460,12 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/html","utf8",".html");
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
-	$tw.utils.registerFileType("application/pdf","base64",".pdf");
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg");
-	$tw.utils.registerFileType("image/png","base64",".png");
-	$tw.utils.registerFileType("image/gif","base64",".gif");
-	$tw.utils.registerFileType("image/svg+xml","utf8",".svg");
-	$tw.utils.registerFileType("image/x-icon","base64",".ico");
+	$tw.utils.registerFileType("application/pdf","base64",".pdf",["image"]);
+	$tw.utils.registerFileType("image/jpeg","base64",".jpg",["image"]);
+	$tw.utils.registerFileType("image/png","base64",".png",["image"]);
+	$tw.utils.registerFileType("image/gif","base64",".gif",["image"]);
+	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",["image"]);
+	$tw.utils.registerFileType("image/x-icon","base64",".ico",["image"]);
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();

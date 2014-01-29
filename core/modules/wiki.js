@@ -196,6 +196,16 @@ exports.isShadowTiddler = function(title) {
 	return $tw.utils.hop(this.shadowTiddlers,title);
 };
 
+exports.isImageTiddler = function(title) {
+	var tiddler = this.getTiddler(title);
+	if(tiddler) {		
+		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type || "text/vnd.tiddlywiki"];
+		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
+	} else {
+		return null;
+	}
+};
+
 exports.addTiddler = function(tiddler) {
 	// Check if we're passed a fields hashmap instead of a tiddler
 	if(!(tiddler instanceof $tw.Tiddler)) {
