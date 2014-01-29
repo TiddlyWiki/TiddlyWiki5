@@ -672,18 +672,23 @@ exports.initParsers = function(moduleType) {
 		}
 	});
 };
-var mergelist = function(listbases, adjuntlists) {
-	if (!adjuntlists) return;//nothing to do
-	$tw.utils.each(listbases,function(listbase, listname) {
-		if (!!adjuntlists[listname]) {
-			var i,baselen=listbase.length;
-			for (var j=0; j<adjuntlists[listname].length; j++){
-				for ( i=0; i<baselen; i++) {
-					if (adjuntlists[listname][j]===listbase[i]) break;
+var mergesetting = function(items, adjustitems) {
+	if (!adjustitems) return;//nothing to do
+	$tw.utils.each(adjustitems,function(adjustitem, listname) {
+		if (!!items[listname]) {
+			if (items[listname] instanceof Array) {//merge lists
+				var i,baselen=items[listname].length;
+				for (var j=0; j<adjustitem.length; j++){
+					for ( i=0; i<baselen; i++) {
+						if (adjustitem[j]===items[listname][i]) break;
+					}
+					if (i===baselen) items[listname].push(adjustitem[j]);
 				}
-				if (i===baselen) listbase.push(adjuntlists[listname][j]);
+			} else {
+				items[listname]=adjustitem;//override item
 			}
-		}
+		} else items[listname]=adjustitem;//add new item
+		
 	})
 }
 /*
@@ -703,14 +708,20 @@ var makeparsers=function(type,text,options){
 				// parserdata
 				// concaternate parserdata with baseparser -recursive
 				// overload baserparser's preparser with this preparser
-			if (!!readdata.baserules) 
-				returns=makeparsers(readdata.baserules,text,options);
-			if (!!readdata.parseAsInline) returns.parseAsInline =readdata.parseAsInline;
-			if (!returns.parserrules) returns.parserrules = readdata.parserrules;
-			else mergelist(returns.parserrules,readdata.parserrules);
-			returns.type = typeParts[0];//overrides basetype of baserules
-			if (!!readdata.preparser) returns.preparser =readdata.preparser;//override baserule preparser	
-			//alert(parserdata);	
+			if (!!readdata) {
+				if (!!readdata.baserules) 
+					returns=makeparsers(readdata.baserules,text,options);
+				if (!!readdata.parseAsInline) returns.parseAsInline =readdata.parseAsInline;
+				if (!returns.parserrules) returns.parserrules = readdata.parserrules;
+				else mergesetting(returns.parserrules,readdata.parserrules);
+				returns.type = typeParts[0];//overrides basetype of baserules
+				if (!!readdata.preparser) returns.preparser =readdata.preparser;//override baserule preparser	
+				//alert(parserdata);
+			}	else {
+				returns.type=type;
+				returns.parserrules=null;
+				returns.preparser=null;
+			}
 		} else {
 			returns.type=type;
 			returns.parserrules=null;

@@ -44,21 +44,17 @@ var ParserPrimer = function(type,text,options) {
 	//BJ meditation if I pass in the complete type here, then I could use this to cache the 
 	//Parser objects.
 	var returns={};
-    if (!!options.parserrulelists) {
-		returns.pragmaRuleClasses=createClassesFromList(options.parserrulelists.pragmaRuleList);
-		returns.blockRuleClasses=createClassesFromList(options.parserrulelists.blockRuleList);
-		returns.inlineRuleClasses=createClassesFromList(options.parserrulelists.inlineRuleList);
+    if (!!options.parserrules) {//if($tw.browser)alert("createrules");
+		returns.pragmaRuleClasses=createClassesFromList(options.parserrules.pragmaRuleList);
+		returns.blockRuleClasses=createClassesFromList(options.parserrules.blockRuleList);
+		returns.inlineRuleClasses=createClassesFromList(options.parserrules.inlineRuleList);
 	} else {
 		// Initialise the classes if we don't have them already
 		if(!this.pragmaRuleClasses) {
 			ParserPrimer.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
 		}
 		if(!this.blockRuleClasses) {
-			ParserPrimer.prototype.blockRuleClasses = [];
-			var classes = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
-			$tw.utils.each(classes,function(Rule_Class) {
-				ParserPrimer.prototype.blockRuleClasses.push(Rule_Class);
-			});
+			ParserPrimer.prototype.blockRuleClasses =  $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
 		}
 		if(!this.inlineRuleClasses) {
 			ParserPrimer.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
