@@ -1,5 +1,5 @@
 created: 20130827080000000
-modified: 20140107114229585
+modified: 20140129214824811
 tags: concepts
 title: TiddlerFilters
 type: text/vnd.tiddlywiki
@@ -36,7 +36,7 @@ A filter string consists of one or more runs of filter operators that each look 
 
 * ''title'': selects the tiddler with the title given in the operand
 * ''is'': tests whether a tiddler is a member of the system defined set named in the operand (see below)
-* ''has'': tests whether a tiddler has the field specified in the operand
+* ''has'': tests whether a tiddler has a non-empty value for the field specified in the operand
 * ''sort'': sorts the tiddlers by the field specified in the operand
 * ''sortcs'': a case sensitive sort of the current tiddlers by the field specified in the operand
 * ''nsort'': sorts the tiddlers numerically by the field specified in the operand
