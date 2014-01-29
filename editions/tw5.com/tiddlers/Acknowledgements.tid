@@ -1,11 +1,13 @@
-modified: 201305070956
-title: Acknowledgements
+created: 20140129204112515
+modified: 20140129204114743
 tags: introduction
+title: Acknowledgements
+type: text/vnd.tiddlywiki
 
 TiddlyWiki5 wouldn't be possible without the ongoing support of the TiddlyWiki user and developer community. Their attention and feedback has made it possible to gain an understanding of what is wanted from the product, and their passion for it has taught me that it is worth the investment that I am making.
 
 TiddlyWiki5 stands on the shoulders of giants by incorporating code from these fine OpenSource projects:
 
-* [[The Stanford Javascript Crypto Library|http://crypto.stanford.edu/sjcl/]]
+* [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
 * [[The Jasmine JavaScript Test Framework|http://pivotal.github.io/jasmine/]]
 * [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
