@@ -166,7 +166,7 @@ exports.formatDateString = function (date,template) {
 	var tz = date.getTimezoneOffset();
 	var atz = Math.abs(tz);
 	t = t.replace(/TZD/g,(tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60));
-	t = t.replace(/\\/g,"");
+	t = t.replace(/\\(.)/g,"$1");
 	return t;
 };
 
