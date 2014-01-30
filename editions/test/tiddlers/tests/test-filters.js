@@ -29,13 +29,13 @@ describe("Filter tests", function() {
 		text: "The quick brown fox in $:/TiddlerTwo",
 		tags: ["one"],
 		modifier: "JoeBloggs",
-		modified: "201304152219"});
+		modified: "201304152222"});
 	wiki.addTiddler({
 		title: "$:/TiddlerTwo",
 		text: "The rain in Spain\nfalls mainly on the plain and [[a fourth tiddler]]",
 		tags: ["two"],
 		modifier: "JohnDoe",
-		modified: "201304151756"});
+		modified: "201304152211"});
 	wiki.addTiddler({
 		title: "Tiddler Three",
 		text: "The speed of sound in light\n\nThere is no TiddlerZero but TiddlerSix",
@@ -206,7 +206,7 @@ describe("Filter tests", function() {
 	});
 
 	it("should handle the sameday operator", function() {
-		expect(wiki.filterTiddlers("[sameday[201304151312]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
+		expect(wiki.filterTiddlers("[sameday[201304152200]sort[title]]").join(",")).toBe("$:/TiddlerTwo,TiddlerOne");
 	});
 
 	describe("testing the is operator",function() {
