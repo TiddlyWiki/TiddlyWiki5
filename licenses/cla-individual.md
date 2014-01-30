@@ -132,3 +132,5 @@ João Bolila, @jbolila, 2014/01/05
 Chris Sugden, @csugden, 2014/01/13
 
 Jeffrey Wilkinson, @buggyj, 2014/01/10
+
+Simon Baird, @simonbaird, 2014/01/29
