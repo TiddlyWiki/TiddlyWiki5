@@ -41,7 +41,7 @@ describe("Filter tests", function() {
 		text: "The speed of sound in light\n\nThere is no TiddlerZero but TiddlerSix",
 		tags: ["one","two"],
 		modifier: "JohnDoe",
-		modified: "201304161643"});
+		modified: "201304162202"});
 	wiki.addTiddler({
 		title: "a fourth tiddler",
 		text: "The quality of mercy is not drained by [[Tiddler Three]]",
