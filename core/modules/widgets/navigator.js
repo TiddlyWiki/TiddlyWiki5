@@ -230,7 +230,6 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 		draftTitle = this.generateDraftTitle(targetTitle);
 	// Save the initial value of the draft tiddler
 	var draftTiddler = new $tw.Tiddler(
-			{text: "Type the text for the tiddler '" + targetTitle + "'"},
 			tiddler,
 			{
 				title: draftTitle,
