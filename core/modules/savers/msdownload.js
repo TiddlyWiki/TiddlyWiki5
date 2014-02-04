@@ -36,7 +36,8 @@ Information about this saver
 */
 MsDownloadSaver.prototype.info = {
 	name: "msdownload",
-	priority: 110
+	priority: 110,
+	capabilities: ["save", "download"]
 };
 
 /*

@@ -46,7 +46,8 @@ Information about this saver
 */
 DownloadSaver.prototype.info = {
 	name: "download",
-	priority: 100
+	priority: 100,
+	capabilities: ["save", "download"]
 };
 
 /*

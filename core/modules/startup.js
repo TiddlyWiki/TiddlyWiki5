@@ -93,6 +93,13 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		});
+		$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
+			$tw.wiki.saveWiki({
+				method: "autosave",
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
 		$tw.rootWidget.addEventListener("tw-download-file",function(event) {
 			$tw.wiki.saveWiki({
 				method: "download",

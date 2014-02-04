@@ -33,7 +33,8 @@ Information about this saver
 */
 ManualDownloadSaver.prototype.info = {
 	name: "manualdownload",
-	priority: 0
+	priority: 0,
+	capabilities: ["save", "download"]
 };
 
 /*

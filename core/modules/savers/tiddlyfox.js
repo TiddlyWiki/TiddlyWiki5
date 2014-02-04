@@ -16,10 +16,6 @@ var TiddlyFoxSaver = function(wiki) {
 };
 
 TiddlyFoxSaver.prototype.save = function(text,method,callback) {
-	// Bail out unless this is a save (rather than a download)
-	if(method !== "save") {
-		return false;
-	}
 	var messageBox = document.getElementById("tiddlyfox-message-box");
 	if(messageBox) {
 		// Get the pathname of this document
@@ -55,7 +51,8 @@ Information about this saver
 */
 TiddlyFoxSaver.prototype.info = {
 	name: "tiddlyfox",
-	priority: 1500
+	priority: 1500,
+	capabilities: ["save", "autosave"]
 };
 
 /*

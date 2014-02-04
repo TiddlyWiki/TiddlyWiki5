@@ -16,10 +16,6 @@ var TWEditSaver = function(wiki) {
 };
 
 TWEditSaver.prototype.save = function(text,method,callback) {
-	// Bail out unless this is a save (rather than a download)
-	if(method !== "save") {
-		return false;
-	}
 	// Bail if we're not running under TWEdit
 	if(typeof DeviceInfo !== "object") {
 		return false;
@@ -68,7 +64,8 @@ Information about this saver
 */
 TWEditSaver.prototype.info = {
 	name: "twedit",
-	priority: 1600
+	priority: 1600,
+	capabilities: ["save", "autosave"]
 };
 
 /*

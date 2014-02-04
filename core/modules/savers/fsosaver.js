@@ -22,10 +22,6 @@ var FSOSaver = function(wiki) {
 };
 
 FSOSaver.prototype.save = function(text,method,callback) {
-	// Bail out unless this is a save (rather than a download)
-	if(method !== "save") {
-		return false;
-	}
 	// Get the pathname of this document
 	var pathname = unescape(document.location.pathname);
 	// Test for a Windows path of the form /x:\blah...
@@ -53,7 +49,8 @@ Information about this saver
 */
 FSOSaver.prototype.info = {
 	name: "FSOSaver",
-	priority: 120
+	priority: 120,
+	capabilities: ["save", "autosave"]
 };
 
 /*

@@ -22,10 +22,6 @@ var UploadSaver = function(wiki) {
 };
 
 UploadSaver.prototype.save = function(text,method,callback) {
-	// Bail out unless this is a save (rather than a download)
-	if(method !== "save") {
-		return false;
-	}
 	// Get the various parameters we need
 	var backupDir = this.wiki.getTextReference("$:/UploadBackupDir") || ".",
 		username = this.wiki.getTextReference("$:/UploadName"),
@@ -78,7 +74,8 @@ Information about this saver
 */
 UploadSaver.prototype.info = {
 	name: "upload",
-	priority: 2000
+	priority: 2000,
+	capabilities: ["save", "autosave"]
 };
 
 /*

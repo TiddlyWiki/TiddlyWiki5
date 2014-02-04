@@ -19,11 +19,7 @@ var TiddlyIESaver = function(wiki) {
 };
 
 TiddlyIESaver.prototype.save = function(text,method,callback) {
-	// Bail out unless this is a save (rather than a download)
-	if(method !== "save") {
-		return false;
-	}
-	// check existence of TiddlyIE BHO extension (note: only works after document is complete)
+	// Check existence of TiddlyIE BHO extension (note: only works after document is complete)
 	if(typeof(window.TiddlyIE) != "undefined") {
 		// Get the pathname of this document
 		var pathname = unescape(document.location.pathname);
@@ -53,7 +49,8 @@ Information about this saver
 */
 TiddlyIESaver.prototype.info = {
 	name: "tiddlyiesaver",
-	priority: 1500
+	priority: 1500,
+	capabilities: ["save"]
 };
 
 /*

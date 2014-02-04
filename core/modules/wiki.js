@@ -905,19 +905,6 @@ exports.initSavers = function(moduleType) {
 };
 
 /*
-Invoke the highest priority saver that successfully handles a method
-*/
-exports.callSaver = function(method /*, args */ ) {
-	for(var t=this.savers.length-1; t>=0; t--) {
-		var saver = this.savers[t];
-		if(saver[method].apply(saver,Array.prototype.slice.call(arguments,1))) {
-			return true;
-		}
-	}
-	return false;
-};
-
-/*
 Save the wiki contents. Options are:
 	method: "save" or "download"
 	template: the tiddler containing the template to save
@@ -927,15 +914,23 @@ exports.saveWiki = function(options) {
 	options = options || {};
 	var method = options.method || "save",
 		template = options.template || "$:/core/save/all",
-		downloadType = options.downloadType || "text/plain";
-	var text = this.renderTiddler(downloadType,template);
-	this.callSaver("save",text,method,function(err) {
-		if(err) {
-			alert("Error while saving:\n\n" + err);
-		} else {
-			$tw.notifier.display("$:/messages/Saved");
+		downloadType = options.downloadType || "text/plain",
+		text = this.renderTiddler(downloadType,template),
+		callback = function(err) {
+			if(err) {
+				alert("Error while saving:\n\n" + err);
+			} else {
+				$tw.notifier.display("$:/messages/Saved");
+			}
+		};
+	// Call the highest priority saver that supports this method
+	for(var t=this.savers.length-1; t>=0; t--) {
+		var saver = this.savers[t];
+		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback)) {
+			return true;
 		}
-	});
+	}
+	return false;
 };
 
 /*

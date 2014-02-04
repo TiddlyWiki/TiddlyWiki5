@@ -289,6 +289,8 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				if(draftTitle !== this.storyTitle) {
 					this.saveStoryList(storyList);
 				}
+				// Send a notification event
+				this.dispatchEvent({type: "tw-auto-save-wiki"});
 			}
 		}
 	}

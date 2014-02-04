@@ -16,10 +16,6 @@ var AndTidWiki = function(wiki) {
 };
 
 AndTidWiki.prototype.save = function(text,method,callback) {
-	// Bail out unless this is a save (rather than a download)
-	if(method !== "save") {
-		return false;
-	}
 	// Get the pathname of this document
 	var pathname = decodeURIComponent(document.location.toString());
 	// Strip the file://
@@ -47,7 +43,8 @@ Information about this saver
 */
 AndTidWiki.prototype.info = {
 	name: "andtidwiki",
-	priority: 1600
+	priority: 1600,
+	capabilities: ["save", "autosave"]
 };
 
 /*
