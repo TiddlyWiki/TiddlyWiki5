@@ -29,7 +29,7 @@ Parses a key descriptor into the structure:
 }
 Key descriptors have the following format:
 	ctrl+enter
-	ctrl+A
+	ctrl+shift+alt+A
 */
 exports.parseKeyDescriptor = function(keyDescriptor) {
 	var components = keyDescriptor.split("+"),
