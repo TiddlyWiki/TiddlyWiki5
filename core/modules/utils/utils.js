@@ -210,6 +210,7 @@ Returns an object with these members:
 exports.getRelativeDate = function(delta) {
 	var futurep = false;
 	if (delta < 0) {
+		delta = -1*delta;
 		futurep = true;
 	}
 	var units = [
