@@ -7,12 +7,12 @@ background-color:$(backgroundColor)$;
 <div class="tw-edit-tags"><$fieldmangler><$list filter="[is[current]tags[]sort[title]]" storyview="pop"><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label"><$view field="title" format="text" /><$button message="tw-remove-tag" param={{!!title}} class="btn-invisible tw-remove-tag-button">&times;</$button></span></$set>
 </$list>
 
-<div class="tw-edit-add-tag"><span class="tw-add-tag-name"><$edit-text tiddler="$:/NewTagName" tag="input" default="" placeholder="tag name" focusPopup=<<qualify "$:/state/tagsAutoComplete">> class="tw-edit-texteditor"/></span> <$button popup=<<qualify "$:/state/tagsAutoComplete">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button"><$button message="tw-add-tag" param={{$:/NewTagName}} set="$:/NewTagName" setTo="" class="">add</$button></span></div>
+<div class="tw-edit-add-tag"><span class="tw-add-tag-name"><$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder="tag name" focusPopup=<<qualify "$:/state/tagsAutoComplete">> class="tw-edit-texteditor"/></span> <$button popup=<<qualify "$:/state/tagsAutoComplete">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button"><$button message="tw-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">add</$button></span></div>
 
 <div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/tagsAutoComplete">> type="nomatch" text="" default="">
 <div class="tw-block-dropdown">
-<$linkcatcher set="$:/NewTagName" setTo="" message="tw-add-tag"><$list filter="[!is[shadow]tags[]search{$:/NewTagName}sort[title]]"><$link><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label"><$view field="title" format="text"/></span></$set></$link>
+<$linkcatcher set="$:/temp/NewTagName" setTo="" message="tw-add-tag"><$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]"><$link><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label"><$view field="title" format="text"/></span></$set></$link>
 </$list>
 </$linkcatcher>
 </div>
