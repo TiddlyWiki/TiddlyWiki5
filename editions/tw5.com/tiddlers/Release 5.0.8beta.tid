@@ -18,10 +18,17 @@ These are changes that might affect users upgrading from previous betas.
 
 !! Improvements
 
-* Added [[automatic saving|AutoSave]] on editing a tiddler
-* Added a warning when attempting to close the window with unsaved changes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a01bbd4b9c7ca284141078340c8f568b1e0561a2]] [[automatic saving|AutoSave]] on editing a tiddler and a warning when attempting to close the window with unsaved changes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/fa5938221552846c255eb50004996528a09534a9]] support for LazyLoading of images
 
 !! Bug Fixes
 
-* 
-
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8e8e31fb9f5ed8f2e5deff0271d434dbe91f503c]] problem with tag pills not working inside table cells
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/6d3d3322e5c676e63d1f64dce89ce86e58dcd715]] problem in client server configuration with ''%'' in tiddler titles
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/7eafd51a7dd89d2174be3dec97033dc0bb206677]] problem with not using placeholder text when editing missing tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1a54d590e1e67825057d7693ac89466a093b4577]] problem with test data in certain time zones
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5af30086c02b9d4466c133c87aca76f9b85eea49]] problem with non-breaking space characters being converted into '@' symbols
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5d3dda1a1721af05e56e301a8b896e53f9868540]] problem with highlighting plugin only working in the browser
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/175e86078ce2fed34953f337baf2f0edfc093742]] crash when wiki/themes folder contains files that are not themes

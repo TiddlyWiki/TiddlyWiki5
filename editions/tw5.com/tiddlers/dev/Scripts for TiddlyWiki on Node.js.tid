@@ -1,5 +1,5 @@
 created: 20131219100637788
-modified: 20140102200458024
+modified: 20140206221215805
 tags: howto dev
 title: Scripts for TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -52,9 +52,23 @@ To experiment with this configuration, run the script and then visit `http://127
 
 Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).
 
-!! `wbld`: builds TiddlyWiki5 for TiddlyWeb
+!! `lazy`: serves tw5.com with lazily loaded images
 
-This script builds and deploys the code for [[TiddlyWiki5 in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
+```
+lazy.sh <username> [<password>]
+```
+
+Or:
+
+```
+lazy.cmd <username> [<password>]
+```
+
+This script serves the `clientserver` edition content with LazyLoading applied to images.
+
+!! `wbld`: builds TiddlyWiki for TiddlyWeb
+
+This script builds and deploys the code for [[TiddlyWiki in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
 
 !! `2bld`: builds TiddlyWiki 2.6.5
 

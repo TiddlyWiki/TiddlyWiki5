@@ -1,8 +1,13 @@
-created: 201308251625
-modified: 201308251626
+created: 20130825162500000
+modified: 20140206221900969
 tags: dev mechanism
 title: LazyLoadingMechanism
+type: text/vnd.tiddlywiki
 
-TiddlyWiki5 currently only implements lazy loading when its running in the browser talking to a TiddlyWeb-compatible server. When it syncs, it first requests a "skinny" version of each tiddler (consisting of all the fields apart from the text field). Subsequently, an attempt to read those skinny tiddlers with `wiki.getTiddler()` returns just the skinny fields, but an attempt to read one using `wiki.getTiddlerText()` will trigger an asynchronous load of the full tiddler text, which in turn triggers a refresh cycle, updating the display to reflect the newly loaded tiddler. Widgets that loop through all tiddlers are fine; it's only if they trigger `wiki.getTiddlerText()` for a tiddler that it will get loaded.
+TiddlyWiki currently only implements LazyLoading when it is running in the browser talking to a TiddlyWeb-compatible server.
 
-So, the browser-based search built into TiddlyWiki5 will only search the text of tiddlers that have been fully loaded. The expectation is that when lazy loading is used in a client-server configuration, then it's the server that really needs to handle search operations, because it's only the server that can "see" the text of all tiddlers. So, the plan is to integrate TW's built in search with TiddlyWeb's search API. The simplest approach is that any local search triggers an asynchronous server side search. The results of the search would be asynchronously loaded such that they would dynamically appear in the local search results.
+In the [[configuration for TiddlyWeb|TiddlyWiki in the Sky for TiddlyWeb]], the browser first requests a "skinny" version of each tiddler (consisting of all the fields apart from the text field). Subsequently, an attempt to read those skinny tiddlers with `wiki.getTiddler()` returns just the skinny fields, but an attempt to read one using `wiki.getTiddlerText()` will trigger an asynchronous load of the full tiddler text, which in turn triggers a refresh cycle, updating the display to reflect the newly loaded tiddler. Widgets that loop through all tiddlers are fine; it's only if they trigger `wiki.getTiddlerText()` for a tiddler that it will get loaded.
+
+Lazy loading can also be used with TiddlyWiki's own server. The core provides a template that enables images to be lazily loaded while other tiddlers are packaged into the initial HTML file in the usual way.
+
+The browser-based search built into TiddlyWiki5 will only search the text of tiddlers that have been fully loaded. The expectation is that when lazy loading is used in a client-server configuration, then it is the server that really needs to handle search operations, because it is only the server that can "see" the text of all tiddlers. So, the plan is to integrate the built in search with TiddlyWeb's search API. The simplest approach is that any local search triggers an asynchronous server side search. The results of the search would be asynchronously loaded such that they would dynamically appear in the local search results.
