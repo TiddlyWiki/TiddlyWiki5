@@ -12,6 +12,11 @@ http://$(userName)$.tiddlyspot.com/backup/
 </$set>
 </$reveal>
 \end
+! Saving
+
+|[[Autosave|$:/config/AutoSave]] |{{$:/snippets/autosavestatus}} |
+
+
 ! TiddlySpot
 
 |[[Wiki name|$:/UploadName]] |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |

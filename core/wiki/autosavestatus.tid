@@ -1,0 +1,10 @@
+title: $:/snippets/autosavestatus
+
+<$reveal type="match" state="$:/config/AutoSave" text="yes">
+Autosave is currently enabled
+<$linkcatcher to="$:/config/AutoSave"><$link to="no">Disable</$link></$linkcatcher>
+</$reveal>
+<$reveal type="nomatch" state="$:/config/AutoSave" text="yes">
+Autosave is currently disabled
+<$linkcatcher to="$:/config/AutoSave"><$link to="yes">Enable</$link></$linkcatcher>
+</$reveal>

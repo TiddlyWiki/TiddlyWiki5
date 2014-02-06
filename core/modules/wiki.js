@@ -878,62 +878,6 @@ exports.renderTiddler = function(outputType,title,options) {
 };
 
 /*
-Select the appropriate saver modules and set them up
-*/
-exports.initSavers = function(moduleType) {
-	moduleType = moduleType || "saver";
-	// Instantiate the available savers
-	this.savers = [];
-	var self = this;
-	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
-		if(module.canSave(self)) {
-			self.savers.push(module.create(self));
-		}
-	});
-	// Sort the savers into priority order
-	this.savers.sort(function(a,b) {
-		if(a.info.priority < b.info.priority) {
-			return -1;
-		} else {
-			if(a.info.priority > b.info.priority) {
-				return +1;
-			} else {
-				return 0;
-			}
-		}
-	});
-};
-
-/*
-Save the wiki contents. Options are:
-	method: "save" or "download"
-	template: the tiddler containing the template to save
-	downloadType: the content type for the saved file
-*/
-exports.saveWiki = function(options) {
-	options = options || {};
-	var method = options.method || "save",
-		template = options.template || "$:/core/save/all",
-		downloadType = options.downloadType || "text/plain",
-		text = this.renderTiddler(downloadType,template),
-		callback = function(err) {
-			if(err) {
-				alert("Error while saving:\n\n" + err);
-			} else {
-				$tw.notifier.display("$:/messages/Saved");
-			}
-		};
-	// Call the highest priority saver that supports this method
-	for(var t=this.savers.length-1; t>=0; t--) {
-		var saver = this.savers[t];
-		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback)) {
-			return true;
-		}
-	}
-	return false;
-};
-
-/*
 Return an array of tiddler titles that match a search string
 	text: The text string to search for
 	options: see below

@@ -52,6 +52,7 @@ NavigatorWidget.prototype.execute = function() {
 	// Get our parameters
 	this.storyTitle = this.getAttribute("story");
 	this.historyTitle = this.getAttribute("history");
+	this.autosave = this.getAttribute("autosave","yes");
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -61,7 +62,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 NavigatorWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.story || changedAttributes.history) {
+	if(changedAttributes.story || changedAttributes.history || changedAttributes.autosave) {
 		this.refreshSelf();
 		return true;
 	} else {
@@ -290,7 +291,9 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					this.saveStoryList(storyList);
 				}
 				// Send a notification event
-				this.dispatchEvent({type: "tw-auto-save-wiki"});
+				if(this.autosave === "yes") {
+					this.dispatchEvent({type: "tw-auto-save-wiki"});
+				}
 			}
 		}
 	}

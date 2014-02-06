@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20140128194546203
+modified: 20140206174804112
 tags: dev
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -21,7 +21,6 @@ Only the ''tiddlywiki.info'' file is required, the ''tiddlers'' and ''plugins'' 
 The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising the following fields:
 
 * ''plugins'' - an array of plugin names to be included in the wiki
-* ''doNotSave'' - an array of tiddler titles that should not be saved by the FileSystemAdaptorPlugin
 * ''includeWikis'' - an array of relative paths to external wiki folders to be included in the wiki
 
 For example:
@@ -31,11 +30,6 @@ For example:
   "plugins": [
     "tiddlywiki/tiddlyweb",
     "tiddlywiki/filesystem"
-  ],
-  "doNotSave": [
-    "$:/HistoryList",
-    "$:/status/IsLoggedIn",
-    "$:/status/UserName"
   ],
   "includeWikis": [
     "../tw5.com"

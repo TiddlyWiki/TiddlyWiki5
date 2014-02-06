@@ -1,0 +1,11 @@
+created: 20140206211715540
+modified: 20140206212334833
+tags: features
+title: AutoSave
+type: text/vnd.tiddlywiki
+
+If there is a SaverModule available that supports it, TiddlyWiki will automatically trigger a save of the current document on clicking {{$:/core/images/done-button}} ''tick'' after editing a tiddler.
+
+You should see a yellow notification at the top right of the window to confirm that an automatic save has taken place.
+
+Automatic saving can be enabled or disabled through the ''Saving'' tab of the [[control panel|$:/ControlPanel]]. Behind the scenes, it is controlled through the configuration tiddler [[$:/config/AutoSave]], which must have the value ''yes'' to enable automatic saving.

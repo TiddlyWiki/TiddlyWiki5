@@ -140,10 +140,6 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if(err) {
 			return callback(err);
 		}
-		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(tiddler.fields.title) !== -1) {
-			// Don't save the tiddler if it is on the blacklist
-			return callback(null,{},0);
-		}
 		if(self.watchers[fileInfo.filepath]) {
 			self.watchers[fileInfo.filepath].close();
 			delete self.watchers[fileInfo.filepath];
@@ -197,34 +193,29 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 		fileInfo = $tw.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		if($tw.boot.wikiInfo.doNotSave && $tw.boot.wikiInfo.doNotSave.indexOf(title) !== -1) {
-			// Don't delete the tiddler if it is on the blacklist
-			callback(null);
-		} else {
-			if(this.watchers[fileInfo.filepath]) {
-				this.watchers[fileInfo.filepath].close();
-				delete this.watchers[fileInfo.filepath];
-			}
-			delete this.pending[fileInfo.filepath];
-			// Delete the file
-			fs.unlink(fileInfo.filepath,function(err) {
-				if(err) {
-					return callback(err);
-				}
-				self.log("Deleted file",fileInfo.filepath);
-				// Delete the metafile if present
-				if(fileInfo.hasMetaFile) {
-					fs.unlink(fileInfo.filepath + ".meta",function(err) {
-						if(err) {
-							return callback(err);
-						}
-						callback(null);
-					});
-				} else {
-					callback(null);
-				}
-			});
+		if(this.watchers[fileInfo.filepath]) {
+			this.watchers[fileInfo.filepath].close();
+			delete this.watchers[fileInfo.filepath];
 		}
+		delete this.pending[fileInfo.filepath];
+		// Delete the file
+		fs.unlink(fileInfo.filepath,function(err) {
+			if(err) {
+				return callback(err);
+			}
+			self.log("Deleted file",fileInfo.filepath);
+			// Delete the metafile if present
+			if(fileInfo.hasMetaFile) {
+				fs.unlink(fileInfo.filepath + ".meta",function(err) {
+					if(err) {
+						return callback(err);
+					}
+					callback(null);
+				});
+			} else {
+				callback(null);
+			}
+		});
 	} else {
 		callback(null);
 	}

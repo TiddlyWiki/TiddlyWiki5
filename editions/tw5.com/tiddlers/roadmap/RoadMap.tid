@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140124204012349
+modified: 20140206174012349
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -12,10 +12,6 @@ During the beta TiddlyWiki will be practical for cautious everyday use but as we
 
 The following additional features are planned or under consideration for implementation during the beta:
 
-* Features affecting user data integrity
-** Warning when attempting to close window without saving
-** Use browser local storage to preserve changes in case browser crashes before saving/sync
-** Automatic saving for saver modules that can support it
 * Features required for large scale adoption
 ** Multilanguage support
 ** Proper use of ARIA roles

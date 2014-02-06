@@ -6,8 +6,6 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
-	"doNotSave": [
-	],
 	"includeWikis": [
 	]
 }

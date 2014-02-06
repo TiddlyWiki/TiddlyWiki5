@@ -9,11 +9,6 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
-	"doNotSave": [
-		"$:/HistoryList",
-		"$:/status/IsLoggedIn",
-		"$:/status/UserName"
-	],
 	"includeWikis": [
 		"../tw5.com"
 	]

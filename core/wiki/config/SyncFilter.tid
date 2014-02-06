@@ -1,0 +1,3 @@
+title: $:/config/SyncFilter
+
+[is[tiddler]] -[[$:/HistoryList]] -[[$:/StoryList]] -[[$:/isEncrypted]] -[prefix[$:/status]] -[prefix[$:/state]] -[prefix[$:/temp]]
