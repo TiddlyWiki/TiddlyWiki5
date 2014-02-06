@@ -250,6 +250,7 @@ a.tw-tiddlylink-external {
 */
 
 .tw-tag-list-item {
+	position: relative;
 	display: inline-block;
 	margin-right: 7px;
 }
