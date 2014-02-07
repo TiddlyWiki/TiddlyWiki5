@@ -208,6 +208,8 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
+	// Send a notification event
+	this.dispatchEvent({type: "tw-auto-save-wiki"});
 	return false;
 };
 

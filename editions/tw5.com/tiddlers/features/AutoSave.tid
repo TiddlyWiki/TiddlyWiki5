@@ -4,7 +4,7 @@ tags: features
 title: AutoSave
 type: text/vnd.tiddlywiki
 
-If there is a SaverModule available that supports it, TiddlyWiki will automatically trigger a save of the current document on clicking {{$:/core/images/done-button}} ''tick'' after editing a tiddler.
+If there is a SaverModule available that supports it, TiddlyWiki will automatically trigger a save of the current document on clicking {{$:/core/images/done-button}} ''tick'' or {{$:/core/images/delete-button}} ''delete'' when editing a tiddler.
 
 You should see a yellow notification at the top right of the window to confirm that an automatic save has taken place.
 
