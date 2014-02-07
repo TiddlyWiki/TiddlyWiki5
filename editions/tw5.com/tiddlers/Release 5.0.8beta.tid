@@ -22,6 +22,7 @@ These are changes that might affect users upgrading from previous betas.
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a01bbd4b9c7ca284141078340c8f568b1e0561a2]] [[automatic saving|AutoSave]] on editing a tiddler and a warning when attempting to close the window with unsaved changes
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/fa5938221552846c255eb50004996528a09534a9]] support for LazyLoading of images
+* Added a ''Filter'' tab to [[advanced search|$:/AdvancedSearch]]
 
 !! Bug Fixes
 

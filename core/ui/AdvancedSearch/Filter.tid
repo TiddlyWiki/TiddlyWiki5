@@ -1,0 +1,27 @@
+title: $:/core/ui/AdvancedSearch/Filter
+tags: $:/tags/AdvancedSearch
+caption: Filter
+
+<$linkcatcher to="$:/temp/advancedsearch">
+
+Search via a [[filter expression|http://tiddlywiki.com/static/TiddlerFilters.html]]:
+
+<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+
+</$linkcatcher>
+
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+
+<div class="tw-search-results">
+
+//<small><$count filter={{$:/temp/advancedsearch}}/> matches</small>//
+
+<$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
+
+</div>
+
+</$reveal>
+
+<$reveal state="$:/temp/advancedsearch" type="match" text="">
+
+</$reveal>
