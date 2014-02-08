@@ -39,7 +39,15 @@ exports.startup = function() {
 	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Kick off the theme manager
-	$tw.themeManager = new $tw.ThemeManager($tw.wiki);
+	$tw.themeManager = new $tw.PluginSwitcher({
+		wiki: $tw.wiki,
+		pluginType: "theme",
+		controllerTitle: "$:/theme",
+		defaultPlugins: [
+			"$:/themes/tiddlywiki/snowwhite",
+			"$:/themes/tiddlywiki/vanilla"
+		]
+	});
 	// Get the default tiddlers
 	var defaultTiddlersTitle = "$:/DefaultTiddlers",
 		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
@@ -63,7 +71,7 @@ exports.startup = function() {
 				confirmationMessage = "You have unsaved changes in TiddlyWiki";
 				event.returnValue = confirmationMessage; // Gecko
 			}
-			return confirmationMessage; // Webkit, Safari, Chrome etc.
+			return confirmationMessage;
 		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({

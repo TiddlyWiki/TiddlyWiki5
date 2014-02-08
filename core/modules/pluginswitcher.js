@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/themes.js
+title: $:/core/modules/pluginswitcher.js
 type: application/javascript
 module-type: global
 
-Manages themes and styling.
+Manages switching plugins for themes and lingo.
 
 \*/
 (function(){
@@ -12,42 +12,44 @@ Manages themes and styling.
 /*global $tw: false */
 "use strict";
 
-var THEME_PLUGIN_TITLE = "$:/theme", // This tiddler contains the title of the current theme plugin
-	DEFAULT_THEME_PLUGINS = [
-		"$:/themes/tiddlywiki/snowwhite",
-		"$:/themes/tiddlywiki/vanilla"
-	];
-
-function ThemeManager(wiki) {
-	this.wiki = wiki;
-	// There's no theme to start with
-	this.currentThemeTitle = undefined;
-	// Switch to the current theme
-	this.switchTheme();
-	// Listen for changes to the theme
+/*
+options:
+wiki: wiki store to be used
+pluginType: type of plugin to be switched
+controllerTitle: title of tiddler used to control switching of this resource
+defaultPlugins: array of default plugins to be used if nominated plugin isn't found
+*/
+function PluginSwitcher(options) {
+	this.wiki = options.wiki;
+	this.pluginType = options.pluginType;
+	this.controllerTitle = options.controllerTitle;
+	this.defaultPlugins = options.defaultPlugins || [];
+	// Switch to the current plugin
+	this.switchPlugins();
+	// Listen for changes to the selected plugin
 	var self = this;
 	this.wiki.addEventListener("change",function(changes) {
-		if($tw.utils.hop(changes,THEME_PLUGIN_TITLE)) {
-			self.switchTheme();
+		if($tw.utils.hop(changes,self.controllerTitle)) {
+			self.switchPlugins();
 		}
 	});
 }
 
-ThemeManager.prototype.switchTheme = function() {
+PluginSwitcher.prototype.switchPlugins = function() {
 	// Get the name of the current theme
-	var themePluginTitle = this.wiki.getTiddlerText(THEME_PLUGIN_TITLE);
+	var selectedPluginTitle = this.wiki.getTiddlerText(this.controllerTitle);
 	// If it doesn't exist, then fallback to one of the default themes
 	var index = 0;
-	while(!this.wiki.getTiddler(themePluginTitle) && index < DEFAULT_THEME_PLUGINS.length) {
-		themePluginTitle = DEFAULT_THEME_PLUGINS[index++];
+	while(!this.wiki.getTiddler(selectedPluginTitle) && index < this.defaultPlugins.length) {
+		selectedPluginTitle = this.defaultPlugins[index++];
 	}
 	// Accumulate the titles of the plugins that we need to load
-	var themePlugins = [],
+	var plugins = [],
 		self = this,
 		accumulatePlugin = function(title) {
 			var tiddler = self.wiki.getTiddler(title);
-			if(tiddler && tiddler.isPlugin() && themePlugins.indexOf(title) === -1) {
-				themePlugins.push(title);
+			if(tiddler && tiddler.isPlugin() && plugins.indexOf(title) === -1) {
+				plugins.push(title);
 				var pluginInfo = JSON.parse(self.wiki.getTiddlerText(title)),
 					dependents = $tw.utils.parseStringArray(tiddler.fields.dependents || "");
 				$tw.utils.each(dependents,function(title) {
@@ -55,23 +57,23 @@ ThemeManager.prototype.switchTheme = function() {
 				});
 			}
 		};
-	accumulatePlugin(themePluginTitle);
+	accumulatePlugin(selectedPluginTitle);
 	// Unregister any existing theme tiddlers
-	var unregisteredThemeTiddlers = $tw.wiki.unregisterPluginTiddlers("theme");
+	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Accumulate the titles of shadow tiddlers that have changed as a result of this switch
 	var changedTiddlers = {};
 	$tw.utils.each(this.wiki.shadowTiddlers,function(shadowInfo,title) {
-		if(unregisteredThemeTiddlers.indexOf(shadowInfo.source) !== -1) {
+		if(unregisteredTiddlers.indexOf(shadowInfo.source) !== -1) {
 			changedTiddlers[title] = true; // isDeleted?
 		}
 	});
 	// Register any new theme tiddlers
-	var registeredThemeTiddlers = $tw.wiki.registerPluginTiddlers("theme",themePlugins);
+	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme tiddlers
 	$tw.wiki.unpackPluginTiddlers();
 	// Accumulate the affected shadow tiddlers
 	$tw.utils.each(this.wiki.shadowTiddlers,function(shadowInfo,title) {
-		if(registeredThemeTiddlers.indexOf(shadowInfo.source) !== -1) {
+		if(registeredTiddlers.indexOf(shadowInfo.source) !== -1) {
 			changedTiddlers[title] = false; // isDeleted?
 		}
 	});
@@ -81,6 +83,6 @@ ThemeManager.prototype.switchTheme = function() {
 	});
 };
 
-exports.ThemeManager = ThemeManager;
+exports.PluginSwitcher = PluginSwitcher;
 
 })();
