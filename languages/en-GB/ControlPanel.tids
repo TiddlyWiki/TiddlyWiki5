@@ -1,0 +1,17 @@
+title: $:/lingo/ControlPanel/
+
+Basics/Caption: Basics
+Basics/Version: ~TiddlyWiki version
+Basics/Title: Title of this ~TiddlyWiki
+Basics/Subtitle: Subtitle
+Basics/Username: Username for signing edits
+Basics/AnimDuration: Animation duration
+Basics/DefaultTiddlers: Default tiddlers
+Basics/DefaultTiddlers/Prompt: Choose which tiddlers are displayed at startup:
+Basics/DefaultTiddlers/Hint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/Tiddlers: Number of tiddlers
+Basics/Tags: Number of tags
+Basics/SystemTiddlers: Number of system tiddlers
+Basics/ShadowTiddlers: Number of shadow tiddlers
+Basics/OverriddenShadowTiddlers: Number of overridden shadow tiddlers
+Appearance/Caption: Appearance

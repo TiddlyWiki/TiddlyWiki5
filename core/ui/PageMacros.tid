@@ -30,4 +30,10 @@ $src$
 $$$
 
 \end
+\define lingo-base()
+$:/lingo/
+\end
+\define lingo(title)
+{{$(lingo-base)$$title$}}
+\end
 {{$:/core/ui/PageTemplate}}

@@ -4,5 +4,6 @@
 	"plugin-type": "language",
 	"description": "French (France)",
 	"author": "JeremyRuston",
-	"core-version": ">=5.0.0"
+	"core-version": ">=5.0.0",
+	"dependents": ["$:/languages/en-GB"]
 }
