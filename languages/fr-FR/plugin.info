@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/fr-FR",
+	"name": "fr-FR",
+	"plugin-type": "language",
+	"description": "French (France)",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}

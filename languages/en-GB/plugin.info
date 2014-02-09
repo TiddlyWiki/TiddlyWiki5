@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/en-GB",
+	"name": "en-GB",
+	"plugin-type": "language",
+	"description": "English (British)",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}

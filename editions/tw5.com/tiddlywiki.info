@@ -16,5 +16,11 @@
 		"giffmex/rocker",
 		"giffmex/blue",
 		"giffmex/blanca"
+	],
+	"languages": [
+		"en-US",
+		"en-GB",
+		"de-AT",
+		"fr-FR"
 	]
 }

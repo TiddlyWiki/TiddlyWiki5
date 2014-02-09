@@ -2,18 +2,6 @@ title: $:/core/ui/SideBar/Tools
 tags: $:/tags/SideBar
 caption: Tools
 
-{{$:/snippets/viewswitcher}}
-
----
-
-[[AdvancedSearch|$:/AdvancedSearch]]
-
----
-
-{{$:/snippets/minithemeswitcher}}
-
----
-
 Import: <$browse/>
 
 ---
@@ -23,3 +11,15 @@ Import: <$browse/>
 ---
 
 TiddlyWiki5 version <<version>>
+
+---
+
+{{$:/snippets/viewswitcher}}
+
+---
+
+{{$:/snippets/minithemeswitcher}}
+
+---
+
+{{$:/snippets/languageswitcher}}

@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/de-AT",
+	"name": "de-AT",
+	"plugin-type": "language",
+	"description": "German (Austria)",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}

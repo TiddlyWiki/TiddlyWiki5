@@ -1291,6 +1291,9 @@ $tw.boot.defaultWikiInfo = {
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
+	],
+	"languages": [
+		"en-GB"
 	]
 };
 
@@ -1342,6 +1345,16 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 			}
 		}
 	}
+	// Load any languages listed in the wiki info file
+	if(wikiInfo.languages) {
+		var languagesBasePath = path.resolve($tw.boot.corePath,$tw.config.languagesPath);
+		for(var t=0; t<wikiInfo.languages.length; t++) {
+			pluginFields = $tw.loadPluginFolder(path.resolve(languagesBasePath,"./" + wikiInfo.languages[t]));
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
+			}
+		}
+	}
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
@@ -1375,6 +1388,17 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 		var themeFolders = fs.readdirSync(wikiThemesPath);
 		for(t=0; t<themeFolders.length; t++) {
 			pluginFields = $tw.loadPluginFolder(path.resolve(wikiThemesPath,"./" + themeFolders[t]));
+			if(pluginFields) {
+				$tw.wiki.addTiddler(pluginFields);
+			}
+		}
+	}
+	// Load any languages within the wiki folder
+	var wikiLanguagesPath = path.resolve(wikiPath,$tw.config.wikiLanguagesSubDir);
+	if(fs.existsSync(wikiLanguagesPath)) {
+		var languageFolders = fs.readdirSync(wikiLanguagesPath);
+		for(t=0; t<languageFolders.length; t++) {
+			pluginFields = $tw.loadPluginFolder(path.resolve(wikiLanguagesPath,"./" + languageFolders[t]));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
 			}
@@ -1416,9 +1440,11 @@ $tw.boot.startup = function(options) {
 		config: { // Configuration overridables
 			pluginsPath: "../plugins/",
 			themesPath: "../themes/",
+			languagesPath: "../languages/",
 			wikiInfo: "./tiddlywiki.info",
 			wikiPluginsSubDir: "./plugins",
 			wikiThemesSubDir: "./themes",
+			wikiLanguagesSubDir: "./languages",
 			wikiTiddlersSubDir: "./tiddlers",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
 			fileExtensionInfo: {}, // Map file extension to {type:}
@@ -1532,6 +1558,3 @@ if(typeof(exports) !== "undefined") {
 } else {
 	_boot(window.$tw);
 }
-
-
-

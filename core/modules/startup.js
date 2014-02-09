@@ -38,6 +38,15 @@ exports.startup = function() {
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Set up the command modules
 	$tw.Commander.initCommands();
+	// Kick off the language manager
+	$tw.languageManager = new $tw.PluginSwitcher({
+		wiki: $tw.wiki,
+		pluginType: "language",
+		controllerTitle: "$:/language",
+		defaultPlugins: [
+			"$:/languages/en-US"
+		]
+	});
 	// Kick off the theme manager
 	$tw.themeManager = new $tw.PluginSwitcher({
 		wiki: $tw.wiki,
