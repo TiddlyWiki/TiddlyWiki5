@@ -992,6 +992,29 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 		return [fields];
 	}
 });
+$tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
+	"application/x-tiddlers": function(text,fields) {
+		var tiddlers = [],
+			split = text.split(/\r?\n\r?\n/mg);
+		if(split.length >= 2) {
+			fields = $tw.utils.parseFields(split[0],fields);
+			var lines = split[1].split(/\r?\n/mg);
+			for(var t=0; t<lines.length; t++) {
+				var line = lines[t];
+				if(line.charAt(0) !== "#") {
+					var parts = line.split(/:\s+/);
+					if(parts.length >= 2) {
+						var tiddler = $tw.utils.extend({},fields);
+						tiddler.title = (tiddler.title || "") + parts[0];
+						tiddler.text = parts[1];
+						tiddlers.push(tiddler);
+					}
+				}
+			}
+		}
+		return tiddlers;
+	}
+});
 $tw.modules.define("$:/boot/tiddlerdeserializer/txt","tiddlerdeserializer",{
 	"text/plain": function(text,fields,type) {
 		fields.text = text;
@@ -1479,6 +1502,7 @@ $tw.boot.startup = function(options) {
 	// Add file extension information
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
+	$tw.utils.registerFileType("application/x-tiddlers","utf8",".tids");
 	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");
 	$tw.utils.registerFileType("text/vnd.tiddlywiki2-recipe","utf8",".recipe");
 	$tw.utils.registerFileType("text/plain","utf8",".txt");

@@ -1,0 +1,30 @@
+created: 20140209143652456
+tags: deserializers dev
+title: MultiTiddlerFiles
+
+MultiTiddlerFiles allow multiple tiddlers to be concisely represented in a single text file.
+
+The goals of this format are:
+
+* To be easy to type and easy to read
+* Optimised for single line strings
+* To allow common fields or tags to be shared within groups of tiddlers
+* To be simple to process with external tools
+
+MultiTiddlerFiles have the extension `tids`. The file is structured as a block of shared fields followed by a blank line. The rest of the file is a sequence of comments and tiddlers. Tiddlers are specified by their title, followed by a colon, at least one space character, and then the rest of the line is the text field for the tiddler.
+
+For axample:
+
+```
+title: $:/lingo/ControlPanel/
+tags: strings
+modifier: JoeBloggs
+
+Basics/Caption: Basics
+# This is a comment
+Basics/Version: ~TiddlyWiki Version
+```
+
+This example defines two tiddlers, ''"""$:/lingo/ControlPanel/Basics/Caption"""'' and ''"""$:/lingo/ControlPanel/Basics/Version"""''.
+
+If a `title` field is specified in the header then it is treated as a prefix for the individual tiddlers defined in the title.
