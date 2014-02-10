@@ -1,10 +1,10 @@
 created: 20130827080000000
-modified: 20140129214824811
+modified: 20140210141253282
 tags: concepts
 title: TiddlerFilters
 type: text/vnd.tiddlywiki
 
-Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria.
+Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria. See [[TiddlerFilter Formal Grammar]] for a technical explanation of the syntax.
 
 ! Examples
 

@@ -1,0 +1,79 @@
+created: 20140210141217955
+modified: 20140210141312363
+tags: dev
+title: TiddlerFilter Formal Grammar
+type: text/vnd.tiddlywiki
+
+TiddlerFilters follow a formal grammar:
+
+''&lt;filter-string&gt;'' ::= ''&lt;opt-whitespaces&gt;'' ''&lt;filter-operand&gt;'' | ''&lt;opt-whitespaces&gt;'' ''&lt;filter-operand&gt;'' ''&lt;filter-string&gt;''
+
+Whitespace is matched with javascript "\s+", which matches space, tab, carriage return, new line, vertical tab, and form feed.
+
+''&lt;opt-whitespaces&gt;'' ::= ''&lt;opt-whitespace&gt;'' | ''&lt;opt-whitespace&gt;'' ''&lt;opt-whitespaces&gt;''
+
+''&lt;opt-whitespace&gt;'' ::= " " | "\t" | "0xD" | "0xA" | "0xB" | "0xC"
+
+''&lt;filter-operand&gt;'' ::= ''&lt;opt-operation-prefix&gt;'' ''&lt;string-or-operator-list&gt;''
+
+''&lt;opt-operation-prefix&gt;'' ::= "+" | "-" | ""
+
+''&lt;string-or-operator-list&gt;'' ::= ''&lt;operation&gt;'' | "\"" ''&lt;string&gt;'' "\"" | "'" ''&lt;string&gt;'' "'" | ''&lt;string&gt;''
+
+''&lt;operation&gt;'' ::= "[" ''&lt;operator-list&gt;'' "]"
+
+''&lt;operator-list&gt;'' ::= ''&lt;operator&gt;'' | ''&lt;operator&gt;'' ''&lt;operator-list&gt;''
+
+''&lt;operator&gt;'' ::= ''&lt;opt-operator-prefix&gt;''''&lt;operator&gt;''''&lt;operand&gt;''
+
+''&lt;opt-operator-prefix&gt;'' ::= "!" | ""
+
+''&lt;operator&gt;'' ::= ''&lt;operator-name&gt;'' | ''&lt;operator-name&gt;'' ":" ''&lt;opt-operator-suffix&gt;''
+
+''&lt;operator-name&gt;'' ::= "" | "is" | "has" | "each" | "field" ...
+
+''&lt;opt-operator-suffix&gt;'' ::= ''&lt;string&gt;'' | ""
+
+''&lt;operand&gt;'' ::= "[" ''&lt;search-string&gt;'' "]" | "{" ''&lt;indirect-search-string&gt;'' "}" | ''&lt;regex&gt;''
+
+''&lt;regex&gt;'' ::= "/" ''&lt;string&gt;'' "/" ''&lt;opt-regex-args&gt;''
+
+''&lt;opt-regex-args&gt;'' ::= "(" ''&lt;regex-args&gt;'' ")" | ""
+
+''&lt;regex-args&gt;'' ::= ''&lt;regex-arg&gt;'' | ''&lt;regex-arg&gt;'' ''&lt;regex-args&gt;''
+
+''&lt;regex-arg&gt;'' ::= "m" | "y" | "g" | "i"
+
+''&lt;string&gt;'' ::= ''&lt;string-type-1&gt;'' | ''&lt;string-type-2&gt;'' | ...
+
+At the end of parsing you end up with some or all of: 
+
+* ''&lt;opt-operation-prefix&gt;''
+* ''&lt;opt-operator-prefix&gt;''
+* ''&lt;operator-name&gt;''
+* ''&lt;opt-operator-suffix&gt;'', and 
+* ''&lt;operand&gt;''
+
+These are used differently by the different operators. For example, the field filter operator supports:
+
+* ''&lt;opt-operator-prefix&gt;'' to negate the result
+* ''&lt;regex&gt;'' or ''&lt;string&gt;'' operand (note that this must be explicitly supported by each filter operator)
+* ''&lt;opt-operator-suffix&gt;'' to specify a fieldname against which to filter
+
+NOTES:
+
+* The ''&lt;string&gt;'' is a terminal that generally supports single- or double- quoted strings which match, respectively, strings of non-single and non-double quotes. Unquoted strings include the extra exclusion of whitespace and square bracket characters.
+
+* In the case where the ''&lt;string-or-operator-list&gt;'' is NOT an ''&lt;operation&gt;'' it is treated as the operand passed to the default operator (see next bullet). It is not parsed as a full ''&lt;operation&gt;''.
+
+* If ''&lt;operator-name&gt;'' is the empty string then it will be set to "title" (i.e. the title filter operator is the default operator)
+
+* Results are collected and each operation is applied in turn. The ''&lt;opt-operation-prefix&gt;'' can be used to specify how the corresponding operation is used. Suppose T is the set of all tiddlers, R0 is the current set of results, and Fx is the xth operation. Then:
+
+** No prefix (""): R0 = R0 U Fx(T) (set union)
+** "-": R0 = R0 - Fx(T) (set difference)
+** "+": R0 = Fx(R0)
+
+Note that ''&lt;filter-operand&gt;''s are not commutative!
+
+* The parser was simplified by treating regex "/" as a "bracket" of sorts, meaning there could only be a start and end bracket. Thus the regex arguments, like i, are included in parenthesis immediately following the trailing "/".
