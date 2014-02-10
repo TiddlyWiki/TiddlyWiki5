@@ -30,16 +30,12 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var codeNode = this.document.createElement("code");
-	if(this.getAttribute("language")) {
-		codeNode.setAttribute("class",this.getAttribute("language"));
-	}
-	var domNode = this.document.createElement("pre");
+	var codeNode = this.document.createElement("code"),
+		domNode = this.document.createElement("pre");
 	codeNode.appendChild(this.document.createTextNode(this.getAttribute("code")));
 	domNode.appendChild(codeNode);
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
-
 	if(this.postRender) {
 		this.postRender();
 	}
@@ -49,7 +45,7 @@ CodeBlockWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 CodeBlockWidget.prototype.execute = function() {
-	// Nothing to do for a text node
+	this.language = this.getAttribute("language");
 };
 
 /*

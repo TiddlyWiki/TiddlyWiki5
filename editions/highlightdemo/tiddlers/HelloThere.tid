@@ -1,13 +1,19 @@
 title: HelloThere
 
-This is a demo of TiddlyWiki5 incorporating a plugin for the [[highlight.js|https://github.com/isagalaev/highlight.js]] Syntax highlighting for the Web from Ivan Sagalaev.
+This is a demo of TiddlyWiki5 incorporating a plugin for the [[highlight.js|https://github.com/isagalaev/highlight.js]] syntax highlighting library from Ivan Sagalaev.
 
-The HighlightExample tiddler have fenced blocks of code.
+! Usage
 
-To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+The HighlightExample tiddler shows how fenced code blocks can have a language specifier added to trigger highlighting.
+
+! Installation
+
+To add this plugin to your own TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/highlight]]
 
-To add your prefered [[theme|http://highlightjs.org/static/test.html]] append to your:
+! Adding Themes
 
-[[$:/tags/stylesheet]]
+You can add themes from highlight.js by copying the CSS to a new tiddler and tagging it with [[$:/tags/stylesheet]]. The available themes can be found on GitHub:
+
+https://github.com/isagalaev/highlight.js/tree/master/src/styles
