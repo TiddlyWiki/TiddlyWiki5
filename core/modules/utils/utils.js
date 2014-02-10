@@ -209,8 +209,8 @@ Returns an object with these members:
 */
 exports.getRelativeDate = function(delta) {
 	var futurep = false;
-	if (delta < 0) {
-		delta = -1*delta;
+	if(delta < 0) {
+		delta = -1 * delta;
 		futurep = true;
 	}
 	var units = [
@@ -225,7 +225,7 @@ exports.getRelativeDate = function(delta) {
 		var result = Math.floor(delta / units[t].duration);
 		if(result >= 2) {
 			var desc = result + " " + units[t].name;
-			if (futurep) {
+			if(futurep) {
 				desc = desc + " from now";
 			} else {
 				desc = desc + " ago";
