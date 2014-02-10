@@ -1,0 +1,9 @@
+created: 20140210160125905
+modified: 20140210162127052
+tags: features
+title: Searching
+type: text/vnd.tiddlywiki
+
+TiddlyWiki supports simple text searches through the search box in the sidebar. More sophisticated search options are featured in the [[advanced search|$:/AdvancedSearch]].
+
+All of them boil down to the use of TiddlerFilters to display the tiddlers that satisfy some criteria.
