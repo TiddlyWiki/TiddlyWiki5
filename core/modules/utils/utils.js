@@ -208,6 +208,11 @@ Returns an object with these members:
 	updatePeriod: time in millisecond until the string will be inaccurate
 */
 exports.getRelativeDate = function(delta) {
+	var futurep = false;
+	if (delta < 0) {
+		delta = -1*delta;
+		futurep = true;
+	}
 	var units = [
 		{name: "years",   duration:      365 * 24 * 60 * 60 * 1000},
 		{name: "months",  duration: (365/12) * 24 * 60 * 60 * 1000},
@@ -219,9 +224,15 @@ exports.getRelativeDate = function(delta) {
 	for(var t=0; t<units.length; t++) {
 		var result = Math.floor(delta / units[t].duration);
 		if(result >= 2) {
+			var desc = result + " " + units[t].name;
+			if (futurep) {
+				desc = desc + " from now";
+			} else {
+				desc = desc + " ago";
+			}
 			return {
 				delta: delta,
-				description: result + " " + units[t].name + " ago",
+				description: desc,
 				updatePeriod: units[t].duration
 			};
 		}
