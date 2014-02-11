@@ -65,10 +65,8 @@ function Syncer(options) {
 	}
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn) {
-		if(isLoggedIn) {
-			// Do a sync from the server
-			self.syncFromServer();
-		}
+		// Do a sync from the server
+		self.syncFromServer();
 	});
 }
 
