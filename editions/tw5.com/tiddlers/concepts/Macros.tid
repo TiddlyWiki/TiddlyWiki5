@@ -1,0 +1,14 @@
+created: 20140211171341271
+modified: 20140211171348738
+tags: concepts
+title: Macros
+type: text/vnd.tiddlywiki
+
+Macros are snippets of text that can be inserted with a concise shortcut:
+
+```
+<<myMacro>>
+```
+
+You can write your own [[Macros in WikiText]] or for more flexibility you can write [[JavaScript Macros]].
+

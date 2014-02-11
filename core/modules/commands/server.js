@@ -108,6 +108,9 @@ SimpleServer.prototype.listen = function(port,host) {
 			response.end();
 			return;
 		}
+		// Set the encoding for the incoming request
+		// TODO: Presumably this would need tweaking if we supported PUTting binary tiddlers
+		request.setEncoding("utf8");
 		// Dispatch the appropriate method
 		switch(request.method) {
 			case "GET": // Intentional fall-through
