@@ -145,7 +145,7 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 			// Process the tiddlers to make sure the revision is a string
 			var tiddlers = JSON.parse(data);
 			for(var t=0; t<tiddlers.length; t++) {
-				var tiddlerFields = self.convertTiddlerFromTiddlyWebFormat(tiddlers[t]);
+				tiddlers[t] = self.convertTiddlerFromTiddlyWebFormat(tiddlers[t]);
 			}
 			// Invoke the callback with the skinny tiddlers
 			callback(null,tiddlers);
