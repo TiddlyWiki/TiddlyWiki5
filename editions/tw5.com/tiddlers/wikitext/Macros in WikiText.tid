@@ -1,8 +1,10 @@
 created: 20131205160746466
-modified: 20131205160758948
+modified: 20140211190841939
 tags: wikitext
 title: Macros in WikiText
 type: text/vnd.tiddlywiki
+
+! Defining Macros
 
 Macros are snippets of text that can be inserted with a concise shortcut. A macro is defined like this:
 
@@ -15,6 +17,10 @@ Hi, I'm $name$ and I live in $address$
 The first line of the definition specifies the macro name and any parameters. Parameters are named and can optionally have default values that are used if the parameter isn't specified at the time of calling. The body of the macro definition follows, terminated with `\end`. The macro can include parameters using the `$name$` construction.
 
 Macro definitions must be placed at the top of a tiddler. Macros are available to the tiddler that defines them, plus any tiddlers that it transcludes.
+
+[[JavaScript Macros]] can also be used for more flexibility.
+
+! Using Macros
 
 Macros are used like this:
 
