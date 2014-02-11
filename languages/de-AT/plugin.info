@@ -4,6 +4,5 @@
 	"plugin-type": "language",
 	"description": "German (Austria)",
 	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"dependents": ["$:/languages/en-GB"]
+	"core-version": ">=5.0.0"
 }

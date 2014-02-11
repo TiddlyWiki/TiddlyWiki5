@@ -1,6 +1,6 @@
 title: $:/snippets/minilanguageswitcher
 
 <$linkcatcher to="$:/language">
-<$list filter="[plugin-type[language]sort[title]]"><div><$reveal state="$:/language" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/language" type="nomatch" text={{!!title}}>&nbsp;</$reveal> <$link to={{!!title}}><$view field="description" format="text"><$view field="name" format="text"><$view field="title" format="text"/></$view></$view></$link></div>
+<$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]]"><div><$reveal state="$:/language" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/language" type="nomatch" text={{!!title}}>&nbsp;</$reveal> <$link to={{!!title}}><$view field="description" format="text"><$view field="name" format="text"><$view field="title" format="text"/></$view></$view></$link></div>
 </$list>
 </$linkcatcher>
