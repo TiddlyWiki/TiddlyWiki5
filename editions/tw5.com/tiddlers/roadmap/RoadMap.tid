@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140206174012349
+modified: 20140211195703410
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -8,24 +8,24 @@ TiddlyWiki is under rapid development at the moment as it moves through beta to 
 
 ! Beta
 
-During the beta TiddlyWiki will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
+During the beta ~TiddlyWiki will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
 
 The following additional features are planned or under consideration for implementation during the beta:
 
 * Features required for large scale adoption
 ** Multilanguage support
 ** Proper use of ARIA roles
-* Features required by TiddlyWiki hackers
+* Features required by ~TiddlyWiki hackers
 ** Making plugins in the browser
 ** Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
 ** A "safe mode" to disable customisations
 * Fixing hangovers from TiddlyWikiClassic
-** TiddlyWiki file format (to avoid illegal attribute names)
+** ~TiddlyWiki file format (to avoid illegal attribute names)
 ** Tiddler object format (to provide true polymorphism of field values)
 * Perfecting WikiText
 ** Global macros
 ** `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
-** Further WikiText features
+** Further ~WikiText features
 * Productivity features
 ** Import wizard allowing individual tiddlers to be selected for import
 ** Aliases
