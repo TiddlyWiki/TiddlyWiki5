@@ -107,6 +107,10 @@ canvas.tw-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
 
+.tw-modal-displayed {
+	-webkit-filter: blur(4px);
+}
+
 .modal {
 	<<border-radius 6px>>
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>

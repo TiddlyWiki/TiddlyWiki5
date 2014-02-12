@@ -1,0 +1,15 @@
+title: TiddlyWiki for Tank
+created: 201311152153
+modified: 201311152153
+
+! Features
+
+* Loads skinny tiddlers from entire recipe at startup/login
+* Subsequently syncs changes back to the server
+* Polls for changes from the server
+
+! Issues
+
+* ''$:/DefaultTiddlers'' doesn't work because thanks to lazy loading it is only loaded after it is needed
+* Ignores ''if-match'' header, so doesn't detect clashes on save
+* UI state (eg current tab status) is shared between all users of the wiki, meaning that the UI can spontaneously change in response to a server sync

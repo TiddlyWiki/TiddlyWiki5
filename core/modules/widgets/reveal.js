@@ -89,6 +89,7 @@ RevealWidget.prototype.execute = function() {
 	this["class"] = this.getAttribute("class","");
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
+	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
 	// Compute the title of the state tiddler and read it
@@ -157,9 +158,12 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 	} else {
 		var refreshed = false;
 		if(changedTiddlers[this.stateTitle]) {
-			// this.updateState();
-			this.refreshSelf();
-			refreshed = true;
+			if(this.retain === "yes") {
+				this.updateState();
+			} else {
+				this.refreshSelf();
+				refreshed = true;
+			}
 		}
 		return this.refreshChildren(changedTiddlers) || refreshed;
 	}
