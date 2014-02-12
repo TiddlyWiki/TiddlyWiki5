@@ -17,13 +17,14 @@ Export our filter function
 */
 exports.field = function(source,operator,options) {
 	var results = [],
-		fieldname = (operator.suffix || operator.operator).toLowerCase();
+		fieldname = (operator.suffix || operator.operator).toLowerCase(),
+		checkTitle = fieldname === "title";
 	// Function to check an individual title
 	function checkTiddler(title) {
-		var tiddler = options.wiki.getTiddler(title);
+		var tiddler = checkTitle ? title : options.wiki.getTiddler(title);
 		if(tiddler) {
 			var match,
-				text = tiddler.getFieldString(fieldname);
+				text = checkTitle ? title : tiddler.getFieldString(fieldname);
 			if(operator.regexp) {
 				match = !!operator.regexp.exec(text);
 			} else {
