@@ -732,10 +732,6 @@ canvas.tw-edit-bitmapeditor  {
 ** Modals
 */
 
-.tw-modal-displayed {
-	-webkit-filter: blur(4px);
-}
-
 .modal-backdrop {
 	position: fixed;
 	top: 0;
