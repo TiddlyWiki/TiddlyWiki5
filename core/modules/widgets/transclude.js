@@ -62,7 +62,7 @@ TranscludeWidget.prototype.execute = function() {
 						this.transcludeField,
 						this.transcludeIndex,
 						{parseAsInline: parseAsInline}),
-		parseTreeNodes = parser ? parser.tree : [];
+		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };

@@ -789,13 +789,16 @@ exports.parseTextReference = function(title,field,index,options) {
 		var tiddler,text;
 		if(field) {
 			tiddler = this.getTiddler(title);
-			text = tiddler ? tiddler.fields[field] : "";
-			if(text === undefined) {
-				text = "";
+			if(!tiddler || !tiddler.hasField(field)) {
+				return null;
 			}
+			text = tiddler.fields[field];
 			return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 		} else if(index) {
 			text = this.extractTiddlerDataItem(title,index,"");
+			if(text === undefined) {
+				return null;
+			}
 			return this.parseText("text/vnd.tiddlywiki",text,options);
 		}
 	}

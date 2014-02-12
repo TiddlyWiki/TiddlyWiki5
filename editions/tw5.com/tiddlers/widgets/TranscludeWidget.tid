@@ -19,7 +19,7 @@ The TranscludeWidget dynamically imports content from another tiddler.
 |tooltip |Tooltip to be added to the generated elements |
 |mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
 
-The TranscludeWidget ignores any contained content.
+The TranscludeWidget treats any contained content as a fallback if the target of the transclusion is not defined (ie a missing tiddler or a missing field).
 
 ! Parsing modes
 
