@@ -94,7 +94,8 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
-		}
+		},
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey
 	});
 	event.preventDefault();
 	event.stopPropagation();

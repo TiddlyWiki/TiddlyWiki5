@@ -149,7 +149,9 @@ Handle a tw-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	this.addToStory(event.navigateTo,event.navigateFromTitle);
-	this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+	if(!event.navigateSuppressNavigation) {
+		this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+	}
 	return false;
 };
 
