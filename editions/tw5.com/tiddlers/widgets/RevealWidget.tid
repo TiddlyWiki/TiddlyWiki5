@@ -1,5 +1,5 @@
 created: 20131024141900000
-modified: 20131212181426191
+modified: 20140211232346858
 tags: widget
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -22,6 +22,10 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
 |default |Default value to use when the state tiddler |
+|animate |Set to "yes" to animate opening and closure (defaults to "no") |
+|retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no")|
+
+Retaining the content when hidden can give poor performance since the hidden content requires refresh processing even though it is not displayed. On the other hand, the content can be revealed much more quickly. Note that setting ''animate="yes"'' will also force ''retain="yes"''.
 
 ! Examples
 
