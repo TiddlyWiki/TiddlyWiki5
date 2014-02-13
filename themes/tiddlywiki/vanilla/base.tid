@@ -234,7 +234,7 @@ a.tw-tiddlylink-external {
 }
 
 .btn-mini {
-	color: #e0e0e0;
+	color: #c0c0c0;
 }
 
 .btn-mini:hover {
