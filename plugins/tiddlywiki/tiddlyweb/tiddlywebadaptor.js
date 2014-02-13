@@ -18,7 +18,7 @@ var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 function TiddlyWebAdaptor(syncer) {
 	this.syncer = syncer;
 	this.host = '/';
-	this.recipe = window.location.pathname.split('/')[2];
+	this.recipe = unescape(window.location.pathname.split('/')[2]);
 	this.log = $tw.logger.makeLog("TiddlyWebAdaptor");
 }
 
