@@ -612,10 +612,13 @@ exports.extractTiddlerDataItem = function(title,index,defaultText) {
 
 /*
 Set a tiddlers content to a JavaScript object. Currently this is done by setting the tiddler's type to "application/json" and setting the text to the JSON text of the data.
+title: title of tiddler
+data: object that can be serialised to JSON
+fields: optional hashmap of additional tiddler fields to be set
 */
-exports.setTiddlerData = function(title,data) {
+exports.setTiddlerData = function(title,data,fields) {
 	var tiddler = this.getTiddler(title);
-	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(tiddler,fields,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
 };
 
 /*
