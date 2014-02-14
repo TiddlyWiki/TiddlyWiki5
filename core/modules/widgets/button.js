@@ -53,16 +53,16 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
+		if(self.set) {
+			self.setTiddler();
+			handled = true;
+		}
 		if(self.message) {
 			self.dispatchMessage(event);
 			handled = true;
 		}
 		if(self.popup) {
 			self.triggerPopup(event);
-			handled = true;
-		}
-		if(self.set) {
-			self.setTiddler();
 			handled = true;
 		}
 		if(handled) {
@@ -102,7 +102,9 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 
 ButtonWidget.prototype.setTiddler = function() {
 	var tiddler = this.wiki.getTiddler(this.set);
-	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
+	var addition = { title: this.set };
+	addition[this.field || "text"] = this.setTo;
+	this.wiki.addTiddler(new $tw.Tiddler(tiddler, addition));
 };
 
 /*
@@ -113,6 +115,7 @@ ButtonWidget.prototype.execute = function() {
 	this.message = this.getAttribute("message");
 	this.param = this.getAttribute("param");
 	this.set = this.getAttribute("set");
+	this.field = this.getAttribute("field", "text");
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
