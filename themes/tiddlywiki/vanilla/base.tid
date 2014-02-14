@@ -950,6 +950,9 @@ canvas.tw-edit-bitmapeditor  {
 	font-weight: bold;
 }
 
+.tw-alert-highlight {
+	color: #812;	
+}
 
 .tw-static-alert {
 	position: relative;

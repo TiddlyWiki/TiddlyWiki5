@@ -1,3 +1,4 @@
 title: $:/core/ui/AlertTemplate
 
-<div class="tw-alert"><div class="tw-alert-toolbar"><$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button></div><div class="tw-alert-subtitle"><$view field="component"/> - <$view field="modified" format="date" template="0hh:0mm:0ss DD MM YYYY"/></div><div class="tw-alert-body"><$view field="text"/></div></div>
+<div class="tw-alert"><div class="tw-alert-toolbar"><$button message="tw-delete-tiddler" class="btn-invisible">{{$:/core/images/delete-button}}</$button></div><div class="tw-alert-subtitle"><$view field="component"/> - <$view field="modified" format="date" template="0hh:0mm:0ss DD MM YYYY"/> <$reveal type="nomatch" state="!!count" text=""><span class="tw-alert-highlight">(count: <$view field="count"/>)</span></$reveal></div><div class="tw-alert-body"><$view field="text"/></div></div>
+
