@@ -19,7 +19,7 @@ function TiddlyWebAdaptor(syncer) {
 	this.syncer = syncer;
 	this.host = this.getHost();
 	this.recipe = undefined;
-	this.log = $tw.logger.makeLog("TiddlyWebAdaptor");
+	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
 TiddlyWebAdaptor.prototype.getHost = function() {
@@ -48,7 +48,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 	// Get status
 	var self = this,
 		wiki = self.syncer.wiki;
-	this.log("Getting status");
+	this.logger.log("Getting status");
 	$tw.utils.httpRequest({
 		url: this.host + "status",
 		callback: function(err,data) {
@@ -63,7 +63,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			} catch (e) {
 			}
 			if(json) {
-				self.log("Status:",data);
+				self.logger.log("Status:",data);
 				// Record the recipe
 				if(json.space) {
 					self.recipe = json.space.recipe;
@@ -95,7 +95,7 @@ TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
 			callback(err);
 		}
 	};
-	this.log("Logging in:",options);
+	this.logger.log("Logging in:",options);
 	$tw.utils.httpRequest(options);
 };
 
@@ -113,7 +113,7 @@ TiddlyWebAdaptor.prototype.logout = function(callback) {
 			callback(err);
 		}
 	};
-	this.log("Logging out:",options);
+	this.logger.log("Logging out:",options);
 	$tw.utils.httpRequest(options);
 };
 

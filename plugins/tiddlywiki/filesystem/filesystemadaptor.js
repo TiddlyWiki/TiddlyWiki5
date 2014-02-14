@@ -21,12 +21,12 @@ function FileSystemAdaptor(syncer) {
 	this.syncer = syncer;
 	this.watchers = {};
 	this.pending = {};
-	this.log = $tw.logger.makeLog("FileSystem");
+	this.logger = new $tw.utils.Logger("FileSystem");
 	this.setwatcher = function(filename, title) {
 		return undefined;
 		return this.watchers[filename] = this.watchers[filename] ||
 			fs.watch(filename, {persistent: false}, function(e) {
-				self.log("Error:",e,filename);
+				self.logger.log("Error:",e,filename);
 				if(e === "change") {
 					var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
 					for(var t in tiddlers) {
@@ -157,7 +157,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 					if(err) {
 						return callback(err);
 					}
-					self.log("Saved file",fileInfo.filepath);
+					self.logger.log("Saved file",fileInfo.filepath);
 					_finish();
 				});
 			});
@@ -169,7 +169,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				if(err) {
 					return callback(err);
 				}
-				self.log("Saved file",fileInfo.filepath);
+				self.logger.log("Saved file",fileInfo.filepath);
 				_finish();
 			});
 		}
@@ -203,7 +203,7 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
 			if(err) {
 				return callback(err);
 			}
-			self.log("Deleted file",fileInfo.filepath);
+			self.logger.log("Deleted file",fileInfo.filepath);
 			// Delete the metafile if present
 			if(fileInfo.hasMetaFile) {
 				fs.unlink(fileInfo.filepath + ".meta",function(err) {
