@@ -20,5 +20,5 @@ Renders as:
 This will be monospaced
 ```
 
-Note that  some keyboard layouts treat the backtick as a [[dead key|http://en.wikipedia.org/wiki/Dead_key]], making it hard to type. The trick is to type three backticks followed by a space (and then typically remove the space). Alternatively, type all six backticks in one go, then a space, and then move the cursor back to type or paste the content.
+Note that  some keyboard layouts treat the backtick as a [[dead key|http://en.wikipedia.org/wiki/Dead_key]], making it hard to type. The trick is to type three backticks followed by a space. Alternatively, type all six backticks in one go, then a space, and then move the cursor back three characters to type or paste the content.
 
