@@ -1,0 +1,6 @@
+title: SampleAlert
+component: demo
+
+This is a demonstration alert.
+
+Note that the trashcan icon deletes the tiddler containing this alert. You can also remove it by opening the tiddler SampleAlert and editing it to remove the tag [[$:/tags/Alert]].

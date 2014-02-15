@@ -926,17 +926,16 @@ canvas.tw-edit-bitmapeditor  {
 	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
+	max-width: 500px;
 	z-index: 20000;
 }
 
 .tw-alert {
 	position: relative;
-	<<border-radius 6px>>
 	margin: 28px;
 	padding: 14px 14px 14px 14px;
-	border: 3px solid #DBB727;
-	background-color: rgb(250, 210, 50);
+	border: 2px solid #B99E2F;
+	background-color: rgb(255, 228, 118);
 }
 
 .tw-alert-toolbar {
@@ -945,8 +944,12 @@ canvas.tw-edit-bitmapeditor  {
 	right: 14px;
 }
 
+.tw-alert-toolbar svg {
+	fill: #B99E2F;
+}
+
 .tw-alert-subtitle {
-	color: #DBB727;
+	color: #B99E2F;
 	font-weight: bold;
 }
 
