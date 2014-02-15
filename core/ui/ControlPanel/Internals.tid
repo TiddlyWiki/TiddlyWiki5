@@ -1,15 +1,16 @@
 title: $:/core/ui/ControlPanel/Internals
 tags: $:/tags/ControlPanel
-caption: Internals
+caption: {{$:/language/ControlPanel/Internals/Caption}}
 
-! Tiddler fields
+\define lingo-base() $:/language/ControlPanel/Internals/
+! <<lingo TiddlerFields/Heading>>
 
-This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+<<lingo TiddlerFields/Hint>>
 
 {{$:/snippets/allfields}}
 
-! Loaded Modules
+! <<lingo LoadedModules/Heading>>
 
-These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+<<lingo LoadedModules/Hint>>
 
 {{$:/snippets/modules}}

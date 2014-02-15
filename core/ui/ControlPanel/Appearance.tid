@@ -1,11 +1,12 @@
 title: $:/core/ui/ControlPanel/Appearance
 tags: $:/tags/ControlPanel
-caption: Appearance
+caption: {{$:/language/ControlPanel/Appearance/Caption}}
 
-! Theme
+\define lingo-base() $:/language/ControlPanel/Appearance/
+! <<lingo Theme/Heading>>
 
 {{$:/snippets/themeswitcher}}
 
-! Story View
+! <<lingo StoryView/Heading>>
 
 {{$:/snippets/viewswitcher}}

@@ -1,7 +1,8 @@
 title: $:/core/ui/ControlPanel/Saving
 tags: $:/tags/ControlPanel
-caption: Saving
+caption: {{$:/language/ControlPanel/Saving/Caption}}
 
+\define lingo-base() $:/language/ControlPanel/Saving/
 \define backupURL()
 http://$(userName)$.tiddlyspot.com/backup/
 \end
@@ -12,23 +13,22 @@ http://$(userName)$.tiddlyspot.com/backup/
 </$set>
 </$reveal>
 \end
-! Saving
+! <<lingo Saving/Heading>>
 
-|[[Autosave|$:/config/AutoSave]] |{{$:/snippets/autosavestatus}} |
+|<<lingo AutoSave>> |{{$:/snippets/autosavestatus}} |
 
+! <<lingo TiddlySpot/Heading>>
 
-! TiddlySpot
+|<<lingo TiddlySpot/UserName>> |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
+|<<lingo TiddlySpot/Password>> |<$password name="upload"/> |
+|<<lingo TiddlySpot/Backups>> |<<backupLink>> |
 
-|[[Wiki name|$:/UploadName]] |<$edit-text tiddler="$:/UploadName" default="" tag="input"/> |
-|Password |<$password name="upload"/> |
-|Backups |<<backupLink>> |
+!! <<lingo TiddlySpot/Advanced/Heading>>
 
-!! Advanced settings
+|<<lingo TiddlySpot/ServerURL>>  |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
+|<<lingo TiddlySpot/Filename>> |<$edit-text tiddler="$:/UploadFilename" default="index.html" tag="input"/> |
+|<<lingo TiddlySpot/UploadDir>> |<$edit-text tiddler="$:/UploadDir" default="." tag="input"/> |
+|<<lingo TiddlySpot/BackupDir>> |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
 
-|Server URL |<$edit-text tiddler="$:/UploadURL" default="" tag="input"/> |
-|Upload filename |<$edit-text tiddler="$:/UploadFilename" default="index.html" tag="input"/> |
-|Upload directory |<$edit-text tiddler="$:/UploadDir" default="." tag="input"/> |
-|Backup directory |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
+<<lingo TiddlySpot/Hint>>
 
-
-//The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//

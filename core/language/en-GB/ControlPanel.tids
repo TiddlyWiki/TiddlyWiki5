@@ -14,5 +14,35 @@ Basics/Tags: Number of tags
 Basics/SystemTiddlers: Number of system tiddlers
 Basics/ShadowTiddlers: Number of shadow tiddlers
 Basics/OverriddenShadowTiddlers: Number of overridden shadow tiddlers
+Basics/Language/Prompt: Hello! Current language:
 Appearance/Caption: Appearance
-Language/prompt: Hello! Current language:
+Appearance/Theme/Heading: Theme
+Appearance/StoryView/Heading: Story View
+Saving/Caption: Saving
+Saving/Heading: Saving
+Saving/AutoSave: Auto Save
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/UserName: Wiki Name
+Saving/TiddlySpot/Password: Password
+Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Advanced/Heading: Advanced Settings
+Saving/TiddlySpot/ServerURL: Server URL
+Saving/TiddlySpot/Filename: Upload Filename
+Saving/TiddlySpot/UploadDir: Upload Directory
+Saving/TiddlySpot/BackupDir: Backup Directory
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
+Plugins/Caption: Plugins
+Plugins/Fields/Title: Title
+Plugins/Fields/Description: Description
+Plugins/Fields/Version: Version
+Tools/Caption: Tools
+Tools/Import/Heading: Import
+Tools/Import/Hint: Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). You can also drag and drop files directly to the browser window.
+Tools/Export/Heading: Export
+Tools/Export/AllAsStaticHTML/Caption: Download all tiddlers as static HTML
+Tools/Encryption/Heading: Encryption
+Internals/Caption: Internals
+Internals/TiddlerFields/Heading: TiddlerFields
+Internals/TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+Internals/LoadedModules/Heading: Loaded Modules
+Internals/LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
