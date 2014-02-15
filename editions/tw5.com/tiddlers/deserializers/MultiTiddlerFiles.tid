@@ -16,7 +16,7 @@ MultiTiddlerFiles have the extension `tids`. The file is structured as a block o
 For axample:
 
 ```
-title: $:/lingo/ControlPanel/
+title: $:/language/ControlPanel/
 tags: strings
 modifier: JoeBloggs
 
@@ -25,6 +25,6 @@ Basics/Caption: Basics
 Basics/Version: ~TiddlyWiki Version
 ```
 
-This example defines two tiddlers, ''"""$:/lingo/ControlPanel/Basics/Caption"""'' and ''"""$:/lingo/ControlPanel/Basics/Version"""''.
+This example defines two tiddlers, ''"""$:/language/ControlPanel/Basics/Caption"""'' and ''"""$:/language/ControlPanel/Basics/Version"""''.
 
 If a `title` field is specified in the header then it is treated as a prefix for the individual tiddlers defined in the title.

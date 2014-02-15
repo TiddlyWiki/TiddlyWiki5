@@ -3,7 +3,7 @@ title: $:/core/modules/pluginswitcher.js
 type: application/javascript
 module-type: global
 
-Manages switching plugins for themes and lingo.
+Manages switching plugins for themes and languages.
 
 \*/
 (function(){

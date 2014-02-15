@@ -1,15 +1,15 @@
 title: $:/core/ui/ControlPanel/Basics
 tags: $:/tags/ControlPanel
-caption: {{$:/lingo/ControlPanel/Basics/Caption}}
+caption: {{$:/language/ControlPanel/Basics/Caption}}
 
-\define lingo-base() $:/lingo/ControlPanel/
+\define lingo-base() $:/language/ControlPanel/
 |<<lingo Basics/Version>> |''<<version>>'' |
 |<$link to="SiteTitle"><<lingo Basics/Title>></$link> |<$edit-text tiddler="SiteTitle" default="" tag="input"/> |
 |<$link to="SiteSubtitle"><<lingo Basics/Subtitle>></$link> |<$edit-text tiddler="SiteSubtitle" default="" tag="input"/> |
 |<$link to="$:/status/UserName"><<lingo Basics/Username>></$link> |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
 |<$link to="$:/config/AnimationDuration"><<lingo Basics/AnimDuration>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
 |<$link to="$:/DefaultTiddlers"><<lingo Basics/DefaultTiddlers>></$link> |<<lingo Basics/DefaultTiddlers/Prompt>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo Basics/DefaultTiddlers/Hint>>// |
-|{{$:/lingo/ControlPanel/Language/prompt}} |{{$:/snippets/minilanguageswitcher}} |
+|{{$:/language/ControlPanel/Language/prompt}} |{{$:/snippets/minilanguageswitcher}} |
 |<<lingo Basics/Tiddlers>> |''<$count filter="[!is[system]]"/>'' |
 |<<lingo Basics/Tags>> |''<$count filter="[tags[]]"/>'' |
 |<<lingo Basics/SystemTiddlers>> |''<$count filter="[is[system]]"/>'' |
