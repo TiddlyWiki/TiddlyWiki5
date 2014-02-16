@@ -2,11 +2,6 @@ title: $:/core/ui/ControlPanel/Appearance
 tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Appearance/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Appearance/
-! <<lingo Theme/Heading>>
+{{$:/language/ControlPanel/Appearance/Hint}}
 
-{{$:/snippets/themeswitcher}}
-
-! <<lingo StoryView/Heading>>
-
-{{$:/snippets/viewswitcher}}
+<div class="tw-control-panel"><<tabs "[is[shadow]!has[draft.of]tag[$:/tags/ControlPanel/Appearance]] [!is[shadow]!has[draft.of]tag[$:/tags/ControlPanel/Appearance]] +[tag[$:/tags/ControlPanel/Appearance]]" "$:/core/ui/ControlPanel/Appearance/Theme">></div>

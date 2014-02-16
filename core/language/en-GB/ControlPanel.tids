@@ -16,10 +16,11 @@ Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
 Basics/Language/Prompt: Hello! Current language:
 Appearance/Caption: Appearance
-Appearance/Theme/Caption: Current theme:
-Appearance/Theme/Heading: Theme
-Appearance/StoryView/Caption: Current view:
-Appearance/StoryView/Heading: Story View
+Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
+Appearance/Theme/Prompt: Current theme:
+Appearance/Theme/Caption: Theme
+Appearance/StoryView/Prompt: Current view:
+Appearance/StoryView/Caption: Story View
 Saving/Caption: Saving
 Saving/Heading: Saving
 Saving/AutoSave: Autosave
@@ -54,8 +55,9 @@ Tools/Encryption/Disabled/Prompt: This wiki is not encrypted
 Tools/Encryption/ClearPassword/Button: clear password
 Tools/Encryption/ChangePassword/Button: change password
 Tools/Encryption/SetPassword/Button: set password
-Internals/Caption: Internals
-Internals/TiddlerFields/Heading: TiddlerFields
-Internals/TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
-Internals/LoadedModules/Heading: Loaded Modules
-Internals/LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+Advanced/Caption: Advanced
+Advanced/Hint: Internal information about this TiddlyWiki
+Advanced/TiddlerFields/Caption: Tiddler Fields
+Advanced/TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+Advanced/LoadedModules/Caption: Loaded Modules
+Advanced/LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
