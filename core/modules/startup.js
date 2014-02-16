@@ -203,7 +203,7 @@ exports.startup = function() {
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
-				param: "$:/messages/SaveInstructions"
+				param: "$:/language/Modals/SaveInstructions"
 			});
 		}
 		// Call browser startup modules

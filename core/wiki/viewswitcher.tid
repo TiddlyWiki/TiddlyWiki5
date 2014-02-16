@@ -1,6 +1,7 @@
 title: $:/snippets/viewswitcher
 
-Current view: {{$:/view}}
+\define lingo-base() $:/language/ControlPanel/Appearance/StoryView/
+<<lingo Caption>> {{$:/view}}
 
 <$linkcatcher to="$:/view"><$list filter="classic zoomin pop"><div><$reveal state="$:/view" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/view" type="nomatch" text={{!!title}}>&nbsp;</$reveal> <$link to={{!!title}}><$view field="title"/></$link>
 </div>

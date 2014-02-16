@@ -65,7 +65,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 		}
 	};
 	http.send(data);
-	$tw.notifier.display("$:/messages/StartingSave");
+	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	return true;
 };
 

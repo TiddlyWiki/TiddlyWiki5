@@ -1,6 +1,7 @@
 title: $:/core/ui/UntaggedTemplate
 
-<$button popup=<<qualify "$:/state/tagpopup">> class="btn-invisible tw-untagged-label tw-tag-label">untagged</$button>
+\define lingo-base() $:/language/SideBar/
+<$button popup=<<qualify "$:/state/tagpopup">> class="btn-invisible tw-untagged-label tw-tag-label"><<lingo Tags/Untagged/Caption>></$button>
 <$reveal state=<<qualify "$:/state/tagpopup">> type="popup" position="below"><div class="tw-drop-down">
 <$list filter="[untagged[]!is[system]] -[tags[]] +[sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 </div></$reveal>

@@ -1,6 +1,6 @@
 title: $:/core/ui/SideBar/More
 tags: $:/tags/SideBar
-caption: More
+caption: {{$:/language/SideBar/More/Caption}}
 
 <div class="tw-more-sidebar">
 <<tabs "[is[shadow]!has[draft.of]tag[$:/tags/MoreSideBar]] [!is[shadow]!has[draft.of]tag[$:/tags/MoreSideBar]] +[tag[$:/tags/MoreSideBar]]" "$:/core/ui/MoreSideBar/Tags" "$:/state/tab/moresidebar">>

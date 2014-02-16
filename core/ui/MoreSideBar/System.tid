@@ -1,5 +1,5 @@
 title: $:/core/ui/MoreSideBar/System
 tags: $:/tags/MoreSideBar
-caption: System
+caption: {{$:/language/SideBar/System/Caption}}
 
 <$list filter="[is[system]sort[title]]" template="$:/core/ui/ListItemTemplate"/>

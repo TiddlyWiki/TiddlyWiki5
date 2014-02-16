@@ -65,6 +65,7 @@ Syncer.prototype.titleIsLoggedIn = "$:/status/IsLoggedIn";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
 Syncer.prototype.titleAutoSave = "$:/config/AutoSave";
+Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
 Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
@@ -124,7 +125,8 @@ Save the wiki contents. Options are:
 */
 Syncer.prototype.saveWiki = function(options) {
 	options = options || {};
-	var method = options.method || "save",
+	var self = this,
+		method = options.method || "save",
 		template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template),
@@ -132,7 +134,7 @@ Syncer.prototype.saveWiki = function(options) {
 			if(err) {
 				alert("Error while saving:\n\n" + err);
 			} else {
-				$tw.notifier.display("$:/messages/Saved");
+				$tw.notifier.display(self.titleSavedNotification);
 				if(options.callback) {
 					options.callback();
 				}

@@ -1,6 +1,6 @@
 title: $:/core/ui/SideBar/Open
 tags: $:/tags/SideBar
-caption: Open
+caption: {{$:/language/SideBar/Open/Caption}}
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>

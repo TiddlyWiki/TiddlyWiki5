@@ -1,5 +1,6 @@
 title: $:/core/ui/TiddlerInfo/Listed
 tags: $:/tags/TiddlerInfo
-caption: Listed
+caption: {{$:/language/TiddlerInfo/Listed/Caption}}
 
-<$list filter="[is[current]listed[]!is[system]]" emptyMessage="This tiddler is not listed by any others" template="$:/core/ui/ListItemTemplate"/>
+\define lingo-base() $:/language/TiddlerInfo/
+<$list filter="[is[current]listed[]!is[system]]" emptyMessage=<<lingo Listed/Empty>> template="$:/core/ui/ListItemTemplate"/>

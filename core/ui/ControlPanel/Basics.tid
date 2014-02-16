@@ -3,15 +3,15 @@ tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Basics/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Basics/
-|<<lingo Version>> |''<<version>>'' |
-|<$link to="SiteTitle"><<lingo Title>></$link> |<$edit-text tiddler="SiteTitle" default="" tag="input"/> |
-|<$link to="SiteSubtitle"><<lingo Subtitle>></$link> |<$edit-text tiddler="SiteSubtitle" default="" tag="input"/> |
-|<$link to="$:/status/UserName"><<lingo Username>></$link> |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
-|<$link to="$:/config/AnimationDuration"><<lingo AnimDuration>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
-|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers>></$link> |<<lingo DefaultTiddlers/Prompt>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/Hint>>// |
-|<<lingo Language/Prompt>>s |{{$:/snippets/minilanguageswitcher}} |
-|<<lingo Tiddlers>> |''<$count filter="[!is[system]]"/>'' |
-|<<lingo Tags>> |''<$count filter="[tags[]]"/>'' |
-|<<lingo SystemTiddlers>> |''<$count filter="[is[system]]"/>'' |
-|<<lingo ShadowTiddlers>> |''<$count filter="[is[shadow]]"/>'' |
-|<<lingo OverriddenShadowTiddlers>> |''<$count filter="[!is[system]is[shadow]]"/>'' |
+|<<lingo Version/Prompt>> |''<<version>>'' |
+|<$link to="SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="SiteTitle" default="" tag="input"/> |
+|<$link to="SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/status/UserName"><<lingo Username/Prompt>></$link> |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
+|<$link to="$:/config/AnimationDuration"><<lingo AnimDuration/Prompt>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+|<<lingo Language/Prompt>> |{{$:/snippets/minilanguageswitcher}} |
+|<<lingo Tiddlers/Prompt>> |''<$count filter="[!is[system]]"/>'' |
+|<<lingo Tags/Prompt>> |''<$count filter="[tags[]]"/>'' |
+|<<lingo SystemTiddlers/Prompt>> |''<$count filter="[is[system]]"/>'' |
+|<<lingo ShadowTiddlers/Prompt>> |''<$count filter="[is[shadow]]"/>'' |
+|<<lingo OverriddenShadowTiddlers/Prompt>> |''<$count filter="[!is[system]is[shadow]]"/>'' |

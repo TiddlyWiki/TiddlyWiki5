@@ -1,10 +1,11 @@
 title: $:/core/ui/AdvancedSearch/Shadows
 tags: $:/tags/AdvancedSearch
-caption: Shadows
+caption: {{$:/language/Search/Shadows/Caption}}
 
+\define lingo-base() $:/language/Search/
 <$linkcatcher to="$:/temp/advancedsearch">
 
-Search for shadow tiddlers:
+<<lingo Shadows/Hint>>
 
 <div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
@@ -14,7 +15,7 @@ Search for shadow tiddlers:
 
 <div class="tw-search-results">
 
-//<small><$count filter="[is[shadow]search{$:/temp/advancedsearch}]"/> matches</small>//
+<<lingo Advanced/Matches>>
 
 <$list filter="[is[shadow]search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 

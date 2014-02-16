@@ -1,8 +1,8 @@
-title: $:/messages/SaveInstructions
+title: $:/language/Modals/SaveInstructions
 type: text/vnd.tiddlywiki
 subtitle: Save your work
 footer: <$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>
-help: http://five.tiddlywiki.com/static/SavingChanges
+help: http://tiddlywiki.com/static/SavingChanges.html
 
 Your changes to this wiki need to be saved as a ~TiddlyWiki HTML file.
 

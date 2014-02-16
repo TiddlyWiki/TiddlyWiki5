@@ -1,8 +1,9 @@
 title: $:/core/ui/SideBar/Tools
 tags: $:/tags/SideBar
-caption: Tools
+caption: {{$:/language/SideBar/Tools/Caption}}
 
-Import: <$browse/>
+\define lingo-base() $:/language/ControlPanel/
+<<lingo Tools/Import/Prompt>> <$browse/>
 
 ---
 
@@ -10,7 +11,7 @@ Import: <$browse/>
 
 ---
 
-TiddlyWiki5 version <<version>>
+<<lingo Basics/Version/Prompt>> <<version>>
 
 ---
 

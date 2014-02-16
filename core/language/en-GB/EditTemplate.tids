@@ -1,0 +1,14 @@
+title: $:/language/EditTemplate/
+
+Tags/Add/Placeholder: tag name
+Tags/Add/Button: add
+Body/Hint: Use WikiText to add formatting, images, and dynamic features
+Body/Placeholder: Type the text for this tiddler
+Body/Preview/Button/Show: show preview
+Body/Preview/Button/Hide: hide preview
+Type/Prompt: Type:
+Type/Placeholder: content type
+Fields/Add/Prompt: Add a new field:
+Fields/Add/Name/Placeholder: field name
+Fields/Add/Value/Placeholder: field value
+Fields/Add/Button: add
