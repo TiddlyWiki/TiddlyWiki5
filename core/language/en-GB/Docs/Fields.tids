@@ -1,0 +1,25 @@
+title: $:/language/Docs/Fields/
+
+bag: The name of the bag from which a tiddler came
+color: The CSS color value associated with a tiddler
+created: The date a tiddler was created
+creator: The name of the person who created a tiddler
+description: The descriptive text for a wizard
+draft.of: For draft tiddlers, contains the title of the tiddler of which this is a draft
+draft.title: For draft tiddlers, contains the proposed new title of the tiddler
+footer: The footer text for a wizard
+icon: The title of the tiddler containing the icon associated with a tiddler
+library: If set to "yes" indicates that a tiddler should be saved as a JavaScript library
+list: An ordered list of tiddler titles associated with a tiddler
+modified: The date and time at which a tiddler was last modified
+modifier: The tiddler title associated with the person who last modified a tiddler
+name: The human readable name associated with a plugin tiddler
+plugin-priority: A numerical value indicating the priority of a plugin tiddler
+plugin-type: The type of plugin in a plugin tiddler
+revision: The revision of the tiddler held at the server
+source: The source URL associated with a tiddler
+subtitle: The subtitle text for a wizard
+tags: A list of tags associated with a tiddler
+text: The body text of a tiddler
+title: The unique name of a tiddler
+type: The content type of a tiddler
