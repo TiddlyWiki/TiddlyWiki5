@@ -39,7 +39,7 @@ notification-border: #999999
 page-background: #ececfc
 pre-background: #f5f5f5
 pre-border: #cccccc
-primary: #d8b757
+primary: #F0B812
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ffffff
 sidebar-foreground: #acacac
@@ -70,9 +70,9 @@ tiddler-editor-border-image: #ffffff
 tiddler-editor-border: #cccccc
 tiddler-editor-fields-even: #e0e8e0
 tiddler-editor-fields-odd: #f0f4f0
-tiddler-info-background: #f8f8f8
+tiddler-info-background: #ffffff
 tiddler-info-border: #dddddd
-tiddler-info-tab-background: #f8f8f8
+tiddler-info-tab-background: #ffffff
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0

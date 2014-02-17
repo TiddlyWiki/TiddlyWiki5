@@ -829,7 +829,6 @@ canvas.tw-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border-selected>>;
 	border-top: 1px solid <<colour tab-border-selected>>;
 	border-right: 1px solid <<colour tab-border-selected>>;
-	margin-bottom: -1px;
 }
 
 .tw-tab-buttons button:not(.tw-tab-selected) {
@@ -849,7 +848,6 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
-	border-bottom: 1px solid <<colour sidebar-tab-background-selected>>;
 }
 
 .tw-sidebar-lists .tw-tab-divider {
