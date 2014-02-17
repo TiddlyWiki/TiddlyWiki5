@@ -1,0 +1,17 @@
+created: 20140217173700918
+modified: 20140217173713987
+tags: mechanism
+title: TranslationMechanism
+type: text/vnd.tiddlywiki
+
+The translation mechanism of TiddlyWiki manages and switches between language plugins that provide translations of the TiddlyWiki user interface.
+
+The title of the current language plugin is read from the tiddler [[$:/language]]. If the selected plugin changes then any displayed translateable text automatically changes.
+
+Translation plugins are bundles of tiddlers that each contain an indepedent translatable string. The strings are transcluded as needed.
+
+Translatable strings are generally in the namespace `$:/language/`, for example:
+
+* [[$:/language/ControlPanel/Tools/Encryption/ChangePassword/Button]]
+* [[$:/language/Docs/ModuleTypes/isfilteroperator]]
+* [[$:/language/EditTemplate/Fields/Add/Value/Placeholder]]
