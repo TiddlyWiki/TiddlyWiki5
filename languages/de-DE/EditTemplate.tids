@@ -1,0 +1,16 @@
+title: $:/language/EditTemplate/
+
+Body/Hint: Verwenden sie WikiText zum Formatieren. 
+Body/Placeholder: Geben Sie den Text für diesen Tiddler ein
+Body/Preview/Button/Hide: Vorschau aus
+Body/Preview/Button/Show: Vorschau
+#
+# TODO folgender button wird niche angenommen
+Fields/Add/Button: ok
+Fields/Add/Name/Placeholder: Feld Name
+Fields/Add/Prompt: Feld einfügen:
+Fields/Add/Value/Placeholder: Feld Text / Wert
+Tags/Add/Button: ok
+Tags/Add/Placeholder: neuer Tag
+Type/Placeholder: Tiddler Format
+Type/Prompt: Type:

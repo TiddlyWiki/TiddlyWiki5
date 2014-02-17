@@ -1,0 +1,11 @@
+title: $:/language/TiddlerInfo/
+
+Fields/Caption: Felder
+List/Caption: Liste
+List/Empty: Dieser Tiddler hat kein "list" Feld.
+Listed/Caption: Gelisted
+Listed/Empty: Dieser Tiddler wird nicht von anderen Tiddlern gelisted.
+References/Caption: Referenzen
+References/Empty: Kein Tiddler linkt zu Diesem.
+Tagging/Caption: Tagging
+Tagging/Empty: Kein Tiddler ist mit diesem "getagged".

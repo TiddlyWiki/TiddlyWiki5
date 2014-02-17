@@ -1,0 +1,9 @@
+{
+	"title": "$:/languages/de-CH",
+	"name": "de-CH",
+	"plugin-type": "language",
+	"description": "Deutsch (Schweiz)",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"dependents": ["$:/languages/de-DE"]
+}

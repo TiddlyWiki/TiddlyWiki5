@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Änderungen Speichern
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">Schließen</$button>
+help: http://tiddlywiki.com/static/DownloadingChanges.html
+
+Ihr Browser unterstützt nur manuelles Speichern. 
+
+Um das geänderte Wiki zu speichern, machen sie einen "rechts klick" auf den folgenden Link. Wählen sie "Datei herunterladen" oder "Datei speichern" und wählen sie Name und Verzeichnis.
+
+//Sie können den Vorgang etwas beschleunigen, indem sie die "Control-Taste" (Windows) oder die "Options/Alt-Taste" (Max OS X) drücken. Es wird kein "Speichern Dialog" erscheinen. Jedoch wird bei einigen Browsern die Datei einen zufälligen Namen bekommen. Sie müssen die Datei eventuell umbenennen, um sie öffnen zu können.//
+
+Bei "smartphones", die das Speichern von Dateien nicht erlauben, können sie ein Lesezeichen erstellen, dass mit ihrem PC synchronisiert wird. Dort können sie die Datein dann wie gewohnt speichern. 
