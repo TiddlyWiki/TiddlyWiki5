@@ -1,0 +1,9 @@
+title: $:/snippets/paletteswitcher
+
+\define lingo-base() $:/language/ControlPanel/Appearance/Palette/
+<<lingo Prompt>> <$view tiddler={{$:/palette}} field="name"/>
+
+<$linkcatcher to="$:/palette">
+<$list filter="[is[shadow]tag[$:/tags/Palette]] [!is[shadow]tag[$:/tags/Palette]] +[sort[description]]"><div><$reveal state="$:/palette" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/palette" type="nomatch" text={{!!title}}>&nbsp;</$reveal> <$link to={{!!title}}>''<$view field="name" format="text"/>'' - <$view field="description" format="text"/></$link></div>
+</$list>
+</$linkcatcher>

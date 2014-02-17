@@ -1,0 +1,43 @@
+created: 20140216102454178
+modified: 20140216102722184
+tags: concepts
+title: ColourPalettes
+type: text/vnd.tiddlywiki
+
+Colour palettes bind logical colour names (such as ''page-background'') to actual CSS colours (such as ''#fe0'').
+
+Entire colour palettes are stored in a single [[data tiddler|DataTiddlers]].
+
+The title of the tiddler containing the current colour palette is identified by the tiddler [[$:/palette]].
+
+To retrieve a named colour from the current palette you can use the ''colour'' macro:
+
+```
+<<colour page-background>>
+```
+
+The ''colour'' macro is defined like this:
+
+```
+\define colour(name)
+<$transclude tiddler={{$:/palette}} index="$name$"/>
+\end
+```
+
+By convention, each theme provides a default colour palette in the tiddler [[$:/config/DefaultPalette]] tiddler. Thus, setting the tiddler [[$:/theme]] to the string `$:/config/DefaultPalette` will revert to the palette packaged with the current theme (as long as it hasn't been redefined, since it is a shadow tiddler).
+
+Palette tiddlers should have the following fields:
+
+|!Field |!Description |
+|title |Any title can be used, typically a system title starting with "$:/" |
+|type |`application/x-tiddler-dictionary` to identify this tiddler as a [[data tiddler|DataTiddlers]] |
+|tags |`$:/tags/Palette` to identify this tiddler as a palette |
+|description |Description to be displayed in palette browser |
+|text |Colour definitions (see below) |
+
+The text of a palette tiddler consists of name value pairs like this:
+
+```
+foreground: #000
+background: #fff
+```

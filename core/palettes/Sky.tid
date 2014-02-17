@@ -1,0 +1,80 @@
+title: $:/palettes/Sky
+name: Sky
+description: Largely blue
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+
+primary: #5778D8
+alert-background: #ffe476
+alert-border: #b99e2f
+alert-highlight: #881122
+alert-muted-foreground: #b99e2f
+background: #f9f9ff
+blockquote-bar: <<colour muted-foreground>>
+code-background: #f7f7f9
+code-border: #e1e1e8
+code-foreground: #dd1144
+download-background: #34c734
+download-foreground: <<colour foreground>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: #fff
+dropdown-tab-background: #ececec
+dropzone-background: rgba(0,200,0,0.7)
+foreground: #333353
+message-background: #ecf2ff
+message-border: #cfd6e6
+message-foreground: #547599
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: #999999
+modal-footer-background: #f5f5f5
+modal-footer-border: #dddddd
+modal-header-border: #eeeeee
+muted-foreground: #999999
+notification-background: #ffffdd
+notification-border: #999999
+page-background: #ececfc
+pre-background: #f5f5f5
+pre-border: #cccccc
+primary: #5778d8
+sidebar-controls-foreground-hover: #000000
+sidebar-controls-foreground: #ffffff
+sidebar-foreground: #acacac
+sidebar-muted-foreground-hover: #444444
+sidebar-muted-foreground: #c0c0c0
+sidebar-tab-background-selected: #ececec
+sidebar-tiddler-link-foreground-hover: #444444
+sidebar-tiddler-link-foreground: #999999
+static-alert-foreground: #aaaaaa
+tab-background-selected: #ffffff
+tab-background: #d8d8d8
+tab-border-selected: #d8d8d8
+tab-border: #cccccc
+tab-divider: #d8d8d8
+tab-foreground: #666666
+table-border: #dddddd
+table-footer-background: #a8a8a8
+table-header-background: #f0f0f0
+tag-background: #d5ad34
+tag-foreground: #ffffff
+tiddler-background: <<colour background>>
+tiddler-controls-foreground-hover: #888888
+tiddler-controls-foreground-selected: #444444
+tiddler-controls-foreground: #cccccc
+tiddler-editor-background: #f8f8f8
+tiddler-editor-border-image: #ffffff
+tiddler-editor-border: #cccccc
+tiddler-editor-fields-even: #e0e8e0
+tiddler-editor-fields-odd: #f0f4f0
+tiddler-info-background: #f8f8f8
+tiddler-info-border: #dddddd
+tiddler-info-tab-background: #f8f8f8
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: #c0c0c0
+tiddler-title-foreground: #182955
+untagged-background: #999999
+very-muted-foreground: #888888

@@ -1,0 +1,5 @@
+title: $:/core/ui/ControlPanel/Appearance/Palette
+tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/Appearance/Palette/Caption}}
+
+{{$:/snippets/paletteswitcher}}
