@@ -6,24 +6,6 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 
 //Take care to preserve any backticks (&#96;) in the settings//
 
-! Colours
-
-* Primary colour: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colours" index="primary" default="" tag="input" type="color"/>
-* Background colour: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colours" index="background" default="" tag="input" type="color"/>
-* Foreground colour: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colours" index="foreground" default="" tag="input" type="color"/>
-* Page background colour: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colours" index="pagebackground" default="" tag="input" type="color"/>
-* Medium contrast color: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colours" index="medium" default="" tag="input" type="color"/>
-
-! Colour mappings
-
-* Tiddler background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="tiddlerbackground" default="" tag="input"/>
-* Tiddler foreground colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="foreground" default="" tag="input"/>
-* Page background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="pagebackground" default="" tag="input"/>
-* Link background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="linkbackground" default="" tag="input"/>
-* Link foreground colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="linkforeground" default="" tag="input"/>
-* Dropdown background colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="dropdownbackground" default="" tag="input"/>
-* Dropdown border colour mapping: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/colourmappings" index="dropdownborder" default="" tag="input"/>
-
 ! Settings
 
 * Font family: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings" index="fontfamily" default="" tag="input"/>

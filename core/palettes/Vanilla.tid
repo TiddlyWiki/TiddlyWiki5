@@ -42,6 +42,7 @@ primary: #5778d8
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ffffff
 sidebar-foreground: #acacac
+sidebar-foreground-shadow: rgba(255,255,255, 0.8)
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
 sidebar-tab-background-selected: #ececec

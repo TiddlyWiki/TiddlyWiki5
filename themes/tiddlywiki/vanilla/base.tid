@@ -2,17 +2,6 @@ title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
-\define colour(name)
-<$transclude tiddler={{$:/palette}} index="$name$"/>
-\end
-\define border-radius(radius)
-```
-  -webkit-border-radius: $radius$;
-     -moz-border-radius: $radius$;
-          border-radius: $radius$;
-```
-\end
-
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
 */

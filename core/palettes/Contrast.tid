@@ -1,21 +1,20 @@
-title: $:/palettes/Sky
-name: Sky
-description: Largely blue
+title: $:/palettes/Contrast
+name: Contrast
+description: High contrast and unambiguous
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
-primary: #5778D8
 alert-background: #ffe476
 alert-border: #b99e2f
 alert-highlight: #881122
 alert-muted-foreground: #b99e2f
-background: #f9f9ff
+background: #ffffff
 blockquote-bar: <<colour muted-foreground>>
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
 download-background: #34c734
-download-foreground: <<colour foreground>>
+download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
 dropdown-background: <<colour background>>
@@ -23,7 +22,7 @@ dropdown-border: <<colour muted-foreground>>
 dropdown-tab-background-selected: #fff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
-foreground: #333353
+foreground: #333333
 message-background: #ecf2ff
 message-border: #cfd6e6
 message-foreground: #547599
@@ -36,22 +35,22 @@ modal-header-border: #eeeeee
 muted-foreground: #999999
 notification-background: #ffffdd
 notification-border: #999999
-page-background: #ececfc
+page-background: #000000
 pre-background: #f5f5f5
 pre-border: #cccccc
-primary: #d8b757
+primary: #5778d8
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ffffff
-sidebar-foreground: #acacac
-sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground: #ffffff
+sidebar-foreground-shadow: rgba(255,0,0, 0.5)
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
-sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background-selected: #ececec
 sidebar-tiddler-link-foreground-hover: #444444
 sidebar-tiddler-link-foreground: #999999
 static-alert-foreground: #aaaaaa
-tab-background-selected: <<colour background>>
-tab-background: #bad0f1
+tab-background-selected: #ffffff
+tab-background: #d8d8d8
 tab-border-selected: #d8d8d8
 tab-border: #cccccc
 tab-divider: #d8d8d8

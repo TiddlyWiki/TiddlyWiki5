@@ -2,53 +2,9 @@ title: $:/themes/tiddlywiki/snowwhite/base
 tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
-\define border-radius(radius)
-```
-  -webkit-border-radius: $radius$;
-     -moz-border-radius: $radius$;
-          border-radius: $radius$;
-```
-\end
-\define box-shadow(shadow)
-```
-  -webkit-box-shadow: $shadow$;
-     -moz-box-shadow: $shadow$;
-          box-shadow: $shadow$;
-```
-\end
-\define filter(filter)
-```
-  -webkit-filter: $filter$;
-     -moz-filter: $filter$;
-          filter: $filter$;
-```
-\end
-\define transition(transition)
-```
-  -webkit-transition: $transition$;
-     -moz-transition: $transition$;
-          transition: $transition$;
-```
-\end
-\define transform-origin(origin)
-```
-  -webkit-transform-origin: $origin$;
-     -moz-transform-origin: $origin$;
-          transform-origin: $origin$;
-```
-\end
-\define background-linear-gradient(gradient)
-```
-background-image: linear-gradient($gradient$);
-background-image: -o-linear-gradient($gradient$);
-background-image: -moz-linear-gradient($gradient$);
-background-image: -webkit-linear-gradient($gradient$);
-background-image: -ms-linear-gradient($gradient$);
-```
-\end
 
 .sidebar-header {
-	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
+	text-shadow: 0 1px 0 <<colour sidebar-foreground-shadow>>;
 }
 
 .tw-page-controls svg {
