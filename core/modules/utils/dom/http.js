@@ -45,7 +45,7 @@ exports.httpRequest = function(options) {
 				return;
 			}
 		// Something went wrong
-		options.callback(new Error("XMLHttpRequest error: " + this.status));
+		options.callback("XMLHttpRequest error code: " + this.status);
 		}
 	};
 	// Make the request

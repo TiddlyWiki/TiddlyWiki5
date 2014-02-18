@@ -1,11 +1,12 @@
 title: $:/snippets/encryptionstatus
 
+\define lingo-base() $:/language/ControlPanel/Tools/Encryption/
 <$reveal type="match" state="$:/isEncrypted" text="yes">
-This wiki is encrypted.
-<$button message="tw-clear-password" class="btn btn-danger">Clear password</$button>
-<$button message="tw-set-password" class="btn btn-warning">Change password</$button>
+<<lingo Enabled/Prompt>>
+<$button message="tw-clear-password" class="btn btn-danger"><<lingo ClearPassword/Button>></$button>
+<$button message="tw-set-password" class="btn btn-warning"><<lingo ChangePassword/Button>></$button>
 </$reveal>
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
-This wiki is not encrypted.
-<$button message="tw-set-password" class="btn btn-warning">Set password</$button>
+<<lingo Disabled/Prompt>>
+<$button message="tw-set-password" class="btn btn-warning"><<lingo SetPassword/Button>></$button>
 </$reveal>

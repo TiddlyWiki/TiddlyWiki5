@@ -1,11 +1,7 @@
 title: $:/core/ui/ControlPanel/Appearance
 tags: $:/tags/ControlPanel
-caption: Appearance
+caption: {{$:/language/ControlPanel/Appearance/Caption}}
 
-! Theme
+{{$:/language/ControlPanel/Appearance/Hint}}
 
-{{$:/snippets/themeswitcher}}
-
-! Story View
-
-{{$:/snippets/viewswitcher}}
+<div class="tw-control-panel"><<tabs "[is[shadow]!has[draft.of]tag[$:/tags/ControlPanel/Appearance]] [!is[shadow]!has[draft.of]tag[$:/tags/ControlPanel/Appearance]] +[tag[$:/tags/ControlPanel/Appearance]]" "$:/core/ui/ControlPanel/Appearance/Theme">></div>

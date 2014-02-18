@@ -172,11 +172,14 @@ exports.tiddlerExists = function(title) {
 /*
 Generate an unused title from the specified base
 */
-exports.generateNewTitle = function(baseTitle) {
+exports.generateNewTitle = function(baseTitle,options) {
+	options = options || {};
 	var c = 0,
 	    title = baseTitle;
 	while(this.tiddlerExists(title)) {
-		title = baseTitle + " " + (++c);
+		title = baseTitle + 
+			(options.prefix || " ") + 
+			(++c);
 	};
 	return title;
 };
@@ -612,10 +615,13 @@ exports.extractTiddlerDataItem = function(title,index,defaultText) {
 
 /*
 Set a tiddlers content to a JavaScript object. Currently this is done by setting the tiddler's type to "application/json" and setting the text to the JSON text of the data.
+title: title of tiddler
+data: object that can be serialised to JSON
+fields: optional hashmap of additional tiddler fields to be set
 */
-exports.setTiddlerData = function(title,data) {
+exports.setTiddlerData = function(title,data,fields) {
 	var tiddler = this.getTiddler(title);
-	this.addTiddler(new $tw.Tiddler(tiddler,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(tiddler,fields,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
 };
 
 /*
@@ -789,13 +795,16 @@ exports.parseTextReference = function(title,field,index,options) {
 		var tiddler,text;
 		if(field) {
 			tiddler = this.getTiddler(title);
-			text = tiddler ? tiddler.fields[field] : "";
-			if(text === undefined) {
-				text = "";
+			if(!tiddler || !tiddler.hasField(field)) {
+				return null;
 			}
+			text = tiddler.fields[field];
 			return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 		} else if(index) {
 			text = this.extractTiddlerDataItem(title,index,"");
+			if(text === undefined) {
+				return null;
+			}
 			return this.parseText("text/vnd.tiddlywiki",text,options);
 		}
 	}

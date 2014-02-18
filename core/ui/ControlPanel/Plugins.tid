@@ -1,7 +1,8 @@
 title: $:/core/ui/ControlPanel/Plugins
 tags: $:/tags/ControlPanel
-caption: Plugins
+caption: {{$:/language/ControlPanel/Plugins/Caption}}
 
-<table><tbody><tr><th>Title</th><th>Description</th><th>Version</th></tr><$list filter="[!has[draft.of]has[plugin-type]sort[title]]"><tr><td><$link to={{!!title}}><$view field="title"/></$link></td><td><$view field="description"/></td><td><$view field="version"/></td></tr></$list>
+\define lingo-base() $:/language/ControlPanel/Plugins/
+<table><tbody><tr><th><<lingo Fields/Title>></th><th><<lingo Fields/Description>></th><th><<lingo Fields/Version>></th></tr><$list filter="[!has[draft.of]has[plugin-type]sort[title]]"><tr><td><$link to={{!!title}}><$view field="title"/></$link></td><td><$view field="description"/></td><td><$view field="version"/></td></tr></$list>
 </tbody>
 </table>

@@ -20,7 +20,7 @@ function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
 	// Make a logger
-	this.log = $tw.logger.makeLog("syncer");
+	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : ""));
 	// Find a working syncadaptor
 	this.syncadaptor = undefined;
 	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
@@ -51,18 +51,6 @@ function Syncer(options) {
 			self.handleLazyLoadEvent(title);
 		});
 	}
-	// Listen out for login/logout/refresh events in the browser
-	if($tw.browser) {
-		document.addEventListener("tw-login",function(event) {
-			self.handleLoginEvent(event);
-		},false);
-		document.addEventListener("tw-logout",function(event) {
-			self.handleLogoutEvent(event);
-		},false);
-		document.addEventListener("tw-server-refresh",function(event) {
-			self.handleRefreshEvent(event);
-		},false);
-	}
 	// Get the login status
 	this.getStatus(function (err,isLoggedIn) {
 		// Do a sync from the server
@@ -71,19 +59,13 @@ function Syncer(options) {
 }
 
 /*
-Error handling
-*/
-Syncer.prototype.showError = function(error) {
-	this.log("Error: " + error);
-};
-
-/*
 Constants
 */
 Syncer.prototype.titleIsLoggedIn = "$:/status/IsLoggedIn";
 Syncer.prototype.titleUserName = "$:/status/UserName";
 Syncer.prototype.titleSyncFilter = "$:/config/SyncFilter";
 Syncer.prototype.titleAutoSave = "$:/config/AutoSave";
+Syncer.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 Syncer.prototype.taskTimerInterval = 1 * 1000; // Interval for sync timer
 Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they've changed in the last 1s...
 Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
@@ -96,8 +78,10 @@ Syncer.prototype.readTiddlerInfo = function() {
 	// Hashmap by title of {revision:,changeCount:,adaptorInfo:}
 	this.tiddlerInfo = {};
 	// Record information for known tiddlers
-	var self = this;
-	this.wiki.forEachTiddler({includeSystem: true},function(title,tiddler) {
+	var self = this,
+		tiddlers = this.filterFn.call(this.wiki);
+	$tw.utils.each(tiddlers,function(title) {
+		var tiddler = self.wiki.getTiddler(title);
 		self.tiddlerInfo[title] = {
 			revision: tiddler.fields["revision"],
 			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
@@ -141,7 +125,8 @@ Save the wiki contents. Options are:
 */
 Syncer.prototype.saveWiki = function(options) {
 	options = options || {};
-	var method = options.method || "save",
+	var self = this,
+		method = options.method || "save",
 		template = options.template || "$:/core/save/all",
 		downloadType = options.downloadType || "text/plain",
 		text = this.wiki.renderTiddler(downloadType,template),
@@ -149,7 +134,7 @@ Syncer.prototype.saveWiki = function(options) {
 			if(err) {
 				alert("Error while saving:\n\n" + err);
 			} else {
-				$tw.notifier.display("$:/messages/Saved");
+				$tw.notifier.display(self.titleSavedNotification);
 				if(options.callback) {
 					options.callback();
 				}
@@ -165,7 +150,7 @@ Syncer.prototype.saveWiki = function(options) {
 	for(var t=this.savers.length-1; t>=0; t--) {
 		var saver = this.savers[t];
 		if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback)) {
-			this.log("Saving wiki with method",method,"through saver",saver.info.name);
+			this.logger.log("Saving wiki with method",method,"through saver",saver.info.name);
 			// Clear the task queue if we're saving (rather than downloading)
 			if(method !== "download") {
 				this.readTiddlerInfo();
@@ -208,7 +193,7 @@ Syncer.prototype.getStatus = function(callback) {
 		// Get login status
 		this.syncadaptor.getStatus(function(err,isLoggedIn,username) {
 			if(err) {
-				self.showError(err);
+				self.logger.alert(err);
 				return;
 			}
 			// Set the various status tiddlers
@@ -233,7 +218,7 @@ Synchronise from the server by reading the skinny tiddler list and queuing up lo
 */
 Syncer.prototype.syncFromServer = function() {
 	if(this.syncadaptor && this.syncadaptor.getSkinnyTiddlers) {
-		this.log("Retrieving skinny tiddler list");
+		this.logger.log("Retrieving skinny tiddler list");
 		var self = this;
 		if(this.pollTimerId) {
 			clearTimeout(this.pollTimerId);
@@ -247,7 +232,7 @@ Syncer.prototype.syncFromServer = function() {
 			},self.pollTimerInterval);
 			// Check for errors
 			if(err) {
-				self.log("Error retrieving skinny tiddler list:",err);
+				self.logger.alert("Error retrieving skinny tiddler list:",err);
 				return;
 			}
 			// Process each incoming tiddler
@@ -285,8 +270,8 @@ Syncer.prototype.syncToServer = function(changes) {
 		now = new Date(),
 		filteredChanges = this.filterFn.call(this.wiki,changes);
 	$tw.utils.each(changes,function(change,title,object) {
-		// Ignore the change if it is a shadow tiddler
-		if((change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) || (!change.deleted && filteredChanges.indexOf(title) !== -1)) {
+		// Process the change if it is a deletion of a tiddler we're already syncing, or is on the filtered change list
+		if((change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) || filteredChanges.indexOf(title) !== -1) {
 			// Queue a task to sync this tiddler
 			self.enqueueSyncTask({
 				type: change.deleted ? "delete" : "save",
@@ -300,7 +285,6 @@ Syncer.prototype.syncToServer = function(changes) {
 Lazily load a skinny tiddler if we can
 */
 Syncer.prototype.handleLazyLoadEvent = function(title) {
-console.log("Lazy loading",title)
 	// Queue up a sync task to load this tiddler
 	this.enqueueSyncTask({
 		type: "load",
@@ -335,7 +319,7 @@ Attempt to login to TiddlyWeb.
 	callback: invoked with arguments (err,isLoggedIn)
 */
 Syncer.prototype.login = function(username,password,callback) {
-	this.log("Attempting to login as",username);
+	this.logger.log("Attempting to login as",username);
 	var self = this;
 	if(this.syncadaptor.login) {
 		this.syncadaptor.login(username,password,function(err) {
@@ -357,12 +341,12 @@ Syncer.prototype.login = function(username,password,callback) {
 Attempt to log out of TiddlyWeb
 */
 Syncer.prototype.handleLogoutEvent = function() {
-	this.log("Attempting to logout");
+	this.logger.log("Attempting to logout");
 	var self = this;
 	if(this.syncadaptor.logout) {
 		this.syncadaptor.logout(function(err) {
 			if(err) {
-				self.showError(err);
+				self.logger.alert(err);
 			} else {
 				self.getStatus();
 			}
@@ -400,7 +384,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 	}
 	// Check if this tiddler is already in the queue
 	if($tw.utils.hop(this.taskQueue,task.title)) {
-		// this.log("Re-queueing up sync task with type:",task.type,"title:",task.title);
+		// this.logger.log("Re-queueing up sync task with type:",task.type,"title:",task.title);
 		var existingTask = this.taskQueue[task.title];
 		// If so, just update the last modification time
 		existingTask.lastModificationTime = task.lastModificationTime;
@@ -409,7 +393,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 			existingTask.type = task.type;
 		}
 	} else {
-		// this.log("Queuing up sync task with type:",task.type,"title:",task.title);
+		// this.logger.log("Queuing up sync task with type:",task.type,"title:",task.title);
 		// If it is not in the queue, insert it
 		this.taskQueue[task.title] = task;
 	}
@@ -463,7 +447,7 @@ Syncer.prototype.processTaskQueue = function() {
 			// Dispatch the task
 			this.dispatchTask(task,function(err) {
 				if(err) {
-					self.showError("Sync error while processing '" + task.title + "':\n" + err);
+					self.logger.alert("Sync error while processing '" + task.title + "':\n" + err);
 				}
 				// Mark that this task is no longer in progress
 				delete self.taskInProgress[task.title];
@@ -515,7 +499,7 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 	if(task.type === "save") {
 		var changeCount = this.wiki.getChangeCount(task.title),
 			tiddler = this.wiki.getTiddler(task.title);
-		this.log("Dispatching 'save' task:",task.title);
+		this.logger.log("Dispatching 'save' task:",task.title);
 		if(tiddler) {
 			this.syncadaptor.saveTiddler(tiddler,function(err,adaptorInfo,revision) {
 				if(err) {
@@ -533,7 +517,7 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 		}
 	} else if(task.type === "load") {
 		// Load the tiddler
-		this.log("Dispatching 'load' task:",task.title);
+		this.logger.log("Dispatching 'load' task:",task.title);
 		this.syncadaptor.loadTiddler(task.title,function(err,tiddlerFields) {
 			if(err) {
 				return callback(err);
@@ -547,7 +531,7 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 		});
 	} else if(task.type === "delete") {
 		// Delete the tiddler
-		this.log("Dispatching 'delete' task:",task.title);
+		this.logger.log("Dispatching 'delete' task:",task.title);
 		this.syncadaptor.deleteTiddler(task.title,function(err) {
 			if(err) {
 				return callback(err);

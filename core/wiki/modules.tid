@@ -1,7 +1,7 @@
 title: $:/snippets/modules
 
 \define describeModuleType(type)
-{{$:/docs/moduletypes/$type$}}
+{{$:/language/Docs/ModuleTypes/$type$}}
 \end
 <$list filter="[moduletypes[]]">
 !! <$macrocall $name="currentTiddler" $type="text/plain" $output="text/plain"/>

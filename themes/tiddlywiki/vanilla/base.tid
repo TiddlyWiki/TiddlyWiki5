@@ -2,14 +2,6 @@ title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
-\define border-radius(radius)
-```
-  -webkit-border-radius: $radius$;
-     -moz-border-radius: $radius$;
-          border-radius: $radius$;
-```
-\end
-
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
 */
@@ -33,8 +25,8 @@ html {
 body.tw-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics##fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics##lineheight}};
-	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##foreground}};
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##pagebackground}};
+	color: <<colour foreground>>;
+	background-color: <<colour page-background>>;
 	word-wrap: break-word;
 }
 
@@ -51,23 +43,23 @@ pre {
 	word-wrap: break-word;
 	white-space: pre;
 	white-space: pre-wrap;
-	background-color: #f5f5f5;
-	border: 1px solid #ccc;
+	background-color: <<colour pre-background>>;
+	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
 	<<border-radius 3px>>
 }
 
 code {
-	color: #d14;
-	background-color: #f7f7f9;
-	border: 1px solid #e1e1e8;
+	color: <<colour code-foreground>>;
+	background-color: <<colour code-background>>;
+	border: 1px solid <<colour code-border>>;
     white-space: pre-wrap;
 	padding: 0 3px 2px;
 	<<border-radius 3px>>
 }
 
 blockquote {
-	border-left: 5px solid #ddd;
+	border-left: 5px solid <<colour blockquote-bar>>;
 	margin-left: 25px;
 	padding-left: 10px;
 }
@@ -88,7 +80,7 @@ pre > code {
 }
 
 table {
-	border: 1px solid #ddd;
+	border: 1px solid <<colour table-border>>;
 	width: auto;
 	max-width: 100%;
 	caption-side: bottom;
@@ -96,17 +88,17 @@ table {
 
 table th, table td {
 	padding: 0 7px 0 7px;
-	border-top: 1px solid #ddd;
-	border-left: 1px solid #ddd;
+	border-top: 1px solid <<colour table-border>>;
+	border-left: 1px solid <<colour table-border>>;
 }
 
 table thead tr td, table th {
-	background-color: #f0f0f0;
+	background-color: <<colour table-header-background>>;
 	font-weight: bold;
 }
 
 table tfoot tr td {
-	background-color: #a8a8a8;
+	background-color: <<colour table-footer-background>>;
 }
 
 .tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
@@ -125,16 +117,16 @@ table tfoot tr td {
 a.tw-tiddlylink {
 	text-decoration: none;
 	font-weight: normal;
-	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkforeground}};
+	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
 
 .tw-sidebar-lists a.tw-tiddlylink {
-	color: #999;
+	color: <<colour sidebar-tiddler-link-foreground>>;
 }
 
 .tw-sidebar-lists a.tw-tiddlylink:hover {
-	color: #444;
+	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
 a.tw-tiddlylink:hover {
@@ -176,17 +168,17 @@ a.tw-tiddlylink-external {
 	font-size: 16.9px;
 	font-weight: bold;
 	line-height: 20px;
-	color: #fff;
+	color: <<colour dragger-foreground>>;
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 1);
 	white-space: nowrap;
 	vertical-align: baseline;
-	background-color: #000;
+	background-color: <<colour dragger-background>>;
 	<<border-radius 20px>>
 }
 
 .tw-tiddler-dragger-cover {
 	position: absolute;
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##pagebackground}};
+	background-color: <<colour page-background>>;
 }
 
 .tw-dropzone {
@@ -200,7 +192,7 @@ a.tw-tiddlylink-external {
 	top: 0;
 	left: 0;
 	right: 0;
-	background: rgba(0,200,0,0.7);
+	background: <<colour dropzone-background>>;
 	text-align: center;
 	content: "Drop here";
 }
@@ -219,26 +211,26 @@ a.tw-tiddlylink-external {
 .btn-icon svg {
 	height: 1em;
 	width: 1em;
-	fill: #999;
+	fill: <<colour muted-foreground>>;
 }
 
 .btn-big-green {
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
-	background: #34C734;
-	color: #fff;
-	fill: #fff;
+	background: <<colour download-background>>;
+	color: <<colour download-foreground>>;
+	fill: <<colour download-foreground>>;
 	border: none;
 	font-size: 1.2em;
 	line-height: 1.4em;
 }
 
 .btn-mini {
-	color: #e0e0e0;
+	color: <<colour sidebar-muted-foreground>>;
 }
 
 .btn-mini:hover {
-	color: #444;
+	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
 .tw-image-button {
@@ -275,21 +267,21 @@ a.tw-tiddlylink-external {
 	font-size: 0.9em;
 	font-weight: 300;
 	line-height: 1.2em;
-	color: #fff;
+	color: <<colour tag-foreground>>;
 	white-space: nowrap;
 	vertical-align: baseline;
-	background-color: #D5AD34;
+	background-color: <<colour tag-background>>;
 	<<border-radius 8px>>
 }
 
 .tw-untagged-label {
-	background-color: #999;
+	background-color: <<colour untagged-background>>;
 }
 
 .tw-tag-label svg {
 	height: 1em;
 	width: 1em;
-	fill: #fff;
+	fill: <<colour tag-foreground>>;
 }
 
 /*
@@ -297,7 +289,7 @@ a.tw-tiddlylink-external {
 */
 
 .sidebar-header {
-	color: #acacac;
+	color: <<colour sidebar-foreground>>;
 }
 
 .sidebar-header .title a.tw-tiddlylink-resolves {
@@ -329,11 +321,11 @@ a.tw-tiddlylink-external {
 	height: 1.75em;
 	min-width: 1px;
 	padding-right: 0.5em;
-	fill: #fff;
+	fill: <<colour sidebar-controls-foreground>>;
 }
 
 .tw-page-controls button:hover svg, .tw-page-controls a:hover svg {
-	fill: #000;
+	fill: <<colour sidebar-controls-foreground-hover>;
 }
 
 .tw-menu-list-item {
@@ -411,19 +403,19 @@ a.tw-tiddlylink-external {
 
 .tw-tiddler-frame {
 	margin-bottom: 28px;
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##tiddlerbackground}};
+	background-color: <<colour tiddler-background>>;
 }
 
 .tw-tiddler-info {
 	padding: 14px 42px 14px 42px;
-	background-color: #f8f8f8;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
+	background-color: <<colour tiddler-info-background>>;
+	border-top: 1px solid <<colour tiddler-info-border>>;
+	border-bottom: 1px solid <<colour tiddler-info-border>>;
 }
 
 .tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
-	background-color: #f8f8f8;
-	border-bottom: 1px solid #f8f8f8;
+	background-color: <<colour tiddler-info-tab-background>>;
+	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
 }
 
 .tw-view-field-table {
@@ -464,7 +456,7 @@ a.tw-tiddlylink-external {
 	font-weight: 300;
 	font-size: 2.35em;
 	line-height: 1.2em;
-	color: #182955;
+	color: <<colour tiddler-title-foreground>>;
 }
 
 .titlebar img {
@@ -473,7 +465,7 @@ a.tw-tiddlylink-external {
 
 .tw-subtitle {
 	font-size: 0.9em;
-	color: #c0c0c0;
+	color: <<colour tiddler-subtitle-foreground>>;
 	font-weight: 300;
 }
 
@@ -493,15 +485,15 @@ a.tw-tiddlylink-external {
 
 .tw-tiddler-controls button svg {
 	height: 0.75em;
-	fill: #ccc;
+	fill: <<colour tiddler-controls-foreground>>;
 }
 
 .tw-tiddler-controls button.tw-selected svg {
-	fill: #444;
+	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
 .tw-tiddler-controls button:hover svg {
-	fill: #888;
+	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
 @media print {
@@ -511,29 +503,29 @@ a.tw-tiddlylink-external {
 }
 
 .tw-tiddler-help { /* Help prompts within tiddler template */
-	color: #999;
+	color: <<colour muted-foreground>>;
 	margin-top: 14px;
 }
 
 .tw-tiddler-help a.tw-tiddlylink {
-	color: #888888;
+	color: <<colour very-muted-foreground>>;
 }
 
 .tw-tiddler-frame input.tw-edit-texteditor, .tw-tiddler-frame textarea.tw-edit-texteditor {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
-	border: 1px solid #ccc;
+	border: 1px solid <<colour tiddler-editor-border>>;
 	line-height: 1.3em;
 	-webkit-appearance: none;
 	margin: 4px 0 4px 0;
 }
 
 .tw-tiddler-frame input.tw-edit-texteditor {
-	background-color: #f8f8f8;
+	background-color: <<colour tiddler-editor-background>>;
 }
 
 canvas.tw-edit-bitmapeditor  {
-	border: 6px solid #fff;
+	border: 6px solid <<colour tiddler-editor-border-image>>;
 	cursor: crosshair;
 	-moz-user-select: none;
 	-webkit-user-select: none;
@@ -555,7 +547,7 @@ canvas.tw-edit-bitmapeditor  {
 */
 
 .tw-tiddler-edit-frame em.tw-edit {
-	color: #999;
+	color: <<colour muted-foreground>>;
 	font-style: normal;
 }
 
@@ -564,7 +556,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-edit-tags {
-	border: 1px solid #ddd;
+	border: 1px solid <<colour tiddler-editor-border>>;
 	padding: 4px 8px 4px 8px;
 }
 
@@ -600,7 +592,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-tiddler-preview-preview {
 	float: right;
 	width: 48%;
-	border: 1px solid #ccc;
+	border: 1px solid <<colour tiddler-editor-border>>;
 	margin: 4px 3px 3px 3px;
 	padding: 3px 3px 3px 3px;
 }
@@ -620,11 +612,11 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-edit-fields > tbody > .tw-edit-field:nth-child(odd) {
-	background-color: #f0f4f0;
+	background-color: <<colour tiddler-editor-fields-odd>>;
 }
 
 .tw-edit-fields > tbody > .tw-edit-field:nth-child(even) {
-	background-color: #e0e8e0;
+	background-color: <<colour tiddler-editor-fields-even>>;
 }
 
 .tw-edit-field-name {
@@ -641,7 +633,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-edit-field-remove svg {
 	height: 1em;
 	width: 1em;
-	fill: #888;
+	fill: <<colour muted-foreground>>;
 	vertical-align: middle;
 }
 
@@ -662,13 +654,13 @@ canvas.tw-edit-bitmapeditor  {
 .btn-dropdown svg {
 	height: 1em;
 	width: 1em;
-	fill: #999;
+	fill: <<colour muted-foreground>>;
 }
 
 .tw-drop-down {
 	min-width: 280px;
-	border: 1px solid {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownborder}};
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownbackground}};
+	border: 1px solid <<colour dropdown-border>>;
+	background-color: <<colour dropdown-background>>;
 	padding: 7px 0 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
@@ -684,18 +676,18 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-drop-down a:hover {
-	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkbackground}};
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkforeground}};
+	color: <<colour tiddler-link-background>>;
+	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
 }
 
 .tw-drop-down .tw-tab-buttons button {
-	background-color: #ececec;
+	background-color: <<colour dropdown-tab-background>>;
 }
 
 .tw-drop-down .tw-tab-buttons button.tw-tab-selected {
-	background-color: #fff;
-	border-bottom: 1px solid #fff;
+	background-color: <<colour dropdown-tab-background-selected>>;
+	border-bottom: 1px solid <<colour dropdown-tab-background-selected>>;
 }
 
 .tw-drop-down .tw-tab-contents a {
@@ -709,8 +701,8 @@ canvas.tw-edit-bitmapeditor  {
 .tw-block-dropdown {
 	position: absolute;
 	min-width: 280px;
-	border: 1px solid {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownborder}};
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##dropdownbackground}};
+	border: 1px solid <<colour dropdown-border>>;
+	background-color: <<colour dropdown-background>>;
 	padding: 0 0 0 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
@@ -723,8 +715,8 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-block-dropdown a:hover {
-	color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkbackground}};
-	background-color: {{$:/themes/tiddlywiki/vanilla/colourmappings##linkforeground}};
+	color: <<colour tiddler-link-background>>;
+	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
 }
 
@@ -739,14 +731,13 @@ canvas.tw-edit-bitmapeditor  {
 	bottom: 0;
 	left: 0;
 	z-index: 1000;
-	background-color: #000;
+	background-color: <<colour modal-backdrop>>;
 }
 
 .modal {
 	z-index: 1100;
-	background-color: #fff;
-	border: 1px solid #999;
-	border: 1px solid rgba(0,0,0,.3);
+	background-color: <<colour modal-background>>;
+	border: 1px solid <<colour modal-border>>;
 }
 
 @media (max-width: 55em) {
@@ -775,7 +766,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .modal-header {
 	padding: 9px 15px;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid <<colour modal-header-border>>;
 }
 
 .modal-header h3 {
@@ -791,8 +782,8 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 14px 15px 15px;
 	margin-bottom: 0;
 	text-align: right;
-	background-color: #f5f5f5;
-	border-top: 1px solid #ddd;
+	background-color: <<colour modal-footer-background>>;
+	border-top: 1px solid <<colour modal-footer-border>>;
 }
 
 /*
@@ -806,9 +797,8 @@ canvas.tw-edit-bitmapeditor  {
 	z-index: 1000;
 	max-width: 280px;
 	padding: 0 14px 0 14px;
-	background-color: #ffd;
-	border: 1px solid #999;
-	border: 1px solid rgba(0,0,0,.3);
+	background-color: <<colour notification-background>>;
+	border: 1px solid <<colour notification-border>>;
 }
 
 /*
@@ -826,7 +816,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-buttons button {
-	color: #666;
+	color: <<colour tab-foreground>>;
 	margin-left: 2px;
 	margin-right: 2px;
 	font-weight: 300;
@@ -835,22 +825,21 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-buttons button.tw-tab-selected {
-	background-color: #fff;
-	border-left: 1px solid #d8d8d8;
-	border-top: 1px solid #d8d8d8;
-	border-right: 1px solid #d8d8d8;
-	margin-bottom: -1px;
+	background-color: <<colour tab-background-selected>>;
+	border-left: 1px solid <<colour tab-border-selected>>;
+	border-top: 1px solid <<colour tab-border-selected>>;
+	border-right: 1px solid <<colour tab-border-selected>>;
 }
 
 .tw-tab-buttons button:not(.tw-tab-selected) {
-	background-color: #d8d8d8;
-	border-left: 1px solid #ccc;
-	border-top: 1px solid #ccc;
-	border-right: 1px solid #ccc;
+	background-color: <<colour tab-background>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-top: 1px solid <<colour tab-border>>;
+	border-right: 1px solid <<colour tab-border>>;
 }
 
 .tw-tab-divider {
-	border-top: 1px solid #d8d8d8;
+	border-top: 1px solid <<colour tab-divider>>;
 }
 
 .tw-tab-content {
@@ -858,8 +847,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
-	background-color: #ececec;
-	border-bottom: 1px solid #ececec;
+	background-color: <<colour sidebar-tab-background-selected>>;
 }
 
 .tw-sidebar-lists .tw-tab-divider {
@@ -904,8 +892,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-more-sidebar .tw-tab-buttons button {
-	background-color: #ececec;
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(224,224,224) 100%">>
+	background-color: <<colour sidebar-tab-background>>;
 	border-top: none;
 	border-left: none;
 	border-bottom: none;
@@ -913,8 +900,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
-	background-color: #fff;
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
+	background-color: <<colour sidebar-tab-background-selected>>;
 	border: none;
 }
 
@@ -922,12 +908,39 @@ canvas.tw-edit-bitmapeditor  {
 ** Alerts
 */
 
+.tw-alerts {
+	position: fixed;
+	top: 0;
+	left: 0;
+	max-width: 500px;
+	z-index: 20000;
+}
+
 .tw-alert {
-	<<border-radius 6px>>
-	margin: 7px 7px 7px 7px;
+	position: relative;
+	margin: 28px;
 	padding: 14px 14px 14px 14px;
-	border: 3px solid #DBB727;
-	background-color: rgb(250, 210, 50);
+	border: 2px solid <<colour alert-border>>;
+	background-color: <<colour alert-background>>;
+}
+
+.tw-alert-toolbar {
+	position: absolute;
+	top: 14px;
+	right: 14px;
+}
+
+.tw-alert-toolbar svg {
+	fill: <<colour alert-muted-foreground>>;
+}
+
+.tw-alert-subtitle {
+	color: <<colour alert-muted-foreground>>;
+	font-weight: bold;
+}
+
+.tw-alert-highlight {
+	color: <<colour alert-highlight>>;	
 }
 
 .tw-static-alert {
@@ -936,7 +949,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-static-alert-inner {
 	padding: 0 2px 2px 42px;
-	color: #AAA;
+	color: <<colour static-alert-foreground>>;
 	position: absolute;
 }
 
@@ -966,17 +979,36 @@ canvas.tw-edit-bitmapeditor  {
 */
 
 .tw-message-box {
-	border: 1px solid #CFD6E6;
-	background: #ECF2FF;
+	border: 1px solid <<colour message-border>>;
+	background: <<colour message-background>>;
 	padding: 0px 21px 0px 21px;
 	margin: 0 -21px 0 -21px;
 	font-size: 12px;
 	line-height: 18px;
-	color: #547599;
+	color: <<colour message-foreground>>;
 }
 
 .tw-message-box img {
 	float: right;
 	width: 150px;
 	margin: 0px 0px 12px 12px;
+}
+
+/*
+** Palette swatches
+*/
+
+.tw-swatches-horiz {
+	
+}
+
+.tw-swatches-horiz .tw-swatch {
+	display: inline-block;
+}
+
+.tw-swatch {
+	width: 2em;
+	height: 2em;
+	margin: 4px;
+	border: 1px solid #000;
 }

@@ -1,17 +1,18 @@
 title: $:/core/ui/ControlPanel/Tools
 tags: $:/tags/ControlPanel
-caption: Tools
+caption: {{$:/language/ControlPanel/Tools/Caption}}
 
-! Import
+\define lingo-base() $:/language/ControlPanel/Tools/
+! <<lingo Import/Heading>>
 
 <$browse/>
 
-Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). You can also drag and drop files directly to the browser window.
+<<lingo Import/Hint>>
 
-! Export
+! <<lingo Export/Heading>>
 
-<$button message="tw-download-file" param="$:/core/templates/alltiddlers.template.html" class="btn-big-green">Download all tiddlers as static HTML {{$:/core/images/save-button}}</$button>
+<$button message="tw-download-file" param="$:/core/templates/alltiddlers.template.html" class="btn-big-green"><<lingo Export/AllAsStaticHTML/Caption>> {{$:/core/images/save-button}}</$button>
 
-! Encryption
+! <<lingo Encryption/Heading>>
 
 {{$:/snippets/encryptionstatus}}

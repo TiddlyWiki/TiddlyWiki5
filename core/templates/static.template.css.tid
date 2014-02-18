@@ -1,4 +1,4 @@
 title: $:/core/templates/static.template.css
 
-{{{ [is[system]type[text/css]] ||$:/core/templates/plain-text-tiddler}}}
+{{$:/boot/boot.css||$:/core/templates/plain-text-tiddler}}
 {{{ [tag[$:/tags/stylesheet]] [is[shadow]tag[$:/tags/stylesheet]] ||$:/core/templates/wikified-tiddler}}}

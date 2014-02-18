@@ -1,10 +1,11 @@
 title: $:/core/ui/AdvancedSearch/Filter
 tags: $:/tags/AdvancedSearch
-caption: Filter
+caption: {{$:/language/Search/Filter/Caption}}
 
+\define lingo-base() $:/language/Search/
 <$linkcatcher to="$:/temp/advancedsearch">
 
-Search via a [[filter expression|http://tiddlywiki.com/static/TiddlerFilters.html]]:
+<<lingo Filter/Hint>>
 
 <div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
@@ -14,7 +15,7 @@ Search via a [[filter expression|http://tiddlywiki.com/static/TiddlerFilters.htm
 
 <div class="tw-search-results">
 
-//<small><$count filter={{$:/temp/advancedsearch}}/> matches</small>//
+<<lingo Advanced/Matches>>
 
 <$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
 

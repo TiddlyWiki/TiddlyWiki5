@@ -1,0 +1,23 @@
+created: 20140213171818824
+modified: 20140213172236345
+tags: mechanism
+title: HistoryMechanism
+type: text/vnd.tiddlywiki
+
+The system tiddler [[$:/HistoryList]] keeps track of a list of tiddlers comprising the navigation history. Each time you click on a link to a tiddler, the title of the target tiddler is added to the top of the stack.
+
+The history list is stored in JSON to allow additional details about the coordinates of the DOM node that initiated the navigation.
+
+The history list also maintains the field ''current-tiddler'' that contains the name of the tiddler at the top of the stack. This field can be used like so:
+
+```
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+</$list>
+```
+
+Which renders the same as the "Open" sidebar tab, with the addition of a tick against the tiddler that was last navigated to.
+
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+<$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+</$list>

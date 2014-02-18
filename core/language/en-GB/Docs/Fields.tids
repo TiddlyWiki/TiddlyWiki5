@@ -1,0 +1,32 @@
+title: $:/language/Docs/Fields/
+
+bag: The name of the bag from which a tiddler came
+caption: The text to be displayed on a tab or button
+color: The CSS color value associated with a tiddler
+component: The name of the component responsible for an [[alert tiddler|AlertMechanism]]
+current-tiddler: Used to cache the top tiddler in a [[history list|HistoryMechanism]]
+created: The date a tiddler was created
+creator: The name of the person who created a tiddler
+dependents: For a plugin, lists the dependent plugin titles
+description: The descriptive text for a plugin, or a modal dialogue
+draft.of: For draft tiddlers, contains the title of the tiddler of which this is a draft
+draft.title: For draft tiddlers, contains the proposed new title of the tiddler
+footer: The footer text for a wizard
+hack-to-give-us-something-to-compare-against: A temporary storage field used in [[$:/core/templates/static.content]]
+icon: The title of the tiddler containing the icon associated with a tiddler
+library: If set to "yes" indicates that a tiddler should be saved as a JavaScript library
+list: An ordered list of tiddler titles associated with a tiddler
+modified: The date and time at which a tiddler was last modified
+modifier: The tiddler title associated with the person who last modified a tiddler
+name: The human readable name associated with a plugin tiddler
+plugin-priority: A numerical value indicating the priority of a plugin tiddler
+plugin-type: The type of plugin in a plugin tiddler
+revision: The revision of the tiddler held at the server
+released: Date of a TiddlyWiki release
+source: The source URL associated with a tiddler
+subtitle: The subtitle text for a wizard
+tags: A list of tags associated with a tiddler
+text: The body text of a tiddler
+title: The unique name of a tiddler
+type: The content type of a tiddler
+version: Version information for a plugin

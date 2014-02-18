@@ -1,0 +1,20 @@
+title: $:/snippets/palettepreview
+
+\define swatchStyle()
+background-color: $(swatchColour)$;
+\end
+\define swatch(colour)
+<$set name="currentTiddler" value={{$:/palette}}>
+<$set name="swatchColour" value={{##$colour$}}>
+<div class="tw-swatch" style=<<swatchStyle>>/>
+</$set>
+</$set>
+\end
+
+<div class="tw-swatches-horiz">
+<<swatch foreground>>
+<<swatch background>>
+<<swatch muted-foreground>>
+<<swatch primary>>
+<<swatch page-background>>
+</div>

@@ -1,5 +1,5 @@
 created: 20130909151600000
-modified: 20140211195856087
+modified: 20140215131035535
 tags: community
 title: Community
 type: text/vnd.tiddlywiki
@@ -12,9 +12,11 @@ The ~TiddlyWiki discussion groups are mailing lists for talking about ~TiddlyWik
 
 * The main ~TiddlyWiki group: http://groups.google.com/group/TiddlyWiki
 * The TiddlyWikiDev group for developers: http://groups.google.com/group/TiddlyWikiDev
+*> Note that you do not need a Google Account to join the discussion groups. Subscribe by sending an email to mailto:tiddlywiki+subscribe@googlegroups.com or mailto:tiddlywikidev+subscribe@googlegroups.com.
 * Follow [[@TiddlyWiki on Twitter|http://twitter.com/#!/TiddlyWiki]] for the latest news
 * Get involved in the [[development on GitHub|https://github.com/Jermolene/TiddlyWiki5]]
 * Watch recordings of our regular [[TiddlyWiki Hangouts]]
+
 
 ! Resources for TiddlyWiki5
 

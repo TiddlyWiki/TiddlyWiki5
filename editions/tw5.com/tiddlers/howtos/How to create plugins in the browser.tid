@@ -1,0 +1,83 @@
+created: 20140213122133816
+modified: 20140214124024493
+tags: howto
+title: How to create plugins in the browser
+type: text/vnd.tiddlywiki
+
+The recommended technique for building TiddlyWiki plugins involves running [[TiddlyWiki on Node.js]], but there is now an experimental technique for creating plugins directly in the browser.
+
+! Overview
+
+Loading a plugin in the browser has several consequences:
+
+* The original plugin tiddler itself is unchanged
+* The payload tiddlers are set up as individual ShadowTiddlers
+
+To make a modified copy of a plugin, one edits the constituent shadow tiddlers (doing this actually overrides the shadow tiddler with a new non-shadow tiddler containing the modified content). The repacking process retrieves the current value of all the shadow tiddlers included in the plugin, and then bundles the new values back into the original plugin tiddler.
+
+! Step by step
+
+!! 1. Setup your development environment
+
+Start with a blank TiddlyWiki, and create a ''HelloThere'' tiddler that contains links to various tiddlers that you'll be visiting frequently:
+
+* The plugin itself (eg `$:/plugins/yourname/pluginname`)
+* The payload tiddlers that are to be packed into the plugin (eg `$:/plugins/yourname/pluginname/mywidget.js`)
+
+!! 2. Create the plugin tiddler
+
+Click the link to the plugin tiddler to open it. Assuming it doesn't currently exist, it will open with an italicised title, indicating that it is a missing tiddler. Then switch to edit mode and set the following fields on the tiddler:
+
+|!Field |!Value |
+|''dependents'' |Space separated list of dependent plugins (use square brackets for titles containing spaces) |
+|''description'' |Plugin description |
+|''plugin-type'' |Either "plugin" for a regular plugin, "theme" for a theme, or "language" for a language pack |
+|''type'' |Set to "application/json" |
+|''version'' |Set to the version number of the plugin (eg "0.0.1") |
+
+Then in the body of the tiddler, insert:
+
+```
+{"tiddlers": {}}
+```
+
+Save the plugin tiddler
+
+!! 3. Modify the payload tiddlers
+
+Create the payload tiddlers by clicking on the links in the ''HelloThere'' tiddler from step 1.
+
+!! 4. Pack the plugin
+
+Open the browser developer console, and type the following JavaScript statement, but first change the first parameter to the name of your plugin. The second parameter is an optional array of tiddler titles to be added to the plugin:
+
+```
+$tw.utils.repackPlugin("$:/plugins/yourname/pluginname",["$:/plugins/yourname/pluginname/mywidget.js"])
+```
+
+You should see a confirmation message, and then if you inspect the plugin tiddler you should see that it has been filled with the payload tiddlers.
+
+Each time you save the plugin the last portion of the version number is automatically incremented. This will ensure that users with an older version of your plugin will be able to install the new version.
+
+!! 5. Repacking the plugin
+
+Once you've built the plugin for the first time you can omit the second parameter to `repackPlugin()` unless you are adding a new tiddler:
+
+```
+$tw.utils.repackPlugin("$:/plugins/yourname/pluginname")
+```
+
+!! 6. Removing tiddlers from the plugin
+
+To remove tiddlers from the plugin specify their titles in the optional third parameter:
+
+```
+$tw.utils.repackPlugin("$:/plugins/yourname/pluginname",null,["$:/plugins/yourname/pluginname/mywidget.js"])
+```
+
+! Notes
+
+!! Creating theme and language plugins
+
+Before attempting to repack your plugin you should ensure that the plugin is selected as the current theme or language. Otherwise the shadow tiddlers will not be present.
+

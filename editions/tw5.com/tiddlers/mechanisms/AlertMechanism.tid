@@ -1,0 +1,18 @@
+created: 20140213224306412
+modified: 20140213224622441
+tags: mechanism
+title: AlertMechanism
+type: text/vnd.tiddlywiki
+
+Alerts are displayed as yellow boxes overlaying the main TiddlyWiki window. Each one corresponds to a tiddler with the tag [[$:/tags/Alert]]. Clicking the delete icon on an alert deletes the corresponding tiddler.
+
+Here's a demo <$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tw-add-tag" param="$:/tags/Alert" class="btn btn-inverse">alert</$button></$set></$fieldmangler>.
+
+Alert tiddlers should have the following fields:
+
+|!Field |!Description |
+|title |By default, alert titles have the prefix `$:/temp/alerts/` |
+|text |The text of the alert message |
+|modified |Date of the alert (used for ordering the alerts on screen) |
+|component |Component name associated with the alert |
+|tags |Must include [[$:/tags/Alert]] |

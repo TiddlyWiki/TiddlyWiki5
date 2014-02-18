@@ -1,5 +1,5 @@
 title: $:/themes/tiddlywiki/starlight/themetweaks
-tags: $:/tags/ControlPanel
+tags: $:/tags/ControlPanel/Appearance
 caption: Star Tweaks
 
 Demo of a control panel tab dynamically loaded with a theme.

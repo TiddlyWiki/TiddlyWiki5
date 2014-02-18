@@ -24,7 +24,7 @@ title: $:/core/templates/tiddlywiki5.html
 <body class="tw-body">
 <!--~~ Static styles ~~-->
 <div id="styleArea">
-{{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
+{{$:/boot/boot.css||$:/core/templates/css-tiddler}}
 </div>
 <!--~~ Static content for Google and browsers without JavaScript ~~-->
 <noscript>

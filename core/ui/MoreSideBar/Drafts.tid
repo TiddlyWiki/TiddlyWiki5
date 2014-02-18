@@ -1,5 +1,5 @@
 title: $:/core/ui/MoreSideBar/Drafts
 tags: $:/tags/MoreSideBar
-caption: Drafts
+caption: {{$:/language/SideBar/Drafts/Caption}}
 
 <$list filter="[has[draft.of]sort[title]]" template="$:/core/ui/ListItemTemplate"/>

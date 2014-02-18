@@ -85,50 +85,41 @@ ViewWidget.prototype.execute = function() {
 The various formatter functions are baked into this widget for the moment. Eventually they will be replaced by macro functions
 */
 
-ViewWidget.prototype.getValue = function() {
-	// Get the value to display
-	var value,
-		tiddler = this.wiki.getTiddler(this.viewTitle);
-	if(tiddler) {
-		if(this.viewField === "text") {
-			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
-			value = this.wiki.getTiddlerText(this.viewTitle);
-		} else {
-			if($tw.utils.hop(tiddler.fields,this.viewField)) {
-				value = tiddler.fields[this.viewField];				
-			} else {
-				value = "";
-			}
-		}
+/*
+Retrieve the value of the widget. Options are:
+asString: Optionally return the value as a string
+*/
+ViewWidget.prototype.getValue = function(options) {
+	options = options || {};
+	var value = options.asString ? "" : undefined;
+	if(this.viewIndex) {
+		value = this.wiki.extractTiddlerDataItem(this.viewTitle,this.viewIndex);
 	} else {
-		if(this.viewField === "title") {
-			value = this.viewTitle;
+		var tiddler = this.wiki.getTiddler(this.viewTitle);
+		if(tiddler) {
+			if(this.viewField === "text") {
+				// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
+				value = this.wiki.getTiddlerText(this.viewTitle);
+			} else {
+				if($tw.utils.hop(tiddler.fields,this.viewField)) {
+					if(options.asString) {
+						value = tiddler.getFieldString(this.viewField);
+					} else {
+						value = tiddler.fields[this.viewField];				
+					}
+				}
+			}
 		} else {
-			value = undefined;
+			if(this.viewField === "title") {
+				value = this.viewTitle;
+			}
 		}
 	}
 	return value;
 };
 
 ViewWidget.prototype.getValueAsText = function() {
-	// Get the value to display
-	var text,
-		tiddler = this.wiki.getTiddler(this.viewTitle);
-	if(tiddler) {
-		if(this.viewField === "text") {
-			// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
-			text = this.wiki.getTiddlerText(this.viewTitle);
-		} else {
-			text = tiddler.getFieldString(this.viewField);
-		}
-	} else { // Use a special value if the tiddler is missing
-		if(this.viewField === "title") {
-			text = this.viewTitle;
-		} else {
-			text = "";
-		}
-	}
-	return text;
+	return this.getValue({asString: true});
 };
 
 ViewWidget.prototype.getValueAsHtmlWikified = function() {

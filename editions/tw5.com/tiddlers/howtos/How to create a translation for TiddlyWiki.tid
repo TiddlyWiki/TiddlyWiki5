@@ -1,0 +1,44 @@
+created: 20140217173715829
+modified: 20140217173730646
+tags: howto
+title: How to create a translation for TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Making a translation 
+
+Prerequisites:
+
+* [[TiddlyWiki on Node.js]]
+* A GitHub account to submit the translation to tiddlywiki.com
+
+Quick and dirty instructions:
+
+# Fork the TiddlyWiki GitHub repository (https://github.com/Jermolene/TiddlyWiki5)
+#* If your GitHub username is JoeBloggs, your fork will be https://github.com/JoeBloggs/TiddlyWiki5
+# Create a branch with the name of the translation you intend to create (eg "cy-GB" for "Welsh (United Kingdom)")
+#* IETF language codes: http://www.lingoes.net/en/translator/langcode.htm
+# Clone your forked repository to your computer (eg, `/MyTranslation/TiddlyWiki5`)
+# Create a sibling directory `/MyTranslation/jermolene.github.com`
+# Create a new folder in `<repo>/languages` for your translation
+# Copy the contents of `<repo>/core/language/en-GB` into your translation folder
+# Create a `plugin.info` file (see below) in your translation folder
+# Edit `<repo>/editions/tw5.com/tiddlywiki.info` to add your language to the list
+# Run `./qbld.sh` to build TiddlyWiki
+# Open the TiddlyWiki file at `/MyTranslation/jermolene.github.com/index.html`
+# You should see your translation listed in the control panel, but the text of the translation will still be in British English
+# Edit the `.tid` and `.tids` files in your language folder to translate the English text
+
+Content of `plugin.info` for Joe Bloggs' Welsh translation:
+
+```
+{
+	"title": "$:/languages/cy-GB",
+	"name": "cy-GB",
+	"plugin-type": "language",
+	"description": "Welsh (British)",
+	"author": "JoeBloggs",
+	"core-version": ">=5.0.0"
+}
+```
+
+MultiTiddlerFiles make it possible to pack the text of several tiddlers in a single text file, simplifying some editing tasks.

@@ -13,7 +13,7 @@ type: text/vnd.tiddlywiki-html
 <link id="faviconLink" rel="shortcut icon" href="favicon.ico">
 <title>{{$:/core/wiki/title}}</title>
 <div id="styleArea">
-{{{ [is[system]type[text/css]] ||$:/core/templates/css-tiddler}}}
+{{$:/boot/boot.css||$:/core/templates/css-tiddler}}
 </div>
 <style type="text/css">
 {{{ [tag[$:/tags/stylesheet]] [is[shadow]tag[$:/tags/stylesheet]] ||$:/core/templates/wikified-tiddler}}}

@@ -1,8 +1,11 @@
-created: 201308252135
-modified: 201308300907
+created: 20130825213500000
+modified: 20140214213936575
 tags: concepts
 title: Tiddlers
+type: text/vnd.tiddlywiki
 
-Tiddlers are the smallest unit of information in TiddlyWiki. They can be structured with [[links|TiddlerLinks]] and tags.
+Tiddlers are the smallest unit of information in TiddlyWiki. Other systems have analogous concepts with more prosaic names: like "items", "entries", "entities" or "records". Even though "tiddler" is a vaguely preposterous name it at least has the virtue of being confusingly distinctive rather than confusingly generic.
+
+Tiddlers can be structured with [[links|TiddlerLinks]] and tags.
 
 Internally, tiddlers are an immutable dictionary of name:value pairs called fields. The only field that is required is the `title` field, but useful tiddlers also have a `text` field, and some or all of the standard fields listed in TiddlerFields.

@@ -1,6 +1,7 @@
 title: $:/core/ui/TiddlerInfo/References
 tags: $:/tags/TiddlerInfo
-caption: References
+caption: {{$:/language/TiddlerInfo/References/Caption}}
 
-<$list filter="[is[current]backlinks[]sort[title]]" emptyMessage="No tiddlers link to this one" template="$:/core/ui/ListItemTemplate">
+\define lingo-base() $:/language/TiddlerInfo/
+<$list filter="[is[current]backlinks[]sort[title]]" emptyMessage=<<lingo References/Empty>> template="$:/core/ui/ListItemTemplate">
 </$list>

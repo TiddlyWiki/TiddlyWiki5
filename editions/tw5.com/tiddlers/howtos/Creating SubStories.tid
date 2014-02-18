@@ -1,0 +1,41 @@
+created: 20140214215718317
+modified: 20140214215745126
+tags: howto
+title: Creating SubStories
+type: text/vnd.tiddlywiki
+
+This example shows how to create a sub-story within a tiddler that is independent of the main story.
+
+Here's the code:
+
+```
+<$navigator story="MySubStoryList" history="MySubHistoryList">
+
+Click this link to get started: HelloThere
+
+<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
+<div>
+! <$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+
+<$transclude/>
+</div>
+</$list>
+
+</$navigator>
+```
+
+Note how you can open the HelloThere tiddler in the substory by clicking on the link below. Links within the substory open within the substory, and not in the main story.
+
+<$navigator story="MySubStoryList" history="MySubHistoryList">
+
+Click this link to get started: HelloThere
+
+<$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
+<div>
+! <$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+
+<$transclude/>
+</div>
+</$list>
+
+</$navigator>

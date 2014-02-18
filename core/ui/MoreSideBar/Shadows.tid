@@ -1,5 +1,5 @@
 title: $:/core/ui/MoreSideBar/Shadows
 tags: $:/tags/MoreSideBar
-caption: Shadows
+caption: {{$:/language/SideBar/Shadows/Caption}}
 
 <$list filter="[is[shadow]sort[title]]" template="$:/core/ui/ListItemTemplate"/>

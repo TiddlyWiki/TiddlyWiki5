@@ -140,7 +140,8 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 		$tw.utils.each(titles,function(title) {
 			historyList.push({title: title, fromPageRect: fromPageRect});
 		});
-		this.wiki.setTiddlerData(this.historyTitle,historyList);
+		this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
+		this.wiki.addTiddler(new $tw.Tiddler());
 	}
 };
 
@@ -149,7 +150,9 @@ Handle a tw-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	this.addToStory(event.navigateTo,event.navigateFromTitle);
-	this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+	if(!event.navigateSuppressNavigation) {
+		this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+	}
 	return false;
 };
 

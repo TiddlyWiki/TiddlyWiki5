@@ -1,6 +1,7 @@
 title: $:/snippets/minithemeswitcher
 
-Current theme: <$view tiddler={{$:/theme}} field="name"/>
+\define lingo-base() $:/language/ControlPanel/Appearance/Theme/
+<<lingo Prompt>> <$view tiddler={{$:/theme}} field="name"/>
 
 <$linkcatcher to="$:/theme">
 <$list filter="[plugin-type[theme]sort[title]]"><div><$reveal state="$:/theme" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/theme" type="nomatch" text={{!!title}}>&nbsp;</$reveal> <$link to={{!!title}}><$view field="name" format="text"/></$link></div>

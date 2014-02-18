@@ -17,9 +17,9 @@ var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 
 function TiddlyWebAdaptor(syncer) {
 	this.syncer = syncer;
-	this.host = '/';
+	this.host = this.getHost();
 	this.recipe = unescape(window.location.pathname.split('/')[2]);
-	this.log = $tw.logger.makeLog("TiddlyWebAdaptor");
+	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
 TiddlyWebAdaptor.prototype.getHost = function() {
@@ -48,7 +48,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 	// Get status
 	var self = this,
 		wiki = self.syncer.wiki;
-	this.log("Getting status");
+	this.logger.log("Getting status");
 	$tw.utils.httpRequest({
 		url: this.host + "status",
 		callback: function(err,data) {
@@ -63,7 +63,7 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			} catch (e) {
 			}
 			if(json) {
-				self.log("Status:",data);
+				self.logger.log("Status:",data);
 				// Check if we're logged in
 				isLoggedIn = json.username !== "GUEST";
 			}

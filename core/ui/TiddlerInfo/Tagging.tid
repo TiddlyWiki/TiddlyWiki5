@@ -1,5 +1,6 @@
 title: $:/core/ui/TiddlerInfo/Tagging
 tags: $:/tags/TiddlerInfo
-caption: Tagging
+caption: {{$:/language/TiddlerInfo/Tagging/Caption}}
 
-<$list filter="[is[current]tagging[]]" emptyMessage="No tiddlers are tagged with this one" template="$:/core/ui/ListItemTemplate"/>
+\define lingo-base() $:/language/TiddlerInfo/
+<$list filter="[is[current]tagging[]]" emptyMessage=<<lingo Tagging/Empty>> template="$:/core/ui/ListItemTemplate"/>

@@ -1,3 +1,4 @@
 title: $:/snippets/download-wiki-button
 
-<$button message="tw-download-file" param="$:/core/save/all" class="btn-big-green">Download Full {{$:/core/images/save-button}}</$button>
+\define lingo-base() $:/language/ControlPanel/Tools/Download/
+<$button message="tw-download-file" param="$:/core/save/all" class="btn-big-green"><<lingo Full/Caption>> {{$:/core/images/save-button}}</$button>

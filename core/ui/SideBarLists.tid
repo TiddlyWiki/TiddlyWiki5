@@ -8,7 +8,7 @@ title: $:/core/ui/SideBarLists
 
 <div class="tw-search-results">
 
-//<small><$count filter="[!is[system]search{$:/temp/search}]"/> matches</small>//
+{{$:/language/Search/Matches}}
 
 <$list filter="[!is[system]search{$:/temp/search}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 

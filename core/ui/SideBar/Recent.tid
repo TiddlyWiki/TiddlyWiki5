@@ -1,5 +1,5 @@
 title: $:/core/ui/SideBar/Recent
 tags: $:/tags/SideBar
-caption: Recent
+caption: {{$:/language/SideBar/Recent/Caption}}
 
 {{$:/snippets/recentchanges}}

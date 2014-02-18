@@ -13,7 +13,7 @@ Handles saving changes via HTML5's download APIs
 "use strict";
 
 // Title of the tiddler containing the download message
-var downloadInstructionsTitle = "$:/messages/Download"
+var downloadInstructionsTitle = "$:/language/Modals/Download";
 
 /*
 Select the appropriate saver module and set it up

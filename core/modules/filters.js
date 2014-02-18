@@ -62,7 +62,7 @@ function parseFilterOperation(operators,filterString,p) {
 			nextBracketPos = filterString.indexOf(']',p);
 			break;
 		case '/': // regexp brackets
-			var rex = /^((?:[^\\\/]*|\\.))*\/(?:\(([mygi]+)\))?/g,
+			var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
 				rexMatch = rex.exec(filterString.substring(p));
 			if(rexMatch) {
 				operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
@@ -219,6 +219,7 @@ exports.compileFilter = function(filterString) {
 	});
 	// Return a function that applies the operations to a source array/hashmap of tiddler titles
 	return function(source,currTiddlerTitle) {
+		source = source || self.tiddlers;
 		var results = [];
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,currTiddlerTitle);

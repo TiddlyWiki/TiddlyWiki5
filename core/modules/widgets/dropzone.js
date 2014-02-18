@@ -174,8 +174,8 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 			var item = items[t];
 			if(item.kind === "file") {
 				// Import any files
-				this.wiki.readFile(item.getAsFile(),function(tiddlerFields) {
-					self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+				this.wiki.readFile(item.getAsFile(),function(tiddlerFieldsArray) {
+					self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 				});
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
