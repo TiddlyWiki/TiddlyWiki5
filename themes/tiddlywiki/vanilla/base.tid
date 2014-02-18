@@ -993,3 +993,22 @@ canvas.tw-edit-bitmapeditor  {
 	width: 150px;
 	margin: 0px 0px 12px 12px;
 }
+
+/*
+** Palette swatches
+*/
+
+.tw-swatches-horiz {
+	
+}
+
+.tw-swatches-horiz .tw-swatch {
+	display: inline-block;
+}
+
+.tw-swatch {
+	width: 2em;
+	height: 2em;
+	margin: 4px;
+	border: 1px solid #000;
+}
