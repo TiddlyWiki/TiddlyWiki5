@@ -1,0 +1,13 @@
+title: GettingStarted
+
+Willkommen bei TiddlyWiki, einem persönlichen nicht-linearen Web-Notizbuch.
+
+Vor dem Start, vergewissern sie sich, dass sie dieses Wiki auch wirklich speichern können. Weitere Informationen können sie unter: http://tiddlywiki.com/ finden. <!-- TODO Link zur deutschen Edition -->
+
+Erste Schritte:
+
+* Erstellen sie einen neuen Tiddler mit dem "Plus-Button" in der rechten Navigationsleiste.
+* Einstellungen können im [[Control Panel|$:/ControlPanel]] vorgenommen werden. Siehe: "Zahnrad-Button" 
+** Das Anzeigen dieses Tiddlers können sie verhindern, indem sie die "~DefaultTiddlers" im ''Basis-Tab'' verändern.
+* Speichern wird mit dem "Speichern-Button" in der ~Navi-Leiste ausgelöst. 
+* Weitere Informationen, siehe: [[WikiText|http://tiddlywiki.com/static/WikiText.html]]

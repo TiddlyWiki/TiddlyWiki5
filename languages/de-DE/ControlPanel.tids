@@ -1,0 +1,71 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Erweitert
+Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
+Advanced/LoadedModules/Caption: Geladene Module
+Advanced/LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
+Advanced/TiddlerFields/Caption: Tiddler Felder
+Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus "System"-, exclusive "Schatten"-Tiddlern. 
+Appearance/Caption: Design
+Appearance/Hint: Möglichkeiten um das Aussehen ihres ~TiddlyWiki's anzupassen.
+Appearance/Palette/Caption: Palette
+Appearance/Palette/Prompt: Ausgewählte Farbpalette:
+#
+# TODO bin mir nicht sicher bei "Story View"
+Appearance/StoryView/Caption: Anzeige
+#
+Appearance/StoryView/Prompt: Ausgewählte Anzeige:
+Appearance/Theme/Caption: Thema
+Appearance/Theme/Prompt: Ausgewähltes Thema:
+Basics/AnimDuration/Prompt: Animation Dauer:
+Basics/Caption: Basis
+Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Lehrzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
+Basics/DefaultTiddlers/Prompt: Standard Tiddler:
+Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
+Basics/Language/Prompt: Hallo! Aktuelle Sprache:
+Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener "Schatten Tiddler":
+Basics/ShadowTiddlers/Prompt: Anzahl "Schatten Tiddler":
+Basics/Subtitle/Prompt: Untertietel:
+Basics/SystemTiddlers/Prompt: Anzahl "System Tiddler":
+Basics/Tags/Prompt: Anzahl Tags:
+Basics/Tiddlers/Prompt: Anzahl Tiddler:
+Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
+Basics/Username/Prompt: Benutzer Signatur zum editieren:
+Basics/Version/Prompt: ~TiddlyWiki Version:
+# TODO - "Plugins"
+Plugins/Caption: Plugins
+Plugins/Fields/Description: Beschreibung
+Plugins/Fields/Title: Titel
+Plugins/Fields/Version: Version
+Saving/AutoSave/Disabled/Button: klicken zum Aktivieren
+Saving/AutoSave/Disabled/Prompt: Automatisch speichern ist deaktiviert!
+Saving/AutoSave/Enabled/Button: klicken zum Deaktivieren
+Saving/AutoSave/Enabled/Prompt: Automatisch speichern ist aktiviert!
+#
+Saving/AutoSave: Automatisch speichern
+Saving/Caption: Speichern
+Saving/Heading: Speichern
+Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
+# TODO Backup ??
+Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
+Saving/TiddlySpot/Backups: "Backups"
+Saving/TiddlySpot/Filename: "Upload" Dateiname
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //Die standard Server URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server URL' verändert werden.//
+Saving/TiddlySpot/Password: Passwort
+Saving/TiddlySpot/ServerURL: Server URL
+Saving/TiddlySpot/UploadDir: "Upload" Verzeichnis
+Saving/TiddlySpot/UserName: Wiki Name
+Tools/Caption: Tools
+Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''
+Tools/Encryption/ChangePassword/Button: Passwort ändern
+Tools/Encryption/ClearPassword/Button: Passwort löschen
+Tools/Encryption/Disabled/Prompt: Dieses Wiki ist ''nicht verschlüsselt''!
+Tools/Encryption/Enabled/Prompt: Dieses Wiki ''ist verschlüsselt''!
+Tools/Encryption/Heading: Verschlüsselung
+Tools/Encryption/SetPassword/Button: Passwort erstellen
+Tools/Export/AllAsStaticHTML/Caption: Alle Tiddler als "statische HTML" Datein speichern. 
+Tools/Export/Heading: Export
+Tools/Import/Heading: Import
+Tools/Import/Hint: Suchen sie Datein auf ihrem Computer, um deren Inhalt zu importieren. Einzelne Tiddler aus ~TiddlyWiki HTML Dateien werden separat importiert. Sie können einzelne Dateien mit "drag and drop" in den Browser ziehen. 
+Tools/Import/Prompt: Import:
