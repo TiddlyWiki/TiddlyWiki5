@@ -4,7 +4,6 @@ description: Largely blue
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
-primary: #5778D8
 alert-background: #ffe476
 alert-border: #b99e2f
 alert-highlight: #881122
