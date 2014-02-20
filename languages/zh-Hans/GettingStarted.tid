@@ -1,0 +1,12 @@
+title: GettingStarted
+
+欢迎使用 TiddlyWiki，非线性的个人网页式笔记。
+
+使用此 TiddlyWiki 之前，请先检查您可以保存变更- 详见http://tiddlywiki.com/ 。
+
+然后您可以:
+
+* 点击右侧栏的{{$:/core/images/new-button}}添加条目。
+* 点击右侧栏的{{$:/core/images/options-button}}开启[[控制台|$:/ControlPanel]]客制化您的维基
+* 点击右侧栏的{{$:/core/images/save-button}}保存变更。
+* 了解更多关于 [[WikiText]]
