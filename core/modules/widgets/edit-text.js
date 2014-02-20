@@ -53,7 +53,7 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(this.editTag === "textarea") {
 		domNode.appendChild(this.document.createTextNode(editInfo.value));
 	} else {
-		domNode.setAttribute("value",editInfo.value)
+		domNode.value = editInfo.value;
 	}
 	// Add an input event handler
 	$tw.utils.addEventListeners(domNode,[
