@@ -1502,7 +1502,7 @@ $tw.boot.startup = function(options) {
 	// Add file extension information
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
-	$tw.utils.registerFileType("application/x-tiddlers","utf8",".tids");
+	$tw.utils.registerFileType("application/x-tiddlers","utf8",".multids");
 	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");
 	$tw.utils.registerFileType("text/vnd.tiddlywiki2-recipe","utf8",".recipe");
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
