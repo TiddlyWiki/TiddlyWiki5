@@ -1,8 +1,0 @@
-{
-	"title": "$:/languages/zh-Hant",
-	"name": "zh-Hant",
-	"plugin-type": "language",
-	"description": "Chinese (Traditional)",
-	"author": "BramChen",
-	"core-version": ">=5.0.8"
-}
