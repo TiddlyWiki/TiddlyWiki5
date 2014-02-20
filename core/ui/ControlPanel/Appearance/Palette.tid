@@ -3,3 +3,12 @@ tags: $:/tags/ControlPanel/Appearance
 caption: {{$:/language/ControlPanel/Appearance/Palette/Caption}}
 
 {{$:/snippets/paletteswitcher}}
+
+<$reveal type="nomatch" state="$:/state/ShowPaletteEditor" text="yes">
+<$button set="$:/state/ShowPaletteEditor" setTo="yes">show editor</$button>
+</$reveal>
+<$reveal type="match" state="$:/state/ShowPaletteEditor" text="yes">
+<$button set="$:/state/ShowPaletteEditor" setTo="no">hide editor</$button>
+{{$:/snippets/paletteeditor}}
+</$reveal>
+

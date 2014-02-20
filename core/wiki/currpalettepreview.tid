@@ -1,0 +1,19 @@
+title: $:/snippets/currpalettepreview
+
+\define swatchStyle()
+background-color: $(swatchColour)$;
+\end
+\define swatch(colour)
+<$set name="swatchColour" value={{##$colour$}}>
+<div class="tw-swatch" style=<<swatchStyle>>/>
+</$set>
+\end
+<div class="tw-swatches-horiz">
+<<swatch foreground>>
+<<swatch background>>
+<<swatch muted-foreground>>
+<<swatch primary>>
+<<swatch page-background>>
+<<swatch tab-background>>
+<<swatch tiddler-info-background>>
+</div>

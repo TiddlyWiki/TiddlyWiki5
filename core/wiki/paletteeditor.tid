@@ -1,0 +1,25 @@
+title: $:/snippets/paletteeditor
+
+<$set name="currentTiddler" value={{$:/palette}}>
+
+Editing <$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
+
+<$list filter="[is[current]is[shadow]is[tiddler]]" variable="listItem">
+This shadow palette has been modified
+<$button message="tw-delete-tiddler" param={{$:/palette}}>reset</$button>
+</$list>
+
+<$list filter="[is[current]is[shadow]!is[tiddler]]" variable="listItem">
+It is recommended that you clone this shadow palette before editing it
+</$list>
+
+<$button message="tw-new-tiddler" param={{$:/palette}}>clone</$button>
+
+<table><tbody><$list filter="[is[current]indexes[]]" variable="colourName"><tr><td><$macrocall $name="colourName" $output="text/plain"/></td>
+<td><$edit-text index=<<colourName>> tag="input"/></td>
+<td><$edit-text index=<<colourName>> type="color" tag="input"/></td>
+</tr>
+</$list>
+</tbody>
+</table>
+</$set>
