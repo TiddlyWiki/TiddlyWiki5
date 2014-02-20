@@ -9,6 +9,11 @@ Advanced/TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含
 Appearance/Caption: 視覺外觀
 Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
 Appearance/Palette/Caption: 調色盤
+Appearance/Palette/Editor/Clone/Caption: 複製
+Appearance/Palette/Editor/Clone/Prompt: 建議您修改前先複製此預設調色盤
+Appearance/Palette/Editor/Prompt/Modified: 此預設調色盤已被修改過
+Appearance/Palette/Editor/Prompt: 編輯
+Appearance/Palette/Editor/Reset/Caption: 重置
 Appearance/Palette/Prompt: 當前的調色盤：
 Appearance/StoryView/Caption: 檢視模式
 Appearance/StoryView/Prompt: 當前的檢視模式：

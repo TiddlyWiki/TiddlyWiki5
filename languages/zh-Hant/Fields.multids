@@ -12,7 +12,7 @@ description: 插件的說明、描述
 draft.of: 草稿條目，包含條目的標題、標籤、欄位 ...
 draft.title: 草稿條目的標題
 footer: wizard 的註腳
-hack-to-give-us-something-to-compare-against: 於 [[$:/core/templates/static.content]] 使用的臨時存儲欄位
+hack-to-give-us-something-to-compare-against: 於 [[$:/core/templates/static.content]] 使用的臨時儲存欄位
 icon: 條目的標題含有與條目關聯的圖示
 library: 若設為 “yes”，表示條目應該被儲存為一個 JavaScript 程式庫
 list: 條目的列表，指定一些條目的標題清單
