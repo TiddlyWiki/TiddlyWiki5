@@ -17,6 +17,7 @@ title: $:/core/ui/PageMacros
 <$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
 
 <$transclude tiddler=<<currentTab>>/>
+
 </$reveal>
 </$list>
 </div>

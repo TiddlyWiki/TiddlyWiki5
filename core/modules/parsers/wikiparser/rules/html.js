@@ -359,7 +359,7 @@ exports.parseTag = function(source,pos,options) {
 	pos = token.end;
 	// Check for a required line break
 	if(options.requireLineBreak) {
-		token = this.parseTokenRegExp(source,pos,/(\r?\n)/g);
+		token = this.parseTokenRegExp(source,pos,/(\r?\n\r?\n)/g);
 		if(!token) {
 			return null;
 		}
