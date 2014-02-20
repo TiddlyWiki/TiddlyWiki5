@@ -1,0 +1,14 @@
+title: $:/language/EditTemplate/
+
+Body/Hint: 使用 WikiText 来添加格式、图片及动态功能
+Body/Placeholder: 输入此条目的内容
+Body/Preview/Button/Hide: 隐藏预览
+Body/Preview/Button/Show: 显示预览
+Fields/Add/Button: 添加
+Fields/Add/Name/Placeholder: 栏位名称
+Fields/Add/Prompt: 添加栏位：
+Fields/Add/Value/Placeholder: 栏位内容
+Tags/Add/Button: 添加
+Tags/Add/Placeholder: 标签名称
+Type/Placeholder: 内容类型
+Type/Prompt: 类型：

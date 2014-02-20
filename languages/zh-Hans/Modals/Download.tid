@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">关闭</$button>
+help: http://tiddlywiki.com/
+
+您的浏览器只支援手动保存。
+
+要储存更动的维基，右键点击下方的下载链结，选择"下载档案"或"储存档案"，然后选择资料夹和档名。
+
+//您可以藉由按一下 Ctrl 键（Windows）或 options/ alt 键（Mac OS X）中的链接，稍微加速操作。您不会被提示资料夹或档名，您的浏览器可能无法辨认它的档名 -- 在做其他任何事之前，您可能需要重新命名副档名为 `.html` 的档案。//
+
+在智慧型手机上，不允许下载档案，但您可以标记链结，然后从一台可以正常保存维基的桌上型电脑的维基同步你的书签。
