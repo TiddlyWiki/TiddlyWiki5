@@ -4,7 +4,7 @@ title: $:/core/ui/PageMacros
 <$transclude tiddler={{$:/palette}} index="$name$"/>
 \end
 \define color(name)
-<<color $name$>>
+<<colour $name$>>
 \end
 \define tabs(tabsList,default,state:"$:/state/tab")
 <div class="tw-tab-buttons"><$list filter="$tabsList$" variable="currentTab"><$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tw-tab-selected"><$transclude tiddler=<<currentTab>> field="caption"><$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/></$transclude> </$button>
