@@ -9,6 +9,11 @@ Advanced/TiddlerFields/Hint: This is the full set of TiddlerFields in use in thi
 Appearance/Caption: Appearance
 Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
 Appearance/Palette/Caption: Palette
+Appearance/Palette/Editor/Clone/Caption: clone
+Appearance/Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
+Appearance/Palette/Editor/Prompt/Modified: This shadow palette has been modified
+Appearance/Palette/Editor/Prompt: Editing
+Appearance/Palette/Editor/Reset/Caption: reset
 Appearance/Palette/Prompt: Current palette:
 Appearance/StoryView/Caption: Story View
 Appearance/StoryView/Prompt: Current view:
