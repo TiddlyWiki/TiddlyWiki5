@@ -1,32 +1,32 @@
 title: $:/language/Docs/Fields/
 
 bag: Le nom du « bag » ~TiddlyWeb d'où vient un tiddler
-caption: Le texte à afficher sur un onglet ou un bouton
-color: La couleur CSS associée à un tiddler
-component: Le nom du composant responsable d'un [[tiddler d'alerte|AlertMechanism]]
+caption: Texte à afficher sur un onglet ou un bouton
+color: Couleur CSS associée à un tiddler
+component: Nom du composant responsable d'un [[tiddler d'alerte|AlertMechanism]]
 current-tiddler: Utilisé pour cacher le premier tiddler dans une [[liste d'historique|HistoryMechanism]]
-created: La date à laquelle le tiddler a été créé
-creator: Le nom de la personne ayant créé le tiddler
-dependents: Pour un plugin, liste les titres des plugins dépendants
-description: Le texte de description d'un plugin, ou d'un dialogue modal
+created: Date à laquelle le tiddler a été créé
+creator: Nom de la personne ayant créé le tiddler
+dependents: Pour un tiddler de plugin, liste des titres des plugins dont il dépend
+description: Texte de description d'un plugin, ou d'un dialogue modal
 draft.of: Pour les tiddlers en cours d'édition, contient le titre du tiddler dont c'est le brouillon
 draft.title: Pour les tiddlers en cours d'édition, contient le nouveau titre proposépour le tiddler
-footer: Le texte de bas de page d'un wizard
-hack-to-give-us-something-to-compare-against: Un champ de stockage temporaire utilisé dans [[$:/core/templates/static.content]]
-icon: Le titre du tiddler contenant l'icone associé à un tiddler
+footer: Texte de bas de page d'un wizard
+hack-to-give-us-something-to-compare-against: Champ de stockage temporaire utilisé dans [[$:/core/templates/static.content]]
+icon: Titre du tiddler contenant l'icone associé à un tiddler
 library: Une valeur à « yes » indique qu'un tiddler doit être sauvegardé en tant que bibliothèque Javascript
-list: Une liste ordonnée de titres de tiddlers associés à un tiddler
-modified: La date et l'heure auxquelles le tiddler a été modifié pour la dernière fois
-modifier: Le titre de tiddler associé à la personne qui a modifié un tiddler pour la dernière fois
-name: Le nom d'un tiddler de type plugin dans une version lisible pour un humain
-plugin-priority: Une valeur numérique indiquant la priorité d'un tiddler de type plugin
-plugin-type: Le type de plugin d'un tiddler de type plugin
-revision: La révision d'un tiddler conservée sur le serveur
+list: Liste ordonnée de titres de tiddlers associés à un tiddler
+modified: Date et heure auxquelles le tiddler a été modifié pour la dernière fois
+modifier: Titre de tiddler associé à la personne qui a modifié un tiddler pour la dernière fois
+name: Nom d'un tiddler de type plugin en version lisible pour un humain
+plugin-priority: Pour un tiddler de plugin, valeur numérique indiquant la priorité
+plugin-type: Pour les tiddlers de plugin, indique le type du plugin.
+revision: Révision d'un tiddler conservée sur le serveur
 released: Date associée à une version de TiddlyWiki
-source: L'URL source associée à un tiddler
-subtitle: Le sous-titre d'un wizard
-tags: Une liste de tags associée à un tiddler
-text: Le corps du texte d'un tiddler
-title: Le nom unique d'un tiddler
-type: Le type de contenu d'un tiddler
-version: Informations de version pour un plugin
+source: URL source associée à un tiddler
+subtitle: Sous-titre d'un wizard
+tags: Liste de tags associée à un tiddler
+text: Corps du texte d'un tiddler
+title: Nom unique d'un tiddler
+type: Type de contenu d'un tiddler
+version: Indications de version pour un plugin

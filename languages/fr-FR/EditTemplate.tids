@@ -1,14 +1,14 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: Utilisez WikiText pour reformater et ajouter des images et des fonctions dynamiques
-Body/Placeholder: Entrez le texte de ce tiddler
-Body/Preview/Button/Hide: cacher la prévisualisation
-Body/Preview/Button/Show: afficher la prévisualisation
+Body/Hint: Utilisez WikiText pour formater ou ajouter des images et des fonctions dynamiques
+Body/Placeholder: Entrez le texte
+Body/Preview/Button/Hide: Cacher la prévisualisation
+Body/Preview/Button/Show: Afficher la prévisualisation
 Fields/Add/Button: ajouter
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
 Tags/Add/Button: ajouter
 Tags/Add/Placeholder: nom du tag
-Type/Placeholder: type de contenu
+Type/Placeholder: type du contenu
 Type/Prompt: Type :
