@@ -1,5 +1,5 @@
 created: 20131205160816081
-modified: 20131205160828313
+modified: 20140220203440064
 tags: wikitext
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -13,6 +13,8 @@ This is my nice and simple block of text. HelloThere
 </article>
 ```
 
+! Attributes
+
 Attributes in HTML tags can be specified as a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
 
 ```
@@ -24,3 +26,8 @@ Here an attribute is specified as a macro invocation:
 ```
 <a href=<<MyMacro "Brian">>>link</a>
 ```
+
+! Content Parsing
+
+The content of an HTML element will be parsed in inline mode unless the opening tag is followed by two linebreaks. (Inline mode means that block mode formatting such as tables, lists and headings is not recognised).
+

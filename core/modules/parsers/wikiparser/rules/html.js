@@ -47,8 +47,8 @@ exports.parse = function() {
 	this.nextTag = null;
 	// Advance the parser position to past the tag
 	this.parser.pos = tag.end;
-	// Check for a following linebreak
-	var hasLineBreak = !tag.isSelfClosing && !!this.parseTokenRegExp(this.parser.source,this.parser.pos,/(\r?\n)/g);
+	// Check for an immediately following double linebreak
+	var hasLineBreak = !tag.isSelfClosing && !!this.parseTokenRegExp(this.parser.source,this.parser.pos,/(\r?\n\r?\n)/g);
 	// Set whether we're in block mode
 	tag.isBlock = this.is.block || hasLineBreak;
 	// Parse the body if we need to
