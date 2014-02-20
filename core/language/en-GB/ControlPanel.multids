@@ -14,6 +14,8 @@ Appearance/Palette/Editor/Clone/Prompt: It is recommended that you clone this sh
 Appearance/Palette/Editor/Prompt/Modified: This shadow palette has been modified
 Appearance/Palette/Editor/Prompt: Editing
 Appearance/Palette/Editor/Reset/Caption: reset
+Appearance/Palette/ShowEditor/Caption: show editor
+Appearance/Palette/HideEditor/Caption: hide editor
 Appearance/Palette/Prompt: Current palette:
 Appearance/StoryView/Caption: Story View
 Appearance/StoryView/Prompt: Current view:
