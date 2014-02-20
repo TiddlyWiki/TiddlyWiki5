@@ -15,12 +15,12 @@ Appearance/StoryView/Prompt: Vue courante :
 Appearance/Theme/Caption: Thème
 Appearance/Theme/Prompt: Thème courant :
 Basics/AnimDuration/Prompt: Durée de l'animation
-Basics/Caption: Bases
+Basics/Caption: Fondamentaux
 Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste des tiddlers qui seront affichés au démarrage :
 Basics/Language/Prompt: Langue active (Bonjour !)
-Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// surchargés
+Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// remplacés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
 Basics/SystemTiddlers/Prompt: Nombre de tiddlers système
