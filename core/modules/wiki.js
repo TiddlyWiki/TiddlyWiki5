@@ -176,7 +176,7 @@ exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
 	    title = baseTitle;
-	while(this.tiddlerExists(title)) {
+	while(this.tiddlerExists(title) || this.isShadowTiddler(title)) {
 		title = baseTitle + 
 			(options.prefix || " ") + 
 			(++c);
@@ -792,13 +792,17 @@ exports.parseTextReference = function(title,field,index,options) {
 		// Parse it
 		return this.parseTiddler(title,options);
 	} else {
-		var tiddler,text;
+		var text;
 		if(field) {
-			tiddler = this.getTiddler(title);
-			if(!tiddler || !tiddler.hasField(field)) {
-				return null;
+			if(field === "title") {
+				text = title;
+			} else {
+				var tiddler = this.getTiddler(title);
+				if(!tiddler || !tiddler.hasField(field)) {
+					return null;
+				}
+				text = tiddler.fields[field];
 			}
-			text = tiddler.fields[field];
 			return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 		} else if(index) {
 			text = this.extractTiddlerDataItem(title,index,"");
