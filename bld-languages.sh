@@ -28,3 +28,10 @@ node ./tiddlywiki.js \
 	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/de-AT-DE.html text/plain \
 	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
 	|| exit 1
+
+node ./tiddlywiki.js \
+	./editions/zh-Hant \
+	--verbose \
+	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/zh-Hant.html text/plain \
+	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	|| exit 1

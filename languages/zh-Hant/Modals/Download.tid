@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Download changes
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">關閉</$button>
+help: http://tiddlywiki.com/
+
+您的瀏覽器只支援手動儲存。
+
+要儲存更動的維基，右鍵點擊下方的下載鏈結，選擇"下載檔案"或"儲存檔案"，然後選擇資料夾和檔名。
+
+//您可以藉由按一下 Ctrl 鍵（Windows）或 options/ alt 鍵（Mac OS X）中的鏈接，稍微加速操作。您不會被提示資料夾或檔名，您的瀏覽器可能無法辨認它的檔名 -- 在做其他任何事之前，您可能需要重新命名副檔名為 `.html` 的檔案。//
+
+在智慧型手機上，不允許下載檔案，但您可以標記鏈結，然後從一台可以正常保存維基的桌上型電腦的維基同步你的書籤。

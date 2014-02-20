@@ -1,0 +1,65 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: 進階
+Advanced/Hint: 關於此 TiddlyWiki 的內部資訊
+Advanced/LoadedModules/Caption: 已載入的模組
+Advanced/LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的模組則無源碼條目，通常是因為它們是在引導過程中設置。
+Advanced/TiddlerFields/Caption: 條目欄位
+Advanced/TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含系統條目的欄位，但預設條目的欄位除外）。
+Appearance/Caption: 視覺外觀
+Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
+Appearance/Palette/Caption: 調色盤
+Appearance/Palette/Prompt: 當前的調色盤：
+Appearance/StoryView/Caption: 檢視模式
+Appearance/StoryView/Prompt: 當前的檢視模式：
+Appearance/Theme/Caption: 佈景主題
+Appearance/Theme/Prompt: 當前的佈景主題：
+Basics/AnimDuration/Prompt: 動畫持續時間：
+Basics/Caption: 基本
+Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
+Basics/DefaultTiddlers/Prompt: 首頁：
+Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
+Basics/Language/Prompt: 您好！當前的語言：
+Basics/OverriddenShadowTiddlers/Prompt: 被覆寫的預設條目數量：
+Basics/ShadowTiddlers/Prompt: 預設條目數量：
+Basics/Subtitle/Prompt: 副標題：
+Basics/SystemTiddlers/Prompt: 系統條目數量：
+Basics/Tags/Prompt: 標籤數量：
+Basics/Tiddlers/Prompt: 一般條目數量：
+Basics/Title/Prompt: 標題：
+Basics/Username/Prompt: 編輯者署名：
+Basics/Version/Prompt: ~TiddlyWiki 版本：
+Plugins/Caption: 插件
+Plugins/Fields/Description: 說明
+Plugins/Fields/Title: 標題
+Plugins/Fields/Version: 版本
+Saving/AutoSave/Disabled/Button:  
+Saving/AutoSave/Disabled/Prompt: 自動儲存已<$linkcatcher to="$:/config/AutoSave"><$link to="yes">@@color:#c0c0c0;''停用''@@</$link></$linkcatcher>
+Saving/AutoSave/Enabled/Button:  
+Saving/AutoSave/Enabled/Prompt: 自動儲存已<$linkcatcher to="$:/config/AutoSave"><$link to="no">@@color:green;''啟用''@@</$link></$linkcatcher>
+Saving/AutoSave: 自動儲存
+Saving/Caption: 儲存
+Saving/Heading: 儲存
+Saving/TiddlySpot/Advanced/Heading: 進階設定
+Saving/TiddlySpot/BackupDir: 備份資料夾
+Saving/TiddlySpot/Backups: 備份
+Saving/TiddlySpot/Filename: 上傳檔名
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //預設之伺服器網址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改為自訂之伺服器網址//
+Saving/TiddlySpot/Password: 密碼
+Saving/TiddlySpot/ServerURL: 伺服器網址
+Saving/TiddlySpot/UploadDir: 上傳資料夾
+Saving/TiddlySpot/UserName: 帳號
+Tools/Caption: 工具
+Tools/Download/Full/Caption: 下載完整副本
+Tools/Encryption/ChangePassword/Button: 變更密碼
+Tools/Encryption/ClearPassword/Button: 清除密碼
+Tools/Encryption/Disabled/Prompt: 本 wiki 尚未加密。
+Tools/Encryption/Enabled/Prompt: 本 wiki 已加密。
+Tools/Encryption/Heading: 加密
+Tools/Encryption/SetPassword/Button: 設定密碼
+Tools/Export/AllAsStaticHTML/Caption: 下載所有條目為靜態 HTML
+Tools/Export/Heading: 導出
+Tools/Import/Heading: 導入
+Tools/Import/Hint: 瀏覽您電腦裡的檔案，導入檔案內容（導入 TiddlyWiki HTML 檔案裡的條目）。您也可以將檔案直接拖放到瀏覽器中開啟的 TiddlyWiki 頁面。
+Tools/Import/Prompt: 導入：

@@ -1,0 +1,32 @@
+title: $:/language/Docs/Fields/
+
+bag: 條目的來源集的名稱
+caption: 顯示於頁籤或按鈕上的標題文字
+color: 條目的 CSS 顏色值
+component: 負責[[警示條目|AlertMechanism]]的元件名稱
+created: 條目的建立日期
+creator: 條目的建立者
+current-tiddler: 用於快取[[瀏覽歷史列表|HistoryMechanism]]的最上層條目
+dependents: 插件的相依插件列表
+description: 插件的說明、描述
+draft.of: 草稿條目，包含條目的標題、標籤、欄位 ...
+draft.title: 草稿條目的標題
+footer: wizard 的註腳
+hack-to-give-us-something-to-compare-against: 於 [[$:/core/templates/static.content]] 使用的臨時存儲欄位
+icon: 條目的標題含有與條目關聯的圖示
+library: 若設為 “yes”，表示條目應該被儲存為一個 JavaScript 程式庫
+list: 條目的列表，指定一些條目的標題清單
+modified: 條目的最近修改日期與時間
+modifier: 條目的最近修改者
+name: 具可讀性的套件條目的名稱
+plugin-priority: 套件條目的優先級數值
+plugin-type: 套件條目的類型
+released: TiddlyWiki 的釋出日期
+revision: 條目存放於伺服器中的修訂版本
+source: 條目的網址
+subtitle: 一個 wizard 的副標題
+tags: 條目的標籤清單
+text: 條目的內文
+title: 條目的唯一名稱
+type: 條目的內容類型
+version: 插件的版本資訊
