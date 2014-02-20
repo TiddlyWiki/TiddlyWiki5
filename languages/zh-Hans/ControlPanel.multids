@@ -3,12 +3,17 @@ title: $:/language/ControlPanel/
 Advanced/Caption: 高级
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Advanced/LoadedModules/Caption: 已加载的模块
-Advanced/LoadedModules/Hint: 这些是当前已载入的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
+Advanced/LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
 Advanced/TiddlerFields/Caption: 条目栏位
 Advanced/TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 Appearance/Caption: 视觉外观
 Appearance/Hint: 自订您的 TiddlyWiki 外观。
 Appearance/Palette/Caption: 调色板
+Appearance/Palette/Editor/Clone/Caption: 复制
+Appearance/Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调色板
+Appearance/Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
+Appearance/Palette/Editor/Prompt: 编辑
+Appearance/Palette/Editor/Reset/Caption: 重置
 Appearance/Palette/Prompt: 当前的调色板：
 Appearance/StoryView/Caption: 查看模式
 Appearance/StoryView/Prompt: 当前的查看模式：
@@ -57,7 +62,7 @@ Tools/Encryption/ClearPassword/Button: 清除密码
 Tools/Encryption/Disabled/Prompt: 本 wiki 尚未加密。
 Tools/Encryption/Enabled/Prompt: 本 wiki 已加密。
 Tools/Encryption/Heading: 加密
-Tools/Encryption/SetPassword/Button: 设定密码
+Tools/Encryption/SetPassword/Button: 设置密码
 Tools/Export/AllAsStaticHTML/Caption: 下载所有条目为静态 HTML
 Tools/Export/Heading: 导出
 Tools/Import/Heading: 导入
