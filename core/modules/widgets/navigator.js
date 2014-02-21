@@ -358,9 +358,6 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 // Import JSON tiddlers
 NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	var self = this;
-	// Get the story and history details
-	var storyList = this.getStoryList();
-	var history = [];
 	// Get the tiddlers
 	var tiddlers = [];
 	try {
@@ -368,6 +365,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	} catch(e) {
 	}
 	// Process each tiddler
+	var importedTiddlers = [];
 	$tw.utils.each(tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		// Add it to the store
@@ -377,14 +375,28 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 			tiddlerFields
 		));
 		if(imported) {
-			// Add it to the story
-			if(storyList.indexOf(title) === -1) {
-				storyList.unshift(title);
-			}
-			// And to history
-			history.push(title);
+			importedTiddlers.push(title);
 		}
 	});
+	// Get the story and history details
+	var storyList = this.getStoryList(),
+		history = [];
+	// Create the import report tiddler
+	var tiddlerFields = {
+		title: this.wiki.generateNewTitle("$:/temp/Import Report"),
+		text: "# [[" + importedTiddlers.join("]]\n# [[") + "]]\n"
+	};
+	this.wiki.addTiddler(new $tw.Tiddler(
+		self.wiki.getCreationFields(),
+		tiddlerFields,
+		self.wiki.getModificationFields()
+	));
+	// Add it to the story
+	if(storyList.indexOf(tiddlerFields.title) === -1) {
+		storyList.unshift(tiddlerFields.title);
+	}
+	// And to history
+	history.push(tiddlerFields.title);
 	// Save the updated story and history
 	this.saveStoryList(storyList);
 	this.addToHistory(history);
