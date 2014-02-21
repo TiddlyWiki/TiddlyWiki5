@@ -9,6 +9,13 @@ Advanced/TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] uti
 Appearance/Caption: Apparence
 Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
 Appearance/Palette/Caption: Palette
+Appearance/Palette/Editor/Clone/Caption: Cloner
+Appearance/Palette/Editor/Clone/Prompt: Il est recommandé de cloner cette palette « shadow » avant de l'éditer
+Appearance/Palette/Editor/Prompt/Modified: Cette palette « shadow » a été modifiée
+Appearance/Palette/Editor/Prompt: Édition de
+Appearance/Palette/Editor/Reset/Caption: Réinitialiser
+Appearance/Palette/ShowEditor/Caption: Afficher l'éditeur
+Appearance/Palette/HideEditor/Caption: Masquer l'éditeur
 Appearance/Palette/Prompt: Palette en cours :
 Appearance/StoryView/Caption: Vue sur le déroulé
 Appearance/StoryView/Prompt: Vue courante :
