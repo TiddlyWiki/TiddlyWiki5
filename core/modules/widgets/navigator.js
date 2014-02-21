@@ -382,21 +382,30 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	var storyList = this.getStoryList(),
 		history = [];
 	// Create the import report tiddler
-	var tiddlerFields = {
-		title: this.wiki.generateNewTitle("$:/temp/Import Report"),
-		text: "# [[" + importedTiddlers.join("]]\n# [[") + "]]\n"
-	};
-	this.wiki.addTiddler(new $tw.Tiddler(
-		self.wiki.getCreationFields(),
-		tiddlerFields,
-		self.wiki.getModificationFields()
-	));
+	if(importedTiddlers.length === 0) {
+		return false;
+	}
+	var title;
+	if(importedTiddlers.length > 1) {
+		title = this.wiki.generateNewTitle("$:/temp/ImportReport");
+		var tiddlerFields = {
+			title: title,
+			text: "# [[" + importedTiddlers.join("]]\n# [[") + "]]\n"
+		};
+		this.wiki.addTiddler(new $tw.Tiddler(
+			self.wiki.getCreationFields(),
+			tiddlerFields,
+			self.wiki.getModificationFields()
+		));
+	} else {
+		title = importedTiddlers[0];
+	}
 	// Add it to the story
-	if(storyList.indexOf(tiddlerFields.title) === -1) {
-		storyList.unshift(tiddlerFields.title);
+	if(storyList.indexOf(title) === -1) {
+		storyList.unshift(title);
 	}
 	// And to history
-	history.push(tiddlerFields.title);
+	history.push(title);
 	// Save the updated story and history
 	this.saveStoryList(storyList);
 	this.addToHistory(history);
