@@ -1,7 +1,8 @@
-title: EditBitmapWidget
-created: 201310241419
-modified: 201310300837
+created: 20131024141900000
+modified: 20140221140151790
 tags: widget
+title: EditBitmapWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
@@ -13,3 +14,10 @@ The content of the `<$edit-bitmap>` widget is ignored.
 
 |!Attribute |!Description |
 |tiddler |The tiddler to edit (defaults to the [[WidgetVariable: currentTiddler]]) |
+
+! Configuration
+
+The edit bitmap widget can be configured with these system tiddlers:
+
+* [[$:/config/BitmapEditor/LineWidth]] determines the line width: <$edit-text tiddler="$:/config/BitmapEditor/LineWidth" tag="input"/>
+* [[$:/config/BitmapEditor/Colour]] determines the line width: <$edit-text tiddler="$:/config/BitmapEditor/Colour" tag="input" type="color"/>

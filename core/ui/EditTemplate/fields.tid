@@ -10,6 +10,6 @@ tags: $:/tags/EditTemplate
 </table>
 </div>
 
-<div class="tw-edit-field-add"><em class="tw-edit"><<lingo Fields/Add/Prompt>></em> <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/temp/NewFieldName" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/temp/NewFieldName}} set="$:/temp/NewFieldName" setTo="" class="">add</$button></span></div>
+<div class="tw-edit-field-add"><em class="tw-edit"><<lingo Fields/Add/Prompt>></em> <span class="tw-edit-field-add-name"><$edit-text tiddler="$:/temp/NewFieldName" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} class="tw-edit-texteditor"/></span> <span class="tw-edit-field-add-button"><$button message="tw-add-field" param={{$:/temp/NewFieldName}} set="$:/temp/NewFieldName" setTo="" class=""><<lingo Fields/Add/Button>></$button></span></div>
 
 </$fieldmangler>
