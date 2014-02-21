@@ -1,0 +1,11 @@
+title: $:/language/TiddlerInfo/
+
+Fields/Caption: Champs
+List/Caption: Liste
+List/Empty: Ce tiddler ne contient pas de champ list
+Listed/Caption: Listé
+Listed/Empty: Ce tiddler ne figure pas dans la liste d'un autre tiddler
+References/Caption: Références
+References/Empty: Aucun tiddler ne pointe vers celui-ci
+Tagging/Caption: Étiquète
+Tagging/Empty: Le titre de ce tiddler ne sert de tag à aucun tiddler
