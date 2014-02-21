@@ -556,8 +556,12 @@ $tw.utils.Crypto = function() {
 		this.updateCryptoStateTiddler();
 	};
 	this.updateCryptoStateTiddler = function() {
-		if($tw.wiki && $tw.wiki.addTiddler) {
-			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: currentPassword ? "yes" : "no"}));
+		if($tw.wiki) {
+			var state = currentPassword ? "yes" : "no",
+				tiddler = $tw.wiki.getTiddler("$:/isEncrypted");
+			if(!tiddler || tiddler.fields.text !== state) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: state}));
+			}
 		}
 	};
 	this.hasPassword = function() {
