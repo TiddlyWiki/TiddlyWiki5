@@ -22,7 +22,7 @@ name: 具可读性的插件条目的名称
 plugin-priority: 插件条目的优先级数值
 plugin-type: 插件条目的类型
 released: TiddlyWiki 的发布日期
-revision: 条目存放于伺服器中的修订版本
+revision: 条目存放于服务器中的修订版本
 source: 条目的网址
 subtitle: 一个 wizard 的副标题
 tags: 条目的标签清单
