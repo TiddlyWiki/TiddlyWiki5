@@ -283,7 +283,7 @@ exports.getTiddlers = function(options) {
 	for(t in this.tiddlers) {
 		if($tw.utils.hop(this.tiddlers,t)) {
 			if(options.includeSystem || !this.isSystemTiddler(t)) {
-				if(!options.excludeTag || !this.tiddlers[t].hasTag(excludeTag)) {
+				if(!options.excludeTag || !this.tiddlers[t].hasTag(options.excludeTag)) {
 					tiddlers.push(this.tiddlers[t]);
 				}
 			}
