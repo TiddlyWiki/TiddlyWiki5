@@ -994,19 +994,24 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 	"application/x-tiddlers": function(text,fields) {
-		var tiddlers = [],
-			split = text.split(/\r?\n\r?\n/mg);
-		if(split.length >= 2) {
-			fields = $tw.utils.parseFields(split[0],fields);
-			var lines = split[1].split(/\r?\n/mg);
+		var titles = [],
+			tiddlers = [],
+			match = /\r?\n\r?\n/mg.exec(text);
+		if(match) {
+			fields = $tw.utils.parseFields(text.substr(0,match.index),fields);
+			var lines = text.substr(match.index + match[0].length).split(/\r?\n/mg);
 			for(var t=0; t<lines.length; t++) {
 				var line = lines[t];
 				if(line.charAt(0) !== "#") {
-					var parts = line.split(/:\s+/);
-					if(parts.length >= 2) {
+					var colonPos= line.indexOf(": ");
+					if(colonPos !== -1) {
 						var tiddler = $tw.utils.extend({},fields);
-						tiddler.title = (tiddler.title || "") + parts[0];
-						tiddler.text = parts[1];
+						tiddler.title = (tiddler.title || "") + line.substr(0,colonPos);
+						if(titles.indexOf(tiddler.title) !== -1) {
+							console.log("Warning: .multids file contains multiple definitions for " + tiddler.title);
+						}
+						titles.push(tiddler.title);
+						tiddler.text = line.substr(colonPos + 2);
 						tiddlers.push(tiddler);
 					}
 				}
