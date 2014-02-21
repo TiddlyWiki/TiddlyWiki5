@@ -105,6 +105,15 @@ Object.defineProperty(TW_Element.prototype, "className", {
     }
 });
 
+Object.defineProperty(TW_Element.prototype, "value", {
+	get: function() {
+		return this.attributes["value"] || "";
+	},
+    set: function(value) {
+    	this.attributes["value"] = value;
+    }
+});
+
 Object.defineProperty(TW_Element.prototype, "outerHTML", {
     get: function() {
 		var output = [],attr,a,v;
