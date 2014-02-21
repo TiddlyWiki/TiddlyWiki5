@@ -16,6 +16,10 @@ Edit-bitmap widget
 var DEFAULT_IMAGE_WIDTH = 300,
 	DEFAULT_IMAGE_HEIGHT = 185;
 
+// Configuration tiddlers
+var LINE_WIDTH_TITLE = "$:/config/BitmapEditor/LineWidth",
+	LINE_COLOUR_TITLE = "$:/config/BitmapEditor/Colour";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var EditBitmapWidget = function(parseTreeNode,options) {
@@ -258,8 +262,8 @@ EditBitmapWidget.prototype.strokeMove = function(x,y) {
 	// Redraw the previous image
 	ctx.drawImage(this.currCanvas,0,0);
 	// Render the stroke
-	ctx.strokeStyle = "#ff0";
-	ctx.lineWidth = 3;
+	ctx.strokeStyle = this.wiki.getTiddlerText(LINE_COLOUR_TITLE,"#ff0");
+	ctx.lineWidth = parseInt(this.wiki.getTiddlerText(LINE_WIDTH_TITLE,"3"),10);
 	ctx.lineCap = "round";
 	ctx.lineJoin = "round";
 	ctx.beginPath();
