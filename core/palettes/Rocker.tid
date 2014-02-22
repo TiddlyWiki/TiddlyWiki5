@@ -46,7 +46,7 @@ sidebar-foreground-shadow: rgba(255,255,255, 0.0)
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
 sidebar-tab-background-selected: #000
-sidebar-tiddler-link-foreground-hover: #444444
+sidebar-tiddler-link-foreground-hover: #ffbb99
 sidebar-tiddler-link-foreground: #cc0000
 static-alert-foreground: #aaaaaa
 tab-background-selected: #ffffff

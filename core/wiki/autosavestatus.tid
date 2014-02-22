@@ -3,10 +3,10 @@ title: $:/snippets/autosavestatus
 \define lingo-base() $:/language/ControlPanel/Saving/
 <$reveal type="match" state="$:/config/AutoSave" text="yes">
 <<lingo AutoSave/Enabled/Prompt>>
-<$linkcatcher to="$:/config/AutoSave"><$link to="no"><<lingo AutoSave/Enabled/Button>>
-</$link></$linkcatcher>
+<$linkcatcher to="$:/config/AutoSave"><$button to="no"><<lingo AutoSave/Enabled/Button>>
+</$button></$linkcatcher>
 </$reveal>
 <$reveal type="nomatch" state="$:/config/AutoSave" text="yes">
 <<lingo AutoSave/Disabled/Prompt>>
-<$linkcatcher to="$:/config/AutoSave"><$link to="yes"><<lingo AutoSave/Disabled/Button>></$link></$linkcatcher>
+<$linkcatcher to="$:/config/AutoSave"><$button to="yes"><<lingo AutoSave/Disabled/Button>></$button></$linkcatcher>
 </$reveal>

@@ -1,12 +1,13 @@
 title: ButtonWidget
 created: 201310241419
-modified: 201310300837
+modified: 201402220837
 tags: widget
 
 ! Introduction
 
 The button widget displays an HTML `<button>` element that can perform a combination optional actions when clicked:
 
+* Navigate to a specified tiddler
 * Dispatch a user defined [[widget message|WidgetMessages]]
 * Trigger a user defined [[popup|PopupMechanism]]
 * Assign new text to a specified tiddler
@@ -16,6 +17,7 @@ The button widget displays an HTML `<button>` element that can perform a combina
 The content of the `<$button>` widget is displayed within the button.
 
 |!Attribute |!Description |
+|to |The title of the tiddler to navigate to |
 |message |The name of the [[widget message|WidgetMessages]] to send when the button is clicked |
 |param |The optional parameter to the message |
 |set |The title of a tiddler to which a new value will be assigned |

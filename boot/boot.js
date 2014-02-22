@@ -1313,23 +1313,6 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 /*
-Fallback tiddlywiki.info content
-*/
-$tw.boot.defaultWikiInfo = {
-	"plugins": [
-		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
-	],
-	"themes": [
-		"tiddlywiki/vanilla",
-		"tiddlywiki/snowwhite"
-	],
-	"languages": [
-		"en-GB"
-	]
-};
-
-/*
 path: path of wiki directory
 parentPaths: array of parent paths that we mustn't recurse into
 */
@@ -1342,7 +1325,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	if(fs.existsSync(wikiInfoPath)) {
 		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
 	} else {
-		wikiInfo = $tw.boot.defaultWikiInfo;
+		return null;
 	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
@@ -1492,10 +1475,7 @@ $tw.boot.startup = function(options) {
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
-		if($tw.boot.argv[0] === "*") {
-			$tw.boot.wikiPath = undefined;
-			$tw.boot.argv = $tw.boot.argv.slice(1);
-		} else if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
 			$tw.boot.wikiPath = $tw.boot.argv[0];
 			$tw.boot.argv = $tw.boot.argv.slice(1);
 		} else {
