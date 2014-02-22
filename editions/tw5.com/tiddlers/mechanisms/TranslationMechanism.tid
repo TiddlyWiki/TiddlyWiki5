@@ -4,7 +4,7 @@ tags: mechanism
 title: TranslationMechanism
 type: text/vnd.tiddlywiki
 
-The translation mechanism of TiddlyWiki manages and switches between language plugins that provide translations of the TiddlyWiki user interface.
+The translation mechanism of TiddlyWiki manages and switches between language plugins that provide translations of the TiddlyWiki user interface. [[How to create a translation for TiddlyWiki]] explains how translators can create and submit translations for TiddlyWiki.
 
 The title of the current language plugin is read from the tiddler [[$:/language]]. If the selected plugin changes then any displayed translateable text automatically changes.
 

@@ -1,10 +1,12 @@
 created: 20130825202900000
-modified: 20131128093306317
+modified: 20140221093306317
 tags: concepts
 title: TiddlerLinks
 type: text/vnd.tiddlywiki
 
 Links are regions of a tiddler that can be clicked to cause navigation to a different tiddler. The navigation behaviour is determined by the current StoryView; the classic TiddlyWiki view displays the story as a linear sequence of tiddlers.
+
+Holding the ''control'' or ''command'' key while clicking on a tiddler link opens the target tiddler but doesn't navigate to it. This can be a useful way of queueing up tiddlers to be read later.
 
 Links are useful for modelling organic relationships between tiddlers, and particularly for expressing the navigational paths between tiddlers.
 

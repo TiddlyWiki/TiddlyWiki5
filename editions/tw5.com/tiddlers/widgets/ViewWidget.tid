@@ -1,6 +1,6 @@
 title: ViewWidget
 created: 201310241419
-modified: 201310300837
+modified: 201402220837
 tags: widget
 
 ! Introduction
@@ -14,6 +14,7 @@ The content of the `<$view>` widget is displayed if the field or property is mis
 |!Attribute |!Description |
 |tiddler |The title of the tiddler (defaults to the [[WidgetVariable: currentTiddler]]) |
 |field |The name of the field to view (defaults to "text") |
+|index |The name of the index to view |
 |format |The format for displaying the field (see below) |
 |template |The optional template used with certain formats |
 
