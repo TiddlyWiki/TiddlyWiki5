@@ -11,9 +11,9 @@ The goals of this format are:
 * To allow common fields or tags to be shared within groups of tiddlers
 * To be simple to process with external tools
 
-MultiTiddlerFiles have the extension `tids`. The file is structured as a block of shared fields followed by a blank line. The rest of the file is a sequence of comments and tiddlers. Tiddlers are specified by their title, followed by a colon, at least one space character, and then the rest of the line is the text field for the tiddler.
+MultiTiddlerFiles have the extension `multids`. The file is structured as a block of shared fields followed by a blank line. The rest of the file is a sequence of comments and tiddlers. Tiddlers are specified by their title, followed by a colon, at least one space character, and then the rest of the line is the text field for the tiddler.
 
-For axample:
+For example:
 
 ```
 title: $:/language/ControlPanel/

@@ -26,7 +26,7 @@ Basics/Caption: Fondamentaux
 Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste des tiddlers qui seront affichés au démarrage :
-Basics/Language/Prompt: Langue active (Bonjour !)
+Basics/Language/Prompt: Bonjour ! Langue active :
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// remplacés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
@@ -35,7 +35,7 @@ Basics/Tags/Prompt: Nombre de tags
 Basics/Tiddlers/Prompt: Nombre de tiddlers
 Basics/Title/Prompt: Titre de ce ~TiddlyWiki
 Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur
-Basics/Version/Prompt: Numéro de version
+Basics/Version/Prompt: Numéro de version :
 Plugins/Caption: Plugins
 Plugins/Fields/Description: Description
 Plugins/Fields/Title: Titre
