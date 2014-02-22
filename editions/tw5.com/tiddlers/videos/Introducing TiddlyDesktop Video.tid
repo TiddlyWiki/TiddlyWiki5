@@ -1,9 +1,9 @@
 created: 20140126124827076
-modified: 20140126125025693
+modified: 20140222133657444
 tags: video
 title: Introducing TiddlyDesktop Video
 type: text/vnd.tiddlywiki
 
 This brief introduction shows how to install and use TiddlyDesktop:
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/i3Bggkm7paA?version=3&enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="http://www.youtube.com/embed/i3Bggkm7paA" frameborder="0" allowfullscreen></iframe>

@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140211195703410
+modified: 20140222134441012
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -13,10 +13,8 @@ During the beta ~TiddlyWiki will be practical for cautious everyday use but as w
 The following additional features are planned or under consideration for implementation during the beta:
 
 * Features required for large scale adoption
-** Multilanguage support
 ** Proper use of ARIA roles
 * Features required by ~TiddlyWiki hackers
-** Making plugins in the browser
 ** Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
 ** A "safe mode" to disable customisations
 * Fixing hangovers from TiddlyWikiClassic
@@ -34,7 +32,6 @@ The following additional features are planned or under consideration for impleme
 ** Rich link tooltips, incorporating a preview
 ** Keyboard shortcuts
 ** Keyboard snippet expansion in the text editor
-** Syntax highlighter plugin
 ** Integration with the browser back and forwards buttons
 ** List editor with drag and drop
 ** Selective/weighted searching by title, body and fields
