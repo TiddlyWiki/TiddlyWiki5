@@ -13,7 +13,7 @@ blockquote-bar: <<colour muted-foreground>>
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
-download-background: #34c734
+download-background: #66cccc
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
 dragger-foreground: <<colour background>>
@@ -38,27 +38,27 @@ notification-border: #999999
 page-background: #ffffff
 pre-background: #f5f5f5
 pre-border: #cccccc
-primary: #5778d8
+primary: #7897f3
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ccc
 sidebar-foreground: #acacac
 sidebar-foreground-shadow: rgba(255,255,255, 0.8)
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
-sidebar-tab-background-selected: #ececec
+sidebar-tab-background-selected: #ffffff
 sidebar-tiddler-link-foreground-hover: #444444
-sidebar-tiddler-link-foreground: #5959c0
+sidebar-tiddler-link-foreground: #7897f3
 static-alert-foreground: #aaaaaa
-tab-background-selected: #ffffff
-tab-background: #eee
-tab-border-selected: #fff
+tab-background-selected: #fffffffff
+tab-background: #eeeeee
+tab-border-selected: #cccccc
 tab-border: #cccccc
 tab-divider: #d8d8d8
 tab-foreground: #666666
-table-border: #000
+table-border: #dddddd
 table-footer-background: #a8a8a8
-table-header-background: #eee
-tag-background: #ffeebb
+table-header-background: #f0f0f0
+tag-background: #ffeedd
 tag-foreground: #000
 tiddler-background: <<colour background>>
 tiddler-border: #eee
