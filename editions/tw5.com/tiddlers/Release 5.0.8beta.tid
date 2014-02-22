@@ -6,9 +6,9 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.7-beta...v5.0.8-beta]]//
 
-!! Breaking
+!! Breaking Changes
 
-These are changes that might affect users upgrading from previous betas.
+See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 * Changed wikitext syntax rules for parsing content of HTML elements
 * Switched SiteTitle and SiteSubtitle to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
