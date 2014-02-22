@@ -18,7 +18,7 @@ var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
-	this.recipe = window.location.pathname.split('/')[2];
+	this.recipe = decodeURIComponent(window.location.pathname.split('/')[2]);
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
