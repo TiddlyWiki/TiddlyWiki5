@@ -3,8 +3,8 @@ tags: $:/tags/PageTemplate
 
 <header class="sidebar-header">
 
-<div class="titlebar">{{SiteTitle}}</div>
-<div class="tw-subtitle">{{SiteSubtitle}}</div>
+<div class="titlebar">{{$:/SiteTitle}}</div>
+<div class="tw-subtitle">{{$:/SiteSubtitle}}</div>
 
 <div class="tw-page-controls">
 

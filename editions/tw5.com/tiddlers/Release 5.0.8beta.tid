@@ -11,6 +11,7 @@ type: text/vnd.tiddlywiki
 These are changes that might affect users upgrading from previous betas.
 
 * Changed wikitext syntax rules for parsing content of HTML elements
+* Switched SiteTitle and SiteSubtitle to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
 
 !! Documentation Improvements
 

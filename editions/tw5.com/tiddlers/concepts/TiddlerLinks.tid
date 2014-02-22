@@ -23,6 +23,6 @@ TiddlyWiki5 alters the appearance of tiddler links to convey additional informat
 |To a tiddler that exists |[[LikeThis|TiddlerLinks]] |
 |To a tiddler that doesn't exist |[[LikeThis|ATiddlerThatDoesntExist]] |
 |To a shadow tiddler that has not been overridden |[[LikeThis|$:/core/copyright.txt]] |
-|To a shadow tiddler that has been overridden by an ordinary tiddler |[[LikeThis|SiteTitle]] |
+|To a shadow tiddler that has been overridden by an ordinary tiddler |[[LikeThis|$:/SiteTitle]] |
 
 External links are shown like this: http://tiddlywiki.com/ or [[like this|http://tiddlywiki.com/]].
