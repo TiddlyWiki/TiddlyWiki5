@@ -1,8 +1,0 @@
-{
-	"title": "$:/languages/en-US",
-	"name": "en-US",
-	"plugin-type": "language",
-	"description": "English (US)",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0"
-}

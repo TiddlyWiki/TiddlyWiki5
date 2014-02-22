@@ -157,6 +157,12 @@ exports.startup = function() {
 		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
 			$tw.crypto.setPassword(null);
 		});
+		// Ensure that $:/isEncrypted is maintained properly
+		$tw.wiki.addEventListener("change",function(changes) {
+			if($tw.utils.hop(changes,"$:/isEncrypted")) {
+				$tw.crypto.updateCryptoStateTiddler();
+			}
+		});
 		// Set up the favicon
 		var faviconTitle = "$:/favicon.ico",
 			faviconLink = document.getElementById("faviconLink"),

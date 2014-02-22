@@ -1,0 +1,32 @@
+title: $:/language/Docs/Fields/
+
+bag: 条目的来源集的名称
+caption: 显示于页签或按钮上的标题文字
+color: 条目的 CSS 颜色值
+component: 负责[[警示条目|AlertMechanism]]的组件名称
+created: 条目的创建日期
+creator: 条目的创建者
+current-tiddler: 用于缓存[[浏览历史列表|HistoryMechanism]]的最上层条目
+dependents: 插件的相依插件列表
+description: 插件的说明、描述
+draft.of: 草稿条目，包含条目的标题、标签、栏位 ...
+draft.title: 草稿条目的标题
+footer: wizard 的注脚
+hack-to-give-us-something-to-compare-against: 于 [[$:/core/templates/static.content]] 使用的临时保存栏位
+icon: 条目的标题含有与条目关联的图标
+library: 若设为 “yes”，表示条目应该被保存为一个 JavaScript 程序库
+list: 条目的列表，指定一些条目的标题清单
+modified: 条目的最近修改日期与时间
+modifier: 条目的最近修改者
+name: 具可读性的插件条目的名称
+plugin-priority: 插件条目的优先级数值
+plugin-type: 插件条目的类型
+released: TiddlyWiki 的发布日期
+revision: 条目存放于服务器中的修订版本
+source: 条目的网址
+subtitle: 一个 wizard 的副标题
+tags: 条目的标签清单
+text: 条目的内文
+title: 条目的唯一名称
+type: 条目的内容类型
+version: 插件的版本信息

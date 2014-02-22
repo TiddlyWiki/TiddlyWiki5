@@ -556,8 +556,12 @@ $tw.utils.Crypto = function() {
 		this.updateCryptoStateTiddler();
 	};
 	this.updateCryptoStateTiddler = function() {
-		if($tw.wiki && $tw.wiki.addTiddler) {
-			$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: currentPassword ? "yes" : "no"}));
+		if($tw.wiki) {
+			var state = currentPassword ? "yes" : "no",
+				tiddler = $tw.wiki.getTiddler("$:/isEncrypted");
+			if(!tiddler || tiddler.fields.text !== state) {
+				$tw.wiki.addTiddler(new $tw.Tiddler({title: "$:/isEncrypted", text: state}));
+			}
 		}
 	};
 	this.hasPassword = function() {
@@ -994,19 +998,24 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 });
 $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 	"application/x-tiddlers": function(text,fields) {
-		var tiddlers = [],
-			split = text.split(/\r?\n\r?\n/mg);
-		if(split.length >= 2) {
-			fields = $tw.utils.parseFields(split[0],fields);
-			var lines = split[1].split(/\r?\n/mg);
+		var titles = [],
+			tiddlers = [],
+			match = /\r?\n\r?\n/mg.exec(text);
+		if(match) {
+			fields = $tw.utils.parseFields(text.substr(0,match.index),fields);
+			var lines = text.substr(match.index + match[0].length).split(/\r?\n/mg);
 			for(var t=0; t<lines.length; t++) {
 				var line = lines[t];
 				if(line.charAt(0) !== "#") {
-					var parts = line.split(/:\s+/);
-					if(parts.length >= 2) {
+					var colonPos= line.indexOf(": ");
+					if(colonPos !== -1) {
 						var tiddler = $tw.utils.extend({},fields);
-						tiddler.title = (tiddler.title || "") + parts[0];
-						tiddler.text = parts[1];
+						tiddler.title = (tiddler.title || "") + line.substr(0,colonPos);
+						if(titles.indexOf(tiddler.title) !== -1) {
+							console.log("Warning: .multids file contains multiple definitions for " + tiddler.title);
+						}
+						titles.push(tiddler.title);
+						tiddler.text = line.substr(colonPos + 2);
 						tiddlers.push(tiddler);
 					}
 				}
@@ -1304,23 +1313,6 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 /*
-Fallback tiddlywiki.info content
-*/
-$tw.boot.defaultWikiInfo = {
-	"plugins": [
-		"tiddlywiki/tiddlyweb",
-		"tiddlywiki/filesystem"
-	],
-	"themes": [
-		"tiddlywiki/vanilla",
-		"tiddlywiki/snowwhite"
-	],
-	"languages": [
-		"en-GB"
-	]
-};
-
-/*
 path: path of wiki directory
 parentPaths: array of parent paths that we mustn't recurse into
 */
@@ -1333,7 +1325,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	if(fs.existsSync(wikiInfoPath)) {
 		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
 	} else {
-		wikiInfo = $tw.boot.defaultWikiInfo;
+		return null;
 	}
 	// Load any parent wikis
 	if(wikiInfo.includeWikis) {
@@ -1483,10 +1475,7 @@ $tw.boot.startup = function(options) {
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
-		if($tw.boot.argv[0] === "*") {
-			$tw.boot.wikiPath = undefined;
-			$tw.boot.argv = $tw.boot.argv.slice(1);
-		} else if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
 			$tw.boot.wikiPath = $tw.boot.argv[0];
 			$tw.boot.argv = $tw.boot.argv.slice(1);
 		} else {
@@ -1502,7 +1491,7 @@ $tw.boot.startup = function(options) {
 	// Add file extension information
 	$tw.utils.registerFileType("text/vnd.tiddlywiki","utf8",".tid");
 	$tw.utils.registerFileType("application/x-tiddler","utf8",".tid");
-	$tw.utils.registerFileType("application/x-tiddlers","utf8",".tids");
+	$tw.utils.registerFileType("application/x-tiddlers","utf8",".multids");
 	$tw.utils.registerFileType("application/x-tiddler-html-div","utf8",".tiddler");
 	$tw.utils.registerFileType("text/vnd.tiddlywiki2-recipe","utf8",".recipe");
 	$tw.utils.registerFileType("text/plain","utf8",".txt");

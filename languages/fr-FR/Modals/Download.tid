@@ -1,0 +1,13 @@
+title: $:/language/Modals/Download
+type: text/vnd.tiddlywiki
+subtitle: Télécharger les modifications
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">Fermer</$button>
+help: http://tiddlywiki.com/static/DownloadingChanges.html
+
+Votre navigateur ne supporte que la sauvegarde manuelle.
+
+Pour sauvegarder les modifications de votre wiki, faites un clic droit sur le lien de téléchargement ci-dessous et choisissez "Enregistrer..." ou "Télécharger...", puis choisissez le répertoire et le nom de fichier.
+
+//Vous pouvez accélérer légèrement les choses en cliquant sur le lien en pressant la touche contrôle (Windows) ou la touche options/alt (Mac OS X). On ne vous demandera pas un nom de fichier ou de répertoire, mais votre navigateur fournira sans doute un nom difficile à identifier — il vous faudra sans doute le renommer pour ajouter une extension .html avant de pouvoir en faire quoi que ce soit d'utile.//
+
+Sur les smartphones qui n'autorisent pas le téléchargement de fichiers, vous pouvez ajouter le lien à vos favoris/signets, puis synchroniser vos signets avec un ordinateur de bureau, d'où le wiki pourra être sauvegardé normalement.

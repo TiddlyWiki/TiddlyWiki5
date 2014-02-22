@@ -7,6 +7,7 @@ type: text/vnd.tiddlywiki
 There are several methods for upgrading an existing TiddlyWiki version 5 document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
 
 <div class="tw-message-box">
+
 <a class="tw-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
 
 !! Upgrading from TiddlyWikiClassic

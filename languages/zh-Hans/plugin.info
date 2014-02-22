@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/zh-Hans",
+	"name": "zh-Hans",
+	"plugin-type": "language",
+	"description": "Chinese (Simplified)",
+	"author": "BramChen",
+	"core-version": ">=5.0.8"
+}

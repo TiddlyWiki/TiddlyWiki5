@@ -3,6 +3,9 @@ title: $:/core/ui/PageStylesheet
 \define colour(name)
 <$transclude tiddler={{$:/palette}} index="$name$"/>
 \end
+\define color(name)
+<<colour $name$>>
+\end
 \define border-radius(radius)
 ```
   -webkit-border-radius: $radius$;
@@ -47,6 +50,10 @@ background-image: -webkit-linear-gradient($gradient$);
 background-image: -ms-linear-gradient($gradient$);
 ```
 \end
+\define datauri(title)
+<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
+\end
+
 <$list filter="[is[shadow]tag[$:/tags/stylesheet]] [!is[shadow]tag[$:/tags/stylesheet]]">
 <$transclude/>
 </$list>

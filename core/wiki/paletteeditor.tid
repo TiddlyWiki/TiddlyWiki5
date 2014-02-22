@@ -1,0 +1,26 @@
+title: $:/snippets/paletteeditor
+
+\define lingo-base() $:/language/ControlPanel/Appearance/Palette/Editor/
+<$set name="currentTiddler" value={{$:/palette}}>
+
+<<lingo Prompt>> <$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
+
+<$list filter="[is[current]is[shadow]is[tiddler]]" variable="listItem">
+<<lingo Prompt/Modified>>
+<$button message="tw-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
+</$list>
+
+<$list filter="[is[current]is[shadow]!is[tiddler]]" variable="listItem">
+<<lingo Clone/Prompt>>
+</$list>
+
+<$button message="tw-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
+
+<table><tbody><$list filter="[is[current]indexes[]]" variable="colourName"><tr><td><$macrocall $name="colourName" $output="text/plain"/></td>
+<td><$edit-text index=<<colourName>> tag="input"/></td>
+<td><$edit-text index=<<colourName>> type="color" tag="input"/></td>
+</tr>
+</$list>
+</tbody>
+</table>
+</$set>

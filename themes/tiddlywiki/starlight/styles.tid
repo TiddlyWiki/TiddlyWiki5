@@ -2,39 +2,6 @@ title: $:/themes/tiddlywiki/starlight/styles.tid
 tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
-\define border-radius(radius)
-```
-  -webkit-border-radius: $radius$;
-     -moz-border-radius: $radius$;
-          border-radius: $radius$;
-```
-\end
-\define box-shadow(shadow)
-```
-  -webkit-box-shadow: $shadow$;
-     -moz-box-shadow: $shadow$;
-          box-shadow: $shadow$;
-```
-\end
-\define filter(filter)
-```
-  -webkit-filter: $filter$;
-     -moz-filter: $filter$;
-          filter: $filter$;
-```
-\end
-\define background-linear-gradient(gradient)
-```
-background-image: linear-gradient($gradient$);
-background-image: -o-linear-gradient($gradient$);
-background-image: -moz-linear-gradient($gradient$);
-background-image: -webkit-linear-gradient($gradient$);
-background-image: -ms-linear-gradient($gradient$);
-```
-\end
-\define datauri(title)
-<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
-\end
 
 /*
 Placeholder for a more thorough refinement of Snow White

@@ -61,6 +61,7 @@ table-header-background: #f0f0f0
 tag-background: #d5ad34
 tag-foreground: #ffffff
 tiddler-background: <<colour background>>
+tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888
 tiddler-controls-foreground-selected: #444444
 tiddler-controls-foreground: #cccccc

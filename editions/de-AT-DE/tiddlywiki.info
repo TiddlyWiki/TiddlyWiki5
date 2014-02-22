@@ -1,0 +1,19 @@
+{
+	"plugins": [
+		"tiddlywiki/fullscreen",
+		"tiddlywiki/github-fork-ribbon"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"en-GB",
+		"de-AT",
+		"de-DE"
+	]
+}

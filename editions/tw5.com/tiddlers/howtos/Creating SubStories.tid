@@ -32,9 +32,11 @@ Click this link to get started: HelloThere
 
 <$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
 <div>
+
 ! <$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
 
 <$transclude/>
+
 </div>
 </$list>
 

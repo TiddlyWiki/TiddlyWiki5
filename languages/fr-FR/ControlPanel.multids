@@ -1,0 +1,72 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Avancé
+Advanced/Hint: Informations internes sur ce ~TiddlyWiki
+Advanced/LoadedModules/Caption: Modules chargés
+Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indique que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
+Advanced/TiddlerFields/Caption: Champs
+Advanced/TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
+Appearance/Caption: Apparence
+Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
+Appearance/Palette/Caption: Palette
+Appearance/Palette/Editor/Clone/Caption: Cloner
+Appearance/Palette/Editor/Clone/Prompt: Il est recommandé de cloner cette palette « shadow » avant de l'éditer
+Appearance/Palette/Editor/Prompt/Modified: Cette palette « shadow » a été modifiée
+Appearance/Palette/Editor/Prompt: Édition de
+Appearance/Palette/Editor/Reset/Caption: Réinitialiser
+Appearance/Palette/ShowEditor/Caption: Afficher l'éditeur
+Appearance/Palette/HideEditor/Caption: Masquer l'éditeur
+Appearance/Palette/Prompt: Palette en cours :
+Appearance/StoryView/Caption: Vue sur le déroulé
+Appearance/StoryView/Prompt: Vue courante :
+Appearance/Theme/Caption: Thème
+Appearance/Theme/Prompt: Thème courant :
+Basics/AnimDuration/Prompt: Durée de l'animation
+Basics/Caption: Fondamentaux
+Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
+Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
+Basics/DefaultTiddlers/TopHint: Liste des tiddlers qui seront affichés au démarrage :
+Basics/Language/Prompt: Bonjour ! Langue active :
+Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// remplacés
+Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
+Basics/Subtitle/Prompt: Sous-titre
+Basics/SystemTiddlers/Prompt: Nombre de tiddlers système
+Basics/Tags/Prompt: Nombre de tags
+Basics/Tiddlers/Prompt: Nombre de tiddlers
+Basics/Title/Prompt: Titre de ce ~TiddlyWiki
+Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur
+Basics/Version/Prompt: Numéro de version :
+Plugins/Caption: Plugins
+Plugins/Fields/Description: Description
+Plugins/Fields/Title: Titre
+Plugins/Fields/Version: Version
+Saving/AutoSave/Disabled/Button: Activer
+Saving/AutoSave/Disabled/Prompt: La sauvegarde automatique est désactivée
+Saving/AutoSave/Enabled/Button: Désactiver
+Saving/AutoSave/Enabled/Prompt: La sauvegarde automatique est activée
+Saving/AutoSave: Sauvegarde automatique
+Saving/Caption: Sauvegarde
+Saving/Heading: Sauvegarde
+Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
+Saving/TiddlySpot/BackupDir: Dossier des //backups//
+Saving/TiddlySpot/Backups: Backup
+Saving/TiddlySpot/Filename: Nom du fichier déposé
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<wikiname>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
+Saving/TiddlySpot/Password: Mot de passe
+Saving/TiddlySpot/ServerURL: URL du serveur
+Saving/TiddlySpot/UploadDir: Dossier de dépôt
+Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
+Tools/Caption: Outils
+Tools/Download/Full/Caption: Télécharger le wiki complet
+Tools/Encryption/ChangePassword/Button: changer le mot de passe
+Tools/Encryption/ClearPassword/Button: effacer le mot de passe
+Tools/Encryption/Disabled/Prompt: Ce wiki n'est pas chiffré
+Tools/Encryption/Enabled/Prompt: Ce wiki est chiffré
+Tools/Encryption/Heading: Chiffrement
+Tools/Encryption/SetPassword/Button: Choisir un mot de passe
+Tools/Export/AllAsStaticHTML/Caption: Regrouper tous les tiddlers dans un même fichier HTML statique
+Tools/Export/Heading: Exporter
+Tools/Import/Heading: Importer
+Tools/Import/Hint: Parcourez les fichiers de votre ordinateur pour importer leur contenu (les tiddlers individuels contenus dans les fichiers TiddlyWiki HTML sont importés séparément). Vous pouvez aussi glisser-déposer les fichiers directement sur la fenêtre du navigateur.
+Tools/Import/Prompt: Importer :

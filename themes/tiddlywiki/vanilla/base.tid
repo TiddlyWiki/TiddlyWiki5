@@ -404,6 +404,7 @@ a.tw-tiddlylink-external {
 .tw-tiddler-frame {
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
+	border: 1px solid <<colour tiddler-border>>;
 }
 
 .tw-tiddler-info {
@@ -995,11 +996,36 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 /*
+** Chooser
+*/
+
+.tw-chooser {
+	border: 1px solid <<colour table-border>>;
+}
+
+.tw-chooser-item {
+	border: 8px;
+}
+
+.tw-chooser-item a.tw-tiddlylink {
+	display: block;
+	text-decotoration: none;
+	color: <<colour tiddler-link-foreground>>;
+	background-color: <<colour tiddler-link-background>>;
+	margin: 4px;
+}
+
+.tw-chooser-item a.tw-tiddlylink:hover {
+	text-decoration: none;
+	color: <<colour tiddler-link-background>>;
+	background-color: <<colour tiddler-link-foreground>>;
+}
+
+/*
 ** Palette swatches
 */
 
 .tw-swatches-horiz {
-	
 }
 
 .tw-swatches-horiz .tw-swatch {

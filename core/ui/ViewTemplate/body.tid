@@ -2,5 +2,7 @@ title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
 <div class="body">
+
 <$transclude />
+
 </div>

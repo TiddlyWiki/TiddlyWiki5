@@ -1,0 +1,21 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: 動畫模組包含可用於 RevealWidget 的動畫。
+browser-startup: 僅可於瀏覽器中執行的啟動功能函數。
+command: 可於 Node.js 執行的指令。
+config: 加入 `$tw.config` 的資料。
+filteroperator: 個別篩選器運算元方法。
+global: 加入 `$tw` 的全域資料。
+isfilteroperator: ''is'' 篩選器運算元的運算子。
+macro: JavaScript ''巨集''定義
+parser: 不同內容類型的解析器。
+saver: 於瀏覽器儲存檔案的不同的儲存處理方法。
+startup: 啟動時期的功能函數。
+storyview: 檢視模式用以自訂 list 小工具的動畫與行為。
+tiddlerdeserializer: 轉換不同內容類型至條目。
+tiddlerfield: 定義個別條目欄位的行為。
+tiddlermethod: 新增方法至 `$tw.Tiddler` 原型。
+utils: 新增方法至 `$tw.utils`.
+widget: 封裝 DOM 渲染和刷新的小工具。
+wikimethod: 新增方法至 `$tw.Wiki`.
+wikirule: WikiText 解析器的個別的語法規則。

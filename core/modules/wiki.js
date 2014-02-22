@@ -176,7 +176,7 @@ exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
 	    title = baseTitle;
-	while(this.tiddlerExists(title)) {
+	while(this.tiddlerExists(title) || this.isShadowTiddler(title)) {
 		title = baseTitle + 
 			(options.prefix || " ") + 
 			(++c);
@@ -283,7 +283,7 @@ exports.getTiddlers = function(options) {
 	for(t in this.tiddlers) {
 		if($tw.utils.hop(this.tiddlers,t)) {
 			if(options.includeSystem || !this.isSystemTiddler(t)) {
-				if(!options.excludeTag || !this.tiddlers[t].hasTag(excludeTag)) {
+				if(!options.excludeTag || !this.tiddlers[t].hasTag(options.excludeTag)) {
 					tiddlers.push(this.tiddlers[t]);
 				}
 			}
@@ -792,13 +792,17 @@ exports.parseTextReference = function(title,field,index,options) {
 		// Parse it
 		return this.parseTiddler(title,options);
 	} else {
-		var tiddler,text;
+		var text;
 		if(field) {
-			tiddler = this.getTiddler(title);
-			if(!tiddler || !tiddler.hasField(field)) {
-				return null;
+			if(field === "title") {
+				text = title;
+			} else {
+				var tiddler = this.getTiddler(title);
+				if(!tiddler || !tiddler.hasField(field)) {
+					return null;
+				}
+				text = tiddler.fields[field];
 			}
-			text = tiddler.fields[field];
 			return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 		} else if(index) {
 			text = this.extractTiddlerDataItem(title,index,"");

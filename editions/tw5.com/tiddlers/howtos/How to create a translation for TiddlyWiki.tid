@@ -26,7 +26,7 @@ Quick and dirty instructions:
 # Run `./qbld.sh` to build TiddlyWiki
 # Open the TiddlyWiki file at `/MyTranslation/jermolene.github.com/index.html`
 # You should see your translation listed in the control panel, but the text of the translation will still be in British English
-# Edit the `.tid` and `.tids` files in your language folder to translate the English text
+# Edit the `.tid` and `.multids` files in your language folder to translate the English text
 
 Content of `plugin.info` for Joe Bloggs' Welsh translation:
 

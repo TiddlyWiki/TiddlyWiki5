@@ -2,7 +2,9 @@
 	"title": "$:/languages/de-AT",
 	"name": "de-AT",
 	"plugin-type": "language",
-	"description": "German (Austria)",
+	"description": "Deutsch (Österreich)",
 	"author": "JeremyRuston",
-	"core-version": ">=5.0.0"
+	"maintainer": "MarioPietsch aka pmario",
+	"core-version": ">=5.0.0",
+	"dependents": ["$:/languages/de-DE"]
 }

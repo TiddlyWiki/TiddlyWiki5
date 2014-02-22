@@ -1,0 +1,17 @@
+{
+	"plugins": [
+		"tiddlywiki/fullscreen"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/stickytitles",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"zh-Hant"
+	]
+}

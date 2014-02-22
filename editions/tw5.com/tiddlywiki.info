@@ -21,6 +21,9 @@
 		"en-US",
 		"en-GB",
 		"de-AT",
-		"fr-FR"
+		"de-DE",
+		"fr-FR",
+		"zh-Hans",
+		"zh-Hant"
 	]
 }

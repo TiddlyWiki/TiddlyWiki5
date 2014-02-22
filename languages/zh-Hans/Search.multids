@@ -1,0 +1,10 @@
+title: $:/language/Search/
+
+Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> 个条目符合条件</small>//
+Filter/Caption: 筛选
+Filter/Hint: 以[[筛选表达式|http://tiddlywiki.com/static/TiddlerFilters.html]]查找：
+Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> 个条目符合条件</small>//
+Shadows/Caption: 默认
+Shadows/Hint: 查找默认条目：
+System/Caption: 系统
+System/Hint: 查找系统条目：

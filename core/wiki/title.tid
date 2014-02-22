@@ -1,4 +1,4 @@
 title: $:/core/wiki/title
 type: text/vnd.tiddlywiki
 
-{{SiteTitle}} --- {{SiteSubtitle}}
+{{$:/SiteTitle}} --- {{$:/SiteSubtitle}}

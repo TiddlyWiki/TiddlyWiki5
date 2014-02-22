@@ -3,7 +3,11 @@ tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
 <$list filter="[tags[]sort[title]]">
+
 <$transclude tiddler="$:/core/ui/TagTemplate"/> <small class="tw-menu-list-count"><$count filter="[is[current]tagging[]]"/></small>
+
 </$list>
+
 ----
+
 {{$:/core/ui/UntaggedTemplate}} <small class="tw-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>

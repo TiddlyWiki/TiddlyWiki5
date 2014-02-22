@@ -2,7 +2,11 @@ title: $:/core/ui/SideBar/Open
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Open/Caption}}
 
+\define lingo-base() $:/language/CloseAll/
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+
 </$list>
-<$button message="tw-close-all-tiddlers" class="btn-invisible btn-mini">close all</$button>
+
+<$button message="tw-close-all-tiddlers" class="btn-invisible btn-mini"><<lingo Button>></$button>
