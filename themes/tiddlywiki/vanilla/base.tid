@@ -404,6 +404,7 @@ a.tw-tiddlylink-external {
 .tw-tiddler-frame {
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
+	border: 1px solid <<colour tiddler-border>>;
 }
 
 .tw-tiddler-info {

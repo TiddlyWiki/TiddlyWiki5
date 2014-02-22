@@ -1,6 +1,6 @@
-title: $:/palettes/Contrast
-name: Contrast
-description: High contrast and unambiguous
+title: $:/palettes/Rocker
+name: Rocker
+description: A dark theme
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
@@ -35,19 +35,19 @@ modal-header-border: #eeeeee
 muted-foreground: #999999
 notification-background: #ffffdd
 notification-border: #999999
-page-background: #000000
+page-background: #000
 pre-background: #f5f5f5
 pre-border: #cccccc
-primary: #5778d8
+primary: #cc0000
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ffffff
-sidebar-foreground: #ffffff
-sidebar-foreground-shadow: rgba(255,0,0, 0.5)
+sidebar-foreground: #acacac
+sidebar-foreground-shadow: rgba(255,255,255, 0.0)
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
-sidebar-tab-background-selected: #ececec
+sidebar-tab-background-selected: #000
 sidebar-tiddler-link-foreground-hover: #444444
-sidebar-tiddler-link-foreground: #999999
+sidebar-tiddler-link-foreground: #cc0000
 static-alert-foreground: #aaaaaa
 tab-background-selected: #ffffff
 tab-background: #d8d8d8
@@ -58,8 +58,8 @@ tab-foreground: #666666
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #d5ad34
-tag-foreground: #ffffff
+tag-background: #ffbb99
+tag-foreground: #000
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
 tiddler-controls-foreground-hover: #888888
@@ -76,6 +76,6 @@ tiddler-info-tab-background: #f8f8f8
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
-tiddler-title-foreground: #182955
+tiddler-title-foreground: #cc0000
 untagged-background: #999999
 very-muted-foreground: #888888
