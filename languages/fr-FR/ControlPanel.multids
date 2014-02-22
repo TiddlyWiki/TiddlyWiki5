@@ -3,7 +3,7 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Avancé
 Advanced/Hint: Informations internes sur ce ~TiddlyWiki
 Advanced/LoadedModules/Caption: Modules chargés
-Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indique que le tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
+Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indique que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Advanced/TiddlerFields/Caption: Champs
 Advanced/TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Appearance/Caption: Apparence
