@@ -40,10 +40,10 @@ Plugins/Caption: 插件
 Plugins/Fields/Description: 說明
 Plugins/Fields/Title: 標題
 Plugins/Fields/Version: 版本
-Saving/AutoSave/Disabled/Button:  
-Saving/AutoSave/Disabled/Prompt: 自動儲存已<$linkcatcher to="$:/config/AutoSave"><$link to="yes">@@color:#c0c0c0;''停用''@@</$link></$linkcatcher>
-Saving/AutoSave/Enabled/Button:  
-Saving/AutoSave/Enabled/Prompt: 自動儲存已<$linkcatcher to="$:/config/AutoSave"><$link to="no">@@color:green;''啟用''@@</$link></$linkcatcher>
+Saving/AutoSave/Disabled/Button: 啟用
+Saving/AutoSave/Disabled/Prompt: 自動儲存已停用
+Saving/AutoSave/Enabled/Button: 停用
+Saving/AutoSave/Enabled/Prompt: 自動儲存已啟用
 Saving/AutoSave: 自動儲存
 Saving/Caption: 儲存
 Saving/Heading: 儲存
