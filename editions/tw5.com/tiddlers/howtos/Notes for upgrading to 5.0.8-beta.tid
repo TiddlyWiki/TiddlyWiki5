@@ -1,5 +1,5 @@
 created: 20140223183404938
-modified: 20140223192031783
+modified: 20140223195514667
 tags: howto
 title: Notes for upgrading to 5.0.8-beta
 type: text/vnd.tiddlywiki
@@ -54,4 +54,4 @@ And a paragraph of text.
 
 ! Changed commands for [[TiddlyWiki on Node.js]]
 
-The handling of wiki folders has changed. Previously, if the `tiddlywiki` command was run against a wiki folder that didn't have the necessary `tiddlywiki.info` file then it would be automatically created. Now, the wiki folder must be initialised with the CreateWikiCommand.
+The handling of wiki folders has changed. Previously, if the `tiddlywiki` command was run against a wiki folder that didn't have the necessary `tiddlywiki.info` file then it would be automatically created. Now, the wiki folder must be initialised with the InitCommand.

@@ -1,0 +1,21 @@
+created: 20140223195548209
+modified: 20140223195738745
+tags: command
+title: InitCommand
+type: text/vnd.tiddlywiki
+
+Initialise an empty [[WikiFolder|WikiFolders]] with a copy of the specified edition.
+
+```
+--init <edition>
+```
+
+The "edition" defaults to ''empty''.
+
+For example:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Note that the init command will fail if the wiki folder does not exist, or is not empty.
