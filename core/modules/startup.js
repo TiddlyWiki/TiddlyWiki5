@@ -18,6 +18,9 @@ exports.startup = function() {
 	var modules,n,m,f,commander;
 	// Load modules
 	$tw.modules.applyMethods("utils",$tw.utils);
+	if($tw.node) {
+		$tw.modules.applyMethods("utils-node",$tw.utils);
+	}
 	$tw.modules.applyMethods("global",$tw);
 	$tw.modules.applyMethods("config",$tw.config);
 	if($tw.browser) {
