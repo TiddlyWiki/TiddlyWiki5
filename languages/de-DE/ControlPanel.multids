@@ -9,11 +9,15 @@ Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die 
 Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen ihres ~TiddlyWiki's anzupassen.
 Appearance/Palette/Caption: Palette
+Appearance/Palette/Editor/Clone/Caption: Palette klonen
+Appearance/Palette/Editor/Clone/Prompt: Es wird empfohlen, dass sie diese Schatten-Palette klonen, bevor sie sie bearbeiten. Der Name der Palette wird im Tiddler Feld "description" eingestellt.
+Appearance/Palette/Editor/Prompt/Modified: Diese ~Schatten-Palette wurde bearbeitet.
+Appearance/Palette/Editor/Prompt: Bearbeiten
+Appearance/Palette/Editor/Reset/Caption: Palette zurücksetzen
+Appearance/Palette/ShowEditor/Caption: Editor zeigen
+Appearance/Palette/HideEditor/Caption: Editor ausblenden
 Appearance/Palette/Prompt: Ausgewählte Farbpalette:
-#
-# TODO bin mir nicht sicher bei "Story View"
 Appearance/StoryView/Caption: Anzeige
-#
 Appearance/StoryView/Prompt: Ausgewählte Anzeige:
 Appearance/Theme/Caption: Thema
 Appearance/Theme/Prompt: Ausgewähltes Thema:
@@ -32,7 +36,6 @@ Basics/Tiddlers/Prompt: Anzahl Tiddler:
 Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
 Basics/Username/Prompt: Benutzer Signatur zum editieren:
 Basics/Version/Prompt: ~TiddlyWiki Version:
-# TODO - "Plugins"
 Plugins/Caption: Plugins
 Plugins/Fields/Description: Beschreibung
 Plugins/Fields/Title: Titel
@@ -41,12 +44,10 @@ Saving/AutoSave/Disabled/Button: klicken zum Aktivieren
 Saving/AutoSave/Disabled/Prompt: Automatisch speichern ist deaktiviert!
 Saving/AutoSave/Enabled/Button: klicken zum Deaktivieren
 Saving/AutoSave/Enabled/Prompt: Automatisch speichern ist aktiviert!
-#
 Saving/AutoSave: Automatisch speichern
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
-# TODO Backup ??
 Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
 Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Filename: "Upload" Dateiname
