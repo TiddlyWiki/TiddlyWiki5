@@ -75,7 +75,7 @@ tag-background: #eeeeff
 tag-foreground: #000
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
-tiddler-controls-foreground-hover: #888888
+tiddler-controls-foreground-hover: #666666
 tiddler-controls-foreground-selected: #444444
 tiddler-controls-foreground: #cccccc
 tiddler-editor-background: #f8f8f8

@@ -341,7 +341,7 @@ a.tw-tiddlylink-external:hover {
 }
 
 .tw-page-controls button:hover svg, .tw-page-controls a:hover svg {
-	fill: <<colour sidebar-controls-foreground-hover>;
+	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
 .tw-menu-list-item {
@@ -509,7 +509,7 @@ a.tw-tiddlylink-external:hover {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tw-tiddler-controls button:hover svg {
+.tw-tiddler-controls button.btn-invisible:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
