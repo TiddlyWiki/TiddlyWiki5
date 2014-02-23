@@ -560,6 +560,46 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 /*
+** Toolbar buttons
+*/
+
+.tw-page-controls svg.tw-image-new-button {
+  fill: <<colour toolbar-new-button>>;
+}
+
+.tw-page-controls svg.tw-image-options-button {
+  fill: <<colour toolbar-options-button>>;
+}
+
+.tw-page-controls svg.tw-image-save-button {
+  fill: <<colour toolbar-save-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-info-button {
+  fill: <<colour toolbar-info-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-edit-button {
+  fill: <<colour toolbar-edit-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-close-button {
+  fill: <<colour toolbar-close-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-delete-button {
+  fill: <<colour toolbar-delete-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-cancel-button {
+  fill: <<colour toolbar-cancel-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-done-button {
+  fill: <<colour toolbar-done-button>>;
+}
+
+/*
 ** Tiddler edit mode
 */
 

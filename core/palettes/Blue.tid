@@ -90,5 +90,14 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
 tiddler-title-foreground: #5959c0
+toolbar-new-button: #5eb95e
+toolbar-options-button: rgb(128, 88, 165)
+toolbar-save-button: #0e90d2
+toolbar-info-button: #0e90d2
+toolbar-edit-button: rgb(243, 123, 29)
+toolbar-close-button: #dd514c
+toolbar-delete-button: #dd514c
+toolbar-cancel-button: rgb(243, 123, 29)
+toolbar-done-button: #5eb95e
 untagged-background: #999999
 very-muted-foreground: #888888
