@@ -55,3 +55,10 @@ And a paragraph of text.
 ! Changed commands for [[TiddlyWiki on Node.js]]
 
 The handling of wiki folders has changed. Previously, if the `tiddlywiki` command was run against a wiki folder that didn't have the necessary `tiddlywiki.info` file then it would be automatically created. Now, the wiki folder must be initialised with the InitCommand.
+
+This is how to create and start a new server-based wiki:
+
+```
+tiddlywiki mywikifolder --init server
+tiddlywiki mywikifolder --server
+```
