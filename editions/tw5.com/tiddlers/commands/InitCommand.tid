@@ -10,7 +10,6 @@ Initialise an empty [[WikiFolder|WikiFolders]] with a copy of the specified edit
 --init <edition>
 ```
 
-The "edition" defaults to ''empty''.
 
 For example:
 
@@ -18,4 +17,9 @@ For example:
 tiddlywiki ./MyWikiFolder --init empty
 ```
 
-Note that the init command will fail if the wiki folder does not exist, or is not empty.
+Note:
+
+* The "edition" defaults to ''empty''
+* The init command will fail if the wiki folder does not exist, or is not empty
+* The init command removes any `includeWikis` definitions in the edition's `tiddlywiki.info` file
+

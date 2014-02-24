@@ -23,7 +23,8 @@ var Command = function(params,commander) {
 };
 
 Command.prototype.execute = function() {
-	var path = require("path"),
+	var fs = require("fs"),
+		path = require("path"),
 		editionName = this.params[0] || "empty";
 	// Check that we don't already have a valid wiki folder
 	if($tw.boot.wikiTiddlersPath) {
@@ -39,6 +40,11 @@ Command.prototype.execute = function() {
 	if(!err) {
 		this.commander.streams.output.write("Copied edition '" + editionName + "' to " + $tw.boot.wikiPath + "\n");
 	}
+	// Tweak the tiddlywiki.info to remove any included wikis
+	var packagePath = $tw.boot.wikiPath + "/tiddlywiki.info",
+		packageJson = JSON.parse(fs.readFileSync(packagePath));
+	delete packageJson.includeWikis;
+	fs.writeFileSync(packagePath,JSON.stringify(packageJson,null,$tw.config.preferences.jsonSpaces));
 	return err;
 };
 
