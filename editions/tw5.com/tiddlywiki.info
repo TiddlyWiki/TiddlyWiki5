@@ -12,10 +12,7 @@
 		"tiddlywiki/starlight",
 		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
-		"tiddlywiki/readonly",
-		"giffmex/rocker",
-		"giffmex/blue",
-		"giffmex/blanca"
+		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"en-US",
