@@ -8,6 +8,6 @@ Filter/Hint: Suche mit [["filter expression"|http://tiddlywiki.com/static/Tiddle
 #
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
 Shadows/Caption: Schatten
-Shadows/Hint: Suche in "Schatten Tiddlern".
+Shadows/Hint: Suche in ~Schatten-Tiddler.
 System/Caption: System
-System/Hint: Suche in "System Tiddlern".
+System/Hint: Suche in ~System-Tiddler.
