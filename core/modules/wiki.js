@@ -892,11 +892,11 @@ parentWidget: optional parent widget for the root node
 */
 exports.renderTiddler = function(outputType,title,options) {
 	options = options || {};
-	var parser = this.parseTiddler(title),
+	var parser = this.parseTiddler(title,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
-	return outputType === "text/html" ? container.innerHTML : container.textContent;
+	return outputType === "text/html" ? container.innerHTML : (outputType === "text/plain-formatted" ? container.formattedTextContent : container.textContent);
 };
 
 /*
