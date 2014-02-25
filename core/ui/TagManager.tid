@@ -1,0 +1,16 @@
+title: $:/TagManager
+
+<table>
+<tbody>
+<tr>
+<th>Tag</th>
+<th>Colour</th>
+</tr>
+<$list filter="[tags[]sort[title]]">
+<tr>
+<td><$view field="title"/></td>
+<td><$edit-text field="color" tag="input" type="color"/></td>
+</tr>
+</$list>
+</tbody>
+</table>
