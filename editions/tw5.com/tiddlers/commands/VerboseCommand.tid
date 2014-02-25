@@ -1,8 +1,4 @@
 title: VerboseCommand
 tags: command
 
-Triggers verbose output, useful for debugging 
-
-```
---verbose
-```
+{{$:/language/Help/verbose}}

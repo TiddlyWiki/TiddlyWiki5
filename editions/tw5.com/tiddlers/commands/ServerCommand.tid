@@ -4,30 +4,4 @@ tags: command
 title: ServerCommand
 type: text/vnd.tiddlywiki
 
-The server built in to TiddlyWiki5 is very simple. Although compatible with TiddlyWeb it doesn't support many of the features needed for robust Internet-facing usage.
-
-At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for `GET`, `PUT` and `DELETE`.
-
-```
---server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
-```
-
-The parameters are:
-
-* ''port'' - port number to serve from (defaults to "8080")
-* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all") 
-* ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
-* ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
-* ''username'' - the default username for signing edits
-* ''password'' - optional password for basic authentication
-* ''host'' - optional hostname to serve from (defaults to "127.0.0.1" aka "localhost")
-
-If the password parameter is specified then the browser will prompt the user for the username and password. Note that the password is transmitted in plain text so this implementation isn't suitable for general use.
-
-For example:
-
-```
---server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
-```
-
-To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port.
+{{$:/language/Help/server}}

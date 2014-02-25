@@ -3,8 +3,4 @@ tags: command
 created: 20131218121606089
 modified: 20131218121606089
 
-Saves an individual tiddler in its raw text or binary format to the specified filename. 
-
-```
---savetiddler <title> <filename>
-```
+{{$:/language/Help/savetiddler}}

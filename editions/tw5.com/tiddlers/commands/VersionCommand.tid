@@ -1,8 +1,4 @@
 title: VersionCommand
 tags: command
 
-Displays the version number of TiddlyWiki.
-
-```
---version
-```
+{{$:/language/Help/version}}
