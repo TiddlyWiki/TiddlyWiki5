@@ -1,0 +1,64 @@
+created: 20140223183404938
+modified: 20140223195514667
+tags: howto
+title: Notes for upgrading to 5.0.8-beta
+type: text/vnd.tiddlywiki
+
+Version 5.0.8-beta includes some changes that can break content from earlier releases of ~TiddlyWiki 5.
+
+! Change to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
+
+You should rename any existing SiteTitle and SiteSubtitle tiddlers to [[$:/SiteTitle]] and [[$:/SiteSubtitle]] respectively.
+
+! Changed parsing rules for content of HTML elements
+
+Version 5.0.8-beta marks a change in the way that TiddlyWiki determines whether to parse the content of an HTML element or widget in //block mode// or //inline mode//.
+
+* In block mode, TiddlyWiki parses text into paragraphs, creating `<p>` tags to wrap them. It also recognises block syntax like headings, lists and tables.
+
+* In inline mode, TiddlyWiki ignores paragraph formatting, and just recognises character formatting, like bold and italic.
+
+It's important to be able to control which type of parsing is performed for different situations.
+
+Prior to 5.0.8-beta, TiddlyWiki parsed the content of an element in inline mode unless the opening tag of the element were immediately followed by a line break. This meant that much of the time element tags would be shunted together into a long line, hindering readability.
+
+The new behaviour for 5.0.8-beta is to parse the content of an element in inline mode unless the opening tag is immediately followed by two line breaks.
+
+To adjust existing content for 5.0.8-beta you will need to manually add the additional line break after the opening tag of elements and widgets whose content should be parsed in block mode.
+
+The positive aspect of the change is that it removes the need to pack multiple HTML tags onto a single line, improving readability.
+
+!! Examples
+
+Consider the difference between these two examples. First, here's an HTML tag that starts with two line breaks:
+
+<<wikitext-example src:"
+<blockquote>
+
+! This is a heading
+
+And a paragraph of text.
+
+</blockquote>
+">>
+
+Secondly, here's an HTML tag with just a single line break. Notice how the heading is no longer recognised as a heading
+
+<<wikitext-example src:"
+<blockquote>
+! This is a heading
+
+And a paragraph of text.
+</blockquote>
+">>
+
+! Changed commands for [[TiddlyWiki on Node.js]]
+
+The handling of wiki folders has changed. Previously, if the `tiddlywiki` command was run against a wiki folder that didn't have the necessary `tiddlywiki.info` file then it would be automatically created. Now, the wiki folder must be initialised with the InitCommand.
+
+This is how to create and start a new server-based wiki:
+
+```
+tiddlywiki mywikifolder --init server
+tiddlywiki mywikifolder --server
+```

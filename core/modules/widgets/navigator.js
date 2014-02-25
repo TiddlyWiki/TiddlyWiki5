@@ -203,6 +203,10 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	if(tiddler.hasField("draft.title")) {
 		// Delete the original tiddler
 		var originalTitle = tiddler.fields["draft.of"];
+		// Ask for confirmation if the tiddler has changed
+		if(!confirm("Do you wish to delete the tiddler '" + originalTitle + "'")) {
+			return false;
+		}
 		this.wiki.deleteTiddler(originalTitle);
 		this.removeTitleFromStory(storyList,originalTitle);
 	}

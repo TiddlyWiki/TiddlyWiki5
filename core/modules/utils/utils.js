@@ -436,4 +436,15 @@ exports.base64Decode = function(string64) {
 	}
 };
 
+/*
+Convert a hashmap into a tiddler dictionary format sequence of name:value pairs
+*/
+exports.makeTiddlerDictionary = function(data) {
+	var output = [];
+	for(var name in data) {
+		output.push(name + ": " + data[name]);
+	}
+	return output.join("\n");
+};
+
 })();

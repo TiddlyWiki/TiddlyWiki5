@@ -16,6 +16,7 @@ tiddlerdeserializer: Converts different content types into tiddlers.
 tiddlerfield: Defines the behaviour of an individual tiddler field.
 tiddlermethod: Adds methods to the `$tw.Tiddler` prototype.
 utils: Adds methods to `$tw.utils`.
+utils-node: Adds Node.js-specific methods to `$tw.utils`.
 widget: Widgets encapsulate DOM rendering and refreshing.
 wikimethod: Adds methods to `$tw.Wiki`.
 wikirule: Individual parser rules for the main WikiText parser.

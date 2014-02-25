@@ -1456,6 +1456,7 @@ $tw.boot.startup = function(options) {
 			pluginsPath: "../plugins/",
 			themesPath: "../themes/",
 			languagesPath: "../languages/",
+			editionsPath: "../editions/",
 			wikiInfo: "./tiddlywiki.info",
 			wikiPluginsSubDir: "./plugins",
 			wikiThemesSubDir: "./themes",

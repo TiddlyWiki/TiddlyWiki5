@@ -150,6 +150,18 @@ a.tw-tiddlylink-missing {
 
 a.tw-tiddlylink-external {
 	text-decoration: underline;
+	color: <<colour external-link-foreground>>;
+	background-color: <<colour external-link-background>>;
+}
+
+a.tw-tiddlylink-external:visited {
+	color: <<colour external-link-foreground-visited>>;
+	background-color: <<colour external-link-background-visited>>;
+}
+
+a.tw-tiddlylink-external:hover {
+	color: <<colour external-link-foreground-hover>>;
+	background-color: <<colour external-link-background-hover>>;
 }
 
 /*
@@ -301,6 +313,10 @@ a.tw-tiddlylink-external {
 	margin-bottom: 3px;
 }
 
+.sidebar-header .tw-missing-tiddler-label {
+	color: <<colour sidebar-foreground>>;
+}
+
 .tw-search a svg {
 	height: 0.75em;
 }
@@ -325,7 +341,7 @@ a.tw-tiddlylink-external {
 }
 
 .tw-page-controls button:hover svg, .tw-page-controls a:hover svg {
-	fill: <<colour sidebar-controls-foreground-hover>;
+	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
 .tw-menu-list-item {
@@ -493,7 +509,7 @@ a.tw-tiddlylink-external {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tw-tiddler-controls button:hover svg {
+.tw-tiddler-controls button.btn-invisible:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
@@ -541,6 +557,46 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-edit-bitmapeditor-height {
 	display: block;
+}
+
+/*
+** Toolbar buttons
+*/
+
+.tw-page-controls svg.tw-image-new-button {
+  fill: <<colour toolbar-new-button>>;
+}
+
+.tw-page-controls svg.tw-image-options-button {
+  fill: <<colour toolbar-options-button>>;
+}
+
+.tw-page-controls svg.tw-image-save-button {
+  fill: <<colour toolbar-save-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-info-button {
+  fill: <<colour toolbar-info-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-edit-button {
+  fill: <<colour toolbar-edit-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-close-button {
+  fill: <<colour toolbar-close-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-delete-button {
+  fill: <<colour toolbar-delete-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-cancel-button {
+  fill: <<colour toolbar-cancel-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-done-button {
+  fill: <<colour toolbar-done-button>>;
 }
 
 /*
@@ -816,6 +872,14 @@ canvas.tw-edit-bitmapeditor  {
 	margin-bottom: -1px;
 }
 
+.tw-tab-buttons button.tw-tab-selected {
+	color: <<colour tab-foreground-selected>>;
+	background-color: <<colour tab-background-selected>>;
+	border-left: 1px solid <<colour tab-border-selected>>;
+	border-top: 1px solid <<colour tab-border-selected>>;
+	border-right: 1px solid <<colour tab-border-selected>>;
+}
+
 .tw-tab-buttons button {
 	color: <<colour tab-foreground>>;
 	margin-left: 2px;
@@ -823,16 +887,6 @@ canvas.tw-edit-bitmapeditor  {
 	font-weight: 300;
 	border: none;
 	background: inherit;
-}
-
-.tw-tab-buttons button.tw-tab-selected {
-	background-color: <<colour tab-background-selected>>;
-	border-left: 1px solid <<colour tab-border-selected>>;
-	border-top: 1px solid <<colour tab-border-selected>>;
-	border-right: 1px solid <<colour tab-border-selected>>;
-}
-
-.tw-tab-buttons button:not(.tw-tab-selected) {
 	background-color: <<colour tab-background>>;
 	border-left: 1px solid <<colour tab-border>>;
 	border-top: 1px solid <<colour tab-border>>;
@@ -849,12 +903,22 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
+	color: <<colour sidebar-tab-foreground-selected>>;
+	border-left: 1px solid <<colour sidebar-tab-border-selected>>;
+	border-top: 1px solid <<colour sidebar-tab-border-selected>>;
+	border-right: 1px solid <<colour sidebar-tab-border-selected>>;
+}
+
+.tw-sidebar-lists .tw-tab-buttons button {
+	background-color: <<colour sidebar-tab-background>>;
+	color: <<colour sidebar-tab-foreground>>;
+	border-left: 1px solid <<colour sidebar-tab-border>>;
+	border-top: 1px solid <<colour sidebar-tab-border>>;
+	border-right: 1px solid <<colour sidebar-tab-border>>;
 }
 
 .tw-sidebar-lists .tw-tab-divider {
-	border-top: none;
-	height: 1px;
-	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
+	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
 .tw-more-sidebar {

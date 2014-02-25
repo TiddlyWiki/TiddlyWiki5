@@ -620,8 +620,17 @@ data: object that can be serialised to JSON
 fields: optional hashmap of additional tiddler fields to be set
 */
 exports.setTiddlerData = function(title,data,fields) {
-	var tiddler = this.getTiddler(title);
-	this.addTiddler(new $tw.Tiddler(tiddler,fields,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
+	var existingTiddler = this.getTiddler(title),
+		newFields = {
+			title: title
+	};
+	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
+		newFields.text = $tw.utils.makeTiddlerDictionary(data);
+	} else {
+		newFields.type = "application/json";
+		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
+	}
+	this.addTiddler(new $tw.Tiddler(existingTiddler,fields,newFields,this.getModificationFields()));
 };
 
 /*
