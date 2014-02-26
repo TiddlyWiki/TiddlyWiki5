@@ -1,0 +1,8 @@
+title: $:/language/Help/savetiddler
+description: 將條目的原始內容保存到一個文件
+
+保存個別條目的原始文本或二进制格式到指定的文件名。
+
+```
+--savetiddler <title> <filename>
+```

@@ -1,0 +1,14 @@
+title: $:/language/Help/rendertiddlers
+description: 呈现符合筛选条件的条目为指定的 ContentType
+
+呈现符合筛选条的条目为指定的 ContentType (默认为 `text/html`) 与扩展名 (默认为 `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+例如：
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```

@@ -1,0 +1,22 @@
+title: $:/language/Help/default
+
+\define commandTitle()
+$:/language/Help/$(command)$
+\end
+```
+用法: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
+```
+
+可用的命令：
+
+<ul>
+<$list filter="[commands[]sort[title]]" variable="command">
+<li><$link to=<<commandTitle>>><$macrocall $name="command" $type="text/plain" $output="text/plain"/></$link>: <$transclude tiddler=<<commandTitle>> field="description"/></li>
+</$list>
+</ul>
+
+取得關於某個命令的詳細説明：
+
+```
+tiddlywiki --help <command>
+```

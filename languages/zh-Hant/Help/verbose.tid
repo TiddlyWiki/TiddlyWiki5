@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: 觸發詳細的輸出模式
+
+觸發顯示詳細的命令執行過程，可用於偵錯 
+
+```
+--verbose
+```
