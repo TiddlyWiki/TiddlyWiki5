@@ -13,6 +13,8 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 * Changed rules for parsing content of HTML elements
 * Switched SiteTitle and SiteSubtitle to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
 * Changes to commands used with [[TiddlyWiki on Node.js]]
+* Changes to naming of some editions
+** Notably ''clientserver'' has changed to ''server''
 
 !! Documentation Improvements
 

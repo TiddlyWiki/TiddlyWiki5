@@ -62,3 +62,6 @@ This is how to create and start a new server-based wiki:
 tiddlywiki mywikifolder --init server
 tiddlywiki mywikifolder --server
 ```
+
+Note that the name of the ''clientserver'' edition has changed to ''server''.
+
