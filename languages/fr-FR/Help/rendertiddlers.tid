@@ -1,0 +1,14 @@
+title: $:/language/Help/rendertiddlers
+description: Enregistre un ensemble de tiddlers sélectionnés par un filtre, avec un rendu correspondant à un type de contenu (ContentType) spécifié
+
+Enregistre un ensemble de tiddlers (sélectionnés par un filtre) dans le répertoire indiqué et avec l'extension indiquée — par défaut `.html`. Le choix du rendu est fonction du type de contenu (ContentType) spécifié — par défaut `text/html` :
+
+```
+--rendertiddlers <filtre> <modèle> <chemindurépertoire> [<type>] [<extension>]
+```
+
+Par exemple :
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
