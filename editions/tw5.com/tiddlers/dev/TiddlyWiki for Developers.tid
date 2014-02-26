@@ -1,5 +1,5 @@
 created: 20131203074550710
-modified: 20131212093713249
+modified: 20140226083600000
 tags: introduction dev
 title: TiddlyWiki for Developers
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ If you're interested in understanding more about the internal operation of Tiddl
 
 TiddlyWiki's architecture is very different from an HTML page written using jQuery. This section concisely explains what TiddlyWiki does differently. It may not make much sense on the first reading.
 
-The key to understanding how it works internally is to see that the RefreshMechanism requires that any region of the DOM can be regenerated at any time. This means that the entire state of the user interface must reside in the tiddler store, and not in the DOM.
+The key to understanding how it works internally is to see that the RefreshMechanism requires that any region of the DOM can be regenerated at any time. This means that the entire state of the user interface must reside in the tiddler store, from where it is synchronised into the DOM. This is done to improve performance by minimising the DOM interactions during the refresh cycles.
 
 It also determines the standard UI flow:
 

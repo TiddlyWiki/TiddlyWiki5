@@ -1,0 +1,14 @@
+created: 20140226084658099
+modified: 20140226195055502
+tags: message navigator-message
+title: WidgetMessage: tw-import-tiddlers
+type: text/vnd.tiddlywiki
+
+The `tw-import-tiddlers` message inserts a list of tiddlers into the store. If multiple tiddlers are imported then a report is displayed; if only one tiddler is imported then it is displayed instead. The import message requires the following properties on the `event` object:
+
+|!Name |!Description |
+|param |JSON text of the array of tiddlers to be imported |
+
+This message is handled by the NavigatorWidget.
+
+The import tiddlers message is usually generated with the DropzoneWidget or the BrowseWidget, and is handled by the NavigatorWidget.

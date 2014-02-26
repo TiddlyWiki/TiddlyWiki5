@@ -1,5 +1,5 @@
 created: 20140127143652456
-modified: 20140223191618338
+modified: 20140226195203603
 tags: releasenote
 title: Release 5.0.8-beta
 type: text/vnd.tiddlywiki
@@ -17,6 +17,7 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 !! Documentation Improvements
 
 * Improved documentation for TiddlerFilters, including a notation of the [[TiddlerFilter Formal Grammar]] contributed by [[@Tikkoneus|https://github.com/Tikkoneus]]
+* Improved documentation for WidgetMessages
 
 !! Usability Improvements
 
