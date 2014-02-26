@@ -1,0 +1,14 @@
+title: $:/language/Help/rendertiddlers
+description: Gefilterte Ausgabe von Tiddlern, in einem spezifizierten Format.
+
+Gefilterte Ausgabe mehrerer Tiddler, in ein angegebenes Dateiformat (standard: `text/html`) mit spezifischer Erweiterung (standard: `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+Beispiel:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
