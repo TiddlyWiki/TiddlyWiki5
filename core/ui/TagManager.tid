@@ -1,0 +1,18 @@
+title: $:/TagManager
+
+<table>
+<tbody>
+<tr>
+<th>Tag</th>
+<th>Count</th>
+<th>Colour</th>
+</tr>
+<$list filter="[tags[]sort[title]]">
+<tr>
+<td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
+<td><$count filter="[is[current]tagging[]]"/></td>
+<td><$edit-text field="color" tag="input" type="color"/></td>
+</tr>
+</$list>
+</tbody>
+</table>

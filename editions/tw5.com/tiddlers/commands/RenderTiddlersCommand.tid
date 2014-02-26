@@ -1,14 +1,4 @@
 title: RenderTiddlersCommand
 tags: command
 
-Render a set of tiddlers matching a filter to separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
-
-```
---rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
-```
-
-For example:
-
-```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
-```
+{{{$:/language/Help/rendertiddlers}}}

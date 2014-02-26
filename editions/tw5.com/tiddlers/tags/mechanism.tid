@@ -1,5 +1,7 @@
-created: 201308251538
-modified: 201308251538
+color: #9fa3cb
+created: 20130825153800000
+modified: 20140225211727889
 title: mechanism
+type: text/vnd.tiddlywiki
 
 These are the internal mechanisms that fit together to make up TiddlyWiki.

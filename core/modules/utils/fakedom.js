@@ -26,6 +26,12 @@ var TW_TextNode = function(text) {
 	this.textContent = text;
 };
 
+Object.defineProperty(TW_TextNode.prototype, "formattedTextContent", {
+	get: function() {
+		return this.textContent.replace(/(\r?\n)/g,"");
+	}
+});
+
 var TW_Element = function(tag,namespace) {
 	bumpSequenceNumber(this);
 	this.isTiddlyWikiFakeDom = true;
@@ -171,6 +177,30 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 			$tw.utils.each(this.children,function(node) {
 				b.push(node.textContent);
 			});
+			return b.join("");
+		}
+	}
+});
+
+Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
+	get: function() {
+		if(this.isRaw) {
+			throw "Cannot get formattedTextContent on a raw TW_Element";
+		} else {
+			var b = [],
+				isBlock = $tw.config.htmlBlockElements.indexOf(this.tag) !== -1;
+			if(isBlock) {
+				b.push("\n");
+			}
+			if(this.tag === "li") {
+				b.push("* ")
+			}
+			$tw.utils.each(this.children,function(node) {
+				b.push(node.formattedTextContent);
+			});
+			if(isBlock) {
+				b.push("\n");
+			}
 			return b.join("");
 		}
 	}
