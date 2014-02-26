@@ -1,4 +1,4 @@
 title: RenderTiddlersCommand
 tags: command
 
-{{{$:/language/Help/rendertiddlers}}}
+{{$:/language/Help/rendertiddlers}}
