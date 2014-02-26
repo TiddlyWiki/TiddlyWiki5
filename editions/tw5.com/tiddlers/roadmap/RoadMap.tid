@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140222134441012
+modified: 20140226202503234
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -36,6 +36,8 @@ The following additional features are planned or under consideration for impleme
 ** List editor with drag and drop
 ** Selective/weighted searching by title, body and fields
 ** Maths notation
+
+Also see the issues list on GitHub: https://github.com/Jermolene/TiddlyWiki5
 
 ! General Release
 
