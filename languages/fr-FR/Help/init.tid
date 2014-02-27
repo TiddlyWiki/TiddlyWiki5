@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Initialise un nouveau dossier wiki
+
+Initialise un [[dossier wiki (WikiFolder)|TiddlyWikiFolders]] vide en copiant l'une des éditions présentes dans le répertoire //editions//.
+
+```
+--init <édition> [<édition> ...]
+```
+
+Par exemple :
+
+```
+tiddlywiki ./MonDossierWiki --init empty
+```
+
+Note :
+
+* Le répertoire correspondant au dossier wiki est créé si nécessaire
+* L'édition par défaut est ''empty''
+* La commande //init// échoue si le dossier wiki n'est pas vide
+* La commande //init// supprime les éventuelles définitions `includeWikis` du fichier `tiddlywiki.info` de l'édition spécifiée
+* Lorsque plusieurs éditions sont spécifiées, chaque édition écrase les fichiers qu'elle a en commun avec les précédentes (par conséquent, le fichier `tiddlywiki.info` proviendra de la dernière édition spécifiée)
+* `--help editions` renvoie une liste des éditions disponibles

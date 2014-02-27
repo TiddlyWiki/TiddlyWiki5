@@ -1,6 +1,6 @@
 title: $:/language/Modals/SaveInstructions
 type: text/vnd.tiddlywiki
-subtitle: Sauvegardez votre travail
+subtitle: Enregistrez votre travail
 footer: <$button message="tw-close-tiddler" class="btn btn-primary">Fermer</$button>
 help: http://tiddlywiki.com/static/SavingChanges.html
 
@@ -8,15 +8,15 @@ Les modifications effectuées dans ce wiki doivent être sauvegardées sous form
 
 !!! Navigateurs de bureau
 
-# Choisissez ''Sauvegarder sous'' depuis le menu ''Fichier''
+# Sélectionnez ''Enregistrer sous'' depuis le menu ''Fichier''
 # Choisissez un nom de fichier et un dossier
-#* Certains navigateurs demandent aussi de spécifier explicitement le format de sauvegarde, à savoir ''Page Web, HTML uniquement'' ou quelque chose d'approchant
+#* Certains navigateurs demandent aussi de spécifier explicitement le format d'enregistrement, à savoir ''Page Web, HTML uniquement'' ou quelque chose d'approchant
 # Fermez cet onglet
 
 !!! Navigateurs sur smartphone
 
 # Créez un favori/signet pour cette page
-#* Si vous utilisez iCloud ou Google Sync, les signets seront automatiquement synchronisez vers votre bureau, d'où vous pourrez l'ouvrir et le sauvegarder comme indiqué ci-dessus
+#* Si vous utilisez iCloud ou Google Sync, le signet sera automatiquement synchronisé avec le navigateur de votre ordinateur de bureau, d'où vous pourrez l'ouvrir et enregistrer le fichier comme indiqué ci-dessus
 # Fermez cet onglet
 
 //Si vous ouvrez  à nouveau le signet dans Safari pour mobile, vous verrez ce message une nouvelle fois. Si vous voulez continuer et utiliser le fichier, cliquez simplement sur le bouton ''Fermer'' ci-dessous//
