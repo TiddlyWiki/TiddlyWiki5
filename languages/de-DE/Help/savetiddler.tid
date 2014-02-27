@@ -1,0 +1,8 @@
+title: $:/language/Help/savetiddler
+description: Speichert einen Tiddler als File.
+
+Speichert einen individuellen tiddler im Text- oder Binärformat mit dem angegebenen Dateinamen.
+
+```
+--savetiddler <title> <filename>
+```
