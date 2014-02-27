@@ -12,6 +12,8 @@ During the beta ~TiddlyWiki will be practical for cautious everyday use but as w
 
 The following additional features are planned or under consideration for implementation during the beta:
 
+* Features improving user data integrity
+** Optional defensive backups with TiddlyFox and TiddlyDesktop
 * Features required for large scale adoption
 ** Proper use of ARIA roles
 * Features required by ~TiddlyWiki hackers
