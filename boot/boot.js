@@ -1373,7 +1373,6 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
-		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 		if(tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {
@@ -1383,7 +1382,16 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 				};
 			});
 		}
+		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
+	// Save the original tiddler file locations if requested
+	if(wikiInfo.config && wikiInfo.config["retain-original-tiddler-path"]) {
+		var output = [];
+		for(var title in $tw.boot.files) {
+			output.push(title + ": " + path.relative(resolvedWikiPath,$tw.boot.files[title].filepath) + "\n");
+		}
+		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/x-tiddler-dictionary", text: output.join("")});
+	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
 	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
