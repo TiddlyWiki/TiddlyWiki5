@@ -1,0 +1,8 @@
+title: $:/language/Help/rendertiddler
+description: 呈現個別條目為指定的 ContentType 
+
+呈現個別條目為指定的 ContentType，預設為 `text/html` 且儲存為指定的檔名：
+
+```
+--rendertiddler <title> <filename> [<type>]
+```
