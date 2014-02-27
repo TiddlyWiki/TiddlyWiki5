@@ -5,10 +5,10 @@ Bienvenue sur TiddlyWiki, un carnet de notes non linéaire pour le Web.
 Commencez par vérifier que vos modifications peuvent être sauvegardées
 correctement — reportez-vous aux instructions détaillées sur http://tiddlywiki.com/.
 
-Ensuite, vous pouvez :
+Ensuite, essayez de :
 
 * Créer de nouveaux tiddlers à l'aide du bouton « plus » de la barre latérale
-* Visiter le [[panneau de contrôle|$:/ControlPanel]] à l'aide du bouton « engrenage » de la barre latérale pour personnaliser votre wiki
-** Ne plus voir ce message en changeant les tiddlers par défaut dans l'onglet ''Fondamentaux''
+* Visiter le [[panneau de contrôle|$:/ControlPanel]] à l'aide du bouton « engrenage » de la barre latérale, afin de personnaliser votre wiki
+** Ne plus voir ce message en changeant les tiddlers affichés par défaut depuis l'onglet //Fondamentaux//
 * Sauvegarder vos modifications à l'aide du bouton « Télécharger » de la barre latérale
 * En savoir plus sur [[WikiText|http://tiddlywiki.com/static/WikiText.html]]

@@ -43,3 +43,10 @@ node ./tiddlywiki.js \
 	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
 	|| exit 1
 
+node ./tiddlywiki.js \
+	./editions/fr-FR \
+	--verbose \
+	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/fr-FR.html text/plain \
+	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	|| exit 1
+
