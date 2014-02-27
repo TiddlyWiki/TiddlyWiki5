@@ -23,4 +23,8 @@
 		"zh-Hans",
 		"zh-Hant"
 	]
+	,
+	"config": {
+		"retain-original-tiddler-path": true
+	}
 }
