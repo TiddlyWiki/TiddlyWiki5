@@ -1,5 +1,5 @@
 created: 20140127143652456
-modified: 20140226195203603
+modified: 20140227170508842
 tags: releasenote
 title: Release 5.0.8-beta
 type: text/vnd.tiddlywiki
@@ -20,10 +20,12 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 * Improved documentation for TiddlerFilters, including a notation of the [[TiddlerFilter Formal Grammar]] contributed by [[@Tikkoneus|https://github.com/Tikkoneus]]
 * Improved documentation for WidgetMessages
+* Tiddlers on tiddlywiki.com now have a link to the original source on ~GitHub for pull requests (see the "Sources" tab of the tiddler info panel)
 
 !! Usability Improvements
 
 * Rejigged [[$:/ControlPanel]] to use nested tabs
+* Added [[$:/TagManager]] for easy management of tags
 * Added confirmation dialogue when deleting tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a01bbd4b9c7ca284141078340c8f568b1e0561a2]] [[automatic saving|AutoSave]] on editing a tiddler and a warning when attempting to close the window with unsaved changes
@@ -44,6 +46,7 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 !! Hackability Improvements
 
+* Added HelpCommand and InitCommand for [[TiddlyWiki on Node.js]]
 * Extended ButtonWidget to allow navigating to a tiddler
 * Added experimental support for building plugins in the browser: [[How to create plugins in the browser]]
 * Extend the TranscludeWidget to display its content as a fallback if the tiddler or field is missing
