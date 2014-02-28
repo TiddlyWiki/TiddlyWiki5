@@ -1,5 +1,5 @@
 created: 20140127143652456
-modified: 20140227170508842
+modified: 20140228154939681
 tags: releasenote
 title: Release 5.0.8-beta
 type: text/vnd.tiddlywiki
@@ -24,20 +24,20 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 !! Usability Improvements
 
-* Rejigged [[$:/ControlPanel]] to use nested tabs
-* Added [[$:/TagManager]] for easy management of tags
-* Added confirmation dialogue when deleting tiddlers
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a01bbd4b9c7ca284141078340c8f568b1e0561a2]] [[automatic saving|AutoSave]] on editing a tiddler and a warning when attempting to close the window with unsaved changes
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
-* Enhanced link handling so that control/command clicking a link opens the target tiddler without navigating to it
-* Importing tiddlers via drag and drop no longer opens all the tiddlers
+* Added confirmation dialogue when deleting tiddlers
 * Add support for switchable (and editable) ColourPalettes
 * Added TranslationMechanism and translations for:
 ** Deutsch (Österreich and Deutschland) by [[@pmario]]
 ** Français (France) by [[@xcazin]]
 ** Chinese (Simplified and Traditional) by [[@BramChen]]
 * Add error alerts when syncing to a server
+* Rejigged [[$:/ControlPanel]] to use nested tabs
+* Added [[$:/TagManager]] for easy management of tags
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
+* Enhanced link handling so that control/command clicking a link opens the target tiddler without navigating to it
+* Importing tiddlers via drag and drop no longer opens all the tiddlers
 
 !! Scalability Improvements
 
