@@ -327,11 +327,10 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList();
-	var newTiddlerTitle = event.param || "New Tiddler";
 	// Get the template tiddler if there is one
-	var templateTiddler = this.wiki.getTiddler(newTiddlerTitle);
+	var templateTiddler = this.wiki.getTiddler(event.param);
 	// Create the new tiddler
-	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || newTiddlerTitle);
+	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || "New Tiddler");
 	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
 		text: "Newly created tiddler",
 		title: title
