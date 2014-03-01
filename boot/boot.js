@@ -283,15 +283,56 @@ $tw.utils.parseStringArray = function(value) {
 // Parse a block of name:value fields. The `fields` object is used as the basis for the return value
 $tw.utils.parseFields = function(text,fields) {
 	fields = fields || {};
+	var lastfield, notrim, join, joiner = "\n";
 	text.split(/\r?\n/mg).forEach(function(line) {
-		if(line.charAt(0) !== "#") {
-			var p = line.indexOf(":");
-			if(p !== -1) {
-				var field = line.substr(0, p).trim(),
-					value = line.substr(p+1).trim();
-				fields[field] = value;
-			}
+		// remove Leading and trailing whitespace. This will allow indented comments
+		line = line.trim();
+		// ignore comment lines
+		if(line.charAt(0) === "#") return;
+		// does this line request a continuation line?
+		var joinnext = line.substr(-1) === "\\";
+		// Is this already a continuation line?
+		if(join) {
+			// Ooops! No field to append to!?
+			if(!lastfield) return;
+			// append the line - remove continuation character
+			fields[lastfield] += joinnext ? line.substr(0,line.length-1) : line;
+			join = joinnext;
+			return;
 		}
+		// do we have a fieldname?
+		var p = line.indexOf(":");
+		if(p === -1) return;
+		// split
+		var field = line.substr(0, p).trim(),
+			value = line.substr(p+1);
+		// No fieldname? Then this is a multiline
+		if(field === "") {
+			// Ooops! No field to append to!?
+			if(!lastfield) return;
+			// trim if wanted
+			if(!notrim) {
+				value = value.trim();
+			}
+			// append the line - remove continuation character
+			fields[lastfield] += joiner + ( joinnext ? value.substr(0,value.length-1) : value );
+			joiner = "\n";
+			return;
+		}
+		// remember this fieldname
+		lastfield = field;
+		// trim the value
+		value = value.trim();
+		// append the line - remove continuation character
+		fields[field] = joinnext ? value.substr(0,value.length-1) : value;
+		// if the first value is empty, we don't want to trim following lines
+		notrim = value === "";
+		// if we don't trim, we should not put a leading \n
+		if(notrim) {
+			joiner = "";
+		}
+		// Did we request a continuation line?
+		join = joinnext;
 	});
 	return fields;
 };
