@@ -18,7 +18,7 @@ var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 function TiddlyWebAdaptor(syncer) {
 	this.syncer = syncer;
 	this.host = this.getHost();
-	this.recipe = undefined;
+	this.recipe = decodeURIComponent(window.location.pathname.split('/')[2]);
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
@@ -64,10 +64,6 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 			}
 			if(json) {
 				self.logger.log("Status:",data);
-				// Record the recipe
-				if(json.space) {
-					self.recipe = json.space.recipe;
-				}
 				// Check if we're logged in
 				isLoggedIn = json.username !== "GUEST";
 			}
@@ -80,63 +76,12 @@ TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 };
 
 /*
-Attempt to login and invoke the callback(err)
-*/
-TiddlyWebAdaptor.prototype.login = function(username,password,callback) {
-	var options = {
-		url: this.host + "challenge/tiddlywebplugins.tiddlyspace.cookie_form",
-		type: "POST",
-		data: {
-			user: username,
-			password: password,
-			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
-		},
-		callback: function(err) {
-			callback(err);
-		}
-	};
-	this.logger.log("Logging in:",options);
-	$tw.utils.httpRequest(options);
-};
-
-/*
-*/
-TiddlyWebAdaptor.prototype.logout = function(callback) {
-	var options = {
-		url: this.host + "logout",
-		type: "POST",
-		data: {
-			csrf_token: this.getCsrfToken(),
-			tiddlyweb_redirect: "/status" // workaround to marginalize automatic subsequent GET
-		},
-		callback: function(err,data) {
-			callback(err);
-		}
-	};
-	this.logger.log("Logging out:",options);
-	$tw.utils.httpRequest(options);
-};
-
-/*
-Retrieve the CSRF token from its cookie
-*/
-TiddlyWebAdaptor.prototype.getCsrfToken = function() {
-	var regex = /^(?:.*; )?csrf_token=([^(;|$)]*)(?:;|$)/,
-		match = regex.exec(document.cookie),
-		csrf = null;
-	if (match && (match.length === 2)) {
-		csrf = match[1];
-	}
-	return csrf;
-};
-
-/*
 Get an array of skinny tiddler fields from the server
 */
 TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	var self = this;
 	$tw.utils.httpRequest({
-		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
+		url: this.host + "recipes/" + this.recipe + "/tiddlers.json?select=title:!app",
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
@@ -157,9 +102,18 @@ TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 */
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
-	var self = this;
+	var self = this,
+		uri = this.host + "recipes/"
+			+ encodeURIComponent(this.recipe)
+			+ "/tiddlers/" + encodeURIComponent(tiddler.fields.title);
+	if (tiddler.fields.bag) {
+		uri = this.host + "bags/"
+			+ encodeURIComponent(tiddler.fields.bag)
+			+ "/tiddlers/" + encodeURIComponent(tiddler.fields.title);
+	}
+	// XXX: if we have bag, we have revision, so we could make If-Match
 	$tw.utils.httpRequest({
-		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
+		url: uri,
 		type: "PUT",
 		headers: {
 			"Content-type": "application/json"
@@ -208,7 +162,9 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback) {
 	}
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
-		url: this.host + "bags/" + encodeURIComponent(bag) + "/tiddlers/" + encodeURIComponent(title),
+		url: this.host + "bags/"
+			+ encodeURIComponent(bag)
+			+ "/tiddlers/" + encodeURIComponent(title),
 		type: "DELETE",
 		callback: function(err,data,request) {
 			if(err) {
@@ -244,10 +200,6 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 			}
 		});
 	}
-	// Default the content type and convert the type "text/x-tiddlywiki" into null
-	if(result.type === "text/x-tiddlywiki") {
-		result.type = null;
-	};
 	result.type = result.type || "text/vnd.tiddlywiki";
 	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
 };
