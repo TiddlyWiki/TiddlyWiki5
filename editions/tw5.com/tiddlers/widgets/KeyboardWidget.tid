@@ -1,0 +1,33 @@
+created: 20140302192136805
+modified: 20140302192935781
+tags: widget
+title: KeyboardWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The keyboard widget allows WidgetMessages to be generated in response to key presses.
+
+! Content and Attributes
+
+The content of the `<$keyboard>` widget is rendered normally. The keyboard shortcut only takes effect within the contained content.
+
+|!Attribute |!Description |
+|message |The title of the WidgetMessage to generate |
+|param |The parameter to be passed with the WidgetMessage |
+|key |Key string identifying the key to be trapped (see below) |
+|class |A CSS class to be assigned to the generated HTML DIV element |
+
+! Key Strings
+
+Key strings are made up of zero or more of the modifiers ''alt'', ''shift'' or ''ctrl'' followed by the name of a key, all joined with "+" plus symbols. Key names are either the letter or digit printed on the key (eg "a" or "1"), or one of the special keys ''backspace'', ''tab'', ''enter'' or ''escape''.
+
+For example:
+
+```
+A
+shift+A
+shift+escape
+ctrl+enter
+ctrl+shift+alt+A
+```
