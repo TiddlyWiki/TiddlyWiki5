@@ -6,7 +6,7 @@ tags: $:/tags/ViewTemplate
 
 <$transclude>
 
-<$transclude tiddler="$:/language/MissingTiddler/Hint"/> <$button message="tw-edit-tiddler"><<lingo Create/Caption>></$button>
+<$transclude tiddler="$:/language/MissingTiddler/Hint"/>
 
 </$transclude>
 
