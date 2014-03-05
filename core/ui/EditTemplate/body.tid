@@ -14,7 +14,7 @@ tags: $:/tags/EditTemplate
 </div>
 
 <div class="tw-tiddler-preview-edit">
-<$edit field="text" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<$edit field="text" onkeyupdate="yes" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </div>
 
@@ -25,6 +25,6 @@ tags: $:/tags/EditTemplate
 <$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
 
 <em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/ShowEditPreview" setTo="yes"><<lingo Body/Preview/Button/Show>></$button>
-<$edit field="text" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<$edit field="text" onkeyupdate="no" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </$reveal>
