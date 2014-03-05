@@ -1073,7 +1073,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-chooser-item a.tw-tiddlylink {
 	display: block;
-	text-decotoration: none;
+	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
 	background-color: <<colour tiddler-link-background>>;
 	margin: 4px;
