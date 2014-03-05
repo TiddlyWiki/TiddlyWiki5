@@ -140,3 +140,5 @@ Daniel Barrett, @shendaras, 2014/02/07
 Bram Chen, @BramChen, 2014/02/20
 
 Xavier Cazin, @xcazin, 2014/02/21
+
+Rustem Akbulatov, @nameanyone, 2014/03/04
