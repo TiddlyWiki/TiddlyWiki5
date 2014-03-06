@@ -1,5 +1,5 @@
 created: 20130827080000000
-modified: 20140304185708353
+modified: 20140306034221709
 tags: concepts
 title: TiddlerFilters
 type: text/vnd.tiddlywiki
@@ -74,7 +74,7 @@ If a filter operator is written with curly brackets around the operand then it i
 The "field" filter also accepts [[regular expressions|http://en.wikipedia.org/wiki/Regular_expression]] with the syntax `/regexp/(modifier)`. For example:
 
 * `[field:title/example/]`: searches for all tiddlers having "example" in their title
-* `[field:title:/example$/]`: `$` is an "anchor" for the end of the text so that "example" has to be at the end of the title
+* `[field:title/example$/]`: `$` is an "anchor" for the end of the text so that "example" has to be at the end of the title
 * `[field:text/summer|winter/(i)]`: Searches for tiddlers containing "summer" or "winter", ignoring case
 
 ! ORing Multiple Filter Operators
