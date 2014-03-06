@@ -73,6 +73,10 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
+	// Set the title
+	if(this.tooltip) {
+		domNode.setAttribute("title",this.tooltip);
+	}
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -162,6 +166,8 @@ Compute the internal state of the widget
 LinkWidget.prototype.execute = function() {
 	// Get the target tiddler title
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
+	// Get the link title
+	this.tooltip = this.getAttribute("tooltip");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
