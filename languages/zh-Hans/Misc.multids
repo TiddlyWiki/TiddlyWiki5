@@ -2,5 +2,4 @@ title: $:/language/
 
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 CloseAll/Button: 全部关闭
-MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>"
-MissingTiddler/Create/Caption: 创建
+MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
