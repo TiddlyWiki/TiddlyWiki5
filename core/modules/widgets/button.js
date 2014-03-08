@@ -54,7 +54,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
 		if(self.to) {
-			self.dispatchEvent({type: "tw-navigate", navigateTo: self.to, tiddlerTitle: self.getVariable("currentTiddler")});
+			self.navigateTo(event);
 			handled = true;
 		}
 		if(self.message) {
@@ -90,6 +90,19 @@ ButtonWidget.prototype.isPoppedUp = function() {
 	var tiddler = this.wiki.getTiddler(this.popup);
 	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(this.popup,tiddler.fields.text) : false;
 	return result;
+};
+
+ButtonWidget.prototype.navigateTo = function(event) {
+	var bounds = this.domNodes[0].getBoundingClientRect();
+	this.dispatchEvent({
+		type: "tw-navigate",
+		navigateTo: this.to,
+		navigateFromTitle: this.getVariable("storyTiddler"),
+		navigateFromNode: this,
+		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		},
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
+	});
 };
 
 ButtonWidget.prototype.dispatchMessage = function(event) {
