@@ -73,9 +73,17 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
-	// Set the title
-	if(this.tooltip) {
-		domNode.setAttribute("title",this.tooltip);
+	// Set the tooltip
+	var tooltipWikiText = this.tooltip || this.getVariable("tw-wikilink-tooltip",{defaultValue: "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"});
+	if(tooltipWikiText) {
+		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
+				parseAsInline: true,
+				variables: {
+					currentTiddler: this.to
+				},
+				parentWidget: this
+			});
+		domNode.setAttribute("title",tooltipText);
 	}
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
@@ -180,7 +188,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to]) {
+	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
 	}
