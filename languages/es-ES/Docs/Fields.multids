@@ -1,0 +1,32 @@
+title: $:/language/Docs/Fields/
+
+bag: Nombre de la « bolsa » ~TiddlyWeb donde funciona un tiddler
+caption: El texto que se mostrará en una pestaña o botón
+color: color de la CSS asociada con un tiddler
+component: Nombre del responsable consiste en un [[alerta tiddler|AlertMechanism]]
+current-tiddler: Permite ocultar la primera tiddler en una [[lista de histórico|HistoryMechanism]]
+created: La fecha de la tiddler fue creado
+creator: nombre de la persona que creó el tiddler
+dependients: Para un tiddler plugin, lista de pistas de plugins que depende
+description: Descripción del texto de un plugin, o un cuadro de diálogo modal
+draft.of: Para tiddlers están editando contiene el título de la tiddler que es el proyecto de
+draft.title: Para tiddlers están editando contiene el nuevo título proposépour la tiddler
+footer: el texto del pie de un asistente
+hack-to-give-us-something-to-compare-against: El campo de almacenamiento temporal utilizada en [[$:/core/templates/static.content]]
+icon: Título tiddler contiene el icono asociado con un tiddler
+library: Un valor de "sí " indica que tiddler que se guarda como una biblioteca de JavaScript
+list: ordenada tiddlers de valores asociados a una lista tiddler
+modified: Fecha y hora de la tiddler se ha modificado por última vez
+modifier: Título del tiddler asociado a la persona que modificó un tiddler por última vez
+name: El nombre de un plugin de tipo tiddler para una versión legible por humanos
+plugin-priority: Para un plugin tiddler, valor numérico que indica la prioridad
+plugin-type: Plugin tiddler, indica el tipo de plugin.
+revision: Revisión de un tiddler almacenado en el servidor
+released: Fecha asociada con una versión de TiddlyWiki
+source: Fuente URL asociada a un tiddler
+subtitle: Subtítulo de un asistente
+tags: lista de etiquetas asociadas a un tiddler
+text: Texto principal de un tiddler
+title: El nombre único de un tiddler
+type: Tipo de contenido de un tiddler
+version: Indicaciones para la versión de un plugin
