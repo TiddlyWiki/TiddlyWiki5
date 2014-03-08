@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: La animación puede ser utilizada por el RevealWidget .
+browser-startup: Funciones empiezan a correr en sólo el navegador.
+command: Los comandos que pueden ser ejecutados modo Node.js.
+config: Los datos que se incluirán en `$tw.config`.
+filteroperator: Métodos operadores de filtros.
+global: Los datos globales que deben incluirse en `$tw`.
+isfilteroperator: Operadores para el filtro "es".
+macro: Definiciones macro ~ JavaScript .
+parser: Analizadores para diferentes tipos de contenido.
+saver: Las tiddlers backup contienen varios métodos para guardar archivos desde el navegador.
+startup: Funciones de boot.
+storyview: Diferentes puntos de vista sobre el lugar, que personalizan la animación y el comportamiento de la lista de widgets.
+tiddlerdeserializer: Convierte diferentes tipos de contenido en tiddlers.
+tiddlerfield : Define el comportamiento de los campos tiddler.
+tiddlermethod : Añade métodos al prototipo `$tw.Tiddler`.
+utils: Añade métodos en ` $tw.utils`.
+utils-node: Añade métodos específicos de Node.js en `$tw.utils`.
+reproductores de widgets encapsulan métodos de representación y refrescan el DOM.
+wikimethod: Añade métodos `$tw.Wiki`.
+wikirule: Análisis de las principales reglas Wikitext analizador .
