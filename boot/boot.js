@@ -107,7 +107,7 @@ $tw.utils.domMaker = function(tag,options) {
 		element.className = options["class"];
 	}
 	if(options.text) {
-		element.appendChild(document.createTextNode(options.text));
+		element.appendChild(doc.createTextNode(options.text));
 	}
 	$tw.utils.each(options.children,function(child) {
 		element.appendChild(child);
