@@ -7,7 +7,7 @@ released: 201402281551
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.7-beta...v5.0.8-beta]]//
 
-!! Breaking Changes
+!! Incompatible Changes
 
 See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
