@@ -166,7 +166,7 @@ exports.deleteTiddler = function(title) {
 };
 
 exports.tiddlerExists = function(title) {
-	return !!this.tiddlers[title];
+	return !!$tw.utils.hop(this.tiddlers,title);
 };
 
 /*
@@ -497,7 +497,7 @@ exports.getTagMap = function() {
 			if(tiddler.fields.tags) {
 				for(var index=0; index<tiddler.fields.tags.length; index++) {
 					var tag = tiddler.fields.tags[index];
-					if(tags[tag]) {
+					if($tw.utils.hop(tags,tag)) {
 						tags[tag].push(title)
 					} else {
 						tags[tag] = [title];
