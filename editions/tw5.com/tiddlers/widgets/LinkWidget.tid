@@ -11,11 +11,30 @@ The `link` widget generates links to tiddlers.
 
 The content of the link widget is rendered within the `<a>` tag.
 
-The default tooltip is:
+The default value of the tooltip attribute is `<<tw-wikilink-tooltip>>`. If that variable is not defined then the following text is used:
 
 ```
 <$transclude field="tooltip"><$transclude field="title"/></$transclude>
 ```
+
+This means that you can control the text of a link tooltip in several ways:
+
+```
+<$link to="HelloThere" tooltip="Custom tooltip">Link 1</$link>
+
+<$set name="tw-wikilink-tooltip" value="I'm a link to {{!!title}}">
+<$link to="HelloThere">Link 2</$link>
+</$set>
+
+```
+
+Renders as:
+
+<$link to="HelloThere" tooltip="Custom tooltip">Link 1</$link>
+
+<$set name="tw-wikilink-tooltip" value="I'm a link to {{!!title}}">
+<$link to="HelloThere">Link 2</$link>
+</$set>
 
 Note that the tooltip is rendered with the current tiddler set to the target of the link.
 
