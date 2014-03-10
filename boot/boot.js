@@ -1481,6 +1481,10 @@ $tw.boot.startup = function(options) {
 		// System paths and filenames
 		$tw.boot.bootPath = path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
+		// If there's no arguments then default to `--help`
+		if($tw.boot.argv.length === 0) {
+			$tw.boot.argv = ["--help"];
+		}
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder

@@ -223,12 +223,8 @@ exports.startup = function() {
 		});
 	} else {
 		// On the server, start a commander with the command line arguments
-		var args = $tw.boot.argv;
-		if(args.length === 0) {
-			args = ["--help"];
-		}
 		commander = new $tw.Commander(
-			args,
+			$tw.boot.argv,
 			function(err) {
 				if(err) {
 					console.log("Error: " + err);
