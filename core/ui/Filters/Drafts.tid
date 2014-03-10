@@ -1,0 +1,5 @@
+title: $:/core/Filters/Drafts
+tags: $:/tags/Filter
+filter: [has[draft.of]sort[title]]
+description: {{$:/language/Filters/Drafts}}
+

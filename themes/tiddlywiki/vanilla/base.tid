@@ -317,6 +317,10 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour sidebar-foreground>>;
 }
 
+.tw-advanced-search input {
+	width: 60%;
+}
+
 .tw-search a svg {
 	height: 0.75em;
 }
