@@ -219,6 +219,7 @@ var document = {
 	createTextNode: function(text) {
 		return new TW_TextNode(text);
 	},
+	isTiddlyWikiFakeDom: true
 };
 
 exports.fakeDocument = document;
