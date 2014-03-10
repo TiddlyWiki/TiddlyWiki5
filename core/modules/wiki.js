@@ -490,20 +490,30 @@ Get a hashmap by tag of arrays of tiddler titles
 exports.getTagMap = function() {
 	var self = this;
 	return this.getGlobalCache("tagmap",function() {
-		var tags = {};
-		// Collect up all the tags
-		for(var title in self.tiddlers) {
-			var tiddler = self.tiddlers[title];
-			if(tiddler.fields.tags) {
-				for(var index=0; index<tiddler.fields.tags.length; index++) {
-					var tag = tiddler.fields.tags[index];
-					if($tw.utils.hop(tags,tag)) {
-						tags[tag].push(title)
-					} else {
-						tags[tag] = [title];
+		var tags = {},
+			storeTags = function(tagArray) {
+				if(tagArray) {
+					for(var index=0; index<tagArray.length; index++) {
+						var tag = tagArray[index];
+						if($tw.utils.hop(tags,tag)) {
+							tags[tag].push(title)
+						} else {
+							tags[tag] = [title];
+						}
 					}
 				}
+			},
+			title, tiddler;
+		// Collect up all the tags
+		for(title in self.shadowTiddlers) {
+			if(!$tw.utils.hop(self.tiddlers,title)) {
+				tiddler = self.shadowTiddlers[title].tiddler;
+				storeTags(tiddler.fields.tags);
 			}
+		}
+		for(title in self.tiddlers) {
+			tiddler = self.tiddlers[title];
+			storeTags(tiddler.fields.tags);
 		}
 		return tags;
 	});
