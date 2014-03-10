@@ -34,8 +34,6 @@ exports.startup = function() {
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	// Set up the parsers
 	$tw.wiki.initParsers();
-	// Set up the syncer object
-	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Set up the command modules
 	$tw.Commander.initCommands();
 	// Kick off the language manager
@@ -71,6 +69,8 @@ exports.startup = function() {
 		story[t] = defaultTiddlers[t];
 	}
 	$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
+	// Set up the syncer object
+	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
 	if($tw.browser) {
 		// Set up our beforeunload handler
