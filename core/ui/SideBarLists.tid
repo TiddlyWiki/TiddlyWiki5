@@ -2,7 +2,7 @@ title: $:/core/ui/SideBarLists
 
 <div class="tw-sidebar-lists">
 
-<div class="tw-search"><$edit-text tiddler="$:/temp/search" type="search" tag="input"/> <$reveal state="$:/temp/search" type="nomatch" text=""><$linkcatcher to="$:/temp/search"><$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$linkcatcher></$reveal><$reveal state="$:/temp/search" type="match" text=""> &nbsp;<$link to="$:/AdvancedSearch" class="btn-invisible">&hellip;</$link></$reveal></div>
+<div class="tw-search"><$edit-text onkeyupdate="yes" tiddler="$:/temp/search" type="search" tag="input"/> <$reveal state="$:/temp/search" type="nomatch" text=""><$linkcatcher to="$:/temp/search"><$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$linkcatcher></$reveal><$reveal state="$:/temp/search" type="match" text=""> &nbsp;<$link to="$:/AdvancedSearch" class="btn-invisible">&hellip;</$link></$reveal></div>
 
 <$reveal state="$:/temp/search" type="nomatch" text="">
 

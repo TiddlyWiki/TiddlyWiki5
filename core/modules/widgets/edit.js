@@ -46,6 +46,7 @@ EditWidget.prototype.execute = function() {
 	this.editIndex = this.getAttribute("index");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
+	this.onkeyupdate = this.getAttribute("onkeyupdate","no"); 
 	// Get the content type of the thing we're editing
 	var type;
 	if(this.editField === "text") {
@@ -65,7 +66,8 @@ EditWidget.prototype.execute = function() {
 			field: {type: "string", value: this.editField},
 			index: {type: "string", value: this.editIndex},
 			"class": {type: "string", value: this.editClass},
-			"placeholder": {type: "string", value: this.editPlaceholder}
+			"placeholder": {type: "string", value: this.editPlaceholder},
+			"onkeyupdate": {type: "string", value: this.onkeyupdate}
 		}
 	}]);
 };
@@ -75,7 +77,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EditWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index|| changedAttributes.onkeyupdate) {
 		this.refreshSelf();
 		return true;
 	} else {

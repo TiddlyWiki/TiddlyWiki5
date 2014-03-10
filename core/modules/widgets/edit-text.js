@@ -56,10 +56,19 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 		domNode.value = editInfo.value;
 	}
 	// Add an input event handler
-	$tw.utils.addEventListeners(domNode,[
+		if (this.onkeyupdate==="yes") { 
+		$tw.utils.addEventListeners(domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
-	]);
+		]);
+	}else {
+
+		$tw.utils.addEventListeners(domNode,[
+		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
+		{name: "input", handlerObject: this, handlerMethod: "handleNewInputEvent"},
+		{name: "blur",  handlerObject: this, handlerMethod: "handleblurEvent"}
+		]);
+	}
 	// Insert the element into the DOM
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
@@ -80,11 +89,11 @@ EditTextWidget.prototype.getEditInfo = function() {
 		update;
 	if(this.editIndex) {
 		value = this.wiki.extractTiddlerDataItem(this.editTitle,this.editIndex,this.editDefault);
-		update = function(value) {
+		update = function(value,norefresh) {
 			var data = self.wiki.getTiddlerData(self.editTitle,{});
 			if(data[self.editIndex] !== value) {
 				data[self.editIndex] = value;
-				self.wiki.setTiddlerData(self.editTitle,data);
+				self.wiki.setTiddlerData(self.editTitle,data,norefresh);
 			}
 		};
 	} else {
@@ -110,13 +119,13 @@ EditTextWidget.prototype.getEditInfo = function() {
 				value = this.editDefault;
 			}
 		}
-		update = function(value) {
+		update = function(value,norefresh) {
 			var tiddler = self.wiki.getTiddler(self.editTitle),
 				updateFields = {
 					title: self.editTitle
 				};
 			updateFields[self.editField] = value;
-			self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()));
+			self.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddler,updateFields,self.wiki.getModificationFields()),norefresh);
 		};
 	}
 	return {value: value, update: update};
@@ -134,6 +143,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editFocusPopup = this.getAttribute("focusPopup");
+	this.onkeyupdate = this.getAttribute("onkeyupdate","no"); 
 	// Get the editor element tag and type
 	var tag,type;
 	if(this.editField === "text") {
@@ -224,6 +234,16 @@ EditTextWidget.prototype.fixHeight = function() {
 /*
 Handle a dom "input" event
 */
+EditTextWidget.prototype.handleblurEvent = function(event) {
+	this.saveChanges(this.domNodes[0].value);
+	this.fixHeight();
+	return true;
+};
+EditTextWidget.prototype.handleNewInputEvent = function(event) {
+	this.saveChanges(this.domNodes[0].value,true);
+	this.fixHeight();
+	return true;
+};
 EditTextWidget.prototype.handleInputEvent = function(event) {
 	this.saveChanges(this.domNodes[0].value);
 	this.fixHeight();
@@ -242,10 +262,10 @@ EditTextWidget.prototype.handleFocusEvent = function(event) {
 	return true;
 };
 
-EditTextWidget.prototype.saveChanges = function(text) {
+EditTextWidget.prototype.saveChanges = function(text,norefresh) {
 	var editInfo = this.getEditInfo();
-	if(text !== editInfo.value) {
-		editInfo.update(text);
+	if((text !== editInfo.value)||!norefresh) {
+		editInfo.update(text,norefresh);
 	}
 };
 

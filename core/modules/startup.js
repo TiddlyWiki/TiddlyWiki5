@@ -203,7 +203,7 @@ exports.startup = function() {
 		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
-		$tw.wiki.addEventListener("change",function(changes) {
+		$tw.wiki.addEventListener("refreshtree",function(changes) {
 			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
 		});
 		// Fix up the link between the root widget and the page container

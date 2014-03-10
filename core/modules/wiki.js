@@ -123,7 +123,7 @@ This method should be called after the changes it describes have been made to th
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
 		true if the tiddler has been created
 */
-exports.enqueueTiddlerEvent = function(title,isDeleted) {
+exports.enqueueTiddlerEvent = function(title,isDeleted,norefresh) {
 	// Record the touch in the list of changed tiddlers
 	this.changedTiddlers = this.changedTiddlers || {};
 	this.changedTiddlers[title] = this.changedTiddlers[title] || {};
@@ -144,6 +144,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 			self.changedTiddlers = {};
 			self.eventsTriggered = false;
 			self.dispatchEvent("change",changes);
+			if (!norefresh) self.dispatchEvent("refreshtree",changes);
 		});
 		this.eventsTriggered = true;
 	}
@@ -209,7 +210,7 @@ exports.isImageTiddler = function(title) {
 	}
 };
 
-exports.addTiddler = function(tiddler) {
+exports.addTiddler = function(tiddler,norefresh) {
 	// Check if we're passed a fields hashmap instead of a tiddler
 	if(!(tiddler instanceof $tw.Tiddler)) {
 		tiddler = new $tw.Tiddler(tiddler);
@@ -221,7 +222,7 @@ exports.addTiddler = function(tiddler) {
 		this.tiddlers[title] = tiddler;
 		this.clearCache(title);
 		this.clearGlobalCache();
-		this.enqueueTiddlerEvent(title);
+		this.enqueueTiddlerEvent(title,false,norefresh);
 	}
 };
 
@@ -619,7 +620,7 @@ title: title of tiddler
 data: object that can be serialised to JSON
 fields: optional hashmap of additional tiddler fields to be set
 */
-exports.setTiddlerData = function(title,data,fields) {
+exports.setTiddlerData = function(title,data,fields,setTiddlerData,norefresh) {
 	var existingTiddler = this.getTiddler(title),
 		newFields = {
 			title: title
@@ -630,7 +631,7 @@ exports.setTiddlerData = function(title,data,fields) {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
-	this.addTiddler(new $tw.Tiddler(existingTiddler,fields,newFields,this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(existingTiddler,fields,newFields,this.getModificationFields()),norefresh);
 };
 
 /*
