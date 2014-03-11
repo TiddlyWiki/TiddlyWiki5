@@ -85,7 +85,7 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 		.tickPadding(6)
 		.orient("bottom");
 	// Create SVG element
-	var svgElement = d3.select(parent).insert("svg",nextSibling)
+	var svgElement = d3.select(parent).insert("svg",function() {return nextSibling;})
 		.attr("viewBox", "0 0 960 500")
 		.attr("preserveAspectRatio", "xMinYMin meet")
 		.attr("width", width + margin.left + margin.right)
