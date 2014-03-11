@@ -38,7 +38,8 @@ h1, h2, h3, h4, h5, h6 {
 pre {
 	display: block;
 	padding: 14px;
-	margin: 0 0 14px;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	word-break: normal;
 	word-wrap: break-word;
 	white-space: pre;
@@ -84,6 +85,8 @@ table {
 	width: auto;
 	max-width: 100%;
 	caption-side: bottom;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 table th, table td {
