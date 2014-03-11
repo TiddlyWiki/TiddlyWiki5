@@ -1,0 +1,12 @@
+title: $:/language/Filters/
+
+AllTiddlers: 所有条目，不含系统条目
+RecentTiddlers: 最近修改的条目
+AllTags: 所有标签，不含系统标签
+Missing: 佚失条目
+Drafts: 草稿条目
+Orphans: 孤立条目
+SystemTiddlers: 系统条目
+ShadowTiddlers: 默认条目
+OverriddenShadowTiddlers: 被覆写的预设条目
+SystemTags: 系统标签
