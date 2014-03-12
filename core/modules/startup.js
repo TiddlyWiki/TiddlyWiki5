@@ -55,20 +55,24 @@ exports.startup = function() {
 			"$:/themes/tiddlywiki/vanilla"
 		]
 	});
-	// Get the default tiddlers
-	var defaultTiddlersTitle = "$:/DefaultTiddlers",
-		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
-		defaultTiddlers = [];
-	if(defaultTiddlersTiddler) {
-		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
-	}
-	// Initialise the story and history
-	var storyTitle = "$:/StoryList",
-		story = [];
-	for(var t=0; t<defaultTiddlers.length; t++) {
-		story[t] = defaultTiddlers[t];
-	}
-	$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
+	// Display the default tiddlers
+	var displayDefaultTiddlers = function() {
+		// Get the default tiddlers
+		var defaultTiddlersTitle = "$:/DefaultTiddlers",
+			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
+			defaultTiddlers = [];
+		if(defaultTiddlersTiddler) {
+			defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
+		}
+		// Initialise the story
+		var storyTitle = "$:/StoryList",
+			story = [];
+		for(var t=0; t<defaultTiddlers.length; t++) {
+			story[t] = defaultTiddlers[t];
+		}
+		$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
+	};
+	displayDefaultTiddlers();
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
@@ -110,6 +114,10 @@ exports.startup = function() {
 		$tw.pageScroller = new $tw.utils.PageScroller();
 		$tw.rootWidget.addEventListener("tw-scroll",function(event) {
 			$tw.pageScroller.handleEvent(event);
+		});
+		// Listen for the tw-home message
+		$tw.rootWidget.addEventListener("tw-home",function(event) {
+			displayDefaultTiddlers();
 		});
 		// Install the save action handlers
 		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
