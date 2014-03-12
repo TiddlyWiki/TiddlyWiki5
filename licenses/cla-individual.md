@@ -142,3 +142,5 @@ Bram Chen, @BramChen, 2014/02/20
 Xavier Cazin, @xcazin, 2014/02/21
 
 Rustem Akbulatov, @nameanyone, 2014/03/04
+
+Sem Bernadet, @sembrestels, 2014/03/10
