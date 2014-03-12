@@ -554,7 +554,31 @@ exports.sortByList = function(array,listTitle) {
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
-				titles.push(title);
+				// Entry isn't in the list yet, so either append or insert;
+				// obey list-before and list-after if present for relative insertion point
+				var tiddler = this.getTiddler(title),
+					pos = -1;
+				if(tiddler) {
+					var beforeTitle = tiddler.fields["list-before"];
+					if(beforeTitle === "") {
+						pos = 0;
+					} else if(beforeTitle) {
+						pos = list.indexOf(beforeTitle);
+					} else {
+						var afterTitle = tiddler.fields["list-after"];
+						if(afterTitle) {
+							pos = list.indexOf(afterTitle);
+							if(pos >= 0) {
+								++pos;
+							}
+						}
+					}
+				}
+				if(pos >= 0) {
+					titles.splice(pos,0,title);
+				} else {
+					titles.push(title);
+				}
 			}
 		}
 		return titles;
