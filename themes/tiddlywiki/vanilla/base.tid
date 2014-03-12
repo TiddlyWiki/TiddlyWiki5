@@ -14,12 +14,17 @@ tags: [[$:/tags/stylesheet]]
 	-webkit-box-sizing: border-box;
 }
 
+html button {
+	line-height: 1.2;
+}
+
 /*
 ** Basic element styles
 */
 
 html {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings##fontfamily}};
+	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
 }
 
 body.tw-body {
@@ -240,7 +245,11 @@ a.tw-tiddlylink-external:hover {
 	line-height: 1.4em;
 }
 
-.btn-mini {
+.tw-sidebar-lists button {
+	color: <<colour sidebar-button-foreground>>;
+}
+
+.tw-sidebar-lists button.btn-mini {
 	color: <<colour sidebar-muted-foreground>>;
 }
 
@@ -874,7 +883,6 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons {
 	font-size: 0.85em;
-	line-height: 100%;
 	padding-top: 1em;
 	margin-bottom: -1px;
 }
@@ -889,6 +897,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: <<colour tab-foreground>>;
+	padding: 2px 4px 4px 4px;
 	margin-left: 2px;
 	margin-right: 2px;
 	font-weight: 300;

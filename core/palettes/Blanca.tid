@@ -45,6 +45,7 @@ page-background: #ffffff
 pre-background: #f5f5f5
 pre-border: #cccccc
 primary: #7897f3
+sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ccc
 sidebar-foreground-shadow: rgba(255,255,255, 0.8)

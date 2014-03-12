@@ -7,7 +7,7 @@ title: $:/TagManager
 <th>Count</th>
 <th>Colour</th>
 </tr>
-<$list filter="[tags[]sort[title]]">
+<$list filter="[tags[]!is[system]sort[title]]">
 <tr>
 <td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
 <td><$count filter="[is[current]tagging[]]"/></td>
