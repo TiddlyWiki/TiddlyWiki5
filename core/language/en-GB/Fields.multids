@@ -16,6 +16,8 @@ hack-to-give-us-something-to-compare-against: A temporary storage field used in 
 icon: The title of the tiddler containing the icon associated with a tiddler
 library: If set to "yes" indicates that a tiddler should be saved as a JavaScript library
 list: An ordered list of tiddler titles associated with a tiddler
+list-before: If set, the title of a tiddler before which this tiddler is added to the ordered list of tiddler titles, or at the start of the list if the empty title
+list-after: If set, the title of a tiddler after which this tiddler is added to the ordered list of tiddler titles
 modified: The date and time at which a tiddler was last modified
 modifier: The tiddler title associated with the person who last modified a tiddler
 name: The human readable name associated with a plugin tiddler
