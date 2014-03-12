@@ -252,10 +252,17 @@ Widget.prototype.getAttribute = function(name,defaultText) {
 
 /*
 Assign the computed attributes of the widget to a domNode
+options include:
+excludeEventAttributes: ignores attributes whose name begins with "on"
 */
-Widget.prototype.assignAttributes = function(domNode) {
+Widget.prototype.assignAttributes = function(domNode,options) {
+	options = options || {};
 	var self = this;
 	$tw.utils.each(this.attributes,function(v,a) {
+		// Check exclusions
+		if(options.excludeEventAttributes && a.substr(0,2) === "on") {
+			v = undefined;
+		}
 		if(v !== undefined) {
 			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
 			try {
