@@ -747,6 +747,8 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 			}
 		}
 	}
+	// Freeze the tiddler against modification
+	Object.freeze(this.fields);
 };
 
 $tw.Tiddler.prototype.hasField = function(field) {
