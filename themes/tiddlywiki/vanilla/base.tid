@@ -302,7 +302,7 @@ a.tw-tiddlylink-external:hover {
 	background-color: <<colour untagged-background>>;
 }
 
-.tw-tag-label svg {
+.tw-tag-label svg, .tw-tag-label img {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
