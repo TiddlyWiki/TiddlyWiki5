@@ -492,6 +492,10 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour tiddler-title-foreground>>;
 }
 
+.tw-system-title-prefix {
+	color: <<colour muted-foreground>>;
+}
+
 .titlebar img {
 	height: 1em;
 }

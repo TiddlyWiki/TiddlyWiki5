@@ -3,3 +3,4 @@ title: $:/language/
 RecentChanges/DateFormat: DDth MMM YYYY
 CloseAll/Button: close all
 MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
+SystemTiddler/Tooltip: This is a system tiddler
