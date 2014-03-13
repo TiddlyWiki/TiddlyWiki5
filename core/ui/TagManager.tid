@@ -6,7 +6,10 @@ title: $:/TagManager
 <$reveal state=<<qualify "$:/state/iconDropdown/$title$">> type="nomatch" text="" default="">
 <$linkcatcher to="$title$!!icon">
 <div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[is[shadow]is[image]] [!is[shadow]is[image]] [is[shadow]tag[$:/tags/Image]] [!is[shadow]tag[$:/tags/Image]] +[sort[title]]"><$link to={{!!title}}><$view field="title"/></$link>
+<$list filter="[is[shadow]is[image]] [!is[shadow]is[image]] [is[shadow]tag[$:/tags/Image]] [!is[shadow]tag[$:/tags/Image]] +[sort[title]]">
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
 </$list>
 </div>
 </$linkcatcher>
