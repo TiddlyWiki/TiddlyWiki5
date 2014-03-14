@@ -3,3 +3,4 @@ title: $:/language/
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 CloseAll/Button: 全部關閉
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
+SystemTiddler/Tooltip: 此為系統條目
