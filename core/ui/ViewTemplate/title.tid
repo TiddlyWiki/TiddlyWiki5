@@ -7,9 +7,7 @@ fill:$(foregroundColor)$;
 <div class="tw-tiddler-title">
 <div class="titlebar">
 <span class="tw-tiddler-controls">
-<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] [!is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] +[tag[$:/tags/ViewToolbar]]" variable="listItem">
-<$transclude tiddler=<<listItem>>/>
-</$list>
+<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] [!is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] +[tag[$:/tags/ViewToolbar]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 </span>
 <$set name="foregroundColor" value={{!!color}}>
 <span style=<<title-styles>>>
