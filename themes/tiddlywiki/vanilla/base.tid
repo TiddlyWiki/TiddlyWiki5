@@ -1067,7 +1067,7 @@ canvas.tw-edit-bitmapeditor  {
 	border: 1px solid <<colour message-border>>;
 	background: <<colour message-background>>;
 	padding: 0px 21px 0px 21px;
-	margin: 0 -21px 0 -21px;
+	margin: 21px -21px 21px -21px;
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
