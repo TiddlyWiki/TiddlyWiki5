@@ -357,8 +357,13 @@ $tw.utils.parseVersion = function(version) {
 Returns true if the version string A is greater than the version string B
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
-	var versionA = $tw.utils.parseVersion(versionStringA),
-		versionB = $tw.utils.parseVersion(versionStringB),
+	var defaultVersion = {
+			major: 0,
+			minor: 0,
+			patch: 0
+		},
+		versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
+		versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
 		diff = [
 			versionA.major - versionB.major,
 			versionA.minor - versionB.minor,
@@ -791,7 +796,8 @@ Construct a wiki store object
 */
 $tw.Wiki = function() {
 	this.tiddlers = {};
-	this.plugins = []; // Array of registered plugins, ordered by priority
+	this.pluginTiddlers = []; // Array of tiddlers containing registered plugins, ordered by priority
+	this.pluginInfo = {}; // Hashmap of parsed plugin content
 	this.shadowTiddlers = {}; // Hashmap by title of {source:, tiddler:}
 };
 
@@ -811,6 +817,18 @@ $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 };
 
 /*
+Read plugin info for all plugins
+*/
+$tw.Wiki.prototype.readPluginInfo = function() {
+	var self = this;
+	$tw.utils.each(this.tiddlers,function(tiddler,title) {
+		if(tiddler && tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
+			self.pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
+		}
+	});
+};
+
+/*
 Register the plugin tiddlers of a particular type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
 */
 $tw.Wiki.prototype.registerPluginTiddlers = function(pluginType,titles) {
@@ -819,7 +837,7 @@ $tw.Wiki.prototype.registerPluginTiddlers = function(pluginType,titles) {
 	// Go through the provided titles, or the entire tiddler list, looking for plugins of this type
 	var checkTiddler = function(tiddler) {
 		if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
-			self.plugins.push(tiddler);
+			self.pluginTiddlers.push(tiddler);
 			registeredTitles.push(tiddler.fields.title);
 		}
 	};
@@ -842,11 +860,11 @@ $tw.Wiki.prototype.unregisterPluginTiddlers = function(pluginType) {
 	var self = this,
 		titles = [];
 	// Remove any previous registered plugins of this type
-	for(var t=this.plugins.length-1; t>=0; t--) {
-		var tiddler = this.plugins[t];
+	for(var t=this.pluginTiddlers.length-1; t>=0; t--) {
+		var tiddler = this.pluginTiddlers[t];
 		if(tiddler.fields["plugin-type"] === pluginType) {
 			titles.push(tiddler.fields.title);
-			this.plugins.splice(t,1);
+			this.pluginTiddlers.splice(t,1);
 		}
 	}
 	return titles;
@@ -858,7 +876,7 @@ Unpack the currently registered plugins, creating shadow tiddlers for their cons
 $tw.Wiki.prototype.unpackPluginTiddlers = function() {
 	var self = this;
 	// Sort the plugin titles by the `plugin-priority` field
-	this.plugins.sort(function(a,b) {
+	this.pluginTiddlers.sort(function(a,b) {
 		if("plugin-priority" in a.fields && "plugin-priority" in b.fields) {
 			return a.fields["plugin-priority"] - b.fields["plugin-priority"];
 		} else if("plugin-priority" in a.fields) {
@@ -875,11 +893,9 @@ $tw.Wiki.prototype.unpackPluginTiddlers = function() {
 	});
 	// Now go through the plugins in ascending order and assign the shadows
 	this.shadowTiddlers = {};
-	$tw.utils.each(this.plugins,function(tiddler) {
-		// Get the plugin information
-		var pluginInfo = JSON.parse(tiddler.fields.text);
+	$tw.utils.each(this.pluginTiddlers,function(tiddler) {
 		// Extract the constituent tiddlers
-		$tw.utils.each(pluginInfo.tiddlers,function(constituentTiddler,constituentTitle) {
+		$tw.utils.each(self.pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
 			// Save the tiddler object
 			if(constituentTitle) {
 				self.shadowTiddlers[constituentTitle] = {
@@ -1535,6 +1551,7 @@ $tw.boot.startup = function(options) {
 		$tw.loadTiddlersNode();
 	}
 	// Unpack plugin tiddlers
+	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
 	// Register typed modules from the tiddlers we've just loaded
