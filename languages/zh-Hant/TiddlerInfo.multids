@@ -1,5 +1,14 @@
 title: $:/language/TiddlerInfo/
 
+Advanced/Caption: 進階
+Advanced/PluginInfo/Empty/Hint: 無資訊
+Advanced/PluginInfo/Heading: 插件明細
+Advanced/PluginInfo/Hint: 此插件包含以下預設條目：
+Advanced/ShadowInfo/Heading: 預設條目狀態
+Advanced/ShadowInfo/NotShadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 不是一個預設條目
+Advanced/ShadowInfo/Shadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 是一個預設條目
+Advanced/ShadowInfo/Shadow/Source: 此條目定義於插件 <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Advanced/ShadowInfo/OverriddenShadow/Hint: 已被一般條目覆寫
 Fields/Caption: 欄位
 List/Caption: 列表
 List/Empty: 此條目無指定列表
