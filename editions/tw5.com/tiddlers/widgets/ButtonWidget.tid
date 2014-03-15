@@ -1,6 +1,6 @@
 title: ButtonWidget
 created: 201310241419
-modified: 201402220837
+modified: 201403150837
 tags: widget
 
 ! Introduction
@@ -20,8 +20,8 @@ The content of the `<$button>` widget is displayed within the button.
 |to |The title of the tiddler to navigate to |
 |message |The name of the [[widget message|WidgetMessages]] to send when the button is clicked |
 |param |The optional parameter to the message |
-|set |The title of a tiddler to which a new value will be assigned |
-|setTo |The new value to assign to the tiddler identified in the `set` attribute |
+|set |A TextReference to which a new value will be assigned |
+|setTo |The new value to assign to the TextReference identified in the `set` attribute |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
 |class |An optional CSS class name to be assigned to the HTML element |
 |style |An optional CSS style attribute to be assigned to the HTML element |

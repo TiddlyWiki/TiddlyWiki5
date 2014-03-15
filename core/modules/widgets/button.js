@@ -118,8 +118,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 };
 
 ButtonWidget.prototype.setTiddler = function() {
-	var tiddler = this.wiki.getTiddler(this.set);
-	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
+	this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
 };
 
 /*
