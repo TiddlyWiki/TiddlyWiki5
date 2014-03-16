@@ -155,17 +155,6 @@ exports.getChangeCount = function(title) {
 	}
 };
 
-exports.deleteTiddler = function(title) {
-	delete this.tiddlers[title];
-	this.clearCache(title);
-	this.clearGlobalCache();
-	this.enqueueTiddlerEvent(title,true);
-};
-
-exports.tiddlerExists = function(title) {
-	return !!$tw.utils.hop(this.tiddlers,title);
-};
-
 /*
 Generate an unused title from the specified base
 */
@@ -203,22 +192,6 @@ exports.isImageTiddler = function(title) {
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
 	} else {
 		return null;
-	}
-};
-
-exports.addTiddler = function(tiddler) {
-	// Check if we're passed a fields hashmap instead of a tiddler
-	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = new $tw.Tiddler(tiddler);
-	}
-	// Get the title
-	var title = tiddler.fields.title;
-	// Save the tiddler
-	if(title) {
-		this.tiddlers[title] = tiddler;
-		this.clearCache(title);
-		this.clearGlobalCache();
-		this.enqueueTiddlerEvent(title);
 	}
 };
 
@@ -277,15 +250,13 @@ exports.getTiddlers = function(options) {
 	var self = this,
 		sortField = options.sortField || "title",
 		tiddlers = [], t, titles = [];
-	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t)) {
-			if(options.includeSystem || !this.isSystemTiddler(t)) {
-				if(!options.excludeTag || !this.tiddlers[t].hasTag(options.excludeTag)) {
-					tiddlers.push(this.tiddlers[t]);
-				}
+	this.each(function(tiddler,title) {
+		if(options.includeSystem || !self.isSystemTiddler(title)) {
+			if(!options.excludeTag || !tiddler.hasTag(options.excludeTag)) {
+				tiddlers.push(tiddler);
 			}
 		}
-	}
+	});
 	tiddlers.sort(function(a,b) {
 		var aa = a.fields[sortField].toLowerCase() || "",
 			bb = b.fields[sortField].toLowerCase() || "";
@@ -363,7 +334,7 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 		titles = this.getTiddlers(options),
 		t, tiddler;
 	for(t=0; t<titles.length; t++) {
-		tiddler = this.tiddlers[titles[t]];
+		tiddler = this.getTiddler(titles[t]);
 		if(tiddler) {
 			callback.call(this,tiddler.fields.title,tiddler);
 		}
@@ -450,26 +421,6 @@ exports.getOrphanTitles = function() {
 	return orphans; // Todo
 };
 
-exports.getSystemTitles = function() {
-	var titles = [];
-	for(var title in this.tiddlers) {
-		if(this.isSystemTiddler(title)) {
-			titles.push(title);
-		}
-	}
-	titles.sort();
-	return titles;
-};
-
-exports.getShadowTitles = function() {
-	var titles = [];
-	for(var title in this.shadowTiddlers) {
-		titles.push(title);
-	}
-	titles.sort();
-	return titles;
-};
-
 /*
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
@@ -488,7 +439,7 @@ exports.getTagMap = function() {
 	var self = this;
 	return this.getGlobalCache("tagmap",function() {
 		var tags = {},
-			storeTags = function(tagArray) {
+			storeTags = function(tagArray,title) {
 				if(tagArray) {
 					for(var index=0; index<tagArray.length; index++) {
 						var tag = tagArray[index];
@@ -503,15 +454,14 @@ exports.getTagMap = function() {
 			title, tiddler;
 		// Collect up all the tags
 		for(title in self.shadowTiddlers) {
-			if(!$tw.utils.hop(self.tiddlers,title)) {
+			if(!self.tiddlerExists(title)) {
 				tiddler = self.shadowTiddlers[title].tiddler;
-				storeTags(tiddler.fields.tags);
+				storeTags(tiddler.fields.tags,title);
 			}
 		}
-		for(title in self.tiddlers) {
-			tiddler = self.tiddlers[title];
-			storeTags(tiddler.fields.tags);
-		}
+		self.each(function(tiddler,title) {
+			storeTags(tiddler.fields.tags,title);
+		});
 		return tags;
 	});
 };
@@ -522,12 +472,11 @@ Lookup a given tiddler and return a list of all the tiddlers that include it in 
 exports.findListingsOfTiddler = function(targetTitle) {
 	// Get the list associated with the tag
 	var titles = [];
-	for(var title in this.tiddlers) {
-		var tiddler = this.tiddlers[title];
+	this.each(function(tiddler,title) {
 		if($tw.utils.isArray(tiddler.fields.list) && tiddler.fields.list.indexOf(targetTitle) !== -1) {
 			titles.push(title);
 		}
-	}
+	});
 	return titles;
 };
 
@@ -998,11 +947,18 @@ exports.search = function(text,options) {
 			}
 		}
 	} else {
-		var source = options.titles || this.tiddlers;
-		for(t in source) {
-			if(!!searchTiddler(t) === !options.invert) {
-				results.push(t);
+		if(options.titles) {
+			for(var title in options.titles) {
+				if(!!searchTiddler(title) === !options.invert) {
+					results.push(title);
+				}
 			}
+		} else {
+			this.each(function(tiddler,title) {
+				if(!!searchTiddler(title) === !options.invert) {
+					results.push(title);
+				}
+			});
 		}
 	}
 	// Remove any of the results we have to exclude

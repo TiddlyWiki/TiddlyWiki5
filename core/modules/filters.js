@@ -151,7 +151,7 @@ exports.getFilterOperators = function() {
 
 exports.filterTiddlers = function(filterString,currTiddlerTitle,tiddlerList) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,tiddlerList || this.tiddlers,currTiddlerTitle);
+	return fn.call(this,tiddlerList,currTiddlerTitle);
 };
 
 exports.compileFilter = function(filterString) {
@@ -219,7 +219,7 @@ exports.compileFilter = function(filterString) {
 	});
 	// Return a function that applies the operations to a source array/hashmap of tiddler titles
 	return function(source,currTiddlerTitle) {
-		source = source || self.tiddlers;
+		source = source || self.getAllTitles();
 		var results = [];
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,currTiddlerTitle);

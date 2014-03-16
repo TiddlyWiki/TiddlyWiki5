@@ -674,7 +674,7 @@ Apply a callback to each module of a particular type
 */
 $tw.modules.forEachModuleOfType = function(moduleType,callback) {
 	var modules = $tw.modules.types[moduleType];
-	$tw.utils.each(modules,function(element,title,object) {
+	$tw.utils.each(modules,function(element,title) {
 		callback(title,$tw.modules.execute(title));
 	});
 };
@@ -795,20 +795,63 @@ $tw.modules.define("$:/boot/tiddlerfields/list","tiddlerfield",{
 Construct a wiki store object
 */
 $tw.Wiki = function() {
-	this.tiddlers = {};
+	var self = this,
+		tiddlers = {}; // Hashmap of tiddlers
 	this.pluginTiddlers = []; // Array of tiddlers containing registered plugins, ordered by priority
 	this.pluginInfo = {}; // Hashmap of parsed plugin content
 	this.shadowTiddlers = {}; // Hashmap by title of {source:, tiddler:}
+	// Methods that need access to the private members
+	this.addTiddler = function(tiddler) {
+		if(!(tiddler instanceof $tw.Tiddler)) {
+			tiddler = new $tw.Tiddler(tiddler);
+		}
+		// Get the title
+		var title = tiddler.fields.title;
+		// Save the tiddler
+		if(title) {
+			tiddlers[title] = tiddler;
+			this.clearCache(title);
+			this.clearGlobalCache();
+			this.enqueueTiddlerEvent(title);
+		}
+	};
+	this.getTiddler = function(title) {
+		var t = tiddlers[title];
+		if(t instanceof $tw.Tiddler) {
+			return t;
+		} else if(title !== undefined && $tw.utils.hop(self.shadowTiddlers,title)) {
+			return self.shadowTiddlers[title].tiddler;
+		} else {
+			return undefined;
+		}
+	};
+	this.getAllTitles = function() {
+		var results = {};
+		for(var title in tiddlers) {
+			results[title] = true;
+		}
+		return results;
+	};
+	this.each = function(callback) {
+		for(var title in tiddlers) {
+			callback(tiddlers[title],title);
+		}
+	};
+	this.tiddlerExists = function(title) {
+		return !!$tw.utils.hop(tiddlers,title);
+	};
+	this.deleteTiddler = function(title) {
+		delete tiddlers[title];
+		this.clearCache(title);
+		this.clearGlobalCache();
+		this.enqueueTiddlerEvent(title,true);
+	};
 };
 
-$tw.Wiki.prototype.addTiddler = function(tiddler) {
-	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = new $tw.Tiddler(tiddler);
-	}
-	if(tiddler.fields.title) {
-		this.tiddlers[tiddler.fields.title] = tiddler;
-	}
-};
+// Dummy methods that will be filled in after boot
+$tw.Wiki.prototype.clearCache = 
+$tw.Wiki.prototype.clearGlobalCache = 
+$tw.Wiki.prototype.enqueueTiddlerEvent = function() {};
 
 $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 	for(var t=0; t<tiddlers.length; t++) {
@@ -821,7 +864,7 @@ Read plugin info for all plugins
 */
 $tw.Wiki.prototype.readPluginInfo = function() {
 	var self = this;
-	$tw.utils.each(this.tiddlers,function(tiddler,title) {
+	this.each(function(tiddler,title) {
 		if(tiddler && tiddler.fields.type === "application/json" && tiddler.hasField("plugin-type")) {
 			self.pluginInfo[tiddler.fields.title] = JSON.parse(tiddler.fields.text);
 		}
@@ -846,7 +889,7 @@ $tw.Wiki.prototype.registerPluginTiddlers = function(pluginType,titles) {
 			checkTiddler(self.getTiddler(title));
 		});
 	} else {
-		$tw.utils.each(this.tiddlers,function(tiddler,title) {
+		this.each(function(tiddler,title) {
 			checkTiddler(tiddler);
 		});
 	}
@@ -911,7 +954,7 @@ $tw.Wiki.prototype.unpackPluginTiddlers = function() {
 Define all modules stored in ordinary tiddlers
 */
 $tw.Wiki.prototype.defineTiddlerModules = function() {
-	$tw.utils.each(this.tiddlers,function(tiddler,title,object) {
+	this.each(function(tiddler,title) {
 		if(tiddler.hasField("module-type")) {
 			switch (tiddler.fields.type) {
 				case "application/javascript":
@@ -938,24 +981,13 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 	var self = this;
 	$tw.utils.each(this.shadowTiddlers,function(element,title) {
 		var tiddler = self.getTiddler(title);
-		if(!$tw.utils.hop(self.tiddlers,title)) { // Don't define the module if it is overidden by an ordinary tiddler
+		if(!self.tiddlerExists(title)) { // Don't define the module if it is overidden by an ordinary tiddler
 			if(tiddler.hasField("module-type")) {
 				// Define the module
 				$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 			}
 		}
 	});
-};
-
-$tw.Wiki.prototype.getTiddler = function(title) {
-	var t = this.tiddlers[title];
-	if(t instanceof $tw.Tiddler) {
-		return t;
-	} else if(title !== undefined && $tw.utils.hop(this.shadowTiddlers,title)) {
-		return this.shadowTiddlers[title].tiddler;
-	} else {
-		return undefined;
-	}
 };
 
 /*
