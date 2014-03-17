@@ -18,9 +18,9 @@ Export our filter function
 exports.shadowsource = function(source,operator,options) {
 	var results = [],
 		pushShadowSource = function(title) {
-			var shadowInfo = options.wiki.shadowTiddlers[title];
-	 		if(shadowInfo) {
- 				$tw.utils.pushTop(results,shadowInfo.source);
+			var source = options.wiki.getShadowSource(title);
+	 		if(source) {
+ 				$tw.utils.pushTop(results,source);
 	 		}
 		};
 	// Iterate through the source tiddlers

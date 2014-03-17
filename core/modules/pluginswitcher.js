@@ -62,8 +62,9 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
 	// Accumulate the titles of shadow tiddlers that have changed as a result of this switch
 	var changedTiddlers = {};
-	$tw.utils.each(this.wiki.shadowTiddlers,function(shadowInfo,title) {
-		if(unregisteredTiddlers.indexOf(shadowInfo.source) !== -1) {
+	this.wiki.eachShadow(function(tiddler,title) {
+		var source = self.wiki.getShadowSource(title);
+		if(unregisteredTiddlers.indexOf(source) !== -1) {
 			changedTiddlers[title] = true; // isDeleted?
 		}
 	});
@@ -72,8 +73,9 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	// Unpack the current theme tiddlers
 	$tw.wiki.unpackPluginTiddlers();
 	// Accumulate the affected shadow tiddlers
-	$tw.utils.each(this.wiki.shadowTiddlers,function(shadowInfo,title) {
-		if(registeredTiddlers.indexOf(shadowInfo.source) !== -1) {
+	this.wiki.eachShadow(function(tiddler,title) {
+		var source = self.wiki.getShadowSource(title);
+		if(registeredTiddlers.indexOf(source) !== -1) {
 			changedTiddlers[title] = false; // isDeleted?
 		}
 	});

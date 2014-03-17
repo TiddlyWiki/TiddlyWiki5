@@ -34,7 +34,7 @@ exports.shadow = function(source,prefix,options) {
 		});
 	} else {
 		if(prefix !== "!") {
-			$tw.utils.each(options.wiki.shadowTiddlers,function(tiddler,title) {
+			options.wiki.eachShadow(function(tiddler,title) {
 				results.push(title);
 			});
 		} else {
