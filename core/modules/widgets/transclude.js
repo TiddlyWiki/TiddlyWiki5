@@ -45,7 +45,7 @@ TranscludeWidget.prototype.execute = function() {
 	// Check for recursion
 	var recursionMarker = this.makeRecursionMarker();;
 	if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
-		this.makeChildWidgets([{type: "text", text: "Tiddler recursion error in transclude widget"}]);
+		this.makeChildWidgets([{type: "text", text: "Recursive transclusion error in transclude widget"}]);
 		return;
 	}
 	// Set context variables for recursion detection
