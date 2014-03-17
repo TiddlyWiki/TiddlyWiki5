@@ -1,5 +1,5 @@
 created: 20131205160146648
-modified: 20140107114340951
+modified: 20140317214256948
 tags: wikitext
 title: Transclusion in WikiText
 type: text/vnd.tiddlywiki
@@ -8,6 +8,14 @@ You can incorporate the content of one tiddler within another using the transclu
 
 * `{{MyTiddler}}` transcludes a single tiddler
 * `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TemplateTiddler|TemplateTiddlers]]
+* `{{||TemplateTitle}}` displays the specified template tiddler without altering the [[current tiddler|WidgetVariable: currentTiddler]]
+
+You can also use a TextReference instead of a tiddler title:
+
+* `{{MyTiddler!!field}}` transcludes a specified field of a tiddler
+* `{{!!field}}` transcludes a specified field of the current tiddler
+* `{{MyTiddler##index}}` transcludes a specified indexed property of a [[DataTiddler|DataTiddlers]]
+* `{{##index}}` transcludes a specified indexed property of the current [[DataTiddler|DataTiddlers]]
 
 A similar syntax can be used to transclude a list of tiddlers matching a specified [[TiddlerFilter|TiddlerFilters]]:
 
