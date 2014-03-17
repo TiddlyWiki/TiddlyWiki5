@@ -36,7 +36,7 @@ exports.parse = function() {
 	// Return the heading
 	return [{
 		type: "element",
-		tag: "h" + this.match[1].length, 
+		tag: "h" + headingLevel, 
 		attributes: {
 			"class": {type: "string", value: classes.join(" ")}
 		},
