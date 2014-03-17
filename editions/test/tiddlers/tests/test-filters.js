@@ -15,13 +15,36 @@ Tests the filtering mechanism.
 describe("Filter tests", function() {
 
 	// Create a wiki
-	var wiki = new $tw.Wiki();
-
-	// Some helpers
-	var addShadowTiddler = function(fields) {
-		var tiddler = new $tw.Tiddler(fields);
-		wiki.shadowTiddlers[tiddler.fields.title] = {tiddler: tiddler};
-	};
+	var wiki = new $tw.Wiki({
+		shadowTiddlers: {
+			"$:/TiddlerFive": {
+				tiddler: new $tw.Tiddler({title: "$:/TiddlerFive",
+					text: "Everything in federation",
+					tags: ["two"]
+				}),
+			},
+			"TiddlerSix": {
+				tiddler: new $tw.Tiddler({title: "TiddlerSix",
+					text: "Missing inaction from TiddlerOne",
+					tags: []
+				}),
+			},
+			"TiddlerSeventh": {
+				tiddler: new $tw.Tiddler({title: "TiddlerSeventh",
+					text: "",
+					list: "TiddlerOne [[Tiddler Three]] [[a fourth tiddler]] MissingTiddler",
+					tags: []
+				}),
+			},
+			"Tiddler8": {
+				tiddler: new $tw.Tiddler({title: "Tiddler8",
+					text: "Tidd",
+					tags: [],
+					"test-field": "JoeBloggs"
+				})
+			}
+		}
+	});
 
 	// Add a few  tiddlers
 	wiki.addTiddler({
@@ -52,27 +75,12 @@ describe("Filter tests", function() {
 		text: "This is the text of tiddler [[one]]",
 		list: "[[Tiddler Three]] [[TiddlerOne]]",
 		modifier: "JohnDoe"});
-	// And some shadows
-	addShadowTiddler({
-		title: "$:/TiddlerFive",
-		text: "Everything in federation",
-		tags: ["two"]});
-	addShadowTiddler({
-		title: "TiddlerSix",
-		text: "Missing inaction from TiddlerOne",
-		tags: []});
-	addShadowTiddler({
-		title: "TiddlerSeventh",
-		text: "",
-		list: "TiddlerOne [[Tiddler Three]] [[a fourth tiddler]] MissingTiddler",
-		tags: []});
-	addShadowTiddler({
-		title: "Tiddler8",
-		text: "Tidd",
-		tags: [],
-		"test-field": "JoeBloggs"});
 
 	// Our tests
+
+	it("should retrieve shadow tiddlers", function() {
+		expect(wiki.getTiddlerText("Tiddler8")).toBe("Tidd");
+	});
 
 	it("should handle the title operator", function() {
 		expect(wiki.filterTiddlers("TiddlerOne [title[$:/TiddlerTwo]] [[Tiddler Three]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three");

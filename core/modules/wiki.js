@@ -178,13 +178,6 @@ exports.isTemporaryTiddler = function(title) {
 	return title.indexOf("$:/temp/") === 0;
 };
 
-/*
-Determines if a tiddler is a shadow tiddler, regardless of whether it has been overridden by a real tiddler
-*/
-exports.isShadowTiddler = function(title) {
-	return $tw.utils.hop(this.shadowTiddlers,title);
-};
-
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {		
@@ -453,12 +446,12 @@ exports.getTagMap = function() {
 			},
 			title, tiddler;
 		// Collect up all the tags
-		for(title in self.shadowTiddlers) {
+		self.eachShadow(function(tiddler,title) {
 			if(!self.tiddlerExists(title)) {
-				tiddler = self.shadowTiddlers[title].tiddler;
+				tiddler = self.getTiddler(title);
 				storeTags(tiddler.fields.tags,title);
 			}
-		}
+		});
 		self.each(function(tiddler,title) {
 			storeTags(tiddler.fields.tags,title);
 		});
