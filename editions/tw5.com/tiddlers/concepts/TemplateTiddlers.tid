@@ -1,5 +1,5 @@
 created: 20140107114355828
-modified: 20140107114636001
+modified: 20140317213147507
 tags: concepts
 title: TemplateTiddlers
 type: text/vnd.tiddlywiki
@@ -37,4 +37,4 @@ The TiddlerWidget is used to change the current tiddler. Consider a tiddler "C" 
 
 It is still transcluding tiddler "A", but now it is also setting the current tiddler to "A". The result is therefore that the field "myfield" for tiddler "A" is displayed.
 
-The shorthand syntax for transcluding actually generates both a TiddlerWidget and a TranscludeWidget.
+The shorthand syntax for [[Transclusion in WikiText]] actually generates both a TiddlerWidget and a TranscludeWidget.
