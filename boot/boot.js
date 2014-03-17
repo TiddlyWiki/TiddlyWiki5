@@ -743,12 +743,18 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 				}
 			} else {
 				// Parse the field with the associated field module (if any)
-				var fieldModule = $tw.Tiddler.fieldModules[t];
+				var fieldModule = $tw.Tiddler.fieldModules[t],
+					value;
 				if(fieldModule && fieldModule.parse) {
-					this.fields[t] = fieldModule.parse.call(this,src[t]);
+					value = fieldModule.parse.call(this,src[t]);
 				} else {
-					this.fields[t] = src[t];
+					value = src[t];
 				}
+				// Freeze the field to keep it immutable
+				if(typeof value === "object") {
+					Object.freeze(value);					
+				}
+				this.fields[t] = value;
 			}
 		}
 	}
