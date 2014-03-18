@@ -21,7 +21,7 @@ exports.plugintiddlers = function(source,operator,options) {
 	switch(operator.operand) {
 		default:
 		 	pushShadows = function(title) {
-		 		var pluginInfo = options.wiki.pluginInfo[title];
+		 		var pluginInfo = options.wiki.getPluginInfo(title);
 		 		if(pluginInfo) {
 		 			$tw.utils.each(pluginInfo.tiddlers,function(fields,title) {
 		 				results.push(title);
