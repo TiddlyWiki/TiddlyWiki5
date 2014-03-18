@@ -4,3 +4,5 @@ RecentChanges/DateFormat: YYYY年0MM月0DD日
 CloseAll/Button: 全部关闭
 MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
 SystemTiddler/Tooltip: 此为系统条目
+ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全相容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
+ClassicWarning/Upgrade/Caption: 升级
