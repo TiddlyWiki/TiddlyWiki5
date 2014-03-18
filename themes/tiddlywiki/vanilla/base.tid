@@ -52,7 +52,7 @@ pre {
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
-	<<border-radius 3px>>
+	border-radius: 3px;
 }
 
 code {
@@ -61,7 +61,7 @@ code {
 	border: 1px solid <<colour code-border>>;
     white-space: pre-wrap;
 	padding: 0 3px 2px;
-	<<border-radius 3px>>
+	border-radius: 3px;
 }
 
 blockquote {
@@ -193,7 +193,7 @@ a.tw-tiddlylink-external:hover {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour dragger-background>>;
-	<<border-radius 20px>>
+	border-radius: 20px;
 }
 
 .tw-tiddler-dragger-cover {
@@ -295,7 +295,7 @@ a.tw-tiddlylink-external:hover {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
-	<<border-radius 8px>>
+	border-radius: 8px;
 }
 
 .tw-untagged-label {

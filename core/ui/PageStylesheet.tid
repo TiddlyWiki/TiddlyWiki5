@@ -6,13 +6,6 @@ title: $:/core/ui/PageStylesheet
 \define color(name)
 <<colour $name$>>
 \end
-\define border-radius(radius)
-```
-  -webkit-border-radius: $radius$;
-     -moz-border-radius: $radius$;
-          border-radius: $radius$;
-```
-\end
 \define box-shadow(shadow)
 ```
   -webkit-box-shadow: $shadow$;
