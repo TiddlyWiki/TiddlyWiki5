@@ -899,6 +899,11 @@ $tw.Wiki = function(options) {
 		}
 	};
 
+	// Get plugin info for a plugin
+	this.getPluginInfo = function(title) {
+		return pluginInfo[title];
+	};
+
 	// Register the plugin tiddlers of a particular type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
