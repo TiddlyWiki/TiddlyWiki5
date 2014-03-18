@@ -1,0 +1,19 @@
+created: 20130825162100000
+modified: 20140318211655525
+tags: dev
+title: TiddlyWiki Architecture
+type: text/vnd.tiddlywiki
+
+The heart of TiddlyWiki is an extensible representation transformation engine for text and images. Given the text of a tiddler and its associated ContentType, the engine can produce a rendering of the tiddler in a new ContentType. Furthermore, it can efficiently selectively update the rendering to track any changes in the tiddler or its dependents.
+
+! Overview
+
+The following diagram shows the internals of TiddlyWiki as a stack of tiddlers above a processing pipeline that converts WikiText into HTML.
+
+{{TiddlyWiki Architecture.svg}}
+
+The processing pipeline shows how WikiText is parsed by a stack of parse rules into a parse tree. The parse tree is rendered as a tree of widgets, which is synchronised into the DOM via the RefreshMechanism.
+
+DOM events trigger actions on widgets which update the tiddler store. The updates trigger a change event which in turn triggers the refresh mechanism to update the DOM.
+
+

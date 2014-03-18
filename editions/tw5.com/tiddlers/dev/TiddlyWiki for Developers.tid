@@ -1,14 +1,14 @@
 created: 20131203074550710
-modified: 20140226083600000
+modified: 20140318210720798
 tags: introduction dev
 title: TiddlyWiki for Developers
 type: text/vnd.tiddlywiki
 
-TiddlyWiki is published as OpenSource which means that anyone can read the code and contribute to its development. It's a big, complex piece of software and can be overwhelming to newcomers.
+TiddlyWiki is published as OpenSource which means that anyone can read the code and contribute to its development.
 
 ! Resources
 
-If you're interested in understanding more about the internal operation of TiddlyWiki, start by reviewing [[TiddlyWiki for Developers]] and then read the code -- start with the boot kernel [[$:/boot/boot.js]].
+If you're interested in understanding more about the internal operation of TiddlyWiki, [[TiddlyWiki Architecture]] gives an overview of how TiddlyWiki is structured. Then read the code -- start with the boot kernel [[$:/boot/boot.js]].
 
 ! The one thing you need to know
 
