@@ -118,7 +118,7 @@ Causes a tiddler to be marked as changed, incrementing the change count, and tri
 This method should be called after the changes it describes have been made to the wiki.tiddlers[] array.
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
-		true if the tiddler has been created
+		true if the tiddler has been deleted
 */
 exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Record the touch in the list of changed tiddlers
