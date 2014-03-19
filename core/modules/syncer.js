@@ -514,6 +514,9 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 				// Invoke the callback
 				callback(null);
 			});
+		} else {
+			this.logger.log(" Not Dispatching 'save' task:",task.title,"tiddler does not exist");
+			return callback(null);
 		}
 	} else if(task.type === "load") {
 		// Load the tiddler
