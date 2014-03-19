@@ -5,6 +5,7 @@ tw-tiddler-frame tw-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 \end
 <div class=<<frame-classes>>>
 <$set name="storyTiddler" value=<<currentTiddler>>>
+<$save>
 <$keyboard key="escape" message="tw-cancel-tiddler">
 <$keyboard key="ctrl+enter" message="tw-save-tiddler">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditTemplate]!has[draft.of]]" variable="listItem">
@@ -12,5 +13,6 @@ tw-tiddler-frame tw-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 </$list>
 </$keyboard>
 </$keyboard>
+</$save>
 </$set>
 </div>
