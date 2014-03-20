@@ -36,8 +36,9 @@ exports.startup = function() {
 	$tw.wiki.initParsers();
 	// Set up the command modules
 	$tw.Commander.initCommands();
-	// Kick off the language manager
-	$tw.languageManager = new $tw.PluginSwitcher({
+	// Kick off the language manager and switcher
+	$tw.language = new $tw.Language();
+	$tw.languageSwitcher = new $tw.PluginSwitcher({
 		wiki: $tw.wiki,
 		pluginType: "language",
 		controllerTitle: "$:/language",

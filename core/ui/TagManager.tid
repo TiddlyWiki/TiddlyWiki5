@@ -1,5 +1,6 @@
 title: $:/TagManager
 
+\define lingo-base() $:/language/TagManager/
 \define iconEditor(title)
 <$edit-text field="icon" tag="input"/> <$button popup=<<qualify "$:/state/iconDropdown/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
 <div class="tw-block-dropdown-wrapper">
@@ -19,10 +20,10 @@ title: $:/TagManager
 <table>
 <tbody>
 <tr>
-<th>Tag</th>
-<th>Count</th>
-<th>Colour</th>
-<th>Icon</th>
+<th><<lingo Tag/Heading>></th>
+<th><<lingo Count/Heading>></th>
+<th><<lingo Colour/Heading>></th>
+<th><<lingo Icon/Heading>></th>
 </tr>
 <$list filter="[tags[]!is[system]sort[title]]">
 <tr>

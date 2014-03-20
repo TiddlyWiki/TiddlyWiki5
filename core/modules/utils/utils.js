@@ -214,32 +214,36 @@ exports.getRelativeDate = function(delta) {
 		futurep = true;
 	}
 	var units = [
-		{name: "years",   duration:      365 * 24 * 60 * 60 * 1000},
-		{name: "months",  duration: (365/12) * 24 * 60 * 60 * 1000},
-		{name: "days",    duration:            24 * 60 * 60 * 1000},
-		{name: "hours",   duration:                 60 * 60 * 1000},
-		{name: "minutes", duration:                      60 * 1000},
-		{name: "seconds", duration:                           1000}
+		{name: "Years",   duration:      365 * 24 * 60 * 60 * 1000},
+		{name: "Months",  duration: (365/12) * 24 * 60 * 60 * 1000},
+		{name: "Days",    duration:            24 * 60 * 60 * 1000},
+		{name: "Hours",   duration:                 60 * 60 * 1000},
+		{name: "Minutes", duration:                      60 * 1000},
+		{name: "Seconds", duration:                           1000}
 	];
 	for(var t=0; t<units.length; t++) {
 		var result = Math.floor(delta / units[t].duration);
 		if(result >= 2) {
-			var desc = result + " " + units[t].name;
-			if(futurep) {
-				desc = desc + " from now";
-			} else {
-				desc = desc + " ago";
-			}
 			return {
 				delta: delta,
-				description: desc,
+				description: $tw.language.getString(
+					"RelativeDate/" + (futurep ? "Future" : "Past") + "/" + units[t].name,
+					{variables:
+						{period: result.toString()}
+					}
+				),
 				updatePeriod: units[t].duration
 			};
 		}
 	}
 	return {
 		delta: delta,
-		description: "1 second ago",
+		description: $tw.language.getString(
+			"RelativeDate/" + (futurep ? "Future" : "Past") + "/Seconds",
+			{variables:
+				{period: "1"}
+			}
+		),
 		updatePeriod: 1000
 	};
 };

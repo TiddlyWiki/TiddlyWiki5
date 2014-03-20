@@ -204,7 +204,12 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		// Delete the original tiddler
 		var originalTitle = tiddler.fields["draft.of"];
 		// Ask for confirmation if the tiddler has changed
-		if(!confirm("Do you wish to delete the tiddler '" + originalTitle + "'")) {
+		if(!confirm($tw.language.getString(
+					"ConfirmDeleteTiddler",
+					{variables:
+						{title: originalTitle}
+					}
+				))) {
 			return false;
 		}
 		this.wiki.deleteTiddler(originalTitle);
@@ -277,7 +282,12 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 			var isRename = draftOf !== draftTitle,
 				isConfirmed = true;
 			if(isRename && this.wiki.tiddlerExists(draftTitle)) {
-				isConfirmed = confirm("Do you wish to overwrite the tiddler '" + draftTitle + "'?");
+				isConfirmed = confirm($tw.language.getString(
+					"ConfirmOverwriteTiddler",
+					{variables:
+						{title: draftTitle}
+					}
+				));
 			}
 			if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
