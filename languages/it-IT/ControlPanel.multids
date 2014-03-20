@@ -1,0 +1,75 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Avanzate
+Advanced/Hint: Informazioni interne di questo ~TiddlyWiki
+Advanced/LoadedModules/Caption: Moduli caricati
+Advanced/LoadedModules/Hint: Elenco dei moduli attualmente caricati e loro collegamento ai frammenti sorgente. I moduli in corsivo mancano di un frammento sorgente perch&eacute; in generale installati durante il processo di avvio.
+Advanced/TiddlerFields/Caption: Campi frammenti
+Advanced/TiddlerFields/Hint: Questa &egrave; la serie completa dei TiddlerFields utilizzati in questo wiki (sono inclusi i frammenti di sistema ed esclusi i frammenti nascosti).
+Appearance/Caption: Aspetto
+Appearance/Hint: Personalizza l'aspetto di TiddlyWiki
+Appearance/Palette/Caption: Tavolozza
+Appearance/Palette/Editor/Clone/Caption: Clona
+Appearance/Palette/Editor/Clone/Prompt: Si consiglia di clonare questa tavolozza prima di modificarla
+Appearance/Palette/Editor/Prompt/Modified: Questa tavolozza &egrave; stata modificata
+Appearance/Palette/Editor/Prompt: Modifica
+Appearance/Palette/Editor/Reset/Caption: Reset
+Appearance/Palette/HideEditor/Caption: Nascondi editor
+Appearance/Palette/Prompt: Tavolozza corrente:
+Appearance/Palette/ShowEditor/Caption: Mostra editor
+Appearance/StoryView/Caption: Vista
+Appearance/StoryView/Prompt: Vista corrente:
+Appearance/Theme/Caption: Tema
+Appearance/Theme/Prompt: Tema corrente:
+Basics/AnimDuration/Prompt: Durata animazione:
+Basics/Caption: Impostazioni base
+Basics/DefaultTiddlers/BottomHint: Utilizza &#91;&#91;le doppie parentesi quadre&#93;&#93; per titoli di frammenti con spazi bianchi. In alternativa scegli di visualizzare i frammenti secondo la <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">cronologia</$button>
+Basics/DefaultTiddlers/Prompt: Frammenti di default:
+Basics/DefaultTiddlers/TopHint: Scegli quali frammenti vuoi visualizzare all'avvio:
+Basics/Language/Prompt: Ciao! Scegli la lingua:
+Basics/OverriddenShadowTiddlers/Prompt: Numero di frammenti nascosti annullati:
+Basics/ShadowTiddlers/Prompt: Numero di frammenti nascosti:
+Basics/Subtitle/Prompt: Sottotitolo:
+Basics/SystemTiddlers/Prompt: Numero di frammenti di sistema:
+Basics/Tags/Prompt: Numero di categorie:
+Basics/Tiddlers/Prompt: Numero di frammenti:
+Basics/Title/Prompt: Il titolo di questo ~TiddlyWiki:
+Basics/Username/Prompt: Digita il nome con cui firmare le modifiche:
+Basics/Version/Prompt: Versione di ~TiddlyWiki:
+Plugins/Caption: Plugins
+Plugins/Fields/Description: Descrizione
+Plugins/Fields/Title: Titolo
+Plugins/Fields/Version: Versione
+Plugins/Language/Prompt: Linguaggi
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Temi
+Saving/AutoSave/Disabled/Button: Abilita
+Saving/AutoSave/Disabled/Prompt: Il salvataggio automatico &egrave; disabilitato
+Saving/AutoSave/Enabled/Button: Disabilita
+Saving/AutoSave/Enabled/Prompt: Il salvataggio automatico &egrave; abilitato
+Saving/AutoSave: Salvataggio automatico
+Saving/Caption: Salvataggio
+Saving/Heading: Salvataggio
+Saving/TiddlySpot/Advanced/Heading: Impostazioni avanzate
+Saving/TiddlySpot/BackupDir: Directory di backup
+Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Filename: Nome del file di upload
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //L'indirizzo del server di default &egrave; `http://<wikiname>.tiddlyspot.com/store.cgi` e pu&ograve; essere modificato per utilizzare un indirizzo server personalizzato//
+Saving/TiddlySpot/Password: Password
+Saving/TiddlySpot/ServerURL: Indirizzo server
+Saving/TiddlySpot/UploadDir: Directory di upload
+Saving/TiddlySpot/UserName: Nome Wiki
+Tools/Caption: Strumenti
+Tools/Download/Full/Caption: Scarica l'intero wiki
+Tools/Encryption/ChangePassword/Button: Cambia la password
+Tools/Encryption/ClearPassword/Button: Cancella la password
+Tools/Encryption/Disabled/Prompt: Questo wiki non &egrave; criptato
+Tools/Encryption/Enabled/Prompt: Questo wiki &egrave; criptato
+Tools/Encryption/Heading: Crittografa
+Tools/Encryption/SetPassword/Button: Imposta la password
+Tools/Export/AllAsStaticHTML/Caption: Scarica tutti i frammenti nel formato HTML statico
+Tools/Export/Heading: Esporta
+Tools/Import/Heading: Importa
+Tools/Import/Hint: Sfoglia i file sul tuo computer per importarne i contenuti (i frammenti singoli all'interno dei file TiddlyWiki HTML sono importati separatamente). &Egrave; anche possibile trascinare e rilasciare i file direttamente nella finestra del browser.
+Tools/Import/Prompt: Importa:

@@ -1,0 +1,10 @@
+title: $:/language/Search/
+
+Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> Corrispondenze</small>//
+Filter/Caption: Filtro
+Filter/Hint: Cerca attraverso un [[filtro|http://tiddlywiki.com/static/TiddlerFilters.html]]
+Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Corrispondenze</small>//
+Shadows/Caption: Nascosti
+Shadows/Hint: Cerca frammenti nascosti
+System/Caption: Sistema
+System/Hint: Cerca frammenti di sistema

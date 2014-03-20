@@ -1,0 +1,30 @@
+title: $:/language/Help/server
+description: Provides an HTTP server interface to TiddlyWiki
+
+Il server incluso in TiddlyWiki5 &egrave; molto semplice. Sebbene compatibile con TiddlyWeb, il server non supporta molte delle funzionalit&agrave; necessarie per un utilizzo affidabile su internet.
+
+Alla radice serve il rendering di un frammento specifico. Oltre la radice, serve frammenti singoli codificati in JSON e supporta le operazioni HTTP di base `GET`, `PUT` e `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
+```
+
+I parametri sono:
+
+* ''port'' - il numero di porta sui cui risponde il server  (default a "8080")
+* ''roottiddler'' - il frammento da servire alla radice (default a "$:/core/save/all") 
+* ''rendertype'' - il tipo di contenuto con cui deve essere effettuato il render del frammento alla radice (default a "text/plain")
+* ''servetype'' - il tipo di contenuto con cui deve essere servito il frammento alla radice (default a "text/html")
+* ''username'' - il nome utente di default da utilizzare per firmare le modifiche
+* ''password'' - la password opzionale da utilizzare per l'autenticazione di base
+* ''host'' - il nome host opzionale da utilizzare per il server  (default a "127.0.0.1" ossia "localhost")
+
+Se il parametro password &egrave; specificato, il browser chieder&agrave; nome utente e password. Notare che la password &egrave; trasmessa in chiaro quindi questa implementazione non &egrave; adatta ad un uso generale.
+
+Per esempio:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Per eseguire istanze multiple di server TiddlyWiki nello stesso tempo, &egrave; necessario definire per ciascuno una porta specifica.
