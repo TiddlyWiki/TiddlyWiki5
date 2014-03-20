@@ -1,6 +1,9 @@
 title: $:/snippets/paletteeditor
 
 \define lingo-base() $:/language/ControlPanel/Appearance/Palette/Editor/
+\define describePaletteColour(colour)
+{{$:/language/Docs/PaletteColours/$colour$}}
+\end
 <$set name="currentTiddler" value={{$:/palette}}>
 
 <<lingo Prompt>> <$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
@@ -16,9 +19,19 @@ title: $:/snippets/paletteeditor
 
 <$button message="tw-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
 
-<table><tbody><$list filter="[is[current]indexes[]]" variable="colourName"><tr><td><$macrocall $name="colourName" $output="text/plain"/></td>
-<td><$edit-text index=<<colourName>> tag="input"/></td>
-<td><$edit-text index=<<colourName>> type="color" tag="input"/></td>
+<table>
+<tbody>
+<$list filter="[is[current]indexes[]]" variable="colourName">
+<tr>
+<td>
+''<$macrocall $name="describePaletteColour" colour=<<colourName>>/>''<br/>
+<$macrocall $name="colourName" $output="text/plain"/>
+</td>
+<td>
+<$edit-text index=<<colourName>> tag="input"/>
+<br>
+<$edit-text index=<<colourName>> type="color" tag="input"/>
+</td>
 </tr>
 </$list>
 </tbody>
