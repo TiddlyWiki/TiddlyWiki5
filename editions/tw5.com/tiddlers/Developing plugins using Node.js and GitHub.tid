@@ -1,0 +1,118 @@
+created: 20140320055936611
+modified: 20140320075440176
+tags: howto
+title: Developing plugins using Node.js and GitHub
+type: text/vnd.tiddlywiki
+
+The most practical way to develop plugins is to use Node.js with the tiddlywiki5 repository to build your plugins, and to use ~GitHub to manage you files.
+
+!Step by step
+
+!!1. Setup your development environment
+
+First read  http://tiddlywiki.com/static/PluginMechanism.html.
+
+Install Git from http://git-scm.com/downloads
+
+Install Node.js from http://nodejs.org/
+
+!!2. Create a new blank repository on ~GitHub
+
+Hint: ~GitHub repositories cannot be grouped together into directories, so it is only possible to group by using a naming scheme, e.g. use 'TW5-' as a name prefix with tiddlywiki5 projects to group them together.
+
+Go to https://github.com/ and create new a repository 'pluginname' - choose to add a readme file.
+
+!!3. Setup a working environment
+
+Choose a location in your file system (eg TW5) for you plugin project; issue commands to:
+
+--create the directory--
+
+```
+mkdir TW5
+
+```
+
+--make a local read-only copy of the tiddlywiki5 repository--
+
+```
+git clone https://github.com/Jermolene/TiddlyWiki5.git TW5
+
+```
+
+--make a directory for your plugin--
+
+```
+cd TW5
+cd plugins
+mkdir yourname
+cd yourname
+mkdir pluginname
+
+```
+
+--make a local copy of you plugin repository--
+
+```
+git clone https://github.com/yourgithub/pluginname.git pluginname
+
+```
+--go to your files--
+
+```
+cd pluginname
+
+```
+
+Create the file plugin.info with content:
+
+```
+{
+	"title": "$:/plugins/yourgithub/pluginname",
+	"description": "summary of the plugin's purpose",
+	"author": "yourname",
+	"version": "0.0.1",
+	"core-version": ">=5.0.8",
+	"source": "https://github.com/yourgithub/pluginname",
+	"plugin-type": "plugin"
+}
+```
+
+
+!!4. Create your plugin's files
+
+For example files see the plugins in the tiddlywiki5 repository i.e. those located at plugins/tiddlywiki/ - Note in particular that files need to contain information that is used to tell tiddlywiki the name of the tiddler that is to be used in the tiddlywiki in place of the name of the file within the file system.
+
+!!5. Build your files into a tiddlywiki
+
+Modify editions/tw5.com/tiddlywiki.info to include a reference to your plugin directory,  i.e. find `"plugins": [ ` and add `"yourname/pluginname"`.
+
+From the TW5 directory  issue command
+
+```
+./qbld.sh
+```
+
+the resultant file (index.html) will be placed in the build directory, the default build directory is  `../jermolene.github.com` relative to TW5/
+
+!!6. Save you work on ~GitHub
+
+From `plugins/yourname/pluginname/` issue commands to:
+
+--add all files--
+
+```
+git add -A
+```
+
+--commit to your local repository---
+
+```
+git commit -am "something meaningful about this check in"
+```
+
+--copy local changes to github--
+
+```
+git push
+```
