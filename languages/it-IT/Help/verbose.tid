@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Triggers verbose output mode
+
+Attiva l'output esteso utile per il debug 
+
+```
+--verbose
+```

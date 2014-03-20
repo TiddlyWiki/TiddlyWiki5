@@ -1,0 +1,14 @@
+title: $:/language/Help/load
+description: Load tiddlers from a file
+
+Carica frammenti da file 2.x.x TiddlyWiki (`.html`), `.tiddler`, `.tid`, `.json` o altri file 
+
+```
+--load <filepath>
+```
+
+Per caricare frrammenti da un TiddlyWiki criptato si deve prima specificare la password con il comando PasswordCommand. Per esempio:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
