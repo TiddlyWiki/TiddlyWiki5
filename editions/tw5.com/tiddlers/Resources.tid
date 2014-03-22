@@ -1,16 +1,14 @@
 created: 20140320230543190
 modified: 20140320231444981
 tags: introduction community
-title: Examples
+title: Resources
 type: text/vnd.tiddlywiki
 
-This collection showcases inspiring and interesting examples of TiddlyWiki being used in the wild.
-
-Submit new entries to this collection via GitHub, Twitter or by posting in the [[TiddlyWiki Groups]].
+These resources created by the TiddlyWiki [[Community]] help you get the best out of TiddlyWiki. Submit new entries via GitHub, Twitter or by posting in the [[TiddlyWiki Groups]].
 
 <div class="tw-link-info">
 
-<$list filter="[tag[examples]!sort[modified]]">
+<$list filter='[tag[resources]!sort[modified]]'>
 
 <div class="tw-link-info-item">
 
@@ -25,3 +23,5 @@ Submit new entries to this collection via GitHub, Twitter or by posting in the [
 </div>
 
 </$list>
+
+</div>

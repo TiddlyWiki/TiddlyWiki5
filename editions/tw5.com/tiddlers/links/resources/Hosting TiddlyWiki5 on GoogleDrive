@@ -1,0 +1,11 @@
+created: 20140315085406905
+modified: 20140321084548184
+tags: resources
+title: "Hosting TiddlyWiki5 on GoogleDrive" by Tony Ching
+url: https://googledrive.com/host/0B51gSXixfJ2Qb0I4R2M4MWJVMlU
+
+Tony Ching's quick guide for sharing TiddlyWiki with Google Drive.
+
+<<<
+Anyway your self-contained a non-linear personal web notebook can be hosted on Google Drive, a free cloud service from Google.com. Because TiddlyWiki5 now supports the Stanford Javascript Crypto Library (SJCL), you can encrypt your content from prying eyes (excluding the NSA of course)
+<<<
