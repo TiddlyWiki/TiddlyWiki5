@@ -1,0 +1,25 @@
+created: 20140321090511826
+modified: 20140321090650144
+tags: community introduction
+title: Latest
+type: text/vnd.tiddlywiki
+
+The latest news, articles, resources and examples.
+
+<div class="tw-link-info">
+
+<$list filter="[tag[articles]] [tag[examples]] [tag[resources]] +[!sort[modified]limit[7]]">
+
+<div class="tw-link-info-item">
+
+! <$view field="title"/>
+
+!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
+
+<div class="tw-subtitle">Updated <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>

@@ -1,5 +1,5 @@
 created: 20130909151600000
-modified: 20140302181824943
+modified: 20140321090723435
 tags: community
 title: Community
 type: text/vnd.tiddlywiki
@@ -19,38 +19,14 @@ The ~TiddlyWiki discussion groups are mailing lists for talking about ~TiddlyWik
 
 New releases of TiddlyWiki, TiddlyDesktop and TiddlyFox are announced via the discussion groups and Twitter.
 
-! Resources for TiddlyWiki5
-
-* [[TW5 Mall|http://www.giffmex.org/tw5mall.htm]] -- DaveGifford's growing catalogue of hints and tips
-* Several [[customisation howto's and theme tweaks|http://tongerner.tiddlyspot.com/]] from TonGerner
-* [[TW5Magick|http://tw5magick.tiddlyspot.com/]] -- a collection of hints and tips from StephanHradek
-* [[BJHacks|http://bjhacks.tiddlyspot.com]] -- a collection of plugins from BJ
-* A [[collection of articles|http://blog.jeffreykishner.com/tiddlywiki/]] from JeffreyKishner
-* A new theme from [[BobRobison|http://tw5gray.tiddlyspot.com]]
-* [[Bestrew|http://nocategories.net/tiddlywiki/bestrew.html]] -- DylanKinnett's adaptation of TiddlyWiki5 as a writers manuscript submission tracker
-* [[BrainTest|http://braintest.tiddlyspot.com]], a collection of tips and experiments from DanieloRodriguez
-* [[Coding for TiddlyWiki5|http://cjhunt.github.io]], an introduction to developing extensions and plugins from ChrisHunt
-* [[Hosting TiddlyWiki5 on GoogleDrive|https://googledrive.com/host/0B51gSXixfJ2Qb0I4R2M4MWJVMlU]] from TonyChing
-
-! Blog posts and articles about TiddlyWiki5
-
-* Reaction to TiddlyWiki5 from the translator of the German edition of TiddlyWikiClassic: "[[TiddlyWiki 5 im Betatest|http://blog.netplanet.org/2014/01/03/tiddlywiki-5-im-betatest/]]"
-* A gamers guide to using TiddlyWiki5: "[[Shining Ark 7 Using TiddlyWiki|http://helugame.wordpress.com/2013/09/07/shining-ark-7-using-tiddlywiki/]]"
-* An introduction to TiddlyWiki5 by [[Moongift (in Japanese)|http://www.moongift.jp/2013/11/tiddlywiki5-%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E5%88%B7%E6%96%B0%E3%80%82%E6%AC%A1%E3%81%AE25%E5%B9%B4%E3%82%92%E7%9B%AE%E6%8C%87%E3%81%99tiddlywiki-2/]]
-
-! Examples of TiddlyWiki5 being used in the wild
-
-; http://freedombits.org
-: A manifesto for the preservation of free speech through the exchange of randomized data
-; http://giffmex.org/nt/1johnnotebase.html
-: A study notebook for the Bible
-; http://tesis.tiddlyspot.com/
-: A thesis notebook
-
 ! Local ~TiddlyWiki Interest Groups
 
 Local meetings of ~TiddlyWiki enthusiasts around the world:
 
 * [[OXTWIG]], the ''Oxford ~TiddlyWiki Interest Group'' meets monthly in Oxford, UK to share experiences of using TiddlyWiki
 
-//If you are a ~TiddlyWiki enthusiast please consider starting a local TWIG in your area, it's a great way to spread the word about using TiddlyWiki// 
+//If you are a ~TiddlyWiki enthusiast please consider starting a local TWIG in your area, it's a great way to spread the word about using TiddlyWiki//
+
+! Links
+
+<<tabs "Latest Resources Examples Articles" "Latest">>

@@ -1,0 +1,14 @@
+created: 20140312085406905
+modified: 20140312084543862
+tags: articles
+title: "Install and run TiddlyWiki on a CentOS 6 VPS using Nginx" from RoseHosting
+type: text/vnd.tiddlywiki
+url: http://www.rosehosting.com/blog/install-and-run-tiddlywiki-on-a-centoos-6-vps-using-nginx/
+
+A step by step guide to running TiddlyWiki on a ~CentOS Virtual Private Server.
+
+<<<
+In this tutorial we will guide you through the steps of installing and running TiddlyWiki on a ~CentOS 6 VPS.
+
+We will also install and configure Nginx as a reverse proxy, so you can run TiddlyWiki behind Nginx.
+<<<
