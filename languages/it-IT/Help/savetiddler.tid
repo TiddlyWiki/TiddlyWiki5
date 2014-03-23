@@ -1,0 +1,8 @@
+title: $:/language/Help/savetiddler
+description: Saves a raw tiddler to a file
+
+Salva un singolo frammento nel formato puro testo o binario con il nome file specificato. 
+
+```
+--savetiddler <title> <filename>
+```

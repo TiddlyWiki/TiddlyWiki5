@@ -1,0 +1,8 @@
+title: $:/language/
+
+RecentChanges/DateFormat: DDth MMM YYYY
+CloseAll/Button: Chiudi tutto
+MissingTiddler/Hint: Frammento mancante "<$text text=<<currentTiddler>>/>" - clicca {{$:/core/images/edit-button}} per crearlo
+SystemTiddler/Tooltip: Questo &egrave; un frammento di sistema
+ClassicWarning/Hint: Questo frammento &egrave; scritto nel formato testo wiki di TiddlyWiki Classic e non &egrave; pienamente compatibile con TiddlyWiki versione 5. Vedi http://tiddlywiki.com/static/Upgrading.html per maggiori dettagli a riguardo 
+ClassicWarning/Upgrade/Caption: Aggiorna

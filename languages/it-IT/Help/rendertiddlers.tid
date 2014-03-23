@@ -1,0 +1,14 @@
+title: $:/language/Help/rendertiddlers
+description: Render tiddlers matching a filter to a specified ContentType
+
+Render a set of tiddlers matching a filter to separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+Per esempio:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```

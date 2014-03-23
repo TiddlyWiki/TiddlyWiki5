@@ -1,0 +1,20 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avanzate
+Advanced/PluginInfo/Empty/Hint: Nessuno
+Advanced/PluginInfo/Heading: Dettagli del plugin
+Advanced/PluginInfo/Hint: Questo plugin contiene i seguenti frammenti nascosti:
+Advanced/ShadowInfo/Heading: Stato nascosto
+Advanced/ShadowInfo/NotShadow/Hint: Il frammento <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> non &egrave; un frammento nascosto
+Advanced/ShadowInfo/Shadow/Hint: Il frammento <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> &egrave; un frammento nascosto
+Advanced/ShadowInfo/Shadow/Source: &Egrave; definito nel plugin <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Advanced/ShadowInfo/OverriddenShadow/Hint: &Egrave; annullato da un frammento ordinario
+Fields/Caption: Campi
+List/Caption: Lista
+List/Empty: Questo frammento non ha una lista
+Listed/Caption: Elencato
+Listed/Empty: Questo frammento non &egrave; elencato da nessun altro
+References/Caption: Riferimenti
+References/Empty: Nessun frammento &egrave; collegato a questo
+Tagging/Caption: Categorizza
+Tagging/Empty: Non ci sono frammenti categorizzati con questo
