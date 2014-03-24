@@ -48,16 +48,10 @@ FieldManglerWidget.prototype.execute = function() {
 	this.createText  = this.getAttribute("create",false); 
 	// Process create param
 	if(this.createText) { 
-	  try{ this.createText = JSON.parse(this.createText); } 
-	  catch (e) { 
-	  	console.error('FieldMangler [' + this.mangleTitle  + ']: Invalid JSON: ' + e); 
-	  	this.createText = false; 
-	  }
-	  if(this.createText){
-	    this.createText['title'] = this.mangleTitle;  
-	    if(!this.wiki.tiddlerExists(this.mangleTitle)) 
-	      this.wiki.addTiddler(this.createText);       
-	  }
+	  var createTiddler = $tw.wiki.deserializeTiddlers("application/x-tiddler",this.createText);
+	  createTiddler[0]['title'] = this.mangleTitle;
+	  if(!this.wiki.tiddlerExists(this.mangleTitle))
+		this.wiki.addTiddler(createTiddler[0]);
 	}
 	// Construct the child widgets
 	this.makeChildWidgets();
