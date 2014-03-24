@@ -45,6 +45,23 @@ Compute the internal state of the widget
 FieldManglerWidget.prototype.execute = function() {
 	// Get our parameters
 	this.mangleTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.createText  = this.getAttribute("create",false); 
+	// Process create param
+	//if(this.createText) is false for a zero-length string. But that is fine.
+	//"create" must be valid JSON. 
+	//The "title" field will be set to mangleTitle and is not necessary.
+	if(this.createText) { 
+	  try{ this.createText = JSON.parse(this.createText); } //It should be valid JSON.
+	  catch (e) { //If not, then set to false and log error.
+	  	console.error('FieldMangler [' + this.mangleTitle  + ']: Invalid JSON: ' + e); 
+	  	this.createText = false; 
+	  }
+	  if(this.createText){
+	    this.createText['title'] = this.mangleTitle;   // make sure the tiddler title is the same as mangleTitle.
+	    if(!this.wiki.tiddlerExists(this.mangleTitle)) // Check if it exists.
+	      this.wiki.addTiddler(this.createText);       // If Not, then add it.
+	  }
+	}
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
