@@ -1,6 +1,7 @@
-title: FilterOperators
 created: 20140303091312363
-modified: 20140303091312363
+modified: 20140324221721972
+title: FilterOperators
+type: text/vnd.tiddlywiki
 
 The available filter operators are listed here. See TiddlerFilters for an introduction to tiddler filters and how they are used.
 
@@ -39,6 +40,8 @@ The available filter operators are listed here. See TiddlerFilters for an introd
 * ''bl'': another synonym for ''butlast''
 * ''nth'': selects the n-th tiddler of the list. Defaults to n = 1
 * ''indexes'': selects the names of the indexes within a [[DataTiddler|DataTiddlers]]
+* ''moduletypes'': selects the list of types of all the loaded modules
+* ''storyviews'': selects the list of names of loaded storyviews
 
 The operands available with the `is` operator are:
 
