@@ -1,8 +1,26 @@
 title: $:/language/
 
-RecentChanges/DateFormat: YYYY年0MM月0DD日
-CloseAll/Button: 全部关闭
-MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
-SystemTiddler/Tooltip: 此为系统条目
 ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全相容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
+CloseAll/Button: 全部关闭
+ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>" ?
+ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>" ?
+MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
+RecentChanges/DateFormat: YYYY年0MM月0DD日
+RelativeDate/Future/Days: <<period>> 天后
+RelativeDate/Future/Hours: <<period>> 小时后
+RelativeDate/Future/Minutes: <<period>> 分钟后
+RelativeDate/Future/Months: <<period>> 个月后
+RelativeDate/Future/Seconds: <<period>> 秒后
+RelativeDate/Future/Years: <<period>> 年后
+RelativeDate/Past/Days: <<period>> 天前
+RelativeDate/Past/Hours: <<period>> 小时前
+RelativeDate/Past/Minutes: <<period>> 分钟前
+RelativeDate/Past/Months: <<period>> 个月前
+RelativeDate/Past/Seconds: <<period>> 秒前
+RelativeDate/Past/Years: <<period>> 年前
+SystemTiddler/Tooltip: 此为系统条目
+TagManager/Tag/Heading: 标签
+TagManager/Count/Heading: 数量
+TagManager/Colour/Heading: 颜色
+TagManager/Icon/Heading: 图标
