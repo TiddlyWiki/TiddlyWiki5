@@ -25,7 +25,7 @@ var ZoominListView = function(listWidget) {
 		}
 		domNode.style.position = "absolute";
 	});
-}
+};
 
 ZoominListView.prototype.navigateTo = function(historyInfo) {
 	var duration = $tw.utils.getAnimationDuration(),
