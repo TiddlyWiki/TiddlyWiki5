@@ -245,6 +245,10 @@ a.tw-tiddlylink-external:hover {
 	line-height: 1.4em;
 }
 
+.tw-sidebar-lists input {
+	color: <<colour foreground>>;
+}
+
 .tw-sidebar-lists button {
 	color: <<colour sidebar-button-foreground>>;
 }
