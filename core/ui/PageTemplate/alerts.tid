@@ -1,0 +1,8 @@
+title: $:/core/ui/PageTemplate/alerts
+tags: $:/tags/PageTemplate
+
+<div class="tw-alerts">
+
+<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/Alert]] [!is[shadow]!has[draft.of]tag[$:/tags/Alert]] +[sort[modified]]" template="$:/core/ui/AlertTemplate" storyview="pop"/>
+
+</div>

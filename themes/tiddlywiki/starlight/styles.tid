@@ -14,7 +14,7 @@ Placeholder for a more thorough refinement of Snow White
   src: local("Arvo"), url(<<datauri "$:/themes/tiddlywiki/starlight/arvo.woff">>) format("woff");
 }
 
-html body {
+html body, .tw-sidebar-scrollable-backdrop {
 	font-family: "Arvo", "Times";
   background: url(<<datauri "$:/themes/tiddlywiki/starlight/ltbg.jpg">>);
 }

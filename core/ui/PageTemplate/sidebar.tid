@@ -1,6 +1,10 @@
 title: $:/core/ui/PageTemplate/sidebar
 tags: $:/tags/PageTemplate
 
+<div class="tw-sidebar-scrollable-backdrop"/>
+
+<$scrollable fallthrough="no" class="tw-sidebar-scrollable">
+
 <header class="sidebar-header">
 
 <div class="titlebar">{{$:/SiteTitle}}</div>
@@ -15,3 +19,5 @@ tags: $:/tags/PageTemplate
 {{$:/core/ui/SideBarLists}}
 
 </header>
+
+</$scrollable>
