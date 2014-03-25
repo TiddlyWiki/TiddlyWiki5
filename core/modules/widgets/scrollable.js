@@ -20,20 +20,22 @@ var ScrollableWidget = function(parseTreeNode,options) {
 	this.addEventListeners([
 		{type: "tw-scroll", handler: "handleScrollEvent"}
 	]);
-	this.requestAnimationFrame = window.requestAnimationFrame ||
-		window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame ||
-		function(callback) {
-			return window.setTimeout(callback, 1000/60);
-		};
-	this.cancelAnimationFrame = window.cancelAnimationFrame ||
-		window.webkitCancelAnimationFrame ||
-		window.webkitCancelRequestAnimationFrame ||
-		window.mozCancelAnimationFrame ||
-		window.mozCancelRequestAnimationFrame ||
-		function(id) {
-			window.clearTimeout(id);
-		};
+	if($tw.browser) {
+		this.requestAnimationFrame = window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			function(callback) {
+				return window.setTimeout(callback, 1000/60);
+			};
+		this.cancelAnimationFrame = window.cancelAnimationFrame ||
+			window.webkitCancelAnimationFrame ||
+			window.webkitCancelRequestAnimationFrame ||
+			window.mozCancelAnimationFrame ||
+			window.mozCancelRequestAnimationFrame ||
+			function(id) {
+				window.clearTimeout(id);
+			};
+	}
 };
 
 /*
