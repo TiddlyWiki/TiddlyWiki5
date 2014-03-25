@@ -43,6 +43,16 @@ $src$
 $$$
 
 \end
+\define wikitext-example-without-html(src)
+```
+$src$
+```
+
+Renders as:
+
+$src$
+
+\end
 \define lingo-base()
 $:/lingo/
 \end
