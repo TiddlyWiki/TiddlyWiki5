@@ -430,20 +430,11 @@ a.tw-tiddlylink-external:hover {
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
 
-	.tw-story-scrollable {
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
-
 	.tw-message-box {
 		margin: 21px -21px 21px -21px;
 	}
 
 	.tw-sidebar-scrollable {
-		z-index: 1100;
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyright}};
@@ -454,18 +445,6 @@ a.tw-tiddlylink-external:hover {
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
 		padding: 70px 0 28px 42px;
-	}
-
-	.tw-sidebar-scrollable-backdrop {
-		z-index: 1000;
-		position: fixed;
-		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
-		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyright}};
-		bottom: 0;
-		right: 0;
-		margin: 0 0 0 -42px;
-		background-color: <<colour page-background>>;
-		opacity: 0.8;	
 	}
 
 	.story-river {
