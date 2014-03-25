@@ -1,12 +1,8 @@
 title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
-<$scrollable class="tw-story-scrollable">
-
 <section class="story-river">
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} />
 
 </section>
-
-</$scrollable>
