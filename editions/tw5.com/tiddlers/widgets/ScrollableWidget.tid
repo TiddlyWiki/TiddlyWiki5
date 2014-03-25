@@ -16,7 +16,7 @@ The content of the `<$scrollable>` widget is displayed within a pair of wrapper 
 |class |The CSS class(es) to be applied to the outer DIV |
 |fallthrough |See below |
 
-If a scrollable widget can't handle the `tw-scroll` message because the inner DIV fits within the outer DIV, then by default the message falls through to the parent widget. Setting the ''fallthrough'' atribute to `no` prevents this behaviour.
+If a scrollable widget can't handle the `tw-scroll` message because the inner DIV fits within the outer DIV, then by default the message falls through to the parent widget. Setting the ''fallthrough'' attribute to `no` prevents this behaviour.
 
 ! Examples
 
