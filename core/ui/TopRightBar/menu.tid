@@ -1,0 +1,4 @@
+title: $:/core/ui/TopBar/menu
+tags: $:/tags/TopRightBar
+
+<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/menu-button}}</$button>

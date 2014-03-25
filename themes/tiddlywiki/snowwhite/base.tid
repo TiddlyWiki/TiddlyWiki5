@@ -7,10 +7,6 @@ tags: [[$:/tags/stylesheet]]
 	text-shadow: 0 1px 0 <<colour sidebar-foreground-shadow>>;
 }
 
-.tw-page-controls svg {
-	<<transition "fill 150ms ease-in-out">>
-}
-
 .tw-tiddler-info {
 	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
 }
@@ -27,7 +23,7 @@ tags: [[$:/tags/stylesheet]]
 	}
 }
 
-.tw-tiddler-controls button svg {
+.tw-page-controls button svg, .tw-tiddler-controls button svg, .tw-topbar button svg {
 	<<transition "fill 150ms ease-in-out">>
 }
 

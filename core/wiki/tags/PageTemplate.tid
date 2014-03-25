@@ -1,3 +1,3 @@
 title: $:/tags/PageTemplate
-list: [[$:/core/ui/PageTemplate/sidebar]] [[$:/core/ui/PageTemplate/story]] [[$:/core/ui/PageTemplate/alerts]]
+list: [[$:/core/ui/PageTemplate/sidebar]] [[$:/core/ui/PageTemplate/story]] [[$:/core/ui/PageTemplate/alerts]] [[$:/core/ui/PageTemplate/topleftbar]] [[$:/core/ui/PageTemplate/toprightbar]]
 
