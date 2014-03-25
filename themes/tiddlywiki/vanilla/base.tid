@@ -316,6 +316,33 @@ a.tw-tiddlylink-external:hover {
 ** Page layout
 */
 
+.tw-topbar {
+	position: fixed;
+	z-index: 1200;
+}
+
+.tw-topbar-left {
+	left: 0;
+	top: 0;
+}
+
+.tw-topbar-right {
+	top: 0;
+	right: 0;
+}
+
+.tw-topbar button {
+	padding: 8px;
+}
+
+.tw-topbar svg {
+	fill: <<colour muted-foreground>>;
+}
+
+.tw-topbar svg:hover {
+	fill: <<colour foreground>>;
+}
+
 .sidebar-header {
 	color: <<colour sidebar-foreground>>;
 }
