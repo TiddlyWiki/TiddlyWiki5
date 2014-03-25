@@ -253,7 +253,7 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour sidebar-muted-foreground>>;
 }
 
-.btn-mini:hover {
+.tw-sidebar-lists button.btn-mini:hover {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
