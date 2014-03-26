@@ -40,4 +40,4 @@ The TiddlyWebAdaptor uses a few more fields:
 |`bag` |BagField |{{$:/docs/fields/bag}} |
 |`revision` |RevisionField |{{$:/docs/fields/revision}} |
 
-See the ''Internals'' tab of the [[control panel|$:/ControlPanel]] for details of the fields used in this wiki.
+See the ''Advanced > TiddlerFields'' tab of the [[control panel|$:/ControlPanel]] for details of the fields used in this wiki.
