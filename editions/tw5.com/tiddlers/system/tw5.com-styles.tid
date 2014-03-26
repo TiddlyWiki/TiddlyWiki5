@@ -32,3 +32,10 @@ tags: $:/tags/stylesheet
 	font-weight: 500;
 	font-size: 16px;	
 }
+
+.tw-scrollable-demo {
+	border: 1px solid <<colour message-border>>;
+	background-color: <<colour message-background>>;
+	padding: 1em;
+	height: 400px;
+}

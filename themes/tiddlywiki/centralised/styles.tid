@@ -17,10 +17,10 @@ tags: [[$:/tags/stylesheet]]
 		text-align: left;
 	}
 
-	html .sidebar-header {
+	html .tw-sidebar-scrollable {
 		text-align: left;
 		left: 50%;
 		right: 0;
-		padding-left: 413px;
+		margin-left: 343px;
 	}
 }

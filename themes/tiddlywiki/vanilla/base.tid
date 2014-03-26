@@ -245,6 +245,10 @@ a.tw-tiddlylink-external:hover {
 	line-height: 1.4em;
 }
 
+.tw-sidebar-lists input {
+	color: <<colour foreground>>;
+}
+
 .tw-sidebar-lists button {
 	color: <<colour sidebar-button-foreground>>;
 }
@@ -253,7 +257,7 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour sidebar-muted-foreground>>;
 }
 
-.btn-mini:hover {
+.tw-sidebar-lists button.btn-mini:hover {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
@@ -311,6 +315,33 @@ a.tw-tiddlylink-external:hover {
 /*
 ** Page layout
 */
+
+.tw-topbar {
+	position: fixed;
+	z-index: 1200;
+}
+
+.tw-topbar-left {
+	left: 0;
+	top: 0;
+}
+
+.tw-topbar-right {
+	top: 0;
+	right: 0;
+}
+
+.tw-topbar button {
+	padding: 8px;
+}
+
+.tw-topbar svg {
+	fill: <<colour muted-foreground>>;
+}
+
+.tw-topbar svg:hover {
+	fill: <<colour foreground>>;
+}
 
 .sidebar-header {
 	color: <<colour sidebar-foreground>>;
@@ -386,8 +417,10 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+
 	.sidebar-header {
 		padding: 14px;
+		min-height: 32px;
 	}
 
 	.story-river {
@@ -397,7 +430,12 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
-	.sidebar-header {
+
+	.tw-message-box {
+		margin: 21px -21px 21px -21px;
+	}
+
+	.tw-sidebar-scrollable {
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyright}};
@@ -1067,7 +1105,6 @@ canvas.tw-edit-bitmapeditor  {
 	border: 1px solid <<colour message-border>>;
 	background: <<colour message-background>>;
 	padding: 0px 21px 0px 21px;
-	margin: 21px -21px 21px -21px;
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
@@ -1122,3 +1159,5 @@ canvas.tw-edit-bitmapeditor  {
 	margin: 4px;
 	border: 1px solid #000;
 }
+
+
