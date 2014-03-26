@@ -16,8 +16,10 @@ By default, files are output to a folder called `jermolene.github.com`, sibling 
 
 ```
 /TiddlyWork/ - Directory for working with TiddlyWiki5
-	/TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
-	/jermolene.github.com/ - Directory for output files
+  |
+  +--+-- /TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
+     |
+     +-- /jermolene.github.com/ - Directory for output files
 ```
 
 You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `bld`.

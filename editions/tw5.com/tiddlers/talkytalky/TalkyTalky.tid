@@ -4,7 +4,7 @@ tags: talkytalky
 title: TalkyTalky
 
 @@text-align:center;
-! http://five.tiddlywiki.com/
+! http://tiddlywiki.com/
 
 ! Jeremy Ruston
 
@@ -19,10 +19,10 @@ Why is TiddlyWiki different? It frees you from the monopoly platforms of the web
 
 Store your tiddlers in a single HTML file along with the JS
 
-# Open http://five.tiddlywiki.com/
+# Open http://tiddlywiki.com/
 # Show reading experience, search and tags
 # Responsive response to phone and tablet
-# Open http://five.tiddlywiki.com/empty.html in Chrome Canary
+# Open http://tiddlywiki.com/empty.html in Chrome Canary
 # Create tiddlers, show links, missing, orphans, tags, tagging, references
 # Use missing tiddlers to find a typo
 # Show shadow tiddlers and system tiddlers
@@ -48,9 +48,9 @@ Store your tiddlers in a single HTML file along with the JS
 Store your tiddlers in separate files in a chain of linked directories.
 
 # Run `./bld.sh`
-# Open http://five.tiddlywiki.com/static.html
+# Open http://tiddlywiki.com/static.html
 #* Click links to show individual tiddlers
-# Open http://five.tiddlywiki.com/test.html
+# Open http://tiddlywiki.com/test.html
 # Start `./serve.sh UserName`
 # Open http://0.0.0.0:8080/
 # Open network console
