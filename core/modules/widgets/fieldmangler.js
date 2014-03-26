@@ -71,10 +71,20 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 };
 
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
-	var tiddler = this.wiki.getTiddler(this.mangleTitle);
+	var tiddler = this.wiki.getTiddler(this.mangleTitle),
+		fieldValidatorRegEx = /^[a-z\-\._]+$/mg;
 	if(tiddler && typeof event.param === "string") {
 		var name = event.param.toLowerCase();
 		if(name !== "" && !$tw.utils.hop(tiddler.fields,name)) {
+			if(!fieldValidatorRegEx.test(name)) {
+				alert($tw.language.getString(
+					"InvalidFieldName",
+					{variables:
+						{fieldName: name}
+					}
+				));
+				return true;
+			}
 			var addition = this.wiki.getModificationFields();
 			addition[name] = "";
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
