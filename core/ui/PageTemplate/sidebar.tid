@@ -3,7 +3,9 @@ tags: $:/tags/PageTemplate
 
 <$scrollable fallthrough="no" class="tw-sidebar-scrollable">
 
-<$reveal class="sidebar-header" state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
+<div class="sidebar-header">
+
+<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
 
 <div class="titlebar">{{$:/SiteTitle}}</div>
 <div class="tw-subtitle">{{$:/SiteSubtitle}}</div>
@@ -17,5 +19,7 @@ tags: $:/tags/PageTemplate
 {{$:/core/ui/SideBarLists}}
 
 </$reveal>
+
+</div>
 
 </$scrollable>

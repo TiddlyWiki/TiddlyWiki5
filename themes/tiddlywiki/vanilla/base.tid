@@ -420,6 +420,7 @@ a.tw-tiddlylink-external:hover {
 
 	.sidebar-header {
 		padding: 14px;
+		min-height: 32px;
 	}
 
 	.story-river {
