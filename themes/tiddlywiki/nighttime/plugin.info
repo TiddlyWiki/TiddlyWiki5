@@ -1,9 +1,0 @@
-{
-	"title": "$:/themes/tiddlywiki/nighttime",
-	"name": "Night-time",
-	"author": "JeremyRuston",
-	"core-version": ">=5.0.0",
-	"plugin-type": "theme",
-	"description": "A darker theme",
-	"dependents": ["$:/themes/tiddlywiki/vanilla"]
-}
