@@ -5,6 +5,7 @@ ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: close all
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
+InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
 RecentChanges/DateFormat: DDth MMM YYYY
 RelativeDate/Future/Days: <<period>> days from now
