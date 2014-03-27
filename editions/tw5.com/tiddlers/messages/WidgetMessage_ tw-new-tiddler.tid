@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 The new tiddler message creates a new draft tiddler and adds it to the current story. It requires the following properties on the `event` object:
 
 |!Name |!Description |
-|param |Optional title of a tiddler to use as a template for the new tiddler |
+|param |Optional title of a tiddler to use as a template for the new tiddler. However, if this contains line breaks it is instead assumed to be [[application/x-tiddler|TiddlerFiles]]. |
 |navigateFromTitle |Title of the tiddler from which the navigation to the new tiddler was initiated |
 
 The new tiddler message is usually generated with the LinkWidget or the ButtonWidget and is handled by the NavigatorWidget.
