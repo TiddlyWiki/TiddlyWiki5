@@ -338,7 +338,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList();
 	// Get the template tiddler if there is one
-	var templateTiddler = this.wiki.getTiddler(event.param);
+	var parseTiddler = false;
+	if(event.param) parseTiddler = (event.param.indexOf("\n") != -1);
+	var templateTiddler = parseTiddler ? new $tw.Tiddler($tw.wiki.deserializeTiddlers("application/x-tiddler", event.param)[0]) : this.wiki.getTiddler(event.param);
 	// Create the new tiddler
 	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || "New Tiddler");
 	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
