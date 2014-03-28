@@ -86,7 +86,7 @@ SimpleServer.prototype.listen = function(port,host) {
 		var state = {};
 		state.wiki = self.wiki;
 		state.server = self;
-		state.urlInfo = url.parse(request.url);
+		state.urlInfo = url.parse(request.url, true);
 		// Find the route that matches this path
 		var route = self.findMatchingRoute(request,state);
 		// Check for the username and password if we've got one
@@ -94,7 +94,7 @@ SimpleServer.prototype.listen = function(port,host) {
 			password = self.get("password");
 		if(username && password) {
 			// Check they match
-			if(self.checkCredentials(request,username,password) !== "ALLOWED") {
+			if(self.checkCredentials(request,username,password) !== "ALLOWED" && (!route || route.anonymous !== "yes")) {
 				response.writeHead(401,"Authentication required",{
 					"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to TiddlyWiki5"'
 				});
@@ -257,6 +257,16 @@ var Command = function(params,commander,callback) {
 				response.writeHead(404);
 				response.end();
 			}
+		}
+	});
+	this.server.addRoute({
+        anonymous: "yes",
+		method: "GET",
+		path: /^\/health$/,
+		handler: function(request,response,state) {
+			response.writeHead(200, {"Content-Type": "text/plain"});
+			var text = "OKAY";
+			response.end(text,"utf8");
 		}
 	});
 };
