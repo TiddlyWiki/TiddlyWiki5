@@ -41,7 +41,7 @@ Command.prototype.execute = function() {
 				self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
 			} else {
 				for(var t=0; t<tiddlers.length; t++) {
-					self.commander.wiki.addTiddler(new $tw.Tiddler(tiddlers[t]));
+					self.commander.wiki.importTiddler(new $tw.Tiddler(tiddlers[t]));
 				}
 				self.callback(null);	
 			}
