@@ -109,6 +109,10 @@ table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
 }
 
+.tw-csv-table {
+	white-space: nowrap;
+}
+
 .tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
 	max-width: 100%;
 }
