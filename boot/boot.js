@@ -1316,7 +1316,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files","utf8"));
+				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						pathname = path.resolve(filepath,tidInfo.file),
@@ -1334,7 +1334,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				// If not, read all the files in the directory
 				$tw.utils.each(files,function(file) {
 					if(!excludeRegExp.test(file)) {
-						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
+						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp));
 					}
 				});
 			}
@@ -1355,13 +1355,13 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			// Read the plugin information
-			pluginInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.info","utf8"));
+			pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
 			// Read the plugin files
 			files = fs.readdirSync(filepath);
 			for(f=0; f<files.length; f++) {
 				file = files[f];
 				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
-					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp);
+					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp);
 					$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
 						pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
 					});
