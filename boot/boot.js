@@ -964,15 +964,17 @@ $tw.Wiki = function(options) {
 		shadowTiddlers = {};
 		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
-			$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
-				// Save the tiddler object
-				if(constituentTitle) {
-					shadowTiddlers[constituentTitle] = {
-						source: tiddler.fields.title,
-						tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-					};
-				}
-			});
+			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
+				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+					// Save the tiddler object
+					if(constituentTitle) {
+						shadowTiddlers[constituentTitle] = {
+							source: tiddler.fields.title,
+							tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+						};
+					}
+				});
+			}
 		});
 	};
 
