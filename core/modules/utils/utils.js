@@ -239,7 +239,7 @@ exports.getRelativeDate = function(delta) {
 	return {
 		delta: delta,
 		description: $tw.language.getString(
-			"RelativeDate/" + (futurep ? "Future" : "Past") + "/Seconds",
+			"RelativeDate/" + (futurep ? "Future" : "Past") + "/Second",
 			{variables:
 				{period: "1"}
 			}
@@ -450,5 +450,22 @@ exports.makeTiddlerDictionary = function(data) {
 	}
 	return output.join("\n");
 };
+
+/*
+High resolution microsecond timer for profiling
+*/
+exports.timer = function(base) {
+	var m;
+	if($tw.node) {
+		var r = process.hrtime();		
+		m =  r[0] * 1e3 + (r[1] / 1e6);
+	} else {
+		m = performance.now();
+	}
+	if(typeof base !== "undefined") {
+		m = m - base;
+	}
+	return m;
+}
 
 })();
