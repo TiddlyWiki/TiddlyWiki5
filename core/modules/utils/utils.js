@@ -459,8 +459,10 @@ exports.timer = function(base) {
 	if($tw.node) {
 		var r = process.hrtime();		
 		m =  r[0] * 1e3 + (r[1] / 1e6);
-	} else {
+	} else if(window.performance) {
 		m = performance.now();
+	} else {
+		m = new Date();
 	}
 	if(typeof base !== "undefined") {
 		m = m - base;
