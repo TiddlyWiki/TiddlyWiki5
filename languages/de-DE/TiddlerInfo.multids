@@ -1,5 +1,14 @@
 title: $:/language/TiddlerInfo/
 
+Advanced/Caption: Erweitert
+Advanced/PluginInfo/Empty/Hint: keine
+Advanced/PluginInfo/Heading: Plugin Details
+Advanced/PluginInfo/Hint: Dieses Plugin enthält folgende ~Schatten-Tiddler:
+Advanced/ShadowInfo/Heading: Shatten Status
+Advanced/ShadowInfo/NotShadow/Hint: Der Tiddler: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> ist kein ~Schatten-Tiddler.
+Advanced/ShadowInfo/Shadow/Hint: Der Tiddler: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> ist ein ~Schatten-Tiddler.
+Advanced/ShadowInfo/Shadow/Source: Er ist definiert im Plugin: <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>.
+Advanced/ShadowInfo/OverriddenShadow/Hint: Der originale ~Schatten-Tiddler wurde durch diesen Tiddler überschrieben. Wenn sie diesen Tiddler löschen, wird der originale ~Schatten-Tiddler wieder aktiv. Vorher eventuell eine Sicherungskopie erstellen!
 Fields/Caption: Felder
 List/Caption: Liste
 List/Empty: Dieser Tiddler hat kein "list" Feld.
