@@ -14,6 +14,7 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 
 // Get a reference to the file system
 var fs = !$tw.browser ? require("fs") : null;
+var path = !$tw.browser ? require("path") : null;
 
 
 function FileSystemAdaptor(syncer) {
