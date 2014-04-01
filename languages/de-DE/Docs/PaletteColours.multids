@@ -1,0 +1,100 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Warnung Hintergrund
+alert-border: Warnung Rahmen
+alert-highlight: Warnung Hervorhebung
+alert-muted-foreground: Warnung gedeckt Vordergrund
+background: Hintergrund Global
+blockquote-bar: Zitat Markierung
+code-background: Code Hintergrund
+code-border: Code Rahmen
+code-foreground: Code Vordergrund
+download-background: Herunterladen-Button Hintergrund
+download-foreground: Herunterladen-Button Vordergrund
+dragger-background: Ziehen Hintergrund
+dragger-foreground: Ziehen Vordergrund
+dropdown-background: Auswahldialog Hintergrund
+dropdown-border: Auswahldialog Rahmen
+dropdown-tab-background-selected: Auswahldialog ausgewählter Reiter Hintergrund
+dropdown-tab-background: Auswahldialog Reiter Hintergrund
+dropzone-background: Import Zone Hintergrund
+external-link-background-hover: Externer Link Hintergrund (hover)
+external-link-background-visited: Externer Link besucht Hintergrund
+external-link-background: Externer Link Hintergrund
+external-link-foreground-hover: Externer Link Vordergrund (hover)
+external-link-foreground-visited: Externer Link besucht Vordergrund
+external-link-foreground: Externer Link Vordergrund
+foreground: Vordergrund Global
+message-background: Meldungs-Box Hintergrund
+message-border: Meldungs-Box Rahmen
+message-foreground: Meldungs-Box Vordergrund
+modal-backdrop: Modaler Dialog abgedunkelt
+modal-background: Modaler Dialog Hintergrund
+modal-border: Modaler Dialog Rahmen
+modal-footer-background: Modaler Dialog Fußzeile Hintergrund
+modal-footer-border: Modaler Dialog Fußzeile Rahmen
+modal-header-border: Modaler Dialog Kopfzeile Rahmen
+muted-foreground: Global gedeckt Vordergrund
+notification-background: Mitteilung Hintergrund
+notification-border: Mitteilung Rahmen
+page-background: Seite Hintergrund
+pre-background: Formatierter Code Hintergrund
+pre-border: Formatierter Code Rahmen
+primary: Global Primary
+sidebar-button-foreground: Seitenleiste Button Vordergrund
+sidebar-controls-foreground-hover: Seitenleiste Bedienelement Vordergrund (hover)
+sidebar-controls-foreground: Seitenleiste Bedienelement Vordergrund
+sidebar-foreground-shadow: Seitenleiste Vordergrund Schatten
+sidebar-foreground: Seitenleiste Vordergrund
+sidebar-muted-foreground-hover: Seitenleiste gedeckt Vordergrund (hover)
+sidebar-muted-foreground: Seitenleiste gedeckt Vordergrund
+sidebar-tab-background-selected: Seitenleiste Reiter
+sidebar-tab-background: Seitenleiste Reiter Hintergrund
+sidebar-tab-border-selected: Seitenleiste Reiter Rahmen für selektierte Reiter
+sidebar-tab-border: Seitenleiste Reiter Rahmen
+sidebar-tab-divider: Seitenleiste Reiter Trennzeichen
+sidebar-tab-foreground-selected: Seitenleiste Reier Vordergrund für selectierte Reiter
+sidebar-tab-foreground: Seitenleiste Reiter Vordergrund
+sidebar-tiddler-link-foreground-hover: Seitenleiste Tiddler Link Vordergrund (hover)
+sidebar-tiddler-link-foreground: Seitenleiste Tiddler Link Vordergrund
+static-alert-foreground: Statische Warnung Vordergrund
+tab-background-selected: Reier Hintergrund für selektierte Reiter
+tab-background: Reiter Hintergrund
+tab-border-selected: Reiter Rahmen für selectierte Reiter
+tab-border: Reiter Rahmen
+tab-divider: Reiter Trennzeichen
+tab-foreground-selected: Reiter Vordergrund für selektierte Reiter
+tab-foreground: Reiter Vordergrund
+table-border: Tabelle Rahmen
+table-footer-background: Tabelle Fußzeile Hintergrund
+table-header-background: Tabelle Kopfzeile Hintergrund
+tag-background: Tag Hintergrund
+tag-foreground: Tag Vordergrund
+tiddler-background: Tiddler Hintergrund
+tiddler-border: Tiddler Rahmen
+tiddler-controls-foreground-hover: Tiddler Bedienelement Vordergrund (hover)
+tiddler-controls-foreground-selected: Tiddler Bedienelement Vordergrund für selektierte Elemente
+tiddler-controls-foreground: Tiddler Bedienelement Vordergrund
+tiddler-editor-background: Tiddler Editor Hintergrund
+tiddler-editor-border-image: Tiddler Editor Rahmen Bild
+tiddler-editor-border: Tiddler Editor Rahmen
+tiddler-editor-fields-even: Tiddler Editor Hintergrund geradzahlinge Felder in Tabelle
+tiddler-editor-fields-odd: Tiddler Editor Hintergrund un-geradzahlinge Felder in Tabelle
+tiddler-info-background: Tiddler Info Bereich Hintergrund
+tiddler-info-border: Tiddler Info Bereich Rahmen
+tiddler-info-tab-background: Tiddler Info Breich Reiter Hintergrund
+tiddler-link-background: Tiddler Link Hintergrund
+tiddler-link-foreground: Tiddler Link Vordergrund
+tiddler-subtitle-foreground: Tiddler Untertitel Vordergrund
+tiddler-title-foreground: Tiddler Titel Vordergrund
+toolbar-new-button: Werkzeugleiste 'Neuer Tiddler' Button Vordergrund
+toolbar-options-button: Werkzeugleiste 'Optionen' Button Vordergrund
+toolbar-save-button: Werkzeugleiste 'Speichern' Button Vordergrund
+toolbar-info-button: Werkzeugleiste 'Info' Button Vordergrund
+toolbar-edit-button: Werkzeugleiste 'Bearbeiten' Button Vordergrund
+toolbar-close-button: Werkzeugleiste 'Schließen' Button Vordergrund
+toolbar-delete-button: Werkzeugleiste 'Löschen' Button Vordergrund
+toolbar-cancel-button: Werkzeugleiste 'Abbruch' Button Vordergrund
+toolbar-done-button: Werkzeugleiste 'Fertig' Button Vordergrund
+untagged-background: (untagged) Pille Hintergrund
+very-muted-foreground: Stark abgedunkelter Vordergrund
