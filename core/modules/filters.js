@@ -218,14 +218,14 @@ exports.compileFilter = function(filterString) {
 		})());
 	});
 	// Return a function that applies the operations to a source array/hashmap of tiddler titles
-	return function(source,currTiddlerTitle) {
+	return $tw.perf.measure("filter",function filterFunction(source,currTiddlerTitle) {
 		source = source || self.getAllTitles();
 		var results = [];
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,currTiddlerTitle);
 		});
 		return results;
-	};
+	});
 };
 
 })();
