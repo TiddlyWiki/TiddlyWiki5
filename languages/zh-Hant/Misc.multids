@@ -12,16 +12,18 @@ RelativeDate/Future/Days: <<period>> 天後
 RelativeDate/Future/Hours: <<period>> 小時後
 RelativeDate/Future/Minutes: <<period>> 分鐘後
 RelativeDate/Future/Months: <<period>> 個月後
+RelativeDate/Future/Second: 1 秒後
 RelativeDate/Future/Seconds: <<period>> 秒後
 RelativeDate/Future/Years: <<period>> 年後
 RelativeDate/Past/Days: <<period>> 天前
 RelativeDate/Past/Hours: <<period>> 小時前
 RelativeDate/Past/Minutes: <<period>> 分鐘前
 RelativeDate/Past/Months: <<period>> 個月前
+RelativeDate/Past/Second: 1 秒前
 RelativeDate/Past/Seconds: <<period>> 秒前
 RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: 此為系統條目
-TagManager/Tag/Heading: 標籤
-TagManager/Count/Heading: 數量
 TagManager/Colour/Heading: 顏色
+TagManager/Count/Heading: 數量
 TagManager/Icon/Heading: 圖示
+TagManager/Tag/Heading: 標籤
