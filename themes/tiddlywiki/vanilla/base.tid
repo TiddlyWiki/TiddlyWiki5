@@ -527,6 +527,7 @@ a.tw-tiddlylink-external:hover {
 	}
 }
 
+.tw-site-title,
 .titlebar {
 	font-weight: 300;
 	font-size: 2.35em;

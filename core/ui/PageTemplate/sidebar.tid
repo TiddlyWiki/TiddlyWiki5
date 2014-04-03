@@ -7,8 +7,8 @@ tags: $:/tags/PageTemplate
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
 
-<div class="titlebar">{{$:/SiteTitle}}</div>
-<div class="tw-subtitle">{{$:/SiteSubtitle}}</div>
+<div class="tw-site-title">{{$:/SiteTitle}}</div>
+<div class="tw-site-subtitle">{{$:/SiteSubtitle}}</div>
 
 <div class="tw-page-controls">
 
