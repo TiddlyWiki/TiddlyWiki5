@@ -12,7 +12,7 @@ Submit new entries to this collection of articles via GitHub, Twitter or by post
 
 <div class="tw-link-info-item">
 
-! <$view field="title"/>
+! <$link><$view field="title"/></$link>
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
