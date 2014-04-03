@@ -275,6 +275,23 @@ exports.countTiddlers = function(excludeTag) {
 };
 
 /*
+Returns a function iterator(callback) that iterates through the specified titles, and invokes the callback with callback(tiddler,title)
+*/
+exports.makeTiddlerIterator = function(titles) {
+	var self = this;
+	if(!$tw.utils.isArray(titles)) {
+		titles = Object.keys(titles);
+	} else {
+		titles = titles.slice(0);
+	}
+	return function(callback) {
+		titles.forEach(function(title) {
+			callback(self.getTiddler(title),title);
+		});
+	};
+};
+
+/*
 Sort an array of tiddler titles by a specified field
 	titles: array of titles (sorted in place)
 	sortField: name of field to sort by
@@ -877,7 +894,7 @@ Return an array of tiddler titles that match a search string
 	text: The text string to search for
 	options: see below
 Options available:
-	titles:  Hashmap or array of tiddler titles to limit search
+	source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
@@ -932,28 +949,13 @@ exports.search = function(text,options) {
 		return true;
 	};
 	// Loop through all the tiddlers doing the search
-	var results = [];
-	if($tw.utils.isArray(options.titles)) {
-		for(t=0; t<options.titles.length; t++) {
-			if(!!searchTiddler(options.titles[t]) === !options.invert) {
-				results.push(options.titles[t]);
-			}
+	var results = [],
+		source = options.source || this.each;
+	source(function(tiddler,title) {
+		if(!!searchTiddler(title) === !options.invert) {
+			results.push(title);
 		}
-	} else {
-		if(options.titles) {
-			for(var title in options.titles) {
-				if(!!searchTiddler(title) === !options.invert) {
-					results.push(title);
-				}
-			}
-		} else {
-			this.each(function(tiddler,title) {
-				if(!!searchTiddler(title) === !options.invert) {
-					results.push(title);
-				}
-			});
-		}
-	}
+	});
 	// Remove any of the results we have to exclude
 	if(options.exclude) {
 		for(t=0; t<options.exclude.length; t++) {

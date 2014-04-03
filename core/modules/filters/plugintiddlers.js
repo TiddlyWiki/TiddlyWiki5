@@ -16,30 +16,15 @@ Filter operator for returning the titles of the shadow tiddlers within a plugin
 Export our filter function
 */
 exports.plugintiddlers = function(source,operator,options) {
-	var results = [],
-		pushShadows;
-	switch(operator.operand) {
-		default:
-		 	pushShadows = function(title) {
-		 		var pluginInfo = options.wiki.getPluginInfo(title);
-		 		if(pluginInfo) {
-		 			$tw.utils.each(pluginInfo.tiddlers,function(fields,title) {
-		 				results.push(title);
-		 			});
-		 		}
-			};
-			break;
-	}
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			pushShadows(title);
-		});
-	} else {
-		$tw.utils.each(source,function(element,title) {
-			pushShadows(title);
-		});
-	}
+	var results = [];
+	source(function(tiddler,title) {
+ 		var pluginInfo = options.wiki.getPluginInfo(title);
+ 		if(pluginInfo) {
+ 			$tw.utils.each(pluginInfo.tiddlers,function(fields,title) {
+ 				results.push(title);
+ 			});
+ 		}
+	});
 	results.sort();
 	return results;
 };

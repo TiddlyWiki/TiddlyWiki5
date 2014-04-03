@@ -8,7 +8,7 @@ title: $:/core/ui/MissingTemplate
 <div class="tw-drop-down">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
-<$list filter="[is[current]backlinks[]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[current]backlinks[]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
 </div>
 </$reveal>
 </div>

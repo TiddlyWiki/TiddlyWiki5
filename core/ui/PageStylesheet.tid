@@ -47,6 +47,6 @@ background-image: -ms-linear-gradient($gradient$);
 <$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
 \end
 
-<$list filter="[is[shadow]tag[$:/tags/stylesheet]] [!is[shadow]tag[$:/tags/stylesheet]]">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/stylesheet]]">
 <$transclude/>
 </$list>

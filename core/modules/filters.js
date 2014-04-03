@@ -3,7 +3,7 @@ title: $:/core/modules/filters.js
 type: application/javascript
 module-type: wikimethod
 
-Adds tiddler filtering to the $tw.Wiki object.
+Adds tiddler filtering methods to the $tw.Wiki object.
 
 \*/
 (function(){
@@ -149,11 +149,16 @@ exports.getFilterOperators = function() {
 	return this.filterOperators;
 };
 
-exports.filterTiddlers = function(filterString,currTiddlerTitle,tiddlerList) {
+exports.filterTiddlers = function(filterString,currTiddlerTitle,source) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,tiddlerList,currTiddlerTitle);
+	return fn.call(this,source,currTiddlerTitle);
 };
 
+/*
+Compile a filter into a function with the signature fn(source,currTiddlerTitle) where:
+source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
+currTiddlerTitle: the optional name of the current tiddler
+*/
 exports.compileFilter = function(filterString) {
 	var filterParseTree;
 	try {
@@ -175,10 +180,15 @@ exports.compileFilter = function(filterString) {
 			var accumulator = source,
 				results = [];
 			$tw.utils.each(operation.operators,function(operator) {
-				var operatorFunction = filterOperators[operator.operator] || filterOperators.field || function(source,operator,operations) {
-						return ["Filter Error: unknown operator '" + operator.operator + "'"];
-					},
-					operand = operator.operand;
+				var operand = operator.operand,
+					operatorFunction;
+				if(!operator.operator) {
+					operatorFunction = filterOperators.title;
+				} else if(!filterOperators[operator.operator]) {
+					operatorFunction = filterOperators.field;
+				} else {
+					operatorFunction = filterOperators[operator.operator];
+				}
 				if(operator.indirect) {
 					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
 				}
@@ -192,7 +202,7 @@ exports.compileFilter = function(filterString) {
 							wiki: self,
 							currTiddlerTitle: currTiddlerTitle
 						});
-				accumulator = results;
+				accumulator = self.makeTiddlerIterator(results);
 			});
 			return results;
 		};
@@ -210,16 +220,20 @@ exports.compileFilter = function(filterString) {
 				case "+": // This operation is applied to the main results so far
 					return function(results,source,currTiddlerTitle) {
 						// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
-						source = results.slice(0);
+						source = self.makeTiddlerIterator(results);
 						results.splice(0,results.length);
 						$tw.utils.pushTop(results,operationSubFunction(source,currTiddlerTitle));
 					};
 			}
 		})());
 	});
-	// Return a function that applies the operations to a source array/hashmap of tiddler titles
+	// Return a function that applies the operations to a source iterator of tiddler titles
 	return $tw.perf.measure("filter",function filterFunction(source,currTiddlerTitle) {
-		source = source || self.getAllTitles();
+		if(!source) {
+			source = self.each;
+		} else if(typeof source === "object") { // Array or hashmap
+			source = self.makeTiddlerIterator(source);
+		}
 		var results = [];
 		$tw.utils.each(operationFunctions,function(operationFunction) {
 			operationFunction(results,source,currTiddlerTitle);

@@ -17,20 +17,16 @@ Export our filter function
 */
 exports.limit = function(source,operator,options) {
 	var results = [];
-	// Convert to an array if necessary
-	if(!$tw.utils.isArray(source)) {
-		var copy = [];
-		$tw.utils.each(source,function(element,title) {
-			copy.push(title);
-		});
-		source = copy;
-	}
+	// Convert to an array
+	source(function(tiddler,title) {
+		results.push(title);
+	});
 	// Slice the array if necessary
-	var limit = Math.min(source.length,parseInt(operator.operand,10));
+	var limit = Math.min(results.length,parseInt(operator.operand,10));
 	if(operator.prefix === "!") {
-		results = source.slice(source.length - limit);
+		results = results.slice(-limit);
 	} else {
-		results = source.slice(0,limit);
+		results = results.slice(0,limit);
 	}
 	return results;
 };

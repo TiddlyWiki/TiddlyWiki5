@@ -36,7 +36,7 @@ This wiki text shows how to display a list within the scrollable widget:
 <<wikitext-example-without-html "<$scrollable class='tw-scrollable-demo'>
 <$list filter='[!is[system]]'>
 
-<$view field='title'/>: <$list filter='[is[current]links[]sort[title]]' storyview='pop'>
+<$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>
 <$link><$view field='title'/></$link>
 </$list>
 
