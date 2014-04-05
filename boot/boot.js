@@ -73,13 +73,11 @@ Iterate through all the own properties of an object or array. Callback is invoke
 $tw.utils.each = function(object,callback) {
 	var f;
 	if(object) {
-		if($tw.utils.isArray(object)) {
-			for(f=0; f<object.length; f++) {
-				callback(object[f],f,object);
-			}
+		if(Object.prototype.toString.call(object) == "[object Array]") {
+			object.forEach(callback);
 		} else {
 			for(f in object) {
-				if($tw.utils.hop(object,f)) {
+				if(Object.prototype.hasOwnProperty.call(object,f)) {
 					callback(object[f],f,object);
 				}
 			}
@@ -840,20 +838,16 @@ $tw.Wiki = function(options) {
 		var t = tiddlers[title];
 		if(t instanceof $tw.Tiddler) {
 			return t;
-		} else if(title !== undefined && $tw.utils.hop(shadowTiddlers,title)) {
+		} else if(title !== undefined && Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
 			return shadowTiddlers[title].tiddler;
 		} else {
 			return undefined;
 		}
 	};
 
-	// Get a hashmap of all tiddler titles
-	this.getAllTitles = function() {
-		var results = {};
-		for(var title in tiddlers) {
-			results[title] = true;
-		}
-		return results;
+	// Get an array of all tiddler titles
+	this.allTitles = function() {
+		return Object.keys(tiddlers);
 	};
 
 	// Iterate through all tiddler titles
@@ -861,6 +855,11 @@ $tw.Wiki = function(options) {
 		for(var title in tiddlers) {
 			callback(tiddlers[title],title);
 		}
+	};
+
+	// Get an array of all shadow tiddler titles
+	this.allShadowTitles = function() {
+		return Object.keys(shadowTiddlers);
 	};
 
 	// Iterate through all shadow tiddler titles

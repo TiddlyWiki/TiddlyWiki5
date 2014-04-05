@@ -16,11 +16,7 @@ Filter function for [all[shadows]]
 Export our filter function
 */
 exports.shadows = function(source,prefix,options) {
-	var results = [];
-	options.wiki.eachShadow(function(tiddler,title) {
-		results.push(title);
-	});
-	return results;
+	return options.wiki.allShadowTitles();
 };
 
 })();

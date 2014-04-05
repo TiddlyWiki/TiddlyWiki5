@@ -16,11 +16,7 @@ Filter function for [all[tiddlers]]
 Export our filter function
 */
 exports.tiddlers = function(source,prefix,options) {
-	var results = [];
-	options.wiki.each(function(tiddler,title) {
-		results.push(title);
-	});
-	return results;
+	return options.wiki.allTitles();
 };
 
 })();
