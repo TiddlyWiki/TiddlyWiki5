@@ -1,3 +1,3 @@
 title: $:/core/ui/TiddlerInfo
 
-<<tabs "[all[tiddlers+shadows]!has[draft.of]tag[$:/tags/TiddlerInfo]]" "$:/core/ui/TiddlerInfo/References">>
+<<tabs "[all[tiddlers+shadows]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/References">>

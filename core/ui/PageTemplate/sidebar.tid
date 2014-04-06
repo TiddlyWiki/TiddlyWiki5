@@ -12,7 +12,7 @@ tags: $:/tags/PageTemplate
 
 <div class="tw-page-controls">
 
-<$list filter="[all[tiddlers+shadows]!has[draft.of]tag[$:/tags/PageControls]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 
 </div>
 

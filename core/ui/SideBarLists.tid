@@ -26,7 +26,7 @@ title: $:/core/ui/SideBarLists
 
 <$reveal state="$:/temp/search" type="match" text="">
 
-<<tabs "[all[tiddlers+shadows]!has[draft.of]tag[$:/tags/SideBar]]" "$:/core/ui/SideBar/Open" "$:/state/tab/sidebar">>
+<<tabs "[all[tiddlers+shadows]tag[$:/tags/SideBar]!has[draft.of]]" "$:/core/ui/SideBar/Open" "$:/state/tab/sidebar">>
 
 </$reveal>
 </div>

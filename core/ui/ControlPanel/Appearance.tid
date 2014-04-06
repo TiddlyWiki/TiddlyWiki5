@@ -5,5 +5,5 @@ caption: {{$:/language/ControlPanel/Appearance/Caption}}
 {{$:/language/ControlPanel/Appearance/Hint}}
 
 <div class="tw-control-panel">
-<<tabs "[all[tiddlers+shadows]!has[draft.of]tag[$:/tags/ControlPanel/Appearance]]" "$:/core/ui/ControlPanel/Appearance/Theme">>
+<<tabs "[all[tiddlers+shadows]tag[$:/tags/ControlPanel/Appearance]!has[draft.of]]" "$:/core/ui/ControlPanel/Appearance/Theme">>
 </div>

@@ -3,6 +3,6 @@ tags: $:/tags/PageTemplate
 
 <div class="tw-alerts">
 
-<$list filter="[all[tiddlers+shadows]!has[draft.of]tag[$:/tags/Alert]]" template="$:/core/ui/AlertTemplate" storyview="pop"/>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Alert]!has[draft.of]]" template="$:/core/ui/AlertTemplate" storyview="pop"/>
 
 </div>

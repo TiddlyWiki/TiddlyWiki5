@@ -3,6 +3,6 @@ title: $:/core/ui/ViewTemplate
 \define frame-classes()
 tw-tiddler-frame tw-tiddler-view-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
-<$set name="storyTiddler" value=<<currentTiddler>>><$set name="tiddlerInfoState" value=<<qualify "$:/state/tiddlerInfo">>><$tiddler tiddler=<<currentTiddler>>><div class=<<frame-classes>>><$list filter="[all[tiddlers+shadows]!has[draft.of]tag[$:/tags/ViewTemplate]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+<$set name="storyTiddler" value=<<currentTiddler>>><$set name="tiddlerInfoState" value=<<qualify "$:/state/tiddlerInfo">>><$tiddler tiddler=<<currentTiddler>>><div class=<<frame-classes>>><$list filter="[all[tiddlers+shadows]tag[$:/tags/ViewTemplate]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 </div>
 </$tiddler></$set></$set>
