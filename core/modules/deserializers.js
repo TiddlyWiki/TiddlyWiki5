@@ -133,12 +133,6 @@ function deserializeHtmlFile(text,fields) {
 	return [result];
 }
 
-/*
-Parse an HTA file into tiddlers.
-same possibilities as with html files 
-*/
-exports["application/hta"] = exports["text/html"]
-
 function deserializeTiddlyWikiFile(text,storeAreaEnd,isTiddlyWiki5,fields) {
 	var results = [],
 		endOfDivRegExp = /(<\/div>\s*)/gi,
