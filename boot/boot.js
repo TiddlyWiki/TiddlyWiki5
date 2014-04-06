@@ -380,7 +380,7 @@ flags: "image" for image types
 */
 $tw.utils.registerFileType = function(type,encoding,extension,flags) {
 	$tw.config.fileExtensionInfo[extension] = {type: type};
-	$tw.config.contentTypeInfo[type] = { extension: { encoding: encoding, extension: extension, flags: flags || [] } };
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: flags || []};
 };
 
 /*
@@ -1284,7 +1284,7 @@ $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
 		extensionInfo = $tw.config.fileExtensionInfo[ext],
 		type = extensionInfo ? extensionInfo.type : null,
-		typeInfo = type ? $tw.config.contentTypeInfo[type][ext] : null,
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
 		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
 		tiddlers = $tw.wiki.deserializeTiddlers(ext,data,fields),
 		metafile = filepath + ".meta",
@@ -1320,9 +1320,8 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				// If so, process the files it describes
 				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
-					var pathname = path.resolve(filepath,tidInfo.file),
-						ext = path.extname(pathname),
-						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"][ext],
+					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
+						pathname = path.resolve(filepath,tidInfo.file),
 						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
 					if(tidInfo.prefix) {
 						text = tidInfo.prefix + text;
@@ -1563,7 +1562,7 @@ $tw.boot.startup = function(options) {
 			wikiTiddlersSubDir: "./tiddlers",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
 			fileExtensionInfo: {}, // Map file extension to {type:}
-			contentTypeInfo: {} // Map type to { extension: {encoding:,extension:}
+			contentTypeInfo: {} // Map type to {encoding:,extension:}
 		}
 	});
 	if(!options.readBrowserTiddlers) {
@@ -1601,7 +1600,6 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
-	$tw.utils.registerFileType("text/html","utf16le",".hta");
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",["image"]);

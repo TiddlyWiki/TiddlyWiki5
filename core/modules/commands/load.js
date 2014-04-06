@@ -30,16 +30,13 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing filename";
 	}
-	var ext = path.extname(self.params[0]);
-	var encoding = ext.localeCompare(".hta") == 0 ? "utf16le" : "utf8";
-
-	fs.readFile(this.params[0], encoding, function (err, data) {
-		if (err) {
+	fs.readFile(this.params[0],"utf8",function(err,data) {
+		if(err) {
 			self.callback(err);
 		} else {
 			var fields = {title: self.params[0]},
 				type = path.extname(self.params[0]);
-			var tiddlers = self.commander.wiki.deserializeTiddlers(type, type.localeCompare(".hta") == 0 ? data.substring(1) : data, fields);
+			var tiddlers = self.commander.wiki.deserializeTiddlers(type,data,fields);
 			if(!tiddlers) {
 				self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
 			} else {
