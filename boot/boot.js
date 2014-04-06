@@ -397,7 +397,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
-		fn = window["eval"](code);
+		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
 		fn = vm.runInThisContext(code,filename);		
 	}
