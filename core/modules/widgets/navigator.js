@@ -26,7 +26,7 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
 		{type: "tw-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
 		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"},
-		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"},
+		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"}
 	]);
 };
 
