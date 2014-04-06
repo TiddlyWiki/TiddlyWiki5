@@ -803,10 +803,10 @@ shadowTiddlers: Array of shadow tiddlers to be added
 $tw.Wiki = function(options) {
 	options = options || {};
 	var self = this,
-		tiddlers = {}, // Hashmap of tiddlers
+		tiddlers = Object.create(null), // Hashmap of tiddlers
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
-		pluginInfo = {}, // Hashmap of parsed plugin content
-		shadowTiddlers = options.shadowTiddlers || {}; // Hashmap by title of {source:, tiddler:}
+		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
+		shadowTiddlers = options.shadowTiddlers || Object.create(null); // Hashmap by title of {source:, tiddler:}
 
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {

@@ -57,7 +57,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 		title = tr.title || currTiddlerTitle;
 	// Check if it is a reference to a tiddler field
 	if(tr.index) {
-		var data = this.getTiddlerData(title,{});
+		var data = this.getTiddlerData(title,Object.create(null));
 		data[tr.index] = value;
 		this.setTiddlerData(title,data,this.getModificationFields());
 	} else {
@@ -79,7 +79,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 		title = tr.title || currTiddlerTitle;
 		tiddler = this.getTiddler(title);
 		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
-			fields = {};
+			fields = Object.create(null);
 			fields[tr.field] = undefined;
 			this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 		}
@@ -122,11 +122,11 @@ This method should be called after the changes it describes have been made to th
 */
 exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Record the touch in the list of changed tiddlers
-	this.changedTiddlers = this.changedTiddlers || {};
-	this.changedTiddlers[title] = this.changedTiddlers[title] || {};
+	this.changedTiddlers = this.changedTiddlers || Object.create(null);
+	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
 	// Increment the change count
-	this.changeCount = this.changeCount || {};
+	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
 		this.changeCount[title]++;
 	} else {
@@ -138,7 +138,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 		var self = this;
 		$tw.utils.nextTick(function() {
 			var changes = self.changedTiddlers;
-			self.changedTiddlers = {};
+			self.changedTiddlers = Object.create(null);
 			self.eventsTriggered = false;
 			self.dispatchEvent("change",changes);
 		});
@@ -147,7 +147,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 };
 
 exports.getChangeCount = function(title) {
-	this.changeCount = this.changeCount || {};
+	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
 		return this.changeCount[title];
 	} else {
@@ -223,7 +223,7 @@ exports.getCreationFields = function() {
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = {},
+	var fields = Object.create(null),
 		modifier = this.getTiddlerText(USER_NAME_TITLE);
 	fields.modified = new Date();
 	if(modifier) {
@@ -239,7 +239,7 @@ excludeTag: tag to exclude
 includeSystem: whether to include system tiddlers (defaults to false)
 */
 exports.getTiddlers = function(options) {
-	options = options || {};
+	options = options || Object.create(null);
 	var self = this,
 		sortField = options.sortField || "title",
 		tiddlers = [], t, titles = [];
@@ -448,7 +448,7 @@ Get a hashmap by tag of arrays of tiddler titles
 exports.getTagMap = function() {
 	var self = this;
 	return this.getGlobalCache("tagmap",function() {
-		var tags = {},
+		var tags = Object.create(null),
 			storeTags = function(tagArray,title) {
 				if(tagArray) {
 					for(var index=0; index<tagArray.length; index++) {
@@ -549,7 +549,7 @@ Retrieve a tiddler as a JSON string of the fields
 exports.getTiddlerAsJson = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = {};
+		var fields = Object.create(null);
 		$tw.utils.each(tiddler.fields,function(value,name) {
 			fields[name] = tiddler.getFieldString(name);
 		});
@@ -591,7 +591,7 @@ exports.getTiddlerData = function(title,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(title,index,defaultText) {
-	var data = this.getTiddlerData(title,{}),
+	var data = this.getTiddlerData(title,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -640,7 +640,7 @@ exports.getTiddlerList = function(title,field,index) {
 
 // Return a named global cache object. Global cache objects are cleared whenever a tiddler change occurs
 exports.getGlobalCache = function(cacheName,initializer) {
-	this.globalCache = this.globalCache || {};
+	this.globalCache = this.globalCache || Object.create(null);
 	if($tw.utils.hop(this.globalCache,cacheName)) {
 		return this.globalCache[cacheName];
 	} else {
@@ -650,7 +650,7 @@ exports.getGlobalCache = function(cacheName,initializer) {
 };
 
 exports.clearGlobalCache = function() {
-	this.globalCache = {};
+	this.globalCache = Object.create(null);
 }
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
@@ -659,13 +659,13 @@ exports.getCacheForTiddler = function(title,cacheName,initializer) {
 // Temporarily disable caching so that tweakParseTreeNode() works
 return initializer();
 
-	this.caches = this.caches || {};
+	this.caches = this.caches || Object.create(null);
 	var caches = this.caches[title];
 	if(caches && caches[cacheName]) {
 		return caches[cacheName];
 	} else {
 		if(!caches) {
-			caches = {};
+			caches = Object.create(null);
 			this.caches[title] = caches;
 		}
 		caches[cacheName] = initializer();
@@ -675,7 +675,7 @@ return initializer();
 
 // Clear all caches associated with a particular tiddler
 exports.clearCache = function(title) {
-	this.caches = this.caches || {};
+	this.caches = this.caches || Object.create(null);
 	if($tw.utils.hop(this.caches,title)) {
 		delete this.caches[title];
 	}
