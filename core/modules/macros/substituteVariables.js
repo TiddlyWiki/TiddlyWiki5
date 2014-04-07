@@ -5,7 +5,7 @@ module-type: macro
 
 Macro to substitute $(variables)$ in text or the text of the specified tiddler.
 
-<<processVariables text:"Text to be converted" tiddler:"Name of tiddler">>
+<<substituteVariables text:"Text to be converted" tiddler:"Name of tiddler">>
 
 If text evaluates to true, tiddler is ignored.
 
@@ -16,7 +16,7 @@ If text evaluates to true, tiddler is ignored.
 /*global $tw: false */
 "use strict";
 
-exports.name = "processVariables";
+exports.name = "substituteVariables";
 
 exports.params = [
 	{name: "text"},
