@@ -4,7 +4,11 @@ tags: tips
 title: Editing Tiddlers with Emacs
 type: text/vnd.tiddlywiki
 
-This [[Emacs|http://www.gnu.org/software/emacs/]] macro from Michael Fogleman simplifies editing tiddlers in `*.tid` files by automatically updating the `modified` field:
+This [[Emacs|http://www.gnu.org/software/emacs/]] function from Michael Fogleman simplifies editing tiddlers in `*.tid` files by automatically updating the `modified` field.
+
+If you have Emacs, you can save this function somewhere (such as in your init file). When you finish editing a tiddler, you can call the function, and it will update the modified time.
+
+> Help Wanted: Even better would be a TiddlyWiki-mode that used this function as a save-hook
 
 ```
 (defun tid-time ()
