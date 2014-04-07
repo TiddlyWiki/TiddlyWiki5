@@ -20,3 +20,4 @@ The field mangler widget displays any contained content, and responds to WidgetM
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |
+|create |Creates the tiddler to be manipulated, if it does not exist, using the specified [[.tid|TiddlerFiles]] content. |

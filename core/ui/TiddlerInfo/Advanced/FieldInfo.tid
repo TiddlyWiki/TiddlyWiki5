@@ -1,0 +1,6 @@
+title: $:/core/ui/TiddlerInfo/Advanced/FieldInfo
+tags: $:/tags/TiddlerInfo/Advanced
+
+<h2>.tid field data</h2>
+<pre><$fields exclude='text bag' template='$name$: $value$
+'></$fields></pre>
