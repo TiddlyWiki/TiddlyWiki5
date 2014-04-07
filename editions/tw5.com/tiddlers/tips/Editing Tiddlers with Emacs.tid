@@ -1,10 +1,10 @@
 created: 20140406210404245
-modified: 20140407105002664
+modified: 20140406210649764
 tags: tips
 title: Editing Tiddlers with Emacs
 type: text/vnd.tiddlywiki
 
-This [[Emacs|http://www.gnu.org/software/emacs/]] function from Michael Fogleman simplifies editing tiddlers in `*.tid` files by automatically updating the `modified` field:
+This [[Emacs|http://www.gnu.org/software/emacs/]] macro from Michael Fogleman simplifies editing tiddlers in `*.tid` files by automatically updating the `modified` field:
 
 ```
 (defun tid-time ()
