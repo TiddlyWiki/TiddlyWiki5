@@ -14,7 +14,7 @@ Submit new entries to this collection via GitHub, Twitter or by posting in the [
 
 <div class="tw-link-info-item">
 
-! <$view field="title"/>
+! <$link><$view field="title"/></$link>
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 

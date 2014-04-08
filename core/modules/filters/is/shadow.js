@@ -17,31 +17,18 @@ Export our filter function
 */
 exports.shadow = function(source,prefix,options) {
 	var results = [];
-	// Function to check a tiddler
-	function checkTiddler(title) {
-		var match = options.wiki.isShadowTiddler(title);
-		if(prefix === "!") {
-			match = !match;
-		}
-		if(match) {
-			results.push(title);
-		}
-	};
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			checkTiddler(title);
+	if(prefix === "!") {
+		source(function(tiddler,title) {
+			if(!options.wiki.isShadowTiddler(title)) {
+				results.push(title);
+			}
 		});
 	} else {
-		if(prefix !== "!") {
-			options.wiki.eachShadow(function(tiddler,title) {
+		source(function(tiddler,title) {
+			if(options.wiki.isShadowTiddler(title)) {
 				results.push(title);
-			});
-		} else {
-			$tw.utils.each(source,function(element,title) {
-				checkTiddler(title);
-			});
-		}
+			}
+		});
 	}
 	return results;
 };

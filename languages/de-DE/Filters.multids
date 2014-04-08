@@ -1,0 +1,12 @@
+title: $:/language/Filters/
+
+AllTiddlers: Alle Tiddler außer ~System-Tiddler
+RecentTiddlers: Kürzlich veränderte Tiddler
+AllTags: Alle Tags außer ~System-Tags
+Missing: Fehlende Tiddler
+Drafts: Entwurf Tiddler
+Orphans: Waisen Tiddler
+SystemTiddlers: ~System-Tiddler
+ShadowTiddlers: ~Schatten-Tiddler
+OverriddenShadowTiddlers: Überschriebene ~Schatten-Tiddler
+SystemTags: ~System-Tags

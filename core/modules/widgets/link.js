@@ -56,17 +56,18 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Create our element
 	var domNode = this.document.createElement("a");
 	// Assign classes
-	$tw.utils.addClass(domNode,"tw-tiddlylink");
+	var classes = ["tw-tiddlylink"];
 	if(this.isShadow) {
-		$tw.utils.addClass(domNode,"tw-tiddlylink-shadow");
+		classes.push("tw-tiddlylink-shadow");
 	}
 	if(this.isMissing && !this.isShadow) {
-		$tw.utils.addClass(domNode,"tw-tiddlylink-missing");
+		classes.push("tw-tiddlylink-missing");
 	} else {
 		if(!this.isMissing) {
-			$tw.utils.addClass(domNode,"tw-tiddlylink-resolves");
+			classes.push("tw-tiddlylink-resolves");
 		}
 	}
+	domNode.setAttribute("class",classes.join(" "));
 	// Set an href
 	var wikiLinkTemplateMacro = this.getVariable("tw-wikilink-template"),
 		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
@@ -74,7 +75,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
 	// Set the tooltip
-	var tooltipWikiText = this.tooltip || this.getVariable("tw-wikilink-tooltip",{defaultValue: "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"});
+	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
+	var tooltipWikiText = this.tooltip || this.getVariable("tw-wikilink-tooltip");
 	if(tooltipWikiText) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
 				parseAsInline: true,

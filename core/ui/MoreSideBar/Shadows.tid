@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Shadows
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Shadows/Caption}}
 
-<$list filter="[is[shadow]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[shadows]sort[title]]" template="$:/core/ui/ListItemTemplate"/>

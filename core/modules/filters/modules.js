@@ -16,22 +16,12 @@ Filter operator for returning the titles of the modules of a given type in this 
 Export our filter function
 */
 exports.modules = function(source,operator,options) {
-	var results = [],
-		pushModules = function(type) {
-			$tw.utils.each($tw.modules.types[type],function(moduleInfo,moduleName) {
-				results.push(moduleName);
-			});
-		};
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			pushModules(title);
+	var results = [];
+	source(function(tiddler,title) {
+		$tw.utils.each($tw.modules.types[title],function(moduleInfo,moduleName) {
+			results.push(moduleName);
 		});
-	} else {
-		$tw.utils.each(source,function(element,title) {
-			pushModules(title);
-		});
-	}
+	});
 	results.sort();
 	return results;
 };

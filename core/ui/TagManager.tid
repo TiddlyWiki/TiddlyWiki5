@@ -7,7 +7,7 @@ title: $:/TagManager
 <$reveal state=<<qualify "$:/state/iconDropdown/$title$">> type="nomatch" text="" default="">
 <$linkcatcher to="$title$!!icon">
 <div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[is[shadow]is[image]] [!is[shadow]is[image]] [is[shadow]tag[$:/tags/Image]] [!is[shadow]tag[$:/tags/Image]] +[sort[title]]">
+<$list filter="[all[tiddlers+shadows]is[image]] [all[tiddlers+shadows]tag[$:/tags/Image]] +[sort[title]]">
 <$link to={{!!title}}>
 <$view field="title"/>
 </$link>
@@ -28,7 +28,7 @@ title: $:/TagManager
 <$list filter="[tags[]!is[system]sort[title]]">
 <tr>
 <td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
-<td><$count filter="[is[current]tagging[]]"/></td>
+<td><$count filter="[all[current]tagging[]]"/></td>
 <td><$edit-text field="color" tag="input" type="color"/></td>
 <td><$macrocall $name="iconEditor" title={{!!title}}/></td>
 </tr>

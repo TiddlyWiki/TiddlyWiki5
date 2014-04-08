@@ -17,23 +17,11 @@ Export our filter function
 */
 exports.tags = function(source,operator,options) {
 	var results = [];
-	// Function to check an individual title
-	function checkTiddler(title) {
-		var tiddler = options.wiki.getTiddler(title);
+	source(function(tiddler,title) {
 		if(tiddler && tiddler.fields.tags) {
 			$tw.utils.pushTop(results,tiddler.fields.tags);
 		}
-	}
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			checkTiddler(title);
-		});
-	} else {
-		$tw.utils.each(source,function(element,title) {
-			checkTiddler(title);
-		});
-	}
+	});
 	return results;
 };
 

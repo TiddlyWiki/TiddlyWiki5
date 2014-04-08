@@ -17,27 +17,17 @@ Export our filter function
 */
 exports.has = function(source,operator,options) {
 	var results = [];
-	// Function to check an individual title
-	function checkTiddler(title) {
-		var tiddler = options.wiki.getTiddler(title);
-		if(tiddler) {
-			var match = $tw.utils.hop(tiddler.fields,operator.operand) && tiddler.fields[operator.operand] !== "";
-			if(operator.prefix === "!") {
-				match = !match;
-			}
-			if(match) {
+	if(operator.prefix === "!") {
+		source(function(tiddler,title) {
+			if(tiddler && (!$tw.utils.hop(tiddler.fields,operator.operand) || tiddler.fields[operator.operand] === "")) {
 				results.push(title);
 			}
-		}
-	}
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			checkTiddler(title);
 		});
 	} else {
-		$tw.utils.each(source,function(element,title) {
-			checkTiddler(title);
+		source(function(tiddler,title) {
+			if(tiddler && $tw.utils.hop(tiddler.fields,operator.operand) && tiddler.fields[operator.operand] !== "") {
+				results.push(title);
+			}
 		});
 	}
 	return results;

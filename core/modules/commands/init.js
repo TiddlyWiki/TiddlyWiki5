@@ -34,7 +34,7 @@ Command.prototype.execute = function() {
 	for(var editionIndex=0; editionIndex<editions.length; editionIndex++) {
 		var editionName = editions[editionIndex];
 		// Check the edition exists
-		var editionPath = path.resolve($tw.boot.corePath,$tw.config.editionsPath) + "/" + editionName;
+		var editionPath = path.resolve($tw.boot.corePath,$tw.config.editionsPath) + path.sep + editionName;
 		if(!$tw.utils.isDirectory(editionPath)) {
 			return "Edition '" + editionName + "' not found";
 		}

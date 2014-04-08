@@ -32,8 +32,8 @@ if(!$tw) {
 	$tw = require("./bootprefix.js").bootprefix();
 }
 
-$tw.utils = $tw.utils || {};
-$tw.boot = $tw.boot || {};
+$tw.utils = $tw.utils || Object.create(null);
+$tw.boot = $tw.boot || Object.create(null);
 
 /////////////////////////// Standard node.js libraries
 
@@ -73,13 +73,11 @@ Iterate through all the own properties of an object or array. Callback is invoke
 $tw.utils.each = function(object,callback) {
 	var f;
 	if(object) {
-		if($tw.utils.isArray(object)) {
-			for(f=0; f<object.length; f++) {
-				callback(object[f],f,object);
-			}
+		if(Object.prototype.toString.call(object) == "[object Array]") {
+			object.forEach(callback);
 		} else {
 			for(f in object) {
-				if($tw.utils.hop(object,f)) {
+				if(Object.prototype.hasOwnProperty.call(object,f)) {
 					callback(object[f],f,object);
 				}
 			}
@@ -282,7 +280,7 @@ $tw.utils.parseStringArray = function(value) {
 
 // Parse a block of name:value fields. The `fields` object is used as the basis for the return value
 $tw.utils.parseFields = function(text,fields) {
-	fields = fields || {};
+	fields = fields || Object.create(null);
 	text.split(/\r?\n/mg).forEach(function(line) {
 		if(line.charAt(0) !== "#") {
 			var p = line.indexOf(":");
@@ -387,7 +385,7 @@ $tw.utils.registerFileType = function(type,encoding,extension,flags) {
 Run code globally with specified context variables in scope
 */
 $tw.utils.evalGlobal = function(code,context,filename) {
-	var contextCopy = $tw.utils.extend({},context);
+	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
 	$tw.utils.each(contextCopy,function(value,name) {
@@ -399,7 +397,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
-		fn = window["eval"](code);
+		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
 		fn = vm.runInThisContext(code,filename);		
 	}
@@ -411,7 +409,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend({},context);
+	var sandbox = $tw.utils.extend(Object.create(null),context);
 	vm.runInNewContext(code,sandbox,filename);
 	return sandbox.exports;
 };
@@ -684,7 +682,7 @@ Get all the modules of a particular type in a hashmap by their `name` field
 */
 $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 	nameField = nameField || "name";
-	var results = {};
+	var results = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		results[module[nameField]] = module;
 	});
@@ -696,7 +694,7 @@ Apply the exports of the modules of a particular type to a target object
 */
 $tw.modules.applyMethods = function(moduleType,targetObject) {
 	if(!targetObject) {
-		targetObject = {};
+		targetObject = Object.create(null);
 	}
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		$tw.utils.each(module,function(element,title,object) {
@@ -710,7 +708,7 @@ $tw.modules.applyMethods = function(moduleType,targetObject) {
 Return an array of classes created from the modules of a specified type. Each module should export the properties to be added to those of the optional base class
 */
 $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
-	var classes = {};
+	var classes = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
 		if(!subType || moduleExports.types[subType]) {
 			var newClass = function() {};
@@ -732,7 +730,7 @@ Construct a tiddler object from a hashmap of tiddler fields. If multiple hasmaps
 taking precedence to the right
 */
 $tw.Tiddler = function(/* [fields,] fields */) {
-	this.fields = {};
+	this.fields = Object.create(null);
 	for(var c=0; c<arguments.length; c++) {
 		var arg = arguments[c],
 			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
@@ -805,10 +803,10 @@ shadowTiddlers: Array of shadow tiddlers to be added
 $tw.Wiki = function(options) {
 	options = options || {};
 	var self = this,
-		tiddlers = {}, // Hashmap of tiddlers
+		tiddlers = Object.create(null), // Hashmap of tiddlers
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
-		pluginInfo = {}, // Hashmap of parsed plugin content
-		shadowTiddlers = options.shadowTiddlers || {}; // Hashmap by title of {source:, tiddler:}
+		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
+		shadowTiddlers = options.shadowTiddlers || Object.create(null); // Hashmap by title of {source:, tiddler:}
 
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {
@@ -840,20 +838,16 @@ $tw.Wiki = function(options) {
 		var t = tiddlers[title];
 		if(t instanceof $tw.Tiddler) {
 			return t;
-		} else if(title !== undefined && $tw.utils.hop(shadowTiddlers,title)) {
+		} else if(title !== undefined && Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
 			return shadowTiddlers[title].tiddler;
 		} else {
 			return undefined;
 		}
 	};
 
-	// Get a hashmap of all tiddler titles
-	this.getAllTitles = function() {
-		var results = {};
-		for(var title in tiddlers) {
-			results[title] = true;
-		}
-		return results;
+	// Get an array of all tiddler titles
+	this.allTitles = function() {
+		return Object.keys(tiddlers);
 	};
 
 	// Iterate through all tiddler titles
@@ -861,6 +855,11 @@ $tw.Wiki = function(options) {
 		for(var title in tiddlers) {
 			callback(tiddlers[title],title);
 		}
+	};
+
+	// Get an array of all shadow tiddler titles
+	this.allShadowTitles = function() {
+		return Object.keys(shadowTiddlers);
 	};
 
 	// Iterate through all shadow tiddler titles
@@ -961,18 +960,20 @@ $tw.Wiki = function(options) {
 			}
 		});
 		// Now go through the plugins in ascending order and assign the shadows
-		shadowTiddlers = {};
+		shadowTiddlers = Object.create(null);
 		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
-			$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
-				// Save the tiddler object
-				if(constituentTitle) {
-					shadowTiddlers[constituentTitle] = {
-						source: tiddler.fields.title,
-						tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-					};
-				}
-			});
+			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
+				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+					// Save the tiddler object
+					if(constituentTitle) {
+						shadowTiddlers[constituentTitle] = {
+							source: tiddler.fields.title,
+							tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+						};
+					}
+				});
+			}
 		});
 	};
 
@@ -1032,9 +1033,9 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
-	srcFields = srcFields || {};
+	srcFields = srcFields || Object.create(null);
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
-		fields = {};
+		fields = Object.create(null);
 	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.config.fileExtensionInfo[type].type;
@@ -1097,7 +1098,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 				if(line.charAt(0) !== "#") {
 					var colonPos= line.indexOf(": ");
 					if(colonPos !== -1) {
-						var tiddler = $tw.utils.extend({},fields);
+						var tiddler = $tw.utils.extend(Object.create(null),fields);
 						tiddler.title = (tiddler.title || "") + line.substr(0,colonPos);
 						if(titles.indexOf(tiddler.title) !== -1) {
 							console.log("Warning: .multids file contains multiple definitions for " + tiddler.title);
@@ -1316,7 +1317,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files","utf8"));
+				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						pathname = path.resolve(filepath,tidInfo.file),
@@ -1334,7 +1335,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				// If not, read all the files in the directory
 				$tw.utils.each(files,function(file) {
 					if(!excludeRegExp.test(file)) {
-						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
+						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp));
 					}
 				});
 			}
@@ -1355,20 +1356,20 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			// Read the plugin information
-			pluginInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.info","utf8"));
+			pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
 			// Read the plugin files
 			files = fs.readdirSync(filepath);
 			for(f=0; f<files.length; f++) {
 				file = files[f];
 				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
-					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp);
+					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp);
 					$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
 						pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
 					});
 				}
 			}
 			// Save the plugin tiddlers into the plugin info
-			pluginInfo.tiddlers = pluginInfo.tiddlers || {};
+			pluginInfo.tiddlers = pluginInfo.tiddlers || Object.create(null);
 			for(t=0; t<pluginTiddlers.length; t++) {
 				if(pluginTiddlers[t].title) {
 					pluginInfo.tiddlers[pluginTiddlers[t].title] = pluginTiddlers[t];
@@ -1545,7 +1546,7 @@ $tw.boot.startup = function(options) {
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
-			titles: {}, // hashmap by module title of {fn:, exports:, moduleType:}
+			titles: Object.create(null), // hashmap by module title of {fn:, exports:, moduleType:}
 			types: {} // hashmap by module type of hashmap of exports
 		},
 		config: { // Configuration overridables
@@ -1559,13 +1560,13 @@ $tw.boot.startup = function(options) {
 			wikiLanguagesSubDir: "./languages",
 			wikiTiddlersSubDir: "./tiddlers",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
-			fileExtensionInfo: {}, // Map file extension to {type:}
-			contentTypeInfo: {} // Map type to {encoding:,extension:}
+			fileExtensionInfo: Object.create(null), // Map file extension to {type:}
+			contentTypeInfo: Object.create(null) // Map type to {encoding:,extension:}
 		}
 	});
 	if(!options.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
-		$tw.boot.files = {};
+		$tw.boot.files = Object.create(null);
 		// System paths and filenames
 		$tw.boot.bootPath = path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
@@ -1612,7 +1613,7 @@ $tw.boot.startup = function(options) {
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules
-	$tw.Wiki.tiddlerDeserializerModules = {};
+	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Load tiddlers
 	if(options.readBrowserTiddlers) {

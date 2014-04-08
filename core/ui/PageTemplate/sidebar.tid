@@ -7,12 +7,12 @@ tags: $:/tags/PageTemplate
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
 
-<div class="titlebar">{{$:/SiteTitle}}</div>
-<div class="tw-subtitle">{{$:/SiteSubtitle}}</div>
+<div class="tw-site-title">{{$:/SiteTitle}}</div>
+<div class="tw-site-subtitle">{{$:/SiteSubtitle}}</div>
 
 <div class="tw-page-controls">
 
-<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/PageControls]] [!is[shadow]!has[draft.of]tag[$:/tags/PageControls]] +[tag[$:/tags/PageControls]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 
 </div>
 

@@ -12,16 +12,18 @@ RelativeDate/Future/Days: <<period>> days from now
 RelativeDate/Future/Hours: <<period>> hours from now
 RelativeDate/Future/Minutes: <<period>> minutes from now
 RelativeDate/Future/Months: <<period>> months from now
+RelativeDate/Future/Second: 1 second from now
 RelativeDate/Future/Seconds: <<period>> seconds from now
 RelativeDate/Future/Years: <<period>> years from now
 RelativeDate/Past/Days: <<period>> days ago
 RelativeDate/Past/Hours: <<period>> hours ago
 RelativeDate/Past/Minutes: <<period>> minutes ago
 RelativeDate/Past/Months: <<period>> months ago
+RelativeDate/Past/Second: 1 second ago
 RelativeDate/Past/Seconds: <<period>> seconds ago
 RelativeDate/Past/Years: <<period>> years ago
 SystemTiddler/Tooltip: This is a system tiddler
-TagManager/Tag/Heading: Tag
-TagManager/Count/Heading: Count
 TagManager/Colour/Heading: Colour
+TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon
+TagManager/Tag/Heading: Tag

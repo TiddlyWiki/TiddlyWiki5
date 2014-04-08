@@ -8,12 +8,12 @@ title: $:/snippets/paletteeditor
 
 <<lingo Prompt>> <$link to={{$:/palette}}><$macrocall $name="currentTiddler" $output="text/plain"/></$link>
 
-<$list filter="[is[current]is[shadow]is[tiddler]]" variable="listItem">
+<$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
 <<lingo Prompt/Modified>>
 <$button message="tw-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
 </$list>
 
-<$list filter="[is[current]is[shadow]!is[tiddler]]" variable="listItem">
+<$list filter="[all[current]is[shadow]!is[tiddler]]" variable="listItem">
 <<lingo Clone/Prompt>>
 </$list>
 
@@ -21,7 +21,7 @@ title: $:/snippets/paletteeditor
 
 <table>
 <tbody>
-<$list filter="[is[current]indexes[]]" variable="colourName">
+<$list filter="[all[current]indexes[]]" variable="colourName">
 <tr>
 <td>
 ''<$macrocall $name="describePaletteColour" colour=<<colourName>>/>''<br/>

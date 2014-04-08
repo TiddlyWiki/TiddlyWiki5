@@ -109,6 +109,10 @@ table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
 }
 
+.tw-csv-table {
+	white-space: nowrap;
+}
+
 .tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
 	max-width: 100%;
 }
@@ -523,6 +527,7 @@ a.tw-tiddlylink-external:hover {
 	}
 }
 
+.tw-site-title,
 .titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
@@ -908,7 +913,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-notification {
 	position: fixed;
 	top: 14px;
-	right: 14px;
+	right: 42px;
 	z-index: 1000;
 	max-width: 280px;
 	padding: 0 14px 0 14px;

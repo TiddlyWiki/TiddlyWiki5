@@ -12,6 +12,9 @@ This is the main application logic for both the client and server
 /*global $tw: false */
 "use strict";
 
+// Set to `true` to enable performance instrumentation
+var PERFORMANCE_INSTRUMENTATION = true;
+
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
@@ -32,6 +35,8 @@ exports.startup = function() {
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
+	// Set up the performance framework
+	$tw.perf = new $tw.Performance(PERFORMANCE_INSTRUMENTATION);
 	// Set up the parsers
 	$tw.wiki.initParsers();
 	// Set up the command modules
@@ -199,22 +204,24 @@ exports.startup = function() {
 		$tw.styleElement = document.createElement("style");
 		$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
 		document.head.insertBefore($tw.styleElement,document.head.firstChild);
-		$tw.wiki.addEventListener("change",function(changes) {
+		$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
 			if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
 				$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
 			}
-		});
+		}));
 		// Display the PageMacros, which includes the PageTemplate
 		var templateTitle = "$:/core/ui/PageMacros",
 			parser = $tw.wiki.parseTiddler(templateTitle);
-		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
-		$tw.pageContainer = document.createElement("div");
-		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
-		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		$tw.pageWidgetNode.render($tw.pageContainer,null);
-		$tw.wiki.addEventListener("change",function(changes) {
+		$tw.perf.report("mainRender",function() {
+			$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
+			$tw.pageContainer = document.createElement("div");
+			$tw.utils.addClass($tw.pageContainer,"tw-page-container");
+			document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+			$tw.pageWidgetNode.render($tw.pageContainer,null);
+		})();
+		$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
 			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
-		});
+		}));
 		// Fix up the link between the root widget and the page container
 		$tw.rootWidget.domNodes = [$tw.pageContainer];
 		$tw.rootWidget.children = [$tw.pageWidgetNode];
