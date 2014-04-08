@@ -17,25 +17,19 @@ Export our filter function
 */
 exports.untagged = function(source,operator,options) {
 	var results = [];
-	// Function to check an individual title
-	function checkTiddler(title) {
-		var tiddler = options.wiki.getTiddler(title),
-			match = tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0;
-		if(operator.prefix !== "!") {
-			match = !match;
-		}
-		if(match) {
-			$tw.utils.pushTop(results,title);
-		}
-	}
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			checkTiddler(title);
+	if(operator.prefix === "!") {
+		source(function(tiddler,title) {
+			if(tiddler && $tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length > 0) {
+				$tw.utils.pushTop(results,title);
+			}
 		});
 	} else {
-		$tw.utils.each(source,function(element,title) {
-			checkTiddler(title);
+		source(function(tiddler,title) {
+			if(tiddler) {
+				if(!tiddler.hasField("tags") || ($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length === 0)) {
+					$tw.utils.pushTop(results,title);
+				}
+			}
 		});
 	}
 	return results;

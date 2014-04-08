@@ -144,7 +144,7 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[!tag[one]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one");
 		expect(wiki.filterTiddlers("[prefix[Tidd]tag[one]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[!is[shadow]tag[two]sort[title]]").join(",")).toBe("$:/TiddlerTwo,Tiddler Three");
-		expect(wiki.filterTiddlers("[is[shadow]tag[two]sort[title]]").join(",")).toBe("$:/TiddlerFive");
+		expect(wiki.filterTiddlers("[all[shadows]tag[two]sort[title]]").join(",")).toBe("$:/TiddlerFive");
 	});
 
 	it("should handle the tags operator", function() {
@@ -156,7 +156,7 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[[one]tagging[]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[[one]tagging[]]").join(",")).toBe("Tiddler Three,TiddlerOne");
 		expect(wiki.filterTiddlers("[[two]tagging[]sort[title]]").join(",")).toBe("$:/TiddlerFive,$:/TiddlerTwo,Tiddler Three");
-		expect(wiki.filterTiddlers("[is[current]tagging[]sort[title]]","one").join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[all[current]tagging[]sort[title]]","one").join(",")).toBe("Tiddler Three,TiddlerOne");
 	});
 
 	it("should handle the untagged operator", function() {
@@ -166,12 +166,12 @@ describe("Filter tests", function() {
 
 	it("should handle the links operator", function() {
 		expect(wiki.filterTiddlers("[!is[shadow]links[]sort[title]]").join(",")).toBe("a fourth tiddler,one,Tiddler Three,TiddlerSix,TiddlerTwo,TiddlerZero");
-		expect(wiki.filterTiddlers("[is[shadow]links[]sort[title]]").join(",")).toBe("TiddlerOne");
+		expect(wiki.filterTiddlers("[all[shadows]links[]sort[title]]").join(",")).toBe("TiddlerOne");
 	});
 
 	it("should handle the backlinks operator", function() {
 		expect(wiki.filterTiddlers("[!is[shadow]backlinks[]sort[title]]").join(",")).toBe("a fourth tiddler,one");
-		expect(wiki.filterTiddlers("[is[shadow]backlinks[]sort[title]]").join(",")).toBe("Tiddler Three");
+		expect(wiki.filterTiddlers("[all[shadows]backlinks[]sort[title]]").join(",")).toBe("Tiddler Three");
 	});
 
 	it("should handle the has operator", function() {
@@ -187,7 +187,7 @@ describe("Filter tests", function() {
 
 	it("should handle the list operator", function() {
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]sort[title]]").join(",")).toBe("a fourth tiddler,MissingTiddler,Tiddler Three,TiddlerOne");
-		expect(wiki.filterTiddlers("[tag[one]list[TiddlerSeventh]sort[title]]").join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[tag[one]list[TiddlerSeventh]sort[title]]").join(",")).toBe("a fourth tiddler,MissingTiddler,Tiddler Three,TiddlerOne");
 	});
 
   	it("should handle the next operator", function() {
@@ -232,12 +232,12 @@ describe("Filter tests", function() {
 		});
 
 		it("should handle the '[is[shadow]]' operator", function() {
-			expect(wiki.filterTiddlers("[is[shadow]sort[title]]").join(",")).toBe("$:/TiddlerFive,Tiddler8,TiddlerSeventh,TiddlerSix");
+			expect(wiki.filterTiddlers("[all[shadows]sort[title]]").join(",")).toBe("$:/TiddlerFive,Tiddler8,TiddlerSeventh,TiddlerSix");
 			expect(wiki.filterTiddlers("[!is[shadow]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
 		});
 
 		it("should handle the '[is[missing]]' operator", function() {
-			expect(wiki.filterTiddlers("[is[missing]]").join(",")).toBe("TiddlerZero,TiddlerTwo");
+			expect(wiki.filterTiddlers("[all[missing]]").join(",")).toBe("TiddlerZero,TiddlerTwo");
 			expect(wiki.filterTiddlers("[!is[missing]sort[title]]").join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three,TiddlerOne");
 			expect(wiki.filterTiddlers("[[TiddlerOne]is[missing]]").join(",")).toBe("");
 			expect(wiki.filterTiddlers("[[TiddlerZero]is[missing]]").join(",")).toBe("TiddlerZero");

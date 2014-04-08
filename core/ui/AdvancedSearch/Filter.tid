@@ -12,7 +12,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 <div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/filterDropdown">> type="nomatch" text="" default="">
 <div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[is[shadow]tag[$:/tags/Filter]] [!is[shadow]tag[$:/tags/Filter]] +[sort[description]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Filter]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
 </$list>
 </div>
 </$reveal>

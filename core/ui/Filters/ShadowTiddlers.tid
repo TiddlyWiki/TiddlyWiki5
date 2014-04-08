@@ -1,5 +1,5 @@
 title: $:/core/Filters/ShadowTiddlers
 tags: $:/tags/Filter
-filter: [is[shadow]sort[title]]
+filter: [all[shadows]sort[title]]
 description: {{$:/language/Filters/ShadowTiddlers}}
 

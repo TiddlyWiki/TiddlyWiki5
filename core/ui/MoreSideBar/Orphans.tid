@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Orphans
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Orphans/Caption}}
 
-<$list filter="[is[orphan]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[orphans]sort[title]]" template="$:/core/ui/ListItemTemplate"/>

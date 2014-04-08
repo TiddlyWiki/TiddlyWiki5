@@ -2,13 +2,13 @@ title: $:/core/ui/TiddlerInfo/Advanced/PluginInfo
 tags: $:/tags/TiddlerInfo/Advanced
 
 \define lingo-base() $:/language/TiddlerInfo/Advanced/PluginInfo/
-<$list filter="[is[current]has[plugin-type]]">
+<$list filter="[all[current]has[plugin-type]]">
 
 ! <<lingo Heading>>
 
 <<lingo Hint>>
 <ul>
-<$list filter="[is[current]plugintiddlers[]sort[title]]" emptyMessage=<<lingo Empty/Hint>>>
+<$list filter="[all[current]plugintiddlers[]sort[title]]" emptyMessage=<<lingo Empty/Hint>>>
 <li>
 <$link to={{!!title}}>
 <$view field="title"/>

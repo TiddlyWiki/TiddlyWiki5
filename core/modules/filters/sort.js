@@ -40,15 +40,10 @@ exports.nsortcs = function(source,operator,options) {
 };
 
 var prepare_results = function (source) {
-	var results;
-	if($tw.utils.isArray(source)) {
-		results = source;
-	} else {
-		results = [];
-		$tw.utils.each(source,function(element,title) {
-			results.push(title);
-		});
-	}
+	var results = [];
+	source(function(tiddler,title) {
+		results.push(title);
+	});
 	return results;
 }
 
