@@ -376,14 +376,14 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 
 /*
 Register file type information
-options: {flags: flags,deserializertype: deserializertype}
+options: {flags: flags,deserializerType: deserializerType}
 	flags:"image" for image types
-	deserializertype: defaults to type if not specified
+	deserializerType: defaults to type if not specified
 */
 $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	options = options || {};
 	$tw.config.fileExtensionInfo[extension] = {type: type};	
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializertype: options.deserializertype || type};	
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};	
 };
 
 /*
@@ -1058,7 +1058,7 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	}
 	if(!deserializer && $tw.config.contentTypeInfo[type]) {
 		// see if this type has a different deserializer registered with it
-		type = $tw.config.contentTypeInfo[type].deserializertype;
+		type = $tw.config.contentTypeInfo[type].deserializerType;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer) {
@@ -1619,7 +1619,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
-	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializertype:"text/html"});
+	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
