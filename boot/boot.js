@@ -376,9 +376,20 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 Register file type information
 flags: "image" for image types
 */
-$tw.utils.registerFileType = function(type,encoding,extension,flags) {
+$tw.utils.registerFileType = function (type, encoding, extension, deserializer_type,flags) {
 	$tw.config.fileExtensionInfo[extension] = {type: type};
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: flags || []};
+	$tw.config.contentTypeInfo[type] = { encoding: encoding, extension: extension, flags: flags || [], deserializer_type: deserializer_type ? deserializer_type : undefined };
+};
+
+/*
+Given an extension, get the correct encoding for that file.
+defaults to utf8
+*/
+$tw.utils.getTypeEncoding = function (ext) {
+	var extensionInfo = $tw.config.fileExtensionInfo[ext],
+		type = extensionInfo ? extensionInfo.type : null,
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
+	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
 /*
@@ -1038,7 +1049,12 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		fields = Object.create(null);
 	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
-		type = $tw.config.fileExtensionInfo[type].type;
+		type = $tw.config.fileExtensionInfo[type].type;		
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+	}
+	if(!deserializer && $tw.config.contentTypeInfo[type]) {
+		// see if this type has a different deserializer registered with it
+		type = $tw.config.contentTypeInfo[type].deserializer_type;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer) {
@@ -1319,8 +1335,9 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				// If so, process the files it describes
 				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
-					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
-						pathname = path.resolve(filepath,tidInfo.file),
+					var pathname = path.resolve(filepath,tidInfo.file),
+						ext = path.extname(pathname),
+						typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
 					if(tidInfo.prefix) {
 						text = tidInfo.prefix + text;
@@ -1599,15 +1616,16 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
+	$tw.utils.registerFileType("application/hta","utf16le",".hta","text/html");
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
-	$tw.utils.registerFileType("application/pdf","base64",".pdf",["image"]);
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg",["image"]);
-	$tw.utils.registerFileType("image/png","base64",".png",["image"]);
-	$tw.utils.registerFileType("image/gif","base64",".gif",["image"]);
-	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",["image"]);
-	$tw.utils.registerFileType("image/x-icon","base64",".ico",["image"]);
-	$tw.utils.registerFileType("application/font-woff","base64",".woff");
+	$tw.utils.registerFileType("application/pdf","base64",".pdf","application/pdf",["image"]);
+	$tw.utils.registerFileType("image/jpeg","base64",".jpg","image/jpeg",["image"]);
+	$tw.utils.registerFileType("image/png","base64",".png","image/png",["image"]);
+	$tw.utils.registerFileType("image/gif","base64",".gif","image/gif",["image"]);
+	$tw.utils.registerFileType("image/svg+xml","utf8",".svg","image/svg+xml",["image"]);
+	$tw.utils.registerFileType("image/x-icon","base64",".ico","image/x-icon",["image"]);
+	$tw.utils.registerFileType("application/font-woff","base64","application/font-woff",".woff");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
