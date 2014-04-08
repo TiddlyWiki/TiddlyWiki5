@@ -374,11 +374,28 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 
 /*
 Register file type information
-flags: "image" for image types
+options: {flags: flags,deserializertype: deserializertype}
+	flags:"image" for image types
+	deserializertype: defaults to type if not specified
 */
-$tw.utils.registerFileType = function(type,encoding,extension,flags) {
-	$tw.config.fileExtensionInfo[extension] = {type: type};
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: flags || []};
+$tw.utils.registerFileType = function(type,encoding,extension,options) {
+	$tw.config.fileExtensionInfo[extension] = {type: type};	
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension};
+	if(options){
+		$tw.config.contentTypeInfo[type].flags = options.flags || [];
+		$tw.config.contentTypeInfo[type].deserializertype = options.deserializertype || type;
+	}
+};
+
+/*
+Given an extension, get the correct encoding for that file.
+defaults to utf8
+*/
+$tw.utils.getTypeEncoding = function(ext) {
+	var extensionInfo = $tw.config.fileExtensionInfo[ext],
+		type = extensionInfo ? extensionInfo.type : null,
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
+	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
 /*
@@ -1041,6 +1058,11 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		type = $tw.config.fileExtensionInfo[type].type;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
+	if(!deserializer && $tw.config.contentTypeInfo[type]) {
+		// see if this type has a different deserializer registered with it
+		type = $tw.config.contentTypeInfo[type].deserializertype;
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+	}
 	if(!deserializer) {
 		// If we still don't have a deserializer, treat it as plain text
 		deserializer = $tw.Wiki.tiddlerDeserializerModules["text/plain"];
@@ -1599,14 +1621,15 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
+	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializertype:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
-	$tw.utils.registerFileType("application/pdf","base64",".pdf",["image"]);
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg",["image"]);
-	$tw.utils.registerFileType("image/png","base64",".png",["image"]);
-	$tw.utils.registerFileType("image/gif","base64",".gif",["image"]);
-	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",["image"]);
-	$tw.utils.registerFileType("image/x-icon","base64",".ico",["image"]);
+	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
+	$tw.utils.registerFileType("image/jpeg","base64",".jpg",{flags:["image"]});
+	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
+	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
+	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
+	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
