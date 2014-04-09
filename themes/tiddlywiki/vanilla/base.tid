@@ -368,6 +368,10 @@ a.tw-tiddlylink-external:hover {
 	width: 60%;
 }
 
+.tw-search {
+	padding-top: .5em;
+}
+
 .tw-search a svg {
 	height: 0.75em;
 }
@@ -449,7 +453,7 @@ a.tw-tiddlylink-external:hover {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 70px 0 28px 42px;
+		padding: 99px 0 28px 42px;
 	}
 
 	.story-river {

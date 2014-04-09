@@ -2,24 +2,15 @@ title: $:/core/ui/PageTemplate/sidebar
 tags: $:/tags/PageTemplate
 
 <$scrollable fallthrough="no" class="tw-sidebar-scrollable">
-
-<div class="sidebar-header">
-
-<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
-
-<div class="tw-site-title">{{$:/SiteTitle}}</div>
-<div class="tw-site-subtitle">{{$:/SiteSubtitle}}</div>
-
-<div class="tw-page-controls">
-
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
-
-</div>
-
-{{$:/core/ui/SideBarLists}}
-
-</$reveal>
-
-</div>
-
+	<div class="sidebar-header">
+		<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
+			<div class="tw-site-title">{{$:/SiteTitle}}</div>
+			<div class="tw-site-subtitle">{{$:/SiteSubtitle}}</div>
+			<div class="tw-page-controls">
+				<$list filter="[all[tiddlers+shadows]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">						<$transclude tiddler=<<listItem>>/>
+				</$list>
+			</div>
+			{{$:/core/ui/SideBarLists}}
+		</$reveal>
+	</div>
 </$scrollable>
