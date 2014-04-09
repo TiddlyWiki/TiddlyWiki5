@@ -7,8 +7,7 @@ tags: $:/tags/PageTemplate
 			<div class="tw-site-title">{{$:/SiteTitle}}</div>
 			<div class="tw-site-subtitle">{{$:/SiteSubtitle}}</div>
 			<div class="tw-page-controls">
-				<$list filter="[all[tiddlers+shadows]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">						<$transclude tiddler=<<listItem>>/>
-				</$list>
+				<$list filter="[all[tiddlers+shadows]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 			</div>
 			{{$:/core/ui/SideBarLists}}
 		</$reveal>

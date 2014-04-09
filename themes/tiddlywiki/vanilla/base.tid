@@ -369,7 +369,7 @@ a.tw-tiddlylink-external:hover {
 }
 
 .tw-search {
-	padding-top: .5em;
+	padding-top: 14px;
 }
 
 .tw-search a svg {
@@ -453,7 +453,7 @@ a.tw-tiddlylink-external:hover {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 99px 0 28px 42px;
+		padding: 84px 0 28px 42px;
 	}
 
 	.story-river {
@@ -461,7 +461,7 @@ a.tw-tiddlylink-external:hover {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}};
-		padding: 56px 42px 42px 42px;
+		padding: 42px 42px 42px 42px;
 	}
 }
 
@@ -966,6 +966,10 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-content {
 	padding-top: 14px;
+}
+
+.tw-sidebar-lists .tw-tab-buttons {
+	padding-top: 15px;	
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
