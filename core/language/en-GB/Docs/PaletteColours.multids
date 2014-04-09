@@ -48,7 +48,7 @@ sidebar-foreground-shadow: Sidebar foreground shadow
 sidebar-foreground: Sidebar foreground
 sidebar-muted-foreground-hover: Sidebar muted foreground hover
 sidebar-muted-foreground: Sidebar muted foreground
-sidebar-tab-background-selected: Sidebar tab
+sidebar-tab-background-selected: Sidebar tab background for selected tabs
 sidebar-tab-background: Sidebar tab background
 sidebar-tab-border-selected: Sidebar tab border for selected tabs
 sidebar-tab-border: Sidebar tab border
