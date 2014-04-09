@@ -268,7 +268,12 @@ Synchronise a set of changes to the server
 Syncer.prototype.syncToServer = function(changes) {
 	var self = this,
 		now = new Date(),
-		filteredChanges = this.filterFn.call(this.wiki,changes);
+		filteredChanges = this.filterFn.call(this.wiki,function(callback) {
+			$tw.utils.each(changes,function(change,title) {
+				var tiddler = self.wiki.getTiddler(title);
+				callback(tiddler,title);
+			});
+		});
 	$tw.utils.each(changes,function(change,title,object) {
 		// Process the change if it is a deletion of a tiddler we're already syncing, or is on the filtered change list
 		if((change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) || filteredChanges.indexOf(title) !== -1) {

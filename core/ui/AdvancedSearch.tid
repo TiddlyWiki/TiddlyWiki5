@@ -1,5 +1,5 @@
 title: $:/AdvancedSearch
 
 <div class="tw-advanced-search">
-<<tabs "[is[shadow]!has[draft.of]tag[$:/tags/AdvancedSearch]] [!is[shadow]!has[draft.of]tag[$:/tags/AdvancedSearch]] +[tag[$:/tags/AdvancedSearch]]" "$:/core/ui/AdvancedSearch/System">>
+<<tabs "[all[tiddlers+shadows]tag[$:/tags/AdvancedSearch]!has[draft.of]]" "$:/core/ui/AdvancedSearch/System">>
 </div>

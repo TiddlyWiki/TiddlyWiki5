@@ -22,4 +22,4 @@ System tags are used to give special behaviour to tiddlers:
 
 These are the system tags in use in this wiki:
 
-{{{ [is[shadow]tags[]prefix[$:/]] [!is[shadow]tags[]prefix[$:/]] +[sort[title]] }}}
+{{{ [all[tiddlers+shadows]tags[]prefix[$:/]] +[sort[title]] }}}

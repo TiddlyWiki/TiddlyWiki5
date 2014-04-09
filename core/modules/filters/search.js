@@ -18,7 +18,7 @@ Export our filter function
 exports.search = function(source,operator,options) {
 	var invert = operator.prefix === "!";
 	return options.wiki.search(operator.operand,{
-		titles: source,
+		source: source,
 		invert: invert
 	});
 };

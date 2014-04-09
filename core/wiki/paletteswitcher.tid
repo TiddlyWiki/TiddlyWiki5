@@ -4,7 +4,7 @@ title: $:/snippets/paletteswitcher
 <<lingo Prompt>> <$view tiddler={{$:/palette}} field="name"/>
 
 <$linkcatcher to="$:/palette">
-<div class="tw-chooser"><$list filter="[is[shadow]tag[$:/tags/Palette]] [!is[shadow]tag[$:/tags/Palette]] +[sort[description]]"><div class="tw-chooser-item"><$link to={{!!title}}><div><$reveal state="$:/palette" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/palette" type="nomatch" text={{!!title}}>&nbsp;</$reveal> ''<$view field="name" format="text"/>'' - <$view field="description" format="text"/></div><$transclude tiddler="$:/snippets/currpalettepreview"/></$link></div>
+<div class="tw-chooser"><$list filter="[all[tiddlers+shadows]tag[$:/tags/Palette]sort[description]]"><div class="tw-chooser-item"><$link to={{!!title}}><div><$reveal state="$:/palette" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/palette" type="nomatch" text={{!!title}}>&nbsp;</$reveal> ''<$view field="name" format="text"/>'' - <$view field="description" format="text"/></div><$transclude tiddler="$:/snippets/currpalettepreview"/></$link></div>
 </$list>
 </div>
 </$linkcatcher>
