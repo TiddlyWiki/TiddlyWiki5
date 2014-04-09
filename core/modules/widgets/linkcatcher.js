@@ -69,10 +69,11 @@ LinkCatcherWidget.prototype.handleNavigateEvent = function(event) {
 	if(this.catchTo) {
 		this.wiki.setTextReference(this.catchTo,event.navigateTo,this.getVariable("currentTiddler"));
 	}
-	if(this.catchMessage) {
-		this.dispatchEvent({
+	if(this.catchMessage && this.parentWidget) {
+		this.parentWidget.dispatchEvent({
 			type: this.catchMessage,
-			param: event.navigateTo
+			param: event.navigateTo,
+			navigateTo: event.navigateTo
 		});
 	}
 	if(this.catchSet) {
