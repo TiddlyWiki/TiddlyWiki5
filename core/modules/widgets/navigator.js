@@ -198,20 +198,29 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Get the tiddler we're deleting
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList();
+		storyList = this.getStoryList(),
+		originalTitle, confirmationTitle;
 	// Check if the tiddler we're deleting is in draft mode
 	if(tiddler.hasField("draft.title")) {
-		// Delete the original tiddler
-		var originalTitle = tiddler.fields["draft.of"];
-		// Ask for confirmation if the tiddler has changed
-		if(!confirm($tw.language.getString(
-					"ConfirmDeleteTiddler",
-					{variables:
-						{title: originalTitle}
-					}
-				))) {
-			return false;
-		}
+		// If so, we'll prompt for confirmation referencing the original tiddler
+		originalTitle = tiddler.fields["draft.of"];
+		confirmationTitle = originalTitle;
+	} else {
+		// If not a draft, then prompt for confirmation referencing the specified tiddler
+		originalTitle = null;
+		confirmationTitle = title;
+	}
+	// Seek confirmation
+	if(!confirm($tw.language.getString(
+				"ConfirmDeleteTiddler",
+				{variables:
+					{title: confirmationTitle}
+				}
+			))) {
+		return false;
+	}
+	// Delete the original tiddler
+	if(originalTitle) {
 		this.wiki.deleteTiddler(originalTitle);
 		this.removeTitleFromStory(storyList,originalTitle);
 	}
