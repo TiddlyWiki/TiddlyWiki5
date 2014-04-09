@@ -6,7 +6,7 @@ tags: $:/tags/EditTemplate
 <div class="tw-edit-fields">
 <table class="tw-edit-fields">
 <tbody>
-<$list filter="[all[current]fields[]] -title -tags -text -creator -created -modified -modifier -type -[[draft.title]] -[[draft.of]]" variable="currentField">
+<$list filter="[all[current]fields[]] -title -tags -text -creator -created -modified -modifier -type -[[draft.title]] -[[draft.of]] +[sort[title]]" variable="currentField">
 <tr class="tw-edit-field">
 <td class="tw-edit-field-name">
 <$text text=<<currentField>>/>:</td>
