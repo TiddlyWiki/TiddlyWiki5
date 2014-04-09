@@ -12,3 +12,5 @@ description: 從檔案中載入條目
 ```
 tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
 ```
+
+請注意 TiddlyWiki 將不載入舊版本的已掛載的插件。
