@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+bag: Le nom du bag d'où provient le tiddler
+caption: Le texte à afficher sur un onglet ou un bouton
+color: La valeur CSS de la couleur associée au tiddler
+component: Le nom du composant responsable pour un [[tiddler d'alerte|AlertMechanism]]
+current-tiddler: Sert à cacher le tiddler situé au début de l'[[historique|HistoryMechanism]]
+created: La date de création du tiddler
+creator: Le nom de l'utilisateur qui a créé le tiddler
+dependents: Quand le tiddler est un plugin, énumère les titres des plugins dépendants
+description: Le texte de description d'un plugin, ou d'une boîte de dialogue
+draft.of: Pour les tiddlers en cours d'édition, contient le titre du tiddler initial
+draft.title: Pour les tiddlers en cours d'édition, contient le nouveau titre prévu pour le tiddler
+footer: Le texte de bas de page dans le cas d'un wizard
+hack-to-give-us-something-to-compare-against: Un champ de stockage temporaire utilisé dans [[$:/core/templates/static.content]]
+icon: Le titre du tiddler contenant l'icone associée à un tiddler
+library: Avec une valeur à <q>yes</q>,  indique qu'un tiddler doit être sauvegardé comme bibliothèque JavaScript
+list: Une liste ordonnée de titres de tiddlers à associer au tiddler
+list-before: Si présent, contient le titre du tiddler avant lequel ce tiddler doit être ajouté dans la liste ordonnée. Si ce champ est présent mais vide, le titre doit être ajouté au début de la liste.
+list-after: Si présent, contient le titre du tiddler après lequel ce tiddler doit être ajouté dans la liste ordonnée.
+modified: La date et l'heure à laquelle le tiddler a été modifié pour la dernière fois
+modifier: Le titre du tiddler associé à l'utilisateur qui a modifié ce tiddler pour la dernière fois
+name: S'il s'agit d'un plugin, le nom de la personne associée à ce tiddler
+plugin-priority: S'il s'agit d'un plugin, un nombre indiquant la priorité de ce tiddler
+plugin-type: S'il s'agit d'un plugin, le type de plugin de ce tiddler
+revision: Le numéro de révision du tiddler présent sur le server
+released: Date de version d'un TiddlyWiki
+source: L'URL source associée à ce tiddler
+subtitle: Le texte du sous-titre pour un wizard
+tags: Une liste de tags associée à un tiddler
+text: Le texte du corps de ce tiddler
+title: Le nom unique du tiddler
+type: Le type de contenu du tiddler
+version: S'il s'agit d'un plugin, l'information de version

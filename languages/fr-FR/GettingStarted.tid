@@ -9,6 +9,6 @@ Ensuite, essayez de :
 
 * Créer de nouveaux tiddlers à l'aide du bouton « plus » de la barre latérale
 * Visiter le [[panneau de contrôle|$:/ControlPanel]] à l'aide du bouton « engrenage » de la barre latérale, afin de personnaliser votre wiki
-** Ne plus voir ce message en changeant les tiddlers affichés par défaut depuis l'onglet //Fondamentaux//
+** Faire en sorte que ce message n'apparaisse plus en changeant les tiddlers affichés par défaut depuis l'onglet //Fondamentaux//
 * Sauvegarder vos modifications à l'aide du bouton « Télécharger » de la barre latérale
 * En savoir plus sur [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
