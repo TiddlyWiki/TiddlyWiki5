@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: listed
+type: text/vnd.tiddlywiki
+
+The ''listed'' filter operator returns the titles of the tiddlers that have `list` fields that contain any members of the current list.
+
+For example:
+
+|!Filter String |!Description |
+|`[[HelloThere]listed[]]` |Returns the titles of any tiddlers containing `HelloThere` in their `list` fields |
+|`[all[current]listed[]]]` |Returns the titles of any tiddlers containing the current tiddler in their `list` fields |

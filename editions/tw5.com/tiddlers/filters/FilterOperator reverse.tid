@@ -1,0 +1,12 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: reverse
+type: text/vnd.tiddlywiki
+
+The ''reverse'' filter operator reverses the order of the titles in the current list.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three +[reverse[]]` |Returns the list `three`, `two`, `one` |

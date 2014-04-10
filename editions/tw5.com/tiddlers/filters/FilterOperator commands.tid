@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: commands
+type: text/vnd.tiddlywiki
+
+The ''commands'' filter operator replaces the current list with a list of the available commands (see the HelpCommand for details).
+
+For example:
+
+|!Filter String |!Description |
+|`[commands[]]` |Returns a list of the available command names |
+

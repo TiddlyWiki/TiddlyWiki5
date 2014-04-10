@@ -1,0 +1,20 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: next
+type: text/vnd.tiddlywiki
+
+The ''next'' filter operator takes each tiddler in the current list and looks it up in the `list` field of the tiddler specified in the operand, and then returns the immediately following tiddler title.
+
+The following examples assume a tiddler called `MyList` with a `list` field containing:
+
+```
+one two three four five
+```
+
+|!Filter String |!Description |
+|`[[three]next[MyList]]` |Returns `four` |
+|`[[five]next[MyList]]` |Returns an empty list |
+|`one three +[next[MyList]]` |Returns `two`, `four` |
+
+See also [[FilterOperator: previous]].

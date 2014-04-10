@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: butlast
+type: text/vnd.tiddlywiki
+
+Without an operand, the ''butlast'' filter operator returns all but the last entry in the current list. The optional operand specifies the number of entries to omit.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three four five +[butlast[]]` |Returns `one`, `two`, `three`, `four` |
+|`one two three four five +[butlast[2]]` |Returns `one`, `two`, `three` |

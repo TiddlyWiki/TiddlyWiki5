@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: tagging
+type: text/vnd.tiddlywiki
+
+The ''tagging'' filter operator returns all the tiddlers that are tagged by the tiddlers in the current list.
+
+For example:
+
+|!Filter String |!Description |
+|`[[mytag]tagging[]]` |Returns all tiddlers tagged `mytag` |
+|`[all[current]tagging[]]` |Returns all tiddlers tagged by the current tiddler |
+
+See also [[FilterOperator: tag]], [[FilterOperator: tags]] and [[FilterOperator: untagged]].

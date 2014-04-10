@@ -1,12 +1,10 @@
-created: 20130827080000000
-modified: 20140306034221709
-tags: concepts
-title: TiddlerFilters
+created: 20140410101941871
+modified: 20140410103229640
+tags: introduction
+title: Introduction to Filters
 type: text/vnd.tiddlywiki
 
-Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria. See [[TiddlerFilter Formal Grammar]] for a technical explanation of the syntax.
-
-Filters are used by widgets like the ListWidget and the CountWidget to perform operations on multiple tiddlers at once. They are also used throughout TiddlyWiki's internal mechanisms.
+A step by step introduction to how TiddlerFilters are used.
 
 You can experiment with tiddler filters by typing them into the "Filter" tab of the [[advanced search panel|$:/AdvancedSearch]].
 
@@ -22,7 +20,7 @@ The titles must be separated by one or more spaces and/or linebreaks.
 
 ! Filter Operators
 
-Filter operators are used to select tiddlers based on some criteria. For example, this filter consists of a single operation made selects all tiddlers tagged "introduction":
+Filter operators are used to select tiddlers based on some criteria. For example, this filter consists of a single operation that selects all tiddlers tagged "introduction":
 
 ```
 [tag[introduction]]
@@ -30,7 +28,7 @@ Filter operators are used to select tiddlers based on some criteria. For example
 
 The word "tag" is the ''operator'' and "introduction" is the ''operand''.
 
-See FilterOperators for a complete list of the available operators.
+See TiddlerFilters for a complete list of the available operators.
 
 !! Default Filter Operator
 

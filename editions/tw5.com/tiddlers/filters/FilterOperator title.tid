@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: title
+type: text/vnd.tiddlywiki
+
+The ''title'' filter operator replaces the current list with the title specified in the operand.
+
+For example:
+
+|!Filter String |!Description |
+|`[[mytiddler]]` |Returns the title `mytiddler` |
+|`[title[mytiddler]]` |Returns the title `mytiddler` |
+
+Note that the ''title'' operator is the default when no operator name is specified.

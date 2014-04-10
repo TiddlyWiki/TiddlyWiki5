@@ -1,0 +1,25 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters commonfilters
+title: FilterOperator: is
+type: text/vnd.tiddlywiki
+
+The ''is'' filter operator selects tiddlers from the current list according to their membership of the category specified in the operand:
+
+* `[is[current]]` - returns any tiddler that matches the title of the current tiddler
+* `[is[image]]` - tiddlers that contain an image (eg, GIF, JPEG, PNG etc.)
+* `[is[missing]]` - MissingTiddlers that are referenced but undefined
+* `[is[orphan]]` - OrphanTiddlers that are not referenced from any other tiddler
+* `[is[shadow]]` - tiddlers that are ShadowTiddlers
+* `[is[system]]` - tiddlers that are SystemTiddlers
+* `[is[tiddler]]` - tiddlers that are not MissingTiddlers
+
+For example:
+
+|!Filter String |!Description |
+|`[tag[task]is[shadow]]` |Returns ShadowTiddlers tagged `task` |
+|`[tag[task]!is[system]]` |Returns non-SystemTiddlers tagged `task` |
+|`[is[shadow]]` |Returns ShadowTiddlers that have been overridden by a 'real' tiddler |
+|`[is[missing]]` |Returns an empty list (see note below) |
+
+Note that the ''is'' filter operator strictly filters the current list by choosing whether or not to include each one in the output. It never adds tiddlers to the results that are not already listed. This means that when used at the start of a run of filter operators the ''is'' operator will be choosing from the currently existing tiddlers, and so will never return missing tiddlers, or shadow tiddlers that haven't been overridden.
