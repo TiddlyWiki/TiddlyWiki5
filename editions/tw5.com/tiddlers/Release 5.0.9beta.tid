@@ -63,5 +63,5 @@ reapoints/index.html#regular]] in Chrome
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/aa631518152cda5643805c143bf0000bca8d767f]] problem with occasional freezes of the sync mechanism - thanks to buggyj
 * Fixed problem with [[tiddlers|https://github.com/Jermolene/TiddlyWiki5/commit/1e960ffcac566c742c44b18d6f0e809d4457b249]] or [[fields|https://github.com/Jermolene/TiddlyWiki5/commit/ea46f85a8a5ad29e8602cbb13667c853903681a6]] called `__proto__`
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/aec618793f41b937676a5a165764dc19d9bbb2b2]] with refreshing the D3 plugin
-
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/67f3d58f7153ca4d50ce5a14ed72d9d4b6ad9b71]] problem with "null" message when unloading under Internet Explorer 11
 
