@@ -25,7 +25,6 @@ type: text/vnd.tiddlywiki
 
 * Made the dropdown arrow icon [[skinnier|https://github.com/Jermolene/TiddlyWiki5/commit/ec90ac99cf2767b6ff20902d8b01aa1c36778147]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bca1d552803c1839e7385765314f81c5307632b8]] validation of legal characters for fieldnames
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/45a362c2859ed401a0af5ca3bbbc976710bf4acf]] a dropdown for tags in edit mode
 * Added blacklisting of unsage HTML [[elements|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]] and [[attributes|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/baa8cf3dd098bab0a7a8c78b24747c69bd40889f]] a warning indicator to tiddlers in TiddlyWikiClassic format
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/42c67cfeb732fccb10b8ab574c84090dc2471352]] tiddler info ''Advanced'' panel with information about plugins and shadow tiddlers

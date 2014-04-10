@@ -7,7 +7,11 @@ background-color:$(backgroundColor)$;
 \end
 <div class="tw-edit-tags">
 <$fieldmangler>
-<$list filter="[all[current]tags[]sort[title]]" storyview="pop" template="$:/core/ui/TagEditTemplate"/>
+<$list filter="[all[current]tags[]sort[title]]" storyview="pop"><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label">
+<$view field="title" format="text" />
+<$button message="tw-remove-tag" param={{!!title}} class="btn-invisible tw-remove-tag-button">&times;</$button></span>
+</$set>
+</$list>
 
 <div class="tw-edit-add-tag">
 <span class="tw-add-tag-name">
