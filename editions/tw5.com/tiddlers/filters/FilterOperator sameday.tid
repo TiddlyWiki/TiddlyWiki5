@@ -4,11 +4,12 @@ tags: filters
 title: FilterOperator: sameday
 type: text/vnd.tiddlywiki
 
-The ''sameday'' filter operator filters the current list to leave only those tiddlers whose `modified` field is on the same day as the date provided as the operand.
+The ''sameday'' filter operator filters the current list to leave only those tiddlers whose `modified` field is on the same day as the date provided as the operand. The optional suffix allows a different field to be specified.
 
 For example:
 
 |!Filter String |!Description |
 |`[sameday[20140410]]` |Returns a list of the tiddlers modified on the 10th April 2014 |
+|`[sameday:created[20140410]]` |Returns a list of the tiddlers created on the 10th April 2014 |
 
 See [[FilterOperator: eachday]] for an example.
