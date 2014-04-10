@@ -12,3 +12,5 @@ Pour charger des tiddlers à partir d'un fichier ~TiddlyWiki chiffré, vous devr
 ```
 tiddlywiki ./MonWiki --password pa55w0rd --load mon_wiki_secret.html
 ```
+
+À noter que Tiddlywiki refusera de charger une version plus ancienne d'un plugin déjà chargé.
