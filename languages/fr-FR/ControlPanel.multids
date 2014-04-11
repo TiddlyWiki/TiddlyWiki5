@@ -40,6 +40,9 @@ Plugins/Caption: Plugins
 Plugins/Fields/Description: Description
 Plugins/Fields/Title: Titre
 Plugins/Fields/Version: Version
+Plugins/Language/Prompt: Langues
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Thèmes
 Saving/AutoSave/Disabled/Button: Activer
 Saving/AutoSave/Disabled/Prompt: La sauvegarde automatique est désactivée
 Saving/AutoSave/Enabled/Button: Désactiver
