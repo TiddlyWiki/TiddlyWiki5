@@ -12,7 +12,6 @@ type: text/vnd.tiddlywiki
 * New ''Filter'' tab in [[$:/AdvancedSearch]]
 * Initial implementation of CecilyView
 * Overhaul of inconsistencies in TiddlerFilters (see [[Changes to filters in 5.0.9-beta]])
-* 
 
 !! Documentation Improvements
 
@@ -32,10 +31,7 @@ type: text/vnd.tiddlywiki
 * [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/f48701544eda4f79af86b1ad44340e7182bcf024]] viewing of system tiddlers by fading down the `$:/` prefix
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/dd3ee2a603cba35770a8f109e070f271d72861f8]] [[$:/TagManager]] to allow icons to be assigned to tags
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/87c4839fed789b80e0942014c05175e36aacc157]] support for `list-before` and `list-after` fields for controlling tag ordering (see TiddlerTags for details)
-
-!! Scalability Improvements
-
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3afa26b9a318d913ba162d93a63036cb4a94be59]] request for confirmation before abandoning edits to a tiddler
 
 !! Hackability Improvements
 
