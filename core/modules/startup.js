@@ -215,7 +215,7 @@ exports.startup = function() {
 		$tw.perf.report("mainRender",function() {
 			$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 			$tw.pageContainer = document.createElement("div");
-			$tw.utils.addClass($tw.pageContainer,"tw-page-container");
+			$tw.utils.addClass($tw.pageContainer,"tw-page-container-wrapper");
 			document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 			$tw.pageWidgetNode.render($tw.pageContainer,null);
 		})();
