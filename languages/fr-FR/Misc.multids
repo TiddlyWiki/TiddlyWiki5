@@ -3,6 +3,7 @@ title: $:/language/
 ClassicWarning/Hint: Ce tiddler est écrit au format TiddlyWiki Classic, qui n'est pas entièrement compatible avec TiddlyWiki version 5. Pour en savoir plus, rendez-vous à l'adresse http://tiddlywiki.com/static/Upgrading.html. 
 ClassicWarning/Upgrade/Caption: Mettre à jour
 CloseAll/Button: Tout fermer
+ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tiddler « <$text text=<<title>>/> » ?
 ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
 ConfirmOverwriteTiddler: Souhaitez-vous écraser le tiddler « <$text text=<<title>>/> » ?
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
