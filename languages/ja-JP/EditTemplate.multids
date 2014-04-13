@@ -1,6 +1,6 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: 表示を整形したり画像や動的な要素を使いたい場合は [[wiki text|http://tiddlywiki.com/static/WikiText.html]] を使用してください
+Body/Hint: 表示を整形したり画像や動的な要素を使いたい場合は [[wiki text|http://tiddlywiki.com/static/WikiText.html]] 書式を使用してください
 Body/Placeholder: ここに tiddler の本文を入力してください
 Body/Preview/Button/Hide: プレビューを隠す
 Body/Preview/Button/Show: プレビューを表示

@@ -1,10 +1,10 @@
 title: $:/language/ControlPanel/
 
-Advanced/Caption: Advanced
+Advanced/Caption: 詳細設定
 Advanced/Hint: この TiddlyWiki の内部情報
 Advanced/LoadedModules/Caption: ロード済みモジュール
 Advanced/LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
-Advanced/TiddlerFields/Caption: Tiddler Fields
+Advanced/TiddlerFields/Caption: Tiddlerフィールド
 Advanced/TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、シャドウ tiddler は含んでいません）。
 Appearance/Caption: 表示形式
 Appearance/Hint: この TiddlyWiki の見え方を変更する各種方法です。
