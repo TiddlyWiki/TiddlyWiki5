@@ -3,8 +3,9 @@ title: $:/language/
 ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全相容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
 CloseAll/Button: 全部关闭
-ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>" ?
-ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>" ?
+ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的更改？
+ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
+ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
 InvalidFieldName: 栏位名称 "<$text text=<<fieldName>>/>" 包含无效字符，栏位名称只能包含小写字母和底线 (`_`)、 连字号 (`-`) 和小数点 (`.`)
 MissingTiddler/Hint: 佚失条目 "<$text text=<<currentTiddler>>/>" - 点击 {{$:/core/images/edit-button}} 可创建此条目
 RecentChanges/DateFormat: YYYY年0MM月0DD日
