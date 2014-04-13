@@ -1,0 +1,75 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Advanced
+Advanced/Hint: この TiddlyWiki の内部情報
+Advanced/LoadedModules/Caption: ロード済みモジュール
+Advanced/LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
+Advanced/TiddlerFields/Caption: Tiddler Fields
+Advanced/TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、シャドウ tiddler は含んでいません）。
+Appearance/Caption: 表示形式
+Appearance/Hint: この TiddlyWiki の見え方を変更する各種方法です。
+Appearance/Palette/Caption: パレット
+Appearance/Palette/Editor/Clone/Caption: クローン
+Appearance/Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前にクローンを作成することをお勧めします
+Appearance/Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました
+Appearance/Palette/Editor/Prompt: 編集中
+Appearance/Palette/Editor/Reset/Caption: リセット
+Appearance/Palette/HideEditor/Caption: エディタを隠す
+Appearance/Palette/Prompt: 現在のパレット:
+Appearance/Palette/ShowEditor/Caption: エディタを表示
+Appearance/StoryView/Caption: 表示スタイル
+Appearance/StoryView/Prompt: 現在の表示スタイル:
+Appearance/Theme/Caption: テーマ
+Appearance/Theme/Prompt: 現在のテーマ:
+Basics/AnimDuration/Prompt: アニメーション時間:
+Basics/Caption: 基本
+Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保存時の表示を維持</$button> することもできます。
+Basics/DefaultTiddlers/Prompt: デフォルト tiddler:
+Basics/DefaultTiddlers/TopHint: このファイルを開いたときに初期表示される tiddler を設定してください:
+Basics/Language/Prompt: 現在の言語:
+Basics/OverriddenShadowTiddlers/Prompt: 上書きされているシャドウ tiddler 数:
+Basics/ShadowTiddlers/Prompt: シャドウ tiddler 数:
+Basics/Subtitle/Prompt: サブタイトル:
+Basics/SystemTiddlers/Prompt: システム tiddler 数:
+Basics/Tags/Prompt: タグ数:
+Basics/Tiddlers/Prompt: tiddler 数:
+Basics/Title/Prompt: この ~TiddlyWiki のタイトル:
+Basics/Username/Prompt: 編集者として表示するユーザ名:
+Basics/Version/Prompt: ~TiddlyWiki バージョン:
+Plugins/Caption: プラグイン
+Plugins/Fields/Description: 説明
+Plugins/Fields/Title: タイトル
+Plugins/Fields/Version: バージョン
+Plugins/Language/Prompt: 言語
+Plugins/Plugin/Prompt: プラグイン
+Plugins/Theme/Prompt: テーマ
+Saving/AutoSave/Disabled/Button: 有功にする
+Saving/AutoSave/Disabled/Prompt: 自動保存は現在「無効」です。
+Saving/AutoSave/Enabled/Button: 無効にする
+Saving/AutoSave/Enabled/Prompt: 自動保存は現在「有効」です。
+Saving/AutoSave: 自動保存
+Saving/Caption: 保存
+Saving/Heading: 保存
+Saving/TiddlySpot/Advanced/Heading: 詳細設定
+Saving/TiddlySpot/BackupDir: バックアップディレクトリ
+Saving/TiddlySpot/Backups: バックアップ
+Saving/TiddlySpot/Filename: アップロードファイル名
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //サーバーのURLには `http://<wikiname>.tiddlyspot.com/store.cgi` がデフォルトで使用されます。ほかのサーバーのアドレスを指定することもできます。//
+Saving/TiddlySpot/Password: パスワード
+Saving/TiddlySpot/ServerURL: サーバーURL
+Saving/TiddlySpot/UploadDir: アップロードディレクトリ
+Saving/TiddlySpot/UserName: Wiki 名
+Tools/Caption: ツール
+Tools/Download/Full/Caption: Download full wiki
+Tools/Encryption/ChangePassword/Button: パスワード変更
+Tools/Encryption/ClearPassword/Button: パスワードクリア
+Tools/Encryption/Disabled/Prompt: この wiki は暗号化されていません。
+Tools/Encryption/Enabled/Prompt: この wiki は暗号化されています。
+Tools/Encryption/Heading: 暗号化
+Tools/Encryption/SetPassword/Button: パスワード設定
+Tools/Export/AllAsStaticHTML/Caption: すべての tiddler を含む閲覧用 HTML としてダウンロードする
+Tools/Export/Heading: エクスポート
+Tools/Import/Heading: インポート
+Tools/Import/Hint: 内容を取り込みたいファイルを参照ボタンから選択してください。ファイル中の個々の tiddler は個別にインポートされます。このブラウザのウィンドウに直接ファイルをドラッグ＆ドロップすることもできます。
+Tools/Import/Prompt: インポート:

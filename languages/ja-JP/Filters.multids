@@ -1,0 +1,12 @@
+title: $:/language/Filters/
+
+AllTiddlers: システム tiddler を除くすべての tiddler
+RecentTiddlers: 最近更新された tiddler
+AllTags: システムタグを除くすべてのタグ
+Missing: 未作成の tiddler
+Drafts: ドラフト状態の tiddler
+Orphans: 孤立状態の tiddler
+SystemTiddlers: システム tiddler
+ShadowTiddlers: シャドウ tiddler
+OverriddenShadowTiddlers: 上書きされているシャドウ tiddler
+SystemTags: システムタグ
