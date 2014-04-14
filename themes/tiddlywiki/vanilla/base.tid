@@ -1,9 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/stylesheet]]
 
-\define if-no-sidebar(text)
-<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">$text$</$reveal>
-\end
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
@@ -456,7 +453,7 @@ a.tw-tiddlylink-external:hover {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 84px 0 28px 42px;
+		padding: 71px 0 28px 42px;
 	}
 
 	.story-river {
@@ -467,12 +464,11 @@ a.tw-tiddlylink-external:hover {
 		padding: 42px 42px 42px 42px;
 	}
 
-
-
 <<if-no-sidebar "
 
 	.story-river {
 		width: auto;
+		padding: 0;
 	}
 
 ">>
@@ -543,7 +539,8 @@ a.tw-tiddlylink-external:hover {
 <<if-no-sidebar "
 
 	.tw-tiddler-frame {
-		width: auto;
+		width: 100%;
+		margin-bottom: 0;
 	}
 
 ">>

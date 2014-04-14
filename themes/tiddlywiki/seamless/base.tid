@@ -3,6 +3,10 @@ tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
+/*
+Rules copied from Snow White
+*/
+
 .tw-page-controls button svg, .tw-tiddler-controls button svg, .tw-topbar button svg {
 	<<transition "fill 150ms ease-in-out">>
 }
@@ -50,26 +54,49 @@ tags: [[$:/tags/stylesheet]]
 	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
 }
 
+/*
+Seamless modifications
+*/
+
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
 
+<<if-sidebar "
+
+	/* Drop the tiddler frame padding */
 	body.tw-body .tw-tiddler-frame {
 		padding: 0;
 	}
 
+">>
+
+	/* Move the sidebar up so that the title lines up */
 	body.tw-body .tw-sidebar-scrollable {
-		padding: 57px 0 28px 42px;
+		padding: 43px 0 28px 42px;
+	}
+
+	/* Stop the tiddler info panel from bleeding into the tiddler frame padding */
+	body.tw-body .tw-tiddler-info {
+		margin: 0;
+	}
+
+	/* Stop message boxes from bleeding into the tiddler frame padding */
+	body.tw-body .tw-message-box {
+		margin: 21px 0 21px 0;
 	}
 
 }
 
+/* Use the tiddler background colour for the page background */
 html body.tw-body {
 	background-color: <<colour background>>;
 }
 
+/* Adjust the colour of the page controls */
 body.tw-body .tw-page-controls svg {
 	fill: <<colour muted-foreground>>;
 }
 
+/* Adjust the colour of the sidebar selected tabs */
 body.tw-body .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour background>>;
 }

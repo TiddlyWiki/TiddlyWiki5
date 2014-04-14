@@ -2,5 +2,7 @@ title: $:/core/ui/PageTemplate/toprightbar
 tags: $:/tags/PageTemplate
 
 <span class="tw-topbar tw-topbar-right">
+
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/TopRightBar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+
 </span>
