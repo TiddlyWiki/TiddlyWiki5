@@ -1,5 +1,6 @@
 title: $:/themes/tiddlywiki/seamless/base
 tags: [[$:/tags/stylesheet]]
+list-after: $:/themes/tiddlywiki/vanilla/base
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
@@ -88,6 +89,10 @@ Seamless modifications
 
 /* Use the tiddler background colour for the page background */
 html body.tw-body {
+	background-color: <<colour background>>;
+}
+
+html:-webkit-full-screen {
 	background-color: <<colour background>>;
 }
 

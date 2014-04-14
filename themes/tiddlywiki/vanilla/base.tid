@@ -27,6 +27,10 @@ html {
 	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
 }
 
+html:-webkit-full-screen {
+	background-color: <<colour page-background>>;
+}
+
 body.tw-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics##fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics##lineheight}};
