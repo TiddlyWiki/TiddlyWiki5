@@ -56,9 +56,16 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 		domNode.value = editInfo.value;
 	}
 	// Add an input event handler
+	var editType;
+	if(this.editEditType === "lazy") {
+		editType = {name: "blur", handlerObject: this, handlerMethod: "handleInputEvent"};
+	}
+	else {
+		editType = {name: "input", handlerObject: this, handlerMethod: "handleInputEvent"};
+	}
 	$tw.utils.addEventListeners(domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
-		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
+		editType
 	]);
 	// Insert the element into the DOM
 	parent.insertBefore(domNode,nextSibling);
@@ -130,6 +137,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.editField = this.getAttribute("field","text");
 	this.editIndex = this.getAttribute("index");
+	this.editEditType = this.getAttribute("edit");
 	this.editDefault = this.getAttribute("default");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
