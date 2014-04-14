@@ -68,7 +68,7 @@ Scroll an element into view
 ScrollableWidget.prototype.scrollIntoView = function(element) {
 	var duration = $tw.utils.getAnimationDuration();
 	this.cancelScroll();
-	this.startTime = new Date();
+	this.startTime = Date.now();
 	var scrollPosition = {
 		x: this.outerDomNode.scrollLeft,
 		y: this.outerDomNode.scrollTop
@@ -112,7 +112,7 @@ ScrollableWidget.prototype.scrollIntoView = function(element) {
 			if(duration <= 0) {
 				t = 1;
 			} else {
-				t = ((new Date()) - self.startTime) / duration;	
+				t = ((Date.now()) - self.startTime) / duration;	
 			}
 			if(t >= 1) {
 				self.cancelScroll();

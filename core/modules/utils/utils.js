@@ -475,7 +475,7 @@ exports.timer = function(base) {
 	} else if(window.performance) {
 		m = performance.now();
 	} else {
-		m = new Date();
+		m = Date.now();
 	}
 	if(typeof base !== "undefined") {
 		m = m - base;
