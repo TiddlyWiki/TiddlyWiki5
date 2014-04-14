@@ -209,19 +209,8 @@ exports.startup = function() {
 				$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
 			}
 		}));
-		// Display the PageMacros, which includes the PageTemplate
-		var templateTitle = "$:/core/ui/PageMacros",
-			parser = $tw.wiki.parseTiddler(templateTitle);
-		$tw.perf.report("mainRender",function() {
-			$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
-			$tw.pageContainer = document.createElement("div");
-			$tw.utils.addClass($tw.pageContainer,"tw-page-container-wrapper");
-			document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-			$tw.pageWidgetNode.render($tw.pageContainer,null);
-		})();
-		$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
-		}));
+		// Display the $:/PageMacros tiddler to kick off the display
+		renderPage();
 		// Fix up the link between the root widget and the page container
 		$tw.rootWidget.domNodes = [$tw.pageContainer];
 		$tw.rootWidget.children = [$tw.pageWidgetNode];
@@ -251,7 +240,22 @@ exports.startup = function() {
 		);
 		commander.execute();
 	}
-
 };
+
+function renderPage() {
+	// Display the PageMacros, which includes the PageTemplate
+	var templateTitle = "$:/core/ui/PageMacros",
+		parser = $tw.wiki.parseTiddler(templateTitle);
+	$tw.perf.report("mainRender",function() {
+		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
+		$tw.pageContainer = document.createElement("div");
+		$tw.utils.addClass($tw.pageContainer,"tw-page-container-wrapper");
+		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+		$tw.pageWidgetNode.render($tw.pageContainer,null);
+	})();
+	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
+		$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
+	}));
+}
 
 })();
