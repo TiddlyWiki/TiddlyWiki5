@@ -15,6 +15,9 @@ This is the main application logic for both the client and server
 // Set to `true` to enable performance instrumentation
 var PERFORMANCE_INSTRUMENTATION = false;
 
+// Time (in ms) that we defer refreshing changes to draft tiddlers
+var DRAFT_TIDDLER_TIMEOUT = 400;
+
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
@@ -242,8 +245,12 @@ exports.startup = function() {
 	}
 };
 
+
+/*
+Main render function for PageMacros, which includes the PageTemplate
+*/
 function renderPage() {
-	// Display the PageMacros, which includes the PageTemplate
+	// Parse and render the template
 	var templateTitle = "$:/core/ui/PageMacros",
 		parser = $tw.wiki.parseTiddler(templateTitle);
 	$tw.perf.report("mainRender",function() {
@@ -253,8 +260,36 @@ function renderPage() {
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
 		$tw.pageWidgetNode.render($tw.pageContainer,null);
 	})();
+	// Prepare refresh mechanism
+	var deferredChanges = Object.create(null),
+		timerId;
+	function refresh() {
+		// Process the refresh
+		$tw.pageWidgetNode.refresh(deferredChanges,$tw.pageContainer,null);
+		deferredChanges = Object.create(null);
+	}
+	// Add the change event handler
 	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
-		$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
+		// Check if only drafts have changed
+		var onlyDraftsHaveChanged = true;
+		for(var title in changes) {
+			var tiddler = $tw.wiki.getTiddler(title);
+			if(!tiddler || !tiddler.hasField("draft.of")) {
+				onlyDraftsHaveChanged = false;
+			}
+		}
+		// Defer the change if only drafts have changed
+		if(timerId) {
+			clearTimeout(timerId);
+		}
+		timerId = null;
+		if(onlyDraftsHaveChanged) {
+			timerId = setTimeout(refresh,DRAFT_TIDDLER_TIMEOUT);
+			$tw.utils.extend(deferredChanges,changes);
+		} else {
+			$tw.utils.extend(deferredChanges,changes);
+			refresh();
+		}
 	}));
 }
 
