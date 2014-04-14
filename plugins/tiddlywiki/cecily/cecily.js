@@ -85,7 +85,7 @@ CecilyStoryView.prototype.loadMap = function() {
 	this.map = this.listWidget.wiki.getTiddlerData(this.getMapTiddlerTitle(),{
 		positions: {},
 		newTiddlerPosition: {x: 0, y: 0},
-		width: 600
+		width: 660
 	});
 };
 

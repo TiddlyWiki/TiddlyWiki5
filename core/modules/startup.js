@@ -13,7 +13,7 @@ This is the main application logic for both the client and server
 "use strict";
 
 // Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION = true;
+var PERFORMANCE_INSTRUMENTATION = false;
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
