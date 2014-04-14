@@ -30,7 +30,7 @@ background-color:$(backgroundColor)$;
 <div class="tw-block-dropdown">
 
 <$linkcatcher set="$:/temp/NewTagName" setTo="" message="tw-add-tag">
-<$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]">
+<$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]-[is[current]tags[]]">
 <$link>
 <$set name="backgroundColor" value={{!!color}}>
 <span style=<<tag-styles>> class="tw-tag-label">
