@@ -1,0 +1,12 @@
+title: $:/language/Filters/
+
+AllTiddlers: システムtiddler以外のすべてのtiddler
+RecentTiddlers: 最近変更されたtiddler
+AllTags: システムタグ以外のすべてのタグ
+Missing: リンクされているが定義されていないtiddler
+Drafts: ドラフトtiddler
+Orphans: リンクされていないtiddler
+SystemTiddlers: システムtiddler
+ShadowTiddlers: 隠しtiddler
+OverriddenShadowTiddlers: 上書きされた隠しtiddler
+SystemTags: システムタグ
