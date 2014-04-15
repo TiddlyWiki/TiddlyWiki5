@@ -120,7 +120,8 @@ var insertMacroCall = function(w,output,macroName,paramString) {
 	output.push({
 		type: "macrocall",
 		name: macroName,
-		params: params
+		params: params,
+		isBlock: true
 	});
 }
 
