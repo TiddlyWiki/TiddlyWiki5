@@ -10,8 +10,11 @@ type: text/vnd.tiddlywiki
 
 * Improved layout, including a ''hamburger'' icon for dismissing the sidebar
 * New ''Filter'' tab in [[$:/AdvancedSearch]]
+* Added new ''Seamless'' theme
 * Initial implementation of CecilyView
 * Overhaul of inconsistencies in TiddlerFilters (see [[Changes to filters in 5.0.9-beta]])
+* New translations for Italian and Japanese
+* Performance improvements, particularly [[during editing|https://github.com/Jermolene/TiddlyWiki5/commit/0aa559cd23b3742c8f10c5ac144860d816699782]]
 
 !! Documentation Improvements
 
