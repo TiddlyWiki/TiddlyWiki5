@@ -1,14 +1,14 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add formatting, images, and dynamic features
-Body/Placeholder: Type the text for this tiddler
-Body/Preview/Button/Hide: hide preview
-Body/Preview/Button/Show: show preview
-Fields/Add/Button: add
-Fields/Add/Name/Placeholder: field name
-Fields/Add/Prompt: Add a new field:
-Fields/Add/Value/Placeholder: field value
-Tags/Add/Button: add
-Tags/Add/Placeholder: tag name
-Type/Placeholder: content type
-Type/Prompt: Type:
+Body/Hint: 文書整形、画像、動的機能を追加するには[[wiki text|http://tiddlywiki.com/static/WikiText.html]]を使用してください
+Body/Placeholder: このtiddlerのタイプ
+Body/Preview/Button/Hide: プレビューを隠す
+Body/Preview/Button/Show: プレビューを表示する
+Fields/Add/Button: 追加
+Fields/Add/Name/Placeholder: フィールド名
+Fields/Add/Prompt: 新しいフィールドを追加:
+Fields/Add/Value/Placeholder: フィールド値
+Tags/Add/Button: 追加
+Tags/Add/Placeholder: タグ名
+Type/Placeholder: コンテンツのタイプ
+Type/Prompt: タイプ:

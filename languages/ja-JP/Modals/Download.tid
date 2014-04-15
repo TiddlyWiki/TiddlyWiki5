@@ -4,9 +4,9 @@ subtitle: Download changes
 footer: <$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>
 help: http://tiddlywiki.com/static/DownloadingChanges.html
 
-Your browser only supports manual saving.
+お使いのブラウザは手動保存にしか対応していません。
 
-To save your modified wiki, right click on the download link below and select "Download file" or "Save file", and then choose the folder and filename.
+変更されたwikiを保存するには、下のダウンロードリンクを右クリックして"ファイルをダウンロードする"や"ファイルを保存する"を選び、フォルダーやファイル名を選んでください。
 
 //You can marginally speed things up by clicking the link with the control key (Windows) or the options/alt key (Mac OS X). You will not be prompted for the folder or filename, but your browser is likely to give it an unrecognisable name -- you may need to rename the file to include an `.html` extension before you can do anything useful with it.//
 

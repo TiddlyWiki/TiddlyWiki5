@@ -1,6 +1,6 @@
 title: $:/language/ControlPanel/
 
-Advanced/Caption: Advanced
+Advanced/Caption: 高度な機能
 Advanced/Hint: Internal information about this TiddlyWiki
 Advanced/LoadedModules/Caption: Loaded Modules
 Advanced/LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
