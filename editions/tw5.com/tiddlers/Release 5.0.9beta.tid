@@ -41,8 +41,7 @@ released: 201404152139
 !! Hackability Improvements
 
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/bdbbf94326f70db0f8ef196270ab9e92bfde10fb]] [[Transclusion in WikiText]] syntax to allow translusion of a template without affecting the current tiddler
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8a7d0f53d380e9ca93ee34d8ad05090d511e95c4]] `sourceURL` handling to `eval()` so that tiddler modules can be [[properly debugged|https://chromedevtools.googlecode.com/svn-history/r421/trunk/tutorials/b
-reapoints/index.html#regular]] in Chrome
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8a7d0f53d380e9ca93ee34d8ad05090d511e95c4]] `sourceURL` handling to `eval()` so that tiddler modules can be [[properly debugged|https://chromedevtools.googlecode.com/svn-history/r421/trunk/tutorials/breapoints/index.html#regular]] in Chrome
 * New ScrollableWidget giving better control over scrollable regions
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d3c0296a87198296cff26aa7ce7bb8274cdcc3f7]] new CSS class `tw-site-title` for the site title
 * [[Disable|https://github.com/Jermolene/TiddlyWiki5/commit/e397e4d15951c1395c7752a7563f002ca459206e]] the TiddlyWeb sync adaptor unless the wiki is loaded over HTTP
