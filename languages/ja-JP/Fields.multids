@@ -12,12 +12,12 @@ description: プラグインなどの説明文
 draft.of: それがドラフト tiddler であるときのタイトル
 draft.title: ドラフト tiddler が正式版になったときに使用される予定のタイトル
 footer: ウィザードのフッタ部テキスト
-hack-to-give-us-something-to-compare-against: A temporary storage field used in [[$:/core/templates/static.content]]
+hack-to-give-us-something-to-compare-against: [[$:/core/templates/static.content]] で使用される一時保管用フィールド
 icon: 紐付けられているアイコン tiddler のタイトル
 library: "yes" となっている場合、その tiddler は JavaScript ライブラリとして保存されなければならない
 list: そのtiddlerに紐付くtiddler名の順序付きリスト
-list-before: If set, the title of a tiddler before which this tiddler should be added to the ordered list of tiddler titles, or at the start of the list if this field is present but empty
-list-after: If set, the title of the tiddler after which this tiddler should be added to the ordered list of tiddler titles
+list-before: このフィールドが設定されたtiddlerは、順序付きリストでこのフィールドに記載の名前のtiddlerの前に並ぶ。ただし空文字列が指定されていた場合は順序付きリストの先頭になる。
+list-after: このフィールドが設定されたtiddlerは、順序付きリストでこのフィールドに記載の名前のtiddlerの後ろに並ぶ。
 modified: その tiddler の最終更新日時
 modifier: その tiddler を最後に更新したユーザ名
 name: 人が読める形のプラグイン tiddler 名
@@ -29,6 +29,6 @@ source: その tiddler のソース URL
 subtitle: ウィザードのサブタイトル
 tags: その tiddler に付けられたタグのリスト
 text: tiddler の本文
-title: tiddler のユニークな名称
+title: tiddler の一意となる名称
 type: その tiddler の種別
 version: プラグインのバージョン情報
