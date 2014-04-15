@@ -57,7 +57,7 @@ PageScroller.prototype.scrollIntoView = function(element) {
 	var duration = $tw.utils.getAnimationDuration();
 	// Now get ready to scroll the body
 	this.cancelScroll();
-	this.startTime = new Date();
+	this.startTime = Date.now();
 	var scrollPosition = $tw.utils.getScrollPosition();
 	// Get the client bounds of the element and adjust by the scroll position
 	var clientBounds = element.getBoundingClientRect(),
@@ -94,7 +94,7 @@ PageScroller.prototype.scrollIntoView = function(element) {
 			if(duration <= 0) {
 				t = 1;
 			} else {
-				t = ((new Date()) - self.startTime) / duration;	
+				t = ((Date.now()) - self.startTime) / duration;	
 			}
 			if(t >= 1) {
 				self.cancelScroll();

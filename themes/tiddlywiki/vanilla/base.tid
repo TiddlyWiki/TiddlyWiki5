@@ -27,6 +27,10 @@ html {
 	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
 }
 
+html:-webkit-full-screen {
+	background-color: <<colour page-background>>;
+}
+
 body.tw-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics##fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics##lineheight}};
@@ -453,7 +457,7 @@ a.tw-tiddlylink-external:hover {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 84px 0 28px 42px;
+		padding: 71px 0 28px 42px;
 	}
 
 	.story-river {
@@ -463,6 +467,16 @@ a.tw-tiddlylink-external:hover {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}};
 		padding: 42px 42px 42px 42px;
 	}
+
+<<if-no-sidebar "
+
+	.story-river {
+		width: auto;
+		padding: 0;
+	}
+
+">>
+
 }
 
 @media print {
@@ -525,6 +539,15 @@ a.tw-tiddlylink-external:hover {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
 	}
+
+<<if-no-sidebar "
+
+	.tw-tiddler-frame {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+">>
 
 	.tw-tiddler-info {
 		margin: 0 -42px 0 -42px;

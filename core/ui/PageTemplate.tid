@@ -1,5 +1,17 @@
 title: $:/core/ui/PageTemplate
 
+\define containerClasses()
+tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
+\end
+
+<$set name="themeTitle" value={{$:/view}}>
+
+<$set name="currentTiddler" value={{$:/language}}>
+
+<$set name="languageTitle" value={{!!name}}>
+
+<div class=<<containerClasses>>>
+
 <$navigator story="$:/StoryList" history="$:/HistoryList">
 
 <$dropzone>
@@ -14,3 +26,10 @@ title: $:/core/ui/PageTemplate
 
 </$navigator>
 
+</div>
+
+</$set>
+
+</$set>
+
+</$set>

@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/ja-JP",
+	"name": "ja-JP",
+	"plugin-type": "language",
+	"description": "Japanese(Japanese)",
+	"author": "pekopeko1",
+	"core-version": ">=5.0.9"
+}

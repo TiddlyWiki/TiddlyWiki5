@@ -8,14 +8,17 @@ type: text/vnd.tiddlywiki
 
 !! Highlights
 
-* Improved layout, including a ''hamburger'' icon for dismissing the sidebar
+* Improved layout, including a ''hamburger'' icon for dismissing the sidebar and expanding the story river to fill the space
+* Added new ''Seamless'' theme
 * New ''Filter'' tab in [[$:/AdvancedSearch]]
 * Initial implementation of CecilyView
 * Overhaul of inconsistencies in TiddlerFilters (see [[Changes to filters in 5.0.9-beta]])
-* 
+* New translations for Italian and Japanese
+* Performance improvements, particularly [[during editing|https://github.com/Jermolene/TiddlyWiki5/commit/0aa559cd23b3742c8f10c5ac144860d816699782]]
 
 !! Documentation Improvements
 
+* Improved and reorganised documentation for TiddlerFilters
 * Demo of [[Making curved text with SVG]]
 * [[Community]] links are now broken up into individual tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a19432541e776bfb63b1b985a60f472e9f1d4352]] overview diagram of [[TiddlyWiki Architecture]]
@@ -32,10 +35,7 @@ type: text/vnd.tiddlywiki
 * [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/f48701544eda4f79af86b1ad44340e7182bcf024]] viewing of system tiddlers by fading down the `$:/` prefix
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/dd3ee2a603cba35770a8f109e070f271d72861f8]] [[$:/TagManager]] to allow icons to be assigned to tags
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/87c4839fed789b80e0942014c05175e36aacc157]] support for `list-before` and `list-after` fields for controlling tag ordering (see TiddlerTags for details)
-
-!! Scalability Improvements
-
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3afa26b9a318d913ba162d93a63036cb4a94be59]] request for confirmation before abandoning edits to a tiddler
 
 !! Hackability Improvements
 

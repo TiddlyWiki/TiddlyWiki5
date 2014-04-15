@@ -333,11 +333,23 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 		originalTitle = draftTiddler.fields["draft.of"],
 		storyList = this.getStoryList();
 	if(draftTiddler && originalTitle) {
+		// Ask for confirmation if the tiddler text has changed
+		var isConfirmed = true;
+		if(this.wiki.getTiddlerText(draftTitle) !== this.wiki.getTiddlerText(originalTitle)) {
+			isConfirmed = confirm($tw.language.getString(
+				"ConfirmCancelTiddler",
+				{variables:
+					{title: draftTitle}
+				}
+			));
+		}
 		// Remove the draft tiddler
-		this.wiki.deleteTiddler(draftTitle);
-		this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
-		this.addToHistory(originalTitle,event.navigateFromClientRect);
-		this.saveStoryList(storyList);
+		if(isConfirmed) {
+			this.wiki.deleteTiddler(draftTitle);
+			this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
+			this.addToHistory(originalTitle,event.navigateFromClientRect);
+			this.saveStoryList(storyList);
+		}
 	}
 	return false;
 };

@@ -46,6 +46,13 @@ background-image: -ms-linear-gradient($gradient$);
 \define datauri(title)
 <$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
 \end
+\define if-sidebar(text)
+<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes">$text$</$reveal>
+\end
+\define if-no-sidebar(text)
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">$text$</$reveal>
+\end
+
 
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/stylesheet]]">
 <$transclude/>

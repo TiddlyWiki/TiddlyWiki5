@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+bag: tiddlerが来たbagの名前
+caption: タブやボタンに表示されるテキスト
+color: tiddlerに関連するCSSの色の値
+component: [[alert tiddler|AlertMechanism]]の原因となるコンポーネントの名前
+current-tiddler: [[history list|HistoryMechanism]]の上部のtiddlerをキャッシュするのに使用する
+created: tiddlerが作成された日付
+creator: tiddlerが作成した人の名前
+dependents: プラグイン用に依存するプラグインのタイトルの一覧を表示する
+description: プラグインやモーダルダイアログの説明文
+draft.of: ドラフトtiddler用に、このtiddlerをドラフトとするtiddlerのタイトルを記入する
+draft.title: ドラフトtiddler用に、tiddlerの新しいタイトルを記入する
+footer: ウィザード用のフッター
+hack-to-give-us-something-to-compare-against: [[$:/core/templates/static.content]]内の一時的な保管フィールド
+icon: このtiddlerに関連するアイコンを含むこのtiddlerのタイトル
+library: "yes"を設定するとtiddlerがJavaScriptライブラリとして保存される
+list: 関連するtiddlerのリスト
+list-before: 設定したtiddlerの後にリストされる。空ならリストの先頭になる
+list-after: 設定したtiddlerの前ににリストされる
+modified: tiddlerが最後に変更された日時
+modifier: tiddlerを最後に変更した人の名前
+name: プラグインtiddlerに関連した人間が読みやすい名前
+plugin-priority: プラグインtiddlerの優先度を示す数値
+plugin-type: プラグインtiddlerのタイプ
+revision: サーバに保持されるこのtiddlerのリビジョン
+released: TiddlyWikiのリリース日
+source: tiddlerに関連するソースURL
+subtitle: ウィザード用のサブタイトル
+tags: tidlerに関連するタグのリスト
+text: tiddlerの本文
+title: tiddlerの一意な名前
+type: tiddlerのコンテンツのタイプ
+version: プラグインのバージョン

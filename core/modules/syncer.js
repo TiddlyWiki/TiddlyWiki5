@@ -267,7 +267,7 @@ Synchronise a set of changes to the server
 */
 Syncer.prototype.syncToServer = function(changes) {
 	var self = this,
-		now = new Date(),
+		now = Date.now(),
 		filteredChanges = this.filterFn.call(this.wiki,function(callback) {
 			$tw.utils.each(changes,function(change,title) {
 				var tiddler = self.wiki.getTiddler(title);
@@ -371,7 +371,7 @@ Queue up a sync task. If there is already a pending task for the tiddler, just u
 */
 Syncer.prototype.enqueueSyncTask = function(task) {
 	var self = this,
-		now = new Date();
+		now = Date.now();
 	// Set the timestamps on this task
 	task.queueTime = now;
 	task.lastModificationTime = now;
@@ -474,7 +474,7 @@ Choose the next applicable task
 Syncer.prototype.chooseNextTask = function() {
 	var self = this,
 		candidateTask = null,
-		now = new Date();
+		now = Date.now();
 	// Select the best candidate task
 	$tw.utils.each(this.taskQueue,function(task,title) {
 		// Exclude the task if there's one of the same name in progress

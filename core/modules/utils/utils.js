@@ -379,7 +379,7 @@ Returns an object with the following fields, all optional:
 */
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
-	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##([^\s]+)))?\s*/mg,
+	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##(.+)))?\s*/mg,
 		match = reTextRef.exec(textRef);
 	if(match && reTextRef.lastIndex === textRef.length) {
 		// Return the parts
@@ -475,7 +475,7 @@ exports.timer = function(base) {
 	} else if(window.performance) {
 		m = performance.now();
 	} else {
-		m = new Date();
+		m = Date.now();
 	}
 	if(typeof base !== "undefined") {
 		m = m - base;
