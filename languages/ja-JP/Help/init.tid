@@ -1,23 +1,23 @@
 title: $:/language/Help/init
 description: Initialise a new wiki folder
 
-Initialise an empty [[WikiFolder|WikiFolders]] with a copy of the specified edition.
+空の [[Wikiフォルダ|WikiFolders]] を初期化し、その中に指定したエディションの内容をコピーします。
 
 ```
 --init <edition> [<edition> ...]
 ```
 
-For example:
+使用例:
 
 ```
 tiddlywiki ./MyWikiFolder --init empty
 ```
 
-Note:
+備考:
 
-* The wiki folder directory will be created if necessary
-* The "edition" defaults to ''empty''
-* The init command will fail if the wiki folder is not empty
-* The init command removes any `includeWikis` definitions in the edition's `tiddlywiki.info` file
-* When multiple editions are specified, editions initialised later will overwrite any files shared with earlier editions (so, the final `tiddlywiki.info` file will be copied from the last edition)
-* `--help editions` returns a list of available editions
+* 必要ならば Wiki フォルダが新たに作成されます。
+* デフォルトのエディションは ''empty'' です。
+* wiki フォルダが空ではない場合、init コマンドは失敗します。
+* init コマンドは指定エディションの `tiddlywiki.info` ファイルに指定されている `includeWikis` は除外します。
+* 複数のエディションを指定した場合、先に指定したエディションに含まれているファイルは、後に指定したエディションに同名のファイルが含まれていると上書きされます。つまり最終的な `tiddlywiki.info` は最後に指定したエディションのものが使用されます。
+* `--help editions` で使用できるエディションの一覧を表示します。

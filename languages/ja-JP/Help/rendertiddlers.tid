@@ -1,13 +1,13 @@
 title: $:/language/Help/rendertiddlers
 description: Render tiddlers matching a filter to a specified ContentType
 
-Render a set of tiddlers matching a filter to separate files of a specified ContentType (defaults to `text/html`) and extension (defaults to `.html`).
+フィルタパターンを指定してマッチする tiddler を指定した ContentType（デフォルトは`text/html`）と拡張子（デフォルトは`.html`）で出力します。 
 
 ```
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
 ```
 
-For example:
+使用例:
 
 ```
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
