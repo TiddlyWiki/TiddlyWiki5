@@ -51,7 +51,7 @@ var setAttr = function(node,attr,value) {
 	if(!node.attributes) {
 		node.attributes = {};
 	}
-	node.attributes[attr] = value;
+	node.attributes[attr] ={type: "string", value:value} ;
 };
 
 var inlineCssHelper = function(w) {
@@ -80,17 +80,14 @@ var inlineCssHelper = function(w) {
 };
 
 var applyCssHelper = function(e,styles) {
+
 	if(styles.length > 0) {
-		if(!e.attributes) {
-			e.attributes = {};
-		}
-		if(!e.attributes.style) {
-			e.attributes.style = {};
-		}
+
 		for(var t=0; t< styles.length; t++) {
-			e.attributes.style[styles[t].style] = styles[t].value;
+			$tw.utils.addStyleToParseTreeNode(e,$tw.utils.roundTripPropertyName(styles[t].style),styles[t].value);
 		}
 	}
+	
 };
 
 var enclosedTextHelper = function(w) {
@@ -98,23 +95,40 @@ var enclosedTextHelper = function(w) {
 	var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 	if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 		var text = lookaheadMatch[1];
-		w.output.push($tw.Tree.Element(this.element,null,[$tw.Tree.Text(text)]));
+		w.output.push({type:"element",tag:this.element,
+			children:[{type: "text",text: lookaheadMatch[1]}]});
 		w.nextMatch = lookaheadMatch.index + lookaheadMatch[0].length;
 	}
 };
 
-var insertMacroCall = function(w,output,name,params,content) {
-	if(name in w.wiki.macros) {
-		var macroNode = $tw.Tree.Macro(name,{
-			srcParams: params,
-			content: content,
-			wiki: w.wiki
-		});
-		w.dependencies.mergeDependencies(macroNode.dependencies);
-		output.push(macroNode);
+var insertMacroCall = function(w,output,macroName,paramString) {
+	var params = [],
+		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
+		paramMatch = reParam.exec(paramString);
+	while(paramMatch) {
+		// Process this parameter
+		var paramInfo = {
+			value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5]
+		};
+		if(paramMatch[1]) {
+			paramInfo.name = paramMatch[1];
+		}
+		params.push(paramInfo);
+		// Find the next match
+		paramMatch = reParam.exec(paramString);
 	}
-};
+	output.push({
+		type: "macrocall",
+		name: macroName,
+		params: params
+	});
+}
 
+
+var isLinkExternal = function(to) {
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s'"]+(?:\/|\b)/i;
+	return externalRegExp.test(to);
+};
 var rules = [
 {
 	name: "table",
@@ -126,7 +140,9 @@ var rules = [
 	rowTypes: {"c":"caption", "h":"thead", "":"tbody", "f":"tfoot"},
 	handler: function(w)
 	{
-		var table = $tw.Tree.Element("table",{"class": "table"},[]);
+		var table = {type:"element",tag:"table",attributes: {"class": {type: "string", value:"table"}},
+					children: []};
+		
 		w.output.push(table);
 		var prevColumns = [];
 		var currRowType = null;
@@ -142,7 +158,7 @@ var rules = [
 				w.nextMatch += lookaheadMatch[0].length+1;
 			} else {
 				if(nextRowType != currRowType) {
-					rowContainer = $tw.Tree.Element(this.rowTypes[nextRowType],{},[]);
+					rowContainer = {type:"element",tag:this.rowTypes[nextRowType],children: []};
 					table.children.push(rowContainer);
 					currRowType = nextRowType;
 				}
@@ -154,11 +170,14 @@ var rules = [
 						table.children.pop(); // Take rowContainer out of the children array
 						table.children.splice(0,0,rowContainer); // Insert it at the bottom						
 					}
+					rowContainer.attributes={};
 					rowContainer.attributes.align = rowCount === 0 ? "top" : "bottom";
 					w.subWikifyTerm(rowContainer.children,this.rowTermRegExp);
 				} else {
-					var theRow = $tw.Tree.Element("tr",{},[]);
-					theRow.attributes["class"] = rowCount%2 ? "oddRow" : "evenRow";
+					var theRow = {type:"element",tag:"tr",
+						attributes: {"class": {type: "string", value:rowCount%2 ? "oddRow" : "evenRow"}},
+						children: []};
+					
 					rowContainer.children.push(theRow);
 					this.rowHandler(w,theRow.children,prevColumns);
 					rowCount++;
@@ -179,15 +198,16 @@ var rules = [
 			if(cellMatch[1] == "~") {
 				// Rowspan
 				var last = prevColumns[col];
-				if(last) {
-					last.rowSpanCount++;
-					last.element.attributes.rowspan = last.rowSpanCount;
-					last.element.attributes.valign = "center";
-					if(colSpanCount > 1) {
-						last.element.attributes.colspan = colSpanCount;
-						colSpanCount = 1;
-					}
+			if(last) {
+				last.rowSpanCount++;
+				$tw.utils.addAttributeToParseTreeNode(last.element,"rowspan",last.rowSpanCount);
+				var vAlign = $tw.utils.getAttributeValueFromParseTreeNode(last.element,"valign","center");
+				$tw.utils.addAttributeToParseTreeNode(last.element,"valign",vAlign);
+				if(colSpanCount > 1) {
+					$tw.utils.addAttributeToParseTreeNode(last.element,"colspan",colSpanCount);
+					colSpanCount = 1;
 				}
+			}
 				w.nextMatch = this.cellRegExp.lastIndex-1;
 			} else if(cellMatch[1] == ">") {
 				// Colspan
@@ -213,25 +233,26 @@ var rules = [
 				}
 				var cell;
 				if(chr == "!") {
-					cell = $tw.Tree.Element("th",{},[]);
+					cell = {type:"element",tag:"th",children: []};
 					e.push(cell);
 					w.nextMatch++;
 				} else {
-					cell = $tw.Tree.Element("td",{},[]);
+					cell = {type:"element",tag:"td",children: []};
 					e.push(cell);
 				}
 				prevCell = cell;
 				prevColumns[col] = {rowSpanCount:1,element:cell};
 				if(colSpanCount > 1) {
-					cell.attributes.colspan = colSpanCount;
+					$tw.utils.addAttributeToParseTreeNode(cell,"colspan",colSpanCount);
 					colSpanCount = 1;
 				}
 				applyCssHelper(cell,styles);
 				w.subWikifyTerm(cell.children,this.cellTermRegExp);
+				if (!cell.attributes) cell.attributes ={};
 				if(w.matchText.substr(w.matchText.length-2,1) == " ") // spaceRight
-					cell.attributes.align = spaceLeft ? "center" : "left";
+					$tw.utils.addAttributeToParseTreeNode(cell,"align",spaceLeft ? "center" : "left");
 				else if(spaceLeft)
-					cell.attributes.align = "right";
+					$tw.utils.addAttributeToParseTreeNode(cell,"align","right");
 				w.nextMatch--;
 			}
 			col++;
@@ -247,7 +268,7 @@ var rules = [
 	termRegExp: /(\n)/mg,
 	handler: function(w)
 	{
-		var e = $tw.Tree.Element("h" + w.matchLength,{},[]);
+		var e = {type:"element",tag:"h" + w.matchLength,children: []};
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -291,7 +312,7 @@ var rules = [
 					if(currLevel !== 0 && target.children) {
 						target = target.children[target.children.length-1];
 					}
-					e = $tw.Tree.Element(listType,{},[]);
+					e = {type:"element",tag:listType,children: []};
 					target.push(e);
 					stack.push(e.children);
 				}
@@ -303,13 +324,13 @@ var rules = [
 					stack.pop();
 			} else if(listLevel == currLevel && listType != currType) {
 				stack.pop();
-				e = $tw.Tree.Element(listType,{},[]);
+				e = {type:"element",tag:listType,children: []};
 				stack[stack.length-1].push(e);
 				stack.push(e.children);
 			}
 			currLevel = listLevel;
 			currType = listType;
-			e = $tw.Tree.Element(itemType,{},[]);
+			e = {type:"element",tag:itemType,children: []};
 			stack[stack.length-1].push(e);
 			w.subWikifyTerm(e.children,this.termRegExp);
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
@@ -324,7 +345,7 @@ var rules = [
 	termRegExp: /(^<<<(\n|$))/mg,
 	element: "blockquote",
 	handler:  function(w) {
-		var e = $tw.Tree.Element(this.element,{},[]);
+		var e = {type:"element",tag:this.element,children: []};
 		w.output.push(e);
 		w.subWikifyTerm(e.children,this.termRegExp);
 	}
@@ -338,23 +359,32 @@ var rules = [
 	element: "blockquote",
 	handler: function(w)
 	{
-		var stack = [w.output];
+		var stack = [];
 		var currLevel = 0;
 		var newLevel = w.matchLength;
 		var t,matched,e;
 		do {
 			if(newLevel > currLevel) {
 				for(t=currLevel; t<newLevel; t++) {
-					e = $tw.Tree.Element(this.element,{},[]);
-					stack[stack.length-1].push(e);
+					var f = stack[stack.length-1];
+					e = {type:"element",tag:this.element,children: []};
+					stack.push(e);
+					if (t ===0){
+						w.output.push(e);
+					}else {
+						f.children.push(e);
+						
+					}
 				}
 			} else if(newLevel < currLevel) {
 				for(t=currLevel; t>newLevel; t--)
 					stack.pop();
 			}
 			currLevel = newLevel;
-			w.subWikifyTerm(stack[stack.length-1],this.termRegExp);
-			stack[stack.length-1].push($tw.Tree.Element("br"));
+			w.subWikifyTerm(stack[stack.length-1].children,this.termRegExp);
+			stack[stack.length-1].children.push({type:"element",tag:"br"});
+			//e.push({type:"element",tag:"br"});
+
 			this.lookaheadRegExp.lastIndex = w.nextMatch;
 			var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 			matched = lookaheadMatch && lookaheadMatch.index == w.nextMatch;
@@ -371,7 +401,7 @@ var rules = [
 	match: "^----+$\\n?|<hr ?/?>\\n?",
 	handler: function(w)
 	{
-		w.output.push($tw.Tree.Element("hr"));
+		w.output.push({type:"element",tag:"hr"});
 	}
 },
 
@@ -400,7 +430,7 @@ var rules = [
 		enclosedTextHelper.call(this,w);
 	}
 },
-
+/*
 {
 	name: "typedBlock",
 	match: "^\\$\\$\\$(?:.*)\\n",
@@ -429,7 +459,7 @@ var rules = [
 		}
 	}
 },
-
+*/
 {
 	name: "wikifyComment",
 	match: "^(?:/\\*\\*\\*|<!---)\\n",
@@ -456,6 +486,7 @@ var rules = [
 	}
 },
 
+
 {
 	name: "prettyLink",
 	match: "\\[\\[",
@@ -471,12 +502,36 @@ var rules = [
 				// Pretty bracketted link
 				link = lookaheadMatch[3];
 			}
-			insertMacroCall(w,w.output,"link",{to: link},[$tw.Tree.Text(text)]);
+	if(isLinkExternal(link)) {
+		w.output.push({
+			type: "element",
+			tag: "a",
+			attributes: {
+				href: {type: "string", value: link},
+				"class": {type: "string", value: "tw-tiddlylink-external"},
+				target: {type: "string", value: "_blank"}
+			},
+			children: [{
+				type: "text", text: text
+			}]
+		});
+	} else {
+		w.output.push({
+			type: "element",
+			tag: "$link",
+			attributes: {
+				to: {type: "string", value: link}
+			},
+			children: [{
+				type: "text", text: text
+			}]
+		});
+	}
+
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
 },
-
 {
 	name: "wikiLink",
 	match: textPrimitives.unWikiLink+"?"+textPrimitives.wikiLink,
@@ -496,8 +551,18 @@ var rules = [
 			}
 		}
 		if(w.autoLinkWikiWords) {
-			insertMacroCall(w,w.output,"link",{to: w.matchText},[$tw.Tree.Text(w.source.substring(w.matchStart,w.nextMatch))]);
-		} else {
+			w.output.push({
+				type: "element",
+				tag: "$link",
+				attributes: {
+					to: {type: "string", value: w.matchText}
+				},
+				children: [{
+					type: "text",
+					text: w.source.substring(w.matchStart,w.nextMatch)
+				}]
+			});
+		} else {	
 			w.outputText(w.output,w.matchStart,w.nextMatch);
 		}
 	}
@@ -508,10 +573,22 @@ var rules = [
 	match: textPrimitives.urlPattern,
 	handler: function(w)
 	{
-		insertMacroCall(w,w.output,"link",{to: w.matchText},[$tw.Tree.Text(w.source.substring(w.matchStart,w.nextMatch))]);
+			w.output.push({
+			type: "element",
+			tag: "a",
+			attributes: {
+				href: {type: "string", value: w.matchText},
+				"class": {type: "string", value: "tw-tiddlylink-external"},
+				target: {type: "string", value: "_blank"}
+			},
+			children: [{
+				type: "text", text: w.source.substring(w.matchStart,w.nextMatch)
+			}]
+		});
+
 	}
 },
-
+/*
 {
 	name: "image",
 	match: "\\[[<>]?[Ii][Mm][Gg]\\[",
@@ -545,7 +622,7 @@ var rules = [
 		}
 	}
 },
-
+*/
 {
 	name: "html",
 	match: "<[Hh][Tt][Mm][Ll]>",
@@ -555,7 +632,7 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			w.output.push($tw.Tree.Element("html",{},[$tw.Tree.Raw(lookaheadMatch[1])]));
+			w.output.push({	type:"raw", html:lookaheadMatch[1]});
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -582,32 +659,32 @@ var rules = [
 		var e,lookaheadRegExp,lookaheadMatch;
 		switch(w.matchText) {
 		case "''":
-			e = $tw.Tree.Element("strong",null,[]);
+			e = {type:"element",tag:"strong",children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/('')/mg);
 			break;
 		case "//":
-			e = $tw.Tree.Element("em",null,[]);
+			e = {type:"element",tag:"em",children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(\/\/)/mg);
 			break;
 		case "__":
-			e = $tw.Tree.Element("u",null,[]);
+			e = {type:"element",tag:"u",children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(__)/mg);
 			break;
 		case "^^":
-			e = $tw.Tree.Element("sup",null,[]);
+			e = {type:"element",tag:"sup",children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(\^\^)/mg);
 			break;
 		case "~~":
-			e = $tw.Tree.Element("sub",null,[]);
+			e = {type:"element",tag:"sub",children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(~~)/mg);
 			break;
 		case "--":
-			e = $tw.Tree.Element("strike",null,[]);
+			e = {type:"element",tag:"strike",children: []};
 			w.output.push(e);
 			w.subWikifyTerm(e.children,/(--)/mg);
 			break;
@@ -616,8 +693,8 @@ var rules = [
 			lookaheadRegExp.lastIndex = w.matchStart;
 			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push($tw.Tree.Element("code",null,[$tw.Tree.Text(lookaheadMatch[1])]));
-				w.nextMatch = lookaheadRegExp.lastIndex;
+				w.output.push({type:"element",tag:"code",
+					children:[{type: "text",text: lookaheadMatch[1]}]});
 			}
 			break;
 		case "{{{":
@@ -625,7 +702,8 @@ var rules = [
 			lookaheadRegExp.lastIndex = w.matchStart;
 			lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-				w.output.push($tw.Tree.Element("code",null,[$tw.Tree.Text(lookaheadMatch[1])]));
+				w.output.push({type:"element",tag:"code",
+					children:[{type: "text",text: lookaheadMatch[1]}]});
 				w.nextMatch = lookaheadRegExp.lastIndex;
 			}
 			break;
@@ -640,7 +718,7 @@ var rules = [
 	{
 		switch(w.matchText) {
 		case "@@":
-			var e = $tw.Tree.Element("span",null,[]);
+			var e = {type:"element",tag:"span",children: []};
 			w.output.push(e);
 			var styles = inlineCssHelper(w);
 			if(styles.length === 0)
@@ -655,9 +733,8 @@ var rules = [
 			var lookaheadMatch = lookaheadRegExp.exec(w.source);
 			if(lookaheadMatch) {
 				w.nextMatch = lookaheadRegExp.lastIndex;
-				e = $tw.Tree.Element(lookaheadMatch[2] == "\n" ? "div" : "span",{
-					"class": lookaheadMatch[1]
-				},[]);
+				e = {type:"element",tag:lookaheadMatch[2] == "\n" ? "div" : "span",
+					attributes: {"class": {type: "string", value:lookaheadMatch[1]}},children: []};
 				w.output.push(e);
 				w.subWikifyTerm(e.children,/(\}\}\})/mg);
 			}
@@ -671,7 +748,7 @@ var rules = [
 	match: "--",
 	handler: function(w)
 	{
-		w.output.push($tw.Tree.Entity("&mdash;"));
+		w.output.push({type: "entity", entity: "&mdash;"});
 	}
 },
 
@@ -680,7 +757,7 @@ var rules = [
 	match: "\\n|<br ?/?>",
 	handler: function(w)
 	{
-		w.output.push($tw.Tree.Element("br"));
+		w.output.push({type:"element",tag:"br"});
 	}
 },
 
@@ -693,7 +770,8 @@ var rules = [
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
-			w.output.push($tw.Tree.Text(lookaheadMatch[1]));
+			w.output.push({type: "text",text: lookaheadMatch[1]
+			});
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
@@ -704,7 +782,7 @@ var rules = [
 	match: "&#?[a-zA-Z0-9]{2,8};",
 	handler: function(w)
 	{
-		w.output.push($tw.Tree.Entity(w.matchText));
+		w.output.push({type: "entity", entity: w.matchText});
 	}
 }
 

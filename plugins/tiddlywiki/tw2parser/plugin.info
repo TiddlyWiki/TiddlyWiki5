@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tiddlywiki/tw2parser",
+	"description": "legacy parser",
+	"author": "JeremyRuston, JeffreyWilkinson",
+	"version": "0.0.1",
+	"core-version": ">=5.0.0",
+	"plugin-type": "plugin"
+}
