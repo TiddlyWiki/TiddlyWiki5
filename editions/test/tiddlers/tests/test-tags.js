@@ -83,7 +83,7 @@ describe("Tag tests", function() {
 	// Our tests
 
 	it("should handle custom tag ordering", function() {
-		expect(wiki.filterTiddlers("[tag[TiddlerSeventh]]").join(",")).toBe("Tiddler10,TiddlerOne,Tiddler11,Tiddler Three,Tiddler9,a fourth tiddler");
+		expect(wiki.filterTiddlers("[tag[TiddlerSeventh]]").join(",")).toBe("Tiddler10,TiddlerOne,Tiddler Three,Tiddler11,Tiddler9,a fourth tiddler");
 	});
 
 });
