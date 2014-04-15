@@ -60,11 +60,14 @@ var WikiTextParser = function(type,text,options) {
 	this.tree =[];
 	this.output = null;
 	this.subWikify(this.children);
+	var parser = $tw.wiki.old_parseTiddler("$:/plugins/tiddlywiki/tw2parser/macrodefs",{parseAsInline:true});
 	this.tree = [{
 		type: "element",
 		tag: "div",
 			children:this.children
 	}];
+	Array.prototype.push.apply(parser.tree,this.tree);
+	this.tree = parser.tree;
 };
 
 
