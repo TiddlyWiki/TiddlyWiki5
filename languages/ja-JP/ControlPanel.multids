@@ -1,0 +1,75 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Advanced
+Advanced/Hint: Internal information about this TiddlyWiki
+Advanced/LoadedModules/Caption: Loaded Modules
+Advanced/LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+Advanced/TiddlerFields/Caption: Tiddler Fields
+Advanced/TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+Appearance/Caption: Appearance
+Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
+Appearance/Palette/Caption: Palette
+Appearance/Palette/Editor/Clone/Caption: clone
+Appearance/Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
+Appearance/Palette/Editor/Prompt/Modified: This shadow palette has been modified
+Appearance/Palette/Editor/Prompt: Editing
+Appearance/Palette/Editor/Reset/Caption: reset
+Appearance/Palette/HideEditor/Caption: hide editor
+Appearance/Palette/Prompt: Current palette:
+Appearance/Palette/ShowEditor/Caption: show editor
+Appearance/StoryView/Caption: Story View
+Appearance/StoryView/Prompt: Current view:
+Appearance/Theme/Caption: Theme
+Appearance/Theme/Prompt: Current theme:
+Basics/AnimDuration/Prompt: Animation duration:
+Basics/Caption: Basics
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
+Basics/DefaultTiddlers/Prompt: Default tiddlers:
+Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
+Basics/Language/Prompt: Hello! Current language:
+Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
+Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
+Basics/Subtitle/Prompt: Subtitle:
+Basics/SystemTiddlers/Prompt: Number of system tiddlers:
+Basics/Tags/Prompt: Number of tags:
+Basics/Tiddlers/Prompt: Number of tiddlers:
+Basics/Title/Prompt: Title of this ~TiddlyWiki:
+Basics/Username/Prompt: Username for signing edits:
+Basics/Version/Prompt: ~TiddlyWiki version:
+Plugins/Caption: Plugins
+Plugins/Fields/Description: Description
+Plugins/Fields/Title: Title
+Plugins/Fields/Version: Version
+Plugins/Language/Prompt: Languages
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Themes
+Saving/AutoSave/Disabled/Button: enable
+Saving/AutoSave/Disabled/Prompt: Autosave is currently disabled
+Saving/AutoSave/Enabled/Button: disable
+Saving/AutoSave/Enabled/Prompt: Autosave is currently enabled
+Saving/AutoSave: Autosave
+Saving/Caption: Saving
+Saving/Heading: Saving
+Saving/TiddlySpot/Advanced/Heading: Advanced Settings
+Saving/TiddlySpot/BackupDir: Backup Directory
+Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Filename: Upload Filename
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
+Saving/TiddlySpot/Password: Password
+Saving/TiddlySpot/ServerURL: Server URL
+Saving/TiddlySpot/UploadDir: Upload Directory
+Saving/TiddlySpot/UserName: Wiki Name
+Tools/Caption: Tools
+Tools/Download/Full/Caption: Download full wiki
+Tools/Encryption/ChangePassword/Button: change password
+Tools/Encryption/ClearPassword/Button: clear password
+Tools/Encryption/Disabled/Prompt: This wiki is not encrypted
+Tools/Encryption/Enabled/Prompt: This wiki is encrypted
+Tools/Encryption/Heading: Encryption
+Tools/Encryption/SetPassword/Button: set password
+Tools/Export/AllAsStaticHTML/Caption: Download all tiddlers as static HTML
+Tools/Export/Heading: Export
+Tools/Import/Heading: Import
+Tools/Import/Hint: Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). You can also drag and drop files directly to the browser window.
+Tools/Import/Prompt: Import:
