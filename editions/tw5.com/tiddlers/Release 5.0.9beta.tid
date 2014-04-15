@@ -53,7 +53,7 @@ released: 201404152139
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/f649b5b037bfd2e7c48d1ba65ffa37064456523d]] the ButtonWidget to be able to set text references
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/afa677b9a0b1dff1239dc1ea08edd210b9736af9]] a class to tiddler frames in view mode
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/50cf9678cb469e443e220b063e2355c844e417e7]] support for [[WidgetMessage: tw-home]]
-* [[Hidden|https://github.com/Jermolene/TiddlyWiki5/commit/2608a323ebf3d8a8e925eda6d3a10ebb8f41d383]] system tags from the sidebar ''Tags' tab
+* [[Hidden|https://github.com/Jermolene/TiddlyWiki5/commit/2608a323ebf3d8a8e925eda6d3a10ebb8f41d383]] system tags from the sidebar ''Tags'' tab
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/98872bbe7c62faa4aa209fa421c2989aeef3aaf2]] pasting and import of HTML content
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/a5a2c718b1d5671652d01e3567dba1c6795b7521]] support for a tooltip on the LinkWidget
 
