@@ -32,12 +32,13 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		title = this.params[0],
 		filename = this.params[1],
-		tiddler, type, contentTypeInfo;
+		tiddler,
+		type,
+		contentTypeInfo;
 
 	tiddler = this.commander.wiki.getTiddler(title);
-
-	// check if tiddler exists. common user error is a typo.
-	if (tiddler) {
+	// Check if tiddler exists. Common user error is a typo
+	if(tiddler) {
 		type = tiddler.fields.type || "text/vnd.tiddlywiki";
 		contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
 
@@ -47,12 +48,11 @@ Command.prototype.execute = function() {
 	} else {
 		return	"\n-----> Command: --savetiddler " + title +
 				"\n-----> Check the tiddler name above" +
-				"\n-----> _and_ be sure, that your tiddler exists with this name in your html file!"
+				"\n-----> _and_ be sure, that your tiddler exists with this name in your html file!";
 	}
 
 	return null;
 };
 
 exports.Command = Command;
-
 })();
