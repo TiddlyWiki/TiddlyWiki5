@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Missing
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Missing/Caption}}
 
-<$list filter="[is[missing]sort[title]]" template="$:/core/ui/MissingTemplate"/>
+<$list filter="[all[missing]sort[title]]" template="$:/core/ui/MissingTemplate"/>

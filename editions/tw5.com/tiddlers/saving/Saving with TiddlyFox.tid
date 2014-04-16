@@ -1,5 +1,5 @@
 created: 20131221085742684
-modified: 20140103135046386
+modified: 20140226201638997
 tags: howto
 title: Saving with TiddlyFox
 type: text/vnd.tiddlywiki
@@ -14,14 +14,10 @@ If you're using [[Firefox for Android]], see the instructions for [[Saving with 
 # [[Download]] an empty TiddlyWiki by clicking this button:
 #> {{$:/editions/tw5.com/snippets/download-empty-button}}
 # Locate the file you just downloaded
-#* You may rename it, but be sure to keep the `.html` extension
+#* You may rename it, but be sure to keep the `.html` or `.htm` extension
 # Open the file in [[Firefox]]
 # Click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
 # Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
 # Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
 #* Look for the yellow notification ''Saved wiki'' at the top right of the window
 # Refresh the browser window to verify that your changes have been saved correctly
-
-In case of difficulties downloading the empty wiki, you can download this direct link to empty.html:
-
-http://tiddlywiki.com/empty.html

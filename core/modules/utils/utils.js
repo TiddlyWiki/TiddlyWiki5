@@ -35,21 +35,34 @@ exports.count = function(object) {
 
 /*
 Push entries onto an array, removing them first if they already exist in the array
-	array: array to modify
+	array: array to modify (assumed to be free of duplicates)
 	value: a single value to push or an array of values to push
 */
 exports.pushTop = function(array,value) {
 	var t,p;
 	if($tw.utils.isArray(value)) {
 		// Remove any array entries that are duplicated in the new values
-		for(t=0; t<value.length; t++) {
-			p = array.indexOf(value[t]);
-			if(p !== -1) {
-				array.splice(p,1);
+		if(value.length !== 0) {
+			if(array.length !== 0) {
+				if(value.length < array.length) {
+					for(t=0; t<value.length; t++) {
+						p = array.indexOf(value[t]);
+						if(p !== -1) {
+							array.splice(p,1);
+						}
+					}
+				} else {
+					for(t=array.length-1; t>=0; t--) {
+						p = value.indexOf(array[t]);
+						if(p !== -1) {
+							array.splice(t,1);
+						}
+					}
+				}
 			}
+			// Push the values on top of the main array
+			array.push.apply(array,value);
 		}
-		// Push the values on top of the main array
-		array.push.apply(array,value);
 	} else {
 		p = array.indexOf(value);
 		if(p !== -1) {
@@ -214,32 +227,36 @@ exports.getRelativeDate = function(delta) {
 		futurep = true;
 	}
 	var units = [
-		{name: "years",   duration:      365 * 24 * 60 * 60 * 1000},
-		{name: "months",  duration: (365/12) * 24 * 60 * 60 * 1000},
-		{name: "days",    duration:            24 * 60 * 60 * 1000},
-		{name: "hours",   duration:                 60 * 60 * 1000},
-		{name: "minutes", duration:                      60 * 1000},
-		{name: "seconds", duration:                           1000}
+		{name: "Years",   duration:      365 * 24 * 60 * 60 * 1000},
+		{name: "Months",  duration: (365/12) * 24 * 60 * 60 * 1000},
+		{name: "Days",    duration:            24 * 60 * 60 * 1000},
+		{name: "Hours",   duration:                 60 * 60 * 1000},
+		{name: "Minutes", duration:                      60 * 1000},
+		{name: "Seconds", duration:                           1000}
 	];
 	for(var t=0; t<units.length; t++) {
 		var result = Math.floor(delta / units[t].duration);
 		if(result >= 2) {
-			var desc = result + " " + units[t].name;
-			if(futurep) {
-				desc = desc + " from now";
-			} else {
-				desc = desc + " ago";
-			}
 			return {
 				delta: delta,
-				description: desc,
+				description: $tw.language.getString(
+					"RelativeDate/" + (futurep ? "Future" : "Past") + "/" + units[t].name,
+					{variables:
+						{period: result.toString()}
+					}
+				),
 				updatePeriod: units[t].duration
 			};
 		}
 	}
 	return {
 		delta: delta,
-		description: "1 second ago",
+		description: $tw.language.getString(
+			"RelativeDate/" + (futurep ? "Future" : "Past") + "/Second",
+			{variables:
+				{period: "1"}
+			}
+		),
 		updatePeriod: 1000
 	};
 };
@@ -362,7 +379,7 @@ Returns an object with the following fields, all optional:
 */
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
-	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##([^\s]+)))?\s*/mg,
+	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##(.+)))?\s*/mg,
 		match = reTextRef.exec(textRef);
 	if(match && reTextRef.lastIndex === textRef.length) {
 		// Return the parts
@@ -435,5 +452,35 @@ exports.base64Decode = function(string64) {
 		return (new Buffer(string64,"base64")).toString();
 	}
 };
+
+/*
+Convert a hashmap into a tiddler dictionary format sequence of name:value pairs
+*/
+exports.makeTiddlerDictionary = function(data) {
+	var output = [];
+	for(var name in data) {
+		output.push(name + ": " + data[name]);
+	}
+	return output.join("\n");
+};
+
+/*
+High resolution microsecond timer for profiling
+*/
+exports.timer = function(base) {
+	var m;
+	if($tw.node) {
+		var r = process.hrtime();		
+		m =  r[0] * 1e3 + (r[1] / 1e6);
+	} else if(window.performance) {
+		m = performance.now();
+	} else {
+		m = Date.now();
+	}
+	if(typeof base !== "undefined") {
+		m = m - base;
+	}
+	return m;
+}
 
 })();

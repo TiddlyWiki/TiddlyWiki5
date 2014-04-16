@@ -2,9 +2,12 @@ title: $:/core/ui/MoreSideBar/Tags
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
-<$list filter="[tags[]sort[title]]">
+\define lingo-base() $:/language/SideBar/Tags/
+<$button to="$:/TagManager"><<lingo TagManager/Caption>></$button>
 
-<$transclude tiddler="$:/core/ui/TagTemplate"/> <small class="tw-menu-list-count"><$count filter="[is[current]tagging[]]"/></small>
+<$list filter="[tags[]!is[system]sort[title]]">
+
+<$transclude tiddler="$:/core/ui/TagTemplate"/> <small class="tw-menu-list-count"><$count filter="[all[current]tagging[]]"/></small>
 
 </$list>
 

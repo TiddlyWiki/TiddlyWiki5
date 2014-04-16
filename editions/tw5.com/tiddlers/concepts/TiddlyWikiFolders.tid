@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20140206174804112
+modified: 20140227162920614
 tags: dev
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -21,7 +21,14 @@ Only the ''tiddlywiki.info'' file is required, the ''tiddlers'' and ''plugins'' 
 The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising the following fields:
 
 * ''plugins'' - an array of plugin names to be included in the wiki
+* ''themes'' - an array of theme names to be included in the wiki
+* ''languages'' - an array of language names to be included in the wiki
 * ''includeWikis'' - an array of relative paths to external wiki folders to be included in the wiki
+* ''config'' - an optional hashmap of configuration options (see below)
+
+Configuration options include:
+
+* ''retain-original-tiddler-path'' - If true, the server will generate a tiddler [[$:/config/OriginalTiddlerPaths]] containing the original file paths of each tiddler in the wiki
 
 For example:
 
@@ -33,7 +40,10 @@ For example:
   ],
   "includeWikis": [
     "../tw5.com"
-  ]
+  ],
+  "config": {
+	"retain-original-tiddler-path": true	
+  }
 }
 ```
 

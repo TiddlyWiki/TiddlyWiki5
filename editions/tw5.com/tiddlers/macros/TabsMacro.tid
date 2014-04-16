@@ -1,27 +1,27 @@
 created: 20131228162203521
-modified: 20131228162445166
+modified: 20140225223527667
 tags: macros
 title: TabsMacro
 type: text/vnd.tiddlywiki
 
-The tabs macro displays a list of tiddlers as a tab control. The user can switch between tabs by clicking on them. By default, the tabs are labelled with the title of the corresponding tiddler. Alternatively, if a `caption` field is specified then it is used instead.
+The tabs macro displays a list of tiddlers as a tab control. The user can switch between tabs by clicking on them. The tabs are labelled with the title of the corresponding tiddler, unless there is a `caption` field present in which case it is used instead.
 
 ! Parameters
 
 |!Position |!Name |!Description |!Default |
 |1st |tabsList |Filter giving the tiddlers to be displayed | |
 |2nd |default |Name of the tiddler containing the default tab | |
-|3rd |state |String to distinguish multiple tabs within the same tiddler |''$:/state/tab'' |
+|3rd |state |String to distinguish multiple tabs within the same tiddler (use of the system tiddler prefix is recommended) |''$:/state/tab'' |
 
 ! Examples
 
 Here is an example of the tabs macro:
 
 ```
-<<tabs "Docs WikiText Features RoadMap" "WikiText" 1>>
+<<tabs "Docs WikiText Features RoadMap" "WikiText" "$:/state/tab1">>
 ```
 
-<<tabs "Docs WikiText Features RoadMap" "WikiText" 1>>
+<<tabs "Docs WikiText Features RoadMap" "WikiText" "$:/state/tab1">>
 
-<<tabs "[tag[tips]]" "GoogleChromeTips" 2>>
+<<tabs "[tag[tips]]" "GoogleChromeTips" "$:/state/tab1">>
 

@@ -1,0 +1,30 @@
+title: $:/language/Help/server
+description: Stellt einen HTTP server für TiddlyWiki zur Verfügung.
+
+TiddlyWiki bringt einen sehr einfachen Web-Server mit. Dieser ist zwar kompatibel mit dem TiddlyWeb Protokoll, ist jeoch nicht ausgereift genug, um im produktiven Einsatz im Netz eingesetzt zu werden. 
+
+Der Server kann spezifische Tiddler im angegebnen Format anzeigen (rendern). Zudem können einzelne, oder mehrere Tiddler im JSON Format übertragen werden. Die unterstützten HTTP Funktionen sind: `GET`, `PUT` und `DELETE`
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
+```
+
+Die Parameter sind: 
+
+* ''port'' - Port Nummer mit der kommuniziert werden soll (standard: "8080").
+* ''roottiddler'' - Der Tiddler, der als ~Basis-Tiddler verwendet werden soll ( standard: "$:/core/save/all").
+* ''rendertype'' -  MIME-Type, zu dem der ~Basis-Tiddler "gerendert" werden soll ( standard: "text/plain").
+* ''servetype'' - MIME-Type, mit dem der Basis-Tiddler ausgeliefert werden soll ( standard: "text/html").
+* ''username'' - Benutzer Name, mit dem verändete Tiddler signiert werden.
+* ''password'' - Passwort mit dem eine sehr "simple" Zugangsbeschränkung aufgebaut werden kann.
+* ''host'' - ~Host-Name von dem ausgeliefert werden soll. Host ist optional ( standard: "127.0.0.1" oder auch "localhost").
+
+Wenn bem Server start ein Passwort angegeben wird, dann wird der Benutzer aufgefordert den Benutzernamen und das Passwort einzugeben, bevor ein Wiki angezeigt wird. ACHTUNG: Das Passwort wird im Klartext übertragen. Diese Vorgehensweise ist nicht für den Einsatz im Netz geeignet.
+
+Beispiel:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MeinBenutzerName passw0rt
+```
+
+Es ist möglich mehrere TiddlyWiki Server gleichzeitig zu starten. Jeder Server muss jedoch mit einem eigenen Port gestartet werden.

@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/seamless",
+	"name": "Seamless",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Borderless tiddlers",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"]
+}

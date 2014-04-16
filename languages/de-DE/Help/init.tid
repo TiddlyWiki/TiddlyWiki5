@@ -1,0 +1,24 @@
+title: $:/language/Help/init
+description: Initialisiere eine neues Wiki Verzeichnis.
+
+Initialisiere eine neues [[Wiki Verzeichnis|WikiFolders]] mit der Kopie einer Edition.
+
+```
+--init <edition> [<edition> ...]
+```
+
+Beispiel:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Anmerkung:
+
+* Das Wiki Verzeichnis wird angelegt, wenn es nicht existiert.
+* Der <edition> Parameter ist standardmäßig: ''empty''.
+* Der --init Befehl bricht ab, wenn das angegebene Verzeichnis nicht leer ist.
+* Der --init Befehl löscht alle `includeWikis` Definitionen aus der neuen `tiddlywiki.info` Datei
+* Wenn mehrere Editionen importiert werden, wird die zuletzt importierte `tidlywiki.info` Datei aktiv sein. Alle anderen weden überschrieben.
+
+* `--help editions` listet alle verfügbaren Editionen auf.

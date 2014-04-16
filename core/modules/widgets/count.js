@@ -54,6 +54,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CountWidget.prototype.refresh = function(changedTiddlers) {
 	// Re-execute the filter to get the count
+	this.computeAttributes();
 	var oldCount = this.currentCount;
 	this.execute();
 	if(this.currentCount !== oldCount) {

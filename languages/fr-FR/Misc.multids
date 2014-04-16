@@ -1,4 +1,30 @@
 title: $:/language/
 
-RecentChanges/DateFormat: DD MMM YYYY
+ClassicWarning/Hint: Ce tiddler est écrit au format TiddlyWiki Classic, qui n'est pas entièrement compatible avec TiddlyWiki version 5. Pour en savoir plus, rendez-vous à l'adresse http://tiddlywiki.com/static/Upgrading.html. 
+ClassicWarning/Upgrade/Caption: Mettre à jour
 CloseAll/Button: Tout fermer
+ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tiddler « <$text text=<<title>>/> » ?
+ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
+ConfirmOverwriteTiddler: Souhaitez-vous écraser le tiddler « <$text text=<<title>>/> » ?
+InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
+MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant - cliquez sur {{$:/core/images/edit-button}} pour le créer
+RecentChanges/DateFormat: DD MMM YYYY
+RelativeDate/Future/Days: dans <<period>> jours
+RelativeDate/Future/Hours: dans <<period>> heures
+RelativeDate/Future/Minutes: dans <<period>> minutes
+RelativeDate/Future/Months: dans <<period>> mois
+RelativeDate/Future/Second: dans 1 seconde
+RelativeDate/Future/Seconds: dans <<period>> secondes
+RelativeDate/Future/Years: dans <<period>> ans
+RelativeDate/Past/Days: il y a <<period>> jours
+RelativeDate/Past/Hours: il y a <<period>> heures
+RelativeDate/Past/Minutes: il y a <<period>> minutes
+RelativeDate/Past/Months: il y a <<period>> mois
+RelativeDate/Past/Second: il y a 1 seconde
+RelativeDate/Past/Seconds: il y a <<period>> secondes
+RelativeDate/Past/Years: il y a <<period>> ans
+SystemTiddler/Tooltip: Ceci est un tiddler système
+TagManager/Colour/Heading: Couleur
+TagManager/Count/Heading: Quantité
+TagManager/Icon/Heading: Icone
+TagManager/Tag/Heading: Tag

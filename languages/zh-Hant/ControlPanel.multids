@@ -14,9 +14,9 @@ Appearance/Palette/Editor/Clone/Prompt: 建議您修改前先複製此預設調�
 Appearance/Palette/Editor/Prompt/Modified: 此預設調色盤已被修改過
 Appearance/Palette/Editor/Prompt: 編輯
 Appearance/Palette/Editor/Reset/Caption: 重置
-Appearance/Palette/ShowEditor/Caption: 顯示編輯器
 Appearance/Palette/HideEditor/Caption: 隱藏編輯器
 Appearance/Palette/Prompt: 當前的調色盤：
+Appearance/Palette/ShowEditor/Caption: 顯示編輯器
 Appearance/StoryView/Caption: 檢視模式
 Appearance/StoryView/Prompt: 當前的檢視模式：
 Appearance/Theme/Caption: 佈景主題
@@ -40,10 +40,13 @@ Plugins/Caption: 插件
 Plugins/Fields/Description: 說明
 Plugins/Fields/Title: 標題
 Plugins/Fields/Version: 版本
-Saving/AutoSave/Disabled/Button:  
-Saving/AutoSave/Disabled/Prompt: 自動儲存已<$linkcatcher to="$:/config/AutoSave"><$link to="yes">@@color:#c0c0c0;''停用''@@</$link></$linkcatcher>
-Saving/AutoSave/Enabled/Button:  
-Saving/AutoSave/Enabled/Prompt: 自動儲存已<$linkcatcher to="$:/config/AutoSave"><$link to="no">@@color:green;''啟用''@@</$link></$linkcatcher>
+Plugins/Language/Prompt: 語言
+Plugins/Plugin/Prompt: 插件
+Plugins/Theme/Prompt: 佈景主題
+Saving/AutoSave/Disabled/Button: 啟用
+Saving/AutoSave/Disabled/Prompt: 自動儲存已停用
+Saving/AutoSave/Enabled/Button: 停用
+Saving/AutoSave/Enabled/Prompt: 自動儲存已啟用
 Saving/AutoSave: 自動儲存
 Saving/Caption: 儲存
 Saving/Heading: 儲存

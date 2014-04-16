@@ -1,6 +1,6 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: Use WikiText to add formatting, images, and dynamic features
+Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add formatting, images, and dynamic features
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Button/Hide: hide preview
 Body/Preview/Button/Show: show preview

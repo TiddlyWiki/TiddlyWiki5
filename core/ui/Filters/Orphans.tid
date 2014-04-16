@@ -1,0 +1,5 @@
+title: $:/core/Filters/Orphans
+tags: $:/tags/Filter
+filter: [all[orphans]sort[title]]
+description: {{$:/language/Filters/Orphans}}
+

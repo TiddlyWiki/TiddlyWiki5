@@ -4,12 +4,31 @@ tags: $:/tags/ViewTemplate
 \define title-styles()
 fill:$(foregroundColor)$;
 \end
-<div class="tw-tiddler-title"><div class="titlebar"><span class="tw-tiddler-controls"><$list filter="[is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] [!is[shadow]!has[draft.of]tag[$:/tags/ViewToolbar]] +[tag[$:/tags/ViewToolbar]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
-
-</span><$set name="foregroundColor" value={{!!color}}><span style=<<title-styles>>><$transclude tiddler={{!!icon}}/></span></$set> <span class="title"><$view field="title"/></span></div>
+<div class="tw-tiddler-title">
+<div class="titlebar">
+<span class="tw-tiddler-controls">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+</span>
+<$set name="foregroundColor" value={{!!color}}>
+<span style=<<title-styles>>>
+<$transclude tiddler={{!!icon}}/>
+</span>
+</$set>
+<$list filter="[all[current]removeprefix[$:/]]">
+<span class="title" title={{$:/language/SystemTiddler/Tooltip}}>
+<span class="tw-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
+</span>
+</$list>
+<$list filter="[all[current]!prefix[$:/]]">
+<span class="title">
+<$view field="title"/>
+</span>
+</$list>
+</div>
 
 <$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tw-tiddler-info tw-popup" animate="yes" retain="yes">
 
 <$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 
-</$reveal></div>
+</$reveal>
+</div>

@@ -1,0 +1,47 @@
+created: 20140305091244145
+modified: 20140305091258135
+tags: howto
+title: Using Stylesheets
+type: text/vnd.tiddlywiki
+
+The usual way of modifying the appearance of a TiddlyWiki is to use one of the available themes, or to modify the [[colour palette|ColourPalettes]].
+
+You can also use custom CSS stylesheets by tagging tiddlers with `$:/tags/stylsheet`. For example, create a tiddler with the tag `$:/tags/stylsheet` and the following content in order to change the page background colour to red:
+
+```
+html body.tw-body {
+	background: red;
+}
+```
+
+! Overriding Theme Settings
+
+Note that custom stylesheets are applied independently to the theme stylesheets. This means that it is frequently necessary to use CSS specificity to reliably override settings within the theme. This means ensuring that the CSS rule in your custom stylesheet is more specific than the theme rule that you are overriding. "More specific" generally means using more CSS rules. So, `html body.tw-body` is more specific than `body.tw-body`.
+
+! Stylesheet Types
+
+Usually it is best to use the type `text/css` for stylesheets. This treats them as plain stylesheets, and ensures that TiddlyWiki doesn't apply any wiki processing to them.
+
+If you wish to use macros and transclusions in your stylesheets you should instead use the default WikiText type `text/vnd.tiddlywiki`. This allows full WikiText processing to be performed. Here is an example:
+
+```
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+body.tw-body pre {
+	<<box-shadow "inset 0 1px 0 #fff">>
+}
+```
+
+The `\rules` pragma at the top of the tiddler restricts the WikiText to just allow macros and transclusion. This avoids mistakenly triggering unwanted WikiText processing.
+
+!! Stylesheet Macros
+
+Several globally available macros are provided that are helpful in constructing stylesheets. See [[$:/core/ui/PageStylesheet]] for the definitions of these macros.
+
+* `<<colour name>>` and `<<color name>>` retrieve named colours from the current [[colour palette|ColourPalettes]]
+* `<<box-shadow shadow>>` specify a box-shadow
+* `<<filter filter>>` specify a CSS filter
+* `<<transition transition>>` specify a CSS transition
+* `<<transform-origin origin>>` specify the CSS transform origin
+* `<<background-linear-gradient gradient>>` specify a linear gradient
+* `<<datauri title>>` retrieves the base64 content of a tiddler for use via the CSS `url()` operator

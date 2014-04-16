@@ -1,0 +1,5 @@
+title: $:/core/Filters/Missing
+tags: $:/tags/Filter
+filter: [all[missing]sort[title]]
+description: {{$:/language/Filters/Missing}}
+

@@ -1,0 +1,46 @@
+created: 20140324223413403
+modified: 20140324223524945
+tags: widget
+title: ScrollableWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The scrollable widget wraps its content in a scrollable frame. The user can scroll the contents with the mouse or with touch gestures. Code can use the [[WidgetMessage: tw-scroll]] to programmatically scroll specific DOM nodes into view.
+
+! Content and Attributes
+
+The content of the `<$scrollable>` widget is displayed within a pair of wrapper DIVs. If the inner DIV is larger then it scrolls within the outer one. CSS is used to specify the size of the outer wrapper.
+
+|!Attribute |!Description |
+|class |The CSS class(es) to be applied to the outer DIV |
+|fallthrough |See below |
+
+If a scrollable widget can't handle the `tw-scroll` message because the inner DIV fits within the outer DIV, then by default the message falls through to the parent widget. Setting the ''fallthrough'' attribute to `no` prevents this behaviour.
+
+! Examples
+
+This example requires the following CSS definitions from [[$:/_tw5.com-styles]]:
+
+```
+.tw-scrollable-demo {
+	border: 1px solid <<colour message-border>>;
+	background-color: <<colour message-background>>;
+	padding: 1em;
+	height: 400px;
+}
+```
+
+This wiki text shows how to display a list within the scrollable widget:
+
+<<wikitext-example-without-html "<$scrollable class='tw-scrollable-demo'>
+<$list filter='[!is[system]]'>
+
+<$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>
+<$link><$view field='title'/></$link>
+</$list>
+
+</$list>
+</$scrollable>
+">>
+

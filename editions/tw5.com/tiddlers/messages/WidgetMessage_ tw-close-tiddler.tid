@@ -1,0 +1,13 @@
+created: 20140226193940778
+modified: 20140226194227227
+tags: message navigator-message
+title: WidgetMessage: tw-close-tiddler
+type: text/vnd.tiddlywiki
+
+The `tw-close-tiddler` message removes a specified tiddler from the story list. It requires the following properties on the `event` object:
+
+|!Name |!Description |
+|param |Title of the tiddler that is to be closed |
+|tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
+
+The close tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.

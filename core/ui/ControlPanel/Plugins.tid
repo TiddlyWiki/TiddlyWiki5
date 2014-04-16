@@ -3,6 +3,42 @@ tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Plugins/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Plugins/
-<table><tbody><tr><th><<lingo Fields/Title>></th><th><<lingo Fields/Description>></th><th><<lingo Fields/Version>></th></tr><$list filter="[!has[draft.of]has[plugin-type]sort[title]]"><tr><td><$link to={{!!title}}><$view field="title"/></$link></td><td><$view field="description"/></td><td><$view field="version"/></td></tr></$list>
+\define plugin-table(type)
+<table>
+<tbody>
+<tr>
+<th>
+<<lingo Fields/Description>>
+</th>
+<th>
+<<lingo Fields/Version>>
+</th>
+</tr>
+<$list filter="[!has[draft.of]plugin-type[$type$]sort[description]]">
+<tr>
+<td>
+<$link to={{!!title}}>
+''<$view field="description"><$view field="title"/></$view>''<br>
+<$view field="title"/>
+</$link>
+</td>
+<td>
+<$view field="version"/>
+</td>
+</tr>
+</$list>
 </tbody>
 </table>
+\end
+
+! <<lingo Plugin/Prompt>>
+
+<<plugin-table plugin>>
+
+! <<lingo Theme/Prompt>>
+
+<<plugin-table theme>>
+
+! <<lingo Language/Prompt>>
+
+<<plugin-table language>>

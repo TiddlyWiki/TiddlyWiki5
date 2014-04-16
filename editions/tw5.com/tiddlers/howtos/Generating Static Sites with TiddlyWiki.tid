@@ -1,0 +1,34 @@
+created: 20130828190200000
+modified: 20140228154328066
+tags: howto
+title: Generating Static Sites with TiddlyWiki
+type: text/vnd.tiddlywiki
+
+TiddlyWiki5 can be used to generate static HTML representations of a TiddlyWiki that doesn't need JavaScript.
+
+There is much flexibility in how the static HTML is generated. The following scenarios are all illustrated on http://tiddlywiki.com.
+
+! Wiki Snapshots and Tiddler Snapshots
+
+You can explore a static representation of this TiddlyWiki at <a href="static.html">static.html</a>. That file is a static snapshot of the current DefaultTiddlers. Any tiddlers that it links to are referred to via URLs of the form `/static/HelloThere.html` that point to static snapshots of individual tiddlers. The tiddler HTML files reference a `static.css` stylesheet file.
+
+The included `bld.sh` script includes these commands that are involved in generating the sample static version of the TiddlyWiki5 site:
+
+```
+--rendertiddler $:/core/templates/static.template.html $TW5_BUILD_OUTPUT/static.html text/plain \
+--rendertiddler $:/core/templates/static.template.css $TW5_BUILD_OUTPUT/static/static.css text/plain \
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html $TW5_BUILD_OUTPUT/static text/plain \
+```
+The first RenderTiddlerCommand saves the static version of the DefaultTiddlers, the second saves the stylesheet, and the final RenderTiddlersCommand generates the HTML representations of individual tiddlers.
+
+! Wiki Snapshot with Internal Links
+
+It is also possible to produce a single HTML file that contains static representations of tiddlers, and uses standard HTML anchor links to jump between them.
+
+For example: <a href="alltiddlers.html">alltiddlers.html</a>
+
+The example is built by the following line in `bld.sh`:
+
+```
+--rendertiddler $:/core/templates/alltiddlers.template.html $TW5_BUILD_OUTPUT/alltiddlers.html text/plain \
+```

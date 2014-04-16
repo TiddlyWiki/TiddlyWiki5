@@ -1,11 +1,12 @@
-title: LinkCatcherWidget
-created: 201310241419
-modified: 201310300837
+created: 20131024141900000
+modified: 20140409074643650
 tags: widget
+title: LinkCatcherWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The link catcher widget responds to navigation WidgetMessages dispatched within its child content by performing any or all of these actions:
+The link catcher widget traps [[WidgetMessage: tw-navigate]] dispatched within its child content by performing any or all of these actions:
 
 * sending a different widget message
 * setting a tiddler to the title of the navigated tiddler

@@ -1,0 +1,100 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: 警示背景
+alert-border: 警示邊框
+alert-highlight: 警示高亮度
+alert-muted-foreground: 警示的低調前景
+background: 一般背景
+blockquote-bar: 引言條
+code-background: 程式碼背景
+code-border: 程式碼邊框
+code-foreground: 程式碼前景
+download-background: 下載按鈕背景
+download-foreground: 下載按鈕前景
+dragger-background: 拖動區背景
+dragger-foreground: 拖動區前景
+dropdown-background: 下拉背景
+dropdown-border: 下拉邊框
+dropdown-tab-background-selected: 選定的下拉頁籤背景
+dropdown-tab-background: 下拉頁籤背景
+dropzone-background: 拖放區背景
+external-link-background-hover: 懸停外部鏈結背景
+external-link-background-visited: 已造訪過的外部鏈結背景
+external-link-background: 外部鏈結背景
+external-link-foreground-hover: 懸停外部鏈結前景
+external-link-foreground-visited: 已造訪過的外部鏈結前景
+external-link-foreground: 外部鏈結前景
+foreground: 一般前景
+message-background: 訊息框背景
+message-border: 訊息邊框
+message-foreground: 訊息框前景
+modal-backdrop: 模組背景幕
+modal-background: 模組背景
+modal-border: 模組邊框
+modal-footer-background: 模組頁腳背景
+modal-footer-border: 模組頁腳邊框
+modal-header-border: 模組標題邊框
+muted-foreground: 一般低調前景
+notification-background: 通知背景
+notification-border: 通知邊框
+page-background: 頁面背景
+pre-background: pre 背景
+pre-border: pre 邊框
+primary: 主顏色
+sidebar-button-foreground: 側邊欄按鈕前景
+sidebar-controls-foreground-hover: 懸停側邊欄控制項前景
+sidebar-controls-foreground: 側邊欄控制項前景
+sidebar-foreground-shadow: 側邊欄前景陰影
+sidebar-foreground: 側邊欄前景
+sidebar-muted-foreground-hover: 懸停側邊欄低調前景
+sidebar-muted-foreground: 側邊欄低調前景
+sidebar-tab-background-selected: 側邊欄選定的頁籤背景
+sidebar-tab-background: 側邊欄頁籤背景
+sidebar-tab-border-selected: 側邊欄選定的頁籤邊框
+sidebar-tab-border: 側邊欄頁籤邊框
+sidebar-tab-divider: 側邊欄頁籤分隔線
+sidebar-tab-foreground-selected: 側邊欄選定頁籤前景
+sidebar-tab-foreground: 側邊欄頁籤前景
+sidebar-tiddler-link-foreground-hover: 側邊欄懸停條目鏈結前景
+sidebar-tiddler-link-foreground: 側邊欄條目鏈結前景
+static-alert-foreground: 靜態警示前景
+tab-background-selected: 選定的頁籤背景
+tab-background: 頁籤背景
+tab-border-selected: 選定的頁籤邊框
+tab-border: 頁籤邊框
+tab-divider: 頁籤分隔線
+tab-foreground-selected: 選定的頁籤前景
+tab-foreground: 頁籤前景
+table-border: 表格邊框
+table-footer-background: 表格頁腳背景
+table-header-background: 表格標題背景
+tag-background: 標籤背景
+tag-foreground: 標籤前景
+tiddler-background: 條目背景
+tiddler-border: 條目邊框
+tiddler-controls-foreground-hover: 懸停的條目控制項前景
+tiddler-controls-foreground-selected: 選定的條目控制項前景
+tiddler-controls-foreground: 條目控制項前景
+tiddler-editor-background: 條目編輯器背景
+tiddler-editor-border-image: 條目編輯器邊框圖片
+tiddler-editor-border: 條目編輯器邊框
+tiddler-editor-fields-even: 條目編輯器中偶數欄位背景
+tiddler-editor-fields-odd: 條目編輯器中奇數欄位背景
+tiddler-info-background: 條目資訊面板背景
+tiddler-info-border: 條目資訊面板邊框
+tiddler-info-tab-background: 條目資訊面板頁籤背景
+tiddler-link-background: 條目鏈結背景
+tiddler-link-foreground: 條目鏈結前景
+tiddler-subtitle-foreground: 條目副標題前景
+tiddler-title-foreground: 條目標題前景
+toolbar-new-button: 工具列 '新增條目' 按鈕前景
+toolbar-options-button: 工具列 '選項' 按鈕前景
+toolbar-save-button: 工具列 '儲存' 按鈕前景
+toolbar-info-button: 工具列 '資訊' 按鈕前景
+toolbar-edit-button: 工具列 '編輯' 按鈕前景
+toolbar-close-button: 工具列 '關閉' 按鈕前景
+toolbar-delete-button: 工具列 '刪除' 按鈕前景
+toolbar-cancel-button: 工具列 '取消' 按鈕前景
+toolbar-done-button: 工具列 '完成  按鈕前景
+untagged-background: 未設標籤的背景
+very-muted-foreground: 非常低調前景

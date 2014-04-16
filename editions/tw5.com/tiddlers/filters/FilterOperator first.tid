@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: first
+type: text/vnd.tiddlywiki
+
+The ''first'' filter operator returns the first entries in the current list. The optional operand specifies the number of entries to return.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three +[first[]]` |Returns `one` |
+|`one two three +[first[2]]` |Returns `one`, `two` |

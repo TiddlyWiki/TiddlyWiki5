@@ -1,2 +1,2 @@
 title: $:/tags/ViewTemplate
-list: [[$:/core/ui/ViewTemplate/title]] [[$:/core/ui/ViewTemplate/subtitle]] [[$:/core/ui/ViewTemplate/tags]] [[$:/core/ui/ViewTemplate/body]] 
+list: [[$:/core/ui/ViewTemplate/title]] [[$:/core/ui/ViewTemplate/subtitle]] [[$:/core/ui/ViewTemplate/tags]] [[$:/core/ui/ViewTemplate/classic]] [[$:/core/ui/ViewTemplate/body]] 

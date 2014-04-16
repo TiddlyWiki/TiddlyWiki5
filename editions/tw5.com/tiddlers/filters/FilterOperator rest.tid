@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: rest
+type: text/vnd.tiddlywiki
+
+Without an operand, the ''rest'' filter operator returns all but the first entry in the current list. The optional operand specifies the number of entries to omit.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three four five +[rest[]]` |Returns `two`, `three`, `four`, `five` |
+|`one two three four five +[rest[2]]` |Returns `three`, `four`, `five` |

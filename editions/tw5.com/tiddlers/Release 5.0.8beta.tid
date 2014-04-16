@@ -1,36 +1,44 @@
 created: 20140127143652456
-modified: 20140206191028534
+modified: 20140228154939681
 tags: releasenote
 title: Release 5.0.8-beta
 type: text/vnd.tiddlywiki
+released: 201402281551
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.7-beta...v5.0.8-beta]]//
 
-!! Breaking Changes
+!! Incompatible Changes
 
 See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
-* Changed wikitext syntax rules for parsing content of HTML elements
+* Changed rules for parsing content of HTML elements
 * Switched SiteTitle and SiteSubtitle to [[$:/SiteTitle]] and [[$:/SiteSubtitle]]
+* Changes to commands used with [[TiddlyWiki on Node.js]]
+* Changes to naming of some editions
+** Notably ''clientserver'' has changed to ''server''
 
 !! Documentation Improvements
 
 * Improved documentation for TiddlerFilters, including a notation of the [[TiddlerFilter Formal Grammar]] contributed by [[@Tikkoneus|https://github.com/Tikkoneus]]
+* Improved documentation for WidgetMessages
+* Tiddlers on tiddlywiki.com now have a link to the original source on ~GitHub for pull requests (see the "Sources" tab of the tiddler info panel)
 
 !! Usability Improvements
 
-* Rejigged [[$:/ControlPanel]] to use nested tabs
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a01bbd4b9c7ca284141078340c8f568b1e0561a2]] [[automatic saving|AutoSave]] on editing a tiddler and a warning when attempting to close the window with unsaved changes
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
-* Enhanced link handling so that control/command clicking a link opens the target tiddler without navigating to it
-* Importing tiddlers via drag and drop no longer opens all the tiddlers
+* Added confirmation dialogue when deleting tiddlers
 * Add support for switchable (and editable) ColourPalettes
 * Added TranslationMechanism and translations for:
 ** Deutsch (Österreich and Deutschland) by [[@pmario]]
 ** Français (France) by [[@xcazin]]
 ** Chinese (Simplified and Traditional) by [[@BramChen]]
 * Add error alerts when syncing to a server
+* Rejigged [[$:/ControlPanel]] to use nested tabs
+* Added [[$:/TagManager]] for easy management of tags
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e3a05625b2368b2167a2a1b30aa82369e96a7538]] experimental KeyboardWidget, including support for ''ctrl-enter'' (or ''cmd-enter'') to finish editing a tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e6fa9b8a859867c147fb289859169b204dea003e]] number of tags to control panel ''Basics'' tab
+* Enhanced link handling so that control/command clicking a link opens the target tiddler without navigating to it
+* Importing tiddlers via drag and drop no longer opens all the tiddlers
 
 !! Scalability Improvements
 
@@ -39,6 +47,8 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 !! Hackability Improvements
 
+* Added HelpCommand and InitCommand for [[TiddlyWiki on Node.js]]
+* Extended ButtonWidget to allow navigating to a tiddler
 * Added experimental support for building plugins in the browser: [[How to create plugins in the browser]]
 * Extend the TranscludeWidget to display its content as a fallback if the tiddler or field is missing
 * Add logging and AlertMechanism
@@ -54,7 +64,6 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 
 * Fixed problem with pasting items into the browser
 * Fixed problem with colour pickers not showing correct colour in Chrome
-* Fixed problem with "tw-new-tiddler" message if the skeleton tiddler is missing
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8e8e31fb9f5ed8f2e5deff0271d434dbe91f503c]] problem with tag pills not working inside table cells
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/6d3d3322e5c676e63d1f64dce89ce86e58dcd715]] problem in client server configuration with ''%'' in tiddler titles
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/7eafd51a7dd89d2174be3dec97033dc0bb206677]] problem with not using placeholder text when editing missing tiddlers

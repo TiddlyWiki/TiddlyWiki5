@@ -147,6 +147,11 @@ DropZoneWidget.prototype.importDataTypes = [
 			};
 		}
 	}},
+	{type: "text/html", IECompatible: false, convertToFields: function(data) {
+		return {
+			text: data
+		};
+	}},
 	{type: "text/plain", IECompatible: false, convertToFields: function(data) {
 		return {
 			text: data

@@ -19,8 +19,6 @@ Error message and password prompt
     left: 50%;
     margin-left: -144px; /* - width/2 - paddingHorz/2 - border */
 	padding: 16px 16px 16px 16px;
-	-webkit-border-radius: 8px;
-	-moz-border-radius: 8px;
 	border-radius: 8px;
 }
 

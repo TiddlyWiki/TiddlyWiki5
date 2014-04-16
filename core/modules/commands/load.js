@@ -30,8 +30,9 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing filename";
 	}
-	fs.readFile(this.params[0],"utf8",function(err,data) {
-		if(err) {
+	var ext = path.extname(self.params[0]);
+	fs.readFile(this.params[0],$tw.utils.getTypeEncoding(ext),function(err,data) {
+		if (err) {
 			self.callback(err);
 		} else {
 			var fields = {title: self.params[0]},
@@ -41,7 +42,7 @@ Command.prototype.execute = function() {
 				self.callback("No tiddlers found in file \"" + self.params[0] + "\"");
 			} else {
 				for(var t=0; t<tiddlers.length; t++) {
-					self.commander.wiki.addTiddler(new $tw.Tiddler(tiddlers[t]));
+					self.commander.wiki.importTiddler(new $tw.Tiddler(tiddlers[t]));
 				}
 				self.callback(null);	
 			}

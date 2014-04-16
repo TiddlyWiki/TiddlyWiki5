@@ -1,5 +1,6 @@
 {
 	"plugins": [
+		"tiddlywiki/cecily",
 		"tiddlywiki/fullscreen",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
@@ -10,12 +11,10 @@
 		"tiddlywiki/snowwhite",
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
 		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
-		"tiddlywiki/readonly",
-		"giffmex/rocker",
-		"giffmex/blue",
-		"giffmex/blanca"
+		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"en-US",
@@ -24,6 +23,12 @@
 		"de-DE",
 		"fr-FR",
 		"zh-Hans",
-		"zh-Hant"
+		"zh-Hant",
+		"it-IT",
+		"ja-JP"
 	]
+	,
+	"config": {
+		"retain-original-tiddler-path": true
+	}
 }

@@ -1,0 +1,34 @@
+title: $:/language/Docs/Fields/
+
+bag: Der Name eines ~TiddlyWeb "bags" von dem der Tiddler kam.
+caption: Der Text, der auf "~Tab-Buttons" angezeigt wird.
+color: Der CSS Farbwert, der mit einem Tiddler assoziiert wird. 
+component: Der Name einer Komponente, die für eine [[Alarm Anzeige|AlertMechanism]] verantwortlich ist.
+current-tiddler: Wird verwendet um den "obersten" Tiddler in der [[Tiddler Historie|HistoryMechanism]] zwischen zu speichern. 
+created: Datum an dem der Tiddler erstellt wurde.
+creator: Name des Erstellers dieses Tiddlers.
+dependents: Listet die Abhängigkeiten bei "plugins" auf.
+description: Die Beschreibung für ein "plugin" oder einen "modalen" Dialog.
+draft.of: Entwurf von - enthält den Titel des Tiddlers, zu dem dieser Entwurf-Tiddler gehört.
+draft.title: Entwurd Titel - enthält den neuen Titel, wenn der Entwurf-Tiddler gespeichert wird. 
+footer: Der Fußnoten Text bei einem "~Wizard-Dialog"
+hack-to-give-us-something-to-compare-against: Ein temporäres Feld, verwendet in [[$:/core/templates/static.content]]
+icon: Der Titel eines ~Icon-Tiddlers, der mit diesem Tiddler verbunden ist.
+library: Wenn dieses Feld="yes" ist, dann soll der Tiddler als JavaScript Bibliothek gespeichert werden.
+list: Eine geordnete Tiddler Liste, die mit diesem Tiddler verbunden ist.
+list-before: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''vor'' dem hier definierten Tiddler in die Liste eingefügt. Wenn vorhanden, aber leer, dann wird der neue Tiddler an den Anfang der Liste gesetzt.
+list-after: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''nach'' dem hier definierten Tiddler in die Liste eingefügt. 
+modified: Datum, an dem der Tiddler zuletzt verändert wurde.
+modifier: Name der Person, die den Tiddler zuletzt veränder hat.
+name: Ein Menschen lesbarer Name für einen "plugin" Tiddler. 
+plugin-priority: Ein numerischer Wert, der die Priorität eines "plugins" festlegt.
+plugin-type: Der Typ eines "plugins".
+revision: Die Revisionsnummer eines Tiddlers. Wird von einem Server vergeben.
+released: Datum der ~TiddlyWiki Ausgabe.
+source: Eine Quelltext URL, verbunden mit diesem Tiddler.
+subtitle: Der Untertitel für einen "~Wizard-Dialog".
+tags: Eine Liste von "Tags" für diesen Tiddler.
+text: Der Haupttext eines Tiddlers.
+title: Ein individueller einmaliger Name eines Tiddlers.
+type: Legt den Typ eines Tiddlers fest (aka MIME-type).
+version: Versions Information eines "plugins".

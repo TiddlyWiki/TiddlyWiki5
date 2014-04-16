@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: 初始化一個新的 wiki 資料夾
+
+初始化一個空的 [[WikiFolder|WikiFolders]] 的指定版本的副本。
+
+```
+--init <edition> [<edition> ...]
+```
+
+例如：
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+注意：
+
+* 若有需要，將建立 wiki 資料夾目錄
+* 其中 "edition" 預設為 ''empty''
+* 若 wiki 資料夾不是空的，則初始化命令將失敗
+* 初始化命令會刪除 'tiddlywiki.info' 檔內所有 'includeWikis' 的定義。
+* 當指定多個版本時，這些版本於初始化後，將覆寫早期版本共用的所有檔案 (故此最終的 `tiddlywiki.info` 檔案將是從最近的版本複製而得)
+* `--help editions` 傳回所有可用版本的清單。

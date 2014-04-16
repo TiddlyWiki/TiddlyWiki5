@@ -33,7 +33,7 @@ The `<$list>` widget can optionally render draft tiddlers through a different te
 
 !! `storyview` attribute
 
-The `storyview` attribute gives the specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following storyview modules:
+The `storyview` attribute specifies the name of an optional module that can animate changes to the list (including navigation). The core ships with the following storyview modules:
 
 * `classic`: renders the list as an ordered sequence of tiddlers
 * `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers

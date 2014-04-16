@@ -1,0 +1,10 @@
+title: $:/language/Search/
+
+Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> matches</small>//
+Filter/Caption: フィルター
+Filter/Hint: [[filter expression|http://tiddlywiki.com/static/TiddlerFilters.html]]で検索
+Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> matches</small>//
+Shadows/Caption: 隠し
+Shadows/Hint: 隠しtiddlerを検索
+System/Caption: システム
+System/Hint: システムtiddlerを検索

@@ -62,7 +62,7 @@ CloudWidget.prototype.createChart = function(parent,nextSibling) {
 		});
 	}
 	// Create the svg element
-	var svgElement = d3.select(parent).insert("svg",nextSibling)
+	var svgElement = d3.select(parent).insert("svg",function() {return nextSibling;})
 		.attr("width", 600)
 		.attr("height", 400);
 	// Create the main group

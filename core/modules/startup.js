@@ -12,12 +12,21 @@ This is the main application logic for both the client and server
 /*global $tw: false */
 "use strict";
 
+// Set to `true` to enable performance instrumentation
+var PERFORMANCE_INSTRUMENTATION = false;
+
+// Time (in ms) that we defer refreshing changes to draft tiddlers
+var DRAFT_TIDDLER_TIMEOUT = 400;
+
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	var modules,n,m,f,commander;
 	// Load modules
 	$tw.modules.applyMethods("utils",$tw.utils);
+	if($tw.node) {
+		$tw.modules.applyMethods("utils-node",$tw.utils);
+	}
 	$tw.modules.applyMethods("global",$tw);
 	$tw.modules.applyMethods("config",$tw.config);
 	if($tw.browser) {
@@ -29,14 +38,15 @@ exports.startup = function() {
 	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
+	// Set up the performance framework
+	$tw.perf = new $tw.Performance(PERFORMANCE_INSTRUMENTATION);
 	// Set up the parsers
 	$tw.wiki.initParsers();
-	// Set up the syncer object
-	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Set up the command modules
 	$tw.Commander.initCommands();
-	// Kick off the language manager
-	$tw.languageManager = new $tw.PluginSwitcher({
+	// Kick off the language manager and switcher
+	$tw.language = new $tw.Language();
+	$tw.languageSwitcher = new $tw.PluginSwitcher({
 		wiki: $tw.wiki,
 		pluginType: "language",
 		controllerTitle: "$:/language",
@@ -54,25 +64,31 @@ exports.startup = function() {
 			"$:/themes/tiddlywiki/vanilla"
 		]
 	});
-	// Get the default tiddlers
-	var defaultTiddlersTitle = "$:/DefaultTiddlers",
-		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
-		defaultTiddlers = [];
-	if(defaultTiddlersTiddler) {
-		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
-	}
-	// Initialise the story and history
-	var storyTitle = "$:/StoryList",
-		story = [];
-	for(var t=0; t<defaultTiddlers.length; t++) {
-		story[t] = defaultTiddlers[t];
-	}
-	$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
+	// Display the default tiddlers
+	var displayDefaultTiddlers = function() {
+		// Get the default tiddlers
+		var defaultTiddlersTitle = "$:/DefaultTiddlers",
+			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
+			defaultTiddlers = [];
+		if(defaultTiddlersTiddler) {
+			defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
+		}
+		// Initialise the story
+		var storyTitle = "$:/StoryList",
+			story = [];
+		for(var t=0; t<defaultTiddlers.length; t++) {
+			story[t] = defaultTiddlers[t];
+		}
+		$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
+	};
+	displayDefaultTiddlers();
+	// Set up the syncer object
+	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
 	if($tw.browser) {
 		// Set up our beforeunload handler
 		window.addEventListener("beforeunload",function(event) {
-			var confirmationMessage = null;
+			var confirmationMessage = undefined;
 			if($tw.syncer.isDirty()) {
 				confirmationMessage = "You have unsaved changes in TiddlyWiki";
 				event.returnValue = confirmationMessage; // Gecko
@@ -107,6 +123,10 @@ exports.startup = function() {
 		$tw.pageScroller = new $tw.utils.PageScroller();
 		$tw.rootWidget.addEventListener("tw-scroll",function(event) {
 			$tw.pageScroller.handleEvent(event);
+		});
+		// Listen for the tw-home message
+		$tw.rootWidget.addEventListener("tw-home",function(event) {
+			displayDefaultTiddlers();
 		});
 		// Install the save action handlers
 		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
@@ -187,22 +207,13 @@ exports.startup = function() {
 		$tw.styleElement = document.createElement("style");
 		$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
 		document.head.insertBefore($tw.styleElement,document.head.firstChild);
-		$tw.wiki.addEventListener("change",function(changes) {
+		$tw.wiki.addEventListener("change",$tw.perf.report("styleRefresh",function(changes) {
 			if($tw.styleWidgetNode.refresh(changes,$tw.styleContainer,null)) {
 				$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
 			}
-		});
-		// Display the PageMacros, which includes the PageTemplate
-		var templateTitle = "$:/core/ui/PageMacros",
-			parser = $tw.wiki.parseTiddler(templateTitle);
-		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
-		$tw.pageContainer = document.createElement("div");
-		$tw.utils.addClass($tw.pageContainer,"tw-page-container");
-		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
-		$tw.pageWidgetNode.render($tw.pageContainer,null);
-		$tw.wiki.addEventListener("change",function(changes) {
-			$tw.pageWidgetNode.refresh(changes,$tw.pageContainer,null);
-		});
+		}));
+		// Display the $:/PageMacros tiddler to kick off the display
+		renderPage();
 		// Fix up the link between the root widget and the page container
 		$tw.rootWidget.domNodes = [$tw.pageContainer];
 		$tw.rootWidget.children = [$tw.pageWidgetNode];
@@ -232,7 +243,54 @@ exports.startup = function() {
 		);
 		commander.execute();
 	}
-
 };
+
+
+/*
+Main render function for PageMacros, which includes the PageTemplate
+*/
+function renderPage() {
+	// Parse and render the template
+	var templateTitle = "$:/core/ui/PageMacros",
+		parser = $tw.wiki.parseTiddler(templateTitle);
+	$tw.perf.report("mainRender",function() {
+		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
+		$tw.pageContainer = document.createElement("div");
+		$tw.utils.addClass($tw.pageContainer,"tw-page-container-wrapper");
+		document.body.insertBefore($tw.pageContainer,document.body.firstChild);
+		$tw.pageWidgetNode.render($tw.pageContainer,null);
+	})();
+	// Prepare refresh mechanism
+	var deferredChanges = Object.create(null),
+		timerId;
+	function refresh() {
+		// Process the refresh
+		$tw.pageWidgetNode.refresh(deferredChanges,$tw.pageContainer,null);
+		deferredChanges = Object.create(null);
+	}
+	// Add the change event handler
+	$tw.wiki.addEventListener("change",$tw.perf.report("mainRefresh",function(changes) {
+		// Check if only drafts have changed
+		var onlyDraftsHaveChanged = true;
+		for(var title in changes) {
+			var tiddler = $tw.wiki.getTiddler(title);
+			if(!tiddler || !tiddler.hasField("draft.of")) {
+				onlyDraftsHaveChanged = false;
+			}
+		}
+		// Defer the change if only drafts have changed
+		if(timerId) {
+			clearTimeout(timerId);
+		}
+		timerId = null;
+		if(onlyDraftsHaveChanged) {
+			timerId = setTimeout(refresh,DRAFT_TIDDLER_TIMEOUT);
+			$tw.utils.extend(deferredChanges,changes);
+		} else {
+			$tw.utils.extend(deferredChanges,changes);
+			refresh();
+		}
+	}));
+}
 
 })();

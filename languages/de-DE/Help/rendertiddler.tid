@@ -1,0 +1,8 @@
+title: $:/language/Help/rendertiddler
+description: Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format.
+
+Ausgabe eines individuellen Tiddlers, in einem spezifizierten Format (standard: `text/html`) und Dateinamen:
+
+```
+--rendertiddler <title> <filename> [<type>]
+```

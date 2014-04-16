@@ -5,15 +5,19 @@ Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Advanced/LoadedModules/Caption: Geladene Module
 Advanced/LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
 Advanced/TiddlerFields/Caption: Tiddler Felder
-Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus "System"-, exclusive "Schatten"-Tiddlern. 
+Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exclusive ~Schatten-Tiddler. 
 Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen ihres ~TiddlyWiki's anzupassen.
 Appearance/Palette/Caption: Palette
+Appearance/Palette/Editor/Clone/Caption: Palette klonen
+Appearance/Palette/Editor/Clone/Prompt: Es wird empfohlen, dass sie diese ~Schatten-Palette klonen, bevor sie sie bearbeiten. Der Name der Palette wird im Tiddler Feld "description" eingestellt.
+Appearance/Palette/Editor/Prompt/Modified: Diese ~Schatten-Palette wurde bearbeitet.
+Appearance/Palette/Editor/Prompt: Bearbeiten
+Appearance/Palette/Editor/Reset/Caption: Palette zurücksetzen
+Appearance/Palette/ShowEditor/Caption: Editor zeigen
+Appearance/Palette/HideEditor/Caption: Editor ausblenden
 Appearance/Palette/Prompt: Ausgewählte Farbpalette:
-#
-# TODO bin mir nicht sicher bei "Story View"
 Appearance/StoryView/Caption: Anzeige
-#
 Appearance/StoryView/Prompt: Ausgewählte Anzeige:
 Appearance/Theme/Caption: Thema
 Appearance/Theme/Prompt: Ausgewähltes Thema:
@@ -23,30 +27,30 @@ Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klamm
 Basics/DefaultTiddlers/Prompt: Standard Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
-Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener "Schatten Tiddler":
-Basics/ShadowTiddlers/Prompt: Anzahl "Schatten Tiddler":
+Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener ~Schatten-Tiddler:
+Basics/ShadowTiddlers/Prompt: Anzahl ~Schatten-Tiddler:
 Basics/Subtitle/Prompt: Untertietel:
-Basics/SystemTiddlers/Prompt: Anzahl "System Tiddler":
+Basics/SystemTiddlers/Prompt: Anzahl ~System-Tiddler:
 Basics/Tags/Prompt: Anzahl Tags:
 Basics/Tiddlers/Prompt: Anzahl Tiddler:
 Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
 Basics/Username/Prompt: Benutzer Signatur zum editieren:
 Basics/Version/Prompt: ~TiddlyWiki Version:
-# TODO - "Plugins"
 Plugins/Caption: Plugins
 Plugins/Fields/Description: Beschreibung
 Plugins/Fields/Title: Titel
 Plugins/Fields/Version: Version
+Plugins/Language/Prompt: Sprachen
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Themen
 Saving/AutoSave/Disabled/Button: klicken zum Aktivieren
 Saving/AutoSave/Disabled/Prompt: Automatisch speichern ist deaktiviert!
 Saving/AutoSave/Enabled/Button: klicken zum Deaktivieren
 Saving/AutoSave/Enabled/Prompt: Automatisch speichern ist aktiviert!
-#
 Saving/AutoSave: Automatisch speichern
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
-# TODO Backup ??
 Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
 Saving/TiddlySpot/Backups: "Backups"
 Saving/TiddlySpot/Filename: "Upload" Dateiname

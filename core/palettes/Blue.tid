@@ -22,6 +22,12 @@ dropdown-border: <<colour muted-foreground>>
 dropdown-tab-background-selected: #fff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
+external-link-background-hover: 
+external-link-background-visited: 
+external-link-background: 
+external-link-foreground-hover: 
+external-link-foreground-visited: #0000aa
+external-link-foreground: #0000ee
 foreground: #333353
 message-background: #ecf2ff
 message-border: #cfd6e6
@@ -39,13 +45,20 @@ page-background: #ddddff
 pre-background: #f5f5f5
 pre-border: #cccccc
 primary: #5778d8
+sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ffffff
-sidebar-foreground: #acacac
 sidebar-foreground-shadow: rgba(255,255,255, 0.8)
+sidebar-foreground: #acacac
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #c0c0c0
 sidebar-tab-background-selected: <<colour page-background>>
+sidebar-tab-background: <<colour tab-background>>
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: <<colour tab-border>>
+sidebar-tab-divider: <<colour tab-divider>>
+sidebar-tab-foreground-selected: 
+sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #444444
 sidebar-tiddler-link-foreground: #5959c0
 static-alert-foreground: #aaaaaa
@@ -54,6 +67,7 @@ tab-background: #ccccdd
 tab-border-selected: #ccccdd
 tab-border: #cccccc
 tab-divider: #d8d8d8
+tab-foreground-selected: <<colour tab-foreground>>
 tab-foreground: #666666
 table-border: #dddddd
 table-footer-background: #a8a8a8
@@ -62,7 +76,7 @@ tag-background: #eeeeff
 tag-foreground: #000
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>
-tiddler-controls-foreground-hover: #888888
+tiddler-controls-foreground-hover: #666666
 tiddler-controls-foreground-selected: #444444
 tiddler-controls-foreground: #cccccc
 tiddler-editor-background: #f8f8f8
@@ -77,5 +91,14 @@ tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
 tiddler-subtitle-foreground: #c0c0c0
 tiddler-title-foreground: #5959c0
+toolbar-new-button: #5eb95e
+toolbar-options-button: rgb(128, 88, 165)
+toolbar-save-button: #0e90d2
+toolbar-info-button: #0e90d2
+toolbar-edit-button: rgb(243, 123, 29)
+toolbar-close-button: #dd514c
+toolbar-delete-button: #dd514c
+toolbar-cancel-button: rgb(243, 123, 29)
+toolbar-done-button: #5eb95e
 untagged-background: #999999
 very-muted-foreground: #888888

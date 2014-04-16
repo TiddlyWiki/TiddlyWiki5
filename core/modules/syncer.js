@@ -267,8 +267,13 @@ Synchronise a set of changes to the server
 */
 Syncer.prototype.syncToServer = function(changes) {
 	var self = this,
-		now = new Date(),
-		filteredChanges = this.filterFn.call(this.wiki,changes);
+		now = Date.now(),
+		filteredChanges = this.filterFn.call(this.wiki,function(callback) {
+			$tw.utils.each(changes,function(change,title) {
+				var tiddler = self.wiki.getTiddler(title);
+				callback(tiddler,title);
+			});
+		});
 	$tw.utils.each(changes,function(change,title,object) {
 		// Process the change if it is a deletion of a tiddler we're already syncing, or is on the filtered change list
 		if((change.deleted && $tw.utils.hop(self.tiddlerInfo,title)) || filteredChanges.indexOf(title) !== -1) {
@@ -366,7 +371,7 @@ Queue up a sync task. If there is already a pending task for the tiddler, just u
 */
 Syncer.prototype.enqueueSyncTask = function(task) {
 	var self = this,
-		now = new Date();
+		now = Date.now();
 	// Set the timestamps on this task
 	task.queueTime = now;
 	task.lastModificationTime = now;
@@ -469,7 +474,7 @@ Choose the next applicable task
 Syncer.prototype.chooseNextTask = function() {
 	var self = this,
 		candidateTask = null,
-		now = new Date();
+		now = Date.now();
 	// Select the best candidate task
 	$tw.utils.each(this.taskQueue,function(task,title) {
 		// Exclude the task if there's one of the same name in progress
@@ -514,6 +519,9 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 				// Invoke the callback
 				callback(null);
 			});
+		} else {
+			this.logger.log(" Not Dispatching 'save' task:",task.title,"tiddler does not exist");
+			return callback(null);
 		}
 	} else if(task.type === "load") {
 		// Load the tiddler

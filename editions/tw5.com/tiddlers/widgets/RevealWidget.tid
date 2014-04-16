@@ -38,8 +38,10 @@ Here's a simple example of showing and hiding content with buttons:
 <$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
 
 <$reveal type="match" state="$:/SampleRevealState" text="show">
+
 ! This is the revealed content
 And this is some text
+
 </$reveal>
 ```
 
@@ -49,8 +51,10 @@ It renders as:
 <$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
 
 <$reveal type="match" state="$:/SampleRevealState" text="show">
+
 ! This is the revealed content
 And this is some text
+
 </$reveal>
 
 !! Popup
@@ -62,8 +66,10 @@ Here is a simple example of a popup built with the RevealWidget:
 
 <$reveal type="popup" state="$:/SamplePopupState">
 <div class="tw-drop-down">
+
 ! This is the popup
 And this is some text
+
 </div>
 </$reveal>
 ```
@@ -74,7 +80,9 @@ It renders as:
 
 <$reveal type="popup" state="$:/SamplePopupState">
 <div class="tw-drop-down">
+
 ! This is the popup
 And this is some text
+
 </div>
 </$reveal>

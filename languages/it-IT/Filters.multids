@@ -1,0 +1,12 @@
+title: $:/language/Filters/
+
+AllTiddlers: Tutti i frammenti eccetto quelli di sistema
+RecentTiddlers: I frammenti modificati di recente
+AllTags: Tutte le categorie eccetto quelle di sistema
+Missing: Frammenti mancanti
+Drafts: Frammenti bozza
+Orphans: Frammenti orfani
+SystemTiddlers: Frammenti di sistema
+ShadowTiddlers: Frammenti nascosti
+OverriddenShadowTiddlers: Frammenti nascosti annullati
+SystemTags: Categorie di sistema

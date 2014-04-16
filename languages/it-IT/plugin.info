@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/it-IT",
+	"name": "it-IT",
+	"plugin-type": "language",
+	"description": "Italian (Italy)",
+	"author": "MaurizioPollio",
+	"core-version": ">=5.0.8"
+}

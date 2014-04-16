@@ -1,5 +1,5 @@
 created: 20131129094353704
-modified: 20131219100410583
+modified: 20140224134310019
 title: TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
@@ -20,9 +20,3 @@ Running TiddlyWiki on [[Node.js]] brings several important benefits over and abo
 ! Upgrading
 
 {{Upgrading TiddlyWiki on Node.js}}
-
-! Commands
-
-The following commands are available:
-
-<ul><$list filter="[tag[command]]"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>

@@ -1,0 +1,5 @@
+title: $:/core/Filters/AllTiddlers
+tags: $:/tags/Filter
+filter: [!is[system]sort[title]]
+description: {{$:/language/Filters/AllTiddlers}}
+

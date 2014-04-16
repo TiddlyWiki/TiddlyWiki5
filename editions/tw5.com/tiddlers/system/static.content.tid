@@ -5,6 +5,13 @@ hack-to-give-us-something-to-compare-against: yes
 <!-- For Google, and people without JavaScript-->
 <$reveal state="!!hack-to-give-us-something-to-compare-against" type="nomatch" text=<<savingEmpty>>>
 
+It looks like this browser doesn't run JavaScript. You can use one of these static HTML versions to browse the same content:
+
+* http://tiddlywiki.com/static.html - browse individual tiddlers as separate pages
+* http://tiddlywiki.com/alltiddlers.html#HelloThere - single file containing all tiddlers
+
+---
+
 {{HelloThere}}
 
 {{TiddlyWiki}}

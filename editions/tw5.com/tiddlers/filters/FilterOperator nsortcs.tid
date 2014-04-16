@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: nsortcs
+type: text/vnd.tiddlywiki
+
+The ''nsortcs'' filter operator sorts the current list as numeric values. String values are sorted case sensitively (upper and lower case letters are considered different). Preceding the operator with `!` reverses the sort order.
+
+For example:
+
+|!Filter String |!Description |
+|`10 010 1000 100 +[nsortcs[]]` |Returns `10`, `010`, `100`, `1000` |
+|`10 010 alpha 1000 100 +[nsortcs[]]` |Returns `10`, `010`, `100`, `1000`, `alpha` |
+
+See also [[FilterOperator: sort]], [[FilterOperator: sortcs]] and [[FilterOperator: nsort]].

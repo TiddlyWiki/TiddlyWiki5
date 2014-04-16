@@ -1,0 +1,30 @@
+title: $:/language/Help/server
+description: 提供一个 HTTP 服务器介面到 TiddlyWiki
+
+在服务器中内置 TiddlyWiki5 是非常简单。虽与 TiddlyWeb 兼容，但不支持许多健全互联网面向的使用方式所需的功能。
+
+提供呈现一个指定条目，也可将个别条目编码成 JSON，且支持基本的 HTTP 操作 `GET`、`PUT` 及 `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
+```
+
+参数说明：
+
+* ''port'' - 服务的埠号 (默认为 "8080")
+* ''roottiddler'' - 服务的基本条目 (默认为 "$:/core/save/all") 
+* ''rendertype'' - 呈现的基本条目内容类型 (默认为 "text/plain")
+* ''servetype'' - 服务的基本条目内容类型(默认为 "text/html")
+* ''username'' - 默认的编辑者署名
+* ''password'' - 可选的基本验证密码
+* ''host'' - 可选的主机名称， (默认为 "127.0.0.1" 或名为 "localhost")
+
+若指定密码参数，浏览器将提示使用者输入用户名与密码。注意，密码系以明码方式传递，因此并不适合一般正式用途。
+
+例如：
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+同时执行多个 TiddlyWiki 服务，须分别指定不同的埠号。

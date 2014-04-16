@@ -26,7 +26,7 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
 		{type: "tw-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
 		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"},
-		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"},
+		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"}
 	]);
 };
 
@@ -198,11 +198,29 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Get the tiddler we're deleting
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList();
+		storyList = this.getStoryList(),
+		originalTitle, confirmationTitle;
 	// Check if the tiddler we're deleting is in draft mode
 	if(tiddler.hasField("draft.title")) {
-		// Delete the original tiddler
-		var originalTitle = tiddler.fields["draft.of"];
+		// If so, we'll prompt for confirmation referencing the original tiddler
+		originalTitle = tiddler.fields["draft.of"];
+		confirmationTitle = originalTitle;
+	} else {
+		// If not a draft, then prompt for confirmation referencing the specified tiddler
+		originalTitle = null;
+		confirmationTitle = title;
+	}
+	// Seek confirmation
+	if(!confirm($tw.language.getString(
+				"ConfirmDeleteTiddler",
+				{variables:
+					{title: confirmationTitle}
+				}
+			))) {
+		return false;
+	}
+	// Delete the original tiddler
+	if(originalTitle) {
 		this.wiki.deleteTiddler(originalTitle);
 		this.removeTitleFromStory(storyList,originalTitle);
 	}
@@ -273,7 +291,12 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 			var isRename = draftOf !== draftTitle,
 				isConfirmed = true;
 			if(isRename && this.wiki.tiddlerExists(draftTitle)) {
-				isConfirmed = confirm("Do you wish to overwrite the tiddler '" + draftTitle + "'?");
+				isConfirmed = confirm($tw.language.getString(
+					"ConfirmOverwriteTiddler",
+					{variables:
+						{title: draftTitle}
+					}
+				));
 			}
 			if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
@@ -310,11 +333,23 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 		originalTitle = draftTiddler.fields["draft.of"],
 		storyList = this.getStoryList();
 	if(draftTiddler && originalTitle) {
+		// Ask for confirmation if the tiddler text has changed
+		var isConfirmed = true;
+		if(this.wiki.getTiddlerText(draftTitle) !== this.wiki.getTiddlerText(originalTitle)) {
+			isConfirmed = confirm($tw.language.getString(
+				"ConfirmCancelTiddler",
+				{variables:
+					{title: draftTitle}
+				}
+			));
+		}
 		// Remove the draft tiddler
-		this.wiki.deleteTiddler(draftTitle);
-		this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
-		this.addToHistory(originalTitle,event.navigateFromClientRect);
-		this.saveStoryList(storyList);
+		if(isConfirmed) {
+			this.wiki.deleteTiddler(draftTitle);
+			this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
+			this.addToHistory(originalTitle,event.navigateFromClientRect);
+			this.saveStoryList(storyList);
+		}
 	}
 	return false;
 };
@@ -323,11 +358,10 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList();
-	var newTiddlerTitle = event.param || "New Tiddler";
 	// Get the template tiddler if there is one
-	var templateTiddler = this.wiki.getTiddler(newTiddlerTitle);
+	var templateTiddler = this.wiki.getTiddler(event.param);
 	// Create the new tiddler
-	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || newTiddlerTitle);
+	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || "New Tiddler");
 	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
 		text: "Newly created tiddler",
 		title: title

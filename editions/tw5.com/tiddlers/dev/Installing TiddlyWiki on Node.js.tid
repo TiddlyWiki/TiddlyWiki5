@@ -1,5 +1,5 @@
 created: 20131219100608529
-modified: 20140102214547249
+modified: 20140224134148737
 tags: howto
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -12,11 +12,10 @@ type: text/vnd.tiddlywiki
 #> `sudo npm install -g tiddlywiki` (Mac/Linux)
 # Check TiddlyWiki is installed by typing:
 #> `tiddlywiki --version`
-# In response, you should see TiddlyWiki report its current version (eg `5.0.4-beta`; you may also see other debugging information reported)
+# In response, you should see TiddlyWiki report its current version (eg `5.0.8-beta`; you may also see other debugging information reported)
 # Try it out:
-## `mkdir mywiki` to create a folder for a new wiki
-## `cd mywiki` to move into the new folder
-## `tiddlywiki --server` to start TiddlyWiki
+## `tiddlywiki mynewwiki --init server` to create a folder for a new wiki that includes server-related components
+## `tiddlywiki mynewwiki --server` to start TiddlyWiki
 ## Visit http://127.0.0.1:8080/ in your browser
 ## Try editing and creating tiddlers
 

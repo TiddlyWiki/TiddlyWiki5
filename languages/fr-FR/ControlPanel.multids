@@ -3,7 +3,7 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Avancé
 Advanced/Hint: Informations internes sur ce ~TiddlyWiki
 Advanced/LoadedModules/Caption: Modules chargés
-Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indique que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
+Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Advanced/TiddlerFields/Caption: Champs
 Advanced/TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Appearance/Caption: Apparence
@@ -40,6 +40,9 @@ Plugins/Caption: Plugins
 Plugins/Fields/Description: Description
 Plugins/Fields/Title: Titre
 Plugins/Fields/Version: Version
+Plugins/Language/Prompt: Langues
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Thèmes
 Saving/AutoSave/Disabled/Button: Activer
 Saving/AutoSave/Disabled/Prompt: La sauvegarde automatique est désactivée
 Saving/AutoSave/Enabled/Button: Désactiver
@@ -48,14 +51,14 @@ Saving/AutoSave: Sauvegarde automatique
 Saving/Caption: Sauvegarde
 Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
-Saving/TiddlySpot/BackupDir: Dossier des //backups//
-Saving/TiddlySpot/Backups: Backup
-Saving/TiddlySpot/Filename: Nom du fichier déposé
+Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
+Saving/TiddlySpot/Backups: Sauvegardes
+Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<wikiname>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
 Saving/TiddlySpot/Password: Mot de passe
 Saving/TiddlySpot/ServerURL: URL du serveur
-Saving/TiddlySpot/UploadDir: Dossier de dépôt
+Saving/TiddlySpot/UploadDir: Dossier des dépôts
 Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
 Tools/Caption: Outils
 Tools/Download/Full/Caption: Télécharger le wiki complet

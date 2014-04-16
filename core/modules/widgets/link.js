@@ -56,23 +56,37 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Create our element
 	var domNode = this.document.createElement("a");
 	// Assign classes
-	$tw.utils.addClass(domNode,"tw-tiddlylink");
+	var classes = ["tw-tiddlylink"];
 	if(this.isShadow) {
-		$tw.utils.addClass(domNode,"tw-tiddlylink-shadow");
+		classes.push("tw-tiddlylink-shadow");
 	}
 	if(this.isMissing && !this.isShadow) {
-		$tw.utils.addClass(domNode,"tw-tiddlylink-missing");
+		classes.push("tw-tiddlylink-missing");
 	} else {
 		if(!this.isMissing) {
-			$tw.utils.addClass(domNode,"tw-tiddlylink-resolves");
+			classes.push("tw-tiddlylink-resolves");
 		}
 	}
+	domNode.setAttribute("class",classes.join(" "));
 	// Set an href
 	var wikiLinkTemplateMacro = this.getVariable("tw-wikilink-template"),
 		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
+	// Set the tooltip
+	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
+	var tooltipWikiText = this.tooltip || this.getVariable("tw-wikilink-tooltip");
+	if(tooltipWikiText) {
+		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
+				parseAsInline: true,
+				variables: {
+					currentTiddler: this.to
+				},
+				parentWidget: this
+			});
+		domNode.setAttribute("title",tooltipText);
+	}
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -95,7 +109,7 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 		navigateFromNode: this,
 		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
 		},
-		navigateSuppressNavigation: event.metaKey || event.ctrlKey
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
 	});
 	event.preventDefault();
 	event.stopPropagation();
@@ -162,6 +176,8 @@ Compute the internal state of the widget
 LinkWidget.prototype.execute = function() {
 	// Get the target tiddler title
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
+	// Get the link title
+	this.tooltip = this.getAttribute("tooltip");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
@@ -174,7 +190,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to]) {
+	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
 	}

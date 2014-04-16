@@ -35,5 +35,8 @@ exports.htmlEntities = {quot:34, amp:38, apos:39, lt:60, gt:62, nbsp:160, iexcl:
 
 exports.htmlVoidElements = "area,base,br,col,command,embed,hr,img,input,keygen,link,meta,param,source,track,wbr".split(",");
 
+exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,div,dl,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,li,noscript,ol,output,p,pre,section,table,tfoot,ul,video".split(",");
+
+exports.htmlUnsafeElements = "script".split(",");
 
 })();

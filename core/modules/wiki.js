@@ -54,20 +54,17 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 
 exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	var tr = $tw.utils.parseTextReference(textRef),
-		title,tiddler,fields;
-	// Check if it is a reference to a tiddler
-	if(tr.title && !tr.field) {
-		tiddler = this.getTiddler(tr.title);
-		this.addTiddler(new $tw.Tiddler(tiddler,{title: tr.title,text: value},this.getModificationFields()));
-	// Else check for a field reference
-	} else if(tr.field) {
 		title = tr.title || currTiddlerTitle;
-		tiddler = this.getTiddler(title);
-		if(tiddler) {
-			fields = {};
-			fields[tr.field] = value;
-			this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
-		}
+	// Check if it is a reference to a tiddler field
+	if(tr.index) {
+		var data = this.getTiddlerData(title,Object.create(null));
+		data[tr.index] = value;
+		this.setTiddlerData(title,data,this.getModificationFields());
+	} else {
+		var tiddler = this.getTiddler(title),
+			fields = {title: title};
+		fields[tr.field || "text"] = value;
+		this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 	}
 };
 
@@ -82,7 +79,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 		title = tr.title || currTiddlerTitle;
 		tiddler = this.getTiddler(title);
 		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
-			fields = {};
+			fields = Object.create(null);
 			fields[tr.field] = undefined;
 			this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 		}
@@ -121,15 +118,15 @@ Causes a tiddler to be marked as changed, incrementing the change count, and tri
 This method should be called after the changes it describes have been made to the wiki.tiddlers[] array.
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
-		true if the tiddler has been created
+		true if the tiddler has been deleted
 */
 exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Record the touch in the list of changed tiddlers
-	this.changedTiddlers = this.changedTiddlers || {};
-	this.changedTiddlers[title] = this.changedTiddlers[title] || {};
+	this.changedTiddlers = this.changedTiddlers || Object.create(null);
+	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
 	// Increment the change count
-	this.changeCount = this.changeCount || {};
+	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
 		this.changeCount[title]++;
 	} else {
@@ -141,7 +138,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 		var self = this;
 		$tw.utils.nextTick(function() {
 			var changes = self.changedTiddlers;
-			self.changedTiddlers = {};
+			self.changedTiddlers = Object.create(null);
 			self.eventsTriggered = false;
 			self.dispatchEvent("change",changes);
 		});
@@ -150,23 +147,12 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 };
 
 exports.getChangeCount = function(title) {
-	this.changeCount = this.changeCount || {};
+	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
 		return this.changeCount[title];
 	} else {
 		return 0;
 	}
-};
-
-exports.deleteTiddler = function(title) {
-	delete this.tiddlers[title];
-	this.clearCache(title);
-	this.clearGlobalCache();
-	this.enqueueTiddlerEvent(title,true);
-};
-
-exports.tiddlerExists = function(title) {
-	return !!this.tiddlers[title];
 };
 
 /*
@@ -192,13 +178,6 @@ exports.isTemporaryTiddler = function(title) {
 	return title.indexOf("$:/temp/") === 0;
 };
 
-/*
-Determines if a tiddler is a shadow tiddler, regardless of whether it has been overridden by a real tiddler
-*/
-exports.isShadowTiddler = function(title) {
-	return $tw.utils.hop(this.shadowTiddlers,title);
-};
-
 exports.isImageTiddler = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {		
@@ -206,22 +185,6 @@ exports.isImageTiddler = function(title) {
 		return !!contentTypeInfo && contentTypeInfo.flags.indexOf("image") !== -1;
 	} else {
 		return null;
-	}
-};
-
-exports.addTiddler = function(tiddler) {
-	// Check if we're passed a fields hashmap instead of a tiddler
-	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = new $tw.Tiddler(tiddler);
-	}
-	// Get the title
-	var title = tiddler.fields.title;
-	// Save the tiddler
-	if(title) {
-		this.tiddlers[title] = tiddler;
-		this.clearCache(title);
-		this.clearGlobalCache();
-		this.enqueueTiddlerEvent(title);
 	}
 };
 
@@ -260,7 +223,7 @@ exports.getCreationFields = function() {
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = {},
+	var fields = Object.create(null),
 		modifier = this.getTiddlerText(USER_NAME_TITLE);
 	fields.modified = new Date();
 	if(modifier) {
@@ -276,19 +239,17 @@ excludeTag: tag to exclude
 includeSystem: whether to include system tiddlers (defaults to false)
 */
 exports.getTiddlers = function(options) {
-	options = options || {};
+	options = options || Object.create(null);
 	var self = this,
 		sortField = options.sortField || "title",
 		tiddlers = [], t, titles = [];
-	for(t in this.tiddlers) {
-		if($tw.utils.hop(this.tiddlers,t)) {
-			if(options.includeSystem || !this.isSystemTiddler(t)) {
-				if(!options.excludeTag || !this.tiddlers[t].hasTag(options.excludeTag)) {
-					tiddlers.push(this.tiddlers[t]);
-				}
+	this.each(function(tiddler,title) {
+		if(options.includeSystem || !self.isSystemTiddler(title)) {
+			if(!options.excludeTag || !tiddler.hasTag(options.excludeTag)) {
+				tiddlers.push(tiddler);
 			}
 		}
-	}
+	});
 	tiddlers.sort(function(a,b) {
 		var aa = a.fields[sortField].toLowerCase() || "",
 			bb = b.fields[sortField].toLowerCase() || "";
@@ -311,6 +272,23 @@ exports.getTiddlers = function(options) {
 exports.countTiddlers = function(excludeTag) {
 	var tiddlers = this.getTiddlers({excludeTag: excludeTag});
 	return $tw.utils.count(tiddlers);
+};
+
+/*
+Returns a function iterator(callback) that iterates through the specified titles, and invokes the callback with callback(tiddler,title)
+*/
+exports.makeTiddlerIterator = function(titles) {
+	var self = this;
+	if(!$tw.utils.isArray(titles)) {
+		titles = Object.keys(titles);
+	} else {
+		titles = titles.slice(0);
+	}
+	return function(callback) {
+		titles.forEach(function(title) {
+			callback(self.getTiddler(title),title);
+		});
+	};
 };
 
 /*
@@ -366,7 +344,7 @@ exports.forEachTiddler = function(/* [options,]callback */) {
 		titles = this.getTiddlers(options),
 		t, tiddler;
 	for(t=0; t<titles.length; t++) {
-		tiddler = this.tiddlers[titles[t]];
+		tiddler = this.getTiddler(titles[t]);
 		if(tiddler) {
 			callback.call(this,tiddler.fields.title,tiddler);
 		}
@@ -453,26 +431,6 @@ exports.getOrphanTitles = function() {
 	return orphans; // Todo
 };
 
-exports.getSystemTitles = function() {
-	var titles = [];
-	for(var title in this.tiddlers) {
-		if(this.isSystemTiddler(title)) {
-			titles.push(title);
-		}
-	}
-	titles.sort();
-	return titles;
-};
-
-exports.getShadowTitles = function() {
-	var titles = [];
-	for(var title in this.shadowTiddlers) {
-		titles.push(title);
-	}
-	titles.sort();
-	return titles;
-};
-
 /*
 Retrieves a list of the tiddler titles that are tagged with a given tag
 */
@@ -490,21 +448,30 @@ Get a hashmap by tag of arrays of tiddler titles
 exports.getTagMap = function() {
 	var self = this;
 	return this.getGlobalCache("tagmap",function() {
-		var tags = {};
-		// Collect up all the tags
-		for(var title in self.tiddlers) {
-			var tiddler = self.tiddlers[title];
-			if(tiddler.fields.tags) {
-				for(var index=0; index<tiddler.fields.tags.length; index++) {
-					var tag = tiddler.fields.tags[index];
-					if(tags[tag]) {
-						tags[tag].push(title)
-					} else {
-						tags[tag] = [title];
+		var tags = Object.create(null),
+			storeTags = function(tagArray,title) {
+				if(tagArray) {
+					for(var index=0; index<tagArray.length; index++) {
+						var tag = tagArray[index];
+						if($tw.utils.hop(tags,tag)) {
+							tags[tag].push(title)
+						} else {
+							tags[tag] = [title];
+						}
 					}
 				}
+			},
+			title, tiddler;
+		// Collect up all the tags
+		self.eachShadow(function(tiddler,title) {
+			if(!self.tiddlerExists(title)) {
+				tiddler = self.getTiddler(title);
+				storeTags(tiddler.fields.tags,title);
 			}
-		}
+		});
+		self.each(function(tiddler,title) {
+			storeTags(tiddler.fields.tags,title);
+		});
 		return tags;
 	});
 };
@@ -515,12 +482,11 @@ Lookup a given tiddler and return a list of all the tiddlers that include it in 
 exports.findListingsOfTiddler = function(targetTitle) {
 	// Get the list associated with the tag
 	var titles = [];
-	for(var title in this.tiddlers) {
-		var tiddler = this.tiddlers[title];
+	this.each(function(tiddler,title) {
 		if($tw.utils.isArray(tiddler.fields.list) && tiddler.fields.list.indexOf(targetTitle) !== -1) {
 			titles.push(title);
 		}
-	}
+	});
 	return titles;
 };
 
@@ -531,7 +497,7 @@ exports.sortByList = function(array,listTitle) {
 	var list = this.getTiddlerList(listTitle);
 	if(!array || array.length === 0) {
 		return [];
-	} else if(list) {
+	} else {
 		var titles = [], t, title;
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
@@ -547,9 +513,40 @@ exports.sortByList = function(array,listTitle) {
 				titles.push(title);
 			}
 		}
+		// Finally obey the list-before and list-after fields of each tiddler in turn
+		var sortedTitles = titles.slice(0);
+		for(t=0; t<sortedTitles.length; t++) {
+			title = sortedTitles[t];
+			var currPos = titles.indexOf(title),
+				newPos = -1,
+				tiddler = this.getTiddler(title);
+			if(tiddler) {
+				var beforeTitle = tiddler.fields["list-before"],
+					afterTitle = tiddler.fields["list-after"];
+				if(beforeTitle === "") {
+					newPos = 0;
+				} else if(beforeTitle) {
+					newPos = titles.indexOf(beforeTitle);
+				} else if(afterTitle) {
+					newPos = titles.indexOf(afterTitle);
+					if(newPos >= 0) {
+						++newPos;
+					}
+				}
+				if(newPos === -1) {
+					newPos = currPos;
+				}
+				if(newPos !== currPos) {
+					titles.splice(currPos,1);
+					if(newPos >= currPos) {
+						newPos--;
+					}
+					titles.splice(newPos,0,title);
+				}
+			}
+
+		}
 		return titles;
-	} else {
-		return array;
 	}
 };
 
@@ -559,7 +556,7 @@ Retrieve a tiddler as a JSON string of the fields
 exports.getTiddlerAsJson = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = {};
+		var fields = Object.create(null);
 		$tw.utils.each(tiddler.fields,function(value,name) {
 			fields[name] = tiddler.getFieldString(name);
 		});
@@ -601,7 +598,7 @@ exports.getTiddlerData = function(title,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(title,index,defaultText) {
-	var data = this.getTiddlerData(title,{}),
+	var data = this.getTiddlerData(title,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -620,8 +617,17 @@ data: object that can be serialised to JSON
 fields: optional hashmap of additional tiddler fields to be set
 */
 exports.setTiddlerData = function(title,data,fields) {
-	var tiddler = this.getTiddler(title);
-	this.addTiddler(new $tw.Tiddler(tiddler,fields,{title: title, type: "application/json", text: JSON.stringify(data,null,$tw.config.preferences.jsonSpaces)},this.getModificationFields()));
+	var existingTiddler = this.getTiddler(title),
+		newFields = {
+			title: title
+	};
+	if(existingTiddler && existingTiddler.fields.type === "application/x-tiddler-dictionary") {
+		newFields.text = $tw.utils.makeTiddlerDictionary(data);
+	} else {
+		newFields.type = "application/json";
+		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
+	}
+	this.addTiddler(new $tw.Tiddler(existingTiddler,fields,newFields,this.getModificationFields()));
 };
 
 /*
@@ -641,7 +647,7 @@ exports.getTiddlerList = function(title,field,index) {
 
 // Return a named global cache object. Global cache objects are cleared whenever a tiddler change occurs
 exports.getGlobalCache = function(cacheName,initializer) {
-	this.globalCache = this.globalCache || {};
+	this.globalCache = this.globalCache || Object.create(null);
 	if($tw.utils.hop(this.globalCache,cacheName)) {
 		return this.globalCache[cacheName];
 	} else {
@@ -651,7 +657,7 @@ exports.getGlobalCache = function(cacheName,initializer) {
 };
 
 exports.clearGlobalCache = function() {
-	this.globalCache = {};
+	this.globalCache = Object.create(null);
 }
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
@@ -660,13 +666,13 @@ exports.getCacheForTiddler = function(title,cacheName,initializer) {
 // Temporarily disable caching so that tweakParseTreeNode() works
 return initializer();
 
-	this.caches = this.caches || {};
+	this.caches = this.caches || Object.create(null);
 	var caches = this.caches[title];
 	if(caches && caches[cacheName]) {
 		return caches[cacheName];
 	} else {
 		if(!caches) {
-			caches = {};
+			caches = Object.create(null);
 			this.caches[title] = caches;
 		}
 		caches[cacheName] = initializer();
@@ -676,7 +682,7 @@ return initializer();
 
 // Clear all caches associated with a particular tiddler
 exports.clearCache = function(title) {
-	this.caches = this.caches || {};
+	this.caches = this.caches || Object.create(null);
 	if($tw.utils.hop(this.caches,title)) {
 		delete this.caches[title];
 	}
@@ -883,11 +889,11 @@ parentWidget: optional parent widget for the root node
 */
 exports.renderTiddler = function(outputType,title,options) {
 	options = options || {};
-	var parser = this.parseTiddler(title),
+	var parser = this.parseTiddler(title,options),
 		widgetNode = this.makeWidget(parser,options);
 	var container = $tw.fakeDocument.createElement("div");
 	widgetNode.render(container,null);
-	return outputType === "text/html" ? container.innerHTML : container.textContent;
+	return outputType === "text/html" ? container.innerHTML : (outputType === "text/plain-formatted" ? container.formattedTextContent : container.textContent);
 };
 
 /*
@@ -895,7 +901,7 @@ Return an array of tiddler titles that match a search string
 	text: The text string to search for
 	options: see below
 Options available:
-	titles:  Hashmap or array of tiddler titles to limit search
+	source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
@@ -950,21 +956,13 @@ exports.search = function(text,options) {
 		return true;
 	};
 	// Loop through all the tiddlers doing the search
-	var results = [];
-	if($tw.utils.isArray(options.titles)) {
-		for(t=0; t<options.titles.length; t++) {
-			if(!!searchTiddler(options.titles[t]) === !options.invert) {
-				results.push(options.titles[t]);
-			}
+	var results = [],
+		source = options.source || this.each;
+	source(function(tiddler,title) {
+		if(!!searchTiddler(title) === !options.invert) {
+			results.push(title);
 		}
-	} else {
-		var source = options.titles || this.tiddlers;
-		for(t in source) {
-			if(!!searchTiddler(t) === !options.invert) {
-				results.push(t);
-			}
-		}
-	}
+	});
 	// Remove any of the results we have to exclude
 	if(options.exclude) {
 		for(t=0; t<options.exclude.length; t++) {

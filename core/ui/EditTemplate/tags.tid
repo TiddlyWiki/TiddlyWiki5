@@ -5,10 +5,23 @@ tags: $:/tags/EditTemplate
 \define tag-styles()
 background-color:$(backgroundColor)$;
 \end
-<div class="tw-edit-tags"><$fieldmangler><$list filter="[is[current]tags[]sort[title]]" storyview="pop"><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label"><$view field="title" format="text" /><$button message="tw-remove-tag" param={{!!title}} class="btn-invisible tw-remove-tag-button">&times;</$button></span></$set>
+<div class="tw-edit-tags">
+<$fieldmangler>
+<$list filter="[all[current]tags[]sort[title]]" storyview="pop"><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label">
+<$view field="title" format="text" />
+<$button message="tw-remove-tag" param={{!!title}} class="btn-invisible tw-remove-tag-button">&times;</$button></span>
+</$set>
 </$list>
 
-<div class="tw-edit-add-tag"><span class="tw-add-tag-name"><$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/tagsAutoComplete">> class="tw-edit-texteditor"/></span> <$button popup=<<qualify "$:/state/tagsAutoComplete">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button"><$button message="tw-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class=""><<lingo Tags/Add/Button>></$button></span></div>
+<div class="tw-edit-add-tag">
+<span class="tw-add-tag-name">
+<$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/tagsAutoComplete">> class="tw-edit-texteditor"/>
+</span> <$button popup=<<qualify "$:/state/tagsAutoComplete">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button">
+<$button message="tw-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">
+<<lingo Tags/Add/Button>>
+</$button>
+</span>
+</div>
 
 <div class="tw-block-dropdown-wrapper">
 
@@ -18,7 +31,13 @@ background-color:$(backgroundColor)$;
 
 <$linkcatcher set="$:/temp/NewTagName" setTo="" message="tw-add-tag">
 <$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]">
-<$link><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tw-tag-label"><$view field="title" format="text"/></span></$set></$link>
+<$link>
+<$set name="backgroundColor" value={{!!color}}>
+<span style=<<tag-styles>> class="tw-tag-label">
+<$view field="title" format="text"/>
+</span>
+</$set>
+</$link>
 </$list>
 </$linkcatcher>
 

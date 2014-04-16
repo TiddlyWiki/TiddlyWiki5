@@ -14,9 +14,9 @@ Appearance/Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调�
 Appearance/Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
 Appearance/Palette/Editor/Prompt: 编辑
 Appearance/Palette/Editor/Reset/Caption: 重置
-Appearance/Palette/ShowEditor/Caption: 显示编辑器
 Appearance/Palette/HideEditor/Caption: 隐藏编辑器
 Appearance/Palette/Prompt: 当前的调色板：
+Appearance/Palette/ShowEditor/Caption: 显示编辑器
 Appearance/StoryView/Caption: 查看模式
 Appearance/StoryView/Prompt: 当前的查看模式：
 Appearance/Theme/Caption: 布景主题
@@ -40,10 +40,13 @@ Plugins/Caption: 插件
 Plugins/Fields/Description: 说明
 Plugins/Fields/Title: 标题
 Plugins/Fields/Version: 版本
-Saving/AutoSave/Disabled/Button:  
-Saving/AutoSave/Disabled/Prompt: 自动保存已<$linkcatcher to="$:/config/AutoSave"><$link to="yes">@@color:#c0c0c0;''停用''@@</$link></$linkcatcher>
-Saving/AutoSave/Enabled/Button:  
-Saving/AutoSave/Enabled/Prompt: 自动保存已<$linkcatcher to="$:/config/AutoSave"><$link to="no">@@color:green;''启用''@@</$link></$linkcatcher>
+Plugins/Language/Prompt: 语言
+Plugins/Plugin/Prompt: 插件
+Plugins/Theme/Prompt: 布景主题
+Saving/AutoSave/Disabled/Button: 启用
+Saving/AutoSave/Disabled/Prompt: 自动保存已停用
+Saving/AutoSave/Enabled/Button: 停用 
+Saving/AutoSave/Enabled/Prompt: 自动保存已启用
 Saving/AutoSave: 自动保存
 Saving/Caption: 保存
 Saving/Heading: 保存

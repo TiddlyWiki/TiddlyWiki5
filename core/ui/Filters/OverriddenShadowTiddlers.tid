@@ -1,0 +1,5 @@
+title: $:/core/Filters/OverriddenShadowTiddlers
+tags: $:/tags/Filter
+filter: [is[shadow]]
+description: {{$:/language/Filters/OverriddenShadowTiddlers}}
+

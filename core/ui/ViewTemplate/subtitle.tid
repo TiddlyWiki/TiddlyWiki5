@@ -1,4 +1,8 @@
 title: $:/core/ui/ViewTemplate/subtitle
 tags: $:/tags/ViewTemplate
 
-<div class="tw-subtitle"><$link to={{!!modifier}}><$view field="modifier"/></$link> <$view field="modified" format="relativedate"/></div>
+<div class="tw-subtitle">
+<$link to={{!!modifier}}>
+<$view field="modifier"/>
+</$link> <$view field="modified" format="relativedate"/>
+</div>

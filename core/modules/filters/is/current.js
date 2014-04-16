@@ -17,31 +17,18 @@ Export our filter function
 */
 exports.current = function(source,prefix,options) {
 	var results = [];
-	// Function to check a tiddler
-	function checkTiddler(title) {
-		if(title !== options.currTiddlerTitle) {
-			results.push(title);
-		}
-	};
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		if(prefix === "!") {
-			$tw.utils.each(source,function(title) {
-				checkTiddler(title);
-			});
-		} else {
-			if(source.indexOf(options.currTiddlerTitle) !== -1) {
-				results.push(options.currTiddlerTitle);
+	if(prefix === "!") {
+		source(function(tiddler,title) {
+			if(title !== options.currTiddlerTitle) {
+				results.push(title);
 			}
-		}
+		});
 	} else {
-		if(prefix === "!") {
-			$tw.utils.each(source,function(element,title) {
-				checkTiddler(title);
-			});
-		} else {
-			results.push(options.currTiddlerTitle);
-		}
+		source(function(tiddler,title) {
+			if(title === options.currTiddlerTitle) {
+				results.push(title);
+			}
+		});
 	}
 	return results;
 };

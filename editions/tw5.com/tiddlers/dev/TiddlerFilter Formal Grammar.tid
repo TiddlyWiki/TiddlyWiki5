@@ -1,10 +1,10 @@
 created: 20140210141217955
-modified: 20140210141312363
+modified: 20140303091312363
 tags: dev
 title: TiddlerFilter Formal Grammar
 type: text/vnd.tiddlywiki
 
-TiddlerFilters follow a formal grammar:
+TiddlerFilters follow a formal grammar that is presented here for users who are familiar with the notation. It isn't necessary to understand this grammar in order to write your own filter expressions.
 
 ''&lt;filter-string&gt;'' ::= ''&lt;opt-whitespaces&gt;'' ''&lt;filter-operand&gt;'' | ''&lt;opt-whitespaces&gt;'' ''&lt;filter-operand&gt;'' ''&lt;filter-string&gt;''
 

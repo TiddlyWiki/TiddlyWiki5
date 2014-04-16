@@ -1,0 +1,20 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters commonfilters
+title: FilterOperator: all
+type: text/vnd.tiddlywiki
+
+The ''all'' filter operator is used to select combinations of lists of tiddlers for subsequent operations.
+
+The operand of the ''all'' operator is a list of names of tiddler sources joined with `+`.
+
+For example:
+
+|!Filter String |!Description |
+|`[all[tiddlers]]` |Selects all 'real' tiddlers (both system and non-system), excluding shadow tiddlers |
+|`[all[shadows]]` |Selects all ShadowTiddlers, including those that have been overridden with real tiddlers |
+|`[all[shadows+tiddlers]]` |Selects all ShadowTiddlers and all 'real' tiddlers together |
+|`[all[current]]` |Selects the current tiddler |
+|`[all[missing]]` |Selects all MissingTiddlers |
+|`[all[orphans]]` |Selects all OrphanTiddlers |
+

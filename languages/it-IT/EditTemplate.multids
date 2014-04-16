@@ -1,0 +1,14 @@
+title: $:/language/EditTemplate/
+
+Body/Hint: Utilizza il formato wiki per definire la formattazione, aggiungere immagini e caratteristiche dinamiche
+Body/Placeholder: Digita il testo di questo frammento
+Body/Preview/Button/Hide: Nascondi preview
+Body/Preview/Button/Show: Mostra preview
+Fields/Add/Button: Aggiungi
+Fields/Add/Name/Placeholder: Nome campo
+Fields/Add/Prompt: Aggiungi un nuovo campo:
+Fields/Add/Value/Placeholder: Valore campo
+Tags/Add/Button: Aggiungi
+Tags/Add/Placeholder: Nome categoria
+Type/Placeholder: Tipo contenuto
+Type/Prompt: Tipo:

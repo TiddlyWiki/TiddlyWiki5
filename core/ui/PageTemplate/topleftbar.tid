@@ -1,0 +1,8 @@
+title: $:/core/ui/PageTemplate/topleftbar
+tags: $:/tags/PageTemplate
+
+<span class="tw-topbar tw-topbar-left">
+
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+
+</span>

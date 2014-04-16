@@ -1,5 +1,5 @@
 created: 20130825202900000
-modified: 20140221093306317
+modified: 20140410103200281
 tags: concepts
 title: TiddlerLinks
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ Links are useful for modelling organic relationships between tiddlers, and parti
 
 The TiddlerInfoPanel lists incoming links to a tiddler in the tab ''References''.
 
-TiddlerFilters can include the following FilterOperators that work with links:
+TiddlerFilters can include the following [[filter operators|TiddlerFilters]] that work with links:
 
 * `[links[]]` - returns the titles of the tiddlers that are linked from the currently selected tiddler(s)
 * `[backlinks[]]` - returns the titles of the tiddlers that link to the currently selected tiddler(s)

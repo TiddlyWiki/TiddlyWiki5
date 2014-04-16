@@ -1,79 +1,12 @@
-title: NavigatorWidget
-created: 201310241419
-modified: 201310300837
+created: 20131024141900000
+modified: 20140226194810214
 tags: widget
+title: NavigatorWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
 The navigator widget manipulates the current store, the story list and history lists in response to various WidgetMessages.
-
-! Navigator Widget Messages
-
-The actions performed by each widget message are described below.
-
-!! Action of `tw-navigate` message
-
-The navigate message inserts the specified tiddler into the story and puts it at the top of the history stack. If the tiddler is not already present in the story then it will be positioned immediately after the tiddler specified in `event.navigateFromTitle`.
-
-The navigate message requires the following properties on the `event` object:
-
-|!Name |!Description |
-|navigateTo |Title of the tiddler that is being navigated |
-|navigateFromTitle |Title of the tiddler from which the navigation was initiated |
-|navigateFromClientRect |Bounding rectangle in client page coordinates of the element initiating the navigation |
-
-!! Action of `tw-edit-tiddler` message
-
-The edit tiddler message replaces the specified tiddler in the current story with a draft version of itself. It requires the following properties on the `event` object:
-
-|!Name |!Description |
-|tiddlerTitle |Title of the tiddler that is being switched to edit mode |
-
-!! Action of `tw-delete-tiddler` message
-
-The delete tiddler message deletes specified tiddler and removes it from the current story. If the tiddler is a draft then it also deletes the tiddler specified in the `draft.of` field. The delete tiddler message requires the following properties on the `event` object:
-
-|!Name |!Description |
-|tiddlerTitle |Title of the tiddler that is being switched to edit mode |
-
-!! Action of `tw-save-tiddler` message
-
-The save tiddler message is applied to draft tiddlers. It saves the draft over the tiddler identified in the `draft.of` field and then deletes the draft. The save tiddler message requires the following properties on the `event` object:
-
-|!Name |!Description |
-|tiddlerTitle |Title of the tiddler that is being switched out of edit mode |
-
-!! Action of `tw-cancel-tiddler` message
-
-The cancel tiddler message abandons the changes in a draft tiddler. It requires the following properties on the `event` object:
-
-|!Name |!Description |
-|tiddlerTitle |Title of the tiddler that is being cancelled out of edit mode |
-
-!! Action of `tw-close-tiddler` message
-
-The close tiddler message removes a specified tiddler from the story list. It requires the following properties on the `event` object:
-
-|!Name |!Description |
-|tiddlerTitle |Title of the tiddler that is to be closed |
-
-!! Action of `tw-close-all-tiddlers` message
-
-The close all tiddlers message empties the story list.
-
-!! Action of `tw-new-tiddler` message
-
-The new tiddler message creates a new draft tiddler and adds it to the current story. It requires the following properties on the `event` object:
-
-|!Name |!Description |
-|navigateFromTitle |Title of the tiddler from which the navigation to the new tiddler was initiated |
-
-!! Action of `tw-import-tiddlers` message
-
-The import tiddlers message adds a list of tiddlers to the store and adds them to the current story. It requires the following properties on the `event` object:
-
-|!Name |!Description |
-|param |JSON text of the tiddlers to be imported |
 
 ! Content and Attributes
 
@@ -82,3 +15,17 @@ The navigator widget displays any contained content, and responds to WidgetMessa
 |!Attribute |!Description |
 |story |Name of the tiddler containing the story list to be manipulated |
 |history |Name of the tiddler containing the history list to be manipulated |
+
+! Widget Messages
+
+The following WidgetMessages are handled by the navigator widget:
+
+<ul>
+<$list filter="[tag[navigator-message]]">
+<li>
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</li>
+</$list>
+</ul>

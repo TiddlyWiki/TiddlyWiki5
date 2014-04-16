@@ -1,4 +1,4 @@
 title: $:/core/ui/EditTemplate/controls
 tags: $:/tags/EditTemplate
 
-<span class="tw-tiddler-controls titlebar"> <$list filter="[is[shadow]!has[draft.of]tag[$:/tags/EditToolbar]] [!is[shadow]!has[draft.of]tag[$:/tags/EditToolbar]] +[tag[$:/tags/EditToolbar]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list> </span>
+<span class="tw-tiddler-controls titlebar"> <$list filter="[all[tiddlers+shadows]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list> </span>

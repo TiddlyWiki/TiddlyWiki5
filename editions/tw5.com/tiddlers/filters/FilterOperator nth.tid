@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: nth
+type: text/vnd.tiddlywiki
+
+Without an operand, the ''nth'' filter operator returns the first entry in the current list. The optional operand specifies the number of entries to return.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three four five +[nth[]]` |Returns `one` |
+|`one two three four five +[nth[3]]` |Returns `three` |

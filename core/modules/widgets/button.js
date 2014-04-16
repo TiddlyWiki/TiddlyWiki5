@@ -54,7 +54,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
 		if(self.to) {
-			self.dispatchEvent({type: "tw-navigate", navigateTo: self.to, tiddlerTitle: self.getVariable("currentTiddler")});
+			self.navigateTo(event);
 			handled = true;
 		}
 		if(self.message) {
@@ -92,6 +92,19 @@ ButtonWidget.prototype.isPoppedUp = function() {
 	return result;
 };
 
+ButtonWidget.prototype.navigateTo = function(event) {
+	var bounds = this.domNodes[0].getBoundingClientRect();
+	this.dispatchEvent({
+		type: "tw-navigate",
+		navigateTo: this.to,
+		navigateFromTitle: this.getVariable("storyTiddler"),
+		navigateFromNode: this,
+		navigateFromClientRect: { top: bounds.top, left: bounds.left, width: bounds.width, right: bounds.right, bottom: bounds.bottom, height: bounds.height
+		},
+		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
+	});
+};
+
 ButtonWidget.prototype.dispatchMessage = function(event) {
 	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
 };
@@ -105,8 +118,7 @@ ButtonWidget.prototype.triggerPopup = function(event) {
 };
 
 ButtonWidget.prototype.setTiddler = function() {
-	var tiddler = this.wiki.getTiddler(this.set);
-	this.wiki.addTiddler(new $tw.Tiddler(tiddler,{title: this.set, text: this.setTo}));
+	this.wiki.setTextReference(this.set,this.setTo,this.getVariable("currentTiddler"));
 };
 
 /*

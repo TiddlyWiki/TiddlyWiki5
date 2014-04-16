@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: list
+type: text/vnd.tiddlywiki
+
+The ''list'' filter operator replaces the current list with the list contained in the [[TextReference|TextReferences]] specified in the operand. The default field for the text reference is `list`.
+
+Preceding the operator name with `!` inverts the logic so that the filter only returns the tiddlers in the current list that are not listed in the specified list.
+
+For example:
+
+|!Filter String |!Description |
+|`[list[HelloThere]]` |Returns the list of tiddlers in the `list` field of the tiddler `HelloThere` |
+|`[list[HelloThere!!mylist]]` |Returns the list of tiddlers in the `mylist` field of the tiddler `HelloThere` |

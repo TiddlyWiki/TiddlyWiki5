@@ -13,8 +13,8 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 "use strict";
 
 // Get a reference to the file system
-var fs = !$tw.browser ? require("fs") : null;
-
+var fs = !$tw.browser ? require("fs") : null,
+	path = !$tw.browser ? require("path") : null;
 
 function FileSystemAdaptor(syncer) {
 	var self = this;
@@ -88,7 +88,7 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			}
 			// Assemble the new fileInfo
 			fileInfo = {};
-			fileInfo.filepath = $tw.boot.wikiTiddlersPath + "/" + self.generateTiddlerFilename(title,extension,files);
+			fileInfo.filepath = $tw.boot.wikiTiddlersPath + path.sep + self.generateTiddlerFilename(title,extension,files);
 			fileInfo.type = typeInfo.fileType || tiddler.fields.type;
 			fileInfo.hasMetaFile = typeInfo.hasMetaFile;
 			// Save the newly created fileInfo

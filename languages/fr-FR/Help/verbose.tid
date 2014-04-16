@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Bascule en mode verbeux
+
+Bascule les informations en mode verbeux, pratique pour le débogage.
+
+```
+--verbose
+```

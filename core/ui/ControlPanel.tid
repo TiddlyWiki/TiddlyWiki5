@@ -1,3 +1,5 @@
 title: $:/ControlPanel
 
-<div class="tw-control-panel"><<tabs "[is[shadow]!has[draft.of]tag[$:/tags/ControlPanel]] [!is[shadow]!has[draft.of]tag[$:/tags/ControlPanel]] +[tag[$:/tags/ControlPanel]]" "$:/core/ui/ControlPanel/Basics">></div>
+<div class="tw-control-panel">
+<<tabs "[all[tiddlers+shadows]tag[$:/tags/ControlPanel]!has[draft.of]]" "$:/core/ui/ControlPanel/Basics">>
+</div>

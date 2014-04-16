@@ -43,7 +43,11 @@ ListWidget.prototype.render = function(parent,nextSibling) {
 	this.renderChildren(parent,nextSibling);
 	// Construct the storyview
 	var StoryView = this.storyViews[this.storyViewName];
-	this.storyview = StoryView ? new StoryView(this) : null;
+	if(StoryView && !this.document.isTiddlyWikiFakeDom) {
+		this.storyview = new StoryView(this)
+	} else {
+		this.storyview = null;
+	}
 };
 
 /*

@@ -1,0 +1,107 @@
+title: $:/themes/tiddlywiki/seamless/base
+tags: [[$:/tags/stylesheet]]
+list-after: $:/themes/tiddlywiki/vanilla/base
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/*
+Rules copied from Snow White
+*/
+
+.tw-page-controls button svg, .tw-tiddler-controls button svg, .tw-topbar button svg {
+	<<transition "fill 150ms ease-in-out">>
+}
+
+.tw-tiddler-controls button.tw-selected svg {
+	<<filter "drop-shadow(0px -1px 2px rgba(0,0,0,0.25))">>
+}
+
+.tw-drop-down {
+	border-radius: 4px;
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
+}
+
+.tw-block-dropdown {
+	border-radius: 4px;
+	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
+}
+
+.tw-modal-displayed {
+	-webkit-filter: blur(4px);
+}
+
+.modal {
+	border-radius: 6px;
+	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
+}
+
+.modal-footer {
+	border-radius: 0 0 6px 6px;
+	<<box-shadow "inset 0 1px 0 #fff">>;
+}
+
+.tw-alert {
+	border-radius: 6px;
+	<<box-shadow "0 3px 7px rgba(0,0,0,0.6)">>
+}
+
+.tw-notification {
+	border-radius: 6px;
+	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
+	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
+}
+
+.tw-message-box img {
+	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
+}
+
+/*
+Seamless modifications
+*/
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+
+<<if-sidebar "
+
+	/* Drop the tiddler frame padding */
+	body.tw-body .tw-tiddler-frame {
+		padding: 0;
+	}
+
+">>
+
+	/* Move the sidebar up so that the title lines up */
+	body.tw-body .tw-sidebar-scrollable {
+		padding: 43px 0 28px 42px;
+	}
+
+	/* Stop the tiddler info panel from bleeding into the tiddler frame padding */
+	body.tw-body .tw-tiddler-info {
+		margin: 0;
+	}
+
+	/* Stop message boxes from bleeding into the tiddler frame padding */
+	body.tw-body .tw-message-box {
+		margin: 21px 0 21px 0;
+	}
+
+}
+
+/* Use the tiddler background colour for the page background */
+html body.tw-body {
+	background-color: <<colour background>>;
+}
+
+html:-webkit-full-screen {
+	background-color: <<colour background>>;
+}
+
+/* Adjust the colour of the page controls */
+body.tw-body .tw-page-controls svg {
+	fill: <<colour muted-foreground>>;
+}
+
+/* Adjust the colour of the sidebar selected tabs */
+body.tw-body .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
+	background-color: <<colour background>>;
+}

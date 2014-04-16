@@ -1,0 +1,29 @@
+title: $:/language/
+
+ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden sie unter: http://tiddlywiki.com/static/Upgrading.html
+ClassicWarning/Upgrade/Caption: upgrade
+CloseAll/Button: alle schließen
+ConfirmDeleteTiddler: Wollen sie den Tiddler: "<$text text=<<title>>/>" löschen?
+ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
+InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
+MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
+RecentChanges/DateFormat: DDth MMM YYYY
+RelativeDate/Future/Days: in <<period>> Tagen
+RelativeDate/Future/Hours: in <<period>> Stunden
+RelativeDate/Future/Minutes: in <<period>> Minuten
+RelativeDate/Future/Months: in <<period>> Monaten
+RelativeDate/Future/Second: in einer Sekunde
+RelativeDate/Future/Seconds: in <<period>> Sekunden
+RelativeDate/Future/Years: in <<period>> Jahren
+RelativeDate/Past/Days: vor <<period>> Tagen
+RelativeDate/Past/Hours: vor <<period>> Stunden
+RelativeDate/Past/Minutes: vor <<period>> Minuten
+RelativeDate/Past/Months: vor <<period>> Monaten
+RelativeDate/Past/Second: vor einer Sekunde
+RelativeDate/Past/Seconds: vor <<period>> Sekunden
+RelativeDate/Past/Years: vor <<period>> Jahren
+SystemTiddler/Tooltip: Das ist ein System-Tiddler
+TagManager/Colour/Heading: Farbe
+TagManager/Count/Heading: Anzahl
+TagManager/Icon/Heading: Symbol
+TagManager/Tag/Heading: Tag

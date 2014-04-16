@@ -14,12 +14,21 @@ tags: [[$:/tags/stylesheet]]
 	-webkit-box-sizing: border-box;
 }
 
+html button {
+	line-height: 1.2;
+}
+
 /*
 ** Basic element styles
 */
 
 html {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings##fontfamily}};
+	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
+}
+
+html:-webkit-full-screen {
+	background-color: <<colour page-background>>;
 }
 
 body.tw-body {
@@ -31,14 +40,15 @@ body.tw-body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	line-height: 1em;
+	line-height: 1.2;
 	font-weight: 300;
 }
 
 pre {
 	display: block;
 	padding: 14px;
-	margin: 0 0 14px;
+	margin-top: 1em;
+	margin-bottom: 1em;
 	word-break: normal;
 	word-wrap: break-word;
 	white-space: pre;
@@ -46,7 +56,7 @@ pre {
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
-	<<border-radius 3px>>
+	border-radius: 3px;
 }
 
 code {
@@ -55,7 +65,7 @@ code {
 	border: 1px solid <<colour code-border>>;
     white-space: pre-wrap;
 	padding: 0 3px 2px;
-	<<border-radius 3px>>
+	border-radius: 3px;
 }
 
 blockquote {
@@ -84,6 +94,8 @@ table {
 	width: auto;
 	max-width: 100%;
 	caption-side: bottom;
+	margin-top: 1em;
+	margin-bottom: 1em;
 }
 
 table th, table td {
@@ -99,6 +111,10 @@ table thead tr td, table th {
 
 table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
+}
+
+.tw-csv-table {
+	white-space: nowrap;
 }
 
 .tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
@@ -150,6 +166,18 @@ a.tw-tiddlylink-missing {
 
 a.tw-tiddlylink-external {
 	text-decoration: underline;
+	color: <<colour external-link-foreground>>;
+	background-color: <<colour external-link-background>>;
+}
+
+a.tw-tiddlylink-external:visited {
+	color: <<colour external-link-foreground-visited>>;
+	background-color: <<colour external-link-background-visited>>;
+}
+
+a.tw-tiddlylink-external:hover {
+	color: <<colour external-link-foreground-hover>>;
+	background-color: <<colour external-link-background-hover>>;
 }
 
 /*
@@ -173,7 +201,7 @@ a.tw-tiddlylink-external {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour dragger-background>>;
-	<<border-radius 20px>>
+	border-radius: 20px;
 }
 
 .tw-tiddler-dragger-cover {
@@ -225,11 +253,19 @@ a.tw-tiddlylink-external {
 	line-height: 1.4em;
 }
 
-.btn-mini {
+.tw-sidebar-lists input {
+	color: <<colour foreground>>;
+}
+
+.tw-sidebar-lists button {
+	color: <<colour sidebar-button-foreground>>;
+}
+
+.tw-sidebar-lists button.btn-mini {
 	color: <<colour sidebar-muted-foreground>>;
 }
 
-.btn-mini:hover {
+.tw-sidebar-lists button.btn-mini:hover {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
@@ -271,14 +307,14 @@ a.tw-tiddlylink-external {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
-	<<border-radius 8px>>
+	border-radius: 8px;
 }
 
 .tw-untagged-label {
 	background-color: <<colour untagged-background>>;
 }
 
-.tw-tag-label svg {
+.tw-tag-label svg, .tw-tag-label img {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
@@ -287,6 +323,33 @@ a.tw-tiddlylink-external {
 /*
 ** Page layout
 */
+
+.tw-topbar {
+	position: fixed;
+	z-index: 1200;
+}
+
+.tw-topbar-left {
+	left: 0;
+	top: 0;
+}
+
+.tw-topbar-right {
+	top: 0;
+	right: 0;
+}
+
+.tw-topbar button {
+	padding: 8px;
+}
+
+.tw-topbar svg {
+	fill: <<colour muted-foreground>>;
+}
+
+.tw-topbar svg:hover {
+	fill: <<colour foreground>>;
+}
 
 .sidebar-header {
 	color: <<colour sidebar-foreground>>;
@@ -299,6 +362,18 @@ a.tw-tiddlylink-external {
 .sidebar-header .tw-sidebar-lists p {
 	margin-top: 3px;
 	margin-bottom: 3px;
+}
+
+.sidebar-header .tw-missing-tiddler-label {
+	color: <<colour sidebar-foreground>>;
+}
+
+.tw-advanced-search input {
+	width: 60%;
+}
+
+.tw-search {
+	padding-top: 14px;
 }
 
 .tw-search a svg {
@@ -325,7 +400,7 @@ a.tw-tiddlylink-external {
 }
 
 .tw-page-controls button:hover svg, .tw-page-controls a:hover svg {
-	fill: <<colour sidebar-controls-foreground-hover>;
+	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
 .tw-menu-list-item {
@@ -354,8 +429,10 @@ a.tw-tiddlylink-external {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+
 	.sidebar-header {
 		padding: 14px;
+		min-height: 32px;
 	}
 
 	.story-river {
@@ -365,7 +442,12 @@ a.tw-tiddlylink-external {
 }
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
-	.sidebar-header {
+
+	.tw-message-box {
+		margin: 21px -21px 21px -21px;
+	}
+
+	.tw-sidebar-scrollable {
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyright}};
@@ -375,7 +457,7 @@ a.tw-tiddlylink-external {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 70px 0 28px 42px;
+		padding: 71px 0 28px 42px;
 	}
 
 	.story-river {
@@ -383,8 +465,18 @@ a.tw-tiddlylink-external {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}};
-		padding: 56px 42px 42px 42px;
+		padding: 42px 42px 42px 42px;
 	}
+
+<<if-no-sidebar "
+
+	.story-river {
+		width: auto;
+		padding: 0;
+	}
+
+">>
+
 }
 
 @media print {
@@ -448,16 +540,30 @@ a.tw-tiddlylink-external {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
 	}
 
+<<if-no-sidebar "
+
+	.tw-tiddler-frame {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+">>
+
 	.tw-tiddler-info {
 		margin: 0 -42px 0 -42px;
 	}
 }
 
+.tw-site-title,
 .titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
 	line-height: 1.2em;
 	color: <<colour tiddler-title-foreground>>;
+}
+
+.tw-system-title-prefix {
+	color: <<colour muted-foreground>>;
 }
 
 .titlebar img {
@@ -493,7 +599,7 @@ a.tw-tiddlylink-external {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tw-tiddler-controls button:hover svg {
+.tw-tiddler-controls button.btn-invisible:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
@@ -541,6 +647,46 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-edit-bitmapeditor-height {
 	display: block;
+}
+
+/*
+** Toolbar buttons
+*/
+
+.tw-page-controls svg.tw-image-new-button {
+  fill: <<colour toolbar-new-button>>;
+}
+
+.tw-page-controls svg.tw-image-options-button {
+  fill: <<colour toolbar-options-button>>;
+}
+
+.tw-page-controls svg.tw-image-save-button {
+  fill: <<colour toolbar-save-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-info-button {
+  fill: <<colour toolbar-info-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-edit-button {
+  fill: <<colour toolbar-edit-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-close-button {
+  fill: <<colour toolbar-close-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-delete-button {
+  fill: <<colour toolbar-delete-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-cancel-button {
+  fill: <<colour toolbar-cancel-button>>;
+}
+
+.tw-tiddler-controls button svg.tw-image-done-button {
+  fill: <<colour toolbar-done-button>>;
 }
 
 /*
@@ -794,7 +940,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-notification {
 	position: fixed;
 	top: 14px;
-	right: 14px;
+	right: 42px;
 	z-index: 1000;
 	max-width: 280px;
 	padding: 0 14px 0 14px;
@@ -811,28 +957,26 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons {
 	font-size: 0.85em;
-	line-height: 100%;
 	padding-top: 1em;
 	margin-bottom: -1px;
 }
 
-.tw-tab-buttons button {
-	color: <<colour tab-foreground>>;
-	margin-left: 2px;
-	margin-right: 2px;
-	font-weight: 300;
-	border: none;
-	background: inherit;
-}
-
 .tw-tab-buttons button.tw-tab-selected {
+	color: <<colour tab-foreground-selected>>;
 	background-color: <<colour tab-background-selected>>;
 	border-left: 1px solid <<colour tab-border-selected>>;
 	border-top: 1px solid <<colour tab-border-selected>>;
 	border-right: 1px solid <<colour tab-border-selected>>;
 }
 
-.tw-tab-buttons button:not(.tw-tab-selected) {
+.tw-tab-buttons button {
+	color: <<colour tab-foreground>>;
+	padding: 2px 4px 4px 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	font-weight: 300;
+	border: none;
+	background: inherit;
 	background-color: <<colour tab-background>>;
 	border-left: 1px solid <<colour tab-border>>;
 	border-top: 1px solid <<colour tab-border>>;
@@ -847,14 +991,28 @@ canvas.tw-edit-bitmapeditor  {
 	padding-top: 14px;
 }
 
+.tw-sidebar-lists .tw-tab-buttons {
+	padding-top: 15px;	
+}
+
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
+	color: <<colour sidebar-tab-foreground-selected>>;
+	border-left: 1px solid <<colour sidebar-tab-border-selected>>;
+	border-top: 1px solid <<colour sidebar-tab-border-selected>>;
+	border-right: 1px solid <<colour sidebar-tab-border-selected>>;
+}
+
+.tw-sidebar-lists .tw-tab-buttons button {
+	background-color: <<colour sidebar-tab-background>>;
+	color: <<colour sidebar-tab-foreground>>;
+	border-left: 1px solid <<colour sidebar-tab-border>>;
+	border-top: 1px solid <<colour sidebar-tab-border>>;
+	border-right: 1px solid <<colour sidebar-tab-border>>;
 }
 
 .tw-sidebar-lists .tw-tab-divider {
-	border-top: none;
-	height: 1px;
-	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
+	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
 .tw-more-sidebar {
@@ -983,7 +1141,6 @@ canvas.tw-edit-bitmapeditor  {
 	border: 1px solid <<colour message-border>>;
 	background: <<colour message-background>>;
 	padding: 0px 21px 0px 21px;
-	margin: 0 -21px 0 -21px;
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
@@ -1009,7 +1166,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-chooser-item a.tw-tiddlylink {
 	display: block;
-	text-decotoration: none;
+	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
 	background-color: <<colour tiddler-link-background>>;
 	margin: 4px;
@@ -1038,3 +1195,5 @@ canvas.tw-edit-bitmapeditor  {
 	margin: 4px;
 	border: 1px solid #000;
 }
+
+

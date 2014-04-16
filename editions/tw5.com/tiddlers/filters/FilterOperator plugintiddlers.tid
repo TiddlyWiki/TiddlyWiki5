@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: plugintiddlers
+type: text/vnd.tiddlywiki
+
+The ''plugintiddlers'' filter operator returns the titles of the shadow tiddlers within any plugin tiddlers in the current list.
+
+For example:
+
+|!Filter String |!Description |
+|`[[$:/core]plugintiddlers[]]` |Returns a list of the shadow tiddlers within the [[$:/core]] module |
+
+See also [[FilterOperator: shadowsource]].
