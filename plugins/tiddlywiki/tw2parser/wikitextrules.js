@@ -431,36 +431,41 @@ var rules = [
 		enclosedTextHelper.call(this,w);
 	}
 },
-/*
+
 {
 	name: "typedBlock",
-	match: "^\\$\\$\\$(?:.*)\\n",
-	lookaheadRegExp: /^\$\$\$(.*)\n((?:^[^\n]*\n)+?)(^\f*\$\$\$$\n?)/mg,
+		match: "^\\$\\$\\$(?:[^ >\\r\\n]*)\\r?\\n",
+	lookaheadRegExp: /^\$\$\$([^ >\r\n]*)\n((?:^[^\n]*\r?\n)+?)(^\f*\$\$\$\r?\n?)/mg,
+	//match: "^\\$\\$\\$(?:[^ >\\r\\n]*)(?: *> *([^ \\r\\n]+))?\\r?\\n",
+	//lookaheadRegExp: /^\$\$\$([^ >\r\n]*)(?: *> *([^ \r\n]+))\n((?:^[^\n]*\n)+?)(^\f*\$\$\$$\n?)/mg,
 	handler: function(w)
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source);
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			// The wikitext parsing infrastructure is horribly unre-entrant
-			var mimeType = lookaheadMatch[1],
-				content = lookaheadMatch[2],
+			var parseType = lookaheadMatch[1],
+				renderType ,//= this.match[2],
+				text = lookaheadMatch[2],
 				oldOutput = w.output,
 				oldSource = w.source,
 				oldNextMatch = w.nextMatch,
-				oldChildren = w.children,
-				oldDependencies = w.dependencies,
-				parseTree = w.wiki.parseText(mimeType,content,{defaultType: "text/plain"}).tree;
+				oldChildren = w.children;
+			// Parse the block according to the specified type
+			var parser = $tw.wiki.parseText(parseType,text.toString(),{defaultType: "text/plain"});
+
 			w.output = oldOutput;
 			w.source = oldSource;
 			w.nextMatch = oldNextMatch;
 			w.children = oldChildren;
-			w.dependencies = oldDependencies;
-			w.output.push.apply(w.output,parseTree);
+			for (var i=0; i<parser.tree.length; i++) {
+				w.output.push(parser.tree[i]);
+			}
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
 },
-*/
+
 {
 	name: "wikifyComment",
 	match: "^(?:/\\*\\*\\*|<!---)\\n",
@@ -479,10 +484,13 @@ var rules = [
 	{
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
+			name;
+		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			name = lookaheadMatch[1] || lookaheadMatch[2];
-		if(lookaheadMatch && lookaheadMatch.index == w.matchStart && name) {
-			w.nextMatch = this.lookaheadRegExp.lastIndex;
-			insertMacroCall(w,w.output,name,lookaheadMatch[3]);
+			if (name) {
+				w.nextMatch = this.lookaheadRegExp.lastIndex;
+				insertMacroCall(w,w.output,name,lookaheadMatch[3]);
+			}
 		}
 	}
 },

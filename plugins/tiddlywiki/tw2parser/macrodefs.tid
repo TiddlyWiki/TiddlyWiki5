@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/tw2parser/macrodefs
+
+\define tiddler(t)
+{{$t$}}
+\end
+
+\define slider(chkUniqueCookieName tiddler label tooltip)
+<span title=$tooltip$><$button popup="$chkUniqueCookieName$" class="btn-invisible tw-slider">$label$</$button>
+<$reveal type="nomatch" text="" default="" state="$chkUniqueCookieName$" animate="yes">
+{{$tiddler$}}
+</$reveal></span>
+\end
