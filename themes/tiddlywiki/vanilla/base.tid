@@ -257,7 +257,7 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour foreground>>;
 }
 
-.tw-sidebar-lists button {
+.tw-sidebar-lists button.btn {
 	color: <<colour sidebar-button-foreground>>;
 }
 
