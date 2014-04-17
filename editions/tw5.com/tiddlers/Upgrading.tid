@@ -18,6 +18,8 @@ Remember that TiddlyWiki version 5 is not fully backwards compatible with the ol
 
 ! Online upgrading
 
+''As ever, exercise caution when updating existing wikis by making sure you keep a trail of operational backups!''
+
 This process will work on most desktop browsers. Note that none of your personal data leaves your browser with this process.
 
 # Locate your TiddlyWiki file in the file system (ie using Windows Explorer, the Finder on Mac OS X, or your file manager on Linux)
@@ -43,5 +45,7 @@ This will download a file called ''empty.html'' to your computer. This file is t
 ># Save your wiki
 
 ! Offline upgrading
+
+''As ever, exercise caution when updating existing wikis by making sure you keep a trail of operational backups!''
 
 You can also download http://tiddlywiki.com/empty.html locally and perform the same drag-and-drop procedure to upgrade your files.
