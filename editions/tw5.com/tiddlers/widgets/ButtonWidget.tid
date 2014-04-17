@@ -5,7 +5,7 @@ tags: widget
 
 ! Introduction
 
-The button widget displays an HTML `<button>` element that can perform a combination optional actions when clicked:
+The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
 
 * Navigate to a specified tiddler
 * Dispatch a user defined [[widget message|WidgetMessages]]
