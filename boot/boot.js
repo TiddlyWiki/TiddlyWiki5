@@ -352,7 +352,7 @@ $tw.utils.parseVersion = function(version) {
 };
 
 /*
-Returns true if the version string A is greater than the version string B
+Returns true if the version string A is greater than the version string B. Returns true if the versions are the same
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	var defaultVersion = {
@@ -369,7 +369,8 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 		];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
+		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0);
 };
 
 /*
