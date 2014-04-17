@@ -750,7 +750,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 		var arg = arguments[c],
 			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
 		for(var t in src) {
-			if(src[t] === undefined) {
+			if(src[t] === undefined || src[t] === null) {
 				if(t in this.fields) {
 					delete this.fields[t]; // If we get a field that's undefined, delete any previous field value
 				}
