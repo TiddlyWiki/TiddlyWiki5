@@ -29,7 +29,7 @@ released: 201404152139
 
 * Made the dropdown arrow icon [[skinnier|https://github.com/Jermolene/TiddlyWiki5/commit/ec90ac99cf2767b6ff20902d8b01aa1c36778147]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bca1d552803c1839e7385765314f81c5307632b8]] validation of legal characters for fieldnames
-* Added blacklisting of unsage HTML [[elements|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]] and [[attributes|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]]
+* Added blacklisting of unsafe HTML [[elements|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]] and [[attributes|https://github.com/Jermolene/TiddlyWiki5/commit/d0caf21b2df9fda9800eb30489003a87cafb1277]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/baa8cf3dd098bab0a7a8c78b24747c69bd40889f]] a warning indicator to tiddlers in TiddlyWikiClassic format
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/42c67cfeb732fccb10b8ab574c84090dc2471352]] tiddler info ''Advanced'' panel with information about plugins and shadow tiddlers
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/96457d801159958b897f98e22aa9af53b97f0e35]] layout of [[$:/ControlPanel]] ''Plugins'' tab
