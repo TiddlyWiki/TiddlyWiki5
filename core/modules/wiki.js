@@ -309,6 +309,8 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			a = Number(a);
 			b = Number(b);
 			return isDescending ? b - a : a - b;
+		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
+			return isDescending ? b - a : a - b;
 		} else {
 			a = String(a);
 			b = String(b);
