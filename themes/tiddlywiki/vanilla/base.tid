@@ -480,7 +480,7 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media print {
-	.sidebar-header {
+	.sidebar-header, .tw-topbar {
 		display: none;
 	}
 
