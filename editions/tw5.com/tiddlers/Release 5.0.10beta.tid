@@ -1,0 +1,28 @@
+created: 20140416160234142
+modified: 20140416160234142
+tags: releasenote
+title: Release 5.0.10-beta
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.9-beta...v5.0.10-beta]]//
+
+!! Highlights
+
+* Added new syntax for [[Images in WikiText]] and a new ImageWidget
+
+!! Documentation Improvements
+
+* 
+
+!! Usability Improvements
+
+* 
+
+!! Hackability Improvements
+
+* 
+
+!! Bug Fixes
+
+* Fixed problem with corrupted upgrades from 5.0.x-prerelease to 5.0.x-beta
+
