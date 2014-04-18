@@ -150,3 +150,5 @@ Maurizio Pollio, @mpollio, 2014/03/21
 Michael Fogleman, @mwfogleman, 2014/04/08
 
 James W. Anderson, @welford, 2014/04/08
+
+Daniel Rodriguez Rivero, @danielo515, 2014/04/18
