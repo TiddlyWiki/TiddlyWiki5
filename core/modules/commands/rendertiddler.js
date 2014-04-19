@@ -32,10 +32,20 @@ Command.prototype.execute = function() {
 		path = require("path"),
 		title = this.params[0],
 		filename = this.params[1],
-		type = this.params[2] || "text/html";
-	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title),"utf8",function(err) {
-		self.callback(err);
-	});
+		type = this.params[2] || "text/html",
+		tiddler;
+
+	tiddler = this.commander.wiki.getTiddler(title);
+	// Check if tiddler exists. Common user error is a typo
+	if(tiddler) {
+		fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title),"utf8",function(err) {
+			self.callback(err);
+		});
+	} else {
+		return	"\n-----> Command: --" + exports.info.name + " " + title +
+				"\n-----> Check the tiddler name above" +
+				"\n-----> _and_ be sure, that your template tiddler exists with this name in your TiddlyWiki!";
+	}
 	return null;
 };
 

@@ -46,13 +46,13 @@ Command.prototype.execute = function() {
 			self.callback(err);
 		});
 	} else {
-		return	"\n-----> Command: --savetiddler " + title +
+		return	"\n-----> Command: --" + exports.info.name + " " + title +
 				"\n-----> Check the tiddler name above" +
 				"\n-----> _and_ be sure, that your tiddler exists with this name in your html file!";
 	}
-
 	return null;
 };
 
 exports.Command = Command;
+
 })();
