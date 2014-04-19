@@ -330,13 +330,13 @@ a.tw-tiddlylink-external:hover {
 }
 
 .tw-topbar-left {
-	left: 0;
-	top: 0;
+	left: 29px;
+	top: 5px;
 }
 
 .tw-topbar-right {
-	top: 0;
-	right: 0;
+	top: 5px;
+	right: 29px;
 }
 
 .tw-topbar button {
