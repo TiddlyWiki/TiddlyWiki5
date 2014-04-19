@@ -1,12 +1,16 @@
 created: 20131202102427114
-modified: 20140419082835626
+modified: 20140419133900452
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
 
 There are several methods for upgrading an existing TiddlyWiki version 5 document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
 
-Regardless of which method you use it is very important to exercise caution when upgrading existing wikis.  In particular, make sure that you keep careful backups of your content -- in some situations problems with the upgrade may not be immediately apparent.
+<<<
+Regardless of which method you use, remember the [[The First Rule of Using TiddlyWiki]]:
+
+//You are responsible for looking after your own data; take care to make backups, especially when upgrading the ~TiddlyWiki core//
+<<<
 
 <div class="tw-message-box">
 
