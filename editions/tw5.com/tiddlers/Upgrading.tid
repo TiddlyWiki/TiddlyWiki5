@@ -1,5 +1,5 @@
 created: 20131202102427114
-modified: 20140126135354379
+modified: 20140419082835626
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
@@ -47,3 +47,7 @@ This will download a file called ''empty.html'' to your computer. This file is t
 ! Offline upgrading
 
 You can also download http://tiddlywiki.com/empty.html locally and perform the same drag-and-drop procedure to upgrade your files.
+
+! Problems with Upgrades
+
+Particularly during the beta, it is possible for a customisation applied in a previous version to break when upgraded to the latest version. Use SafeMode to investigate and fix these problems.

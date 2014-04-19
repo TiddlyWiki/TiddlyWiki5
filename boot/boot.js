@@ -1045,6 +1045,37 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 };
 
 /*
+Enable safe mode by deleting any tiddlers that override a shadow tiddler
+*/
+$tw.Wiki.prototype.processSafeMode = function() {
+	var self = this,
+		overrides = [];
+	// Find the overriding tiddlers
+	this.each(function(tiddler,title) {
+		if(self.isShadowTiddler(title)) {
+		console.log(title);
+			overrides.push(title);
+		}
+	});
+	// Assemble a report tiddler
+	var titleReportTiddler = "TiddlyWiki Safe Mode",
+		report = [];
+	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. Most customisations have been disabled by renaming the following tiddlers:")
+	// Delete the overrides
+	overrides.forEach(function(title) {
+		var tiddler = self.getTiddler(title),
+			newTitle = "SAFE: " + title;
+		self.deleteTiddler(title);
+		self.addTiddler(new $tw.Tiddler(tiddler, {title: newTitle}));
+		report.push("* [[" + title + "|" + newTitle + "]]");
+	});
+	report.push()
+	this.addTiddler(new $tw.Tiddler({title: titleReportTiddler, text: report.join("\n\n")}));
+	// Set $:/DefaultTiddlers to point to our report
+	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
+};
+
+/*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
@@ -1563,6 +1594,8 @@ readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
+	// Check for safe mode
+	$tw.safeMode = $tw.browser && location.hash === "#:safe";
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
@@ -1646,6 +1679,10 @@ $tw.boot.startup = function(options) {
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
+	// Process "safe mode"
+	if($tw.safeMode) {
+		$tw.wiki.processSafeMode();
+	}
 	// Register typed modules from the tiddlers we've just loaded
 	$tw.wiki.defineTiddlerModules();
 	// And any modules within plugins
