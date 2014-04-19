@@ -3,6 +3,7 @@ modified: 201403021809
 tags: releasenote
 title: Release 5.0.9-beta
 type: text/vnd.tiddlywiki
+released: 201404152139
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.8-beta...v5.0.9-beta]]//
 
@@ -28,7 +29,7 @@ type: text/vnd.tiddlywiki
 
 * Made the dropdown arrow icon [[skinnier|https://github.com/Jermolene/TiddlyWiki5/commit/ec90ac99cf2767b6ff20902d8b01aa1c36778147]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bca1d552803c1839e7385765314f81c5307632b8]] validation of legal characters for fieldnames
-* Added blacklisting of unsage HTML [[elements|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]] and [[attributes|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]]
+* Added blacklisting of unsafe HTML [[elements|https://github.com/Jermolene/TiddlyWiki5/commit/ba6edd42c125cb19d955a1cb3f54a2d367cb79dc]] and [[attributes|https://github.com/Jermolene/TiddlyWiki5/commit/d0caf21b2df9fda9800eb30489003a87cafb1277]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/baa8cf3dd098bab0a7a8c78b24747c69bd40889f]] a warning indicator to tiddlers in TiddlyWikiClassic format
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/42c67cfeb732fccb10b8ab574c84090dc2471352]] tiddler info ''Advanced'' panel with information about plugins and shadow tiddlers
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/96457d801159958b897f98e22aa9af53b97f0e35]] layout of [[$:/ControlPanel]] ''Plugins'' tab
@@ -40,8 +41,7 @@ type: text/vnd.tiddlywiki
 !! Hackability Improvements
 
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/bdbbf94326f70db0f8ef196270ab9e92bfde10fb]] [[Transclusion in WikiText]] syntax to allow translusion of a template without affecting the current tiddler
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8a7d0f53d380e9ca93ee34d8ad05090d511e95c4]] `sourceURL` handling to `eval()` so that tiddler modules can be [[properly debugged|https://chromedevtools.googlecode.com/svn-history/r421/trunk/tutorials/b
-reapoints/index.html#regular]] in Chrome
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8a7d0f53d380e9ca93ee34d8ad05090d511e95c4]] `sourceURL` handling to `eval()` so that tiddler modules can be [[properly debugged|https://chromedevtools.googlecode.com/svn-history/r421/trunk/tutorials/breapoints/index.html#regular]] in Chrome
 * New ScrollableWidget giving better control over scrollable regions
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d3c0296a87198296cff26aa7ce7bb8274cdcc3f7]] new CSS class `tw-site-title` for the site title
 * [[Disable|https://github.com/Jermolene/TiddlyWiki5/commit/e397e4d15951c1395c7752a7563f002ca459206e]] the TiddlyWeb sync adaptor unless the wiki is loaded over HTTP
@@ -53,7 +53,7 @@ reapoints/index.html#regular]] in Chrome
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/f649b5b037bfd2e7c48d1ba65ffa37064456523d]] the ButtonWidget to be able to set text references
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/afa677b9a0b1dff1239dc1ea08edd210b9736af9]] a class to tiddler frames in view mode
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/50cf9678cb469e443e220b063e2355c844e417e7]] support for [[WidgetMessage: tw-home]]
-* [[Hidden|https://github.com/Jermolene/TiddlyWiki5/commit/2608a323ebf3d8a8e925eda6d3a10ebb8f41d383]] system tags from the sidebar ''Tags' tab
+* [[Hidden|https://github.com/Jermolene/TiddlyWiki5/commit/2608a323ebf3d8a8e925eda6d3a10ebb8f41d383]] system tags from the sidebar ''Tags'' tab
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/98872bbe7c62faa4aa209fa421c2989aeef3aaf2]] pasting and import of HTML content
 * [[Add|https://github.com/Jermolene/TiddlyWiki5/commit/a5a2c718b1d5671652d01e3567dba1c6795b7521]] support for a tooltip on the LinkWidget
 

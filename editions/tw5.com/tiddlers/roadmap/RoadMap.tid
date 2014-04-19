@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140415111839328
+modified: 20140419081726794
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -18,15 +18,12 @@ The following additional features are planned or under consideration for impleme
 ** Improve upgrade process
 ** Establish plugin library
 ** Proper use of ARIA roles
-* Features required by ~TiddlyWiki hackers
-** Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
-** A "safe mode" to disable customisations
 * Fixing hangovers from TiddlyWikiClassic
 ** ~TiddlyWiki file format (to avoid illegal attribute names)
 ** Tiddler object format (to provide true polymorphism of field values)
 * Perfecting WikiText
 ** Global macros
-** `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
+** ~~`[img[url]]` for remote image embedding~~, and `[ext[url]]` for explicit external links
 ** Further ~WikiText features
 * Productivity features
 ** Import wizard allowing individual tiddlers to be selected for import

@@ -11,7 +11,7 @@ For example:
 |!Filter String |!Description |
 |`[tag[mytag]]` |Returns all tiddlers tagged `mytag` |
 |`[all[shadows]tag[mytag]]` |Returns all ShadowTiddlers tagged `mytag` |
-|`[all[tiddlers+shadows]tag[mytag]]` |Returns all ShadowTiddlers and non-ShadowTiddlers tagged `mytag` |
+|`[all[shadows+tiddlers]tag[mytag]]` |Returns all ShadowTiddlers and non-ShadowTiddlers tagged `mytag` |
 |`[!tag[mytag]]` |Returns all tiddlers not tagged `mytag` |
 |`[tag[mytag]!tag[exclude]]` |Returns all tiddlers tagged `mytag` that are not tagged `mytag` |
 

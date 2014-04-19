@@ -1,0 +1,40 @@
+created: 20140416160234142
+modified: 20140416160234142
+tags: releasenote
+title: Release 5.0.10-beta
+type: text/vnd.tiddlywiki
+released: 201404191305
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.9-beta...v5.0.10-beta]]//
+
+!! Highlights
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ad4b03506a62d7110cb30aaa3d6f8dbfc712f246]] new syntax for [[Images in WikiText]] and a new ImageWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ba576d9f1b2146cec293447b2968e34f0c594a05]] support for a SafeMode that disables customisations
+
+!! Documentation Improvements
+
+* Added DateFormat documentation
+
+!! Usability Improvements
+
+* [[Refactor|https://github.com/Jermolene/TiddlyWiki5/commit/bb42c0ab360760917ad5bde84f15350186a9471a]] sorting to respect accented characters
+* [[Support|https://github.com/Jermolene/TiddlyWiki5/commit/45b0966013c760abab5b3f7faea0e59af2ca5619]] embedded images in Markdown tiddlers
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/821f1f1428f92160ae8bc4fa71dd3f947243f09e]] sidebar hiding action so that the story river border is maintained
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/15d0c27e2a82359616ce6c7883557cd2ef1886cd]] `[is[tag]]` to the [[FilterOperator: is]]
+* [[Hide|https://github.com/Jermolene/TiddlyWiki5/commit/95d291daac4a26664f0c232175f54780f0fa678f]] the top bars in the print stylesheet
+
+!! Bug Fixes
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4758874d13430338da07727997d0c4df7f328ac1]] support for saving changes on Windows network drives
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/9fbe72a8778ae94c7d6322ad4b9155c83f753113]] configuration processing so that ordinary tiddlers are processed after shadow tiddlers. This resolves an issue whereby user stylesheets were being overridden by shadow stylesheets
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d6054f10392c535ca430f3e73b9b68d0f8c18498]] issue with offline snapshot of server edition erroneously including shadow tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/bd4a031df8a68287475a41ad84b423ad83f735a3]] problem with corrupted upgrades from 5.0.x-prerelease to 5.0.x-beta
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/73cfd1021809e97906ecfd5dacdf2337da3abae9]] bug with `[untagged[]]` filter operator
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d336ffea02621e382f6d7135847d11e49e77bc26]] incorrect background colour for tag pills in the sidebar
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f57e04787738ad30fb05ac0e592239075b90507e]] issues with null fields under TiddlyWeb
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/768489128547cf54e80fc321f3f1f4f5cd191862]] problem with hamburger overlapping scrollbars
+

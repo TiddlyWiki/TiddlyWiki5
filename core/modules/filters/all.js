@@ -5,7 +5,7 @@ module-type: filteroperator
 
 Filter operator for selecting tiddlers
 
-[all[tiddlers+shadows]]
+[all[shadows+tiddlers]]
 
 \*/
 (function(){

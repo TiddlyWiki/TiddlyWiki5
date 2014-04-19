@@ -257,7 +257,7 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour foreground>>;
 }
 
-.tw-sidebar-lists button {
+.tw-sidebar-lists button.btn {
 	color: <<colour sidebar-button-foreground>>;
 }
 
@@ -330,13 +330,13 @@ a.tw-tiddlylink-external:hover {
 }
 
 .tw-topbar-left {
-	left: 0;
-	top: 0;
+	left: 29px;
+	top: 5px;
 }
 
 .tw-topbar-right {
-	top: 0;
-	right: 0;
+	top: 5px;
+	right: 29px;
 }
 
 .tw-topbar button {
@@ -472,7 +472,6 @@ a.tw-tiddlylink-external:hover {
 
 	.story-river {
 		width: auto;
-		padding: 0;
 	}
 
 ">>
@@ -480,7 +479,7 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media print {
-	.sidebar-header {
+	.sidebar-header, .tw-topbar {
 		display: none;
 	}
 
@@ -544,7 +543,6 @@ a.tw-tiddlylink-external:hover {
 
 	.tw-tiddler-frame {
 		width: 100%;
-		margin-bottom: 0;
 	}
 
 ">>

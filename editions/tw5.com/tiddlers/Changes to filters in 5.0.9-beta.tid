@@ -33,7 +33,7 @@ Previously, it was common to have `[is[shadow]]` at the start of a filter string
 In 5.0.9, that filter has been changed to:
 
 ```
-[all[tiddlers+shadows]tag[$:/tags/AdvancedSearch]!has[draft.of]]
+[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]
 ```
 
 Note how the ''all'' operator allows operations to be performed on tiddlers from combinations of sources.

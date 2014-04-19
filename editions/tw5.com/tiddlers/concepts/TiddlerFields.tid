@@ -1,43 +1,44 @@
 created: 20130825213300000
-modified: 20131212095204933
+modified: 20140419151511111
 tags: concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
 
+\define lingo-base() $:/language/Docs/Fields/
 TiddlerFields are name:value pairs that make up a [[tiddler|Tiddlers]]. Field names must be lowercase letters, digits or the characters `-` (dash), `_` (underscore) and `.` (period).
 
 The standard fields are:
 
 |!Field Name |!Reference |!Description |
-|`title` |TitleField |{{$:/docs/fields/title}} |
-|`text` |TextField |{{$:/docs/fields/text}} |
-|`modified` |ModifiedField |{{$:/docs/fields/modified}} |
-|`modifier` |ModifierField |{{$:/docs/fields/modifier}} |
-|`created` |CreatedField |{{$:/docs/fields/created}} |
-|`creator` |CreatorField |{{$:/docs/fields/creator}} |
-|`tags` |TagsField |{{$:/docs/fields/tags}} |
-|`type` |TypeField |{{$:/docs/fields/type}} |
-|`list` |ListField |{{$:/docs/fields/list}} |
+|`title` |TitleField |<<lingo title>> |
+|`text` |TextField |<<lingo text>> |
+|`modified` |ModifiedField |<<lingo modified>> |
+|`modifier` |ModifierField |<<lingo modifier>> |
+|`created` |CreatedField |<<lingo created>> |
+|`creator` |CreatorField |<<lingo creator>> |
+|`tags` |TagsField |<<lingo tags>> |
+|`type` |TypeField |<<lingo type>> |
+|`list` |ListField |<<lingo list>> |
 
 Other fields used by the core are:
 
 |!Field Name |!Reference |!Description |
-|`color` |ColorField |{{$:/docs/fields/color}} |
-|`description` |DescriptionField |{{$:/docs/fields/description}} |
-|`draft.of` |DraftOfField |{{$:/docs/fields/draft.of}} |
-|`draft.title` |DraftTitleField |{{$:/docs/fields/draft.title}} |
-|`footer` |FooterField |{{$:/docs/fields/footer}} |
-|`library` |LibraryField |{{$:/docs/fields/library}} |
-|`name` |NameField |{{$:/docs/fields/name}} |
-|`plugin-priority` |PluginPriorityField |{{$:/docs/fields/plugin-priority}} |
-|`plugin-type` |PluginTypeField |{{$:/docs/fields/plugin-type}} |
-|`source` |SourceField |{{$:/docs/fields/source}} |
-|`subtitle` |SubtitleField |{{$:/docs/fields/subtitle}} |
+|`color` |ColorField |<<lingo color>> |
+|`description` |DescriptionField |<<lingo description>> |
+|`draft.of` |DraftOfField |<<lingo draft.of>> |
+|`draft.title` |DraftTitleField |<<lingo draft.title>> |
+|`footer` |FooterField |<<lingo footer>> |
+|`library` |LibraryField |<<lingo library>> |
+|`name` |NameField |<<lingo name>> |
+|`plugin-priority` |PluginPriorityField |<<lingo plugin-priority>> |
+|`plugin-type` |PluginTypeField |<<lingo plugin-type>> |
+|`source` |SourceField |<<lingo source>> |
+|`subtitle` |SubtitleField |<<lingo subtitle>> |
 
 The TiddlyWebAdaptor uses a few more fields:
 
 |!Field Name |!Reference |!Description |
-|`bag` |BagField |{{$:/docs/fields/bag}} |
-|`revision` |RevisionField |{{$:/docs/fields/revision}} |
+|`bag` |BagField |<<lingo bag>> |
+|`revision` |RevisionField |<<lingo revision>> |
 
 See the ''Advanced > TiddlerFields'' tab of the [[control panel|$:/ControlPanel]] for details of the fields used in this wiki.
