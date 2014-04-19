@@ -472,7 +472,6 @@ a.tw-tiddlylink-external:hover {
 
 	.story-river {
 		width: auto;
-		padding: 0;
 	}
 
 ">>
@@ -544,7 +543,6 @@ a.tw-tiddlylink-external:hover {
 
 	.tw-tiddler-frame {
 		width: 100%;
-		margin-bottom: 0;
 	}
 
 ">>
