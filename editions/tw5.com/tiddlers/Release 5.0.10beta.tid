@@ -19,6 +19,7 @@ type: text/vnd.tiddlywiki
 
 * [[Refactor|https://github.com/Jermolene/TiddlyWiki5/commit/bb42c0ab360760917ad5bde84f15350186a9471a]] sorting to respect accented characters
 * [[Support|https://github.com/Jermolene/TiddlyWiki5/commit/45b0966013c760abab5b3f7faea0e59af2ca5619]] embedded images in Markdown tiddlers
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/821f1f1428f92160ae8bc4fa71dd3f947243f09e]] sidebar hiding action so that the story river border is maintained
 
 !! Hackability Improvements
 
@@ -34,3 +35,5 @@ type: text/vnd.tiddlywiki
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/73cfd1021809e97906ecfd5dacdf2337da3abae9]] bug with `[untagged[]]` filter operator
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d336ffea02621e382f6d7135847d11e49e77bc26]] incorrect background colour for tag pills in the sidebar
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f57e04787738ad30fb05ac0e592239075b90507e]] issues with null fields under TiddlyWeb
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/768489128547cf54e80fc321f3f1f4f5cd191862]] problem with hamburger overlapping scrollbars
+
