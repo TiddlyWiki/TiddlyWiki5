@@ -9,6 +9,7 @@ type: text/vnd.tiddlywiki
 !! Highlights
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ad4b03506a62d7110cb30aaa3d6f8dbfc712f246]] new syntax for [[Images in WikiText]] and a new ImageWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ba576d9f1b2146cec293447b2968e34f0c594a05]] support for a SafeMode that disables customisations
 
 !! Documentation Improvements
 
