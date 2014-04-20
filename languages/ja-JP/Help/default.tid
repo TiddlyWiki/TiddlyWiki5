@@ -4,10 +4,10 @@ title: $:/language/Help/default
 $:/language/Help/$(command)$
 \end
 ```
-usage: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
+使用方法: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
 ```
 
-Available commands:
+使用可能なコマンド:
 
 <ul>
 <$list filter="[commands[]sort[title]]" variable="command">
@@ -15,7 +15,7 @@ Available commands:
 </$list>
 </ul>
 
-To get detailed help on a command:
+各コマンドの詳細なヘルプを見たい場合は:
 
 ```
 tiddlywiki --help <command>

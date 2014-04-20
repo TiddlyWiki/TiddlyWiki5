@@ -1,100 +1,100 @@
 title: $:/language/Docs/PaletteColours/
 
-alert-background: Alert background
-alert-border: Alert border
-alert-highlight: Alert highlight
+alert-background: アラートの背景
+alert-border: アラートの枠線
+alert-highlight: アラートのハイライト
 alert-muted-foreground: Alert muted foreground
-background: General background
+background: 標準の背景
 blockquote-bar: Blockquote bar
-code-background: Code background
-code-border: Code border
-code-foreground: Code foreground
-download-background: Download button background
-download-foreground: Download button foreground
+code-background: コードの背景
+code-border: コードの枠線
+code-foreground: コードの前景
+download-background: ダウンロードボタンの背景
+download-foreground: ダウンロードボタンの前景
 dragger-background: Dragger background
 dragger-foreground: Dragger foreground
-dropdown-background: Dropdown background
-dropdown-border: Dropdown border
-dropdown-tab-background-selected: Dropdown tab background for selected tabs
-dropdown-tab-background: Dropdown tab background
-dropzone-background: Dropzone background
-external-link-background-hover: External link background hover
-external-link-background-visited: External link background visited
-external-link-background: External link background
-external-link-foreground-hover: External link foreground hover
-external-link-foreground-visited: External link foreground visited
-external-link-foreground: External link foreground
-foreground: General foreground
-message-background: Message box background
-message-border: Message box border
-message-foreground: Message box foreground
-modal-backdrop: Modal backdrop
-modal-background: Modal background
-modal-border: Modal border
-modal-footer-background: Modal footer background
-modal-footer-border: Modal footer border
-modal-header-border: Modal header border
+dropdown-background: ドロップダウンの背景
+dropdown-border: ドロップダウンの前景
+dropdown-tab-background-selected: 選択状態のドロップダウンタブの背景
+dropdown-tab-background: ドロップダウンタブの背景
+dropzone-background: ドロップ領域の背景
+external-link-background-hover: 外部リンクの背景（ホバー）
+external-link-background-visited: 外部リンクの背景（既訪）
+external-link-background: 外部リンクの背景
+external-link-foreground-hover: 外部リンクの前景（ホバー）
+external-link-foreground-visited: 外部リンクの前景（既訪）
+external-link-foreground: 外部リンクの前景
+foreground: 標準の前景
+message-background: メッセージボックスの背景
+message-border: メッセージボックスの枠線
+message-foreground: メッセージボックスの前景
+modal-backdrop: モーダルウィンドウの影
+modal-background: モーダルウィンドウの背景
+modal-border: モーダルウィンドウの枠線
+modal-footer-background: モーダルフッタの背景
+modal-footer-border: モーダルフッタの枠線
+modal-header-border: モーダルヘッダの枠線
 muted-foreground: General muted foreground
-notification-background: Notification background
-notification-border: Notification border
-page-background: Page background
-pre-background: Preformatted code background
-pre-border: Preformatted code border
-primary: General primary
-sidebar-button-foreground: Sidebar button foreground
-sidebar-controls-foreground-hover: Sidebar controls foreground hover
-sidebar-controls-foreground: Sidebar controls foreground
-sidebar-foreground-shadow: Sidebar foreground shadow
-sidebar-foreground: Sidebar foreground
+notification-background: 通知領域の背景
+notification-border: 通知領域の枠線
+page-background: ページの背景
+pre-background: 整形済みコードの背景
+pre-border: 整形済みコードの枠線
+primary: 標準の主色 General primary
+sidebar-button-foreground: サイドバーボタンの前景
+sidebar-controls-foreground-hover: サイドバーコントロールの前景（ホバー）
+sidebar-controls-foreground: サイドバーコントロールの前景
+sidebar-foreground-shadow: サイドバー前景の影
+sidebar-foreground: サイドバーの前景
 sidebar-muted-foreground-hover: Sidebar muted foreground hover
 sidebar-muted-foreground: Sidebar muted foreground
-sidebar-tab-background-selected: Sidebar tab background for selected tabs
-sidebar-tab-background: Sidebar tab background
-sidebar-tab-border-selected: Sidebar tab border for selected tabs
-sidebar-tab-border: Sidebar tab border
-sidebar-tab-divider: Sidebar tab divider
-sidebar-tab-foreground-selected: Sidebar tab foreground for selected tabs
-sidebar-tab-foreground: Sidebar tab foreground
-sidebar-tiddler-link-foreground-hover: Sidebar tiddler link foreground hover
-sidebar-tiddler-link-foreground: Sidebar tiddler link foreground
-static-alert-foreground: Static alert foreground
-tab-background-selected: Tab background for selected tabs
-tab-background: Tab background
-tab-border-selected: Tab border for selected tabs
-tab-border: Tab border
-tab-divider: Tab divider
-tab-foreground-selected: Tab foreground for selected tabs
-tab-foreground: Tab foreground
-table-border: Table border
-table-footer-background: Table footer background
-table-header-background: Table header background
-tag-background: Tag background
-tag-foreground: Tag foreground
-tiddler-background: Tiddler background
-tiddler-border: Tiddler border
-tiddler-controls-foreground-hover: Tiddler controls foreground hover
-tiddler-controls-foreground-selected: Tiddler controls foreground for selected controls
-tiddler-controls-foreground: Tiddler controls foreground
-tiddler-editor-background: Tiddler editor background
-tiddler-editor-border-image: Tiddler editor border image
-tiddler-editor-border: Tiddler editor border
-tiddler-editor-fields-even: Tiddler editor background for even fields
-tiddler-editor-fields-odd: Tiddler editor background for odd fields
-tiddler-info-background: Tiddler info panel background
-tiddler-info-border: Tiddler info panel border
-tiddler-info-tab-background: Tiddler info panel tab background
-tiddler-link-background: Tiddler link background
-tiddler-link-foreground: Tiddler link foreground
-tiddler-subtitle-foreground: Tiddler subtitle foreground
-tiddler-title-foreground: Tiddler title foreground
-toolbar-new-button: Toolbar 'new tiddler' button foreground
-toolbar-options-button: Toolbar 'options' button foreground
-toolbar-save-button: Toolbar 'save' button foreground
-toolbar-info-button: Toolbar 'info' button foreground
-toolbar-edit-button: Toolbar 'edit' button foreground
-toolbar-close-button: Toolbar 'close' button foreground
-toolbar-delete-button: Toolbar 'delete' button foreground
-toolbar-cancel-button: Toolbar 'cancel' button foreground
-toolbar-done-button: Toolbar 'done' button foreground
-untagged-background: Untagged pill background
+sidebar-tab-background-selected: サイドバータブの背景（選択済）
+sidebar-tab-background: サイドバータブの背景
+sidebar-tab-border-selected: サイドバータブの枠線（選択済）
+sidebar-tab-border: サイドバータブの枠線
+sidebar-tab-divider: サイドバータブの分割線
+sidebar-tab-foreground-selected: サイドバータブの前景（選択済）
+sidebar-tab-foreground: サイドバータブの前景
+sidebar-tiddler-link-foreground-hover: サイドバーtiddlerリンクの前景（ホバー）
+sidebar-tiddler-link-foreground: サイドバーtiddlerリンクの前景
+static-alert-foreground: 固定アラート前景
+tab-background-selected: タブの背景（選択済）
+tab-background: タブの背景
+tab-border-selected: タブの枠線（選択済）
+tab-border: タブの枠線
+tab-divider: タブの分割線
+tab-foreground-selected: タブの前景（選択済）
+tab-foreground: タブの前景
+table-border: テーブルの枠線
+table-footer-background: テーブルフッタの背景
+table-header-background: テーブルヘッダの背景
+tag-background: タグの背景
+tag-foreground: タグの前景
+tiddler-background: tiddlerの背景
+tiddler-border: tiddlerの前景
+tiddler-controls-foreground-hover: tiddler部品の前景（ホバー）
+tiddler-controls-foreground-selected: tiddler部品の前景（選択済）
+tiddler-controls-foreground: tiddler部品の前景
+tiddler-editor-background: tiddlerエディタの背景
+tiddler-editor-border-image: tiddlerエディタの枠線イメージ
+tiddler-editor-border: tiddlerエディタの枠線
+tiddler-editor-fields-even: tiddlerエディタの背景（偶数フィールド）
+tiddler-editor-fields-odd: tiddlerエディタの背景（奇数フィールド）
+tiddler-info-background: tiddlerインフォパネルの背景
+tiddler-info-border: tiddlerインフォパネルの枠線
+tiddler-info-tab-background: tiddlerインフォパネルタブの背景
+tiddler-link-background: tiddlerリンクの背景
+tiddler-link-foreground: tiddlerリンクの前景
+tiddler-subtitle-foreground: tiddlerサブタイトルの前景
+tiddler-title-foreground: tiddlerタイトルの前景
+toolbar-new-button: ツールバー「新規Tiddler」ボタンの前景
+toolbar-options-button: ツールバー「オプション」ボタンの前景
+toolbar-save-button: ツールバー「保存」ボタンの前景
+toolbar-info-button: ツールバー「情報」ボタンの前景
+toolbar-edit-button: ツールバー「編集」ボタンの前景
+toolbar-close-button: ツールバー「閉じる」ボタンの前景
+toolbar-delete-button: ツールバー「削除」ボタンの前景
+toolbar-cancel-button: ツールバー「キャンセル」ボタンの前景
+toolbar-done-button: ツールバー「確定」ボタンの前景
+untagged-background: 未タグ背景
 very-muted-foreground: Very muted foreground

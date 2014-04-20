@@ -1,13 +1,13 @@
 title: GettingStarted
 
-TiddlyWikiへようこそ。TiddlyWikiは非線形な（上から読むだけではなくて記事と記事とがつながった）個人のWebノートです。
+TiddlyWiki にようこそ。これは個人で使える Web ノートです。
 
-まずはじめに、変更を保存できるか確認してください。 - 詳しい手順は http://tiddlywiki.com/ を見てください。
+作業を開始する前に保存機能が正しく使えるかどうかをご確認ください。 - 詳細は http://tiddlywiki.com/ の説明をご覧ください。
 
-次に、以下のようなことができます。
+以下のことができます:
 
-* サイドバーの’＋’ボタンを押して新しいtiddlerを作成してください。
-* Wikiをカスタマイズするにはサイドバーの歯車ボタンを押して[[control panel|$:/ControlPanel]]を開いてください。
-** ''Basics'' タブのdefault tiddlersを変更して、このメッセージを表示しないようにしてください。
-* サイドバーのダウンロードボタンを押して変更を保存してください。
-* 詳しい記法は [[WikiText|http://tiddlywiki.com/static/WikiText.html]]を見てください。
+* サイドバーにある「＋」ボタンで新規の tiddler を作成できます
+* サイドバーにある「歯車」ボタンで [[コントロールパネル|$:/ControlPanel]] を開いてこの wiki に対する設定ができます
+** 「基本」タブのデフォルトtiddlerを変更することで、wikiを開くたびにこのメッセージが表示されることを抑制できます
+* 変更を保存するにはサイドバーの「ダウンロード」ボタンを押してください
+* 書式に関する詳細は [[WikiText|http://tiddlywiki.com/static/WikiText.html]] を参照してください

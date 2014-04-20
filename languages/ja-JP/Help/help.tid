@@ -1,10 +1,10 @@
 title: $:/language/Help/help
 description: Display help for TiddlyWiki commands
 
-Displays help text for a command:
+コマンドのヘルプを表示します:
 
 ```
 --help [<command>]
 ```
 
-If the command name is omitted then a list of available commands is displayed.
+コマンド名が指定されなければ、使用可能なコマンドの一覧が表示されます。
