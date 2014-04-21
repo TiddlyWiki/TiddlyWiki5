@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: modules
+type: text/vnd.tiddlywiki
+
+The ''modules'' filter operator treats the current list as a list of [[module types|ModuleType]], and returns the titles of all of the modules of those types.
+
+For example:
+
+|!Filter String |!Description |
+|`[[filteroperator]modules[]]` |Returns a list of the modules of type `filteroperator` |
+
+See also [[FilterOperator: moduletypes]].

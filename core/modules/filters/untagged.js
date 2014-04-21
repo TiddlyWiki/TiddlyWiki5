@@ -25,10 +25,8 @@ exports.untagged = function(source,operator,options) {
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(tiddler) {
-				if(!tiddler.hasField("tags") || ($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length === 0)) {
-					$tw.utils.pushTop(results,title);
-				}
+			if(!tiddler || !tiddler.hasField("tags") || ($tw.utils.isArray(tiddler.fields.tags) && tiddler.fields.tags.length === 0)) {
+				$tw.utils.pushTop(results,title);
 			}
 		});
 	}

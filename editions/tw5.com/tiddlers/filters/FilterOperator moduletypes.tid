@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: moduletypes
+type: text/vnd.tiddlywiki
+
+The ''moduletypes'' filter operator replaces the current list with a list of the types of the currently loaded modules.
+
+For example:
+
+|!Filter String |!Description |
+|`[moduletypes[]]` |Returns a list of the types of the currently loaded modules |
+
+See also [[FilterOperator: modules]].

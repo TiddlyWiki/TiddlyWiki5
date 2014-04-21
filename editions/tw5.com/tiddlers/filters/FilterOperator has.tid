@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters commonfilters
+title: FilterOperator: has
+type: text/vnd.tiddlywiki
+
+The ''has'' filter operator chooses tiddlers from the current list that have a non-empty value for the field specified in the operand.
+
+For example:
+
+|!Filter String |!Description |
+|`[has[modifier]]` |Returns tiddlers that have a `modifier` field |
+

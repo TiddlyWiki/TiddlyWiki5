@@ -17,25 +17,25 @@ Export our filter function
 */
 exports.sort = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand,operator.prefix === "!",false,false);
+	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",false,false);
 	return results;
 };
 
 exports.nsort = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand,operator.prefix === "!",false,true);
+	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",false,true);
 	return results;
 };
 
 exports.sortcs = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand,operator.prefix === "!",true,false);
+	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",true,false);
 	return results;
 };
 
 exports.nsortcs = function(source,operator,options) {
 	var results = prepare_results(source);
-	options.wiki.sortTiddlers(results,operator.operand,operator.prefix === "!",true,true);
+	options.wiki.sortTiddlers(results,operator.operand || "title",operator.prefix === "!",true,true);
 	return results;
 };
 

@@ -305,28 +305,20 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			a = self.getTiddler(a).fields[sortField] || "";
 			b = self.getTiddler(b).fields[sortField] || "";
 		}
-		if(!isNumeric || isNaN(a) || isNaN(b)) {
-			if(!isCaseSensitive) {
-				if(typeof a === "string") {
-					a = a.toLowerCase();
-				}
-				if(typeof b === "string") {
-					b = b.toLowerCase();
-				}
-			}
-		}
-		else {
-			a-= 0;
-			b-= 0;
-		}
-		if(a < b) {
-			return isDescending ? +1 : -1;
+		if(isNumeric) {
+			a = Number(a);
+			b = Number(b);
+			return isDescending ? b - a : a - b;
+		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
+			return isDescending ? b - a : a - b;
 		} else {
-			if(a > b) {
-				return isDescending ? -1 : +1;
-			} else {
-				return 0;
+			a = String(a);
+			b = String(b);
+			if(!isCaseSensitive) {
+				a = a.toLowerCase();
+				b = b.toLowerCase();
 			}
+			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
 		}
 	});
 };
@@ -497,7 +489,7 @@ exports.sortByList = function(array,listTitle) {
 	var list = this.getTiddlerList(listTitle);
 	if(!array || array.length === 0) {
 		return [];
-	} else if(list) {
+	} else {
 		var titles = [], t, title;
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
@@ -510,36 +502,43 @@ exports.sortByList = function(array,listTitle) {
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
-				// Entry isn't in the list yet, so either append or insert;
-				// obey list-before and list-after if present for relative insertion point
-				var tiddler = this.getTiddler(title),
-					pos = -1;
-				if(tiddler) {
-					var beforeTitle = tiddler.fields["list-before"];
-					if(beforeTitle === "") {
-						pos = 0;
-					} else if(beforeTitle) {
-						pos = list.indexOf(beforeTitle);
-					} else {
-						var afterTitle = tiddler.fields["list-after"];
-						if(afterTitle) {
-							pos = list.indexOf(afterTitle);
-							if(pos >= 0) {
-								++pos;
-							}
-						}
-					}
-				}
-				if(pos >= 0) {
-					titles.splice(pos,0,title);
-				} else {
-					titles.push(title);
-				}
+				titles.push(title);
 			}
 		}
+		// Finally obey the list-before and list-after fields of each tiddler in turn
+		var sortedTitles = titles.slice(0);
+		for(t=0; t<sortedTitles.length; t++) {
+			title = sortedTitles[t];
+			var currPos = titles.indexOf(title),
+				newPos = -1,
+				tiddler = this.getTiddler(title);
+			if(tiddler) {
+				var beforeTitle = tiddler.fields["list-before"],
+					afterTitle = tiddler.fields["list-after"];
+				if(beforeTitle === "") {
+					newPos = 0;
+				} else if(beforeTitle) {
+					newPos = titles.indexOf(beforeTitle);
+				} else if(afterTitle) {
+					newPos = titles.indexOf(afterTitle);
+					if(newPos >= 0) {
+						++newPos;
+					}
+				}
+				if(newPos === -1) {
+					newPos = currPos;
+				}
+				if(newPos !== currPos) {
+					titles.splice(currPos,1);
+					if(newPos >= currPos) {
+						newPos--;
+					}
+					titles.splice(newPos,0,title);
+				}
+			}
+
+		}
 		return titles;
-	} else {
-		return array;
 	}
 };
 

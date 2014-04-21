@@ -1,0 +1,100 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Fond pour les alertes
+alert-border: Bordure pour les alertes
+alert-highlight: Surlignage pour les alertes
+alert-muted-foreground: Fond atténué pour les alertes
+background: Couleur de fond générale
+blockquote-bar: Barre de citation
+code-background: Fond pour le code
+code-border: Bordure pour le code
+code-foreground: Premier plan pour le code
+download-background: Fond pour le bouton de téléchargement
+download-foreground: Premier plan pour le bouton de téléchargement
+dragger-background: Fond pour le glissé-déposé
+dragger-foreground: Premier plan pour le glissé-déposé
+dropdown-background: Fond des menus déroulants
+dropdown-border: Bordure des menus déroulants
+dropdown-tab-background-selected: Fond pour les onglets à menu déroulant sélectionnés
+dropdown-tab-background: Fond pour les onglets à menu déroulant
+dropzone-background: Fond de la zone « déposé »
+external-link-background-hover: Fond lors du passage de la souris sur un lien externe
+external-link-background-visited: Fond pour un lien externe déjà visité
+external-link-background: Fond pour un lien externe
+external-link-foreground-hover: Premier plan lors du passage de la souris sur un lien externe
+external-link-foreground-visited: Premier plan pour un lien externe déjà visité
+external-link-foreground: Premier plan pour un lien externe
+foreground: Premier plan
+message-background: Fond pour les messages
+message-border: Bordure pour les messages
+message-foreground: Premier plan pour les messages
+modal-backdrop: Arrière-plan pour les fenêtres modales
+modal-background: Fond pour les fenêtres modales
+modal-border: Bordure pour les fenêtres modales
+modal-footer-background: Fond pour les pieds de page des fenêtres modales
+modal-footer-border: Bordure pour les pieds de page des fenêtres modales
+modal-header-border: Bordure pour les en-tête des fenêtres modales
+muted-foreground: Premier plan atténué
+notification-background: Fond pour les notifications
+notification-border: Bordure pour les notifications
+page-background: Fond de page
+pre-background: Fond pour le code préformaté
+pre-border: Bordure pour le code préformaté
+primary: Couleur principale
+sidebar-button-foreground: Premier plan des boutons de la barre latérale
+sidebar-controls-foreground-hover: Premier plan au passage de la souris sur les boutons de commande de la barre latérale
+sidebar-controls-foreground: Premier plan sur les boutons de commande de la barre latérale
+sidebar-foreground-shadow: Ombre du premier plan de la barre latérale
+sidebar-foreground: Premier plan de la barre latérale
+sidebar-muted-foreground-hover: Premier plan atténué au passage de la souris sur la barre latérale
+sidebar-muted-foreground: Premier plan atténué de la barre latérale
+sidebar-tab-background-selected: Fond pour les onglets sélectionnés de la barre latérale
+sidebar-tab-background: Fond pour les onglets de la barre latérale
+sidebar-tab-border-selected: Bordure pour les onglets sélectionnés de la barre latérale
+sidebar-tab-border: Bordure pour les onglets de la barre latérale
+sidebar-tab-divider: Séparateur d'onglets pour la barre latérale
+sidebar-tab-foreground-selected: Premier plan pour les onglets sélectionnés de la barre latérale
+sidebar-tab-foreground: Premier plan pour les onglets de la barre latérale
+sidebar-tiddler-link-foreground-hover: Premier plan au passage de la souris sur le lien d'un tiddler de la barre latérale
+sidebar-tiddler-link-foreground: Premier plan du lien d'un tiddler de la barre latérale
+static-alert-foreground: Premier plan pour les alertes statiques
+tab-background-selected: Fond pour les onglets sélectionnés
+tab-background: Fond pour les onglets
+tab-border-selected: Bordure pour les onglets sélectionnés
+tab-border: Bordure pour les onglets
+tab-divider: Séparateur d'onglets
+tab-foreground-selected: Premier plan pour les onglets sélectionnés
+tab-foreground: Premier plan pour les onglets
+table-border: Bordure des tableaux
+table-footer-background: Fond pour les bas de tableau
+table-header-background: Fond pour les en-têtes de tableau
+tag-background: Fond pour les tags
+tag-foreground: Premier plan pour les tags
+tiddler-background: Fond pour les tiddlers
+tiddler-border: Bordure pour les tiddlers
+tiddler-controls-foreground-hover: Premier plan au passage de la souris sur les boutons de commande d'un tiddler
+tiddler-controls-foreground-selected: Premier plan pour le bouton de commande sélectionné d'un tiddler
+tiddler-controls-foreground: Premier plan pour les boutons de commande d'un tiddler
+tiddler-editor-background: Fond pour l'éditeur de tiddlers
+tiddler-editor-border-image: Image de bordure pour l'éditeur de tiddlers
+tiddler-editor-border: Bordure de l'éditeur de tiddlers
+tiddler-editor-fields-even: Fond de l'éditeur de tiddlers pour les champs pairs
+tiddler-editor-fields-odd: Fond de l'éditeur de tiddlers pour les champs impairs
+tiddler-info-background: Fond du panneau d'information d'un tiddler
+tiddler-info-border: Bordure du panneau d'information d'un tiddler
+tiddler-info-tab-background: Fond pour les onglets du panneau d'information d'un tiddler
+tiddler-link-background: Fond pour les liens vers un tiddler
+tiddler-link-foreground: Premier plan pour les liens vers un tiddler
+tiddler-subtitle-foreground: Premier plan du sous-titre du wiki
+tiddler-title-foreground: Premier plan du titre du wiki
+toolbar-new-button: Premier plan pour le bouton 'Nouveau tiddler' de la barre latérale
+toolbar-options-button: Premier plan pour le bouton 'Options' de la barre latérale
+toolbar-save-button: Premier plan pour le bouton 'Enregistrer' de la barre latérale
+toolbar-info-button: Premier plan pour le bouton 'Info' de la barre latérale
+toolbar-edit-button: Premier plan pour le bouton 'Éditer' de la barre latérale
+toolbar-close-button: Premier plan pour le bouton 'Fermer' de la barre latérale
+toolbar-delete-button: Premier plan pour le bouton 'Supprimer' de la barre latérale
+toolbar-cancel-button: Premier plan pour le bouton 'Annuler' de la barre latérale
+toolbar-done-button: Premier plan pour le bouton 'Terminé' de la barre latérale
+untagged-background: Fond pour la pastille « sans-étiquette »
+very-muted-foreground: Premier plan très atténué

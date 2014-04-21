@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: last
+type: text/vnd.tiddlywiki
+
+The ''last'' filter operator returns the last entries in the current list. The optional operand specifies the number of entries to return.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three +[last[]]` |Returns `three` |
+|`one two three +[last[2]]` |Returns `two`, `three` |

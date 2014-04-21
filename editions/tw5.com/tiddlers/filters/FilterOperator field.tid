@@ -1,0 +1,20 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters commonfilters
+title: FilterOperator: field
+type: text/vnd.tiddlywiki
+
+The ''field'' filter operator filters the current list to leave only the first tiddler that has a distinct value for a specified date field.
+
+For example:
+
+|!Filter String |!Description |
+|`[eachday[created]]` |Returns a list of the first tiddler created on each distinct day |
+
+The ''eachday'' operator can be used to group tiddlers. For example, the following wiki text creates a list of the number of tiddlers that were modified on each day:
+
+<$list filter="[!is[system]eachday[modified]!sort[modified]]">
+
+<$view field="modified" format="date" template="DD MMM YYYY"/>: <$count filter="[sameday{!!modified}]"/> modifications
+
+</$list>

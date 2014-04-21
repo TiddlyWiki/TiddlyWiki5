@@ -84,7 +84,8 @@ Load the current map
 CecilyStoryView.prototype.loadMap = function() {
 	this.map = this.listWidget.wiki.getTiddlerData(this.getMapTiddlerTitle(),{
 		positions: {},
-		newTiddlerPosition: {x: 0, y: 0}
+		newTiddlerPosition: {x: 0, y: 0},
+		width: 660
 	});
 };
 
@@ -99,6 +100,7 @@ CecilyStoryView.prototype.positionTiddler = function(title,domNode) {
 	var pos = this.lookupTiddlerInMap(title,domNode),
 		scale = pos.w/domNode.offsetWidth;
 	$tw.utils.setStyle(domNode,[
+		{width: this.map.width + "px"},
 		{transformOrigin: "0% 0%"},
 		{transform: "translateX(" + pos.x + "px) translateY(" + pos.y + "px) scale(" + scale + ")"}
 	]);

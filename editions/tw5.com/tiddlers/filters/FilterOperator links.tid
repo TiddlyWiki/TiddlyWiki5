@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters commonfilters
+title: FilterOperator: links
+type: text/vnd.tiddlywiki
+
+The ''links'' filter operator replaces the current list with a list of the targets of outgoing links from those tiddlers.
+
+For example:
+
+|!Filter String |!Description |
+|`[[HelloThere]links[]]` |Returns the titles of tiddlers linked from `HelloThere` |
+|`[all[current]links[]]` |Returns the titles of tiddlers linked from the current tiddler |

@@ -17,14 +17,15 @@ Export our filter function
 */
 exports.sameday = function(source,operator,options) {
 	var results = [],
+		fieldName = operator.suffix || "modified",
 		targetDate = (new Date($tw.utils.parseDate(operator.operand))).setHours(0,0,0,0);
 	// Function to convert a date/time to a date integer
 	var isSameDay = function(dateField) {
 			return (new Date(dateField)).setHours(0,0,0,0) === targetDate;
 		};
 	source(function(tiddler,title) {
-		if(tiddler && tiddler.fields.modified) {
-			if(isSameDay(tiddler.fields.modified)) {
+		if(tiddler && tiddler.fields[fieldName]) {
+			if(isSameDay(tiddler.fields[fieldName])) {
 				results.push(title);
 			}
 		}

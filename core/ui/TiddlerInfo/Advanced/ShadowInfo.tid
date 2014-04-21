@@ -4,7 +4,7 @@ tags: $:/tags/TiddlerInfo/Advanced
 \define lingo-base() $:/language/TiddlerInfo/Advanced/ShadowInfo/
 <$set name="infoTiddler" value=<<currentTiddler>>>
 
-! <<lingo Heading>>
+''<<lingo Heading>>''
 
 <$list filter="[all[current]!is[shadow]]">
 

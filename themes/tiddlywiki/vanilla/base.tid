@@ -27,6 +27,10 @@ html {
 	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
 }
 
+html:-webkit-full-screen {
+	background-color: <<colour page-background>>;
+}
+
 body.tw-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics##fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics##lineheight}};
@@ -253,7 +257,7 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour foreground>>;
 }
 
-.tw-sidebar-lists button {
+.tw-sidebar-lists button.btn {
 	color: <<colour sidebar-button-foreground>>;
 }
 
@@ -326,13 +330,13 @@ a.tw-tiddlylink-external:hover {
 }
 
 .tw-topbar-left {
-	left: 0;
-	top: 0;
+	left: 29px;
+	top: 5px;
 }
 
 .tw-topbar-right {
-	top: 0;
-	right: 0;
+	top: 5px;
+	right: 29px;
 }
 
 .tw-topbar button {
@@ -366,6 +370,10 @@ a.tw-tiddlylink-external:hover {
 
 .tw-advanced-search input {
 	width: 60%;
+}
+
+.tw-search {
+	padding-top: 14px;
 }
 
 .tw-search a svg {
@@ -449,7 +457,7 @@ a.tw-tiddlylink-external:hover {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 70px 0 28px 42px;
+		padding: 71px 0 28px 42px;
 	}
 
 	.story-river {
@@ -457,12 +465,21 @@ a.tw-tiddlylink-external:hover {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}};
-		padding: 56px 42px 42px 42px;
+		padding: 42px 42px 42px 42px;
 	}
+
+<<if-no-sidebar "
+
+	.story-river {
+		width: auto;
+	}
+
+">>
+
 }
 
 @media print {
-	.sidebar-header {
+	.sidebar-header, .tw-topbar {
 		display: none;
 	}
 
@@ -521,6 +538,14 @@ a.tw-tiddlylink-external:hover {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
 	}
+
+<<if-no-sidebar "
+
+	.tw-tiddler-frame {
+		width: 100%;
+	}
+
+">>
 
 	.tw-tiddler-info {
 		margin: 0 -42px 0 -42px;
@@ -962,6 +987,10 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-content {
 	padding-top: 14px;
+}
+
+.tw-sidebar-lists .tw-tab-buttons {
+	padding-top: 15px;	
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {

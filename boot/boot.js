@@ -352,7 +352,7 @@ $tw.utils.parseVersion = function(version) {
 };
 
 /*
-Returns true if the version string A is greater than the version string B
+Returns true if the version string A is greater than the version string B. Returns true if the versions are the same
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	var defaultVersion = {
@@ -369,16 +369,31 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 		];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
+		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0);
 };
 
 /*
 Register file type information
-flags: "image" for image types
+options: {flags: flags,deserializerType: deserializerType}
+	flags:"image" for image types
+	deserializerType: defaults to type if not specified
 */
-$tw.utils.registerFileType = function(type,encoding,extension,flags) {
-	$tw.config.fileExtensionInfo[extension] = {type: type};
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: flags || []};
+$tw.utils.registerFileType = function(type,encoding,extension,options) {
+	options = options || {};
+	$tw.config.fileExtensionInfo[extension] = {type: type};	
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};	
+};
+
+/*
+Given an extension, get the correct encoding for that file.
+defaults to utf8
+*/
+$tw.utils.getTypeEncoding = function(ext) {
+	var extensionInfo = $tw.config.fileExtensionInfo[ext],
+		type = extensionInfo ? extensionInfo.type : null,
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
+	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
 /*
@@ -735,7 +750,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 		var arg = arguments[c],
 			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
 		for(var t in src) {
-			if(src[t] === undefined) {
+			if(src[t] === undefined || src[t] === null) {
 				if(t in this.fields) {
 					delete this.fields[t]; // If we get a field that's undefined, delete any previous field value
 				}
@@ -1030,6 +1045,37 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 };
 
 /*
+Enable safe mode by deleting any tiddlers that override a shadow tiddler
+*/
+$tw.Wiki.prototype.processSafeMode = function() {
+	var self = this,
+		overrides = [];
+	// Find the overriding tiddlers
+	this.each(function(tiddler,title) {
+		if(self.isShadowTiddler(title)) {
+		console.log(title);
+			overrides.push(title);
+		}
+	});
+	// Assemble a report tiddler
+	var titleReportTiddler = "TiddlyWiki Safe Mode",
+		report = [];
+	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. Most customisations have been disabled by renaming the following tiddlers:")
+	// Delete the overrides
+	overrides.forEach(function(title) {
+		var tiddler = self.getTiddler(title),
+			newTitle = "SAFE: " + title;
+		self.deleteTiddler(title);
+		self.addTiddler(new $tw.Tiddler(tiddler, {title: newTitle}));
+		report.push("* [[" + title + "|" + newTitle + "]]");
+	});
+	report.push()
+	this.addTiddler(new $tw.Tiddler({title: titleReportTiddler, text: report.join("\n\n")}));
+	// Set $:/DefaultTiddlers to point to our report
+	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
+};
+
+/*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
@@ -1039,6 +1085,11 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.config.fileExtensionInfo[type].type;
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+	}
+	if(!deserializer && $tw.config.contentTypeInfo[type]) {
+		// see if this type has a different deserializer registered with it
+		type = $tw.config.contentTypeInfo[type].deserializerType;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer) {
@@ -1543,6 +1594,8 @@ readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
+	// Check for safe mode
+	$tw.safeMode = $tw.browser && location.hash === "#:safe";
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
@@ -1599,14 +1652,15 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
+	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
-	$tw.utils.registerFileType("application/pdf","base64",".pdf",["image"]);
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg",["image"]);
-	$tw.utils.registerFileType("image/png","base64",".png",["image"]);
-	$tw.utils.registerFileType("image/gif","base64",".gif",["image"]);
-	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",["image"]);
-	$tw.utils.registerFileType("image/x-icon","base64",".ico",["image"]);
+	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
+	$tw.utils.registerFileType("image/jpeg","base64",".jpg",{flags:["image"]});
+	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
+	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
+	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
+	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
@@ -1625,6 +1679,10 @@ $tw.boot.startup = function(options) {
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
+	// Process "safe mode"
+	if($tw.safeMode) {
+		$tw.wiki.processSafeMode();
+	}
 	// Register typed modules from the tiddlers we've just loaded
 	$tw.wiki.defineTiddlerModules();
 	// And any modules within plugins

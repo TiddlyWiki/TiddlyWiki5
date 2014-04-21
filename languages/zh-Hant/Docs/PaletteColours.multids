@@ -48,7 +48,7 @@ sidebar-foreground-shadow: 側邊欄前景陰影
 sidebar-foreground: 側邊欄前景
 sidebar-muted-foreground-hover: 懸停側邊欄低調前景
 sidebar-muted-foreground: 側邊欄低調前景
-sidebar-tab-background-selected: 側邊欄頁籤
+sidebar-tab-background-selected: 側邊欄選定的頁籤背景
 sidebar-tab-background: 側邊欄頁籤背景
 sidebar-tab-border-selected: 側邊欄選定的頁籤邊框
 sidebar-tab-border: 側邊欄頁籤邊框

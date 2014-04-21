@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: prefix
+type: text/vnd.tiddlywiki
+
+The ''prefix'' filter operator returns the titles in the current list that start with a specified prefix. If the ''prefix'' operator is preceded by `!` then it returns the titles that do not start with the specified prefix.
+
+For example:
+
+|!Filter String |!Description |
+|`[tag[task]!prefix[hidden]]` |Returns tiddlers tagged `task` whose titles do not start with `hidden` |
+|`[prefix[$:/]]` |Equivalent to `[is[system]]` |
+
+See also [[FilterOperator: removeprefix]].

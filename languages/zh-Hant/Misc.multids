@@ -3,8 +3,9 @@ title: $:/language/
 ClassicWarning/Hint: 此條目以經典版 TiddlyWiki 標記格式撰寫，不完全相容新版 TiddlyWiki 的格式，詳細資訊請參閱：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升級
 CloseAll/Button: 全部關閉
-ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>" ?
-ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>" ?
+ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的更改？
+ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
+ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母和底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
 RecentChanges/DateFormat: YYYY年0MM月0DD日
@@ -12,16 +13,18 @@ RelativeDate/Future/Days: <<period>> 天後
 RelativeDate/Future/Hours: <<period>> 小時後
 RelativeDate/Future/Minutes: <<period>> 分鐘後
 RelativeDate/Future/Months: <<period>> 個月後
+RelativeDate/Future/Second: 1 秒後
 RelativeDate/Future/Seconds: <<period>> 秒後
 RelativeDate/Future/Years: <<period>> 年後
 RelativeDate/Past/Days: <<period>> 天前
 RelativeDate/Past/Hours: <<period>> 小時前
 RelativeDate/Past/Minutes: <<period>> 分鐘前
 RelativeDate/Past/Months: <<period>> 個月前
+RelativeDate/Past/Second: 1 秒前
 RelativeDate/Past/Seconds: <<period>> 秒前
 RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: 此為系統條目
-TagManager/Tag/Heading: 標籤
-TagManager/Count/Heading: 數量
 TagManager/Colour/Heading: 顏色
+TagManager/Count/Heading: 數量
 TagManager/Icon/Heading: 圖示
+TagManager/Tag/Heading: 標籤

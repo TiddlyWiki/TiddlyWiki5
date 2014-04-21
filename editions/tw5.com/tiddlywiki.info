@@ -11,6 +11,7 @@
 		"tiddlywiki/snowwhite",
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
 		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
@@ -23,7 +24,8 @@
 		"fr-FR",
 		"zh-Hans",
 		"zh-Hant",
-		"it-IT"
+		"it-IT",
+		"ja-JP"
 	]
 	,
 	"config": {
