@@ -2,7 +2,7 @@ title: $:/core/ui/MoreSideBar/Types
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Types/Caption}}
 
-<$list filter="[!is[system]has[type]each[type]sort[type]]">
+<$list filter="[!is[system]has[type]each[type]sort[type]] -[type[text/vnd.tiddlywiki]]">
 <div class="tw-menu-list-item">
 <$view field="type"/>
 <$list filter="[type{!!type}!is[system]sort[title]]">
