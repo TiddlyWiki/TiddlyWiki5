@@ -61,14 +61,10 @@ Seamless modifications
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
 
-<<if-sidebar "
-
 	/* Drop the tiddler frame padding */
 	body.tw-body .tw-tiddler-frame {
 		padding: 0;
 	}
-
-">>
 
 	/* Move the sidebar up so that the title lines up */
 	body.tw-body .tw-sidebar-scrollable {

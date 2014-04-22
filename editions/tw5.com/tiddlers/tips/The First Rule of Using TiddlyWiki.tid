@@ -1,0 +1,19 @@
+created: 20140419132828051
+modified: 20140419134201033
+tags: howto tips
+title: The First Rule of Using TiddlyWiki
+type: text/vnd.tiddlywiki
+
+!! The first rule of using TiddlyWiki is:
+
+<p style="font-size:40pt;font-weight:700;color:red;">
+Backup your data!
+</p>
+
+TiddlyWiki is a very flexible, customisable system that puts you firmly in charge of your own data. Every care is taken in TiddlyWiki's development to ensure that it is a safe place to preserve your most valuable data but the ultimate responsibility to reduce the risk of data loss falls to users.
+
+The best way to make sure that your data is safe is to practice a rigorous system of backups:
+
+* Consider using services like Dropbox to continuously back up your personal data to the cloud
+* Retain backups before upgrading to a new version of TiddlyWiki
+

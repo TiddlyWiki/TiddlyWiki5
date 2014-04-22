@@ -3,7 +3,7 @@ tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
 \define lingo-base() $:/language/SideBar/Tags/
-<$button to="$:/TagManager"><<lingo TagManager/Caption>></$button>
+<$button to="$:/TagManager" class="btn"><<lingo TagManager/Caption>></$button>
 
 <$list filter="[tags[]!is[system]sort[title]]">
 

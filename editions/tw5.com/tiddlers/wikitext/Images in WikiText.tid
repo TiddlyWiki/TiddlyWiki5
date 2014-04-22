@@ -1,10 +1,44 @@
 created: 20131205160221762
-modified: 20131205160234142
+modified: 20140416160234142
 tags: wikitext
 title: Images in WikiText
 type: text/vnd.tiddlywiki
 
-To display an image stored in a tiddler just transclude that tiddler:
+! Image Formatting
+
+Images can be included in WikiText with the following syntax:
+
+```
+[img[Motovun Jack.jpg]]
+[img[http://tiddlywiki.com/favicon.ico]]
+```
+
+If the image source is the title of an image tiddler then that tiddler is directly displayed. Otherwise it is interpreted as a URL and an HTML `<img>` tag is generated with the `src` attribute containing the URL.
+
+A tooltip can also be specified:
+
+```
+[img[An explanatory tooltip|Motovun Jack.jpg]]
+```
+
+Attributes can be provided to specify CSS classes and the image width and height:
+
+```
+[img width=32 [Motovun Jack.jpg]]
+[img width=32 class="tw-image" [Motovun Jack.jpg]]
+```
+
+Note that attributes can be specified as transclusions or variable references:
+
+```
+[img width={{!!mywidth}} class=<<image-classes>> [Motovun Jack.jpg]]
+```
+
+The image syntax is a shorthand for invoking the ImageWidget.
+
+! Displaying Images via Transclusion
+
+You can also display an image stored in a tiddler by transcluding that tiddler. The disadvantage of this approach is that there is no direct way to control the size of the image.
 
 ```
 {{Motovun Jack.jpg}}
@@ -13,3 +47,4 @@ To display an image stored in a tiddler just transclude that tiddler:
 Renders as:
 
 {{Motovun Jack.jpg}}
+

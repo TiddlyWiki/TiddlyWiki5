@@ -1,0 +1,45 @@
+created: 20140418142957325
+modified: 20140418163615916
+tags: features
+title: DateFormat
+type: text/vnd.tiddlywiki
+
+The ViewWidget accepts a `template` attribute that allows the format of date values to be specified. The format string is processed with the following substitutions:
+
+|!Token |!Substituted Value |
+|`DDD` |Day of week in full (eg, "Monday") |
+|`ddd` |Short day of week (eg, "Mon") |
+|`DD` |Day of month |
+|`0DD` |Adds a leading zero |
+|`DDth` |Adds a suffix |
+|`WW` |~ISO-8601 week number of year |
+|`0WW` |Adds a leading zero |
+|`MMM` |Month in full (eg, "July") |
+|`mmm` |Short month (eg, "Jul") |
+|`MM` |Month number |
+|`0MM` |Adds leading zero |
+|`YYYY` |Full year |
+|`YY` |Two digit year |
+|`wYYYY` |Full year with respect to week number |
+|`wYY` |Two digit year with respect to week number |
+|`hh` |Hours |
+|`0hh` |Adds a leading zero |
+|`hh12` |Hours in 12 hour clock |
+|`0hh12` |Hours in 12 hour clock with leading zero |
+|`mm` |Minutes |
+|`0mm` |Minutes with leading zero |
+|`ss` |Seconds |
+|`0ss` |Seconds with leading zero |
+|`am` or `pm` |Lower case AM/PM indicator |
+|`AM` or `PM` |Upper case AM/PM indicator |
+|`TZD` |Timezone offset |
+|`\x` |Used to escape a character that would otherwise have special meaning |
+
+Note that other text is passed through unchanged, allowing commas, colons or other separators to be used.
+
+! Examples
+
+|!Template |!Output |
+|`DDth MMM YYYY` |16th February 2011 |
+|`DDth MMM \M\M\M YYYY` |16th February MMM 2011 |
+|`DDth mmm hh:mm:ss` |16th Feb 2011 11:38:42 |
