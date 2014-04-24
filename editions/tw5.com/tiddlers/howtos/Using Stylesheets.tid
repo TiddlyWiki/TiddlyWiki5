@@ -1,12 +1,12 @@
 created: 20140305091244145
-modified: 20140305091258135
+modified: 20140425121258135
 tags: howto
 title: Using Stylesheets
 type: text/vnd.tiddlywiki
 
 The usual way of modifying the appearance of a TiddlyWiki is to use one of the available themes, or to modify the [[colour palette|ColourPalettes]].
 
-You can also use custom CSS stylesheets by tagging tiddlers with `$:/tags/stylsheet`. For example, create a tiddler with the tag `$:/tags/stylsheet` and the following content in order to change the page background colour to red:
+You can also use custom CSS stylesheets by tagging tiddlers with `$:/tags/stylesheet`. For example, create a tiddler with the tag `$:/tags/stylesheet` and the following content in order to change the page background colour to red:
 
 ```
 html body.tw-body {
