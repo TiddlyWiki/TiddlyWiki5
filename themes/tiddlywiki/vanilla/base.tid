@@ -347,7 +347,7 @@ a.tw-tiddlylink-external:hover {
 	fill: <<colour muted-foreground>>;
 }
 
-.tw-topbar svg:hover {
+.tw-topbar button:hover svg {
 	fill: <<colour foreground>>;
 }
 
