@@ -1,30 +1,7 @@
 created: 20140406210404245
-modified: 20140406210649764
+modified: 20140424113815434
 tags: tips
 title: Editing Tiddlers with Emacs
 type: text/vnd.tiddlywiki
 
-This [[Emacs|http://www.gnu.org/software/emacs/]] function from Michael Fogleman simplifies editing tiddlers in `*.tid` files by automatically updating the `modified` field.
-
-If you have Emacs, you can save this function somewhere (such as in your init file). When you finish editing a tiddler, you can call the function, and it will update the modified time.
-
-> Help Wanted: Even better would be a TiddlyWiki-mode that used this function as a save-hook
-
-```
-(defun tid-time ()
-  "If called in a tiddler file, this function updates the metadata to
-  reflect the modification time."
-  (interactive)
-  (when
-      (and
-       (> (length (buffer-file-name)) 4)
-       (string-equal (substring (buffer-file-name) -4) ".tid"))
-      (save-excursion
-        (goto-char (point-min))
-
-        (search-forward "modified: ")
-        (beginning-of-line)
-
-        (kill-line)
-        (insert (format-time-string "modified: %Y%m%d%H%M%S%3N")))))
-```
+Michael Fogleman has written an [[Emacs|http://www.gnu.org/software/emacs/]] major mode called [[tid-mode|https://github.com/mwfogleman/tid-mode]], which is for editing TiddlyWiki .tid files. It is derived from text-mode, uses the useful minor modes org-struct and subword, and updates the modified times when you save a .tid file.
