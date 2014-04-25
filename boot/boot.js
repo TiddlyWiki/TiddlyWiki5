@@ -795,6 +795,20 @@ $tw.Tiddler.prototype.isDraft = function() {
 	return this.hasField("draft.of");
 };
 
+$tw.Tiddler.prototype.isModified = function() {
+	if(!this.isDraft()) { return false; }
+	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
+		tiddler = this,
+		origTiddler = $tw.wiki.getTiddler(this.fields["draft.of"]);
+	if(!$tw.utils.isEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
+		return true;
+	}
+	return !Object.keys(tiddler.fields).every(function(field) {
+		if(ignoredFields.indexOf(field) >= 0) { return true; }
+		return tiddler.fields[field] === origTiddler.fields[field];
+	});
+};
+
 /*
 Register and install the built in tiddler field modules
 */
