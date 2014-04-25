@@ -296,12 +296,14 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 						{title: draftTitle}
 					}
 				));
-			}
-			if(isConfirmed) {
+			} else if(!tiddler.isModified()) {
+				event.type = "tw-cancel-tiddler";
+				this.dispatchEvent(event);
+			} else if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
 				this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
 					title: draftTitle,
-					"draft.title": undefined, 
+					"draft.title": undefined,
 					"draft.of": undefined
 				},this.wiki.getModificationFields()));
 				// Remove the draft tiddler
