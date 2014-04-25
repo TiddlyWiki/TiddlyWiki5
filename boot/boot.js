@@ -86,6 +86,18 @@ $tw.utils.each = function(object,callback) {
 };
 
 /*
+Check if an array is equal by value and by reference.
+*/
+$tw.utils.isEqual = function(array1,array2) {
+	if(array1 === array2) { return true; }
+	array1 = array1 || []; array2 = array2 || [];
+	if(array1.length !== array2.length) { return false; }
+	return array1.every(function(value,index) {
+		return value === array2[index];
+	});
+};
+
+/*
 Helper for making DOM elements
 tag: tag name
 options: see below
