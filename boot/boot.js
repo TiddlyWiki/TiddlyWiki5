@@ -791,6 +791,10 @@ $tw.Tiddler.prototype.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
 };
 
+$tw.Tiddler.prototype.isDraft = function() {
+	return this.hasField("draft.of");
+};
+
 /*
 Register and install the built in tiddler field modules
 */
