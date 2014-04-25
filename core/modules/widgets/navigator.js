@@ -281,8 +281,7 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList(),
-		storyTiddlerModified = false; // We have to special case saving the story tiddler itself
+		storyList = this.getStoryList();
 	// Replace the original tiddler with the draft
 	if(tiddler) {
 		var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
