@@ -6,3 +6,5 @@ Saves an individual tiddler in its raw text or binary format to the specified fi
 ```
 --savetiddler <title> <filename>
 ```
+
+Any missing directories in the path to the filename are automatically created.

@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Set the base output directory for subsequent commands
+
+Sets the base output directory for subsequent commands. The default output directory is the current working directory.
+
+```
+--output <pathname>
+```
+
+If the specified pathname is relative then it is resolved relative to the current output directory.

@@ -1612,6 +1612,7 @@ $tw.boot.startup = function(options) {
 			wikiThemesSubDir: "./themes",
 			wikiLanguagesSubDir: "./languages",
 			wikiTiddlersSubDir: "./tiddlers",
+			wikiOutputSubDir: "./output",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
 			fileExtensionInfo: Object.create(null), // Map file extension to {type:}
 			contentTypeInfo: Object.create(null) // Map type to {encoding:,extension:}

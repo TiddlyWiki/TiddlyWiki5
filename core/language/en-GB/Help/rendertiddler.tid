@@ -6,3 +6,5 @@ Render an individual tiddler as a specified ContentType, defaults to `text/html`
 ```
 --rendertiddler <title> <filename> [<type>]
 ```
+
+Any missing directories in the path to the filename are automatically created.

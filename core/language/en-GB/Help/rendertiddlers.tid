@@ -12,3 +12,5 @@ For example:
 ```
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```
+
+Any files in the target directory are deleted. The target directory is recursively created if it is missing.

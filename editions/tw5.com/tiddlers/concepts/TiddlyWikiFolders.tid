@@ -24,6 +24,7 @@ The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising th
 * ''themes'' - an array of theme names to be included in the wiki
 * ''languages'' - an array of language names to be included in the wiki
 * ''includeWikis'' - an array of relative paths to external wiki folders to be included in the wiki
+* ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
 * ''config'' - an optional hashmap of configuration options (see below)
 
 Configuration options include:
@@ -34,16 +35,23 @@ For example:
 
 ```
 {
-  "plugins": [
-    "tiddlywiki/tiddlyweb",
-    "tiddlywiki/filesystem"
-  ],
-  "includeWikis": [
-    "../tw5.com"
-  ],
-  "config": {
-	"retain-original-tiddler-path": true	
-  }
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"]
+	},
+	"config": {
+		"retain-original-tiddler-path": true	
+	}
 }
 ```
 
@@ -55,26 +63,26 @@ Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` 
 
 ```
 {
-  "tiddlers": [
-    {
-      "file": "d3.min.js",
-      "fields": {
-        "type": "application/javascript",
-        "title": "$:/plugins/tiddlywiki/d3/d3.js",
-        "module-type": "library"
-      },
-      "prefix": "var d3;if($tw.browser){\n",
-      "suffix": "}\nexports.d3 = d3;\n"
-    },
-    {
-      "file": "cloud/d3.layout.cloud.js",
-      "fields": {
-        "type": "application/javascript",
-        "title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
-        "module-type": "library"
-      }
-    }
-  ]
+	"tiddlers": [
+		{
+			"file": "d3.min.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.js",
+				"module-type": "library"
+			},
+			"prefix": "var d3;if($tw.browser){\n",
+			"suffix": "}\nexports.d3 = d3;\n"
+		},
+		{
+			"file": "cloud/d3.layout.cloud.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
+				"module-type": "library"
+			}
+		}
+	]
 }
 ```
 
