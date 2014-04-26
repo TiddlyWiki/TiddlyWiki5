@@ -1,8 +1,10 @@
 title: $:/language/Help/rendertiddler
-description: 呈現個別條目為指定的 ContentType 
+description: 呈現個別條目為指定的內容類型 
 
-呈現個別條目為指定的 ContentType，預設為 `text/html` 且儲存為指定的檔名：
+呈現個別條目為指定的[[內容類型|ContentType]]，預設為 `text/html` 且儲存為指定的檔名：
 
 ```
 --rendertiddler <title> <filename> [<type>]
 ```
+
+自動建立在檔案名稱的路徑中任何缺少的資料夾。

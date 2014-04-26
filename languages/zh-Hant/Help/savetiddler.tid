@@ -6,3 +6,5 @@ description: 將條目的原始內容儲存到一個檔案
 ```
 --savetiddler <title> <filename>
 ```
+
+自動建立在檔案名稱的路徑中任何缺少的資料夾。
