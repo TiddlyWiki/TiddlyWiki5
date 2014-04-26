@@ -3,6 +3,10 @@ tags: $:/tags/PageTemplate
 
 <span class="tw-topbar tw-topbar-left">
 
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/TopLeftBar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TopLeftBar]!has[draft.of]]" variable="listItem">
+
+<$transclude tiddler=<<listItem>> mode="inline"/>
+
+</$list>
 
 </span>

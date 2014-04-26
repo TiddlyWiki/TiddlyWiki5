@@ -1,7 +1,6 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
-\define lingo-base() $:/language/MissingTiddler/
 <div class="body">
 
 <$transclude>

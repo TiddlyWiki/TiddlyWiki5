@@ -26,8 +26,30 @@
 		"zh-Hant",
 		"it-IT",
 		"ja-JP"
-	]
-	,
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"encrypted": [
+			"--password", "password",
+			"--rendertiddler", "$:/core/save/all", "encrypted.html", "text/plain",
+			"--clearpassword"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],
+		"readmes": [
+			"--rendertiddler","ReadMe","readme.md","text/html",
+			"--rendertiddler","ContributingTemplate","contributing.md","text/html",
+			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/html"],
+		"empty": [
+			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
+			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.hta","text/plain"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain"]
+	},
 	"config": {
 		"retain-original-tiddler-path": true
 	}

@@ -1,0 +1,21 @@
+created: 20140419082845576
+modified: 20140419083436245
+tags: features
+title: SafeMode
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Safe mode provides a way to disabling most customisations in TiddlyWiki. This is useful because if TiddlyWiki is customised incorrectly it can be rendered inoperable. A particular issue is that some customisations break when upgrading to a newer core version of TiddlyWiki (especially during the beta).
+
+! Enabling Safe Mode
+
+Safe mode is enabled in the browser by starting TiddlyWiki with the URL hash set to the string `#:safe`. For example:
+
+http://tiddlywiki.com/#:safe
+
+! How Safe Mode Works
+
+In safe mode, any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler.
+
+A report tiddler is displayed that allows you to inspect the tiddlers that were renamed.

@@ -31,8 +31,9 @@ Command.prototype.execute = function() {
 		fs = require("fs"),
 		path = require("path"),
 		title = this.params[0],
-		filename = this.params[1],
+		filename = path.resolve(this.commander.outputPath,this.params[1]),
 		type = this.params[2] || "text/html";
+	$tw.utils.createFileDirectories(filename);
 	fs.writeFile(filename,this.commander.wiki.renderTiddler(type,title),"utf8",function(err) {
 		self.callback(err);
 	});

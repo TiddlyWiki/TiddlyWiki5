@@ -305,28 +305,20 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			a = self.getTiddler(a).fields[sortField] || "";
 			b = self.getTiddler(b).fields[sortField] || "";
 		}
-		if(!isNumeric || isNaN(a) || isNaN(b)) {
-			if(!isCaseSensitive) {
-				if(typeof a === "string") {
-					a = a.toLowerCase();
-				}
-				if(typeof b === "string") {
-					b = b.toLowerCase();
-				}
-			}
-		}
-		else {
-			a-= 0;
-			b-= 0;
-		}
-		if(a < b) {
-			return isDescending ? +1 : -1;
+		if(isNumeric) {
+			a = Number(a);
+			b = Number(b);
+			return isDescending ? b - a : a - b;
+		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
+			return isDescending ? b - a : a - b;
 		} else {
-			if(a > b) {
-				return isDescending ? -1 : +1;
-			} else {
-				return 0;
+			a = String(a);
+			b = String(b);
+			if(!isCaseSensitive) {
+				a = a.toLowerCase();
+				b = b.toLowerCase();
 			}
+			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
 		}
 	});
 };

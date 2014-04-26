@@ -20,11 +20,20 @@ Parse a sequence of commands
 	callback: a callback invoked as callback(err) where err is null if there was no error
 */
 var Commander = function(commandTokens,callback,wiki,streams) {
+	var path = require("path");
 	this.commandTokens = commandTokens;
 	this.nextToken = 0;
 	this.callback = callback;
 	this.wiki = wiki;
 	this.streams = streams;
+	this.outputPath = process.cwd();
+};
+
+/*
+Add a string of tokens to the command queue
+*/
+Commander.prototype.addCommandTokens = function(commandTokens) {
+	Array.prototype.push.apply(this.commandTokens,commandTokens);
 };
 
 /*

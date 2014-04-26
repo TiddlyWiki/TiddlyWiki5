@@ -352,7 +352,7 @@ $tw.utils.parseVersion = function(version) {
 };
 
 /*
-Returns true if the version string A is greater than the version string B
+Returns true if the version string A is greater than the version string B. Returns true if the versions are the same
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	var defaultVersion = {
@@ -369,7 +369,8 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 		];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
+		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0);
 };
 
 /*
@@ -749,7 +750,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 		var arg = arguments[c],
 			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
 		for(var t in src) {
-			if(src[t] === undefined) {
+			if(src[t] === undefined || src[t] === null) {
 				if(t in this.fields) {
 					delete this.fields[t]; // If we get a field that's undefined, delete any previous field value
 				}
@@ -1041,6 +1042,37 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 			$tw.modules.define(tiddler.fields.title,tiddler.fields["module-type"],tiddler.fields.text);
 		}
 	});
+};
+
+/*
+Enable safe mode by deleting any tiddlers that override a shadow tiddler
+*/
+$tw.Wiki.prototype.processSafeMode = function() {
+	var self = this,
+		overrides = [];
+	// Find the overriding tiddlers
+	this.each(function(tiddler,title) {
+		if(self.isShadowTiddler(title)) {
+		console.log(title);
+			overrides.push(title);
+		}
+	});
+	// Assemble a report tiddler
+	var titleReportTiddler = "TiddlyWiki Safe Mode",
+		report = [];
+	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. Most customisations have been disabled by renaming the following tiddlers:")
+	// Delete the overrides
+	overrides.forEach(function(title) {
+		var tiddler = self.getTiddler(title),
+			newTitle = "SAFE: " + title;
+		self.deleteTiddler(title);
+		self.addTiddler(new $tw.Tiddler(tiddler, {title: newTitle}));
+		report.push("* [[" + title + "|" + newTitle + "]]");
+	});
+	report.push()
+	this.addTiddler(new $tw.Tiddler({title: titleReportTiddler, text: report.join("\n\n")}));
+	// Set $:/DefaultTiddlers to point to our report
+	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
 };
 
 /*
@@ -1562,6 +1594,8 @@ readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
+	// Check for safe mode
+	$tw.safeMode = $tw.browser && location.hash === "#:safe";
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
@@ -1578,6 +1612,7 @@ $tw.boot.startup = function(options) {
 			wikiThemesSubDir: "./themes",
 			wikiLanguagesSubDir: "./languages",
 			wikiTiddlersSubDir: "./tiddlers",
+			wikiOutputSubDir: "./output",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
 			fileExtensionInfo: Object.create(null), // Map file extension to {type:}
 			contentTypeInfo: Object.create(null) // Map type to {encoding:,extension:}
@@ -1645,6 +1680,10 @@ $tw.boot.startup = function(options) {
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
+	// Process "safe mode"
+	if($tw.safeMode) {
+		$tw.wiki.processSafeMode();
+	}
 	// Register typed modules from the tiddlers we've just loaded
 	$tw.wiki.defineTiddlerModules();
 	// And any modules within plugins
