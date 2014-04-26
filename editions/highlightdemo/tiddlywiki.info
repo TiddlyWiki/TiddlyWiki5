@@ -7,5 +7,9 @@
 		"tiddlywiki/snowwhite"
 	],
 	"includeWikis": [
-	]
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","highlightdemo.html","text/plain"]
+	}
 }

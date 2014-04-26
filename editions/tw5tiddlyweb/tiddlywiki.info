@@ -6,5 +6,9 @@
 	"themes": [
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
-	]
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","tw5tiddlyweb.html","text/plain"]
+	}
 }
