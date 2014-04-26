@@ -55,7 +55,7 @@ Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<wikiname>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
+Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
 Saving/TiddlySpot/Password: Mot de passe
 Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts

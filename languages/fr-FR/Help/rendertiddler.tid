@@ -1,8 +1,10 @@
 title: $:/language/Help/rendertiddler
-description: Enregistre un tiddler avec un rendu correspondant à un type de contenu spécifié
+description: Enregistre un tiddler avec un rendu correspondant au type de contenu spécifié
 
-Enregistre un tiddler sous le nom de fichier indiqué, avec un rendu correspondant au type de contenu (ContentType) spécifié — par défaut `text/html` :
+Enregistre un tiddler sous le chemin de fichier indiqué, avec un rendu correspondant au type de contenu (ContentType) spécifié — par défaut `text/html` :
 
 ```
---rendertiddler <titre> <nomdefichier> [<type>]
+--rendertiddler <titre> <chemindufichier> [<type>]
 ```
+
+Les répertoires présents dans le chemin du fichier et qui n'existent pas encore sont créés automatiquement. 
