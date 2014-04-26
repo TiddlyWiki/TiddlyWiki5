@@ -3,6 +3,6 @@
 	"name": "ja-JP",
 	"plugin-type": "language",
 	"description": "Japanese(Japan)",
-	"author": "OGOSHI Masayuki","pekopeko1",
+	"author": "OGOSHI Masayuki,pekopeko1",
 	"core-version": ">=5.0.9"
 }
