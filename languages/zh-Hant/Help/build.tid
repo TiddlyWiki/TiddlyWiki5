@@ -1,4 +1,4 @@
-建制title: $:/language/Help/build
+title: $:/language/Help/build
 description: 自動執行已組態的命令
 
 產生指定的建置目標為當前 wiki。若未指定任何建置目標，則產生所有可用的目標。
