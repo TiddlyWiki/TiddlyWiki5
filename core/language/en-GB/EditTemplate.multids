@@ -4,6 +4,7 @@ Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add f
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Button/Hide: hide preview
 Body/Preview/Button/Show: show preview
+Body/ShadowWarning: You are editing a shadow tiddler. Any changes will override the default version.
 Fields/Add/Button: add
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:

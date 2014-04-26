@@ -2,6 +2,14 @@ title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/
+<$list filter="[all[current]is[shadow]]">
+<div class="tw-message-box">
+
+<<lingo Body/ShadowWarning>>
+
+</div>
+</$list>
+
 <$reveal state="$:/ShowEditPreview" type="match" text="yes">
 
 <em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/ShowEditPreview" setTo="no"><<lingo Body/Preview/Button/Hide>></$button>
