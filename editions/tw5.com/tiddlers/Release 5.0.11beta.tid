@@ -10,22 +10,24 @@ type: text/vnd.tiddlywiki
 
 See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 
-* The default output location for command line operations has changed to the `/output` folder within the TiddlyWikiFolder (it used to be current directory).
-
-Commands when [[Using TiddlyWiki on Node.js]]
+* The default output location for command line operations has changed to the `/output` folder within TiddlyWikiFolders (it used to be current directory)
 
 !! Documentation Improvements
 
-* 
+* Added more warnings about taking care to [[backup your data|The First Rule of Using TiddlyWiki]]
 
 !! Usability Improvements
 
-* 
+* [[Replaced|https://github.com/Jermolene/TiddlyWiki5/issues/580]] hamburger menu icon with double chevron icon
+* [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/552657fc584dbb36754d3fcabca2cdef7e916ec9]] plain text parsing to use the CodeBlockWidget, and hence use syntax highlighting if the plugin is installed. This gives us syntax highlighting for JavaScript shadow tiddlers, amongst other things
+* Improvements to Chinese, Japanese and French translations
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/61c3f8a5ba3c815d623c06f6a97d9c00a31a4157]] WikiText tiddlers from the sidebar "Types" tab
 
 !! Hackability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f7e50e0950c5bf10d94d926576011893418b25f1]] [[BuildCommand]], [[OutputCommand]] and [[ClearPasswordCommand]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/570cad1c7f90e685961130918f09a7f9b2951f8c]] new [[FilterOperator: get]]
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc60ad1428dcf99a7ea0787e43e3b37f5a02fb98]] issue with hovering of the topbar icons in Firefox
