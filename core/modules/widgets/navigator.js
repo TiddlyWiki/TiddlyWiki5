@@ -315,7 +315,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 						{title: draftTitle}
 					}
 				));
-			} else if(!tiddler.isModified()) {
+			} else if(!this.wiki.isModifiedTiddler(title)) {
 				event.type = "tw-cancel-tiddler";
 				this.dispatchEvent(event);
 			} else if(isConfirmed) {
