@@ -796,7 +796,9 @@ $tw.Tiddler.prototype.isDraft = function() {
 };
 
 $tw.Tiddler.prototype.isModified = function() {
-	if(!this.isDraft()) { return false; }
+	if(!this.isDraft()) {
+		return false;
+	}
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
 		tiddler = this,
 		origTiddler = $tw.wiki.getTiddler(this.fields["draft.of"]);
