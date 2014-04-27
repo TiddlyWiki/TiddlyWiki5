@@ -7,4 +7,6 @@ Saves an individual tiddler in its raw text or binary format to the specified fi
 --savetiddler <title> <filename>
 ```
 
+By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
 Any missing directories in the path to the filename are automatically created.

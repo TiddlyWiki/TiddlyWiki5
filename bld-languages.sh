@@ -25,28 +25,32 @@ echo "tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
 node ./tiddlywiki.js \
 	./editions/de-AT-DE \
 	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/de-AT-DE.html text/plain \
-	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all de-AT-DE.html text/plain \
+	--savetiddler $:/favicon.ico favicon.ico \
 	|| exit 1
 
 node ./tiddlywiki.js \
 	./editions/zh-Hant \
 	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/zh-Hant.html text/plain \
-	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all zh-Hant.html text/plain \
+	--savetiddler $:/favicon.ico favicon.ico \
 	|| exit 1
 
 node ./tiddlywiki.js \
 	./editions/zh-Hans \
 	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/zh-Hans.html text/plain \
-	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all zh-Hans.html text/plain \
+	--savetiddler $:/favicon.ico favicon.ico \
 	|| exit 1
 
 node ./tiddlywiki.js \
 	./editions/fr-FR \
 	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/fr-FR.html text/plain \
-	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all fr-FR.html text/plain \
+	--savetiddler $:/favicon.ico favicon.ico \
 	|| exit 1
 

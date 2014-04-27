@@ -7,4 +7,6 @@ Render an individual tiddler as a specified ContentType, defaults to `text/html`
 --rendertiddler <title> <filename> [<type>]
 ```
 
+By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
 Any missing directories in the path to the filename are automatically created.

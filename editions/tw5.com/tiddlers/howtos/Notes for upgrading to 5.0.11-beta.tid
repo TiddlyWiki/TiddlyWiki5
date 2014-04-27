@@ -1,0 +1,23 @@
+created: 20140426170234142
+modified: 20140426170234142
+tags: howto
+title: Notes for upgrading to 5.0.11-beta
+type: text/vnd.tiddlywiki
+
+Version 5.0.11-beta includes some changes that can break content from earlier releases of ~TiddlyWiki 5.
+
+! Command line changes
+
+Previously, commands that generate output files would interpret the specified path to the file as being relative to the current working directory. So, for example, the following command would write `index.html` to the current directory:
+
+```
+tiddlywiki mywiki --rendertiddler $:/core/save/all index.html text/plain
+```
+
+In 5.0.11-beta this behaviour has changed, and now the specified filename is resolved relative to an `output` folder within the TiddlyWikiFolder. So the command above will now write the file `index.html` to `mywiki/output/index.html`.
+
+You can override this behaviour with the OutputCommand. For example, to generate the `index.html` file within the current directory:
+
+```
+tiddlywiki mywiki --output . --rendertiddler $:/core/save/all index.html text/plain
+```

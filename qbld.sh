@@ -25,6 +25,7 @@ echo "tiddlywiki.com" > $TW5_BUILD_OUTPUT/CNAME
 node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/index.html text/plain \
-	--savetiddler $:/favicon.ico $TW5_BUILD_OUTPUT/favicon.ico \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all index.html text/plain \
+	--savetiddler $:/favicon.ico favicon.ico \
 	|| exit 1

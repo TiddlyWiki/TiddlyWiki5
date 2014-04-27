@@ -29,7 +29,7 @@ Command.prototype.execute = function() {
 	if(this.params.length < 1) {
 		return "Missing output path";
 	}
-	this.commander.outputPath = path.resolve(this.commander.outputPath,this.params[0]);
+	this.commander.outputPath = path.resolve(process.cwd(),this.params[0]);
 	return null;
 };
 

@@ -26,7 +26,7 @@ var Commander = function(commandTokens,callback,wiki,streams) {
 	this.callback = callback;
 	this.wiki = wiki;
 	this.streams = streams;
-	this.outputPath = process.cwd();
+	this.outputPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiOutputSubDir);
 };
 
 /*
