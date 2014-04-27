@@ -80,7 +80,7 @@ ListWidget.prototype.execute = function() {
 
 ListWidget.prototype.getTiddlerList = function() {
 	var defaultFilter = "[!is[system]sort[title]]";
-	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this.getVariable("currentTiddler"));
+	return this.wiki.filterTiddlers(this.getAttribute("filter",defaultFilter),this);
 };
 
 ListWidget.prototype.getEmptyMessage = function() {

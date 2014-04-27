@@ -149,22 +149,22 @@ exports.getFilterOperators = function() {
 	return this.filterOperators;
 };
 
-exports.filterTiddlers = function(filterString,currTiddlerTitle,source) {
+exports.filterTiddlers = function(filterString,widget,source) {
 	var fn = this.compileFilter(filterString);
-	return fn.call(this,source,currTiddlerTitle);
+	return fn.call(this,source,widget);
 };
 
 /*
-Compile a filter into a function with the signature fn(source,currTiddlerTitle) where:
+Compile a filter into a function with the signature fn(source,widget) where:
 source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
-currTiddlerTitle: the optional name of the current tiddler
+widget: an optional widget node for retrieving the current tiddler etc.
 */
 exports.compileFilter = function(filterString) {
 	var filterParseTree;
 	try {
 		filterParseTree = this.parseFilter(filterString);
 	} catch(e) {
-		return function(source,currTiddlerTitle) {
+		return function(source,widget) {
 			return ["Filter error: " + e];
 		};
 	}
@@ -176,9 +176,10 @@ exports.compileFilter = function(filterString) {
 	var self = this;
 	$tw.utils.each(filterParseTree,function(operation) {
 		// Create a function for the chain of operators in the operation
-		var operationSubFunction = function(source,currTiddlerTitle) {
+		var operationSubFunction = function(source,widget) {
 			var accumulator = source,
-				results = [];
+				results = [],
+				currTiddlerTitle = widget && widget.getVariable("currentTiddler");
 			$tw.utils.each(operation.operators,function(operator) {
 				var operand = operator.operand,
 					operatorFunction;
@@ -200,7 +201,7 @@ exports.compileFilter = function(filterString) {
 							regexp: operator.regexp
 						},{
 							wiki: self,
-							currTiddlerTitle: currTiddlerTitle
+							widget: widget
 						});
 				accumulator = self.makeTiddlerIterator(results);
 			});
@@ -210,25 +211,25 @@ exports.compileFilter = function(filterString) {
 		operationFunctions.push((function() {
 			switch(operation.prefix || "") {
 				case "": // No prefix means that the operation is unioned into the result
-					return function(results,source,currTiddlerTitle) {
-						$tw.utils.pushTop(results,operationSubFunction(source,currTiddlerTitle));
+					return function(results,source,widget) {
+						$tw.utils.pushTop(results,operationSubFunction(source,widget));
 					};
 				case "-": // The results of this operation are removed from the main result
-					return function(results,source,currTiddlerTitle) {
-						$tw.utils.removeArrayEntries(results,operationSubFunction(source,currTiddlerTitle));
+					return function(results,source,widget) {
+						$tw.utils.removeArrayEntries(results,operationSubFunction(source,widget));
 					};
 				case "+": // This operation is applied to the main results so far
-					return function(results,source,currTiddlerTitle) {
+					return function(results,source,widget) {
 						// This replaces all the elements of the array, but keeps the actual array so that references to it are preserved
 						source = self.makeTiddlerIterator(results);
 						results.splice(0,results.length);
-						$tw.utils.pushTop(results,operationSubFunction(source,currTiddlerTitle));
+						$tw.utils.pushTop(results,operationSubFunction(source,widget));
 					};
 			}
 		})());
 	});
 	// Return a function that applies the operations to a source iterator of tiddler titles
-	return $tw.perf.measure("filter",function filterFunction(source,currTiddlerTitle) {
+	return $tw.perf.measure("filter",function filterFunction(source,widget) {
 		if(!source) {
 			source = self.each;
 		} else if(typeof source === "object") { // Array or hashmap
@@ -236,7 +237,7 @@ exports.compileFilter = function(filterString) {
 		}
 		var results = [];
 		$tw.utils.each(operationFunctions,function(operationFunction) {
-			operationFunction(results,source,currTiddlerTitle);
+			operationFunction(results,source,widget);
 		});
 		return results;
 	});
