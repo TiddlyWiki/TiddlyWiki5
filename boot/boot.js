@@ -88,7 +88,7 @@ $tw.utils.each = function(object,callback) {
 /*
 Check if an array is equal by value and by reference.
 */
-$tw.utils.isEqual = function(array1,array2) {
+$tw.utils.isArrayEqual = function(array1,array2) {
 	if(array1 === array2) { return true; }
 	array1 = array1 || []; array2 = array2 || [];
 	if(array1.length !== array2.length) { return false; }
@@ -802,7 +802,7 @@ $tw.Tiddler.prototype.isModified = function() {
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
 		tiddler = this,
 		origTiddler = $tw.wiki.getTiddler(this.fields["draft.of"]);
-	if(!$tw.utils.isEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
+	if(!$tw.utils.isArrayEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
 		return true;
 	}
 	return !Object.keys(tiddler.fields).every(function(field) {
