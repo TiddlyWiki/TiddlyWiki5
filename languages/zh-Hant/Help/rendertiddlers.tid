@@ -1,7 +1,7 @@
 title: $:/language/Help/rendertiddlers
-description: 呈現符合篩選條件的條目為指定的 ContentType
+description: 呈現符合篩選條件的條目為指定的內容類型
 
-呈現符合篩選條的條目為指定的 ContentType (預設為 `text/html`) 與副檔名 (預設為 `.html`).
+呈現符合篩選條的條目為指定的[[內容類型|ContentType]] (預設為 `text/html`) 與副檔名 (預設為 `.html`).
 
 ```
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
@@ -12,3 +12,5 @@ description: 呈現符合篩選條件的條目為指定的 ContentType
 ```
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```
+
+在目標資料夾中的任何檔案都會被刪除。若缺少目標資料夾，則以遞迴方式建立。
