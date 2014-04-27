@@ -1,20 +1,20 @@
 title: $:/language/TiddlerInfo/
 
-Advanced/Caption: 高度な機能
+Advanced/Caption: 詳細
 Advanced/PluginInfo/Empty/Hint: なし
 Advanced/PluginInfo/Heading: プラグイン詳細
-Advanced/PluginInfo/Hint: このプラグインには以下の隠しtiddlerが含まれます
-Advanced/ShadowInfo/Heading: 隠し状態
-Advanced/ShadowInfo/NotShadow/Hint: このtiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> は隠しtiddlerではありません
-Advanced/ShadowInfo/Shadow/Hint: このtiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> は隠しtiddlerです
-Advanced/ShadowInfo/Shadow/Source: これはこのプラグイン <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>で定義されています
-Advanced/ShadowInfo/OverriddenShadow/Hint: これは通常のtiddlerで上書きされます
+Advanced/PluginInfo/Hint: このプラグインは次の隠し tiddler を含んでいます :
+Advanced/ShadowInfo/Heading: 隠しステータス
+Advanced/ShadowInfo/NotShadow/Hint: この tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> は隠し tiddler ではありません
+Advanced/ShadowInfo/Shadow/Hint: この tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> は隠し tiddler です
+Advanced/ShadowInfo/Shadow/Source: プラグイン <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link> で定義されています
+Advanced/ShadowInfo/OverriddenShadow/Hint: 通常の tiddler に上書きされています
 Fields/Caption: フィールド
 List/Caption: リスト
-List/Empty: このtiddlerにはリストがありません
-Listed/Caption: リストされています
-Listed/Empty: このtiddlerは他のどのtiddlerからもリストされていません
-References/Caption: 参照
-References/Empty: 関連付けられているtiddlerはありません
-Tagging/Caption: タグ付け
-Tagging/Empty: このタグにタグ付けされているtiddlerはありません
+List/Empty: リストを保持していません
+Listed/Caption: 被リスト
+Listed/Empty: このtiddlerを参照するリストはありません
+References/Caption: これを参照
+References/Empty: どこからも参照されていません
+Tagging/Caption: この名でタグ付
+Tagging/Empty: この名でタグ付けされた tiddler はありません

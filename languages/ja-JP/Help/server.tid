@@ -1,30 +1,31 @@
 title: $:/language/Help/server
 description: Provides an HTTP server interface to TiddlyWiki
 
-The server built in to TiddlyWiki5 is very simple. Although compatible with TiddlyWeb it doesn't support many of the features needed for robust Internet-facing usage.
+TiddlyWiki5 に組み込まれているサーバー機能は非常にシンプルなものです。TiddlyWeb との互換性はありますが、インターネット上で安定して公開するために必要となるいくつもの機能がサポートされていません。
 
-At the root, it serves a rendering of a specified tiddler. Away from the root, it serves individual tiddlers encoded in JSON, and supports the basic HTTP operations for `GET`, `PUT` and `DELETE`.
+root 階層では指定された tiddler のレンダリングを行います。root 階層以外では JSON エンコードされた個々の tiddler や、一般的な HTTP 操作（`GET`, `PUT`, `DELETE`）をサポートします。
 
 ```
 --server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
 ```
 
-The parameters are:
+以下のパラメータがあります:
 
-* ''port'' - port number to serve from (defaults to "8080")
-* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all") 
-* ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
-* ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
-* ''username'' - the default username for signing edits
-* ''password'' - optional password for basic authentication
-* ''host'' - optional hostname to serve from (defaults to "127.0.0.1" aka "localhost")
+* ''port'' - 待ち受けるポート番号（デフォルトは "8080"）
+* ''roottiddler'' - root階層になる tiddler（デフォルトは "$:/core/save/all"）
+* ''rendertype'' - root tiddler がレンダリングされるときの ContentType（デフォルトは "text/plain"）
+* ''servetype'' - root tiddler がリクエストされるときの ContentType（デフォルトは "text/html"）
+* ''username'' - 編集した tiddler を保存する際のデフォルトユーザ名
+* ''password'' - ベーシック認証用のパスワード
+* ''host'' - サーバーとなるホスト名（デフォルトは "127.0.0.1" つまり "localhost"）
 
-If the password parameter is specified then the browser will prompt the user for the username and password. Note that the password is transmitted in plain text so this implementation isn't suitable for general use.
+password パラメータが指定された場合ブラウザはユーザ名とパスワードを尋ねるようになります。なお、このパスワードはネットワーク上を平文で流れるため、この実装はインターネット上に公開するような一般的な使用には適していないことに注意してください。
 
-For example:
+使用例:
 
 ```
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
-To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port.
+同時に複数の TiddlyWiki サーバーを起動したい場合は、それぞれに別々のポート番号を割り当てる必要があります。
+

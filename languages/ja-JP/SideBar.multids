@@ -1,17 +1,17 @@
 title: $:/language/SideBar/
 
-All/Caption: すべて
+All/Caption: 全て
 Drafts/Caption: ドラフト
-Missing/Caption: リンクされているが定義されていないtiddler
-More/Caption: もっと見る
-Open/Caption: 開いているtiddler
-Orphans/Caption: リンクされていないtiddler
+Missing/Caption: 未作成
+More/Caption: さらに
+Open/Caption: オープン中
+Orphans/Caption: 孤立
 Recent/Caption: 最近
 Shadows/Caption: 隠し
 System/Caption: システム
-Tags/Caption: タグ
-Tags/TagManager/Caption: タグマネージャー
-Tags/Untagged/Caption: タグされていない
+Tags/Caption: タグ別
+Tags/TagManager/Caption: タグマネージャ
+Tags/Untagged/Caption: 未タグ
 Tools/Caption: ツール
-Types/Caption: タイプ
+Types/Caption: 種類別
 

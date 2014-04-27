@@ -1,13 +1,13 @@
 title: $:/language/Modals/Download
 type: text/vnd.tiddlywiki
-subtitle: Download changes
-footer: <$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>
+subtitle: 変更のダウンロード
+footer: <$button message="tw-close-tiddler" class="btn btn-primary">閉じる</$button>
 help: http://tiddlywiki.com/static/DownloadingChanges.html
 
-お使いのブラウザは手動保存にしか対応していません。
+このブラウザは手動での保存しかできません。
 
-変更されたwikiを保存するには、下のダウンロードリンクを右クリックして"ファイルをダウンロードする"や"ファイルを保存する"を選び、フォルダーやファイル名を選んでください。
+編集済みの wiki を保存するには下記のリンクを右クリックし「ファイルをダウンロード」あるいは「ファイルを保存」を選択し、保存先とファイル名を指定してください。
 
-//You can marginally speed things up by clicking the link with the control key (Windows) or the options/alt key (Mac OS X). You will not be prompted for the folder or filename, but your browser is likely to give it an unrecognisable name -- you may need to rename the file to include an `.html` extension before you can do anything useful with it.//
+//コントロールキー(Windowsの場合)あるいは Option/alt キー(Mac OS Xの場合)を押しながらリンクをクリックすることですぐに保存が可能です。このときフォルダー名やファイル名を尋ねられることはありませんが、ブラウザが自動的に判りにくい名前を付けてしまうので、保存後にわかりやすい名前（拡張子 .htmlを含む）を付けた方が良いでしょう。//
 
-On smartphones that do not allow files to be downloaded you can instead bookmark the link, and then sync your bookmarks to a desktop computer from where the wiki can be saved normally.
+スマートフォンではダウンロードはできません。代わりにリンクをブックマークしてください。そしてそのブックマークをデスクトップ機へ同期してください。
