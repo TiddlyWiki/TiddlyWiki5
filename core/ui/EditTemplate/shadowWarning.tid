@@ -1,0 +1,11 @@
+title: $:/core/ui/EditTemplate/shadowWarning
+tags: $:/tags/EditTemplate
+
+\define lingo-base() $:/language/EditTemplate/
+<$list filter="[all[current]get[draft.of]is[shadow]]">
+<div class="tw-message-box">
+
+<<lingo Body/ShadowWarning>>
+
+</div>
+</$list>
