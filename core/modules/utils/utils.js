@@ -414,6 +414,18 @@ exports.parseTextReference = function(textRef) {
 };
 
 /*
+Checks whether a string is a valid fieldname
+*/
+exports.isValidFieldName = function(name) {
+	if(!name || typeof name !== "string") {
+		return false;
+	}
+	name = name.toLowerCase().trim();
+	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
+	return fieldValidatorRegEx.test(name);
+};
+
+/*
 Extract the version number from the meta tag or from the boot file
 */
 
