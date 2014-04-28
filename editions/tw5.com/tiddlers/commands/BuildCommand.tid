@@ -1,7 +1,9 @@
 created: 20140425085548209
-modified: 20140425085738745
+modified: 20140427210435569
 tags: command
 title: BuildCommand
 type: text/vnd.tiddlywiki
 
 {{$:/language/Help/build}}
+
+See TiddlyWikiFolders for details of defining build targets.
