@@ -1,10 +1,12 @@
 title: $:/language/Help/savetiddler
-description: 將條目的原始內容保存到一個文件
+description: 将条目的原始内容保存到一个文件
 
-保存個別條目的原始文本或二进制格式到指定的文件名。
+保存个别条目的原始文本或二进制格式到指定的文件名。
 
 ```
 --savetiddler <title> <filename>
 ```
+
+默认情况下，文件名被解析为相对于版本文件夹的 `output` 子文件夹。 `--output` 命令可以用于将输出指定到一个不同的文件。
 
 自动创建在文件名称的路径中任何缺少的文件夹。

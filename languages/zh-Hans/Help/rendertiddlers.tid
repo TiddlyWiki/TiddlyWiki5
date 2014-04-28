@@ -13,4 +13,6 @@ description: 呈现符合筛选条件的条目为指定的内容类型
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
+默认情况下，路径名被解析为相对于版本文件夹的 `output` 子文件夹。 `--output` 命令可以用于将输出指定到一个不同的文件。
+
 在目标文件夹中的任何文件都会被删除。若缺少目标文件夹，则以递回方式创建。
