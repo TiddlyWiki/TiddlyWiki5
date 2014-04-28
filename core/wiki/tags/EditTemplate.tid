@@ -1,2 +1,2 @@
 title: $:/tags/EditTemplate
-list: [[$:/core/ui/EditTemplate/controls]] [[$:/core/ui/EditTemplate/title]] [[$:/core/ui/EditTemplate/tags]] [[$:/core/ui/EditTemplate/shadowWarning]] [[$:/core/ui/ViewTemplate/classic]] [[$:/core/ui/EditTemplate/body]] [[$:/core/ui/EditTemplate/type]] [[$:/core/ui/EditTemplate/fields]]
+list: [[$:/core/ui/EditTemplate/controls]] [[$:/core/ui/EditTemplate/title]] [[$:/core/ui/EditTemplate/tags]] [[$:/core/ui/EditTemplate/shadow]] [[$:/core/ui/ViewTemplate/classic]] [[$:/core/ui/EditTemplate/body]] [[$:/core/ui/EditTemplate/type]] [[$:/core/ui/EditTemplate/fields]]

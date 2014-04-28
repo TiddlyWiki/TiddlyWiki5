@@ -20,6 +20,10 @@ exports.isPlugin = function() {
 	return this.fields.type === "application/json" && this.hasField("plugin-type");
 }
 
+exports.isDraft = function() {
+	return this.hasField("draft.of");
+};
+
 exports.getFieldString = function(field) {
 	var value = this.fields[field];
 	// Check for a missing field

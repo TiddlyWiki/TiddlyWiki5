@@ -1060,4 +1060,25 @@ exports.readFile = function(file,callback) {
 	}
 };
 
+/*
+Check whether the specified draft tiddler has been modified
+*/
+$tw.Wiki.prototype.isDraftModified = function(title) {
+  var tiddler = this.getTiddler(title);
+	if(!tiddler.isDraft()) {
+		return false;
+	}
+	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
+		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
+	if(!$tw.utils.isArrayEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
+		return true;
+	}
+	return !Object.keys(tiddler.fields).every(function(field) {
+		if(ignoredFields.indexOf(field) >= 0) {
+			return true;
+		}
+		return tiddler.fields[field] === origTiddler.fields[field];
+	});
+};
+
 })();

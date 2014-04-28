@@ -86,18 +86,6 @@ $tw.utils.each = function(object,callback) {
 };
 
 /*
-Check if an array is equal by value and by reference.
-*/
-$tw.utils.isArrayEqual = function(array1,array2) {
-	if(array1 === array2) { return true; }
-	array1 = array1 || []; array2 = array2 || [];
-	if(array1.length !== array2.length) { return false; }
-	return array1.every(function(value,index) {
-		return value === array2[index];
-	});
-};
-
-/*
 Helper for making DOM elements
 tag: tag name
 options: see below
@@ -791,10 +779,6 @@ $tw.Tiddler.prototype.hasField = function(field) {
 	return $tw.utils.hop(this.fields,field);
 };
 
-$tw.Tiddler.prototype.isDraft = function() {
-	return this.hasField("draft.of");
-};
-
 /*
 Register and install the built in tiddler field modules
 */
@@ -1122,22 +1106,6 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		fields.text = text;
 		return [fields];
 	}
-};
-
-$tw.Wiki.prototype.isModifiedTiddler = function(title) {
-  var tiddler = this.getTiddler(title);
-	if(!tiddler.isDraft()) {
-		return false;
-	}
-	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
-		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
-	if(!$tw.utils.isArrayEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
-		return true;
-	}
-	return !Object.keys(tiddler.fields).every(function(field) {
-		if(ignoredFields.indexOf(field) >= 0) { return true; }
-		return tiddler.fields[field] === origTiddler.fields[field];
-	});
 };
 
 /*
