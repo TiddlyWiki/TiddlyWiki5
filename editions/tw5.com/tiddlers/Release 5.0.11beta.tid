@@ -22,6 +22,8 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 * [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/552657fc584dbb36754d3fcabca2cdef7e916ec9]] plain text parsing to use the CodeBlockWidget, and hence use syntax highlighting if the plugin is installed. This gives us syntax highlighting for JavaScript shadow tiddlers, amongst other things
 * Improvements to Chinese, Japanese and French translations
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/61c3f8a5ba3c815d623c06f6a97d9c00a31a4157]] WikiText tiddlers from the sidebar "Types" tab
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a90339d1e573ec82dba1caeaead0f71717618a80]] various warnings when editing shadow tiddlers
+* [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/0ac4c2b554f045c6bd2dc6ea5daa0d2f0397d04c]] digits in field names
 
 !! Hackability Improvements
 
@@ -31,3 +33,4 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc60ad1428dcf99a7ea0787e43e3b37f5a02fb98]] issue with hovering of the topbar icons in Firefox
+
