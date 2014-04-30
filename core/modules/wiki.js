@@ -140,7 +140,9 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 			var changes = self.changedTiddlers;
 			self.changedTiddlers = Object.create(null);
 			self.eventsTriggered = false;
-			self.dispatchEvent("change",changes);
+			if($tw.utils.count(changes) > 0) {
+				self.dispatchEvent("change",changes);
+			}
 		});
 		this.eventsTriggered = true;
 	}
