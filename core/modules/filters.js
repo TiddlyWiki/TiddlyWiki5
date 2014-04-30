@@ -203,9 +203,21 @@ exports.compileFilter = function(filterString) {
 							wiki: self,
 							widget: widget
 						});
-				accumulator = self.makeTiddlerIterator(results);
+				if($tw.utils.isArray(results)) {
+					accumulator = self.makeTiddlerIterator(results);
+				} else {
+					accumulator = results;
+				}
 			});
-			return results;
+			if($tw.utils.isArray(results)) {
+				return results;
+			} else {
+				var resultArray = [];
+				results(function(tiddler,title) {
+					resultArray.push(title);
+				});
+				return resultArray;
+			}
 		};
 		// Wrap the operator functions in a wrapper function that depends on the prefix
 		operationFunctions.push((function() {
