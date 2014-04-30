@@ -148,6 +148,11 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	}
 };
 
+exports.clearTiddlerEventQueue = function() {
+	this.changedTiddlers = Object.create(null);
+	this.changeCount = Object.create(null)
+};
+
 exports.getChangeCount = function(title) {
 	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {

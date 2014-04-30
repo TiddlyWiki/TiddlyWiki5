@@ -82,6 +82,8 @@ exports.startup = function() {
 		$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
 	};
 	displayDefaultTiddlers();
+	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
+	$tw.wiki.clearTiddlerEventQueue();
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
