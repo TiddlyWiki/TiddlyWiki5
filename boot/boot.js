@@ -885,6 +885,33 @@ $tw.Wiki = function(options) {
 		}
 	};
 
+	// Iterate through all tiddlers and then the shadows
+	this.eachTiddlerPlusShadows = function(callback) {
+		for(var title in tiddlers) {
+			callback(tiddlers[title],title);
+		}
+		for(var title in shadowTiddlers) {
+			if(!Object.prototype.hasOwnProperty.call(tiddlers,title)) {
+				var shadowInfo = shadowTiddlers[title];
+				callback(shadowInfo.tiddler,title);
+			}
+		}
+	};
+
+	// Iterate through all the shadows and then the tiddlers
+	this.eachShadowPlusTiddlers = function(callback) {
+		for(var title in shadowTiddlers) {
+			var shadowInfo = shadowTiddlers[title];
+			callback(shadowInfo.tiddler,title);
+		}
+		for(var title in tiddlers) {
+			if(!Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
+				callback(tiddlers[title],title);
+			}
+		}
+
+	};
+
 	// Test for the existence of a tiddler
 	this.tiddlerExists = function(title) {
 		return !!$tw.utils.hop(tiddlers,title);
