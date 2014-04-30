@@ -33,6 +33,17 @@ exports.all = function(source,operator,options) {
 	// Cycle through the suboperators accumulating their results
 	var results = [],
 		subops = operator.operand.split("+");
+	// Check for common optimisations
+	if(subops.length === 1 && subops[0] === "tiddlers") {
+		return options.wiki.each;
+	} else if(subops.length === 1 && subops[0] === "shadows") {
+		return options.wiki.eachShadow;
+	} else if(subops.length === 2 && subops[0] === "tiddlers" && subops[1] === "shadows") {
+		return options.wiki.eachTiddlerPlusShadows;
+	} else if(subops.length === 2 && subops[0] === "shadows" && subops[1] === "tiddlers") {
+		return options.wiki.eachShadowPlusTiddlers;
+	}
+	// Do it the hard way
 	for(var t=0; t<subops.length; t++) {
 		var subop = allFilterOperators[subops[t]];
 		if(subop) {
