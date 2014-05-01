@@ -1077,6 +1077,9 @@ $tw.Wiki.prototype.isDraftModified = function(title) {
 	}
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
 		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
+	if(tiddler.fields["draft.title"] !== tiddler.fields["draft.of"]) {
+		return true;
+	}
 	if(!$tw.utils.isArrayEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
 		return true;
 	}
