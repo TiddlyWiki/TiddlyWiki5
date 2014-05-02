@@ -1,0 +1,26 @@
+created: 20140502213500000
+modified: 20140502213500000
+tags: concepts
+title: PermaLinks
+type: text/vnd.tiddlywiki
+
+Permalinks allow direct links to individual tiddlers within a TiddlyWiki.
+
+The simplest form of permalink is a single target tiddler title appended to the base URL with "#!":
+
+http://tiddlywiki.com/#!HelloThere
+
+The tiddler title can contain spaces if required:
+
+[[http://tiddlywiki.com/#!Using TiddlyWiki on Node.js]]
+
+The permalink can also specify the story list of tiddlers that should be opened alongside the target tiddler. The tiddler titles are separated by `%00`:
+
+http://tiddlywiki.com/#!Tiddlers%00Tags%00TiddlerFields%00Tiddlers
+
+In this form, the first tiddler title is taken to be the target tiddler, and the remaining titles give the sequence of tiddlers in the story list.
+
+If the target tiddler isn't present in the story list then it is automatically inserted at the top. This means that the following two examples both target the tiddler `Tiddlers` within the story sequence `Tiddlers`, `Tags`, `TiddlerFields`:
+
+http://tiddlywiki.com/#!Tiddlers%00Tags%00TiddlerFields
+http://tiddlywiki.com/#!Tiddlers%00Tiddlers%00Tags%00TiddlerFields

@@ -18,6 +18,7 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 
 !! Usability Improvements
 
+* Added support for PermaLinks and browser navigation buttons
 * [[Replaced|https://github.com/Jermolene/TiddlyWiki5/issues/580]] hamburger menu icon with double chevron icon
 * [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/552657fc584dbb36754d3fcabca2cdef7e916ec9]] plain text parsing to use the CodeBlockWidget, and hence use syntax highlighting if the plugin is installed. This gives us syntax highlighting for JavaScript shadow tiddlers, amongst other things
 * Improvements to Chinese, Japanese and French translations

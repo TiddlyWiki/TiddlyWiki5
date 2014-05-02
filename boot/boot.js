@@ -1621,8 +1621,15 @@ readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
-	// Check for safe mode
-	$tw.safeMode = $tw.browser && location.hash === "#:safe";
+	// Get the URL hash and check for safe mode
+	$tw.locationHash = "#";
+	if($tw.browser) {
+		if(location.hash === "#:safe") {
+			$tw.safeMode = true;
+		} else {
+			$tw.locationHash = location.hash;
+		}
+	}
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module

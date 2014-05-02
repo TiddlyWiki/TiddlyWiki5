@@ -18,6 +18,14 @@ var PERFORMANCE_INSTRUMENTATION = false;
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT = 400;
 
+// Default story and history lists
+var DEFAULT_STORY_TITLE = "$:/StoryList";
+var DEFAULT_HISTORY_TITLE = "$:/HistoryList";
+
+// Default tiddlers
+var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
+		
+
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
@@ -64,26 +72,37 @@ exports.startup = function() {
 			"$:/themes/tiddlywiki/vanilla"
 		]
 	});
-	// Display the default tiddlers
-	var displayDefaultTiddlers = function() {
-		// Get the default tiddlers
-		var defaultTiddlersTitle = "$:/DefaultTiddlers",
-			defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
-			defaultTiddlers = [];
-		if(defaultTiddlersTiddler) {
-			defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
-		}
-		// Initialise the story
-		var storyTitle = "$:/StoryList",
-			story = [];
-		for(var t=0; t<defaultTiddlers.length; t++) {
-			story[t] = defaultTiddlers[t];
-		}
-		$tw.wiki.addTiddler({title: storyTitle, text: "", list: story},$tw.wiki.getModificationFields());
-	};
-	displayDefaultTiddlers();
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
+	// Decode the hash portion of our URL
+	var parts = [];
+	if($tw.locationHash.charAt(1) === "!") {
+		parts = decodeURIComponent($tw.locationHash.substr(2)).split("\u0000")
+	}
+	if(parts[0]) {
+		// Set the history
+		var historyList = [{title: parts[0]}];
+		$tw.wiki.setTiddlerData(DEFAULT_HISTORY_TITLE, historyList, {"current-tiddler": parts[0]});
+		// Set the story
+		var story = [];
+		for(var t=1; t<parts.length; t++) {
+			if(parts[t]) {
+				story.push(parts[t]);
+			}
+		}
+		// If the story is empty use the default tiddlers
+		if(story.length === 0) {
+			story = getDefaultTiddlers();
+		}
+		// If the target tiddler isn't included then splice it in at the top
+		if(story.indexOf(parts[0]) === -1) {
+			story.unshift(parts[0]);
+		}
+		$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: story},$tw.wiki.getModificationFields());
+	} else {
+		// Display the default tiddlers if the hash portion was empty
+		displayDefaultTiddlers();
+	}
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
@@ -247,6 +266,34 @@ exports.startup = function() {
 	}
 };
 
+
+/*
+Helper to display the default tiddlers
+*/
+function displayDefaultTiddlers() {
+	// Get the default tiddlers
+	var defaultTiddlersTitle = "$:/DefaultTiddlers",
+		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
+		defaultTiddlers = [];
+	if(defaultTiddlersTiddler) {
+		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
+	}
+	// Initialise the story
+	var story = [];
+	for(var t=0; t<defaultTiddlers.length; t++) {
+		story[t] = defaultTiddlers[t];
+	}
+	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: story},$tw.wiki.getModificationFields());
+}
+
+function getDefaultTiddlers() {
+	var defaultTiddlersTiddler = $tw.wiki.getTiddler(DEFAULT_TIDDLERS_TITLE),
+		defaultTiddlers = [];
+	if(defaultTiddlersTiddler) {
+		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
+	}
+	return defaultTiddlers;
+}
 
 /*
 Main render function for PageMacros, which includes the PageTemplate
