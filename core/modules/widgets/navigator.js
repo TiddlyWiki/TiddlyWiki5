@@ -141,7 +141,6 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 			historyList.push({title: title, fromPageRect: fromPageRect});
 		});
 		this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
-		this.wiki.addTiddler(new $tw.Tiddler());
 	}
 };
 
