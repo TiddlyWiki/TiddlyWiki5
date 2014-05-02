@@ -1,11 +1,13 @@
 title: $:/language/
 
+BinaryWarning/Prompt: Ce tiddler contient des données binaires
 ClassicWarning/Hint: Ce tiddler est écrit au format TiddlyWiki Classic, qui n'est pas entièrement compatible avec TiddlyWiki version 5. Pour en savoir plus, rendez-vous à l'adresse http://tiddlywiki.com/static/Upgrading.html. 
 ClassicWarning/Upgrade/Caption: Mettre à jour
 CloseAll/Button: Tout fermer
 ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tiddler « <$text text=<<title>>/> » ?
 ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
-ConfirmOverwriteTiddler: Souhaitez-vous écraser le tiddler « <$text text=<<title>>/> » ?
+ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
+ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant - cliquez sur {{$:/core/images/edit-button}} pour le créer
 RecentChanges/DateFormat: DD MMM YYYY

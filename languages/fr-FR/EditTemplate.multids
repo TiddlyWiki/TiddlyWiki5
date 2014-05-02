@@ -8,6 +8,8 @@ Fields/Add/Button: ajouter
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
+Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
+Shadow/OverriddenWarning: Il s'agit d'un tiddler « shadow » modifié. Pour revenir à la version par défaut, il vous suffit de supprimer ce tiddler.
 Tags/Add/Button: ajouter
 Tags/Add/Placeholder: nom du tag
 Type/Placeholder: type du contenu
