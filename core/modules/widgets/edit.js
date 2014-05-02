@@ -56,7 +56,15 @@ EditWidget.prototype.execute = function() {
 	}
 	type = type || "text/vnd.tiddlywiki";
 	// Choose the appropriate edit widget
-	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type) || "text";
+	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
+	if(!editorType) {
+		var typeInfo = $tw.config.contentTypeInfo[type];
+		if(typeInfo && typeInfo.encoding === "base64") {
+			editorType = "binary";
+		} else {
+			editorType = "text";
+		}
+	}
 	// Make the child widgets
 	this.makeChildWidgets([{
 		type: "edit-" + editorType,
