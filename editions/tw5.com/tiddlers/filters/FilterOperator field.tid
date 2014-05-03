@@ -9,7 +9,7 @@ The ''field'' filter operator filters the current list according to whether a fi
 The operand is the value to match, and the suffix is used to identify the field. For example:
 
 |!Filter String |!Description |
-|`[field:modifier[JeremyRuston]]` |Returns a list of the tiddlers created by `JeremyRuston |
+|`[field:modifier[JeremyRuston]]` |Returns a list of the tiddlers created by `JeremyRuston` |
 |`[modifier[JeremyRuston]]` |Returns a list of the tiddlers created by `JeremyRuston |
 
 Note that if an unknown filter operator `[unknown[xxx]]` is encountered it is interpreted as `[field:unknown[xxx]]`.
