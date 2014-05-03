@@ -76,38 +76,8 @@ exports.startup = function() {
 	});
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
-	// Decode the hash portion of our URL
-	var target,
-		storyFilter;
-	if($tw.locationHash.charAt(1) === "!") {
-		var hash = $tw.locationHash.substr(2),
-			split = hash.indexOf(":");
-		if(split === -1) {
-			target = decodeURIComponent(hash.trim());
-		} else {
-			target = decodeURIComponent(hash.substr(0,split - 1).trim());
-			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
-		}
-	}
-	// If a target tiddler was specified add it to the history stack
-	if(target && target !== "") {
-		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-			target = target.substr(2,target.length - 4);
-		}
-		$tw.wiki.addToHistory(target);
-	}
-	// Use the story filter specified in the hash, or the default tiddlers
-	if(!storyFilter || storyFilter === "") {
-		storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);
-	}
-	var storyList = $tw.wiki.filterTiddlers(storyFilter);
-	// If the target tiddler isn't included then splice it in at the top
-	if(target && storyList.indexOf(target) === -1) {
-		storyList.unshift(target);
-	}
-	// Save the story list
-	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+	// Open startup tiddlers
+	openStartupTiddlers();
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
@@ -229,6 +199,13 @@ exports.startup = function() {
 				updateLocationHash();
 			}
 		});
+		// Listen for changes to the browser location hash
+		window.addEventListener("hashchange",function() {
+			if(window.location.hash !== $tw.locationHash) {
+				$tw.locationHash = window.location.hash;
+				openStartupTiddlers({defaultToCurrentStory: true});
+			}
+		},false)
 		// Set up the styles
 		var styleTemplateTitle = "$:/core/ui/PageStylesheet",
 			styleParser = $tw.wiki.parseTiddler(styleTemplateTitle);
@@ -277,6 +254,51 @@ exports.startup = function() {
 };
 
 /*
+Process the location hash to open the specified tiddlers. Options:
+defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
+*/
+function openStartupTiddlers(options) {
+	options = options || {};
+	// Decode the hash portion of our URL
+	var target,
+		storyFilter;
+	if($tw.locationHash.length > 1) {
+		var hash = $tw.locationHash.substr(1),
+			split = hash.indexOf(":");
+		if(split === -1) {
+			target = decodeURIComponent(hash.trim());
+		} else {
+			target = decodeURIComponent(hash.substr(0,split).trim());
+			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
+		}
+	}
+	// If a target tiddler was specified add it to the history stack
+	if(target && target !== "") {
+		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+			target = target.substr(2,target.length - 4);
+		}
+		$tw.wiki.addToHistory(target);
+	}
+	// Use the story filter specified in the hash, or the default tiddlers
+	if(!storyFilter || storyFilter === "") {
+		if(options.defaultToCurrentStory) {
+			var currStoryList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
+			storyFilter = $tw.utils.stringifyList(currStoryList);
+		} else {
+			storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);			
+		}
+	}
+	var storyList = $tw.wiki.filterTiddlers(storyFilter);
+	// If the target tiddler isn't included then splice it in at the top
+	if(target && storyList.indexOf(target) === -1) {
+		storyList.unshift(target);
+	}
+	// Save the story list
+	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+}
+
+/*
 Helper to display the default tiddlers
 */
 function displayDefaultTiddlers() {
@@ -299,7 +321,10 @@ function updateLocationHash() {
 	if(historyList.length > 0) {
 		targetTiddler = historyList[historyList.length-1].title;
 	}
-	location.hash = "#!" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
+	$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
+	if(window.location.hash !== $tw.locationHash) {
+		window.location.hash = $tw.locationHash;
+	}
 }
 
 /*
