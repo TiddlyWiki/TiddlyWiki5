@@ -1750,6 +1750,7 @@ $tw.boot.executeNextStartupTask = function() {
 		if($tw.boot.isStartupTaskEligible(task)) {
 			// Remove this task from the list
 			$tw.boot.remainingStartupModules.splice(taskIndex,1);
+console.log("Executing task",task.name);
 			// Execute it
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
 				task.startup();
@@ -1779,6 +1780,16 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 	if(platforms) {
 		for(t=0; t<platforms.length; t++) {
 			if((platforms[t] === "browser" && !$tw.browser) || (platforms[t] === "node" && !$tw.node)) {
+				return false;
+			}
+		}
+	}
+	// Check that no other outstanding tasks must be executed before this one
+	var name = taskModule.name,
+		remaining = $tw.boot.remainingStartupModules;
+	if(name) {
+		for(t=0; t<remaining.length; t++) {
+			if(remaining[t].before && remaining[t].before.indexOf(name) !== -1) {
 				return false;
 			}
 		}

@@ -10,11 +10,12 @@ The startup mechanism runs the installed startup modules at the end of the [[boo
 
 Modules with their ''module-type'' field set to `startup`:
 
-* Must expose a `startup` function
+* Must export a `startup` function
 ** For synchronous startup modules the startup function is called as `startup()`, asynchronous modules are passed a callback they must invoke on completion: `startup(callback)`
-* May expose a `name` property that is used to identify the task
-* May expose a `after` property containing an array of names of dependent tasks that must be run before this one
-* May expose a `platforms` property containing an array of names of platforms that are required in order for the startup module to be executed. The defined platforms are ''node'' and ''browser''
+* May export a `name` property that is used to identify the task
+* May export a `after` property containing an array of names of dependent tasks that must be run before this one
+* May export a `before` property containing an array of names of tasks that must be run after this one
+* May export a `platforms` property containing an array of names of platforms that are required in order for the startup module to be executed. The defined platforms are ''node'' and ''browser''
 
 ! Startup Processing
 
