@@ -220,12 +220,6 @@ exports.startup = function() {
 				param: "$:/language/Modals/SaveInstructions"
 			});
 		}
-		// Call browser startup modules
-		$tw.modules.forEachModuleOfType("browser-startup",function(title,module) {
-			if(module.startup) {
-				module.startup();
-			}
-		});
 	} else {
 		// On the server, start a commander with the command line arguments
 		commander = new $tw.Commander(

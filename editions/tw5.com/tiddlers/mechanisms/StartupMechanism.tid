@@ -14,6 +14,7 @@ Modules with their ''module-type'' field set to `startup`:
 ** For synchronous startup modules the startup function is called as `startup()`, asynchronous modules are passed a callback they must invoke on completion: `startup(callback)`
 * May expose a `name` property that is used to identify the task
 * May expose a `after` property containing an array of names of dependent tasks that must be run before this one
+* May expose a `platforms` property containing an array of names of platforms that are required in order for the startup module to be executed. The defined platforms are ''node'' and ''browser''
 
 ! Startup Processing
 

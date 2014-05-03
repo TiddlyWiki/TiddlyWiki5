@@ -1773,9 +1773,20 @@ $tw.boot.executeNextStartupTask = function() {
 };
 
 $tw.boot.isStartupTaskEligible = function(taskModule) {
+	var t;
+	// Check that the platform is correct
+	var platforms = taskModule.platforms;
+	if(platforms) {
+		for(t=0; t<platforms.length; t++) {
+			if((platforms[t] === "browser" && !$tw.browser) || (platforms[t] === "node" && !$tw.node)) {
+				return false;
+			}
+		}
+	}
+	// Check that all of the tasks that we must be performed after has been done
 	var after = taskModule.after;
 	if(after) {
-		for(var t=0; t<after.length; t++) {
+		for(t=0; t<after.length; t++) {
 			if(!$tw.boot.executedStartupModules[after[t]]) {
 				return false;
 			}

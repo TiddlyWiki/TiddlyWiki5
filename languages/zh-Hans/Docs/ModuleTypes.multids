@@ -1,7 +1,6 @@
 title: $:/language/Docs/ModuleTypes/
 
 animation: 动画模块包含可用于 RevealWidget 的动画。
-browser-startup: 仅可于浏览器中执行的启动功能函数。
 command: 可于 Node.js 执行的指令。
 config: 加入 `$tw.config` 的数据。
 filteroperator: 个别筛选器算子方法。

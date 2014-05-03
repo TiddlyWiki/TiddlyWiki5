@@ -1,7 +1,6 @@
 title: $:/language/Docs/ModuleTypes/
 
 animation: 動畫模組包含可用於 RevealWidget 的動畫。
-browser-startup: 僅可於瀏覽器中執行的啟動功能函數。
 command: 可於 Node.js 執行的指令。
 config: 加入 `$tw.config` 的資料。
 filteroperator: 個別篩選器運算元方法。

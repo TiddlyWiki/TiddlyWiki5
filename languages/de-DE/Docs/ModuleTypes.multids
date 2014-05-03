@@ -1,7 +1,6 @@
 title: $:/language/Docs/ModuleTypes/
 
 animation: Animationen, die vom RevealWidget verwendet werden. 
-browser-startup: Funktionen, die einmalig beim Browser start ausgeführt werden.
 command: Kommandozeilen Parameter, die mit node.js ausgeführt werden können.
 config: Daten, die in `$tw.config` eingefügt werden.
 filteroperator: Individuelle Filter Operator Funktionen.

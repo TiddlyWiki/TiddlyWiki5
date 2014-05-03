@@ -1,7 +1,6 @@
 title: $:/language/Docs/ModuleTypes/
 
 animation: アニメーション。通常は RevealWidget で使用されるモジュール。
-browser-startup: ブラウザから開いたときにのみ、初回に実行されるファンクションモジュール。
 command: Node.js で実行できるコマンド。
 config: `$tw.config` に格納されるデータ。
 filteroperator: 個々のフィルタ操作用メソッドモジュール。
