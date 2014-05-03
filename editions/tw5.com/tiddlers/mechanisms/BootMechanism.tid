@@ -1,6 +1,6 @@
 created: 20130825142900000
-modified: 20131214093453953
-tags: mechanism
+modified: 20140502142900000
+tags: mechanism dev
 title: BootMechanism
 type: text/vnd.tiddlywiki
 
@@ -39,3 +39,5 @@ In the browser, `core/boot.js` is packed into a template HTML file that contains
 On the server, `core/boot.js` is executed directly. It uses the `Node.js` local file API to load plugins directly from the file system in the `core/modules` directory. The code loading is performed synchronously for brevity (and because the system is in any case inherently blocked until plugins are loaded).
 
 The boot process sets up the `$tw` global variable that is used to store all the state data of the system.
+
+At the end of the boot process the StartupMechanism schedules the execution of startup modules to bring up the rest of TiddlyWiki.

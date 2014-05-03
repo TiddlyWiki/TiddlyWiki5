@@ -1,0 +1,28 @@
+created: 20140502142900000
+modified: 20140502142900000
+tags: mechanism dev
+title: StartupMechanism
+type: text/vnd.tiddlywiki
+
+The startup mechanism runs the installed startup modules at the end of the [[boot process|BootMechanism]].
+
+! Startup Modules
+
+Modules with their ''module-type'' field set to `startup`:
+
+* Must expose a `startup` function
+** For synchronous startup modules the startup function is called as `startup()`, asynchronous modules are passed a callback they must invoke on completion: `startup(callback)`
+* May expose a `name` property that is used to identify the task
+* May expose a `dependencies` property containing an array of names of dependent tasks that must be run before this one
+
+! Startup Processing
+
+The startup mechanism begins by sequentially executing the tasks that have no dependencies. It then continues executing tasks as they are unlocked by the completion of their dependencies.
+
+There is no guarantee of the execution order of tasks that share the same dependencies.
+
+! Startup Tasks
+
+The core defines the following sequence of named startup tasks:
+
+|!Task Name |!Description |

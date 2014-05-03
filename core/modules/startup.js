@@ -12,6 +12,10 @@ This is the main application logic for both the client and server
 /*global $tw: false */
 "use strict";
 
+// Export name and synchronous status
+exports.name = "startup";
+exports.synchronous = true;
+
 // Set to `true` to enable performance instrumentation
 var PERFORMANCE_INSTRUMENTATION = false;
 
@@ -322,6 +326,7 @@ function updateLocationHash() {
 		targetTiddler = historyList[historyList.length-1].title;
 	}
 	$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
+	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 	if(window.location.hash !== $tw.locationHash) {
 		window.location.hash = $tw.locationHash;
 	}

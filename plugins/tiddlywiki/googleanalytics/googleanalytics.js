@@ -12,6 +12,10 @@ Runs Google Analytics with the account number in the tiddler `$:/GoogleAnalytics
 /*global $tw: false */
 "use strict";
 
+// Export name and synchronous status
+exports.name = "google-analytics";
+exports.synchronous = true;
+
 var GOOGLE_ANALYTICS_ACCOUNT = "$:/GoogleAnalyticsAccount",
 	GOOGLE_ANALYTICS_DOMAIN = "$:/GoogleAnalyticsDomain";
 

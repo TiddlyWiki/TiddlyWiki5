@@ -1726,12 +1726,62 @@ $tw.boot.startup = function(options) {
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
 	}
-	// Run any startup modules
+	// Gather up any startup modules
+	$tw.boot.remainingStartupModules = []; // Array of startup modules
 	$tw.modules.forEachModuleOfType("startup",function(title,module) {
 		if(module.startup) {
-			module.startup();
+			$tw.boot.remainingStartupModules.push(module);
 		}
 	});
+	// Keep track of the startup tasks that have been executed
+	$tw.boot.executedStartupModules = Object.create(null);
+	// Repeatedly execute the next eligible task
+	$tw.boot.executeNextStartupTask();
+};
+
+/*
+Execute the remaining eligible startup tasks
+*/
+$tw.boot.executeNextStartupTask = function() {
+	// Find the next eligible task
+	var taskIndex = 0;
+	while(taskIndex < $tw.boot.remainingStartupModules.length) {
+		var task = $tw.boot.remainingStartupModules[taskIndex];
+		if($tw.boot.isStartupTaskEligible(task)) {
+			// Remove this task from the list
+			$tw.boot.remainingStartupModules.splice(taskIndex,1);
+			// Execute it
+			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
+				task.startup();
+				if(task.name) {
+					$tw.boot.executedStartupModules[task.name] = true;
+				}
+				return $tw.boot.executeNextStartupTask();
+			} else {
+				task.startup(function() {
+					if(task.name) {
+						$tw.boot.executedStartupModules[task.name] = true;
+					}
+					return $tw.boot.executeNextStartupTask();
+				});
+				return true;
+			}
+		}
+		taskIndex++;
+	}
+	return false;
+};
+
+$tw.boot.isStartupTaskEligible = function(taskModule) {
+	var dependencies = taskModule.dependencies;
+	if(dependencies) {
+		for(var t=0; t<dependencies.length; t++) {
+			if(!$tw.boot.executedStartupModules[dependencies[t]]) {
+				return false;
+			}
+		}
+	}
+	return true;
 };
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
