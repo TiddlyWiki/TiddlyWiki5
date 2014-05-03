@@ -14,6 +14,7 @@ This is the main application logic for both the client and server
 
 // Export name and synchronous status
 exports.name = "startup";
+exports.after = ["load-modules"];
 exports.synchronous = true;
 
 // Set to `true` to enable performance instrumentation
@@ -36,28 +37,12 @@ var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	var modules,n,m,f,commander;
-	// Load modules
-	$tw.modules.applyMethods("utils",$tw.utils);
-	if($tw.node) {
-		$tw.modules.applyMethods("utils-node",$tw.utils);
-	}
-	$tw.modules.applyMethods("global",$tw);
-	$tw.modules.applyMethods("config",$tw.config);
 	if($tw.browser) {
-		$tw.utils.getBrowserInfo($tw.browser);
+		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
 	}
 	$tw.version = $tw.utils.extractVersionInfo();
-	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
-	$tw.modules.applyMethods("tiddlermethod",$tw.Tiddler.prototype);
-	$tw.modules.applyMethods("wikimethod",$tw.Wiki.prototype);
-	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
-	$tw.macros = $tw.modules.getModulesByTypeAsHashmap("macro");
 	// Set up the performance framework
 	$tw.perf = new $tw.Performance(PERFORMANCE_INSTRUMENTATION);
-	// Set up the parsers
-	$tw.wiki.initParsers();
-	// Set up the command modules
-	$tw.Commander.initCommands();
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({

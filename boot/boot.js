@@ -1773,10 +1773,10 @@ $tw.boot.executeNextStartupTask = function() {
 };
 
 $tw.boot.isStartupTaskEligible = function(taskModule) {
-	var dependencies = taskModule.dependencies;
-	if(dependencies) {
-		for(var t=0; t<dependencies.length; t++) {
-			if(!$tw.boot.executedStartupModules[dependencies[t]]) {
+	var after = taskModule.after;
+	if(after) {
+		for(var t=0; t<after.length; t++) {
+			if(!$tw.boot.executedStartupModules[after[t]]) {
 				return false;
 			}
 		}
