@@ -133,15 +133,7 @@ title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	var titles = $tw.utils.isArray(title) ? title : [title];
-	// Add a new record to the top of the history stack
-	if(this.historyTitle) {
-		var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
-		$tw.utils.each(titles,function(title) {
-			historyList.push({title: title, fromPageRect: fromPageRect});
-		});
-		this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
-	}
+	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
 };
 
 /*

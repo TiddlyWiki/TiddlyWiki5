@@ -6,6 +6,8 @@ type: text/vnd.tiddlywiki
 
 Permalinks allow direct links to individual tiddlers within a TiddlyWiki.
 
+! Simple Permalinks
+
 The simplest form of permalink is a single target tiddler title appended to the base URL with "#!":
 
 http://tiddlywiki.com/#!HelloThere
@@ -14,13 +16,26 @@ The tiddler title can contain spaces if required:
 
 [[http://tiddlywiki.com/#!Using TiddlyWiki on Node.js]]
 
-The permalink can also specify the story list of tiddlers that should be opened alongside the target tiddler. The tiddler titles are separated by `%00`:
+Note that double square brackets are not required around the target tiddler title; however, if present they are silently removed.
 
-http://tiddlywiki.com/#!Tiddlers%00Tags%00TiddlerFields%00Tiddlers
+! Story Permalinks
 
-In this form, the first tiddler title is taken to be the target tiddler, and the remaining titles give the sequence of tiddlers in the story list.
+The permalink can also specify the story list of tiddlers that should be opened alongside the target tiddler as a [[TiddlerFilter|TiddlerFilters]]:
+
+[[http://tiddlywiki.com/#!TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
 
 If the target tiddler isn't present in the story list then it is automatically inserted at the top. This means that the following two examples both target the tiddler `Tiddlers` within the story sequence `Tiddlers`, `Tags`, `TiddlerFields`:
 
-http://tiddlywiki.com/#!Tiddlers%00Tags%00TiddlerFields
-http://tiddlywiki.com/#!Tiddlers%00Tiddlers%00Tags%00TiddlerFields
+[[http://tiddlywiki.com/#!Tiddlers:Tags TiddlerFields]]
+
+[[http://tiddlywiki.com/#!Tiddlers:Tiddlers Tags TiddlerFields]]
+
+It is also possible to specify a story filter without specifying a target tiddler for navigation:
+
+<a href="http://tiddlywiki.com/#!:[tags[task]]">~http://tiddlywiki.com/#!:[tags[task]]</a>
+
+! About URL encoding
+
+There are technical restrictions on the legal characters in an URL fragment. To allow all tiddler titles to be addressed, illegal characters are subject to a process called "URL encoding" whereby problematic characters are replaced by their numeric code. For example, the space character is replaced with `%20`.
+
+Both the target tiddler title and the story filter should be URL encoded (but not the separating colon). TiddlyWiki generates properly encoded URLs which can look quite ugly. However, in practice browsers will usually perfectly happily process arbitrary characters in URL fragments. Thus when creating permalinks manually you can choose to ignore URL encoding.

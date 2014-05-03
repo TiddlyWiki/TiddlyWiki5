@@ -1070,7 +1070,7 @@ exports.readFile = function(file,callback) {
 /*
 Check whether the specified draft tiddler has been modified
 */
-$tw.Wiki.prototype.isDraftModified = function(title) {
+exports.isDraftModified = function(title) {
   var tiddler = this.getTiddler(title);
 	if(!tiddler.isDraft()) {
 		return false;
@@ -1089,6 +1089,23 @@ $tw.Wiki.prototype.isDraftModified = function(title) {
 		}
 		return tiddler.fields[field] === origTiddler.fields[field];
 	});
+};
+
+/*
+Add a new record to the top of the history stack
+title: a title string or an array of title strings
+fromPageRect: page coordinates of the origin of the navigation
+historyTitle: title of history tiddler (defaults to $:/HistoryList)
+*/
+exports.addToHistory = function(title,fromPageRect,historyTitle) {
+	historyTitle = historyTitle || "$:/HistoryList";
+	var titles = $tw.utils.isArray(title) ? title : [title];
+	// Add a new record to the top of the history stack
+	var historyList = this.getTiddlerData(historyTitle,[]);
+	$tw.utils.each(titles,function(title) {
+		historyList.push({title: title, fromPageRect: fromPageRect});
+	});
+	this.setTiddlerData(historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
 };
 
 })();

@@ -25,6 +25,8 @@ var DEFAULT_HISTORY_TITLE = "$:/HistoryList";
 // Default tiddlers
 var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
 		
+// Favicon tiddler
+var FAVICON_TITLE = "$:/favicon.ico";
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
@@ -75,34 +77,37 @@ exports.startup = function() {
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Decode the hash portion of our URL
-	var parts = [];
+	var target,
+		storyFilter;
 	if($tw.locationHash.charAt(1) === "!") {
-		parts = decodeURIComponent($tw.locationHash.substr(2)).split("\u0000")
+		var hash = $tw.locationHash.substr(2),
+			split = hash.indexOf(":");
+		if(split === -1) {
+			target = decodeURIComponent(hash.trim());
+		} else {
+			target = decodeURIComponent(hash.substr(0,split - 1).trim());
+			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
+		}
 	}
-	if(parts[0]) {
-		// Set the history
-		var historyList = [{title: parts[0]}];
-		$tw.wiki.setTiddlerData(DEFAULT_HISTORY_TITLE, historyList, {"current-tiddler": parts[0]});
-		// Set the story
-		var story = [];
-		for(var t=1; t<parts.length; t++) {
-			if(parts[t]) {
-				story.push(parts[t]);
-			}
+	// If a target tiddler was specified add it to the history stack
+	if(target && target !== "") {
+		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+			target = target.substr(2,target.length - 4);
 		}
-		// If the story is empty use the default tiddlers
-		if(story.length === 0) {
-			story = getDefaultTiddlers();
-		}
-		// If the target tiddler isn't included then splice it in at the top
-		if(story.indexOf(parts[0]) === -1) {
-			story.unshift(parts[0]);
-		}
-		$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: story},$tw.wiki.getModificationFields());
-	} else {
-		// Display the default tiddlers if the hash portion was empty
-		displayDefaultTiddlers();
+		$tw.wiki.addToHistory(target);
 	}
+	// Use the story filter specified in the hash, or the default tiddlers
+	if(!storyFilter || storyFilter === "") {
+		storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);
+	}
+	var storyList = $tw.wiki.filterTiddlers(storyFilter);
+	// If the target tiddler isn't included then splice it in at the top
+	if(target && storyList.indexOf(target) === -1) {
+		storyList.unshift(target);
+	}
+	// Save the story list
+	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
@@ -205,18 +210,23 @@ exports.startup = function() {
 			}
 		});
 		// Set up the favicon
-		var faviconTitle = "$:/favicon.ico",
-			faviconLink = document.getElementById("faviconLink"),
+		var faviconLink = document.getElementById("faviconLink"),
 			setFavicon = function() {
-				var tiddler = $tw.wiki.getTiddler(faviconTitle);
+				var tiddler = $tw.wiki.getTiddler(FAVICON_TITLE);
 				if(tiddler) {
 					faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);
 				}
 			};
 		setFavicon();
 		$tw.wiki.addEventListener("change",function(changes) {
-			if($tw.utils.hop(changes,faviconTitle)) {
+			if($tw.utils.hop(changes,FAVICON_TITLE)) {
 				setFavicon();
+			}
+		});
+		// Set up location hash update
+		$tw.wiki.addEventListener("change",function(changes) {
+			if($tw.utils.hop(changes,DEFAULT_STORY_TITLE) || $tw.utils.hop(changes,DEFAULT_HISTORY_TITLE)) {
+				updateLocationHash();
 			}
 		});
 		// Set up the styles
@@ -266,24 +276,11 @@ exports.startup = function() {
 	}
 };
 
-
 /*
 Helper to display the default tiddlers
 */
 function displayDefaultTiddlers() {
-	// Get the default tiddlers
-	var defaultTiddlersTitle = "$:/DefaultTiddlers",
-		defaultTiddlersTiddler = $tw.wiki.getTiddler(defaultTiddlersTitle),
-		defaultTiddlers = [];
-	if(defaultTiddlersTiddler) {
-		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
-	}
-	// Initialise the story
-	var story = [];
-	for(var t=0; t<defaultTiddlers.length; t++) {
-		story[t] = defaultTiddlers[t];
-	}
-	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: story},$tw.wiki.getModificationFields());
+	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: getDefaultTiddlers()},$tw.wiki.getModificationFields());
 }
 
 function getDefaultTiddlers() {
@@ -293,6 +290,16 @@ function getDefaultTiddlers() {
 		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
 	}
 	return defaultTiddlers;
+}
+
+function updateLocationHash() {
+	var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
+		historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]);
+		var targetTiddler = "";
+	if(historyList.length > 0) {
+		targetTiddler = historyList[historyList.length-1].title;
+	}
+	location.hash = "#!" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 }
 
 /*
