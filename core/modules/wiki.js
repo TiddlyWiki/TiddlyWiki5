@@ -1077,6 +1077,9 @@ exports.isDraftModified = function(title) {
 	}
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
 		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
+	if(!origTiddler) {
+		return true;
+	}
 	if(tiddler.fields["draft.title"] !== tiddler.fields["draft.of"]) {
 		return true;
 	}
