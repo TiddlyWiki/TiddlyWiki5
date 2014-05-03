@@ -1750,7 +1750,17 @@ $tw.boot.executeNextStartupTask = function() {
 		if($tw.boot.isStartupTaskEligible(task)) {
 			// Remove this task from the list
 			$tw.boot.remainingStartupModules.splice(taskIndex,1);
-console.log("Executing task",task.name);
+var s = ["Executing task:",task.name];
+if(task.platforms) {
+	s.push("platforms:",task.platforms.join(","));
+}
+if(task.after) {
+	s.push("after:",task.after.join(","));
+}
+if(task.before) {
+	s.push("before:",task.before.join(","));
+}
+console.log(s.join(" "));
 			// Execute it
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
 				task.startup();

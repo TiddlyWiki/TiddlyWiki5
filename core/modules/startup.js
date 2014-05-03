@@ -20,23 +20,10 @@ exports.synchronous = true;
 // Set to `true` to enable performance instrumentation
 var PERFORMANCE_INSTRUMENTATION = false;
 
-// Time (in ms) that we defer refreshing changes to draft tiddlers
-var DRAFT_TIDDLER_TIMEOUT = 400;
-
-// Default story and history lists
-var DEFAULT_STORY_TITLE = "$:/StoryList";
-var DEFAULT_HISTORY_TITLE = "$:/HistoryList";
-
-// Default tiddlers
-var DEFAULT_TIDDLERS_TITLE = "$:/DefaultTiddlers";
-		
-// Favicon tiddler
-var FAVICON_TITLE = "$:/favicon.ico";
-
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
-	var modules,n,m,f,commander;
+	var modules,n,m,f;
 	if($tw.browser) {
 		$tw.browser.isIE = (/msie|trident/i.test(navigator.userAgent));
 	}
@@ -65,8 +52,6 @@ exports.startup = function() {
 	});
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
-	// Open startup tiddlers
-	openStartupTiddlers();
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
@@ -168,128 +153,13 @@ exports.startup = function() {
 				$tw.crypto.updateCryptoStateTiddler();
 			}
 		});
-		// Set up the favicon
-		var faviconLink = document.getElementById("faviconLink"),
-			setFavicon = function() {
-				var tiddler = $tw.wiki.getTiddler(FAVICON_TITLE);
-				if(tiddler) {
-					faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);
-				}
-			};
-		setFavicon();
-		$tw.wiki.addEventListener("change",function(changes) {
-			if($tw.utils.hop(changes,FAVICON_TITLE)) {
-				setFavicon();
-			}
-		});
-		// Set up location hash update
-		$tw.wiki.addEventListener("change",function(changes) {
-			if($tw.utils.hop(changes,DEFAULT_STORY_TITLE) || $tw.utils.hop(changes,DEFAULT_HISTORY_TITLE)) {
-				updateLocationHash();
-			}
-		});
-		// Listen for changes to the browser location hash
-		window.addEventListener("hashchange",function() {
-			if(window.location.hash !== $tw.locationHash) {
-				$tw.locationHash = window.location.hash;
-				openStartupTiddlers({defaultToCurrentStory: true});
-			}
-		},false)
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
 				param: "$:/language/Modals/SaveInstructions"
 			});
 		}
-	} else {
-		// On the server, start a commander with the command line arguments
-		commander = new $tw.Commander(
-			$tw.boot.argv,
-			function(err) {
-				if(err) {
-					console.log("Error: " + err);
-				}
-			},
-			$tw.wiki,
-			{output: process.stdout, error: process.stderr}
-		);
-		commander.execute();
 	}
 };
-
-/*
-Process the location hash to open the specified tiddlers. Options:
-defaultToCurrentStory: If true, the current story is retained as the default, instead of opening the default tiddlers
-*/
-function openStartupTiddlers(options) {
-	options = options || {};
-	// Decode the hash portion of our URL
-	var target,
-		storyFilter;
-	if($tw.locationHash.length > 1) {
-		var hash = $tw.locationHash.substr(1),
-			split = hash.indexOf(":");
-		if(split === -1) {
-			target = decodeURIComponent(hash.trim());
-		} else {
-			target = decodeURIComponent(hash.substr(0,split).trim());
-			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
-		}
-	}
-	// If a target tiddler was specified add it to the history stack
-	if(target && target !== "") {
-		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-			target = target.substr(2,target.length - 4);
-		}
-		$tw.wiki.addToHistory(target);
-	}
-	// Use the story filter specified in the hash, or the default tiddlers
-	if(!storyFilter || storyFilter === "") {
-		if(options.defaultToCurrentStory) {
-			var currStoryList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
-			storyFilter = $tw.utils.stringifyList(currStoryList);
-		} else {
-			storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);			
-		}
-	}
-	var storyList = $tw.wiki.filterTiddlers(storyFilter);
-	// If the target tiddler isn't included then splice it in at the top
-	if(target && storyList.indexOf(target) === -1) {
-		storyList.unshift(target);
-	}
-	// Save the story list
-	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
-}
-
-/*
-Helper to display the default tiddlers
-*/
-function displayDefaultTiddlers() {
-	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: getDefaultTiddlers()},$tw.wiki.getModificationFields());
-}
-
-function getDefaultTiddlers() {
-	var defaultTiddlersTiddler = $tw.wiki.getTiddler(DEFAULT_TIDDLERS_TITLE),
-		defaultTiddlers = [];
-	if(defaultTiddlersTiddler) {
-		defaultTiddlers = $tw.wiki.filterTiddlers(defaultTiddlersTiddler.fields.text);
-	}
-	return defaultTiddlers;
-}
-
-function updateLocationHash() {
-	var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
-		historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]);
-		var targetTiddler = "";
-	if(historyList.length > 0) {
-		targetTiddler = historyList[historyList.length-1].title;
-	}
-	$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
-	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
-	if(window.location.hash !== $tw.locationHash) {
-		window.location.hash = $tw.locationHash;
-	}
-}
 
 })();

@@ -3,7 +3,7 @@ title: $:/core/modules/startup/main-render.js
 type: application/javascript
 module-type: startup
 
-Load core modules
+Main stylesheet and page rendering
 
 \*/
 (function(){
@@ -15,8 +15,11 @@ Load core modules
 // Export name and synchronous status
 exports.name = "main-render";
 exports.platforms = ["browser"];
-exports.after = ["startup"];
+exports.after = ["setup-story"];
 exports.synchronous = true;
+
+// Time (in ms) that we defer refreshing changes to draft tiddlers
+var DRAFT_TIDDLER_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the styles
