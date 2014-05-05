@@ -1783,24 +1783,37 @@ console.log(s.join(" "));
 	return false;
 };
 
-$tw.boot.isStartupTaskEligible = function(taskModule) {
-	var t;
-	// Check that the platform is correct
+/*
+Returns true if we are running on one platforms specified in a task modules `platforms` array
+*/
+$tw.boot.doesTaskMatchPlatform = function(taskModule) {
 	var platforms = taskModule.platforms;
 	if(platforms) {
-		for(t=0; t<platforms.length; t++) {
+		for(var t=0; t<platforms.length; t++) {
 			if((platforms[t] === "browser" && !$tw.browser) || (platforms[t] === "node" && !$tw.node)) {
 				return false;
 			}
 		}
+	}
+	return true;
+};
+
+$tw.boot.isStartupTaskEligible = function(taskModule) {
+	var t;
+	// Check that the platform is correct
+	if(!$tw.boot.doesTaskMatchPlatform(taskModule)) {
+		return false;
 	}
 	// Check that no other outstanding tasks must be executed before this one
 	var name = taskModule.name,
 		remaining = $tw.boot.remainingStartupModules;
 	if(name) {
 		for(t=0; t<remaining.length; t++) {
-			if(remaining[t].before && remaining[t].before.indexOf(name) !== -1) {
-				return false;
+			var task = remaining[t];
+			if(task.before && task.before.indexOf(name) !== -1) {
+				if($tw.boot.doesTaskMatchPlatform(task)) {
+					return false;
+				}
 			}
 		}
 	}

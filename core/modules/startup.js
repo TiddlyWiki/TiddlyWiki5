@@ -119,40 +119,6 @@ exports.startup = function() {
 				downloadType: "text/plain"
 			});
 		});
-		// Listen out for login/logout/refresh events in the browser
-		$tw.rootWidget.addEventListener("tw-login",function() {
-			$tw.syncer.handleLoginEvent();
-		});
-		$tw.rootWidget.addEventListener("tw-logout",function() {
-			$tw.syncer.handleLogoutEvent();
-		});
-		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
-			$tw.syncer.handleRefreshEvent();
-		});
-		// Install the crypto event handlers
-		$tw.rootWidget.addEventListener("tw-set-password",function(event) {
-			$tw.passwordPrompt.createPrompt({
-				serviceName: "Set a new password for this TiddlyWiki",
-				noUserName: true,
-				submitText: "Set password",
-				canCancel: true,
-				callback: function(data) {
-					if(data) {
-						$tw.crypto.setPassword(data.password);
-					}
-					return true; // Get rid of the password prompt
-				}
-			});
-		});
-		$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
-			$tw.crypto.setPassword(null);
-		});
-		// Ensure that $:/isEncrypted is maintained properly
-		$tw.wiki.addEventListener("change",function(changes) {
-			if($tw.utils.hop(changes,"$:/isEncrypted")) {
-				$tw.crypto.updateCryptoStateTiddler();
-			}
-		});
 		// If we're being viewed on a data: URI then give instructions for how to save
 		if(document.location.protocol === "data:") {
 			$tw.utils.dispatchCustomEvent(document,"tw-modal",{

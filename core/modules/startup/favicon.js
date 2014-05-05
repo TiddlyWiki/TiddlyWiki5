@@ -3,7 +3,7 @@ title: $:/core/modules/startup/favicon.js
 type: application/javascript
 module-type: startup
 
-Load core modules
+Favicon handling
 
 \*/
 (function(){

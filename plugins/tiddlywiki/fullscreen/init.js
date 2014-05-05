@@ -13,7 +13,7 @@ Message handler for full screen mode
 "use strict";
 
 // Export name and synchronous status
-exports.name = "full-screen-startup";
+exports.name = "full-screen";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
