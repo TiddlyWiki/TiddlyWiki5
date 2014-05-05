@@ -3,7 +3,7 @@ title: $:/core/modules/startup/render.js
 type: application/javascript
 module-type: startup
 
-Main stylesheet and page rendering
+Title, stylesheet and page rendering
 
 \*/
 (function(){
@@ -18,13 +18,28 @@ exports.platforms = ["browser"];
 exports.after = ["story"];
 exports.synchronous = true;
 
+// Default story and history lists
+var PAGE_TITLE_TITLE = "$:/core/wiki/title"
+var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
+var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageMacros";
+
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT = 400;
 
 exports.startup = function() {
+	// Set up the title
+	var titleParser = $tw.wiki.parseTiddler(PAGE_TITLE_TITLE);
+	$tw.titleWidgetNode = $tw.wiki.makeWidget(titleParser,{document: $tw.fakeDocument});
+	$tw.titleContainer = $tw.fakeDocument.createElement("div");
+	$tw.titleWidgetNode.render($tw.titleContainer,null);
+	document.title = $tw.titleContainer.textContent;
+	$tw.wiki.addEventListener("change",function(changes) {
+		if($tw.titleWidgetNode.refresh(changes,$tw.titleContainer,null)) {
+			document.title = $tw.titleContainer.textContent;
+		}
+	});
 	// Set up the styles
-	var styleTemplateTitle = "$:/core/ui/PageStylesheet",
-		styleParser = $tw.wiki.parseTiddler(styleTemplateTitle);
+	var styleParser = $tw.wiki.parseTiddler(PAGE_STYLESHEET_TITLE);
 	$tw.styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: $tw.fakeDocument});
 	$tw.styleContainer = $tw.fakeDocument.createElement("style");
 	$tw.styleWidgetNode.render($tw.styleContainer,null);
@@ -37,8 +52,7 @@ exports.startup = function() {
 		}
 	}));
 	// Display the $:/core/ui/PageMacros tiddler to kick off the display
-	var templateTitle = "$:/core/ui/PageMacros",
-		parser = $tw.wiki.parseTiddler(templateTitle);
+	var parser = $tw.wiki.parseTiddler(PAGE_TEMPLATE_TITLE);
 	$tw.perf.report("mainRender",function() {
 		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
