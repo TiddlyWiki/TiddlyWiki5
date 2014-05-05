@@ -15,10 +15,12 @@ Startup handling
 // Export name and synchronous status
 exports.name = "syncer-browser";
 exports.platforms = ["browser"];
-exports.after = ["main-render"];
+exports.after = ["rootwidget"];
 exports.synchronous = true;
 
 exports.startup = function() {
+	// Set up the syncer object
+	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Listen out for login/logout/refresh events in the browser
 	$tw.rootWidget.addEventListener("tw-login",function() {
 		$tw.syncer.handleLoginEvent();

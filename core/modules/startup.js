@@ -20,8 +20,6 @@ exports.synchronous = true;
 // Set to `true` to enable performance instrumentation
 var PERFORMANCE_INSTRUMENTATION = false;
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.startup = function() {
 	var modules,n,m,f;
 	if($tw.browser) {
@@ -52,8 +50,6 @@ exports.startup = function() {
 	});
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
-	// Set up the syncer object
-	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
 	if($tw.browser) {
 		// Set up our beforeunload handler
@@ -71,60 +67,6 @@ exports.startup = function() {
 		});
 		// Install the animator
 		$tw.anim = new $tw.utils.Animator();
-		// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-		$tw.rootWidget = new widget.widget({
-			type: "widget",
-			children: []
-		},{
-			wiki: $tw.wiki,
-			document: document
-		});
-		// Install the modal message mechanism
-		$tw.modal = new $tw.utils.Modal($tw.wiki);
-		$tw.rootWidget.addEventListener("tw-modal",function(event) {
-			$tw.modal.display(event.param);
-		});
-		// Install the notification  mechanism
-		$tw.notifier = new $tw.utils.Notifier($tw.wiki);
-		$tw.rootWidget.addEventListener("tw-notify",function(event) {
-			$tw.notifier.display(event.param);
-		});
-		// Install the scroller
-		$tw.pageScroller = new $tw.utils.PageScroller();
-		$tw.rootWidget.addEventListener("tw-scroll",function(event) {
-			$tw.pageScroller.handleEvent(event);
-		});
-		// Listen for the tw-home message
-		$tw.rootWidget.addEventListener("tw-home",function(event) {
-			displayDefaultTiddlers();
-		});
-		// Install the save action handlers
-		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
-			$tw.syncer.saveWiki({
-				template: event.param,
-				downloadType: "text/plain"
-			});
-		});
-		$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
-			$tw.syncer.saveWiki({
-				method: "autosave",
-				template: event.param,
-				downloadType: "text/plain"
-			});
-		});
-		$tw.rootWidget.addEventListener("tw-download-file",function(event) {
-			$tw.syncer.saveWiki({
-				method: "download",
-				template: event.param,
-				downloadType: "text/plain"
-			});
-		});
-		// If we're being viewed on a data: URI then give instructions for how to save
-		if(document.location.protocol === "data:") {
-			$tw.utils.dispatchCustomEvent(document,"tw-modal",{
-				param: "$:/language/Modals/SaveInstructions"
-			});
-		}
 	}
 };
 

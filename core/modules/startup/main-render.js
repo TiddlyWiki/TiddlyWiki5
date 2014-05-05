@@ -15,7 +15,7 @@ Main stylesheet and page rendering
 // Export name and synchronous status
 exports.name = "main-render";
 exports.platforms = ["browser"];
-exports.after = ["setup-story"];
+exports.after = ["rootwidget"];
 exports.synchronous = true;
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers

@@ -15,7 +15,7 @@ Password handling
 // Export name and synchronous status
 exports.name = "password";
 exports.platforms = ["browser"];
-exports.after = ["startup"];
+exports.after = ["rootwidget"];
 exports.synchronous = true;
 
 exports.startup = function() {
