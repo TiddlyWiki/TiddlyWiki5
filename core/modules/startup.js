@@ -50,6 +50,8 @@ exports.startup = function() {
 	});
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
+	// Set up the syncer object
+	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
 	if($tw.browser) {
 		// Set up our beforeunload handler
