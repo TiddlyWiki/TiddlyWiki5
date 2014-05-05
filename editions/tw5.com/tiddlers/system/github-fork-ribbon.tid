@@ -1,4 +1,4 @@
 title: $:/editions/tw5.com/github-fork-ribbon
 tags: $:/tags/PageControls
 
-<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#FF7685;"><$link to="ReleaseHistory"><<version>></$link></div></div>
+<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#FF76C3;"><$link to="ReleaseHistory"><<version>></$link></div></div>
