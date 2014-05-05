@@ -45,6 +45,9 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	if(editInfo.value === "" && this.editPlaceholder) {
 		domNode.setAttribute("placeholder",this.editPlaceholder);
 	}
+	if(this.editSize) {
+		domNode.setAttribute("size",this.editSize);
+	}
 	// Assign classes
 	if(this.editClass) {
 		domNode.className = this.editClass;
@@ -133,6 +136,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editDefault = this.getAttribute("default");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
+	this.editSize = this.getAttribute("size");
 	this.editFocusPopup = this.getAttribute("focusPopup");
 	// Get the editor element tag and type
 	var tag,type;
