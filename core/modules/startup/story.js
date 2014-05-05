@@ -36,8 +36,9 @@ exports.startup = function() {
 		});
 		// Listen for changes to the browser location hash
 		window.addEventListener("hashchange",function() {
-			if(window.location.hash !== $tw.locationHash) {
-				$tw.locationHash = window.location.hash;
+			var hash = $tw.utils.getLocationHash();
+			if(hash !== $tw.locationHash) {
+				$tw.locationHash = hash;
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
 		},false)
@@ -104,8 +105,11 @@ function updateLocationHash() {
 	}
 	$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
-	if(window.location.hash !== $tw.locationHash) {
+// console.log("Testing",$tw.utils.getLocationHash(),$tw.locationHash)
+	if($tw.utils.getLocationHash() !== $tw.locationHash) {
 		window.location.hash = $tw.locationHash;
+console.log("Just set",$tw.locationHash,$tw.utils.getLocationHash())
+
 	}
 }
 

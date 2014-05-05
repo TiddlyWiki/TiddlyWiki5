@@ -203,6 +203,14 @@ $tw.utils.htmlDecode = function(s) {
 };
 
 /*
+Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
+*/
+$tw.utils.getLocationHash = function() {
+	var parts = window.location.href.split('#');
+	return "#" + (parts.length > 1 ? parts[1] : "");
+};
+
+/*
 Pad a string to a given length with "0"s. Length defaults to 2
 */
 $tw.utils.pad = function(value,length) {
@@ -1627,7 +1635,7 @@ $tw.boot.startup = function(options) {
 		if(location.hash === "#:safe") {
 			$tw.safeMode = true;
 		} else {
-			$tw.locationHash = location.hash;
+			$tw.locationHash = $tw.utils.getLocationHash();
 		}
 	}
 	// Initialise some more $tw properties
