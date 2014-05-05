@@ -97,12 +97,19 @@ function openStartupTiddlers(options) {
 }
 
 function updateLocationHash() {
+	// Get the story and the history stack
 	var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
 		historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]);
 		var targetTiddler = "";
+	// The target tiddler is the one at the top of the stack
 	if(historyList.length > 0) {
 		targetTiddler = historyList[historyList.length-1].title;
 	}
+	// Blank the target tiddler if it isn't present in the story
+	if(storyList.indexOf(targetTiddler) === -1) {
+		targetTiddler = "";
+	}
+	// Assemble the location hash
 	$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 	if($tw.utils.getLocationHash() !== $tw.locationHash) {
