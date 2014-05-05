@@ -15,16 +15,16 @@ Modules with their ''module-type'' field set to `startup`:
 * May export a `name` property that is used to identify the task
 * May export a `after` property containing an array of names of dependent tasks that must be run before this one
 * May export a `before` property containing an array of names of tasks that must be run after this one
-* May export a `platforms` property containing an array of names of platforms that are required in order for the startup module to be executed. The defined platforms are ''node'' and ''browser''
+* May export a `platforms` property containing an array of names of platforms that are required in order for the startup module to be executed. The defined platforms are ''node'' and ''browser''. If the `platforms` property is not provided it defaults to `["node","browser"]`
 
 ! Startup Processing
 
-The startup mechanism begins by sequentially executing the tasks that have no dependencies. It then continues executing tasks as they are unlocked by the completion of their dependencies.
+Startup modules are executed in sequence according to their declared dependencies.
 
 There is no guarantee of the execution order of tasks that share the same dependencies.
 
-! Startup Tasks
+! Startup Modules
 
-The core defines the following sequence of named startup tasks:
+The core defines the following startup modules:
 
-|!Task Name |!Description |
+{{Startup Modules.svg}}
