@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/startup/process-commands.js
+title: $:/core/modules/startup/commands.js
 type: application/javascript
 module-type: startup
 
@@ -13,9 +13,9 @@ Command processing
 "use strict";
 
 // Export name and synchronous status
-exports.name = "process-commands";
+exports.name = "commands";
 exports.platforms = ["node"];
-exports.after = ["setup-story"];
+exports.after = ["story"];
 exports.synchronous = false;
 
 exports.startup = function(callback) {

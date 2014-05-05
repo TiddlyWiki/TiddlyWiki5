@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/startup/setup-story.js
+title: $:/core/modules/startup/story.js
 type: application/javascript
 module-type: startup
 
@@ -13,7 +13,7 @@ Load core modules
 "use strict";
 
 // Export name and synchronous status
-exports.name = "setup-story";
+exports.name = "story";
 exports.after = ["startup"];
 exports.synchronous = true;
 
@@ -41,6 +41,12 @@ exports.startup = function() {
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
 		},false)
+		// Listen for the tw-home message
+		$tw.rootWidget.addEventListener("tw-home",function(event) {
+			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
+				storyList = $tw.wiki.filterTiddlers(storyFilter);
+			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+		});
 	}
 };
 
@@ -77,7 +83,7 @@ function openStartupTiddlers(options) {
 			var currStoryList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
 			storyFilter = $tw.utils.stringifyList(currStoryList);
 		} else {
-			storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);			
+			storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);
 		}
 	}
 	var storyList = $tw.wiki.filterTiddlers(storyFilter);

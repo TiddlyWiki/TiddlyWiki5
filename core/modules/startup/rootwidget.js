@@ -3,7 +3,7 @@ title: $:/core/modules/startup/rootwidget.js
 type: application/javascript
 module-type: startup
 
-Setup the root widget
+Setup the root widget and the core root widget handlers
 
 \*/
 (function(){
@@ -15,7 +15,7 @@ Setup the root widget
 // Export name and synchronous status
 exports.name = "rootwidget";
 exports.platforms = ["browser"];
-exports.after = ["setup-story"];
+exports.before = ["story"];
 exports.synchronous = true;
 
 var widget = require("$:/core/modules/widgets/widget.js");
@@ -43,10 +43,6 @@ exports.startup = function() {
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tw-scroll",function(event) {
 		$tw.pageScroller.handleEvent(event);
-	});
-	// Listen for the tw-home message
-	$tw.rootWidget.addEventListener("tw-home",function(event) {
-		displayDefaultTiddlers();
 	});
 	// Install the save action handlers
 	$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {

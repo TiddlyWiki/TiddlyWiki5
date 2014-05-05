@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/startup/main-render.js
+title: $:/core/modules/startup/render.js
 type: application/javascript
 module-type: startup
 
@@ -13,9 +13,9 @@ Main stylesheet and page rendering
 "use strict";
 
 // Export name and synchronous status
-exports.name = "main-render";
+exports.name = "render";
 exports.platforms = ["browser"];
-exports.after = ["rootwidget"];
+exports.after = ["story"];
 exports.synchronous = true;
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
