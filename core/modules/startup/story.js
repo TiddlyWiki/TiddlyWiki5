@@ -113,7 +113,8 @@ function updateLocationHash() {
 	$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 	// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 	if($tw.utils.getLocationHash() !== $tw.locationHash) {
-		window.location.hash = $tw.locationHash;
+		// We use replace so that browser history isn't affected
+		window.location.replace(window.location.toString().split("#")[0] + $tw.locationHash);
 	}
 }
 
