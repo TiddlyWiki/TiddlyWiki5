@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140419081726794
+modified: 20140505221726794
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -33,7 +33,6 @@ The following additional features are planned or under consideration for impleme
 ** Rich link tooltips, incorporating a preview
 ** Keyboard shortcuts
 ** Keyboard snippet expansion in the text editor
-** Integration with the browser back and forwards buttons
 ** List editor with drag and drop
 ** Selective/weighted searching by title, body and fields
 ** Maths notation
