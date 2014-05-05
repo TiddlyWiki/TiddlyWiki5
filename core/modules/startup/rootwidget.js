@@ -15,6 +15,7 @@ Setup the root widget and the core root widget handlers
 // Export name and synchronous status
 exports.name = "rootwidget";
 exports.platforms = ["browser"];
+exports.after = ["load-modules"];
 exports.before = ["story"];
 exports.synchronous = true;
 
