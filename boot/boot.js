@@ -273,7 +273,7 @@ $tw.utils.parseStringArray = function(value) {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(results.indexOf(item) === -1) {
+				if(item !== undefined && results.indexOf(item) === -1) {
 					results.push(item);
 				}
 			}
