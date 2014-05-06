@@ -10,8 +10,9 @@ For example:
 ```
 {
   "require": [
-      "$:/plugins/tiddlywiki/codemirror/addon/dialog.js",
-      "$:/plugins/tiddlywiki/codemirror/addon/searchcursor.js",
+      "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
+      "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
+      "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
       "$:/plugins/tiddlywiki/codemirror/keymap/vim.js",
       "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js"
   ],
