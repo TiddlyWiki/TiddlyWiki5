@@ -8,9 +8,7 @@ Wiki text inline rule for embedding images. For example:
 ```
 [img[http://tiddlywiki.com/fractalveg.jpg]]
 [img width=23 height=24 [http://tiddlywiki.com/fractalveg.jpg]]
-[img 23x24 [http://tiddlywiki.com/fractalveg.jpg]]
 [img width={{!!width}} height={{!!height}} [http://tiddlywiki.com/fractalveg.jpg]]
-[img {{!!width}}x{{!!height}} [http://tiddlywiki.com/fractalveg.jpg]]
 [img[Description of image|http://tiddlywiki.com/fractalveg.jpg]]
 [img[TiddlerTitle]]
 [img[Description of image|TiddlerTitle]]
