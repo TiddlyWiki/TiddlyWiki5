@@ -1,5 +1,6 @@
 title: $:/language/
 
+BinaryWarning/Prompt: 此条目包含二进制数据
 ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全相容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
 CloseAll/Button: 全部关闭
