@@ -266,7 +266,7 @@ $tw.utils.stringifyList = function(value) {
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
 $tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
-		var memberRegExp = /(?:^|\s)(?:\[\[(.*?)\]\])(?=\s|$)|(\S+)/mg,
+		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
 			results = [],
 			match;
 		do {
