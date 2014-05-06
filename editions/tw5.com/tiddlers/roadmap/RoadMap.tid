@@ -23,7 +23,7 @@ The following additional features are planned or under consideration for impleme
 ** Tiddler object format (to provide true polymorphism of field values)
 * Perfecting WikiText
 ** Global macros
-** ~~`[img[url]]` for remote image embedding~~, and `[ext[url]]` for explicit external links
+** ~~`[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links~~
 ** Further ~WikiText features
 * Productivity features
 ** Import wizard allowing individual tiddlers to be selected for import
