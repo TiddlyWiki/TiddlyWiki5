@@ -59,6 +59,10 @@ EditTextWidget.prototype.postRender = function() {
 			lineWrapping: true,
 			lineNumbers: true
 		};
+	var tid = $tw.wiki.getTiddler(this.editTitle);
+	if(tid && tid.fields.type) {
+		cm_opts.mode = tid.fields.type
+	}
 
 	if($tw.browser && window.CodeMirror && this.editTag === "textarea") {
 		if(EditTextWidget.configuration) {
