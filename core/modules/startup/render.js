@@ -28,8 +28,7 @@ var DRAFT_TIDDLER_TIMEOUT = 400;
 
 exports.startup = function() {
 	// Set up the title
-	var titleParser = $tw.wiki.parseTiddler(PAGE_TITLE_TITLE);
-	$tw.titleWidgetNode = $tw.wiki.makeWidget(titleParser,{document: $tw.fakeDocument});
+	$tw.titleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TITLE_TITLE,{document: $tw.fakeDocument, parseAsInline: true});
 	$tw.titleContainer = $tw.fakeDocument.createElement("div");
 	$tw.titleWidgetNode.render($tw.titleContainer,null);
 	document.title = $tw.titleContainer.textContent;
@@ -39,8 +38,7 @@ exports.startup = function() {
 		}
 	});
 	// Set up the styles
-	var styleParser = $tw.wiki.parseTiddler(PAGE_STYLESHEET_TITLE);
-	$tw.styleWidgetNode = $tw.wiki.makeWidget(styleParser,{document: $tw.fakeDocument});
+	$tw.styleWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_STYLESHEET_TITLE,{document: $tw.fakeDocument});
 	$tw.styleContainer = $tw.fakeDocument.createElement("style");
 	$tw.styleWidgetNode.render($tw.styleContainer,null);
 	$tw.styleElement = document.createElement("style");
@@ -52,9 +50,8 @@ exports.startup = function() {
 		}
 	}));
 	// Display the $:/core/ui/PageMacros tiddler to kick off the display
-	var parser = $tw.wiki.parseTiddler(PAGE_TEMPLATE_TITLE);
 	$tw.perf.report("mainRender",function() {
-		$tw.pageWidgetNode = $tw.wiki.makeWidget(parser,{document: document, parentWidget: $tw.rootWidget});
+		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
 		$tw.utils.addClass($tw.pageContainer,"tw-page-container-wrapper");
 		document.body.insertBefore($tw.pageContainer,document.body.firstChild);

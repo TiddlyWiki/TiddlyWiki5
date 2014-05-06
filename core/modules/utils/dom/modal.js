@@ -80,8 +80,7 @@ Modal.prototype.display = function(title,options) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
 	// Render the body of the message
-	var bodyParser = this.wiki.parseTiddler(title),
-		bodyWidgetNode = this.wiki.makeWidget(bodyParser,{parentWidget: $tw.rootWidget, document: document});
+	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document});
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyWidgetNode.refresh(changes,modalBody,null);

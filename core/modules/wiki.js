@@ -859,6 +859,25 @@ exports.makeWidget = function(parser,options) {
 };
 
 /*
+Make a widget tree for transclusion
+title: target tiddler title
+options: as for wiki.makeWidget() (including parseAsInline)
+*/
+exports.makeTranscludeWidget = function(title,options) {
+	options = options || {};
+	var parseTree = {tree: [{
+		type: "transclude",
+		attributes: {
+			tiddler: {
+				name: "tiddler",
+				type: "string",
+				value: title}},
+		isBlock: !options.parseAsInline}
+	]};
+	return $tw.wiki.makeWidget(parseTree,options);
+};
+
+/*
 Parse text in a specified format and render it into another format
 	outputType: content type for the output
 	textType: content type of the input text
