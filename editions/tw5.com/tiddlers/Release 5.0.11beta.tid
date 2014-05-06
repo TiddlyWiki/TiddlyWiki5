@@ -18,6 +18,7 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 
 !! Usability Improvements
 
+* Many performance optimisations, particularly for filter operations
 * Added support for PermaLinks
 * Added support for WikiLinks in Markdown via `[link text](#TiddlerTitle)`
 * [[Replaced|https://github.com/Jermolene/TiddlyWiki5/issues/580]] hamburger menu icon with double chevron icon
@@ -26,11 +27,14 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/61c3f8a5ba3c815d623c06f6a97d9c00a31a4157]] WikiText tiddlers from the sidebar "Types" tab
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a90339d1e573ec82dba1caeaead0f71717618a80]] various warnings when editing shadow tiddlers
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/0ac4c2b554f045c6bd2dc6ea5daa0d2f0397d04c]] digits in field names
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a4294b55f0a217d019a6e4cbb62f6a8a19668928]] warning banner when attempting to edit binary tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b84c663215cf7877fff960748af4b2849ae0dbb3]] automatic refreshing of the browser window title from $:/core/wiki/title
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f7e50e0950c5bf10d94d926576011893418b25f1]] [[BuildCommand]], [[OutputCommand]] and [[ClearPasswordCommand]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/570cad1c7f90e685961130918f09a7f9b2951f8c]] new [[FilterOperator: get]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f7e50e0950c5bf10d94d926576011893418b25f1]] [[BuildCommand]], [[OutputCommand]] and [[ClearPasswordCommand]]
+* Added new extensible StartupMechanism for orchestrating startup tasks
 
 !! Bug Fixes
 
