@@ -19,7 +19,7 @@ exports.synchronous = true;
 exports.startup = function() {
 	// Load modules
 	$tw.modules.applyMethods("utils",$tw.utils);
-	if($tw.node) {
+	if($tw.node && !$tw.browser) {
 		$tw.modules.applyMethods("utils-node",$tw.utils);
 	}
 	$tw.modules.applyMethods("global",$tw);

@@ -131,7 +131,7 @@ $tw.utils.error = function(err) {
 		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
 	// Log the error to the console
 	console.error(err);
-	if($tw.browser) {
+	if($tw.browser && !$tw.node) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
@@ -146,7 +146,7 @@ $tw.utils.error = function(err) {
 			return false;
 		},true);
 		return null;
-	} else {
+	} else if(!$tw.browser) {
 		// Exit if we're under node.js
 		process.exit(1);
 	}
@@ -155,7 +155,7 @@ $tw.utils.error = function(err) {
 /*
 Use our custom error handler if we're in the browser
 */
-if($tw.browser) {
+if($tw.browser && !$tw.node) {
 	window.onerror = function(errorMsg,url,lineNumber) {
 		$tw.utils.error(errorMsg);
 		return false;
@@ -1222,7 +1222,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 
 /////////////////////////// Browser definitions
 
-if($tw.browser) {
+if($tw.browser && !$tw.node) {
 
 /*
 Decrypt any tiddlers stored within the element with the ID "encryptedArea". The function is asynchronous to allow the user to be prompted for a password
@@ -1341,12 +1341,9 @@ $tw.loadTiddlersBrowser = function() {
 	}
 };
 
-// End of if($tw.browser)
-}
+} else {
 
 /////////////////////////// Server definitions
-
-if(!$tw.browser) {
 
 /*
 Get any encrypted tiddlers
@@ -1356,7 +1353,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	callback();
 };
 
-}
+} // End of if($tw.browser && !$tw.node)
 
 /////////////////////////// Node definitions
 
@@ -1631,7 +1628,7 @@ $tw.boot.startup = function(options) {
 	options = options || {};
 	// Get the URL hash and check for safe mode
 	$tw.locationHash = "#";
-	if($tw.browser) {
+	if($tw.browser && !$tw.node) {
 		if(location.hash === "#:safe") {
 			$tw.safeMode = true;
 		} else {
@@ -1843,14 +1840,14 @@ $tw.boot.boot = function() {
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
 	// Initialise password prompter
-	if($tw.browser) {
+	if($tw.browser && !$tw.node) {
 		$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
 	}
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
 		$tw.boot.startup({
-			readBrowserTiddlers: !!$tw.browser
+			readBrowserTiddlers: !!($tw.browser && !$tw.node)
 		});
 	});
 };
