@@ -172,11 +172,12 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
+	var self = this;
 	function isUnmodifiedShadow(title) {
 		// jshint eqnull:true
-		var tiddler = $tw.wiki.getTiddler(title);
+		var tiddler = self.wiki.getTiddler(title);
 		return (
-			$tw.wiki.isShadowTiddler(title) &&
+			self.wiki.isShadowTiddler(title) &&
 			tiddler.fields.modified == null
 		);
 	}

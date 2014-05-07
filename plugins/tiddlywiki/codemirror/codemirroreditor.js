@@ -59,7 +59,7 @@ EditTextWidget.prototype.postRender = function() {
 			lineWrapping: true,
 			lineNumbers: true
 		},
-		tid = $tw.wiki.getTiddler(this.editTitle);
+		tid = this.wiki.getTiddler(this.editTitle);
 	if(tid && tid.fields.type) {
 		cm_opts.mode = tid.fields.type
 	};
