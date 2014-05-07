@@ -58,7 +58,12 @@ EditTextWidget.prototype.postRender = function() {
 		cm, config, cv, cm_opts = {
 			lineWrapping: true,
 			lineNumbers: true
-		};
+		},
+		tid = $tw.wiki.getTiddler(this.editTitle);
+	if(tid && tid.fields.type) {
+		cm_opts.mode = tid.fields.type
+	};
+
 	if($tw.browser && window.CodeMirror && this.editTag === "textarea") {
 		if(EditTextWidget.configuration) {
 			for (cv in EditTextWidget.configuration) { cm_opts[cv] = EditTextWidget.configuration[cv]; }
