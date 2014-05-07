@@ -675,6 +675,9 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = _exports;
 				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				if(sandbox.module.exports) {
+					moduleInfo.exports = sandbox.module.exports; //more codemirror workaround
+				}
 			} else { // Object
 				moduleInfo.exports = moduleInfo.definition;
 			}
