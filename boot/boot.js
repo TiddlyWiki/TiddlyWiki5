@@ -33,7 +33,6 @@ if(!$tw) {
 }
 
 $tw.utils = $tw.utils || Object.create(null);
-$tw.boot = $tw.boot || Object.create(null);
 
 /////////////////////////// Standard node.js libraries
 
@@ -155,7 +154,7 @@ $tw.utils.error = function(err) {
 /*
 Use our custom error handler if we're in the browser
 */
-if($tw.browser && !$tw.node) {
+if($tw.boot.tasks.trapErrors) {
 	window.onerror = function(errorMsg,url,lineNumber) {
 		$tw.utils.error(errorMsg);
 		return false;
@@ -309,7 +308,6 @@ name `.` refers to the current directory
 */
 $tw.utils.resolvePath = function(sourcepath,rootpath) {
 	// If the source path starts with ./ or ../ then it is relative to the root
-	
 	if(sourcepath.substr(0,2) === "./" || sourcepath.substr(0,3) === "../" ) {
 		var src = sourcepath.split("/"),
 			root = rootpath.split("/");
@@ -1621,8 +1619,7 @@ $tw.loadTiddlersNode = function() {
 /////////////////////////// Main startup function called once tiddlers have been decrypted
 
 /*
-Startup TiddlyWiki. Options are:
-readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing within; if not, tiddlers are read from the file system with Node.js APIs
+Startup TiddlyWiki
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
@@ -1657,7 +1654,7 @@ $tw.boot.startup = function(options) {
 			contentTypeInfo: Object.create(null) // Map type to {encoding:,extension:}
 		}
 	});
-	if(!options.readBrowserTiddlers) {
+	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
 		$tw.boot.files = Object.create(null);
 		// System paths and filenames
@@ -1710,7 +1707,7 @@ $tw.boot.startup = function(options) {
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Load tiddlers
-	if(options.readBrowserTiddlers) {
+	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
 	} else {
 		$tw.loadTiddlersNode();
@@ -1740,6 +1737,7 @@ $tw.boot.startup = function(options) {
 	});
 	// Keep track of the startup tasks that have been executed
 	$tw.boot.executedStartupModules = Object.create(null);
+	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask();
 };
@@ -1809,14 +1807,18 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 	if(!$tw.boot.doesTaskMatchPlatform(taskModule)) {
 		return false;
 	}
-	// Check that no other outstanding tasks must be executed before this one
 	var name = taskModule.name,
 		remaining = $tw.boot.remainingStartupModules;
 	if(name) {
+		// Fail if this module is disabled
+		if($tw.boot.disabledStartupModules.indexOf(name) !== -1) {
+			return false;
+		}
+		// Check that no other outstanding tasks must be executed before this one
 		for(t=0; t<remaining.length; t++) {
 			var task = remaining[t];
 			if(task.before && task.before.indexOf(name) !== -1) {
-				if($tw.boot.doesTaskMatchPlatform(task)) {
+				if($tw.boot.doesTaskMatchPlatform(task) || (task.name && $tw.boot.disabledStartupModules.indexOf(name) !== -1)) {
 					return false;
 				}
 			}
@@ -1846,9 +1848,7 @@ $tw.boot.boot = function() {
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup({
-			readBrowserTiddlers: !!($tw.browser && !$tw.node)
-		});
+		$tw.boot.startup();
 	});
 };
 
