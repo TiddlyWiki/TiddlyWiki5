@@ -89,17 +89,19 @@ defaultValue: default value if the variable is not defined
 */
 Widget.prototype.getVariable = function(name,options) {
 	options = options || {};
-	var actualParams = options.params || [];
-	// If the variable doesn't exist then look for a macro module
-	if(!(name in this.variables)) {
-		return this.evaluateMacroModule(name,actualParams,options.defaultValue);
+	var actualParams = options.params || [],
+		parentWidget = this.parentWidget;
+	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
+	if(parentWidget && name in parentWidget.variables) {
+		var variable = parentWidget.variables[name],
+			value = variable.value || options.defaultValue;
+		// Substitute any parameters specified in the definition
+		value = this.substituteVariableParameters(value,variable.params,actualParams);
+		value = this.substituteVariableReferences(value);
+		return value;
 	}
-	var variable = this.variables[name],
-		value = variable.value || "";
-	// Substitute any parameters specified in the definition
-	value = this.substituteVariableParameters(value,variable.params,actualParams);
-	value = this.substituteVariableReferences(value);
-	return value;
+	// If the variable doesn't exist in the parent widget then look for a macro module
+	return this.evaluateMacroModule(name,actualParams,options.defaultValue);
 };
 
 Widget.prototype.substituteVariableParameters = function(text,formalParams,actualParams) {
