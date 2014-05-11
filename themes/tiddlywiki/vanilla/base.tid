@@ -959,13 +959,23 @@ canvas.tw-edit-bitmapeditor  {
 ** Tabs
 */
 
-.tw-tab-set {
+.tw-tab-set.tw-vertical {
+	white-space: nowrap;
 }
 
 .tw-tab-buttons {
 	font-size: 0.85em;
 	padding-top: 1em;
 	margin-bottom: -1px;
+}
+
+.tw-tab-buttons.tw-vertical  {
+	display: inline-block;
+	padding-top: inherit;
+	vertical-align: top;
+	text-align: right;
+	margin-bottom: inherit;
+	margin-right: -1px;
 }
 
 .tw-tab-buttons button.tw-tab-selected {
@@ -978,9 +988,6 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: <<colour tab-foreground>>;
-	padding: 2px 4px 4px 4px;
-	margin-left: 2px;
-	margin-right: 2px;
 	font-weight: 300;
 	border: none;
 	background: inherit;
@@ -990,16 +997,40 @@ canvas.tw-edit-bitmapeditor  {
 	border-right: 1px solid <<colour tab-border>>;
 }
 
+.tw-tab-buttons.tw-vertical button {
+	display: block;
+	width: 100%;
+	margin-top: 3px;
+	text-align: right;
+	background-color: <<colour tab-background>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+	border-right: none;
+}
+
+.tw-tab-buttons.tw-vertical button.tw-tab-selected {
+	background-color: <<colour tab-background-selected>>;
+	border-right: 1px solid <<colour tab-background-selected>>;
+}
+
 .tw-tab-divider {
 	border-top: 1px solid <<colour tab-divider>>;
+}
+
+.tw-tab-divider.tw-vertical  {
+	display: none;
 }
 
 .tw-tab-content {
 	padding-top: 14px;
 }
 
-.tw-sidebar-lists .tw-tab-buttons {
-	padding-top: 15px;	
+.tw-tab-content.tw-vertical  {
+	white-space: normal;
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 14px;
+	border-left: 1px solid <<colour tab-border>>;
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
@@ -1022,47 +1053,13 @@ canvas.tw-edit-bitmapeditor  {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tw-more-sidebar {
-	white-space: nowrap;
-}
-
-@media (min-width: 770px) {
-	.tw-more-sidebar {
-		margin-left: -14px;
-	}
-}
-
-.tw-more-sidebar .tw-tab-buttons {
-	display: inline-block;
-	vertical-align: top;
-	text-align: right;
-	padding-top: 0;
-	padding-left: 0;
-}
-
-.tw-more-sidebar .tw-tab-buttons button {
-	display: block;
-	width: 100%;
-	text-align: right;
-}
-
-.tw-sidebar-lists .tw-more-sidebar .tw-tab-divider {
-	display: none;
-}
-
-.tw-more-sidebar .tw-tab-content {
-	display: inline-block;
-	vertical-align: top;
-	padding-top: 0;
-	padding-left: 14px;
-}
-
 .tw-more-sidebar .tw-tab-buttons button {
 	background-color: <<colour sidebar-tab-background>>;
 	border-top: none;
 	border-left: none;
 	border-bottom: none;
 	border-right: 1px solid #ccc;
+	margin-bottom: inherit;
 }
 
 .tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {

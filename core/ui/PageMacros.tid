@@ -8,8 +8,9 @@ title: $:/core/ui/PageMacros
 <<colour $name$>>
 \end
 
-\define tabs(tabsList,default,state:"$:/state/tab")
-<div class="tw-tab-buttons">
+\define tabs(tabsList,default,state:"$:/state/tab",class)
+<div class="tw-tab-set $class$">
+<div class="tw-tab-buttons $class$">
 	<$list filter="$tabsList$" variable="currentTab">
 		<$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tw-tab-selected">
 			<$transclude tiddler=<<currentTab>> field="caption">
@@ -17,14 +18,13 @@ title: $:/core/ui/PageMacros
 			</$transclude>
 		</$button>
 	</$list>
-</div>
-<div class="tw-tab-divider"/>
-<div class="tw-tab-content">
+</div><div class="tw-tab-divider $class$"/><div class="tw-tab-content $class$">
 	<$list filter="$tabsList$" variable="currentTab">
 		<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
 			<$transclude tiddler=<<currentTab>> mode="block"/>
 		</$reveal>
 	</$list>
+</div>
 </div>
 \end
 
