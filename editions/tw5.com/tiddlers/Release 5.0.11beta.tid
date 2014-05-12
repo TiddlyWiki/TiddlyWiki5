@@ -33,11 +33,17 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 
 !! Hackability Improvements
 
+* Improved vertical layouts of TabsMacro
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e83759e86d2a9e05e4b85dae50925fe988f8e239]] new filter operators [[before|FilterOperator: before]] and [[afterFilterOperator: before]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/570cad1c7f90e685961130918f09a7f9b2951f8c]] new [[FilterOperator: get]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f7e50e0950c5bf10d94d926576011893418b25f1]] [[BuildCommand]], [[OutputCommand]] and [[ClearPasswordCommand]]
 * Added new extensible StartupMechanism for orchestrating startup tasks
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/711b76307c95d0026f79f584e85ae3d4b7289d15]] to new version of CodeMirror
+* Added https://github.com/Jermolene/TiddlyWiki5NodeWebkit, a demo of using TiddlyWiki as a library in a node-webkit application
 
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc60ad1428dcf99a7ea0787e43e3b37f5a02fb98]] issue with hovering of the topbar icons in Firefox
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e548dd35af2d3195f82899096d4a4080362a1ff0]] problem with dragging and dropping within a text edit control
+
 
