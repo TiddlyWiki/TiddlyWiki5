@@ -1,0 +1,20 @@
+created: 20140512103123179
+modified: 20140512103123179
+tags: filters
+title: FilterOperator: after
+type: text/vnd.tiddlywiki
+
+The ''after'' filter operator returns the tiddler from the current list that is after the tiddler named in the operand.
+
+The following examples assume a tiddler called `MyList` with a `list` field containing:
+
+```
+one two three four five
+```
+
+|!Filter String |!Description |
+|`[list[MyList]after[two]]` |Returns `three` |
+|`[list[MyList]after[five]]` |Returns an empty list |
+|`[list[MyList]after{!!title}]` |Returns `five` if the current tiddler is `four` |
+
+See also [[FilterOperator: before]], [[FilterOperator: previous]] and [[FilterOperator: next]].
