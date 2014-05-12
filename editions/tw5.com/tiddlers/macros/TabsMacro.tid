@@ -26,4 +26,4 @@ Here is an example of the tabs macro:
 
 <<tabs "Docs WikiText Features RoadMap" "WikiText" "$:/state/tab1">>
 
-<<tabs "[tag[tips]]" "GoogleChromeTips" "$:/state/tab1" "tw-vertical">>
+<<tabs "[tag[tips]]" "GoogleChromeTips" "$:/state/tab2" "tw-vertical">>

@@ -960,7 +960,7 @@ canvas.tw-edit-bitmapeditor  {
 */
 
 .tw-tab-set.tw-vertical {
-	white-space: nowrap;
+	display: flex;
 }
 
 .tw-tab-buttons {
@@ -970,12 +970,15 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-buttons.tw-vertical  {
-	display: inline-block;
-	padding-top: inherit;
+	display: block;
+	padding-top: 14px;
+	padding-top: 14px;
 	vertical-align: top;
 	text-align: right;
 	margin-bottom: inherit;
 	margin-right: -1px;
+	max-width: 33%;
+	flex: 0 0 auto;
 }
 
 .tw-tab-buttons button.tw-tab-selected {
@@ -1026,11 +1029,12 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-content.tw-vertical  {
-	white-space: normal;
 	display: inline-block;
 	vertical-align: top;
+	padding-top: 0;
 	padding-left: 14px;
 	border-left: 1px solid <<colour tab-border>>;
+	flex: 0 0 70%;
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
