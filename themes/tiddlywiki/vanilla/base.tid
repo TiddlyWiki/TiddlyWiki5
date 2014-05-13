@@ -991,6 +991,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: <<colour tab-foreground>>;
+	padding: 2px 4px 4px 4px;
 	font-weight: 300;
 	border: none;
 	background: inherit;
