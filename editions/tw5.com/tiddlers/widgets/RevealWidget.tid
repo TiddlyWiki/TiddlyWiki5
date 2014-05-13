@@ -33,8 +33,7 @@ Retaining the content when hidden can give poor performance since the hidden con
 
 Here's a simple example of showing and hiding content with buttons:
 
-```
-<$button set="$:/SampleRevealState" setTo="show">Show me</$button>
+<<wikitext-example-without-html '<$button set="$:/SampleRevealState" setTo="show">Show me</$button>
 <$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
 
 <$reveal type="match" state="$:/SampleRevealState" text="show">
@@ -42,27 +41,31 @@ Here's a simple example of showing and hiding content with buttons:
 ! This is the revealed content
 And this is some text
 
-</$reveal>
-```
+</$reveal>'>>
 
-It renders as:
+!! "Slider"
+
+A slider appears as a single button that can be used to toggle the display of the contained content.
+
+<<wikitext-example-without-html '<$reveal type="nomatch" state="$:/SampleRevealState" text="show">
 
 <$button set="$:/SampleRevealState" setTo="show">Show me</$button>
-<$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
 
+</$reveal>
 <$reveal type="match" state="$:/SampleRevealState" text="show">
+
+<$button set="$:/SampleRevealState" setTo="hide">Hide me</$button>
 
 ! This is the revealed content
 And this is some text
 
-</$reveal>
+</$reveal>'>>
 
 !! Popup
 
 Here is a simple example of a popup built with the RevealWidget:
 
-```
-<$button popup="$:/SamplePopupState">Pop me up!</$button>
+<<wikitext-example-without-html '<$button popup="$:/SamplePopupState">Pop me up!</$button>
 
 <$reveal type="popup" state="$:/SamplePopupState">
 <div class="tw-drop-down">
@@ -71,18 +74,4 @@ Here is a simple example of a popup built with the RevealWidget:
 And this is some text
 
 </div>
-</$reveal>
-```
-
-It renders as:
-
-<$button popup="$:/SamplePopupState">Pop me up!</$button>
-
-<$reveal type="popup" state="$:/SamplePopupState">
-<div class="tw-drop-down">
-
-! This is the popup
-And this is some text
-
-</div>
-</$reveal>
+</$reveal>'>>
