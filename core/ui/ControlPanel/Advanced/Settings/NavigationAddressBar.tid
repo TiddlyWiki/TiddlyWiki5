@@ -4,7 +4,6 @@ caption: {{$:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/Capti
 
 \define lingo-base() $:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/
 <<lingo Hint>>
-<div style="position:relative;">
 <$button popup=<<qualify "$:/state/navaddressbarpopup">> class="btn-invisible btn-dropdown">
 <$view tiddler="$:/config/Navigation/UpdateAddressBar" field="text"/>:
 <$reveal state="$:/config/Navigation/UpdateAddressBar" type="match" text="no">
@@ -18,10 +17,9 @@ caption: {{$:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/Capti
 </$reveal>
 {{$:/core/images/down-arrow}}
 </$button>
-<div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/navaddressbarpopup">> type="popup" position="below" animate="yes" default="">
 <$linkcatcher to="$:/config/Navigation/UpdateAddressBar">
-<div class="tw-block-dropdown tw-edit-type-dropdown">
+<div class="tw-drop-down tw-edit-type-dropdown">
 <$list filter="no permalink permaview">
 <$link to={{!!title}}>
 <$view field="title"/>
@@ -30,5 +28,3 @@ caption: {{$:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/Capti
 </div>
 </$linkcatcher>
 </$reveal>
-</div>
-</div>
