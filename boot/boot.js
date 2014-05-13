@@ -186,7 +186,7 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 					object[p] = source[p];
 				}
 				if(typeof object[p] === "object" && typeof source[p] === "object") {
-					$tw.utils.deepDefaults(object[p],source[p]); 
+					$tw.utils.deepDefaults(object[p],source[p]);
 				}
 			}
 		}
@@ -225,8 +225,8 @@ $tw.utils.pad = function(value,length) {
 $tw.utils.stringifyDate = function(value) {
 	return value.getUTCFullYear() +
 			$tw.utils.pad(value.getUTCMonth() + 1) +
-			$tw.utils.pad(value.getUTCDate()) + 
-			$tw.utils.pad(value.getUTCHours()) + 
+			$tw.utils.pad(value.getUTCDate()) +
+			$tw.utils.pad(value.getUTCHours()) +
 			$tw.utils.pad(value.getUTCMinutes()) +
 			$tw.utils.pad(value.getUTCSeconds()) +
 			$tw.utils.pad(value.getUTCMilliseconds(),3);
@@ -387,8 +387,8 @@ options: {flags: flags,deserializerType: deserializerType}
 */
 $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	options = options || {};
-	$tw.config.fileExtensionInfo[extension] = {type: type};	
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};	
+	$tw.config.fileExtensionInfo[extension] = {type: type};
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};
 };
 
 /*
@@ -420,7 +420,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 	if($tw.browser) {
 		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
-		fn = vm.runInThisContext(code,filename);		
+		fn = vm.runInThisContext(code,filename);
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
@@ -571,7 +571,7 @@ $tw.utils.Crypto = function() {
 				}
 			} catch(ex) {
 				console.log("Crypto error:" + ex);
-				outputText = null;	
+				outputText = null;
 			}
 			return outputText;
 		};
@@ -659,7 +659,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 					return window.require(moduleName);
 				} catch(e) {}
 			}
-			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;				
+			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;
 		} else {
 			// If we don't have a module with that name, let node.js try to find it
 			return require(moduleName);
@@ -774,7 +774,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 				}
 				// Freeze the field to keep it immutable
 				if(typeof value === "object") {
-					Object.freeze(value);					
+					Object.freeze(value);
 				}
 				this.fields[t] = value;
 			}
@@ -844,7 +844,7 @@ $tw.Wiki = function(options) {
 				tiddlers[title] = tiddler;
 				this.clearCache(title);
 				this.clearGlobalCache();
-				this.enqueueTiddlerEvent(title);				
+				this.enqueueTiddlerEvent(title);
 			}
 		}
 	};
@@ -1031,15 +1031,15 @@ $tw.Wiki = function(options) {
 };
 
 // Dummy methods that will be filled in after boot
-$tw.Wiki.prototype.clearCache = 
-$tw.Wiki.prototype.clearGlobalCache = 
+$tw.Wiki.prototype.clearCache =
+$tw.Wiki.prototype.clearGlobalCache =
 $tw.Wiki.prototype.enqueueTiddlerEvent = function() {};
 
 // Add an array of tiddlers
 $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 	for(var t=0; t<tiddlers.length; t++) {
 		this.addTiddler(tiddlers[t]);
-	}	
+	}
 };
 
 /*
@@ -1616,7 +1616,7 @@ $tw.loadTiddlersNode = function() {
 	}
 };
 
-// End of if($tw.node)	
+// End of if($tw.node)
 }
 
 /////////////////////////// Main startup function called once tiddlers have been decrypted
