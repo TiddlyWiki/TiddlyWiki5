@@ -1166,8 +1166,6 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 		}
 		if(split.length >= 2) {
 			fields.text = split.slice(1).join("\n\n");
-		} else {
-			fields.text = "";
 		}
 		return [fields];
 	}
