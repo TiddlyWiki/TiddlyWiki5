@@ -201,8 +201,8 @@ Widget.prototype.getStateQualifier = function(name) {
 	name = name || "transclusion";
 	var output = [],
 		node = this;
-	while(node) {
-		if($tw.utils.hop(node.variables,name)) {
+	while(node && node.parentWidget) {
+		if($tw.utils.hop(node.parentWidget.variables,name)) {
 			output.push(node.getVariable(name));
 		}
 		node = node.parentWidget;
