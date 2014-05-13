@@ -1,0 +1,31 @@
+title: $:/core/ui/ControlPanel/Advanced/Settings/NavigationHistory
+tags: $:/tags/ControlPanel/Advanced/Settings
+caption: {{$:/language/ControlPanel/Advanced/Settings/NavigationHistory/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Advanced/Settings/NavigationHistory/
+<<lingo Hint>>
+<div style="position:relative;">
+<$button popup=<<qualify "$:/state/navhistorypopup">> class="btn-invisible btn-dropdown">
+<$view tiddler="$:/config/Navigation/UpdateHistory" field="text"/>:
+<$reveal state="$:/config/Navigation/UpdateHistory" type="match" text="no">
+''<<lingo No/Description>>''
+</$reveal>
+<$reveal state="$:/config/Navigation/UpdateHistory" type="match" text="yes">
+''<<lingo Yes/Description>>''
+</$reveal>
+{{$:/core/images/down-arrow}}
+</$button>
+<div class="tw-block-dropdown-wrapper">
+<$reveal state=<<qualify "$:/state/navhistorypopup">> type="popup" position="below" animate="yes" default="">
+<$linkcatcher to="$:/config/Navigation/UpdateHistory">
+<div class="tw-block-dropdown tw-edit-type-dropdown">
+<$list filter="no yes">
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</$list>
+</div>
+</$linkcatcher>
+</$reveal>
+</div>
+</div>
