@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 !! The first rule of using TiddlyWiki is:
 
-<p style="font-size:40pt;font-weight:700;color:red;">
+<p style="font-size:40pt;line-height:48pt;font-weight:700;color:red;">
 Backup your data!
 </p>
 
