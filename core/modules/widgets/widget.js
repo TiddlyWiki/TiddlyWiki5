@@ -94,7 +94,7 @@ Widget.prototype.getVariable = function(name,options) {
 	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
 	if(parentWidget && name in parentWidget.variables) {
 		var variable = parentWidget.variables[name],
-			value = variable.value || options.defaultValue;
+			value = variable.value;
 		// Substitute any parameters specified in the definition
 		value = this.substituteVariableParameters(value,variable.params,actualParams);
 		value = this.substituteVariableReferences(value);
@@ -344,7 +344,7 @@ Add a list of event listeners from an array [{type:,handler:},...]
 Widget.prototype.addEventListeners = function(listeners) {
 	var self = this;
 	$tw.utils.each(listeners,function(listenerInfo) {
-		self.addEventListener(listenerInfo.type,listenerInfo.handler);		
+		self.addEventListener(listenerInfo.type,listenerInfo.handler);
 	});
 };
 
@@ -460,7 +460,7 @@ Widget.prototype.findFirstDomNode = function() {
 Remove any DOM nodes created by this widget or its children
 */
 Widget.prototype.removeChildDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case 
+	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);
