@@ -40,8 +40,7 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.nextImage.end;
 	var node = {
-		type: "element",
-		tag: "$image",
+		type: "image",
 		attributes: this.nextImage.attributes
 	};
 	return [node];
@@ -72,13 +71,12 @@ exports.findNextImage = function(source,pos) {
 };
 
 /*
-Look for an image at the specified position. Returns null if not found, otherwise returns {type: "element", name: "$image", attributes: [], isSelfClosing:, start:, end:,}
+Look for an image at the specified position. Returns null if not found, otherwise returns {type: "image", attributes: [], isSelfClosing:, start:, end:,}
 */
 exports.parseImage = function(source,pos) {
 	var token,
 		node = {
-			type: "element",
-			name: "$image",
+			type: "image",
 			start: pos,
 			attributes: {}
 		};

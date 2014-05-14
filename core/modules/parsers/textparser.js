@@ -14,8 +14,7 @@ The plain text parser processes blocks of source text into a degenerate parse tr
 
 var TextParser = function(type,text,options) {
 	this.tree = [{
-		type: "element",
-		tag: "$codeblock",
+		type: "codeblock",
 		attributes: {
 			code: {type: "string", value: text},
 			language: {type: "string", value: type}

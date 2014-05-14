@@ -53,8 +53,7 @@ exports.parse = function() {
 		}];
 	} else {
 		return [{
-			type: "element",
-			tag: "$link",
+			type: "link",
 			attributes: {
 				to: {type: "string", value: link}
 			},

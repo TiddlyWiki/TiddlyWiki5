@@ -97,6 +97,9 @@ exports.parseTag = function(source,pos,options) {
 		return null;
 	}
 	node.tag = token.match[1];
+	if(node.tag.charAt(0) === "$") {
+		node.type = node.tag.substr(1);
+	}
 	pos = token.end;
 	// Process attributes
 	var attribute = $tw.utils.parseAttribute(source,pos);
@@ -142,7 +145,7 @@ exports.findNextTag = function(source,pos,options) {
 		// Try to parse the candidate as a tag
 		var tag = this.parseTag(source,match.index,options);
 		// Return success
-		if(tag && this.isLegalTag(tag.tag)) {
+		if(tag && this.isLegalTag(tag)) {
 			return tag;
 		}
 		// Look for the next match
@@ -154,11 +157,11 @@ exports.findNextTag = function(source,pos,options) {
 };
 
 exports.isLegalTag = function(tag) {
-	// If it starts with a $ then we'll let anything go
-	if(tag.charAt(0) === "$") {
+	// Widgets are always OK
+	if(tag.type !== "element") {
 		return true;
-	// If it starts with a dash then it's not legal
-	} else if(tag.charAt(0) === "-") {
+	// If it's an HTML tag that starts with a dash then it's not legal
+	} else if(tag.tag.charAt(0) === "-") {
 		return false;
 	} else {
 		// Otherwise it's OK
