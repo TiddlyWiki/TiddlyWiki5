@@ -970,8 +970,8 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-buttons.tw-vertical  {
+	z-index: 100;
 	display: block;
-	padding-top: 14px;
 	padding-top: 14px;
 	vertical-align: top;
 	text-align: right;
@@ -991,7 +991,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: <<colour tab-foreground>>;
-	padding: 2px 4px 4px 4px;
+	padding: 3px 5px 3px 5px;
 	font-weight: 300;
 	border: none;
 	background: inherit;
