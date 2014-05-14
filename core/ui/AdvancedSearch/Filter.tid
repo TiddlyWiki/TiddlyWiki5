@@ -22,7 +22,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <div class="tw-search-results">
-<<lingo Advanced/Matches>>
+<<lingo Filter/Matches>>
 <$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
 </div>
 </$reveal>
