@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Setzt das Basis Ausgabeverzeichnis für die folgenden Befehle.
+
+Setzt das Basis Ausgabeverzeichnis für die folgenden Befehle. Das Standard Verzeichnis heißt: `output` und ist ein Unterverzeichnis des `edition` Verzeichnisses.
+
+```
+--output <pathname>
+```
+
+Ist das spezifizierte Verzeichnis "relative", dann wird es relativ zum bestehenden Arbeitsverzeichnis angelegt. 

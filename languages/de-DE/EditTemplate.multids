@@ -1,15 +1,15 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: Verwenden sie WikiText zum Formatieren. 
-Body/Placeholder: Geben Sie den Text für diesen Tiddler ein
+Body/Hint: Verwenden sie [[WikiText|http://tiddlywiki.com/static/WikiText.html]] zum Formatieren. 
+Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Button/Hide: Vorschau aus
 Body/Preview/Button/Show: Vorschau
-#
-# TODO folgender button wird niche angenommen
 Fields/Add/Button: ok
 Fields/Add/Name/Placeholder: Feld Name
 Fields/Add/Prompt: Feld einfügen:
 Fields/Add/Value/Placeholder: Feld Text / Wert
+Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung überschreibt die "standard" Version.
+Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur "standard" Version zurück zu kehren, löschen sie diesen Tiddler.
 Tags/Add/Button: ok
 Tags/Add/Placeholder: neuer Tag
 Type/Placeholder: Tiddler Format

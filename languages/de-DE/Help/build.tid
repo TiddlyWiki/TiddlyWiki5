@@ -1,0 +1,10 @@
+title: $:/language/Help/build
+description: Ausführen, von vorkonfigurierten Befehlen.
+
+Dieser Befehl erstellt die vorkonfigurierten Ziele, der aktuellen Wiki Edition. Sind keine Ziele spezifiziert, dann werden all konfigurierten Ziele erstellt.
+
+```
+--build <target> [<target> ...]
+```
+
+Ziele werden in der `tiddlywiki.info` Datei, im Wiki Verzeichnis konfiguriert.
