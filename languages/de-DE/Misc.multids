@@ -1,11 +1,14 @@
 title: $:/language/
 
+BinaryWarning/Prompt: Dieser Tiddler enthält binäre Daten.
 ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden sie unter: http://tiddlywiki.com/static/Upgrading.html
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: alle schließen
+ConfirmCancelTiddler: Wollen sie die Änderungen im Tiddler: "<$text text=<<title>>/>" verwerfen?
 ConfirmDeleteTiddler: Wollen sie den Tiddler: "<$text text=<<title>>/>" löschen?
 ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
-InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
+ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können ihre Änderungen rückgängig machen, indem sie diesen Tiddler wieder löschen. Wollen sie den Tiddler: "<$text text=<<title>>/>" ändern?
+InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
 RecentChanges/DateFormat: DDth MMM YYYY
 RelativeDate/Future/Days: in <<period>> Tagen
