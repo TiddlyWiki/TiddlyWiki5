@@ -1,0 +1,28 @@
+title: $:/core/ui/AdvancedSearch/Standard
+tags: $:/tags/AdvancedSearch
+caption: {{$:/language/Search/Standard/Caption}}
+
+\define lingo-base() $:/language/Search/
+<$linkcatcher to="$:/temp/advancedsearch">
+
+<<lingo Standard/Hint>>
+
+<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+
+</$linkcatcher>
+
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+
+<div class="tw-search-results">
+
+<<lingo Standard/Matches>>
+
+<$list filter="[!is[system]search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+</div>
+
+</$reveal>
+
+<$reveal state="$:/temp/advancedsearch" type="match" text="">
+
+</$reveal>
