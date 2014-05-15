@@ -45,6 +45,11 @@ if($tw.node) {
 
 /////////////////////////// Utility functions
 
+$tw.boot.log = function(str) {
+	$tw.boot.logMessages = $tw.boot.logMessages || [];
+	$tw.boot.logMessages.push(str);
+}
+
 /*
 Check if an object has a property
 */
@@ -1089,7 +1094,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	// Find the overriding tiddlers
 	this.each(function(tiddler,title) {
 		if(self.isShadowTiddler(title)) {
-		console.log(title);
+			console.log(title);
 			overrides.push(title);
 		}
 	});
@@ -1754,18 +1759,19 @@ $tw.boot.executeNextStartupTask = function() {
 		if($tw.boot.isStartupTaskEligible(task)) {
 			// Remove this task from the list
 			$tw.boot.remainingStartupModules.splice(taskIndex,1);
-var s = ["Executing task:",task.name];
-if(task.platforms) {
-	s.push("platforms:",task.platforms.join(","));
-}
-if(task.after) {
-	s.push("after:",task.after.join(","));
-}
-if(task.before) {
-	s.push("before:",task.before.join(","));
-}
-console.log(s.join(" "));
-			// Execute it
+			// Assemble log message
+			var s = ["Startup task:",task.name];
+			if(task.platforms) {
+				s.push("platforms:",task.platforms.join(","));
+			}
+			if(task.after) {
+				s.push("after:",task.after.join(","));
+			}
+			if(task.before) {
+				s.push("before:",task.before.join(","));
+			}
+			$tw.boot.log(s.join(" "));
+			// Execute task
 			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
 				task.startup();
 				if(task.name) {
