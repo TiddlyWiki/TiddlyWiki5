@@ -1,10 +1,13 @@
 title: $:/language/Search/
 
-Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> correspondances</small>//
 Filter/Caption: Filtres
 Filter/Hint: Recherche via une combinaison de [[filtres|http://tiddlywiki.com/static/TiddlerFilters.html]]
+Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> correspondances</small>//
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> correspondances</small>//
 Shadows/Caption: Shadows
 Shadows/Hint: Recherche parmi les tiddlers //shadow//
+Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> correspondances</small>//
 System/Caption: Système
 System/Hint: Recherche parmi les tiddlers //système//
+System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> correspondances</small>//
+
