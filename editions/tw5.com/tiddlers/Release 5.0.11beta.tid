@@ -42,6 +42,7 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/711b76307c95d0026f79f584e85ae3d4b7289d15]] to new version of CodeMirror
 * Added https://github.com/Jermolene/TiddlyWiki5NodeWebkit, a demo of using TiddlyWiki as a library in a node-webkit application
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4e07b3335b570f4039427e11df729fc4a899a671]] `.tid` TiddlerFiles to allow single line text fields
+* Renamed `$:/ShowEditPreview` to `$:/state/showeditpreview`
 
 !! Bug Fixes
 
