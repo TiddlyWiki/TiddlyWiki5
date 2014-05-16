@@ -34,6 +34,7 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 !! Hackability Improvements
 
 * Improved vertical layouts of TabsMacro
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/93566cdc332226b77eaba8a70fa166f3b8fcfe1e]] "standard" tab to [[advanced search|$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e83759e86d2a9e05e4b85dae50925fe988f8e239]] new filter operators [[before|FilterOperator: before]] and [[after|FilterOperator: after]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/570cad1c7f90e685961130918f09a7f9b2951f8c]] new [[FilterOperator: get]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f7e50e0950c5bf10d94d926576011893418b25f1]] [[BuildCommand]], [[OutputCommand]] and [[ClearPasswordCommand]]
