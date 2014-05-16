@@ -48,8 +48,8 @@
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
-			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain",
-			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain"]
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
 	},
 	"config": {
 		"retain-original-tiddler-path": true

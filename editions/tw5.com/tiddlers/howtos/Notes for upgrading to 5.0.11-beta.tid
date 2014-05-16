@@ -21,3 +21,5 @@ You can override this behaviour with the OutputCommand. For example, to generate
 ```
 tiddlywiki mywiki --output . --rendertiddler $:/core/save/all index.html text/plain
 ```
+
+A further change is that the `--rendertiddlers` command now clears the output folder before it writes any files. This means that any previous `--rendertiddler` commands to the same folder will have their output deleted.

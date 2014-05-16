@@ -46,8 +46,8 @@ node ./tiddlywiki.js \
 	--savetiddler $:/green_favicon.ico static/favicon.ico \
 	--rendertiddler $:/core/templates/static.template.html static.html text/plain \
 	--rendertiddler $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain \
-	--rendertiddler $:/core/templates/static.template.css static/static.css text/plain \
 	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain \
+	--rendertiddler $:/core/templates/static.template.css static/static.css text/plain \
 	|| exit 1
 
 # encrypted.html: a version of the main file encrypted with the password "password"
