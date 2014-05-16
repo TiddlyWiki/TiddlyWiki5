@@ -35,12 +35,13 @@ rm $TW5_BUILD_OUTPUT/static/*
 node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
-	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all index.html text/plain \
-	--savetiddler $:/favicon.ico favicon.ico \
+	--output . \
 	--rendertiddler ReadMe ./readme.md text/html \
 	--rendertiddler ContributingTemplate ./contributing.md text/html \
 	--rendertiddler $:/core/copyright.txt ./licenses/copyright.md text/plain \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all index.html text/plain \
+	--savetiddler $:/favicon.ico favicon.ico \
 	--rendertiddler $:/editions/tw5.com/download-empty empty.html text/plain \
 	--rendertiddler $:/editions/tw5.com/download-empty empty.hta text/plain \
 	--savetiddler $:/green_favicon.ico static/favicon.ico \
