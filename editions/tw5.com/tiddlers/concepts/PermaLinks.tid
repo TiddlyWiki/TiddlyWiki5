@@ -39,3 +39,12 @@ It is also possible to specify a story filter without specifying a target tiddle
 There are technical restrictions on the legal characters in an URL fragment. To allow all tiddler titles to be addressed, illegal characters are subject to a process called "URL encoding" whereby problematic characters are replaced by their numeric code. For example, the space character is replaced with `%20`.
 
 Both the target tiddler title and the story filter should be URL encoded (but not the separating colon). TiddlyWiki generates properly encoded URLs which can look quite ugly. However, in practice browsers will usually perfectly happily process arbitrary characters in URL fragments. Thus when creating permalinks manually you can choose to ignore URL encoding.
+
+! Permalink Behaviour
+
+Two important aspects of TiddlyWiki's behaviour with permalinks can be controlled via options in the $:/ControlPanel ''Advanced/Settings'' tab:
+
+* Whether to automatically update the address bar at each navigation, and if so whether to include the story sequence as well as the target tiddler
+* Whether the updates to the address bar should affect browser history. The default is ''no''; when switched to ''yes'' you can rewind navigation between tiddlers using the browser back and forward buttons
+
+Note that typing or navigating to a permalink will always cause the permalink to be processed, and tiddlers opened and closed as appropriate.

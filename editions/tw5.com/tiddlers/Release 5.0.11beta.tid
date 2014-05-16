@@ -11,6 +11,7 @@ type: text/vnd.tiddlywiki
 See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 
 * The default output location for command line operations has changed to the `/output` folder within TiddlyWikiFolders (it used to be current directory)
+* Note that the shadow tiddler [[$:/core/ui/PageMacros]] has changed with this release. If you've made modifications to it you should copy your modifications to a new tiddler, delete [[$:/core/ui/PageMacros]], perform the upgrade and then manually update the new copy of [[$:/core/ui/PageMacros]]
 
 !! Documentation Improvements
 
@@ -19,16 +20,16 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 !! Usability Improvements
 
 * Many performance optimisations, particularly for filter operations
-* Added support for PermaLinks
+* Added support for PermaLinks and browser back and forward buttons
 * Added support for WikiLinks in Markdown via `[link text](#TiddlerTitle)`
 * Added support for explicit external [[Linking in WikiText]] (eg `[ext[tooltip|url]]`)
 * [[Replaced|https://github.com/Jermolene/TiddlyWiki5/issues/580]] hamburger menu icon with double chevron icon
 * [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/552657fc584dbb36754d3fcabca2cdef7e916ec9]] plain text parsing to use the CodeBlockWidget, and hence use syntax highlighting if the plugin is installed. This gives us syntax highlighting for JavaScript shadow tiddlers, amongst other things
-* Improvements to Chinese, Japanese and French translations
+* Improvements to the German, French, Italian, Japanese and Chinese translations
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/61c3f8a5ba3c815d623c06f6a97d9c00a31a4157]] WikiText tiddlers from the sidebar "Types" tab
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a90339d1e573ec82dba1caeaead0f71717618a80]] various warnings when editing shadow tiddlers
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/0ac4c2b554f045c6bd2dc6ea5daa0d2f0397d04c]] digits in field names
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a4294b55f0a217d019a6e4cbb62f6a8a19668928]] warning banner when attempting to edit binary tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a4294b55f0a217d019a6e4cbb62f6a8a19668928]] warning banner and when attempting to edit binary tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b84c663215cf7877fff960748af4b2849ae0dbb3]] automatic refreshing of the browser window title from $:/core/wiki/title
 
 !! Hackability Improvements
@@ -49,4 +50,8 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc60ad1428dcf99a7ea0787e43e3b37f5a02fb98]] issue with hovering of the topbar icons in Firefox
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e548dd35af2d3195f82899096d4a4080362a1ff0]] problem with dragging and dropping within a text edit control
 
+!! Contributors
 
+I ([[@Jermolene|https://github.com/Jermolene]]) would like to thank the contributors to this release who have generously given their time to helping improve TiddlyWiki:
+
+[[@BramChen|https://github.com/BramChen]], [[@mwfogleman|https://github.com/mwfogleman]], [[@nameanyone|https://github.com/nameanyone]], [[@natecain|https://github.com/natecain]], [[@pekopeko1|https://github.com/pekopeko1]], [[@pmario|https://github.com/pmario]], [[@sukima|https://github.com/sukima]], [[@xcazin|https://github.com/xcazin]].
