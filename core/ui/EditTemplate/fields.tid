@@ -26,9 +26,9 @@ tags: $:/tags/EditTemplate
 <em class="tw-edit">
 <<lingo Fields/Add/Prompt>>
 </em> <span class="tw-edit-field-add-name">
-<$edit-text tiddler="$:/temp/NewFieldName" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} class="tw-edit-texteditor"/>
+<$edit-text tiddler="$:/temp/newfieldname" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} class="tw-edit-texteditor"/>
 </span> <span class="tw-edit-field-add-button">
-<$button message="tw-add-field" param={{$:/temp/NewFieldName}} set="$:/temp/NewFieldName" setTo="" class="">
+<$button message="tw-add-field" param={{$:/temp/newfieldname}} set="$:/temp/newfieldname" setTo="" class="">
 <<lingo Fields/Add/Button>>
 </$button>
 </span>
