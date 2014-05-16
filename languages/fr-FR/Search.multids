@@ -7,6 +7,9 @@ Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> corresp
 Shadows/Caption: Shadows
 Shadows/Hint: Recherche parmi les tiddlers //shadow//
 Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> correspondances</small>//
+Standard/Caption: Standard
+Standard/Hint: Recherche parmi les tiddlers standard
+Standard/Matches: //<small><$count filter="[!is[system]search{$:/temp/advancedsearch}]"/> correspondances</small>//
 System/Caption: Système
 System/Hint: Recherche parmi les tiddlers //système//
 System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> correspondances</small>//
