@@ -3,6 +3,7 @@ title: $:/language/Search/
 Filter/Caption: Filter
 Filter/Hint: Suche mit [["filter expression"|http://tiddlywiki.com/static/TiddlerFilters.html]].
 Filter/Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
+Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
 Shadows/Caption: Schatten
 Shadows/Hint: Suche in ~Schatten-Tiddler.
 Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> Treffer</small>//
