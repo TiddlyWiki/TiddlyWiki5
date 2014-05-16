@@ -1,10 +1,15 @@
 title: $:/language/Search/
 
-Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> 个条目符合条件</small>//
 Filter/Caption: 筛选
-Filter/Hint: 以[[筛选表达式|http://tiddlywiki.com/static/TiddlerFilters.html]]查找：
+Filter/Hint: 以[[筛选表达式|http://tiddlywiki.com/static/TiddlerFilters.html]]查找
+Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> 个条目符合条件</small>//
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> 个条目符合条件</small>//
 Shadows/Caption: 默认
-Shadows/Hint: 查找默认条目：
+Shadows/Hint: 查找默认条目
+Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> 个条目符合条件</small>//
+Standard/Caption: 标准
+Standard/Hint: 查找一般条目
+Standard/Matches: //<small><$count filter="[!is[system]search{$:/temp/advancedsearch}]"/> 个条目符合条件</small>//
 System/Caption: 系统
-System/Hint: 查找系统条目：
+System/Hint: 查找系统条目
+System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> 个条目符合条件</small>//
