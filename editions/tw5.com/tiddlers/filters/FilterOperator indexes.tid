@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: indexes
+type: text/vnd.tiddlywiki
+
+The ''indexes'' filter operator returns a list of all the property indexes found in the DataTiddlers in the current list. Tiddlers that are not DataTiddlers are ignored.
+
+For example:
+
+|!Filter String |!Description |
+|`[[MyData]indexes[]]` |Returns the indexes of all properties in the data tiddler `MyData` |
+|`[{$:/palette}indexes[]sort[title]]` |Returns the names of all the colours defined in the current [[colour palette|ColourPalettes]] |

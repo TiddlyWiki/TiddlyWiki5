@@ -37,4 +37,6 @@ exports.htmlVoidElements = "area,base,br,col,command,embed,hr,img,input,keygen,l
 
 exports.htmlBlockElements = "address,article,aside,audio,blockquote,canvas,dd,div,dl,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,li,noscript,ol,output,p,pre,section,table,tfoot,ul,video".split(",");
 
+exports.htmlUnsafeElements = "script".split(",");
+
 })();

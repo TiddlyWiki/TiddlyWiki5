@@ -34,18 +34,19 @@ rem  static.html: the static version of the default tiddlers
 node .\tiddlywiki.js ^
 	.\editions\tw5.com ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\index.html text/plain ^
-	--savetiddler $:/favicon.ico %TW5_BUILD_OUTPUT%\favicon.ico ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all index.html text/plain ^
+	--savetiddler $:/favicon.ico favicon.ico ^
 	--rendertiddler ReadMe .\readme.md text/html ^
 	--rendertiddler ContributingTemplate .\contributing.md text/html ^
 	--rendertiddler $:/core/copyright.txt .\licenses\copyright.md text/plain ^
-	--rendertiddler $:/editions/tw5.com/download-empty %TW5_BUILD_OUTPUT%\empty.html text/plain ^
-	--rendertiddler $:/editions/tw5.com/download-empty %TW5_BUILD_OUTPUT%\empty.hta text/plain ^
+	--rendertiddler $:/editions/tw5.com/download-empty empty.html text/plain ^
+	--rendertiddler $:/editions/tw5.com/download-empty empty.hta text/plain ^
 	--savetiddler $:/green_favicon.ico %TW5_BUILD_OUTPUT%/static/favicon.ico ^
-	--rendertiddler $:/core/templates/static.template.html %TW5_BUILD_OUTPUT%\static.html text/plain ^
-	--rendertiddler $:/core/templates/alltiddlers.template.html %TW5_BUILD_OUTPUT%\alltiddlers.html text/plain ^
-	--rendertiddler $:/core/templates/static.template.css %TW5_BUILD_OUTPUT%\static\static.css text/plain ^
-	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html %TW5_BUILD_OUTPUT%\static text/plain ^
+	--rendertiddler $:/core/templates/static.template.html static.html text/plain ^
+	--rendertiddler $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain ^
+	--rendertiddler $:/core/templates/static.template.css static\static.css text/plain ^
+	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain ^
 	|| exit 1
 
 rem encrypted.html: a version of the main file encrypted with the password "password"
@@ -53,8 +54,9 @@ rem encrypted.html: a version of the main file encrypted with the password "pass
 node .\tiddlywiki.js ^
 	.\editions\tw5.com ^
 	--verbose ^
+	--output %TW5_BUILD_OUTPUT% ^
 	--password password ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\encrypted.html text/plain ^
+	--rendertiddler $:/core/save/all encrypted.html text/plain ^
 	|| exit 1
 
 rem tahoelafs.html: empty wiki with plugin for Tahoe-LAFS
@@ -62,7 +64,8 @@ rem tahoelafs.html: empty wiki with plugin for Tahoe-LAFS
 node .\tiddlywiki.js ^
 	.\editions\tahoelafs ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\tahoelafs.html text/plain ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all tahoelafs.html text/plain ^
 	|| exit 1
 
 rem d3demo.html: wiki to demo d3 plugin
@@ -70,7 +73,8 @@ rem d3demo.html: wiki to demo d3 plugin
 node .\tiddlywiki.js ^
 	.\editions\d3demo ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\d3demo.html text/plain ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all d3demo.html text/plain ^
 	|| exit 1
 
 rem codemirrordemo.html: wiki to demo codemirror plugin
@@ -78,7 +82,8 @@ rem codemirrordemo.html: wiki to demo codemirror plugin
 node .\tiddlywiki.js ^
 	.\editions\codemirrordemo ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\codemirrordemo.html text/plain ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all codemirrordemo.html text/plain ^
 	|| exit 1
 
 rem markdowndemo.html: wiki to demo markdown plugin
@@ -86,7 +91,8 @@ rem markdowndemo.html: wiki to demo markdown plugin
 node .\tiddlywiki.js ^
 	.\editions\markdowndemo ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\markdowndemo.html text/plain ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all markdowndemo.html text/plain ^
 	|| exit 1
 
 
@@ -95,7 +101,8 @@ rem highlightdemo.html: wiki to demo highlight plugin
 node .\tiddlywiki.js ^
 	.\editions\highlightdemo ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\highlightdemo.html text/plain ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all highlightdemo.html text/plain ^
 	|| exit 1
 
 rem Make the CNAME file that GitHub Pages requires

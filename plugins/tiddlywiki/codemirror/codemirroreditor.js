@@ -17,8 +17,8 @@ var CODEMIRROR_OPTIONS = "$:/config/CodeMirror", configOptions;
 e.g. to allow vim key bindings
  {
 	"require": [
-		"$:/plugins/tiddlywiki/codemirror/addon/dialog.js",
-		"$:/plugins/tiddlywiki/codemirror/addon/searchcursor.js",
+		"$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
+		"$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
 		"$:/plugins/tiddlywiki/codemirror/keymap/vim.js"
 	],
 	"configuration": {
@@ -31,7 +31,7 @@ e.g. to allow vim key bindings
 var EditTextWidget = require("$:/core/modules/widgets/edit-text.js")["edit-text"];
 
 if($tw.browser) {
-	require("$:/plugins/tiddlywiki/codemirror/codemirror.js");
+	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 
 	configOptions = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{});
 
@@ -58,13 +58,17 @@ EditTextWidget.prototype.postRender = function() {
 		cm, config, cv, cm_opts = {
 			lineWrapping: true,
 			lineNumbers: true
-		};
+		},
+		tid = this.wiki.getTiddler(this.editTitle);
+	if(tid && tid.fields.type) {
+		cm_opts.mode = tid.fields.type
+	};
 
 	if($tw.browser && window.CodeMirror && this.editTag === "textarea") {
 		if(EditTextWidget.configuration) {
 			for (cv in EditTextWidget.configuration) { cm_opts[cv] = EditTextWidget.configuration[cv]; }
 		}
-		cm = CodeMirror.fromTextArea(this.domNodes[0], cm_opts);
+		cm = window.CodeMirror.fromTextArea(this.domNodes[0], cm_opts);
 		cm.on("change",function() {
 			self.saveChanges(cm.getValue());
 		});

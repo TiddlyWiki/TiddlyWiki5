@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: 设置后续命令的基准输出文件夹
+
+设置后续命令的基准输出文件夹，默认为该版本文件夹的 `output` 子文件夹。
+
+```
+--output <pathname>
+```
+
+若指定的路径是相对路径，则它是被解析相对于当前的工作文件夹。

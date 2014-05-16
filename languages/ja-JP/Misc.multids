@@ -1,0 +1,29 @@
+title: $:/language/
+
+ClassicWarning/Hint: この tiddler はクラシックスタイルの TiddlyWiki フォーマットで書かれています。このフォーマットは TiddlyWiki バージョン 5 との完全な互換性はありません。詳しくは http://tiddlywiki.com/static/Upgrading.html を参照してください。
+ClassicWarning/Upgrade/Caption: アップグレード
+CloseAll/Button: すべて閉じる
+ConfirmDeleteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を削除しますか?
+ConfirmOverwriteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を上書きしますか?
+InvalidFieldName: フィールド名に不正な文字が使われています "<$text text=<<fieldName>>/>". フィールド名に使用できるのは英小文字かアンダースコア(`_`)、ハイフン(`-`)、ピリオド(`.`)のみです。
+MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{$:/core/images/edit-button}} して作成
+RecentChanges/DateFormat: YYYY-MM-DD
+RelativeDate/Future/Days: <<period>> 日後
+RelativeDate/Future/Hours: <<period>> 時間後
+RelativeDate/Future/Minutes: <<period>> 分後
+RelativeDate/Future/Months: <<period>> か月後
+RelativeDate/Future/Second: 1 秒後
+RelativeDate/Future/Seconds: <<period>> 秒後
+RelativeDate/Future/Years: <<period>> 年後
+RelativeDate/Past/Days: <<period>> 日前
+RelativeDate/Past/Hours: <<period>> 時間前
+RelativeDate/Past/Minutes: <<period>> 分前
+RelativeDate/Past/Months: <<period>> か月前
+RelativeDate/Past/Second: 1 秒前
+RelativeDate/Past/Seconds: <<period>> 秒前
+RelativeDate/Past/Years: <<period>> 年前
+SystemTiddler/Tooltip: これはシステム tiddler です
+TagManager/Colour/Heading: 色
+TagManager/Count/Heading: カウント
+TagManager/Icon/Heading: アイコン
+TagManager/Tag/Heading: タグ

@@ -1,0 +1,21 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: アニメーション。通常は RevealWidget で使用されるモジュール。
+command: Node.js で実行できるコマンド。
+config: `$tw.config` に格納されるデータ。
+filteroperator: 個々のフィルタ操作用メソッドモジュール。
+global: `$tw` に格納されるグローバルデータ。
+isfilteroperator: フィルタ ''is'' メソッドのオペランドモジュール。
+macro: JavaScript マクロの定義モジュール。
+parser: 各種 ContentType のパーサモジュール。
+saver: ファイル保存メソッドモジュール。ブラウザによる差異を吸収する。
+startup: 初回実行ファンクションモジュール。
+storyview: リストウィジェットのアニメーションや振る舞いをカスタマイズするモジュール。
+tiddlerdeserializer: tiddler を他の ContentType に変換するモジュール。
+tiddlerfield: 個々の tiddler フィールドの振る舞いを定義するモジュール。
+tiddlermethod: `$tw.Tiddler` の prototype にメソッドを追加するモジュール。
+utils: `$tw.utils` にメソッドを追加するモジュール。
+utils-node: `$tw.utils` に Node.js 特有のメソッドを追加するモジュール。
+widget: DOM の描画や操作をひとまとめにしたウィジェットモジュール。
+wikimethod: `$tw.Wiki` にメソッドを追加するモジュール。
+wikirule: メインの WikiText パーサのための個々の解析ルールモジュール。

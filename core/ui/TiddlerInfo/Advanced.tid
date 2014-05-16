@@ -2,7 +2,7 @@ title: $:/core/ui/TiddlerInfo/Advanced
 tags: $:/tags/TiddlerInfo
 caption: {{$:/language/TiddlerInfo/Advanced/Caption}}
 
-<$list filter="[is[shadow]!has[draft.of]tag[$:/tags/TiddlerInfo/Advanced]] [!is[shadow]!has[draft.of]tag[$:/tags/TiddlerInfo/Advanced]] +[tag[$:/tags/TiddlerInfo/Advanced]]" variable="listItem">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo/Advanced]!has[draft.of]]" variable="listItem">
 <$transclude tiddler=<<listItem>>/>
 
 </$list>

@@ -32,8 +32,7 @@ if(!$tw) {
 	$tw = require("./bootprefix.js").bootprefix();
 }
 
-$tw.utils = $tw.utils || {};
-$tw.boot = $tw.boot || {};
+$tw.utils = $tw.utils || Object.create(null);
 
 /////////////////////////// Standard node.js libraries
 
@@ -45,6 +44,11 @@ if($tw.node) {
 }
 
 /////////////////////////// Utility functions
+
+$tw.boot.log = function(str) {
+	$tw.boot.logMessages = $tw.boot.logMessages || [];
+	$tw.boot.logMessages.push(str);
+}
 
 /*
 Check if an object has a property
@@ -73,13 +77,11 @@ Iterate through all the own properties of an object or array. Callback is invoke
 $tw.utils.each = function(object,callback) {
 	var f;
 	if(object) {
-		if($tw.utils.isArray(object)) {
-			for(f=0; f<object.length; f++) {
-				callback(object[f],f,object);
-			}
+		if(Object.prototype.toString.call(object) == "[object Array]") {
+			object.forEach(callback);
 		} else {
 			for(f in object) {
-				if($tw.utils.hop(object,f)) {
+				if(Object.prototype.hasOwnProperty.call(object,f)) {
 					callback(object[f],f,object);
 				}
 			}
@@ -133,7 +135,7 @@ $tw.utils.error = function(err) {
 		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
 	// Log the error to the console
 	console.error(err);
-	if($tw.browser) {
+	if($tw.browser && !$tw.node) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
@@ -148,7 +150,7 @@ $tw.utils.error = function(err) {
 			return false;
 		},true);
 		return null;
-	} else {
+	} else if(!$tw.browser) {
 		// Exit if we're under node.js
 		process.exit(1);
 	}
@@ -157,7 +159,7 @@ $tw.utils.error = function(err) {
 /*
 Use our custom error handler if we're in the browser
 */
-if($tw.browser) {
+if($tw.boot.tasks.trapErrors) {
 	window.onerror = function(errorMsg,url,lineNumber) {
 		$tw.utils.error(errorMsg);
 		return false;
@@ -189,7 +191,7 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 					object[p] = source[p];
 				}
 				if(typeof object[p] === "object" && typeof source[p] === "object") {
-					$tw.utils.deepDefaults(object[p],source[p]); 
+					$tw.utils.deepDefaults(object[p],source[p]);
 				}
 			}
 		}
@@ -202,6 +204,14 @@ Convert "&amp;" to &, "&nbsp;" to nbsp, "&lt;" to <, "&gt;" to > and "&quot;" to
 */
 $tw.utils.htmlDecode = function(s) {
 	return s.toString().replace(/&lt;/mg,"<").replace(/&nbsp;/mg,"\xA0").replace(/&gt;/mg,">").replace(/&quot;/mg,"\"").replace(/&amp;/mg,"&");
+};
+
+/*
+Get the browser location.hash. We don't use location.hash because of the way that Firefox auto-urldecodes it (see http://stackoverflow.com/questions/1703552/encoding-of-window-location-hash)
+*/
+$tw.utils.getLocationHash = function() {
+	var parts = window.location.href.split('#');
+	return "#" + (parts.length > 1 ? parts[1] : "");
 };
 
 /*
@@ -220,8 +230,8 @@ $tw.utils.pad = function(value,length) {
 $tw.utils.stringifyDate = function(value) {
 	return value.getUTCFullYear() +
 			$tw.utils.pad(value.getUTCMonth() + 1) +
-			$tw.utils.pad(value.getUTCDate()) + 
-			$tw.utils.pad(value.getUTCHours()) + 
+			$tw.utils.pad(value.getUTCDate()) +
+			$tw.utils.pad(value.getUTCHours()) +
 			$tw.utils.pad(value.getUTCMinutes()) +
 			$tw.utils.pad(value.getUTCSeconds()) +
 			$tw.utils.pad(value.getUTCMilliseconds(),3);
@@ -260,14 +270,14 @@ $tw.utils.stringifyList = function(value) {
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
 $tw.utils.parseStringArray = function(value) {
 	if(typeof value === "string") {
-		var memberRegExp = /(?:^|\s)(?:\[\[(.*?)\]\])(?=\s|$)|(\S+)/mg,
+		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
 			results = [],
 			match;
 		do {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(results.indexOf(item) === -1) {
+				if(item !== undefined && results.indexOf(item) === -1) {
 					results.push(item);
 				}
 			}
@@ -282,7 +292,7 @@ $tw.utils.parseStringArray = function(value) {
 
 // Parse a block of name:value fields. The `fields` object is used as the basis for the return value
 $tw.utils.parseFields = function(text,fields) {
-	fields = fields || {};
+	fields = fields || Object.create(null);
 	text.split(/\r?\n/mg).forEach(function(line) {
 		if(line.charAt(0) !== "#") {
 			var p = line.indexOf(":");
@@ -303,7 +313,6 @@ name `.` refers to the current directory
 */
 $tw.utils.resolvePath = function(sourcepath,rootpath) {
 	// If the source path starts with ./ or ../ then it is relative to the root
-	
 	if(sourcepath.substr(0,2) === "./" || sourcepath.substr(0,3) === "../" ) {
 		var src = sourcepath.split("/"),
 			root = rootpath.split("/");
@@ -354,7 +363,7 @@ $tw.utils.parseVersion = function(version) {
 };
 
 /*
-Returns true if the version string A is greater than the version string B
+Returns true if the version string A is greater than the version string B. Returns true if the versions are the same
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	var defaultVersion = {
@@ -371,23 +380,38 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 		];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
+		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0);
 };
 
 /*
 Register file type information
-flags: "image" for image types
+options: {flags: flags,deserializerType: deserializerType}
+	flags:"image" for image types
+	deserializerType: defaults to type if not specified
 */
-$tw.utils.registerFileType = function(type,encoding,extension,flags) {
+$tw.utils.registerFileType = function(type,encoding,extension,options) {
+	options = options || {};
 	$tw.config.fileExtensionInfo[extension] = {type: type};
-	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: flags || []};
+	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};
+};
+
+/*
+Given an extension, get the correct encoding for that file.
+defaults to utf8
+*/
+$tw.utils.getTypeEncoding = function(ext) {
+	var extensionInfo = $tw.config.fileExtensionInfo[ext],
+		type = extensionInfo ? extensionInfo.type : null,
+		typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
+	return typeInfo ? typeInfo.encoding : "utf8";
 };
 
 /*
 Run code globally with specified context variables in scope
 */
 $tw.utils.evalGlobal = function(code,context,filename) {
-	var contextCopy = $tw.utils.extend({},context);
+	var contextCopy = $tw.utils.extend(Object.create(null),context);
 	// Get the context variables as a pair of arrays of names and values
 	var contextNames = [], contextValues = [];
 	$tw.utils.each(contextCopy,function(value,name) {
@@ -399,9 +423,9 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
-		fn = window["eval"](code);
+		fn = window["eval"](code + "\n\n//# sourceURL=" + filename);
 	} else {
-		fn = vm.runInThisContext(code,filename);		
+		fn = vm.runInThisContext(code,filename);
 	}
 	// Call the function and return the exports
 	return fn.apply(null,contextValues);
@@ -411,7 +435,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 Run code in a sandbox with only the specified context variables in scope
 */
 $tw.utils.evalSandboxed = $tw.browser ? $tw.utils.evalGlobal : function(code,context,filename) {
-	var sandbox = $tw.utils.extend({},context);
+	var sandbox = $tw.utils.extend(Object.create(null),context);
 	vm.runInNewContext(code,sandbox,filename);
 	return sandbox.exports;
 };
@@ -552,7 +576,7 @@ $tw.utils.Crypto = function() {
 				}
 			} catch(ex) {
 				console.log("Crypto error:" + ex);
-				outputText = null;	
+				outputText = null;
 			}
 			return outputText;
 		};
@@ -640,7 +664,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 					return window.require(moduleName);
 				} catch(e) {}
 			}
-			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;				
+			throw "Cannot find module named '" + moduleName + "' required by module '" + moduleRoot + "', resolved to " + name;
 		} else {
 			// If we don't have a module with that name, let node.js try to find it
 			return require(moduleName);
@@ -656,6 +680,9 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 			} else if(typeof moduleInfo.definition === "string") { // String
 				moduleInfo.exports = _exports;
 				$tw.utils.evalSandboxed(moduleInfo.definition,sandbox,tiddler.fields.title);
+				if(sandbox.module.exports) {
+					moduleInfo.exports = sandbox.module.exports; //more codemirror workaround
+				}
 			} else { // Object
 				moduleInfo.exports = moduleInfo.definition;
 			}
@@ -684,7 +711,7 @@ Get all the modules of a particular type in a hashmap by their `name` field
 */
 $tw.modules.getModulesByTypeAsHashmap = function(moduleType,nameField) {
 	nameField = nameField || "name";
-	var results = {};
+	var results = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		results[module[nameField]] = module;
 	});
@@ -696,7 +723,7 @@ Apply the exports of the modules of a particular type to a target object
 */
 $tw.modules.applyMethods = function(moduleType,targetObject) {
 	if(!targetObject) {
-		targetObject = {};
+		targetObject = Object.create(null);
 	}
 	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
 		$tw.utils.each(module,function(element,title,object) {
@@ -710,7 +737,7 @@ $tw.modules.applyMethods = function(moduleType,targetObject) {
 Return an array of classes created from the modules of a specified type. Each module should export the properties to be added to those of the optional base class
 */
 $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
-	var classes = {};
+	var classes = Object.create(null);
 	$tw.modules.forEachModuleOfType(moduleType,function(title,moduleExports) {
 		if(!subType || moduleExports.types[subType]) {
 			var newClass = function() {};
@@ -732,12 +759,12 @@ Construct a tiddler object from a hashmap of tiddler fields. If multiple hasmaps
 taking precedence to the right
 */
 $tw.Tiddler = function(/* [fields,] fields */) {
-	this.fields = {};
+	this.fields = Object.create(null);
 	for(var c=0; c<arguments.length; c++) {
 		var arg = arguments[c],
 			src = (arg instanceof $tw.Tiddler) ? arg.fields : arg;
 		for(var t in src) {
-			if(src[t] === undefined) {
+			if(src[t] === undefined || src[t] === null) {
 				if(t in this.fields) {
 					delete this.fields[t]; // If we get a field that's undefined, delete any previous field value
 				}
@@ -752,7 +779,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 				}
 				// Freeze the field to keep it immutable
 				if(typeof value === "object") {
-					Object.freeze(value);					
+					Object.freeze(value);
 				}
 				this.fields[t] = value;
 			}
@@ -805,10 +832,10 @@ shadowTiddlers: Array of shadow tiddlers to be added
 $tw.Wiki = function(options) {
 	options = options || {};
 	var self = this,
-		tiddlers = {}, // Hashmap of tiddlers
+		tiddlers = Object.create(null), // Hashmap of tiddlers
 		pluginTiddlers = [], // Array of tiddlers containing registered plugins, ordered by priority
-		pluginInfo = {}, // Hashmap of parsed plugin content
-		shadowTiddlers = options.shadowTiddlers || {}; // Hashmap by title of {source:, tiddler:}
+		pluginInfo = Object.create(null), // Hashmap of parsed plugin content
+		shadowTiddlers = options.shadowTiddlers || Object.create(null); // Hashmap by title of {source:, tiddler:}
 
 	// Add a tiddler to the store
 	this.addTiddler = function(tiddler) {
@@ -822,7 +849,7 @@ $tw.Wiki = function(options) {
 				tiddlers[title] = tiddler;
 				this.clearCache(title);
 				this.clearGlobalCache();
-				this.enqueueTiddlerEvent(title);				
+				this.enqueueTiddlerEvent(title);
 			}
 		}
 	};
@@ -840,20 +867,16 @@ $tw.Wiki = function(options) {
 		var t = tiddlers[title];
 		if(t instanceof $tw.Tiddler) {
 			return t;
-		} else if(title !== undefined && $tw.utils.hop(shadowTiddlers,title)) {
+		} else if(title !== undefined && Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
 			return shadowTiddlers[title].tiddler;
 		} else {
 			return undefined;
 		}
 	};
 
-	// Get a hashmap of all tiddler titles
-	this.getAllTitles = function() {
-		var results = {};
-		for(var title in tiddlers) {
-			results[title] = true;
-		}
-		return results;
+	// Get an array of all tiddler titles
+	this.allTitles = function() {
+		return Object.keys(tiddlers);
 	};
 
 	// Iterate through all tiddler titles
@@ -863,12 +886,44 @@ $tw.Wiki = function(options) {
 		}
 	};
 
+	// Get an array of all shadow tiddler titles
+	this.allShadowTitles = function() {
+		return Object.keys(shadowTiddlers);
+	};
+
 	// Iterate through all shadow tiddler titles
 	this.eachShadow = function(callback) {
 		for(var title in shadowTiddlers) {
 			var shadowInfo = shadowTiddlers[title];
 			callback(shadowInfo.tiddler,title);
 		}
+	};
+
+	// Iterate through all tiddlers and then the shadows
+	this.eachTiddlerPlusShadows = function(callback) {
+		for(var title in tiddlers) {
+			callback(tiddlers[title],title);
+		}
+		for(var title in shadowTiddlers) {
+			if(!Object.prototype.hasOwnProperty.call(tiddlers,title)) {
+				var shadowInfo = shadowTiddlers[title];
+				callback(shadowInfo.tiddler,title);
+			}
+		}
+	};
+
+	// Iterate through all the shadows and then the tiddlers
+	this.eachShadowPlusTiddlers = function(callback) {
+		for(var title in shadowTiddlers) {
+			var shadowInfo = shadowTiddlers[title];
+			callback(shadowInfo.tiddler,title);
+		}
+		for(var title in tiddlers) {
+			if(!Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
+				callback(tiddlers[title],title);
+			}
+		}
+
 	};
 
 	// Test for the existence of a tiddler
@@ -897,6 +952,11 @@ $tw.Wiki = function(options) {
 			}
 
 		}
+	};
+
+	// Get plugin info for a plugin
+	this.getPluginInfo = function(title) {
+		return pluginInfo[title];
 	};
 
 	// Register the plugin tiddlers of a particular type, optionally restricting registration to an array of tiddler titles. Return the array of titles affected
@@ -956,33 +1016,35 @@ $tw.Wiki = function(options) {
 			}
 		});
 		// Now go through the plugins in ascending order and assign the shadows
-		shadowTiddlers = {};
+		shadowTiddlers = Object.create(null);
 		$tw.utils.each(pluginTiddlers,function(tiddler) {
 			// Extract the constituent tiddlers
-			$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
-				// Save the tiddler object
-				if(constituentTitle) {
-					shadowTiddlers[constituentTitle] = {
-						source: tiddler.fields.title,
-						tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
-					};
-				}
-			});
+			if($tw.utils.hop(pluginInfo,tiddler.fields.title)) {
+				$tw.utils.each(pluginInfo[tiddler.fields.title].tiddlers,function(constituentTiddler,constituentTitle) {
+					// Save the tiddler object
+					if(constituentTitle) {
+						shadowTiddlers[constituentTitle] = {
+							source: tiddler.fields.title,
+							tiddler: new $tw.Tiddler(constituentTiddler,{title: constituentTitle})
+						};
+					}
+				});
+			}
 		});
 	};
 
 };
 
 // Dummy methods that will be filled in after boot
-$tw.Wiki.prototype.clearCache = 
-$tw.Wiki.prototype.clearGlobalCache = 
+$tw.Wiki.prototype.clearCache =
+$tw.Wiki.prototype.clearGlobalCache =
 $tw.Wiki.prototype.enqueueTiddlerEvent = function() {};
 
 // Add an array of tiddlers
 $tw.Wiki.prototype.addTiddlers = function(tiddlers) {
 	for(var t=0; t<tiddlers.length; t++) {
 		this.addTiddler(tiddlers[t]);
-	}	
+	}
 };
 
 /*
@@ -1024,15 +1086,51 @@ $tw.Wiki.prototype.defineShadowModules = function() {
 };
 
 /*
+Enable safe mode by deleting any tiddlers that override a shadow tiddler
+*/
+$tw.Wiki.prototype.processSafeMode = function() {
+	var self = this,
+		overrides = [];
+	// Find the overriding tiddlers
+	this.each(function(tiddler,title) {
+		if(self.isShadowTiddler(title)) {
+			console.log(title);
+			overrides.push(title);
+		}
+	});
+	// Assemble a report tiddler
+	var titleReportTiddler = "TiddlyWiki Safe Mode",
+		report = [];
+	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. Most customisations have been disabled by renaming the following tiddlers:")
+	// Delete the overrides
+	overrides.forEach(function(title) {
+		var tiddler = self.getTiddler(title),
+			newTitle = "SAFE: " + title;
+		self.deleteTiddler(title);
+		self.addTiddler(new $tw.Tiddler(tiddler, {title: newTitle}));
+		report.push("* [[" + title + "|" + newTitle + "]]");
+	});
+	report.push()
+	this.addTiddler(new $tw.Tiddler({title: titleReportTiddler, text: report.join("\n\n")}));
+	// Set $:/DefaultTiddlers to point to our report
+	this.addTiddler(new $tw.Tiddler({title: "$:/DefaultTiddlers", text: "[[" + titleReportTiddler + "]]"}));
+};
+
+/*
 Extracts tiddlers from a typed block of text, specifying default field values
 */
 $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
-	srcFields = srcFields || {};
+	srcFields = srcFields || Object.create(null);
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
-		fields = {};
+		fields = Object.create(null);
 	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
 		type = $tw.config.fileExtensionInfo[type].type;
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+	}
+	if(!deserializer && $tw.config.contentTypeInfo[type]) {
+		// see if this type has a different deserializer registered with it
+		type = $tw.config.contentTypeInfo[type].deserializerType;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer) {
@@ -1073,8 +1171,6 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tid","tiddlerdeserializer",{
 		}
 		if(split.length >= 2) {
 			fields.text = split.slice(1).join("\n\n");
-		} else {
-			fields.text = "";
 		}
 		return [fields];
 	}
@@ -1092,7 +1188,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/tids","tiddlerdeserializer",{
 				if(line.charAt(0) !== "#") {
 					var colonPos= line.indexOf(": ");
 					if(colonPos !== -1) {
-						var tiddler = $tw.utils.extend({},fields);
+						var tiddler = $tw.utils.extend(Object.create(null),fields);
 						tiddler.title = (tiddler.title || "") + line.substr(0,colonPos);
 						if(titles.indexOf(tiddler.title) !== -1) {
 							console.log("Warning: .multids file contains multiple definitions for " + tiddler.title);
@@ -1130,7 +1226,7 @@ $tw.modules.define("$:/boot/tiddlerdeserializer/json","tiddlerdeserializer",{
 
 /////////////////////////// Browser definitions
 
-if($tw.browser) {
+if($tw.browser && !$tw.node) {
 
 /*
 Decrypt any tiddlers stored within the element with the ID "encryptedArea". The function is asynchronous to allow the user to be prompted for a password
@@ -1249,12 +1345,9 @@ $tw.loadTiddlersBrowser = function() {
 	}
 };
 
-// End of if($tw.browser)
-}
+} else {
 
 /////////////////////////// Server definitions
-
-if(!$tw.browser) {
 
 /*
 Get any encrypted tiddlers
@@ -1264,7 +1357,7 @@ $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	callback();
 };
 
-}
+} // End of if($tw.browser && !$tw.node)
 
 /////////////////////////// Node definitions
 
@@ -1311,7 +1404,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			// Look for a tiddlywiki.files file
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
-				var filesInfo = JSON.parse(fs.readFileSync(filepath + "/tiddlywiki.files","utf8"));
+				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
 						pathname = path.resolve(filepath,tidInfo.file),
@@ -1329,7 +1422,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				// If not, read all the files in the directory
 				$tw.utils.each(files,function(file) {
 					if(!excludeRegExp.test(file)) {
-						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp));
+						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp));
 					}
 				});
 			}
@@ -1350,20 +1443,20 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		stat = fs.statSync(filepath);
 		if(stat.isDirectory()) {
 			// Read the plugin information
-			pluginInfo = JSON.parse(fs.readFileSync(filepath + "/plugin.info","utf8"));
+			pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
 			// Read the plugin files
 			files = fs.readdirSync(filepath);
 			for(f=0; f<files.length; f++) {
 				file = files[f];
 				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
-					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + "/" + file,excludeRegExp);
+					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp);
 					$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
 						pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
 					});
 				}
 			}
 			// Save the plugin tiddlers into the plugin info
-			pluginInfo.tiddlers = pluginInfo.tiddlers || {};
+			pluginInfo.tiddlers = pluginInfo.tiddlers || Object.create(null);
 			for(t=0; t<pluginTiddlers.length; t++) {
 				if(pluginTiddlers[t].title) {
 					pluginInfo.tiddlers[pluginTiddlers[t].title] = pluginTiddlers[t];
@@ -1526,21 +1619,29 @@ $tw.loadTiddlersNode = function() {
 	}
 };
 
-// End of if($tw.node)	
+// End of if($tw.node)
 }
 
 /////////////////////////// Main startup function called once tiddlers have been decrypted
 
 /*
-Startup TiddlyWiki. Options are:
-readBrowserTiddlers: whether to read tiddlers from the HTML file we're executing within; if not, tiddlers are read from the file system with Node.js APIs
+Startup TiddlyWiki
 */
 $tw.boot.startup = function(options) {
 	options = options || {};
+	// Get the URL hash and check for safe mode
+	$tw.locationHash = "#";
+	if($tw.browser && !$tw.node) {
+		if(location.hash === "#:safe") {
+			$tw.safeMode = true;
+		} else {
+			$tw.locationHash = $tw.utils.getLocationHash();
+		}
+	}
 	// Initialise some more $tw properties
 	$tw.utils.deepDefaults($tw,{
 		modules: { // Information about each module
-			titles: {}, // hashmap by module title of {fn:, exports:, moduleType:}
+			titles: Object.create(null), // hashmap by module title of {fn:, exports:, moduleType:}
 			types: {} // hashmap by module type of hashmap of exports
 		},
 		config: { // Configuration overridables
@@ -1553,14 +1654,15 @@ $tw.boot.startup = function(options) {
 			wikiThemesSubDir: "./themes",
 			wikiLanguagesSubDir: "./languages",
 			wikiTiddlersSubDir: "./tiddlers",
+			wikiOutputSubDir: "./output",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
-			fileExtensionInfo: {}, // Map file extension to {type:}
-			contentTypeInfo: {} // Map type to {encoding:,extension:}
+			fileExtensionInfo: Object.create(null), // Map file extension to {type:}
+			contentTypeInfo: Object.create(null) // Map type to {encoding:,extension:}
 		}
 	});
-	if(!options.readBrowserTiddlers) {
+	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
-		$tw.boot.files = {};
+		$tw.boot.files = Object.create(null);
 		// System paths and filenames
 		$tw.boot.bootPath = path.dirname(module.filename);
 		$tw.boot.corePath = path.resolve($tw.boot.bootPath,"../core");
@@ -1593,24 +1695,25 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
+	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
-	$tw.utils.registerFileType("application/pdf","base64",".pdf",["image"]);
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg",["image"]);
-	$tw.utils.registerFileType("image/png","base64",".png",["image"]);
-	$tw.utils.registerFileType("image/gif","base64",".gif",["image"]);
-	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",["image"]);
-	$tw.utils.registerFileType("image/x-icon","base64",".ico",["image"]);
+	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
+	$tw.utils.registerFileType("image/jpeg","base64",".jpg",{flags:["image"]});
+	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
+	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
+	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
+	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
 	$tw.Tiddler.fieldModules = $tw.modules.getModulesByTypeAsHashmap("tiddlerfield");
 	// Install the tiddler deserializer modules
-	$tw.Wiki.tiddlerDeserializerModules = {};
+	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
 	// Load tiddlers
-	if(options.readBrowserTiddlers) {
+	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
 	} else {
 		$tw.loadTiddlersNode();
@@ -1619,6 +1722,10 @@ $tw.boot.startup = function(options) {
 	$tw.wiki.readPluginInfo();
 	$tw.wiki.registerPluginTiddlers("plugin");
 	$tw.wiki.unpackPluginTiddlers();
+	// Process "safe mode"
+	if($tw.safeMode) {
+		$tw.wiki.processSafeMode();
+	}
 	// Register typed modules from the tiddlers we've just loaded
 	$tw.wiki.defineTiddlerModules();
 	// And any modules within plugins
@@ -1627,12 +1734,113 @@ $tw.boot.startup = function(options) {
 	if($tw.crypto) {
 		$tw.crypto.updateCryptoStateTiddler();
 	}
-	// Run any startup modules
+	// Gather up any startup modules
+	$tw.boot.remainingStartupModules = []; // Array of startup modules
 	$tw.modules.forEachModuleOfType("startup",function(title,module) {
 		if(module.startup) {
-			module.startup();
+			$tw.boot.remainingStartupModules.push(module);
 		}
 	});
+	// Keep track of the startup tasks that have been executed
+	$tw.boot.executedStartupModules = Object.create(null);
+	$tw.boot.disabledStartupModules = $tw.boot.disabledStartupModules || [];
+	// Repeatedly execute the next eligible task
+	$tw.boot.executeNextStartupTask();
+};
+
+/*
+Execute the remaining eligible startup tasks
+*/
+$tw.boot.executeNextStartupTask = function() {
+	// Find the next eligible task
+	var taskIndex = 0;
+	while(taskIndex < $tw.boot.remainingStartupModules.length) {
+		var task = $tw.boot.remainingStartupModules[taskIndex];
+		if($tw.boot.isStartupTaskEligible(task)) {
+			// Remove this task from the list
+			$tw.boot.remainingStartupModules.splice(taskIndex,1);
+			// Assemble log message
+			var s = ["Startup task:",task.name];
+			if(task.platforms) {
+				s.push("platforms:",task.platforms.join(","));
+			}
+			if(task.after) {
+				s.push("after:",task.after.join(","));
+			}
+			if(task.before) {
+				s.push("before:",task.before.join(","));
+			}
+			$tw.boot.log(s.join(" "));
+			// Execute task
+			if(!$tw.utils.hop(task,"synchronous") || task.synchronous) {
+				task.startup();
+				if(task.name) {
+					$tw.boot.executedStartupModules[task.name] = true;
+				}
+				return $tw.boot.executeNextStartupTask();
+			} else {
+				task.startup(function() {
+					if(task.name) {
+						$tw.boot.executedStartupModules[task.name] = true;
+					}
+					return $tw.boot.executeNextStartupTask();
+				});
+				return true;
+			}
+		}
+		taskIndex++;
+	}
+	return false;
+};
+
+/*
+Returns true if we are running on one platforms specified in a task modules `platforms` array
+*/
+$tw.boot.doesTaskMatchPlatform = function(taskModule) {
+	var platforms = taskModule.platforms;
+	if(platforms) {
+		for(var t=0; t<platforms.length; t++) {
+			if((platforms[t] === "browser" && !$tw.browser) || (platforms[t] === "node" && !$tw.node)) {
+				return false;
+			}
+		}
+	}
+	return true;
+};
+
+$tw.boot.isStartupTaskEligible = function(taskModule) {
+	var t;
+	// Check that the platform is correct
+	if(!$tw.boot.doesTaskMatchPlatform(taskModule)) {
+		return false;
+	}
+	var name = taskModule.name,
+		remaining = $tw.boot.remainingStartupModules;
+	if(name) {
+		// Fail if this module is disabled
+		if($tw.boot.disabledStartupModules.indexOf(name) !== -1) {
+			return false;
+		}
+		// Check that no other outstanding tasks must be executed before this one
+		for(t=0; t<remaining.length; t++) {
+			var task = remaining[t];
+			if(task.before && task.before.indexOf(name) !== -1) {
+				if($tw.boot.doesTaskMatchPlatform(task) || (task.name && $tw.boot.disabledStartupModules.indexOf(name) !== -1)) {
+					return false;
+				}
+			}
+		}
+	}
+	// Check that all of the tasks that we must be performed after has been done
+	var after = taskModule.after;
+	if(after) {
+		for(t=0; t<after.length; t++) {
+			if(!$tw.boot.executedStartupModules[after[t]]) {
+				return false;
+			}
+		}
+	}
+	return true;
 };
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
@@ -1641,15 +1849,13 @@ $tw.boot.boot = function() {
 	// Initialise crypto object
 	$tw.crypto = new $tw.utils.Crypto();
 	// Initialise password prompter
-	if($tw.browser) {
+	if($tw.browser && !$tw.node) {
 		$tw.passwordPrompt = new $tw.utils.PasswordPrompt();
 	}
 	// Preload any encrypted tiddlers
 	$tw.boot.decryptEncryptedTiddlers(function() {
 		// Startup
-		$tw.boot.startup({
-			readBrowserTiddlers: !!$tw.browser
-		});
+		$tw.boot.startup();
 	});
 };
 

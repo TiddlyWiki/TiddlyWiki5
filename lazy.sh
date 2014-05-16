@@ -5,7 +5,7 @@
 # Optional parameter is the username for signing edits
 
 node ./tiddlywiki.js \
-	editions/clientserver \
+	editions/server \
 	--verbose \
 	--server 8080 $:/core/save/lazy-images text/plain text/html $1 $2\
 	|| exit 1

@@ -1,0 +1,18 @@
+created: 20140315085406905
+modified: 20140321084539183
+tags: resources
+title: "TiddlyWiki 5 vis.js plug-in" by emkay
+type: text/vnd.tiddlywiki
+url: http://emkayonline.github.io/tw5visjs/
+
+A beautifully presented timeline widget using vis.js (http://visjs.org).
+
+Source: https://github.com/emkayonline/tw5visjs
+
+<<<
+This plug-in allows TW5 to display tiddlers using the vis.js graphical timeline and graph widgets.
+
+This plug-in has been testing on OS X with Safari, Chrome and Firefox, but should work under all operating systems and browser supported by TW5 and vis.js.
+
+Also, the plug-in has been designed to work off-line, enabling it to be used without a wireless connection on an iPad/iPhone using TWEdit
+<<<

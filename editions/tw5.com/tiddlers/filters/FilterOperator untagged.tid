@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: untagged
+type: text/vnd.tiddlywiki
+
+The ''untagged'' filter operator selects from the current list any tiddlers that do not have any tags.
+
+For example:
+
+|!Filter String |!Description |
+|`[untagged[]]` |Returns the titles of all tiddlers without tags |
+|`[all[shadows]untagged[]]` |Returns all the ShadowTiddlers without tags |
+
+See also [[FilterOperator: tag]], [[FilterOperator: tagging]] and [[FilterOperator: tags]].

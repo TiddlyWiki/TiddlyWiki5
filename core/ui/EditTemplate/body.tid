@@ -2,9 +2,9 @@ title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/
-<$reveal state="$:/ShowEditPreview" type="match" text="yes">
+<$reveal state="$:/state/showeditpreview" type="match" text="yes">
 
-<em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/ShowEditPreview" setTo="no"><<lingo Body/Preview/Button/Hide>></$button>
+<em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Body/Preview/Button/Hide>></$button>
 
 <div class="tw-tiddler-preview">
 <div class="tw-tiddler-preview-preview">
@@ -22,9 +22,9 @@ tags: $:/tags/EditTemplate
 
 </$reveal>
 
-<$reveal state="$:/ShowEditPreview" type="nomatch" text="yes">
+<$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
 
-<em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/ShowEditPreview" setTo="yes"><<lingo Body/Preview/Button/Show>></$button>
+<em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Body/Preview/Button/Show>></$button>
 <$edit field="text" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </$reveal>

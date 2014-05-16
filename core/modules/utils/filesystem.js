@@ -87,9 +87,13 @@ exports.removeTrailingSeparator = function(dirPath) {
 Recursively create a directory
 */
 exports.createDirectory = function(dirPath) {
-	var parts = dirPath.split(path.sep);
-	for(var component=0; component<parts.length; component++) {
-		var subDirPath = parts.slice(0,component+1).join(path.sep);
+	if(dirPath.substr(dirPath.length-1,1) !== path.sep) {
+		dirPath = dirPath + path.sep;
+	}
+	var pos = 1;
+	pos = dirPath.indexOf(path.sep,pos);
+	while(pos !== -1) {
+		var subDirPath = dirPath.substr(0,pos);
 		if(!$tw.utils.isDirectory(subDirPath)) {
 			try {
 				fs.mkdirSync(subDirPath);
@@ -97,6 +101,33 @@ exports.createDirectory = function(dirPath) {
 				return "Error creating directory '" + subDirPath + "'";
 			}
 		}
+		pos = dirPath.indexOf(path.sep,pos + 1);
+	}
+	return null;
+};
+
+/*
+Recursively create directories needed to contain a specified file
+*/
+exports.createFileDirectories = function(filePath) {
+	return $tw.utils.createDirectory(path.dirname(filePath));
+};
+
+/*
+Recursively delete a directory
+*/
+exports.deleteDirectory = function(dirPath) {
+	if(fs.existsSync(dirPath)) {
+		var entries = fs.readdirSync(dirPath);
+		for(var entryIndex=0; entryIndex<entries.length; entryIndex++) {
+			var currPath = dirPath + path.sep + entries[entryIndex];
+			if(fs.lstatSync(currPath).isDirectory()) {
+				$tw.utils.deleteDirectory(currPath);
+			} else {
+				fs.unlinkSync(currPath);
+			}
+		}
+	fs.rmdirSync(dirPath);
 	}
 	return null;
 };

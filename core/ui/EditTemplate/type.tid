@@ -8,7 +8,7 @@ tags: $:/tags/EditTemplate
 <$reveal state=<<qualify "$:/state/typeDropdown">> type="nomatch" text="" default="">
 <div class="tw-block-dropdown tw-edit-type-dropdown">
 <$linkcatcher to="!!type">
-<$list filter="[is[shadow]prefix[$:/language/Docs/Types/]] [!is[shadow]prefix[$:/language/Docs/Types/]] +[sort[description]]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>
+<$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]] +[sort[description]]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>
 </$list>
 </$linkcatcher>
 </div>

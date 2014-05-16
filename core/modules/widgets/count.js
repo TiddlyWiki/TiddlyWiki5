@@ -43,7 +43,7 @@ CountWidget.prototype.execute = function() {
 	this.filter = this.getAttribute("filter");
 	// Execute the filter
 	if(this.filter) {
-		this.currentCount = this.wiki.filterTiddlers(this.filter,this.getVariable("currentTiddler")).length;
+		this.currentCount = this.wiki.filterTiddlers(this.filter,this).length;
 	} else {
 		this.currentCount = undefined;
 	}

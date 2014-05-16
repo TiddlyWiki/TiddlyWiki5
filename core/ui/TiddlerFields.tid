@@ -2,6 +2,6 @@ title: $:/core/ui/TiddlerFields
 
 <table class="tw-view-field-table">
 <tbody>
-<$list filter="[is[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
+<$list filter="[all[current]fields[]sort[title]] -text" template="$:/core/ui/TiddlerFieldTemplate" variable="listItem"/>
 </tbody>
 </table>

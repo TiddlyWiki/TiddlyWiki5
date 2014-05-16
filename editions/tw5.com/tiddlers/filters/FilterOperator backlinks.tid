@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: backlinks
+type: text/vnd.tiddlywiki
+
+The ''backlinks'' filter operator replaces the current list with a list of the non-system tiddlers that link to them.
+
+For example:
+
+|!Filter String |!Description |
+|`[[HelloThere]backlinks[]]` |Selects all tiddlers that contain links to the tiddler `HelloThere` |
+|`[tag[Personal]backlinks[]]` |Selects all tiddlers that contain links to tiddlers tagged `Personal` |
+|`[all[current]backlinks[]]` |Selects all tiddlers that contain links to the current tiddler |
+

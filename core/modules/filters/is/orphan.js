@@ -18,24 +18,15 @@ Export our filter function
 exports.orphan = function(source,prefix,options) {
 	var results = [],
 		orphanTitles = options.wiki.getOrphanTitles();
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			var match = orphanTitles.indexOf(title) !== -1;
-			if(prefix === "!") {
-				match = !match;
-			}
-			if(match) {
+	if(prefix === "!") {
+		source(function(tiddler,title) {
+			if(orphanTitles.indexOf(title) === -1) {
 				results.push(title);
 			}
 		});
 	} else {
-		$tw.utils.each(source,function(element,title) {
-			var match = orphanTitles.indexOf(title) !== -1;
-			if(prefix === "!") {
-				match = !match;
-			}
-			if(match) {
+		source(function(tiddler,title) {
+			if(orphanTitles.indexOf(title) !== -1) {
 				results.push(title);
 			}
 		});

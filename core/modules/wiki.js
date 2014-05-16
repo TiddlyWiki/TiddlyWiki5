@@ -57,7 +57,7 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 		title = tr.title || currTiddlerTitle;
 	// Check if it is a reference to a tiddler field
 	if(tr.index) {
-		var data = this.getTiddlerData(title,{});
+		var data = this.getTiddlerData(title,Object.create(null));
 		data[tr.index] = value;
 		this.setTiddlerData(title,data,this.getModificationFields());
 	} else {
@@ -79,7 +79,7 @@ exports.deleteTextReference = function(textRef,currTiddlerTitle) {
 		title = tr.title || currTiddlerTitle;
 		tiddler = this.getTiddler(title);
 		if(tiddler && $tw.utils.hop(tiddler.fields,tr.field)) {
-			fields = {};
+			fields = Object.create(null);
 			fields[tr.field] = undefined;
 			this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 		}
@@ -118,15 +118,15 @@ Causes a tiddler to be marked as changed, incrementing the change count, and tri
 This method should be called after the changes it describes have been made to the wiki.tiddlers[] array.
 	title: Title of tiddler
 	isDeleted: defaults to false (meaning the tiddler has been created or modified),
-		true if the tiddler has been created
+		true if the tiddler has been deleted
 */
 exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	// Record the touch in the list of changed tiddlers
-	this.changedTiddlers = this.changedTiddlers || {};
-	this.changedTiddlers[title] = this.changedTiddlers[title] || {};
+	this.changedTiddlers = this.changedTiddlers || Object.create(null);
+	this.changedTiddlers[title] = this.changedTiddlers[title] || Object.create(null);
 	this.changedTiddlers[title][isDeleted ? "deleted" : "modified"] = true;
 	// Increment the change count
-	this.changeCount = this.changeCount || {};
+	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
 		this.changeCount[title]++;
 	} else {
@@ -138,16 +138,23 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 		var self = this;
 		$tw.utils.nextTick(function() {
 			var changes = self.changedTiddlers;
-			self.changedTiddlers = {};
+			self.changedTiddlers = Object.create(null);
 			self.eventsTriggered = false;
-			self.dispatchEvent("change",changes);
+			if($tw.utils.count(changes) > 0) {
+				self.dispatchEvent("change",changes);
+			}
 		});
 		this.eventsTriggered = true;
 	}
 };
 
+exports.clearTiddlerEventQueue = function() {
+	this.changedTiddlers = Object.create(null);
+	this.changeCount = Object.create(null)
+};
+
 exports.getChangeCount = function(title) {
-	this.changeCount = this.changeCount || {};
+	this.changeCount = this.changeCount || Object.create(null);
 	if($tw.utils.hop(this.changeCount,title)) {
 		return this.changeCount[title];
 	} else {
@@ -223,7 +230,7 @@ exports.getCreationFields = function() {
 Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
-	var fields = {},
+	var fields = Object.create(null),
 		modifier = this.getTiddlerText(USER_NAME_TITLE);
 	fields.modified = new Date();
 	if(modifier) {
@@ -239,7 +246,7 @@ excludeTag: tag to exclude
 includeSystem: whether to include system tiddlers (defaults to false)
 */
 exports.getTiddlers = function(options) {
-	options = options || {};
+	options = options || Object.create(null);
 	var self = this,
 		sortField = options.sortField || "title",
 		tiddlers = [], t, titles = [];
@@ -275,6 +282,23 @@ exports.countTiddlers = function(excludeTag) {
 };
 
 /*
+Returns a function iterator(callback) that iterates through the specified titles, and invokes the callback with callback(tiddler,title)
+*/
+exports.makeTiddlerIterator = function(titles) {
+	var self = this;
+	if(!$tw.utils.isArray(titles)) {
+		titles = Object.keys(titles);
+	} else {
+		titles = titles.slice(0);
+	}
+	return function(callback) {
+		titles.forEach(function(title) {
+			callback(self.getTiddler(title),title);
+		});
+	};
+};
+
+/*
 Sort an array of tiddler titles by a specified field
 	titles: array of titles (sorted in place)
 	sortField: name of field to sort by
@@ -288,28 +312,20 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 			a = self.getTiddler(a).fields[sortField] || "";
 			b = self.getTiddler(b).fields[sortField] || "";
 		}
-		if(!isNumeric || isNaN(a) || isNaN(b)) {
-			if(!isCaseSensitive) {
-				if(typeof a === "string") {
-					a = a.toLowerCase();
-				}
-				if(typeof b === "string") {
-					b = b.toLowerCase();
-				}
-			}
-		}
-		else {
-			a-= 0;
-			b-= 0;
-		}
-		if(a < b) {
-			return isDescending ? +1 : -1;
+		if(isNumeric) {
+			a = Number(a);
+			b = Number(b);
+			return isDescending ? b - a : a - b;
+		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
+			return isDescending ? b - a : a - b;
 		} else {
-			if(a > b) {
-				return isDescending ? -1 : +1;
-			} else {
-				return 0;
+			a = String(a);
+			b = String(b);
+			if(!isCaseSensitive) {
+				a = a.toLowerCase();
+				b = b.toLowerCase();
 			}
+			return isDescending ? b.localeCompare(a) : a.localeCompare(b);
 		}
 	});
 };
@@ -431,7 +447,7 @@ Get a hashmap by tag of arrays of tiddler titles
 exports.getTagMap = function() {
 	var self = this;
 	return this.getGlobalCache("tagmap",function() {
-		var tags = {},
+		var tags = Object.create(null),
 			storeTags = function(tagArray,title) {
 				if(tagArray) {
 					for(var index=0; index<tagArray.length; index++) {
@@ -480,7 +496,7 @@ exports.sortByList = function(array,listTitle) {
 	var list = this.getTiddlerList(listTitle);
 	if(!array || array.length === 0) {
 		return [];
-	} else if(list) {
+	} else {
 		var titles = [], t, title;
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
@@ -493,36 +509,43 @@ exports.sortByList = function(array,listTitle) {
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
-				// Entry isn't in the list yet, so either append or insert;
-				// obey list-before and list-after if present for relative insertion point
-				var tiddler = this.getTiddler(title),
-					pos = -1;
-				if(tiddler) {
-					var beforeTitle = tiddler.fields["list-before"];
-					if(beforeTitle === "") {
-						pos = 0;
-					} else if(beforeTitle) {
-						pos = list.indexOf(beforeTitle);
-					} else {
-						var afterTitle = tiddler.fields["list-after"];
-						if(afterTitle) {
-							pos = list.indexOf(afterTitle);
-							if(pos >= 0) {
-								++pos;
-							}
-						}
-					}
-				}
-				if(pos >= 0) {
-					titles.splice(pos,0,title);
-				} else {
-					titles.push(title);
-				}
+				titles.push(title);
 			}
 		}
+		// Finally obey the list-before and list-after fields of each tiddler in turn
+		var sortedTitles = titles.slice(0);
+		for(t=0; t<sortedTitles.length; t++) {
+			title = sortedTitles[t];
+			var currPos = titles.indexOf(title),
+				newPos = -1,
+				tiddler = this.getTiddler(title);
+			if(tiddler) {
+				var beforeTitle = tiddler.fields["list-before"],
+					afterTitle = tiddler.fields["list-after"];
+				if(beforeTitle === "") {
+					newPos = 0;
+				} else if(beforeTitle) {
+					newPos = titles.indexOf(beforeTitle);
+				} else if(afterTitle) {
+					newPos = titles.indexOf(afterTitle);
+					if(newPos >= 0) {
+						++newPos;
+					}
+				}
+				if(newPos === -1) {
+					newPos = currPos;
+				}
+				if(newPos !== currPos) {
+					titles.splice(currPos,1);
+					if(newPos >= currPos) {
+						newPos--;
+					}
+					titles.splice(newPos,0,title);
+				}
+			}
+
+		}
 		return titles;
-	} else {
-		return array;
 	}
 };
 
@@ -532,7 +555,7 @@ Retrieve a tiddler as a JSON string of the fields
 exports.getTiddlerAsJson = function(title) {
 	var tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = {};
+		var fields = Object.create(null);
 		$tw.utils.each(tiddler.fields,function(value,name) {
 			fields[name] = tiddler.getFieldString(name);
 		});
@@ -574,7 +597,7 @@ exports.getTiddlerData = function(title,defaultData) {
 Extract an indexed field from within a data tiddler
 */
 exports.extractTiddlerDataItem = function(title,index,defaultText) {
-	var data = this.getTiddlerData(title,{}),
+	var data = this.getTiddlerData(title,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -623,7 +646,7 @@ exports.getTiddlerList = function(title,field,index) {
 
 // Return a named global cache object. Global cache objects are cleared whenever a tiddler change occurs
 exports.getGlobalCache = function(cacheName,initializer) {
-	this.globalCache = this.globalCache || {};
+	this.globalCache = this.globalCache || Object.create(null);
 	if($tw.utils.hop(this.globalCache,cacheName)) {
 		return this.globalCache[cacheName];
 	} else {
@@ -633,7 +656,7 @@ exports.getGlobalCache = function(cacheName,initializer) {
 };
 
 exports.clearGlobalCache = function() {
-	this.globalCache = {};
+	this.globalCache = Object.create(null);
 }
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
@@ -642,13 +665,13 @@ exports.getCacheForTiddler = function(title,cacheName,initializer) {
 // Temporarily disable caching so that tweakParseTreeNode() works
 return initializer();
 
-	this.caches = this.caches || {};
+	this.caches = this.caches || Object.create(null);
 	var caches = this.caches[title];
 	if(caches && caches[cacheName]) {
 		return caches[cacheName];
 	} else {
 		if(!caches) {
-			caches = {};
+			caches = Object.create(null);
 			this.caches[title] = caches;
 		}
 		caches[cacheName] = initializer();
@@ -658,7 +681,7 @@ return initializer();
 
 // Clear all caches associated with a particular tiddler
 exports.clearCache = function(title) {
-	this.caches = this.caches || {};
+	this.caches = this.caches || Object.create(null);
 	if($tw.utils.hop(this.caches,title)) {
 		delete this.caches[title];
 	}
@@ -718,19 +741,6 @@ exports.old_parseTiddler = function(title,options) {
 		}) : null;
 };
 
-// We need to tweak parse trees generated by the existing parser because of the change from {type:"element",tag:"$tiddler",...} to {type:"tiddler",...}
-var tweakParseTreeNode = function(node) {
-	if(node.type === "element" && node.tag.charAt(0) === "$") {
-		node.type = node.tag.substr(1);
-		delete node.tag;
-	}
-	tweakParseTreeNodes(node.children);
-};
-
-var tweakParseTreeNodes = function(nodeList) {
-	$tw.utils.each(nodeList,tweakParseTreeNode);
-};
-
 var tweakMacroDefinition = function(nodeList) {
 	if(nodeList && nodeList[0] && nodeList[0].type === "macrodef") {
 		nodeList[0].type = "set";
@@ -747,8 +757,6 @@ var tweakMacroDefinition = function(nodeList) {
 var tweakParser = function(parser) {
 	// Move any macro definitions to contain the body tree
 	tweakMacroDefinition(parser.tree);
-	// Tweak widgets
-	tweakParseTreeNodes(parser.tree);
 };
 
 exports.parseText = function(type,text,options) {
@@ -836,6 +844,25 @@ exports.makeWidget = function(parser,options) {
 };
 
 /*
+Make a widget tree for transclusion
+title: target tiddler title
+options: as for wiki.makeWidget() (including parseAsInline)
+*/
+exports.makeTranscludeWidget = function(title,options) {
+	options = options || {};
+	var parseTree = {tree: [{
+		type: "transclude",
+		attributes: {
+			tiddler: {
+				name: "tiddler",
+				type: "string",
+				value: title}},
+		isBlock: !options.parseAsInline}
+	]};
+	return $tw.wiki.makeWidget(parseTree,options);
+};
+
+/*
 Parse text in a specified format and render it into another format
 	outputType: content type for the output
 	textType: content type of the input text
@@ -877,7 +904,7 @@ Return an array of tiddler titles that match a search string
 	text: The text string to search for
 	options: see below
 Options available:
-	titles:  Hashmap or array of tiddler titles to limit search
+	source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 	exclude: An array of tiddler titles to exclude from the search
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
@@ -932,28 +959,13 @@ exports.search = function(text,options) {
 		return true;
 	};
 	// Loop through all the tiddlers doing the search
-	var results = [];
-	if($tw.utils.isArray(options.titles)) {
-		for(t=0; t<options.titles.length; t++) {
-			if(!!searchTiddler(options.titles[t]) === !options.invert) {
-				results.push(options.titles[t]);
-			}
+	var results = [],
+		source = options.source || this.each;
+	source(function(tiddler,title) {
+		if(!!searchTiddler(title) === !options.invert) {
+			results.push(title);
 		}
-	} else {
-		if(options.titles) {
-			for(var title in options.titles) {
-				if(!!searchTiddler(title) === !options.invert) {
-					results.push(title);
-				}
-			}
-		} else {
-			this.each(function(tiddler,title) {
-				if(!!searchTiddler(title) === !options.invert) {
-					results.push(title);
-				}
-			});
-		}
-	}
+	});
 	// Remove any of the results we have to exclude
 	if(options.exclude) {
 		for(t=0; t<options.exclude.length; t++) {
@@ -1057,6 +1069,50 @@ exports.readFile = function(file,callback) {
 	} else {
 		reader.readAsText(file);
 	}
+};
+
+/*
+Check whether the specified draft tiddler has been modified
+*/
+exports.isDraftModified = function(title) {
+  var tiddler = this.getTiddler(title);
+	if(!tiddler.isDraft()) {
+		return false;
+	}
+	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of", "tags"],
+		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
+	if(!origTiddler) {
+		return true;
+	}
+	if(tiddler.fields["draft.title"] !== tiddler.fields["draft.of"]) {
+		return true;
+	}
+	if(!$tw.utils.isArrayEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
+		return true;
+	}
+	return !Object.keys(tiddler.fields).every(function(field) {
+		if(ignoredFields.indexOf(field) >= 0) {
+			return true;
+		}
+		return tiddler.fields[field] === origTiddler.fields[field];
+	});
+};
+
+/*
+Add a new record to the top of the history stack
+title: a title string or an array of title strings
+fromPageRect: page coordinates of the origin of the navigation
+historyTitle: title of history tiddler (defaults to $:/HistoryList)
+*/
+exports.addToHistory = function(title,fromPageRect,historyTitle) {
+	historyTitle = historyTitle || "$:/HistoryList";
+	var titles = $tw.utils.isArray(title) ? title : [title];
+	// Add a new record to the top of the history stack
+	var historyList = this.getTiddlerData(historyTitle,[]);
+	$tw.utils.each(titles,function(title) {
+		historyList.push({title: title, fromPageRect: fromPageRect});
+	});
+	this.setTiddlerData(historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
 };
 
 })();

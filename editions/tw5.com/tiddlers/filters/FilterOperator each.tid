@@ -1,0 +1,26 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: each
+type: text/vnd.tiddlywiki
+
+The ''each'' filter operator filters the current list to leave only the first tiddler with each distinct value for a specified field.
+
+For example:
+
+|!Filter String |!Description |
+|`[all[tiddlers]sort[title]each[type]]` |Returns a list of the first tiddler with each distinct ''type'' field |
+
+The ''each'' operator can be used to group tiddlers. For example, the following example creates a list of tiddlers split into types:
+
+<$list filter="[!is[system]has[type]!type[text/vnd.tiddlywiki]each[type]sort[type]]">
+<div>
+
+! <$view field="type"/>
+<$list filter="[type{!!type}!is[system]sort[title]]">
+<div>
+<$link to={{!!title}}><$view field="title"/></$link>
+</div>
+</$list>
+</div>
+</$list>

@@ -157,17 +157,5 @@ exports.addEventListeners = function(domNode,events) {
 	});
 };
 
-/*
-Construct and dispatch a custom event
-*/
-exports.dispatchCustomEvent = function(target,name,members) {
-	var event = document.createEvent("Event");
-	event.initEvent(name,true,true);
-	$tw.utils.each(members,function(member,name) {
-		event[name] = member;
-	});
-	target.dispatchEvent(event); 
-};
-
 
 })();

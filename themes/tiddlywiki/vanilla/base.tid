@@ -27,6 +27,10 @@ html {
 	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
 }
 
+html:-webkit-full-screen {
+	background-color: <<colour page-background>>;
+}
+
 body.tw-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics##fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics##lineheight}};
@@ -36,7 +40,7 @@ body.tw-body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	line-height: 1em;
+	line-height: 1.2;
 	font-weight: 300;
 }
 
@@ -52,7 +56,7 @@ pre {
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
-	<<border-radius 3px>>
+	border-radius: 3px;
 }
 
 code {
@@ -61,7 +65,7 @@ code {
 	border: 1px solid <<colour code-border>>;
     white-space: pre-wrap;
 	padding: 0 3px 2px;
-	<<border-radius 3px>>
+	border-radius: 3px;
 }
 
 blockquote {
@@ -107,6 +111,10 @@ table thead tr td, table th {
 
 table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
+}
+
+.tw-csv-table {
+	white-space: nowrap;
 }
 
 .tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
@@ -193,7 +201,7 @@ a.tw-tiddlylink-external:hover {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour dragger-background>>;
-	<<border-radius 20px>>
+	border-radius: 20px;
 }
 
 .tw-tiddler-dragger-cover {
@@ -245,7 +253,11 @@ a.tw-tiddlylink-external:hover {
 	line-height: 1.4em;
 }
 
-.tw-sidebar-lists button {
+.tw-sidebar-lists input {
+	color: <<colour foreground>>;
+}
+
+.tw-sidebar-lists button.btn {
 	color: <<colour sidebar-button-foreground>>;
 }
 
@@ -253,7 +265,7 @@ a.tw-tiddlylink-external:hover {
 	color: <<colour sidebar-muted-foreground>>;
 }
 
-.btn-mini:hover {
+.tw-sidebar-lists button.btn-mini:hover {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
@@ -295,7 +307,7 @@ a.tw-tiddlylink-external:hover {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
-	<<border-radius 8px>>
+	border-radius: 8px;
 }
 
 .tw-untagged-label {
@@ -311,6 +323,33 @@ a.tw-tiddlylink-external:hover {
 /*
 ** Page layout
 */
+
+.tw-topbar {
+	position: fixed;
+	z-index: 1200;
+}
+
+.tw-topbar-left {
+	left: 29px;
+	top: 5px;
+}
+
+.tw-topbar-right {
+	top: 5px;
+	right: 29px;
+}
+
+.tw-topbar button {
+	padding: 8px;
+}
+
+.tw-topbar svg {
+	fill: <<colour muted-foreground>>;
+}
+
+.tw-topbar button:hover svg {
+	fill: <<colour foreground>>;
+}
 
 .sidebar-header {
 	color: <<colour sidebar-foreground>>;
@@ -331,6 +370,10 @@ a.tw-tiddlylink-external:hover {
 
 .tw-advanced-search input {
 	width: 60%;
+}
+
+.tw-search {
+	padding-top: 14px;
 }
 
 .tw-search a svg {
@@ -386,8 +429,10 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+
 	.sidebar-header {
 		padding: 14px;
+		min-height: 32px;
 	}
 
 	.story-river {
@@ -397,7 +442,12 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
-	.sidebar-header {
+
+	.tw-message-box {
+		margin: 21px -21px 21px -21px;
+	}
+
+	.tw-sidebar-scrollable {
 		position: fixed;
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyright}};
@@ -407,7 +457,7 @@ a.tw-tiddlylink-external:hover {
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
 		margin: 0 0 0 -42px;
-		padding: 70px 0 28px 42px;
+		padding: 71px 0 28px 42px;
 	}
 
 	.story-river {
@@ -415,12 +465,21 @@ a.tw-tiddlylink-external:hover {
 		left: {{$:/themes/tiddlywiki/vanilla/metrics##storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics##storytop}};
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}};
-		padding: 56px 42px 42px 42px;
+		padding: 42px 42px 42px 42px;
 	}
+
+<<if-no-sidebar "
+
+	.story-river {
+		width: auto;
+	}
+
+">>
+
 }
 
 @media print {
-	.sidebar-header {
+	.sidebar-header, .tw-topbar {
 		display: none;
 	}
 
@@ -480,11 +539,20 @@ a.tw-tiddlylink-external:hover {
 		width: {{$:/themes/tiddlywiki/vanilla/metrics##tiddlerwidth}};
 	}
 
+<<if-no-sidebar "
+
+	.tw-tiddler-frame {
+		width: 100%;
+	}
+
+">>
+
 	.tw-tiddler-info {
 		margin: 0 -42px 0 -42px;
 	}
 }
 
+.tw-site-title,
 .titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
@@ -555,6 +623,15 @@ a.tw-tiddlylink-external:hover {
 	line-height: 1.3em;
 	-webkit-appearance: none;
 	margin: 4px 0 4px 0;
+}
+
+.tw-tiddler-frame .tw-binary-warning {
+	width: 100%;
+	height: 5em;
+	text-align: center;
+	padding: 3em 3em 6em 3em;
+	background: <<colour alert-background>>;
+	border: 1px solid <<colour alert-border>>;
 }
 
 .tw-tiddler-frame input.tw-edit-texteditor {
@@ -870,7 +947,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-notification {
 	position: fixed;
 	top: 14px;
-	right: 14px;
+	right: 42px;
 	z-index: 1000;
 	max-width: 280px;
 	padding: 0 14px 0 14px;
@@ -882,13 +959,26 @@ canvas.tw-edit-bitmapeditor  {
 ** Tabs
 */
 
-.tw-tab-set {
+.tw-tab-set.tw-vertical {
+	display: flex;
 }
 
 .tw-tab-buttons {
 	font-size: 0.85em;
 	padding-top: 1em;
 	margin-bottom: -1px;
+}
+
+.tw-tab-buttons.tw-vertical  {
+	z-index: 100;
+	display: block;
+	padding-top: 14px;
+	vertical-align: top;
+	text-align: right;
+	margin-bottom: inherit;
+	margin-right: -1px;
+	max-width: 33%;
+	flex: 0 0 auto;
 }
 
 .tw-tab-buttons button.tw-tab-selected {
@@ -901,9 +991,7 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-tab-buttons button {
 	color: <<colour tab-foreground>>;
-	padding: 2px 4px 4px 4px;
-	margin-left: 2px;
-	margin-right: 2px;
+	padding: 3px 5px 3px 5px;
 	font-weight: 300;
 	border: none;
 	background: inherit;
@@ -913,12 +1001,41 @@ canvas.tw-edit-bitmapeditor  {
 	border-right: 1px solid <<colour tab-border>>;
 }
 
+.tw-tab-buttons.tw-vertical button {
+	display: block;
+	width: 100%;
+	margin-top: 3px;
+	text-align: right;
+	background-color: <<colour tab-background>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+	border-right: none;
+}
+
+.tw-tab-buttons.tw-vertical button.tw-tab-selected {
+	background-color: <<colour tab-background-selected>>;
+	border-right: 1px solid <<colour tab-background-selected>>;
+}
+
 .tw-tab-divider {
 	border-top: 1px solid <<colour tab-divider>>;
 }
 
+.tw-tab-divider.tw-vertical  {
+	display: none;
+}
+
 .tw-tab-content {
 	padding-top: 14px;
+}
+
+.tw-tab-content.tw-vertical  {
+	display: inline-block;
+	vertical-align: top;
+	padding-top: 0;
+	padding-left: 14px;
+	border-left: 1px solid <<colour tab-border>>;
+	flex: 0 0 70%;
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
@@ -941,47 +1058,13 @@ canvas.tw-edit-bitmapeditor  {
 	border-top: 1px solid <<colour sidebar-tab-divider>>;
 }
 
-.tw-more-sidebar {
-	white-space: nowrap;
-}
-
-@media (min-width: 770px) {
-	.tw-more-sidebar {
-		margin-left: -14px;
-	}
-}
-
-.tw-more-sidebar .tw-tab-buttons {
-	display: inline-block;
-	vertical-align: top;
-	text-align: right;
-	padding-top: 0;
-	padding-left: 0;
-}
-
-.tw-more-sidebar .tw-tab-buttons button {
-	display: block;
-	width: 100%;
-	text-align: right;
-}
-
-.tw-sidebar-lists .tw-more-sidebar .tw-tab-divider {
-	display: none;
-}
-
-.tw-more-sidebar .tw-tab-content {
-	display: inline-block;
-	vertical-align: top;
-	padding-top: 0;
-	padding-left: 14px;
-}
-
 .tw-more-sidebar .tw-tab-buttons button {
 	background-color: <<colour sidebar-tab-background>>;
 	border-top: none;
 	border-left: none;
 	border-bottom: none;
 	border-right: 1px solid #ccc;
+	margin-bottom: inherit;
 }
 
 .tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
@@ -1067,7 +1150,6 @@ canvas.tw-edit-bitmapeditor  {
 	border: 1px solid <<colour message-border>>;
 	background: <<colour message-background>>;
 	padding: 0px 21px 0px 21px;
-	margin: 21px -21px 21px -21px;
 	font-size: 12px;
 	line-height: 18px;
 	color: <<colour message-foreground>>;
@@ -1122,3 +1204,5 @@ canvas.tw-edit-bitmapeditor  {
 	margin: 4px;
 	border: 1px solid #000;
 }
+
+

@@ -17,7 +17,7 @@ var AndTidWiki = function(wiki) {
 
 AndTidWiki.prototype.save = function(text,method,callback) {
 	// Get the pathname of this document
-	var pathname = decodeURIComponent(document.location.toString());
+	var pathname = decodeURIComponent(document.location.toString().split("#")[0]);
 	// Strip the file://
 	if(pathname.indexOf("file://") === 0) {
 		pathname = pathname.substr(7);

@@ -4,6 +4,17 @@ Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Advanced/LoadedModules/Caption: Geladene Module
 Advanced/LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
+Advanced/Settings/Caption: Einstellungen
+Advanced/Settings/Hint: Diese erweiterten Einstellungen ermöglichen ihnen, das Verhalten von TiddlyWiki zu ändern.
+Advanced/Settings/NavigationAddressBar/Caption: Navigation Adresszeile
+Advanced/Settings/NavigationAddressBar/Hint: Verhalten der Browser Adresszeile, wenn ein Tiddler geöffnet wird:
+Advanced/Settings/NavigationAddressBar/No/Description: Die Browser Adresszeile wird nicht verändert.
+Advanced/Settings/NavigationAddressBar/Permalink/Description: Den aktuellen Tiddler einbinden.
+Advanced/Settings/NavigationAddressBar/Permaview/Description: Alle geöffneten Tiddler einbinden.
+Advanced/Settings/NavigationHistory/Caption: Browser Chronik
+Advanced/Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
+Advanced/Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
+Advanced/Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
 Advanced/TiddlerFields/Caption: Tiddler Felder
 Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exclusive ~Schatten-Tiddler. 
 Appearance/Caption: Design
@@ -40,6 +51,9 @@ Plugins/Caption: Plugins
 Plugins/Fields/Description: Beschreibung
 Plugins/Fields/Title: Titel
 Plugins/Fields/Version: Version
+Plugins/Language/Prompt: Sprachen
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Themen
 Saving/AutoSave/Disabled/Button: klicken zum Aktivieren
 Saving/AutoSave/Disabled/Prompt: Automatisch speichern ist deaktiviert!
 Saving/AutoSave/Enabled/Button: klicken zum Deaktivieren

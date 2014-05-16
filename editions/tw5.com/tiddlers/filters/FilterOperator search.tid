@@ -1,0 +1,13 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters commonfilters
+title: FilterOperator: search
+type: text/vnd.tiddlywiki
+
+The ''search'' filter operator filters the current list to leave only those tiddlers that include the operand text in their title, body or tags. Preceding the operator with `!` returns all tiddlers that do not include the specified text. The search is case-insenstive.
+
+For example:
+
+|!Filter String |!Description |
+|`[search[alsatian]]` |Returns a list of the tiddlers containing the text "alsatian" |
+|`[all[shadows]search[alsatian]]` |Returns a list of the shadow tiddlers containing the text "alsatian" |

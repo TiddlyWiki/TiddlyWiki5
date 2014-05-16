@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Lance automatiquement les commandes configurées
+
+Compile le wiki courant à partir des cibles spécifiées. Si aucune cible n'est spécifiée, toutes les cibles seront compilées.
+
+```
+--build <target> [<target> ...]
+```
+
+Les cibles de compilation sont définies dans le fichier `tiddlywiki.info` du [dossier associé au wiki|TiddlyWikiFolders].
+

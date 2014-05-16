@@ -30,7 +30,12 @@ ElementWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElementNS(this.namespace,this.parseTreeNode.tag);
+	// Neuter blacklisted elements
+	var tag = this.parseTreeNode.tag;
+	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+		tag = "safe-" + tag;
+	}
+	var domNode = this.document.createElementNS(this.namespace,tag);
 	this.assignAttributes(domNode,{excludeEventAttributes: true});
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);

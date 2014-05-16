@@ -1,0 +1,7 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: filters
+title: FilterOperator: butfirst
+type: text/vnd.tiddlywiki
+
+The ''butfirst'' filter operator is a synonym for [[FilterOperator: rest]].

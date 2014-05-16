@@ -89,17 +89,19 @@ defaultValue: default value if the variable is not defined
 */
 Widget.prototype.getVariable = function(name,options) {
 	options = options || {};
-	var actualParams = options.params || [];
-	// If the variable doesn't exist then look for a macro module
-	if(!(name in this.variables)) {
-		return this.evaluateMacroModule(name,actualParams,options.defaultValue);
+	var actualParams = options.params || [],
+		parentWidget = this.parentWidget;
+	// Check for the variable defined in the parent widget (or an ancestor in the prototype chain)
+	if(parentWidget && name in parentWidget.variables) {
+		var variable = parentWidget.variables[name],
+			value = variable.value;
+		// Substitute any parameters specified in the definition
+		value = this.substituteVariableParameters(value,variable.params,actualParams);
+		value = this.substituteVariableReferences(value);
+		return value;
 	}
-	var variable = this.variables[name],
-		value = variable.value || "";
-	// Substitute any parameters specified in the definition
-	value = this.substituteVariableParameters(value,variable.params,actualParams);
-	value = this.substituteVariableReferences(value);
-	return value;
+	// If the variable doesn't exist in the parent widget then look for a macro module
+	return this.evaluateMacroModule(name,actualParams,options.defaultValue);
 };
 
 Widget.prototype.substituteVariableParameters = function(text,formalParams,actualParams) {
@@ -199,8 +201,8 @@ Widget.prototype.getStateQualifier = function(name) {
 	name = name || "transclusion";
 	var output = [],
 		node = this;
-	while(node) {
-		if($tw.utils.hop(node.variables,name)) {
+	while(node && node.parentWidget) {
+		if($tw.utils.hop(node.parentWidget.variables,name)) {
 			output.push(node.getVariable(name));
 		}
 		node = node.parentWidget;
@@ -342,7 +344,7 @@ Add a list of event listeners from an array [{type:,handler:},...]
 Widget.prototype.addEventListeners = function(listeners) {
 	var self = this;
 	$tw.utils.each(listeners,function(listenerInfo) {
-		self.addEventListener(listenerInfo.type,listenerInfo.handler);		
+		self.addEventListener(listenerInfo.type,listenerInfo.handler);
 	});
 };
 
@@ -458,7 +460,7 @@ Widget.prototype.findFirstDomNode = function() {
 Remove any DOM nodes created by this widget or its children
 */
 Widget.prototype.removeChildDomNodes = function() {
-	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case 
+	// If this widget has directly created DOM nodes, delete them and exit. This assumes that any child widgets are contained within the created DOM nodes, which would normally be the case
 	if(this.domNodes.length > 0) {
 		$tw.utils.each(this.domNodes,function(domNode) {
 			domNode.parentNode.removeChild(domNode);

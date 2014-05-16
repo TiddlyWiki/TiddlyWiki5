@@ -1,12 +1,12 @@
 created: 20140305091244145
-modified: 20140305091258135
+modified: 20140425121258135
 tags: howto
 title: Using Stylesheets
 type: text/vnd.tiddlywiki
 
 The usual way of modifying the appearance of a TiddlyWiki is to use one of the available themes, or to modify the [[colour palette|ColourPalettes]].
 
-You can also use custom CSS stylesheets by tagging tiddlers with `$:/tags/stylsheet`. For example, create a tiddler with the tag `$:/tags/stylsheet` and the following content in order to change the page background colour to red:
+You can also use custom CSS stylesheets by tagging tiddlers with `$:/tags/stylesheet`. For example, create a tiddler with the tag `$:/tags/stylesheet` and the following content in order to change the page background colour to red:
 
 ```
 html body.tw-body {
@@ -28,7 +28,7 @@ If you wish to use macros and transclusions in your stylesheets you should inste
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
 body.tw-body pre {
-	<<border-radius 7px>>
+	<<box-shadow "inset 0 1px 0 #fff">>
 }
 ```
 
@@ -39,7 +39,6 @@ The `\rules` pragma at the top of the tiddler restricts the WikiText to just all
 Several globally available macros are provided that are helpful in constructing stylesheets. See [[$:/core/ui/PageStylesheet]] for the definitions of these macros.
 
 * `<<colour name>>` and `<<color name>>` retrieve named colours from the current [[colour palette|ColourPalettes]]
-* `<<border-radius radius>>` specify a border-radius
 * `<<box-shadow shadow>>` specify a box-shadow
 * `<<filter filter>>` specify a CSS filter
 * `<<transition transition>>` specify a CSS transition

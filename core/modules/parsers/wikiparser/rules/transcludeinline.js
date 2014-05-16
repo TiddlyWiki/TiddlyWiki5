@@ -34,8 +34,7 @@ exports.parse = function() {
 		textRef = $tw.utils.trim(this.match[1]);
 	// Prepare the transclude widget
 	var transcludeNode = {
-			type: "element",
-			tag: "$transclude",
+			type: "transclude",
 			attributes: {}
 		};
 	// Prepare the tiddler widget
@@ -45,8 +44,7 @@ exports.parse = function() {
 			targetField = tr.field,
 			targetIndex = tr.index,
 			tiddlerNode = {
-				type: "element",
-				tag: "$tiddler",
+				type: "tiddler",
 				attributes: {
 					tiddler: {type: "string", value: targetTitle}
 				},

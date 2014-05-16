@@ -13,5 +13,5 @@ caption: {{$:/language/ControlPanel/Basics/Caption}}
 |<<lingo Tiddlers/Prompt>> |''<$count filter="[!is[system]]"/>'' |
 |<<lingo Tags/Prompt>> |''<$count filter="[tags[]]"/>'' |
 |<<lingo SystemTiddlers/Prompt>> |''<$count filter="[is[system]]"/>'' |
-|<<lingo ShadowTiddlers/Prompt>> |''<$count filter="[is[shadow]]"/>'' |
+|<<lingo ShadowTiddlers/Prompt>> |''<$count filter="[all[shadows]]"/>'' |
 |<<lingo OverriddenShadowTiddlers/Prompt>> |''<$count filter="[is[tiddler]is[shadow]]"/>'' |

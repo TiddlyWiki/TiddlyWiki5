@@ -1,0 +1,53 @@
+created: 20140403223413403
+modified: 20140403223524945
+tags: upgrading
+title: Changes to filters in 5.0.9-beta
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+This release resolves a number of inconsistencies with the way that filters are handled. The changes mean that existing filters may need to be updated - particularly those that must deal with missing or shadow tiddlers.
+
+! Changes to ''is'' and addition of ''all''
+
+Most filter operators act by choosing some or all of their source titles to pass through or re-order. Those that add new entries that are not drawn from the source list are referred to as selectors. Prior to 5.0.9-beta, a few filter operators were inconsistent in whether they filtered from the source list or selected new entries into it. 
+
+The specific changes are:
+
+* The ''is'' operator now always strictly filters from the currently selected list of tiddlers
+* The new ''all'' operator acts as a selector by replacing the current list with a combination of tiddlers from specific sources:
+** ''current'' for the current tiddler
+** ''missing'' for all missing tiddlers
+** ''orphans'' for all orphan tiddlers
+** ''shadows'' for all shadow tiddlers
+** ''tiddlers'' for all non-shadow tiddlers (including both system and non-system tiddlers)
+
+The sources for the ''all'' operator can be combined with the `+` character. For example, `[all[shadows+tiddlers]]` returns all shadow tiddlers and all ordinary tiddlers.
+
+Previously, it was common to have `[is[shadow]]` at the start of a filter string to select all the shadow tiddlers. In 5.0.9 and above, this will not return all the shadow tiddlers, but instead just those ordinary tiddlers that are also shadow tiddlers (by virtue of having overridden one). The resolution is to use the new ''all'' operator. For example, consider this filter from 5.0.8:
+
+```
+[is[shadow]!has[draft.of]tag[$:/tags/AdvancedSearch]] [!is[shadow]!has[draft.of]tag[$:/tags/AdvancedSearch]] +[tag[$:/tags/AdvancedSearch]]
+```
+
+In 5.0.9, that filter has been changed to:
+
+```
+[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]
+```
+
+Note how the ''all'' operator allows operations to be performed on tiddlers from combinations of sources.
+
+!! Changes to `[is[current]]`
+
+One result of the changes is that `[is[current]]` now strictly filters from the source tiddlers; so, if the current tiddler is a missing tiddler not in the source list, then `[is[current]]` will return an empty list.
+
+The solution is generally to use `[all[current]]` instead. It doesn't read as well, but has the required behaviour of returning just the current tiddler, regardless of whether it is in the source tiddlers.
+
+! Changes to ''title'' and ''field''
+
+There are minor changes to the way that the ''title'' and ''field'' operators work.
+
+The ''title'' operator is a selector: it returns the specified title regardless of whether it is in the current source. ''title'' is used as the default operator if none is specified
+
+The ''field'' operator is a filter: it only returns a subset of the source tiddlers. ''field'' is used as the default operator if the supplied operator is not defined (the supplied operator is passed as the suffix to the field operator, so `[description[Missing]]` is equivalent to `[field:description[Missing]]`).

@@ -17,31 +17,18 @@ Export our filter function
 */
 exports.tag = function(source,operator,options) {
 	var results = [];
-	// Function to check an individual title
-	function checkTiddler(title) {
-		var tiddler = options.wiki.getTiddler(title);
-		if(tiddler) {
-			var match = tiddler.hasTag(operator.operand);
-			if(operator.prefix === "!") {
-				match = !match;
-			}
-			if(match) {
+	if(operator.prefix === "!") {
+		source(function(tiddler,title) {
+			if(tiddler && !tiddler.hasTag(operator.operand)) {
 				results.push(title);
 			}
-		}
-	}
-	// Iterate through the source tiddlers
-	if($tw.utils.isArray(source)) {
-		$tw.utils.each(source,function(title) {
-			checkTiddler(title);
 		});
 	} else {
-		$tw.utils.each(source,function(element,title) {
-			checkTiddler(title);
+		source(function(tiddler,title) {
+			if(tiddler && tiddler.hasTag(operator.operand)) {
+				results.push(title);
+			}
 		});
-	}
-	// Sort the results if we are matching a tag
-	if(operator.prefix !== "!") {
 		results = options.wiki.sortByList(results,operator.operand);
 	}
 	return results;

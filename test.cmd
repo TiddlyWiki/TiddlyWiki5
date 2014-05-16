@@ -19,6 +19,7 @@ rem Run the test edition to run the node.js tests and to generate test.html for 
 
 node .\tiddlywiki.js ^
 	.\editions\test ^
+	--output %TW5_BUILD_OUTPUT% ^
 	--verbose ^
-	--rendertiddler $:/core/save/all %TW5_BUILD_OUTPUT%\test.html text/plain ^
+	--rendertiddler $:/core/save/all test.html text/plain ^
 	|| exit 1

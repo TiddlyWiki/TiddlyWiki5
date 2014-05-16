@@ -1,0 +1,7 @@
+created: 20140406210404245
+modified: 20140424113815434
+tags: tips
+title: Editing Tiddlers with Emacs
+type: text/vnd.tiddlywiki
+
+Michael Fogleman has written an [[Emacs|http://www.gnu.org/software/emacs/]] major mode called [[tid-mode|https://github.com/mwfogleman/tid-mode]], which is for editing TiddlyWiki .tid files. It is derived from text-mode, uses the useful minor modes org-struct and subword, and updates the modified times when you save a .tid file.

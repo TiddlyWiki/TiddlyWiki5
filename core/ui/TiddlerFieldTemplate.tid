@@ -2,7 +2,7 @@ title: $:/core/ui/TiddlerFieldTemplate
 
 <tr class="tw-view-field">
 <td class="tw-view-field-name">
-<<listItem>>
+<$text text=<<listItem>>/>
 </td>
 <td class="tw-view-field-value">
 <$view field=<<listItem>>/>

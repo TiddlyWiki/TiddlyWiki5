@@ -28,7 +28,7 @@ exports.init = function(parser) {
 };
 
 var isLinkExternal = function(to) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s'"]+(?:\/|\b)/i;
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
 	return externalRegExp.test(to);
 };
 
@@ -53,8 +53,7 @@ exports.parse = function() {
 		}];
 	} else {
 		return [{
-			type: "element",
-			tag: "$link",
+			type: "link",
 			attributes: {
 				to: {type: "string", value: link}
 			},

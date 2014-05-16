@@ -1,5 +1,5 @@
-created: 20140213122133816
-modified: 20140214124024493
+created: 2014013122133816
+modified: 20140415114024493
 tags: howto
 title: How to create plugins in the browser
 type: text/vnd.tiddlywiki
@@ -19,7 +19,7 @@ To make a modified copy of a plugin, one edits the constituent shadow tiddlers (
 
 !! 1. Setup your development environment
 
-Start with a blank TiddlyWiki, and create a ''HelloThere'' tiddler that contains links to various tiddlers that you'll be visiting frequently:
+Start with a blank TiddlyWiki. It is useful to create a ''HelloThere'' tiddler that contains links to various tiddlers that you'll be opening frequently during plugin development:
 
 * The plugin itself (eg `$:/plugins/yourname/pluginname`)
 * The payload tiddlers that are to be packed into the plugin (eg `$:/plugins/yourname/pluginname/mywidget.js`)

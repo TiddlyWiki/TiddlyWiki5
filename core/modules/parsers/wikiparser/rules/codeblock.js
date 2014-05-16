@@ -46,8 +46,7 @@ exports.parse = function() {
 	}
 	// Return the $codeblock widget
 	return [{
-			type: "element",
-			tag: "$codeblock",
+			type: "codeblock",
 			attributes: {
 					code: {type: "string", value: text},
 					language: {type: "string", value: this.match[1]}

@@ -1,0 +1,41 @@
+title: $:/_tw5.com-styles
+tags: $:/tags/stylesheet
+
+@media (min-width: 600px) {
+
+	.tw-link-info {
+		-moz-column-count: 2;
+		-moz-column-gap: 10px;
+		-webkit-column-count: 2;
+		-webkit-column-gap: 10px;
+		column-count: 2;
+		column-gap: 10px;
+	}
+
+	.tw-link-info-item {
+		width: 100%;
+	}
+
+}
+
+.tw-link-info-item {
+	display: inline-block;
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+	background: #fcf8f8;
+	font-size: 0.8em;
+	line-height: 1.2;
+}
+
+.tw-link-info-item h1 {
+	font-weight: 500;
+	font-size: 16px;	
+}
+
+.tw-scrollable-demo {
+	border: 1px solid <<colour message-border>>;
+	background-color: <<colour message-background>>;
+	padding: 1em;
+	height: 400px;
+}

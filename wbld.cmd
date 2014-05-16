@@ -6,16 +6,13 @@ rem of a member of the tw5tiddlyweb space
 rem usage:
 rem .\wbld.cmd <tiddlyspace username> <tiddlyspace password>
 
-rem Create the tmp directory if needed
-
-mkdir tmp
-
 rem Open the tw5tiddlyweb edition in TW5 and save the template for the main HTML file
 
 node .\tiddlywiki.js ^
 	editions\tw5tiddlyweb ^
 	--verbose ^
-	--rendertiddler $:/core/save/all tmp\tiddlyweb.html text/plain ^
+	--output tmp ^
+	--rendertiddler $:/core/save/all tiddlyweb.html text/plain ^
 	|| exit 1
 
 rem Prepend the type information that TiddlyWeb needs to turn the .html file into a .tid file

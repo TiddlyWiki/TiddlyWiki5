@@ -2,8 +2,13 @@ title: HelloThere
 
 This is a demo of TiddlyWiki5 incorporating a plugin for the [[markdown-js|https://github.com/evilstreak/markdown-js]] Markdown parser from Dominic Baggott.
 
-The MarkdownExample tiddler below is written in Markdown.
+The MarkdownExample tiddler below is written in Markdown. Create wiki links with the usual Markdown link syntax targeting `#` and the target tiddler title:
+
+```
+[link text](#TiddlerTitle)
+```
 
 To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/markdown]]
+

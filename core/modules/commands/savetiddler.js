@@ -31,10 +31,11 @@ Command.prototype.execute = function() {
 		fs = require("fs"),
 		path = require("path"),
 		title = this.params[0],
-		filename = this.params[1],
+		filename = path.resolve(this.commander.outputPath,this.params[1]),
 		tiddler = this.commander.wiki.getTiddler(title),
 		type = tiddler.fields.type || "text/vnd.tiddlywiki",
 		contentTypeInfo = $tw.config.contentTypeInfo[type] || {encoding: "utf8"};
+	$tw.utils.createFileDirectories(filename);
 	fs.writeFile(filename,tiddler.fields.text,contentTypeInfo.encoding,function(err) {
 		self.callback(err);
 	});

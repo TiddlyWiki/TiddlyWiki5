@@ -4,19 +4,19 @@ tags: $:/tags/TiddlerInfo/Advanced
 \define lingo-base() $:/language/TiddlerInfo/Advanced/ShadowInfo/
 <$set name="infoTiddler" value=<<currentTiddler>>>
 
-! <<lingo Heading>>
+''<<lingo Heading>>''
 
-<$list filter="[is[current]!is[shadow]]">
+<$list filter="[all[current]!is[shadow]]">
 
 <<lingo NotShadow/Hint>>
 
 </$list>
 
-<$list filter="[is[current]is[shadow]]">
+<$list filter="[all[current]is[shadow]]">
 
 <<lingo Shadow/Hint>>
 
-<$list filter="[is[current]shadowsource[]]">
+<$list filter="[all[current]shadowsource[]]">
 
 <$set name="pluginTiddler" value=<<currentTiddler>>>
 <<lingo Shadow/Source>>
@@ -24,7 +24,7 @@ tags: $:/tags/TiddlerInfo/Advanced
 
 </$list>
 
-<$list filter="[is[current]is[shadow]is[tiddler]]">
+<$list filter="[all[current]is[shadow]is[tiddler]]">
 
 <<lingo OverriddenShadow/Hint>>
 

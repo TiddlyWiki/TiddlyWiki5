@@ -1,0 +1,52 @@
+created: 20140426170234142
+modified: 20140426170234142
+tags: releasenote
+title: Release 5.0.11-beta
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.10-beta...v5.0.11-beta]]//
+
+!! Incompatible Changes
+
+See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
+
+* The default output location for command line operations has changed to the `/output` folder within TiddlyWikiFolders (it used to be current directory)
+
+!! Documentation Improvements
+
+* Added more warnings about taking care to [[backup your data|The First Rule of Using TiddlyWiki]]
+
+!! Usability Improvements
+
+* Many performance optimisations, particularly for filter operations
+* Added support for PermaLinks
+* Added support for WikiLinks in Markdown via `[link text](#TiddlerTitle)`
+* Added support for explicit external [[Linking in WikiText]] (eg `[ext[tooltip|url]]`)
+* [[Replaced|https://github.com/Jermolene/TiddlyWiki5/issues/580]] hamburger menu icon with double chevron icon
+* [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/552657fc584dbb36754d3fcabca2cdef7e916ec9]] plain text parsing to use the CodeBlockWidget, and hence use syntax highlighting if the plugin is installed. This gives us syntax highlighting for JavaScript shadow tiddlers, amongst other things
+* Improvements to Chinese, Japanese and French translations
+* [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/61c3f8a5ba3c815d623c06f6a97d9c00a31a4157]] WikiText tiddlers from the sidebar "Types" tab
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a90339d1e573ec82dba1caeaead0f71717618a80]] various warnings when editing shadow tiddlers
+* [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/0ac4c2b554f045c6bd2dc6ea5daa0d2f0397d04c]] digits in field names
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a4294b55f0a217d019a6e4cbb62f6a8a19668928]] warning banner when attempting to edit binary tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b84c663215cf7877fff960748af4b2849ae0dbb3]] automatic refreshing of the browser window title from $:/core/wiki/title
+
+!! Hackability Improvements
+
+* Improved vertical layouts of TabsMacro
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/93566cdc332226b77eaba8a70fa166f3b8fcfe1e]] "standard" tab to [[advanced search|$:/AdvancedSearch]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e83759e86d2a9e05e4b85dae50925fe988f8e239]] new filter operators [[before|FilterOperator: before]] and [[after|FilterOperator: after]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/570cad1c7f90e685961130918f09a7f9b2951f8c]] new [[FilterOperator: get]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f7e50e0950c5bf10d94d926576011893418b25f1]] [[BuildCommand]], [[OutputCommand]] and [[ClearPasswordCommand]]
+* Added new extensible StartupMechanism for orchestrating startup tasks
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/711b76307c95d0026f79f584e85ae3d4b7289d15]] to new version of CodeMirror
+* Added https://github.com/Jermolene/TiddlyWiki5NodeWebkit, a demo of using TiddlyWiki as a library in a node-webkit application
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4e07b3335b570f4039427e11df729fc4a899a671]] `.tid` TiddlerFiles to allow single line text fields
+* Renamed `$:/ShowEditPreview` to `$:/state/showeditpreview`
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc60ad1428dcf99a7ea0787e43e3b37f5a02fb98]] issue with hovering of the topbar icons in Firefox
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/e548dd35af2d3195f82899096d4a4080362a1ff0]] problem with dragging and dropping within a text edit control
+
+

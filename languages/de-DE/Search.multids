@@ -1,13 +1,12 @@
 title: $:/language/Search/
 
-Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> Treffer</small>//
 Filter/Caption: Filter
-#
-#  TODO "filter expression" sollte ev. verbessert werden.
 Filter/Hint: Suche mit [["filter expression"|http://tiddlywiki.com/static/TiddlerFilters.html]].
-#
+Filter/Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
 Shadows/Caption: Schatten
 Shadows/Hint: Suche in ~Schatten-Tiddler.
+Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> Treffer</small>//
 System/Caption: System
 System/Hint: Suche in ~System-Tiddler.
+System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> matches</small>//

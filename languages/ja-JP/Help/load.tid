@@ -1,0 +1,19 @@
+title: $:/language/Help/load
+description: Load tiddlers from a file
+
+tiddler を TiddlyWiki Ver.2 のファイル (`.html`), `.tiddler`, `.tid`, `.json` などから読み込みます。
+
+```
+--load <filepath>
+```
+
+暗号化された TiddlyWiki ファイルから読み込むためには、最初に password コマンドでパスワードを指定する必要があります。
+
+使用例:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+なお、既に読み込まれたプラグインより古いバージョンのプラグインは読み込みません。
+

@@ -1,0 +1,20 @@
+created: 20140512103123179
+modified: 20140512103123179
+tags: filters
+title: FilterOperator: before
+type: text/vnd.tiddlywiki
+
+The ''before'' filter operator returns the tiddler from the current list that is before the tiddler named in the operand.
+
+The following examples assume a tiddler called `MyList` with a `list` field containing:
+
+```
+one two three four five
+```
+
+|!Filter String |!Description |
+|`[list[MyList]before[two]]` |Returns `one` |
+|`[list[MyList]before[one]]` |Returns an empty list |
+|`[list[MyList]before{!!title}]` |Returns `three` if the current tiddler is `four` |
+
+See also [[FilterOperator: after]], [[FilterOperator: previous]] and [[FilterOperator: next]].
