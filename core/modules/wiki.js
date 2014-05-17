@@ -219,7 +219,7 @@ exports.getCreationFields = function() {
 	var fields = {
 			created: new Date()
 		},
-		creator = this.getTiddlerText(USER_NAME_TITLE);
+		creator = $tw.utils.getBrowserVariable("wiki-username") || this.getTiddlerText(USER_NAME_TITLE);
 	if(creator) {
 		fields.creator = creator;
 	}
@@ -231,7 +231,7 @@ Return a hashmap of the fields that should be set when a tiddler is modified
 */
 exports.getModificationFields = function() {
 	var fields = Object.create(null),
-		modifier = this.getTiddlerText(USER_NAME_TITLE);
+		modifier = $tw.utils.getBrowserVariable("wiki-username") || this.getTiddlerText(USER_NAME_TITLE);
 	fields.modified = new Date();
 	if(modifier) {
 		fields.modifier = modifier;

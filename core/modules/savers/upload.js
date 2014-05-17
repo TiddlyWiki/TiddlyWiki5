@@ -25,7 +25,7 @@ UploadSaver.prototype.save = function(text,method,callback) {
 	// Get the various parameters we need
 	var backupDir = this.wiki.getTextReference("$:/UploadBackupDir") || ".",
 		username = this.wiki.getTextReference("$:/UploadName"),
-		password = $tw.utils.getPassword("upload"),
+		password = $tw.utils.getBrowserVariable("password-upload"),
 		uploadDir = this.wiki.getTextReference("$:/UploadDir") || ".",
 		uploadFilename = this.wiki.getTextReference("$:/UploadFilename") || "index.html",
 		url = this.wiki.getTextReference("$:/UploadURL");

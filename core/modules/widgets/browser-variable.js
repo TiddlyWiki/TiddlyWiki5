@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/widgets/password.js
+title: $:/core/modules/widgets/browser-variable.js
 type: application/javascript
 module-type: widget
 
-Password widget
+Browser-variable widget
 
 \*/
 (function(){
@@ -14,31 +14,31 @@ Password widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var PasswordWidget = function(parseTreeNode,options) {
+var BrowserVariableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-PasswordWidget.prototype = new Widget();
+BrowserVariableWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-PasswordWidget.prototype.render = function(parent,nextSibling) {
+BrowserVariableWidget.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	// Get the current password
-	var password = $tw.browser ? $tw.utils.getBrowserVariable("password-" + this.passwordName) || "" : "";
+	// Get the current value
+	var value = $tw.browser ? $tw.utils.getBrowserVariable(this.variableName) || "" : "";
 	// Create our element
 	var domNode = this.document.createElement("input");
-	domNode.setAttribute("type","password");
-	domNode.setAttribute("value",password);
+	domNode.setAttribute("type","text");
+	domNode.setAttribute("value",value);
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -49,17 +49,17 @@ PasswordWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(domNode);
 };
 
-PasswordWidget.prototype.handleChangeEvent = function(event) {
-	var password = this.domNodes[0].value;
-	return $tw.utils.saveBrowserVariable("password-" + this.passwordName,password);
+BrowserVariableWidget.prototype.handleChangeEvent = function(event) {
+	var value = this.domNodes[0].value;
+	return $tw.utils.saveBrowserVariable(this.variableName,value);
 };
 
 /*
 Compute the internal state of the widget
 */
-PasswordWidget.prototype.execute = function() {
+BrowserVariableWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
-	this.passwordName = this.getAttribute("name","");
+	this.variableName = this.getAttribute("name","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -67,7 +67,7 @@ PasswordWidget.prototype.execute = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-PasswordWidget.prototype.refresh = function(changedTiddlers) {
+BrowserVariableWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.name) {
 		this.refreshSelf();
@@ -77,6 +77,6 @@ PasswordWidget.prototype.refresh = function(changedTiddlers) {
 	}
 };
 
-exports.password = PasswordWidget;
+exports["browser-variable"] = BrowserVariableWidget;
 
 })();

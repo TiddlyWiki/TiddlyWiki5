@@ -95,17 +95,17 @@ exports.getBoundingPageRect = function(element) {
 /*
 Saves a named password in the browser
 */
-exports.savePassword = function(name,password) {
+exports.saveBrowserVariable = function(name,value) {
 	if(window.localStorage) {
-		localStorage.setItem("tw5-password-" + name,password);
+		localStorage.setItem("tw5-" + name,value);
 	}
 };
 
 /*
 Retrieve a named password from the browser
 */
-exports.getPassword = function(name) {
-	return window.localStorage ? localStorage.getItem("tw5-password-" + name) : "";
+exports.getBrowserVariable = function(name) {
+	return window.localStorage ? localStorage.getItem("tw5-" + name) : "";
 };
 
 /*
