@@ -915,8 +915,12 @@ $tw.Wiki = function(options) {
 	// Iterate through all the shadows and then the tiddlers
 	this.eachShadowPlusTiddlers = function(callback) {
 		for(var title in shadowTiddlers) {
-			var shadowInfo = shadowTiddlers[title];
-			callback(shadowInfo.tiddler,title);
+			if(Object.prototype.hasOwnProperty.call(tiddlers,title)) {
+				callback(tiddlers[title],title);
+			} else {
+				var shadowInfo = shadowTiddlers[title];
+				callback(shadowInfo.tiddler,title);
+			}
 		}
 		for(var title in tiddlers) {
 			if(!Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {

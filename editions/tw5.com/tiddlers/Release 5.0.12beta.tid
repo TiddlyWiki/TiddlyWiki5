@@ -1,0 +1,10 @@
+created: 20140517010234142
+modified: 20140517010234142
+tags: releasenote
+title: Release 5.0.12-beta
+type: text/vnd.tiddlywiki
+released: 201405170102
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.11-beta...v5.0.12-beta]]//
+
+This is an emergency release that fixes a single significant bug with shadow tiddler handling in 5.0.11. See the [[discussion thread|https://groups.google.com/d/topic/tiddlywiki/pNxZsSCVp7c/discussion]] for more details.
