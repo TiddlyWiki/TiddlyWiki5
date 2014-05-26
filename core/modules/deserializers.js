@@ -57,7 +57,7 @@ var parseTiddlerDiv = function(text /* [,fields] */) {
 				attrMatch = attrRegExp.exec(match[1]);
 				if(attrMatch) {
 					var name = attrMatch[1];
-					var value = attrMatch[2] || attrMatch[3];
+					var value = attrMatch[2] !== undefined ? attrMatch[2] : attrMatch[3];
 					result[name] = value;
 				}
 			} while(attrMatch);
