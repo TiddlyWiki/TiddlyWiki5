@@ -72,7 +72,9 @@ exports.parseLink = function(source,pos) {
 			type: "element",
 			tag: "a",
 			start: pos,
-			attributes: {},
+			attributes: {
+				"class": {type: "string", value: "tw-tiddlylink-external"},
+			},
 			children: [textNode]
 		};
 	// Skip whitespace
