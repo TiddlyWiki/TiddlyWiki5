@@ -74,14 +74,6 @@ function openStartupTiddlers(options) {
 			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
 		}
 	}
-	// If a target tiddler was specified add it to the history stack
-	if(target && target !== "") {
-		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
-		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
-			target = target.substr(2,target.length - 4);
-		}
-		$tw.wiki.addToHistory(target);
-	}
 	// Use the story filter specified in the hash, or the default tiddlers
 	if(!storyFilter || storyFilter === "") {
 		if(options.defaultToCurrentStory) {
@@ -98,6 +90,16 @@ function openStartupTiddlers(options) {
 	}
 	// Save the story list
 	$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+	// If a target tiddler was specified add it to the history stack
+	if(target && target !== "") {
+		// The target tiddler doesn't need double square brackets, but we'll silently remove them if they're present
+		if(target.indexOf("[[") === 0 && target.substr(-2) === "]]") {
+			target = target.substr(2,target.length - 4);
+		}
+		$tw.wiki.addToHistory(target);
+	} else if(storyList.length > 0) {
+		$tw.wiki.addToHistory(storyList[0]);
+	}
 }
 
 function updateLocationHash() {
