@@ -161,7 +161,8 @@ var Command = function(params,commander,callback) {
 			state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title}));
 			var changeCount = state.wiki.getChangeCount(title).toString();
 			response.writeHead(204, "OK",{
-				Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\""
+				Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",
+				"Content-Type": "text/plain"
 			});
 			response.end();
 		}
@@ -172,7 +173,9 @@ var Command = function(params,commander,callback) {
 		handler: function(request,response,state) {
 			var title = decodeURIComponent(state.params[0]);
 			state.wiki.deleteTiddler(title);
-			response.writeHead(204, "OK");
+			response.writeHead(204, "OK", {
+				"Content-Type": "text/plain"
+			});
 			response.end();
 		}
 	});
