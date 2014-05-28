@@ -565,7 +565,7 @@ Crypto helper object for encrypted content. It maintains the password text in a 
 the password, and to encrypt/decrypt a block of text
 */
 $tw.utils.Crypto = function() {
-	var sjcl = $tw.browser ? window.sjcl : require("./sjcl.js"),
+	var sjcl = $tw.node ? require("./sjcl.js") : window.sjcl,
 		currentPassword = null,
 		callSjcl = function(method,inputText,password) {
 			password = password || currentPassword;
