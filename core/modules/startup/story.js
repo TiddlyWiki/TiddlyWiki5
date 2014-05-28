@@ -63,7 +63,7 @@ function openStartupTiddlers(options) {
 	options = options || {};
 	// Decode the hash portion of our URL
 	var target,
-		storyFilter;
+		storyFilter = null;
 	if($tw.locationHash.length > 1) {
 		var hash = $tw.locationHash.substr(1),
 			split = hash.indexOf(":");
@@ -74,13 +74,13 @@ function openStartupTiddlers(options) {
 			storyFilter = decodeURIComponent(hash.substr(split + 1).trim());
 		}
 	}
-	// Use the story filter specified in the hash, or the default tiddlers
-	if(!storyFilter || storyFilter === "") {
+	// If the story wasn't specified use the current tiddlers or a blank story
+	if(storyFilter === null) {
 		if(options.defaultToCurrentStory) {
 			var currStoryList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
 			storyFilter = $tw.utils.stringifyList(currStoryList);
 		} else {
-			storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);
+			storyFilter = "";
 		}
 	}
 	var storyList = $tw.wiki.filterTiddlers(storyFilter);
