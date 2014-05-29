@@ -61,8 +61,8 @@ defaultToCurrentStory: If true, the current story is retained as the default, in
 */
 function openStartupTiddlers(options) {
 	options = options || {};
-	// Decode the hash portion of our URL
-	var target,
+	// Work out the target tiddler and the story filter. "null" means "unspecified"
+	var target = null,
 		storyFilter = null;
 	if($tw.locationHash.length > 1) {
 		var hash = $tw.locationHash.substr(1),
@@ -80,9 +80,14 @@ function openStartupTiddlers(options) {
 			var currStoryList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE);
 			storyFilter = $tw.utils.stringifyList(currStoryList);
 		} else {
-			storyFilter = "";
+			if(target && target !== "") {
+				storyFilter = "";
+			} else {
+				storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE);
+			}
 		}
 	}
+	// Process the story filter to get the story list
 	var storyList = $tw.wiki.filterTiddlers(storyFilter);
 	// If the target tiddler isn't included then splice it in at the top
 	if(target && storyList.indexOf(target) === -1) {

@@ -48,3 +48,15 @@ Two important aspects of TiddlyWiki's behaviour with permalinks can be controlle
 * Whether the updates to the address bar should affect browser history. The default is ''no''; when switched to ''yes'' you can rewind navigation between tiddlers using the browser back and forward buttons
 
 Note that typing or navigating to a permalink will always cause the permalink to be processed, and tiddlers opened and closed as appropriate.
+
+!! Technical Details
+
+When TiddlyWiki starts up it processes permalinks according to the following steps; the same steps are repeated if the permalink changes dynamically (this happens in response to the user editing the address bar, for example).
+
+# If the permalink contains a colon, treat the string before as the ''target'' and the string after it as the ''story filter''
+# If the permalink doesn't contain a colon, treat the entire string as the ''target'' and mark the ''story filter'' as //unspecified//
+# If the ''story filter'' was unspecified and we're in the process of starting up, then set the ''story filter'' to the empty string if the ''target'' is specified, or to the default tiddlers if the ''target'' is unspecified
+# If the ''story filter'' was unspecified and we're not starting up, then set the ''story filter'' to the current story list
+# Evaluate the ''story filter'' as the ''story list''
+# If the ''target'' is specified and not present in the ''story list'' then add it at the top
+# If the ''target'' is specified then navigate to it, otherwise navigate to the first tiddler in the ''story list''
