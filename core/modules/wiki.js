@@ -55,15 +55,19 @@ exports.getTextReference = function(textRef,defaultText,currTiddlerTitle) {
 exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	var tr = $tw.utils.parseTextReference(textRef),
 		title = tr.title || currTiddlerTitle;
+	this.setText(title,tr.field,tr.index,value);
+};
+
+exports.setText = function(title,field,index,value) {
 	// Check if it is a reference to a tiddler field
-	if(tr.index) {
+	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
-		data[tr.index] = value;
+		data[index] = value;
 		this.setTiddlerData(title,data,this.getModificationFields());
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
-		fields[tr.field || "text"] = value;
+		fields[field || "text"] = value;
 		this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
 	}
 };
