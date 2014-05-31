@@ -10,6 +10,8 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 
 <$set name="languageTitle" value={{!!name}}>
 
+<$set name="currentTiddler" value="">
+
 <div class=<<containerClasses>>>
 
 <$navigator story="$:/StoryList" history="$:/HistoryList">
@@ -27,6 +29,8 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
 
 </$set>
 
