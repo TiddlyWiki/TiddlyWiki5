@@ -3,28 +3,11 @@ tags: $:/tags/ControlPanel/Advanced/Settings
 caption: {{$:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/
-<<lingo Hint>>
-<$button popup=<<qualify "$:/state/navaddressbarpopup">> class="btn-invisible btn-dropdown">
-<$view tiddler="$:/config/Navigation/UpdateAddressBar" field="text"/>:
-<$reveal state="$:/config/Navigation/UpdateAddressBar" type="match" text="no">
-''<<lingo No/Description>>''
-</$reveal>
-<$reveal state="$:/config/Navigation/UpdateAddressBar" type="match" text="permalink">
-''<<lingo Permalink/Description>>''
-</$reveal>
-<$reveal state="$:/config/Navigation/UpdateAddressBar" type="match" text="permaview">
-''<<lingo Permaview/Description>>''
-</$reveal>
-{{$:/core/images/down-arrow}}
-</$button>
-<$reveal state=<<qualify "$:/state/navaddressbarpopup">> type="popup" position="below" animate="yes" default="">
-<$linkcatcher to="$:/config/Navigation/UpdateAddressBar">
-<div class="tw-drop-down tw-edit-type-dropdown">
-<$list filter="no permalink permaview">
-<$link to={{!!title}}>
-<$view field="title"/>
-</$link>
-</$list>
-</div>
-</$linkcatcher>
-</$reveal>
+
+<$link to="$:/config/Navigation/UpdateAddressBar"><<lingo Hint>></$link>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permaview"> <<lingo Permaview/Description>> </$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permalink"> <<lingo Permalink/Description>> </$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="no"> <<lingo No/Description>> </$radio>
