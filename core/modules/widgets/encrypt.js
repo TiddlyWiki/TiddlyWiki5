@@ -60,14 +60,8 @@ EncryptWidget.prototype.execute = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 EncryptWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes(),
-		affectedTiddlers = this.wiki.filterTiddlers(this.filter,null,changedTiddlers);
-	if(changedAttributes.filter || affectedTiddlers.length > 0) {
-		this.refreshSelf();
-		return true;
-	} else {
-		return false;	
-	}
+	// We don't need to worry about refreshing because the encrypt widget isn't for interactive use
+	return false;
 };
 
 exports.encrypt = EncryptWidget;

@@ -1,5 +1,5 @@
 created: 20131211222303769
-modified: 20140120130146763
+modified: 20140424130146763
 tags: dev
 title: JavaScript Macros
 type: text/vnd.tiddlywiki
@@ -25,3 +25,8 @@ There are several JavaScript macros built into the core which can serve as a jum
 https://github.com/Jermolene/TiddlyWiki5/tree/master/core/modules/macros
 
 Note that JavaScript macros work on both the client and the server, and so do not have access to the browser DOM.
+
+!! Macro Behaviour
+
+Macros are just used to return a chunk of wikitext for further processing. They should not make modifications to tiddlers in the wiki store. The reason is that you cannott control when the macro is called; it may be called repeatedly as part of refresh processing. So it is important that macros do not have any other side effects beyond generating their text.
+

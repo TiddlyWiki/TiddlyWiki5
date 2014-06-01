@@ -15,5 +15,9 @@
 		"en-GB",
 		"de-AT",
 		"de-DE"
-	]
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","de-at-demo.html","text/plain"]
+	}
 }

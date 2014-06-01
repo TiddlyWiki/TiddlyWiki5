@@ -64,8 +64,7 @@ exports.parse = function() {
 		}
 	}
 	return [{
-		type: "element",
-		tag: "$link",
+		type: "link",
 		attributes: {
 			to: {type: "string", value: linkText}
 		},

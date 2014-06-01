@@ -1,7 +1,6 @@
 title: $:/language/Docs/ModuleTypes/
 
 animation: Animationen, die vom RevealWidget verwendet werden. 
-browser-startup: Funktionen, die einmalig beim Browser start ausgeführt werden.
 command: Kommandozeilen Parameter, die mit node.js ausgeführt werden können.
 config: Daten, die in `$tw.config` eingefügt werden.
 filteroperator: Individuelle Filter Operator Funktionen.
@@ -16,6 +15,7 @@ tiddlerdeserializer: Konvertiert unterschiedliche "Inhalts Typen" in das Tiddler
 tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler Felder.
 tiddlermethod: Methoden werden dem `$tw.Tiddler` Prototypen hinzugefügt.
 utils: Methoden werden `$tw.utils` hinzugefügt.
+utils-node: Erweitert `$tw.utils` mit node.js spezifischen Methoden.
 widget: Widgets verarbeiten das "Rendern" und "Aktualisieren" der Anzeige in der DOM.
 wikimethod: Methoden werden zu `$tw.Wiki` hinzugefügt.
 wikirule: Enthält die individuellen "Parser Regeln" für den WikiText Parser.

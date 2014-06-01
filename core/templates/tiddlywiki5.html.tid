@@ -19,7 +19,7 @@ title: $:/core/templates/tiddlywiki5.html
 <!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 
 <!--~~ Raw markup ~~-->
-{{{ [tag[$:/core/wiki/rawmarkup]] ||$:/core/templates/plain-text-tiddler}}}
+{{{ [all[shadows+tiddlers]tag[$:/core/wiki/rawmarkup]] [all[shadows+tiddlers]tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}
 </head>
 <body class="tw-body">
 <!--~~ Static styles ~~-->

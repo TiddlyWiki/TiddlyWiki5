@@ -1,4 +1,0 @@
-title: $:/core/ui/TopBar/home
-tags: $:/tags/TopLeftBar
-
-<$button message="tw-home" class="btn-invisible">{{$:/core/images/home-button}}</$button>

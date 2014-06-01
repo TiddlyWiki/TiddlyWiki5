@@ -1,9 +1,8 @@
 title: $:/snippets/viewswitcher
 
 \define lingo-base() $:/language/ControlPanel/Appearance/StoryView/
-<<lingo Prompt>> {{$:/view}}
-
-<$linkcatcher to="$:/view"><$list filter="[storyviews[]]"><div><$reveal state="$:/view" type="match" text={{!!title}}>&bull;</$reveal><$reveal state="$:/view" type="nomatch" text={{!!title}}>&nbsp;</$reveal> <$link to={{!!title}}><$view field="title"/></$link>
-</div>
+<<lingo Prompt>> <$select tiddler="$:/view">
+<$list filter="[storyviews[]]">
+<option><$view field="title"/></option>
 </$list>
-</$linkcatcher>
+</$select>

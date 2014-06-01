@@ -35,10 +35,12 @@ Command.prototype.execute = function() {
 		wiki = this.commander.wiki,
 		filter = this.params[0],
 		template = this.params[1],
-		pathname = this.params[2],
+		pathname = path.resolve(this.commander.outputPath,this.params[2]),
 		type = this.params[3] || "text/html",
 		extension = this.params[4] || ".html",
 		tiddlers = wiki.filterTiddlers(filter);
+	$tw.utils.deleteDirectory(pathname);
+	$tw.utils.createDirectory(pathname);
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
 			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});

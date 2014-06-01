@@ -1,10 +1,16 @@
 created: 20131202102427114
-modified: 20140126135354379
+modified: 20140419133900452
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
 
 There are several methods for upgrading an existing TiddlyWiki version 5 document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
+
+<<<
+Regardless of which method you use, remember the [[The First Rule of Using TiddlyWiki]]:
+
+//You are responsible for looking after your own data; take care to make backups, especially when upgrading the ~TiddlyWiki core//
+<<<
 
 <div class="tw-message-box">
 
@@ -45,3 +51,7 @@ This will download a file called ''empty.html'' to your computer. This file is t
 ! Offline upgrading
 
 You can also download http://tiddlywiki.com/empty.html locally and perform the same drag-and-drop procedure to upgrade your files.
+
+! Problems with Upgrades
+
+Particularly during the beta, it is possible for a customisation applied in a previous version to break when upgraded to the latest version. Use SafeMode to investigate and fix these problems.

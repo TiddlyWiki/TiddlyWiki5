@@ -8,6 +8,8 @@ Fields/Add/Button: add
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
 Fields/Add/Value/Placeholder: field value
+Shadow/Warning: This is a shadow tiddler. Any changes will override the default version
+Shadow/OverriddenWarning: This is a modified shadow tiddler. You can revert to the default version by deleting this tiddler
 Tags/Add/Button: add
 Tags/Add/Placeholder: tag name
 Type/Placeholder: content type

@@ -1,12 +1,14 @@
 title: $:/language/
 
+BinaryWarning/Prompt: This tiddler contains binary data
 ClassicWarning/Hint: This tiddler is written in TiddlyWiki Classic wiki text format, which is not fully compatible with TiddlyWiki version 5. See http://tiddlywiki.com/static/Upgrading.html for more details. 
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: close all
 ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text=<<title>>/>"?
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
-InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters and the characters underscore (`_`), hyphen (`-`) and period (`.`)
+ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
+InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
 RecentChanges/DateFormat: DDth MMM YYYY
 RelativeDate/Future/Days: <<period>> days from now

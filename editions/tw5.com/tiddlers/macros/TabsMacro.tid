@@ -1,10 +1,12 @@
 created: 20131228162203521
-modified: 20140225223527667
+modified: 20140509223527667
 tags: macros
 title: TabsMacro
 type: text/vnd.tiddlywiki
 
 The tabs macro displays a list of tiddlers as a tab control. The user can switch between tabs by clicking on them. The tabs are labelled with the title of the corresponding tiddler, unless there is a `caption` field present in which case it is used instead.
+
+By default the tab control arranges the tabs horizontally with the content underneath. You can also choose to have the tabs arranged vertically by passing the class `tw-vertical`.
 
 ! Parameters
 
@@ -12,6 +14,7 @@ The tabs macro displays a list of tiddlers as a tab control. The user can switch
 |1st |tabsList |Filter giving the tiddlers to be displayed | |
 |2nd |default |Name of the tiddler containing the default tab | |
 |3rd |state |String to distinguish multiple tabs within the same tiddler (use of the system tiddler prefix is recommended) |''$:/state/tab'' |
+|4th |class |Additional CSS classes for the three wrappers DIV of the tab | |
 
 ! Examples
 
@@ -23,5 +26,4 @@ Here is an example of the tabs macro:
 
 <<tabs "Docs WikiText Features RoadMap" "WikiText" "$:/state/tab1">>
 
-<<tabs "[tag[tips]]" "GoogleChromeTips" "$:/state/tab1">>
-
+<<tabs "[tag[tips]]" "GoogleChromeTips" "$:/state/tab2" "tw-vertical">>

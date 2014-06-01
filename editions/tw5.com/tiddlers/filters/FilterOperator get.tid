@@ -1,0 +1,12 @@
+created: 20140426183123179
+modified: 20140426183123179
+tags: filters
+title: FilterOperator: get
+type: text/vnd.tiddlywiki
+
+The ''get'' filter operator replaces the titles of the tiddlers in the current list with the values of the field specified by the operand.
+
+For example:
+
+|!Filter String |!Description |
+|`[all[current]get[draft.of]]` |If the current tiddler is a draft, returns the original tiddler, otherwise returns an empty list |

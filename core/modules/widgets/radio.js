@@ -95,7 +95,7 @@ Compute the internal state of the widget
 RadioWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.radioTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	this.radioField = this.getAttribute("field");
+	this.radioField = this.getAttribute("field","text");
 	this.radioValue = this.getAttribute("value");
 	this.radioClass = this.getAttribute("class","");
 	if(this.radioClass !== "") {

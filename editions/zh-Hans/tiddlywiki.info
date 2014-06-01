@@ -7,11 +7,16 @@
 		"tiddlywiki/snowwhite",
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
 		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"zh-Hans"
-	]
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","zh-hans-demo.html","text/plain"]
+	}
 }

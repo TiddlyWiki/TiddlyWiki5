@@ -1,0 +1,13 @@
+created: 20140526204527418
+modified: 20140526204842873
+tags: introduction tips
+title: KeyboardShortcuts
+type: text/vnd.tiddlywiki
+
+Keyboard shortcut support is currently very limited but will be improved in later releases.
+
+! Editing Shortcuts
+
+|Key |Shortcut description |
+|`Ctrl-Enter` |Confirm changes to the draft tiddler containing the keyboard focus |
+|`Escape` |Abandon changes to the draft tiddler containing the keyboard focus |

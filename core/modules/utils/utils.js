@@ -34,6 +34,23 @@ exports.count = function(object) {
 };
 
 /*
+Check if an array is equal by value and by reference.
+*/
+exports.isArrayEqual = function(array1,array2) {
+	if(array1 === array2) {
+		return true;
+	}
+	array1 = array1 || [];
+	array2 = array2 || [];
+	if(array1.length !== array2.length) {
+		return false;
+	}
+	return array1.every(function(value,index) {
+		return value === array2[index];
+	});
+};
+
+/*
 Push entries onto an array, removing them first if they already exist in the array
 	array: array to modify (assumed to be free of duplicates)
 	value: a single value to push or an array of values to push
@@ -397,6 +414,18 @@ exports.parseTextReference = function(textRef) {
 };
 
 /*
+Checks whether a string is a valid fieldname
+*/
+exports.isValidFieldName = function(name) {
+	if(!name || typeof name !== "string") {
+		return false;
+	}
+	name = name.toLowerCase().trim();
+	var fieldValidatorRegEx = /^[a-z0-9\-\._]+$/mg;
+	return fieldValidatorRegEx.test(name);
+};
+
+/*
 Extract the version number from the meta tag or from the boot file
 */
 
@@ -481,6 +510,6 @@ exports.timer = function(base) {
 		m = m - base;
 	}
 	return m;
-}
+};
 
 })();

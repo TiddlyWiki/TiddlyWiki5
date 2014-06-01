@@ -23,127 +23,127 @@ describe("HTML tag new parser tests", function() {
 	var parser = new FakeParser();
 
 	it("should parse whitespace", function() {
-		expect(parser.parseWhiteSpace("p  ",0)).toEqual(
+		expect($tw.utils.parseWhiteSpace("p  ",0)).toEqual(
 			null
 		);
-		expect(parser.parseWhiteSpace("p  ",1)).toEqual(
+		expect($tw.utils.parseWhiteSpace("p  ",1)).toEqual(
 			{ type : 'whitespace', start : 1, end : 3 }
 		);
 	});
 
 	it("should parse string tokens", function() {
-		expect(parser.parseTokenString("p=  ",0,"=")).toEqual(
+		expect($tw.utils.parseTokenString("p=  ",0,"=")).toEqual(
 			null
 		);
-		expect(parser.parseTokenString("p=  ",1,"=")).toEqual(
+		expect($tw.utils.parseTokenString("p=  ",1,"=")).toEqual(
 			{ type : 'token', value : '=', start : 1, end : 2 }
 		);
 	});
 
 	it("should parse regexp tokens", function() {
-		expect(parser.parseTokenRegExp("p='  ",0,/(=(?:'|"))/)).toEqual(
+		expect($tw.utils.parseTokenRegExp("p='  ",0,/(=(?:'|"))/)).toEqual(
 			null
 		);
-		expect(parser.parseTokenRegExp("p='  ",1,/(=(?:'|"))/g).match[0]).toEqual(
+		expect($tw.utils.parseTokenRegExp("p='  ",1,/(=(?:'|"))/g).match[0]).toEqual(
 			'=\''
 		);
-		expect(parser.parseTokenRegExp("p=blah  ",2,/([^\s>]+)/g).match[0]).toEqual(
+		expect($tw.utils.parseTokenRegExp("p=blah  ",2,/([^\s>]+)/g).match[0]).toEqual(
 			'blah'
 		);
 	});
 
 	it("should parse string literals", function() {
-		expect(parser.parseStringLiteral("p='blah'  ",0)).toEqual(
+		expect($tw.utils.parseStringLiteral("p='blah'  ",0)).toEqual(
 			null
 		);
-		expect(parser.parseStringLiteral("p='blah'  ",2)).toEqual(
+		expect($tw.utils.parseStringLiteral("p='blah'  ",2)).toEqual(
 			{ type : 'string', start : 2, value : 'blah', end : 8 }
 		);
-		expect(parser.parseStringLiteral("p=''  ",2)).toEqual(
+		expect($tw.utils.parseStringLiteral("p=''  ",2)).toEqual(
 			{ type : 'string', start : 2, value : '', end : 4 }
 		);
-		expect(parser.parseStringLiteral("p=\"blah'  ",2)).toEqual(
+		expect($tw.utils.parseStringLiteral("p=\"blah'  ",2)).toEqual(
 			null
 		);
-		expect(parser.parseStringLiteral("p=\"\"  ",2)).toEqual(
+		expect($tw.utils.parseStringLiteral("p=\"\"  ",2)).toEqual(
 			{ type : 'string', start : 2, value : '', end : 4 }
 		);
 	});
 
 	it("should parse macro parameters", function() {
-		expect(parser.parseMacroParameter("me",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("me",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'me', end : 2 }
 		);
-		expect(parser.parseMacroParameter("me:one",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("me:one",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'one', name : 'me', end : 6 }
 		);
-		expect(parser.parseMacroParameter("me:'one two three'",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("me:'one two three'",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'one two three', name : 'me', end : 18 }
 		);
-		expect(parser.parseMacroParameter("'one two three'",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("'one two three'",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'one two three', end : 15 }
 		);
-		expect(parser.parseMacroParameter("me:[[one two three]]",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("me:[[one two three]]",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'one two three', name : 'me', end : 20 }
 		);
-		expect(parser.parseMacroParameter("[[one two three]]",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("[[one two three]]",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'one two three', end : 17 }
 		);
-		expect(parser.parseMacroParameter("myparam>",0)).toEqual(
+		expect($tw.utils.parseMacroParameter("myparam>",0)).toEqual(
 			{ type : 'macro-parameter', start : 0, value : 'myparam', end : 7 }
 		);
 	});
 
 	it("should parse macro invocations", function() {
-		expect(parser.parseMacroInvocation("<<mymacro",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<mymacro",0)).toEqual(
 			null
 		);
-		expect(parser.parseMacroInvocation("<<mymacro>>",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<mymacro>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [  ], name : 'mymacro', end : 11 }
 		);
-		expect(parser.parseMacroInvocation("<<mymacro one two three>>",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<mymacro one two three>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'one', end : 13 }, { type : 'macro-parameter', start : 13, value : 'two', end : 17 }, { type : 'macro-parameter', start : 17, value : 'three', end : 23 } ], name : 'mymacro', end : 25 }
 		);
-		expect(parser.parseMacroInvocation("<<mymacro p:one q:two three>>",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<mymacro p:one q:two three>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'one', name : 'p', end : 15 }, { type : 'macro-parameter', start : 15, value : 'two', name : 'q', end : 21 }, { type : 'macro-parameter', start : 21, value : 'three', end : 27 } ], name : 'mymacro', end : 29 }
 		);
-		expect(parser.parseMacroInvocation("<<mymacro 'one two three'>>",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<mymacro 'one two three'>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'one two three', end : 25 } ], name : 'mymacro', end : 27 } 
 		);
-		expect(parser.parseMacroInvocation("<<mymacro r:'one two three'>>",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<mymacro r:'one two three'>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'one two three', name : 'r', end : 27 } ], name : 'mymacro', end : 29 } 
 		);
-		expect(parser.parseMacroInvocation("<<myMacro one:two three:'four and five'>>",0)).toEqual(
+		expect($tw.utils.parseMacroInvocation("<<myMacro one:two three:'four and five'>>",0)).toEqual(
 			{ type : 'macrocall', start : 0, params : [ { type : 'macro-parameter', start : 9, value : 'two', name : 'one', end : 17 }, { type : 'macro-parameter', start : 17, value : 'four and five', name : 'three', end : 39 } ], name : 'myMacro', end : 41 } 
 		);
 	});
 
 	it("should parse HTML attributes", function() {
-		expect(parser.parseAttribute("p='blah'  ",1)).toEqual(
+		expect($tw.utils.parseAttribute("p='blah'  ",1)).toEqual(
 			null
 		);
-		expect(parser.parseAttribute("p='blah'  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p='blah'  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 8 }
 		);
-		expect(parser.parseAttribute("p=\"blah\"  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p=\"blah\"  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 8 }
 		);
-		expect(parser.parseAttribute("p=blah  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p=blah  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 6 }
 		);
-		expect(parser.parseAttribute("p =blah  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p =blah  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 7 }
 		);
-		expect(parser.parseAttribute("p= blah  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p= blah  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 7 }
 		);
-		expect(parser.parseAttribute("p = blah  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p = blah  ",0)).toEqual(
 			{ type : 'string', start : 0, name : 'p', value : 'blah', end : 8 }
 		);
-		expect(parser.parseAttribute("p = >blah  ",0)).toEqual(
+		expect($tw.utils.parseAttribute("p = >blah  ",0)).toEqual(
 			{ type : 'string', value : 'true', start : 0, name : 'p', end : 4 }
 		);
-		expect(parser.parseAttribute(" attrib1>",0)).toEqual(
+		expect($tw.utils.parseAttribute(" attrib1>",0)).toEqual(
 			{ type : 'string', value : 'true', start : 0, name : 'attrib1', end : 8 }
 		);
 	});
@@ -165,22 +165,22 @@ describe("HTML tag new parser tests", function() {
 			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', value : 'true', start : 6, name : 'attrib1', end : 14 } }, tag : 'mytag', isSelfClosing : true, end : 16 }
 		);
 		expect(parser.parseTag("<$view field=\"title\" format=\"link\"/>",0)).toEqual(
-			{ type : 'element', start : 0, attributes : { field : { start : 6, name : 'field', type : 'string', value : 'title', end : 20 }, format : { start : 20, name : 'format', type : 'string', value : 'link', end : 34 } }, tag : '$view', isSelfClosing : true, end : 36 }
+			{ type : 'view', start : 0, attributes : { field : { start : 6, name : 'field', type : 'string', value : 'title', end : 20 }, format : { start : 20, name : 'format', type : 'string', value : 'link', end : 34 } }, tag : '$view', isSelfClosing : true, end : 36 }
 		);
 		expect(parser.parseTag("<mytag attrib1='something'>",0)).toEqual(
 			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', start : 6, name : 'attrib1', value : 'something', end : 26 } }, tag : 'mytag', end : 27 }
 		);
 		expect(parser.parseTag("<$mytag attrib1='something' attrib2=else thing>",0)).toEqual(
-			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', start : 7, name : 'attrib1', value : 'something', end : 27 }, attrib2 : { type : 'string', start : 27, name : 'attrib2', value : 'else', end : 40 }, thing : { type : 'string', start : 40, name : 'thing', value : 'true', end : 46 } }, tag : '$mytag', end : 47 }
+			{ type : 'mytag', start : 0, attributes : { attrib1 : { type : 'string', start : 7, name : 'attrib1', value : 'something', end : 27 }, attrib2 : { type : 'string', start : 27, name : 'attrib2', value : 'else', end : 40 }, thing : { type : 'string', start : 40, name : 'thing', value : 'true', end : 46 } }, tag : '$mytag', end : 47 }
 		);
 		expect(parser.parseTag("< $mytag attrib1='something' attrib2=else thing>",0)).toEqual(
 			null
 		);
 		expect(parser.parseTag("<$mytag attrib3=<<myMacro one:two three:'four and five'>>>",0)).toEqual(
-			{ type : 'element', start : 0, attributes : { attrib3 : { type : 'macro', start : 7, name : 'attrib3', value : { type : 'macrocall', start : 16, params : [ { type : 'macro-parameter', start : 25, value : 'two', name : 'one', end : 33 }, { type : 'macro-parameter', start : 33, value : 'four and five', name : 'three', end : 55 } ], name : 'myMacro', end : 57 }, end : 57 } }, tag : '$mytag', end : 58 }
+			{ type : 'mytag', start : 0, attributes : { attrib3 : { type : 'macro', start : 7, name : 'attrib3', value : { type : 'macrocall', start : 16, params : [ { type : 'macro-parameter', start : 25, value : 'two', name : 'one', end : 33 }, { type : 'macro-parameter', start : 33, value : 'four and five', name : 'three', end : 55 } ], name : 'myMacro', end : 57 }, end : 57 } }, tag : '$mytag', end : 58 }
 		);
 		expect(parser.parseTag("<$mytag attrib1='something' attrib2=else thing attrib3=<<myMacro one:two three:'four and five'>>>",0)).toEqual(
-			{ type : 'element', start : 0, attributes : { attrib1 : { type : 'string', start : 7, name : 'attrib1', value : 'something', end : 27 }, attrib2 : { type : 'string', start : 27, name : 'attrib2', value : 'else', end : 40 }, thing : { type : 'string', start : 40, name : 'thing', value : 'true', end : 47 }, attrib3 : { type : 'macro', start : 47, name : 'attrib3', value : { type : 'macrocall', start : 55, params : [ { type : 'macro-parameter', start : 64, value : 'two', name : 'one', end : 72 }, { type : 'macro-parameter', start : 72, value : 'four and five', name : 'three', end : 94 } ], name : 'myMacro', end : 96 }, end : 96 } }, tag : '$mytag', end : 97 }
+			{ type : 'mytag', start : 0, attributes : { attrib1 : { type : 'string', start : 7, name : 'attrib1', value : 'something', end : 27 }, attrib2 : { type : 'string', start : 27, name : 'attrib2', value : 'else', end : 40 }, thing : { type : 'string', start : 40, name : 'thing', value : 'true', end : 47 }, attrib3 : { type : 'macro', start : 47, name : 'attrib3', value : { type : 'macrocall', start : 55, params : [ { type : 'macro-parameter', start : 64, value : 'two', name : 'one', end : 72 }, { type : 'macro-parameter', start : 72, value : 'four and five', name : 'three', end : 94 } ], name : 'myMacro', end : 96 }, end : 96 } }, tag : '$mytag', end : 97 }
 		);
 	});
 

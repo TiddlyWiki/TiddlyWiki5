@@ -4,6 +4,17 @@ Advanced/Caption: 高级
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Advanced/LoadedModules/Caption: 已加载的模块
 Advanced/LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
+Advanced/Settings/Caption: 设置
+Advanced/Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
+Advanced/Settings/NavigationAddressBar/Caption: 网址栏导览
+Advanced/Settings/NavigationAddressBar/Hint: 在浏览器网址列导览到条目时的行为：
+Advanced/Settings/NavigationAddressBar/No/Description: 不更新网址栏
+Advanced/Settings/NavigationAddressBar/Permalink/Description: 包含目标条目
+Advanced/Settings/NavigationAddressBar/Permaview/Description: 包括目标条目和当前已开启的条目序列
+Advanced/Settings/NavigationHistory/Caption: 历史记录导览
+Advanced/Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
+Advanced/Settings/NavigationHistory/No/Description: 不更新历史记录
+Advanced/Settings/NavigationHistory/Yes/Description: 更新历史记录
 Advanced/TiddlerFields/Caption: 条目栏位
 Advanced/TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 Appearance/Caption: 视觉外观

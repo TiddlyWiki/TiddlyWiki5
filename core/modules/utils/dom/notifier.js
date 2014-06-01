@@ -37,8 +37,7 @@ Notifier.prototype.display = function(title,options) {
 	// Add classes
 	$tw.utils.addClass(notification,"tw-notification");
 	// Render the body of the notification
-	var parser = this.wiki.parseTiddler(title),
-		widgetNode = this.wiki.makeWidget(parser,{parentWidget: $tw.rootWidget, document: document});
+	var widgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document});
 	widgetNode.render(notification,null);
 	this.wiki.addEventListener("change",function(changes) {
 		widgetNode.refresh(changes,notification,null);

@@ -15,7 +15,7 @@ The CSV text parser processes CSV files into a table wrapped in a scrollable wid
 var CsvParser = function(type,text,options) {
 	// Table framework
 	this.tree = [{
-		"type": "element", "tag": "$scrollable", "children": [{
+		"type": "scrollable", "children": [{
 			"type": "element", "tag": "table", "children": [{
 				"type": "element", "tag": "tbody", "children": []
 			}], "attributes": {

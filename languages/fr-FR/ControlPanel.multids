@@ -4,6 +4,17 @@ Advanced/Caption: Avancé
 Advanced/Hint: Informations internes sur ce ~TiddlyWiki
 Advanced/LoadedModules/Caption: Modules chargés
 Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
+Advanced/Settings/Caption: Paramétrage
+Advanced/Settings/Hint: Ce paramétrage avancé vous permet de personnaliser le comportement de TiddlyWiki.
+Advanced/Settings/NavigationAddressBar/Caption: Barre d'adresse lors de la navigation
+Advanced/Settings/NavigationAddressBar/Hint: Comportement de la barre d'adresse du navigateur lorsqu'on pointe vers un tiddler :
+Advanced/Settings/NavigationAddressBar/No/Description: Ne pas modifier la barre d'adresse
+Advanced/Settings/NavigationAddressBar/Permalink/Description: Inclure le titre du tiddler cible
+Advanced/Settings/NavigationAddressBar/Permaview/Description: Inclure le titre du tiddler cible ainsi que le déroulé courant
+Advanced/Settings/NavigationHistory/Caption: Historique de navigation
+Advanced/Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
+Advanced/Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
+Advanced/Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
 Advanced/TiddlerFields/Caption: Champs
 Advanced/TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Appearance/Caption: Apparence
@@ -55,7 +66,7 @@ Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<wikiname>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
+Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
 Saving/TiddlySpot/Password: Mot de passe
 Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts

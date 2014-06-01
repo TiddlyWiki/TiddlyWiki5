@@ -1,4 +1,4 @@
 title: $:/DefaultTiddlers
 
 GettingStarted
-[!is[system]sort[modified]limit[25]]
+[!is[system]has[modified]!sort[modified]limit[25]]

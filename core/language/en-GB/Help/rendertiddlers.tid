@@ -12,3 +12,7 @@ For example:
 ```
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```
+
+By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+
+Any files in the target directory are deleted. The target directory is recursively created if it is missing.

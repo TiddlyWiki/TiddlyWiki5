@@ -24,6 +24,8 @@ var Command = function(params,commander) {
 
 Command.prototype.execute = function() {
 	this.commander.verbose = true;
+	// Output the boot message log
+	this.commander.streams.output.write("Boot log:\n  " + $tw.boot.logMessages.join("\n  ") + "\n");
 	return null; // No error
 };
 

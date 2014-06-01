@@ -1,5 +1,5 @@
 created: 20140213171818824
-modified: 20140213172236345
+modified: 20140516172236345
 tags: mechanism
 title: HistoryMechanism
 type: text/vnd.tiddlywiki
@@ -12,7 +12,9 @@ The history list also maintains the field ''current-tiddler'' that contains the 
 
 ```
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
 <$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+
 </$list>
 ```
 

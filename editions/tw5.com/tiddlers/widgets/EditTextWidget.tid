@@ -1,6 +1,6 @@
 title: EditTextWidget
 created: 201310241419
-modified: 201310300837
+modified: 201405050837
 tags: widget
 
 ! Introduction
@@ -22,4 +22,5 @@ The content of the `<$edit-text>` widget is ignored.
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
 |tag |Overrides the generated HTML editing element tag |
+|size |The size of the input field (in characters) |
 |type |Overrides the generated HTML editing element `type` attribute |

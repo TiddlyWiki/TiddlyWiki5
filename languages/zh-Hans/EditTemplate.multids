@@ -8,6 +8,8 @@ Fields/Add/Button: 添加
 Fields/Add/Name/Placeholder: 栏位名称
 Fields/Add/Prompt: 添加栏位：
 Fields/Add/Value/Placeholder: 栏位内容
+Shadow/Warning: 这是默认条目，任何更改将会覆盖预设的版本。
+Shadow/OverriddenWarning: 这是修改过的默认条目，删除此条目可以还原为默认的版本。
 Tags/Add/Button: 添加
 Tags/Add/Placeholder: 标签名称
 Type/Placeholder: 内容类型

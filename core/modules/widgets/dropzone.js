@@ -66,6 +66,10 @@ DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
+	// Check for being over a TEXTAREA or INPUT
+	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+		return false;
+	}
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
 	event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
@@ -81,6 +85,10 @@ DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
+	// Check for being over a TEXTAREA or INPUT
+	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+		return false;
+	}
 	var self = this,
 		dataTransfer = event.dataTransfer;
 	// Reset the enter count

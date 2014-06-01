@@ -3,5 +3,5 @@ tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/More/Caption}}
 
 <div class="tw-more-sidebar">
-<<tabs "[all[tiddlers+shadows]tag[$:/tags/MoreSideBar]!has[draft.of]]" "$:/core/ui/MoreSideBar/Tags" "$:/state/tab/moresidebar">>
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]" "$:/core/ui/MoreSideBar/Tags" "$:/state/tab/moresidebar" "tw-vertical">>
 </div>

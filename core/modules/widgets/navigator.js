@@ -133,16 +133,7 @@ title: a title string or an array of title strings
 fromPageRect: page coordinates of the origin of the navigation
 */
 NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
-	var titles = $tw.utils.isArray(title) ? title : [title];
-	// Add a new record to the top of the history stack
-	if(this.historyTitle) {
-		var historyList = this.wiki.getTiddlerData(this.historyTitle,[]);
-		$tw.utils.each(titles,function(title) {
-			historyList.push({title: title, fromPageRect: fromPageRect});
-		});
-		this.wiki.setTiddlerData(this.historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
-		this.wiki.addTiddler(new $tw.Tiddler());
-	}
+	this.wiki.addToHistory(title,fromPageRect,this.historyTitle);
 };
 
 /*
@@ -181,9 +172,29 @@ NavigatorWidget.prototype.handleCloseOtherTiddlersEvent = function(event) {
 
 // Place a tiddler in edit mode
 NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
+	var self = this;
+	function isUnmodifiedShadow(title) {
+		// jshint eqnull:true
+		var tiddler = self.wiki.getTiddler(title);
+		return (
+			self.wiki.isShadowTiddler(title) &&
+			tiddler.fields.modified == null
+		);
+	}
+	function confirmEditShadow(title) {
+		return confirm($tw.language.getString(
+			"ConfirmEditShadowTiddler",
+			{variables:
+				{title: title}
+			}
+		));
+	}
+	var title = event.param || event.tiddlerTitle;
+	if(isUnmodifiedShadow(title) && !confirmEditShadow(title)) {
+		return false;
+	}
 	// Replace the specified tiddler with a draft in edit mode
-	var title = event.param || event.tiddlerTitle,
-		draftTiddler = this.makeDraftTiddler(title),
+	var draftTiddler = this.makeDraftTiddler(title),
 		draftTitle = draftTiddler.fields.title,
 		storyList = this.getStoryList();
 	this.removeTitleFromStory(storyList,draftTitle);
@@ -281,8 +292,7 @@ NavigatorWidget.prototype.generateDraftTitle = function(title) {
 NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
-		storyList = this.getStoryList(),
-		storyTiddlerModified = false; // We have to special case saving the story tiddler itself
+		storyList = this.getStoryList();
 	// Replace the original tiddler with the draft
 	if(tiddler) {
 		var draftTitle = (tiddler.fields["draft.title"] || "").trim(),
@@ -297,12 +307,14 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 						{title: draftTitle}
 					}
 				));
-			}
-			if(isConfirmed) {
+			} else if(!this.wiki.isDraftModified(title)) {
+				event.type = "tw-cancel-tiddler";
+				this.dispatchEvent(event);
+			} else if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
 				this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
 					title: draftTitle,
-					"draft.title": undefined, 
+					"draft.title": undefined,
 					"draft.of": undefined
 				},this.wiki.getModificationFields()));
 				// Remove the draft tiddler

@@ -4,6 +4,17 @@ Advanced/Caption: Advanced
 Advanced/Hint: Internal information about this TiddlyWiki
 Advanced/LoadedModules/Caption: Loaded Modules
 Advanced/LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+Advanced/Settings/Caption: Settings
+Advanced/Settings/Hint: These advanced settings let you customise the behaviour of TiddlyWiki.
+Advanced/Settings/NavigationAddressBar/Caption: Navigation Address Bar
+Advanced/Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
+Advanced/Settings/NavigationAddressBar/No/Description: Do not update the address bar
+Advanced/Settings/NavigationAddressBar/Permalink/Description: Include the target tiddler
+Advanced/Settings/NavigationAddressBar/Permaview/Description: Include the target tiddler and the current story sequence
+Advanced/Settings/NavigationHistory/Caption: Navigation History
+Advanced/Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
+Advanced/Settings/NavigationHistory/No/Description: Do not update history
+Advanced/Settings/NavigationHistory/Yes/Description: Update history
 Advanced/TiddlerFields/Caption: Tiddler Fields
 Advanced/TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
 Appearance/Caption: Appearance

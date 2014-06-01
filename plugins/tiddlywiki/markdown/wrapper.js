@@ -33,6 +33,18 @@ function transformNode(node) {
 			});
 		}
 		widget.children = transformNodes(node.slice(p++));
+		// Massage images into the image widget
+		if(widget.tag === "img") {
+			widget.tag = "$image";
+			if(widget.attributes.alt) {
+				widget.attributes.tooltip = widget.attributes.alt;
+				delete widget.attributes.alt;
+			}
+			if(widget.attributes.src) {
+				widget.attributes.source = widget.attributes.src;
+				delete widget.attributes.src;
+			}
+		}
 		return widget;
 	} else {
 		return {type: "text", text: node};

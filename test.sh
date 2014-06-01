@@ -20,5 +20,6 @@ echo "Using TW5_BUILD_OUTPUT as [$TW5_BUILD_OUTPUT]"
 node ./tiddlywiki.js \
 	./editions/test \
 	--verbose \
-	--rendertiddler $:/core/save/all $TW5_BUILD_OUTPUT/test.html text/plain \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all test.html text/plain \
 	|| exit 1

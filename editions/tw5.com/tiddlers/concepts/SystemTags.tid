@@ -17,9 +17,10 @@ System tags are used to give special behaviour to tiddlers:
 * [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
 * [[$:/tags/PageControls]] for the page control tools in the sidebar
 * [[$:/tags/PageTemplate]] for the main page elements
+* [[$:/tags/RawMarkup]] for raw markup to be included in the generated HTML file
 
 ! System tags in use
 
 These are the system tags in use in this wiki:
 
-{{{ [all[tiddlers+shadows]tags[]prefix[$:/]] +[sort[title]] }}}
+{{{ [all[shadows+tiddlers]tags[]prefix[$:/]] +[sort[title]] }}}

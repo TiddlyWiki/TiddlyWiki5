@@ -40,8 +40,7 @@ exports.parse = function() {
 		classes = this.match[5];
 	// Return the list widget
 	var node = {
-		type: "element",
-		tag: "$list",
+		type: "list",
 		attributes: {
 			filter: {type: "string", value: filter}
 		}

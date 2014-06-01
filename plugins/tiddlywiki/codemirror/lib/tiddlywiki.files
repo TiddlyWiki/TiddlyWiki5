@@ -1,0 +1,75 @@
+{
+	"tiddlers": [
+		{
+			"file": "codemirror.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "codemirror.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/lib/codemirror.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+		},{
+			"file": "addon/dialog/dialog.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+		},{
+			"file": "addon/dialog/dialog.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/dialog/dialog.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "addon/edit/matchbrackets.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/edit/matchbrackets.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "addon/search/searchcursor.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/addon/search/searchcursor.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "mode/javascript/javascript.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/mode/javascript/javascript.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "keymap/vim.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/keymap/vim.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "keymap/sublime.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/keymap/sublime.js",
+				"module-type": "library"
+			}
+		},{
+			"file": "keymap/emacs.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

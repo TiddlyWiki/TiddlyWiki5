@@ -16,8 +16,9 @@ Filter function for [all[current]]
 Export our filter function
 */
 exports.current = function(source,prefix,options) {
-	if(options.currTiddlerTitle) {
-		return [options.currTiddlerTitle];
+	var currTiddlerTitle = options.widget && options.widget.getVariable("currentTiddler");
+	if(currTiddlerTitle) {
+		return [currTiddlerTitle];
 	} else {
 		return [];
 	}

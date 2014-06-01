@@ -70,7 +70,7 @@ describe("WikiText parser tests", function() {
 		);
 		expect(parse("<$reveal state='$:/temp/search' type='nomatch' text=''>")).toEqual(
 
-			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 54 } }, end : 55, isBlock : false, children : [  ] } ] } ]
+			[ { type : 'element', tag : 'p', children : [ { type : 'reveal', tag: '$reveal', start : 0, attributes : { state : { start : 8, name : 'state', type : 'string', value : '$:/temp/search', end : 31 }, type : { start : 31, name : 'type', type : 'string', value : 'nomatch', end : 46 }, text : { start : 46, name : 'text', type : 'string', value : '', end : 54 } }, end : 55, isBlock : false, children : [  ] } ] } ]
 
 		);
 		expect(parse("<div attribute={{TiddlerTitle!!field}}>some text</div>")).toEqual(

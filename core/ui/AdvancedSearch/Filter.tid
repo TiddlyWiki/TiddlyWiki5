@@ -12,7 +12,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 <div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/filterDropdown">> type="nomatch" text="" default="">
 <div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[all[tiddlers+shadows]tag[$:/tags/Filter]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Filter]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
 </$list>
 </div>
 </$reveal>
@@ -22,7 +22,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 <div class="tw-search-results">
-<<lingo Advanced/Matches>>
+<<lingo Filter/Matches>>
 <$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
 </div>
 </$reveal>

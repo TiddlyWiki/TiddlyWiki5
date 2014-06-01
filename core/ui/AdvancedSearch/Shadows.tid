@@ -15,7 +15,7 @@ caption: {{$:/language/Search/Shadows/Caption}}
 
 <div class="tw-search-results">
 
-<<lingo Advanced/Matches>>
+<<lingo Shadows/Matches>>
 
 <$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 

@@ -15,10 +15,16 @@ Zooms between individual tiddlers
 var ZoominListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
-	// Make all the tiddlers position absolute, and hide all but the first one
+	// Get the index of the tiddler that is at the top of the history
+	var history = this.listWidget.wiki.getTiddlerData(this.listWidget.historyTitle,[]),
+		targetTiddler;
+	if(history.length > 0) {
+		targetTiddler = history[history.length-1].title;
+	}
+	// Make all the tiddlers position absolute, and hide all but the top (or first) one
 	$tw.utils.each(this.listWidget.children,function(itemWidget,index) {
 		var domNode = itemWidget.findFirstDomNode();
-		if(index) {
+		if(targetTiddler !== itemWidget.parseTreeNode.itemTitle || (!targetTiddler && index)) {
 			domNode.style.display = "none";
 		} else {
 			self.currentTiddlerDomNode = domNode;

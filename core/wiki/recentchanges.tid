@@ -1,6 +1,6 @@
 title: $:/snippets/recentchanges
 
-<$list filter="[!is[system]has[modified]!sort[modified]limit[250]eachday[modified]]">
+<$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
 <div class="tw-menu-list-item">
 <$view field="modified" format="date" template={{$:/language/RecentChanges/DateFormat}}/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]">

@@ -1,5 +1,5 @@
 created: 201308251500
-modified: 201308251621
+modified: 201405131621
 tags: deserializers dev
 title: TiddlerFiles
 
@@ -21,6 +21,14 @@ modifier: Jeremy
 This is the text of my tiddler.
 ```
 
+Note that many text editors require that files include a terminating newline. If you want to avoid including the terminating newline in the text of the tiddler you can use this alternative syntax:
+
+```
+title: MyTiddler
+modifier: Jeremy
+text: This is the text of my tiddler.
+```
+
 //The ContentType `application/x-tiddler` is used internally for these files//
 
 !! TiddlyWiki `<DIV>` .tiddler files
@@ -30,7 +38,7 @@ Modern `*.tiddler` files look like this:
 ```
 <div title="AnotherExampleStyleSheet" modifier="blaine" created="201102111106" modified="201102111310" tags="examples" creator="psd">
 <pre>Note that there is an embedded <pre> tag, and line feeds are not escaped.
-	
+
 And, weirdly, there is no HTML encoding of the body.</pre>
 </div>
 ```

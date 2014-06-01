@@ -8,6 +8,8 @@ Fields/Add/Button: 新增
 Fields/Add/Name/Placeholder: 欄位名稱
 Fields/Add/Prompt: 新增欄位：
 Fields/Add/Value/Placeholder: 欄位內容
+Shadow/Warning: 這是預設條目，任何更改將會覆蓋預設的版本。
+Shadow/OverriddenWarning: 這是修改過的預設條目，刪除此條目可以還原為預設的版本。
 Tags/Add/Button: 新增
 Tags/Add/Placeholder: 標籤名稱
 Type/Placeholder: 內容類型

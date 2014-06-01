@@ -2,12 +2,12 @@ title: $:/TagManager
 
 \define lingo-base() $:/language/TagManager/
 \define iconEditor(title)
-<$edit-text field="icon" tag="input"/> <$button popup=<<qualify "$:/state/iconDropdown/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/iconDropdown/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
 <div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/iconDropdown/$title$">> type="nomatch" text="" default="">
 <$linkcatcher to="$title$!!icon">
 <div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[all[tiddlers+shadows]is[image]] [all[tiddlers+shadows]tag[$:/tags/Image]] +[sort[title]]">
+<$list filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] +[sort[title]]">
 <$link to={{!!title}}>
 <$view field="title"/>
 </$link>
@@ -29,7 +29,7 @@ title: $:/TagManager
 <tr>
 <td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
 <td><$count filter="[all[current]tagging[]]"/></td>
-<td><$edit-text field="color" tag="input" type="color"/></td>
+<td><$edit-text field="color" tag="input" type="text" size="9"/> <$edit-text field="color" tag="input" type="color"/></td>
 <td><$macrocall $name="iconEditor" title={{!!title}}/></td>
 </tr>
 </$list>

@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140226202503234
+modified: 20140505221726794
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -18,15 +18,12 @@ The following additional features are planned or under consideration for impleme
 ** Improve upgrade process
 ** Establish plugin library
 ** Proper use of ARIA roles
-* Features required by ~TiddlyWiki hackers
-** Pretty-printed JSON (similar to http://marianoguerra.github.io/json.human.js/)
-** A "safe mode" to disable customisations
 * Fixing hangovers from TiddlyWikiClassic
 ** ~TiddlyWiki file format (to avoid illegal attribute names)
 ** Tiddler object format (to provide true polymorphism of field values)
 * Perfecting WikiText
 ** Global macros
-** `[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links
+** ~~`[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links~~
 ** Further ~WikiText features
 * Productivity features
 ** Import wizard allowing individual tiddlers to be selected for import
@@ -36,7 +33,6 @@ The following additional features are planned or under consideration for impleme
 ** Rich link tooltips, incorporating a preview
 ** Keyboard shortcuts
 ** Keyboard snippet expansion in the text editor
-** Integration with the browser back and forwards buttons
 ** List editor with drag and drop
 ** Selective/weighted searching by title, body and fields
 ** Maths notation
@@ -45,4 +41,4 @@ Also see the issues list on GitHub: https://github.com/Jermolene/TiddlyWiki5
 
 ! General Release
 
-TiddlyWiki will leave beta and become a full release early in 2014. That is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
+TiddlyWiki will [[leave beta|TiddlyWiki5 Versioning]] and become a full release in the first half of 2014. That is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
