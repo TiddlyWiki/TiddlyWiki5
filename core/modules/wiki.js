@@ -703,7 +703,70 @@ exports.initParsers = function(moduleType) {
 		}
 	});
 };
+/*
+recursive function, retrives parseroptions from tiddlers/files
+returns preparser, baseparser type and parserrules
+*/
+exports.makeparsers=function(type,text,options){
+	var returns = {};	
+		var typeParts = type.split("<");
+		if (typeParts.length >1) {
+			var typeDialog = typeParts[1];//alert(typeDialog);
+			var  readdata = $tw.wiki.getTiddlerData(typeDialog);
+			//read json tid containing: 
+				// baseparser
+				// parserdata
+			// now concaternate parserdata with baseparser -recursive
+			if (!!readdata) {
+				if (!!readdata.baserules) {
+					returns = this.makeparsers(readdata.baserules,text,options);
+				}
+				if (!!readdata.parseAsInline) {
+					 returns.parseAsInline =readdata.parseAsInline;
+				}
+				if (!returns.parserrules) {
+					returns.parserrules = readdata.parserrules;
+				}
+				else {
+					this.mergesetting(returns.parserrules,readdata.parserrules);
+				}
+				returns.type = typeParts[0];//overrides basetype of baserules
+			}	else {
+				returns.type = type;
+				returns.parserrules = null;
+			}
+		} else {
+			returns.type=type;
+			returns.parserrules=null;
+		}
+		return returns;
+}
 
+exports.mergesetting = function(items, adjustitems) {
+	if (!adjustitems) {
+		return;//nothing to do
+	}
+	$tw.utils.each(adjustitems,function(adjustitem, listname) {
+		if (!!items[listname]) {
+			if (items[listname] instanceof Array) {//merge lists
+				var i,baselen=items[listname].length;
+				for (var j=0; j<adjustitem.length; j++){
+					for ( i=0; i<baselen; i++) {
+						if (adjustitem[j]===items[listname][i]) break;
+					}
+					if (i===baselen) {
+						items[listname].push(adjustitem[j]);
+					}
+				}
+			} else {
+				items[listname]=adjustitem;//override item
+			}
+		} else {
+			items[listname]=adjustitem;//add new item
+		}
+		
+	})
+}
 /*
 Parse a block of text of a specified MIME type
 	type: content type of text to be parsed
@@ -714,7 +777,15 @@ Options include:
 */
 exports.old_parseText = function(type,text,options) {
 	options = options || {};
+	var parserdata;
 	// Select a parser
+	if(type !== undefined) { 
+		parserdata=this.makeparsers(type,text,options);
+		type=parserdata.type;
+		if (!!parserdata.parseAsInline) {
+			options.parseAsInline =parserdata.parseAsInline;
+		}
+	}
 	var Parser = $tw.Wiki.parsers[type];
 	if(!Parser && $tw.config.fileExtensionInfo[type]) {
 		Parser = $tw.Wiki.parsers[$tw.config.fileExtensionInfo[type].type];
@@ -728,7 +799,8 @@ exports.old_parseText = function(type,text,options) {
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
-		wiki: this
+		wiki: this,
+		parserrules:(type !== undefined)?parserdata.parserrules:null 
 	});
 };
 
