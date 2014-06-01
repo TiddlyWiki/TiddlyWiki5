@@ -70,6 +70,238 @@
 				"title": "$:/plugins/tiddlywiki/codemirror/keymap/emacs.js",
 				"module-type": "library"
 			}
-		}
+		},{
+			"file": "theme/3024-day.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/3024-day.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/3024-night.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/3024-night.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/ambiance-mobile.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/ambiance-mobile.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/ambiance.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/ambiance.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/base16-dark.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/base16-dark.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/base16-light.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/base16-light.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/blackboard.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/blackboard.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/cobalt.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/cobalt.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/eclipse.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/eclipse.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/elegant.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/elegant.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/erlang-dark.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/erlang-dark.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/lesser-dark.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/lesser-dark.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/mbo.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/mbo.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/mdn-like.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/mdn-like.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/midnight.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/midnight.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/monokai.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/monokai.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/neat.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/neat.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/night.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/night.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/paraiso-dark.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/paraiso-dark.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/paraiso-light.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/paraiso-light.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/pastel-on-dark.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/pastel-on-dark.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/rubyblue.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/rubyblue.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/solarized.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/solarized.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/the-matrix.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/the-matrix.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/tomorrow-night-eighties.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/tomorrow-night-eighties.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/twilight.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/twilight.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/vibrant-ink.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/vibrant-ink.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/xq-dark.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/xq-dark.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
+{
+			"file": "theme/xq-light.css",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/xq-light.css",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ }
+
 	]
 }
