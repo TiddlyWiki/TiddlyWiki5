@@ -1,0 +1,28 @@
+created: 20140520214706318
+modified: 20140520221208420
+title: $:/plugins/kpe/jsxgraph/jsxgraph.demo.tid
+type: text/vnd.tiddlywiki
+
+<$jsxgraph height="400px" width="600px" id="jxgbox">
+console.log('executing jxgbox',JXG);
+var addPoint = function(x) {
+  p.push(brd.create('point',
+              [x,(Math.random()-0.5)*3],{style:6}));
+  brd.update();
+};
+
+var brd = JXG.JSXGraph.initBoard('jxgbox',
+           {axis:true,originX: 250, originY: 250, unitX: 50, unitY: 25});
+brd.suspendUpdate();
+var p = [];
+p[0] = brd.create('point', [-4,2], {style:6});
+p[1] = brd.create('point', [3,-1], {style:6});
+addPoint(-2);
+addPoint(0.5);
+addPoint(1);
+var pol = JXG.Math.Numerics.lagrangePolynomial(p);
+var g = brd.create('functiongraph', [pol, -10, 10], {strokeWidth:3});
+var g2 = brd.create('functiongraph', [JXG.Math.Numerics.D(pol), -10, 10],
+                                      {dash:3, strokeColor:'#ff0000'});
+brd.unsuspendUpdate();
+</$jsxgraph>
