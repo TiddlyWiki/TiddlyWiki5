@@ -1,3 +1,4 @@
 title: $:/language/Docs/Types/application/json
-description: Javascript 对象数据
+description: JSON 数据
 name: application/json
+group: 开发者
