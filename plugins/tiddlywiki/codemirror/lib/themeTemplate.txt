@@ -1,0 +1,8 @@
+{
+			"file": "theme/filename",
+			"fields": {
+				"type": "text/css",
+				"title": "$:/plugins/tiddlywiki/codemirror/theme/filename",
+				"tags": "[[$:/tags/stylesheet]]"
+			}
+ },
