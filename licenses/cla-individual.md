@@ -156,3 +156,6 @@ Tomohiro Miura, @pekopeko1, 2014/04/15
 Devin Weaver, @sukima, 2014/05/21
 
 Irene Knapp, @IreneKnapp, 2014/05/17
+
+Daniel Rodriguez Rivero, @danielo515, 2014/04/18
+
