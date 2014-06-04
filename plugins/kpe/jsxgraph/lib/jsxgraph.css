@@ -1,9 +1,3 @@
-created: 20140520214706318
-modified: 20140520221208420
-title: $:/plugins/kpe/jsxgraph/jsxgraph.css.tid
-type: text/css
-tags: $:/tags/stylesheet
-
 /*
     Copyright 2008-2013
         Matthias Ehmann,
@@ -34,6 +28,7 @@ tags: $:/tags/stylesheet
     the MIT License along with JSXGraph. If not, see <http://www.gnu.org/licenses/>
     and <http://opensource.org/licenses/MIT/>.
  */
+
 .jxgbox {
     /* for IE 7 */
     position: relative;
@@ -68,3 +63,4 @@ tags: $:/tags/stylesheet
 .JXGimageHighlight {
     opacity: 0.6;
 }
+

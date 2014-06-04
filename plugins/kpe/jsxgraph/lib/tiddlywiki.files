@@ -1,0 +1,20 @@
+{
+    "tiddlers": [
+        {
+            "file": "jsxgraphcore.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/kpe/jsxgraph/lib/jsxgraphcore.js",
+                "module-type": "library"
+            }
+        },
+        {
+            "file": "jsxgraph.css",
+            "fields": {
+                "type": "text/css",
+                "title": "$:/plugins/kpe/jsxgraph/jsxgraph.css",
+                "tags": "[[$:/tags/stylesheet]]"
+            }
+        }
+    ]
+}

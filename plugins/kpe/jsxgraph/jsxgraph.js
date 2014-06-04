@@ -13,7 +13,10 @@ Creates a JSXGraph widget
     /*global $tw: false */
     "use strict";
 
+    var uniqueID = 1;
+
     var Widget = require("$:/core/modules/widgets/widget.js").widget;
+    var JXG = require("$:/plugins/kpe/jsxgraph/lib/jsxgraphcore.js");
 
     var JSXGraphWidget = function(parseTreeNode,options) {
         this.initialise(parseTreeNode,options);
@@ -24,6 +27,43 @@ Creates a JSXGraph widget
      */
     JSXGraphWidget.prototype = new Widget();
 
+    /**
+     * Intercepts the call to JSXGraph.initBoard() for replacing the first parameter.
+     * @param {string} boardNodeID id of the the HTMLElement to rendered the JSXGraph into
+     * @param {string} jxgScriptBody the script content
+     * @returns {JXG.Board} the rendered JSXGraph board
+     */
+    JSXGraphWidget.prototype.processJXGScript = function(boardNodeID, jxgScriptBody){
+        var result = null;
+        var initBoardBackup;
+        try{
+            var doc = this.document;
+
+            initBoardBackup = JXG.JSXGraph.initBoard;
+            JXG.JSXGraph.initBoard = function(box, attributes){
+                if(result != null) {
+                    throw new Error("Only board per jsxgraph widget is supported!");
+                }
+
+                if($tw.fakeDocument === doc) {
+                    boardNodeID = null;
+                    attributes.document = {};
+                    JXG.merge(JXG.Options, {renderer:'no'});
+                    attributes.renderer = 'no';
+                }
+
+                result = initBoardBackup.call(this, boardNodeID, attributes);
+                return result;
+            };
+            var jxgScript = new Function("JXG", jxgScriptBody);
+            jxgScript.call(null, JXG);
+        } finally {
+            JXG.JSXGraph.initBoard = initBoardBackup;
+        }
+        return result;
+    };
+
+
     /*
      Render this widget into the DOM
      */
@@ -32,23 +72,19 @@ Creates a JSXGraph widget
         this.computeAttributes();
         this.execute();
 
-        var height = this.getAttribute('height','500px');
-        var width = this.getAttribute('width','500px');
-        var id = this.getAttribute('id','jxgbox');
-        var script = this.parseTreeNode.children[0].text;
+        var height = this.getAttribute("height", "500px");
+        var width = this.getAttribute("width", "500px");
+        var scriptBody = this.parseTreeNode.children[0].text;
 
-        var divNode = this.document.createElement('div');
-        divNode.setAttribute('class', 'jxgbox');
-        divNode.setAttribute('style', 'height:'+height+';width:'+width);
-        divNode.setAttribute('id', id);
-
-        var scriptNode = this.document.createElement('script');
-        scriptNode.appendChild(this.document.createTextNode(script));
+        var divNode = this.document.createElement("div");
+        divNode.setAttribute("class", "jxgbox");
+        divNode.setAttribute("style", "height:" + height + ";width:" + width);
+        divNode.setAttribute("id", "jxgbox_" + uniqueID++);
 
         parent.insertBefore(divNode, nextSibling);
-        parent.insertBefore(scriptNode, nextSibling);
         this.domNodes.push(divNode);
-        this.domNodes.push(scriptNode);
+
+        var board = this.processJXGScript(divNode.id, scriptBody);
     };
 
     /*

@@ -3,8 +3,7 @@ modified: 20140520221208420
 title: $:/plugins/kpe/jsxgraph/jsxgraph.demo.tid
 type: text/vnd.tiddlywiki
 
-<$jsxgraph height="400px" width="600px" id="jxgbox">
-console.log('executing jxgbox',JXG);
+<$jsxgraph height="400px" width="600px">
 var addPoint = function(x) {
   p.push(brd.create('point',
               [x,(Math.random()-0.5)*3],{style:6}));
