@@ -498,6 +498,13 @@ a.tw-tiddlylink-external:hover {
 	border: 1px solid <<colour tiddler-border>>;
 }
 
+
+@media print {
+	.tw-tiddler-frame {
+		border: none;
+	}
+}
+
 .tw-tiddler-info {
 	padding: 14px 42px 14px 42px;
 	background-color: <<colour tiddler-info-background>>;
@@ -866,6 +873,11 @@ canvas.tw-edit-bitmapeditor  {
 .tw-block-dropdown a {
 	display: block;
 	padding: 4px 14px 4px 14px;
+}
+
+.tw-block-dropdown .tw-dropdown-item {
+	padding: 4px 14px 4px 7px;
+	color: <<colour muted-foreground>>;
 }
 
 .tw-block-dropdown a:hover {
