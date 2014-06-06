@@ -78,3 +78,17 @@ The ListWidget can be used to generate the options for a select widget. For exam
 <$tiddler tiddler={{$:/generated-list-demo-state}}>
 <$transclude mode='block'/>
 </$tiddler>"/>
+
+!! Nested Lists
+
+This example uses a nested pair of list widgets. The outer one generates the `<optgroup>` elements, and the inner one generates `<option>` elements:
+
+<$macrocall $name="wikitext-example-without-html" src="<$select tiddler='$:/generated-list-demo-nestedstate' field='type' default='text/vnd.tiddlywiki'>
+<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
+<optgroup label={{!!group}}>
+<$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]'>
+<option value={{!!name}}><$view field='description'><$view field='title'/></$view> (<$view field='name'/>)</option>
+</$list>
+</optgroup>
+</$list>
+</$select>"/>
