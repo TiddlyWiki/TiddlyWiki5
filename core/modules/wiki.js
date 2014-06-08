@@ -211,6 +211,9 @@ exports.importTiddler = function(tiddler) {
 			return false;
 		}
 	}
+	if(tiddler && tiddler.hasField("modified") && existingTiddler && existingTiddler.hasField("modified") && tiddler.fields.modified <= existingTiddler.fields.modified){
+  	    return false;
+  	    }
 	// Fall through to adding the tiddler
 	this.addTiddler(tiddler);
 	return true;
