@@ -1,5 +1,5 @@
 created: 20131101111400000
-modified: 20140112164329806
+modified: 20140607164329806
 tags: introduction
 title: Contributing
 type: text/vnd.tiddlywiki
@@ -12,30 +12,7 @@ Code contributions should follow the [[TiddlyWiki Coding Style Guidelines]].
 
 !! GitHub Issues
 
-We use GitHub Issues to manage bug reports, feature requests for TiddlyWiki. To maintain their effectiveness we endeavour to have as few open issues as possible.
-
-!!! Policies for Managing Issues
-
-Open issues must be actionable: generally either a reproducible bug report, or a specific feature request. From the perspective of the core developers, the issues list behaves like a shared todo list. Every item on the list requires a little bit of attention each time we check the list.
-
-GitHub Issues are not very good for managing ideas that are not immediately actionable. Better to use the [[TiddlyWiki discussion groups|Community]] for open ended questions, or speculative discussions of new features.
-
-!!! Creating Issues
-
-When you do create an issue, remember that for effective debugging, we need as much information as possible. At a minimum, please try to include:
-
-* A descriptive title
-* A summary
-* Steps to reproduce
-* Expected behaviour
-* Context (OS, browser etc.)
-
-Consider also adding screenshots if it makes things clearer.
-
-There's a lot of good material on the web about bug reports:
-
-* http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
-* http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
+See ReportingBugs for information about how TiddlyWiki handles bug reports.
 
 !! Contributor License Agreement
 
@@ -56,4 +33,4 @@ eg: `Jeremy Ruston, @Jermolene, 2011/11/22`
 
 !!!! Attribution
 
-The CLA documents used for this project where created using [[Harmony Project Templates|http://www.harmonyagreements.org]]. "~HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "~HA-CLA-E-LIST Version 1.0" for "CLA-entity"
+The CLA documents used for this project were created using [[Harmony Project Templates|http://www.harmonyagreements.org]]. "~HA-CLA-I-LIST Version 1.0" for "CLA-individual" and "~HA-CLA-E-LIST Version 1.0" for "CLA-entity"

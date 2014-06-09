@@ -1,0 +1,43 @@
+created: 20140604204709181
+modified: 20140604205253392
+tags: resources tips
+title: ReportingBugs
+type: text/vnd.tiddlywiki
+
+There are two ways to report bugs in TiddlyWiki:
+
+* via the TiddlyWiki discussion group (requires a Google account)
+** http://groups.google.com/group/TiddlyWiki
+* via the TiddlyWiki GitHub repository (requires a GitHub account)
+** https://github.com/Jermolene/TiddlyWiki5/issues/new
+
+Unless you are already familiar with GitHub, it's usually easiest to report problems through the discussion groups.
+
+! TiddlyWiki on GitHub
+
+We use GitHub Issues to manage bug reports and feature requests for TiddlyWiki. To maintain their effectiveness we endeavour to have as few open issues as possible.
+
+!!! Policies for Managing Issues
+
+Open issues should be actionable: generally either a reproducible bug report, or a specific feature request. From the perspective of the core developers, the issues list behaves like a shared todo list. Every item on the list requires a little bit of attention each time we check the list.
+
+GitHub Issues are not very good for managing ideas that are not immediately actionable. Better to use the [[TiddlyWiki discussion groups|Community]] for open ended questions, or speculative discussions of new features.
+
+!!! Creating Issues
+
+Before creating a GitHub issue it is good etiquette to search through the existing issues to see whether the problem has already been reported. If a search isn't practical, don't worry too much; GitHub makes it easy to merge existing issues.
+
+When you do create an issue, remember that for effective debugging, we need as much information as possible. At a minimum, please try to include:
+
+* A descriptive title
+* A summary
+* Steps to reproduce
+* Expected behaviour
+* Context (OS, browser etc.)
+
+Consider also adding screenshots if it makes things clearer.
+
+There's a lot of good material on the web about bug reports:
+
+* http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
+* http://www.chiark.greenend.org.uk/~sgtatham/bugs.html
