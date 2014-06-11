@@ -117,11 +117,16 @@ table tfoot tr td {
 	white-space: nowrap;
 }
 
-.tw-tiddler-frame img, .tw-tiddler-frame svg, .tw-tiddler-frame canvas, .tw-tiddler-frame embed {
+.tw-tiddler-frame img,
+.tw-tiddler-frame svg,
+.tw-tiddler-frame canvas,
+.tw-tiddler-frame embed,
+.tw-tiddler-frame iframe {
 	max-width: 100%;
 }
 
-.tw-tiddler-frame embed {
+.tw-tiddler-frame embed,
+.tw-tiddler-frame iframe {
 	width: 100%;
 	height: 600px;
 }
