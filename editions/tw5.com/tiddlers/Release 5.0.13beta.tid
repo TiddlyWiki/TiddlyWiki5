@@ -19,18 +19,32 @@ See [[Notes for upgrading to 5.0.13-beta]] for more details of these changes:
 
 !! Usability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9ab0c84140bbc0f31cf65e632bddac616bbadbda]] support for global [[Macros in WikiText]] via the new ImportVariablesWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3182a2d599f0e4b70a73fe369df4f398587dc1a9]] new SelectWidget
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f131c378934a86b741ab5b808437c95694dc5503]] behaviour of `text/html` tiddlers so that they are displayed within an HTML iframe element
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9b576f2a8d39dcca37bcb709183a8f9b27f33ccf]] group headings to the content type dropdown in edit mode
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d70d5780e51cf0918fba15954cd47549e4e1a9f]] advanced navigation settings in $:/ControlPanel to use radio buttons
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f7b8813a27141a78980eefa03df70a4a2de9d10b]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/3f25db0abe8cd28712c020f218506710cec004b6]]) behaviour of PermaLinks so that now [ext[http://tiddlywiki.com/#HelloThere]] just opens the single specified tiddler
 
 !! Hackability Improvements
 
-* 
+* [[Restored|https://github.com/Jermolene/TiddlyWiki5/commit/1b37d660ea7cd576cfeadfe8b782fe6c62dc9048]] ''escape'' as a shortcut to abandon edits
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9547a1f01c144c604c294f394a68d7dc6dbe4e5d]] support for ExternalImages that are referenced by URI and not stored in the TiddlyWiki HTML file
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2796d0c9c7ed7a971ae6b0752d7418384072bb5]] new SetFieldCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/305617b632fd6ecf25cd4be85f4dfb5a5a65dfef]] new SaveTiddlersCommand
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f14ecf4eb8965f2e407ccac51d4277330221efe3]] support for system tag [[$:/tags/RawMarkup]]
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a03a15e7de32a1b41618146ac334b5cd7d432e91]] bug with TextWidget not refreshing correctly
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d8a142fed5b22a8273d93ba05095e5f9c6929cb3]] problem with vertical tabs in Safari
 
 !! Contributors
 
 I ([[@Jermolene|https://github.com/Jermolene]]) would like to thank the contributors to this release who have generously given their time to helping improve TiddlyWiki:
 
-[[@BramChen|https://github.com/BramChen]], [[@mwfogleman|https://github.com/mwfogleman]], [[@nameanyone|https://github.com/nameanyone]], [[@natecain|https://github.com/natecain]], [[@pekopeko1|https://github.com/pekopeko1]], [[@pmario|https://github.com/pmario]], [[@sukima|https://github.com/sukima]], [[@xcazin|https://github.com/xcazin]].
+[[@BramChen|https://github.com/BramChen]]
+[[@danielo515|https://github.com/danielo515]]
+[[@IreneKnapp|https://github.com/IreneKnapp]]
+[[@mwfogleman|https://github.com/mwfogleman]]
+[[@xcazin|https://github.com/xcazin]]

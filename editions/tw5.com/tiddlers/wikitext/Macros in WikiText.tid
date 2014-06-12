@@ -1,5 +1,5 @@
 created: 20131205160746466
-modified: 20140409133148420
+modified: 20140612182148420
 tags: wikitext
 title: Macros in WikiText
 type: text/vnd.tiddlywiki
@@ -25,6 +25,10 @@ Single-line macros can omit the `\end` marker like this:
 ```
 
 Macro definitions must be placed at the top of a tiddler. Macros are available to the tiddler that defines them, plus any tiddlers that it transcludes.
+
+Global macros can be defined in any tiddler with the tag [[$:/tags/Macro]]. They are then available within all tiddlers.
+
+Macros can be imported from other tiddlers with the ImportVariablesWidget.
 
 [[JavaScript Macros]] can also be used for more flexibility.
 

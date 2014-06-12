@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140505221726794
+modified: 20140612181726794
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ During the beta ~TiddlyWiki will be practical for cautious everyday use but as w
 
 The following additional features are planned or under consideration for implementation during the beta:
 
-* Features improving user data integrity
+* Features to improve user data integrity
 ** Optional defensive backups with TiddlyFox and TiddlyDesktop
 * Features required for large scale adoption
 ** Improve upgrade process
@@ -22,7 +22,7 @@ The following additional features are planned or under consideration for impleme
 ** ~TiddlyWiki file format (to avoid illegal attribute names)
 ** Tiddler object format (to provide true polymorphism of field values)
 * Perfecting WikiText
-** Global macros
+** ~~Global macros~~
 ** ~~`[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links~~
 ** Further ~WikiText features
 * Productivity features
