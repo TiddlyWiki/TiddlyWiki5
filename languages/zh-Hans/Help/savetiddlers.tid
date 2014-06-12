@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: 将条目的原始内容保存到一个文件
+
+保存一群条目的原始文字或二进制格式到指定的文件夹。
+
+```
+--savetiddlers <filter> <pathname>
+```
+
+默认情况下，文件名被解析为相对于版本文件夹的 `output` 子文件夹。 `--output` 命令可以用于将输出指定到一个不同的文件。
+
+自动创建在路径中任何缺少的文件夹。
