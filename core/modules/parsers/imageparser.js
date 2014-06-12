@@ -19,7 +19,12 @@ var ImageParser = function(type,text,options) {
 			attributes: {}
 		},
 		src;
-	if(text) {
+	if(options._canonical_uri) {
+		element.attributes.src = {type: "string", value: options._canonical_uri};
+		if(type === "application/pdf" || type === ".pdf") {
+			element.tag = "embed";
+		}
+	} else if(text) {
 		if(type === "application/pdf" || type === ".pdf") {
 			element.attributes.src = {type: "string", value: "data:application/pdf;base64," + text};
 			element.tag = "embed";

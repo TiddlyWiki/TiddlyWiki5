@@ -56,20 +56,37 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	} else {
 		// Check if it is an image tiddler
 		if(this.wiki.isImageTiddler(this.imageSource)) {
-			// Render the appropriate element for the image type
 			var type = tiddler.fields.type,
-				text = tiddler.fields.text;
-			switch(type) {
-				case "application/pdf":
-					tag = "embed";
-					src = "data:application/pdf;base64," + text;
-					break;
-				case "image/svg+xml":
-					src = "data:image/svg+xml," + encodeURIComponent(text);
-					break;
-				default:
-					src = "data:" + type + ";base64," + text;
-					break;
+				text = tiddler.fields.text,
+				_canonical_uri = tiddler.fields._canonical_uri;
+			// If the tiddler has body text then it doesn't need to be lazily loaded
+			if(text) {
+				// Render the appropriate element for the image type
+				switch(type) {
+					case "application/pdf":
+						tag = "embed";
+						src = "data:application/pdf;base64," + text;
+						break;
+					case "image/svg+xml":
+						src = "data:image/svg+xml," + encodeURIComponent(text);
+						break;
+					default:
+						src = "data:" + type + ";base64," + text;
+						break;
+				}
+			} else if(_canonical_uri) {
+				switch(type) {
+					case "application/pdf":
+						tag = "embed";
+						src = _canonical_uri;
+						break;
+					case "image/svg+xml":
+						src = _canonical_uri;
+						break;
+					default:
+						src = _canonical_uri;
+						break;
+				}	
 			}
 		}
 	}

@@ -26,6 +26,5 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all index.html text/plain \
-	--savetiddler $:/favicon.ico favicon.ico \
+	--build index favicon \
 	|| exit 1

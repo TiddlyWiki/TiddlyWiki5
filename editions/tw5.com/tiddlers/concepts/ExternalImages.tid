@@ -1,0 +1,68 @@
+created: 20140610213500000
+modified: 20140610213936575
+tags: concepts
+title: ExternalImages
+type: text/vnd.tiddlywiki
+
+External images in TiddlyWiki are tiddlers that point to the URI of an image, rather than embedding the full image data. They can perform better than embedded images, particularly with large numbers or sizes of images. However, using them breaks the single file pattern of TiddlyWiki.
+
+External images are used in the browser. They can be created by the Node.js configuration when it builds a TiddlyWiki, or they can be created manually within the browser.
+
+! What is an External Image
+
+An external image is an ordinary image tiddler that has a ''_canonical_uri'' field containing the URI of the image. The URI can be absoluate or relative to the HTML document. If the canonical URI is provided then the ''text'' field of the tiddler is ignored and so should be omitted.
+
+! Manually Creating External Images
+
+To manually create an external image just create the tiddler with the appropriate image content type, and add a ''_canonical_uri'' field with a URI pointing to the actual image location.
+
+! Creating external images under Node.js
+
+The following steps are used to create a static HTML file version of a wiki accompanied by an ''images'' folder containing the referenced external images:
+
+# Create image tiddlers in your TiddlyWikiFolders in the usual way
+# Save the images as separate files (by convention, in a subfolder named ''images'')
+# Externalise the image tiddlers by giving them a ''_canonical_uri'' field
+# Save the main HTML file
+
+Note the image files must be saved before they are externalised. Externalising them destroys the ''text'' field within the in-memory copy of the wiki store, meaning that attempts to save them will fail.
+
+For an example see the ''externalimages'' build target of the demo ''tw5.com'' wiki:
+
+```
+--savetiddlers [is[image]] images
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri text/plain
+--setfield [is[image]] text "" text/plain
+--rendertiddler $:/core/save/all externalimages.html text/plain
+```
+
+!! Saving Separate Image Files
+
+The following `--savetiddlers` command can be used to save the images of a wiki into an ''images'' subfolder:
+
+```
+--savetiddlers [is[image]] images
+```
+
+!! Externalising Image Tiddlers
+
+Two `--setfield` commands are used: the first sets the ''_canonical_uri'' field to a URI derived from the title of the tiddler, and the second clears the text field.
+
+```
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri text/plain
+--setfield [is[image]] text "" text/plain
+```
+
+The template tiddler [[$:/core/templates/canonical-uri]] contains:
+
+<pre>
+
+<$view tiddler="$:/core/templates/canonical-uri" field="text" format="text"/>
+
+</pre>
+
+Note that these operations modify the tiddlers in the wiki store and so may affect the operation of subsequent commands.
+
+! Using External Images
+
+You can't edit an external image directly in the browser except by changing the URI field to point to a different image.

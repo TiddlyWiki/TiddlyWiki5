@@ -1,6 +1,6 @@
 title: ImageWidget
 created: 20140416160234142
-modified: 20140416160234142
+modified: 20140611160234142
 tags: widget
 
 ! Introduction
@@ -18,3 +18,11 @@ Any content of the `<$image>` widget is ignored.
 |tooltip |The tooltip to be displayed over the image |
 |class |CSS classes to be assigned to the `<img>` element |
 
+! External Images and the ''_canonical_uri'' field
+
+When used to display tiddler-based images, the image widget operates in two distinct modes:
+
+* If the ''_canonical_uri'' field is present then it is used as the ''src'' attribute of the generated `<img>` element and the ''text'' field is ignored
+* Without the ''_canonical_uri'' field, the image widget generates an `<img>` element that embeds the image data directly using a `data:` URI.
+
+See ExternalImages for more details.
