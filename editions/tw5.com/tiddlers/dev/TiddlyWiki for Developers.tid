@@ -23,4 +23,4 @@ It also determines the standard UI flow:
 # The core then issues a store change event which triggers the refresh cycle
 # Each widget in the tree then gets a chance to refresh itself to reflect the changes in the store if they need to
 
-From a technical perspective, TiddlyWiki is a fairly classic MVC architecture, with strict separation of concerns. The model is the tiddler store, the view is a rendering tree (such as the one created from [[$:/core/ui/PageMacros]] in startup.js), and the controller is the core code itself.
+From a technical perspective, TiddlyWiki is a fairly classic MVC architecture, with strict separation of concerns. The model is the tiddler store, the view is a rendering tree (such as the one created from [[$:/core/ui/PageTemplate]] in startup.js), and the controller is the core code itself.

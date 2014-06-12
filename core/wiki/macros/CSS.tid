@@ -1,0 +1,10 @@
+title: $:/core/macros/CSS
+tags: $:/tags/Macro
+
+\define colour(name)
+<$transclude tiddler={{$:/palette}} index="$name$"/>
+\end
+
+\define color(name)
+<<colour $name$>>
+\end

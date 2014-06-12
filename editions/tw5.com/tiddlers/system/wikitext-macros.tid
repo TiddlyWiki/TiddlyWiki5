@@ -1,0 +1,30 @@
+title: $:/editions/tw5.com/wikitext-macros
+tags: $:/tags/Macro
+
+\define wikitext-example(src)
+```
+$src$
+```
+
+Renders as:
+
+$src$
+
+In HTML:
+
+$$$text/vnd.tiddlywiki>text/html
+$src$
+$$$
+
+\end
+
+\define wikitext-example-without-html(src)
+```
+$src$
+```
+
+Renders as:
+
+$src$
+
+\end

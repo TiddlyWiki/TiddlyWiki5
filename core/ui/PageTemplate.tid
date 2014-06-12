@@ -4,6 +4,8 @@ title: $:/core/ui/PageTemplate
 tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 \end
 
+<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
+
 <$set name="themeTitle" value={{$:/view}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
@@ -37,3 +39,5 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 </$set>
 
 </$set>
+
+</$importvariables>

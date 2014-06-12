@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The StateMechanism in TiddlyWiki is at the heart of how complex user interfaces can be built from WikiText.
 
-In the browser, the TiddlyWiki display is produced by dynamically rendering the tiddler [[$:/core/ui/PageMacros]]. Through various transclusions and other widgets it renders the entire user interface. The dynamic rendering is accomplished by a mechanism called "binding": any changes to the tiddlers in the store are dynamically reflected in the browser display.
+In the browser, the TiddlyWiki display is produced by dynamically rendering the tiddler [[$:/core/ui/PageTemplate]]. Through various transclusions and other widgets it renders the entire user interface. The dynamic rendering is accomplished by a mechanism called "binding": any changes to the tiddlers in the store are dynamically reflected in the browser display.
 
 The stack of templates that make up the TiddlyWiki display are complex but we'll focus on the line that displays the main story column:
 

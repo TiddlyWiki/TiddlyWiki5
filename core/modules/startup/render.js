@@ -21,7 +21,7 @@ exports.synchronous = true;
 // Default story and history lists
 var PAGE_TITLE_TITLE = "$:/core/wiki/title"
 var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
-var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageMacros";
+var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageTemplate";
 
 // Time (in ms) that we defer refreshing changes to draft tiddlers
 var DRAFT_TIDDLER_TIMEOUT = 400;
@@ -49,7 +49,7 @@ exports.startup = function() {
 			$tw.styleElement.innerHTML = $tw.styleContainer.textContent;
 		}
 	}));
-	// Display the $:/core/ui/PageMacros tiddler to kick off the display
+	// Display the $:/core/ui/PageTemplate tiddler to kick off the display
 	$tw.perf.report("mainRender",function() {
 		$tw.pageWidgetNode = $tw.wiki.makeTranscludeWidget(PAGE_TEMPLATE_TITLE,{document: document, parentWidget: $tw.rootWidget});
 		$tw.pageContainer = document.createElement("div");
