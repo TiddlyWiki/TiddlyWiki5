@@ -711,6 +711,7 @@ Parse a block of text of a specified MIME type
 	options: see below
 Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
+	_canonical_uri: optional string of the canonical URI of this content
 */
 exports.old_parseText = function(type,text,options) {
 	options = options || {};
@@ -728,7 +729,8 @@ exports.old_parseText = function(type,text,options) {
 	// Return the parser instance
 	return new Parser(type,text,{
 		parseAsInline: options.parseAsInline,
-		wiki: this
+		wiki: this,
+		_canonical_uri: options._canonical_uri
 	});
 };
 
@@ -736,11 +738,14 @@ exports.old_parseText = function(type,text,options) {
 Parse a tiddler according to its MIME type
 */
 exports.old_parseTiddler = function(title,options) {
-	options = options || {};
+	options = $tw.utils.extend({},options);
 	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
 	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
+			if(tiddler.hasField("_canonical_uri")) {
+				options._canonical_uri = tiddler.fields._canonical_uri;
+			}
 			return self.old_parseText(tiddler.fields.type,tiddler.fields.text,options);
 		}) : null;
 };

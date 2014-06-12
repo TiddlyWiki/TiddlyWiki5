@@ -1,10 +1,26 @@
 title: $:/core/ui/EditTemplate/body
 tags: $:/tags/EditTemplate
 
-\define lingo-base() $:/language/EditTemplate/
+\define lingo-base() $:/language/EditTemplate/Body/
+<$list filter="[is[current]has[_canonical_uri]]">
+
+<div class="tw-message-box">
+
+<<lingo External/Hint>>
+
+<a href={{!!_canonical_uri}}><$text text={{!!_canonical_uri}}/></a>
+
+<$edit-text field="_canonical_uri" class="tw-edit-fields"></$edit-text>
+
+</div>
+
+</$list>
+
+<$list filter="[is[current]!has[_canonical_uri]]">
+
 <$reveal state="$:/state/showeditpreview" type="match" text="yes">
 
-<em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Body/Preview/Button/Hide>></$button>
+<em class="tw-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
 
 <div class="tw-tiddler-preview">
 <div class="tw-tiddler-preview-preview">
@@ -24,7 +40,9 @@ tags: $:/tags/EditTemplate
 
 <$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
 
-<em class="tw-edit"><<lingo Body/Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Body/Preview/Button/Show>></$button>
+<em class="tw-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Preview/Button/Show>></$button>
 <$edit field="text" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </$reveal>
+
+</$list>
