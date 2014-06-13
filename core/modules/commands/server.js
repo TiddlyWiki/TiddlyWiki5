@@ -50,10 +50,22 @@ SimpleServer.prototype.addRoute = function(route) {
 };
 
 SimpleServer.prototype.findMatchingRoute = function(request,state) {
+	var pathprefix = this.get("pathprefix") || "";
 	for(var t=0; t<this.routes.length; t++) {
 		var potentialRoute = this.routes[t],
 			pathRegExp = potentialRoute.path,
-			match = potentialRoute.path.exec(state.urlInfo.pathname);
+			pathname = state.urlInfo.pathname,
+			match;
+		if(pathprefix) {
+			if(pathname.substr(0,pathprefix.length) === pathprefix) {
+				pathname = pathname.substr(pathprefix.length);
+				match = potentialRoute.path.exec(pathname);
+			} else {
+				match = false;
+			}
+		} else {
+			match = potentialRoute.path.exec(pathname);
+		}
 		if(match && request.method === potentialRoute.method) {
 			state.params = [];
 			for(var p=1; p<match.length; p++) {
@@ -272,13 +284,15 @@ Command.prototype.execute = function() {
 		serveType = this.params[3] || "text/html",
 		username = this.params[4],
 		password = this.params[5],
-		host = this.params[6] || "127.0.0.1";
+		host = this.params[6] || "127.0.0.1",
+		pathprefix = this.params[7];
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
 		serveType: serveType,
 		username: username,
-		password: password
+		password: password,
+		pathprefix: pathprefix
 	});
 	this.server.listen(port,host);
 	console.log("Serving on " + host + ":" + port);

@@ -1,0 +1,14 @@
+created: 20140613133627669
+modified: 20140613134313770
+tags: howto
+title: Using a custom path prefix with the client-server edition
+type: text/vnd.tiddlywiki
+
+By default, when running [[TiddlyWiki on Node.js]], the server exposes the wiki at the URI formed from the protocol, host and port - for example, `http://127.0.0.1:8080/`.
+
+There are two steps to running the wiki at a custom path like `http://127.0.0.1:8080/path/to/my/wiki/`:
+
+# Configure the server by passing `/path/to/my/wiki` as the ''pathprefix'' argument of the ServerCommand
+# Configure the client by creating a tiddler called ''$:/config/tiddlyweb/host'' that contains `$protocol$//$host$/path/to/my/wiki/`
+
+
