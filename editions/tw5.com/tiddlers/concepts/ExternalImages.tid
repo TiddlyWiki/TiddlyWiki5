@@ -31,7 +31,7 @@ For an example see the ''externalimages'' build target of the demo ''tw5.com'' w
 
 ```
 --savetiddlers [is[image]] images
---setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri text/plain
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
 --setfield [is[image]] text "" text/plain
 --rendertiddler $:/core/save/all externalimages.html text/plain
 ```
@@ -49,15 +49,15 @@ The following `--savetiddlers` command can be used to save the images of a wiki 
 Two `--setfield` commands are used: the first sets the ''_canonical_uri'' field to a URI derived from the title of the tiddler, and the second clears the text field.
 
 ```
---setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri text/plain
+--setfield [is[image]] _canonical_uri $:/core/templates/canonical-uri-external-image text/plain
 --setfield [is[image]] text "" text/plain
 ```
 
-The template tiddler [[$:/core/templates/canonical-uri]] contains:
+The template tiddler [[$:/core/templates/canonical-uri-external-image]] contains:
 
 <pre>
 
-<$view tiddler="$:/core/templates/canonical-uri" field="text" format="text"/>
+<$view tiddler="$:/core/templates/canonical-uri-external-image" field="text" format="text"/>
 
 </pre>
 
