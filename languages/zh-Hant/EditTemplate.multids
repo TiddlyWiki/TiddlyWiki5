@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Body/External/Hint: 這是儲存於主要的 TiddlyWiki 檔之外的外部條目。你可以編輯其標籤和欄位，但不能直接編輯內容本身
 Body/Hint: 使用 WikiText 來新增格式、圖片及動態功能
 Body/Placeholder: 輸入此條目的內容
 Body/Preview/Button/Hide: 隱藏預覽
