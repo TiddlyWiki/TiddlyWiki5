@@ -33,6 +33,7 @@ See [[Notes for upgrading to 5.0.13-beta]] for more details of these changes:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2796d0c9c7ed7a971ae6b0752d7418384072bb5]] new SetFieldCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/305617b632fd6ecf25cd4be85f4dfb5a5a65dfef]] new SaveTiddlersCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f14ecf4eb8965f2e407ccac51d4277330221efe3]] support for system tag [[$:/tags/RawMarkup]]
+* Extended [[FilterOperator: listed]] to work with any list field
 
 !! Bug Fixes
 

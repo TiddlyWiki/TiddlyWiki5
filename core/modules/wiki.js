@@ -480,13 +480,14 @@ exports.getTagMap = function() {
 };
 
 /*
-Lookup a given tiddler and return a list of all the tiddlers that include it in their list
+Lookup a given tiddler and return a list of all the tiddlers that include it in the specified list field
 */
-exports.findListingsOfTiddler = function(targetTitle) {
-	// Get the list associated with the tag
+exports.findListingsOfTiddler = function(targetTitle,fieldName) {
+	fieldName = fieldName || "list";
 	var titles = [];
 	this.each(function(tiddler,title) {
-		if($tw.utils.isArray(tiddler.fields.list) && tiddler.fields.list.indexOf(targetTitle) !== -1) {
+		var list = $tw.utils.parseStringArray(tiddler.fields[fieldName]);
+		if(list && list.indexOf(targetTitle) !== -1) {
 			titles.push(title);
 		}
 	});

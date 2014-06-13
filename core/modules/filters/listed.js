@@ -16,9 +16,10 @@ Filter operator returning all tiddlers that have the selected tiddlers in a list
 Export our filter function
 */
 exports.listed = function(source,operator,options) {
-	var results = [];
+	var field = operator.operand || "list",
+		results = [];
 	source(function(tiddler,title) {
-		$tw.utils.pushTop(results,options.wiki.findListingsOfTiddler(title));
+		$tw.utils.pushTop(results,options.wiki.findListingsOfTiddler(title,field));
 	});
 	return results;
 };
