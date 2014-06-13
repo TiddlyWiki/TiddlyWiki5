@@ -10,4 +10,4 @@ For example:
 
 |!Filter String |!Description |
 |`[[HelloThere]listed[]]` |Returns the titles of any tiddlers containing `HelloThere` in their `list` fields |
-|`[all[current]listed[my-special-list]]]` |Returns the titles of any tiddlers containing the current tiddler in their `my-special-list` fields |
+|`[all[current]listed[my-special-list]]` |Returns the titles of any tiddlers containing the current tiddler in their `my-special-list` fields |
