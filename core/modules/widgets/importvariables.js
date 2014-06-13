@@ -100,7 +100,6 @@ ImportVariablesWidget.prototype.refresh = function(changedTiddlers) {
 	}
 	if(changedAttributes.filter || !$tw.utils.isArrayEqual(this.tiddlerList,tiddlerList) || haveListedTiddlersChanged()) {
 		// Compute the filter
-console.log("Refreshing importvariables with filter=",this.getAttribute("filter"));
 		this.removeChildDomNodes();
 		this.execute(tiddlerList);
 		this.renderChildren(this.parentDomNode,this.findNextSiblingDomNode());
