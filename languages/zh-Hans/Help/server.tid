@@ -6,7 +6,7 @@ description: 提供一个 HTTP 服务器介面到 TiddlyWiki
 提供呈现一个指定条目，也可将个别条目编码成 JSON，且支持基本的 HTTP 操作 `GET`、`PUT` 及 `DELETE`.
 
 ```
---server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host>
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
 ```
 
 参数说明：
@@ -18,6 +18,7 @@ description: 提供一个 HTTP 服务器介面到 TiddlyWiki
 * ''username'' - 默认的编辑者署名
 * ''password'' - 可选的基本验证密码
 * ''host'' - 可选的主机名称， (默认为 "127.0.0.1" 或名为 "localhost")
+* ''pathprefix'' - 可选的路径前缀
 
 若指定密码参数，浏览器将提示使用者输入用户名与密码。注意，密码系以明码方式传递，因此并不适合一般正式用途。
 
