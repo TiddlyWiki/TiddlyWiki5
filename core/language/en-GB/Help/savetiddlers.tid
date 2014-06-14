@@ -1,5 +1,5 @@
 title: $:/language/Help/savetiddlers
-description: Saves a raw tiddler to a file
+description: Saves a group of raw tiddlers to a directory
 
 Saves a group of tiddlers in their raw text or binary format to the specified directory. 
 
@@ -7,6 +7,6 @@ Saves a group of tiddlers in their raw text or binary format to the specified di
 --savetiddlers <filter> <pathname>
 ```
 
-By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
 
 Any missing directories in the pathname are automatically created.
