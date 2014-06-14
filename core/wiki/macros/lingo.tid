@@ -2,7 +2,7 @@ title: $:/core/macros/lingo
 tags: $:/tags/Macro
 
 \define lingo-base()
-$:/lingo/
+$:/language/
 \end
 
 \define lingo(title)

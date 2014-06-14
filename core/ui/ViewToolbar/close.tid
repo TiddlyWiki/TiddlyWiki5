@@ -1,4 +1,4 @@
 title: $:/core/ui/ViewToolbar/close
 tags: $:/tags/ViewToolbar
 
-<$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button>
+<$button message="tw-close-tiddler" title={{$:/language/ViewToolbar/Close/Hint}} aria-label={{$:/language/ViewToolbar/Close/Caption}} class="btn-invisible">{{$:/core/images/close-button}}</$button>

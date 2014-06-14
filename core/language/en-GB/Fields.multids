@@ -1,5 +1,6 @@
 title: $:/language/Docs/Fields/
 
+_canonical_uri: The full URI of an external image tiddler
 bag: The name of the bag from which a tiddler came
 caption: The text to be displayed on a tab or button
 color: The CSS color value associated with a tiddler

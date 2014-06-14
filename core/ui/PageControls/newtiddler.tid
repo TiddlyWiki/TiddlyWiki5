@@ -1,4 +1,4 @@
 title: $:/core/ui/PageControls/new-tiddler
 tags: $:/tags/PageControls
 
-<$button message="tw-new-tiddler" class="btn-invisible">{{$:/core/images/new-button}}</$button>
+<$button message="tw-new-tiddler" title={{$:/language/PageControls/NewTiddler/Hint}} aria-label={{$:/language/PageControls/NewTiddler/Caption}} class="btn-invisible">{{$:/core/images/new-button}}</$button>

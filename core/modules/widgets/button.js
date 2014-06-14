@@ -46,9 +46,15 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 		}
 	}
 	domNode.className = classes.join(" ");
-	// Assign classes
+	// Assign other attributes
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
+	}
+	if(this.title) {
+		domNode.setAttribute("title",this.title);
+	}
+	if(this["aria-label"]) {
+		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
@@ -134,6 +140,8 @@ ButtonWidget.prototype.execute = function() {
 	this.popup = this.getAttribute("popup");
 	this.hover = this.getAttribute("hover");
 	this["class"] = this.getAttribute("class","");
+	this["aria-label"] = this.getAttribute("aria-label");
+	this.title = this.getAttribute("title");
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default");

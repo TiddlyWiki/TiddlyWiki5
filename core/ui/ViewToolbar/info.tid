@@ -1,4 +1,4 @@
 title: $:/core/ui/ViewToolbar/info
 tags: $:/tags/ViewToolbar
 
-<$button popup=<<tiddlerInfoState>> class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button>
+<$button popup=<<tiddlerInfoState>> title={{$:/language/ViewToolbar/Info/Hint}} aria-label={{$:/language/ViewToolbar/Info/Caption}} class="btn-invisible" selectedClass="tw-selected">{{$:/core/images/info-button}}</$button>
