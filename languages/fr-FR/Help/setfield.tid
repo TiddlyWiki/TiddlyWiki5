@@ -1,0 +1,18 @@
+title: $:/language/Help/setfield
+description: Prépare des tiddlers externes for use
+
+//Notez que cette commande est expérimentale et peut changer ou être remplacée au cours de la version bêta de TiddlyWiki version 5//
+
+Initialise le champ spécifié d'un groupe de tiddlers avec le résultat de la wikification d'un tiddler template, la variable `currentTiddler` prenant tour à tour la valeur de chaque tiddler.
+
+```
+--setfield <filtre> <nom-du-champ> <titre-du-template> <type-de-rendu>
+```
+
+Les paramètres sont les suivants :
+
+* ''filtre'' - filtre identifiant les tiddlers cibles
+* ''nom-du-champ'' - le champ à modifier ("text" par défaut)
+* ''titre-du-template'' - le tiddler à wikifier dans le champ spécifié. Si manquant ou blanc, le champ spécifié est supprimé
+* ''type'' - le type de texte à utiliser pour le rendu ("text/plain" par défaut ; "text/html" peut être utilisé pour inclure des éléments HTML)
+
