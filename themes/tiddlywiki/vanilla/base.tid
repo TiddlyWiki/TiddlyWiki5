@@ -570,6 +570,7 @@ a.tw-tiddlylink-external:hover {
 	font-size: 2.35em;
 	line-height: 1.2em;
 	color: <<colour tiddler-title-foreground>>;
+	margin: 0;
 }
 
 .tw-system-title-prefix {

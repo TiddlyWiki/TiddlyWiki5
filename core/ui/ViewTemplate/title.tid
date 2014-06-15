@@ -5,7 +5,7 @@ tags: $:/tags/ViewTemplate
 fill:$(foregroundColor)$;
 \end
 <div class="tw-tiddler-title">
-<div class="titlebar">
+<h1 class="titlebar">
 <span class="tw-tiddler-controls">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
 </span>
@@ -24,7 +24,7 @@ fill:$(foregroundColor)$;
 <$view field="title"/>
 </span>
 </$list>
-</div>
+</h1>
 
 <$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tw-tiddler-info tw-popup" animate="yes" retain="yes">
 
