@@ -7,11 +7,11 @@ tags: $:/tags/PageTemplate
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
 
-<div class="tw-site-title">
+<h1 class="tw-site-title">
 
 <$transclude tiddler="$:/SiteTitle" mode="inline"/>
 
-</div>
+</h1>
 
 <div class="tw-site-subtitle">
 
