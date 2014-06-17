@@ -1,0 +1,21 @@
+created: 20140617211749290
+modified: 20140617212340133
+title: Environment Variables on Node.js
+type: text/vnd.tiddlywiki
+
+[[TiddlyWiki on Node.js]] supports the following OS environment variables for specifying a colon-delimited list of paths to search for plugins and editions:
+
+* `TIDDLYWIKI_PLUGIN_PATH` - Search path for ordinary plugins
+* `TIDDLYWIKI_THEME_PATH` - Search path for themes
+* `TIDDLYWIKI_LANGUAGE_PATH` - Search path for languages
+* `TIDDLYWIKI_EDITION_PATH` - Search path for editions (used by the InitCommand)
+
+The additional paths should each point to folders structured like the equivalent directories in the TiddlyWiki5 GitHub repository: the plugin, theme and language directories contain `publisher/pluginname/<files>` while the edition directories contain `editionname/<files>`
+
+For example:
+
+```
+TIDDLYWIKI_PLUGIN_PATH=~/MyPluginStore
+tiddlywiki mywiki --build index
+```
+
