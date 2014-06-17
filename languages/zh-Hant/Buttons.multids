@@ -1,0 +1,26 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: 進階搜尋
+AdvancedSearch/Hint: 進階搜尋
+Cancel/Caption: 取消
+Cancel/Hint: 取消編輯此條目
+Close/Caption: 關閉
+Close/Hint: 關閉此條目
+ControlPanel/Caption: 控制台
+ControlPanel/Hint: 開啟控制台
+Delete/Caption: 刪除
+Delete/Hint: 刪除此條目
+Edit/Caption: 編輯
+Edit/Hint: 編輯此條目
+Info/Caption: 資訊
+Info/Hint: 顯示此條目的資訊
+NewTiddler/Caption: 新增條目
+NewTiddler/Hint: 建立一新條目
+Save/Caption: 儲存
+Save/Hint: 儲存此條目
+SaveWiki/Caption: 儲存變更
+SaveWiki/Hint: 儲存變更
+HideSideBar/Caption: 隱藏側邊欄
+HideSideBar/Hint: 隱藏側邊欄
+ShowSideBar/Caption: 顯示側邊欄
+ShowSideBar/Hint: 顯示側邊欄
