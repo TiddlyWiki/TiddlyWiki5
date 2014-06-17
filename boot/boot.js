@@ -1493,6 +1493,39 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 /*
+name: Name of the plugin to load
+paths: array of file paths to search for it
+*/
+$tw.loadPlugin = function(name,paths) {
+	var pathIndex = 0;
+	do {
+		var pluginFields = $tw.loadPluginFolder(path.resolve(paths[pathIndex],"./" + name));
+		if(pluginFields) {
+			$tw.wiki.addTiddler(pluginFields);
+			return;
+		}
+	} while(++pathIndex < paths.length);
+};
+
+/*
+plugins: Array of names of plugins (eg, "tiddlywiki/filesystemadaptor")
+libraryPath: Path of library folder for these plugins (relative to core path)
+envVar: Environment variable name for these plugins
+*/
+$tw.loadPlugins = function(plugins,libraryPath,envVar) {
+	if(plugins) {
+		var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
+			env = process.env[envVar];
+		if(env) {
+			Array.prototype.push.apply(pluginPaths,env.split(":"));
+		}
+		for(var t=0; t<plugins.length; t++) {
+			$tw.loadPlugin(plugins[t],pluginPaths);
+		}
+	}
+};
+
+/*
 path: path of wiki directory
 parentPaths: array of parent paths that we mustn't recurse into
 */
@@ -1520,36 +1553,10 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 			}
 		});
 	}
-	// Load any plugins listed in the wiki info file
-	if(wikiInfo.plugins) {
-		var pluginBasePath = path.resolve($tw.boot.corePath,$tw.config.pluginsPath);
-		for(var t=0; t<wikiInfo.plugins.length; t++) {
-			pluginFields = $tw.loadPluginFolder(path.resolve(pluginBasePath,"./" + wikiInfo.plugins[t]));
-			if(pluginFields) {
-				$tw.wiki.addTiddler(pluginFields);
-			}
-		}
-	}
-	// Load any themes listed in the wiki info file
-	if(wikiInfo.themes) {
-		var themesBasePath = path.resolve($tw.boot.corePath,$tw.config.themesPath);
-		for(var t=0; t<wikiInfo.themes.length; t++) {
-			pluginFields = $tw.loadPluginFolder(path.resolve(themesBasePath,"./" + wikiInfo.themes[t]));
-			if(pluginFields) {
-				$tw.wiki.addTiddler(pluginFields);
-			}
-		}
-	}
-	// Load any languages listed in the wiki info file
-	if(wikiInfo.languages) {
-		var languagesBasePath = path.resolve($tw.boot.corePath,$tw.config.languagesPath);
-		for(var t=0; t<wikiInfo.languages.length; t++) {
-			pluginFields = $tw.loadPluginFolder(path.resolve(languagesBasePath,"./" + wikiInfo.languages[t]));
-			if(pluginFields) {
-				$tw.wiki.addTiddler(pluginFields);
-			}
-		}
-	}
+	// Load any plugins, themes and languages listed in the wiki info file
+	$tw.loadPlugins(wikiInfo.plugins,$tw.config.pluginsPath,$tw.config.pluginsEnvVar);
+	$tw.loadPlugins(wikiInfo.themes,$tw.config.themesPath,$tw.config.themesEnvVar);
+	$tw.loadPlugins(wikiInfo.languages,$tw.config.languagesPath,$tw.config.languagesEnvVar);
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
@@ -1661,7 +1668,10 @@ $tw.boot.startup = function(options) {
 			wikiOutputSubDir: "./output",
 			jsModuleHeaderRegExpString: "^\\/\\*\\\\(?:\\r?\\n)((?:^[^\\r\\n]*(?:\\r?\\n))+?)(^\\\\\\*\\/$(?:\\r?\\n)?)",
 			fileExtensionInfo: Object.create(null), // Map file extension to {type:}
-			contentTypeInfo: Object.create(null) // Map type to {encoding:,extension:}
+			contentTypeInfo: Object.create(null), // Map type to {encoding:,extension:}
+			pluginsEnvVar: "TIDDLYWIKI_PLUGIN_PATH",
+			themesEnvVar: "TIDDLYWIKI_THEME_PATH",
+			languagesEnvVar: "TIDDLYWIKI_LANGUAGE_PATH"
 		}
 	});
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
