@@ -1,4 +1,4 @@
 title: $:/core/ui/EditToolbar/delete
 tags: $:/tags/EditToolbar
 
-<$button message="tw-delete-tiddler" title={{$:/language/EditToolbar/Delete/Hint}} aria-label={{$:/language/EditToolbar/Delete/Caption}} class="btn-invisible">{{$:/core/images/delete-button}}</$button>
+<$button message="tw-delete-tiddler" title={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class="btn-invisible">{{$:/core/images/delete-button}}</$button>

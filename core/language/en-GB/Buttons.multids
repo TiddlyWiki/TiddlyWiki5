@@ -1,0 +1,22 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: advanced search
+AdvancedSearch/Hint: Advanced search
+Cancel/Caption: cancel
+Cancel/Hint: Cancel editing this tiddler
+Close/Caption: close
+Close/Hint: Close this tiddler
+ControlPanel/Caption: control panel
+ControlPanel/Hint: Open control panel
+Delete/Caption: delete
+Delete/Hint: Delete this tiddler
+Edit/Caption: edit
+Edit/Hint: Edit this tiddler
+Info/Caption: info
+Info/Hint: Show information for this tiddler
+NewTiddler/Caption: new tiddler
+NewTiddler/Hint: Create a new tiddler
+Save/Caption: save
+Save/Hint: Save this tiddler
+SaveWiki/Caption: save changes
+SaveWiki/Hint: Save changes

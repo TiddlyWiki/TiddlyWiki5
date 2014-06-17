@@ -1,4 +1,4 @@
 title: $:/core/ui/EditToolbar/save
 tags: $:/tags/EditToolbar
 
-<$button message="tw-save-tiddler" title={{$:/language/EditToolbar/Save/Hint}} aria-label={{$:/language/EditToolbar/Save/Caption}} class="btn-invisible">{{$:/core/images/done-button}}</$button>
+<$button message="tw-save-tiddler" title={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class="btn-invisible">{{$:/core/images/done-button}}</$button>
