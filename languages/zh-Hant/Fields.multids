@@ -1,5 +1,6 @@
 title: $:/language/Docs/Fields/
 
+_canonical_uri: 外部圖片條目的完整的 URI
 bag: 條目的來源集的名稱
 caption: 顯示於頁籤或按鈕上的標題文字
 color: 條目的 CSS 顏色值
