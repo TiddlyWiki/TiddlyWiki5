@@ -20,3 +20,7 @@ Save/Caption: save
 Save/Hint: Save this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
+HideSideBar/Caption: hide sidebar
+HideSideBar/Hint: Hide sidebar
+ShowSideBar/Caption: show sidebar
+ShowSideBar/Hint: Show sidebar
