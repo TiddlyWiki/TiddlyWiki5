@@ -1493,18 +1493,47 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 };
 
 /*
+name: Name of the plugin to find
+paths: array of file paths to search for it
+Returns the path of the plugin folder
+*/
+$tw.findLibraryItem = function(name,paths) {
+	var pathIndex = 0;
+	do {
+		var pluginPath = path.resolve(paths[pathIndex],"./" + name)
+		if(fs.existsSync(pluginPath) && fs.statSync(pluginPath).isDirectory()) {
+			return pluginPath;
+		}
+	} while(++pathIndex < paths.length);
+	return null;
+};
+
+/*
 name: Name of the plugin to load
 paths: array of file paths to search for it
 */
 $tw.loadPlugin = function(name,paths) {
-	var pathIndex = 0;
-	do {
-		var pluginFields = $tw.loadPluginFolder(path.resolve(paths[pathIndex],"./" + name));
+	var pluginPath = $tw.findLibraryItem(name,paths);
+	if(pluginPath) {
+		var pluginFields = $tw.loadPluginFolder(pluginPath);
 		if(pluginFields) {
 			$tw.wiki.addTiddler(pluginFields);
-			return;
 		}
-	} while(++pathIndex < paths.length);
+	}
+};
+
+/*
+libraryPath: Path of library folder for these plugins (relative to core path)
+envVar: Environment variable name for these plugins
+Returns an array of search paths
+*/
+$tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
+	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
+		env = process.env[envVar];
+	if(env) {
+		Array.prototype.push.apply(pluginPaths,env.split(":"));
+	}
+	return pluginPaths;
 };
 
 /*
@@ -1514,11 +1543,7 @@ envVar: Environment variable name for these plugins
 */
 $tw.loadPlugins = function(plugins,libraryPath,envVar) {
 	if(plugins) {
-		var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
-			env = process.env[envVar];
-		if(env) {
-			Array.prototype.push.apply(pluginPaths,env.split(":"));
-		}
+		var pluginPaths = $tw.getLibraryItemSearchPaths(libraryPath,envVar);
 		for(var t=0; t<plugins.length; t++) {
 			$tw.loadPlugin(plugins[t],pluginPaths);
 		}
@@ -1671,7 +1696,8 @@ $tw.boot.startup = function(options) {
 			contentTypeInfo: Object.create(null), // Map type to {encoding:,extension:}
 			pluginsEnvVar: "TIDDLYWIKI_PLUGIN_PATH",
 			themesEnvVar: "TIDDLYWIKI_THEME_PATH",
-			languagesEnvVar: "TIDDLYWIKI_LANGUAGE_PATH"
+			languagesEnvVar: "TIDDLYWIKI_LANGUAGE_PATH",
+			editionsEnvVar: "TIDDLYWIKI_EDITION_PATH"
 		}
 	});
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
