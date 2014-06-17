@@ -24,6 +24,7 @@ The content of the `<$button>` widget is displayed within the button.
 |setTo |The new value to assign to the TextReference identified in the `set` attribute |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
 |aria-label |Optional [[Accessibility]] label |
+|title |Optional tooltip |
 |class |An optional CSS class name to be assigned to the HTML element |
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |
