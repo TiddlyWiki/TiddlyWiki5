@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/bj/tw2parser",
+	"description": "legacy parser",
+	"author": "JeremyRuston, JeffreyWilkinson",
+	"version": "0.0.2-alpha-tw2parser",
+	"core-version": ">=5.0.0",
+	"plugin-type": "plugin"
+}
