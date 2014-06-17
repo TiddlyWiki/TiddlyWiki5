@@ -5,7 +5,7 @@ caption: {{$:/language/SideBar/Open/Caption}}
 \define lingo-base() $:/language/CloseAll/
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 
-<$button message="tw-close-tiddler" title={{$:/language/ViewToolbar/Close/Hint}} aria-label={{$:/language/ViewToolbar/Close/Caption}} class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+<$button message="tw-close-tiddler" title={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 
 </$list>
 
