@@ -87,6 +87,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 			});
 		domNode.setAttribute("title",tooltipText);
 	}
+	if(this["aria-label"]) {
+		domNode.setAttribute("aria-label",this["aria-label"]);
+	}
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
@@ -176,8 +179,9 @@ Compute the internal state of the widget
 LinkWidget.prototype.execute = function() {
 	// Get the target tiddler title
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
-	// Get the link title
+	// Get the link title and aria label
 	this.tooltip = this.getAttribute("tooltip");
+	this["aria-label"] = this.getAttribute("aria-label");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
@@ -190,7 +194,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 LinkWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes.tooltip) {
+	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
 		this.refreshSelf();
 		return true;
 	}

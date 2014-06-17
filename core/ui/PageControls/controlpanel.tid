@@ -1,4 +1,4 @@
 title: $:/core/ui/PageControls/control-panel
 tags: $:/tags/PageControls
 
-<$button to="$:/ControlPanel" class="btn-invisible">{{$:/core/images/options-button}}</$button>
+<$button to="$:/ControlPanel" title={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class="btn-invisible">{{$:/core/images/options-button}}</$button>

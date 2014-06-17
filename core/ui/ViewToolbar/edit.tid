@@ -1,4 +1,4 @@
 title: $:/core/ui/ViewToolbar/edit
 tags: $:/tags/ViewToolbar
 
-<$button message="tw-edit-tiddler" class="btn-invisible">{{$:/core/images/edit-button}}</$button>
+<$button message="tw-edit-tiddler" title={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class="btn-invisible">{{$:/core/images/edit-button}}</$button>

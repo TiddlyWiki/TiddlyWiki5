@@ -1,6 +1,6 @@
 title: ButtonWidget
 created: 201310241419
-modified: 201403150837
+modified: 201406170837
 tags: widget
 
 ! Introduction
@@ -23,6 +23,8 @@ The content of the `<$button>` widget is displayed within the button.
 |set |A TextReference to which a new value will be assigned |
 |setTo |The new value to assign to the TextReference identified in the `set` attribute |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
+|aria-label |Optional [[Accessibility]] label |
+|title |Optional tooltip |
 |class |An optional CSS class name to be assigned to the HTML element |
 |style |An optional CSS style attribute to be assigned to the HTML element |
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |

@@ -1,4 +1,4 @@
 title: $:/core/ui/PageControls/save-wiki
 tags: $:/tags/PageControls
 
-<$button message="tw-save-wiki" class="btn-invisible">{{$:/core/images/save-button}}</$button>
+<$button message="tw-save-wiki" title={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class="btn-invisible">{{$:/core/images/save-button}}</$button>

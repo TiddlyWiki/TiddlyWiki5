@@ -1,4 +1,6 @@
 title: LinkWidget
+created: 201310241419
+modified: 201406170837
 tags: widget
 
 The `link` widget generates links to tiddlers.
@@ -7,6 +9,7 @@ The `link` widget generates links to tiddlers.
 
 |!Attribute |!Description |
 |to |The title of the target tiddler for the link (defaults to the [[WidgetVariable: currentTiddler]]) |
+|aria-label |Optional [[Accessibility]] label |
 |tooltip |Optional tooltip WikiText |
 
 The content of the link widget is rendered within the `<a>` tag.

@@ -1,4 +1,4 @@
 title: $:/core/ui/EditToolbar/cancel
 tags: $:/tags/EditToolbar
 
-<$button message="tw-cancel-tiddler" class="btn-invisible">{{$:/core/images/cancel-button}}</$button>
+<$button message="tw-cancel-tiddler" title={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class="btn-invisible">{{$:/core/images/cancel-button}}</$button>
