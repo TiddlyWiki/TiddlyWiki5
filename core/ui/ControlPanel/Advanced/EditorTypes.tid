@@ -1,0 +1,30 @@
+title: $:/core/ui/ControlPanel/Advanced/EditorTypes
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/Advanced/EditorTypes/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Advanced/EditorTypes/
+
+<<lingo Hint>>
+
+<table>
+<tbody>
+<tr>
+<th><<lingo Type/Caption>></th>
+<th><<lingo Editor/Caption>></th>
+</tr>
+<$list filter="[all[shadows+tiddlers]prefix[$:/config/EditorTypeMappings/]sort[title]]">
+<tr>
+<td>
+<$link>
+<$list filter="[all[current]removeprefix[$:/config/EditorTypeMappings/]]">
+<$text text={{!!title}}/>
+</$list>
+</$link>
+</td>
+<td>
+<$view field="text"/>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
