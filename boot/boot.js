@@ -1601,7 +1601,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
 		var pluginFolders = fs.readdirSync(wikiPluginsPath);
-		for(t=0; t<pluginFolders.length; t++) {
+		for(var t=0; t<pluginFolders.length; t++) {
 			pluginFields = $tw.loadPluginFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
@@ -1612,7 +1612,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	var wikiThemesPath = path.resolve(wikiPath,$tw.config.wikiThemesSubDir);
 	if(fs.existsSync(wikiThemesPath)) {
 		var themeFolders = fs.readdirSync(wikiThemesPath);
-		for(t=0; t<themeFolders.length; t++) {
+		for(var t=0; t<themeFolders.length; t++) {
 			pluginFields = $tw.loadPluginFolder(path.resolve(wikiThemesPath,"./" + themeFolders[t]));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
@@ -1623,7 +1623,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	var wikiLanguagesPath = path.resolve(wikiPath,$tw.config.wikiLanguagesSubDir);
 	if(fs.existsSync(wikiLanguagesPath)) {
 		var languageFolders = fs.readdirSync(wikiLanguagesPath);
-		for(t=0; t<languageFolders.length; t++) {
+		for(var t=0; t<languageFolders.length; t++) {
 			pluginFields = $tw.loadPluginFolder(path.resolve(wikiLanguagesPath,"./" + languageFolders[t]));
 			if(pluginFields) {
 				$tw.wiki.addTiddler(pluginFields);
