@@ -3,7 +3,7 @@ tags: dev
 
 ! Motivation
 
-TiddlyWiki is a large project with many interested parties. It benefits everyone if the code is as easy to read as possible. A key part of that it must be written and laid out consistently.
+TiddlyWiki is a large project with many interested parties. It benefits everyone if the code is as easy to read as possible. A key part of that it must be written and laid out consistently -- the code should read as though it were written by a single author.
 
 ! Guidelines
 
