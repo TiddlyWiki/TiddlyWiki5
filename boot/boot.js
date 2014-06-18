@@ -1462,23 +1462,24 @@ $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 		if(!("version" in pluginInfo)) {
 			pluginInfo.version = $tw.packageInfo.version;
 		}
-		// Save the plugin tiddler
-		if(pluginInfo) {
-			return {
-				title: pluginInfo.title,
-				type: "application/json",
-				text: JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4),
-				"plugin-priority": pluginInfo["plugin-priority"],
-				"name": pluginInfo["name"],
-				"version": pluginInfo["version"],
-				"thumbnail": pluginInfo["thumbnail"],
-				"description": pluginInfo["description"],
-				"plugin-type": pluginInfo["plugin-type"] || "plugin",
-				"dependents": $tw.utils.stringifyList(pluginInfo["dependents"] || [])
-			}
-		} else {
-			return null;
+		// Use "plugin" as the plugin-type if we don't have one
+		if(!("plugin-type" in pluginInfo)) {
+			pluginInfo["plugin-type"] = "plugin";
 		}
+		pluginInfo.dependents = pluginInfo.dependents || [];
+		pluginInfo.type = "application/json";
+		// Set plugin text
+		pluginInfo.text = JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4);
+		delete pluginInfo.tiddlers;
+		// Deserialise array fields (currently required for the dependents field)
+		for(var field in pluginInfo) {
+			if($tw.utils.isArray(pluginInfo[field])) {
+				pluginInfo[field] = $tw.utils.stringifyList(pluginInfo[field]);
+			}
+		}
+		return pluginInfo;
+	} else {
+			return null;
 	}
 };
 
