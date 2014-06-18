@@ -1,6 +1,10 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: 高级
+Advanced/EditorTypes/Caption: 编辑器类型
+Advanced/EditorTypes/Editor/Caption: 编辑器
+Advanced/EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
+Advanced/EditorTypes/Type/Caption: 类型
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Advanced/LoadedModules/Caption: 已加载的模块
 Advanced/LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。

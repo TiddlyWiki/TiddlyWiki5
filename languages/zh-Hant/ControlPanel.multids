@@ -1,6 +1,10 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: 進階
+Advanced/EditorTypes/Caption: 編輯器類型
+Advanced/EditorTypes/Editor/Caption: 編輯器
+Advanced/EditorTypes/Hint: 這些條目決定使用哪個編輯器來編輯特定條目類型。
+Advanced/EditorTypes/Type/Caption: 類型
 Advanced/Hint: 關於此 TiddlyWiki 的內部資訊
 Advanced/LoadedModules/Caption: 已載入的模組
 Advanced/LoadedModules/Hint: 這些是當前已載入的模組之源碼條目。斜體的模組則無源碼條目，通常是因為它們是在引導過程中設置。
