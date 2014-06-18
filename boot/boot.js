@@ -1425,7 +1425,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			} else {
 				// If not, read all the files in the directory
 				$tw.utils.each(files,function(file) {
-					if(!excludeRegExp.test(file)) {
+					if(!excludeRegExp.test(file) && file !== "plugin.info") {
 						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp));
 					}
 				});
@@ -1442,53 +1442,43 @@ Load the tiddlers from a plugin folder, and package them up into a proper JSON p
 */
 $tw.loadPluginFolder = function(filepath,excludeRegExp) {
 	excludeRegExp = excludeRegExp || $tw.boot.excludeRegExp;
-	var stat, files, pluginInfo, pluginTiddlers = [], f, file, titlePrefix, t;
-	if(fs.existsSync(filepath)) {
-		stat = fs.statSync(filepath);
-		if(stat.isDirectory()) {
-			// Read the plugin information
-			pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
-			// Read the plugin files
-			files = fs.readdirSync(filepath);
-			for(f=0; f<files.length; f++) {
-				file = files[f];
-				if(!excludeRegExp.test(file) && file !== "plugin.info" && file !== "tiddlywiki.files") {
-					var tiddlerFiles = $tw.loadTiddlersFromPath(filepath + path.sep + file,excludeRegExp);
-					$tw.utils.each(tiddlerFiles,function(tiddlerFile) {
-						pluginTiddlers.push.apply(pluginTiddlers,tiddlerFile.tiddlers);
-					});
-				}
-			}
-			// Save the plugin tiddlers into the plugin info
-			pluginInfo.tiddlers = pluginInfo.tiddlers || Object.create(null);
-			for(t=0; t<pluginTiddlers.length; t++) {
-				if(pluginTiddlers[t].title) {
-					pluginInfo.tiddlers[pluginTiddlers[t].title] = pluginTiddlers[t];
+	if(fs.existsSync(filepath) && fs.statSync(filepath).isDirectory()) {
+		// Read the plugin information
+		var pluginInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "plugin.info","utf8"));
+		// Read the plugin files
+		var pluginFiles = $tw.loadTiddlersFromPath(filepath,excludeRegExp);
+		// Save the plugin tiddlers into the plugin info
+		pluginInfo.tiddlers = pluginInfo.tiddlers || Object.create(null);
+		for(var f=0; f<pluginFiles.length; f++) {
+			var tiddlers = pluginFiles[f].tiddlers;
+			for(var t=0; t<tiddlers.length; t++) {
+				var tiddler= tiddlers[t];
+				if(tiddler.title) {
+					pluginInfo.tiddlers[tiddler.title] = tiddler;
 				}
 			}
 		}
-	}
-	// Give the plugin the same version number as the core if it doesn't have one
-	if(pluginInfo && !("version" in pluginInfo)) {
-		pluginInfo.version = $tw.packageInfo.version;
-	}
-	// Save the plugin tiddler
-	if(pluginInfo) {
-		var fields = {
-			title: pluginInfo.title,
-			type: "application/json",
-			text: JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4),
-			"plugin-priority": pluginInfo["plugin-priority"],
-			"name": pluginInfo["name"],
-			"version": pluginInfo["version"],
-			"thumbnail": pluginInfo["thumbnail"],
-			"description": pluginInfo["description"],
-			"plugin-type": pluginInfo["plugin-type"] || "plugin",
-			"dependents": $tw.utils.stringifyList(pluginInfo["dependents"] || [])
+		// Give the plugin the same version number as the core if it doesn't have one
+		if(!("version" in pluginInfo)) {
+			pluginInfo.version = $tw.packageInfo.version;
 		}
-		return fields;
-	} else {
-		return null;
+		// Save the plugin tiddler
+		if(pluginInfo) {
+			return {
+				title: pluginInfo.title,
+				type: "application/json",
+				text: JSON.stringify({tiddlers: pluginInfo.tiddlers},null,4),
+				"plugin-priority": pluginInfo["plugin-priority"],
+				"name": pluginInfo["name"],
+				"version": pluginInfo["version"],
+				"thumbnail": pluginInfo["thumbnail"],
+				"description": pluginInfo["description"],
+				"plugin-type": pluginInfo["plugin-type"] || "plugin",
+				"dependents": $tw.utils.stringifyList(pluginInfo["dependents"] || [])
+			}
+		} else {
+			return null;
+		}
 	}
 };
 
