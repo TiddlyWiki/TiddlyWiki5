@@ -1,9 +1,16 @@
 title: $:/plugins/tiddlywiki/codemirror/instructions
 
-! Configuration
+! Setting ~CodeMirror Content Types
 
-* You can configure the CodeMirror plugin by creating a tiddler called [[$:/config/CodeMirror]] containing a JSON configuration object.
-* The configuration tiddler needs to be `type: application/json`, to take effect.
+You can determine which tiddler content types are edited by the ~CodeMirror widget by creating or modifying special tiddlers whose prefix is comprised of the string `$:/config/EditorTypeMappings/` concatenated with the content type. The text of that tiddler gives the editor type to be used (eg, ''text'', ''bitmap'', ''codemirror'').
+
+The current editor type mappings are shown in [[$:/ControlPanel]] under the "Advanced" tab.
+
+! ~CodeMirror Configuration
+
+You can configure the ~CodeMirror plugin by creating a tiddler called [[$:/config/CodeMirror]] containing a JSON configuration object. The configuration tiddler must have its type field set to `application/json` to take effect.
+
+See http://codemirror.net/ for details of available configuration options.
 
 For example:
 
