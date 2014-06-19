@@ -40,12 +40,12 @@ exports.parse = function() {
 	var paramString = this.match[2],
 		params = [];
 	if(paramString !== "") {
-		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/mg,
+		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/mg,
 			paramMatch = reParam.exec(paramString);
 		while(paramMatch) {
 			// Save the parameter details
 			var paramInfo = {name: paramMatch[1]},
-				defaultValue = paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5];
+				defaultValue = paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5] || paramMatch[6];
 			if(defaultValue) {
 				paramInfo["default"] = defaultValue;
 			}
