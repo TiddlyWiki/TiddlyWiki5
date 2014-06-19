@@ -8,6 +8,14 @@ The MarkdownExample tiddler below is written in Markdown. Create wiki links with
 [link text](#TiddlerTitle)
 ```
 
+Markdown image syntax can be used to reference images by tiddler title or an external URI. For example:
+
+```
+![alt text](/path/to/img.jpg "Title")
+
+![alt text](Motovun Jack.jpg "Title")
+```
+
 To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
 
 [[$:/plugins/tiddlywiki/markdown]]
