@@ -99,11 +99,13 @@ exports.parseStringLiteral = function(source,pos) {
 		type: "string",
 		start: pos
 	};
-	var reString = /(?:"([^"]*)")|(?:'([^']*)')/g;
+	var reString = /(?:"""([\s\S]*?)"""|"([^"]*)")|(?:'([^']*)')/g;
 	reString.lastIndex = pos;
 	var match = reString.exec(source);
 	if(match && match.index === pos) {
-		node.value = match[1] === undefined ? match[2] : match[1];
+		node.value = match[1] !== undefined ? match[1] :(
+			match[2] !== undefined ? match[2] : match[3] 
+					);
 		node.end = pos + match[0].length;
 		return node;
 	} else {
@@ -134,7 +136,9 @@ exports.parseMacroParameter = function(source,pos) {
 					token.match[3] !== undefined ? token.match[3] : (
 						token.match[4] !== undefined ? token.match[4] : (
 							token.match[5] !== undefined ? token.match[5] : (
-								""
+								token.match[6] !== undefined ? token.match[6] : (
+									""
+								)
 							)
 						)
 					)
