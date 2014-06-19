@@ -187,7 +187,7 @@ $tw.utils.deepDefaults = function(object /*, sourceObjectList */) {
 	$tw.utils.each(Array.prototype.slice.call(arguments,1),function(source) {
 		if(source) {
 			for (var p in source) {
-				if(object[p] == null) {
+				if(object[p] === null || object[p] === undefined) {
 					object[p] = source[p];
 				}
 				if(typeof object[p] === "object" && typeof source[p] === "object") {
@@ -1784,9 +1784,15 @@ Execute the remaining eligible startup tasks
 */
 $tw.boot.executeNextStartupTask = function() {
 	// Find the next eligible task
-	var taskIndex = 0;
+	var taskIndex = 0, task,
+		asyncTaskCallback = function() {
+			if(task.name) {
+				$tw.boot.executedStartupModules[task.name] = true;
+			}
+			return $tw.boot.executeNextStartupTask();
+		};
 	while(taskIndex < $tw.boot.remainingStartupModules.length) {
-		var task = $tw.boot.remainingStartupModules[taskIndex];
+		task = $tw.boot.remainingStartupModules[taskIndex];
 		if($tw.boot.isStartupTaskEligible(task)) {
 			// Remove this task from the list
 			$tw.boot.remainingStartupModules.splice(taskIndex,1);
@@ -1810,12 +1816,7 @@ $tw.boot.executeNextStartupTask = function() {
 				}
 				return $tw.boot.executeNextStartupTask();
 			} else {
-				task.startup(function() {
-					if(task.name) {
-						$tw.boot.executedStartupModules[task.name] = true;
-					}
-					return $tw.boot.executeNextStartupTask();
-				});
+				task.startup(asyncTaskCallback);
 				return true;
 			}
 		}
