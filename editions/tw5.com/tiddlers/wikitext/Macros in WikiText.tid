@@ -1,5 +1,5 @@
 created: 20131205160746466
-modified: 20140612182148420
+modified: 20140619111725471
 tags: wikitext
 title: Macros in WikiText
 type: text/vnd.tiddlywiki
@@ -49,4 +49,24 @@ Hi I'm Bugs Bunny and I live in Rabbit Hole Hill
 Hi I'm Donald Duck and I live in Rabbit Hole Hill
 Hi I'm Mickey Mouse and I live in Mouse House
 
+```
+
+! Multiline Parameters
+
+Parameters can include line breaks. For example:
+
+```
+<<mysamplemacro "Mickey Mouse" "Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland.">>
+```
+
+By using triple-double quotes you can specify parameter values that include single double quotes. For example:
+
+```
+<<mysamplemacro "Mickey Mouse" "Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland.""">>
 ```

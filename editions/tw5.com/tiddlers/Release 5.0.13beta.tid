@@ -34,8 +34,9 @@ This release includes a number of features designed to improve the experience of
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3182a2d599f0e4b70a73fe369df4f398587dc1a9]] new SelectWidget
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f131c378934a86b741ab5b808437c95694dc5503]] behaviour of `text/html` tiddlers so that they are displayed within an HTML iframe element
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9b576f2a8d39dcca37bcb709183a8f9b27f33ccf]] group headings to the content type dropdown in edit mode
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d70d5780e51cf0918fba15954cd47549e4e1a9f]] advanced navigation settings in $:/ControlPanel to use radio buttons
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d70d5780e51cf0918fba15954cd47549e4e1a9f]] advanced navigation settings in [[$:/ControlPanel]] to use radio buttons
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f7b8813a27141a78980eefa03df70a4a2de9d10b]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/3f25db0abe8cd28712c020f218506710cec004b6]]) behaviour of PermaLinks so that now [ext[http://tiddlywiki.com/#HelloThere]] just opens the single specified tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c48502e8ed214cee23537d06e7e87efd53592c7]] support for triple-quoted multi-line attributes with [[macros|Macros in WikiText]], [[widgets|Widgets in WikiText]] and [[HTML elements|HTML in WikiText]].
 
 !! Hackability Improvements
 
@@ -60,9 +61,11 @@ This release includes a number of features designed to improve the experience of
 
 !! Contributors
 
-I ([[@Jermolene|https://github.com/Jermolene]]) would like to thank the contributors to this release who have generously given their time to helping improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 [[@BramChen|https://github.com/BramChen]]
+[[@buggyj|https://github.com/buggyj]]
+[[@csugden|https://github.com/csugden]]
 [[@danielo515|https://github.com/danielo515]]
 [[@IreneKnapp|https://github.com/IreneKnapp]]
 [[@mwfogleman|https://github.com/mwfogleman]]

@@ -1,5 +1,5 @@
 created: 20131205160840915
-modified: 20140220203320110
+modified: 20140619111725471
 tags: wikitext
 title: Widgets in WikiText
 type: text/vnd.tiddlywiki
@@ -15,6 +15,7 @@ Note that widgets inherit all the features of [[HTML in WikiText]]:
 * Widget attributes can be specified as:
 ** Unquoted strings (that cannot contain spaces)
 ** Strings quoted with single or double quotes
+** Strings quoted with triple-double quotes
 ** Macro invocations (eg `attr=<<myMacro>>`)
 ** Transclusions (eg, `attr={{MyTiddler!!field}}`)
 * The content of a widget is parsed in inline mode unless the opening tag is followed by two linebreaks, which forces block mode
