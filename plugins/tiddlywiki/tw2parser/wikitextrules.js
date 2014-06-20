@@ -103,12 +103,12 @@ var enclosedTextHelper = function(w) {
 
 var insertMacroCall = function(w,output,macroName,paramString) {
 	var params = [],
-		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
+		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
 		paramMatch = reParam.exec(paramString);
 	while(paramMatch) {
 		// Process this parameter
 		var paramInfo = {
-			value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5]
+			value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5] || paramMatch[6]
 		};
 		if(paramMatch[1]) {
 			paramInfo.name = paramMatch[1];

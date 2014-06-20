@@ -53,12 +53,12 @@ function gettiddlername(title) {
 
 var parserparams = function(paramString) {
 	var params = [],
-		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
+		reParam = /\s*(?:([A-Za-z0-9\-_]+)\s*:)?(?:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))/mg,
 		paramMatch = reParam.exec(paramString);
 	while(paramMatch) {
 		// Process this parameter
 		var paramInfo = {
-			value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5]
+			value: paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5] || paramMatch[6]
 		};
 		if(paramMatch[1]) {
 			paramInfo.name = paramMatch[1];
@@ -85,7 +85,7 @@ var tabshandler = function(paramstring) {
 	} 
 	//Create a list of names (tiddlers, tiddler/sections, tiddler/slices), and create maps from name -> label and name -> prompt
 	//Use json to implement maps 
-	return "'"+tabslist +"' '"+JSON.stringify(promptarray)+"' '"+JSON.stringify(labelarray)+"' '"+cookie+"'";
+	return '"""'+tabslist +'""" """'+JSON.stringify(promptarray)+'""" """'+JSON.stringify(labelarray)+'""" """'+cookie+'"""';
 };
 var namedapter = {tabs:'__system_tabs'};
 var paramadapter = {

@@ -12,15 +12,15 @@ title: $:/plugins/tiddlywiki/tw2parser/macrodefs
 \end
 
 \define __system_tabinstance(state, currentTab, prompts, labels)
-		<span title=<<entryof "$currentTab$" '$prompts$'>> ><$button set=<<qualify "$state$">> setTo="$currentTab$" selectedClass="tw-tab-selected">
-		<<entryof "$currentTab$" '$labels$' >>
+		<span title=<<entryof "$currentTab$" """$prompts$""">> ><$button set=<<qualify "$state$">> setTo="$currentTab$" selectedClass="tw-tab-selected">
+		<<entryof "$currentTab$" """$labels$""" >>
 		</$button></span>
 \end
 
 \define __system_tabs(tabsList,prompts,labels,state:"$:/state/tab")
 <div class="tw-tab-buttons">
 	<$list filter="$tabsList$" variable="currentTab">
-		<$macrocall $name="__system_tabinstance" state="$state$" prompts='$prompts$' labels='$labels$'currentTab=<<currentTab>>/>
+		<$macrocall $name="__system_tabinstance" state="$state$" prompts="""$prompts$""" labels="""$labels$""" currentTab=<<currentTab>>/>
 	</$list>
 </div>
 <div class="tw-tab-divider"/>
