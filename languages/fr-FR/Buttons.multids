@@ -1,0 +1,26 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: recherche avancée
+AdvancedSearch/Hint: Recherche avancée
+Cancel/Caption: annuler
+Cancel/Hint: Annule l'édition de ce tiddler
+Close/Caption: fermer
+Close/Hint: Ferme ce tiddler
+ControlPanel/Caption: panneau de contrôle
+ControlPanel/Hint: Ouvre le panneau de contrôle
+Delete/Caption: supprimer
+Delete/Hint: Supprime ce tiddler
+Edit/Caption: éditer
+Edit/Hint: Édite ce tiddler
+Info/Caption: informations
+Info/Hint: Affiche des informations sur ce tiddler
+NewTiddler/Caption: nouveau tiddler
+NewTiddler/Hint: Crée un nouveau tiddler
+Save/Caption: enregistrer
+Save/Hint: Enregistre ce tiddler
+SaveWiki/Caption: enregistrer les modifications
+SaveWiki/Hint: Enregistre les modifications
+HideSideBar/Caption: cacher la barre latérale
+HideSideBar/Hint: Cache la barre latérale
+ShowSideBar/Caption: afficher la barre latérale
+ShowSideBar/Hint: Afficher la barre latérale
