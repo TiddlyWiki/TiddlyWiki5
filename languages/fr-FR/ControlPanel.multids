@@ -1,6 +1,10 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Avancé
+Advanced/EditorTypes/Caption: Types d'éditeur
+Advanced/EditorTypes/Editor/Caption: Éditeur
+Advanced/EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
+Advanced/EditorTypes/Type/Caption: Type
 Advanced/Hint: Informations internes sur ce ~TiddlyWiki
 Advanced/LoadedModules/Caption: Modules chargés
 Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
