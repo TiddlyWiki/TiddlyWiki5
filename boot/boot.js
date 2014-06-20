@@ -751,7 +751,19 @@ $tw.modules.createClassesFromModules = function(moduleType,subType,baseClass) {
 	});
 	return classes;
 };
-
+/*
+Get all the modules of a particular type and subtype in a hashmap by their name field
+*/
+$tw.modules.getModulesByTypeAndSubtypeAsHashmap = function(moduleType,subType) {
+	var nameField = "name";
+	var results = Object.create(null);
+	$tw.modules.forEachModuleOfType(moduleType,function(title,module) {
+		if(!subType || module.types[subType]) {
+			results[module[nameField]] = module;
+		}
+	});
+	return results;
+};
 /////////////////////////// Barebones tiddler object
 
 /*

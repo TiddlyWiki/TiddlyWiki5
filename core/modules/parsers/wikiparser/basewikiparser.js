@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/parsers/wikiparser/wikiparser.js
+title: $:/core/modules/parsers/wikiparser/basewikiparser.js
 type: application/javascript
 module-type: parser
 
@@ -11,16 +11,19 @@ The base wiki text parser
 /*jslint node: true, browser: true */
 /*global $tw: false */
 "use strict";
-var createClassesFromList= function (ruleList) {
-	var classes = [],mylist=" ";
+var createClassesFromList= function (ruleList, subtype) {
+	var classes = Object.create(null),mylist = " ";
+	var allrules = $tw.modules.getModulesByTypeAndSubtypeAsHashmap("wikirule", subtype);
 	for (var i=0;i<ruleList.length;i++) {
-		var moduleExports=$tw.modules.execute("$:/core/modules/parsers/wikiparser/rules/"+ruleList[i]+".js");
-		var newClass = function() {};
-		newClass.prototype = new $tw.WikiRuleBase();
-		newClass.prototype.constructor = $tw.WikiRuleBase;
-		$tw.utils.extend(newClass.prototype,moduleExports);
-		classes[i] = newClass;
-		mylist +=moduleExports.name+" ";
+		var moduleExports=allrules[ruleList[i]];
+		if (!!moduleExports) { 
+			var newClass = function() {};
+			newClass.prototype = new $tw.WikiRuleBase();
+			newClass.prototype.constructor = $tw.WikiRuleBase;
+			$tw.utils.extend(newClass.prototype,moduleExports);
+			classes[moduleExports.name] = newClass;
+			mylist += moduleExports.name+" ";
+		}
 	}
 	//alert(mylist);
 	return classes;
@@ -28,22 +31,19 @@ var createClassesFromList= function (ruleList) {
 var ParserPrimer = function(type,text,options) {
 	//BJ meditation if I pass in the complete type here, then I could use this to cache the 
 	//Parser objects.
-	var returns={};
     if (!!options.parserrules) {//if($tw.browser)alert("createrules");
-		returns.pragmaRuleClasses=createClassesFromList(options.parserrules.pragmaRuleList);
-		returns.blockRuleClasses=createClassesFromList(options.parserrules.blockRuleList);
-		returns.inlineRuleClasses=createClassesFromList(options.parserrules.inlineRuleList);
+		this.pragmaRuleClasses=createClassesFromList(options.parserrules.pragmaRuleList,"pragma");
+		this.blockRuleClasses=createClassesFromList(options.parserrules.blockRuleList,"block");
+		this.inlineRuleClasses=createClassesFromList(options.parserrules.inlineRuleList,"inline");
 	} else {
-		returns.pragmaRuleClasses={};
-		returns.blockRuleClasses={};
-		returns.inlineRuleClasses={};
+		this.pragmaRuleClasses={};
+		this.blockRuleClasses={};
+		this.inlineRuleClasses={};
 	}
 	// Save the parse text
-	returns.type = type || "text/vnd.twbase";
-	returns.source = text || "";
-	returns.options = options;
-	return returns;
-	
+	this.type = type || "text/vnd.twbase";
+	this.source = text || "";
+	this.options = options;
 };
 //realise the parser from the abstr parser
 var  FullWikiParser5= function (type,text,options) { 
