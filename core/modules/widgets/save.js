@@ -25,7 +25,6 @@ var saveWidget = function(parseTreeNode,options) {
 Inherit from the base widget class
 */
 saveWidget.prototype = new Widget();
-
 /*
 Render this widget into the DOM
 */
@@ -43,19 +42,14 @@ saveWidget.prototype.execute = function() {
 	this.makeChildWidgets();
 };
 
-
 saveWidget.prototype.refresh = function(changedTiddlers) {
-
 	return this.refreshChildren(changedTiddlers);
+};
 
-};
-saveWidget.prototype.dispatchMessage = function(event) {
-	this.dispatchEvent({type: this.message, param: this.param, tiddlerTitle: this.getVariable("currentTiddler")});
-};
 saveWidget.prototype.handleSaveTiddlerEvent = function(event) {
 	if (!this.saving) { //debounce save events 
 		this.saving = true;
-		this.saveChildren(true);//alert("save");
+		this.saveChildren(true);
 		return true;//propogate the save event to the navigator
 	} else {
 		return false;
