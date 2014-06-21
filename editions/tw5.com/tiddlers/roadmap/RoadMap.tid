@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140612181726794
+modified: 20140619111725471
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -17,7 +17,7 @@ The following additional features are planned or under consideration for impleme
 * Features required for large scale adoption
 ** Improve upgrade process
 ** Establish plugin library
-** Proper use of ARIA roles
+** ~~Proper use of ARIA roles (in progress)~~
 * Fixing hangovers from TiddlyWikiClassic
 ** ~TiddlyWiki file format (to avoid illegal attribute names)
 ** Tiddler object format (to provide true polymorphism of field values)
