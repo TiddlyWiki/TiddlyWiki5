@@ -1,6 +1,10 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Erweitert
+Advanced/EditorTypes/Caption: Editor Typen
+Advanced/EditorTypes/Editor/Caption: Editor
+Advanced/EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden sollen.
+Advanced/EditorTypes/Type/Caption: MIME-Type
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Advanced/LoadedModules/Caption: Geladene Module
 Advanced/LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
