@@ -358,6 +358,7 @@ a.tw-tiddlylink-external:hover {
 
 .sidebar-header {
 	color: <<colour sidebar-foreground>>;
+	fill: <<colour sidebar-foreground>>;
 }
 
 .sidebar-header .title a.tw-tiddlylink-resolves {
@@ -1241,6 +1242,12 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-sidebar-lists .tw-table-of-contents {
 	white-space: nowrap;
+}
+
+.tw-table-of-contents svg {
+	width: 0.7em;
+	height: 0.7em;
+	vertical-align: middle;
 }
 
 .tw-table-of-contents ol {
