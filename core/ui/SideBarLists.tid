@@ -1,23 +1,34 @@
 title: $:/core/ui/SideBarLists
 
 <div class="tw-sidebar-lists">
-	<div class="tw-search">
-		<$edit-text tiddler="$:/temp/search" type="search" tag="input"/>
-		<$reveal state="$:/temp/search" type="nomatch" text="">
-			<$linkcatcher to="$:/temp/search">
-				<$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link>
-			</$linkcatcher>
-		</$reveal>
-		<$reveal state="$:/temp/search" type="match" text="">&nbsp;<$link to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="btn-invisible">&hellip;</$link>
-		</$reveal>
-	</div>
-	<$reveal state="$:/temp/search" type="nomatch" text="">
-		<div class="tw-search-results">
-			{{$:/language/Search/Matches}}
-			<$list filter="[!is[system]search{$:/temp/search}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
-		</div>
-	</$reveal>
-	<$reveal state="$:/temp/search" type="match" text="">
-		<<tabs "[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" "$:/core/ui/SideBar/Open" "$:/state/tab/sidebar">>
-	</$reveal>
+
+<div class="tw-search">
+<$edit-text tiddler="$:/temp/search" type="search" tag="input"/>
+<$reveal state="$:/temp/search" type="nomatch" text="">
+<$linkcatcher to="$:/temp/search">
+<$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link>
+</$linkcatcher>
+</$reveal>
+<$reveal state="$:/temp/search" type="match" text="">&nbsp;<$link to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="btn-invisible">&hellip;</$link>
+</$reveal>
+</div>
+
+<$reveal state="$:/temp/search" type="nomatch" text="">
+
+<div class="tw-search-results">
+
+{{$:/language/Search/Matches}}
+
+<$list filter="[!is[system]search{$:/temp/search}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+</div>
+
+</$reveal>
+
+<$reveal state="$:/temp/search" type="match" text="">
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]" "TableOfContents" "$:/state/tab/sidebar">>
+
+</$reveal>
+
 </div>
