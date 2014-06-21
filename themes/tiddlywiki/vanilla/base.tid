@@ -530,6 +530,7 @@ a.tw-tiddlylink-external:hover {
 	width: 1%; /* Makes this column be as narrow as possible */
 	text-align: right;
 	font-style: italic;
+	font-weight: 200;
 }
 
 .tw-view-field-value {
@@ -1054,7 +1055,7 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-tab-content {
-	padding-top: 14px;
+	margin-top: 14px;
 }
 
 .tw-tab-content.tw-vertical  {
@@ -1234,4 +1235,53 @@ canvas.tw-edit-bitmapeditor  {
 	border: 1px solid #000;
 }
 
+/*
+** Table of contents
+*/
 
+.tw-sidebar-lists .tw-table-of-contents {
+	white-space: nowrap;
+}
+
+.tw-table-of-contents ol {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.tw-table-of-contents ol ol {
+	padding-left: 1em;
+}
+
+.tw-table-of-contents li {
+	font-size: 1.0em;
+	font-weight: bold;
+}
+
+.tw-table-of-contents li a {
+	font-weight: bold;
+}
+
+.tw-table-of-contents li li {
+	font-size: 0.95em;
+	font-weight: normal;
+	line-height: 1.4;
+}
+
+.tw-table-of-contents li li a {
+	font-weight: normal;
+}
+
+.tw-table-of-contents li li li {
+	font-size: 0.95em;
+	font-weight: 200;
+	line-height: 1.5;
+}
+
+.tw-table-of-contents li li li a {
+	font-weight: bold;
+}
+
+.tw-table-of-contents li li li li {
+	font-size: 0.95em;
+	font-weight: 200;
+}
