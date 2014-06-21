@@ -7,12 +7,6 @@ released: 201405181600
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.12-beta...v5.0.13-beta]]//
 
-!! Incompatible Changes
-
-See [[Notes for upgrading to 5.0.13-beta]] for more details of these changes:
-
-* 
-
 !! Documentation Improvements
 
 * 
@@ -36,7 +30,8 @@ This release includes a number of features designed to improve the experience of
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9b576f2a8d39dcca37bcb709183a8f9b27f33ccf]] group headings to the content type dropdown in edit mode
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d70d5780e51cf0918fba15954cd47549e4e1a9f]] advanced navigation settings in [[$:/ControlPanel]] to use radio buttons
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f7b8813a27141a78980eefa03df70a4a2de9d10b]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/3f25db0abe8cd28712c020f218506710cec004b6]]) behaviour of PermaLinks so that now [ext[http://tiddlywiki.com/#HelloThere]] just opens the single specified tiddler
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c48502e8ed214cee23537d06e7e87efd53592c7]] support for triple-quoted multi-line attributes with [[macros|Macros in WikiText]], [[widgets|Widgets in WikiText]] and [[HTML elements|HTML in WikiText]].
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c48502e8ed214cee23537d06e7e87efd53592c7]] support for triple-quoted multi-line attributes with [[macros|Macros in WikiText]], [[widgets|Widgets in WikiText]] and [[HTML elements|HTML in WikiText]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/32099b85d3b12f9e590274cb7550e3e531131706]] TableOfContents tab for tw5.com edition
 
 !! Hackability Improvements
 
