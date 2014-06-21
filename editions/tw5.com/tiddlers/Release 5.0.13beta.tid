@@ -7,10 +7,6 @@ released: 201405181600
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.12-beta...v5.0.13-beta]]//
 
-!! Documentation Improvements
-
-* 
-
 !! Accessibility Improvements
 
 This release includes a number of features designed to improve the experience of TiddlyWiki with a screen reader. Particular thanks to [[@domasofan|https://github.com/domasofan]] for his feedback
@@ -58,10 +54,10 @@ This release includes a number of features designed to improve the experience of
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-[[@BramChen|https://github.com/BramChen]]
-[[@buggyj|https://github.com/buggyj]]
-[[@csugden|https://github.com/csugden]]
-[[@danielo515|https://github.com/danielo515]]
-[[@IreneKnapp|https://github.com/IreneKnapp]]
-[[@mwfogleman|https://github.com/mwfogleman]]
-[[@xcazin|https://github.com/xcazin]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@csugden|https://github.com/csugden]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@IreneKnapp|https://github.com/IreneKnapp]]
+* [[@mwfogleman|https://github.com/mwfogleman]]
+* [[@xcazin|https://github.com/xcazin]]
