@@ -9,11 +9,6 @@
 	"build": {
 		"index": [
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
-		"externalimages": [
-			"--savetiddlers","[is[image]]","images",
-			"--setfield","[is[image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
-			"--setfield","[is[image]]","text","","text/plain",
-			"--rendertiddler","$:/core/save/all","externalimages.html","text/plain"],
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
