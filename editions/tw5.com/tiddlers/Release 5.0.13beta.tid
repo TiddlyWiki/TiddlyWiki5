@@ -44,7 +44,7 @@ This release includes a number of features designed to improve the experience of
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/6fb992690d33940d3509d7d4d74538e7f458e063]] problem with state tiddlers being inadvertently saved
+* Fixed [[here|https://github.com/Jermolene/TiddlyWiki5/commit/6fb992690d33940d3509d7d4d74538e7f458e063]] and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/0fae9ee99200e7eca30b9db0584c479d58841349]] the problem with state tiddlers being inadvertently saved
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a03a15e7de32a1b41618146ac334b5cd7d432e91]] bug with TextWidget not refreshing correctly
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d8a142fed5b22a8273d93ba05095e5f9c6929cb3]] problem with vertical tabs in Safari
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b8aedf2ca3cfc870be5a46accbb2dc0ddbb6d451]] issue with images in Markdown
