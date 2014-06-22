@@ -192,10 +192,12 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 				});
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
+				var type = item.type;
 				item.getAsString(function(str) {
 					var tiddlerFields = {
 						title: self.wiki.generateNewTitle("Untitled"),
-						text: str
+						text: str,
+						type: type
 					};
 					self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				});
