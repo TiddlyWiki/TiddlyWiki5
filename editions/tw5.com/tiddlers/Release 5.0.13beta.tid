@@ -36,7 +36,6 @@ This release includes a number of features designed to improve the experience of
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2796d0c9c7ed7a971ae6b0752d7418384072bb5]] new SetFieldCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/305617b632fd6ecf25cd4be85f4dfb5a5a65dfef]] new SaveTiddlersCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f14ecf4eb8965f2e407ccac51d4277330221efe3]] support for system tag [[$:/tags/RawMarkup]]
-* Extended [[FilterOperator: listed]] to work with any list field
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0bdc5b5c70fbbf34aa459afcf0499fc9c8ae6374]] editor type mappings to control panel advanced tab
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/1717c93d001ad184a08ca66d1bffb33fb5d32b3a]] CodeMirror (http://tiddlywiki.com/codemirrordemo.html) plugin for simpler configuration
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b2e48d00e9ea068a22b5ac5c0a4c93e8ddbb4a8a]] support for [[Environment Variables on Node.js]]
