@@ -36,6 +36,7 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--output . \
+        --build externalimages \
 	--rendertiddler ReadMe ./readme.md text/html \
 	--rendertiddler ContributingTemplate ./contributing.md text/html \
 	--rendertiddler $:/core/copyright.txt ./licenses/copyright.md text/plain \
