@@ -5,11 +5,11 @@ background-color:$(backgroundColor)$;
 \end
 <span class="tw-tag-list-item">
 <$set name="backgroundColor" value={{!!color}}>
-<$button popup=<<qualify "$:/state/tagpopup">> class="btn-invisible tw-tag-label" style=<<tag-styles>>>
+<$button popup=<<qualify "$:/state/popup/tag">> class="btn-invisible tw-tag-label" style=<<tag-styles>>>
 <$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
 </$button>
 </$set>
-<$reveal state=<<qualify "$:/state/tagpopup">> type="popup" position="below" animate="yes"><div class="tw-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tw-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
 </div>
