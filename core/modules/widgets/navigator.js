@@ -308,7 +308,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					}
 				));
 			}
-			if(!this.wiki.isDraftModified(title)) {
+			if(!isRename && !this.wiki.isDraftModified(title)) {
 				event.type = "tw-cancel-tiddler";
 				this.dispatchEvent(event);
 			} else if(isConfirmed) {
