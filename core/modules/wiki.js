@@ -1085,7 +1085,7 @@ exports.readFile = function(file,callback) {
 Check whether the specified draft tiddler has been modified
 */
 exports.isDraftModified = function(title) {
-  var tiddler = this.getTiddler(title);
+	var tiddler = this.getTiddler(title);
 	if(!tiddler.isDraft()) {
 		return false;
 	}
@@ -1094,18 +1094,7 @@ exports.isDraftModified = function(title) {
 	if(!origTiddler) {
 		return true;
 	}
-	if(tiddler.fields["draft.title"] !== tiddler.fields["draft.of"]) {
-		return true;
-	}
-	if(!$tw.utils.isArrayEqual(tiddler.fields.tags,origTiddler.fields.tags)) {
-		return true;
-	}
-	return !Object.keys(tiddler.fields).every(function(field) {
-		if(ignoredFields.indexOf(field) >= 0) {
-			return true;
-		}
-		return tiddler.fields[field] === origTiddler.fields[field];
-	});
+	return !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
 /*
