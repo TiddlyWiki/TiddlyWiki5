@@ -95,7 +95,7 @@ From the TW5 directory  issue command
 
 the resultant file (index.html) will be placed in the build directory, the default build directory is  `../jermolene.github.com` relative to TW5/
 
-!!6. Save you work on ~GitHub
+!!6. Save your work on ~GitHub
 
 From `plugins/yourname/pluginname/` issue commands to:
 
