@@ -65,7 +65,7 @@ Ratland.">>
 By using triple-double quotes you can specify parameter values that include single double quotes. For example:
 
 ```
-<<mysamplemacro "Mickey Mouse" "Mouse House,
+<<mysamplemacro "Mickey Mouse" """Mouse House,
 "Mouse" Lane,
 Rodentville,
 Ratland.""">>
