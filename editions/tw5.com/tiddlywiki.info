@@ -43,7 +43,8 @@
 		"readmes": [
 			"--rendertiddler","ReadMe","readme.md","text/html",
 			"--rendertiddler","ContributingTemplate","contributing.md","text/html",
-			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/plain",
+			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/plain"],
+		"tw2": [
 			"--rendertiddler","TiddlyWiki2ReadMe","tw2/readme.md","text/html"],
 		"empty": [
 			"--rendertiddler","$:/editions/tw5.com/download-empty","empty.html","text/plain",
