@@ -22,10 +22,10 @@ dropdown-border: <<colour muted-foreground>>
 dropdown-tab-background-selected: #fff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
-external-link-background-hover: 
-external-link-background-visited: 
-external-link-background: 
-external-link-foreground-hover: 
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
 foreground: #333353
