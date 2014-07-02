@@ -1,9 +1,8 @@
 created: 20131109105400007
-modified: 20140119201607494
+modified: 20140701201607494
 title: ReleaseHistory
 type: text/vnd.tiddlywiki
 
 Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
 
-
-<<tabs "[tag[releasenote]!sort[created]]" "Release 5.0.14-beta" "$:/state/tab2" "tw-vertical">>
+<<tabs "[tag[releasenote]!sort[created]]" "Release 5.0.14-beta" "$:/state/tab2" "tw-vertical" "ReleaseHistoryTemplate">>
