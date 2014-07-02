@@ -5,18 +5,5 @@ type: text/vnd.tiddlywiki
 
 Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
 
-<$list filter="[tag[releasenote]!sort[created]]">
 
-<div>
-
-<h1><$link to={{!!title}}><$view field="title"/></$link></h1>
-<div>''Release date: <$view field="released" format="date" template="DDth MMM YYYY at 0hh:0mm">TBA</$view>''</div>
-<div>
-
-<$transclude/>
-
-</div>
-
-</div>
-
-</$list>
+<<tabs "[tag[releasenote]!sort[created]]" "Release 5.0.14-beta" "$:/state/tab2" "tw-vertical">>
