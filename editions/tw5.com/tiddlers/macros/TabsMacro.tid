@@ -1,5 +1,5 @@
 created: 20131228162203521
-modified: 20140509223527667
+modified: 20140702113527667
 tags: macros
 title: TabsMacro
 type: text/vnd.tiddlywiki
@@ -15,6 +15,7 @@ By default the tab control arranges the tabs horizontally with the content under
 |2nd |default |Name of the tiddler containing the default tab | |
 |3rd |state |String to distinguish multiple tabs within the same tiddler (use of the system tiddler prefix is recommended) |''$:/state/tab'' |
 |4th |class |Additional CSS classes for the three wrappers DIV of the tab | |
+|5th |template |Optional template through which to render the tab content | |
 
 ! Examples
 

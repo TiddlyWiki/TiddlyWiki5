@@ -1,7 +1,7 @@
 title: $:/core/macros/tabs
 tags: $:/tags/Macro
 
-\define tabs(tabsList,default,state:"$:/state/tab",class)
+\define tabs(tabsList,default,state:"$:/state/tab",class,template)
 <div class="tw-tab-set $class$">
 <div class="tw-tab-buttons $class$">
 <$list filter="$tabsList$" variable="currentTab">
@@ -16,7 +16,15 @@ tags: $:/tags/Macro
 
 <$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
 
-<$transclude tiddler=<<currentTab>> mode="block"/>
+<$tiddler tiddler=<<currentTab>>>
+
+<$transclude tiddler="$template$" mode="block">
+
+<$transclude mode="block"/>
+
+</$transclude>
+
+</$tiddler>
 
 </$reveal>
 
