@@ -856,19 +856,30 @@ exports.makeWidget = function(parser,options) {
 /*
 Make a widget tree for transclusion
 title: target tiddler title
-options: as for wiki.makeWidget() (including parseAsInline)
+options: as for wiki.makeWidget() plus:
+options.field: optional field to transclude (defaults to "text")
+options.children: optional array of children for the transclude widget
 */
 exports.makeTranscludeWidget = function(title,options) {
 	options = options || {};
 	var parseTree = {tree: [{
-		type: "transclude",
-		attributes: {
-			tiddler: {
-				name: "tiddler",
-				type: "string",
-				value: title}},
-		isBlock: !options.parseAsInline}
+			type: "element",
+			tag: "div",
+			children: [{
+				type: "transclude",
+				attributes: {
+					tiddler: {
+						name: "tiddler",
+						type: "string",
+						value: title}},
+				isBlock: !options.parseAsInline}]}
 	]};
+	if(options.field) {
+		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+	}
+	if(options.children) {
+		parseTree.tree[0].children[0].children = options.children;
+	}
 	return $tw.wiki.makeWidget(parseTree,options);
 };
 
