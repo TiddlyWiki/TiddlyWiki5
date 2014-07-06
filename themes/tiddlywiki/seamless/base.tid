@@ -59,7 +59,7 @@ Rules copied from Snow White
 Seamless modifications
 */
 
-@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics##storywidth}}) {
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
 	/* Drop the tiddler frame padding */
 	body.tw-body .tw-tiddler-frame {

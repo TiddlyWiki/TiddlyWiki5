@@ -7,6 +7,10 @@ caption: 5.0.14-beta
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.13-beta...v5.0.14-beta]]//
 
+!! Incompatible Changes
+
+* Theme tweaks (in [[control panel|$:/ControlPanel]] under the ''Appearance'' tab) will not be upgraded from TiddlyWiki versions prior to 5.0.14-beta. You'll need to re-apply any customisations after upgrading
+
 !! Accessibility Improvements
 
 * 
