@@ -4,19 +4,17 @@ caption: Theme Tweaks
 
 You can tweak certain aspects of the ''Vanilla'' theme.
 
-//Take care to preserve any backticks (&#96;) in the settings//
-
 ! Settings
 
-* Font family: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings" index="fontfamily" default="" tag="input"/>
+* Font family: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/>
 
 ! Sizes
 
-* Font size: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="fontsize" default="" tag="input"/>
-* Line height: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="lineheight" default="" tag="input"/>
-* Story left position //(the distance between the left of the screen and the left margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="storyleft" default="" tag="input"/>
-* Story top position //(the distance between the top of the screen ad the top margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="storytop" default="" tag="input"/>
-* Story right //(the distance between the left side of the screen and the left margin of the sidebar area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="storyright" default="" tag="input"/>
-* Story width //(the width of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="storywidth" default="" tag="input"/>
-* Tiddler width //(the width of individual tiddlers -- used for zoomin storyview)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics" index="tiddlerwidth" default="" tag="input"/>
-
+* Font size: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/>
+* Line height: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/>
+* Story left position //(the distance between the left of the screen and the left margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/>
+* Story top position //(the distance between the top of the screen ad the top margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/>
+* Story right //(the distance between the left side of the screen and the left margin of the sidebar area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/>
+* Story width //(the width of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/>
+* Tiddler width //(the width of individual tiddlers -- used for zoomin storyview)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/>
+* Sidebar breakpoint //(the minimum width for the sidebar to be displayed above the story river)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/>

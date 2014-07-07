@@ -17,7 +17,7 @@ tags: [[$:/tags/stylesheet]]
 	}
 }
 
-@media (max-width: 770px) {
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 	.tw-tiddler-frame {
 		<<box-shadow none>>
 	}
