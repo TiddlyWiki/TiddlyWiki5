@@ -1,5 +1,5 @@
 created: 20130822080600000
-modified: 20131228161338857
+modified: 20140707161338857
 tags: concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
@@ -17,6 +17,8 @@ System tags are used to give special behaviour to tiddlers:
 * [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
 * [[$:/tags/PageControls]] for the page control tools in the sidebar
 * [[$:/tags/PageTemplate]] for the main page elements
+* [[$:/tags/StoryBackdrop]] for elements to be placed at the top of the story river
+* [[$:/tags/StoryFrontdrop]] for elements to be placed at the bottom of the story river
 * [[$:/tags/RawMarkup]] for raw markup to be included in the generated HTML file
 
 ! System tags in use
