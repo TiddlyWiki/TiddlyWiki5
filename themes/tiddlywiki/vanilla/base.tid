@@ -485,6 +485,11 @@ a.tw-tiddlylink-external:hover {
 }
 
 @media print {
+
+	body.tw-body {
+		background-color: transparent;
+	}
+
 	.sidebar-header, .tw-topbar {
 		display: none;
 	}
