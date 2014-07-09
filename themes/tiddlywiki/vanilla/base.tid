@@ -495,7 +495,14 @@ a.tw-tiddlylink-external:hover {
 	}
 
 	.story-river {
-		margin-left: 14px;
+		margin: 0;
+		padding: 0;
+	}
+
+	.story-river .tw-tiddler-frame {
+		margin: 0;
+		border: none;
+		padding: 28px;
 	}
 }
 
@@ -507,13 +514,6 @@ a.tw-tiddlylink-external:hover {
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
-}
-
-
-@media print {
-	.tw-tiddler-frame {
-		border: none;
-	}
 }
 
 .tw-tiddler-info {
