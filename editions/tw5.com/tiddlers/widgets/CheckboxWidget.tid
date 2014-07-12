@@ -1,11 +1,14 @@
 title: CheckboxWidget
 created: 201310241419
-modified: 201310300837
+modified: 201407110837
 tags: widget
 
 ! Introduction
 
-The checkbox widget displays an HTML `<input type="checkbox">` element that is dynamically bound to the presence or absence of a specified tag on a specified tiddler.
+The checkbox widget displays an HTML `<input type="checkbox">` element that is dynamically bound to either:
+
+* the presence or absence of a specified tag on a specified tiddler
+* the value of a specified field of a specified tiddler
 
 ! Content and Attributes
 
@@ -14,3 +17,27 @@ The content of the `<$checkbox>` widget is displayed within an HTML `<label>` el
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |
 |tag |The name of the tag to which the checkbox should be bound |
+|field |The name of the field to which the checkbox should be bound |
+|checked |The value of the field corresponding to the checkbox being checked |
+|unchecked |The value of the field corresponding to the checkbox being unchecked |
+|default |The default value to use if the field is not defined |
+
+!! Tag Mode
+
+Using the checkbox widget in tag mode requires the ''tag'' attribute to specify the name of the tag. The ''tiddler'' attribute specifies the tiddler to target, defaulting to the current tiddler if not present.
+
+This example creates a checkbox that flips the ''done'' tag on the current tiddler:
+
+```
+<$checkbox tag="done">Is it done?</$checkbox>
+```
+
+!! Field Mode
+
+Using the checkbox widget in field mode requires the ''field'' attribute to specify the name of the field. The ''checked'' and ''unchecked'' attributes specify the values to be assigned to the field to correspond to its checked and unchecked states respectively. The ''default'' attribute is used as a fallback value if the field is not defined.
+
+This example creates a checkbox that is checked if the field ''status'' is equal to ''open'' and unchecked if the field is equal to ''closed''. If the field is undefined then it defaults to ''closed'', meaning that the checkbox will be unchecked if the ''status'' field is missing.
+
+```
+<$checkbox field="status" checked="open" unchecked="closed" default="closed">Is it open?</$checkbox>
+```
