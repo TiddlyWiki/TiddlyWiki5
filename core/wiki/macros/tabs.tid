@@ -16,15 +16,11 @@ tags: $:/tags/Macro
 
 <$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
 
-<$tiddler tiddler=<<currentTab>>>
-
 <$transclude tiddler="$template$" mode="block">
 
-<$transclude mode="block"/>
+<$transclude tiddler=<<currentTab>> mode="block"/>
 
 </$transclude>
-
-</$tiddler>
 
 </$reveal>
 
