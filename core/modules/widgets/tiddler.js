@@ -53,7 +53,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler) {
+	if(changedAttributes.tiddler || changedTiddlers[this.tiddlerTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
