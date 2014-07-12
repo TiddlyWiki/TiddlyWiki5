@@ -12,6 +12,8 @@ Navigator widget
 /*global $tw: false */
 "use strict";
 
+var IMPORT_TITLE = "$:/Import";
+
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var NavigatorWidget = function(parseTreeNode,options) {
@@ -26,7 +28,8 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
 		{type: "tw-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
 		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"},
-		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"}
+		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"},
+		{type: "tw-perform-import", handler: "handlePerformImportEvent"}
 	]);
 };
 
@@ -402,7 +405,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	return false;
 };
 
-// Import JSON tiddlers
+// Import JSON tiddlers into a pending import tiddler
 NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	var self = this;
 	// Get the tiddlers
@@ -411,52 +414,72 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		tiddlers = JSON.parse(event.param);	
 	} catch(e) {
 	}
+	// Get the current $:/Import tiddler
+	var importTiddler = this.wiki.getTiddler(IMPORT_TITLE) || {fields: {}},
+		importData = this.wiki.getTiddlerData(IMPORT_TITLE,{}),
+		newFields = new Object({
+			title: IMPORT_TITLE,
+			type: "application/json",
+			"plugin-type": "import"
+		}),
+		incomingTiddlers = [];
 	// Process each tiddler
-	var importedTiddlers = [];
+	importData.tiddlers = importData.tiddlers || {};
 	$tw.utils.each(tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
-		// Add it to the store
-		var imported = self.wiki.importTiddler(new $tw.Tiddler(
-			self.wiki.getCreationFields(),
-			self.wiki.getModificationFields(),
-			tiddlerFields
-		));
-		if(imported) {
-			importedTiddlers.push(title);
+		if(title) {
+			incomingTiddlers.push(title);
+			importData.tiddlers[title] = tiddlerFields;
 		}
 	});
+	// Give the active upgrader modules a chance to process the incoming tiddlers
+	var messages = this.wiki.invokeUpgraders(incomingTiddlers,importData.tiddlers);
+	$tw.utils.each(messages,function(message,title) {
+		newFields["message-" + title] = message;
+	});
+	// Deselect any suppressed tiddlers
+	$tw.utils.each(importData.tiddlers,function(tiddler,title) {
+		if($tw.utils.count(tiddler) === 0) {
+			newFields["selection-" + title] = "unchecked";
+		}
+	});
+	// Save the $:/Import tiddler
+	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
+	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Get the story and history details
 	var storyList = this.getStoryList(),
 		history = [];
-	// Create the import report tiddler
-	if(importedTiddlers.length === 0) {
-		return false;
-	}
-	var title;
-	if(importedTiddlers.length > 1) {
-		title = this.wiki.generateNewTitle("$:/temp/ImportReport");
-		var tiddlerFields = {
-			title: title,
-			text: "# [[" + importedTiddlers.join("]]\n# [[") + "]]\n"
-		};
-		this.wiki.addTiddler(new $tw.Tiddler(
-			self.wiki.getCreationFields(),
-			tiddlerFields,
-			self.wiki.getModificationFields()
-		));
-	} else {
-		title = importedTiddlers[0];
-	}
 	// Add it to the story
-	if(storyList.indexOf(title) === -1) {
-		storyList.unshift(title);
+	if(storyList.indexOf(IMPORT_TITLE) === -1) {
+		storyList.unshift(IMPORT_TITLE);
 	}
 	// And to history
-	history.push(title);
+	history.push(IMPORT_TITLE);
 	// Save the updated story and history
 	this.saveStoryList(storyList);
 	this.addToHistory(history);
 	return false;
+};
+
+// 
+NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
+	var self = this,
+		importTiddler = this.wiki.getTiddler(event.param) || {fields: {}},
+		importData = this.wiki.getTiddlerData(event.param,{tiddlers: {}}),
+		importReport = [];
+	// Add the tiddlers to the store
+	importReport.push("The following tiddlers were imported:\n");
+	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
+		var title = tiddlerFields.title;
+		if(title && importTiddler.fields["selection-" + title] !== "unchecked") {
+			self.wiki.addTiddler(new $tw.Tiddler(tiddlerFields));
+			importReport.push("# [[" + tiddlerFields.title + "]]");
+		}
+	});
+	// Replace the $:/Import tiddler with an import report
+	this.wiki.addTiddler(new $tw.Tiddler({title: IMPORT_TITLE, text: importReport.join("\n")}));
+	// Navigate to the $:/Import tiddler
+	this.addToHistory([IMPORT_TITLE]);
 };
 
 exports.navigator = NavigatorWidget;

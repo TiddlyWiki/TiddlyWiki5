@@ -1125,4 +1125,31 @@ exports.addToHistory = function(title,fromPageRect,historyTitle) {
 	this.setTiddlerData(historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
 };
 
+/*
+Invoke the available upgrader modules
+titles: array of tiddler titles to be processed
+tiddlers: hashmap by title of tiddler fields of pending import tiddlers. These can be modified by the upgraders. An entry with no fields indicates a tiddler that was pending import has been suppressed. When entries are added to the pending import the tiddlers hashmap may have entries that are not present in the titles array
+Returns a hashmap of messages keyed by tiddler title.
+*/
+exports.invokeUpgraders = function(titles,tiddlers) {
+	// Collect up the available upgrader modules
+	var self = this;
+	if(!this.upgraderModules) {
+		this.upgraderModules = [];
+		$tw.modules.forEachModuleOfType("upgrader",function(title,module) {
+			if(module.upgrade) {
+				self.upgraderModules.push(module);
+			}
+		});
+	}
+	// Invoke each upgrader in turn
+	var messages = {};
+	for(var t=0; t<this.upgraderModules.length; t++) {
+		var upgrader = this.upgraderModules[t],
+			upgraderMessages = upgrader.upgrade(this,titles,tiddlers);
+		$tw.utils.extend(messages,upgraderMessages);
+	}
+	return messages;
+};
+
 })();

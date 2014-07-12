@@ -1,0 +1,53 @@
+title: $:/core/ui/ViewTemplate/import
+tags: $:/tags/ViewTemplate
+
+\define lingo-base() $:/language/Import/
+\define messageField()
+message-$(currentTiddler)$
+\end
+\define selectionField()
+selection-$(currentTiddler)$
+\end
+<$list filter="[all[current]field:plugin-type[import]]">
+
+<div class="tw-import">
+
+<<lingo Listing/Hint>>
+
+<table>
+<tbody>
+<tr>
+<th>
+<<lingo Listing/Select/Caption>>
+</th>
+<th>
+<<lingo Listing/Title/Caption>>
+</th>
+<th>
+<<lingo Listing/Status/Caption>>
+</th>
+</tr>
+<$list filter="[all[current]plugintiddlers[]sort[title]]">
+<tr>
+<td>
+<$checkbox tiddler=<<storyTiddler>> field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked"/>
+</td>
+<td>
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</td>
+<td>
+<$view tiddler=<<storyTiddler>> field=<<messageField>>/>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>
+
+<$button message="tw-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
+<$button message="tw-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+
+</div>
+
+</$list>

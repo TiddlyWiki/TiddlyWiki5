@@ -9,6 +9,9 @@
 	"build": {
 		"index": [
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"upgrade": [
+			"--makelibrary",
+			"--rendertiddler","$:/core/save/all","upgrade.html","text/plain"],
 		"externalimages": [
 			"--savetiddlers","[is[image]]","images",
 			"--setfield","[is[image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
