@@ -1,5 +1,4 @@
-title: $:/core/ui/ViewTemplate/import
-tags: $:/tags/ViewTemplate
+title: $:/core/ui/ImportListing
 
 \define lingo-base() $:/language/Import/
 \define messageField()
@@ -8,12 +7,6 @@ message-$(currentTiddler)$
 \define selectionField()
 selection-$(currentTiddler)$
 \end
-<$list filter="[all[current]field:plugin-type[import]]">
-
-<div class="tw-import">
-
-<<lingo Listing/Hint>>
-
 <table>
 <tbody>
 <tr>
@@ -44,10 +37,3 @@ selection-$(currentTiddler)$
 </$list>
 </tbody>
 </table>
-
-<$button message="tw-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
-<$button message="tw-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
-
-</div>
-
-</$list>

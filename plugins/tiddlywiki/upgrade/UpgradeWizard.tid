@@ -1,34 +1,44 @@
 title: $:/UpgradeWizard
 tags: $:/tags/StoryBackdrop
 
+<div class="tw-upgrade-wizard-wrapper">
+
+<div class="tw-upgrade-wizard">
+
+! ~TiddlyWiki Upgrade Wizard
+
 <$list filter="[[$:/Import]is[missing]]">
 
-Drag a TiddlyWiki file here to upgrade it
+{{$:/core/images/download-button}}
 
-<$browse/>
+Drag a ~TiddlyWiki file here to upgrade it
+
+or click to pick the file <$browse/>
 
 </$list>
 
 <$reveal state="$:/Import!!status" type="match" text="pending">
 
-And now there's a pending import
+The following tiddlers will be included in the upgrade
 
 <$set name="storyTiddler" value="$:/Import">
 
-<$tiddler tiddler="$:/Import">
-
-<$transclude tiddler="$:/core/ui/ViewTemplate/import"/>
-
-</$tiddler>
+{{$:/Import||$:/core/ui/ImportListing}}
 
 </$set>
+
+<$button message="tw-perform-import" param=<<currentTiddler>>>Upgrade</$button>
 
 </$reveal>
 
 <$reveal state="$:/Import!!status" type="match" text="complete">
 
-All done
+Upgrade completed. Click the button below to save your upgraded ~TiddlyWiki file
 
 {{$:/plugins/tiddlywiki/upgrade/save}}
 
 </$reveal>
+
+</div>
+
+</div>

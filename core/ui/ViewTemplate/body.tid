@@ -3,12 +3,6 @@ tags: $:/tags/ViewTemplate
 
 <div class="body">
 
-<$list filter="[all[current]has[plugin-type]] -[all[current]field:plugin-type[import]]">
-
-{{||$:/core/ui/TiddlerInfo/Advanced/PluginInfo}}
-
-</$list>
-
 <$list filter="[all[current]!has[plugin-type]]">
 
 <$transclude>
