@@ -26,11 +26,11 @@ tags: mechanism
 
 ! ToDo
 
-* Add upgrade plugin containing instructions and one-shot UI
+* ~~Add upgrade plugin containing instructions and one-shot UI~~
 * Grouping plugins
 * Incoming tiddler preview
 * Better display text for plugins
-* Suppressing $:/UpgradeLibrary and upgrade plugin from save
+* ~~Suppressing $:/UpgradeLibrary and upgrade plugin from save~~
 * Finish UpgradeMechanism docs
 * ~~Checkboxes~~
 * ~~Visual difference for suppressed tiddlers~~
