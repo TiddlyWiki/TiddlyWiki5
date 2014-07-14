@@ -27,7 +27,7 @@ The following tiddlers will be included in the upgrade
 
 </$set>
 
-<$button message="tw-perform-import" param=<<currentTiddler>>>Upgrade</$button>
+<$button message="tw-perform-import" param="$:/Import">Upgrade</$button>
 
 </$reveal>
 
