@@ -448,7 +448,6 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
 	// Update the story and history details
-	debugger;
 	if(this.getVariable("tw-auto-open-on-import") !== "no") {
 		var storyList = this.getStoryList(),
 			history = [];
