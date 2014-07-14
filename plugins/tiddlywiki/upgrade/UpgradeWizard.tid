@@ -1,0 +1,34 @@
+title: $:/UpgradeWizard
+tags: $:/tags/StoryBackdrop
+
+<$list filter="[[$:/Import]is[missing]]">
+
+Drag a TiddlyWiki file here to upgrade it
+
+<$browse/>
+
+</$list>
+
+<$reveal state="$:/Import!!status" type="match" text="pending">
+
+And now there's a pending import
+
+<$set name="storyTiddler" value="$:/Import">
+
+<$tiddler tiddler="$:/Import">
+
+<$transclude tiddler="$:/core/ui/ViewTemplate/import"/>
+
+</$tiddler>
+
+</$set>
+
+</$reveal>
+
+<$reveal state="$:/Import!!status" type="match" text="complete">
+
+All done
+
+{{$:/plugins/tiddlywiki/upgrade/save}}
+
+</$reveal>

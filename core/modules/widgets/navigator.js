@@ -420,7 +420,8 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 		newFields = new Object({
 			title: IMPORT_TITLE,
 			type: "application/json",
-			"plugin-type": "import"
+			"plugin-type": "import",
+			"status": "pending"
 		}),
 		incomingTiddlers = [];
 	// Process each tiddler
@@ -446,18 +447,21 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	// Save the $:/Import tiddler
 	newFields.text = JSON.stringify(importData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(importTiddler,newFields));
-	// Get the story and history details
-	var storyList = this.getStoryList(),
-		history = [];
-	// Add it to the story
-	if(storyList.indexOf(IMPORT_TITLE) === -1) {
-		storyList.unshift(IMPORT_TITLE);
+	// Update the story and history details
+	debugger;
+	if(this.getVariable("tw-auto-open-on-import") !== "no") {
+		var storyList = this.getStoryList(),
+			history = [];
+		// Add it to the story
+		if(storyList.indexOf(IMPORT_TITLE) === -1) {
+			storyList.unshift(IMPORT_TITLE);
+		}
+		// And to history
+		history.push(IMPORT_TITLE);
+		// Save the updated story and history
+		this.saveStoryList(storyList);
+		this.addToHistory(history);		
 	}
-	// And to history
-	history.push(IMPORT_TITLE);
-	// Save the updated story and history
-	this.saveStoryList(storyList);
-	this.addToHistory(history);
 	return false;
 };
 
@@ -477,7 +481,11 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 		}
 	});
 	// Replace the $:/Import tiddler with an import report
-	this.wiki.addTiddler(new $tw.Tiddler({title: IMPORT_TITLE, text: importReport.join("\n")}));
+	this.wiki.addTiddler(new $tw.Tiddler({
+		title: IMPORT_TITLE,
+		text: importReport.join("\n"),
+		"status": "complete"
+	}));
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([IMPORT_TITLE]);
 };
