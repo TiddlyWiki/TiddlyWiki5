@@ -5,7 +5,7 @@ tags: $:/tags/ViewTemplate
 
 <$list filter="[all[current]has[plugin-type]] -[all[current]field:plugin-type[import]]">
 
-This tiddler is a plugin
+{{||$:/core/ui/TiddlerInfo/Advanced/PluginInfo}}
 
 </$list>
 
