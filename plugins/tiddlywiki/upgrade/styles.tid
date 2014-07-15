@@ -4,6 +4,7 @@ tags: $:/tags/stylesheet
 .tw-upgrade-wizard-wrapper {
 	width: 100%;
 	text-align: center;
+	margin-bottom: 3em;
 }
 
 .tw-upgrade-wizard {
@@ -11,6 +12,8 @@ tags: $:/tags/stylesheet
 	padding: 2em;
 	display: inline-block;
 	position: relative;
+	border: 1px solid #ddd;
+	<<box-shadow "inset 1px 2px 4px rgba(0, 0, 0, 0.15)">>;
 }
 
 .tw-upgrade-wizard svg.tw-image-download-button {
