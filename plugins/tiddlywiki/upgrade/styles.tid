@@ -23,6 +23,10 @@ tags: $:/tags/stylesheet
 	fill: <<colour foreground>>;
 }
 
+.tw-upgrade-wizard em {
+	color: <<colour tiddler-subtitle-foreground>>;
+}
+
 .tw-upgrade-wizard table {
 	text-align: left;
 }

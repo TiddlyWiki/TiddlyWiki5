@@ -15,6 +15,10 @@ Drag a ~TiddlyWiki file here to upgrade it
 
 or click to pick a file <$browse/>
 
+---
+
+//Your data will not leave your browser. [[Download|http://tiddlywiki.com/upgrade.html]] this upgrader to use it offline//
+
 </$list>
 
 <$reveal state="$:/Import!!status" type="match" text="pending">
