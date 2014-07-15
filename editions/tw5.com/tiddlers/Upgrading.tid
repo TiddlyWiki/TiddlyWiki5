@@ -31,7 +31,7 @@ This process will work on most desktop browsers. Note that none of your personal
 # Drag your old TiddlyWiki HTML file into the browser window
 #* If the file is encrypted you will be prompted for the password
 # Review the list of tiddlers that will be upgraded
-# Click ''Import''
+# Click ''Upgrade''
 # Set your password again if you want to use encryption
 # Save changes to save the new version
 
