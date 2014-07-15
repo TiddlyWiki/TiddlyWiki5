@@ -16,7 +16,6 @@ tags: $:/tags/stylesheet
 .tw-upgrade-wizard svg.tw-image-download-button {
 	width: 14em;
 	height: 14em;
-	<<transition "fill 150ms ease-in-out">>;
 	fill: <<colour muted-foreground>>;
 }
 
