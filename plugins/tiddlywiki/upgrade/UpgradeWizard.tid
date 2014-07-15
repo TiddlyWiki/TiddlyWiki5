@@ -23,15 +23,13 @@ or click to pick a file <$browse/>
 
 <$reveal state="$:/Import!!status" type="match" text="pending">
 
-The following tiddlers will be included in the upgrade
+The following tiddlers will be included in the upgrade <$button message="tw-perform-import" param="$:/Import">Upgrade</$button>
 
 <$set name="storyTiddler" value="$:/Import">
 
 {{$:/Import||$:/core/ui/ImportListing}}
 
 </$set>
-
-<$button message="tw-perform-import" param="$:/Import">Upgrade</$button>
 
 </$reveal>
 
@@ -40,6 +38,10 @@ The following tiddlers will be included in the upgrade
 Upgrade completed. Click the button below to save your upgraded ~TiddlyWiki file
 
 {{$:/plugins/tiddlywiki/upgrade/save}}
+
+---
+
+{{$:/snippets/encryptionstatus}}
 
 </$reveal>
 
