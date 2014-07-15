@@ -16,11 +16,19 @@ tags: $:/tags/stylesheet
 .tw-upgrade-wizard svg.tw-image-download-button {
 	width: 14em;
 	height: 14em;
+	<<transition "fill 150ms ease-in-out">>;
 	fill: <<colour muted-foreground>>;
 }
 
 .tw-upgrade-wizard:hover svg.tw-image-download-button {
 	fill: <<colour foreground>>;
+}
+
+.tw-upgrade-wizard svg .tw-image-download-button-ring {
+}
+
+.tw-upgrade-wizard:hover svg .tw-image-download-button-ring {
+	fill: <<colour primary>>;
 }
 
 .tw-upgrade-wizard em {
