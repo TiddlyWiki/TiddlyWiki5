@@ -23,7 +23,6 @@ tags: mechanism
 
 ! ToDo
 
-* Grouping plugins
 * Incoming tiddler preview
 * ~~Better display text for plugins~~
 * ~~Better handling of encrypted upgrades~~
@@ -33,3 +32,7 @@ tags: mechanism
 * ~~Checkboxes~~
 * ~~Visual difference for suppressed tiddlers~~
 * Translation of upgrade wizard
+
+! NoToDo
+
+* Grouping plugins - not possible without extending the core
