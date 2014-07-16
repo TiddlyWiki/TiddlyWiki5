@@ -25,8 +25,8 @@ tags: mechanism
 
 * Grouping plugins
 * Incoming tiddler preview
-* Better display text for plugins
-* Better handling of encrypted upgrades
+* ~~Better display text for plugins~~
+* ~~Better handling of encrypted upgrades~~
 * Docs
 * ~~Add upgrade plugin containing instructions and one-shot UI~~
 * ~~Suppressing $:/UpgradeLibrary and upgrade plugin from save~~
