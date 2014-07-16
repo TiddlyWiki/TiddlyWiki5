@@ -25,11 +25,7 @@ or click to pick a file <$browse/>
 
 The following tiddlers will be included in the upgrade <$button message="tw-perform-import" param="$:/Import">Upgrade</$button>
 
-<$set name="storyTiddler" value="$:/Import">
-
 {{$:/Import||$:/core/ui/ImportListing}}
-
-</$set>
 
 </$reveal>
 

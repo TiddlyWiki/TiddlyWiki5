@@ -2,10 +2,10 @@ title: $:/core/ui/ImportListing
 
 \define lingo-base() $:/language/Import/
 \define messageField()
-message-$(currentTiddler)$
+message-$(payloadTiddler)$
 \end
 \define selectionField()
-selection-$(currentTiddler)$
+selection-$(payloadTiddler)$
 \end
 <table>
 <tbody>
@@ -20,18 +20,18 @@ selection-$(currentTiddler)$
 <<lingo Listing/Status/Caption>>
 </th>
 </tr>
-<$list filter="[all[current]plugintiddlers[]sort[title]]">
+<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
 <tr>
 <td>
-<$checkbox tiddler=<<storyTiddler>> field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked"/>
+<$checkbox field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked"/>
 </td>
 <td>
-<$link to={{!!title}}>
-<$view field="title"/>
+<$link to=<<payloadTiddler>>>
+<$text text=<<payloadTiddler>>/>
 </$link>
 </td>
 <td>
-<$view tiddler=<<storyTiddler>> field=<<messageField>>/>
+<$view field=<<messageField>>/>
 </td>
 </tr>
 </$list>
