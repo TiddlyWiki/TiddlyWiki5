@@ -37,15 +37,15 @@ The following tiddlers will be included in the upgrade <$button message="tw-perf
 
 Upgrade completed. Click the button below to save your upgraded ~TiddlyWiki file
 
+Make sure that you keep a safe copy of your previous ~TiddlyWiki file.
+
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 
-The file will be encrypted with your existing password
+''The file will be encrypted with your existing password.''
 
 </$reveal>
 
 {{$:/plugins/tiddlywiki/upgrade/save}}
-
-Make sure that you keep a safe copy of your previous ~TiddlyWiki file.
 
 Close this browser window to prevent others from being able to access your data.
 
