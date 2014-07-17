@@ -39,6 +39,7 @@ Compute the internal state of the widget
 TranscludeWidget.prototype.execute = function() {
 	// Get our parameters
 	this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.transcludeSubTiddler = this.getAttribute("subtiddler");
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	this.transcludeMode = this.getAttribute("mode");
@@ -53,7 +54,10 @@ TranscludeWidget.prototype.execute = function() {
 						this.transcludeTitle,
 						this.transcludeField,
 						this.transcludeIndex,
-						{parseAsInline: parseAsInline}),
+						{
+							parseAsInline: parseAsInline,
+							subTiddler: this.transcludeSubTiddler
+						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
 	// Set context variables for recursion detection
 	var recursionMarker = this.makeRecursionMarker();

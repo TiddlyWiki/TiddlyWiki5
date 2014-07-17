@@ -554,6 +554,17 @@ exports.sortByList = function(array,listTitle) {
 	}
 };
 
+exports.getSubTiddler = function(title,subTiddlerTitle) {
+	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerData(title);
+	if(bundleInfo) {
+		var subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
+		if(subTiddler) {
+			return new $tw.Tiddler(subTiddler);
+		}
+	}
+	return null;
+};
+
 /*
 Retrieve a tiddler as a JSON string of the fields
 */
@@ -571,16 +582,22 @@ exports.getTiddlerAsJson = function(title) {
 };
 
 /*
-Get a tiddlers content as a JavaScript object. How this is done depends on the type of the tiddler:
+Get the content of a tiddler as a JavaScript object. How this is done depends on the type of the tiddler:
 
 application/json: the tiddler JSON is parsed into an object
 application/x-tiddler-dictionary: the tiddler is parsed as sequence of name:value pairs
 
 Other types currently just return null.
+
+titleOrTiddler: string tiddler title or a tiddler object
+defaultData: default data to be returned if the tiddler is missing or doesn't contain data
 */
-exports.getTiddlerData = function(title,defaultData) {
-	var tiddler = this.getTiddler(title),
+exports.getTiddlerData = function(titleOrTiddler,defaultData) {
+	var tiddler = titleOrTiddler,
 		data;
+	if(!(tiddler instanceof $tw.Tiddler)) {
+		tiddler = this.getTiddler(tiddler)		
+	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
 			case "application/json":
@@ -601,8 +618,8 @@ exports.getTiddlerData = function(title,defaultData) {
 /*
 Extract an indexed field from within a data tiddler
 */
-exports.extractTiddlerDataItem = function(title,index,defaultText) {
-	var data = this.getTiddlerData(title,Object.create(null)),
+exports.extractTiddlerDataItem = function(titleOrTiddler,index,defaultText) {
+	var data = this.getTiddlerData(titleOrTiddler,Object.create(null)),
 		text;
 	if(data && $tw.utils.hop(data,index)) {
 		text = data[index];
@@ -786,31 +803,34 @@ exports.parseTiddler = function(title,options) {
 };
 
 exports.parseTextReference = function(title,field,index,options) {
-	if(field === "text" || (!field && !index)) {
-		// Force the tiddler to be lazily loaded
-		this.getTiddlerText(title);
-		// Parse it
-		return this.parseTiddler(title,options);
+	var tiddler,text;
+	if(options.subTiddler) {
+		tiddler = this.getSubTiddler(title,options.subTiddler);
 	} else {
-		var text;
-		if(field) {
-			if(field === "title") {
-				text = title;
-			} else {
-				var tiddler = this.getTiddler(title);
-				if(!tiddler || !tiddler.hasField(field)) {
-					return null;
-				}
-				text = tiddler.fields[field];
-			}
-			return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
-		} else if(index) {
-			text = this.extractTiddlerDataItem(title,index,"");
-			if(text === undefined) {
+		tiddler = this.getTiddler(title);
+		if(field === "text" || (!field && !index)) {
+			this.getTiddlerText(title); // Force the tiddler to be lazily loaded
+			return this.parseTiddler(title,options);
+		}
+	}
+	if(field === "text" || (!field && !index)) {
+		return this.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",tiddler.fields.text,options);
+	} else if(field) {
+		if(field === "title") {
+			text = title;
+		} else {
+			if(!tiddler || !tiddler.hasField(field)) {
 				return null;
 			}
-			return this.parseText("text/vnd.tiddlywiki",text,options);
+			text = tiddler.fields[field];
 		}
+		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
+	} else if(index) {
+		text = this.extractTiddlerDataItem(tiddler,index,"");
+		if(text === undefined) {
+			return null;
+		}
+		return this.parseText("text/vnd.tiddlywiki",text,options);
 	}
 };
 
