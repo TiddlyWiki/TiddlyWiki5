@@ -1,26 +1,18 @@
 created: 20131202102427114
-modified: 20140419133900452
+modified: 20140716133900452
 tags: howto
 title: Upgrading
 type: text/vnd.tiddlywiki
 
-There are several methods for upgrading an existing TiddlyWiki version 5 document to a new release. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
+The process described here is for upgrading standalone TiddlyWiki files. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
 
 <<<
-Regardless of which method you use, remember the [[The First Rule of Using TiddlyWiki]]:
+When upgrading, please remember the [[The First Rule of Using TiddlyWiki]]:
 
 //You are responsible for looking after your own data; take care to make backups, especially when upgrading the ~TiddlyWiki core//
 <<<
 
-<div class="tw-message-box">
-
-<a class="tw-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
-
-!! Upgrading from TiddlyWikiClassic
-
-Remember that TiddlyWiki version 5 is not fully backwards compatible with the older TiddlyWikiClassic. It is recommended that users of TiddlyWikiClassic should not attempt to upgrade their existing files until the new version is more mature.
-
-</div>
+Remember that TiddlyWiki version 5 is not fully backwards compatible with the older TiddlyWikiClassic.
 
 ! Online upgrading
 
@@ -32,7 +24,6 @@ This process will work on most desktop browsers. Note that none of your personal
 #* If the file is encrypted you will be prompted for the password
 # Review the list of tiddlers that will be upgraded
 # Click ''Upgrade''
-# Set your password again if you want to use encryption
 # Save changes to save the new version
 
 This will download a file called ''upgrade.html'' to your computer. This file is the upgrade of your old file. You may need to open the location where ''upgrade.html'' was downloaded, rename ''upgrade.html'' with the name of the old file you are upgrading, and replace the old file by moving the new file in its place.
@@ -43,4 +34,7 @@ You can also download http://tiddlywiki.com/upgrade.html locally and perform the
 
 ! Problems with Upgrades
 
-Particularly during the beta, it is possible for a customisation applied in a previous version to break when upgraded to the latest version. Use SafeMode to investigate and fix these problems.
+Particularly during the beta, it is possible for a customisation applied in a previous version to break when upgraded to the latest version. There are two techniques you can use to help track down issues:
+
+* Try repeating the upgrade having selectively unchecked any tiddlers that may be applying customisations to TiddlyWiki
+* Use SafeMode to disable all customisations of shadow tiddlers
