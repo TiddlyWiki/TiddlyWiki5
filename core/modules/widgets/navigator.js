@@ -415,7 +415,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 	} catch(e) {
 	}
 	// Get the current $:/Import tiddler
-	var importTiddler = this.wiki.getTiddler(IMPORT_TITLE) || {fields: {}},
+	var importTiddler = this.wiki.getTiddler(IMPORT_TITLE),
 		importData = this.wiki.getTiddlerData(IMPORT_TITLE,{}),
 		newFields = new Object({
 			title: IMPORT_TITLE,
@@ -467,14 +467,14 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 // 
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
-		importTiddler = this.wiki.getTiddler(event.param) || {fields: {}},
+		importTiddler = this.wiki.getTiddler(event.param),
 		importData = this.wiki.getTiddlerData(event.param,{tiddlers: {}}),
 		importReport = [];
 	// Add the tiddlers to the store
 	importReport.push("The following tiddlers were imported:\n");
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
-		if(title && importTiddler.fields["selection-" + title] !== "unchecked") {
+		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
 			self.wiki.addTiddler(new $tw.Tiddler(tiddlerFields));
 			importReport.push("# [[" + tiddlerFields.title + "]]");
 		}
