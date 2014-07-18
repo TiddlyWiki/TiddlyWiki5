@@ -6,7 +6,7 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 
 ! Settings
 
-* Font family: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/>
+* [[Font family|$:/themes/tiddlywiki/vanilla/settings/fontfamily]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/>
 
 ! Sizes
 
