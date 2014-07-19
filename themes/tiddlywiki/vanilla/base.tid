@@ -825,6 +825,10 @@ canvas.tw-edit-bitmapeditor  {
 ** Dropdowns
 */
 
+.btn-dropdown {
+	text-align: left;
+}
+
 .btn-dropdown svg {
 	height: 1em;
 	width: 1em;

@@ -17,12 +17,12 @@ System tags are used to give special behaviour to tiddlers:
 * [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
 * [[$:/tags/PageControls]] for the page control tools in the sidebar
 * [[$:/tags/PageTemplate]] for the main page elements
-* [[$:/tags/StoryBackdrop]] for elements to be placed at the top of the story river
-* [[$:/tags/StoryFrontdrop]] for elements to be placed at the bottom of the story river
+* [[$:/tags/AboveStory]] for elements to be placed at the top of the story river
+* [[$:/tags/BelowStory]] for elements to be placed at the bottom of the story river
 * [[$:/tags/RawMarkup]] for raw markup to be included in the generated HTML file
 
 ! System tags in use
 
 These are the system tags in use in this wiki:
 
-{{{ [all[shadows+tiddlers]tags[]prefix[$:/]] +[sort[title]] }}}
+{{{ [all[shadows+tiddlers]tags[]prefix[$:/]sort[title]] }}}

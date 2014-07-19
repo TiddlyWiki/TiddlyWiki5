@@ -1,44 +1,30 @@
 created: 20130823203800000
-modified: 20140621201725471
+modified: 20140715081725471
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
 
-TiddlyWiki is under rapid development at the moment as it moves through beta to a full release.
+TiddlyWiki is under rapid development at the moment as it moves through beta to a full release. That is the point at which it is declared stable enough for general use. It will continue to improve and evolve, but constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the future.
 
-! Beta
+The plan is for the full release to take place in September 2014, around the time of TiddlyWiki's tenth anniversary.
 
-During the beta ~TiddlyWiki will be practical for cautious everyday use but as we perfect the product there will occasionally be situations where we have to make changes that are not backwards compatible. These occasions will be clearly marked in the release notes.
+! Deferred Tasks
 
-The following additional features are planned or under consideration for implementation during the beta:
+Some important features were deferred to be added after the beta:
 
-* Features to improve user data integrity
-** Optional defensive backups with TiddlyFox and TiddlyDesktop
-* Features required for large scale adoption
-** Improve upgrade process
-** Establish plugin library
-** ~~Proper use of ARIA roles (in progress)~~
+* Establish online plugin library
 * Fixing hangovers from TiddlyWikiClassic
-** ~TiddlyWiki file format (to avoid illegal attribute names)
-** Tiddler object format (to provide true polymorphism of field values)
-* Perfecting WikiText
-** ~~Global macros~~
-** ~~`[img[url]]` for remote image embedding, and `[ext[url]]` for explicit external links~~
-** Further ~WikiText features
-* Productivity features
-** Import wizard allowing individual tiddlers to be selected for import
-** Aliases
-** Search and replace
-** Tiddler renaming
-** Rich link tooltips, incorporating a preview
-** Keyboard shortcuts
-** Keyboard snippet expansion in the text editor
-** List editor with drag and drop
-** Selective/weighted searching by title, body and fields
-** Maths notation
+* ~TiddlyWiki file format (to avoid illegal attribute names)
+* Tiddler object format (to provide true polymorphism of field values)
+* Aliases
+* Search and replace
+* Tiddler renaming
+* Rich link tooltips, incorporating a preview
+* More keyboard shortcuts
+* Keyboard snippet expansion in the text editor
+* List editor with drag and drop
+* Selective/weighted searching by title, body and fields
+* Maths notation
 
 Also see the issues list on GitHub: https://github.com/Jermolene/TiddlyWiki5
 
-! General Release
-
-TiddlyWiki will [[leave beta|TiddlyWiki5 Versioning]] and become a full release in the summer of 2014. That is the point at which it is declared stable enough for general use. It will continue to improve and evolve after this point, although constrained to remain backwards compatible so that plugins and content created for version 5.0 will continue to work into the indefinite future.
