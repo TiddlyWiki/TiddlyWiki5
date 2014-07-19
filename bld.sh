@@ -41,6 +41,15 @@ node ./tiddlywiki.js \
 	--build favicon empty static index \
 	|| exit 1
 
+# upgrade.html: custom edition for handling upgrades
+
+node ./tiddlywiki.js \
+	./editions/upgrade \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--build upgrade \
+	|| exit 1
+
 # encrypted.html: a version of the main file encrypted with the password "password"
 
 node ./tiddlywiki.js \

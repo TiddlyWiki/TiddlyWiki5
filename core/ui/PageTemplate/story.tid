@@ -5,7 +5,7 @@ tags: $:/tags/PageTemplate
 
 <section class="story-backdrop">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/StoryBackdrop]!has[draft.of]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]">
 
 <$transclude/>
 
@@ -17,7 +17,7 @@ tags: $:/tags/PageTemplate
 
 <section class="story-frontdrop">
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/StoryFrontdrop]!has[draft.of]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/BelowStory]!has[draft.of]]">
 
 <$transclude/>
 

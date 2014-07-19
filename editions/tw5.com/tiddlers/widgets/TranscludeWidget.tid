@@ -1,5 +1,5 @@
 created: 20130824142500000
-modified: 20140526175900970
+modified: 20140717175900970
 tags: widget
 title: TranscludeWidget
 type: text/vnd.tiddlywiki
@@ -14,6 +14,7 @@ The TranscludeWidget dynamically imports content from another tiddler.
 |tiddler |The title of the tiddler to transclude (defaults to the current tiddler) |
 |field |The field name of the current tiddler (defaults to "text"; if present takes precedence over the index attribute) |
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] |
+|subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
 |mode |Override the default parsing mode for the transcluded text to "block" or "inline" |
 
 The TranscludeWidget treats any contained content as a fallback if the target of the transclusion is not defined (ie a missing tiddler or a missing field).
@@ -55,3 +56,14 @@ This can be fixed by amending tiddler "A":
 #<$transclude tiddler="B" mode="block"/>
 # Item two
 ```
+
+! SubTiddler Access
+
+The transclude widget allows access to the individual tiddlers stored within a [[plugin|Plugins]].
+
+The following example will transclude the core version of the tiddler [[$:/DefaultTiddlers]] even if it has been overridden:
+
+<<wikitext-example-without-html '
+<$transclude tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>
+
+'>>

@@ -55,22 +55,52 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
-	return tiddler ? tiddler.hasTag(this.checkboxTag) : false;
+	if(tiddler) {
+		if(this.checkboxTag) {
+			return tiddler.hasTag(this.checkboxTag);
+		}
+		if(this.checkboxField) {
+			var value = tiddler.fields[this.checkboxField] || this.checkboxDefault || "";
+			if(value === this.checkboxChecked) {
+				return true;
+			}
+			if(value === this.checkboxUnchecked) {
+				return false;
+			}
+		}
+	}
+	return false;
 };
 
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	var checked = this.inputDomNode.checked,
-		tiddler = this.wiki.getTiddler(this.checkboxTitle);
-	if(tiddler && tiddler.hasTag(this.checkboxTag) !== checked) {
-		var newTags = (tiddler.fields.tags || []).slice(0),
-			pos = newTags.indexOf(this.checkboxTag);
-		if(pos !== -1) {
-			newTags.splice(pos,1);
+		tiddler = this.wiki.getTiddler(this.checkboxTitle),
+		newFields = {},
+		hasChanged = false;
+	if(tiddler) {
+		// Set the tag if specified
+		if(this.checkboxTag && tiddler.hasTag(this.checkboxTag) !== checked) {
+			newFields.tags = (tiddler.fields.tags || []).slice(0);
+			var pos = newFields.tags.indexOf(this.checkboxTag);
+			if(pos !== -1) {
+				newFields.tags.splice(pos,1);
+			}
+			if(checked) {
+				newFields.tags.push(this.checkboxTag);
+			}
+			hasChanged = true;
 		}
-		if(checked) {
-			newTags.push(this.checkboxTag);
+		// Set the field if specified
+		if(this.checkboxField) {
+			var value = checked ? this.checkboxChecked : this.checkboxUnchecked;
+			if(tiddler.fields[this.checkboxField] !== value) {
+				newFields[this.checkboxField] = value;
+				hasChanged = true;
+			}
 		}
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,{tags: newTags},this.wiki.getModificationFields()));
+		if(hasChanged) {
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,newFields,this.wiki.getModificationFields()));
+		}
 	}
 };
 
@@ -81,6 +111,10 @@ CheckboxWidget.prototype.execute = function() {
 	// Get the parameters from the attributes
 	this.checkboxTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	this.checkboxTag = this.getAttribute("tag");
+	this.checkboxField = this.getAttribute("field");
+	this.checkboxChecked = this.getAttribute("checked");
+	this.checkboxUnchecked = this.getAttribute("unchecked");
+	this.checkboxDefault = this.getAttribute("default");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -90,7 +124,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.field || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {

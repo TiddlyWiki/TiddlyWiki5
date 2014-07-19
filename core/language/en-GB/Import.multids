@@ -1,0 +1,12 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Cancel
+Listing/Hint: These tiddlers are ready to import:
+Listing/Import/Caption: Import
+Listing/Select/Caption: Select
+Listing/Status/Caption: Status
+Listing/Title/Caption: Title
+Upgrader/Plugins/Suppressed: Suppressed plugin (due to incoming <<incoming>>  being older than existing <<existing>>)
+Upgrader/Plugins/Upgraded: Upgraded plugin from <<incoming>> to <<upgraded>>
+Upgrader/System/Suppressed: Suppressed system tiddler
+Upgrader/ThemeTweaks/Created: Migrated theme tweak from <$text text=<<from>>/>

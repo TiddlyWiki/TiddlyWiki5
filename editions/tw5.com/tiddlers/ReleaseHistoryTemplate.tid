@@ -1,7 +1,7 @@
 title: ReleaseHistoryTemplate
 
-<h2><$link ><$view field="title"/></$link></h2>
+<h2><$link to=<<currentTab>>><$view tiddler=<<currentTab>> field="title"/></$link></h2>
 
-^^Released <$view field="released" format="date" template="DDth MMM YYYY at 0hh:0mm">TBA</$view>^^
+^^Released <$view tiddler=<<currentTab>> field="released" format="date" template="DDth MMM YYYY at 0hh:0mm">TBA</$view>^^
 
-<$transclude/>
+<$transclude tiddler=<<currentTab>> />

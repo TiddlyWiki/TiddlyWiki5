@@ -1,0 +1,38 @@
+title: UpgradeMechanism
+modified: 20140711090154150
+created: 20140711090154150
+tags: mechanism
+
+# Open upgrade.html
+# Includes a data tiddler called `$:/UpgradeLibrary` that contains the latest compatible versions of all plugins in the library
+# Drag in old wiki file
+# Place tiddlers into a data tiddler `$:/Import` that is typed as a "pending import"
+# Kick off import processing for each tiddler
+## Give each "upgrader" module a chance to inspect the incoming tiddlers
+## Upgrader modules can trigger actions for each tiddler:
+##* Display a warning message
+##* Don't import
+##* Replace with another tiddler from the upgrade library
+##* Disable incompatible plugins
+# Display the newly created pending import tiddler through a new view template segment
+## Displays the payload tiddlers as a list of titles and checkboxes, with a dropdown showing the full details of the tiddler
+## Perhaps we also suppress the usual JSON display for data tiddlers behind a reveal widget
+# The user can adjust the selection checkboxes
+# Clicking "done" unpacks the selected tiddlers from the pending import tiddler
+# The pending import tiddler and the upgrade library tiddler are excluded from the subsequent save operation
+
+! ToDo
+
+* Incoming tiddler preview
+* ~~Better display text for plugins~~
+* ~~Better handling of encrypted upgrades~~
+* Docs
+* ~~Add upgrade plugin containing instructions and one-shot UI~~
+* ~~Suppressing $:/UpgradeLibrary and upgrade plugin from save~~
+* ~~Checkboxes~~
+* ~~Visual difference for suppressed tiddlers~~
+* Translation of upgrade wizard
+
+! NoToDo
+
+* Grouping plugins - not possible without extending the core

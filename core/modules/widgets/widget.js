@@ -136,7 +136,7 @@ Widget.prototype.substituteVariableParameters = function(text,formalParams,actua
 
 Widget.prototype.substituteVariableReferences = function(text) {
 	var self = this;
-	return text.replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
+	return (text || "").replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
 		return self.getVariable(p1,{defaultValue: ""});
 	});
 };
