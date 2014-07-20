@@ -615,7 +615,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name + ".js") || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName + ".js") ,
 		_exports = {},
 		sandbox = {
-			module: {},
+			module: {exports: _exports},
 			//moduleInfo: moduleInfo,
 			exports: _exports,
 			console: console,
