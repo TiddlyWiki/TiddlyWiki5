@@ -16,7 +16,7 @@ The latest news, articles, resources and examples.
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
-<div class="tw-subtitle">Updated <$view field="modified" format="relativedate"/></div>
+<div class="tw-subtitle">Posted <$view field="modified" format="relativedate"/></div>
 
 <$transclude/>
 
