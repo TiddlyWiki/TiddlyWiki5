@@ -1,0 +1,12 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: 取消
+Listing/Hint: 这些条目已备妥导入：
+Listing/Import/Caption: 导入
+Listing/Select/Caption: 选择
+Listing/Status/Caption: 状态
+Listing/Title/Caption: 条目
+Upgrader/Plugins/Suppressed: 排除插件 (由于传入的 <<incoming>> 较现有版本 <<existing>> 旧)
+Upgrader/Plugins/Upgraded: 升级插件，从 <<incoming>> 到 <<upgraded>>
+Upgrader/System/Suppressed: 排除系统条目
+Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題
