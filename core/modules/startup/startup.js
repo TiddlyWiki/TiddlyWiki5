@@ -3,7 +3,7 @@ title: $:/core/modules/startup.js
 type: application/javascript
 module-type: startup
 
-This is the main application logic for both the client and server
+Miscellaneous startup logic for both the client and server.
 
 \*/
 (function(){

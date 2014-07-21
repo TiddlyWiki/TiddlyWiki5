@@ -1,8 +1,17 @@
 created: 20131129090249275
-modified: 20140206212022007
+modified: 20140720212022007
 tags: introduction
 title: GettingStarted
 type: text/vnd.tiddlywiki
+
+\define default-platform()
+GettingStarted - $(browser-name)$
+\end
+<$set name="browser-name" value={{$:/info/browser/name}}>
+<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tw-vertical"/>
+</$set>
+
+-----
 
 TiddlyWiki is very flexible, and there are many different ways to use it. Here we're focusing on using it as a standalone file in the browser, which is a good choice for most users as it doesn't require any special knowledge or tools. For more options you can also run [[TiddlyWiki on Node.js]].
 
