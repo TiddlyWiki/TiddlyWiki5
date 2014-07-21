@@ -1,4 +1,5 @@
 title: $:/editions/tw5.com/github-fork-ribbon
-tags: $:/tags/PageControls
+tags: $:/tags/PageTemplate
 
-<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#FA6A6A;"><$link to="ReleaseHistory"><<version>></$link></div></div>
+<div class="github-fork-ribbon-wrapper right"><div class="github-fork-ribbon"><a href="https://github.com/Jermolene/TiddlyWiki5" target="_blank">Fork me on ~GitHub</a></div>
+</div>
