@@ -4,7 +4,8 @@
 		"tiddlywiki/fullscreen",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
-		"tiddlywiki/github-fork-ribbon"
+		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/browser-sniff"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

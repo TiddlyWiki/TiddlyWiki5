@@ -4,7 +4,7 @@
 			"file": "bowser.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/core/modules/info/bowser/bowser.js",
+				"title": "$:/plugins/tiddlywiki/browser-sniff/bowser/bowser.js",
 				"module-type": "library"
 			}
 		}

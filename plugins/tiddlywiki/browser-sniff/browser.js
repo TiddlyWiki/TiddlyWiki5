@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/info/browser.js
+title: $:/plugins/tiddlywiki/browser-sniff/sniff.js
 type: application/javascript
 module-type: info
 
@@ -16,10 +16,9 @@ exports.getInfoTiddlerFields = function() {
 	var mapBoolean = function(value) {return value ? "yes" : "no"},
 		infoTiddlerFields = [];
 	// Basics
-	infoTiddlerFields.push({title: "$:/info/browser", text: mapBoolean(!!$tw.browser)});
 	if($tw.browser) {
 		// Mappings from tiddler titles (prefixed with "$:/info/browser/") to bowser.browser property name
-		var bowser = require("$:/core/modules/info/bowser/bowser.js"),
+		var bowser = require("$:/plugins/tiddlywiki/browser-sniff/bowser/bowser.js"),
 			mappings = [
 				["name","name","unknown"],
 				["version","version"],

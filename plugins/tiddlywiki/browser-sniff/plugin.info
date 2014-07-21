@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/browser-sniff",
+	"description": "Browser sniffing for TiddlyWiki",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}
