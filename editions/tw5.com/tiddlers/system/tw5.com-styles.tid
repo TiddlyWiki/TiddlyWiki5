@@ -4,16 +4,18 @@ tags: $:/tags/stylesheet
 @media (min-width: 600px) {
 
 	.tw-link-info {
-		-moz-column-count: 2;
-		-moz-column-gap: 10px;
-		-webkit-column-count: 2;
-		-webkit-column-gap: 10px;
-		column-count: 2;
-		column-gap: 10px;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+
+		-webkit-flex-wrap: wrap;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
 	}
 
 	.tw-link-info-item {
-		width: 100%;
+		max-width: 25em;
+		margin-right: 10px;
 	}
 
 }
