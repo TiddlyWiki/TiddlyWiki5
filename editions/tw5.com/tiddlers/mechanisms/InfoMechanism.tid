@@ -10,50 +10,5 @@ System tiddlers in the namespace `$:/info/` are used to expose information about
 
 |!Title |!Description |
 |[[$:/info/browser]] |Running in the browser? ("yes" or "no") |
-|[[$:/info/browser/has/tiddlyfox]] |Is TiddlyFox available? ("yes" or "no") |
-|[[$:/info/browser/is/android]] |Running on Android? ("yes" or "no")  |
-|[[$:/info/browser/is/bada]] |Running on Bada? ("yes" or "no")  |
-|[[$:/info/browser/is/blackberry]] |Running on Blackberry? ("yes" or "no")  |
-|[[$:/info/browser/is/chrome]] |Running on Chrome? ("yes" or "no")  |
-|[[$:/info/browser/is/firefox]] |Running on Firefox? ("yes" or "no")  |
-|[[$:/info/browser/is/firefoxos]] |Running on Firefox OS? ("yes" or "no")  |
-|[[$:/info/browser/is/gecko]] |Running on Gecko? ("yes" or "no")  |
-|[[$:/info/browser/is/ios]] |Running on iOS (ie an iPhone, iPad or iPod)? ("yes" or "no")  |
-|[[$:/info/browser/is/ipad]] |Running on iPad? ("yes" or "no")  |
-|[[$:/info/browser/is/iphone]] |Running on iPhone? ("yes" or "no")  |
-|[[$:/info/browser/is/ipod]] |Running on iPod? ("yes" or "no")  |
-|[[$:/info/browser/is/opera]] |Running on Opera? ("yes" or "no")  |
-|[[$:/info/browser/is/phantomjs]] |Running on PhantomJS? ("yes" or "no")  |
-|[[$:/info/browser/is/safari]] |Running on Safari? ("yes" or "no")  |
-|[[$:/info/browser/is/sailfish]] |Running on Sailfish? ("yes" or "no")  |
-|[[$:/info/browser/is/seamonkey]] |Running on Sea Monkey? ("yes" or "no")  |
-|[[$:/info/browser/is/silk]] |Running on Amazon's Silk? ("yes" or "no")  |
-|[[$:/info/browser/is/tiddlydesktop]] |Running on TiddlyDesktop? ("yes" or "no")  |
-|[[$:/info/browser/is/tizen]] |Running on Tizen? ("yes" or "no")  |
-|[[$:/info/browser/is/webkit]] |Running on WebKit? ("yes" or "no")  |
-|[[$:/info/browser/is/webos]] |Running on WebOS? ("yes" or "no")  |
-|[[$:/info/browser/is/windowsphone]] |Running on Windows Phone? ("yes" or "no")  |
-|[[$:/info/browser/name]] |Platform name (see below) |
-|[[$:/info/browser/version]] |Browser version |
+|[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |
 
-The browser information is obtained with [[Bowser, a browser detector library from Dustin Diaz|https://github.com/ded/bowser/]]. Possible browser names include:
-
-* ''"Amazon Silk"''
-* ''"Android"''
-* ''"Bada"''
-* ''"BlackBerry"''
-* ''"Chrome"''
-* ''"Firefox"''
-* ''"Internet Explorer"''
-* ''"iOS"''
-* ''"Opera"''
-* ''"PhantomJS"''
-* ''"Safari"''
-* ''"Sailfish"''
-* ''"SeaMonkey"''
-* ''"TiddlyDesktop"''
-* ''"Tizen"''
-* ''"WebOS"''
-* ''"Windows Phone"''
-
-Note that Bowser returns "iPhone", "iPad" and "iPod" as distinct values for the name of the current browser. TiddlyWiki converts all three distinct values into "iOS" before copying to [[$:/info/browser/name]].

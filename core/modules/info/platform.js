@@ -17,6 +17,7 @@ exports.getInfoTiddlerFields = function() {
 		infoTiddlerFields = [];
 	// Basics
 	infoTiddlerFields.push({title: "$:/info/browser", text: mapBoolean(!!$tw.browser)});
+	infoTiddlerFields.push({title: "$:/info/node", text: mapBoolean(!!$tw.node)});
 	return infoTiddlerFields;
 };
 
