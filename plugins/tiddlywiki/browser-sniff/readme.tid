@@ -5,7 +5,6 @@ This plugin adds a number of `$:/info/` tiddlers containing information about th
 ! Information Tiddlers
 
 |!Title |!Description |
-|[[$:/info/browser/has/tiddlyfox]] |Is TiddlyFox available? ("yes" or "no") |
 |[[$:/info/browser/is/android]] |Running on Android? ("yes" or "no")  |
 |[[$:/info/browser/is/bada]] |Running on Bada? ("yes" or "no")  |
 |[[$:/info/browser/is/blackberry]] |Running on Blackberry? ("yes" or "no")  |
@@ -23,7 +22,6 @@ This plugin adds a number of `$:/info/` tiddlers containing information about th
 |[[$:/info/browser/is/sailfish]] |Running on Sailfish? ("yes" or "no")  |
 |[[$:/info/browser/is/seamonkey]] |Running on Sea Monkey? ("yes" or "no")  |
 |[[$:/info/browser/is/silk]] |Running on Amazon's Silk? ("yes" or "no")  |
-|[[$:/info/browser/is/tiddlydesktop]] |Running on TiddlyDesktop? ("yes" or "no")  |
 |[[$:/info/browser/is/tizen]] |Running on Tizen? ("yes" or "no")  |
 |[[$:/info/browser/is/webkit]] |Running on WebKit? ("yes" or "no")  |
 |[[$:/info/browser/is/webos]] |Running on WebOS? ("yes" or "no")  |
