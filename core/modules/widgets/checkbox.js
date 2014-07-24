@@ -68,6 +68,18 @@ CheckboxWidget.prototype.getValue = function() {
 				return false;
 			}
 		}
+	} else {
+		if(this.checkboxTag) {
+			return false;
+		}
+		if(this.checkboxField) {
+			if(this.checkboxDefault === this.checkboxChecked) {
+				return true;
+			}
+			if(this.checkboxDefault === this.checkboxUnchecked) {
+				return false;
+			}
+		}
 	}
 	return false;
 };
@@ -75,32 +87,30 @@ CheckboxWidget.prototype.getValue = function() {
 CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	var checked = this.inputDomNode.checked,
 		tiddler = this.wiki.getTiddler(this.checkboxTitle),
-		newFields = {},
+		newFields = {title: this.checkboxTitle, text: ""},
 		hasChanged = false;
-	if(tiddler) {
-		// Set the tag if specified
-		if(this.checkboxTag && tiddler.hasTag(this.checkboxTag) !== checked) {
-			newFields.tags = (tiddler.fields.tags || []).slice(0);
-			var pos = newFields.tags.indexOf(this.checkboxTag);
-			if(pos !== -1) {
-				newFields.tags.splice(pos,1);
-			}
-			if(checked) {
-				newFields.tags.push(this.checkboxTag);
-			}
+	// Set the tag if specified
+	if(this.checkboxTag && (!tiddler || tiddler.hasTag(this.checkboxTag) !== checked)) {
+		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
+		var pos = newFields.tags.indexOf(this.checkboxTag);
+		if(pos !== -1) {
+			newFields.tags.splice(pos,1);
+		}
+		if(checked) {
+			newFields.tags.push(this.checkboxTag);
+		}
+		hasChanged = true;
+	}
+	// Set the field if specified
+	if(this.checkboxField) {
+		var value = checked ? this.checkboxChecked : this.checkboxUnchecked;
+		if(!tiddler || tiddler.fields[this.checkboxField] !== value) {
+			newFields[this.checkboxField] = value;
 			hasChanged = true;
 		}
-		// Set the field if specified
-		if(this.checkboxField) {
-			var value = checked ? this.checkboxChecked : this.checkboxUnchecked;
-			if(tiddler.fields[this.checkboxField] !== value) {
-				newFields[this.checkboxField] = value;
-				hasChanged = true;
-			}
-		}
-		if(hasChanged) {
-			this.wiki.addTiddler(new $tw.Tiddler(tiddler,newFields,this.wiki.getModificationFields()));
-		}
+	}
+	if(hasChanged) {
+		this.wiki.addTiddler(new $tw.Tiddler(tiddler,newFields,this.wiki.getModificationFields()));
 	}
 };
 
