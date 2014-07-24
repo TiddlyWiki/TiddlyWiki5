@@ -1,3 +1,5 @@
 title: $:/core/ui/TiddlerInfo
 
+<$button message="tw-permalink" title={{$:/language/Buttons/Permalink/Hint}} aria-label={{$:/language/Buttons/Permalink/Caption}}>{{$:/language/Buttons/Permalink/Caption}}</$button> <$button message="tw-permaview" title={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}}>{{$:/language/Buttons/Permaview/Caption}}</$button> <$button message="tw-new-tiddler" param=<<currentTiddler>> title={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}}>{{$:/language/Buttons/Clone/Caption}}</$button>
+
 <<tabs "[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/References">>

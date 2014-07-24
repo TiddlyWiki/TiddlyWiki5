@@ -4,6 +4,8 @@ AdvancedSearch/Caption: advanced search
 AdvancedSearch/Hint: Advanced search
 Cancel/Caption: cancel
 Cancel/Hint: Cancel editing this tiddler
+Clone/Caption: clone
+Clone/Hint: Clone this tiddler
 Close/Caption: close
 Close/Hint: Close this tiddler
 ControlPanel/Caption: control panel
@@ -16,6 +18,10 @@ Info/Caption: info
 Info/Hint: Show information for this tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+Permalink/Caption: permalink
+Permalink/Hint: Set browser address bar to a direct link to this tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
 Save/Caption: save
 Save/Hint: Save this tiddler
 SaveWiki/Caption: save changes
