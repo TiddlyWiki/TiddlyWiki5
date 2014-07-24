@@ -65,6 +65,4 @@ While TiddlyWiki's extended [[WikiText]] is similar in design to HTML templating
 
 In this respect, it's closer to a glue language like Qt Quick or Python with Javascript filling the "create new components" role of C/C++ in widget toolkits like Qt and GTK+.
 
-{{Page Composition.svg}}
-
 To familiarize yourself with this, read [[Widgets in WikiText]] and [[Introduction to Filters]]. then examine the internals for a tiddler like [[TaskManagementExample]].
