@@ -36,10 +36,10 @@ exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 
-    // Parse the run including the terminator
+	// Parse the run including the terminator
 	var tree = this.parser.parseInlineRun(/''/mg,{eatTerminator: true});
 
-    // Return the classed span
+	// Return the classed span
 	return [{
 		type: "element",
 		tag: "strong",

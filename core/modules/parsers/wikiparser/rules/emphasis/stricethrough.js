@@ -39,7 +39,7 @@ exports.parse = function() {
     // Parse the run including the terminator
 	var tree = this.parser.parseInlineRun(/~~/mg,{eatTerminator: true});
 
-    // Return the classed span
+	// Return the classed span
 	return [{
 		type: "element",
 		tag: "strike",
