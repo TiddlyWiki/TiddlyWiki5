@@ -4,6 +4,8 @@ AdvancedSearch/Caption: 高级查找
 AdvancedSearch/Hint: 高级查找
 Cancel/Caption: 取消
 Cancel/Hint: 取消编辑此条目
+Clone/Caption: 克隆
+Clone/Hint: 克隆此条目
 Close/Caption: 关闭
 Close/Hint: 关闭此条目
 ControlPanel/Caption: 控制台
@@ -16,6 +18,10 @@ Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 NewTiddler/Caption: 添加条目
 NewTiddler/Hint: 创建一新条目
+Permalink/Caption: 引用连结
+Permalink/Hint: 设定浏览器网址栏为直接连结到此条目
+Permaview/Caption: 永久连结
+Permaview/Hint: 设定浏览器网址栏为直接连结到当前所有已开启条目
 Save/Caption: 保存
 Save/Hint: 保存此条目
 SaveWiki/Caption: 保存变更
