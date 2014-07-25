@@ -4,6 +4,8 @@ AdvancedSearch/Caption: 進階搜尋
 AdvancedSearch/Hint: 進階搜尋
 Cancel/Caption: 取消
 Cancel/Hint: 取消編輯此條目
+Clone/Caption: 複製
+Clone/Hint: 複製此條目
 Close/Caption: 關閉
 Close/Hint: 關閉此條目
 ControlPanel/Caption: 控制台
@@ -16,6 +18,10 @@ Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一新條目
+Permalink/Caption: 引用連結
+Permalink/Hint: 設定瀏覽器網址列為直接連結到此條目
+Permaview/Caption: 固定連結
+Permaview/Hint: 設定瀏覽器網址列為直接連結到當前所有已開啟條目
 Save/Caption: 儲存
 Save/Hint: 儲存此條目
 SaveWiki/Caption: 儲存變更
