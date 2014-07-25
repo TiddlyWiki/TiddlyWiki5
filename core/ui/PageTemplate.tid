@@ -6,6 +6,10 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 
+<$set name="tw-config-toolbar-icons" value={{$:/config/Toolbar/Icons}}>
+
+<$set name="tw-config-toolbar-text" value={{$:/config/Toolbar/Text}}>
+
 <$set name="themeTitle" value={{$:/view}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
@@ -31,6 +35,10 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
+
+</$set>
 
 </$set>
 
