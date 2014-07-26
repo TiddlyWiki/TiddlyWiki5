@@ -19,6 +19,10 @@ Advanced/Settings/NavigationHistory/Caption: Navigation History
 Advanced/Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
 Advanced/Settings/NavigationHistory/No/Description: Do not update history
 Advanced/Settings/NavigationHistory/Yes/Description: Update history
+Advanced/Settings/ToolbarButtons/Caption: Toolbar Buttons
+Advanced/Settings/ToolbarButtons/Hint: Default toolbar button appearance:
+Advanced/Settings/ToolbarButtons/Text/Description: Include text
+Advanced/Settings/ToolbarButtons/Icons/Description: Include icon
 Advanced/TiddlerFields/Caption: Tiddler Fields
 Advanced/TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
 Appearance/Caption: Appearance
