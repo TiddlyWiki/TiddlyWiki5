@@ -1,5 +1,21 @@
 title: $:/core/ui/TiddlerInfo
 
-<$button message="tw-permalink" title={{$:/language/Buttons/Permalink/Hint}} aria-label={{$:/language/Buttons/Permalink/Caption}}>{{$:/language/Buttons/Permalink/Caption}}</$button> <$button message="tw-permaview" title={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}}>{{$:/language/Buttons/Permaview/Caption}}</$button> <$button message="tw-new-tiddler" param=<<currentTiddler>> title={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}}>{{$:/language/Buttons/Clone/Caption}}</$button> <$button message="tw-close-other-tiddlers" param=<<currentTiddler>> title={{$:/language/Buttons/CloseOthers/Hint}} aria-label={{$:/language/Buttons/CloseOthers/Caption}}>{{$:/language/Buttons/CloseOthers/Caption}}</$button>
+\define config-title()
+$:/config/Buttons/Hide/$(listItem)$
+\end
+
+<$set name="tw-config-toolbar-icons" value="yes">
+
+<$set name="tw-config-toolbar-text" value="yes">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
+
+<$transclude tiddler=<<listItem>>/> (<$checkbox tiddler=<<config-title>> field="text" checked="no" unchecked="yes" default="no"> Show in toolbar</$checkbox>)
+
+</$list>
+
+</$set>
+
+</$set>
 
 <<tabs "[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/References">>
