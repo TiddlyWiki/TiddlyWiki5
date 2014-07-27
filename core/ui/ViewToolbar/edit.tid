@@ -1,4 +1,11 @@
 title: $:/core/ui/ViewToolbar/edit
 tags: $:/tags/ViewToolbar
 
-<$button message="tw-edit-tiddler" title={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class="btn-invisible">{{$:/core/images/edit-button}}</$button>
+<$button message="tw-edit-tiddler" title={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class="btn-invisible">
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/edit-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Edit/Caption}}/>
+</$list>
+</$button>
