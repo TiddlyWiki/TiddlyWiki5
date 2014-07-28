@@ -4,7 +4,7 @@ tags: $:/tags/ViewToolbar
 \define config-title()
 $:/config/Buttons/Hide/$(listItem)$
 \end
-<$button popup=<<qualify "$:/state/popup/more">> title={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class="btn-invisible">
+<$button popup=<<qualify "$:/state/popup/more">> title={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class="btn-invisible" selectedClass="tw-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/down-arrow}}
 </$list>
