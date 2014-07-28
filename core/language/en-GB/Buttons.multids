@@ -20,6 +20,8 @@ Info/Caption: info
 Info/Hint: Show information for this tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+More/Caption: more
+More/Hint: More actions
 Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
