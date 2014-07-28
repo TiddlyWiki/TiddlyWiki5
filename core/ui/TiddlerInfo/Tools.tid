@@ -1,5 +1,8 @@
-title: $:/core/ui/TiddlerInfo
+title: $:/core/ui/TiddlerInfo/Tools
+tags: $:/tags/TiddlerInfo
+caption: {{$:/language/TiddlerInfo/Tools/Caption}}
 
+\define lingo-base() $:/language/TiddlerInfo/
 \define config-title()
 $:/config/Buttons/Hide/$(listItem)$
 \end
@@ -17,5 +20,3 @@ $:/config/Buttons/Hide/$(listItem)$
 </$set>
 
 </$set>
-
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/References">>
