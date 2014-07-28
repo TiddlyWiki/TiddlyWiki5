@@ -1,0 +1,3 @@
+title: $:/core/ui/TiddlerInfo
+
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/Tools">>
