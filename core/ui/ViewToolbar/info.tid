@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/info
+title: $:/core/ui/Buttons/info
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/info-button}} {{$:/language/Buttons/Info/Caption}}
 

@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/clone
+title: $:/core/ui/Buttons/clone
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/clone-button}} {{$:/language/Buttons/Clone/Caption}}
 

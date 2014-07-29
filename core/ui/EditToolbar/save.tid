@@ -1,4 +1,4 @@
-title: $:/core/ui/EditToolbar/save
+title: $:/core/ui/Buttons/save
 tags: $:/tags/EditToolbar
 caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 

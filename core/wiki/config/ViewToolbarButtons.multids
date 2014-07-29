@@ -1,7 +1,7 @@
 title: $:/config/ViewToolbarButtons/Visibility/$:/
 
-core/ui/ViewToolbar/clone: hide
-core/ui/ViewToolbar/close-others: hide
-core/ui/ViewToolbar/more: hide
-core/ui/ViewToolbar/permalink: hide
-core/ui/ViewToolbar/permaview: hide
+core/ui/Buttons/clone: hide
+core/ui/Buttons/close-others: hide
+core/ui/Buttons/more: hide
+core/ui/Buttons/permalink: hide
+core/ui/Buttons/permaview: hide

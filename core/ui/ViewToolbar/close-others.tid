@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/close-others
+title: $:/core/ui/Buttons/close-others
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/close-others-button}} {{$:/language/Buttons/CloseOthers/Caption}}
 

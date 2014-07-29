@@ -1,4 +1,4 @@
-title: $:/core/ui/PageControls/save-wiki
+title: $:/core/ui/Buttons/save-wiki
 tags: $:/tags/PageControls
 caption: {{$:/core/images/save-button}} {{$:/language/Buttons/SaveWiki/Caption}}
 

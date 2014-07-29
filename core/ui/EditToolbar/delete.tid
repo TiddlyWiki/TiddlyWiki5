@@ -1,4 +1,4 @@
-title: $:/core/ui/EditToolbar/delete
+title: $:/core/ui/Buttons/delete
 tags: $:/tags/EditToolbar
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 

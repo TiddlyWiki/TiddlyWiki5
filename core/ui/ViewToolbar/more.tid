@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/more
+title: $:/core/ui/Buttons/more
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
 
@@ -17,7 +17,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 <div class="tw-drop-down">
 <$set name="tw-config-toolbar-icons" value="yes">
 <$set name="tw-config-toolbar-text" value="yes">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/ViewToolbar/more]]" variable="listItem">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more]]" variable="listItem">
 <$reveal type="match" state=<<config-title>> text="hide">
 <$transclude tiddler=<<listItem>>/>
 </$reveal>

@@ -1,4 +1,4 @@
-title: $:/core/ui/PageControls/new-tiddler
+title: $:/core/ui/Buttons/new-tiddler
 tags: $:/tags/PageControls
 caption: {{$:/core/images/new-button}} {{$:/language/Buttons/NewTiddler/Caption}}
 

@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/permaview
+title: $:/core/ui/Buttons/permaview
 tags: $:/tags/ViewToolbar $:/tags/PageControls
 caption: {{$:/core/images/permaview-button}} {{$:/language/Buttons/Permaview/Caption}}
 

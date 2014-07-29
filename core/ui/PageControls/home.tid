@@ -1,4 +1,4 @@
-title: $:/core/ui/PageControls/home
+title: $:/core/ui/Buttons/home
 tags: $:/tags/PageControls
 caption: {{$:/core/images/home-button}} {{$:/language/Buttons/Home/Caption}}
 

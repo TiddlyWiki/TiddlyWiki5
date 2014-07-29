@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/permalink
+title: $:/core/ui/Buttons/permalink
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/permalink-button}} {{$:/language/Buttons/Permalink/Caption}}
 

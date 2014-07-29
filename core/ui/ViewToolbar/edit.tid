@@ -1,4 +1,4 @@
-title: $:/core/ui/ViewToolbar/edit
+title: $:/core/ui/Buttons/edit
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
 

@@ -1,4 +1,4 @@
-title: $:/core/ui/EditToolbar/cancel
+title: $:/core/ui/Buttons/cancel
 tags: $:/tags/EditToolbar
 caption: {{$:/core/images/cancel-button}} {{$:/language/Buttons/Cancel/Caption}}
 
