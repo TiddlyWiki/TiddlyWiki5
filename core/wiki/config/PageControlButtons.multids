@@ -1,0 +1,4 @@
+title: $:/config/PageControlButtons/Visibility/$:/
+
+core/ui/Buttons/home: hide
+core/ui/Buttons/permaview: hide

@@ -198,7 +198,7 @@ exports.compileFilter = function(filterString) {
 					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
 				}
 				if(operator.variable) {
-					operand = widget.getVariable(operator.operand,"");
+					operand = widget.getVariable(operator.operand,{defaultValue: ""});
 				}
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,

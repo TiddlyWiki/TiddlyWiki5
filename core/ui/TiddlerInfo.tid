@@ -1,21 +1,3 @@
 title: $:/core/ui/TiddlerInfo
 
-\define config-title()
-$:/config/Buttons/Hide/$(listItem)$
-\end
-
-<$set name="tw-config-toolbar-icons" value="yes">
-
-<$set name="tw-config-toolbar-text" value="yes">
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
-
-<$transclude tiddler=<<listItem>>/> (<$checkbox tiddler=<<config-title>> field="text" checked="no" unchecked="yes" default="no"> Show in toolbar</$checkbox>)
-
-</$list>
-
-</$set>
-
-</$set>
-
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/References">>
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/TiddlerInfo]!has[draft.of]]" "$:/core/ui/TiddlerInfo/Tools">>

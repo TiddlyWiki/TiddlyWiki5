@@ -1,2 +1,2 @@
 title: $:/tags/PageControls
-list: [[$:/core/ui/PageControls/new-tiddler]] [[$:/core/ui/PageControls/control-panel]] [[$:/core/ui/PageControls/save-wiki]]
+list: [[$:/core/ui/Buttons/home]] [[$:/core/ui/Buttons/permaview]] [[$:/core/ui/Buttons/new-tiddler]] [[$:/core/ui/Buttons/control-panel]] [[$:/core/ui/Buttons/save-wiki]]

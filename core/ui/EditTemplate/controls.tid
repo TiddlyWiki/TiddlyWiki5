@@ -1,4 +1,7 @@
 title: $:/core/ui/EditTemplate/controls
 tags: $:/tags/EditTemplate
 
-<span class="tw-tiddler-controls titlebar"> <$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list> </span>
+\define config-title()
+$:/config/EditToolbarButtons/Visibility/$(listItem)$
+\end
+<span class="tw-tiddler-controls titlebar"><$list filter="[all[shadows+tiddlers]tag[$:/tags/EditToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list></span>

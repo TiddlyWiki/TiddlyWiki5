@@ -1,2 +1,2 @@
 title: $:/tags/ViewToolbar
-list: [[$:/core/ui/ViewToolbar/info]] [[$:/core/ui/ViewToolbar/edit]] [[$:/core/ui/ViewToolbar/close]]
+list: [[$:/core/ui/Buttons/more]] [[$:/core/ui/Buttons/info]] [[$:/core/ui/Buttons/clone]] [[$:/core/ui/Buttons/edit]] [[$:/core/ui/Buttons/permalink]] [[$:/core/ui/Buttons/permaview]] [[$:/core/ui/Buttons/close-others]] [[$:/core/ui/Buttons/close]]

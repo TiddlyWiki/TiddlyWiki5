@@ -1,7 +1,8 @@
-title: $:/core/ui/ViewToolbar/permalink
+title: $:/core/ui/Buttons/permalink
 tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/permalink-button}} {{$:/language/Buttons/Permalink/Caption}}
 
-<$button message="tw-permalink" title={{$:/language/Buttons/Permalink/Hint}} aria-label={{$:/language/Buttons/Permalink/Caption}} class="btn-invisible">
+<$button message="tw-permalink" title={{$:/language/Buttons/Permalink/Hint}} aria-label={{$:/language/Buttons/Permalink/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/permalink-button}}
 </$list>

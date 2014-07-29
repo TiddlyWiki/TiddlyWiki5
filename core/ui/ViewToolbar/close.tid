@@ -1,7 +1,8 @@
-title: $:/core/ui/ViewToolbar/close
+title: $:/core/ui/Buttons/close
 tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 
-<$button message="tw-close-tiddler" title={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="btn-invisible">
+<$button message="tw-close-tiddler" title={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/close-button}}
 </$list>

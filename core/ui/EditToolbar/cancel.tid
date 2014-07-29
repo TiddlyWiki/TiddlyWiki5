@@ -1,4 +1,12 @@
-title: $:/core/ui/EditToolbar/cancel
+title: $:/core/ui/Buttons/cancel
 tags: $:/tags/EditToolbar
+caption: {{$:/core/images/cancel-button}} {{$:/language/Buttons/Cancel/Caption}}
 
-<$button message="tw-cancel-tiddler" title={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class="btn-invisible">{{$:/core/images/cancel-button}}</$button>
+<$button message="tw-cancel-tiddler" title={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/cancel-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Cancel/Caption}}/>
+</$list>
+</$button>

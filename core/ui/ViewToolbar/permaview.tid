@@ -1,7 +1,8 @@
-title: $:/core/ui/ViewToolbar/permaview
-tags: $:/tags/ViewToolbar
+title: $:/core/ui/Buttons/permaview
+tags: $:/tags/ViewToolbar $:/tags/PageControls
+caption: {{$:/core/images/permaview-button}} {{$:/language/Buttons/Permaview/Caption}}
 
-<$button message="tw-permaview" title={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class="btn-invisible">
+<$button message="tw-permaview" title={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/permaview-button}}
 </$list>

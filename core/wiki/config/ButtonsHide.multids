@@ -1,6 +1,0 @@
-title: $:/config/Buttons/Hide/$:/
-
-core/ui/ViewToolbar/permalink: yes
-core/ui/ViewToolbar/permaview: yes
-core/ui/ViewToolbar/close-others: yes
-core/ui/ViewToolbar/clone: yes

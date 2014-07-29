@@ -10,6 +10,8 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 
 <$set name="tw-config-toolbar-text" value={{$:/config/Toolbar/Text}}>
 
+<$set name="tw-config-toolbar-class" value="btn-invisible">
+
 <$set name="themeTitle" value={{$:/view}}>
 
 <$set name="currentTiddler" value={{$:/language}}>
@@ -35,6 +37,8 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 </$navigator>
 
 </div>
+
+</$set>
 
 </$set>
 

@@ -234,6 +234,10 @@ a.tw-tiddlylink-external:hover {
 ** Buttons
 */
 
+button svg {
+	vertical-align: middle;
+}
+
 .btn-invisible {
 	padding: 0;
 	margin: 0;
@@ -276,6 +280,7 @@ a.tw-tiddlylink-external:hover {
 
 .tw-image-button {
 	height: 1em;
+	width: 1em;
 }
 
 /*
@@ -378,10 +383,6 @@ a.tw-tiddlylink-external:hover {
 	width: 60%;
 }
 
-.tw-search {
-	padding-top: 14px;
-}
-
 .tw-search a svg {
 	height: 0.75em;
 }
@@ -392,6 +393,11 @@ a.tw-tiddlylink-external:hover {
 
 .tw-page-controls {
 	margin-top: 14px;
+	font-size: 1.5em;
+}
+
+.tw-page-controls button {
+	margin-right: 0.5em;
 }
 
 .tw-page-controls a.tw-tiddlylink:hover {
@@ -399,9 +405,6 @@ a.tw-tiddlylink-external:hover {
 }
 
 .tw-page-controls svg {
-	height: 1.75em;
-	min-width: 1px;
-	padding-right: 0.5em;
 	fill: <<colour sidebar-controls-foreground>>;
 }
 
@@ -603,8 +606,11 @@ a.tw-tiddlylink-external:hover {
 	float: right;
 }
 
+.tw-tiddler-controls .tw-drop-down {
+	font-size: 0.6em;
+}
+
 .tw-tiddler-controls button {
-	margin: 0 0 0 5px;
 	vertical-align: baseline;
 }
 
@@ -844,16 +850,26 @@ canvas.tw-edit-bitmapeditor  {
 	white-space: nowrap;
 }
 
+.tw-drop-down button svg {
+	fill: <<colour foreground>>;
+}
+
+.tw-drop-down button.btn-invisible:hover svg {
+	fill: <<colour foreground>>;
+}
+
 .tw-drop-down p {
 	padding: 0 14px 0 14px;
 }
 
-.tw-drop-down a {
+.tw-drop-down a, .tw-drop-down button {
 	display: block;
 	padding: 0 14px 0 14px;
+	width: 100%;
+	text-align: left;
 }
 
-.tw-drop-down a:hover {
+.tw-drop-down a:hover, .tw-drop-down button:hover {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;

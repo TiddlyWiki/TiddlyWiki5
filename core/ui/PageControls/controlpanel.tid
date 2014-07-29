@@ -1,4 +1,12 @@
-title: $:/core/ui/PageControls/control-panel
+title: $:/core/ui/Buttons/control-panel
 tags: $:/tags/PageControls
+caption: {{$:/core/images/options-button}} {{$:/language/Buttons/ControlPanel/Caption}}
 
-<$button to="$:/ControlPanel" title={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class="btn-invisible">{{$:/core/images/options-button}}</$button>
+<$button to="$:/ControlPanel" title={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/options-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/ControlPanel/Caption}}/>
+</$list>
+</$button>

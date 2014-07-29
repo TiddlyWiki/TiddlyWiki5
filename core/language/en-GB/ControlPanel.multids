@@ -40,6 +40,14 @@ Appearance/StoryView/Caption: Story View
 Appearance/StoryView/Prompt: Current view:
 Appearance/Theme/Caption: Theme
 Appearance/Theme/Prompt: Current theme:
+Appearance/Toolbars/Caption: Toolbars
+Appearance/Toolbars/Hint: Select which toolbar buttons are displayed
+Appearance/Toolbars/EditToolbar/Caption: Edit Toolbar
+Appearance/Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
+Appearance/Toolbars/ViewToolbar/Caption: View Toolbar
+Appearance/Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
+Appearance/Toolbars/PageControls/Caption: Page Toolbar
+Appearance/Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
 Basics/AnimDuration/Prompt: Animation duration:
 Basics/Caption: Basics
 Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
