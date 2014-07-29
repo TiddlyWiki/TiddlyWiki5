@@ -16,6 +16,11 @@ Delete/Caption: delete
 Delete/Hint: Delete this tiddler
 Edit/Caption: edit
 Edit/Hint: Edit this tiddler
+Encryption/Caption: encryption
+Encryption/ClearPassword/Caption: clear password
+Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
+Encryption/SetPassword/Caption: set password
+Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
 Info/Caption: info
 Info/Hint: Show information for this tiddler
 Home/Caption: home
