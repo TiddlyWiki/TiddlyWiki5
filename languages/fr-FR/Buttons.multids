@@ -4,23 +4,35 @@ AdvancedSearch/Caption: recherche avancée
 AdvancedSearch/Hint: Recherche avancée
 Cancel/Caption: annuler
 Cancel/Hint: Annule l'édition de ce tiddler
+Clone/Caption: cloner
+Clone/Hint: Cloner ce tiddler
 Close/Caption: fermer
-Close/Hint: Ferme ce tiddler
+Close/Hint: Fermer ce tiddler
+CloseOthers/Caption: fermer les autres tiddlers
+CloseOthers/Hint: Fermer les autres tiddlers
 ControlPanel/Caption: panneau de contrôle
-ControlPanel/Hint: Ouvre le panneau de contrôle
+ControlPanel/Hint: Ouvrir le panneau de contrôle
 Delete/Caption: supprimer
-Delete/Hint: Supprime ce tiddler
+Delete/Hint: Supprimer ce tiddler
 Edit/Caption: éditer
-Edit/Hint: Édite ce tiddler
+Edit/Hint: Éditer ce tiddler
 Info/Caption: informations
-Info/Hint: Affiche des informations sur ce tiddler
+Info/Hint: Afficher les informations sur ce tiddler
+Home/Caption: accueil
+Home/Hint: Ouvre les tiddlers de la page d'accueil
 NewTiddler/Caption: nouveau tiddler
-NewTiddler/Hint: Crée un nouveau tiddler
+NewTiddler/Hint: Créer un nouveau tiddler
+More/Caption: plus
+More/Hint: Autres actions
+Permalink/Caption: permalink
+Permalink/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers l'ensemble des tiddlers présents dans le déroulé
 Save/Caption: enregistrer
-Save/Hint: Enregistre ce tiddler
+Save/Hint: Enregistrer ce tiddler
 SaveWiki/Caption: enregistrer les modifications
-SaveWiki/Hint: Enregistre les modifications
+SaveWiki/Hint: Enregistrer les modifications
 HideSideBar/Caption: cacher la barre latérale
-HideSideBar/Hint: Cache la barre latérale
+HideSideBar/Hint: Cacher la barre latérale
 ShowSideBar/Caption: afficher la barre latérale
 ShowSideBar/Hint: Afficher la barre latérale
