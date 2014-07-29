@@ -1,0 +1,24 @@
+title: $:/core/ui/ControlPanel/Appearance/Toolbars/ViewToolbar
+tags: $:/tags/ControlPanel/Appearance/Toolbars
+caption: {{$:/language/ControlPanel/Appearance/Toolbars/ViewToolbar/Caption}}
+
+\define lingo-base() $:/language/TiddlerInfo/
+\define config-title()
+$:/config/ViewToolbarButtons/Visibility/$(listItem)$
+\end
+
+{{$:/language/ControlPanel/Appearance/Toolbars/ViewToolbar/Hint}}
+
+<$set name="tw-config-toolbar-icons" value="yes">
+
+<$set name="tw-config-toolbar-text" value="yes">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
+
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="caption"/></$checkbox>
+
+</$list>
+
+</$set>
+
+</$set>

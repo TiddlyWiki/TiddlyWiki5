@@ -1,10 +1,11 @@
 title: $:/core/ui/ViewToolbar/more
 tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
 
 \define config-title()
-$:/config/Buttons/Hide/$(listItem)$
+$:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
-<$button popup=<<qualify "$:/state/popup/more">> title={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class="btn-invisible" selectedClass="tw-selected">
+<$button popup=<<qualify "$:/state/popup/more">> title={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/down-arrow}}
 </$list>
@@ -17,7 +18,7 @@ $:/config/Buttons/Hide/$(listItem)$
 <$set name="tw-config-toolbar-icons" value="yes">
 <$set name="tw-config-toolbar-text" value="yes">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/ViewToolbar/more]]" variable="listItem">
-<$reveal type="match" state=<<config-title>> text="yes">
+<$reveal type="match" state=<<config-title>> text="hide">
 <$transclude tiddler=<<listItem>>/>
 </$reveal>
 </$list>

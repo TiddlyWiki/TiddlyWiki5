@@ -1,0 +1,12 @@
+title: $:/core/ui/PageControls/home
+tags: $:/tags/PageControls
+caption: {{$:/core/images/home-button}} {{$:/language/Buttons/Home/Caption}}
+
+<$button message="tw-home" title={{$:/language/Buttons/Home/Hint}} aria-label={{$:/language/Buttons/Home/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/home-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Home/Caption}}/>
+</$list>
+</$button>

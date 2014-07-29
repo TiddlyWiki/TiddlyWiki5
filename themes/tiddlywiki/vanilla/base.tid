@@ -379,10 +379,6 @@ a.tw-tiddlylink-external:hover {
 	width: 60%;
 }
 
-.tw-search {
-	padding-top: 14px;
-}
-
 .tw-search a svg {
 	height: 0.75em;
 }

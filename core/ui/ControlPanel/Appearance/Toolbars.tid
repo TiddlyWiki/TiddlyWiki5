@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Appearance/Toolbars
+tags: $:/tags/ControlPanel/Appearance
+caption: {{$:/language/ControlPanel/Appearance/Toolbars/Caption}}
+
+{{$:/language/ControlPanel/Appearance/Toolbars/Hint}}
+
+<div class="tw-control-panel">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Appearance/Toolbars]!has[draft.of]]" "$:/core/ui/ControlPanel/Appearance/Toolbars/ViewToolbar" "$:/state/tabs/controlpanel/toolbars" "tw-vertical">>
+</div>

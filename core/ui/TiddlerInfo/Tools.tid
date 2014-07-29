@@ -4,18 +4,22 @@ caption: {{$:/language/TiddlerInfo/Tools/Caption}}
 
 \define lingo-base() $:/language/TiddlerInfo/
 \define config-title()
-$:/config/Buttons/Hide/$(listItem)$
+$:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
 
 <$set name="tw-config-toolbar-icons" value="yes">
 
 <$set name="tw-config-toolbar-text" value="yes">
 
+<$set name="tw-config-toolbar-class" value="">
+
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
 
-<$transclude tiddler=<<listItem>>/> (<$checkbox tiddler=<<config-title>> field="text" checked="no" unchecked="yes" default="no"> Show in toolbar</$checkbox>)
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>>/> </$checkbox>
 
 </$list>
+
+</$set>
 
 </$set>
 
