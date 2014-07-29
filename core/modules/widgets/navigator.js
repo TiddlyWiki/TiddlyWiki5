@@ -487,6 +487,8 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	}));
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([IMPORT_TITLE]);
+	// Send a notification event
+	this.dispatchEvent({type: "tw-auto-save-wiki"});
 };
 
 exports.navigator = NavigatorWidget;
