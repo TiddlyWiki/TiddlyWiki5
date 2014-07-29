@@ -234,6 +234,10 @@ a.tw-tiddlylink-external:hover {
 ** Buttons
 */
 
+button svg {
+	vertical-align: middle;
+}
+
 .btn-invisible {
 	padding: 0;
 	margin: 0;
