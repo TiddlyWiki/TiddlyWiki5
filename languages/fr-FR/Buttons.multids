@@ -16,7 +16,7 @@ Delete/Caption: supprimer
 Delete/Hint: Supprimer ce tiddler
 Edit/Caption: éditer
 Edit/Hint: Éditer ce tiddler
-Encryption/Caption: encryption
+Encryption/Caption: chiffrement
 Encryption/ClearPassword/Caption: résilier le mot de passe
 Encryption/ClearPassword/Hint: Résilier le mot de passe et sauvegarder ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
