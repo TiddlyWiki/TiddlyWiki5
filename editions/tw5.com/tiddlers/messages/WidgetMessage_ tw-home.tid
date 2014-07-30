@@ -1,9 +1,9 @@
 created: 20140312223013470
-modified: 20140312223134387
+modified: 20140729223134387
 tags: message
 title: WidgetMessage: tw-home
 type: text/vnd.tiddlywiki
 
-The `tw-home` message resets the story list to the tiddlers defined in [[$:/DefaultTiddlers]]. It does not require any properties on the `event` object.
+The `tw-home` message refreshes the current page by removing any [[permalink|PermaLinks]] from the browser address bar, causing the re-display of the [[$:/DefaultTiddlers]], and re-initialisation of any plugin tiddlers. It does not require any properties on the `event` object.
 
-The cancel tiddler message is usually generated with the ButtonWidget and is handled by the core.
+The home message is usually generated with the ButtonWidget and is handled by the core.

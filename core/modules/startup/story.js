@@ -51,9 +51,8 @@ exports.startup = function() {
 		},false)
 		// Listen for the tw-home message
 		$tw.rootWidget.addEventListener("tw-home",function(event) {
-			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
-				storyList = $tw.wiki.filterTiddlers(storyFilter);
-			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+			window.location.hash = "";
+			window.location.reload(true);
 		});
 		// Listen for the tw-permalink message
 		$tw.rootWidget.addEventListener("tw-permalink",function(event) {
