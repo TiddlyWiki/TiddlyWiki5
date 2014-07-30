@@ -71,6 +71,7 @@ Syncer.prototype.throttleInterval = 1 * 1000; // Defer saving tiddlers if they'v
 Syncer.prototype.fallbackInterval = 10 * 1000; // Unless the task is older than 10s
 Syncer.prototype.pollTimerInterval = 60 * 1000; // Interval for polling for changes from the adaptor
 
+
 /*
 Read (or re-read) the latest tiddler info from the store
 */
@@ -155,6 +156,7 @@ Syncer.prototype.saveWiki = function(options) {
 			if(method !== "download") {
 				this.readTiddlerInfo();
 				this.taskQueue = {};
+				this.updateDirtyStatus();
 			}
 			return true;
 		}
@@ -167,6 +169,15 @@ Checks whether the wiki is dirty (ie the window shouldn't be closed)
 */
 Syncer.prototype.isDirty = function() {
 	return (this.numTasksInQueue() > 0) || (this.numTasksInProgress() > 0);
+};
+
+/*
+Update the document body with the class "tw-dirty" if the wiki has unsaved/unsynced changes
+*/
+Syncer.prototype.updateDirtyStatus = function() {
+	if($tw.browser) {
+		$tw.utils.toggleClass(document.body,"tw-dirty",this.isDirty());
+	}
 };
 
 /*
@@ -401,6 +412,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 		// this.logger.log("Queuing up sync task with type:",task.type,"title:",task.title);
 		// If it is not in the queue, insert it
 		this.taskQueue[task.title] = task;
+		this.updateDirtyStatus();
 	}
 	// Process the queue
 	if(this.syncadaptor) {
@@ -449,6 +461,7 @@ Syncer.prototype.processTaskQueue = function() {
 			// Remove the task from the queue and add it to the in progress list
 			delete this.taskQueue[task.title];
 			this.taskInProgress[task.title] = task;
+			this.updateDirtyStatus();
 			// Dispatch the task
 			this.dispatchTask(task,function(err) {
 				if(err) {
@@ -456,6 +469,7 @@ Syncer.prototype.processTaskQueue = function() {
 				}
 				// Mark that this task is no longer in progress
 				delete self.taskInProgress[task.title];
+				self.updateDirtyStatus();
 				// Process the next task
 				self.processTaskQueue.call(self);
 			});
