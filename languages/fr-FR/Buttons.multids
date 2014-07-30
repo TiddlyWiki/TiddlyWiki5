@@ -8,6 +8,8 @@ Clone/Caption: cloner
 Clone/Hint: Cloner ce tiddler
 Close/Caption: fermer
 Close/Hint: Fermer ce tiddler
+CloseAll/Caption: fermer tout
+CloseAll/Hint: Fermer tous les tiddlers
 CloseOthers/Caption: fermer les autres tiddlers
 CloseOthers/Hint: Fermer les autres tiddlers
 ControlPanel/Caption: panneau de contrôle
