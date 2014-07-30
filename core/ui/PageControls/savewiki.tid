@@ -4,7 +4,9 @@ caption: {{$:/core/images/save-button}} {{$:/language/Buttons/SaveWiki/Caption}}
 
 <$button message="tw-save-wiki" title={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<span class="tw-dirty-indicator">
 {{$:/core/images/save-button}}
+</span>
 </$list>
 <$list filter="[<tw-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/SaveWiki/Caption}}/>

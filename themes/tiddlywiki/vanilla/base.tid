@@ -1317,3 +1317,11 @@ canvas.tw-edit-bitmapeditor  {
 	font-size: 0.95em;
 	font-weight: 200;
 }
+
+/*
+** Dirty indicator
+*/
+
+body.tw-dirty .tw-dirty-indicator svg {
+	fill: <<colour dirty-indicator>>;
+}

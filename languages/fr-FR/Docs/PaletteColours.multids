@@ -9,6 +9,7 @@ blockquote-bar: Barre de citation
 code-background: Fond pour le code
 code-border: Bordure pour le code
 code-foreground: Premier plan pour le code
+dirty-indicator: Indicateur de modifications non sauvegardées
 download-background: Fond pour le bouton de téléchargement
 download-foreground: Premier plan pour le bouton de téléchargement
 dragger-background: Fond pour le glissé-déposé
