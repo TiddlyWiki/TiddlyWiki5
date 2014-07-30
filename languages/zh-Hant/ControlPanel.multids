@@ -19,6 +19,10 @@ Advanced/Settings/NavigationHistory/Caption: 歷史記錄導覽
 Advanced/Settings/NavigationHistory/Hint: 當導覽到條目時，更新瀏覽器歷史記錄：
 Advanced/Settings/NavigationHistory/No/Description: 不更新歷史記錄
 Advanced/Settings/NavigationHistory/Yes/Description: 更新歷史記錄
+Advanced/Settings/ToolbarButtons/Caption: 工具列按鈕
+Advanced/Settings/ToolbarButtons/Hint: 預設的工具列按鈕外觀：
+Advanced/Settings/ToolbarButtons/Text/Description: 包含文字
+Advanced/Settings/ToolbarButtons/Icons/Description: 包含圖示
 Advanced/TiddlerFields/Caption: 條目欄位
 Advanced/TiddlerFields/Hint: 這是本維基使用中的所有條目欄位（含系統條目的欄位，但預設條目的欄位除外）。
 Appearance/Caption: 視覺外觀
@@ -36,6 +40,14 @@ Appearance/StoryView/Caption: 檢視模式
 Appearance/StoryView/Prompt: 當前的檢視模式：
 Appearance/Theme/Caption: 佈景主題
 Appearance/Theme/Prompt: 當前的佈景主題：
+Appearance/Toolbars/Caption: 工具列
+Appearance/Toolbars/Hint: 選擇將顯示哪些工具列按鈕
+Appearance/Toolbars/EditToolbar/Caption: 編輯工具列
+Appearance/Toolbars/EditToolbar/Hint: 選擇將顯示哪些按鈕於條目的編輯模式工具列
+Appearance/Toolbars/ViewToolbar/Caption: 檢視工具列
+Appearance/Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列
+Appearance/Toolbars/PageControls/Caption: 頁面工具列
+Appearance/Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列
 Basics/AnimDuration/Prompt: 動畫持續時間：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>

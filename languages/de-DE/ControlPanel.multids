@@ -19,6 +19,10 @@ Advanced/Settings/NavigationHistory/Caption: Browser Chronik
 Advanced/Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
 Advanced/Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
 Advanced/Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
+Advanced/Settings/ToolbarButtons/Caption: Toolbar Buttons
+Advanced/Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
+Advanced/Settings/ToolbarButtons/Text/Description: Text anzeigen
+Advanced/Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Advanced/TiddlerFields/Caption: Tiddler Felder
 Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exclusive ~Schatten-Tiddler. 
 Appearance/Caption: Design
@@ -36,6 +40,14 @@ Appearance/StoryView/Caption: Anzeige
 Appearance/StoryView/Prompt: Ausgewählte Anzeige:
 Appearance/Theme/Caption: Thema
 Appearance/Theme/Prompt: Ausgewähltes Thema:
+Appearance/Toolbars/Caption: Toolbar
+Appearance/Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
+Appearance/Toolbars/EditToolbar/Caption: Edit Toolbar
+Appearance/Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
+Appearance/Toolbars/ViewToolbar/Caption: View Toolbar
+Appearance/Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
+Appearance/Toolbars/PageControls/Caption: Page Toolbar
+Appearance/Toolbars/PageControls/Hint: Ausweählen, welche Buttons im Hauptmenü angezeigt werden:
 Basics/AnimDuration/Prompt: Animation Dauer:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Lehrzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>

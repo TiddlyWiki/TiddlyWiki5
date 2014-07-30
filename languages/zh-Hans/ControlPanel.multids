@@ -19,6 +19,10 @@ Advanced/Settings/NavigationHistory/Caption: 历史记录导览
 Advanced/Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
 Advanced/Settings/NavigationHistory/No/Description: 不更新历史记录
 Advanced/Settings/NavigationHistory/Yes/Description: 更新历史记录
+Advanced/Settings/ToolbarButtons/Caption: 工具栏按钮
+Advanced/Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
+Advanced/Settings/ToolbarButtons/Text/Description: 包含文字
+Advanced/Settings/ToolbarButtons/Icons/Description: 包含图示
 Advanced/TiddlerFields/Caption: 条目栏位
 Advanced/TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 Appearance/Caption: 视觉外观
@@ -36,6 +40,14 @@ Appearance/StoryView/Caption: 查看模式
 Appearance/StoryView/Prompt: 当前的查看模式：
 Appearance/Theme/Caption: 布景主题
 Appearance/Theme/Prompt: 当前的布景主题：
+Appearance/Toolbars/Caption: 工具栏
+Appearance/Toolbars/Hint: 选择将显示哪些工具栏按钮
+Appearance/Toolbars/EditToolbar/Caption: 编辑工具栏
+Appearance/Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏
+Appearance/Toolbars/ViewToolbar/Caption: 检视工具栏
+Appearance/Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的检视模式工具栏
+Appearance/Toolbars/PageControls/Caption: 页面工具栏
+Appearance/Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
 Basics/AnimDuration/Prompt: 动画持续时间：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>

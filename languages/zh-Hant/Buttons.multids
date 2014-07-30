@@ -8,6 +8,8 @@ Clone/Caption: 複製
 Clone/Hint: 複製此條目
 Close/Caption: 關閉
 Close/Hint: 關閉此條目
+CloseAll/Caption: 全部關閉
+CloseAll/Hint: 關閉所有條目
 CloseOthers/Caption: 關閉其他
 CloseOthers/Hint: 關閉其他條目
 ControlPanel/Caption: 控制台
@@ -16,8 +18,17 @@ Delete/Caption: 刪除
 Delete/Hint: 刪除此條目
 Edit/Caption: 編輯
 Edit/Hint: 編輯此條目
+Encryption/Caption: 加密
+Encryption/ClearPassword/Caption: 清除密碼
+Encryption/ClearPassword/Hint: 清除密碼且不加密儲存此維基
+Encryption/SetPassword/Caption: 設定密碼
+Encryption/SetPassword/Hint: 設定加密儲存此維基的密碼
+Home/Caption: 首頁
+Home/Hint: 開啟首頁條目
 Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
+More/Caption: 更多
+More/Hint: 更多動作
 NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一新條目
 Permalink/Caption: 引用連結
