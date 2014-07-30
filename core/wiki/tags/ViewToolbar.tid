@@ -1,2 +1,2 @@
 title: $:/tags/ViewToolbar
-list: [[$:/core/ui/Buttons/more]] [[$:/core/ui/Buttons/info]] [[$:/core/ui/Buttons/clone]] [[$:/core/ui/Buttons/edit]] [[$:/core/ui/Buttons/permalink]] [[$:/core/ui/Buttons/permaview]] [[$:/core/ui/Buttons/close-others]] [[$:/core/ui/Buttons/close]]
+list: [[$:/core/ui/Buttons/more-tiddler-actions]] [[$:/core/ui/Buttons/info]] [[$:/core/ui/Buttons/clone]] [[$:/core/ui/Buttons/edit]] [[$:/core/ui/Buttons/permalink]] [[$:/core/ui/Buttons/permaview]] [[$:/core/ui/Buttons/close-others]] [[$:/core/ui/Buttons/close]]
