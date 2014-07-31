@@ -9,6 +9,7 @@ blockquote-bar: 引言條
 code-background: 程式碼背景
 code-border: 程式碼邊框
 code-foreground: 程式碼前景
+dirty-indicator: 未儲存變更指示器
 download-background: 下載按鈕背景
 download-foreground: 下載按鈕前景
 dragger-background: 拖動區背景
