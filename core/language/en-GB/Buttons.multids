@@ -26,7 +26,7 @@ Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
 Info/Caption: info
 Info/Hint: Show information for this tiddler
 Home/Caption: home
-Home/Hint: Open home tiddlers
+Home/Hint: Refresh the page and open the home tiddlers
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 More/Caption: more
