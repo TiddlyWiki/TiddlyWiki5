@@ -19,6 +19,7 @@ Delete/Hint: Supprimer ce tiddler
 Edit/Caption: éditer
 Edit/Hint: Éditer ce tiddler
 Encryption/Caption: chiffrement
+Encryption/Hint: Affecte ou résilie le mot de passe pour la sauvegarde de ce wiki
 Encryption/ClearPassword/Caption: résilier le mot de passe
 Encryption/ClearPassword/Hint: Résilier le mot de passe et sauvegarder ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
@@ -26,7 +27,9 @@ Encryption/SetPassword/Hint: Affecter un mot de passe pour sauvegarder une versi
 Info/Caption: informations
 Info/Hint: Afficher les informations sur ce tiddler
 Home/Caption: accueil
-Home/Hint: Ouvre les tiddlers de la page d'accueil
+Home/Hint: Rafraîchit la page et ouvre les tiddlers de la page d'accueil
+Language/Caption: langue
+Language/Hint: Langue choisie pour l'interface utilisateur
 NewTiddler/Caption: nouveau tiddler
 NewTiddler/Hint: Créer un nouveau tiddler
 More/Caption: plus
