@@ -814,7 +814,11 @@ exports.parseTextReference = function(title,field,index,options) {
 		}
 	}
 	if(field === "text" || (!field && !index)) {
-		return this.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",tiddler.fields.text,options);
+		if(tiddler && tiddler.fields) {
+			return this.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",tiddler.fields.text,options);			
+		} else {
+			return null;
+		}
 	} else if(field) {
 		if(field === "title") {
 			text = title;
