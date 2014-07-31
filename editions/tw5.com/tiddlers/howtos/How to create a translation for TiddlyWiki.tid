@@ -4,14 +4,12 @@ tags: howto
 title: How to create a translation for TiddlyWiki
 type: text/vnd.tiddlywiki
 
-Making a translation 
-
-Prerequisites:
+! Prerequisites
 
 * [[TiddlyWiki on Node.js]]
 * A GitHub account to submit the translation to tiddlywiki.com
 
-Quick and dirty instructions:
+! Setting Up
 
 # Fork the TiddlyWiki GitHub repository (https://github.com/Jermolene/TiddlyWiki5)
 #* If your GitHub username is JoeBloggs, your fork will be https://github.com/JoeBloggs/TiddlyWiki5
@@ -42,3 +40,9 @@ Content of `plugin.info` for Joe Bloggs' Welsh translation:
 ```
 
 MultiTiddlerFiles make it possible to pack the text of several tiddlers in a single text file, simplifying some editing tasks.
+
+! Handling Updates
+
+Sometimes the master en-GB language tiddlers are updated with revised content or new items. The best way to keep track of language-related commits to ~TiddlyWiki5:master is to monitor this RSS/Atom feed:
+
+https://github.com/Jermolene/TiddlyWiki5/commits/master/core/language.atom
