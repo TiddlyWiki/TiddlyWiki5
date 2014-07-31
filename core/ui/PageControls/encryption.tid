@@ -1,6 +1,7 @@
 title: $:/core/ui/Buttons/encryption
 tags: $:/tags/PageControls
 caption: {{$:/core/images/locked-padlock}} {{$:/language/Buttons/Encryption/Caption}}
+description: {{$:/language/Buttons/Encryption/Hint}}
 
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 <$button message="tw-clear-password" title={{$:/language/Buttons/Encryption/ClearPassword/Hint}} aria-label={{$:/language/Buttons/Encryption/ClearPassword/Caption}} class=<<tw-config-toolbar-class>>>

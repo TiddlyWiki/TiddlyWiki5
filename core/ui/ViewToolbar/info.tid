@@ -1,6 +1,7 @@
 title: $:/core/ui/Buttons/info
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/info-button}} {{$:/language/Buttons/Info/Caption}}
+description: {{$:/language/Buttons/Info/Hint}}
 
 <$button popup=<<tiddlerInfoState>> title={{$:/language/Buttons/Info/Hint}} aria-label={{$:/language/Buttons/Info/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">

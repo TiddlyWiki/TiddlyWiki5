@@ -1,6 +1,7 @@
 title: $:/core/ui/Buttons/more-page-actions
 tags: $:/tags/PageControls
 caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
+description: {{$:/language/Buttons/More/Hint}}
 
 \define config-title()
 $:/config/PageControlButtons/Visibility/$(listItem)$

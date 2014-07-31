@@ -1,6 +1,7 @@
 title: $:/core/ui/Buttons/more-tiddler-actions
 tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
+description: {{$:/language/Buttons/More/Hint}}
 
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$

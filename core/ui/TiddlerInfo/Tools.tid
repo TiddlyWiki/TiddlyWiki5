@@ -15,7 +15,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
 
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>>/> </$checkbox>
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>>/> <i class="tw-muted"><$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
 
 </$list>
 

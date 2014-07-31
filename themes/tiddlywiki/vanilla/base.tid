@@ -79,6 +79,10 @@ dl dt {
 	margin-top: 6px;
 }
 
+.tw-muted {
+	color: <<colour muted-foreground>>;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */

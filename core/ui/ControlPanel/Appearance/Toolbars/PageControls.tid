@@ -15,7 +15,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
 
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="caption"/></$checkbox>
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="caption"/> <i class="tw-muted">-- <$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
 
 </$list>
 
