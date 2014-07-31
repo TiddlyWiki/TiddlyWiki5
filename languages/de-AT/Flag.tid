@@ -1,0 +1,8 @@
+title: $:/language/Flag
+type: image/svg+xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600">
+<rect fill="#ed2939" width="900" height="600"/>
+<rect fill="#fff" y="200" width="900" height="200"/>
+</svg>

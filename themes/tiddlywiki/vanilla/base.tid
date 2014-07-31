@@ -238,7 +238,7 @@ a.tw-tiddlylink-external:hover {
 ** Buttons
 */
 
-button svg {
+button svg, button img {
 	vertical-align: middle;
 }
 
@@ -406,6 +406,10 @@ button svg {
 
 .tw-page-controls a.tw-tiddlylink:hover {
 	text-decoration: none;
+}
+
+.tw-page-controls img {
+	width: 1em;
 }
 
 .tw-page-controls svg {
@@ -618,7 +622,7 @@ button svg {
 	vertical-align: baseline;
 }
 
-.tw-tiddler-controls button svg {
+.tw-tiddler-controls button svg, .tw-tiddler-controls button img {
 	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
 }
@@ -839,7 +843,7 @@ canvas.tw-edit-bitmapeditor  {
 	text-align: left;
 }
 
-.btn-dropdown svg {
+.btn-dropdown svg, .btn-dropdown img {
 	height: 1em;
 	width: 1em;
 	fill: <<colour muted-foreground>>;
@@ -852,6 +856,8 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 7px 0 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
+	text-shadow: none;
+	line-height: 1.4;
 }
 
 .tw-drop-down button svg {
@@ -872,6 +878,7 @@ canvas.tw-edit-bitmapeditor  {
 	width: 100%;
 	text-align: left;
 	color: <<colour foreground>>;
+	line-height: 1.4;
 }
 
 .tw-drop-down a:hover, .tw-drop-down button:hover {

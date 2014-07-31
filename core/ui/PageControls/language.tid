@@ -1,0 +1,33 @@
+title: $:/core/ui/Buttons/language
+tags: $:/tags/PageControls
+caption: {{$:/core/images/globe}} {{$:/language/Buttons/Language/Caption}}
+description: {{$:/language/Buttons/Language/Hint}}
+
+<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$transclude tiddler="$:/language/Flag"/>
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Language/Caption}}/>
+</$list>
+</$button>
+<$reveal state=<<qualify "$:/state/popup/language">> type="popup" position="below" animate="yes">
+<div class="tw-drop-down">
+<$linkcatcher to="$:/language">
+<$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]]">
+<$link>
+<$transclude subtiddler="$:/language/Flag">
+<$list filter="[all[current]field:title[$:/languages/en-GB]]">
+<$transclude tiddler="$:/core" subtiddler="$:/language/Flag"/>
+</$list>
+</$transclude>
+<$view field="description">
+<$view field="name">
+<$view field="title"/>
+</$view>
+</$view>
+</$link>
+</$list>
+</$linkcatcher>
+</div>
+</$reveal>
