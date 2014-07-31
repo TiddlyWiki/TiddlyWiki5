@@ -1323,6 +1323,7 @@ canvas.tw-edit-bitmapeditor  {
 ** Dirty indicator
 */
 
-body.tw-dirty .tw-dirty-indicator svg {
+body.tw-dirty span.tw-dirty-indicator, body.tw-dirty span.tw-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
+	color: <<colour dirty-indicator>>;
 }
