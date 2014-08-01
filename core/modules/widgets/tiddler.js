@@ -44,8 +44,25 @@ TiddlerWidget.prototype.execute = function() {
 	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tw-tiddler-exists" : "tw-tiddler-missing");
 	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tw-tiddler-shadow" : "");
 	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tw-tiddler-system" : "");
+	this.setVariable("tiddlerTagClasses",this.getTagClasses())
 	// Construct the child widgets
 	this.makeChildWidgets();
+};
+
+/*
+Create a string of CSS classes derived from the tags of the current tiddler
+*/
+TiddlerWidget.prototype.getTagClasses = function() {
+	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
+	if(tiddler) {
+		var tags = [];
+		$tw.utils.each(tiddler.fields.tags,function(tag) {
+			tags.push("tw-tag-" + encodeURIComponent(tag));
+		});
+		return tags.join(" ");
+	} else {
+		return "";
+	}
 };
 
 /*
