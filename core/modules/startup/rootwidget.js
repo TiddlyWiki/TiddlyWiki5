@@ -66,6 +66,15 @@ exports.startup = function() {
 			downloadType: "text/plain"
 		});
 	});
+	var fullscreen = $tw.utils.getFullScreenApis();
+	$tw.rootWidget.addEventListener("tw-full-screen",function(event) {
+		if(document[fullscreen._fullscreenElement]) {
+			document[fullscreen._exitFullscreen]();
+		} else {
+			document.documentElement[fullscreen._requestFullscreen](Element.ALLOW_KEYBOARD_INPUT);
+		}
+	});
+
 	// If we're being viewed on a data: URI then give instructions for how to save
 	if(document.location.protocol === "data:") {
 		$tw.rootWidget.dispatchEvent({

@@ -1,7 +1,6 @@
 {
 	"plugins": [
 		"tiddlywiki/cecily",
-		"tiddlywiki/fullscreen",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
