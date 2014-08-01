@@ -16,6 +16,12 @@ description: {{$:/language/Buttons/Language/Hint}}
 <$linkcatcher to="$:/language">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]]">
 <$link>
+<$reveal type="match" state="$:/language" text=<<currentTiddler>>>
+&bull;
+</$reveal>
+<$reveal type="nomatch" state="$:/language" text=<<currentTiddler>>>
+&nbsp;
+</$reveal>
 <$transclude subtiddler="$:/language/Flag">
 <$list filter="[all[current]field:title[$:/languages/en-GB]]">
 <$transclude tiddler="$:/core" subtiddler="$:/language/Flag"/>
