@@ -40,8 +40,8 @@ Appearance/StoryView/Caption: Vue sur le déroulé
 Appearance/StoryView/Prompt: Vue courante :
 Appearance/Theme/Caption: Thème
 Appearance/Theme/Prompt: Thème courant :
-Appearance/Toolbars/Caption: Barre d'outils
-Appearance/Toolbars/Hint: Choix des boutons à afficher dans la barre d'outils
+Appearance/Toolbars/Caption: Barres d'outils
+Appearance/Toolbars/Hint: Choix des boutons à afficher dans les barres d'outils
 Appearance/Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
 Appearance/Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en cours d'édition
 Appearance/Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
@@ -90,7 +90,7 @@ Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
 Tools/Caption: Outils
 Tools/Download/Full/Caption: Télécharger le wiki complet
 Tools/Encryption/ChangePassword/Button: changer le mot de passe
-Tools/Encryption/ClearPassword/Button: effacer le mot de passe
+Tools/Encryption/ClearPassword/Button: résilier le mot de passe
 Tools/Encryption/Disabled/Prompt: Ce wiki n'est pas chiffré
 Tools/Encryption/Enabled/Prompt: Ce wiki est chiffré
 Tools/Encryption/Heading: Chiffrement
