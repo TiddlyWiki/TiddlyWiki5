@@ -6,5 +6,6 @@
 	"author": "JeremyRuston",
 	"maintainer": "MarioPietsch aka pmario",
 	"core-version": ">=5.0.0",
-	"dependents": ["$:/languages/de-DE"]
+	"dependents": ["$:/languages/de-DE"],
+	"plugin-priority": 110
 }
