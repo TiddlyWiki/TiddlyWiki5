@@ -20,7 +20,17 @@ $:/core/images/storyview-$(storyview)$
 <div class="tw-drop-down">
 <$linkcatcher to="$:/view">
 <$list filter="[storyviews[]]" variable="storyview">
-<$link to=<<storyview>>><$transclude tiddler=<<icon>>/> <$text text=<<storyview>>/></$link>
+<$link to=<<storyview>>>
+<span class="tw-drop-down-bullet">
+<$reveal type="match" state="$:/view" text=<<storyview>>>
+&bull;
+</$reveal>
+<$reveal type="nomatch" state="$:/view" text=<<storyview>>>
+&nbsp;
+</$reveal>
+</span>
+<$transclude tiddler=<<icon>>/>
+<$text text=<<storyview>>/></$link>
 </$list>
 </$linkcatcher>
 </div>

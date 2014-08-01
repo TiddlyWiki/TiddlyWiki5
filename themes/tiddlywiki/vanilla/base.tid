@@ -896,6 +896,11 @@ canvas.tw-edit-bitmapeditor  {
 	border-bottom: 1px solid <<colour dropdown-tab-background-selected>>;
 }
 
+.tw-drop-down-bullet {
+	display: inline-block;
+	width: 0.5em;
+}
+
 .tw-drop-down .tw-tab-contents a {
 	padding: 0 0.5em 0 0.5em;
 }
