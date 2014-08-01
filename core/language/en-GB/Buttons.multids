@@ -44,6 +44,8 @@ Save/Caption: save
 Save/Hint: Save this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
+StoryView/Caption: storyview
+StoryView/Hint: Choose the story visualisation
 HideSideBar/Caption: hide sidebar
 HideSideBar/Hint: Hide sidebar
 ShowSideBar/Caption: show sidebar

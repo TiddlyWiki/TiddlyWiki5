@@ -860,7 +860,7 @@ canvas.tw-edit-bitmapeditor  {
 	line-height: 1.4;
 }
 
-.tw-drop-down button svg {
+.tw-drop-down button svg, .tw-drop-down a svg  {
 	fill: <<colour foreground>>;
 }
 
