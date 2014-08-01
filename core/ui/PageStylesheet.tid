@@ -54,6 +54,6 @@ background-image: -ms-linear-gradient($gradient$);
 \end
 
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]!has[draft.of]]">
 <$transclude/>
 </$list>
