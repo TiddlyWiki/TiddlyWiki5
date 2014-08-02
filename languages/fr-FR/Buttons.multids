@@ -44,6 +44,8 @@ Save/Caption: enregistrer
 Save/Hint: Enregistrer ce tiddler
 SaveWiki/Caption: enregistrer les modifications
 SaveWiki/Hint: Enregistrer les modifications
+StoryView/Caption: vue sur le déroulé
+StoryView/Hint: Choix du mode de visualisation du déroulé
 HideSideBar/Caption: cacher la barre latérale
 HideSideBar/Hint: Cacher la barre latérale
 ShowSideBar/Caption: afficher la barre latérale
