@@ -14,6 +14,12 @@ Upgrader module that checks that plugins are newer than any already installed ve
 
 var UPGRADE_LIBRARY_TITLE = "$:/UpgradeLibrary";
 
+var BLOCKED_PLUGINS = {
+	"$:/plugins/tiddlywiki/fullscreen": {
+		versions: ["*"]
+	}
+};
+
 exports.upgrade = function(wiki,titles,tiddlers) {
 	var self = this,
 		messages = {},
@@ -23,7 +29,7 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 				upgradeLibrary = wiki.getTiddlerData(UPGRADE_LIBRARY_TITLE,{});
 				upgradeLibrary.tiddlers = upgradeLibrary.tiddlers || {};
 			}
-			return upgradeLibrary.tiddlers[title]
+			return upgradeLibrary.tiddlers[title];
 		};
 
 	// Go through all the incoming tiddlers
@@ -46,7 +52,18 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 				// Reject the incoming plugin by blanking all its fields
 				if($tw.utils.checkVersions(existingTiddler.fields.version,incomingTiddler.version)) {
 					tiddlers[title] = Object.create(null);
-					messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Suppressed",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
+					messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Version",{variables: {incoming: incomingTiddler.version, existing: existingTiddler.fields.version}});
+					return;
+				}
+			}
+		}
+		if(incomingTiddler && incomingTiddler["plugin-type"]) {
+			// Check whether the plugin is on the blocked list
+			var blockInfo = BLOCKED_PLUGINS[title];
+			if(blockInfo) {
+				if(blockInfo.versions.indexOf("*") !== -1 || (incomingTiddler.version && blockInfo.versions.indexOf(incomingTiddler.version) !== -1)) {
+					tiddlers[title] = Object.create(null);
+					messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Suppressed/Incompatible");
 					return;
 				}
 			}
