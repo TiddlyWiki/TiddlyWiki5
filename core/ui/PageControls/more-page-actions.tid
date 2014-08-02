@@ -22,6 +22,8 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 
 <$set name="tw-config-toolbar-text" value="yes">
 
+<$set name="tw-config-toolbar-class" value="btn-invisible">
+
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]] -[[$:/core/ui/Buttons/more-page-actions]]" variable="listItem">
 
 <$reveal type="match" state=<<config-title>> text="hide">
@@ -31,6 +33,8 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 </$reveal>
 
 </$list>
+
+</$set>
 
 </$set>
 
