@@ -1309,10 +1309,15 @@ canvas.tw-edit-bitmapeditor  {
 	white-space: nowrap;
 }
 
+.tw-table-of-contents button {
+	color: <<colour sidebar-foreground>>;
+}
+
 .tw-table-of-contents svg {
 	width: 0.7em;
 	height: 0.7em;
 	vertical-align: middle;
+	fill: <<colour sidebar-foreground>>;
 }
 
 .tw-table-of-contents ol {
