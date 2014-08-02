@@ -28,6 +28,8 @@ FullScreen/Caption: 全螢幕
 FullScreen/Hint: 進入或離開全螢幕模式
 Home/Caption: 首頁
 Home/Hint: 刷新頁面且開啟首頁條目
+Import/Caption: 導入
+Import/Hint: 導入檔案
 Info/Caption: 資訊
 Info/Hint: 顯示此條目的資訊
 Language/Caption: 語言
