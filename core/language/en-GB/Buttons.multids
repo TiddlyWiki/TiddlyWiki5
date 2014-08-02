@@ -26,6 +26,8 @@ Encryption/SetPassword/Caption: set password
 Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
 FullScreen/Caption: full-screen
 FullScreen/Hint: Enter or leave full-screen mode
+Import/Caption: import
+Import/Hint: Import files
 Info/Caption: info
 Info/Hint: Show information for this tiddler
 Home/Caption: home

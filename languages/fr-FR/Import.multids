@@ -6,7 +6,7 @@ Listing/Import/Caption: Importer
 Listing/Select/Caption: Sélectionner
 Listing/Status/Caption: Statut
 Listing/Title/Caption: Titre
-Upgrader/Plugins/Suppressed: Plugin supprimé (le pressenti <<incoming>> étant plus ancien que l'existant <<existing>>)
+Upgrader/Plugins/Suppressed/Version: Plugin supprimé (le pressenti <<incoming>> étant plus ancien que l'existant <<existing>>)
 Upgrader/Plugins/Upgraded: Plugin mis à jour depuis <<incoming>> vers <<upgraded>>
 Upgrader/System/Suppressed: Tiddler système supprimé
 Upgrader/ThemeTweaks/Created: Thème modifié à partir de <$text text=<<from>>/>

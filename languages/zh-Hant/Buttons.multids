@@ -24,6 +24,8 @@ Encryption/ClearPassword/Caption: 清除密碼
 Encryption/ClearPassword/Hint: 清除密碼且不加密儲存此維基
 Encryption/SetPassword/Caption: 設定密碼
 Encryption/SetPassword/Hint: 設定加密儲存此維基的密碼
+FullScreen/Caption: 全螢幕
+FullScreen/Hint: 進入或離開全螢幕模式
 Home/Caption: 首頁
 Home/Hint: 刷新頁面且開啟首頁條目
 Info/Caption: 資訊
@@ -42,6 +44,8 @@ Save/Caption: 儲存
 Save/Hint: 儲存此條目
 SaveWiki/Caption: 儲存變更
 SaveWiki/Hint: 儲存變更
+StoryView/Caption: 檢視模式
+StoryView/Hint: 選擇檢視條目的視覺效果
 HideSideBar/Caption: 隱藏側邊欄
 HideSideBar/Hint: 隱藏側邊欄
 ShowSideBar/Caption: 顯示側邊欄

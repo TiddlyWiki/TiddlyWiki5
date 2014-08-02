@@ -5,7 +5,9 @@ description: {{$:/language/Buttons/Language/Hint}}
 
 <$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
-<$transclude tiddler="$:/language/Flag"/>
+<span class="tw-image-button">
+<$image source="$:/language/Flag"/>
+</span>
 </$list>
 <$list filter="[<tw-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/Language/Caption}}/>
@@ -24,11 +26,13 @@ description: {{$:/language/Buttons/Language/Hint}}
 &nbsp;
 </$reveal>
 </span>
+<span class="tw-image-button">
 <$transclude subtiddler="$:/language/Flag">
 <$list filter="[all[current]field:title[$:/languages/en-GB]]">
 <$transclude tiddler="$:/core" subtiddler="$:/language/Flag"/>
 </$list>
 </$transclude>
+</span>
 <$view field="description">
 <$view field="name">
 <$view field="title"/>

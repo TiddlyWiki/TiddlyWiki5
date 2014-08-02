@@ -6,7 +6,6 @@ caption: {{$:/language/TiddlerInfo/Tools/Caption}}
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
-
 <$set name="tw-config-toolbar-icons" value="yes">
 
 <$set name="tw-config-toolbar-text" value="yes">

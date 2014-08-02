@@ -24,6 +24,8 @@ Encryption/ClearPassword/Caption: 清除密码
 Encryption/ClearPassword/Hint: 清除密码且不加密保存此维基
 Encryption/SetPassword/Caption: 设置密码
 Encryption/SetPassword/Hint: 设置加密保存此维基的密码
+FullScreen/Caption: 全屏幕
+FullScreen/Hint: 进入或离开全屏模式
 Home/Caption: 首页
 Home/Hint: 刷新页面且开启首页条目
 Info/Caption: 信息
@@ -42,6 +44,8 @@ Save/Caption: 保存
 Save/Hint: 保存此条目
 SaveWiki/Caption: 保存变更
 SaveWiki/Hint: 保存变更
+StoryView/Caption: 检视模式
+StoryView/Hint: 选择检视条目的视觉效果
 HideSideBar/Caption: 隐藏侧边栏
 HideSideBar/Hint: 隐藏侧边栏
 ShowSideBar/Caption: 显示侧边栏
