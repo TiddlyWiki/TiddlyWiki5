@@ -896,7 +896,15 @@ canvas.tw-edit-bitmapeditor  {
 	line-height: 1.4;
 }
 
-.tw-drop-down a:hover, .tw-drop-down button:hover {
+.tw-drop-down .tw-file-input-wrapper {
+	width: 100%;
+}
+
+.tw-drop-down .tw-file-input-wrapper button {
+	color: <<colour foreground>>;
+}
+
+.tw-drop-down a:hover, .tw-drop-down button:hover, .tw-drop-down .tw-file-input-wrapper:hover button {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
