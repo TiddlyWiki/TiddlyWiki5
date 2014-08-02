@@ -1352,3 +1352,28 @@ body.tw-dirty span.tw-dirty-indicator, body.tw-dirty span.tw-dirty-indicator svg
 	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
 }
+
+/*
+** File inputs
+*/
+
+.tw-file-input-wrapper {
+	position: relative;
+}
+
+.tw-file-input-wrapper input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 999px;
+	max-width: 100%;
+	max-height: 100%;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: pointer;
+	display: inline-block;
+}

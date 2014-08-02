@@ -1,0 +1,16 @@
+title: $:/core/ui/Buttons/import
+tags: $:/tags/PageControls
+caption: {{$:/core/images/import-button}} {{$:/language/Buttons/Import/Caption}}
+description: {{$:/language/Buttons/Import/Hint}}
+
+<span class="tw-file-input-wrapper">
+<$button title={{$:/language/Buttons/Import/Hint}} aria-label={{$:/language/Buttons/Import/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/import-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Import/Caption}}/>
+</$list>
+</$button>
+<$browse/>
+</span>
