@@ -282,7 +282,7 @@ button svg, button img {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
-.tw-image-button {
+button svg.tw-image-button, button .tw-image-button img {
 	height: 1em;
 	width: 1em;
 }
@@ -870,6 +870,15 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-drop-down p {
 	padding: 0 14px 0 14px;
+}
+
+.tw-drop-down svg {
+	width: 1em;
+	height: 1em;
+}
+
+.tw-drop-down img {
+	width: 1em;
 }
 
 .tw-drop-down a, .tw-drop-down button {
