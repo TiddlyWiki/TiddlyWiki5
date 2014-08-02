@@ -9,8 +9,6 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 
 <<lingo Basics/Version/Prompt>> <<version>>
 
----
-
 <$set name="tw-config-toolbar-icons" value="yes">
 
 <$set name="tw-config-toolbar-text" value="yes">
@@ -31,23 +29,4 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 
 ---
 
-<<lingo Tools/Import/Prompt>> <$browse/>
-
----
-
-{{$:/snippets/encryptionstatus}}
-
----
-
-
----
-
-{{$:/snippets/viewswitcher}}
-
----
-
 {{$:/snippets/minithemeswitcher}}
-
----
-
-{{$:/snippets/languageswitcher}}
