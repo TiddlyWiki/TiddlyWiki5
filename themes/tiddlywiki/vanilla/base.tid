@@ -270,8 +270,9 @@ button svg, button img {
 	color: <<colour foreground>>;
 }
 
-.tw-sidebar-lists button.btn {
+.tw-sidebar-lists button {
 	color: <<colour sidebar-button-foreground>>;
+	fill: <<colour sidebar-button-foreground>>;
 }
 
 .tw-sidebar-lists button.btn-mini {
@@ -532,6 +533,11 @@ button svg.tw-image-button, button .tw-image-button img {
 	background-color: <<colour tiddler-info-background>>;
 	border-top: 1px solid <<colour tiddler-info-border>>;
 	border-bottom: 1px solid <<colour tiddler-info-border>>;
+}
+
+.tw-tiddler-info p {
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
@@ -1360,6 +1366,8 @@ body.tw-dirty span.tw-dirty-indicator, body.tw-dirty span.tw-dirty-indicator svg
 .tw-file-input-wrapper {
 	position: relative;
 	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 .tw-file-input-wrapper input[type=file] {
