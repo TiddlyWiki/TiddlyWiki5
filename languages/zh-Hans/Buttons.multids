@@ -28,6 +28,8 @@ FullScreen/Caption: 全屏幕
 FullScreen/Hint: 进入或离开全屏模式
 Home/Caption: 首页
 Home/Hint: 刷新页面且开启首页条目
+Import/Caption: 导入
+Import/Hint: 导入文件
 Info/Caption: 信息
 Info/Hint: 显示此条目的信息
 Language/Caption: 语言

@@ -52,3 +52,5 @@ HideSideBar/Caption: hide sidebar
 HideSideBar/Hint: Hide sidebar
 ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
+Theme/Caption: theme
+Theme/Hint: Choose the display theme

@@ -26,7 +26,3 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 </$set>
 
 </$set>
-
----
-
-{{$:/snippets/minithemeswitcher}}

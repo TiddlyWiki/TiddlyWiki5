@@ -9,3 +9,4 @@ core/ui/Buttons/language: hide
 core/ui/Buttons/more-page-actions: hide
 core/ui/Buttons/permaview: hide
 core/ui/Buttons/storyview: hide
+core/ui/Buttons/theme: hide
