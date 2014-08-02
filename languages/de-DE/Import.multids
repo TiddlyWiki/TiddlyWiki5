@@ -6,7 +6,7 @@ Listing/Import/Caption: Importieren
 Listing/Select/Caption: Auswahl
 Listing/Status/Caption: Status
 Listing/Title/Caption: Titel
-Upgrader/Plugins/Suppressed: Einige "plugins" weden unterdrückt! Importierte plugins: <<incoming>> sind älter als existierende: <<existing>>.
+Upgrader/Plugins/Suppressed/Version: Einige "plugins" weden unterdrückt! Importierte plugins: <<incoming>> sind älter als existierende: <<existing>>.
 Upgrader/Plugins/Upgraded:  Aktualisieren der plugins von: <<incoming>> nach: <<upgraded>>
 Upgrader/System/Suppressed: Unterdrückte "System Tiddler"
 Upgrader/ThemeTweaks/Created: Migrieren der "theme tweaks" von: <$text text=<<from>>/>

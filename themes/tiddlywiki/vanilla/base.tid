@@ -270,8 +270,9 @@ button svg, button img {
 	color: <<colour foreground>>;
 }
 
-.tw-sidebar-lists button.btn {
+.tw-sidebar-lists button {
 	color: <<colour sidebar-button-foreground>>;
+	fill: <<colour sidebar-button-foreground>>;
 }
 
 .tw-sidebar-lists button.btn-mini {
@@ -282,7 +283,7 @@ button svg, button img {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
-.tw-image-button {
+button svg.tw-image-button, button .tw-image-button img {
 	height: 1em;
 	width: 1em;
 }
@@ -532,6 +533,11 @@ button svg, button img {
 	background-color: <<colour tiddler-info-background>>;
 	border-top: 1px solid <<colour tiddler-info-border>>;
 	border-bottom: 1px solid <<colour tiddler-info-border>>;
+}
+
+.tw-tiddler-info p {
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
@@ -870,6 +876,15 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-drop-down p {
 	padding: 0 14px 0 14px;
+}
+
+.tw-drop-down svg {
+	width: 1em;
+	height: 1em;
+}
+
+.tw-drop-down img {
+	width: 1em;
 }
 
 .tw-drop-down a, .tw-drop-down button {
@@ -1342,4 +1357,32 @@ canvas.tw-edit-bitmapeditor  {
 body.tw-dirty span.tw-dirty-indicator, body.tw-dirty span.tw-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
+}
+
+/*
+** File inputs
+*/
+
+.tw-file-input-wrapper {
+	position: relative;
+	overflow: hidden;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.tw-file-input-wrapper input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 999px;
+	max-width: 100%;
+	max-height: 100%;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: pointer;
+	display: inline-block;
 }

@@ -1,6 +1,7 @@
 title: $:/editions/tw5.com/github-fork-ribbon
 tags: $:/tags/PageControls
 caption: ~GitHub ribbon
+description: ~GitHub ribbon for tw5.com
 
 <div class="github-fork-ribbon-wrapper right"><div class="github-fork-ribbon"><a href="https://github.com/Jermolene/TiddlyWiki5" target="_blank">Find me on ~GitHub</a></div>
 </div>

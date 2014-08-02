@@ -4,6 +4,7 @@ core/ui/Buttons/close-all: hide
 core/ui/Buttons/encryption: hide
 core/ui/Buttons/full-screen: hide
 core/ui/Buttons/home: hide
+core/ui/Buttons/import: hide
 core/ui/Buttons/language: hide
 core/ui/Buttons/more-page-actions: hide
 core/ui/Buttons/permaview: hide
