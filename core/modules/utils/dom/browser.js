@@ -135,8 +135,8 @@ Return the names of the fullscreen APIs
 */
 exports.getFullScreenApis = function() {
 	var d = document,
-		db = d.body;
-	return {
+		db = d.body,
+		result = {
 		"_requestFullscreen": db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
 							db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
 							db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
@@ -150,6 +150,11 @@ exports.getFullScreenApis = function() {
 							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
 							d.fullscreenElement !== undefined ? "fullscreenElement" : ""
 	};
+	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement) {
+		return null;
+	} else {
+		return result;
+	}
 };
 
 })();
