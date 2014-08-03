@@ -6,6 +6,7 @@ alert-highlight: Warnung Hervorhebung
 alert-muted-foreground: Warnung gedeckt Vordergrund
 background: Hintergrund Global
 blockquote-bar: Zitat Markierung
+dirty-indicator: Speichern nötig - Indikator
 code-background: Code Hintergrund
 code-border: Code Rahmen
 code-foreground: Code Vordergrund
