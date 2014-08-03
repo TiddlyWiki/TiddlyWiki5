@@ -48,7 +48,7 @@ pre-border: #cccccc
 primary: #5778d8
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
-sidebar-controls-foreground: #ffffff
+sidebar-controls-foreground: #aaaaaa
 sidebar-foreground-shadow: rgba(255,255,255, 0.8)
 sidebar-foreground: #acacac
 sidebar-muted-foreground-hover: #444444
