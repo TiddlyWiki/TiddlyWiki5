@@ -3,10 +3,15 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/globe}} {{$:/language/Buttons/Language/Caption}}
 description: {{$:/language/Buttons/Language/Hint}}
 
+\define flag-title()
+$(languagePluginTitle)$/icon
+\end
 <$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 <span class="tw-image-button">
-<$image source="$:/language/Flag"/>
+<$set name="languagePluginTitle" value={{$:/language}}>
+<$image source=<<flag-title>>/>
+</$set>
 </span>
 </$list>
 <$list filter="[<tw-config-toolbar-text>prefix[yes]]">
@@ -27,11 +32,13 @@ description: {{$:/language/Buttons/Language/Hint}}
 </$reveal>
 </span>
 <span class="tw-image-button">
-<$transclude subtiddler="$:/language/Flag">
+<$set name="languagePluginTitle" value=<<currentTiddler>>>
+<$transclude subtiddler=<<flag-title>>>
 <$list filter="[all[current]field:title[$:/languages/en-GB]]">
-<$transclude tiddler="$:/core" subtiddler="$:/language/Flag"/>
+<$transclude tiddler="$:/languages/en-GB/icon"/>
 </$list>
 </$transclude>
+</$set>
 </span>
 <$view field="description">
 <$view field="name">
