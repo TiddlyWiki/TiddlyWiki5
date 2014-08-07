@@ -85,6 +85,8 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 	output.push(this.transcludeField || "");
 	output.push("|");
 	output.push(this.transcludeIndex || "");
+	output.push("|");
+	output.push(this.transcludeSubTiddler || "");
 	output.push("}");
 	return output.join("");
 };
