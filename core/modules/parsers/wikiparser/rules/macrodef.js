@@ -58,7 +58,7 @@ exports.parse = function() {
 	var reEnd;
 	if(this.match[3]) {
 		// If so, the end of the body is marked with \end
-		reEnd = /(\r?\n\\end\r?\n)/mg;
+		reEnd = /(\r?\n\\end(?:$|\r?\n))/mg;
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /(\r?\n)/mg;
