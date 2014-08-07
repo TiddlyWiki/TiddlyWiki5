@@ -1,5 +1,5 @@
 created: 20130826122000000
-modified: 20131214094840608
+modified: 20140807094840608
 tags: mechanism
 title: PluginMechanism
 type: text/vnd.tiddlywiki
@@ -84,3 +84,23 @@ Plugins can also be included manually by copying them into the `plugins` subfold
 The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.
 
 In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are executed during startup processing.
+
+! Standard Tiddlers for Plugins
+
+Plugin authors are encouraged to provide special information and documentation tiddlers that TiddlyWiki can include as plugin information tabs in the [[control panel|$:/ControlPanel]].
+
+Plugins should provide an icon contained in a tiddler with the title formed of `<plugin-name>/icon` (for example, [[$:/core/icon]]).
+
+Plugins expose the names of the individual information tabs that they wish to display in the `list` field of the plugin tiddler. By convention, some or all of the following should be provided:
+
+* ''readme'': basic information about the plugin
+* ''license'': the license under which the plugin is published
+
+The process used to generate the title of the information tiddler is as follows:
+
+# `<plugin-name>/<current-language>/<tab-name>` (for example, ''$:/core/en-GB/readme'')
+# `<plugin-name>/<tab-name>` (for example, ''$:/core/readme'')
+
+Thus, plugins can provide language-specific versions of each information tiddler.
+
+Note that information tiddlers should not reference other tiddlers within the plugin. This is because plugins containing themes or languages are dynamically switched in and out as they are selected, and so their information tiddlers  may not be available for viewing. The control panel uses the 'subtiddler' attribute of the TranscludeWidget to access these tiddlers, which works independently of the plugin switching mechanism.
