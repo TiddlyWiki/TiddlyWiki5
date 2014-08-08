@@ -1239,7 +1239,6 @@ canvas.tw-edit-bitmapeditor  {
 }
 
 .tw-plugin-info {
-	vertical-align: middle;
 	border: 1px solid <<colour muted-foreground>>;
 	margin: 1em 0 1em 0;
 	padding: 8px;
@@ -1253,6 +1252,7 @@ canvas.tw-edit-bitmapeditor  {
 .tw-plugin-info .tw-plugin-info-dropdown-button,
 .tw-plugin-info .tw-tiddlylink {
 	display: inline-block;
+	vertical-align: middle;
 }
 
 /*

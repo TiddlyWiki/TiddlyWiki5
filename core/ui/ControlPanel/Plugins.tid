@@ -31,17 +31,17 @@ $(currentTiddler)$/icon
 </div>
 <$link to={{!!title}} class="tw-plugin-info-link">
 <div>
-<div style="display:inline-block;">
+<div style="display:inline-block;vertical-align:middle;">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<plugin-icon-title>>>
 <$transclude tiddler="$:/core/images/plugin-generic-$type$"/>
 </$transclude>
 </div>
-<div style="display:inline-block;">
+<div style="display:inline-block;vertical-align:middle;">
 <div>
 ''<$view field="description"><$view field="title"/></$view>''
 </div>
 <div>
-<$view field="title"/><br>
+<$view field="title"/>
 </div>
 <div>
 <$view field="version"/>
