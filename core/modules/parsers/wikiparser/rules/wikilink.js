@@ -24,9 +24,9 @@ exports.name = "wikilink";
 exports.types = {inline: true};
 
 var textPrimitives = {
-	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
+	upperLetter: "[A-Z\u00c0-\u00d6\u00d8-\u00de\u0150\u0170]",
 	lowerLetter: "[a-z0-9\u00df-\u00ff\u0151\u0171]",
-	anyLetter:   "[A-Za-z0-9\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]"
+	anyLetter:   "[A-Za-z0-9\u00c0-\u00d6\u00d8-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]"
 };
 
 textPrimitives.unWikiLink = "~";

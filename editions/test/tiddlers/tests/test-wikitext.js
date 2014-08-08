@@ -49,6 +49,7 @@ describe("WikiText tests", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No wikilinks here").indexOf("<a") !== -1).toBe(false);
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","One WikiLink here").indexOf("<a") !== -1).toBe(true);
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki-Link here").indexOf("<a") !== -1).toBe(false);
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki×Link here").indexOf("<a") !== -1).toBe(false);
 	});
 
 });
