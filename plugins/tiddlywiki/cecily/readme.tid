@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/cecily/readme
+
+This plugin provides a new story visualisation that displays individual tiddlers as resizable tiles on an infinite canvas.
+
+Cecily is based on an earlier plugin for TiddlyWiki Classic: http://jermolene.com/cecily
+
+Cecily is currently in the early stages of development with little functionality yet implemented.
