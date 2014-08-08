@@ -45,6 +45,11 @@ describe("WikiText tests", function() {
 	it("should support attributes specified as macro invocations", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<p><a class='tw-tiddlylink tw-tiddlylink-missing' href='#This%20is%20my%20''amazingly''%20groovy%20macro!'>This is a link</a></p>");
 	});
+	it("should identify wikiwords to automatically link", function() {
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No wikilinks here").indexOf("<a") !== -1).toBe(false);
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","One WikiLink here").indexOf("<a") !== -1).toBe(true);
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki-Link here").indexOf("<a") !== -1).toBe(false);
+	});
 
 });
 

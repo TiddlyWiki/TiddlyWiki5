@@ -25,9 +25,8 @@ exports.types = {inline: true};
 
 var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00de\u0150\u0170]",
-	lowerLetter: "[a-z0-9_\\-\u00df-\u00ff\u0151\u0171]",
-	anyLetter:   "[A-Za-z0-9_\\-\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]",
-	anyLetterStrict: "[A-Za-z0-9\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]"
+	lowerLetter: "[a-z0-9\u00df-\u00ff\u0151\u0171]",
+	anyLetter:   "[A-Za-z0-9\u00c0-\u00de\u00df-\u00ff\u0150\u0170\u0151\u0171]"
 };
 
 textPrimitives.unWikiLink = "~";
@@ -56,7 +55,7 @@ exports.parse = function() {
 	}
 	// If the link has been preceded with a letter then don't treat it as a link
 	if(this.match.index > 0) {
-		var preRegExp = new RegExp(textPrimitives.anyLetterStrict,"mg");
+		var preRegExp = new RegExp(textPrimitives.anyLetter,"mg");
 		preRegExp.lastIndex = this.match.index-1;
 		var preMatch = preRegExp.exec(this.parser.source);
 		if(preMatch && preMatch.index === this.match.index-1) {
