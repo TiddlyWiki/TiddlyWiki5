@@ -51,6 +51,9 @@ describe("WikiText tests", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki-Link here").indexOf("<a") !== -1).toBe(false);
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki×Link here").indexOf("<a") !== -1).toBe(false);
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No Wiki÷Link here").indexOf("<a") !== -1).toBe(false);
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No xWikiLink here").indexOf("<a") !== -1).toBe(false);
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No -WikiLink here").indexOf("<a") !== -1).toBe(false);
+		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No _WikiLink here").indexOf("<a") !== -1).toBe(false);
 	});
 
 });

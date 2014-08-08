@@ -26,7 +26,8 @@ exports.types = {inline: true};
 var textPrimitives = {
 	upperLetter: "[A-Z\u00c0-\u00d6\u00d8-\u00de\u0150\u0170]",
 	lowerLetter: "[a-z0-9\u00df-\u00f6\u00f8-\u00ff\u0151\u0171]",
-	anyLetter:   "[A-Za-z0-9\u00c0-\u00d6\u00d8-\u00de\u00df-\u00f6\u00f8-\u00ff\u0150\u0170\u0151\u0171]"
+	anyLetter:   "[A-Za-z0-9\u00c0-\u00d6\u00d8-\u00de\u00df-\u00f6\u00f8-\u00ff\u0150\u0170\u0151\u0171]",
+	blockPrefixLetters:	"[A-Za-z0-9\-_\u00c0-\u00d6\u00d8-\u00de\u00df-\u00f6\u00f8-\u00ff\u0150\u0170\u0151\u0171]"
 };
 
 textPrimitives.unWikiLink = "~";
@@ -53,9 +54,9 @@ exports.parse = function() {
 	if(linkText.substr(0,1) === textPrimitives.unWikiLink) {
 		return [{type: "text", text: linkText.substr(1)}];
 	}
-	// If the link has been preceded with a letter then don't treat it as a link
+	// If the link has been preceded with a blocked letter then don't treat it as a link
 	if(this.match.index > 0) {
-		var preRegExp = new RegExp(textPrimitives.anyLetter,"mg");
+		var preRegExp = new RegExp(textPrimitives.blockPrefixLetters,"mg");
 		preRegExp.lastIndex = this.match.index-1;
 		var preMatch = preRegExp.exec(this.parser.source);
 		if(preMatch && preMatch.index === this.match.index-1) {
