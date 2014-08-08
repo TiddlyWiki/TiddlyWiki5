@@ -6,5 +6,3 @@ title: $:/core/zh-Hant/readme
 * 圖示
 * 建立 TiddlyWiki 的使用者介面所需的範本
 * 核心所使用的可當地語系化字串的英國英語 (''en-GB'') 翻譯
-
-{{$:/core/readme}}
