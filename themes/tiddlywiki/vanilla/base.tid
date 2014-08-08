@@ -1238,6 +1238,23 @@ canvas.tw-edit-bitmapeditor  {
 	width: 100%;
 }
 
+.tw-plugin-info {
+	vertical-align: middle;
+	border: 1px solid <<colour muted-foreground>>;
+	margin: 1em 0 1em 0;
+	padding: 8px;
+}
+
+.tw-plugin-info img, .tw-plugin-info svg {
+	width: 3em;
+	height: 3em;
+} 
+
+.tw-plugin-info .tw-plugin-info-dropdown-button,
+.tw-plugin-info .tw-tiddlylink {
+	display: inline-block;
+}
+
 /*
 ** Message boxes
 */
