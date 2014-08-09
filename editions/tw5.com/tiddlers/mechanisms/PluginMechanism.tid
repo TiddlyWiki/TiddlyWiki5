@@ -32,6 +32,7 @@ Plugins are stored as tiddlers with the following fields:
 |type |Must be ''application/json'' |
 |plugin-type |Can be ''plugin'' (default) or ''theme'' |
 |text |JSON encoding of the list of tiddlers comprising the plugin |
+|list |Names of exposed plugin information tiddlers (see below) |
 |dependents |List of dependent plugins (currently only implemented for themes) |
 
 ! Plugin folders
@@ -50,7 +51,8 @@ The JSON structure for plugin tiddlers is as follows:
 	"version": "1.2.3-alpha3",
 	"core-version": ">=5.0.0",
 	"source": "http://tiddlywiki.com/MyPlugin",
-	"plugin-type": "plugin"
+	"plugin-type": "plugin",
+	"list": "readme license history"
 }
 ```
 
@@ -85,7 +87,7 @@ The wiki object keeps track of all of the currently loaded plugins. If a request
 
 In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are executed during startup processing.
 
-! Standard Tiddlers for Plugins
+! Information Tiddlers for Plugins
 
 Plugin authors are encouraged to provide special information and documentation tiddlers that TiddlyWiki can include as plugin information tabs in the [[control panel|$:/ControlPanel]].
 
