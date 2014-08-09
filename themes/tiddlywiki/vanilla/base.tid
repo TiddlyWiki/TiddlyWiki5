@@ -952,6 +952,7 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 4px 14px 4px 14px;
 }
 
+.tw-drop-down .tw-dropdown-item,
 .tw-block-dropdown .tw-dropdown-item {
 	padding: 4px 14px 4px 7px;
 	color: <<colour muted-foreground>>;
