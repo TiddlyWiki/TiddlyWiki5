@@ -1,0 +1,6 @@
+title: $:/editions/tw5.com/version-link-macro
+tags: $:/tags/Macro
+
+\define version-link()
+[[$(version)$|Release $(version)$]]
+\end
