@@ -855,6 +855,10 @@ canvas.tw-edit-bitmapeditor  {
 	fill: <<colour muted-foreground>>;
 }
 
+.tw-drop-down-wrapper {
+	position: relative;
+}
+
 .tw-drop-down {
 	min-width: 280px;
 	border: 1px solid <<colour dropdown-border>>;
