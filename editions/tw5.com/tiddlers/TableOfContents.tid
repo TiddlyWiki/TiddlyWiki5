@@ -1,7 +1,10 @@
-title: TableOfContents
-list-after: $:/core/ui/SideBar/Open
-tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Contents/Caption}}
+created: 20140809114010378
+list-after: $:/core/ui/SideBar/Open
+modified: 20140809114018461
+tags: $:/tags/SideBar
+title: TableOfContents
+type: text/vnd.tiddlywiki
 
 \define toc-heading(caption,body)
 <$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
@@ -106,6 +109,7 @@ $body$
 ## [[Creating SubStories]]
 ## [[Editing Tiddlers with Emacs]]
 ## [[GoogleChromeTips]]
+## [[ImageGallery Example]]
 ## [[Making curved text with SVG]]
 ## [[Preserving open tiddlers at startup]]
 ## [[Setting a favicon]]

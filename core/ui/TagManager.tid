@@ -2,18 +2,18 @@ title: $:/TagManager
 
 \define lingo-base() $:/language/TagManager/
 \define iconEditor(title)
+<div class="tw-drop-down-wrapper">
 <$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/popup/icon/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<div class="tw-block-dropdown-wrapper">
-<$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="nomatch" text="" default="">
+<$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
+<div class="tw-drop-down">
 <$linkcatcher to="$title$!!icon">
-<div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] +[sort[title]]">
+<$list filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[sort[title]]">
 <$link to={{!!title}}>
-<$view field="title"/>
+<$transclude/> <$view field="title"/>
 </$link>
 </$list>
-</div>
 </$linkcatcher>
+</div>
 </$reveal>
 </div>
 \end

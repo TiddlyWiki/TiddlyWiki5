@@ -855,6 +855,10 @@ canvas.tw-edit-bitmapeditor  {
 	fill: <<colour muted-foreground>>;
 }
 
+.tw-drop-down-wrapper {
+	position: relative;
+}
+
 .tw-drop-down {
 	min-width: 280px;
 	border: 1px solid <<colour dropdown-border>>;
@@ -1241,8 +1245,15 @@ canvas.tw-edit-bitmapeditor  {
 .tw-plugin-info {
 	display: block;
 	border: 1px solid <<colour muted-foreground>>;
+	background-colour: <<colour background>>;
 	margin: 1em 0 1em 0;
 	padding: 8px;
+}
+
+a.tw-tiddlylink.tw-plugin-info:hover {
+	text-decoration: none;
+	background-color: <<colour primary>>;
+	color: <<colour background>>;
 }
 
 .tw-plugin-info-chunk {
@@ -1250,9 +1261,19 @@ canvas.tw-edit-bitmapeditor  {
 	vertical-align: middle;	
 }
 
-.tw-plugin-info img, .tw-plugin-info svg {
+.tw-plugin-info img {
+	width: 3em;
+}
+
+.tw-plugin-info svg {
 	width: 3em;
 	height: 3em;
+}
+
+.tw-plugin-info-dropdown {
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 1em;
+	margin-top: -1em;
 }
 
 /*
