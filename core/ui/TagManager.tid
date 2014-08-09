@@ -14,13 +14,8 @@ title: $:/TagManager
 <$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
 <div class="tw-drop-down">
 <$linkcatcher to="$title$!!icon">
-<div class="tw-dropdown-item">
-Images
-</div>
 <<iconEditorTab type:"!">>
-<div class="tw-dropdown-item">
-System Images
-</div>
+<hr/>
 <<iconEditorTab type:"">>
 </$linkcatcher>
 </div>
