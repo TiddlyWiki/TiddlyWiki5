@@ -1,5 +1,8 @@
 title: $:/core/zh-Hant/readme
 
-<!-- Replace with translation of the readme for the core plugin -->
+此插件包含 TiddlyWiki 的核心元件，包括：
 
-{{$:/core/readme}}
+* JavaScript 程式碼模組
+* 圖示
+* 建立 TiddlyWiki 的使用者介面所需的範本
+* 核心所使用的可當地語系化字串的英國英語 (''en-GB'') 翻譯
