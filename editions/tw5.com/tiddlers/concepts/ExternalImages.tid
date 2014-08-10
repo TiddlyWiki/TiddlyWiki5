@@ -16,6 +16,8 @@ An external image is an ordinary image tiddler that has a ''_canonical_uri'' fie
 
 To manually create an external image just create the tiddler with the appropriate image content type, and add a ''_canonical_uri'' field with a URI pointing to the actual image location.
 
+''IMPORTANT:'' Double-check your spelling. ``_canonical_uri`` is spelled [[URI|https://en.wikipedia.org/wiki/URI#The_relationship_between_URIs.2C_URLs.2C_and_URNs]], not URL.
+
 ! Creating external images under Node.js
 
 The following steps are used to create a static HTML file version of a wiki accompanied by an ''images'' folder containing the referenced external images:
