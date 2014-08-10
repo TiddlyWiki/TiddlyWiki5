@@ -5,12 +5,15 @@ tags: $:/tags/EditTemplate
 \define config-title()
 $:/config/EditTemplateFields/Visibility/$(currentField)$
 \end
+\define config-filter()
+[[hide]] -[title{$(config-title)$}]
+\end
 <$fieldmangler>
 <div class="tw-edit-fields">
 <table class="tw-edit-fields">
 <tbody>
 <$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField">
-<$reveal type="nomatch" state=<<config-title>> text="hide">
+<$list filter=<<config-filter>> variable="temp">
 <tr class="tw-edit-field">
 <td class="tw-edit-field-name">
 <$text text=<<currentField>>/>:</td>
@@ -21,7 +24,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$button message="tw-remove-field" param=<<currentField>> class="btn-invisible">{{$:/core/images/delete-button}}</$button>
 </td>
 </tr>
-</$reveal>
+</$list>
 </$list>
 </tbody>
 </table>
