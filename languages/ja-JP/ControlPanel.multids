@@ -37,9 +37,6 @@ Basics/Title/Prompt: この ~TiddlyWiki のタイトル:
 Basics/Username/Prompt: 編集者として表示するユーザ名:
 Basics/Version/Prompt: ~TiddlyWiki バージョン:
 Plugins/Caption: プラグイン
-Plugins/Fields/Description: 説明
-Plugins/Fields/Title: タイトル
-Plugins/Fields/Version: バージョン
 Plugins/Language/Prompt: 言語
 Plugins/Plugin/Prompt: プラグイン
 Plugins/Theme/Prompt: テーマ

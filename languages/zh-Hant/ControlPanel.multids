@@ -64,9 +64,6 @@ Basics/Title/Prompt: 標題：
 Basics/Username/Prompt: 編輯者署名：
 Basics/Version/Prompt: ~TiddlyWiki 版本：
 Plugins/Caption: 插件
-Plugins/Fields/Description: 說明
-Plugins/Fields/Title: 標題
-Plugins/Fields/Version: 版本
 Plugins/Language/Prompt: 語言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 佈景主題

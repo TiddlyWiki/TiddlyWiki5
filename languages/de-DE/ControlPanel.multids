@@ -64,9 +64,6 @@ Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
 Basics/Username/Prompt: Benutzer Signatur zum editieren:
 Basics/Version/Prompt: ~TiddlyWiki Version:
 Plugins/Caption: Plugins
-Plugins/Fields/Description: Beschreibung
-Plugins/Fields/Title: Titel
-Plugins/Fields/Version: Version
 Plugins/Language/Prompt: Sprachen
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themen

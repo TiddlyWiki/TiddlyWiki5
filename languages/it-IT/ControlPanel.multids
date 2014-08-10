@@ -37,9 +37,6 @@ Basics/Title/Prompt: Il titolo di questo ~TiddlyWiki:
 Basics/Username/Prompt: Digita il nome con cui firmare le modifiche:
 Basics/Version/Prompt: Versione di ~TiddlyWiki:
 Plugins/Caption: Plugins
-Plugins/Fields/Description: Descrizione
-Plugins/Fields/Title: Titolo
-Plugins/Fields/Version: Versione
 Plugins/Language/Prompt: Linguaggi
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Temi
