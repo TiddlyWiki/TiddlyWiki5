@@ -1,0 +1,12 @@
+created: 20140811112304772
+modified: 20140811120248738
+tags: message
+title: WidgetMessage: tw-notify
+type: application/x-tiddler
+
+The notify message briefly displays a specified tiddler as a small alert in the upper right corner of the page. It requires the following properties on the `event` object:
+
+|!Name |!Description |
+|param |Title of the tiddler to be displayed |
+
+The notify message is handled by the TiddlyWiki core.
