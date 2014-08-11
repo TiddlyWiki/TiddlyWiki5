@@ -1,10 +1,10 @@
-created: 20131129092604900
-modified: 20140811170321179
+created: 20140811171304926
+modified: 20140811171800263
 tags: howto
-title: Saving with the HTML5 fallback saver
+title: Saving on Safari
 type: text/vnd.tiddlywiki
 
-This method of saving changes is clunky because it requires manual intervention for each save. It has the advantage of working on almost all desktop browsers, and many mobile browsers.
+This method of saving changes is clunky because it requires manual intervention for each save.
 
 # [[Download]] an empty TiddlyWiki by clicking this button:
 #> {{$:/editions/tw5.com/snippets/download-empty-button}}
@@ -12,11 +12,12 @@ This method of saving changes is clunky because it requires manual intervention 
 #> Your browser may ask you to accept the download before it begins
 # Locate the file you just downloaded
 #* You may rename it, but be sure to keep the `.html` or `.htm` extension
-# Open the file in your browser
+# Open the file in Safari
 # Try creating a new tiddler using the ''new tiddler'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''done'' button
 # Save your changes by clicking the {{$:/core/images/save-button}} ''save changes'' button in the sidebar
-# Your browser will download a new copy of the wiki incorporating your changes
-# Locate the newly downloaded file and open it in your browser
+# A popup "Download changes" window is displayed that includes a link labelled //Right-click to save changes//
+# Right-click on the link and select "Download Linked File As..." from the popup menu
+# Navigate to the folder containing your wiki HTML file and select the existing file
+# Click the "Save" button
+# Click "Replace" to confirm replacing the existing file
 # Verify that your changes have been saved correctly
-
-''Tip'': most browsers have an option to prompt each time for the download location. This allows you to select the existing version of the file and replace it.

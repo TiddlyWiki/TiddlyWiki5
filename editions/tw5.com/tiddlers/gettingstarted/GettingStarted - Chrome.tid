@@ -1,4 +1,9 @@
-title: GettingStarted - Chrome
 caption: Chrome
+created: 20140811165935523
+modified: 20140811170107969
+title: GettingStarted - Chrome
+type: text/vnd.tiddlywiki
 
-These are instructions for Chrome
+TiddlyWiki on Google Chrome can only save changes using the HTML5-compatible fallback saver module.
+
+{{Saving with the HTML5 fallback saver}}
