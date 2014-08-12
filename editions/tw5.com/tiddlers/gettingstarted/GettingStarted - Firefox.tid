@@ -1,4 +1,9 @@
-title: GettingStarted - Firefox
 caption: Firefox
+created: 20140811170425199
+modified: 20140811170527083
+title: GettingStarted - Firefox
+type: text/vnd.tiddlywiki
 
-These are instructions for Firefox
+Firefox provides the best user experience for using TiddlyWiki with the TiddlyFox browser extension.
+
+{{Saving with TiddlyFox}}

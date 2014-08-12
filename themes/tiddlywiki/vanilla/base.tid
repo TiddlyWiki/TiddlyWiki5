@@ -1135,8 +1135,8 @@ canvas.tw-edit-bitmapeditor  {
 	padding-top: 0;
 	padding-left: 14px;
 	border-left: 1px solid <<colour tab-border>>;
-	-webkit-flex: 0 0 70%;
-	flex: 0 0 70%;
+	-webkit-flex: 0 0 84%;
+	flex: 0 0 84%;
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
