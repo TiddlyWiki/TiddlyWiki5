@@ -5,4 +5,4 @@ type: text/vnd.tiddlywiki
 
 Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
 
-<<tabs "[tag[releasenote]!sort[created]]" "Release 5.0.14-beta" "$:/state/tab2" "tw-vertical" "ReleaseHistoryTemplate">>
+<<tabs "[tag[releasenote]!sort[created]]" "Release 5.0.15-beta" "$:/state/tab2" "tw-vertical" "ReleaseHistoryTemplate">>
