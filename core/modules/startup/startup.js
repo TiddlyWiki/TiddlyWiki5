@@ -58,7 +58,7 @@ exports.startup = function() {
 		window.addEventListener("beforeunload",function(event) {
 			var confirmationMessage = undefined;
 			if($tw.syncer.isDirty()) {
-				confirmationMessage = "You have unsaved changes in TiddlyWiki";
+				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
 				event.returnValue = confirmationMessage; // Gecko
 			}
 			return confirmationMessage;
