@@ -22,14 +22,6 @@ exports.synchronous = true;
 var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: document
-	});
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tw-modal",function(event) {
