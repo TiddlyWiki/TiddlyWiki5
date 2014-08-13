@@ -66,6 +66,27 @@ function Syncer(options) {
 		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
 			$tw.syncer.handleRefreshEvent();
 		});
+		// Install the save action handlers
+		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
+			$tw.syncer.saveWiki({
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
+		$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
+			$tw.syncer.saveWiki({
+				method: "autosave",
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
+		$tw.rootWidget.addEventListener("tw-download-file",function(event) {
+			$tw.syncer.saveWiki({
+				method: "download",
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
 	}
 	// Listen out for lazyLoad events
 	if(this.syncadaptor) {
