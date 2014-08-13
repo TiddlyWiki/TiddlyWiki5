@@ -54,15 +54,6 @@ exports.startup = function() {
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup
 	if($tw.browser) {
-		// Set up our beforeunload handler
-		window.addEventListener("beforeunload",function(event) {
-			var confirmationMessage = undefined;
-			if($tw.syncer.isDirty()) {
-				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
-				event.returnValue = confirmationMessage; // Gecko
-			}
-			return confirmationMessage;
-		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			rootElement: document.body

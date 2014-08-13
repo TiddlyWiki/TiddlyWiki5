@@ -45,6 +45,17 @@ function Syncer(options) {
 	this.wiki.addEventListener("change",function(changes) {
 		self.syncToServer(changes);
 	});
+	// Set up our beforeunload handler
+	if($tw.browser) {
+		window.addEventListener("beforeunload",function(event) {
+			var confirmationMessage = undefined;
+			if(self.isDirty()) {
+				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
+				event.returnValue = confirmationMessage; // Gecko
+			}
+			return confirmationMessage;
+		});
+	}
 	// Listen out for lazyLoad events
 	if(this.syncadaptor) {
 		this.wiki.addEventListener("lazyLoad",function(title) {
