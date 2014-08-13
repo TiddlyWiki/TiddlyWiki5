@@ -45,8 +45,9 @@ function Syncer(options) {
 	this.wiki.addEventListener("change",function(changes) {
 		self.syncToServer(changes);
 	});
-	// Set up our beforeunload handler
+	// Browser event handlers
 	if($tw.browser) {
+		// Set up our beforeunload handler
 		window.addEventListener("beforeunload",function(event) {
 			var confirmationMessage = undefined;
 			if(self.isDirty()) {
@@ -54,6 +55,16 @@ function Syncer(options) {
 				event.returnValue = confirmationMessage; // Gecko
 			}
 			return confirmationMessage;
+		});
+		// Listen out for login/logout/refresh events in the browser
+		$tw.rootWidget.addEventListener("tw-login",function() {
+			$tw.syncer.handleLoginEvent();
+		});
+		$tw.rootWidget.addEventListener("tw-logout",function() {
+			$tw.syncer.handleLogoutEvent();
+		});
+		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
+			$tw.syncer.handleRefreshEvent();
 		});
 	}
 	// Listen out for lazyLoad events
@@ -509,7 +520,7 @@ Syncer.prototype.chooseNextTask = function() {
 		// Exclude the task if it is a save and the tiddler has been modified recently, but not hit the fallback time
 		if(task.type === "save" && (now - task.lastModificationTime) < self.throttleInterval &&
 			(now - task.queueTime) < self.fallbackInterval) {
-			return;	
+			return;
 		}
 		// Exclude the task if it is newer than the current best candidate
 		if(candidateTask && candidateTask.queueTime < task.queueTime) {
