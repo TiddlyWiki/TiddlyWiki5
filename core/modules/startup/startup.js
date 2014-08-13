@@ -20,6 +20,8 @@ exports.synchronous = true;
 // Set to `true` to enable performance instrumentation
 var PERFORMANCE_INSTRUMENTATION = false;
 
+var widget = require("$:/core/modules/widgets/widget.js");
+
 exports.startup = function() {
 	var modules,n,m,f;
 	if($tw.browser) {
@@ -51,13 +53,15 @@ exports.startup = function() {
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
 	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: document
-	});
+	if($tw.browser) {
+		$tw.rootWidget = new widget.widget({
+			type: "widget",
+			children: []
+		},{
+			wiki: $tw.wiki,
+			document: document
+		});
+	}
 	// Set up the syncer object
 	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
 	// Host-specific startup

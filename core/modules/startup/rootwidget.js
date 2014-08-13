@@ -15,11 +15,9 @@ Setup the root widget and the core root widget handlers
 // Export name and synchronous status
 exports.name = "rootwidget";
 exports.platforms = ["browser"];
-exports.after = ["load-modules"];
+exports.after = ["startup"];
 exports.before = ["story"];
 exports.synchronous = true;
-
-var widget = require("$:/core/modules/widgets/widget.js");
 
 exports.startup = function() {
 	// Install the modal message mechanism
