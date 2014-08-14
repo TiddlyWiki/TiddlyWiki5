@@ -58,30 +58,30 @@ function Syncer(options) {
 		});
 		// Listen out for login/logout/refresh events in the browser
 		$tw.rootWidget.addEventListener("tw-login",function() {
-			$tw.syncer.handleLoginEvent();
+			self.handleLoginEvent();
 		});
 		$tw.rootWidget.addEventListener("tw-logout",function() {
-			$tw.syncer.handleLogoutEvent();
+			self.handleLogoutEvent();
 		});
 		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
-			$tw.syncer.handleRefreshEvent();
+			self.handleRefreshEvent();
 		});
 		// Install the save action handlers
 		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
-			$tw.syncer.saveWiki({
+			self.saveWiki({
 				template: event.param,
 				downloadType: "text/plain"
 			});
 		});
 		$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
-			$tw.syncer.saveWiki({
+			self.saveWiki({
 				method: "autosave",
 				template: event.param,
 				downloadType: "text/plain"
 			});
 		});
 		$tw.rootWidget.addEventListener("tw-download-file",function(event) {
-			$tw.syncer.saveWiki({
+			self.saveWiki({
 				method: "download",
 				template: event.param,
 				downloadType: "text/plain"
