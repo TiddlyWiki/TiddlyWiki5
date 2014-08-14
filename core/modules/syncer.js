@@ -14,20 +14,15 @@ The syncer tracks changes to the store. If a syncadaptor is used then individual
 
 /*
 Instantiate the syncer with the following options:
+syncadaptor: reference to syncadaptor to be used
 wiki: wiki to be synced
 */
 function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
+	this.syncadaptor = options.syncadaptor
 	// Make a logger
 	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : ""));
-	// Find a working syncadaptor
-	this.syncadaptor = undefined;
-	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
-		if(!self.syncadaptor && module.adaptorClass) {
-			self.syncadaptor = new module.adaptorClass(self);
-		}
-	});
 	// Initialise our savers
 	if($tw.browser) {
 		this.initSavers();
@@ -603,6 +598,8 @@ Syncer.prototype.dispatchTask = function(task,callback) {
 			}
 			// Invoke the callback
 			callback(null);
+		},{
+			tiddlerInfo: self.tiddlerInfo[task.title]
 		});
 	}
 };

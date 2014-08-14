@@ -1,5 +1,5 @@
 created: 20130825162100000
-modified: 20131129094907624
+modified: 20140814094907624
 tags: dev moduletypes
 title: SyncAdaptorModules
 type: text/vnd.tiddlywiki
@@ -27,12 +27,16 @@ Nothing should be exported if the adaptor detects that it isn't capable of opera
 
 Adaptor modules must handle the following methods.
 
-!! `Constructor(syncer)`
+!! `Constructor(options)`
 
 Initialises a new adaptor instance.
 
 |!Parameter |!Description |
-|syncer |Syncer object that is using this adaptor |
+|options |See below |
+
+Options include:
+
+* ''options.wiki'': reference to wiki to use with this syncadaptor
 
 !! `getTiddlerInfo(tiddler)`
 
@@ -91,10 +95,11 @@ Loads a tiddler from the server.
 |title |Title of tiddler to be retrieved |
 |callback |Callback function invoked with parameter `err,tiddlerFields` |
 
-!! `deleteTiddler(title,callback)`
+!! `deleteTiddler(title,callback,tiddlerInfo)`
 
 Delete a tiddler from the server.
 
 |!Parameter |!Description |
 |title |Title of tiddler to be deleted |
 |callback |Callback function invoked with parameter `err` |
+|tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |
