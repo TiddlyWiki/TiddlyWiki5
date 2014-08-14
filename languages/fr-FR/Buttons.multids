@@ -52,6 +52,7 @@ HideSideBar/Caption: cacher la barre latérale
 HideSideBar/Hint: Cacher la barre latérale
 ShowSideBar/Caption: afficher la barre latérale
 ShowSideBar/Hint: Afficher la barre latérale
+TagManager/Caption: gestionnaire de tags
+TagManager/Hint:  Gestionnaire de tags
 Theme/Caption: thème
 Theme/Hint: Choix du thème pour l'affichage
-

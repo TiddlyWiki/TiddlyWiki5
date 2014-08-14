@@ -6,6 +6,7 @@ core/ui/Buttons/full-screen: hide
 core/ui/Buttons/home: hide
 core/ui/Buttons/import: hide
 core/ui/Buttons/language: hide
+core/ui/Buttons/tag-manager: hide
 core/ui/Buttons/more-page-actions: hide
 core/ui/Buttons/permaview: hide
 core/ui/Buttons/storyview: hide

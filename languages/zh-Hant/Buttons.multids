@@ -52,5 +52,7 @@ HideSideBar/Caption: 隱藏側邊欄
 HideSideBar/Hint: 隱藏側邊欄
 ShowSideBar/Caption: 顯示側邊欄
 ShowSideBar/Hint: 顯示側邊欄
+TagManager/Caption: 標籤管理
+TagManager/Hint: 標籤管理
 Theme/Caption: 佈景主題
 Theme/Hint: 選擇佈景主題

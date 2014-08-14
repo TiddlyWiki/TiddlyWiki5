@@ -1,7 +1,7 @@
 title: $:/language/Buttons/
 
 AdvancedSearch/Caption: erweiterte suche
-AdvancedSearch/Hint: Erweiterte Suche 
+AdvancedSearch/Hint: Erweiterte Suche
 Cancel/Caption: abbrechen
 Cancel/Hint: Tiddler bearbeiten abbrechen
 Clone/Caption: klone
@@ -31,7 +31,7 @@ Import/Hint: Importiere Dateien
 Info/Caption: info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
 Home/Caption: home
-Home/Hint: Seite neu laden und öffne die standard (default) Tiddler 
+Home/Hint: Seite neu laden und öffne die standard (default) Tiddler
 Language/Caption: sprache
 Language/Hint: Auswahl Dialog für die System Sprache
 NewTiddler/Caption: neuer Tiddler
@@ -52,5 +52,7 @@ HideSideBar/Caption: Sidebar ausblenden
 HideSideBar/Hint: Sidebar ausblenden
 ShowSideBar/Caption: Sidebar einblenden
 ShowSideBar/Hint: Sidebar eiblenden
+TagManager/Caption: tag manager
+TagManager/Hint: Öffne das "Tag Manager"
 Theme/Caption: Thema
 Theme/Hint: Thema auswählen
