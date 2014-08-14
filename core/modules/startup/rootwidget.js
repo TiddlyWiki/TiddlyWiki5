@@ -15,21 +15,11 @@ Setup the root widget and the core root widget handlers
 // Export name and synchronous status
 exports.name = "rootwidget";
 exports.platforms = ["browser"];
-exports.after = ["load-modules"];
+exports.after = ["startup"];
 exports.before = ["story"];
 exports.synchronous = true;
 
-var widget = require("$:/core/modules/widgets/widget.js");
-
 exports.startup = function() {
-	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
-	$tw.rootWidget = new widget.widget({
-		type: "widget",
-		children: []
-	},{
-		wiki: $tw.wiki,
-		document: document
-	});
 	// Install the modal message mechanism
 	$tw.modal = new $tw.utils.Modal($tw.wiki);
 	$tw.rootWidget.addEventListener("tw-modal",function(event) {
@@ -44,27 +34,6 @@ exports.startup = function() {
 	$tw.pageScroller = new $tw.utils.PageScroller();
 	$tw.rootWidget.addEventListener("tw-scroll",function(event) {
 		$tw.pageScroller.handleEvent(event);
-	});
-	// Install the save action handlers
-	$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
-		$tw.syncer.saveWiki({
-			template: event.param,
-			downloadType: "text/plain"
-		});
-	});
-	$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
-		$tw.syncer.saveWiki({
-			method: "autosave",
-			template: event.param,
-			downloadType: "text/plain"
-		});
-	});
-	$tw.rootWidget.addEventListener("tw-download-file",function(event) {
-		$tw.syncer.saveWiki({
-			method: "download",
-			template: event.param,
-			downloadType: "text/plain"
-		});
 	});
 	var fullscreen = $tw.utils.getFullScreenApis();
 	if(fullscreen) {

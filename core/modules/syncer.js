@@ -45,6 +45,49 @@ function Syncer(options) {
 	this.wiki.addEventListener("change",function(changes) {
 		self.syncToServer(changes);
 	});
+	// Browser event handlers
+	if($tw.browser) {
+		// Set up our beforeunload handler
+		window.addEventListener("beforeunload",function(event) {
+			var confirmationMessage = undefined;
+			if(self.isDirty()) {
+				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
+				event.returnValue = confirmationMessage; // Gecko
+			}
+			return confirmationMessage;
+		});
+		// Listen out for login/logout/refresh events in the browser
+		$tw.rootWidget.addEventListener("tw-login",function() {
+			$tw.syncer.handleLoginEvent();
+		});
+		$tw.rootWidget.addEventListener("tw-logout",function() {
+			$tw.syncer.handleLogoutEvent();
+		});
+		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
+			$tw.syncer.handleRefreshEvent();
+		});
+		// Install the save action handlers
+		$tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
+			$tw.syncer.saveWiki({
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
+		$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
+			$tw.syncer.saveWiki({
+				method: "autosave",
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
+		$tw.rootWidget.addEventListener("tw-download-file",function(event) {
+			$tw.syncer.saveWiki({
+				method: "download",
+				template: event.param,
+				downloadType: "text/plain"
+			});
+		});
+	}
 	// Listen out for lazyLoad events
 	if(this.syncadaptor) {
 		this.wiki.addEventListener("lazyLoad",function(title) {
@@ -498,7 +541,7 @@ Syncer.prototype.chooseNextTask = function() {
 		// Exclude the task if it is a save and the tiddler has been modified recently, but not hit the fallback time
 		if(task.type === "save" && (now - task.lastModificationTime) < self.throttleInterval &&
 			(now - task.queueTime) < self.fallbackInterval) {
-			return;	
+			return;
 		}
 		// Exclude the task if it is newer than the current best candidate
 		if(candidateTask && candidateTask.queueTime < task.queueTime) {
