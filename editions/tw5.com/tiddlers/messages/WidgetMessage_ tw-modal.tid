@@ -1,0 +1,12 @@
+created: 20140811112133701
+modified: 20140811120203685
+tags: message
+title: WidgetMessage: tw-modal
+type: text/vnd.tiddlywiki
+
+The modal message displays a specified tiddler in a modal overlay that dims the main page. It requires the following properties on the `event` object:
+
+|!Name |!Description |
+|param |Title of the tiddler to be displayed |
+
+The modal message is usually generated with the ButtonWidget. The modal message is handled by the TiddlyWiki core.

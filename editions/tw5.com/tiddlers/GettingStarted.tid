@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20140720212022007
+modified: 20140811172052886
 tags: introduction
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -11,31 +11,9 @@ GettingStarted - $(browser-name)$
 <$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tw-vertical"/>
 </$set>
 
------
+See also:
 
-TiddlyWiki is very flexible, and there are many different ways to use it. Here we're focusing on using it as a standalone file in the browser, which is a good choice for most users as it doesn't require any special knowledge or tools. For more options you can also run [[TiddlyWiki on Node.js]].
-
-[[Video Tutorials]] are available, too.
-
-! The 'works anywhere' method
-
-{{Saving with the HTML5 fallback saver}}
-
-! The convenient and fast method
-
-Saving changes as described above is quite inconvenient because of the degree of manual intervention that browsers require. The following alternative method is recommended for everyone who is able to use Mozilla's [[Firefox]] browser.
-
-{{Saving with TiddlyFox}}
-
-! Other ways of saving changes
-
-[[Saving with Encryption]] explains how to use TiddlyWiki's built-in encryption to protect your content with a password.
-
-You can also try:
-
-* [[Using TiddlyWiki on TiddlyDesktop]], a custom desktop application for working with TiddlyWiki
-* [[Saving on iPad/iPhone]] with the custom ''TWEdit'' app
-* [[Saving on Android]] with the custom ''~AndTidWiki'' app
-* [[Saving on InternetExplorer]] with the [[TiddlyIE]] extension, or via the [[Windows HTA Hack]] 
+* [[Saving with Encryption]] explains how to use TiddlyWiki's built-in encryption to protect your content with a password
 * [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
 * Running [[TiddlyWiki on node-webkit]], turning a single TiddlyWiki into a native application on your desktop
+* [[Using TiddlyWiki on TiddlyDesktop]], a custom desktop application for working with TiddlyWiki

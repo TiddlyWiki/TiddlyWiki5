@@ -855,6 +855,10 @@ canvas.tw-edit-bitmapeditor  {
 	fill: <<colour muted-foreground>>;
 }
 
+.tw-drop-down-wrapper {
+	position: relative;
+}
+
 .tw-drop-down {
 	min-width: 280px;
 	border: 1px solid <<colour dropdown-border>>;
@@ -948,6 +952,7 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 4px 14px 4px 14px;
 }
 
+.tw-drop-down .tw-dropdown-item,
 .tw-block-dropdown .tw-dropdown-item {
 	padding: 4px 14px 4px 7px;
 	color: <<colour muted-foreground>>;
@@ -1130,8 +1135,8 @@ canvas.tw-edit-bitmapeditor  {
 	padding-top: 0;
 	padding-left: 14px;
 	border-left: 1px solid <<colour tab-border>>;
-	-webkit-flex: 0 0 70%;
-	flex: 0 0 70%;
+	-webkit-flex: 1 0 70%;
+	flex: 1 0 70%;
 }
 
 .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
@@ -1236,6 +1241,40 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-control-panel table, .tw-control-panel table input, .tw-control-panel table textarea {
 	width: 100%;
+}
+
+.tw-plugin-info {
+	display: block;
+	border: 1px solid <<colour muted-foreground>>;
+	background-colour: <<colour background>>;
+	margin: 1em 0 1em 0;
+	padding: 8px;
+}
+
+a.tw-tiddlylink.tw-plugin-info:hover {
+	text-decoration: none;
+	background-color: <<colour primary>>;
+	color: <<colour background>>;
+}
+
+.tw-plugin-info-chunk {
+	display: inline-block;
+	vertical-align: middle;	
+}
+
+.tw-plugin-info img {
+	width: 3em;
+}
+
+.tw-plugin-info svg {
+	width: 3em;
+	height: 3em;
+}
+
+.tw-plugin-info-dropdown {
+	border: 1px solid <<colour muted-foreground>>;
+	padding: 1em;
+	margin-top: -1em;
 }
 
 /*

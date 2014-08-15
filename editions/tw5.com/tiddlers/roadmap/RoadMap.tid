@@ -1,5 +1,5 @@
 created: 20130823203800000
-modified: 20140715081725471
+modified: 20140809112946299
 tags: planning
 title: RoadMap
 type: text/vnd.tiddlywiki
@@ -16,7 +16,7 @@ Some important features were deferred to be added after the beta:
 * Fixing hangovers from TiddlyWikiClassic
 * ~TiddlyWiki file format (to avoid illegal attribute names)
 * Tiddler object format (to provide true polymorphism of field values)
-* Aliases
+* Aliases (alternative titles for tiddlers)
 * Search and replace
 * Tiddler renaming
 * Rich link tooltips, incorporating a preview

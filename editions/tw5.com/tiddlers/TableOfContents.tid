@@ -1,7 +1,10 @@
-title: TableOfContents
-list-after: $:/core/ui/SideBar/Open
-tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/Contents/Caption}}
+created: 20140809114010378
+list-after: $:/core/ui/SideBar/Open
+modified: 20140809114018461
+tags: $:/tags/SideBar
+title: TableOfContents
+type: text/vnd.tiddlywiki
 
 \define toc-heading(caption,body)
 <$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
@@ -106,6 +109,7 @@ $body$
 ## [[Creating SubStories]]
 ## [[Editing Tiddlers with Emacs]]
 ## [[GoogleChromeTips]]
+## [[ImageGallery Example]]
 ## [[Making curved text with SVG]]
 ## [[Preserving open tiddlers at startup]]
 ## [[Setting a favicon]]
@@ -179,18 +183,30 @@ $body$
 ">>
 ## <<toc-heading "Widget Messages" "
 ## WidgetMessages
+## [[tw-auto-save-wiki|WidgetMessage: tw-auto-save-wiki]]
 ## [[tw-cancel-tiddler|WidgetMessage: tw-cancel-tiddler]]
 ## [[tw-clear-password|WidgetMessage: tw-clear-password]]
 ## [[tw-close-all-tiddlers|WidgetMessage: tw-close-all-tiddlers]]
 ## [[tw-close-other-tiddlers|WidgetMessage: tw-close-other-tiddlers]]
 ## [[tw-close-tiddler|WidgetMessage: tw-close-tiddler]]
 ## [[tw-delete-tiddler|WidgetMessage: tw-delete-tiddler]]
+## [[tw-download-file|WidgetMessage: tw-download-file]]
 ## [[tw-edit-tiddler|WidgetMessage: tw-edit-tiddler]]
+## [[tw-full-screen|WidgetMessage: tw-full-screen]]
 ## [[tw-home|WidgetMessage: tw-home]]
 ## [[tw-import-tiddlers|WidgetMessage: tw-import-tiddlers]]
+## [[tw-login|WidgetMessage: tw-login]]
+## [[tw-logout|WidgetMessage: tw-logout]]
+## [[tw-modal|WidgetMessage: tw-modal]]
 ## [[tw-navigate|WidgetMessage: tw-navigate]]
 ## [[tw-new-tiddler|WidgetMessage: tw-new-tiddler]]
+## [[tw-notify|WidgetMessage: tw-notify]]
+## [[tw-perform-import|WidgetMessage: tw-perform-import]]
+## [[tw-permalink|WidgetMessage: tw-permalink]]
+## [[tw-permaview|WidgetMessage: tw-permaview]]
 ## [[tw-save-tiddler|WidgetMessage: tw-save-tiddler]]
+## [[tw-save-wiki|WidgetMessage: tw-save-wiki]]
+## [[tw-server-refresh|WidgetMessage: tw-server-refresh]]
 ## [[tw-set-password|WidgetMessage: tw-set-password]]
 ">>
 ## <<toc-heading "Filter Operators" "
@@ -330,6 +346,7 @@ $body$
 ## [[Release 5.0.11-beta]]
 ## [[Release 5.0.12-beta]]
 ## [[Release 5.0.13-beta]]
+## [[Release 5.0.14-beta]]
 ">>
 
 </div>

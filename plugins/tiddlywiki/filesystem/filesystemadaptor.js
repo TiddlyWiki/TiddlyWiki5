@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/filesystem/filesystemadaptor.js
 type: application/javascript
 module-type: syncadaptor
 
-A sync adaptor module for synchronising with the local filesystem via node.js APIs 
+A sync adaptor module for synchronising with the local filesystem via node.js APIs
 
 \*/
 (function(){
@@ -16,9 +16,9 @@ A sync adaptor module for synchronising with the local filesystem via node.js AP
 var fs = !$tw.browser ? require("fs") : null,
 	path = !$tw.browser ? require("path") : null;
 
-function FileSystemAdaptor(syncer) {
+function FileSystemAdaptor(options) {
 	var self = this;
-	this.syncer = syncer;
+	this.wiki = options.wiki;
 	this.watchers = {};
 	this.pending = {};
 	this.logger = new $tw.utils.Logger("FileSystem");
@@ -31,7 +31,7 @@ function FileSystemAdaptor(syncer) {
 					var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
 					for(var t in tiddlers) {
 						if(tiddlers[t].title) {
-							$tw.wiki.addTiddler(tiddlers[t]);
+							self.wiki.addTiddler(tiddlers[t]);
 						}
 					}
 				}
@@ -152,7 +152,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 				if(err) {
 					return callback(err);
 				}
-				content = $tw.wiki.renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{variables: {currentTiddler: tiddler.fields.title}});
+				content = self.wiki.renderTiddler("text/plain","$:/core/templates/tiddler-metadata",{variables: {currentTiddler: tiddler.fields.title}});
 				fs.writeFile(fileInfo.filepath + ".meta",content,{encoding: "utf8"},function (err) {
 					if(err) {
 						return callback(err);
@@ -164,7 +164,7 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		} else {
 			// Save the tiddler as a self contained templated file
 			template = $tw.config.typeTemplates[fileInfo.type];
-			content = $tw.wiki.renderTiddler("text/plain",template,{variables: {currentTiddler: tiddler.fields.title}});
+			content = self.wiki.renderTiddler("text/plain",template,{variables: {currentTiddler: tiddler.fields.title}});
 			fs.writeFile(fileInfo.filepath,content,{encoding: "utf8"},function (err) {
 				if(err) {
 					return callback(err);
@@ -188,7 +188,7 @@ FileSystemAdaptor.prototype.loadTiddler = function(title,callback) {
 /*
 Delete a tiddler and invoke the callback with (err)
 */
-FileSystemAdaptor.prototype.deleteTiddler = function(title,callback) {
+FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this,
 		fileInfo = $tw.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file

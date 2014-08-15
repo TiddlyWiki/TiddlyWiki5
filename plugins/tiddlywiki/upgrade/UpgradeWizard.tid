@@ -15,10 +15,6 @@ Drag a ~TiddlyWiki file here to upgrade it
 
 or click to pick a file <$browse/>
 
----
-
-//Your data will not leave your browser. [[Download|http://tiddlywiki.com/upgrade.html]] this upgrader to use it offline//
-
 </$list>
 
 <$reveal state="$:/Import!!status" type="match" text="pending">
@@ -49,8 +45,10 @@ For help and support, visit [[the TiddlyWiki discussion forum|http://groups.goog
 
 </$reveal>
 
-//(version <<version>>)//
-
 </div>
+
+version <<version>>
+
+//Your data will not leave your browser. <a href="http://tiddlywiki.com/upgrade.html" download="upgrade.html">Download</a> this upgrader to use it offline//
 
 </div>

@@ -1,15 +1,26 @@
-created: 20140518150234142
-modified: 20140624094134118
+caption: 5.0.14-beta
+created: 20140718150234142
+modified: 20140813153116300
 tags: releasenote
 title: Release 5.0.14-beta
 type: text/vnd.tiddlywiki
-caption: 5.0.14-beta
+released: 201408131731
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.13-beta...v5.0.14-beta]]//
 
 !! Major Changes
 
-!!! Introduction of Upgrade Mechanism
+!!! Improved Control Panel Plugins Tab
+
+The ''Plugins'' tab of the [[control panel|$:/ControlPanel]] has been improved with the addition of documentation tabs that plugins can use to show documentation. There is also a larger draggable area for dragging tiddlers across to other wikis.
+
+!!! Configurable Button Toolbars
+
+The page toolbar and the tiddler toolbars can now be configured with several new buttons - see the [[control panel|$:/ControlPanel]] under the ''Appearance'' and ''Toolbars'' tabs.
+
+The sidebar tools tab now shows all the available page controls, allowing them to be invoked or checked to appear in the toolbar. The tiddler info area now includes a tools tab that includes buttons for all the tiddler actions.
+
+!!! Upgrade Mechanism
 
 There are two components:
 
@@ -19,32 +30,45 @@ There are two components:
 *** The [[plugin upgrader|$:/core/modules/upgraders/plugins.js]] module handles version checking of plugins and upgrading them from a special UpgradeLibrary plugin tiddler
 *** The [[system upgrader|$:/core/modules/upgraders/system.js]] module is responsible for suppressing the importing of certain system tiddlers (currently [[$:/StoryList]] and [[$:/HistoryList]])
 *** The [[themetweak upgrader|$:/core/modules/upgraders/themetweaks.js]] module handles migrating theme tweaks from their pre-5.0.14-beta format (see below)
-* An UpgradePlugin and associated edition that provides a custom, single-purpose user interface for upgrading standalone TiddlyWiki files
+* An UpgradePlugin and associated edition that provides a custom, single-purpose user interface for upgrading standalone TiddlyWiki files - see http://tiddlywiki.com/upgrade.html
 
-!!! PermaView (and PermaLinks) Off by Default
+!!! Improvements to CamelCase Recognition
 
-The browser address bar is automatically updated with previous beta releases of TiddlyWiki so that it dynamically reflects the tiddlers that are currently open. This makes it easier to get a permalink for copying and pasting elsewhere, but it leads to much confusion for casual users who don't always understand why unexpected tiddlers are being displayed.
+TiddlyWiki now takes a much more conservative approach to recognising CamelCase terms that should be automatically linked. Previously, the dash and underscore were treated as lower case letters, leading to a number of false positives. See the [[GitHub bug #337|https://github.com/Jermolene/TiddlyWiki5/issues/337]] for details.
+
+!!! Automatic Permalinking Off by Default
+
+With previous beta releases of TiddlyWiki the browser address bar is automatically updated so that it dynamically reflects the tiddlers that are currently open. This makes it easier to get a permalink for copying and pasting elsewhere, but it leads to much confusion for casual users who don't always understand why unexpected tiddlers are being displayed after they have refreshed the page in the browser.
 
 For 5.0.14-beta, the setting has been changed. Visit [[control panel|$:/ControlPanel]] ''Advanced''/''Settings'' to switch the setting back to "Include the target tiddler and the current story sequence".
 
-!! Accessibility Improvements
-
-* 
-
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f6d7d87a3d49f816ccc050bdf4a5394eed37dd51]] previews to the icon dropdown in the [[tag manager|$:/TagManager]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/56945d91d327489478fc44dce5234ece35a01abb]] an indication of unsaved changes by changing the colour of the save changes button
+* [[Split|https://github.com/Jermolene/TiddlyWiki5/commit/7aa6c7c06d8b5359f183e6b9f6f57cf89611cda8]] the wikitext emphasis parsers into separate modules so that they can be independently controlled with the `\rules` pragma
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/f43cd5ba9c6e5eda221ec738174e61e34fad2b8d]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/a3de93b4eb8b108239b2e4b496308026e9e9eef8]]) ReleaseHistory to place the releases into vertical tabs
 * [[Stopped|https://github.com/Jermolene/TiddlyWiki5/commit/3ff7462afd5414b92680c6b6e67274be79233224]] saving [[$:/HistoryList]], thus avoiding it uncontrollably increasing in size
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/73cf1bfdb3cd238ac7800162f58d44a8bb60019b]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/d5e4b9b5d1e7db5ad4d769433cc934ef08265f57]]) print stylesheet to remove page background
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/07f13b310d300631267936ad8bc55a338369afc0]] display of plugin tiddlers so that their constituent tiddlers are shown, rather than the raw JSON
+* [[Moved|https://github.com/Jermolene/TiddlyWiki5/commit/799a5b059a40a51fdeb1dae7a0eb5bf8a79f5106]] the functionality of the fullscreen plugin into the core
 
 !! Hackability Improvements
 
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c23f6af4b5c59f4d09dd8d6704e1939bb9d5b2d3]] TiddlerWidget to add a CSS class corresponding to each tag present on displayed tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d357e1706c91d17a72fb19fedf43e57071fc7dd6]] support for hiding specified fields in the tiddler editor
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/be040ea8a2cc8962f1a28a313e4c9ebc2d5c0e31]] support for variable operands in filters (see [[Introduction to Filters]])
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1f16ef6fa88b51d2dad7c8e57fcff014950a7442]] support for widget messages [[tw-permalink|WidgetMessage: tw-permalink]] and [[tw-permaview|WidgetMessage: tw-permaview]] 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/tree/master/plugins/tiddlywiki/browser-sniff]] browser sniffing plugin so that tiddlywiki.com can present the correct browser-specific documentation
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ef67cc3fd9b267a522598abccdfbb93fbfca240c]] a configuration option for specifying the default location for saving new tiddlers in the client-server configuration
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4d47858e587c96f3a68cc28cffff181ec45f55f]] support for the InfoMechanism
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/f08f57c5d24eb0146ac2cb77472a5fc5f135f1e9]] CheckboxWidget to allow it to toggle fields as well as tags
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/21c137a66c37f010b36697bb6bed5321138fbb9f]] [[control panel|$:/ControlPanel]] theme tweaks to be stored in individual tiddlers
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/e18d8a88661a1c2caa1b722841747c75ca6af437]] the TabsMacro to allow tabs to be templated
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/91acad0f7ce8637945a953dfcb122cd31292626d]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/8612bc4006e717e4fa3c562fa72a85650206b66f]]) SystemTags support for inserting content above and below the story river
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f793816dfa687ae7791143b33487fd5f95f3265c]] support for transcluding plugin subtiddlers with the TranscludeWidget
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c73853288c5b4b0716da94fea2f2edec09345643]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/08f775eac8cb053d08c1c561e65a5eeb87c4c6b6]]) support for importing from `*.htm` and `*.hta` files as well as the existing support for `*.html` files
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/73d7e85e11c7732080ca8bc4321ebb12afbac09c]] the "sticky titles" theme so that it works when tiddlers are in edit mode
 
 !! Bug Fixes
 
@@ -52,9 +76,13 @@ For 5.0.14-beta, the setting has been changed. Visit [[control panel|$:/ControlP
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d93da81671a704377209fc1871425c3a7c5db35a]] bug with missing hover colours for external links
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/465f4ac46903070759a572d183c498c5579cb922]] problem with refreshing modal dialogues
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3351ae7e29cbf3bed6fc1925ef33664bcc59fef5]] issue with cookies disabled on Firefox
+* [[Relax|https://github.com/Jermolene/TiddlyWiki5/commit/5260899d8b090e8886e41e3aa770fdcf5967ad8c]] the requirement for a newline immediately the closing `\end` of a macro definition
 
 !! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BramChen|https://github.com/BramChen]]
+* [[@pmario|https://github.com/pmario]]
+* [[@ssokolow|https://github.com/ssokolow]]
+* [[@xcazin|https://github.com/xcazin]]

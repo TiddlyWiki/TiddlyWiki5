@@ -2,5 +2,6 @@
 	"title": "$:/plugins/tiddlywiki/cecily",
 	"description": "Zoomable User Interface for TiddlyWiki",
 	"author": "JeremyRuston",
-	"core-version": ">=5.0.0"
+	"core-version": ">=5.0.0",
+	"list": "readme"
 }

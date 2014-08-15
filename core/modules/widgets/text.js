@@ -30,8 +30,9 @@ TextNodeWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var text = this.getAttribute("text",this.parseTreeNode.text),
-		textNode = this.document.createTextNode(text);
+	var text = this.getAttribute("text",this.parseTreeNode.text);
+	text = text.replace(/\r/mg,"");
+	var textNode = this.document.createTextNode(text);
 	parent.insertBefore(textNode,nextSibling);
 	this.domNodes.push(textNode);
 };

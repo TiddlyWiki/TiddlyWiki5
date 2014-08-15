@@ -1,0 +1,8 @@
+title: $:/core/readme
+
+This plugin contains TiddlyWiki's core components, comprising:
+
+* JavaScript code modules
+* Icons
+* Templates needed to create TiddlyWiki's user interface
+* British English (''en-GB'') translations of the localisable strings used by the core

@@ -20,6 +20,8 @@ exports.synchronous = true;
 // Set to `true` to enable performance instrumentation
 var PERFORMANCE_INSTRUMENTATION = false;
 
+var widget = require("$:/core/modules/widgets/widget.js");
+
 exports.startup = function() {
 	var modules,n,m,f;
 	if($tw.browser) {
@@ -50,19 +52,31 @@ exports.startup = function() {
 	});
 	// Clear outstanding tiddler store change events to avoid an unnecessary refresh cycle at startup
 	$tw.wiki.clearTiddlerEventQueue();
-	// Set up the syncer object
-	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+	if($tw.browser) {
+		$tw.rootWidget = new widget.widget({
+			type: "widget",
+			children: []
+		},{
+			wiki: $tw.wiki,
+			document: document
+		});
+	}
+	// Find a working syncadaptor
+	$tw.syncadaptor = undefined;
+	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
+		if(!$tw.syncadaptor && module.adaptorClass) {
+			$tw.syncadaptor = new module.adaptorClass({wiki: $tw.wiki});
+		}
+	});
+	// Set up the syncer object if we've got a syncadaptor, otherwise setup the saverhandler
+	if($tw.syncadaptor) {
+		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
+	} else {
+		$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki});
+	}
 	// Host-specific startup
 	if($tw.browser) {
-		// Set up our beforeunload handler
-		window.addEventListener("beforeunload",function(event) {
-			var confirmationMessage = undefined;
-			if($tw.syncer.isDirty()) {
-				confirmationMessage = "You have unsaved changes in TiddlyWiki";
-				event.returnValue = confirmationMessage; // Gecko
-			}
-			return confirmationMessage;
-		});
 		// Install the popup manager
 		$tw.popup = new $tw.utils.Popup({
 			rootElement: document.body

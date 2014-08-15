@@ -3,5 +3,4 @@ tags: $:/tags/PageControls
 caption: ~GitHub ribbon
 description: ~GitHub ribbon for tw5.com
 
-<div class="github-fork-ribbon-wrapper right"><div class="github-fork-ribbon"><a href="https://github.com/Jermolene/TiddlyWiki5" target="_blank">Find me on ~GitHub</a></div>
-</div>
+<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#DF4848;"><$link to="ReleaseHistory"><<version>></$link></div></div>

@@ -12,7 +12,7 @@ The TiddlerWidget sets the CurrentTiddler that applies for processing its conten
 
 |!Attribute |!Description |
 |tiddler |The title of the tiddler to become the new CurrentTiddler |
-|class |CSS classes to added to the generated elements |
+|class |CSS classes to be added to the generated elements |
 
 ! CSS Class Variables
 

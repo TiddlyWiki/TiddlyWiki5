@@ -1,0 +1,30 @@
+caption: 5.0.15-beta
+created: 20140812150234142
+modified: 20140813153116300
+tags: releasenote
+title: Release 5.0.15-beta
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.14-beta...v5.0.15-beta]]//
+
+This is a small release to resolve some minor issues with [[Release 5.0.14-beta]].
+
+!! Usability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4b05608ad5e77043b01495825ea0f0e76c378760]] page control button for invoking the [[tag manager|$:/TagManager]]
+
+!! Hackability Improvements
+
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/f75af2c983e10e8a82639890b993fb5cf042d610]] `saver-handler.js` out of `syncer.js`
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c8830d32f74b8c228553f11f7f55b5be45ae6471]] problem with building TiddlyWiki under Windows
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/34461cb2fe554331a0269fd7795b1d6a879fcba9]] unclickable download ink in upgrade wizard
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/9e85ddfec78dd8df71e6173100dce659417551f4]] missing language flag in ''empty.html''
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@BramChen|https://github.com/BramChen]]

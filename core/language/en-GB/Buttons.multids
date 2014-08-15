@@ -52,5 +52,7 @@ HideSideBar/Caption: hide sidebar
 HideSideBar/Hint: Hide sidebar
 ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
+TagManager/Caption: tag manager
+TagManager/Hint: Open tag manager
 Theme/Caption: theme
 Theme/Hint: Choose the display theme

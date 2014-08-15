@@ -1,0 +1,9 @@
+created: 20140811112435281
+modified: 20140811113453568
+tags: message
+title: WidgetMessage: tw-server-refresh
+type: text/vnd.tiddlywiki
+
+The server refresh message attempts to synchronise the latest changes to the current serverside host.
+
+The server refresh message is handled by the TiddlyWiki core SyncMechanism which invokes the current [[SyncAdaptorModule|SyncAdaptorModules]] (typically the ''tiddlywiki/tiddlywebadaptor'' plugin).

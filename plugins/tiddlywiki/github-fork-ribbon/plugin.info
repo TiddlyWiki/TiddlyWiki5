@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/github-fork-ribbon",
 	"description": "GitHub-style ribbon in pure CSS",
-	"author": "Simon Whitaker, adapted for TiddlyWiki by JeremyRuston"
+	"author": "Simon Whitaker, adapted for TiddlyWiki by JeremyRuston",
+	"list": "readme"
 }

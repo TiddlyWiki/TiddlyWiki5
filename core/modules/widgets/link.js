@@ -56,7 +56,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Create our element
 	var domNode = this.document.createElement("a");
 	// Assign classes
-	var classes = ["tw-tiddlylink"];
+	var classes = [];
+	if(this.linkClasses) {
+		classes.push(this.linkClasses);
+	}
+	classes.push("tw-tiddlylink");
 	if(this.isShadow) {
 		classes.push("tw-tiddlylink-shadow");
 	}
@@ -182,6 +186,8 @@ LinkWidget.prototype.execute = function() {
 	// Get the link title and aria label
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
+	// Get the link classes
+	this.linkClasses = this.getAttribute("class");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);

@@ -3,8 +3,7 @@
 	"name": "de-DE",
 	"plugin-type": "language",
 	"description": "Deutsch (Deutschland)",
-	"author": "JeremyRuston",
-	"maintainer": "MarioPietsch aka pmario",
+	"author": "MarioPietsch aka pmario",
 	"core-version": ">=5.0.0",
 	"plugin-priority": 100
 }
