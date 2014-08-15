@@ -83,7 +83,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 EditWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.editTitle]) {
 		this.refreshSelf();
 		return true;
 	} else {
