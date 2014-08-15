@@ -14,7 +14,7 @@ $(currentTiddler)$/icon
 \end
 \define plugin-table(type)
 <$set name="qualified-state" value=<<qualify "$:/state/plugin-info">>>
-<$list filter="[!has[draft.of]plugin-type[$type$]sort[description]]">
+<$list filter="[!has[draft.of]plugin-type[$type$]sort[description]]" emptyMessage=<<lingo "Empty/Hint">>>
 <$set name="popup-state" value=<<popup-state-macro>>>
 <$link to={{!!title}} class="tw-plugin-info">
 <div class="tw-plugin-info-chunk">
