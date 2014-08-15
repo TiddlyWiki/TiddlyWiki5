@@ -11,6 +11,7 @@ This is a small release to resolve some minor issues with [[Release 5.0.14-beta]
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/32a7ee2683ace619599f0ab73028307ca33f4e4c]] the ability to disable plugins (see PluginMechanism) with a user interface in [[control panel|$:/ControlPanel]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4b05608ad5e77043b01495825ea0f0e76c378760]] page control button for invoking the [[tag manager|$:/TagManager]]
 
 !! Hackability Improvements
@@ -22,6 +23,7 @@ This is a small release to resolve some minor issues with [[Release 5.0.14-beta]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c8830d32f74b8c228553f11f7f55b5be45ae6471]] problem with building TiddlyWiki under Windows
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/34461cb2fe554331a0269fd7795b1d6a879fcba9]] unclickable download ink in upgrade wizard
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/9e85ddfec78dd8df71e6173100dce659417551f4]] missing language flag in ''empty.html''
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/18592fe8f810d1858ca040da1a7c4a81fb74cfed]] problem with switching the type of a tiddler between the bitmap and text editor
 
 !! Contributors
 
