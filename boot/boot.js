@@ -967,19 +967,22 @@ $tw.Wiki = function(options) {
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [],
-			checkTiddler = function(tiddler) {
+			checkTiddler = function(tiddler,title) {
 				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
-					pluginTiddlers.push(tiddler);
-					registeredTitles.push(tiddler.fields.title);
+					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
+					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+						pluginTiddlers.push(tiddler);
+						registeredTitles.push(tiddler.fields.title);
+					}
 				}
 			};
 		if(titles) {
 			$tw.utils.each(titles,function(title) {
-				checkTiddler(self.getTiddler(title));
+				checkTiddler(self.getTiddler(title),title);
 			});
 		} else {
 			this.each(function(tiddler,title) {
-				checkTiddler(tiddler);
+				checkTiddler(tiddler,title);
 			});
 		}
 		return registeredTitles;

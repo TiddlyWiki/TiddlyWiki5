@@ -1251,6 +1251,16 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 8px;
 }
 
+.tw-plugin-info-disabled {
+	background: -webkit-repeating-linear-gradient(45deg, #ff0, #ff0 10px, #eee 10px, #eee 20px);
+	background: repeating-linear-gradient(45deg, #ff0, #ff0 10px, #eee 10px, #eee 20px);
+}
+
+.tw-plugin-info-disabled:hover {
+	background: -webkit-repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
+	background: repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
+}
+
 a.tw-tiddlylink.tw-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
@@ -1273,7 +1283,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 
 .tw-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
-	padding: 1em;
+	padding: 1em 1em 0 1em;
 	margin-top: -1em;
 }
 
