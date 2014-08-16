@@ -64,6 +64,12 @@ Basics/Title/Prompt: Titre de ce ~TiddlyWiki
 Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur
 Basics/Version/Prompt: Numéro de version :
 Plugins/Caption: Plugins
+Plugins/Disable/Caption: désactiver
+Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
+Plugins/Disabled/Status: (désactivé)
+Plugins/Empty/Hint: Aucun
+Plugins/Enable/Caption: activer
+Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
 Plugins/Language/Prompt: Langues
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Thèmes
