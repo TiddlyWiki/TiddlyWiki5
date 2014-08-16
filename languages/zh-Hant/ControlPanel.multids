@@ -64,6 +64,12 @@ Basics/Title/Prompt: 標題：
 Basics/Username/Prompt: 編輯者署名：
 Basics/Version/Prompt: ~TiddlyWiki 版本：
 Plugins/Caption: 插件
+Plugins/Disable/Caption: 停用
+Plugins/Disable/Hint: 重新載入頁面時停用此插件
+Plugins/Disabled/Status: (已停用)
+Plugins/Empty/Hint: 無
+Plugins/Enable/Caption: 啟用
+Plugins/Enable/Hint: 重新載入頁面時啟用此插件
 Plugins/Language/Prompt: 語言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 佈景主題

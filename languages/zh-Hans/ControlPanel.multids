@@ -64,11 +64,17 @@ Basics/Title/Prompt: 标题：
 Basics/Username/Prompt: 编辑者署名：
 Basics/Version/Prompt: ~TiddlyWiki 版本：
 Plugins/Caption: 插件
+Plugins/Disable/Caption: 禁用
+Plugins/Disable/Hint: 重新加载页面时禁用此插件
+Plugins/Disabled/Status: (已禁用)
+Plugins/Empty/Hint: 无
+Plugins/Enable/Caption: 启用
+Plugins/Enable/Hint: 重新加载页面时启用此插件
 Plugins/Language/Prompt: 语言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 布景主题
 Saving/AutoSave/Disabled/Button: 启用
-Saving/AutoSave/Disabled/Prompt: 自动保存已停用
+Saving/AutoSave/Disabled/Prompt: 自动保存已禁用
 Saving/AutoSave/Enabled/Button: 停用 
 Saving/AutoSave/Enabled/Prompt: 自动保存已启用
 Saving/AutoSave: 自动保存
