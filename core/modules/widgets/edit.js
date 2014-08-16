@@ -46,28 +46,11 @@ EditWidget.prototype.execute = function() {
 	this.editIndex = this.getAttribute("index");
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
-	// Get the content type of the thing we're editing
-	var type;
-	if(this.editField === "text") {
-		var tiddler = this.wiki.getTiddler(this.editTitle);
-		if(tiddler) {
-			type = tiddler.fields.type;
-		}
-	}
-	type = type || "text/vnd.tiddlywiki";
 	// Choose the appropriate edit widget
-	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
-	if(!editorType) {
-		var typeInfo = $tw.config.contentTypeInfo[type];
-		if(typeInfo && typeInfo.encoding === "base64") {
-			editorType = "binary";
-		} else {
-			editorType = "text";
-		}
-	}
+	this.editorType = this.getEditorType();
 	// Make the child widgets
 	this.makeChildWidgets([{
-		type: "edit-" + editorType,
+		type: "edit-" + this.editorType,
 		attributes: {
 			tiddler: {type: "string", value: this.editTitle},
 			field: {type: "string", value: this.editField},
@@ -78,12 +61,35 @@ EditWidget.prototype.execute = function() {
 	}]);
 };
 
+EditWidget.prototype.getEditorType = function() {
+	// Get the content type of the thing we're editing
+	var type;
+	if(this.editField === "text") {
+		var tiddler = this.wiki.getTiddler(this.editTitle);
+		if(tiddler) {
+			type = tiddler.fields.type;
+		}
+	}
+	type = type || "text/vnd.tiddlywiki";
+	var editorType = this.wiki.getTiddlerText(EDITOR_MAPPING_PREFIX + type);
+	if(!editorType) {
+		var typeInfo = $tw.config.contentTypeInfo[type];
+		if(typeInfo && typeInfo.encoding === "base64") {
+			editorType = "binary";
+		} else {
+			editorType = "text";
+		}
+	}
+	return editorType;
+};
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 EditWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedTiddlers[this.editTitle]) {
+	// Refresh if an attribute has changed, or the type associated with the target tiddler has changed
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || (changedTiddlers[this.editTitle] && this.getEditorType() !== this.editorType)) {
 		this.refreshSelf();
 		return true;
 	} else {
