@@ -1283,7 +1283,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 
 .tw-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
-	padding: 1em 1em 0 1em;
+	padding: 1em 1em 1em 1em;
 	margin-top: -1em;
 }
 
