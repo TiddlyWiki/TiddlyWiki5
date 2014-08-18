@@ -1,0 +1,33 @@
+title: TableOfContentsMacro
+tags: macros
+modified: 20140818180307785
+
+The table of contents macro produces a hierarchical tree of tiddlers based on their tags.
+
+There are several variants of the macro:
+
+* `<<toc>>` produces a simple hierarchical tree of links
+* `<<toc-expandable>>` produces an expandable tree of links
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |tag |The tag that identifies the top level of the hierarchy | |
+
+! Examples
+
+!! Simple Table of Contents
+
+<$macrocall $name="wikitext-example-without-html"
+src="<div class='tw-table-of-contents'>
+<<toc 'Contents'>>
+</div>
+"/>
+
+!! Expandable Table of Contents
+
+<$macrocall $name="wikitext-example-without-html"
+src="<div class='tw-table-of-contents'>
+<<toc-expandable 'Contents'>>
+</div>
+"/>

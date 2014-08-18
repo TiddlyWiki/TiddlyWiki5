@@ -1,0 +1,46 @@
+title: $:/core/macros/toc
+tags: $:/tags/Macro
+
+\define toc(tag)
+<ol>
+<$list filter="[tag[$tag$]]">
+<li>
+<$link>
+<$view field="title"/>
+</$link>
+<$macrocall $name="toc" tag=<<currentTiddler>>/>
+</li>
+</$list>
+</ol>
+\end
+
+\define toc-body(tag,show-button-filter)
+<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<li>
+<$link>
+<$reveal type="nomatch" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="open" class="btn-invisible">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="close" class="btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$view field="title"/>
+</$link>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$macrocall $name="toc-expandable" tag=<<currentTiddler>>/>
+</$reveal>
+</li>
+</$set>
+\end
+
+\define toc-expandable(tag)
+<ol>
+<$list filter="[tag[$tag$]]">
+<<toc-body tag:"$tag$">>
+</$list>
+</ol>
+\end
