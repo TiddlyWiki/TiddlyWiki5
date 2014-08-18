@@ -830,7 +830,7 @@ exports.parseTextReference = function(title,field,index,options) {
 		}
 		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 	} else if(index) {
-		text = this.extractTiddlerDataItem(tiddler,index,"");
+		text = this.extractTiddlerDataItem(tiddler,index,undefined);
 		if(text === undefined) {
 			return null;
 		}
