@@ -1,13 +1,11 @@
 caption: 5.0.15-beta
 created: 20140812150234142
-modified: 20140813153116300
+modified: 20140818153116300
 tags: releasenote
 title: Release 5.0.15-beta
 type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.14-beta...v5.0.15-beta]]//
-
-This is a small release to resolve some minor issues with [[Release 5.0.14-beta]].
 
 !! Usability Improvements
 
