@@ -9,12 +9,15 @@ type: text/vnd.tiddlywiki
 
 !! Usability Improvements
 
+* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/c57b00996855f10d9b7fa2aa4e9deb2a2a607d7f]] shadow default tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/32a7ee2683ace619599f0ab73028307ca33f4e4c]] the ability to disable plugins (see PluginMechanism) with a user interface in [[control panel|$:/ControlPanel]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4b05608ad5e77043b01495825ea0f0e76c378760]] page control button for invoking the [[tag manager|$:/TagManager]]
 
 !! Hackability Improvements
 
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/f75af2c983e10e8a82639890b993fb5cf042d610]] `saver-handler.js` out of `syncer.js`
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cf726275c19ed5b4a0ed1cf8354d64d1bc29da5]] TableOfContentsMacro support
+* Simplified startup module organisation (see [[Startup Modules.svg]])
 
 !! Bug Fixes
 
@@ -22,6 +25,7 @@ type: text/vnd.tiddlywiki
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/34461cb2fe554331a0269fd7795b1d6a879fcba9]] unclickable download ink in upgrade wizard
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/9e85ddfec78dd8df71e6173100dce659417551f4]] missing language flag in ''empty.html''
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/18592fe8f810d1858ca040da1a7c4a81fb74cfed]] problem with switching the type of a tiddler between the bitmap and text editor
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/fe6623d7feed1a9068e15bfac57be0b0924e8915]] foreground colour for tag pills in the sidebar
 
 !! Contributors
 
