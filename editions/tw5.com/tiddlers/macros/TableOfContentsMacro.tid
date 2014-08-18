@@ -4,6 +4,8 @@ modified: 20140818180307785
 
 The table of contents macro produces a hierarchical tree of tiddlers based on their tags.
 
+The top level entries of the table of contents are defined by a root tag. The subentries under each of those entries are tagged with the title of the entry. Entries can be ordered using the `list` field as described in TiddlerTags.
+
 There are several variants of the macro:
 
 * `<<toc>>` produces a simple hierarchical tree of links
@@ -12,7 +14,7 @@ There are several variants of the macro:
 ! Parameters
 
 |!Position |!Name |!Description |!Default |
-|1st |tag |The tag that identifies the top level of the hierarchy | |
+|1st |tag |The root tag that identifies the top level of the hierarchy | |
 
 ! Examples
 
