@@ -226,12 +226,17 @@ a.tw-tiddlylink-external:hover {
 	z-index: 10000;
 	display: block;
 	position: absolute;
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -o-sticky;
+	position: -ms-sticky;
+	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
 	background: <<colour dropzone-background>>;
 	text-align: center;
-	content: "Drop here";
+	content: "<<lingo DropMessage>>";
 }
 
 /*
