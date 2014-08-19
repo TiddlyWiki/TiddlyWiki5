@@ -10,6 +10,7 @@ There are several variants of the macro:
 
 * `<<toc>>` produces a simple hierarchical tree of links
 * `<<toc-expandable>>` produces an expandable tree of links
+* `<<toc-selective-expandable>>` produces an expandable tree of links where the expand/contract buttons are only shown for entries that possess child nodes
 
 ! Parameters
 
@@ -18,18 +19,4 @@ There are several variants of the macro:
 
 ! Examples
 
-!! Simple Table of Contents
-
-<$macrocall $name="wikitext-example-without-html"
-src="<div class='tw-table-of-contents'>
-<<toc 'Contents'>>
-</div>
-"/>
-
-!! Expandable Table of Contents
-
-<$macrocall $name="wikitext-example-without-html"
-src="<div class='tw-table-of-contents'>
-<<toc-expandable 'Contents'>>
-</div>
-"/>
+<<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>
