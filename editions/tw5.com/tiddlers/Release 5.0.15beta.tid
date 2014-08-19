@@ -12,12 +12,15 @@ type: text/vnd.tiddlywiki
 * [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/c57b00996855f10d9b7fa2aa4e9deb2a2a607d7f]] shadow default tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/32a7ee2683ace619599f0ab73028307ca33f4e4c]] the ability to disable plugins (see PluginMechanism) with a user interface in [[control panel|$:/ControlPanel]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/4b05608ad5e77043b01495825ea0f0e76c378760]] page control button for invoking the [[tag manager|$:/TagManager]]
+* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/c4b76ceb0bc786bcceb12fc3417bb8c4bfde27a9]] downloading an offline copy of a client-server wiki
 
 !! Hackability Improvements
 
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/f75af2c983e10e8a82639890b993fb5cf042d610]] `saver-handler.js` out of `syncer.js`
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cf726275c19ed5b4a0ed1cf8354d64d1bc29da5]] TableOfContentsMacro support
 * Simplified startup module organisation (see [[Startup Modules.svg]])
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/25777b147fa4ed2f915150aec503ad1e094e6043]] the overlay text for the DropzoneWidget to make it translateable
+* [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/920e11e7921f777170aa2f9e1836c000fec2e26d]] a new [[refresh button|WidgetMessage: tw-browser-refresh]] and reverted [[home button|WidgetMessage: tw-home]] behaviour
 
 !! Bug Fixes
 
