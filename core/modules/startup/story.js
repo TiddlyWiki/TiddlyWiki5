@@ -49,10 +49,17 @@ exports.startup = function() {
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
 		},false)
+		// Listen for the tw-refresh message
+		$tw.rootWidget.addEventListener("tw-refresh",function(event) {
+			window.location.hash = "";
+			window.location.reload(true);
+		});
 		// Listen for the tw-home message
 		$tw.rootWidget.addEventListener("tw-home",function(event) {
 			window.location.hash = "";
-			window.location.reload(true);
+			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
+				storyList = $tw.wiki.filterTiddlers(storyFilter);
+			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
 		});
 		// Listen for the tw-permalink message
 		$tw.rootWidget.addEventListener("tw-permalink",function(event) {
