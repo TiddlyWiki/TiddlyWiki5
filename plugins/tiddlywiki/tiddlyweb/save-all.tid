@@ -1,4 +1,4 @@
-title: $:/editions/server/download-offline
+title: $:/core/save/all
 
 \define saveTiddlerFilter()
 [is[tiddler]] -[[$:/boot/boot.css]] -[[$:/HistoryList]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] +[sort[title]]

@@ -18,9 +18,3 @@ Host configuration: <$edit-text tiddler="$:/config/tiddlyweb/host" tag="input" d
 ----
 
 <$button message="tw-server-refresh" class="btn btn-warning">Refresh</$button> to fetch changes from the server immediately
-
-----
-
-Download an offline copy of this wiki:
-
-{{$:/editions/server/download-offline-button}}
