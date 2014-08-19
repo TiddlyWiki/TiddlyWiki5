@@ -1,9 +1,0 @@
-created: 20140819110529062
-modified: 20140819110529062
-tags: message
-title: WidgetMessage: tw-refresh
-type: text/vnd.tiddlywiki
-
-The `tw-refresh` message refreshes the current page by removing any [[permalink|PermaLinks]] from the browser address bar, causing the re-display of the [[$:/DefaultTiddlers]], and re-initialisation of any plugin tiddlers. It does not require any properties on the `event` object.
-
-The refresh message is usually generated with the ButtonWidget and is handled by the core.

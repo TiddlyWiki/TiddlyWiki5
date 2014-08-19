@@ -49,8 +49,8 @@ exports.startup = function() {
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
 		},false)
-		// Listen for the tw-refresh message
-		$tw.rootWidget.addEventListener("tw-refresh",function(event) {
+		// Listen for the tw-browser-refresh message
+		$tw.rootWidget.addEventListener("tw-browser-refresh",function(event) {
 			window.location.hash = "";
 			window.location.reload(true);
 		});
