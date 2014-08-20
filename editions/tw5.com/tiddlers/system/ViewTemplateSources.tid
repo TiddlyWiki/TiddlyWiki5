@@ -1,5 +1,5 @@
 title: $:/editions/tw5.com/ViewTemplate/Sources
-tags: $:/tags/ViewTemplate
+tags: not-$:/tags/ViewTemplate
 
 \define makeGitHubLink()
 https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$(githubLink)$
