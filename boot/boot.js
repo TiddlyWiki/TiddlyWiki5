@@ -1593,11 +1593,11 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	// Save the original tiddler file locations if requested
 	var config = wikiInfo.config || {};
 	if(config["retain-original-tiddler-path"]) {
-		var output = [];
+		var output = {};
 		for(var title in $tw.boot.files) {
-			output.push(title + ": " + path.relative(resolvedWikiPath,$tw.boot.files[title].filepath) + "\n");
+			output[title] = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
 		}
-		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/x-tiddler-dictionary", text: output.join("")});
+		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
 	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
