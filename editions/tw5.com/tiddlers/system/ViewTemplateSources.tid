@@ -10,5 +10,5 @@ https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$
 </$set>
 \end
 <div class="tw-improvement-banner">
-{{$:/core/images/star-filled}} Can you help improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to edit <<outerMakeGitHubLink "this tiddler">>
+{{$:/core/images/star-filled}} Can you help us improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to edit <<outerMakeGitHubLink "this tiddler on ~GitHub">>
 </div>
