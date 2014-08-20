@@ -317,7 +317,7 @@ button svg.tw-image-button, button .tw-image-button img {
 	vertical-align: baseline;
 }
 
-button.tw-tag-label {
+button.tw-tag-label, span.tw-tag-label {
 	display: inline-block;
 	padding: 2px 9px;
 	font-size: 0.9em;
