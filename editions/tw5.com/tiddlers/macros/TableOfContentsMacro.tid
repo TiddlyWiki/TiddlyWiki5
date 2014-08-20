@@ -16,6 +16,13 @@ There are several variants of the macro:
 
 |!Position |!Name |!Description |!Default |
 |1st |tag |The root tag that identifies the top level of the hierarchy | |
+|2nd |sort |Optional sorting subfilter (eg `sort[title]`) | |
+
+The ''tag'' and ''sort'' parameters are combined to make a filter expression of the form:
+
+```
+[tag[$tag$]$sort$]
+```
 
 ! Examples
 

@@ -1,9 +1,9 @@
 title: $:/core/macros/toc
 tags: $:/tags/Macro
 
-\define toc(tag)
+\define toc(tag,sort:"")
 <ol>
-<$list filter="[tag[$tag$]]">
+<$list filter="[tag[$tag$]$sort$]">
 <li>
 <$link>
 <$view field="title"/>
@@ -14,7 +14,7 @@ tags: $:/tags/Macro
 </ol>
 \end
 
-\define toc-expandable-body(tag,show-button-filter)
+\define toc-expandable-body(tag,sort:"")
 <$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
 <li>
 <$link>
@@ -31,21 +31,21 @@ tags: $:/tags/Macro
 <$view field="title"/>
 </$link>
 <$reveal type="match" state=<<toc-state>> text="open">
-<$macrocall $name="toc-expandable" tag=<<currentTiddler>>/>
+<$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort="$sort$"/>
 </$reveal>
 </li>
 </$set>
 \end
 
-\define toc-expandable(tag)
+\define toc-expandable(tag,sort:"")
 <ol>
-<$list filter="[tag[$tag$]]">
-<<toc-expandable-body tag:"$tag$">>
+<$list filter="[tag[$tag$]$sort$]">
+<<toc-expandable-body tag:"$tag$" sort:"$sort$">>
 </$list>
 </ol>
 \end
 
-\define toc-selective-expandable-body(tag,show-button-filter)
+\define toc-selective-expandable-body(tag,sort:"")
 <$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
 <li>
 <$link>
@@ -64,16 +64,16 @@ tags: $:/tags/Macro
 <$view field="title"/>
 </$link>
 <$reveal type="match" state=<<toc-state>> text="open">
-<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>>/>
+<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort="$sort$"/>
 </$reveal>
 </li>
 </$set>
 \end
 
-\define toc-selective-expandable(tag)
+\define toc-selective-expandable(tag,sort:"")
 <ol>
-<$list filter="[tag[$tag$]]">
-<<toc-selective-expandable-body tag:"$tag$">>
+<$list filter="[tag[$tag$]$sort$]">
+<<toc-selective-expandable-body tag:"$tag$" sort:"$sort$">>
 </$list>
 </ol>
 \end
