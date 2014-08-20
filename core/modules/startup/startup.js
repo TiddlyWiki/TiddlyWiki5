@@ -69,12 +69,12 @@ exports.startup = function() {
 			$tw.syncadaptor = new module.adaptorClass({wiki: $tw.wiki});
 		}
 	});
-	// Set up the syncer object if we've got a syncadaptor, otherwise setup the saverhandler
+	// Set up the syncer object if we've got a syncadaptor
 	if($tw.syncadaptor) {
 		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
-	} else {
-		$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki});
-	}
+	} 
+	// Setup the saver handler
+	$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki, dirtyTracking: !$tw.syncadaptor});
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager

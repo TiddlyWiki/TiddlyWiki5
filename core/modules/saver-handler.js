@@ -15,43 +15,50 @@ The saver handler tracks changes to the store and handles saving the entire wiki
 /*
 Instantiate the saver handler with the following options:
 wiki: wiki to be synced
+dirtyTracking: true if dirty tracking should be performed
 */
 function SaverHandler(options) {
     var self = this;
     this.wiki = options.wiki;
+    this.dirtyTracking = options.dirtyTracking;
     // Make a logger
     this.logger = new $tw.utils.Logger("saver-handler");
     // Initialise our savers
     if($tw.browser) {
         this.initSavers();
     }
-    // Compile the dirty tiddler filter
-    this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
-    // Count of tiddlers that have been changed but not yet saved
-    this.numTasksInQueue = 0;
-    // Listen out for changes to tiddlers
-    this.wiki.addEventListener("change",function(changes) {
-        var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
-            $tw.utils.each(changes,function(change,title) {
-                var tiddler = self.wiki.getTiddler(title);
-                callback(tiddler,title);
+    // Only do dirty tracking if required
+    if(this.dirtyTracking) {
+        // Compile the dirty tiddler filter
+        this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
+        // Count of tiddlers that have been changed but not yet saved
+        this.numTasksInQueue = 0;
+        // Listen out for changes to tiddlers
+        this.wiki.addEventListener("change",function(changes) {
+            var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
+                $tw.utils.each(changes,function(change,title) {
+                    var tiddler = self.wiki.getTiddler(title);
+                    callback(tiddler,title);
+                });
             });
+            self.numTasksInQueue += filteredChanges.length;
+            self.updateDirtyStatus();
         });
-        self.numTasksInQueue += filteredChanges.length;
-        self.updateDirtyStatus();
-    });
-    // Browser event handlers
+        // Browser event handlers
+        if($tw.browser) {
+            // Set up our beforeunload handler
+            window.addEventListener("beforeunload",function(event) {
+                var confirmationMessage = undefined;
+                if(self.isDirty()) {
+                    confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
+                    event.returnValue = confirmationMessage; // Gecko
+                }
+                return confirmationMessage;
+            });
+        }
+    }
+    // Install the save action handlers
     if($tw.browser) {
-        // Set up our beforeunload handler
-        window.addEventListener("beforeunload",function(event) {
-            var confirmationMessage = undefined;
-            if(self.isDirty()) {
-                confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
-                event.returnValue = confirmationMessage; // Gecko
-            }
-            return confirmationMessage;
-        });
-        // Install the save action handlers
         $tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
             self.saveWiki({
                 template: event.param,
