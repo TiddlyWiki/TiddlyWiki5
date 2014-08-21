@@ -9,5 +9,6 @@ Listing/Title/Caption: Titre
 Upgrader/Plugins/Suppressed/Incompatible: Plugin bloqué : incompatible ou obsolète
 Upgrader/Plugins/Suppressed/Version: Plugin bloqué (la version <<incoming>> en cours d'importation est plus ancienne que la version <<existing>> actuelle)
 Upgrader/Plugins/Upgraded: Plugin mis à jour à partir de <<incoming>> vers <<upgraded>>
-Upgrader/System/Suppressed: Tiddler système supprimé
+Upgrader/State/Suppressed: Tiddler d'état temporaire bloqué
+Upgrader/System/Suppressed: Tiddler système bloqué
 Upgrader/ThemeTweaks/Created: Thème modifié à partir de <$text text=<<from>>/>
