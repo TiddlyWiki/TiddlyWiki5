@@ -27,7 +27,7 @@ Encryption/SetPassword/Hint: 設定加密儲存此維基的密碼
 FullScreen/Caption: 全螢幕
 FullScreen/Hint: 進入或離開全螢幕模式
 Home/Caption: 首頁
-Home/Hint: 刷新頁面且開啟首頁條目
+Home/Hint: 開啟首頁條目
 Import/Caption: 導入
 Import/Hint: 導入檔案
 Info/Caption: 資訊
@@ -42,6 +42,8 @@ Permalink/Caption: 引用連結
 Permalink/Hint: 設定瀏覽器網址列為直接連結到此條目
 Permaview/Caption: 固定連結
 Permaview/Hint: 設定瀏覽器網址列為直接連結到當前所有已開啟條目
+Refresh/Caption: 重新整理
+Refresh/Hint: 執行維基的完全刷新
 Save/Caption: 儲存
 Save/Hint: 儲存此條目
 SaveWiki/Caption: 儲存變更
