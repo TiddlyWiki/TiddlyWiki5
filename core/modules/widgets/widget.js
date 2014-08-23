@@ -263,13 +263,15 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			v = undefined;
 		}
 		if(v !== undefined) {
-			var b=a.split(":");
+			var b = a.split(":");
 			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
 			try {
-				if (b.length ==2 && b[0]=="xlink")
+				if (b.length == 2 && b[0] == "xlink"){
 					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
-				else
-				   domNode.setAttributeNS(null,a,v);
+				}
+				else {
+					domNode.setAttributeNS(null,a,v);
+				}
 			} catch(e) {
 			}
 		}
