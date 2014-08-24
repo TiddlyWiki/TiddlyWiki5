@@ -24,15 +24,15 @@ Encryption/ClearPassword/Caption: lösche Passwort
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: ativiere Passwort
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
-FullScreen/Caption: vollbild
+FullScreen/Caption: Vollbild
 FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild modus
-Import/Caption: import
+Import/Caption: Import
 Import/Hint: Importiere Dateien
 Info/Caption: info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
 Home/Caption: home
 Home/Hint: Öffnen der standard (default) Tiddler
-Language/Caption: sprache
+Language/Caption: Sprache
 Language/Hint: Auswahl Dialog für die System Sprache
 NewTiddler/Caption: neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
@@ -46,9 +46,9 @@ Refresh/Caption: aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: speichern
 Save/Hint: Speichere diesen Tiddler
-SaveWiki/Caption: speichere Änderungen
-SaveWiki/Hint: Speichere Änderungen
-StoryView/Caption: story Modus
+SaveWiki/Caption: Speichern
+SaveWiki/Hint: Das Wiki speichern
+StoryView/Caption: Story Modus
 StoryView/Hint: Auswahl des Anzeige Modus für die "Story"
 HideSideBar/Caption: Sidebar ausblenden
 HideSideBar/Hint: Sidebar ausblenden
