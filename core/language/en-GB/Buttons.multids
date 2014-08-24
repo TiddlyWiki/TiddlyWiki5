@@ -31,7 +31,7 @@ Import/Hint: Import files
 Info/Caption: info
 Info/Hint: Show information for this tiddler
 Home/Caption: home
-Home/Hint: Refresh the page and open the home tiddlers
+Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
 NewTiddler/Caption: new tiddler
@@ -42,6 +42,8 @@ Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
+Refresh/Caption: refresh
+Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: save
 Save/Hint: Save this tiddler
 SaveWiki/Caption: save changes

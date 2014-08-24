@@ -8,6 +8,7 @@ ConfirmCancelTiddler: Souhaitez-vous annuler les modifications apportées au tid
 ConfirmDeleteTiddler: Souhaitez-vous supprimer le tiddler « <$text text=<<title>>/> » ?
 ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<title>>/> » ?
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
+DropMessage: Lâcher ici (ou appuyer sur « escape » pour annuler)
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant - cliquez sur {{$:/core/images/edit-button}} pour le créer
 RecentChanges/DateFormat: DD MMM YYYY
@@ -30,3 +31,4 @@ TagManager/Colour/Heading: Couleur
 TagManager/Count/Heading: Quantité
 TagManager/Icon/Heading: Icone
 TagManager/Tag/Heading: Tag
+UnsavedChangesWarning: Vos dernières modifications n'ont pas été sauvegardées dans votre TiddlyWiki

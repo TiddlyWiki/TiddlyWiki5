@@ -1,5 +1,5 @@
 created: 20130826122000000
-modified: 20140807094840608
+modified: 20140815094840608
 tags: mechanism
 title: PluginMechanism
 type: text/vnd.tiddlywiki
@@ -86,6 +86,16 @@ Plugins can also be included manually by copying them into the `plugins` subfold
 The wiki object keeps track of all of the currently loaded plugins. If a request for a tiddler isn't in the store then the wiki looks through the cascade of plugins to find the requested tiddler. It is a similar idea to the way that shadow tiddlers are implemented in classic TiddlyWiki.
 
 In the browser, any constituent tiddlers that are JavaScript modules (ie shadow tiddlers of content type `application/javascript` and possessing the field `module-type`) are executed during startup processing.
+
+!! Disabling Plugins
+
+Plugins can be disabled by creating a tiddler titled `$:/config/Plugins/Disabled/` concatenated with the plugin title, and setting its text to `yes`.
+
+For example, to disable the plugin `$:/plugins/tiddlywiki/highlight`, the title would be:
+
+```
+$:/config/Plugins/Disabled/$:/plugins/tiddlywiki/highlight
+```
 
 ! Information Tiddlers for Plugins
 

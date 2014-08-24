@@ -1,6 +1,6 @@
 title: ImageWidget
 created: 20140416160234142
-modified: 20140611160234142
+modified: 20140820100234142
 tags: widget
 
 ! Introduction
@@ -16,6 +16,7 @@ Any content of the `<$image>` widget is ignored.
 |width |The width of the image as a number |
 |height |The height of the image |
 |tooltip |The tooltip to be displayed over the image |
+|alt |The alternative text to be associated with the image |
 |class |CSS classes to be assigned to the `<img>` element |
 
 ! External Images and the ''_canonical_uri'' field

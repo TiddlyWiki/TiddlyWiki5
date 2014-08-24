@@ -226,12 +226,17 @@ a.tw-tiddlylink-external:hover {
 	z-index: 10000;
 	display: block;
 	position: absolute;
+	position: -webkit-sticky;
+	position: -moz-sticky;
+	position: -o-sticky;
+	position: -ms-sticky;
+	position: sticky;
 	top: 0;
 	left: 0;
 	right: 0;
 	background: <<colour dropzone-background>>;
 	text-align: center;
-	content: "Drop here";
+	content: "<<lingo DropMessage>>";
 }
 
 /*
@@ -312,7 +317,7 @@ button svg.tw-image-button, button .tw-image-button img {
 	vertical-align: baseline;
 }
 
-.tw-tag-label {
+button.tw-tag-label, span.tw-tag-label {
 	display: inline-block;
 	padding: 2px 9px;
 	font-size: 0.9em;
@@ -1251,6 +1256,16 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 8px;
 }
 
+.tw-plugin-info-disabled {
+	background: -webkit-repeating-linear-gradient(45deg, #ff0, #ff0 10px, #eee 10px, #eee 20px);
+	background: repeating-linear-gradient(45deg, #ff0, #ff0 10px, #eee 10px, #eee 20px);
+}
+
+.tw-plugin-info-disabled:hover {
+	background: -webkit-repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
+	background: repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
+}
+
 a.tw-tiddlylink.tw-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
@@ -1273,7 +1288,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 
 .tw-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
-	padding: 1em;
+	padding: 1em 1em 1em 1em;
 	margin-top: -1em;
 }
 

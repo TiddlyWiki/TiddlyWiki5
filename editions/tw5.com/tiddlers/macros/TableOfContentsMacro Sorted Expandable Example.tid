@@ -1,0 +1,11 @@
+title: TableOfContentsMacro Sorted Expandable Example
+caption: Sorted Expandable
+tags: table-of-contents-example
+
+!! Sorted Expandable Table of Contents
+
+<$macrocall $name="wikitext-example-without-html"
+src="<div class='tw-table-of-contents'>
+<<toc-expandable 'Contents' 'sort[title]'>>
+</div>
+"/>

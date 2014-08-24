@@ -967,19 +967,22 @@ $tw.Wiki = function(options) {
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [],
-			checkTiddler = function(tiddler) {
+			checkTiddler = function(tiddler,title) {
 				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
-					pluginTiddlers.push(tiddler);
-					registeredTitles.push(tiddler.fields.title);
+					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
+					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+						pluginTiddlers.push(tiddler);
+						registeredTitles.push(tiddler.fields.title);
+					}
 				}
 			};
 		if(titles) {
 			$tw.utils.each(titles,function(title) {
-				checkTiddler(self.getTiddler(title));
+				checkTiddler(self.getTiddler(title),title);
 			});
 		} else {
 			this.each(function(tiddler,title) {
-				checkTiddler(tiddler);
+				checkTiddler(tiddler,title);
 			});
 		}
 		return registeredTitles;
@@ -1590,11 +1593,11 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	// Save the original tiddler file locations if requested
 	var config = wikiInfo.config || {};
 	if(config["retain-original-tiddler-path"]) {
-		var output = [];
+		var output = {};
 		for(var title in $tw.boot.files) {
-			output.push(title + ": " + path.relative(resolvedWikiPath,$tw.boot.files[title].filepath) + "\n");
+			output[title] = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
 		}
-		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/x-tiddler-dictionary", text: output.join("")});
+		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
 	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);

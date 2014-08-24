@@ -8,6 +8,7 @@ ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
+DropMessage: Drop here (or click escape to cancel)
 InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
 RecentChanges/DateFormat: DDth MMM YYYY

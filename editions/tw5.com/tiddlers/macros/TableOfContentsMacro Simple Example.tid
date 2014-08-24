@@ -1,0 +1,11 @@
+title: TableOfContentsMacro Simple Example
+caption: Simple
+tags: table-of-contents-example
+
+!! Simple Table of Contents
+
+<$macrocall $name="wikitext-example-without-html"
+src="<div class='tw-table-of-contents'>
+<<toc 'Contents'>>
+</div>
+"/>

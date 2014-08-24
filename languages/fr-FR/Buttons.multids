@@ -31,7 +31,7 @@ Import/Hint: Importer des fichiers
 Info/Caption: informations
 Info/Hint: Afficher les informations sur ce tiddler
 Home/Caption: accueil
-Home/Hint: Rafraîchit la page et ouvre les tiddlers de la page d'accueil
+Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
 NewTiddler/Caption: nouveau tiddler
@@ -42,6 +42,8 @@ Permalink/Caption: permalink
 Permalink/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers l'ensemble des tiddlers présents dans le déroulé
+Refresh/Caption: rafraîchir
+Refresh/Hint: Rafraîchit la totalité du wiki
 Save/Caption: enregistrer
 Save/Hint: Enregistrer ce tiddler
 SaveWiki/Caption: enregistrer les modifications

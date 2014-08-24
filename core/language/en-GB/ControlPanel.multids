@@ -64,6 +64,12 @@ Basics/Title/Prompt: Title of this ~TiddlyWiki:
 Basics/Username/Prompt: Username for signing edits:
 Basics/Version/Prompt: ~TiddlyWiki version:
 Plugins/Caption: Plugins
+Plugins/Disable/Caption: disable
+Plugins/Disable/Hint: Disable this plugin when reloading page
+Plugins/Disabled/Status: (disabled)
+Plugins/Empty/Hint: None
+Plugins/Enable/Caption: enable
+Plugins/Enable/Hint: Enable this plugin when reloading page
 Plugins/Language/Prompt: Languages
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themes

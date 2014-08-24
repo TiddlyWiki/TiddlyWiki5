@@ -1,0 +1,79 @@
+title: $:/core/macros/toc
+tags: $:/tags/Macro
+
+\define toc(tag,sort:"")
+<ol>
+<$list filter="[tag[$tag$]$sort$]">
+<li>
+<$link>
+<$view field="title"/>
+</$link>
+<$macrocall $name="toc" tag=<<currentTiddler>>/>
+</li>
+</$list>
+</ol>
+\end
+
+\define toc-expandable-body(tag,sort:"")
+<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<li>
+<$link>
+<$reveal type="nomatch" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="open" class="btn-invisible">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="close" class="btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+<$view field="title"/>
+</$link>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort="$sort$"/>
+</$reveal>
+</li>
+</$set>
+\end
+
+\define toc-expandable(tag,sort:"")
+<ol>
+<$list filter="[tag[$tag$]$sort$]">
+<<toc-expandable-body tag:"$tag$" sort:"$sort$">>
+</$list>
+</ol>
+\end
+
+\define toc-selective-expandable-body(tag,sort:"")
+<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<li>
+<$link>
+<$list filter="[all[current]tagging[]limit[1]]">
+<$reveal type="nomatch" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="open" class="btn-invisible">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="close" class="btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+</$reveal>
+</$list>
+<$view field="title"/>
+</$link>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort="$sort$"/>
+</$reveal>
+</li>
+</$set>
+\end
+
+\define toc-selective-expandable(tag,sort:"")
+<ol>
+<$list filter="[tag[$tag$]$sort$]">
+<<toc-selective-expandable-body tag:"$tag$" sort:"$sort$">>
+</$list>
+</ol>
+\end

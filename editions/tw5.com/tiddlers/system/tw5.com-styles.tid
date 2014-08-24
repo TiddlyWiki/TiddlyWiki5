@@ -41,3 +41,47 @@ tags: $:/tags/stylesheet
 	padding: 1em;
 	height: 400px;
 }
+
+.tw-improvement-banner {
+	font-size: 0.7em;
+	background: #fcc;
+	padding-left: 5px;
+	margin-top: 6px;
+	margin-bottom: 12px;
+	<<box-shadow "2px 2px 2px rgba(0,0,0,0.4)">>
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	
+	.tw-improvement-banner {
+	}
+
+}
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tw-improvement-banner {
+		margin-right: -23px;
+		margin-left: -53px;
+	}
+
+	.tw-improvement-banner:before {
+		display: block;
+		position: absolute;
+		width: 0;
+		height: 0;
+		content: " ";
+		margin-left: -5px;
+		margin-top: -10px;
+		border-top: 5px solid transparent;
+		border-left: 5px solid transparent;
+		border-right: 5px solid #C07E7E;
+		border-bottom: 5px solid #C07E7E;
+	}
+
+}
+
+.tw-improvement-banner svg {
+	width: 1em;
+	height: 1em;
+}

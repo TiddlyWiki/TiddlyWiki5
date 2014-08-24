@@ -62,8 +62,19 @@ exports.startup = function() {
 			document: document
 		});
 	}
-	// Set up the syncer object
-	$tw.syncer = new $tw.Syncer({wiki: $tw.wiki});
+	// Find a working syncadaptor
+	$tw.syncadaptor = undefined;
+	$tw.modules.forEachModuleOfType("syncadaptor",function(title,module) {
+		if(!$tw.syncadaptor && module.adaptorClass) {
+			$tw.syncadaptor = new module.adaptorClass({wiki: $tw.wiki});
+		}
+	});
+	// Set up the syncer object if we've got a syncadaptor
+	if($tw.syncadaptor) {
+		$tw.syncer = new $tw.Syncer({wiki: $tw.wiki, syncadaptor: $tw.syncadaptor});
+	} 
+	// Setup the saver handler
+	$tw.saverHandler = new $tw.SaverHandler({wiki: $tw.wiki, dirtyTracking: !$tw.syncadaptor});
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager
