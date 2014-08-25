@@ -4,7 +4,7 @@ tags: filters
 title: FilterOperator: nsortcs
 type: text/vnd.tiddlywiki
 
-The ''nsortcs'' filter operator sorts the current list as numeric values. String values are sorted case sensitively (upper and lower case letters are considered different). Preceding the operator with `!` reverses the sort order.
+The ''nsortcs'' filter operator sorts the current list as numeric values, along the field specified in the operand (which defaults to `title`). String values are sorted case sensitively (upper and lower case letters are considered different). Preceding the operator with `!` reverses the sort order.
 
 For example:
 

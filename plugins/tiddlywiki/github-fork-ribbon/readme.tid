@@ -5,6 +5,7 @@ This stylesheet is adapted from work by Simon Whitaker:
 https://github.com/simonwhitaker/github-fork-ribbon-css/
 
 
+```
 <!-- TOP RIGHT RIBBON: START COPYING HERE -->
 <div class="github-fork-ribbon-wrapper right"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>
 </div>
@@ -25,3 +26,4 @@ https://github.com/simonwhitaker/github-fork-ribbon-css/
 <div class="github-fork-ribbon-wrapper left-bottom"><div class="github-fork-ribbon"><a href="https://github.com/simonwhitaker/github-fork-ribbon-css">Fork me on ~GitHub</a></div>
 </div>
 <!-- BOTTOM LEFT RIBBON: END COPYING HERE -->
+```

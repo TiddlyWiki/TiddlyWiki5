@@ -1,26 +1,32 @@
 created: 20130822080600000
-modified: 20131228161338857
+modified: 20140707161338857
 tags: concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
 
 System tags are used to give special behaviour to tiddlers:
 
-* [[$:/tags/stylesheet]] to indicate that a tiddler should be applied as a CSS stylesheet
-* [[$:/tags/TiddlerInfo]] for tiddler info panel tabs
-* [[$:/tags/ControlPanel]] for control panel tabs
-* [[$:/tags/SideBar]] for sidebar tabs
-* [[$:/tags/MoreSideBar]] for tabs in the "more" sidebar
-* [[$:/tags/ViewTemplate]] for the view template
-* [[$:/tags/ViewToolbar]] for the view mode tiddler toolbar
-* [[$:/tags/EditTemplate]] for the edit template
-* [[$:/tags/EditToolbar]] for the edit mode tiddler toolbar
-* [[$:/tags/PageControls]] for the page control tools in the sidebar
-* [[$:/tags/PageTemplate]] for the main page elements
-* [[$:/tags/RawMarkup]] for raw markup to be included in the generated HTML file
+* {{$:/tags/AboveStory||$:/core/ui/TagTemplate}} for elements to be placed at the top of the story river
+* {{$:/tags/BelowStory||$:/core/ui/TagTemplate}} for elements to be placed at the bottom of the story river
+* {{$:/tags/ControlPanel||$:/core/ui/TagTemplate}} for control panel tabs
+* {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}} for the edit template
+* {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} for the edit mode tiddler toolbar
+* {{$:/tags/MoreSideBar||$:/core/ui/TagTemplate}} for tabs in the "more" sidebar
+* {{$:/tags/PageControls||$:/core/ui/TagTemplate}} for the page control tools in the sidebar
+* {{$:/tags/PageTemplate||$:/core/ui/TagTemplate}} for the main page elements
+* {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file
+* {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
+* {{$:/tags/stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
+* {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}} for tiddler info panel tabs
+* {{$:/tags/ViewTemplate||$:/core/ui/TagTemplate}} for the view template
+* {{$:/tags/ViewToolbar||$:/core/ui/TagTemplate}} for the view mode tiddler toolbar
 
 ! System tags in use
 
 These are the system tags in use in this wiki:
 
-{{{ [all[shadows+tiddlers]tags[]prefix[$:/]] +[sort[title]] }}}
+<ul>
+<$list filter="[all[shadows+tiddlers]tags[]prefix[$:/]sort[title]]">
+<li>{{||$:/core/ui/TagTemplate}}</li>
+</$list>
+</ul>

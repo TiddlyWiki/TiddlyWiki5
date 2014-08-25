@@ -4,23 +4,57 @@ AdvancedSearch/Caption: advanced search
 AdvancedSearch/Hint: Advanced search
 Cancel/Caption: cancel
 Cancel/Hint: Cancel editing this tiddler
+Clone/Caption: clone
+Clone/Hint: Clone this tiddler
 Close/Caption: close
 Close/Hint: Close this tiddler
+CloseAll/Caption: close all
+CloseAll/Hint: Close all tiddlers
+CloseOthers/Caption: close others
+CloseOthers/Hint: Close other tiddlers
 ControlPanel/Caption: control panel
 ControlPanel/Hint: Open control panel
 Delete/Caption: delete
 Delete/Hint: Delete this tiddler
 Edit/Caption: edit
 Edit/Hint: Edit this tiddler
+Encryption/Caption: encryption
+Encryption/Hint: Set or clear a password for saving this wiki
+Encryption/ClearPassword/Caption: clear password
+Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
+Encryption/SetPassword/Caption: set password
+Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
+FullScreen/Caption: full-screen
+FullScreen/Hint: Enter or leave full-screen mode
+Import/Caption: import
+Import/Hint: Import files
 Info/Caption: info
 Info/Hint: Show information for this tiddler
+Home/Caption: home
+Home/Hint: Open the default tiddlers
+Language/Caption: language
+Language/Hint: Choose the user interface language
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+More/Caption: more
+More/Hint: More actions
+Permalink/Caption: permalink
+Permalink/Hint: Set browser address bar to a direct link to this tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
+Refresh/Caption: refresh
+Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: save
 Save/Hint: Save this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
+StoryView/Caption: storyview
+StoryView/Hint: Choose the story visualisation
 HideSideBar/Caption: hide sidebar
 HideSideBar/Hint: Hide sidebar
 ShowSideBar/Caption: show sidebar
 ShowSideBar/Hint: Show sidebar
+TagManager/Caption: tag manager
+TagManager/Hint: Open tag manager
+Theme/Caption: theme
+Theme/Hint: Choose the display theme

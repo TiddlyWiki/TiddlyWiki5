@@ -36,19 +36,18 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--output . \
-	--rendertiddler ReadMe ./readme.md text/html \
-	--rendertiddler ContributingTemplate ./contributing.md text/html \
-	--rendertiddler $:/core/copyright.txt ./licenses/copyright.md text/plain \
+	--build readmes \
 	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all index.html text/plain \
-	--savetiddler $:/favicon.ico favicon.ico \
-	--rendertiddler $:/editions/tw5.com/download-empty empty.html text/plain \
-	--rendertiddler $:/editions/tw5.com/download-empty empty.hta text/plain \
-	--savetiddler $:/green_favicon.ico static/favicon.ico \
-	--rendertiddler $:/core/templates/static.template.html static.html text/plain \
-	--rendertiddler $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain \
-	--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain \
-	--rendertiddler $:/core/templates/static.template.css static/static.css text/plain \
+	--build favicon empty static index \
+	|| exit 1
+
+# upgrade.html: custom edition for handling upgrades
+
+node ./tiddlywiki.js \
+	./editions/upgrade \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--build upgrade \
 	|| exit 1
 
 # encrypted.html: a version of the main file encrypted with the password "password"
@@ -57,8 +56,7 @@ node ./tiddlywiki.js \
 	./editions/tw5.com \
 	--verbose \
 	--output $TW5_BUILD_OUTPUT \
-	--password password \
-	--rendertiddler $:/core/save/all encrypted.html text/plain \
+	--build encrypted \
 	|| exit 1
 
 # tahoelafs.html: empty wiki with plugin for Tahoe-LAFS

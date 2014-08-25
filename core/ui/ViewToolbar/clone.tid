@@ -1,0 +1,13 @@
+title: $:/core/ui/Buttons/clone
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/clone-button}} {{$:/language/Buttons/Clone/Caption}}
+description: {{$:/language/Buttons/Clone/Hint}}
+
+<$button message="tw-new-tiddler" param=<<currentTiddler>> title={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/clone-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Clone/Caption}}/>
+</$list>
+</$button>

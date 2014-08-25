@@ -20,4 +20,4 @@ The content of the `<$edit-bitmap>` widget is ignored.
 The edit bitmap widget can be configured with these system tiddlers:
 
 * [[$:/config/BitmapEditor/LineWidth]] determines the line width: <$edit-text tiddler="$:/config/BitmapEditor/LineWidth" tag="input"/>
-* [[$:/config/BitmapEditor/Colour]] determines the line width: <$edit-text tiddler="$:/config/BitmapEditor/Colour" tag="input" type="color"/>
+* [[$:/config/BitmapEditor/Colour]] determines the line color: <$edit-text tiddler="$:/config/BitmapEditor/Colour" tag="input" type="color"/>

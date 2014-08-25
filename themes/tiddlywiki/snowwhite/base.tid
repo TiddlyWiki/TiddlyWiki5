@@ -17,7 +17,7 @@ tags: [[$:/tags/stylesheet]]
 	}
 }
 
-@media (max-width: 770px) {
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 	.tw-tiddler-frame {
 		<<box-shadow none>>
 	}
@@ -99,4 +99,8 @@ canvas.tw-edit-bitmapeditor  {
 
 .tw-message-box img {
 	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
+}
+
+.tw-plugin-info {
+	<<box-shadow "2px 2px 4px rgba(0,0,0,0.2)">>
 }

@@ -1,4 +1,13 @@
-title: $:/core/ui/PageControls/new-tiddler
+title: $:/core/ui/Buttons/new-tiddler
 tags: $:/tags/PageControls
+caption: {{$:/core/images/new-button}} {{$:/language/Buttons/NewTiddler/Caption}}
+description: {{$:/language/Buttons/NewTiddler/Hint}}
 
-<$button message="tw-new-tiddler" title={{$:/language/Buttons/NewTiddler/Hint}} aria-label={{$:/language/Buttons/NewTiddler/Caption}} class="btn-invisible">{{$:/core/images/new-button}}</$button>
+<$button message="tw-new-tiddler" title={{$:/language/Buttons/NewTiddler/Hint}} aria-label={{$:/language/Buttons/NewTiddler/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/new-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/NewTiddler/Caption}}/>
+</$list>
+</$button>

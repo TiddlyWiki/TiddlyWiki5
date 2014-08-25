@@ -1,5 +1,6 @@
 {
-	"title": "$:/plugins/bj/tw2parser",
-	"description": "legacy parser",
+	"title": "$:/plugins/tiddlywiki/tw2parser",
+	"description": "TiddlyWiki Classic-compatible wikitext parser",
 	"authors": "JeremyRuston, JeffreyWilkinson"
+	"core-version": ">=5.0.0"
 }

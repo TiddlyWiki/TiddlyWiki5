@@ -1,20 +1,28 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Avancé
+Advanced/EditorTypes/Caption: Types d'éditeur
+Advanced/EditorTypes/Editor/Caption: Éditeur
+Advanced/EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
+Advanced/EditorTypes/Type/Caption: Type
 Advanced/Hint: Informations internes sur ce ~TiddlyWiki
 Advanced/LoadedModules/Caption: Modules chargés
 Advanced/LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Advanced/Settings/Caption: Paramétrage
 Advanced/Settings/Hint: Ce paramétrage avancé vous permet de personnaliser le comportement de TiddlyWiki.
-Advanced/Settings/NavigationAddressBar/Caption: Barre d'adresse lors de la navigation
+Advanced/Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
 Advanced/Settings/NavigationAddressBar/Hint: Comportement de la barre d'adresse du navigateur lorsqu'on pointe vers un tiddler :
 Advanced/Settings/NavigationAddressBar/No/Description: Ne pas modifier la barre d'adresse
-Advanced/Settings/NavigationAddressBar/Permalink/Description: Inclure le titre du tiddler cible
+Advanced/Settings/NavigationAddressBar/Permalink/Description: Inclure uniquement le titre du tiddler cible
 Advanced/Settings/NavigationAddressBar/Permaview/Description: Inclure le titre du tiddler cible ainsi que le déroulé courant
 Advanced/Settings/NavigationHistory/Caption: Historique de navigation
 Advanced/Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
 Advanced/Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Advanced/Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
+Advanced/Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
+Advanced/Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
+Advanced/Settings/ToolbarButtons/Text/Description: Afficher le texte
+Advanced/Settings/ToolbarButtons/Icons/Description: Afficher l'icone
 Advanced/TiddlerFields/Caption: Champs
 Advanced/TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Appearance/Caption: Apparence
@@ -32,6 +40,14 @@ Appearance/StoryView/Caption: Vue sur le déroulé
 Appearance/StoryView/Prompt: Vue courante :
 Appearance/Theme/Caption: Thème
 Appearance/Theme/Prompt: Thème courant :
+Appearance/Toolbars/Caption: Barres d'outils
+Appearance/Toolbars/Hint: Choix des boutons à afficher dans les barres d'outils
+Appearance/Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
+Appearance/Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en cours d'édition
+Appearance/Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
+Appearance/Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
+Appearance/Toolbars/PageControls/Caption: Barre d'outils de la page
+Appearance/Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
 Basics/AnimDuration/Prompt: Durée de l'animation
 Basics/Caption: Fondamentaux
 Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
@@ -48,9 +64,12 @@ Basics/Title/Prompt: Titre de ce ~TiddlyWiki
 Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur
 Basics/Version/Prompt: Numéro de version :
 Plugins/Caption: Plugins
-Plugins/Fields/Description: Description
-Plugins/Fields/Title: Titre
-Plugins/Fields/Version: Version
+Plugins/Disable/Caption: désactiver
+Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
+Plugins/Disabled/Status: (désactivé)
+Plugins/Empty/Hint: Aucun
+Plugins/Enable/Caption: activer
+Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
 Plugins/Language/Prompt: Langues
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Thèmes
@@ -74,7 +93,7 @@ Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
 Tools/Caption: Outils
 Tools/Download/Full/Caption: Télécharger le wiki complet
 Tools/Encryption/ChangePassword/Button: changer le mot de passe
-Tools/Encryption/ClearPassword/Button: effacer le mot de passe
+Tools/Encryption/ClearPassword/Button: résilier le mot de passe
 Tools/Encryption/Disabled/Prompt: Ce wiki n'est pas chiffré
 Tools/Encryption/Enabled/Prompt: Ce wiki est chiffré
 Tools/Encryption/Heading: Chiffrement

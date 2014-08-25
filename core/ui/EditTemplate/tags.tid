@@ -15,8 +15,8 @@ background-color:$(backgroundColor)$;
 
 <div class="tw-edit-add-tag">
 <span class="tw-add-tag-name">
-<$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/tagsAutoComplete">> class="tw-edit-texteditor"/>
-</span> <$button popup=<<qualify "$:/state/tagsAutoComplete">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button">
+<$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tw-edit-texteditor"/>
+</span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tw-add-tag-button">
 <$button message="tw-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">
 <<lingo Tags/Add/Button>>
 </$button>
@@ -25,7 +25,7 @@ background-color:$(backgroundColor)$;
 
 <div class="tw-block-dropdown-wrapper">
 
-<$reveal state=<<qualify "$:/state/tagsAutoComplete">> type="nomatch" text="" default="">
+<$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 
 <div class="tw-block-dropdown">
 

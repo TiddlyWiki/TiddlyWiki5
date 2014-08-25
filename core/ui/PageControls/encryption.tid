@@ -1,0 +1,25 @@
+title: $:/core/ui/Buttons/encryption
+tags: $:/tags/PageControls
+caption: {{$:/core/images/locked-padlock}} {{$:/language/Buttons/Encryption/Caption}}
+description: {{$:/language/Buttons/Encryption/Hint}}
+
+<$reveal type="match" state="$:/isEncrypted" text="yes">
+<$button message="tw-clear-password" title={{$:/language/Buttons/Encryption/ClearPassword/Hint}} aria-label={{$:/language/Buttons/Encryption/ClearPassword/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/locked-padlock}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Encryption/ClearPassword/Caption}}/>
+</$list>
+</$button>
+</$reveal>
+<$reveal type="nomatch" state="$:/isEncrypted" text="yes">
+<$button message="tw-set-password" title={{$:/language/Buttons/Encryption/SetPassword/Hint}} aria-label={{$:/language/Buttons/Encryption/SetPassword/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/unlocked-padlock}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Encryption/SetPassword/Caption}}/>
+</$list>
+</$button>
+</$reveal>

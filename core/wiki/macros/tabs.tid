@@ -1,22 +1,30 @@
 title: $:/core/macros/tabs
 tags: $:/tags/Macro
 
-\define tabs(tabsList,default,state:"$:/state/tab",class)
+\define tabs(tabsList,default,state:"$:/state/tab",class,template)
 <div class="tw-tab-set $class$">
 <div class="tw-tab-buttons $class$">
-	<$list filter="$tabsList$" variable="currentTab">
-		<$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tw-tab-selected">
-			<$transclude tiddler=<<currentTab>> field="caption">
-			<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
-			</$transclude>
-		</$button>
-	</$list>
+<$list filter="$tabsList$" variable="currentTab">
+<$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tw-tab-selected">
+<$transclude tiddler=<<currentTab>> field="caption">
+<$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
+</$transclude>
+</$button>
+</$list>
 </div><div class="tw-tab-divider $class$"/><div class="tw-tab-content $class$">
-	<$list filter="$tabsList$" variable="currentTab">
-		<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
-			<$transclude tiddler=<<currentTab>> mode="block"/>
-		</$reveal>
-	</$list>
+<$list filter="$tabsList$" variable="currentTab">
+
+<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
+
+<$transclude tiddler="$template$" mode="block">
+
+<$transclude tiddler=<<currentTab>> mode="block"/>
+
+</$transclude>
+
+</$reveal>
+
+</$list>
 </div>
 </div>
 \end

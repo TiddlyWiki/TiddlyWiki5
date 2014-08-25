@@ -27,7 +27,7 @@ Instantiate parse rule
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /^\\define\s+([^(\s]+)\(\s*([^)]*)\)(\r?\n)?/mg;
+	this.matchRegExp = /^\\define\s+([^(\s]+)\(\s*([^)]*)\)(\s*\r?\n)?/mg;
 };
 
 /*
@@ -40,12 +40,12 @@ exports.parse = function() {
 	var paramString = this.match[2],
 		params = [];
 	if(paramString !== "") {
-		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/mg,
+		var reParam = /\s*([A-Za-z0-9\-_]+)(?:\s*:\s*(?:"""([\s\S]*?)"""|"([^"]*)"|'([^']*)'|\[\[([^\]]*)\]\]|([^"'\s]+)))?/mg,
 			paramMatch = reParam.exec(paramString);
 		while(paramMatch) {
 			// Save the parameter details
 			var paramInfo = {name: paramMatch[1]},
-				defaultValue = paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5];
+				defaultValue = paramMatch[2] || paramMatch[3] || paramMatch[4] || paramMatch[5] || paramMatch[6];
 			if(defaultValue) {
 				paramInfo["default"] = defaultValue;
 			}
@@ -58,7 +58,7 @@ exports.parse = function() {
 	var reEnd;
 	if(this.match[3]) {
 		// If so, the end of the body is marked with \end
-		reEnd = /(\r?\n\\end\r?\n)/mg;
+		reEnd = /(\r?\n\\end(?:$|\r?\n))/mg;
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /(\r?\n)/mg;

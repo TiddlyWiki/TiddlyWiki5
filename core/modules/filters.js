@@ -33,7 +33,7 @@ function parseFilterOperation(operators,filterString,p) {
 			operator.prefix = filterString.charAt(p++);
 		}
 		// Get the operator name
-		var nextBracketPos = filterString.substring(p).search(/[\[\{\/]/);
+		var nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
 		if(nextBracketPos === -1) {
 			throw "Missing [ in filter expression";
 		}
@@ -54,24 +54,28 @@ function parseFilterOperation(operators,filterString,p) {
 
 		p = nextBracketPos + 1;
 		switch (bracket) {
-		case '{': // Curly brackets
-			operator.indirect = true;
-			nextBracketPos = filterString.indexOf('}',p);
-			break;
-		case '[': // Square brackets
-			nextBracketPos = filterString.indexOf(']',p);
-			break;
-		case '/': // regexp brackets
-			var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
-				rexMatch = rex.exec(filterString.substring(p));
-			if(rexMatch) {
-				operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-				nextBracketPos = p + rex.lastIndex - 1;
-			}
-			else {
-				throw "Unterminated regular expression in filter expression";
-			}
-			break;
+			case "{": // Curly brackets
+				operator.indirect = true;
+				nextBracketPos = filterString.indexOf("}",p);
+				break;
+			case "[": // Square brackets
+				nextBracketPos = filterString.indexOf("]",p);
+				break;
+			case "<": // Angle brackets
+				operator.variable = true;
+				nextBracketPos = filterString.indexOf(">",p);
+				break;
+			case "/": // regexp brackets
+				var rex = /^((?:[^\\\/]*|\\.)*)\/(?:\(([mygi]+)\))?/g,
+					rexMatch = rex.exec(filterString.substring(p));
+				if(rexMatch) {
+					operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
+					nextBracketPos = p + rex.lastIndex - 1;
+				}
+				else {
+					throw "Unterminated regular expression in filter expression";
+				}
+				break;
 		}
 		
 		if(nextBracketPos === -1) {
@@ -192,6 +196,9 @@ exports.compileFilter = function(filterString) {
 				}
 				if(operator.indirect) {
 					operand = self.getTextReference(operator.operand,"",currTiddlerTitle);
+				}
+				if(operator.variable) {
+					operand = widget.getVariable(operator.operand,{defaultValue: ""});
 				}
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,

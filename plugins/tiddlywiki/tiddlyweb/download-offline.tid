@@ -1,6 +1,0 @@
-title: $:/editions/server/download-offline
-
-\define saveTiddlerFilter()
-[is[tiddler]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] -[[$:/plugins/tiddlywiki/filesystem]] -[[$:/plugins/tiddlywiki/tiddlyweb]] +[sort[title]]
-\end
-{{$:/core/templates/tiddlywiki5.html}}

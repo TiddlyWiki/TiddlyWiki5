@@ -1,0 +1,14 @@
+created: 20140716084242809
+modified: 20140716084341303
+tags: message navigator-message
+title: WidgetMessage: tw-perform-import
+type: text/vnd.tiddlywiki
+
+The perform import message copies tiddlers from a specified plugin into the main store. See the UpgradeMechanism for an overview of how it is used by the core.
+
+|!Name |!Description |
+|param |Title of the pending import tiddler. Defaults to ''$:/Import'' |
+
+To select which tiddlers are to be imported, fields with names formed from `selection-` plus the title of the tiddler are used. The value ''unchecked'' causes the tiddler to be skipped from the import.
+
+The perform import message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.

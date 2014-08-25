@@ -1,7 +1,7 @@
 title: $:/editions/tw5.com/download-empty
 
 \define saveTiddlerFilter()
-[[$:/core]] [[$:/isEncrypted]] [[$:/plugins/tiddlywiki/fullscreen]] [[$:/themes/tiddlywiki/snowwhite]] [[$:/themes/tiddlywiki/vanilla]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]]
+[[$:/core]] [[$:/isEncrypted]] [[$:/themes/tiddlywiki/snowwhite]] [[$:/themes/tiddlywiki/vanilla]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]]
 \end
 \define savingEmpty()
 yes

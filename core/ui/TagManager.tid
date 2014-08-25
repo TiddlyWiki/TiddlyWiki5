@@ -1,19 +1,24 @@
 title: $:/TagManager
 
 \define lingo-base() $:/language/TagManager/
-\define iconEditor(title)
-<$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/iconDropdown/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
-<div class="tw-block-dropdown-wrapper">
-<$reveal state=<<qualify "$:/state/iconDropdown/$title$">> type="nomatch" text="" default="">
-<$linkcatcher to="$title$!!icon">
-<div class="tw-block-dropdown tw-edit-type-dropdown">
-<$list filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] +[sort[title]]">
+\define iconEditorTab(type)
+<$list filter="[all[shadows+tiddlers]is[image]] [all[shadows+tiddlers]tag[$:/tags/Image]] -[type[application/pdf]] +[sort[title]] +[$type$is[system]]">
 <$link to={{!!title}}>
-<$view field="title"/>
+<$transclude/> <$view field="title"/>
 </$link>
 </$list>
-</div>
+\end
+\define iconEditor(title)
+<div class="tw-drop-down-wrapper">
+<$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/popup/icon/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
+<div class="tw-drop-down">
+<$linkcatcher to="$title$!!icon">
+<<iconEditorTab type:"!">>
+<hr/>
+<<iconEditorTab type:"">>
 </$linkcatcher>
+</div>
 </$reveal>
 </div>
 \end

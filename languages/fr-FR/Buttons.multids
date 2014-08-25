@@ -1,0 +1,60 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: recherche avancée
+AdvancedSearch/Hint: Recherche avancée
+Cancel/Caption: annuler
+Cancel/Hint: Annule l'édition de ce tiddler
+Clone/Caption: cloner
+Clone/Hint: Cloner ce tiddler
+Close/Caption: fermer
+Close/Hint: Fermer ce tiddler
+CloseAll/Caption: fermer tout
+CloseAll/Hint: Fermer tous les tiddlers
+CloseOthers/Caption: fermer les autres tiddlers
+CloseOthers/Hint: Fermer les autres tiddlers
+ControlPanel/Caption: panneau de contrôle
+ControlPanel/Hint: Ouvrir le panneau de contrôle
+Delete/Caption: supprimer
+Delete/Hint: Supprimer ce tiddler
+Edit/Caption: éditer
+Edit/Hint: Éditer ce tiddler
+Encryption/Caption: chiffrement
+Encryption/Hint: Affecte ou résilie le mot de passe pour la sauvegarde de ce wiki
+Encryption/ClearPassword/Caption: résilier le mot de passe
+Encryption/ClearPassword/Hint: Résilier le mot de passe et sauvegarder ce wiki sans chiffrement
+Encryption/SetPassword/Caption: affecter un mot de passe
+Encryption/SetPassword/Hint: Affecter un mot de passe pour sauvegarder une version chiffrée de ce wiki
+FullScreen/Caption: plein-écran
+FullScreen/Hint: Entre ou sort du mode plein-écran
+Import/Caption: importer
+Import/Hint: Importer des fichiers
+Info/Caption: informations
+Info/Hint: Afficher les informations sur ce tiddler
+Home/Caption: accueil
+Home/Hint: Ouvre les tiddlers par défaut
+Language/Caption: langue
+Language/Hint: Choix de la langue pour l'interface utilisateur
+NewTiddler/Caption: nouveau tiddler
+NewTiddler/Hint: Créer un nouveau tiddler
+More/Caption: plus
+More/Hint: Autres actions
+Permalink/Caption: permalink
+Permalink/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers l'ensemble des tiddlers présents dans le déroulé
+Refresh/Caption: rafraîchir
+Refresh/Hint: Rafraîchit la totalité du wiki
+Save/Caption: enregistrer
+Save/Hint: Enregistrer ce tiddler
+SaveWiki/Caption: enregistrer les modifications
+SaveWiki/Hint: Enregistrer les modifications
+StoryView/Caption: vue sur le déroulé
+StoryView/Hint: Choix du mode de visualisation du déroulé
+HideSideBar/Caption: cacher la barre latérale
+HideSideBar/Hint: Cacher la barre latérale
+ShowSideBar/Caption: afficher la barre latérale
+ShowSideBar/Hint: Afficher la barre latérale
+TagManager/Caption: gestionnaire de tags
+TagManager/Hint:  Gestionnaire de tags
+Theme/Caption: thème
+Theme/Hint: Choix du thème pour l'affichage

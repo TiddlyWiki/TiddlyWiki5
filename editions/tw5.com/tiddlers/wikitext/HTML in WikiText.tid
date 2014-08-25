@@ -1,5 +1,5 @@
 created: 20131205160816081
-modified: 20140220203440064
+modified: 20140619111725471
 tags: wikitext
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -25,6 +25,24 @@ Here an attribute is specified as a macro invocation:
 
 ```
 <a href=<<MyMacro "Brian">>>link</a>
+```
+
+Literal attribute values can include line breaks. For example:
+
+```
+<div data-address="Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland."/>
+```
+
+By using triple-double quotes you can specify attribute values that include single double quotes. For example:
+
+```
+<div data-address="""Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland."""/>
 ```
 
 ! Content Parsing

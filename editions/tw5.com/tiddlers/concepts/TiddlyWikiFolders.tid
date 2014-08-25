@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20140427210453175
+modified: 20140720210453175
 tags: dev
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -28,6 +28,8 @@ The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising th
 * ''config'' - an optional hashmap of configuration options (see below)
 
 Configuration options include:
+
+* ''default-tiddler-location'' - a string path to the default location for the filesystem adaptor to save new tiddlers (resolved relative to the wiki folder)
 
 * ''retain-original-tiddler-path'' - If true, the server will generate a tiddler [[$:/config/OriginalTiddlerPaths]] containing the original file paths of each tiddler in the wiki
 

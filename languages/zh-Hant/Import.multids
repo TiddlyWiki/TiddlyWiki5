@@ -1,0 +1,13 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: 取消
+Listing/Hint: 這些條目已備妥導入：
+Listing/Import/Caption: 導入
+Listing/Select/Caption: 選擇
+Listing/Status/Caption: 狀態
+Listing/Title/Caption: 條目
+Upgrader/Plugins/Suppressed/Incompatible: 封鎖的不相容或過時插件
+Upgrader/Plugins/Suppressed/Version: 封鎖的插件 (由於傳入的 <<incoming>> 較現有版本 <<existing>> 舊)
+Upgrader/Plugins/Upgraded: 升級插件，從 <<incoming>> 到 <<upgraded>>
+Upgrader/System/Suppressed: 封鎖的系統條目
+Upgrader/ThemeTweaks/Created: 從 <$text text=<<from>>/> 遷移佈景主題

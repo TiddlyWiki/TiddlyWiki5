@@ -1,0 +1,14 @@
+title: $:/config/PageControlButtons/Visibility/$:/
+
+core/ui/Buttons/close-all: hide
+core/ui/Buttons/encryption: hide
+core/ui/Buttons/full-screen: hide
+core/ui/Buttons/home: hide
+core/ui/Buttons/refresh: hide
+core/ui/Buttons/import: hide
+core/ui/Buttons/language: hide
+core/ui/Buttons/tag-manager: hide
+core/ui/Buttons/more-page-actions: hide
+core/ui/Buttons/permaview: hide
+core/ui/Buttons/storyview: hide
+core/ui/Buttons/theme: hide

@@ -1,6 +1,9 @@
 title: $:/core/ui/PageTemplate/sidebar
 tags: $:/tags/PageTemplate
 
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
 <$scrollable fallthrough="no" class="tw-sidebar-scrollable">
 
 <div class="sidebar-header">
@@ -20,13 +23,11 @@ tags: $:/tags/PageTemplate
 </div>
 
 <div class="tw-page-controls">
-
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
-
+<$reveal type="nomatch" state=<<config-title>> text="hide">
 <$transclude tiddler=<<listItem>> mode="inline"/>
-
+</$reveal>
 </$list>
-
 </div>
 
 <$transclude tiddler="$:/core/ui/SideBarLists" mode="inline"/>

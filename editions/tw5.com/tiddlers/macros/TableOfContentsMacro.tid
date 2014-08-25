@@ -1,0 +1,29 @@
+title: TableOfContentsMacro
+tags: macros
+modified: 20140818180307785
+
+The table of contents macro produces a hierarchical tree of tiddlers based on their tags.
+
+The top level entries of the table of contents are defined by a root tag. The subentries under each of those entries are tagged with the title of the entry. Entries can be ordered using the `list` field as described in TiddlerTags.
+
+There are several variants of the macro:
+
+* `<<toc>>` produces a simple hierarchical tree of links
+* `<<toc-expandable>>` produces an expandable tree of links
+* `<<toc-selective-expandable>>` produces an expandable tree of links where the expand/contract buttons are only shown for entries that possess child nodes
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |tag |The root tag that identifies the top level of the hierarchy | |
+|2nd |sort |Optional sorting subfilter (eg `sort[title]`) | |
+
+The ''tag'' and ''sort'' parameters are combined to make a filter expression of the form:
+
+```
+[tag[$tag$]$sort$]
+```
+
+! Examples
+
+<<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>

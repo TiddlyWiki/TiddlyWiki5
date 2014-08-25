@@ -21,7 +21,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
-|default |Default value to use when the state tiddler |
+|default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no")|
 

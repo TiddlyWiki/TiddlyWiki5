@@ -1,7 +1,11 @@
 created: 20140223195548209
-modified: 20140223195738745
+modified: 20140617212529392
 tags: command
 title: InitCommand
 type: text/vnd.tiddlywiki
 
 {{$:/language/Help/init}}
+
+See also:
+
+* [[Environment Variables on Node.js]]

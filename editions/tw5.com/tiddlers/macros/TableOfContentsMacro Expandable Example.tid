@@ -1,0 +1,11 @@
+title: TableOfContentsMacro Expandable Example
+caption: Expandable
+tags: table-of-contents-example
+
+!! Expandable Table of Contents
+
+<$macrocall $name="wikitext-example-without-html"
+src="<div class='tw-table-of-contents'>
+<<toc-expandable 'Contents'>>
+</div>
+"/>

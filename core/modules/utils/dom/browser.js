@@ -130,4 +130,31 @@ exports.convertEventName = function(eventName) {
 	return newEventName;
 };
 
+/*
+Return the names of the fullscreen APIs
+*/
+exports.getFullScreenApis = function() {
+	var d = document,
+		db = d.body,
+		result = {
+		"_requestFullscreen": db.webkitRequestFullscreen !== undefined ? "webkitRequestFullscreen" :
+							db.mozRequestFullScreen !== undefined ? "mozRequestFullScreen" :
+							db.msRequestFullscreen !== undefined ? "msRequestFullscreen" :
+							db.requestFullscreen !== undefined ? "requestFullscreen" : "",
+		"_exitFullscreen": d.webkitExitFullscreen !== undefined ? "webkitExitFullscreen" :
+							d.mozCancelFullScreen !== undefined ? "mozCancelFullScreen" :
+							d.msExitFullscreen !== undefined ? "msExitFullscreen" :
+							d.exitFullscreen !== undefined ? "exitFullscreen" : "",
+		"_fullscreenElement": d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
+							d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
+							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
+							d.fullscreenElement !== undefined ? "fullscreenElement" : ""
+	};
+	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement) {
+		return null;
+	} else {
+		return result;
+	}
+};
+
 })();

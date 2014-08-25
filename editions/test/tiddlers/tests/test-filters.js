@@ -270,6 +270,25 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]",fakeWidget).join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
 	});
 
+	it("should handle variable operands", function() {
+
+		var widget = require("$:/core/modules/widgets/widget.js");
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+		var rootWidget = new widget.widget({
+			type: "widget",
+			children: [{type: "widget", children: []}]
+		},{
+			wiki: $tw.wiki,
+			document: $tw.document
+		});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("myVar","Tidd");
+		rootWidget.setVariable("myVar2","JoeBloggs");
+		expect(wiki.filterTiddlers("[prefix<myVar>] +[sort[title]]",anchorWidget).join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[modifier<myVar2>] +[sort[title]]",anchorWidget).join(",")).toBe("TiddlerOne");
+	});
+
 	it("should handle the before and after operators", function() {
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]after[TiddlerOne]]").join(",")).toBe("Tiddler Three");
 		expect(wiki.filterTiddlers("[list[TiddlerSeventh]after[a fourth tiddler]]").join(",")).toBe("MissingTiddler");

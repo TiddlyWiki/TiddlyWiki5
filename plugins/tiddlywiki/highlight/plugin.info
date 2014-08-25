@@ -1,5 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/highlight",
 	"description": "Highlight.js plugin for TiddlyWiki5",
-	"author": "JoaoBolila"
+	"author": "JoaoBolila",
+	"list": "license"
 }

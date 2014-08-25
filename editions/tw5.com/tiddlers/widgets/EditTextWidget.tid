@@ -1,6 +1,6 @@
 title: EditTextWidget
 created: 201310241419
-modified: 201405050837
+modified: 201407250837
 tags: widget
 
 ! Introduction
@@ -24,3 +24,15 @@ The content of the `<$edit-text>` widget is ignored.
 |tag |Overrides the generated HTML editing element tag |
 |size |The size of the input field (in characters) |
 |type |Overrides the generated HTML editing element `type` attribute |
+
+! Notes
+
+One trap to be aware of is that the edit text widget cannot be used to edit a field of the tiddler that contains it. Each keypress results in the tiddler being re-rendered, which loses the cursor position within the text field.
+
+Instead, place the edit text widget in a [[template|TiddlerTemplates]] that references the tiddler you want to modify.
+
+For example, if you wanted to edit the value of the "myconfig" field of the tiddler "AppSettings", you might do so by creating a separate tiddler "ChangeAppSettings" that contains the following:
+
+```
+<$edit-text tiddler="AppSettings" field="myconfig"/>
+```

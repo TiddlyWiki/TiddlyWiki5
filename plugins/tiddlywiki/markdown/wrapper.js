@@ -35,7 +35,7 @@ function transformNode(node) {
 		widget.children = transformNodes(node.slice(p++));
 		// Massage images into the image widget
 		if(widget.tag === "img") {
-			widget.tag = "$image";
+			widget.type = "image";
 			if(widget.attributes.alt) {
 				widget.attributes.tooltip = widget.attributes.alt;
 				delete widget.attributes.alt;

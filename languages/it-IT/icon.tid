@@ -1,0 +1,32 @@
+title: $:/languages/it-IT/icon
+type: image/svg+xml
+
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg 
+	height="1000" 
+	width="1500" 
+	version="1.1" 
+	viewBox="0 0 3 2" 
+	xmlns="http://www.w3.org/2000/svg" 
+	xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>Bandiera della Repubblica Italiana PMS 20060414</desc>
+<!--
+	from http://commons.wikimedia.org/wiki/Image:Bandiera_della_Repubblica_Italiana_PMS_20060414.svg
+	this text is in the public domain
+-->
+	<rect 
+		fill="#009246" 
+		height="2" 
+		width="1" />
+	<rect 
+		fill="#f1f2f1" 
+		height="2" 
+		width="1" 
+		x="1" />
+	<rect 
+		fill="#ce2b37" 
+		height="2" 
+		width="1" 
+		x="2" />
+</svg>

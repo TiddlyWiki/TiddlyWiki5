@@ -18,11 +18,8 @@ Create a widget object for a parse tree node
 	options: see below
 Options include:
 	wiki: mandatory reference to wiki associated with this render tree
-	variables: optional hashmap of context variables (see below)
 	parentWidget: optional reference to a parent renderer node for the context chain
 	document: optional document object to use instead of global document
-Context variables include:
-	currentTiddler: title of the tiddler providing the context
 */
 var Widget = function(parseTreeNode,options) {
 	if(arguments.length > 0) {
@@ -136,7 +133,7 @@ Widget.prototype.substituteVariableParameters = function(text,formalParams,actua
 
 Widget.prototype.substituteVariableReferences = function(text) {
 	var self = this;
-	return text.replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
+	return (text || "").replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
 		return self.getVariable(p1,{defaultValue: ""});
 	});
 };

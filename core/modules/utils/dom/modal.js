@@ -67,20 +67,27 @@ Modal.prototype.display = function(title,options) {
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
 	// Render the title of the message
-	var titleText;
-	if(tiddler && tiddler.fields && tiddler.fields.subtitle) {
-		titleText = tiddler.fields.subtitle;
-	} else {
-		titleText = title;
-	}
-	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
-		headerWidgetNode = this.wiki.makeWidget(headerParser,{parentWidget: $tw.rootWidget, document: document});
+	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
+		field: "subtitle",
+		children: [{
+			type: "text",
+			attributes: {
+				text: {
+					type: "string",
+					value: title
+		}}}],
+		parentWidget: $tw.rootWidget,
+		document: document
+	});
 	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
 	// Render the body of the message
-	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document});
+	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
+		parentWidget: $tw.rootWidget,
+		document: document
+	});
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyWidgetNode.refresh(changes,modalBody,null);
@@ -100,14 +107,31 @@ Modal.prototype.display = function(title,options) {
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
-	var footerText;
-	if(tiddler && tiddler.fields && tiddler.fields.footer) {
-		footerText = tiddler.fields.footer;
-	} else {
-		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
-	}
-	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
-		footerWidgetNode = this.wiki.makeWidget(footerParser,{parentWidget: $tw.rootWidget, document: document});
+	var footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
+		field: "footer",
+		children: [{
+			type: "button",
+			attributes: {
+				message: {
+					type: "string",
+					value: "tw-close-tiddler"
+				},
+				"class": {
+					type: "string",
+					value: "btn btn-primary"
+				}
+			},
+			children: [{
+				type: "text",
+				attributes: {
+					text: {
+						type: "string",
+						value: "Close"
+			}}}
+		]}],
+		parentWidget: $tw.rootWidget,
+		document: document
+	});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);

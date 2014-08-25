@@ -1,12 +1,14 @@
 created: 20130822170200000
-modified: 20140226201004198
+modified: 20140820153116300
 tags: introduction
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-Welcome to TiddlyWiki, a complete interactive wiki in JavaScript. It can be used as a [[single HTML file in the browser|SingleFileApplication]] or as a powerful [[Node.js application|Node.js]]. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
+Welcome to TiddlyWiki, a non-linear personal web notebook that anyone can use and keep forever, independently of any corporation.
 
-This is version <<version>> of ~TiddlyWiki, a major reboot designed [[for the next 25 years|Future of TiddlyWiki]]. It is currently in beta (see the detailed ReleaseHistory). There is a RoadMap for moving to the full release. It is a great time to [[get involved|Community]] and support the future development of ~TiddlyWiki.
+TiddlyWiki is a complete interactive wiki in JavaScript. It can be used as a [[single HTML file in the browser|SingleFileApplication]] or as a powerful [[Node.js application|Node.js]]. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
+
+This is version <<version-link>> of ~TiddlyWiki, a major reboot designed [[for the next 25 years|Future of TiddlyWiki]]. It is currently in beta (see the detailed ReleaseHistory) with a RoadMap for moving to the full release. It is a great time to [[get involved|Community]] and support the future development of ~TiddlyWiki.
 
 //~TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//.
 
@@ -14,9 +16,7 @@ This is version <<version>> of ~TiddlyWiki, a major reboot designed [[for the ne
 
 <a class="tw-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
 
-!! TiddlyWikiClassic - http://classic.tiddlywiki.com
+!! TiddlyWikiClassic
 
-On this site, unless noted otherwise, "~TiddlyWiki" refers to the new version 5, and "~TiddlyWikiClassic" is used to identify the older version.
-
-The deep internal improvements mean that the new version of ~TiddlyWiki is not fully compatible with ~TiddlyWikiClassic. Existing content will need massaging, while plugins and themes will have to be completely rewritten. The upgrade path will get smoother as the new version matures.
+The original "Classic" version of TiddlyWiki is still available at http://classic.tiddlywiki.com. Note that it is not fully backwards compatible: existing content will need massaging, while plugins and themes will have to be completely rewritten. The upgrade path will get smoother as the new version matures.
 </div>

@@ -1,6 +1,10 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: 高级
+Advanced/EditorTypes/Caption: 编辑器类型
+Advanced/EditorTypes/Editor/Caption: 编辑器
+Advanced/EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
+Advanced/EditorTypes/Type/Caption: 类型
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Advanced/LoadedModules/Caption: 已加载的模块
 Advanced/LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
@@ -15,6 +19,10 @@ Advanced/Settings/NavigationHistory/Caption: 历史记录导览
 Advanced/Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
 Advanced/Settings/NavigationHistory/No/Description: 不更新历史记录
 Advanced/Settings/NavigationHistory/Yes/Description: 更新历史记录
+Advanced/Settings/ToolbarButtons/Caption: 工具栏按钮
+Advanced/Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
+Advanced/Settings/ToolbarButtons/Text/Description: 包含文字
+Advanced/Settings/ToolbarButtons/Icons/Description: 包含图示
 Advanced/TiddlerFields/Caption: 条目栏位
 Advanced/TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 Appearance/Caption: 视觉外观
@@ -32,6 +40,14 @@ Appearance/StoryView/Caption: 查看模式
 Appearance/StoryView/Prompt: 当前的查看模式：
 Appearance/Theme/Caption: 布景主题
 Appearance/Theme/Prompt: 当前的布景主题：
+Appearance/Toolbars/Caption: 工具栏
+Appearance/Toolbars/Hint: 选择将显示哪些工具栏按钮
+Appearance/Toolbars/EditToolbar/Caption: 编辑工具栏
+Appearance/Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏
+Appearance/Toolbars/ViewToolbar/Caption: 检视工具栏
+Appearance/Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的检视模式工具栏
+Appearance/Toolbars/PageControls/Caption: 页面工具栏
+Appearance/Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
 Basics/AnimDuration/Prompt: 动画持续时间：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
@@ -48,14 +64,17 @@ Basics/Title/Prompt: 标题：
 Basics/Username/Prompt: 编辑者署名：
 Basics/Version/Prompt: ~TiddlyWiki 版本：
 Plugins/Caption: 插件
-Plugins/Fields/Description: 说明
-Plugins/Fields/Title: 标题
-Plugins/Fields/Version: 版本
+Plugins/Disable/Caption: 禁用
+Plugins/Disable/Hint: 重新加载页面时禁用此插件
+Plugins/Disabled/Status: (已禁用)
+Plugins/Empty/Hint: 无
+Plugins/Enable/Caption: 启用
+Plugins/Enable/Hint: 重新加载页面时启用此插件
 Plugins/Language/Prompt: 语言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 布景主题
 Saving/AutoSave/Disabled/Button: 启用
-Saving/AutoSave/Disabled/Prompt: 自动保存已停用
+Saving/AutoSave/Disabled/Prompt: 自动保存已禁用
 Saving/AutoSave/Enabled/Button: 停用 
 Saving/AutoSave/Enabled/Prompt: 自动保存已启用
 Saving/AutoSave: 自动保存

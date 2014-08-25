@@ -1,0 +1,13 @@
+title: $:/core/ui/Buttons/tag-manager
+tags: $:/tags/PageControls
+caption: {{$:/core/images/tag-button}} {{$:/language/Buttons/TagManager/Caption}}
+description: {{$:/language/Buttons/TagManager/Hint}}
+
+<$button to="$:/TagManager" title={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/tag-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/TagManager/Caption}}/>
+</$list>
+</$button>

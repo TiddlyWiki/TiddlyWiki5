@@ -1,5 +1,5 @@
 created: 20140410101941871
-modified: 20140410103229640
+modified: 20140725103229640
 tags: introduction
 title: Introduction to Filters
 type: text/vnd.tiddlywiki
@@ -66,6 +66,16 @@ If a filter operator is written with curly brackets around the operand then it i
 ```
 [search{$:/temp/search}]
 ```
+
+! Variable Operands
+
+If a filter operator is written with angle brackets around the operand then it is taken to be the name of a variable containing the actual value. For example, this filter selects all tiddlers containing the title of the current tiddler:
+
+```
+[search<currentTiddler>]
+```
+
+(Note that the `currentTiddler` variable is used to track the current tiddler).
 
 ! Regular Expression Operands
 

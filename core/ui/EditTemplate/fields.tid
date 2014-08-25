@@ -2,11 +2,18 @@ title: $:/core/ui/EditTemplate/fields
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/
+\define config-title()
+$:/config/EditTemplateFields/Visibility/$(currentField)$
+\end
+\define config-filter()
+[[hide]] -[title{$(config-title)$}]
+\end
 <$fieldmangler>
 <div class="tw-edit-fields">
 <table class="tw-edit-fields">
 <tbody>
-<$list filter="[all[current]fields[]] -title -tags -text -creator -created -modified -modifier -type -[[draft.title]] -[[draft.of]] +[sort[title]]" variable="currentField">
+<$list filter="[all[current]fields[]] +[sort[title]]" variable="currentField">
+<$list filter=<<config-filter>> variable="temp">
 <tr class="tw-edit-field">
 <td class="tw-edit-field-name">
 <$text text=<<currentField>>/>:</td>
@@ -17,6 +24,7 @@ tags: $:/tags/EditTemplate
 <$button message="tw-remove-field" param=<<currentField>> class="btn-invisible">{{$:/core/images/delete-button}}</$button>
 </td>
 </tr>
+</$list>
 </$list>
 </tbody>
 </table>

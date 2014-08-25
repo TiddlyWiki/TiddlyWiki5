@@ -1,0 +1,24 @@
+title: $:/core/ui/ControlPanel/Appearance/Toolbars/PageControls
+tags: $:/tags/ControlPanel/Appearance/Toolbars
+caption: {{$:/language/ControlPanel/Appearance/Toolbars/PageControls/Caption}}
+
+\define lingo-base() $:/language/TiddlerInfo/
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
+
+{{$:/language/ControlPanel/Appearance/Toolbars/PageControls/Hint}}
+
+<$set name="tw-config-toolbar-icons" value="yes">
+
+<$set name="tw-config-toolbar-text" value="yes">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="caption"/> <i class="tw-muted">-- <$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
+
+</$list>
+
+</$set>
+
+</$set>

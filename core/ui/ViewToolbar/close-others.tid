@@ -1,0 +1,13 @@
+title: $:/core/ui/Buttons/close-others
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/close-others-button}} {{$:/language/Buttons/CloseOthers/Caption}}
+description: {{$:/language/Buttons/CloseOthers/Hint}}
+
+<$button message="tw-close-other-tiddlers" param=<<currentTiddler>> title={{$:/language/Buttons/CloseOthers/Hint}} aria-label={{$:/language/Buttons/CloseOthers/Caption}} class=<<tw-config-toolbar-class>>>
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/close-others-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/CloseOthers/Caption}}/>
+</$list>
+</$button>

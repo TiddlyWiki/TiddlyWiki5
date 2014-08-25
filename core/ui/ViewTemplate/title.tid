@@ -4,10 +4,13 @@ tags: $:/tags/ViewTemplate
 \define title-styles()
 fill:$(foregroundColor)$;
 \end
+\define config-title()
+$:/config/ViewToolbarButtons/Visibility/$(listItem)$
+\end
 <div class="tw-tiddler-title">
 <h2 class="titlebar">
 <span class="tw-tiddler-controls">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$transclude tiddler=<<listItem>>/></$list>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list>
 </span>
 <$set name="foregroundColor" value={{!!color}}>
 <span style=<<title-styles>>>

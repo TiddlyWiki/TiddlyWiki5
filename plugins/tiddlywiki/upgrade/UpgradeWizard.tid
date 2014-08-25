@@ -1,0 +1,54 @@
+title: $:/UpgradeWizard
+tags: $:/tags/AboveStory
+
+<div class="tw-upgrade-wizard-wrapper">
+
+<div class="tw-upgrade-wizard">
+
+! ~TiddlyWiki Upgrade Wizard
+
+<$list filter="[[$:/Import]is[missing]]">
+
+{{$:/core/images/download-button}}
+
+Drag a ~TiddlyWiki file here to upgrade it
+
+or click to pick a file <$browse/>
+
+</$list>
+
+<$reveal state="$:/Import!!status" type="match" text="pending">
+
+The following tiddlers will be included in the upgrade <$button message="tw-perform-import" param="$:/Import">Upgrade</$button>
+
+{{$:/Import||$:/core/ui/ImportListing}}
+
+</$reveal>
+
+<$reveal state="$:/Import!!status" type="match" text="complete">
+
+Upgrade completed. Click the button below to save your upgraded ~TiddlyWiki file
+
+Make sure that you keep a safe copy of your previous ~TiddlyWiki file.
+
+<$reveal type="match" state="$:/isEncrypted" text="yes">
+
+''The file will be encrypted with your existing password.''
+
+</$reveal>
+
+{{$:/plugins/tiddlywiki/upgrade/save}}
+
+Close this browser window to prevent others from being able to access your data.
+
+For help and support, visit [[the TiddlyWiki discussion forum|http://groups.google.com/group/TiddlyWiki]].
+
+</$reveal>
+
+</div>
+
+version <<version>>
+
+//Your data will not leave your browser. <a href="http://tiddlywiki.com/upgrade.html" download="upgrade.html">Download</a> this upgrader to use it offline//
+
+</div>

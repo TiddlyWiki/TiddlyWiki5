@@ -1,6 +1,10 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Erweitert
+Advanced/EditorTypes/Caption: Editor Typen
+Advanced/EditorTypes/Editor/Caption: Editor
+Advanced/EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden sollen.
+Advanced/EditorTypes/Type/Caption: MIME-Type
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Advanced/LoadedModules/Caption: Geladene Module
 Advanced/LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
@@ -15,6 +19,10 @@ Advanced/Settings/NavigationHistory/Caption: Browser Chronik
 Advanced/Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
 Advanced/Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
 Advanced/Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
+Advanced/Settings/ToolbarButtons/Caption: Toolbar Buttons
+Advanced/Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
+Advanced/Settings/ToolbarButtons/Text/Description: Text anzeigen
+Advanced/Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Advanced/TiddlerFields/Caption: Tiddler Felder
 Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exclusive ~Schatten-Tiddler. 
 Appearance/Caption: Design
@@ -32,6 +40,14 @@ Appearance/StoryView/Caption: Anzeige
 Appearance/StoryView/Prompt: Ausgewählte Anzeige:
 Appearance/Theme/Caption: Thema
 Appearance/Theme/Prompt: Ausgewähltes Thema:
+Appearance/Toolbars/Caption: Toolbar
+Appearance/Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
+Appearance/Toolbars/EditToolbar/Caption: Edit Toolbar
+Appearance/Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
+Appearance/Toolbars/ViewToolbar/Caption: View Toolbar
+Appearance/Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
+Appearance/Toolbars/PageControls/Caption: Page Toolbar
+Appearance/Toolbars/PageControls/Hint: Ausweählen, welche Buttons im Hauptmenü angezeigt werden:
 Basics/AnimDuration/Prompt: Animation Dauer:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Lehrzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
@@ -48,9 +64,6 @@ Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
 Basics/Username/Prompt: Benutzer Signatur zum editieren:
 Basics/Version/Prompt: ~TiddlyWiki Version:
 Plugins/Caption: Plugins
-Plugins/Fields/Description: Beschreibung
-Plugins/Fields/Title: Titel
-Plugins/Fields/Version: Version
 Plugins/Language/Prompt: Sprachen
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themen

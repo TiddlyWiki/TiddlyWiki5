@@ -1,59 +1,9 @@
 title: $:/core/ui/PageStylesheet
 
-\define colour(name)
-<$transclude tiddler={{$:/palette}} index="$name$"/>
-\end
-\define color(name)
-<<colour $name$>>
-\end
-\define box-shadow(shadow)
-```
-  -webkit-box-shadow: $shadow$;
-     -moz-box-shadow: $shadow$;
-          box-shadow: $shadow$;
-```
-\end
-\define filter(filter)
-```
-  -webkit-filter: $filter$;
-     -moz-filter: $filter$;
-          filter: $filter$;
-```
-\end
-\define transition(transition)
-```
-  -webkit-transition: $transition$;
-     -moz-transition: $transition$;
-          transition: $transition$;
-```
-\end
-\define transform-origin(origin)
-```
-  -webkit-transform-origin: $origin$;
-     -moz-transform-origin: $origin$;
-          transform-origin: $origin$;
-```
-\end
-\define background-linear-gradient(gradient)
-```
-background-image: linear-gradient($gradient$);
-background-image: -o-linear-gradient($gradient$);
-background-image: -moz-linear-gradient($gradient$);
-background-image: -webkit-linear-gradient($gradient$);
-background-image: -ms-linear-gradient($gradient$);
-```
-\end
-\define datauri(title)
-<$macrocall $name="makedatauri" type={{$title$!!type}} text={{$title$}}/>
-\end
-\define if-sidebar(text)
-<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes">$text$</$reveal>
-\end
-\define if-no-sidebar(text)
-<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">$text$</$reveal>
-\end
+<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 
-
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]!has[draft.of]]">
 <$transclude/>
 </$list>
+
+</$importvariables>

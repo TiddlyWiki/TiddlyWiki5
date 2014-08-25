@@ -1,4 +1,15 @@
-title: $:/core/ui/PageControls/save-wiki
+title: $:/core/ui/Buttons/save-wiki
 tags: $:/tags/PageControls
+caption: {{$:/core/images/save-button}} {{$:/language/Buttons/SaveWiki/Caption}}
+description: {{$:/language/Buttons/SaveWiki/Hint}}
 
-<$button message="tw-save-wiki" title={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class="btn-invisible">{{$:/core/images/save-button}}</$button>
+<$button message="tw-save-wiki" param={{$:/config/SaveWikiButton/Template}} title={{$:/language/Buttons/SaveWiki/Hint}} aria-label={{$:/language/Buttons/SaveWiki/Caption}} class=<<tw-config-toolbar-class>>>
+<span class="tw-dirty-indicator">
+<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/save-button}}
+</$list>
+<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/SaveWiki/Caption}}/>
+</$list>
+</span>
+</$button>

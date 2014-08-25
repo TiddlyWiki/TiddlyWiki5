@@ -1,0 +1,12 @@
+{
+	"tiddlers": [
+		{
+			"file": "bowser.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/tiddlywiki/browser-sniff/bowser/bowser.js",
+				"module-type": "library"
+			}
+		}
+	]
+}

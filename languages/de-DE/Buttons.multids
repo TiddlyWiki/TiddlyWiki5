@@ -1,0 +1,58 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: erweiterte suche
+AdvancedSearch/Hint: Erweiterte Suche
+Cancel/Caption: abbrechen
+Cancel/Hint: Tiddler bearbeiten abbrechen
+Clone/Caption: klone
+Clone/Hint: Klone diesen Tiddler
+Close/Caption: schließen
+Close/Hint: Schließe diesen Tiddler
+CloseAll/Caption: alle schließen
+CloseAll/Hint: Alle Tiddler schließen
+CloseOthers/Caption: andere schließen
+CloseOthers/Hint: Alle anderen Tiddler schließen
+ControlPanel/Caption: Control Panel
+ControlPanel/Hint: Öffne das "Control Panel"
+Delete/Caption: löschen
+Delete/Hint: Lösche diesen Tiddler
+Edit/Caption: bearbeiten
+Edit/Hint: Bearbeite diesen Tiddler
+Encryption/Caption: verschlüsseln
+Encryption/Hint: Aktivieren oder löschen des Passworts für dieses Wiki
+Encryption/ClearPassword/Caption: lösche Passwort
+Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
+Encryption/SetPassword/Caption: ativiere Passwort
+Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+FullScreen/Caption: vollbild
+FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild modus
+Import/Caption: import
+Import/Hint: Importiere Dateien
+Info/Caption: info
+Info/Hint: Informationen zu diesem Tiddler anzeigen
+Home/Caption: home
+Home/Hint: Seite neu laden und öffne die standard (default) Tiddler
+Language/Caption: sprache
+Language/Hint: Auswahl Dialog für die System Sprache
+NewTiddler/Caption: neuer Tiddler
+NewTiddler/Hint: Erstelle einen neuen Tiddler
+More/Caption: mehr
+More/Hint: Weitere Aktionen
+Permalink/Caption: permalink
+Permalink/Hint: Die Browser Address Leiste enthält einen Link zu diesem Tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Die Browser Address Leiste enthält einen Link zu allen offenen Tiddlern in dieser "Story"
+Save/Caption: speichern
+Save/Hint: Speichere diesen Tiddler
+SaveWiki/Caption: speichere Änderungen
+SaveWiki/Hint: Speichere Änderungen
+StoryView/Caption: story Modus
+StoryView/Hint: Auswahl des Anzeige Modus für die "Story"
+HideSideBar/Caption: Sidebar ausblenden
+HideSideBar/Hint: Sidebar ausblenden
+ShowSideBar/Caption: Sidebar einblenden
+ShowSideBar/Hint: Sidebar eiblenden
+TagManager/Caption: tag manager
+TagManager/Hint: Öffne das "Tag Manager"
+Theme/Caption: Thema
+Theme/Hint: Thema auswählen

@@ -1,0 +1,19 @@
+title: $:/core/ui/ViewTemplate/import
+tags: $:/tags/ViewTemplate
+
+\define lingo-base() $:/language/Import/
+
+<$list filter="[all[current]field:plugin-type[import]]">
+
+<div class="tw-import">
+
+<<lingo Listing/Hint>>
+
+{{||$:/core/ui/ImportListing}}
+
+<$button message="tw-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
+<$button message="tw-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+
+</div>
+
+</$list>

@@ -1,0 +1,56 @@
+title: $:/core/ui/ImportListing
+
+\define lingo-base() $:/language/Import/
+\define messageField()
+message-$(payloadTiddler)$
+\end
+\define selectionField()
+selection-$(payloadTiddler)$
+\end
+\define previewPopupState()
+!!popup-$(payloadTiddler)$
+\end
+<table>
+<tbody>
+<tr>
+<th>
+<<lingo Listing/Select/Caption>>
+</th>
+<th>
+<<lingo Listing/Title/Caption>>
+</th>
+<th>
+<<lingo Listing/Status/Caption>>
+</th>
+</tr>
+<$list filter="[all[current]plugintiddlers[]sort[title]]" variable="payloadTiddler">
+<tr>
+<td>
+<$checkbox field=<<selectionField>> checked="checked" unchecked="unchecked" default="checked"/>
+</td>
+<td>
+<$reveal type="nomatch" state=<<previewPopupState>> text="yes">
+<$button class="btn-invisible btn-dropdown" set=<<previewPopupState>> setTo="yes">
+{{$:/core/images/right-arrow}}&nbsp;<$text text=<<payloadTiddler>>/>
+</$button>
+</$reveal>
+<$reveal type="match" state=<<previewPopupState>> text="yes">
+<$button class="btn-invisible btn-dropdown" set=<<previewPopupState>> setTo="no">
+{{$:/core/images/down-arrow}}&nbsp;<$text text=<<payloadTiddler>>/>
+</$button>
+</$reveal>
+</td>
+<td>
+<$view field=<<messageField>>/>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<$reveal type="match" text="yes" state=<<previewPopupState>>>
+<$transclude subtiddler=<<payloadTiddler>> mode="block"/>
+</$reveal>
+</td>
+</tr>
+</$list>
+</tbody>
+</table>

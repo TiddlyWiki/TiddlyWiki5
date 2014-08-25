@@ -1,0 +1,352 @@
+caption: {{$:/language/SideBar/Contents/Caption}}
+created: 20140809114010378
+list-after: $:/core/ui/SideBar/Open
+modified: 20140809114018461
+tags: $:/tags/SideBar
+title: TableOfContents
+type: text/vnd.tiddlywiki
+
+\define toc-heading(caption,body)
+<$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="btn-invisible">{{$:/core/images/right-arrow}} $caption$
+</$button>
+</$reveal>
+<$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show">
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="hide" class="btn-invisible">{{$:/core/images/down-arrow}} $caption$
+</$button>
+</$reveal>
+<$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show" retain="yes" animate="yes">
+
+$body$
+
+</$reveal>
+\end
+<div class="tw-table-of-contents">
+
+# Guide
+## <<toc-heading "Introduction" "
+## [[GettingStarted]]
+## [[The First Rule of Using TiddlyWiki]]
+## [[Features]]
+## [[Examples]]
+## [[Video Tutorials]]
+## [[Resources]]
+## [[ReportingBugs]]
+## [[TableOfContents]]
+">>
+## <<toc-heading "Concepts" "
+## Basics
+### [[Tiddlers]]
+### [[Philosophy of Tiddlers]]
+### [[Fields|TiddlerFields]]
+### [[Tags|TiddlerTags]]
+### [[Links|TiddlerLinks]]
+### [[CamelCase]]
+### [[WikiText]]
+### [[Macros]]
+### [[Searching]]
+### [[SystemTiddlers]]
+### [[Plugins]] & [[ShadowTiddlers]]
+## Advanced
+### [[ColourPalettes]]
+### [[ContentType]]
+### [[CurrentTiddler]]
+### [[DataTiddlers]]
+### [[DateFormat]]
+### [[ListField]]
+### [[Structuring TiddlyWiki]]
+### [[SystemTags]]
+### [[TemplateTiddlers]]
+### [[TextReference]]
+### [[TiddlerFilters]]
+">>
+## <<toc-heading "~TiddlyWiki in the Browser" "
+## Saving
+### [[AutoSave]]
+### [[Saving on a PHP Server]]
+### [[Saving on Android]]
+### [[Saving on InternetExplorer]]
+### [[Saving on iPad/iPhone]]
+### [[Saving on TiddlySpot]]
+### [[Saving with Encryption]]
+### [[Saving with the HTML5 fallback saver]]
+### [[Saving with TiddlyFox]]
+### [[Saving with TiddlyFox on Android]]
+### [[Saving with TiddlyIE]]
+### [[Using TiddlyWiki on TiddlyDesktop]]
+### [[Windows HTA Hack]]
+## Features
+### [[ExternalImages]]
+### [[ImportTiddlers]]
+### [[KeyboardShortcuts]]
+### [[PermaLinks]]
+### [[SafeMode]]
+### [[Upgrading]]
+### [[Using Stylesheets]]
+### [[UsingSVG]]
+">>
+## <<toc-heading "~TiddlyWiki on Node.js" "
+## Basics
+### [[Installing TiddlyWiki on Node.js]]
+### [[Using TiddlyWiki on Node.js]]
+### [[Environment Variables on Node.js]]
+### [[Upgrading TiddlyWiki on Node.js]]
+## Concepts
+### [[TiddlerFiles]]
+### [[MultiTiddlerFiles]]
+### [[TiddlyWikiFolders]]
+### [[LazyLoading]]
+## Tasks
+### [[Building TiddlyWikiClassic]]
+### [[Generating Static Sites with TiddlyWiki]]
+### [[How to build a TiddlyWiki5 from individual tiddlers]]
+### [[Scripts for TiddlyWiki on Node.js]]
+### [[Using a custom path prefix with the client-server edition]]
+### [[Using TiddlyWiki for GitHub Pages project documentation]]
+">>
+## <<toc-heading "Tips" "
+## [[Adding a Twitter Follow button]]
+## [[Creating SubStories]]
+## [[Editing Tiddlers with Emacs]]
+## [[GoogleChromeTips]]
+## [[ImageGallery Example]]
+## [[Making curved text with SVG]]
+## [[Preserving open tiddlers at startup]]
+## [[Setting a favicon]]
+## [[Sharing a TiddlyWiki on Dropbox]]
+## [[TaskManagementExample]]
+## [[TitlesPolicy]]
+">>
+# Reference
+## <<toc-heading "~WikiText" "
+## [[Block Quotes|Block Quotes in WikiText]]
+## [[Code Blocks|Code Blocks in WikiText]]
+## [[Dashes|Dashes in WikiText]]
+## [[Definitions|Definitions in WikiText]]
+## [[Formatting|Formatting in WikiText]]
+## [[Hard Linebreaks|Hard Linebreaks in WikiText]]
+## [[Headings|Headings in WikiText]]
+## [[Horizontal Rules|Horizontal Rules in WikiText]]
+## [[HTML|HTML in WikiText]]
+## [[Images|Images in WikiText]]
+## [[Linking|Linking in WikiText]]
+## [[Lists|Lists in WikiText]]
+## [[Macros|Macros in WikiText]]
+## [[Paragraphs|Paragraphs in WikiText]]
+## [[Styles and Classes|Styles and Classes in WikiText]]
+## [[Tables|Tables in WikiText]]
+## [[Transclusion|Transclusion in WikiText]]
+## [[Typed Blocks|Typed Blocks in WikiText]]
+## [[Widgets|Widgets in WikiText]]
+## WikiText
+">>
+## <<toc-heading "Macros" "
+## [[Macros]]
+## [[changecount|ChangeCountMacro]]
+## [[makedatauri|MakeDataUriMacro]]
+## [[qualify|QualifyMacro]]
+## [[tabs|TabsMacro]]
+## [[version|VersionMacro]]
+">>
+## <<toc-heading "Widgets" "
+## [[Browse|BrowseWidget]]
+## [[Button|ButtonWidget]]
+## [[Checkbox|CheckboxWidget]]
+## [[Count|CountWidget]]
+## [[Dropzone|DropzoneWidget]]
+## [[EditBitmap|EditBitmapWidget]]
+## [[EditText|EditTextWidget]]
+## [[Edit|EditWidget]]
+## [[Encrypt|EncryptWidget]]
+## [[FieldMangler|FieldManglerWidget]]
+## [[Fields|FieldsWidget]]
+## [[Grid|GridWidget]]
+## [[Image|ImageWidget]]
+## [[ImportVariables|ImportVariablesWidget]]
+## [[Keyboard|KeyboardWidget]]
+## [[LinkCatcher|LinkCatcherWidget]]
+## [[Link|LinkWidget]]
+## [[List|ListWidget]]
+## [[MacroCall|MacroCallWidget]]
+## [[Navigator|NavigatorWidget]]
+## [[Password|PasswordWidget]]
+## [[Radio|RadioWidget]]
+## [[Reveal|RevealWidget]]
+## [[Scrollable|ScrollableWidget]]
+## [[Select|SelectWidget]]
+## [[SetVariable|SetVariableWidget]]
+## [[Set|SetWidget]]
+## [[Text|TextWidget]]
+## [[Tiddler|TiddlerWidget]]
+## [[Transclude|TranscludeWidget]]
+## [[View|ViewWidget]]
+">>
+## <<toc-heading "Widget Messages" "
+## WidgetMessages
+## [[tw-auto-save-wiki|WidgetMessage: tw-auto-save-wiki]]
+## [[tw-cancel-tiddler|WidgetMessage: tw-cancel-tiddler]]
+## [[tw-clear-password|WidgetMessage: tw-clear-password]]
+## [[tw-close-all-tiddlers|WidgetMessage: tw-close-all-tiddlers]]
+## [[tw-close-other-tiddlers|WidgetMessage: tw-close-other-tiddlers]]
+## [[tw-close-tiddler|WidgetMessage: tw-close-tiddler]]
+## [[tw-delete-tiddler|WidgetMessage: tw-delete-tiddler]]
+## [[tw-download-file|WidgetMessage: tw-download-file]]
+## [[tw-edit-tiddler|WidgetMessage: tw-edit-tiddler]]
+## [[tw-full-screen|WidgetMessage: tw-full-screen]]
+## [[tw-home|WidgetMessage: tw-home]]
+## [[tw-import-tiddlers|WidgetMessage: tw-import-tiddlers]]
+## [[tw-login|WidgetMessage: tw-login]]
+## [[tw-logout|WidgetMessage: tw-logout]]
+## [[tw-modal|WidgetMessage: tw-modal]]
+## [[tw-navigate|WidgetMessage: tw-navigate]]
+## [[tw-new-tiddler|WidgetMessage: tw-new-tiddler]]
+## [[tw-notify|WidgetMessage: tw-notify]]
+## [[tw-perform-import|WidgetMessage: tw-perform-import]]
+## [[tw-permalink|WidgetMessage: tw-permalink]]
+## [[tw-permaview|WidgetMessage: tw-permaview]]
+## [[tw-save-tiddler|WidgetMessage: tw-save-tiddler]]
+## [[tw-save-wiki|WidgetMessage: tw-save-wiki]]
+## [[tw-server-refresh|WidgetMessage: tw-server-refresh]]
+## [[tw-set-password|WidgetMessage: tw-set-password]]
+">>
+## <<toc-heading "Filter Operators" "
+## FilterOperators
+## [[after|FilterOperator: after]]
+## [[all|FilterOperator: all]]
+## [[backlinks|FilterOperator: backlinks]]
+## [[before|FilterOperator: before]]
+## [[bf|FilterOperator: bf]]
+## [[butfirst|FilterOperator: butfirst]]
+## [[butlast|FilterOperator: butlast]]
+## [[commands|FilterOperator: commands]]
+## [[each|FilterOperator: each]]
+## [[eachday|FilterOperator: eachday]]
+## [[field|FilterOperator: field]]
+## [[first|FilterOperator: first]]
+## [[get|FilterOperator: get]]
+## [[has|FilterOperator: has]]
+## [[indexes|FilterOperator: indexes]]
+## [[is|FilterOperator: is]]
+## [[last|FilterOperator: last]]
+## [[limit|FilterOperator: limit]]
+## [[links|FilterOperator: links]]
+## [[list|FilterOperator: list]]
+## [[listed|FilterOperator: listed]]
+## [[modules|FilterOperator: modules]]
+## [[moduletypes|FilterOperator: moduletypes]]
+## [[next|FilterOperator: next]]
+## [[nsort|FilterOperator: nsort]]
+## [[nsortcs|FilterOperator: nsortcs]]
+## [[nth|FilterOperator: nth]]
+## [[plugintiddlers|FilterOperator: plugintiddlers]]
+## [[prefix|FilterOperator: prefix]]
+## [[previous|FilterOperator: previous]]
+## [[removeprefix|FilterOperator: removeprefix]]
+## [[rest|FilterOperator: rest]]
+## [[reverse|FilterOperator: reverse]]
+## [[sameday|FilterOperator: sameday]]
+## [[search|FilterOperator: search]]
+## [[shadowsource|FilterOperator: shadowsource]]
+## [[sort|FilterOperator: sort]]
+## [[sortcs|FilterOperator: sortcs]]
+## [[tag|FilterOperator: tag]]
+## [[tagging|FilterOperator: tagging]]
+## [[tags|FilterOperator: tags]]
+## [[title|FilterOperator: title]]
+## [[untagged|FilterOperator: untagged]]
+">>
+## <<toc-heading "Commands" "
+## [[Build|BuildCommand]]
+## [[ClearPassword|ClearPasswordCommand]]
+## [[Help|HelpCommand]]
+## [[Init|InitCommand]]
+## [[Load|LoadCommand]]
+## [[Output|OutputCommand]]
+## [[Password|PasswordCommand]]
+## [[RenderTiddler|RenderTiddlerCommand]]
+## [[RenderTiddlers|RenderTiddlersCommand]]
+## [[SaveTiddler|SaveTiddlerCommand]]
+## [[SaveTiddlers|SaveTiddlersCommand]]
+## [[Server|ServerCommand]]
+## [[SetField|SetFieldCommand]]
+## [[Verbose|VerboseCommand]]
+## [[Version|VersionCommand]]
+">>
+# Advanced
+## <<toc-heading "Mechanisms" "
+## [[AlertMechanism]]
+## [[BootMechanism]]
+## [[DraftMechanism]]
+## [[EncryptionMechanism]]
+## [[HistoryMechanism]]
+## [[LazyLoadingMechanism]]
+## [[Modules]]
+## [[ModuleType]]
+## [[ParsingMechanism]]
+## [[PluginMechanism]]
+## [[PopupMechanism]]
+## [[RenderingMechanism]]
+## [[StartupMechanism]]
+## [[StateMechanism]]
+## [[TestingMechanism]]
+## [[TiddlerFilter Formal Grammar]]
+## [[TranslationMechanism]]
+">>
+## <<toc-heading "Developers" "
+## Basics
+### [[TiddlyWiki for Developers]]
+### [[TiddlyWiki Architecture]]
+### [[Working with the TiddlyWiki5 repository]]
+### [[TiddlyWiki5 Development Environment]]
+### [[TiddlyWiki Coding Style Guidelines]]
+## Concepts
+### [[JavaScript Macros]]
+### [[Naming of System Tiddlers]]
+### [[SyncAdaptorModules]]
+### [[TiddlyWiki5 Versioning]]
+### [[WidgetModules]]
+### [[WikiRuleModules]]
+## Tasks
+### [[Developing plugins using Node.js and GitHub]]
+### [[How to create a translation for TiddlyWiki]]
+### [[Releasing a new version of TiddlyWiki5]]
+### [[TiddlyWiki on node-webkit]]
+### [[How to create plugins in the browser]]
+">>
+# About
+## <<toc-heading "About" "
+## [[Acknowledgements]]
+## [[Community]]
+## [[Contributing]]
+## [[Download]]
+## [[Future of TiddlyWiki]]
+## [[HelloThere]]
+## [[HelpingTiddlyWiki]]
+## [[RoadMap]]
+## [[TalkyTalky]]
+">>
+## <<toc-heading "Releases" "
+## [[Release 5.0.0-alpha.11]]
+## [[Release 5.0.0-alpha.12]]
+## [[Release 5.0.0-alpha.13]]
+## [[Release 5.0.0-alpha.14]]
+## [[Release 5.0.0-alpha.15]]
+## [[Release 5.0.0-alpha.16]]
+## [[Release 5.0.0-alpha.17]]
+## [[Release 5.0.1-alpha]]
+## [[Release 5.0.2-beta]]
+## [[Release 5.0.3-beta]]
+## [[Release 5.0.4-beta]]
+## [[Release 5.0.5-beta]]
+## [[Release 5.0.6-beta]]
+## [[Release 5.0.7-beta]]
+## [[Release 5.0.8-beta]]
+## [[Release 5.0.9-beta]]
+## [[Release 5.0.10-beta]]
+## [[Release 5.0.11-beta]]
+## [[Release 5.0.12-beta]]
+## [[Release 5.0.13-beta]]
+## [[Release 5.0.14-beta]]
+">>
+
+</div>

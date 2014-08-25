@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/tiddlyweb/tiddlywebadaptor.js
 type: application/javascript
 module-type: syncadaptor
 
-A sync adaptor module for synchronising with TiddlyWeb compatible servers 
+A sync adaptor module for synchronising with TiddlyWeb compatible servers
 
 \*/
 (function(){
@@ -15,15 +15,15 @@ A sync adaptor module for synchronising with TiddlyWeb compatible servers
 var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 	DEFAULT_HOST_TIDDLER = "$protocol$//$host$/";
 
-function TiddlyWebAdaptor(syncer) {
-	this.syncer = syncer;
+function TiddlyWebAdaptor(options) {
+	this.wiki = options.wiki;
 	this.host = this.getHost();
 	this.recipe = undefined;
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
 TiddlyWebAdaptor.prototype.getHost = function() {
-	var text = this.syncer.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
+	var text = this.wiki.getTiddlerText(CONFIG_HOST_TIDDLER,DEFAULT_HOST_TIDDLER),
 		substitutions = [
 			{name: "protocol", value: document.location.protocol},
 			{name: "host", value: document.location.host}
@@ -46,8 +46,7 @@ Get the current status of the TiddlyWeb connection
 */
 TiddlyWebAdaptor.prototype.getStatus = function(callback) {
 	// Get status
-	var self = this,
-		wiki = self.syncer.wiki;
+	var self = this;
 	this.logger.log("Getting status");
 	$tw.utils.httpRequest({
 		url: this.host + "status",
@@ -174,7 +173,7 @@ TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 			// Invoke the callback
 			callback(null,{
 				bag: etagInfo.bag
-			}, etagInfo.revision);	
+			}, etagInfo.revision);
 		}
 	});
 };
@@ -198,10 +197,12 @@ TiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {
 
 /*
 Delete a tiddler and invoke the callback with (err)
+options include:
+tiddlerInfo: the syncer's tiddlerInfo for this tiddler
 */
-TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback) {
+TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	var self = this,
-		bag = this.syncer.tiddlerInfo[title].adaptorInfo.bag;
+		bag = options.tiddlerInfo.adaptorInfo.bag;
 	// If we don't have a bag it means that the tiddler hasn't been seen by the server, so we don't need to delete it
 	if(!bag) {
 		return callback(null);

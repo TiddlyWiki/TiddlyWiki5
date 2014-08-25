@@ -13,7 +13,7 @@ http://$(userName)$.tiddlyspot.com/backup/
 </$set>
 </$reveal>
 \end
-! <<lingo Saving/Heading>>
+! <<lingo Heading>>
 
 |<<lingo AutoSave>> |{{$:/snippets/autosavestatus}} |
 

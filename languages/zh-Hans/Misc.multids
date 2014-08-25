@@ -30,3 +30,4 @@ TagManager/Colour/Heading: 颜色
 TagManager/Count/Heading: 数量
 TagManager/Icon/Heading: 图标
 TagManager/Tag/Heading: 标签
+UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未保存的变更

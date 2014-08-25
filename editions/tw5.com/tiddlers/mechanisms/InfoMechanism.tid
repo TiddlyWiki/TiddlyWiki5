@@ -1,0 +1,14 @@
+created: 20140720164948099
+modified: 20140720165248031
+tags: mechanism
+title: InfoMechanism
+type: text/vnd.tiddlywiki
+
+System tiddlers in the namespace `$:/info/` are used to expose information about the system (including the current browser) so that WikiText applications can adapt themselves to available features.
+
+! Information Tiddlers
+
+|!Title |!Description |
+|[[$:/info/browser]] |Running in the browser? ("yes" or "no") |
+|[[$:/info/node]] |Running under [[Node.js]]? ("yes" or "no") |
+

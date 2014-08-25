@@ -12,6 +12,8 @@ Views the story as a linear sequence
 /*global $tw: false */
 "use strict";
 
+var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
+
 var ClassicStoryView = function(listWidget) {
 	this.listWidget = listWidget;
 }
@@ -51,8 +53,8 @@ ClassicStoryView.prototype.insert = function(widget) {
 	$tw.utils.forceLayout(targetElement);
 	// Transition to the final position
 	$tw.utils.setStyle(targetElement,[
-		{transition: "opacity " + duration + "ms ease-in-out, " +
-					"margin-bottom " + duration + "ms ease-in-out"},
+		{transition: "opacity " + duration + "ms " + easing + ", " +
+					"margin-bottom " + duration + "ms " + easing},
 		{marginBottom: currMarginBottom + "px"},
 		{opacity: "1.0"}
 	]);
@@ -80,9 +82,9 @@ ClassicStoryView.prototype.remove = function(widget) {
 	]);
 	$tw.utils.forceLayout(targetElement);
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in-out, " +
-					"opacity " + duration + "ms ease-in-out, " +
-					"margin-bottom " + duration + "ms ease-in-out"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", " +
+					"opacity " + duration + "ms " + easing + ", " +
+					"margin-bottom " + duration + "ms " + easing},
 		{transform: "translateX(-" + currWidth + "px)"},
 		{marginBottom: (-currHeight) + "px"},
 		{opacity: "0.0"}

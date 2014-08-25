@@ -1,10 +1,10 @@
 title: $:/core/ui/MissingTemplate
 
 <div class="tw-tiddler-missing">
-<$button popup=<<qualify "$:/state/missingpopup">> class="btn-invisible tw-missing-tiddler-label">
+<$button popup=<<qualify "$:/state/popup/missing">> class="btn-invisible tw-missing-tiddler-label">
 <$view field="title" format="text" />
 </$button>
-<$reveal state=<<qualify "$:/state/missingpopup">> type="popup" position="below" animate="yes">
+<$reveal state=<<qualify "$:/state/popup/missing">> type="popup" position="below" animate="yes">
 <div class="tw-drop-down">
 <$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>

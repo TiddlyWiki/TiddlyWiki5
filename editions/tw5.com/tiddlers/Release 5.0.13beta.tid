@@ -1,21 +1,23 @@
 created: 20140518150234142
-modified: 20140518150234142
+modified: 20140624094134118
 tags: releasenote
 title: Release 5.0.13-beta
 type: text/vnd.tiddlywiki
-released: 201405181600
+released: 201406240941
+caption: 5.0.13-beta
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.12-beta...v5.0.13-beta]]//
 
-!! Incompatible Changes
+!! Accessibility Improvements
 
-See [[Notes for upgrading to 5.0.13-beta]] for more details of these changes:
+This release includes a number of features designed to improve the experience of TiddlyWiki with a screen reader. Particular thanks to [[@domasofan|https://github.com/domasofan]] for his feedback
 
-* 
-
-!! Documentation Improvements
-
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/34e4166dc5f24519b000de66853d5b1aee8f1648]] label and title for show/hide sidebar buttons
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/346b2f86111815c746c993fa09b7f677fa0b4b37]] label and title for advanced search link
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6f859c8d447a477a9120bdc308d1524558a80f20]] label and title for close buttons in "Open" sidebar tab
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/06b0f9adb7209870b46d42f832c1f7ad7a78976f]] ''aria-label'' support to the LinkWidget
+* [[Switched|https://github.com/Jermolene/TiddlyWiki5/commit/bc9b67cbc3f363d48aafea86c077fcd5a9c0ca64]] to H1 tags for the page title and H2 tags for tiddler titles
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/eeedcb6d94a25d02e8fec45c89b30c7f2bcdde73]] label and title for tiddler and page toolbar buttons
 
 !! Usability Improvements
 
@@ -23,8 +25,10 @@ See [[Notes for upgrading to 5.0.13-beta]] for more details of these changes:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/3182a2d599f0e4b70a73fe369df4f398587dc1a9]] new SelectWidget
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f131c378934a86b741ab5b808437c95694dc5503]] behaviour of `text/html` tiddlers so that they are displayed within an HTML iframe element
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9b576f2a8d39dcca37bcb709183a8f9b27f33ccf]] group headings to the content type dropdown in edit mode
-* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d70d5780e51cf0918fba15954cd47549e4e1a9f]] advanced navigation settings in $:/ControlPanel to use radio buttons
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d70d5780e51cf0918fba15954cd47549e4e1a9f]] advanced navigation settings in [[$:/ControlPanel]] to use radio buttons
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/f7b8813a27141a78980eefa03df70a4a2de9d10b]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/3f25db0abe8cd28712c020f218506710cec004b6]]) behaviour of PermaLinks so that now [ext[http://tiddlywiki.com/#HelloThere]] just opens the single specified tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c48502e8ed214cee23537d06e7e87efd53592c7]] support for triple-quoted multi-line attributes with [[macros|Macros in WikiText]], [[widgets|Widgets in WikiText]] and [[HTML elements|HTML in WikiText]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/32099b85d3b12f9e590274cb7550e3e531131706]] TableOfContents tab for tw5.com edition
 
 !! Hackability Improvements
 
@@ -33,19 +37,28 @@ See [[Notes for upgrading to 5.0.13-beta]] for more details of these changes:
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d2796d0c9c7ed7a971ae6b0752d7418384072bb5]] new SetFieldCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/305617b632fd6ecf25cd4be85f4dfb5a5a65dfef]] new SaveTiddlersCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f14ecf4eb8965f2e407ccac51d4277330221efe3]] support for system tag [[$:/tags/RawMarkup]]
-* Extended [[FilterOperator: listed]] to work with any list field
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0bdc5b5c70fbbf34aa459afcf0499fc9c8ae6374]] editor type mappings to control panel advanced tab
+* [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/1717c93d001ad184a08ca66d1bffb33fb5d32b3a]] CodeMirror (http://tiddlywiki.com/codemirrordemo.html) plugin for simpler configuration
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b2e48d00e9ea068a22b5ac5c0a4c93e8ddbb4a8a]] support for [[Environment Variables on Node.js]]
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/eee3a0cf8e5aa047f8596df06e28194409f38b01]] ServerCommand to allow a path prefix
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4238af2a405c14d22937d7c47a70bfb3d4e6f22d]] [[FilterOperator: listed]] to use any list field
 
 !! Bug Fixes
 
+* Fixed [[here|https://github.com/Jermolene/TiddlyWiki5/commit/6fb992690d33940d3509d7d4d74538e7f458e063]] and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/0fae9ee99200e7eca30b9db0584c479d58841349]] the problem with state tiddlers being inadvertently saved
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a03a15e7de32a1b41618146ac334b5cd7d432e91]] bug with TextWidget not refreshing correctly
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/d8a142fed5b22a8273d93ba05095e5f9c6929cb3]] problem with vertical tabs in Safari
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b8aedf2ca3cfc870be5a46accbb2dc0ddbb6d451]] issue with images in Markdown
 
 !! Contributors
 
-I ([[@Jermolene|https://github.com/Jermolene]]) would like to thank the contributors to this release who have generously given their time to helping improve TiddlyWiki:
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-[[@BramChen|https://github.com/BramChen]]
-[[@danielo515|https://github.com/danielo515]]
-[[@IreneKnapp|https://github.com/IreneKnapp]]
-[[@mwfogleman|https://github.com/mwfogleman]]
-[[@xcazin|https://github.com/xcazin]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@csugden|https://github.com/csugden]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@IreneKnapp|https://github.com/IreneKnapp]]
+* [[@jayfresh|https://github.com/jayfresh]]
+* [[@mwfogleman|https://github.com/mwfogleman]]
+* [[@xcazin|https://github.com/xcazin]]

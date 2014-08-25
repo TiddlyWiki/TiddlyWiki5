@@ -39,17 +39,10 @@ Compute the internal state of the widget
 TranscludeWidget.prototype.execute = function() {
 	// Get our parameters
 	this.transcludeTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.transcludeSubTiddler = this.getAttribute("subtiddler");
 	this.transcludeField = this.getAttribute("field");
 	this.transcludeIndex = this.getAttribute("index");
 	this.transcludeMode = this.getAttribute("mode");
-	// Check for recursion
-	var recursionMarker = this.makeRecursionMarker();
-	if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
-		this.makeChildWidgets([{type: "text", text: "Recursive transclusion error in transclude widget"}]);
-		return;
-	}
-	// Set context variables for recursion detection
-	this.setVariable("transclusion",recursionMarker);
 	// Parse the text reference
 	var parseAsInline = !this.parseTreeNode.isBlock;
 	if(this.transcludeMode === "inline") {
@@ -61,8 +54,20 @@ TranscludeWidget.prototype.execute = function() {
 						this.transcludeTitle,
 						this.transcludeField,
 						this.transcludeIndex,
-						{parseAsInline: parseAsInline}),
+						{
+							parseAsInline: parseAsInline,
+							subTiddler: this.transcludeSubTiddler
+						}),
 		parseTreeNodes = parser ? parser.tree : this.parseTreeNode.children;
+	// Set context variables for recursion detection
+	var recursionMarker = this.makeRecursionMarker();
+	this.setVariable("transclusion",recursionMarker);
+	// Check for recursion
+	if(parser) {
+		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
+			parseTreeNodes = [{type: "text", text: "Recursive transclusion error in transclude widget"}];
+		}
+	}
 	// Construct the child widgets
 	this.makeChildWidgets(parseTreeNodes);
 };
@@ -80,6 +85,8 @@ TranscludeWidget.prototype.makeRecursionMarker = function() {
 	output.push(this.transcludeField || "");
 	output.push("|");
 	output.push(this.transcludeIndex || "");
+	output.push("|");
+	output.push(this.transcludeSubTiddler || "");
 	output.push("}");
 	return output.join("");
 };
