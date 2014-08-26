@@ -51,7 +51,6 @@ exports.startup = function() {
 		},false)
 		// Listen for the tw-browser-refresh message
 		$tw.rootWidget.addEventListener("tw-browser-refresh",function(event) {
-			window.location.hash = "";
 			window.location.reload(true);
 		});
 		// Listen for the tw-home message
