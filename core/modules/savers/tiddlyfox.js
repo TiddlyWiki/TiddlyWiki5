@@ -43,7 +43,6 @@ TiddlyFoxSaver.prototype.save = function(text,method,callback) {
 		}
 		// Create the message element and put it in the message box
 		var message = document.createElement("div");
-console.log("Pathname",pathname);
 		message.setAttribute("data-tiddlyfox-path",decodeURIComponent(pathname));
 		message.setAttribute("data-tiddlyfox-content",text);
 		messageBox.appendChild(message);
