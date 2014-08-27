@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 !! Usability Improvements
 
-* 
+* [[Amended|https://github.com/Jermolene/TiddlyWiki5/commit/e47852cb141b384ad2a9097eca795545cb5b2494]] behaviour of the [[tw-browser-refresh|WidgetMessage: tw-browser-refresh]] message so that it no longer clears the location hash
 
 !! Hackability Improvements
 

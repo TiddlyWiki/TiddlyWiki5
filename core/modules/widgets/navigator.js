@@ -243,8 +243,6 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
-	// Send a notification event
-	this.dispatchEvent({type: "tw-auto-save-wiki"});
 	return false;
 };
 
@@ -333,8 +331,6 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				if(draftTitle !== this.storyTitle) {
 					this.saveStoryList(storyList);
 				}
-				// Send a notification event
-				this.dispatchEvent({type: "tw-auto-save-wiki"});
 			}
 		}
 	}
@@ -376,13 +372,8 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	var storyList = this.getStoryList();
 	// Get the template tiddler if there is one
 	var templateTiddler = this.wiki.getTiddler(event.param);
-	// Create the new tiddler
+	// Title the new tiddler
 	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || "New Tiddler");
-	var tiddler = new $tw.Tiddler(this.wiki.getCreationFields(),{
-		text: "Newly created tiddler",
-		title: title
-	},this.wiki.getModificationFields());
-	this.wiki.addTiddler(tiddler);
 	// Create the draft tiddler
 	var draftTitle = this.generateDraftTitle(title),
 		draftTiddler = new $tw.Tiddler({
@@ -487,8 +478,6 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	}));
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([IMPORT_TITLE]);
-	// Send a notification event
-	this.dispatchEvent({type: "tw-auto-save-wiki"});
 };
 
 exports.navigator = NavigatorWidget;
