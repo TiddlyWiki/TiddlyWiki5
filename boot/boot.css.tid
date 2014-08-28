@@ -9,7 +9,7 @@ Basic styles used before we boot up the parsing engine
 Error message and password prompt
 */
 
-.tc-password-wrapper, .tw-error-form {
+.tc-password-wrapper, .tc-error-form {
     font-family: sans-serif;
 	z-index: 20000;
 	position: fixed;
@@ -22,7 +22,7 @@ Error message and password prompt
 	border-radius: 8px;
 }
 
-.tw-error-form {
+.tc-error-form {
 	color: #fff;
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 	background-color: rgb(255, 75, 75);
@@ -31,11 +31,11 @@ Error message and password prompt
     margin-left: -244px; /* - width/2 - paddingHorz/2 - border */
 }
 
-.tw-error-form div {
+.tc-error-form div {
 	padding-bottom: 1em;
 }
 
-.tw-error-prompt {
+.tc-error-prompt {
 	color: #000;
 	text-shadow: none;
 }
