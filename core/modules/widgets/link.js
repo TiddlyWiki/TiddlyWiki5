@@ -33,8 +33,8 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	// Get the value of the tw-wikilinks configuration macro
-	var wikiLinksMacro = this.getVariable("tw-wikilinks"),
+	// Get the value of the tv-wikilinks configuration macro
+	var wikiLinksMacro = this.getVariable("tv-wikilinks"),
 		useWikiLinks = wikiLinksMacro ? !(wikiLinksMacro.trim() === "no") : true;
 	// Render the link if required
 	if(useWikiLinks) {
@@ -73,14 +73,14 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	}
 	domNode.setAttribute("class",classes.join(" "));
 	// Set an href
-	var wikiLinkTemplateMacro = this.getVariable("tw-wikilink-template"),
+	var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
 	// Set the tooltip
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
-	var tooltipWikiText = this.tooltip || this.getVariable("tw-wikilink-tooltip");
+	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");
 	if(tooltipWikiText) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
 				parseAsInline: true,

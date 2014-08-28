@@ -1,9 +1,9 @@
 title: $:/core/templates/static.tiddler.html
 
-\define tw-wikilink-template() $uri_doubleencoded$.html
-\define tw-config-toolbar-icons() no
-\define tw-config-toolbar-text() no
-\define tw-config-toolbar-class() tc-btn-invisible
+\define tv-wikilink-template() $uri_doubleencoded$.html
+\define tv-config-toolbar-icons() no
+\define tv-config-toolbar-text() no
+\define tv-config-toolbar-class() tc-btn-invisible
 `<!doctype html>
 <html>
 <head>

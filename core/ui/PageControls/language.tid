@@ -6,15 +6,15 @@ description: {{$:/language/Buttons/Language/Hint}}
 \define flag-title()
 $(languagePluginTitle)$/icon
 \end
-<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tc-selected">
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 <span class="tc-image-button">
 <$set name="languagePluginTitle" value={{$:/language}}>
 <$image source=<<flag-title>>/>
 </$set>
 </span>
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/Language/Caption}}/>
 </$list>
 </$button>

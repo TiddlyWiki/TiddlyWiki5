@@ -13,7 +13,7 @@ The import tiddlers message is usually generated with the DropzoneWidget or the 
 
 ! Configuration Variables
 
-The variable `tw-auto-open-on-import` controls whether the `tm-import-tiddlers` message automatically triggers the display of the pending import tiddler [[$:/Import]]:
+The variable `tv-auto-open-on-import` controls whether the `tm-import-tiddlers` message automatically triggers the display of the pending import tiddler [[$:/Import]]:
 
 * ''no'': The pending import tiddler is not opened in the story
 * ''yes'': The pending import tiddler is opened in th story. This is the default

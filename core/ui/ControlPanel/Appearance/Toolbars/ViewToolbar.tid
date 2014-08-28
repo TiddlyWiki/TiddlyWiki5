@@ -9,9 +9,9 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 {{$:/language/ControlPanel/Appearance/Toolbars/ViewToolbar/Hint}}
 
-<$set name="tw-config-toolbar-icons" value="yes">
+<$set name="tv-config-toolbar-icons" value="yes">
 
-<$set name="tw-config-toolbar-text" value="yes">
+<$set name="tv-config-toolbar-text" value="yes">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
 
