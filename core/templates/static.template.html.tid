@@ -19,7 +19,7 @@ type: text/vnd.tiddlywiki-html
 {{$:/core/ui/PageStylesheet||$:/core/templates/wikified-tiddler}}
 </style>
 </head>
-<body class="tw-body">
+<body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
 {{$:/core/ui/PageTemplate||$:/core/templates/html-tiddler}}
 </body>

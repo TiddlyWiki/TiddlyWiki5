@@ -31,7 +31,7 @@ html:-webkit-full-screen {
 	background-color: <<colour page-background>>;
 }
 
-body.tw-body {
+body.tc-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/fontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
 	color: <<colour foreground>>;
@@ -503,7 +503,7 @@ button.tw-tag-label, span.tw-tag-label {
 
 @media print {
 
-	body.tw-body {
+	body.tc-body {
 		background-color: transparent;
 	}
 

@@ -12,7 +12,7 @@ title: $:/core/templates/static.tiddler.html
 <link rel="stylesheet" href="static.css">
 <title>`{{$:/core/wiki/title}}`</title>
 </head>
-<body class="tw-body">
+<body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="tc-story-river">
 `<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">

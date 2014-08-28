@@ -62,29 +62,29 @@ Seamless modifications
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
 	/* Drop the tiddler frame padding */
-	body.tw-body .tc-tiddler-frame {
+	body.tc-body .tc-tiddler-frame {
 		padding: 0;
 	}
 
 	/* Move the sidebar up so that the title lines up */
-	body.tw-body .tw-sidebar-scrollable {
+	body.tc-body .tw-sidebar-scrollable {
 		padding: 43px 0 28px 42px;
 	}
 
 	/* Stop the tiddler info panel from bleeding into the tiddler frame padding */
-	body.tw-body .tc-tiddler-info {
+	body.tc-body .tc-tiddler-info {
 		margin: 0;
 	}
 
 	/* Stop message boxes from bleeding into the tiddler frame padding */
-	body.tw-body .tw-message-box {
+	body.tc-body .tw-message-box {
 		margin: 21px 0 21px 0;
 	}
 
 }
 
 /* Use the tiddler background colour for the page background */
-html body.tw-body {
+html body.tc-body {
 	background-color: <<colour background>>;
 }
 
@@ -93,11 +93,11 @@ html:-webkit-full-screen {
 }
 
 /* Adjust the colour of the page controls */
-body.tw-body .tw-page-controls svg {
+body.tc-body .tw-page-controls svg {
 	fill: <<colour muted-foreground>>;
 }
 
 /* Adjust the colour of the sidebar selected tabs */
-body.tw-body .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
+body.tc-body .tw-sidebar-lists .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour background>>;
 }
