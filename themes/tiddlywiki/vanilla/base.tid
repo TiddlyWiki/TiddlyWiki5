@@ -434,21 +434,12 @@ button.tc-tag-label, span.tc-tag-label {
 	font-weight: bold;
 }
 
-.tw-open-tiddler-list {
-	<<transform-origin "0% 0%">>
-}
-
 .tc-menu-list-subitem {
 	padding-left: 7px;
 }
 
 .tc-story-river {
 	position: relative;
-}
-
-.tw-story-spacer {
-	position: absolute;
-	min-height: 100%;
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
@@ -773,11 +764,6 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-edit-tags-list {
 	margin: 14px 0 14px 0;
-}
-
-.tw-tag-editor-label {
-	display: inline-block;
-	margin-right: 7px;
 }
 
 .tc-remove-tag-button {
@@ -1217,23 +1203,14 @@ canvas.tc-edit-bitmapeditor  {
 	color: <<colour alert-highlight>>;	
 }
 
-.tw-static-alert {
+.tc-static-alert {
 	position: relative;
 }
 
-.tw-static-alert-inner {
+.tc-static-alert-inner {
 	padding: 0 2px 2px 42px;
 	color: <<colour static-alert-foreground>>;
 	position: absolute;
-}
-
-/*
-** Grids
-*/
-
-.tw-grid-frame td {
-	width: 1em;
-	height: 1em;
 }
 
 /*

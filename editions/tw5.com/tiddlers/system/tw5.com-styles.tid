@@ -42,7 +42,7 @@ tags: $:/tags/stylesheet
 	height: 400px;
 }
 
-.tw-improvement-banner {
+.tc-improvement-banner {
 	font-size: 0.7em;
 	background: #fcc;
 	padding-left: 5px;
@@ -53,19 +53,19 @@ tags: $:/tags/stylesheet
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 	
-	.tw-improvement-banner {
+	.tc-improvement-banner {
 	}
 
 }
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	.tw-improvement-banner {
+	.tc-improvement-banner {
 		margin-right: -23px;
 		margin-left: -53px;
 	}
 
-	.tw-improvement-banner:before {
+	.tc-improvement-banner:before {
 		display: block;
 		position: absolute;
 		width: 0;
@@ -81,7 +81,7 @@ tags: $:/tags/stylesheet
 
 }
 
-.tw-improvement-banner svg {
+.tc-improvement-banner svg {
 	width: 1em;
 	height: 1em;
 }
