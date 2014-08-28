@@ -6,7 +6,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 \end
 <$scrollable fallthrough="no" class="tw-sidebar-scrollable">
 
-<div class="sidebar-header">
+<div class="tc-sidebar-header">
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
 

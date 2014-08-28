@@ -3,7 +3,7 @@ tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-.sidebar-header {
+.tc-sidebar-header {
 	text-shadow: 0 1px 0 <<colour sidebar-foreground-shadow>>;
 }
 

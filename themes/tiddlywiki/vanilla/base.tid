@@ -371,21 +371,21 @@ button.tw-tag-label, span.tw-tag-label {
 	fill: <<colour foreground>>;
 }
 
-.sidebar-header {
+.tc-sidebar-header {
 	color: <<colour sidebar-foreground>>;
 	fill: <<colour sidebar-foreground>>;
 }
 
-.sidebar-header .tc-title a.tw-tiddlylink-resolves {
+.tc-sidebar-header .tc-title a.tw-tiddlylink-resolves {
 	font-weight: 300;
 }
 
-.sidebar-header .tw-sidebar-lists p {
+.tc-sidebar-header .tw-sidebar-lists p {
 	margin-top: 3px;
 	margin-bottom: 3px;
 }
 
-.sidebar-header .tw-missing-tiddler-label {
+.tc-sidebar-header .tw-missing-tiddler-label {
 	color: <<colour sidebar-foreground>>;
 }
 
@@ -453,7 +453,7 @@ button.tw-tag-label, span.tw-tag-label {
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	.sidebar-header {
+	.tc-sidebar-header {
 		padding: 14px;
 		min-height: 32px;
 	}
@@ -507,7 +507,7 @@ button.tw-tag-label, span.tw-tag-label {
 		background-color: transparent;
 	}
 
-	.sidebar-header, .tw-topbar {
+	.tc-sidebar-header, .tw-topbar {
 		display: none;
 	}
 
