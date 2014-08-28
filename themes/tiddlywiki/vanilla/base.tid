@@ -442,7 +442,7 @@ button.tw-tag-label, span.tw-tag-label {
 	padding-left: 7px;
 }
 
-.story-river {
+.tc-story-river {
 	position: relative;
 }
 
@@ -458,7 +458,7 @@ button.tw-tag-label, span.tw-tag-label {
 		min-height: 32px;
 	}
 
-	.story-river {
+	.tc-story-river {
 		position: relative;
 		padding: 0;
 	}
@@ -483,7 +483,7 @@ button.tw-tag-label, span.tw-tag-label {
 		padding: 71px 0 28px 42px;
 	}
 
-	.story-river {
+	.tc-story-river {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
@@ -493,7 +493,7 @@ button.tw-tag-label, span.tw-tag-label {
 
 <<if-no-sidebar "
 
-	.story-river {
+	.tc-story-river {
 		width: auto;
 	}
 
@@ -511,12 +511,12 @@ button.tw-tag-label, span.tw-tag-label {
 		display: none;
 	}
 
-	.story-river {
+	.tc-story-river {
 		margin: 0;
 		padding: 0;
 	}
 
-	.story-river .tw-tiddler-frame {
+	.tc-story-river .tw-tiddler-frame {
 		margin: 0;
 		border: none;
 		padding: 28px;

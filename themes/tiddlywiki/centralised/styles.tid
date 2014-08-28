@@ -9,7 +9,7 @@ tags: [[$:/tags/stylesheet]]
 		text-align: center;
 	}
 
-	html .story-river {
+	html .tc-story-river {
 		position: relative;
 		width: 770px;
 		padding: 42px;

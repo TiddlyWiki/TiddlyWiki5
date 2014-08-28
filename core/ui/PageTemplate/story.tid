@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
-<section class="story-river">
+<section class="tc-story-river">
 
 <section class="story-backdrop">
 
