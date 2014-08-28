@@ -25,6 +25,8 @@ ManualDownloadSaver.prototype.save = function(text,method,callback) {
 	$tw.modal.display(downloadInstructionsTitle,{
 		downloadLink: "data:text/html," + encodeURIComponent(text)
 	});
+	// Callback that we succeeded
+	callback(null);
 	return true;
 };
 

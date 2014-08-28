@@ -1,9 +1,9 @@
 title: LinkWidget
 created: 201310241419
-modified: 201406170837
+modified: 201408280837
 tags: widget
 
-The `link` widget generates links to tiddlers.
+The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to generate external links).
 
 ! Content and Attributes
 

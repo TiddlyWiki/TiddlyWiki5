@@ -183,7 +183,6 @@ $body$
 ">>
 ## <<toc-heading "Widget Messages" "
 ## WidgetMessages
-## [[tw-auto-save-wiki|WidgetMessage: tw-auto-save-wiki]]
 ## [[tw-cancel-tiddler|WidgetMessage: tw-cancel-tiddler]]
 ## [[tw-clear-password|WidgetMessage: tw-clear-password]]
 ## [[tw-close-all-tiddlers|WidgetMessage: tw-close-all-tiddlers]]

@@ -6,7 +6,9 @@ tags: $:/tags/Macro
 <$list filter="[tag[$tag$]$sort$]">
 <li>
 <$link>
+<$view field="caption">
 <$view field="title"/>
+</$view>
 </$link>
 <$macrocall $name="toc" tag=<<currentTiddler>>/>
 </li>
@@ -28,7 +30,9 @@ tags: $:/tags/Macro
 {{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
+<$view field="caption">
 <$view field="title"/>
+</$view>
 </$link>
 <$reveal type="match" state=<<toc-state>> text="open">
 <$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort="$sort$"/>
@@ -61,7 +65,9 @@ tags: $:/tags/Macro
 </$button>
 </$reveal>
 </$list>
+<$view field="caption">
 <$view field="title"/>
+</$view>
 </$link>
 <$reveal type="match" state=<<toc-state>> text="open">
 <$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort="$sort$"/>

@@ -33,14 +33,16 @@ FSOSaver.prototype.save = function(text,method,callback) {
 		pathname = pathname.substr(1);
 		// reconstruct UNC path
 		pathname = "\\\\" + document.location.hostname + pathname;
-	} else return false;
-	
+	} else {
+		return false;
+	}
 	// Save the file (as UTF-16)
 	var fso = new ActiveXObject("Scripting.FileSystemObject");
 	var file = fso.OpenTextFile(pathname,2,-1,-1);
-	
 	file.Write(text);
 	file.Close();
+	// Callback that we succeeded
+	callback(null);
 	return true;
 };
 

@@ -71,8 +71,6 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 			$tw.wiki.deleteTiddler(title);
 		}
 	});
-	// Trigger an autosave
-	$tw.rootWidget.dispatchEvent({type: "tw-auto-save-wiki"});
 	// Return a heartwarming confirmation
 	return "Plugin " + title + " successfully saved";
 }
