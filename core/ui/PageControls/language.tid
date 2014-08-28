@@ -6,7 +6,7 @@ description: {{$:/language/Buttons/Language/Hint}}
 \define flag-title()
 $(languagePluginTitle)$/icon
 \end
-<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
+<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 <span class="tc-image-button">
 <$set name="languagePluginTitle" value={{$:/language}}>

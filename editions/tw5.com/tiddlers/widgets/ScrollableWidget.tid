@@ -23,7 +23,7 @@ If a scrollable widget can't handle the `tw-scroll` message because the inner DI
 This example requires the following CSS definitions from [[$:/_tw5.com-styles]]:
 
 ```
-.tw-scrollable-demo {
+.tc-scrollable-demo {
 	border: 1px solid <<colour message-border>>;
 	background-color: <<colour message-background>>;
 	padding: 1em;
@@ -33,7 +33,7 @@ This example requires the following CSS definitions from [[$:/_tw5.com-styles]]:
 
 This wiki text shows how to display a list within the scrollable widget:
 
-<<wikitext-example-without-html "<$scrollable class='tw-scrollable-demo'>
+<<wikitext-example-without-html "<$scrollable class='tc-scrollable-demo'>
 <$list filter='[!is[system]]'>
 
 <$view field='title'/>: <$list filter='[all[current]links[]sort[title]]' storyview='pop'>

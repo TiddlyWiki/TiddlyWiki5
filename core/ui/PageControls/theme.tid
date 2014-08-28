@@ -3,7 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/theme-button}} {{$:/language/Buttons/Theme/Caption}}
 description: {{$:/language/Buttons/Theme/Hint}}
 
-<$button popup=<<qualify "$:/state/popup/theme">> title={{$:/language/Buttons/Theme/Hint}} aria-label={{$:/language/Buttons/Theme/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
+<$button popup=<<qualify "$:/state/popup/theme">> title={{$:/language/Buttons/Theme/Hint}} aria-label={{$:/language/Buttons/Theme/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/theme-button}}
 </$list>

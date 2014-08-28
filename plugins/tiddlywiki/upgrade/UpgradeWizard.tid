@@ -1,9 +1,9 @@
 title: $:/UpgradeWizard
 tags: $:/tags/AboveStory
 
-<div class="tw-upgrade-wizard-wrapper">
+<div class="tc-upgrade-wizard-wrapper">
 
-<div class="tw-upgrade-wizard">
+<div class="tc-upgrade-wizard">
 
 ! ~TiddlyWiki Upgrade Wizard
 

@@ -3,7 +3,7 @@ tags: $:/tags/stylesheet
 
 @media (min-width: 600px) {
 
-	.tw-link-info {
+	.tc-link-info {
 		display: -webkit-flex;
 		display: -ms-flexbox;
 		display: flex;
@@ -13,14 +13,14 @@ tags: $:/tags/stylesheet
 		flex-wrap: wrap;
 	}
 
-	.tw-link-info-item {
+	.tc-link-info-item {
 		max-width: 25em;
 		margin-right: 10px;
 	}
 
 }
 
-.tw-link-info-item {
+.tc-link-info-item {
 	display: inline-block;
 	border: 1px solid <<colour muted-foreground>>;
 	padding: 5px 10px;
@@ -30,12 +30,12 @@ tags: $:/tags/stylesheet
 	line-height: 1.2;
 }
 
-.tw-link-info-item h1 {
+.tc-link-info-item h1 {
 	font-weight: 500;
 	font-size: 16px;	
 }
 
-.tw-scrollable-demo {
+.tc-scrollable-demo {
 	border: 1px solid <<colour message-border>>;
 	background-color: <<colour message-background>>;
 	padding: 1em;

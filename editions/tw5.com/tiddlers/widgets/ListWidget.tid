@@ -53,10 +53,10 @@ The ''types'' listing is performed with this markup:
 
 ```
 <$list filter="[!is[system]has[type]each[type]sort[type]]">
-<div class="tw-menu-list-item">
+<div class="tc-menu-list-item">
 <$view field="type"/>
 <$list filter="[type{!!type}!is[system]sort[title]]">
-<div class="tw-menu-list-subitem">
+<div class="tc-menu-list-subitem">
 <$link to={{!!title}}><$view field="title"/></$link>
 </div>
 </$list>
@@ -71,10 +71,10 @@ The ''recent'' listing is performed with this markup:
 
 ```
 <$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
-<div class="tw-menu-list-item">
+<div class="tc-menu-list-item">
 <$view field="modified" format="date" template="DDth MMM YYYY"/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
-<div class="tw-menu-list-subitem">
+<div class="tc-menu-list-subitem">
 <$link to={{!!title}}><$view field="title"/></$link>
 </div>
 </$list>

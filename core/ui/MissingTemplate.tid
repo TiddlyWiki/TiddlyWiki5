@@ -1,7 +1,7 @@
 title: $:/core/ui/MissingTemplate
 
 <div class="tc-tiddler-missing">
-<$button popup=<<qualify "$:/state/popup/missing">> class="tc-btn-invisible tw-missing-tiddler-label">
+<$button popup=<<qualify "$:/state/popup/missing">> class="tc-btn-invisible tc-missing-tiddler-label">
 <$view field="title" format="text" />
 </$button>
 <$reveal state=<<qualify "$:/state/popup/missing">> type="popup" position="below" animate="yes">

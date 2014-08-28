@@ -6,7 +6,7 @@ description: {{$:/language/Buttons/More/Hint}}
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
-<$button popup=<<qualify "$:/state/popup/more">> title={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
+<$button popup=<<qualify "$:/state/popup/more">> title={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/down-arrow}}
 </$list>

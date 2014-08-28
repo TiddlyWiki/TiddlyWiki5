@@ -8,17 +8,17 @@ This collection showcases inspiring and interesting examples of TiddlyWiki being
 
 Submit new entries to this collection via GitHub, Twitter or by posting in the [[TiddlyWiki Groups]].
 
-<div class="tw-link-info">
+<div class="tc-link-info">
 
 <$list filter="[tag[examples]!sort[modified]]">
 
-<div class="tw-link-info-item">
+<div class="tc-link-info-item">
 
 ! <$link><$view field="title"/></$link>
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
-<div class="tw-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
 
 <$transclude/>
 

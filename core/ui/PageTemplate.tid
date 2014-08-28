@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate
 
 \define containerClasses()
-tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
+tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 \end
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">

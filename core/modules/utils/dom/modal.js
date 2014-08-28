@@ -189,7 +189,7 @@ Modal.prototype.display = function(title,options) {
 
 Modal.prototype.adjustPageClass = function() {
 	if($tw.pageContainer) {
-		$tw.utils.toggleClass($tw.pageContainer,"tw-modal-displayed",this.modalCount > 0);
+		$tw.utils.toggleClass($tw.pageContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
 };
 

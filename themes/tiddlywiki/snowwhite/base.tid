@@ -23,11 +23,11 @@ tags: [[$:/tags/stylesheet]]
 	}
 }
 
-.tw-page-controls button svg, .tc-tiddler-controls button svg, .tw-topbar button svg {
+.tc-page-controls button svg, .tc-tiddler-controls button svg, .tc-topbar button svg {
 	<<transition "fill 150ms ease-in-out">>
 }
 
-.tc-tiddler-controls button.tw-selected svg {
+.tc-tiddler-controls button.tc-selected svg {
 	<<filter "drop-shadow(0px -1px 2px rgba(0,0,0,0.25))">>
 }
 
@@ -59,7 +59,7 @@ canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
 
-.tw-modal-displayed {
+.tc-modal-displayed {
 	-webkit-filter: blur(4px);
 }
 
@@ -85,15 +85,15 @@ canvas.tc-edit-bitmapeditor  {
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);
 }
 
-.tw-sidebar-lists .tw-tab-divider {
+.tc-sidebar-lists .tc-tab-divider {
 	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
 }
 
-.tw-more-sidebar .tw-tab-buttons button {
+.tc-more-sidebar .tc-tab-buttons button {
 	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(224,224,224) 100%">>
 }
 
-.tw-more-sidebar .tw-tab-buttons button.tw-tab-selected {
+.tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
 	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
 }
 

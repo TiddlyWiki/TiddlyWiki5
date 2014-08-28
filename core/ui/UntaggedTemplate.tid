@@ -1,7 +1,7 @@
 title: $:/core/ui/UntaggedTemplate
 
 \define lingo-base() $:/language/SideBar/
-<$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tw-untagged-label tw-tag-label">
+<$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-untagged-label tc-tag-label">
 <<lingo Tags/Untagged/Caption>>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below">

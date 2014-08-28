@@ -5,7 +5,7 @@ tags: $:/tags/ViewTemplate
 
 <$list filter="[all[current]field:plugin-type[import]]">
 
-<div class="tw-import">
+<div class="tc-import">
 
 <<lingo Listing/Hint>>
 

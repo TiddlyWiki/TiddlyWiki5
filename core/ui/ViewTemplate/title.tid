@@ -19,7 +19,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$set>
 <$list filter="[all[current]removeprefix[$:/]]">
 <span class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
-<span class="tw-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
+<span class="tc-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
 </span>
 </$list>
 <$list filter="[all[current]!prefix[$:/]]">

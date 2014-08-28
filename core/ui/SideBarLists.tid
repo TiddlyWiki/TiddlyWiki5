@@ -1,6 +1,6 @@
 title: $:/core/ui/SideBarLists
 
-<div class="tw-sidebar-lists">
+<div class="tc-sidebar-lists">
 
 <div class="tc-search">
 <$edit-text tiddler="$:/temp/search" type="search" tag="input"/>

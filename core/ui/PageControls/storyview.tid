@@ -6,7 +6,7 @@ description: {{$:/language/Buttons/StoryView/Hint}}
 \define icon()
 $:/core/images/storyview-$(storyview)$
 \end
-<$button popup=<<qualify "$:/state/popup/storyview">> title={{$:/language/Buttons/StoryView/Hint}} aria-label={{$:/language/Buttons/StoryView/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
+<$button popup=<<qualify "$:/state/popup/storyview">> title={{$:/language/Buttons/StoryView/Hint}} aria-label={{$:/language/Buttons/StoryView/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 <$set name="storyview" value={{$:/view}}>
 <$transclude tiddler=<<icon>>/>
