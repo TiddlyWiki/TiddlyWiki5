@@ -21,12 +21,12 @@ tags: $:/tags/Macro
 <li>
 <$link>
 <$reveal type="nomatch" state=<<toc-state>> text="open">
-<$button set=<<toc-state>> setTo="open" class="btn-invisible">
+<$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
 {{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
 <$reveal type="match" state=<<toc-state>> text="open">
-<$button set=<<toc-state>> setTo="close" class="btn-invisible">
+<$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
@@ -55,12 +55,12 @@ tags: $:/tags/Macro
 <$link>
 <$list filter="[all[current]tagging[]limit[1]]">
 <$reveal type="nomatch" state=<<toc-state>> text="open">
-<$button set=<<toc-state>> setTo="open" class="btn-invisible">
+<$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
 {{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
 <$reveal type="match" state=<<toc-state>> text="open">
-<$button set=<<toc-state>> setTo="close" class="btn-invisible">
+<$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
 </$button>
 </$reveal>

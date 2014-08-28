@@ -1,7 +1,7 @@
 title: $:/language/Modals/SaveInstructions
 type: text/vnd.tiddlywiki
 subtitle: Aktuellen Stand speichern
-footer: <$button message="tw-close-tiddler" class="btn btn-primary">Schließen</$button>
+footer: <$button message="tm-close-tiddler">Schließen</$button>
 help: http://tiddlywiki.com/static/SavingChanges.html
 
 Ihre Änderungen sollen als ~TiddlyWiki HTML Datei gespeichert werden. 

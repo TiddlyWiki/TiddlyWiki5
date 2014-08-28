@@ -5,7 +5,7 @@ tags: table-of-contents-example
 !! Selective Expandable Table of Contents
 
 <$macrocall $name="wikitext-example-without-html"
-src="<div class='tw-table-of-contents'>
+src="<div class='tc-table-of-contents'>
 <<toc-selective-expandable 'Contents'>>
 </div>
 "/>

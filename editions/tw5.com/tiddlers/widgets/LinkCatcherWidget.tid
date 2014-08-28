@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The link catcher widget traps [[WidgetMessage: tw-navigate]] dispatched within its child content by performing any or all of these actions:
+The link catcher widget traps [[WidgetMessage: tm-navigate]] dispatched within its child content by performing any or all of these actions:
 
 * sending a different widget message
 * setting a tiddler to the title of the navigated tiddler

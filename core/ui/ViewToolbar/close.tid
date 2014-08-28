@@ -3,7 +3,7 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/close-button}} {{$:/language/Buttons/Close/Caption}}
 description: {{$:/language/Buttons/Close/Hint}}
 
-<$button message="tw-close-tiddler" title={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-close-tiddler" title={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/close-button}}
 </$list>

@@ -19,7 +19,7 @@ var CsvParser = function(type,text,options) {
 			"type": "element", "tag": "table", "children": [{
 				"type": "element", "tag": "tbody", "children": []
 			}], "attributes": {
-				"class": {"type": "string", "value": "tw-csv-table"}
+				"class": {"type": "string", "value": "tc-csv-table"}
 			}
 		}]
 	}];

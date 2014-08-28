@@ -48,13 +48,13 @@ function Syncer(options) {
 			return confirmationMessage;
 		});
 		// Listen out for login/logout/refresh events in the browser
-		$tw.rootWidget.addEventListener("tw-login",function() {
+		$tw.rootWidget.addEventListener("tm-login",function() {
 			self.handleLoginEvent();
 		});
-		$tw.rootWidget.addEventListener("tw-logout",function() {
+		$tw.rootWidget.addEventListener("tm-logout",function() {
 			self.handleLogoutEvent();
 		});
-		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
+		$tw.rootWidget.addEventListener("tm-server-refresh",function() {
 			self.handleRefreshEvent();
 		});
 	}
@@ -109,11 +109,11 @@ Syncer.prototype.isDirty = function() {
 };
 
 /*
-Update the document body with the class "tw-dirty" if the wiki has unsaved/unsynced changes
+Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
 */
 Syncer.prototype.updateDirtyStatus = function() {
 	if($tw.browser) {
-		$tw.utils.toggleClass(document.body,"tw-dirty",this.isDirty());
+		$tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
 	}
 };
 

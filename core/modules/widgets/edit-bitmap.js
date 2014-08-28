@@ -45,7 +45,7 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	// Create our element
 	this.canvasDomNode = $tw.utils.domMaker("canvas",{
 		document: this.document,
-		"class":"tw-edit-bitmapeditor",
+		"class":"tc-edit-bitmapeditor",
 		eventListeners: [{
 			name: "touchstart", handlerObject: this, handlerMethod: "handleTouchStartEvent"
 		},{
@@ -62,14 +62,14 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	});
 	this.widthDomNode = $tw.utils.domMaker("input",{
 		document: this.document,
-		"class":"tw-edit-bitmapeditor-width",
+		"class":"tc-edit-bitmapeditor-width",
 		eventListeners: [{
 			name: "change", handlerObject: this, handlerMethod: "handleWidthChangeEvent"
 		}]
 	});
 	this.heightDomNode = $tw.utils.domMaker("input",{
 		document: this.document,
-		"class":"tw-edit-bitmapeditor-height",
+		"class":"tc-edit-bitmapeditor-height",
 		eventListeners: [{
 			name: "change", handlerObject: this, handlerMethod: "handleHeightChangeEvent"
 		}]

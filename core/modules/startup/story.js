@@ -49,27 +49,27 @@ exports.startup = function() {
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
 		},false)
-		// Listen for the tw-browser-refresh message
-		$tw.rootWidget.addEventListener("tw-browser-refresh",function(event) {
+		// Listen for the tm-browser-refresh message
+		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
 		});
-		// Listen for the tw-home message
-		$tw.rootWidget.addEventListener("tw-home",function(event) {
+		// Listen for the tm-home message
+		$tw.rootWidget.addEventListener("tm-home",function(event) {
 			window.location.hash = "";
 			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
 				storyList = $tw.wiki.filterTiddlers(storyFilter);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
 		});
-		// Listen for the tw-permalink message
-		$tw.rootWidget.addEventListener("tw-permalink",function(event) {
+		// Listen for the tm-permalink message
+		$tw.rootWidget.addEventListener("tm-permalink",function(event) {
 			updateLocationHash({
 				updateAddressBar: "permalink",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
 				targetTiddler: event.param || event.tiddlerTitle
 			});
 		});
-		// Listen for the tw-permaview message
-		$tw.rootWidget.addEventListener("tw-permaview",function(event) {
+		// Listen for the tm-permaview message
+		$tw.rootWidget.addEventListener("tm-permaview",function(event) {
 			updateLocationHash({
 				updateAddressBar: "permaview",
 				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),

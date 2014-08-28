@@ -62,13 +62,13 @@ function SaverHandler(options) {
     }
     // Install the save action handlers
     if($tw.browser) {
-        $tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
+        $tw.rootWidget.addEventListener("tm-save-wiki",function(event) {
             self.saveWiki({
                 template: event.param,
                 downloadType: "text/plain"
             });
         });
-        $tw.rootWidget.addEventListener("tw-download-file",function(event) {
+        $tw.rootWidget.addEventListener("tm-download-file",function(event) {
             self.saveWiki({
                 method: "download",
                 template: event.param,
@@ -160,11 +160,11 @@ SaverHandler.prototype.isDirty = function() {
 };
 
 /*
-Update the document body with the class "tw-dirty" if the wiki has unsaved/unsynced changes
+Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
 */
 SaverHandler.prototype.updateDirtyStatus = function() {
     if($tw.browser) {
-        $tw.utils.toggleClass(document.body,"tw-dirty",this.isDirty());
+        $tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
     }
 };
 

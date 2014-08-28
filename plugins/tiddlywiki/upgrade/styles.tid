@@ -1,13 +1,13 @@
 title: $:/plugins/tiddlywiki/upgrade/styles
 tags: $:/tags/stylesheet
 
-.tw-upgrade-wizard-wrapper {
+.tc-upgrade-wizard-wrapper {
 	width: 100%;
 	text-align: center;
 	margin-bottom: 3em;
 }
 
-.tw-upgrade-wizard {
+.tc-upgrade-wizard {
 	background: <<colour tiddler-background>>;
 	padding: 2em;
 	display: inline-block;
@@ -17,32 +17,32 @@ tags: $:/tags/stylesheet
 	overflow: hidden;
 }
 
-.tw-upgrade-wizard svg.tw-image-download-button {
+.tc-upgrade-wizard svg.tc-image-download-button {
 	width: 14em;
 	height: 14em;
 	fill: <<colour muted-foreground>>;
 }
 
-.tw-upgrade-wizard:hover svg.tw-image-download-button {
+.tc-upgrade-wizard:hover svg.tc-image-download-button {
 	fill: <<colour foreground>>;
 }
 
-.tw-upgrade-wizard svg .tw-image-download-button-ring {
+.tc-upgrade-wizard svg .tc-image-download-button-ring {
 }
 
-.tw-upgrade-wizard:hover svg .tw-image-download-button-ring {
+.tc-upgrade-wizard:hover svg .tc-image-download-button-ring {
 	fill: <<colour primary>>;
 }
 
-.tw-upgrade-wizard em {
+.tc-upgrade-wizard em {
 	color: <<colour tiddler-subtitle-foreground>>;
 }
 
-.tw-upgrade-wizard table {
+.tc-upgrade-wizard table {
 	text-align: left;
 }
 
-.tw-upgrade-wizard input[type=file] {
+.tc-upgrade-wizard input[type=file] {
 	position: absolute;
 	top: 0;
 	left: 0;

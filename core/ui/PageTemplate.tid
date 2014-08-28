@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate
 
 \define containerClasses()
-tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
+tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 \end
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
@@ -10,7 +10,7 @@ tw-page-container tw-page-view-$(themeTitle)$ tw-language-$(languageTitle)$
 
 <$set name="tw-config-toolbar-text" value={{$:/config/Toolbar/Text}}>
 
-<$set name="tw-config-toolbar-class" value="btn-invisible">
+<$set name="tw-config-toolbar-class" value="tc-btn-invisible">
 
 <$set name="themeTitle" value={{$:/view}}>
 

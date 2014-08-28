@@ -27,7 +27,7 @@ Encryption/SetPassword/Hint: 设置加密保存此维基的密码
 FullScreen/Caption: 全屏幕
 FullScreen/Hint: 进入或离开全屏模式
 Home/Caption: 首页
-Home/Hint: 刷新页面且开启首页条目
+Home/Hint: 开启首页条目
 Import/Caption: 导入
 Import/Hint: 导入文件
 Info/Caption: 信息
@@ -42,6 +42,8 @@ Permalink/Caption: 引用连结
 Permalink/Hint: 设定浏览器网址栏为直接连结到此条目
 Permaview/Caption: 永久连结
 Permaview/Hint: 设定浏览器网址栏为直接连结到当前所有已开启条目
+Refresh/Caption: 刷新
+Refresh/Hint: 执行维基的完全刷新
 Save/Caption: 保存
 Save/Hint: 保存此条目
 SaveWiki/Caption: 保存变更

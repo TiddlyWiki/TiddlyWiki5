@@ -1,10 +1,10 @@
 created: 20140302183306544
 modified: 20140302183352966
 tags: message navigator-message
-title: WidgetMessage: tw-close-other-tiddlers
+title: WidgetMessage: tm-close-other-tiddlers
 type: text/vnd.tiddlywiki
 
-The `tw-close-other-tiddlers` message removes all but a specified tiddler from the story list. It requires the following properties on the `event` object:
+The `tm-close-other-tiddlers` message removes all but a specified tiddler from the story list. It requires the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Title of the tiddler that is not to be closed |

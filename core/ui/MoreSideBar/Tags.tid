@@ -18,10 +18,10 @@ caption: {{$:/language/SideBar/Tags/Caption}}
 
 <$list filter="[tags[]!is[system]sort[title]]">
 
-<$transclude tiddler="$:/core/ui/TagTemplate"/> <small class="tw-menu-list-count"><$count filter="[all[current]tagging[]]"/></small>
+<$transclude tiddler="$:/core/ui/TagTemplate"/> <small class="tc-menu-list-count"><$count filter="[all[current]tagging[]]"/></small>
 
 </$list>
 
 ----
 
-{{$:/core/ui/UntaggedTemplate}} <small class="tw-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>
+{{$:/core/ui/UntaggedTemplate}} <small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>

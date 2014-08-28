@@ -6,9 +6,9 @@ description: {{$:/language/Buttons/Language/Hint}}
 \define flag-title()
 $(languagePluginTitle)$/icon
 \end
-<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
+<$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
-<span class="tw-image-button">
+<span class="tc-image-button">
 <$set name="languagePluginTitle" value={{$:/language}}>
 <$image source=<<flag-title>>/>
 </$set>
@@ -19,11 +19,11 @@ $(languagePluginTitle)$/icon
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/language">> type="popup" position="below" animate="yes">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 <$linkcatcher to="$:/language">
 <$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]]">
 <$link>
-<span class="tw-drop-down-bullet">
+<span class="tc-drop-down-bullet">
 <$reveal type="match" state="$:/language" text=<<currentTiddler>>>
 &bull;
 </$reveal>
@@ -31,7 +31,7 @@ $(languagePluginTitle)$/icon
 &nbsp;
 </$reveal>
 </span>
-<span class="tw-image-button">
+<span class="tc-image-button">
 <$set name="languagePluginTitle" value=<<currentTiddler>>>
 <$transclude subtiddler=<<flag-title>>>
 <$list filter="[all[current]field:title[$:/languages/en-GB]]">

@@ -18,10 +18,10 @@ The TiddlerWidget sets the CurrentTiddler that applies for processing its conten
 
 The tiddler widget assigns several useful CSS classes to variables that it creates:
 
-* ''missingTiddlerClass'': ''"tw-tiddler-exists"'' or ''"tw-tiddler-missing"'' depending upon whether the target tiddler exists
-* ''shadowTiddlerClass'': ''"tw-tiddler-shadow"'' if the tiddler is a shadow tiddler
-* ''systemTiddlerClass'': ''"tw-tiddler-system"'' if the tiddler is a system tiddler
-* ''tiddlerTagClasses'': A space separated list of CSS classes named ''"tw-tagged-{tagname}"''. For example ''"tw-tagged-introduction"''. Note that tag names are UrlEncoded which means that the tag ''$:/tags/Macro'' appears as the CSS class ''"tw-tagged-%24%3A%2Ftags%2FMacro"''
+* ''missingTiddlerClass'': ''"tc-tiddler-exists"'' or ''"tc-tiddler-missing"'' depending upon whether the target tiddler exists
+* ''shadowTiddlerClass'': ''"tc-tiddler-shadow"'' if the tiddler is a shadow tiddler
+* ''systemTiddlerClass'': ''"tc-tiddler-system"'' if the tiddler is a system tiddler
+* ''tiddlerTagClasses'': A space separated list of CSS classes named ''"tc-tagged-{tagname}"''. For example ''"tc-tagged-introduction"''. Note that tag names are UrlEncoded which means that the tag ''$:/tags/Macro'' appears as the CSS class ''"tc-tagged-%24%3A%2Ftags%2FMacro"''
 
 You can use these variables like this:
 

@@ -139,10 +139,10 @@ $tw.utils.error = function(err) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
-			prompt = dm("div",{text: promptMsg, "class": "tw-error-prompt"}),
+			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
 			message = dm("div",{text: err}),
 			button = dm("button",{text: "close"}),
-			form = dm("form",{children: [heading,prompt,message,button], "class": "tw-error-form"});
+			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
 		form.addEventListener("submit",function(event) {
 			document.body.removeChild(form);
@@ -447,7 +447,7 @@ $tw.utils.PasswordPrompt = function() {
 	// Store of pending password prompts
 	this.passwordPrompts = [];
 	// Create the wrapper
-	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tw-password-wrapper"});
+	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tc-password-wrapper"});
 	document.body.appendChild(this.promptWrapper);
 	// Hide the empty wrapper
 	this.setWrapperDisplay();
@@ -480,18 +480,15 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		children = [dm("h1",{text: options.serviceName})];
 	if(!options.noUserName) {
 		children.push(dm("input",{
-			attributes: {type: "text", name: "username", placeholder: "Username"},
-			"class": "input-small"
+			attributes: {type: "text", name: "username", placeholder: "Username"}
 		}));
 	}
 	children.push(dm("input",{
-		attributes: {type: "password", name: "password", placeholder: "Password"},
-		"class": "input-small"
+		attributes: {type: "password", name: "password", placeholder: "Password"}
 	}));
 	if(options.canCancel) {
 		children.push(dm("button",{
 			text: "Cancel",
-			"class": "btn",
 			eventListeners: [{
 					name: "click",
 					handlerFunction: function(event) {
@@ -503,11 +500,9 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	}
 	children.push(dm("button",{
 		attributes: {type: "submit"},
-		text: submitText,
-		"class": "btn"
+		text: submitText
 	}));
 	var form = dm("form",{
-		"class": "form-inline",
 		attributes: {autocomplete: "off"},
 		children: children
 	});

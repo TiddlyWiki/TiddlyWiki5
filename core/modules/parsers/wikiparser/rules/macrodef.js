@@ -62,6 +62,8 @@ exports.parse = function() {
 	} else {
 		// Otherwise, the end of the definition is marked by the end of the line
 		reEnd = /(\r?\n)/mg;
+		// Move past any whitespace
+		this.parser.pos = $tw.utils.skipWhiteSpace(this.parser.source,this.parser.pos);
 	}
 	// Find the end of the definition
 	reEnd.lastIndex = this.parser.pos;

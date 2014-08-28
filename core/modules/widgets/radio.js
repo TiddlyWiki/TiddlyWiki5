@@ -101,7 +101,7 @@ RadioWidget.prototype.execute = function() {
 	if(this.radioClass !== "") {
 		this.radioClass += " ";
 	}
-	this.radioClass += "tw-radio";
+	this.radioClass += "tc-radio";
 	// Make the child widgets
 	this.makeChildWidgets();
 };

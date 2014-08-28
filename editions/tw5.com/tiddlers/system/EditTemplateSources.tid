@@ -7,7 +7,7 @@ https://github.com/Jermolene/TiddlyWiki5/edit/master/editions/tw5.com/tiddlers/$
 \end
 \define innerMakeGitHubLink(linkText)
 <$set name="githubLink" value={{$:/config/OriginalTiddlerPaths##$(draftOfTiddler)$}}>
-<a href=<<makeGitHubLink>> class="tw-tiddlylink-external" target="_blank">$linkText$</a>
+<a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank">$linkText$</a>
 </$set>
 \end
 \define outerMakeGitHubLink(linkText)
@@ -15,6 +15,6 @@ https://github.com/Jermolene/TiddlyWiki5/edit/master/editions/tw5.com/tiddlers/$
 <<innerMakeGitHubLink "$linkText$">>
 </$set>
 \end
-<div class="tw-improvement-banner">
+<div class="tc-improvement-banner">
 {{$:/core/images/star-filled}} Can you help us improve this documentation? [[Find out how|Improving TiddlyWiki Documentation]] to edit <<outerMakeGitHubLink "this tiddler on ~GitHub">>
 </div>

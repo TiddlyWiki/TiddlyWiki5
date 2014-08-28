@@ -1,10 +1,10 @@
 created: 20140716084658099
 modified: 20140716195055502
 tags: message navigator-message
-title: WidgetMessage: tw-import-tiddlers
+title: WidgetMessage: tm-import-tiddlers
 type: text/vnd.tiddlywiki
 
-The `tw-import-tiddlers` message inserts a list of tiddlers into the pending import tiddler [[$:/Import]]. It also applies any active ''upgrader'' modules to each tiddler as it arrives (see the UpgradeMechanism for more details).
+The `tm-import-tiddlers` message inserts a list of tiddlers into the pending import tiddler [[$:/Import]]. It also applies any active ''upgrader'' modules to each tiddler as it arrives (see the UpgradeMechanism for more details).
 
 |!Name |!Description |
 |param |JSON text of the array of tiddlers to be imported |
@@ -13,7 +13,7 @@ The import tiddlers message is usually generated with the DropzoneWidget or the 
 
 ! Configuration Variables
 
-The variable `tw-auto-open-on-import` controls whether the `tw-import-tiddlers` message automatically triggers the display of the pending import tiddler [[$:/Import]]:
+The variable `tw-auto-open-on-import` controls whether the `tm-import-tiddlers` message automatically triggers the display of the pending import tiddler [[$:/Import]]:
 
 * ''no'': The pending import tiddler is not opened in the story
 * ''yes'': The pending import tiddler is opened in th story. This is the default

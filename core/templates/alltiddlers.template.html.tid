@@ -2,6 +2,9 @@ title: $:/core/templates/alltiddlers.template.html
 type: text/vnd.tiddlywiki-html
 
 \define tw-wikilink-template() #$uri_encoded$
+\define tw-config-toolbar-icons() no
+\define tw-config-toolbar-text() no
+\define tw-config-toolbar-class() tc-btn-invisible
 \rules only filteredtranscludeinline transcludeinline
 <!doctype html>
 <html>
@@ -19,9 +22,9 @@ type: text/vnd.tiddlywiki-html
 {{$:/core/ui/PageStylesheet||$:/core/templates/wikified-tiddler}}
 </style>
 </head>
-<body class="tw-body">
+<body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
-<section class="story-river">
+<section class="tc-story-river">
 {{$:/core/templates/alltiddlers.content||$:/core/templates/html-tiddler}}
 </section>
 </body>

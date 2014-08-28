@@ -3,7 +3,7 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/edit-button}} {{$:/language/Buttons/Edit/Caption}}
 description: {{$:/language/Buttons/Edit/Hint}}
 
-<$button message="tw-edit-tiddler" title={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-edit-tiddler" title={{$:/language/Buttons/Edit/Hint}} aria-label={{$:/language/Buttons/Edit/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/edit-button}}
 </$list>

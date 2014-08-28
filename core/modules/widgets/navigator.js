@@ -19,17 +19,17 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var NavigatorWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	this.addEventListeners([
-		{type: "tw-navigate", handler: "handleNavigateEvent"},
-		{type: "tw-edit-tiddler", handler: "handleEditTiddlerEvent"},
-		{type: "tw-delete-tiddler", handler: "handleDeleteTiddlerEvent"},
-		{type: "tw-save-tiddler", handler: "handleSaveTiddlerEvent"},
-		{type: "tw-cancel-tiddler", handler: "handleCancelTiddlerEvent"},
-		{type: "tw-close-tiddler", handler: "handleCloseTiddlerEvent"},
-		{type: "tw-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
-		{type: "tw-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
-		{type: "tw-new-tiddler", handler: "handleNewTiddlerEvent"},
-		{type: "tw-import-tiddlers", handler: "handleImportTiddlersEvent"},
-		{type: "tw-perform-import", handler: "handlePerformImportEvent"}
+		{type: "tm-navigate", handler: "handleNavigateEvent"},
+		{type: "tm-edit-tiddler", handler: "handleEditTiddlerEvent"},
+		{type: "tm-delete-tiddler", handler: "handleDeleteTiddlerEvent"},
+		{type: "tm-save-tiddler", handler: "handleSaveTiddlerEvent"},
+		{type: "tm-cancel-tiddler", handler: "handleCancelTiddlerEvent"},
+		{type: "tm-close-tiddler", handler: "handleCloseTiddlerEvent"},
+		{type: "tm-close-all-tiddlers", handler: "handleCloseAllTiddlersEvent"},
+		{type: "tm-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
+		{type: "tm-new-tiddler", handler: "handleNewTiddlerEvent"},
+		{type: "tm-import-tiddlers", handler: "handleImportTiddlersEvent"},
+		{type: "tm-perform-import", handler: "handlePerformImportEvent"}
 	]);
 };
 
@@ -140,7 +140,7 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 };
 
 /*
-Handle a tw-navigate event
+Handle a tm-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	this.addToStory(event.navigateTo,event.navigateFromTitle);
@@ -310,7 +310,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				));
 			}
 			if(!isRename && !this.wiki.isDraftModified(title)) {
-				event.type = "tw-cancel-tiddler";
+				event.type = "tm-cancel-tiddler";
 				this.dispatchEvent(event);
 			} else if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
