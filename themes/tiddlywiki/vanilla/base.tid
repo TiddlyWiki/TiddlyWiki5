@@ -288,7 +288,7 @@ button svg, button img {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
-button svg.tw-image-button, button .tw-image-button img {
+button svg.tc-image-button, button .tc-image-button img {
 	height: 1em;
 	width: 1em;
 }
@@ -705,39 +705,39 @@ canvas.tw-edit-bitmapeditor  {
 ** Toolbar buttons
 */
 
-.tw-page-controls svg.tw-image-new-button {
+.tw-page-controls svg.tc-image-new-button {
   fill: <<colour toolbar-new-button>>;
 }
 
-.tw-page-controls svg.tw-image-options-button {
+.tw-page-controls svg.tc-image-options-button {
   fill: <<colour toolbar-options-button>>;
 }
 
-.tw-page-controls svg.tw-image-save-button {
+.tw-page-controls svg.tc-image-save-button {
   fill: <<colour toolbar-save-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-info-button {
+.tw-tiddler-controls button svg.tc-image-info-button {
   fill: <<colour toolbar-info-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-edit-button {
+.tw-tiddler-controls button svg.tc-image-edit-button {
   fill: <<colour toolbar-edit-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-close-button {
+.tw-tiddler-controls button svg.tc-image-close-button {
   fill: <<colour toolbar-close-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-delete-button {
+.tw-tiddler-controls button svg.tc-image-delete-button {
   fill: <<colour toolbar-delete-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-cancel-button {
+.tw-tiddler-controls button svg.tc-image-cancel-button {
   fill: <<colour toolbar-cancel-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-done-button {
+.tw-tiddler-controls button svg.tc-image-done-button {
   fill: <<colour toolbar-done-button>>;
 }
 
