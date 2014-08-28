@@ -97,10 +97,10 @@ canvas.tc-edit-bitmapeditor  {
 	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
 }
 
-.tw-message-box img {
+.tc-message-box img {
 	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
 }
 
-.tw-plugin-info {
+.tc-plugin-info {
 	<<box-shadow "2px 2px 4px rgba(0,0,0,0.2)">>
 }

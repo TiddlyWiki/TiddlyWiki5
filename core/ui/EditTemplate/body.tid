@@ -4,7 +4,7 @@ tags: $:/tags/EditTemplate
 \define lingo-base() $:/language/EditTemplate/Body/
 <$list filter="[is[current]has[_canonical_uri]]">
 
-<div class="tw-message-box">
+<div class="tc-message-box">
 
 <<lingo External/Hint>>
 

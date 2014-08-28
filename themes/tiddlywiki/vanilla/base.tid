@@ -466,7 +466,7 @@ button.tw-tag-label, span.tw-tag-label {
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	.tw-message-box {
+	.tc-message-box {
 		margin: 21px -21px 21px -21px;
 	}
 
@@ -780,7 +780,7 @@ canvas.tc-edit-bitmapeditor  {
 	margin-right: 7px;
 }
 
-.tw-remove-tag-button {
+.tc-remove-tag-button {
 	padding-left: 4px;
 }
 
@@ -1248,7 +1248,7 @@ canvas.tc-edit-bitmapeditor  {
 	width: 100%;
 }
 
-.tw-plugin-info {
+.tc-plugin-info {
 	display: block;
 	border: 1px solid <<colour muted-foreground>>;
 	background-colour: <<colour background>>;
@@ -1256,37 +1256,37 @@ canvas.tc-edit-bitmapeditor  {
 	padding: 8px;
 }
 
-.tw-plugin-info-disabled {
+.tc-plugin-info-disabled {
 	background: -webkit-repeating-linear-gradient(45deg, #ff0, #ff0 10px, #eee 10px, #eee 20px);
 	background: repeating-linear-gradient(45deg, #ff0, #ff0 10px, #eee 10px, #eee 20px);
 }
 
-.tw-plugin-info-disabled:hover {
+.tc-plugin-info-disabled:hover {
 	background: -webkit-repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
 	background: repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
 }
 
-a.tc-tiddlylink.tw-plugin-info:hover {
+a.tc-tiddlylink.tc-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
 	color: <<colour background>>;
 }
 
-.tw-plugin-info-chunk {
+.tc-plugin-info-chunk {
 	display: inline-block;
 	vertical-align: middle;	
 }
 
-.tw-plugin-info img {
+.tc-plugin-info img {
 	width: 3em;
 }
 
-.tw-plugin-info svg {
+.tc-plugin-info svg {
 	width: 3em;
 	height: 3em;
 }
 
-.tw-plugin-info-dropdown {
+.tc-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
 	padding: 1em 1em 1em 1em;
 	margin-top: -1em;
@@ -1296,7 +1296,7 @@ a.tc-tiddlylink.tw-plugin-info:hover {
 ** Message boxes
 */
 
-.tw-message-box {
+.tc-message-box {
 	border: 1px solid <<colour message-border>>;
 	background: <<colour message-background>>;
 	padding: 0px 21px 0px 21px;
@@ -1305,7 +1305,7 @@ a.tc-tiddlylink.tw-plugin-info:hover {
 	color: <<colour message-foreground>>;
 }
 
-.tw-message-box img {
+.tc-message-box img {
 	float: right;
 	width: 150px;
 	margin: 0px 0px 12px 12px;

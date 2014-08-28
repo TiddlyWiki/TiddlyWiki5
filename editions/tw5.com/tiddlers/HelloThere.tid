@@ -12,7 +12,7 @@ This is version <<version-link>> of ~TiddlyWiki, a major reboot designed [[for t
 
 //~TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//.
 
-<div class="tw-message-box">
+<div class="tc-message-box">
 
 <a class="tw-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
 
