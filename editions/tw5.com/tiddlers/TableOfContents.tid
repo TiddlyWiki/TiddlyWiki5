@@ -8,11 +8,11 @@ type: text/vnd.tiddlywiki
 
 \define toc-heading(caption,body)
 <$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
-<$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="btn-invisible">{{$:/core/images/right-arrow}} $caption$
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} $caption$
 </$button>
 </$reveal>
 <$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show">
-<$button set=<<qualify "$:/state/toc/$caption$">> setTo="hide" class="btn-invisible">{{$:/core/images/down-arrow}} $caption$
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="hide" class="tc-btn-invisible">{{$:/core/images/down-arrow}} $caption$
 </$button>
 </$reveal>
 <$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show" retain="yes" animate="yes">

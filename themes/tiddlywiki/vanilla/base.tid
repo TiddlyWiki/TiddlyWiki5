@@ -247,7 +247,7 @@ button svg, button img {
 	vertical-align: middle;
 }
 
-.btn-invisible {
+.tc-btn-invisible {
 	padding: 0;
 	margin: 0;
 	background: none;
@@ -642,7 +642,7 @@ button.tw-tag-label, span.tw-tag-label {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tw-tiddler-controls button.btn-invisible:hover svg {
+.tw-tiddler-controls button.tc-btn-invisible:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
@@ -879,7 +879,7 @@ canvas.tw-edit-bitmapeditor  {
 	fill: <<colour foreground>>;
 }
 
-.tw-drop-down button.btn-invisible:hover svg {
+.tw-drop-down button.tc-btn-invisible:hover svg {
 	fill: <<colour foreground>>;
 }
 

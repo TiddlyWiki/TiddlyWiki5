@@ -2,7 +2,7 @@ title: $:/core/ui/AlertTemplate
 
 <div class="tw-alert">
 <div class="tw-alert-toolbar">
-<$button message="tw-delete-tiddler" class="btn-invisible">
+<$button message="tw-delete-tiddler" class="tc-btn-invisible">
 {{$:/core/images/delete-button}}</$button>
 </div>
 <div class="tw-alert-subtitle">

@@ -28,7 +28,7 @@ Note how this approach makes the ''open'' tab in the sidebar very easy to implem
 
 ```
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
-<$button message="tw-close-tiddler" class="btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+<$button message="tw-close-tiddler" class="tc-btn-invisible btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
 </$list>
 ```
 

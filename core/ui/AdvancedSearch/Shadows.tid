@@ -7,7 +7,7 @@ caption: {{$:/language/Search/Shadows/Caption}}
 
 <<lingo Shadows/Hint>>
 
-<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
 </$linkcatcher>
 

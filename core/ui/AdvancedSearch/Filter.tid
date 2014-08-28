@@ -7,7 +7,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 
 <<lingo Filter/Hint>>
 
-<div class="tw-search tw-advanced-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/> <$button popup=<<qualify "$:/state/filterDropdown">> class="btn-invisible">{{$:/core/images/down-arrow}}</$button> <$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tw-search tw-advanced-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/> <$button popup=<<qualify "$:/state/filterDropdown">> class="tc-btn-invisible">{{$:/core/images/down-arrow}}</$button> <$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
 <div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/filterDropdown">> type="nomatch" text="" default="">
