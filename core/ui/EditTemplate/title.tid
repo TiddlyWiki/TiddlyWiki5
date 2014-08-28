@@ -1,4 +1,4 @@
 title: $:/core/ui/EditTemplate/title
 tags: $:/tags/EditTemplate
 
-<$edit-text field="draft.title" class="titlebar tw-edit-texteditor"/>
+<$edit-text field="draft.title" class="tc-titlebar tw-edit-texteditor"/>
