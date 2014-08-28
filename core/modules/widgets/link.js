@@ -60,15 +60,15 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	if(this.linkClasses) {
 		classes.push(this.linkClasses);
 	}
-	classes.push("tw-tiddlylink");
+	classes.push("tc-tiddlylink");
 	if(this.isShadow) {
-		classes.push("tw-tiddlylink-shadow");
+		classes.push("tc-tiddlylink-shadow");
 	}
 	if(this.isMissing && !this.isShadow) {
-		classes.push("tw-tiddlylink-missing");
+		classes.push("tc-tiddlylink-missing");
 	} else {
 		if(!this.isMissing) {
-			classes.push("tw-tiddlylink-resolves");
+			classes.push("tc-tiddlylink-resolves");
 		}
 	}
 	domNode.setAttribute("class",classes.join(" "));
@@ -126,7 +126,7 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 LinkWidget.prototype.handleDragStartEvent = function(event) {
 	if(this.to) {
 		// Set the dragging class on the element being dragged
-		$tw.utils.addClass(event.target,"tw-tiddlylink-dragging");
+		$tw.utils.addClass(event.target,"tc-tiddlylink-dragging");
 		// Create the drag image elements
 		this.dragImage = this.document.createElement("div");
 		this.dragImage.className = "tw-tiddler-dragger";
@@ -170,7 +170,7 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 
 LinkWidget.prototype.handleDragEndEvent = function(event) {
 	// Remove the dragging class on the element being dragged
-	$tw.utils.removeClass(event.target,"tw-tiddlylink-dragging");
+	$tw.utils.removeClass(event.target,"tc-tiddlylink-dragging");
 	// Delete the drag image element
 	if(this.dragImage) {
 		this.dragImage.parentNode.removeChild(this.dragImage);

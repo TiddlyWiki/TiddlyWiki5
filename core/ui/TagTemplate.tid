@@ -5,7 +5,7 @@ background-color:$(backgroundColor)$;
 \end
 <span class="tw-tag-list-item">
 <$set name="backgroundColor" value={{!!color}}>
-<$button popup=<<qualify "$:/state/popup/tag">> class="btn-invisible tw-tag-label" style=<<tag-styles>>>
+<$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tw-tag-label" style=<<tag-styles>>>
 <$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
 </$button>
 </$set>

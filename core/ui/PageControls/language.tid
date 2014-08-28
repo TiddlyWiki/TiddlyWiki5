@@ -8,7 +8,7 @@ $(languagePluginTitle)$/icon
 \end
 <$button popup=<<qualify "$:/state/popup/language">> title={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
-<span class="tw-image-button">
+<span class="tc-image-button">
 <$set name="languagePluginTitle" value={{$:/language}}>
 <$image source=<<flag-title>>/>
 </$set>
@@ -31,7 +31,7 @@ $(languagePluginTitle)$/icon
 &nbsp;
 </$reveal>
 </span>
-<span class="tw-image-button">
+<span class="tc-image-button">
 <$set name="languagePluginTitle" value=<<currentTiddler>>>
 <$transclude subtiddler=<<flag-title>>>
 <$list filter="[all[current]field:title[$:/languages/en-GB]]">

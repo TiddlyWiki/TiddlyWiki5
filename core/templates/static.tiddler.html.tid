@@ -14,7 +14,7 @@ title: $:/core/templates/static.tiddler.html
 </head>
 <body class="tw-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
-<section class="story-river">
+<section class="tc-story-river">
 `<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 <$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>
 </$importvariables>`

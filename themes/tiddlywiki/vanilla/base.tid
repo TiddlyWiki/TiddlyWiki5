@@ -139,52 +139,52 @@ table tfoot tr td {
 ** Links
 */
 
-a.tw-tiddlylink {
+a.tc-tiddlylink {
 	text-decoration: none;
 	font-weight: normal;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
 
-.tw-sidebar-lists a.tw-tiddlylink {
+.tw-sidebar-lists a.tc-tiddlylink {
 	color: <<colour sidebar-tiddler-link-foreground>>;
 }
 
-.tw-sidebar-lists a.tw-tiddlylink:hover {
+.tw-sidebar-lists a.tc-tiddlylink:hover {
 	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
-a.tw-tiddlylink:hover {
+a.tc-tiddlylink:hover {
 	text-decoration: underline;
 }
 
-a.tw-tiddlylink-resolves {
+a.tc-tiddlylink-resolves {
 }
 
-a.tw-tiddlylink-shadow {
+a.tc-tiddlylink-shadow {
 	font-weight: bold;
 }
 
-a.tw-tiddlylink-shadow.tw-tiddlylink-resolves {
+a.tc-tiddlylink-shadow.tc-tiddlylink-resolves {
 	font-weight: normal;
 }
 
-a.tw-tiddlylink-missing {
+a.tc-tiddlylink-missing {
 	font-style: italic;
 }
 
-a.tw-tiddlylink-external {
+a.tc-tiddlylink-external {
 	text-decoration: underline;
 	color: <<colour external-link-foreground>>;
 	background-color: <<colour external-link-background>>;
 }
 
-a.tw-tiddlylink-external:visited {
+a.tc-tiddlylink-external:visited {
 	color: <<colour external-link-foreground-visited>>;
 	background-color: <<colour external-link-background-visited>>;
 }
 
-a.tw-tiddlylink-external:hover {
+a.tc-tiddlylink-external:hover {
 	color: <<colour external-link-foreground-hover>>;
 	background-color: <<colour external-link-background-hover>>;
 }
@@ -247,20 +247,20 @@ button svg, button img {
 	vertical-align: middle;
 }
 
-.btn-invisible {
+.tc-btn-invisible {
 	padding: 0;
 	margin: 0;
 	background: none;
 	border: none;
 }
 
-.btn-icon svg {
+.tc-btn-icon svg {
 	height: 1em;
 	width: 1em;
 	fill: <<colour muted-foreground>>;
 }
 
-.btn-big-green {
+.tc-btn-big-green {
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
 	background: <<colour download-background>>;
@@ -288,7 +288,7 @@ button svg, button img {
 	color: <<colour sidebar-muted-foreground-hover>>;
 }
 
-button svg.tw-image-button, button .tw-image-button img {
+button svg.tc-image-button, button .tc-image-button img {
 	height: 1em;
 	width: 1em;
 }
@@ -371,21 +371,21 @@ button.tw-tag-label, span.tw-tag-label {
 	fill: <<colour foreground>>;
 }
 
-.sidebar-header {
+.tc-sidebar-header {
 	color: <<colour sidebar-foreground>>;
 	fill: <<colour sidebar-foreground>>;
 }
 
-.sidebar-header .title a.tw-tiddlylink-resolves {
+.tc-sidebar-header .tc-title a.tc-tiddlylink-resolves {
 	font-weight: 300;
 }
 
-.sidebar-header .tw-sidebar-lists p {
+.tc-sidebar-header .tw-sidebar-lists p {
 	margin-top: 3px;
 	margin-bottom: 3px;
 }
 
-.sidebar-header .tw-missing-tiddler-label {
+.tc-sidebar-header .tw-missing-tiddler-label {
 	color: <<colour sidebar-foreground>>;
 }
 
@@ -410,7 +410,7 @@ button.tw-tag-label, span.tw-tag-label {
 	margin-right: 0.5em;
 }
 
-.tw-page-controls a.tw-tiddlylink:hover {
+.tw-page-controls a.tc-tiddlylink:hover {
 	text-decoration: none;
 }
 
@@ -442,7 +442,7 @@ button.tw-tag-label, span.tw-tag-label {
 	padding-left: 7px;
 }
 
-.story-river {
+.tc-story-river {
 	position: relative;
 }
 
@@ -453,12 +453,12 @@ button.tw-tag-label, span.tw-tag-label {
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	.sidebar-header {
+	.tc-sidebar-header {
 		padding: 14px;
 		min-height: 32px;
 	}
 
-	.story-river {
+	.tc-story-river {
 		position: relative;
 		padding: 0;
 	}
@@ -483,7 +483,7 @@ button.tw-tag-label, span.tw-tag-label {
 		padding: 71px 0 28px 42px;
 	}
 
-	.story-river {
+	.tc-story-river {
 		position: relative;
 		left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
@@ -493,7 +493,7 @@ button.tw-tag-label, span.tw-tag-label {
 
 <<if-no-sidebar "
 
-	.story-river {
+	.tc-story-river {
 		width: auto;
 	}
 
@@ -507,16 +507,16 @@ button.tw-tag-label, span.tw-tag-label {
 		background-color: transparent;
 	}
 
-	.sidebar-header, .tw-topbar {
+	.tc-sidebar-header, .tw-topbar {
 		display: none;
 	}
 
-	.story-river {
+	.tc-story-river {
 		margin: 0;
 		padding: 0;
 	}
 
-	.story-river .tw-tiddler-frame {
+	.tc-story-river .tw-tiddler-frame {
 		margin: 0;
 		border: none;
 		padding: 28px;
@@ -616,7 +616,7 @@ button.tw-tag-label, span.tw-tag-label {
 	font-weight: 300;
 }
 
-.tw-tiddler-missing .title {
+.tw-tiddler-missing .tc-title {
   font-style: italic;
   font-weight: normal;
 }
@@ -642,7 +642,7 @@ button.tw-tag-label, span.tw-tag-label {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tw-tiddler-controls button.btn-invisible:hover svg {
+.tw-tiddler-controls button.tc-btn-invisible:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
@@ -657,7 +657,7 @@ button.tw-tag-label, span.tw-tag-label {
 	margin-top: 14px;
 }
 
-.tw-tiddler-help a.tw-tiddlylink {
+.tw-tiddler-help a.tc-tiddlylink {
 	color: <<colour very-muted-foreground>>;
 }
 
@@ -705,39 +705,39 @@ canvas.tw-edit-bitmapeditor  {
 ** Toolbar buttons
 */
 
-.tw-page-controls svg.tw-image-new-button {
+.tw-page-controls svg.tc-image-new-button {
   fill: <<colour toolbar-new-button>>;
 }
 
-.tw-page-controls svg.tw-image-options-button {
+.tw-page-controls svg.tc-image-options-button {
   fill: <<colour toolbar-options-button>>;
 }
 
-.tw-page-controls svg.tw-image-save-button {
+.tw-page-controls svg.tc-image-save-button {
   fill: <<colour toolbar-save-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-info-button {
+.tw-tiddler-controls button svg.tc-image-info-button {
   fill: <<colour toolbar-info-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-edit-button {
+.tw-tiddler-controls button svg.tc-image-edit-button {
   fill: <<colour toolbar-edit-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-close-button {
+.tw-tiddler-controls button svg.tc-image-close-button {
   fill: <<colour toolbar-close-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-delete-button {
+.tw-tiddler-controls button svg.tc-image-delete-button {
   fill: <<colour toolbar-delete-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-cancel-button {
+.tw-tiddler-controls button svg.tc-image-cancel-button {
   fill: <<colour toolbar-cancel-button>>;
 }
 
-.tw-tiddler-controls button svg.tw-image-done-button {
+.tw-tiddler-controls button svg.tc-image-done-button {
   fill: <<colour toolbar-done-button>>;
 }
 
@@ -750,7 +750,7 @@ canvas.tw-edit-bitmapeditor  {
 	font-style: normal;
 }
 
-.tw-edit-type-dropdown a.tw-tiddlylink-missing {
+.tw-edit-type-dropdown a.tc-tiddlylink-missing {
 	font-style: normal;
 }
 
@@ -879,7 +879,7 @@ canvas.tw-edit-bitmapeditor  {
 	fill: <<colour foreground>>;
 }
 
-.tw-drop-down button.btn-invisible:hover svg {
+.tw-drop-down button.tc-btn-invisible:hover svg {
 	fill: <<colour foreground>>;
 }
 
@@ -973,7 +973,7 @@ canvas.tw-edit-bitmapeditor  {
 ** Modals
 */
 
-.modal-wrapper {
+.tc-modal-wrapper {
 	position: fixed;
 	overflow: auto;
 	overflow-y: scroll;
@@ -983,7 +983,7 @@ canvas.tw-edit-bitmapeditor  {
 	left: 0;
 }
 
-.modal-backdrop {
+.tc-modal-backdrop {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -993,49 +993,49 @@ canvas.tw-edit-bitmapeditor  {
 	background-color: <<colour modal-backdrop>>;
 }
 
-.modal {
+.tc-modal {
 	z-index: 1100;
 	background-color: <<colour modal-background>>;
 	border: 1px solid <<colour modal-border>>;
 }
 
 @media (max-width: 55em) {
-	.modal {
+	.tc-modal {
 		position: fixed;
 		top: 1em;
 		left: 1em;
 		right: 1em;
 	}
 
-	.modal-body {
+	.tc-modal-body {
 		overflow-y: auto;
 		max-height: 400px;
 	}
 }
 
 @media (min-width: 55em) {
-	.modal {
+	.tc-modal {
 		position: relative;
 		width: 50%;
 		margin: 30px auto;
 	}
 }
 
-.modal-header {
+.tc-modal-header {
 	padding: 9px 15px;
 	border-bottom: 1px solid <<colour modal-header-border>>;
 }
 
-.modal-header h3 {
+.tc-modal-header h3 {
 	margin: 0;
 	line-height: 30px;
 }
 
-.modal-body {
+.tc-modal-body {
 	padding: 15px;
 }
 
-.modal-footer {
+.tc-modal-footer {
 	padding: 14px 15px 15px;
 	margin-bottom: 0;
 	text-align: right;
@@ -1266,7 +1266,7 @@ canvas.tw-edit-bitmapeditor  {
 	background: repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
 }
 
-a.tw-tiddlylink.tw-plugin-info:hover {
+a.tc-tiddlylink.tw-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
 	color: <<colour background>>;
@@ -1323,7 +1323,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 	border: 8px;
 }
 
-.tw-chooser-item a.tw-tiddlylink {
+.tw-chooser-item a.tc-tiddlylink {
 	display: block;
 	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
@@ -1331,7 +1331,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 	margin: 4px;
 }
 
-.tw-chooser-item a.tw-tiddlylink:hover {
+.tw-chooser-item a.tc-tiddlylink:hover {
 	text-decoration: none;
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;

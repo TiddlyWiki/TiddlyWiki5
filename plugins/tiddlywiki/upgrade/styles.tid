@@ -17,20 +17,20 @@ tags: $:/tags/stylesheet
 	overflow: hidden;
 }
 
-.tw-upgrade-wizard svg.tw-image-download-button {
+.tw-upgrade-wizard svg.tc-image-download-button {
 	width: 14em;
 	height: 14em;
 	fill: <<colour muted-foreground>>;
 }
 
-.tw-upgrade-wizard:hover svg.tw-image-download-button {
+.tw-upgrade-wizard:hover svg.tc-image-download-button {
 	fill: <<colour foreground>>;
 }
 
-.tw-upgrade-wizard svg .tw-image-download-button-ring {
+.tw-upgrade-wizard svg .tc-image-download-button-ring {
 }
 
-.tw-upgrade-wizard:hover svg .tw-image-download-button-ring {
+.tw-upgrade-wizard:hover svg .tc-image-download-button-ring {
 	fill: <<colour primary>>;
 }
 

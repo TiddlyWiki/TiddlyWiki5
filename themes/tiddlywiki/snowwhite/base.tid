@@ -3,7 +3,7 @@ tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-.sidebar-header {
+.tc-sidebar-header {
 	text-shadow: 0 1px 0 <<colour sidebar-foreground-shadow>>;
 }
 
@@ -63,12 +63,12 @@ canvas.tw-edit-bitmapeditor  {
 	-webkit-filter: blur(4px);
 }
 
-.modal {
+.tc-modal {
 	border-radius: 6px;
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
 }
 
-.modal-footer {
+.tc-modal-footer {
 	border-radius: 0 0 6px 6px;
 	<<box-shadow "inset 0 1px 0 #fff">>;
 }

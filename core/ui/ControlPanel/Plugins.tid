@@ -18,12 +18,12 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 \define plugin-table-body(type,disabledMessage)
 <div class="tw-plugin-info-chunk">
 <$reveal type="nomatch" state=<<popup-state>> text="yes">
-<$button class="btn-invisible btn-dropdown" set=<<popup-state>> setTo="yes">
+<$button class="tc-btn-invisible btn-dropdown" set=<<popup-state>> setTo="yes">
 {{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
 <$reveal type="match" state=<<popup-state>> text="yes">
-<$button class="btn-invisible btn-dropdown" set=<<popup-state>> setTo="no">
+<$button class="tc-btn-invisible btn-dropdown" set=<<popup-state>> setTo="no">
 {{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
