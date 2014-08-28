@@ -2,7 +2,7 @@ title: $:/core/ui/SideBarLists
 
 <div class="tw-sidebar-lists">
 
-<div class="tw-search">
+<div class="tc-search">
 <$edit-text tiddler="$:/temp/search" type="search" tag="input"/>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$linkcatcher to="$:/temp/search">
@@ -15,7 +15,7 @@ title: $:/core/ui/SideBarLists
 
 <$reveal state="$:/temp/search" type="nomatch" text="">
 
-<div class="tw-search-results">
+<div class="tc-search-results">
 
 {{$:/language/Search/Matches}}
 

@@ -79,7 +79,7 @@ dl dt {
 	margin-top: 6px;
 }
 
-.tw-muted {
+.tc-muted {
 	color: <<colour muted-foreground>>;
 }
 
@@ -389,15 +389,15 @@ button.tw-tag-label, span.tw-tag-label {
 	color: <<colour sidebar-foreground>>;
 }
 
-.tw-advanced-search input {
+.tc-advanced-search input {
 	width: 60%;
 }
 
-.tw-search a svg {
+.tc-search a svg {
 	height: 0.75em;
 }
 
-.tw-search-results {
+.tc-search-results {
 	padding-top: 14px;
 }
 
@@ -670,7 +670,7 @@ button.tw-tag-label, span.tw-tag-label {
 	margin: 4px 0 4px 0;
 }
 
-.tc-tiddler-frame .tw-binary-warning {
+.tc-tiddler-frame .tc-binary-warning {
 	width: 100%;
 	height: 5em;
 	text-align: center;
@@ -937,11 +937,11 @@ canvas.tc-edit-bitmapeditor  {
 	padding: 0 0.5em 0 0.5em;
 }
 
-.tw-block-dropdown-wrapper {
+.tc-block-dropdown-wrapper {
 	position: relative;
 }
 
-.tw-block-dropdown {
+.tc-block-dropdown {
 	position: absolute;
 	min-width: 280px;
 	border: 1px solid <<colour dropdown-border>>;
@@ -952,18 +952,18 @@ canvas.tc-edit-bitmapeditor  {
 	z-index: 1000;
 }
 
-.tw-block-dropdown a {
+.tc-block-dropdown a {
 	display: block;
 	padding: 4px 14px 4px 14px;
 }
 
 .tc-drop-down .tc-dropdown-item,
-.tw-block-dropdown .tc-dropdown-item {
+.tc-block-dropdown .tc-dropdown-item {
 	padding: 4px 14px 4px 7px;
 	color: <<colour muted-foreground>>;
 }
 
-.tw-block-dropdown a:hover {
+.tc-block-dropdown a:hover {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
@@ -1062,7 +1062,7 @@ canvas.tc-edit-bitmapeditor  {
 ** Tabs
 */
 
-.tw-tab-set.tw-vertical {
+.tw-tab-set.tc-vertical {
 	display: -webkit-flex;
 	display: flex;
 }
@@ -1073,7 +1073,7 @@ canvas.tc-edit-bitmapeditor  {
 	margin-bottom: -1px;
 }
 
-.tw-tab-buttons.tw-vertical  {
+.tw-tab-buttons.tc-vertical  {
 	z-index: 100;
 	display: block;
 	padding-top: 14px;
@@ -1106,7 +1106,7 @@ canvas.tc-edit-bitmapeditor  {
 	border-right: 1px solid <<colour tab-border>>;
 }
 
-.tw-tab-buttons.tw-vertical button {
+.tw-tab-buttons.tc-vertical button {
 	display: block;
 	width: 100%;
 	margin-top: 3px;
@@ -1117,7 +1117,7 @@ canvas.tc-edit-bitmapeditor  {
 	border-right: none;
 }
 
-.tw-tab-buttons.tw-vertical button.tw-tab-selected {
+.tw-tab-buttons.tc-vertical button.tw-tab-selected {
 	background-color: <<colour tab-background-selected>>;
 	border-right: 1px solid <<colour tab-background-selected>>;
 }
@@ -1126,7 +1126,7 @@ canvas.tc-edit-bitmapeditor  {
 	border-top: 1px solid <<colour tab-divider>>;
 }
 
-.tw-tab-divider.tw-vertical  {
+.tw-tab-divider.tc-vertical  {
 	display: none;
 }
 
@@ -1134,7 +1134,7 @@ canvas.tc-edit-bitmapeditor  {
 	margin-top: 14px;
 }
 
-.tw-tab-content.tw-vertical  {
+.tw-tab-content.tc-vertical  {
 	display: inline-block;
 	vertical-align: top;
 	padding-top: 0;
@@ -1182,7 +1182,7 @@ canvas.tc-edit-bitmapeditor  {
 ** Alerts
 */
 
-.tw-alerts {
+.tc-alerts {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -1190,7 +1190,7 @@ canvas.tc-edit-bitmapeditor  {
 	z-index: 20000;
 }
 
-.tw-alert {
+.tc-alert {
 	position: relative;
 	margin: 28px;
 	padding: 14px 14px 14px 14px;
@@ -1198,22 +1198,22 @@ canvas.tc-edit-bitmapeditor  {
 	background-color: <<colour alert-background>>;
 }
 
-.tw-alert-toolbar {
+.tc-alert-toolbar {
 	position: absolute;
 	top: 14px;
 	right: 14px;
 }
 
-.tw-alert-toolbar svg {
+.tc-alert-toolbar svg {
 	fill: <<colour alert-muted-foreground>>;
 }
 
-.tw-alert-subtitle {
+.tc-alert-subtitle {
 	color: <<colour alert-muted-foreground>>;
 	font-weight: bold;
 }
 
-.tw-alert-highlight {
+.tc-alert-highlight {
 	color: <<colour alert-highlight>>;	
 }
 
@@ -1240,11 +1240,11 @@ canvas.tc-edit-bitmapeditor  {
 ** Control panel
 */
 
-.tw-control-panel td {
+.tc-control-panel td {
 	padding: 4px;
 }
 
-.tw-control-panel table, .tw-control-panel table input, .tw-control-panel table textarea {
+.tc-control-panel table, .tc-control-panel table input, .tc-control-panel table textarea {
 	width: 100%;
 }
 

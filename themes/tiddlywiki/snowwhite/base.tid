@@ -54,7 +54,7 @@ canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
 
-.tw-block-dropdown {
+.tc-block-dropdown {
 	border-radius: 4px;
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
@@ -74,7 +74,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 
-.tw-alert {
+.tc-alert {
 	border-radius: 6px;
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.6)">>
 }

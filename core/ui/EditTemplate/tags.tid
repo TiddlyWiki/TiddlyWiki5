@@ -23,11 +23,11 @@ background-color:$(backgroundColor)$;
 </span>
 </div>
 
-<div class="tw-block-dropdown-wrapper">
+<div class="tc-block-dropdown-wrapper">
 
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 
-<div class="tw-block-dropdown">
+<div class="tc-block-dropdown">
 
 <$linkcatcher set="$:/temp/NewTagName" setTo="" message="tw-add-tag">
 <$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]">

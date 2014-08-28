@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 GettingStarted - $(browser-name)$
 \end
 <$set name="browser-name" value={{$:/info/browser/name}}>
-<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tw-vertical"/>
+<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
 </$set>
 
 See also:

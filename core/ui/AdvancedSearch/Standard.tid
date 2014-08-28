@@ -7,13 +7,13 @@ caption: {{$:/language/Search/Standard/Caption}}
 
 <<lingo Standard/Hint>>
 
-<div class="tw-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tc-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
 </$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
-<div class="tw-search-results">
+<div class="tc-search-results">
 
 <<lingo Standard/Matches>>
 

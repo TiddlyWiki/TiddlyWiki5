@@ -57,7 +57,7 @@ TiddlerWidget.prototype.getTagClasses = function() {
 	if(tiddler) {
 		var tags = [];
 		$tw.utils.each(tiddler.fields.tags,function(tag) {
-			tags.push("tw-tagged-" + encodeURIComponent(tag));
+			tags.push("tc-tagged-" + encodeURIComponent(tag));
 		});
 		return tags.join(" ");
 	} else {
