@@ -1,3 +1,3 @@
 title: $:/editions/tw5.com/snippets/download-empty-button
 
-<$button message="tw-download-file" param="$:/editions/tw5.com/download-empty" class="btn-big-green">Download Empty {{$:/core/images/save-button}}</$button>
+<$button message="tw-download-file" param="$:/editions/tw5.com/download-empty" class="tc-btn-big-green">Download Empty {{$:/core/images/save-button}}</$button>
