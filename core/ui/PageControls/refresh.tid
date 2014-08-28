@@ -3,7 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/refresh-button}} {{$:/language/Buttons/Refresh/Caption}}
 description: {{$:/language/Buttons/Refresh/Hint}}
 
-<$button message="tw-browser-refresh" title={{$:/language/Buttons/Refresh/Hint}} aria-label={{$:/language/Buttons/Refresh/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-browser-refresh" title={{$:/language/Buttons/Refresh/Hint}} aria-label={{$:/language/Buttons/Refresh/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/refresh-button}}
 </$list>

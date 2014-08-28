@@ -1,10 +1,10 @@
 created: 20140226085529797
 modified: 20140226090641987
 tags: message navigator-message
-title: WidgetMessage: tw-edit-tiddler
+title: WidgetMessage: tm-edit-tiddler
 type: text/vnd.tiddlywiki
 
-The `tw-edit-tiddler` message replaces the specified tiddler in the current story with a draft version of itself. It requires the following properties on the `event` object:
+The `tm-edit-tiddler` message replaces the specified tiddler in the current story with a draft version of itself. It requires the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Title of the tiddler that is being switched to edit mode |

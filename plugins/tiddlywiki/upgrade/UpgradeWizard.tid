@@ -19,7 +19,7 @@ or click to pick a file <$browse/>
 
 <$reveal state="$:/Import!!status" type="match" text="pending">
 
-The following tiddlers will be included in the upgrade <$button message="tw-perform-import" param="$:/Import">Upgrade</$button>
+The following tiddlers will be included in the upgrade <$button message="tm-perform-import" param="$:/Import">Upgrade</$button>
 
 {{$:/Import||$:/core/ui/ImportListing}}
 

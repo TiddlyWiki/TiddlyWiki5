@@ -1,7 +1,7 @@
 title: $:/language/Modals/SaveInstructions
 type: text/vnd.tiddlywiki
 subtitle: Save your work
-footer: <$button message="tw-close-tiddler">关闭</$button>
+footer: <$button message="tm-close-tiddler">关闭</$button>
 help: http://tiddlywiki.com/static/SavingChanges.html
 
 您对此 wiki 的变更需被保存为 ~TiddlyWiki HTML 文件。

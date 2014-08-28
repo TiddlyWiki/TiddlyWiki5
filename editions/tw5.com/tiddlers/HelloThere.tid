@@ -14,7 +14,7 @@ This is version <<version-link>> of ~TiddlyWiki, a major reboot designed [[for t
 
 <div class="tc-message-box">
 
-<a class="tw-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
+<a class="tc-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
 
 !! TiddlyWikiClassic
 

@@ -21,7 +21,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$edit-text tiddler=<<currentTiddler>> field=<<currentField>> placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}}/>
 </td>
 <td class="tc-edit-field-remove">
-<$button message="tw-remove-field" param=<<currentField>> class="tc-btn-invisible">{{$:/core/images/delete-button}}</$button>
+<$button message="tm-remove-field" param=<<currentField>> class="tc-btn-invisible">{{$:/core/images/delete-button}}</$button>
 </td>
 </tr>
 </$list>
@@ -36,7 +36,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 </em> <span class="tc-edit-field-add-name">
 <$edit-text tiddler="$:/temp/newfieldname" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Name/Placeholder}} class="tc-edit-texteditor"/>
 </span> <span class="tc-edit-field-add-button">
-<$button message="tw-add-field" param={{$:/temp/newfieldname}} set="$:/temp/newfieldname" setTo="" class="">
+<$button message="tm-add-field" param={{$:/temp/newfieldname}} set="$:/temp/newfieldname" setTo="" class="">
 <<lingo Fields/Add/Button>>
 </$button>
 </span>

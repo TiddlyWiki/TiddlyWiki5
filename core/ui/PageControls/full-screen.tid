@@ -3,7 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/full-screen-button}} {{$:/language/Buttons/FullScreen/Caption}}
 description: {{$:/language/Buttons/FullScreen/Hint}}
 
-<$button message="tw-full-screen" title={{$:/language/Buttons/FullScreen/Hint}} aria-label={{$:/language/Buttons/FullScreen/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-full-screen" title={{$:/language/Buttons/FullScreen/Hint}} aria-label={{$:/language/Buttons/FullScreen/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/full-screen-button}}
 </$list>

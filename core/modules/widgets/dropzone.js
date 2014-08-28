@@ -97,7 +97,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Import any files in the drop
 	var numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
-		self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+		self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 	});
 	// Try to import the various data types we understand
 	if(numFiles === 0) {
@@ -122,7 +122,7 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 				if(!tiddlerFields.title) {
 					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
 				}
-				this.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+				this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				return;
 			}
 		}
@@ -188,7 +188,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 			if(item.kind === "file") {
 				// Import any files
 				this.wiki.readFile(item.getAsFile(),function(tiddlerFieldsArray) {
-					self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 				});
 			} else if(item.kind === "string") {
 				// Create tiddlers from string items
@@ -199,7 +199,7 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 						text: str,
 						type: type
 					};
-					self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify([tiddlerFields])});
+					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				});
 			}
 		}

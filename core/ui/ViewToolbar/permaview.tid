@@ -3,7 +3,7 @@ tags: $:/tags/ViewToolbar $:/tags/PageControls
 caption: {{$:/core/images/permaview-button}} {{$:/language/Buttons/Permaview/Caption}}
 description: {{$:/language/Buttons/Permaview/Hint}}
 
-<$button message="tw-permaview" title={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-permaview" title={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/permaview-button}}
 </$list>

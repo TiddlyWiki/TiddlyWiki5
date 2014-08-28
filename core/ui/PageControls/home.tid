@@ -3,7 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/home-button}} {{$:/language/Buttons/Home/Caption}}
 description: {{$:/language/Buttons/Home/Hint}}
 
-<$button message="tw-home" title={{$:/language/Buttons/Home/Hint}} aria-label={{$:/language/Buttons/Home/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-home" title={{$:/language/Buttons/Home/Hint}} aria-label={{$:/language/Buttons/Home/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/home-button}}
 </$list>

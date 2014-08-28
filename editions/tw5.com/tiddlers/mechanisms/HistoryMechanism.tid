@@ -13,7 +13,7 @@ The history list also maintains the field ''current-tiddler'' that contains the 
 ```
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 
-<$button message="tw-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
 
 </$list>
 ```
@@ -22,6 +22,6 @@ Which renders the same as the "Open" sidebar tab, with the addition of a tick ag
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
 
-<$button message="tw-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
+<$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
 
 </$list>

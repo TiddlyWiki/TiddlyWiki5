@@ -10,14 +10,14 @@ title: $:/snippets/paletteeditor
 
 <$list filter="[all[current]is[shadow]is[tiddler]]" variable="listItem">
 <<lingo Prompt/Modified>>
-<$button message="tw-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
+<$button message="tm-delete-tiddler" param={{$:/palette}}><<lingo Reset/Caption>></$button>
 </$list>
 
 <$list filter="[all[current]is[shadow]!is[tiddler]]" variable="listItem">
 <<lingo Clone/Prompt>>
 </$list>
 
-<$button message="tw-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
+<$button message="tm-new-tiddler" param={{$:/palette}}><<lingo Clone/Caption>></$button>
 
 <table>
 <tbody>

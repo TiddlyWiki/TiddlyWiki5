@@ -3,7 +3,7 @@ tags: $:/tags/EditToolbar
 caption: {{$:/core/images/delete-button}} {{$:/language/Buttons/Delete/Caption}}
 description: {{$:/language/Buttons/Delete/Hint}}
 
-<$button message="tw-delete-tiddler" title={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-delete-tiddler" title={{$:/language/Buttons/Delete/Hint}} aria-label={{$:/language/Buttons/Delete/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/delete-button}}
 </$list>

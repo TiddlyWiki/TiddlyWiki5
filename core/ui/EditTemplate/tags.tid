@@ -9,7 +9,7 @@ background-color:$(backgroundColor)$;
 <$fieldmangler>
 <$list filter="[all[current]tags[]sort[title]]" storyview="pop"><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tc-tag-label">
 <$view field="title" format="text" />
-<$button message="tw-remove-tag" param={{!!title}} class="tc-btn-invisible tc-remove-tag-button">&times;</$button></span>
+<$button message="tm-remove-tag" param={{!!title}} class="tc-btn-invisible tc-remove-tag-button">&times;</$button></span>
 </$set>
 </$list>
 
@@ -17,7 +17,7 @@ background-color:$(backgroundColor)$;
 <span class="tc-add-tag-name">
 <$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor"/>
 </span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
-<$button message="tw-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">
+<$button message="tm-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">
 <<lingo Tags/Add/Button>>
 </$button>
 </span>
@@ -29,7 +29,7 @@ background-color:$(backgroundColor)$;
 
 <div class="tc-block-dropdown">
 
-<$linkcatcher set="$:/temp/NewTagName" setTo="" message="tw-add-tag">
+<$linkcatcher set="$:/temp/NewTagName" setTo="" message="tm-add-tag">
 <$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]">
 <$link>
 <$set name="backgroundColor" value={{!!color}}>

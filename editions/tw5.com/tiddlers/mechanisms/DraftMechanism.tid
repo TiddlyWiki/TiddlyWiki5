@@ -8,9 +8,9 @@ Several features work in concert to give the desired behaviour for draft tiddler
 
 * The ListWidget can optionally render draft tiddlers through a different template
 * The NavigatorWidget incorporates handlers for the following events:
-** `tw-new-tiddler` for creating a new tiddler in draft mode
-** `tw-edit-tiddler` for moving a tiddler into edit mode 
-** `tw-cancel-tiddler` for cancelling a tiddler out of edit mode
-** `tw-save-tiddler` for saving a draft tiddler
+** `tm-new-tiddler` for creating a new tiddler in draft mode
+** `tm-edit-tiddler` for moving a tiddler into edit mode 
+** `tm-cancel-tiddler` for cancelling a tiddler out of edit mode
+** `tm-save-tiddler` for saving a draft tiddler
 * Draft tiddlers are automatically excluded from search operations
 

@@ -110,7 +110,7 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 	// Send the click on it's way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
-		type: "tw-navigate",
+		type: "tm-navigate",
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,

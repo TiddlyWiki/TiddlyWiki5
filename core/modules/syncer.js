@@ -48,13 +48,13 @@ function Syncer(options) {
 			return confirmationMessage;
 		});
 		// Listen out for login/logout/refresh events in the browser
-		$tw.rootWidget.addEventListener("tw-login",function() {
+		$tw.rootWidget.addEventListener("tm-login",function() {
 			self.handleLoginEvent();
 		});
-		$tw.rootWidget.addEventListener("tw-logout",function() {
+		$tw.rootWidget.addEventListener("tm-logout",function() {
 			self.handleLogoutEvent();
 		});
-		$tw.rootWidget.addEventListener("tw-server-refresh",function() {
+		$tw.rootWidget.addEventListener("tm-server-refresh",function() {
 			self.handleRefreshEvent();
 		});
 	}

@@ -62,13 +62,13 @@ function SaverHandler(options) {
     }
     // Install the save action handlers
     if($tw.browser) {
-        $tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
+        $tw.rootWidget.addEventListener("tm-save-wiki",function(event) {
             self.saveWiki({
                 template: event.param,
                 downloadType: "text/plain"
             });
         });
-        $tw.rootWidget.addEventListener("tw-download-file",function(event) {
+        $tw.rootWidget.addEventListener("tm-download-file",function(event) {
             self.saveWiki({
                 method: "download",
                 template: event.param,

@@ -34,7 +34,7 @@ CecilyStoryView.prototype.navigateTo = function(historyInfo) {
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
 	// Scroll the node into view
-	this.listWidget.dispatchEvent({type: "tw-scroll", target: targetElement});
+	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 };
 
 CecilyStoryView.prototype.insert = function(widget) {

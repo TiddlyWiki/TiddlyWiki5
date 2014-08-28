@@ -3,7 +3,7 @@ tags: $:/tags/EditToolbar
 caption: {{$:/core/images/done-button}} {{$:/language/Buttons/Save/Caption}}
 description: {{$:/language/Buttons/Save/Hint}}
 
-<$button message="tw-save-tiddler" title={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class=<<tw-config-toolbar-class>>>
+<$button message="tm-save-tiddler" title={{$:/language/Buttons/Save/Hint}} aria-label={{$:/language/Buttons/Save/Caption}} class=<<tw-config-toolbar-class>>>
 <$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/done-button}}
 </$list>
