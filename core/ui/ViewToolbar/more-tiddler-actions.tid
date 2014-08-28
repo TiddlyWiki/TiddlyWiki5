@@ -15,7 +15,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 <$set name="tw-config-toolbar-icons" value="yes">
 <$set name="tw-config-toolbar-text" value="yes">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]" variable="listItem">

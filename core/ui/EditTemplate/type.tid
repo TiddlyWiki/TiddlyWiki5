@@ -9,7 +9,7 @@ tags: $:/tags/EditTemplate
 <div class="tw-block-dropdown tw-edit-type-dropdown">
 <$linkcatcher to="!!type">
 <$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
-<div class="tw-dropdown-item">
+<div class="tc-dropdown-item">
 <$text text={{!!group}}/>
 </div>
 <$list filter="[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]group{!!group}] +[sort[description]]"><$link to={{!!name}}><$view field="description"/> (<$view field="name"/>)</$link>

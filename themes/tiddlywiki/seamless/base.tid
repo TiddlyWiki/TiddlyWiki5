@@ -16,7 +16,7 @@ Rules copied from Snow White
 	<<filter "drop-shadow(0px -1px 2px rgba(0,0,0,0.25))">>
 }
 
-.tw-drop-down {
+.tc-drop-down {
 	border-radius: 4px;
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
@@ -45,7 +45,7 @@ Rules copied from Snow White
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.6)">>
 }
 
-.tw-notification {
+.tc-notification {
 	border-radius: 6px;
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
 	text-shadow: 0 1px 0 rgba(255,255,255, 0.8);

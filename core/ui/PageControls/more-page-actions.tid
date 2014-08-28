@@ -16,7 +16,7 @@ $:/config/PageControlButtons/Visibility/$(listItem)$
 </$button>
 <$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 
 <$set name="tw-config-toolbar-icons" value="yes">
 

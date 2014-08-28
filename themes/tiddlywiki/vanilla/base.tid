@@ -117,7 +117,7 @@ table tfoot tr td {
 	background-color: <<colour table-footer-background>>;
 }
 
-.tw-csv-table {
+.tc-csv-table {
 	white-space: nowrap;
 }
 
@@ -218,11 +218,11 @@ a.tc-tiddlylink-external:hover {
 	background-color: <<colour page-background>>;
 }
 
-.tw-dropzone {
+.tc-dropzone {
 	position: relative;
 }
 
-.tw-dropzone.tw-dragover:before {
+.tc-dropzone.tc-dragover:before {
 	z-index: 10000;
 	display: block;
 	position: absolute;
@@ -625,7 +625,7 @@ button.tw-tag-label, span.tw-tag-label {
 	float: right;
 }
 
-.tw-tiddler-controls .tw-drop-down {
+.tw-tiddler-controls .tc-drop-down {
 	font-size: 0.6em;
 }
 
@@ -860,11 +860,11 @@ canvas.tw-edit-bitmapeditor  {
 	fill: <<colour muted-foreground>>;
 }
 
-.tw-drop-down-wrapper {
+.tc-drop-down-wrapper {
 	position: relative;
 }
 
-.tw-drop-down {
+.tc-drop-down {
 	min-width: 280px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
@@ -875,28 +875,28 @@ canvas.tw-edit-bitmapeditor  {
 	line-height: 1.4;
 }
 
-.tw-drop-down button svg, .tw-drop-down a svg  {
+.tc-drop-down button svg, .tc-drop-down a svg  {
 	fill: <<colour foreground>>;
 }
 
-.tw-drop-down button.tc-btn-invisible:hover svg {
+.tc-drop-down button.tc-btn-invisible:hover svg {
 	fill: <<colour foreground>>;
 }
 
-.tw-drop-down p {
+.tc-drop-down p {
 	padding: 0 14px 0 14px;
 }
 
-.tw-drop-down svg {
+.tc-drop-down svg {
 	width: 1em;
 	height: 1em;
 }
 
-.tw-drop-down img {
+.tc-drop-down img {
 	width: 1em;
 }
 
-.tw-drop-down a, .tw-drop-down button {
+.tc-drop-down a, .tc-drop-down button {
 	display: block;
 	padding: 0 14px 0 14px;
 	width: 100%;
@@ -905,35 +905,35 @@ canvas.tw-edit-bitmapeditor  {
 	line-height: 1.4;
 }
 
-.tw-drop-down .tw-file-input-wrapper {
+.tc-drop-down .tw-file-input-wrapper {
 	width: 100%;
 }
 
-.tw-drop-down .tw-file-input-wrapper button {
+.tc-drop-down .tw-file-input-wrapper button {
 	color: <<colour foreground>>;
 }
 
-.tw-drop-down a:hover, .tw-drop-down button:hover, .tw-drop-down .tw-file-input-wrapper:hover button {
+.tc-drop-down a:hover, .tc-drop-down button:hover, .tc-drop-down .tw-file-input-wrapper:hover button {
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
 	text-decoration: none;
 }
 
-.tw-drop-down .tw-tab-buttons button {
+.tc-drop-down .tw-tab-buttons button {
 	background-color: <<colour dropdown-tab-background>>;
 }
 
-.tw-drop-down .tw-tab-buttons button.tw-tab-selected {
+.tc-drop-down .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour dropdown-tab-background-selected>>;
 	border-bottom: 1px solid <<colour dropdown-tab-background-selected>>;
 }
 
-.tw-drop-down-bullet {
+.tc-drop-down-bullet {
 	display: inline-block;
 	width: 0.5em;
 }
 
-.tw-drop-down .tw-tab-contents a {
+.tc-drop-down .tw-tab-contents a {
 	padding: 0 0.5em 0 0.5em;
 }
 
@@ -957,8 +957,8 @@ canvas.tw-edit-bitmapeditor  {
 	padding: 4px 14px 4px 14px;
 }
 
-.tw-drop-down .tw-dropdown-item,
-.tw-block-dropdown .tw-dropdown-item {
+.tc-drop-down .tc-dropdown-item,
+.tw-block-dropdown .tc-dropdown-item {
 	padding: 4px 14px 4px 7px;
 	color: <<colour muted-foreground>>;
 }
@@ -1047,7 +1047,7 @@ canvas.tw-edit-bitmapeditor  {
 ** Notifications
 */
 
-.tw-notification {
+.tc-notification {
 	position: fixed;
 	top: 14px;
 	right: 42px;
@@ -1421,7 +1421,7 @@ a.tc-tiddlylink.tw-plugin-info:hover {
 ** Dirty indicator
 */
 
-body.tw-dirty span.tw-dirty-indicator, body.tw-dirty span.tw-dirty-indicator svg {
+body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg {
 	fill: <<colour dirty-indicator>>;
 	color: <<colour dirty-indicator>>;
 }

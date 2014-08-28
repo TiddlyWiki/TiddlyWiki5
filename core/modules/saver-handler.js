@@ -160,11 +160,11 @@ SaverHandler.prototype.isDirty = function() {
 };
 
 /*
-Update the document body with the class "tw-dirty" if the wiki has unsaved/unsynced changes
+Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
 */
 SaverHandler.prototype.updateDirtyStatus = function() {
     if($tw.browser) {
-        $tw.utils.toggleClass(document.body,"tw-dirty",this.isDirty());
+        $tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
     }
 };
 

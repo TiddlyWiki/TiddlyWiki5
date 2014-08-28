@@ -35,7 +35,7 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create element
 	var domNode = this.document.createElement("div");
-	domNode.className = "tw-dropzone";
+	domNode.className = "tc-dropzone";
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
 		{name: "dragenter", handlerObject: this, handlerMethod: "handleDragEnterEvent"},
@@ -57,7 +57,7 @@ DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
 	this.dragEnterCount = (this.dragEnterCount || 0) + 1;
 	// If we're entering for the first time we need to apply highlighting
 	if(this.dragEnterCount === 1) {
-		$tw.utils.addClass(this.domNodes[0],"tw-dragover");
+		$tw.utils.addClass(this.domNodes[0],"tc-dragover");
 	}
 	// Tell the browser that we're ready to handle the drop
 	event.preventDefault();
@@ -80,7 +80,7 @@ DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
 	this.dragEnterCount = (this.dragEnterCount || 0) - 1;
 	// Remove highlighting if we're leaving externally
 	if(this.dragEnterCount <= 0) {
-		$tw.utils.removeClass(this.domNodes[0],"tw-dragover");
+		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	}
 };
 
@@ -94,7 +94,7 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	// Reset the enter count
 	this.dragEnterCount = 0;
 	// Remove highlighting
-	$tw.utils.removeClass(this.domNodes[0],"tw-dragover");
+	$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
 	// Import any files in the drop
 	var numFiles = this.wiki.readFiles(dataTransfer.files,function(tiddlerFieldsArray) {
 		self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});

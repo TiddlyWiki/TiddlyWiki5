@@ -9,7 +9,7 @@ background-color:$(backgroundColor)$;
 <$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
 </$button>
 </$set>
-<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tw-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
 <$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
 </div>

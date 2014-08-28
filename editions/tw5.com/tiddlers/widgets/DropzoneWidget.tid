@@ -15,7 +15,7 @@ The dropzone widget has no attributes, and displays any contained content within
 
 ! Display
 
-The dropzone widget creates an HTML `<div class="tw-dropzone">` to contain its content. During a drag operation the class `tw-dragover` is added. CSS is used to provide user feedback.
+The dropzone widget creates an HTML `<div class="tc-dropzone">` to contain its content. During a drag operation the class `tc-dragover` is added. CSS is used to provide user feedback.
 
 ! Data types supported
 
