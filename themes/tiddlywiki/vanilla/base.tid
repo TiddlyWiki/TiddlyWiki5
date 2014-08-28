@@ -973,7 +973,7 @@ canvas.tw-edit-bitmapeditor  {
 ** Modals
 */
 
-.modal-wrapper {
+.tc-modal-wrapper {
 	position: fixed;
 	overflow: auto;
 	overflow-y: scroll;
@@ -983,7 +983,7 @@ canvas.tw-edit-bitmapeditor  {
 	left: 0;
 }
 
-.modal-backdrop {
+.tc-modal-backdrop {
 	position: fixed;
 	top: 0;
 	right: 0;
@@ -993,49 +993,49 @@ canvas.tw-edit-bitmapeditor  {
 	background-color: <<colour modal-backdrop>>;
 }
 
-.modal {
+.tc-modal {
 	z-index: 1100;
 	background-color: <<colour modal-background>>;
 	border: 1px solid <<colour modal-border>>;
 }
 
 @media (max-width: 55em) {
-	.modal {
+	.tc-modal {
 		position: fixed;
 		top: 1em;
 		left: 1em;
 		right: 1em;
 	}
 
-	.modal-body {
+	.tc-modal-body {
 		overflow-y: auto;
 		max-height: 400px;
 	}
 }
 
 @media (min-width: 55em) {
-	.modal {
+	.tc-modal {
 		position: relative;
 		width: 50%;
 		margin: 30px auto;
 	}
 }
 
-.modal-header {
+.tc-modal-header {
 	padding: 9px 15px;
 	border-bottom: 1px solid <<colour modal-header-border>>;
 }
 
-.modal-header h3 {
+.tc-modal-header h3 {
 	margin: 0;
 	line-height: 30px;
 }
 
-.modal-body {
+.tc-modal-body {
 	padding: 15px;
 }
 
-.modal-footer {
+.tc-modal-footer {
 	padding: 14px 15px 15px;
 	margin-bottom: 0;
 	text-align: right;
