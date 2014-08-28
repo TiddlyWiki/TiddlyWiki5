@@ -9,7 +9,7 @@ Basic styles used before we boot up the parsing engine
 Error message and password prompt
 */
 
-.tw-password-wrapper, .tw-error-form {
+.tc-password-wrapper, .tw-error-form {
     font-family: sans-serif;
 	z-index: 20000;
 	position: fixed;
@@ -40,23 +40,23 @@ Error message and password prompt
 	text-shadow: none;
 }
 
-.tw-password-wrapper {
+.tc-password-wrapper {
 	color: #000;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 	background-color: rgb(197, 235, 183);
 	border: 8px solid rgb(164, 197, 152);
 }
 
-.tw-password-wrapper form {
+.tc-password-wrapper form {
 	text-align: left;
 }
 
-.tw-password-wrapper h1 {
+.tc-password-wrapper h1 {
 	font-size: 16px;
 	line-height: 20px;
 	padding-bottom: 16px;
 }
 
-.tw-password-wrapper input {
+.tc-password-wrapper input {
 	width: 100%;
 }

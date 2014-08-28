@@ -447,7 +447,7 @@ $tw.utils.PasswordPrompt = function() {
 	// Store of pending password prompts
 	this.passwordPrompts = [];
 	// Create the wrapper
-	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tw-password-wrapper"});
+	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tc-password-wrapper"});
 	document.body.appendChild(this.promptWrapper);
 	// Hide the empty wrapper
 	this.setWrapperDisplay();
