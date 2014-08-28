@@ -55,7 +55,6 @@ Modal.prototype.display = function(title,options) {
 	$tw.utils.addClass(modalWrapper,"modal");
 	$tw.utils.addClass(modalHeader,"modal-header");
 	$tw.utils.addClass(modalBody,"modal-body");
-	$tw.utils.addClass(modalLink,"btn btn-large btn-block btn-success");
 	$tw.utils.addClass(modalFooter,"modal-footer");
 	// Join them together
 	wrapper.appendChild(modalBackdrop);
@@ -115,10 +114,6 @@ Modal.prototype.display = function(title,options) {
 				message: {
 					type: "string",
 					value: "tw-close-tiddler"
-				},
-				"class": {
-					type: "string",
-					value: "btn btn-primary"
 				}
 			},
 			children: [{

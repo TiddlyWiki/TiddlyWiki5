@@ -5,7 +5,7 @@ title: Features
 type: text/vnd.tiddlywiki
 
 \define alert-demo()
-<$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tw-add-tag" param="$:/tags/Alert" class="btn btn-inverse">alerts</$button></$set></$fieldmangler>
+<$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tw-add-tag" param="$:/tags/Alert">alerts</$button></$set></$fieldmangler>
 \end
 * The ability to save changes on almost any desktop HTML5 compatible-browser, with custom apps to enable [[Saving on iPad/iPhone]] and [[Android|Saving on Android]], and a cross-platform [[Firefox extension|Saving with TiddlyFox]] that even runs on Android
 * Support for pluggable themes and colour palettes (see the [[control panel|$:/ControlPanel]])
@@ -15,7 +15,7 @@ type: text/vnd.tiddlywiki
 * Integrated [[AES encryption|Saving with Encryption]]
 * TiddlyWiki isn't just a wiki - you can build custom applications with it like this TaskManagementExample
 * Full internationalization support, with TiddlyWiki itself available in several languages (see the [[control panel|$:/ControlPanel]])
-* Familiar user interface elements like <<alert-demo>>, <$button message="tw-modal" param="SampleWizard" class="btn btn-inverse">wizards</$button> and <$button message="tw-notify" param="SampleNotification" class="btn btn-inverse">notifications</$button>
+* Familiar user interface elements like <<alert-demo>>, <$button message="tw-modal" param="SampleWizard">wizards</$button> and <$button message="tw-notify" param="SampleNotification">notifications</$button>
 * Easily [[import|ImportTiddlers]] content via drag and drop, copy and paste, or browsing for local files
 * Clone existing tiddlers (for example, <$button message="tw-new-tiddler" param=<<currentTiddler>>>clone this tiddler</$button>)
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
