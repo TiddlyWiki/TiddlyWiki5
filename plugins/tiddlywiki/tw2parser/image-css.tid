@@ -1,0 +1,11 @@
+tags: $:/tags/stylesheet
+title: $:/plugins/tiddlywiki/tw2parser/image-css
+type: text/plain
+
+.classic-image-left{
+     float: left;
+}
+
+.classic-image-right{
+     float: right;
+}

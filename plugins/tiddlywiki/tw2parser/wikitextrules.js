@@ -491,6 +491,7 @@ var rules = [
 			if (name) {
 				if (!!macroadapter.paramadapter[name]) {
 					params=macroadapter.paramadapter[name](params);
+					//alert("going out as "+params);
 				}
 				if (!!macroadapter.namedapter[name]) {
 					name=macroadapter.namedapter[name];
@@ -602,7 +603,7 @@ var rules = [
 
 	}
 },
-/*
+
 {
 	name: "image",
 	match: "\\[[<>]?[Ii][Mm][Gg]\\[",
@@ -610,33 +611,53 @@ var rules = [
 	lookaheadRegExp: /\[([<]?)(>?)[Ii][Mm][Gg]\[(?:([^\|\]]+)\|)?([^\[\]\|]+)\](?:\[([^\]]*)\])?\]/mg,
 	handler: function(w)
 	{
+		var node = {
+			type: "image",
+			attributes: {}
+		};
 		this.lookaheadRegExp.lastIndex = w.matchStart;
 		var lookaheadMatch = this.lookaheadRegExp.exec(w.source),
 			imageParams = {},
 			linkParams = {};
 		if(lookaheadMatch && lookaheadMatch.index == w.matchStart) {
 			if(lookaheadMatch[1]) {
-				imageParams.alignment = "left";
+				node.attributes.class = {type: "string", value: "classic-image-left"};
 			} else if(lookaheadMatch[2]) {
-				imageParams.alignment = "right";
+				node.attributes.class  = {type: "string", value: "classic-image-right"};
 			}
 			if(lookaheadMatch[3]) {
-				imageParams.text = lookaheadMatch[3];
+				node.attributes.tooltip = {type: "string", value: lookaheadMatch[3]};
 			}
-			imageParams.src = lookaheadMatch[4];
+			node.attributes.source = {type: "string", value: lookaheadMatch[4]};
 			if(lookaheadMatch[5]) {
-				linkParams.target = lookaheadMatch[5];
-				var linkChildren = [];
-				insertMacroCall(w,w.output,"link",linkParams,linkChildren);
-				insertMacroCall(w,linkChildren,"image",imageParams);
+				if(isLinkExternal(lookaheadMatch[5])) {
+					w.output.push({
+						type: "element",
+						tag: "a",
+						attributes: {
+							href: {type: "string", value:lookaheadMatch[5]},
+							"class": {type: "string", value: "tw-tiddlylink-external"},
+							target: {type: "string", value: "_blank"}
+						},
+						children: [node]
+					});
+				} else {
+					w.output.push({
+						type: "link",
+						attributes: {
+							to: {type: "string", value: lookaheadMatch[5]}
+						},
+						children: [node]
+					});
+				}
 			} else {
-				insertMacroCall(w,w.output,"image",imageParams);
+				w.output.push(node);
 			}
 			w.nextMatch = this.lookaheadRegExp.lastIndex;
 		}
 	}
 },
-*/
+
 {
 	name: "html",
 	match: "<[Hh][Tt][Mm][Ll]>",
