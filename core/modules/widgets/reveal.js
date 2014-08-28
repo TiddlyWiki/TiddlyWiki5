@@ -32,7 +32,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
 	var classes = this["class"].split(" ") || [];
-	classes.push("tw-reveal");
+	classes.push("tc-reveal");
 	domNode.className = classes.join(" ");
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);

@@ -22,14 +22,14 @@ tags: $:/tags/EditTemplate
 
 <em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
 
-<div class="tw-tiddler-preview">
-<div class="tw-tiddler-preview-preview">
+<div class="tc-tiddler-preview">
+<div class="tc-tiddler-preview-preview">
 
 <$transclude />
 
 </div>
 
-<div class="tw-tiddler-preview-edit">
+<div class="tc-tiddler-preview-edit">
 <$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </div>

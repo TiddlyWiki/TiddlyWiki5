@@ -121,16 +121,16 @@ table tfoot tr td {
 	white-space: nowrap;
 }
 
-.tw-tiddler-frame img,
-.tw-tiddler-frame svg,
-.tw-tiddler-frame canvas,
-.tw-tiddler-frame embed,
-.tw-tiddler-frame iframe {
+.tc-tiddler-frame img,
+.tc-tiddler-frame svg,
+.tc-tiddler-frame canvas,
+.tc-tiddler-frame embed,
+.tc-tiddler-frame iframe {
 	max-width: 100%;
 }
 
-.tw-tiddler-frame embed,
-.tw-tiddler-frame iframe {
+.tc-tiddler-frame embed,
+.tc-tiddler-frame iframe {
 	width: 100%;
 	height: 600px;
 }
@@ -193,12 +193,12 @@ a.tc-tiddlylink-external:hover {
 ** Drag and drop styles
 */
 
-.tw-tiddler-dragger {
+.tc-tiddler-dragger {
 	position: relative;
 	z-index: -10000;
 }
 
-.tw-tiddler-dragger-inner {
+.tc-tiddler-dragger-inner {
 	position: absolute;
 	display: inline-block;
 	padding: 8px 20px;
@@ -213,7 +213,7 @@ a.tc-tiddlylink-external:hover {
 	border-radius: 20px;
 }
 
-.tw-tiddler-dragger-cover {
+.tc-tiddler-dragger-cover {
 	position: absolute;
 	background-color: <<colour page-background>>;
 }
@@ -516,7 +516,7 @@ button.tw-tag-label, span.tw-tag-label {
 		padding: 0;
 	}
 
-	.tc-story-river .tw-tiddler-frame {
+	.tc-story-river .tc-tiddler-frame {
 		margin: 0;
 		border: none;
 		padding: 28px;
@@ -527,25 +527,25 @@ button.tw-tag-label, span.tw-tag-label {
 ** Tiddler styles
 */
 
-.tw-tiddler-frame {
+.tc-tiddler-frame {
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
 }
 
-.tw-tiddler-info {
+.tc-tiddler-info {
 	padding: 14px 42px 14px 42px;
 	background-color: <<colour tiddler-info-background>>;
 	border-top: 1px solid <<colour tiddler-info-border>>;
 	border-bottom: 1px solid <<colour tiddler-info-border>>;
 }
 
-.tw-tiddler-info p {
+.tc-tiddler-info p {
 	margin-top: 3px;
 	margin-bottom: 3px;
 }
 
-.tw-tiddler-info .tw-tab-buttons button.tw-tab-selected {
+.tc-tiddler-info .tw-tab-buttons button.tw-tab-selected {
 	background-color: <<colour tiddler-info-tab-background>>;
 	border-bottom: 1px solid <<colour tiddler-info-tab-background>>;
 }
@@ -565,30 +565,30 @@ button.tw-tag-label, span.tw-tag-label {
 }
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.tw-tiddler-frame {
+	.tc-tiddler-frame {
 		padding: 14px 14px 14px 14px;
 	}
 
-	.tw-tiddler-info {
+	.tc-tiddler-info {
 		margin: 0 -14px 0 -14px;
 	}
 }
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
-	.tw-tiddler-frame {
+	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
 	}
 
 <<if-no-sidebar "
 
-	.tw-tiddler-frame {
+	.tc-tiddler-frame {
 		width: 100%;
 	}
 
 ">>
 
-	.tw-tiddler-info {
+	.tc-tiddler-info {
 		margin: 0 -42px 0 -42px;
 	}
 }
@@ -616,52 +616,52 @@ button.tw-tag-label, span.tw-tag-label {
 	font-weight: 300;
 }
 
-.tw-tiddler-missing .tc-title {
+.tc-tiddler-missing .tc-title {
   font-style: italic;
   font-weight: normal;
 }
 
-.tw-tiddler-frame .tw-tiddler-controls {
+.tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
 }
 
-.tw-tiddler-controls .tc-drop-down {
+.tc-tiddler-controls .tc-drop-down {
 	font-size: 0.6em;
 }
 
-.tw-tiddler-controls button {
+.tc-tiddler-controls button {
 	vertical-align: baseline;
 }
 
-.tw-tiddler-controls button svg, .tw-tiddler-controls button img {
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
 	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
 }
 
-.tw-tiddler-controls button.tw-selected svg {
+.tc-tiddler-controls button.tw-selected svg {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tw-tiddler-controls button.tc-btn-invisible:hover svg {
+.tc-tiddler-controls button.tc-btn-invisible:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
 @media print {
-	.tw-tiddler-controls {
+	.tc-tiddler-controls {
 		display: none;
 	}
 }
 
-.tw-tiddler-help { /* Help prompts within tiddler template */
+.tc-tiddler-help { /* Help prompts within tiddler template */
 	color: <<colour muted-foreground>>;
 	margin-top: 14px;
 }
 
-.tw-tiddler-help a.tc-tiddlylink {
+.tc-tiddler-help a.tc-tiddlylink {
 	color: <<colour very-muted-foreground>>;
 }
 
-.tw-tiddler-frame input.tc-edit-texteditor, .tw-tiddler-frame textarea.tc-edit-texteditor {
+.tc-tiddler-frame input.tc-edit-texteditor, .tc-tiddler-frame textarea.tc-edit-texteditor {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
@@ -670,7 +670,7 @@ button.tw-tag-label, span.tw-tag-label {
 	margin: 4px 0 4px 0;
 }
 
-.tw-tiddler-frame .tw-binary-warning {
+.tc-tiddler-frame .tw-binary-warning {
 	width: 100%;
 	height: 5em;
 	text-align: center;
@@ -679,7 +679,7 @@ button.tw-tag-label, span.tw-tag-label {
 	border: 1px solid <<colour alert-border>>;
 }
 
-.tw-tiddler-frame input.tc-edit-texteditor {
+.tc-tiddler-frame input.tc-edit-texteditor {
 	background-color: <<colour tiddler-editor-background>>;
 }
 
@@ -717,27 +717,27 @@ canvas.tc-edit-bitmapeditor  {
   fill: <<colour toolbar-save-button>>;
 }
 
-.tw-tiddler-controls button svg.tc-image-info-button {
+.tc-tiddler-controls button svg.tc-image-info-button {
   fill: <<colour toolbar-info-button>>;
 }
 
-.tw-tiddler-controls button svg.tc-image-edit-button {
+.tc-tiddler-controls button svg.tc-image-edit-button {
   fill: <<colour toolbar-edit-button>>;
 }
 
-.tw-tiddler-controls button svg.tc-image-close-button {
+.tc-tiddler-controls button svg.tc-image-close-button {
   fill: <<colour toolbar-close-button>>;
 }
 
-.tw-tiddler-controls button svg.tc-image-delete-button {
+.tc-tiddler-controls button svg.tc-image-delete-button {
   fill: <<colour toolbar-delete-button>>;
 }
 
-.tw-tiddler-controls button svg.tc-image-cancel-button {
+.tc-tiddler-controls button svg.tc-image-cancel-button {
   fill: <<colour toolbar-cancel-button>>;
 }
 
-.tw-tiddler-controls button svg.tc-image-done-button {
+.tc-tiddler-controls button svg.tc-image-done-button {
   fill: <<colour toolbar-done-button>>;
 }
 
@@ -745,7 +745,7 @@ canvas.tc-edit-bitmapeditor  {
 ** Tiddler edit mode
 */
 
-.tw-tiddler-edit-frame em.tc-edit {
+.tc-tiddler-edit-frame em.tc-edit {
 	color: <<colour muted-foreground>>;
 	font-style: normal;
 }
@@ -784,11 +784,11 @@ canvas.tc-edit-bitmapeditor  {
 	padding-left: 4px;
 }
 
-.tw-tiddler-preview {
+.tc-tiddler-preview {
 	overflow: auto;
 }
 
-.tw-tiddler-preview-preview {
+.tc-tiddler-preview-preview {
 	float: right;
 	width: 48%;
 	border: 1px solid <<colour tiddler-editor-border>>;
@@ -796,7 +796,7 @@ canvas.tc-edit-bitmapeditor  {
 	padding: 3px 3px 3px 3px;
 }
 
-.tw-tiddler-preview-edit {
+.tc-tiddler-preview-edit {
 	width: 48%;
 }
 

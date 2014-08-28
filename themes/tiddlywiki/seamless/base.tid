@@ -8,11 +8,11 @@ list-after: $:/themes/tiddlywiki/vanilla/base
 Rules copied from Snow White
 */
 
-.tw-page-controls button svg, .tw-tiddler-controls button svg, .tw-topbar button svg {
+.tw-page-controls button svg, .tc-tiddler-controls button svg, .tw-topbar button svg {
 	<<transition "fill 150ms ease-in-out">>
 }
 
-.tw-tiddler-controls button.tw-selected svg {
+.tc-tiddler-controls button.tw-selected svg {
 	<<filter "drop-shadow(0px -1px 2px rgba(0,0,0,0.25))">>
 }
 
@@ -62,7 +62,7 @@ Seamless modifications
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
 	/* Drop the tiddler frame padding */
-	body.tw-body .tw-tiddler-frame {
+	body.tw-body .tc-tiddler-frame {
 		padding: 0;
 	}
 
@@ -72,7 +72,7 @@ Seamless modifications
 	}
 
 	/* Stop the tiddler info panel from bleeding into the tiddler frame padding */
-	body.tw-body .tw-tiddler-info {
+	body.tw-body .tc-tiddler-info {
 		margin: 0;
 	}
 

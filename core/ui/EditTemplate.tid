@@ -1,7 +1,7 @@
 title: $:/core/ui/EditTemplate
 
 \define frame-classes()
-tw-tiddler-frame tw-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
+tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
 <div class=<<frame-classes>>>
 <$set name="storyTiddler" value=<<currentTiddler>>>

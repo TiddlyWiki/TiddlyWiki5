@@ -129,15 +129,15 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		$tw.utils.addClass(event.target,"tc-tiddlylink-dragging");
 		// Create the drag image elements
 		this.dragImage = this.document.createElement("div");
-		this.dragImage.className = "tw-tiddler-dragger";
+		this.dragImage.className = "tc-tiddler-dragger";
 		var inner = this.document.createElement("div");
-		inner.className = "tw-tiddler-dragger-inner";
+		inner.className = "tc-tiddler-dragger-inner";
 		inner.appendChild(this.document.createTextNode(this.to));
 		this.dragImage.appendChild(inner);
 		this.document.body.appendChild(this.dragImage);
 		// Astoundingly, we need to cover the dragger up: http://www.kryogenix.org/code/browser/custom-drag-image.html
 		var cover = this.document.createElement("div");
-		cover.className = "tw-tiddler-dragger-cover";
+		cover.className = "tc-tiddler-dragger-cover";
 		cover.style.left = (inner.offsetLeft - 16) + "px";
 		cover.style.top = (inner.offsetTop - 16) + "px";
 		cover.style.width = (inner.offsetWidth + 32) + "px";
