@@ -16,6 +16,8 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var TiddlerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+	this.addEventListener("tw-active-focus", "handleFocusEvent");
+	this.activeState = false;
 };
 
 /*
@@ -65,12 +67,24 @@ TiddlerWidget.prototype.getTagClasses = function() {
 	}
 };
 
+
+TiddlerWidget.prototype.handleFocusEvent = function(event) {
+	//check event and set our active state
+	if(event.type == "tw-active-focus") {
+		this.activeState = (event.param == "false") ? false : true;
+		// don't propagate any further
+		return false;
+	}
+
+	return true;
+}
+
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedTiddlers[this.tiddlerTitle]) {
+	if(changedAttributes.tiddler || (changedTiddlers[this.tiddlerTitle] && !this.activeState)) {
 		this.refreshSelf();
 		return true;
 	} else {

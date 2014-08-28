@@ -88,6 +88,15 @@ EditCodeMirrorWidget.prototype.render = function(parent,nextSibling) {
 	cm.on("change",function() {
 		self.saveChanges(cm.getValue());
 	});
+
+	//add events to tell parent widgets whether the editor is active or not
+	cm.on("focus", function() {
+		self.dispatchEvent({type: "tw-active-focus", param: "true", tiddlerTitle: self.getVariable("currentTiddler")});
+	});
+
+	cm.on("blur", function() {
+		self.dispatchEvent({type: "tw-active-focus", param: "false", tiddlerTitle: self.getVariable("currentTiddler")});
+	});
 	this.codeMirrorInstance = cm;
 };
 

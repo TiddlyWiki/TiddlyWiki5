@@ -61,6 +61,7 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	// Add an input event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "focus", handlerObject: this, handlerMethod: "handleFocusEvent"},
+		{name: "blur", handlerObject: this, handlerMethod: "handleBlurEvent"},
 		{name: "input", handlerObject: this, handlerMethod: "handleInputEvent"}
 	]);
 	// Insert the element into the DOM
@@ -235,6 +236,10 @@ EditTextWidget.prototype.handleInputEvent = function(event) {
 };
 
 EditTextWidget.prototype.handleFocusEvent = function(event) {
+	// tell the parent widgets that we currently have the focus
+	this.dispatchEvent({type: "tw-active-focus", param: "true", tiddlerTitle: this.getVariable("currentTiddler")});
+
+	// trigger an eventual popup
 	if(this.editFocusPopup) {
 		$tw.popup.triggerPopup({
 			domNode: this.domNodes[0],
@@ -245,6 +250,11 @@ EditTextWidget.prototype.handleFocusEvent = function(event) {
 	}
 	return true;
 };
+
+EditTextWidget.prototype.handleBlurEvent = function(event) {
+	//inform the parent widgets that we lost the focus
+	this.dispatchEvent({type: "tw-active-focus", param: "false", tiddlerTitle: this.getVariable("currentTiddler")});
+}
 
 EditTextWidget.prototype.saveChanges = function(text) {
 	var editInfo = this.getEditInfo();
