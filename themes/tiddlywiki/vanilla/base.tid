@@ -594,7 +594,7 @@ button.tw-tag-label, span.tw-tag-label {
 }
 
 .tw-site-title,
-.titlebar {
+.tc-titlebar {
 	font-weight: 300;
 	font-size: 2.35em;
 	line-height: 1.2em;
@@ -606,7 +606,7 @@ button.tw-tag-label, span.tw-tag-label {
 	color: <<colour muted-foreground>>;
 }
 
-.titlebar img {
+.tc-titlebar img {
 	height: 1em;
 }
 

@@ -480,18 +480,15 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		children = [dm("h1",{text: options.serviceName})];
 	if(!options.noUserName) {
 		children.push(dm("input",{
-			attributes: {type: "text", name: "username", placeholder: "Username"},
-			"class": "input-small"
+			attributes: {type: "text", name: "username", placeholder: "Username"}
 		}));
 	}
 	children.push(dm("input",{
-		attributes: {type: "password", name: "password", placeholder: "Password"},
-		"class": "input-small"
+		attributes: {type: "password", name: "password", placeholder: "Password"}
 	}));
 	if(options.canCancel) {
 		children.push(dm("button",{
 			text: "Cancel",
-			"class": "btn",
 			eventListeners: [{
 					name: "click",
 					handlerFunction: function(event) {
@@ -503,11 +500,9 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	}
 	children.push(dm("button",{
 		attributes: {type: "submit"},
-		text: submitText,
-		"class": "btn"
+		text: submitText
 	}));
 	var form = dm("form",{
-		"class": "form-inline",
 		attributes: {autocomplete: "off"},
 		children: children
 	});

@@ -3,10 +3,10 @@ caption: Server
 tags: $:/tags/ControlPanel
 
 <$reveal state="$:/status/IsLoggedIn" type="nomatch" text="yes">
-Log in to ~TiddlyWeb: <$button message="tw-login" class="btn btn-info">Login</$button>
+Log in to ~TiddlyWeb: <$button message="tw-login">Login</$button>
 </$reveal>
 <$reveal state="$:/status/IsLoggedIn" type="match" text="yes">
-Logged in as {{$:/status/UserName}} <$button message="tw-logout" class="btn btn-warning">Logout</$button>
+Logged in as {{$:/status/UserName}} <$button message="tw-logout">Logout</$button>
 </$reveal>
 
 ----
@@ -17,4 +17,4 @@ Host configuration: <$edit-text tiddler="$:/config/tiddlyweb/host" tag="input" d
 
 ----
 
-<$button message="tw-server-refresh" class="btn btn-warning">Refresh</$button> to fetch changes from the server immediately
+<$button message="tw-server-refresh">Refresh</$button> to fetch changes from the server immediately

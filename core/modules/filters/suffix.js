@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/filters/prefix.js
+title: $:/core/modules/filters/suffix.js
 type: application/javascript
 module-type: filteroperator
 
-Filter operator for checking if a title starts with a prefix
+Filter operator for checking if a title ends with a suffix
 
 \*/
 (function(){
@@ -15,17 +15,17 @@ Filter operator for checking if a title starts with a prefix
 /*
 Export our filter function
 */
-exports.prefix = function(source,operator,options) {
+exports.suffix = function(source,operator,options) {
 	var results = [];
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(title.substr(0,operator.operand.length) !== operator.operand) {
+			if(title.substr(-operator.operand.length) !== operator.operand) {
 				results.push(title);
 			}
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(title.substr(0,operator.operand.length) === operator.operand) {
+			if(title.substr(-operator.operand.length) === operator.operand) {
 				results.push(title);
 			}
 		});

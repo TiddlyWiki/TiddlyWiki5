@@ -3,10 +3,10 @@ title: $:/snippets/encryptionstatus
 \define lingo-base() $:/language/ControlPanel/Tools/Encryption/
 <$reveal type="match" state="$:/isEncrypted" text="yes">
 <<lingo Enabled/Prompt>>
-<$button message="tw-clear-password" class="btn btn-danger"><<lingo ClearPassword/Button>></$button>
-<$button message="tw-set-password" class="btn btn-warning"><<lingo ChangePassword/Button>></$button>
+<$button message="tw-clear-password"><<lingo ClearPassword/Button>></$button>
+<$button message="tw-set-password"><<lingo ChangePassword/Button>></$button>
 </$reveal>
 <$reveal type="nomatch" state="$:/isEncrypted" text="yes">
 <<lingo Disabled/Prompt>>
-<$button message="tw-set-password" class="btn btn-warning"><<lingo SetPassword/Button>></$button>
+<$button message="tw-set-password"><<lingo SetPassword/Button>></$button>
 </$reveal>
