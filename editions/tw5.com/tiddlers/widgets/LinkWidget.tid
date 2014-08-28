@@ -50,11 +50,11 @@ This causes the tooltip to be the ''tooltip'' field of the target tiddler. If th
 
 ! CSS Classes
 
-* `tw-tiddlylink` - applied to all links
-* `tw-tiddlylink-external` - applied to external, non-tiddler links
-* `tw-tiddlylink-internal` - applied to tiddler links
-* `tw-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
-* `tw-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
+* `tc-tiddlylink` - applied to all links
+* `tc-tiddlylink-external` - applied to external, non-tiddler links
+* `tc-tiddlylink-internal` - applied to tiddler links
+* `tc-tiddlylink-missing` - applied to tiddler links where the target tiddler doesn't exist
+* `tc-tiddlylink-resolves` - applied to tiddler links when the target tiddler does exist
 
 ! Configuration macros
 

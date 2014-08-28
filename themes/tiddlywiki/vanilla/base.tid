@@ -139,52 +139,52 @@ table tfoot tr td {
 ** Links
 */
 
-a.tw-tiddlylink {
+a.tc-tiddlylink {
 	text-decoration: none;
 	font-weight: normal;
 	color: <<colour tiddler-link-foreground>>;
 	-webkit-user-select: inherit; /* Otherwise the draggable attribute makes links impossible to select */
 }
 
-.tw-sidebar-lists a.tw-tiddlylink {
+.tw-sidebar-lists a.tc-tiddlylink {
 	color: <<colour sidebar-tiddler-link-foreground>>;
 }
 
-.tw-sidebar-lists a.tw-tiddlylink:hover {
+.tw-sidebar-lists a.tc-tiddlylink:hover {
 	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
-a.tw-tiddlylink:hover {
+a.tc-tiddlylink:hover {
 	text-decoration: underline;
 }
 
-a.tw-tiddlylink-resolves {
+a.tc-tiddlylink-resolves {
 }
 
-a.tw-tiddlylink-shadow {
+a.tc-tiddlylink-shadow {
 	font-weight: bold;
 }
 
-a.tw-tiddlylink-shadow.tw-tiddlylink-resolves {
+a.tc-tiddlylink-shadow.tc-tiddlylink-resolves {
 	font-weight: normal;
 }
 
-a.tw-tiddlylink-missing {
+a.tc-tiddlylink-missing {
 	font-style: italic;
 }
 
-a.tw-tiddlylink-external {
+a.tc-tiddlylink-external {
 	text-decoration: underline;
 	color: <<colour external-link-foreground>>;
 	background-color: <<colour external-link-background>>;
 }
 
-a.tw-tiddlylink-external:visited {
+a.tc-tiddlylink-external:visited {
 	color: <<colour external-link-foreground-visited>>;
 	background-color: <<colour external-link-background-visited>>;
 }
 
-a.tw-tiddlylink-external:hover {
+a.tc-tiddlylink-external:hover {
 	color: <<colour external-link-foreground-hover>>;
 	background-color: <<colour external-link-background-hover>>;
 }
@@ -376,7 +376,7 @@ button.tw-tag-label, span.tw-tag-label {
 	fill: <<colour sidebar-foreground>>;
 }
 
-.tc-sidebar-header .tc-title a.tw-tiddlylink-resolves {
+.tc-sidebar-header .tc-title a.tc-tiddlylink-resolves {
 	font-weight: 300;
 }
 
@@ -410,7 +410,7 @@ button.tw-tag-label, span.tw-tag-label {
 	margin-right: 0.5em;
 }
 
-.tw-page-controls a.tw-tiddlylink:hover {
+.tw-page-controls a.tc-tiddlylink:hover {
 	text-decoration: none;
 }
 
@@ -657,7 +657,7 @@ button.tw-tag-label, span.tw-tag-label {
 	margin-top: 14px;
 }
 
-.tw-tiddler-help a.tw-tiddlylink {
+.tw-tiddler-help a.tc-tiddlylink {
 	color: <<colour very-muted-foreground>>;
 }
 
@@ -750,7 +750,7 @@ canvas.tw-edit-bitmapeditor  {
 	font-style: normal;
 }
 
-.tw-edit-type-dropdown a.tw-tiddlylink-missing {
+.tw-edit-type-dropdown a.tc-tiddlylink-missing {
 	font-style: normal;
 }
 
@@ -1266,7 +1266,7 @@ canvas.tw-edit-bitmapeditor  {
 	background: repeating-linear-gradient(45deg, #aa0, #aa0 10px, #888 10px, #888 20px);
 }
 
-a.tw-tiddlylink.tw-plugin-info:hover {
+a.tc-tiddlylink.tw-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
 	color: <<colour background>>;
@@ -1323,7 +1323,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 	border: 8px;
 }
 
-.tw-chooser-item a.tw-tiddlylink {
+.tw-chooser-item a.tc-tiddlylink {
 	display: block;
 	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
@@ -1331,7 +1331,7 @@ a.tw-tiddlylink.tw-plugin-info:hover {
 	margin: 4px;
 }
 
-.tw-chooser-item a.tw-tiddlylink:hover {
+.tw-chooser-item a.tc-tiddlylink:hover {
 	text-decoration: none;
 	color: <<colour tiddler-link-background>>;
 	background-color: <<colour tiddler-link-foreground>>;
