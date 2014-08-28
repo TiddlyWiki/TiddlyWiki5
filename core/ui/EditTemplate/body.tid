@@ -10,7 +10,7 @@ tags: $:/tags/EditTemplate
 
 <a href={{!!_canonical_uri}}><$text text={{!!_canonical_uri}}/></a>
 
-<$edit-text field="_canonical_uri" class="tw-edit-fields"></$edit-text>
+<$edit-text field="_canonical_uri" class="tc-edit-fields"></$edit-text>
 
 </div>
 
@@ -20,7 +20,7 @@ tags: $:/tags/EditTemplate
 
 <$reveal state="$:/state/showeditpreview" type="match" text="yes">
 
-<em class="tw-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
+<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="no"><<lingo Preview/Button/Hide>></$button>
 
 <div class="tw-tiddler-preview">
 <div class="tw-tiddler-preview-preview">
@@ -30,7 +30,7 @@ tags: $:/tags/EditTemplate
 </div>
 
 <div class="tw-tiddler-preview-edit">
-<$edit field="text" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </div>
 
@@ -40,8 +40,8 @@ tags: $:/tags/EditTemplate
 
 <$reveal state="$:/state/showeditpreview" type="nomatch" text="yes">
 
-<em class="tw-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Preview/Button/Show>></$button>
-<$edit field="text" class="tw-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
+<em class="tc-edit"><<lingo Hint>></em> <$button type="set" set="$:/state/showeditpreview" setTo="yes"><<lingo Preview/Button/Show>></$button>
+<$edit field="text" class="tc-edit-texteditor" placeholder={{$:/language/EditTemplate/Body/Placeholder}}/>
 
 </$reveal>
 

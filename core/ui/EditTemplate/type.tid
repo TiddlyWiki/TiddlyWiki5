@@ -2,11 +2,11 @@ title: $:/core/ui/EditTemplate/type
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/
-<p><$fieldmangler><em class="tw-edit"><<lingo Type/Prompt>></em> <$edit-text field="type" tag="input" default="" placeholder={{$:/language/EditTemplate/Type/Placeholder}} focusPopup=<<qualify "$:/state/popup/type-dropdown">> class="tw-edit-typeeditor"/> <$button popup=<<qualify "$:/state/popup/type-dropdown">> class="tc-btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <$button message="tw-remove-field" param="type" class="tc-btn-invisible tc-btn-icon">{{$:/core/images/delete-button}}</$button></$fieldmangler></p>
+<p><$fieldmangler><em class="tc-edit"><<lingo Type/Prompt>></em> <$edit-text field="type" tag="input" default="" placeholder={{$:/language/EditTemplate/Type/Placeholder}} focusPopup=<<qualify "$:/state/popup/type-dropdown">> class="tc-edit-typeeditor"/> <$button popup=<<qualify "$:/state/popup/type-dropdown">> class="tc-btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <$button message="tw-remove-field" param="type" class="tc-btn-invisible tc-btn-icon">{{$:/core/images/delete-button}}</$button></$fieldmangler></p>
 
 <div class="tw-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/popup/type-dropdown">> type="nomatch" text="" default="">
-<div class="tw-block-dropdown tw-edit-type-dropdown">
+<div class="tw-block-dropdown tc-edit-type-dropdown">
 <$linkcatcher to="!!type">
 <$list filter='[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]each[group]sort[group]]'>
 <div class="tc-dropdown-item">

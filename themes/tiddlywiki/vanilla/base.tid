@@ -661,7 +661,7 @@ button.tw-tag-label, span.tw-tag-label {
 	color: <<colour very-muted-foreground>>;
 }
 
-.tw-tiddler-frame input.tw-edit-texteditor, .tw-tiddler-frame textarea.tw-edit-texteditor {
+.tw-tiddler-frame input.tc-edit-texteditor, .tw-tiddler-frame textarea.tc-edit-texteditor {
 	width: 100%;
 	padding: 3px 3px 3px 3px;
 	border: 1px solid <<colour tiddler-editor-border>>;
@@ -679,11 +679,11 @@ button.tw-tag-label, span.tw-tag-label {
 	border: 1px solid <<colour alert-border>>;
 }
 
-.tw-tiddler-frame input.tw-edit-texteditor {
+.tw-tiddler-frame input.tc-edit-texteditor {
 	background-color: <<colour tiddler-editor-background>>;
 }
 
-canvas.tw-edit-bitmapeditor  {
+canvas.tc-edit-bitmapeditor  {
 	border: 6px solid <<colour tiddler-editor-border-image>>;
 	cursor: crosshair;
 	-moz-user-select: none;
@@ -693,11 +693,11 @@ canvas.tw-edit-bitmapeditor  {
 	margin-bottom: 6px;
 }
 
-.tw-edit-bitmapeditor-width {
+.tc-edit-bitmapeditor-width {
 	display: block;
 }
 
-.tw-edit-bitmapeditor-height {
+.tc-edit-bitmapeditor-height {
 	display: block;
 }
 
@@ -745,33 +745,33 @@ canvas.tw-edit-bitmapeditor  {
 ** Tiddler edit mode
 */
 
-.tw-tiddler-edit-frame em.tw-edit {
+.tw-tiddler-edit-frame em.tc-edit {
 	color: <<colour muted-foreground>>;
 	font-style: normal;
 }
 
-.tw-edit-type-dropdown a.tc-tiddlylink-missing {
+.tc-edit-type-dropdown a.tc-tiddlylink-missing {
 	font-style: normal;
 }
 
-.tw-edit-tags {
+.tc-edit-tags {
 	border: 1px solid <<colour tiddler-editor-border>>;
 	padding: 4px 8px 4px 8px;
 }
 
-.tw-edit-add-tag {
+.tc-edit-add-tag {
 	display: inline-block;
 }
 
-.tw-edit-add-tag .tw-add-tag-name input {
+.tc-edit-add-tag .tw-add-tag-name input {
 	width: 50%;
 }
 
-.tw-edit-tags .tw-tag-label {
+.tc-edit-tags .tw-tag-label {
 	display: inline-block;
 }
 
-.tw-edit-tags-list {
+.tc-edit-tags-list {
 	margin: 14px 0 14px 0;
 }
 
@@ -800,48 +800,48 @@ canvas.tw-edit-bitmapeditor  {
 	width: 48%;
 }
 
-.tw-edit-fields {
+.tc-edit-fields {
 	width: 100%;
 }
 
 
-.tw-edit-fields table, .tw-edit-fields tr, .tw-edit-fields td {
+.tc-edit-fields table, .tc-edit-fields tr, .tc-edit-fields td {
 	border: none;
 	padding: 4px;
 }
 
-.tw-edit-fields > tbody > .tw-edit-field:nth-child(odd) {
+.tc-edit-fields > tbody > .tc-edit-field:nth-child(odd) {
 	background-color: <<colour tiddler-editor-fields-odd>>;
 }
 
-.tw-edit-fields > tbody > .tw-edit-field:nth-child(even) {
+.tc-edit-fields > tbody > .tc-edit-field:nth-child(even) {
 	background-color: <<colour tiddler-editor-fields-even>>;
 }
 
-.tw-edit-field-name {
+.tc-edit-field-name {
 	text-align: right;
 }
 
-.tw-edit-field-value input {
+.tc-edit-field-value input {
 	width: 100%;
 }
 
-.tw-edit-field-remove {
+.tc-edit-field-remove {
 }
 
-.tw-edit-field-remove svg {
+.tc-edit-field-remove svg {
 	height: 1em;
 	width: 1em;
 	fill: <<colour muted-foreground>>;
 	vertical-align: middle;
 }
 
-.tw-edit-field-add-name {
+.tc-edit-field-add-name {
 	display: inline-block;
 	width: 15%;
 }
 
-.tw-edit-field-add-button {
+.tc-edit-field-add-button {
 	display: inline-block;
 	width: 10%;
 }
