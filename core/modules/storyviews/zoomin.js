@@ -108,10 +108,10 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 };
 
 /*
-Find the first child DOM node of a widget that has the class "title"
+Find the first child DOM node of a widget that has the class "tc-title"
 */
 function findTitleDomNode(widget,targetClass) {
-	targetClass = targetClass || "title";
+	targetClass = targetClass || "tc-title";
 	var domNode = widget.findFirstDomNode();
 	if(domNode && domNode.querySelector) {
 		return domNode.querySelector("." + targetClass);

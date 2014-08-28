@@ -376,7 +376,7 @@ button.tw-tag-label, span.tw-tag-label {
 	fill: <<colour sidebar-foreground>>;
 }
 
-.sidebar-header .title a.tw-tiddlylink-resolves {
+.sidebar-header .tc-title a.tw-tiddlylink-resolves {
 	font-weight: 300;
 }
 
@@ -616,7 +616,7 @@ button.tw-tag-label, span.tw-tag-label {
 	font-weight: 300;
 }
 
-.tw-tiddler-missing .title {
+.tw-tiddler-missing .tc-title {
   font-style: italic;
   font-weight: normal;
 }
