@@ -5,10 +5,10 @@ background-color: $(swatchColour)$;
 \end
 \define swatch(colour)
 <$set name="swatchColour" value={{##$colour$}}>
-<div class="tw-swatch" style=<<swatchStyle>>/>
+<div class="tc-swatch" style=<<swatchStyle>>/>
 </$set>
 \end
-<div class="tw-swatches-horiz">
+<div class="tc-swatches-horiz">
 <<swatch foreground>>
 <<swatch background>>
 <<swatch muted-foreground>>

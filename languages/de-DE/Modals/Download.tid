@@ -1,7 +1,7 @@
 title: $:/language/Modals/Download
 type: text/vnd.tiddlywiki
 subtitle: Änderungen Speichern
-footer: <$button message="tw-close-tiddler">Schließen</$button>
+footer: <$button message="tm-close-tiddler">Schließen</$button>
 help: http://tiddlywiki.com/static/DownloadingChanges.html
 
 Ihr Browser unterstützt nur manuelles Speichern. 

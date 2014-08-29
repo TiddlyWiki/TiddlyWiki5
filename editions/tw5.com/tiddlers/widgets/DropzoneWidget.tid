@@ -7,7 +7,7 @@ tags: widget
 
 The dropzone widget creates an area into which the user can drag files and other objects. It also supports pasting via the clipboard, although browser support is currently limited.
 
-It sends a [[WidgetMessage: tw-import-tiddlers]] carrying a JSON representation of the tiddlers to be imported up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
+It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation of the tiddlers to be imported up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
 
 ! Content and Attributes
 
@@ -15,7 +15,7 @@ The dropzone widget has no attributes, and displays any contained content within
 
 ! Display
 
-The dropzone widget creates an HTML `<div class="tw-dropzone">` to contain its content. During a drag operation the class `tw-dragover` is added. CSS is used to provide user feedback.
+The dropzone widget creates an HTML `<div class="tc-dropzone">` to contain its content. During a drag operation the class `tc-dragover` is added. CSS is used to provide user feedback.
 
 ! Data types supported
 

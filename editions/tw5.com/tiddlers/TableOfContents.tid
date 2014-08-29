@@ -21,7 +21,7 @@ $body$
 
 </$reveal>
 \end
-<div class="tw-table-of-contents">
+<div class="tc-table-of-contents">
 
 # Guide
 ## <<toc-heading "Introduction" "
@@ -183,30 +183,30 @@ $body$
 ">>
 ## <<toc-heading "Widget Messages" "
 ## WidgetMessages
-## [[tw-cancel-tiddler|WidgetMessage: tw-cancel-tiddler]]
-## [[tw-clear-password|WidgetMessage: tw-clear-password]]
-## [[tw-close-all-tiddlers|WidgetMessage: tw-close-all-tiddlers]]
-## [[tw-close-other-tiddlers|WidgetMessage: tw-close-other-tiddlers]]
-## [[tw-close-tiddler|WidgetMessage: tw-close-tiddler]]
-## [[tw-delete-tiddler|WidgetMessage: tw-delete-tiddler]]
-## [[tw-download-file|WidgetMessage: tw-download-file]]
-## [[tw-edit-tiddler|WidgetMessage: tw-edit-tiddler]]
-## [[tw-full-screen|WidgetMessage: tw-full-screen]]
-## [[tw-home|WidgetMessage: tw-home]]
-## [[tw-import-tiddlers|WidgetMessage: tw-import-tiddlers]]
-## [[tw-login|WidgetMessage: tw-login]]
-## [[tw-logout|WidgetMessage: tw-logout]]
-## [[tw-modal|WidgetMessage: tw-modal]]
-## [[tw-navigate|WidgetMessage: tw-navigate]]
-## [[tw-new-tiddler|WidgetMessage: tw-new-tiddler]]
-## [[tw-notify|WidgetMessage: tw-notify]]
-## [[tw-perform-import|WidgetMessage: tw-perform-import]]
-## [[tw-permalink|WidgetMessage: tw-permalink]]
-## [[tw-permaview|WidgetMessage: tw-permaview]]
-## [[tw-save-tiddler|WidgetMessage: tw-save-tiddler]]
-## [[tw-save-wiki|WidgetMessage: tw-save-wiki]]
-## [[tw-server-refresh|WidgetMessage: tw-server-refresh]]
-## [[tw-set-password|WidgetMessage: tw-set-password]]
+## [[tm-cancel-tiddler|WidgetMessage: tm-cancel-tiddler]]
+## [[tm-clear-password|WidgetMessage: tm-clear-password]]
+## [[tm-close-all-tiddlers|WidgetMessage: tm-close-all-tiddlers]]
+## [[tm-close-other-tiddlers|WidgetMessage: tm-close-other-tiddlers]]
+## [[tm-close-tiddler|WidgetMessage: tm-close-tiddler]]
+## [[tm-delete-tiddler|WidgetMessage: tm-delete-tiddler]]
+## [[tm-download-file|WidgetMessage: tm-download-file]]
+## [[tm-edit-tiddler|WidgetMessage: tm-edit-tiddler]]
+## [[tm-full-screen|WidgetMessage: tm-full-screen]]
+## [[tm-home|WidgetMessage: tm-home]]
+## [[tm-import-tiddlers|WidgetMessage: tm-import-tiddlers]]
+## [[tm-login|WidgetMessage: tm-login]]
+## [[tm-logout|WidgetMessage: tm-logout]]
+## [[tm-modal|WidgetMessage: tm-modal]]
+## [[tm-navigate|WidgetMessage: tm-navigate]]
+## [[tm-new-tiddler|WidgetMessage: tm-new-tiddler]]
+## [[tm-notify|WidgetMessage: tm-notify]]
+## [[tm-perform-import|WidgetMessage: tm-perform-import]]
+## [[tm-permalink|WidgetMessage: tm-permalink]]
+## [[tm-permaview|WidgetMessage: tm-permaview]]
+## [[tm-save-tiddler|WidgetMessage: tm-save-tiddler]]
+## [[tm-save-wiki|WidgetMessage: tm-save-wiki]]
+## [[tm-server-refresh|WidgetMessage: tm-server-refresh]]
+## [[tm-set-password|WidgetMessage: tm-set-password]]
 ">>
 ## <<toc-heading "Filter Operators" "
 ## FilterOperators

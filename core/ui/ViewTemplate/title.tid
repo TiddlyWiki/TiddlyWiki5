@@ -7,9 +7,9 @@ fill:$(foregroundColor)$;
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
-<div class="tw-tiddler-title">
+<div class="tc-tiddler-title">
 <h2 class="tc-titlebar">
-<span class="tw-tiddler-controls">
+<span class="tc-tiddler-controls">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list>
 </span>
 <$set name="foregroundColor" value={{!!color}}>
@@ -19,7 +19,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$set>
 <$list filter="[all[current]removeprefix[$:/]]">
 <span class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
-<span class="tw-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
+<span class="tc-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
 </span>
 </$list>
 <$list filter="[all[current]!prefix[$:/]]">
@@ -29,7 +29,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$list>
 </h2>
 
-<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tw-tiddler-info tw-popup" animate="yes" retain="yes">
+<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup" animate="yes" retain="yes">
 
 <$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 

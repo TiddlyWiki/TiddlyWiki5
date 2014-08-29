@@ -22,7 +22,7 @@ Similar syntax is used to assign styles. For example:
 
 Multiple styles and classes can be mixed. For example:
 
-<<wikitext-example src:"@@.tw-tiddler-frame
+<<wikitext-example src:"@@.tc-tiddler-frame
 @@width:400px;
 Some text
 @@

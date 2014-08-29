@@ -113,7 +113,7 @@ Modal.prototype.display = function(title,options) {
 			attributes: {
 				message: {
 					type: "string",
-					value: "tw-close-tiddler"
+					value: "tm-close-tiddler"
 				}
 			},
 			children: [{
@@ -152,12 +152,12 @@ Modal.prototype.display = function(title,options) {
 				document.body.removeChild(wrapper);
 			}
 		},duration);
-		// Don't let anyone else handle the tw-close-tiddler message
+		// Don't let anyone else handle the tm-close-tiddler message
 		return false;
 	};
-	headerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
-	bodyWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
-	footerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
+	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}
@@ -189,7 +189,7 @@ Modal.prototype.display = function(title,options) {
 
 Modal.prototype.adjustPageClass = function() {
 	if($tw.pageContainer) {
-		$tw.utils.toggleClass($tw.pageContainer,"tw-modal-displayed",this.modalCount > 0);
+		$tw.utils.toggleClass($tw.pageContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
 };
 

@@ -1,10 +1,10 @@
 created: 20140226193622350
 modified: 20140226193906089
 tags: message navigator-message
-title: WidgetMessage: tw-cancel-tiddler
+title: WidgetMessage: tm-cancel-tiddler
 type: text/vnd.tiddlywiki
 
-The `tw-cancel-tiddler` message abandons the changes in a draft tiddler. It requires the following properties on the `event` object:
+The `tm-cancel-tiddler` message abandons the changes in a draft tiddler. It requires the following properties on the `event` object:
 
 |!Name |!Description |
 |param |Title of the tiddler that is being cancelled out of edit mode |

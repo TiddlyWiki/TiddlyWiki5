@@ -1,6 +1,9 @@
 title: $:/core/templates/static.tiddler.html
 
-\define tw-wikilink-template() $uri_doubleencoded$.html
+\define tv-wikilink-template() $uri_doubleencoded$.html
+\define tv-config-toolbar-icons() no
+\define tv-config-toolbar-text() no
+\define tv-config-toolbar-class() tc-btn-invisible
 `<!doctype html>
 <html>
 <head>
@@ -12,7 +15,7 @@ title: $:/core/templates/static.tiddler.html
 <link rel="stylesheet" href="static.css">
 <title>`{{$:/core/wiki/title}}`</title>
 </head>
-<body class="tw-body">
+<body class="tc-body">
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="tc-story-river">
 `<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">

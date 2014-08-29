@@ -5,14 +5,14 @@ tags: $:/tags/ViewTemplate
 
 <$list filter="[all[current]field:plugin-type[import]]">
 
-<div class="tw-import">
+<div class="tc-import">
 
 <<lingo Listing/Hint>>
 
 {{||$:/core/ui/ImportListing}}
 
-<$button message="tw-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
-<$button message="tw-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+<$button message="tm-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
+<$button message="tm-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
 
 </div>
 

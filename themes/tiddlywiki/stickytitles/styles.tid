@@ -3,7 +3,7 @@ tags: [[$:/tags/stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-.tw-tiddler-title {
+.tc-tiddler-title {
   position: -webkit-sticky;
   position: -moz-sticky;
   position: -o-sticky;

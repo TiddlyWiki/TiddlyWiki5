@@ -101,7 +101,7 @@ ButtonWidget.prototype.isPoppedUp = function() {
 ButtonWidget.prototype.navigateTo = function(event) {
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
-		type: "tw-navigate",
+		type: "tm-navigate",
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,

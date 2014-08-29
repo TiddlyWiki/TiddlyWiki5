@@ -3,11 +3,11 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-button}} {{$:/language/Buttons/NewTiddler/Caption}}
 description: {{$:/language/Buttons/NewTiddler/Hint}}
 
-<$button message="tw-new-tiddler" title={{$:/language/Buttons/NewTiddler/Hint}} aria-label={{$:/language/Buttons/NewTiddler/Caption}} class=<<tw-config-toolbar-class>>>
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button message="tm-new-tiddler" title={{$:/language/Buttons/NewTiddler/Hint}} aria-label={{$:/language/Buttons/NewTiddler/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-button}}
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/NewTiddler/Caption}}/>
 </$list>
 </$button>

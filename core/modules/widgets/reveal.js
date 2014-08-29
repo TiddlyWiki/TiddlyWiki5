@@ -32,13 +32,13 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
 	var classes = this["class"].split(" ") || [];
-	classes.push("tw-reveal");
+	classes.push("tc-reveal");
 	domNode.className = classes.join(" ");
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
 		this.positionPopup(domNode);
-		$tw.utils.addClass(domNode,"tw-popup"); // Make sure that clicks don't dismiss popups within the revealed content
+		$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
 	}
 	if(!this.isOpen) {
 		domNode.setAttribute("hidden","true")
@@ -187,7 +187,7 @@ RevealWidget.prototype.updateState = function() {
 	// Animate our DOM node
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
 		this.positionPopup(domNode);
-		$tw.utils.addClass(domNode,"tw-popup"); // Make sure that clicks don't dismiss popups within the revealed content
+		$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
 
 	}
 	if(this.isOpen) {

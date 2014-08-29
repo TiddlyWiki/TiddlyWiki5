@@ -30,12 +30,12 @@ selection-$(payloadTiddler)$
 </td>
 <td>
 <$reveal type="nomatch" state=<<previewPopupState>> text="yes">
-<$button class="tc-btn-invisible btn-dropdown" set=<<previewPopupState>> setTo="yes">
+<$button class="tc-btn-invisible tc-btn-dropdown" set=<<previewPopupState>> setTo="yes">
 {{$:/core/images/right-arrow}}&nbsp;<$text text=<<payloadTiddler>>/>
 </$button>
 </$reveal>
 <$reveal type="match" state=<<previewPopupState>> text="yes">
-<$button class="tc-btn-invisible btn-dropdown" set=<<previewPopupState>> setTo="no">
+<$button class="tc-btn-invisible tc-btn-dropdown" set=<<previewPopupState>> setTo="no">
 {{$:/core/images/down-arrow}}&nbsp;<$text text=<<payloadTiddler>>/>
 </$button>
 </$reveal>

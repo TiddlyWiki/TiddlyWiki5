@@ -9,14 +9,14 @@ The usual way of modifying the appearance of a TiddlyWiki is to use one of the a
 You can also use custom CSS stylesheets by tagging tiddlers with `$:/tags/stylesheet`. For example, create a tiddler with the tag `$:/tags/stylesheet` and the following content in order to change the page background colour to red:
 
 ```
-html body.tw-body {
+html body.tc-body {
 	background: red;
 }
 ```
 
 ! Overriding Theme Settings
 
-Note that custom stylesheets are applied independently to the theme stylesheets. This means that it is frequently necessary to use CSS specificity to reliably override settings within the theme. This means ensuring that the CSS rule in your custom stylesheet is more specific than the theme rule that you are overriding. "More specific" generally means using more CSS rules. So, `html body.tw-body` is more specific than `body.tw-body`.
+Note that custom stylesheets are applied independently to the theme stylesheets. This means that it is frequently necessary to use CSS specificity to reliably override settings within the theme. This means ensuring that the CSS rule in your custom stylesheet is more specific than the theme rule that you are overriding. "More specific" generally means using more CSS rules. So, `html body.tc-body` is more specific than `body.tc-body`.
 
 ! Stylesheet Types
 
@@ -27,7 +27,7 @@ If you wish to use macros and transclusions in your stylesheets you should inste
 ```
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-body.tw-body pre {
+body.tc-body pre {
 	<<box-shadow "inset 0 1px 0 #fff">>
 }
 ```

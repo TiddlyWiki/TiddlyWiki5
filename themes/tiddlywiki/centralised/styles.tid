@@ -5,7 +5,7 @@ tags: [[$:/tags/stylesheet]]
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	html .tw-page-container {
+	html .tc-page-container {
 		text-align: center;
 	}
 
@@ -17,7 +17,7 @@ tags: [[$:/tags/stylesheet]]
 		text-align: left;
 	}
 
-	html .tw-sidebar-scrollable {
+	html .tc-sidebar-scrollable {
 		text-align: left;
 		left: 50%;
 		right: 0;

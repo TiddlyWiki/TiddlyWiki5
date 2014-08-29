@@ -1,10 +1,10 @@
 title: SampleWizard
 tags: demo
 subtitle: I'm a modal wizard
-footer: <$button message="tw-close-tiddler">Close</$button>
+footer: <$button message="tm-close-tiddler">Close</$button>
 
 This is a modal wizard dialogue, stored in the tiddler SampleWizard.
 
 {{Motovun Jack.jpg}}
 
-You can <$button message="tw-modal" param="SampleWizard2">nest wizards</$button>.
+You can <$button message="tm-modal" param="SampleWizard2">nest wizards</$button>.

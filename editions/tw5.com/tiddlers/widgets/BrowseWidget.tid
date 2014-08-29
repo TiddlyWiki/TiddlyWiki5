@@ -5,7 +5,7 @@ tags: widget
 
 ! Introduction
 
-The browse widget displays an HTML file browser button that allows the user to choose one or more files to import. It sends a [[WidgetMessage: tw-import-tiddlers]] carrying a JSON representation of the tiddlers imported from the files up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
+The browse widget displays an HTML file browser button that allows the user to choose one or more files to import. It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation of the tiddlers imported from the files up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
 
 ! Content and Attributes
 

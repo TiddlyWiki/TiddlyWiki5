@@ -17,10 +17,10 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var FieldManglerWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	this.addEventListeners([
-		{type: "tw-remove-field", handler: "handleRemoveFieldEvent"},
-		{type: "tw-add-field", handler: "handleAddFieldEvent"},
-		{type: "tw-remove-tag", handler: "handleRemoveTagEvent"},
-		{type: "tw-add-tag", handler: "handleAddTagEvent"}
+		{type: "tm-remove-field", handler: "handleRemoveFieldEvent"},
+		{type: "tm-add-field", handler: "handleAddFieldEvent"},
+		{type: "tm-remove-tag", handler: "handleRemoveTagEvent"},
+		{type: "tm-add-tag", handler: "handleAddTagEvent"}
 	]);
 };
 

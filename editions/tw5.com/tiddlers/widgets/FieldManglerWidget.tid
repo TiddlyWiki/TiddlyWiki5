@@ -9,10 +9,10 @@ type: text/vnd.tiddlywiki
 The field mangler widget manipulates the fields and tags of a tiddler. It does so in response to the following WidgetMessages:
 
 |!Message |!Description |
-|''tw-remove-field'' |Remove the field specified in `event.param` |
-|''tw-add-field'' |Add the field specified in `event.param` |
-|''tw-remove-tag'' |Remove the tag specified in `event.param` |
-|''tw-add-tag'' |Add the tag specified in `event.param` |
+|''tm-remove-field'' |Remove the field specified in `event.param` |
+|''tm-add-field'' |Add the field specified in `event.param` |
+|''tm-remove-tag'' |Remove the tag specified in `event.param` |
+|''tm-add-tag'' |Add the tag specified in `event.param` |
 
 ! Content and Attributes
 

@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The tabs macro displays a list of tiddlers as a tab control. The user can switch between tabs by clicking on them. The tabs are labelled with the title of the corresponding tiddler, unless there is a `caption` field present in which case it is used instead.
 
-By default the tab control arranges the tabs horizontally with the content underneath. You can also choose to have the tabs arranged vertically by passing the class `tw-vertical`.
+By default the tab control arranges the tabs horizontally with the content underneath. You can also choose to have the tabs arranged vertically by passing the class `tc-vertical`.
 
 ! Parameters
 
@@ -26,9 +26,9 @@ Here are some examples of the tabs macro:
 ```
 <<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
 
-<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tw-vertical">>
+<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
 ```
 
 <<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
 
-<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tw-vertical">>
+<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>

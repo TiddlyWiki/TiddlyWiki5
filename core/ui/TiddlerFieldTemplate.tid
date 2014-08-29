@@ -1,10 +1,10 @@
 title: $:/core/ui/TiddlerFieldTemplate
 
-<tr class="tw-view-field">
-<td class="tw-view-field-name">
+<tr class="tc-view-field">
+<td class="tc-view-field-name">
 <$text text=<<listItem>>/>
 </td>
-<td class="tw-view-field-value">
+<td class="tc-view-field-value">
 <$view field=<<listItem>>/>
 </td>
 </tr>

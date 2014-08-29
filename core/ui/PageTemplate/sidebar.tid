@@ -4,25 +4,25 @@ tags: $:/tags/PageTemplate
 \define config-title()
 $:/config/PageControlButtons/Visibility/$(listItem)$
 \end
-<$scrollable fallthrough="no" class="tw-sidebar-scrollable">
+<$scrollable fallthrough="no" class="tc-sidebar-scrollable">
 
 <div class="tc-sidebar-header">
 
 <$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
 
-<h1 class="tw-site-title">
+<h1 class="tc-site-title">
 
 <$transclude tiddler="$:/SiteTitle" mode="inline"/>
 
 </h1>
 
-<div class="tw-site-subtitle">
+<div class="tc-site-subtitle">
 
 <$transclude tiddler="$:/SiteSubtitle" mode="inline"/>
 
 </div>
 
-<div class="tw-page-controls">
+<div class="tc-page-controls">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
 <$reveal type="nomatch" state=<<config-title>> text="hide">
 <$transclude tiddler=<<listItem>> mode="inline"/>

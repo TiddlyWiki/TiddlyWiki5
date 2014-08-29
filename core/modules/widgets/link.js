@@ -33,8 +33,8 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	// Execute our logic
 	this.execute();
-	// Get the value of the tw-wikilinks configuration macro
-	var wikiLinksMacro = this.getVariable("tw-wikilinks"),
+	// Get the value of the tv-wikilinks configuration macro
+	var wikiLinksMacro = this.getVariable("tv-wikilinks"),
 		useWikiLinks = wikiLinksMacro ? !(wikiLinksMacro.trim() === "no") : true;
 	// Render the link if required
 	if(useWikiLinks) {
@@ -73,14 +73,14 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	}
 	domNode.setAttribute("class",classes.join(" "));
 	// Set an href
-	var wikiLinkTemplateMacro = this.getVariable("tw-wikilink-template"),
+	var wikiLinkTemplateMacro = this.getVariable("tv-wikilink-template"),
 		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	domNode.setAttribute("href",wikiLinkText);
 	// Set the tooltip
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
-	var tooltipWikiText = this.tooltip || this.getVariable("tw-wikilink-tooltip");
+	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");
 	if(tooltipWikiText) {
 		var tooltipText = this.wiki.renderText("text/plain","text/vnd.tiddlywiki",tooltipWikiText,{
 				parseAsInline: true,
@@ -110,7 +110,7 @@ LinkWidget.prototype.handleClickEvent = function (event) {
 	// Send the click on it's way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
-		type: "tw-navigate",
+		type: "tm-navigate",
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
@@ -129,15 +129,15 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 		$tw.utils.addClass(event.target,"tc-tiddlylink-dragging");
 		// Create the drag image elements
 		this.dragImage = this.document.createElement("div");
-		this.dragImage.className = "tw-tiddler-dragger";
+		this.dragImage.className = "tc-tiddler-dragger";
 		var inner = this.document.createElement("div");
-		inner.className = "tw-tiddler-dragger-inner";
+		inner.className = "tc-tiddler-dragger-inner";
 		inner.appendChild(this.document.createTextNode(this.to));
 		this.dragImage.appendChild(inner);
 		this.document.body.appendChild(this.dragImage);
 		// Astoundingly, we need to cover the dragger up: http://www.kryogenix.org/code/browser/custom-drag-image.html
 		var cover = this.document.createElement("div");
-		cover.className = "tw-tiddler-dragger-cover";
+		cover.className = "tc-tiddler-dragger-cover";
 		cover.style.left = (inner.offsetLeft - 16) + "px";
 		cover.style.top = (inner.offsetTop - 16) + "px";
 		cover.style.width = (inner.offsetWidth + 32) + "px";
