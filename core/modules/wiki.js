@@ -152,6 +152,10 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 	}
 };
 
+exports.getSizeOfTiddlerEventQueue = function() {
+	return $tw.utils.count(this.changedTiddlers);
+};
+
 exports.clearTiddlerEventQueue = function() {
 	this.changedTiddlers = Object.create(null);
 	this.changeCount = Object.create(null)
