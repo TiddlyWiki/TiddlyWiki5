@@ -17,4 +17,5 @@ For example:
 |`[all[current]]` |Selects the current tiddler |
 |`[all[missing]]` |Selects all MissingTiddlers |
 |`[all[orphans]]` |Selects all OrphanTiddlers |
+|`[all[]]` |Selects all the source tiddlers available to the filter |
 
