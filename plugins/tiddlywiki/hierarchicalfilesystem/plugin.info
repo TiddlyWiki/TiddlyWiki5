@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/hierarchicalfilesystem",
 	"description": "hierarchical file system synchronisation",
-	"author": "TheDiveO",
+	"author": "JeremyRuston,TheDiveO",
 	"core-version": ">=5.0.0"
 }
