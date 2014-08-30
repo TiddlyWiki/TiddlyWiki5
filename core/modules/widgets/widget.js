@@ -268,8 +268,7 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			try {
 				if (b.length == 2 && b[0] == "xlink"){
 					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
-				}
-				else {
+				} else {
 					domNode.setAttributeNS(null,a,v);
 				}
 			} catch(e) {
