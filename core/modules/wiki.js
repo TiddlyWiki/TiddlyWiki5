@@ -158,7 +158,7 @@ exports.getSizeOfTiddlerEventQueue = function() {
 
 exports.clearTiddlerEventQueue = function() {
 	this.changedTiddlers = Object.create(null);
-	this.changeCount = Object.create(null)
+	this.changeCount = Object.create(null);
 };
 
 exports.getChangeCount = function(title) {
@@ -176,12 +176,12 @@ Generate an unused title from the specified base
 exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
-	    title = baseTitle;
+		title = baseTitle;
 	while(this.tiddlerExists(title) || this.isShadowTiddler(title)) {
 		title = baseTitle + 
 			(options.prefix || " ") + 
 			(++c);
-	};
+	}
 	return title;
 };
 
@@ -461,7 +461,7 @@ exports.getTagMap = function() {
 					for(var index=0; index<tagArray.length; index++) {
 						var tag = tagArray[index];
 						if($tw.utils.hop(tags,tag)) {
-							tags[tag].push(title)
+							tags[tag].push(title);
 						} else {
 							tags[tag] = [title];
 						}
@@ -600,7 +600,7 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
 		data;
 	if(!(tiddler instanceof $tw.Tiddler)) {
-		tiddler = this.getTiddler(tiddler)		
+		tiddler = this.getTiddler(tiddler);	
 	}
 	if(tiddler && tiddler.fields.text) {
 		switch(tiddler.fields.type) {
@@ -683,7 +683,7 @@ exports.getGlobalCache = function(cacheName,initializer) {
 
 exports.clearGlobalCache = function() {
 	this.globalCache = Object.create(null);
-}
+};
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
@@ -691,18 +691,18 @@ exports.getCacheForTiddler = function(title,cacheName,initializer) {
 // Temporarily disable caching so that tweakParseTreeNode() works
 return initializer();
 
-	this.caches = this.caches || Object.create(null);
-	var caches = this.caches[title];
-	if(caches && caches[cacheName]) {
-		return caches[cacheName];
-	} else {
-		if(!caches) {
-			caches = Object.create(null);
-			this.caches[title] = caches;
-		}
-		caches[cacheName] = initializer();
-		return caches[cacheName];
-	}
+//	this.caches = this.caches || Object.create(null);
+//	var caches = this.caches[title];
+//	if(caches && caches[cacheName]) {
+//		return caches[cacheName];
+//	} else {
+//		if(!caches) {
+//			caches = Object.create(null);
+//			this.caches[title] = caches;
+//		}
+//		caches[cacheName] = initializer();
+//		return caches[cacheName];
+//	}
 };
 
 // Clear all caches associated with a particular tiddler
@@ -793,16 +793,16 @@ var tweakParser = function(parser) {
 exports.parseText = function(type,text,options) {
 	var parser = this.old_parseText(type,text,options);
 	if(parser) {
-		tweakParser(parser)
-	};
+		tweakParser(parser);
+	}
 	return parser;
 };
 
 exports.parseTiddler = function(title,options) {
 	var parser = this.old_parseTiddler(title,options);
 	if(parser) {
-		tweakParser(parser)
-	};
+		tweakParser(parser);
+	}
 	return parser;
 };
 
@@ -961,7 +961,9 @@ Options available:
 */
 exports.search = function(text,options) {
 	options = options || {};
-	var self = this,t;
+	var self = this,
+		t,
+		invert = !!options.invert;
 	// Convert the search string into a regexp for each term
 	var terms, searchTermsRegExps,
 		flags = options.caseSensitive ? "" : "i";
@@ -1011,7 +1013,7 @@ exports.search = function(text,options) {
 	var results = [],
 		source = options.source || this.each;
 	source(function(tiddler,title) {
-		if(!!searchTiddler(title) === !options.invert) {
+		if(searchTiddler(title) !== options.invert) {
 			results.push(title);
 		}
 	});
@@ -1060,7 +1062,7 @@ exports.readFiles = function(files,callback) {
 				callback(result);
 			}
 		});
-	};
+	}
 	return files.length;
 };
 

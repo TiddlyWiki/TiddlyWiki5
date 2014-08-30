@@ -283,9 +283,10 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 Generate a title for the draft of a given tiddler
 */
 NavigatorWidget.prototype.generateDraftTitle = function(title) {
-	var c = 0;
+	var c = 0,
+		draftTitle;
 	do {
-		var draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
 		c++;
 	} while(this.wiki.tiddlerExists(draftTitle));
 	return draftTitle;

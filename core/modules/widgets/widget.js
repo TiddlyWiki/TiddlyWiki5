@@ -171,7 +171,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 		else for(var i=0; i<actualParams.length; ++i) {
 			args.push(actualParams[i].value);
 		}
-		return macro.run.apply(this,args)
+		return macro.run.apply(this,args);
 	} else {
 		return defaultValue;
 	}
@@ -289,7 +289,7 @@ Construct the widget object for a parse tree node
 Widget.prototype.makeChildWidget = function(parseTreeNode) {
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
-		WidgetClass = this.widgetClasses["text"];
+		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
 	return new WidgetClass(parseTreeNode,{
@@ -357,8 +357,7 @@ Widget.prototype.addEventListener = function(type,handler) {
 	} else { // The handler is a function
 		this.eventListeners[type] = function(event) {
 			return handler.call(self,event);
-		}
-
+		};
 	}
 };
 

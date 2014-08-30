@@ -74,7 +74,7 @@ function SaverHandler(options) {
 		});
 		// Set up our beforeunload handler
 		window.addEventListener("beforeunload",function(event) {
-			var confirmationMessage = undefined;
+			var confirmationMessage;
 			if(self.isDirty()) {
 				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
 				event.returnValue = confirmationMessage; // Gecko

@@ -20,7 +20,7 @@ wiki: wiki to be synced
 function Syncer(options) {
 	var self = this;
 	this.wiki = options.wiki;
-	this.syncadaptor = options.syncadaptor
+	this.syncadaptor = options.syncadaptor;
 	// Make a logger
 	this.logger = new $tw.utils.Logger("syncer" + ($tw.browser ? "-browser" : "") + ($tw.node ? "-server" : ""));
 	// Compile the dirty tiddler filter
@@ -40,7 +40,7 @@ function Syncer(options) {
 	if($tw.browser) {
 		// Set up our beforeunload handler
 		window.addEventListener("beforeunload",function(event) {
-			var confirmationMessage = undefined;
+			var confirmationMessage;
 			if(self.isDirty()) {
 				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
 				event.returnValue = confirmationMessage; // Gecko
@@ -94,10 +94,10 @@ Syncer.prototype.readTiddlerInfo = function() {
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.wiki.getTiddler(title);
 		self.tiddlerInfo[title] = {
-			revision: tiddler.fields["revision"],
+			revision: tiddler.fields.revision,
 			adaptorInfo: self.syncadaptor && self.syncadaptor.getTiddlerInfo(tiddler),
 			changeCount: self.wiki.getChangeCount(title)
-		}
+		};
 	});
 };
 
@@ -329,7 +329,7 @@ Syncer.prototype.enqueueSyncTask = function(task) {
 			revision: null,
 			adaptorInfo: {},
 			changeCount: -1
-		}
+		};
 	}
 	// Bail if this is a save and the tiddler is already at the changeCount that the server has
 	if(task.type === "save" && this.wiki.getChangeCount(task.title) <= this.tiddlerInfo[task.title].changeCount) {
