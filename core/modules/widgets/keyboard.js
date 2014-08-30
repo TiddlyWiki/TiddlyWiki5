@@ -37,7 +37,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	var domNode = this.document.createElement("div");
 	// Assign classes
 	var classes = (this["class"] || "").split(" ");
-	classes.push("tw-keyboard");
+	classes.push("tc-keyboard");
 	domNode.className = classes.join(" ");
 	// Add a keyboard event handler
 	domNode.addEventListener("keydown",function (event) {

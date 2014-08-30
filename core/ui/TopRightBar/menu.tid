@@ -2,8 +2,8 @@ title: $:/core/ui/TopBar/menu
 tags: $:/tags/TopRightBar
 
 <$reveal state="$:/state/sidebar" type="nomatch" text="no">
-<$button set="$:/state/sidebar" setTo="no" title={{$:/language/Buttons/HideSideBar/Hint}} aria-label={{$:/language/Buttons/HideSideBar/Caption}} class="btn-invisible">{{$:/core/images/chevron-right}}</$button>
+<$button set="$:/state/sidebar" setTo="no" title={{$:/language/Buttons/HideSideBar/Hint}} aria-label={{$:/language/Buttons/HideSideBar/Caption}} class="tc-btn-invisible">{{$:/core/images/chevron-right}}</$button>
 </$reveal>
 <$reveal state="$:/state/sidebar" type="match" text="no">
-<$button set="$:/state/sidebar" setTo="yes" title={{$:/language/Buttons/ShowSideBar/Hint}} aria-label={{$:/language/Buttons/ShowSideBar/Caption}} class="btn-invisible">{{$:/core/images/chevron-left}}</$button>
+<$button set="$:/state/sidebar" setTo="yes" title={{$:/language/Buttons/ShowSideBar/Hint}} aria-label={{$:/language/Buttons/ShowSideBar/Caption}} class="tc-btn-invisible">{{$:/core/images/chevron-left}}</$button>
 </$reveal>

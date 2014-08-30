@@ -16,7 +16,7 @@ Click this link to get started: HelloThere
 <$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
 <div>
 
-! <$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
 
 <$transclude/>
 </div>
@@ -34,7 +34,7 @@ Click this link to get started: HelloThere
 <$list filter="[list[MySubStoryList]]" history="MySubHistoryList">
 <div>
 
-! <$button message="tw-close-tiddler" class="btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
+! <$button message="tm-close-tiddler" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> <$view field="title"/>
 
 <$transclude/>
 

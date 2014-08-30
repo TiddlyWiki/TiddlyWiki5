@@ -1,7 +1,7 @@
 title: $:/core/ui/PageTemplate/toprightbar
 tags: $:/tags/PageTemplate
 
-<span class="tw-topbar tw-topbar-right">
+<span class="tc-topbar tc-topbar-right">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/TopRightBar]!has[draft.of]]" variable="listItem">
 

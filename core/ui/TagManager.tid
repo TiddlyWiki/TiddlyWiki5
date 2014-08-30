@@ -9,10 +9,10 @@ title: $:/TagManager
 </$list>
 \end
 \define iconEditor(title)
-<div class="tw-drop-down-wrapper">
-<$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/popup/icon/$title$">> class="btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<div class="tc-drop-down-wrapper">
+<$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 <$linkcatcher to="$title$!!icon">
 <<iconEditorTab type:"!">>
 <hr/>

@@ -1,7 +1,7 @@
 created: 20140716084242809
 modified: 20140716084341303
 tags: message navigator-message
-title: WidgetMessage: tw-perform-import
+title: WidgetMessage: tm-perform-import
 type: text/vnd.tiddlywiki
 
 The perform import message copies tiddlers from a specified plugin into the main store. See the UpgradeMechanism for an overview of how it is used by the core.

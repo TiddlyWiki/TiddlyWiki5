@@ -16,24 +16,24 @@ $(currentTiddler)$/icon
 $:/config/Plugins/Disabled/$(currentTiddler)$
 \end
 \define plugin-table-body(type,disabledMessage)
-<div class="tw-plugin-info-chunk">
+<div class="tc-plugin-info-chunk">
 <$reveal type="nomatch" state=<<popup-state>> text="yes">
-<$button class="btn-invisible btn-dropdown" set=<<popup-state>> setTo="yes">
+<$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="yes">
 {{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
 <$reveal type="match" state=<<popup-state>> text="yes">
-<$button class="btn-invisible btn-dropdown" set=<<popup-state>> setTo="no">
+<$button class="tc-btn-invisible tc-btn-dropdown" set=<<popup-state>> setTo="no">
 {{$:/core/images/down-arrow}}
 </$button>
 </$reveal>
 </div>
-<div class="tw-plugin-info-chunk">
+<div class="tc-plugin-info-chunk">
 <$transclude tiddler=<<currentTiddler>> subtiddler=<<plugin-icon-title>>>
 <$transclude tiddler="$:/core/images/plugin-generic-$type$"/>
 </$transclude>
 </div>
-<div class="tw-plugin-info-chunk">
+<div class="tc-plugin-info-chunk">
 <div>
 ''<$view field="description"><$view field="title"/></$view>'' $disabledMessage$
 </div>
@@ -50,17 +50,17 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 <$list filter="[!has[draft.of]plugin-type[$type$]sort[description]]" emptyMessage=<<lingo "Empty/Hint">>>
 <$set name="popup-state" value=<<popup-state-macro>>>
 <$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
-<$link to={{!!title}} class="tw-plugin-info">
+<$link to={{!!title}} class="tc-plugin-info">
 <<plugin-table-body type:"$type$">>
 </$link>
 </$reveal>
 <$reveal type="match" state=<<plugin-disable-title>> text="yes">
-<$link to={{!!title}} class="tw-plugin-info tw-plugin-info-disabled">
+<$link to={{!!title}} class="tc-plugin-info tc-plugin-info-disabled">
 <<plugin-table-body type:"$type$" disabledMessage:"<$macrocall $name='lingo' title='Disabled/Status'/>">>
 </$link>
 </$reveal>
 <$reveal type="match" text="yes" state=<<popup-state>>>
-<div class="tw-plugin-info-dropdown">
+<div class="tc-plugin-info-dropdown">
 <$list filter="[all[current]] -[[$:/core]]">
 <div style="float:right;">
 <$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">

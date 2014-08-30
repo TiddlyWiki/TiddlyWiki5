@@ -9,13 +9,13 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 
 {{$:/language/ControlPanel/Appearance/Toolbars/ViewToolbar/Hint}}
 
-<$set name="tw-config-toolbar-icons" value="yes">
+<$set name="tv-config-toolbar-icons" value="yes">
 
-<$set name="tw-config-toolbar-text" value="yes">
+<$set name="tv-config-toolbar-text" value="yes">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem">
 
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="caption"/> <i class="tw-muted">-- <$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"> <$transclude tiddler=<<listItem>> field="caption"/> <i class="tc-muted">-- <$transclude tiddler=<<listItem>> field="description"/></i></$checkbox>
 
 </$list>
 

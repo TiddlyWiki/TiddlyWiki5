@@ -25,7 +25,7 @@ Attributes can be provided to specify CSS classes and the image width and height
 
 ```
 [img width=32 [Motovun Jack.jpg]]
-[img width=32 class="tw-image" [Motovun Jack.jpg]]
+[img width=32 class="tc-image" [Motovun Jack.jpg]]
 ```
 
 Note that attributes can be specified as transclusions or variable references:

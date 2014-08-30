@@ -1,7 +1,7 @@
 created: 20140226194405353
 modified: 20140724194729158
 tags: message navigator-message
-title: WidgetMessage: tw-new-tiddler
+title: WidgetMessage: tm-new-tiddler
 type: text/vnd.tiddlywiki
 
 The new tiddler message creates a new draft tiddler and adds it to the current story. It requires the following properties on the `event` object:
@@ -17,5 +17,5 @@ The new tiddler message is usually generated with the LinkWidget or the ButtonWi
 To make a button that creates new tiddlers tagged "task", create a tiddler called "TaskTemplate" with that tag, and then make your button like this:
 
 ```
-<$button message="tw-new-tiddler" param="TaskTemplate">New Task</$button>
+<$button message="tm-new-tiddler" param="TaskTemplate">New Task</$button>
 ```

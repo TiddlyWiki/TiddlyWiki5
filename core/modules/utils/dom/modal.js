@@ -50,13 +50,12 @@ Modal.prototype.display = function(title,options) {
 	this.modalCount++;
 	this.adjustPageClass();
 	// Add classes
-	$tw.utils.addClass(wrapper,"modal-wrapper");
-	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
-	$tw.utils.addClass(modalWrapper,"modal");
-	$tw.utils.addClass(modalHeader,"modal-header");
-	$tw.utils.addClass(modalBody,"modal-body");
-	$tw.utils.addClass(modalLink,"btn btn-large btn-block btn-success");
-	$tw.utils.addClass(modalFooter,"modal-footer");
+	$tw.utils.addClass(wrapper,"tc-modal-wrapper");
+	$tw.utils.addClass(modalBackdrop,"tc-modal-backdrop");
+	$tw.utils.addClass(modalWrapper,"tc-modal");
+	$tw.utils.addClass(modalHeader,"tc-modal-header");
+	$tw.utils.addClass(modalBody,"tc-modal-body");
+	$tw.utils.addClass(modalFooter,"tc-modal-footer");
 	// Join them together
 	wrapper.appendChild(modalBackdrop);
 	wrapper.appendChild(modalWrapper);
@@ -114,11 +113,7 @@ Modal.prototype.display = function(title,options) {
 			attributes: {
 				message: {
 					type: "string",
-					value: "tw-close-tiddler"
-				},
-				"class": {
-					type: "string",
-					value: "btn btn-primary"
+					value: "tm-close-tiddler"
 				}
 			},
 			children: [{
@@ -157,12 +152,12 @@ Modal.prototype.display = function(title,options) {
 				document.body.removeChild(wrapper);
 			}
 		},duration);
-		// Don't let anyone else handle the tw-close-tiddler message
+		// Don't let anyone else handle the tm-close-tiddler message
 		return false;
 	};
-	headerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
-	bodyWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
-	footerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
+	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}
@@ -194,7 +189,7 @@ Modal.prototype.display = function(title,options) {
 
 Modal.prototype.adjustPageClass = function() {
 	if($tw.pageContainer) {
-		$tw.utils.toggleClass($tw.pageContainer,"tw-modal-displayed",this.modalCount > 0);
+		$tw.utils.toggleClass($tw.pageContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
 };
 

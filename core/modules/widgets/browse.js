@@ -40,7 +40,7 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		self.wiki.readFiles(event.target.files,function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 		});
 		return false;
 	},false);

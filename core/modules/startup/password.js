@@ -19,7 +19,7 @@ exports.after = ["startup"];
 exports.synchronous = true;
 
 exports.startup = function() {
-	$tw.rootWidget.addEventListener("tw-set-password",function(event) {
+	$tw.rootWidget.addEventListener("tm-set-password",function(event) {
 		$tw.passwordPrompt.createPrompt({
 			serviceName: "Set a new password for this TiddlyWiki",
 			noUserName: true,
@@ -33,7 +33,7 @@ exports.startup = function() {
 			}
 		});
 	});
-	$tw.rootWidget.addEventListener("tw-clear-password",function(event) {
+	$tw.rootWidget.addEventListener("tm-clear-password",function(event) {
 		$tw.crypto.setPassword(null);
 	});
 	// Ensure that $:/isEncrypted is maintained properly

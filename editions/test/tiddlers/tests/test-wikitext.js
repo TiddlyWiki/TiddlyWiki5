@@ -43,7 +43,7 @@ describe("WikiText tests", function() {
 		expect(wiki.renderTiddler("text/html","TiddlerThree")).toBe("<p>The speed of sound</p><p>The light of speed</p>");
 	});
 	it("should support attributes specified as macro invocations", function() {
-		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<p><a class='tw-tiddlylink tw-tiddlylink-missing' href='#This%20is%20my%20''amazingly''%20groovy%20macro!'>This is a link</a></p>");
+		expect(wiki.renderTiddler("text/html","TiddlerFour")).toBe("<p><a class='tc-tiddlylink tc-tiddlylink-missing' href='#This%20is%20my%20''amazingly''%20groovy%20macro!'>This is a link</a></p>");
 	});
 	it("should identify wikiwords to automatically link", function() {
 		expect(wiki.renderText("text/html","text/vnd-tiddlywiki","No wikilinks here").indexOf("<a") !== -1).toBe(false);

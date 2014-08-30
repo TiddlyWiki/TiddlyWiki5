@@ -28,7 +28,7 @@ function SaverHandler(options) {
         this.initSavers();
     }
     // Only do dirty tracking if required
-    if(this.dirtyTracking) {
+    if($tw.browser && this.dirtyTracking) {
         // Compile the dirty tiddler filter
         this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
         // Count of tiddlers that have been changed but not yet saved
@@ -43,6 +43,9 @@ function SaverHandler(options) {
             });
             self.numTasksInQueue += filteredChanges.length;
             self.updateDirtyStatus();
+            if(self.numTasksInQueue > 0) {
+                self.saveWiki({method: "autosave"});
+            }
         });
         // Browser event handlers
         if($tw.browser) {
@@ -59,20 +62,13 @@ function SaverHandler(options) {
     }
     // Install the save action handlers
     if($tw.browser) {
-        $tw.rootWidget.addEventListener("tw-save-wiki",function(event) {
+        $tw.rootWidget.addEventListener("tm-save-wiki",function(event) {
             self.saveWiki({
                 template: event.param,
                 downloadType: "text/plain"
             });
         });
-        $tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
-            self.saveWiki({
-                method: "autosave",
-                template: event.param,
-                downloadType: "text/plain"
-            });
-        });
-        $tw.rootWidget.addEventListener("tw-download-file",function(event) {
+        $tw.rootWidget.addEventListener("tm-download-file",function(event) {
             self.saveWiki({
                 method: "download",
                 template: event.param,
@@ -82,7 +78,7 @@ function SaverHandler(options) {
     }
 }
 
-SaverHandler.prototype.titleSyncFilter = "$:/config/SyncFilter";
+SaverHandler.prototype.titleSyncFilter = "$:/config/SaverFilter";
 SaverHandler.prototype.titleAutoSave = "$:/config/AutoSave";
 SaverHandler.prototype.titleSavedNotification = "$:/language/Notifications/Save/Done";
 
@@ -115,7 +111,7 @@ SaverHandler.prototype.initSavers = function(moduleType) {
 
 /*
 Save the wiki contents. Options are:
-    method: "save" or "download"
+    method: "save", "autosave" or "download"
     template: the tiddler containing the template to save
     downloadType: the content type for the saved file
 */
@@ -130,6 +126,11 @@ SaverHandler.prototype.saveWiki = function(options) {
             if(err) {
                 alert("Error while saving:\n\n" + err);
             } else {
+                // Clear the task queue if we're saving (rather than downloading)
+                if(method !== "download") {
+                    self.numTasksInQueue = 0;
+                    self.updateDirtyStatus();
+                }
                 $tw.notifier.display(self.titleSavedNotification);
                 if(options.callback) {
                     options.callback();
@@ -145,11 +146,6 @@ SaverHandler.prototype.saveWiki = function(options) {
         var saver = this.savers[t];
         if(saver.info.capabilities.indexOf(method) !== -1 && saver.save(text,method,callback)) {
             this.logger.log("Saving wiki with method",method,"through saver",saver.info.name);
-            // Clear the task queue if we're saving (rather than downloading)
-            if(method !== "download") {
-                this.numTasksInQueue = 0;
-                this.updateDirtyStatus();
-            }
             return true;
         }
     }
@@ -164,11 +160,11 @@ SaverHandler.prototype.isDirty = function() {
 };
 
 /*
-Update the document body with the class "tw-dirty" if the wiki has unsaved/unsynced changes
+Update the document body with the class "tc-dirty" if the wiki has unsaved/unsynced changes
 */
 SaverHandler.prototype.updateDirtyStatus = function() {
     if($tw.browser) {
-        $tw.utils.toggleClass(document.body,"tw-dirty",this.isDirty());
+        $tw.utils.toggleClass(document.body,"tc-dirty",this.isDirty());
     }
 };
 

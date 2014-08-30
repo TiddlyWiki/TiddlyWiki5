@@ -11,7 +11,7 @@ caption: {{$:/language/ControlPanel/Tools/Caption}}
 
 ! <<lingo Export/Heading>>
 
-<$button message="tw-download-file" param="$:/core/templates/alltiddlers.template.html" class="btn-big-green"><<lingo Export/AllAsStaticHTML/Caption>> {{$:/core/images/save-button}}</$button>
+<$button message="tm-download-file" param="$:/core/templates/alltiddlers.template.html" class="tc-btn-big-green"><<lingo Export/AllAsStaticHTML/Caption>> {{$:/core/images/save-button}}</$button>
 
 ! <<lingo Encryption/Heading>>
 

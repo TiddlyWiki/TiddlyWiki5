@@ -3,20 +3,20 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/theme-button}} {{$:/language/Buttons/Theme/Caption}}
 description: {{$:/language/Buttons/Theme/Hint}}
 
-<$button popup=<<qualify "$:/state/popup/theme">> title={{$:/language/Buttons/Theme/Hint}} aria-label={{$:/language/Buttons/Theme/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button popup=<<qualify "$:/state/popup/theme">> title={{$:/language/Buttons/Theme/Hint}} aria-label={{$:/language/Buttons/Theme/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/theme-button}}
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/Theme/Caption}}/>
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/theme">> type="popup" position="below" animate="yes">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 <$linkcatcher to="$:/theme">
 <$list filter="[plugin-type[theme]sort[title]]" variable="themeTitle">
 <$link to=<<themeTitle>>>
-<span class="tw-drop-down-bullet">
+<span class="tc-drop-down-bullet">
 <$reveal type="match" state="$:/theme" text=<<themeTitle>>>
 &bull;
 </$reveal>

@@ -6,22 +6,22 @@ description: {{$:/language/Buttons/StoryView/Hint}}
 \define icon()
 $:/core/images/storyview-$(storyview)$
 \end
-<$button popup=<<qualify "$:/state/popup/storyview">> title={{$:/language/Buttons/StoryView/Hint}} aria-label={{$:/language/Buttons/StoryView/Caption}} class=<<tw-config-toolbar-class>> selectedClass="tw-selected">
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button popup=<<qualify "$:/state/popup/storyview">> title={{$:/language/Buttons/StoryView/Hint}} aria-label={{$:/language/Buttons/StoryView/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 <$set name="storyview" value={{$:/view}}>
 <$transclude tiddler=<<icon>>/>
 </$set>
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/StoryView/Caption}}/>
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/storyview">> type="popup" position="below" animate="yes">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 <$linkcatcher to="$:/view">
 <$list filter="[storyviews[]]" variable="storyview">
 <$link to=<<storyview>>>
-<span class="tw-drop-down-bullet">
+<span class="tc-drop-down-bullet">
 <$reveal type="match" state="$:/view" text=<<storyview>>>
 &bull;
 </$reveal>

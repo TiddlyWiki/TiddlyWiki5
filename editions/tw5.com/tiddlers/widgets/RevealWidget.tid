@@ -68,7 +68,7 @@ Here is a simple example of a popup built with the RevealWidget:
 <<wikitext-example-without-html '<$button popup="$:/SamplePopupState">Pop me up!</$button>
 
 <$reveal type="popup" state="$:/SamplePopupState">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 
 ! This is the popup
 And this is some text

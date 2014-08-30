@@ -3,7 +3,7 @@ tags: $:/tags/stylesheet
 
 @media (min-width: 600px) {
 
-	.tw-link-info {
+	.tc-link-info {
 		display: -webkit-flex;
 		display: -ms-flexbox;
 		display: flex;
@@ -13,14 +13,14 @@ tags: $:/tags/stylesheet
 		flex-wrap: wrap;
 	}
 
-	.tw-link-info-item {
+	.tc-link-info-item {
 		max-width: 25em;
 		margin-right: 10px;
 	}
 
 }
 
-.tw-link-info-item {
+.tc-link-info-item {
 	display: inline-block;
 	border: 1px solid <<colour muted-foreground>>;
 	padding: 5px 10px;
@@ -30,19 +30,19 @@ tags: $:/tags/stylesheet
 	line-height: 1.2;
 }
 
-.tw-link-info-item h1 {
+.tc-link-info-item h1 {
 	font-weight: 500;
 	font-size: 16px;	
 }
 
-.tw-scrollable-demo {
+.tc-scrollable-demo {
 	border: 1px solid <<colour message-border>>;
 	background-color: <<colour message-background>>;
 	padding: 1em;
 	height: 400px;
 }
 
-.tw-improvement-banner {
+.tc-improvement-banner {
 	font-size: 0.7em;
 	background: #fcc;
 	padding-left: 5px;
@@ -53,19 +53,19 @@ tags: $:/tags/stylesheet
 
 @media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 	
-	.tw-improvement-banner {
+	.tc-improvement-banner {
 	}
 
 }
 
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	.tw-improvement-banner {
+	.tc-improvement-banner {
 		margin-right: -23px;
 		margin-left: -53px;
 	}
 
-	.tw-improvement-banner:before {
+	.tc-improvement-banner:before {
 		display: block;
 		position: absolute;
 		width: 0;
@@ -81,7 +81,7 @@ tags: $:/tags/stylesheet
 
 }
 
-.tw-improvement-banner svg {
+.tc-improvement-banner svg {
 	width: 1em;
 	height: 1em;
 }

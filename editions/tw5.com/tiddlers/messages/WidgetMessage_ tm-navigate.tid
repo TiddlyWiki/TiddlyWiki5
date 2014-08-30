@@ -1,10 +1,10 @@
 created: 20140226085215941
 modified: 20140226085454346
 tags: message
-title: WidgetMessage: tw-navigate
+title: WidgetMessage: tm-navigate
 type: text/vnd.tiddlywiki
 
-The `tw-navigate` message inserts the specified tiddler into the story and puts it at the top of the history stack. If the tiddler is not already present in the story then it will be positioned immediately after the tiddler specified in `event.navigateFromTitle`.
+The `tm-navigate` message inserts the specified tiddler into the story and puts it at the top of the history stack. If the tiddler is not already present in the story then it will be positioned immediately after the tiddler specified in `event.navigateFromTitle`.
 
 The navigate message requires the following properties on the `event` object:
 

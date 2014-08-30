@@ -41,9 +41,9 @@ TiddlerWidget.prototype.execute = function() {
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	// Set context variables
 	this.setVariable("currentTiddler",this.tiddlerTitle);
-	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tw-tiddler-exists" : "tw-tiddler-missing");
-	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tw-tiddler-shadow" : "");
-	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tw-tiddler-system" : "");
+	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tc-tiddler-exists" : "tc-tiddler-missing");
+	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tc-tiddler-shadow" : "");
+	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tc-tiddler-system" : "");
 	this.setVariable("tiddlerTagClasses",this.getTagClasses())
 	// Construct the child widgets
 	this.makeChildWidgets();
@@ -57,7 +57,7 @@ TiddlerWidget.prototype.getTagClasses = function() {
 	if(tiddler) {
 		var tags = [];
 		$tw.utils.each(tiddler.fields.tags,function(tag) {
-			tags.push("tw-tagged-" + encodeURIComponent(tag));
+			tags.push("tc-tagged-" + encodeURIComponent(tag));
 		});
 		return tags.join(" ");
 	} else {
@@ -70,7 +70,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedTiddlers[this.tiddlerTitle]) {
+	if(changedAttributes.tiddler) {
 		this.refreshSelf();
 		return true;
 	} else {

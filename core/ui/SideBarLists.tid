@@ -1,21 +1,21 @@
 title: $:/core/ui/SideBarLists
 
-<div class="tw-sidebar-lists">
+<div class="tc-sidebar-lists">
 
-<div class="tw-search">
+<div class="tc-search">
 <$edit-text tiddler="$:/temp/search" type="search" tag="input"/>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$linkcatcher to="$:/temp/search">
-<$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link>
+<$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link>
 </$linkcatcher>
 </$reveal>
-<$reveal state="$:/temp/search" type="match" text="">&nbsp;<$link to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="btn-invisible">&hellip;</$link>
+<$reveal state="$:/temp/search" type="match" text="">&nbsp;<$link to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">&hellip;</$link>
 </$reveal>
 </div>
 
 <$reveal state="$:/temp/search" type="nomatch" text="">
 
-<div class="tw-search-results">
+<div class="tc-search-results">
 
 {{$:/language/Search/Matches}}
 

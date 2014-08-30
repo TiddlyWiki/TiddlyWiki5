@@ -45,7 +45,7 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var classes = ["tw-quote"];
+	var classes = ["tc-quote"];
 	// Get all the details of the match
 	var reEndString = "^" + this.match[1] + "(?!<)";
 	// Move past the <s
