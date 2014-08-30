@@ -3,11 +3,11 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/home-button}} {{$:/language/Buttons/Home/Caption}}
 description: {{$:/language/Buttons/Home/Hint}}
 
-<$button message="tm-home" title={{$:/language/Buttons/Home/Hint}} aria-label={{$:/language/Buttons/Home/Caption}} class=<<tw-config-toolbar-class>>>
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button message="tm-home" title={{$:/language/Buttons/Home/Hint}} aria-label={{$:/language/Buttons/Home/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/home-button}}
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/Home/Caption}}/>
 </$list>
 </$button>

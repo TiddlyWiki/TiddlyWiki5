@@ -17,10 +17,10 @@ This is done in `bld.sh` by this command:
 
 It saves the tiddler ReadMe to the file `./readme.md` in the `text/html` format.
 
-By default, tiddler links will be rendered as `<a>` links to a relative URI consisting of the title of the tiddler. This behaviour can be overridden by defining the macro `tw-wikilink-template`, as is done at the top of the tiddler ReadMe:
+By default, tiddler links will be rendered as `<a>` links to a relative URI consisting of the title of the tiddler. This behaviour can be overridden by defining the macro `tv-wikilink-template`, as is done at the top of the tiddler ReadMe:
 
 ```
-\define tw-wikilink-template() http://tiddlywiki.com/static/$uri_doubleencoded$.html
+\define tv-wikilink-template() http://tiddlywiki.com/static/$uri_doubleencoded$.html
 ```
 
 See the LinkWidget for more details.

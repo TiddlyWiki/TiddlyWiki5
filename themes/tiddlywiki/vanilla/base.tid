@@ -836,11 +836,11 @@ canvas.tc-edit-bitmapeditor  {
 ** Dropdowns
 */
 
-.btn-dropdown {
+.tc-btn-dropdown {
 	text-align: left;
 }
 
-.btn-dropdown svg, .btn-dropdown img {
+.tc-btn-dropdown svg, .tc-btn-dropdown img {
 	height: 1em;
 	width: 1em;
 	fill: <<colour muted-foreground>>;

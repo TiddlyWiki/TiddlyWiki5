@@ -16,7 +16,7 @@ background-color:$(backgroundColor)$;
 <div class="tc-edit-add-tag">
 <span class="tc-add-tag-name">
 <$edit-text tiddler="$:/temp/NewTagName" tag="input" default="" placeholder={{$:/language/EditTemplate/Tags/Add/Placeholder}} focusPopup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-edit-texteditor"/>
-</span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
+</span> <$button popup=<<qualify "$:/state/popup/tags-auto-complete">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button> <span class="tc-add-tag-button">
 <$button message="tm-add-tag" param={{$:/temp/NewTagName}} set="$:/temp/NewTagName" setTo="" class="">
 <<lingo Tags/Add/Button>>
 </$button>

@@ -3,11 +3,11 @@ tags: $:/tags/EditToolbar
 caption: {{$:/core/images/cancel-button}} {{$:/language/Buttons/Cancel/Caption}}
 description: {{$:/language/Buttons/Cancel/Hint}}
 
-<$button message="tm-cancel-tiddler" title={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tw-config-toolbar-class>>>
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button message="tm-cancel-tiddler" title={{$:/language/Buttons/Cancel/Hint}} aria-label={{$:/language/Buttons/Cancel/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/cancel-button}}
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/Cancel/Caption}}/>
 </$list>
 </$button>

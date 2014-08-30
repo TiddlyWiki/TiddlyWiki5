@@ -3,11 +3,11 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/options-button}} {{$:/language/Buttons/ControlPanel/Caption}}
 description: {{$:/language/Buttons/ControlPanel/Hint}}
 
-<$button to="$:/ControlPanel" title={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class=<<tw-config-toolbar-class>>>
-<$list filter="[<tw-config-toolbar-icons>prefix[yes]]">
+<$button to="$:/ControlPanel" title={{$:/language/Buttons/ControlPanel/Hint}} aria-label={{$:/language/Buttons/ControlPanel/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/options-button}}
 </$list>
-<$list filter="[<tw-config-toolbar-text>prefix[yes]]">
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
 <$text text={{$:/language/Buttons/ControlPanel/Caption}}/>
 </$list>
 </$button>

@@ -2,11 +2,11 @@ title: $:/core/ui/MoreSideBar/Tags
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
-<$set name="tw-config-toolbar-icons" value="yes">
+<$set name="tv-config-toolbar-icons" value="yes">
 
-<$set name="tw-config-toolbar-text" value="yes">
+<$set name="tv-config-toolbar-text" value="yes">
 
-<$set name="tw-config-toolbar-class" value="">
+<$set name="tv-config-toolbar-class" value="">
 
 {{$:/core/ui/Buttons/tag-manager}}
 
