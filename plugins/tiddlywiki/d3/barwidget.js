@@ -57,7 +57,7 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 		n = 4; // number of layers
 		m = 58; // number of samples per layer
 		stack = d3.layout.stack();
-		layers = stack(d3.range(n).map(function() { return bumpLayer(m, .1); }));
+		layers = stack(d3.range(n).map(function() { return bumpLayer(m, 0.1); }));
 	}
 	// Calculate the maximum data values
 	var yGroupMax = d3.max(layers, function(layer) { return d3.max(layer, function(d) { return d.y; }); }),
@@ -69,7 +69,7 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 	// x-scale
 	var x = d3.scale.ordinal()
 		.domain(d3.range(m))
-		.rangeRoundBands([0, width], .08);
+		.rangeRoundBands([0, width], 0.08);
 	// y-scale
 	var y = d3.scale.linear()
 		.domain([0, yStackMax])
@@ -96,13 +96,13 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 	// Create the layers
 	var layer = mainGroup.selectAll(".layer")
 		.data(layers)
-	  .enter().append("g")
+	.enter().append("g")
 		.attr("class", "layer")
 		.style("fill", function(d, i) { return color(i); });
 	// Create the rectangles in each layer
 	var rect = layer.selectAll("rect")
 		.data(function(d) { return d; })
-	  .enter().append("rect")
+	.enter().append("rect")
 		.attr("x", function(d) { return x(d.x); })
 		.attr("y", height)
 		.attr("width", x.rangeBand())
@@ -131,44 +131,44 @@ BarWidget.prototype.createChart = function(parent,nextSibling) {
 	};
 
 	function transitionGrouped() {
-	  y.domain([0, yGroupMax]);
-	  rect.transition()
-		  .duration(500)
-		  .delay(function(d, i) { return i * 10; })
-		  .attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
-		  .attr("width", x.rangeBand() / n)
-		.transition()
-		  .attr("y", function(d) { return y(d.y); })
-		  .attr("height", function(d) { return height - y(d.y); });
+		y.domain([0, yGroupMax]);
+		rect.transition()
+			.duration(500)
+			.delay(function(d, i) { return i * 10; })
+			.attr("x", function(d, i, j) { return x(d.x) + x.rangeBand() / n * j; })
+			.attr("width", x.rangeBand() / n)
+			.transition()
+			.attr("y", function(d) { return y(d.y); })
+			.attr("height", function(d) { return height - y(d.y); });
 	}
 
 	function transitionStacked() {
-	  y.domain([0, yStackMax]);
-	  rect.transition()
-		  .duration(500)
-		  .delay(function(d, i) { return i * 10; })
-		  .attr("y", function(d) { return y(d.y0 + d.y); })
-		  .attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
-		.transition()
-		  .attr("x", function(d) { return x(d.x); })
-		  .attr("width", x.rangeBand());
+		y.domain([0, yStackMax]);
+		rect.transition()
+			.duration(500)
+			.delay(function(d, i) { return i * 10; })
+			.attr("y", function(d) { return y(d.y0 + d.y); })
+			.attr("height", function(d) { return y(d.y0) - y(d.y0 + d.y); })
+			.transition()
+			.attr("x", function(d) { return x(d.x); })
+			.attr("width", x.rangeBand());
 	}
 
 	// Inspired by Lee Byron's test data generator.
 	function bumpLayer(n, o) {
-	  function bump(a) {
-		var x = 1 / (.1 + Math.random()),
-			y = 2 * Math.random() - .5,
-			z = 10 / (.1 + Math.random());
-		for (var i = 0; i < n; i++) {
-		  var w = (i / n - y) * z;
-		  a[i] += x * Math.exp(-w * w);
+		function bump(a) {
+			var x = 1 / (0.1 + Math.random()),
+				y = 2 * Math.random() - 0.5,
+				z = 10 / (0.1 + Math.random());
+			for (var i = 0; i < n; i++) {
+			var w = (i / n - y) * z;
+			a[i] += x * Math.exp(-w * w);
+			}
 		}
-	  }
-	  var a = [], i;
-	  for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
-	  for (i = 0; i < 5; ++i) bump(a);
-	  return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
+		var a = [], i;
+		for (i = 0; i < n; ++i) a[i] = o + o * Math.random();
+		for (i = 0; i < 5; ++i) bump(a);
+		return a.map(function(d, i) { return {x: i, y: Math.max(0, d)}; });
 	}
 };
 

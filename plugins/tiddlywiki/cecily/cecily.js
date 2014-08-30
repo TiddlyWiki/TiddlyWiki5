@@ -113,7 +113,7 @@ CecilyStoryView.prototype.lookupTiddlerInMap = function(title,domNode) {
 	if(tiddler) {
 		var draftOf = tiddler.fields["draft.of"];
 		if(draftOf && this.map.positions[draftOf]) {
-			return this.map.positions[draftOf]
+			return this.map.positions[draftOf];
 		}
 	}
 	// Try looking the target tiddler up in the map

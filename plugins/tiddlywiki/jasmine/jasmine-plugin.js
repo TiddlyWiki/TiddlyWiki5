@@ -51,7 +51,7 @@ exports.startup = function() {
 		// The HTMLReporter links itself into the jasmine object automatically, but we have to manually add the node reporter
 		jasmine.jasmine.TerminalVerboseReporter = reporterExports.jasmineNode.TerminalVerboseReporter;
 		jasmine.jasmine.TerminalReporter = reporterExports.jasmineNode.TerminalReporter;
-	    jasmineEnv.addReporter(new jasmine.jasmine.TerminalVerboseReporter({
+		jasmineEnv.addReporter(new jasmine.jasmine.TerminalVerboseReporter({
 			print: require("util").print,
 			color: true,
 			includeStackTrace: true
