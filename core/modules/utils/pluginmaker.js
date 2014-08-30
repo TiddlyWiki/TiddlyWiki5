@@ -24,15 +24,16 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		throw "No such tiddler as " + title;
 	}
 	// Extract the JSON
+	var jsonPluginTiddler;
 	try {
-		var jsonPluginTiddler = JSON.parse(pluginTiddler.fields.text);
+		jsonPluginTiddler = JSON.parse(pluginTiddler.fields.text);
 	} catch(e) {
 		throw "Cannot parse plugin tiddler " + title + "\nError: " + e;
 	}
 	// Get the list of tiddlers
 	var tiddlers = Object.keys(jsonPluginTiddler.tiddlers);
 	// Add the additional tiddlers
-	$tw.utils.pushTop(tiddlers,additionalTiddlers)
+	$tw.utils.pushTop(tiddlers,additionalTiddlers);
 	// Remove any excluded tiddlers
 	for(var t=tiddlers.length-1; t>=0; t--) {
 		if(excludeTiddlers.indexOf(tiddlers[t]) !== -1) {
@@ -71,8 +72,10 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 			$tw.wiki.deleteTiddler(title);
 		}
 	});
+	// Trigger an autosave
+	$tw.rootWidget.dispatchEvent({type: "tw-auto-save-wiki"});
 	// Return a heartwarming confirmation
 	return "Plugin " + title + " successfully saved";
-}
+};
 
 })();

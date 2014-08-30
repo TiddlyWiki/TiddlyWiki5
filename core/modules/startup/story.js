@@ -48,7 +48,7 @@ exports.startup = function() {
 				$tw.locationHash = hash;
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
-		},false)
+		},false);
 		// Listen for the tm-browser-refresh message
 		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
 			window.location.reload(true);
@@ -157,7 +157,7 @@ function updateLocationHash(options) {
 		}
 		// Assemble the location hash
 		if(options.updateAddressBar === "permalink") {
-			$tw.locationHash = "#" + encodeURIComponent(targetTiddler)
+			$tw.locationHash = "#" + encodeURIComponent(targetTiddler);
 		} else {
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 		}

@@ -51,10 +51,10 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 					tiddlers[mappedTitle] = {
 						title: mappedTitle,
 						text: tiddlerData[index]
-					}
+					};
 					messages[mappedTitle] = $tw.language.getString("Import/Upgrader/ThemeTweaks/Created",{variables: {
 						from: title + "##" + index
-					}})
+					}});
 				}
 			}
 		}

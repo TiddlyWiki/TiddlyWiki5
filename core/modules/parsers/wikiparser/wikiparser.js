@@ -100,7 +100,7 @@ Get the next match out of an array of parse rule instances
 */
 WikiParser.prototype.findNextMatch = function(rules,startPos) {
 	// Find the best matching rule by finding the closest match position
-	var matchingRule = undefined,
+	var matchingRule,
 		matchingRulePos = this.sourceLength;
 	// Step through each rule
 	for(var t=0; t<rules.length; t++) {
@@ -308,7 +308,7 @@ WikiParser.prototype.parseClasses = function() {
 	while(match && match.index === this.pos) {
 		this.pos = match.index + match[0].length;
 		classNames.push(match[1]);
-		var match = classRegExp.exec(this.source);
+		match = classRegExp.exec(this.source);
 	}
 	return classNames;
 };
@@ -345,7 +345,7 @@ WikiParser.prototype.amendRules = function(type,names) {
 	processRuleArray(this.pragmaRules);
 	processRuleArray(this.blockRules);
 	processRuleArray(this.inlineRules);
-}
+};
 
 exports["text/vnd.tiddlywiki"] = WikiParser;
 
