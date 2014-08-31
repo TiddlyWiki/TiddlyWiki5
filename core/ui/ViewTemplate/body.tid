@@ -1,7 +1,7 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
-<div class="body">
+<div class="tc-tiddler-body">
 
 <$list filter="[all[current]!has[plugin-type]]">
 
