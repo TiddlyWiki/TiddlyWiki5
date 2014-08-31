@@ -4,6 +4,12 @@ tags: dev howto
 title: Working with the TiddlyWiki5 repository
 type: text/vnd.tiddlywiki
 
+! Introduction
+
+Mario Pietsch has created a short video tutorial on working with the TiddlyWiki5 ~GitHub repository.
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/6ElUruH92tc" frameborder="0" allowfullscreen></iframe>
+
 ! Setting Up
 
 If you plan on working with the TiddlyWiki5 source code then follow these steps:
