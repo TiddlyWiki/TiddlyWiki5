@@ -41,9 +41,9 @@ exports.addClassToParseTreeNode = function(node,classString) {
 
 exports.addStyleToParseTreeNode = function(node,name,value) {
 		node.attributes = node.attributes || {};
-		node.attributes["style"] = node.attributes["style"] || {type: "string", value: ""};
-		if(node.attributes["style"].type === "string") {
-			node.attributes["style"].value += name + ":" + value + ";";
+		node.attributes.style = node.attributes.style || {type: "string", value: ""};
+		if(node.attributes.style.type === "string") {
+			node.attributes.style.value += name + ":" + value + ";";
 		}
 };
 

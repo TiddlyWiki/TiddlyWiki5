@@ -126,7 +126,7 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 				return;
 			}
 		}
-	};
+	}
 };
 
 DropZoneWidget.prototype.importDataTypes = [

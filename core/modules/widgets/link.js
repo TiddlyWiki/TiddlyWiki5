@@ -35,7 +35,7 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Get the value of the tv-wikilinks configuration macro
 	var wikiLinksMacro = this.getVariable("tv-wikilinks"),
-		useWikiLinks = wikiLinksMacro ? !(wikiLinksMacro.trim() === "no") : true;
+		useWikiLinks = wikiLinksMacro ? (wikiLinksMacro.trim() !== "no") : true;
 	// Render the link if required
 	if(useWikiLinks) {
 		this.renderLink(parent,nextSibling);

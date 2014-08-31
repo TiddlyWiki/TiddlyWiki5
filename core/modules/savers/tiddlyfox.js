@@ -21,7 +21,7 @@ TiddlyFoxSaver.prototype.save = function(text,method,callback) {
 		// Get the pathname of this document
 		var pathname = document.location.toString().split("#")[0];
 		// Replace file://localhost/ with file:///
-		if(pathname.indexOf("file://localhost/") == 0) {
+		if(pathname.indexOf("file://localhost/") === 0) {
 			pathname = "file://" + pathname.substr(16);
 		}
 		// Windows path file:///x:/blah/blah --> x:\blah\blah
@@ -32,10 +32,10 @@ TiddlyFoxSaver.prototype.save = function(text,method,callback) {
 		} else if(pathname.indexOf("file://///") === 0) {
 			pathname = "\\\\" + unescape(pathname.substr(10)).replace(/\//g,"\\");
 		// Mac/Unix local path file:///path/path --> /path/path
-		} else if(pathname.indexOf("file:///") == 0) {
+		} else if(pathname.indexOf("file:///") === 0) {
 			pathname = unescape(pathname.substr(7));
 		// Mac/Unix local path file:/path/path --> /path/path
-		} else if(pathname.indexOf("file:/") == 0) {
+		} else if(pathname.indexOf("file:/") === 0) {
 			pathname = unescape(pathname.substr(5));
 		// Otherwise Windows networth path file://server/share/path/path --> \\server\share\path\path
 		} else {

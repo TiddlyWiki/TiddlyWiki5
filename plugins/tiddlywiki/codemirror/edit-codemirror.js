@@ -25,14 +25,14 @@ Config options "$:/config/CodeMirror" e.g. to allow vim key bindings
 /*global $tw: false */
 "use strict";
 
-var CODEMIRROR_OPTIONS = "$:/config/CodeMirror"
+var CODEMIRROR_OPTIONS = "$:/config/CodeMirror";
 
 // Install CodeMirror
 if($tw.browser && !window.CodeMirror) {
 	window.CodeMirror = require("$:/plugins/tiddlywiki/codemirror/lib/codemirror.js");
 	// Install required CodeMirror plugins
 	var configOptions = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}),
-		req = configOptions["require"];
+		req = configOptions.require;
 	if(req) {
 		if($tw.utils.isArray(req)) {
 			for(var index=0; index<req.length; index++) {

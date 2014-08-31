@@ -14,7 +14,7 @@ Animates list insertions and removals
 
 var PopStoryView = function(listWidget) {
 	this.listWidget = listWidget;
-}
+};
 
 PopStoryView.prototype.navigateTo = function(historyInfo) {
 	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);

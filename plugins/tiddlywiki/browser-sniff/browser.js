@@ -13,7 +13,7 @@ Initialise $:/info/browser tiddlers
 "use strict";
 
 exports.getInfoTiddlerFields = function() {
-	var mapBoolean = function(value) {return value ? "yes" : "no"},
+	var mapBoolean = function(value) {return value ? "yes" : "no";},
 		infoTiddlerFields = [];
 	// Basics
 	if($tw.browser) {

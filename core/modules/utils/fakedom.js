@@ -19,7 +19,7 @@ var bumpSequenceNumber = function(object) {
 	if(sequenceNumber !== null) {
 		object.sequenceNumber = sequenceNumber++;
 	}
-}
+};
 
 var TW_TextNode = function(text) {
 	bumpSequenceNumber(this);
@@ -79,7 +79,7 @@ TW_Element.prototype.insertBefore = function(node,nextSibling) {
 	} else {
 		this.appendChild(node);
 	}
-}
+};
 
 TW_Element.prototype.removeChild = function(node) {
 	var p = this.children.indexOf(node);
@@ -93,9 +93,9 @@ TW_Element.prototype.hasChildNodes = function() {
 };
 
 Object.defineProperty(TW_Element.prototype, "firstChild", {
-    get: function() {
-    	return this.children[0];
-    }
+	get: function() {
+		return this.children[0];
+	}
 });
 
 TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
@@ -106,22 +106,22 @@ Object.defineProperty(TW_Element.prototype, "className", {
 	get: function() {
 		return this.attributes["class"] || "";
 	},
-    set: function(value) {
-    	this.attributes["class"] = value;
-    }
+	set: function(value) {
+		this.attributes["class"] = value;
+	}
 });
 
 Object.defineProperty(TW_Element.prototype, "value", {
 	get: function() {
-		return this.attributes["value"] || "";
+		return this.attributes.value || "";
 	},
-    set: function(value) {
-    	this.attributes["value"] = value;
-    }
+	set: function(value) {
+		this.attributes.value = value;
+	}
 });
 
 Object.defineProperty(TW_Element.prototype, "outerHTML", {
-    get: function() {
+	get: function() {
 		var output = [],attr,a,v;
 		output.push("<",this.tag);
 		if(this.attributes) {
@@ -143,7 +143,7 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 			output.push("</",this.tag,">");
 		}
 		return output.join("");
-    }
+	}
 });
 
 Object.defineProperty(TW_Element.prototype, "innerHTML", {
@@ -162,10 +162,10 @@ Object.defineProperty(TW_Element.prototype, "innerHTML", {
 			return b.join("");
 		}
 	},
-    set: function(value) {
-    	this.isRaw = true;
-    	this.rawHTML = value;
-    }
+	set: function(value) {
+		this.isRaw = true;
+		this.rawHTML = value;
+	}
 });
 
 Object.defineProperty(TW_Element.prototype, "textContent", {
@@ -193,7 +193,7 @@ Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 				b.push("\n");
 			}
 			if(this.tag === "li") {
-				b.push("* ")
+				b.push("* ");
 			}
 			$tw.utils.each(this.children,function(node) {
 				b.push(node.formattedTextContent);

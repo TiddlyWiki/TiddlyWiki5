@@ -109,7 +109,7 @@ exports["text/html"] = function(text,fields) {
 		if(sysMatch) {
 			results.push.apply(results,deserializeTiddlyWikiFile(text,systemAreaMarkerRegExp.lastIndex,!!sysMatch[1],fields));
 		}
-		return results
+		return results;
 	} else {
 		// Check whether we've got an encrypted file
 		var encryptedStoreArea = $tw.utils.extractEncryptedStoreArea(text);

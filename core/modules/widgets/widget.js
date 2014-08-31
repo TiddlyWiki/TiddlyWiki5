@@ -171,7 +171,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 		else for(var i=0; i<actualParams.length; ++i) {
 			args.push(actualParams[i].value);
 		}
-		return macro.run.apply(this,args)
+		return macro.run.apply(this,args);
 	} else {
 		return defaultValue;
 	}
@@ -263,9 +263,14 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			v = undefined;
 		}
 		if(v !== undefined) {
+			var b = a.split(":");
 			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
 			try {
-				domNode.setAttributeNS(null,a,v);
+				if (b.length == 2 && b[0] == "xlink"){
+					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
+				} else {
+					domNode.setAttributeNS(null,a,v);
+				}
 			} catch(e) {
 			}
 		}
@@ -289,7 +294,7 @@ Construct the widget object for a parse tree node
 Widget.prototype.makeChildWidget = function(parseTreeNode) {
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
-		WidgetClass = this.widgetClasses["text"];
+		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
 	return new WidgetClass(parseTreeNode,{
@@ -357,8 +362,7 @@ Widget.prototype.addEventListener = function(type,handler) {
 	} else { // The handler is a function
 		this.eventListeners[type] = function(event) {
 			return handler.call(self,event);
-		}
-
+		};
 	}
 };
 

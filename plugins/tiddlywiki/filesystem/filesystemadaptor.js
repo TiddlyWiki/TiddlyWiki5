@@ -24,20 +24,19 @@ function FileSystemAdaptor(options) {
 	this.logger = new $tw.utils.Logger("FileSystem");
 	this.setwatcher = function(filename, title) {
 		return undefined;
-		return this.watchers[filename] = this.watchers[filename] ||
-			fs.watch(filename, {persistent: false}, function(e) {
-				self.logger.log("Error:",e,filename);
-				if(e === "change") {
-					var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
-					for(var t in tiddlers) {
-						if(tiddlers[t].title) {
-							self.wiki.addTiddler(tiddlers[t]);
-						}
-					}
-				}
-			});
-	}
-
+		//return this.watchers[filename] = this.watchers[filename] ||
+		//	fs.watch(filename, {persistent: false}, function(e) {
+		//		self.logger.log("Error:",e,filename);
+		//		if(e === "change") {
+		//			var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
+		//			for(var t in tiddlers) {
+		//				if(tiddlers[t].title) {
+		//					self.wiki.addTiddler(tiddlers[t]);
+		//				}
+		//			}
+		//		}
+		//	});
+	};
 	for(var f in $tw.boot.files) {
 		var fileInfo = $tw.boot.files[f];
 		this.setwatcher(fileInfo.filepath, f);
@@ -108,7 +107,7 @@ Given a tiddler title and an array of existing filenames, generate a new legal f
 */
 FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
 	// First remove any of the characters that are illegal in Windows filenames
-	var baseFilename = title.replace(/\<|\>|\:|\"|\/|\\|\||\?|\*|\^/g,"_");
+	var baseFilename = title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^/g,"_");
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200) + extension;

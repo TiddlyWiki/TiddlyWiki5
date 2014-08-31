@@ -27,7 +27,8 @@ var processRow = function(prevColumns) {
 		tree = [],
 		col = 0,
 		colSpanCount = 1,
-		prevCell;
+		prevCell,
+		vAlign;
 	// Match a single cell
 	cellRegExp.lastIndex = this.parser.pos;
 	var cellMatch = cellRegExp.exec(this.parser.source);
@@ -38,7 +39,7 @@ var processRow = function(prevColumns) {
 			if(last) {
 				last.rowSpanCount++;
 				$tw.utils.addAttributeToParseTreeNode(last.element,"rowspan",last.rowSpanCount);
-				var vAlign = $tw.utils.getAttributeValueFromParseTreeNode(last.element,"valign","center");
+				vAlign = $tw.utils.getAttributeValueFromParseTreeNode(last.element,"valign","center");
 				$tw.utils.addAttributeToParseTreeNode(last.element,"valign",vAlign);
 				if(colSpanCount > 1) {
 					$tw.utils.addAttributeToParseTreeNode(last.element,"colspan",colSpanCount);
@@ -74,8 +75,8 @@ var processRow = function(prevColumns) {
 			// For ordinary cells, step beyond the opening `|`
 			this.parser.pos++;
 			// Look for a space at the start of the cell
-			var spaceLeft = false,
-				vAlign = null;
+			var spaceLeft = false;
+			vAlign = null;
 			if(this.parser.source.substr(this.parser.pos).search(/^\^([^\^]|\^\^)/) === 0) {
 				vAlign = "top";
 			} else if(this.parser.source.substr(this.parser.pos).search(/^,([^,]|,,)/) === 0) {

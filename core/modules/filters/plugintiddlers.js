@@ -18,12 +18,12 @@ Export our filter function
 exports.plugintiddlers = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
- 		var pluginInfo = options.wiki.getPluginInfo(title) || options.wiki.getTiddlerData(title,{tiddlers:[]});
- 		if(pluginInfo) {
- 			$tw.utils.each(pluginInfo.tiddlers,function(fields,title) {
- 				results.push(title);
- 			});
- 		}
+		var pluginInfo = options.wiki.getPluginInfo(title) || options.wiki.getTiddlerData(title,{tiddlers:[]});
+		if(pluginInfo) {
+			$tw.utils.each(pluginInfo.tiddlers,function(fields,title) {
+				results.push(title);
+			});
+		}
 	});
 	results.sort();
 	return results;

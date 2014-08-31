@@ -1,6 +1,6 @@
 caption: 5.0.16-beta
-created: 20140826131615798
-modified: 20140826131615798
+created: 20140830131615798
+modified: 20140830131615798
 tags: releasenote
 title: Release 5.0.16-beta
 type: text/vnd.tiddlywiki
@@ -9,16 +9,22 @@ type: text/vnd.tiddlywiki
 
 !! Incompatible Changes
 
-These changes have the potential to break existing tiddlers.
+5.0.16-beta brings more incompatible changes than any previous release. These changes are likely to break almost all plugins written for previous releases of TiddlyWiki 5, and will break many customisations.
 
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/issues/764]] all CSS class prefixes from `tw-` to `tc-` (eg `tw-tiddler-frame` has become `tc-tiddler-frame`; missing prefixes have also been added, so `btn-invisible` has become `tc-btn-invisible`)
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/2f69ea362cd673f59b9fadbe11f1f95549a59813]] all message prefixes from `tw-` to `tm-` (eg `tw-close-tiddler` has become `tm-close-tiddler`)
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/89fd5379dd78887fc21746d792072bf5a25f0c56]] all variable prefixes from `tw-` to `tv-` (eg `tw-config-toolbar-icons` has become `tv-config-toolbar-icons`)
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/112a9a95d95e9f62f110c97a4faaf537c5c100b1]] prefix/removeprefix filter operators to be case-sensitive
 
 !! Usability Improvements
 
 * [[Amended|https://github.com/Jermolene/TiddlyWiki5/commit/e47852cb141b384ad2a9097eca795545cb5b2494]] behaviour of the [[tw-browser-refresh|WidgetMessage: tw-browser-refresh]] message so that it no longer clears the location hash
+* [[Hide|https://github.com/Jermolene/TiddlyWiki5/commit/88c9c0c3ee115917b8c1a9126452bb0574061857]] toolbar buttons from static renderings
 
 !! Hackability Improvements
 
+* [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/48312272adb17610db96d50758e6af947cab7b1d]] the [FilterOperator: all]] to be able to select all the source tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/43aeb47fc34f1ba424030c4f78ee907fe7b1d5d8]] problem with single line macro definitions incorrectly including whitespace in the value. (For example, `\define mymacro() yes` would set the macro value to " yes", with a leading space)
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/d2a5a12f2d6b6ccc36dd22a70ac2def08d1d3722]] TableOfContentsMacro to use the caption field if present
 * [[Configurability|https://github.com/Jermolene/TiddlyWiki5/commit/b437f1b450f5f2a3104a9086f7c674299b53b9bc]] for the default tab shown in the tiddler info panel (see [[Configuring the default TiddlerInfo tab]])
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/dcf4e93a3283e3e93cc14e50366f9b0252870835]] [[suffix|FilterOperator: suffix]] and [[removesuffix|FilterOperator: removesuffix]] filter operators
@@ -32,4 +38,5 @@ These changes have the potential to break existing tiddlers.
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BramChen|https://github.com/BramChen]]
+* [[@pmario|https://github.com/pmario]]
 * [[@xcazin|https://github.com/xcazin]]
