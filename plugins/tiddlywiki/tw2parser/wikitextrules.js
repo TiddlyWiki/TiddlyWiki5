@@ -121,7 +121,7 @@ var insertMacroCall = function(w,output,macroName,paramString) {
 		type: "macrocall",
 		name: macroName,
 		params: params,
-		isBlock: true
+		isBlock: false
 	});
 }
 
