@@ -12,6 +12,8 @@ There are several variants of the macro:
 * `<<toc-expandable>>` produces an expandable tree of links
 * `<<toc-selective-expandable>>` produces an expandable tree of links where the expand/contract buttons are only shown for entries that possess child nodes
 
+The macros all generate HTML ordered lists. The `<ol>` elements are given the class `tc-toc`, with the expandable variant also having the class `tc-toc-expandable` and the selective expandable variant also having the class `tc-toc-selective-expandable`.
+
 ! Parameters
 
 |!Position |!Name |!Description |!Default |
