@@ -33,6 +33,7 @@ Plugins are stored as tiddlers with the following fields:
 |plugin-type |Can be ''plugin'' (default) or ''theme'' |
 |text |JSON encoding of the list of tiddlers comprising the plugin |
 |list |Names of exposed plugin information tiddlers (see below) |
+|name |Name of the theme (only for themes) |
 |dependents |List of dependent plugins (currently only implemented for themes) |
 
 ! Plugin folders
