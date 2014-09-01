@@ -1,19 +1,7 @@
-_hash: 68bc50e6415c23513fafbec11506ae62fe5c8f3b
 created: 20130211143136000
 creator: tobibeer
 modified: 20140415164021461
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Suppressing%20Formatting/1335270:26464606220d84bc638573e59dc71530aa224690"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335270
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Suppressing Formatting
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Suppressing Formatting
 type: text/x-tiddlywiki

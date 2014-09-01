@@ -1,18 +1,7 @@
-_hash: 0d3b2ef2a0232e9adbc6a5bf3d863ce17e71cb3f
 created: 20130205062501000
 creator: tobibeer
 modified: 20140831153103538
 modifier: tobibeer
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Markup/1382679:beaebc99fbe21d8e1007f4e99e2564e8ce51d5f1"
-server.host: http://tiddlywiki.org
-server.page.revision: 1382679
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Markup
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 title: Markup
 type: text/x-tiddlywiki
 

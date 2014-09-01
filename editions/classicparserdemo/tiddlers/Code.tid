@@ -1,19 +1,7 @@
-_hash: 63711c725b9bd23b197b1569670088ce26dbd898
 created: 20130211142734000
 creator: tobibeer
 modified: 20140901061201603
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Code/1335258:2e39d9422863168f6a71f2b09941cb4261414092"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335258
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Code
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Code
 type: text/x-tiddlywiki

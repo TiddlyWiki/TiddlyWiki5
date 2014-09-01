@@ -1,18 +1,7 @@
-_hash: 45def774dc01f80083c17e4dc6170000e8c37277
 created: 20130213002736000
 creator: tobibeer
 modified: 20140415163915430
 modifier: andrewstern
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Monospaced%20Text/1335271:2940e308e0ee81c6ed021b78cf9a489bb68b4cab"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335271
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Monospaced Text
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Monospaced Text
 type: text/x-tiddlywiki

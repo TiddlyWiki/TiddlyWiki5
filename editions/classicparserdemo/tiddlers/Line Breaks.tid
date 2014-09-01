@@ -1,19 +1,7 @@
-_hash: e14e759f83d04b0412db73d1b66b3a64fb07fc83
 created: 20130211153646000
 creator: tobibeer
 modified: 20140415164315536
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Line%20Breaks/1335267:ad5687f1d1741d5e63a783565df6885923752aac"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335267
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Line Breaks
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Line Breaks
 type: text/x-tiddlywiki

@@ -1,19 +1,7 @@
-_hash: 32b1f260d97f45ce425e8bcff9a7647972b7a80e
 created: 20130204165019000
 creator: tobibeer
 modified: 20140415164150742
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/HTML%20Entities/1335264:117f829031adc20106ce49a71687b123ec65bb7f"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335264
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: HTML Entities
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: HTML Entities
 type: text/x-tiddlywiki

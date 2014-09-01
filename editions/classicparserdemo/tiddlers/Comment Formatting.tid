@@ -1,19 +1,7 @@
-_hash: 78b7216cae18ec47008a6948d404deee68257058
 created: 20130213001758000
 creator: tobibeer
 modified: 20140901061006864
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Comment%20Formatting/1335257:dfac9b4ac6526e0a1625ecf4796601565b189fb7"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335257
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Comment Formatting
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Comment Formatting
 type: text/x-tiddlywiki

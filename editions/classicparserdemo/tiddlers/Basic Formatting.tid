@@ -1,19 +1,7 @@
-_hash: a671a350dbb8f4917de9ffec36cc184be1fcd69b
 created: 20121217004633000
 creator: keithb
 modified: 20140415164633773
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Basic%20Formatting/1335260:638b0282ddcebd9b6dbdb6f9e51a9f9410c2ad8a"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335260
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Basic Formatting
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Basic Formatting
 type: text/x-tiddlywiki

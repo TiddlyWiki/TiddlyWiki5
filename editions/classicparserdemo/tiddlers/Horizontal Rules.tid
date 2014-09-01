@@ -1,19 +1,7 @@
-_hash: c56cf57df6a5faece40e25bf61e986c6badb0193
 created: 20130211150739000
 creator: tobibeer
 modified: 20140415164242103
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Horizontal%20Rules/1335263:f23eb319f2ed3d3ec848f744a3dbe988f28aca19"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335263
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Horizontal Rules
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Horizontal Rules
 type: text/x-tiddlywiki

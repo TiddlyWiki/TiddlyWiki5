@@ -1,19 +1,7 @@
-_hash: 816bced1fe527175bcf3be0fdf7dd2419989ea5e
 created: 20110215174227000
 creator: pmario
 modified: 20140415164659711
 modifier: andrewstern
-more: [[TiddlyWiki Markup]]
-server.bag: tiddlywiki_public
-server.content-type: 
-server.etag: "tiddlywiki_public/Blockquotes/1335259:2fe415fcc19e5d77f9ae8d000b8d37107c34a8c6"
-server.host: http://tiddlywiki.org
-server.page.revision: 1335259
-server.permissions: read
-server.recipe: tiddlywiki_public
-server.title: Blockquotes
-server.type: tiddlyweb
-server.workspace: bags/tiddlywiki_public
 tags: Formatting
 title: Blockquotes
 type: text/x-tiddlywiki
