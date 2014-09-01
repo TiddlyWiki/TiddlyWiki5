@@ -5,5 +5,23 @@ title: ContentType
 
 Used in Internet protocols to indicate the type that should be used to interpret the content of a web resource.
 
-Under TiddlyWiki5, the `type` field is gives the content type to apply to the main `text` field.
+Under TiddlyWiki5, the `type` field is given the content type to apply to the main `text` field.
+
+!!List of available types
+
+|!Group |!Type |!Content of `type` field |
+|^''Developer'' |Data dictionary |application/x-tiddler-dictionary|
+|~|JavaScript code |application/javascript|
+|~|JSON data |application/json|
+|~|Static stylesheet |text/css|
+|^''Image''|GIF image |image/gif|
+|~|ICO format icon file |image/x-icon|
+|~|JPEG image |image/jpeg|
+|~|PNG image |image/png|
+|~|Structured Vector Graphics image |image/svg+xml|
+|^''Text''|HTML markup |text/html|
+|~|Plain text |text/plain|
+|~|TiddlyWiki 5 |text/vnd.tiddlywiki|
+|~|TiddlyWiki Classic |text/x-tiddlywiki|
+
 
