@@ -4,20 +4,36 @@ tags: concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
 
-System tags are used to give special behaviour to tiddlers:
+System tags are used to give special behaviour to tiddlers.
+
+! Available system tags
+
+These are the available system tags
 
 * {{$:/tags/AboveStory||$:/core/ui/TagTemplate}} for elements to be placed at the top of the story river
+* {{$:/tags/AdvancedSearch||$:/core/ui/TagTemplate}} for search elements
+* {{$:/tags/Alert||$:/core/ui/TagTemplate}} for alerts
 * {{$:/tags/BelowStory||$:/core/ui/TagTemplate}} for elements to be placed at the bottom of the story river
 * {{$:/tags/ControlPanel||$:/core/ui/TagTemplate}} for control panel tabs
+* {{$:/tags/ControlPanel/Advanced||$:/core/ui/TagTemplate}} for advanced control panel tabs
+* {{$:/tags/ControlPanel/Advanced/Settings||$:/core/ui/TagTemplate}} for parts in advanced settings
+* {{$:/tags/ControlPanel/Appearance||$:/core/ui/TagTemplate}} for tabs controlling the appearance
 * {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}} for the edit template
 * {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} for the edit mode tiddler toolbar
+* {{$:/tags/Filter||$:/core/ui/TagTemplate}} for filters in advanced seach > filters
+* {{$:/tags/Image||$:/core/ui/TagTemplate}} for (core) images
+* {{$:/tags/Macro||$:/core/ui/TagTemplate}} for global macros
 * {{$:/tags/MoreSideBar||$:/core/ui/TagTemplate}} for tabs in the "more" sidebar
 * {{$:/tags/PageControls||$:/core/ui/TagTemplate}} for the page control tools in the sidebar
 * {{$:/tags/PageTemplate||$:/core/ui/TagTemplate}} for the main page elements
+* {{$:/tags/Palette||$:/core/ui/TagTemplate}} for colour palettes
 * {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file
 * {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
 * {{$:/tags/stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
 * {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}} for tiddler info panel tabs
+* {{$:/tags/TiddlerInfo/Advanced||$:/core/ui/TagTemplate}} for tabs under the advanced tiddler tab
+* {{$:/tags/TopLeftBar||$:/core/ui/TagTemplate}} for the top left bar
+* {{$:/tags/TopRightBar||$:/core/ui/TagTemplate}} for the top right bar
 * {{$:/tags/ViewTemplate||$:/core/ui/TagTemplate}} for the view template
 * {{$:/tags/ViewToolbar||$:/core/ui/TagTemplate}} for the view mode tiddler toolbar
 
