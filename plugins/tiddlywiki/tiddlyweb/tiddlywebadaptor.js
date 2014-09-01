@@ -245,10 +245,7 @@ TiddlyWebAdaptor.prototype.convertTiddlerToTiddlyWebFormat = function(tiddler) {
 			}
 		});
 	}
-	// Default the content type and convert the type "text/x-tiddlywiki" into null
-	if(result.type === "text/x-tiddlywiki") {
-		result.type = null;
-	};
+	// Default the content type
 	result.type = result.type || "text/vnd.tiddlywiki";
 	return JSON.stringify(result,null,$tw.config.preferences.jsonSpaces);
 };
