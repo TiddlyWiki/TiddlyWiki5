@@ -63,7 +63,7 @@ function Syncer(options) {
 		self.handleLazyLoadEvent(title);
 	});
 	// Get the login status
-	this.getStatus(function (err,isLoggedIn) {
+	this.getStatus(function(err,isLoggedIn) {
 		// Do a sync from the server
 		self.syncFromServer();
 	});
@@ -173,7 +173,7 @@ Syncer.prototype.syncFromServer = function() {
 			this.pollTimerId = null;
 		}
 		this.syncadaptor.getSkinnyTiddlers(function(err,tiddlers) {
-			// Trigger another sync
+			// Trigger the next sync
 			self.pollTimerId = setTimeout(function() {
 				self.pollTimerId = null;
 				self.syncFromServer.call(self);

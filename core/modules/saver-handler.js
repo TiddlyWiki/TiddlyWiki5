@@ -32,22 +32,24 @@ function SaverHandler(options) {
 	if($tw.browser && this.dirtyTracking) {
 		// Compile the dirty tiddler filter
 		this.filterFn = this.wiki.compileFilter(this.wiki.getTiddlerText(this.titleSyncFilter));
-		// Count of tiddlers that have been changed but not yet saved
-		this.numTasksInQueue = 0;
+		// Count of changes that have not yet been saved
+		this.numChanges = 0;
 		// Listen out for changes to tiddlers
 		this.wiki.addEventListener("change",function(changes) {
+			// Filter the changes so that we only count changes to tiddlers that we care about
 			var filteredChanges = self.filterFn.call(self.wiki,function(callback) {
 				$tw.utils.each(changes,function(change,title) {
 					var tiddler = self.wiki.getTiddler(title);
 					callback(tiddler,title);
 				});
 			});
-			self.numTasksInQueue += filteredChanges.length;
+			// Adjust the number of changes
+			self.numChanges += filteredChanges.length;
 			self.updateDirtyStatus();
 			// Do any autosave if one is pending and there's no more change events
 			if(self.pendingAutoSave && self.wiki.getSizeOfTiddlerEventQueue() === 0) {
 				// Check if we're dirty
-				if(self.numTasksInQueue > 0) {
+				if(self.numChanges > 0) {
 					self.saveWiki({
 						method: "autosave",
 						downloadType: "text/plain"
@@ -61,7 +63,7 @@ function SaverHandler(options) {
 			// Do the autosave unless there are outstanding tiddler change events
 			if(self.wiki.getSizeOfTiddlerEventQueue() === 0) {
 				// Check if we're dirty
-				if(self.numTasksInQueue > 0) {
+				if(self.numChanges > 0) {
 					self.saveWiki({
 						method: "autosave",
 						downloadType: "text/plain"
@@ -150,7 +152,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 			} else {
 				// Clear the task queue if we're saving (rather than downloading)
 				if(method !== "download") {
-					self.numTasksInQueue = 0;
+					self.numChanges = 0;
 					self.updateDirtyStatus();
 				}
 				$tw.notifier.display(self.titleSavedNotification);
@@ -178,7 +180,7 @@ SaverHandler.prototype.saveWiki = function(options) {
 Checks whether the wiki is dirty (ie the window shouldn't be closed)
 */
 SaverHandler.prototype.isDirty = function() {
-	return this.numTasksInQueue > 0;
+	return this.numChanges > 0;
 };
 
 /*
