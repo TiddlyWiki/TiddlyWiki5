@@ -26,7 +26,7 @@ The tag manager is available via a button at the top of the sidebar tab "Tabs", 
 
 The colour used to draw a tag pill is taken from the ''color'' field of the tiddler titled with the tag. The colour can be specified as any CSS value (more modern browsers show a colour picker for the ''color'' field).
 
-An icon can be associated with a tag by placing the title of the tiddler containing the image into the ''icon'' field of th etiddler titled with the tag.
+An icon can be associated with a tag by placing the title of the tiddler containing the image into the ''icon'' field of the tiddler titled with the tag.
 
 See the tag {{done||$:/core/ui/TagTemplate}} for an example.
 
