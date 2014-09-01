@@ -2,7 +2,7 @@ title: $:/core/macros/toc
 tags: $:/tags/Macro
 
 \define toc(tag,sort:"")
-<ol>
+<ol class="tc-toc">
 <$list filter="[tag[$tag$]$sort$]">
 <li>
 <$link>
@@ -42,7 +42,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-expandable(tag,sort:"")
-<ol>
+<ol class="tc-toc toc-expandable">
 <$list filter="[tag[$tag$]$sort$]">
 <<toc-expandable-body tag:"$tag$" sort:"$sort$">>
 </$list>
@@ -77,7 +77,7 @@ tags: $:/tags/Macro
 \end
 
 \define toc-selective-expandable(tag,sort:"")
-<ol>
+<ol class="tc-toc toc-selective-expandable">
 <$list filter="[tag[$tag$]$sort$]">
 <<toc-selective-expandable-body tag:"$tag$" sort:"$sort$">>
 </$list>

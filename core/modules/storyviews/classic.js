@@ -16,7 +16,7 @@ var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/
 
 var ClassicStoryView = function(listWidget) {
 	this.listWidget = listWidget;
-}
+};
 
 ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	var listElementIndex = this.listWidget.findListItem(0,historyInfo.title);

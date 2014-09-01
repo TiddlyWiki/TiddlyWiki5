@@ -243,6 +243,8 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	// Remove the closed tiddler from the story
 	this.removeTitleFromStory(storyList,title);
 	this.saveStoryList(storyList);
+	// Trigger an autosave
+	$tw.rootWidget.dispatchEvent({type: "tw-auto-save-wiki"});
 	return false;
 };
 
@@ -281,9 +283,10 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 Generate a title for the draft of a given tiddler
 */
 NavigatorWidget.prototype.generateDraftTitle = function(title) {
-	var c = 0;
+	var c = 0,
+		draftTitle;
 	do {
-		var draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
+		draftTitle = "Draft " + (c ? (c + 1) + " " : "") + "of '" + title + "'";
 		c++;
 	} while(this.wiki.tiddlerExists(draftTitle));
 	return draftTitle;
@@ -331,6 +334,8 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				if(draftTitle !== this.storyTitle) {
 					this.saveStoryList(storyList);
 				}
+				// Trigger an autosave
+				$tw.rootWidget.dispatchEvent({type: "tw-auto-save-wiki"});
 			}
 		}
 	}
@@ -478,6 +483,8 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	}));
 	// Navigate to the $:/Import tiddler
 	this.addToHistory([IMPORT_TITLE]);
+	// Trigger an autosave
+	$tw.rootWidget.dispatchEvent({type: "tw-auto-save-wiki"});
 };
 
 exports.navigator = NavigatorWidget;

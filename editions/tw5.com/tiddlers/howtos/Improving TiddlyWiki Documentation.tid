@@ -1,7 +1,7 @@
 title: Improving TiddlyWiki Documentation
 tags: howto
 created: 20140820151051019
-modified: 20140820151051019
+modified: 20140830151051019
 
 Anyone can submit improvements to the TiddlyWiki documentation that appears on http://tiddlywiki.com.
 
@@ -9,6 +9,7 @@ Anyone can submit improvements to the TiddlyWiki documentation that appears on h
 # On http://tiddlywiki.com, click "edit" on the tiddler you want to improve
 # You should see a pink banner with the text: //Can you help us improve this documentation? Find out how to edit this tiddler on ~GitHub//
 # Click on the external link ...''this tiddler on ~GitHub''
+## You will be prompted that "you need to fork this repository to propose changes". A "fork" is your own copy of the repository that incorporates the changes you are proposing
 # A new browser tab should open ready to edit the tiddler on github.com
 # Below the edit box for the tiddler text you should see a box labelled ''Propose file change''
 # Enter a brief title to explain the change (eg, "Clarify attribute syntax instability")
@@ -17,3 +18,7 @@ Anyone can submit improvements to the TiddlyWiki documentation that appears on h
 # On the following screen, click the green button labelled ''Create pull request''
 
 [[Jermolene|https://github.com/Jermolene]] or one of the other core developers will then have the opportunity to merge your pull request so that it is incorporated into the next build of http://tiddlywiki.com.
+
+Mario Pietsch has created this short video tutorial:
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/L4zTkMYcri8" frameborder="0" allowfullscreen></iframe>

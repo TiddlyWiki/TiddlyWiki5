@@ -86,7 +86,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	]);
 	// Transform the previous tiddler out of the way and then hide it
 	if(prevCurrentTiddler && prevCurrentTiddler !== targetElement) {
-		var scale = zoomBounds.width / sourceBounds.width;
+		scale = zoomBounds.width / sourceBounds.width;
 		x =  zoomBounds.left - targetBounds.left - (sourceBounds.left - targetBounds.left) * scale;
 		y =  zoomBounds.top - targetBounds.top - (sourceBounds.top - targetBounds.top) * scale;
 		$tw.utils.setStyle(prevCurrentTiddler,[

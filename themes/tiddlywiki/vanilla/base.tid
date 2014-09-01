@@ -129,8 +129,8 @@ table tfoot tr td {
 	max-width: 100%;
 }
 
-.tc-tiddler-frame embed,
-.tc-tiddler-frame iframe {
+.tc-tiddler-body > embed,
+.tc-tiddler-body > iframe {
 	width: 100%;
 	height: 600px;
 }

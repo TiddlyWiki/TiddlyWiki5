@@ -37,7 +37,7 @@ TiddlyWebAdaptor.prototype.getHost = function() {
 
 TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	return {
-		bag: tiddler.fields["bag"]
+		bag: tiddler.fields.bag
 	};
 };
 

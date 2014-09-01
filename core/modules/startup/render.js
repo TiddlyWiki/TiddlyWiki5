@@ -19,7 +19,7 @@ exports.after = ["story"];
 exports.synchronous = true;
 
 // Default story and history lists
-var PAGE_TITLE_TITLE = "$:/core/wiki/title"
+var PAGE_TITLE_TITLE = "$:/core/wiki/title";
 var PAGE_STYLESHEET_TITLE = "$:/core/ui/PageStylesheet";
 var PAGE_TEMPLATE_TITLE = "$:/core/ui/PageTemplate";
 

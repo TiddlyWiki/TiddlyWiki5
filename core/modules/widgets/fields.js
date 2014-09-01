@@ -78,7 +78,7 @@ FieldsWidget.prototype.execute = function() {
 				row = row.replace("$name$",fieldName);
 				row = row.replace("$value$",value);
 				row = row.replace("$encoded_value$",$tw.utils.htmlEncode(value));
-				text.push(row)
+				text.push(row);
 			}
 		}
 	}

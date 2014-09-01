@@ -44,7 +44,7 @@ TiddlerWidget.prototype.execute = function() {
 	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tc-tiddler-exists" : "tc-tiddler-missing");
 	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tc-tiddler-shadow" : "");
 	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tc-tiddler-system" : "");
-	this.setVariable("tiddlerTagClasses",this.getTagClasses())
+	this.setVariable("tiddlerTagClasses",this.getTagClasses());
 	// Construct the child widgets
 	this.makeChildWidgets();
 };

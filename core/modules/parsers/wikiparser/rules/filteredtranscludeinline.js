@@ -55,7 +55,7 @@ exports.parse = function() {
 		node.attributes.style = {type: "string", value: style};
 	}
 	if(classes) {
-		node.attributes["itemClass"] = {type: "string", value: classes.split(".").join(" ")};
+		node.attributes.itemClass = {type: "string", value: classes.split(".").join(" ")};
 	}
 	return [node];
 };

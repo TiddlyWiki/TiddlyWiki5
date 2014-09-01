@@ -23,8 +23,8 @@ exports.types = {inline: true};
 
 exports.init = function(parser) {
 	this.parser = parser;
-	this.matchRegExp = /\<!--/mg;
-	this.endMatchRegExp = /--\>/mg;
+	this.matchRegExp = /<!--/mg;
+	this.endMatchRegExp = /-->/mg;
 };
 
 exports.findNextMatch = function(startPos) {

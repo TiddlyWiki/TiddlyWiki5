@@ -38,25 +38,25 @@ TWEditSaver.prototype.save = function(text,method,callback) {
 	}
 	// Error handler
 	var errorHandler = function(event) {
-    	// Error
-    	callback("Error saving to TWEdit: " + event.target.error.code);
-    };
+		// Error
+		callback("Error saving to TWEdit: " + event.target.error.code);
+	};
 	// Get the file system
-    window.requestFileSystem(LocalFileSystem.PERSISTENT,0,function(fileSystem) {
-    	// Now we've got the filesystem, get the fileEntry
-        fileSystem.root.getFile(pathname, {create: true}, function(fileEntry) {
-        	// Now we've got the fileEntry, create the writer
-        	fileEntry.createWriter(function(writer) {
-		        writer.onerror = errorHandler;
-		        writer.onwrite = function() {
-		        	callback(null);
-		        };
-		        writer.position = 0;
-		        writer.write(text);
-        	},errorHandler);
-        }, errorHandler);
-    }, errorHandler);
-    return true;
+	window.requestFileSystem(LocalFileSystem.PERSISTENT,0,function(fileSystem) {
+		// Now we've got the filesystem, get the fileEntry
+		fileSystem.root.getFile(pathname, {create: true}, function(fileEntry) {
+			// Now we've got the fileEntry, create the writer
+			fileEntry.createWriter(function(writer) {
+				writer.onerror = errorHandler;
+				writer.onwrite = function() {
+					callback(null);
+				};
+				writer.position = 0;
+				writer.write(text);
+			},errorHandler);
+		}, errorHandler);
+	}, errorHandler);
+	return true;
 };
 
 /*

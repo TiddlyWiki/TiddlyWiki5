@@ -41,7 +41,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 		$tw.utils.addClass(domNode,"tc-popup"); // Make sure that clicks don't dismiss popups within the revealed content
 	}
 	if(!this.isOpen) {
-		domNode.setAttribute("hidden","true")
+		domNode.setAttribute("hidden","true");
 	}
 	this.domNodes.push(domNode);
 };
