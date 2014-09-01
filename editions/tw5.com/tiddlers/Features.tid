@@ -23,7 +23,7 @@ type: text/vnd.tiddlywiki
 * Explore the [[D3.js visualisation plugin|http://tiddlywiki.com/d3demo.html]]
 * [[CodeMirror support via a plugin|http://tiddlywiki.com/codemirrordemo.html]]
 * [[Markdown support via a plugin|http://tiddlywiki.com/markdowndemo.html]]
-* [[Classic tiddlywiki Markup support via a plugin|http://tiddlywiki.com/classicparserdemo.html]]
+* [[Classic TiddlyWiki markup support via a plugin|http://tiddlywiki.com/classicparserdemo.html]]
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[Node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules
