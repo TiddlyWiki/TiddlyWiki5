@@ -1,0 +1,38 @@
+_hash: 53962b59ad3826de5aadf772871de68c230c6a7d
+created: 20130211150503000
+creator: tobibeer
+modified: 20140831113805090
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Headings/1335262:2946827d55b2935db86bfdefab9c8db6a9042fd3"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335262
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Headings
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Headings
+type: text/x-tiddlywiki
+
+!Summary
+
+Start a line using exclamation marks to create headings.
+!Markup
+{{{
+!Heading Level 1
+!!Heading Level 2
+!!!Heading Level 3
+!!!!Heading Level 4
+!!!!!Heading Level 5
+!!!!!!Heading Level 6
+}}}
+!Heading Level 1
+!!Heading Level 2
+!!!Heading Level 3
+!!!!Heading Level 4
+!!!!!Heading Level 5
+!!!!!!Heading Level 6

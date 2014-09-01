@@ -1,0 +1,42 @@
+_hash: 63711c725b9bd23b197b1569670088ce26dbd898
+created: 20130211142734000
+creator: tobibeer
+modified: 20140901061201603
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Code/1335258:2e39d9422863168f6a71f2b09941cb4261414092"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335258
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Code
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Code
+type: text/x-tiddlywiki
+
+!Summary
+You can render text monospaced text, e.g. using the font //Courier//, while preserving line breaks and not applying WikiText formating or turning WikiWords into links.
+!!"""Monospaced Text Block"""
+<html><pre>
+{{{
+Some plain text including WikiLinks
+}}}
+</pre></html>''Displays as:'' a HTML <pre> element
+{{{
+Some plain text including WikiLinks
+}}}
+<<<
+''Note:'' Code blocks are displayed using a white-space 'as-is', fixed-width font without no word-wrapping -- displayed in a box.
+<<<
+!!"""Monospaced Inline Text"""
+Alternatively, you can also display monospaced text __inline__ by wrapping the text in three braces <html><code>{{{...}}}</code></html>:
+<html><pre>{{{inline //code//}}}</pre></html>''Displays as:''  a HTML <code> element
+{{{inline //code//}}}
+<<<
+''Note:'' Inline code uses a white-space 'collapsed', word-wrapped, fixed-width font.
+
+

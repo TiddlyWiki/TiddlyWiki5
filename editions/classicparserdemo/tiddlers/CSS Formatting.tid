@@ -1,0 +1,51 @@
+_hash: 8e82a50e4e8f727c56f450b0b9a5b935c2d9535f
+created: 20130211145116000
+creator: tobibeer
+modified: 20140415164516606
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/CSS%20Formatting/1335261:a084d915f3bc4e548b5616c5c3e8d8d70712e625"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335261
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: CSS Formatting
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: CSS Formatting
+type: text/x-tiddlywiki
+
+
+!Summary
+You can directly apply CSS rules inline or use custom classes.
+!Markup
+!!!Inline Styles
+Enclose text using two double @ signs and let the first two follow by your CSS rules.
+{{{
+@@color:#4bbbbb;Some random text@@
+}}}
+''Displays as:''
+@@color:red;Some random text@@
+
+!!!CSS Classes
+CSS classes can be applied to text blocks.
+
+To wrap your text inline in a HTML {{{<span>}}} element use...
+{{{
+before » {{customClassName{inline content}}} « after
+}}}
+''Displays as:''
+before » {{customClassName{inline content}}} « after
+
+To wrap your text as a block level element -- a HTML {{{<div>}}} -- use line-breaks...
+<html><pre>
+before » {{customClassName{
+box content
+}}} « after
+</pre></html>''Displays as:''
+before » {{customClassName{
+box content
+}}} « after

@@ -1,0 +1,63 @@
+_hash: a5a78107a55c570806975b6e35e87dfd0be734c2
+created: 20130211154140000
+creator: tobibeer
+modified: 20140831095524601
+modifier: tobibeer
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Links/1078257:0183b2e8bea01e6c5288e6448b8acc87ddd35619"
+server.host: http://tiddlywiki.org
+server.page.revision: 1078257
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Links
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Links
+type: text/x-tiddlywiki
+
+!Summary
+TiddlyWiki allows different kinds of links, e.g. WikiWords, [[TiddlyLinks|TiddlyLink]], external Links or TiddlySpace links.
+!!WikiWords
+Any words or phrases that are CamelCase or [[Compound-Words|CamelCase]] - in which the elements are joined without spaces - will result in them becoming wiki links to tiddlers with that name. 
+{{{
+WikiWord
+}}}
+WikiWord
+
+To prevent this, append a tilde {{{~}}}...
+{{{
+~WikiWord
+}}}
+~WikiWord
+
+!![[TiddlyLinks|TiddlyLink]]
+A tiddler can also be linked using square brackets encompassing the tiddler title:
+{{{
+[[Core Macros]]
+}}}
+[[Core Macros]]
+
+!![[Pretty TiddlyLinks|TiddlyLink]]
+Optionally, a custom title can be used, separated by a pipe character (|)
+{{{
+[[standard macros|Core Macros]]
+}}}
+[[standard macros|Core Macros]]
+
+!![[External Links|External Link]]
+A valid URL directly results in a link to that external site:
+{{{
+http://tiddlywiki.org
+}}}
+http://tiddlywiki.org
+
+!![[Pretty External Links|External Link]]
+Similar to TiddlyLinks, external links can have a different title as well:
+{{{
+[[visit TiddlyWiki.org|http://tiddlywiki.org]]
+}}}
+[[visit TiddlyWiki.org|http://tiddlywiki.org]]
+

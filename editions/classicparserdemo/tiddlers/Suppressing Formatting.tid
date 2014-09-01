@@ -1,0 +1,41 @@
+_hash: 68bc50e6415c23513fafbec11506ae62fe5c8f3b
+created: 20130211143136000
+creator: tobibeer
+modified: 20140415164021461
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Suppressing%20Formatting/1335270:26464606220d84bc638573e59dc71530aa224690"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335270
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Suppressing Formatting
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Suppressing Formatting
+type: text/x-tiddlywiki
+
+!Summary
+TiddlyWiki markup rules can be suppressed for any given section of text by enclosing it in three ''double'' quotes or wrapping it using the {{{<nowiki>}}} markup...
+* when you just don't want that text to be TiddlyWiki markup
+* when you want to prevent WikiWords
+* when you copy & paste from other sources
+!Markup
+{{{
+» neither is this italicised or a """//WikiWord//"""
+» nor is this <nowiki>__underlined__</nowiki>
+}}}
+» neither is this italicised or a """//WikiWord//"""
+» nor is this <nowiki>__underlined__</nowiki>
+
+In addition, you can suppress auto-linking for WikiWords, use the tilde prefix {{{~}}}:
+{{{
+~WikiWord
+}}}
+~WikiWord
+!!Also see
+*[[Comment Formatting]]
+*[[Code Formatting]]

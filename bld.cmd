@@ -94,6 +94,14 @@ node .\tiddlywiki.js ^
 	--rendertiddler $:/core/save/all markdowndemo.html text/plain ^
 	|| exit 1
 
+rem classicparserdemo.html: wiki to demo classicparser plugin
+
+node .\tiddlywiki.js ^
+	.\editions\classicparserdemo ^
+	--verbose ^
+	--output %TW5_BUILD_OUTPUT% ^
+	--rendertiddler $:/core/save/all classicparserdemo.html text/plain ^
+	|| exit 1
 
 rem highlightdemo.html: wiki to demo highlight plugin
 

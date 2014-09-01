@@ -1,0 +1,61 @@
+_hash: a2a8660d474da9327faeef05b76a1af62ca8155b
+created: 20130211151808000
+creator: tobibeer
+modified: 20140901062342853
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Images/1335266:f72a1a7b1204fff0f413e6873cc55f704bb1b213"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335266
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Images
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Images
+type: text/x-tiddlywiki
+
+!Summary
+Generally, images are external to TiddlyWiki. You have different means to layout the image flow.
+!Markup
+!!Simple Images
+{{{
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+}}}
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+!!Images Titles
+{{{
+[img[tooltip|http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+}}}
+[img[tooltip|http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+!!Image Links
+{{{
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg][http://www.flickr.com/photos/jermy/10134618/]]
+}}}
+[img[http://wikitext.tiddlyspace.com/fractalveg.jpg][http://www.flickr.com/photos/jermy/10134618/]]
+
+!!Floating Images
+To clear a float, append...
+{{{
+@@clear:both;display:block; @@
+}}}
+
+!!Floating Left...
+{{{
+[<img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+@@clear:both;display:block; all clear@@
+}}}
+[<img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+@@clear:both;display:block; all clear@@
+!!Floating Right
+{{{
+[>img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+@@float:right;clear:both;display:block; all clear@@
+@@clear:both;display:block; @@
+}}}
+[>img[http://wikitext.tiddlyspace.com/fractalveg.jpg]]
+@@float:right;clear:both;display:block; all clear@@
+@@clear:both;display:block; @@

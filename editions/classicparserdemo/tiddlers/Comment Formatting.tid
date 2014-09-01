@@ -1,0 +1,41 @@
+_hash: 78b7216cae18ec47008a6948d404deee68257058
+created: 20130213001758000
+creator: tobibeer
+modified: 20140901061006864
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Comment%20Formatting/1335257:dfac9b4ac6526e0a1625ecf4796601565b189fb7"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335257
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Comment Formatting
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Comment Formatting
+type: text/x-tiddlywiki
+
+!Summary
+Occasionally you want to add notes to your tiddler markup yet don't want it displayed when the tiddler is rendered. To achieve this, wrap the text using {{{/% hidden %/}}}.
+!Example
+{{{
+text before .../%
+!HIDDEN SECTION
+This is content of a hidden section.
+!END%/ text after
+}}}
+''Display as:''
+<<<
+text before /%
+!HIDDEN SECTION
+This is content of a hidden section.
+!END%/... text after
+<<<
+!Also see...
+;[[Suppressing Formatting]]
+:» when you just don't want that text to be TiddlyWiki markup
+:» when you want to prevent WikiWords
+:» when you copy & paste from other sources

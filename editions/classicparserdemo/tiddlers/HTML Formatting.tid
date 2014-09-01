@@ -1,0 +1,40 @@
+_hash: 1738085855a64048d0d8bb2d3eda1d7f7527e0b5
+created: 20130212225913000
+creator: tobibeer
+modified: 20140415163847476
+modifier: andrewstern
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/HTML%20Formatting/1335265:8840437d314e281d82669c312d1129b933760b5a"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335265
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: HTML Formatting
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: HTML Formatting
+type: text/x-tiddlywiki
+
+!Summary
+TiddlyWiki provides support for rendering pure HTML markup. To do this, simply wrap your HTML code in {{{<html>your html markup goes here</html>}}}. This way you are able to use embed code using iFrames often suggested by popular media sites like ~YouTube.
+!!"""Embedded HTML"""
+{{{
+<html>
+<span style="padding-right:30px;font-size:2em;">any</span><br />
+<b>valid</b> <em>xhtml</em>
+</html>
+}}}
+<html><span style="padding-right:30px;font-size:2em;">any</span><br /><b>valid</b> <em>xhtml</em></html>
+!!"""Embedded iFrame"""
+{{{
+<html>
+<iframe src="http://www.youtube.com/embed/Cj6ho1-G6tw"
+  width="450" height="315" frameborder="0" allowfullscreen/>
+</html>
+}}}
+<html>
+<iframe src="http://www.youtube.com/embed/Cj6ho1-G6tw?vq=hd720&iv_load_policy=3"
+  width="450" height="315" frameborder="0" allowfullscreen/>
+</html>

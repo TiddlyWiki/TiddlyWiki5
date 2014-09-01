@@ -1,0 +1,129 @@
+_hash: e094b1328d5bc04e2c9fc5b967edc22e1c183729
+created: 20130205062438000
+creator: tobibeer
+modified: 20140901062133767
+modifier: andrewstern
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Tables/1335272:5471c2a5c72db2d46fcbb9091440c4f498f514fd"
+server.host: http://tiddlywiki.org
+server.page.revision: 1335272
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Tables
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Tables
+type: text/x-tiddlywiki
+
+!Summary
+TiddlyWiki provides flexible means to output tables.
+!!"""Simple Tables"""
+{{{
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+}}}
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+!!"""Cell Formatting"""
+*Insert a space before cell content to right justify cell
+*Insert a space after cell content to left justify cell
+*Insert spaces before and after cell content to centre justify cell
+*Insert an exclamation mark ({{{!}}}) as the first non-space character of a cell to turn it into a header cell
+{{{
+|!First column|!Second column|!Third column|
+|left | centre | right|
+}}}
+|!First column|!Second column|!Third column|
+|left | centre | right|
+!!"""Table Headers and Footers"""
+* Mark a table row as a header by adding an 'h' to the end
+* Mark a table row as a footer by adding an 'f' to the end
+{{{
+|NW|N|NE|h
+|W|X|E|
+|SW|S|SE|f
+}}}
+|NW|N|NE|h
+|W|X|E|
+|SW|S|SE|f
+Use  an exclamation mark to turn an individual cell into a header cell of type {{{<th}}}...
+{{{
+| NW| !N |NE |h
+| !W| X |!E |
+| SW| !S |SE |f
+}}}
+| NW| !N |NE |h
+| !W| X |!E |
+| SW| !S |SE |f
+!!"""Table Caption"""
+A caption can be added to a table by adding a {{{c}}} after the last column either before the main table...
+{{{
+|A caption above the table|c
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+}}}
+|A caption above the table|c
+|North West|North|North East|h
+|West|Here|East|
+|South West|South|South East|
+or after the main table...
+{{{
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+|A caption below the table|c
+}}}
+|North West|North|North East|h
+|West|Here|East|
+|South West|South|South East|
+|A caption below the table|c
+!!"""Merging Table Cells"""
+Merge a cell horizontally with the one to its right using greater-than {{{>}}}...
+{{{
+|North West|North|North East|
+|>|>|West and Here and East|
+|South West|South|South East|
+}}}
+|North West|North|North East|
+|>|>|West and Here and East|
+|South West|South|South East|
+Merge a cell vertically with the one above using a tilde {{{~}}}...
+{{{
+|Westerly|North|North East|
+|~|Here|East|
+|~|South|South East|
+}}}
+|Westerly|North|North East|
+|~|Here|East|
+|~|South|South East|
+!!"""CSS Formatting for Tables"""
+A CSS class can be added to an entire table using a special first row that ends with a {{{k}}}...
+{{{
+|myClass|k
+|North West|North|North East|
+|West|Here|East|
+|South West|South|South East|
+}}}
+Use your StyleSheet tiddler to define the desired styles.
+
+CSS properties can also be added to individual table cells by appending the CSS syntax directly after the delimiting pipe {{{|}}}.
+{{{
+|color:red; North West|opacity:0.5;North|North East|
+|color(green):West|Here|East|
+|South West|South|South East|
+}}}
+|color:red; North West|opacity:0.5;North|North East|
+|color(green):West|Here|East|
+|South West|South|South East|
+!!"""Alternating Row Colors"""
+TiddlyWiki automatically assigns the classes {{{oddRow}}} and {{{evenRow}}} to table row elements {{{<TR>}}}. These can then be styled using the StyleSheet tiddler:
+{{{
+tr.oddRow { background-color: #fff; }
+tr.evenRow { background-color: #ffe; }
+}}}

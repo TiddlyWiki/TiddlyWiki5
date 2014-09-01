@@ -1,0 +1,55 @@
+_hash: b6d1718a0af0a2a63318097500958556983bd88d
+created: 20120131235950000
+creator: sandman619
+macro: [[TiddlyWiki Markup]]
+modified: 20140415164107038
+modifier: tobibeer
+more: [[TiddlyWiki Markup]]
+server.bag: tiddlywiki_public
+server.content-type: 
+server.etag: "tiddlywiki_public/Lists/1076129:4d2b012667f2ca3f082ace3498e736fcb8b3afd6"
+server.host: http://tiddlywiki.org
+server.page.revision: 1076129
+server.permissions: read
+server.recipe: tiddlywiki_public
+server.title: Lists
+server.type: tiddlyweb
+server.workspace: bags/tiddlywiki_public
+tags: Formatting
+title: Lists
+type: text/x-tiddlywiki
+
+!Summary
+In TiddlyWiki you can make user of different list types, such as unordered lists, ordered or numbered lists, as well as definition lists.
+!!Ordered Lists
+Lists can be ordered using numbers and letters by starting a line with a hash {{{#}}}...
+{{{
+#List item one
+##List item two
+###List item three
+}}}
+#List item one
+##List item two
+###List item three
+!!Unordered Lists
+Create unordered lists by starting a line using an asterisk {{{*}}}...
+{{{
+*Unordered List Level 1
+**Unordered List Level 2
+***Unordered List Level 3
+}}}
+*Unordered List Level 1
+**Unordered List Level 2
+***Unordered List Level 3
+!!Definition Lists
+Create definition lists by starting a line using a semi-colon {{{;}}} for the term followed by a line starting with a colon {{{:}}} for the definition...
+{{{
+;Term 1
+:Definition for Term 1
+;Term 2
+:Definition for Term 2
+}}}
+;Term 1
+:Definition for Term 1
+;Term 2
+:Definition for Term 2
