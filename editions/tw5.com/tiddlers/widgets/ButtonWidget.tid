@@ -5,7 +5,7 @@ tags: widget
 
 ! Introduction
 
-The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
+The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked (or hovered over):
 
 * Navigate to a specified tiddler
 * Dispatch a user defined [[widget message|WidgetMessages]]
@@ -23,6 +23,7 @@ The content of the `<$button>` widget is displayed within the button.
 |set |A TextReference to which a new value will be assigned |
 |setTo |The new value to assign to the TextReference identified in the `set` attribute |
 |popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
+|action |Controls what causes the button to trigger its actions. This can be either "click" or "hover", defaults to "click" |
 |aria-label |Optional [[Accessibility]] label |
 |title |Optional tooltip |
 |class |An optional CSS class name to be assigned to the HTML element |
