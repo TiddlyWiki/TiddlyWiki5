@@ -27,8 +27,6 @@ Subsequent releases will include end-user documentation with step-by-step instru
 
 Many thanks to @buggyj for his work on this plugin.
 
-classicparserdemo.html
-
 !! Usability Improvements
 
 * [[Amended|https://github.com/Jermolene/TiddlyWiki5/commit/e47852cb141b384ad2a9097eca795545cb5b2494]] behaviour of the [[tm-browser-refresh|WidgetMessage: tw-browser-refresh]] message so that it no longer clears the location hash
