@@ -73,7 +73,7 @@ exports.repackPlugin = function(title,additionalTiddlers,excludeTiddlers) {
 		}
 	});
 	// Trigger an autosave
-	$tw.rootWidget.dispatchEvent({type: "tw-auto-save-wiki"});
+	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
 	// Return a heartwarming confirmation
 	return "Plugin " + title + " successfully saved";
 };
