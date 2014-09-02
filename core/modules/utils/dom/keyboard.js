@@ -48,6 +48,8 @@ exports.parseKeyDescriptor = function(keyDescriptor) {
 			info.shiftKey = true;
 		} else if(s === "alt") {
 			info.altKey = true;
+		} else if(s === "meta") {
+			info.metaKey = true;
 		}
 		// Replace named keys with their code
 		if(namedKeys[s]) {
@@ -55,6 +57,14 @@ exports.parseKeyDescriptor = function(keyDescriptor) {
 		}
 	}
 	return info;
+};
+
+exports.checkKeyDescriptor = function(event,keyInfo) {
+	return event.keyCode === keyInfo.keyCode && 
+			event.shiftKey === keyInfo.shiftKey && 
+			event.altKey === keyInfo.altKey && 
+			event.ctrlKey === keyInfo.ctrlKey && 
+			event.metaKey === keyInfo.metaKey;	
 };
 
 })();
