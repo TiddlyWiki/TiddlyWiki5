@@ -16,6 +16,18 @@ type: text/vnd.tiddlywiki
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/89fd5379dd78887fc21746d792072bf5a25f0c56]] all variable prefixes from `tw-` to `tv-` (eg `tw-config-toolbar-icons` has become `tv-config-toolbar-icons`)
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/112a9a95d95e9f62f110c97a4faaf537c5c100b1]] prefix/removeprefix filter operators to be case-sensitive
 
+!! Compatibility with TiddlyWikiClassic
+
+This release includes a preliminary version of a new plugin that provides compatibility with content created for TiddlyWikiClassic:
+
+http://tiddlywiki.com/classicparserdemo.html
+
+Subsequent releases will include end-user documentation with step-by-step instructions for migrating content.
+
+Many thanks to @buggyj for his work on this plugin.
+
+classicparserdemo.html
+
 !! Usability Improvements
 
 * [[Amended|https://github.com/Jermolene/TiddlyWiki5/commit/e47852cb141b384ad2a9097eca795545cb5b2494]] behaviour of the [[tm-browser-refresh|WidgetMessage: tw-browser-refresh]] message so that it no longer clears the location hash
@@ -39,5 +51,7 @@ type: text/vnd.tiddlywiki
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@gernert|https://github.com/gernert]]
 * [[@pmario|https://github.com/pmario]]
 * [[@xcazin|https://github.com/xcazin]]
