@@ -76,12 +76,23 @@ TranscludeWidget.prototype.execute = function() {
 	this.transcludeTitle = gettiddlername(this.rawTitle);
 	this.section = getsectionname(this.rawTitle);
 	this.slice = getslicename(this.rawTitle);
-		// Check for recursion
+	// Check for recursion
 	var recursionMarker = this.makeRecursionMarker();
 	if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
 		this.makeChildWidgets([{type: "text", text: "Recursive transclusion error in transclude widget"}]);
 		return;
 	}
+	// Check for correct type
+	var existingTiddler = this.wiki.getTiddler(this.transcludeTitle);
+	// Check if we're dealing with a classic tiddler
+	if(existingTiddler && existingTiddler.hasField("type") && existingTiddler.fields.type !== "text/x-tiddlywiki") {
+		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
+		return;
+	}
+	if(existingTiddler && !existingTiddler.hasField("type")) {
+		this.makeChildWidgets([{type: "text", text: "Tiddler not of type 'text/x-tiddlywiki'"}]);
+		return;
+	}		
 	// Set context variables for recursion detection
 	this.setVariable("transclusion",recursionMarker);
 	// Parse 
