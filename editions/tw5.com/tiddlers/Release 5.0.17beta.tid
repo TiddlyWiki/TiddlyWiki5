@@ -1,0 +1,33 @@
+caption: 5.0.17-beta
+created: 20140830131615798
+modified: 20140902124037214
+tags: releasenote
+title: Release 5.0.17-beta
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.16-beta...v5.0.17-beta]]//
+
+!! Incompatible Changes
+
+
+!! Usability Improvements
+
+* 
+
+!! Hackability Improvements
+
+* 
+
+!! Bug Fixes
+
+* 
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@gernert|https://github.com/gernert]]
+* [[@pmario|https://github.com/pmario]]
+* [[@xcazin|https://github.com/xcazin]]
