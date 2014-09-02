@@ -60,11 +60,12 @@ exports.parseKeyDescriptor = function(keyDescriptor) {
 };
 
 exports.checkKeyDescriptor = function(event,keyInfo) {
+	var metaKeyStatus = !!keyInfo.metaKey; // Using a temporary variable to keep JSHint happy
 	return event.keyCode === keyInfo.keyCode && 
 			event.shiftKey === keyInfo.shiftKey && 
 			event.altKey === keyInfo.altKey && 
 			event.ctrlKey === keyInfo.ctrlKey && 
-			event.metaKey === keyInfo.metaKey;	
+			event.metaKey === metaKeyStatus;	
 };
 
 })();
