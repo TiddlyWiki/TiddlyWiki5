@@ -932,7 +932,7 @@ canvas.tc-edit-bitmapeditor  {
 	min-width: 280px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
-	padding: 0 0 0 0;
+	padding: 7px 0;
 	margin: 4px 0 0 0;
 	white-space: nowrap;
 	z-index: 1000;

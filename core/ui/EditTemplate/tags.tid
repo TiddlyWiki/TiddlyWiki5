@@ -24,11 +24,8 @@ background-color:$(backgroundColor)$;
 </div>
 
 <div class="tc-block-dropdown-wrapper">
-
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
-
 <div class="tc-block-dropdown">
-
 <$linkcatcher set="$:/temp/NewTagName" setTo="" message="tm-add-tag">
 <$list filter="[!is[shadow]tags[]search{$:/temp/NewTagName}sort[title]]">
 <$link>
@@ -40,9 +37,7 @@ background-color:$(backgroundColor)$;
 </$link>
 </$list>
 </$linkcatcher>
-
 </div>
-
 </$reveal>
 </div>
 </$fieldmangler>
