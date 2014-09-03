@@ -1,53 +1,53 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Erweitert
-Advanced/EditorTypes/Caption: Editor Typen
-Advanced/EditorTypes/Editor/Caption: Editor
-Advanced/EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden sollen.
-Advanced/EditorTypes/Type/Caption: MIME-Type
+EditorTypes/Caption: Editor Typen
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden sollen.
+EditorTypes/Type/Caption: MIME-Type
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
-Advanced/LoadedModules/Caption: Geladene Module
-Advanced/LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
-Advanced/Settings/Caption: Einstellungen
-Advanced/Settings/Hint: Diese erweiterten Einstellungen ermöglichen ihnen, das Verhalten von TiddlyWiki zu ändern.
-Advanced/Settings/NavigationAddressBar/Caption: Navigation Adresszeile
-Advanced/Settings/NavigationAddressBar/Hint: Verhalten der Browser Adresszeile, wenn ein Tiddler geöffnet wird:
-Advanced/Settings/NavigationAddressBar/No/Description: Die Browser Adresszeile wird nicht verändert.
-Advanced/Settings/NavigationAddressBar/Permalink/Description: Den aktuellen Tiddler einbinden.
-Advanced/Settings/NavigationAddressBar/Permaview/Description: Alle geöffneten Tiddler einbinden.
-Advanced/Settings/NavigationHistory/Caption: Browser Chronik
-Advanced/Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
-Advanced/Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
-Advanced/Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
-Advanced/Settings/ToolbarButtons/Caption: Toolbar Buttons
-Advanced/Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
-Advanced/Settings/ToolbarButtons/Text/Description: Text anzeigen
-Advanced/Settings/ToolbarButtons/Icons/Description: Icon anzeigen
-Advanced/TiddlerFields/Caption: Tiddler Felder
-Advanced/TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exclusive ~Schatten-Tiddler. 
+LoadedModules/Caption: Geladene Module
+LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
+Settings/Caption: Einstellungen
+Settings/Hint: Diese erweiterten Einstellungen ermöglichen ihnen, das Verhalten von TiddlyWiki zu ändern.
+Settings/NavigationAddressBar/Caption: Navigation Adresszeile
+Settings/NavigationAddressBar/Hint: Verhalten der Browser Adresszeile, wenn ein Tiddler geöffnet wird:
+Settings/NavigationAddressBar/No/Description: Die Browser Adresszeile wird nicht verändert.
+Settings/NavigationAddressBar/Permalink/Description: Den aktuellen Tiddler einbinden.
+Settings/NavigationAddressBar/Permaview/Description: Alle geöffneten Tiddler einbinden.
+Settings/NavigationHistory/Caption: Browser Chronik
+Settings/NavigationHistory/Hint: Die Browser Chronik ändern, wenn ein Tiddler angezeigt wird:
+Settings/NavigationHistory/No/Description: Browser Chronik nicht ändern.
+Settings/NavigationHistory/Yes/Description: Browser Chronik ändern.
+Settings/ToolbarButtons/Caption: Toolbar Buttons
+Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
+Settings/ToolbarButtons/Text/Description: Text anzeigen
+Settings/ToolbarButtons/Icons/Description: Icon anzeigen
+TiddlerFields/Caption: Tiddler Felder
+TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exclusive ~Schatten-Tiddler. 
 Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen ihres ~TiddlyWiki's anzupassen.
-Appearance/Palette/Caption: Palette
-Appearance/Palette/Editor/Clone/Caption: Palette klonen
-Appearance/Palette/Editor/Clone/Prompt: Es wird empfohlen, dass sie diese ~Schatten-Palette klonen, bevor sie sie bearbeiten. Der Name der Palette wird im Tiddler Feld "description" eingestellt.
-Appearance/Palette/Editor/Prompt/Modified: Diese ~Schatten-Palette wurde bearbeitet.
-Appearance/Palette/Editor/Prompt: Bearbeiten
-Appearance/Palette/Editor/Reset/Caption: Palette zurücksetzen
-Appearance/Palette/ShowEditor/Caption: Editor zeigen
-Appearance/Palette/HideEditor/Caption: Editor ausblenden
-Appearance/Palette/Prompt: Ausgewählte Farbpalette:
-Appearance/StoryView/Caption: Anzeige
-Appearance/StoryView/Prompt: Ausgewählte Anzeige:
-Appearance/Theme/Caption: Thema
-Appearance/Theme/Prompt: Ausgewähltes Thema:
-Appearance/Toolbars/Caption: Toolbar
-Appearance/Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
-Appearance/Toolbars/EditToolbar/Caption: Edit Toolbar
-Appearance/Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
-Appearance/Toolbars/ViewToolbar/Caption: View Toolbar
-Appearance/Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
-Appearance/Toolbars/PageControls/Caption: Page Toolbar
-Appearance/Toolbars/PageControls/Hint: Ausweählen, welche Buttons im Hauptmenü angezeigt werden:
+Palette/Caption: Palette
+Palette/Editor/Clone/Caption: Palette klonen
+Palette/Editor/Clone/Prompt: Es wird empfohlen, dass sie diese ~Schatten-Palette klonen, bevor sie sie bearbeiten. Der Name der Palette wird im Tiddler Feld "description" eingestellt.
+Palette/Editor/Prompt/Modified: Diese ~Schatten-Palette wurde bearbeitet.
+Palette/Editor/Prompt: Bearbeiten
+Palette/Editor/Reset/Caption: Palette zurücksetzen
+Palette/ShowEditor/Caption: Editor zeigen
+Palette/HideEditor/Caption: Editor ausblenden
+Palette/Prompt: Ausgewählte Farbpalette:
+StoryView/Caption: Anzeige
+StoryView/Prompt: Ausgewählte Anzeige:
+Theme/Caption: Thema
+Theme/Prompt: Ausgewähltes Thema:
+Toolbars/Caption: Toolbar
+Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
+Toolbars/EditToolbar/Caption: Edit Toolbar
+Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
+Toolbars/ViewToolbar/Caption: View Toolbar
+Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
+Toolbars/PageControls/Caption: Page Toolbar
+Toolbars/PageControls/Hint: Ausweählen, welche Buttons im Hauptmenü angezeigt werden:
 Basics/AnimDuration/Prompt: Animation Dauer:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Lehrzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>

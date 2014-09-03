@@ -1,5 +1,5 @@
-title: $:/core/ui/ControlPanel/Appearance/StoryView
+title: $:/core/ui/ControlPanel/StoryView
 tags: $:/tags/ControlPanel/Appearance
-caption: {{$:/language/ControlPanel/Appearance/StoryView/Caption}}
+caption: {{$:/language/ControlPanel/StoryView/Caption}}
 
 {{$:/snippets/viewswitcher}}

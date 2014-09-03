@@ -1,13 +1,13 @@
-title: $:/core/ui/ControlPanel/Appearance/Toolbars/ViewToolbar
-tags: $:/tags/ControlPanel/Appearance/Toolbars
-caption: {{$:/language/ControlPanel/Appearance/Toolbars/ViewToolbar/Caption}}
+title: $:/core/ui/ControlPanel/Toolbars/ViewToolbar
+tags: $:/tags/ControlPanel/Toolbars
+caption: {{$:/language/ControlPanel/Toolbars/ViewToolbar/Caption}}
 
 \define lingo-base() $:/language/TiddlerInfo/
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
 
-{{$:/language/ControlPanel/Appearance/Toolbars/ViewToolbar/Hint}}
+{{$:/language/ControlPanel/Toolbars/ViewToolbar/Hint}}
 
 <$set name="tv-config-toolbar-icons" value="yes">
 

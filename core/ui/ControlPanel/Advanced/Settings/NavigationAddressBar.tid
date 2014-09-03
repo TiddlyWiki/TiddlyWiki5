@@ -1,8 +1,8 @@
-title: $:/core/ui/ControlPanel/Advanced/Settings/NavigationAddressBar
-tags: $:/tags/ControlPanel/Advanced/Settings
-caption: {{$:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/Caption}}
+title: $:/core/ui/ControlPanel/Settings/NavigationAddressBar
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/NavigationAddressBar/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Advanced/Settings/NavigationAddressBar/
+\define lingo-base() $:/language/ControlPanel/Settings/NavigationAddressBar/
 
 <$link to="$:/config/Navigation/UpdateAddressBar"><<lingo Hint>></$link>
 

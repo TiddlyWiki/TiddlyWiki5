@@ -1,6 +1,6 @@
 title: $:/snippets/paletteeditor
 
-\define lingo-base() $:/language/ControlPanel/Appearance/Palette/Editor/
+\define lingo-base() $:/language/ControlPanel/Palette/Editor/
 \define describePaletteColour(colour)
 {{$:/language/Docs/PaletteColours/$colour$}}
 \end

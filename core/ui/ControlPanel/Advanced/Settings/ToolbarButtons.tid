@@ -1,8 +1,8 @@
-title: $:/core/ui/ControlPanel/Advanced/Settings/ToolbarButtons
-tags: $:/tags/ControlPanel/Advanced/Settings
-caption: {{$:/language/ControlPanel/Advanced/Settings/ToolbarButtons/Caption}}
+title: $:/core/ui/ControlPanel/Settings/ToolbarButtons
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/ToolbarButtons/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Advanced/Settings/ToolbarButtons/
+\define lingo-base() $:/language/ControlPanel/Settings/ToolbarButtons/
 <<lingo Hint>>
 
 <$checkbox tiddler="$:/config/Toolbar/Icons" field="text" checked="yes" unchecked="no" default="yes"> <$link to="$:/config/Toolbar/Icons"><<lingo Icons/Description>></$link> </$checkbox>

@@ -1,8 +1,8 @@
-title: $:/core/ui/ControlPanel/Appearance/Palette
+title: $:/core/ui/ControlPanel/Palette
 tags: $:/tags/ControlPanel/Appearance
-caption: {{$:/language/ControlPanel/Appearance/Palette/Caption}}
+caption: {{$:/language/ControlPanel/Palette/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Appearance/Palette/
+\define lingo-base() $:/language/ControlPanel/Palette/
 
 {{$:/snippets/paletteswitcher}}
 

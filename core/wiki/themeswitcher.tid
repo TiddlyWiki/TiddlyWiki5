@@ -1,6 +1,6 @@
 title: $:/snippets/themeswitcher
 
-\define lingo-base() $:/language/ControlPanel/Appearance/Theme/
+\define lingo-base() $:/language/ControlPanel/Theme/
 <<lingo Prompt>> <$view tiddler={{$:/theme}} field="name"/>
 
 <$linkcatcher to="$:/theme">
