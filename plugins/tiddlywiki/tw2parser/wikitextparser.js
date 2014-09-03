@@ -48,10 +48,28 @@ Planned:
 	extraMacros: An array of additional macro handlers to add
 */
 
-var WikiTextParser = function(options) {
+var WikiTextParser = function(type,text,options) {
 	this.wiki = options.wiki;
 	this.autoLinkWikiWords = true;
+	this.installRules();
+	text = text || "no text";
+	this.source = text;
+	this.nextMatch = 0;
+	this.children = [];
+	//this.children.push({type: "text",text:"hello to the queen"});
+	this.tree =[];
+	this.output = null;
+	this.subWikify(this.children);
+	var parser = $tw.wiki.old_parseTiddler("$:/plugins/tiddlywiki/tw2parser/macrodefs",{parseAsInline:false});
+	this.tree = [{
+		type: "element",
+		tag: "div",
+			children:this.children
+	}];
+	Array.prototype.push.apply(parser.tree,this.tree);
+	this.tree = parser.tree;
 };
+
 
 WikiTextParser.prototype.installRules = function() {
 	var rules = require("./wikitextrules.js").rules,
@@ -63,23 +81,10 @@ WikiTextParser.prototype.installRules = function() {
 	this.rulesRegExp = new RegExp(pattern.join("|"),"mg");
 };
 
-WikiTextParser.prototype.parse = function(type,text) {
-	text = text || "";
-	this.source = text;
-	this.nextMatch = 0;
-	this.children = [];
-	this.dependencies = new $tw.Dependencies();
-	this.output = null;
-	this.subWikify(this.children);
-	var tree = new $tw.Renderer(this.children,this.dependencies);
-	this.source = null;
-	this.children = null;
-	return tree;
-};
 
 WikiTextParser.prototype.outputText = function(place,startPos,endPos) {
 	if(startPos < endPos) {
-		place.push($tw.Tree.Text(this.source.substring(startPos,endPos)));
+		place.push({type: "text",text:this.source.substring(startPos,endPos)});
 	}
 };
 

@@ -1,9 +1,10 @@
 caption: 5.0.16-beta
 created: 20140830131615798
-modified: 20140830131615798
+modified: 20140902124037214
 tags: releasenote
 title: Release 5.0.16-beta
 type: text/vnd.tiddlywiki
+released: 20140902124037214
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.15-beta...v5.0.16-beta]]//
 
@@ -16,14 +17,24 @@ type: text/vnd.tiddlywiki
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/89fd5379dd78887fc21746d792072bf5a25f0c56]] all variable prefixes from `tw-` to `tv-` (eg `tw-config-toolbar-icons` has become `tv-config-toolbar-icons`)
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/112a9a95d95e9f62f110c97a4faaf537c5c100b1]] prefix/removeprefix filter operators to be case-sensitive
 
+!! Compatibility with TiddlyWikiClassic
+
+This release includes a preliminary version of a new plugin that provides compatibility with content created for TiddlyWikiClassic:
+
+http://tiddlywiki.com/classicparserdemo.html
+
+Subsequent releases will include end-user documentation with step-by-step instructions for migrating content.
+
+Many thanks to @buggyj for his work on this plugin.
+
 !! Usability Improvements
 
-* [[Amended|https://github.com/Jermolene/TiddlyWiki5/commit/e47852cb141b384ad2a9097eca795545cb5b2494]] behaviour of the [[tw-browser-refresh|WidgetMessage: tw-browser-refresh]] message so that it no longer clears the location hash
+* [[Amended|https://github.com/Jermolene/TiddlyWiki5/commit/e47852cb141b384ad2a9097eca795545cb5b2494]] behaviour of the [[tm-browser-refresh|WidgetMessage: tw-browser-refresh]] message so that it no longer clears the location hash
 * [[Hide|https://github.com/Jermolene/TiddlyWiki5/commit/88c9c0c3ee115917b8c1a9126452bb0574061857]] toolbar buttons from static renderings
 
 !! Hackability Improvements
 
-* [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/48312272adb17610db96d50758e6af947cab7b1d]] the [FilterOperator: all]] to be able to select all the source tiddlers
+* [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/48312272adb17610db96d50758e6af947cab7b1d]] the [[FilterOperator: all]] to be able to select all the source tiddlers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/43aeb47fc34f1ba424030c4f78ee907fe7b1d5d8]] problem with single line macro definitions incorrectly including whitespace in the value. (For example, `\define mymacro() yes` would set the macro value to " yes", with a leading space)
 * [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/d2a5a12f2d6b6ccc36dd22a70ac2def08d1d3722]] TableOfContentsMacro to use the caption field if present
 * [[Configurability|https://github.com/Jermolene/TiddlyWiki5/commit/b437f1b450f5f2a3104a9086f7c674299b53b9bc]] for the default tab shown in the tiddler info panel (see [[Configuring the default TiddlerInfo tab]])
@@ -32,11 +43,14 @@ type: text/vnd.tiddlywiki
 !! Bug Fixes
 
 * [[Reverted|https://github.com/Jermolene/TiddlyWiki5/commit/ad40223d6b9bed435d9381611cb9de1841b53df6]] incorrect refreshing of the tiddler widget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/44228ed9f733217557851150f5ae45d9ebb23420]] indentation of selective expandable TableOfContentsMacro
 
 !! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@gernert|https://github.com/gernert]]
 * [[@pmario|https://github.com/pmario]]
 * [[@xcazin|https://github.com/xcazin]]

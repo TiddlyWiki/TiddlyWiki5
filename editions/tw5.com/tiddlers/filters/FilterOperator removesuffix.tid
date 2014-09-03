@@ -1,5 +1,5 @@
 created: 20140828133830424
-modified: 20140828133830424
+modified: 20140902145613329
 tags: filters
 title: FilterOperator: removesuffix
 type: text/vnd.tiddlywiki
@@ -9,6 +9,6 @@ The ''removesuffix'' filter operator returns the titles in the current list that
 For example:
 
 |!Filter String |!Description |
-|`tid-one tid-two three +[removeprefix[tid-]]` |Returns `one`, `two` |
+|`one-tid two-tid three +[removesuffix[-tid]]` |Returns `one`, `two` |
 
 See also [[FilterOperator: suffix]], [[FilterOperator: prefix]] and [[FilterOperator: removeprefix]].

@@ -1,0 +1,14 @@
+created: 20140416201128370
+modified: 20140901082657977
+title: Classic Parser Plugin Demo
+type: text/x-tiddlywiki
+
+This is a demo of the Tiddlywiki Classic parser for Tiddlywiki5 (the tw2parser plugin).  
+Below is a  [[Test card|Markup]] from [[http://tiddlywiki.org]] showing examples of all Classic markup.
+
+Tiddlers that are given the type 'text/x-tiddlywiki' will be interpreted as containing Classic Tiddlywiki markup. In addition Classic Tiddlywiki markup can be embedded in a tiddlywiki5 tiddler by the use of a type block - see [[text/x-tiddlywiki typeblock]] below.
+!!Support for Classic macros
+At present there is limited support for Classic macros. See below for examples of the [[slider|Classic Slider Demo]], [[tabs|ClassicTabsDemo]] and [[tiddler|Classic Transclusion]] macros.
+!!Status
+See here for <<slider $:/temp/1 Issues "Issues»" "more" >>
+!!See also [[Developers Notes]]

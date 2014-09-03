@@ -2,25 +2,25 @@ title: $:/language/ControlPanel/
 
 Advanced/Caption: Avanzate
 Advanced/Hint: Informazioni interne di questo ~TiddlyWiki
-Advanced/LoadedModules/Caption: Moduli caricati
-Advanced/LoadedModules/Hint: Elenco dei moduli attualmente caricati e loro collegamento ai frammenti sorgente. I moduli in corsivo mancano di un frammento sorgente perch&eacute; in generale installati durante il processo di avvio.
-Advanced/TiddlerFields/Caption: Campi frammenti
-Advanced/TiddlerFields/Hint: Questa &egrave; la serie completa dei TiddlerFields utilizzati in questo wiki (sono inclusi i frammenti di sistema ed esclusi i frammenti nascosti).
+LoadedModules/Caption: Moduli caricati
+LoadedModules/Hint: Elenco dei moduli attualmente caricati e loro collegamento ai frammenti sorgente. I moduli in corsivo mancano di un frammento sorgente perch&eacute; in generale installati durante il processo di avvio.
+TiddlerFields/Caption: Campi frammenti
+TiddlerFields/Hint: Questa &egrave; la serie completa dei TiddlerFields utilizzati in questo wiki (sono inclusi i frammenti di sistema ed esclusi i frammenti nascosti).
 Appearance/Caption: Aspetto
 Appearance/Hint: Personalizza l'aspetto di TiddlyWiki
-Appearance/Palette/Caption: Tavolozza
-Appearance/Palette/Editor/Clone/Caption: Clona
-Appearance/Palette/Editor/Clone/Prompt: Si consiglia di clonare questa tavolozza prima di modificarla
-Appearance/Palette/Editor/Prompt/Modified: Questa tavolozza &egrave; stata modificata
-Appearance/Palette/Editor/Prompt: Modifica
-Appearance/Palette/Editor/Reset/Caption: Reset
-Appearance/Palette/HideEditor/Caption: Nascondi editor
-Appearance/Palette/Prompt: Tavolozza corrente:
-Appearance/Palette/ShowEditor/Caption: Mostra editor
-Appearance/StoryView/Caption: Vista
-Appearance/StoryView/Prompt: Vista corrente:
-Appearance/Theme/Caption: Tema
-Appearance/Theme/Prompt: Tema corrente:
+Palette/Caption: Tavolozza
+Palette/Editor/Clone/Caption: Clona
+Palette/Editor/Clone/Prompt: Si consiglia di clonare questa tavolozza prima di modificarla
+Palette/Editor/Prompt/Modified: Questa tavolozza &egrave; stata modificata
+Palette/Editor/Prompt: Modifica
+Palette/Editor/Reset/Caption: Reset
+Palette/HideEditor/Caption: Nascondi editor
+Palette/Prompt: Tavolozza corrente:
+Palette/ShowEditor/Caption: Mostra editor
+StoryView/Caption: Vista
+StoryView/Prompt: Vista corrente:
+Theme/Caption: Tema
+Theme/Prompt: Tema corrente:
 Basics/AnimDuration/Prompt: Durata animazione:
 Basics/Caption: Impostazioni base
 Basics/DefaultTiddlers/BottomHint: Utilizza &#91;&#91;le doppie parentesi quadre&#93;&#93; per titoli di frammenti con spazi bianchi. In alternativa scegli di visualizzare i frammenti secondo la <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">cronologia</$button>

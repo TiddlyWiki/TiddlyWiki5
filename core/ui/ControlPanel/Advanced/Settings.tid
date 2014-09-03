@@ -1,12 +1,12 @@
-title: $:/core/ui/ControlPanel/Advanced/Settings
+title: $:/core/ui/ControlPanel/Settings
 tags: $:/tags/ControlPanel/Advanced
-caption: {{$:/language/ControlPanel/Advanced/Settings/Caption}}
+caption: {{$:/language/ControlPanel/Settings/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Advanced/Settings/
+\define lingo-base() $:/language/ControlPanel/Settings/
 
 <<lingo Hint>>
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Advanced/Settings]]">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Settings]]">
 
 <div style="border-top:1px solid #eee;">
 

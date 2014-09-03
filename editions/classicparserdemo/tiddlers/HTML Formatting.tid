@@ -1,0 +1,29 @@
+created: 20130212225913000
+creator: tobibeer
+modified: 20140415163847476
+modifier: andrewstern
+tags: Formatting
+title: HTML Formatting
+type: text/x-tiddlywiki
+
+!Summary
+TiddlyWiki provides support for rendering pure HTML markup. To do this, simply wrap your HTML code in {{{<html>your html markup goes here</html>}}}. This way you are able to use embed code using iFrames often suggested by popular media sites like ~YouTube.
+!!"""Embedded HTML"""
+{{{
+<html>
+<span style="padding-right:30px;font-size:2em;">any</span><br />
+<b>valid</b> <em>xhtml</em>
+</html>
+}}}
+<html><span style="padding-right:30px;font-size:2em;">any</span><br /><b>valid</b> <em>xhtml</em></html>
+!!"""Embedded iFrame"""
+{{{
+<html>
+<iframe src="http://www.youtube.com/embed/Cj6ho1-G6tw"
+  width="450" height="315" frameborder="0" allowfullscreen/>
+</html>
+}}}
+<html>
+<iframe src="http://www.youtube.com/embed/Cj6ho1-G6tw?vq=hd720&iv_load_policy=3"
+  width="450" height="315" frameborder="0" allowfullscreen/>
+</html>

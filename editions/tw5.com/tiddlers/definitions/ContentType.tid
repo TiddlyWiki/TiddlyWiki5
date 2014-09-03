@@ -24,7 +24,6 @@ Under TiddlyWiki5, the `type` field gives the content type to apply to the main 
 |~|Cascading Stylesheet text |text/css|
 |~|Comma-separated values |text/csv|
 |~|Plain text |text/plain|
-|~|Plain text |text/plain|
 |~|~TiddlyWiki 5 |text/vnd.tiddlywiki|
 |~|~TiddlyWiki Classic |text/x-tiddlywiki|
 

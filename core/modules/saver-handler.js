@@ -59,7 +59,7 @@ function SaverHandler(options) {
 			}
 		});
 		// Listen for the autosave event
-		$tw.rootWidget.addEventListener("tw-auto-save-wiki",function(event) {
+		$tw.rootWidget.addEventListener("tm-auto-save-wiki",function(event) {
 			// Do the autosave unless there are outstanding tiddler change events
 			if(self.wiki.getSizeOfTiddlerEventQueue() === 0) {
 				// Check if we're dirty

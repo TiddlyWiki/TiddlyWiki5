@@ -41,10 +41,7 @@ KeyboardWidget.prototype.render = function(parent,nextSibling) {
 	domNode.className = classes.join(" ");
 	// Add a keyboard event handler
 	domNode.addEventListener("keydown",function (event) {
-		if(event.keyCode === self.keyInfo.keyCode && 
-			event.shiftKey === self.keyInfo.shiftKey && 
-			event.altKey === self.keyInfo.altKey && 
-			event.ctrlKey === self.keyInfo.ctrlKey) {
+		if($tw.utils.checkKeyDescriptor(event,self.keyInfo)) {
 			self.dispatchMessage(event);
 			event.preventDefault();
 			event.stopPropagation();

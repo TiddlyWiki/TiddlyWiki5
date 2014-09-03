@@ -1,0 +1,9 @@
+created: 20140903085210479
+modified: 20140903085210479
+tags: command
+title: MakeLibraryCommand
+type: text/vnd.tiddlywiki
+
+{{$:/language/Help/makelibrary}}
+
+See the UpgradeMechanism for more details.

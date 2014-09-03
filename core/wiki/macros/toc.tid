@@ -53,7 +53,7 @@ tags: $:/tags/Macro
 <$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
 <li>
 <$link>
-<$list filter="[all[current]tagging[]limit[1]]">
+<$list filter="[all[current]tagging[]limit[1]]" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
 <$reveal type="nomatch" state=<<toc-state>> text="open">
 <$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
 {{$:/core/images/right-arrow}}

@@ -1,6 +1,6 @@
 title: $:/snippets/paletteswitcher
 
-\define lingo-base() $:/language/ControlPanel/Appearance/Palette/
+\define lingo-base() $:/language/ControlPanel/Palette/
 <<lingo Prompt>> <$view tiddler={{$:/palette}} field="name"/>
 
 <$linkcatcher to="$:/palette">

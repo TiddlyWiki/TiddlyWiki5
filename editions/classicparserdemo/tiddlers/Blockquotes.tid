@@ -1,0 +1,43 @@
+created: 20110215174227000
+creator: pmario
+modified: 20140415164659711
+modifier: andrewstern
+tags: Formatting
+title: Blockquotes
+type: text/x-tiddlywiki
+
+!Summary
+Use quotations to cite other sources or simply indent content.
+!!Blockquotes
+Text can be displayed as quotations using three less-than signs:
+{{{
+<<<
+Steve Jobs: "computers are like a bicycle for our minds"
+<<<
+}}}
+<<<
+Steve Jobs: "computers are like a bicycle for our minds"
+<<<
+!Nested Blockquotes 
+Quotes can be displayed with multi-levels:
+{{{
+> blockquote, level 1
+>> blockquote, level 2
+>>> blockquote, level 3
+}}}
+> blockquote, level 1
+>> blockquote, level 2
+>>> blockquote, level 3
+!!Mixed Blockquotes
+{{{
+<<<
+Steve Jobs: "computers are like a bicycle for our minds"
+> blockquote, level 1
+Some more text.
+<<<
+}}}
+<<<
+Steve Jobs: "computers are like a bicycle for our minds"
+> blockquote, level 1
+Some more text.
+<<<

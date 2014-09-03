@@ -2,25 +2,25 @@ title: $:/language/ControlPanel/
 
 Advanced/Caption: 詳細設定
 Advanced/Hint: この TiddlyWiki の内部情報
-Advanced/LoadedModules/Caption: ロード済みモジュール
-Advanced/LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
-Advanced/TiddlerFields/Caption: Tiddlerフィールド
-Advanced/TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
+LoadedModules/Caption: ロード済みモジュール
+LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
+TiddlerFields/Caption: Tiddlerフィールド
+TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
 Appearance/Caption: 表示形式
 Appearance/Hint: この TiddlyWiki の見え方を変更する各種方法です。
-Appearance/Palette/Caption: パレット
-Appearance/Palette/Editor/Clone/Caption: クローン
-Appearance/Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前にクローンを作成することをお勧めします
-Appearance/Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました
-Appearance/Palette/Editor/Prompt: 編集中
-Appearance/Palette/Editor/Reset/Caption: リセット
-Appearance/Palette/HideEditor/Caption: エディタを隠す
-Appearance/Palette/Prompt: 現在のパレット:
-Appearance/Palette/ShowEditor/Caption: エディタを表示
-Appearance/StoryView/Caption: 表示スタイル
-Appearance/StoryView/Prompt: 現在の表示スタイル:
-Appearance/Theme/Caption: テーマ
-Appearance/Theme/Prompt: 現在のテーマ:
+Palette/Caption: パレット
+Palette/Editor/Clone/Caption: クローン
+Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前にクローンを作成することをお勧めします
+Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました
+Palette/Editor/Prompt: 編集中
+Palette/Editor/Reset/Caption: リセット
+Palette/HideEditor/Caption: エディタを隠す
+Palette/Prompt: 現在のパレット:
+Palette/ShowEditor/Caption: エディタを表示
+StoryView/Caption: 表示スタイル
+StoryView/Prompt: 現在の表示スタイル:
+Theme/Caption: テーマ
+Theme/Prompt: 現在のテーマ:
 Basics/AnimDuration/Prompt: アニメーション時間:
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保存時の表示を維持</$button> することもできます。

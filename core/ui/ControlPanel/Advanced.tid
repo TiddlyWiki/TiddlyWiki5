@@ -5,5 +5,5 @@ caption: {{$:/language/ControlPanel/Advanced/Caption}}
 {{$:/language/ControlPanel/Advanced/Hint}}
 
 <div class="tc-control-panel">
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Advanced]!has[draft.of]]" "$:/core/ui/ControlPanel/Advanced/TiddlerFields">>
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Advanced]!has[draft.of]]" "$:/core/ui/ControlPanel/TiddlerFields">>
 </div>

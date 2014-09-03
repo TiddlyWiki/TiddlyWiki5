@@ -1,8 +1,8 @@
-title: $:/core/ui/ControlPanel/Advanced/EditorTypes
+title: $:/core/ui/ControlPanel/EditorTypes
 tags: $:/tags/ControlPanel/Advanced
-caption: {{$:/language/ControlPanel/Advanced/EditorTypes/Caption}}
+caption: {{$:/language/ControlPanel/EditorTypes/Caption}}
 
-\define lingo-base() $:/language/ControlPanel/Advanced/EditorTypes/
+\define lingo-base() $:/language/ControlPanel/EditorTypes/
 
 <<lingo Hint>>
 
