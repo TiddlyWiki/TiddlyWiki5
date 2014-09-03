@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: 構建升級處理所需的程式庫插件
+
+為升級處理構建 `$:/UpgradeLibrary` 條目。
+
+升級程式庫被格式化為一個插件類型為 `library` 的一般插件條目。它包含 TiddlyWiki5 存儲庫中所有可用的插件、佈景主題和語言包的副本。
+
+此命令僅供內部使用；它只是與使用者構建一個自訂的升級程式相關。
+
+```
+--makelibrary <title>
+```
+
+標題參數預設為 `$:/UpgradeLibrary`。
