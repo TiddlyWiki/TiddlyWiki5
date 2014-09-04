@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Advanced
-tags: $:/tags/ControlPanel
+tags: $:/tags/ControlPanel/Info
 caption: {{$:/language/ControlPanel/Advanced/Caption}}
 
 {{$:/language/ControlPanel/Advanced/Hint}}
