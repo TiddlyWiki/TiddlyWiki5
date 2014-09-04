@@ -20,6 +20,10 @@ tags: $:/tags/stylesheet
 
 }
 
+.tc-double-spaced-list {
+	padding-bottom:.5em;padding-top:.5em;
+}
+
 .tc-link-info-item {
 	display: inline-block;
 	border: 1px solid <<colour muted-foreground>>;
