@@ -1,53 +1,9 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Avancé
-EditorTypes/Caption: Types d'éditeur
-EditorTypes/Editor/Caption: Éditeur
-EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
-EditorTypes/Type/Caption: Type
 Advanced/Hint: Informations internes sur ce ~TiddlyWiki
-LoadedModules/Caption: Modules chargés
-LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
-Settings/Caption: Paramétrage
-Settings/Hint: Ce paramétrage avancé vous permet de personnaliser le comportement de TiddlyWiki.
-Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
-Settings/NavigationAddressBar/Hint: Comportement de la barre d'adresse du navigateur lorsqu'on pointe vers un tiddler :
-Settings/NavigationAddressBar/No/Description: Ne pas modifier la barre d'adresse
-Settings/NavigationAddressBar/Permalink/Description: Inclure uniquement le titre du tiddler cible
-Settings/NavigationAddressBar/Permaview/Description: Inclure le titre du tiddler cible ainsi que le déroulé courant
-Settings/NavigationHistory/Caption: Historique de navigation
-Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
-Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
-Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
-Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
-Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
-Settings/ToolbarButtons/Text/Description: Afficher le texte
-Settings/ToolbarButtons/Icons/Description: Afficher l'icone
-TiddlerFields/Caption: Champs
-TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
 Appearance/Caption: Apparence
 Appearance/Hint: Personnalisation de l'apparence de votre ~TiddlyWiki.
-Palette/Caption: Palette
-Palette/Editor/Clone/Caption: Cloner
-Palette/Editor/Clone/Prompt: Il est recommandé de cloner cette palette « shadow » avant de l'éditer
-Palette/Editor/Prompt/Modified: Cette palette « shadow » a été modifiée
-Palette/Editor/Prompt: Édition de
-Palette/Editor/Reset/Caption: Réinitialiser
-Palette/ShowEditor/Caption: Afficher l'éditeur
-Palette/HideEditor/Caption: Masquer l'éditeur
-Palette/Prompt: Palette en cours :
-StoryView/Caption: Vue sur le déroulé
-StoryView/Prompt: Vue courante :
-Theme/Caption: Thème
-Theme/Prompt: Thème courant :
-Toolbars/Caption: Barres d'outils
-Toolbars/Hint: Choix des boutons à afficher dans les barres d'outils
-Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
-Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en cours d'édition
-Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
-Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
-Toolbars/PageControls/Caption: Barre d'outils de la page
-Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
 Basics/AnimDuration/Prompt: Durée de l'animation
 Basics/Caption: Fondamentaux
 Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&#93; pour les titres contenant des espaces. Vous pouvez aussi décider de <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Conserver le déroulé actuel</$button>
@@ -63,6 +19,21 @@ Basics/Tiddlers/Prompt: Nombre de tiddlers
 Basics/Title/Prompt: Titre de ce ~TiddlyWiki
 Basics/Username/Prompt: Signer les modifications avec ce nom d'utilisateur
 Basics/Version/Prompt: Numéro de version :
+EditorTypes/Caption: Types d'éditeur
+EditorTypes/Editor/Caption: Éditeur
+EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
+EditorTypes/Type/Caption: Type
+LoadedModules/Caption: Modules chargés
+LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
+Palette/Caption: Palette
+Palette/Editor/Clone/Caption: Cloner
+Palette/Editor/Clone/Prompt: Il est recommandé de cloner cette palette « shadow » avant de l'éditer
+Palette/Editor/Prompt/Modified: Cette palette « shadow » a été modifiée
+Palette/Editor/Prompt: Édition de
+Palette/Editor/Reset/Caption: Réinitialiser
+Palette/HideEditor/Caption: Masquer l'éditeur
+Palette/Prompt: Palette en cours :
+Palette/ShowEditor/Caption: Afficher l'éditeur
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: désactiver
 Plugins/Disable/Hint: Désactive ce plugin au prochain rechargement de la page
@@ -73,7 +44,6 @@ Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
 Plugins/Language/Prompt: Langues
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Thèmes
-Settings/AutoSave/Caption: Sauvegarde automatique
 Saving/Caption: Sauvegarde
 Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
@@ -86,6 +56,36 @@ Saving/TiddlySpot/Password: Mot de passe
 Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts
 Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
+Settings/AutoSave/Caption: Sauvegarde automatique
+Settings/Caption: Paramétrage
+Settings/Hint: Ce paramétrage avancé vous permet de personnaliser le comportement de TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
+Settings/NavigationAddressBar/Hint: Comportement de la barre d'adresse du navigateur lorsqu'on pointe vers un tiddler :
+Settings/NavigationAddressBar/No/Description: Ne pas modifier la barre d'adresse
+Settings/NavigationAddressBar/Permalink/Description: Inclure uniquement le titre du tiddler cible
+Settings/NavigationAddressBar/Permaview/Description: Inclure le titre du tiddler cible ainsi que le déroulé courant
+Settings/NavigationHistory/Caption: Historique de navigation
+Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
+Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
+Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
+Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
+Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
+Settings/ToolbarButtons/Icons/Description: Afficher l'icone
+Settings/ToolbarButtons/Text/Description: Afficher le texte
+StoryView/Caption: Vue sur le déroulé
+StoryView/Prompt: Vue courante :
+Theme/Caption: Thème
+Theme/Prompt: Thème courant :
+TiddlerFields/Caption: Champs
+TiddlerFields/Hint: Voici la totalité des [[champs|TiddlerFields]] utilisés dans ce wiki (y compris les tiddlers système, mais non compris les tiddlers //shadow//).
+Toolbars/Caption: Barres d'outils
+Toolbars/EditToolbar/Caption: Barre d'outils du mode édition
+Toolbars/EditToolbar/Hint: Choix des boutons à afficher pour les tiddlers en cours d'édition
+Toolbars/Hint: Choix des boutons à afficher dans les barres d'outils
+Toolbars/PageControls/Caption: Barre d'outils de la page
+Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
+Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
+Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
 Tools/Caption: Outils
 Tools/Download/Full/Caption: Télécharger le wiki complet
 Tools/Encryption/ChangePassword/Button: changer le mot de passe

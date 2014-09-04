@@ -2,25 +2,8 @@ title: $:/language/ControlPanel/
 
 Advanced/Caption: 詳細設定
 Advanced/Hint: この TiddlyWiki の内部情報
-LoadedModules/Caption: ロード済みモジュール
-LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
-TiddlerFields/Caption: Tiddlerフィールド
-TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
 Appearance/Caption: 表示形式
 Appearance/Hint: この TiddlyWiki の見え方を変更する各種方法です。
-Palette/Caption: パレット
-Palette/Editor/Clone/Caption: クローン
-Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前にクローンを作成することをお勧めします
-Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました
-Palette/Editor/Prompt: 編集中
-Palette/Editor/Reset/Caption: リセット
-Palette/HideEditor/Caption: エディタを隠す
-Palette/Prompt: 現在のパレット:
-Palette/ShowEditor/Caption: エディタを表示
-StoryView/Caption: 表示スタイル
-StoryView/Prompt: 現在の表示スタイル:
-Theme/Caption: テーマ
-Theme/Prompt: 現在のテーマ:
 Basics/AnimDuration/Prompt: アニメーション時間:
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保存時の表示を維持</$button> することもできます。
@@ -36,11 +19,21 @@ Basics/Tiddlers/Prompt: tiddler 数:
 Basics/Title/Prompt: この ~TiddlyWiki のタイトル:
 Basics/Username/Prompt: 編集者として表示するユーザ名:
 Basics/Version/Prompt: ~TiddlyWiki バージョン:
+LoadedModules/Caption: ロード済みモジュール
+LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
+Palette/Caption: パレット
+Palette/Editor/Clone/Caption: クローン
+Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前にクローンを作成することをお勧めします
+Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました
+Palette/Editor/Prompt: 編集中
+Palette/Editor/Reset/Caption: リセット
+Palette/HideEditor/Caption: エディタを隠す
+Palette/Prompt: 現在のパレット:
+Palette/ShowEditor/Caption: エディタを表示
 Plugins/Caption: プラグイン
 Plugins/Language/Prompt: 言語
 Plugins/Plugin/Prompt: プラグイン
 Plugins/Theme/Prompt: テーマ
-Settings/AutoSave/Caption: 自動保存
 Saving/Caption: 保存
 Saving/Heading: 保存
 Saving/TiddlySpot/Advanced/Heading: 詳細設定
@@ -53,6 +46,13 @@ Saving/TiddlySpot/Password: パスワード
 Saving/TiddlySpot/ServerURL: サーバーURL
 Saving/TiddlySpot/UploadDir: アップロードディレクトリ
 Saving/TiddlySpot/UserName: Wiki 名
+Settings/AutoSave/Caption: 自動保存
+StoryView/Caption: 表示スタイル
+StoryView/Prompt: 現在の表示スタイル:
+Theme/Caption: テーマ
+Theme/Prompt: 現在のテーマ:
+TiddlerFields/Caption: Tiddlerフィールド
+TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
 Tools/Caption: ツール
 Tools/Download/Full/Caption: Download full wiki
 Tools/Encryption/ChangePassword/Button: パスワード変更
