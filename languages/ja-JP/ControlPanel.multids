@@ -40,11 +40,7 @@ Plugins/Caption: プラグイン
 Plugins/Language/Prompt: 言語
 Plugins/Plugin/Prompt: プラグイン
 Plugins/Theme/Prompt: テーマ
-Saving/AutoSave/Disabled/Button: 有功にする
-Saving/AutoSave/Disabled/Prompt: 自動保存は現在「無効」です。
-Saving/AutoSave/Enabled/Button: 無効にする
-Saving/AutoSave/Enabled/Prompt: 自動保存は現在「有効」です。
-Saving/AutoSave: 自動保存
+Settings/AutoSave/Caption: 自動保存
 Saving/Caption: 保存
 Saving/Heading: 保存
 Saving/TiddlySpot/Advanced/Heading: 詳細設定

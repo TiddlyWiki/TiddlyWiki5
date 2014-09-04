@@ -73,11 +73,7 @@ Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
 Plugins/Language/Prompt: Langues
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Thèmes
-Saving/AutoSave/Disabled/Button: Activer
-Saving/AutoSave/Disabled/Prompt: La sauvegarde automatique est désactivée
-Saving/AutoSave/Enabled/Button: Désactiver
-Saving/AutoSave/Enabled/Prompt: La sauvegarde automatique est activée
-Saving/AutoSave: Sauvegarde automatique
+Settings/AutoSave/Caption: Sauvegarde automatique
 Saving/Caption: Sauvegarde
 Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés

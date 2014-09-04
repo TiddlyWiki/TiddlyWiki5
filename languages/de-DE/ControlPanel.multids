@@ -73,11 +73,7 @@ Plugins/Enable/Hint: Aktivieren sie dieses Plugin beim nächsten Laden der Seite
 Plugins/Language/Prompt: Sprachen
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themen
-Saving/AutoSave/Disabled/Button: klicken zum Aktivieren
-Saving/AutoSave/Disabled/Prompt: Automatisch speichern ist deaktiviert!
-Saving/AutoSave/Enabled/Button: klicken zum Deaktivieren
-Saving/AutoSave/Enabled/Prompt: Automatisch speichern ist aktiviert!
-Saving/AutoSave: Automatisch speichern
+Settings/AutoSave/Caption: Automatisch speichern
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen

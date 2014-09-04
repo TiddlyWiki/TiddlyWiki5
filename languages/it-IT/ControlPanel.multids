@@ -40,11 +40,7 @@ Plugins/Caption: Plugins
 Plugins/Language/Prompt: Linguaggi
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Temi
-Saving/AutoSave/Disabled/Button: Abilita
-Saving/AutoSave/Disabled/Prompt: Il salvataggio automatico &egrave; disabilitato
-Saving/AutoSave/Enabled/Button: Disabilita
-Saving/AutoSave/Enabled/Prompt: Il salvataggio automatico &egrave; abilitato
-Saving/AutoSave: Salvataggio automatico
+Settings/AutoSave/Caption: Salvataggio automatico
 Saving/Caption: Salvataggio
 Saving/Heading: Salvataggio
 Saving/TiddlySpot/Advanced/Heading: Impostazioni avanzate

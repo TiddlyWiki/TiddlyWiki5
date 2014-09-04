@@ -73,11 +73,7 @@ Plugins/Enable/Hint: 重新載入頁面時啟用此插件
 Plugins/Language/Prompt: 語言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 佈景主題
-Saving/AutoSave/Disabled/Button: 啟用
-Saving/AutoSave/Disabled/Prompt: 自動儲存已停用
-Saving/AutoSave/Enabled/Button: 停用
-Saving/AutoSave/Enabled/Prompt: 自動儲存已啟用
-Saving/AutoSave: 自動儲存
+Settings/AutoSave/Caption: 自動儲存
 Saving/Caption: 儲存
 Saving/Heading: 儲存
 Saving/TiddlySpot/Advanced/Heading: 進階設定
