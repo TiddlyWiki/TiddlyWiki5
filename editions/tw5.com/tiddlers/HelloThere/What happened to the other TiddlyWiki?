@@ -1,0 +1,13 @@
+title: What happened to the other TiddlyWiki?
+tags: HelloThere
+created: 201409040851
+modified: 201409040851
+
+<div class="tc-message-box">
+
+<a class="tw-message-icon" href="http://classic.tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
+
+!! TiddlyWikiClassic
+
+The original "Classic" version of TiddlyWiki is still available at http://classic.tiddlywiki.com. While it is not fully backwards compatible, we are currently improving the upgrade process.
+</div>
