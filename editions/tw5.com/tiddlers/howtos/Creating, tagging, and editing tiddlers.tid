@@ -1,0 +1,30 @@
+title: Creating, tagging, and editing tiddlers
+tags: howtos [[Working with TiddlyWiki]]
+created: 201409041403
+modified: 201409041403
+
+!Creating tiddlers
+
+You create a tiddler either by clicking the {{$:/core/images/new-button}} button in the sidebar, or by clicking on any empty hyperlink (empty links will normally appear in [[blue italic text]]).
+
+!Editing tiddlers
+
+You can edit an existing tiddler by clicking the {{$:/core/images/edit-button}} button at the top right of the tiddler.
+
+!The ~EditTemplate
+
+Creating new tiddlers and editing existing tiddlers both open up the ~EditTemplate. This is your control panel for modifying the tiddler in different ways. The ~EditTemplate has several areas:
+
+*''The title editor'' Use this to edit the title of the tiddler
+*''The tag editor'' Use this to add or remove tags to the tiddler. Type a tag name and either select a tag from the dropdown list or finish typing to create a new tag. Then click the 'add' button to add it to the tiddler. Delete tags from a tiddler by clicking the 'x' on the tag label.
+*''The text editor'' Use this to add content to the tiddler. You can also use the preview button to preview changes to the tiddler text.
+*''The type editor'' Use this when you have a specific type of content that needs to be displayed in a different way, such as an image. See ContentType for a list of possible content types. The default is text/vnd.tiddlywiki)
+*''The field editor'' Use this to add fields to the tiddler. For example, you can use a [[list field|ListField]] to display the order of tiddlers tagged with the current tiddler's title in ways that are not alphabetical.
+
+!Save, cancel or delete
+
+When you are finished editing, select the desired button at the top of the ~EditTemplate:
+
+*The 'done' button ({{$:/core/images/done-button}}) saves your changes and returns to view mode.
+*The 'cancel' button ({{$:/core/images/cancel-button}}) cancels the changes and returns to view mode.
+*The 'delete' button ({{$:/core/images/delete-button}}) deletes the entire tiddler.
