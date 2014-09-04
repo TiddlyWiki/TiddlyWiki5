@@ -1,0 +1,10 @@
+title: TiddlyWiki advanced features
+tags: TableOfContents
+created: 201409041030
+edited: 201409041030
+
+Here are some advanced tools you can use to get the most out of your ~Tiddlywiki:
+
+<div class='tc-table-of-contents'>
+<<toc-selective-expandable 'TiddlyWiki advanced features'>>
+</div>
