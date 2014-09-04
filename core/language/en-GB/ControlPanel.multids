@@ -1,55 +1,9 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: Advanced
-EditorTypes/Caption: Editor Types
-EditorTypes/Editor/Caption: Editor
-EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
-EditorTypes/Type/Caption: Type
 Advanced/Hint: Internal information about this TiddlyWiki
-Info/Caption: Info
-Info/Hint: Information about this TiddlyWiki
-LoadedModules/Caption: Loaded Modules
-LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
-Settings/Caption: Settings
-Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
-Settings/NavigationAddressBar/Caption: Navigation Address Bar
-Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
-Settings/NavigationAddressBar/No/Description: Do not update the address bar
-Settings/NavigationAddressBar/Permalink/Description: Include the target tiddler
-Settings/NavigationAddressBar/Permaview/Description: Include the target tiddler and the current story sequence
-Settings/NavigationHistory/Caption: Navigation History
-Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
-Settings/NavigationHistory/No/Description: Do not update history
-Settings/NavigationHistory/Yes/Description: Update history
-Settings/ToolbarButtons/Caption: Toolbar Buttons
-Settings/ToolbarButtons/Hint: Default toolbar button appearance:
-Settings/ToolbarButtons/Text/Description: Include text
-Settings/ToolbarButtons/Icons/Description: Include icon
-TiddlerFields/Caption: Tiddler Fields
-TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
 Appearance/Caption: Appearance
 Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
-Palette/Caption: Palette
-Palette/Editor/Clone/Caption: clone
-Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
-Palette/Editor/Prompt/Modified: This shadow palette has been modified
-Palette/Editor/Prompt: Editing
-Palette/Editor/Reset/Caption: reset
-Palette/HideEditor/Caption: hide editor
-Palette/Prompt: Current palette:
-Palette/ShowEditor/Caption: show editor
-StoryView/Caption: Story View
-StoryView/Prompt: Current view:
-Theme/Caption: Theme
-Theme/Prompt: Current theme:
-Toolbars/Caption: Toolbars
-Toolbars/Hint: Select which toolbar buttons are displayed
-Toolbars/EditToolbar/Caption: Edit Toolbar
-Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
-Toolbars/ViewToolbar/Caption: View Toolbar
-Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
-Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
 Basics/AnimDuration/Prompt: Animation duration:
 Basics/Caption: Basics
 Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
@@ -65,6 +19,23 @@ Basics/Tiddlers/Prompt: Number of tiddlers:
 Basics/Title/Prompt: Title of this ~TiddlyWiki:
 Basics/Username/Prompt: Username for signing edits:
 Basics/Version/Prompt: ~TiddlyWiki version:
+EditorTypes/Caption: Editor Types
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
+EditorTypes/Type/Caption: Type
+Info/Caption: Info
+Info/Hint: Information about this TiddlyWiki
+LoadedModules/Caption: Loaded Modules
+LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+Palette/Caption: Palette
+Palette/Editor/Clone/Caption: clone
+Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
+Palette/Editor/Prompt/Modified: This shadow palette has been modified
+Palette/Editor/Prompt: Editing
+Palette/Editor/Reset/Caption: reset
+Palette/HideEditor/Caption: hide editor
+Palette/Prompt: Current palette:
+Palette/ShowEditor/Caption: show editor
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -75,10 +46,6 @@ Plugins/Enable/Hint: Enable this plugin when reloading page
 Plugins/Language/Prompt: Languages
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themes
-Settings/AutoSave/Disabled/Description: Do not save automatically
-Settings/AutoSave/Enabled/Description: Save changes automatically
-Settings/AutoSave/Caption: Autosave
-Settings/AutoSave/Hint: Automatically save changes during editing
 Saving/Caption: Saving
 Saving/Heading: Saving
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
@@ -91,6 +58,39 @@ Saving/TiddlySpot/Password: Password
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name
+Settings/AutoSave/Caption: Autosave
+Settings/AutoSave/Disabled/Description: Do not save automatically
+Settings/AutoSave/Enabled/Description: Save changes automatically
+Settings/AutoSave/Hint: Automatically save changes during editing
+Settings/Caption: Settings
+Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Navigation Address Bar
+Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
+Settings/NavigationAddressBar/No/Description: Do not update the address bar
+Settings/NavigationAddressBar/Permalink/Description: Include the target tiddler
+Settings/NavigationAddressBar/Permaview/Description: Include the target tiddler and the current story sequence
+Settings/NavigationHistory/Caption: Navigation History
+Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
+Settings/NavigationHistory/No/Description: Do not update history
+Settings/NavigationHistory/Yes/Description: Update history
+Settings/ToolbarButtons/Caption: Toolbar Buttons
+Settings/ToolbarButtons/Hint: Default toolbar button appearance:
+Settings/ToolbarButtons/Icons/Description: Include icon
+Settings/ToolbarButtons/Text/Description: Include text
+StoryView/Caption: Story View
+StoryView/Prompt: Current view:
+Theme/Caption: Theme
+Theme/Prompt: Current theme:
+TiddlerFields/Caption: Tiddler Fields
+TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
+Toolbars/Caption: Toolbars
+Toolbars/EditToolbar/Caption: Edit Toolbar
+Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
+Toolbars/Hint: Select which toolbar buttons are displayed
+Toolbars/PageControls/Caption: Page Toolbar
+Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
+Toolbars/ViewToolbar/Caption: View Toolbar
+Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Caption: Tools
 Tools/Download/Full/Caption: Download full wiki
 Tools/Encryption/ChangePassword/Button: change password
