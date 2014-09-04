@@ -75,11 +75,10 @@ Plugins/Enable/Hint: Enable this plugin when reloading page
 Plugins/Language/Prompt: Languages
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themes
-Saving/AutoSave/Disabled/Button: enable
-Saving/AutoSave/Disabled/Prompt: Autosave is currently disabled
-Saving/AutoSave/Enabled/Button: disable
-Saving/AutoSave/Enabled/Prompt: Autosave is currently enabled
-Saving/AutoSave: Autosave
+Settings/AutoSave/Disabled/Description: Do not save automatically
+Settings/AutoSave/Enabled/Description: Save changes automatically
+Settings/AutoSave/Caption: Autosave
+Settings/AutoSave/Hint: Automatically save changes during editing
 Saving/Caption: Saving
 Saving/Heading: Saving
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
