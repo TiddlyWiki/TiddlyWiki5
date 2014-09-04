@@ -1,6 +1,6 @@
 created: 20130822170200000
 modified: 20140902124037214
-tags: introduction
+tags: TableOfContents introduction
 title: HelloThere
 type: text/vnd.tiddlywiki
 
@@ -10,9 +10,8 @@ You can use ~TiddlyWiki as a single file that you view and edit through any web 
 
 How can you make ~TiddlyWiki work for you? We recommend you start with our introductory documentation, listed below, then browse the TableOfContents, always available in the Contents tab in the sidebar. Or just [[download an empty TiddlyWiki now|Downloading and saving]] and try it out for yourself!
 
-*[[Discover TiddlyWiki (presentation)]] 
-*[[A visual tour of TiddlyWiki (presentation)]] 
-*[[Some things you can do with TiddlyWiki]] 
+*[[Discover TiddlyWiki]] 
+*[[Some of the things you can do with TiddlyWiki]] 
 *[[Examples of TiddlyWiki in the wild]] 
 *[[The history of TiddlyWiki]] 
 *[[What happened to the other TiddlyWiki?]]
