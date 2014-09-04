@@ -1,0 +1,20 @@
+title: Some of the things you can do with TiddlyWiki
+tags: HelloThere
+created: 201409040903
+edited: 201409040903
+
+*Take notes, and use tags and hyperlinking to form relationships between your notes
+*Use tabs, tables, tag-based lists, and tables of contents to get organzed
+*Bookmark your favorite websites (see an example at http://giffmex.org/experiments/tidmarks.html)
+*Keep track of tasks and appointments, and organize them by multiple tags (see our TaskManagementExample)
+*Inventory just about anything: your recipes, personal library, contacts, music collection, and more
+*Create a blog or website
+*Write a book
+*Organize your images into galleries (see our [[ImageGallery Example]])
+*Share the information in your ~TiddlyWiki with others, as an online file, as a file attachment, as a tiddler file, or as a link to a specific online tiddler (try clicking and dragging a tiddler from one ~TiddlyWiki file to another to see what happens)
+*Draw a sketch (Edit [[Motovun Jack.jpg]] and start drawing over the image to see what happens)
+*Create a modal wizard (also known as a lightbox) - see SampleWizard
+*Create a slideshow presentation
+*Set up an entire local or online knowledgebase, with a central ~TiddlyWiki file linking to other ~TiddlyWiki files (http://recursos.giffmex.org is a Spanish online example of this)
+*Set up a data visualization using tiddlers as data (see the visualizations at http://tiddlywiki.com/d3demo.html)
+*Create a timeline (See http://emkayonline.github.io/tw5visjs/#ShowTimelineDemo)
