@@ -4,19 +4,15 @@ tags: introduction
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-Welcome to TiddlyWiki, a non-linear personal web notebook that anyone can use and keep forever, independently of any corporation.
+~TiddlyWiki is a web application you can download for free, store wherever you like, customize however you wish, and use to take / organize / share your notes in ways that word processors and other note-taking tools cannot. ~TiddlyWiki is designed in a "non-linear" way, using tags, hyperlinks, and many other features, so that you can organize and retrieve your notes in ways that conform to your personal thought patterns, rather than feel chained to one pre-set organizational structure.
 
-TiddlyWiki is a complete interactive wiki in JavaScript. It can be used as a [[single HTML file in the browser|SingleFileApplication]] or as a powerful [[Node.js application|Node.js]]. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
+You can use ~TiddlyWiki as a single file that you view and edit through any web browser, whether you are online or offline. Or you can use it as a powerful [[Node.js application|Node.js]] that treats each of your notes as a separate file and accesses them through a central hub.
 
-This is version <<version-link>> of ~TiddlyWiki, a major reboot designed [[for the next 25 years|Future of TiddlyWiki]]. It is currently in beta (see the detailed ReleaseHistory) with a RoadMap for moving to the full release. It is a great time to [[get involved|Community]] and support the future development of ~TiddlyWiki.
+How can you make ~TiddlyWiki work for you? We recommend you start with our introductory documentation, listed below, then browse the TableOfContents, always available in the Contents tab in the sidebar. Or just [[download an empty TiddlyWiki now|Downloading and saving]] and try it out for yourself!
 
-//~TiddlyWiki is a free, open source project that depends on [[your love and support|HelpingTiddlyWiki]] for its survival//.
-
-<div class="tc-message-box">
-
-<a class="tc-message-icon" href="http://tiddlywiki.com/" target="_blank">{{TiddlyWiki Classic.png}}</a>
-
-!! TiddlyWikiClassic
-
-The original "Classic" version of TiddlyWiki is still available at http://classic.tiddlywiki.com. Note that it is not fully backwards compatible: existing content will need massaging, while plugins and themes will have to be completely rewritten. The upgrade path will get smoother as the new version matures.
-</div>
+*[[Discover TiddlyWiki (presentation)]] 
+*[[A visual tour of TiddlyWiki (presentation)]] 
+*[[Some things you can do with TiddlyWiki]] 
+*[[Examples of TiddlyWiki in the wild]] 
+*[[The history of TiddlyWiki]] 
+*[[What happened to the other TiddlyWiki?]]
