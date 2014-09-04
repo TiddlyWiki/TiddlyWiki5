@@ -1,10 +1,12 @@
-title: Improving TiddlyWiki Documentation
-tags: howto
 created: 20140820151051019
-modified: 20140830151051019
+modified: 20140904165057207
+tags: howto
+title: Improving TiddlyWiki Documentation
+type: text/vnd.tiddlywiki
 
 Anyone can submit improvements to the TiddlyWiki documentation that appears on http://tiddlywiki.com.
 
+# Read and observe the [[Documentation Style Guide]]
 # Create an account on https://github.com if you don't already have one
 # On http://tiddlywiki.com, click "edit" on the tiddler you want to improve
 # You should see a pink banner with the text: //Can you help us improve this documentation? Find out how to edit this tiddler on ~GitHub//

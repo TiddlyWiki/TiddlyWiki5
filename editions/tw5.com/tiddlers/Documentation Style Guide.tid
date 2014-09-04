@@ -1,0 +1,10 @@
+created: 20140904164608166
+modified: 20140904164935351
+title: Documentation Style Guide
+type: text/vnd.tiddlywiki
+
+The documentation for ~TiddlyWiki tries to follow the following guidelines. The aim is to ensure that documentation from different authors reads consistently.
+
+# Do address the reader directly as "you"
+# Avoid the [[passive voice|http://grammar.ccc.commnet.edu/grammar/passive.htm]] in tutorial and introductory material
+# Do use [[British spellings in preference to US spellings|http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]]
