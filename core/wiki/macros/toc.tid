@@ -5,18 +5,18 @@ tags: $:/tags/Macro
 <ol class="tc-toc">
 <$list filter="[tag[$tag$]$sort$]">
 <li>
-<$link>
+<$list filter="[is[current]toc-link[no]]" emptyMessage="<$link><$view field='caption'><$view field='title'/></$view></$link>">
 <$view field="caption">
 <$view field="title"/>
 </$view>
-</$link>
+</$list>
 <$macrocall $name="toc" tag=<<currentTiddler>>/>
 </li>
 </$list>
 </ol>
 \end
 
-\define toc-expandable-body(tag,sort:"")
+\define toc-linked-expandable-body(tag,sort:"")
 <$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
 <li>
 <$link>
@@ -41,15 +41,43 @@ tags: $:/tags/Macro
 </$set>
 \end
 
+\define toc-unlinked-expandable-body(tag,sort:"")
+<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<li>
+<$reveal type="nomatch" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
+{{$:/core/images/right-arrow}}
+<$view field="caption">
+<$view field="title"/>
+</$view>
+</$button>
+</$reveal>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+<$view field="caption">
+<$view field="title"/>
+</$view>
+</$button>
+</$reveal>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$macrocall $name="toc-expandable" tag=<<currentTiddler>> sort="$sort$"/>
+</$reveal>
+</li>
+</$set>
+\end
+
 \define toc-expandable(tag,sort:"")
 <ol class="tc-toc toc-expandable">
 <$list filter="[tag[$tag$]$sort$]">
-<<toc-expandable-body tag:"$tag$" sort:"$sort$">>
+<$list filter="[is[current]toc-link[no]]" emptyMessage="<<toc-linked-expandable-body tag:'$tag$' sort:'$sort$'>>">
+<<toc-unlinked-expandable-body tag:"$tag$" sort:"$sort$">>
+</$list>
 </$list>
 </ol>
 \end
 
-\define toc-selective-expandable-body(tag,sort:"")
+\define toc-linked-selective-expandable-body(tag,sort:"")
 <$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
 <li>
 <$link>
@@ -76,10 +104,40 @@ tags: $:/tags/Macro
 </$set>
 \end
 
+\define toc-unlinked-selective-expandable-body(tag,sort:"")
+<$set name="toc-state" value=<<qualify "$:/state/toc/$tag$-$(currentTiddler)$">>>
+<li>
+<$list filter="[all[current]tagging[]limit[1]]" emptyMessage="<$button class='tc-btn-invisible'>{{$:/core/images/blank}}</$button>">
+<$reveal type="nomatch" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="open" class="tc-btn-invisible">
+{{$:/core/images/right-arrow}}
+<$view field="caption">
+<$view field="title"/>
+</$view>
+</$button>
+</$reveal>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$button set=<<toc-state>> setTo="close" class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+<$view field="caption">
+<$view field="title"/>
+</$view>
+</$button>
+</$reveal>
+</$list>
+<$reveal type="match" state=<<toc-state>> text="open">
+<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>> sort="$sort$"/>
+</$reveal>
+</li>
+</$set>
+\end
+
 \define toc-selective-expandable(tag,sort:"")
 <ol class="tc-toc toc-selective-expandable">
 <$list filter="[tag[$tag$]$sort$]">
-<<toc-selective-expandable-body tag:"$tag$" sort:"$sort$">>
+<$list filter="[is[current]toc-link[no]]" emptyMessage="<<toc-linked-selective-expandable-body tag:'$tag$' sort:'$sort$'>>">
+<<toc-unlinked-selective-expandable-body tag:"$tag$" sort:"$sort$">>
+</$list>
 </$list>
 </ol>
 \end
