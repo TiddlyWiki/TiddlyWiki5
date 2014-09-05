@@ -55,14 +55,5 @@ TiddlerFields/Caption: Campi frammenti
 TiddlerFields/Hint: Questa &egrave; la serie completa dei TiddlerFields utilizzati in questo wiki (sono inclusi i frammenti di sistema ed esclusi i frammenti nascosti).
 Tools/Caption: Strumenti
 Tools/Download/Full/Caption: Scarica l'intero wiki
-Tools/Encryption/ChangePassword/Button: Cambia la password
-Tools/Encryption/ClearPassword/Button: Cancella la password
-Tools/Encryption/Disabled/Prompt: Questo wiki non &egrave; criptato
-Tools/Encryption/Enabled/Prompt: Questo wiki &egrave; criptato
-Tools/Encryption/Heading: Crittografa
-Tools/Encryption/SetPassword/Button: Imposta la password
 Tools/Export/AllAsStaticHTML/Caption: Scarica tutti i frammenti nel formato HTML statico
 Tools/Export/Heading: Esporta
-Tools/Import/Heading: Importa
-Tools/Import/Hint: Sfoglia i file sul tuo computer per importarne i contenuti (i frammenti singoli all'interno dei file TiddlyWiki HTML sono importati separatamente). &Egrave; anche possibile trascinare e rilasciare i file direttamente nella finestra del browser.
-Tools/Import/Prompt: Importa:

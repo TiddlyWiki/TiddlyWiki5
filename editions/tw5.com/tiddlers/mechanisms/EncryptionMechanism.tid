@@ -16,4 +16,3 @@ The EncryptionMechanism is implemented with the following elements:
 * The EncryptWidget within the main file template that encrypts a filtered list of tiddlers with the currently held password
 * The [[$:/isEncrypted]] tiddler that contains "yes" or "no" according to whether there is a password in the password vault
 ** The availability of this tiddler allows the RevealWidget to be used to selectively display user interface elements according to whether encryption is in force
-* The [[$:/snippets/encryptionstatus]] snippet displays the current encryption status

@@ -93,14 +93,5 @@ Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Caption: Tools
 Tools/Download/Full/Caption: Download full wiki
-Tools/Encryption/ChangePassword/Button: change password
-Tools/Encryption/ClearPassword/Button: clear password
-Tools/Encryption/Disabled/Prompt: This wiki is not encrypted
-Tools/Encryption/Enabled/Prompt: This wiki is encrypted
-Tools/Encryption/Heading: Encryption
-Tools/Encryption/SetPassword/Button: set password
 Tools/Export/AllAsStaticHTML/Caption: Download all tiddlers as static HTML
 Tools/Export/Heading: Export
-Tools/Import/Heading: Import
-Tools/Import/Hint: Browse for files on your computer to import their contents (the individual tiddlers within TiddlyWiki HTML files are imported separately). You can also drag and drop files directly to the browser window.
-Tools/Import/Prompt: Import:

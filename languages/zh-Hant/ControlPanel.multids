@@ -88,14 +88,5 @@ Toolbars/ViewToolbar/Caption: 檢視工具列
 Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列
 Tools/Caption: 工具
 Tools/Download/Full/Caption: 下載完整副本
-Tools/Encryption/ChangePassword/Button: 變更密碼
-Tools/Encryption/ClearPassword/Button: 清除密碼
-Tools/Encryption/Disabled/Prompt: 本 wiki 尚未加密。
-Tools/Encryption/Enabled/Prompt: 本 wiki 已加密。
-Tools/Encryption/Heading: 加密
-Tools/Encryption/SetPassword/Button: 設定密碼
 Tools/Export/AllAsStaticHTML/Caption: 下載所有條目為靜態 HTML
 Tools/Export/Heading: 導出
-Tools/Import/Heading: 導入
-Tools/Import/Hint: 瀏覽您電腦裡的檔案，導入檔案內容（導入 TiddlyWiki HTML 檔案裡的條目）。您也可以將檔案直接拖放到瀏覽器中開啟的 TiddlyWiki 頁面。
-Tools/Import/Prompt: 導入：

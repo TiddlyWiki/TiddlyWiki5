@@ -55,14 +55,5 @@ TiddlerFields/Caption: Tiddlerフィールド
 TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
 Tools/Caption: ツール
 Tools/Download/Full/Caption: Download full wiki
-Tools/Encryption/ChangePassword/Button: パスワード変更
-Tools/Encryption/ClearPassword/Button: パスワードクリア
-Tools/Encryption/Disabled/Prompt: この wiki は暗号化されていません。
-Tools/Encryption/Enabled/Prompt: この wiki は暗号化されています。
-Tools/Encryption/Heading: 暗号化
-Tools/Encryption/SetPassword/Button: パスワード設定
 Tools/Export/AllAsStaticHTML/Caption: すべての tiddler を含む閲覧用 HTML としてダウンロードする
 Tools/Export/Heading: エクスポート
-Tools/Import/Heading: インポート
-Tools/Import/Hint: 内容を取り込みたいファイルを参照ボタンから選択してください。ファイル中の個々の tiddler は個別にインポートされます。このブラウザのウィンドウに直接ファイルをドラッグ＆ドロップすることもできます。
-Tools/Import/Prompt: インポート:

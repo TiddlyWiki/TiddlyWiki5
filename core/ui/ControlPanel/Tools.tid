@@ -3,16 +3,9 @@ tags: $:/tags/ControlPanel
 caption: {{$:/language/ControlPanel/Tools/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Tools/
-! <<lingo Import/Heading>>
 
-<$browse/>
-
-<<lingo Import/Hint>>
+//Note that before the end of the beta this tab will be removed, and more extensive export options made available via toolbar buttons//
 
 ! <<lingo Export/Heading>>
 
 <$button message="tm-download-file" param="$:/core/templates/alltiddlers.template.html" class="tc-btn-big-green"><<lingo Export/AllAsStaticHTML/Caption>> {{$:/core/images/save-button}}</$button>
-
-! <<lingo Encryption/Heading>>
-
-{{$:/snippets/encryptionstatus}}
