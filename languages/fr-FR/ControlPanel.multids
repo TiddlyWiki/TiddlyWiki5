@@ -23,6 +23,8 @@ EditorTypes/Caption: Types d'éditeur
 EditorTypes/Editor/Caption: Éditeur
 EditorTypes/Hint: Ces tiddlers déterminent l'éditeur à utiliser pour éditer tel ou tel type de tiddler.
 EditorTypes/Type/Caption: Type
+Info/Caption: Info
+Info/Hint: Information sur ce TiddlyWiki
 LoadedModules/Caption: Modules chargés
 LoadedModules/Hint: Liste des modules chargés, avec leurs tiddlers sources. Les italiques indiquent que les tiddlers sources n'existent pas, le plus souvent parce que le module a été créé lors du processus d'amorçage.
 Palette/Caption: Palette
@@ -57,8 +59,11 @@ Saving/TiddlySpot/ServerURL: URL du serveur
 Saving/TiddlySpot/UploadDir: Dossier des dépôts
 Saving/TiddlySpot/UserName: Nom utilisé pour ce Wiki
 Settings/AutoSave/Caption: Sauvegarde automatique
+Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifications
+Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
+Settings/AutoSave/Hint: Sauvegarde automatique des modifications pendant l'édition
 Settings/Caption: Paramétrage
-Settings/Hint: Ce paramétrage avancé vous permet de personnaliser le comportement de TiddlyWiki.
+Settings/Hint: Ce paramétrage vous permet de personnaliser le comportement de TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
 Settings/NavigationAddressBar/Hint: Comportement de la barre d'adresse du navigateur lorsqu'on pointe vers un tiddler :
 Settings/NavigationAddressBar/No/Description: Ne pas modifier la barre d'adresse
