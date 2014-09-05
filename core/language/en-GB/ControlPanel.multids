@@ -59,7 +59,7 @@ Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
 Saving/TiddlySpot/UserName: Wiki Name
 Settings/AutoSave/Caption: Autosave
-Settings/AutoSave/Disabled/Description: Do not save automatically
+Settings/AutoSave/Disabled/Description: Do not save changes automatically
 Settings/AutoSave/Enabled/Description: Save changes automatically
 Settings/AutoSave/Hint: Automatically save changes during editing
 Settings/Caption: Settings
