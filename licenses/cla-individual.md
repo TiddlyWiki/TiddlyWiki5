@@ -162,3 +162,5 @@ Daniel Rodriguez Rivero, @danielo515, 2014/04/18
 Jonathan Lister, @jayfresh, 2014/06/23
 
 Stephan Sokolow, @ssokolow, 2014/07/15
+
+Dave Gifford, @giffmex, 2014/09/05
