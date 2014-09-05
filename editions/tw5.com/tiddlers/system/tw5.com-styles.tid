@@ -65,7 +65,7 @@ tags: $:/tags/stylesheet
 @media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
 	.tc-improvement-banner {
-		margin-right: -23px;
+		margin-right: -53px;
 		margin-left: -53px;
 	}
 
