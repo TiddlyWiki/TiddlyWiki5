@@ -3,7 +3,7 @@ title: $:/language/ControlPanel/
 Advanced/Caption: 高级
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
 Appearance/Caption: 视觉外观
-Appearance/Hint: 自订您的 TiddlyWiki 外观。
+Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
@@ -53,7 +53,7 @@ Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为自订之服务器网址//
+Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址//
 Saving/TiddlySpot/Password: 密码
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
@@ -65,7 +65,7 @@ Settings/AutoSave/Hint: 在编辑过程中自动保存变更
 Settings/Caption: 设置
 Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
 Settings/NavigationAddressBar/Caption: 网址栏导览
-Settings/NavigationAddressBar/Hint: 在浏览器网址列导览到条目时的行为：
+Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
 Settings/NavigationAddressBar/No/Description: 不更新网址栏
 Settings/NavigationAddressBar/Permalink/Description: 包含目标条目
 Settings/NavigationAddressBar/Permaview/Description: 包括目标条目和当前已开启的条目序列
@@ -75,8 +75,8 @@ Settings/NavigationHistory/No/Description: 不更新历史记录
 Settings/NavigationHistory/Yes/Description: 更新历史记录
 Settings/ToolbarButtons/Caption: 工具栏按钮
 Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
-Settings/ToolbarButtons/Icons/Description: 包含图示
-Settings/ToolbarButtons/Text/Description: 包含文字
+Settings/ToolbarButtons/Icons/Description: 包含图标
+Settings/ToolbarButtons/Text/Description: 包含文本
 StoryView/Caption: 查看模式
 StoryView/Prompt: 当前的查看模式：
 Theme/Caption: 布景主题
@@ -89,8 +89,8 @@ Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式�
 Toolbars/Hint: 选择将显示哪些工具栏按钮
 Toolbars/PageControls/Caption: 页面工具栏
 Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
-Toolbars/ViewToolbar/Caption: 检视工具栏
-Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的检视模式工具栏
+Toolbars/ViewToolbar/Caption: 查看工具栏
+Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏
 Tools/Caption: 工具
 Tools/Download/Full/Caption: 下载完整副本
 Tools/Export/AllAsStaticHTML/Caption: 下载所有条目为静态 HTML
