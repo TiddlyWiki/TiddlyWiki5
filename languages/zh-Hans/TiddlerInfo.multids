@@ -1,12 +1,12 @@
 title: $:/language/TiddlerInfo/
 
-Advanced/Caption: 进阶
+Advanced/Caption: 高级
 Advanced/PluginInfo/Empty/Hint: 无信息
 Advanced/PluginInfo/Heading: 插件明细
 Advanced/PluginInfo/Hint: 此插件包含以下预设条目：
 Advanced/ShadowInfo/Heading: 默认条目状态
-Advanced/ShadowInfo/NotShadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 不是一个预设条目
-Advanced/ShadowInfo/Shadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 是一个预设条目
+Advanced/ShadowInfo/NotShadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 不是一个默认条目
+Advanced/ShadowInfo/Shadow/Hint: <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> 是一个默认条目
 Advanced/ShadowInfo/Shadow/Source: 此条目定义于插件 <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
 Advanced/ShadowInfo/OverriddenShadow/Hint: 已被一般条目覆写
 Fields/Caption: 栏位
