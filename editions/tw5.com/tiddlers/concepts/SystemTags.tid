@@ -1,5 +1,5 @@
 created: 20130822080600000
-modified: 20140707161338857
+modified: 20140906224046452
 tags: concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
@@ -15,12 +15,14 @@ These are the available system tags
 * {{$:/tags/Alert||$:/core/ui/TagTemplate}} for alerts
 * {{$:/tags/BelowStory||$:/core/ui/TagTemplate}} for elements to be placed at the bottom of the story river
 * {{$:/tags/ControlPanel||$:/core/ui/TagTemplate}} for control panel tabs
-* {{$:/tags/ControlPanel/Advanced||$:/core/ui/TagTemplate}} for advanced control panel tabs
-* {{$:/tags/ControlPanel/Advanced/Settings||$:/core/ui/TagTemplate}} for parts in advanced settings
-* {{$:/tags/ControlPanel/Appearance||$:/core/ui/TagTemplate}} for tabs controlling the appearance
+* {{$:/tags/ControlPanel/Advanced||$:/core/ui/TagTemplate}} for control panel advanced tabs
+* {{$:/tags/ControlPanel/Appearance||$:/core/ui/TagTemplate}} for control panel appearance tabs
+* {{$:/tags/ControlPanel/Info||$:/core/ui/TagTemplate}} for control panel info tabs
+* {{$:/tags/ControlPanel/Settings||$:/core/ui/TagTemplate}} for control panel settings tabs
+* {{$:/tags/ControlPanel/Toolbars||$:/core/ui/TagTemplate}} for control panel toolbar customisation tabs
 * {{$:/tags/EditTemplate||$:/core/ui/TagTemplate}} for the edit template
 * {{$:/tags/EditToolbar||$:/core/ui/TagTemplate}} for the edit mode tiddler toolbar
-* {{$:/tags/Filter||$:/core/ui/TagTemplate}} for filters in advanced seach > filters
+* {{$:/tags/Filter||$:/core/ui/TagTemplate}} for filters in advanced seach sample filter dropdown
 * {{$:/tags/Image||$:/core/ui/TagTemplate}} for (core) images
 * {{$:/tags/Macro||$:/core/ui/TagTemplate}} for global macros
 * {{$:/tags/MoreSideBar||$:/core/ui/TagTemplate}} for tabs in the "more" sidebar

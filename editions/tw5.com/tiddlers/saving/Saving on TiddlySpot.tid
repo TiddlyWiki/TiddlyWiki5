@@ -1,17 +1,23 @@
 created: 20130825213500000
-modified: 20131203112307327
+modified: 20140907124810121
 tags: howto
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
 
-TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Daniel Baird. It has been in operation almost as long as TiddlyWiki itself.
+TiddlySpot is a free hosting service for TiddlyWiki documents from Simon and Daniel Baird. The easiest way to get started is to sign up for a new wiki at http://tiddlyspot.com - by default you'll get the latest release of TiddlyWiki.
 
-TiddlyWiki5 isn't yet built in to TiddlySpot but you can use it by following these steps:
+You can upload an existing TiddlyWiki document from your local disc to TiddlySpot it by following these steps:
 
 # Sign up for a new wiki at http://tiddlyspot.com/, and remember the wiki name and password
-# Open TiddlyWiki5 in your browser from http://tiddlywiki.com/empty.html
+# Open your locally stored TiddlyWiki document in your browser
 # Fill in the TiddlySpot wikiname and password in the control panel
 # Click the "Save Changes" button. You should get a confirmation notification at the top right saying ''Saved wiki''. Saving can take several seconds if you're on a slow connection or working with a large wiki.
-#* //This step won't work in Firefox thanks to its default security policy. Google Chrome works fine//
 # Navigate to your TiddlySpot URL at http://{wikiname}.tiddlyspot.com/
-# You should see a copy of TiddlyWiki5. You can edit and create tiddlers, and click "Save Changes" to save changes back up to TiddlySpot (you'll need to re-enter your password the first time you visit the wiki on TiddlySpot)
+
+Note that your password is sent unencrypted when using TiddlySpot. From http://faq.tiddlyspot.com/:
+
+<<<
+''Is Tiddlyspot secure?''
+
+No. Tiddlyspot does not use SSL/https. Your password is sent in clear text when uploading and when authenticating to access a private site. This means that your Tiddlyspot is vulnerable to packet sniffing and your password could be discovered by a malicious third party. Also your data is transmitted unencrypted when you view your site, even if it is a private site. For this reason please don't put sensitive information such as banking details in your Tiddlyspot and don't use a password that you use for other high security sites.
+<<<
