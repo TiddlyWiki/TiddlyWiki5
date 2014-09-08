@@ -1,0 +1,17 @@
+title: $:/language/Help/setfield
+description: Experimentell - Setzt ein Tiddler "field" auf einen bestimmten Wert
+
+//Wichtig! Dieser Befehl is experimentell und kann während der Betaphase geändert oder ersetzt werden!//
+
+Setzt ein spezifiziertes Feld, für eine Gruppe von Tiddlern. Ein Template wird "wikifiziert" und das Ergebnis in das Feld geschrieben. Die `currentTiddler` Variable wird auf den jeweiligen Tiddler gesetzt. 
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+The parameters are:
+
+* ''filter'' - Filter, der die zu modifizierenden Tiddler auswählt.
+* ''fieldname'' - Das zu verändernde Feld (Standardwert: "text").
+* ''templatetitle'' - Der zu wikifizierende Vorlagen Tiddler, dessen Ergebnis in das Feld geschrieben wird. Wenn Leer, dann wird das Feld gelöscht.
+* ''type'' - Der Text Typ für den "rendering" Vorgang (Standardwert: "text/plain"; "text/html" kann verwendet werden, um "HTML tags" zu erzeugen).

@@ -1,0 +1,14 @@
+title: $:/language/Help/makelibrary
+description: Erstellt die "Upgrade Bibliothek", die vom upgrade Prozess benötigt wird
+
+Erstellt den tiddler: `$:/UpgradeLibrary`, der vom upgrade Prozess benötigt wird.
+
+Die "Upgrade Bibliothek" ist ein "normales" Plugin, vom Typ: `library`. Es enthält eine Kopie jedes Plugins, Themas und Sprachpacketes, das im TiddlyWiki5 Archiv enthalten ist.
+
+Dieser Befehl ist ein "interner" Befehl! Er ist nur relevant für Benutzer, die einen spezifischen "Upgrade Prezess" erstellen müssen. zB: Umwandeln von einem Tiddler in mehrere Tiddler, um Inkompatibilitäten zu vermeiden.
+
+```
+--makelibrary <title>
+```
+
+Das "title" Argument ist standardmäßig: `$:/UpgradeLibrary`.

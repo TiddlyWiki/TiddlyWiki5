@@ -23,6 +23,8 @@ EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
 EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden sollen.
 EditorTypes/Type/Caption: MIME-Type
+Info/Caption: Info
+Info/Hint: Informationen über dieses TiddlyWiki
 LoadedModules/Caption: Geladene Module
 LoadedModules/Hint: Hier weden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des ~Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
 Palette/Caption: Palette
@@ -57,6 +59,9 @@ Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: "Upload" Verzeichnis
 Saving/TiddlySpot/UserName: Wiki Name
 Settings/AutoSave/Caption: Automatisch speichern
+Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
+Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
+Settings/AutoSave/Hint: Änderungen des Wikis automatisch speichern
 Settings/Caption: Einstellungen
 Settings/Hint: Diese erweiterten Einstellungen ermöglichen ihnen, das Verhalten von TiddlyWiki zu ändern.
 Settings/NavigationAddressBar/Caption: Navigation Adresszeile
