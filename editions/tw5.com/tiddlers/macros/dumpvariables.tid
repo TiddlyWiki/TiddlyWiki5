@@ -1,0 +1,27 @@
+created: 20140908104107181
+modified: 20140908104107181
+tags: macros
+title: DumpVariablesMacro
+type: text/vnd.tiddlywiki
+
+The dumpvariables macro displays a table containing the values of all the variables defined at that location in the widget tree. It can be useful for exploring the mechanisms of TiddlyWiki and for debugging.
+
+! Parameters
+
+The dumpvariables macro does not require any parameters
+
+! Examples
+
+
+```
+<<dumpvariables>>
+```
+
+Returns:
+
+<<dumpvariables>>
+
+The results returned by the dumpvariables macro will depend upon where it is used.
+
+Note that the values displayed for macros are displayed with all the parameters and variable subsitutions set to an empty string. So, a macro defined as `\define myMacro(text) ''$text$''` will display as `''''`.
+
