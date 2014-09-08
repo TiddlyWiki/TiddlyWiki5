@@ -88,14 +88,14 @@ tiddler-link-background: 条目链结背景
 tiddler-link-foreground: 条目链结前景
 tiddler-subtitle-foreground: 条目副标题前景
 tiddler-title-foreground: 条目标题前景
-toolbar-new-button: 工具列 '添加条目' 按钮前景
-toolbar-options-button: 工具列 '选项' 按钮前景
-toolbar-save-button: 工具列 '保存' 按钮前景
-toolbar-info-button: 工具列 '资讯' 按钮前景
-toolbar-edit-button: 工具列 '编辑' 按钮前景
-toolbar-close-button: 工具列 '关闭' 按钮前景
-toolbar-delete-button: 工具列 '删除' 按钮前景
-toolbar-cancel-button: 工具列 '取消' 按钮前景
-toolbar-done-button: 工具列 '完成  按钮前景
+toolbar-new-button: 工具栏 '添加条目' 按钮前景
+toolbar-options-button: 工具栏 '选项' 按钮前景
+toolbar-save-button: 工具栏 '保存' 按钮前景
+toolbar-info-button: 工具栏 '资讯' 按钮前景
+toolbar-edit-button: 工具栏 '编辑' 按钮前景
+toolbar-close-button: 工具栏 '关闭' 按钮前景
+toolbar-delete-button: 工具栏 '删除' 按钮前景
+toolbar-cancel-button: 工具栏 '取消' 按钮前景
+toolbar-done-button: 工具栏 '完成  按钮前景
 untagged-background: 未设标签的背景
 very-muted-foreground: 非常低调前景
