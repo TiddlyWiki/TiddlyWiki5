@@ -26,10 +26,10 @@ tags: $:/tags/stylesheet
 
 .tc-link-info-item {
 	display: inline-block;
-	border: 1px solid <<colour muted-foreground>>;
+	border: none;
 	padding: 5px 10px;
 	margin-bottom: 10px;
-	background: #fcf8f8;
+	background: #ddeeff;
 	font-size: 0.8em;
 	line-height: 1.2;
 }
