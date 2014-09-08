@@ -1,0 +1,13 @@
+title: Eucaly's Tiddly World
+tags: resources
+created: 201409081039
+modified: 201409081039
+url: http://eucaly-tw5.tiddlyspot.com/
+
+I collect my tw5 creations on-line as http://eucaly-tw5.tiddlyspot.com/
+
+Currently, there are:
+
+*FlexWidth - Flexibly tweak sidebar width for TiddlyWiki 5 (Inspired by TW5 tristate Sidebar)
+*MatchFilter - returns matching text instead of a list of the tiddlers from FieldFilter
+*PopupTagger - TagBar / TagTable with popup list of tags (Inspired by MonkeyTaggerMacro for TiddlyWiki classic)

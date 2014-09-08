@@ -1,0 +1,7 @@
+created: 20131207085406905
+modified: 20131207084548184
+tags: examples
+title: Obadiah TOC
+url: http://giffmex.org/experiments/obadiah.html
+
+An introduction to the biblical book of Obadiah by Dave Gifford using the table of contents macro and various custom tweaks to ~TiddlyWiki: custom new here buttons, [[this custom viewtemplate addition|http://giffmex.org/experiments/obadiah.html#%24%3A%2F_aa%2FViewTemplate%2FNoteList]] to add notes or images within any tiddler, and a tiddler transcluding all the content, in order to facilitate printing ([[this tiddler|http://giffmex.org/experiments/obadiah.html#An%20introduction%20to%20Obadiah]]).
