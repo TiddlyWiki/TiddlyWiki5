@@ -22,8 +22,8 @@ You can use internal hyperlinks (links between tiddlers, normally displayed in b
 ***''Drafts'' lists all unfinished tiddlers still in edit mode. A tiddler draft is considered a separate tiddler by ~TiddlyWiki until it is closed, so if you edit a tiddler entitled "Australia," there will then be two tiddlers, 'Australia' and 'Draft of "Australia."' When you save or cancel your changes to close the draft, it will apply those changes to the 'Australia' tiddler. So treat the Drafts tab as a way of finding any unfinished drafts you started.
 ***''Orphans'' lists all the tiddlers which are not related to any other tiddler by links, tags or lists. This is a helpful aid to editing your file - it shows you the tiddlers that need to be integrated more carefully with the other tiddlers.
 ***''Types'' lists tiddlers by special content types, such as images.
-***''System'' lists all tiddlers 
-***''Shadows'' lists all behind-the-scenes tiddlers 
+***''System'' lists all SystemTiddlers. 
+***''Shadows'' lists all ShadowTiddlers.
 *''Search results'' are lists of tiddlers that match the text you enter into the search window.
 *Finally, you can create your own custom lists of tiddlers by various methods. These 
 **You can transclude a TiddlerFilter (see [[Transclusion in WikiText]]). For example, adding `{{ [tag[mountain]] }}` to a tiddler will insert a list of all tiddlers tagged with 'mountain.'
