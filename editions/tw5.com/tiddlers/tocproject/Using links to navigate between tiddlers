@@ -1,0 +1,30 @@
+title: Using links to navigate between tiddlers
+tags: Working with TiddlyWiki
+created: 201409080936
+modified: 201409080936
+
+You can use internal hyperlinks (links between tiddlers, normally displayed in blue text) to navigate between your tiddlers. Clicking on the link to any tiddler will take you to that tiddler. If the tiddler is closed, it will be opened. The wonderful thing about ~Tiddlywiki is that it has made links to tiddlers as accessible as possible. There are links everywhere! Here are the key places where you can find links to tiddlers in ~TiddlyWiki:
+
+*You can ''create a link'' to a tiddler, whether it exists yet or not, in the body of any tiddler. See [[Linking in Wikitext]] to see the various, easy ways to create links between tiddlers.
+*Each ''tag pill'' found in your tiddler (such as the 'Working with TiddlyWiki' tag pill under the title of this tiddler) contains a link to that tag tiddler, as well a lists of all the tiddlers tagged with that tag. This allows you to go to any of those tiddlers.
+*The ''~TiddlerInfo section'' of each tiddler, accessed by clicking the {{$:/core/images/info-button}} button at the top of the tiddler, gives you access to four additional lists of tiddlers related to your tiddler:
+**The ''References'' tab lists all the tiddlers that contain links back to the current tiddler.
+**The ''Tagging'' tab lists all the tiddlers which are tagged with the current tiddler's title.
+**The ''List'' tab lists all the  tiddlers or potential tiddlers contained in the list field of the current tiddler. See [[ListField]] for more on list fields.
+**The ''Listed'' tab lists all the tiddlers which contain the current tiddler in their list fields.
+*The ''sidebar tabs'' contain numerous lists of links to tiddlers:
+**The ''Open'' tab lists all currently open tiddlers.
+**The ''Recent'' tab lists the 100 most recently modified tiddlers, beginning with the most recently modified.
+**The ''More'' tab contains eight additional lists of tiddlers:
+***''All'' lists all tiddlers, ordered alphabetically.
+***''Tags'' lists all the tags. You can click on the pill for any tag to access a list of the tiddlers tagged with that tag.
+***''Missing'' lists all the hyperlinks found in tiddler text for which no tiddler currently exists. This is helpful for finding tiddlers you at some point expected to create, but never got around to creating.
+***''Drafts'' lists all unfinished tiddlers still in edit mode. A tiddler draft is considered a separate tiddler by ~TiddlyWiki until it is closed, so if you edit a tiddler entitled "Australia," there will then be two tiddlers, 'Australia' and 'Draft of "Australia."' When you save or cancel your changes to close the draft, it will apply those changes to the 'Australia' tiddler. So treat the Drafts tab as a way of finding any unfinished drafts you started.
+***''Orphans'' lists all the tiddlers which are not related to any other tiddler by links, tags or lists. This is a helpful aid to editing your file - it shows you the tiddlers that need to be integrated more carefully with the other tiddlers.
+***''Types'' lists tiddlers by special content types, such as images.
+***''System'' lists all tiddlers 
+***''Shadows'' lists all behind-the-scenes tiddlers 
+*''Search results'' are lists of tiddlers that match the text you enter into the search window.
+*Finally, you can create your own custom lists of tiddlers by various methods. These 
+**You can transclude a TiddlerFilter (see [[Transclusion in WikiText]]). For example, adding `{{ [tag[mountain]] }}` to a tiddler will insert a list of all tiddlers tagged with 'mountain.'
+**You can create a ListWidget. This is more complicated than transcluding a ~TiddlerFilter, but in return allows you more flexibility in designing and displaying the list exactly as you want it to appear.
