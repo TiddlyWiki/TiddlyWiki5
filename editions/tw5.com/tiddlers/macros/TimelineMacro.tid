@@ -1,0 +1,21 @@
+title: TimelineMacro
+tags: macros
+modified: 20140905084423561
+
+The timeline macro produces a list of tiddlers in reverse chronological order of modification date that is grouped by the date of the day of modification.
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |limit |The maximum number of tiddlers to list |100 |
+|2nd |format |A DateFormat string for formatting the date |DDth MMM YYYY |
+
+! Examples
+
+```
+<<timeline limit:30 format:"DD/MM/YYYY">>
+```
+
+Renders as:
+
+<<timeline limit:30 format:"DD/MM/YYYY">>

@@ -1,10 +1,11 @@
 title: $:/core/macros/timeline
 tags: $:/tags/Macro
 
-\define timeline()
-<$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
+\define timeline(limit:"100",format:"DDth MMM YYYY")
+<div class="tc-timeline">
+<$list filter="[!is[system]has[modified]!sort[modified]limit[$limit$]eachday[modified]]">
 <div class="tc-menu-list-item">
-<$view field="modified" format="date" template={{$:/language/RecentChanges/DateFormat}}/>
+<$view field="modified" format="date" template="$format$"/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
 <div class="tc-menu-list-subitem">
 <$link to={{!!title}}>
@@ -14,4 +15,5 @@ tags: $:/tags/Macro
 </$list>
 </div>
 </$list>
+</div>
 \end
