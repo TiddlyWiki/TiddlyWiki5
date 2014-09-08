@@ -1,5 +1,7 @@
-title: $:/snippets/recentchanges
+title: $:/core/macros/timeline
+tags: $:/tags/Macro
 
+\define timeline()
 <$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
 <div class="tc-menu-list-item">
 <$view field="modified" format="date" template={{$:/language/RecentChanges/DateFormat}}/>
@@ -12,3 +14,4 @@ title: $:/snippets/recentchanges
 </$list>
 </div>
 </$list>
+\end
