@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Body/External/Hint: Diese ist ein externer Tiddler, der nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
 Body/Hint: Verwenden sie [[WikiText|http://tiddlywiki.com/static/WikiText.html]] zum Formatieren. 
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Button/Hide: Vorschau aus
