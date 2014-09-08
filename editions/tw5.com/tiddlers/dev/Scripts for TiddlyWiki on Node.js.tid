@@ -1,12 +1,14 @@
 created: 20131219100637788
-modified: 20140206221215805
+modified: 20140908153149748
 tags: howto dev
 title: Scripts for TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
 ! Script Files
 
-The TiddlyWiki5 repo contains several scripts that are used to build and deploy TiddlyWiki5 (.sh for *nix and .cmd for Windows). They can serve as a useful starting point for your own scripts.
+The TiddlyWiki5 repository contains several scripts in the `bin` folder that are used to build and deploy TiddlyWiki (`.sh` for *nix and `.cmd` for Windows). They can serve as a useful starting point for your own scripts.
+
+All the scripts expect to be run from the root folder of the repository.
 
 !! `bld`: builds tw5.com
 
@@ -39,34 +41,38 @@ The files output by `bld` are:
 !! `serve`: serves tw5.com
 
 ```
-serve.sh <username> [<password>]
+./bin/serve.sh <username> [<password>]
 ```
 
 Or:
 
 ```
-serve.cmd <username> [<password>]
+./bin/serve.cmd <username> [<password>]
 ```
 
-This script starts TiddlyWiki5 running as an HTTP server with the content from the `clientserver` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used.
+This script starts TiddlyWiki5 running as an HTTP server with the content from the `tw5.com-server` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used.
 
 To experiment with this configuration, run the script and then visit `http://127.0.0.1:8080` in a browser.
 
 Changes made in the browser propagate to the server over HTTP (use the browser developer console to see these requests). The server then syncs changes to the file system (and logs each change to the screen).
 
+!! `test`: build and run tests
+
+This script runs the `test` edition of TiddlyWiki on the server to perform the server-side tests and to build `test.html` for running the tests in the browser.
+
 !! `lazy`: serves tw5.com with lazily loaded images
 
 ```
-lazy.sh <username> [<password>]
+./bin/lazy.sh <username> [<password>]
 ```
 
 Or:
 
 ```
-lazy.cmd <username> [<password>]
+./bin/lazy.cmd <username> [<password>]
 ```
 
-This script serves the `clientserver` edition content with LazyLoading applied to images.
+This script serves the `tw5.com-server` edition content with LazyLoading applied to images.
 
 !! `wbld`: builds TiddlyWiki for TiddlyWeb
 
@@ -75,3 +81,7 @@ This script builds and deploys the code for [[TiddlyWiki in the Sky for TiddlyWe
 !! `2bld`: builds TiddlyWiki 2.6.5
 
 This script builds TiddlyWiki 2.6.5 from the original source and then displays the differences between them (`diff` is used for *nix, `fc` for Windows).
+
+!! `deploy` & `verbump`: deploy TiddlyWiki and bump the TiddlyWiki version number
+
+These scripts are concerned with releasing a new version of TiddlyWiki. See [[Releasing a new version of TiddlyWiki5]].

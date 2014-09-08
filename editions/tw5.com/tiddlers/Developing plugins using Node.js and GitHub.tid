@@ -1,5 +1,5 @@
 created: 20140320055936611
-modified: 20140320075440176
+modified: 20140908152942119
 tags: howto
 title: Developing plugins using Node.js and GitHub
 type: text/vnd.tiddlywiki
@@ -79,7 +79,7 @@ Create the file plugin.info with content:
 ```
 
 
-!!4. Create your plugin's files
+!!4. Create the files for you plugin
 
 For example files see the plugins in the tiddlywiki5 repository i.e. those located at plugins/tiddlywiki/ - Note in particular that files need to contain information that is used to tell tiddlywiki the name of the tiddler that is to be used in the tiddlywiki in place of the name of the file within the file system.
 
@@ -90,7 +90,7 @@ Modify editions/tw5.com/tiddlywiki.info to include a reference to your plugin di
 From the TW5 directory  issue command
 
 ```
-./qbld.sh
+./bin/qbld.sh
 ```
 
 the resultant file (index.html) will be placed in the build directory, the default build directory is  `../jermolene.github.com` relative to TW5/

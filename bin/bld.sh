@@ -115,4 +115,4 @@ node ./tiddlywiki.js \
 
 # Run the test edition to run the Node.js tests and to generate test.html for tests in the browser
 
-./test.sh
+./bin/test.sh

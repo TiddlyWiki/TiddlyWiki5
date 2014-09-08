@@ -1,5 +1,5 @@
 created: 20131130132123707
-modified: 20140619212123707
+modified: 20140908153054348
 tags: dev
 title: Releasing a new version of TiddlyWiki5
 type: text/vnd.tiddlywiki
@@ -9,8 +9,8 @@ type: text/vnd.tiddlywiki
 # Adjust the modified time of HelloThere
 # Make sure ''Jermolene/TiddlyWiki5'' is fully committed
 # Edit `package.json` to the new version number
-# Run `bld.sh` to build the deployment files
+# Run `bin/bld.sh` to build the deployment files
 # Restore `package.json` to the previous version number
-# Run `verbump "5.0.8-beta"`, substituting the new version number
-# Run `deploy.sh`
-# Run `wbld.sh <username> <password>`
+# Run `bin/verbump "5.0.8-beta"`, substituting the new version number
+# Run `bin/deploy.sh`
+# Run `bin/wbld.sh <username> <password>`
