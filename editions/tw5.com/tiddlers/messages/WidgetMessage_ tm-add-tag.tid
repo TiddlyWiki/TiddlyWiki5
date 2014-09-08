@@ -1,0 +1,12 @@
+created: 20140908185153663
+modified: 20140908185153663
+tags: message
+title: WidgetMessage: tm-add-tag
+type: text/vnd.tiddlywiki
+
+The `tm-add-tag` message is handled by the FieldMangerWidget. It adds the specified tag.
+
+|!Name |!Description |
+|param |Name of tag to add |
+
+The add tag message is usually generated with the ButtonWidget, and is handled by the FieldMangerWidget.
