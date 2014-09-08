@@ -1103,7 +1103,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	// Assemble a report tiddler
 	var titleReportTiddler = "TiddlyWiki Safe Mode",
 		report = [];
-	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. Most customisations have been disabled by renaming the following tiddlers:")
+	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. All plugins are temporarily disabled. Most customisations have been disabled by renaming the following tiddlers:")
 	// Delete the overrides
 	overrides.forEach(function(title) {
 		var tiddler = self.getTiddler(title),
@@ -1752,7 +1752,7 @@ $tw.boot.startup = function(options) {
 	}
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
-	$tw.wiki.registerPluginTiddlers("plugin");
+	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
 	$tw.wiki.unpackPluginTiddlers();
 	// Process "safe mode"
 	if($tw.safeMode) {
