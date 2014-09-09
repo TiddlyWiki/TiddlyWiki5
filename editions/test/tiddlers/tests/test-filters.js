@@ -97,6 +97,14 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[!is[system]!field:modifier[JoeBloggs]]").join(",")).toBe("Tiddler Three,a fourth tiddler,one");
 	});
 
+	it("should handle the regexp operator", function() {
+		expect(wiki.filterTiddlers("[regexp[id]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler");
+		expect(wiki.filterTiddlers("[!regexp[id]]").join(",")).toBe("one");
+		expect(wiki.filterTiddlers("[regexp[Tid]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three");
+		expect(wiki.filterTiddlers("[regexp[(?i)Tid]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler");
+		expect(wiki.filterTiddlers("[!regexp[Tid(?i)]]").join(",")).toBe("one");
+	});
+
 	it("should handle the field operator with a regular expression operand", function() {
 		expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
 		expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");

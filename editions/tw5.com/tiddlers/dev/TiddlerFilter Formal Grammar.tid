@@ -1,5 +1,5 @@
 created: 20140210141217955
-modified: 20140725091312363
+modified: 20140909134102102
 tags: dev
 title: TiddlerFilter Formal Grammar
 type: text/vnd.tiddlywiki
@@ -34,15 +34,7 @@ Whitespace is matched with javascript "\s+", which matches space, tab, carriage 
 
 ''&lt;opt-operator-suffix&gt;'' ::= ''&lt;string&gt;'' | ""
 
-''&lt;operand&gt;'' ::= "[" ''&lt;search-string&gt;'' "]" | "{" ''&lt;indirect-search-string&gt;'' "}" | "<" ''&lt;variable-name-string&gt;'' ">" | ''&lt;regex&gt;''
-
-''&lt;regex&gt;'' ::= "/" ''&lt;string&gt;'' "/" ''&lt;opt-regex-args&gt;''
-
-''&lt;opt-regex-args&gt;'' ::= "(" ''&lt;regex-args&gt;'' ")" | ""
-
-''&lt;regex-args&gt;'' ::= ''&lt;regex-arg&gt;'' | ''&lt;regex-arg&gt;'' ''&lt;regex-args&gt;''
-
-''&lt;regex-arg&gt;'' ::= "m" | "y" | "g" | "i"
+''&lt;operand&gt;'' ::= "[" ''&lt;search-string&gt;'' "]" | "{" ''&lt;indirect-search-string&gt;'' "}" | "<" ''&lt;variable-name-string&gt;'' ">"
 
 ''&lt;string&gt;'' ::= ''&lt;string-type-1&gt;'' | ''&lt;string-type-2&gt;'' | ...
 
