@@ -18,6 +18,4 @@ For example:
 |`[all[tiddlers]regexp[EggCup]]` |Selects all tiddlers that have the CamelCase string "EggCup" in their title |
 |`[all[tiddlers]regexp[eggcup(?i)]]` |Selects all tiddlers that have the string "eggcup" in their title (ignoring case) |
 |`[all[tiddlers]regexp[(?i)\.jpe?g$]]` |Selects all tiddlers with titles ending in ".jpg" or ".jpeg" (ignoring case) |
-|`[all[tiddlers]regexp:modified[eggcup(^2014)]]` |Selects all tiddlers whose modified field starts with the string "2014" |
-
-regexp:title[(?i)\.jpe?g$] 
+|`[all[tiddlers]regexp:modified[^2014]]` |Selects all tiddlers whose modified field starts with the string "2014" |
