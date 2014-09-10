@@ -24,9 +24,9 @@ $body$
 \end
 <div class="tc-table-of-contents">
 
-<div class='tw-table-of-contents'>
 <<toc-selective-expandable 'TableOfContents'>>
-</div>
+
+----
 
 ''Previous table of contents''
 
