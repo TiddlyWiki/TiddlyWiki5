@@ -1,8 +1,6 @@
 created: 20140710183759647
-creator: Christian Heigele, Christian Jurke
 description: After the microkernel has been explained this section focuses on the core plug-in. It describes the central modules of the core and explains how they work together to build a single file application.
 modified: 20140717203802364
-modifier: Christian Heigele, Christian Jurke
 sectionnumber: 3
 tags: doc new section
 title: TiddlyWiki Core Application
