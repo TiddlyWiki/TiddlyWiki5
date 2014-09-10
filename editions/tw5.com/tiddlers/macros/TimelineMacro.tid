@@ -1,5 +1,5 @@
 title: TimelineMacro
-tags: macros Macros
+tags: Macros
 modified: 20140905084423561
 
 The timeline macro produces a list of tiddlers in reverse chronological order of modification date that is grouped by the date of the day of modification.

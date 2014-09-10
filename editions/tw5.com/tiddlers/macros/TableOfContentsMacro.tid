@@ -1,5 +1,5 @@
 title: TableOfContentsMacro
-tags: macros Macros
+tags: Macros
 modified: 20140905084423561
 
 The table of contents macro produces a hierarchical tree of tiddlers based on their tags.
