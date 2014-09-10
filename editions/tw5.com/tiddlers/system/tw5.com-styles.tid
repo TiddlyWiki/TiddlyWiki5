@@ -14,7 +14,7 @@ tags: $:/tags/Stylesheet
 	}
 
 	.tc-link-info-item {
-		max-width: 25em;
+		max-width: 24em;
 		margin-right: 10px;
 	}
 
