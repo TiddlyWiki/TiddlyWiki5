@@ -3,6 +3,7 @@ modified: 20131228163843163
 tags: Macros
 title: MakeDataUriMacro
 type: text/vnd.tiddlywiki
+caption: makedatauri
 
 The makedatauri macro constructs a data URI from a block of text and an associated ContentType. It is commonly used within stylesheets to generate an inline image or font.
 

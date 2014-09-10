@@ -1,8 +1,9 @@
 created: 20140908185153663
 modified: 20140908185153663
-tags: message
+tags: WidgetMessages
 title: WidgetMessage: tm-remove-field
 type: text/vnd.tiddlywiki
+caption: tm-remove-field
 
 The `tm-remove-field` message is handled by the FieldMangerWidget. It removes the specified field.
 

@@ -1,6 +1,7 @@
 title: SaveTiddlerCommand
-tags: command
+tags: Commands
 created: 20131218121606089
 modified: 20131218121606089
+caption: savetiddler
 
 {{$:/language/Help/savetiddler}}

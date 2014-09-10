@@ -1,8 +1,9 @@
 created: 20140903085210479
 modified: 20140903085210479
-tags: command
+tags: Commands
 title: MakeLibraryCommand
 type: text/vnd.tiddlywiki
+caption: makelibrary
 
 {{$:/language/Help/makelibrary}}
 

@@ -3,6 +3,7 @@ modified: 20140908104107181
 tags: Macros
 title: DumpVariablesMacro
 type: text/vnd.tiddlywiki
+caption: dumpvariables
 
 The dumpvariables macro displays a table containing the values of all the variables defined at that location in the widget tree. It can be useful for exploring the mechanisms of TiddlyWiki and for debugging.
 
