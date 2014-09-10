@@ -1,0 +1,7 @@
+created: 20140708085435652
+creator: Christian Heigele, Christian Jurke
+modified: 20140717203409411
+modifier: Christian Heigele, Christian Jurke
+title: The TiddlyWiki data management concept
+
+This section descripes how the data of the wiki is stored within Tiddlywiki during the runtime. And how the complete wiki is persisted.
