@@ -3,6 +3,12 @@ tags: $:/tags/PageTemplate
 
 <section class="tc-story-river">
 
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]!has[draft.of]]">
+
+WARNING: tag "$:/tags/stylesheet" on <$link><$view field="title"/></$link> should be replaced with "$:/tags/Stylesheet"
+
+</$list>
+
 <section class="story-backdrop">
 
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]">

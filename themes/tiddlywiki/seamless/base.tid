@@ -1,5 +1,5 @@
 title: $:/themes/tiddlywiki/seamless/base
-tags: [[$:/tags/stylesheet]]
+tags: [[$:/tags/Stylesheet]]
 list-after: $:/themes/tiddlywiki/vanilla/base
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline

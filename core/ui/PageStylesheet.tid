@@ -6,4 +6,8 @@ title: $:/core/ui/PageStylesheet
 <$transclude mode="block"/>
 </$list>
 
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
+<$transclude mode="block"/>
+</$list>
+
 </$importvariables>

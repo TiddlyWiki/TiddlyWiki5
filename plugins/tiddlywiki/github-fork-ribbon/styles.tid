@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/github-fork-ribbon/styles
-tags: [[$:/tags/stylesheet]]
+tags: [[$:/tags/Stylesheet]]
 
 /* Left will inherit from right (so we don't need to duplicate code */
 .github-fork-ribbon {

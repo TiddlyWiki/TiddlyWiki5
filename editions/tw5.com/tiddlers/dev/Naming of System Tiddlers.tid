@@ -20,7 +20,7 @@ The system tiddlers provided as part of the core are named according to the foll
 |`$:/plugins/*` |lowercase |Plugin tiddlers, and plugin content |
 |`$:/snippets/*` |//inconsistent// |Reusable snippets (will be replaced by macros) |
 |`$:/state/*` |lowercase |User interface state tiddlers |
-|`$:/tags/*` |~CamelCase |User interface configuration tags (currently `$:/tags/stylesheet` is inconsistent) |
+|`$:/tags/*` |~CamelCase |User interface configuration tags |
 |`$:/temp/*` |lowercase |Temporary tiddlers that shouldn't be saved |
 |`$:/themes/*` |lowercase |Theme plugins |
 

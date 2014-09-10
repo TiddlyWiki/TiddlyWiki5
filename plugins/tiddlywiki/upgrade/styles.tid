@@ -1,5 +1,5 @@
 title: $:/plugins/tiddlywiki/upgrade/styles
-tags: $:/tags/stylesheet
+tags: $:/tags/Stylesheet
 
 .tc-upgrade-wizard-wrapper {
 	width: 100%;
