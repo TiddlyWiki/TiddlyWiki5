@@ -34,10 +34,6 @@
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico"],
-		"readmes": [
-			"--rendertiddler","ReadMe","readme.md","text/html",
-			"--rendertiddler","ReadMeBinFolder","bin/readme.md","text/html",
-			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/plain"],
 		"static": [
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
