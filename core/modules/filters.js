@@ -70,7 +70,7 @@ function parseFilterOperation(operators,filterString,p) {
 					rexMatch = rex.exec(filterString.substring(p));
 				if(rexMatch) {
 					operator.regexp = new RegExp(rexMatch[1], rexMatch[2]);
-// Deprecation warning
+// DEPRECATION WARNING
 console.log("WARNING: Filter",operator.operator,"has a deprecated regexp operand",operator.regexp);
 					nextBracketPos = p + rex.lastIndex - 1;
 				}
