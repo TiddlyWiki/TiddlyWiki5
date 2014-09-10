@@ -19,7 +19,7 @@ All the macros defined in tiddlers with the tag "mySpecialMacros" are available 
 The content of the importvariables widget is the scope within which the imported variable definitions are available.
 
 |!Attribute |!Description |
-|filter |[[Tiddler filter|TiddlerFilters]] defining the tiddlers from which macro definitions will be imported |
+|filter |[[Tiddler filter|Filters]] defining the tiddlers from which macro definitions will be imported |
 
 ! Global Macros
 

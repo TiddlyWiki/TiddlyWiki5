@@ -1,6 +1,7 @@
 created: 20140828133830424
 modified: 20140902145613329
-tags: filters
+tags: Filters
+caption: removesuffix
 title: FilterOperator: removesuffix
 type: text/vnd.tiddlywiki
 

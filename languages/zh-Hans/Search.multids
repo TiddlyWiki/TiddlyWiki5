@@ -1,7 +1,7 @@
 title: $:/language/Search/
 
 Filter/Caption: 筛选
-Filter/Hint: 以[[筛选表达式|http://tiddlywiki.com/static/TiddlerFilters.html]]查找
+Filter/Hint: 以[[筛选表达式|http://tiddlywiki.com/static/Filters.html]]查找
 Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> 个条目符合条件</small>//
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> 个条目符合条件</small>//
 Shadows/Caption: 默认

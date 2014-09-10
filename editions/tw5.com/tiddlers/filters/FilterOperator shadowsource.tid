@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
 title: FilterOperator: shadowsource
+caption: shadowsource
 type: text/vnd.tiddlywiki
 
 The ''shadowsource'' filter operator returns the titles of the plugin tiddlers containing any ShadowTiddlers in the current list.

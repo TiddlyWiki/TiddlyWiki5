@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
 title: FilterOperator: untagged
+caption: untagged
 type: text/vnd.tiddlywiki
 
 The ''untagged'' filter operator selects from the current list any tiddlers that do not have any tags.

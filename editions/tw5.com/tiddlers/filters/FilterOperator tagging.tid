@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
 title: FilterOperator: tagging
+caption: tagging
 type: text/vnd.tiddlywiki
 
 The ''tagging'' filter operator returns all the tiddlers that are tagged by the tiddlers in the current list.

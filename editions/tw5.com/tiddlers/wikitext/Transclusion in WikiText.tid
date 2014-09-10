@@ -17,7 +17,7 @@ You can also use a TextReference instead of a tiddler title:
 * `{{MyTiddler##index}}` transcludes a specified indexed property of a [[DataTiddler|DataTiddlers]]
 * `{{##index}}` transcludes a specified indexed property of the current [[DataTiddler|DataTiddlers]]
 
-A similar syntax can be used to transclude a list of tiddlers matching a specified [[TiddlerFilter|TiddlerFilters]]:
+A similar syntax can be used to transclude a list of tiddlers matching a specified [[filter|Filters]]:
 
 ```
 {{{ [tag[mechanism]] }}}

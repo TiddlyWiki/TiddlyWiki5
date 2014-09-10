@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
 title: FilterOperator: tags
+caption: tags
 type: text/vnd.tiddlywiki
 
 The ''tags'' filter operator returns all the tags present on the tiddlers in the current list.

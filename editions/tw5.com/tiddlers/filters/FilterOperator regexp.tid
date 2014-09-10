@@ -1,6 +1,7 @@
 created: 20140909134102102
 modified: 20140909134102102
-tags: filters
+tags: Filters
+caption: regexp
 title: FilterOperator: regexp
 type: text/vnd.tiddlywiki
 

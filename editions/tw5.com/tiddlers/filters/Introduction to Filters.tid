@@ -4,7 +4,7 @@ tags: introduction
 title: Introduction to Filters
 type: text/vnd.tiddlywiki
 
-A step by step introduction to how TiddlerFilters are used.
+A step by step introduction to how [[Filters]] are used.
 
 You can experiment with tiddler filters by typing them into the "Filter" tab of the [[advanced search panel|$:/AdvancedSearch]].
 
@@ -28,7 +28,7 @@ Filter operators are used to select tiddlers based on some criteria. For example
 
 The word "tag" is the ''operator'' and "introduction" is the ''operand''.
 
-See TiddlerFilters for a complete list of the available operators.
+See [[Filters]] for a complete list of the available operators.
 
 !! Default Filter Operator
 

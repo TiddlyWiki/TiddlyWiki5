@@ -1,7 +1,8 @@
 created: 20140512103123179
 modified: 20140512103123179
-tags: filters
+tags: Filters
 title: FilterOperator: after
+caption: after
 type: text/vnd.tiddlywiki
 
 The ''after'' filter operator returns the tiddler from the current list that is after the tiddler named in the operand.
