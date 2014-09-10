@@ -7,5 +7,5 @@
 node ./tiddlywiki.js \
 	editions/tw5.com-server \
 	--verbose \
-	--server 8080 $:/core/save/all text/plain text/html $1 $2\
+	--server 8080 $:/core/save/all text/plain text/html "$1" "$2" "$3"\
 	|| exit 1
