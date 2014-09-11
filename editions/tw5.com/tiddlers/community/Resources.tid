@@ -1,6 +1,6 @@
 created: 20140320230543190
 modified: 20140320231444981
-tags: [[Get help and learn more]] Community
+tags: Community
 title: Resources
 type: text/vnd.tiddlywiki
 
@@ -8,7 +8,7 @@ These are sites with resources created by the TiddlyWiki [[Community]] help you 
 
 <div class="tc-link-info">
 
-<$list filter='[tag[resources]!sort[modified]]'>
+<$list filter='[tag[Resources]!sort[modified]]'>
 
 <div class="tc-link-info-item">
 

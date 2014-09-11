@@ -1,13 +1,13 @@
-title: User-created editions of TiddlyWiki
-tags: [[Get help and learn more]]
-created: 201409081255
-modified: 201409081255
+title: Tutorials
+tags: Community
+created: 201409081253
+modified: 201409081253
 
-Some ~TiddlyWiki users have created template ~TiddlyWikis for special uses. Below are some of them.
+Here are some webpages with tips and tutorials related to ~TiddlyWiki 
 
 <div class="tc-link-info">
 
-<$list filter="[tag[usereditions]!sort[modified]]">
+<$list filter="[tag[Tutorials]!sort[modified]]">
 
 <div class="tc-link-info-item">
 

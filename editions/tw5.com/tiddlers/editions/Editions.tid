@@ -1,13 +1,13 @@
-title: Tips and tutorials
-tags: [[Get help and learn more]]
-created: 201409081253
-modified: 201409081253
+title: Editions
+tags: TableOfContents
+created: 201409081255
+modified: 201409081255
 
-Here are some webpages with tips and tutorials related to ~TiddlyWiki 
+Some ~TiddlyWiki users have created template ~TiddlyWikis for special uses. Below are some of them.
 
 <div class="tc-link-info">
 
-<$list filter="[tag[tutorials]!sort[modified]]">
+<$list filter="[tag[usereditions]!sort[modified]]">
 
 <div class="tc-link-info-item">
 
