@@ -4,9 +4,6 @@ tags: Reference concepts
 title: Filters
 type: text/vnd.tiddlywiki
 
-\define bulletList(filter)
-<ul><$list filter="$filter$"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
-\end
 Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria. They are used by widgets like the ListWidget and the CountWidget to perform operations on multiple tiddlers at once.
 
 * [[Introduction to Filters]] is a step-by-step introduction to how filters are used
@@ -14,6 +11,6 @@ Filters are used in TiddlyWiki to choose tiddlers by specifying simple match cri
 
 The most common filter operators are:
 
-<<bulletList "[tag[CommonFilters]]">>
+<<list-unordered-links "[tag[CommonFilters]]">>
 
 See FilterOperators for a complete list of available filter operators

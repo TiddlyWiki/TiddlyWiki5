@@ -1,6 +1,6 @@
 created: 20140211171341271
 modified: 20140910215504098
-tags: concepts Reference
+tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
 
@@ -11,3 +11,8 @@ Macros are snippets of text that can be inserted with a concise shortcut:
 ```
 
 You can write your own [[Macros in WikiText]] or for more flexibility you can write [[JavaScript Macros]].
+
+The following macros are built-in to the TiddlyWiki core:
+
+<<list-unordered-links "[tag[Macros]]">>
+

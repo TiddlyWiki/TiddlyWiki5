@@ -1,5 +1,5 @@
 title: Quine
-tags: definitions
+tags: Definitions
 
 Wikipedia [[defines a Quine|http://en.wikipedia.org/wiki/Quine_(computing)]] as //a computer program which takes no input and produces a copy of its own source code as its only output//.
 

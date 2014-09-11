@@ -1,6 +1,6 @@
 created: 201308291647
 modified: 201308291647
-tags: concepts
+tags: Concepts
 title: DataTiddlers
 
 Data tiddlers provide a way to access blocks of [[JSON]] data within the `text` field of a tiddler.

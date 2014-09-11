@@ -7,7 +7,7 @@ caption: keyboard
 
 ! Introduction
 
-The keyboard widget allows WidgetMessages to be generated in response to key presses.
+The keyboard widget allows [[Messages]] to be generated in response to key presses.
 
 ! Content and Attributes
 

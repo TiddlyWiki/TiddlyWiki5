@@ -5,3 +5,7 @@ title: Widgets
 type: text/vnd.tiddlywiki
 
 Widgets add dynamic functionality to WikiText.
+
+The following widgets are built into the core:
+
+<<list-unordered-links "[tag[Widgets]]">>

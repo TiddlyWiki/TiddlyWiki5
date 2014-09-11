@@ -1,6 +1,6 @@
 created: 201308270759
 modified: 201311011115
-tags: concepts
+tags: Concepts
 title: TextReference
 
 A TextReference identifies a chunk of text from a tiddler that can be retrieved or modified depending on the context.

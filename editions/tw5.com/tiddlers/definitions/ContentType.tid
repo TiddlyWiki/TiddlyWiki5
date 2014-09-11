@@ -1,11 +1,11 @@
 created: 201308281859
 modified: 201308281859
-tags: definitions concepts
+tags: Definitions concepts
 title: ContentType
 
 Used in Internet protocols to indicate the type that should be used to interpret the content of a web resource.
 
-Under TiddlyWiki5, the `type` field gives the content type to apply to the main `text` field.
+In TiddlyWiki, the `type` field gives the content type to apply to the main `text` field.
 
 !! List of Common Content Types
 
