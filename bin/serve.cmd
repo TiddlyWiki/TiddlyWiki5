@@ -11,7 +11,6 @@ if "%1" == "--help" (
 if "%1" == "help" (
 	call :help
 ) else (
-	echo %1 %2 %3 %4 %5
 	call :main %1 %2 %3 %4 %5
 )
 exit 0
