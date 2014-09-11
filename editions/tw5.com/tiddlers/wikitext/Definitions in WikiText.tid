@@ -1,8 +1,9 @@
 created: 20131205160424246
 modified: 20131205160450910
-tags: wikitext
+tags: WikiText
 title: Definitions in WikiText
 type: text/vnd.tiddlywiki
+caption: Definitions
 
 HTML definition lists are created with this syntax:
 

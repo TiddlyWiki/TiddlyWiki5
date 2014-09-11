@@ -1,8 +1,9 @@
 created: 20131205160047557
 modified: 20140214190843724
-tags: wikitext
+tags: WikiText
 title: Code Blocks in WikiText
 type: text/vnd.tiddlywiki
+caption: Code Blocks
 
 You can  use triple backticks <code>&#96;&#96;&#96;</code> to mark code blocks:
 
