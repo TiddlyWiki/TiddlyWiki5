@@ -35,10 +35,10 @@ help() {
 	echo Optional parameters
 	echo
 	echo $'\t'\$1 .. editions directory .. full path or relative to current directory
-	echo $'\t'\$2 .. username for signing edits - can be empty like this: ""
-	echo $'\t'\$3 .. password - can be empty like this: ""
-	echo $'\t'\$4 .. IP address or HOST name .. defaults to "localhost"
-	echo $'\t'\$5 .. PORT .. defaults to 8080
+	echo $'\t'\$2 .. username for signing edits - can be empty like this: \"\"
+	echo $'\t'\$3 .. password - can be empty like this: \"\"
+	echo $'\t'\$4 .. IP address or HOST name .. defaults to: localhost
+	echo $'\t'\$5 .. PORT .. defaults to: 8080
 	echo
 	echo $'\t'-v .. Version
 	echo $'\t'-h .. Help
