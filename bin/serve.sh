@@ -4,25 +4,20 @@
 # It respects the TIDDLYWIKI_EDITION_PATH variable described
 # at: # http://tiddlywiki.com/#Environment%20Variables%20on%20Node.js
 #
-# Be sure your server tiddlywiki.info configuration contains the 
-#   - "tiddlywiki/tiddlyweb" and the "tiddlywiki/filesystem" plugins.
-# Otherwise saving is not possible. 
+# Be sure your server tiddlywiki.info configuration contains the plugins:
+#   - "tiddlywiki/tiddlyweb" and the "tiddlywiki/filesystem"
+#   - Otherwise saving is not possible. 
 
 # global settings
 # set -o nounset	#exit if a variable is not set
 set -o errexit	#exit on error
 
-# get command naem and path info needed for help text
+# get command name and path info needed for help text
 ARG0=$(basename $0)
 #ARG0DIR=$(dirname $0)
 #[ $ARG0DIR == "." ] && ARG0DIR=$PWD
 
 # ---- helper functions ----
-_log () {
-	echo
-	echo "---> $1"
-}
-
 version () {
 	echo "$ARG0, TiddlyWiki serve script version 0.0.1"
 	echo
@@ -54,6 +49,11 @@ help() {
 	echo
 }
 
+_log () {
+	echo
+	echo "---> $1"
+}
+
 # error handling
 error() {
     echo "$ARG0: $*" 1>&2
@@ -72,6 +72,7 @@ serve () {
 }
 
 check_edition_directory () {
+	# The editions directory must exist and should contain a tiddlywiki.info file
 	if [ ! -d $TIDDLYWIKI_EDITION_PATH ]; then
 		_log "Edition directory: '$TIDDLYWIKI_EDITION_PATH' doesn't exist. Create it!"
 		exit 1
@@ -94,7 +95,7 @@ shift $(expr $OPTIND - 1)
 
 #----------------------------------------------------
 
-# If no edition parameter is provided, use defaults
+# If no edition parameter is provided, use Jeremy's defaults
 if [ $# -eq 0 ]; then
 	# check if the edition path environment variable is set. If yes use it.
 	[ -z $TIDDLYWIKI_EDITION_PATH ] && TIDDLYWIKI_EDITION_PATH="./editions/tw5.com-server"
@@ -119,4 +120,3 @@ else
 
 	serve "$TIDDLYWIKI_EDITION_PATH" "$2" "$3" "$4" $PORT
 fi
-
