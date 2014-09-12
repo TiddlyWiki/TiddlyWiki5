@@ -2,8 +2,8 @@
 #
 # This script allows you to serve different TiddlyWiki editions.
 #
-# It respects the TIDDLYWIKI_EDITION_PATH variable described
-# at: # http://tiddlywiki.com/#Environment%20Variables%20on%20Node.js
+# It respects a TW_SERVE_EDITION_PATH environment variable.
+# If this variable is set it will be used. A command line parameter will overwrite it.
 #
 # Ensure your server tiddlywiki.info configuration contains
 # these plugins, otherwise saving is not possible:
@@ -21,7 +21,7 @@ ARG0=$(basename $0)
 
 # ---- helper functions ----
 version () {
-	echo "$ARG0, TiddlyWiki serve script version 0.0.1"
+	echo "$ARG0, TiddlyWiki serve script version 0.0.2"
 	echo
 }
 
@@ -75,8 +75,8 @@ serve () {
 
 check_edition_directory () {
 	# The editions directory must exist and should contain a tiddlywiki.info file
-	if [ ! -d $TIDDLYWIKI_EDITION_PATH ]; then
-		_log "Edition directory: '$TIDDLYWIKI_EDITION_PATH' does not exist"
+	if [ ! -d $TW_SERVE_EDITION_PATH ]; then
+		_log "Edition directory: '$TW_SERVE_EDITION_PATH' does not exist"
 		exit 1
 	fi
 }
@@ -100,13 +100,13 @@ shift $(expr $OPTIND - 1)
 # If no edition parameter is provided, use Jeremy's defaults
 if [ $# -eq 0 ]; then
 	# check if the edition path environment variable is set. If yes use it.
-	[ -z $TIDDLYWIKI_EDITION_PATH ] && TIDDLYWIKI_EDITION_PATH="./editions/tw5.com-server"
+	[ -z $TW_SERVE_EDITION_PATH ] && TW_SERVE_EDITION_PATH="./editions/tw5.com-server"
 
 	# directory must exist
 	check_edition_directory
 
 	# serve the default settings.
-	serve "$TIDDLYWIKI_EDITION_PATH" "" "" localhost 8080
+	serve "$TW_SERVE_EDITION_PATH" "" "" localhost 8080
 else
 	if [ -z "$5" ]; then 
 		PORT=8080 
@@ -115,10 +115,10 @@ else
 	fi
 	
 	# If the 1st parameter (edition) is set, it has priority.
-	TIDDLYWIKI_EDITION_PATH=$1
+	TW_SERVE_EDITION_PATH=$1
 
 	# directory must exist
 	check_edition_directory
 
-	serve "$TIDDLYWIKI_EDITION_PATH" "$2" "$3" "$4" $PORT
+	serve "$TW_SERVE_EDITION_PATH" "$2" "$3" "$4" $PORT
 fi
