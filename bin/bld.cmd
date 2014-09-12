@@ -40,6 +40,15 @@ node .\tiddlywiki.js ^
 	--build favicon empty static index ^
 	|| exit 1
 
+rem dev/: developer material
+
+node .\tiddlywiki.js ^
+	.\editions\dev ^
+	--verbose ^
+	--output %TW5_BUILD_OUTPUT%\dev ^
+	--build index favicon static ^
+	|| exit 1
+
 rem upgrade.html: custom edition for handling upgrades
 
 node .\tiddlywiki.js ^
