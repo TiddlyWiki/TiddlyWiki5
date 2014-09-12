@@ -1,11 +1,10 @@
 :: This script allows you to serve different TiddlyWiki editions. 
 ::
-:: It respects the TIDDLYWIKI_EDITION_PATH variable described
-:: at: # http://tiddlywiki.com/#Environment%20Variables%20on%20Node.js
+:: It respects a TW_SERVE_EDITION_PATH environment variable.
+:: If this variable is set it will be used. A command line parameter will overwrite it.
 ::
 :: Ensure your server tiddlywiki.info configuration contains
 :: these plugins, otherwise saving is not possible:
-::
 ::   - "tiddlywiki/tiddlyweb"
 ::   - "tiddlywiki/filesystem"
 
@@ -29,7 +28,7 @@ if "%1" == "help" (
 exit 0
 
 :version
-echo TiddlyWiki serve.cmd script version 0.0.1"
+echo TiddlyWiki serve.cmd script version 0.0.2"
 echo.
 exit 0
 goto:eof
@@ -59,21 +58,21 @@ goto:eof
 :main
 if [%1] NEQ [] (
 	:: if there is a editions parameter .. use it.
-	set TIDDLYWIKI_EDITION_PATH=%1
+	set TW_SERVE_EDITION_PATH=%1
 ) else (
-	if [%TIDDLYWIKI_EDITION_PATH%] == [] (
+	if [%TW_SERVE_EDITION_PATH%] == [] (
 		echo Please provide an edition path as your first parameter or
-		echo define a valid TIDDLYWIKI_EDITION_PATH environment variable.
+		echo define a valid TW_SERVE_EDITION_PATH environment variable.
 		echo.
 		echo Using default edition path 'editions\tw5.com-server' because no environment variable is set
 		echo.
-		set TIDDLYWIKI_EDITION_PATH= editions\tw5.com-server
+		set TW_SERVE_EDITION_PATH= editions\tw5.com-server
 	)
 )
 
 :: The editions path must exist!
-if not exist %TIDDLYWIKI_EDITION_PATH%\nul (
-	echo The Path: "%TIDDLYWIKI_EDITION_PATH%" does not exist
+if not exist %TW_SERVE_EDITION_PATH%\nul (
+	echo The Path: "%TW_SERVE_EDITION_PATH%" does not exist
 	exit 1
 )
 
@@ -85,11 +84,11 @@ if [%5] == [] (
 	set PORT=%5
 )
 
-echo Using edition: %TIDDLYWIKI_EDITION_PATH%
+echo Using edition: %TW_SERVE_EDITION_PATH%
 echo.
 
 node .\tiddlywiki.js ^
-	%TIDDLYWIKI_EDITION_PATH% ^
+	%TW_SERVE_EDITION_PATH% ^
 	--verbose ^
 	--server %PORT% $:/core/save/all text/plain text/html %2 %3 %4^
 	|| exit 1
