@@ -4,9 +4,14 @@
 @echo off
 echo.
 
-if "%1" == "--help" (
-	call :help
-)
+:: Help wanted!! 
+:: If someone knows, how to improve -help and -version handling tell me :)
+
+if "%1" == "--help" call :help
+if "%1" == "-h" call :help
+
+if "%1" == "--version" call :version
+if "%1" == "-v" call :version
 
 if "%1" == "help" (
 	call :help
@@ -15,20 +20,32 @@ if "%1" == "help" (
 )
 exit 0
 
+:version
+echo TiddlyWiki serve.cmd script version 0.0.1"
+echo.
+exit 0
+goto:eof
+
 :help
 echo Serve TiddlyWiki5 over HTTP
 echo.
 echo Optional parameters
-echo  - %%1 .. editions directory .. full path or relative to current directory
-echo  - %%2 .. username for signing edits - can be empty like this: '""'
-echo  - %%3 .. password - can be empty like this: '""'
-echo  - %%4 .. IP address or HOST name .. defaults to localhost
-echo  - %%5 .. PORT .. defaults to 8080
+echo  - %%1 .. editions directory	.. full path or relative to current directory
+echo  - %%2 .. username 		.. for signing edits - can be empty like this: '""'
+echo  - %%3 .. password 		.. can be empty like this: '""'
+echo  - %%4 .. IP address or HOST 	.. defaults to localhost
+echo  - %%5 .. PORT			.. defaults to 8080
 echo.
 echo Example 1 .\serve .\edition\tw5.com-server username
 echo Example 2 .\serve .\edition\tw5.com-server '""' '""' localhost 9090 
 echo .. Example 2 defines: empty username, empty password
 echo.
+echo Help information
+echo  -v, --version		.. shows the script version
+echo  -h, --help, help	.. shows this help information
+echo.
+
+exit 0
 goto:eof
 
 :main
@@ -60,7 +77,7 @@ if [%5] == [] (
 	set PORT=%5
 )
 
-echo Usging edition: %TIDDLYWIKI_EDITION_PATH% !!
+echo Using edition: %TIDDLYWIKI_EDITION_PATH% !!
 echo.
 
 node .\tiddlywiki.js ^
