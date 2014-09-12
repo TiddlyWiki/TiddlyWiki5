@@ -21,5 +21,5 @@ Furthermore the WikiText is used to access the widgets which are integrated in t
 
 ```
 WikiText:
-<$button message="tw-close-tiddler">Close Me!</$button> 
+<$button message="tm-close-tiddler">Close Me!</$button> 
 ```
