@@ -1,12 +1,19 @@
 created: 20130822172800000
-modified: 20140228154616490
-tags: introduction
+modified: 20140912140558227
+tags: TableOfContents
 title: Features
 type: text/vnd.tiddlywiki
 
 \define alert-demo()
 <$fieldmangler tiddler="SampleAlert"><$set name="currentTiddler" value="SampleAlert"><$button message="tm-add-tag" param="$:/tags/Alert">alerts</$button></$set></$fieldmangler>
 \end
+
+Further information about specific TiddlyWiki features:
+
+<<list-unordered-links "[tag[Features]]">>
+
+----
+
 * The ability to save changes on almost any desktop HTML5 compatible-browser, with custom apps to enable [[Saving on iPad/iPhone]] and [[Android|Saving on Android]], and a cross-platform [[Firefox extension|Saving with TiddlyFox]] that even runs on Android
 * Support for pluggable themes and colour palettes (see the [[control panel|$:/ControlPanel]])
 * The ability to [[render static HTML snapshots|Generating Static Sites with TiddlyWiki]] that can be used without JavaScript

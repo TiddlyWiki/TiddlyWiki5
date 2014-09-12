@@ -1,7 +1,8 @@
-created: 201308251500
-modified: 201405131621
-tags: deserializers dev
+created: 20130825150000000
+modified: 20140912141751154
+tags: [[TiddlyWiki on Node.js]]
 title: TiddlerFiles
+type: text/vnd.tiddlywiki
 
 Tiddlers can be stored in text files in several different formats. Files containing single tiddlers can also have an auxiliary `.meta` file formatted as a sequence of name:value pairs:
 

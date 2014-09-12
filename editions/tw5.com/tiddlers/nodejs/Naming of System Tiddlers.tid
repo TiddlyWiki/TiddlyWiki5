@@ -1,6 +1,6 @@
 created: 20140112190154121
-modified: 20140112190154121
-tags: dev
+modified: 20140912142655205
+tags: SystemTiddlers
 title: Naming of System Tiddlers
 type: text/vnd.tiddlywiki
 
@@ -23,8 +23,6 @@ The system tiddlers provided as part of the core are named according to the foll
 |`$:/tags/*` |~CamelCase |User interface configuration tags |
 |`$:/temp/*` |lowercase |Temporary tiddlers that shouldn't be saved |
 |`$:/themes/*` |lowercase |Theme plugins |
-
-The tiddler `$:/view` is inconsistently named and should be renamed `$:/config/View`
 
 In the format column:
 

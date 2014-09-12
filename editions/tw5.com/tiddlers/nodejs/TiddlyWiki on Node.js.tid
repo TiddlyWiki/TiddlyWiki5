@@ -1,8 +1,8 @@
 created: 20131129094353704
-modified: 20140224134310019
+modified: 20140912141900862
+tags: [[Other TiddlyWiki configurations]]
 title: TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
-tags: TableOfContents
 
 Running TiddlyWiki on [[Node.js]] brings several important benefits over and above the single file version:
 
@@ -10,14 +10,8 @@ Running TiddlyWiki on [[Node.js]] brings several important benefits over and abo
 * Individual tiddlers are stored in separate files, which you can organise as you wish
 * The ability to build multiple wikis that blend different combinations of shared and unique content
 
-! Installation
+For more information see:
 
-{{Installing TiddlyWiki on Node.js}}
-
-! Usage
-
-{{Using TiddlyWiki on Node.js}}
-
-! Upgrading
-
-{{Upgrading TiddlyWiki on Node.js}}
+* Installing TiddlyWiki on Node.js
+* Using TiddlyWiki on Node.js
+* Upgrading TiddlyWiki on Node.js

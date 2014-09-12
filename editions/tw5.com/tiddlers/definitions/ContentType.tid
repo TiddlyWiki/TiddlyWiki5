@@ -1,7 +1,8 @@
-created: 201308281859
-modified: 201308281859
-tags: Definitions concepts
+created: 20130828185900000
+modified: 20140912145359306
+tags: Definitions
 title: ContentType
+type: text/vnd.tiddlywiki
 
 Used in Internet protocols to indicate the type that should be used to interpret the content of a web resource.
 

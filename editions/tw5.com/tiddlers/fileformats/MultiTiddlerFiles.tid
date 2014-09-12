@@ -1,6 +1,8 @@
 created: 20140209143652456
-tags: deserializers dev
+modified: 20140912141738408
+tags: [[TiddlyWiki on Node.js]]
 title: MultiTiddlerFiles
+type: text/vnd.tiddlywiki
 
 MultiTiddlerFiles allow multiple tiddlers to be concisely represented in a single text file.
 

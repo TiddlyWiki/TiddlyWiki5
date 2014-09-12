@@ -1,7 +1,9 @@
-title: SampleWizard2
-tags: demo
-subtitle: I'm another modal wizard
+created: 20140912145532856
 footer: <$button message="tm-close-tiddler">Close</$button>
+modified: 20140912145532856
+subtitle: I'm another modal wizard
+title: SampleWizard2
+type: text/vnd.tiddlywiki
 
 This is another modal wizard dialogue, stored in the tiddler SampleWizard2.
 

@@ -1,5 +1,6 @@
+created: 20140912145543340
+modified: 20140912145610020
 title: SampleNotification
-tags: demo
-modified: 201305081131
+type: text/vnd.tiddlywiki
 
-{{$:/images/done-button.svg}} This is a notification!
+{{$:/core/images/done-button}} This is a notification!
