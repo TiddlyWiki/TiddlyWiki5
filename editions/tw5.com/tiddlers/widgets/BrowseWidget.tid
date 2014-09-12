@@ -1,7 +1,8 @@
 title: BrowseWidget
 created: 201310241419
-modified: 201310300837
-tags: widget
+modified: 20140910200751303
+tags: Widgets
+caption: browse
 
 ! Introduction
 
@@ -9,4 +10,9 @@ The browse widget displays an HTML file browser button that allows the user to c
 
 ! Content and Attributes
 
-The browse widget has no attributes, and ignores any contained content.
+The content of the `<$browse>` widget is ignored.
+
+|!Attribute |!Description |
+|multiple |Set to "multiple" to select multiple file upload |
+
+On iPhone/iPad choosing the multiple option will remove the ability to take photographs/videos directly into TiddlyWiki.

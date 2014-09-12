@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters commonfilters
+tags: Filters CommonFilters
 title: FilterOperator: sort
+caption: sort
 type: text/vnd.tiddlywiki
 
 The ''sort'' filter operator sorts the current list case insensitively (upper and lower case letters are considered equivalent), along the field specified in the operand (which defaults to `title`). Preceding the operator with `!` reverses the sort order.

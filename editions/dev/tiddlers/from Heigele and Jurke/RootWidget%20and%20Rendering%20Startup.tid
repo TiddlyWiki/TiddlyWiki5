@@ -1,0 +1,34 @@
+chapter.of: UI and Rendering Pipeline
+created: 20140717175203036
+modified: 20140717182314488
+sub.num: 5
+tags: doc
+title: RootWidget and Rendering Startup
+
+The previous parts of this chapter showed how WikiText is transformed to DOM nodes which dynamically react to tiddler changes and a way to compose tiddlers from other tiddlers.
+This last part describes how the TiddlyWiki core plug-in starts up a UI build from tiddlers and WikiText.
+
+After the microkernel has loaded it starts executing [[Startup Modules|Startup Process]].
+The core plug-in contains two startup modules which are responsible to kick off the UI:
+
+[[rootwidget.js|$:/core/modules/startup/rootwidget.js]] is a startup module and creates an instance of the base widget.
+This widget is globally accessible ``$tw.rootWidget``.
+The DOM node associated to this widget is the current browser window's DOM (``document``).
+
+At first, the root widget has no children but provides some basic event handlers ([[Messages]]) like:
+
+* ''tm-notify:'' Displays the message given in param as a notification.
+* ''tm-save-wiki'': Triggered by a save button, the user can click. This handler uses the syncer module described in [[Extended Persistence]] to save the current wiki.
+* ''tm-auto-save-wiki'': Similar to tm-save-wiki but not triggered directly by the user but automatically triggered when a wiki page is edited and saved. A [[Saver]] implementation which starts a download of the updated wiki file would not support the auto-save method and would only be used when the tm-save-wiki message is used.
+* ''tm-download-file'': This message also uses the syncer module described in [[Extended Persistence]] but explicitly demands to choose a saver with the download-method to start downloading a single tiddler.
+
+After the root widget is loaded another startup module [[$:/core/modules/startup/render.js]] creates a transclude widget which contains the contents of [[$:/core/ui/PageTemplate]] which is now bound to the browsers DOM document.
+The render function of the transclude widget is initially executed
+and a listener is registered at the store which executes the refresh function of the transclude widget to trigger the [[Selective Update]] process.
+
+[[Techniques for including other tiddlers and Templates|Transclusion and TextReference]] are finally used in [[$:/core/ui/PageTemplate]] to build the TiddlyWiki UI only from tiddlers written in WikiText (with widgets implemented in javascript):
+
+For example to implement the list of open wiki pages the [[$:/core/ui/PageTemplate]] contains a [[navigator widget|$:/core/modules/widgets/navigator.js]] which maintains a list of open tiddlers in a field of [[$:/StoryList]] and handles events like ``tm-navigate`` by adding a tiddler specified as parameter to the top of the list in [[$:/StoryList]].
+The [[story tiddler|$:/core/ui/PageTemplate/story]] transcluded in [[$:/core/ui/PageTemplate]] then uses a ~ListWidget to transclude all tiddlers in [[$:/StoryList]] through a special template [[$:/core/ui/ViewTemplate]].
+A event of the type ``tm-close-tiddler`` would remove a specified tiddler from [[$:/StoryList]].
+The [[Event Mechanism]] would trigger a changed event which triggers a call of the ~ListWidget's refresh function which would remove the tiddler from the list, closing the tiddler.

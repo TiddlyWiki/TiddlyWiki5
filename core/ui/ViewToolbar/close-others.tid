@@ -3,7 +3,7 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/close-others-button}} {{$:/language/Buttons/CloseOthers/Caption}}
 description: {{$:/language/Buttons/CloseOthers/Hint}}
 
-<$button message="tm-close-other-tiddlers" param=<<currentTiddler>> title={{$:/language/Buttons/CloseOthers/Hint}} aria-label={{$:/language/Buttons/CloseOthers/Caption}} class=<<tv-config-toolbar-class>>>
+<$button message="tm-close-other-tiddlers" param=<<currentTiddler>> tooltip={{$:/language/Buttons/CloseOthers/Hint}} aria-label={{$:/language/Buttons/CloseOthers/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/close-others-button}}
 </$list>

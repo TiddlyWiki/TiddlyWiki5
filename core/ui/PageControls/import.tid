@@ -4,7 +4,7 @@ caption: {{$:/core/images/import-button}} {{$:/language/Buttons/Import/Caption}}
 description: {{$:/language/Buttons/Import/Hint}}
 
 <div class="tc-file-input-wrapper">
-<$button title={{$:/language/Buttons/Import/Hint}} aria-label={{$:/language/Buttons/Import/Caption}} class=<<tv-config-toolbar-class>>>
+<$button tooltip={{$:/language/Buttons/Import/Hint}} aria-label={{$:/language/Buttons/Import/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/import-button}}
 </$list>

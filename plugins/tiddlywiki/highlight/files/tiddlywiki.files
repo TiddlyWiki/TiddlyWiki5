@@ -15,7 +15,7 @@
 			"fields": {
 				"type": "text/css",
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.css",
-				"tags": "[[$:/tags/stylesheet]]"
+				"tags": "[[$:/tags/Stylesheet]]"
 			}
 		}
 	]

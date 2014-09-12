@@ -1,7 +1,8 @@
-created: 201309012131
-modified: 201309012131
-tags: demo definitions
+created: 20130901213100000
+modified: 20140912145419929
+tags: Definitions Demonstrations
 title: MathML
+type: text/vnd.tiddlywiki
 
 MathML is a markup language for mathematical notation that can be used with HTML.
 

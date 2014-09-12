@@ -1,0 +1,37 @@
+created: 20140909134102102
+modified: 20140909134102102
+tags: Filters
+caption: regexp
+title: FilterOperator: regexp
+type: text/vnd.tiddlywiki
+
+The ''regexp'' filter operator filters tiddlers that match a regular expression.
+
+Regular expressions are a way of encoding complex string matching criteria. The format is defined fully in [[this Mozilla reference|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions]].
+
+The regexp filter operator takes a fieldname as the optional suffix (defaulting to `title`).
+
+The regular expression itself can start or end with an optional string to specify flags in the format `(?flags)` where flags can be "g", "m" or "i". Only the "i" flag is generally useful: it forces the match to be case-insensitive (ie upper and lower case letters are considered the same).
+
+For example:
+
+|!Filter String |!Description |
+|`[all[tiddlers]regexp[EggCup]]` |Selects all tiddlers that have the CamelCase string "EggCup" in their title |
+|`[all[tiddlers]regexp[eggcup(?i)]]` |Selects all tiddlers that have the string "eggcup" in their title (ignoring case) |
+|`[all[tiddlers]regexp[(?i)\.jpe?g$]]` |Selects all tiddlers with titles ending in ".jpg" or ".jpeg" (ignoring case) |
+|`[all[tiddlers]regexp:modified[^2014]]` |Selects all tiddlers whose modified field starts with the string "2014" |
+
+! Regular Expressions with Square Brackets
+
+Note that the filter syntax doesn't allow you to directly enter regular expressions that include square brackets. Instead, you should use a variable to store the filter string. For example, the following regular expression matches all titles that contain any combination the letters "a", "b" and "c" (with no other characters present).
+
+```
+<$set name="myfilter" value="^[abc]*$">
+<$list filter="[regexp:title<myfilter>]">
+<div>
+<$view field="title"/>
+</div>
+</$list>
+</$set>
+```
+

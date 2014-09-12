@@ -1,0 +1,28 @@
+title: Editions
+tags: TableOfContents
+created: 201409081255
+modified: 201409081255
+
+TiddlyWiki is distributed in several different editions that are tuned for specific purposes. Each one consists of the same TiddlyWiki core components along with the required plugins, documentation and sample content.
+
+You can mix and match the components of these editions, to make a unique solution to your particular application.
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Editions]!sort[modified]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$view field="title"/></$link>
+
+!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

@@ -3,7 +3,7 @@ tags: $:/tags/ViewTemplate
 
 <div class="tc-tiddler-body">
 
-<$list filter="[all[current]!has[plugin-type]]">
+<$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
 <$transclude>
 

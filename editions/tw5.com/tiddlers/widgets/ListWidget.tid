@@ -1,11 +1,12 @@
 created: 201310241419
 modified: 201310300837
-tags: widget
+tags: Widgets
 title: ListWidget
+caption: list
 
 ! Introduction
 
-The list widget displays a sequence of tiddlers that match a [[tiddler filter|TiddlerFilters]]. It can be used for many purposes:
+The list widget displays a sequence of tiddlers that match a [[tiddler filter|Filters]]. It can be used for many purposes:
 
 * Displaying custom lists of links, like in TiddlyWiki5's sidebar
 * Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"

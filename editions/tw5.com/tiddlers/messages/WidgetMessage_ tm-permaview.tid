@@ -1,8 +1,9 @@
 created: 20140723103751357
 modified: 20140723103751357
-tags: message
+tags: Messages
 title: WidgetMessage: tm-permaview
 type: text/vnd.tiddlywiki
+caption: tm-permaview
 
 The `tm-permaview` message changes the browser address bar to form a [[permaview|PermaLinks]] that specifies all the open tiddlers in the main story river, and the tiddler to be navigated, defaulting to the current tiddler.
 

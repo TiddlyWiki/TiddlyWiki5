@@ -1,7 +1,7 @@
 title: UpgradeMechanism
 modified: 20140711090154150
 created: 20140711090154150
-tags: mechanism
+tags: Mechanisms
 
 # Open upgrade.html
 # Includes a data tiddler called `$:/UpgradeLibrary` that contains the latest compatible versions of all plugins in the library

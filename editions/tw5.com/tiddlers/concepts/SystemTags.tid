@@ -1,6 +1,6 @@
 created: 20130822080600000
 modified: 20140906224046452
-tags: concepts
+tags: Concepts
 title: SystemTags
 type: text/vnd.tiddlywiki
 
@@ -31,7 +31,7 @@ These are the available system tags
 * {{$:/tags/Palette||$:/core/ui/TagTemplate}} for colour palettes
 * {{$:/tags/RawMarkup||$:/core/ui/TagTemplate}} for raw markup to be included in the generated HTML file
 * {{$:/tags/SideBar||$:/core/ui/TagTemplate}} for sidebar tabs
-* {{$:/tags/stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
+* {{$:/tags/Stylesheet||$:/core/ui/TagTemplate}} to indicate that a tiddler should be applied as a CSS stylesheet
 * {{$:/tags/TiddlerInfo||$:/core/ui/TagTemplate}} for tiddler info panel tabs
 * {{$:/tags/TiddlerInfo/Advanced||$:/core/ui/TagTemplate}} for tabs under the advanced tiddler tab
 * {{$:/tags/TopLeftBar||$:/core/ui/TagTemplate}} for the top left bar

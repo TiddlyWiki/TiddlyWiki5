@@ -1,0 +1,17 @@
+chapter.of: Extending the Store
+created: 20140710184959721
+modified: 20140715084818289
+sub.num: 3
+tags: doc new
+title: System Tiddlers
+
+The core plug-in introduces a segregation of tiddlers.
+The tiddler model is central in the whole TiddlyWiki application and can be used in various roles.
+Because of the fact that a TiddlyWiki user works with tiddlers (taking the role of a wiki page) and tiddlers are the building blocks of the whole application (including modules, UI elements, etc.) we need to identify the internal tiddlers.
+
+The core plug-in introduces the concept of system tiddlers. It builds on the convention that application internal tiddler names start with ``$:/``.
+Then the core plug-in introduces a set of new functions to the wiki store which are used to retrieve tiddlers like ``getTiddlers(options)`` and ``forEachTiddler(callback, options)``.
+These functions work with all tiddlers in the store but the options parameter provides the ability to sort tiddlers by a field-name and exclude tiddlers with a specific tag.
+By default it doesn't return system tiddlers. To get a list of all tiddlers including system tiddlers, this must be requested explicitly via the options.
+If a function wants to present a list of tiddlers to the user it can use this new functions so that internal application tiddlers wouldn't clutter the resulting list.
+These functions are added via the [[wikimethod module type]].

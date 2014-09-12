@@ -1,4 +1,5 @@
 title: VerboseCommand
-tags: command
+tags: Commands
+caption: verbose
 
 {{$:/language/Help/verbose}}

@@ -1,8 +1,9 @@
 created: 20131205160840915
 modified: 20140619111725471
-tags: wikitext
+tags: WikiText
 title: Widgets in WikiText
 type: text/vnd.tiddlywiki
+caption: Widgets
 
 Widgets provide rich functionality within WikiText. They have the same syntax as [[HTML elements|HTML in WikiText]], but the tag name always starts with `$`. For example:
 

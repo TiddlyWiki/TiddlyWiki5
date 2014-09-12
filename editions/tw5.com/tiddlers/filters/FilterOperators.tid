@@ -1,12 +1,14 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: concepts
+tags: Concepts
 title: FilterOperators
 type: text/vnd.tiddlywiki
 
 \define bulletList(filter)
 <ul><$list filter="$filter$"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
 \end
+Filter operators are the individual elements of [[filters|Filters]]. See [[Introduction to Filters]] for details.
+
 The full list of available filter operators is:
 
-<<bulletList "[tag[filters]]">>
+<<bulletList "[tag[Filters]]">>

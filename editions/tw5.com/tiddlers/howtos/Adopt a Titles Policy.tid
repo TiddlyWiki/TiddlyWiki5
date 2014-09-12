@@ -1,0 +1,22 @@
+created: 20130825103300000
+modified: 20140912150136251
+tags: Learning
+title: Adopt a Titles Policy
+type: text/vnd.tiddlywiki
+
+As the structures within your TiddlyWiki documents get more complex it can be hard to keep the titles of tiddlers consistent. For example, should terms be defined in the plural or the singular? Camel case or separate words?
+
+Recording a formal titling policy can help to reduce confusion. For example, the titling policies for this wiki are:
+
+* Use lowercase single words for tags
+** e.g. [[task]], [[demo]]
+* Use CamelCase for definitions and concepts
+** e.g. TiddlerFields, DeveloperDocs
+* Use separate words for titles that are full phrases or sentences, such as FAQ, howtos or tasks
+** e.g. [[How to build a TiddlyWiki5 from individual tiddlers]]
+* Where TiddlyWiki or TiddlyWiki5 is used as a qualifier at the start of the title, always use separate words
+** e.g. [[Saving with TiddlyFox]]
+
+Policies that may make sense for your own wikis include:
+
+* Use the prefix `$:/_` for any system tiddlers that you create to ensure that they are near the top of the system tiddler listing in the sidebar

@@ -1,0 +1,9 @@
+created: 20140708084152555
+modified: 20140708090258588
+tags: doc
+title: Using Modules to build a Single File Application
+
+TW is built up from the micro kernel and uses the module mechanism to provide various ways of loading and saving tiddlers, including the ability to load and save to a single HTML file.
+Furthermore a developer can extend the application by providing modules with a specific module-type. TW searches for modules with these specific module-types and handles them accordingly.
+
+The last sequence of the boot kernel is to execute startup modules. One of these startup modules ("load-modules") is responsible for registering some modules with specific module types at the right place. For example, the methods exported by wikimethod modules are put in \textit{\$tw.Wiki.prototype}. Other startup modules build up the initial UI and link events to certain modules.

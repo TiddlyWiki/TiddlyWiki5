@@ -1,8 +1,9 @@
 created: 20140830112325641
 modified: 20140830115149288
-tags: message
+tags: Messages
 title: WidgetMessage: tm-auto-save-wiki
 type: text/vnd.tiddlywiki
+caption: tm-auto-save-wiki
 
 The autosave wiki message causes the current saver module to perform a background save if it is required.
 

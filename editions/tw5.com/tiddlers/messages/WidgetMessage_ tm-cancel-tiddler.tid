@@ -1,8 +1,9 @@
 created: 20140226193622350
 modified: 20140226193906089
-tags: message navigator-message
+tags: Messages navigator-message
 title: WidgetMessage: tm-cancel-tiddler
 type: text/vnd.tiddlywiki
+caption: tm-cancel-tiddler
 
 The `tm-cancel-tiddler` message abandons the changes in a draft tiddler. It requires the following properties on the `event` object:
 

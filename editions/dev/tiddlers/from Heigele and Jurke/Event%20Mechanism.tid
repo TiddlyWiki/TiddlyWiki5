@@ -1,0 +1,14 @@
+chapter.of: Extending the Store
+created: 20140710184910226
+modified: 20140717201408167
+sub.num: 1
+tags: doc new
+title: Event Mechanism
+
+Most of the following mechanisms need a way to get notified, when anything in the wiki store changes.
+The core -plug-in adds an event system to the bare wiki store.
+The event system provides the ability to listen to events. The most important is the "change" event which notifies the listeners when tiddlers have changed, with a list of the changed tiddlers.
+The event mechanism is one of the few mechanisms which needs a hook at the microkernel:
+The microkernel contains an empty function "enqueueTiddlerEvent(event)" and calls this function when a tiddler is added or deleted.
+The event mechanism from the core plug-in overwrites this function with it's own implementation.
+The functions providing the event system are added via the [[wikimethod module type]].

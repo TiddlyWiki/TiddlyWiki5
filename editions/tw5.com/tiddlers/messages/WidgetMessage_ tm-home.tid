@@ -1,8 +1,9 @@
 created: 20140819110529062
 modified: 20140819110529062
-tags: message
+tags: Messages
 title: WidgetMessage: tm-home
 type: text/vnd.tiddlywiki
+caption: tm-home
 
 The `tm-home` message closes any open tiddlers and re-opens the default tiddlers set in [[$:/DefaultTiddlers]]. It also remove any [[permalink|PermaLinks]] from the browser address bar. It does not require any properties on the `event` object.
 

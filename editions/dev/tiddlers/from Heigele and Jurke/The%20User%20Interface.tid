@@ -1,0 +1,14 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708082154372
+modified: 20140715083432391
+sub.num: 4
+tags: doc
+title: The User Interface
+
+Following the "anything is a tiddler" concept, even the UI consists of tiddlers.
+This is possible because tiddlers can not only contain plain text or JavaScript (modules) but they also can contain a special markup text called WikiText.
+By using WikiText the user can put markup elements like tables or images in a tiddler.
+To provide some more sophisticated UI elements, WikiText can also contain special widgets like text input fields,
+checkboxes, dynamic lists etc.
+In most cases, these widgets are used to directly modify or represent the information contained in other tiddlers.
+If a tiddler is changed and this change should reflect in an UI element e.g. a widget, a process called selective update takes place. Selective updating means when a tiddler or a set of tiddlers changes, each widget is asked, if changes to this tiddlers would affect its appearance. If so, the respective widget is re-rendered otherwise it remains unchanged.

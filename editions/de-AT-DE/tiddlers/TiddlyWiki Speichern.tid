@@ -1,0 +1,16 @@
+created: 20140909075632780
+creator: pmario
+modified: 20140909081515599
+title: TiddlyWiki Speichern
+type: text/vnd.tiddlywiki
+
+!! Ein leeres Dokument speichern
+
+|{{$:/editions/de-AT-DE/snippets/download-empty-button}}|Nur TiddlyWiki und die deutschen Sprachdateien für Deutschland und Österreich werden gespeichert. Die Standardeinstellung wird auf "de-DE" für Deuschland gestellt. Die Sprache kann mit dem ''[[Control Panel|$:/ControlPanel]]: Info - Tab''  geändert werden. |
+
+!! Dieses Dokument speichern
+|{{$:/snippets/download-wiki-button}}|Dieses Tiddlywiki und alle enthaltenen Tiddler werden gespeichert. Die selbe Funktion kann über den  {{$:/core/images/save-button}} ''speichern'' Button im rechten Menü ausgelöst werden. |
+
+----
+
+Weitere Informationen zum Umgang mit ~TiddlyWiki und unterschiedlichen Browsern finden sie unter: ErsteSchritte

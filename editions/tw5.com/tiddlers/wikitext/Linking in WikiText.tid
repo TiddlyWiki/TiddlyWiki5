@@ -1,8 +1,9 @@
 created: 20131205155230596
 modified: 20130706185813974
-tags: wikitext
+tags: WikiText
 title: Linking in WikiText
 type: text/vnd.tiddlywiki
+caption: Linking
 
 A key capability of WikiText is the ability to make links to other tiddlers or to external websites.
 

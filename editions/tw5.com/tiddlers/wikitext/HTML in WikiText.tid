@@ -1,8 +1,9 @@
 created: 20131205160816081
 modified: 20140619111725471
-tags: wikitext
+tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
+caption: HTML
 
 HTML tags and comments can be used directly in WikiText. For example:
 

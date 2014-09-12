@@ -3,7 +3,7 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/close-all-button}} {{$:/language/Buttons/CloseAll/Caption}}
 description: {{$:/language/Buttons/CloseAll/Hint}}
 
-<$button message="tm-close-all-tiddlers" title={{$:/language/Buttons/CloseAll/Hint}} aria-label={{$:/language/Buttons/CloseAll/Caption}} class=<<tv-config-toolbar-class>>>
+<$button message="tm-close-all-tiddlers" tooltip={{$:/language/Buttons/CloseAll/Hint}} aria-label={{$:/language/Buttons/CloseAll/Caption}} class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/close-all-button}}
 </$list>

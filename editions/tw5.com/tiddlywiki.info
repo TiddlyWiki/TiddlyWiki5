@@ -42,6 +42,7 @@
 			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],
 		"readmes": [
 			"--rendertiddler","ReadMe","readme.md","text/html",
+			"--rendertiddler","ReadMeBinFolder","bin/readme.md","text/html",
 			"--rendertiddler","ContributingTemplate","contributing.md","text/html",
 			"--rendertiddler","$:/core/copyright.txt","licenses/copyright.md","text/plain"],
 		"tw2": [

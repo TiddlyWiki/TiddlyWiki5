@@ -1,0 +1,75 @@
+chapter.of: UI and Rendering Pipeline
+created: 20140717174825427
+modified: 20140717181845115
+sub.num: 4
+tags: doc
+title: Transclusion and TextReference
+
+The previous parts about [[Widgets]] and the [[Parser]] explained how a block of WikiText is transformed into a DOM representation and how this presentation can react on changes to the wiki store.
+The previous chapters also describe that WikiText is saved in individual tiddlers, including the WikiText describing the UI components.
+This raises the question, how these multiple tiddlers are build up to a single UI.
+But before answering this question we need to introduce text references and transclusion.
+
+!!! ~TextReference
+A text reference describes a special notation to indirectly refer to the contents of a specified tiddler field.
+The syntax of a text reference is:
+
+```
+<tiddlertitle>
+<tiddlertitle>!!<fieldname>
+!!<fieldname> - specifies a field of the current tiddlers
+```
+
+To obtain the actual text, the core plug-in adds a function to the wiki store ``getTextReference(textRef,defaultText,currTiddlerTitle)``. The "currentTiddlerTitle" is the title of a tiddler which is used when no tiddlerTitle is specified in the text reference.
+What the currentTiddler should be, depends on where the text reference is used.
+If it is for example used as a widget attribute, the current tiddler is the tiddler which contains this widget.
+Text references are used by widgets (attributes), filteroperators (parameter) and in transclusions.
+These elements use the ``getTextReference(textRef,defaultText,currTiddlerTitle)`` function.
+
+!!! Transclusion
+
+Transclusion means including the contents of a different tiddler.
+This is realized with a transclude widget which parses the tiddler to be included and adds the resulting nodes as children of its own parse node.
+The trick with transclusion is, that it shows the content of a different tiddler but by default it does not change the current tiddler.
+This enables us to create tiddlers with text references and use them as a templates.
+
+For example:
+Tiddler ``MyTask`` having the fields and the content of:
+
+```
+important: "very"
+assoc.person: "Hans Dampf"
+
+<$transclude tiddler="TaskHeaderTemplate" />
+
+Hans needs some more Dampf.
+```
+
+And Tiddler ``TaskHeaderTemplate`` with a content of:
+
+```
+<$view field="assoc.person"/> has a <$view field="important"/> important task for us:
+```
+
+When showing tiddler ``MyTask`` it would result in:
+
+```
+Hans Dampf has a very important task for us:
+
+Hans needs some more Dampf.
+```
+
+Transclusion and templates is one of the most important concepts in TiddlyWiki.
+It allows us to include other tiddlers using the metadata for our current tiddler.
+It also allows us to transclude a template tiddler with a third tiddler set as the currentTiddler with the ~TiddlerWidget:
+
+```
+<$tiddler tiddler="MyTiddler">
+<$transclude tiddler="EditTemplate" />
+</$tiddler>
+```
+
+This way we can create a different view on a tiddler which does not only show it's title and it's content
+but shows it's content and metadata in editable text fields and allows us to edit this tiddler.
+Also the template concept is used by the ~ListWidget to show the tiddlers through a specified template.
+Finally, when wanting to download the wiki as a new html file, this html file is created by binding a list of all tiddlers to a template and sending the resulting text to the syncer module described in [[Extended Persistence]] to save the current wiki.

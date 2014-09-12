@@ -1,6 +1,6 @@
 created: 20140320230543190
 modified: 20140320231444981
-tags: introduction community
+tags: HelloThere Community
 title: Examples
 type: text/vnd.tiddlywiki
 
@@ -10,7 +10,7 @@ Submit new entries to this collection via GitHub, Twitter or by posting in the [
 
 <div class="tc-link-info">
 
-<$list filter="[tag[examples]!sort[modified]]">
+<$list filter="[tag[Examples]!sort[modified]]">
 
 <div class="tc-link-info-item">
 

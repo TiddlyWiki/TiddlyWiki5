@@ -64,12 +64,12 @@ $:/config/Plugins/Disabled/$(currentTiddler)$
 <$list filter="[all[current]] -[[$:/core]]">
 <div style="float:right;">
 <$reveal type="nomatch" state=<<plugin-disable-title>> text="yes">
-<$button set=<<plugin-disable-title>> setTo="yes" title={{$:/language/ControlPanel/Plugins/Disable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Disable/Caption}}>
+<$button set=<<plugin-disable-title>> setTo="yes" tooltip={{$:/language/ControlPanel/Plugins/Disable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Disable/Caption}}>
 <<lingo Disable/Caption>>
 </$button>
 </$reveal>
 <$reveal type="match" state=<<plugin-disable-title>> text="yes">
-<$button set=<<plugin-disable-title>> setTo="no" title={{$:/language/ControlPanel/Plugins/Enable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Enable/Caption}}>
+<$button set=<<plugin-disable-title>> setTo="no" tooltip={{$:/language/ControlPanel/Plugins/Enable/Hint}} aria-label={{$:/language/ControlPanel/Plugins/Enable/Caption}}>
 <<lingo Enable/Caption>>
 </$button>
 </$reveal>

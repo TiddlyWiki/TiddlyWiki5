@@ -1,8 +1,0 @@
-title: Customize your TiddlyWiki
-tags: TableOfContents
-created: 201409041016
-modified: 201409041016
-
-<div class='tc-table-of-contents'>
-<<toc-selective-expandable 'Customize your TiddlyWiki'>>
-</div>

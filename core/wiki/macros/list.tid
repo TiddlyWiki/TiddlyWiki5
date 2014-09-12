@@ -1,0 +1,14 @@
+title: $:/core/macros/list
+tags: $:/tags/Macro
+
+\define list-unordered-links(filter)
+<ul>
+<$list filter="$filter$">
+<li>
+<$link to={{!!title}}>
+<$view field="title"/>
+</$link>
+</li>
+</$list>
+</ul>
+\end
