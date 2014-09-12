@@ -1,18 +1,20 @@
 #!/bin/bash
 #
-# This script allows you to serve different TiddlyWiki editions. 
+# This script allows you to serve different TiddlyWiki editions.
+#
 # It respects the TIDDLYWIKI_EDITION_PATH variable described
 # at: # http://tiddlywiki.com/#Environment%20Variables%20on%20Node.js
 #
-# Be sure your server tiddlywiki.info configuration contains the plugins:
-#   - "tiddlywiki/tiddlyweb" and the "tiddlywiki/filesystem"
-#   - Otherwise saving is not possible. 
+# Ensure your server tiddlywiki.info configuration contains
+# these plugins, otherwise saving is not possible:
+#    - "tiddlywiki/tiddlyweb"
+#    - "tiddlywiki/filesystem"
 
-# global settings
+# Global settings
 # set -o nounset	#exit if a variable is not set
 set -o errexit	#exit on error
 
-# get command name and path info needed for help text
+# Get command name and path info needed for help text
 ARG0=$(basename $0)
 #ARG0DIR=$(dirname $0)
 #[ $ARG0DIR == "." ] && ARG0DIR=$PWD
@@ -34,7 +36,7 @@ help() {
 
 	echo Optional parameters
 	echo
-	echo $'\t'\$1 .. editions directory .. full path or relative to current directory
+	echo $'\t'\$1 .. edition directory .. full or relative path to edition directory
 	echo $'\t'\$2 .. username for signing edits - can be empty like this: \"\"
 	echo $'\t'\$3 .. password - can be empty like this: \"\"
 	echo $'\t'\$4 .. IP address or HOST name .. defaults to: localhost
@@ -74,7 +76,7 @@ serve () {
 check_edition_directory () {
 	# The editions directory must exist and should contain a tiddlywiki.info file
 	if [ ! -d $TIDDLYWIKI_EDITION_PATH ]; then
-		_log "Edition directory: '$TIDDLYWIKI_EDITION_PATH' doesn't exist. Create it!"
+		_log "Edition directory: '$TIDDLYWIKI_EDITION_PATH' does not exist"
 		exit 1
 	fi
 }
@@ -100,7 +102,7 @@ if [ $# -eq 0 ]; then
 	# check if the edition path environment variable is set. If yes use it.
 	[ -z $TIDDLYWIKI_EDITION_PATH ] && TIDDLYWIKI_EDITION_PATH="./editions/tw5.com-server"
 
-	# directory must exist!
+	# directory must exist
 	check_edition_directory
 
 	# serve the default settings.
@@ -115,7 +117,7 @@ else
 	# If the 1st parameter (edition) is set, it has priority.
 	TIDDLYWIKI_EDITION_PATH=$1
 
-	# directory must exist!
+	# directory must exist
 	check_edition_directory
 
 	serve "$TIDDLYWIKI_EDITION_PATH" "$2" "$3" "$4" $PORT

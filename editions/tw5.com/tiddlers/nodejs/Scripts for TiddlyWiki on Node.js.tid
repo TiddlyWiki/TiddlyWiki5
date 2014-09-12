@@ -85,3 +85,5 @@ This script builds TiddlyWiki 2.6.5 from the original source and then displays t
 !! `deploy` & `verbump`: deploy TiddlyWiki and bump the TiddlyWiki version number
 
 These scripts are concerned with releasing a new version of TiddlyWiki. See [[Releasing a new version of TiddlyWiki5]].
+
+<!-- TODO: Update docs in line with latest version of serve.sh/serve.cmd -->

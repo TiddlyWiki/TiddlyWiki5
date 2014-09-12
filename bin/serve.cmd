@@ -1,19 +1,19 @@
-:: This file uses the default settings for Jeremy and 
-:: provides some help and more parameters for the rest of us.
-
 :: This script allows you to serve different TiddlyWiki editions. 
+::
 :: It respects the TIDDLYWIKI_EDITION_PATH variable described
 :: at: # http://tiddlywiki.com/#Environment%20Variables%20on%20Node.js
 ::
-:: Be sure your server tiddlywiki.info configuration contains the plugins:
-::   - "tiddlywiki/tiddlyweb" and the "tiddlywiki/filesystem"
-::   - Otherwise saving is not possible. 
+:: Ensure your server tiddlywiki.info configuration contains
+:: these plugins, otherwise saving is not possible:
+::
+::   - "tiddlywiki/tiddlyweb"
+::   - "tiddlywiki/filesystem"
 
 @echo off
 echo.
 
-:: Help wanted!! 
-:: If someone knows, how to improve -help and -version handling tell me :)
+:: Help Wanted!! 
+:: If you know how to improve -help and -version handling let us know
 
 if "%1" == "--help" call :help
 if "%1" == "-h" call :help
@@ -35,10 +35,10 @@ exit 0
 goto:eof
 
 :help
-echo Serve TiddlyWiki5 over HTTP
+echo Serve TiddlyWiki over HTTP
 echo.
 echo Optional parameters
-echo  - %%1 .. editions directory	.. full path or relative to current directory
+echo  - %%1 .. edition directory	.. full or relative path to edition directory
 echo  - %%2 .. username 		.. for signing edits - can be empty like this: '""'
 echo  - %%3 .. password 		.. can be empty like this: '""'
 echo  - %%4 .. IP address or HOST 	.. defaults to localhost
@@ -62,10 +62,10 @@ if [%1] NEQ [] (
 	set TIDDLYWIKI_EDITION_PATH=%1
 ) else (
 	if [%TIDDLYWIKI_EDITION_PATH%] == [] (
-		echo Provide an edition path as your first parameter or
-		echo Define a valid TIDDLYWIKI_EDITION_PATH environment variable.
+		echo Please provide an edition path as your first parameter or
+		echo define a valid TIDDLYWIKI_EDITION_PATH environment variable.
 		echo.
-		echo No environment variable set, using the default settings!
+		echo Using default edition path 'editions\tw5.com-server' because no environment variable is set
 		echo.
 		set TIDDLYWIKI_EDITION_PATH= editions\tw5.com-server
 	)
@@ -73,7 +73,7 @@ if [%1] NEQ [] (
 
 :: The editions path must exist!
 if not exist %TIDDLYWIKI_EDITION_PATH%\nul (
-	echo The Path: "%TIDDLYWIKI_EDITION_PATH%" doesn't exist. Create it!
+	echo The Path: "%TIDDLYWIKI_EDITION_PATH%" does not exist
 	exit 1
 )
 
@@ -85,7 +85,7 @@ if [%5] == [] (
 	set PORT=%5
 )
 
-echo Using edition: %TIDDLYWIKI_EDITION_PATH% !!
+echo Using edition: %TIDDLYWIKI_EDITION_PATH%
 echo.
 
 node .\tiddlywiki.js ^
@@ -94,4 +94,3 @@ node .\tiddlywiki.js ^
 	--server %PORT% $:/core/save/all text/plain text/html %2 %3 %4^
 	|| exit 1
 goto:eof
-
