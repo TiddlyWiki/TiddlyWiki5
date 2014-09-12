@@ -54,7 +54,7 @@ _log () {
 	echo "---> $1"
 }
 
-# error handling
+# error handling for wrong parameters
 error() {
     echo "$ARG0: $*" 1>&2
     exit 1
