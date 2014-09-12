@@ -1,6 +1,14 @@
 :: This file uses the default settings for Jeremy and 
 :: provides some help and more parameters for the rest of us.
 
+:: This script allows you to serve different TiddlyWiki editions. 
+:: It respects the TIDDLYWIKI_EDITION_PATH variable described
+:: at: # http://tiddlywiki.com/#Environment%20Variables%20on%20Node.js
+::
+:: Be sure your server tiddlywiki.info configuration contains the plugins:
+::   - "tiddlywiki/tiddlyweb" and the "tiddlywiki/filesystem"
+::   - Otherwise saving is not possible. 
+
 @echo off
 echo.
 
