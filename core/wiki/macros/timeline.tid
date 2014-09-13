@@ -1,9 +1,9 @@
 title: $:/core/macros/timeline
 tags: $:/tags/Macro
 
-\define timeline(limit:"100",format:"DDth MMM YYYY")
+\define timeline(limit:"100",format:"DDth MMM YYYY",subfilter:"")
 <div class="tc-timeline">
-<$list filter="[!is[system]has[modified]!sort[modified]limit[$limit$]eachday[modified]]">
+<$list filter="[!is[system]$subfilter$has[modified]!sort[modified]limit[$limit$]eachday[modified]]">
 <div class="tc-menu-list-item">
 <$view field="modified" format="date" template="$format$"/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
