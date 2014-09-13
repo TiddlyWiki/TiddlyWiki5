@@ -1,0 +1,11 @@
+title: $:/core/ui/ControlPanel/Settings/AutoSave
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/AutoSave/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/AutoSave/
+
+<$link to="$:/config/AutoSave"><<lingo Hint>></$link>
+
+<$radio tiddler="$:/config/AutoSave" value="yes"> <<lingo Enabled/Description>> </$radio>
+
+<$radio tiddler="$:/config/AutoSave" value="no"> <<lingo Disabled/Description>> </$radio>

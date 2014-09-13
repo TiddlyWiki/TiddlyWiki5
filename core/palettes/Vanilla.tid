@@ -13,6 +13,7 @@ blockquote-bar: <<colour muted-foreground>>
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
+dirty-indicator: #ff0000
 download-background: #34c734
 download-foreground: <<colour background>>
 dragger-background: <<colour foreground>>
@@ -22,10 +23,10 @@ dropdown-border: <<colour muted-foreground>>
 dropdown-tab-background-selected: #fff
 dropdown-tab-background: #ececec
 dropzone-background: rgba(0,200,0,0.7)
-external-link-background-hover: 
-external-link-background-visited: 
-external-link-background: 
-external-link-foreground-hover: 
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
 external-link-foreground-visited: #0000aa
 external-link-foreground: #0000ee
 foreground: #333333
@@ -47,7 +48,7 @@ pre-border: #cccccc
 primary: #5778d8
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
-sidebar-controls-foreground: #ffffff
+sidebar-controls-foreground: #aaaaaa
 sidebar-foreground-shadow: rgba(255,255,255, 0.8)
 sidebar-foreground: #acacac
 sidebar-muted-foreground-hover: #444444

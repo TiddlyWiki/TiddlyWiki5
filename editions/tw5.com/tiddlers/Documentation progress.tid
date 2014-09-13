@@ -1,0 +1,81 @@
+title: Documentation progress
+tags:
+created: 201409041656
+modified: 201409041656
+
+Since new user documentation is a multiple-user, time-sensitive project, I have prepared the following list to help coordinate our efforts. Please sign up next to a tiddler to volunteer to write it. Feel free to add the names of other documentation tiddlers that you think are needed, and edit the titles or content of any tiddlers already edited. //(Note that developer tiddlers are moving from tiddlywiki.html to another location and so are not needed here).//
+
+''~HelloThere section''
+
+*HelloThere - first draft of rewrite done by Dave Gifford
+*[[Discover TiddlyWiki]] - Dave Gifford (first draft done)
+**[[TiddlyWiki is a tool]] - Dave Gifford (first draft done)
+**[[TiddlyWiki is a toolbox]] - Dave Gifford (first draft done)
+**[[TiddlyWiki is a community]] - Dave Gifford (first draft done)
+**[[TiddlyWiki is a philosophy]] - Dave Gifford (first draft done)
+*[[Ten reasons to switch to TiddlyWiki]] - Dave Gifford (first draft done)
+*[[Some of the things you can do with TiddlyWiki]] - Dave Gifford (first draft done)
+*[[Examples of TiddlyWiki in the wild]]
+*[[The history of TiddlyWiki]]
+*[[What happened to the other TiddlyWiki?]] - Dave Gifford (first draft done)
+
+''Working with ~TiddlyWiki section''
+
+*[[Working with TiddlyWiki]] - just needs a blank tiddler tagged TableOfContents and tc-no-link
+*[[Downloading and saving]]
+*[[Initial customisation]]
+*[[Creating, tagging and editing tiddlers]] - Dave Gifford (first draft done)
+*[[Navigating between tiddlers]] - Dave Gifford (will write)
+*[[Searching in TiddlyWiki]] - Dave Gifford (first draft done)
+*[[Formatting text in TiddlyWiki]]
+*[[Upgrading TiddlyWiki and importing tiddlers]]
+*[[Hosting your TiddlyWiki on the web]]
+
+''Customise your ~TiddlyWiki section''
+
+*[[Customise your TiddlyWiki]] - just needs a blank tiddler tagged TableOfContents and tc-no-link
+*[[Initial customisation]]
+*[[Button configuration]]
+*[[Colours]]
+*[[Page and tiddler layout customisation]] - Dave Gifford (will write)
+*[[StoryView and animation speed]] - Dave Gifford (will write)
+*[[Themes]]
+*[[Using StyleSheets]]
+
+''~TiddlyWiki advanced features section''
+
+*[[TiddlyWiki advanced features]] - just needs a blank tiddler tagged TableOfContents and tc-no-link
+*[[Filters overview]]
+*[[Macros overview]]
+*[[Plugins overview]]
+*[[Widgets overview]]
+
+''~TiddlyWiki editions and special uses section''
+
+*[[TiddlyWiki editions and special uses]] - just needs a blank tiddler tagged TableOfContents and tc-no-link
+*[[TiddlyWiki standalone]]
+*[[Node.js edition]]
+*[[TiddlyDesktop]]
+*[[Windows HTA Hack]]
+*[[Build a TiddlyWiki5 from individual tiddlers]]
+*[[Building TiddlyWikiClassic]]
+*[[Generating Static Sites with TiddlyWiki]]
+
+''Get help and learn more section''
+
+*[[Get help and learn more]] - just needs a blank tiddler tagged TableOfContents and tc-no-link
+*[[The TiddlyWiki community]] - Dave Gifford (will write)
+*[[Sites with resources for TiddlyWiki]] - Dave Gifford (will write)
+*[[TiddlyWiki tutorials]] - Dave Gifford (will write)
+*[[TiddlyWiki adaptations]] - Dave Gifford (will write)
+*[[Articles about TiddlyWiki]] - Dave Gifford (will write)
+
+''Get involved section''
+
+*[[Get involved]] - just needs a blank tiddler tagged TableOfContents and tc-no-link
+*[[Create support resources]]
+*[[Develop for TiddlyWiki]]
+*[[Help us with documentation]] - Dave Gifford (will rename [[Improving TiddlyWiki Documentation]] and double-check text for clarity)
+*[[Promote TiddlyWiki]]
+*[[Report bugs]]
+*[[Translate TiddlyWiki into your language]]

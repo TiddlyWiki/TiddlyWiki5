@@ -11,5 +11,8 @@
 	],
 	"includeWikis": [
 		"../tw5.com"
-	]
+	],
+	"config": {
+		"default-tiddler-location": "../tw5.com/tiddlers"
+	}
 }

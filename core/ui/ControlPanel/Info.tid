@@ -1,0 +1,9 @@
+title: $:/core/ui/ControlPanel/Info
+tags: $:/tags/ControlPanel
+caption: {{$:/language/ControlPanel/Info/Caption}}
+
+{{$:/language/ControlPanel/Info/Hint}}
+
+<div class="tc-control-panel">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Info]!has[draft.of]]" "$:/core/ui/ControlPanel/Basics">>
+</div>

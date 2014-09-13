@@ -1,6 +1,6 @@
 created: 20140502213500000
-modified: 20140502213500000
-tags: concepts
+modified: 20140912141257569
+tags: Features Concepts
 title: PermaLinks
 type: text/vnd.tiddlywiki
 
@@ -20,7 +20,7 @@ Note that double square brackets are not required around the target tiddler titl
 
 ! Story Permalinks
 
-The permalink can also specify the story list of tiddlers that should be opened alongside the target tiddler as a [[TiddlerFilter|TiddlerFilters]]:
+The permalink can also specify the story list of tiddlers that should be opened alongside the target tiddler as a [[TiddlerFilter|Filters]]:
 
 [[http://tiddlywiki.com/#TiddlerFields:Tiddlers TiddlerTags TiddlerFields ContentType]]
 

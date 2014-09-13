@@ -18,7 +18,7 @@ var ScrollableWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 	this.scaleFactor = 1;
 	this.addEventListeners([
-		{type: "tw-scroll", handler: "handleScrollEvent"}
+		{type: "tm-scroll", handler: "handleScrollEvent"}
 	]);
 	if($tw.browser) {
 		this.requestAnimationFrame = window.requestAnimationFrame ||

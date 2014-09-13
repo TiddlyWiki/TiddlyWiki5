@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Speichert eine Gruppe von Tiddler in ein Verzeichnis
+
+Speichert eine Gruppe von Tiddler im Text- oder Binärformat in ein angegebenes Verzeichnis.
+
+```
+--savetiddlers <filter> <pathname>
+```
+
+Standardmäßig ist das `output` Verzeichnis ein Unterverzeichnis im `edition` Verzeichnis. Der `--output` Befehl kann verwendet werden, um ein anderes Verzeichnis auszuwählen.
+
+Nicht vorhandene Verzeichnisse im Pfadnamen werden automatisch erstellt.

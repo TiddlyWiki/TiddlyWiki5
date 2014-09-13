@@ -1,3 +1,4 @@
 title: $:/language/Docs/Types/text/x-tiddlywiki
-description: TiddlyWiki Classic Wikitext
+description: TWc - TiddlyWiki Classic Wikitext
 name: text/x-tiddlywiki
+group: Text

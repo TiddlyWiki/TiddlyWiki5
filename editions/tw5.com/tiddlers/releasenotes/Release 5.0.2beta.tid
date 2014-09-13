@@ -1,0 +1,31 @@
+created: 20131211074600007
+modified: 20131215142414174
+tags: BetaReleaseNotes
+title: Release 5.0.2-beta
+type: text/vnd.tiddlywiki
+released: 201312151436
+caption: 5.0.2-beta
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.1-alpha...v5.0.2-beta]]//
+
+!! Improvements
+
+* Added support for [[Hard Linebreaks in WikiText]]
+* Added a new RadioWidget, contributed by StephanHradek (@Skeeve on GitHub)
+* Two new savers for InternetExplorer, both contributed by DavidJade (@davidjade on GitHub)
+** ''tiddlyie'' for [[saving with TiddlyIE|Saving with TiddlyIE]], an equivalent of TiddlyFox for InternetExplorer
+** ''fsosaver'' that can [[save changes directly with InternetExplorer|Saving on InternetExplorer]] but requires the HTML file to be renamed `*.hta`
+
+!! Bug fixes
+
+* Fixed problem deleting tiddlers under the filesystemadaptor
+* Fixed problem with transcluding fields containing lists or dates (eg, `{{!!tags}}`)
+* Fixed problem with re-ordering page control tiddlers (ie tiddlers tagged `$:/tags/PageControls`)
+* Update template used for deploying to TiddlyWeb
+* Fixed problem with tiddler deletions via the file system adaptor
+
+!! Internal changes
+
+* Allowed variable number of arguments to [[JavaScript Macros]]
+** Contributed by StephanHradek (@Skeeve on GitHub)
+* Changed the format of plugin tiddlers to remove duplicated information (see the PluginMechanism)

@@ -18,11 +18,8 @@ Create a widget object for a parse tree node
 	options: see below
 Options include:
 	wiki: mandatory reference to wiki associated with this render tree
-	variables: optional hashmap of context variables (see below)
 	parentWidget: optional reference to a parent renderer node for the context chain
 	document: optional document object to use instead of global document
-Context variables include:
-	currentTiddler: title of the tiddler providing the context
 */
 var Widget = function(parseTreeNode,options) {
 	if(arguments.length > 0) {
@@ -136,7 +133,7 @@ Widget.prototype.substituteVariableParameters = function(text,formalParams,actua
 
 Widget.prototype.substituteVariableReferences = function(text) {
 	var self = this;
-	return text.replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
+	return (text || "").replace(/\$\(([^\)\$]+)\)\$/g,function(match,p1,offset,string) {
 		return self.getVariable(p1,{defaultValue: ""});
 	});
 };
@@ -174,7 +171,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 		else for(var i=0; i<actualParams.length; ++i) {
 			args.push(actualParams[i].value);
 		}
-		return macro.run.apply(this,args)
+		return macro.run.apply(this,args);
 	} else {
 		return defaultValue;
 	}
@@ -266,9 +263,14 @@ Widget.prototype.assignAttributes = function(domNode,options) {
 			v = undefined;
 		}
 		if(v !== undefined) {
+			var b = a.split(":");
 			// Setting certain attributes can cause a DOM error (eg xmlns on the svg element)
 			try {
-				domNode.setAttributeNS(null,a,v);
+				if (b.length == 2 && b[0] == "xlink"){
+					domNode.setAttributeNS("http://www.w3.org/1999/xlink",b[1],v);
+				} else {
+					domNode.setAttributeNS(null,a,v);
+				}
 			} catch(e) {
 			}
 		}
@@ -292,7 +294,7 @@ Construct the widget object for a parse tree node
 Widget.prototype.makeChildWidget = function(parseTreeNode) {
 	var WidgetClass = this.widgetClasses[parseTreeNode.type];
 	if(!WidgetClass) {
-		WidgetClass = this.widgetClasses["text"];
+		WidgetClass = this.widgetClasses.text;
 		parseTreeNode = {type: "text", text: "Undefined widget '" + parseTreeNode.type + "'"};
 	}
 	return new WidgetClass(parseTreeNode,{
@@ -360,8 +362,7 @@ Widget.prototype.addEventListener = function(type,handler) {
 	} else { // The handler is a function
 		this.eventListeners[type] = function(event) {
 			return handler.call(self,event);
-		}
-
+		};
 	}
 };
 

@@ -27,4 +27,10 @@ Par exemple :
 --server 8080 $:/core/save/all text/plain text/html MonNomUtilisateur m0tdepa55e
 ```
 
-Si vous souhaitez faire tourner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner à chacun un port différent.
+Le nom d'utilisateur et le mot de passe peuvent être spécifiés en tant que chaînes vides si vous avez besoin d'indiquer le nom de machine ou le préfixe de chemin sans pour autant demander un mot de passe :
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Si vous souhaitez faire fonctionner plusieurs serveurs TiddlyWiki en même temps sur la même machine, vous devrez leur assigner à chacun un port différent.

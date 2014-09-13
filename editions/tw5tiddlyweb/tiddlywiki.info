@@ -1,6 +1,5 @@
 {
 	"plugins": [
-		"tiddlywiki/fullscreen",
 		"tiddlywiki/tiddlyweb"
 	],
 	"themes": [

@@ -45,6 +45,6 @@ var prepare_results = function (source) {
 		results.push(title);
 	});
 	return results;
-}
+};
 
 })();

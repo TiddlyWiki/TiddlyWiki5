@@ -1,0 +1,7 @@
+title: $:/config/ViewToolbarButtons/Visibility/$:/
+
+core/ui/Buttons/clone: hide
+core/ui/Buttons/close-others: hide
+core/ui/Buttons/more-tiddler-actions: hide
+core/ui/Buttons/permalink: hide
+core/ui/Buttons/permaview: hide

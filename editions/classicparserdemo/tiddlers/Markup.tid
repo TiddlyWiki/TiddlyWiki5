@@ -1,0 +1,101 @@
+created: 20130205062501000
+creator: tobibeer
+modified: 20140831153103538
+modifier: tobibeer
+title: Markup
+type: text/x-tiddlywiki
+
+TiddlyWiki markup is a dedicated markup syntax to <<tag Formatting "format your content">> using WikiText... 
+|noLinkify|k
+|width:250px; !Example | !Example Markup |h
+| how the example markup renders | what to enter as tiddler text |
+|>| ![[Basic Text Formatting|Basic Formatting]] |
+|''bold''|{{{''bold''}}} (two __single__-quotes) |
+|//italics//|{{{//italics//}}} |
+|''//bold italics//''|{{{''//bold italics//''}}} |
+|__underline__|{{{__underline__}}} |
+|--strikethrough--|{{{--strikethrough--}}} |
+|super^^script^^|{{{super^^script^^}}} |
+|sub~~script~~|{{{sub~~script~~}}} |
+|@@highlight@@|{{{@@highlight@@}}} |
+|foo -- bar|{{{foo -- bar}}} -- two dashes create an Em dash|
+|>| ![[Avoiding Wikification|Suppressing Formatting]] |
+|to output text as-is (escaping), enclose it in three double quotes or use the {{{<nowiki>}}} markup|>|
+|"""plain//text""" |{{{"""plain//text"""}}}|
+|<nowiki>not__wikified</nowiki>|{{{<nowiki>not__wikified</nowiki>}}}|
+|>| ![[Headings]] |
+|start a new line with one or more question marks to create headings |>|
+|<html><h1>Heading 1</h1><h2>Heading 2</h2><h3>Heading 3</h3><h4>Heading 4</h4><h5>Heading 5</h5></html>|{{{!Heading 1}}}<br />{{{!!Heading 2}}}<br />{{{!!!Heading 3}}}<br />{{{!!!!Heading 4}}}<br />{{{!!!!!Heading 5}}}|
+|>|![[Lists]]|
+|>| [[Ordered Lists|Lists]] |
+|<html><ol><li>item one</li><li>item two<ol><li>level two<ol><li>level three</li></ol></li></ol></li></ol></li></ol></html>|{{{#item one}}}<br/>{{{#item  two}}}<br/>{{{##level two}}}<br/>{{{###level three}}}|
+|>| [[Unordered Lists|Lists]] |
+|<html><ul><li>item one</li><li>item two<ul><li>level two<ul><li>level three</li></ul></li></ul></li></ul></html>|{{{*item one}}}<br/>{{{*item two}}}<br/>{{{**level two}}}<br/>{{{***level three}}}|
+|>| [[Definition List|Lists]] |
+|<html><dl><dt>term</dt><dd>definition</dd></dl></html>|{{{;term}}}<br />{{{:definition}}}|
+|>| [[Mixed Lists|Lists]] |
+|<html><ol><li>ordered<ul><li>unordered<dl><dt>term</dt><dd>definition</dd></dl></li></ul></li></ol></html>|{{{# ordered}}}<br />{{{#* unordered}}}<br />{{{#*;term}}}<br />{{{#*:definition}}}|
+| ![[Blockquotes]] |>|
+| [[Nested Blockquotes|Blockquotes]] |>|
+|<html><blockquote>blockquote<blockquote>level two<blockquote>level three</blockquote></blockquote></blockquote></html>|{{{>blockquote}}}<br />{{{>>level two}}}<br />{{{>>>level three}}}|
+|>| [[Multi-line Blockquotes|Blockquotes]] |
+|<html><blockquote>multi-line<br/>blockquote</blockquote></html>|{{{<<<}}}<br />{{{multi-line}}}<br />{{{blockquote}}}<br />{{{<<<}}}|
+|>| [[Mixed Blockquotes|Blockquotes]] |
+|<html><blockquote>foo<br><blockquote>inner foo, level 1<br><blockquote>inner foo, level 2<br></blockquote></blockquote>more foo<br></blockquote></html>|{{{<<<}}}<br />{{{foo}}}<br />{{{> inner foo, level 1}}}<br />{{{>> inner foo, level 2}}}<br />{{{more foo}}}<br />{{{<<<}}}|
+|>| ![[Code  / Monospaced Text|Code]] |
+|>| [[Inline Code|Code]] |
+|{{{monospaced text}}}|<html><code>{{{mono space text}}}</code></html>|
+|>| [[Code Block|Code]] |
+|<html><pre>{{{<br/>multi-line<br/>code block<br/>}}}</pre></html>|<html><code>{{{</code></html><br/>{{{multi-line}}}<br/>{{{code block}}}<br/><html><code>}}}</code></html>|
+| ![[Links]] |>|
+|>| [[Internal Links|TiddlyLink]] |
+|[[WikiWord]]|{{{WikiWord}}}|
+|~NoLink|{{{~NoLink}}} -- a tilde {{{~}}} prevents automatic ~WikiWord links|
+|[[Plain Link]]|{{{[[Plain Link]]}}}|
+|[[Pretty Link|Tiddler Name]]|{{{[[Pretty Link|Tiddler Name]]}}}|
+|>| [[External Links|External Link]] |
+|A valid URL is automatically rendered as an external link.|>|
+|http://www.tiddlywiki.com|{{{http://www.tiddlywiki.com}}}|
+|[[Pretty External Link|http://www.tiddlywiki.com]]|{{{[[Pretty External Link|http://www.tiddlywiki.com]]}}}|
+|>| ![[Filesystem Links|Links]] |
+|You can, of course, use file system links both as plain or pretty links.|>|
+|''Windows Network Path''|{{{[[file://///server/share]]}}}|
+|''Windows Local''|{{{[[file:///c:/folder/file]]}}}|
+|''Linux/Unix Local''|{{{[[file:///folder/file]]}}}|
+|''Relative Path (Subfolder)''|{{{[[folder/file]]}}}|
+|>| ![[Images]] |
+|In general, image files are external to a TiddlyWiki.|>|
+|[img[http://www.tiddlywiki.com/favicon.ico]]|{{{[img[path/image.jpg]]}}}|
+| aligned right&nbsp;&nbsp;[>img[http://www.tiddlywiki.com/favicon.ico]]|{{{[>img[path/image.jpg]]}}}|
+|[<img[http://www.tiddlywiki.com/favicon.ico]]&nbsp;&nbsp;aligned left|{{{[<img[path/image.jpg]]}}}|
+|w/ internal link [>img[http://www.tiddlywiki.com/favicon.ico][TiddlyWiki]]|{{{[img[path/image.jpg][TiddlerName]]}}}|
+|w/ external link [>img[http://www.tiddlywiki.com/favicon.ico][http://www.tiddlywiki.com]]|{{{[img[path/image.jpg][TiddlyWiki|http://www.tiddlywiki.com]]}}}|
+|>| ![[Gradients|gradient]] |
+|<<gradient horiz #faa #afa #aaf>>&nbsp;&nbsp;__vert__ical or __horiz__ontal<br>&nbsp;&nbsp;see [[gradient macro|http://tiddlywiki.org/#%5B%5Bgradient%20(macro)%5D%5D]]>>|{{{<<gradient horiz #faa #afa #aaf>>wiki text>>}}}|
+|>| ![[Tables]] |
+|<<tiddler HTML_TABLE>>|<<tiddler HTML_TABLE_MARKUP>>|
+|>|<<tiddler HTML_TABLE_RULES>>|
+|>| ![[Custom Styles|CSS Formatting]] |
+|>|a {{{@@highlight@@}}} element can accept CSS syntax to directly style text.|>|
+|@@color:green;green coloured@@|{{{@@color:green;green coloured@@}}}|
+|>| ![[Custom CSS Class Wrapper|CSS Formatting]] |
+|>|You can define a custom css class wrapper, like {{{.button}}} below. By default, the inner text is placed inline into a {{{<span>}}} of said class(s). If you start and end the inner text with a newline, the content is placed in a {{{<div>}}}. Use the StyleSheet to define the css styles applied to the class.|
+|<br>{{button title{Click!}}}|<html><pre>{{button title{Click!}}}</pre></html>|
+|>| ![[Embedded HTML|HTML Formatting]] |
+|<html><span style="padding-right:30px;font-size:2em;">any</span><br /><b>valid</b> <em>xhtml</em></html>|<html><code style="font-weight:bold">&lt;html&gt;</code></html>{{{<span style="padding-right:30px;font-size:2em;">any</span><br /><b>valid</b> <em>xhtml</em>}}}<html><code style="font-weight:bold">&lt;/html&gt;</code></html>|
+|>| [[Embedded <iframe>|HTML Formatting]] |
+|<html><iframe height="200px" width="300px" src="http://www.youtube.com/embed/Cj6ho1-G6tw?vq=hd720" frameborder="0" allowfullscreen/></html>|<html><code style="font-weight:bold">&lt;html&gt;</code></html>{{{<iframe src="http://the.url"/>}}}<html><code style="font-weight:bold">&lt;/html&gt;</code></html>|
+|>| ![[Line Break|Line Breaks]] |
+|handy for entering multi-line content into table cells or lists|>|
+|a<br>b|{{{a<br>b}}} or {{{a<br/>a}}} or {{{a<br />a}}}|
+|>| ![[Horizontal Rules]] |
+|before<hr>after|{{{<hr>}}} or <br>{{{----}}} on its own line|
+|>| ![[HTML Entities]] |
+|>|You can use HTML entities...|
+|&#632;&trade; |{{{&#632;&trade;}}}|
+| ![[Macros]] |>|
+|>|macros are called by enclosing the macro name in {{{<<}}} and {{{>>}}}|
+|<<version>> |{{{<<version>>}}}|
+|>| ![[Hidden Text|Basic Formatting]] |
+|This is hidden: |{{{This is hidden: /% secret comment %/}}}|
+

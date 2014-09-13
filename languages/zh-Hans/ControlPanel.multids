@@ -1,41 +1,9 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: 高级
-Advanced/EditorTypes/Caption: 编辑器类型
-Advanced/EditorTypes/Editor/Caption: 编辑器
-Advanced/EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
-Advanced/EditorTypes/Type/Caption: 类型
 Advanced/Hint: 关于此 TiddlyWiki 的内部信息
-Advanced/LoadedModules/Caption: 已加载的模块
-Advanced/LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
-Advanced/Settings/Caption: 设置
-Advanced/Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
-Advanced/Settings/NavigationAddressBar/Caption: 网址栏导览
-Advanced/Settings/NavigationAddressBar/Hint: 在浏览器网址列导览到条目时的行为：
-Advanced/Settings/NavigationAddressBar/No/Description: 不更新网址栏
-Advanced/Settings/NavigationAddressBar/Permalink/Description: 包含目标条目
-Advanced/Settings/NavigationAddressBar/Permaview/Description: 包括目标条目和当前已开启的条目序列
-Advanced/Settings/NavigationHistory/Caption: 历史记录导览
-Advanced/Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
-Advanced/Settings/NavigationHistory/No/Description: 不更新历史记录
-Advanced/Settings/NavigationHistory/Yes/Description: 更新历史记录
-Advanced/TiddlerFields/Caption: 条目栏位
-Advanced/TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
 Appearance/Caption: 视觉外观
-Appearance/Hint: 自订您的 TiddlyWiki 外观。
-Appearance/Palette/Caption: 调色板
-Appearance/Palette/Editor/Clone/Caption: 复制
-Appearance/Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调色板
-Appearance/Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
-Appearance/Palette/Editor/Prompt: 编辑
-Appearance/Palette/Editor/Reset/Caption: 重置
-Appearance/Palette/HideEditor/Caption: 隐藏编辑器
-Appearance/Palette/Prompt: 当前的调色板：
-Appearance/Palette/ShowEditor/Caption: 显示编辑器
-Appearance/StoryView/Caption: 查看模式
-Appearance/StoryView/Prompt: 当前的查看模式：
-Appearance/Theme/Caption: 布景主题
-Appearance/Theme/Prompt: 当前的布景主题：
+Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间：
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
@@ -51,18 +19,33 @@ Basics/Tiddlers/Prompt: 一般条目数量：
 Basics/Title/Prompt: 标题：
 Basics/Username/Prompt: 编辑者署名：
 Basics/Version/Prompt: ~TiddlyWiki 版本：
+EditorTypes/Caption: 编辑器类型
+EditorTypes/Editor/Caption: 编辑器
+EditorTypes/Hint: 这些条目决定使用哪个编辑器来编辑特定条目类型。
+EditorTypes/Type/Caption: 类型
+Info/Caption: 信息
+Info/Hint: 有关此 TiddlyWiki 的信息
+LoadedModules/Caption: 已加载的模块
+LoadedModules/Hint: 这些是当前已加载的模块之源码条目。斜体的模块则无源码条目，通常是因为它们是在引导过程中设置。
+Palette/Caption: 调色板
+Palette/Editor/Clone/Caption: 复制
+Palette/Editor/Clone/Prompt: 建议您修改前先复制此默认调色板
+Palette/Editor/Prompt/Modified: 此默认调色板已被修改过
+Palette/Editor/Prompt: 编辑
+Palette/Editor/Reset/Caption: 重置
+Palette/HideEditor/Caption: 隐藏编辑器
+Palette/Prompt: 当前的调色板：
+Palette/ShowEditor/Caption: 显示编辑器
 Plugins/Caption: 插件
-Plugins/Fields/Description: 说明
-Plugins/Fields/Title: 标题
-Plugins/Fields/Version: 版本
+Plugins/Disable/Caption: 禁用
+Plugins/Disable/Hint: 重新加载页面时禁用此插件
+Plugins/Disabled/Status: (已禁用)
+Plugins/Empty/Hint: 无
+Plugins/Enable/Caption: 启用
+Plugins/Enable/Hint: 重新加载页面时启用此插件
 Plugins/Language/Prompt: 语言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 布景主题
-Saving/AutoSave/Disabled/Button: 启用
-Saving/AutoSave/Disabled/Prompt: 自动保存已停用
-Saving/AutoSave/Enabled/Button: 停用 
-Saving/AutoSave/Enabled/Prompt: 自动保存已启用
-Saving/AutoSave: 自动保存
 Saving/Caption: 保存
 Saving/Heading: 保存
 Saving/TiddlySpot/Advanced/Heading: 高级设置
@@ -70,21 +53,45 @@ Saving/TiddlySpot/BackupDir: 备份文件夹
 Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为自订之服务器网址//
+Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址//
 Saving/TiddlySpot/Password: 密码
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹
 Saving/TiddlySpot/UserName: 用户
+Settings/AutoSave/Caption: 自动保存
+Settings/AutoSave/Disabled/Description: 不要自动保存变更
+Settings/AutoSave/Enabled/Description: 自动保存变更
+Settings/AutoSave/Hint: 在编辑过程中自动保存变更
+Settings/Caption: 设置
+Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
+Settings/NavigationAddressBar/Caption: 网址栏导览
+Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
+Settings/NavigationAddressBar/No/Description: 不更新网址栏
+Settings/NavigationAddressBar/Permalink/Description: 包含目标条目
+Settings/NavigationAddressBar/Permaview/Description: 包括目标条目和当前已开启的条目序列
+Settings/NavigationHistory/Caption: 历史记录导览
+Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
+Settings/NavigationHistory/No/Description: 不更新历史记录
+Settings/NavigationHistory/Yes/Description: 更新历史记录
+Settings/ToolbarButtons/Caption: 工具栏按钮
+Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
+Settings/ToolbarButtons/Icons/Description: 包含图标
+Settings/ToolbarButtons/Text/Description: 包含文本
+StoryView/Caption: 查看模式
+StoryView/Prompt: 当前的查看模式：
+Theme/Caption: 布景主题
+Theme/Prompt: 当前的布景主题：
+TiddlerFields/Caption: 条目栏位
+TiddlerFields/Hint: 这是本维基使用中的所有条目栏位（含系统条目的栏位，但默认条目的栏位除外）。
+Toolbars/Caption: 工具栏
+Toolbars/EditToolbar/Caption: 编辑工具栏
+Toolbars/EditToolbar/Hint: 选择将显示哪些按钮于条目的编辑模式工具栏
+Toolbars/Hint: 选择将显示哪些工具栏按钮
+Toolbars/PageControls/Caption: 页面工具栏
+Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
+Toolbars/ViewToolbar/Caption: 查看工具栏
+Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏
 Tools/Caption: 工具
 Tools/Download/Full/Caption: 下载完整副本
-Tools/Encryption/ChangePassword/Button: 变更密码
-Tools/Encryption/ClearPassword/Button: 清除密码
-Tools/Encryption/Disabled/Prompt: 本 wiki 尚未加密。
-Tools/Encryption/Enabled/Prompt: 本 wiki 已加密。
-Tools/Encryption/Heading: 加密
-Tools/Encryption/SetPassword/Button: 设置密码
 Tools/Export/AllAsStaticHTML/Caption: 下载所有条目为静态 HTML
 Tools/Export/Heading: 导出
-Tools/Import/Heading: 导入
-Tools/Import/Hint: 浏览您电脑里的文件，导入文件内容（导入 TiddlyWiki HTML 文件里的条目）。您也可以将文件直接拖放到浏览器中开启的 TiddlyWiki 页面。
-Tools/Import/Prompt: 导入：

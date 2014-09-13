@@ -1,0 +1,42 @@
+created: 20120131235950000
+creator: sandman619
+modified: 20140415164107038
+modifier: tobibeer
+tags: Formatting
+title: Lists
+type: text/x-tiddlywiki
+
+!Summary
+In TiddlyWiki you can make user of different list types, such as unordered lists, ordered or numbered lists, as well as definition lists.
+!!Ordered Lists
+Lists can be ordered using numbers and letters by starting a line with a hash {{{#}}}...
+{{{
+#List item one
+##List item two
+###List item three
+}}}
+#List item one
+##List item two
+###List item three
+!!Unordered Lists
+Create unordered lists by starting a line using an asterisk {{{*}}}...
+{{{
+*Unordered List Level 1
+**Unordered List Level 2
+***Unordered List Level 3
+}}}
+*Unordered List Level 1
+**Unordered List Level 2
+***Unordered List Level 3
+!!Definition Lists
+Create definition lists by starting a line using a semi-colon {{{;}}} for the term followed by a line starting with a colon {{{:}}} for the definition...
+{{{
+;Term 1
+:Definition for Term 1
+;Term 2
+:Definition for Term 2
+}}}
+;Term 1
+:Definition for Term 1
+;Term 2
+:Definition for Term 2

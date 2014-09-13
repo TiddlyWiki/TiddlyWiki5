@@ -1,6 +1,6 @@
 title: DraftMechanism
 modified: 201308201324
-tags: mechanism
+tags: Mechanisms
 
 Tiddlers that have a `draft.of` field are treated as pending drafts of the tiddler specified in the field. Draft tiddlers should also have a `draft.title` field that specifies the title that will be given to the tiddler when it is saved.
 
@@ -8,9 +8,9 @@ Several features work in concert to give the desired behaviour for draft tiddler
 
 * The ListWidget can optionally render draft tiddlers through a different template
 * The NavigatorWidget incorporates handlers for the following events:
-** `tw-new-tiddler` for creating a new tiddler in draft mode
-** `tw-edit-tiddler` for moving a tiddler into edit mode 
-** `tw-cancel-tiddler` for cancelling a tiddler out of edit mode
-** `tw-save-tiddler` for saving a draft tiddler
+** `tm-new-tiddler` for creating a new tiddler in draft mode
+** `tm-edit-tiddler` for moving a tiddler into edit mode 
+** `tm-cancel-tiddler` for cancelling a tiddler out of edit mode
+** `tm-save-tiddler` for saving a draft tiddler
 * Draft tiddlers are automatically excluded from search operations
 

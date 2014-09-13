@@ -1,0 +1,22 @@
+chapter.of: Extending the Store
+created: 20140710184940308
+modified: 20140717180902471
+sub.num: 2
+tags: doc new
+title: Caching
+
+The core plug-in adds two caches to the wiki store.
+A global cache and a cache for each tiddler.
+While the global cache is cleared whenever any tiddler changes, the tiddler cache is only cleared when the associated tiddler changes.
+The idea of the tiddler cache is, that sometimes we want to calculate information from a tiddler but don't want to recalculate every time we need this information.
+Imagine a tiddler which contains links to other tiddlers and at one point we want to have a list of the linked tiddlers (LinksFilter).
+With the tiddler cache we can parse the WikiText, extract the linked tiddlers and put this list in the cache.
+Until the tiddler is changed, the cache can be used to access this information in the next requests.
+
+The same idea holds for the global cache. For example when a [[filter|Tags and Filter Mechanism]] string is parsed and a list of matching tiddlers is constructed.
+This list can be put in the global cache for later reuse until something changes in the store.
+
+Like the [[Event Mechanism]], the cache needs hook functions in the microkernel.
+The microkernel calls ``clearGlobalCache()`` and ``clearCache(tiddlertitle)`` when a tiddler changes.
+The core's cache mechanism overwrites this functions.
+The functions providing the cache system are added via the [[wikimethod module type]].

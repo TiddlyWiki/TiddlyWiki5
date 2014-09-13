@@ -1,17 +1,17 @@
 title: $:/plugins/tiddlywiki/d3/base.tid
-tags: [[$:/tags/stylesheet]]
+tags: [[$:/tags/Stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-.tw-barwidget {
+.tc-barwidget {
 }
 
-.tw-barwidget text {
+.tc-barwidget text {
   font: 8px sans-serif;
 }
 
-.tw-barwidget .axis path,
-.tw-barwidget .axis line {
+.tc-barwidget .axis path,
+.tc-barwidget .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;

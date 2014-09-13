@@ -18,7 +18,7 @@ exports.hasTag = function(tag) {
 
 exports.isPlugin = function() {
 	return this.fields.type === "application/json" && this.hasField("plugin-type");
-}
+};
 
 exports.isDraft = function() {
 	return this.hasField("draft.of");
@@ -55,6 +55,54 @@ exports.getFieldStringBlock = function(options) {
 		}
 	}
 	return fields.join("\n");
+};
+
+/*
+Compare two tiddlers for equality
+tiddler: the tiddler to compare
+excludeFields: array of field names to exclude from the comparison
+*/
+exports.isEqual = function(tiddler,excludeFields) {
+	excludeFields = excludeFields || [];
+	var self = this,
+		differences = []; // Fields that have differences
+	// Add to the differences array
+	function addDifference(fieldName) {
+		// Check for this field being excluded
+		if(excludeFields.indexOf(fieldName) === -1) {
+			// Save the field as a difference
+			$tw.utils.pushTop(differences,fieldName);
+		}
+	}
+	// Returns true if the two values of this field are equal
+	function isFieldValueEqual(fieldName) {
+		var valueA = self.fields[fieldName],
+			valueB = tiddler.fields[fieldName];
+		// Check for identical string values
+		if(typeof(valueA) === "string" && typeof(valueB) === "string" && valueA === valueB) {
+			return true;
+		}
+		// Check for identical array values
+		if($tw.utils.isArray(valueA) && $tw.utils.isArray(valueB) && $tw.utils.isArrayEqual(valueA,valueB)) {
+			return true;
+		}
+		// Otherwise the fields must be different
+		return false;
+	}
+	// Compare our fields
+	for(var fieldName in this.fields) {
+		if(!isFieldValueEqual(fieldName)) {
+			addDifference(fieldName);
+		}
+	}
+	// There's a difference for every field in the other tiddler that we don't have
+	for(fieldName in tiddler.fields) {
+		if(!(fieldName in this.fields)) {
+			addDifference(fieldName);
+		}
+	}
+	// Return whether there were any differences
+	return differences.length === 0;
 };
 
 })();

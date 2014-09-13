@@ -1,6 +1,7 @@
 title: $:/language/SideBar/
 
 All/Caption: 全部
+Contents/Caption: 目录
 Drafts/Caption: 草稿
 Missing/Caption: 佚失
 More/Caption: 更多
@@ -10,8 +11,6 @@ Recent/Caption: 最近
 Shadows/Caption: 默认
 System/Caption: 系统
 Tags/Caption: 标签
-Tags/TagManager/Caption: 标签管理
 Tags/Untagged/Caption: 未设标签
 Tools/Caption: 工具
 Types/Caption: 类型
-

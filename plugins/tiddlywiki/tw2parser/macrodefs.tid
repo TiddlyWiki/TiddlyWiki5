@@ -1,0 +1,34 @@
+title: $:/plugins/tiddlywiki/tw2parser/macrodefs
+
+\define tiddler(tiddler)
+<$classictransclude tiddler = "$tiddler$"/>
+\end
+
+\define slider(chkUniqueCookieName tiddler label tooltip)
+<span title=$tooltip$><$button popup="$chkUniqueCookieName$" class="btn-invisible tc-slider">$label$</$button>
+<$reveal type="nomatch" text="" default="" state="$chkUniqueCookieName$" animate="yes">
+<$classictransclude tiddler = "$tiddler$"/>
+</$reveal></span>
+\end
+
+\define __system_tabinstance(state, currentTab, prompts, labels)
+		<span title=<<entryof "$currentTab$" """$prompts$""">> ><$button set=<<qualify "$state$">> setTo="$currentTab$" selectedClass="tc-tab-selected">
+		<<entryof "$currentTab$" """$labels$""" >>
+		</$button></span>
+\end
+
+\define __system_tabs(tabsList,prompts,labels,state:"$:/state/tab")
+<div class="tc-tab-buttons">
+	<$list filter="$tabsList$" variable="currentTab">
+		<$macrocall $name="__system_tabinstance" state="$state$" prompts="""$prompts$""" labels="""$labels$""" currentTab=<<currentTab>>/>
+	</$list>
+</div>
+<div class="tc-tab-divider"/>
+<div class="tc-tab-content">
+	<$list filter="$tabsList$" variable="currentTab">
+		<$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$">
+			<$classictransclude tiddler=<<currentTab>> />
+		</$reveal>
+	</$list>
+</div>
+\end

@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters commonfilters
+tags: Filters CommonFilters
 title: FilterOperator: all
+caption: all
 type: text/vnd.tiddlywiki
 
 The ''all'' filter operator is used to select combinations of lists of tiddlers for subsequent operations.
@@ -17,4 +18,5 @@ For example:
 |`[all[current]]` |Selects the current tiddler |
 |`[all[missing]]` |Selects all MissingTiddlers |
 |`[all[orphans]]` |Selects all OrphanTiddlers |
+|`[all[]]` |Selects all the source tiddlers available to the filter |
 

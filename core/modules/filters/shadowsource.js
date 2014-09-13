@@ -19,9 +19,9 @@ exports.shadowsource = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		var source = options.wiki.getShadowSource(title);
- 		if(source) {
+		if(source) {
 			$tw.utils.pushTop(results,source);
- 		}
+		}
 	});
 	results.sort();
 	return results;

@@ -97,6 +97,14 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[!is[system]!field:modifier[JoeBloggs]]").join(",")).toBe("Tiddler Three,a fourth tiddler,one");
 	});
 
+	it("should handle the regexp operator", function() {
+		expect(wiki.filterTiddlers("[regexp[id]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler");
+		expect(wiki.filterTiddlers("[!regexp[id]]").join(",")).toBe("one");
+		expect(wiki.filterTiddlers("[regexp[Tid]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three");
+		expect(wiki.filterTiddlers("[regexp[(?i)Tid]]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler");
+		expect(wiki.filterTiddlers("[!regexp[Tid(?i)]]").join(",")).toBe("one");
+	});
+
 	it("should handle the field operator with a regular expression operand", function() {
 		expect(wiki.filterTiddlers("[modifier/JoeBloggs/]").join(",")).toBe("TiddlerOne");
 		expect(wiki.filterTiddlers("[modifier/Jo/]").join(",")).toBe("TiddlerOne,$:/TiddlerTwo,Tiddler Three,a fourth tiddler,one");
@@ -268,6 +276,25 @@ describe("Filter tests", function() {
 		expect(wiki.filterTiddlers("[modifier{Tiddler8!!test-field}] +[sort[title]]").join(",")).toBe("TiddlerOne");
 		var fakeWidget = {getVariable: function() {return "Tiddler Three";}};
 		expect(wiki.filterTiddlers("[modifier{!!modifier}] +[sort[title]]",fakeWidget).join(",")).toBe("$:/TiddlerTwo,a fourth tiddler,one,Tiddler Three");
+	});
+
+	it("should handle variable operands", function() {
+
+		var widget = require("$:/core/modules/widgets/widget.js");
+	// Create a root widget for attaching event handlers. By using it as the parentWidget for another widget tree, one can reuse the event handlers
+		var rootWidget = new widget.widget({
+			type: "widget",
+			children: [{type: "widget", children: []}]
+		},{
+			wiki: $tw.wiki,
+			document: $tw.document
+		});
+		rootWidget.makeChildWidgets();
+		var anchorWidget = rootWidget.children[0];
+		rootWidget.setVariable("myVar","Tidd");
+		rootWidget.setVariable("myVar2","JoeBloggs");
+		expect(wiki.filterTiddlers("[prefix<myVar>] +[sort[title]]",anchorWidget).join(",")).toBe("Tiddler Three,TiddlerOne");
+		expect(wiki.filterTiddlers("[modifier<myVar2>] +[sort[title]]",anchorWidget).join(",")).toBe("TiddlerOne");
 	});
 
 	it("should handle the before and after operators", function() {

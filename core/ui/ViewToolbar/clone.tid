@@ -1,0 +1,13 @@
+title: $:/core/ui/Buttons/clone
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/clone-button}} {{$:/language/Buttons/Clone/Caption}}
+description: {{$:/language/Buttons/Clone/Hint}}
+
+<$button message="tm-new-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/clone-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Clone/Caption}}/>
+</$list>
+</$button>

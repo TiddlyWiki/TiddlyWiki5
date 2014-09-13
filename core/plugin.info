@@ -3,5 +3,6 @@
 	"description": "TiddlyWiki5 core plugin",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
-	"plugin-priority": "0"
+	"plugin-priority": "0",
+	"list": "readme"
 }

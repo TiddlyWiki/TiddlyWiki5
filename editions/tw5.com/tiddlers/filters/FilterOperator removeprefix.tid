@@ -1,6 +1,7 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
+caption: removeprefix
 title: FilterOperator: removeprefix
 type: text/vnd.tiddlywiki
 
@@ -11,4 +12,4 @@ For example:
 |!Filter String |!Description |
 |`tid-one tid-two three +[removeprefix[tid-]]` |Returns `one`, `two` |
 
-See also [[FilterOperator: prefix]].
+See also [[FilterOperator: prefix]], [[FilterOperator: suffix]] and [[FilterOperator: removesuffix]].

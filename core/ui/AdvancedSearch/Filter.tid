@@ -7,11 +7,11 @@ caption: {{$:/language/Search/Filter/Caption}}
 
 <<lingo Filter/Hint>>
 
-<div class="tw-search tw-advanced-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/> <$button popup=<<qualify "$:/state/filterDropdown">> class="btn-invisible">{{$:/core/images/down-arrow}}</$button> <$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tc-search tc-advanced-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/> <$button popup=<<qualify "$:/state/filterDropdown">> class="tc-btn-invisible">{{$:/core/images/down-arrow}}</$button> <$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
 
-<div class="tw-block-dropdown-wrapper">
+<div class="tc-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/filterDropdown">> type="nomatch" text="" default="">
-<div class="tw-block-dropdown tw-edit-type-dropdown">
+<div class="tc-block-dropdown tc-edit-type-dropdown">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Filter]]"><$link to={{!!filter}}><$transclude field="description"/></$link>
 </$list>
 </div>
@@ -21,7 +21,7 @@ caption: {{$:/language/Search/Filter/Caption}}
 </$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
-<div class="tw-search-results">
+<div class="tc-search-results">
 <<lingo Filter/Matches>>
 <$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
 </div>

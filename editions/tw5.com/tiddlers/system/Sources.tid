@@ -13,7 +13,7 @@ https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$
 \end
 \define outerMakeGitHubLink()
 <$set name="githubLink" value={{$:/config/OriginalTiddlerPaths##$(currentTiddler)$}}>
-<a href=<<makeGitHubLink>> class="tw-tiddlylink-external" target="_blank"><$text text=<<makeGitHubLink>>/></a>
+<a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank"><$text text=<<makeGitHubLink>>/></a>
 </$set>
 \end
 A static HTML representation of this tiddler is available at the URL:

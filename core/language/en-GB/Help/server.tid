@@ -28,4 +28,10 @@ For example:
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
+The username and password can be specified as empty strings if you need to set the hostname or pathprefix and don't want to require a password:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
 To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port.

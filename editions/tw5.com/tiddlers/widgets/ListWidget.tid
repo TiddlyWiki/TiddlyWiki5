@@ -1,11 +1,12 @@
 created: 201310241419
 modified: 201310300837
-tags: widget
+tags: Widgets
 title: ListWidget
+caption: list
 
 ! Introduction
 
-The list widget displays a sequence of tiddlers that match a [[tiddler filter|TiddlerFilters]]. It can be used for many purposes:
+The list widget displays a sequence of tiddlers that match a [[tiddler filter|Filters]]. It can be used for many purposes:
 
 * Displaying custom lists of links, like in TiddlyWiki5's sidebar
 * Custom lists, such as "all tiddlers tagged 'task' that are not tagged 'done'"
@@ -53,10 +54,10 @@ The ''types'' listing is performed with this markup:
 
 ```
 <$list filter="[!is[system]has[type]each[type]sort[type]]">
-<div class="tw-menu-list-item">
+<div class="tc-menu-list-item">
 <$view field="type"/>
 <$list filter="[type{!!type}!is[system]sort[title]]">
-<div class="tw-menu-list-subitem">
+<div class="tc-menu-list-subitem">
 <$link to={{!!title}}><$view field="title"/></$link>
 </div>
 </$list>
@@ -71,10 +72,10 @@ The ''recent'' listing is performed with this markup:
 
 ```
 <$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
-<div class="tw-menu-list-item">
+<div class="tc-menu-list-item">
 <$view field="modified" format="date" template="DDth MMM YYYY"/>
 <$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
-<div class="tw-menu-list-subitem">
+<div class="tc-menu-list-subitem">
 <$link to={{!!title}}><$view field="title"/></$link>
 </div>
 </$list>

@@ -50,13 +50,12 @@ Modal.prototype.display = function(title,options) {
 	this.modalCount++;
 	this.adjustPageClass();
 	// Add classes
-	$tw.utils.addClass(wrapper,"modal-wrapper");
-	$tw.utils.addClass(modalBackdrop,"modal-backdrop");
-	$tw.utils.addClass(modalWrapper,"modal");
-	$tw.utils.addClass(modalHeader,"modal-header");
-	$tw.utils.addClass(modalBody,"modal-body");
-	$tw.utils.addClass(modalLink,"btn btn-large btn-block btn-success");
-	$tw.utils.addClass(modalFooter,"modal-footer");
+	$tw.utils.addClass(wrapper,"tc-modal-wrapper");
+	$tw.utils.addClass(modalBackdrop,"tc-modal-backdrop");
+	$tw.utils.addClass(modalWrapper,"tc-modal");
+	$tw.utils.addClass(modalHeader,"tc-modal-header");
+	$tw.utils.addClass(modalBody,"tc-modal-body");
+	$tw.utils.addClass(modalFooter,"tc-modal-footer");
 	// Join them together
 	wrapper.appendChild(modalBackdrop);
 	wrapper.appendChild(modalWrapper);
@@ -67,27 +66,34 @@ Modal.prototype.display = function(title,options) {
 	modalFooter.appendChild(modalFooterButtons);
 	modalWrapper.appendChild(modalFooter);
 	// Render the title of the message
-	var titleText;
-	if(tiddler && tiddler.fields && tiddler.fields.subtitle) {
-		titleText = tiddler.fields.subtitle;
-	} else {
-		titleText = title;
-	}
-	var headerParser = this.wiki.parseText("text/vnd.tiddlywiki",titleText,{parseAsInline: true}),
-		headerWidgetNode = this.wiki.makeWidget(headerParser,{parentWidget: $tw.rootWidget, document: document});
+	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
+		field: "subtitle",
+		children: [{
+			type: "text",
+			attributes: {
+				text: {
+					type: "string",
+					value: title
+		}}}],
+		parentWidget: $tw.rootWidget,
+		document: document
+	});
 	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
 		headerWidgetNode.refresh(changes,modalHeader,null);
 	});
 	// Render the body of the message
-	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document});
+	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
+		parentWidget: $tw.rootWidget,
+		document: document
+	});
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyWidgetNode.refresh(changes,modalBody,null);
 	});
 	// Setup the link if present
 	if(options.downloadLink) {
-		modalLink.href = options.downloadLink
+		modalLink.href = options.downloadLink;
 		modalLink.appendChild(document.createTextNode("Right-click to save changes"));
 		modalBody.appendChild(modalLink);
 	}
@@ -100,14 +106,27 @@ Modal.prototype.display = function(title,options) {
 		modalFooterHelp.appendChild(link);
 		modalFooterHelp.style.float = "left";
 	}
-	var footerText;
-	if(tiddler && tiddler.fields && tiddler.fields.footer) {
-		footerText = tiddler.fields.footer;
-	} else {
-		footerText = '<$button message="tw-close-tiddler" class="btn btn-primary">Close</$button>';
-	}
-	var footerParser = this.wiki.parseText("text/vnd.tiddlywiki",footerText,{parseAsInline: true}),
-		footerWidgetNode = this.wiki.makeWidget(footerParser,{parentWidget: $tw.rootWidget, document: document});
+	var footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
+		field: "footer",
+		children: [{
+			type: "button",
+			attributes: {
+				message: {
+					type: "string",
+					value: "tm-close-tiddler"
+				}
+			},
+			children: [{
+				type: "text",
+				attributes: {
+					text: {
+						type: "string",
+						value: "Close"
+			}}}
+		]}],
+		parentWidget: $tw.rootWidget,
+		document: document
+	});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
 		footerWidgetNode.refresh(changes,modalFooterButtons,null);
@@ -133,12 +152,12 @@ Modal.prototype.display = function(title,options) {
 				document.body.removeChild(wrapper);
 			}
 		},duration);
-		// Don't let anyone else handle the tw-close-tiddler message
+		// Don't let anyone else handle the tm-close-tiddler message
 		return false;
 	};
-	headerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
-	bodyWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
-	footerWidgetNode.addEventListener("tw-close-tiddler",closeHandler,false);
+	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}
@@ -170,7 +189,7 @@ Modal.prototype.display = function(title,options) {
 
 Modal.prototype.adjustPageClass = function() {
 	if($tw.pageContainer) {
-		$tw.utils.toggleClass($tw.pageContainer,"tw-modal-displayed",this.modalCount > 0);
+		$tw.utils.toggleClass($tw.pageContainer,"tc-modal-displayed",this.modalCount > 0);
 	}
 };
 

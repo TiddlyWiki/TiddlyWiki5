@@ -105,6 +105,9 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 	if(this.imageTooltip) {
 		domNode.setAttribute("title",this.imageTooltip);		
 	}
+	if(this.imageAlt) {
+		domNode.setAttribute("alt",this.imageAlt);		
+	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.domNodes.push(domNode);
@@ -120,6 +123,7 @@ ImageWidget.prototype.execute = function() {
 	this.imageHeight = this.getAttribute("height");
 	this.imageClass = this.getAttribute("class");
 	this.imageTooltip = this.getAttribute("tooltip");
+	this.imageAlt = this.getAttribute("alt");
 };
 
 /*

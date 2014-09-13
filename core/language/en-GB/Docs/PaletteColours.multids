@@ -6,6 +6,7 @@ alert-highlight: Alert highlight
 alert-muted-foreground: Alert muted foreground
 background: General background
 blockquote-bar: Blockquote bar
+dirty-indicator: Unsaved changes indicator
 code-background: Code background
 code-border: Code border
 code-foreground: Code foreground

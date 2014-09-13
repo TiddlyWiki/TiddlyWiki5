@@ -50,8 +50,8 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this.style) {
 		domNode.setAttribute("style",this.style);
 	}
-	if(this.title) {
-		domNode.setAttribute("title",this.title);
+	if(this.tooltip) {
+		domNode.setAttribute("title",this.tooltip);
 	}
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
@@ -101,7 +101,7 @@ ButtonWidget.prototype.isPoppedUp = function() {
 ButtonWidget.prototype.navigateTo = function(event) {
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
-		type: "tw-navigate",
+		type: "tm-navigate",
 		navigateTo: this.to,
 		navigateFromTitle: this.getVariable("storyTiddler"),
 		navigateFromNode: this,
@@ -141,7 +141,14 @@ ButtonWidget.prototype.execute = function() {
 	this.hover = this.getAttribute("hover");
 	this["class"] = this.getAttribute("class","");
 	this["aria-label"] = this.getAttribute("aria-label");
-	this.title = this.getAttribute("title");
+	this.tooltip = this.getAttribute("tooltip");
+// DEPRECATION WARNING
+var title = this.getAttribute("title");
+if(title) {
+	console.log("WARNING: attribute 'title' on button widget should be replaced with 'tooltip'");
+	this.tooltip = title;
+}
+
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default");

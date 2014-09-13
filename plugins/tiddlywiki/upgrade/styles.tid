@@ -1,0 +1,60 @@
+title: $:/plugins/tiddlywiki/upgrade/styles
+tags: $:/tags/Stylesheet
+
+.tc-upgrade-wizard-wrapper {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 3em;
+}
+
+.tc-upgrade-wizard {
+	background: <<colour tiddler-background>>;
+	padding: 2em;
+	display: inline-block;
+	position: relative;
+	border: 1px solid #ddd;
+	<<box-shadow "inset 1px 2px 4px rgba(0, 0, 0, 0.15)">>;
+	overflow: hidden;
+}
+
+.tc-upgrade-wizard svg.tc-image-download-button {
+	width: 14em;
+	height: 14em;
+	fill: <<colour muted-foreground>>;
+}
+
+.tc-upgrade-wizard:hover svg.tc-image-download-button {
+	fill: <<colour foreground>>;
+}
+
+.tc-upgrade-wizard svg .tc-image-download-button-ring {
+}
+
+.tc-upgrade-wizard:hover svg .tc-image-download-button-ring {
+	fill: <<colour primary>>;
+}
+
+.tc-upgrade-wizard em {
+	color: <<colour tiddler-subtitle-foreground>>;
+}
+
+.tc-upgrade-wizard table {
+	text-align: left;
+}
+
+.tc-upgrade-wizard input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 999px;
+	max-width: 100%;
+	max-height: 100%;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: pointer;
+	display: block;
+}

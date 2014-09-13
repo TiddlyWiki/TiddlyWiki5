@@ -1,0 +1,15 @@
+{
+	"plugins": [
+		"tiddlywiki/tw2parser"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","classicparserdemo.html","text/plain"]
+	}
+}

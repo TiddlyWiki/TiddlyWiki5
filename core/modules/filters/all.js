@@ -34,7 +34,9 @@ exports.all = function(source,operator,options) {
 	var results = [],
 		subops = operator.operand.split("+");
 	// Check for common optimisations
-	if(subops.length === 1 && subops[0] === "tiddlers") {
+	if(subops.length === 1 && subops[0] === "") {
+		return source;
+	} else if(subops.length === 1 && subops[0] === "tiddlers") {
 		return options.wiki.each;
 	} else if(subops.length === 1 && subops[0] === "shadows") {
 		return options.wiki.eachShadow;

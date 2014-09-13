@@ -1,6 +1,6 @@
 created: 20140419082845576
-modified: 20140419083436245
-tags: features
+modified: 20140912141226700
+tags: Features
 title: SafeMode
 type: text/vnd.tiddlywiki
 
@@ -16,6 +16,9 @@ http://tiddlywiki.com/#:safe
 
 ! How Safe Mode Works
 
-In safe mode, any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler.
+Safe mode triggers two changes:
+
+* All plugins are temporarily disabled. You can use the control panel to disable individual plugins
+* Any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler
 
 A report tiddler is displayed that allows you to inspect the tiddlers that were renamed.

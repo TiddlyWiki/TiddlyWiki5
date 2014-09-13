@@ -14,6 +14,9 @@ Wraps up the markdown-js parser for use in TiddlyWiki5
 
 var markdown = require("$:/plugins/tiddlywiki/markdown/markdown.js");
 
+var CONFIG_DIALECT_TIDDLER = "$:/config/markdown/dialect",
+	DEFAULT_DIALECT = "Gruber";
+
 function transformNodes(nodes) {
 	var results = [];
 	for(var index=0; index<nodes.length; index++) {
@@ -52,7 +55,8 @@ function transformNode(node) {
 }
 
 var MarkdownParser = function(type,text,options) {
-	var markdownTree = markdown.toHTMLTree(text);
+	var dialect = options.wiki.getTiddlerText(CONFIG_DIALECT_TIDDLER,DEFAULT_DIALECT),
+		markdownTree = markdown.toHTMLTree(text,dialect);
 	this.tree = transformNodes(markdownTree.slice(1));
 };
 

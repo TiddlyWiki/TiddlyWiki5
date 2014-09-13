@@ -1,0 +1,13 @@
+title: $:/core/ui/Buttons/permaview
+tags: $:/tags/ViewToolbar $:/tags/PageControls
+caption: {{$:/core/images/permaview-button}} {{$:/language/Buttons/Permaview/Caption}}
+description: {{$:/language/Buttons/Permaview/Hint}}
+
+<$button message="tm-permaview" tooltip={{$:/language/Buttons/Permaview/Hint}} aria-label={{$:/language/Buttons/Permaview/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/permaview-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Permaview/Caption}}/>
+</$list>
+</$button>

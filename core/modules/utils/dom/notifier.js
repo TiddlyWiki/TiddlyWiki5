@@ -35,7 +35,7 @@ Notifier.prototype.display = function(title,options) {
 		return;
 	}
 	// Add classes
-	$tw.utils.addClass(notification,"tw-notification");
+	$tw.utils.addClass(notification,"tc-notification");
 	// Render the body of the notification
 	var widgetNode = this.wiki.makeTranscludeWidget(title,{parentWidget: $tw.rootWidget, document: document});
 	widgetNode.render(notification,null);

@@ -1,0 +1,10 @@
+created: 20140226194242809
+modified: 20140226194341303
+tags: Messages navigator-message
+title: WidgetMessage: tm-close-all-tiddlers
+type: text/vnd.tiddlywiki
+caption: tm-close-all-tiddlers
+
+The close all tiddlers message empties the story list.
+
+The close all tiddlers message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.

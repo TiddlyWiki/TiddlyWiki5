@@ -1,5 +1,5 @@
 title: $:/core/ui/ControlPanel/Basics
-tags: $:/tags/ControlPanel
+tags: $:/tags/ControlPanel/Info
 caption: {{$:/language/ControlPanel/Basics/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Basics/

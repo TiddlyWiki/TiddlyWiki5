@@ -35,7 +35,10 @@ exports.startup = function() {
 		// Set up location hash update
 		$tw.wiki.addEventListener("change",function(changes) {
 			if($tw.utils.hop(changes,DEFAULT_STORY_TITLE) || $tw.utils.hop(changes,DEFAULT_HISTORY_TITLE)) {
-				updateLocationHash();
+				updateLocationHash({
+					updateAddressBar: $tw.wiki.getTiddlerText(CONFIG_UPDATE_ADDRESS_BAR,"permaview").trim(),
+					updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim()
+				});
 			}
 		});
 		// Listen for changes to the browser location hash
@@ -45,12 +48,33 @@ exports.startup = function() {
 				$tw.locationHash = hash;
 				openStartupTiddlers({defaultToCurrentStory: true});
 			}
-		},false)
-		// Listen for the tw-home message
-		$tw.rootWidget.addEventListener("tw-home",function(event) {
+		},false);
+		// Listen for the tm-browser-refresh message
+		$tw.rootWidget.addEventListener("tm-browser-refresh",function(event) {
+			window.location.reload(true);
+		});
+		// Listen for the tm-home message
+		$tw.rootWidget.addEventListener("tm-home",function(event) {
+			window.location.hash = "";
 			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
 				storyList = $tw.wiki.filterTiddlers(storyFilter);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+		});
+		// Listen for the tm-permalink message
+		$tw.rootWidget.addEventListener("tm-permalink",function(event) {
+			updateLocationHash({
+				updateAddressBar: "permalink",
+				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
+				targetTiddler: event.param || event.tiddlerTitle
+			});
+		});
+		// Listen for the tm-permaview message
+		$tw.rootWidget.addEventListener("tm-permaview",function(event) {
+			updateLocationHash({
+				updateAddressBar: "permaview",
+				updateHistory: $tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim(),
+				targetTiddler: event.param || event.tiddlerTitle
+			});
 		});
 	}
 };
@@ -107,30 +131,39 @@ function openStartupTiddlers(options) {
 	}
 }
 
-function updateLocationHash() {
-	var updateAddressBar = $tw.wiki.getTiddlerText(CONFIG_UPDATE_ADDRESS_BAR,"permaview").trim();
-	if(updateAddressBar !== "no") {
+/*
+options: See below
+options.updateAddressBar: "permalink", "permaview" or "no" (defaults to "permaview")
+options.updateHistory: "yes" or "no" (defaults to "no")
+options.targetTiddler: optional title of target tiddler for permalink
+*/
+function updateLocationHash(options) {
+	if(options.updateAddressBar !== "no") {
 		// Get the story and the history stack
 		var storyList = $tw.wiki.getTiddlerList(DEFAULT_STORY_TITLE),
-			historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]);
-			var targetTiddler = "";
-		// The target tiddler is the one at the top of the stack
-		if(historyList.length > 0) {
-			targetTiddler = historyList[historyList.length-1].title;
-		}
-		// Blank the target tiddler if it isn't present in the story
-		if(storyList.indexOf(targetTiddler) === -1) {
+			historyList = $tw.wiki.getTiddlerData(DEFAULT_HISTORY_TITLE,[]),
 			targetTiddler = "";
+		if(options.targetTiddler) {
+			targetTiddler = options.targetTiddler;
+		} else {
+			// The target tiddler is the one at the top of the stack
+			if(historyList.length > 0) {
+				targetTiddler = historyList[historyList.length-1].title;
+			}
+			// Blank the target tiddler if it isn't present in the story
+			if(storyList.indexOf(targetTiddler) === -1) {
+				targetTiddler = "";
+			}
 		}
 		// Assemble the location hash
-		if(updateAddressBar === "permalink") {
-			$tw.locationHash = "#" + encodeURIComponent(targetTiddler)
+		if(options.updateAddressBar === "permalink") {
+			$tw.locationHash = "#" + encodeURIComponent(targetTiddler);
 		} else {
 			$tw.locationHash = "#" + encodeURIComponent(targetTiddler) + ":" + encodeURIComponent($tw.utils.stringifyList(storyList));
 		}
 		// Only change the location hash if we must, thus avoiding unnecessary onhashchange events
 		if($tw.utils.getLocationHash() !== $tw.locationHash) {
-			if($tw.wiki.getTiddlerText(CONFIG_UPDATE_HISTORY,"no").trim() === "yes") {
+			if(options.updateHistory === "yes") {
 				// Assign the location hash so that history is updated
 				window.location.hash = $tw.locationHash;
 			} else {

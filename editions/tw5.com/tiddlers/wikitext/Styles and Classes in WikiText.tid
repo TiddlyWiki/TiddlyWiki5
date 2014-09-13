@@ -1,8 +1,9 @@
 created: 20131205160532119
 modified: 20131205160549129
-tags: wikitext
+tags: WikiText
 title: Styles and Classes in WikiText
 type: text/vnd.tiddlywiki
+caption: Styles and Classes
 
 You can use this construction to cause the wrapped content to be assigned specified CSS classes or styles:
 
@@ -22,7 +23,7 @@ Similar syntax is used to assign styles. For example:
 
 Multiple styles and classes can be mixed. For example:
 
-<<wikitext-example src:"@@.tw-tiddler-frame
+<<wikitext-example src:"@@.tc-tiddler-frame
 @@width:400px;
 Some text
 @@

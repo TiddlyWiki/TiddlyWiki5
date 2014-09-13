@@ -36,11 +36,13 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	// Create element
 	var domNode = this.document.createElement("input");
 	domNode.setAttribute("type","file");
-	domNode.setAttribute("multiple","multiple");
+	if(this.browseMultiple) {
+		domNode.setAttribute("multiple","multiple");
+	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		self.wiki.readFiles(event.target.files,function(tiddlerFieldsArray) {
-			self.dispatchEvent({type: "tw-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
+			self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
 		});
 		return false;
 	},false);
@@ -54,6 +56,7 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 BrowseWidget.prototype.execute = function() {
+	this.browseMultiple = this.getAttribute("multiple");
 };
 
 /*

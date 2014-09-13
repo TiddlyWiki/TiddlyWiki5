@@ -1,15 +1,15 @@
 title: $:/themes/tiddlywiki/centralised/styles.tid
-tags: [[$:/tags/stylesheet]]
+tags: [[$:/tags/Stylesheet]]
 
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
 
-@media (min-width: 770px) {
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
 
-	html .tw-page-container {
+	html .tc-page-container {
 		text-align: center;
 	}
 
-	html .story-river {
+	html .tc-story-river {
 		position: relative;
 		width: 770px;
 		padding: 42px;
@@ -17,7 +17,7 @@ tags: [[$:/tags/stylesheet]]
 		text-align: left;
 	}
 
-	html .tw-sidebar-scrollable {
+	html .tc-sidebar-scrollable {
 		text-align: left;
 		left: 50%;
 		right: 0;

@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/upgrade",
+	"description": "User interface for upgrading TiddlyWiki documents",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}

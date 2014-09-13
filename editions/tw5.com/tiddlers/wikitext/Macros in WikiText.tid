@@ -1,8 +1,9 @@
 created: 20131205160746466
 modified: 20140619111725471
-tags: wikitext
+tags: WikiText
 title: Macros in WikiText
 type: text/vnd.tiddlywiki
+caption: Macros
 
 ! Defining Macros
 
@@ -65,7 +66,7 @@ Ratland.">>
 By using triple-double quotes you can specify parameter values that include single double quotes. For example:
 
 ```
-<<mysamplemacro "Mickey Mouse" "Mouse House,
+<<mysamplemacro "Mickey Mouse" """Mouse House,
 "Mouse" Lane,
 Rodentville,
 Ratland.""">>

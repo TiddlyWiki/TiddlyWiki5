@@ -1,0 +1,6 @@
+created: 20140909074234434
+modified: 20140909075544956
+title: $:/editions/de-AT-DE/snippets/download-empty-button
+type: text/vnd.tiddlywiki
+
+<$button message="tm-download-file" param="$:/editions/de-AT-DE/download-empty" class="tc-btn-big-green">Leeres Dokument Speichern {{$:/core/images/save-button}}</$button>

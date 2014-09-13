@@ -3,7 +3,7 @@ tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/Shadow/
 <$list filter="[all[current]get[draft.of]is[shadow]!is[tiddler]]">
-<div class="tw-message-box">
+<div class="tc-message-box">
 
 <<lingo Warning>>
 
@@ -11,7 +11,7 @@ tags: $:/tags/EditTemplate
 </$list>
 
 <$list filter="[all[current]get[draft.of]is[shadow]is[tiddler]]">
-<div class="tw-message-box">
+<div class="tc-message-box">
 
 <<lingo OverriddenWarning>>
 

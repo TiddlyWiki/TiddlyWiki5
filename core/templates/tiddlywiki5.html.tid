@@ -21,7 +21,7 @@ title: $:/core/templates/tiddlywiki5.html
 <!--~~ Raw markup ~~-->
 {{{ [all[shadows+tiddlers]tag[$:/core/wiki/rawmarkup]] [all[shadows+tiddlers]tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}
 </head>
-<body class="tw-body">
+<body class="tc-body">
 <!--~~ Static styles ~~-->
 <div id="styleArea">
 {{$:/boot/boot.css||$:/core/templates/css-tiddler}}

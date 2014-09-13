@@ -1,0 +1,24 @@
+created: 20130211153646000
+creator: tobibeer
+modified: 20140415164315536
+modifier: andrewstern
+tags: Formatting
+title: Line Breaks
+type: text/x-tiddlywiki
+
+!Summary
+Line breaks can be forced explicitly using a {{{<br>}}} -- useful in lists or tables.
+!Markup
+{{{
+|A cell<br> with a line break|
+}}}
+|A cell<br> with a line break|
+!!Avoiding Linebreaks
+Sometimes you want to avoid superflous linebreaks and increase readability of your wiki text, e.g. when using @@highlights@@ or the tiddler macro. To achieve that, end the current line by starting a hidden comment and ending it on the next line, e.g.:
+{{{
+@@highlight@@/%
+%/<<tiddler foo>>
+}}}
+This will prevent from adding a superflous linebreak between the highlight and the transcluded content that follows.
+!!Also see
+* [[Table Formatting

@@ -41,7 +41,7 @@ exports.copyDirectory = function(srcPath,dstPath) {
 				if(err) {
 					return err;
 				}
-			};
+			}
 		}
 	};
 	copy(srcPath,dstPath);
@@ -70,7 +70,7 @@ exports.copyFile = function(srcPath,dstPath) {
 	fs.closeSync(srcFile);
 	fs.closeSync(dstFile);
 	return null;
-}
+};
 
 /*
 Remove trailing path separator

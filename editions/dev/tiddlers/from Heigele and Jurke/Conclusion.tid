@@ -1,0 +1,21 @@
+created: 20140717203330824
+description: A briefly summary about this documentation bringing out the advantages, disadvantages and experiences with TiddlyWiki.
+modified: 20140717211803349
+sectionnumber: 5
+tags: section doc
+title: Conclusion
+
+TiddlyWiki consists in its heart only of a basic microkernel providing bare tiddlerstore and module system.
+It is written in ~JavaScript and suited to run in a browser or as node.js application.
+The core plug-in extends the microkernel with powerful functions from a central event system to a sophisticated widget system transforming WikiText to dynamic HTML.
+Because of it's microkernel architecture the application is highly customizable. The plug-in system not only allows to add new modules but also to override existing modules. Most of the components don't refer directly to modules but load them by type, allowing developers to inject additional modules including new saver implementations, widgets or even rules for the WikiText parser.
+The user interface of TiddlyWiki is written in WikiText and can be customized with the same language, a user normally uses when just writing wiki entries.
+
+A drawback of the core plug-in is it's high complexity. While the microkernel provides just the bare some bare functions and structures, the core plug-in adds a whole bunch of components at once.
+It can be challenging to decompose the core architecture and understand the connections between the components. This documentation could only cover the most important parts.
+This gives a developer the choice of building a whole new application on the microkernel or building the application on the core plug-in, including all modules and UI tiddlers.
+
+In conclusion, TiddlyWiki is a interesting piece of software.
+The focus on tiddlers, the functionality provided in the core and the fact that the core comes with a full blown wiki application puts TiddlyWiki into a personal information management domain, especially when using TiddlyWiki as a single file application storing code and data in a single HTML file.
+But the highly customizable nature makes TiddlyWiki perfect for this exact domain. A casual user can organize information with tags and metadata and customize the UI to a grade, that he is able to implement and test his own workflows just by using WikiText.
+~JavaScript developers can add whole new features and create completely new single page applications by building on the microkernel or customizing the core plug-in.

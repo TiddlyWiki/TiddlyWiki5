@@ -45,7 +45,7 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	// Create our element
 	this.canvasDomNode = $tw.utils.domMaker("canvas",{
 		document: this.document,
-		"class":"tw-edit-bitmapeditor",
+		"class":"tc-edit-bitmapeditor",
 		eventListeners: [{
 			name: "touchstart", handlerObject: this, handlerMethod: "handleTouchStartEvent"
 		},{
@@ -62,14 +62,14 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	});
 	this.widthDomNode = $tw.utils.domMaker("input",{
 		document: this.document,
-		"class":"tw-edit-bitmapeditor-width",
+		"class":"tc-edit-bitmapeditor-width",
 		eventListeners: [{
 			name: "change", handlerObject: this, handlerMethod: "handleWidthChangeEvent"
 		}]
 	});
 	this.heightDomNode = $tw.utils.domMaker("input",{
 		document: this.document,
-		"class":"tw-edit-bitmapeditor-height",
+		"class":"tc-edit-bitmapeditor-height",
 		eventListeners: [{
 			name: "change", handlerObject: this, handlerMethod: "handleHeightChangeEvent"
 		}]
@@ -120,7 +120,7 @@ EditBitmapWidget.prototype.loadCanvas = function() {
 		self.initCanvas(self.currCanvas,DEFAULT_IMAGE_WIDTH,DEFAULT_IMAGE_HEIGHT);
 		// Set the width and height input boxes
 		self.updateSize();
-	}
+	};
 	// Get the current bitmap into an image object
 	currImage.src = "data:" + tiddler.fields.type + ";base64," + tiddler.fields.text;
 };
@@ -135,7 +135,7 @@ EditBitmapWidget.prototype.initCanvas = function(canvas,width,height,image) {
 		ctx.fillStyle = "#fff";
 		ctx.fillRect(0,0,canvas.width,canvas.height);
 	}
-}
+};
 
 /*
 ** Update the input boxes with the actual size of the canvas

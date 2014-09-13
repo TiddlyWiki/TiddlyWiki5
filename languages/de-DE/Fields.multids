@@ -1,5 +1,6 @@
 title: $:/language/Docs/Fields/
 
+_canonical_uri: Die komplette URI eines externen Foto Tiddlers. URI = Uniform Resource Identifier, Identifikator für Ressourcen im Internet.
 bag: Der Name eines ~TiddlyWeb "bags" von dem der Tiddler kam.
 caption: Der Text, der auf "~Tab-Buttons" angezeigt wird.
 color: Der CSS Farbwert, der mit einem Tiddler assoziiert wird. 

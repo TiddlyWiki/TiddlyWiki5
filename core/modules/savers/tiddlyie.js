@@ -35,9 +35,10 @@ TiddlyIESaver.prototype.save = function(text,method,callback) {
 			// reconstruct UNC path
 			pathname = "\\\\" + document.location.hostname + pathname;
 		} else return false;
-		
 		// Prompt the user to save the file
 		window.TiddlyIE.save(pathname, text);
+		// Callback that we succeeded
+		callback(null);
 		return true;
 	} else {
 		return false;

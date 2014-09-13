@@ -1,8 +1,34 @@
 title: $:/core/ui/PageTemplate/story
 tags: $:/tags/PageTemplate
 
-<section class="story-river">
+<section class="tc-story-river">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]!has[draft.of]]">
+
+<!-- DEPRECATION WARNING -->WARNING: tag "$:/tags/stylesheet" on <$link><$view field="title"/></$link> should be replaced with "$:/tags/Stylesheet"
+
+</$list>
+
+<section class="story-backdrop">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/AboveStory]!has[draft.of]]">
+
+<$transclude/>
+
+</$list>
+
+</section>
 
 <$list filter="[list[$:/StoryList]]" history="$:/HistoryList" template="$:/core/ui/ViewTemplate" editTemplate="$:/core/ui/EditTemplate" storyview={{$:/view}} />
+
+<section class="story-frontdrop">
+
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/BelowStory]!has[draft.of]]">
+
+<$transclude/>
+
+</$list>
+
+</section>
 
 </section>

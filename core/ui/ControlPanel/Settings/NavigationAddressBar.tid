@@ -1,0 +1,13 @@
+title: $:/core/ui/ControlPanel/Settings/NavigationAddressBar
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/NavigationAddressBar/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/NavigationAddressBar/
+
+<$link to="$:/config/Navigation/UpdateAddressBar"><<lingo Hint>></$link>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permaview"> <<lingo Permaview/Description>> </$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permalink"> <<lingo Permalink/Description>> </$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="no"> <<lingo No/Description>> </$radio>

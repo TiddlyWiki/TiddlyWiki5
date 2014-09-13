@@ -41,11 +41,28 @@ TiddlerWidget.prototype.execute = function() {
 	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
 	// Set context variables
 	this.setVariable("currentTiddler",this.tiddlerTitle);
-	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tw-tiddler-exists" : "tw-tiddler-missing");
-	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tw-tiddler-shadow" : "");
-	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tw-tiddler-system" : "");
+	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tc-tiddler-exists" : "tc-tiddler-missing");
+	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tc-tiddler-shadow" : "");
+	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tc-tiddler-system" : "");
+	this.setVariable("tiddlerTagClasses",this.getTagClasses());
 	// Construct the child widgets
 	this.makeChildWidgets();
+};
+
+/*
+Create a string of CSS classes derived from the tags of the current tiddler
+*/
+TiddlerWidget.prototype.getTagClasses = function() {
+	var tiddler = this.wiki.getTiddler(this.tiddlerTitle);
+	if(tiddler) {
+		var tags = [];
+		$tw.utils.each(tiddler.fields.tags,function(tag) {
+			tags.push("tc-tagged-" + encodeURIComponent(tag));
+		});
+		return tags.join(" ");
+	} else {
+		return "";
+	}
 };
 
 /*

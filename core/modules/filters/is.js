@@ -20,7 +20,7 @@ function getIsFilterOperators() {
 		$tw.modules.applyMethods("isfilteroperator",isFilterOperators);
 	}
 	return isFilterOperators;
-};
+}
 
 /*
 Export our filter function

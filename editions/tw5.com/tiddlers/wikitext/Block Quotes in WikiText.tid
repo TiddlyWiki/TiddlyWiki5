@@ -1,8 +1,9 @@
 created: 20131206154636572
 modified: 20131206162157596
-tags: wikitext
+tags: WikiText
 title: Block Quotes in WikiText
 type: text/vnd.tiddlywiki
+caption: Block Quotes
 
 There are two ways to produce HTML block quotes in TiddlyWiki5, one for content spread across multiple lines, and one for single line content.
 

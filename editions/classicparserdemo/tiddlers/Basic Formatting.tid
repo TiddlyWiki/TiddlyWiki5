@@ -1,0 +1,24 @@
+created: 20121217004633000
+creator: keithb
+modified: 20140415164633773
+modifier: andrewstern
+tags: Formatting
+title: Basic Formatting
+type: text/x-tiddlywiki
+
+
+!Summary
+//''Emphasizing''// @@text@@ __is easy__!
+!Markup
+| !Style | !Markup |h
+|<html><b><i>bold</i></b></html>|{{{''bold''}}} -- two single-quotes|
+|//italics//|{{{//italics//}}}|
+|<html><b><i>bold italics</i></b></html>|{{{''//bold italics//''}}}|
+|__underline__|{{{__underline__}}}|
+|--strikethrough--|{{{--Strikethrough--}}}|
+|super^^script^^|{{{super^^script^^}}}|
+|sub~~script~~|{{{sub~~script~~}}}|
+|@@Highlight@@|{{{@@Highlight@@}}}|
+|{{{plain text}}}|<html><code>{{{PlainText No ''Formatting''}}}</code></html>|
+|/%this text will be invisible%/hidden text|{{{/%this text will be invisible%/}}}|
+|foo -- bar|{{{use two dashes -- between two words to create an Em dash}}}|

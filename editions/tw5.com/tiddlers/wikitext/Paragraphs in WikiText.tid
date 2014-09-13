@@ -1,8 +1,9 @@
 created: 20131205155836435
 modified: 20131214170445345
-tags: wikitext
+tags: WikiText
 title: Paragraphs in WikiText
 type: text/vnd.tiddlywiki
+caption: Paragraphs
 
 To mark the end of a paragraph in TiddlyWiki you need to type `enter` twice to create a double line break:
 

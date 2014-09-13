@@ -1,0 +1,26 @@
+created: 20140831112438405
+modified: 20140901080739956
+title: Developers Notes
+type: text/x-tiddlywiki
+
+The  includes handling of namespace conflicts between Classic and Tw5 macros.
+
+One of the goals of the Tw2parser plugin is to hide the Classic macros from tiddlers of types other than text/x-tiddlywiki. This is achieved by having the parser prepend the macro definitions to the 'local' parse tree (see around line 60 wikitextparser.js), making them only visible in text/x-tiddlywiki tiddlers and typed-blocks. At present all text based Classic macros are in the same file.
+
+As all global Tw5 macros are visible in all tiddlers (including text/x-tiddlywiki tiddlers), there is a name-space conflict between Classic and tw5 macros. For macros that are defined using tiddlytext (ie /define() /end blocks) the local defined Classic definition will override the global Tw5 macros (which is what we want).
+
+For cases where simple overriding is not sufficient, the tw2parser plugin also has a 'macro name adapter' module (macroadapter.js) to move the Classic macros names to a new names -
+(in wikitextrules.js around line 490)
+
+{{{tw2on5-name=macroadapter.namedapter[tw2name];}}}
+
+This is invisible to the user.
+
+An example is the {{{tabs()}}} macro which is mapped to {{{__system_tabs()}}}
+so the user still types {{{tabs()}}} but this is mapped to {{{__system_tabs()}}} in the parser which is what appears in the file macrodefs.tids
+
+There is also the facility to manipulate the parameters via {{{params=macroadapter.paramadaptername}}}
+This is used in the 'tabs' macro where there is a variable number of parameters that must be mapped into fixed number of tw5 macro parameters.
+
+The implementation of the tabs macro is rather sophisticated, the parameters are put into maps from tab-tiddername to tab-property (properties are cookies, prompts and labels) implemented as jsons.
+

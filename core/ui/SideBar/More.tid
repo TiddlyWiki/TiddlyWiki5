@@ -2,6 +2,6 @@ title: $:/core/ui/SideBar/More
 tags: $:/tags/SideBar
 caption: {{$:/language/SideBar/More/Caption}}
 
-<div class="tw-more-sidebar">
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]" "$:/core/ui/MoreSideBar/Tags" "$:/state/tab/moresidebar" "tw-vertical">>
+<div class="tc-more-sidebar">
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/MoreSideBar]!has[draft.of]]" "$:/core/ui/MoreSideBar/Tags" "$:/state/tab/moresidebar" "tc-vertical">>
 </div>

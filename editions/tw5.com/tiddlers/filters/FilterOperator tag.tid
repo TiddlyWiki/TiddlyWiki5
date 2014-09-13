@@ -1,7 +1,8 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters commonfilters
+tags: Filters CommonFilters
 title: FilterOperator: tag
+caption: tag
 type: text/vnd.tiddlywiki
 
 The ''tag'' filter operator returns the tiddlers in the current list that have the tag specified in the operand. Preceding the operator with `!` returns tiddlers that do not have the specified tag.
@@ -13,6 +14,6 @@ For example:
 |`[all[shadows]tag[mytag]]` |Returns all ShadowTiddlers tagged `mytag` |
 |`[all[shadows+tiddlers]tag[mytag]]` |Returns all ShadowTiddlers and non-ShadowTiddlers tagged `mytag` |
 |`[!tag[mytag]]` |Returns all tiddlers not tagged `mytag` |
-|`[tag[mytag]!tag[exclude]]` |Returns all tiddlers tagged `mytag` that are not tagged `mytag` |
+|`[tag[mytag]!tag[exclude]]` |Returns all tiddlers tagged `mytag` that are not tagged `exclude` |
 
 See also [[FilterOperator: tagging]], [[FilterOperator: tags]] and [[FilterOperator: untagged]].

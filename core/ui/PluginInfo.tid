@@ -1,0 +1,15 @@
+title: $:/core/ui/PluginInfo
+
+\define localised-info-tiddler-title()
+$(currentTiddler)$/$(languageTitle)$/$(currentTab)$
+\end
+\define info-tiddler-title()
+$(currentTiddler)$/$(currentTab)$
+\end
+<$transclude tiddler=<<localised-info-tiddler-title>> mode="block">
+<$transclude tiddler=<<currentTiddler>> subtiddler=<<localised-info-tiddler-title>> mode="block">
+<$transclude tiddler=<<currentTiddler>> subtiddler=<<info-tiddler-title>> mode="block">
+No ''"<$text text=<<currentTab>>/>"'' found
+</$transclude>
+</$transclude>
+</$transclude>

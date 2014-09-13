@@ -1,10 +1,11 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
 title: FilterOperator: sortcs
+caption: sortcs
 type: text/vnd.tiddlywiki
 
-The ''sortcs'' filter operator sorts the current list case sensitively (upper and lower case letters are considered different). Preceding the operator with `!` reverses the sort order.
+The ''sortcs'' filter operator sorts the current list case sensitively (upper and lower case letters are considered different), along the field specified in the operand (which defaults to `title`). Preceding the operator with `!` reverses the sort order.
 
 For example:
 

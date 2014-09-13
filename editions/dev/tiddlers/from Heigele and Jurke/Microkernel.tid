@@ -1,0 +1,21 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708081952235
+modified: 20140717195539035
+sub.num: 2
+tags: doc
+title: Microkernel
+
+In the universe of TiddlyWiki everything is a tiddler.
+Even the application logic is stored in tiddlers that are marked as "application/javascript".
+These tiddlers, which contain application logic, are called modules and a ~CommonJS compatible module system is responsible for assembling the individual modules into the TiddlyWiki application.
+The result is a tree representing the whole TiddlyWiki application containing module tiddlers, data tiddlers and some ~JavaScript functions and objects.
+
+Only a small part of the TiddlyWiki is not managed as tiddlers, the microkernel.
+The microkernel is the first thing to run, when the application is started and it puts some initial objects and functions into the application tree, which are needed to load and manage tiddlers.
+After the microkernel built this initial application tree, the remaining parts of the application can be loaded as module tiddlers.
+Beside some utility functions the most important object that is contributed by the boot kernel is "$tw.wiki", consisting of ~JavaScript structures and functions that are used to store and manage the loaded tiddlers.
+Among other things this store can be used to add new tiddlers, remove tiddlers and retrieve tiddlers by name.
+
+<<<
+{{apptree.svg}}
+<<< The microkernel constructs a initial $tw object containing the needed structures and functions.

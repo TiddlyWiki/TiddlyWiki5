@@ -1,11 +1,12 @@
 title: CountWidget
 created: 201310241419
 modified: 201310300837
-tags: widget
+tags: Widgets
+caption: count
 
 ! Introduction
 
-The count widget displays the number of matches to a specified [[filter expression|TiddlerFilters]].
+The count widget displays the number of matches to a specified [[filter expression|Filters]].
 
 ! Content and Attributes
 

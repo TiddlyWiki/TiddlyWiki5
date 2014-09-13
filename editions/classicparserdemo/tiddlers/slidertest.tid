@@ -1,0 +1,8 @@
+created: 20140416192513067
+modified: 20140416200952144
+title: slidertest
+type: text/x-tiddlywiki
+
+!!now a transclusion of [[Basic Formatting]]
+<hr>
+<<tiddler [[Basic Formatting]]>>

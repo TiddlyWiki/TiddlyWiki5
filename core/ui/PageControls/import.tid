@@ -1,0 +1,16 @@
+title: $:/core/ui/Buttons/import
+tags: $:/tags/PageControls
+caption: {{$:/core/images/import-button}} {{$:/language/Buttons/Import/Caption}}
+description: {{$:/language/Buttons/Import/Hint}}
+
+<div class="tc-file-input-wrapper">
+<$button tooltip={{$:/language/Buttons/Import/Hint}} aria-label={{$:/language/Buttons/Import/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/import-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Import/Caption}}/>
+</$list>
+</$button>
+<$browse/>
+</div>

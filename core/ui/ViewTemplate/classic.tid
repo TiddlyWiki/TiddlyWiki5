@@ -3,7 +3,7 @@ tags: $:/tags/ViewTemplate $:/tags/EditTemplate
 
 \define lingo-base() $:/language/ClassicWarning/
 <$list filter="[all[current]type[text/x-tiddlywiki]]">
-<div class="tw-message-box">
+<div class="tc-message-box">
 
 <<lingo Hint>>
 

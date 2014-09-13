@@ -1,15 +1,18 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters commonfilters
+tags: Filters CommonFilters
 title: FilterOperator: sort
+caption: sort
 type: text/vnd.tiddlywiki
 
-The ''sort'' filter operator sorts the current list case insensitively (upper and lower case letters are considered equivalent). Preceding the operator with `!` reverses the sort order.
+The ''sort'' filter operator sorts the current list case insensitively (upper and lower case letters are considered equivalent), along the field specified in the operand (which defaults to `title`). Preceding the operator with `!` reverses the sort order.
 
 For example:
 
 |!Filter String |!Description |
 |`one two three four +[sort[]]` |Returns `four`, `one`, `three`, `two` |
 |`one two Three four +[sort[]]` |Returns `four`, `one`, `Three`, `two` |
+
+For an example of use with explicit operands, see [[FilterOperator: limit]].
 
 See also [[FilterOperator: nsort]], [[FilterOperator: sortcs]] and [[FilterOperator: nsortcs]].

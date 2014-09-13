@@ -28,6 +28,8 @@ MsDownloadSaver.prototype.save = function(text,method,callback) {
 	// Set up the link
 	var blob = new Blob([text], {type: "text/html"});
 	window.navigator.msSaveBlob(blob,filename);
+	// Callback that we succeeded
+	callback(null);
 	return true;
 };
 

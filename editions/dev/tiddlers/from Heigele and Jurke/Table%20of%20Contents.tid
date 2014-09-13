@@ -1,0 +1,70 @@
+created: 20140708080152731
+modified: 20140714171831330
+tags: doc
+title: Table of Contents
+
+\define toc-heading(caption,body)
+<$reveal type="nomatch" state=<<qualify "$:/state/toc/$caption$">> text="show">
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="show" class="tc-btn-invisible">{{$:/core/images/right-arrow}} $caption$
+</$button>
+</$reveal>
+<$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show">
+<$button set=<<qualify "$:/state/toc/$caption$">> setTo="hide" class="tc-btn-invisible">{{$:/core/images/down-arrow}} $caption$
+</$button>
+</$reveal>
+<$reveal type="match" state=<<qualify "$:/state/toc/$caption$">> text="show" retain="yes" animate="yes">
+
+$body$
+
+</$reveal>
+\end
+<div class="tc-table-of-contents">
+
+# [[Introduction]]
+
+# [[Decomposition of the TiddlyWiki-Architecture]]
+## <<toc-heading "Architecture of the single page application ~TiddlyWiki" "
+##[[Architecture of the single page application TiddlyWiki]]
+### [[Boot Kernel|Boot Kernel]]
+###[[Data Persistence|Data Persistence]]
+###[[UI - WikiText and Widgets|UI - WikiText and Widgets]]
+###[[Modularization|Modularization]]
+">>
+## <<toc-heading "Tiddler as the key element" "
+##[[Tiddler as the key element]]
+">>
+## <<toc-heading "The ~WikiText concept" "
+##[[The WikiText concept]]
+">>
+# [[Bootstrap-Process]]
+## <<toc-heading "The Heart of ~TiddlyWiki (~Boot-Kernel)" "
+##[[The Heart of TiddlyWiki (Boot-Kernel)]]
+">>
+## <<toc-heading "Timeline of the startup Process" "
+##[[Timeline of the startup Process]]
+">>
+# [[The Plugin and Module concept]]
+## <<toc-heading "Introduction to the Module- and ~Plugin-Concept" "
+##[[Introduction to the Module- and Plugin-Concept]]
+">>
+## <<toc-heading "Using Modules to build a Single File Application" "
+##[[Using Modules to build a Single File Application]]
+###[[Startup Modules]]
+###[[Deserializer Modules]]
+###[[Saver Modules]]
+###[[Syncadaptor Modules]]
+">>
+## <<toc-heading "Using Modules to extend the UI" "
+##[[Using Modules to extend the UI]]
+">>
+#[[Developing a own Plugin]]
+#[[The TiddlyWiki data management concept]]
+## <<toc-heading "Data Management during Runtime" "
+##[[Data Management during Runtime]]
+">>
+## <<toc-heading "Data Persistence" "
+##[[Persist data|Persist data]]
+##[[Data-Storage|Data-Storage]]
+">>
+#[[Conclusion]]
+</div>

@@ -1,16 +1,17 @@
 created: 20131024141900000
 modified: 20140226194810214
-tags: widget
+tags: Widgets
 title: NavigatorWidget
 type: text/vnd.tiddlywiki
+caption: navigator
 
 ! Introduction
 
-The navigator widget manipulates the current store, the story list and history lists in response to various WidgetMessages.
+The navigator widget manipulates the current store, the story list and history lists in response to various [[Messages]].
 
 ! Content and Attributes
 
-The navigator widget displays any contained content, and responds to WidgetMessages dispatched within it.
+The navigator widget displays any contained content, and responds to Messages dispatched within it.
 
 |!Attribute |!Description |
 |story |Name of the tiddler containing the story list to be manipulated |
@@ -18,7 +19,7 @@ The navigator widget displays any contained content, and responds to WidgetMessa
 
 ! Widget Messages
 
-The following WidgetMessages are handled by the navigator widget:
+The following [[Messages]] are handled by the navigator widget:
 
 <ul>
 <$list filter="[tag[navigator-message]]">

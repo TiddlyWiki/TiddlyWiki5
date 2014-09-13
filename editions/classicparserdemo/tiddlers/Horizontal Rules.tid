@@ -1,0 +1,25 @@
+created: 20130211150739000
+creator: tobibeer
+modified: 20140415164242103
+modifier: andrewstern
+tags: Formatting
+title: Horizontal Rules
+type: text/x-tiddlywiki
+
+!Summary
+Use four dashes on a line or the HTML tag {{{<hr>}}} to produce a horizontal rule.
+!Markup
+{{{
+before
+----
+after
+}}}
+or
+{{{
+before<hr>after
+}}}
+''Displays as:''
+
+before
+----
+after

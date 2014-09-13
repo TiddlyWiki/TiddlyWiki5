@@ -1,0 +1,16 @@
+created: 20130827080000000
+modified: 20140912145347313
+tags: Reference Concepts
+title: Filters
+type: text/vnd.tiddlywiki
+
+Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria. They are used by widgets like the ListWidget and the CountWidget to perform operations on multiple tiddlers at once.
+
+* [[Introduction to Filters]] is a step-by-step introduction to how filters are used
+* [[Filter Formal Grammar]] is a technical explanation of the filter syntax.
+
+The most common filter operators are:
+
+<<list-unordered-links "[tag[CommonFilters]]">>
+
+See FilterOperators for a complete list of available filter operators

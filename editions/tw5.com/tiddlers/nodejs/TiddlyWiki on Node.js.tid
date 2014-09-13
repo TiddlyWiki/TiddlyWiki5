@@ -1,0 +1,17 @@
+created: 20131129094353704
+modified: 20140912141900862
+tags: [[Other TiddlyWiki configurations]]
+title: TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+Running TiddlyWiki on [[Node.js]] brings several important benefits over and above the single file version:
+
+* You can edit your content on any suitably compatible HTML5 browser, including smartphones and tablets
+* Individual tiddlers are stored in separate files, which you can organise as you wish
+* The ability to build multiple wikis that blend different combinations of shared and unique content
+
+For more information see:
+
+* Installing TiddlyWiki on Node.js
+* Using TiddlyWiki on Node.js
+* Upgrading TiddlyWiki on Node.js

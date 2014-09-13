@@ -1,8 +1,0 @@
-title: $:/core/ui/ControlPanel/Advanced/LoadedModules
-tags: $:/tags/ControlPanel/Advanced
-caption: {{$:/language/ControlPanel/Advanced/LoadedModules/Caption}}
-
-\define lingo-base() $:/language/ControlPanel/Advanced/
-<<lingo LoadedModules/Hint>>
-
-{{$:/snippets/modules}}

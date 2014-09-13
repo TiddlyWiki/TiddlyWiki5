@@ -1,8 +1,9 @@
 created: 20131205160221762
 modified: 20140416160234142
-tags: wikitext
+tags: WikiText
 title: Images in WikiText
 type: text/vnd.tiddlywiki
+caption: Images
 
 ! Image Formatting
 
@@ -25,7 +26,7 @@ Attributes can be provided to specify CSS classes and the image width and height
 
 ```
 [img width=32 [Motovun Jack.jpg]]
-[img width=32 class="tw-image" [Motovun Jack.jpg]]
+[img width=32 class="tc-image" [Motovun Jack.jpg]]
 ```
 
 Note that attributes can be specified as transclusions or variable references:

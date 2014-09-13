@@ -33,7 +33,10 @@ var Commander = function(commandTokens,callback,wiki,streams) {
 Add a string of tokens to the command queue
 */
 Commander.prototype.addCommandTokens = function(commandTokens) {
-	Array.prototype.push.apply(this.commandTokens,commandTokens);
+	var params = commandTokens.slice(0);
+	params.unshift(0);
+	params.unshift(this.nextToken);
+	Array.prototype.splice.apply(this.commandTokens,params);
 };
 
 /*

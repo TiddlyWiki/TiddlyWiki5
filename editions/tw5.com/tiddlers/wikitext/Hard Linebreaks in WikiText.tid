@@ -1,8 +1,9 @@
 created: 20131214165710101
 modified: 20131214170106553
-tags: wikitext
+tags: WikiText
 title: Hard Linebreaks in WikiText
 type: text/vnd.tiddlywiki
+caption: Hard Linebreaks
 
 The usual handling of [[paragraphs in wikitext|Paragraphs in WikiText]] causes single line breaks to be ignored, and double linebreaks to be interpreted as the end of a paragraph.
 

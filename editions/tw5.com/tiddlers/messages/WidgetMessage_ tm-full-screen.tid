@@ -1,0 +1,10 @@
+created: 20140811112400855
+modified: 20140811113627373
+tags: Messages
+title: WidgetMessage: tm-full-screen
+type: text/vnd.tiddlywiki
+caption: tm-full-screen
+
+The fullscreen message toggles the "fullscreen" mode of the browser, if it supports it.
+
+The fullscreen message is handled by the TiddlyWiki core.

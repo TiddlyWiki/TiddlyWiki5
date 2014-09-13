@@ -1,6 +1,6 @@
 title: $:/snippets/viewswitcher
 
-\define lingo-base() $:/language/ControlPanel/Appearance/StoryView/
+\define lingo-base() $:/language/ControlPanel/StoryView/
 <<lingo Prompt>> <$select tiddler="$:/view">
 <$list filter="[storyviews[]]">
 <option><$view field="title"/></option>

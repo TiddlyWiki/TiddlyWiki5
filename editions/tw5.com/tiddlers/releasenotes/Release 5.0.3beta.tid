@@ -1,0 +1,11 @@
+created: 201312151700
+modified: 201312151700
+tags: BetaReleaseNotes
+title: Release 5.0.3-beta
+type: text/vnd.tiddlywiki
+released: 201312151700
+caption: 5.0.3-beta
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.2-beta...v5.0.3-beta]]//
+
+This release includes minor bug fixes and documentation updates.

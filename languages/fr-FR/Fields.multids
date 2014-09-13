@@ -1,5 +1,6 @@
 title: $:/language/Docs/Fields/
 
+_canonical_uri: L'URI complet vers le contenu externe d'un tiddler image
 bag: Nom du <q>bag</q> d'où provient le tiddler
 caption: Texte à afficher sur un onglet ou un bouton
 color: Couleur CSS associée au tiddler

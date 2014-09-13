@@ -34,7 +34,8 @@ exports.init = function(parser) {
 
 exports.parse = function() {
 	var reEnd = /(""")|(\r?\n)/mg,
-		tree = [];
+		tree = [],
+		match;
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	do {
@@ -42,7 +43,7 @@ exports.parse = function() {
 		tree.push.apply(tree,this.parser.parseInlineRun(reEnd,{eatTerminator: false}));
 		// Redo the terminator match
 		reEnd.lastIndex = this.parser.pos;
-		var match = reEnd.exec(this.parser.source);
+		match = reEnd.exec(this.parser.source);
 		if(match) {
 			this.parser.pos = reEnd.lastIndex;
 			// Add a line break if the terminator was a line break

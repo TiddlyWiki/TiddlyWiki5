@@ -1,0 +1,10 @@
+title: $:/core/ui/ControlPanel/Settings/NavigationHistory
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/NavigationHistory/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/NavigationHistory/
+<$link to="$:/config/Navigation/UpdateHistory"><<lingo Hint>></$link>
+
+<$radio tiddler="$:/config/Navigation/UpdateHistory" value="yes"> <<lingo Yes/Description>> </$radio>
+
+<$radio tiddler="$:/config/Navigation/UpdateHistory" value="no"> <<lingo No/Description>> </$radio>

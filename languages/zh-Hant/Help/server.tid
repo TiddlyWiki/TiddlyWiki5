@@ -28,4 +28,10 @@ description: 提供一個 HTTP 伺服器介面到 TiddlyWiki
 --server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
 ```
 
+若您需要設定主機名稱或路徑前綴而不要求輸入密碼，則可以指定空字串的使用者名和密碼：
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
 同時執行多個 TiddlyWiki 伺服器，須分別指定不同的埠號。

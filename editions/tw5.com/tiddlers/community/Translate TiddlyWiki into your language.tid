@@ -1,0 +1,7 @@
+created: 20140908123800000
+modified: 20140910212909125
+tags: Community
+title: Translate TiddlyWiki into your language
+type: text/vnd.tiddlywiki
+
+Our eventual goal is to make it easy for anyone to create a new translation for TiddlyWiki. Right now, the process requires familiarity with GitHub and so is documented over at http://tiddlywiki.com/dev.

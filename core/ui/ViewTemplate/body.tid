@@ -1,12 +1,16 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
-<div class="body">
+<div class="tc-tiddler-body">
+
+<$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
 <$transclude>
 
 <$transclude tiddler="$:/language/MissingTiddler/Hint"/>
 
 </$transclude>
+
+</$list>
 
 </div>

@@ -1,8 +1,9 @@
 created: 20131024141900000
 modified: 20140211232346858
-tags: widget
+tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
+caption: reveal
 
 ! Introduction
 
@@ -21,7 +22,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
-|default |Default value to use when the state tiddler |
+|default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no")|
 
@@ -68,7 +69,7 @@ Here is a simple example of a popup built with the RevealWidget:
 <<wikitext-example-without-html '<$button popup="$:/SamplePopupState">Pop me up!</$button>
 
 <$reveal type="popup" state="$:/SamplePopupState">
-<div class="tw-drop-down">
+<div class="tc-drop-down">
 
 ! This is the popup
 And this is some text

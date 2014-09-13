@@ -42,7 +42,7 @@ exports.parse = function() {
 		type: "element",
 		tag: "span",
 		attributes: {
-			"class": {type: "string", value: "tw-inline-style"}
+			"class": {type: "string", value: "tc-inline-style"}
 		},
 		children: tree
 	};

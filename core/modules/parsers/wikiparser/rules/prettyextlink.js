@@ -73,7 +73,7 @@ exports.parseLink = function(source,pos) {
 			tag: "a",
 			start: pos,
 			attributes: {
-				"class": {type: "string", value: "tw-tiddlylink-external"},
+				"class": {type: "string", value: "tc-tiddlylink-external"},
 			},
 			children: [textNode]
 		};

@@ -45,7 +45,7 @@ exports.init = function(parser) {
 };
 
 exports.parse = function() {
-	var classes = ["tw-quote"];
+	var classes = ["tc-quote"];
 	// Get all the details of the match
 	var reEndString = "^" + this.match[1] + "(?!<)";
 	// Move past the <s
@@ -55,7 +55,6 @@ exports.parse = function() {
 	classes.push.apply(classes, this.parser.parseClasses());
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
 	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
-
 	// before handling the cite, parse the body of the quote
 	var tree= this.parser.parseBlocks(reEndString);
 	// If we got a cite, put it before the text
@@ -66,10 +65,9 @@ exports.parse = function() {
 			children: cite
 		});
 	}
-
 	// Parse any optional cite
 	this.parser.skipWhitespace({treatNewlinesAsNonWhitespace: true});
-	var cite = this.parser.parseInlineRun(/(\r?\n)/mg);
+	cite = this.parser.parseInlineRun(/(\r?\n)/mg);
 	// If we got a cite, push it
 	if(cite.length > 0) {
 		tree.push({
@@ -78,7 +76,6 @@ exports.parse = function() {
 			children: cite
 		});
 	}
-
 	// Return the blockquote element
 	return [{
 		type: "element",

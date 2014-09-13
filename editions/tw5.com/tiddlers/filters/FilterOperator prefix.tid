@@ -1,6 +1,7 @@
 created: 20140410103123179
 modified: 20140410103123179
-tags: filters
+tags: Filters
+caption: prefix
 title: FilterOperator: prefix
 type: text/vnd.tiddlywiki
 
@@ -12,4 +13,4 @@ For example:
 |`[tag[task]!prefix[hidden]]` |Returns tiddlers tagged `task` whose titles do not start with `hidden` |
 |`[prefix[$:/]]` |Equivalent to `[is[system]]` |
 
-See also [[FilterOperator: removeprefix]].
+See also [[FilterOperator: removeprefix]], [[FilterOperator: removesuffix]] and [[FilterOperator: removesuffix]].

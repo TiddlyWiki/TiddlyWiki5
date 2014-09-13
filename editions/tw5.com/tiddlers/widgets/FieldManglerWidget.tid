@@ -1,22 +1,23 @@
 created: 20131024141900000
 modified: 20140125140636123
-tags: widget
+tags: Widgets
 title: FieldManglerWidget
 type: text/vnd.tiddlywiki
+caption: fieldmangler
 
 ! Introduction
 
-The field mangler widget manipulates the fields and tags of a tiddler. It does so in response to the following WidgetMessages:
+The field mangler widget manipulates the fields and tags of a tiddler. It does so in response to the following [[Messages]]:
 
 |!Message |!Description |
-|''tw-remove-field'' |Remove the field specified in `event.param` |
-|''tw-add-field'' |Add the field specified in `event.param` |
-|''tw-remove-tag'' |Remove the tag specified in `event.param` |
-|''tw-add-tag'' |Add the tag specified in `event.param` |
+|''tm-remove-field'' |Remove the field specified in `event.param` |
+|''tm-add-field'' |Add the field specified in `event.param` |
+|''tm-remove-tag'' |Remove the tag specified in `event.param` |
+|''tm-add-tag'' |Add the tag specified in `event.param` |
 
 ! Content and Attributes
 
-The field mangler widget displays any contained content, and responds to WidgetMessages dispatched within it.
+The field mangler widget displays any contained content, and responds to [[Messages]] dispatched within it.
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |

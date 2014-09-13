@@ -1,0 +1,13 @@
+title: $:/core/ui/Buttons/permalink
+tags: $:/tags/ViewToolbar
+caption: {{$:/core/images/permalink-button}} {{$:/language/Buttons/Permalink/Caption}}
+description: {{$:/language/Buttons/Permalink/Hint}}
+
+<$button message="tm-permalink" tooltip={{$:/language/Buttons/Permalink/Hint}} aria-label={{$:/language/Buttons/Permalink/Caption}} class=<<tv-config-toolbar-class>>>
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/permalink-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<$text text={{$:/language/Buttons/Permalink/Caption}}/>
+</$list>
+</$button>

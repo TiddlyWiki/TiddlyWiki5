@@ -38,6 +38,6 @@ function setFavicon() {
 		var faviconLink = document.getElementById("faviconLink");
 		faviconLink.setAttribute("href","data:" + tiddler.fields.type + ";base64," + tiddler.fields.text);
 	}
-};
+}
 
 })();

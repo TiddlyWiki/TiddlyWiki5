@@ -1,12 +1,18 @@
 title: BrowseWidget
 created: 201310241419
-modified: 201310300837
-tags: widget
+modified: 20140910200751303
+tags: Widgets
+caption: browse
 
 ! Introduction
 
-The browse widget displays an HTML file browser button that allows the user to choose one or more files to import. It sends a [[WidgetMessage: tw-import-tiddlers]] carrying a JSON representation of the tiddlers imported from the files up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
+The browse widget displays an HTML file browser button that allows the user to choose one or more files to import. It sends a [[WidgetMessage: tm-import-tiddlers]] carrying a JSON representation of the tiddlers imported from the files up through its parents. This message usually trapped by the NavigatorWidget which adds the tiddlers to the store and updates the story to display them.
 
 ! Content and Attributes
 
-The browse widget has no attributes, and ignores any contained content.
+The content of the `<$browse>` widget is ignored.
+
+|!Attribute |!Description |
+|multiple |Set to "multiple" to select multiple file upload |
+
+On iPhone/iPad choosing the multiple option will remove the ability to take photographs/videos directly into TiddlyWiki.

@@ -26,7 +26,7 @@ Command.prototype.execute = function() {
 	// Get the build targets defined in the wiki
 	var buildTargets = $tw.boot.wikiInfo.build;
 	if(!buildTargets) {
-		return "No build targets defined"
+		return "No build targets defined";
 	}
 	// Loop through each of the specified targets
 	var targets;

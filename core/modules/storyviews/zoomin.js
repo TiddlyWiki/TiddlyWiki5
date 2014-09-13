@@ -12,6 +12,8 @@ Zooms between individual tiddlers
 /*global $tw: false */
 "use strict";
 
+var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
+
 var ZoominListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
@@ -77,18 +79,18 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	this.currentTiddlerDomNode = targetElement;
 	// Transform the target tiddler to its natural size
 	$tw.utils.setStyle(targetElement,[
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
 		{opacity: "1.0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{zIndex: "500"},
 	]);
 	// Transform the previous tiddler out of the way and then hide it
 	if(prevCurrentTiddler && prevCurrentTiddler !== targetElement) {
-		var scale = zoomBounds.width / sourceBounds.width;
+		scale = zoomBounds.width / sourceBounds.width;
 		x =  zoomBounds.left - targetBounds.left - (sourceBounds.left - targetBounds.left) * scale;
 		y =  zoomBounds.top - targetBounds.top - (sourceBounds.top - targetBounds.top) * scale;
 		$tw.utils.setStyle(prevCurrentTiddler,[
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
 			{opacity: "0.0"},
 			{transformOrigin: "0 0"},
 			{transform: "translateX(" + x + "px) translateY(" + y + "px) scale(" + scale + ")"},
@@ -106,10 +108,10 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 };
 
 /*
-Find the first child DOM node of a widget that has the class "title"
+Find the first child DOM node of a widget that has the class "tc-title"
 */
 function findTitleDomNode(widget,targetClass) {
-	targetClass = targetClass || "title";
+	targetClass = targetClass || "tc-title";
 	var domNode = widget.findFirstDomNode();
 	if(domNode && domNode.querySelector) {
 		return domNode.querySelector("." + targetClass);
@@ -151,7 +153,7 @@ ZoominListView.prototype.remove = function(widget) {
 			{display: "block"},
 			{transformOrigin: "50% 50%"},
 			{transform: "translateX(0px) translateY(0px) scale(10)"},
-			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
+			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
 			{opacity: "0"},
 			{zIndex: "500"}
 		]);
@@ -164,7 +166,7 @@ ZoominListView.prototype.remove = function(widget) {
 	$tw.utils.setStyle(targetElement,[
 		{transformOrigin: "50% 50%"},
 		{transform: "translateX(0px) translateY(0px) scale(0.1)"},
-		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms ease-in, opacity " + duration + "ms ease-in"},
+		{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);

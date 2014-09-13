@@ -1,0 +1,12 @@
+title: $:/Acknowledgements
+type: text/vnd.tiddlywiki
+
+TiddlyWiki incorporates code from these fine OpenSource projects:
+
+* [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
+* [[The Jasmine JavaScript Test Framework|http://pivotal.github.io/jasmine/]]
+* [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
+
+And media from these projects:
+
+* World flag icons from [[Wikipedia|http://commons.wikimedia.org/wiki/Category:SVG_flags_by_country]]

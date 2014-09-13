@@ -1,3 +1,0 @@
-title: $:/editions/server/download-offline-button
-
-<$button message="tw-download-file" param="$:/editions/server/download-offline" class="btn-big-green">Download Offline Snapshot {{$:/core/images/save-button}}</$button>

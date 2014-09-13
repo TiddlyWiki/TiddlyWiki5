@@ -139,10 +139,10 @@ $tw.utils.error = function(err) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,
 			heading = dm("h1",{text: errHeading}),
-			prompt = dm("div",{text: promptMsg, "class": "tw-error-prompt"}),
+			prompt = dm("div",{text: promptMsg, "class": "tc-error-prompt"}),
 			message = dm("div",{text: err}),
 			button = dm("button",{text: "close"}),
-			form = dm("form",{children: [heading,prompt,message,button], "class": "tw-error-form"});
+			form = dm("form",{children: [heading,prompt,message,button], "class": "tc-error-form"});
 		document.body.insertBefore(form,document.body.firstChild);
 		form.addEventListener("submit",function(event) {
 			document.body.removeChild(form);
@@ -447,7 +447,7 @@ $tw.utils.PasswordPrompt = function() {
 	// Store of pending password prompts
 	this.passwordPrompts = [];
 	// Create the wrapper
-	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tw-password-wrapper"});
+	this.promptWrapper = $tw.utils.domMaker("div",{"class":"tc-password-wrapper"});
 	document.body.appendChild(this.promptWrapper);
 	// Hide the empty wrapper
 	this.setWrapperDisplay();
@@ -480,18 +480,15 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		children = [dm("h1",{text: options.serviceName})];
 	if(!options.noUserName) {
 		children.push(dm("input",{
-			attributes: {type: "text", name: "username", placeholder: "Username"},
-			"class": "input-small"
+			attributes: {type: "text", name: "username", placeholder: "Username"}
 		}));
 	}
 	children.push(dm("input",{
-		attributes: {type: "password", name: "password", placeholder: "Password"},
-		"class": "input-small"
+		attributes: {type: "password", name: "password", placeholder: "Password"}
 	}));
 	if(options.canCancel) {
 		children.push(dm("button",{
 			text: "Cancel",
-			"class": "btn",
 			eventListeners: [{
 					name: "click",
 					handlerFunction: function(event) {
@@ -503,11 +500,9 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	}
 	children.push(dm("button",{
 		attributes: {type: "submit"},
-		text: submitText,
-		"class": "btn"
+		text: submitText
 	}));
 	var form = dm("form",{
-		"class": "form-inline",
 		attributes: {autocomplete: "off"},
 		children: children
 	});
@@ -615,7 +610,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 		tiddler = $tw.wiki.getTiddler(name) || $tw.wiki.getTiddler(name + ".js") || $tw.wiki.getTiddler(moduleName) || $tw.wiki.getTiddler(moduleName + ".js") ,
 		_exports = {},
 		sandbox = {
-			module: {},
+			module: {exports: _exports},
 			//moduleInfo: moduleInfo,
 			exports: _exports,
 			console: console,
@@ -967,19 +962,22 @@ $tw.Wiki = function(options) {
 	this.registerPluginTiddlers = function(pluginType,titles) {
 		var self = this,
 			registeredTitles = [],
-			checkTiddler = function(tiddler) {
+			checkTiddler = function(tiddler,title) {
 				if(tiddler && tiddler.fields.type === "application/json" && tiddler.fields["plugin-type"] === pluginType) {
-					pluginTiddlers.push(tiddler);
-					registeredTitles.push(tiddler.fields.title);
+					var disablingTiddler = self.getTiddler("$:/config/Plugins/Disabled/" + title);
+					if(title === "$:/core" || !disablingTiddler || (disablingTiddler.fields.text || "").trim() !== "yes") {
+						pluginTiddlers.push(tiddler);
+						registeredTitles.push(tiddler.fields.title);
+					}
 				}
 			};
 		if(titles) {
 			$tw.utils.each(titles,function(title) {
-				checkTiddler(self.getTiddler(title));
+				checkTiddler(self.getTiddler(title),title);
 			});
 		} else {
 			this.each(function(tiddler,title) {
-				checkTiddler(tiddler);
+				checkTiddler(tiddler,title);
 			});
 		}
 		return registeredTitles;
@@ -1105,7 +1103,7 @@ $tw.Wiki.prototype.processSafeMode = function() {
 	// Assemble a report tiddler
 	var titleReportTiddler = "TiddlyWiki Safe Mode",
 		report = [];
-	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. Most customisations have been disabled by renaming the following tiddlers:")
+	report.push("TiddlyWiki has been started in [[safe mode|http://tiddlywiki.com/static/SafeMode.html]]. All plugins are temporarily disabled. Most customisations have been disabled by renaming the following tiddlers:")
 	// Delete the overrides
 	overrides.forEach(function(title) {
 		var tiddler = self.getTiddler(title),
@@ -1588,15 +1586,16 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 		$tw.wiki.addTiddlers(tiddlerFile.tiddlers);
 	});
 	// Save the original tiddler file locations if requested
-	if(wikiInfo.config && wikiInfo.config["retain-original-tiddler-path"]) {
-		var output = [];
+	var config = wikiInfo.config || {};
+	if(config["retain-original-tiddler-path"]) {
+		var output = {};
 		for(var title in $tw.boot.files) {
-			output.push(title + ": " + path.relative(resolvedWikiPath,$tw.boot.files[title].filepath) + "\n");
+			output[title] = path.relative(resolvedWikiPath,$tw.boot.files[title].filepath);
 		}
-		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/x-tiddler-dictionary", text: output.join("")});
+		$tw.wiki.addTiddler({title: "$:/config/OriginalTiddlerPaths", type: "application/json", text: JSON.stringify(output)});
 	}
 	// Save the path to the tiddlers folder for the filesystemadaptor
-	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,$tw.config.wikiTiddlersSubDir);
+	$tw.boot.wikiTiddlersPath = path.resolve($tw.boot.wikiPath,config["default-tiddler-location"] || $tw.config.wikiTiddlersSubDir);
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
@@ -1726,6 +1725,8 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
 	$tw.utils.registerFileType("text/html","utf8",".html");
+	$tw.config.fileExtensionInfo[".htm"] = {type: "text/html"};
+	$tw.config.fileExtensionInfo[".hta"] = {type: "text/html"};
 	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
@@ -1751,7 +1752,7 @@ $tw.boot.startup = function(options) {
 	}
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
-	$tw.wiki.registerPluginTiddlers("plugin");
+	$tw.wiki.registerPluginTiddlers("plugin",$tw.safeMode ? ["$:/core"] : undefined);
 	$tw.wiki.unpackPluginTiddlers();
 	// Process "safe mode"
 	if($tw.safeMode) {

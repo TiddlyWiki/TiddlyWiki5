@@ -19,13 +19,13 @@ exports.prefix = function(source,operator,options) {
 	var results = [];
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(title.substr(0,operator.operand.length).toLowerCase() !== operator.operand.toLowerCase()) {
+			if(title.substr(0,operator.operand.length) !== operator.operand) {
 				results.push(title);
 			}
 		});
 	} else {
 		source(function(tiddler,title) {
-			if(title.substr(0,operator.operand.length).toLowerCase() === operator.operand.toLowerCase()) {
+			if(title.substr(0,operator.operand.length) === operator.operand) {
 				results.push(title);
 			}
 		});

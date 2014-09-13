@@ -13,7 +13,7 @@ Module that creates a $tw.utils.Scroller object prototype that manages scrolling
 "use strict";
 
 /*
-Event handler for when the `tw-scroll` event hits the document body
+Event handler for when the `tm-scroll` event hits the document body
 */
 var PageScroller = function() {
 	this.idRequestFrame = null;
@@ -44,7 +44,7 @@ PageScroller.prototype.cancelScroll = function() {
 Handle an event
 */
 PageScroller.prototype.handleEvent = function(event) {
-	if(event.type === "tw-scroll") {
+	if(event.type === "tm-scroll") {
 		return this.scrollIntoView(event.target);
 	}
 	return true;

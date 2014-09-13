@@ -1,0 +1,14 @@
+caption: {{$:/language/SideBar/Contents/Caption}}
+created: 20140809114010378
+list: HelloThere [[Working with TiddlyWiki]] [[Customise TiddlyWiki]] [[Advanced features]] [[TiddlyWiki on Node.JS]] [[Other TiddlyWiki configurations]] [[Get involved]] [[TiddlyWiki glossaries]]
+list-after: $:/core/ui/SideBar/Open
+modified: 20140912145302498
+tags: $:/tags/SideBar
+title: TableOfContents
+type: text/vnd.tiddlywiki
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'TableOfContents'>>
+
+</div>

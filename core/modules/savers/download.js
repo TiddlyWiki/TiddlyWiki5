@@ -38,6 +38,8 @@ DownloadSaver.prototype.save = function(text,method,callback) {
 	document.body.appendChild(link);
 	link.click();
 	document.body.removeChild(link);
+	// Callback that we succeeded
+	callback(null);
 	return true;
 };
 

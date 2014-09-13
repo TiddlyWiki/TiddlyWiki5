@@ -18,7 +18,7 @@ Export our filter function
 exports.removeprefix = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
-		if(title.substr(0,operator.operand.length).toLowerCase() === operator.operand.toLowerCase()) {
+		if(title.substr(0,operator.operand.length) === operator.operand) {
 			results.push(title.substr(operator.operand.length));
 		}
 	});

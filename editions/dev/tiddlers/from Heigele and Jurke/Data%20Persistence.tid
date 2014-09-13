@@ -1,0 +1,20 @@
+chapter.of: TiddlyWiki - A quick Overview
+created: 20140708082053686
+modified: 20140717195758655
+sub.num: 3
+tags: doc
+title: Data Persistence
+
+The next important part of the application are deserializers. Deserializers are responsible to load tiddlers from various sources. One of the deserializers provided by the microkernel for example can load new tiddlers from the current DOM tree.
+The counterpart of deserializers are saver.
+A saver is used to save the complete store or the complete TiddlyWiki for that matter at once. After a user made changes to some tiddlers, this method can be used to download the current state of the store as a completely new TiddlyWiki application.
+
+Another way of persisting data are syncadaptors.
+Like deserializer and saver, a syncadaptor can load tiddlers into the store and can persist changed tiddlers.
+But in contrast to deserializer and saver it can load and persist single tiddlers.
+A syncadaptor can provide a list of loadable tiddlers registers at the store for changes.
+Now when a tiddler is changed and these changes are written to the store, the syncadaptor is triggered and persists the new changes, for each tiddler individually.
+
+<<<
+[img width=500 [overview.svg]]
+<<< Tiddlers can be persisted from/to harddisk or synced with a remote server.

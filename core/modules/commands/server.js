@@ -78,7 +78,7 @@ SimpleServer.prototype.findMatchingRoute = function(request,state) {
 };
 
 SimpleServer.prototype.checkCredentials = function(request,incomingUsername,incomingPassword) {
-	var header = request.headers["authorization"] || "",
+	var header = request.headers.authorization || "",
 		token = header.split(/\s+/).pop() || "",
 		auth = $tw.utils.base64Decode(token),
 		parts = auth.split(/:/),
@@ -89,7 +89,7 @@ SimpleServer.prototype.checkCredentials = function(request,incomingUsername,inco
 	} else {
 		return "DENIED";
 	}
-}
+};
 
 SimpleServer.prototype.listen = function(port,host) {
 	var self = this;
@@ -167,8 +167,8 @@ var Command = function(params,commander,callback) {
 				delete fields.fields;
 			}
 			// Remove any revision field
-			if(fields["revision"]) {
-				delete fields["revision"];
+			if(fields.revision) {
+				delete fields.revision;
 			}
 			state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title}));
 			var changeCount = state.wiki.getChangeCount(title).toString();
@@ -237,7 +237,7 @@ var Command = function(params,commander,callback) {
 						tiddlerFields[name] = tiddler.getFieldString(name);
 					}
 				});
-				tiddlerFields["revision"] = state.wiki.getChangeCount(title);
+				tiddlerFields.revision = state.wiki.getChangeCount(title);
 				tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 				tiddlers.push(tiddlerFields);
 			});
@@ -265,7 +265,7 @@ var Command = function(params,commander,callback) {
 						tiddlerFields.fields[name] = value;
 					}
 				});
-				tiddlerFields["revision"] = state.wiki.getChangeCount(title);
+				tiddlerFields.revision = state.wiki.getChangeCount(title);
 				tiddlerFields.type = tiddlerFields.type || "text/vnd.tiddlywiki";
 				response.writeHead(200, {"Content-Type": "application/json"});
 				response.end(JSON.stringify(tiddlerFields),"utf8");

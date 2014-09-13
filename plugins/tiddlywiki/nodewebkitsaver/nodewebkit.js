@@ -48,7 +48,7 @@ Static method that returns true if this saver is capable of working
 */
 exports.canSave = function(wiki) {
 	// Check if we're running under node-webkit
-	return (typeof process == "object")
+	return (typeof process == "object");
 };
 
 /*
