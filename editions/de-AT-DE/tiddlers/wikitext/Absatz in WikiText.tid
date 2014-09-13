@@ -1,0 +1,25 @@
+caption: Absatz
+created: 20131205155836435
+creator: pmario
+modified: 20140913190735540
+modifier: pmario
+tags: WikiText
+title: Absatz in WikiText
+type: text/vnd.tiddlywiki
+
+Um einen Absatz in TiddlyWiki zu erzeugen sind 2 Zeilenumbrüche nötig. 
+
+```
+Das ist der erste Absatz
+
+Das ist der zweite Abastz, getrennt durch 2 Zeilenumbrüche.
+```
+
+Ein Zeilenumbruch wird nicht dargestellt, kann aber im Tiddler Text verwendet werden.
+
+<<wikitext-example src:"Das ist ein Absatz,
+zusammengesetzt aus
+mehreren Zeilen 
+"Source" Text">>
+
+Für Situationen, wo ein "harter" Zeilenumbruch benötigt wird sehen sie: [[Zeilenumbruch in WikiText]].
