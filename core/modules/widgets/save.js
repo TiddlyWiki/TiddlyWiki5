@@ -17,7 +17,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 var saveWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 		this.addEventListeners([
-		{type: "tw-save-tiddler", handler: "handleSaveTiddlerEvent"}
+		{type: "tm-save-tiddler", handler: "handleSaveTiddlerEvent"}
 	])
 };
 
