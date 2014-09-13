@@ -1,10 +1,10 @@
-caption: Stiel und Klassen
+caption: Stil und Klassen
 created: 20131205160532119
 creator: pmario
-modified: 20140913172104910
+modified: 20140913194353656
 modifier: pmario
 tags: WikiText
-title: Stiel und CSS Klassen in WikiText
+title: Stil und CSS Klassen in WikiText
 type: text/vnd.tiddlywiki
 
 ''Nur für geübte Anwender!'' Sie können folgende Konstruktion verwenden um verschiedenen Elementen direkt CSS Klassen zuzuweisen.
@@ -23,7 +23,7 @@ Eine ähnliche Syntax wird verwendet, um das "style" Attribut direkt zu definier
 @@
 ">>
 
-Mehrere Stiele und Klassen gleichzeitig angewendet:
+Mehrere Stile und Klassen gleichzeitig angewendet:
 
 <<wikitext-example src:"@@.tc-tiddler-frame
 @@width:400px;
