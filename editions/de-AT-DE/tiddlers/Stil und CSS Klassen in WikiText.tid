@@ -1,0 +1,32 @@
+caption: Stil und Klassen
+created: 20131205160532119
+creator: pmario
+modified: 20140913194353656
+modifier: pmario
+tags: WikiText
+title: Stil und CSS Klassen in WikiText
+type: text/vnd.tiddlywiki
+
+''Nur für geübte Anwender!'' Sie können folgende Konstruktion verwenden um verschiedenen Elementen direkt CSS Klassen zuzuweisen.
+
+<<wikitext-example src:"@@.myStyle
+* Listen Element Eins
+* Listen Element Zwei
+@@
+">>
+
+Eine ähnliche Syntax wird verwendet, um das "style" Attribut direkt zu definieren:
+
+<<wikitext-example src:"@@background-color:red;
+* Listen Element Eins
+* Listen Element Zwei
+@@
+">>
+
+Mehrere Stile und Klassen gleichzeitig angewendet:
+
+<<wikitext-example src:"@@.tc-tiddler-frame
+@@width:400px;
+Test Text, Test Text, 
+@@
+">>
