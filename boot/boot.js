@@ -392,7 +392,14 @@ options: {flags: flags,deserializerType: deserializerType}
 */
 $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	options = options || {};
-	$tw.config.fileExtensionInfo[extension] = {type: type};
+	if($tw.utils.isArray(extension)) {
+		$tw.utils.each(extension,function(extension) {
+			$tw.config.fileExtensionInfo[extension] = {type: type};
+		});
+		extension = extension[0];
+	} else {
+		$tw.config.fileExtensionInfo[extension] = {type: type};
+	}
 	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};
 };
 
@@ -1731,7 +1738,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg",{flags:["image"]});
+	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
