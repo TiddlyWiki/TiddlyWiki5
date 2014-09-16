@@ -1731,9 +1731,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/vnd.tiddlywiki2-recipe","utf8",".recipe");
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
-	$tw.utils.registerFileType("text/html","utf8",".html");
-	$tw.config.fileExtensionInfo[".htm"] = {type: "text/html"};
-	$tw.config.fileExtensionInfo[".hta"] = {type: "text/html"};
+	$tw.utils.registerFileType("text/html","utf8",[".html",".htm"]);
 	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
