@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20140912150048700
+modified: 20140916140523223
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -7,6 +7,8 @@ type: text/vnd.tiddlywiki
 \define default-platform()
 GettingStarted - $(browser-name)$
 \end
+Instructions for getting started using TiddlyWiki on the different platforms and configurations that it supports.
+
 <$set name="browser-name" value={{$:/info/browser/name}}>
 <$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
 </$set>
@@ -15,6 +17,5 @@ See also:
 
 * [[Saving with Encryption]] explains how to use TiddlyWiki's built-in encryption to protect your content with a password
 * [[Saving on TiddlySpot]], a free service that lets you use TiddlyWiki online
-* Running [[TiddlyWiki on node-webkit]], turning a single TiddlyWiki into a native application on your desktop
 * [[Using TiddlyWiki on TiddlyDesktop]], a custom desktop application for working with TiddlyWiki
 * You can also download this full TiddlyWiki including all the documentation: <a href="http://tiddlywiki.com/index.html" download="index.html">~http://tiddlywiki.com/index.html</a>

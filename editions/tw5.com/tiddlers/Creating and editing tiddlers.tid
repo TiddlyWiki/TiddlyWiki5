@@ -1,11 +1,12 @@
-title: Creating, tagging and editing tiddlers
+created: 20140904140300000
+modified: 20140916130530304
 tags: [[Working with TiddlyWiki]]
-created: 201409041403
-modified: 201409041403
+title: Creating and editing tiddlers
+type: text/vnd.tiddlywiki
 
 !Creating tiddlers
 
-You create a tiddler either by clicking the {{$:/core/images/new-button}} button in the sidebar, or by clicking on any empty hyperlink (empty links will normally appear in [[blue italic text]]).
+You create a tiddler either by clicking the {{$:/core/images/new-button}} button in the sidebar, or by clicking on a link to a missing tiddler (links to missing tiddlers will appear in [[blue italic text]]).
 
 !Editing tiddlers
 
