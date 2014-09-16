@@ -12,6 +12,6 @@ Running TiddlyWiki on [[Node.js]] brings several important benefits over and abo
 
 For more information see:
 
-* Installing TiddlyWiki on Node.js
-* Using TiddlyWiki on Node.js
-* Upgrading TiddlyWiki on Node.js
+* [[Installing TiddlyWiki on Node.js]]
+* [[Using TiddlyWiki on Node.js]]
+* [[Upgrading TiddlyWiki on Node.js]]
