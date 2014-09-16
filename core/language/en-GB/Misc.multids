@@ -28,7 +28,6 @@ RelativeDate/Past/Seconds: <<period>> seconds ago
 RelativeDate/Past/Years: <<period>> years ago
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
-TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon
 TagManager/Tag/Heading: Tag
 UnsavedChangesWarning: You have unsaved changes in TiddlyWiki
