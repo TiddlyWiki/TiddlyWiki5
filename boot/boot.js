@@ -1742,6 +1742,7 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
+	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules
