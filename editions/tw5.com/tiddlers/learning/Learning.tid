@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 Learn more about using TiddlyWiki:
 
-<<list-unordered-links "[tag[Learning]]">>
+<<list-links "[tag[Learning]]">>

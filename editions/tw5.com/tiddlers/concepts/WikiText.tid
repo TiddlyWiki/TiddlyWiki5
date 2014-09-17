@@ -8,4 +8,4 @@ type: text/vnd.tiddlywiki
 
 The following elements of WikiText syntax are built into the core:
 
-<<list-unordered-links "[tag[WikiText]]">>
+<<list-links "[tag[WikiText]]">>

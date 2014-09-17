@@ -6,4 +6,4 @@ tags: Reference
 
 These are definitions of technical words and phrases used in this documentation. (As distinct from the [[Concepts]] that make up TiddlyWiki itself).
 
-<<list-unordered-links "[tag[Definitions]]">>
+<<list-links "[tag[Definitions]]">>

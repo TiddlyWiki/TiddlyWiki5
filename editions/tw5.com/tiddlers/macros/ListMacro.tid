@@ -1,0 +1,27 @@
+title: ListMacro
+tags: Macros
+modified: 20140917083515996
+caption: list
+
+The list macro is a family of macros that produce a list of tiddlers.
+
+There are several variants of the macro:
+
+* `<<list-links>>` produces a list of links to tiddlers that match a filter expression
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |filter |Filter expression | |
+|2nd |type |HTML tag to be used for the list wrapper |"ul" |
+|3rd |subtype |HTML tag to be used for list entries  |"li" |
+
+! Examples
+
+<$macrocall $name='wikitext-example-without-html'
+src='<<list-links filter:"[tag[HelloThere]]">>
+'/>
+
+<$macrocall $name='wikitext-example-without-html'
+src='<<list-links filter:"[tag[HelloThere]]" type:"ol">>
+'/>

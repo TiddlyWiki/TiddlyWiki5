@@ -6,4 +6,4 @@ type: text/vnd.tiddlywiki
 
 Information about the making of TiddlyWiki:
 
-<<list-unordered-links "[tag[About]]">>
+<<list-links "[tag[About]]">>

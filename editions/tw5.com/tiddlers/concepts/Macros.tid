@@ -14,5 +14,5 @@ You can write your own [[Macros in WikiText]] or for more flexibility you can wr
 
 The following macros are built-in to the TiddlyWiki core:
 
-<<list-unordered-links "[tag[Macros]]">>
+<<list-links "[tag[Macros]]">>
 

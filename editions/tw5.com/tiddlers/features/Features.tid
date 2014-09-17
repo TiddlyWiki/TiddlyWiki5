@@ -10,7 +10,7 @@ type: text/vnd.tiddlywiki
 
 Further information about specific TiddlyWiki features:
 
-<<list-unordered-links "[tag[Features]]">>
+<<list-links "[tag[Features]]">>
 
 ----
 

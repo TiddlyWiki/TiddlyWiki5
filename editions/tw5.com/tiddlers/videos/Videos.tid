@@ -6,4 +6,4 @@ type: text/vnd.tiddlywiki
 
 The following TiddlyWiki videos are available
 
-<<list-unordered-links "[tag[Videos]]">>
+<<list-links "[tag[Videos]]">>

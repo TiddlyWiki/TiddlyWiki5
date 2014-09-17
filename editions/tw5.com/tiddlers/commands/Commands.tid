@@ -3,4 +3,4 @@ tags: Reference
 
 Commands are used with [[TiddlyWiki on Node.js|Using TiddlyWiki on Node.js]].
 
-<list-unordered-links "[tag[Commands]]">>
+<list-links "[tag[Commands]]">>

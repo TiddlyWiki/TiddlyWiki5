@@ -11,6 +11,6 @@ Filters are used in TiddlyWiki to choose tiddlers by specifying simple match cri
 
 The most common filter operators are:
 
-<<list-unordered-links "[tag[CommonFilters]]">>
+<<list-links "[tag[CommonFilters]]">>
 
 See FilterOperators for a complete list of available filter operators

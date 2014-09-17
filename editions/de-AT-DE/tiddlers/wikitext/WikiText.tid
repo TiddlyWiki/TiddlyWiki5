@@ -11,4 +11,4 @@ type: text/vnd.tiddlywiki
 
 Die folgenden Elemente sind im TW Kern enthalten:
 
-<<list-unordered-links "[tag[WikiText]]">>
+<<list-links "[tag[WikiText]]">>

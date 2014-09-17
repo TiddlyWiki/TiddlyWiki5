@@ -6,4 +6,4 @@ type: text/vnd.tiddlywiki
 
 Available methods for saving changes with TiddlyWiki:
 
-<<list-unordered-links "[tag[Saving]]">>
+<<list-links "[tag[Saving]]">>
