@@ -1,5 +1,5 @@
 created: 20131129100250644
-modified: 20140206221253685
+modified: 20140916213415337
 tags: [[Hosting your TiddlyWiki on the web]] Editions
 title: TiddlyWiki in the Sky for TiddlyWeb
 type: text/vnd.tiddlywiki
@@ -10,12 +10,6 @@ TiddlyWiki in the Sky for TiddlyWeb allows content to be synchronised between Ti
 * Two way synchronisation between the browser and the server
 ** Synchronising from the server is accomplished by polling (currently every 60 seconds)
 * Throttling so that rapidly changing tiddlers don't overwhelm the server
-
-The implementation is somewhat experimental, and includes these limitations:
-
-* Only works with tiddlers written in TiddlyWiki version 5 WikiText. Tiddlers in the old syntax will be parsed as TiddlyWikiClassic syntax
-* New tiddlers are not saved to the server
-* No way to delete tiddlers
 
 To try out TiddlyWiki in the Sky for TiddlyWeb:
 

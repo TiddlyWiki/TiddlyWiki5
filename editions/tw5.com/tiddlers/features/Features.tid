@@ -19,7 +19,7 @@ Further information about specific TiddlyWiki features:
 * The ability to [[render static HTML snapshots|Generating Static Sites with TiddlyWiki]] that can be used without JavaScript
 * [[Bitmap images|Motovun Jack.jpg]] and [[SVG images|UsingSVG]] are first-class citizens alongside text
 * Concise and expressive WikiText that generates semantic HTML
-* Integrated [[AES encryption|Saving with Encryption]]
+* Integrated [[AES encryption|Encryption]]
 * TiddlyWiki isn't just a wiki - you can build custom applications with it like this TaskManagementExample
 * Full internationalization support, with TiddlyWiki itself available in several languages (see the [[control panel|$:/ControlPanel]])
 * Familiar user interface elements like <<alert-demo>>, <$button message="tm-modal" param="SampleWizard">wizards</$button> and <$button message="tm-notify" param="SampleNotification">notifications</$button>
