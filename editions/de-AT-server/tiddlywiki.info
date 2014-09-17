@@ -7,10 +7,15 @@
 		"tiddlywiki/vanilla",
 		"tiddlywiki/snowwhite"
 	],
+	"languages": [
+		"en-GB",
+		"de-AT",
+		"de-DE"
+	],
 	"includeWikis": [
-		"../de-AT-DE"
+		"../de-AT"
 	],
 	"config": {
-		"default-tiddler-location": "../de-AT-DE/tiddlers"
+		"default-tiddler-location": "../de-AT/tiddlers"
 	}
 }
