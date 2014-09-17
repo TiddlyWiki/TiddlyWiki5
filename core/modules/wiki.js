@@ -317,8 +317,18 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 	var self = this;
 	titles.sort(function(a,b) {
 		if(sortField !== "title") {
-			a = self.getTiddler(a).fields[sortField] || "";
-			b = self.getTiddler(b).fields[sortField] || "";
+			var tiddlerA = self.getTiddler(a),
+				tiddlerB = self.getTiddler(b);
+			if(tiddlerA) {
+				a = tiddlerA.fields[sortField] || "";
+			} else {
+				a = "";
+			}
+			if(tiddlerB) {
+				b = tiddlerB.fields[sortField] || "";
+			} else {
+				b = "";
+			}
 		}
 		if(isNumeric) {
 			a = Number(a);
