@@ -1,6 +1,7 @@
 created: 20131129101027725
 creator: pmario
-modified: 20140909103924542
+modified: 20140918102218367
+modifier: pmario
 tags: howto
 title: Speichern mit iPad/iPhone
 type: text/vnd.tiddlywiki
@@ -13,7 +14,7 @@ Verwendung von TWEdit:
 # Öffnen sie TWEdit.
 # Tippen sie den Titel in der Mitte des "Toolbars".
 #* Eine Text Box sollte sich öffnen, in der sie die URL eingeben können.
-# Verwenden sie URL `http://tiddlywiki.com/empty.html`  TODO german version
+# Verwenden sie URL `http://tiddlywiki.com/languages/de-AT/empty.html` oder `http://tiddlywiki.com/languages/de-DE/empty.html`
 # Wenn die leere Version geladen wurde, dann tippen sie "save" (Das zweite "icon" oben rechts)
 #* Ein Hinweis Dialog sollte erscheinen, wo sie den lokalen Namen eingeben können.
 # Geben sie den neuen Dateinamen ein. Die Endung `.html` nicht vergessen!

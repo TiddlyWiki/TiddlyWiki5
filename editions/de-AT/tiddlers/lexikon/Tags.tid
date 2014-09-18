@@ -1,11 +1,22 @@
 created: 20140908130640417
 creator: pmario
-modified: 20140908131007409
+modified: 20140918124555159
 modifier: pmario
 tags: Lexikon
 title: Tags
 type: text/vnd.tiddlywiki
 
-Als Tags werden Markierungen bezeichnet, die verwendet werden können um einzeln Tiddler zu filtern.
+Als Tags werden Markierungen bezeichnet, die verwendet werden können um einzelne Tiddler, später, zu filtern.
 
-Zum Beispiel ist dieser Tiddler mit ''Lexikon'' getaggt.
+Zum Beispiel ist dieser Tiddler mit ''Lexikon'' "getaggt". Es gibt <$count filter="[tag[Lexikon]]"/> weitere Tiddler mit diesem Tag.
+
+Eine gekürzte Liste wird hier angezeigt mit: 
+
+```
+<<list-links filter:"[tag[Lexikon]limit[4]]">>
+```
+
+<<list-links filter:"[tag[Lexikon]limit[4]]">>
+
+Eine komplette liste können sie im rechten Menü unter ''Mehr: Tags" sehen.
+
