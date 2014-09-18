@@ -27,6 +27,9 @@ mkdir -p $TW5_BUILD_OUTPUT/dev/static
 rm $TW5_BUILD_OUTPUT/static/*
 rm $TW5_BUILD_OUTPUT/dev/static/*
 
+rm $TW5_BUILD_OUTPUT/languages/de_AT/static/*
+rm $TW5_BUILD_OUTPUT/languages/de_DE/static/*
+
 # Redirects
 
 echo "<a href='./plugins/tiddlywiki/tw2parser/index.html'>Moved to http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html</a>" > $TW5_BUILD_OUTPUT/classicparserdemo.html
