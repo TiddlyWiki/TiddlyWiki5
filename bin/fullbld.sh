@@ -166,9 +166,8 @@ node ./tiddlywiki.js \
 node ./tiddlywiki.js \
 	./editions/de-AT \
 	--verbose \
-	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all languages/de-AT/index.html text/plain \
-	--rendertiddler $:/core/save/empty languages/de-AT/empty.html text/plain \
+	--output $TW5_BUILD_OUTPUT/languages/de-AT \
+	--build favicon empty static index \
 	|| exit 1
 
 # /languages/de-DE/index.html		Demo wiki with de-DE language
@@ -176,9 +175,8 @@ node ./tiddlywiki.js \
 node ./tiddlywiki.js \
 	./editions/de-DE \
 	--verbose \
-	--output $TW5_BUILD_OUTPUT \
-	--rendertiddler $:/core/save/all languages/de-DE/index.html text/plain \
-	--rendertiddler $:/core/save/empty languages/de-DE/empty.html text/plain \
+	--output $TW5_BUILD_OUTPUT/languages/de-DE \
+	--build favicon empty static index \
 	|| exit 1
 
 # /languages/fr-FR/index.html		Demo wiki with fr-FR language

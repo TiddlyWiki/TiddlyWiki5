@@ -1,0 +1,13 @@
+caption: Banner
+created: 20140918070509363
+creator: pmario
+description: Banner für de-AT-DE
+modified: 20140918072656549
+modifier: pmario
+tags: $:/tags/PageControls
+title: $:/editions/de-AT-DE/github-fork-ribbon
+type: text/vnd.tiddlywiki
+
+<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#DF4848;"><$link to="TiddlyWiki Speichern"><<version>></$link></div></div>
+
+<!-- TODO: Change link to "Releases" before full release -->
