@@ -1,6 +1,7 @@
 created: 20131129092604900
 creator: pmario
-modified: 20140909085517511
+modified: 20140918102122537
+modifier: pmario
 tags: howto
 title: Speichern mit Chrome
 type: text/vnd.tiddlywiki
@@ -9,7 +10,7 @@ Diese Methode ist etwas umständlich, da man Einstellungen immer wieder manuell 
 
 # Speichern sie eine leere Datei der deutschen Version.
 #> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
-#> Wenn der Button nicht funktioniert, dann klicken sie den link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  http://tiddlywiki.com/empty.html ... TODO (de-AT-DE-empty.html)
+#> Wenn der Button nicht funktioniert, dann klicken sie den link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  http://tiddlywiki.com/languages/de-AT/empty.html oder http://tiddlywiki.com/languages/de-DE/empty.html
 #> Je nach Browser folgen sie den Dialogen!
 # Suchen sie die eben geladene Datei im Datei Manager.
 #* Geben sie der Datei einen vernünftigen Namen und stellen sie sicher, dass die Endung `.html` oder `.htm` ist.
