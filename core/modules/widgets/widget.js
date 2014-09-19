@@ -204,7 +204,7 @@ Widget.prototype.getStateQualifier = function(name) {
 		}
 		node = node.parentWidget;
 	}
-	return "{" + $tw.utils.hashString(output.join("")) + "}";
+	return $tw.utils.hashString(output.join(""));
 };
 
 /*
