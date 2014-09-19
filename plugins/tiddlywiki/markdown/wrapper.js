@@ -56,8 +56,9 @@ function transformNode(node) {
 
 var MarkdownParser = function(type,text,options) {
 	var dialect = options.wiki.getTiddlerText(CONFIG_DIALECT_TIDDLER,DEFAULT_DIALECT),
-		markdownTree = markdown.toHTMLTree(text,dialect);
-	this.tree = transformNodes(markdownTree.slice(1));
+		markdownTree = markdown.toHTMLTree(text,dialect),
+		node = $tw.utils.isArray(markdownTree[1]) ? markdownTree.slice(1) : markdownTree.slice(2);
+	this.tree = transformNodes(node);
 };
 
 /*
