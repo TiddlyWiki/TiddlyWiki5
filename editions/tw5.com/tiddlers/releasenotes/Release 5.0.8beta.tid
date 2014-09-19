@@ -30,9 +30,9 @@ See [[Notes for upgrading to 5.0.8-beta]] for more details of these changes:
 * Added confirmation dialogue when deleting tiddlers
 * Add support for switchable (and editable) ColourPalettes
 * Added TranslationMechanism and translations for:
-** Deutsch (Österreich and Deutschland) by [[@pmario]]
-** Français (France) by [[@xcazin]]
-** Chinese (Simplified and Traditional) by [[@BramChen]]
+** Deutsch (Österreich and Deutschland) by @pmario
+** Français (France) by @xcazin
+** Chinese (Simplified and Traditional) by @BramChen
 * Add error alerts when syncing to a server
 * Rejigged [[$:/ControlPanel]] to use nested tabs
 * Added [[$:/TagManager]] for easy management of tags

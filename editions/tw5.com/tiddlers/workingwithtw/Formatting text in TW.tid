@@ -1,7 +1,9 @@
 created: 20140908131500000
-modified: 20140912154933058
+modified: 20140919205321882
 tags: [[Working with TiddlyWiki]]
 title: Formatting text in TiddlyWiki
 type: text/vnd.tiddlywiki
 
-forthcoming...
+Within the text of a tiddler you can use special formatting called WikiText to control how the text is displayed.
+
+The simplest level of WikiText provides formatting
