@@ -1,8 +1,12 @@
 created: 20131202102427114
-modified: 20140912141217736
+modified: 20140919154634754
 tags: Features [[Working with TiddlyWiki]]
 title: Upgrading
 type: text/vnd.tiddlywiki
+
+There are regular releases of TiddlyWiki with bug fixes and improvements. It's a good idea to keep up to date by regularly upgrading to the latest version.
+
+! Introduction
 
 The process described here is for upgrading standalone TiddlyWiki files. There is a [[different procedure|Upgrading TiddlyWiki on Node.js]] for upgrading [[TiddlyWiki on Node.js]].
 
@@ -11,8 +15,6 @@ When upgrading, please remember the [[The First Rule of Using TiddlyWiki]]:
 
 //You are responsible for looking after your own data; take care to make backups, especially when upgrading the ~TiddlyWiki core//
 <<<
-
-Remember that TiddlyWiki version 5 is not fully backwards compatible with the older TiddlyWikiClassic.
 
 ! Online upgrading
 
@@ -34,7 +36,9 @@ You can also download http://tiddlywiki.com/upgrade.html locally and perform the
 
 ! Problems with Upgrades
 
-Particularly during the beta, it is possible for a customisation applied in a previous version to break when upgraded to the latest version. There are two techniques you can use to help track down issues:
+It is possible for a customisation applied in a previous version to break when upgraded to the latest version. There are two techniques you can use to help track down issues:
 
 * Try repeating the upgrade having selectively unchecked any tiddlers that may be applying customisations to TiddlyWiki
 * Use SafeMode to disable all customisations of shadow tiddlers
+
+You can see which shadow tiddlers have been overridden in the ''Filter'' tab of [[advanced search|$:/AdvancedSearch]]. Select "Overridden shadow tiddlers" from the dropdown.

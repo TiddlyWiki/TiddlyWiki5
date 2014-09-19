@@ -1,11 +1,13 @@
-title: TableOfContentsMacro
-tags: Macros
-modified: 20140905084423561
 caption: toc
+created: 20140919155729620
+modified: 20140919155735567
+tags: Macros
+title: TableOfContentsMacro
+type: text/vnd.tiddlywiki
 
 The table of contents macro produces a hierarchical tree of tiddlers based on their tags.
 
-The top level entries of the table of contents are defined by a root tag. The subentries under each of those entries are tagged with the title of the entry. Entries can be ordered using the `list` field of the tag tiddler as described in TiddlerTags.
+The top level entries of the table of contents are defined by a root tag. The subentries under each of those entries are tagged with the title of the entry. Entries can be ordered using the `list` field of the tag tiddler as described in [[Tagging]].
 
 The text for each entry is taken from the ''caption'' field if it is present, otherwise the ''title'' is used.
 
