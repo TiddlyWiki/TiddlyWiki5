@@ -166,3 +166,6 @@ Stephan Sokolow, @ssokolow, 2014/07/15
 Dave Gifford, @giffmex, 2014/09/05
 
 Eucaly J, @Eucaly, 2014/09/14
+
+Mal Gamble, @malgam, 2014/09/19
+
