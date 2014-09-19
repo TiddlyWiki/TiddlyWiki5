@@ -42,7 +42,7 @@ Or:
 ./bin/serve.cmd [edition dir] [username] [password] [host] [port]
 ```
 
-This script starts TiddlyWiki5 running as an HTTP server, defaulting to the content from the `tw5.com-server` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used.
+This script starts TiddlyWiki5 running as an HTTP server, defaulting to the content from the `tw5.com-server` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used. Run the script with the `-h` parameter to see online help.
 
 To experiment with this configuration, run the script and then visit `http://127.0.0.1:8080` in a browser.
 
@@ -78,4 +78,3 @@ This script builds TiddlyWiki 2.6.5 from the original source and then displays t
 
 These scripts are concerned with releasing a new version of TiddlyWiki. See [[Releasing a new version of TiddlyWiki5]].
 
-<!-- TODO: Update docs in line with latest version of serve.sh/serve.cmd -->
