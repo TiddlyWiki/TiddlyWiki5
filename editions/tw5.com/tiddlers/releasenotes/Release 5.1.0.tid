@@ -1,13 +1,14 @@
-caption: 5.0.19-beta
+caption: 5.1.0
 created: 20140918182111323
 modified: 20140918182111323
-tags: BetaReleaseNotes
-title: Release 5.0.19-beta
+tags: ReleaseNotes
+title: Release 5.1.0
 type: text/vnd.tiddlywiki
+released: 201409201500
 
-//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.18-beta...v5.0.19-beta]]//
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.18-beta...v5.1.0]]//
 
-This is a minor release prior to the full release of TiddlyWiki on September 20th. There are some bug fixes and improvements to the documentation.
+This is the first full release of TiddlyWiki.
 
 !! Hackability Improvements
 
