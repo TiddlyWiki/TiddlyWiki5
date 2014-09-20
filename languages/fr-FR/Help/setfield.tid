@@ -1,7 +1,7 @@
 title: $:/language/Help/setfield
 description: Prépare des tiddlers externes for use
 
-//Notez que cette commande est expérimentale et peut changer ou être remplacée au cours de la version bêta de TiddlyWiki version 5//
+//Notez que cette commande est expérimentale et peut changer ou être remplacée avant qu'elle soit finalisée//
 
 Initialise le champ spécifié d'un groupe de tiddlers avec le résultat de la wikification d'un tiddler template, la variable `currentTiddler` prenant tour à tour la valeur de chaque tiddler.
 
