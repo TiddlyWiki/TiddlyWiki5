@@ -20,12 +20,15 @@
 	],
 	"build": {
 		"index": [
+			"--setfield","$:/language","text","","","$:/languages/de-DE",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"empty": [
+			"--setfield","$:/language","text","","","$:/languages/de-DE",
 			"--rendertiddler","$:/editions/de-AT-DE/download-empty","empty.html","text/plain"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico"],
 		"static": [
+			"--setfield","$:/language","text","","","$:/languages/de-DE",
 			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
 			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
 			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",

@@ -2,7 +2,7 @@ title: $:/language/Docs/Fields/
 
 _canonical_uri: Die komplette URI eines externen Foto Tiddlers. URI = Uniform Resource Identifier, Identifikator für Ressourcen im Internet.
 bag: Der Name eines ~TiddlyWeb "bags" von dem der Tiddler kam.
-caption: Der Text, der auf "~Tab-Buttons" angezeigt wird.
+caption: Der Text, der auf "Tab-Buttons" angezeigt wird.
 color: Der CSS Farbwert, der mit einem Tiddler assoziiert wird. 
 component: Der Name einer Komponente, die für eine [[Alarm Anzeige|AlertMechanism]] verantwortlich ist.
 current-tiddler: Wird verwendet um den "obersten" Tiddler in der [[Tiddler Historie|HistoryMechanism]] zwischen zu speichern. 
