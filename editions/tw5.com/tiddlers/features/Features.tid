@@ -27,10 +27,10 @@ Further information about specific TiddlyWiki features:
 * Clone existing tiddlers (for example, <$button message="tm-new-tiddler" param=<<currentTiddler>>>clone this tiddler</$button>)
 * TiddlyWiki is [[surprisingly scalable|Scalability]] to many thousands of tiddlers and megabytes of content
 * Try out the <$button message="tm-full-screen">full screen support</$button>
-* Explore the [[D3.js visualisation plugin|http://tiddlywiki.com/plugins/tiddlwiki/d3/index.html]]
-* [[CodeMirror support via a plugin|http://tiddlywiki.com/plugins/tiddlwiki/codemirror/index.html]]
-* [[Markdown support via a plugin|http://tiddlywiki.com/plugins/tiddlwiki/markdown/index.html]]
-* [[Classic TiddlyWiki markup support via a plugin|http://tiddlywiki.com/plugins/tiddlwiki/tw2parser/index.html]]
+* Explore the [[D3.js visualisation plugin|http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html]]
+* [[CodeMirror support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html]]
+* [[Markdown support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html]]
+* [[Classic TiddlyWiki markup support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html]]
 * Many internal improvements:
 ** TiddlyWiki can now be run under [[Node.js]] as well as in the browser, allowing it to be used as a personal web server
 ** An elegant [[microkernel architecture|PluginMechanism]], that allows infinite customisation by replacing and augmenting the core modules
