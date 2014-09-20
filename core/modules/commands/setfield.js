@@ -35,7 +35,6 @@ Command.prototype.execute = function() {
 		fieldname = this.params[1] || "text",
 		templatetitle = this.params[2],
 		rendertype = this.params[3] || "text/plain",
-		rawtext= this.params[4] || "",
 		tiddlers = wiki.filterTiddlers(filter);
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(templatetitle),
@@ -47,7 +46,7 @@ Command.prototype.execute = function() {
 			widgetNode.render(container,null);
 			newFields[fieldname] = rendertype === "text/html" ? container.innerHTML : container.textContent;
 		} else {
-			newFields[fieldname] = rawtext ? rawtext : undefined;
+			newFields[fieldname] = undefined;
 		}
 		wiki.addTiddler(new $tw.Tiddler(tiddler,newFields));
 	});
