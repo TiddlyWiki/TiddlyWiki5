@@ -142,13 +142,6 @@ ButtonWidget.prototype.execute = function() {
 	this["class"] = this.getAttribute("class","");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
-// DEPRECATION WARNING
-var title = this.getAttribute("title");
-if(title) {
-	console.log("WARNING: attribute 'title' on button widget should be replaced with 'tooltip'");
-	this.tooltip = title;
-}
-
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default");
