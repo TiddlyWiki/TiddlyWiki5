@@ -1,0 +1,178 @@
+title: $:/plugins/tiddlywiki/katex/styles
+tags: [[$:/tags/Stylesheet]]
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
+/* KaTeX styles */
+
+{{$:/plugins/tiddlywiki/katex/katex.min.css}}
+
+/* Override font URLs */
+
+@font-face {
+	font-family: 'KaTeX_AMS';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_AMS-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Caligraphic';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Caligraphic-Bold.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Caligraphic';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Caligraphic-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Fraktur';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Fraktur-Bold.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Fraktur';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Fraktur-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Greek';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Greek-Bold.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Greek';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Greek-BoldItalic.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'KaTeX_Greek';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Greek-Italic.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'KaTeX_Greek';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Greek-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Main';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Bold.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Main';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Italic.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'KaTeX_Main';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Main-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Math';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-BoldItalic.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'KaTeX_Math';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-Italic.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'KaTeX_Math';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Math-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_SansSerif';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Bold.woff'>>) format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_SansSerif';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Italic.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'KaTeX_SansSerif';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_SansSerif-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Script';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Script-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Size1';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size1-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Size2';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size2-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Size3';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size3-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Size4';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Size4-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'KaTeX_Typewriter';
+	src: url(<<datauri '$:/plugins/tiddlywiki/katex/fonts/KaTeX_Typewriter-Regular.woff'>>) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
