@@ -7,4 +7,4 @@ Setzt das Basis Ausgabeverzeichnis für die folgenden Befehle. Das Standard Verz
 --output <pathname>
 ```
 
-Ist das spezifizierte Verzeichnis "relative", dann wird es relativ zum bestehenden Arbeitsverzeichnis angelegt. 
+Ist das spezifizierte Verzeichnis "relativ", dann wird es relativ zum bestehenden Arbeitsverzeichnis angelegt. 

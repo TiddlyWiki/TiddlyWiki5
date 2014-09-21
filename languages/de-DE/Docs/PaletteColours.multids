@@ -54,14 +54,14 @@ sidebar-tab-background: Seitenleiste Reiter Hintergrund
 sidebar-tab-border-selected: Seitenleiste Reiter Rahmen für selektierte Reiter
 sidebar-tab-border: Seitenleiste Reiter Rahmen
 sidebar-tab-divider: Seitenleiste Reiter Trennzeichen
-sidebar-tab-foreground-selected: Seitenleiste Reier Vordergrund für selectierte Reiter
+sidebar-tab-foreground-selected: Seitenleiste Reiter Vordergrund für selectierte Reiter
 sidebar-tab-foreground: Seitenleiste Reiter Vordergrund
 sidebar-tiddler-link-foreground-hover: Seitenleiste Tiddler Link Vordergrund (hover)
 sidebar-tiddler-link-foreground: Seitenleiste Tiddler Link Vordergrund
 static-alert-foreground: Statische Warnung Vordergrund
-tab-background-selected: Reier Hintergrund für selektierte Reiter
+tab-background-selected: Reiter Hintergrund für selektierte Reiter
 tab-background: Reiter Hintergrund
-tab-border-selected: Reiter Rahmen für selectierte Reiter
+tab-border-selected: Reiter Rahmen für selektierte Reiter
 tab-border: Reiter Rahmen
 tab-divider: Reiter Trennzeichen
 tab-foreground-selected: Reiter Vordergrund für selektierte Reiter
@@ -79,11 +79,11 @@ tiddler-controls-foreground: Tiddler Bedienelement Vordergrund
 tiddler-editor-background: Tiddler Editor Hintergrund
 tiddler-editor-border-image: Tiddler Editor Rahmen Bild
 tiddler-editor-border: Tiddler Editor Rahmen
-tiddler-editor-fields-even: Tiddler Editor Hintergrund geradzahlinge Felder in Tabelle
-tiddler-editor-fields-odd: Tiddler Editor Hintergrund un-geradzahlinge Felder in Tabelle
+tiddler-editor-fields-even: Tiddler Editor Hintergrund geradzahlige Felder in Tabelle
+tiddler-editor-fields-odd: Tiddler Editor Hintergrund un-geradzahlige Felder in Tabelle
 tiddler-info-background: Tiddler Info Bereich Hintergrund
 tiddler-info-border: Tiddler Info Bereich Rahmen
-tiddler-info-tab-background: Tiddler Info Breich Reiter Hintergrund
+tiddler-info-tab-background: Tiddler Info Bereich Reiter Hintergrund
 tiddler-link-background: Tiddler Link Hintergrund
 tiddler-link-foreground: Tiddler Link Vordergrund
 tiddler-subtitle-foreground: Tiddler Untertitel Vordergrund
