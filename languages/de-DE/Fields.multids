@@ -20,7 +20,7 @@ list: Eine geordnete Tiddler Liste, die mit diesem Tiddler verbunden ist.
 list-before: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''vor'' dem hier definierten Tiddler in die Liste eingefügt. Wenn vorhanden, aber leer, dann wird der neue Tiddler an den Anfang der Liste gesetzt.
 list-after: Dient zum Einfügen von Tiddler Titeln in das "list" Feld. Wenn gesetzt, wird der neue Tiddler ''nach'' dem hier definierten Tiddler in die Liste eingefügt. 
 modified: Datum, an dem der Tiddler zuletzt verändert wurde.
-modifier: Name der Person, die den Tiddler zuletzt veränder hat.
+modifier: Name der Person, die den Tiddler zuletzt verändert hat.
 name: Ein Menschen lesbarer Name für einen "plugin" Tiddler. 
 plugin-priority: Ein numerischer Wert, der die Priorität eines "plugins" festlegt.
 plugin-type: Der Typ eines "plugins".

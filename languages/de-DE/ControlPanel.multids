@@ -6,13 +6,13 @@ Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen ihres ~TiddlyWiki's anzupassen.
 Basics/AnimDuration/Prompt: Animation Dauer:
 Basics/Caption: Basis
-Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Lehrzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
+Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
 Basics/DefaultTiddlers/Prompt: Standard Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
-Basics/Subtitle/Prompt: Untertietel:
+Basics/Subtitle/Prompt: Untertitel:
 Basics/SystemTiddlers/Prompt: Anzahl System-Tiddler:
 Basics/Tags/Prompt: Anzahl Tags:
 Basics/Tiddlers/Prompt: Anzahl Tiddler:
@@ -21,7 +21,7 @@ Basics/Username/Prompt: Benutzer Signatur zum editieren:
 Basics/Version/Prompt: ~TiddlyWiki Version:
 EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
-EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden sollen.
+EditorTypes/Hint: Diese Tiddler definieren, welcher Editor für bestimmte Tiddler Typen (MIME-Type) verwendet werden soll.
 EditorTypes/Type/Caption: MIME-Type
 Info/Caption: Info
 Info/Hint: Informationen über dieses TiddlyWiki
@@ -88,7 +88,7 @@ Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
 Toolbars/Hint: Auswählen, welche "Toolbar Button" angezeigt werden
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Ausweählen, welche Buttons im Hauptmenü angezeigt werden:
+Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden:
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
 Tools/Caption: Tools
