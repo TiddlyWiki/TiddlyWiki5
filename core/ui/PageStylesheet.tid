@@ -2,10 +2,6 @@ title: $:/core/ui/PageStylesheet
 
 <$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
 
-<!-- DEPRECATION WARNING --><$list filter="[all[shadows+tiddlers]tag[$:/tags/stylesheet]!has[draft.of]]">
-<$transclude mode="block"/>
-</$list>
-
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/Stylesheet]!has[draft.of]]">
 <$transclude mode="block"/>
 </$list>
