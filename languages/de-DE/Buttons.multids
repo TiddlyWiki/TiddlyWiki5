@@ -25,7 +25,7 @@ Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlü
 Encryption/SetPassword/Caption: aktiviere Passwort
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
 FullScreen/Caption: Vollbild
-FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild modus
+FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-modus
 Import/Caption: Import
 Import/Hint: Importiere Dateien
 Info/Caption: info
@@ -39,9 +39,9 @@ NewTiddler/Hint: Erstelle einen neuen Tiddler
 More/Caption: mehr
 More/Hint: Weitere Aktionen
 Permalink/Caption: permalink
-Permalink/Hint: Die Browser Addressleiste enthält einen Link zu diesem Tiddler
+Permalink/Hint: Die Browser Adressleiste enthält einen Link zu diesem Tiddler
 Permaview/Caption: permaview
-Permaview/Hint: Die Browser Addressleiste enthält einen Link zu allen offenen Tiddlern in dieser "Story"
+Permaview/Hint: Die Browser Adressleiste enthält einen Link zu allen offenen Tiddlern in dieser "Story"
 Refresh/Caption: aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: speichern
@@ -53,7 +53,7 @@ StoryView/Hint: Auswahl des Anzeige Modus für die "Story"
 HideSideBar/Caption: Sidebar ausblenden
 HideSideBar/Hint: Sidebar ausblenden
 ShowSideBar/Caption: Sidebar einblenden
-ShowSideBar/Hint: Sidebar eiblenden
+ShowSideBar/Hint: Sidebar einblenden
 TagManager/Caption: Tag Manager
 TagManager/Hint: Öffne den "Tag Manager"
 Theme/Caption: Thema
