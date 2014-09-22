@@ -1,7 +1,7 @@
 caption: Widgets
 created: 20131205160840915
 creator: pmario
-modified: 20140913183907225
+modified: 20140921170719673
 modifier: pmario
 tags: WikiText
 title: Widgets in WikiText
@@ -18,7 +18,7 @@ Widgets sind die Grundbausteine von ~TiddlyWiki. Sie haben ein sehr ähnliche Sy
 Widgets erben alle Funktionalitäten von [[HTML in WikiText]]:
 
 * Widget Attribute können spezifiziert werden als:
-** Zeichenkette ohne Anführungszeichen. Attribute könne dann keine Leerzeichen enthalten. 
+** Zeichenkette ohne Anführungszeichen. Attribute können dann keine Leerzeichen enthalten. 
 ** Zeichenkette mit einfachen oder doppelten Anführungszeichen. Leerzeichen sind möglich.
 ** Zeichenkette mit 3 x doppelten Anführungszeichen. Leerzeichen und 1 doppeltes Anführungszeichen sind möglich.
 ** Makro Aufruf zB: `attr=<<meinMakro>>`
