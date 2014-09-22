@@ -11,7 +11,9 @@ Welcome to TiddlyWiki, a non-linear personal web notebook that anyone can use an
 
 TiddlyWiki is a complete interactive wiki in JavaScript. It can be used as a single HTML file in the browser or as a powerful Node.js application. It is highly customisable: the entire user interface is itself implemented in hackable WikiText.
 
-Learn more and see it in action at http://tiddlywiki.com
+Learn more and see it in action at http://tiddlywiki.com/
+
+Developer documentation is in progress at http://tiddlywiki.com/dev/
 
 ! Installing TiddlyWiki on Node.js
 
