@@ -27,7 +27,7 @@ See the text change as you switch entries in the select widget. Try changing the
 The content of the `<$select>` widget should be one or more HTML `<option>` or `<optiongroup>` elements that provide the available values.
 
 |!Attribute |!Description |
-|tiddler |The title of the tiddler containing the value to be displayed in the select widget (defaults to the current tiddler) |
+|tiddler |The title of the tiddler containing the value to be displayed/modified by the select widget (defaults to the current tiddler) |
 |field |The field name for the value in the current tiddler (defaults to "text") |
 |index |The index of a property in a [[DataTiddler|DataTiddlers]] (takes precedence over the field attribute) |
 |class |CSS classes to be assigned to the HTML select element |
