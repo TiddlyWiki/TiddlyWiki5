@@ -3,7 +3,7 @@ modified: 20140901080739956
 title: Developers Notes
 type: text/x-tiddlywiki
 
-The  includes handling of namespace conflicts between Classic and Tw5 macros.
+The Tw2parser plugin includes handling of namespace conflicts between Classic and Tw5 macros.
 
 One of the goals of the Tw2parser plugin is to hide the Classic macros from tiddlers of types other than text/x-tiddlywiki. This is achieved by having the parser prepend the macro definitions to the 'local' parse tree (see around line 60 wikitextparser.js), making them only visible in text/x-tiddlywiki tiddlers and typed-blocks. At present all text based Classic macros are in the same file.
 
