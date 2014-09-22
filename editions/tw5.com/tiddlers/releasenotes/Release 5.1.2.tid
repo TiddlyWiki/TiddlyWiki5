@@ -1,0 +1,27 @@
+caption: 5.1.2
+created: 20140922124011558
+modified: 20140922124011558
+tags: ReleaseNotes
+title: Release 5.1.2
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.1...v5.1.2]]//
+
+!! Incompatible Changes
+
+* 
+
+!! Hackability Improvements
+
+* 
+
+!! Bug Fixes
+
+*
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@pmario|https://github.com/pmario]]
+* [[@TheDiveO|https://github.com/TheDiveO]]
