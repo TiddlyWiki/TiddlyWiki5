@@ -4,7 +4,7 @@ modified: 20140921124011558
 tags: ReleaseNotes
 title: Release 5.1.1
 type: text/vnd.tiddlywiki
-released: 201409201500
+released: 201409221100
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.0...v5.1.1]]//
 
@@ -22,10 +22,6 @@ Note that the next release will also remove support for regular expression filte
 !! Hackability Improvements
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/96b7d0eebaf73dcfd4eccb848b90caaa055e5e20]] first implementation of the [[KaTeX Plugin]] for mathematical typesetting
-
-!! Bug Fixes
-
-* 
 
 !! Contributors
 
