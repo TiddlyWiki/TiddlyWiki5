@@ -14,7 +14,9 @@ To add the plugin to your own TiddlyWiki5, just drag this link to the browser wi
 
 ! Using KaTeX
 
-The KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple LaTeX plugins and wish to specifically target KaTeX.
+The usual way to include ~LaTeX is to use `$$`, as shown in the examples below.
+
+The underlying KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple ~LaTeX plugins and wish to specifically target KaTeX.
 
 ! Examples
 
