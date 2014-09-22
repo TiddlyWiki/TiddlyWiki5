@@ -16,6 +16,7 @@ var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
 var ButtonWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
+	this.mouseInside = false;
 };
 
 /*
@@ -56,31 +57,15 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	if(this["aria-label"]) {
 		domNode.setAttribute("aria-label",this["aria-label"]);
 	}
-	// Add a click event handler
-	domNode.addEventListener("click",function (event) {
-		var handled = false;
-		if(self.to) {
-			self.navigateTo(event);
-			handled = true;
-		}
-		if(self.message) {
-			self.dispatchMessage(event);
-			handled = true;
-		}
-		if(self.popup) {
-			self.triggerPopup(event);
-			handled = true;
-		}
-		if(self.set) {
-			self.setTiddler();
-			handled = true;
-		}
-		if(handled) {
-			event.preventDefault();
-			event.stopPropagation();
-		}
-		return handled;
-	},false);
+	// Add a click or mouse event handlers
+	if(this.action === "hover") {
+		$tw.utils.addEventListeners(domNode, [{name: "mouseenter", handlerObject: this}]);
+		$tw.utils.addEventListeners(domNode, [{name: "mouseleave", handlerObject: this}]);
+	} else {
+		// This.action could be === "click" but since "click" is the default, we
+		// will just handle it here.
+		$tw.utils.addEventListeners(domNode, [{name: "click", handlerObject: this}]);
+	}
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
@@ -138,7 +123,7 @@ ButtonWidget.prototype.execute = function() {
 	this.set = this.getAttribute("set");
 	this.setTo = this.getAttribute("setTo");
 	this.popup = this.getAttribute("popup");
-	this.hover = this.getAttribute("hover");
+	this.action = this.getAttribute("action","click");
 	this["class"] = this.getAttribute("class","");
 	this["aria-label"] = this.getAttribute("aria-label");
 	this.tooltip = this.getAttribute("tooltip");
@@ -154,12 +139,76 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 ButtonWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.hover || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
+	if(changedAttributes.to || changedAttributes.message || changedAttributes.param || changedAttributes.set || changedAttributes.setTo || changedAttributes.popup || changedAttributes.action || changedAttributes["class"] || changedAttributes.selectedClass || changedAttributes.style || (this.set && changedTiddlers[this.set]) || (this.popup && changedTiddlers[this.popup])) {
 		this.refreshSelf();
 		return true;
 	}
 	return this.refreshChildren(changedTiddlers);
 };
+
+/*
+Handler for click/mouse events
+*/
+ButtonWidget.prototype.handleEvent = function (event) {
+	var self = this;
+	var handled = false;
+	switch (event.type) {
+		case "click":
+			handled =  self.triggerActions(event);
+			break;
+		case "mouseenter":
+			if (self.mouseInside == false) {
+				self.mouseInside = !self.mouseInside;
+
+				handled = self.triggerActions(event);
+			}
+			break;
+		case "mouseleave":
+			//Trigger popup again (to close)
+			//Other actions are not triggered again
+			if (self.mouseInside == true) {
+				self.mouseInside = !self.mouseInside;
+
+				if (self.popup) {
+					self.triggerPopup(event);
+					handled = true;
+				}
+			}
+			break;
+		default:
+			// Don't handle other events.
+	}
+	if(handled) {
+		event.preventDefault();
+		event.stopPropagation();
+	}
+	// This is expected to be a void function, thus nothing to return
+}
+
+/*
+Trigger the configured actions
+*/
+ButtonWidget.prototype.triggerActions = function(event) {
+	var self = this;
+	var handled = false;
+	if(self.to) {
+		self.navigateTo(event);
+		handled = true;
+	}
+	if(self.message) {
+		self.dispatchMessage(event);
+		handled = true;
+	}
+	if(self.popup) {
+		self.triggerPopup(event);
+		handled = true;
+	}
+	if(self.set) {
+		self.setTiddler();
+		handled = true;
+	}
+	return handled;
+}
 
 exports.button = ButtonWidget;
 
