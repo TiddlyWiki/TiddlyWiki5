@@ -2,6 +2,10 @@ title: HelloThere
 
 This is a TiddlyWiki plugin for mathematical typesetting based on KaTeX from Khan Academy.
 
+It is completely self-contained, and doesn't need an Internet connection in order to work.
+
+//This first version of the plugin cannot be used to generate static content under Node.js, but that capability will come in a future update. (Note that you can still use it when running the client-server configuration under Node.js).//
+
 ! Installation
 
 To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:

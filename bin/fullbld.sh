@@ -98,6 +98,16 @@ node ./tiddlywiki.js \
 #
 ######################################################
 
+# /plugins/tiddlywiki/katex/index.html	Demo wiki with KaTeX plugin
+# /plugins/tiddlywiki/katex/empty.html	Empty wiki with KaTeX plugin
+node ./tiddlywiki.js \
+	./editions/katexdemo \
+	--verbose \
+	--output $TW5_BUILD_OUTPUT \
+	--rendertiddler $:/core/save/all plugins/tiddlywiki/katex/index.html text/plain \
+	--rendertiddler $:/core/save/empty plugins/tiddlywiki/katex/empty.html text/plain \
+	|| exit 1
+
 # /plugins/tiddlywiki/tahoelafs/index.html	Demo wiki with Tahoe-LAFS plugin
 # /plugins/tiddlywiki/tahoelafs/empty.html	Empty wiki with Tahoe-LAFS plugin
 node ./tiddlywiki.js \

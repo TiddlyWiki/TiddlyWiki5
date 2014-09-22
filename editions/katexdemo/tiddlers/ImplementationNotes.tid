@@ -27,3 +27,4 @@ These definitions are currently removed manually from [[$:/plugins/tiddlywiki/ka
 }
 ```
 
+Note that the plugin currently only embeds the WOFF format fonts, which seems to be sufficient for most browsers.
