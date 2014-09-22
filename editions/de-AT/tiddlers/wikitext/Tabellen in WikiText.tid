@@ -1,7 +1,7 @@
 caption: Tabellen
 created: 20130914132100000
 creator: pmario
-modified: 20140913175104046
+modified: 20140921170739118
 modifier: pmario
 tags: WikiText
 title: Tabellen in WikiText
@@ -48,7 +48,7 @@ Dargestellt als:
 
 !! Vertikale Ausrichtung
 
-Die Vertikale Ausrichtung kann mit `^` für oben und `,` für unten als erstes Zeichen in der Zelle festgelegt werden:
+Die vertikale Ausrichtung kann mit `^` für oben und `,` für unten als erstes Zeichen in der Zelle festgelegt werden:
 Eine horizontale Ausrichtung ist zusätzlich möglich.
 
 ```

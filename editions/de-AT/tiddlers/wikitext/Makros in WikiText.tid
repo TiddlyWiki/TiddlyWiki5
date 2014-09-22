@@ -1,7 +1,7 @@
 caption: Makros
 created: 20131205160746466
 creator: pmario
-modified: 20140913144641193
+modified: 20140921170734908
 modifier: pmario
 tags: WikiText
 title: Makros in WikiText
@@ -70,7 +70,7 @@ Für einzeilige Makros kann die `\end` Markierung entfallen!
 
 !!! Globale Makros
 
-* Globale Makros können in Tiddlern definiert weden, die mit dem System Tag: [[$:/tags/Macro]] getaggt sind. Diese Makros sind in jedem Tiddler sichtbar.
+* Globale Makros können in Tiddlern definiert werden, die mit dem System Tag: [[$:/tags/Macro]] getaggt sind. Diese Makros sind in jedem Tiddler sichtbar.
 
 * [[JavaScript Macros]] sind global sichtbar und haben Zugriff auf die TW Kern Funktionen. 
 

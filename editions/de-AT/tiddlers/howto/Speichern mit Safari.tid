@@ -1,11 +1,12 @@
 created: 20140811171304926
 creator: pmario
-modified: 20140909111713240
+modified: 20140921170749113
+modifier: pmario
 tags: howto
 title: Speichern mit Safari
 type: text/vnd.tiddlywiki
 
-This method of saving changes is clunky because it requires manual intervention for each save.
+Diese Methode ist etwas umständlich, da jeder Schritt manuell gemacht werden muss. 
 
 # Speichern sie eine leere Datei der deutschen Version.
 #> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
