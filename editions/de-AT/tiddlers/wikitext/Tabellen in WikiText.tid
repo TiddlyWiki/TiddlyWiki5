@@ -1,8 +1,8 @@
 caption: Tabellen
 created: 20130914132100000
 creator: pmario
-modified: 20140921170739118
-modifier: pmario
+modified: 20140922130746459
+modifier: ChrisK
 tags: WikiText
 title: Tabellen in WikiText
 type: text/vnd.tiddlywiki
@@ -105,7 +105,7 @@ Tabellen CSS Klassen, Beschriftung, Kopfzeile und Fußzeile können als "Pseudo 
 |Fußzeile|Fußzeile|f
 ```
 
-Renders as:
+Dargestellt als:
 
 |meineKlasse anderKlasse|k
 | Das die Tabellen Beschriftung |c

@@ -1,8 +1,8 @@
 caption: Lists
 created: 20131205160257619
 creator: pmario
-modified: 20140913134840699
-modifier: pmario
+modified: 20140922123717762
+modifier: ChrisK
 tags: WikiText
 title: Listen in WikiText
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 Ungeordnete Listen können mit dem Stern `*` erzeugt werden. Der `*` muss das erste Zeichen in der Zeile sein!
 
 <<wikitext-example src:"* Erstes Listen Element
-* Zwseites Listen Element
+* Zweites Listen Element
 ** Ein Unterelement
 * Drittes Listen Element
 ">>
