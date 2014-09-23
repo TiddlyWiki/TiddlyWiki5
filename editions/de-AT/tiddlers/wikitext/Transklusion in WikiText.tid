@@ -1,7 +1,7 @@
 caption: Transklusion
 created: 20131205160146648
 creator: pmario
-modified: 20140921170725154
+modified: 20140923191923647
 modifier: pmario
 tags: WikiText
 title: Transklusion in WikiText
@@ -27,4 +27,6 @@ Eine ähnliche Syntax kann verwendet werden, um eine Liste von Tiddlern mit eine
 {{{ [tag[tagName]] ||VorlageTitel}}}
 ```
 
-TODO .. Beispiele
+!! Beispiel Transklusion
+
+<<list-links filter:"[tag[Transklusion in WikiText]]">>

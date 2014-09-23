@@ -6,7 +6,7 @@ Vor dem Start, vergewissern sie sich, dass sie dieses Wiki auch wirklich speiche
 
 * Österreich: http://tiddlywiki.com/languages/de-AT
 * Deutschland: http://tiddlywiki.com/languages/de-DE
-* Allgemein (englisch): http://tiddlywiki.com finden.
+* Allgemein (englisch): http://tiddlywiki.com 
 
 Erste Schritte:
 
@@ -14,4 +14,7 @@ Erste Schritte:
 * Einstellungen können im [[Kontrollpanel|$:/ControlPanel]] vorgenommen werden. Siehe: "Zahnrad-Button" 
 ** Das Anzeigen dieses Tiddlers können sie verhindern, indem sie die "~DefaultTiddlers" im ''Basis-Tab'' verändern.
 * Speichern wird mit dem "Speichern-Button" in der Navigationsleiste ausgelöst. 
-* [[Weitere Informationen zu WikiText|http://tiddlywiki.com/languages/de-AT/index.html#WikiText]]
+* Österreich: [[Weitere Informationen zu WikiText|http://tiddlywiki.com/languages/de-AT/index.html#WikiText]]
+* Deutschland: [[Weitere Informationen zu WikiText|http://tiddlywiki.com/languages/de-DE/index.html#WikiText]]
+
+Hinweis: Die österreichische und deutsche Version unterscheiden sich momentan nur in der Flagge, die bei der Standard Sprachauswahl angezeigt wird. In Zukunft können Beschriftungen der Benutzeroberfläche geringfügig von einander abweichen. zB: Jänner - Januar. 

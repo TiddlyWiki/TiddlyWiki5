@@ -1,0 +1,11 @@
+created: 20140923122853896
+creator: pmario
+modified: 20140923175442564
+modifier: pmario
+tags: $:/_tags/ListIcon
+title: list-done.svg
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" class="tc-list-image-done tc-list-image" height="15" width="15">
+<path id="path3757" stroke-linejoin="round" d="M3.5168,8.809,6.3999,12.172,12.747,5.9087" stroke="#31a837" stroke-linecap="round" stroke-width="2.5" fill="none"/>
+</svg>
