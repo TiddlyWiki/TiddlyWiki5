@@ -1,0 +1,12 @@
+created: 20140924115616653
+modified: 20140924115627781
+tags: Filters
+title: FilterOperator: fields
+type: text/vnd.tiddlywiki
+
+The ''fields'' filter operator returns the names of all the fields used in the currently selected tiddlers.
+
+|!Filter String |!Description |
+|`[[HelloThere]fields[]]` |Returns the fields present in the tiddler `HelloThere` |
+|`[tag[myTag]fields[]]` |Returns the aggregate of all the fields present on tiddlers that have the tag  `myTag` |
+
