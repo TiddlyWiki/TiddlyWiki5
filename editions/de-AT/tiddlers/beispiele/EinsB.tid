@@ -1,0 +1,12 @@
+created: 20140923232903865
+creator: pmario
+modified: 20140923235548021
+modifier: pmario
+tags: tocEins
+title: EinsB
+toc-link: no
+type: text/vnd.tiddlywiki
+
+Dieser Tiddler enthält ein Feld mit dem Namen: `toc-link` mit dem Wert: `no`. Deshalb wird beim `<<toc>>` Makro hier kein Link erzeugt.
+
+Siehe: [[Inhaltsverzeichnis-Einfach]]

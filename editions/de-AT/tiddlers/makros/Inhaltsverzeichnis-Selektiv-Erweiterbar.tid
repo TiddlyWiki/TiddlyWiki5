@@ -1,0 +1,16 @@
+caption: Selectiv Erweiterbar
+created: 20140923233515274
+creator: pmario
+modified: 20140923233651833
+modifier: pmario
+tags: tocVariante
+title: Inhaltsverzeichnis-Selektiv-Erweiterbar
+type: text/vnd.tiddlywiki
+
+!!! Selectiv Erweiterbares Inhaltsverzeichnis
+
+<$macrocall $name='wikitext-example-without-html'
+src='<div class="tc-table-of-contents">
+<<toc-selective-expandable "tocBeispiel">>
+</div>
+'/>

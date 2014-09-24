@@ -1,7 +1,8 @@
-caption: tabs
+caption: tabs-Reiter
 created: 20131228162203521
 creator: ChrisK
-modified: 20140923203413899
+list: ReiterEins ReiterZwei ReiterDrei
+modified: 20140923234958679
 modifier: pmario
 tags: Makros
 title: TabsMakro
@@ -31,7 +32,7 @@ Hier sind einige Beispiele für das `<<tabs>>` Makro
 ```
 <<tabs "ReiterEins ReiterZwei ReiterDrei" "ReiterZwei" "$:/state/tab1">>
 
-<<tabs "[tag[TabsMakro]] ReiterDrei" "$:/state/tab2" "tc-vertical">>
+<<tabs "[tag[TabsMakro]]" "ReiterDrei" "$:/state/tab2" "tc-vertical">>
 ```
 
 <<tabs "ReiterEins ReiterZwei ReiterDrei" "ReiterZwei" "$:/state/tab1">>

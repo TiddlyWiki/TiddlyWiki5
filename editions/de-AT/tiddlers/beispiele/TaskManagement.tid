@@ -1,6 +1,6 @@
 created: 20140923173639039
 creator: pmario
-modified: 20140923173741466
+modified: 20140924155046340
 modifier: pmario
 title: TaskManagement
 type: text/vnd.tiddlywiki
@@ -8,3 +8,11 @@ type: text/vnd.tiddlywiki
 In dieser Edition sind folgende Task Management Varianten beschreiben:
 
 <<list-links filter:"[tag[TaskManagement]]">>
+
+----
+
+Obige Liste wurde mit folgenden Befehlen erstellt.
+
+```
+<<list-links filter:"[tag[TaskManagement]]">>
+```
