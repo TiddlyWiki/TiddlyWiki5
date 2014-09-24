@@ -1,9 +1,9 @@
+caption: Lists
 created: 20131205160257619
-modified: 20131206154613715
+modified: 20140924104026734
 tags: WikiText
 title: Lists in WikiText
 type: text/vnd.tiddlywiki
-caption: Lists
 
 ! Unordered Lists
 
@@ -52,3 +52,13 @@ Note that [[Block Quotes in WikiText]] can be mixed with lists. For example:
 **> Another quote
 * List Three
 ">>
+
+! Paragraphs in Lists
+
+Entries in the list are delimited with a linebreak, making it impossible to include linebreaks within a list entry. The workaround is to transclude paragraph content from another tiddler. For example:
+
+```
+* First entry
+* <$transclude tiddler="MyTiddler" mode="block"/>
+* Third entry
+```
