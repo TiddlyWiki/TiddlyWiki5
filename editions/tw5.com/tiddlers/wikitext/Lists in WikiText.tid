@@ -1,6 +1,6 @@
 caption: Lists
 created: 20131205160257619
-modified: 20140924104026734
+modified: 20140924112303029
 tags: WikiText
 title: Lists in WikiText
 type: text/vnd.tiddlywiki
@@ -55,10 +55,28 @@ Note that [[Block Quotes in WikiText]] can be mixed with lists. For example:
 
 ! Paragraphs in Lists
 
-Entries in the list are delimited with a linebreak, making it impossible to include linebreaks within a list entry. The workaround is to transclude paragraph content from another tiddler. For example:
+Entries in the list are delimited with a linebreak, making it impossible to include linebreaks within a list entry. There are a couple of workarounds.
+
+First, you can transclude paragraph content from another tiddler. For example:
 
 ```
 * First entry
 * <$transclude tiddler="MyTiddler" mode="block"/>
 * Third entry
+```
+
+Secondly, you can use an HTML "div" element to contain the multiline content. For example:
+
+```
+# Step 1
+# Step 2
+# Step 3<div>
+
+Here is the first of several paragraphs. Note that the double linebreak preceding this paragraph is significant.
+
+And here is the second of several paragraphs.
+</div>
+# Step 4
+# Step 5
+# Step 6
 ```
