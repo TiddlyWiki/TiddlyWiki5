@@ -39,7 +39,7 @@ exports.httpRequest = function(options) {
 	// Set up the state change handler
 	request.onreadystatechange = function() {
 		if(this.readyState === 4) {
-			if(this.status === 200 || this.status === 204) {
+			if(this.status === 200 || this.status === 201 || this.status === 204) {
 				// Success!
 				options.callback(null,this.responseText,this);
 				return;
