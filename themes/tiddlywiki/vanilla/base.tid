@@ -1447,3 +1447,12 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	cursor: pointer;
 	display: inline-block;
 }
+
+/*
+** Errors
+*/
+
+.tc-error {
+	background: #f00;
+	color: #fff;
+}
