@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 The following plugins are distributed on tiddlywiki.com as part of the main TiddlyWiki distribution.
 
-<list-links "[tag[Plugins]]">>
+<<list-links "[tag[Plugins]]">>
 
 ! What is a plugin?
 

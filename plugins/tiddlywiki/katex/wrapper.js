@@ -36,7 +36,12 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
 	// Render it into a span
 	var span = this.document.createElement("span");
-	katex.render(text,span);
+	try {
+		katex.render(text,span);
+	} catch(ex) {
+		span.className = "tc-error";
+		span.textContent = ex;
+	}
 	// Insert it into the DOM
 	parent.insertBefore(span,nextSibling);
 	this.domNodes.push(span);
