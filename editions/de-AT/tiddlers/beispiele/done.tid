@@ -1,0 +1,16 @@
+color: #37d011
+created: 20140923104300415
+creator: pmario
+icon: $:/core/images/done-button
+modified: 20140923105208878
+modifier: ChrisK
+tags: done
+title: done
+type: text/vnd.tiddlywiki
+
+Diese Tag wird verwendet um "Tasks" als erledigt zu markieren.
+
+Siehe auch:
+
+* [[Task Management]] .. Beispiel
+* [[Tag Manager|$:/TagManager]] .. Zuweisung der Farben und Symbole

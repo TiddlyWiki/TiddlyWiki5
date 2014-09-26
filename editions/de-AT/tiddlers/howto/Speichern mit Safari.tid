@@ -1,7 +1,7 @@
 created: 20140811171304926
 creator: pmario
-modified: 20140921170749113
-modifier: pmario
+modified: 20140922125459696
+modifier: ChrisK
 tags: howto
 title: Speichern mit Safari
 type: text/vnd.tiddlywiki
@@ -20,7 +20,7 @@ Diese Methode ist etwas umständlich, da jeder Schritt manuell gemacht werden mu
 # Ein "popup" mit "Änderungen speichern" wird angezeigt. Es enthält einen Link mit der Information //Rechts klicken um zu speichern//
 # Klicken sie den Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  
 # Wählen sie das Verzeichnis, und selektieren sie die existierende Datei.
-# Klicken sie den "Speichern" button.
+# Klicken sie den "Speichern" Button.
 # Klicken sie "Ersetzen" um das Überschreiben zu erlauben.
 # Laden sie das Browser Fenster neu.
 # Überprüfen sie, ob die Änderungen richtig gespeichert wurden.

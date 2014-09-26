@@ -1,11 +1,12 @@
 created: 20131212223146250
 creator: pmario
-modified: 20140909102435058
+modified: 20140922132924816
+modifier: ChrisK
 tags: howto
 title: Windows HTA Hack
 type: text/vnd.tiddlywiki
 
-Unter Windows ist es möglich ein TiddlyWiki in einen "logische" Applikation zu verwandeln, indem man die Datei Endung von `.html` nach `.hta` ändert. ~TiddlyWiki kann dann direkt gespeichert werden. 
+Unter Windows ist es möglich, ein TiddlyWiki in eine "logische" Applikation zu verwandeln, indem man die Datei Endung von `.html` nach `.hta` ändert. ~TiddlyWiki kann dann direkt gespeichert werden. 
 
 Achtung!
 Der Nachteil dieser Änderung ist, dass die Datei im UTF-16 format gespeichert wird, was sie ungefähr doppelt so groß macht. 

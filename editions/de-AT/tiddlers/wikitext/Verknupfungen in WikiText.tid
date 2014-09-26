@@ -1,8 +1,8 @@
 caption: Verknüpfungen
 created: 20131205155230596
 creator: pmario
-modified: 20140921170658739
-modifier: pmario
+modified: 20140922132221424
+modifier: ChrisK
 tags: WikiText Hyperlinks
 title: Verknüpfungen in WikiText
 type: text/vnd.tiddlywiki
@@ -65,7 +65,7 @@ Dargestellt als:
 * http://tiddlywiki.com/
 * [[TW5|http://tiddlywiki.com/]]
 
-Die automatisch Erkennung von externen Verknüpfungen hat einige Schwächen. Deshalb ist es möglich eine externe Verknüpfung zu definieren: 
+Die automatische Erkennung von externen Verknüpfungen hat einige Schwächen. Deshalb ist es möglich eine externe Verknüpfung zu definieren: 
 
 ```
 [ext[tiddlywiki.com]]
