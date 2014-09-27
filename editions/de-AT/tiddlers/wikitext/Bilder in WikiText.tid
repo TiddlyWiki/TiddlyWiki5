@@ -19,7 +19,7 @@ Bilder können in WikiText mit folgender Syntax verwendet werden:
 oder 
 
 ```
-[img[http://tiddlywiki.com/favicon.ico]]  Dieses verlinkte Bild wird eventuell nicht angezeigt, wenn sie offline sind!
+[img[http://tiddlywiki.com/favicon.ico]]  Dieses verlinkte Bild wird eventuell nicht angezeigt, wenn Sie offline sind!
 ```
 [img[http://tiddlywiki.com/favicon.ico]]
 

@@ -1,9 +1,9 @@
 caption: {{$:/language/SideBar/Contents/Caption}}
 created: 20140918100037381
 creator: pmario
-list: Willkommen! ErsteSchritte WikiText
+list: Willkommen! ErsteSchritte WikiText Einführung [[Was kann TiddlyWiki]] Makros
 list-after: $:/core/ui/SideBar/Open
-modified: 20140918100252116
+modified: 20140923192624395
 modifier: pmario
 tags: $:/tags/SideBar
 title: InhaltsVerzeichnis

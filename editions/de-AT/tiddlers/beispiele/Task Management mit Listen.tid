@@ -1,0 +1,44 @@
+created: 20140923105745269
+creator: pmario
+modified: 20140923182134093
+modifier: pmario
+tags: [[Was kann TiddlyWiki]] TaskManagement
+title: Task Management mit Listen
+type: text/vnd.tiddlywiki
+
+Wie in [[Listen in WikiText]] beschrieben, können einzelnen Listenelementen spezifische Formatierungen (CSS Klassen) zugewiesen werden. 
+
+Für ein "reines" Text basierendes Task Management System kann diese Funktion sehr hilfreich sein. 
+
+Zum Beispiel
+
+```
+* Finde den Ring
+* Gehe nach Mordor
+** Finde den Weg
+* Rette die Welt
+```
+
+Erzeugt folgende einfache Liste. 
+
+* Finde den Ring
+* Gehe nach Mordor
+** Finde den Weg
+* Rette die Welt
+
+Mit CSS-Klassen und ein wenig Magie
+
+```
+*.Done Finde den Ring
+*.ToDo Gehe nach Mordor
+**.Check Finde den Weg
+* Rette die Welt
+```
+
+der richtigen [[Stylesheet|$:_TaskStylesheet]] und den [[richtigen Symbolen|$:/_tags/ListIcon]] wird daraus:
+
+*.Done Finde den Ring
+*.ToDo Gehe nach Mordor
+**.Check Finde den Weg
+* Rette die Welt
+

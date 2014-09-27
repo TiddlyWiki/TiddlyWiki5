@@ -1,0 +1,16 @@
+caption: Erweiterbar
+created: 20140923233304471
+creator: pmario
+modified: 20140923233643671
+modifier: pmario
+tags: tocVariante
+title: Inhaltsverzeichnis-Erweiterbar
+type: text/vnd.tiddlywiki
+
+!!! Erweiterbares Inhaltsverzeichnis
+
+<$macrocall $name='wikitext-example-without-html'
+src='<div class="tc-table-of-contents">
+<<toc-expandable "tocBeispiel">>
+</div>
+'/>

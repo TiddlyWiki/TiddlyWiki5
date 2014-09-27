@@ -1,0 +1,14 @@
+created: 20140923133954557
+creator: pmario
+modified: 20140923175436090
+modifier: pmario
+tags: $:/_tags/ListIcon
+title: list-task.svg
+type: image/svg+xml
+
+<svg xmlns="http://www.w3.org/2000/svg" class="tc-list-image-task tc-list-image" height="15" width="15" >
+<g stroke="#2929e4" stroke-linejoin="miter" stroke-linecap="round" stroke-width="2.5" fill="none">
+<path d="m11.002,2.5018,0,6.4319"/>
+<path d="m10.547,13.61,0.95879-0.0067"/>
+</g>
+</svg>

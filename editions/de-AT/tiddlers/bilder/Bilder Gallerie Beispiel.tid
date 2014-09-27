@@ -1,0 +1,22 @@
+created: 20140809113603449
+creator: pmario
+modified: 20140923103646709
+modifier: pmario
+tags: [[Was kann TiddlyWiki]]
+title: Bilder Gallerie Beispiel
+type: text/vnd.tiddlywiki
+
+Hier ist ein Beispiel, wie mit dem ListWidget und dem TranscludeWidget eine einfache Bildergalerie erstellt werden kann. Bearbeiten Sie diesen Tiddler, um zu sehen, wie!
+
+<style>
+.my-gallery svg {
+width: 6em;
+height: 6em;
+margin: 1em;
+}
+</style>
+<div class="my-gallery">
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/Image]]">
+<$transclude/>
+</$list>
+</div>

@@ -1,0 +1,45 @@
+caption: toc-Inhaltsverzeichnis
+created: 20140919155729620
+creator: pmario
+modified: 20140923235926478
+modifier: pmario
+tags: Makros
+title: TableOfContentsMacro
+type: text/vnd.tiddlywiki
+
+Das Inhaltsverzeichnis Makro (englisch: table of content) erstellt einen hierarchischen Baum von Verknüpfungen (Links), basierend auf ihren Tags.
+
+Der Basis Eintrag in das Verzeichnis wird als "root tag" bezeichnet. Die weiteren Ebenen werden von Tiddlern gebildet, die mit den "root tags" getaggt sind. Einträge können sortiert werden, indem im `list` Feld eines Tags die Reihenfolge der Tiddler festgelegt wird. (Die Sortierung muss momentan per Hand vorgenommen werden). Siehe auch: [[Tagging]]
+
+Der Text für die Einträge wird aus dem `caption` Feld des Tiddlers genommen. Ist dieser nicht vorhanden, dann wird der Tiddler Titel angezeigt.Dieser Tiddler hat ein `caption` Feld mit dem Inhalt: ''{{!!caption}}''. Im (i)nfo Button unter Felder können Sie alle Felder sehen!
+
+Die Einträge werden als Links dargestellt, außer, der Tiddler hat ein weiteres Feld mit dem Namen: `toc-link` und dem Wert: `no`. In den folgenden Beispielen ist dies der Fall für den Tiddler: ''EinsB.''
+
+Es gibt mehrere Varianten des "toc" Makros:
+
+* `<<toc>>` erstellt eine hierarchische Liste mit Links.
+* `<<toc-expandable>>` erstellt einen erweiterbaren Baum mit Links.
+* `<<toc-selective-expandable>>` erstellt einen erweiterbaren Baum, bei dem der "erweitern" Button nur dann vorhanden ist, wenn der Zweig weitere Elemente hat. 
+
+Die Makros erzeugen HTML `<ol>` Elemente (geordnete Listen):
+
+* Die `<ol>` Elemente haben eine CSS Klasse: `tc-toc`.
+* Die erweiterbaren Elemente habe zusätzlich die Klasse: `tc-toc-expandable`.
+* Die "selective-expandable" Variante hat die Klasse: `tc-toc-selective-expandable`
+
+
+!! Parameter
+
+|Position |Name |Beschreibung |Standard |h
+|1 |tag |Der "root tag" legt die erste Ebene der Hierarchie fest | |
+|2 |sort |Optional können die Einträge sortiert werden. zB: `sort[title]` | |
+
+Der "tag" und "sort" Parameter werden kombiniert und legen den Filterausdruck fest:
+
+```
+[tag[$tag$]$sort$]
+```
+
+!! Beispiele
+
+<<tabs "[tag[tocVariante]]" "Inhaltsverzeichnis-Einfach">>
