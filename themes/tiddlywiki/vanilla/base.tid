@@ -330,6 +330,15 @@ button.tc-tag-label, span.tc-tag-label {
 	border-radius: 8px;
 }
 
+.tc-untagged-separator {
+	width: 10em;
+	left: 0;
+	margin-left: 0;
+	border: 0;
+	height: 1px;
+	background: <<colour tab-divider>>;
+}
+
 .tc-untagged-label {
 	background-color: <<colour untagged-background>>;
 }
