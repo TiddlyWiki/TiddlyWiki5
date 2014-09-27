@@ -1061,7 +1061,7 @@ canvas.tc-edit-bitmapeditor  {
 .tc-tab-buttons {
 	font-size: 0.85em;
 	padding-top: 1em;
-	margin-bottom: -1px;
+	margin-bottom: -2px;
 }
 
 .tc-tab-buttons.tc-vertical  {
