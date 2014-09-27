@@ -570,7 +570,7 @@ exports.sortByList = function(array,listTitle) {
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
 	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerData(title);
-	if(bundleInfo) {
+	if(bundleInfo && bundleInfo.tiddlers) {
 		var subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
 		if(subTiddler) {
 			return new $tw.Tiddler(subTiddler);

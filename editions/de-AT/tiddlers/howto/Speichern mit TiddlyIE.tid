@@ -6,17 +6,17 @@ tags: howto
 title: Speichern mit TiddlyIE
 type: text/vnd.tiddlywiki
 
-# Installieren sie TiddlyIE AddOn von:
+# Installieren Sie TiddlyIE AddOn von:
 #* https://github.com/davidjade/TiddlyIE/releases
-# Starten sie Internet Explorer neu. IE wird beim Start einen Dialog anzeigen, mit dem sie das AddOn freischalten können.
-#> Es ist möglich, dass sie aufgefordert werden das //Microsoft Script Runtime// zu erlauben. Tun sie das!
-#  Klicken sie den folgenden Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."
+# Starten Sie Internet Explorer neu. IE wird beim Start einen Dialog anzeigen, mit dem Sie das AddOn freischalten können.
+#> Es ist möglich, dass Sie aufgefordert werden das //Microsoft Script Runtime// zu erlauben. Tun Sie das!
+#  Klicken Sie den folgenden Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."
 #> http://tiddlywiki.com/languages/de-AT/empty.html oder
 #> http://tiddlywiki.com/languages/de-DE/empty.html
-# Suchen sie die eben geladene Datei im Datei Manager.
-#* Geben sie der Datei einen vernünftigen Namen und stellen sie sicher, dass die Endung `.html` oder `.htm` ist.
-# Öffnen sie die Datei mit dem Internet Explorer
-# Erstellen sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
-# Geben sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
-# Speichern sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü. IE wird einen "Speichern Unter.." Dialog öffnen. Folgen sie den Dialogen!
-# Laden sie die Seite neu, um sicher zu stellen, dass die Daten richtig gespeichert wurden.
+# Suchen Sie die eben geladene Datei im Datei Manager.
+#* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` oder `.htm` ist.
+# Öffnen Sie die Datei mit dem Internet Explorer
+# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
+# Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
+# Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü. IE wird einen "Speichern Unter.." Dialog öffnen. Folgen Sie den Dialogen!
+# Laden Sie die Seite neu, um sicher zu stellen, dass die Daten richtig gespeichert wurden.

@@ -6,6 +6,6 @@ tags: Referenz
 title: Liste aller HowTo's
 type: text/vnd.tiddlywiki
 
-Hier finden sie eine Auflistung aller HowTo's
+Hier finden Sie eine Auflistung aller HowTo's
 
 <<list-links "[tag[howto]]">>

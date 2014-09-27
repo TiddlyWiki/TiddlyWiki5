@@ -34,5 +34,16 @@ The ''tag'' and ''sort'' parameters are combined to make a filter expression of 
 ```
 
 ! Examples
+The top level entries of the table of contents examples are defined by the root tag 'Contents'<br>
+The subentries under each of those entries are tagged with the title of the entry, here 'First', 'Second', 'Third', and 'Fourth'. One level deeper only '~SecondThree' has subentries.
+
+Graphically, shown with - clickable - tag pills:
+
+{{Contents||$:/core/ui/TagTemplate}}
+*{{First||$:/core/ui/TagTemplate}}
+*{{Second||$:/core/ui/TagTemplate}}
+**{{SecondThree||$:/core/ui/TagTemplate}}
+*{{Third||$:/core/ui/TagTemplate}}
+*{{Fourtth||$:/core/ui/TagTemplate}}
 
 <<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>

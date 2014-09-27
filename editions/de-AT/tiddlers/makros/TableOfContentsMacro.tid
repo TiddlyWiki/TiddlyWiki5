@@ -11,7 +11,7 @@ Das Inhaltsverzeichnis Makro (englisch: table of content) erstellt einen hierarc
 
 Der Basis Eintrag in das Verzeichnis wird als "root tag" bezeichnet. Die weiteren Ebenen werden von Tiddlern gebildet, die mit den "root tags" getaggt sind. Einträge können sortiert werden, indem im `list` Feld eines Tags die Reihenfolge der Tiddler festgelegt wird. (Die Sortierung muss momentan per Hand vorgenommen werden). Siehe auch: [[Tagging]]
 
-Der Text für die Einträge wird aus dem `caption` Feld des Tiddlers genommen. Ist dieser nicht vorhanden, dann wird der Tiddler Titel angezeigt.Dieser Tiddler hat ein `caption` Feld mit dem Inhalt: ''{{!!caption}}''. Im (i)nfo Button unter Felder können sie alle Felder sehen!
+Der Text für die Einträge wird aus dem `caption` Feld des Tiddlers genommen. Ist dieser nicht vorhanden, dann wird der Tiddler Titel angezeigt.Dieser Tiddler hat ein `caption` Feld mit dem Inhalt: ''{{!!caption}}''. Im (i)nfo Button unter Felder können Sie alle Felder sehen!
 
 Die Einträge werden als Links dargestellt, außer, der Tiddler hat ein weiteres Feld mit dem Namen: `toc-link` und dem Wert: `no`. In den folgenden Beispielen ist dies der Fall für den Tiddler: ''EinsB.''
 

@@ -47,7 +47,7 @@ Rodentville,
 Ratland."/>
 ```
 
-Wenn sie 3 doppelte Anführungszeichen am Beginn verwenden, dann kann der Text einfache Anführungszeichen enthalten.
+Wenn Sie 3 doppelte Anführungszeichen am Beginn verwenden, dann kann der Text einfache Anführungszeichen enthalten.
 
 ```
 <div data-address="""Mouse House,
