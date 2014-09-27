@@ -23,6 +23,10 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Scroll the node into view
 	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 };
@@ -30,6 +34,10 @@ PopStoryView.prototype.navigateTo = function(historyInfo) {
 PopStoryView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Reset once the transition is over
 	setTimeout(function() {
 		$tw.utils.setStyle(targetElement,[
@@ -55,13 +63,19 @@ PopStoryView.prototype.insert = function(widget) {
 
 PopStoryView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+		duration = $tw.utils.getAnimationDuration(),
+		removeElement = function() {
+			if(targetElement.parentNode) {
+				widget.removeChildDomNodes();
+			}
+		};
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		removeElement();
+		return;
+	}
 	// Remove the element at the end of the transition
-	setTimeout(function() {
-		if(targetElement.parentNode) {
-			widget.removeChildDomNodes();
-		}
-	},duration);
+	setTimeout(removeElement,duration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},

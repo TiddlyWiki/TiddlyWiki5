@@ -26,6 +26,10 @@ var ZoominListView = function(listWidget) {
 	// Make all the tiddlers position absolute, and hide all but the top (or first) one
 	$tw.utils.each(this.listWidget.children,function(itemWidget,index) {
 		var domNode = itemWidget.findFirstDomNode();
+		// Abandon if the list entry isn't a DOM element (it might be a text node)
+		if(!(domNode instanceof Element)) {
+			return;
+		}
 		if(targetTiddler !== itemWidget.parseTreeNode.itemTitle || (!targetTiddler && index)) {
 			domNode.style.display = "none";
 		} else {
@@ -43,6 +47,10 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Make the new tiddler be position absolute and visible so that we can measure it
 	$tw.utils.setStyle(targetElement,[
 		{position: "absolute"},
@@ -121,6 +129,10 @@ function findTitleDomNode(widget,targetClass) {
 
 ZoominListView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Make the newly inserted node position absolute and hidden
 	$tw.utils.setStyle(targetElement,[
 		{display: "none"},
@@ -130,7 +142,15 @@ ZoominListView.prototype.insert = function(widget) {
 
 ZoominListView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+		duration = $tw.utils.getAnimationDuration(),
+		removeElement = function() {
+			widget.removeChildDomNodes();
+		};
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		removeElement();
+		return;
+	}
 	// Set up the tiddler that is being closed
 	$tw.utils.setStyle(targetElement,[
 		{position: "absolute"},
@@ -170,10 +190,7 @@ ZoominListView.prototype.remove = function(widget) {
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);
-	setTimeout(function() {
-		// Delete the DOM node when the transition is over
-		widget.removeChildDomNodes();
-	},duration);
+	setTimeout(removeElement,duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {
 		$tw.utils.setStyle(toWidgetDomNode,[
