@@ -163,7 +163,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		describe("should detect the recursion", function() {
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("Recursive transclusion error in transclude widget\n");
+			expect(wrapper.innerHTML).toBe("<span class='tc-error'>Recursive transclusion error in transclude widget</span>\n");
 		});
 
 	});
