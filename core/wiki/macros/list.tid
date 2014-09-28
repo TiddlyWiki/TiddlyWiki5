@@ -6,7 +6,9 @@ tags: $:/tags/Macro
 <$list filter="$filter$">
 <$subtype$>
 <$link to={{!!title}}>
+<$transclude field="caption">
 <$view field="title"/>
+</$transclude>
 </$link>
 </$subtype$>
 </$list>
