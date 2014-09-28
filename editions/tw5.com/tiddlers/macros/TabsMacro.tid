@@ -1,5 +1,5 @@
 created: 20131228162203521
-modified: 20140702113527667
+modified: 20140928113527667
 tags: Macros
 title: TabsMacro
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ By default the tab control arranges the tabs horizontally with the content under
 |4th |class |Additional CSS classes for the three wrappers DIV of the tab | |
 |5th |template |Optional template through which to render the tab content | |
 
-Within the template the title of the current tab is available in the widget variable ''currentTab''.
+Within the template the title of the current tab is available in the widget variable ''currentTab''. The ''currentTiddler'' variable is not affected by the tabs macro.
 
 ! Examples
 
