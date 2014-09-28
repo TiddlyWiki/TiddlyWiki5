@@ -10,7 +10,7 @@ Macros are snippets of text that can be inserted with a concise shortcut:
 <<myMacro>>
 ```
 
-You can write your own [[Macros in WikiText]] or for more flexibility you can write [[JavaScript Macros]].
+You can write your own [[Macros in WikiText]] or for more flexibility you can write [[JavaScript Macros|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]].
 
 The following macros are built-in to the TiddlyWiki core:
 
