@@ -15,6 +15,7 @@ There are several variants of the macro:
 |1st |filter |Filter expression | |
 |2nd |type |HTML tag to be used for the list wrapper |"ul" |
 |3rd |subtype |HTML tag to be used for list entries  |"li" |
+|4th |class |The list element `<ul> or <ol>` gets a CSS class. eg: `<ul class="three-columns"` | |
 
 ! Examples
 

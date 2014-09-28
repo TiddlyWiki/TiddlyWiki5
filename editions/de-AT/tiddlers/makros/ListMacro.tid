@@ -17,6 +17,7 @@ Das "list" Makro erstellt Linklisten von Tiddlern.
 |1 |filter |Filter Ausdruck | |
 |2 |type |"HTML tag", der als Hülle verwendet werden soll. Möglich sind:<br />"ul" .. "unordered list" oder <br />"ol" .. "ordered list" |"ul" |
 |3 |subtype |"HTML tag" der als Listen Element verwendet werden soll. |"li" |
+|4 |class |Das Listen Element `<ul> oder <ol>` bekommt eine CSS Klasse zugewiesen zB: `<ul class="three-columns"` | |
 
 !! Beispiele
 
