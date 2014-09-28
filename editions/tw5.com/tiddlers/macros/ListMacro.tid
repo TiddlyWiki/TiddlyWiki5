@@ -7,7 +7,7 @@ The list macro is a family of macros that produce a list of tiddlers.
 
 There are several variants of the macro:
 
-* `<<list-links>>` produces a list of links to tiddlers that match a filter expression
+* `<<list-links>>` produces a list of links to tiddlers that match a filter expression. If the tiddler has a //caption// field, it is displayed in lieu of the //title// field.
 
 ! Parameters
 
