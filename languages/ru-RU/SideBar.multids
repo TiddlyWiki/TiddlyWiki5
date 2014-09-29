@@ -1,16 +1,16 @@
 title: $:/language/SideBar/
 
-All/Caption: All
-Contents/Caption: Contents
-Drafts/Caption: Drafts
-Missing/Caption: Missing
-More/Caption: More
-Open/Caption: Open
-Orphans/Caption: Orphans
-Recent/Caption: Recent
-Shadows/Caption: Shadows
-System/Caption: System
-Tags/Caption: Tags
-Tags/Untagged/Caption: untagged
-Tools/Caption: Tools
-Types/Caption: Types
+All/Caption: Все
+Contents/Caption: Оглавление
+Drafts/Caption: Черновики
+Missing/Caption: Отсутствующие
+More/Caption: Ещё
+Open/Caption: Открытые
+Orphans/Caption: Потерянные
+Recent/Caption: Последние
+Shadows/Caption: Встроенные
+System/Caption: Системные
+Tags/Caption: Метки
+Tags/Untagged/Caption: без метки
+Tools/Caption: Инструменты
+Types/Caption: Типы
