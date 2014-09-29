@@ -1,60 +1,60 @@
 title: $:/language/Buttons/
 
-AdvancedSearch/Caption: advanced search
-AdvancedSearch/Hint: Advanced search
-Cancel/Caption: cancel
-Cancel/Hint: Cancel editing this tiddler
-Clone/Caption: clone
-Clone/Hint: Clone this tiddler
-Close/Caption: close
-Close/Hint: Close this tiddler
-CloseAll/Caption: close all
-CloseAll/Hint: Close all tiddlers
-CloseOthers/Caption: close others
-CloseOthers/Hint: Close other tiddlers
-ControlPanel/Caption: control panel
-ControlPanel/Hint: Open control panel
-Delete/Caption: delete
-Delete/Hint: Delete this tiddler
-Edit/Caption: edit
-Edit/Hint: Edit this tiddler
-Encryption/Caption: encryption
-Encryption/Hint: Set or clear a password for saving this wiki
-Encryption/ClearPassword/Caption: clear password
-Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
-Encryption/SetPassword/Caption: set password
-Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
-FullScreen/Caption: full-screen
-FullScreen/Hint: Enter or leave full-screen mode
-Import/Caption: import
-Import/Hint: Import files
-Info/Caption: info
-Info/Hint: Show information for this tiddler
-Home/Caption: home
-Home/Hint: Open the default tiddlers
-Language/Caption: language
-Language/Hint: Choose the user interface language
-NewTiddler/Caption: new tiddler
-NewTiddler/Hint: Create a new tiddler
-More/Caption: more
-More/Hint: More actions
-Permalink/Caption: permalink
-Permalink/Hint: Set browser address bar to a direct link to this tiddler
-Permaview/Caption: permaview
-Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
-Refresh/Caption: refresh
-Refresh/Hint: Perform a full refresh of the wiki
-Save/Caption: save
-Save/Hint: Save this tiddler
-SaveWiki/Caption: save changes
-SaveWiki/Hint: Save changes
-StoryView/Caption: storyview
-StoryView/Hint: Choose the story visualisation
-HideSideBar/Caption: hide sidebar
-HideSideBar/Hint: Hide sidebar
-ShowSideBar/Caption: show sidebar
-ShowSideBar/Hint: Show sidebar
-TagManager/Caption: tag manager
-TagManager/Hint: Open tag manager
-Theme/Caption: theme
-Theme/Hint: Choose the display theme
+AdvancedSearch/Caption: расширенный поиск
+AdvancedSearch/Hint: Расширенный поиск
+Cancel/Caption: отмена
+Cancel/Hint: Отменить редактирование заметки
+Clone/Caption: клонировать
+Clone/Hint: Создать копию заметки
+Close/Caption: закрыть
+Close/Hint: Закрыть заметку
+CloseAll/Caption: закрыть все
+CloseAll/Hint: Закрыть все заметки
+CloseOthers/Caption: закрыть остальные
+CloseOthers/Hint: Закрыть остальные заметки
+ControlPanel/Caption: панель управления
+ControlPanel/Hint: Открыть панель управления
+Delete/Caption: удалить
+Delete/Hint: Удалить заметку
+Edit/Caption: редактировать
+Edit/Hint: Редактировать заметку
+Encryption/Caption: шифрование
+Encryption/Hint: Установить или сбросить пароль
+Encryption/ClearPassword/Caption: сбросить пароль
+Encryption/ClearPassword/Hint: Сбросить пароль и сохранить без использования шифрования
+Encryption/SetPassword/Caption: установить пароль
+Encryption/SetPassword/Hint: Установить пароль и включить шифрование
+FullScreen/Caption: полный экран
+FullScreen/Hint: Включить или выключить полноэкранный режим
+Import/Caption: импортировать
+Import/Hint: Импорт файлов
+Info/Caption: информация
+Info/Hint: Показать информацию об этой заметке
+Home/Caption: главная
+Home/Hint: Открыть заметки по умолчанию
+Language/Caption: язык
+Language/Hint: Выбрать язык пользовательского интерфейса
+NewTiddler/Caption: новая заметка
+NewTiddler/Hint: Создать новую заметку
+More/Caption: ещё
+More/Hint: Другие действия
+Permalink/Caption: прямая ссылка
+Permalink/Hint: Показать прямую ссылку на заметку в адресной строке браузера
+Permaview/Caption: прямая ссылка
+Permaview/Hint: Показать прямую ссылку на открытые заметки в адресной строке браузера
+Refresh/Caption: oбновить
+Refresh/Hint: Выполнить обновление страницы
+Save/Caption: сохранить
+Save/Hint: Сохранить заметку
+SaveWiki/Caption: сохранить изменения
+SaveWiki/Hint: Сохранить изменения
+StoryView/Caption: отображение заметок
+StoryView/Hint: Выбрать способ отображения заметок
+HideSideBar/Caption: скрыть боковую панель
+HideSideBar/Hint: Скрыть боковую панель
+ShowSideBar/Caption: показать боковую панель
+ShowSideBar/Hint: Показать боковую панель
+TagManager/Caption: управление метками
+TagManager/Hint: Открыть панель управления метками
+Theme/Caption: тема
+Theme/Hint: Выбрать тему
