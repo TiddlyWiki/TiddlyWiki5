@@ -1,17 +1,17 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: This is an external tiddler stored outside of the main TiddlyWiki file. You can edit the tags and fields but cannot directly edit the content itself
-Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add formatting, images, and dynamic features
-Body/Placeholder: Type the text for this tiddler
-Body/Preview/Button/Hide: hide preview
-Body/Preview/Button/Show: show preview
-Fields/Add/Button: add
-Fields/Add/Name/Placeholder: field name
-Fields/Add/Prompt: Add a new field:
-Fields/Add/Value/Placeholder: field value
-Shadow/Warning: This is a shadow tiddler. Any changes will override the default version
-Shadow/OverriddenWarning: This is a modified shadow tiddler. You can revert to the default version by deleting this tiddler
-Tags/Add/Button: add
-Tags/Add/Placeholder: tag name
-Type/Placeholder: content type
-Type/Prompt: Type:
+Body/External/Hint: Содержимое этой заметки находится вне TiddlyWiki. Но вы можете редактировать метки и поля
+Body/Hint: Воспользуйтесь [[WikiText|http://tiddlywiki.com/static/WikiText.html]] для форматирования, добавления изображений и макросов
+Body/Placeholder: Введите текст заметки
+Body/Preview/Button/Hide: скрыть предпросмотр
+Body/Preview/Button/Show: предпросмотр
+Fields/Add/Button: добавить
+Fields/Add/Name/Placeholder: название поля
+Fields/Add/Prompt: Добавить новое поле:
+Fields/Add/Value/Placeholder: значение
+Shadow/Warning: Это встроенная заметка. Любое изменение переопределит стандартное значение
+Shadow/OverriddenWarning: Это переопределённая встроенная заметка. Для восстановления стандартного значения просто удалите её
+Tags/Add/Button: добавить
+Tags/Add/Placeholder: название метки
+Type/Placeholder: тип содержимого
+Type/Prompt: Тип:

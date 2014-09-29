@@ -1,13 +1,13 @@
 title: GettingStarted
 
-Welcome to TiddlyWiki, the non-linear personal web notebook.
+Добро пожаловать в TiddlyWiki, нелинейную личную сетевую записную книжку.
 
-To get started, first verify that you can save changes successfully - see http://tiddlywiki.com/ for detailed instructions.
+Для начала убедитесь, что у вас работает сохранение - подробные инструкции на http://tiddlywiki.com/.
 
-Then you can:
+Затем вы можете:
 
-* Create new tiddlers using the 'plus' button in the sidebar
-* Visit the [[control panel|$:/ControlPanel]] using the 'cog' button in the sidebar to customise your wiki
-** Stop this message appearing by changing the default tiddlers under the ''Basics'' tab
-* Save changes using the 'download' button in the sidebar
-* Learn more about [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
+* Создавать новые заметки, используя кнопку 'плюс' на боковой панели
+* Зайти в [[панель управления|$:/ControlPanel]], используя кнопку с изображением 'шестерёнки' на боковой панели и настроить TiddlyWiki на свой вкус
+** Убрать это сообщение, изменив настройку 'заметки по умолчанию' на вкладке ''Основные''
+* Сохранить изменения при помощи кнопки 'скачать' на боковой панели
+* Изучить подробнее [[WikiText|http://tiddlywiki.com/static/WikiText.html]]

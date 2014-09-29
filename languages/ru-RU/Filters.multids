@@ -1,12 +1,12 @@
 title: $:/language/Filters/
 
-AllTiddlers: All tiddlers except system tiddlers
-RecentTiddlers: Recently modified tiddlers
-AllTags: All tags except system tags
-Missing: Missing tiddlers
-Drafts: Draft tiddlers
-Orphans: Orphan tiddlers
-SystemTiddlers: System tiddlers
-ShadowTiddlers: Shadow tiddlers
-OverriddenShadowTiddlers: Overridden shadow tiddlers
-SystemTags: System tags
+AllTiddlers: Все заметки, кроме системных
+RecentTiddlers: Недавно измененные заметки
+AllTags: Все метки, кроме системных
+Missing: Отсутствующие заметки
+Drafts: Черновики
+Orphans: Потерянные заметки
+SystemTiddlers: Системные заметки
+ShadowTiddlers: Встроенные заметки
+OverriddenShadowTiddlers: Переопределённые встроенные заметки
+SystemTags: Системные метки
