@@ -1,98 +1,98 @@
 title: $:/language/ControlPanel/
 
-Advanced/Caption: Advanced
-Advanced/Hint: Internal information about this TiddlyWiki
-Appearance/Caption: Appearance
-Appearance/Hint: Ways to customise the appearance of your TiddlyWiki.
-Basics/AnimDuration/Prompt: Animation duration:
-Basics/Caption: Basics
-Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;double square brackets&#93;&#93; for titles with spaces. Or you can choose to <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">retain story ordering</$button>
-Basics/DefaultTiddlers/Prompt: Default tiddlers:
-Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
-Basics/Language/Prompt: Hello! Current language:
-Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
-Basics/ShadowTiddlers/Prompt: Number of shadow tiddlers:
-Basics/Subtitle/Prompt: Subtitle:
-Basics/SystemTiddlers/Prompt: Number of system tiddlers:
-Basics/Tags/Prompt: Number of tags:
-Basics/Tiddlers/Prompt: Number of tiddlers:
-Basics/Title/Prompt: Title of this ~TiddlyWiki:
-Basics/Username/Prompt: Username for signing edits:
-Basics/Version/Prompt: ~TiddlyWiki version:
-EditorTypes/Caption: Editor Types
-EditorTypes/Editor/Caption: Editor
-EditorTypes/Hint: These tiddlers determine which editor is used to edit specific tiddler types.
-EditorTypes/Type/Caption: Type
-Info/Caption: Info
-Info/Hint: Information about this TiddlyWiki
-LoadedModules/Caption: Loaded Modules
+Advanced/Caption: Расширенные
+Advanced/Hint: Системные сведения об этой TiddlyWiki
+Appearance/Caption: Внешний вид
+Appearance/Hint: Способы настройки внешнего вида TiddlyWiki.
+Basics/AnimDuration/Prompt: Продолжительность анимации:
+Basics/Caption: Основные
+Basics/DefaultTiddlers/BottomHint: Заметки, содержащие пробелы нужно взять в &#91;&#91;двойные квадратные скобки&#93;&#93;. А также можно возвращать <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">открытые ранее заметки</$button>
+Basics/DefaultTiddlers/Prompt: Открывать при старте:
+Basics/DefaultTiddlers/TopHint: Выберите заметки открытые при запуске:
+Basics/Language/Prompt: Привет! Текущий язык:
+Basics/OverriddenShadowTiddlers/Prompt: Количество переопределённых встроенных заметок:
+Basics/ShadowTiddlers/Prompt: Количество встроенных заметок:
+Basics/Subtitle/Prompt: Подзаголовок:
+Basics/SystemTiddlers/Prompt: Количество системных заметок:
+Basics/Tags/Prompt: Количество меток:
+Basics/Tiddlers/Prompt: Количество заметок:
+Basics/Title/Prompt: Заголовок этой ~TiddlyWiki:
+Basics/Username/Prompt: Имя пользователя для подписи под изменениями:
+Basics/Version/Prompt: Версия ~TiddlyWiki:
+EditorTypes/Caption: Редакторы
+EditorTypes/Editor/Caption: Редактор
+EditorTypes/Hint: Эти заметки определяют, какой редактор используется для конкретного типа заметки.
+EditorTypes/Type/Caption: Тип содержимого
+Info/Caption: Сведения
+Info/Hint: Сведения об этой TiddlyWiki
+LoadedModules/Caption: Загруженные модули
 LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
-Palette/Caption: Palette
-Palette/Editor/Clone/Caption: clone
-Palette/Editor/Clone/Prompt: It is recommended that you clone this shadow palette before editing it
-Palette/Editor/Prompt/Modified: This shadow palette has been modified
-Palette/Editor/Prompt: Editing
-Palette/Editor/Reset/Caption: reset
-Palette/HideEditor/Caption: hide editor
-Palette/Prompt: Current palette:
-Palette/ShowEditor/Caption: show editor
-Plugins/Caption: Plugins
-Plugins/Disable/Caption: disable
-Plugins/Disable/Hint: Disable this plugin when reloading page
-Plugins/Disabled/Status: (disabled)
-Plugins/Empty/Hint: None
-Plugins/Enable/Caption: enable
-Plugins/Enable/Hint: Enable this plugin when reloading page
-Plugins/Language/Prompt: Languages
-Plugins/Plugin/Prompt: Plugins
-Plugins/Theme/Prompt: Themes
-Saving/Caption: Saving
-Saving/Heading: Saving
-Saving/TiddlySpot/Advanced/Heading: Advanced Settings
-Saving/TiddlySpot/BackupDir: Backup Directory
-Saving/TiddlySpot/Backups: Backups
-Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
-Saving/TiddlySpot/Filename: Upload Filename
+Palette/Caption: Цветовая схема
+Palette/Editor/Clone/Caption: скопировать
+Palette/Editor/Clone/Prompt: Перед редактированием рекомендуется скопировать встроенную цветовую схему
+Palette/Editor/Prompt/Modified: Эта встроенная цветовая схема изменена
+Palette/Editor/Prompt: Редактирование
+Palette/Editor/Reset/Caption: сброс
+Palette/HideEditor/Caption: скрыть редактор
+Palette/Prompt: Текущая цветовая схема:
+Palette/ShowEditor/Caption: показать редактор
+Plugins/Caption: Плагины
+Plugins/Disable/Caption: Выключить
+Plugins/Disable/Hint: Выключить этот плагин
+Plugins/Disabled/Status: (выключен)
+Plugins/Empty/Hint: Нет
+Plugins/Enable/Caption: включить
+Plugins/Enable/Hint: Выключить этот плагин
+Plugins/Language/Prompt: Языки
+Plugins/Plugin/Prompt: Плагины
+Plugins/Theme/Prompt: Темы
+Saving/Caption: Сохранение
+Saving/Heading: Сохранение
+Saving/TiddlySpot/Advanced/Heading: Расширенные настройки
+Saving/TiddlySpot/BackupDir: Каталог для резервной копии
+Saving/TiddlySpot/Backups: Резервная копия
+Saving/TiddlySpot/Description: Эти настройки нужны для сохранения на http://tiddlyspot.com или совместимый с ним удаленный сервер
+Saving/TiddlySpot/Filename: Имя файла для загрузки
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
-Saving/TiddlySpot/Password: Password
-Saving/TiddlySpot/ServerURL: Server URL
-Saving/TiddlySpot/UploadDir: Upload Directory
-Saving/TiddlySpot/UserName: Wiki Name
-Settings/AutoSave/Caption: Autosave
-Settings/AutoSave/Disabled/Description: Do not save changes automatically
-Settings/AutoSave/Enabled/Description: Save changes automatically
-Settings/AutoSave/Hint: Automatically save changes during editing
-Settings/Caption: Settings
-Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
-Settings/NavigationAddressBar/Caption: Navigation Address Bar
-Settings/NavigationAddressBar/Hint: Behaviour of the browser address bar when navigating to a tiddler:
-Settings/NavigationAddressBar/No/Description: Do not update the address bar
-Settings/NavigationAddressBar/Permalink/Description: Include the target tiddler
-Settings/NavigationAddressBar/Permaview/Description: Include the target tiddler and the current story sequence
-Settings/NavigationHistory/Caption: Navigation History
-Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
-Settings/NavigationHistory/No/Description: Do not update history
-Settings/NavigationHistory/Yes/Description: Update history
-Settings/ToolbarButtons/Caption: Toolbar Buttons
-Settings/ToolbarButtons/Hint: Default toolbar button appearance:
-Settings/ToolbarButtons/Icons/Description: Include icon
-Settings/ToolbarButtons/Text/Description: Include text
-StoryView/Caption: Story View
-StoryView/Prompt: Current view:
-Theme/Caption: Theme
-Theme/Prompt: Current theme:
-TiddlerFields/Caption: Tiddler Fields
-TiddlerFields/Hint: This is the full set of TiddlerFields in use in this wiki (including system tiddlers but excluding shadow tiddlers).
-Toolbars/Caption: Toolbars
-Toolbars/EditToolbar/Caption: Edit Toolbar
-Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
-Toolbars/Hint: Select which toolbar buttons are displayed
-Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
-Toolbars/ViewToolbar/Caption: View Toolbar
-Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
-Tools/Caption: Tools
-Tools/Download/Full/Caption: Download full wiki
-Tools/Export/AllAsStaticHTML/Caption: Download all tiddlers as static HTML
-Tools/Export/Heading: Export
+Saving/TiddlySpot/Hint: //URL сервера по умолчанию - `http://<wikiname>.tiddlyspot.com/store.cgi`. Его можно указать если используется другой сервер//
+Saving/TiddlySpot/Password: Пароль
+Saving/TiddlySpot/ServerURL: URL сервера
+Saving/TiddlySpot/UploadDir: Каталог загрузки
+Saving/TiddlySpot/UserName: Название Wiki
+Settings/AutoSave/Caption: Автосохранение
+Settings/AutoSave/Disabled/Description: Не сохранять изменения автоматически
+Settings/AutoSave/Enabled/Description: Сохранять изменения автоматически
+Settings/AutoSave/Hint: Сохранять изменения автоматически в процессе редактирования
+Settings/Caption: Настройки
+Settings/Hint: Эти настройки позволяют изменить поведение TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Адресная строка браузера
+Settings/NavigationAddressBar/Hint: Поведение адресной строки браузера при открытии заметки:
+Settings/NavigationAddressBar/No/Description: Не изменять адресную строку
+Settings/NavigationAddressBar/Permalink/Description: Включить целевую заметку
+Settings/NavigationAddressBar/Permaview/Description: Включить целевую заметку и все открытые заметки
+Settings/NavigationHistory/Caption: История браузера
+Settings/NavigationHistory/Hint: Обновлять историю браузера при открытии заметки:
+Settings/NavigationHistory/No/Description: Не обновлять историю
+Settings/NavigationHistory/Yes/Description: Обновлять историю
+Settings/ToolbarButtons/Caption: Кнопки
+Settings/ToolbarButtons/Hint: Внешний вид кнопок:
+Settings/ToolbarButtons/Icons/Description: Показывать значок
+Settings/ToolbarButtons/Text/Description: Показывать текст
+StoryView/Caption: Поведение открытых заметок
+StoryView/Prompt: Текущий вид:
+Theme/Caption: Тема
+Theme/Prompt: Текущая тема:
+TiddlerFields/Caption: Поля заметок
+TiddlerFields/Hint: Это полный набор полей заметок (включая системные заметки, но без встроенных).
+Toolbars/Caption: Панели инструментов
+Toolbars/EditToolbar/Caption: При редактировании
+Toolbars/EditToolbar/Hint: Выберите кнопки, отображаемые во время редактирования заметок
+Toolbars/Hint: Выберите отображаемые кнопки
+Toolbars/PageControls/Caption: Боковой панели
+Toolbars/PageControls/Hint: Выберите кнопки, отображаемые на боковой панели
+Toolbars/ViewToolbar/Caption: При просмотре
+Toolbars/ViewToolbar/Hint: Выберите кнопки, отображаемые во время просмотра заметок
+Tools/Caption: Инструменты
+Tools/Download/Full/Caption: Скачать wiki целиком
+Tools/Export/AllAsStaticHTML/Caption: Скачать все заметки в виде статического HTML
+Tools/Export/Heading: Экспорт
