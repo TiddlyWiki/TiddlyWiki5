@@ -11,7 +11,7 @@ ConfirmEditShadowTiddler: Вы собираетесь редактировать
 DropMessage: Перетащите сюда (или нажмите escape для отмены)
 InvalidFieldName: Недопустимые символы в названии поля "<$text text=<<fieldName>>/>". Поля могут содержать только латинские буквы нижнего регистра, цифры и символы: подчеркивание (`_`), дефис (`-`) и точку (`.`)
 MissingTiddler/Hint: Заметка "<$text text=<<currentTiddler>>/>" отсутствует - нажмите {{$:/core/images/edit-button}} чтобы её создать
-RecentChanges/DateFormat: DDth MMM YYYY
+RecentChanges/DateFormat: DD MMM YYYY
 RelativeDate/Future/Days: через <<period>> дней
 RelativeDate/Future/Hours: через <<period>> часов
 RelativeDate/Future/Minutes: через <<period>> минут
