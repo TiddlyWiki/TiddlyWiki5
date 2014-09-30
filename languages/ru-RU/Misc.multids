@@ -1,33 +1,33 @@
 title: $:/language/
 
-BinaryWarning/Prompt: This tiddler contains binary data
-ClassicWarning/Hint: This tiddler is written in TiddlyWiki Classic wiki text format, which is not fully compatible with TiddlyWiki version 5. See http://tiddlywiki.com/static/Upgrading.html for more details. 
-ClassicWarning/Upgrade/Caption: upgrade
-CloseAll/Button: close all
-ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text=<<title>>/>"?
-ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
-ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
-ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
-DropMessage: Drop here (or click escape to cancel)
-InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
-MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
+BinaryWarning/Prompt: Эта заметка содержит двоичные данные
+ClassicWarning/Hint: Эта заметка написана в формате TiddlyWiki Classic WikiText, который не совместим с TiddlyWiki 5. Подробнее: http://tiddlywiki.com/static/Upgrading.html
+ClassicWarning/Upgrade/Caption: обновление
+CloseAll/Button: закрыть все
+ConfirmCancelTiddler: Отменить изменения заметки "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Удалить заметку "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Заменить заметку "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Вы собираетесь редактировать встроенную заметку. Любое изменение переопределит стандартное значение и может привести к проблемам при обновлении TiddlyWiki. Вы действительно хотите редактировать "<$text text=<<title>>/>"?
+DropMessage: Перетащите сюда (или нажмите escape для отмены)
+InvalidFieldName: Недопустимые символы в названии поля "<$text text=<<fieldName>>/>". Поля могут содержать только латинские буквы нижнего регистра, цифры и символы: подчеркивание (`_`), дефис (`-`) и точку (`.`)
+MissingTiddler/Hint: Заметка "<$text text=<<currentTiddler>>/>" отсутствует - нажмите {{$:/core/images/edit-button}} чтобы её создать
 RecentChanges/DateFormat: DDth MMM YYYY
-RelativeDate/Future/Days: <<period>> days from now
-RelativeDate/Future/Hours: <<period>> hours from now
-RelativeDate/Future/Minutes: <<period>> minutes from now
-RelativeDate/Future/Months: <<period>> months from now
-RelativeDate/Future/Second: 1 second from now
-RelativeDate/Future/Seconds: <<period>> seconds from now
-RelativeDate/Future/Years: <<period>> years from now
-RelativeDate/Past/Days: <<period>> days ago
-RelativeDate/Past/Hours: <<period>> hours ago
-RelativeDate/Past/Minutes: <<period>> minutes ago
-RelativeDate/Past/Months: <<period>> months ago
-RelativeDate/Past/Second: 1 second ago
-RelativeDate/Past/Seconds: <<period>> seconds ago
-RelativeDate/Past/Years: <<period>> years ago
-SystemTiddler/Tooltip: This is a system tiddler
-TagManager/Colour/Heading: Colour
-TagManager/Icon/Heading: Icon
-TagManager/Tag/Heading: Tag
-UnsavedChangesWarning: You have unsaved changes in TiddlyWiki
+RelativeDate/Future/Days: через <<period>> дней
+RelativeDate/Future/Hours: через <<period>> часов
+RelativeDate/Future/Minutes: через <<period>> минут
+RelativeDate/Future/Months: через <<period>> месяцев
+RelativeDate/Future/Second: через 1 секунду
+RelativeDate/Future/Seconds: через <<period>> секунд
+RelativeDate/Future/Years: через <<period>> лет
+RelativeDate/Past/Days: <<period>> дней назад
+RelativeDate/Past/Hours: <<period>> часов назад
+RelativeDate/Past/Minutes: <<period>> минут назад
+RelativeDate/Past/Months: <<period>> месяцев назад
+RelativeDate/Past/Second: 1 секунду назад
+RelativeDate/Past/Seconds: <<period>> секунд назад
+RelativeDate/Past/Years: <<period>> лет назад
+SystemTiddler/Tooltip: Это системная заметка
+TagManager/Colour/Heading: Цвет
+TagManager/Icon/Heading: Значок
+TagManager/Tag/Heading: Метка
+UnsavedChangesWarning: Изменения TiddlyWiki не сохранены
