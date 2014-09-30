@@ -26,7 +26,7 @@ EditorTypes/Type/Caption: Тип содержимого
 Info/Caption: Сведения
 Info/Hint: Сведения об этой TiddlyWiki
 LoadedModules/Caption: Загруженные модули
-LoadedModules/Hint: These are the currently loaded tiddler modules linked to their source tiddlers. Any italicised modules lack a source tiddler, typically because they were setup during the boot process.
+LoadedModules/Hint: Это загруженные в настоящий момент модули, ссылающиеся на их исходные заметки. Модули, обозначенные курсивом, не имеют исходных заметок (typically because they were setup during the boot process).
 Palette/Caption: Цветовая схема
 Palette/Editor/Clone/Caption: скопировать
 Palette/Editor/Clone/Prompt: Перед редактированием рекомендуется скопировать встроенную цветовую схему
@@ -37,7 +37,7 @@ Palette/HideEditor/Caption: скрыть редактор
 Palette/Prompt: Текущая цветовая схема:
 Palette/ShowEditor/Caption: показать редактор
 Plugins/Caption: Плагины
-Plugins/Disable/Caption: Выключить
+Plugins/Disable/Caption: выключить
 Plugins/Disable/Hint: Выключить этот плагин
 Plugins/Disabled/Status: (выключен)
 Plugins/Empty/Hint: Нет
