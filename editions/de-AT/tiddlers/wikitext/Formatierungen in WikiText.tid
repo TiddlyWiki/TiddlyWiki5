@@ -1,0 +1,22 @@
+caption: Formatierung
+created: 20131205155959399
+creator: pmario
+modified: 20140922122456103
+modifier: ChrisK
+tags: WikiText
+title: Formatierungen in WikiText
+type: text/vnd.tiddlywiki
+
+Mögliche Zeichen Formatierungen sind:
+
+|Format Name |Beispiel |h
+|`` `code` ``|für `Code` |
+|<code>&#96;&#96;code&#96;&#96;</code>|Alternativ: ``doppelte backticks erlauben `eingebettete` backticks``|
+|`''bold''`|für ''fett gedruckten'' Text |
+|`//italic//`|für //hervorgehobenen// Text |
+|`__underscore__`|für __unterstrichenen__ Text|
+|`^^superscript^^`|für ^^hochgestellten^^ Text|
+|`,,subscript,,`|für ,,tiefgestellten,, Text|
+|`~~strikethrough~~`|für ~~durchgestrichenen~~ Text|
+
+Siehe auch: [[Code Block in WikiText]]

@@ -1,0 +1,13 @@
+created: 20140908131026578
+creator: pmario
+modified: 20140922123320620
+modifier: ChrisK
+tags: Lexikon
+title: Hyperlinks
+type: text/vnd.tiddlywiki
+
+Als Hyperlinks werden Verknüpfungen bezeichnet, die zu anderen Tiddlern oder externen Seiten führen, und diese öffnen.
+
+* Tiddler werden direkt in TiddlyWiki geöffnet.
+* Externe Seiten, laden je nach Browser Einstellung einen neuen Tab oder eine neue Seite im selben Tab. 
+*Siehe auch: <<list-links filter:"[tag[Hyperlinks]]" type:"ol">>

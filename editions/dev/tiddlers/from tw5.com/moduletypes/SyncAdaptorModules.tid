@@ -79,13 +79,14 @@ This method is optional. If an adaptor doesn't implement it then synchronisation
 |!Parameter |!Description |
 |callback |Callback function invoked with parameter `err,tiddlers`, where `tiddlers` is an array of tiddler field objects |
 
-!! `saveTiddler(tiddler,callback)`
+!! `saveTiddler(tiddler,callback,tiddlerInfo)`
 
 Saves a tiddler to the server.
 
 |!Parameter |!Description |
 |tiddler |Tiddler to be saved |
 |callback |Callback function invoked with parameter `err,adaptorInfo,revision` |
+|tiddlerInfo |The tiddlerInfo maintained by the syncer for this tiddler |
 
 !! `loadTiddler(title,callback)`
 

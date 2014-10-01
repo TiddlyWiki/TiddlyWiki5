@@ -17,8 +17,8 @@ hack-to-give-us-something-to-compare-against: 于 [[$:/core/templates/static.con
 icon: 条目的标题含有与条目关联的图标
 library: 若设为 “yes”，表示条目应该被保存为一个 JavaScript 程序库
 list: 条目的列表，指定一些条目的标题清单
-list-before:当前条目名称将被添加到条目排序清单中的设定条目名称之前，或若此栏位存在但是空的，则在清单的起始位置
-list-after: 当前条目名称将被添加到条目排序清单的设定条目名称之后
+list-before:当前条目名称将被添加到条目排序清单中的设置条目名称之前，或若此栏位存在但是空的，则在清单的起始位置
+list-after: 当前条目名称将被添加到条目排序清单的设置条目名称之后
 modified: 条目的最近修改日期与时间
 modifier: 条目的最近修改者
 name: 具可读性的插件条目的名称

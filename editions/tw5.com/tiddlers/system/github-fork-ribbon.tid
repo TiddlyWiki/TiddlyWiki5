@@ -3,6 +3,4 @@ tags: $:/tags/PageControls
 caption: ~GitHub ribbon
 description: ~GitHub ribbon for tw5.com
 
-<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#DF4848;"><$link to="BetaReleases"><<version>></$link></div></div>
-
-<!-- TODO: Change link to "Releases" before full release -->
+<div class="github-fork-ribbon-wrapper right" style><div class="github-fork-ribbon" style="background-color:#DF4848;"><$link to="Releases">Version <<version>></$link></div></div>

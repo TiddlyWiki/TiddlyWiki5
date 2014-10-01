@@ -1,0 +1,123 @@
+caption: Makros
+created: 20131205160746466
+creator: pmario
+modified: 20140922124415476
+modifier: ChrisK
+tags: WikiText
+title: Makros in WikiText
+type: text/vnd.tiddlywiki
+
+\define meinErstesMakro(name:"Bugs Bunny",adresse:"Rabbit Hole Hill")
+Hallo, Ich bin $name$ und lebe in $adresse$
+\end
+
+\define meinZweitesMakro(name:"Mario",adresse:"dort")
+Hallo, Ich bin $name$ und würde gerne mal wieder nach $adresse$ fahren:)
+\end
+
+!! Makros Definieren
+
+!!! Für die Ungeduldigen
+
+Makros sind Text Bausteine, die an beliebiger Stelle aufgerufen / eingefügt werden können. Eine Makro Definition kann zum Beispiel so aussehen und ''muss'' am Anfang eines Tiddlers eingefügt werden:
+
+```
+\define meinErstesMakro(name:"Bugs Bunny",adresse:"Rabbit Hole Hill")
+Hallo, Ich bin $name$ und lebe in $adresse$
+\end
+```
+
+Der Aufruf erfolgt mit:
+
+```
+Es erzeugt folgenden Text: ''<<meinErstesMakro>>''
+```
+
+Es erzeugt folgenden Text: ''<<meinErstesMakro>>''
+
+---
+
+!!! Was genau passiert hier?
+
+Die erste Zeile der Definition startet mit: `\define` und enthält:
+
+* Den Makro Namen: `meinErstesMakro`
+* Die Parameter Namen: `name` und `adresse`
+* Die Standard Werte: `Bugs Bunny` und `Rabbit Hole Hill`
+
+Parameter sollten immer sinnvolle Standard Werte haben, da es die Verwendung erleichtert. 
+
+Die letzte Zeile des Makros ist `\end` und markiert das Ende eines Makros :)
+
+Der Bereich zwischen `\define` und `\end` wird als Makro Code bezeichnet. In diesem Bereich können die Makro Parameter mit `$name$` bzw `$adresse$` als Platzhalter verwendet werden. 
+
+Wie im Beispiel ersichtlich: `Hallo, Ich bin $name$ und lebe in $adresse$`
+
+---
+!!! Einzeilige Makros
+
+Für einzeilige Makros kann die `\end` Markierung entfallen!
+
+```
+\define meinZweitesMakro(name:"Bugs Bunny") Hallo, Ich bin $name$
+```
+
+!!! Makro Regeln
+
+* Makro Definitionen müssen am Anfang des Tiddlers eingefügt werden.
+* Makros sind nur in dem Tiddler sichtbar der sie definiert.
+* Tiddler die mit Transklusion eingefügt werden können definierte Makros sehen, jedoch nicht selber mitbringen!
+
+!!! Globale Makros
+
+* Globale Makros können in Tiddlern definiert werden, die mit dem System Tag: [[$:/tags/Macro]] getaggt sind. Diese Makros sind in jedem Tiddler sichtbar.
+
+* [[JavaScript Macros]] sind global sichtbar und haben Zugriff auf die TW Kern Funktionen. 
+
+* Makros können mit dem ImportVariablesWidget importiert werden. (Für geübte Anwender)
+
+!! Makros Verwenden
+
+```
+<<meinErstesMakro>>
+<<meinErstesMakro "Donald Duck">>
+<<meinErstesMakro "Mickey Mouse" "Mouse House">>
+```
+
+Dargestellt als:
+
+<<<
+<<meinErstesMakro>>
+<<meinErstesMakro "Donald Duck">>
+<<meinErstesMakro "Mickey Mouse" "Mouse House">>
+<<<
+
+Wie wir sehen können, werden die Parameter in der Reihenfolge übernommen, in der sie definiert wurden: `name`, `adresse`. Da Makros jedoch viele Parameter haben können und es passieren kann, dass wir nur den Zweiten ändern möchten können Parameter auch benannt übergeben werden.
+
+```
+<<meinZweitesMakro adresse:"Dufftown">>
+```
+
+<<meinZweitesMakro adresse:"Dufftown">>
+
+
+!! Mehrzeilige Parameter beim Aufruf
+
+Makros können mit mehrzeiligen Parametern aufgerufen werden, wenn sie in Anführungsstriche gesetzt werden:
+
+```
+<<meinErstesMakro "Mickey Mouse" "Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland.">>
+```
+
+Wenn sie 3 doppelte Anführungszeichen verwenden, dann können die Parameter einfache Anführungszeichen enthalten:
+
+```
+<<meinErstesMakro "Mickey Mouse" """Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland.""">>
+```
+

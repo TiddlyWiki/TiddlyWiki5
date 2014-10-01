@@ -26,10 +26,6 @@ To restrict the timeline to a particular tag, the subfilter can be set to someth
 
 ! Examples
 
-```
-<<timeline limit:30 format:"DD/MM/YYYY">>
-```
-
-Renders as:
-
-<<timeline limit:30 format:"DD/MM/YYYY">>
+<$macrocall $name="wikitext-example-without-html"
+src="<<timeline limit:30 format:'DD/MM/YYYY'>>
+"/>

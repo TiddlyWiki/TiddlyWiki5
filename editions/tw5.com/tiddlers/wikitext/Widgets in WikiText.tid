@@ -26,5 +26,4 @@ See [[HTML in WikiText]] for more details.
 
 The available widgets include:
 
-<$list filter="[tag[widget]sort[title]]"/>
-
+<<list-links "[tag[Widgets]]">>

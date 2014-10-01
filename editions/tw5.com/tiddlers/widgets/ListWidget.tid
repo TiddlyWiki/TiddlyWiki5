@@ -40,6 +40,8 @@ The `storyview` attribute specifies the name of an optional module that can anim
 * `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers
 * `pop`: shrinks items in and out of place
 
+In order for the storyviews to animate correctly each entry in the list should be a single block mode DOM element.
+
 !! Handling history and navigation
 
 The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See the NavigationMechanism for more details.

@@ -1,0 +1,30 @@
+caption: list-Liste
+created: 20140923193202449
+creator: ChrisK
+modified: 20140923235012644
+modifier: pmario
+tags: Makros
+title: ListMacro
+type: text/vnd.tiddlywiki
+
+Das "list" Makro erstellt Linklisten von Tiddlern.
+
+* `<<list-links>>` erzeugt eine Liste von Links zu Tiddlern, die einem [[Filter]] entsprechen.
+
+!! Parameter
+
+|Position |Name |Beschreibung |Standard |h
+|1 |filter |Filter Ausdruck | |
+|2 |type |"HTML tag", der als Hülle verwendet werden soll. Möglich sind:<br />"ul" .. "unordered list" oder <br />"ol" .. "ordered list" |"ul" |
+|3 |subtype |"HTML tag" der als Listen Element verwendet werden soll. |"li" |
+|4 |class |Das Listen Element `<ul>` oder `<ol>` bekommt eine CSS Klasse zugewiesen zB: `<ul class="three-columns">` | |
+
+!! Beispiele
+
+<$macrocall $name='wikitext-example-without-html'
+src='<<list-links filter:"[tag[Was kann TiddlyWiki]]">>
+'/>
+
+<$macrocall $name='wikitext-example-without-html'
+src='<<list-links filter:"[tag[Was kann TiddlyWiki]]" type:"ol">>
+'/>

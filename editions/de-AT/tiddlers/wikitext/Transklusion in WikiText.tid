@@ -1,0 +1,32 @@
+caption: Transklusion
+created: 20131205160146648
+creator: pmario
+modified: 20140923191923647
+modifier: pmario
+tags: WikiText
+title: Transklusion in WikiText
+type: text/vnd.tiddlywiki
+
+Sie können mit dem [[Transklusions Mechanismus|Transklusion]] den Inhalt eines Tiddlers in einen anderen Tiddler einbinden:
+
+* `{{MeinTiddler}}` transkludiert einen einzelnen Tiddler.
+* `{{MeinTiddler||VorlageTitel}}` zeigt den Tiddler mit Hilfe eines [[VorlagenTiddlers]] an.
+* `{{||VorlageTitel}}` benutzt einen Vorlagen Tiddler, ohne die interne Variable "[[current tiddler|WidgetVariable: currentTiddler]]" zu verändern.
+
+Statt den Tiddler Titel direkt anzugeben kann eine sogenannte TextReferenz verwendet werden:
+
+* `{{MeinTiddler!!feldName}}` transkludiert den Inhalt eines Tiddler Feldes.
+* `{{!!feldName}}` transkludiert das Feld des Tiddlers, der in der "current tiddler" Variable definiert ist.
+* `{{MyTiddler##index}}` transkludiert ein spezifisches Feld aus einem so genannten: DataTiddlers
+* `{{##index}}` transkludiert das angegebene Feld des "current DataTiddlers"
+
+Eine ähnliche Syntax kann verwendet werden, um eine Liste von Tiddlern mit einem Filter einzubinden:
+
+```
+{{{ [tag[tagName]] }}}
+{{{ [tag[tagName]] ||VorlageTitel}}}
+```
+
+!! Beispiel Transklusion
+
+<<list-links filter:"[tag[Transklusion in WikiText]]">>

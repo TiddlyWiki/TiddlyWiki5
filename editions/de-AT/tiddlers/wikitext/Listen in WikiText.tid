@@ -1,0 +1,56 @@
+caption: Listen
+created: 20131205160257619
+creator: pmario
+modified: 20140923173928536
+modifier: pmario
+tags: WikiText
+title: Listen in WikiText
+type: text/vnd.tiddlywiki
+
+!! Ungeordnete Listen
+
+Ungeordnete Listen können mit dem Stern `*` erzeugt werden. Der `*` muss das erste Zeichen in der Zeile sein!
+
+<<wikitext-example src:"* Erstes Listen Element
+* Zweites Listen Element
+** Ein Unterelement
+* Drittes Listen Element
+">>
+
+! Geordnete Listen
+
+Geordnete Listen verwenden das "Hash" Zeichen: `#`
+
+# Erstes Element
+# Zweites Element
+# Drittes Element
+
+Ungeordnete und geordnete Listen können gemischt werden:
+
+<<wikitext-example src:"* Heute zu erledigen
+*# Essen
+* Arbeit abschieben :)
+*# Dieses und 
+*# Jenes 
+*## und das auch noch
+">>
+
+! Listen und Zitate mischen
+
+Hinweis: [[Zitate|Zitate in WikiText]] und Listen lassen sich hervorragend gemeinsam einsetzen: 
+
+<<wikitext-example src:"* Element Eins
+** Element Zwei
+**> Ein Zitat
+**> Noch ein Zitat
+* Element Drei
+">>
+
+!! CSS Klassen
+
+''Für geübte Anwender!'' Sie können CSS Klassen direkt zuweisen:
+
+<<wikitext-example src:"* Element Eins
+*.MyClass Element 2
+* Element 3
+">>

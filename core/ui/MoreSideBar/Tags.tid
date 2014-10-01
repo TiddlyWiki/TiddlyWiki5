@@ -22,6 +22,6 @@ caption: {{$:/language/SideBar/Tags/Caption}}
 
 </$list>
 
-----
+<hr class="tc-untagged-separator">
 
 {{$:/core/ui/UntaggedTemplate}} <small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>

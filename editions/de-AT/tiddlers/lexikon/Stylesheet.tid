@@ -1,0 +1,15 @@
+created: 20140923181404483
+creator: pmario
+modified: 20140923181631831
+modifier: pmario
+tags: Lexikon
+title: Stylesheet
+type: text/vnd.tiddlywiki
+
+''Stylesheet Definition''
+
+<<<
+Stylesheet-Sprachen [ˈstaɪlʃiːt] sind Beschreibungssprachen in der Informationstechnik.
+
+Ein Stylesheet ist am ehesten mit einer Formatvorlage zu vergleichen. Grundidee hierbei ist die Trennung von Information (Daten) und Darstellung. Das Stylesheet interpretiert die zugewiesenen Daten (Text, Tabellen, Grafiken etc.) und formatiert sie (z. B. für die Bildschirmausgabe) entsprechend den vorgegebenen Regeln.
+<<<wikipedia http://de.wikipedia.org/wiki/Stylesheet

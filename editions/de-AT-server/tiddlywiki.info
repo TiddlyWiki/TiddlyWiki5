@@ -1,0 +1,21 @@
+{
+	"plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"languages": [
+		"en-GB",
+		"de-AT",
+		"de-DE"
+	],
+	"includeWikis": [
+		"../de-AT"
+	],
+	"config": {
+		"default-tiddler-location": "../de-AT/tiddlers"
+	}
+}

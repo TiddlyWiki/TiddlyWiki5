@@ -5,7 +5,7 @@ title: $:/plugins/tiddlywiki/tw2parser/macrodefs
 \end
 
 \define slider(chkUniqueCookieName tiddler label tooltip)
-<span title=$tooltip$><$button popup="$chkUniqueCookieName$" class="btn-invisible tc-slider">$label$</$button>
+<span title=$tooltip$><$button popup="$chkUniqueCookieName$" class="tc-btn-invisible tc-slider">$label$</$button>
 <$reveal type="nomatch" text="" default="" state="$chkUniqueCookieName$" animate="yes">
 <$classictransclude tiddler = "$tiddler$"/>
 </$reveal></span>

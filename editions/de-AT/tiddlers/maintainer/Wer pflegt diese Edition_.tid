@@ -1,0 +1,33 @@
+created: 20140918103106541
+creator: pmario
+modified: 20140918105518082
+modifier: pmario
+tags: Referenz
+title: Wer pflegt diese Edition?
+type: text/vnd.tiddlywiki
+
+\define list-about(filter,type:"ul",subtype:"li")
+<$type$>
+<$list filter="$filter$">
+<$subtype$>
+<$link to={{!!title}}>
+<$view field="about"/>
+</$link>
+</$subtype$>
+</$list>
+</$type$>
+\end
+
+!! Maintainer
+
+<<list-about filter:"[tag[maintainer]has[about]]" >>
+
+!! GitHub
+
+siehe: https://github.com/Jermolene/TiddlyWiki5/tree/master/languages
+
+!! Feedback
+
+Konstruktives Feedback ist wichtig, um die Dokumentation zu verbessern! ... Kein Feedback ... keine Änderungen :) 
+
+Bitte unter: https://groups.google.com/forum/#!forum/tiddlywiki

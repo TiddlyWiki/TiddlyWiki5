@@ -1,0 +1,16 @@
+caption: Einfach
+created: 20140923232546667
+creator: pmario
+modified: 20140923233701795
+modifier: pmario
+tags: tocVariante
+title: Inhaltsverzeichnis-Einfach
+type: text/vnd.tiddlywiki
+
+!!! Einfaches Inhaltsverzeichnis
+
+<$macrocall $name='wikitext-example-without-html'
+src='<div class="tc-table-of-contents">
+<<toc "tocBeispiel">>
+</div>
+'/>

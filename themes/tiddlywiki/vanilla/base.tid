@@ -330,6 +330,15 @@ button.tc-tag-label, span.tc-tag-label {
 	border-radius: 8px;
 }
 
+.tc-untagged-separator {
+	width: 10em;
+	left: 0;
+	margin-left: 0;
+	border: 0;
+	height: 1px;
+	background: <<colour tab-divider>>;
+}
+
 .tc-untagged-label {
 	background-color: <<colour untagged-background>>;
 }
@@ -1061,7 +1070,7 @@ canvas.tc-edit-bitmapeditor  {
 .tc-tab-buttons {
 	font-size: 0.85em;
 	padding-top: 1em;
-	margin-bottom: -1px;
+	margin-bottom: -2px;
 }
 
 .tc-tab-buttons.tc-vertical  {
@@ -1446,4 +1455,13 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	background: white;
 	cursor: pointer;
 	display: inline-block;
+}
+
+/*
+** Errors
+*/
+
+.tc-error {
+	background: #f00;
+	color: #fff;
 }

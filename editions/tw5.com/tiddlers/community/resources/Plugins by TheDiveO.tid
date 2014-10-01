@@ -7,7 +7,7 @@ url: http://thediveo.github.io
 
 A collection of plugins from TheDiveO.
 
-[[TheDiveO's Third Way|http://thediveo.github.io/ThirdFlow/]] plugin construction system:
+[[TheDiveO's Third Flow|http://thediveo.github.io/ThirdFlow/]] plugin construction system:
 
 <<<
 The ~ThirdFlow plugin brings to you another way to develop customization plugins for TiddlyWiki 5. It is not enforcing a specific development flow, it simply tries to help you. Otherwise, it tries to stay out of your way.

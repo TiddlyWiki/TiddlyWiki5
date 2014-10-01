@@ -24,6 +24,5 @@ RelativeDate/Past/Seconds: <<period>> 秒前
 RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: これはシステム tiddler です
 TagManager/Colour/Heading: 色
-TagManager/Count/Heading: カウント
 TagManager/Icon/Heading: アイコン
 TagManager/Tag/Heading: タグ

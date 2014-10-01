@@ -1,0 +1,15 @@
+{
+	"plugins": [
+		"tiddlywiki/katex"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"includeWikis": [
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","katexdemo.html","text/plain"]
+	}
+}

@@ -1,0 +1,16 @@
+caption: Sorted Expandable
+created: 20140923233745927
+creator: pmario
+modified: 20140923234035454
+modifier: pmario
+tags: tocVariante
+title: Inhaltsverzeichnis-Sortiert
+type: text/vnd.tiddlywiki
+
+!! Sortiertes Erweiterbares Inhaltsverzeichnis
+
+<$macrocall $name='wikitext-example-without-html'
+src='<div class="tc-table-of-contents">
+<<toc-expandable "tocBeispiel" "sort[title]">>
+</div>
+'/>

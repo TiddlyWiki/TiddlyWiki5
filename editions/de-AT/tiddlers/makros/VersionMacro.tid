@@ -1,0 +1,20 @@
+caption: version
+created: 20131228162448664
+creator: pmario
+modified: 20140923225859656
+modifier: pmario
+tags: Makros
+title: VersionMacro
+type: text/vnd.tiddlywiki
+
+Das `version` Makro gibt die aktuelle Kern Versionsnummer aus.
+
+!! Beispiel
+
+Das `version` Makro benötigt keine Parameter.
+
+```
+Versionsnummer: <<version>>
+```
+
+Versionsnummer: <<version>>

@@ -1,0 +1,23 @@
+created: 20130825161100000
+creator: pmario
+modified: 20140922131114649
+modifier: ChrisK
+tags: Lexikon InhaltsVerzeichnis
+title: TiddlyFox
+type: text/vnd.tiddlywiki
+
+~TiddlyFox ist eine Firefox Erweiterung,  die es erlaubt, dass TiddlyWiki direkt auf Ihr Laufwerk speichern kann. ~TiddlyFox funktioniert mit der Desktop- und Smartphone-version von Firefox. 
+
+~TiddlyFox können Sie von der Mozilla AddOn Seite direkt installieren:
+
+* https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/
+
+Siehe auch: 
+<<list-links "[tag[TiddlyFox]]">>
+
+<<<
+Die Entwickler Version von ~TiddlyFox finden Sie auf GitHub:
+
+* https://github.com/TiddlyWiki/TiddlyFox/raw/master/tiddlyfox.xpi
+
+<<<

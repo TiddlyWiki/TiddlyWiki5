@@ -1,0 +1,34 @@
+{
+	"plugins": [
+		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/browser-sniff"],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"en-GB",
+		"de-AT",
+		"de-DE"
+	],
+	"includeWikis": [
+		"../de-AT"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"empty": [
+			"--rendertiddler","$:/editions/de-AT-DE/download-empty","empty.html","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
+	}
+}

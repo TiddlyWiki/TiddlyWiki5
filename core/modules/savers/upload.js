@@ -64,7 +64,11 @@ UploadSaver.prototype.save = function(text,method,callback) {
 			}
 		}
 	};
-	http.send(data);
+	try {
+		http.send(data);
+	} catch(ex) {
+		return callback("Error:" + ex);
+	}
 	$tw.notifier.display("$:/language/Notifications/Save/Starting");
 	return true;
 };

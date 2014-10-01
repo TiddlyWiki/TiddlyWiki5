@@ -1,0 +1,16 @@
+caption: {{$:/language/SideBar/Contents/Caption}}
+created: 20140918100037381
+creator: pmario
+list: Willkommen! ErsteSchritte WikiText Einführung [[Was kann TiddlyWiki]] Makros
+list-after: $:/core/ui/SideBar/Open
+modified: 20140923192624395
+modifier: pmario
+tags: $:/tags/SideBar
+title: InhaltsVerzeichnis
+type: text/vnd.tiddlywiki
+
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'InhaltsVerzeichnis'>>
+
+</div>

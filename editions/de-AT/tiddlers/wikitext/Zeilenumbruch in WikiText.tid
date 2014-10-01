@@ -1,0 +1,42 @@
+caption: Zeilenumbruch
+created: 20131214165710101
+creator: pmario
+modified: 20140922133054642
+modifier: ChrisK
+tags: WikiText
+title: Zeilenumbruch in WikiText
+type: text/vnd.tiddlywiki
+
+!! Block Syntax
+Die übliche Behandlung von [[Absätzen in WikiText|Absatz in WikiText]] ignoriert einzelne Zeilenumbrüche. Zwei Zeilenumbrüche werden als neuer Absatz interpretiert. 
+
+Um trotzdem Texte mit "hartem" Zeilenumbruch darstellen zu können, zum Beispiel: "Gedichte", kann folgende Formatierung verwendet werden:
+
+<<wikitext-example src:'"""
+Loch in die Erde,
+Bronze rin.
+Glocke fertig,
+bim, bim, bim.
+"""'>>
+
+!! HTML Syntax
+
+In normalem Fließtext sollten keine zusätzlichen "harten" Zeilenumbrüche eingefügt werden, da diese bei unterschiedlichen Anzeigen zB: Handy's falsch dargestellt werden. 
+
+In Ausnahmefällen sollte es jedoch möglich sein, einen "harten" Zeilenumbruch zu setzen. Dafür kann der HTML `<br>` "tag" verwendet werden. 
+
+```
+Erste Zeile <br/>
+Zweite Zeile
+```
+
+Dargestellt als: 
+
+Erste Zeile <br/>
+Zweite Zeile
+
+HTML Code: 
+
+```
+<p>Erste Zeile <br/>Zweite Zeile</p>
+```

@@ -1,0 +1,21 @@
+modified: 20140920124011558
+tags: TableOfContents
+title: HelloThere
+
+Welcome to the developer documentation for TiddlyWiki (http://tiddlywiki.com/). It is currently a work in progress as material from two different sources is adapted and merged:
+
+* An assignment by Christian Jurke and Christian Heigele, two students working on their Master's degree in Information Technology at the Gießen University of Applied Sciences (Technische Hochschule Mittelhessen). Their work can be seen in the [[Introduction]] and the tiddlers that link from it.
+* The original developer documentation from http://tiddlywiki.com:
+** [[TiddlyWiki for Developers]]
+** [[TiddlyWiki Coding Style Guidelines]]
+** [[TiddlyWiki Architecture]]
+** [[TiddlyWiki5 Development Environment]]
+** [[Developing plugins using Node.js and GitHub]]
+** [[How to create a translation for TiddlyWiki]]
+** [[JavaScript Macros]]
+** [[TiddlyWiki on node-webkit]]
+** [[package.json for node-webkit]]
+** [[How to create plugins in the browser]]
+** SyncAdaptorModules
+** WidgetModules
+** WikiRuleModules

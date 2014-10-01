@@ -1,7 +1,15 @@
 caption: Android
 created: 20140811171036268
-modified: 20140811171041595
+modified: 20140916124042604
 title: GettingStarted - Android
 type: text/vnd.tiddlywiki
+
+There are two options for using TiddlyWiki on Android:
+
+! Using Firefox and TiddlyFox
+
+{{Saving with TiddlyFox on Android}}
+
+! Using the AndTidWiki App
 
 {{Saving on Android}}

@@ -1,0 +1,12 @@
+created: 20140909074606881
+modified: 20140909075251840
+title: $:/editions/de-AT-DE/download-empty
+type: text/vnd.tiddlywiki
+
+\define saveTiddlerFilter()
+[[$:/core]] [[$:/isEncrypted]] [[$:/themes/tiddlywiki/snowwhite]] [[$:/themes/tiddlywiki/vanilla]] [[$:/languages/de-DE]] [[$:/languages/de-AT]] [[$:/language]] -[[$:/boot/boot.css]] -[type[application/javascript]library[yes]] -[[$:/boot/boot.js]] -[[$:/boot/bootprefix.js]] +[sort[title]]
+\end
+\define savingEmpty()
+yes
+\end
+{{$:/core/templates/tiddlywiki5.html}}

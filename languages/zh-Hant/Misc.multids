@@ -28,7 +28,6 @@ RelativeDate/Past/Seconds: <<period>> 秒前
 RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: 此為系統條目
 TagManager/Colour/Heading: 顏色
-TagManager/Count/Heading: 數量
 TagManager/Icon/Heading: 圖示
 TagManager/Tag/Heading: 標籤
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未儲存的變更

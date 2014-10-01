@@ -19,33 +19,9 @@ var fs = !$tw.browser ? require("fs") : null,
 function FileSystemAdaptor(options) {
 	var self = this;
 	this.wiki = options.wiki;
-	this.watchers = {};
-	this.pending = {};
 	this.logger = new $tw.utils.Logger("FileSystem");
-	this.setwatcher = function(filename, title) {
-		return undefined;
-		//return this.watchers[filename] = this.watchers[filename] ||
-		//	fs.watch(filename, {persistent: false}, function(e) {
-		//		self.logger.log("Error:",e,filename);
-		//		if(e === "change") {
-		//			var tiddlers = $tw.loadTiddlersFromFile(filename).tiddlers;
-		//			for(var t in tiddlers) {
-		//				if(tiddlers[t].title) {
-		//					self.wiki.addTiddler(tiddlers[t]);
-		//				}
-		//			}
-		//		}
-		//	});
-	};
-	for(var f in $tw.boot.files) {
-		var fileInfo = $tw.boot.files[f];
-		this.setwatcher(fileInfo.filepath, f);
-	}
 	// Create the <wiki>/tiddlers folder if it doesn't exist
-	// TODO: we should create the path recursively
-	if(!fs.existsSync($tw.boot.wikiTiddlersPath)) {
-		fs.mkdirSync($tw.boot.wikiTiddlersPath);
-	}
+	$tw.utils.createDirectory($tw.boot.wikiTiddlersPath);
 }
 
 FileSystemAdaptor.prototype.getTiddlerInfo = function(tiddler) {
@@ -92,7 +68,6 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 			fileInfo.hasMetaFile = typeInfo.hasMetaFile;
 			// Save the newly created fileInfo
 			$tw.boot.files[title] = fileInfo;
-			self.pending[fileInfo.filepath] = title;
 			// Pass it to the callback
 			callback(null,fileInfo);
 		});
@@ -128,21 +103,12 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
 	this.getTiddlerFileInfo(tiddler,function(err,fileInfo) {
-		var template, content, encoding;
-		function _finish() {
-			if(self.pending[fileInfo.filepath]) {
-				self.setwatcher(fileInfo.filepath, tiddler.fields.title);
-				delete self.pending[fileInfo.filepath];
-			}
-			callback(null, {}, 0);
-		}
+		var template, content, encoding,
+			_finish = function() {
+				callback(null, {}, 0);
+			};
 		if(err) {
 			return callback(err);
-		}
-		if(self.watchers[fileInfo.filepath]) {
-			self.watchers[fileInfo.filepath].close();
-			delete self.watchers[fileInfo.filepath];
-			self.pending[fileInfo.filepath] = tiddler.fields.title;
 		}
 		if(fileInfo.hasMetaFile) {
 			// Save the tiddler as a separate body and meta file
@@ -192,11 +158,6 @@ FileSystemAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 		fileInfo = $tw.boot.files[title];
 	// Only delete the tiddler if we have writable information for the file
 	if(fileInfo) {
-		if(this.watchers[fileInfo.filepath]) {
-			this.watchers[fileInfo.filepath].close();
-			delete this.watchers[fileInfo.filepath];
-		}
-		delete this.pending[fileInfo.filepath];
 		// Delete the file
 		fs.unlink(fileInfo.filepath,function(err) {
 			if(err) {

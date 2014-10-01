@@ -1,0 +1,35 @@
+created: 20140913093307509
+creator: pmario
+modified: 20140913100949363
+modifier: pmario
+tags: $:/tags/Macro
+title: $:/editions/de-AT-DE/wikitext-macros
+type: text/vnd.tiddlywiki
+
+\define wikitext-example(src)
+```
+$src$
+```
+
+Dargestellt als:
+
+$src$
+
+Erzeugter HTML Code:
+
+$$$text/vnd.tiddlywiki>text/html
+$src$
+$$$
+
+\end
+
+\define wikitext-example-without-html(src)
+```
+$src$
+```
+
+Dargestellt als:
+
+$src$
+
+\end

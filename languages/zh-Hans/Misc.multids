@@ -1,7 +1,7 @@
 title: $:/language/
 
 BinaryWarning/Prompt: 此条目包含二进制数据
-ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全相容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
+ClassicWarning/Hint: 此条目以经典版 TiddlyWiki 标记格式撰写，不完全兼容新版 TiddlyWiki 的格式，详细信息请参阅：http://tiddlywiki.com/static/Upgrading。
 ClassicWarning/Upgrade/Caption: 升级
 CloseAll/Button: 全部关闭
 ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的更改？
@@ -28,7 +28,6 @@ RelativeDate/Past/Seconds: <<period>> 秒前
 RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: 此为系统条目
 TagManager/Colour/Heading: 颜色
-TagManager/Count/Heading: 数量
 TagManager/Icon/Heading: 图标
 TagManager/Tag/Heading: 标签
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未保存的变更

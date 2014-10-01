@@ -1,6 +1,6 @@
 created: 20131109105400007
-modified: 20140701201607494
-tags: TableOfContents
+modified: 20140916132045295
+tags: About
 title: Releases
 type: text/vnd.tiddlywiki
 
@@ -8,4 +8,4 @@ Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versio
 
 (BetaReleases and AlphaReleases are listed separately).
 
-<<tabs "[tag[ReleaseNotes]!sort[created]]" "Release 5.0.17-beta" "$:/state/tab2" "tc-vertical" "ReleaseTemplate">>
+<<tabs "[tag[ReleaseNotes]!sort[created]]" "Release 5.1.3" "$:/state/tab2" "tc-vertical" "ReleaseTemplate">>

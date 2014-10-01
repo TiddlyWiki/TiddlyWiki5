@@ -1,0 +1,21 @@
+created: 20140910215514237
+modified: 20140910215514237
+tags: Concepts TableOfContents
+title: Plugins
+type: text/vnd.tiddlywiki
+
+! Available Plugins
+
+The following plugins are distributed on tiddlywiki.com as part of the main TiddlyWiki distribution.
+
+<<list-links "[tag[Plugins]]">>
+
+! What is a plugin?
+
+A plugin in TiddlyWiki5 is a bundle of tiddlers packaged together as a single tiddler. Plugins are used to distribute optional, custom components for TiddlyWiki.
+
+The tiddlers within a plugin appear as ShadowTiddlers.
+
+Plugins can contain JavaScript modules, style sheets, and templates to extend the functionality of TiddlyWiki itself. Plugins can also be used to distribute ordinary text, images or other content. Plugins can be updated from their source as a unit.
+
+See the PluginMechanism discussion for more details about how plugins are implemented internally.

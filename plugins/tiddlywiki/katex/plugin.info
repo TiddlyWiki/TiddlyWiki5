@@ -1,0 +1,5 @@
+{
+	"title": "$:/plugins/tiddlywiki/katex",
+	"description": "Mathematics typesetting plugin wrapping KaTeX",
+	"author": "JeremyRuston"
+}

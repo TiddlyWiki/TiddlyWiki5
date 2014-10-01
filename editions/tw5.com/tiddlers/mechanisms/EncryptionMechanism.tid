@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 TiddlyWiki5 allows the entire content of a TiddlyWiki HTML file to be encrypted with the Stanford JavaScript Crypto Library. Opening an encrypted TiddlyWiki in the browser prompts for a password before decrypting and displaying the content.
 
-For instructions on how to use TiddlyWiki5's encryption features, see [[Saving with Encryption]].
+For instructions on how to use TiddlyWiki5's encryption features, see [[Encryption]].
 
 The EncryptionMechanism is implemented with the following elements:
 

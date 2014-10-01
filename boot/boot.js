@@ -392,7 +392,14 @@ options: {flags: flags,deserializerType: deserializerType}
 */
 $tw.utils.registerFileType = function(type,encoding,extension,options) {
 	options = options || {};
-	$tw.config.fileExtensionInfo[extension] = {type: type};
+	if($tw.utils.isArray(extension)) {
+		$tw.utils.each(extension,function(extension) {
+			$tw.config.fileExtensionInfo[extension] = {type: type};
+		});
+		extension = extension[0];
+	} else {
+		$tw.config.fileExtensionInfo[extension] = {type: type};
+	}
 	$tw.config.contentTypeInfo[type] = {encoding: encoding, extension: extension, flags: options.flags || [], deserializerType: options.deserializerType || type};
 };
 
@@ -1724,19 +1731,18 @@ $tw.boot.startup = function(options) {
 	$tw.utils.registerFileType("text/vnd.tiddlywiki2-recipe","utf8",".recipe");
 	$tw.utils.registerFileType("text/plain","utf8",".txt");
 	$tw.utils.registerFileType("text/css","utf8",".css");
-	$tw.utils.registerFileType("text/html","utf8",".html");
-	$tw.config.fileExtensionInfo[".htm"] = {type: "text/html"};
-	$tw.config.fileExtensionInfo[".hta"] = {type: "text/html"};
+	$tw.utils.registerFileType("text/html","utf8",[".html",".htm"]);
 	$tw.utils.registerFileType("application/hta","utf16le",".hta",{deserializerType:"text/html"});
 	$tw.utils.registerFileType("application/javascript","utf8",".js");
 	$tw.utils.registerFileType("application/json","utf8",".json");
 	$tw.utils.registerFileType("application/pdf","base64",".pdf",{flags:["image"]});
-	$tw.utils.registerFileType("image/jpeg","base64",".jpg",{flags:["image"]});
+	$tw.utils.registerFileType("image/jpeg","base64",[".jpg",".jpeg"],{flags:["image"]});
 	$tw.utils.registerFileType("image/png","base64",".png",{flags:["image"]});
 	$tw.utils.registerFileType("image/gif","base64",".gif",{flags:["image"]});
 	$tw.utils.registerFileType("image/svg+xml","utf8",".svg",{flags:["image"]});
 	$tw.utils.registerFileType("image/x-icon","base64",".ico",{flags:["image"]});
 	$tw.utils.registerFileType("application/font-woff","base64",".woff");
+	$tw.utils.registerFileType("text/x-markdown","utf8",[".md",".markdown"]);
 	// Create the wiki store for the app
 	$tw.wiki = new $tw.Wiki();
 	// Install built in tiddler fields modules

@@ -7,4 +7,4 @@ type: text/vnd.tiddlywiki
 
 These are the internal mechanisms that fit together to make up TiddlyWiki.
 
-<<list-unordered-links "[tag[Mechanisms]]">>
+<<list-links "[tag[Mechanisms]]">>

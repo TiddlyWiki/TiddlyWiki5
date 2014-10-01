@@ -1,5 +1,5 @@
 created: 20131219100637788
-modified: 20140912141623230
+modified: 20140917190022854
 tags: [[TiddlyWiki on Node.js]]
 title: Scripts for TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -10,7 +10,7 @@ The TiddlyWiki5 repository contains several scripts in the `bin` folder that are
 
 All the scripts expect to be run from the root folder of the repository.
 
-!! `bld`: builds tw5.com
+!! `fullbld`: builds tw5.com
 
 This script builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
 
@@ -24,33 +24,25 @@ By default, files are output to a folder called `jermolene.github.com`, sibling 
      +-- /jermolene.github.com/ - Directory for output files
 ```
 
-You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `bld`.
+You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `fullbld`.
 
-The files output by `bld` are:
-
-* `readme.md` main readme file, output to the TiddlyWiki5 directory
-* `index.html` TiddlyWiki5 standalone HTML file with content from the `tw5.com` edition
-* `empty.html` TiddlyWiki5 standalone HTML file with no content
-* `encrypted.html` TiddlyWiki5 standalone HTML file encrypted with the password `password`
-* `test.html` TiddlyWiki5 browser-based test suite (see TestingMechanism)
-* `static.html` static HTML version of the DefaultTiddlers of the `tw5.com` edition
-* `static/*.html` and `static/static.css` static HTML versions of individual tiddlers
-
-`bld` also runs the TiddlyWiki5 Node.js-based test suite (see TestingMechanism)
+`fullbld` also runs the TiddlyWiki5 Node.js-based test suite (see TestingMechanism)
 
 !! `serve`: serves tw5.com
 
 ```
-./bin/serve.sh <username> [<password>]
+./bin/serve.sh -h
+./bin/serve.sh [edition dir] [username] [password] [host] [port]
 ```
 
 Or:
 
 ```
-./bin/serve.cmd <username> [<password>]
+./bin/serve.cmd -h
+./bin/serve.cmd [edition dir] [username] [password] [host] [port]
 ```
 
-This script starts TiddlyWiki5 running as an HTTP server with the content from the `tw5.com-server` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used.
+This script starts TiddlyWiki5 running as an HTTP server, defaulting to the content from the `tw5.com-server` edition. By default, the Node.js serves on port 8080. If the optional `username` parameter is provided, it is used for signing edits. If the `password` is provided then HTTP basic authentication is used. Run the script with the `-h` parameter to see online help.
 
 To experiment with this configuration, run the script and then visit `http://127.0.0.1:8080` in a browser.
 
@@ -86,4 +78,3 @@ This script builds TiddlyWiki 2.6.5 from the original source and then displays t
 
 These scripts are concerned with releasing a new version of TiddlyWiki. See [[Releasing a new version of TiddlyWiki5]].
 
-<!-- TODO: Update docs in line with latest version of serve.sh/serve.cmd -->

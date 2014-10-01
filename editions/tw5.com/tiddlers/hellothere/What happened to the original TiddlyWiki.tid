@@ -9,6 +9,6 @@ The original [[Classic|TiddlyWikiClassic]] version of TiddlyWiki is still availa
 
 http://classic.tiddlywiki.com.
 
-Note that the [[current version|TiddlyWiki5]] of TiddlyWiki is not fully backwards compatible with TiddlyWikiClassic. Content can be imported but will need massaging to adapt to the new WikiText format. A ''tw2parser'' plugin is under development that will allow faithful display of most content created for TiddlyWikiClassic.
+Note that the [[current version|TiddlyWiki5]] of TiddlyWiki is not fully backwards compatible with TiddlyWikiClassic. Content can be imported but will need massaging to adapt to the new WikiText format. A ''tw2parser'' plugin is under development that will allow faithful display of most content created for TiddlyWikiClassic:
 
-<!-- TODO: Fill in a link to the tw2parser plugin -->
+http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/

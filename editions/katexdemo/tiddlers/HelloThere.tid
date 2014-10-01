@@ -1,0 +1,76 @@
+title: HelloThere
+
+This is a TiddlyWiki plugin for mathematical typesetting based on KaTeX from Khan Academy.
+
+It is completely self-contained, and doesn't need an Internet connection in order to work.
+
+//This first version of the plugin cannot be used to generate static content under Node.js, but that capability will come in a future update. (Note that you can still use it when running the client-server configuration under Node.js).//
+
+! Installation
+
+To add the plugin to your own TiddlyWiki5, just drag this link to the browser window:
+
+[[$:/plugins/tiddlywiki/katex]]
+
+! Using KaTeX
+
+The usual way to include ~LaTeX is to use `$$`, as shown in the examples below.
+
+The underlying KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple ~LaTeX plugins and wish to specifically target KaTeX.
+
+! Examples
+
+These examples are taken from http://khan.github.io/KaTeX/
+
+!! Example 1
+
+```
+$$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+```
+
+$$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+
+!! Example 2
+
+```
+$$\displaystyle \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$
+```
+
+$$\displaystyle \frac{1}{\Bigl(\sqrt{\phi \sqrt{5}}-\phi\Bigr) e^{\frac25 \pi}} = 1+\frac{e^{-2\pi}} {1+\frac{e^{-4\pi}} {1+\frac{e^{-6\pi}} {1+\frac{e^{-8\pi}} {1+\cdots} } } }$$
+
+!! Example 3
+
+```
+$$\displaystyle \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+```
+
+$$\displaystyle \left( \sum_{k=1}^n a_k b_k \right)^2 \leq \left( \sum_{k=1}^n a_k^2 \right) \left( \sum_{k=1}^n b_k^2 \right)$$
+
+!! Example 4
+
+```
+$$\displaystyle 1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert<1.$$
+```
+
+$$\displaystyle 1 +  \frac{q^2}{(1-q)}+\frac{q^6}{(1-q)(1-q^2)}+\cdots = \prod_{j=0}^{\infty}\frac{1}{(1-q^{5j+2})(1-q^{5j+3})}, \quad\quad \text{for }\lvert q\rvert<1.$$
+
+!! Widget Example
+
+For more flexibility the KaTeX widget can also be used via the full widget syntax:
+
+```
+<$latex text="\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi"></$latex>
+```
+
+<$latex text="\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi"></$latex>
+
+! Error Handling
+
+An warning message is displayed if KaTeX detects a problem with the ~LaTeX syntax. For example:
+
+```
+$$\displaystyle f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+```
+
+$$\displaystyle f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+

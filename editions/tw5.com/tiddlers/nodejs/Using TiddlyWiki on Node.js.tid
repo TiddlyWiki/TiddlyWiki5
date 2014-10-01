@@ -1,5 +1,5 @@
 created: 20131219100520659
-modified: 20140912141913837
+modified: 20140920135025757
 tags: [[TiddlyWiki on Node.js]]
 title: Using TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
@@ -24,8 +24,4 @@ tiddlywiki [<wikipath>] [--<command> [<arg>[,<arg>]]]
 
 The available commands are:
 
-<ul><$list filter="[tag[command]]"><li><$link to={{!!title}}><$view field="title"/></$link></li></$list></ul>
-
-See also:
-
-* [[Environment Variables on Node.js]]
+<<list-links "[tag[Commands]]">>
