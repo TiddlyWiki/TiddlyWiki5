@@ -33,6 +33,16 @@ You can also mix ordered and unordered list items:
 *## And the other
 ">>
 
+or the other way around (numbers as first level):
+
+<<wikitext-example src:"# To do today
+#* Eat
+# To get someone else to do
+#* This
+#* That
+#** And the other
+">>
+
 ! CSS Classes
 
 You can also assign a CSS class to an individual member of a list with this notation:
