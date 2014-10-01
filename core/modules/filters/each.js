@@ -19,13 +19,7 @@ exports.each = function(source,operator,options) {
 	var results = [],
 		values = {};
 	source(function(tiddler,title) {
-		if ((operator.operand === "") || (operator.operand === "title")) {
-			var value = title;
-			if(!$tw.utils.hop(values,value)) {
-				values[value] = true;
-				results.push(title);
-			}
-		} else if(tiddler) {
+		if(tiddler) {
 			var value = tiddler.getFieldString(operator.operand);
 			if(!$tw.utils.hop(values,value)) {
 				values[value] = true;
