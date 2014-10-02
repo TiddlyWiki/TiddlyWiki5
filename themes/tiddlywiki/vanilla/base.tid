@@ -339,7 +339,7 @@ button.tc-tag-label, span.tc-tag-label {
 	background: <<colour tab-divider>>;
 }
 
-.tc-untagged-label {
+button.tc-untagged-label {
 	background-color: <<colour untagged-background>>;
 }
 
