@@ -1,11 +1,11 @@
+caption: Variables
 created: 20141002141231992
-modified: 20141002144153170
+modified: 20141002230751664
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
-caption: Hard Linebreaks
-! Defining Variables
 
+! Defining Variables
 Variables contains values defined by [[Widgets]].
 Variables are available within the widget that defines them, and the child widgets in the widget tree.
 
@@ -18,10 +18,11 @@ Variables are defined by:
 
 ! Using Variables
 
-Variables are used with:
+Variables are used in:
 
 * Variable substitution `$(name)$`
 * Concise shortcut  `<<name>>`
 * [[Filter expression|Introduction to Filters]] `[operator<variable-operand>]`
+* Some default behaviors of [[Widgets]]
 
-Built-in [[variables|Variables]] are useful for dynamic WikiText.
+See also [[currentTiddler|WidgetVariable: currentTiddler]] variable and built-in [[variables|Variables]].
