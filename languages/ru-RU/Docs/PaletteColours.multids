@@ -12,12 +12,12 @@ code-border: Граница блоков кода
 code-foreground: Цвет текста блоков кода
 download-background: Фон кнопки Скачать
 download-foreground: Цвет текста кнопки Скачать
-dragger-background: Dragger фон
-dragger-foreground: Dragger цвет текста
-dropdown-background: Dropdown фон
-dropdown-border: Dropdown граница
-dropdown-tab-background-selected: Dropdown tab фон for selected tabs
-dropdown-tab-background: Dropdown tab фон
+dragger-background: Фон перетаскиваемой ссылки
+dragger-foreground: Цвет текста перетаскиваемой ссылки
+dropdown-background: Фон выпадающего меню
+dropdown-border: Граница выпадающего меню
+dropdown-tab-background-selected: Фон выбранных вкладок выпадающего меню
+dropdown-tab-background: Фон вкладок выпадающего меню
 dropzone-background: Фон области перетаскивания
 external-link-background-hover: Фон внешней ссылки при наведении
 external-link-background-visited: Фон посещённой внешней ссылки
@@ -58,7 +58,7 @@ sidebar-tab-foreground-selected: Цвет текста выбранных вкл
 sidebar-tab-foreground: Цвет текста вкладок на боковой панели
 sidebar-tiddler-link-foreground-hover: Цвет ссылок на заметки на боковой панели при наведении
 sidebar-tiddler-link-foreground: Цвет ссылок на заметки на боковой панели
-static-alert-foreground: Static alert цвет текста
+static-alert-foreground: Цвет текста статической версии сообщения об ошибке
 tab-background-selected: Фон выбранных вкладок
 tab-background: Фон вкладок
 tab-border-selected: Граница выбранных вкладок
@@ -97,5 +97,5 @@ toolbar-close-button: Цвет кнопки 'закрыть'
 toolbar-delete-button: Цвет кнопки 'удалить'
 toolbar-cancel-button: Цвет кнопки 'отменить'
 toolbar-done-button: Цвет кнопки 'готово'
-untagged-background: Untagged pill фон
+untagged-background: Фон метки 'без метки'
 very-muted-foreground: Очень приглушенный цвет текста
