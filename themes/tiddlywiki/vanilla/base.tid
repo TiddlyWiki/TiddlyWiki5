@@ -603,6 +603,13 @@ button.tc-tag-label, span.tc-tag-label {
 	margin: 0;
 }
 
+/* fix jumpy titlebar */
+.tc-tiddler-title,
+.tc-titlebar {
+	overflow: hidden;
+}
+
+
 .tc-system-title-prefix {
 	color: <<colour muted-foreground>>;
 }

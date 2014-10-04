@@ -11,4 +11,5 @@ tags: [[$:/tags/Stylesheet]]
   position: sticky;
   top: 0px;
   background: #fff;
+  overflow: hidden;
 }
