@@ -15,5 +15,5 @@ To try out TiddlyWiki in the Sky for TiddlyWeb:
 
 # If necessary, create an account at http://tiddlyspace.com/
 # Create a new space, eg `<myspace>`
-# Include the space `tw5tiddlyweb`
+# Include the space `tw5tiddlyweb` (this is a space that is like an empty tiddlywiki that you might download to your computer)
 # Visit `http://<myspace>.tiddlyspace.com/tw5`
