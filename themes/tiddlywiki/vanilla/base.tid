@@ -531,6 +531,7 @@ button.tc-tag-label, span.tc-tag-label {
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
+	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
 }
 
 .tc-tiddler-info {
