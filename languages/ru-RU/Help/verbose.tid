@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Triggers verbose output mode
+
+Triggers verbose output, useful for debugging 
+
+```
+--verbose
+```
