@@ -20,7 +20,12 @@ exports.each = function(source,operator,options) {
 		values = {};
 	source(function(tiddler,title) {
 		if(tiddler) {
-			var value = tiddler.getFieldString(operator.operand);
+			var value;
+			if((operator.operand === "") || (operator.operand === "title")) {
+				value = title;
+			} else {
+				value = tiddler.getFieldString(operator.operand);
+			}
 			if(!$tw.utils.hop(values,value)) {
 				values[value] = true;
 				results.push(title);
