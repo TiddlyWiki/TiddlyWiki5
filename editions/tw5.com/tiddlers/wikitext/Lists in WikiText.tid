@@ -33,7 +33,7 @@ You can also mix ordered and unordered list items:
 *## And the other
 ">>
 
-or the other way around (numbers as first level):
+Here's an example the other way around, with numbers as the first level:
 
 <<wikitext-example src:"# To do today
 #* Eat
