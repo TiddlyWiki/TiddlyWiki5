@@ -106,6 +106,7 @@ node ./tiddlywiki.js \
 	--output $TW5_BUILD_OUTPUT \
 	--rendertiddler $:/core/save/all plugins/tiddlywiki/katex/index.html text/plain \
 	--rendertiddler $:/core/save/empty plugins/tiddlywiki/katex/empty.html text/plain \
+	--rendertiddler $:/core/templates/static.template.html plugins/tiddlywiki/katex/static.html text/plain \
 	|| exit 1
 
 # /plugins/tiddlywiki/tahoelafs/index.html	Demo wiki with Tahoe-LAFS plugin
