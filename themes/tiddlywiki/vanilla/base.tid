@@ -851,6 +851,17 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 /*
+** Storyview Classes
+*/
+
+.tc-storyview-zoomin-tiddler {
+	position: absolute;
+	display: block;
+	width: 100%;
+	width: calc(100% - 84px);
+}
+
+/*
 ** Dropdowns
 */
 
