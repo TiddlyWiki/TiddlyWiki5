@@ -99,7 +99,7 @@ return $tw
 
 if(typeof(exports) === "undefined") {
 	// Set up $tw global for the browser
-	window.$tw = _bootprefix();
+	window.$tw = _bootprefix(window.$tw);
 } else {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;
