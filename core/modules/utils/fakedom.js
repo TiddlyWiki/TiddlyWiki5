@@ -39,6 +39,7 @@ var TW_Element = function(tag,namespace) {
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
+	this.style = {};
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
@@ -137,6 +138,13 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				}
 			}
 		}
+		if(this.style) {
+			var style = [];
+			for(var s in this.style) {
+				style.push(s + ":" + this.style[s] + ";");
+			}
+			output.push(" style='",style.join(""),"'")
+		}
 		output.push(">");
 		if($tw.config.htmlVoidElements.indexOf(this.tag) === -1) {
 			output.push(this.innerHTML);
@@ -179,6 +187,9 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 			});
 			return b.join("");
 		}
+	},
+	set: function(value) {
+		this.children = [new TW_TextNode(value)];
 	}
 });
 
