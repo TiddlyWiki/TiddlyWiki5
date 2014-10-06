@@ -246,11 +246,20 @@ EditTextWidget.prototype.handleFocusEvent = function(event) {
 	return true;
 };
 
-EditTextWidget.prototype.saveChanges = function(text) {
+EditTextWidget.prototype.saveChanges = function(text,deleting) {
+	if (deleting) {
+		this.deleted = true;
+	} else if (this.deleted) {
+		return;
+	}
 	var editInfo = this.getEditInfo();
 	if(text !== editInfo.value) {
 		editInfo.update(text);
 	}
+};
+
+EditTextWidget.prototype.save = function(deleting) {
+	this.saveChanges(this.domNodes[0].value,deleting);	
 };
 
 exports["edit-text"] = EditTextWidget;

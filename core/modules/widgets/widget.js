@@ -474,7 +474,17 @@ Widget.prototype.removeChildDomNodes = function() {
 		});
 	}
 };
+Widget.prototype.save = function(deleting) {
+	return this.saveChildren(deleting);
+};
 
+Widget.prototype.saveChildren = function(deleting) {
+;
+	$tw.utils.each(this.children,function(childWidget) {
+		childWidget.save(deleting);
+	});
+
+};
 exports.widget = Widget;
 
 })();
