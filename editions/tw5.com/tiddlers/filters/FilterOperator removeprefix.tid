@@ -12,4 +12,4 @@ For example:
 |!Filter String |!Description |
 |`tid-one tid-two three +[removeprefix[tid-]]` |Returns `one`, `two` |
 
-See also [[FilterOperator: prefix]], [[FilterOperator: suffix]] and [[FilterOperator: removesuffix]].
+See also [[FilterOperator: prefix]], [[FilterOperator: suffix]], [[FilterOperator: removesuffix]], [[FilterOperator: addprefix]], and [[FilterOperator: addsuffix]].
