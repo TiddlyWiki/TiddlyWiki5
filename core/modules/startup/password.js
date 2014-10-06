@@ -25,6 +25,7 @@ exports.startup = function() {
 			noUserName: true,
 			submitText: "Set password",
 			canCancel: true,
+			repeatPassword: true,
 			callback: function(data) {
 				if(data) {
 					$tw.crypto.setPassword(data.password);
