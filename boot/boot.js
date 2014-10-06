@@ -1244,10 +1244,14 @@ Decrypt any tiddlers stored within the element with the ID "encryptedArea". The 
 $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	var encryptedArea = document.getElementById("encryptedStoreArea");
 	if(encryptedArea) {
-		var encryptedText = encryptedArea.innerHTML;
+		var encryptedText = encryptedArea.innerHTML,
+			prompt = "Enter a password to decrypt this TiddlyWiki";
 		// Prompt for the password
+		if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
+			prompt = $tw.boot.encryptionPrompts.decrypt;
+		}
 		$tw.passwordPrompt.createPrompt({
-			serviceName: "Enter a password to decrypt this TiddlyWiki",
+			serviceName: prompt,
 			noUserName: true,
 			submitText: "Decrypt",
 			callback: function(data) {
