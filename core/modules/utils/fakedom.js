@@ -143,7 +143,9 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 			for(var s in this.style) {
 				style.push(s + ":" + this.style[s] + ";");
 			}
-			output.push(" style='",style.join(""),"'")
+			if(style.length > 0) {
+				output.push(" style='",style.join(""),"'")
+			}
 		}
 		output.push(">");
 		if($tw.config.htmlVoidElements.indexOf(this.tag) === -1) {
