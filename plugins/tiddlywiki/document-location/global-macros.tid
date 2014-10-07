@@ -1,0 +1,50 @@
+title: $:/plugins/tiddlywiki/document-location/global-macros
+tags: $:/tags/Macro
+
+\define document-filedomain()
+{{$:/info/doc/location/filedomain}}
+\end
+
+\define document-filepath()
+{{$:/info/doc/location/filepath}}
+\end
+
+\define document-filename()
+{{$:/info/doc/location/filename}}
+\end
+
+\define document-hash()
+{{$:/info/doc/location/hash}}
+\end
+
+\define document-host()
+{{$:/info/doc/location/host}}
+\end
+
+\define document-hostname()
+{{$:/info/doc/location/hostname}}
+\end
+
+\define document-origin()
+{{$:/info/doc/location/origin}}
+\end
+
+\define document-port()
+{{$:/info/doc/location/port}}
+\end
+
+\define document-protocol()
+{{$:/info/doc/location/protocol}}
+\end
+
+\define document-search()
+{{$:/info/doc/location/search}}
+\end
+
+\define document-href()
+{{$:/info/doc/location/href}}
+\end
+
+\define document-pathname()
+{{$:/info/doc/location/pathname}}
+\end

@@ -1,0 +1,43 @@
+title: $:/plugins/tiddlywiki/document-location/filename
+
+!! Filename detection
+
+The filename detection mechanism can handle the following `document.location.pathname` paterns:
+
+* `/D:/git/tiddly/tiddlywiki/jermolene.github.com/index.html`
+** filedomain: `D:/`
+** filepath: `git/tiddly/tiddlywiki/jermolene.github.com/`
+** filename: `index.html`
+----
+* `/D:/index.html`
+** filedomain: `D:/`
+** filepath: - empty -
+** filename: `index.html`
+----
+* `///b2d.lan/index.html`
+** filedomain: `b2d.lan/`
+** filepath: - empty -
+** filename: `index.html`
+----
+* `///b2d.lan/data/index.html`
+** filedomain: `b2d.lan/`
+** filepath: `data/`
+** filename: `index.html`
+----
+* `///10.0.0.6/data/index.html`
+** filedomain: `10.0.0.6/`
+** filepath: `data/`
+** filename: `index.html`
+----
+* `/`
+** filedomain: - empty -
+** filepath: - empty -
+** filename: - empty -
+----
+* `/index.html`
+** filedomain: - empty -
+** filepath: - empty -
+** filename: `index.html`
+----
+* `/test/index.html`
+* `/languages/de-DE/index.html`

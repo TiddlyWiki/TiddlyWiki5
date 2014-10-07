@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/document-location/system
+
+This plugin adds a number of `$:/info/` tiddlers containing information about the current TiddlyWiki document.
+
+!! Information Tiddlers
+
+!!! Information derived from "document.location"
+
+|Title |Description |h
+|[[$:/info/doc/location/host]] |Name of the document host and port if different to 80. eg: `localhost:8080` |
+|[[$:/info/doc/location/hostname]] |Name of the document host, without the port. eg: `localhost` |
+|[[$:/info/doc/location/pathname]] |Full path name of the document. This may be slash `/`, if the server is configured to use a default file. So the real name is unknown. Most of the time index.html will fit. |
+|[[$:/info/doc/location/href]] |Full URL encoded path name of the document. This may contain elements like `%20` for spaces |
+|[[$:/info/doc/location/protocol]] |The protocol used to display. (`file: http: https: ..`) |
+|[[$:/info/doc/location/origin]] |Name of the document origin. eg: `http://tiddlywiki.com` Also contains the port if not default |
+|[[$:/info/doc/location/hash]] |Hash, if there is one. eg: `#GettingStarted:GettingStarted` |
+|[[$:/info/doc/location/search]] |Search string, if there is one. eg: `?something` ... not supported by TW atm |
+|[[$:/info/doc/location/port]] |HTTP port, where the document comes from. 80 will be an empty string |
+
+!!! Information derived from "document.location.pathname"
+
+|Title |Description |h
+|[[$:/info/doc/location/filename]] |Name of the document: eg: `index.html` |
+|[[$:/info/doc/location/filedomain]] |Name of the document domain. eg: `D:/` or `xyz.lan/` if mounted from a network drive |
+|[[$:/info/doc/location/filepath]] |Name of the document path. This may be empty. |
+

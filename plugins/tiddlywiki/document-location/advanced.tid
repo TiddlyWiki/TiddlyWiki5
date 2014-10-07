@@ -1,0 +1,60 @@
+title: $:/plugins/tiddlywiki/document-location/advanced
+
+\define infoTid()
+info-$(currentTiddler)$
+\end
+
+!! Be Careful!
+
+The path of a TiddlyWiki is very likely to change. So be sure, that you use elements, where you know, that they never change. Otherwise your code may break!
+
+!! Extended Info Tiddlers
+
+Depending on the content of the [[$:/info/doc/location/filepath]] tiddler, several tiddlers with the content "yes" will be created. These tiddlers can be used by the reveal widget. eg:
+
+* If the filepath is: `languages/de-DE/` there will be the following shadow tiddlers: 
+** `$:/info/doc/location/filepath/is/languages` and
+** `$:/info/doc/location/filepath/is/de-DE`
+
+Both tiddlers contain the text "yes", so the reveal widget can compare this value with "match" or "nomatch". The extended shadow tiddlers are dynamic. Depending on where the TiddlyWiki file is saved. So ''never ever'' modify those tiddlers!
+
+This Tiddlywiki has the following extended info tiddlers:
+
+<<list-links "[all[shadows]tag[$:/tags/filepath/]]">>
+
+!! Extended Tags
+The tiddler [[$:/info/doc/location/filepath]] will be tagged with the path elements. These tags can be used as filter inputs for the list- or the reveal-widget.
+
+* So if the filepath is eg: `languages/de-DE/` the tiddler will have the following tags: 
+** `$:/tags/filepath/languages` and
+** `$:/tags/filepath/de-DE`
+
+!! How to use the $:/tags/filepath tags
+
+Copy this code into a tiddler and play with it. The transclude widget will do nothing, until you create the "info-xxx" tiddlers.
+Important: At the moment you need to remove the additional empty lines if you copy paste the code :/
+For the widget documentation visit: http://tiddlywiki.com#Widgets
+
+```
+\define infoTid()
+info-$(currentTiddler)$
+\end
+
+<ul>
+<$list filter="[[$:/info/doc/location/filepath]tags[]]">
+<li><$link to=<<infoTid>> ><<infoTid>></$link></li>
+<$reveal type="nomatch" state=<<currentTiddler>> >
+<$transclude tiddler=<<infoTid>> mode="block" />
+</$reveal>
+</$list>
+</ul>
+```
+
+<ul>
+<$list filter="[[$:/info/doc/location/filepath]tags[]]">
+<li><$link to=<<infoTid>> ><<infoTid>></$link></li>
+<$reveal type="nomatch" state=<<currentTiddler>> >
+<$transclude tiddler=<<infoTid>> mode="block" />
+</$reveal>
+</$list>
+</ul>
