@@ -403,7 +403,9 @@ button.tc-untagged-label {
 }
 
 .tc-search a svg {
-	height: 0.75em;
+	width: 1.2em;
+	height: 1.2em;
+	vertical-align: middle;
 }
 
 .tc-search-results {
