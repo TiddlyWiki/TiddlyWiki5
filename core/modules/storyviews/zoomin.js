@@ -54,6 +54,7 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	// Make the new tiddler be position absolute and visible so that we can measure it
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
+		{display: "block"},
 		{transformOrigin: "0 0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{transition: "none"},
@@ -153,6 +154,7 @@ ZoominListView.prototype.remove = function(widget) {
 	// Set up the tiddler that is being closed
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
+		{display: "block"},
 		{transformOrigin: "50% 50%"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
 		{transition: "none"},
@@ -168,6 +170,7 @@ ZoominListView.prototype.remove = function(widget) {
 	if(toWidgetDomNode) {
 		$tw.utils.addClass(toWidgetDomNode,"tc-storyview-zoomin-tiddler");
 		$tw.utils.setStyle(toWidgetDomNode,[
+			{display: "block"},
 			{transformOrigin: "50% 50%"},
 			{transform: "translateX(0px) translateY(0px) scale(10)"},
 			{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing + ", opacity " + duration + "ms " + easing},
