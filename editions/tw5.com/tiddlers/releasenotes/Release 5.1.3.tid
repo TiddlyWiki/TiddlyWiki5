@@ -10,18 +10,32 @@ type: text/vnd.tiddlywiki
 
 !! Usability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/tree/master/languages/ru-RU]] Russian translation
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ef1d5310918dae088ce9361c1682ce0f99cf568a]] confirmation when clearing password
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b7bbcfa05659808c1e51a4f2f5f1d6afbc2ed3a1]] additional prompt when setting password
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/63c174d7ed56284e80ad6cd6ae966b81f9181cc9]] ~KaTeX plugin to be able to work under Node.js to generate static HTML
 
 !! Hackability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/65504d5d41e45326ab1b1b6c0c21eea4c9772797]] new [[FilterOperator: addprefix]] and [[FilterOperator: addsuffix]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c8e5380778303cdd3308bed4a15290214841f8b]] support for custom password prompts
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c26bd4c5a872f56c47e9f5cfc3fada468c53ddde]] the ListMacro to display ''caption'' field if present
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc576b052e2b05fd93fcb4f3eb8d9ee5278abf3e]] [[FilterOperator: each]] to work with missing tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5dd6ebff05a3380db2901294b2cfc89c1a0e71bf]] problem with tiddler width in zoomin storyview with the sidebar hidden
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/09b6540998fec6bf1fb14842be8e8c53dbd5c46a]] bug whereby the `tm-home` message wasn't navigating to a tiddler, causing problems in zoomin storyview
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3ca8d7b6cca46ffa424bcf9bdc134da464fc84f4]] problem with jumping toolbar icons under Firefox
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f85b07e70b71d0622a9459e4b04e2027540abda8]] problem with untagged label being incorrectly coloured
 
 !! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@andrey013|https://github.com/andrey013]]
+* [[@Eucaly|https://github.com/Eucaly]]
+* [[@fghhfg|https://github.com/fghhfg]]
 * [[@pmario|https://github.com/pmario]]
+* [[@TheDiveO|https://github.com/TheDiveO]]
+
