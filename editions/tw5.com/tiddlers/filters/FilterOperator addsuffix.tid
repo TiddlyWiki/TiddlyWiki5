@@ -1,0 +1,15 @@
+created: 20140828133830424
+modified: 20140902145613329
+tags: Filters
+caption: addsuffix
+title: FilterOperator: addsuffix
+type: text/vnd.tiddlywiki
+
+The ''addsuffix'' filter operator adds a suffix to all titles in the current list.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three +[addsuffix[-tid]]` |Returns `one-tid`, `two-tid`, `three-tid` |
+
+See also [[FilterOperator: suffix]], [[FilterOperator: prefix]], [[FilterOperator: addprefix]], [[FilterOperator: removesuffix]], and [[FilterOperator: removeprefix]].
