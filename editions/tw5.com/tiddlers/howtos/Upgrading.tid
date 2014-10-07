@@ -13,18 +13,16 @@ The process described here is for upgrading standalone TiddlyWiki files. There i
 <<<
 When upgrading, please remember the [[The First Rule of Using TiddlyWiki]]:
 
-//You are responsible for looking after your own data; take care to make backups, especially when upgrading the ~TiddlyWiki core//
+//Backup your data!//
 <<<
 
 ! Online upgrading
 
 This process will work on most desktop browsers. Note that none of your personal data leaves your browser with this process.
 
-# Locate your TiddlyWiki file in the file system (ie using Windows Explorer, the Finder on Mac OS X, or your file manager on Linux)
-# Visit http://tiddlywiki.com/upgrade.html in your browser
+# Visit the new version tiddywiki in http://tiddlywiki.com/upgrade.html in your browser
 # Drag your old TiddlyWiki HTML file into the browser window
 #* If the file is encrypted you will be prompted for the password
-# Review the list of tiddlers that will be upgraded
 # Click ''Upgrade''
 # Save changes to save the new version
 
