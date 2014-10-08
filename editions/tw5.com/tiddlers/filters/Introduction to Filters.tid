@@ -1,12 +1,24 @@
 created: 20140410101941871
-modified: 20140919160749349
+modified: 20141008180223576
 tags: Learning
 title: Introduction to Filters
 type: text/vnd.tiddlywiki
 
 A step by step introduction to how [[Filters]] are used.
 
-You can experiment with tiddler filters by typing them into the "Filter" tab of the [[advanced search panel|$:/AdvancedSearch]].
+! Using Filters
+
+Filters are a special language within WikiText for expressing lists of tiddlers.
+
+Filters are used in the ListMacro, TabsMacro, ListWidget, CountWidget, and many other areas of TiddlyWiki.
+
+For example, this is how the ListMacro would be used to display  the first example below:
+
+```
+<<list-links "HelloThere Introduction [[Title with Spaces]]">>
+```
+
+The easiest way to experiment with tiddler filters is by typing them into the "Filter" tab of the [[advanced search panel|$:/AdvancedSearch]].
 
 ! Simple Filters
 
