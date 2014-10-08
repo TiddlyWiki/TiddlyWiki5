@@ -374,11 +374,19 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 // Create a new draft tiddler
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
-	var storyList = this.getStoryList();
-	// Get the template tiddler if there is one
-	var templateTiddler = this.wiki.getTiddler(event.param);
+	var storyList = this.getStoryList(),
+		templateTiddler,originalTitle;
+	// Get the template
+	if(typeof event.param === "object") {
+		templateTiddler = event.param;
+		originalTitle = templateTiddler.title;
+	} else {
+		templateTiddler = this.wiki.getTiddler(event.param);
+		originalTitle = templateTiddler && templateTiddler.fields.title;
+	}
+	originalTitle = originalTitle || $tw.language.getString("DefaultNewTiddlerTitle");
 	// Title the new tiddler
-	var title = this.wiki.generateNewTitle((templateTiddler && templateTiddler.fields.title) || "New Tiddler");
+	var title = this.wiki.generateNewTitle(originalTitle);
 	// Create the draft tiddler
 	var draftTitle = this.generateDraftTitle(title),
 		draftTiddler = new $tw.Tiddler({

@@ -1,0 +1,23 @@
+created: 20141008134425548
+modified: 20141008144957192
+tags: Widgets
+title: ActionWidgets
+type: text/vnd.tiddlywiki
+
+Action widgets are a special type of widget that perform an action such as sending a message, navigating to a tiddler, or changing the value of a tiddler. They are used in association with other widgets that trigger those actions (for example, the ButtonWidget).
+
+Action widgets are invisible. They must be the immediate children of their parent triggering widget. The actions are performed in sequence. For example, here is a button that triggers two actions of sending different messages:
+
+```
+<$button>
+<$action-sendmessage $message="tm-home"/>
+<$action-sendmessage $message="tm-full-screen"/>
+Click me!
+</$button>
+```
+
+Take care not to accidentally introduce an extra line break after the opening tag of the button widget. Doing so will trigger the WikiText parser to wrap the action widgets in a paragraph element. This means that the action widgets will not be triggered as they are no longer immediate children of the triggering widget.
+
+The following action widgets are provided:
+
+<<list-links "[tag[ActionWidgets]]">>

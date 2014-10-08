@@ -1,17 +1,22 @@
-title: ButtonWidget
-created: 201310241419
-modified: 201406170837
-tags: Widgets
 caption: button
+created: 20131024141900000
+modified: 20141008145311298
+tags: Widgets
+title: ButtonWidget
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
 The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
 
-* Navigate to a specified tiddler
-* Dispatch a user defined [[widget message|Messages]]
-* Trigger a user defined [[popup|PopupMechanism]]
-* Assign new text to a specified tiddler
+* Executing any ActionWidgets that are immediate children of the button widget
+* Execute any integrated actions:
+** Navigate to a specified tiddler
+** Dispatch a user defined [[widget message|Messages]]
+** Trigger a user defined [[popup|PopupMechanism]]
+** Assign new text to a specified tiddler
+
+The integrated actions are provided as a shortcut for invoking common actions. The same functionality is available via ActionWidgets, with the exception of the support for highlighting selected popups.
 
 ! Content and Attributes
 
