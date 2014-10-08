@@ -3,8 +3,9 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/new-journal-button}} {{$:/language/Buttons/NewJournal/Caption}}
 description: {{$:/language/Buttons/NewJournal/Hint}}
 
+\define journalButton()
 <$button tooltip={{$:/language/Buttons/NewJournal/Hint}} aria-label={{$:/language/Buttons/NewJournal/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" title=<<now "DDth MMM YYYY">> tags="Journal"/>
+<$action-sendmessage $message="tm-new-tiddler" title=<<now "$(journalTitleTemplate)$">> tags={{$:/config/NewJournal/Tags}}/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-journal-button}}
 </$list>
@@ -12,3 +13,7 @@ description: {{$:/language/Buttons/NewJournal/Hint}}
 <$text text={{$:/language/Buttons/NewJournal/Caption}}/>
 </$list>
 </$button>
+\end
+<$set name="journalTitleTemplate" value={{$:/config/NewJournal/Title}}>
+<<journalButton>>
+</$set>
