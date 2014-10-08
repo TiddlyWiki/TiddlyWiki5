@@ -34,6 +34,8 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
+NewJournal/Caption: new journal
+NewJournal/Hint: Create a new journal tiddler
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 More/Caption: more
