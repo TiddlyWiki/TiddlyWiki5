@@ -24,13 +24,15 @@ The optional `$scroll` attribute can be set to "yes" to force scrolling to occur
 * the control key is pressed
 * the action was initiated with the middle mouse button (if available)
 
+Note that if navigating to multiple tiddlers at once you should use the same `$scroll` setting for all of them.
+
 ! Examples
 
 Here is an example of button that navigates to two different tiddlers at once:
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
-<$action-navigate $to="ButtonWidget" $scroll="no"/>
+<$action-navigate $to="ButtonWidget"/>
 <$action-navigate $to="ActionWidgets"/>
 Click me!
 </$button>'/>
