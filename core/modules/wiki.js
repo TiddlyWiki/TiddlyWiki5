@@ -1133,6 +1133,19 @@ exports.readFile = function(file,callback) {
 };
 
 /*
+Find any existing draft of a specified tiddler
+*/
+exports.findDraft = function(targetTitle) {
+	var draftTitle = undefined;
+	this.forEachTiddler({includeSystem: true},function(title,tiddler) {
+		if(tiddler.fields["draft.title"] && tiddler.fields["draft.of"] === targetTitle) {
+			draftTitle = title;
+		}
+	});
+	return draftTitle;
+}
+
+/*
 Check whether the specified draft tiddler has been modified
 */
 exports.isDraftModified = function(title) {
