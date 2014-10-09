@@ -87,6 +87,7 @@ exports.pushTop = function(array,value) {
 		}
 		array.push(value);
 	}
+	return array;
 };
 
 /*
