@@ -708,7 +708,7 @@ canvas.tc-edit-bitmapeditor  {
 	line-height: 22px;
 }
 
-.tc-tiddler-title, .tc-titlebar {
+.tc-titlebar {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
 }
 
