@@ -34,10 +34,14 @@ Home/Caption: home
 Home/Hint: Öffnen der standard (default) Tiddler
 Language/Caption: Sprache
 Language/Hint: Auswahl Dialog für die System Sprache
-NewTiddler/Caption: neuer Tiddler
-NewTiddler/Hint: Erstelle einen neuen Tiddler
 More/Caption: mehr
 More/Hint: Weitere Aktionen
+NewHere/Caption: neu hier
+NewHere/Hint: Erstelle einen neuen Tiddler der mit diesem getaggt ist
+NewJournal/Caption: neues Journal
+NewJournal/Hint: Erstelle einen neuen Journal Tiddler
+NewTiddler/Caption: neuer Tiddler
+NewTiddler/Hint: Erstelle einen neuen Tiddler
 Permalink/Caption: permalink
 Permalink/Hint: Die Browser Adressleiste enthält einen Link zu diesem Tiddler
 Permaview/Caption: permaview

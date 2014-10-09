@@ -65,7 +65,7 @@ Dargestellt als (der "Rahmen" ist nötig, um die Ausrichtung mit wenig Text sich
 | ::<br>:: |,unten links |, unten mitte |, unten rechts| ::<br>:: |
 | :: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | ::::::::::::::::::::::::::: | :: |
 
-Wenn sie die Zeichen `^` und `,` als erste Zeichen benötigen, dann können sie "HTML escaping" verwenden.
+Wenn Sie die Zeichen `^` und `,` als erste Zeichen benötigen, dann können Sie "HTML escaping" verwenden.
 
 | `^` | &amp;#94; |
 | `,` | &amp;#44; |

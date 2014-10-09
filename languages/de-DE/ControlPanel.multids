@@ -3,13 +3,15 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Appearance/Caption: Design
-Appearance/Hint: Möglichkeiten um das Aussehen ihres ~TiddlyWiki's anzupassen.
+Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWiki's anzupassen.
 Basics/AnimDuration/Prompt: Animation Dauer:
 Basics/Caption: Basis
-Basics/DefaultTiddlers/BottomHint: Verwenden sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
+Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
 Basics/DefaultTiddlers/Prompt: Standard Tiddler:
 Basics/DefaultTiddlers/TopHint: Tiddler, die beim Start geladen werden:
 Basics/Language/Prompt: Hallo! Aktuelle Sprache:
+Basics/NewJournal/Title/Prompt: Titel des neuen Journal Tiddlers
+Basics/NewJournal/Tags/Prompt: Tags des neuen Journal Tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Anzahl überschriebener Schatten-Tiddler:
 Basics/ShadowTiddlers/Prompt: Anzahl Schatten-Tiddler:
 Basics/Subtitle/Prompt: Untertitel:
@@ -29,7 +31,7 @@ LoadedModules/Caption: Geladene Module
 LoadedModules/Hint: Hier werden die geladenen Module und ihre Quelltext Komponenten angezeigt. Mit "italic" hervorgehobene Tiddler wurden während des Boot-Prozesses erstellt. Diese Tiddler haben keinen Quelltext.
 Palette/Caption: Palette
 Palette/Editor/Clone/Caption: Palette klonen
-Palette/Editor/Clone/Prompt: Es wird empfohlen, dass sie diese Schatten-Palette klonen, bevor sie sie bearbeiten. Der Name der Palette wird im Tiddler Feld "description" eingestellt.
+Palette/Editor/Clone/Prompt: Es wird empfohlen, dass Sie diese Schatten-Palette klonen, bevor Sie sie bearbeiten. Der Name der Palette wird im Tiddler Feld "description" eingestellt.
 Palette/Editor/Prompt/Modified: Diese Schatten-Palette wurde bearbeitet.
 Palette/Editor/Prompt: Bearbeiten
 Palette/Editor/Reset/Caption: Palette zurücksetzen
@@ -38,11 +40,11 @@ Palette/Prompt: Ausgewählte Farbpalette:
 Palette/ShowEditor/Caption: Editor zeigen
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: deaktivieren
-Plugins/Disable/Hint: Deaktivieren sie dieses Plugin beim nächsten Laden der Seite.
+Plugins/Disable/Hint: Deaktivieren Sie dieses Plugin beim nächsten Laden der Seite.
 Plugins/Disabled/Status: (deaktiviert)
 Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
-Plugins/Enable/Hint: Aktivieren sie dieses Plugin beim nächsten Laden der Seite.
+Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
 Plugins/Language/Prompt: Sprachen
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themen
@@ -51,6 +53,7 @@ Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
 Saving/TiddlySpot/BackupDir: "Backup" Verzeichnis
 Saving/TiddlySpot/Backups: "Backups"
+Saving/TiddlySpot/Description: Diese Einstellungen sind nur für http://tiddlyspot.com und kompatible Server aktiv!
 Saving/TiddlySpot/Filename: "Upload" Dateiname
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //Die standard Server URL ist `http://<wikiname>.tiddlyspot.com/store.cgi` und kann im Feld 'Server URL' verändert werden.//
@@ -63,7 +66,7 @@ Settings/AutoSave/Disabled/Description: Änderungen NICHT automatisch speichern
 Settings/AutoSave/Enabled/Description: Änderungen automatisch speichern
 Settings/AutoSave/Hint: Änderungen des Wikis automatisch speichern
 Settings/Caption: Einstellungen
-Settings/Hint: Diese erweiterten Einstellungen ermöglichen ihnen, das Verhalten von TiddlyWiki zu ändern.
+Settings/Hint: Diese erweiterten Einstellungen ermöglichen Ihnen, das Verhalten von TiddlyWiki zu ändern.
 Settings/NavigationAddressBar/Caption: Navigation Adresszeile
 Settings/NavigationAddressBar/Hint: Verhalten der Browser Adresszeile, wenn ein Tiddler geöffnet wird:
 Settings/NavigationAddressBar/No/Description: Die Browser Adresszeile wird nicht verändert.
@@ -82,7 +85,7 @@ StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Thema
 Theme/Prompt: Ausgewähltes Thema:
 TiddlerFields/Caption: Tiddler Felder
-TiddlerFields/Hint: Hier finden sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler. 
+TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler. 
 Toolbars/Caption: Toolbar
 Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Auswählen, welche Buttons im "Edit Modus" angezeigt werden:
