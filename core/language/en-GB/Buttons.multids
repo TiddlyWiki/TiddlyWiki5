@@ -40,6 +40,8 @@ NewHere/Caption: new here
 NewHere/Hint: Create a new tiddler tagged with this one
 NewJournal/Caption: new journal
 NewJournal/Hint: Create a new journal tiddler
+NewJournalHere/Caption: new journal here
+NewJournalHere/Hint: Create a new journal tiddler tagged with this one
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 Permalink/Caption: permalink
