@@ -167,7 +167,7 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
-exports.formatDateString = function (date,template) {
+exports.formatDateString = function(date,template) {
 	var t = template.replace(/0hh12/g,$tw.utils.pad($tw.utils.getHours12(date)));
 	t = t.replace(/hh12/g,$tw.utils.getHours12(date));
 	t = t.replace(/0hh/g,$tw.utils.pad(date.getHours()));

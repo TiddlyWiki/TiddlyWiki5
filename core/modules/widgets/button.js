@@ -59,6 +59,9 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
+		if(self.invokeActions(event)) {
+			handled = true;
+		}
 		if(self.to) {
 			self.navigateTo(event);
 			handled = true;
@@ -87,6 +90,10 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(domNode);
 };
 
+ButtonWidget.prototype.getBoundingClientRect = function() {
+	return this.domNodes[0].getBoundingClientRect();
+}
+
 ButtonWidget.prototype.isSelected = function() {
 	var tiddler = this.wiki.getTiddler(this.set);
 	return tiddler ? tiddler.fields.text === this.setTo : this.defaultSetValue === this.setTo;
@@ -99,7 +106,7 @@ ButtonWidget.prototype.isPoppedUp = function() {
 };
 
 ButtonWidget.prototype.navigateTo = function(event) {
-	var bounds = this.domNodes[0].getBoundingClientRect();
+	var bounds = this.getBoundingClientRect();
 	this.dispatchEvent({
 		type: "tm-navigate",
 		navigateTo: this.to,
