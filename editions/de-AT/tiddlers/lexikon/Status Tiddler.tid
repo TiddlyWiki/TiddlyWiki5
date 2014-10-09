@@ -12,7 +12,7 @@ Diese Status Tiddler werden meist mit einem System Prefix versehen, damit sie in
 
 Wenn Sie im rechten Menü den Reiter: "Mehr: System" wählen, dann können Sie Status Tiddler mit den Namen: `$:/state/xxxxxx` sehen. 
 
-''Wichtig'': `$:/state/*` Tiddler werden nicht gespeichert. Wenn Sie also den Status ihres `<<tabs>>` Makros speichern wollen, dann verwenden Sie einen anderen Namen. zB: `$:/_state/tabx`
+''Wichtig'': `$:/state/*` Tiddler werden nicht gespeichert. Wenn Sie also den Status Ihres `<<tabs>>` Makros speichern wollen, dann verwenden Sie einen anderen Namen. zB: `$:/_state/tabx`
 
 Siehe auch:
 
