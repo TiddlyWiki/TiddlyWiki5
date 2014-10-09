@@ -22,4 +22,4 @@ To the right of the search box, when there are no search results displayed below
 
 * The ''shadows'' tab allows you to limit your search to shadow tiddlers.
 
-* The ''filter'' tab is not a search box, per se, but a way to obtain a list of all tiddlers that meet the specific criteria described by that filter, for example, "All tags except system tags".
+* The ''filter'' tab is not a search box, per se, but a way to obtain a list of all tiddlers that meet the specific criteria described by that filter, for example, "All tags except system tags". More information in [[Introduction to Filters]].
