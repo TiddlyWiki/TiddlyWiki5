@@ -7,7 +7,7 @@ tags: Konzept Referenz InhaltsVerzeichnis
 title: WikiText
 type: text/vnd.tiddlywiki
 
-~WikiText ist eine Auszeichnungssprache, die es erlaubt, auf einfache Weise Texte und ihre Formatierung in Textform einzugeben. Das erlaubt es ihnen, sich auf das Schreiben zu konzentrieren und nicht auf eine komplexe Oberfläche, die vom Wesentlichen ablenkt. Für Anwender, die bereits MarkDown kennen, sollte es relativ leicht sein, sich in ~WikiText einzuarbeiten. WikiText bietet mehr Möglichkeiten zum Verlinken und zur Erstellung von interaktiven Inhalten. 
+~WikiText ist eine Auszeichnungssprache, die es erlaubt, auf einfache Weise Texte und ihre Formatierung in Textform einzugeben. Das erlaubt es Ihnen, sich auf das Schreiben zu konzentrieren und nicht auf eine komplexe Oberfläche, die vom Wesentlichen ablenkt. Für Anwender, die bereits MarkDown kennen, sollte es relativ leicht sein, sich in ~WikiText einzuarbeiten. WikiText bietet mehr Möglichkeiten zum Verlinken und zur Erstellung von interaktiven Inhalten. 
 
 Die folgenden Elemente sind im TW Kern enthalten:
 

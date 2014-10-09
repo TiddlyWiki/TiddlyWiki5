@@ -1,17 +1,20 @@
 title: $:/language/
 
 BinaryWarning/Prompt: Dieser Tiddler enthält binäre Daten.
-ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden sie unter: http://tiddlywiki.com/static/Upgrading.html
+ClassicWarning/Hint: Dieser Tiddler wurde im TiddlyWiki Classic Format erstellt. Dieses Format ist nur teilweise kompatibel mit TiddlyWiki Version 5. Mehr Info finden Sie unter: http://tiddlywiki.com/static/Upgrading.html
 ClassicWarning/Upgrade/Caption: upgrade
 CloseAll/Button: alle schließen
-ConfirmCancelTiddler: Wollen sie die Änderungen im Tiddler: "<$text text=<<title>>/>" verwerfen?
-ConfirmDeleteTiddler: Wollen sie den Tiddler: "<$text text=<<title>>/>" löschen?
+ConfirmCancelTiddler: Wollen Sie die Änderungen im Tiddler: "<$text text=<<title>>/>" verwerfen?
+ConfirmDeleteTiddler: Wollen Sie den Tiddler: "<$text text=<<title>>/>" löschen?
 ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK überschreibt den tiddler!
-ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können ihre Änderungen rückgängig machen, indem sie diesen Tiddler wieder löschen. Wollen sie den Tiddler: "<$text text=<<title>>/>" ändern?
+ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können Ihre Änderungen rückgängig machen, indem Sie diesen Tiddler wieder löschen. Wollen Sie den Tiddler: "<$text text=<<title>>/>" ändern?
+DefaultNewTiddlerTitle: Neuer Tiddler
 DropMessage: Hierher ziehen (oder Escape um abzubrechen)
+Encryption/ConfirmClearPassword: Wollen Sie das Passwort löschen? Damit wird die Verschlüsselung beim nächsten Speichervorgang abgeschalten!
+Encryption/PromptSetPassword: Der TiddlyWiki Inhalt wird mit dem nächsten Speichern verschlüsselt!
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
-MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
-RecentChanges/DateFormat: DDth MMM YYYY
+MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
+RecentChanges/DateFormat: YYYY MMM DD
 RelativeDate/Future/Days: in <<period>> Tagen
 RelativeDate/Future/Hours: in <<period>> Stunden
 RelativeDate/Future/Minutes: in <<period>> Minuten
