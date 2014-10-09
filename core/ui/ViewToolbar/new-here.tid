@@ -3,9 +3,12 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/new-here-button}} {{$:/language/Buttons/NewHere/Caption}}
 description: {{$:/language/Buttons/NewHere/Hint}}
 
+\define newHereButtonTags()
+[[$(currentTiddler)$]]
+\end
 \define newHereButton()
 <$button tooltip={{$:/language/Buttons/NewHere/Hint}} aria-label={{$:/language/Buttons/NewHere/Caption}} class=<<tv-config-toolbar-class>>>
-<$action-sendmessage $message="tm-new-tiddler" tags="[[$(currentTiddler)$]]"/>
+<$action-sendmessage $message="tm-new-tiddler" tags=<<newHereButtonTags>>/>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/new-here-button}}
 </$list>
