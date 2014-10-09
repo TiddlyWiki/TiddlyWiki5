@@ -1,5 +1,5 @@
 created: 20140410101941871
-modified: 20141008180223576
+modified: 20141009180223576
 tags: Learning
 title: Introduction to Filters
 type: text/vnd.tiddlywiki
@@ -98,6 +98,12 @@ You can use multiple filter operations at once. This example selects all tiddler
 ```
 
 Each separate operator is processed in turn, accumulating the tiddlers that they select.
+
+Here's an example that returns tiddlers tagged ''alpha'' or ''beta'' that are also tagged ''task'' and not tagged ''done'':
+
+```
+[tag[alpha]] [tag[beta]] +[tag[task]!tag[done]]
+```
 
 ! ANDing Multiple Filter Operators
 
