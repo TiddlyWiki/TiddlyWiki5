@@ -8,6 +8,46 @@ ConfirmCancelTiddler: 您确定要放弃对条目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您确定要删除条目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您确定要覆写条目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即将要编辑默认条目，任何更改将会覆盖默认的系统，使未来的升级不寻常。您确定要编辑 "<$text text=<<title>>/>"?
+Date/Long/Day/0: 周日
+Date/Long/Day/1: 周一
+Date/Long/Day/2: 周二
+Date/Long/Day/3: 周三
+Date/Long/Day/4: 周四
+Date/Long/Day/5: 周五
+Date/Long/Day/6: 周六
+Date/Long/Month/1: 一月
+Date/Long/Month/2: 二月
+Date/Long/Month/3: 三月
+Date/Long/Month/4: 四月
+Date/Long/Month/5: 五月
+Date/Long/Month/6: 六月
+Date/Long/Month/7: 七月
+Date/Long/Month/8: 八月
+Date/Long/Month/9: 九月
+Date/Long/Month/10: 十月
+Date/Long/Month/11: 十一月
+Date/Long/Month/12: 十二月
+Date/Period/am: 上午
+Date/Period/pm: 下午
+Date/Short/Day/0: 日
+Date/Short/Day/1: 一
+Date/Short/Day/2: 二
+Date/Short/Day/3: 三
+Date/Short/Day/4: 四
+Date/Short/Day/5: 五
+Date/Short/Day/6: 六
+Date/Short/Month/1: 01月
+Date/Short/Month/2: 02月
+Date/Short/Month/3: 03月
+Date/Short/Month/4: 04月
+Date/Short/Month/5: 05月
+Date/Short/Month/6: 06月
+Date/Short/Month/7: 07月
+Date/Short/Month/8: 08月
+Date/Short/Month/9: 09月
+Date/Short/Month/10: 10月
+Date/Short/Month/11: 11月
+Date/Short/Month/12: 12月
 DefaultNewTiddlerTitle: 新条目
 DropMessage: 拖放到此处 （或按 ESC 键取消）
 Encryption/ConfirmClearPassword: 您要清除密码？这将移除保存此维基时套用的加密
