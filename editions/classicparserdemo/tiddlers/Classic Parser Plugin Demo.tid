@@ -12,3 +12,8 @@ At present there is limited support for Classic macros. See below for examples o
 !!Status
 See here for <<slider $:/temp/1 Issues "Issues»" "more" >>
 !!See also [[Developers Notes]]
+! Installation
+To add this plugin to your own TiddlyWiki5, just drag this link to your tiddlywiki's browser window:
+
+[[$:/plugins/tiddlywiki/tw2parser]]
+
