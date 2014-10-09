@@ -36,8 +36,12 @@ Language/Caption: 语言
 Language/Hint: 选择用户介面语言
 More/Caption: 更多
 More/Hint: 更多动作
+NewHere/Caption: 添加子條目
+NewHere/Hint: 创建一個標籤為 "<$text text=<<currentTiddler>> />" 的新條目
+NewJournal/Caption: 添加日誌
+NewJournal/Hint: 创建一個新的日誌條目
 NewTiddler/Caption: 添加条目
-NewTiddler/Hint: 创建一新条目
+NewTiddler/Hint: 创建一個新的条目
 Permalink/Caption: 引用连结
 Permalink/Hint: 设置浏览器网址栏为直接连结到此条目
 Permaview/Caption: 永久连结

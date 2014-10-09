@@ -8,6 +8,7 @@ ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即將要編輯預設條目，任何更改將會覆蓋預設的系統，使未來的升級不尋常。您確定要編輯 "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: 新條目
 DropMessage: 拖放到此處 （或按 ESC 鍵取消）
 Encryption/ConfirmClearPassword: 您要清除密碼？這將移除儲存此維基時套用的加密
 Encryption/PromptSetPassword: 為此 TiddlyWiki 設置一個新密碼
