@@ -37,7 +37,7 @@ Language/Hint: Choose the user interface language
 More/Caption: more
 More/Hint: More actions
 NewHere/Caption: new here
-NewHere/Hint: Create a new tiddler tagged with "<$text text=<<currentTiddler>>"
+NewHere/Hint: Create a new tiddler tagged with this one
 NewJournal/Caption: new journal
 NewJournal/Hint: Create a new journal tiddler
 NewTiddler/Caption: new tiddler
