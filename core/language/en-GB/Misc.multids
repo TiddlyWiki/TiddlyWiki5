@@ -8,6 +8,77 @@ ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
+Date/DaySuffix/1: st
+Date/DaySuffix/2: nd
+Date/DaySuffix/3: rd
+Date/DaySuffix/4: th
+Date/DaySuffix/5: th
+Date/DaySuffix/6: th
+Date/DaySuffix/7: th
+Date/DaySuffix/8: th
+Date/DaySuffix/9: th
+Date/DaySuffix/10: th
+Date/DaySuffix/11: th
+Date/DaySuffix/12: th
+Date/DaySuffix/13: th
+Date/DaySuffix/14: th
+Date/DaySuffix/15: th
+Date/DaySuffix/16: th
+Date/DaySuffix/17: th
+Date/DaySuffix/18: th
+Date/DaySuffix/19: th
+Date/DaySuffix/20: th
+Date/DaySuffix/21: st
+Date/DaySuffix/22: nd
+Date/DaySuffix/23: rd
+Date/DaySuffix/24: th
+Date/DaySuffix/25: th
+Date/DaySuffix/26: th
+Date/DaySuffix/27: th
+Date/DaySuffix/28: th
+Date/DaySuffix/29: th
+Date/DaySuffix/30: th
+Date/DaySuffix/31: st
+Date/Long/Day/0: Sunday
+Date/Long/Day/1: Monday
+Date/Long/Day/2: Tuesday
+Date/Long/Day/3: Wednesday
+Date/Long/Day/4: Thursday
+Date/Long/Day/5: Friday
+Date/Long/Day/6: Saturday
+Date/Long/Month/1: January
+Date/Long/Month/2: February
+Date/Long/Month/3: March
+Date/Long/Month/4: April
+Date/Long/Month/5: May
+Date/Long/Month/6: June
+Date/Long/Month/7: July
+Date/Long/Month/8: August
+Date/Long/Month/9: September
+Date/Long/Month/10: October
+Date/Long/Month/11: November
+Date/Long/Month/12: December
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: Sun
+Date/Short/Day/1: Mon
+Date/Short/Day/2: Tue
+Date/Short/Day/3: Wed
+Date/Short/Day/4: Thu
+Date/Short/Day/5: Fri
+Date/Short/Day/6: Sat
+Date/Short/Month/1: Jan
+Date/Short/Month/2: Feb
+Date/Short/Month/3: Mar
+Date/Short/Month/4: Apr
+Date/Short/Month/5: May
+Date/Short/Month/6: Jun
+Date/Short/Month/7: Jul
+Date/Short/Month/8: Aug
+Date/Short/Month/9: Sep
+Date/Short/Month/10: Oct
+Date/Short/Month/11: Nov
+Date/Short/Month/12: Dec
 DefaultNewTiddlerTitle: New Tiddler
 DropMessage: Drop here (or click escape to cancel)
 Encryption/ConfirmClearPassword: Do you wish to clear the password? This will remove the encryption applied when saving this wiki
