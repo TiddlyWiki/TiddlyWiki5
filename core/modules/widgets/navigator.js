@@ -412,14 +412,14 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	}
 	// Save the draft tiddler
 	var draftTiddler = new $tw.Tiddler({
-			text: ""
+			text: "",
+			"draft.title": title
 		},
 		templateTiddler,
 		existingTiddler,
 		this.wiki.getCreationFields(),
 		{
 			title: draftTitle,
-			"draft.title": title,
 			"draft.of": title,
 			tags: mergedTags
 		},this.wiki.getModificationFields());
