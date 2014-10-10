@@ -9,7 +9,7 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 ! Content and Attributes
 
 |!Attribute |!Description |
-|to |The title of the target tiddler for the link (defaults to the [[WidgetVariable: currentTiddler]]) |
+|to |The title of the target tiddler for the link (defaults to the CurrentTiddler) |
 |aria-label |Optional [[Accessibility]] label |
 |tooltip |Optional tooltip WikiText |
 

@@ -5,7 +5,7 @@ caption: list
 title: FilterOperator: list
 type: text/vnd.tiddlywiki
 
-The ''list'' filter operator replaces the current list with the list contained in the [[TextReference|TextReferences]] specified in the operand. The default field for the text reference is `list`.
+The ''list'' filter operator replaces the current list with the list contained in the TextReference specified in the operand. The default field for the text reference is `list`.
 
 Preceding the operator name with `!` inverts the logic so that the filter only returns the tiddlers in the current list that are not listed in the specified list.
 
