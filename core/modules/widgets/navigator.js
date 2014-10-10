@@ -250,7 +250,7 @@ NavigatorWidget.prototype.makeDraftTiddler = function(targetTitle) {
 	// See if there is already a draft tiddler for this tiddler
 	var draftTitle = this.wiki.findDraft(targetTitle);
 	if(draftTitle) {
-		return draftTitle;
+		return this.wiki.getTiddler(draftTitle);
 	}
 	// Get the current value of the tiddler we're editing
 	var tiddler = this.wiki.getTiddler(targetTitle);
