@@ -1,0 +1,16 @@
+title: $:/language/
+
+RelativeDate/Future/Days: через <<period>> дней
+RelativeDate/Future/Hours: через <<period>> часов
+RelativeDate/Future/Minutes: через <<period>> минут
+RelativeDate/Future/Months: через <<period>> месяцев
+RelativeDate/Future/Second: через 1 секунду
+RelativeDate/Future/Seconds: через <<period>> секунд
+RelativeDate/Future/Years: через <<period>> лет
+RelativeDate/Past/Days: <<period>> дней назад
+RelativeDate/Past/Hours: <<period>> часов назад
+RelativeDate/Past/Minutes: <<period>> минут назад
+RelativeDate/Past/Months: <<period>> месяцев назад
+RelativeDate/Past/Second: 1 секунду назад
+RelativeDate/Past/Seconds: <<period>> секунд назад
+RelativeDate/Past/Years: <<period>> лет назад

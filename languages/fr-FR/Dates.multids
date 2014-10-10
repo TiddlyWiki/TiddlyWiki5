@@ -1,0 +1,16 @@
+title: $:/language
+
+RelativeDate/Future/Days: dans <<period>> jours
+RelativeDate/Future/Hours: dans <<period>> heures
+RelativeDate/Future/Minutes: dans <<period>> minutes
+RelativeDate/Future/Months: dans <<period>> mois
+RelativeDate/Future/Second: dans 1 seconde
+RelativeDate/Future/Seconds: dans <<period>> secondes
+RelativeDate/Future/Years: dans <<period>> ans
+RelativeDate/Past/Days: il y a <<period>> jours
+RelativeDate/Past/Hours: il y a <<period>> heures
+RelativeDate/Past/Minutes: il y a <<period>> minutes
+RelativeDate/Past/Months: il y a <<period>> mois
+RelativeDate/Past/Second: il y a 1 seconde
+RelativeDate/Past/Seconds: il y a <<period>> secondes
+RelativeDate/Past/Years: il y a <<period>> ans

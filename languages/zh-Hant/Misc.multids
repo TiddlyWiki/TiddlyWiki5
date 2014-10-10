@@ -8,46 +8,6 @@ ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即將要編輯預設條目，任何更改將會覆蓋預設的系統，使未來的升級不尋常。您確定要編輯 "<$text text=<<title>>/>"?
-Date/Long/Day/0: 星期日
-Date/Long/Day/1: 星期一
-Date/Long/Day/2: 星期二
-Date/Long/Day/3: 星期三
-Date/Long/Day/4: 星期四
-Date/Long/Day/5: 星期五
-Date/Long/Day/6: 星期六
-Date/Long/Month/1: 一月
-Date/Long/Month/2: 二月
-Date/Long/Month/3: 三月
-Date/Long/Month/4: 四月
-Date/Long/Month/5: 五月
-Date/Long/Month/6: 六月
-Date/Long/Month/7: 七月
-Date/Long/Month/8: 八月
-Date/Long/Month/9: 九月
-Date/Long/Month/10: 十月
-Date/Long/Month/11: 十一月
-Date/Long/Month/12: 十二月
-Date/Period/am: 上午
-Date/Period/pm: 下午
-Date/Short/Day/0: 日
-Date/Short/Day/1: 一
-Date/Short/Day/2: 二
-Date/Short/Day/3: 三
-Date/Short/Day/4: 四
-Date/Short/Day/5: 五
-Date/Short/Day/6: 六
-Date/Short/Month/1: 01月
-Date/Short/Month/2: 02月
-Date/Short/Month/3: 03月
-Date/Short/Month/4: 04月
-Date/Short/Month/5: 05月
-Date/Short/Month/6: 06月
-Date/Short/Month/7: 07月
-Date/Short/Month/8: 08月
-Date/Short/Month/9: 09月
-Date/Short/Month/10: 10月
-Date/Short/Month/11: 11月
-Date/Short/Month/12: 12月
 DefaultNewTiddlerTitle: 新條目
 DropMessage: 拖放到此處 （或按 ESC 鍵取消）
 Encryption/ConfirmClearPassword: 您要清除密碼？這將移除儲存此維基時套用的加密
@@ -55,20 +15,6 @@ Encryption/PromptSetPassword: 為此 TiddlyWiki 設置一個新密碼
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
 RecentChanges/DateFormat: YYYY年0MM月0DD日
-RelativeDate/Future/Days: <<period>> 天後
-RelativeDate/Future/Hours: <<period>> 小時後
-RelativeDate/Future/Minutes: <<period>> 分鐘後
-RelativeDate/Future/Months: <<period>> 個月後
-RelativeDate/Future/Second: 1 秒後
-RelativeDate/Future/Seconds: <<period>> 秒後
-RelativeDate/Future/Years: <<period>> 年後
-RelativeDate/Past/Days: <<period>> 天前
-RelativeDate/Past/Hours: <<period>> 小時前
-RelativeDate/Past/Minutes: <<period>> 分鐘前
-RelativeDate/Past/Months: <<period>> 個月前
-RelativeDate/Past/Second: 1 秒前
-RelativeDate/Past/Seconds: <<period>> 秒前
-RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: 此為系統條目
 TagManager/Colour/Heading: 顏色
 TagManager/Icon/Heading: 圖示
