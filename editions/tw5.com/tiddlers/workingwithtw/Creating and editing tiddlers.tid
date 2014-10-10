@@ -1,5 +1,5 @@
 created: 20140904140300000
-modified: 20140916130530304
+modified: 20141010093319359
 tags: [[Working with TiddlyWiki]]
 title: Creating and editing tiddlers
 type: text/vnd.tiddlywiki
@@ -7,6 +7,10 @@ type: text/vnd.tiddlywiki
 ! Creating tiddlers
 
 You create a tiddler either by clicking the {{$:/core/images/new-button}} button in the sidebar, or by clicking on a link to a missing tiddler (links to missing tiddlers will appear in [[blue italic text]]).
+
+See also:
+
+* [[Creating journal tiddlers]]
 
 ! Editing tiddlers
 
