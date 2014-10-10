@@ -405,9 +405,9 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		mergedTags = $tw.utils.pushTop($tw.utils.parseStringArray(templateTiddler.tags),existingTiddler.fields.tags);
 	} else if(existingTiddler && existingTiddler.fields.tags) {
 		mergedTags = existingTiddler.fields.tags;
-	} else if(templateTiddler.tags) {
+	} else if(templateTiddler && templateTiddler.tags) {
 		mergedTags = templateTiddler.tags;
-	} else if(templateTiddler.fields.tags) {
+	} else if(templateTiddler && templateTiddler.fields && templateTiddler.fields.tags) {
 		mergedTags = templateTiddler.fields.tags;
 	}
 	// Save the draft tiddler
