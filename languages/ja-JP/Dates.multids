@@ -1,4 +1,4 @@
-title: $:/language
+title: $:/language/
 
 RelativeDate/Future/Days: <<period>> 日後
 RelativeDate/Future/Hours: <<period>> 時間後
