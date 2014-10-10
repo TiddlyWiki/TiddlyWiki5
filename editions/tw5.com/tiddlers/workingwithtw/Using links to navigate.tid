@@ -1,5 +1,5 @@
 created: 20140908093600000
-modified: 20140919155030759
+modified: 20141010184816361
 tags: [[Working with TiddlyWiki]]
 title: Using links to navigate between tiddlers
 type: text/vnd.tiddlywiki
@@ -48,6 +48,6 @@ You can use internal hyperlinks (links between tiddlers, normally displayed in b
 
 * Finally, you can create your own custom lists of tiddlers by various methods:
 
-** You can transclude a TiddlerFilter (see [[Transclusion in WikiText]]). For example, adding `{{ [tag[mountain]] }}` to a tiddler will insert a list of all tiddlers tagged with 'mountain'.
+** You can transclude a [[filter|Filters]] (see [[Transclusion in WikiText]]). For example, adding `{{{ [tag[mountain]] }}}` to a tiddler will insert a list of all tiddlers tagged with 'mountain'.
 
-** You can use the ListWidget. This is more complicated than transcluding a ~TiddlerFilter, but in return allows you more flexibility in designing and displaying the list exactly as you want it to appear.
+** You can use the ListWidget. This is more complicated than transcluding a [[filter|Filters]], but in return allows you more flexibility in designing and displaying the list exactly as you want it to appear.
