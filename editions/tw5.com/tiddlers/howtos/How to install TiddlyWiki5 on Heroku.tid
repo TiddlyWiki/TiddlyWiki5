@@ -1,0 +1,49 @@
+created: 20141010110448509
+modified: 20141010110448509
+title: How to install TiddlyWiki5 on Heroku
+tags: [[TiddlyWiki on Node.js]]
+type: text/vnd.tiddlywiki
+
+1. Creating the local development environment
+
+npm install -g tiddlywiki # install tw5 globally
+tiddlywiki newwikifolder --init server # create a new tiddlywiki folder in 'newwikifolder' using the 'server' edition
+tiddlywiki --server # start the tw5 server
+
+TW5 will now be running at http://localhost:8080/.
+
+2. Add Heroku config files
+
+To get Heroku to run tw5, we need to add a Procfile that tells it to run the tiddlywiki command and we need a package.json to instruct it to install tiddlywiki globally (and so Heroku knows it is a node.js application). Create these two files:
+
+Procfile
+
+web: tiddlywiki . --server $PORT $:/core/save/all text/plain text/html "" "" 0.0.0.0
+
+package.json
+
+{
+  "name": "newapp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "start": "tiddlywiki . --server",
+    "postinstall": "npm install -g tiddlywiki"
+  }
+}
+
+At this point you can run the app locally by running:
+
+npm start
+
+
+3. Create the heroku application
+
+I did created a new app on the heroku dashboard, and then followed the instructions to set it up locally. NB: you need heroku toolbelt installed locally.
+
+cd newwikifolder # move into your new wiki directory
+heroku git:remote -a newapp # add the heroku git remote, where 'newapp' is the name of the app you created
+git push heroku master # push the master branch to heroku, which launches tw5
+
+Now TW5 will be running at http://<newapp>.herokuapp.com.
