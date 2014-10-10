@@ -373,43 +373,57 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList(),
-		existingTiddler, templateTiddler,
-		title;
-	// Get the template
+		templateTiddler, title, draftTitle, existingTiddler, mergedTags;
+	// Work out the title of the target tiddler
 	if(typeof event.param === "object") {
 		// If we got a hashmap use it as the template
 		templateTiddler = event.param;
 		if(templateTiddler.title) {
-			// Pull in any existing tiddler
-			existingTiddler = this.wiki.getTiddler(templateTiddler.title);
-			if(existingTiddler && existingTiddler.fields.tags && templateTiddler.tags) {
-				// Merge tags
-				templateTiddler.tags = $tw.utils.pushTop($tw.utils.parseStringArray(templateTiddler.tags),existingTiddler.fields.tags);
-			}
 			// Use the provided title
 			title = templateTiddler.title
+		} else {
+			// Generate a new unique title
+			title = this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
 		}
 	} else {
-		existingTiddler = this.wiki.getTiddler(event.param);
-		title = this.wiki.generateNewTitle(event.param);
+		// If we got a string, use it as the template and generate a new title
+		templateTiddler = this.wiki.getTiddler(event.param);
+		title = this.wiki.generateNewTitle(event.param || $tw.language.getString("DefaultNewTiddlerTitle"));
 	}
-	title = title || this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
-	// Try to reuse any existing draft of the tiddler
-	var draftTitle = this.wiki.findDraft(title);
-	if(!draftTitle) {
-		// Otherwise, create a new draft of the tiddler
+	// Find any existing draft for this tiddler
+	draftTitle = this.wiki.findDraft(title);
+	// Pull in any existing tiddler
+	if(draftTitle) {
+		existingTiddler = this.wiki.getTiddler(draftTitle);
+	} else {
 		draftTitle = this.generateDraftTitle(title);
-		var draftTiddler = new $tw.Tiddler({
-				text: ""
-			},existingTiddler,templateTiddler,
-			this.wiki.getCreationFields(),
-			{
-				title: draftTitle,
-				"draft.title": title,
-				"draft.of": title
-			},this.wiki.getModificationFields());
-		this.wiki.addTiddler(draftTiddler);
+		existingTiddler = this.wiki.getTiddler(title);
 	}
+	// Merge the tags
+	if(existingTiddler && existingTiddler.fields.tags && templateTiddler && templateTiddler.tags) {
+		// Merge tags
+		mergedTags = $tw.utils.pushTop($tw.utils.parseStringArray(templateTiddler.tags),existingTiddler.fields.tags);
+	} else if(existingTiddler && existingTiddler.fields.tags) {
+		mergedTags = existingTiddler.fields.tags;
+	} else if(templateTiddler.tags) {
+		mergedTags = templateTiddler.tags;
+	} else if(templateTiddler.fields.tags) {
+		mergedTags = templateTiddler.fields.tags;
+	}
+	// Save the draft tiddler
+	var draftTiddler = new $tw.Tiddler({
+			text: ""
+		},
+		templateTiddler,
+		existingTiddler,
+		this.wiki.getCreationFields(),
+		{
+			title: draftTitle,
+			"draft.title": title,
+			"draft.of": title,
+			tags: mergedTags
+		},this.wiki.getModificationFields());
+	this.wiki.addTiddler(draftTiddler);
 	// Update the story to insert the new draft at the top and remove any existing tiddler
 	if(storyList.indexOf(draftTitle) === -1) {
 		var slot = storyList.indexOf(event.navigateFromTitle);
