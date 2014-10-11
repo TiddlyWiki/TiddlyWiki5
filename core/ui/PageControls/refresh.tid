@@ -8,6 +8,6 @@ description: {{$:/language/Buttons/Refresh/Hint}}
 {{$:/core/images/refresh-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Refresh/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Refresh/Caption}}/></span>
 </$list>
 </$button>

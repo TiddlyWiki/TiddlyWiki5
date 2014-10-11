@@ -260,6 +260,11 @@ button svg, button img {
 	fill: <<colour muted-foreground>>;
 }
 
+.tc-btn-text {
+	padding: 0;
+	margin: 0;
+}
+
 .tc-btn-big-green {
 	padding: 8px;
 	margin: 4px 8px 4px 8px;

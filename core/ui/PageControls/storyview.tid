@@ -13,7 +13,7 @@ $:/core/images/storyview-$(storyview)$
 </$set>
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/StoryView/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/StoryView/Caption}}/></span>
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/storyview">> type="popup" position="below" animate="yes">
