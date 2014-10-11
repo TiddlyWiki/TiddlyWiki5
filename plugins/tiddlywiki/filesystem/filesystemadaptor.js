@@ -35,11 +35,16 @@ $tw.config.typeInfo = {
 	},
 	"image/jpeg" : {
 		hasMetaFile: true
+	},
+	"application/javascript": {
+		fileType: "application/javascript",
+		extension: ""
 	}
 };
 
 $tw.config.typeTemplates = {
-	"application/x-tiddler": "$:/core/templates/tid-tiddler"
+	"application/x-tiddler": "$:/core/templates/tid-tiddler",
+	"application/javascript": "$:/core/templates/plain-javascript-tiddler"
 };
 
 FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {

@@ -1,0 +1,21 @@
+title: MetafyWidget
+tags: Widgets
+caption: metafy
+
+! Introduction
+
+The metafy widget renders the contents of another tiddler while simultaneously inserting a missing meta-data comment section or replacing an existing meta-data comment section. This is different from the ViewWidget that albeit can display a tiddler's contents in a variety of formats, it cannot modify the tiddler's contents in itself during the formatting process. Also, while the FieldsWidget also renders tiddler meta-data it cannot insert its output into other content whereby replacing any old meta-data.
+
+This widget is used when rendering JavaScript tiddlers directly as plain JavaScript source code with tiddler meta-data embedded into the source code itself. A suitable template for rendering plain JavaScript source code with embedded meta-data is [[$:/core/templates/plain-javascript-tiddler]].
+
+It is thus possible to store plain JavaScript source code as ordinary `.js` files without the need for either separate `.meta` files or resorting to the general `.tid` tiddler storage format.
+
+! Content and Attributes
+
+The content of the `<$metafy>` widget is ignored.
+
+|!Attribute|!Description|
+|tiddler|The title of the tiddler to transclude (defaults to the current tiddler)|
+|detect|regular expression detecting a meta-data comment section. Its parameter #2 indicates where to replace or insert meta-data when such a meta-data comment section actually is present in the tiddler's contents. If no such section is present, then the `template` parameter will be evaluated instead. This parameter defaults to a regular expression suitable for JavaScript TiddlyWiki meta-data comment sections.|
+|exclude|The tiddler fields to exclude. This parameter defaults to `text bag revision`.|
+|template|The meta-data comment section template to use to correctly insert meta-data when no such meta-data comment section was found according to the `detect` regular expression. The string `$fields$` in the template indicates where the meta-data has to be inserted. This parameter defaults to a suitable template to be used with JavaScript plain source code. Please note that it is no possible to control the field name and value formatting as this is fixed in the TiddlyWiki core.|
