@@ -45,8 +45,8 @@ help() {
 	echo $'\t'-v .. Version
 	echo $'\t'-h .. Help
 	echo
-	echo Example 1 ./serve ./edition/tw5.com-server username
-	echo Example 2 ./serve ./edition/tw5.com-server \"\" \"\" localhost 9090
+	echo Example 1 ./serve ./editions/tw5.com-server username
+	echo Example 2 ./serve ./editions/tw5.com-server \"\" \"\" localhost 9090
 	echo .. Example 2 defines: empty username, empty password
 	echo
 }
