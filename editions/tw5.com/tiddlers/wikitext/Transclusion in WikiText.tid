@@ -9,7 +9,7 @@ You can incorporate the content of one tiddler within another using the transclu
 
 * `{{MyTiddler}}` transcludes a single tiddler
 * `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TemplateTiddler|TemplateTiddlers]]
-* `{{||TemplateTitle}}` displays the specified template tiddler without altering the [[current tiddler|WidgetVariable: currentTiddler]]
+* `{{||TemplateTitle}}` displays the specified template tiddler without altering the CurrentTiddler
 
 You can also use a TextReference instead of a tiddler title:
 

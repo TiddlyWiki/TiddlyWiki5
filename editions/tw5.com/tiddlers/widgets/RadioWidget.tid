@@ -14,7 +14,7 @@ The radio widget displays an HTML `<input type="radio">`  that reflects whether 
 The content of the `<$radio>` widget is displayed within an HTML `<label>` element also containing the radio button. This means that clicking on the content will have the same effect as clicking on the button itself.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |
+|tiddler |Title of the tiddler to manipulate (defaults to the CurrentTiddler) |
 |field |The name of the field to which the radio button will be bound |
 |value |The value for the tiddler field |
 |class |CSS classes to be assigned to the label around the radio button |
