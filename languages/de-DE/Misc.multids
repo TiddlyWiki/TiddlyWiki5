@@ -14,21 +14,7 @@ Encryption/ConfirmClearPassword: Wollen Sie das Passwort löschen? Damit wird di
 Encryption/PromptSetPassword: Der TiddlyWiki Inhalt wird mit dem nächsten Speichern verschlüsselt!
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
-RecentChanges/DateFormat: YYYY MMM DD
-RelativeDate/Future/Days: in <<period>> Tagen
-RelativeDate/Future/Hours: in <<period>> Stunden
-RelativeDate/Future/Minutes: in <<period>> Minuten
-RelativeDate/Future/Months: in <<period>> Monaten
-RelativeDate/Future/Second: in einer Sekunde
-RelativeDate/Future/Seconds: in <<period>> Sekunden
-RelativeDate/Future/Years: in <<period>> Jahren
-RelativeDate/Past/Days: vor <<period>> Tagen
-RelativeDate/Past/Hours: vor <<period>> Stunden
-RelativeDate/Past/Minutes: vor <<period>> Minuten
-RelativeDate/Past/Months: vor <<period>> Monaten
-RelativeDate/Past/Second: vor einer Sekunde
-RelativeDate/Past/Seconds: vor <<period>> Sekunden
-RelativeDate/Past/Years: vor <<period>> Jahren
+RecentChanges/DateFormat: YYYY MMM 0DD
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
 TagManager/Colour/Heading: Farbe
 TagManager/Icon/Heading: Symbol
