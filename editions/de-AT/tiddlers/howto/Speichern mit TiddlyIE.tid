@@ -1,10 +1,16 @@
 created: 20131211220000000
 creator: pmario
-modified: 20140918102257399
+modified: 20141012141931383
 modifier: pmario
 tags: howto
 title: Speichern mit TiddlyIE
 type: text/vnd.tiddlywiki
+
+!! Video
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/OrWuvjs3Ly0" frameborder="0" allowfullscreen></iframe>
+
+!! Speichern mit TiddlyIE
 
 # Installieren Sie TiddlyIE AddOn von:
 #* https://github.com/davidjade/TiddlyIE/releases
@@ -14,7 +20,7 @@ type: text/vnd.tiddlywiki
 #> http://tiddlywiki.com/languages/de-AT/empty.html oder
 #> http://tiddlywiki.com/languages/de-DE/empty.html
 # Suchen Sie die eben geladene Datei im Datei Manager.
-#* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` oder `.htm` ist.
+#* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` ist.
 # Öffnen Sie die Datei mit dem Internet Explorer
 # Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
 # Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
