@@ -10,6 +10,8 @@ Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste des tiddlers qui seront affichés au démarrage :
 Basics/Language/Prompt: Bonjour ! Langue active :
+Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
+Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// remplacés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
