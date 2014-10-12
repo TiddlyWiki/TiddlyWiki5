@@ -8,6 +8,6 @@ description: {{$:/language/Buttons/Clone/Hint}}
 {{$:/core/images/clone-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Clone/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Clone/Caption}}/></span>
 </$list>
 </$button>

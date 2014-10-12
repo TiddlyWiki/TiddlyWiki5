@@ -13,7 +13,7 @@ description: {{$:/language/Buttons/NewJournalHere/Hint}}
 {{$:/core/images/new-journal-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/NewJournalHere/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/NewJournalHere/Caption}}/></span>
 </$list>
 </$button>
 \end

@@ -8,6 +8,6 @@ description: {{$:/language/Buttons/Edit/Hint}}
 {{$:/core/images/edit-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Edit/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Edit/Caption}}/></span>
 </$list>
 </$button>
