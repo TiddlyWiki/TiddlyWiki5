@@ -1,12 +1,18 @@
 created: 20131129092604900
 creator: pmario
-modified: 20140922125135926
-modifier: ChrisK
+modified: 20141012120259664
+modifier: pmario
 tags: howto
 title: Speichern mit Chrome
 type: text/vnd.tiddlywiki
 
 Diese Methode ist etwas umständlich, da man Einstellungen immer wieder manuell vornehmen muss. Der Vorteil ist, dass diese Methode jedoch mit fast allen Desktop- und vielen mobilen Browsern funktioniert.
+
+!! Video
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/LcoZ7hQCuFI" frameborder="0" allowfullscreen></iframe>
+
+!! Speichern mit Chrome
 
 # Speichern Sie eine leere Datei der deutschen Version.
 #> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
