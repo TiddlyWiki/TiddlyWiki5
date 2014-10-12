@@ -71,3 +71,17 @@ Date/Short/Month/9: Sep
 Date/Short/Month/10: Okt
 Date/Short/Month/11: Nov
 Date/Short/Month/12: Dez
+RelativeDate/Future/Days: in <<period>> Tagen
+RelativeDate/Future/Hours: in <<period>> Stunden
+RelativeDate/Future/Minutes: in <<period>> Minuten
+RelativeDate/Future/Months: in <<period>> Monaten
+RelativeDate/Future/Second: in einer Sekunde
+RelativeDate/Future/Seconds: in <<period>> Sekunden
+RelativeDate/Future/Years: in <<period>> Jahren
+RelativeDate/Past/Days: vor <<period>> Tagen
+RelativeDate/Past/Hours: vor <<period>> Stunden
+RelativeDate/Past/Minutes: vor <<period>> Minuten
+RelativeDate/Past/Months: vor <<period>> Monaten
+RelativeDate/Past/Second: vor einer Sekunde
+RelativeDate/Past/Seconds: vor <<period>> Sekunden
+RelativeDate/Past/Years: vor <<period>> Jahren
