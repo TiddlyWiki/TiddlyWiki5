@@ -1583,7 +1583,9 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 		$tw.utils.each(wikiInfo.includeWikis,function(includedWikiPath) {
 			var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
 			if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
-				$tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				var subWikiInfo = $tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				// Merge the build targets
+				wikiInfo.build = $tw.utils.extend([],subWikiInfo.build,wikiInfo.build);
 			} else {
 				$tw.utils.error("Cannot recursively include wiki " + resolvedIncludedWikiPath);
 			}
