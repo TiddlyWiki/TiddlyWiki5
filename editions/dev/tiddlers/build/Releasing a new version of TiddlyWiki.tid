@@ -1,0 +1,20 @@
+title: Releasing a new version of TiddlyWiki
+
+# Adjust the release date of the latest release tiddler (eg, [[Release 5.1.3]])
+# Ensure [[Releases]] has the new version as the default tab
+# Adjust the modified time of HelloThere
+# Make sure ''Jermolene/TiddlyWiki5'' is fully committed
+# Edit `package.json` to the new version number
+# Run `bin/makereadmes.sh` to build the readme files
+# Restore `package.json` to the previous version number
+# Run `bin/verbump "5.1.3"` (substituting the correct version number) to update the version number and assign it a tag
+# Run `npm publish` to publish to npm
+# Verify that the new release of TiddlyWiki is available at https://www.npmjs.org/package/tiddlywiki
+# Check the version number of TiddlyWiki specified in `package.json`
+# Change current directory to the `build.jermolene.github.io` directory
+# Run `npm install` to install the correct version of TiddlyWiki
+# Change current directory to the `TiddlyWiki5` directory
+# Run `../build.jermolene.github.io/bld.sh` to build the content files
+# Verify that the files in the `jermolene.github.io` directory are correct
+# Run `../build.jermolene.github.io/deploy.sh` to push the new files to GitHub
+# Run `bin/wbld.sh <username> <password>`

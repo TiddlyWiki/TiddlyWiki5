@@ -1,0 +1,6 @@
+title: Releasing new content for TiddlyWiki
+
+# Change current directory to the `TiddlyWiki5` directory
+# Run `../build.jermolene.github.io/bld.sh` to build the content files
+# Verify that the files in the `jermolene.github.io` directory are correct
+# Run `../build.jermolene.github.io/deploy.sh` to push the new files to GitHub
