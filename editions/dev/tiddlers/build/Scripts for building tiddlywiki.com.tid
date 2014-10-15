@@ -53,7 +53,7 @@ Builds the `tiddlywiki.com` target files. By default, it uses the version of tid
 
 Builds the `tiddlywiki.com/prerelease` target files using the latest TiddlyWiki prerelease code and special ''prerelease'' edition for the content.
 
-!! `deploy.sh`
+!! `github-push.sh`
 
 Pushes the latest changes to the `jermolene.github.io` directory to GitHub.
 
