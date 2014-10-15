@@ -17,7 +17,6 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/tree/master/languages/ru-RU]] Russian translation
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ef1d5310918dae088ce9361c1682ce0f99cf568a]] confirmation when clearing password
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b7bbcfa05659808c1e51a4f2f5f1d6afbc2ed3a1]] additional prompt when setting password
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/63c174d7ed56284e80ad6cd6ae966b81f9181cc9]] ~KaTeX plugin to be able to work under Node.js to generate static HTML
 * [[Increased|https://github.com/Jermolene/TiddlyWiki5/commit/dc9981322aeb508d5ebac0b691b0d703f8c1995e]] size of the clear search button
 
 
@@ -36,6 +35,12 @@ type: text/vnd.tiddlywiki
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3ca8d7b6cca46ffa424bcf9bdc134da464fc84f4]] problem with jumping toolbar icons under Firefox
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/f85b07e70b71d0622a9459e4b04e2027540abda8]] problem with untagged label being incorrectly coloured
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/b3dcd7d625ec83701ef3a77f3fb8101af57c154f]] problem with title background colours with the "Sticky Titles" theme
+
+!! Node.js Changes
+
+//These changes are only relevant to people using TiddlyWiki under Node.js//
+
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/63c174d7ed56284e80ad6cd6ae966b81f9181cc9]] ~KaTeX plugin to be able to work under Node.js to generate static HTML
 
 !! Contributors
 
