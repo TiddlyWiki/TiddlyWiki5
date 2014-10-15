@@ -1,7 +1,7 @@
 title: $:/language/EditTemplate/
 
 Body/External/Hint: Diese ist ein externer Tiddler, der nicht im TW file gespeichert ist. Sie können die "Tags" und "Feld" Texte ändern, jedoch nicht den Inhalt des Tiddlers!
-Body/Hint: Verwenden Sie [[WikiText|http://tiddlywiki.com/static/WikiText.html]] zum Formatieren. 
+Body/Hint: Verwenden Sie zum Formatieren [[WikiText|http://tiddlywiki.com/static/WikiText.html]].
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Button/Hide: Vorschau aus
 Body/Preview/Button/Show: Vorschau
@@ -10,8 +10,8 @@ Fields/Add/Name/Placeholder: Feld Name
 Fields/Add/Prompt: Feld einfügen:
 Fields/Add/Value/Placeholder: Feld Text / Wert
 Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung überschreibt die Standardversion.
-Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurück zu kehren, löschen Sie diesen Tiddler.
+Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler.
 Tags/Add/Button: ok
 Tags/Add/Placeholder: neuer Tag
 Type/Placeholder: Tiddler Format
-Type/Prompt: Type:
+Type/Prompt: Typ:
