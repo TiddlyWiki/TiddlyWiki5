@@ -14,6 +14,7 @@ storyview: 檢視模式用以自訂 list 小工具的動畫與行為。
 tiddlerdeserializer: 轉換不同內容類型至條目。
 tiddlerfield: 定義個別條目欄位的行為。
 tiddlermethod: 新增方法至 `$tw.Tiddler` 原型。
+upgrader: 於升級/導入過程中，套用升級處理至條目。
 utils: 新增方法至 `$tw.utils`。
 utils-node: 將特定於 Node.js 的方法新增到 '$tw.utils'。.
 widget: 封裝 DOM 渲染和刷新的小工具。
