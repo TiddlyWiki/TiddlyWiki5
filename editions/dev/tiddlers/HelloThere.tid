@@ -16,6 +16,9 @@ Welcome to the developer documentation for TiddlyWiki (http://tiddlywiki.com/). 
 ** [[TiddlyWiki on node-webkit]]
 ** [[package.json for node-webkit]]
 ** [[How to create plugins in the browser]]
+** [[Contributing to the TiddlyWiki Core]]
+** [[Contributing to the TiddlyWiki Plugin Library]]
+** [[Scripts for building tiddlywiki.com]]
 ** SyncAdaptorModules
 ** WidgetModules
 ** WikiRuleModules

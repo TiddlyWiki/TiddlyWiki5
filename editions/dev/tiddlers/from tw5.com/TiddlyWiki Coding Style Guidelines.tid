@@ -1,3 +1,4 @@
+modified: 20141016083333808
 title: TiddlyWiki Coding Style Guidelines
 tags: dev
 
@@ -6,6 +7,8 @@ tags: dev
 TiddlyWiki is a large project with many interested parties. It benefits everyone if the code is as easy to read as possible. A key part of that it must be written and laid out consistently -- the code should read as though it were written by a single author.
 
 ! Guidelines
+
+This list of guidelines isn't exhaustive but captures some of the common problems. The ultimate guide is the existing TiddlyWiki code-base. There are still some places where the coding guidelines aren't used consistently within the core; pull requests are welcome to help resolve those issues.
 
 !! Tabs and whitespace
 
