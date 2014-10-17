@@ -102,11 +102,19 @@ SimpleServer.prototype.listen = function(port,host) {
 		// Find the route that matches this path
 		var route = self.findMatchingRoute(request,state);
 		// Check for the username and password if we've got one
-		var username = self.get("username"),
-			password = self.get("password");
-		if(username && password) {
-			// Check they match
-			if(self.checkCredentials(request,username,password) !== "ALLOWED") {
+		var users = self.get("users");
+		if(users.length > 0) {
+			var authed = false;
+			for(var i in users) {
+				var username = users[i].username,
+					password = users[i].password;
+				// Check they match
+				if(self.checkCredentials(request,username,password) !== "ALLOWED") {
+					authed = true;
+					break;
+				}
+			}
+			if(!authed) {
 				var servername = state.wiki.getTiddlerText("$:/SiteTitle") || "TiddlyWiki5";
 				response.writeHead(401,"Authentication required",{
 					"WWW-Authenticate": 'Basic realm="Please provide your username and password to login to ' + servername + '"'
@@ -285,14 +293,25 @@ Command.prototype.execute = function() {
 		username = this.params[4],
 		password = this.params[5],
 		host = this.params[6] || "127.0.0.1",
-		pathprefix = this.params[7];
+		pathprefix = this.params[7],
+		users = [];
+	if(username && password) {
+		users.push({
+			username: username,
+			password: password
+		});
+	}
+	if($tw.boot.wikiInfo.users) {
+		for(var i in $tw.boot.wikiInfo.users) {
+			users.push($tw.boot.wikiInfo.users[i]);
+		}
+	}
 	this.server.set({
 		rootTiddler: rootTiddler,
 		renderType: renderType,
 		serveType: serveType,
-		username: username,
-		password: password,
-		pathprefix: pathprefix
+		pathprefix: pathprefix,
+		users: users
 	});
 	this.server.listen(port,host);
 	console.log("Serving on " + host + ":" + port);
