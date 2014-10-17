@@ -477,6 +477,7 @@ submitText: text to use for submit button (defaults to "Login")
 serviceName: text of the human readable service name
 noUserName: set true to disable username prompt
 canCancel: set true to enable a cancel button (callback called with null)
+repeatPassword: set true to prompt for the password twice
 callback: function to be called on submission with parameter of object {username:,password:}. Callback must return `true` to remove the password prompt
 */
 $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
@@ -493,6 +494,11 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 	children.push(dm("input",{
 		attributes: {type: "password", name: "password", placeholder: "Password"}
 	}));
+	if(options.repeatPassword) {
+		children.push(dm("input",{
+			attributes: {type: "password", name: "password2", placeholder: "Repeat password"}
+		}));
+	}
 	if(options.canCancel) {
 		children.push(dm("button",{
 			text: "Cancel",
@@ -527,18 +533,23 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 				data[element.name] = element.value;
 			}
 		});
-		// Call the callback
-		if(options.callback(data)) {
-			// Remove the prompt if the callback returned true
-			self.removePrompt(promptInfo);
+		// Check that the passwords match
+		if(options.repeatPassword && data.password !== data.password2) {
+			alert("Passwords do not match");
 		} else {
-			// Clear the password if the callback returned false
-			$tw.utils.each(form.elements,function(element) {
-				if(element.name === "password") {
-					element.value = "";
-				}
-			});
-		}
+			// Call the callback
+			if(options.callback(data)) {
+				// Remove the prompt if the callback returned true
+				self.removePrompt(promptInfo);
+			} else {
+				// Clear the password if the callback returned false
+				$tw.utils.each(form.elements,function(element) {
+					if(element.name === "password" || element.name === "password2") {
+						element.value = "";
+					}
+				});
+			}
+		} 
 		event.preventDefault();
 		return false;
 	},true);
@@ -1244,10 +1255,14 @@ Decrypt any tiddlers stored within the element with the ID "encryptedArea". The 
 $tw.boot.decryptEncryptedTiddlers = function(callback) {
 	var encryptedArea = document.getElementById("encryptedStoreArea");
 	if(encryptedArea) {
-		var encryptedText = encryptedArea.innerHTML;
+		var encryptedText = encryptedArea.innerHTML,
+			prompt = "Enter a password to decrypt this TiddlyWiki";
 		// Prompt for the password
+		if($tw.utils.hop($tw.boot,"encryptionPrompts")) {
+			prompt = $tw.boot.encryptionPrompts.decrypt;
+		}
 		$tw.passwordPrompt.createPrompt({
-			serviceName: "Enter a password to decrypt this TiddlyWiki",
+			serviceName: prompt,
 			noUserName: true,
 			submitText: "Decrypt",
 			callback: function(data) {
@@ -1568,7 +1583,9 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 		$tw.utils.each(wikiInfo.includeWikis,function(includedWikiPath) {
 			var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
 			if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
-				$tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				var subWikiInfo = $tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				// Merge the build targets
+				wikiInfo.build = $tw.utils.extend([],subWikiInfo.build,wikiInfo.build);
 			} else {
 				$tw.utils.error("Cannot recursively include wiki " + resolvedIncludedWikiPath);
 			}

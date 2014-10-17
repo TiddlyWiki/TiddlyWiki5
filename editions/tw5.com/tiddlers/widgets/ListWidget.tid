@@ -20,7 +20,7 @@ The tiddlers can either be displayed by transcluding each in turn through an opt
 The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list (alternatively, the template can be specified as a tiddler title in the ``template`` attribute).
 
 |!Attribute |!Description |
-|filter |The TiddlerFilter to display |
+|filter |The [[tiddler filter|Filters]] to display |
 |template |The title of a template tiddler for rendering each tiddler in the list |
 |editTemplate |An alternative template to use for DraftTiddlers in edit mode |
 |variable |The [[widget variable|WidgetVariables]] name to be assigned the title of each tiddler in the list. Defaults to ''currentTiddler'' |

@@ -14,8 +14,8 @@ The keyboard widget allows [[Messages]] to be generated in response to key press
 The content of the `<$keyboard>` widget is rendered normally. The keyboard shortcut only takes effect within the contained content.
 
 |!Attribute |!Description |
-|message |The title of the WidgetMessage to generate |
-|param |The parameter to be passed with the WidgetMessage |
+|message |The title of the [[WidgetMessage|Messages]] to generate |
+|param |The parameter to be passed with the [[WidgetMessage|Messages]] |
 |key |Key string identifying the key to be trapped (see below) |
 |class |A CSS class to be assigned to the generated HTML DIV element |
 

@@ -2,15 +2,6 @@
 
 rem build TiddlyWiki 2.x
 
-rem Prepare the readme file from the revelant content in the tw5.com wiki
-
-node .\tiddlywiki.js ^
-	editions\tw5.com ^
-	--verbose ^
-	--output editions\tw2 ^
-	--rendertiddler TiddlyWiki2ReadMe readme.md text/html ^
-	|| exit 1
-
 rem cook the TiddlyWiki 2.x.x index file
 
 node .\tiddlywiki.js ^

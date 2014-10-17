@@ -31,17 +31,23 @@ Import/Hint: Importiere Dateien
 Info/Caption: info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
 Home/Caption: home
-Home/Hint: Öffnen der standard (default) Tiddler
+Home/Hint: Öffnen der Standard-Tiddler
 Language/Caption: Sprache
-Language/Hint: Auswahl Dialog für die System Sprache
-NewTiddler/Caption: neuer Tiddler
-NewTiddler/Hint: Erstelle einen neuen Tiddler
+Language/Hint: Auswahldialog für die Systemsprache
 More/Caption: mehr
 More/Hint: Weitere Aktionen
+NewHere/Caption: neu hier
+NewHere/Hint: Erstelle einen neuen Tiddler der mit diesem getaggt ist
+NewJournal/Caption: neues Journal
+NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
+NewJournalHere/Caption: neues Journal hier
+NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
+NewTiddler/Caption: neuer Tiddler
+NewTiddler/Hint: Erstelle einen neuen Tiddler
 Permalink/Caption: permalink
-Permalink/Hint: Die Browser Adressleiste enthält einen Link zu diesem Tiddler
+Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
 Permaview/Caption: permaview
-Permaview/Hint: Die Browser Adressleiste enthält einen Link zu allen offenen Tiddlern in dieser "Story"
+Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser [[Story]]
 Refresh/Caption: aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
 Save/Caption: speichern
@@ -49,7 +55,7 @@ Save/Hint: Speichere diesen Tiddler
 SaveWiki/Caption: Speichern
 SaveWiki/Hint: Das Wiki speichern
 StoryView/Caption: Story Modus
-StoryView/Hint: Auswahl des Anzeige Modus für die "Story"
+StoryView/Hint: Auswahl des Anzeigemodus für die [[Story]]
 HideSideBar/Caption: Sidebar ausblenden
 HideSideBar/Hint: Sidebar ausblenden
 ShowSideBar/Caption: Sidebar einblenden

@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Mechanism
 
-The ''currentTiddler'' variable containes the title of the current tiddler. 
+The ''currentTiddler'' variable contains the title of the current tiddler. 
 
 The ListWidget assigns the list result to the ''currentTiddler'' variable, unless the `variable` attribute is specified.
 
@@ -19,4 +19,4 @@ The TranscludeWidget (or WikiText `{{||TemplateTitle}}`) transcludes a tiddler w
 
 These mechanisms together allow you to write references like `<$view field="title" format="link"/>` in TemplateTiddlers or inside the ListWidget hierarchy without explicitly specifying the tiddler that it applies to.
 
-See also [[WidgetVariable: storyTiddler]]
+See also [[WidgetVariable: storyTiddler]] and [[WidgetVariable: currentTiddler]]

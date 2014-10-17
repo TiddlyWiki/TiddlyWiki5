@@ -1,10 +1,10 @@
 created: 20140908092600000
-modified: 20140919154732676
+modified: 20141010184954582
 tags: [[Working with TiddlyWiki]]
 title: Navigating between open tiddlers
 type: text/vnd.tiddlywiki
 
-In the default 'classic' storyview mode, open tiddlers are displayed in a vertical column called the 'story river.' There are a number of ways you can 'navigate the story river' - that is, how you can jump back and forth between the open tiddlers.
+In the default 'classic' storyview mode, open tiddlers are displayed in a vertical column called the 'story river.' There are a number of ways you can navigate the story river - that is, how you can jump back and forth between the open tiddlers.
 
 * One obvious way is to ''scroll the page up and down'' using the story river scrollbar to the right.
 

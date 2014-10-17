@@ -7,7 +7,7 @@ tags: WikiText
 title: Typisierte Blöcke in WikiText
 type: text/vnd.tiddlywiki
 
-WikiText kann Textblöcke direkt darstellen, wenn Ihr Inhalts-Typ ([[MIME-Type]]) bekannt ist:
+WikiText kann Textblöcke direkt darstellen, wenn ihr Inhalts-Typ ([[MIME-Type]]) bekannt ist:
 
 ```
 $$$image/svg+xml

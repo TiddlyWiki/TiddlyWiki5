@@ -11,7 +11,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 {{$:/core/images/down-arrow}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/More/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/More/Caption}}/></span>
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">

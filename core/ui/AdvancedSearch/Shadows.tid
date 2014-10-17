@@ -17,7 +17,7 @@ caption: {{$:/language/Search/Shadows/Caption}}
 
 <<lingo Shadows/Matches>>
 
-<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[all[shadows]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]]" template="$:/core/ui/ListItemTemplate"/>
 
 </div>
 

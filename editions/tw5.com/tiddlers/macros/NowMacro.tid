@@ -1,0 +1,28 @@
+caption: now
+created: 20141008141616791
+modified: 20141013180540337
+tags: Macros
+title: NowMacro
+type: text/vnd.tiddlywiki
+
+The 'now' macro returns the current date and time, formatted with an optional format string.
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |format |DateFormat string specifying the format for the date/time |`0hh:0mm, DDth MMM YYYY` |
+
+! Examples
+
+For example:
+
+```
+* <<now>>
+* <<now "DDth MMM YYYY">>
+```
+
+Returns:
+
+* <<now>>
+* <<now "DDth MMM YYYY">>
+

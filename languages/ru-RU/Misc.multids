@@ -12,20 +12,6 @@ DropMessage: Перетащите сюда (или нажмите escape для 
 InvalidFieldName: Недопустимые символы в названии поля "<$text text=<<fieldName>>/>". Поля могут содержать только латинские буквы нижнего регистра, цифры и символы: подчеркивание (`_`), дефис (`-`) и точку (`.`)
 MissingTiddler/Hint: Заметка "<$text text=<<currentTiddler>>/>" отсутствует - нажмите {{$:/core/images/edit-button}} чтобы её создать
 RecentChanges/DateFormat: DD MMM YYYY
-RelativeDate/Future/Days: через <<period>> дней
-RelativeDate/Future/Hours: через <<period>> часов
-RelativeDate/Future/Minutes: через <<period>> минут
-RelativeDate/Future/Months: через <<period>> месяцев
-RelativeDate/Future/Second: через 1 секунду
-RelativeDate/Future/Seconds: через <<period>> секунд
-RelativeDate/Future/Years: через <<period>> лет
-RelativeDate/Past/Days: <<period>> дней назад
-RelativeDate/Past/Hours: <<period>> часов назад
-RelativeDate/Past/Minutes: <<period>> минут назад
-RelativeDate/Past/Months: <<period>> месяцев назад
-RelativeDate/Past/Second: 1 секунду назад
-RelativeDate/Past/Seconds: <<period>> секунд назад
-RelativeDate/Past/Years: <<period>> лет назад
 SystemTiddler/Tooltip: Это системная заметка
 TagManager/Colour/Heading: Цвет
 TagManager/Icon/Heading: Значок

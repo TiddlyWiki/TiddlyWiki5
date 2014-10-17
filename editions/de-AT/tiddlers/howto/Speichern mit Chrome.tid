@@ -1,12 +1,18 @@
 created: 20131129092604900
 creator: pmario
-modified: 20140922125135926
-modifier: ChrisK
+modified: 20141012120259664
+modifier: pmario
 tags: howto
 title: Speichern mit Chrome
 type: text/vnd.tiddlywiki
 
 Diese Methode ist etwas umständlich, da man Einstellungen immer wieder manuell vornehmen muss. Der Vorteil ist, dass diese Methode jedoch mit fast allen Desktop- und vielen mobilen Browsern funktioniert.
+
+!! Video
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/LcoZ7hQCuFI" frameborder="0" allowfullscreen></iframe>
+
+!! Speichern mit Chrome
 
 # Speichern Sie eine leere Datei der deutschen Version.
 #> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
@@ -14,7 +20,7 @@ Diese Methode ist etwas umständlich, da man Einstellungen immer wieder manuell 
 #> Je nach Browser folgen Sie den Dialogen!
 # Suchen Sie die eben geladene Datei im Datei Manager.
 #* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` oder `.htm` ist.
-#  Öffnen Sie die Datei mit ihrem Browser.
+#  Öffnen Sie die Datei mit Ihrem Browser.
 # Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
 # Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
 # Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü
@@ -22,4 +28,4 @@ Diese Methode ist etwas umständlich, da man Einstellungen immer wieder manuell 
 # Suchen Sie die eben geladene Datei im Datei Manager.
 # Überprüfen sie, ob die Änderungen richtig gespeichert wurden.
 
-''Tip'': Die meisten Browser haben eine Einstellung, dass der "Datei Speichern" Dialog immer angezeigt wird. Das ermöglicht ihnen, die bestehende Datei auszuwählen und zu überschreiben. 
+''Tip'': Die meisten Browser haben eine Einstellung, dass der "Datei Speichern" Dialog immer angezeigt wird. Das ermöglicht Ihnen, die bestehende Datei auszuwählen und zu überschreiben. 

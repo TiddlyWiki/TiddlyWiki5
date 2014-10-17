@@ -78,7 +78,9 @@
 				"type": "application/javascript",
 				"title": "$:/plugins/tiddlywiki/katex/katex.min.js",
 				"module-type": "library"
-			}
+			},
+			"prefix": "(function(document) {\n",
+			"suffix": "\n})($tw.node ? $tw.fakeDocument : window.document)\n"
 		}
 	]
 }

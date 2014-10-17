@@ -87,7 +87,7 @@ For example files see the plugins in the tiddlywiki5 repository i.e. those locat
 
 Modify editions/tw5.com/tiddlywiki.info to include a reference to your plugin directory,  i.e. find `"plugins": [ ` and add `"yourname/pluginname"`.
 
-From the TW5 directory  issue command
+From the TW5 directory issue the command
 
 ```
 ./bin/qbld.sh

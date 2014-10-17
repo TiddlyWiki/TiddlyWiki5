@@ -7,4 +7,8 @@ list: Concepts Definitions WikiText Macros Widgets Filters Messages Commands Mec
 
 The following topics provide the canonical reference documentation for TiddlyWiki:
 
-<<list-links "[tag[Reference]]">>
+<div class="tc-table-of-contents">
+
+<<toc-selective-expandable 'Reference'>>
+
+</div>
