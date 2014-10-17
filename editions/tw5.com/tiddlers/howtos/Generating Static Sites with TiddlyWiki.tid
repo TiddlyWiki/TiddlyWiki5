@@ -28,7 +28,7 @@ It is also possible to produce a single HTML file that contains static represent
 
 For example: <a href="alltiddlers.html">alltiddlers.html</a>
 
-The example is built by the following line in `bin/bld.sh`:
+The example is built by the following commands:
 
 ```
 --rendertiddler $:/core/templates/alltiddlers.template.html alltiddlers.html text/plain
