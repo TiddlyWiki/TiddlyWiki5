@@ -200,6 +200,18 @@ var Command = function(params,commander,callback) {
 			response.end(text,"utf8");
 		}
 	});
+	for(var r in $tw.boot.wikiInfo.routes) {
+		var route = $tw.boot.wikiInfo.routes[r];
+		this.server.addRoute({
+			method: "GET",
+			path: new RegExp(route.path),
+			handler: function(request,response,state) {
+				response.writeHead(200, {"Content-Type": route.serveType});
+				var text = state.wiki.renderTiddler(route.renderType, route.rootTiddler)
+				response.end(text,"utf8");
+			}
+		});
+	}
 	this.server.addRoute({
 		method: "GET",
 		path: /^\/status$/,
