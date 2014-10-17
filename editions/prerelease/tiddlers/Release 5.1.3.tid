@@ -17,6 +17,7 @@ type: text/vnd.tiddlywiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ef1d5310918dae088ce9361c1682ce0f99cf568a]] confirmation when clearing password
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b7bbcfa05659808c1e51a4f2f5f1d6afbc2ed3a1]] additional prompt when setting password
 * [[Increased|https://github.com/Jermolene/TiddlyWiki5/commit/dc9981322aeb508d5ebac0b691b0d703f8c1995e]] size of the clear search button
+* [[Upgraded|]] to [[KaTeX v0.1.1|https://github.com/Khan/KaTeX/releases/tag/v0.1.1]]
 
 
 !! Hackability Improvements

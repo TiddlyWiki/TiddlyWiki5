@@ -232,6 +232,7 @@ var document = {
 	createTextNode: function(text) {
 		return new TW_TextNode(text);
 	},
+	compatMode: "CSS1Compat", // For KaTeX to know that we're not a browser in quirks mode
 	isTiddlyWikiFakeDom: true
 };
 
