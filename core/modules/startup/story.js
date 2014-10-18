@@ -59,6 +59,9 @@ exports.startup = function() {
 			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
 				storyList = $tw.wiki.filterTiddlers(storyFilter);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+			if(storyList[0]) {
+				$tw.wiki.addToHistory(storyList[0]);				
+			}
 		});
 		// Listen for the tm-permalink message
 		$tw.rootWidget.addEventListener("tm-permalink",function(event) {

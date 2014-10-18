@@ -87,6 +87,7 @@ exports.pushTop = function(array,value) {
 		}
 		array.push(value);
 	}
+	return array;
 };
 
 /*
@@ -167,61 +168,118 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
-exports.formatDateString = function (date,template) {
-	var t = template.replace(/0hh12/g,$tw.utils.pad($tw.utils.getHours12(date)));
-	t = t.replace(/hh12/g,$tw.utils.getHours12(date));
-	t = t.replace(/0hh/g,$tw.utils.pad(date.getHours()));
-	t = t.replace(/hh/g,date.getHours());
-	t = t.replace(/mmm/g,$tw.config.dateFormats.shortMonths[date.getMonth()]);
-	t = t.replace(/0mm/g,$tw.utils.pad(date.getMinutes()));
-	t = t.replace(/mm/g,date.getMinutes());
-	t = t.replace(/0ss/g,$tw.utils.pad(date.getSeconds()));
-	t = t.replace(/ss/g,date.getSeconds());
-	t = t.replace(/[ap]m/g,$tw.utils.getAmPm(date).toLowerCase());
-	t = t.replace(/[AP]M/g,$tw.utils.getAmPm(date).toUpperCase());
-	t = t.replace(/wYYYY/g,$tw.utils.getYearForWeekNo(date));
-	t = t.replace(/wYY/g,$tw.utils.pad($tw.utils.getYearForWeekNo(date)-2000));
-	t = t.replace(/YYYY/g,date.getFullYear());
-	t = t.replace(/YY/g,$tw.utils.pad(date.getFullYear()-2000));
-	t = t.replace(/MMM/g,$tw.config.dateFormats.months[date.getMonth()]);
-	t = t.replace(/0MM/g,$tw.utils.pad(date.getMonth()+1));
-	t = t.replace(/MM/g,date.getMonth()+1);
-	t = t.replace(/0WW/g,$tw.utils.pad($tw.utils.getWeek(date)));
-	t = t.replace(/WW/g,$tw.utils.getWeek(date));
-	t = t.replace(/DDD/g,$tw.config.dateFormats.days[date.getDay()]);
-	t = t.replace(/ddd/g,$tw.config.dateFormats.shortDays[date.getDay()]);
-	t = t.replace(/0DD/g,$tw.utils.pad(date.getDate()));
-	t = t.replace(/DDth/g,date.getDate()+$tw.utils.getDaySuffix(date));
-	t = t.replace(/DD/g,date.getDate());
-	var tz = date.getTimezoneOffset();
-	var atz = Math.abs(tz);
-	t = t.replace(/TZD/g,(tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60));
+exports.formatDateString = function(date,template) {
+	var t = template;
+	t = t.replace(/0hh12/g,function() {
+		return $tw.utils.pad($tw.utils.getHours12(date));
+	});
+	t = t.replace(/hh12/g,function() {
+		return $tw.utils.getHours12(date);
+	});
+	t = t.replace(/0hh/g,function() {
+		return $tw.utils.pad(date.getHours());
+	});
+	t = t.replace(/hh/g,function() {
+		return date.getHours();
+	});
+	t = t.replace(/mmm/g,function() {
+		return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
+	});
+	t = t.replace(/0mm/g,function() {
+		return $tw.utils.pad(date.getMinutes());
+	});
+	t = t.replace(/mm/g,function() {
+		return date.getMinutes();
+	});
+	t = t.replace(/0ss/g,function() {
+		return $tw.utils.pad(date.getSeconds());
+	});
+	t = t.replace(/ss/g,function() {
+		return date.getSeconds();
+	});
+	t = t.replace(/[ap]m/g,function() {
+		return $tw.utils.getAmPm(date).toLowerCase();
+	});
+	t = t.replace(/[AP]M/g,function() {
+		return $tw.utils.getAmPm(date).toUpperCase();
+	});
+	t = t.replace(/wYYYY/g,function() {
+		return $tw.utils.getYearForWeekNo(date);
+	});
+	t = t.replace(/wYY/g,function() {
+		return $tw.utils.pad($tw.utils.getYearForWeekNo(date)-2000);
+	});
+	t = t.replace(/YYYY/g,function() {
+		return date.getFullYear();
+	});
+	t = t.replace(/YY/g,function() {
+		return $tw.utils.pad(date.getFullYear()-2000);
+	});
+	t = t.replace(/MMM/g,function() {
+		return $tw.language.getString("Date/Long/Month/" + (date.getMonth() + 1));
+	});
+	t = t.replace(/0MM/g,function() {
+		return $tw.utils.pad(date.getMonth()+1);
+	});
+	t = t.replace(/MM/g,function() {
+		return date.getMonth() + 1;
+	});
+	t = t.replace(/0WW/g,function() {
+		return $tw.utils.pad($tw.utils.getWeek(date));
+	});
+	t = t.replace(/WW/g,function() {
+		return $tw.utils.getWeek(date);
+	});
+	t = t.replace(/DDD/g,function() {
+		return $tw.language.getString("Date/Long/Day/" + date.getDay());
+	});
+	t = t.replace(/ddd/g,function() {
+		return $tw.language.getString("Date/Short/Day/" + date.getDay());
+	});
+	t = t.replace(/0DD/g,function() {
+		return $tw.utils.pad(date.getDate());
+	});
+	t = t.replace(/DDth/g,function() {
+		return date.getDate() + $tw.utils.getDaySuffix(date);
+	});
+	t = t.replace(/DD/g,function() {
+		return date.getDate();
+	});
+	t = t.replace(/TZD/g,function() {
+		var tz = date.getTimezoneOffset(),
+			atz = Math.abs(tz);
+		return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
+	});
 	t = t.replace(/\\(.)/g,"$1");
 	return t;
 };
 
 exports.getAmPm = function(date) {
-	return date.getHours() >= 12 ? $tw.config.dateFormats.pm : $tw.config.dateFormats.am;
+	return $tw.language.getString("Date/Period/" + (date.getHours() >= 12 ? "pm" : "am"));
 };
 
 exports.getDaySuffix = function(date) {
-	return $tw.config.dateFormats.daySuffixes[date.getDate()-1];
+	return $tw.language.getString("Date/DaySuffix/" + date.getDate());
 };
 
 exports.getWeek = function(date) {
 	var dt = new Date(date.getTime());
 	var d = dt.getDay();
-	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
-	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week to calculate weekNo
-	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1)+3600000)/86400000);
-	return Math.floor(n/7)+1;
+	if(d === 0) {
+		d = 7; // JavaScript Sun=0, ISO Sun=7
+	}
+	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
+	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1) + 3600000) / 86400000);
+	return Math.floor(n / 7) + 1;
 };
 
 exports.getYearForWeekNo = function(date) {
 	var dt = new Date(date.getTime());
 	var d = dt.getDay();
-	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
-	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week
+	if(d === 0) {
+		d = 7; // JavaScript Sun=0, ISO Sun=7
+	}
+	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week
 	return dt.getFullYear();
 };
 

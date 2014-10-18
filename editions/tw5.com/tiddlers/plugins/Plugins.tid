@@ -19,3 +19,13 @@ The tiddlers within a plugin appear as ShadowTiddlers.
 Plugins can contain JavaScript modules, style sheets, and templates to extend the functionality of TiddlyWiki itself. Plugins can also be used to distribute ordinary text, images or other content. Plugins can be updated from their source as a unit.
 
 See the PluginMechanism discussion for more details about how plugins are implemented internally.
+
+! How to install a plugin
+
+# Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+# Open your TiddlyWiki in a browser
+# In another browser window, find a link to the plugin, e.g. [[$:/plugins/tiddlywiki/example]]. You will typically find links to plugins on the home page of the plugin (for example, http://tiddlywiki.com/plugins/tiddlywiki/katex/)
+# Drag the link [[$:/plugins/tiddlywiki/example]] to the browser window containing your TiddlyWiki
+# Save your TiddlyWiki
+# Refresh the window
+# The plugin should now be available for use

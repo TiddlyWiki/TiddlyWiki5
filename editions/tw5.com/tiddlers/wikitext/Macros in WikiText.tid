@@ -31,7 +31,7 @@ Global macros can be defined in any tiddler with the tag [[$:/tags/Macro]]. They
 
 Macros can be imported from other tiddlers with the ImportVariablesWidget.
 
-[[JavaScript Macros]] can also be used for more flexibility.
+[[JavaScript Macros|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]] can also be used for more flexibility.
 
 ! Using Macros
 
@@ -71,3 +71,20 @@ By using triple-double quotes you can specify parameter values that include sing
 Rodentville,
 Ratland.""">>
 ```
+
+! Invoked 
+
+There are many different ways to invoke macro.A macro called `italicise` that takes a single parameter called `text` can be invoked in any of these ways:
+
+```
+<<italicise "Text to be made into italics">>
+<<italicise text:"Text to be made into italics">>
+<$macrocall $name="italicise" text="Text to be made into italics"/>
+<$macrocall $name="italicise" text={{Title of tiddler containing text to be italicised}}/>
+<$macrocall $name="italicise" text=<<textMaker "Another macro to generate the text to be italicised">>/>
+```
+
+''also see''
+
+* [[Macros]]
+* [[MacroCallWidget]]

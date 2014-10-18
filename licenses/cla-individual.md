@@ -172,3 +172,7 @@ Mal Gamble, @malgam, 2014/09/19
 Ton Gerner, @gernert, 2014/09/19
 
 Julie Bertrand, @Evolena, 2014/09/22
+
+Andrey Yankin, @andrey013, 2014/09/30
+
+David john, @fghhfg, 2014/10/06

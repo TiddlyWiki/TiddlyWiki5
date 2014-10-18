@@ -8,7 +8,7 @@ description: {{$:/language/Buttons/Theme/Hint}}
 {{$:/core/images/theme-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Theme/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Theme/Caption}}/></span>
 </$list>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/theme">> type="popup" position="below" animate="yes">

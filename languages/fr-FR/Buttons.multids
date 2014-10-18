@@ -34,10 +34,16 @@ Home/Caption: accueil
 Home/Hint: Ouvre les tiddlers par défaut
 Language/Caption: langue
 Language/Hint: Choix de la langue pour l'interface utilisateur
+NewJournal/Caption: nouveau journal
+NewJournal/Hint: Crée un nouveau tiddler journal
+NewJournalHere/Caption: nouveau journal, ici
+NewJournalHere/Hint: Crée un nouveau tiddler journal avec pour tag le tiddler courant
 NewTiddler/Caption: nouveau tiddler
 NewTiddler/Hint: Créer un nouveau tiddler
 More/Caption: plus
 More/Hint: Autres actions
+NewHere/Caption: nouveau, ici
+NewHere/Hint: Crée un nouveau tiddler avec pour tag le tiddler courant
 Permalink/Caption: permalink
 Permalink/Hint: Remplacer l'URL dans la barre d'adresse du navigateur par un lien direct vers ce tiddler
 Permaview/Caption: permaview

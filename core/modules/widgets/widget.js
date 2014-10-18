@@ -475,6 +475,20 @@ Widget.prototype.removeChildDomNodes = function() {
 	}
 };
 
+/*
+Invoke any action widgets that are immediate children of this widget
+*/
+Widget.prototype.invokeActions = function(event) {
+	var handled = false;
+	for(var t=0; t<this.children.length; t++) {
+		var child = this.children[t];
+		if(child.invokeAction && child.invokeAction(this,event)) {
+			handled = true;
+		}
+	}
+	return handled;
+};
+
 exports.widget = Widget;
 
 })();

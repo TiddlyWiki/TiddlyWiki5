@@ -1,0 +1,36 @@
+created: 20141010093214683
+modified: 20141010093214683
+tags: [[Working with TiddlyWiki]]
+title: Creating journal tiddlers
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+Journal tiddlers are tiddlers that use a date and/or time as their title. They are typically used as a quick way to record time-stamped information.
+
+Additional tags on a journal tiddler can be used to link it to other tiddlers, helping to establish the relationships between items of information.
+
+For example, a journal tiddler called "11th October 2014" might be used to record thoughts and information captured on that particular day. The tags "Shopping" and "New York" might be used to indicate that the entry concerns shopping in New York.
+
+! Creating a journal tiddler
+
+The easiest way to create a journal tiddler is to use the ''new journal'' button in the tools tab of the sidebar. If you find yourself often using the button then click the checkbox to display the button in the page control toolbar where it is more easily accessible.
+
+The new journal button creates the journal tiddler as a blank tiddler with the tag "Journal" and a title derived from todays date. If there is already an existing journal tiddler then it is opened for editing.
+
+! Creating a tagged journal tiddler
+
+A common sequence of actions is creating (or re-opening) todays journal and adding a tag for the current tiddler. This can be done with the ''new journal here'' button in the tiddler toolbar (you can find this button in the tools tab of the tiddler info panel).
+
+For example, one might be reviewing a tiddler called "Times Square" and realise that it is relevant for planning the shopping trip. Clicking the ''new journal here'' button on the "Times Square" tiddler will bring up a journal tagged with "Times Square".
+
+! Customising journal tiddlers
+
+Visit the control panel Info/Basics tab to configure new journal creation:
+
+* "Title of new journal tiddlers" specifies the naming of journal tiddlers as a [[date format string|DateFormat]]. The default setting of "DDth MMM YYYY" causes new journals to have titles of the form "11th October 2014"
+* "Tags for new journal tiddlers" specifies one or more optional tags that are automatically applied to new journal tiddlers. Multiple tags should be separated with spaces. Tags containing spaces should be surrounded by double square brackes. For example: `Journal [[Multi-word tag]]`
+
+One useful hint is to use a title format such as `YYYY-0MM-0DD at 0hhh0mm'0ss''` which causes the time (including seconds) to be included in the journal title. This means that a new, separate journal tiddler will be created each time the button is clicked.
+
+

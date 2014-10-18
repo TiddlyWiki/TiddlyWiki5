@@ -37,7 +37,11 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// Render it into a span
 	var span = this.document.createElement("span");
 	try {
-		katex.render(text,span);
+		if($tw.browser) {
+			katex.render(text,span);
+		} else {
+			span.innerHTML = katex.renderToString(text);
+		}
 	} catch(ex) {
 		span.className = "tc-error";
 		span.textContent = ex;

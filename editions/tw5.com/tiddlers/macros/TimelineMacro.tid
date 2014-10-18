@@ -1,6 +1,6 @@
 title: TimelineMacro
 tags: Macros
-modified: 20140913100126081
+modified: 20141015165343893
 caption: timeline
 
 The timeline macro produces a list of tiddlers in reverse chronological order of modification date that is grouped by the date of the day of modification.
@@ -8,7 +8,7 @@ The timeline macro produces a list of tiddlers in reverse chronological order of
 ! Parameters
 
 |!Position |!Name |!Description |!Default |
-|1st |limit |The maximum number of tiddlers to list |100 |
+|1st |limit |The maximum number of tiddlers to list (see below) |100 |
 |2nd |format |A DateFormat string for formatting the date |DDth MMM YYYY |
 |3rd |subfilter |A subfilter to include in the timeline filter (see below)  | |
 
@@ -23,6 +23,8 @@ To restrict the timeline to a particular tag, the subfilter can be set to someth
 ```
 <<timeline limit:10 subfilter:"tag[mytag]">>
 ```
+
+Note that the timeline macro does not truncate the entries for a particular day, instead always displaying all the tiddlers under each displayed day heading. This means that the limit parameter works in an unexpected way because it is possible for more than the specified number of tiddlers to be displayed.
 
 ! Examples
 

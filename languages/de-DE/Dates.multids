@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: .
+Date/DaySuffix/2: .
+Date/DaySuffix/3: .
+Date/DaySuffix/4: .
+Date/DaySuffix/5: .
+Date/DaySuffix/6: .
+Date/DaySuffix/7: .
+Date/DaySuffix/8: .
+Date/DaySuffix/9: .
+Date/DaySuffix/10: .
+Date/DaySuffix/11: .
+Date/DaySuffix/12: .
+Date/DaySuffix/13: .
+Date/DaySuffix/14: .
+Date/DaySuffix/15: .
+Date/DaySuffix/16: .
+Date/DaySuffix/17: .
+Date/DaySuffix/18: .
+Date/DaySuffix/19: .
+Date/DaySuffix/20: .
+Date/DaySuffix/21: .
+Date/DaySuffix/22: .
+Date/DaySuffix/23: .
+Date/DaySuffix/24: .
+Date/DaySuffix/25: .
+Date/DaySuffix/26: .
+Date/DaySuffix/27: .
+Date/DaySuffix/28: .
+Date/DaySuffix/29: .
+Date/DaySuffix/30: .
+Date/DaySuffix/31: .
+Date/Long/Day/0: Sonntag
+Date/Long/Day/1: Montag
+Date/Long/Day/2: Dienstag
+Date/Long/Day/3: Mittwoch
+Date/Long/Day/4: Donnerstag
+Date/Long/Day/5: Freitag
+Date/Long/Day/6: Samstag
+Date/Long/Month/1: Januar
+Date/Long/Month/2: Februar
+Date/Long/Month/3: März
+Date/Long/Month/4: April
+Date/Long/Month/5: Mai
+Date/Long/Month/6: Juni
+Date/Long/Month/7: Juli
+Date/Long/Month/8: August
+Date/Long/Month/9: September
+Date/Long/Month/10: Oktober
+Date/Long/Month/11: November
+Date/Long/Month/12: Dezember
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: So
+Date/Short/Day/1: Mo
+Date/Short/Day/2: Di
+Date/Short/Day/3: Mi
+Date/Short/Day/4: Do
+Date/Short/Day/5: Fr
+Date/Short/Day/6: Sa
+Date/Short/Month/1: Jan
+Date/Short/Month/2: Feb
+Date/Short/Month/3: Mär
+Date/Short/Month/4: Apr
+Date/Short/Month/5: Mai
+Date/Short/Month/6: Jun
+Date/Short/Month/7: Jul
+Date/Short/Month/8: Aug
+Date/Short/Month/9: Sep
+Date/Short/Month/10: Okt
+Date/Short/Month/11: Nov
+Date/Short/Month/12: Dez
+RelativeDate/Future/Days: in <<period>> Tagen
+RelativeDate/Future/Hours: in <<period>> Stunden
+RelativeDate/Future/Minutes: in <<period>> Minuten
+RelativeDate/Future/Months: in <<period>> Monaten
+RelativeDate/Future/Second: in einer Sekunde
+RelativeDate/Future/Seconds: in <<period>> Sekunden
+RelativeDate/Future/Years: in <<period>> Jahren
+RelativeDate/Past/Days: vor <<period>> Tagen
+RelativeDate/Past/Hours: vor <<period>> Stunden
+RelativeDate/Past/Minutes: vor <<period>> Minuten
+RelativeDate/Past/Months: vor <<period>> Monaten
+RelativeDate/Past/Second: vor einer Sekunde
+RelativeDate/Past/Seconds: vor <<period>> Sekunden
+RelativeDate/Past/Years: vor <<period>> Jahren

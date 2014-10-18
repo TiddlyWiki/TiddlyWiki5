@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20140912141727308
+modified: 20141013204930183
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -26,6 +26,8 @@ The `tiddlywiki.info` file in a wiki folder contains a JSON object comprising th
 * ''includeWikis'' - an array of relative paths to external wiki folders to be included in the wiki
 * ''build'' - a hashmap of named build targets, each defined by an array of command tokens (see BuildCommand)
 * ''config'' - an optional hashmap of configuration options (see below)
+
+Note that the build targets of included wikis are merged if a target of that name isn't defined in the current `tiddlywiki.info` file.
 
 Configuration options include:
 

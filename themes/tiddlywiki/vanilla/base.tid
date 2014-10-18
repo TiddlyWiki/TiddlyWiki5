@@ -260,6 +260,11 @@ button svg, button img {
 	fill: <<colour muted-foreground>>;
 }
 
+.tc-btn-text {
+	padding: 0;
+	margin: 0;
+}
+
 .tc-btn-big-green {
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
@@ -339,7 +344,7 @@ button.tc-tag-label, span.tc-tag-label {
 	background: <<colour tab-divider>>;
 }
 
-.tc-untagged-label {
+button.tc-untagged-label {
 	background-color: <<colour untagged-background>>;
 }
 
@@ -403,7 +408,9 @@ button.tc-tag-label, span.tc-tag-label {
 }
 
 .tc-search a svg {
-	height: 0.75em;
+	width: 1.2em;
+	height: 1.2em;
+	vertical-align: middle;
 }
 
 .tc-search-results {
@@ -706,6 +713,10 @@ canvas.tc-edit-bitmapeditor  {
 	line-height: 22px;
 }
 
+.tc-titlebar, .tc-tiddler-edit-title {
+	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+}
+
 /*
 ** Toolbar buttons
 */
@@ -844,6 +855,17 @@ canvas.tc-edit-bitmapeditor  {
 .tc-edit-field-add-button {
 	display: inline-block;
 	width: 10%;
+}
+
+/*
+** Storyview Classes
+*/
+
+.tc-storyview-zoomin-tiddler {
+	position: absolute;
+	display: block;
+	width: 100%;
+	width: calc(100% - 84px);
 }
 
 /*

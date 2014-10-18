@@ -13,4 +13,4 @@ For example:
 |`[tag[task]!suffix[hidden]]` |Returns tiddlers tagged `task` whose titles do not end with `hidden` |
 |`[suffix[.jpg]]` |Returns tiddlers whose titles end with `.jpg` |
 
-See also [[FilterOperator: removesuffix]], [[FilterOperator: prefix]] and [[FilterOperator: removeprefix]].
+See also [[FilterOperator: removesuffix]], [[FilterOperator: prefix]], [[FilterOperator: removeprefix]], [[FilterOperator: addprefix]], and [[FilterOperator: addsuffix]].

@@ -6,7 +6,7 @@ tags: $:/tags/Macro
 <$list filter="[!is[system]$subfilter$has[modified]!sort[modified]limit[$limit$]eachday[modified]]">
 <div class="tc-menu-list-item">
 <$view field="modified" format="date" template="$format$"/>
-<$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
+<$list filter="[sameday{!!modified}!is[system]$subfilter$!sort[modified]]">
 <div class="tc-menu-list-subitem">
 <$link to={{!!title}}>
 <$view field="title"/>

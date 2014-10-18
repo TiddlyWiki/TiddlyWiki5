@@ -177,7 +177,7 @@ exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
 		title = baseTitle;
-	while(this.tiddlerExists(title) || this.isShadowTiddler(title)) {
+	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 		title = baseTitle + 
 			(options.prefix || " ") + 
 			(++c);
@@ -1131,6 +1131,19 @@ exports.readFile = function(file,callback) {
 		reader.readAsText(file);
 	}
 };
+
+/*
+Find any existing draft of a specified tiddler
+*/
+exports.findDraft = function(targetTitle) {
+	var draftTitle = undefined;
+	this.forEachTiddler({includeSystem: true},function(title,tiddler) {
+		if(tiddler.fields["draft.title"] && tiddler.fields["draft.of"] === targetTitle) {
+			draftTitle = title;
+		}
+	});
+	return draftTitle;
+}
 
 /*
 Check whether the specified draft tiddler has been modified

@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 # Copy the contents of `<repo>/core/language/en-GB` into your translation folder
 # Create a `plugin.info` file (see below) in your translation folder
 # Edit `<repo>/editions/tw5.com/tiddlywiki.info` to add your language to the list
-# Run `./bin/qbld.sh` to build TiddlyWiki
+# Run `../build.jermolene.github.io/quick-bld.sh` to build TiddlyWiki
 # Open the TiddlyWiki file at `/MyTranslation/jermolene.github.com/index.html`
 # You should see your translation listed in the control panel, but the text of the translation will still be in British English
 # Edit the `.tid` and `.multids` files in your language folder to translate the English text

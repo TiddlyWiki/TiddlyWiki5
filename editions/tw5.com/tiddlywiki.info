@@ -25,7 +25,8 @@
 		"zh-Hans",
 		"zh-Hant",
 		"it-IT",
-		"ja-JP"
+		"ja-JP",
+		"ru-RU"
 	],
 	"build": {
 		"index": [

@@ -1,0 +1,16 @@
+title: $:/language/
+
+RelativeDate/Future/Days: <<period>> 日後
+RelativeDate/Future/Hours: <<period>> 時間後
+RelativeDate/Future/Minutes: <<period>> 分後
+RelativeDate/Future/Months: <<period>> か月後
+RelativeDate/Future/Second: 1 秒後
+RelativeDate/Future/Seconds: <<period>> 秒後
+RelativeDate/Future/Years: <<period>> 年後
+RelativeDate/Past/Days: <<period>> 日前
+RelativeDate/Past/Hours: <<period>> 時間前
+RelativeDate/Past/Minutes: <<period>> 分前
+RelativeDate/Past/Months: <<period>> か月前
+RelativeDate/Past/Second: 1 秒前
+RelativeDate/Past/Seconds: <<period>> 秒前
+RelativeDate/Past/Years: <<period>> 年前

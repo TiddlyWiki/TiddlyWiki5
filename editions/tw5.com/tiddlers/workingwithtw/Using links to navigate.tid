@@ -1,12 +1,12 @@
 created: 20140908093600000
-modified: 20140919155030759
+modified: 20141010184816361
 tags: [[Working with TiddlyWiki]]
 title: Using links to navigate between tiddlers
 type: text/vnd.tiddlywiki
 
 You can use internal hyperlinks (links between tiddlers, normally displayed in blue text) to navigate between your tiddlers. Clicking on a link to any tiddler will take you to that tiddler. If the tiddler is closed, it will be opened. The wonderful thing about ~Tiddlywiki is that it has made links to tiddlers as accessible as possible. There are links everywhere! Here are the key places where you can find links to tiddlers in ~TiddlyWiki:
 
-* You can ''create a link'' to a tiddler, whether it exists yet or not, in the body of any tiddler. See [[Linking in Wikitext]] to see the various, easy ways to create links between tiddlers.
+* You can ''create a link'' to a tiddler, whether it exists yet or not, in the body of any tiddler. See [[Linking in WikiText]] to see the various, easy ways to create links between tiddlers.
 
 * Each ''tag pill'' found in your tiddler (such as the 'Working with ~TiddlyWiki' tag pill under the title of this tiddler) contains a link to that tag tiddler, as well a lists of all the tiddlers tagged with that tag. This allows you to go to any of those tiddlers.
 
@@ -48,6 +48,6 @@ You can use internal hyperlinks (links between tiddlers, normally displayed in b
 
 * Finally, you can create your own custom lists of tiddlers by various methods:
 
-** You can transclude a TiddlerFilter (see [[Transclusion in WikiText]]). For example, adding `{{ [tag[mountain]] }}` to a tiddler will insert a list of all tiddlers tagged with 'mountain'.
+** You can transclude a [[filter|Filters]] (see [[Transclusion in WikiText]]). For example, adding `{{{ [tag[mountain]] }}}` to a tiddler will insert a list of all tiddlers tagged with 'mountain'.
 
-** You can use the ListWidget. This is more complicated than transcluding a ~TiddlerFilter, but in return allows you more flexibility in designing and displaying the list exactly as you want it to appear.
+** You can use the ListWidget. This is more complicated than transcluding a [[filter|Filters]], but in return allows you more flexibility in designing and displaying the list exactly as you want it to appear.

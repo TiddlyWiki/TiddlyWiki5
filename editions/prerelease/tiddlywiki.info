@@ -1,0 +1,34 @@
+{
+	"plugins": [
+		"tiddlywiki/cecily",
+		"tiddlywiki/googleanalytics",
+		"tiddlywiki/nodewebkitsaver",
+		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/browser-sniff"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/stickytitles",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"en-US",
+		"en-GB",
+		"de-AT",
+		"de-DE",
+		"fr-FR",
+		"zh-Hans",
+		"zh-Hant",
+		"it-IT",
+		"ja-JP",
+		"ru-RU"
+	],
+	"includeWikis": [
+		"../tw5.com"
+	]
+}

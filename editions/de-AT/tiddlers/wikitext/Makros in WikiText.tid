@@ -112,7 +112,7 @@ Rodentville,
 Ratland.">>
 ```
 
-Wenn sie 3 doppelte Anführungszeichen verwenden, dann können die Parameter einfache Anführungszeichen enthalten:
+Wenn Sie 3 doppelte Anführungszeichen verwenden, dann können die Parameter einfache Anführungszeichen enthalten:
 
 ```
 <<meinErstesMakro "Mickey Mouse" """Mouse House,

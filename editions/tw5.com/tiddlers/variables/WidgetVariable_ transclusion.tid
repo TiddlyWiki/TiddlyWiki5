@@ -1,0 +1,36 @@
+caption: transclusion
+created: 20141002004621385
+modified: 20141002162057822
+tags: Variables
+title: WidgetVariable: transclusion
+type: text/vnd.tiddlywiki
+
+! Mechanism 
+The ''transclusion'' variable is set automatically by the transclude widget to contain a string that identifies the position of the current node within the widget tree. In the sidebar it is set to `{|$:/core/ui/PageTemplate/sidebar|||}` and within the tiddler "HelloThere" in the story river it is set to `{HelloThere|HelloThere|||}`. Each nested level of transclusion appends another curly bracketed list of symbols.
+
+The QualifyMacro uses the ''transclusion'' variable to identify the stack of transcluded tiddlers.
+
+! Example
+
+```
+\define mymacro()
+Hello from mymacro
+<$list filter="[<transclusion>prefix[{|$:/core/ui/PageTemplate/sidebar|||}]]" emptyMessage="in a tiddler">
+	in the sidebar
+</$list>
+\end
+
+<<mymacro>>
+```
+
+Result in story tiddler
+
+```
+Hello from mymacro in a tiddler
+```
+
+Result in the sidebar
+
+```
+Hello from mymacro in the sidebar
+```

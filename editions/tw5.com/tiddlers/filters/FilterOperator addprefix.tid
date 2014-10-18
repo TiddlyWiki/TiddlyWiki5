@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20140410103123179
+tags: Filters
+caption: addprefix
+title: FilterOperator: addprefix
+type: text/vnd.tiddlywiki
+
+The ''addprefix'' filter operator add a prefix to all titles in the current list.
+
+For example:
+
+|!Filter String |!Description |
+|`one two three +[addprefix[tid-]]` |Returns `tid-one`, `tid-two`, `tid-three` |
+
+See also [[FilterOperator: prefix]], [[FilterOperator: suffix]], [[FilterOperator: addsuffix]], [[FilterOperator: removeprefix]] and [[FilterOperator: removesuffix]].
