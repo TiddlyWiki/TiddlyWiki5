@@ -1714,7 +1714,9 @@ $tw.boot.startup = function(options) {
 		// If the first command line argument doesn't start with `--` then we
 		// interpret it as the path to the wiki folder, which will otherwise default
 		// to the current folder
+		var explicitWikiPath;
 		if($tw.boot.argv[0] && $tw.boot.argv[0].indexOf("--") !== 0) {
+			explicitWikiPath = true;
 			$tw.boot.wikiPath = $tw.boot.argv[0];
 			$tw.boot.argv = $tw.boot.argv.slice(1);
 		} else {
@@ -1761,6 +1763,9 @@ $tw.boot.startup = function(options) {
 		$tw.loadTiddlersBrowser();
 	} else {
 		$tw.loadTiddlersNode();
+		if(!$tw.boot.wikiInfo && explicitWikiPath) {
+			return $tw.utils.error("Wiki folder '" + $tw.boot.wikiPath + "' is missing a 'tiddlywiki.info' file");
+		}
 	}
 	// Unpack plugin tiddlers
 	$tw.wiki.readPluginInfo();
