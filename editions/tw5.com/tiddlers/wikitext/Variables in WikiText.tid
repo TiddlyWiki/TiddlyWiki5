@@ -1,6 +1,6 @@
 caption: Variables
 created: 20141002141231992
-modified: 20141018104313995
+modified: 20141018220627092
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
@@ -25,4 +25,4 @@ Variables are used in:
 * [[Filter expression|Introduction to Filters]] `[operator<variable-operand>]`
 * Some default behaviors of [[Widgets]]
 
-See also [[currentTiddler|WidgetVariable: currentTiddler]] variable, built-in [[variables|Variables]] and [[subsitutions in WikiText|Variables, Macros and Subsitutions in WikiText]]
+See also [[currentTiddler|WidgetVariable: currentTiddler]] variable, built-in [[variables|Variables]] and [[substitutions in WikiText|Variables, Macros and Substitutions in WikiText]]
