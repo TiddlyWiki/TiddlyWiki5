@@ -4,20 +4,7 @@ type: application/javascript
 
 The main boot kernel for TiddlyWiki. This single file creates a barebones TW environment that is just sufficient to bootstrap the modules containing the main logic of the application.
 
-On the server this file is executed directly to boot TiddlyWiki. In the browser, this file is packed into a single HTML file along with other elements:
-
-# bootprefix.js
-# <module definitions>
-# boot.js
-
-The module definitions on the browser look like this:
-
-	$tw.defineModule("MyModule","moduletype",function(module,exports,require) {
-	// Module code inserted here
-	return exports;
-	});
-
-In practice, each module is wrapped in a separate script block.
+On the server this file is executed directly to boot TiddlyWiki. In the browser, this file is packed into a single HTML file.
 
 \*/
 
