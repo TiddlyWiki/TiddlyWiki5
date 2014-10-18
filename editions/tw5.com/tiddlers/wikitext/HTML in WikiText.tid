@@ -1,5 +1,5 @@
 created: 20131205160816081
-modified: 20140619111725471
+modified: 20141018181414011
 tags: WikiText
 title: HTML in WikiText
 type: text/vnd.tiddlywiki
@@ -14,9 +14,13 @@ This is my nice and simple block of text. HelloThere
 </article>
 ```
 
+! Content Parsing
+
+The content of an HTML element will be parsed in inline mode unless the opening tag is followed by two linebreaks, in which case it is parsed in block mode. (Inline mode means that block mode formatting such as tables, lists and headings is not recognised).
+
 ! Attributes
 
-Attributes in HTML tags can be specified as a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
+Attributes in HTML tags can be specified as a literal, a transclusion or a macro invocation. For example, here the value of the `href` attribute will be set to the value of the tiddler MyLinkDestination:
 
 ```
 <a href={{MyLinkDestination}}>link</a>
@@ -45,8 +49,3 @@ By using triple-double quotes you can specify attribute values that include sing
 Rodentville,
 Ratland."""/>
 ```
-
-! Content Parsing
-
-The content of an HTML element will be parsed in inline mode unless the opening tag is followed by two linebreaks. (Inline mode means that block mode formatting such as tables, lists and headings is not recognised).
-

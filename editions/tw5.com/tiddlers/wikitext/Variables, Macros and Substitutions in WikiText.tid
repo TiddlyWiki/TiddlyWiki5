@@ -1,19 +1,19 @@
-caption: Variables, Parameters, Subsitutions
+caption: Variables, Parameters, Substitutions
 created: 20141018090608643
-modified: 20141018104201050
+modified: 20141018181414011
 tags: WikiText
-title: Variables, Macros and Subsitutions in WikiText
+title: Variables, Macros and Substitutions in WikiText
 type: text/vnd.tiddlywiki
 
 ! Syntax for Attributes
 
 The syntax for the attributes of [[HTML elements|HTML in WikiText]] and [[widgets|Widgets in WikiText]]:
 
-* `"text"` or `'text'` - passed as a literal value
+* `"text"`, `'text'`, `"""text"""` - passed as a literal value
 * `{{text reference}}` - [[transcludes|Transclusion in WikiText]] a text reference
-* `<<macro>>` - transcludes a variable or macro invocation.
+* `<<macro>>` - transcludes a variable or macro invocation
 
-! Syntax for Filter
+! Syntax for Filters
 
 Using single brace `{...}` and `<...>` when referenced as operands in [[Filter expression|Introduction to Filters]].
 
@@ -26,7 +26,7 @@ Using single brace `{...}` and `<...>` when referenced as operands in [[Filter e
 
 ! Textual Substitution
 
-* `$parametername$` - for [[macor parameters|Macros in WikiText]] 
+* `$parametername$` - for [[macro parameters|Macros in WikiText]] 
 ```
 \define mysamplemacro(name:"Bugs Bunny",address:"Rabbit Hole Hill")
 Hi, I'm $name$ and I live in $address$
@@ -44,7 +44,7 @@ Hi, I'm $(name)$ and I live in $(address)$
 <<mysamplemacro2>>
 </$set></$set>
 ```
-The differents between textual substitution and other syntax:
+The difference between textual substitution and other syntax:
 
 * Textual substitution is performed before the macro is parsed, the values are inserted into the target.
 * While the `<<...>>` syntax is a transclusion, where the "WikiText" is inserted and rendered separately.
