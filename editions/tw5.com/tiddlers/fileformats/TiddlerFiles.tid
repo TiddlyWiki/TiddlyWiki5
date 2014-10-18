@@ -63,3 +63,17 @@ These files are a straightforward array of hashmaps of name:value fields. Curren
 !! TiddlyWiki HTML files
 
 TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
+
+The minimal requirement for an HTML file to be recognised as an unencrypted TW file is that it has a <div id="storeArea"> immediately preceding the tiddler DIVs, which must be followed by a </div>. For example:
+
+```
+<div id="storeArea">
+<div created="20130302085406905" modified="20130302084548184" tags="Examples" title="A tiddler title">
+<pre>HTML encoded text of tiddler
+</pre>
+</div>
+<div created="20140315085406905" modified="20140321084548184" tags="One Two [[Three with Space]]" title="Another title" customfield="field value">
+<pre>Text of this tiddler
+</pre>
+</div>
+```
