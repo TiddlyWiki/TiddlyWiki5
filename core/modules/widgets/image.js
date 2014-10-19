@@ -97,10 +97,10 @@ ImageWidget.prototype.render = function(parent,nextSibling) {
 		domNode.setAttribute("class",this.imageClass);		
 	}
 	if(this.imageWidth) {
-		domNode.setAttribute("width",parseInt(this.imageWidth,10) + "px");
+		domNode.setAttribute("width",this.imageWidth);
 	}
 	if(this.imageHeight) {
-		domNode.setAttribute("height",parseInt(this.imageHeight,10) + "px");
+		domNode.setAttribute("height",this.imageHeight);
 	}
 	if(this.imageTooltip) {
 		domNode.setAttribute("title",this.imageTooltip);		
