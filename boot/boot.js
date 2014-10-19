@@ -1561,6 +1561,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	if(fs.existsSync(wikiInfoPath)) {
 		wikiInfo = JSON.parse(fs.readFileSync(wikiInfoPath,"utf8"));
 	} else {
+		console.log("Warning: " + $tw.config.wikiInfo + " NOT exist in below location!!\n"	+ wikiInfoPath + "\n" );
 		return null;
 	}
 	// Load any parent wikis
