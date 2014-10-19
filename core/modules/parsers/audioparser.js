@@ -29,6 +29,7 @@ var AudioParser = function(type,text,options) {
 	this.tree = [element];
 };
 
+exports["audio/ogg"] = AudioParser;
 exports["audio/mpeg"] = AudioParser;
 exports["audio/mp3"] = AudioParser;
 exports["audio/mp4"] = AudioParser;
