@@ -64,7 +64,7 @@ These files are a straightforward array of hashmaps of name:value fields. Curren
 
 TiddlyWiki HTML files contain a collection of tiddlers encoded in `<DIV>` format.
 
-The minimal requirement for an HTML file to be importable as an unencrypted TW file is that it has a <div id="storeArea"> immediately preceding the tiddler DIVs, which must be followed by a </div>. For example:
+The minimal requirement for an HTML file to be importable as an unencrypted TW file is that it has a `<div id="storeArea">` immediately preceding the tiddler DIVs, which must be followed by a `</div>`. For example:
 
 ```
 <div id="storeArea">

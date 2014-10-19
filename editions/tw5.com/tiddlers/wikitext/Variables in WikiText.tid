@@ -25,4 +25,4 @@ Variables are used in:
 * [[Filter expression|Introduction to Filters]] `[operator<variable-operand>]`
 * Some default behaviors of [[Widgets]]
 
-See also [[currentTiddler|WidgetVariable: currentTiddler]] variable, built-in [[variables|Variables]] and [[subsitutions in WikiText|Variables, Macros and Subsitutions in WikiText]]
+See also [[currentTiddler|WidgetVariable: currentTiddler]] variable, built-in [[variables|Variables]] and [[substitutions in WikiText|Variables, Macros and Substitutions in WikiText]]
