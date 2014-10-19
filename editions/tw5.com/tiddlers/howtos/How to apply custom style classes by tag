@@ -1,0 +1,30 @@
+created: 20141001132300000
+modified: 20141001132300000
+tags: Learning
+title: How to apply custom style classes by tag
+type: text/vnd.tiddlywiki
+
+You can create a tag that will apply custom style to a tiddler by using the form:
+
+```
+.tc-tagged-<My Class Tag>
+```
+
+where `<My Class Tag>` is the name of the tag which you will give to any tiddler to which you wish to apply the styles defined in `.tc-tagged-<My Class Tag>`.
+
+For instance if you create a style sheet (see [[Using Stylesheets]] for details on creating style sheets) with class .`tc-tagged-NightReader` like this:
+
+```
+.tc-tagged-NightReader {
+  background-color:black;
+  color:orange;
+  padding: 35px 35px;
+}
+.tc-tagged-NightReader .tc-tiddler-body {
+font-size: 1.5em;
+}
+```
+
+then you can apply the class `NightReader` to any tiddler that you want to display in a format possible more suitable for night viewing.
+
+Note that the `NightReader` class is applied to the entire tiddler and not just the tiddler text, so you may need to increase the specificity of your style definitions to make sure that only the tiddler content you want is affected  by the style. (as is demonstrated here by `.tc-tagged-NightReader .tc-tiddler-body`.
