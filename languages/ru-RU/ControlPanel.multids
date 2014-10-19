@@ -10,6 +10,8 @@ Basics/DefaultTiddlers/BottomHint: Заметки, содержащие проб
 Basics/DefaultTiddlers/Prompt: Открывать при старте:
 Basics/DefaultTiddlers/TopHint: Выберите заметки открытые при запуске:
 Basics/Language/Prompt: Привет! Текущий язык:
+Basics/NewJournal/Title/Prompt: Заголовок новых заметок дневника
+Basics/NewJournal/Tags/Prompt: Метки новых заметок дневника
 Basics/OverriddenShadowTiddlers/Prompt: Количество переопределённых встроенных заметок:
 Basics/ShadowTiddlers/Prompt: Количество встроенных заметок:
 Basics/Subtitle/Prompt: Подзаголовок:

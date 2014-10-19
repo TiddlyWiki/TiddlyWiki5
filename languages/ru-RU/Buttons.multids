@@ -34,10 +34,16 @@ Home/Caption: главная
 Home/Hint: Открыть заметки по умолчанию
 Language/Caption: язык
 Language/Hint: Выбрать язык пользовательского интерфейса
-NewTiddler/Caption: новая заметка
-NewTiddler/Hint: Создать новую заметку
 More/Caption: ещё
 More/Hint: Другие действия
+NewHere/Caption: новая заметка здесь
+NewHere/Hint: Создать новую заметку, помеченную этой заметкой
+NewJournal/Caption: дневник
+NewJournal/Hint: Создать новую заметку в дневник
+NewJournalHere/Caption: дневник здесь
+NewJournalHere/Hint: Создать новую заметку в дневник, помеченную этой заметкой
+NewTiddler/Caption: новая заметка
+NewTiddler/Hint: Создать новую заметку
 Permalink/Caption: прямая ссылка
 Permalink/Hint: Показать прямую ссылку на заметку в адресной строке браузера
 Permaview/Caption: прямая ссылка
