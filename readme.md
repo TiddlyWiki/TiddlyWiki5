@@ -130,8 +130,8 @@ How to build a TiddlyWiki5 from individual tiddlers
 </li>
 
 <li>
-<a class='tc-tiddlylink tc-tiddlylink-resolves' href='http://tiddlywiki.com/static/Using%2520TiddlyWiki%2520for%2520GitHub%2520Pages%2520project%2520documentation.html'>
-Using TiddlyWiki for GitHub Pages project documentation
+<a class='tc-tiddlylink tc-tiddlylink-resolves' href='http://tiddlywiki.com/static/Using%2520TiddlyWiki%2520for%2520GitHub%2520project%2520documentation.html'>
+Using TiddlyWiki for GitHub project documentation
 </a>
 </li>
 
