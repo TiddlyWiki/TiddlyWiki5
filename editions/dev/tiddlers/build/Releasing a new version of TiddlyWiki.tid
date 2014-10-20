@@ -7,10 +7,11 @@ title: Releasing a new version of TiddlyWiki
 # Make sure ''Jermolene/TiddlyWiki5'' is fully committed
 # Edit `package.json` to the new version number
 # Run `../build.jermolene.github.io/readme-bld.sh` to build the readme files
-# Commit the new readme files in `TiddlyWiki5` and `build.jermolene.github.io`
+# Commit the new readme files in `TiddlyWiki5` 
 # Restore `package.json` to the previous version number
 # Run `../build.jermolene.github.io/verbump "5.1.3"` (substituting the correct version number) to update the version number, assign it a tag 
 # Run `../build.jermolene.github.io/npm-publish.sh` to publish the release to npm
+# Update the `package.json` for `build.jermolene.github.io` to the new version
 # Verify that the new release of TiddlyWiki is available at https://www.npmjs.org/package/tiddlywiki
 # Check the version number of TiddlyWiki specified in `build.jermolene.github.io/package.json` is the latest version
 # Change current directory to the `build.jermolene.github.io` directory
