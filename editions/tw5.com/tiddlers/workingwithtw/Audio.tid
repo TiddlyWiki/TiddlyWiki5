@@ -1,5 +1,5 @@
 created: 20141018131647392
-modified: 20141018132325901
+modified: 20141019200654436
 tags: [[Working with TiddlyWiki]]
 title: Audio
 type: text/vnd.tiddlywiki
@@ -18,7 +18,7 @@ You can also transclude audio files. For example:
 
 ! External Audio
 
-External audio tiddlers use the ''_canonical_uri'' field to point to an external audio file, and have a block ''text'' field. This reduces their size considerably, and still allows for playback.
+External audio tiddlers use the ''_canonical_uri'' field to point to an external audio file/stream, and have a block ''text'' field. This reduces their size considerably, and still allows for playback.
 
 For example, the tiddler [[Caruso - Ave Maria]] points to an online audio recording hosted on http://archive.org:
 
