@@ -1,6 +1,6 @@
 caption: 5.1.3
-created: 20140928085506951
-modified: 20140928085506951
+created: 20141020134608901
+modified: 20141020134608901
 tags: ReleaseNotes
 title: Release 5.1.3
 type: text/vnd.tiddlywiki
@@ -22,10 +22,12 @@ type: text/vnd.tiddlywiki
 
 !! Hackability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2ffe53f1916e4b746cc6d7e74e8f4ac75c72e38a]] audio "parser" for handling [[Audio]] content
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0dcf54c3b59ed04645928f0ec4ced647e5a0da7f]] support for ActionWidgets
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/65504d5d41e45326ab1b1b6c0c21eea4c9772797]] new [[FilterOperator: addprefix]] and [[FilterOperator: addsuffix]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0c8e5380778303cdd3308bed4a15290214841f8b]] support for custom password prompts
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c26bd4c5a872f56c47e9f5cfc3fada468c53ddde]] the ListMacro to display ''caption'' field if present
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/12e26009eef5e29140ba1a880ff033428d673630]] ImageWidget to allow percentage width and height to be specified
 
 !! Bug Fixes
 
@@ -45,6 +47,7 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/63c174d7ed56284e80ad6cd6ae966b81f9181cc9]] ~KaTeX plugin to be able to work under Node.js to generate static HTML
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/49dc5694a391a391264a4473e4f4422e2472a3b3]] "includeWikis" to merge build targets
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/issues/969]] the build scripts for tiddlywiki.com into a separate repository at https://github.com/Jermolene/build.jermolene.github.io
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/744245ea3249446fd15f504190efb1d828935d01]] boot kernel to raise an error if a missing wiki folder is specified on the command line
 
 !! Contributors
 
@@ -54,8 +57,9 @@ type: text/vnd.tiddlywiki
 * [[@BramChen|https://github.com/BramChen]]
 * [[@buggyj|https://github.com/buggyj]]
 * [[@Eucaly|https://github.com/Eucaly]]
+* [[@Evolena|https://github.com/Evolena]]
 * [[@fghhfg|https://github.com/fghhfg]]
-* [[@gernert|https://github.com/gernert]]
+* [[@Marxsal|https://github.com/Marxsal]]
 * [[@pmario|https://github.com/pmario]]
 * [[@simonbaird|https://github.com/simonbaird]]
 * [[@TheDiveO|https://github.com/TheDiveO]]
