@@ -24,3 +24,7 @@ A similar syntax can be used to transclude a list of tiddlers matching a specifi
 {{{ [tag[mechanism]] }}}
 {{{ [tag[mechanism]] ||TemplateTitle}}}
 ```
+
+See also:
+
+* [[Confusion between Transclusion and Substitution]]
