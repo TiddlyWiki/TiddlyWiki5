@@ -2,14 +2,14 @@ title: $:/language/Search/
 
 Filter/Caption: Filter
 Filter/Hint: Suche mit [["filter expression"|http://tiddlywiki.com/static/Filters.html]].
-Filter/Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
-Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> Treffer</small>//
+Filter/Matches: //<small><<resultCount>> Treffer</small>//
+Matches: //<small><<resultCount>> Treffer</small>//
 Shadows/Caption: Schatten
 Shadows/Hint: Suche in Schatten-Tiddlern.
-Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> Treffer</small>//
+Shadows/Matches: //<small><<resultCount>> Treffer</small>//
 Standard/Caption: Standard
 Standard/Hint: Suche in Standard-Tiddlern.
-Standard/Matches: //<small><$count filter="[!is[system]search{$:/temp/advancedsearch}]"/> matches</small>//
+Standard/Matches: //<small><<resultCount>> matches</small>//
 System/Caption: System
 System/Hint: Suche in System-Tiddlern.
-System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> matches</small>//
+System/Matches: //<small><<resultCount>> matches</small>//

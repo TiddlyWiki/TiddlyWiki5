@@ -2,14 +2,14 @@ title: $:/language/Search/
 
 Filter/Caption: Фильтр
 Filter/Hint: Поиск с помощью [[фильтров|http://tiddlywiki.com/static/Filters.html]]
-Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> совпадений</small>//
-Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> совпадений</small>//
+Filter/Matches: //<small><<resultCount>> совпадений</small>//
+Matches: //<small><<resultCount>> совпадений</small>//
 Shadows/Caption: Встроенные
 Shadows/Hint: Поиск встроенных заметок
-Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> совпадений</small>//
+Shadows/Matches: //<small><<resultCount>> совпадений</small>//
 Standard/Caption: Обычные
 Standard/Hint: Поиск обычных заметок
-Standard/Matches: //<small><$count filter="[!is[system]search{$:/temp/advancedsearch}]"/> совпадений</small>//
+Standard/Matches: //<small><<resultCount>> совпадений</small>//
 System/Caption: Системные
 System/Hint: Поиск системных заметок
-System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> совпадений</small>//
+System/Matches: //<small><<resultCount>> совпадений</small>//

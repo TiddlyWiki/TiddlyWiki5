@@ -2,14 +2,14 @@ title: $:/language/Search/
 
 Filter/Caption: 篩選
 Filter/Hint: 以[[篩選表達式|http://tiddlywiki.com/static/Filters.html]]搜尋
-Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> 個條目符合條件</small>//
-Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> 個條目符合條件</small>//
+Filter/Matches: //<small><<resultCount>> 個條目符合條件</small>//
+Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Shadows/Caption: 預設
 Shadows/Hint: 尋找預設條目
-Shadows/Matches: //<small><$count filter="[all[shadows]search{$:/temp/advancedsearch}]"/> 個條目符合條件</small>//
+Shadows/Matches: //<small><<resultCount>> 個條目符合條件</small>//
 Standard/Caption: 標準
 Standard/Hint: 尋找一般條目
-Standard/Matches: //<small><$count filter="[!is[system]search{$:/temp/advancedsearch}]"/> 個條目符合條件</small>//
+Standard/Matches: //<small><<resultCount>> 個條目符合條件</small>//
 System/Caption: 系統
 System/Hint: 尋找系統條目
-System/Matches: //<small><$count filter="[is[system]search{$:/temp/advancedsearch}]"/> 個條目符合條件</small>//
+System/Matches: //<small><<resultCount>> 個條目符合條件</small>//

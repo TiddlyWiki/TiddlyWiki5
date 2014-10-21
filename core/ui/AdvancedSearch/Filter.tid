@@ -21,8 +21,10 @@ caption: {{$:/language/Search/Filter/Caption}}
 </$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
 <div class="tc-search-results">
 <<lingo Filter/Matches>>
 <$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
 </div>
+</$set>
 </$reveal>
