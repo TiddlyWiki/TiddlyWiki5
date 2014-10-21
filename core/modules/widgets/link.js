@@ -158,11 +158,11 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 			// IE doesn't like these content types
 			if(!$tw.browser.isIE) {
 				dataTransfer.setData("text/vnd.tiddler",jsonData);
-				dataTransfer.setData("text/plain",textData);
+				dataTransfer.setData("text/plain",this.to);
 				dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURI(jsonData));
 			}
 			dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(jsonData));
-			dataTransfer.setData("Text",textData);
+			dataTransfer.setData("Text",this.to);
 			event.stopPropagation();
 		} else {
 			event.preventDefault();
