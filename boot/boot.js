@@ -121,7 +121,7 @@ $tw.utils.error = function(err) {
 	var errHeading = "Internal JavaScript Error",
 		promptMsg = "Well, this is embarrassing. It is recommended that you restart TiddlyWiki by refreshing your browser";
 	// Log the error to the console
-	console.error(err);
+	console.error($tw.node ? "\x1b[1;31m" + err + "\x1b[0m" : err);
 	if($tw.browser && !$tw.node) {
 		// Display an error message to the user
 		var dm = $tw.utils.domMaker,

@@ -13,6 +13,13 @@ Various static utility functions.
 "use strict";
 
 /*
+Display a warning, in colour if we're on a terminal
+*/
+exports.warning = function(text) {
+	console.log($tw.node ? "\x1b[1;33m" + text + "\x1b[0m" : text);
+}
+
+/*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */
