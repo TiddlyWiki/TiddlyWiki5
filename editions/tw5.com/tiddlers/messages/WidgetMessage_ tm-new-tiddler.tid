@@ -17,7 +17,7 @@ The title for the draft tiddler is chosen according to these rules:
 * If a hashmap was used without a title field, use a default title, if necessary making it unique with a numeric suffix
 * If a template tiddler was used, use the title of the template tiddler, if necessary making it unique with a numeric suffix
 
-The new tiddler message is usually generated with the LinkWidget, ButtonWidget or ActionSendMessageWidget and is handled by the NavigatorWidget.
+The new tiddler message is usually generated with the ButtonWidget or ActionSendMessageWidget and is handled by the NavigatorWidget.
 
 ! Example
 
