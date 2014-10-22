@@ -1,0 +1,34 @@
+caption: 5.1.4
+created: 20141022175524581
+modified: 20141022175524581
+tags: ReleaseNotes
+title: Release 5.1.4
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.4...v5.1.5]]//
+
+!! Usability Improvements
+
+* 
+
+!! Hackability Improvements
+
+* 
+
+!! Bug Fixes
+
+* 
+
+!! Node.js Changes
+
+//These changes are only relevant to people using TiddlyWiki under Node.js//
+
+* 
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@danielo515|https://github.com/danielo515]]
+* [[@gernert|https://github.com/gernert]]
+
