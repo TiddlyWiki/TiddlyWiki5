@@ -4,38 +4,43 @@
 This is invoked as a shell script by NPM when the `tiddlywiki` command is typed
 */
 
-var $tw = require("./boot/boot.js").TiddlyWiki();
+var idx,
+	$tw = require("./boot/boot.js").TiddlyWiki();
 
 // console.log("Command used:\n", process.argv, "\n");
 
 // if the command is --npm_serve and the environment variable is not set, ignore the command
-// and pass it to tiddlywiki.js. It will show a help text. 
-if (process.argv[2] == "--npm_serve" && process.env.npm_package_config_serve_edition ) {
-
-	process.argv[2] =	process.env.npm_package_config_serve_edition;
-	process.argv[3] =	process.env.npm_package_config_serve_command;
-	process.argv[4] =	process.env.npm_package_config_serve_port;
-	process.argv[5] =	process.env.npm_package_config_serve_roottiddler;
-	process.argv[6] =	process.env.npm_package_config_serve_rendertype;
-	process.argv[7] =	process.env.npm_package_config_serve_servetype;
-	process.argv[8] =	process.env.npm_package_config_serve_username;
-	process.argv[9] =	process.env.npm_package_config_serve_userpw;
-	process.argv[10] =	process.env.npm_package_config_serve_host;
-	process.argv[11] =	process.env.npm_package_config_serve_pathprefix;
+// and pass it to tiddlywiki.js. It will show a help text.
+// Since the TW --serve command expects parameters at special positions every element has to be touched :/
+// TODO: fix this
+if (process.argv[2] == "--npmserve" && process.env.npm_package_config_serve_edition ) {
+	idx = 2;
+	process.argv[idx++] = process.env.npm_package_config_serve_edition;
+	if (process.env.npm_package_config_verbose == "--verbose") process.argv[idx++] = process.env.npm_package_config_verbose;
+	process.argv[idx++] = "--server";
+	process.argv[idx++] = process.env.npm_package_config_serve_port;
+	process.argv[idx++] = "";
+	process.argv[idx++] = "";
+	process.argv[idx++] = "";
+	process.argv[idx++] = "";
+	process.argv[idx++] = "";
+	process.argv[idx++] = process.env.npm_package_config_serve_host;
 }
 
-if (process.argv[2] == "--npm_build" && process.env.npm_package_config_serve_edition ) {
-    var pe_output = process.env.npm_package_config_build_output_command,
-        pe_element = process.env.npm_package_config_build_element,
-        idx = 2;
+if (process.argv[2] == "--npmbuild" && process.env.npm_package_config_serve_edition ) {
+	idx = 2;
+	process.argv[idx++] = process.env.npm_package_config_build_edition;
 
-    process.argv[idx++] = process.env.npm_package_config_build_edition;
-    
-	if (pe_output) process.argv[idx++] = process.env.npm_package_config_build_output_command;
-	if (pe_output) process.argv[idx++] = process.env.npm_package_config_build_output_dir;
+	// output is hardcoded because with the TW default behaviour is hard to find.
+	// If users RTFM they'll find out, what needs to be done to change it. 
+	process.argv[idx++] = "--output";
+	process.argv[idx++] = "output";
 
-    process.argv[idx++] = process.env.npm_package_config_build_command;
-	if (pe_element) process.argv[idx++] = process.env.npm_package_config_build_element;
+	// default is build all, if no element is defined. 
+	process.argv[idx++] = "--build";
+	if (process.env.npm_package_config_build_element) {
+		process.argv[idx++] = process.env.npm_package_config_build_element;
+	}
 }
 
 if (process.env.npm_package_config_verbose == "--verbose") console.log("Command used:\n", process.argv, "\n");

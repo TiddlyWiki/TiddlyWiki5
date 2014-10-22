@@ -1,0 +1,25 @@
+title: $:/language/Help/npmserve
+description: This command is used if TW is called with: `npm run serve`
+
+This command is used if TW is called with `npm run serve`.
+
+IMPORTANT: It can ''only'' be used with: `npm run`!
+
+```
+npm run serve
+```
+
+Default config parameters are:
+
+* "serve_edition": "./editions/tw5.com-server"
+* "serve_port" : "8080"
+* "serve_host": ""
+* "verbose": "--verbose"
+
+Parameters can be changed with eg:
+
+`npm config set tiddlywiki:serve_editon ./editions/xyz`
+
+use: `npm config --help`
+
+or see: https://www.npmjs.org/doc/misc/npm-scripts.html

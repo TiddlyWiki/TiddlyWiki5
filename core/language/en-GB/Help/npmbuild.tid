@@ -1,0 +1,25 @@
+title: $:/language/Help/npmbuild
+description: This command is used if TW is called with: `npm run build`
+
+This command is used if TW is called with `npm run build`.
+
+IMPORTANT: It can ''only'' be used with: `npm run`!
+
+```
+npm run build
+```
+
+Default config parameters are:
+
+* "build_edition": "./editions/tw5.com"
+* "build_command": "--build"
+* "build_element": ""
+* "verbose": "--verbose"
+
+Parameters can be changed with eg:
+
+`npm config set tiddlywiki:build_editon ./editions/xyz`
+
+use: `npm config --help`
+
+or see: https://www.npmjs.org/doc/misc/npm-scripts.html
