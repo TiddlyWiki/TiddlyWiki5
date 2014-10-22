@@ -13,7 +13,6 @@ title: Releasing a new version of TiddlyWiki
 # Run `../build.jermolene.github.io/npm-publish.sh` to publish the release to npm
 # Update the `package.json` for `build.jermolene.github.io` to the new version
 # Verify that the new release of TiddlyWiki is available at https://www.npmjs.org/package/tiddlywiki
-# Check the version number of TiddlyWiki specified in `build.jermolene.github.io/package.json` is the latest version
 # Change current directory to the `build.jermolene.github.io` directory
 # Run `npm install` to install the correct version of TiddlyWiki
 # Change current directory to the `TiddlyWiki5` directory
