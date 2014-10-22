@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Date
+caption: Date
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Date/]]
+[all[tiddlers+shadows]prefix[$:/language/RelativeDate/]]
+\end
+
+Dates.
+
+<<translatableStringEditor>>

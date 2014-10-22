@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Filters
+caption: Filters
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Filters/]]
+\end
+
+Filters.
+
+<<translatableStringEditor>>

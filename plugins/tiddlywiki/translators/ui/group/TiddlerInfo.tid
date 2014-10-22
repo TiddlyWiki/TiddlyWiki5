@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/TiddlerInfo
+caption: Tiddler Info
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/TiddlerInfo/]]
+\end
+
+Tiddler info panel.
+
+<<translatableStringEditor>>

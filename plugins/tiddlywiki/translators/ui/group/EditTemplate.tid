@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/EditTemplate
+caption: Edit Template
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/EditTemplate/]]
+\end
+
+Edit template.
+
+<<translatableStringEditor>>

@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Buttons
+caption: Buttons
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Buttons/]]
+\end
+
+Toolbar buttons.
+
+<<translatableStringEditor>>

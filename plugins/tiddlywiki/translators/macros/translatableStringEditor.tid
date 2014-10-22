@@ -1,0 +1,29 @@
+title: $:/plugins/tiddlywiki/translators/macros/translatableStringEditor
+tags: $:/tags/Macro
+
+\define translatableStringEditor(editorTag:"input")
+<div class="tc-translators-string-table">
+
+<$count filter=<<translatableTiddlerTitles>>/> translatable tiddlers in this group
+
+<$list filter=<<translatableTiddlerTitles>>>
+<div>
+
+<hr>
+
+Title: <$link><$text text=<<currentTiddler>>/></$link>
+
+<$edit-text tag="$editorTag$" type="text" class="tc-edit-texteditor"/>
+
+Core en-GB text:
+
+<textarea class="tc-edit-texteditor" readonly>
+
+<$view tiddler="$:/core" subtiddler=<<currentTiddler>>/>
+
+</textarea>
+
+</div>
+</$list>
+</div>
+\end

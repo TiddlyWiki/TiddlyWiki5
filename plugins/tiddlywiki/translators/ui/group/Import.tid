@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Import
+caption: Import
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Import/]]
+\end
+
+Import mechanism.
+
+<<translatableStringEditor>>

@@ -1,0 +1,25 @@
+{
+	"plugins": [
+		"tiddlywiki/translators"
+	],
+	"languages": [
+		"en-US",
+		"en-GB",
+		"de-AT",
+		"de-DE",
+		"fr-FR",
+		"zh-Hans",
+		"zh-Hant",
+		"it-IT",
+		"ja-JP",
+		"ru-RU"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	}
+}
