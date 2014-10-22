@@ -16,5 +16,5 @@ node ./tiddlywiki.js \
 # Prepend the type information that TiddlyWeb needs to turn the .html file into a .tid file
 
 echo "type: text/html" > output/app.txt
-echo "" >> tmp/app.txt
+echo "" >> output/app.txt
 cat output/app.html >> output/app.txt
