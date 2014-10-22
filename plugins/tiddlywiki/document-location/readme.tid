@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/document-location/readme
+
+!! Global Macros
+
+[[The document-location plugin|$:/plugins/tiddlywiki/document-location]] defines several global macros, to simplify typing.
+
+''Important:'' For the background info, read the "plugin:system" tab! For advanced usage have a look at the "plugin:advanced" tab!
+
+There are "Actual values", that are empty. Values vary, if the TW is a "file" TW, if it is hosted from a server or if it is shared on a network drive.
+
+|Macro Name |Actual Value|h
+|`<<document-filedomain>>` |<<document-filedomain>> |
+|`<<document-filepath>>` |<<document-filepath>> |
+|`<<document-filename>>` |<<document-filename>> |
+|`<<document-hash>>` |<<document-hash>> |
+|`<<document-host>>` |<<document-host>> |
+|`<<document-hostname>>` |<<document-hostname>> |
+|`<<document-origin>>` |<<document-origin>> |
+|`<<document-port>>` |<<document-port>> |
+|`<<document-protocol>>` |<<document-protocol>> |
+|`<<document-search>>` |<<document-search>> |
+|`<<document-href>>` |<<document-href>> |
+|`<<document-pathname>>` |<<document-pathname>> |

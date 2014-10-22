@@ -4,6 +4,7 @@
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/document-location",
 		"tiddlywiki/browser-sniff"
 	],
 	"themes": [
