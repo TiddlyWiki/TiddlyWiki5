@@ -12,6 +12,8 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 
 * [[Font size|$:/themes/tiddlywiki/vanilla/metrics/fontsize]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/>
 * [[Line height|$:/themes/tiddlywiki/vanilla/metrics/lineheight]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/>
+* [[Font size for tiddler bodies|$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/>
+* [[Line height for tiddler bodies|$:/themes/tiddlywiki/vanilla/metrics/bodylineheight]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/>
 * [[Story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]] //(the distance between the left of the screen and the left margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/>
 * [[Story top position|$:/themes/tiddlywiki/vanilla/metrics/storytop]] //(the distance between the top of the screen ad the top margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/>
 * [[Story right|$:/themes/tiddlywiki/vanilla/metrics/storyright]] //(the distance between the left side of the screen and the left margin of the sidebar area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/>

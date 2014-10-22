@@ -709,8 +709,8 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-tiddler-frame .tc-tiddler-body {
-	font-size: 15px;
-	line-height: 22px;
+	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
+	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
 }
 
 .tc-titlebar, .tc-tiddler-edit-title {

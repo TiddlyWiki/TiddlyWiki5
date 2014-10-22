@@ -1,5 +1,7 @@
 title: $:/themes/tiddlywiki/vanilla/metrics/
 
+bodyfontsize: 15px
+bodylineheight: 22px
 fontsize: 14px
 lineheight: 20px
 storyleft: 0px
