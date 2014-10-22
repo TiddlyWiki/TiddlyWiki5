@@ -7,7 +7,7 @@ This is invoked as a shell script by NPM when the `tiddlywiki` command is typed
 var idx,
 	$tw = require("./boot/boot.js").TiddlyWiki();
 
-console.log("argv", process.argv);
+// console.log("argv", process.argv);
 
 // if the command is --npmserve and the environment variable is not set, ignore the command
 // and pass it to tiddlywiki.js. It will show a help text.
