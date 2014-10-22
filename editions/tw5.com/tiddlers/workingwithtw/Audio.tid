@@ -1,10 +1,10 @@
 created: 20141018131647392
 modified: 20141019200654436
-tags: [[Working with TiddlyWiki]]
+tags: [[Working with TiddlyWiki]] Features
 title: Audio
 type: text/vnd.tiddlywiki
 
-Audio files can be incorporated into TiddlyWiki in a very similar way to [[images|Images]].
+Audio files can be incorporated into TiddlyWiki in a very similar way to [[images|Images in WikiText]].
 
 ! Embedded Audio
 
