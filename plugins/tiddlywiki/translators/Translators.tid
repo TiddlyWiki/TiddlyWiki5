@@ -10,11 +10,7 @@ title: $:/Translators
 [all[tiddlers+shadows]!is[tiddler]prefix[$:/language/]] [all[tiddlers+shadows]!is[tiddler]prefix[$:/config/NewJournal/]] [[GettingStarted]!is[tiddler]] [[$:/SiteTitle]!is[tiddler]] [[$:/SiteSubtitle]!is[tiddler]] +[sort[title]]
 \end
 
-Number of translatable tiddlers: <$count filter=<<allTheTranslatableTiddlerTitles>>/>
-
-Number of tiddlers translated so far: <$count filter=<<allTheTranslatedTiddlerTitles>>/>
-
-Number of tiddlers not yet translated: <$count filter=<<allTheNotTranslatedTiddlerTitles>>/>
+Number of translated tiddlers: <$count filter=<<allTheTranslatedTiddlerTitles>>/> of <$count filter=<<allTheTranslatableTiddlerTitles>>/>
 
 {{$:/core/ui/PageTemplate/pagecontrols}}
 

@@ -1,8 +1,3 @@
 title: $:/plugins/tiddlywiki/translators/readme
 
-! Introduction
-
 This plugin exposes a new system tiddler [[$:/Translators]] that presents a user interface for creating and maintaining translations.
-
-! Quick Start
-
