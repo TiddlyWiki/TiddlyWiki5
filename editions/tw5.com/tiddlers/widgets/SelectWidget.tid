@@ -1,12 +1,13 @@
-created: 201310241419
-modified: 201310300837
+caption: select
+created: 20131024141900000
+modified: 20141024155137508
 tags: Widgets
 title: SelectWidget
-caption: select
+type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The select widget displays an [[HTML select element|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select]] containing a list of items defined by `<option>` and `<optgroup>` elements and binds the selected value to the text of a tiddler field or index.
+The select widget displays a popup menu based on a [[HTML select element|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select]]. The popup (or dropdown) contains a list of items defined by `<option>` and `<optgroup>` elements. The selected value to the text of a specified tiddler field or index.
 
 For example, this select widget displays a list of the tags in this wiki:
 
