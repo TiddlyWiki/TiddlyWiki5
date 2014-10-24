@@ -6,7 +6,12 @@ tags: $:/tags/TranslationGroup
 [all[tiddlers+shadows]prefix[$:/language/Date/]]
 [all[tiddlers+shadows]prefix[$:/language/RelativeDate/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Date/]] [all[current]removeprefix[$:/language/RelativeDate/]]
+\end
 
-Dates.
+! Date
+
+Absolute and relative dates.
 
 <<translatableStringEditor>>

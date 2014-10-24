@@ -5,6 +5,11 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/Import/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Import/]]
+\end
+
+! Import
 
 Import mechanism.
 

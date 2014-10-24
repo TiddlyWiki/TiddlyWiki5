@@ -5,7 +5,12 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/EditTemplate/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/EditTemplate/]]
+\end
 
-Edit template.
+! Edit Template
+
+Strings used in the tiddler edit template.
 
 <<translatableStringEditor>>

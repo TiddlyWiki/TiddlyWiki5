@@ -5,7 +5,12 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/Buttons/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Buttons/]]
+\end
 
-Toolbar buttons.
+! Buttons
+
+Toolbar buttons. The ''/Caption'' tiddlers specify the text to be displayed on the button and the ''//Hint'' tiddlers specify the tooltip text.
 
 <<translatableStringEditor>>

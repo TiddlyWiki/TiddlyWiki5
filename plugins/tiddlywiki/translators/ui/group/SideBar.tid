@@ -5,7 +5,12 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/SideBar/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/SideBar/]]
+\end
 
-Sidebar.
+! Sidebar
+
+Sidebar-related translatable strings.
 
 <<translatableStringEditor>>

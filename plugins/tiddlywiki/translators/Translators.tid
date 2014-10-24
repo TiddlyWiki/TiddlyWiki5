@@ -16,4 +16,6 @@ Number of tiddlers translated so far: <$count filter=<<allTheTranslatedTiddlerTi
 
 Number of tiddlers not yet translated: <$count filter=<<allTheNotTranslatedTiddlerTitles>>/>
 
+{{$:/core/ui/PageTemplate/pagecontrols}}
+
 <<tabs "[all[tiddlers+shadows]tag[$:/tags/TranslationGroup]sort[caption]]" "$:/plugins/tiddlywiki/translators/ui/group/Miscellaneous" "$:/state/translatorsTab" "tc-vertical">>

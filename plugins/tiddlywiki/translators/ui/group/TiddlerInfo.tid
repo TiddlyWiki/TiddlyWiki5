@@ -5,6 +5,11 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/TiddlerInfo/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/TiddlerInfo/]]
+\end
+
+! Tiddler Info
 
 Tiddler info panel.
 

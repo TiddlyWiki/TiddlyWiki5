@@ -1,29 +1,76 @@
 title: $:/plugins/tiddlywiki/translators/macros/translatableStringEditor
 tags: $:/tags/Macro
 
-\define translatableStringEditor(editorTag:"input")
+\define translatableStringEditorInner(tiddlerTitle)
+<tr>
+<td width="1px">
+<$link><$list filter=<<shortenTitle>>><$text text=<<currentTiddler>>/></$list></$link>
+</td>
+<td width="100%">
+<$list filter="""$(editFieldsFilter)$""" variable="editorField">
+<$edit-text tag="$(editorTagName)$" field=<<editorField>> type="text" class="tc-edit-texteditor"/>
+</$list>
+</td>
+<td width="1px">
+<div class="tc-drop-down-wrapper">
+<$button class="tc-btn-invisible" popup=<<qualify "$:/state/popup/translationInfo/$tiddlerTitle$">>>
+{{$:/core/images/down-arrow}}
+</$button>
+<$reveal state=<<qualify "$:/state/popup/translationInfo/$tiddlerTitle$">> type="popup" position="belowleft" text="" default="">
+<div class="tc-drop-down">
+<p>
+Original en-GB text:
+</p>
+<$list filter="""$(editFieldsFilter)$""" variable="editorField">
+<p>
+<textarea class="tc-edit-texteditor" readonly><$view tiddler="$:/core" subtiddler=<<currentTiddler>> field=<<editorField>>/>
+</textarea>
+</p>
+</$list>
+<p>
+<$button message="tm-delete-tiddler" param=<<currentTiddler>>>
+Delete translation
+</$button>
+</p>
+</div>
+</$reveal>
+</div>
+</td>
+</tr>
+\end
+
+\define translatableStringEditorOuter()
 <div class="tc-translators-string-table">
 
-<$count filter=<<translatableTiddlerTitles>>/> translatable tiddlers in this group
+//<$count filter=<<translatableTiddlerTitles>>/> translatable tiddlers in this group//
 
+<$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="textarea"> Multi-line editors</$radio><br>
+<$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="input"> Single-line editors</$radio>
+
+<table>
+<tbody>
+<tr>
+<th>
+Title
+</th>
+<th>
+Fields: $(editFieldsFilter)$
+</th>
+<th>
+&nbsp;
+</th>
+</tr>
 <$list filter=<<translatableTiddlerTitles>>>
-<div>
-
-<hr>
-
-Title: <$link><$text text=<<currentTiddler>>/></$link>
-
-<$edit-text tag="$editorTag$" type="text" class="tc-edit-texteditor"/>
-
-Core en-GB text:
-
-<textarea class="tc-edit-texteditor" readonly>
-
-<$view tiddler="$:/core" subtiddler=<<currentTiddler>>/>
-
-</textarea>
-
-</div>
+<$macrocall $name="translatableStringEditorInner" tiddlerTitle=<<currentTiddler>>/>
 </$list>
-</div>
+</tbody>
+</table>
+\end
+
+\define translatableStringEditor(editorTag:"input",editorFields:"text")
+<$set name="editorTagName" value={{$:/plugins/tiddlywiki/translators/editorTag}}>
+<$set name="editFieldsFilter" value="""$editorFields$""">
+<<translatableStringEditorOuter>>
+</$set>
+</$set>
 \end

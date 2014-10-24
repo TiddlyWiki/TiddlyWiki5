@@ -5,6 +5,11 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/ControlPanel/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/ControlPanel/]]
+\end
+
+! Control Panel
 
 [[Control Panel|$:/ControlPanel]].
 

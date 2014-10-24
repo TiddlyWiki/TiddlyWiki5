@@ -5,7 +5,12 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/Filters/]]
 \end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Filters/]]
+\end
 
-Filters.
+! Filters
+
+Translatable titles of the preconfigured filters available in [[advanced search|$:/AdvancedSearch]].
 
 <<translatableStringEditor>>
