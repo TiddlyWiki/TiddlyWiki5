@@ -25,7 +25,8 @@ This process will work on most desktop browsers. Note that none of your personal
 
 # Drag your old TiddlyWiki HTML file into the browser window
 #* If the file is encrypted you will be prompted for the password
-# Review the list of tiddlers that will be upgradedck ''Upgrade''
+# Review the list of tiddlers that will be upgraded
+# Click ''Upgrade''
 # Save changes to save the new version
 
 This will download a file called ''upgrade.html'' to your computer. This file is the upgrade of your old file. You may need to open the location where ''upgrade.html'' was downloaded, rename ''upgrade.html'' with the name of the old file you are upgrading, and replace the old file by moving the new file in its place.
@@ -36,6 +37,8 @@ You can also download http://tiddlywiki.com/upgrade.html locally and perform the
 
 ! Problems with Upgrades
 
+!! Firefox Security Restrictions
+
 In case you run into this error with the upgrader, upon confirming the upgrade selection :
 
 <<<
@@ -44,11 +47,13 @@ Error while saving:
 Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
 <<<
 
-* The upgrading script triggers a security restriction in Firefox, we suggest using Chrome instead until this can be resolved.<br><br>
+The upgrade operation falls foul of a security restriction in Firefox. Until this can be resolved, we suggest either using the offline upgrader, or using Chrome to perform the upgrade:
 
-*# Use Chrome to open http://tiddlywiki.com/upgrade.html, then drag your local TiddlyWiki html file to be upgraded into the upgrader window, as described above in ''Online upgrading''.<br><br>
-*#After you've saved your upgraded file, you should be able to open it in Firefox and [[save using TiddlyFox|Saving with TiddlyFox]] again.<br><br>  
+*# Use Chrome to open http://tiddlywiki.com/upgrade.html, then drag your local TiddlyWiki html file to be upgraded into the upgrader window, as described above in ''Online upgrading''
+*# After you've saved your upgraded file, you should be able to open it in Firefox and [[save using TiddlyFox|Saving with TiddlyFox]] again
 * //See also : [[Saving on TiddlySpot]]//
+
+!! Incompatible Customisations
 
 It is possible for a customisation applied in a previous version to break when upgraded to the latest version. There are two techniques you can use to help track down issues:
 

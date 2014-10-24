@@ -21,6 +21,7 @@ Note that your password is sent unencrypted when using TiddlySpot. From http://f
 
 No. Tiddlyspot does not use SSL/https. Your password is sent in clear text when uploading and when authenticating to access a private site. This means that your Tiddlyspot is vulnerable to packet sniffing and your password could be discovered by a malicious third party. Also your data is transmitted unencrypted when you view your site, even if it is a private site. For this reason please don't put sensitive information such as banking details in your Tiddlyspot and don't use a password that you use for other high security sites.
 <<<
+
 ! Problems with saving on TiddlySpot
 
 In case you run into this error when uploading a new or freshly upgraded local TiddlyWiki to TiddlySpot :
@@ -31,13 +32,11 @@ Error while saving:
 Error:NS_ERROR_DOM_BAD_URI: Access to restricted URI denied
 <<<
 
-* The upgrading script triggers a security restriction in Firefox, we suggest using Chrome instead until this can be resolved.<br><br>
+The upgrade operation falls foul of a security restriction in Firefox. Until this can be resolved, we suggest using Chrome.
 
-*# Use Chrome to open the local TiddlyWiki document you want to upload to TiddlySpot and follow the steps 1 through 5 described above..<br><br>
-
-*# Once you've checked the TiddlySpot-hosted TiddlyWiki loads properly in Chrome, you should be able to access, edit and [[save using TiddlyFox|Saving with TiddlyFox]] again.<br><br>  
-
-* After you've uploaded your local document once, further editing and saving of the online version hosted on TiddlySpot should work with any modern browser of your choice.<br><br>  
-** Don't forget to fill in the TiddlySpot wikiname and password in your TiddlySpot TiddlyWiki control panel for any new browser you want to save changes with !<br><br>
+*# Use Chrome to open the local TiddlyWiki document you want to upload to TiddlySpot and follow the steps 1 through 5 described above
+*# Once you've checked the TiddlySpot-hosted TiddlyWiki loads properly in Chrome, you should be able to access, edit and [[save using TiddlyFox|Saving with TiddlyFox]] again
+* After you've uploaded your local document once, further editing and saving of the online version hosted on TiddlySpot should work with any modern browser of your choice.
+** Don't forget to fill in the TiddlySpot wikiname and password in your TiddlySpot TiddlyWiki control panel for any new browser you want to use for saving changes
 
 * //See also : [[Upgrading]]//
