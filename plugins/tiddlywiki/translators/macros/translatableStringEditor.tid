@@ -39,6 +39,22 @@ Delete translation
 </tr>
 \end
 
+\define translatableStringEditorWrapperAll(tiddlerTitle)
+<<translatableStringEditorInner "$tiddlerTitle$">>
+\end
+
+\define translatableStringEditorWrapperTranslated(tiddlerTitle)
+<$list filter="[all[current]is[tiddler]]">
+<<translatableStringEditorInner "$tiddlerTitle$">>
+</$list>
+\end
+
+\define translatableStringEditorWrapperNotTranslated(tiddlerTitle)
+<$list filter="[all[current]!is[tiddler]]">
+<<translatableStringEditorInner "$tiddlerTitle$">>
+</$list>
+\end
+
 \define translatableStringEditorOuter()
 <div class="tc-translators-string-table">
 
@@ -46,6 +62,12 @@ Delete translation
 
 <$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="textarea"> Multi-line editors</$radio><br>
 <$radio tiddler="$:/plugins/tiddlywiki/translators/editorTag" value="input"> Single-line editors</$radio>
+
+<$select tiddler="$:/plugins/tiddlywiki/translators/editorView">
+<option value="translatableStringEditorWrapperAll">Show all strings</option>
+<option value="translatableStringEditorWrapperTranslated">Only show translated strings</option>
+<option value="translatableStringEditorWrapperNotTranslated">Only show strings that have not been translated</option>
+</$select>
 
 <table>
 <tbody>
@@ -60,9 +82,11 @@ Fields: $(editFieldsFilter)$
 &nbsp;
 </th>
 </tr>
+<$set name="editorView" value={{$:/plugins/tiddlywiki/translators/editorView}}>
 <$list filter=<<translatableTiddlerTitles>>>
-<$macrocall $name="translatableStringEditorInner" tiddlerTitle=<<currentTiddler>>/>
+<$macrocall $name=<<editorView>> tiddlerTitle=<<currentTiddler>>/>
 </$list>
+</$set>
 </tbody>
 </table>
 \end
