@@ -1,0 +1,13 @@
+title: $:/core/ui/PageTemplate/pagecontrols
+
+\define config-title()
+$:/config/PageControlButtons/Visibility/$(listItem)$
+\end
+<div class="tc-page-controls">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+<$reveal type="nomatch" state=<<config-title>> text="hide">
+<$transclude tiddler=<<listItem>> mode="inline"/>
+</$reveal>
+</$list>
+</div>
+
