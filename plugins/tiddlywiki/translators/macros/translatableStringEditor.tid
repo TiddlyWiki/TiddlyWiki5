@@ -8,7 +8,7 @@ tags: $:/tags/Macro
 </td>
 <td width="100%">
 <$list filter="""$(editFieldsFilter)$""" variable="editorField">
-<$edit-text tag="$(editorTagName)$" field=<<editorField>> type="text" class="tc-edit-texteditor"/>
+<$edit-text tag="$(editorTagName)$" field=<<editorField>> type="text" class="tc-edit-texteditor" minHeight="10px"/>
 </$list>
 </td>
 <td width="1px">
