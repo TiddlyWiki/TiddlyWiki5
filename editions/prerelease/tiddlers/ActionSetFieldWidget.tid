@@ -44,3 +44,12 @@ src='<$button>
 <$action-navigate $to="HelloThere"/>
 Modify ~HelloThere
 </$button>'/>
+
+Here is an example of a button that assigns tags and fields to the tiddler HelloThere, and then initiates editing it:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="HelloThere" tags="MoreTag [[Further More Tags]]" color="green"/>
+<$action-sendmessage $message="tm-edit-tiddler" $param="HelloThere"/>
+Edit ~HelloThere
+</$button>'/>
