@@ -1,9 +1,7 @@
 title: SetVariableWidget
 created: 201310241419
-modified: 201311151827
+modified: 20141025115603373
 tags: Widgets
 caption: setvariable
 
-The `<$setvariable>` widget has been renamed `<$set/>`; see SetWidget for more details.
-
-For the moment, you can continue to use `<$setvariable>` as a synonym for `<$set/>`, but it will be removed for the beta.
+The `<$setvariable>` widget is a synonym for `<$set/>`; see SetWidget for more details.
