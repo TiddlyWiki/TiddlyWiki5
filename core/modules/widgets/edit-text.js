@@ -12,7 +12,7 @@ Edit-text widget
 /*global $tw: false */
 "use strict";
 
-var MIN_TEXT_AREA_HEIGHT = 100; // Minimum height of textareas in pixels
+var DEFAULT_MIN_TEXT_AREA_HEIGHT = "100px"; // Minimum height of textareas in pixels
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
@@ -137,6 +137,8 @@ EditTextWidget.prototype.execute = function() {
 	this.editClass = this.getAttribute("class");
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editSize = this.getAttribute("size");
+	this.editAutoHeight = this.getAttribute("autoHeight","yes") === "yes";
+	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT)
 	this.editFocusPopup = this.getAttribute("focusPopup");
 	// Get the editor element tag and type
 	var tag,type;
@@ -164,7 +166,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 EditTextWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	// Completely rerender if any of our attributes have changed
-	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index) {
+	if(changedAttributes.tiddler || changedAttributes.field || changedAttributes.index || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.placeholder || changedAttributes.size || changedAttributes.autoHeight || changedAttributes.minHeight || changedAttributes.focusPopup) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {
@@ -203,15 +205,18 @@ Fix the height of textareas to fit their content
 EditTextWidget.prototype.fixHeight = function() {
 	var self = this,
 		domNode = this.domNodes[0];
-	if(domNode && !domNode.isTiddlyWikiFakeDom && this.editTag === "textarea") {
+	if(this.editAutoHeight && domNode && !domNode.isTiddlyWikiFakeDom && this.editTag === "textarea") {
 		$tw.utils.nextTick(function() {
 			// Resize the textarea to fit its content, preserving scroll position
 			var scrollPosition = $tw.utils.getScrollPosition(),
 				scrollTop = scrollPosition.y;
+			// Measure the specified minimum height
+			domNode.style.height = self.editMinHeight;
+			var minHeight = domNode.offsetHeight;
 			// Set its height to auto so that it snaps to the correct height
 			domNode.style.height = "auto";
 			// Calculate the revised height
-			var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,MIN_TEXT_AREA_HEIGHT);
+			var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,minHeight);
 			// Only try to change the height if it has changed
 			if(newHeight !== domNode.offsetHeight) {
 				domNode.style.height =  newHeight + "px";
