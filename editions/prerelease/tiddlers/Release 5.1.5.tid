@@ -17,6 +17,7 @@ type: text/vnd.tiddlywiki
 
 !! Hackability Improvements
 
+* [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/d8248cfba709a4bcff03ebeec2bdd4683441467f]] new ActionSetFieldWidget for manipulating tiddler fields
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
 
 !! Bug Fixes
