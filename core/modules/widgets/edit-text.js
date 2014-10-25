@@ -138,7 +138,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editPlaceholder = this.getAttribute("placeholder");
 	this.editSize = this.getAttribute("size");
 	this.editAutoHeight = this.getAttribute("autoHeight","yes") === "yes";
-	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT)
+	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 	this.editFocusPopup = this.getAttribute("focusPopup");
 	// Get the editor element tag and type
 	var tag,type;
