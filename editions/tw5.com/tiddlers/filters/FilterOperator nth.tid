@@ -5,7 +5,7 @@ caption: nth
 title: FilterOperator: nth
 type: text/vnd.tiddlywiki
 
-Without an operand, the ''nth'' filter operator returns the first entry in the current list. The optional operand specifies the number of entries to return.
+Without an operand, the ''nth'' filter operator returns the first entry in the current list. The optional operand specifies the position of the entry in the list.
 
 For example:
 
