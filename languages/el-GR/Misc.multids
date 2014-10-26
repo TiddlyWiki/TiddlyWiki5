@@ -1,0 +1,22 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Αυτό το tiddler περιέχει δυαδικά δεδομένα
+ClassicWarning/Hint: Αυτό το tiddler έχει γραφτεί με την TiddlyWiki κλασική μορφή κειμένου, που δεν είναι πλήρως συμβατή με αυτήν του TiddlyWiki 5ης έκδοσης. Δείτε στο  http://tiddlywiki.com/static/Upgrading.html για περισσότερες λεπτομέρειες. 
+ClassicWarning/Upgrade/Caption: αναβάθμιση
+CloseAll/Button: κλείστα όλα
+ConfirmCancelTiddler: Θέλετε να απορριφθούν οι όποιες τροποποιήσεις έχετε κάνει για το tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Θέλετε να διαγραφεί το tiddler "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Θέλετε να αντικαταστήσετε το tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Πρόκειται να τροποποιήσετε ένα Σκιώδη Tiddler. Οποιεσδήποτε τροποποιήσεις θα αντικαταστήσουν το τυπικό σύστημα και υπάρχει κίνδυνος να δυσκολευτείτε σε σε μελλοντική αναβάθμιση. Είστε σίγουροι ότι θέλετε να τροποποιήσετε το "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: Νέο tiddler
+DropMessage: Ρίχτε εδώ (ή πατήστε το πλήκτρο Esc για ακύρωση)
+Encryption/ConfirmClearPassword: Θέλετε να καθαρίσετε το συνθηματικό; Αυτό θα έχει ως συνέπεια να μην κρυπτογραφητε το wiki όταν κάνετε αποθήκευση
+Encryption/PromptSetPassword: Ορίστε το νέο συνθηματικό για αυτό το TiddlyWiki
+InvalidFieldName: Μη έγκυροι χαρακτήρες στο όνομα πεδίου "<$text text=<<fieldName>>/>". Τα ονόματα πεδίων μπορούν να περιέχουν μόνο πεζούς χαρακτήρες, ψηφία και τους χαρακτήρες κάτω παύλα (`_`), μείον (`-`) και τελεία (`.`)
+MissingTiddler/Hint: Ανύπαρκτο tiddler "<$text text=<<currentTiddler>>/>" - κάντε κλικ {{$:/core/images/edit-button}} για να δημιουργηθεί
+RecentChanges/DateFormat: DDth MMM YYYY
+SystemTiddler/Tooltip: Αυτό είναι ένα tiddler συστήματος
+TagManager/Colour/Heading: Χρώμα
+TagManager/Icon/Heading: Εικονίδιο
+TagManager/Tag/Heading: Ετικέτα
+UnsavedChangesWarning: Έχετε μη αποθηκευμένες αλλαγές στο TiddlyWiki

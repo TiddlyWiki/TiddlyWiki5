@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Automatically run configured commands
+
+Χτίζει τους προκαθορισμένους στόχους για το τρέχον wiki. Αν δεν έχει προκαθοριστεί στόχος τότε όλοι οι διαθέσιμοι στόχοι θα χτιστούν.
+
+```
+--build <στόχος> [<στόχος> ...]
+```
+
+Οι στόχοι ορίζονται στο `tiddlywiki.info` αρχείο ενός  wiki φακέλου.
+

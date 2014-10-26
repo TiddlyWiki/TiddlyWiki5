@@ -1,0 +1,66 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: Προηγμένη αναζήτηση
+AdvancedSearch/Hint: Προηγμένη αναζήτηση
+Cancel/Caption: Άκυρο
+Cancel/Hint: Ακυρώνει την τροποποίηση αυτού του tiddler
+Clone/Caption: Κλωνοποίησε
+Clone/Hint: Κλωνοποίησε αυτό το tiddler
+Close/Caption: Κλείσε
+Close/Hint: Κλείσε αυτό το tiddler
+CloseAll/Caption: Κλείσε τα όλα
+CloseAll/Hint: Κλείσε όλα τα tiddlers
+CloseOthers/Caption: Κλείσε τα υπόλοιπα
+CloseOthers/Hint: Κλείσε τα υπόλοιπα tiddlers
+ControlPanel/Caption: Πίνακας ελέγχου
+ControlPanel/Hint: Άνοιξε τον πίνακα ελέγχου
+Delete/Caption: Διαγραφή
+Delete/Hint: Διέγραψε αυτό το tiddler
+Edit/Caption: Τροποποίηση
+Edit/Hint: Τροποποίησε αυτό το tiddler
+Encryption/Caption: Κρυπτογράφηση
+Encryption/Hint: Θέσε ή καθάρισε το συνθηματικό για την αποθήκευση αυτού του wiki
+Encryption/ClearPassword/Caption: Χωρίς συνθηματικό
+Encryption/ClearPassword/Hint: Αναιρεί το συνθηματικό και αποθηκεύει αυτό το  wiki χωρίς κρυπτογράφηση
+Encryption/SetPassword/Caption: θέσε συνθηματικό
+Encryption/SetPassword/Hint: Θέσε ένα συνθηματικό για να να αποθηκεύσεις αυτό το wiki κρυπτογραφημένο
+FullScreen/Caption: Πλήρη-οθόνη
+FullScreen/Hint: Εναλλαγη κατάστασης πλήρους-οθόνης
+Import/Caption: Εισαγωγή
+Import/Hint: Εισαγωγή αρχείων
+Info/Caption: Πληροφορίες
+Info/Hint: Δείξε πληροφορίες για αυτό το tiddler
+Home/Caption: Αρχική
+Home/Hint: Ανοίγει τα τυπικά tiddlers
+Language/Caption: Γλώσσα
+Language/Hint: Επιλέξτε την γλώσσα για την διεπαφή του χρήστη
+More/Caption: περισσότερα
+More/Hint: Περισσότερες ενέργειες
+NewHere/Caption: Νέο εδώ
+NewHere/Hint: Δημιούργησε ένα νέο tiddler που έχει ώς ετικέτα το τρέχον
+NewJournal/Caption: Νέο ημερολόγιο
+NewJournal/Hint: Δημιούργησε ένα νέο ημερολογιακό tiddler
+NewJournalHere/Caption: Νέο ημερολόγιο εδώ
+NewJournalHere/Hint: Δημιούργησε ένα νέο ημερολογιακό tiddler με ετικέτα το παρόν
+NewTiddler/Caption: Νέο tiddler
+NewTiddler/Hint: Δημιούργησε ένα νέο tiddler
+Permalink/Caption: Μόνιμος σύνδεσμος
+Permalink/Hint: Θέσε στην γραμμή διεύθυνσης του προγράμματος πλοήγησης έναν μόνιμο σύνδεσμο για αυτό το tiddler
+Permaview/Caption: Μόνιμη όψη
+Permaview/Hint: Θέσε στην γραμμή διεύθυνσης του προγράμματος πλοήγησης έναν μόνιμο σύνδεσμο για όλα τα tiddlers σε αυτή την ιστορία
+Refresh/Caption: Ανανέωση
+Refresh/Hint: Επαναφόρτιση του wiki
+Save/Caption: αποθήκευση
+Save/Hint: Αποθήκευσε αυτό το tiddler
+SaveWiki/Caption: αποθήκευση αλλαγών
+SaveWiki/Hint: Αποθήκευσε τις αλλαγές
+StoryView/Caption: Ιστορική όψη
+StoryView/Hint: Επέλεξε την ιστορική οπτικοποίηση
+HideSideBar/Caption: απόκρυψη πλευρικής γραμμής
+HideSideBar/Hint: Κρύψε την πλευρική γραμμή
+ShowSideBar/Caption: εμφάνιση πλευρικής γραμμής
+ShowSideBar/Hint: Δείξε την πλευρική γραμμή
+TagManager/Caption: Διαχειριστής ετικετών
+TagManager/Hint: Άνοιξε τον διαχειριστή ετικετών
+Theme/Caption: Θέμα
+Theme/Hint: Διάλεξε το οπτικό θέμα
