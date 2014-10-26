@@ -11,6 +11,6 @@ tags: $:/tags/TranslationGroup
 
 ! Buttons
 
-Toolbar buttons. The ''/Caption'' tiddlers specify the text to be displayed on the button and the ''//Hint'' tiddlers specify the tooltip text.
+Toolbar buttons. The ''/Caption'' tiddlers specify the text to be displayed on the button and the ''/Hint'' tiddlers specify the tooltip text.
 
 <<translatableStringEditor>>
