@@ -9,9 +9,9 @@ Fields/Add/Button: προσθήκη
 Fields/Add/Name/Placeholder: όνομα πεδίου
 Fields/Add/Prompt: Πρόσθεσε ένα νέο πεδίο:
 Fields/Add/Value/Placeholder: τιμή πεδίου
-Shadow/Warning: Αυτό είναι ένα σκιώδες tiddler. Οποιεσδήποτε αλλαγές θα παρακαμψουν την τυπική έκδοση
-Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείτε να ανακαλέσετε την τυπική έκδοση του διαγράφωντας αυτό το tiddler
+Shadow/Warning: Αυτό είναι ένα σκιώδες tiddler. Οποιεσδήποτε αλλαγές θα παρακάμψουν την τυπική έκδοση
+Shadow/OverriddenWarning: Αυτό είναι ένα τροποποιημένο σκιώδες tiddler. Μπορείτε να ανακαλέσετε την τυπική έκδοση του διαγράφοντας αυτό το tiddler
 Tags/Add/Button: προσθήκη
-Tags/Add/Placeholder: ονομα ετικέτας
+Tags/Add/Placeholder: όνομα ετικέτας
 Type/Placeholder: τύπος περιεχομένου
 Type/Prompt: Τύπος:

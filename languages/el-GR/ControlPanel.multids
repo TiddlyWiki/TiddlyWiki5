@@ -3,7 +3,7 @@ title: $:/language/ControlPanel/
 Advanced/Caption: Προηγμένα
 Advanced/Hint: Εσωτερικές πληροφορίες σχετικά με αυτό το TiddlyWiki
 Appearance/Caption: Εμφάνιση
-Appearance/Hint: Τρόποι για να παραμετρικοποιήσετε την εμφάνιση του δικού σας TiddlyWiki.
+Appearance/Hint: Τρόποι για να παραμετροποιήσετε την εμφάνιση του δικού σας TiddlyWiki.
 Basics/AnimDuration/Prompt:  Διάρκεια κίνησης:
 Basics/Caption: Βασικά
 Basics/DefaultTiddlers/BottomHint: Χρησιμοποιήστε &#91;&#91;διπλές αγκύλες &#93;&#93; για τίτλους με κενά. Ή, μπορείτε να διαλέξετε τη <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">διατήρηση της διάταξης της ιστορίας</$button>
@@ -40,16 +40,16 @@ Palette/Prompt: Τρέχουσα παλέτα:
 Palette/ShowEditor/Caption: εμφάνισε επεξεργαστή
 Plugins/Caption: Πρόσθετα
 Plugins/Disable/Caption: απενεργοποίησε
-Plugins/Disable/Hint: Απενεργοποίησε αυτό το πρόσθετο όταν επαναφορτωθεί η σελίδα
+Plugins/Disable/Hint: Απενεργοποίησε αυτό το πρόσθετο όταν φορτωθεί ξανά η σελίδα
 Plugins/Disabled/Status: (απενεργοποιημένο)
 Plugins/Empty/Hint: Άδειο
 Plugins/Enable/Caption: ενεργοποίησε
-Plugins/Enable/Hint: Ενεργοποίησε αυτό το πρόσθετο όταν επαναφορτωθεί η σελίδα
+Plugins/Enable/Hint: Ενεργοποίησε αυτό το πρόσθετο όταν φορτωθεί ξανά η σελίδα
 Plugins/Language/Prompt: Γλώσσες
 Plugins/Plugin/Prompt: Πρόσθετα
 Plugins/Theme/Prompt: Θέματα
 Saving/Caption: Αποθήκευση
-Saving/Heading: Αποθηκευση
+Saving/Heading: Αποθήκευση
 Saving/TiddlySpot/Advanced/Heading: Προηγμένες ρυθμίσεις
 Saving/TiddlySpot/BackupDir: Φάκελος αντιγράφων ασφαλείας
 Saving/TiddlySpot/Backups: Αντίγραφα ασφαλείας
@@ -66,7 +66,7 @@ Settings/AutoSave/Disabled/Description: Μην αποθηκεύσεις αυτό
 Settings/AutoSave/Enabled/Description: Αυτόματα αποθήκευσε τις αλλαγές
 Settings/AutoSave/Hint: Αυτόματη αποθήκευση αλλαγών κατά την επεξεργασία
 Settings/Caption: Ρυθμίσεις
-Settings/Hint: Αυτές οι ρυθμίσεις σας επιτρέπουν να παραμετρικοποιήσετε την συμπεριφορά του TiddlyWiki.
+Settings/Hint: Αυτές οι ρυθμίσεις σας επιτρέπουν να παραμετροποιήσετε την συμπεριφορά του TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Γραμμή διεύθυνσης πλοήγησης
 Settings/NavigationAddressBar/Hint: Η συμπεριφορά της γραμμής διεύθυνσης του προγράμματος πλοήγησης ιστοσελίδων όταν μεταβαίνετε σε κάποιο tiddler:
 Settings/NavigationAddressBar/No/Description: Μην ενημερώνεις την γραμμή διευθύνσεων 
@@ -74,7 +74,7 @@ Settings/NavigationAddressBar/Permalink/Description: Συμπεριέλαβε τ
 Settings/NavigationAddressBar/Permaview/Description: Συμπεριέλαβε το tiddler προορισμού και την τρέχουσα ακολουθία της ιστορίας
 Settings/NavigationHistory/Caption: Ιστορικό πλοήγησης
 Settings/NavigationHistory/Hint: Ενημέρωση του ιστορικού στο πρόγραμμα πλοήγησης όταν μεταβαίνουμε σε κάποιο tiddler:
-Settings/NavigationHistory/No/Description: Μήν ενημερώσεις το ιστορικό
+Settings/NavigationHistory/No/Description: Μην ενημερώσεις το ιστορικό
 Settings/NavigationHistory/Yes/Description: Ενημέρωσε το ιστορικό
 Settings/ToolbarButtons/Caption: Κουμπιά γραμμής εργαλείων
 Settings/ToolbarButtons/Hint: Τυπική εμφάνιση κουμπιού γραμμής εργαλείων:

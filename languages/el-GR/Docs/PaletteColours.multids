@@ -45,10 +45,10 @@ primary: Γενικά στοιχειώδη
 sidebar-button-foreground: Προσκήνιο κουμπιού πλευρικής γραμμής
 sidebar-controls-foreground-hover: Προσκήνιο αντικειμένων ελέγχου πλευρικής γραμμής σε αιώρηση
 sidebar-controls-foreground: Προσκήνιο αντικειμένων ελέγχου Πλευρικής γραμμής
-sidebar-foreground-shadow: Σκιά προσκηνίο πλευρικής γραμμής
+sidebar-foreground-shadow: Σκιά προσκήνιου πλευρικής γραμμής
 sidebar-foreground: Προσκήνιο πλευρικής γραμμής
 sidebar-muted-foreground-hover: Προσκήνιο σε αιώρηση για βουβή πλευρική γραμμή
-sidebar-muted-foreground: Προσκήνειο βουβής πλευρικής γραμμής
+sidebar-muted-foreground: Προσκήνιο βουβής πλευρικής γραμμής
 sidebar-tab-background-selected: Υπόβαθρο καρτέλας πλευρικής γραμμής για επιλεγμένες καρτέλες
 sidebar-tab-background: Υπόβαθρο καρτέλας πλευρικής γραμμής
 sidebar-tab-border-selected: Περιθώριο καρτέλας πλευρικής γραμμής για επιλεγμένες καρτέλες
@@ -67,7 +67,7 @@ tab-divider: Διαχωριστής καρτελών
 tab-foreground-selected: Προσκήνιο καρτέλας για επιλεγμένες καρτέλες
 tab-foreground: Προσκήνιο καρτέλας
 table-border: Περιθώριο καρτέλας
-table-footer-background: Υπόβαθρο υπότιτιλου σε πίνακα
+table-footer-background: Υπόβαθρο υπότιτλου σε πίνακα
 table-header-background: Υπόβαθρο επικεφαλίδας πίνακα
 tag-background: Υπόβαθρο ετικέτας
 tag-foreground: Προσκήνιο ετικέτας

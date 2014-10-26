@@ -3,6 +3,6 @@
 	"name": "el-GR",
 	"plugin-type": "language",
 	"description": "Ελληνικά (Ελλάδα)",
-	"author": "access-denied",
+	"author": "Stratis Aravias@ΓΕΛ Σαμοθράκης",
 	"core-version": ">=5.0.0"
 }
