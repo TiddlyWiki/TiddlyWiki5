@@ -1,5 +1,5 @@
 created: 201310241419
-modified: 201310300837
+modified: 20141027193838998
 tags: Widgets
 title: ListWidget
 caption: list
@@ -13,11 +13,11 @@ The list widget displays a sequence of tiddlers that match a [[tiddler filter|Fi
 * Listing each of the tags applied to a tiddler
 * Handling the main story river
 
-The tiddlers can either be displayed by transcluding each in turn through an optional template.
+The tiddlers are displayed by transcluding each in turn through a template. There are several ways to specify the template and for controlling the behaviour of the list.
 
 ! Content and Attributes
 
-The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list (alternatively, the template can be specified as a tiddler title in the ``template`` attribute).
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
 
 |!Attribute |!Description |
 |filter |The [[tiddler filter|Filters]] to display |
