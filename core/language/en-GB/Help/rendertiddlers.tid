@@ -7,7 +7,7 @@ Render a set of tiddlers matching a filter to separate files of a specified Cont
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
 ```
 
-By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+By default, the pathname is resolved relative to the `output` subdirectory of the wiki folder. The `--output` command can be used to direct output to a different directory.
 
 Any files in the target directory are deleted. The target directory is recursively created if it is missing.
 
@@ -34,4 +34,4 @@ tiddlywiki ./editions/tw5.com --output ./output --rendertiddler '$:/core/templat
 
 Note: The system tiddlers starting with `$:/` have to be enclosed in single quotes, otherwise the command line parser throws an error message, that it can't use `$:/` as a variable name.
 
-Also see the `--output` and `--rendertiddler` command!
+Also see the `--output` and `--rendertiddler` command
