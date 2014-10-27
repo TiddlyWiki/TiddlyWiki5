@@ -10,3 +10,15 @@ Render an individual tiddler as a specified ContentType, defaults to `text/html`
 By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
 
 Any missing directories in the path to the filename are automatically created.
+
+Example:
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --rendertiddler '$:/core/save/all' 'index.html' 'text/plain'
+```
+
+This command will create an index.html file in the ./output directory, relative to the currend working directory. The `$:/core/save/all` tiddler contains a filter, to build the whole TiddlyWiki file.
+
+Note: `'$:/core/save/all'` has to be enclosed in single quotes, otherwise the command line parser throws an error message, that it can't use `$:/` as a variable name.
+
+Also see the `--output` and `--build` command!

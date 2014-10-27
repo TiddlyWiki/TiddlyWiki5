@@ -10,3 +10,11 @@ Saves a group of tiddlers in their raw text or binary format to the specified di
 By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
 
 Any missing directories in the pathname are automatically created.
+
+Example: 
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --savetiddlers "[tag[external-image]]" "images"
+```
+
+This command will save all image tiddlers tagged "external-image" into the `./output/images` directory.

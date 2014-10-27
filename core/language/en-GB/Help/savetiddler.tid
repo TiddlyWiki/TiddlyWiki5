@@ -1,7 +1,7 @@
 title: $:/language/Help/savetiddler
 description: Saves a raw tiddler to a file
 
-Saves an individual tiddler in its raw text or binary format to the specified filename. 
+Saves an individual tiddler in its raw text or binary format to the specified filename.
 
 ```
 --savetiddler <title> <filename>
@@ -10,3 +10,11 @@ Saves an individual tiddler in its raw text or binary format to the specified fi
 By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
 
 Any missing directories in the path to the filename are automatically created.
+
+Example:
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --savetiddler '$:/favicon.ico' 'favicon.ico'
+```
+
+Note: The system tiddler starting with `$:/` have to be enclosed in single quotes, otherwise the command line parser throws an error message, that it can't use `$:/` as a variable name.

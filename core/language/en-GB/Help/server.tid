@@ -22,16 +22,20 @@ The parameters are:
 
 If the password parameter is specified then the browser will prompt the user for the username and password. Note that the password is transmitted in plain text so this implementation isn't suitable for general use.
 
-For example:
+Examples:
 
 ```
---server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+tiddlywiki ./editions/tw5.com-server --server 8080 '$:/core/save/all' text/plain text/html MyUserName passw0rd
 ```
 
-The username and password can be specified as empty strings if you need to set the hostname or pathprefix and don't want to require a password:
+The username and password can be specified as empty strings if you need to set the hostname or pathprefix and don't want to require a password. 
+
+IMPORTANT: With Windows you have to set empty name or password like this: `'""'`
 
 ```
---server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+tiddlywiki ./editions/tw5.com-server --server 8080 '$:/core/save/all' text/plain text/html "" "" 192.168.0.245
 ```
 
 To run multiple TiddlyWiki servers at the same time you'll need to put each one on a different port.
+
+Note: The system tiddlers starting with `$:/` have to be enclosed in single quotes, otherwise the command line parser throws an error message, that it can't use `$:/` as a variable name.
