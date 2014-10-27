@@ -15,17 +15,9 @@ title: $:/core/ui/SideBarLists
 
 <$reveal state="$:/temp/search" type="nomatch" text="">
 
-<div class="tc-search-results">
-
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$:/temp/search}]"/>""">
-
-{{$:/language/Search/Matches}}
-
+<$set name="searchTiddler" value="$:/temp/search">
+{{$:/core/ui/SearchResults}}
 </$set>
-
-<$list filter="[!is[system]search{$:/temp/search}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
-
-</div>
 
 </$reveal>
 

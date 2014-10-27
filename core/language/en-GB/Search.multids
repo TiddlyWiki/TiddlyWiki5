@@ -1,5 +1,6 @@
 title: $:/language/Search/
 
+DefaultResults/Caption: List
 Filter/Caption: Filter
 Filter/Hint: Search via a [[filter expression|http://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> matches</small>//
