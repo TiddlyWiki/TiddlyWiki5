@@ -13,7 +13,7 @@ The list widget displays a sequence of tiddlers that match a [[tiddler filter|Fi
 * Listing each of the tags applied to a tiddler
 * Handling the main story river
 
-The tiddlers can either be displayed by transcluding each in turn through an optional template.
+The tiddlers can either be displayed as a list of links (default) or by transcluding each in turn through an optional template.
 
 ! Content and Attributes
 
