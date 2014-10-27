@@ -178,3 +178,5 @@ Andrey Yankin, @andrey013, 2014/09/30
 David john, @fghhfg, 2014/10/06
 
 Mark S., @marxsal, 2014/10/18
+
+Erwan Moreau, @erwanm, 2014/10/27
