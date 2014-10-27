@@ -1,4 +1,5 @@
 {
+	"description": "Content for the current prerelease",
 	"plugins": [
 		"tiddlywiki/cecily",
 		"tiddlywiki/googleanalytics",

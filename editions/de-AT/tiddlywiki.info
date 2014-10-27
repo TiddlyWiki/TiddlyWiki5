@@ -1,4 +1,5 @@
 {
+	"description": "German (Österreich) edition",
 	"plugins": [
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff"],

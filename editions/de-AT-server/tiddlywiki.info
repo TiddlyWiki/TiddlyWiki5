@@ -1,4 +1,5 @@
 {
+	"description": "Server configuration of the German (Österreich) edition",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem"

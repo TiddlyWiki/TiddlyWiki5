@@ -1,4 +1,5 @@
 {
+	"description": "Edition for people translating TiddlyWiki",
 	"plugins": [
 		"tiddlywiki/translators"
 	],

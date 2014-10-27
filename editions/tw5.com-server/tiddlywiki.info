@@ -1,4 +1,5 @@
 {
+	"description": "Server configuration of the tw5.com edition",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",

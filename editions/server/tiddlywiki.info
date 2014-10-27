@@ -1,4 +1,5 @@
 {
+	"description": "Basic client-server edition",
 	"plugins": [
 		"tiddlywiki/tiddlyweb",
 		"tiddlywiki/filesystem",

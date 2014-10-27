@@ -1,4 +1,5 @@
 {
+	"description": "Demo of Tank integration",
 	"plugins": [
 		"tiddlywiki/tiddlyweb"
 	],

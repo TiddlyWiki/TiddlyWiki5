@@ -1,4 +1,5 @@
 {
+	"description": "Base edition for TiddlySpace integration",
 	"plugins": [
 		"tiddlywiki/tiddlyweb"
 	],

@@ -21,4 +21,4 @@ Anmerkung:
 * Der --init Befehl löscht alle `includeWikis` Definitionen aus der neuen `tiddlywiki.info` Datei
 * Wenn mehrere Editionen importiert werden, wird die zuletzt importierte `tidlywiki.info` Datei aktiv sein. Alle anderen weden überschrieben.
 
-* `--help editions` listet alle verfügbaren Editionen auf.
+* `--editions` listet alle verfügbaren Editionen auf.

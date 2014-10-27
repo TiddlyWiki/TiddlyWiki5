@@ -1,4 +1,5 @@
 {
+	"description": "TiddlyWiki core tests",
 	"plugins": [
 		"tiddlywiki/jasmine"
 	],

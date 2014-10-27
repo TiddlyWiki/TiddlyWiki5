@@ -20,4 +20,4 @@ Note :
 * La commande //init// échoue si le dossier wiki n'est pas vide
 * La commande //init// supprime les éventuelles définitions `includeWikis` du fichier `tiddlywiki.info` de l'édition spécifiée
 * Lorsque plusieurs éditions sont spécifiées, chaque édition écrase les fichiers qu'elle a en commun avec les précédentes (par conséquent, le fichier `tiddlywiki.info` proviendra de la dernière édition spécifiée)
-* `--help editions` renvoie une liste des éditions disponibles
+* `--editions` renvoie une liste des éditions disponibles
