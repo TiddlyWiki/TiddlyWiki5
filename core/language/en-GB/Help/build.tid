@@ -9,3 +9,10 @@ Build the specified build targets for the current wiki. If no build targets are 
 
 Build targets are defined in the `tiddlywiki.info` file of a wiki folder.
 
+Example:
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --build index 
+```
+
+Will create the index.html file in the ./output folder. The ./output folder, in the example, is relative to the current directory.

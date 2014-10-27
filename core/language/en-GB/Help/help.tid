@@ -8,3 +8,11 @@ Displays help text for a command:
 ```
 
 If the command name is omitted then a list of available commands is displayed.
+
+Example: 
+
+```
+tiddlywiki --help server
+```
+
+This example will display the help text for the `--server` command.

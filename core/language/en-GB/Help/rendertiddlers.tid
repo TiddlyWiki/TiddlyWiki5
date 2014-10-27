@@ -7,12 +7,31 @@ Render a set of tiddlers matching a filter to separate files of a specified Cont
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
 ```
 
-For example:
-
-```
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
-```
-
-By default, the pathname is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.
+By default, the pathname is resolved relative to the `output` subdirectory of the wiki folder. The `--output` command can be used to direct output to a different directory.
 
 Any files in the target directory are deleted. The target directory is recursively created if it is missing.
+
+Example:
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --rendertiddlers 'HelloThere GettingStarted' '$:/core/templates/static.tiddler.html' './static' 'text/plain'
+```
+
+This command creates 2 tiddlers HelloThere and GettingStarted in the `./output/static` directory. The CSS is missing! See the last example, how to create the CSS file.
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --rendertiddlers '[!is[system]]' '$:/core/templates/static.tiddler.html' './static' 'text/plain'
+```
+
+This command writes all tiddlers of the wiki into a ./static directory as single html files. If you view them in the browser, you'll see, they are not formatted, since the static.css is missing.
+
+Use the following command to create it: 
+
+```
+tiddlywiki ./editions/tw5.com --output ./output --rendertiddler '$:/core/templates/static.template.css' 'static/static.css' 'text/plain'
+
+```
+
+Note: The system tiddlers starting with `$:/` have to be enclosed in single quotes, otherwise the command line parser throws an error message, that it can't use `$:/` as a variable name.
+
+Also see the `--output` and `--rendertiddler` command

@@ -206,7 +206,10 @@ Object.defineProperty(TW_Element.prototype, "formattedTextContent", {
 				b.push("\n");
 			}
 			if(this.tag === "li") {
-				b.push("* ");
+				b.push("    ");
+			}
+			if(this.tag === "pre") {
+				b.push("    ");
 			}
 			$tw.utils.each(this.children,function(node) {
 				b.push(node.formattedTextContent);
