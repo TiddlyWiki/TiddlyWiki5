@@ -13,6 +13,8 @@ To create a new search result visualisation:
 # Create a new tiddler tagged [[$:/tags/SearchResults]]
 # Use the widget variable ''searchTiddler'' to access the title of the tiddler containing the current search term
 
+If you'd like the new visualisation to be the default, create a tiddler called [[$:/config/SearchResults/Default]] containing the title of the tiddler containing the search visualisation that you want to display by default.
+
 Here is an example of an alternative visualisation that displays results in reverse chronological order:
 
 ```
