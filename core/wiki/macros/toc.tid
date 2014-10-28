@@ -10,7 +10,7 @@ tags: $:/tags/Macro
 <$view field="title"/>
 </$view>
 </$list>
-<$macrocall $name="toc" tag=<<currentTiddler>>/>
+<$macrocall $name="toc" tag=<<currentTiddler>> sort="$sort$"/>
 </li>
 </$list>
 </ol>
