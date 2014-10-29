@@ -3,7 +3,7 @@ caption: Types
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]]
+[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Docs/Types/]]

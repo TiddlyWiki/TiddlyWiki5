@@ -3,7 +3,7 @@ caption: Module Types
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[shadows+tiddlers]prefix[$:/language/Docs/ModuleTypes/]]
+[all[shadows+tiddlers]prefix[$:/language/Docs/ModuleTypes/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Docs/ModuleTypes/]]

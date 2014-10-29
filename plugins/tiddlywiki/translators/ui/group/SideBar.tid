@@ -3,7 +3,7 @@ caption: Sidebar
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/SideBar/]]
+[all[tiddlers+shadows]prefix[$:/language/SideBar/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/SideBar/]]

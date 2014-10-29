@@ -3,7 +3,7 @@ caption: Control Panel
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/ControlPanel/]]
+[all[tiddlers+shadows]prefix[$:/language/ControlPanel/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/ControlPanel/]]

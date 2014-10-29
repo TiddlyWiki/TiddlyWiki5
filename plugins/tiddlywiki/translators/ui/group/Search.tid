@@ -3,7 +3,7 @@ caption: Search
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/Search/]]
+[all[tiddlers+shadows]prefix[$:/language/Search/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Search/]]

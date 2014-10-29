@@ -3,7 +3,7 @@ caption: Help
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/Help/]]
+[all[tiddlers+shadows]prefix[$:/language/Help/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Help/]]

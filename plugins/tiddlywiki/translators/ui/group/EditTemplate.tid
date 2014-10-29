@@ -3,7 +3,7 @@ caption: Edit Template
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/EditTemplate/]]
+[all[tiddlers+shadows]prefix[$:/language/EditTemplate/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/EditTemplate/]]

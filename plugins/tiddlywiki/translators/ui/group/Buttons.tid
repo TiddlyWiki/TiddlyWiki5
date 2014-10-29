@@ -3,7 +3,7 @@ caption: Buttons
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/Buttons/]]
+[all[tiddlers+shadows]prefix[$:/language/Buttons/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Buttons/]]

@@ -3,7 +3,7 @@ caption: Import
 tags: $:/tags/TranslationGroup
 
 \define translatableTiddlerTitles()
-[all[tiddlers+shadows]prefix[$:/language/Import/]]
+[all[tiddlers+shadows]prefix[$:/language/Import/]sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Import/]]

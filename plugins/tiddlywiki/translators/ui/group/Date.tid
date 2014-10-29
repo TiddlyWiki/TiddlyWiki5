@@ -5,6 +5,7 @@ tags: $:/tags/TranslationGroup
 \define translatableTiddlerTitles()
 [all[tiddlers+shadows]prefix[$:/language/Date/]]
 [all[tiddlers+shadows]prefix[$:/language/RelativeDate/]]
++[sort[title]]
 \end
 \define shortenTitle()
 [all[current]removeprefix[$:/language/Date/]] [all[current]removeprefix[$:/language/RelativeDate/]]
