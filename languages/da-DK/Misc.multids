@@ -1,0 +1,22 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Denne tiddler indeholder binære data
+ClassicWarning/Hint: Denne tiddler er skrevet i TiddlyWiki Classic wiki text format, som ikke er fuldt kompatibel med TiddlyWiki version 5. Se http://tiddlywiki.com/static/Upgrading.html for flere detaljer.. 
+ClassicWarning/Upgrade/Caption: Opgradér
+CloseAll/Button: luk alle
+ConfirmCancelTiddler: Ønsker du at fortryde ændringer til denne tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Ønsker du at slette denne tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Du skal til at redigere en skygge tiddler. Enhver ændring vil overskrive standard systemet og gøre fremtidige opgraderinger ikke-trivielle. Er du sikker på, du ønsker at redigere "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Ønsker du at overskrive tiddleren "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: Ny tiddler
+DropMessage: Slip her (eller klik escape for at fortryde)
+Encryption/ConfirmClearPassword: Ønsker du at slette password? Dette vil fjerne den indsatte  encryption, når wikien gemmes
+Encryption/PromptSetPassword: Angiv et nyt password for denne TiddlyWiki
+InvalidFieldName: Illegale tegn i felt navn "<$text text=<<fieldName>>/>". Felter kan kun indeholde små bogstaver, tal og tegnene undersstreg (`_`), bindestreg (`-`) og punktum (`.`)
+MissingTiddler/Hint: Manglende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} for at oprette den.
+RecentChanges/DateFormat: DDth MMM YYYY
+SystemTiddler/Tooltip: Dette er en system tiddler
+TagManager/Colour/Heading: Farve
+TagManager/Icon/Heading: Ikon
+TagManager/Tag/Heading: Tag
+UnsavedChangesWarning: Du har ændringer som ikke er gemt i TiddlyWiki

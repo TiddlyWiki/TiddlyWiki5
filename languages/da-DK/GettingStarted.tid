@@ -1,0 +1,13 @@
+title: GettingStarted
+
+Velkommen til TiddlyWiki, den ikke-lineære personlige web notesbog.
+
+For at komme i gang, skal du først sikre dig, at du kan gemme med succes - se http://tiddlywiki.com/ for detaljerede instruktioner.
+
+Derefter kan du:
+
+* Oprette ny tiddlere ved brug af 'plus' knappen i sidebar
+* Besøg kontrol panelet ved at bruge 'tandhjuls' knappen i sidebar for at tilpasse din wiki
+** Stands visning af denne besked ved at ændre stardard tiddlere under Basis fanen
+* Gem ændringer ved brug af  'gem' knappen i sidebar
+* Lær mere om WikiText

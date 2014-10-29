@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Kør konfigurerede kommandoer automatisk.
+
+Bygger de  specificerede bygge mål for den aktuelle wiki.Hvis der ikke er specificeret nogen bygge mål vil alle tilstedeværende mål blive bygget.
+
+```
+--build <target> [<target> ...]
+```
+
+Bygge targets defineres i  `tiddlywiki.info` filen i en wiki mappe.
+

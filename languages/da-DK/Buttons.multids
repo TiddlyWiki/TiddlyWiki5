@@ -1,0 +1,66 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: avanceret søgning
+AdvancedSearch/Hint: Avanceret søgning
+Cancel/Caption: fortryd
+Cancel/Hint: Fortryd redigering af denne tiddler
+Clone/Caption: klon
+Clone/Hint: Klon denne tiddler
+Close/Caption: luk
+Close/Hint: Luk denne tiddler
+CloseAll/Caption: Luk alle
+CloseAll/Hint: Luk alle tiddlere
+CloseOthers/Caption: luk andre
+CloseOthers/Hint: Luk andre tiddlere
+ControlPanel/Caption: Kontrol panel
+ControlPanel/Hint: Åbn kontrol panel
+Delete/Caption: slet
+Delete/Hint: Slet denne tiddler
+Edit/Caption: redigér
+Edit/Hint: Redigér denne tiddler
+Encryption/Caption: encryption
+Encryption/ClearPassword/Caption: slet password
+Encryption/ClearPassword/Hint: Slet password og gem denne wiki uden encryption
+Encryption/Hint: Sæt eller slet et  password for at gemme denne wiki
+Encryption/SetPassword/Caption: Angiv password
+Encryption/SetPassword/Hint: Angiv et password for gemme denne wiki med encryption
+FullScreen/Caption: fuldskærm
+FullScreen/Hint: Gå til eller forlad fuldskærms tilstand
+HideSideBar/Caption: skjul sidebar
+HideSideBar/Hint: Skjul sidebar
+Home/Caption: hjem
+Home/Hint: Åbn standard tiddlerne
+Import/Caption: import
+Import/Hint: Import filer
+Info/Caption: info
+Info/Hint: Vis information om denne tiddler
+Language/Caption: sprog
+Language/Hint: Vælg brugerflade sprog
+More/Caption: mere
+More/Hint: Flere muligheder
+NewHere/Caption: ny her
+NewHere/Hint: Opret en ny tiddler tagget med denne
+NewJournal/Caption: ny journal
+NewJournal/Hint: Opret en ny journal tiddler
+NewJournalHere/Caption: ny journal her
+NewJournalHere/Hint: opret en ny journal tiddler tagget med denne
+NewTiddler/Caption: ny tiddler
+NewTiddler/Hint: Opret en ny tiddler
+Permalink/Caption: permalink
+Permalink/Hint: Sæt browserens adresse linie til et direkte link til denne tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Sæt browserens adresse linie til et direkte link til alle tiddlere i denne historie
+Refresh/Caption: genopfrisk
+Refresh/Hint: Udfør en fuld genopfriskning af wiki'en
+Save/Caption: gem
+Save/Hint: Gem denne tiddler
+SaveWiki/Caption: gem ændringer
+SaveWiki/Hint: Gem ændringer
+ShowSideBar/Caption: vis sidebar
+ShowSideBar/Hint: Vis sidebar
+StoryView/Caption: historieSyn
+StoryView/Hint: Vælg historie visualisering
+TagManager/Caption: tag administrator
+TagManager/Hint: Åbn tag manager
+Theme/Caption: tema
+Theme/Hint: Vælg visnings tema
