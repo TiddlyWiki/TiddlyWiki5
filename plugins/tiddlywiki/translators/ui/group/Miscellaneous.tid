@@ -19,6 +19,7 @@ tags: $:/tags/TranslationGroup
 [all[tiddlers+shadows]prefix[$:/config/NewJournal/]]
 [[$:/SiteTitle]]
 [[$:/SiteSubtitle]]
+[[$:/core/readme]]
 +[sort[title]]
 \end
 \define shortenTitle()

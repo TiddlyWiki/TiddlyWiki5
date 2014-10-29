@@ -36,6 +36,7 @@
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/TiddlerInfo.multids","language/TiddlerInfo.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/NewJournal.multids","language/NewJournal.multids","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/Notifications.multids","language/Notifications.multids","text/plain",
+			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/CoreReadMe.tid","language/CoreReadMe.tid","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/GettingStarted.tid","language/GettingStarted.tid","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/SiteTitle.tid","language/SiteTitle.tid","text/plain",
 			"--rendertiddler","$:/plugins/tiddlywiki/translators/templates/SiteSubtitle.tid","language/SiteSubtitle.tid","text/plain",
