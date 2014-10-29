@@ -1,5 +1,6 @@
 title: $:/language/Search/
 
+DefaultResults/Caption: Список
 Filter/Caption: Фильтр
 Filter/Hint: Поиск с помощью [[фильтров|http://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><<resultCount>> совпадений</small>//
