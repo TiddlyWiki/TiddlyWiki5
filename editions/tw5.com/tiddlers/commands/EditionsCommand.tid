@@ -3,6 +3,6 @@ modified: 20141029114305697
 tags: Commands
 title: EditionsCommand
 type: text/vnd.tiddlywiki
-caption: output
+caption: editions
 
 {{$:/language/Help/editions}}
