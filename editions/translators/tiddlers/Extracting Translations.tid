@@ -1,0 +1,11 @@
+title: Extracting Translations
+
+The [[Instructions for Translators]] yield a standalone TiddlyWiki HTML file that contains tiddlers corresponding to each translated string.
+
+The following command is used to generate the tiddler source files for the repository:
+
+```
+tiddlywiki editions/translators/ --verbose --load <path to HTML file> --build output-files
+```
+
+The source files are generated in `editions/translators/output/language`. They should be copied to the appropriate `languages` directory, and an appropriate flag image placed in `icon.tid`.

@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/SiteTitle.tid
+
+{{$:/SiteTitle||$:/plugins/tiddlywiki/translators/templates/tid}}

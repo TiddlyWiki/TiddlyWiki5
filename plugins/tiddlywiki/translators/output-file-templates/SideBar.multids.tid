@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/SideBar.multids
+
+{{$:/language/SideBar/||$:/plugins/tiddlywiki/translators/templates/multids}}
