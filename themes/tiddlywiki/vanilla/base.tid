@@ -918,6 +918,11 @@ canvas.tc-edit-bitmapeditor  {
 	width: 1em;
 }
 
+.tc-drop-down-language-chooser img {
+	width: 2em;
+	vertical-align: baseline;
+}
+
 .tc-drop-down a, .tc-drop-down button {
 	display: block;
 	padding: 0 14px 0 14px;
