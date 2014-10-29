@@ -1,10 +1,16 @@
 title: $:/language/
 
-ClassicWarning/Hint: この tiddler はクラシックスタイルの TiddlyWiki フォーマットで書かれています。このフォーマットは TiddlyWiki バージョン 5 との完全な互換性はありません。詳しくは http://tiddlywiki.com/static/Upgrading.html を参照してください。
+BinaryWarning/Prompt: このtiddlerにはバイナリデータが含まれています。
+ClassicWarning/Hint: この tiddler はクラシックスタイルのTiddlyWikiフォーマットで書かれています。このフォーマットはTiddlyWiki5との完全な互換性はありません。詳しくは http://tiddlywiki.com/static/Upgrading.html を参照してください。
 ClassicWarning/Upgrade/Caption: アップグレード
 CloseAll/Button: すべて閉じる
-ConfirmDeleteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を削除しますか?
+ConfirmCancelTiddler: 本当にこのtiddler "<$text text=<<title>>/>" の編集内容を取り消しますか？
+ConfirmDeleteTiddler: 本当にこのtiddler "<$text text=<<title>>/>" を削除しますか?
+ConfirmEditShadowTiddler: 隠しtiddlerを編集します。将来のアップグレードで互換性がとれなくなるかもしれません。本当にこのtiddler "<$text text=<<title>>/>" を編集しますか？
 ConfirmOverwriteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を上書きしますか?
+DropMessage: ドロップしてください。（止めるには、キャンセルをクリックしてください。）
+Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
+Encryption/PromptSetPassword: パスワードを入力してください。
 InvalidFieldName: フィールド名に不正な文字が使われています "<$text text=<<fieldName>>/>". フィールド名に使用できるのは英小文字かアンダースコア(`_`)、ハイフン(`-`)、ピリオド(`.`)のみです。
 MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{$:/core/images/edit-button}} して作成
 RecentChanges/DateFormat: YYYY-MM-DD
@@ -12,3 +18,4 @@ SystemTiddler/Tooltip: これはシステム tiddler です
 TagManager/Colour/Heading: 色
 TagManager/Icon/Heading: アイコン
 TagManager/Tag/Heading: タグ
+UnsavedChangesWarning: 保存していない編集内容があります。

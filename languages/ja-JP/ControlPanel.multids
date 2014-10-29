@@ -1,15 +1,17 @@
 title: $:/language/ControlPanel/
 
 Advanced/Caption: 詳細設定
-Advanced/Hint: この TiddlyWiki の内部情報
-Appearance/Caption: 表示形式
-Appearance/Hint: この TiddlyWiki の見え方を変更する各種方法です。
+Advanced/Hint: このWikiのシステム情報です。
+Appearance/Caption: 表示
+Appearance/Hint: このWikiの表示方法の設定をします。
 Basics/AnimDuration/Prompt: アニメーション時間:
 Basics/Caption: 基本
 Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは &#91;&#91;二重の角カッコ&#93;&#93; を使用してください。そのほか <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保存時の表示を維持</$button> することもできます。
 Basics/DefaultTiddlers/Prompt: デフォルト tiddler:
 Basics/DefaultTiddlers/TopHint: このファイルを開いたときに初期表示される tiddler を設定してください:
 Basics/Language/Prompt: 現在の言語:
+Basics/NewJournal/Tags/Prompt: 日誌（journal tiddler）のタグ
+Basics/NewJournal/Title/Prompt: 日誌（journal tiddlers）のデフォルトのタイトル
 Basics/OverriddenShadowTiddlers/Prompt: 上書きされている隠し tiddler 数:
 Basics/ShadowTiddlers/Prompt: 隠し tiddler 数:
 Basics/Subtitle/Prompt: サブタイトル:
@@ -19,18 +21,30 @@ Basics/Tiddlers/Prompt: tiddler 数:
 Basics/Title/Prompt: この ~TiddlyWiki のタイトル:
 Basics/Username/Prompt: 編集者として表示するユーザ名:
 Basics/Version/Prompt: ~TiddlyWiki バージョン:
+EditorTypes/Caption: エディタ
+EditorTypes/Editor/Caption: エディタ
+EditorTypes/Hint: tiddlerの種類と、それを編集するエディタの関係です。
+EditorTypes/Type/Caption: tiddlerの種類
+Info/Caption: 情報
+Info/Hint: このWikiについて
 LoadedModules/Caption: ロード済みモジュール
 LoadedModules/Hint: 以下は現在ロード済みのモジュールの一覧で、ソースの tiddler にリンクしています。斜体表記のものにはソースがありませんが、これは通常ブートプロセス中に設定されたものです。
 Palette/Caption: パレット
-Palette/Editor/Clone/Caption: クローン
-Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前にクローンを作成することをお勧めします
-Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました
+Palette/Editor/Clone/Caption: 複製
+Palette/Editor/Clone/Prompt: このシャドウパレットを編集する前に複製を作成することをお勧めします。
 Palette/Editor/Prompt: 編集中
+Palette/Editor/Prompt/Modified: このシャドウパレットは更新されました。
 Palette/Editor/Reset/Caption: リセット
 Palette/HideEditor/Caption: エディタを隠す
 Palette/Prompt: 現在のパレット:
 Palette/ShowEditor/Caption: エディタを表示
 Plugins/Caption: プラグイン
+Plugins/Disable/Caption: 無効
+Plugins/Disable/Hint: ページを再読込したときにプラグインを無効にする。
+Plugins/Disabled/Status: (無効)
+Plugins/Empty/Hint: 無し
+Plugins/Enable/Caption: 有効
+Plugins/Enable/Hint: ページを再読込したときにプラグインを有効にする。
 Plugins/Language/Prompt: 言語
 Plugins/Plugin/Prompt: プラグイン
 Plugins/Theme/Prompt: テーマ
@@ -39,6 +53,7 @@ Saving/Heading: 保存
 Saving/TiddlySpot/Advanced/Heading: 詳細設定
 Saving/TiddlySpot/BackupDir: バックアップディレクトリ
 Saving/TiddlySpot/Backups: バックアップ
+Saving/TiddlySpot/Description: この設定は、 http://tiddlyspot.com または互換性のあるリモートサーバーへ保存する場合に使います。
 Saving/TiddlySpot/Filename: アップロードファイル名
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //サーバーのURLには `http://<wikiname>.tiddlyspot.com/store.cgi` がデフォルトで使用されます。ほかのサーバーのアドレスを指定することもできます。//
@@ -47,13 +62,39 @@ Saving/TiddlySpot/ServerURL: サーバーURL
 Saving/TiddlySpot/UploadDir: アップロードディレクトリ
 Saving/TiddlySpot/UserName: Wiki 名
 Settings/AutoSave/Caption: 自動保存
+Settings/AutoSave/Disabled/Description: 自動的に保存しない。
+Settings/AutoSave/Enabled/Description: 自動的に保存する。
+Settings/AutoSave/Hint: 自動的に保存するかどうかの設定
+Settings/Caption: 設定
+Settings/Hint: TiddlyWikiの動作を設定します。
+Settings/NavigationAddressBar/Caption: ナビゲーションアドレスバー
+Settings/NavigationAddressBar/Hint: ナビゲーションアドレスバーの動作:
+Settings/NavigationAddressBar/No/Description: アドレスバーを変更しない。
+Settings/NavigationAddressBar/Permalink/Description: tiddlerをアドレスに含める。
+Settings/NavigationAddressBar/Permaview/Description: 開くtiddlerと、現在開いているtiddlerをアドレスに含める。
+Settings/NavigationHistory/Caption: 操作履歴
+Settings/NavigationHistory/Hint: tiddlerを操作したときのブラウザの履歴の設定:
+Settings/NavigationHistory/No/Description: 履歴を残さない。
+Settings/NavigationHistory/Yes/Description: 履歴を残す。
+Settings/ToolbarButtons/Caption: ボタンの表示
+Settings/ToolbarButtons/Hint: ツールバーのボタンの表示の設定:
+Settings/ToolbarButtons/Icons/Description: アイコンを表示する。
+Settings/ToolbarButtons/Text/Description: テキストを表示する。
 StoryView/Caption: 表示スタイル
 StoryView/Prompt: 現在の表示スタイル:
 Theme/Caption: テーマ
 Theme/Prompt: 現在のテーマ:
 TiddlerFields/Caption: Tiddlerフィールド
 TiddlerFields/Hint: 以下はこの TiddlyWiki で使用されているすべての tiddler フィールド の一覧です（システム tiddler も含みますが、隠し tiddler は含んでいません）。
+Toolbars/Caption: ツールバー
+Toolbars/EditToolbar/Caption: 編集画面
+Toolbars/EditToolbar/Hint: 編集画面で表示するボタンを選んでください。
+Toolbars/Hint: ツールバーに表示するボタンを選んでください。
+Toolbars/PageControls/Caption: サイドバー
+Toolbars/PageControls/Hint: サイドバーに表示するボタンを選んでください。
+Toolbars/ViewToolbar/Caption: 閲覧画面
+Toolbars/ViewToolbar/Hint: 閲覧画面に表示するボタンを選んでください。
 Tools/Caption: ツール
-Tools/Download/Full/Caption: Download full wiki
+Tools/Download/Full/Caption: 全てダウンロードする
 Tools/Export/AllAsStaticHTML/Caption: すべての tiddler を含む閲覧用 HTML としてダウンロードする
 Tools/Export/Heading: エクスポート
