@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/action-setfield.js
 type: application/javascript
 module-type: widget
 
-Action widget to send a message
+Action widget to set fields on a tiddler.
 
 \*/
 (function(){
