@@ -71,6 +71,7 @@ EditCodeMirrorWidget.prototype.render = function(parent,nextSibling) {
 	// Get the configuration options for the CodeMirror object
 	var config = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}).configuration || {},
 		editInfo = this.getEditInfo();
+console.log("editInfo",editInfo);
 	if(!("lineWrapping" in config)) {
 		config.lineWrapping = true;
 	}
@@ -148,7 +149,7 @@ EditCodeMirrorWidget.prototype.getEditInfo = function() {
 	if(this.editType) {
 		type = this.editType;
 	}
-	return {value: value, type: type, update: update};
+	return {value: value || "", type: type, update: update};
 };
 
 /*
