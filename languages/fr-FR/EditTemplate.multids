@@ -1,5 +1,6 @@
 title: $:/language/EditTemplate/
 
+Body/External/Hint: Ceci est un tiddler externe, conservé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
 Body/Hint: Utilisez WikiText pour formater ou ajouter des images et des fonctions dynamiques
 Body/Placeholder: Entrez le texte
 Body/Preview/Button/Hide: Cacher la prévisualisation
@@ -8,8 +9,8 @@ Fields/Add/Button: ajouter
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
-Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
 Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut, il vous suffit de supprimer ce tiddler.
+Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
 Tags/Add/Button: ajouter
 Tags/Add/Placeholder: nom du tag
 Type/Placeholder: type du contenu
