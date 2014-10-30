@@ -18,7 +18,7 @@ var CONFIG_HOST_TIDDLER = "$:/config/tiddlyweb/host",
 function TiddlyWebAdaptor(options) {
 	this.wiki = options.wiki;
 	this.host = this.getHost();
-	this.recipe = undefined;
+	this.recipe = "default";
 	this.logger = new $tw.utils.Logger("TiddlyWebAdaptor");
 }
 
@@ -135,7 +135,7 @@ Get an array of skinny tiddler fields from the server
 TiddlyWebAdaptor.prototype.getSkinnyTiddlers = function(callback) {
 	var self = this;
 	$tw.utils.httpRequest({
-		url: this.host + "recipes/" + this.recipe + "/tiddlers.json",
+		url: this.host + "recipes/" + encodeURIComponentWithSlashes(this.recipe) + "/tiddlers.json",
 		callback: function(err,data) {
 			// Check for errors
 			if(err) {
@@ -158,7 +158,7 @@ Save a tiddler and invoke the callback with (err,adaptorInfo,revision)
 TiddlyWebAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 	var self = this;
 	$tw.utils.httpRequest({
-		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(tiddler.fields.title),
+		url: this.host + "recipes/" + encodeURIComponentWithSlashes(this.recipe) + "/tiddlers/" + encodeURIComponentWithSlashes(tiddler.fields.title),
 		type: "PUT",
 		headers: {
 			"Content-type": "application/json"
@@ -184,7 +184,7 @@ Load a tiddler and invoke the callback with (err,tiddlerFields)
 TiddlyWebAdaptor.prototype.loadTiddler = function(title,callback) {
 	var self = this;
 	$tw.utils.httpRequest({
-		url: this.host + "recipes/" + encodeURIComponent(this.recipe) + "/tiddlers/" + encodeURIComponent(title),
+		url: this.host + "recipes/" + encodeURIComponentWithSlashes(this.recipe) + "/tiddlers/" + encodeURIComponentWithSlashes(title),
 		callback: function(err,data,request) {
 			if(err) {
 				return callback(err);
@@ -209,7 +209,7 @@ TiddlyWebAdaptor.prototype.deleteTiddler = function(title,callback,options) {
 	}
 	// Issue HTTP request to delete the tiddler
 	$tw.utils.httpRequest({
-		url: this.host + "bags/" + encodeURIComponent(bag) + "/tiddlers/" + encodeURIComponent(title),
+		url: this.host + "bags/" + encodeURIComponentWithSlashes(bag) + "/tiddlers/" + encodeURIComponentWithSlashes(title),
 		type: "DELETE",
 		callback: function(err,data,request) {
 			if(err) {
@@ -308,6 +308,10 @@ TiddlyWebAdaptor.prototype.parseEtag = function(etag) {
 		};
 	}
 };
+
+function encodeURIComponentWithSlashes(uri) {
+	return encodeURIComponent(uri.replace(/\//g, "%2F"));
+}
 
 if($tw.browser && document.location.protocol.substr(0,4) === "http" ) {
 	exports.adaptorClass = TiddlyWebAdaptor;
