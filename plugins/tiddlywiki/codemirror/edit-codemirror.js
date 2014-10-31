@@ -71,7 +71,6 @@ EditCodeMirrorWidget.prototype.render = function(parent,nextSibling) {
 	// Get the configuration options for the CodeMirror object
 	var config = $tw.wiki.getTiddlerData(CODEMIRROR_OPTIONS,{}).configuration || {},
 		editInfo = this.getEditInfo();
-console.log("editInfo",editInfo);
 	if(!("lineWrapping" in config)) {
 		config.lineWrapping = true;
 	}
