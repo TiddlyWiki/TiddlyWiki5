@@ -324,7 +324,7 @@ button svg.tc-image-button, button .tc-image-button img {
 
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
-	padding: 2px 9px;
+	padding: 0.25em 0.7em;
 	font-size: 0.9em;
 	font-weight: 300;
 	line-height: 1.2em;
@@ -332,7 +332,7 @@ button.tc-tag-label, span.tc-tag-label {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
-	border-radius: 8px;
+	border-radius: 1em;
 }
 
 .tc-untagged-separator {
