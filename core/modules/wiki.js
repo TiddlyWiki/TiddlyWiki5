@@ -844,6 +844,7 @@ exports.parseTextReference = function(title,field,index,options) {
 		}
 		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 	} else if(index) {
+		this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 		text = this.extractTiddlerDataItem(tiddler,index,undefined);
 		if(text === undefined) {
 			return null;
