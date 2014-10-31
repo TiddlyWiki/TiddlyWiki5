@@ -1,5 +1,5 @@
 {
-	"description": "Demo presentation of TiddlyWiki",
+	"description": "A step by step introduction to TiddlyWiki",
 	"plugins": [
 		"tiddlywiki/cecily",
 		"tiddlywiki/codemirror",
