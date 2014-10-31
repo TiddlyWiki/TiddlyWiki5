@@ -1,0 +1,47 @@
+{
+	"description": "Demo presentation of TiddlyWiki",
+	"plugins": [
+		"tiddlywiki/cecily",
+		"tiddlywiki/codemirror",
+		"tiddlywiki/highlight",
+		"tiddlywiki/katex"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/stickytitles",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"da-DK",
+		"en-US",
+		"en-GB",
+		"de-AT",
+		"de-DE",
+		"fr-FR",
+		"zh-Hans",
+		"zh-Hant",
+		"it-IT",
+		"ja-JP",
+		"ru-RU"
+	],
+	"build": {
+		"index": [
+			"--savetiddlers","[tag[external-image]]","images",
+			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
+			"--setfield","[tag[external-image]]","text","","text/plain",
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"favicon": [
+			"--savetiddler","$:/favicon.ico","favicon.ico",
+			"--savetiddler","$:/green_favicon.ico","static/favicon.ico"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
+	}
+}

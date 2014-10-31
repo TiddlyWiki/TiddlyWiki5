@@ -1,0 +1,5 @@
+title: $:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/
+
+close: hide
+edit: hide
+info: hide

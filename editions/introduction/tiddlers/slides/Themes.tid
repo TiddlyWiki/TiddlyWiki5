@@ -1,0 +1,19 @@
+title: Themes
+
+Themes can change the layout, fonts, colours and background images of the page.
+
+For example,
+
+<$button class="tc-btn-big-blue">
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+{{$:/core/images/theme-button}} Switch to the default "Snow White" theme</$button>
+
+<$button class="tc-btn-big-blue">
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/starlight"/>
+{{$:/core/images/theme-button}} Switch to the optional "Starlight" theme</$button>
+
+<$button class="tc-btn-big-blue">
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/hidefurniture"/>
+{{$:/core/images/theme-button}} Revert to the presentation theme</$button>
+
+[[Other Story Views]] are also provided, and more are available as plugins.
