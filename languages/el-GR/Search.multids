@@ -1,7 +1,7 @@
 title: $:/language/Search/
 
 Filter/Caption: Φίλτρο
-Filter/Hint: Αναζήτηση μέσο μιας [[έκφρασης φιλτραρίσματος|http://tiddlywiki.com/static/Filters.html]]
+Filter/Hint: Αναζήτηση μέσω μιας [[έκφρασης φιλτραρίσματος|http://tiddlywiki.com/static/Filters.html]]
 Filter/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> βρέθηκαν</small>//
 Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> βρέθηκαν</small>//
 Shadows/Caption: Σκιώδη

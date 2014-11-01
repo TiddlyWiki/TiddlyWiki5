@@ -5,7 +5,7 @@ alert-border: Περιθώριο προειδοποίησης
 alert-highlight: Επισήμανση προειδοποίησης
 alert-muted-foreground: Βουβό προσκήνιο προειδοποίησης
 background: Γενικό υπόβαθρο
-blockquote-bar: Ράβδος Blockquote 
+blockquote-bar: Πλαίσιο Blockquote 
 dirty-indicator: Ένδειξη μη αποθηκευμένων αλλαγών
 code-background: Υπόβαθρο κώδικα
 code-border: Περιθώριο κώδικα 
