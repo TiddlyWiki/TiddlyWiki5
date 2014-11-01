@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: η
+Date/DaySuffix/2: η
+Date/DaySuffix/3: η
+Date/DaySuffix/4: η
+Date/DaySuffix/5: η
+Date/DaySuffix/6: η
+Date/DaySuffix/7: η
+Date/DaySuffix/8: η
+Date/DaySuffix/9: η
+Date/DaySuffix/10: η
+Date/DaySuffix/11: η
+Date/DaySuffix/12: η
+Date/DaySuffix/13: η
+Date/DaySuffix/14: η
+Date/DaySuffix/15: η
+Date/DaySuffix/16: η
+Date/DaySuffix/17: η
+Date/DaySuffix/18: η
+Date/DaySuffix/19: η
+Date/DaySuffix/20: η
+Date/DaySuffix/21: η
+Date/DaySuffix/22: η
+Date/DaySuffix/23: η
+Date/DaySuffix/24: η
+Date/DaySuffix/25: η
+Date/DaySuffix/26: η
+Date/DaySuffix/27: η
+Date/DaySuffix/28: η
+Date/DaySuffix/29: η
+Date/DaySuffix/30: η
+Date/DaySuffix/31: η
+Date/Long/Day/0: Κυριακή
+Date/Long/Day/1: Δευτέρα
+Date/Long/Day/2: Τρίτη
+Date/Long/Day/3: Τετάρτη
+Date/Long/Day/4: Πέμπτη
+Date/Long/Day/5: Παρασκευή
+Date/Long/Day/6: Σάββατο
+Date/Long/Month/1: Ιανουαρίου
+Date/Long/Month/2: Φεβρουαρίου
+Date/Long/Month/3: Μαρτίου
+Date/Long/Month/4: Απριλίου
+Date/Long/Month/5: Μαΐου
+Date/Long/Month/6: Ιουνίου
+Date/Long/Month/7: Ιουλίου
+Date/Long/Month/8: Αυγούστου
+Date/Long/Month/9: Σεπτεμβρίου
+Date/Long/Month/10: Οκτωβρίου
+Date/Long/Month/11: Νοεμβρίου
+Date/Long/Month/12: Δεκεμβρίου
+Date/Period/am: π.μ.
+Date/Period/pm: μ.μ.
+Date/Short/Day/0: Κυρ
+Date/Short/Day/1: Δευ
+Date/Short/Day/2: Τρι
+Date/Short/Day/3: Τετ
+Date/Short/Day/4: Πεμ
+Date/Short/Day/5: Παρ
+Date/Short/Day/6: Σαβ
+Date/Short/Month/1: Ιαν
+Date/Short/Month/2: Φεβ
+Date/Short/Month/3: Μαρ
+Date/Short/Month/4: Απρ
+Date/Short/Month/5: Μάη
+Date/Short/Month/6: Ιου
+Date/Short/Month/7: Ιουλ
+Date/Short/Month/8: Αυγ
+Date/Short/Month/9: Σεπ
+Date/Short/Month/10: Οκτ
+Date/Short/Month/11: Νοε
+Date/Short/Month/12: Δεκ
+RelativeDate/Future/Days: <<period>> ημέρες από τώρα
+RelativeDate/Future/Hours: <<period>> ώρες από τώρα
+RelativeDate/Future/Minutes: <<period>> λεπτά από τώρα
+RelativeDate/Future/Months: <<period>> μήνες από τώρα
+RelativeDate/Future/Second: 1 δευτερόλεπτο από τώρα
+RelativeDate/Future/Seconds: <<period>> δευτερόλεπτα από τώρα
+RelativeDate/Future/Years: <<period>> έτη από τώρα
+RelativeDate/Past/Days: <<period>> ημέρες μέχρι τώρα
+RelativeDate/Past/Hours: <<period>> ώρες μέχρι τώρα
+RelativeDate/Past/Minutes: <<period>> λεπτά μέχρι τώρα
+RelativeDate/Past/Months: <<period>> μήνες μέχρι τώρα
+RelativeDate/Past/Second: 1 δευτερόλεπτο μέχρι τώρα
+RelativeDate/Past/Seconds: <<period>> δευτερόλεπτα μέχρι τώρα
+RelativeDate/Past/Years: <<period>> έτη μέχρι τώρα
