@@ -28,26 +28,6 @@ html body .tc-tiddler-frame .tc-tiddler-body {
 	line-height: 32px;
 }
 
-.tc-scrollable-storyview {
-	border: 1px solid <<colour message-border>>;
-	background-color: <<colour message-background>>;
-	padding: 1em;
-	height: 15em;
-}
-
-.tc-scrollable-storyview-inner {
-	-webkit-transform-origin: 0 0;
-	transform-origin: 0 0;
-	-webkit-transform: scale(0.25);
-	transform: scale(0.25);
-}
-
-.tc-scrollable-storyview .tc-tiddler-frame {
-	background-color: white;
-	border: 1px solid #ddd;
-	width: 600px;
-}
-
 html body .tc-titlebar {
 	position: relative;
 }

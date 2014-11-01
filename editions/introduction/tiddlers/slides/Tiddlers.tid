@@ -4,4 +4,4 @@ title: Tiddlers
 
 Tiddlers are the fundamental units of information in TiddlyWiki. Tiddlers work best when they are as small as possible so that they can be reused by weaving them together into different narratives and perspectives.
 
-[[Links]] create navigable relationships between tiddlers.
+You can create relationships between tiddlers with [[Links]].
