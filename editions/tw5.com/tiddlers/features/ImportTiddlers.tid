@@ -11,4 +11,4 @@ You can import content into a TiddlyWiki file in several ways:
 * Paste content directly from the clipboard using the keyboard shortcut (control-V or command-V)
 ** Pasting is currently only supported in GoogleChrome
 ** You can copy something from internet and paste it directly in tiddlywiki. tiddlywiki will create a tiddler and keep formatting text correctly for you, although are are some text become garbled text.
-** You can drap and drop a lot of text(including image) from internet to tiddlywiki, it works perfect without garbled text.
+** You can drag and drop a lot of text(including image) from internet to tiddlywiki, it works perfect without garbled text.
