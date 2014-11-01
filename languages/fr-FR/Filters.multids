@@ -1,9 +1,10 @@
 title: $:/language/Filters/
 
 AllTiddlers: Tous les tiddlers sauf les tiddlers système
+RecentSystemTiddlers: Les tiddlers modifiés récemment, y compris les tiddlers système
 RecentTiddlers: Les tiddlers modifiés récemment
 AllTags: Tous les tags sauf les tags système
-Missing: Les tiddlers manquant
+Missing: Les tiddlers manquants
 Drafts: Les tiddlers en cours d'édition
 Orphans: Les tiddlers orphelins
 SystemTiddlers: Les tiddlers système
