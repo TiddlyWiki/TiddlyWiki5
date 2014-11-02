@@ -25,6 +25,6 @@ The `tc-tagged-NightReader` class is applied to the entire tiddler and not just 
 Note that tags containing spaces or non-alphanumeric characters will be converted using URI encoding, making the generated CSS classname hard to predict. For example:
 
 |!Tag |!Generated Class Name |
-|`$:/mytag |`tc-tagged-%24%3A%2Fmytag` |
+|`$:/mytag` |`tc-tagged-%24%3A%2Fmytag` |
 |`one two` |`tc-tagged-one%20two` |
 |`£35.23` |`tc-tagged-%C2%A335.23` |
