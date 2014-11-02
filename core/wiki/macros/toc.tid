@@ -10,13 +10,9 @@ tags: $:/tags/Macro
 <$view field="title"/>
 </$view>
 </$list>
-
 <$list filter="""[all[current]] -[[$rootTag$]]""">
-
 <$macrocall $name="toc-body" rootTag="""$rootTag$""" tag=<<currentTiddler>> sort="$sort$"/>
-
 </$list>
-
 </li>
 </$list>
 </ol>
