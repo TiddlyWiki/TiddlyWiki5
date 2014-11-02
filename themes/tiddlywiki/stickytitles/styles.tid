@@ -11,4 +11,5 @@ tags: [[$:/tags/Stylesheet]]
   position: sticky;
   top: 0px;
   background: <<colour tiddler-background>>;
+  z-index: 500;
 }
