@@ -87,6 +87,10 @@ Modal.prototype.display = function(title,options) {
 		parentWidget: $tw.rootWidget,
 		document: document
 	});
+	
+	// make it possible to refer to the underlying tiddler the modal is based on
+	bodyWidgetNode.setVariable("currentTiddler", title);
+	
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyWidgetNode.refresh(changes,modalBody,null);
