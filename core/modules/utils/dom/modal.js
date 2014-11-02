@@ -26,7 +26,21 @@ Display a modal dialogue
 Options include:
 	downloadLink: Text of a big download link to include
 */
-Modal.prototype.display = function(title,options) {
+Modal.prototype.display = function(param, options) {
+	
+	if(typeof param === "object") {
+	    if("title" in param) {
+	        var title = param.title;
+	    } else {
+	        // do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below) - comment can be removed
+	        return;
+	    }
+	} else {
+	    // expect param to be a string
+	    var title = param;
+  	}
+  
+	
 	options = options || {};
 	var self = this,
 		duration = $tw.utils.getAnimationDuration(),
@@ -87,9 +101,11 @@ Modal.prototype.display = function(title,options) {
 		parentWidget: $tw.rootWidget,
 		document: document
 	});
-	
-	// make it possible to refer to the underlying tiddler from the body
-	bodyWidgetNode.setVariable("currentTiddler", title);
+
+	// make variables accessible in the body
+	for(var prop in param) {
+    		bodyWidgetNode.setVariable(prop, param[prop]);
+  	}
 	
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
