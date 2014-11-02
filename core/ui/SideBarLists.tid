@@ -7,7 +7,7 @@ title: $:/core/ui/SideBarLists
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$linkcatcher to="$:/temp/search">
 <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link>
-</$linkcatcher>
+</$linkcatcher>&nbsp;<$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible"><$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/><$action-setfield $tiddler="$:/temp/search" text=""/><$action-navigate $to="$:/AdvancedSearch"/>&hellip;</$button>
 </$reveal>
 <$reveal state="$:/temp/search" type="match" text="">&nbsp;<$link to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">&hellip;</$link>
 </$reveal>
