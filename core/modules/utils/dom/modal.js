@@ -88,7 +88,7 @@ Modal.prototype.display = function(title,options) {
 		document: document
 	});
 	
-	// make it possible to refer to the underlying tiddler the modal is based on
+	// make it possible to refer to the underlying tiddler from the body
 	bodyWidgetNode.setVariable("currentTiddler", title);
 	
 	bodyWidgetNode.render(modalBody,null);
