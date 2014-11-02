@@ -1,19 +1,29 @@
 title: $:/core/macros/toc
 tags: $:/tags/Macro
 
-\define toc(tag,sort:"")
+\define toc-body(rootTag,tag,sort:"")
 <ol class="tc-toc">
-<$list filter="[tag[$tag$]$sort$]">
+<$list filter="""[tag[$tag$]$sort$]""">
 <li>
 <$list filter="[is[current]toc-link[no]]" emptyMessage="<$link><$view field='caption'><$view field='title'/></$view></$link>">
 <$view field="caption">
 <$view field="title"/>
 </$view>
 </$list>
-<$macrocall $name="toc" tag=<<currentTiddler>> sort="$sort$"/>
+
+<$list filter="""[all[current]] -[[$rootTag$]]""">
+
+<$macrocall $name="toc-body" rootTag="""$rootTag$""" tag=<<currentTiddler>> sort="$sort$"/>
+
+</$list>
+
 </li>
 </$list>
 </ol>
+\end
+
+\define toc(tag,sort:"")
+<<toc-body rootTag:"""$tag$""" tag:"""$tag$""" sort:"""$sort$""">>
 \end
 
 \define toc-linked-expandable-body(tag,sort:"")
