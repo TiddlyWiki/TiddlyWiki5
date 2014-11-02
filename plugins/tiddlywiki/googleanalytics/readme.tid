@@ -7,9 +7,9 @@ This plugin enables you to use Google Analytics to track access to your online T
 # Enter the name of your TiddlySpot domain, for example "mysite.tiddlyspot.com" 
 # You will be given your own Tracking ID for this domain
 # Go to http://tiddlywiki.com -- open the More/System tab and drag the links to these three tiddlers across to a local copy of your site:
-#* $:/GoogleAnalyticsDomain
-#* $:/GoogleAnalyticsAccount
-#* $:/plugins/tiddlywiki/googleanalytics
+#* [[$:/GoogleAnalyticsDomain]]
+#* [[$:/GoogleAnalyticsAccount]]
+#* [[$:/plugins/tiddlywiki/googleanalytics]]
 # Edit the first two of these tiddlers to reflect your Domain and Tracking ID
 # Upload the new version to TiddlySpot or other web host
 # Return to your Google Analytics page to check that your site is being tracked
