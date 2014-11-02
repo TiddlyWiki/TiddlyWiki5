@@ -1,3 +1,4 @@
 title: $:/language/Docs/Types/text/vnd.tiddlywiki
-description: TiddlyWiki バージョン5形式 wikitext
+description: TiddlyWiki 5形式
 name: text/vnd.tiddlywiki
+group: Text
