@@ -687,7 +687,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.exports = moduleInfo.definition;
 			}
 		} catch(e) {
-			$tw.utils.error("Error executing boot module " + name + ":\n" + e);
+			$tw.utils.error("Error executing boot module " + name + ":\n" + e.stack);
 		}
 	}
 	// Return the exports of the module
