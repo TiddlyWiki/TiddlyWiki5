@@ -180,3 +180,5 @@ David john, @fghhfg, 2014/10/06
 Mark S., @marxsal, 2014/10/18
 
 Erwan Moreau, @erwanm, 2014/10/27
+
+Felix Küppers, @felixhayashi, 2014/11/02
