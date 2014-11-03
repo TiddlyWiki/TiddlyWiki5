@@ -1,6 +1,7 @@
 title: $:/language/Filters/
 
 AllTiddlers: Alle Tiddler außer System-Tiddler
+RecentSystemTiddlers: Kürzlich veränderte Tiddler, inklusive System-Tiddler
 RecentTiddlers: Kürzlich veränderte Tiddler
 AllTags: Alle Tags außer System-Tags
 Missing: Fehlende Tiddler
