@@ -14,6 +14,7 @@ storyview: "[[Story View|Story]]" ist für das Verhalten des "ListWidgets" zust�
 tiddlerdeserializer: Konvertiert verschiedene textbasierte Inhaltstypen in das Tiddler-Format.
 tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler-Felder.
 tiddlermethod: Methoden werden dem `$tw.Tiddler` Prototypen hinzugefügt.
+upgrader: Führt spezifische Änderungen während des Upgrade- oder Import-prozesses durch.
 utils: Methoden werden `$tw.utils` hinzugefügt.
 utils-node: Erweitert `$tw.utils` mit Methoden aus node.js.
 widget: Widgets verarbeiten das Rendern und Aktualisieren der Anzeige in der DOM.

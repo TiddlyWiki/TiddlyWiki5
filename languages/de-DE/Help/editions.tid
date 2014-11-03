@@ -1,0 +1,10 @@
+title: $:/language/Help/editions
+description: Listet alle verfügbaren TiddlyWiki Editionen auf
+
+Listet alle verfügbaren TiddlyWiki Editionen auf.
+
+```
+--editions
+```
+
+Sie können ein neues Wiki mit dem `--init` Kommando erstellen. Dabei wird eine der angezeigten Editionen "geklont".
