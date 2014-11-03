@@ -22,14 +22,20 @@ title: $:/TagManager
 </$reveal>
 </div>
 \end
-\define qualifyUnique(title)
+\define qualifyTitle(title)
 $title$$(currentTiddler)$
 \end
 \define toggleButton(state)
-<$reveal state="$state$" type="match" text="0" default="0">
-<$button set="$state$" setTo="1" class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/right-arrow}}</$button></$reveal>
-<$reveal state="$state$" type="match" text="1" default="0">
-<$button set="$state$" setTo="0" class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/close-button}}</$button></$reveal>
+<$reveal state="$state$" type="match" text="closed" default="closed">
+<$button set="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown">
+{{$:/core/images/right-arrow}}
+</$button>
+</$reveal>
+<$reveal state="$state$" type="match" text="open" default="closed">
+<$button set="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown">
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
 \end
 <table>
 <tbody>
@@ -44,22 +50,27 @@ $title$$(currentTiddler)$
 <td><$edit-text field="color" tag="input" type="color"/></td>
 <td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
 <td>
-<$reveal state=<<qualifyUnique "$:/state/tagman/">> type="match" text="0" default="0">
-<$macrocall $name="iconEditor" title={{!!title}}/></$reveal></td>
-<td><$macrocall $name="toggleButton" state=<<qualifyUnique "$:/state/tagman/">> /> 
+<$macrocall $name="iconEditor" title={{!!title}}/>
+</td>
+<td>
+<$macrocall $name="toggleButton" state=<<qualifyTitle "$:/state/tag-manager/">> /> 
 </td>
 </tr>
-<tr><td></td>
+<tr>
+<td></td>
 <td>
-<$reveal state=<<qualifyUnique "$:/state/tagman/">> type="match" text="1" default="">
+<$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
 <table>
 <tbody>
-<tr><td>Color</td><td><$edit-text field="color" tag="input" type="text" size="9"/></td></tr>
+<tr><td>Color</td><td><$edit-text field="color" tag="input" type="text" size="9"/></td><td></td></tr>
 <tr><td>Icon</td><td><$edit-text field="icon" tag="input" size="45"/></td><td><$macrocall $name="iconEditor" title={{!!title}}/></td></tr>
 </tbody>
 </table>
 </$reveal>
-</td></tr>
+</td>
+<td></td>
+<td></td>
+</tr>
 </$list>
 </tbody>
 </table>
