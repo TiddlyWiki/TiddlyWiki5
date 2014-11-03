@@ -10,7 +10,7 @@ title: $:/TagManager
 \end
 \define iconEditor(title)
 <div class="tc-drop-down-wrapper">
-<$edit-text field="icon" tag="input" size="20"/> <$button popup=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$button popup=<<qualify "$:/state/popup/icon/$title$">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
 <$reveal state=<<qualify "$:/state/popup/icon/$title$">> type="popup" position="belowleft" text="" default="">
 <div class="tc-drop-down">
 <$linkcatcher to="$title$!!icon">
@@ -22,19 +22,44 @@ title: $:/TagManager
 </$reveal>
 </div>
 \end
+\define qualifyUnique(title)
+$title$$(currentTiddler)$
+\end
+\define toggleButton(state)
+<$reveal state="$state$" type="match" text="0" default="0">
+<$button set="$state$" setTo="1" class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/right-arrow}}</$button></$reveal>
+<$reveal state="$state$" type="match" text="1" default="0">
+<$button set="$state$" setTo="0" class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/close-button}}</$button></$reveal>
+\end
 <table>
 <tbody>
 <tr>
-<th><<lingo Tag/Heading>></th>
 <th><<lingo Colour/Heading>></th>
+<th class="tc-tag-manager-tag"><<lingo Tag/Heading>></th>
 <th><<lingo Icon/Heading>></th>
+<th>Info</th>
 </tr>
 <$list filter="[tags[]!is[system]sort[title]]">
 <tr>
+<td><$edit-text field="color" tag="input" type="color"/></td>
 <td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
-<td><$edit-text field="color" tag="input" type="text" size="9"/> <$edit-text field="color" tag="input" type="color"/></td>
-<td><$macrocall $name="iconEditor" title={{!!title}}/></td>
+<td>
+<$reveal state=<<qualifyUnique "$:/state/tagman/">> type="match" text="0" default="0">
+<$macrocall $name="iconEditor" title={{!!title}}/></$reveal></td>
+<td><$macrocall $name="toggleButton" state=<<qualifyUnique "$:/state/tagman/">> /> 
+</td>
 </tr>
+<tr><td></td>
+<td>
+<$reveal state=<<qualifyUnique "$:/state/tagman/">> type="match" text="1" default="">
+<table>
+<tbody>
+<tr><td>Color</td><td><$edit-text field="color" tag="input" type="text" size="9"/></td></tr>
+<tr><td>Icon</td><td><$edit-text field="icon" tag="input" size="45"/></td><td><$macrocall $name="iconEditor" title={{!!title}}/></td></tr>
+</tbody>
+</table>
+</$reveal>
+</td></tr>
 </$list>
 </tbody>
 </table>
