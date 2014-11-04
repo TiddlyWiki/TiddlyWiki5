@@ -29,8 +29,8 @@ Options include:
 Modal.prototype.display = function(param,options) {
 	if(typeof param === "object") {
 		if(!("title" in param)) {
-		// Do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below)
-		return;
+			// Do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below)
+			return;
 		}
 	} else {
 		// Transform param into an abject with title as its attribute
