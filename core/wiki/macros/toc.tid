@@ -3,7 +3,7 @@ tags: $:/tags/Macro
 
 \define toc-body(rootTag,tag,sort:"")
 <ol class="tc-toc">
-<$list filter="""[tag[$tag$]$sort$]""">
+<$list filter="""[tag[$tag$]!has[draft.of]$sort$]""">
 <li>
 <$list filter="[is[current]toc-link[no]]" emptyMessage="<$link><$view field='caption'><$view field='title'/></$view></$link>">
 <$view field="caption">
@@ -75,7 +75,7 @@ tags: $:/tags/Macro
 
 \define toc-expandable(tag,sort:"")
 <ol class="tc-toc toc-expandable">
-<$list filter="[tag[$tag$]$sort$]">
+<$list filter="[tag[$tag$]!has[draft.of]$sort$]">
 <$list filter="[is[current]toc-link[no]]" emptyMessage="<<toc-linked-expandable-body tag:'$tag$' sort:'$sort$'>>">
 <<toc-unlinked-expandable-body tag:"$tag$" sort:"$sort$">>
 </$list>
@@ -140,7 +140,7 @@ tags: $:/tags/Macro
 
 \define toc-selective-expandable(tag,sort:"")
 <ol class="tc-toc toc-selective-expandable">
-<$list filter="[tag[$tag$]$sort$]">
+<$list filter="[tag[$tag$]!has[draft.of]$sort$]">
 <$list filter="[is[current]toc-link[no]]" variable="ignore" emptyMessage="<<toc-linked-selective-expandable-body tag:'$tag$' sort:'$sort$'>>">
 <<toc-unlinked-selective-expandable-body tag:"$tag$" sort:"$sort$">>
 </$list>
