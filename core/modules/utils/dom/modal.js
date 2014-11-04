@@ -108,13 +108,8 @@ Modal.prototype.display = function(param,options) {
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
 		document: document,
-		variables: param
+		variables: vars
 	});
-	// make variables accessible in the body
-	for(var prop in param) {
-    		bodyWidgetNode.setVariable(prop, param[prop]);
-  	}
-	
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
 		bodyWidgetNode.refresh(changes,modalBody,null);
@@ -154,7 +149,7 @@ Modal.prototype.display = function(param,options) {
 		]}],
 		parentWidget: $tw.rootWidget,
 		document: document,
-		variables: param
+		variables: vars
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
