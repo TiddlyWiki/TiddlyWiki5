@@ -389,7 +389,6 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 				  	if(p == "template") continue;
 					additionalFields[p] = event.param[p];
 				}
-				
 				// Override the default templateTiddler variable we created above.
 				// Also merge the additional fields provided in param to allow additional fields and overrides
 				templateTiddler = new $tw.Tiddler(tObj, additionalFields);
