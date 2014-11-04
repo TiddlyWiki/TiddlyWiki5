@@ -381,16 +381,18 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		  // If a template property is specified and it is a tiddler, try to use this as a template instead
 		if("template" in event.param) {
 			var tObj = this.wiki.getTiddler(event.param.template);
-			// Only use it as template if we can retrieve the tiddler
+			// Filter properties to be passed as fields. Because events.param is immutable, we cannot simply delete fields
 			if(tObj) {
-				// Override the default we set above
-				templateTiddler = tObj;
-				// Now merge the additional fields provided in param to allow additional fields and overrides
+				var additionalFields = {};
 				for(var p in event.param) {
-					// Do not consider the template attribute as this is now treated specially
-					if(p == "template") continue;
-					templateTiddler[p] = event.param[p];
+				 	// Do not consider the template attribute as this is now treated specially
+				  	if(p == "template") continue;
+					additionalFields[p] = event.param[p];
 				}
+				
+				// Override the default templateTiddler variable we created above.
+				// Also merge the additional fields provided in param to allow additional fields and overrides
+				templateTiddler = new $tw.Tiddler(tObj, additionalFields);
 			}
 		}
 		if(templateTiddler.title) {
