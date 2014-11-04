@@ -39,8 +39,10 @@ Modal.prototype.display = function(param,options) {
 	}
 	// Create a title variable for conveniance
 	var title = param.title;
-	// Set the currentTiddler to the title
-	param.currentTiddler = title;
+	// Set the currentTiddler to the title if not specified otherwise
+  	if(!("currentTiddler" in param)) {
+  		param.currentTiddler = title;
+  	}
 	options = options || {};
 	var self = this,
 		duration = $tw.utils.getAnimationDuration(),
