@@ -26,13 +26,13 @@ Display a modal dialogue
 Options include:
 	downloadLink: Text of a big download link to include
 */
-Modal.prototype.display = function(param, options) {
+Modal.prototype.display = function(param,options) {
 	
 	if(typeof param === "object") {
 		if( ! "title" in param) {
 		// Do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below)
 		return;
-	}
+		}
 	} else {
 		// Transform param into an abject with title as its attribute
 		// We want param to be an object so that further code does not have to distinguish between string and object unnecessarily
