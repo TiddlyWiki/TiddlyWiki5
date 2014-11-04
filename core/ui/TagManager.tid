@@ -27,13 +27,13 @@ $title$$(currentTiddler)$
 \end
 \define toggleButton(state)
 <$reveal state="$state$" type="match" text="closed" default="closed">
-<$button set="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown">
-{{$:/core/images/right-arrow}}
+<$button set="$state$" setTo="open" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+{{$:/core/images/info-button}}
 </$button>
 </$reveal>
 <$reveal state="$state$" type="match" text="open" default="closed">
-<$button set="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown">
-{{$:/core/images/close-button}}
+<$button set="$state$" setTo="closed" class="tc-btn-invisible tc-btn-dropdown" selectedClass="tc-selected">
+{{$:/core/images/info-button}}
 </$button>
 </$reveal>
 \end
@@ -43,7 +43,7 @@ $title$$(currentTiddler)$
 <th><<lingo Colour/Heading>></th>
 <th class="tc-tag-manager-tag"><<lingo Tag/Heading>></th>
 <th><<lingo Icon/Heading>></th>
-<th>Info</th>
+<th><<lingo Info/Heading>></th>
 </tr>
 <$list filter="[tags[]!is[system]sort[title]]">
 <tr>
@@ -62,8 +62,8 @@ $title$$(currentTiddler)$
 <$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
 <table>
 <tbody>
-<tr><td>Color</td><td><$edit-text field="color" tag="input" type="text" size="9"/></td><td></td></tr>
-<tr><td>Icon</td><td><$edit-text field="icon" tag="input" size="45"/></td><td><$macrocall $name="iconEditor" title={{!!title}}/></td></tr>
+<tr><td><<lingo Colour/Heading>></td><td><$edit-text field="color" tag="input" type="text" size="9"/></td></tr>
+<tr><td><<lingo Icon/Heading>></td><td><$edit-text field="icon" tag="input" size="45"/></td></tr>
 </tbody>
 </table>
 </$reveal>
