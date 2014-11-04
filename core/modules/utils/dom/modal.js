@@ -27,21 +27,26 @@ Options include:
 	downloadLink: Text of a big download link to include
 */
 Modal.prototype.display = function(param,options) {
+	// An object that will hold arguments received via param and also the ones automatically added later like currentTiddler
+	var vars = {};
 	if(typeof param === "object") {
 		if(!("title" in param)) {
 			// Do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below)
 			return;
 		}
+		// Extract the properties from param. We cannot use param itself as it is immutable and we need might need to add more variables
+		for(var p in param) {
+			vars[p] = param[p];
+		}
 	} else {
-		// Transform param into an abject with title as its attribute
-		// We want param to be an object so that further code does not have to distinguish between string and object unnecessarily
-		param = { title : param };    
+		// Create a new object vars that also holds the title as property
+		vars = { title : param };    
 	}
 	// Create a title variable for conveniance
-	var title = param.title;
+	var title = vars.title;
 	// Set the currentTiddler to the title if not specified otherwise
-  	if(!("currentTiddler" in param)) {
-  		param.currentTiddler = title;
+  	if(!("currentTiddler" in vars)) {
+  		vars.currentTiddler = title;
   	}
 	options = options || {};
 	var self = this,
@@ -93,7 +98,7 @@ Modal.prototype.display = function(param,options) {
 		}}}],
 		parentWidget: $tw.rootWidget,
 		document: document,
-		variables: param
+		variables: vars
 	});
 	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
