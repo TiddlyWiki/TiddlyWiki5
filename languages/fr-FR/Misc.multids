@@ -17,6 +17,7 @@ MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manqu
 RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Ceci est un tiddler système
 TagManager/Colour/Heading: Couleur
-TagManager/Icon/Heading: Icone
+TagManager/Icon/Heading: Icône
+TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 UnsavedChangesWarning: Vos dernières modifications n'ont pas été sauvegardées dans votre TiddlyWiki
