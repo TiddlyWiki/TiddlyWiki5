@@ -29,18 +29,19 @@ Options include:
 Modal.prototype.display = function(param, options) {
 	
 	if(typeof param === "object") {
-	    if("title" in param) {
-	        var title = param.title;
-	    } else {
-	        // do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below) - comment can be removed
-	        return;
-	    }
+		if( ! "title" in param) {
+		// Do nothing; this is the same reaction as to when tiddler cannot be retrived (see further below)
+		return;
+	}
 	} else {
-	    // expect param to be a string
-	    var title = param;
-  	}
-  
-	
+		// Transform param into an abject with title as its attribute
+		// We want param to be an object so that further code does not have to distinguish between string and object unnecessarily
+		param = { title : param };    
+	}
+	// Create a title variable for conveniance
+	var title = param.title;
+	// Set the currentTiddler to the title
+	param.currentTiddler = title;
 	options = options || {};
 	var self = this,
 		duration = $tw.utils.getAnimationDuration(),
@@ -90,7 +91,8 @@ Modal.prototype.display = function(param, options) {
 					value: title
 		}}}],
 		parentWidget: $tw.rootWidget,
-		document: document
+		document: document,
+		variables: param
 	});
 	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
@@ -99,9 +101,9 @@ Modal.prototype.display = function(param, options) {
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
-		document: document
+		document: document,
+		variables: param
 	});
-
 	// make variables accessible in the body
 	for(var prop in param) {
     		bodyWidgetNode.setVariable(prop, param[prop]);
@@ -145,7 +147,8 @@ Modal.prototype.display = function(param, options) {
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,
-		document: document
+		document: document,
+		variables: param
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
