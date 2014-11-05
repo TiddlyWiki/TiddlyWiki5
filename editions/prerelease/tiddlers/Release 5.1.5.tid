@@ -12,29 +12,40 @@ type: text/vnd.tiddlywiki
 * Added new translators edition making it much easier to create and maintain translations of TiddlyWiki
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/615425cf0634233d27f4f1ea430589b2a618feb6]] improved Japanese translation
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8ba1a9b72ac5a4f50a4f670a24393d564c137c0c]] new Danish translation
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/14a64ef3effc1e4cf1098b35af6d6cb864d77ac2]] new Greek translation
 
 !! Usability Improvements
 
-* 
+* Improved layout of [[$:/TagManager]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/63b00fd0f80ce0c9917e233287d4a0138e8c385f]] advanced search button to sidebar search results
 
 !! Hackability Improvements
 
-* [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/d8248cfba709a4bcff03ebeec2bdd4683441467f]] new ActionSetFieldWidget for manipulating tiddler fields
+* [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/d8248cfba709a4bcff03ebeec2bdd4683441467f]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/9022dfdf71bbb72791867eaece6c0c4e871dbe8e]]) new ActionSetFieldWidget and ActionDeleteFieldWidget for manipulating tiddler fields
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results.tid]]
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] TimelineMacro to be able to use different date fields
 
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/90096cbd367a7a685fb5dc5b2cbaa69a00d8199f]] problem with CodeMirror editor and missing tiddlers
+* [[Exclude|https://github.com/Jermolene/TiddlyWiki5/commit/5093cdc86047209f23b9ead5ee0f216d0414e4f2]] drafts from TableOfContentsMacro
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5599f9f9338a5f96080143b2192214a78b961509]] problem with encoding of HTML tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/835e3a945244dd8a07f4c7fd570eb890e9fdcc2c]] problem with sticky titles being covered by vertical tabs
 
 !! Node.js Changes
 
 //These changes are only relevant to people using TiddlyWiki under Node.js//
 
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/cea963420ca2800b86989e29d42d06ccb7ea2a00]] error handling under Node.js
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/17a594a97ad5655142c834dfd5fa68855a61d201]] UnpackPluginCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/04d26e6fae20671a6d455e113f7b0afedabc7122]] EditionsCommand to list the available editions
+
+!! Changes affecting plugin authors
+
+* [[Disabled|https://github.com/Jermolene/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
 
 !! Contributors
 
