@@ -18,5 +18,6 @@ RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此为系统条目
 TagManager/Colour/Heading: 颜色
 TagManager/Icon/Heading: 图标
+TagManager/Info/Heading: 信息
 TagManager/Tag/Heading: 标签
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未保存的变更
