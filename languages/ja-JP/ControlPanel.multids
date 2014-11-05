@@ -10,8 +10,8 @@ Basics/DefaultTiddlers/BottomHint: タイトルに空白を含めたいときは
 Basics/DefaultTiddlers/Prompt: デフォルト tiddler:
 Basics/DefaultTiddlers/TopHint: このファイルを開いたときに初期表示される tiddler を設定してください:
 Basics/Language/Prompt: 現在の言語:
-Basics/NewJournal/Tags/Prompt: 日誌（journal tiddler）のタグ
 Basics/NewJournal/Title/Prompt: 日誌（journal tiddlers）のデフォルトのタイトル
+Basics/NewJournal/Tags/Prompt: 日誌（journal tiddler）のタグ
 Basics/OverriddenShadowTiddlers/Prompt: 上書きされている隠し tiddler 数:
 Basics/ShadowTiddlers/Prompt: 隠し tiddler 数:
 Basics/Subtitle/Prompt: サブタイトル:
@@ -61,7 +61,7 @@ Saving/TiddlySpot/Password: パスワード
 Saving/TiddlySpot/ServerURL: サーバーURL
 Saving/TiddlySpot/UploadDir: アップロードディレクトリ
 Saving/TiddlySpot/UserName: Wiki 名
-Settings/AutoSave/Caption: 自動保存
+Settings/AutoSave/Caption: 自動保存:
 Settings/AutoSave/Disabled/Description: 自動的に保存しない。
 Settings/AutoSave/Enabled/Description: 自動的に保存する。
 Settings/AutoSave/Hint: 自動的に保存するかどうかの設定
