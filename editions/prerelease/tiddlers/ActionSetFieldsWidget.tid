@@ -2,16 +2,16 @@ caption: action-setfield
 created: 20141025120850184
 modified: 20141025120850184
 tags: Widgets ActionWidgets
-title: ActionSetFieldWidget
+title: ActionSetFieldsWidget
 type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-setfield'' widget is an [[action widget|ActionWidgets]] that assigns values to the fields of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-setfields'' widget is an [[action widget|ActionWidgets]] that assigns values to the fields of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
 
 ! Content and Attributes
 
-The ''action-setfield'' widget is invisible. Any content within it is ignored.
+The ''action-setfields'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
 |$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[WidgetVariable: currentTiddler]] |
@@ -19,17 +19,17 @@ The ''action-setfield'' widget is invisible. Any content within it is ignored.
 
 ! Examples
 
-Here is an example of a pair of buttons that open the control panel directly to specified tabs. They work by using ''action-setfield'' to set the state tiddler for the control panel tabs.
+Here is an example of a pair of buttons that open the control panel directly to specified tabs. They work by using ''action-setfields'' to set the state tiddler for the control panel tabs.
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
-<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Appearance"/>
+<$action-setfields $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Appearance"/>
 <$action-navigate $to="$:/ControlPanel"/>
 Go to Control Panel "Appearance" tab
 </$button>
 
 <$button>
-<$action-setfield $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Settings"/>
+<$action-setfields $tiddler="$:/state/tab-1749438307" text="$:/core/ui/ControlPanel/Settings"/>
 <$action-navigate $to="$:/ControlPanel"/>
 Go to Control Panel "Settings" tab
 </$button>'/>
@@ -38,9 +38,9 @@ Here is an example of a button that assigns tags and fields to the tiddler Hello
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
-<$action-setfield $tiddler="HelloThere" tags="NewTag [[Another New Tag]]" color="red"/>
-<$action-setfield $tiddler="$:/state/popup/tiddler-info--1779055697" text="(568,1443,33,39)"/>
-<$action-setfield $tiddler="$:/state/tab--1890574033" text="$:/core/ui/TiddlerInfo/Fields"/>
+<$action-setfields $tiddler="HelloThere" tags="NewTag [[Another New Tag]]" color="red"/>
+<$action-setfields $tiddler="$:/state/popup/tiddler-info--1779055697" text="(568,1443,33,39)"/>
+<$action-setfields $tiddler="$:/state/tab--1890574033" text="$:/core/ui/TiddlerInfo/Fields"/>
 <$action-navigate $to="HelloThere"/>
 Modify ~HelloThere
 </$button>'/>
@@ -49,7 +49,7 @@ Here is an example of a button that assigns tags and fields to the tiddler Hello
 
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
-<$action-setfield $tiddler="HelloThere" tags="MoreTag [[Further More Tags]]" color="green"/>
+<$action-setfields $tiddler="HelloThere" tags="MoreTag [[Further More Tags]]" color="green"/>
 <$action-sendmessage $message="tm-edit-tiddler" $param="HelloThere"/>
 Edit ~HelloThere
 </$button>'/>

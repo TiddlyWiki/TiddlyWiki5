@@ -1,9 +1,9 @@
 /*\
-title: $:/core/modules/widgets/action-setfield.js
+title: $:/core/modules/widgets/action-setfields.js
 type: application/javascript
 module-type: widget
 
-Action widget to set fields on a tiddler.
+Action widget to set multiple fields on a tiddler.
 
 \*/
 (function(){
@@ -14,19 +14,19 @@ Action widget to set fields on a tiddler.
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var SetFieldWidget = function(parseTreeNode,options) {
+var SetFieldsWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-SetFieldWidget.prototype = new Widget();
+SetFieldsWidget.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-SetFieldWidget.prototype.render = function(parent,nextSibling) {
+SetFieldsWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 };
@@ -34,14 +34,14 @@ SetFieldWidget.prototype.render = function(parent,nextSibling) {
 /*
 Compute the internal state of the widget
 */
-SetFieldWidget.prototype.execute = function() {
+SetFieldsWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
 };
 
 /*
 Refresh the widget by ensuring our attributes are up to date
 */
-SetFieldWidget.prototype.refresh = function(changedTiddlers) {
+SetFieldsWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes["$tiddler"]) {
 		this.refreshSelf();
@@ -53,7 +53,7 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 /*
 Invoke the action associated with this widget
 */
-SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
+SetFieldsWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this;
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
@@ -63,6 +63,6 @@ SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	return true; // Action was invoked
 };
 
-exports["action-setfield"] = SetFieldWidget;
+exports["action-setfields"] = SetFieldsWidget;
 
 })();
