@@ -57,7 +57,14 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);
+	if(this.actionValue) {
+		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);		
+	}
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.charAt(0) !== "$") {
+			self.wiki.setText(self.actionTiddler,name,undefined,attribute);
+		}
+	});
 	return true; // Action was invoked
 };
 
