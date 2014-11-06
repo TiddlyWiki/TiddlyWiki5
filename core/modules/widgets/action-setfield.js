@@ -57,21 +57,7 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var newFields = {};
-	if(this.actionIndex) {
-		var data = self.wiki.getTiddlerData(this.actionTiddler,{});
-		if(data[self.editIndex] !== value) {
-			data[self.editIndex] = value;
-			this.wiki.setTiddlerData(self.actionTiddler,data);
-		}
-	} else {
-		var tiddler = this.wiki.getTiddler(this.actionTiddler),
-			updateFields = {
-				title: this.actionTiddler
-			};
-		updateFields[this.editField || "text"] = this.actionValue;
-		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,updateFields,this.wiki.getModificationFields()));
-	}
+	this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);
 	return true; // Action was invoked
 };
 
