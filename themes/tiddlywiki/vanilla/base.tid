@@ -856,6 +856,11 @@ canvas.tc-edit-bitmapeditor  {
 	width: 15%;
 }
 
+.tc-edit-field-add-value {
+	display: inline-block;
+	width: 40%;
+}
+
 .tc-edit-field-add-button {
 	display: inline-block;
 	width: 10%;
