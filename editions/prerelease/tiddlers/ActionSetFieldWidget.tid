@@ -1,0 +1,33 @@
+caption: action-setfield
+created: 20141025120850184
+modified: 20141106173455527
+tags: Widgets ActionWidgets
+title: ActionSetFieldWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-setfield'' widget is an [[action widget|ActionWidgets]] that assigns a value to a specified field of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+See also the ActionSetFieldsWidget (note the extra "s") that provides a more flexible way to set the value of a single field.
+
+! Content and Attributes
+
+The ''action-setfield'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[WidgetVariable: currentTiddler]] |
+|$field |The name of the field to be modified. If neither a field or index is specified, then the default field "text" is used |
+|$index |If $field is not provided, specifies the index of a [[data tiddler|DataTiddlers]] to modify |
+|$value |The value to be assigned to the field or index |
+
+! Examples
+
+Here is an example of a button that opens the control panel directly to the "Appearance" tabs:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab-1749438307" $field="text" $value="$:/core/ui/ControlPanel/Appearance"/>
+<$action-navigate $to="$:/ControlPanel"/>
+Go to Control Panel "Appearance" tab
+</$button>'/>

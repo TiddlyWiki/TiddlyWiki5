@@ -1,4 +1,4 @@
-caption: action-setfield
+caption: action-setfields
 created: 20141025120850184
 modified: 20141025120850184
 tags: Widgets ActionWidgets
@@ -8,6 +8,8 @@ type: text/vnd.tiddlywiki
 ! Introduction
 
 The ''action-setfields'' widget is an [[action widget|ActionWidgets]] that assigns values to the fields of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+See also the ActionSetFieldWidget (note the lack of the "s") that provides a way to set the values of multiple fields in a single operation.
 
 ! Content and Attributes
 

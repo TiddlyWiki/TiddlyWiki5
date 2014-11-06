@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 
 !! Hackability Improvements
 
-* [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/d8248cfba709a4bcff03ebeec2bdd4683441467f]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/9022dfdf71bbb72791867eaece6c0c4e871dbe8e]]) new ActionSetFieldWidget and ActionDeleteFieldWidget for manipulating tiddler fields
+* Introduced new ActionSetFieldWidget, ActionSetFieldsWidget and ActionDeleteFieldWidget for manipulating tiddler fields
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
