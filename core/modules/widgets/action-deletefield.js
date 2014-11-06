@@ -36,6 +36,7 @@ Compute the internal state of the widget
 */
 DeleteFieldWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
+	this.actionField = this.getAttribute("$field");
 };
 
 /*
@@ -57,6 +58,9 @@ DeleteFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
 		tiddler = this.wiki.getTiddler(self.actionTiddler),
 		removeFields = {};
+	if(this.actionField) {
+		removeFields[this.actionField] = undefined;
+	}
 	if(tiddler) {
 		$tw.utils.each(this.attributes,function(attribute,name) {
 			if(name.charAt(0) !== "$" && name !== "title") {
