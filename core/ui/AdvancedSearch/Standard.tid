@@ -12,21 +12,13 @@ caption: {{$:/language/Search/Standard/Caption}}
 </$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
-
-<$set name="resultCount" value="""<$count filter="[!is[system]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]]"/>""">
-
-<div class="tc-search-results">
-
-<<lingo Standard/Matches>>
-
-<$list filter="[!is[system]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]]" template="$:/core/ui/ListItemTemplate"/>
-
-</div>
-
+<$set name="searchTiddler" value="$:/temp/advancedsearch">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]butfirst[]limit[1]]" emptyMessage="""
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]">
+<$transclude/>
+</$list>
+""">
+<$macrocall $name="tabs" tabsList="[all[shadows+tiddlers]tag[$:/tags/SearchResults]!has[draft.of]]" default={{$:/config/SearchResults/Default}}/>
+</$list>
 </$set>
-
-</$reveal>
-
-<$reveal state="$:/temp/advancedsearch" type="match" text="">
-
 </$reveal>
