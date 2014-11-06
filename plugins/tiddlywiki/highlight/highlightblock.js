@@ -14,12 +14,15 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 
 var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
 
+if($tw.browser) {
+	var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js").hljs;
+	hljs.configure({tabReplace: "    "});	
+}
+
 CodeBlockWidget.prototype.postRender = function() {
 	var domNode = this.domNodes[0];
 	if($tw.browser && this.document !== $tw.fakeDocument && this.language) {
 		domNode.className = this.language.toLowerCase();
-		var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js").hljs;
-		hljs.tabReplace = "    ";
 		hljs.highlightBlock(domNode);
 	}
 };
