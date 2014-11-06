@@ -969,6 +969,7 @@ Options available:
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
 	literal: If true, searches for literal string, rather than separate search terms
+	field: If specified, restricts the search to the specified field
 */
 exports.search = function(text,options) {
 	options = options || {};
@@ -1007,13 +1008,17 @@ exports.search = function(text,options) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
 			match;
 		for(var t=0; t<searchTermsRegExps.length; t++) {
-			// Search title, tags and body
 			match = false;
-			if(contentTypeInfo.encoding === "utf8") {
-				match = match || searchTermsRegExps[t].test(tiddler.fields.text);
+			if(options.field) {
+				match = searchTermsRegExps[t].test(tiddler.getFieldString(options.field));
+			} else {
+				// Search title, tags and body
+				if(contentTypeInfo.encoding === "utf8") {
+					match = match || searchTermsRegExps[t].test(tiddler.fields.text);
+				}
+				var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
+				match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
 			}
-			var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
-			match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
 			if(!match) {
 				return false;
 			}
