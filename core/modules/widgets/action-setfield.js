@@ -57,6 +57,7 @@ SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
+	var self = this;
 	if(this.actionValue) {
 		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);		
 	}
