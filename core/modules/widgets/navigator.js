@@ -378,6 +378,22 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	if(typeof event.param === "object") {
 		// If we got a hashmap use it as the template
 		templateTiddler = event.param;
+		  // If a template property is specified and it is a tiddler, try to use this as a template instead
+		if("template" in event.param) {
+			var tObj = this.wiki.getTiddler(event.param.template);
+			// Filter properties to be passed as fields. Because events.param is immutable, we cannot simply delete fields
+			if(tObj) {
+				var additionalFields = {};
+				for(var p in event.param) {
+				 	// Do not consider the template attribute as this is now treated specially
+				  	if(p == "template") continue;
+					additionalFields[p] = event.param[p];
+				}
+				// Override the default templateTiddler variable we created above.
+				// Also merge the additional fields provided in param to allow additional fields and overrides
+				templateTiddler = new $tw.Tiddler(tObj, additionalFields);
+			}
+		}
 		if(templateTiddler.title) {
 			// Use the provided title
 			title = templateTiddler.title
