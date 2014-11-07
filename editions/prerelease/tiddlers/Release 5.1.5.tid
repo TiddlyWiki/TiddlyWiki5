@@ -17,7 +17,11 @@ type: text/vnd.tiddlywiki
 !! Usability Improvements
 
 * Improved layout of [[$:/TagManager]]
+* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/0a986ccd995266bf3a47182fa584d79f9dd3e153]] default tiddler toolbar buttons
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/63b00fd0f80ce0c9917e233287d4a0138e8c385f]] advanced search button to sidebar search results
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/4d061d0fee959fdc5ab470dc8f8379bedfa946d9]] search results by listing title matches at the top
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/da1f9f7d2233eb2aacc027bc1fc1053fa8b7bc2e]] input box for specifying new field value in edit template
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/0bb8e08edca61f415aa084327b6751c278e45108]] tag pill rendering so that the foreground colour is dynamically chosen for maximum contrast with the background colour
 
 !! Hackability Improvements
 
@@ -25,8 +29,10 @@ type: text/vnd.tiddlywiki
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results.tid]]
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] TimelineMacro to be able to use different date fields
+* [[Update|https://github.com/Jermolene/TiddlyWiki5/commit/8260d000be1cf1caf35a557f6cd54a0fb8ccf4f0]] [[FilterOperator: search]] to allow a field to be specified
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/73491f14dd63612d527632210d2c3873eb81188f]] the highlight plugin to display tabs as spaces
 
 !! Bug Fixes
 
@@ -46,6 +52,7 @@ type: text/vnd.tiddlywiki
 !! Changes affecting plugin authors
 
 * [[Disabled|https://github.com/Jermolene/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
+* [[Updated|]] structure of widget messages that have a hashmap parameter
 
 !! Contributors
 
