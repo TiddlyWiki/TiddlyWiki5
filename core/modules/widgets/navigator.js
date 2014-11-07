@@ -373,23 +373,26 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList(),
-		templateTiddler, title, draftTitle, existingTiddler, mergedTags;
-	// Work out the title of the target tiddler
-	if(typeof event.param === "object") {
-		// If we got a hashmap use it as the template
-		templateTiddler = event.param;
-		if(templateTiddler.title) {
-			// Use the provided title
-			title = templateTiddler.title
-		} else {
-			// Generate a new unique title
-			title = this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
-		}
-	} else {
-		// If we got a string, use it as the template and generate a new title
+		templateTiddler, additionalFields, title, draftTitle, existingTiddler, mergedTags;
+	// Get the template tiddler (if any)
+	if(typeof event.param === "string") {
+		// Get the template tiddler
 		templateTiddler = this.wiki.getTiddler(event.param);
+		// Generate a new title
 		title = this.wiki.generateNewTitle(event.param || $tw.language.getString("DefaultNewTiddlerTitle"));
 	}
+	// Get the specified additional fields
+	if(typeof event.paramObject === "object") {
+		additionalFields = event.paramObject;
+	}
+	if(typeof event.param === "object") { // Backwards compatibility with 5.1.3
+		additionalFields = event.param;
+	}
+	if(additionalFields.title) {
+		title = additionalFields.title;
+	}
+	// Generate a title if we don't have one
+	title = title || this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
 	// Find any existing draft for this tiddler
 	draftTitle = this.wiki.findDraft(title);
 	// Pull in any existing tiddler
@@ -400,15 +403,13 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		existingTiddler = this.wiki.getTiddler(title);
 	}
 	// Merge the tags
-	if(existingTiddler && existingTiddler.fields.tags && templateTiddler && templateTiddler.tags) {
+	if(existingTiddler && existingTiddler.fields.tags && additionalFields && additionalFields.tags) {
 		// Merge tags
-		mergedTags = $tw.utils.pushTop($tw.utils.parseStringArray(templateTiddler.tags),existingTiddler.fields.tags);
+		mergedTags = $tw.utils.pushTop($tw.utils.parseStringArray(additionalFields.tags),existingTiddler.fields.tags);
 	} else if(existingTiddler && existingTiddler.fields.tags) {
 		mergedTags = existingTiddler.fields.tags;
-	} else if(templateTiddler && templateTiddler.tags) {
-		mergedTags = templateTiddler.tags;
-	} else if(templateTiddler && templateTiddler.fields && templateTiddler.fields.tags) {
-		mergedTags = templateTiddler.fields.tags;
+	} else if(additionalFields && additionalFields.tags) {
+		mergedTags = additionalFields.tags;
 	}
 	// Save the draft tiddler
 	var draftTiddler = new $tw.Tiddler({
@@ -417,6 +418,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		},
 		templateTiddler,
 		existingTiddler,
+		additionalFields,
 		this.wiki.getCreationFields(),
 		{
 			title: draftTitle,
