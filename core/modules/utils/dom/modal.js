@@ -35,6 +35,8 @@ Modal.prototype.display = function(title,options) {
 	if(!tiddler) {
 		return;
 	}
+	// Create the variables
+	var variables = $tw.utils.extend({currentTiddler: title},options.variables);
 	// Create the wrapper divs
 	var wrapper = document.createElement("div"),
 		modalBackdrop = document.createElement("div"),
@@ -76,7 +78,8 @@ Modal.prototype.display = function(title,options) {
 					value: title
 		}}}],
 		parentWidget: $tw.rootWidget,
-		document: document
+		document: document,
+		variables: variables
 	});
 	headerWidgetNode.render(headerTitle,null);
 	this.wiki.addEventListener("change",function(changes) {
@@ -85,7 +88,8 @@ Modal.prototype.display = function(title,options) {
 	// Render the body of the message
 	var bodyWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		parentWidget: $tw.rootWidget,
-		document: document
+		document: document,
+		variables: variables
 	});
 	bodyWidgetNode.render(modalBody,null);
 	this.wiki.addEventListener("change",function(changes) {
@@ -125,7 +129,8 @@ Modal.prototype.display = function(title,options) {
 			}}}
 		]}],
 		parentWidget: $tw.rootWidget,
-		document: document
+		document: document,
+		variables: variables
 	});
 	footerWidgetNode.render(modalFooterButtons,null);
 	this.wiki.addEventListener("change",function(changes) {
