@@ -388,7 +388,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	if(typeof event.param === "object") { // Backwards compatibility with 5.1.3
 		additionalFields = event.param;
 	}
-	if(additionalFields.title) {
+	if(additionalFields && additionalFields.title) {
 		title = additionalFields.title;
 	}
 	// Generate a title if we don't have one
