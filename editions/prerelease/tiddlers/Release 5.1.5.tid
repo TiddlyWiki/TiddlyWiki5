@@ -33,6 +33,7 @@ type: text/vnd.tiddlywiki
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] TimelineMacro to be able to use different date fields
 * [[Update|https://github.com/Jermolene/TiddlyWiki5/commit/8260d000be1cf1caf35a557f6cd54a0fb8ccf4f0]] [[FilterOperator: search]] to allow a field to be specified
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/73491f14dd63612d527632210d2c3873eb81188f]] the highlight plugin to display tabs as spaces
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/91a7c397911726e391ca368f96b50fbe1687d56a]] modal handling to permit variables to be passed to the modal (see [[WidgetMessage: tm-modal]])
 
 !! Bug Fixes
 
@@ -52,7 +53,7 @@ type: text/vnd.tiddlywiki
 !! Changes affecting plugin authors
 
 * [[Disabled|https://github.com/Jermolene/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
-* [[Updated|]] structure of widget messages that have a hashmap parameter
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/d93c19daaa126f0938048009a83796cb52690541]] structure of widget messages that have a hashmap parameter
 
 !! Contributors
 
