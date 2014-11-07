@@ -8,10 +8,10 @@ fill:$(foregroundColor)$;
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
 <div class="tc-tiddler-title">
-<h2 class="tc-titlebar">
 <span class="tc-tiddler-controls">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list>
 </span>
+<h2 class="tc-titlebar">
 <$set name="foregroundColor" value={{!!color}}>
 <span style=<<title-styles>>>
 <$transclude tiddler={{!!icon}}/>
