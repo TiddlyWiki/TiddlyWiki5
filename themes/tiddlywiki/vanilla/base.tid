@@ -617,6 +617,11 @@ button.tc-untagged-label {
 	color: <<colour muted-foreground>>;
 }
 
+.tc-titlebar h2 {
+	font-size: 1em;
+	display: inline;
+}
+
 .tc-titlebar img {
 	height: 1em;
 }

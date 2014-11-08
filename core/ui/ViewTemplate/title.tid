@@ -8,7 +8,7 @@ fill:$(foregroundColor)$;
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
 <div class="tc-tiddler-title">
-<h2 class="tc-titlebar">
+<div class="tc-titlebar">
 <span class="tc-tiddler-controls">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]]" variable="listItem"><$reveal type="nomatch" state=<<config-title>> text="hide"><$transclude tiddler=<<listItem>>/></$reveal></$list>
 </span>
@@ -18,16 +18,16 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </span>
 </$set>
 <$list filter="[all[current]removeprefix[$:/]]">
-<span class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
+<h2 class="tc-title" title={{$:/language/SystemTiddler/Tooltip}}>
 <span class="tc-system-title-prefix">$:/</span><$text text=<<currentTiddler>>/>
-</span>
+</h2>
 </$list>
 <$list filter="[all[current]!prefix[$:/]]">
-<span class="tc-title">
+<h2 class="tc-title">
 <$view field="title"/>
-</span>
-</$list>
 </h2>
+</$list>
+</div>
 
 <$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup" animate="yes" retain="yes">
 
