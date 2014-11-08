@@ -634,8 +634,6 @@ button.tc-untagged-label {
 
 .tc-tiddler-frame .tc-tiddler-controls {
 	float: right;
-	font-size: 2.35em;
-	line-height: 1.2em;
 }
 
 .tc-tiddler-controls .tc-drop-down {
