@@ -1699,7 +1699,8 @@ $tw.boot.startup = function(options) {
 			themesEnvVar: "TIDDLYWIKI_THEME_PATH",
 			languagesEnvVar: "TIDDLYWIKI_LANGUAGE_PATH",
 			editionsEnvVar: "TIDDLYWIKI_EDITION_PATH"
-		}
+		},
+		log: {} // Log flags
 	});
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
