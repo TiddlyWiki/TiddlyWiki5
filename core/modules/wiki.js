@@ -1166,9 +1166,9 @@ exports.isDraftModified = function(title) {
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of"],
 		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
 	if(!origTiddler) {
-		return true;
+		return tiddler.fields.text !== "";
 	}
-	return !tiddler.isEqual(origTiddler,ignoredFields);
+	return tiddler.fields["draft.title"] !== tiddler.fields["draft.of"] || !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
 /*
