@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 ! Introduction
 
-The ''action-deletetiddler'' widget is an [[action widget|ActionWidgets]] that deletes a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+The ''action-deletetiddler'' widget is an [[action widget|ActionWidgets]] that deletes tiddlers. ActionWidgets are used within triggering widgets such as the ButtonWidget.
 
 There are several differences compared to the [[WidgetMessage: tm-delete-tiddler]]:
 
@@ -20,7 +20,8 @@ There are several differences compared to the [[WidgetMessage: tm-delete-tiddler
 The ''action-deletetiddler'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
-|$tiddler |The title of the tiddler to be deleted (if not provided defaults to the [[WidgetVariable: currentTiddler]] |
+|$tiddler |Optional title of the tiddler to be deleted |
+|$filter |Optional filter identifying tiddlers to be deleted |
 
 ! Examples
 
@@ -29,5 +30,5 @@ Here is an example of a button that deletes the tiddler HelloThere. Note:
 <$macrocall $name='wikitext-example-without-html'
 src='<$button>
 <$action-deletetiddler $tiddler="HelloThere"/>
-Go to Control Panel "Appearance" tab
+Delete "HelloThere"
 </$button>'/>

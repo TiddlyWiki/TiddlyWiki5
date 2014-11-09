@@ -35,8 +35,8 @@ DeleteTiddlerWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 DeleteTiddlerWidget.prototype.execute = function() {
-	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
-	this.actionConfirm = this.getAttribute("$confirm");
+	this.actionFilter = this.getAttribute("$filter");
+	this.actionTiddler = this.getAttribute("$tiddler");
 };
 
 /*
@@ -44,7 +44,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$tiddler"] || changedAttributes["$confirm"]) {
+	if(changedAttributes["$filter"] || changedAttributes["$tiddler"]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -55,8 +55,16 @@ DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 DeleteTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	
-	this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);
+	var tiddlers;
+	if(this.actionFilter) {
+		tiddlers = this.wiki.filterTiddlers(this.actionFilter,this);
+	}
+	if(this.actionTiddler) {
+		tiddlers.push(this.actionTiddler);
+	}
+	for(var t=0; t<tiddlers.length; t++) {
+		this.wiki.deleteTiddler(tiddlers[t]);
+	}
 	return true; // Action was invoked
 };
 
