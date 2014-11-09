@@ -37,16 +37,33 @@ TiddlerWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 TiddlerWidget.prototype.execute = function() {
-	// Get our parameters
-	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
-	// Set context variables
-	this.setVariable("currentTiddler",this.tiddlerTitle);
-	this.setVariable("missingTiddlerClass",(this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tc-tiddler-exists" : "tc-tiddler-missing");
-	this.setVariable("shadowTiddlerClass",this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tc-tiddler-shadow" : "");
-	this.setVariable("systemTiddlerClass",this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tc-tiddler-system" : "");
-	this.setVariable("tiddlerTagClasses",this.getTagClasses());
+	this.tiddlerState = this.computeTiddlerState();
+	this.setVariable("currentTiddler",this.tiddlerState.currentTiddler);
+	this.setVariable("missingTiddlerClass",this.tiddlerState.missingTiddlerClass);
+	this.setVariable("shadowTiddlerClass",this.tiddlerState.shadowTiddlerClass);
+	this.setVariable("systemTiddlerClass",this.tiddlerState.systemTiddlerClass);
+	this.setVariable("tiddlerTagClasses",this.tiddlerState.tiddlerTagClasses);
 	// Construct the child widgets
 	this.makeChildWidgets();
+};
+
+/*
+Compute the tiddler state flags
+*/
+TiddlerWidget.prototype.computeTiddlerState = function() {
+	// Get our parameters
+	this.tiddlerTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	// Compute the state
+	var state = {
+		currentTiddler: this.tiddlerTitle || "",
+		missingTiddlerClass: (this.wiki.tiddlerExists(this.tiddlerTitle) || this.wiki.isShadowTiddler(this.tiddlerTitle)) ? "tc-tiddler-exists" : "tc-tiddler-missing",
+		shadowTiddlerClass: this.wiki.isShadowTiddler(this.tiddlerTitle) ? "tc-tiddler-shadow" : "",
+		systemTiddlerClass: this.wiki.isSystemTiddler(this.tiddlerTitle) ? "tc-tiddler-system" : "",
+		tiddlerTagClasses: this.getTagClasses()
+	};
+	// Compute a simple hash to make it easier to detect changes
+	state.hash = state.currentTiddler + state.missingTiddlerClass + state.shadowTiddlerClass + state.systemTiddlerClass + state.tiddlerTagClasses;
+	return state;
 };
 
 /*
@@ -69,8 +86,9 @@ TiddlerWidget.prototype.getTagClasses = function() {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 TiddlerWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler) {
+	var changedAttributes = this.computeAttributes(),
+		newTiddlerState = this.computeTiddlerState();
+	if(changedAttributes.tiddler || newTiddlerState.hash !== this.tiddlerState.hash) {
 		this.refreshSelf();
 		return true;
 	} else {
