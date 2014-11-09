@@ -338,11 +338,12 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
 		originalTitle = draftTiddler.fields["draft.of"],
+		originalTiddler = this.wiki.getTiddler(originalTitle),
 		storyList = this.getStoryList();
 	if(draftTiddler && originalTitle) {
 		// Ask for confirmation if the tiddler text has changed
 		var isConfirmed = true;
-		if(this.wiki.getTiddlerText(draftTitle) !== this.wiki.getTiddlerText(originalTitle)) {
+		if(this.wiki.isDraftModified(draftTitle)) {
 			isConfirmed = confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
 				{variables:
@@ -353,9 +354,13 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 		// Remove the draft tiddler
 		if(isConfirmed) {
 			this.wiki.deleteTiddler(draftTitle);
-			this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
-			this.addToHistory(originalTitle,event.navigateFromClientRect);
-			this.saveStoryList(storyList);
+			if(originalTiddler) {
+				this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
+				this.addToHistory(originalTitle,event.navigateFromClientRect);
+			} else {
+				this.removeTitleFromStory(storyList,draftTitle);
+			}
+			this.saveStoryList(storyList);				
 		}
 	}
 	return false;
