@@ -55,7 +55,7 @@ DeleteTiddlerWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 DeleteTiddlerWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	var tiddlers;
+	var tiddlers = [];
 	if(this.actionFilter) {
 		tiddlers = this.wiki.filterTiddlers(this.actionFilter,this);
 	}
