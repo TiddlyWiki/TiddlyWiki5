@@ -220,7 +220,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if(!confirm($tw.language.getString(
+	if(this.wiki.getTiddler(originalTitle) && !confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
@@ -360,7 +360,9 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 			} else {
 				this.removeTitleFromStory(storyList,draftTitle);
 			}
-			this.saveStoryList(storyList);				
+			this.saveStoryList(storyList);
+			// Trigger an autosave
+			$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});			
 		}
 	}
 	return false;
