@@ -1,0 +1,9 @@
+title: $:/core/templates/exporters/JsonFile
+tags: $:/tags/Exporter
+description: JSON tiddlers file
+filename: tiddlers.json
+
+\define renderContent()
+<$text text=<<jsontiddlers filter:"""$(exportFilter)$""">>/>
+\end
+<<renderContent>>

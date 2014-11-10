@@ -1,0 +1,6 @@
+title: $:/core/ui/Buttons/export-page
+tags: $:/tags/PageControls
+caption: {{$:/core/images/export-button}} {{$:/language/Buttons/ExportPage/Caption}}
+description: {{$:/language/Buttons/ExportPage/Hint}}
+
+<$macrocall $name="exportButton" exportFilter="[!is[system]sort[title]]" lingoBase="$:/language/Buttons/ExportPage/"/>

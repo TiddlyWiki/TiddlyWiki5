@@ -1,0 +1,9 @@
+title: $:/core/templates/exporters/CsvFile
+tags: $:/tags/Exporter
+description: CSV tiddlers file
+filename: tiddlers.csv
+
+\define renderContent()
+<$text text=<<csvtiddlers filter:"""$(exportFilter)$""" format:"quoted-comma-sep">>/>
+\end
+<<renderContent>>
