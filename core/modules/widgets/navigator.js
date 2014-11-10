@@ -302,10 +302,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					}
 				));
 			}
-			if(!isRename && !this.wiki.isDraftModified(title)) {
-				event.type = "tm-cancel-tiddler";
-				this.dispatchEvent(event);
-			} else if(isConfirmed) {
+			if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
 				this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
 					title: draftTitle,
