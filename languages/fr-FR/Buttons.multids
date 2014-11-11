@@ -24,6 +24,12 @@ Encryption/ClearPassword/Caption: résilier le mot de passe
 Encryption/ClearPassword/Hint: Résilier le mot de passe et sauvegarder ce wiki sans chiffrement
 Encryption/SetPassword/Caption: affecter un mot de passe
 Encryption/SetPassword/Hint: Affecter un mot de passe pour sauvegarder une version chiffrée de ce wiki
+ExportPage/Caption: exporte tout
+ExportPage/Hint: Exporter tous les tiddlers
+ExportTiddler/Caption: exporte ce tiddler
+ExportTiddler/Hint: Exporter ce tiddler
+ExportTiddlers/Caption: exporte ces tiddlers
+ExportTiddlers/Hint: Exporter ces tiddlers
 FullScreen/Caption: plein-écran
 FullScreen/Hint: Entre ou sort du mode plein-écran
 Import/Caption: importer
