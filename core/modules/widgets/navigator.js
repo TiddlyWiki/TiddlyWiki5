@@ -208,19 +208,18 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
 		storyList = this.getStoryList(),
-		originalTitle, confirmationTitle;
+		originalTitle = tiddler.fields["draft.of"],
+		confirmationTitle;
 	// Check if the tiddler we're deleting is in draft mode
-	if(tiddler.hasField("draft.title")) {
+	if(originalTitle) {
 		// If so, we'll prompt for confirmation referencing the original tiddler
-		originalTitle = tiddler.fields["draft.of"];
 		confirmationTitle = originalTitle;
 	} else {
 		// If not a draft, then prompt for confirmation referencing the specified tiddler
-		originalTitle = null;
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if(this.wiki.getTiddler(originalTitle) && !confirm($tw.language.getString(
+	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
