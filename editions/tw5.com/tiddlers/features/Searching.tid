@@ -1,5 +1,5 @@
 created: 20140210160125905
-modified: 20140919155139513
+modified: 20141113174103422
 tags: Features [[Working with TiddlyWiki]]
 title: Searching in TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -14,12 +14,12 @@ Typing text into the search box in the sidebar will turn up a list of all the ti
 
 ''Advanced searching''
 
-To the right of the search box, when there are no search results displayed below it, you will find an ellipsis (...). Clicking on the ellipsis will open [[$:/AdvancedSearch]]. This tiddler contains four tabs.
+Clicking on the magnifying glass icon to the right of the search box will open [[$:/AdvancedSearch]]. This tiddler contains four tabs:
 
-* The ''standard'' tab contains another instance of the search box found in the sidebar.
+* The ''standard'' tab contains another instance of the search box found in the sidebar
 
-* The ''system'' tab allows you to limit your search to system tiddlers.
+* The ''system'' tab allows you to limit your search to system tiddlers
 
-* The ''shadows'' tab allows you to limit your search to shadow tiddlers.
+* The ''shadows'' tab allows you to limit your search to shadow tiddlers
 
-* The ''filter'' tab is not a search box, per se, but a way to obtain a list of all tiddlers that meet the specific criteria described by that filter, for example, "All tags except system tags". More information in [[Introduction to Filters]].
+* The ''filter'' tab is not a search box, per se, but a way to obtain a list of all tiddlers that meet the specific criteria described by that filter, for example, "All tags except system tags". More information in [[Introduction to Filters]]
