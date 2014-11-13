@@ -1550,11 +1550,14 @@ $tw.loadPlugins = function(plugins,libraryPath,envVar) {
 
 /*
 path: path of wiki directory
-parentPaths: array of parent paths that we mustn't recurse into
+options:
+	parentPaths: array of parent paths that we mustn't recurse into
+	readOnly: true if the tiddler file paths should not be retained
 */
-$tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
-	parentPaths = parentPaths || [];
-	var wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
+$tw.loadWikiTiddlers = function(wikiPath,options) {
+	options = options || {};
+	var parentPaths = options.parentPaths || [],
+		wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
 		wikiInfo,
 		pluginFields;
 	// Bail if we don't have a wiki info file
@@ -1567,10 +1570,16 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	if(wikiInfo.includeWikis) {
 		parentPaths = parentPaths.slice(0);
 		parentPaths.push(wikiPath);
-		$tw.utils.each(wikiInfo.includeWikis,function(includedWikiPath) {
-			var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
+		$tw.utils.each(wikiInfo.includeWikis,function(info) {
+			if(typeof info === "string") {
+				info = {path: info};
+			}
+			var resolvedIncludedWikiPath = path.resolve(wikiPath,info.path);
 			if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
-				var subWikiInfo = $tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				var subWikiInfo = $tw.loadWikiTiddlers(resolvedIncludedWikiPath,{
+					parentPaths: parentPaths,
+					readOnly: info["read-only"]
+				});
 				// Merge the build targets
 				wikiInfo.build = $tw.utils.extend([],subWikiInfo.build,wikiInfo.build);
 			} else {
@@ -1585,7 +1594,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
-		if(tiddlerFile.filepath) {
+		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,
