@@ -1,0 +1,9 @@
+title: TableOfContentsMacro Tabbed Example
+caption: Tabbed
+tags: table-of-contents-example
+
+!! Tabbed Table of Contents
+
+<$macrocall $name='wikitext-example-without-html'
+src='<<toc-tabbed tag:"TableOfContents" sort:"" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+'/>
