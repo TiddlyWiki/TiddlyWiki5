@@ -1,3 +1,0 @@
-title: $:/core/templates/alltiddlers.content
-
-{{{ [!is[system]sort[title]] ||$:/core/templates/static-tiddler}}}
