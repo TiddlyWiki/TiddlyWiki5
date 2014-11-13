@@ -1517,6 +1517,7 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	display: inline-block;
 	vertical-align: top;
 	padding-left: 1.5em;
+	padding-right: 1.5em;
 	border: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 50%;
 	flex: 1 0 50%;
