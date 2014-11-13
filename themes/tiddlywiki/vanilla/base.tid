@@ -438,11 +438,13 @@ button.tc-untagged-label {
 	width: 1em;
 }
 
-.tc-page-controls svg {
+.tc-page-controls svg,
+.tc-search svg {
 	fill: <<colour sidebar-controls-foreground>>;
 }
 
-.tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
+.tc-page-controls button:hover svg, .tc-page-controls a:hover svg,
+.tc-search button:hover svg, .tc-search a:hover svg {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
