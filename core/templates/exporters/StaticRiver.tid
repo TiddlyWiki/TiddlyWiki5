@@ -1,6 +1,6 @@
-title: $:/core/templates/exporters/Static
+title: $:/core/templates/exporters/StaticRiver
 tags: $:/tags/Exporter
-description: Tiddlers as static HTML
+description: {{$:/language/Exporters/StaticRiver}}
 filename: static.tiddlers.html
 
 \define tv-wikilink-template() #$uri_encoded$
@@ -27,7 +27,7 @@ filename: static.tiddlers.html
 <body class="tc-body">
 {{$:/StaticBanner||$:/core/templates/html-tiddler}}
 <section class="tc-story-river">
-{{$:/core/templates/exporters/Static/Content||$:/core/templates/html-tiddler}}
+{{$:/core/templates/exporters/StaticRiver/Content||$:/core/templates/html-tiddler}}
 </section>
 </body>
 </html>

@@ -1,6 +1,6 @@
 title: $:/core/templates/exporters/CsvFile
 tags: $:/tags/Exporter
-description: CSV tiddlers file
+description: {{$:/language/Exporters/CsvFile}}
 filename: tiddlers.csv
 
 \define renderContent()

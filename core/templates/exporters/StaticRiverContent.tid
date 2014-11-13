@@ -1,4 +1,4 @@
-title: $:/core/templates/exporters/Static/Content
+title: $:/core/templates/exporters/StaticRiver/Content
 
 \define renderContent()
 {{{ $(exportFilter)$ ||$:/core/templates/static-tiddler}}}

@@ -1,6 +1,6 @@
 title: $:/core/templates/exporters/TidFile
 tags: $:/tags/Exporter
-description: Plain text .tid tiddler file
+description: {{$:/language/Exporters/TidFile}}
 filename: tiddler.tid
 
 \define renderContent()

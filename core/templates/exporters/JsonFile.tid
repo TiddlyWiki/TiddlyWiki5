@@ -1,6 +1,6 @@
 title: $:/core/templates/exporters/JsonFile
 tags: $:/tags/Exporter
-description: JSON tiddlers file
+description: {{$:/language/Exporters/JsonFile}}
 filename: tiddlers.json
 
 \define renderContent()
