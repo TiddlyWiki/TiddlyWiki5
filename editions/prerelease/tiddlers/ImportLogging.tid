@@ -1,0 +1,14 @@
+title: ImportLogging
+created: 20141114100055595
+modified: 20141114100055595
+
+Browsers still have significant variations in their handling of drag and drop and clipboard operations.
+
+You can switch on special logging to help debug issues:
+
+# Open your browser JavaScript console
+# Type:
+#> ``$tw.log.IMPORT = true``
+# Drag or paste a file to import it
+# Look for debug information in the console. For example:
+#> ``Importing file 'my-image.png', type: 'image/png', isBinary: true``

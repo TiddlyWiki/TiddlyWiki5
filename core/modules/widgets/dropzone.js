@@ -127,6 +127,9 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 				var data = dataTransfer.getData(dataType.type);
 			// Import the tiddlers in the data
 			if(data !== "" && data !== null) {
+				if($tw.log.IMPORT) {
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
+				}
 				var tiddlerFields = dataType.convertToFields(data);
 				if(!tiddlerFields.title) {
 					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
@@ -208,6 +211,9 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 						text: str,
 						type: type
 					};
+					if($tw.log.IMPORT) {
+						console.log("Importing string '" + str + "', type: '" + type + "'");
+					}
 					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				});
 			}

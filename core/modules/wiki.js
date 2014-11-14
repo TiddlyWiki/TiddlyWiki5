@@ -1102,7 +1102,7 @@ exports.readFile = function(file,callback) {
 	var contentTypeInfo = $tw.config.contentTypeInfo[type],
 		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
 	// Log some debugging information
-	if($tw.log.FILES) {
+	if($tw.log.IMPORT) {
 		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);
 	}
 	// Create the FileReader
