@@ -1,0 +1,6 @@
+title: $:/language/Exporters/
+
+StaticRiver: 条目河的静态 HTML 文件
+JsonFile: JSON 条目文件
+CsvFile: CSV 条目文件
+TidFile: 单一条目 ".tid" 文件
