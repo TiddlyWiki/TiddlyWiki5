@@ -94,7 +94,3 @@ Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Auswählen, welche Buttons im Hauptmenü angezeigt werden:
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Auswählen, welche Buttons im "View Modus" angezeigt werden:
-Tools/Caption: Tools
-Tools/Download/Full/Caption: Herunterladen des ''gesamten Wikis''
-Tools/Export/AllAsStaticHTML/Caption: Alle Tiddler als "statische HTML" Dateien speichern. 
-Tools/Export/Heading: Export

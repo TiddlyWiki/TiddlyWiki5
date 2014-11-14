@@ -94,7 +94,3 @@ Toolbars/PageControls/Caption: 頁面工具列
 Toolbars/PageControls/Hint: 選擇將顯示哪些按鈕於主頁面的工具列
 Toolbars/ViewToolbar/Caption: 檢視工具列
 Toolbars/ViewToolbar/Hint: 選擇將顯示哪些按鈕於條目的檢視模式工具列
-Tools/Caption: 工具
-Tools/Download/Full/Caption: 下載完整副本
-Tools/Export/AllAsStaticHTML/Caption: 下載所有條目為靜態 HTML
-Tools/Export/Heading: 導出

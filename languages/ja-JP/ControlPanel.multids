@@ -94,7 +94,3 @@ Toolbars/PageControls/Caption: サイドバー
 Toolbars/PageControls/Hint: サイドバーに表示するボタンを選んでください。
 Toolbars/ViewToolbar/Caption: 閲覧画面
 Toolbars/ViewToolbar/Hint: 閲覧画面に表示するボタンを選んでください。
-Tools/Caption: ツール
-Tools/Download/Full/Caption: 全てダウンロードする
-Tools/Export/AllAsStaticHTML/Caption: すべての tiddler を含む閲覧用 HTML としてダウンロードする
-Tools/Export/Heading: エクスポート

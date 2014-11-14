@@ -53,7 +53,3 @@ Theme/Caption: Tema
 Theme/Prompt: Tema corrente:
 TiddlerFields/Caption: Campi frammenti
 TiddlerFields/Hint: Questa &egrave; la serie completa dei TiddlerFields utilizzati in questo wiki (sono inclusi i frammenti di sistema ed esclusi i frammenti nascosti).
-Tools/Caption: Strumenti
-Tools/Download/Full/Caption: Scarica l'intero wiki
-Tools/Export/AllAsStaticHTML/Caption: Scarica tutti i frammenti nel formato HTML statico
-Tools/Export/Heading: Esporta

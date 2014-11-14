@@ -94,7 +94,3 @@ Toolbars/PageControls/Caption: Γραμμή εργαλείων σελίδας
 Toolbars/PageControls/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται στην γραμμή εργαλείων της κεντρικής σελίδας
 Toolbars/ViewToolbar/Caption: Εμφάνιση γραμμής εργαλείων
 Toolbars/ViewToolbar/Hint: Επιλέξτε ποια κουμπιά θα εμφανίζονται για tiddlers σε κατάσταση προβολής
-Tools/Caption: Εργαλεία
-Tools/Download/Full/Caption: Λήψη του πλήρους wiki
-Tools/Export/AllAsStaticHTML/Caption: Λήψη όλων των tiddlers ως στατική HTML
-Tools/Export/Heading: Εξαγωγή
