@@ -18,5 +18,6 @@ RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Это системная заметка
 TagManager/Colour/Heading: Цвет
 TagManager/Icon/Heading: Значок
+TagManager/Info/Heading: Детали
 TagManager/Tag/Heading: Метка
 UnsavedChangesWarning: Изменения TiddlyWiki не сохранены
