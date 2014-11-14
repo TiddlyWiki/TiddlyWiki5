@@ -163,17 +163,24 @@ tags: $:/tags/Macro
 \end
 
 \define toc-tabbed(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
-<$linkcatcher to="$selectedTiddler$">
 <$tiddler tiddler={{$selectedTiddler$}}>
 <div class="tc-tabbed-table-of-contents">
+<$linkcatcher to="$selectedTiddler$">
 <div class="tc-table-of-contents">
 <$macrocall $name="toc-selective-expandable" tag="""$tag$""" sort="""$sort$""" itemClassFilter=<<toc-tabbed-selected-item-filter selectedTiddler:"""$selectedTiddler$""">>/>
 </div>
+</$linkcatcher>
 <div class="tc-tabbed-table-of-contents-content">
 <h1><$view field="caption"><$view field="title"/></$view></h1>
 <$transclude mode="block">$unselectedText$</$transclude>
 </div>
 </div>
 </$tiddler>
+\end
+
+\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
+<$linkcatcher to="""$selectedTiddler$""">
+<$macrocall $name="toc-tabbed" tag="""$tag$""" sort="""$sort$""" selectedTiddler="""$selectedTiddler$""" unselectedText="""$unselectedText$"""/>
 </$linkcatcher>
 \end
+

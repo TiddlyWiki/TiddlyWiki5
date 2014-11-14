@@ -4,6 +4,24 @@ tags: table-of-contents-example
 
 !! Tabbed Table of Contents
 
+The tabbed table of contents macro renders a selective expandable table of contents with an attached panel that displays the currently selected tiddler.
+
+!!! Internal navigation
+
+This example shows how to construct a tabbed table of contents with internal navigation, so that clicking links in the displayed tiddler will replace the displayed tiddler.
+
 <$macrocall $name='wikitext-example-without-html'
-src='<<toc-tabbed tag:"TableOfContents" sort:"" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+src='<<toc-tabbed-internal-nav tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+
 '/>
+
+!!! External navigation
+
+This example shows how to construct a tabbed table of contents with external navigation, so that clicking links in the displayed tiddler will open those tiddlers in the story river in the usual way.
+
+<$macrocall $name='wikitext-example-without-html'
+src='<<toc-tabbed tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+
+'/>
+
+
