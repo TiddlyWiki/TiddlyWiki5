@@ -1304,6 +1304,11 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
 	color: <<colour background>>;
+	fill: <<colour foreground>>;
+}
+
+a.tc-tiddlylink.tc-plugin-info:hover svg {
+	fill: <<colour foreground>>;
 }
 
 .tc-plugin-info-chunk {
@@ -1311,13 +1316,10 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	vertical-align: middle;	
 }
 
-.tc-plugin-info img {
-	width: 3em;
-}
-
-.tc-plugin-info svg {
-	width: 3em;
-	height: 3em;
+a.tc-plugin-info img, a.tc-plugin-info svg {
+	width: 2em;
+	height: 2em;
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-plugin-info-dropdown {
