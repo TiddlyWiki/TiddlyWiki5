@@ -24,6 +24,12 @@ Encryption/ClearPassword/Caption: сбросить пароль
 Encryption/ClearPassword/Hint: Сбросить пароль и сохранить без использования шифрования
 Encryption/SetPassword/Caption: установить пароль
 Encryption/SetPassword/Hint: Установить пароль и включить шифрование
+ExportPage/Caption: экспортировать всё
++ExportPage/Hint: Экспортировать все заметки
++ExportTiddler/Caption: экспортировать заметку
++ExportTiddler/Hint: Экспортировать заметку
++ExportTiddlers/Caption: экспортировать заметки
++ExportTiddlers/Hint: Экспортировать заметки
 FullScreen/Caption: полный экран
 FullScreen/Hint: Включить или выключить полноэкранный режим
 Import/Caption: импортировать
