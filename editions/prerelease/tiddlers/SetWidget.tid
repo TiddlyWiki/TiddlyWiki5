@@ -24,7 +24,7 @@ The simplest way of using set variable widget assigns a string to a variable. Th
 
 ```
 <$set name="myVariable" value="Some text">
-<<myVariable>>
+<$text text=<<myVariable>>/>
 </$set>
 ```
 
@@ -32,7 +32,7 @@ Both the name and value attributes can be transcluded. For example:
 
 ```
 <$set name=<<anotherVariable>> value={{template!!text}}>
-<<myVariable>>
+<$text text=<<myVariable>>/>
 </$set>
 ```
 
@@ -42,7 +42,7 @@ This form of the set variable widget chooses one of two specified values accordi
 
 ```
 <$set name="myVariable" filter="[all[current]field:title[myMagicTitle]]" value="It's magic" emptyValue="It's not magic">
-<<myVariable>>
+<$text text=<<myVariable>>/>
 </$set>
 ```
 
@@ -52,6 +52,6 @@ This form of the set variable widget evaluates the filter and assigns the result
 
 ```
 <$set name="myVariable" filter="[tag[Introduction]]">
-<<myVariable>>
+<$text text=<<myVariable>>/>
 </$set>
 ```
