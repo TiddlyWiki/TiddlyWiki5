@@ -10,18 +10,23 @@ The tabbed table of contents macro renders a selective expandable table of conte
 
 This example shows how to construct a tabbed table of contents with internal navigation, so that clicking links in the displayed tiddler will replace the displayed tiddler.
 
-<$macrocall $name='wikitext-example-without-html'
-src='<<toc-tabbed-internal-nav tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
-
-'/>
+```
+<<toc-tabbed-internal-nav tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+```
 
 !!! External navigation
 
 This example shows how to construct a tabbed table of contents with external navigation, so that clicking links in the displayed tiddler will open those tiddlers in the story river in the usual way.
 
-<$macrocall $name='wikitext-example-without-html'
-src='<<toc-tabbed tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+```
+<<toc-tabbed-external-nav tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Select a topic in the table of contents. Click the arrow to expand a topic.">>
+```
 
-'/>
+!! Example
 
+Type: <$select tiddler="TabbedExampleType">
+<option value="toc-tabbed-internal-nav">Open tiddler links internally (toc-tabbed-internal-nav)</option>
+<option value="toc-tabbed-external-nav">Open tiddler links externally (toc-tabbed-external-nav)</option>
+</$select>
 
+<$macrocall $name={{TabbedExampleType}} tag="TableOfContents" selectedTiddler="$:/temp/toc/selectedTiddler" unselectedText="Select a topic in the table of contents. Click the arrow to expand a topic."/>

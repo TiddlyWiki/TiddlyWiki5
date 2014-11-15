@@ -162,7 +162,7 @@ tags: $:/tags/Macro
 [all[current]field:title{$selectedTiddler$}]
 \end
 
-\define toc-tabbed(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
+\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
 <$tiddler tiddler={{$selectedTiddler$}}>
 <div class="tc-tabbed-table-of-contents">
 <$linkcatcher to="$selectedTiddler$">
@@ -180,7 +180,7 @@ tags: $:/tags/Macro
 
 \define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
 <$linkcatcher to="""$selectedTiddler$""">
-<$macrocall $name="toc-tabbed" tag="""$tag$""" sort="""$sort$""" selectedTiddler="""$selectedTiddler$""" unselectedText="""$unselectedText$"""/>
+<$macrocall $name="toc-tabbed-external-nav" tag="""$tag$""" sort="""$sort$""" selectedTiddler="""$selectedTiddler$""" unselectedText="""$unselectedText$"""/>
 </$linkcatcher>
 \end
 
