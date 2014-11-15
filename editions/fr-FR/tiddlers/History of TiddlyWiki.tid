@@ -1,0 +1,18 @@
+caption: Histoire de TiddlyWiki
+created: 20140908114400000
+creator: xcazin
+list: [[Origins of Tiddlywiki]] [[Launch of TiddlyWiki]] [[Growth of TiddlyWiki]] [[BT Acquisition]] [[Osmosoft and TiddlySpace]] [[Leaving BT]] [[Development of TiddlyWiki5]] Future
+modified: 20141115220155477
+modifier: xcazin
+tags: About
+title: History of TiddlyWiki
+type: text/vnd.tiddlywiki
+
+//Il s'agit de réflexions personnelles sur l'histoire et le développement de <<tw>>, par son créateur  JeremyRuston//.
+
+<$list filter="[list[]]">
+<$link>
+<h1><$transclude field="caption"><$view field="title"/></$transclude></h1>
+</$link>
+<$transclude mode="block"/>
+</$list>

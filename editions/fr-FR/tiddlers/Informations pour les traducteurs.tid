@@ -1,0 +1,9 @@
+created: 20141115212945847
+list-after: RoadMap
+modified: 20141115230417218
+tags: $:/tags/SideBar About
+title: Informations pour les traducteurs
+type: text/vnd.tiddlywiki
+
+*Les titres des tiddlers sont conservés en anglais, de sorte que les tiddlers traduits soient effectivement remplacés au moment d'être servis, et que les références croisées restent effectives. Pour faire apparaître les titres traduits, utilisez le champ `caption`, ainsi que le paramètre de libellé dans les [[liens wikitext|Linking in WikiText]].
+*Quelques raccourcis sont à votre disposition sous forme de macros dans le tiddler [[$:/editions/fr-FR/util-macros]]. Ils facilitent la saisie des chaînes de caractères typiquement françaises (comme les <<gf guillemets>>, mais aussi de mots fréquents (comme <<tw>>) ou compliqués comme <<latex>> (qui a sa propre [[feuille de style|$:/editions/fr-FR/CSS stylesheets/latex]]). N'hésitez pas à en ajouter<<pe>>
