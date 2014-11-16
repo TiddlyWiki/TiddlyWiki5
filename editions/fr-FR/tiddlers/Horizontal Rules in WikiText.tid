@@ -1,0 +1,18 @@
+caption: Ligne horizontale
+created: 20141017091105859
+creator: evolena
+modified: 20141116092622611
+modifier: evolena
+tags: WikiText
+title: Horizontal Rules in WikiText
+type: text/vnd.tiddlywiki
+
+Une ligne horizontale se crée avec trois caractères "moins" ou plus `---`, seuls sur une ligne :
+
+<<wikitexte-exemple "Paragraphe précédent.
+
+---
+Paragraphe suivant.">>
+
+; Remarque
+* La ligne vide avant la ligne horizontale est nécessaire pour que cette dernière soit interprétée correctement, et non comme un [[tiret|Dashes in WikiText]].

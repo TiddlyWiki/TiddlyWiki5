@@ -1,0 +1,13 @@
+caption: Tirets
+created: 20141016153634338
+creator: evolena
+modified: 20141116092606603
+modifier: evolena
+tags: WikiText
+title: Dashes in WikiText
+type: text/vnd.tiddlywiki
+
+Les [[tirets|Tirets]] se font avec :
+
+* deux caractères "moins" `--` pour le tiret moyen ou semi-cadratin : --
+* trois caractères "moins" `---` pour le tiret long ou cadratin : ---
