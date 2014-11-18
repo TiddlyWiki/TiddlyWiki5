@@ -7,6 +7,8 @@ url: https://github.com/wshallum/couchadaptor
 
 An adaptor to enable TiddlyWiki to sync changes with a [[CouchDB|http://couchdb.apache.org]] database.
 
+{{!!url}}
+
 <<<
 CouchDB sync adaptor for TiddlyWiki 5. Requires TiddlyWiki >= 5.1.2.
 
