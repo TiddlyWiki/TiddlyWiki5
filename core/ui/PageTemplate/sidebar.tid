@@ -19,7 +19,7 @@ tags: $:/tags/PageTemplate
 
 </div>
 
-{{$:/core/ui/PageTemplate/pagecontrols}}
+{{||$:/core/ui/PageTemplate/pagecontrols}}
 
 <$transclude tiddler="$:/core/ui/SideBarLists" mode="inline"/>
 
