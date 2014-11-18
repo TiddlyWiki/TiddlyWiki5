@@ -37,7 +37,7 @@ $title$$(currentTiddler)$
 </$button>
 </$reveal>
 \end
-<table>
+<table class="tc-tag-manager-table">
 <tbody>
 <tr>
 <th><<lingo Colour/Heading>></th>

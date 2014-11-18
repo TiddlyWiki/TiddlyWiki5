@@ -354,6 +354,10 @@ button.tc-untagged-label {
 	fill: <<colour tag-foreground>>;
 }
 
+.tc-tag-manager-table .tc-tag-label {
+	white-space: normal;
+}
+
 .tc-tag-manager-tag {
 	width: 100%;
 }
