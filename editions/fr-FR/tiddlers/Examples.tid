@@ -1,6 +1,8 @@
 caption: Exemples d'utilisation
 created: 20140320230543190
-modified: 20141115223249014
+creator: 127.0.0.1
+modified: 20141116113123645
+modifier: 127.0.0.1
 tags: HelloThere Community
 title: Examples
 type: text/vnd.tiddlywiki
@@ -15,7 +17,7 @@ Proposez de nouvelles entrées pour cette collection via GitHub, Twitter ou en p
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 

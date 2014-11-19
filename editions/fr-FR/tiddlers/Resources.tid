@@ -1,7 +1,8 @@
+caption: Ressources
 created: 20140320230543190
 creator: xcazin
-modified: 20140921094654807
-modifier: xcazin
+modified: 20141118215342409
+modifier: 127.0.0.1
 tags: Community
 title: Resources
 type: text/vnd.tiddlywiki
@@ -14,7 +15,7 @@ Voici quelques sites contenant des ressources créées par la [[communauté|Comm
 
 <div class="tc-link-info-item">
 
-! <$link><$view field="title"/></$link>
+! <$link><$view field="caption"><$view field="title"/></$view></$link>
 
 !!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
