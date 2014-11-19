@@ -1,0 +1,14 @@
+created: 20141117221740337
+creator: 127.0.0.1
+modified: 20141117221911824
+modifier: 127.0.0.1
+title: $:/core/ui/ListItemTemplate
+type: text/vnd.tiddlywiki
+
+<div class="tc-menu-list-item">
+<$link to={{!!title}}>
+<$view field="caption">
+<$view field="title"/>
+</$view>
+</$link>
+</div>
