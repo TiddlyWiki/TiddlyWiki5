@@ -39,8 +39,11 @@ describe("Utility tests", function() {
 		expect(ptr("ti#tle##index")).toEqual(
 			{ title : 'ti#tle', index : 'index' }
 		);
+		expect(ptr("ti!tle!!field")).toEqual(
+			{ title : 'ti!tle', field : 'field' }
+		);
 		expect(ptr("title##index!!field")).toEqual(
-			{ title : 'title', index : 'index!!field' }
+			{ title : 'title##index', field : 'field' }
 		);
 		expect(ptr("title!!field##index")).toEqual(
 			{ title : 'title', field : 'field##index' }
