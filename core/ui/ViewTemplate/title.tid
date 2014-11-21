@@ -29,7 +29,7 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$list>
 </div>
 
-<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup" animate="yes" retain="yes">
+<$reveal type="nomatch" text="" default="" state=<<tiddlerInfoState>> class="tc-tiddler-info tc-popup-keep" animate="yes" retain="yes">
 
 <$transclude tiddler="$:/core/ui/TiddlerInfo"/>
 

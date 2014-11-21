@@ -651,6 +651,10 @@ button.tc-untagged-label {
 	font-size: 0.6em;
 }
 
+.tc-tiddler-controls .tc-drop-down .tc-drop-down {
+	font-size: 1em;
+}
+
 .tc-tiddler-controls button {
 	vertical-align: baseline;
 }
@@ -915,6 +919,10 @@ canvas.tc-edit-bitmapeditor  {
 	white-space: nowrap;
 	text-shadow: none;
 	line-height: 1.4;
+}
+
+.tc-drop-down .tc-drop-down {
+	margin-left: 14px;
 }
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
