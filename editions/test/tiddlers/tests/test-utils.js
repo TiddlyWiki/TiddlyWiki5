@@ -15,13 +15,37 @@ Tests various utility functions.
 describe("Utility tests", function() {
 
 	it("should handle parsing a string array", function() {
-		expect($tw.utils.parseStringArray("Tiddler8")).toEqual(["Tiddler8"]);
-		expect($tw.utils.parseStringArray(" Tiddler8")).toEqual(["Tiddler8"]);
-		expect($tw.utils.parseStringArray("Tiddler8 ")).toEqual(["Tiddler8"]);
-		expect($tw.utils.parseStringArray("Tiddler8 two")).toEqual(["Tiddler8","two"]);
-		expect($tw.utils.parseStringArray(" Tiddler8 two ")).toEqual(["Tiddler8","two"]);
-		expect($tw.utils.parseStringArray(" Tidd\u00a0ler8 two ")).toEqual(["Tidd\u00a0ler8","two"]);
-		expect($tw.utils.parseStringArray(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
+		var psa = $tw.utils.parseStringArray;
+		expect(psa("Tiddler8")).toEqual(["Tiddler8"]);
+		expect(psa(" Tiddler8")).toEqual(["Tiddler8"]);
+		expect(psa("Tiddler8 ")).toEqual(["Tiddler8"]);
+		expect(psa("Tiddler8 two")).toEqual(["Tiddler8","two"]);
+		expect(psa(" Tiddler8 two ")).toEqual(["Tiddler8","two"]);
+		expect(psa(" Tidd\u00a0ler8 two ")).toEqual(["Tidd\u00a0ler8","two"]);
+		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
+	});
+
+	it("should parse text references", function() {
+		var ptr = $tw.utils.parseTextReference;
+		expect(ptr("title")).toEqual(
+			{ title : 'title' }
+		);
+		expect(ptr("ti#tle")).toEqual(
+			{ title : 'ti#tle' }
+		);
+		expect(ptr("ti!tle")).toEqual(
+			{ title : 'ti!tle' }
+		);
+		expect(ptr("ti#tle##index")).toEqual(
+			{ title : 'ti#tle', index : 'index' }
+		);
+		expect(ptr("title##index!!field")).toEqual(
+			{ title : 'title', index : 'index!!field' }
+		);
+		expect(ptr("title!!field##index")).toEqual(
+			{ title : 'title', field : 'field##index' }
+		);
+
 	});
 
 });
