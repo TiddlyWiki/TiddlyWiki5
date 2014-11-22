@@ -1899,6 +1899,36 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 	return true;
 };
 
+/*
+Global Hooks mechanism which allows plugins to modify default functionality
+*/
+$tw.hooks = $tw.hooks || { name: {}};
+ 
+/*
+Add hooks to the  hashmap 
+*/
+$tw.hooks.addHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.name,hookName)) {
+		alert($tw.hooks.name[hookName]);
+		$tw.hooks.name[hookName].push(definition);
+	}
+	else {
+		$tw.hooks.name[hookName] = [definition];
+	}
+};
+ 
+/*
+Invoke the hook by key 
+*/
+$tw.hooks.invokeHook = function(hookName, value) {
+	if($tw.utils.hop($tw.hooks.name,hookName)) {
+		for (var i = 0; i < $tw.hooks.name[hookName].length; i++) {
+			value = $tw.hooks.name[hookName][i](value);
+		}
+	}
+	return value;
+};
+
 /////////////////////////// Main boot function to decrypt tiddlers and then startup
 
 $tw.boot.boot = function() {
