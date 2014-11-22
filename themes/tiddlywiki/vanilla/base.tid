@@ -619,6 +619,10 @@ button.tc-untagged-label {
 	margin: 0;
 }
 
+.tc-tiddler-title-icon {
+	vertical-align: middle;
+}
+
 .tc-system-title-prefix {
 	color: <<colour muted-foreground>>;
 }
