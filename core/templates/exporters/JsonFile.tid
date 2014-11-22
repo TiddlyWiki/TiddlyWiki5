@@ -1,7 +1,7 @@
 title: $:/core/templates/exporters/JsonFile
 tags: $:/tags/Exporter
 description: {{$:/language/Exporters/JsonFile}}
-filename: tiddlers.json
+extension: .json
 
 \define renderContent()
 <$text text=<<jsontiddlers filter:"""$(exportFilter)$""">>/>
