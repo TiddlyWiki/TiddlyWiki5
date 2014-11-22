@@ -18,7 +18,7 @@ Creates a Popup object with these options:
 */
 var Popup = function(options) {
 	options = options || {};
-	this.rootElement = options.rootElement || document.body;
+	this.rootElement = options.rootElement || document.documentElement;
 	this.popups = []; // Array of {title:,wiki:,domNode:} objects
 };
 
