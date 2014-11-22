@@ -59,11 +59,11 @@ $(variableName)$
 If you want to set a variable that you can use outside of a macro you use the `<<name>>` syntax.
  The following code is an example of this usage.
 
-This colde will display `Test Name`.
+This code will display `Test Name`.
 
 ```
 <$set name='variableName' value='Test Name'>
-$(variableName)$
+<<variableName>>
 </$set>
 ```
 
