@@ -182,3 +182,5 @@ Mark S., @marxsal, 2014/10/18
 Erwan Moreau, @erwanm, 2014/10/27
 
 Felix Küppers, @felixhayashi, 2014/11/02
+
+Jedediah Carty, @inmysocks, 2014/11/21
