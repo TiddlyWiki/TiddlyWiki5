@@ -661,6 +661,7 @@ button.tc-untagged-label {
 
 .tc-tiddler-controls button {
 	vertical-align: baseline;
+	margin-left:5px;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img {
