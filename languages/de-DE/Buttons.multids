@@ -24,6 +24,12 @@ Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
 Encryption/SetPassword/Caption: verschlüsseln
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+ExportPage/Caption: alle exportieren
+ExportPage/Hint: Alle Tiddler exportieren
+ExportTiddler/Caption: exportieren
+ExportTiddler/Hint: Diesen Tiddler exportieren
+ExportTiddlers/Caption: mehrere exportieren
+ExportTiddlers/Hint: Mehrere Tiddler exportieren
 FullScreen/Caption: Vollbild
 FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-modus
 Import/Caption: Import
