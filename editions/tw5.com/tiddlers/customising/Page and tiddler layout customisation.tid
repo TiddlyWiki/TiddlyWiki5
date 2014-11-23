@@ -52,11 +52,7 @@ title="New tiddler"
 <span class="tc-btn-text"><$text text="CAPTION FOR YOUR BUTTON"/></span>
 </$list>
 </$button>
-```
 \end
 
 <<newHereButton>>
-
-# Finally, you will want a tiddler 
-
-
+```
