@@ -1909,7 +1909,6 @@ Add hooks to the  hashmap
 */
 $tw.hooks.addHook = function(hookName,definition) {
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
-		alert($tw.hooks.names[hookName]);
 		$tw.hooks.names[hookName].push(definition);
 	}
 	else {
