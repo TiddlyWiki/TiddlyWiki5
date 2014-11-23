@@ -1110,7 +1110,7 @@ canvas.tc-edit-bitmapeditor  {
 	position: fixed;
 	top: 14px;
 	right: 42px;
-	z-index: 1000;
+	z-index: 1300;
 	max-width: 280px;
 	padding: 0 14px 0 14px;
 	background-color: <<colour notification-background>>;
