@@ -1,9 +1,0 @@
-created: 20141117000000000
-modified: 20141117000000000
-tags: Learning "Customise TiddlyWiki"
-title: How to Add A Menu to the Sidebar
-type: text/vnd.tiddlywiki
-
-You can create a new tab in the sidebar menu by a tagging a tiddler with the [[SystemTiddler|SystemTiddlers]] tag ``$:/tags/SideBar``. The tiddler title will be used as the menu tab title by default, but you can use a different title by setting the ``caption`` field.
-
-You can populate the new menu tab using the [[Table of Contents Macro|TableOfContentsMacro]].
