@@ -13,6 +13,9 @@ http://$(userName)$.tiddlyspot.com/backup/
 </$set>
 </$reveal>
 \end
+
+{{$:/core/ui/ControlPanel/Settings/AutoSave}}
+
 ! <<lingo TiddlySpot/Heading>>
 
 <<lingo TiddlySpot/Description>>
@@ -29,4 +32,3 @@ http://$(userName)$.tiddlyspot.com/backup/
 |<<lingo TiddlySpot/BackupDir>> |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
 
 <<lingo TiddlySpot/Hint>>
-

@@ -4,7 +4,7 @@ caption: {{$:/language/ControlPanel/Settings/NavigationAddressBar/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Settings/NavigationAddressBar/
 
-<$link to="$:/config/Navigation/UpdateAddressBar"><<lingo Hint>></$link>
+<<lingo Hint>>
 
 <$radio tiddler="$:/config/Navigation/UpdateAddressBar" value="permaview"> <<lingo Permaview/Description>> </$radio>
 
