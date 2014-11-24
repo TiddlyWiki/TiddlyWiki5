@@ -10,7 +10,7 @@ caption: {{$:/language/ControlPanel/Settings/Caption}}
 
 <div style="border-top:1px solid #eee;">
 
-!! <$link><$transclude field="caption"/></$link>
+!! <$transclude field="caption"/>
 
 <$transclude/>
 
