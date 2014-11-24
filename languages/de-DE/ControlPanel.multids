@@ -4,7 +4,7 @@ Advanced/Caption: Erweitert
 Advanced/Hint: Interne Informationen über dieses ~TiddlyWiki.
 Appearance/Caption: Design
 Appearance/Hint: Möglichkeiten um das Aussehen Ihres ~TiddlyWiki's anzupassen.
-Basics/AnimDuration/Prompt: Animation Dauer:
+Basics/AnimDuration/Prompt: Dauer der Animation:
 Basics/Caption: Basis
 Basics/DefaultTiddlers/BottomHint: Verwenden Sie &#91;&#91;doppelte eckige Klammern&#93;&#93; für Titel mit Leerzeichen oder wählen Sie <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">Offene Tiddler beim Laden wiederherstellen.</$button>
 Basics/DefaultTiddlers/Prompt: Standard-Tiddler:
@@ -19,7 +19,7 @@ Basics/SystemTiddlers/Prompt: Anzahl System-Tiddler:
 Basics/Tags/Prompt: Anzahl Tags:
 Basics/Tiddlers/Prompt: Anzahl Tiddler:
 Basics/Title/Prompt: Titel dieses ~TiddlyWikis:
-Basics/Username/Prompt: Benutzersignatur zum editieren:
+Basics/Username/Prompt: Benutzersignatur zum Editieren:
 Basics/Version/Prompt: ~TiddlyWiki Version:
 EditorTypes/Caption: Editor Typen
 EditorTypes/Editor/Caption: Editor
@@ -82,8 +82,8 @@ Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
-Theme/Caption: Thema
-Theme/Prompt: Ausgewähltes Thema:
+Theme/Caption: Theme
+Theme/Prompt: Ausgewähltes Theme:
 TiddlerFields/Caption: Tiddler Felder
 TiddlerFields/Hint: Hier finden Sie alle [[Felder|TiddlerFields]], die in diesem Wiki verwendet werden. Inklusive der Felder aus System-, exklusive Schatten-Tiddler. 
 Toolbars/Caption: Toolbar
