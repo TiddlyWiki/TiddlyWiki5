@@ -16,7 +16,7 @@ http://$(userName)$.tiddlyspot.com/backup/
 
 {{$:/core/ui/ControlPanel/Settings/AutoSave}}
 
-! <<lingo TiddlySpot/Heading>>
+!! <<lingo TiddlySpot/Heading>>
 
 <<lingo TiddlySpot/Description>>
 

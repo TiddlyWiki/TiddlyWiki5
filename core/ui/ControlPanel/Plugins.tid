@@ -88,14 +88,14 @@ No information provided
 </$set>
 \end
 
-! <<lingo Plugin/Prompt>>
+!! <<lingo Plugin/Prompt>>
 
 <<plugin-table plugin>>
 
-! <<lingo Theme/Prompt>>
+!! <<lingo Theme/Prompt>>
 
 <<plugin-table theme>>
 
-! <<lingo Language/Prompt>>
+!! <<lingo Language/Prompt>>
 
 <<plugin-table language>>
