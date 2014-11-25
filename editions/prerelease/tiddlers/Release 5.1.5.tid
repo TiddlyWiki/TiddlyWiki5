@@ -66,6 +66,7 @@ type: text/vnd.tiddlywiki
 
 * [[Disabled|https://github.com/Jermolene/TiddlyWiki5/commit/f7a2849d27bb082e4bbf6b056a800a1edb30f510]] wiki change events for shadow tiddlers
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/d93c19daaa126f0938048009a83796cb52690541]] structure of widget messages that have a hashmap parameter
+* The support for nested popups has necessitated a change in the way that popups are styled that affects popups that are triggered with the focusPopup attribute of the EditTextWidget: it is now necessary for the widget to be given the class `tc-popup-handle`.
 
 !! Contributors
 
