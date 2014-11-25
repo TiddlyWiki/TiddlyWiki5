@@ -71,13 +71,11 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Fix height
 	this.fixHeight();
-
 	// Focus field
 	if(this.editFocus === "true") {
 		domNode.focus();
 		domNode.select();
 	}
-
 };
 
 /*
@@ -148,7 +146,6 @@ EditTextWidget.prototype.execute = function() {
 	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 	this.editFocusPopup = this.getAttribute("focusPopup");
 	this.editFocus = this.getAttribute("focus");
-
 	// Get the editor element tag and type
 	var tag,type;
 	if(this.editField === "text") {
