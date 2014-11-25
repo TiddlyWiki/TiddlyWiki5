@@ -6,7 +6,7 @@ caption: Sources
 http://tiddlywiki.com/static/<$view tiddler=<<currentTiddler>> field="title" format="doubleurlencoded"/>.html
 \end
 \define outerMakeStaticLink()
-__<$macrocall $name="makeStaticLink" $output="text/plain"/>__
+<$macrocall $name="makeStaticLink" $output="text/plain"/>
 \end
 \define makeGitHubLink()
 https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$(githubLink)$
@@ -16,13 +16,13 @@ https://github.com/Jermolene/TiddlyWiki5/blob/master/editions/tw5.com/tiddlers/$
 <a href=<<makeGitHubLink>> class="tc-tiddlylink-external" target="_blank"><$text text=<<makeGitHubLink>>/></a>
 </$set>
 \end
-<$list filter="[all[current]!prefix[$:/]]">
+<$list filter="[all[current]!prefix[$:/]!is[shadow]]">
 
 A static HTML representation of this tiddler is available at the URL:
 
-<<outerMakeStaticLink>>
+* <<outerMakeStaticLink>>
 
 Help us to improve the documentation by sending a ~GitHub pull request for this tiddler:
 
-<<outerMakeGitHubLink>>
+* <<outerMakeGitHubLink>>
 </$list>
