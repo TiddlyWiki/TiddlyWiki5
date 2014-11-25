@@ -3,6 +3,8 @@ modified: 20141122200310516
 title: Hook: tc-opening-default-tiddlers-list
 type: text/vnd.tiddlywiki
 
-This hook allows plugins to add aditional tiddlers to those specified in [[$:/DefaultTiddlers]]. 
+This hook allows plugins to add to or remove from the list of tiddlers that are opened when the wiki is first loaded or the home button is clicked.
 
-The function definition takes a list of tiddlers as it's argument and should return a modified list of tiddlers to display when the wiki is first loaded or the home button is pressed.  This hook is invoked after ``$tw.wiki.filterTiddlers`` is called on the contents of [[$:/DefaultTiddlers]] and it is therfore not correct to append additional filters to the list argument as they will not be  subsequently applied.
+The function takes a list of tiddlers as its only argument and returns a modified list of tiddler titles to display.
+
+Note that this hook is invoked with the tiddler titles that are generated from the filter in [[$:/DefaultTiddlers]]. Any added entries must be tiddler titles, not filter expressions.
