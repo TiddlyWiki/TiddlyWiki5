@@ -35,7 +35,6 @@ type: text/vnd.tiddlywiki
 * Introduced new ActionSetFieldWidget, ActionDeleteFieldWidget and ActionDeleteTiddlerWidget for manipulating tiddler fields and values
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/c7971d3da3bbef4bbc81d4462ee93590adc248f8]] [[WidgetMessage: tm-new-tiddler]] to allow a skeleton to be specified with additional fields
 * [[Enhanced|https://github.com/Jermolene/TiddlyWiki5/commit/4a172125768e3b33c30e725e8550454a9d26c5c4]] the EditTextWidget to allow more control over the sizing of textarea editors
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/91a7c397911726e391ca368f96b50fbe1687d56a]] modal handling to allow variables to be passed with the [[WidgetMessage: tm-modal]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results]]
@@ -43,7 +42,7 @@ type: text/vnd.tiddlywiki
 * [[Update|https://github.com/Jermolene/TiddlyWiki5/commit/8260d000be1cf1caf35a557f6cd54a0fb8ccf4f0]] [[FilterOperator: search]] to allow a field to be specified
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/73491f14dd63612d527632210d2c3873eb81188f]] the highlight plugin to display tabs as spaces
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/91a7c397911726e391ca368f96b50fbe1687d56a]] modal handling to permit variables to be passed to the modal (see [[WidgetMessage: tm-modal]])
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/853f5fd06402b16e271e8f119ef380de485aeff2]] simple ImportLogging to help track down drop/paste issues
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/853f5fd06402b16e271e8f119ef380de485aeff2]] simple logging to help track down drop/paste issues (see http://tiddlywiki.com/dev/#ImportLogging)
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/b520efdeb83f6ac7536a69cf5af2bab3f94cf77f]] [[WidgetMessage: tm-download-file]] and [[WidgetMessage: tm-save-wiki]] to allow variables to be specified for the rendering
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f5055c0205d24102a36b9cf3a9dd9306e148a1f0]] [[TableOfContentsMacro Tabbed Example]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/79e428757b5562bd4a925b9b0428ea4ba70ad05a]] RevealWidget so that it can be used without specifying a state tiddler
