@@ -1,5 +1,5 @@
 created: 20140811112201235
-modified: 20140811115140378
+modified: 20141110133723696
 tags: Messages
 title: WidgetMessage: tm-download-file
 type: text/vnd.tiddlywiki
@@ -9,6 +9,7 @@ The download file message causes the current saver module to prompt the user to 
 
 |!Name |!Description |
 |param |Title of a tiddler to use as a template for the new tiddler |
+|paramObject |Optional hashmap of variable values to use for the rendering |
 
 The download file message is usually generated with the ButtonWidget.
 

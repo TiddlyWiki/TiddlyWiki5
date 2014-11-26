@@ -1,6 +1,6 @@
 title: TimelineMacro
 tags: Macros
-modified: 20141015165343893
+modified: 20141103172520228
 caption: timeline
 
 The timeline macro produces a list of tiddlers in reverse chronological order of modification date that is grouped by the date of the day of modification.
@@ -11,6 +11,7 @@ The timeline macro produces a list of tiddlers in reverse chronological order of
 |1st |limit |The maximum number of tiddlers to list (see below) |100 |
 |2nd |format |A DateFormat string for formatting the date |DDth MMM YYYY |
 |3rd |subfilter |A subfilter to include in the timeline filter (see below)  | |
+|4th |dateField |Optional name of date field to use |modified |
 
 The subfilter and limit parameters are spliced into the filter string like this:
 
