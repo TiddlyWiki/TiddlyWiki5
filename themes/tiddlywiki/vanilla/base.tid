@@ -595,6 +595,7 @@ button.tc-untagged-label {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		border-radius: 2px;
 	}
 
 <<if-no-sidebar "
@@ -1164,6 +1165,8 @@ canvas.tc-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border>>;
 	border-top: 1px solid <<colour tab-border>>;
 	border-right: 1px solid <<colour tab-border>>;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
 }
 
 .tc-tab-buttons.tc-vertical button {
@@ -1175,6 +1178,8 @@ canvas.tc-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
 	border-right: none;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .tc-tab-buttons.tc-vertical button.tc-tab-selected {
