@@ -1,6 +1,6 @@
 caption: action-setfield
 created: 20141025120850184
-modified: 20141025120850184
+modified: 20141106173455527
 tags: Widgets ActionWidgets
 title: ActionSetFieldWidget
 type: text/vnd.tiddlywiki
@@ -15,6 +15,9 @@ The ''action-setfield'' widget is invisible. Any content within it is ignored.
 
 |!Attribute |!Description |
 |$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[WidgetVariable: currentTiddler]] |
+|$field |Optional name of a field to be assigned the $value attribute |
+|$index |Optional index of a property in a [[data tiddler|DataTiddlers]] to be assigned the $value attribute|
+|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field |
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be modified with the attribute value providing the value to assign to the field  |
 
 ! Examples
@@ -52,4 +55,13 @@ src='<$button>
 <$action-setfield $tiddler="HelloThere" tags="MoreTag [[Further More Tags]]" color="green"/>
 <$action-sendmessage $message="tm-edit-tiddler" $param="HelloThere"/>
 Edit ~HelloThere
+</$button>'/>
+
+Here is an example of a button that opens the control panel directly to the "Appearance" tabs:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-setfield $tiddler="$:/state/tab-1749438307" $field="text" $value="$:/core/ui/ControlPanel/Appearance"/>
+<$action-navigate $to="$:/ControlPanel"/>
+Go to Control Panel "Appearance" tab
 </$button>'/>

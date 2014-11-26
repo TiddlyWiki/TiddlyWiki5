@@ -94,7 +94,4 @@ Toolbars/PageControls/Caption: Side værktøjslinie
 Toolbars/PageControls/Hint: Vælg hvilke knapper der vises på hoved side værktøjslinien
 Toolbars/ViewToolbar/Caption: Betragtnings værktøjslinie
 Toolbars/ViewToolbar/Hint: Vælg hvilke knapper der vises i tiddlere i betragtnings tilstand
-Tools/Caption: Værktøj
 Tools/Download/Full/Caption: Hent fuld wiki
-Tools/Export/AllAsStaticHTML/Caption: Hent alle tiddlere som statisk HTML
-Tools/Export/Heading: Eksport

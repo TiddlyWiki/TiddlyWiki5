@@ -413,7 +413,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + ";})();\nreturn exports;\n})\n";
+	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
@@ -687,7 +687,7 @@ $tw.modules.execute = function(moduleName,moduleRoot) {
 				moduleInfo.exports = moduleInfo.definition;
 			}
 		} catch(e) {
-			$tw.utils.error("Error executing boot module " + name + ":\n" + e);
+			$tw.utils.error("Error executing boot module " + name + ":\n" + e.stack);
 		}
 	}
 	// Return the exports of the module
@@ -930,7 +930,7 @@ $tw.Wiki = function(options) {
 
 	};
 
-	// Test for the existence of a tiddler
+	// Test for the existence of a tiddler (excludes shadow tiddlers)
 	this.tiddlerExists = function(title) {
 		return !!$tw.utils.hop(tiddlers,title);
 	};
@@ -1550,11 +1550,14 @@ $tw.loadPlugins = function(plugins,libraryPath,envVar) {
 
 /*
 path: path of wiki directory
-parentPaths: array of parent paths that we mustn't recurse into
+options:
+	parentPaths: array of parent paths that we mustn't recurse into
+	readOnly: true if the tiddler file paths should not be retained
 */
-$tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
-	parentPaths = parentPaths || [];
-	var wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
+$tw.loadWikiTiddlers = function(wikiPath,options) {
+	options = options || {};
+	var parentPaths = options.parentPaths || [],
+		wikiInfoPath = path.resolve(wikiPath,$tw.config.wikiInfo),
 		wikiInfo,
 		pluginFields;
 	// Bail if we don't have a wiki info file
@@ -1567,10 +1570,16 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	if(wikiInfo.includeWikis) {
 		parentPaths = parentPaths.slice(0);
 		parentPaths.push(wikiPath);
-		$tw.utils.each(wikiInfo.includeWikis,function(includedWikiPath) {
-			var resolvedIncludedWikiPath = path.resolve(wikiPath,includedWikiPath);
+		$tw.utils.each(wikiInfo.includeWikis,function(info) {
+			if(typeof info === "string") {
+				info = {path: info};
+			}
+			var resolvedIncludedWikiPath = path.resolve(wikiPath,info.path);
 			if(parentPaths.indexOf(resolvedIncludedWikiPath) === -1) {
-				var subWikiInfo = $tw.loadWikiTiddlers(resolvedIncludedWikiPath,parentPaths);
+				var subWikiInfo = $tw.loadWikiTiddlers(resolvedIncludedWikiPath,{
+					parentPaths: parentPaths,
+					readOnly: info["read-only"]
+				});
 				// Merge the build targets
 				wikiInfo.build = $tw.utils.extend([],subWikiInfo.build,wikiInfo.build);
 			} else {
@@ -1585,7 +1594,7 @@ $tw.loadWikiTiddlers = function(wikiPath,parentPaths) {
 	// Load the wiki files, registering them as writable
 	var resolvedWikiPath = path.resolve(wikiPath,$tw.config.wikiTiddlersSubDir);
 	$tw.utils.each($tw.loadTiddlersFromPath(resolvedWikiPath),function(tiddlerFile) {
-		if(tiddlerFile.filepath) {
+		if(!options.readOnly && tiddlerFile.filepath) {
 			$tw.utils.each(tiddlerFile.tiddlers,function(tiddler) {
 				$tw.boot.files[tiddler.title] = {
 					filepath: tiddlerFile.filepath,
@@ -1699,7 +1708,8 @@ $tw.boot.startup = function(options) {
 			themesEnvVar: "TIDDLYWIKI_THEME_PATH",
 			languagesEnvVar: "TIDDLYWIKI_LANGUAGE_PATH",
 			editionsEnvVar: "TIDDLYWIKI_EDITION_PATH"
-		}
+		},
+		log: {} // Log flags
 	});
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
@@ -1887,6 +1897,35 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 		}
 	}
 	return true;
+};
+
+/*
+Global Hooks mechanism which allows plugins to modify default functionality
+*/
+$tw.hooks = $tw.hooks || { names: {}};
+ 
+/*
+Add hooks to the  hashmap 
+*/
+$tw.hooks.addHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		$tw.hooks.names[hookName].push(definition);
+	}
+	else {
+		$tw.hooks.names[hookName] = [definition];
+	}
+};
+ 
+/*
+Invoke the hook by key 
+*/
+$tw.hooks.invokeHook = function(hookName, value) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		for (var i = 0; i < $tw.hooks.names[hookName].length; i++) {
+			value = $tw.hooks.names[hookName][i](value);
+		}
+	}
+	return value;
 };
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup

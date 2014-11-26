@@ -461,21 +461,31 @@ Returns an object with the following fields, all optional:
 */
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
-	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##(.+)))?\s*/mg,
-		match = reTextRef.exec(textRef);
+	var reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg,
+		match = reTextRef.exec(textRef),
+		result = {};
 	if(match && reTextRef.lastIndex === textRef.length) {
 		// Return the parts
-		return {
-			title: match[1],
-			field: match[2],
-			index: match[3]
-		};
+		if(match[1]) {
+			result.title = match[1];
+		}
+		if(match[2]) {
+			result.field = match[2];
+		}
+		if(match[3]) {
+			result.title = match[3];
+		}
+		if(match[4]) {
+			result.index = match[4];
+		}
+		if(match[5]) {
+			result.title = match[5];
+		}
 	} else {
-		// If we couldn't parse it (eg it started with a)
-		return {
-			title: textRef
-		};
+		// If we couldn't parse it
+		result.title = textRef
 	}
+	return result;
 };
 
 /*

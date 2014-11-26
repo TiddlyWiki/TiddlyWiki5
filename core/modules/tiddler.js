@@ -63,6 +63,9 @@ tiddler: the tiddler to compare
 excludeFields: array of field names to exclude from the comparison
 */
 exports.isEqual = function(tiddler,excludeFields) {
+	if(!(tiddler instanceof $tw.Tiddler)) {
+		return false;
+	}
 	excludeFields = excludeFields || [];
 	var self = this,
 		differences = []; // Fields that have differences

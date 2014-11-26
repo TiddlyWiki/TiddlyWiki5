@@ -148,7 +148,7 @@ EditCodeMirrorWidget.prototype.getEditInfo = function() {
 	if(this.editType) {
 		type = this.editType;
 	}
-	return {value: value, type: type, update: update};
+	return {value: value || "", type: type, update: update};
 };
 
 /*

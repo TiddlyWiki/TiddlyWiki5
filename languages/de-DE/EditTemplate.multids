@@ -5,6 +5,8 @@ Body/Hint: Verwenden Sie zum Formatieren [[WikiText|http://tiddlywiki.com/static
 Body/Placeholder: Geben Sie den Text für diesen Tiddler ein.
 Body/Preview/Button/Hide: Vorschau aus
 Body/Preview/Button/Show: Vorschau
+Field/Remove/Caption: Lösche Feld
+Field/Remove/Hint: Lösche Feld
 Fields/Add/Button: ok
 Fields/Add/Name/Placeholder: Feld Name
 Fields/Add/Prompt: Feld einfügen:
@@ -13,5 +15,11 @@ Shadow/Warning: Dies ist ein Schatten-Tiddler. Jede Änderung überschreibt die 
 Shadow/OverriddenWarning: Dies ist ein veränderter Tiddler. Um zur Standardversion zurückzukehren, löschen Sie diesen Tiddler.
 Tags/Add/Button: ok
 Tags/Add/Placeholder: neuer Tag
+Tags/Dropdown/Caption: Tag Liste
+Tags/Dropdown/Hint: Tag Liste anzeigen
+Type/Dropdown/Caption: Tiddler Typ Liste
+Type/Dropdown/Hint: Anzeigen der Tiddler Typ Liste
+Type/Delete/Caption: Lösche Inhalts Typ
+Type/Delete/Hint: Lösche Inhalts Typ
 Type/Placeholder: Tiddler Format
 Type/Prompt: Typ:

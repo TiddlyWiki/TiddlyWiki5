@@ -1,5 +1,5 @@
 created: 20141010093214683
-modified: 20141010093214683
+modified: 20141125123700243
 tags: [[Working with TiddlyWiki]]
 title: Creating journal tiddlers
 type: text/vnd.tiddlywiki
@@ -32,5 +32,8 @@ Visit the control panel Info/Basics tab to configure new journal creation:
 * "Tags for new journal tiddlers" specifies one or more optional tags that are automatically applied to new journal tiddlers. Multiple tags should be separated with spaces. Tags containing spaces should be surrounded by double square brackes. For example: `Journal [[Multi-word tag]]`
 
 One useful hint is to use a title format such as `YYYY-0MM-0DD at 0hhh0mm'0ss''` which causes the time (including seconds) to be included in the journal title. This means that a new, separate journal tiddler will be created each time the button is clicked.
+
+Another useful trick is to include the string `$(currentTiddler)$` in the journal title format string which causes the title of the current tiddler to be included. This means that a separate journal tiddler will be created each time "new journal here" is used on a different tiddler.
+
 
 

@@ -17,7 +17,7 @@ var HtmlParser = function(type,text,options) {
 	if(options._canonical_uri) {
 		src = options._canonical_uri;
 	} else if(text) {
-		src = "data:text/html," + encodeURIComponent(text);
+		src = "data:text/html;charset=utf-8," + encodeURIComponent(text);
 	}
 	this.tree = [{
 		type: "element",

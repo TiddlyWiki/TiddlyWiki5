@@ -208,19 +208,18 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
 		storyList = this.getStoryList(),
-		originalTitle, confirmationTitle;
+		originalTitle = tiddler.fields["draft.of"],
+		confirmationTitle;
 	// Check if the tiddler we're deleting is in draft mode
-	if(tiddler.hasField("draft.title")) {
+	if(originalTitle) {
 		// If so, we'll prompt for confirmation referencing the original tiddler
-		originalTitle = tiddler.fields["draft.of"];
 		confirmationTitle = originalTitle;
 	} else {
 		// If not a draft, then prompt for confirmation referencing the specified tiddler
-		originalTitle = null;
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if(!confirm($tw.language.getString(
+	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
@@ -302,10 +301,7 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 					}
 				));
 			}
-			if(!isRename && !this.wiki.isDraftModified(title)) {
-				event.type = "tm-cancel-tiddler";
-				this.dispatchEvent(event);
-			} else if(isConfirmed) {
+			if(isConfirmed) {
 				// Save the draft tiddler as the real tiddler
 				this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
 					title: draftTitle,
@@ -338,11 +334,12 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
 		originalTitle = draftTiddler.fields["draft.of"],
+		originalTiddler = this.wiki.getTiddler(originalTitle),
 		storyList = this.getStoryList();
 	if(draftTiddler && originalTitle) {
 		// Ask for confirmation if the tiddler text has changed
 		var isConfirmed = true;
-		if(this.wiki.getTiddlerText(draftTitle) !== this.wiki.getTiddlerText(originalTitle)) {
+		if(this.wiki.isDraftModified(draftTitle)) {
 			isConfirmed = confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
 				{variables:
@@ -353,9 +350,15 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 		// Remove the draft tiddler
 		if(isConfirmed) {
 			this.wiki.deleteTiddler(draftTitle);
-			this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
-			this.addToHistory(originalTitle,event.navigateFromClientRect);
+			if(originalTiddler) {
+				this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
+				this.addToHistory(originalTitle,event.navigateFromClientRect);
+			} else {
+				this.removeTitleFromStory(storyList,draftTitle);
+			}
 			this.saveStoryList(storyList);
+			// Trigger an autosave
+			$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});			
 		}
 	}
 	return false;
@@ -373,23 +376,26 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList(),
-		templateTiddler, title, draftTitle, existingTiddler, mergedTags;
-	// Work out the title of the target tiddler
-	if(typeof event.param === "object") {
-		// If we got a hashmap use it as the template
-		templateTiddler = event.param;
-		if(templateTiddler.title) {
-			// Use the provided title
-			title = templateTiddler.title
-		} else {
-			// Generate a new unique title
-			title = this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
-		}
-	} else {
-		// If we got a string, use it as the template and generate a new title
+		templateTiddler, additionalFields, title, draftTitle, existingTiddler;
+	// Get the template tiddler (if any)
+	if(typeof event.param === "string") {
+		// Get the template tiddler
 		templateTiddler = this.wiki.getTiddler(event.param);
+		// Generate a new title
 		title = this.wiki.generateNewTitle(event.param || $tw.language.getString("DefaultNewTiddlerTitle"));
 	}
+	// Get the specified additional fields
+	if(typeof event.paramObject === "object") {
+		additionalFields = event.paramObject;
+	}
+	if(typeof event.param === "object") { // Backwards compatibility with 5.1.3
+		additionalFields = event.param;
+	}
+	if(additionalFields && additionalFields.title) {
+		title = additionalFields.title;
+	}
+	// Generate a title if we don't have one
+	title = title || this.wiki.generateNewTitle($tw.language.getString("DefaultNewTiddlerTitle"));
 	// Find any existing draft for this tiddler
 	draftTitle = this.wiki.findDraft(title);
 	// Pull in any existing tiddler
@@ -400,15 +406,17 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		existingTiddler = this.wiki.getTiddler(title);
 	}
 	// Merge the tags
-	if(existingTiddler && existingTiddler.fields.tags && templateTiddler && templateTiddler.tags) {
+	var mergedTags = [];
+	if(existingTiddler && existingTiddler.fields.tags) {
+		$tw.utils.pushTop(mergedTags,existingTiddler.fields.tags)
+	}
+	if(additionalFields && additionalFields.tags) {
 		// Merge tags
-		mergedTags = $tw.utils.pushTop($tw.utils.parseStringArray(templateTiddler.tags),existingTiddler.fields.tags);
-	} else if(existingTiddler && existingTiddler.fields.tags) {
-		mergedTags = existingTiddler.fields.tags;
-	} else if(templateTiddler && templateTiddler.tags) {
-		mergedTags = templateTiddler.tags;
-	} else if(templateTiddler && templateTiddler.fields && templateTiddler.fields.tags) {
-		mergedTags = templateTiddler.fields.tags;
+		mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
+	}
+	if(templateTiddler && templateTiddler.fields.tags) {
+		// Merge tags
+		mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
 	}
 	// Save the draft tiddler
 	var draftTiddler = new $tw.Tiddler({
@@ -417,6 +425,7 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		},
 		templateTiddler,
 		existingTiddler,
+		additionalFields,
 		this.wiki.getCreationFields(),
 		{
 			title: draftTitle,

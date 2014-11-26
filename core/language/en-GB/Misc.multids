@@ -18,5 +18,6 @@ RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
 TagManager/Icon/Heading: Icon
+TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 UnsavedChangesWarning: You have unsaved changes in TiddlyWiki

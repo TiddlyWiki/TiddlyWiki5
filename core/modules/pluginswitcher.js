@@ -60,29 +60,10 @@ PluginSwitcher.prototype.switchPlugins = function() {
 	accumulatePlugin(selectedPluginTitle);
 	// Unregister any existing theme tiddlers
 	var unregisteredTiddlers = $tw.wiki.unregisterPluginTiddlers(this.pluginType);
-	// Accumulate the titles of shadow tiddlers that have changed as a result of this switch
-	var changedTiddlers = {};
-	this.wiki.eachShadow(function(tiddler,title) {
-		var source = self.wiki.getShadowSource(title);
-		if(unregisteredTiddlers.indexOf(source) !== -1) {
-			changedTiddlers[title] = true; // isDeleted?
-		}
-	});
 	// Register any new theme tiddlers
 	var registeredTiddlers = $tw.wiki.registerPluginTiddlers(this.pluginType,plugins);
 	// Unpack the current theme tiddlers
 	$tw.wiki.unpackPluginTiddlers();
-	// Accumulate the affected shadow tiddlers
-	this.wiki.eachShadow(function(tiddler,title) {
-		var source = self.wiki.getShadowSource(title);
-		if(registeredTiddlers.indexOf(source) !== -1) {
-			changedTiddlers[title] = false; // isDeleted?
-		}
-	});
-	// Issue change events for the modified tiddlers
-	$tw.utils.each(changedTiddlers,function(status,title) {
-		self.wiki.enqueueTiddlerEvent(title,status);
-	});
 };
 
 exports.PluginSwitcher = PluginSwitcher;

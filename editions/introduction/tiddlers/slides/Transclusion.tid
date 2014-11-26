@@ -1,0 +1,14 @@
+title: Transclusion
+tags: [[This is a tag]] [[This is another tag]]
+
+Transcluding a tiddler inserts a copy of its content, allowing you to reuse the same text or image more than once. For example,
+
+```
+This is my cat {{Motovun Jack.svg}} and his identical twin {{Motovun Jack.svg}}
+```
+
+<div class="tc-example-box">
+This is my cat {{Motovun Jack.svg}} and his identical twin {{Motovun Jack.svg}}
+</div>
+
+Next, weaving tiddlers into [[Lists]].

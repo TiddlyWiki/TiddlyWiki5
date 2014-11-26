@@ -39,9 +39,21 @@ Compute the internal state of the widget
 SetWidget.prototype.execute = function() {
 	// Get our parameters
 	this.setName = this.getAttribute("name","currentTiddler");
+	this.setFilter = this.getAttribute("filter");
 	this.setValue = this.getAttribute("value");
+	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
-	this.setVariable(this.setName,this.setValue,this.parseTreeNode.params);
+	var value = this.setValue;
+	if(this.setFilter) {
+		var results = this.wiki.filterTiddlers(this.setFilter,this);
+		if(!this.setValue) {
+			value = $tw.utils.stringifyList(results);
+		}
+		if(results.length === 0 && this.setEmptyValue !== undefined) {
+			value = this.setEmptyValue;
+		}
+	}
+	this.setVariable(this.setName,value,this.parseTreeNode.params);
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
@@ -51,7 +63,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 SetWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.name || changedAttributes.value) {
+	if(changedAttributes.name || changedAttributes.filter || changedAttributes.value || changedAttributes.emptyValue) {
 		this.refreshSelf();
 		return true;
 	} else {

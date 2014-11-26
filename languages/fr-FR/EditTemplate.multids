@@ -1,16 +1,25 @@
 title: $:/language/EditTemplate/
 
-Body/Hint: Utilisez WikiText pour formater ou ajouter des images et des fonctions dynamiques
-Body/Placeholder: Entrez le texte
+Body/External/Hint: Ceci est un tiddler externe, conservé en dehors du fichier TiddlyWiki principal. Vous pouvez éditer les tags et les champs mais pas directement le contenu lui-même
+Body/Hint: Utilisez [[WikiText|http://tiddlywiki.com/static/WikiText.html]] pour formater ou ajouter des images et des fonctions dynamiques
+Body/Placeholder: Entrez le texte ici
 Body/Preview/Button/Hide: Cacher la prévisualisation
 Body/Preview/Button/Show: Afficher la prévisualisation
+Field/Remove/Caption: supprimer le champ
+Field/Remove/Hint: Supprime le champ
 Fields/Add/Button: ajouter
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
-Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
 Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut, il vous suffit de supprimer ce tiddler.
+Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
 Tags/Add/Button: ajouter
 Tags/Add/Placeholder: nom du tag
+Tags/Dropdown/Caption: liste des tags
+Tags/Dropdown/Hint: Montre la liste des tags
+Type/Dropdown/Caption: liste des types de contenu
+Type/Dropdown/Hint: Montre la liste des types de contenu
+Type/Delete/Caption: supprimer le type de contenu
+Type/Delete/Hint: Supprime le type de contenu
 Type/Placeholder: type du contenu
 Type/Prompt: Type :

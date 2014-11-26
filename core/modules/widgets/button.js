@@ -36,14 +36,18 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Create element
 	var domNode = this.document.createElement("button");
 	// Assign classes
-	var classes = this["class"].split(" ") || [];
+	var classes = this["class"].split(" ") || [],
+		isPoppedUp = this.popup && this.isPoppedUp();
 	if(this.selectedClass) {
 		if(this.set && this.setTo && this.isSelected()) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
 		}
-		if(this.popup && this.isPoppedUp()) {
+		if(isPoppedUp) {
 			$tw.utils.pushTop(classes,this.selectedClass.split(" "));
 		}
+	}
+	if(isPoppedUp) {
+		$tw.utils.pushTop(classes,"tc-popup-handle");
 	}
 	domNode.className = classes.join(" ");
 	// Assign other attributes
@@ -101,7 +105,7 @@ ButtonWidget.prototype.isSelected = function() {
 
 ButtonWidget.prototype.isPoppedUp = function() {
 	var tiddler = this.wiki.getTiddler(this.popup);
-	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(this.popup,tiddler.fields.text) : false;
+	var result = tiddler && tiddler.fields.text ? $tw.popup.readPopupState(tiddler.fields.text) : false;
 	return result;
 };
 

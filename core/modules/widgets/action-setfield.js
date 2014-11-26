@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/action-setfield.js
 type: application/javascript
 module-type: widget
 
-Action widget to send a message
+Action widget to set a single field or index on a tiddler.
 
 \*/
 (function(){
@@ -36,6 +36,9 @@ Compute the internal state of the widget
 */
 SetFieldWidget.prototype.execute = function() {
 	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
+	this.actionField = this.getAttribute("$field");
+	this.actionIndex = this.getAttribute("$index");
+	this.actionValue = this.getAttribute("$value");
 };
 
 /*
@@ -43,7 +46,7 @@ Refresh the widget by ensuring our attributes are up to date
 */
 SetFieldWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes["$tiddler"]) {
+	if(changedAttributes["$tiddler"] || changedAttributes["$field"] || changedAttributes["$index"] || changedAttributes["$value"]) {
 		this.refreshSelf();
 		return true;
 	}
@@ -55,6 +58,9 @@ Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this;
+	if(typeof this.actionValue === "string") {
+		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);		
+	}
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
 			self.wiki.setText(self.actionTiddler,name,undefined,attribute);

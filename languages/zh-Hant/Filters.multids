@@ -1,6 +1,7 @@
 title: $:/language/Filters/
 
 AllTiddlers: 所有條目，不含系統條目
+RecentSystemTiddlers: 最近修改的條目，包含系統條目
 RecentTiddlers: 最近修改的條目
 AllTags: 所有標籤，不含系統標籤
 Missing: 佚失條目

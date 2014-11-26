@@ -154,15 +154,16 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 			// Then the data
 			dataTransfer.clearData();
 			var jsonData = this.wiki.getTiddlerAsJson(this.to),
-				textData = this.wiki.getTiddlerText(this.to,"");
+				textData = this.wiki.getTiddlerText(this.to,""),
+				title = this.to.indexOf(" ") === -1 ? this.to : "[[" + this.to + "]]";
 			// IE doesn't like these content types
 			if(!$tw.browser.isIE) {
 				dataTransfer.setData("text/vnd.tiddler",jsonData);
-				dataTransfer.setData("text/plain",this.to);
+				dataTransfer.setData("text/plain",title);
 				dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURI(jsonData));
 			}
 			dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(jsonData));
-			dataTransfer.setData("Text",this.to);
+			dataTransfer.setData("Text",title);
 			event.stopPropagation();
 		} else {
 			event.preventDefault();

@@ -55,25 +55,19 @@ SendMessageWidget.prototype.refresh = function(changedTiddlers) {
 Invoke the action associated with this widget
 */
 SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
-	// Get the parameter
+	// Get the string parameter
 	var param = this.actionParam;
-	// If the parameter is missing then we'll assemble the attributes as a hashmap
-	if(!param) {
-		param = Object.create(null);
-		var count = 0;
-		$tw.utils.each(this.attributes,function(attribute,name) {
-			if(name.charAt(0) !== "$") {
-				param[name] = attribute;
-				count++;
-			}
-		});
-		// Revert to an empty parameter if no values were found
-		if(!count) {
-			param = undefined;
+	// Assemble the attributes as a hashmap
+	var paramObject = Object.create(null);
+	var count = 0;
+	$tw.utils.each(this.attributes,function(attribute,name) {
+		if(name.charAt(0) !== "$") {
+			paramObject[name] = attribute;
+			count++;
 		}
-	}
+	});
 	// Dispatch the message
-	this.dispatchEvent({type: this.actionMessage, param: param, tiddlerTitle: this.getVariable("currentTiddler")});
+	this.dispatchEvent({type: this.actionMessage, param: param, paramObject: paramObject, tiddlerTitle: this.getVariable("currentTiddler")});
 	return true; // Action was invoked
 };
 

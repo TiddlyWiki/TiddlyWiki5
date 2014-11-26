@@ -71,6 +71,11 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	}
 	// Fix height
 	this.fixHeight();
+	// Focus field
+	if(this.editFocus === "true") {
+		domNode.focus();
+		domNode.select();
+	}
 };
 
 /*
@@ -140,6 +145,7 @@ EditTextWidget.prototype.execute = function() {
 	this.editAutoHeight = this.getAttribute("autoHeight","yes") === "yes";
 	this.editMinHeight = this.getAttribute("minHeight",DEFAULT_MIN_TEXT_AREA_HEIGHT);
 	this.editFocusPopup = this.getAttribute("focusPopup");
+	this.editFocus = this.getAttribute("focus");
 	// Get the editor element tag and type
 	var tag,type;
 	if(this.editField === "text") {
@@ -206,27 +212,25 @@ EditTextWidget.prototype.fixHeight = function() {
 	var self = this,
 		domNode = this.domNodes[0];
 	if(this.editAutoHeight && domNode && !domNode.isTiddlyWikiFakeDom && this.editTag === "textarea") {
-		$tw.utils.nextTick(function() {
-			// Resize the textarea to fit its content, preserving scroll position
-			var scrollPosition = $tw.utils.getScrollPosition(),
-				scrollTop = scrollPosition.y;
-			// Measure the specified minimum height
-			domNode.style.height = self.editMinHeight;
-			var minHeight = domNode.offsetHeight;
-			// Set its height to auto so that it snaps to the correct height
-			domNode.style.height = "auto";
-			// Calculate the revised height
-			var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,minHeight);
-			// Only try to change the height if it has changed
-			if(newHeight !== domNode.offsetHeight) {
-				domNode.style.height =  newHeight + "px";
-				// Make sure that the dimensions of the textarea are recalculated
-				$tw.utils.forceLayout(domNode);
-				// Check that the scroll position is still visible before trying to scroll back to it
-				scrollTop = Math.min(scrollTop,self.document.body.scrollHeight - window.innerHeight);
-				window.scrollTo(scrollPosition.x,scrollTop);
-			}
-		});
+		// Resize the textarea to fit its content, preserving scroll position
+		var scrollPosition = $tw.utils.getScrollPosition(),
+			scrollTop = scrollPosition.y;
+		// Measure the specified minimum height
+		domNode.style.height = self.editMinHeight;
+		var minHeight = domNode.offsetHeight;
+		// Set its height to auto so that it snaps to the correct height
+		domNode.style.height = "auto";
+		// Calculate the revised height
+		var newHeight = Math.max(domNode.scrollHeight + domNode.offsetHeight - domNode.clientHeight,minHeight);
+		// Only try to change the height if it has changed
+		if(newHeight !== domNode.offsetHeight) {
+			domNode.style.height =  newHeight + "px";
+			// Make sure that the dimensions of the textarea are recalculated
+			$tw.utils.forceLayout(domNode);
+			// Check that the scroll position is still visible before trying to scroll back to it
+			scrollTop = Math.min(scrollTop,self.document.body.scrollHeight - window.innerHeight);
+			window.scrollTo(scrollPosition.x,scrollTop);
+		}
 	}
 };
 

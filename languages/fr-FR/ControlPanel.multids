@@ -94,7 +94,4 @@ Toolbars/PageControls/Caption: Barre d'outils de la page
 Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
 Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
 Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
-Tools/Caption: Outils
 Tools/Download/Full/Caption: Télécharger le wiki complet
-Tools/Export/AllAsStaticHTML/Caption: Regrouper tous les tiddlers dans un même fichier HTML statique
-Tools/Export/Heading: Exporter

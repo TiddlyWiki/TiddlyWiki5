@@ -1,5 +1,5 @@
 created: 2014013122133816
-modified: 20140415114024493
+modified: 20141111122437656
 tags: howto
 title: How to create plugins in the browser
 type: text/vnd.tiddlywiki
@@ -59,7 +59,11 @@ You should see a confirmation message, and then if you inspect the plugin tiddle
 
 Each time you save the plugin the last portion of the version number is automatically incremented. This will ensure that users with an older version of your plugin will be able to install the new version.
 
-!! 5. Repacking the plugin
+!! 5. Testing the plugin
+
+To test the plugin, first make sure that it has been packed. Then save changes and refresh the page in order to load the new plugin.
+
+!! 6. Repacking the plugin
 
 Once you've built the plugin for the first time you can omit the second parameter to `repackPlugin()` unless you are adding a new tiddler:
 
@@ -67,7 +71,7 @@ Once you've built the plugin for the first time you can omit the second paramete
 $tw.utils.repackPlugin("$:/plugins/yourname/pluginname")
 ```
 
-!! 6. Removing tiddlers from the plugin
+!! 7. Removing tiddlers from the plugin
 
 To remove tiddlers from the plugin specify their titles in the optional third parameter:
 

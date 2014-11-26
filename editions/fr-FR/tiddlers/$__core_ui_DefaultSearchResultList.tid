@@ -1,0 +1,25 @@
+caption: {{$:/language/Search/DefaultResults/Caption}}
+created: 20141117081621387
+creator: 127.0.0.1
+modified: 20141118214915276
+modifier: 127.0.0.1
+tags: $:/tags/SearchResults
+title: $:/core/ui/DefaultSearchResultList
+type: text/vnd.tiddlywiki
+
+\define searchResultList()
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+
+{{$:/language/Search/Matches}}
+
+</$set>
+
+//<small>Correspondances parmi les titres :</small>//
+
+<$list filter="[!is[system]search:caption{$(searchTiddler)$}sort[caption]limit[250]] [!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+
+//<small>Toutes les correspondances :</small>//
+
+<$list filter="[!is[system]search{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+\end
+<<searchResultList>>

@@ -94,7 +94,4 @@ Toolbars/PageControls/Caption: 页面工具栏
 Toolbars/PageControls/Hint: 选择将显示哪些按钮于主页面的工具栏
 Toolbars/ViewToolbar/Caption: 查看工具栏
 Toolbars/ViewToolbar/Hint: 选择将显示哪些按钮于条目的查看模式工具栏
-Tools/Caption: 工具
 Tools/Download/Full/Caption: 下载完整副本
-Tools/Export/AllAsStaticHTML/Caption: 下载所有条目为静态 HTML
-Tools/Export/Heading: 导出

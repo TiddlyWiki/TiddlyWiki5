@@ -324,7 +324,7 @@ button svg.tc-image-button, button .tc-image-button img {
 
 button.tc-tag-label, span.tc-tag-label {
 	display: inline-block;
-	padding: 2px 9px;
+	padding: 0.16em 0.7em;
 	font-size: 0.9em;
 	font-weight: 300;
 	line-height: 1.2em;
@@ -332,7 +332,7 @@ button.tc-tag-label, span.tc-tag-label {
 	white-space: nowrap;
 	vertical-align: baseline;
 	background-color: <<colour tag-background>>;
-	border-radius: 8px;
+	border-radius: 1em;
 }
 
 .tc-untagged-separator {
@@ -352,6 +352,14 @@ button.tc-untagged-label {
 	height: 1em;
 	width: 1em;
 	fill: <<colour tag-foreground>>;
+}
+
+.tc-tag-manager-table .tc-tag-label {
+	white-space: normal;
+}
+
+.tc-tag-manager-tag {
+	width: 100%;
 }
 
 /*
@@ -434,11 +442,13 @@ button.tc-untagged-label {
 	width: 1em;
 }
 
-.tc-page-controls svg {
+.tc-page-controls svg,
+.tc-search svg {
 	fill: <<colour sidebar-controls-foreground>>;
 }
 
-.tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
+.tc-page-controls button:hover svg, .tc-page-controls a:hover svg,
+.tc-search button:hover svg, .tc-search a:hover svg {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
@@ -609,8 +619,17 @@ button.tc-untagged-label {
 	margin: 0;
 }
 
+.tc-tiddler-title-icon {
+	vertical-align: middle;
+}
+
 .tc-system-title-prefix {
 	color: <<colour muted-foreground>>;
+}
+
+.tc-titlebar h2 {
+	font-size: 1em;
+	display: inline;
 }
 
 .tc-titlebar img {
@@ -636,8 +655,13 @@ button.tc-untagged-label {
 	font-size: 0.6em;
 }
 
+.tc-tiddler-controls .tc-drop-down .tc-drop-down {
+	font-size: 1em;
+}
+
 .tc-tiddler-controls button {
 	vertical-align: baseline;
+	margin-left:5px;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img {
@@ -852,6 +876,11 @@ canvas.tc-edit-bitmapeditor  {
 	width: 15%;
 }
 
+.tc-edit-field-add-value {
+	display: inline-block;
+	width: 40%;
+}
+
 .tc-edit-field-add-button {
 	display: inline-block;
 	width: 10%;
@@ -895,6 +924,10 @@ canvas.tc-edit-bitmapeditor  {
 	white-space: nowrap;
 	text-shadow: none;
 	line-height: 1.4;
+}
+
+.tc-drop-down .tc-drop-down {
+	margin-left: 14px;
 }
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
@@ -1078,7 +1111,7 @@ canvas.tc-edit-bitmapeditor  {
 	position: fixed;
 	top: 14px;
 	right: 42px;
-	z-index: 1000;
+	z-index: 1300;
 	max-width: 280px;
 	padding: 0 14px 0 14px;
 	background-color: <<colour notification-background>>;
@@ -1288,6 +1321,11 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	text-decoration: none;
 	background-color: <<colour primary>>;
 	color: <<colour background>>;
+	fill: <<colour foreground>>;
+}
+
+a.tc-tiddlylink.tc-plugin-info:hover svg {
+	fill: <<colour foreground>>;
 }
 
 .tc-plugin-info-chunk {
@@ -1295,13 +1333,10 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	vertical-align: middle;	
 }
 
-.tc-plugin-info img {
-	width: 3em;
-}
-
-.tc-plugin-info svg {
-	width: 3em;
-	height: 3em;
+a.tc-plugin-info img, a.tc-plugin-info svg {
+	width: 2em;
+	height: 2em;
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-plugin-info-dropdown {
@@ -1445,6 +1480,66 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 .tc-table-of-contents li li li li {
 	font-size: 0.95em;
 	font-weight: 200;
+}
+
+.tc-tabbed-table-of-contents {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents {
+	z-index: 100;
+	display: inline-block;
+	padding-left: 1em;
+	max-width: 50%;
+	-webkit-flex: 0 0 auto;
+	flex: 0 0 auto;
+	background: <<colour tab-background>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-top: 1px solid <<colour tab-border>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a,
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
+	display: block;
+	padding: 0.12em 1em 0.12em 0.25em;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a {
+	border-top: 1px solid <<colour tab-background>>;
+	border-left: 1px solid <<colour tab-background>>;
+	border-bottom: 1px solid <<colour tab-background>>;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item > a:hover {
+	text-decoration: none;
+	border-top: 1px solid <<colour tab-border>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+	background: <<colour tab-border>>;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a {
+	border-top: 1px solid <<colour tab-border>>;
+	border-left: 1px solid <<colour tab-border>>;
+	border-bottom: 1px solid <<colour tab-border>>;
+	background: <<colour background>>;
+	margin-right: -1px;
+}
+
+.tc-tabbed-table-of-contents .tc-table-of-contents .toc-item-selected > a:hover {
+	text-decoration: none;
+}
+
+.tc-tabbed-table-of-contents .tc-tabbed-table-of-contents-content {
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	border: 1px solid <<colour tab-border>>;
+	-webkit-flex: 1 0 50%;
+	flex: 1 0 50%;
 }
 
 /*

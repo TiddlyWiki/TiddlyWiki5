@@ -1,0 +1,45 @@
+caption: action-deletefield
+created: 20141025120850184
+modified: 20141025120850184
+tags: Widgets ActionWidgets
+title: ActionDeleteFieldWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-deletefield'' widget is an [[action widget|ActionWidgets]] that deletes specified fields of a tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-deletefield'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[WidgetVariable: currentTiddler]] |
+|$field |Optional name of a field to delete |
+|//{any attributes not starting with $}// |Each attribute name specifies a field to be deleted. The attribute value is ignored and need not be specified |
+
+! Examples
+
+Here is an example of a button that deletes the caption and tags fields of the current tiddler:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-deletefield caption tags/>
+Delete "caption" and "tags"
+</$button>'/>
+
+Here is an example of a button that deletes the modified date and tags fields of the tiddler HelloThere:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-deletefield $tiddler="HelloThere" modified tags/>
+Delete "modified" and "tags" from ~HelloThere
+</$button>'/>
+
+Here is an example of a button that uses the optional $field attribute to delete the text field of the tiddler HelloThere:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-deletefield $tiddler="HelloThere" $field="text"/>
+Delete text from ~HelloThere
+</$button>'/>

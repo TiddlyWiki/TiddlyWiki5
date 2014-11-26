@@ -13,8 +13,6 @@ Here are some webpages with tips and tutorials related to ~TiddlyWiki
 
 ! <$link><$view field="title"/></$link>
 
-!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
-
 <div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
 
 <$transclude/>

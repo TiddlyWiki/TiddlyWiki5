@@ -1,0 +1,13 @@
+created: 20141029162816366
+modified: 20141029163114250
+title: Formatting
+
+Tiddlers can contain formatted text:
+
+> {{FormattingDemoText}}
+
+Formatting is typed with special codes:
+
+<$edit-text tiddler="FormattingDemoText" class="tc-edit-texteditor" minHeight="10px"/>
+
+TiddlyWiki is not just for text. [[Images]] are first class citizens, too.

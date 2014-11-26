@@ -1,0 +1,10 @@
+caption: Plugin Markdown
+created: 20141116085424505
+modified: 20141116085526169
+tags: Plugins
+title: Markdown Plugin
+type: text/vnd.tiddlywiki
+
+Le plugin Markdown permet d'utiliser des tiddlers écrits avec les conventions de balisage [[Markdown]] standard.
+
+Voir http://tiddlywiki.com/plugins/tiddlywiki/markdown/
