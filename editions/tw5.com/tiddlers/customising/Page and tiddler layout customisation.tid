@@ -9,7 +9,7 @@ One major feature of TiddlyWiki that many new users are unaware of is the degree
 * You can also add and remove default features from the general page layout (maybe you want to add a clock to the sidebar, or replace one of the page control buttons with your own)
 * You can also rearrange the order in which these features are displayed (perhaps you would like tags above tiddler titles, or the subtitle of your TiddlyWiki below the page control buttons)
 
-Once you know what you are doing, all of these things are actually pretty easy to do. There are two steps involved:
+Once you know what you are doing, all of these things are actually pretty easy to do.
 
 ! Adding custom-made tiddlers to the user interface
 
