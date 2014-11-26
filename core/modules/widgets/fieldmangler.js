@@ -73,7 +73,15 @@ FieldManglerWidget.prototype.handleRemoveFieldEvent = function(event) {
 FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 	var tiddler = this.wiki.getTiddler(this.mangleTitle);
 	if(tiddler && typeof event.param === "string") {
-		var name = event.param.toLowerCase().trim();
+		var name = event.param;
+		var colon = name.indexOf(":");
+		var value = "";
+		if(colon>0) {
+			value = name.substr(colon+1).trim();
+			name= name.substr(0, colon).trim().toLowerCase();
+		} else {
+			name= name.toLowerCase().trim();
+		}
 		if(name !== "" && !$tw.utils.hop(tiddler.fields,name)) {
 			if(!$tw.utils.isValidFieldName(name)) {
 				alert($tw.language.getString(
@@ -85,7 +93,7 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 				return true;
 			}
 			var addition = this.wiki.getModificationFields();
-			addition[name] = "";
+			addition[name] = value;
 			this.wiki.addTiddler(new $tw.Tiddler(tiddler,addition));
 		}
 	}
