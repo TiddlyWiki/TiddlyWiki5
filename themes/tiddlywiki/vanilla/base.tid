@@ -1209,6 +1209,10 @@ canvas.tc-edit-bitmapeditor  {
 	flex: 1 0 70%;
 }
 
+.tc-sidebar-lists .tc-tab-buttons {
+	margin-bottom: -1px;
+}
+
 .tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {
 	background-color: <<colour sidebar-tab-background-selected>>;
 	color: <<colour sidebar-tab-foreground-selected>>;
