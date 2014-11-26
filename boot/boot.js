@@ -62,14 +62,19 @@ $tw.utils.isDate = function(value) {
 Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)
 */
 $tw.utils.each = function(object,callback) {
-	var f;
+	var next, f;
+
 	if(object) {
 		if(Object.prototype.toString.call(object) == "[object Array]") {
-			object.forEach(callback);
+			for (f = 0; f < object.length; f++) {
+				next = callback(object[f],f);
+				if (next === false) break;
+		    }
 		} else {
 			for(f in object) {
 				if(Object.prototype.hasOwnProperty.call(object,f)) {
-					callback(object[f],f,object);
+					next = callback(object[f],f,object);
+					if (next === false) break;
 				}
 			}
 		}
