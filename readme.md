@@ -14,6 +14,12 @@ clearpassword
 </li>
 
 <li>
+<a class='tc-tiddlylink tc-tiddlylink-resolves' href='http://tiddlywiki.com/static/EditionsCommand.html'>
+editions
+</a>
+</li>
+
+<li>
 <a class='tc-tiddlylink tc-tiddlylink-resolves' href='http://tiddlywiki.com/static/HelpCommand.html'>
 help
 </a>
@@ -82,6 +88,12 @@ server
 <li>
 <a class='tc-tiddlylink tc-tiddlylink-resolves' href='http://tiddlywiki.com/static/SetFieldCommand.html'>
 setfield
+</a>
+</li>
+
+<li>
+<a class='tc-tiddlylink tc-tiddlylink-resolves' href='http://tiddlywiki.com/static/UnpackPluginCommand.html'>
+unpackplugin
 </a>
 </li>
 
