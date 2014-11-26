@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 Welcome to ~TiddlyWiki, a versatile note-taking web application you can download for free, store wherever you like and customise however you wish. Use it to capture, organise and share your notes in ways that word processors and other note-taking tools cannot.
 
-<$button class="tc-btn-invisible" to="Introduction Video" style="fill:red;">
+<$button class="tc-btn-big-green" to="Introduction Video" style="background:red;">
 {{$:/core/images/video}} Watch a video introduction
 </$button>
 
