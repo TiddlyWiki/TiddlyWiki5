@@ -660,7 +660,7 @@ button.tc-untagged-label {
 	font-size: 1em;
 }
 
-.tc-tiddler-controls button {
+.tc-tiddler-controls > span > button {
 	vertical-align: baseline;
 	margin-left:5px;
 }
@@ -917,7 +917,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-drop-down {
-	min-width: 280px;
+	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
 	padding: 7px 0 7px 0;
@@ -1004,7 +1004,7 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-block-dropdown {
 	position: absolute;
-	min-width: 280px;
+	min-width: 220px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
 	padding: 7px 0;
