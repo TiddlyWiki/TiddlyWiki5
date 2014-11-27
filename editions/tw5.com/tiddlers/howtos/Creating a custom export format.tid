@@ -7,7 +7,7 @@ To create a custom export format that exports tiddlers as their raw body text:
 
 # Create a tiddler with the following fields:
 #* ''tags'': [[$:/tags/Exporter]]
-#* ''description'': Description of this importer
+#* ''description'': Description of this exporter
 #* ''extension'': Default file extension for this export format (including the dot; for example `.tid`)
 # Set the following content:
 
