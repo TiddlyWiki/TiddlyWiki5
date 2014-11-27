@@ -80,7 +80,9 @@ EditBitmapWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(this.heightDomNode,nextSibling);
 	this.domNodes.push(this.canvasDomNode,this.widthDomNode,this.heightDomNode);
 	// Load the image into the canvas
-	this.loadCanvas();
+	if($tw.browser) {
+		this.loadCanvas();
+	}
 };
 
 /*
