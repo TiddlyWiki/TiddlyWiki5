@@ -1,6 +1,6 @@
 created: 20141119224138888
 creator: 127.0.0.1
-modified: 20141119224210297
+modified: 20141127151713840
 modifier: 127.0.0.1
 tags: $:/tags/Macro
 title: $:/core/macros/timeline
@@ -15,7 +15,9 @@ type: text/vnd.tiddlywiki
 <div class="tc-menu-list-subitem">
 <$link to={{!!title}}>
 <$view field="caption">
+<$view field="fr-title">
 <$view field="title"/>
+</$view>
 </$view>
 </$link>
 </div>
