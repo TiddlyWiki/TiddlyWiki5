@@ -1,6 +1,7 @@
 {
 	"description": "Developer documentation from http://tiddlywiki.com/dev/",
 	"plugins": [
+		"tiddlywiki/highlight",
 		"tiddlywiki/cecily",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",

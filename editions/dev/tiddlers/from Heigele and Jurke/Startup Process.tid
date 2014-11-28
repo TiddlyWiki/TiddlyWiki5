@@ -7,7 +7,7 @@ title: Startup Process
 
 Modules with ``module-type: startup`` have to export a  function named ``startup`` and may export a name property to identify this module. The startup function will be executed by the boot kernel at the end of the boot process.
 
-```
+```js
 // From boot.js:
 // Gather up any startup modules
 $tw.boot.remainingStartupModules = []; // Array of startup modules

@@ -28,7 +28,7 @@ type: text/vnd.tiddlywiki
 
 Content of `plugin.info` for Joe Bloggs' Welsh translation:
 
-```
+```js
 {
 	"title": "$:/languages/cy-GB",
 	"name": "cy-GB",

@@ -17,9 +17,10 @@ This way every time a tiddler or the wiki store itself changes, each widget can 
 
 Another way of updating are text reference attributes (text references explained in [[Transclusion and TextReference]]):
 
-```
+```js
 {type: "indirect", textReference: <textReference>}
 ```
+
 When a widget got a attribute which is a text reference and the refresh function is called, it can check if the text reference references a changed tiddler and update accordingly.
 
 Nearly every state of the UI is stored in tiddlers. A search mechanism for example would use a ~EditTextWidget which shows an text input field for the search string and a ListWidget to show the results.

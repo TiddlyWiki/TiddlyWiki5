@@ -37,7 +37,7 @@ Click the link to the plugin tiddler to open it. Assuming it doesn't currently e
 
 Then in the body of the tiddler, insert:
 
-```
+```js
 {"tiddlers": {}}
 ```
 
@@ -51,7 +51,7 @@ Create the payload tiddlers by clicking on the links in the ''HelloThere'' tiddl
 
 Open the browser developer console, and type the following JavaScript statement, but first change the first parameter to the name of your plugin. The second parameter is an optional array of tiddler titles to be added to the plugin:
 
-```
+```js
 $tw.utils.repackPlugin("$:/plugins/yourname/pluginname",["$:/plugins/yourname/pluginname/mywidget.js"])
 ```
 
@@ -67,7 +67,7 @@ To test the plugin, first make sure that it has been packed. Then save changes a
 
 Once you've built the plugin for the first time you can omit the second parameter to `repackPlugin()` unless you are adding a new tiddler:
 
-```
+```js
 $tw.utils.repackPlugin("$:/plugins/yourname/pluginname")
 ```
 
@@ -75,7 +75,7 @@ $tw.utils.repackPlugin("$:/plugins/yourname/pluginname")
 
 To remove tiddlers from the plugin specify their titles in the optional third parameter:
 
-```
+```jss
 $tw.utils.repackPlugin("$:/plugins/yourname/pluginname",null,["$:/plugins/yourname/pluginname/mywidget.js"])
 ```
 

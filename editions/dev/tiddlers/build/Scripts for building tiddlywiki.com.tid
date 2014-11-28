@@ -26,8 +26,7 @@ The scripts are designed to be executed with the current directory being the `Ti
 
 The `package.json` in the root of the `build.jermolene.github.io` repository contains a dependency declaration that specifies the latest official released version of TiddlyWiki to be used when building the release targets:
 
-```
-
+```js
   "dependencies": {
     "tiddlywiki": "5.1.2"
   }
@@ -47,7 +46,7 @@ Some of the scripts use the following environment variables:
 
 Builds the `tiddlywiki.com` target files. By default, it uses the version of tiddlywiki specified in the `package.json` file. This can be overridden with the ''TW5_BUILD_TIDDLYWIKI'' environment variable. The following command would select the latest prerelease version of tiddlywiki from the `TiddlyWiki5` directory:
 
-```
+```bash
     TW5_BUILD_TIDDLYWIKI=./tiddlywiki.js
 ```
 
