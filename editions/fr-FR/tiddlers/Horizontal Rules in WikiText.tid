@@ -5,6 +5,7 @@ modified: 20141116092622611
 modifier: evolena
 tags: WikiText
 title: Horizontal Rules in WikiText
+fr-title: Lignes horizontales en WikiText
 type: text/vnd.tiddlywiki
 
 Une ligne horizontale se crée avec trois caractères "moins" ou plus `---`, seuls sur une ligne :
