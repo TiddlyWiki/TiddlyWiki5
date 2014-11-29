@@ -43,9 +43,9 @@ http://tiddlywiki.com/
 For this syntax to work, the URL has to be recognisable as an URL, including a protocol such as `http://` or `file://`. You can force an external link with the extended syntax:
 
 ```
-[ext[tiddlywiki.com]]
+[ext[http://tiddlywiki.com]]
 
-[ext[caption for link|tiddlywiki.com]]
+[ext[caption for link|http://tiddlywiki.com]]
 
 [ext[Donate|bitcoin:1aabbdd....?amount=0.001]]
 ```
