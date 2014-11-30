@@ -6,9 +6,9 @@ description: {{$:/language/Buttons/More/Hint}}
 \define config-title()
 $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 \end
+<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
 <$set name="tv-config-toolbar-icons" value="yes">
-<$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 <$set name="tv-config-toolbar-text" value="yes">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]" variable="listItem">
 <$reveal type="match" state=<<config-title>> text="hide">
