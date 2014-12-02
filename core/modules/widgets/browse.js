@@ -39,6 +39,9 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.browseMultiple) {
 		domNode.setAttribute("multiple","multiple");
 	}
+	if(this.tooltip) {
+		domNode.setAttribute("title",this.tooltip);
+	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		if(self.message) {
@@ -62,6 +65,7 @@ Compute the internal state of the widget
 BrowseWidget.prototype.execute = function() {
 	this.browseMultiple = this.getAttribute("multiple");
 	this.message = this.getAttribute("message");
+	this.tooltip = this.getAttribute("tooltip");
 };
 
 /*
