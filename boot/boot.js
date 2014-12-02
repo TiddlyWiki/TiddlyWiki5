@@ -63,7 +63,6 @@ Iterate through all the own properties of an object or array. Callback is invoke
 */
 $tw.utils.each = function(object,callback) {
 	var next,f;
-
 	if(object) {
 		if(Object.prototype.toString.call(object) == "[object Array]") {
 			for (f=0; f<object.length; f++) {
