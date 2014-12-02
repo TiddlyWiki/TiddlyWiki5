@@ -171,8 +171,10 @@ tags: $:/tags/Macro
 </div>
 </$linkcatcher>
 <div class="tc-tabbed-table-of-contents-content">
+<$transclude mode="block" tiddler="$template$">
 <h1><$view field="caption"><$view field="title"/></$view></h1>
-<$transclude mode="block" tiddler="$template$"><$transclude mode="block">$unselectedText$</$transclude></$transclude>
+<$transclude mode="block">$unselectedText$</$transclude>
+</$transclude>
 </div>
 </div>
 </$tiddler>
