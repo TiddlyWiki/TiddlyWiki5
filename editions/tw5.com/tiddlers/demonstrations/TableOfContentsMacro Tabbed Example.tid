@@ -13,6 +13,7 @@ The tabbed table of contents macro renders a selective expandable table of conte
 |2nd |sort |Optional sorting subfilter (eg `sort[title]`) | |
 |3rd |selectedTiddler |Title of the tiddler containing the title of the currently displayed tiddler  |"$:/temp/toc/selectedTiddler" |
 |4th |unselectedText |Text to be displayed when no tiddler is selected | |
+|5th |template |Optional title of a tiddler to be used as a template for rendering the selected tiddler | |
 
 !!! Internal navigation
 

@@ -162,7 +162,7 @@ tags: $:/tags/Macro
 [all[current]field:title{$selectedTiddler$}]
 \end
 
-\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
+\define toc-tabbed-external-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,template:"")
 <$tiddler tiddler={{$selectedTiddler$}}>
 <div class="tc-tabbed-table-of-contents">
 <$linkcatcher to="$selectedTiddler$">
@@ -172,15 +172,15 @@ tags: $:/tags/Macro
 </$linkcatcher>
 <div class="tc-tabbed-table-of-contents-content">
 <h1><$view field="caption"><$view field="title"/></$view></h1>
-<$transclude mode="block">$unselectedText$</$transclude>
+<$transclude mode="block" tiddler="$template$"><$transclude mode="block">$unselectedText$</$transclude></$transclude>
 </div>
 </div>
 </$tiddler>
 \end
 
-\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText)
+\define toc-tabbed-internal-nav(tag,sort:"",selectedTiddler:"$:/temp/toc/selectedTiddler",unselectedText,template:"")
 <$linkcatcher to="""$selectedTiddler$""">
-<$macrocall $name="toc-tabbed-external-nav" tag="""$tag$""" sort="""$sort$""" selectedTiddler="""$selectedTiddler$""" unselectedText="""$unselectedText$"""/>
+<$macrocall $name="toc-tabbed-external-nav" tag="""$tag$""" sort="""$sort$""" selectedTiddler="""$selectedTiddler$""" unselectedText="""$unselectedText$""" template="""$template$"""/>
 </$linkcatcher>
 \end
 
