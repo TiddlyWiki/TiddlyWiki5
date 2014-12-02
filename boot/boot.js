@@ -67,7 +67,7 @@ $tw.utils.each = function(object,callback) {
 	if(object) {
 		if(Object.prototype.toString.call(object) == "[object Array]") {
 			for (f=0; f<object.length; f++) {
-				next = callback(object[f],f);
+				next = callback(object[f],f,object);
 				if(next === false) {
 					break;
 				}
