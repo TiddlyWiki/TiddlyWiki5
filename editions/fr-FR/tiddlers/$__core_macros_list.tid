@@ -1,6 +1,6 @@
 created: 20141127091159720
 creator: 127.0.0.1
-modified: 20141127091212193
+modified: 20141203144808981
 modifier: 127.0.0.1
 tags: $:/tags/Macro
 title: $:/core/macros/list
@@ -11,11 +11,11 @@ type: text/vnd.tiddlywiki
 <$list filter="$filter$">
 <$subtype$>
 <$link to={{!!title}}>
-<$transclude field="fr-title">
+<$view field="fr-title">
 <$transclude field="caption">
 <$view field="title"/>
 </$transclude>
-</$transclude>
+</$view>
 </$link>
 </$subtype$>
 </$list>
