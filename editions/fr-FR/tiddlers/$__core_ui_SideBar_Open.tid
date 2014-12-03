@@ -1,8 +1,6 @@
 caption: {{$:/language/SideBar/Open/Caption}}
 created: 20141119223515194
-creator: 127.0.0.1
 modified: 20141127160706002
-modifier: 127.0.0.1
 tags: $:/tags/SideBar
 title: $:/core/ui/SideBar/Open
 type: text/vnd.tiddlywiki

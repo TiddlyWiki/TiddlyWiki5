@@ -1,17 +1,15 @@
 created: 20141127152047697
-creator: 127.0.0.1
-modified: 20141203144001354
-modifier: 127.0.0.1
+modified: 20141203174852815
 tags: $:/tags/Macro
 title: $:/core/macros/toc
 type: text/vnd.tiddlywiki
 
 \define title-unless-caption() 
-<$view field='fr-title'>
 <$transclude field='caption'>
+<$view field='fr-title'>
 <$view field='title'/>
-</$transclude>
 </$view>
+</$transclude>
 \end
 \define toc-body(rootTag,tag,sort:"",itemClassFilter)
 <ol class="tc-toc">
