@@ -1537,7 +1537,7 @@ $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
 		env = process.env[envVar];
 	if(env) {
-		Array.prototype.push.apply(pluginPaths,env.split(":"));
+		Array.prototype.push.apply(pluginPaths,env.split(path.delimiter));
 	}
 	return pluginPaths;
 };
