@@ -1,7 +1,6 @@
 {
 	"description": "Documentation from http://tiddlywiki.com",
 	"plugins": [
-		"tiddlywiki/cecily",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
