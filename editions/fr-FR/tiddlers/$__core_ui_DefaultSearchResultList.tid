@@ -1,8 +1,6 @@
 caption: {{$:/language/Search/DefaultResults/Caption}}
 created: 20141117081621387
-creator: 127.0.0.1
-modified: 20141118214915276
-modifier: 127.0.0.1
+modified: 20141203175833281
 tags: $:/tags/SearchResults
 title: $:/core/ui/DefaultSearchResultList
 type: text/vnd.tiddlywiki
@@ -16,7 +14,7 @@ type: text/vnd.tiddlywiki
 
 //<small>Correspondances parmi les titres :</small>//
 
-<$list filter="[!is[system]search:caption{$(searchTiddler)$}sort[caption]limit[250]] [!is[system]search:title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[!is[system]search:title{$(searchTiddler)$}sort[caption]limit[250]] [!is[system]search:fr-title{$(searchTiddler)$}sort[title]limit[250]][!is[system]search:en-title{$(searchTiddler)$}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
 
 //<small>Toutes les correspondances :</small>//
 
