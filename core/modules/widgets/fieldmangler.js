@@ -76,7 +76,6 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 		hadInvalidFieldName = false,
 		addField = function(name,value) {
 			var trimmedName = name.toLowerCase().trim();
-	debugger;
 			if(!$tw.utils.isValidFieldName(trimmedName)) {
 				if(!hadInvalidFieldName) {
 					alert($tw.language.getString(
@@ -89,6 +88,9 @@ FieldManglerWidget.prototype.handleAddFieldEvent = function(event) {
 					return;
 				}
 			} else {
+				if(!value && tiddler) {
+					value = tiddler.fields[trimmedName];
+				}
 				addition[trimmedName] = value || "";
 			}
 			return;
