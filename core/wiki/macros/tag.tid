@@ -1,0 +1,6 @@
+title: $:/core/macros/tag
+tags: $:/tags/Macro
+
+\define tag(tag)
+{{$tag$||$:/core/ui/TagTemplate}}
+\end
