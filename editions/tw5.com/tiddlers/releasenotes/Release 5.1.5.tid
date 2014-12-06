@@ -28,7 +28,7 @@ released: 20141126153016142
 * Enhancements to many of the [[core icons|ImageGallery Example]]
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/1dfa6f369bddd8dedba2e47dc4707eba28ccf4e1]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/145713e7668a41320981ed87b448542cd30d13dc]], [[here|https://github.com/Jermolene/TiddlyWiki5/commit/3035badf144abb85f5d42b2b1d395cf0f65fb03e]] and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/e69e2c1c91002c296e1789532ca74286fae8d5a4]]) unnecessary confirmations when abandoning or deleting unmodified tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a5c7089bcfe3d2439eb082535527a7cc767891cc]] a subtle rounded corner to tiddlers and tabs
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a5c7089bcfe3d2439eb082535527a7cc767891cc]] automatic focusing of the title of newly created tiddlers
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6f0d581d720e611fade3b3f346ad0409ef5e291b]] automatic focusing of the title of newly created tiddlers
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/81481588e07ed3cb1e378a6c6f21d26dcbaa8345]] advanced search links on tiddler counts in [[$:/ControlPanel]]
 
 !! Hackability Improvements
