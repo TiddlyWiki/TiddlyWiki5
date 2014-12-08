@@ -20,7 +20,7 @@ The following commands are used to generate the sample static version of the Tid
 --rendertiddler $:/core/templates/static.template.css static/static.css text/plain
 ```
 
-The first RenderTiddlersCommand generates the HTML representations of individual tiddlers, the third RenderTiddlerCommand saves the static version of the DefaultTiddlers, and the third saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
+The first RenderTiddlersCommand generates the HTML representations of individual tiddlers, the second RenderTiddlerCommand saves the static version of the DefaultTiddlers, and the final RenderTiddlerCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
 
 ! Wiki Snapshot with Internal Links
 
