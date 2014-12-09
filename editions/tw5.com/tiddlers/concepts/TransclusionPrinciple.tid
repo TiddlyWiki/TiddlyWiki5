@@ -1,0 +1,14 @@
+created: 20141129194651420
+creator: Erwan
+modified: 20141130195444237
+modifier: Erwan
+tags: Transclusion
+title: TransclusionPrinciple
+
+A <a href="http://en.wikipedia.org/wiki/Transclusion">transclusion</a> consists in including some content from a tiddler A into another tiddler B //by reference//. 
+
+This means that, instead of having the same content in two different places (as what happens if the content is "copy-pasted" from A to B), there is a special instruction in B which indicates that this part should be taken from tiddler A. The first advantage is that if something is modified in A, the modification appears automatically in B as well. Thus it is easier to maintain inter-dependent content, since every piece of content is written in a single place, but can be viewed from many.
+
+In TiddlyWiki the concept of transclusion plays a very important role because the [[Philosophy of Tiddlers]] is to connect small pieces of information together. But the concept is extended even further to allow for various kinds of useful features. To learn how to use it, see TransclusionBasicUsage and TransclusionAsTemplateUsage.
+
+See also: TransclusionBasicUsage, TransclusionAsTemplateUsage, [[Transclusion in WikiText]], TextReference, TemplateTiddlers and TranscludeWidget.
