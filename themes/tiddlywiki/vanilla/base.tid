@@ -473,6 +473,7 @@ button.tc-untagged-label {
 	.tc-sidebar-header {
 		padding: 14px;
 		min-height: 32px;
+		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 	}
 
 	.tc-story-river {
