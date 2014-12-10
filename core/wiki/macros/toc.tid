@@ -3,10 +3,10 @@ tags: $:/tags/Macro
 
 \define toc-body(rootTag,tag,sort:"",itemClassFilter)
 <ol class="tc-toc">
-<$list filter="""[tag[$tag$]!has[draft.of]$sort$]""">
+<$list filter="""[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$]""">
 <$set name="toc-item-class" filter="""$itemClassFilter$""" value="toc-item-selected" emptyValue="toc-item">
 <li class=<<toc-item-class>>>
-<$list filter="[is[current]toc-link[no]]" emptyMessage="<$link><$view field='caption'><$view field='title'/></$view></$link>">
+<$list filter="[all[current]toc-link[no]]" emptyMessage="<$link><$view field='caption'><$view field='title'/></$view></$link>">
 <$view field="caption">
 <$view field="title"/>
 </$view>
@@ -81,8 +81,8 @@ tags: $:/tags/Macro
 
 \define toc-expandable(tag,sort:"",itemClassFilter)
 <ol class="tc-toc toc-expandable">
-<$list filter="[tag[$tag$]!has[draft.of]$sort$]">
-<$list filter="[is[current]toc-link[no]]" emptyMessage="<<toc-linked-expandable-body tag:'$tag$' sort:'$sort$' itemClassFilter:'$itemClassFilter$'>>">
+<$list filter="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$]">
+<$list filter="[all[current]toc-link[no]]" emptyMessage="<<toc-linked-expandable-body tag:'$tag$' sort:'$sort$' itemClassFilter:'$itemClassFilter$'>>">
 <<toc-unlinked-expandable-body tag:"""$tag$""" sort:"""$sort$""" itemClassFilter:"""itemClassFilter""">>
 </$list>
 </$list>
@@ -150,8 +150,8 @@ tags: $:/tags/Macro
 
 \define toc-selective-expandable(tag,sort:"",itemClassFilter)
 <ol class="tc-toc toc-selective-expandable">
-<$list filter="[tag[$tag$]!has[draft.of]$sort$]">
-<$list filter="[is[current]toc-link[no]]" variable="ignore" emptyMessage="<<toc-linked-selective-expandable-body tag:'$tag$' sort:'$sort$' itemClassFilter:'$itemClassFilter$'>>">
+<$list filter="[all[shadows+tiddlers]tag[$tag$]!has[draft.of]$sort$]">
+<$list filter="[all[current]toc-link[no]]" variable="ignore" emptyMessage="<<toc-linked-selective-expandable-body tag:'$tag$' sort:'$sort$' itemClassFilter:'$itemClassFilter$'>>">
 <<toc-unlinked-selective-expandable-body tag:"""$tag$""" sort:"""$sort$""" itemClassFilter:"""$itemClassFilter$""">>
 </$list>
 </$list>
