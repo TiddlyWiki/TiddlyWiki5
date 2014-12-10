@@ -30,7 +30,6 @@ Trigger a popup open or closed. Parameters are in a hashmap:
 	force: if specified, forces the popup state to true or false (instead of toggling it)
 */
 Popup.prototype.triggerPopup = function(options) {
-console.log("triggerPopup",options)
 	// Check if this popup is already active
 	var index = -1;
 	for(var t=0; t<this.popups.length; t++) {
@@ -52,7 +51,6 @@ console.log("triggerPopup",options)
 };
 
 Popup.prototype.handleEvent = function(event) {
-console.log("handleEvent",event)
 	if(event.type === "click") {
 		// Find out what was clicked on
 		var info = this.popupInfo(event.target),
@@ -98,7 +96,6 @@ Popup.prototype.popupInfo = function(domNode) {
 		popupLevel: popupCount,
 		isHandle: isHandle
 	};
-console.log("Returning popupInfo",info)
 	return info;
 };
 
@@ -106,7 +103,6 @@ console.log("Returning popupInfo",info)
 Display a popup by adding it to the stack
 */
 Popup.prototype.show = function(options) {
-console.log("show",options)
 	// Find out what was clicked on
 	var info = this.popupInfo(options.domNode);
 	// Cancel any higher level popups
@@ -123,7 +119,6 @@ console.log("show",options)
 				options.domNode.offsetWidth + "," + options.domNode.offsetHeight + ")");
 	// Add the click handler if we have any popups
 	if(this.popups.length > 0) {
-console.log("Adding click handler")
 		this.rootElement.addEventListener("click",this,true);		
 	}
 };
@@ -133,7 +128,6 @@ Cancel all popups at or above a specified level or DOM node
 level: popup level to cancel (0 cancels all popups)
 */
 Popup.prototype.cancel = function(level) {
-console.log("cancel",level)
 	var numPopups = this.popups.length;
 	level = Math.max(0,Math.min(level,numPopups));
 	for(var t=level; t<numPopups; t++) {
@@ -143,7 +137,6 @@ console.log("cancel",level)
 		}
 	}
 	if(this.popups.length === 0) {
-console.log("Removing click handler")
 		this.rootElement.removeEventListener("click",this,false);
 	}
 };
@@ -152,7 +145,6 @@ console.log("Removing click handler")
 Returns true if the specified title and text identifies an active popup
 */
 Popup.prototype.readPopupState = function(text) {
-console.log("readPopupState",text)
 	var popupLocationRegExp = /^\((-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+),(-?[0-9\.E]+)\)$/;
 	return popupLocationRegExp.test(text);
 };
