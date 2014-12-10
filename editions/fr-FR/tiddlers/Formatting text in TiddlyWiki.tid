@@ -1,41 +1,41 @@
-caption: Formater du texte dans TiddlyWiki
 created: 20140908131500000
-modified: 20141116091250359
+fr-title: Formater du texte dans TiddlyWiki
+modified: 20141203151407522
 tags: [[Working with TiddlyWiki]]
 title: Formatting text in TiddlyWiki
 type: text/vnd.tiddlywiki
 
-Within the text of a tiddler you can use special formatting called WikiText to control how the text is displayed.
+Au sein d'un tiddler, vous pouvez utiliser un formatage spécifique appelé WikiText, afin de contrôler la manière dont le texte sera affiché.
 
-! Simple Formatting
+! Formatage simple
 
-At its simplest, WikiText lets you use familiar word-processing features like bold, italic, lists and tables. For example:
-
-```
-The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
-```
-
-Displays as:
-
-The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
-
-! Working with Tiddlers
-
-WikiText allows you to link to tiddlers using double square brackets, or taking advantage of the automatic linking of CamelCase words:
+Dans sa plus simple expression, WikiText vous permet d'appliquer des fonctions de traitement de texte familières comme le gras, l'italique, les listes et les tableaux. Par exemple<<dp>>
 
 ```
-This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+Portez ce //vieux// whisky au ''juge'' ~~brun~~ blond qui `fume`
 ```
 
-Displays as:
+S'affiche ainsi<<dp>>
 
-This is a link to HelloThere, and one to [[History of TiddlyWiki]]
+Portez ce //vieux// whisky au ''juge'' ~~brun~~ blond qui `fume`
+
+! Travailler avec les tiddlers
+
+WikiText vous permet de [[pointer vers d'autres tiddlers|Linking in WikiText]] à l'aide des doubles crochets droits, ou grâce aux liens automatiques engendrés par les mots en CamelCase<<dp>>
+
+```
+Voici un lien vers HelloThere, et un autre vers l'[[histoire de TiddlyWiki|History of TiddlyWiki]]
+```
+
+S'affiche comme<<dp>>
+
+Voici un lien vers HelloThere, et un autre vers l'[[histoire de TiddlyWiki|History of TiddlyWiki]]
 
 ! Macros
 
-Macros let you package repetitive fragments of WikiText so that you can easily reuse them.
+Les macros vous permettent d'assembler des bouts de WikiText répétitifs, afin de les réutiliser facilement.
 
-For example, here is the definition of a macro that generates a YouTube video URL from its unique identifier:
+Par exemple, voici la définition d'une macro qui génère une URL vidéo ~YouTube à partir de son identifiant unique<<dp>>
 
 ```
 \define youtube(video)
@@ -43,14 +43,14 @@ https://www.youtube.com/watch?v=$video$
 \end
 ```
 
-With that definition in place, `<<youtube 1g66s7UbyuU>>` generates the URL https://www.youtube.com/watch?v=1g66s7UbyuU
+Une fois cette définition mise en place, `<<youtube 1g66s7UbyuU>>` génèrera l'URL https://www.youtube.com/watch?v=1g66s7UbyuU
 
-! Advanced WikiText
+! ~WikiText avancé
 
-Advanced WikiText features allow you to produce automated lists and interactive features like dropdown menus. In fact, the entire user interface of TiddlyWiki itself is written in WikiText, so any feature that you see in TiddlyWiki can be adapted for use in your own wikis.
+Les fonctionnalités avancées de WikiText permettent de produire des listes automatisées et des fonctions interactives comme des menus déroulants. En fait, toute l'interface de TiddlyWiki est elle-même écrite en WikiText<<pv>> autrement dit, toutes les fonctionnalités que vous voyez dans TiddlyWiki peuvent être adaptées pour être utilisées dans vos propres wikis.
 
-Some of the advanced features require complex coding. TiddlyWiki includes several built-in macros that simplify common user interface tasks, like tabs, tables of content, and lists of tiddlers.
+Certaines fonctionnalités avancées nécessitent un codage complexe. <<tw>> inclut plusieurs macros prédéfinies, qui simplifient les fonctions usuelles d'interface utilisateur, comme les onglets, les tables des matières, et les listes de tiddlers.
 
-! Find out more
+! En savoir plus
 
-See [[WikiText]] for a detailed introduction to writing WikiText.
+Voir [[WikiText]] pour une introduction détaillée à l'écriture de ~WikiText.

@@ -1,9 +1,7 @@
-caption: Travailler avec TiddlyWiki
 created: 20140904101100000
-creator: 127.0.0.1
+fr-title: Travailler avec TiddlyWiki
 list: [[The First Rule of Using TiddlyWiki]] GettingStarted [[Getting Started Video]] Upgrading [[Navigating between open tiddlers]] [[Using links to navigate between tiddlers]] [[Searching in TiddlyWiki]] [[Creating and editing tiddlers]] [[Creating journal tiddlers]] Saving [[Formatting text in TiddlyWiki]] [[Structuring TiddlyWiki]] Tagging [[Images in WikiText]] KeyboardShortcuts Encryption
-modified: 20141115211832642
-modifier: 127.0.0.1
+modified: 20141127151557971
 tags: TableOfContents
 title: Working with TiddlyWiki
 type: text/vnd.tiddlywiki

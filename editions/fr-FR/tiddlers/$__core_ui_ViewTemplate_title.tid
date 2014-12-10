@@ -1,7 +1,5 @@
 created: 20141119191707140
-creator: 127.0.0.1
-modified: 20141119223956119
-modifier: 127.0.0.1
+modified: 20141128165607841
 tags: $:/tags/ViewTemplate
 title: $:/core/ui/ViewTemplate/title
 type: text/vnd.tiddlywiki
@@ -29,9 +27,9 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$list>
 <$list filter="[all[current]!prefix[$:/]]">
 <h2 class="tc-title">
-<$transclude field="caption">
+<$view field="fr-title">
 <$view field="title"/>
-</$transclude>
+</$view>
 </h2>
 </$list>
 </div>

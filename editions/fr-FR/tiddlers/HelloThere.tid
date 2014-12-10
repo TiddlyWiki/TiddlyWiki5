@@ -1,14 +1,17 @@
 caption: Bienvenue !
 created: 20130822170200000
-creator: xcazin
+fr-title: Bienvenue !
 list: [[Découvrez TiddlyWiki]] [[Certaines choses qu'on peut faire avec TiddlyWiki] [[Dix raisons de passer à TiddlyWiki]] Examples [[Histoire de TiddlyWiki]] [[Qu'est-il arrivé au TiddlyWiki d'origine ?]]
-modified: 20141115211533396
-modifier: 127.0.0.1
+modified: 20141203144417884
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
 Bienvenue sur <<tw>>, une application web dédiée à la prise de notes, dont le signe distinctif est la grande souplesse d'utilisation. Vous pouvez l'obtenir gratuitement, la stocker n'importe où, et la personnaliser selon vos souhaits. Elle vous servira à conserver, organiser, et partager vos notes de manière inédite en comparaison des traitements de texte et autres outils habituels de prise de notes.
+
+<$button class="tc-btn-big-green" to="Introduction Video" style="background:red;">
+{{$:/core/images/video}} Visionnez une introduction en vidéo
+</$button>
 
 <<tw>> privilégie la non-linéarité : le contenu se structure à l'aide de déroulés, de tags, d'hyperliens, et d'autres fonctionnalités spécifiques. Vous pouvez organiser vos notes et y accéder selon votre manière de penser, sans vous sentir contraint par une structure d'organisation prédéfinie.
 

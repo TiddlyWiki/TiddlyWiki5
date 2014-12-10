@@ -1,8 +1,8 @@
 caption: {{$:/language/SideBar/Contents/Caption}}
 created: 20140809114010378
-list: HelloThere [[Working with TiddlyWiki]] Learning [[Customise TiddlyWiki]] Features Editions Plugins [[TiddlyWiki Configurations]] Reference Community About
+list: HelloThere [[Working with TiddlyWiki]] Learning [[Customise TiddlyWiki]] Features Languages Editions Plugins [[TiddlyWiki Configurations]] Reference Community About
 list-after: $:/core/ui/SideBar/Open
-modified: 20140912145302498
+modified: 20141203120652586
 tags: $:/tags/SideBar
 title: TableOfContents
 type: text/vnd.tiddlywiki

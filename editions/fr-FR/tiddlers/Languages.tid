@@ -1,0 +1,14 @@
+created: 20141202125500000
+fr-title: Langues
+modified: 20141203120501320
+tags: TableOfContents
+title: Languages
+type: text/vnd.tiddlywiki
+
+Les plugins de langue fournissent des traductions pour l'interface principale de TiddlyWiki.
+
+Les langues ci-dessous sont disponibles<<dp>>
+
+<<list-links "[tag[Languages]]">>
+
+Vous pouvez contribuer en suivant les instructions pour [[traduire TiddlyWiki dans votre langue|Translate TiddlyWiki into your language]].

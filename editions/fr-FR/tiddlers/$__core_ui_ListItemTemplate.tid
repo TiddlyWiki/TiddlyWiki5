@@ -1,14 +1,12 @@
 created: 20141117221740337
-creator: 127.0.0.1
-modified: 20141119225717026
-modifier: 127.0.0.1
+modified: 20141203175714604
 title: $:/core/ui/ListItemTemplate
 type: text/vnd.tiddlywiki
 
 <div class="tc-menu-list-item">
 <$link to={{!!title}}>
-<$transclude field="caption">
+<$view field="fr-title">
 <$view field="title"/>
-</$transclude>
+</$view>
 </$link>
 </div>

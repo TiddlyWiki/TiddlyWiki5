@@ -1,13 +1,11 @@
-caption: TiddlyWiki sur Node.js
 created: 20131129094353704
-creator: xcazin
-modified: 20141115215146889
-modifier: 127.0.0.1
+fr-title: TiddlyWiki sur Node.js
+modified: 20141203153032034
 tags: [[TiddlyWiki Configurations]]
 title: TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
-Exécuter <<tw>> avec [[Node.js]] comporte plusieurs avantages par rapport à la version s'exécutant dans un fichier isolé :
+Exécuter <<tw>> avec [[Node.js]] comporte plusieurs avantages par rapport à la version s'exécutant dans un seul fichier<<dp>>
 
 * Vous pouvez éditez le contenu du wiki dans n'importe quel navigateur compatible HTML5, y compris s'il tourne sur des smartphones et des tablettes
 * Les tiddlers sont stockés dans des fichiers séparés, que vous pouvez organiser comme vous le souhaitez

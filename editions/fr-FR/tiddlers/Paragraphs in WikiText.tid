@@ -1,10 +1,8 @@
-caption: Paragraphes
 created: 20141017122121853
-creator: evolena
 modified: 20141116092111983
-modifier: evolena
 tags: WikiText
 title: Paragraphs in WikiText
+fr-title: Paragraphes
 type: text/vnd.tiddlywiki
 
 Pour marquer la fin d'un paragraphe, il faut appuyer deux fois sur la touche `Entrée` pour créer deux retours à la ligne :

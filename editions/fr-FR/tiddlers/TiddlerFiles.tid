@@ -1,7 +1,5 @@
 created: 20130825150000000
-creator: 127.0.0.1
 modified: 20141019101433897
-modifier: 127.0.0.1
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlerFiles
 type: text/vnd.tiddlywiki
@@ -10,7 +8,6 @@ Les tiddlers peuvent être conservés dans des fichiers texte dans plusieurs for
 
 ```
 title: LeTitre
-modifier: quelqu'un
 ```
 
 !! Fichiers `.tid` à la ~TiddlyWeb
@@ -19,7 +16,6 @@ Ces fichiers consistent en une séquence de paires //nom:valeur//, suivie d'une 
 
 ```
 title: MonTiddler
-modifier: Jeremy
 
 Voici le texte de mon tiddler.
 ```
@@ -28,7 +24,6 @@ Notez que de nombreux éditeurs de texte imposent que les fichiers se terminent 
 
 ```
 title: MonTiddler
-modifier: Jeremy
 text: Voici le texte de mon tiddler.
 ```
 

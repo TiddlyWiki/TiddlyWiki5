@@ -1,0 +1,21 @@
+created: 20141127091159720
+modified: 20141203144808981
+tags: $:/tags/Macro
+title: $:/core/macros/list
+type: text/vnd.tiddlywiki
+
+\define list-links(filter,type:"ul",subtype:"li",class:"")
+<$type$ class="$class$">
+<$list filter="$filter$">
+<$subtype$>
+<$link to={{!!title}}>
+<$view field="fr-title">
+<$transclude field="caption">
+<$view field="title"/>
+</$transclude>
+</$view>
+</$link>
+</$subtype$>
+</$list>
+</$type$>
+\end

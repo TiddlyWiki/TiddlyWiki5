@@ -1,10 +1,9 @@
 caption: Blocs de code
 created: 20141016143834720
-creator: evolena
 modified: 20141116091520961
-modifier: evolena
 tags: WikiText
 title: Code Blocks in WikiText
+fr-title: Blocs de code en WikiText
 type: text/vnd.tiddlywiki
 
 Un bloc de code est délimité par trois caractères "accents graves" <code>&#96;&#96;&#96;</code> (connus en anglais sous le nom de "backticks") :

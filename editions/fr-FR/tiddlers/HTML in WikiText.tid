@@ -1,10 +1,9 @@
 caption: HTML
 created: 20141017141153174
-creator: evolena
 modified: 20141118192457947
-modifier: 127.0.0.1
 tags: WikiText
 title: HTML in WikiText
+fr-title: HTML dans le WikiTexte
 type: text/vnd.tiddlywiki
 
 Les balises HTML (dont les commentaires `<!-- -->`) peuvent être utilisées directement en [[WikiTexte|WikiText]] :

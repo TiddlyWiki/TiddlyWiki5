@@ -1,8 +1,6 @@
-caption: Mise à niveau pour Node.js
 created: 20131219100544073
-creator: 127.0.0.1
-modified: 20141025215446938
-modifier: 127.0.0.1
+fr-title: Mettre à niveau pour Node.js
+modified: 20141129081501675
 tags: [[TiddlyWiki on Node.js]]
 title: Upgrading TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
