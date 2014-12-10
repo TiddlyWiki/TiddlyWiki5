@@ -5,7 +5,7 @@ title: Transclusion in WikiText
 type: text/vnd.tiddlywiki
 caption: Transclusion
 
-You can incorporate the content of one tiddler within another using the transclusion notation:
+You can incorporate the content of one tiddler within another using the [[Transclusion]] notation:
 
 * `{{MyTiddler}}` transcludes a single tiddler
 * `{{MyTiddler||TemplateTitle}}` displays the tiddler through a specified [[TemplateTiddler|TemplateTiddlers]]
@@ -27,4 +27,8 @@ A similar syntax can be used to transclude a list of tiddlers matching a specifi
 
 See also:
 
+* [[Transclusion Basic Usage]]
+* [[Transclusion with Templates]]
+* TemplateTiddlers
+* TranscludeWidget
 * [[Confusion between Transclusion and Substitution]]

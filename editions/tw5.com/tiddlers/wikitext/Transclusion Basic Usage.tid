@@ -1,0 +1,45 @@
+created: 20141129201509859
+modified: 20141130194810119
+tags: [[Transclusion in WikiText]]
+title: Transclusion Basic Usage
+caption: Basic Usage
+
+! Simple Transclusion
+
+To include some content from [[TiddlerA]] into [[TiddlerB]], edit the latter to include the following text: 
+
+```
+This is the content of TiddlerA: {{TiddlerA}}
+```
+
+The result is that the content of the ''text'' field (i.e. the main content) of [[TiddlerA]] is rendered within [[TiddlerB]]. 
+
+! Usage
+
+The notation ``{{TiddlerA}}`` is a shortcut for ``{{TiddlerA!!text}}``. This is because the default field for transclusion is ''text'', but any other [[field|TiddlerFields]] can be used explicitly. For example, you can print the last time TiddlerA was modified using:
+
+```
+TiddlerA was modified on {{TiddlerA!!modified}}
+```
+
+By omitting the tiddler title, the transclusion notation can also be used to display the content of a field from the current tiddler, for example:
+
+```
+The current tiddler was modified on {{!!modified}}
+```
+
+! Recursion Errors
+
+Notice that using ``{{!!text}}`` or ``{{}}`` causes an error (//Recursive transclusion error in transclude widget//), because it does not make sense to include the content of the current tiddler into the content of the current tiddler (that is, into itself). Whenever you encouter this error message, it means that you are trying to include something into itself, directly or indirectly (for example if tiddler A transcludes tiddler B which transcludes tiddler C which, in turn, transcludes tiddler A).
+
+! Learning More
+
+In TiddlyWiki, transclusions are not limited to including raw content like the above. To learn about more advanced uses of transclusion, see [[Transclusion with Templates]].
+
+See also:
+
+* [[Transclusion]]
+* [[Transclusion with Templates]]
+* [[Transclusion in WikiText]]
+* TextReference
+* TiddlerFields.

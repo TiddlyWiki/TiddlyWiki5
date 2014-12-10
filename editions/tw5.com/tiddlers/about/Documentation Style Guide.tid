@@ -4,10 +4,61 @@ title: Documentation Style Guide
 tags: Improving TiddlyWiki Documentation
 type: text/vnd.tiddlywiki
 
-The documentation for ~TiddlyWiki tries to follow the following guidelines. The aim is to ensure that documentation from different authors reads consistently.
+The documentation for ~TiddlyWiki tries to follow a consistent style. The aim is to ensure that documentation from different authors reads consistently.
 
-# Do address the reader directly as "you"
-# Avoid the [[passive voice|http://grammar.ccc.commnet.edu/grammar/passive.htm]] in tutorial and introductory material
-# Do use [[British spellings in preference to US spellings|http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]]
+! Tone
 
-See also the guidelines for [[tiddler titles|Adopt a Titles Policy]].
+Tutorial documentation may address the user as "you" for clarity and immediacy. Reference documentation should use a more formal [[passive voice|http://grammar.ccc.commnet.edu/grammar/passive.htm]].
+
+For example, this would be reasonable for tutorial documentation:
+
+> You can add a new sidebar tab by creating a specially tagged tiddler
+
+But for reference documentation this would be better:
+
+> Tiddlers with a special tag are displayed as sidebar tabs
+
+! Tiddler Title Policy
+
+The following conventions govern how tiddler titles are composed:
+
+* Use lowercase single words for tags
+** e.g. [[task]], [[demo]]
+* Use CamelCase for definitions and concepts
+** e.g. TiddlerFields, DeveloperDocs
+* Use separate words for titles that are full phrases or sentences, such as FAQ, howtos or tasks
+** e.g. [[How to build a TiddlyWiki5 from individual tiddlers]]
+* Where TiddlyWiki or TiddlyWiki5 is used as a qualifier at the start of the title, always use separate words
+** e.g. [[TiddlyWiki on Node.js]]
+
+! Spelling
+
+Use [[British spellings in preference to US spellings|http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]].
+
+! Abbreviations
+
+We try to avoid abbreviations, but the following are acceptable:
+
+* `e.g.` for ''for example''
+* `i.e.` for ''that is to say''
+
+Note that the periods should not be omitted from these abbreviations.
+
+! Typographic Standards
+
+!! Referring to Titles, Fields, Tags
+
+* ''Titles'' of tiddlers should usually be typed as links
+* ''Tag names'' should usually be typed as links
+* ''Field names'' should be typed in bold: e.g. ''title'', ''tags'', ''caption''
+* ''Tab names'' should be typed in bold: e.g. 
+
+!! Headings
+
+Initial capitalisation is preferred, where the initial letter of most words is capitalised. The exceptions are small conjunctions and prepositions like "and", "or", "the", "to", etc.
+
+<<style-guide
+"""!! How to Configure Default Tiddlers"""
+"""!! How to configure default tiddlers"""
+>>
+
