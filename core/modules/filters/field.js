@@ -26,6 +26,8 @@ exports.field = function(source,operator,options) {
 					if(text !== null && !operator.regexp.exec(text)) {
 						results.push(title);
 					}
+				} else {
+					results.push(title);
 				}
 			});
 		} else {
@@ -35,6 +37,8 @@ exports.field = function(source,operator,options) {
 					if(text !== null && text !== operator.operand) {
 						results.push(title);
 					}
+				} else {
+					results.push(title);
 				}
 			});
 		}
