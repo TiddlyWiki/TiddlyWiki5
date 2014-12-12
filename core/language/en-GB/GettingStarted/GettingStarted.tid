@@ -1,7 +1,0 @@
-title: GettingStarted
-
-Welcome to ~TiddlyWiki and the ~TiddlyWiki community
-
-Visit http://tiddlywiki.com/ to find out more about ~TiddlyWiki and what it can do.
-
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/GettingStarted]!has[draft.of]]" "GettingStarted (Step 1)" "$:/state/tabs/gettingstarted" "tc-vertical">>
