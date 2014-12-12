@@ -80,7 +80,7 @@ Settings/ToolbarButtons/Caption: Værktøjslinie knapper
 Settings/ToolbarButtons/Hint: Standard udseende af værktøjslinie knap:
 Settings/ToolbarButtons/Icons/Description: Inkludér ikon
 Settings/ToolbarButtons/Text/Description: Inkludér tekst
-StoryView/Caption: HistorieVisning
+StoryView/Caption: Historie visning
 StoryView/Prompt: Aktuel visning:
 Theme/Caption: Tema
 Theme/Prompt: Aktuelt tema
