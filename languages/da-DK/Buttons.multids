@@ -24,6 +24,12 @@ Encryption/ClearPassword/Hint: Slet password og gem denne wiki uden encryption
 Encryption/Hint: Sæt eller slet et  password for at gemme denne wiki
 Encryption/SetPassword/Caption: Angiv password
 Encryption/SetPassword/Hint: Angiv et password for gemme denne wiki med encryption
+ExportPage/Caption: eksport alle
+ExportPage/Hint: Eksport alle tiddlere
+ExportTiddler/Caption: eksport tiddler
+ExportTiddler/Hint: Eksport tiddler
+ExportTiddlers/Caption: eksport tiddlere
+ExportTiddlers/Hint: Eksport tiddlere
 FullScreen/Caption: fuldskærm
 FullScreen/Hint: Gå til eller forlad fuldskærms tilstand
 HideSideBar/Caption: skjul sidebar
