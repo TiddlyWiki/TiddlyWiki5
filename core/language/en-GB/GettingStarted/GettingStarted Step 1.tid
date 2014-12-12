@@ -1,0 +1,20 @@
+title: GettingStarted (Step 1)
+tags: $:/tags/GettingStarted
+caption: Step 1<br>Saving
+
+! Saving Changes
+
+Before you can start storing important information in ~TiddlyWiki it is important to make sure that you can reliably save changes.
+
+# Create a new tiddler using the {{$:/core/images/new-button}} button in the sidebar on the right
+# Click the {{$:/core/images/done-button}} button at the top right of the new tiddler
+# Click the red {{$:/core/images/save-button}} in the sidebar on the right
+
+What happens next will depend on how you've set up ~TiddlyWiki:
+
+* If you've installed the ~TiddlyFox add-on for Firefox, your changes should immediately be saved back to the file
+* If you're running ~TiddlyDesktop, again the changes will be saved instantly
+* If you're using Chrome, you'll need to follow the [ext[instructions on tiddlywiki.com|http://tiddlywiki.com#GettingStarted%20-%20Chrome]]
+* For other browsers, see the relevant [ext[instructions on tiddlywiki.com|http://tiddlywiki.com#GettingStarted]]
+
+Finally, refresh the page in the browser to and verify that the new tiddler has been correctly saved.

@@ -46,6 +46,6 @@ Here is the tag structure shown with clickable tag pills:
 *{{Third||$:/core/ui/TagTemplate}}
 *{{Fourtth||$:/core/ui/TagTemplate}}
 
-For instructions on adding a table of contents to the sidebar, see: {{How to add a new tab to the sidebar}}.
+For instructions on adding a table of contents to the sidebar, see: [[How to add a new tab to the sidebar]].
 
 <<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>
