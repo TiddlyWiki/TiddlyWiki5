@@ -1,5 +1,5 @@
 title: $:/language/Help/init
-description: Initialise a new wiki folder
+description: 空の[[Wikiフォルダ|WikiFolders]] を初期化
 
 空の [[Wikiフォルダ|WikiFolders]] を初期化し、その中に指定したエディションの内容をコピーします。
 

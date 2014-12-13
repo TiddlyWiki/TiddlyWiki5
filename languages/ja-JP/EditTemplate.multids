@@ -5,6 +5,8 @@ Body/Hint: 表示を整形したり画像や動的な要素を使いたい場合
 Body/Placeholder: ここに tiddler の本文を入力してください。
 Body/Preview/Button/Hide: プレビューを隠す
 Body/Preview/Button/Show: プレビューを表示
+Field/Remove/Caption: fieldを削除
+Field/Remove/Hint: fieldを削除
 Fields/Add/Button: 追加
 Fields/Add/Name/Placeholder: フィールド名
 Fields/Add/Prompt: 新しいフィールドを追加:
@@ -13,5 +15,11 @@ Shadow/OverriddenWarning: このshadow tiddlerは編集されたものです。�
 Shadow/Warning: これはshadow tiddlerです。変更すると上書きされます。
 Tags/Add/Button: 追加
 Tags/Add/Placeholder: タグ名
+Tags/Dropdown/Caption: タグ一覧
+Tags/Dropdown/Hint: タグ一覧を表示
+Type/Delete/Caption: コンテンツタイプを削除
+Type/Delete/Hint: コンテンツタイプを削除
+Type/Dropdown/Caption: コンテンツタイプ一覧
+Type/Dropdown/Hint: コンテンツタイプ一覧を表示
 Type/Placeholder: 種類
 Type/Prompt: Tiddlerの種類:
