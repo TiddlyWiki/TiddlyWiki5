@@ -1,0 +1,12 @@
+created: 20140410103123179
+fr-title: Opérateurs de filtre
+modified: 20141213084515111
+tags: Concepts
+title: FilterOperators
+type: text/vnd.tiddlywiki
+
+Les opérateurs de filtre sont les briques des [[filtres|Filters]]. Reportez-vous à notre [[Introduction au maniement des filtres|Introduction to Filters]] pour les détails.
+
+Voici la liste exhaustive des opérateurs de filtre<<:>>
+
+<<list-links "[tag[Filters]]">>
