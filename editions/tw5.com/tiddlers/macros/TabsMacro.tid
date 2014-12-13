@@ -1,9 +1,9 @@
+caption: tabs
 created: 20131228162203521
-modified: 20141209113527667
+modified: 20141211141507313
 tags: Macros
 title: TabsMacro
 type: text/vnd.tiddlywiki
-caption: tabs
 
 The tabs macro displays a list of tiddlers as a tab control. The user can switch between tabs by clicking on them. The tabs are labelled with the title of the corresponding tiddler, unless there is a `caption` field present in which case it is used instead.
 
@@ -33,3 +33,4 @@ Here are some examples of the tabs macro:
 <<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
 
 <<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
+//Exercise//: how would you make sure that the second tab list is correctly sorted? Hint : read [[Tagging]] until the end.
