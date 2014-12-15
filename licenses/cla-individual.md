@@ -188,3 +188,5 @@ Jedediah Carty, @inmysocks, 2014/11/21
 Erwan Dano, @Braincoke, 2014/11/24
 
 Jim Lehmer, @dullroar, 2014/12/07
+
+Aurelien Navarre, @anavarre, 2014/12/15
