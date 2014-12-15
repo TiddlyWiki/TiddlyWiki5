@@ -1,0 +1,17 @@
+created: 20130827080000000
+fr-title: Filtres
+modified: 20141213084853423
+tags: Reference Concepts
+title: Filters
+type: text/vnd.tiddlywiki
+
+Dans <<tw>>, les filtres servent à sélectionner des tiddlers en spécifiant des critères de correspondance simples. Les filtres sont utilisés par des widgets comme ListWidget et CountWidget pour effectuer des opérations sur plusieurs tiddlers à la fois.
+
+* [[Introduction au maniement des filtres|Introduction to Filters]] vous initie par étape à la manière d'utiliser les filtres
+* [[Grammaire formelle des filtres|Filter Formal Grammar]] est une explication technique de la syntaxe des filtres.
+
+Les opérateurs de filtre les plus courants sont<<:>>
+
+<<list-links "[tag[CommonFilters]]">>
+
+Il existe par ailleurs une liste exhaustive des [[opérateurs de filtre|FilterOperators]].
