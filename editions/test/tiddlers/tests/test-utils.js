@@ -25,6 +25,15 @@ describe("Utility tests", function() {
 		expect(psa(" [[Tidd\u00a0ler8]] two ")).toEqual(["Tidd\u00a0ler8","two"]);
 	});
 
+	it("should handle formatting a date string", function() {
+		var fds = $tw.utils.formatDateString,
+			d = new Date(2014,10,9,17,41,28,542);
+		expect(fds(d,"DDD DD MMM YYYY")).toBe("Sunday 9 November 2014");
+		expect(fds(d,"ddd hh mm ssss")).toBe("Sun 17 41 2828");
+		expect(fds(d,"MM0DD")).toBe("1109");
+		expect(fds(d,"MM0\\D\\D")).toBe("110DD");
+	});
+
 	it("should parse text references", function() {
 		var ptr = $tw.utils.parseTextReference;
 		expect(ptr("title")).toEqual(

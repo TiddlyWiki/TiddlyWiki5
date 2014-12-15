@@ -176,8 +176,7 @@ exports.slowInSlowOut = function(t) {
 };
 
 exports.formatDateString = function(date,template) {
-	var match,
-		result="",
+	var result = "",
 		t = template,
 		matches = [
 			[/^0hh12/, function() {
@@ -231,7 +230,7 @@ exports.formatDateString = function(date,template) {
 				return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
 			}],
 			[/^wYY/, function() {
-				return $tw.utils.pad($tw.utils.getYearForWeekNo(date)-2000);
+				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
 			}],
 			[/^[ap]m/, function() {
 				return $tw.utils.getAmPm(date).toLowerCase();
@@ -258,25 +257,22 @@ exports.formatDateString = function(date,template) {
 				return $tw.utils.getWeek(date);
 			}],
 			[/^YY/, function() {
-				return $tw.utils.pad(date.getFullYear()-2000);
+				return $tw.utils.pad(date.getFullYear() - 2000);
 			}]
 		];
-
 	while(t.length){
-		match = "";
+		var matchString = "";
 		$tw.utils.each(matches, function(m) {
-			var r,l;
-			if(t.match(m[0])) {
-				match = m[1].call();
-				r = m[0].toString(),
-				l = r.length - 3;
-				l = r.substr(2,1) == "[" ? l - 3 : l;
-				t = t.substr(l);
+			var r,l,
+				match = m[0].exec(t);
+			if(match) {
+				matchString = m[1].call();
+				t = t.substr(match[0].length);
 				return false;
 			}
 		});
-		if(match) {
-			result += match;
+		if(matchString) {
+			result += matchString;
 		} else {
 			result += t.charAt(0);
 			t = t.substr(1);

@@ -12,7 +12,7 @@ The ViewWidget accepts a `template` attribute that allows the format of date val
 |`DD` |Day of month |
 |`0DD` |Adds a leading zero |
 |`DDth` |Adds a suffix |
-|`WW` |~ISO-8601 week number of year |
+|`WW` |ISO-8601 week number of year |
 |`0WW` |Adds a leading zero |
 |`MMM` |Month in full (eg, "July") |
 |`mmm` |Short month (eg, "Jul") |
