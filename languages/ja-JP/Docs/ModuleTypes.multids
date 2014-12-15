@@ -14,6 +14,7 @@ storyview: リストウィジェットのアニメーションや振る舞いを
 tiddlerdeserializer: tiddler を他の ContentType に変換するモジュール。
 tiddlerfield: 個々の tiddler フィールドの振る舞いを定義するモジュール。
 tiddlermethod: `$tw.Tiddler` の prototype にメソッドを追加するモジュール。
+upgrader: アップグレードやインポート中にtiddlerのアップグレード処理を追加するモジュール。
 utils: `$tw.utils` にメソッドを追加するモジュール。
 utils-node: `$tw.utils` に Node.js 特有のメソッドを追加するモジュール。
 widget: DOM の描画や操作をひとまとめにしたウィジェットモジュール。

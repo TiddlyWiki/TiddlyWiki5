@@ -1,5 +1,5 @@
 title: $:/language/Help/rendertiddler
-description: Render an individual tiddler as a specified ContentType
+description: 個々の tiddler を指定した ContentType で出力
 
 個々の tiddler を指定した ContentType で出力します。デフォルトは `text/html` で、指定されたファイル名で内容を保存します。
 
