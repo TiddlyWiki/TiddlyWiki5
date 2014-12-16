@@ -139,6 +139,7 @@ table tfoot tr td {
 ** Links
 */
 
+button.tc-tiddlylink,
 a.tc-tiddlylink {
 	text-decoration: none;
 	font-weight: normal;
@@ -154,6 +155,7 @@ a.tc-tiddlylink {
 	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
+button.tc-tiddlylink:hover,
 a.tc-tiddlylink:hover {
 	text-decoration: underline;
 }
