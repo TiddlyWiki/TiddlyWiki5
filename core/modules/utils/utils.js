@@ -263,8 +263,7 @@ exports.formatDateString = function(date,template) {
 	while(t.length){
 		var matchString = "";
 		$tw.utils.each(matches, function(m) {
-			var r,l,
-				match = m[0].exec(t);
+			var match = m[0].exec(t);
 			if(match) {
 				matchString = m[1].call();
 				t = t.substr(match[0].length);
