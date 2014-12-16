@@ -26,9 +26,10 @@ DownloadSaver.prototype.save = function(text,method,callback,options) {
 		var p = document.location.pathname.lastIndexOf("/");
 		if(p !== -1) {
 			filename = document.location.pathname.substr(p+1);
-		} else {
-			filename = "tiddlywiki.html";
 		}
+	}
+	if(!filename) {
+		filename = "tiddlywiki.html";
 	}
 	// Set up the link
 	var link = document.createElement("a");
