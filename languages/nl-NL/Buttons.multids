@@ -22,7 +22,6 @@ Encryption/Caption: versleuteling
 Encryption/ClearPassword/Caption: verwijder wachtwoord
 Encryption/ClearPassword/Hint: Verwijder het wachtwoord en sla de wiki onversleuteld op
 Encryption/Hint: Vul in / verwijder een wachtwoord om deze wiki op te slaan
-
 Encryption/SetPassword/Caption: vul wachtwoord in
 Encryption/SetPassword/Hint: Vul een wachtwoord in om deze wiki versleuteld op te slaan
 ExportPage/Caption: exporteer alle

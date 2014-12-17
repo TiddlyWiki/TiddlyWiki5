@@ -11,4 +11,4 @@ Upgrader/Plugins/Suppressed/Version: Geblokkeerde plugin (te importeren <<incomi
 Upgrader/Plugins/Upgraded: Plugin opgewaardeerd van <<incoming>> naar <<upgraded>>
 Upgrader/State/Suppressed: Geblokkeerde tijdelijke statustiddler
 Upgrader/System/Suppressed: Geblokkeerde systeemtiddler
-Upgrader/ThemeTweaks/Created: Gemigreerde thema aanpassing van <$text text=<<from>>/>
+Upgrader/ThemeTweaks/Created: Gemigreerde thema-aanpassing van <$text text=<<from>>/>

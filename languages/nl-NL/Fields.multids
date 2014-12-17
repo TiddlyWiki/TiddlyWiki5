@@ -18,7 +18,6 @@ icon: De titel van de pictogramtiddler die met deze tiddler gekoppeld is
 library: Als "yes" ingevuld is, dient de tiddler als JavaScript-bibliotheek opgeslagen te worden
 list: Een geordende lijst van tiddlertitels gekoppeld met een tiddler
 list-after: Indien ingevuld, de titel van de tiddler waarna deze tiddler toegevoegd moet worden in de reeks tiddlertitels
-
 list-before: Indien ingevuld, de titel van de tiddler waarvoor deze tiddler toegevoegd moet worden in de reeks tiddlertitels, of aan het begin van de reeks als dit veld wel aanwezig maar leeg is
 modified: De datum en tijd waarop de tiddler voor het laatst werd gewijzigd
 modifier: De persoon die voor het laatst de tiddler gewijzigd heeft

@@ -7,13 +7,13 @@ Body/Preview/Button/Hide: verberg voorbeeld
 Body/Preview/Button/Show: toon voorbeeld
 Field/Remove/Caption: verwijder veld
 Field/Remove/Hint: Verwijder veld
-Fields/Add/Button: voeg toe
+Fields/Add/Button: +
 Fields/Add/Name/Placeholder: veldnaam
 Fields/Add/Prompt: Voeg een nieuw veld toe:
 Fields/Add/Value/Placeholder: veldwaarde
 Shadow/OverriddenWarning: Dit is een aangepaste schaduwtiddler. Door deze tiddler te verwijderen wordt de standaard schaduwtiddler weer actief
 Shadow/Warning: Dit is een schaduwtiddler. Elke verandering overschrijft de standaardversie
-Tags/Add/Button: voeg toe
+Tags/Add/Button: +
 Tags/Add/Placeholder: labelnaam
 Tags/Dropdown/Caption: labellijst
 Tags/Dropdown/Hint: Toon labellijst

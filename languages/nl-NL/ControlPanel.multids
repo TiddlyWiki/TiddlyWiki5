@@ -54,7 +54,7 @@ Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
 Saving/TiddlySpot/BackupDir: Backup Folder
 Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Description: Deze instellingen worden alleen gebruikt bij http://tiddlyspot.com of een vergelijkbare server
-Saving/TiddlySpot/Filename: "Upload" bestandsnaam
+Saving/TiddlySpot/Filename: Upload bestandsnaam
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //De standaard server URL is `http://<wikiname>.tiddlyspot.com/store.cgi` en kan gewijzigd worden in een speciaal serveradres//
 Saving/TiddlySpot/Password: Wachtwoord
@@ -70,11 +70,10 @@ Settings/Hint: Met deze instellingen kun je het gedrag van TiddlyWiki veranderen
 Settings/NavigationAddressBar/Caption: Navigatie adresbalk
 Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:
 Settings/NavigationAddressBar/No/Description: Verander het browseradres niet
-Settings/NavigationAddressBar/Permalink/Description: Voeg de doel tiddler toe
+Settings/NavigationAddressBar/Permalink/Description: Voeg de doeltiddler toe
 Settings/NavigationAddressBar/Permaview/Description: Voeg alle open tiddlers toe
-Settings/NavigationHistory/Caption: Navigeer geschiedenis
-Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
-Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
+Settings/NavigationHistory/Caption: Navigeer-geschiedenis
+Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
 Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
 Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij 
 Settings/ToolbarButtons/Caption: Knoppen van knoppenbalk
@@ -86,9 +85,9 @@ StoryView/Prompt: Huidige view:
 Theme/Caption: Thema
 Theme/Prompt: Huidig thema:
 TiddlerFields/Caption: Tiddler velden
-TiddlerFields/Hint: Dit is de complete reeks Tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
+TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
 Toolbars/Caption: Knoppenbalken
-Toolbars/EditToolbar/Caption: Wijzig knoppenbalk
+Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
 Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
 Toolbars/Hint: Kies welke knoppen getoond worden
 Toolbars/PageControls/Caption: Pagina-knoppenbalk

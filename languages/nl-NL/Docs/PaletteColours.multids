@@ -9,7 +9,7 @@ blockquote-bar: Citaatbalk
 code-background: Achtergrond code
 code-border: Rand code
 code-foreground: Voorgrond code
-dirty-indicator: Indicator voor niet opgeslagen wijzigingen
+dirty-indicator: Indicator voor niet-opgeslagen wijzigingen
 download-background: Achtergrond downloadknop
 download-foreground: Voorgrond downloadknop
 dragger-background: Achtergrond "dragger"
@@ -21,7 +21,6 @@ dropdown-tab-background-selected: Achtergrond dropdown tab voor geselecteerde ta
 dropzone-background: Achtergrond "dropzone"
 external-link-background: Achtergrond externe link
 external-link-background-hover: Achtergrond mouseover externe link 
-
 external-link-background-visited: Achtergrond bezochte externe link
 external-link-foreground: Voorgrond externe link
 external-link-foreground-hover: Voorgrond mouseover externe link 
@@ -31,10 +30,7 @@ message-background: Achtergrond berichtenpaneel
 message-border: Rand berichtenpaneel
 message-foreground: Voorgrond berichtenpaneel
 modal-backdrop: Gedimde achtergrond bij modale dialoog
-
-
 modal-background: Achtergrond modale dialoog
-
 modal-border: Rand van modale dialoog
 modal-footer-background: Achtergrond van modale voettekst
 modal-footer-border: Rand van modale voettekst
@@ -80,7 +76,6 @@ tiddler-border: Rand tiddler
 tiddler-controls-foreground: Voorgrond knoppen tiddler
 tiddler-controls-foreground-hover: Voorgrond mouseover knoppen tiddler
 tiddler-controls-foreground-selected: Voorgrond geselecteerde knoppen tiddler
-
 tiddler-editor-background: Achtergrond tiddlereditor
 tiddler-editor-border: Rand tiddlereditor
 tiddler-editor-border-image: Rand tiddler editor afbeelding
@@ -104,4 +99,3 @@ toolbar-options-button: Voorgrond 'opties' knop (knoppenbalk)
 toolbar-save-button: Voorgrond 'opslaan wiki' knop (knoppenbalk)
 untagged-background: Achtergrond label "niet gelabeld"
 very-muted-foreground: Voorgrond zeer gedimd
-
