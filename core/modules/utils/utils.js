@@ -524,28 +524,21 @@ exports.isValidFieldName = function(name) {
 Extract the version number from the meta tag or from the boot file
 */
 
-if($tw.browser) {
-
 // Browser version
 exports.extractVersionInfo = function() {
-	var metatags = document.getElementsByTagName("meta");
-	for(var t=0; t<metatags.length; t++) {
-		var m = metatags[t];
-		if(m.name === "tiddlywiki-version") {
-			return m.content;
+	if($tw.packageInfo) {
+		return $tw.packageInfo.version;
+	} else {
+		var metatags = document.getElementsByTagName("meta");
+		for(var t=0; t<metatags.length; t++) {
+			var m = metatags[t];
+			if(m.name === "tiddlywiki-version") {
+				return m.content;
+			}
 		}
 	}
 	return null;
 };
-
-} else {
-
-// Server version
-exports.extractVersionInfo = function() {
-	return $tw.packageInfo.version;
-};
-
-}
 
 /*
 Get the animation duration in ms
