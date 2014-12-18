@@ -52,9 +52,13 @@ exports.copyDirectory = function(srcPath,dstPath) {
 Copy a file
 */
 var FILE_BUFFER_LENGTH = 64 * 1024,
-	fileBuffer = $tw.node && new Buffer(FILE_BUFFER_LENGTH);
+	fileBuffer;
 
 exports.copyFile = function(srcPath,dstPath) {
+	// Create buffer if required
+	if(!fileBuffer) {
+		fileBuffer = new Buffer(FILE_BUFFER_LENGTH);
+	}
 	// Create any directories in the destination
 	$tw.utils.createDirectory(path.dirname(dstPath));
 	// Copy the file
