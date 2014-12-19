@@ -37,12 +37,17 @@ Use [[British spellings in preference to US spellings|http://en.wikipedia.org/wi
 
 ! Abbreviations
 
-We try to avoid abbreviations, but the following are acceptable:
+We try to avoid abbreviations for ordinary words, but the following are acceptable:
 
 * `e.g.` for ''for example''
 * `i.e.` for ''that is to say''
 
 Note that the periods should not be omitted from these abbreviations.
+
+Technical abbreviations should be in upper case and omit periods:
+
+* ''HTML'', not ''html'' or ''H.T.M.L.''
+* ''CSS'', not ''css''
 
 ! Typographic Standards
 
