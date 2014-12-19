@@ -9,7 +9,7 @@ type: text/vnd.tiddlywiki
 
 !! Translation Improvements
 
-* 
+* Updated Dutch translation
 
 !! Usability Improvements
 
@@ -21,7 +21,7 @@ type: text/vnd.tiddlywiki
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/182c2428ca7b38d00d36d2d6650e761026470e63]] problem with download saver using incorrect filename
 
 !! Node.js Changes
 
