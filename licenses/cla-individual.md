@@ -190,3 +190,5 @@ Erwan Dano, @Braincoke, 2014/11/24
 Jim Lehmer, @dullroar, 2014/12/07
 
 Aurelien Navarre, @anavarre, 2014/12/15
+
+Astrid Elocson, @aelocson, 2014/12/21
