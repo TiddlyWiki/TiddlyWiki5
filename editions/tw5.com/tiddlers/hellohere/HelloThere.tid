@@ -17,10 +17,8 @@ You can use ~TiddlyWiki as a single file that you view and edit through any web 
 
 How can you make ~TiddlyWiki work for you? We recommend you start with our introductory documentation listed below, and then browse the TableOfContents, available in the Contents tab in the sidebar. Or just [[follow our simple instructions|GettingStarted]] and try it out for yourself!
 
-* [[Discover TiddlyWiki]]
-* [[Some of the things you can do with TiddlyWiki]]
-* [[Ten reasons to switch to TiddlyWiki]]
-* [[Examples of TiddlyWiki being used in the wild|Examples]]
-* [[History of TiddlyWiki]] 
-* [[What happened to the original TiddlyWiki?]]
+<<list-links "[tag[HelloThere]]">>
+
+Also see:
+
 * [ext[Developer Documentation|./dev/index.html]]
