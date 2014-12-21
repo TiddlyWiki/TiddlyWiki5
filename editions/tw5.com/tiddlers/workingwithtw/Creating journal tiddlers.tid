@@ -28,7 +28,7 @@ For example, one might be reviewing a tiddler called ''Oxford Street'' and reali
 
 Visit the control panel Info/Basics tab to configure new journal creation:
 
-* "Title of new journal tiddlers" specifies the naming of journal tiddlers as a [[date format string|DateFormat]]. The default setting of "DDth MMM YYYY" causes new journals to have titles of the form "10th October 2014"
+* "Title of new journal tiddlers" specifies the naming of journal tiddlers as a [[date format string|DateFormat]]. The default setting of `DDth MMM YYYY` causes new journals to have titles of the form "10th October 2014"
 * "Tags for new journal tiddlers" specifies one or more optional tags that are automatically applied to new journal tiddlers. Multiple tags should be separated with spaces. Tags containing spaces should be surrounded by double square brackets. For example: `Journal [[Multi-word tag]]`
 
 One useful hint is to use a title format such as `YYYY-0MM-0DD at 0hhh0mm'0ss''` which causes the time (including seconds) to be included in the journal title. This means that a new, separate journal tiddler will be created each time the button is clicked.
