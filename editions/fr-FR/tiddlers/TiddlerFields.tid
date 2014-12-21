@@ -1,6 +1,6 @@
-fr-title: Champs de tiddler
 created: 20130825213300000
-modified: 20141115221447314
+fr-title: Champs de tiddler
+modified: 20141217193536384
 tags: Concepts
 title: TiddlerFields
 type: text/vnd.tiddlywiki
@@ -21,7 +21,7 @@ Les champs standard sont<<dp>>
 |`type` |TypeField |<<lingo type>> |
 |`list` |ListField |<<lingo list>> |
 
-Les autres champs utilisés par le cœur du système sont<<dp>>
+Les autres champs utilisés par le noyau sont<<dp>>
 
 |!Nom du champ |!Référence |!Description |
 |`color` |ColorField |<<lingo color>> |
