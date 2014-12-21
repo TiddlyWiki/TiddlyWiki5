@@ -10,7 +10,7 @@ External images are used in the browser. They can be created by the Node.js conf
 
 ! What is an External Image
 
-An external image is an ordinary image tiddler that has a ''_canonical_uri'' field containing the URI of the image. The URI can be absoluate or relative to the HTML document. If the canonical URI is provided then the ''text'' field of the tiddler is ignored and so should be omitted.
+An external image is an ordinary image tiddler that has a ''_canonical_uri'' field containing the URI of the image. The URI can be absolute or relative to the HTML document. If the canonical URI is provided then the ''text'' field of the tiddler is ignored and so should be omitted.
 
 ! Manually Creating External Images
 
