@@ -1,8 +1,8 @@
 caption: Bienvenue !
 created: 20130822170200000
 fr-title: Bienvenue !
-list: [[Découvrez TiddlyWiki]] [[Certaines choses qu'on peut faire avec TiddlyWiki] [[Dix raisons de passer à TiddlyWiki]] Examples [[Histoire de TiddlyWiki]] [[Qu'est-il arrivé au TiddlyWiki d'origine ?]]
-modified: 20141203144417884
+list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[History of TiddlyWiki]] [[What happened to the original TiddlyWiki?]]
+modified: 20141221121901696
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
@@ -19,10 +19,8 @@ Vous pouvez utiliser <<tw>> sous forme de fichier autonome, affichable et édita
 
 Comment faire fonctionner <<tw>> chez vous ? Notre conseil est de commencer par lire les textes de présentation ci-dessous, puis de naviguer dans la [[table des matières|TableOfContents]] présente dans l'onglet //{{TableOfContents!!caption}}// de la barre latérale. Ou si vous préférez, contentez-vous de suivre [[nos instructions de démarrage|GettingStarted]] et jetez-vous à l'eau !
 
-* [[Découvrez TiddlyWiki|Discover TiddlyWiki]]
-* [[Certaines choses qu'on peut faire avec TiddlyWiki|Some of the things you can do with TiddlyWiki]]
-* [[Dix raisons de passer à TiddlyWiki|Ten reasons to switch to TiddlyWiki]]
-* [[Exemples de TiddlyWiki qu'on peut trouver dans la nature|Examples]]
-* [[Histoire de TiddlyWiki|History of TiddlyWiki]] 
-* [[Qu'est-il arrivé au TiddlyWiki d'origine ?|What happened to the original TiddlyWiki?]]
+<<list-links "[tag[HelloThere]]">>
+
+Voir aussi<<:>>
+
 * [ext[Developer Documentation|http://tiddlywiki.com/dev/index.html]] (en anglais)
