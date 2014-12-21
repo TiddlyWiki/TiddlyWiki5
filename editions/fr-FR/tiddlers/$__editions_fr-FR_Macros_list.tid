@@ -1,19 +1,22 @@
 created: 20141127091159720
-modified: 20141203144808981
+modified: 20141221122727114
 tags: $:/tags/Macro
-title: $:/core/macros/list
+title: $:/editions/fr-FR/Macros/list
 type: text/vnd.tiddlywiki
 
 \define list-links(filter,type:"ul",subtype:"li",class:"")
+<!-- Essentially overriding $:/core/macros/list
+	 so that the list item is rather labeled with fr-title
+     when present. -->
 <$type$ class="$class$">
 <$list filter="$filter$">
 <$subtype$>
 <$link to={{!!title}}>
-<$view field="fr-title">
 <$transclude field="caption">
+<$view field="fr-title">
 <$view field="title"/>
-</$transclude>
 </$view>
+</$transclude>
 </$link>
 </$subtype$>
 </$list>
