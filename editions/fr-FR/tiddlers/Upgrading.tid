@@ -1,6 +1,6 @@
-fr-title: Mettre à niveau
 created: 20131202102427114
-modified: 20141022194628954
+fr-title: Mettre à niveau
+modified: 20141217193600632
 tags: Features [[Working with TiddlyWiki]]
 title: Upgrading
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ La procédure décrite ici est réservée à la mise à niveau de fichiers <<tw>
 <<<
 Quand vous mettez à niveau, n'oubliez pas [[la première règle d'utilisation de Tiddlywiki|The First Rule of Using TiddlyWiki]] :
 
-//Il est de votre responsabilité de vous occuper de vos données ; prenez soin d'effectuer des sauvegardes, surtout quand vous mettez à niveau le cœur de <<tw>>.//
+//Il est de votre responsabilité de vous occuper de vos données ; prenez soin d'effectuer des sauvegardes, surtout quand vous mettez à niveau le noyau de <<tw>>.//
 <<<
 
 ! Mise à niveau en ligne
