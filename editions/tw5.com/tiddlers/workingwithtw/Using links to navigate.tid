@@ -8,7 +8,7 @@ You can use internal hyperlinks (links between tiddlers, normally displayed in b
 
 * You can ''create a link'' to a tiddler, whether it exists yet or not, in the body of any tiddler. See [[Linking in WikiText]] to see the various, easy ways to create links between tiddlers.
 
-* Each ''tag pill'' found in your tiddler (such as the "Working with ~TiddlyWiki" tag pill under the title of this tiddler) contains a link to that tag tiddler, as well as lists of all the tiddlers tagged with that tag. This allows you to go to any of those tiddlers.
+* Each ''tag pill'' found in your tiddler (such as the ''Working with ~TiddlyWiki'' tag pill under the title of this tiddler) contains a link to that tag tiddler, as well as lists of all the tiddlers tagged with that tag. This allows you to go to any of those tiddlers.
 
 * The ''~TiddlerInfo section'' of each tiddler, accessed by clicking the {{$:/core/images/info-button}} button at the top of the tiddler, gives you access to four additional lists of tiddlers related to your tiddler:
 
@@ -34,7 +34,7 @@ You can use internal hyperlinks (links between tiddlers, normally displayed in b
 
 *** ''Missing'' lists all the hyperlinks found in tiddler text for which no tiddler currently exists. This is helpful for finding tiddlers you at some point expected to create, but never got around to creating.
 
-*** ''Drafts'' lists all unfinished tiddlers still in edit mode. A tiddler draft is considered a separate tiddler by ~TiddlyWiki until it is closed, so if you edit a tiddler entitled "Australia", there will then be two tiddlers, "Australia" and "Draft of 'Australia'". When you save or cancel your changes to close the draft, it will apply those changes to the "Australia" tiddler. So treat the Drafts tab as a way of finding any unfinished drafts you started.
+*** ''Drafts'' lists all unfinished tiddlers still in edit mode. A tiddler draft is considered a separate tiddler by ~TiddlyWiki until it is closed, so if you edit a tiddler entitled ''Australia'', there will then be two tiddlers, ''Australia'' and ''Draft of 'Australia&apos;''. When you save or cancel your changes to close the draft, it will apply those changes to the ''Australia'' tiddler. So treat the Drafts tab as a way of finding any unfinished drafts you started.
 
 *** ''Orphans'' lists all the tiddlers which are not related to any other tiddler by links, tags or lists. This is a helpful aid to editing your file - it shows you the tiddlers that need to be integrated more carefully with the other tiddlers.
 
@@ -48,6 +48,6 @@ You can use internal hyperlinks (links between tiddlers, normally displayed in b
 
 * Finally, you can create your own custom lists of tiddlers by various methods:
 
-** You can transclude a [[filter|Filters]] (see [[Transclusion in WikiText]]). For example, adding `{{{ [tag[mountain]] }}}` to a tiddler will insert a list of all tiddlers tagged with "mountain".
+** You can transclude a [[filter|Filters]] (see [[Transclusion in WikiText]]). For example, adding `{{{ [tag[mountain]] }}}` to a tiddler will insert a list of all tiddlers tagged with ''mountain''.
 
 ** You can use the ListWidget. This is more complicated than transcluding a [[filter|Filters]], but in return allows you more flexibility in designing and displaying the list exactly as you want it to appear.
