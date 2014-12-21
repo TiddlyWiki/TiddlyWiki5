@@ -364,22 +364,18 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	var defaultVersion = {
 		major: 0,
 		minor: 0,
-		patch: 0,
-		build: 0
+		patch: 0
 	},
 	versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
 	versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
 	diff = [
 		versionA.major - versionB.major,
 		versionA.minor - versionB.minor,
-		versionA.patch - versionB.patch,
-		versionA.build - versionB.build
+		versionA.patch - versionB.patch
 	];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0 && diff[3] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0 && diff[3] === 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
 };
 
 /*
