@@ -23,7 +23,7 @@ Creating new tiddlers and editing existing tiddlers both open up the ~EditTempla
 *''The title editor'' Use this to edit the title of the tiddler
 *''The tag editor'' Use this to add or remove tags to the tiddler. Type a tag name and either select a tag from the dropdown list or finish typing to create a new tag. Then click the 'add' button to add it to the tiddler. Delete tags from a tiddler by clicking the 'x' on the tag pill
 *''The text editor'' Use this to add content to the tiddler. You can also use the preview button to preview changes to the tiddler text
-*''The type editor'' Use this when you have a specific type of content that needs to be displayed in a different way, such as an image. See ContentType for a list of possible content types. The default is text/vnd.tiddlywiki)
+*''The type editor'' Use this when you have a specific type of content that needs to be displayed in a different way, such as an image. See ContentType for a list of possible content types. The default is `text/vnd.tiddlywiki`
 *''The field editor'' Use this to add fields to the tiddler. For example, you can use a [[list field|ListField]] to display the order of tiddlers tagged with the current tiddler's title in ways that are not alphabetical
 
 ! Save, cancel or delete
