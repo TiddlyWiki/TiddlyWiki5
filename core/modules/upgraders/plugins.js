@@ -15,6 +15,9 @@ Upgrader module that checks that plugins are newer than any already installed ve
 var UPGRADE_LIBRARY_TITLE = "$:/UpgradeLibrary";
 
 var BLOCKED_PLUGINS = {
+	"$:/themes/tiddlywiki/stickytitles": {
+		versions: ["*"]
+	},
 	"$:/plugins/tiddlywiki/fullscreen": {
 		versions: ["*"]
 	}

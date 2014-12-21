@@ -7,6 +7,17 @@ tags: [[$:/tags/Stylesheet]]
 	text-shadow: 0 1px 0 <<colour sidebar-foreground-shadow>>;
 }
 
+.tc-tiddler-title {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  top: 0px;
+  background: <<colour tiddler-background>>;
+  z-index: 500;
+}
+
 .tc-tiddler-info {
 	<<box-shadow "inset 1px 2px 3px rgba(0,0,0,0.1)">>
 }
