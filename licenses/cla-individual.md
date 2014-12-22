@@ -192,3 +192,5 @@ Jim Lehmer, @dullroar, 2014/12/07
 Aurelien Navarre, @anavarre, 2014/12/15
 
 Astrid Elocson, @aelocson, 2014/12/21
+
+Andreas Hahn, @Drakor, 2014/12/21
