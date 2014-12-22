@@ -10,7 +10,7 @@ You can use links (normally displayed as blue text) to navigate from one tiddler
 
 * Each ''tag pill'' in your tiddler (such as the ''Working with ~TiddlyWiki'' tag pill below the title of this tiddler) contains a link to that tag's tiddler, as well as lists of all the tiddlers that carry that tag. This lets you go to any of those tiddlers.
 
-* The ''info section'' of each tiddler - accessed by clicking the {{$:/core/images/info-button}} button in the {{$:/core/images/down-arrow}} dropdown list at the top of the tiddler - gives you access to four tabs containing additional lists of related tiddlers:
+* The ''InfoPanel'' of each tiddler - accessed by clicking the {{$:/core/images/info-button}} button in the {{$:/core/images/down-arrow}} dropdown list at the top of the tiddler - gives you access to four tabs containing additional lists of related tiddlers:
 
 ** The ''References'' tab lists all the tiddlers that link //to// the current tiddler.
 
