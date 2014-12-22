@@ -3,7 +3,7 @@ modified: 20140101175304016
 title: TiddlyWiki on node-webkit
 type: text/vnd.tiddlywiki
 
-[[node-webkit]] allows TiddlyWiki to be set up as a native application for Windows, Mac OS X or Linux.
+[[node-webkit|http://tiddlywiki.com/#node-webkit]] allows TiddlyWiki to be set up as a native application for Windows, Mac OS X or Linux.
 
 ! Setting up
 
