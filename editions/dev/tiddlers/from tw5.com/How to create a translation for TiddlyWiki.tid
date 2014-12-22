@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! Prerequisites
 
-* [[TiddlyWiki on Node.js]]
+* [[TiddlyWiki on Node.js|http://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]]
 * A GitHub account to submit the translation to tiddlywiki.com
 
 ! Setting Up
