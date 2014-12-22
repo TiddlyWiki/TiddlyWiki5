@@ -1,14 +1,15 @@
 title: GettingStarted
 
-Bienvenue sur TiddlyWiki, un carnet de notes non linéaire pour le Web.
+\define lingo-base() $:/language/ControlPanel/Basics/
+Bienvenue sur ~TiddlyWiki et parmi la communauté ~TiddlyWiki.
 
 Commencez par vérifier que vos modifications peuvent être sauvegardées
-correctement — reportez-vous aux instructions détaillées sur http://tiddlywiki.com/.
+correctement — reportez-vous aux [[instructions détaillées|http://tiddlywiki.com/languages/fr-FR/index.html#Saving]] sur http://tiddlywiki.com/.
 
-Ensuite, essayez de :
+!! Personnalisez ce ~TiddlyWiki
 
-* Créer de nouveaux tiddlers à l'aide du bouton « plus » de la barre latérale
-* Visiter le [[panneau de contrôle|$:/ControlPanel]] à l'aide du bouton « engrenage » de la barre latérale, afin de personnaliser votre wiki
-** Faire en sorte que ce message n'apparaisse plus en changeant les tiddlers affichés par défaut depuis l'onglet //Fondamentaux//
-* Sauvegarder vos modifications à l'aide du bouton « Télécharger » de la barre latérale
-* En savoir plus sur [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+
+Rendez-vous dans le [[panneau de contrôle|$:/ControlPanel]] pour plus d'options.
