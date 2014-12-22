@@ -194,3 +194,5 @@ Aurelien Navarre, @anavarre, 2014/12/15
 Astrid Elocson, @aelocson, 2014/12/21
 
 Andreas Hahn, @Drakor, 2014/12/21
+
+Jean-Charles Longuet, @Jc-L, 2014/12/22
