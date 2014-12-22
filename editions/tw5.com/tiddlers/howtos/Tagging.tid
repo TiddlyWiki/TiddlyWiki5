@@ -8,7 +8,7 @@ Tagging a tiddler assigns a tiddler to a category of your choosing (see [[Creati
 
 Tagging tiddlers gives you numerous additional ways to view, navigate and organise your information:
 
-* The coloured tag pills on a tagged tiddler gives you links to all the other tiddlers with the same tag, as well as to the tiddler representing the tag itself.
+* The coloured tag pills on a tagged tiddler give you links to all the other tiddlers with the same tag, as well as to the tiddler representing the tag itself.
 * The ''Tagging'' tab in the tiddler info panel (accessed by clicking the {{$:/core/images/info-button}} button) gives you links to all the tiddlers tagged with the title of the current tiddler.
 
 * You can use the tags tab in the ''More'' sidebar tab to view all your tags and access your tagged tiddlers.
@@ -32,5 +32,5 @@ You can use the [[tag manager|$:/TagManager]], found in the ''Tags'' tab of the 
 ** First, any tiddlers that are listed in the ListField of the tag tiddler are placed into a new list in the same order
 ** Second, any unplaced tiddlers that have the field ''list-before'' are placed before the tiddler specified in the field
 *** (if the ''list-before'' field is empty then the unplaced tiddler is placed at the start of the list)
-** Third, if any unplaced tiddlers have the field ''list-after'' then they placed immediately after the tiddler specified in the field
+** Third, if any unplaced tiddlers have the field ''list-after'' then they are placed immediately after the tiddler specified in the field
 ** Finally, any remaining unplaced tiddlers are placed at the end of the list

@@ -26,7 +26,7 @@ Backup your data!
 
 TiddlyWiki is a very flexible, customisable system that puts you firmly in charge of your own data. Every care is taken in TiddlyWiki's development to ensure that it is a safe place to preserve your most valuable data but the ultimate responsibility to reduce the risk of data loss falls to users.
 
-The best way to make sure that your data is safe is to practice a rigorous system of backups:
+The best way to make sure that your data is safe is to practise a rigorous system of backups:
 
 * Consider using services like Dropbox to continuously back up your personal data to the cloud. (Dropbox [[has a neat feature|https://www.dropbox.com/help/11]] whereby they keep track of previous versions of files)
 * Retain backups before upgrading to a new version of TiddlyWiki
