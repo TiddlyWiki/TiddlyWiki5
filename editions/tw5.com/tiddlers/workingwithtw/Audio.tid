@@ -10,7 +10,7 @@ Audio files can be incorporated into TiddlyWiki in a very similar way to [[image
 
 Small audio files can be embedded directly within TiddlyWiki. Embedding isn't suitable for large files (over a few hundred kilobytes) because it increases the size of the TiddlyWiki file.
 
-For example, the tiddler [[TiddlyWiki.mp3]] contains an MP3 recording of the word "TiddlyWiki". Viewing the tiddler directly should show an audio player that allows playback.
+For example, the tiddler [[TiddlyWiki.mp3]] contains an MP3 recording of the word "TiddlyWiki". If you visit that tiddler, you should see an audio player that will play back the recording.
 
 You can also transclude audio files. For example:
 
@@ -18,7 +18,7 @@ You can also transclude audio files. For example:
 
 ! External Audio
 
-External audio tiddlers use the ''_canonical_uri'' field to point to an external audio file/stream, and have a block ''text'' field. This reduces their size considerably, and still allows for playback.
+External audio tiddlers use the ''_canonical_uri'' field to point to an external audio file/stream, and have their ''text'' field blocked. This reduces their size considerably, but still allows for playback.
 
 For example, the tiddler [[Caruso - Ave Maria]] points to an online audio recording hosted on http://archive.org:
 
