@@ -333,12 +333,12 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	// Flip the specified tiddler from draft back to the original
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
-		originalTitle = draftTiddler.fields["draft.of"],
-		originalTiddler = this.wiki.getTiddler(originalTitle),
-		storyList = this.getStoryList();
+		originalTitle = draftTiddler && draftTiddler.fields["draft.of"];
 	if(draftTiddler && originalTitle) {
 		// Ask for confirmation if the tiddler text has changed
-		var isConfirmed = true;
+		var isConfirmed = true,
+			originalTiddler = this.wiki.getTiddler(originalTitle),
+			storyList = this.getStoryList();
 		if(this.wiki.isDraftModified(draftTitle)) {
 			isConfirmed = confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
