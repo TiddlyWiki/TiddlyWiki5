@@ -20,7 +20,7 @@ The ''new journal'' button creates a journal entry as a blank tiddler with the t
 
 ! Creating a tagged journal tiddler
 
-A common sequence of actions is to create (or reopen) today's journal entry and tag it with the title of another tiddler. This can be done with the ''new journal here'' button in the other tiddler's toolbar. (You can find this button in the ''Tools'' tab of the tiddler's info panel, which you can reveal by choosing ''info'' under {{$:/core/images/down-arrow}} in the tiddler's toolbar. If you click the checkbox next to ''new journal here'', you can promote that button up to the tiddler's toolbar.)
+A common sequence of actions is to create (or reopen) today's journal entry and tag it with the title of another tiddler. This can be done with the ''new journal here'' button in the other tiddler's toolbar. You can find this button in the ''Tools'' tab of the tiddler's InfoPanel.
 
 For example, you might be reviewing a tiddler called ''Oxford Street'' and realise that it's relevant for planning your shopping trip. Click the ''new journal here'' button on the ''Oxford Street'' tiddler to bring up a journal entry tagged with ''Oxford Street''.
 
