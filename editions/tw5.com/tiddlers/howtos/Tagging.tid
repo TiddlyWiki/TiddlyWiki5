@@ -32,5 +32,5 @@ You can use the [[tag manager|$:/TagManager]], found in the ''Tags'' tab of the 
 ** First, any tiddlers that are listed in the ListField of the tag tiddler are placed into a new list in the same order
 ** Second, any unplaced tiddlers that have the field ''list-before'' are placed before the tiddler specified in the field
 *** (if the ''list-before'' field is empty then the unplaced tiddler is placed at the start of the list)
-** Third, if any unplaced tiddlers have the field ''list-after'' then they placed immediately after the tiddler specified in the field
+** Third, if any unplaced tiddlers have the field ''list-after'' then they are placed immediately after the tiddler specified in the field
 ** Finally, any remaining unplaced tiddlers are placed at the end of the list
