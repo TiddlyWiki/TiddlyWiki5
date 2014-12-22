@@ -39,7 +39,7 @@ Content of `plugin.info` for Joe Bloggs' Welsh translation:
 }
 ```
 
-MultiTiddlerFiles make it possible to pack the text of several tiddlers in a single text file, simplifying some editing tasks.
+[[MultiTiddlerFiles|http://tiddlywiki.com/#MultiTiddlerFiles]] make it possible to pack the text of several tiddlers in a single text file, simplifying some editing tasks.
 
 ! Handling Updates
 
