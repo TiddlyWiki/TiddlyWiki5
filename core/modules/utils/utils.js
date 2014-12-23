@@ -441,7 +441,7 @@ exports.escapeRegExp = function(s) {
 
 exports.nextTick = function(fn) {
 /*global window: false */
-	if(typeof window !== "undefined") {
+	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,4);
 	} else {
