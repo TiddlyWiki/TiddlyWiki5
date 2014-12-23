@@ -78,17 +78,27 @@ FileSystemAdaptor.prototype.getTiddlerFileInfo = function(tiddler,callback) {
 };
 
 /*
+Transliterate string from cyrillic russian to latin
+*/
+ var transliterate = function(cyrillyc) {
+	var a = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"a","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+	return cyrillyc.split("").map(function (char) {
+		return a[char] || char;
+	}).join("");
+};
+
+/*
 Given a tiddler title and an array of existing filenames, generate a new legal filename for the title, case insensitively avoiding the array of existing filenames
 */
 FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
 	// First remove any of the characters that are illegal in Windows filenames
-	var baseFilename = title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^/g,"_");
+	var baseFilename = title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_");
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200) + extension;
 	}
 	// Start with the base filename plus the extension
-	var filename = baseFilename + extension,
+	var filename = transliterate(baseFilename) + extension,
 		count = 1;
 	// Add a discriminator if we're clashing with an existing filename
 	while(existingFilenames.indexOf(filename) !== -1) {
