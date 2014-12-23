@@ -14,5 +14,5 @@ type: text/vnd.tiddlywiki
 #* You may rename it, but be sure to keep the `.html` extension
 # Open the file in Internet Explorer
 # Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
-# Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar. Internet Explorer will ask for your consent to save the file locally by presenting a file ''Save As'' dialog.
+# Save your changes by clicking the {{$:/core/images/save-button}} ''Save changes'' button in the sidebar. Internet Explorer will ask for your consent to save the file locally by presenting a file ''Save As'' dialog.
 # Refresh the browser window to verify that your changes have been saved correctly
