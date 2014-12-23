@@ -375,7 +375,8 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
+		((diff[0] === 0 && diff[1] === 0 && diff[2] === 0) && !(versionA.prerelease && versionB.prerelease));
 };
 
 /*
