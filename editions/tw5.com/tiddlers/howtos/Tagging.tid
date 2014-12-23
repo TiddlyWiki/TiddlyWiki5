@@ -35,7 +35,7 @@ You can use the [[tag manager|$:/TagManager]], found on the ''Tags'' tab under '
 
 By default, tagged tiddlers are listed in the order they were added to the wiki. The [[sort operator|Filter operator: sort]] can change the order to alphabetical.
 
-If you want any other order, add a [[field called ''list''|ListField]] to the tag tiddler, and set its value to be a [[TiddlerChain]] of the tiddlers in that order.
+If you want any other order, add a [[field called ''list''|ListField]] to the tag tiddler, and set its value to be a [[TitleList]] of the tiddlers in that order.
 
 The ''list'' field doesn't have to mention all of the tiddlers. Here are the precise rules ~TiddlyWiki uses to order tagged tiddlers:
 
