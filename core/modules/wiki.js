@@ -662,7 +662,7 @@ exports.setTiddlerData = function(title,data,fields) {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
-	this.addTiddler(new $tw.Tiddler(existingTiddler,fields,newFields,this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(this.getCreationFields(),existingTiddler,fields,newFields,this.getModificationFields()));
 };
 
 /*
