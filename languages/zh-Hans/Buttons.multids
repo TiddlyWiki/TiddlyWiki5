@@ -3,7 +3,7 @@ title: $:/language/Buttons/
 AdvancedSearch/Caption: 高级查找
 AdvancedSearch/Hint: 高级查找
 Cancel/Caption: 取消
-Cancel/Hint: 取消编辑此条目
+Cancel/Hint: 放弃对此条目的更改
 Clone/Caption: 克隆
 Clone/Hint: 克隆此条目
 Close/Caption: 关闭
@@ -56,8 +56,8 @@ Permaview/Caption: 永久连结
 Permaview/Hint: 设置浏览器网址栏为直接连结到当前所有已开启条目
 Refresh/Caption: 刷新
 Refresh/Hint: 执行维基的完全刷新
-Save/Caption: 保存
-Save/Hint: 保存此条目
+Save/Caption: 确定
+Save/Hint: 确定对此条目的更改
 SaveWiki/Caption: 保存变更
 SaveWiki/Hint: 保存变更
 StoryView/Caption: 查看模式
