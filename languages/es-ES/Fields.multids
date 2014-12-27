@@ -1,0 +1,35 @@
+title: $:/language/Docs/Fields/
+
+_canonical_uri: URI completa de tiddler externo de imagen
+bag: Nombre de la bolsa de la que procede el tiddler
+caption: Texto que se muestra en una pestaña o botón
+color: El valor CSS de color asociado a un tiddler.
+component: Nombre del componente responsable de un [[tiddler de alerta|AlertMechanism]]
+created: Fecha en que un tiddler fue creado
+creator: Nombre de quien creó el tiddler
+current-tiddler: Usado para almacenar el tiddler superior en un [[histórico|HistoryMechanism]]
+dependents: Lista de títulos dependientes de un plugin
+description: Texto descriptivo de un plugin o diálogo modal
+draft.of: Contiene el título del tiddler del que es borrador. 
+draft.title: Contiene el nuevo título propuesto para un borrador. 
+footer: Texto de pie de un asistente
+hack-to-give-us-something-to-compare-against: Campo de almacenamiento temporal usado en [[$:/core/templates/static.content]]
+icon: Título del tiddler que contiene un icono asociado a un tiddler
+library: Si se establece "yes", indica que un tiddler debiera guardarse como librería de JavaScript
+list: Lista ordenada de títulos de tiddlers asociados a un tiddler
+list-after: Si se selecciona, título del tiddler después del que este tiddler se añade a la lista de títulos
+list-before: Si se selecciona, título del tiddler antes del que este tiddler se añade a la lista de títulos, o al inicio de la lista, si este campo está presente, pero vacío. 
+modified: Fecha y hora de la última modificación de un tiddler
+modifier: Título del tiddler asociado a la última persona que modificó un determinado tiddler
+name: Nombre humano legible asociado a un determinado tiddler plugin
+plugin-priority: Valor numérico que indica la prioridad de un tiddler plugin
+plugin-type: Tipo de plugin en un tiddler plugin
+released: Fecha de publicación de un TiddlyWiki
+revision: Revisión del tiddler guardado en el servidor
+source: URL de origen asociada a un tiddler
+subtitle: Texto de subtítulo de un asistente
+tags: Lista de etiquetas asociadas a un tiddler
+text: Cuerpo de un tiddler
+title: Nombre único de un tiddler
+type: Tipo de contenido en un tiddler
+version: Información de la versión de un plugin

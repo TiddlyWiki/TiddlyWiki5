@@ -1,0 +1,97 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Avanzado
+Advanced/Hint: Información interna sobre este TiddlyWiki
+Appearance/Caption: Apariencia
+Appearance/Hint: Formas de personalizar la apariencia de su TiddlyWiki
+Basics/AnimDuration/Prompt: Duración de la animación:
+Basics/Caption: Conceptos básicos
+Basics/DefaultTiddlers/BottomHint: Use &#91;&#91;corchetes dobles&#93;&#93; para títulos con espacios. También puede elegir  <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">mantener el orden histórico de los tiddlers abiertos </$button>
+Basics/DefaultTiddlers/Prompt: Tiddlers por defecto:
+Basics/DefaultTiddlers/TopHint: Elija qué tiddlers se muestran al inicio: 
+Basics/Language/Prompt: ¡Hola! Lenguaje actual:
+Basics/NewJournal/Tags/Prompt: Etiquetas para nuevas entradas de blog/diario
+Basics/NewJournal/Title/Prompt: Título de las nuevas entradas de blog/diario
+Basics/OverriddenShadowTiddlers/Prompt: Número de tiddlers ocultos omitidos:
+Basics/ShadowTiddlers/Prompt: Número de tiddlers ocultos:
+Basics/Subtitle/Prompt: Subtítulo:
+Basics/SystemTiddlers/Prompt: Número de tiddlers de sistema:
+Basics/Tags/Prompt: Número de etiquetas:
+Basics/Tiddlers/Prompt: Número de tiddlers:
+Basics/Title/Prompt: Título de este~TiddlyWiki:
+Basics/Username/Prompt: Nombre de usuario:
+Basics/Version/Prompt: Versión de ~TiddlyWiki:
+EditorTypes/Caption: Tipos de editor
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Estos tiddlers determinan qué editor se usará para editar qué tipo específico de tiddler.
+EditorTypes/Type/Caption: Tipo
+Info/Caption: Información
+Info/Hint: Información sobre este TiddlyWiki
+LoadedModules/Caption: Módulos cargados
+LoadedModules/Hint: Estos son módulos de tiddlers actualmente en carga, enlazados a sus tiddlers de origen. Los módulos en itálica carecen de tiddler de origen, normalmente porque se configuran durante el proceso de arranque. 
+Palette/Caption: Paleta de color
+Palette/Editor/Clone/Caption: clonar
+Palette/Editor/Clone/Prompt: Se recomienda que clone esta paleta oculta antes de editarla. 
+Palette/Editor/Prompt: Edición
+Palette/Editor/Prompt/Modified: Esta paleta oculta ha sido modificada
+Palette/Editor/Reset/Caption: resetear
+Palette/HideEditor/Caption: ocultar editor
+Palette/Prompt: Paleta actual:
+Palette/ShowEditor/Caption: mostrar editor
+Plugins/Caption:  Plugins
+Plugins/Disable/Caption: desactivar
+Plugins/Disable/Hint: Desactivar este plugin cuando se refresque la página
+Plugins/Disabled/Status: (desactivado)
+Plugins/Empty/Hint: Ninguno
+Plugins/Enable/Caption: activar
+Plugins/Enable/Hint: Activar este plugin cuando se refresque la página
+Plugins/Language/Prompt: Idiomas
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Temas
+Saving/Caption: Guardando
+Saving/Heading: Guardando
+Saving/TiddlySpot/Advanced/Heading: Ajustes avanzados
+Saving/TiddlySpot/BackupDir: Directorio para copia de seguridad
+Saving/TiddlySpot/Backups: Copias de seguridad
+Saving/TiddlySpot/Description: Estos ajustes se usan sólo cuando se guarda en http://tiddlyspot.com o un servidor remoto compatible
+Saving/TiddlySpot/Filename: Nombre de archivo para subir
+Saving/TiddlySpot/Heading: Orphan tiddlers~TiddlySpot
+Saving/TiddlySpot/Hint: //La URL por defecto del servidor es `http://<wikiname>.tiddlyspot.com/store.cgi` y puede modificarse para usar un servidor personalizado//
+Saving/TiddlySpot/Password: Contraseña
+Saving/TiddlySpot/ServerURL: URL del servidor
+Saving/TiddlySpot/UploadDir: Directorio de subida
+Saving/TiddlySpot/UserName: Nombre del Wiki
+Settings/AutoSave/Caption: Autoguardado
+Settings/AutoSave/Disabled/Description: No guardar cambios automáticamente
+Settings/AutoSave/Enabled/Description: Guardar cambios automáticamente
+Settings/AutoSave/Hint: Guardar cambios automáticamente, durante la edición
+Settings/Caption: Ajustes
+Settings/Hint: Estos ajustes permiten configurar el comportamiento de TiddlyWiki.
+Settings/NavigationAddressBar/Caption: Barra de dirección del navegador
+Settings/NavigationAddressBar/Hint: Comportamiento de la barra de dirección del navegador cuando se abren tiddlers: 
+Settings/NavigationAddressBar/No/Description: No actualizar la barra de dirección
+Settings/NavigationAddressBar/Permalink/Description: Incluir el tiddler de destino
+Settings/NavigationAddressBar/Permaview/Description: Incluir el tiddler de destino y la secuencia actual de tiddlers abiertos
+Settings/NavigationHistory/Caption: Historial de navegación
+Settings/NavigationHistory/Hint: Actualizar el historial de navegación cuando se abra un tiddler:
+Settings/NavigationHistory/No/Description: No actualizar el historial
+Settings/NavigationHistory/Yes/Description: Actualizar el historial
+Settings/ToolbarButtons/Caption: Botones de la barra de herramientas
+Settings/ToolbarButtons/Hint: Apariencia por defecto de los botones de la barra de herramientas: 
+Settings/ToolbarButtons/Icons/Description: Iconos
+Settings/ToolbarButtons/Text/Description: Texto
+StoryView/Caption: Vista:
+StoryView/Prompt: Vista actual
+Theme/Caption: Tema
+Theme/Prompt: Tema actual:
+TiddlerFields/Caption: Campos del tiddler
+TiddlerFields/Hint: Este es el conjunto total campos de tiddler (TiddlerFields) en uso en este wiki (incluyendo tiddlers de sistema, pero excluyendo tiddlers ocultos).
+Toolbars/Caption: Barras de herramientas
+Toolbars/EditToolbar/Caption: Editar barras de herramientas
+Toolbars/EditToolbar/Hint: Seleccionar qué botones mostrar en los tiddlers en modo de edición.
+Toolbars/Hint: Seleccionar qué botones mostrar en la barra de herramientas. 
+Toolbars/PageControls/Caption: Barra de herramientas de la página
+Toolbars/PageControls/Hint: Seleccionar qué botones mostrar en la barra de herramientas de la página principal.
+Toolbars/ViewToolbar/Caption: Mostrar barra de herramientas
+Toolbars/ViewToolbar/Hint: Seleccionar qué botones mostrar en los tiddlers en modo vista. 
+Tools/Download/Full/Caption: Descargar wiki completo

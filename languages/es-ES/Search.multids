@@ -1,0 +1,16 @@
+title: $:/language/Search/
+
+DefaultResults/Caption: Lista
+Filter/Caption: Filtro
+Filter/Hint: Buscar por medio de una [[expresión de filtrado|http://tiddlywiki.com/static/Filters.html]]
+Filter/Matches: //<small><<resultCount>> resultados</small>//
+Matches: //<small><<resultCount>> Resultados</small>//
+Shadows/Caption: Ocultos
+Shadows/Hint: Buscar tiddlers ocultos
+Shadows/Matches: //<small><<resultCount>> resultados</small>//
+Standard/Caption: Estándar
+Standard/Hint: Buscar tiddlers estándar
+Standard/Matches: //<small><<resultCount>> resultados</small>//
+System/Caption: Sistema
+System/Hint: Buscar tiddlers de sistema
+System/Matches: //<small><<resultCount>> resultados</small>//

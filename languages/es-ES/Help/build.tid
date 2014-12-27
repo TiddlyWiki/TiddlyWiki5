@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Ejecutar automáticamente los comandos configurados
+
+Compilar los //targets// u objetivos seleccionados para el presente wiki. Si no se especifica ningún /target/ en concreto, se compilarán todos los disponibles. 
+
+```
+--build <target> [<target> ...]
+```
+
+Los targets de compilado se definen en el archivo `tiddlywiki.info` en la carpeta del wiki.
+
