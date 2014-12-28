@@ -4,68 +4,61 @@ tags: Filters
 title: Filter Formal Grammar
 type: text/vnd.tiddlywiki
 
-[[Filters]] follow a formal grammar that is presented here for users who are familiar with the notation. It isn't necessary to understand this grammar in order to write your own filter expressions.
+[[Filter expressions|Filters]] follow a grammar that is presented here for those who find formal syntax descriptions helpful. However, you can write your own filter expressions without needing to understand this tiddler.
 
-''&lt;filter-string&gt;'' ::= ''&lt;opt-whitespaces&gt;'' ''&lt;filter-operand&gt;'' | ''&lt;opt-whitespaces&gt;'' ''&lt;filter-operand&gt;'' ''&lt;filter-string&gt;''
+* [//x//] denotes an optional //x//
+* (//x//)... denotes 1 or more instances of //x//
+* Literal characters are `monospaced`
+* Bullets indicate alternative possibilities
 
-Whitespace is matched with javascript "\s+", which matches space, tab, carriage return, new line, vertical tab, and form feed.
+;filter
+* ( [//whitespace//] [`+`|`-`] //run// )...
 
-''&lt;opt-whitespaces&gt;'' ::= ''&lt;opt-whitespace&gt;'' | ''&lt;opt-whitespace&gt;'' ''&lt;opt-whitespaces&gt;''
+;run
+* `[` (//operation//)... `]`
+* `"` //text// `"`
+** The text can contain anything but `"`
+* `'` //text// `'`
+** The text can contain anything but `'`
+* //text//
+** The text can contain anything but whitespace and `[` and `]`
+** These last three alternatives are short for `[title[text]]`
 
-''&lt;opt-whitespace&gt;'' ::= " " | "\t" | "0xD" | "0xA" | "0xB" | "0xC"
+;operation
+* [`!`] //operator// //operand//
 
-''&lt;filter-operand&gt;'' ::= ''&lt;opt-operation-prefix&gt;'' ''&lt;string-or-operator-list&gt;''
+;operator
+* [//keyword//] [//suffix//]
+** Terminated by the `[` or `{` or `<` of the operand
+** Keywords are drawn from a reserved list
+** A suffix on its own implies the keyword `field`
+** An entirely omitted operator defaults to `title`
 
-''&lt;opt-operation-prefix&gt;'' ::= "+" | "-" | ""
+;suffix
+* `:` [//text//]
 
-''&lt;string-or-operator-list&gt;'' ::= ''&lt;operation&gt;'' | "\"" ''&lt;string&gt;'' "\"" | "'" ''&lt;string&gt;'' "'" | ''&lt;string&gt;''
+;operand
+* `[` //text// `]`
+** literal -- the text can contain anything but `]`
+* `{` //text// `}`
+** text reference -- the text can contain anything but `}`
+* `<` //text// `>`
+** variable -- the text can contain anything but `>`
 
-''&lt;operation&gt;'' ::= "[" ''&lt;operator-list&gt;'' "]"
+;whitespace
+* One or more spaces, tabs or linefeeds, i.e. a match for the JavaScript regular expression `\s+`
 
-''&lt;operator-list&gt;'' ::= ''&lt;operator&gt;'' | ''&lt;operator&gt;'' ''&lt;operator-list&gt;''
+!Evaluation
 
-''&lt;operator&gt;'' ::= ''&lt;opt-operator-prefix&gt;''''&lt;operator&gt;''''&lt;operand&gt;''
+Each operation returns a set of tiddlers, in the form of a TitleList.
 
-''&lt;opt-operator-prefix&gt;'' ::= "!" | ""
+A run evaluates each of the operations it contains, and returns the intersection of the resulting sets.
 
-''&lt;operator&gt;'' ::= ''&lt;operator-name&gt;'' | ''&lt;operator-name&gt;'' ":" ''&lt;opt-operator-suffix&gt;''
+A sequence of runs is evaluated from left to right, as follows:
 
-''&lt;operator-name&gt;'' ::= "" | "is" | "has" | "each" | "field" ...
+|!Sequence |!Interpretation |
+|run1 run2 |union of the sets, i.e. the tiddlers in //either// run1 //or// run2 |
+|run1 -run2 |difference of the sets, i.e. run1 but excluding any tiddlers in run2 |
+|run1 +run2 |run2 takes run1 as its input |
 
-''&lt;opt-operator-suffix&gt;'' ::= ''&lt;string&gt;'' | ""
-
-''&lt;operand&gt;'' ::= "[" ''&lt;search-string&gt;'' "]" | "{" ''&lt;indirect-search-string&gt;'' "}" | "<" ''&lt;variable-name-string&gt;'' ">"
-
-''&lt;string&gt;'' ::= ''&lt;string-type-1&gt;'' | ''&lt;string-type-2&gt;'' | ...
-
-At the end of parsing you end up with some or all of: 
-
-* ''&lt;opt-operation-prefix&gt;''
-* ''&lt;opt-operator-prefix&gt;''
-* ''&lt;operator-name&gt;''
-* ''&lt;opt-operator-suffix&gt;'', and 
-* ''&lt;operand&gt;''
-
-These are used differently by the different operators. For example, the field filter operator supports:
-
-* ''&lt;opt-operator-prefix&gt;'' to negate the result
-* ''&lt;regex&gt;'' or ''&lt;string&gt;'' operand (note that this must be explicitly supported by each filter operator)
-* ''&lt;opt-operator-suffix&gt;'' to specify a fieldname against which to filter
-
-NOTES:
-
-* The ''&lt;string&gt;'' is a terminal that generally supports single- or double- quoted strings which match, respectively, strings of non-single and non-double quotes. Unquoted strings include the extra exclusion of whitespace and square bracket characters.
-
-* In the case where the ''&lt;string-or-operator-list&gt;'' is NOT an ''&lt;operation&gt;'' it is treated as the operand passed to the default operator (see next bullet). It is not parsed as a full ''&lt;operation&gt;''.
-
-* If ''&lt;operator-name&gt;'' is the empty string then it will be set to "title" (i.e. the title filter operator is the default operator)
-
-* Results are collected and each operation is applied in turn. The ''&lt;opt-operation-prefix&gt;'' can be used to specify how the corresponding operation is used. Suppose T is the set of all tiddlers, R0 is the current set of results, and Fx is the xth operation. Then:
-
-** No prefix (""): R0 = R0 U Fx(T) (set union)
-** "-": R0 = R0 - Fx(T) (set difference)
-** "+": R0 = Fx(R0)
-
-Note that ''&lt;filter-operand&gt;''s are not commutative!
-
-* The parser was simplified by treating regex "/" as a "bracket" of sorts, meaning there could only be a start and end bracket. Thus the regex arguments, like i, are included in parenthesis immediately following the trailing "/".
+The first run of a sequence takes `[all[tiddlers]]` as its input, i.e. the set of all non-missing tiddlers.
