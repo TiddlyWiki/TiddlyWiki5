@@ -9,7 +9,8 @@ type: text/vnd.tiddlywiki
 * [//x//] denotes an optional //x//
 * (//x//)... denotes 1 or more instances of //x//
 * Literal characters are `monospaced`
-* Bullets indicate alternative possibilities
+* Top-level bullets indicate alternative possibilities
+* Second-level bullets are comments and clarifications
 
 ;filter
 * ( [//whitespace//] [`+`|`-`] //run// )...
@@ -28,14 +29,10 @@ type: text/vnd.tiddlywiki
 * [`!`] //operator// //operand//
 
 ;operator
-* [//keyword//] [//suffix//]
-** Terminated by the `[` or `{` or `<` of the operand
-** Keywords are drawn from a reserved list
-** A suffix on its own implies the keyword `field`
+* [//keyword//] [`:` //fieldname//]
+** Keywords (`is`, `has`, `tag`, etc) are reserved names that identify filter functions
+** A fieldname on its own implies the keyword `field`
 ** An entirely omitted operator defaults to `title`
-
-;suffix
-* `:` [//text//]
 
 ;operand
 * `[` //text// `]`
