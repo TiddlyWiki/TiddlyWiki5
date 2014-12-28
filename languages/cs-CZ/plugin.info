@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/cs-CZ",
+	"name": "cs-CZ",
+	"plugin-type": "language",
+	"description": "Česky (Czech Republic)",
+	"author": "Zdeněk Jašek",
+	"core-version": ">=5.0.0"
+}
