@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Guarda un grupo de tiddlers en formato plano
+
+Guarda un grupo de tiddlers en formato binario o como texto plano en la ruta especificada.
+
+```
+--savetiddlers <filter> <pathname>
+```
+
+Por defecto, la ruta es relativa al subdirectorio `output` del directorio de la edición. Puede usarse con el comando `--output` para apuntar a un directorio diferente.
+
+Se crean automáticamente los directorios especificados en la ruta que no existan.

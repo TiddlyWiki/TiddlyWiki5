@@ -9,6 +9,10 @@ html body .tc-tiddler-frame {
 	<<box-shadow "none">>
 }
 
+html body .tc-tiddler-title {
+	background-color: inherit;
+}
+
 html body .tc-story-river {
 	margin-top: 70px;
 }

@@ -22,11 +22,13 @@
 		"en-GB",
 		"de-AT",
 		"de-DE",
+		"es-ES",
 		"fr-FR",
 		"zh-Hans",
 		"zh-Hant",
 		"it-IT",
 		"ja-JP",
+		"cs-CZ",
 		"ru-RU"
 	],
 	"build": {

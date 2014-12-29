@@ -10,12 +10,14 @@
 		"en-GB",
 		"de-AT",
 		"de-DE",
+		"es-ES",
 		"fr-FR",
 		"nl-NL",
 		"zh-Hans",
 		"zh-Hant",
 		"it-IT",
 		"ja-JP",
+		"cs-CZ",
 		"ru-RU"
 	],
 	"themes": [

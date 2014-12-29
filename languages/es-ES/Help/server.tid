@@ -1,0 +1,36 @@
+title: $:/language/Help/server
+description: Proporciona interfaz de servidor HTTP a TiddlyWiki
+
+El servidor compilado para TiddlyWiki5 es muy sencillo. Aunque es compatible con TiddlyWeb, no soporta muchas de las características necesarias para un uso robusto en internet. 
+
+En la raíz, provee un determinado tiddler. Fuera de la raíz, sirve tiddlers individuales codificados en JSON y soporta las operaciones HTTP de `GET`, `PUT` y `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Los parámetros son
+
+* ''port'' - número de puerto desde el que sirve (por defecto, "8080")
+* ''roottiddler'' - tiddler que se sirve desde la raíz (por defecto, "$:/core/save/all") 
+* ''rendertype'' - tipo de contenido al que se convierte el tiddler raíz (por defecto "text/plain")
+* ''servetype'' - tipo de contenido con el que se sirve el tiddler raíz (por defecto "text/html")
+* ''username'' - nombre de usuario por defecto para firmar la edición
+* ''password'' - contraseña opcional para autenticación básica
+* ''host'' - hostname opcional desde el que se sirve (por defecto "127.0.0.1" o "localhost")
+* ''pathprefix'' - prefijo opcional de enrutado
+
+Si se especifica el contraseña, el navegador preguntará al usuario por su nombre y contraseña. Tenga en cuenta que la contraseña se transmite como texto plano, así que su implementación no es conveniente para uso general. 
+Por ejemplo:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Usuario y contraseña pueden dejarse como cadenas vacías si quiere establecer hostname o prefijo de enrutado sin autenticación:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Para ejecutar simultáneamente múltiples servidores TiddlyWiki, deberá configurar cada uno en un puerto diferente.

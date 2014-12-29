@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Activa modo de presentación detallada
+
+Activa presentación detallada, útil para debugging
+
+```
+--verbose
+```

@@ -1,0 +1,70 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: búsqueda avanzada
+AdvancedSearch/Hint: Búsqueda avanzada
+Cancel/Caption: cancelar
+Cancel/Hint: Cancelar la edición de este tiddler
+Clone/Caption: clonar
+Clone/Hint: clonar este tiddler
+Close/Caption: cerrar
+Close/Hint: Cerrar este tiddler
+CloseAll/Caption: cerrar todos
+CloseAll/Hint: Cerrar todos los tiddlers
+CloseOthers/Caption: cerrar todos los demás
+CloseOthers/Hint: Cerrar todos los demás tiddlers
+ControlPanel/Caption: panel de control
+ControlPanel/Hint: Abrir el panel de control
+Delete/Caption: borrar
+Delete/Hint: Borrar este tiddler
+Edit/Caption: editar
+Edit/Hint: Editar este tiddler
+Encryption/Caption: encriptado
+Encryption/ClearPassword/Caption: eliminar contraseña
+Encryption/ClearPassword/Hint: Eliminar verificación de contraseña y guardar este tiddler sin encriptar. 
+Encryption/Hint: Establecer contraseña de encriptado para guardar este wiki
+Encryption/SetPassword/Caption: establecer contraseña
+Encryption/SetPassword/Hint: establecer contraseña Set a password for saving this wiki with encryption
+ExportPage/Caption: exportar todos
+ExportPage/Hint: Exportar todos los tiddlers
+ExportTiddler/Caption: exportar tiddler
+ExportTiddler/Hint: Exportar este tiddler
+ExportTiddlers/Caption: exportar tiddlers
+ExportTiddlers/Hint: Exportar tiddlers
+FullScreen/Caption: pantalla completa
+FullScreen/Hint: Entrar o salir de modo pantalla completa
+HideSideBar/Caption: ocultar barra lateral
+HideSideBar/Hint: Ocultar barra lateral
+Home/Caption: principal
+Home/Hint: Abrir tiddlers por defecto
+Import/Caption: importar
+Import/Hint: Importar archivos
+Info/Caption: Información
+Info/Hint: Mostrar información de este tiddler
+Language/Caption: idioma
+Language/Hint: Seleccione idioma para la interfaz
+More/Caption: más
+More/Hint: Más acciones
+NewHere/Caption: nuevo aquí
+NewHere/Hint: Crear nuevo tiddler etiqueatdo con este
+NewJournal/Caption: nueva entrada de diario/blog
+NewJournal/Hint: Crear un nuevo tiddler con formato de entrada de diario o blog
+NewJournalHere/Caption: nueva entrada aquí
+NewJournalHere/Hint: Crear una nueva entrada etiquetada con esta
+NewTiddler/Caption: nuevo tiddler
+NewTiddler/Hint: crear nuevo tiddler
+Permalink/Hint: Crear en la barra de direcciones un enlace directo a este tiddler
+Permaview/Hint: Crear en la barra de direcciones un enlace directo a todos los tiddlers abiertos
+Refresh/Caption: refrescar
+Refresh/Hint: Volver a cargar el wiki por completo
+Save/Caption: guardar
+Save/Hint: Guardar este tiddler
+SaveWiki/Caption: guardar cambios
+SaveWiki/Hint: Guardar los cambios realizados en el wiki
+ShowSideBar/Caption: mostrar barra lateral
+ShowSideBar/Hint: Mostrar la barra lateral
+StoryView/Caption: vista
+StoryView/Hint: Seleccionar el modo de visualización
+TagManager/Caption: gestor de etiquetas
+TagManager/Hint: Abrir el gestor de etiquetas
+Theme/Caption: tema
+Theme/Hint: Seleccionar tema de visualización

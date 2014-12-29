@@ -1,0 +1,72 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: pokročilé hledání
+AdvancedSearch/Hint: Pokročilé hledání
+Cancel/Caption: zrušit
+Cancel/Hint: Zrušit editaci tohoto tiddleru
+Clone/Caption: klonovat
+Clone/Hint: Klonovat tento tiddler
+Close/Caption: zavřít
+Close/Hint: Zavřít tento tiddler
+CloseAll/Caption: zavřít vše
+CloseAll/Hint: Zavřít všechny tiddlery
+CloseOthers/Caption: zavřít ostatní
+CloseOthers/Hint: Zavřít ostatní tiddlery
+ControlPanel/Caption: panel nastavení
+ControlPanel/Hint: Otevřít panel nastavení
+Delete/Caption: smazat
+Delete/Hint: Smazat tento tiddler
+Edit/Caption: editovat
+Edit/Hint: Editovat tento tiddler
+Encryption/Caption: šifrování
+Encryption/ClearPassword/Caption: smazat heslo
+Encryption/ClearPassword/Hint: Smazat heslo a uložit tuto wiki bez šifrování
+Encryption/Hint: Nastavit nebo smazat heslo pro ukádání této wiki
+Encryption/SetPassword/Caption: nastavit heslo
+Encryption/SetPassword/Hint: Nastavit heslo pro ukládání této wiki se šifrováním
+ExportPage/Caption: exportovat vše
+ExportPage/Hint: Expertovat všechny tiddlery
+ExportTiddler/Caption: exportovat tiddler
+ExportTiddler/Hint: Exportovat tiddler
+ExportTiddlers/Caption: exportovat tiddlery
+ExportTiddlers/Hint: Exportovat tiddlery
+FullScreen/Caption: full-screen
+FullScreen/Hint: Přepnout full-screen mód
+HideSideBar/Caption: skrýt boční panel
+HideSideBar/Hint: Skrýt boční panel
+Home/Caption: domů
+Home/Hint: Otevřít výchozí tiddlery
+Import/Caption: import
+Import/Hint: Importovat soubory
+Info/Caption: info
+Info/Hint: Zobrazit info o tomto tiddleru
+Language/Caption: jazyk
+Language/Hint: Vyberte jazyk
+More/Caption: více
+More/Hint: Více akcí
+NewHere/Caption: nový k tomuto
+NewHere/Hint: Vytvořit nový tiddler se štítkem na tento
+NewJournal/Caption: nový deník
+NewJournal/Hint: Vytvořit nový deníkový tiddler
+NewJournalHere/Caption: nový deník k tomuto
+NewJournalHere/Hint: Vytvořit nový deníkový tiddler se štítkem na tento
+NewTiddler/Caption: nový tiddler
+NewTiddler/Hint: Vytvořit nový tiddler
+Permalink/Caption: permalink
+Permalink/Hint: Nastavit adresu v prohlížeči na přímý odkaz na tento tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Nastavit adresu v prohlížeči na přímý odkaz na tok zobrazených tiddlery
+Refresh/Caption: obnovit
+Refresh/Hint: Spustit znovunačtení wiki
+Save/Caption: uložit
+Save/Hint: Uložit tento tiddler
+SaveWiki/Caption: uložit změny
+SaveWiki/Hint: Uložit změny
+ShowSideBar/Caption: zobrazit boční panel
+ShowSideBar/Hint: Zobrazit boční panel
+StoryView/Caption: styl zobrazování
+StoryView/Hint: Vybrat styl zobrazování
+TagManager/Caption: správce štítků
+TagManager/Hint: Otevřít správce štítků
+Theme/Caption: vzhled
+Theme/Hint: výběr vzhledu
