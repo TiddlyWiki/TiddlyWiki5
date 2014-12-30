@@ -198,3 +198,5 @@ Andreas Hahn, @Drakor, 2014/12/21
 Jean-Charles Longuet, @Jc-L, 2014/12/22
 
 Evgeniy Gryaznov, @evgeniy-gryaznov, 2014/12/23
+
+Arlen Beiler, @arlen22, 2014/12/30
