@@ -202,3 +202,5 @@ Jean-Charles Longuet, @Jc-L, 2014/12/22
 Evgeniy Gryaznov, @evgeniy-gryaznov, 2014/12/23
 
 Andrew Harrison, @infurnoape, 2014/12/27
+
+Arlen Beiler, @arlen22, 2014/12/30
