@@ -164,7 +164,7 @@ RevealWidget.prototype.refresh = function(changedTiddlers) {
 			currentlyOpen = this.isOpen;
 		this.readState();
 		if(this.isOpen !== currentlyOpen) {
-			if(this.retain === "yes" || this.alwaysOpen) {
+			if(this.retain === "yes" || this.alwaysRender) {
 				this.updateState();
 			} else {
 				this.refreshSelf();
