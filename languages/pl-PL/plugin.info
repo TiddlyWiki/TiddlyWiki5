@@ -1,8 +1,0 @@
-{
-	"title": "$:/languages/pl-PL",
-	"name": "pl-PL",
-	"plugin-type": "language",
-	"description": "Polish (Poland)",
-	"author": "Zdeněk Jašek",
-	"core-version": ">=5.0.0"
-}
