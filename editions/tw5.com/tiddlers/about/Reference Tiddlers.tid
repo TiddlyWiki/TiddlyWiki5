@@ -1,0 +1,25 @@
+created: 20141226192500000
+title: Reference Tiddlers
+tags: documenting
+
+Reference tiddlers offer raw information in a comprehensive interlinked way. The reader is likely to be an intermediate or expert user.
+
+There are several subcategories:
+
+* ''Concepts''
+** With definitions, together forming a glossary
+* ''User manual''
+** Presenting technical details of ~WikiText features
+** Subcategorised: messages, operators, widgets, etc
+* ''Developer manual''
+** Presenting technical details of ~TiddlyWiki's internal architecture
+
+Reference material is written in a terse, formal style that avoids referring to the reader, and instead focuses on how ~TiddlyWiki itself behaves. The passive voice is often suitable:
+
+* "the template can be specified as a tiddler" rather than "specify the template as a tiddler"
+* "the widget can be used for various purposes" rather than "you can use the widget for various purposes"
+* But "this widget has several possible uses" is better, because it is more succinct
+
+Contracted verb forms are normally avoided in reference tiddlers.
+
+To reduce the risk that the reader will overlook the word "not", it can be italicised.

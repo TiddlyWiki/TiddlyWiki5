@@ -1,0 +1,26 @@
+created: 20141226192500000
+title: Typography
+tags: documenting
+
+Use ''bold'' when referring to:
+
+* Captions in ~TiddlyWiki's user interface:
+** "the ''Recent'' tab", "the ''Hide sidebar'' button"
+* Tiddler fields:
+** "the ''list'' field"
+* Example tiddlers and tags:
+** "create a tiddler called ''Super Soup Recipe'' with the tag ''cookery''"
+
+''Bold'' is also used to make part or all of a sentence stand out from the rest of the tiddler.
+
+Use //italics// to give more subtle emphasis to a word or phrase.
+
+Use `monospaced` text when a sentence contains a fragment of ~WikiText or a string that the user could type.
+
+Use the double quotation mark `"` as the basic one. It is easier to read on screen, and it avoids confusion with the apostrophe. To keep things clean and simple, quotation marks and apostrophes should be straight `'`, not curly `’`, and the ellipsis should be three separate dots `...` rather than `…`
+
+Avoid using a single hyphen `-` as sentence punctuation. Instead, use a double hyphen -- which ~TiddlyWiki renders as an en-dash -- with a space on either side.
+
+Items in lists and tables should only end with a full stop (period in US English) if they are complete sentences. They should have no trailing punctuation otherwise.
+
+It is very rarely necessary to use an exclamation mark in professional documentation.
