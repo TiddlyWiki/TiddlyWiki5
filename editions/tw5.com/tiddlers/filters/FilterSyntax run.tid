@@ -1,0 +1,31 @@
+created: 20141231203305638
+modified: 20141231213631867
+tags: Filters Syntax
+title: $:/editions/tw5.com/Filter Syntax: run
+
+<svg class="railroad-diagram" width="457" height="218" ><g transform="translate(.5 .5)" ><path d="M 20 21 v 20 m 10 -20 v 20 m -10 -10 h 20.5" ></path><g ><path d="M40 31h0" ></path><path d="M416 31h0" ></path><path d="M40 31h20" ></path><g ><path d="M60 31h74" ></path><path d="M322 31h74" ></path><path d="M134 31h10" ></path><g ><path d="M144 31h0" ></path><path d="M172 31h0" ></path><rect x="144" y="20" width="28" height="22" rx="10" ry="10" ></rect><text x="158" y="35" >[</text></g><path d="M172 31h10" ></path><path d="M182 31h10" ></path><g ><path d="M192 31h0" ></path><path d="M264 31h0" ></path><path d="M192 31h10" ></path><g ><path d="M202 31h0" ></path><path d="M254 31h0" ></path><rect x="202" y="20" width="52" height="22" ></rect><text x="228" y="35" >step</text></g><path d="M254 31h10" ></path><path d="M202 31a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M202 51h52" ></path></g><path d="M254 51a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M264 31h10" ></path><path d="M274 31h10" ></path><g ><path d="M284 31h0" ></path><path d="M312 31h0" ></path><rect x="284" y="20" width="28" height="22" rx="10" ry="10" ></rect><text x="298" y="35" >]</text></g><path d="M312 31h10" ></path></g><path d="M396 31h20" ></path><path d="M40 31a10 10 0 0 1 10 10v29a10 10 0 0 0 10 10" ></path><g ><path d="M60 80h8" ></path><path d="M388 80h8" ></path><path d="M68 80h10" ></path><g ><path d="M78 80h0" ></path><path d="M106 80h0" ></path><rect x="78" y="69" width="28" height="22" rx="10" ry="10" ></rect><text x="92" y="84" >"</text></g><path d="M106 80h10" ></path><g ><path d="M116 80h0" ></path><path d="M340 80h0" ></path><path d="M116 80a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M136 60h184" ></path></g><path d="M320 60a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M116 80h20" ></path><g ><path d="M136 80h0" ></path><path d="M320 80h0" ></path><path d="M136 80h10" ></path><g ><path d="M146 80h0" ></path><path d="M310 80h0" ></path><text x="228" y="85" class="comment" >any character except "</text></g><path d="M310 80h10" ></path><path d="M146 80a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M146 100h164" ></path></g><path d="M310 100a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M320 80h20" ></path></g><path d="M340 80h10" ></path><g ><path d="M350 80h0" ></path><path d="M378 80h0" ></path><rect x="350" y="69" width="28" height="22" rx="10" ry="10" ></rect><text x="364" y="84" >"</text></g><path d="M378 80h10" ></path></g><path d="M396 80a10 10 0 0 0 10 -10v-29a10 10 0 0 1 10 -10" ></path><path d="M40 31a10 10 0 0 1 10 10v78a10 10 0 0 0 10 10" ></path><g ><path d="M60 129h8" ></path><path d="M388 129h8" ></path><path d="M68 129h10" ></path><g ><path d="M78 129h0" ></path><path d="M106 129h0" ></path><rect x="78" y="118" width="28" height="22" rx="10" ry="10" ></rect><text x="92" y="133" >'</text></g><path d="M106 129h10" ></path><g ><path d="M116 129h0" ></path><path d="M340 129h0" ></path><path d="M116 129a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M136 109h184" ></path></g><path d="M320 109a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M116 129h20" ></path><g ><path d="M136 129h0" ></path><path d="M320 129h0" ></path><path d="M136 129h10" ></path><g ><path d="M146 129h0" ></path><path d="M310 129h0" ></path><text x="228" y="134" class="comment" >any character except '</text></g><path d="M310 129h10" ></path><path d="M146 129a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M146 149h164" ></path></g><path d="M310 149a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M320 129h20" ></path></g><path d="M340 129h10" ></path><g ><path d="M350 129h0" ></path><path d="M378 129h0" ></path><rect x="350" y="118" width="28" height="22" rx="10" ry="10" ></rect><text x="364" y="133" >'</text></g><path d="M378 129h10" ></path></g><path d="M396 129a10 10 0 0 0 10 -10v-78a10 10 0 0 1 10 -10" ></path><path d="M40 31a10 10 0 0 1 10 10v127a10 10 0 0 0 10 10" ></path><g ><path d="M60 178h0" ></path><path d="M396 178h0" ></path><g ><path d="M60 178h0" ></path><path d="M396 178h0" ></path><path d="M60 178a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M80 158h296" ></path></g><path d="M376 158a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M60 178h20" ></path><g ><path d="M80 178h0" ></path><path d="M376 178h0" ></path><path d="M80 178h10" ></path><g ><path d="M90 178h0" ></path><path d="M366 178h0" ></path><text x="228" y="183" class="comment" >any character except [ ] or whitespace</text></g><path d="M366 178h10" ></path><path d="M90 178a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M90 198h276" ></path></g><path d="M366 198a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M376 178h20" ></path></g></g><path d="M396 178a10 10 0 0 0 10 -10v-127a10 10 0 0 1 10 -10" ></path></g><path d="M 416 31 h 20 m -10 -10 v 20 m 10 -20 v 20" ></path></g></svg>
+<!--
+Diagram(
+  Choice(
+    0,
+    Sequence(
+      "[",
+      OneOrMore(NonTerminal("step")),
+      "]"
+    ),
+    Sequence(
+      '"',
+      ZeroOrMore(Comment('any character except "')),
+      '"'
+    ),
+    Sequence(
+      "'",
+      ZeroOrMore(Comment("any character except '")),
+      "'"
+    ),
+    Sequence(
+      ZeroOrMore(Comment("any character except [ ] or whitespace"))
+    )
+  )
+)
+-->
