@@ -1,0 +1,15 @@
+created: 20141231203839870
+modified: 20141231213544984
+tags: Filters Syntax
+title: $:/editions/tw5.com/Filter Syntax: operator
+
+<svg class="railroad-diagram" width="417" height="102" ><g transform="translate(.5 .5)" ><path d="M 20 31 v 20 m 10 -20 v 20 m -10 -10 h 20.5" ></path><g ><path d="M40 41h0" ></path><path d="M376 41h0" ></path><path d="M40 41h20" ></path><g ><path d="M60 41h0" ></path><path d="M356 41h0" ></path><path d="M60 41h10" ></path><g ><path d="M70 41h0" ></path><path d="M146 41h0" ></path><rect x="70" y="30" width="76" height="22" ></rect><text x="108" y="45" >keyword</text></g><path d="M146 41h10" ></path><g ><path d="M156 41h0" ></path><path d="M356 41h0" ></path><path d="M156 41a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M176 21h160" ></path></g><path d="M336 21a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M156 41h20" ></path><g ><path d="M176 41h0" ></path><path d="M336 41h0" ></path><path d="M176 41h10" ></path><g ><path d="M186 41h0" ></path><path d="M214 41h0" ></path><rect x="186" y="30" width="28" height="22" rx="10" ry="10" ></rect><text x="200" y="45" >:</text></g><path d="M214 41h10" ></path><path d="M224 41h10" ></path><g ><path d="M234 41h0" ></path><path d="M326 41h0" ></path><rect x="234" y="30" width="92" height="22" ></rect><text x="280" y="45" >fieldname</text></g><path d="M326 41h10" ></path></g><path d="M336 41h20" ></path></g></g><path d="M356 41h20" ></path><path d="M40 41a10 10 0 0 1 10 10v10a10 10 0 0 0 10 10" ></path><g ><path d="M60 71h102" ></path><path d="M254 71h102" ></path><rect x="162" y="60" width="92" height="22" ></rect><text x="208" y="75" >fieldname</text></g><path d="M356 71a10 10 0 0 0 10 -10v-10a10 10 0 0 1 10 -10" ></path></g><path d="M 376 41 h 20 m -10 -10 v 20 m 10 -20 v 20" ></path></g></svg>
+<!--
+Diagram(
+  Choice(
+    0,
+    Sequence(NonTerminal("keyword"), Optional(Sequence(":", NonTerminal("fieldname")))),
+    NonTerminal("fieldname")
+  )
+)
+-->
