@@ -3,46 +3,29 @@ modified: 201308291647
 tags: Concepts
 title: DataTiddlers
 
-Data tiddlers provide a way to access blocks of [[JSON]] data within the `text` field of a tiddler.
+A data tiddler is a miniature database contained within a tiddler.
 
-//The implementation of data tiddlers is preliminary, with some intentional limitations.//
+There are two standard formats:
 
-! Data tiddler format
+* DictionaryTiddlers
+* [[JSONTiddlers]]
 
-A native data tiddler must have:
+Other formats of tiddler can also be parsed to yield blocks of data that behave like data tiddlers.
 
-* The ContentType field `type` set to `application/json`
-* Valid JSON data in the `text` field 
-
-For example, the [[history list|$:/HistoryList]] tiddler is a data tiddler.
-
-Other tiddler types with alternative formats can also be parsed to yield a block of data that behaves like a data tiddler.
-
-!! Tiddler dictionary format
-
-The tiddler dictionary format is an alternative syntax for data tiddlers:
-
-* The ContentType field `type` is set to `application/x-tiddler-dictionary`
-* The `text` field consists of one or more lines of the form `<name>:<value>`
-
-For example, palettes such as the [[default Vanilla palette|$:/palettes/Vanilla]] are tiddler dictionaries.
-
-! Accessing data within data tiddlers
-
-Currently, it is only possible to access the top level properties of the data using TextReference syntax.
-
-For example, given a `application/json` tiddler containing:
+Use a TextReference to look up a value by its name. For example, if a [[DictionaryTiddler|DictionaryTiddlers]] called `MonthDays` contains:
 
 ```
-{"a":"one","b":"two","c":"three"}
+oct:31
+nov:30
+dec:31
 ```
 
-Or the equivalent tiddler dictionary of type `application/x-tiddler-dictionary`:
+... then `{{MonthDays##nov}}` will resolve to the value `30`.
+
+The same is true if `MonthDays` is a [[JSONTiddler|JSONTiddlers]] with the following content:
 
 ```
-a:one
-b:two
-c:three
+{"oct":31,"nov":30,"dec":31}
 ```
 
-With either of those definitions `{{TiddlerTitle##b}}` would have the value `two`.
+Note: //It is currently only possible to retrieve data from the immediate properties of the root object of a JSONTiddler.//

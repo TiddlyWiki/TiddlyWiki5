@@ -1,0 +1,12 @@
+tags: Concepts
+title: TitleList
+
+A title list is a line of text that presents one or more tiddler titles, strung together with a space between each one and the next.
+
+If a title //contains// a space, it needs double square brackets around it.
+
+Example:
+
+`GettingStarted [[Discover TiddlyWiki]] Upgrading`
+
+Title lists are used in various places, including PermaLinks and the ListField.

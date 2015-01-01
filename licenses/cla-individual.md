@@ -183,6 +183,8 @@ Erwan Moreau, @erwanm, 2014/10/27
 
 Felix Küppers, @felixhayashi, 2014/11/02
 
+Roma Hicks, @roma0104, 2014/11/18
+
 Jedediah Carty, @inmysocks, 2014/11/21
 
 Erwan Dano, @Braincoke, 2014/11/24
@@ -198,3 +200,7 @@ Andreas Hahn, @Drakor, 2014/12/21
 Jean-Charles Longuet, @Jc-L, 2014/12/22
 
 Evgeniy Gryaznov, @evgeniy-gryaznov, 2014/12/23
+
+Andrew Harrison, @infurnoape, 2014/12/27
+
+Arlen Beiler, @arlen22, 2014/12/30
