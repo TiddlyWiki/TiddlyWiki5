@@ -1,0 +1,28 @@
+created: 20141231204349975
+modified: 20141231213602490
+tags: Filters Syntax
+title: $:/editions/tw5.com/Filter Syntax: parameter
+
+<svg class="railroad-diagram" width="441" height="179" ><g transform="translate(.5 .5)" ><path d="M 20 31 v 20 m 10 -20 v 20 m -10 -10 h 20.5" ></path><g ><path d="M40 41h0" ></path><path d="M400 41h0" ></path><path d="M40 41h20" ></path><g ><path d="M60 41h0" ></path><path d="M380 41h0" ></path><path d="M60 41h10" ></path><g ><path d="M70 41h0" ></path><path d="M98 41h0" ></path><rect x="70" y="30" width="28" height="22" rx="10" ry="10" ></rect><text x="84" y="45" >[</text></g><path d="M98 41h10" ></path><g ><path d="M108 41h0" ></path><path d="M332 41h0" ></path><path d="M108 41a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M128 21h184" ></path></g><path d="M312 21a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M108 41h20" ></path><g ><path d="M128 41h0" ></path><path d="M312 41h0" ></path><path d="M128 41h10" ></path><g ><path d="M138 41h0" ></path><path d="M302 41h0" ></path><text x="220" y="46" class="comment" >any character except ]</text></g><path d="M302 41h10" ></path><path d="M138 41a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M138 61h164" ></path></g><path d="M302 61a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M312 41h20" ></path></g><path d="M332 41h10" ></path><g ><path d="M342 41h0" ></path><path d="M370 41h0" ></path><rect x="342" y="30" width="28" height="22" rx="10" ry="10" ></rect><text x="356" y="45" >]</text></g><path d="M370 41h10" ></path></g><path d="M380 41h20" ></path><path d="M40 41a10 10 0 0 1 10 10v29a10 10 0 0 0 10 10" ></path><g ><path d="M60 90h0" ></path><path d="M380 90h0" ></path><path d="M60 90h10" ></path><g ><path d="M70 90h0" ></path><path d="M98 90h0" ></path><rect x="70" y="79" width="28" height="22" rx="10" ry="10" ></rect><text x="84" y="94" >{</text></g><path d="M98 90h10" ></path><g ><path d="M108 90h0" ></path><path d="M332 90h0" ></path><path d="M108 90a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M128 70h184" ></path></g><path d="M312 70a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M108 90h20" ></path><g ><path d="M128 90h0" ></path><path d="M312 90h0" ></path><path d="M128 90h10" ></path><g ><path d="M138 90h0" ></path><path d="M302 90h0" ></path><text x="220" y="95" class="comment" >any character except }</text></g><path d="M302 90h10" ></path><path d="M138 90a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M138 110h164" ></path></g><path d="M302 110a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M312 90h20" ></path></g><path d="M332 90h10" ></path><g ><path d="M342 90h0" ></path><path d="M370 90h0" ></path><rect x="342" y="79" width="28" height="22" rx="10" ry="10" ></rect><text x="356" y="94" >}</text></g><path d="M370 90h10" ></path></g><path d="M380 90a10 10 0 0 0 10 -10v-29a10 10 0 0 1 10 -10" ></path><path d="M40 41a10 10 0 0 1 10 10v78a10 10 0 0 0 10 10" ></path><g ><path d="M60 139h0" ></path><path d="M380 139h0" ></path><path d="M60 139h10" ></path><g ><path d="M70 139h0" ></path><path d="M98 139h0" ></path><rect x="70" y="128" width="28" height="22" rx="10" ry="10" ></rect><text x="84" y="143" >&lt;</text></g><path d="M98 139h10" ></path><g ><path d="M108 139h0" ></path><path d="M332 139h0" ></path><path d="M108 139a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M128 119h184" ></path></g><path d="M312 119a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M108 139h20" ></path><g ><path d="M128 139h0" ></path><path d="M312 139h0" ></path><path d="M128 139h10" ></path><g ><path d="M138 139h0" ></path><path d="M302 139h0" ></path><text x="220" y="144" class="comment" >any character except ></text></g><path d="M302 139h10" ></path><path d="M138 139a10 10 0 0 0 -10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M138 159h164" ></path></g><path d="M302 159a10 10 0 0 0 10 -10v0a10 10 0 0 0 -10 -10" ></path></g><path d="M312 139h20" ></path></g><path d="M332 139h10" ></path><g ><path d="M342 139h0" ></path><path d="M370 139h0" ></path><rect x="342" y="128" width="28" height="22" rx="10" ry="10" ></rect><text x="356" y="143" >></text></g><path d="M370 139h10" ></path></g><path d="M380 139a10 10 0 0 0 10 -10v-78a10 10 0 0 1 10 -10" ></path></g><path d="M 400 41 h 20 m -10 -10 v 20 m 10 -20 v 20" ></path></g></svg>
+<!--
+Diagram(
+  Choice(
+    0,
+    Sequence(
+      "[",
+      ZeroOrMore(Comment("any character except ]")),
+      "]"
+    ),
+    Sequence(
+      "{",
+      ZeroOrMore(Comment("any character except }")),
+      "}"
+    ),
+    Sequence(
+      "<",
+      ZeroOrMore(Comment("any character except >")),
+      ">"
+    )
+  )
+)
+-->

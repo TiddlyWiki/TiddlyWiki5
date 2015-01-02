@@ -1,0 +1,16 @@
+created: 20141231202433166
+modified: 20141231213500934
+title: $:/editions/tw5.com/Filter Syntax: filter
+
+<svg class="railroad-diagram" width="393" height="128" ><g transform="translate(.5 .5)" ><path d="M 20 50 v 20 m 10 -20 v 20 m -10 -10 h 20.5" ></path><path d="M40 60h10" ></path><g ><path d="M50 60h0" ></path><path d="M342 60h0" ></path><path d="M50 60h10" ></path><g ><path d="M60 60h0" ></path><path d="M332 60h0" ></path><g ><path d="M60 60h0" ></path><path d="M200 60h0" ></path><path d="M60 60h20" ></path><g ><path d="M80 60h100" ></path></g><path d="M180 60h20" ></path><path d="M60 60a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M80 80h0" ></path><path d="M180 80h0" ></path><rect x="80" y="69" width="100" height="22" ></rect><text x="130" y="84" >whitespace</text></g><path d="M180 80a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path></g><g ><path d="M200 60h0" ></path><path d="M268 60h0" ></path><path d="M200 60a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path><g ><path d="M220 40h0" ></path><path d="M248 40h0" ></path><rect x="220" y="29" width="28" height="22" rx="10" ry="10" ></rect><text x="234" y="44" >-</text></g><path d="M248 40a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><path d="M200 60h20" ></path><g ><path d="M220 60h28" ></path></g><path d="M248 60h20" ></path><path d="M200 60a10 10 0 0 1 10 10v0a10 10 0 0 0 10 10" ></path><g ><path d="M220 80h0" ></path><path d="M248 80h0" ></path><rect x="220" y="69" width="28" height="22" rx="10" ry="10" ></rect><text x="234" y="84" >+</text></g><path d="M248 80a10 10 0 0 0 10 -10v0a10 10 0 0 1 10 -10" ></path></g><path d="M268 60h10" ></path><g ><path d="M278 60h0" ></path><path d="M322 60h0" ></path><rect x="278" y="49" width="44" height="22" ></rect><text x="300" y="64" >run</text></g><path d="M322 60h10" ></path></g><path d="M332 60h10" ></path><path d="M60 60a10 10 0 0 0 -10 10v28a10 10 0 0 0 10 10" ></path><g ><path d="M60 108h272" ></path></g><path d="M332 108a10 10 0 0 0 10 -10v-28a10 10 0 0 0 -10 -10" ></path></g><path d="M342 60h10" ></path><path d="M 352 60 h 20 m -10 -10 v 20 m 10 -20 v 20" ></path></g></svg>
+<!--
+Diagram(
+  OneOrMore(
+    Sequence(
+      Optional(NonTerminal("whitespace"), "skip"),
+      Choice(1, "+", Skip(), "-"),
+      NonTerminal("run")
+    )
+  )
+)
+-->
