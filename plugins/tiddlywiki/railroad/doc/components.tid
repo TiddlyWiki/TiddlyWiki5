@@ -1,0 +1,34 @@
+created: 20150102165114859
+modified: 20150102171957240
+tags: 
+title: $:/plugins/tiddlywiki/railroad/components
+
+A ''component'' of a railroad diagram is either:
+
+* A ~JavaScript call to one of the functions listed below
+* A ~JavaScript string literal, treated as shorthand for `lit(...)`
+
+The following functions are available. Each has a short name and a long name. The latter are the names used in the original library, but some of them are inconvenient because ~TiddlyWiki will misinterpret their ~CamelCase names as links.
+
+; `syn` or `Diagram`
+: The outermost layer. The arguments are the components of the diagram, from left to right.
+; `seq` or `Sequence`
+: An inner sequence of items from left to right. The arguments are as for `syn`.
+; `alt` or `Choice`
+: A set of alternative components. The first argument is a zero-based integer indicating which of the remaining arguments should be displayed as the "straight ahead" route.
+; `opt` or `Optional`
+: An optional component. The first argument is that component. The optional second argument is `"skip"`, indicating that the component's omission should be displayed as the "straight ahead" route.
+; `rep` or `OneOrMore`
+: A component that may appear more than once. The first argument is that component. The optional second argument is a separator component that appears between each repetition and the next.
+; `optrep` or `ZeroOrMore`
+: An optional component that may appear more than once. The first two arguments are as for `rep`. The optional third argument is equivalent to the second argument of `opt`.
+; `lit` or `Terminal`
+: A literal component. The argument is a string literal.
+; `box` or `NonTerminal`
+: A component representing another diagram. The argument is a string literal.
+; `com` or `Comment`
+: A comment. The argument is a string literal.
+; `skip` or `Skip`
+: The absence of a component. Can be used as the second argument to `optrep`.
+; `link` or `Link`
+: A ~TiddlyWiki link. The first argument is the title of the target tiddler. The second argument is the component that is to carry the link.

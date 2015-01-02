@@ -1,0 +1,13 @@
+created: 20140210141217955
+modified: 20150102174633890
+tags: FilterSyntax
+title: $:/editions/tw5.com/FilterSyntax/step
+type: text/vnd.tiddlywiki
+
+<$railroad>
+syn(
+  opt("!", "skip"),
+  box("operator"),
+  box("parameter")
+)
+</$railroad>
