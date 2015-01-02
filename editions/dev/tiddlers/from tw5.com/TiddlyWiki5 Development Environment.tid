@@ -13,6 +13,8 @@ title: TiddlyWiki5 Development Environment
 npm link
 ```
 
+''Note:'' You do ''not'' run TiddlyWiki from the root of the TiddlyWiki5 repo. Instead you can either run one of the editions in the repo or else use `tiddlywiki --init` in another directory to create a wiki for testing.
+
 ! Bumping version numbers
 
 As releases are made during development it is necessary to adjust the version number of the TiddlyWiki5 core. This is done with the [[npm version|https://npmjs.org/doc/version.html]] command. For example:

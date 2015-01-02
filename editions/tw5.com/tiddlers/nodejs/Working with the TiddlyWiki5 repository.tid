@@ -20,4 +20,6 @@ Mario Pietsch has created a [[short video introduction|Working with the TiddlyWi
 
 After this procedure you can work with TiddlyWiki5 via [[npm]] as though it were installed in the usual way with `npm install -g tiddlywiki`.
 
+''Note:'' You do ''not'' run TiddlyWiki from the root of the TiddlyWiki5 repo. Instead you can either run one of the editions in the repo or else use `tiddlywiki --init` in another directory to create a wiki for testing.
+
 See also [[Scripts for TiddlyWiki on Node.js]].
