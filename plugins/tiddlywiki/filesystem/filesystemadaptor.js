@@ -91,20 +91,21 @@ Transliterate string from cyrillic russian to latin
 Given a tiddler title and an array of existing filenames, generate a new legal filename for the title, case insensitively avoiding the array of existing filenames
 */
 FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
+    var lcExistingFileNames = existingFilenames.map(function(value) {return value.toLocaleLowerCase();});
 	// First remove any of the characters that are illegal in Windows filenames
-	var baseFilename = title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_");
+	var baseFilename = transliterate(title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_"));
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
 	}
 	// Start with the base filename plus the extension
-	var filename = transliterate(baseFilename) + extension,
-		count = 1;
-	// Add a discriminator if we're clashing with an existing filename
-	while(existingFilenames.indexOf(filename) !== -1) {
-		filename = baseFilename + " " + (count++) + extension;
-	}
-	return filename;
+    var filename = baseFilename + extension,
+    count = 1;
+    // Add a discriminator if we're clashing with an existing filename
+    while(lcExistingFileNames.indexOf(filename.toLocaleLowerCase()) !== -1) {
+        filename = baseFilename + " " + (count++) + extension;
+    }
+    return filename;
 };
 
 /*
