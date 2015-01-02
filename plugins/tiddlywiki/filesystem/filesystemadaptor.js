@@ -95,7 +95,7 @@ FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,e
 	var baseFilename = title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_");
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
-		baseFilename = baseFilename.substr(0,200) + extension;
+		baseFilename = baseFilename.substr(0,200);
 	}
 	// Start with the base filename plus the extension
 	var filename = transliterate(baseFilename) + extension,
