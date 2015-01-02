@@ -7,8 +7,8 @@
 				"title": "$:/plugins/tiddlywiki/highlight/highlight.js",
 				"module-type": "library"
 			},
-			"prefix": "var hljs;if($tw.browser){\n",
-			"suffix": "}\nexports.hljs = hljs;\n"
+			"prefix": "var hljs;\n",
+			"suffix": "\nexports.hljs = hljs;\n"
 		},
 		{
 			"file": "default.css",
