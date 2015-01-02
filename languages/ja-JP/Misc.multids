@@ -18,5 +18,6 @@ RecentChanges/DateFormat: YYYY-MM-DD
 SystemTiddler/Tooltip: これはシステム tiddler です
 TagManager/Colour/Heading: 色
 TagManager/Icon/Heading: アイコン
+TagManager/Info/Heading: 情報
 TagManager/Tag/Heading: タグ
 UnsavedChangesWarning: 保存していない編集内容があります。

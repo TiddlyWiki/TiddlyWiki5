@@ -11,3 +11,5 @@ Upgrader/Plugins/Suppressed/Version: ブロックされたプラグイン（イ�
 Upgrader/Plugins/Upgraded: <<incoming>> から <<upgraded>>にアップグレードされたプラグイン
 Upgrader/State/Suppressed: ブロックされた一時tiddler
 Upgrader/System/Suppressed: ブロックされたシステムtiddler
+Upgrader/ThemeTweaks/Created: <$text text=<<from>>/> から移動したtheme tweak
+

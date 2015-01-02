@@ -3,7 +3,7 @@ title: $:/language/Docs/PaletteColours/
 alert-background: アラートの背景
 alert-border: アラートの枠線
 alert-highlight: アラートのハイライト
-alert-muted-foreground: Alert muted foreground
+alert-muted-foreground: 抑えたアラートの前景
 background: 標準の背景
 blockquote-bar: 引用線
 code-background: コードの背景
@@ -12,8 +12,8 @@ code-foreground: コードの前景
 dirty-indicator: 未保存の表示
 download-background: ダウンロードボタンの背景
 download-foreground: ダウンロードボタンの前景
-dragger-background: Dragger background
-dragger-foreground: Dragger foreground
+dragger-background: ドラッグの背景
+dragger-foreground: ドラッグの前景
 dropdown-background: ドロップダウンの背景
 dropdown-border: ドロップダウンの前景
 dropdown-tab-background: ドロップダウンタブの背景
@@ -35,20 +35,20 @@ modal-border: モーダルウィンドウの枠線
 modal-footer-background: モーダルフッタの背景
 modal-footer-border: モーダルフッタの枠線
 modal-header-border: モーダルヘッダの枠線
-muted-foreground: General muted foreground
+muted-foreground: 抑えた前景
 notification-background: 通知領域の背景
 notification-border: 通知領域の枠線
 page-background: ページの背景
 pre-background: 整形済みコードの背景
 pre-border: 整形済みコードの枠線
-primary: 標準の主色 General primary
+primary: 標準の前景
 sidebar-button-foreground: サイドバーボタンの前景
 sidebar-controls-foreground: サイドバーコントロールの前景
 sidebar-controls-foreground-hover: サイドバーコントロールの前景（ホバー）
 sidebar-foreground: サイドバーの前景
 sidebar-foreground-shadow: サイドバー前景の影
-sidebar-muted-foreground: Sidebar muted foreground
-sidebar-muted-foreground-hover: Sidebar muted foreground hover
+sidebar-muted-foreground: サイドバーの抑えた前景
+sidebar-muted-foreground-hover: サイドバーの抑えた前景（ホバー）
 sidebar-tab-background: サイドバータブの背景
 sidebar-tab-background-selected: サイドバータブの背景（選択済）
 sidebar-tab-border: サイドバータブの枠線
@@ -98,4 +98,4 @@ toolbar-new-button: ツールバー「新規Tiddler」ボタンの前景
 toolbar-options-button: ツールバー「オプション」ボタンの前景
 toolbar-save-button: ツールバー「保存」ボタンの前景
 untagged-background: 未タグ背景
-very-muted-foreground: Very muted foreground
+very-muted-foreground: きわめて控えめな前景

@@ -1,5 +1,8 @@
 title: $:/core/ja-JP/readme
 
-<!-- Replace with translation of the readme for the core plugin -->
+このプラグインには、下記から成るTiddlyWiliのコアコンポーネントが含まれています。：
 
-{{$:/core/readme}}
+* JavaScript モジュール
+* アイコン
+* TiddlyWikiの表示に必要なテンプレート
+* コアに使用される各言語の文字列の英語（"en-GB"）表現
