@@ -1,11 +1,10 @@
 title: $:/language/Help/build
 description: 設定されたコマンドを自動実行
 
-Build the specified build targets for the current wiki. If no build targets are specified then all available targets will be built.
+現在のwikiの指定したターゲット（target）をビルドします。もしターゲットを指定しない場合は、ビルド可能な全てのターゲットをビルドします。
 
 ```
 --build <target> [<target> ...]
 ```
 
-Build targets are defined in the `tiddlywiki.info` file of a wiki folder.
-
+ビルドターゲットは、wikiフォルダのtiddlywiki.infoに定義されます。
