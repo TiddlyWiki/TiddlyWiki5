@@ -1,0 +1,28 @@
+created: 20140210141217955
+modified: 20150102174633890
+tags: FilterSyntax
+title: $:/editions/tw5.com/FilterSyntax/parameter
+type: text/vnd.tiddlywiki
+
+<$railroad>
+syn(
+  alt(
+    0,
+    seq(
+      "[",
+      optrep(com("any character except ]")),
+      "]"
+    ),
+    seq(
+      "{",
+      optrep(com("any character except }")),
+      "}"
+    ),
+    Sequence(
+      "<",
+      optrep(com("any character except >")),
+      ">"
+    )
+  )
+)
+</$railroad>

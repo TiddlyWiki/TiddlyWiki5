@@ -1,0 +1,15 @@
+created: 20140210141217955
+modified: 20150102174633890
+tags: FilterSyntax
+title: $:/editions/tw5.com/FilterSyntax/operator
+type: text/vnd.tiddlywiki
+
+<$railroad>
+syn(
+  alt(
+    0,
+    seq(box("keyword"), opt(seq(":", box("fieldname")))),
+    box("fieldname")
+  )
+)
+</$railroad>

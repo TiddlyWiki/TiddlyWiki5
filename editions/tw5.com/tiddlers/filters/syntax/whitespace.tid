@@ -1,0 +1,21 @@
+created: 20140210141217955
+modified: 20150102174633890
+tags: FilterSyntax
+title: $:/editions/tw5.com/FilterSyntax/whitespace
+type: text/vnd.tiddlywiki
+
+<$railroad>
+syn(
+  rep(
+    alt(
+      0,
+      "space",
+      "tab",
+      "linefeed",
+      "return",
+      "vertical tab",
+      "formfeed"
+    )
+  )
+)
+</$railroad>
