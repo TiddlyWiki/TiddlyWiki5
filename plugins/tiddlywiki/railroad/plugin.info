@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/railroad",
+	"description": "Plugin for generating SVG railroad diagrams",
+	"author": "Astrid Elocson",
+	"plugin-type": "plugin",
+	"list": "readme syntax example"
+}
