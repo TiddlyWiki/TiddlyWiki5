@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria. They are used by widgets like the ListWidget and the CountWidget to perform operations on multiple tiddlers at once.
 
 * [[Introduction to Filters]] is a step-by-step introduction to how filters are used
-* [[Filter Formal Grammar]] is a technical explanation of the filter syntax.
+* [[Filter Syntax]] explains the exact rules for writing filters
 
 The most common filter operators are:
 

@@ -1,0 +1,80 @@
+created: 20140210141217955
+modified: 20150102174633890
+tags: Filters
+title: Filter Syntax
+type: text/vnd.tiddlywiki
+
+[[Filter expressions|Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, you can write your own filter expressions without needing to understand this tiddler.
+
+---
+
+;filter
+: <$railroad text="""
+{ [:whitespace] ("+" | :- | "-") run }
+"""/>
+
+A sequence of runs is evaluated from left to right, as follows:
+
+|!Sequence |!Interpretation |
+|`run1 run2` |union of the sets, i.e. the tiddlers in //either// run1 //or// run2 |
+|`run1 -run2` |difference of the sets, i.e. run1 but excluding any tiddlers in run2 |
+|`run1 +run2` |run2 takes run1 as its input |
+
+The first run takes `[all[tiddlers]]` as its input, i.e. the set of all non-missing tiddlers.
+
+---
+
+;run
+: <$railroad text="""
+( "[" {step} "]"
+  |
+  '"' [{/'any character except "'/}] '"'
+  |
+  "'" [{/"any character except '"/}] '"'
+  |
+  [{/"any character except [ ] or whitespace"/}]
+)
+"""/>
+* The last three options are short for `[title[text]]`
+* A run evaluates each of its steps and returns the intersection of the results
+
+---
+
+;step
+: <$railroad text="""
+[:"!"] operator parameter
+"""/>
+* A step returns a set of tiddlers, in the form of a TitleList
+
+---
+
+;operator
+: <$railroad text="""
+( keyword [:":" fieldname] | fieldname )
+"""/>
+* Keywords are reserved names (<code>[[is|FilterOperator: is]]</code>, <code>[[has|FilterOperator: has]]</code>, <code>[[tag|FilterOperator: tag]]</code>, etc) of specific filtering functions
+* A fieldname on its own implies the keyword `field`
+* An entirely omitted operator defaults to `title`
+
+---
+
+;parameter
+: <$railroad text="""
+( "[" [{/"any character except ]"/}] "]"
+  |
+  "{" [{/"any character except }"/}] "}"
+  |
+  "<" [{/"any character except >"/}] ">"
+)
+"""/>
+* `[`...`]` encloses a literal parameter
+* `{`...`}` encloses a TextReference parameter
+* `<`...`>` encloses a [[variable|Variables]] parameter
+
+---
+
+;whitespace
+: <$railroad text="""
+{( "space" | "tab" | "linefeed" | "return" | "vertical tab" | "formfeed" )}
+"""/>
+* A match for the JavaScript regular expression `\s+`
