@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/select.js
 type: application/javascript
 module-type: widget
 
-Select widget:
+Select widget (NG mod):
 
 ```
 <$select tiddler="MyTiddler" field="text">
