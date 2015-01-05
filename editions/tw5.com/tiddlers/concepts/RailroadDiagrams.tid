@@ -1,0 +1,15 @@
+created: 20150105133800000
+modified: 20150105134300000
+title: RailroadDiagrams
+
+Railroad diagrams, sometimes called syntax diagrams, are a visual way of explaining the syntax rules of a computer language. Reading one is like reading a public transport map.
+
+Each diagram starts on the left and ends on the right. Simply follow any line from the startpoint to the endpoint. All the alternative lines are equally valid. A line will sometimes jump over an item that is optional, or loop back to indicate that an item can be repeated.
+
+<$railroad text="""
+start [:optional] {repeated +","} end
+"""/>
+
+Characters in round boxes are literal, i.e. they denote themselves. A name in a rectangular box denotes a further railroad diagram.
+
+The railroad diagrams on this site are generated using the [[Railroad Plugin]].
