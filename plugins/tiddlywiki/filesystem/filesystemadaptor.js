@@ -92,16 +92,17 @@ Given a tiddler title and an array of existing filenames, generate a new legal f
 */
 FileSystemAdaptor.prototype.generateTiddlerFilename = function(title,extension,existingFilenames) {
 	// First remove any of the characters that are illegal in Windows filenames
-	var baseFilename = title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_");
+	var baseFilename = transliterate(title.replace(/<|>|\:|\"|\/|\\|\||\?|\*|\^|\s/g,"_"));
 	// Truncate the filename if it is too long
 	if(baseFilename.length > 200) {
 		baseFilename = baseFilename.substr(0,200);
 	}
 	// Start with the base filename plus the extension
-	var filename = transliterate(baseFilename) + extension,
+	var filename = baseFilename + extension,
 		count = 1;
-	// Add a discriminator if we're clashing with an existing filename
-	while(existingFilenames.indexOf(filename) !== -1) {
+	// Add a discriminator if we're clashing with an existing filename while
+	// handling case-insensitive filesystems (NTFS, FAT/FAT32, etc.)
+	while(existingFilenames.some(function(value) {return value.toLocaleLowerCase() === filename.toLocaleLowerCase();})) {
 		filename = baseFilename + " " + (count++) + extension;
 	}
 	return filename;
