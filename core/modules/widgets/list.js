@@ -60,16 +60,18 @@ ListWidget.prototype.execute = function() {
 	this.variableName = this.getAttribute("variable","currentTiddler");
 	this.storyViewName = this.getAttribute("storyview");
 	this.historyTitle = this.getAttribute("history");
+	this.iterator = this.getAttribute("iterator","iterator");
 	// Compose the list elements
 	this.list = this.getTiddlerList();
 	var members = [],
-		self = this;
+		self = this,
+		count = self.list.length;
 	// Check for an empty list
-	if(this.list.length === 0) {
+	if(0 === count) {
 		members = this.getEmptyMessage();
 	} else {
 		$tw.utils.each(this.list,function(title,index) {
-			members.push(self.makeItemTemplate(title));
+			members.push(self.makeItemTemplate(title,index,count,self.iterator));
 		});
 	}
 	// Construct the child widgets
@@ -96,7 +98,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 /*
 Compose the template for a list item
 */
-ListWidget.prototype.makeItemTemplate = function(title) {
+ListWidget.prototype.makeItemTemplate = function(title,index,count,iterator) {
 	// Check if the tiddler is a draft
 	var tiddler = this.wiki.getTiddler(title),
 		isDraft = tiddler && tiddler.hasField("draft.of"),
@@ -119,7 +121,15 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 		}
 	}
 	// Return the list item
-	return {type: "listitem", itemTitle: title, variableName: this.variableName, children: templateTree};
+	return {
+		type: "listitem",
+		itemTitle: title,
+		variableName: this.variableName,
+		children: templateTree,
+		index: index,
+		count: count,
+		iterator: iterator
+	};
 };
 
 /*
@@ -291,8 +301,12 @@ ListItemWidget.prototype.render = function(parent,nextSibling) {
 Compute the internal state of the widget
 */
 ListItemWidget.prototype.execute = function() {
+	var item = this.parseTreeNode;
 	// Set the current list item title
-	this.setVariable(this.parseTreeNode.variableName,this.parseTreeNode.itemTitle);
+	this.setVariable(item.variableName,item.itemTitle);
+	this.setVariable(item.iterator,(item.index + 1).toString());
+	this.setVariable(item.iterator + "-even",item.index % 2 == 1 ? "true" : "false");
+	this.setVariable(item.iterator + "-last",item.index + 1 == item.count ? "true" : "false");
 	// Construct the child widgets
 	this.makeChildWidgets();
 };

@@ -439,6 +439,12 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+// Checks whether a link target is external, i.e. not a tiddler title
+exports.isLinkExternal = function(to) {
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
+	return externalRegExp.test(to);
+};
+
 exports.nextTick = function(fn) {
 /*global window: false */
 	if(typeof process === "undefined") {

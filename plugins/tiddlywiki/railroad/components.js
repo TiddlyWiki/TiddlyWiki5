@@ -89,13 +89,13 @@ Component.prototype.debug = function(output,indent) {
 Component.prototype.debugArray = function(array,output,indent) {
 	for(var i=0; i<array.length; i++) {
 		var item = array[i];
-		// Choice content is a special case: an array of arrays
+		// Choice content is a special case: we number the branches
 		if(item.isChoiceBranch) {
 			output.push(indent);
 			output.push("(");
 			output.push(i);
 			output.push(")\n");
-			item.debug(output,"  " +indent);
+			item.debug(output,"  "+indent);
 		} else {
 			item.debug(output,indent);
 		}
@@ -205,6 +205,27 @@ Repeated.prototype.toSvg = function() {
 	return railroad.OneOrMore(this.child.toSvg(),separatorSvg);
 }
 
+var Link = function(content,options) {
+	this.initialiseWithChild("Link",content);
+	this.options = options;
+};
+
+Link.prototype = new Component();
+
+Link.prototype.toSvg = function() {
+	return railroad.Link(this.child.toSvg(),this.options);
+}
+
+var Transclusion = function(content) {
+	this.initialiseWithChild("Transclusion",content);
+};
+
+Transclusion.prototype = new Component();
+
+Transclusion.prototype.toSvg = function() {
+	return this.child.toSvg();
+}
+
 /////////////////////////// Components with an array of children
 
 var Root = function(content) {
@@ -252,13 +273,15 @@ exports.components = {
 	Choice: Choice,
 	Comment: Comment,
 	Dummy: Dummy,
+	Link: Link,
 	Nonterminal: Nonterminal,
 	Optional: Optional,
 	OptionalRepeated: OptionalRepeated,
 	Repeated: Repeated,
 	Root: Root,
 	Sequence: Sequence,
-	Terminal: Terminal
+	Terminal: Terminal,
+	Transclusion: Transclusion
 };
 
 })();

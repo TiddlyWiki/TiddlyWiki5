@@ -4,21 +4,21 @@ tags: Learning
 title: Introduction to Filters
 type: text/vnd.tiddlywiki
 
-A step by step introduction to how [[Filters]] are used.
+This is a step-by-step introduction to how [[Filters]] are used. [[Filter Syntax]] presents a more technical summary of this information.
 
 ! Using Filters
 
-Filters are a special language within WikiText for expressing lists of tiddlers.
+Filters are a special notation for expressing lists of tiddlers within WikiText.
 
 Filters are used in the ListMacro, TabsMacro, ListWidget, CountWidget, and many other areas of TiddlyWiki.
 
-For example, this is how the ListMacro would be used to display  the first example below:
+For example, this is how the ListMacro would be used to display the first example below:
 
 ```
 <<list-links "HelloThere Introduction [[Title with Spaces]]">>
 ```
 
-The easiest way to experiment with tiddler filters is by typing them into the "Filter" tab of the [[advanced search panel|$:/AdvancedSearch]].
+The easiest way to experiment with tiddler filters is by typing them into the ''Filter'' tab of the [[advanced search panel|$:/AdvancedSearch]].
 
 ! Simple Filters
 
@@ -32,13 +32,13 @@ The titles must be separated by one or more spaces and/or linebreaks.
 
 ! Filter Operators
 
-Filter operators are used to select tiddlers based on some criteria. For example, this filter consists of a single operation that selects all tiddlers tagged "introduction":
+Filter operators are used to select tiddlers in particular ways. For example, this filter consists of a single step that selects all tiddlers tagged ''introduction'':
 
 ```
 [tag[introduction]]
 ```
 
-The word "tag" is the ''operator'' and "introduction" is the ''operand''.
+The word `tag` is the ''operator'' and `introduction` is the ''parameter'' (sometimes called the ''operand'').
 
 See [[Filters]] for a complete list of the available operators.
 
@@ -46,9 +46,9 @@ See [[Filters]] for a complete list of the available operators.
 
 The operator defaults to `title` if omitted, so `[[HelloThere]]` is equivalent to `[title[HelloThere]]`. If there are no spaces in the title, then the double square brackets can also be omitted: `HelloThere`.
 
-! Negating Filter Operators
+! Negating Filter Steps
 
-Filter operations can be negated by preceding the operator with an exclamation mark (!). This example selects all tiddlers that are not tagged "introduction":
+A filter step can be negated by preceding the operator with an exclamation mark (`!`). This example selects all tiddlers that are not tagged ''introduction'':
 
 ```
 [!tag[introduction]]
@@ -56,7 +56,7 @@ Filter operations can be negated by preceding the operator with an exclamation m
 
 ! Operator Suffixes
 
-Some filter operators can take an optional suffix that provides further information for the operation. For example, the "field" operator takes a suffix indicating the field to be compared. The following filter returns all tiddlers that have "JeremyRuston" in the "modifier" field:
+Some filter operators can take an optional suffix that provides further information. For example, the `field` operator takes a suffix indicating the field to be compared. The following filter returns all tiddlers that have ''JeremyRuston'' in the `modifier` field:
 
 ```
 [field:modifier[JeremyRuston]]
@@ -64,70 +64,72 @@ Some filter operators can take an optional suffix that provides further informat
 
 ! Field Operator Shortcut
 
-If an unknown operator is used then it is instead interpreted as the suffix of the "field" operator. Thus, these two filters both return all the tiddlers that contain the string "create" in their "caption" field:
+If an operator is not recognised, then it is instead interpreted as the suffix of the `field` operator. Thus, these two filters both return all the tiddlers that contain the string ''create'' in their `caption` field:
 
 ```
 [caption[create]]
 [field:caption[create]]
 ```
 
-! Indirect Operands
+! Indirect Parameters
 
-If a filter operator is written with curly brackets around the operand then it is taken to be a TextReference to the actual value. For example, this filter selects all tiddlers containing the string contained in the tiddler titled "$:/temp/search"
+If a filter step has curly brackets around its parameter, then it is taken to be a TextReference to the actual value. For example, this filter selects all tiddlers containing the string contained in the ''$:/temp/search'' tiddler:
 
 ```
 [search{$:/temp/search}]
 ```
 
-! Variable Operands
+! Variable Parameters
 
-If a filter operator is written with angle brackets around the operand then it is taken to be the name of a variable containing the actual value. For example, this filter selects all tiddlers containing the title of the current tiddler:
+If a filter step has angle brackets around its parameter, then it is taken to be the name of a variable containing the actual value. For example, this filter selects all tiddlers containing the title of the current tiddler:
 
 ```
 [search<currentTiddler>]
 ```
 
-(Note that the `currentTiddler` variable is used to track the current tiddler).
+(The built-in `currentTiddler` variable keeps track of which tiddler is the current one.)
 
-! ORing Multiple Filter Operators
+! ORing Multiple Filter Steps
 
-You can use multiple filter operations at once. This example selects all tiddlers that are either tagged "introduction" or "demo":
+You can use multiple filter steps at once. If you write the steps separately, the overall result is the set of tiddlers that match //any// of the steps. Each step is processed separately, adding its tiddlers to the overall result.
+
+This example selects all tiddlers that are either tagged ''introduction'' or ''demo'':
 
 ```
 [tag[introduction]] [tag[demo]]
 ```
 
-Each separate operator is processed in turn, accumulating the tiddlers that they select.
-
-Here's an example that returns tiddlers tagged ''alpha'' or ''beta'' that are also tagged ''task'' and not tagged ''done'':
+Here's an example that returns tiddlers tagged ''alpha'' or ''beta'' that are also tagged ''task'' but not tagged ''done'':
 
 ```
 [tag[alpha]] [tag[beta]] +[tag[task]!tag[done]]
 ```
 
-! ANDing Multiple Filter Operators
+! ANDing Multiple Filter Steps
 
-A sequence of operators can be logically ANDed together by bashing them together and merging the outer square brackets. This is called a "run" of operations. For example, here we select tiddlers that are tagged "introduction" and also tagged "demo":
+A sequence of steps can also be combined by bashing them together and merging the outer square brackets. This is called a "run". The result is the set of tiddlers that match //all// of the steps in the run.
+
+For example, here we select tiddlers that are tagged ''introduction'' and also tagged ''demo'':
 
 ```
 [tag[introduction]tag[demo]]
 ```
 
-Here's another example that selects all tiddlers tagged "introduction" that are not tagged "demo":
+Here's another example that selects all tiddlers tagged ''introduction'' that are //not// tagged ''demo'':
 
 ```
 [tag[introduction]!tag[demo]]
 ```
 
-! Negating Runs of Filter Operators
+! Negating Runs
 
-Ordinarily, each run of filter operations adds to the accumulated results. Prefixing a run with `-` causes the list of tiddlers to instead be removed from the results. For example, this example returns all the tiddlers tagged "introduction" apart from `HelloThere` and `Title with Spaces`:
+Ordinarily, each run //adds// to the accumulated results. Prefixing a run with `-` instead causes the list of tiddlers selected to be //removed// from the results. For example, this example returns all the tiddlers tagged ''introduction'', apart from `HelloThere` and `Title with Spaces`:
 
 ```
 [tag[introduction]] -HelloThere -[[Title with Spaces]]
 ```
 
-This example returns all tiddlers tagged "introduction" that are not also tagged "demo":
+This example returns all tiddlers tagged ''introduction'' that are not also tagged ''demo'':
 
 ```
 [tag[introduction]] -[tag[demo]]
@@ -135,9 +137,9 @@ This example returns all tiddlers tagged "introduction" that are not also tagged
 
 ! Working with Filter Results
 
-Usually, each run of filter operations takes as its source the entire store of available tiddlers. Prefixing a run with `+` causes the accumulated results to be used as the source instead.
+Usually, each run takes the entire store of available tiddlers as its source. Prefixing a run with `+` causes the results so far accumulated to be used as the source instead.
 
-For example, this filter selects tiddlers tagged "introduction" or "demo" and then sorts the resulting list by the "title" field:
+For example, this filter selects tiddlers tagged ''introduction'' or ''demo'', and then sorts the resulting list by the `title` field:
 
 ```
 [tag[introduction]] [tag[demo]] +[sort[title]]
