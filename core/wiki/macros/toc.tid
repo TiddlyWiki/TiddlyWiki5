@@ -167,7 +167,7 @@ tags: $:/tags/Macro
 <div class="tc-tabbed-table-of-contents-content">
 <$reveal state="""$selectedTiddler$""" type="nomatch" text="">
 <$transclude mode="block" tiddler="$template$">
-<h1><$transclude field="caption"><$view field="title"/></$transclude></h1>
+<h1><<toc-caption>></h1>
 <$transclude mode="block">$missingText$</$transclude>
 </$transclude>
 </$reveal>
