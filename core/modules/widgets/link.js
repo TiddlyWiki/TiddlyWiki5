@@ -106,8 +106,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	this.domNodes.push(domNode);
 };
 
-LinkWidget.prototype.handleClickEvent = function (event) {
-	// Send the click on it's way as a navigate event
+LinkWidget.prototype.handleClickEvent = function(event) {
+	// Send the click on its way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
 		type: "tm-navigate",

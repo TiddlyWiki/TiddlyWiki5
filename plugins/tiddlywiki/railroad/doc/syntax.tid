@@ -2,9 +2,11 @@ created: 20150103184022184
 modified: 20150103184022184
 title: $:/plugins/tiddlywiki/railroad/syntax
 
-The railroad widget constructs a diagram from the components defined below.
+The railroad widget uses a special ''diagram syntax'' to construct the components defined below.
 
 `x` and `y` here stand for any component.
+
+Names (as opposed to quoted strings) are available when a value starts with a letter and contains only letters, digits, underscores, dots and hyphens.
 
 ---
 
@@ -52,7 +54,6 @@ The railroad widget constructs a diagram from the components defined below.
 ; nonterminal
 : <$railroad text=""" (name | "<" string ">") """/>
 * A nonterminal component, i.e. the name of another diagram
-* The simple `name` option is available when the text starts with a letter and contains only letters, digits, underscores, dots and hyphens
 
 ---
 
@@ -65,3 +66,15 @@ The railroad widget constructs a diagram from the components defined below.
 ; dummy
 : <$railroad text=""" "-" """/>
 * The absence of a component
+
+---
+
+; link
+: <$railroad text=""" "[[" x "|" (name|string) "]]" """/>
+* A link to the tiddler title or URI given by the string or name
+
+---
+
+; transclusion
+: <$railroad text=""" "{{" (name|string) "}}" """/>
+* Treats the content of another tiddler as diagram syntax and transcludes it into the current diagram

@@ -21,12 +21,10 @@ x y z			sequence
 <"x">			nonterminal
 /"blah"/		comment
 -				dummy
+[[x|"tiddler"]]	link
+{{"tiddler"}}	transclusion
 
 "x" can also be written 'x' or """x"""
-
-Future extensions:
-[[x|tiddler]]	link
-{{tiddler}}		transclusion
 
 \*/
 (function(){
@@ -37,12 +35,14 @@ Future extensions:
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
 
-var Parser = function(source) {
+var Parser = function(widget,source) {
+	this.widget = widget;
 	this.source = source;
 	this.tokens = this.tokenise(source);
 	this.tokenPos = 0;
 	this.advance();
-	this.root = new components.Root(this.parseContent());
+	this.content = this.parseContent();
+	this.root = new components.Root(this.content);
 	this.checkFinished();
 };
 
@@ -66,8 +66,8 @@ Parser.prototype.parseComponent = function() {
 	if(this.token) {
 		if(this.at("string")) {
 			component = this.parseTerminal();
-		} else if(this.at("identifier")) {
-			component = this.parseIdentifier();
+		} else if(this.at("name")) {
+			component = this.parseName();
 		} else {
 			switch(this.token.value) {
 				case "[":
@@ -84,6 +84,12 @@ Parser.prototype.parseComponent = function() {
 					break;
 				case "/":
 					component = this.parseComment();
+					break;
+				case "[[":
+					component = this.parseLink();
+					break;
+				case "{{":
+					component = this.parseTransclusion();
 					break;
 				case "<-":
 					component = this.parseSequence();
@@ -112,25 +118,21 @@ Parser.prototype.parseChoice = function() {
 		// Parse the next branch
 		content.push(this.parseContent());
 	} while(this.eat("|"));
-	// Create a component
-	var component = new components.Choice(content,colon === -1 ? 0 : colon);
 	// Consume the closing bracket
 	this.close(")");
-	return component;
+	// Create a component
+	return new components.Choice(content,colon === -1 ? 0 : colon);
 };
 
 Parser.prototype.parseComment = function() {
 	// Consume the /
 	this.advance();
 	// The comment's content should be in a string literal
-	this.expectStringLiteral("/");
-	// Create a component
-	var component = new components.Comment(this.token.value);
-	// Consume the string literal
-	this.advance();
+	var content = this.expectString("after /");
 	// Consume the closing /
 	this.close("/");
-	return component;
+	// Create a component
+	return new components.Comment(content);
 };
 
 Parser.prototype.parseDummy = function() {
@@ -140,27 +142,43 @@ Parser.prototype.parseDummy = function() {
 	return new components.Dummy();
 };
 
-Parser.prototype.parseIdentifier = function() {
+Parser.prototype.parseLink = function() {
+	// Consume the [[
+	this.advance();
+	// Parse the content
+	var content = this.parseContent();
+	// Consume the |
+	this.expect("|");
+	// Consume the target
+	var target = this.expectNameOrString("as link target");
+	// Prepare some attributes for the SVG "a" element to carry
+	var options = {"data-tw-target": target};
+	if($tw.utils.isLinkExternal(target)) {
+		options["data-tw-external"] = true;
+	}
+	// Consume the closing ]]
+	this.close("]]");
+	// Create a component
+	return new components.Link(content,options);
+};
+
+Parser.prototype.parseName = function() {
 	// Create a component
 	var component = new components.Nonterminal(this.token.value);
-	// Consume the identifier
+	// Consume the name
 	this.advance();
 	return component;
 };
-
 
 Parser.prototype.parseNonterminal = function() {
 	// Consume the <
 	this.advance();
 	// The nonterminal's name should be in a string literal
-	this.expectStringLiteral("<");
-	// Create a component
-	var component = new components.Nonterminal(this.token.value);
-	// Consume the string literal
-	this.advance();
+	var content = this.expectString("after <");
 	// Consume the closing bracket
 	this.close(">");
-	return component;
+	// Create a component
+	return new components.Nonterminal(content);
 };
 
 Parser.prototype.parseOptional = function() {
@@ -177,14 +195,13 @@ Parser.prototype.parseOptional = function() {
 	if(repeated && this.eat("+")) {
 		separator = this.parseContent();
 	}
-	// Create a component
-	var component = repeated ? new components.OptionalRepeated(content,separator,normal) : new components.Optional(content,normal);
 	// Consume the closing brackets
 	if(repeated) {
 		this.close("}");
 	}
 	this.close("]");
-	return component;
+	// Create a component
+	return repeated ? new components.OptionalRepeated(content,separator,normal) : new components.Optional(content,normal);
 };
 
 Parser.prototype.parseRepeated = function() {
@@ -197,23 +214,21 @@ Parser.prototype.parseRepeated = function() {
 	if(this.eat("+")) {
 		separator = this.parseContent();
 	}
-	// Create a component
-	var component = new components.Repeated(content,separator);
 	// Consume the closing bracket
 	this.close("}");
-	return component;
+	// Create a component
+	return new components.Repeated(content,separator);
 };
 
 Parser.prototype.parseSequence = function() {
-	// Consume the ~
+	// Consume the <-
 	this.advance();
 	// Parse the content
 	var content = this.parseContent();
-	// Create a component
-	var component = new components.Sequence(content);
-	// Consume the closing ~
+	// Consume the closing ->
 	this.close("->");
-	return component;
+	// Create a component
+	return new components.Sequence(content);
 };
 
 Parser.prototype.parseTerminal = function() {
@@ -221,6 +236,21 @@ Parser.prototype.parseTerminal = function() {
 	// Consume the string literal
 	this.advance();
     return component;
+};
+
+Parser.prototype.parseTransclusion = function() {
+	// Consume the {{
+	this.advance();
+	// Consume the text reference
+	var textRef = this.expectNameOrString("as transclusion source");
+	// Consume the closing }}
+	this.close("}}");
+	// Retrieve the content of the text reference
+	var source = this.widget.wiki.getTextReference(textRef,"",this.widget.getVariable("currentTiddler"));
+	// Parse the content
+	var content = new Parser(this.widget,source).content;
+	// Create a component
+	return new components.Transclusion(content);
 };
 
 /////////////////////////// Token manipulation
@@ -244,10 +274,10 @@ Parser.prototype.eat = function(token) {
 	return at;
 };
 
-Parser.prototype.expectStringLiteral = function(preamble) {
-	if(!this.at("string")) {
-		throw "String expected after " + preamble;
-	}
+Parser.prototype.tokenValue = function() {
+	var output = this.token.value;
+	this.advance();
+	return output;
 };
 
 Parser.prototype.close = function(token) {
@@ -260,6 +290,27 @@ Parser.prototype.checkFinished = function() {
 	if(this.token) {
 		throw "Syntax error at " + this.token.value;
 	}
+};
+
+Parser.prototype.expect = function(token) {
+	if(!this.eat(token)) {
+		throw token + " expected";
+	}
+};
+
+Parser.prototype.expectString = function(context,token) {
+	if(!this.at("string")) {
+		token = token || "String";
+		throw token + " expected " + context;
+	}
+	return this.tokenValue();
+};
+
+Parser.prototype.expectNameOrString = function(context) {
+	if(this.at("name")) {
+		return this.tokenValue();
+	}
+	return this.expectString(context,"Name or string");
 };
 
 /////////////////////////// Tokenisation
@@ -294,12 +345,12 @@ Parser.prototype.tokenise = function(source) {
 		} else if(c === "-") {
 			// - or ->
 			s = source.charAt(pos+1) === ">" ? "->" : "-";
-		} else if("()>+|/:".indexOf(c) !== -1) {
+		} else if("()>+/:|".indexOf(c) !== -1) {
 			// Single character
 			s = c;
 		} else if(c.match(/[a-zA-Z]/)) {
-			// Identifier
-			token = this.readIdentifier(source,pos);
+			// Name
+			token = this.readName(source,pos);
 		} else {
 			throw "Syntax error at " + c;
 		}
@@ -316,14 +367,14 @@ Parser.prototype.tokenise = function(source) {
 	return tokens;
 };
 
-Parser.prototype.readIdentifier = function(source,pos) {
+Parser.prototype.readName = function(source,pos) {
 	var re = /([a-zA-Z0-9_.-]+)/g;
 	re.lastIndex = pos;
 	var match = re.exec(source);
 	if(match && match.index === pos) {
-		return {type: "identifier", value: match[1], start: pos, end: pos + match[1].length};
+		return {type: "name", value: match[1], start: pos, end: pos+match[1].length};
 	} else {
-		throw "Invalid identifier";
+		throw "Invalid name";
 	}
 };
 
