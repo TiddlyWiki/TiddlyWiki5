@@ -1,0 +1,45 @@
+title: NestedLists
+tags: ListWidget
+created: 20150106180000000
+modified: 20150106180000000
+
+
+The following sidebar tabs give examples of grouped lists created by nesting.
+
+!! Types Tab
+
+The list in the [[Types|$:/core/ui/MoreSideBar/Types]] tab is generated with this markup:
+
+```
+<$list filter="[!is[system]has[type]each[type]sort[type]]">
+<div class="tc-menu-list-item">
+<$view field="type"/>
+<$list filter="[type{!!type}!is[system]sort[title]]">
+<div class="tc-menu-list-subitem">
+<$link to={{!!title}}><$view field="title"/></$link>
+</div>
+</$list>
+</div>
+</$list>
+```
+
+The outer list filter selects each discrete value found in the `type` field. The inner list filter selects all the (non-system) tiddlers with that type.
+
+!! Recent Tab
+
+The list in the [[Recent|$:/core/ui/SideBar/Recent]] tab is generated with this markup:
+
+```
+<$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
+<div class="tc-menu-list-item">
+<$view field="modified" format="date" template="DDth MMM YYYY"/>
+<$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
+<div class="tc-menu-list-subitem">
+<$link to={{!!title}}><$view field="title"/></$link>
+</div>
+</$list>
+</div>
+</$list>
+```
+
+Here, the outer list filter selects each discrete day found in the `modified` field, while the inner list filter selects all the tiddlers dated the same day in the `modified` field.
