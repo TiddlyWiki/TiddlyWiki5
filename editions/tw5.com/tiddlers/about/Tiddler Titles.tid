@@ -4,7 +4,7 @@ tags: documenting
 
 Each of the main words of a tiddler title begins with a capital letter, but minor words such as "and", "or", "the", "to" and "with" do not. Avoid starting a tiddler with the word "the".
 
-[[Reference Tiddlers]] have ~CamelCase nouns as their titles, e.g. ''~RevealWidget'', ''~CamelCase'', ''CSS''. The title is plural if it denotes a category, e.g. ''~KeyboardShorcuts'', ''~TiddlerFields''. Such categories are used to tag more specific tiddlers within the category.
+[[Reference Tiddlers]] have ~CamelCase nouns as their titles, e.g. ''~RevealWidget'', ''~CamelCase'', ''CSS''. The title is plural if it denotes a category, e.g. ''~KeyboardShortcuts'', ''~TiddlerFields''. Such categories are used to tag more specific tiddlers within the category.
 
 Other tags usually consist of a single lowercase word. Avoid spaces in tags.
 
