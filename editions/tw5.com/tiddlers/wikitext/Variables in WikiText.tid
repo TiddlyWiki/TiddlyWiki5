@@ -26,3 +26,89 @@ Variables are used in:
 * Some default behaviors of [[Widgets]]
 
 See also [[currentTiddler|WidgetVariable: currentTiddler]] variable, built-in [[variables|Variables]] and [[Confusion between Transclusion and Substitution]].
+
+! Examples
+!!The `$(name)$` syntax
+---
+
+If you want to define a variable and then use that variable in a macro without passing it to the macro as an argument you use the `$(name)$` syntax.
+
+The following code gives an example of this use:
+
+```
+\define exampleMacro()
+This is your variable: $(variableName)$
+\end
+
+<$set name='variableName' value='Test Name'>
+<<exampleMacro>>
+</$set>
+```
+
+Note that this syntax doesn't work outside of macros, the following code will display `$(variableName)$` not `Test Name`.
+
+```
+<$set name='variableName' value='Test Name'>
+$(variableName)$
+</$set>
+```
+
+!!The `<<name>>` syntax
+---
+
+If you want to set a variable that you can use outside of a macro you use the `<<name>>` syntax.
+ The following code is an example of this usage.
+
+This code will display `Test Name`.
+
+```
+<$set name='variableName' value='Test Name'>
+<<variableName>>
+</$set>
+```
+
+You can use this to pass arguments to filters and other widgets in the same way you would use a macro, as in this code:
+
+
+```
+<$set name='variableName' value='[tag[Reference]]'>
+<$list filter=<<variableName>>>
+<$view field=title/><br>
+</$list>
+</$set>
+```
+
+Which will display all tiddlers tagged with `Reference`:
+
+<$set name='variableName' value='[tag[Reference]]'>
+<$list filter=<<variableName>>>
+<$view field=title/><br>
+</$list>
+</$set>
+
+
+Note that in this example the value of `variableName` was set to the entire filter, not just the filter operand. To set just the operand use the `<name>` syntax described below.
+
+!!The `<name>` syntax
+---
+
+Another way you can pass variables to filters is to use the `<name>` syntax shown in the following code:
+
+
+```
+<$set name='variableName' value='Reference'>
+<$list filter='[tag[<variableName>]]'>
+<$view field=title/><br>
+</$list>
+</$set>
+```
+
+Which will display all tiddlers tagged with `Reference`:
+
+<$set name='variableName' value='Reference'>
+<$list filter='[tag<variableName>]'>
+<$view field=title/><br>
+</$list>
+</$set>
+
+Note that for this usage you leave out the square brackets (`[ ]`) that are normally present around the filter operands.
