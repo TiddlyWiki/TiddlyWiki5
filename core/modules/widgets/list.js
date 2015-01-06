@@ -71,7 +71,7 @@ ListWidget.prototype.execute = function() {
 		members = this.getEmptyMessage();
 	} else {
 		$tw.utils.each(this.list,function(title,index) {
-			members.push(self.makeItemTemplate(title, index, count, self.iterator));
+			members.push(self.makeItemTemplate(title,index,count,self.iterator));
 		});
 	}
 	// Construct the child widgets
@@ -98,7 +98,7 @@ ListWidget.prototype.getEmptyMessage = function() {
 /*
 Compose the template for a list item
 */
-ListWidget.prototype.makeItemTemplate = function(title, index, count, iterator) {
+ListWidget.prototype.makeItemTemplate = function(title,index,count,iterator) {
 	// Check if the tiddler is a draft
 	var tiddler = this.wiki.getTiddler(title),
 		isDraft = tiddler && tiddler.hasField("draft.of"),
@@ -305,9 +305,8 @@ ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(item.variableName,item.itemTitle);
 	this.setVariable(item.iterator,(item.index + 1).toString());
-	this.setVariable(item.iterator + "-even",item.index % 2 == 1 ? 'true' : 'false');
-	this.setVariable(item.iterator + "-last",item.index + 1 == item.count ? 'true' : 'false');
-
+	this.setVariable(item.iterator + "-even",item.index % 2 == 1 ? "true" : "false");
+	this.setVariable(item.iterator + "-last",item.index + 1 == item.count ? "true" : "false");
 	// Construct the child widgets
 	this.makeChildWidgets();
 };
