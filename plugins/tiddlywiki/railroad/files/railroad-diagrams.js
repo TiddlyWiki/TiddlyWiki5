@@ -467,15 +467,16 @@ var temp = (function(options) {
 	}
 	
 /* TiddlyWiki: added linking ability */
-	function Link(target, item) {
-		if(!(this instanceof Link)) return new Link(target, item);
-		FakeSVG.call(this, 'a', {'xlink:href': target});
+	function Link(item,options) {
+		if(!(this instanceof Link)) return new Link(item,options);
+		FakeSVG.call(this,'a',options);
 		this.item = item;
 		this.width = item.width;
 		this.up = item.up;
 		this.down = item.down;
 	}
 	subclassOf(Link, FakeSVG);
+	Link.prototype.needsSpace = true;
 	Link.prototype.format = function(x, y, width) {
 		this.item.format(x,y,width).addTo(this);
 		return this;

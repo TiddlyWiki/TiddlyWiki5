@@ -5,5 +5,5 @@ title: $:/plugins/tiddlywiki/railroad/example-source
 type: text/plain
 
 ["+"]
-({digit} | "#" <'escape sequence'>)
+({ [[digit|GettingStarted]] } | "#" <'escape sequence'>)
 [{("@" name-char | :"--" )}]
