@@ -305,8 +305,8 @@ ListItemWidget.prototype.execute = function() {
 	// Set the current list item title
 	this.setVariable(item.variableName,item.itemTitle);
 	this.setVariable(item.iterator,(item.index + 1).toString());
-	this.setVariable(item.iterator + "-even",item.index % 2 == 1 ? 'true' : '');
-	this.setVariable(item.iterator + "-last",item.index + 1 == item.count ? 'true' : '');
+	this.setVariable(item.iterator + "-even",item.index % 2 == 1 ? 'true' : 'false');
+	this.setVariable(item.iterator + "-last",item.index + 1 == item.count ? 'true' : 'false');
 
 	// Construct the child widgets
 	this.makeChildWidgets();
