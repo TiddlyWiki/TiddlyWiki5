@@ -7,4 +7,4 @@ Muestra texto de ayuda para un comando:
 --help [<command>]
 ```
 
-Si no se especifica comando, se muestra una lista de los disponibles.
+Si el nombre del comando es omitido entonces una lista de comandos es mostrada.

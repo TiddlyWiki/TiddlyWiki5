@@ -1,7 +1,7 @@
 title: $:/language/Help/unpackplugin
-description: Desenpaqueta los tiddlers de carga de un plugin
+description: Desenpaqueta los tiddlers de carga de una extensión
 
-Extrae los tiddlers de carga de un plugin, convirtiéndolos en tiddlers normales: 
+Extrae los tiddlers de carga de una extensión, creándolos como tiddlers ordinarios: 
 
 ```
 --unpackplugin <title>
