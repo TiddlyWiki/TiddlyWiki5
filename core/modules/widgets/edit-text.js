@@ -73,8 +73,10 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	this.fixHeight();
 	// Focus field
 	if(this.editFocus === "true") {
-		domNode.focus();
-		domNode.select();
+		if(domNode.focus && domNode.select) {
+			domNode.focus();
+			domNode.select();			
+		}
 	}
 };
 
