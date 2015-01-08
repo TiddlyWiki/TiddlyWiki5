@@ -148,9 +148,13 @@ exports.getFullScreenApis = function() {
 		"_fullscreenElement": d.webkitFullscreenElement !== undefined ? "webkitFullscreenElement" :
 							d.mozFullScreenElement !== undefined ? "mozFullScreenElement" :
 							d.msFullscreenElement !== undefined ? "msFullscreenElement" :
-							d.fullscreenElement !== undefined ? "fullscreenElement" : ""
+							d.fullscreenElement !== undefined ? "fullscreenElement" : "",
+		"_fullscreenChange": d.webkitFullscreenElement !== undefined ? "webkitfullscreenchange" :
+							d.mozFullScreenElement !== undefined ? "mozfullscreenchange" :
+							d.msFullscreenElement !== undefined ? "MSFullscreenChange" :
+							d.fullscreenElement !== undefined ? "fullscreenchange" : ""
 	};
-	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement) {
+	if(!result._requestFullscreen || !result._exitFullscreen || !result._fullscreenElement || !result._fullscreenChange) {
 		return null;
 	} else {
 		return result;
