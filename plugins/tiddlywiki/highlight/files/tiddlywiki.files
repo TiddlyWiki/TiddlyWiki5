@@ -1,14 +1,22 @@
 {
 	"tiddlers": [
-		{
-			"file": "highlight.pack.js",
-			"fields": {
-				"type": "application/javascript",
-				"title": "$:/plugins/tiddlywiki/highlight/highlight.js",
-				"module-type": "library"
-			},
-			"prefix": "var hljs;\n",
-			"suffix": "\nexports.hljs = hljs;\n"
+        {
+            "file": "highlight.pack.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/highlight/highlight.js",
+                "module-type": "library"
+            }            
+        },
+        {
+			"file": "registerlanguages.pack.js",
+            "fields": {
+                "type": "application/javascript",
+                "title": "$:/plugins/tiddlywiki/highlight/registerlanguages.js",
+                "module-type": "library"
+            },
+            "prefix": "var hljs = require(\"$:/plugins/tiddlywiki/highlight/highlight.js\");\n",
+            "suffix": "\nexports.hljs = hljs;\n"
 		},
 		{
 			"file": "default.css",

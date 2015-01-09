@@ -13,8 +13,8 @@ Wraps up the fenced code blocks parser for highlight and use in TiddlyWiki5
 "use strict";
 
 var CodeBlockWidget = require("$:/core/modules/widgets/codeblock.js").codeblock;
-
-var hljs = require("$:/plugins/tiddlywiki/highlight/highlight.js").hljs;
+//register languages requires hljs for us
+var hljs = require("$:/plugins/tiddlywiki/highlight/registerlanguages.js").hljs;
 hljs.configure({tabReplace: "    "});	
 
 CodeBlockWidget.prototype.postRender = function() {
@@ -29,7 +29,8 @@ CodeBlockWidget.prototype.postRender = function() {
 			domNode.children[0].innerHTML = hljs.fixMarkup(hljs.highlight(this.language, this.getAttribute("code")).value);
 		}
 		catch(err) {
-			//alert(err);
+			//can't easily tell if a language is registered or not in the packed version of hightlight.js
+			//so we silently fail and the codeblock remains unchanged
 		}
 	}	
 };
