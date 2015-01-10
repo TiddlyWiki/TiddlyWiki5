@@ -171,7 +171,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 		else for(var i=0; i<actualParams.length; ++i) {
 			args.push(actualParams[i].value);
 		}
-		return macro.run.apply(this,args).toString();
+		return (macro.run.apply(this,args) || "").toString();
 	} else {
 		return defaultValue;
 	}
