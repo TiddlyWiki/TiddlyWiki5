@@ -1,18 +1,17 @@
 created: 20140211171341271
-modified: 20140910215504098
+modified: 20150107121000000
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
 
-Macros are snippets of text that can be inserted with a concise shortcut:
+Macros are snippets of text, inserted with the following shortcut syntax:
 
 ```
 <<myMacro>>
 ```
 
-You can write your own [[Macros in WikiText]] or for more flexibility you can write [[JavaScript Macros|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]].
+You can define and use [[Macros in WikiText]] or write [[JavaScript Macros|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]] for more flexibility.
 
-The following macros are built-in to the TiddlyWiki core:
+The following macros are provided by the TiddlyWiki core:
 
 <<list-links "[tag[Macros]]">>
-
