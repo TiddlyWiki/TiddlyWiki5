@@ -1,7 +1,7 @@
 title: $:/language/Help/verbose
-description: Activa modo de presentación detallada
+description: Genera modo de salida en texto indefinido
 
-Activa presentación detallada, útil para debugging
+Genera texto indefinido, útil para identificar errores
 
 ```
 --verbose

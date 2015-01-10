@@ -1,7 +1,7 @@
 title: $:/language/Help/rendertiddlers
-description: Devuelve tiddlers coincidentes con un determinado ContentType
+description: Genera tiddlers coincidentes con un determinado ContentType
 
-Devuelve un conjunto de tiddlers que coinciden con el argumento de un filtro para separar tiddlers de un determinado ContentType (por defecto `text/html`) y extensión (defaults to `.html`).
+Genera un conjunto de tiddlers que coinciden con el argumento de un filtro para separar tiddlers de un determinado ContentType (por defecto `text/html`) y extensión de archivo (defaults to `.html`).
 
 ```
 --rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
@@ -13,6 +13,6 @@ Por ejemplo:
 --rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
 ```
 
-Por defecto, la ruta es relativa al subdirectorio `output` del directorio de la edición. Puede usarse con el comando `--output` para apuntar a un directorio diferente.
+Por defecto, la ruta es relativa al subdirectorio `output` (de salida) del directorio de edición. Puede usarse con el comando `--output` para dirigir la salida a un directorio diferente.
 
-Se borrará cualquier archivo existente en el directorio de destino. El directorio de destino se crea recursivamente si no existe. 
+Cualquier archivo existente en el directorio de destino será borrado. El directorio de destino es creado automáticamente si no existiera.

@@ -1,9 +1,9 @@
 title: $:/language/Help/setfield
 description: Prepara tiddlers externos para su uso
 
-//Tenga en cuenta que este comando aún es experimental y puede sufrir cambios o ser sustituido.//
+//Notar que este comando es experimental y puede cambiar o ser reemplazado antes de que vaya a ser finalizado//
 
-Ajusta el campo específico de un grupo de tiddlers al resultado de //wikificar// una plantilla de  tiddler con la variable `currentTiddler` establecida.
+Configura el campo especificado de un grupo de tiddlers al resultado de "wikify" un tiddler plantilla con la variable `currentTiddler` configurada al tiddler.
 
 ```
 --setfield <filter> <fieldname> <templatetitle> <rendertype>
@@ -12,7 +12,7 @@ Ajusta el campo específico de un grupo de tiddlers al resultado de //wikificar/
 Los parámetros son:
 
 * ''filter'' - filtro que identifica los tiddlers que se verán afectados
-* ''fieldname'' - campo que será modificado (por defecto, "text")
-* ''templatetitle'' - tiddler para //wikificar// al campo especificado. Si se deja en blanco o está ausente, el campo especificado se borrará. 
-* ''type'' - siguiente tipo que se obtiene (por defecto, "text/plain"; se puede usar también "text/html" para incluir etiquetas HTML)
+* ''fieldname'' - el campo que será modificado (por defecto, "text")
+* ''templatetitle'' - el tiddler a ''wikify'' en el campo especificado. Si se deja en blanco o está ausente, el campo especificado es borrado. 
+* ''type'' - el tipo de texto a generar (por defecto, "text/plain"; se puede usar también "text/html" para incluir etiquetas HTML)
 

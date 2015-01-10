@@ -1,8 +1,8 @@
-title: $:/core/es-ES/readme
+title: $:/core/readme
 
-Este plugin contiene componentes del núcleo de de TiddlyWiki, que incluyen:
+Esta extensión contiene componentes del núcleo de de TiddlyWiki, que incluyen:
 
-* Módulos de código de JavaScript
-* Iconos
+* Módulos de código JavaScript
+* Íconos
 * Plantillas necesarias para crear la interfaz de usuario de TiddlyWiki
-* Traducciones al castellano (ES-es) de las cadenas localizables de cadenas usadas por el núcleo
+* Traducciones al Español (ES-es) de las cadenas localizables usadas por el núcleo

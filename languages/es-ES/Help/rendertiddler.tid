@@ -1,12 +1,12 @@
 title: $:/language/Help/rendertiddler
-description: Convierte un tiddler individual en uno de un ContentType determinado
+description: Genera un tiddler individual en uno de un determinado ContentType
 
-Convierte un tiddler individual en uno de un determinado ContentType (por defecto `text/html`) y lo guarda con el nombre especificado:
+Genera un tiddler individual en uno de un determinado ContentType (por defecto `text/html`) y lo guarda en el nombre de archivo especificado:
 
 ```
 --rendertiddler <title> <filename> [<type>]
 ```
 
-Por defecto, el nombre de archivo es relativo al subdirectorio `output` de salida, en el directorio de la edición. 
-Puede usarse el comando `--output` para dirigirlo a otro directorio diferente. 
-Se crean automáticamente los directorios especificados en la ruta que no existan.
+Por defecto, el nombre de archivo es relativo al subdirectorio `output` (de salida) en el directorio de edición. Puede usarse el comando `--output` para dirigir la salida a otro directorio diferente.
+
+Directorios no existentes en la ruta al nombre de archivo son creados automáticamente.

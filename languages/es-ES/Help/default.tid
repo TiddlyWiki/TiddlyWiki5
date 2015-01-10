@@ -5,7 +5,7 @@ description:
 $:/language/Help/$(command)$
 \end
 ```
-usage: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
+Uso: tiddlywiki [<wikifolder>] [--<command> [<args>...]...]
 ```
 
 Comandos disponibles:
