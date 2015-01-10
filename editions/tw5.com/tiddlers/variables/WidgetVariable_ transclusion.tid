@@ -1,36 +1,46 @@
 caption: transclusion
 created: 20141002004621385
-modified: 20141002162057822
+modified: 20150107121000000
 tags: Variables
 title: WidgetVariable: transclusion
 type: text/vnd.tiddlywiki
 
-! Mechanism 
-The ''transclusion'' variable is set automatically by the transclude widget to contain a string that identifies the position of the current node within the widget tree. In the sidebar it is set to `{|$:/core/ui/PageTemplate/sidebar|||}` and within the tiddler "HelloThere" in the story river it is set to `{HelloThere|HelloThere|||}`. Each nested level of transclusion appends another curly bracketed list of symbols.
+The ''transclusion'' [[variable|Variables]] is automatically set by the TranscludeWidget to contain a string identifying the position of the current node within the widget tree.
 
-The QualifyMacro uses the ''transclusion'' variable to identify the stack of transcluded tiddlers.
+With the ''transclusion'' variable, the QualifyMacro identifies the stack of transcluded tiddlers.
 
-! Example
+In the sidebar, the ''transclusion'' variable is set to:<br>
+`{|$:/core/ui/PageTemplate/sidebar|||}`
+
+When the tiddler "HelloThere" is displayed in the story river ''transclusion'' is set to:<br> `{HelloThere|HelloThere|||}`
+
+Each nested level of transclusion appends another curly bracketed list of symbols.
+
+!! Example
+
+''identifying if we're in the sidebar or not''
 
 ```
 \define mymacro()
-Hello from mymacro
-<$list filter="[<transclusion>prefix[{|$:/core/ui/PageTemplate/sidebar|||}]]" emptyMessage="in a tiddler">
-	in the sidebar
+We are
+<$list
+filter="[<transclusion>prefix[{|$:/core/ui/PageTemplate/sidebar|||}]]"
+emptyMessage="in the story river.">
+in the sidebar.
 </$list>
 \end
 
 <<mymacro>>
 ```
 
-Result in story tiddler
+Result in a story tiddler:
 
-```
-Hello from mymacro in a tiddler
-```
+<<<
+We are in the story river.
+<<<
 
-Result in the sidebar
+Result in the sidebar:
 
-```
-Hello from mymacro in the sidebar
-```
+<<<
+We are in the sidebar.
+<<<

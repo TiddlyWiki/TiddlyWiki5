@@ -39,14 +39,14 @@ function Syncer(options) {
 	// Browser event handlers
 	if($tw.browser) {
 		// Set up our beforeunload handler
-		window.addEventListener("beforeunload",function(event) {
+		window.onbeforeunload = function(event) {
 			var confirmationMessage;
 			if(self.isDirty()) {
 				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
 				event.returnValue = confirmationMessage; // Gecko
 			}
 			return confirmationMessage;
-		});
+		};
 		// Listen out for login/logout/refresh events in the browser
 		$tw.rootWidget.addEventListener("tm-login",function() {
 			self.handleLoginEvent();

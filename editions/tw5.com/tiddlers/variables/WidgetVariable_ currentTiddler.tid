@@ -1,22 +1,41 @@
 caption: currentTiddler
 created: 20141001232824187
-modified: 20141002161518301
+modified: 20150107121000000
 tags: Variables
 title: WidgetVariable: currentTiddler
 type: text/vnd.tiddlywiki
 
-! Mechanism
+The ''currentTiddler'' [[variable|Variables]] contains the title of the current tiddler. 
 
-The ''currentTiddler'' variable contains the title of the current tiddler. 
+!! Usage
 
-The ListWidget assigns the list result to the ''currentTiddler'' variable, unless the `variable` attribute is specified.
+Various [[Widgets]] and [[Macros]] are by default applied with respect to the tiddler referenced via ''currentTiddler''. Within the [[ListWidget]] or TemplateTiddlers you are thus often not required to specify the tiddler title.
 
-A couple of [[Widgets]] and [[Macros]] by default apply to the tiddler according to the ''currentTiddler'' variable. 
+The following two examples are thus equivalent...
 
-The TranscludeWidget (or WikiText `{{||TemplateTitle}}`) transcludes a tiddler without changing the ''currentTiddler'' variable.
+* `<$view field=title/>`
+* `<$view field=title tiddler=<<currentTiddler>>/>`
 
-! Using currentTiddler Variable
+;TranscludeWidget
+: when [[transcluding|Transclusion]] a tiddler, ''currentTiddler'' is set to the tiddler being transcluded,
+: e.g. when using the [[WikiText shorthand|Transclusion in WikiText]]: `{{||TemplateTiddlerTitle}}`
+; ListWidget
+: overrides the ''currentTiddler'' variable with the currently iterated list-item,
+: unless a custom `variable` attribute is specified
+; TiddlerWidget
+: sets the ''currentTiddler'' variable for its inner scope
 
-These mechanisms together allow you to write references like `<$view field="title" format="link"/>` in TemplateTiddlers or inside the ListWidget hierarchy without explicitly specifying the tiddler that it applies to.
+!! Example
 
-See also [[WidgetVariable: storyTiddler]] and [[WidgetVariable: currentTiddler]]
+```
+<$view tiddler=<<currentTiddler>> field=title/>
+```
+
+<<<
+<$view tiddler=<<currentTiddler>> field=title/>
+<<<
+
+!! Other Standard Variables
+
+* [[WidgetVariable: storyTiddler]]
+* [[WidgetVariable: transclusion]]
