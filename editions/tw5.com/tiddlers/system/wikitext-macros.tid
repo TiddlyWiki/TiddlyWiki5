@@ -30,7 +30,7 @@ $src$
 \end
 
 \define tw-code(tiddler)
-<pre><code><$view tiddler="$tiddler$" format="text"/></code></pre>
+<$codeblock language={{$tiddler$!!type}} code={{$tiddler$}}/>
 \end
 
 \define tw-code-link(tiddler)
