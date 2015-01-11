@@ -24,13 +24,13 @@ Variables are defined by...
 
 !!Using Variables
 
-Variables are used via...
+Variables are used...
 
-; shorthand
+; via shorthand
 :`<<variableName>>`
-; variable substitution within [[macros|Macros]]
+; via variable substitution within [[macros|Macros]]
 :`$(variableName)$`
-; as variable operands in [[filter expressions|Introduction to Filters]]
+; as parameters to [[filter steps|Filters]]
 : `[operator<variableName>]`
 ; in [[widgets|Widgets]]
 : internally, or as widget attributes
