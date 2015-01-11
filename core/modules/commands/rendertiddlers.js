@@ -38,9 +38,9 @@ Command.prototype.execute = function() {
 		pathname = path.resolve(this.commander.outputPath,this.params[2]),
 		type = this.params[3] || "text/html",
 		extension = this.params[4] || ".html",
-		deletedirectory = (this.params[5] || "") != "noclean",
+		deleteDirectory = (this.params[5] || "") != "noclean",
 		tiddlers = wiki.filterTiddlers(filter);
-	if(deletedirectory){
+	if(deleteDirectory){
 		$tw.utils.deleteDirectory(pathname);
 	}
 	$tw.utils.createDirectory(pathname);
