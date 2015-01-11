@@ -42,6 +42,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc85368fd48f1e5878018a4e00b6c17d436e67a9]] [[Highlight Plugin]] to work when generating static files under Node.js
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c296f14210545374124df5d4ae9ffb402ed73561]] problem with case-insensitive filing systems (eg Windows)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1354]] mobile metadata to static page templates
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1352]] added "noclean" parameter to RenderTiddlersCommand
 
 !! Changes affecting plugin authors
 
