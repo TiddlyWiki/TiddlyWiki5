@@ -1,0 +1,140 @@
+created: 20150110182600000
+title: Documentation Macros
+tags: [[Improving TiddlyWiki Documentation]]
+
+The following macros are used throughout the documentation.
+
+!General
+
+|!Macro |!Used for |!Example |
+|doc-def |the defining instance of a term |<<doc-def widget>> |
+|doc-em |minor emphasis within a sentence |<<doc-em not>> |
+|doc-ph |a placeholder for the user to fill in |<<doc-ph tagname>> |
+|doc-strong |major emphasis within a tiddler |<<doc-strong Important!>> |
+|doc-w |a mention of an ordinary word or phrase |<<doc-w "hello world">> |
+
+!Tiddlers and fields
+
+|!Macro |!Used for |!Example |
+|doc-tiddler |a tiddler title|<<doc-tiddler Example>> |
+|doc-tag |a tag |<<doc-tag Example>> |
+|doc-field|a field name|<<doc-field example>> |
+|doc-field-value|a field value|<<doc-field-value "example value">> |
+|doc-var|a variable or macro name|<<doc-var currentTiddler>> |
+|doc-widget|a widget name|<<doc-widget list>> |
+
+!Links
+
+|!Macro |!Used for |!Example |
+|doc-link |a link containing WikiText |<<doc-link "^^an^^ ~~example~~" Example>> |
+|doc-clink |a code link |<<doc-clink `<$list>` ListWidget>> |
+
+!User interface
+
+|!Macro |!Used for |!Example |
+|doc-key |a key on the keyboard |<<doc-key Escape>> |
+|doc-key-combo |a key combination |<<doc-key-combo Ctrl Enter>> |
+|doc-input |text entered by the user |<<doc-input "npm install -g tiddlywiki">> |
+|doc-output |text output by the system |<<doc-output "Serving on 127.0.0.1:8080">> |
+
+!Tabs
+
+|!Macro |!Used for |!Example |
+|doc-sidebar-tab |the name of a sidebar tab |<<doc-sidebar-tab More>> |
+|doc-more-tab |the name of a subtab of the More tab |<<doc-more-tab Shadows>> |
+|doc-info-tab |the name of a tiddler info tab |<<doc-info-tab Fields>> |
+|doc-controlpanel-tab |the name of a Control Panel tab |<<doc-controlpanel-tab Settings>> |
+|doc-advancedsearch-tab |the name of an Advanced Search tab |<<doc-advancedsearch-tab Filter>> |
+|doc-toc-tab |name of the tw5.com TOC tab |<<doc-toc-tab>> |
+|doc-example-tab |an example tab name |<<doc-example-tab "Notes">> |
+
+!!Parameters for doc-sidebar-tab
+
+|Open |<<doc-sidebar-tab Open>> |
+|Recent |<<doc-sidebar-tab Recent>> |
+|Tools |<<doc-sidebar-tab Tools>> |
+|More |<<doc-sidebar-tab More>> |
+
+!!Parameters for doc-more-tab
+
+|All |<<doc-more-tab All>> |
+|Recent |<<doc-more-tab Recent>> |
+|Tags |<<doc-more-tab Tags>> |
+|Missing |<<doc-more-tab Missing>> |
+|Drafts |<<doc-more-tab Drafts>> |
+|Orphans |<<doc-more-tab Orphans>> |
+|Types |<<doc-more-tab Types>> |
+|System |<<doc-more-tab System>> |
+|Shadows |<<doc-more-tab Shadows>> |
+
+!!Parameters for doc-info-tab
+
+|Tools |<<doc-info-tab Tools>> |
+|References |<<doc-info-tab References>> |
+|Tagging |<<doc-info-tab Tagging>> |
+|List |<<doc-info-tab List>> |
+|Listed |<<doc-info-tab Listed>> |
+|Fields |<<doc-info-tab Fields>> |
+|Advanced |<<doc-info-tab Advanced>> |
+
+!!Parameters for doc-controlpanel-tab
+
+|Info |<<doc-controlpanel-tab Info>> |
+|Appearance |<<doc-controlpanel-tab Appearance>> |
+|Settings |<<doc-controlpanel-tab Settings>> |
+|Saving |<<doc-controlpanel-tab Saving>> |
+|Plugins |<<doc-controlpanel-tab Plugins>> |
+
+!!Parameters for doc-advancedsearch-tab
+
+|Standard |<<doc-advancedsearch-tab Standard>> |
+|System |<<doc-advancedsearch-tab System>> |
+|Shadows |<<doc-advancedsearch-tab Shadows>> |
+|Filter |<<doc-advancedsearch-tab Filter>> |
+
+!Buttons
+
+|!Macro |!Used for |!Example |
+|doc-button |a standard button name and icon |<<doc-button "new-tiddler">> |
+
+!!Parameters for doc-button
+
+!!!Tiddler toolbar
+
+|clone |<<doc-button "clone">> |
+|close |<<doc-button "close">> |
+|close-others |<<doc-button "close-others">> |
+|edit |<<doc-button "edit">> |
+|export-tiddler |<<doc-button "export-tiddler">> |
+|info |<<doc-button "info">> |
+|more-tiddler-actions |<<doc-button "more-tiddler-actions">> |
+|new-here |<<doc-button "new-here">> |
+|new-journal-here |<<doc-button "new-journal-here">> |
+|permalink |<<doc-button "permalink">> |
+
+!!!Edit-mode toolbar
+
+|cancel |<<doc-button "cancel">> |
+|delete |<<doc-button "delete">> |
+|save |<<doc-button "save">> |
+
+!!!Page toolbar
+
+|advanced-search |<<doc-button "advanced-search">> |
+|close-all |<<doc-button "close-all">> |
+|control-panel |<<doc-button "control-panel">> |
+|encryption |<<doc-button "encryption">> |
+|export-page |<<doc-button "export-page">> |
+|full-screen |<<doc-button "full-screen">> |
+|home |<<doc-button "home">> |
+|import |<<doc-button "import">> |
+|language |<<doc-button "language">> |
+|more-page-actions |<<doc-button "more-page-actions">> |
+|new-journal |<<doc-button "new-journal">> |
+|new-tiddler |<<doc-button "new-tiddler">> |
+|permaview |<<doc-button "permaview">> |
+|refresh |<<doc-button "refresh">> |
+|save-wiki |<<doc-button "save-wiki">> |
+|storyview |<<doc-button "storyview">> |
+|tag-manager |<<doc-button "tag-manager">> |
+|theme |<<doc-button "theme">> |

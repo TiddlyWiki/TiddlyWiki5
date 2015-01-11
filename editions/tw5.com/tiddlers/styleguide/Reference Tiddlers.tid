@@ -1,25 +1,26 @@
 created: 20141226192500000
+modified: 20150110182100000
 title: Reference Tiddlers
-tags: documenting
+tags: [[Improving TiddlyWiki Documentation]]
 
-Reference tiddlers offer raw information in a comprehensive interlinked way. The reader is likely to be an intermediate or expert user.
+<<doc-def "Reference tiddlers">> offer raw information in a comprehensive interlinked way. The reader is likely to be an intermediate or expert user.
 
 There are several subcategories:
 
-* ''Concepts''
-** With definitions, together forming a glossary
-* ''User manual''
-** Presenting technical details of ~WikiText features
-** Subcategorised: messages, operators, widgets, etc
-* ''Developer manual''
-** Presenting technical details of ~TiddlyWiki's internal architecture
+;Concepts
+* With definitions, together forming a glossary
+
+;User manual
+* Presenting technical details of ~WikiText features
+* Subcategorised: messages, operators, widgets, etc
+
+;Developer manual
+* Presenting technical details of ~TiddlyWiki's internal architecture
 
 Reference material is written in a terse, formal style that avoids referring to the reader, and instead focuses on how ~TiddlyWiki itself behaves. The passive voice is often suitable:
 
-* "the template can be specified as a tiddler" rather than "specify the template as a tiddler"
-* "the widget can be used for various purposes" rather than "you can use the widget for various purposes"
-* But "this widget has several possible uses" is better, because it is more succinct
+* <<doc-w "the template is specified as a tiddler">> rather than <<doc-w "specify the template as a tiddler">>
+* <<doc-w "the widget can be used for various purposes">> rather than <<doc-w "you can use the widget for various purposes">>
+* But <<doc-w "this widget has several possible uses">> is better, because it is less convoluted and more succinct
 
-Contracted verb forms are normally avoided in reference tiddlers.
-
-To reduce the risk that the reader will overlook the word "not", it can be italicised.
+Most contracted verb forms are avoided in reference tiddlers. But those ending in <<doc-w "n't">> (<<doc-w "aren't">>, <<doc-w "doesn't">>, <<doc-w "hasn't">>, <<doc-w "isn't">>, etc) are acceptable, as they make it less easy to accidentally overlook the word <<doc-w not>>.
