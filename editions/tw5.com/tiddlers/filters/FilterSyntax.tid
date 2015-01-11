@@ -4,7 +4,9 @@ tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
 
-[[Filter expressions|Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, you can write your own filter expressions without needing to understand this tiddler.
+[[Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, [[you can learn to write filters|Introduction to filter notation]] without needing to understand this tiddler.
+
+When a filter is evaluated, it generates a <<doc-def result>>, which is an ordered set of items. No item can appear more than once in the result. The items are usually tiddler titles, but certain specialised filters generate other items, such as Node.js command words.
 
 ---
 
@@ -13,14 +15,14 @@ type: text/vnd.tiddlywiki
 { [:whitespace] ("+" | :- | "-") run }
 """/>
 
-A sequence of runs is evaluated from left to right, as follows:
+A <<doc-def filter>> is a sequence of runs, evaluated from left to right.
 
-|!Sequence |!Interpretation |
-|`run1 run2` |union of the sets, i.e. the tiddlers in //either// run1 //or// run2 |
-|`run1 -run2` |difference of the sets, i.e. run1 but excluding any tiddlers in run2 |
-|`run1 +run2` |run2 takes run1 as its input |
+Each run receives an <<doc-def "input set">>, which it modifies to produce a result. The first run in a sequence receives `[all[tiddlers]]` as its input, i.e. the set of all non-missing tiddlers. The second run receives the result of the first run as its input, and so on.
 
-The first run takes `[all[tiddlers]]` as its input, i.e. the set of all non-missing tiddlers.
+|!Run |!Interpretation |!Result |
+|`run` |union of sets|input OR run |
+|`+run` |intersection of sets |input AND run |
+|`-run` |difference of sets|input AND NOT run |
 
 ---
 
@@ -28,45 +30,59 @@ The first run takes `[all[tiddlers]]` as its input, i.e. the set of all non-miss
 : <$railroad text="""
 ( "[" {step} "]"
   |
-  '"' [{/'any character except "'/}] '"'
-  |
-  "'" [{/"any character except '"/}] '"'
-  |
-  [{/"any character except [ ] or whitespace"/}]
+  [:{/"anything but [ ] or whitespace"/}]
 )
 """/>
-* The last three options are short for `[title[text]]`
-* A run evaluates each of its steps and returns the intersection of the results
+
+<!-- The following has been removed from the diagram until issue #1346 is addressed:
+  '"' [:{/'anything but "'/}] '"'
+  |
+  "'" [:{/"anything but '"/}] '"'
+  |
+-->
+
+The lower option, e.g. matching `HelloThere`, is short for `[title[HelloThere]]`.
+
+A <<doc-def run>> is a sequence of steps, evaluated from left to right.
+
+The run's result is basically the intersection of the step results. In other words, the run's result contains the items that are found in <<doc-em all>> of the step results.
+
+However, a few operators (known as <<doc-def selectors>>) ignore any preceding steps in the same run, and completely replace the result so far. Examples of this are <<doc-clink "commands" "FilterOperator: commands">> and <<doc-clink "title" "FilterOperator: title">>, but not <<doc-clink "field:title" "FilterOperator: field">>.
 
 ---
 
 ;step
 : <$railroad text="""
-[:"!"] operator parameter
+[:"!"] [:method] parameter
 """/>
-* A step returns a set of tiddlers, in the form of a TitleList
+
+If the method is omitted, it defaults to `title`.
 
 ---
 
-;operator
+;method
 : <$railroad text="""
-( keyword [:":" fieldname] | fieldname )
+operator [:":" suffix]
 """/>
-* Keywords are reserved names (<code>[[is|FilterOperator: is]]</code>, <code>[[has|FilterOperator: has]]</code>, <code>[[tag|FilterOperator: tag]]</code>, etc) of specific filtering functions
-* A fieldname on its own implies the keyword `field`
-* An entirely omitted operator defaults to `title`
+
+The operator is drawn from a list of [[predefined names|FilterOperators]].
+
+The suffix is additional information, usually the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
+
+An unrecognised operator name is is treated as the suffix to the <<doc-clink "field" "FilterOperator: field">> operator.
 
 ---
 
 ;parameter
 : <$railroad text="""
-( "[" [{/"any character except ]"/}] "]"
+( "[" [:{/"anything but ]"/}] "]"
   |
-  "{" [{/"any character except }"/}] "}"
+  "{" [:{/"anything but }"/}] "}"
   |
-  "<" [{/"any character except >"/}] ">"
+  "<" [:{/"anything but >"/}] ">"
 )
 """/>
+
 * `[`...`]` encloses a literal parameter
 * `{`...`}` encloses a TextReference parameter
 * `<`...`>` encloses a [[variable|Variables]] parameter
@@ -77,4 +93,3 @@ The first run takes `[all[tiddlers]]` as its input, i.e. the set of all non-miss
 : <$railroad text="""
 {( "space" | "tab" | "linefeed" | "return" | "vertical tab" | "formfeed" )}
 """/>
-* A match for the JavaScript regular expression `\s+`
