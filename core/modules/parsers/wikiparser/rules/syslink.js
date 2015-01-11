@@ -18,7 +18,7 @@ exports.types = {inline: true};
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = /~?(?:\$):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/mg;
+	this.matchRegExp = /~?\$:[^\s<|]+(?:[^\s<|])/mg;
 };
 
 exports.parse = function() {
