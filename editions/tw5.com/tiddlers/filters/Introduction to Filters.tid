@@ -37,7 +37,7 @@ For instance, here's how to select all the tiddlers that have been tagged <<doc-
 [tag[Recipe]]
 ```
 
-We can reverse the meaning by adding an exclamation mark `!` just before the method. For example, we can select any tiddlers that do <<em not>> have the <<doc-tag Recipe>> tag:
+We can reverse the meaning by adding an exclamation mark `!` just before the method. For example, we can select any tiddlers that do <<doc-em not>> have the <<doc-tag Recipe>> tag:
 
 ```
 [!tag[Recipe]]
@@ -67,9 +67,9 @@ The filters we've looked at so far have involved just one step each. But you can
 
 Notice how the entire run is contained in a single pair of square brackets.
 
-A tiddler has to match <<em all>> of the steps in a run. So the example above retrieves vegetarian recipes (other than soups) for 4 people.
+A tiddler has to match <<doc-em all>> of the steps in a run. So the example above retrieves vegetarian recipes (other than soups) for 4 people.
 
-A <<em sequence>> of runs will select the tiddlers that match <<em any>> of the runs. We can use this to find recipes that serve either 3, 4 or 5 people:
+A <<doc-em sequence>> of runs will select the tiddlers that match <<doc-em any>> of the runs. We can use this to find recipes that serve either 3, 4 or 5 people:
 
 ```
 [serving[3]] [serving[4]] [serving[5]]
@@ -87,9 +87,9 @@ By default, each run considers every tiddler in the wiki. But we can use a `+` s
 [serving[3]] [serving[4]] [serving[5]] +[tag[Vegetarian]] +[sort[title]]
 ```
 
-This selects recipes for 3, 4 or 5 people, then filters <<em those>> to remove the vegetarian ones, and finally sorts any that are left into alphabetical order of title.
+This selects recipes for 3, 4 or 5 people, then filters <<doc-em those>> to remove the vegetarian ones, and finally sorts any that are left into alphabetical order of title.
 
-In a similar way, we can use a `-` sign to <<em remove>> a run's tiddlers from the result so far. Here we select all vegetarian recipes apart from two:
+In a similar way, we can use a `-` sign to <<doc-em remove>> a run's tiddlers from the result so far. Here we select all vegetarian recipes apart from two:
 
 ```
 [tag[Vegetarian]] -[title[ScrambledEggs]] -BeansOnToast
