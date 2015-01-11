@@ -23,6 +23,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Migrated|https://github.com/Jermolene/TiddlyWiki5/commit/230066eeae9ace8336612e02c78f8cdaa3f717e4]] functionality of "Sticky Titles" theme into "Vanilla"/"Snow White". This means that tiddler titles will stick to the top of the window during scrolling on browsers that support `position: sticky` (such as Safari and Firefox)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cb7090c40489c81e8c5dfb8cbbdee2c60998c3e]] icons to [[$:/AdvancedSearch]], [[$:/ControlPanel]] and [[$:/TagManager]]
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/b9129d77e99970579074bdb4f9c2ef4b77b812c6]] wording of tiddler "save" button to "store"
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/1103]] automatic linking of system tiddlers such as $:/ControlPanel
 
 !! Hackability Improvements
 
@@ -53,6 +54,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[@Arlen22|https://github.com/Arlen22]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@Drakor|https://github.com/Drakor]]
+* [[@dpdannemiller|https://github.com/dpdannemiller]]
 * [[@evgeniy-gryaznov|https://github.com/evgeniy-gryaznov]]
 * [[@felixhayashi|https://github.com/felixhayashi]]
 * [[@gernert|https://github.com/gernert]]
