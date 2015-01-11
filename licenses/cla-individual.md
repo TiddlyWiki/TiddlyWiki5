@@ -204,3 +204,5 @@ Evgeniy Gryaznov, @evgeniy-gryaznov, 2014/12/23
 Andrew Harrison, @infurnoape, 2014/12/27
 
 Arlen Beiler, @arlen22, 2014/12/30
+
+David P Dannemiller, @dpdannemiller, 2015/01/10
