@@ -1,12 +1,12 @@
-created: 20141226192500000
+created: 20150110182900000
 title: Spelling
-tags: documenting
+tags: [[Improving TiddlyWiki Documentation]]
 
 Because ~TiddlyWiki is of British origin, its English documentation uses [[British spelling in preference to US spelling|http://en.wikipedia.org/wiki/American_and_British_English_spelling_differences]].
 
-Words like "customise" are spelled "-ise", not "-ize".
+Words like <<doc-w customise>> are spelled <<doc-w -ise>>, not <<doc-w -ize>>.
 
-Standard technical acronyms are written in upper case, without dots: `HTML`, not `html` or `H.T.M.L.`
+Standard technical acronyms are written in upper case, without dots: <<doc-w HTML>>, not <<doc-w html>> or <<doc-w H.T.M.L.>>
 
 Avoid arbitrarily abbreviating words and sentences. But the following abbreviations are acceptable:
 

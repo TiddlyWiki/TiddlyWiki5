@@ -1,0 +1,57 @@
+title: $:/editions/tw5.com/doc-styles
+tags: $:/tags/Stylesheet
+
+.doc-def {
+	font-style: normal;
+	font-weight: bold;
+}
+
+.doc-em {
+	font-style: italic;
+	font-variant: small-caps;
+	text-decoration: none;
+}
+
+.doc-strong {
+	color: <<colour alert-highlight>>;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.doc-foreign {
+	font-style: italic;
+}
+
+.doc-ph {
+	border: none;
+	color: <<color foreground>>;
+	font-style: italic;
+}
+
+.doc-button,
+.doc-tab,
+.doc-tag,
+.doc-tiddler,
+.doc-field,
+.doc-field-value,
+.doc-var,
+.doc-widget {
+	background: <<color background>>;
+	border: none;
+	color: <<color very-muted-foreground>>;
+	font-weight: bold;
+	padding: 0;
+}
+
+.doc-button svg {
+	height: 1em;
+}
+
+.doc-key {
+	color: <<color very-muted-foreground>>;
+	font-weight: bold;
+}
+
+.doc-clink code {
+	color: <<colour tiddler-link-foreground>>;
+}
