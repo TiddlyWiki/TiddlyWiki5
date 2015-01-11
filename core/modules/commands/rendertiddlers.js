@@ -38,8 +38,11 @@ Command.prototype.execute = function() {
 		pathname = path.resolve(this.commander.outputPath,this.params[2]),
 		type = this.params[3] || "text/html",
 		extension = this.params[4] || ".html",
+		deleteDirectory = (this.params[5] || "") != "noclean",
 		tiddlers = wiki.filterTiddlers(filter);
-	$tw.utils.deleteDirectory(pathname);
+	if(deleteDirectory){
+		$tw.utils.deleteDirectory(pathname);
+	}
 	$tw.utils.createDirectory(pathname);
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
