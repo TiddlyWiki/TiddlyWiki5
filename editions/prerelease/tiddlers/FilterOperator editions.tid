@@ -1,0 +1,8 @@
+created: 20150111145738451
+modified: 20150111145738451
+tags: Filters
+caption: editions
+title: FilterOperator: editions
+type: text/vnd.tiddlywiki
+
+The ''editions'' filter operator returns the names of all the available editions. It is only available under Node.js.

@@ -1,0 +1,10 @@
+created: 20150111145738451
+modified: 20150111145738451
+tags: Filters
+caption: editiondescription
+title: FilterOperator: editiondescription
+type: text/vnd.tiddlywiki
+
+The ''editiondescription'' filter operator returns a description string for each edition name in the current results. It is only available under Node.js.
+
+Also see [[FilterOperator: editions]].
