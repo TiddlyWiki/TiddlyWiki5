@@ -78,7 +78,7 @@ A <<doc-em sequence>> of runs will select the tiddlers that match <<doc-em any>>
 If we want to ignore vegetarian recipes that serve 4, we can say this:
 
 ```
-[serving[3]] [serving[4]!tag[vegetarian]] [serving[5]]
+[serving[3]] [serving[4]!tag[Vegetarian]] [serving[5]]
 ```
 
 By default, each run considers every tiddler in the wiki. But we can use a `+` sign to force a run to consider only the tiddlers that were selected by the preceding runs:
