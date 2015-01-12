@@ -22,7 +22,7 @@ You can omit the square brackets when a title doesn't contain any spaces:
 The double square brackets are actually a shorthand for this:
 
 ```
-[title[Scrambled eggs]]
+[title[ScrambledEggs]]
 ```
 
 … which gives us the <<doc-def "general model">> for any filter:
