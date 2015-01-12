@@ -74,7 +74,7 @@ RailroadWidget.prototype.renderSvg = function(parser,div) {
 
 RailroadWidget.prototype.patchLinks = function(node) {
 	var self = this;
-	if(node.hasChildNodes()) {
+	if(!$tw.node && node.hasChildNodes()) {
 		var children = node.childNodes;
 		for(var i=0; i<children.length; i++) {
 			var child = children[i];

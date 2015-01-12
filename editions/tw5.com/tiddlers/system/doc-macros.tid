@@ -1,0 +1,38 @@
+title: $:/editions/tw5.com/doc-macros
+tags: $:/tags/Macro
+
+\define doc-if(cond,then,else) <$reveal type="nomatch" default="$cond$" text="">$then$</$reveal><$reveal type="match" default="$cond$" text="">$else$</$reveal>
+
+\define doc-def(_) <dfn class="doc-def">$_$</dfn>
+\define doc-em(_) <em class="doc-em">$_$</em>
+\define doc-strong(_) <strong class="doc-strong">$_$</strong>
+\define doc-ph(_) <var class="doc-ph">$_$</var>
+\define doc-w(_) "$_$"
+
+\define doc-tiddler(_) <code class="doc-tiddler">$_$</code>
+\define doc-tag(_) <code class="doc-tag">$_$</code>
+\define doc-field(_) <code class="doc-field">$_$</code>
+\define doc-field-value(_) <code class="doc-field-value">$_$</code>
+\define doc-var(_) <code class="doc-var">$_$</code>
+\define doc-widget(_) <code class="doc-widget">$_$</code>
+
+\define doc-link(_,to) <$link to="$to$">$_$</$link>
+\define doc-clink(_,to) <span class="doc-clink"><<doc-link """$_$""" "$to$">></span>
+
+\define doc-key(_) <span class="doc-key">$_$</span>
+\define doc-combo-key(_) <$macrocall $name="doc-if" cond="$_$" then="<<doc-key '$_$'>>"/>
+\define doc-key-combo(1,2,3,4) <<doc-combo-key "$1$">><<doc-if "$2$" +>><<doc-combo-key "$2$">><<doc-if "$3$" +>><<doc-combo-key "$3$">><<doc-if "$4$" +>><<doc-combo-key "$4$">>
+
+\define doc-input(_) `$_$`
+\define doc-output(_) `$_$`
+
+\define doc-tab(_) <span class="doc-tab">{{$_$!!caption}}</span>
+\define doc-sidebar-tab(_) <<doc-tab "$:/core/ui/SideBar/$_$">>
+\define doc-more-tab(_) <<doc-tab "$:/core/ui/MoreSideBar/$_$">>
+\define doc-info-tab(_) <<doc-tab "$:/core/ui/TiddlerInfo/$_$">>
+\define doc-controlpanel-tab(_) <<doc-tab "$:/core/ui/ControlPanel/$_$">>
+\define doc-advancedsearch-tab(_) <<doc-tab "$:/core/ui/AdvancedSearch/$_$">>
+\define doc-toc-tab() <<doc-tab "TableOfContents">>
+\define doc-example-tab(_) <span class="doc-tab">$_$</span>
+
+\define doc-button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>

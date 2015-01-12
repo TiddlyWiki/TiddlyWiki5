@@ -10,6 +10,8 @@ Each diagram starts on the left and ends on the right. Simply follow any line fr
 start [:optional] {repeated +","} end
 """/>
 
+In the example above, a comma appears between each occurrence of the `repeated` item. The comma path runs from right to left, and can only be reached by first passing through `repeated`.
+
 Characters in round boxes are literal, i.e. they denote themselves. A name in a rectangular box denotes a further railroad diagram.
 
-The railroad diagrams on this site are generated using the [[Railroad Plugin]].
+The railroad diagrams on this site are generated with the [[Railroad Plugin]].

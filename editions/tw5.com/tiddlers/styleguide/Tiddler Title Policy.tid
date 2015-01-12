@@ -1,0 +1,22 @@
+created: 20150110183300000
+modified: 20150110190400000
+title: Tiddler Title Policy
+tags: [[Improving TiddlyWiki Documentation]]
+
+Many documentation tiddlers, especially the [[reference ones|Reference Tiddlers]], are concerned with a single concept. Their titles should be succinct noun phrases like <<doc-tiddler "List Widget">> or <<doc-tiddler "Tiddler Fields">>.
+
+Each of the main words of such a title begins with a capital letter. Minor words such as <<doc-w and>>, <<doc-w or>>, <<doc-w the>>, <<doc-w to>> and <<doc-w with>> do not.
+
+Tags also follow this pattern.
+
+Titles of this kind are plural if they denote a category of items, e.g. <<doc-tiddler "Keyboard Shortcuts">> or <<doc-tiddler "Tiddler Fields">>. Such titles are used to tag more specific tiddlers within the category.
+
+Where a concept is an item rather than a category, its tiddler has a singular title, e.g. <<doc-tiddler "List Widget">>, <<doc-tiddler "Tag Operator">>.
+
+Avoid starting a title with the word <<doc-w the>>.
+
+In the past, many tiddlers had CamelCase titles. This is gradually being phased out of the documentation to improve readability. ~CamelCase titles should no longer be used, even for tags, except in cases like <<doc-tiddler ~JavaScript>> where that is the standard spelling.
+
+[[Instruction tiddlers|Instruction Tiddlers]] often have longer titles that can be more complicated than just a noun phrase, e.g. <<doc-tiddler "Ten reasons to switch to ~TiddlyWiki">> These titles use sentence case, i.e. only the first word (and any proper names) starts with a capital letter.
+
+How-to tiddlers have titles that begin with <<doc-w "How to">>, e.g. <<doc-tiddler "How to edit a tiddler">>. Avoid titles like <<doc-tiddler "Editing tiddlers">>, because a less fluent English speaker could misunderstand that as the name of a category of tiddlers.

@@ -4,8 +4,14 @@ tags: Concepts
 title: FilterOperators
 type: text/vnd.tiddlywiki
 
-Filter operators are the individual elements of [[filters|Filters]]. See [[Introduction to Filters]] for details.
+A <<doc-def "filter operator">> is a predefined name attached to an individual step in a [[filter|Filters]]. It defines how that step is to be performed.
 
-The full list of available filter operators is:
+A typical step is written as `[operator[parameter]]`, although not all of the operators need a parameter.
 
-<<list-links "[tag[Filters]]">>
+Here are the most commonly used operators:
+
+<<list-links "[tag[CommonFilters]]">>
+
+The complete list is:
+
+<<list-links "[tag[Filters]] -[[Introduction to filter notation]] -[[Filter Syntax]]">>
