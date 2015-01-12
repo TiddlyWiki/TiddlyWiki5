@@ -345,12 +345,8 @@ var temp = (function(options) {
 		this.up = this.item.up;
 		this.down = Math.max(Diagram.ARC_RADIUS*2, this.item.down + Diagram.VERTICAL_SEPARATION + this.rep.up + this.rep.down);
 
-/* TiddlyWiki: code added, including moving calculation of distanceFromY (of the repeat arc) to here */
+/* TiddlyWiki: moved calculation of distanceFromY (of the repeat arc) to here */
 		this.distanceFromY = Math.max(Diagram.ARC_RADIUS*2, this.item.down+Diagram.VERTICAL_SEPARATION+this.rep.up);
-		if(this.wantArrow && this.distanceFromY < Diagram.ARC_RADIUS*3) {
-			this.distanceFromY += Diagram.ARC_RADIUS/2;
-			this.down += Diagram.ARC_RADIUS/2;
-		}
 	}
 	subclassOf(OneOrMore, FakeSVG);
 	OneOrMore.prototype.needsSpace = true;
@@ -376,7 +372,7 @@ var temp = (function(options) {
 		
 /* TiddlyWiki: code added */
 		if(this.wantArrow) {
-			var arrowSize = 2/3 * Diagram.ARC_RADIUS;
+			var arrowSize = Diagram.ARC_RADIUS/2;
 			Path(x-arrowSize, y+distanceFromY/2 + arrowSize/2, {class:"arrow"}).
 				line(arrowSize, -arrowSize).line(arrowSize, arrowSize).addTo(this);
 		}
