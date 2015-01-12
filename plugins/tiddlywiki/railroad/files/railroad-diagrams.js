@@ -111,9 +111,9 @@ var temp = (function(options) {
 		return str;
 	}
 
-	function Path(x,y) {
-		if(!(this instanceof Path)) return new Path(x,y);
-		FakeSVG.call(this, 'path');
+	function Path(x,y,attrs) {
+		if(!(this instanceof Path)) return new Path(x,y,attrs);
+		FakeSVG.call(this, 'path', attrs);
 		this.attrs.d = "M"+x+' '+y;
 	}
 	subclassOf(Path, FakeSVG);
@@ -154,6 +154,11 @@ var temp = (function(options) {
 		// All paths in this library start/end horizontally.
 		// The extra .5 ensures a minor overlap, so there's no seams in bad rasterizers.
 		this.attrs.d += 'h.5';
+		return this;
+	}
+/* TiddlyWiki: added support for arbitrary straight lines */
+	Path.prototype.line = function(dx,dy) {
+		this.attrs.d += "l"+dx+" "+dy;
 		return this;
 	}
 
@@ -325,15 +330,27 @@ var temp = (function(options) {
 			throw "Unknown value for Optional()'s 'skip' argument.";
 	}
 
-	function OneOrMore(item, rep) {
-		if(!(this instanceof OneOrMore)) return new OneOrMore(item, rep);
+/* TiddlyWiki: added wantArrow */
+	function OneOrMore(item, rep, wantArrow) {
+		if(!(this instanceof OneOrMore)) return new OneOrMore(item, rep, wantArrow);
 		FakeSVG.call(this, 'g');
+
+/* TiddlyWiki: code added */
+		this.wantArrow = wantArrow;
+
 		rep = rep || (new Skip);
 		this.item = wrapString(item);
 		this.rep = wrapString(rep);
 		this.width = Math.max(this.item.width, this.rep.width) + Diagram.ARC_RADIUS*2;
 		this.up = this.item.up;
 		this.down = Math.max(Diagram.ARC_RADIUS*2, this.item.down + Diagram.VERTICAL_SEPARATION + this.rep.up + this.rep.down);
+
+/* TiddlyWiki: code added, including moving calculation of distanceFromY (of the repeat arc) to here */
+		this.distanceFromY = Math.max(Diagram.ARC_RADIUS*2, this.item.down+Diagram.VERTICAL_SEPARATION+this.rep.up);
+		if(this.wantArrow && this.distanceFromY < Diagram.ARC_RADIUS*3) {
+			this.distanceFromY += Diagram.ARC_RADIUS/2;
+			this.down += Diagram.ARC_RADIUS/2;
+		}
 	}
 	subclassOf(OneOrMore, FakeSVG);
 	OneOrMore.prototype.needsSpace = true;
@@ -350,16 +367,25 @@ var temp = (function(options) {
 		Path(x+this.width-Diagram.ARC_RADIUS,y).right(Diagram.ARC_RADIUS).addTo(this);
 
 		// Draw repeat arc
-		var distanceFromY = Math.max(Diagram.ARC_RADIUS*2, this.item.down+Diagram.VERTICAL_SEPARATION+this.rep.up);
+/* TiddlyWiki: moved calculation of distanceFromY from here to constructor */
+		var distanceFromY = this.distanceFromY;
+		
 		Path(x+Diagram.ARC_RADIUS,y).arc('nw').down(distanceFromY-Diagram.ARC_RADIUS*2).arc('ws').addTo(this);
 		this.rep.format(x+Diagram.ARC_RADIUS, y+distanceFromY, this.width - Diagram.ARC_RADIUS*2).addTo(this);
 		Path(x+this.width-Diagram.ARC_RADIUS, y+distanceFromY).arc('se').up(distanceFromY-Diagram.ARC_RADIUS*2).arc('en').addTo(this);
+		
+/* TiddlyWiki: code added */
+		if(this.wantArrow) {
+			var arrowSize = 2/3 * Diagram.ARC_RADIUS;
+			Path(x-arrowSize, y+distanceFromY/2 + arrowSize/2, {class:"arrow"}).
+				line(arrowSize, -arrowSize).line(arrowSize, arrowSize).addTo(this);
+		}
 
 		return this;
 	}
 
-	function ZeroOrMore(item, rep, skip) {
-		return Optional(OneOrMore(item, rep), skip);
+	function ZeroOrMore(item, rep, skip, wantArrow) {
+		return Optional(OneOrMore(item, rep, wantArrow), skip);
 	}
 
 	function Start() {

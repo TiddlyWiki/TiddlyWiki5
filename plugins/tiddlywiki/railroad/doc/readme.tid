@@ -8,6 +8,7 @@ The content of the `<$railroad>` widget is ignored.
 
 |!Attribute |!Description |
 |text |Text in a special syntax that defines the diagram's layout |
+|arrow |If set to `no`, repeat paths do not have an arrow on them. The default is `yes` |
 |mode |If set to `debug`, the diagram will display its internal tree structure. The default mode is `svg` |
 
 The entire `text` can be transcluded from another tiddler:

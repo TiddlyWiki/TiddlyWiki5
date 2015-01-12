@@ -177,10 +177,11 @@ Optional.prototype.toSvg = function() {
 	return railroad.Optional(this.child.toSvg(), this.normal ? undefined : "skip");
 }
 
-var OptionalRepeated = function(content,separator,normal) {
+var OptionalRepeated = function(content,separator,normal,wantArrow) {
 	this.initialiseWithChild("OptionalRepeated",content);
 	this.separator = toSingleChild(separator);
 	this.normal = normal;
+	this.wantArrow = wantArrow;
 };
 
 OptionalRepeated.prototype = new Component();
@@ -189,12 +190,13 @@ OptionalRepeated.prototype.toSvg = function() {
 	// Call ZeroOrMore(component,separator,"skip")
 	var separatorSvg = this.separator ? this.separator.toSvg() : null;
 	var skip = this.normal ? undefined : "skip";
-	return railroad.ZeroOrMore(this.child.toSvg(),separatorSvg,skip);
+	return railroad.ZeroOrMore(this.child.toSvg(),separatorSvg,skip,this.wantArrow);
 }
 
-var Repeated = function(content,separator) {
+var Repeated = function(content,separator,wantArrow) {
 	this.initialiseWithChild("Repeated",content);
 	this.separator = toSingleChild(separator);
+	this.wantArrow = wantArrow;
 };
 
 Repeated.prototype = new Component();
@@ -202,7 +204,7 @@ Repeated.prototype = new Component();
 Repeated.prototype.toSvg = function() {
 	// Call OneOrMore(component,separator)
 	var separatorSvg = this.separator ? this.separator.toSvg() : null;
-	return railroad.OneOrMore(this.child.toSvg(),separatorSvg);
+	return railroad.OneOrMore(this.child.toSvg(),separatorSvg,this.wantArrow);
 }
 
 var Link = function(content,options) {

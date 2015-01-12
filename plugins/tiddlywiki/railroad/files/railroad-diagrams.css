@@ -21,3 +21,8 @@ svg.railroad-diagram rect {
     stroke: black;
     fill: hsl(120,100%,90%);
 }
+
+/* TiddlyWiki extensions */
+svg.railroad-diagram path.arrow {
+    stroke-width: 1;
+}

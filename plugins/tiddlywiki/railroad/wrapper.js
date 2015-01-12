@@ -38,7 +38,7 @@ RailroadWidget.prototype.render = function(parent,nextSibling) {
 	var div = this.document.createElement("div");
 	try {
 		// Parse the source
-		var parser = new Parser(this,source);
+		var parser = new Parser(this,source,this.getAttribute("arrow","yes") === "yes");
 		// Generate content into the div
 		if(this.getAttribute("mode","svg") === "debug") {
 			this.renderDebug(parser,div);
@@ -107,7 +107,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 
 RailroadWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.text) {
+	if(changedAttributes.text || changedAttributes.mode || changedAttributes.arrow) {
 		this.refreshSelf();
 		return true;
 	}

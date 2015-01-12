@@ -35,9 +35,10 @@ x y z			sequence
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
 
-var Parser = function(widget,source) {
+var Parser = function(widget,source,wantArrow) {
 	this.widget = widget;
 	this.source = source;
+	this.wantArrow = wantArrow;
 	this.tokens = this.tokenise(source);
 	this.tokenPos = 0;
 	this.advance();
@@ -201,7 +202,8 @@ Parser.prototype.parseOptional = function() {
 	}
 	this.close("]");
 	// Create a component
-	return repeated ? new components.OptionalRepeated(content,separator,normal) : new components.Optional(content,normal);
+	return repeated ? new components.OptionalRepeated(content,separator,normal,this.wantArrow)
+		: new components.Optional(content,normal);
 };
 
 Parser.prototype.parseRepeated = function() {
@@ -217,7 +219,7 @@ Parser.prototype.parseRepeated = function() {
 	// Consume the closing bracket
 	this.close("}");
 	// Create a component
-	return new components.Repeated(content,separator);
+	return new components.Repeated(content,separator,this.wantArrow);
 };
 
 Parser.prototype.parseSequence = function() {
