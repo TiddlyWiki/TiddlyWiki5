@@ -5,7 +5,7 @@
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
-                "tiddlywiki/railroad"
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
