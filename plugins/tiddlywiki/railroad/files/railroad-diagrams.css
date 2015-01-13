@@ -1,28 +1,32 @@
+/* CSS modified for TiddlyWiki */
 svg.railroad-diagram {
-    background-color: hsl(30,20%,95%);
+	background-color: hsl(30,20%,98%);
+	border-radius: 5px;
+}
+svg.railroad-diagram:hover {
+	background-color: hsl(30,20%,96%);
+}
+svg.railroad-diagram path,
+svg.railroad-diagram rect {
+	stroke-width: 2;
+	stroke: #333;
 }
 svg.railroad-diagram path {
-    stroke-width: 3;
-    stroke: black;
-    fill: rgba(0,0,0,0);
-}
-svg.railroad-diagram text {
-    font: bold 14px monospace;
-    text-anchor: middle;
-}
-svg.railroad-diagram text.label {
-    text-anchor: start;
-}
-svg.railroad-diagram text.comment {
-    font: italic 12px monospace;
+	fill: rgba(0,0,0,0);
 }
 svg.railroad-diagram rect {
-    stroke-width: 3;
-    stroke: black;
-    fill: hsl(120,100%,90%);
+	fill: hsl(120,100%,90%);
 }
-
-/* TiddlyWiki extensions */
+svg.railroad-diagram text {
+	font: 14px monospace;
+	text-anchor: middle;
+}
+svg.railroad-diagram text.label {
+	text-anchor: start;
+}
+svg.railroad-diagram text.comment {
+	font: italic 12px monospace;
+}
 svg.railroad-diagram path.arrow {
-    stroke-width: 1;
+    stroke-width: 2;
 }
