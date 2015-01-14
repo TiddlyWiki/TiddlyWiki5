@@ -5,7 +5,7 @@ title: Filters
 type: text/vnd.tiddlywiki
 list: [[Introduction to filter notation]] [[Filter Syntax]]
 
-You can think of TiddlyWiki as a database where the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
+You can think of TiddlyWiki as a database in which the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
 
 A <<doc-def filter>> is a concise notation for selecting a particular set of tiddlers, known as its <<doc-def "result">>. Whenever ~TiddlyWiki encounters a filter, it calculates the result. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
 

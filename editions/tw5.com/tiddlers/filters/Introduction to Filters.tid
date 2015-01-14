@@ -4,7 +4,7 @@ tags: Learning Filters
 title: Introduction to filter notation
 type: text/vnd.tiddlywiki
 
-: (This explains the basics of writing a [[filter|Filters]] to select a set of tiddlers. For a more technical summary, see [[Filter Syntax]].)
+:(This explains the basics of writing a [[filter|Filters]] to select a set of tiddlers. For a more technical summary, see [[Filter Syntax]].)
 
 The simplest case is where you already know exactly which tiddlers you want. Type each title in double square brackets, with a space or linebreak between each one and the next:
 

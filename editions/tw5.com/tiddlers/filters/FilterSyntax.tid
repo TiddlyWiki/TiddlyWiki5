@@ -4,25 +4,33 @@ tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
 
-[[Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, [[you can learn to write filters|Introduction to filter notation]] without needing to understand this tiddler.
+:([[Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, [[you can learn to write filters|Introduction to filter notation]] without needing to understand this tiddler.)
 
-When a filter is evaluated, it generates a <<doc-def result>>, which is an ordered set of items. No item can appear more than once in the result. The items are usually tiddler titles, but certain specialised filters generate other items, such as Node.js command words.
+A <<doc-def filter>> is an expression whose value is an ordered set of items known as its <<doc-def result>>. No item can appear more than once in the result. The items are usually tiddler titles, but certain specialised filter steps produce other items, such as field names.
+
+A filter is a sequence of zero or more ''runs'', and each run is a sequence of one or more ''steps''. Each step and each run produces its own intermediate result.
 
 ---
 
 ;filter
 : <$railroad text="""
-{ [:whitespace] ("+" | :- | "-") run }
+[{ : [:whitespace] ("+" | :- | "-") run }]
 """/>
 
-A <<doc-def filter>> is a sequence of runs, evaluated from left to right.
+A filter starts with an empty result. The runs are processed from left to right, progressively modifying the result.
 
-Each run receives an <<doc-def "input set">>, which it modifies to produce a result. The first run in a sequence receives `[all[tiddlers]]` as its input, i.e. the set of all non-missing tiddlers. The second run receives the result of the first run as its input, and so on.
+Each run receives a <<doc-def "source">> set from which to select items. This is normally the set of all tiddlers in the wiki, in the order they happen to be stored there, but it can be changed by prefixing a run with `+`.
+
+* If the run has no `+` or `-` prefix, the items in its result are <<doc-em appended>> to the filter's result. If this leaves the filter's result containing two copies of the same item, the earlier one is removed.
+* If the run has a `-` prefix, the items in its result are <<doc-em removed>> from the filter's result if they were present there.
+* If the run has a `+` prefix, it receives the filter's current result as its source set. The filter's result is then completely <<doc-em replaced>> by the run's result. Any subsequent run reverts to receiving all tiddlers as its source set, unless it too has a `+` prefix.
+
+In concise technical terms:
 
 |!Run |!Interpretation |!Result |
-|`run` |union of sets|input OR run |
-|`+run` |intersection of sets |input AND run |
-|`-run` |difference of sets|input AND NOT run |
+|`run` |union of sets|result OR run |
+|`+run` |intersection of sets |result AND run |
+|`-run` |difference of sets|result AND NOT run |
 
 ---
 
@@ -31,23 +39,21 @@ Each run receives an <<doc-def "input set">>, which it modifies to produce a res
 ( "[" {step} "]"
   |
   [:{/"anything but [ ] or whitespace"/}]
-)
-"""/>
-
-<!-- The following has been removed from the diagram until issue #1346 is addressed:
+  |
   '"' [:{/'anything but "'/}] '"'
   |
   "'" [:{/"anything but '"/}] '"'
-  |
--->
+)
+"""/>
 
-The lower option, e.g. matching `HelloThere`, is short for `[title[HelloThere]]`.
+The steps of a run are processed from left to right. Each step receives a source set. For the first step, this is the run's source set. For each subsequent step, the source is the result of the previous step.
 
-A <<doc-def run>> is a sequence of steps, evaluated from left to right.
+The result of a run depends on the operator involved:
 
-The run's result is basically the intersection of the step results. In other words, the run's result contains the items that are found in <<doc-em all>> of the step results.
+* Most operators are <<doc-def filterers>>. They examine each item in their source set and discard any that don't match. Such steps serve to narrow down the result of their run.
+* A few operators, called <<doc-def selectors>>, ignore the source they're given and generate an independent result instead. `title` is a good example. The result of `[title[A]title[B]]` is `B`. But `field` is a filterer, so the result of `[title[A]field:title[B]` is empty.
 
-However, a few operators (known as <<doc-def selectors>>) ignore any preceding steps in the same run, and completely replace the result so far. Examples of this are <<doc-clink "commands" "FilterOperator: commands">> and <<doc-clink "title" "FilterOperator: title">>, but not <<doc-clink "field:title" "FilterOperator: field">>.
+The lower three options in the diagram match items like `HelloThere`, `"HelloThere"` and `'HelloThere'`, and are short for `[title[HelloThere]]`. The two quoted options exist to support titles that contain square brackets, such as `"An [[[[Unusual]]]] Tiddler"`.
 
 ---
 
@@ -56,7 +62,7 @@ However, a few operators (known as <<doc-def selectors>>) ignore any preceding s
 [:"!"] [:method] parameter
 """/>
 
-If the method is omitted, it defaults to `title`.
+If a step's method is omitted, it defaults to `title`.
 
 ---
 
@@ -65,11 +71,9 @@ If the method is omitted, it defaults to `title`.
 operator [:":" suffix]
 """/>
 
-The operator is drawn from a list of [[predefined names|FilterOperators]].
+The operator is drawn from a list of [[predefined names|FilterOperators]]. If it can't be found in that list, it is instead treated as the suffix to the <<doc-clink "field" "FilterOperator: field">> operator.
 
 The suffix is additional information, usually the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
-
-An unrecognised operator name is is treated as the suffix to the <<doc-clink "field" "FilterOperator: field">> operator.
 
 ---
 
