@@ -13,8 +13,8 @@ Adds tiddler filtering methods to the $tw.Wiki object.
 "use strict";
 
 /*
-Parses an operation within a filter string
-	results: Array of array of operator nodes into which results should be inserted
+Parses an operation (i.e. a run) within a filter string
+	operators: Array of array of operator nodes into which results should be inserted
 	filterString: filter string
 	p: start position within the string
 Returns the new start position, after the parsed operation
@@ -202,6 +202,7 @@ exports.compileFilter = function(filterString) {
 				if(operator.variable) {
 					operand = widget.getVariable(operator.operand,{defaultValue: ""});
 				}
+				// Invoke the appropriate filteroperator module
 				results = operatorFunction(accumulator,{
 							operator: operator.operator,
 							operand: operand,
