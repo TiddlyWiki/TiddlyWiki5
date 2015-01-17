@@ -531,8 +531,10 @@ exports.sortByList = function(array,listTitle) {
 				unlisted.push(title);
 			}
 		}
-		//concat listed with unlisted, sorted
-		titles = titles.concat(unlisted.sort());
+		//sort unlisted
+		$tw.wiki.sortTiddlers(unlisted,"title",false,false);
+		//concat listed with unlisted
+		titles = titles.concat(unlisted);
 		// Finally obey the list-before and list-after fields of each tiddler in turn
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
