@@ -1,6 +1,54 @@
 title: $:/core/macros/tag
 tags: $:/tags/Macro
 
-\define tag(tag)
-{{$tag$||$:/core/ui/TagTemplate}}
+\define tag(tag,mode:"button")
+<$reveal type="match" default="$mode$" text="button">
+<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} popup="true"/>
+</$reveal>
+<$reveal type="match" default="$mode$" text="link">
+<$link>
+<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}}/>
+</$link>
+</$reveal>
+<$reveal type="match" default="$mode$" text="remove">
+<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} remove="true"/>
+</$reveal>
+\end
+
+\define tag-body(colour,palette,popup,remove)
+<span class="tc-tag-list-item">
+<$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} popup="$popup$" remove="$remove$"/>
+</span>
+\end
+
+\define tag-body-inner(colour,fallbackTarget,colourA,colourB,popup,remove)
+<$set name="foregroundColor" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
+<$set name="backgroundColor" value="""$colour$""">
+<$reveal type="match" text="$popup$" default="">
+<span class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
+<$transclude tiddler={{!!icon}}/>
+<$view field="title" format="text"/>
+<$reveal type="nomatch" text="$remove$" default="">
+<$button message="tm-remove-tag" param={{!!title}} class="tc-btn-invisible tc-remove-tag-button">&times;</$button>
+</$reveal>
+</span>
+</$reveal>
+<$reveal type="nomatch" text="$popup$" default="">
+<$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
+<$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
+</$button>
+<$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
+<hr>
+<$list filter="[all[current]tagging[]]" template="$:/core/ui/ListItemTemplate"/>
+</div>
+</$reveal>
+</$reveal>
+</$set>
+</$set>
+\end
+
+\define tag-styles()
+background-color:$(backgroundColor)$;
+fill:$(foregroundColor)$;
+color:$(foregroundColor)$;
 \end

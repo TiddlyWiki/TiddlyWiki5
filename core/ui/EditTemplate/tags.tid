@@ -2,15 +2,11 @@ title: $:/core/ui/EditTemplate/tags
 tags: $:/tags/EditTemplate
 
 \define lingo-base() $:/language/EditTemplate/
-\define tag-styles()
-background-color:$(backgroundColor)$;
-\end
+
 <div class="tc-edit-tags">
 <$fieldmangler>
-<$list filter="[all[current]tags[]sort[title]]" storyview="pop"><$set name="backgroundColor" value={{!!color}}><span style=<<tag-styles>> class="tc-tag-label">
-<$view field="title" format="text" />
-<$button message="tm-remove-tag" param={{!!title}} class="tc-btn-invisible tc-remove-tag-button">&times;</$button></span>
-</$set>
+<$list filter="[all[current]tags[]sort[title]]" storyview="pop">
+<<tag mode:"remove">>
 </$list>
 
 <div class="tc-edit-add-tag">
@@ -27,11 +23,11 @@ background-color:$(backgroundColor)$;
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
 <$linkcatcher set="$:/temp/NewTagName" setTo="" message="tm-add-tag">
-<$list filter="[tags[]search:title{$:/temp/NewTagName}sort[]]">
+<$list filter="[tags[]search:title{$:/temp/NewTagName}]-[all[current]tags[]]+[sort[]]">
 {{||$:/core/ui/Components/tag-link}}
 </$list>
 <hr>
-<$list filter="[!is[system]search:title{$:/temp/NewTagName}sort[]]">
+<$list filter="[!is[system]search:title{$:/temp/NewTagName}]-[tags[]search:title{$:/temp/NewTagName}]-[all[current]tags[]]+[sort[]]">
 {{||$:/core/ui/Components/tag-link}}
 </$list>
 </$linkcatcher>
