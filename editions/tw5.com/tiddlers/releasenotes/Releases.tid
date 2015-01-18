@@ -8,4 +8,6 @@ Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versio
 
 (BetaReleases and AlphaReleases are listed separately).
 
-<<tabs "[tag[ReleaseNotes]!sort[created]]" "Release 5.1.7" "$:/state/tab2" "tc-vertical" "ReleaseTemplate">>
+<$list filter="[tag[ReleaseNotes]!sort[created]limit[1]]">
+  <$macrocall $name="tabs" tabsList="[tag[ReleaseNotes]!sort[created]]"default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />
+</$list>
