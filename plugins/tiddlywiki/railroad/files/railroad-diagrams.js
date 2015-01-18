@@ -373,8 +373,10 @@ var temp = (function(options) {
 /* TiddlyWiki: code added */
 		if(this.wantArrow) {
 			var arrowSize = Diagram.ARC_RADIUS/2;
+			// Compensate for the illusion that makes the arrow look unbalanced if it's too close to the curve below it
+			var multiplier = (distanceFromY < arrowSize*5) ? 1.2 : 1;
 			Path(x-arrowSize, y+distanceFromY/2 + arrowSize/2, {class:"arrow"}).
-				line(arrowSize, -arrowSize).line(arrowSize, arrowSize).addTo(this);
+				line(arrowSize, -arrowSize).line(arrowSize*multiplier, arrowSize).addTo(this);
 		}
 
 		return this;
