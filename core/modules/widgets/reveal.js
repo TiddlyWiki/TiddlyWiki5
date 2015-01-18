@@ -30,7 +30,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
+	var domNode = this.document.createElement(this.element ? this.element : this.parseTreeNode.isBlock ? "div" : "span");
 	var classes = this["class"].split(" ") || [];
 	classes.push("tc-reveal");
 	domNode.className = classes.join(" ");
@@ -92,6 +92,7 @@ RevealWidget.prototype.execute = function() {
 	this.retain = this.getAttribute("retain","no");
 	this.openAnimation = this.animate === "no" ? undefined : "open";
 	this.closeAnimation = this.animate === "no" ? undefined : "close";
+	this.element = this.getAttribute("element","span");
 	// Compute the title of the state tiddler and read it
 	this.stateTitle = this.state;
 	this.readState();
