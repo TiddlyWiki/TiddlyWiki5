@@ -1,5 +1,6 @@
 title: $:/core/ui/PageTemplate/topleftbar
 tags: $:/tags/PageTemplate
+list-before: 
 
 <span class="tc-topbar tc-topbar-left">
 
