@@ -1,13 +1,17 @@
-caption: fields
 created: 20140924115616653
-modified: 20141002150019737
-tags: Filters
-title: FilterOperator: fields
+modified: 20150118183051000
+tags: [[Filter Operators]] [[Field Operators]]
+title: fields Operator
 type: text/vnd.tiddlywiki
+caption: fields
+purpose: get all fields of the input tiddlers
 
-The ''fields'' filter operator returns the names of all the fields used in the currently selected tiddlers.
+<$macrocall $name=".operator-def"
+input="a [[set|Tiddler Sets]] of tiddler titles"
+parameter="none"
+output="the [[set|Tiddler Sets]] of all field names contained in the input tiddlers"
+/>
 
-|!Filter String |!Description |
-|`[[HelloThere]fields[]]` |Returns the fields present in the tiddler `HelloThere` |
-|`[tag[myTag]fields[]]` |Returns the aggregate of all the fields present on tiddlers that have the tag  `myTag` |
+Each input item is processed in turn. Its set of field names is retrieved (in no particular order) and then [[dominantly appended|Dominant Append]] to the operator's output.
 
+<<.operator-examples "fields">>

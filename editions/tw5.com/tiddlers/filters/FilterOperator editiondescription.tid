@@ -1,10 +1,15 @@
 created: 20150111145738451
-modified: 20150111145738451
-tags: Filters
-caption: editiondescription
-title: FilterOperator: editiondescription
+modified: 20150118183039000
+tags: [[Filter Operators]] [[Non-Tiddler Operators]] [[Node.js Operators]]
+title: editiondescription Operator
 type: text/vnd.tiddlywiki
+caption: editiondescription
+purpose: get the descriptions of the input ~TiddlyWiki editions
 
-The ''editiondescription'' filter operator returns a description string for each edition name in the current results. It is only available under Node.js.
+<$macrocall $name=".operator-def"
+input="a [[set|Tiddler Sets]] of ~TiddlyWiki edition names"
+parameter="none"
+output="the description string of each edition in the input"
+/>
 
-Also see [[FilterOperator: editions]].
+<<.node-only-operator>>

@@ -1,17 +1,24 @@
 created: 20140410103123179
-modified: 20141007213204936
-tags: Concepts
-title: FilterOperators
+modified: 20150118180311000
+tags: Concepts Filters
+title: Filter Operators
 type: text/vnd.tiddlywiki
 
-A <<doc-def "filter operator">> is a predefined name attached to an individual step in a [[filter|Filters]]. It defines how that step is to be performed.
+A <<.def "filter operator">> is a predefined name attached to an individual step in a [[filter|Filters]]. It defines the particular action of that step.
 
-A typical step is written as `[operator[parameter]]`, although not all of the operators need a parameter.
+<table class>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+<th align="left">Common</th>
+</tr>
+<$list filter="[tag[Filter Operators]]"><tr>
+<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td>{{!!purpose}}</td>
+<td><$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+</tr></$list>
+</table>
 
-Here are the most commonly used operators:
+A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameters]].
 
-<<list-links "[tag[CommonFilters]]">>
-
-The complete list is:
-
-<<list-links "[tag[Filters]] -[[Introduction to filter notation]] -[[Filter Syntax]]">>
+Most steps operate on a set of input items. For the exact rules, see [[Filter Syntax]].

@@ -1,14 +1,16 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: butlast
-title: FilterOperator: butlast
+modified: 20150118183022000
+tags: [[Filter Operators]] [[Sequence Operators]]
+title: butlast Operator
 type: text/vnd.tiddlywiki
+caption: butlast
+purpose: get all the but last <<.place n>> input items
 
-Without an operand, the ''butlast'' filter operator returns all but the last entry in the current list. The optional operand specifies the number of entries to omit.
+<$macrocall $name=".operator-def"
+input="a [[set|Tiddler Sets]] of strings"
+parameter="an integer, defaulting to 1"
+paramName="n"
+output="all but the last <<.place n>> strings from the input set"
+/>
 
-For example:
-
-|!Filter String |!Description |
-|`one two three four five +[butlast[]]` |Returns `one`, `two`, `three`, `four` |
-|`one two three four five +[butlast[2]]` |Returns `one`, `two`, `three` |
+<<.operator-examples "butlast">>

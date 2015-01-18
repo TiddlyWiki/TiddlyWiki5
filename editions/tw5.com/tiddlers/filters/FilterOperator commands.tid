@@ -1,14 +1,16 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: commands
-title: FilterOperator: commands
+modified: 20150118183026000
+tags: [[Filter Operators]] [[Non-Tiddler Operators]] [[Absolute Operators]]
+title: commands Operator
 type: text/vnd.tiddlywiki
+caption: commands
+purpose: get all the Node.js commands
 
-The ''commands'' filter operator replaces the current list with a list of the available commands (see the HelpCommand for details).
+<$macrocall $name=".operator-def"
+input="ignored"
+parameter="none"
+output="the set of [[commands|Commands]] that can be given to [[TiddlyWiki on Node.js]]"
+/>
 
-For example:
-
-|!Filter String |!Description |
-|`[commands[]]` |Returns a list of the available command names |
+<<.operator-examples "commands">>
 

@@ -1,8 +1,9 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: bf
-title: FilterOperator: bf
+modified: 20150118182927000
+tags: [[Filter Operators]] [[List Operators]]
+title: bf Operator
 type: text/vnd.tiddlywiki
+caption: bf
+purpose: same as <<.op rest>>
 
-The ''bf'' filter operator is a synonym for [[FilterOperator: rest]].
+<<.op bf>> is a synonym for <<.olink rest>>, also known as <<.olink butfirst>>.

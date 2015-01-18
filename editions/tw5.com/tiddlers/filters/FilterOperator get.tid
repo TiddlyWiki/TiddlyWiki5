@@ -1,13 +1,20 @@
 created: 20140426183123179
-modified: 20140426183123179
-tags: Filters
-caption: get
-title: FilterOperator: get
+modified: 20150118183058000
+tags: [[Filter Operators]] [[Field Operators]]
+title: get Operator
 type: text/vnd.tiddlywiki
+caption: get
+purpose: get the values of a field from all input tiddlers
 
-The ''get'' filter operator replaces the titles of the tiddlers in the current list with the values of the field specified by the operand.
+<$macrocall $name=".operator-def"
+input="a [[set|Tiddler Sets]] of tiddler titles"
+parameter="the name of a [[field|TiddlerFields]]"
+paramName="f"
+output="the values of field <<.place f>> in each of the input tiddlers"
+/>
 
-For example:
+Each input tiddler is processed in turn. If the tiddler contains field <<.place f>>, and the value of this field is not empty, then its value is appended to the output.
 
-|!Filter String |!Description |
-|`[all[current]get[draft.of]]` |If the current tiddler is a draft, returns the original tiddler, otherwise returns an empty list |
+Unlike most other [[Filter Operators]], the output of <<.op get>> can contain duplicates.
+
+<<.operator-examples "get">>

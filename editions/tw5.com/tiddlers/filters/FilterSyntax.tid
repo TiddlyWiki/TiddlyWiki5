@@ -1,36 +1,36 @@
 created: 20140210141217955
-modified: 20150102174633890
+modified: 20150117204215000
 tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
 
-:([[Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, [[you can learn to write filters|Introduction to filter notation]] without needing to understand this tiddler.)
+<<.preamble """[[Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, you can [[learn to write filters|Introduction to filter notation]] without needing to understand this tiddler.""">>
 
-A <<doc-def filter>> is an expression whose value is an ordered set of items known as its <<doc-def result>>. No item can appear more than once in the result. The items are usually tiddler titles, but certain specialised filter steps produce other items, such as field names.
+A <<.def filter>> is a pipeline for transforming an <<.def input>> into an <<.def output>>. Both the input and the output are [[ordered sets|Tiddler Sets]] of strings, usually tiddler titles.
 
-A filter is a sequence of zero or more ''runs'', and each run is a sequence of one or more ''steps''. Each step and each run produces its own intermediate result.
+Filters are built from smaller pieces, called ''runs'' and ''steps'', each of which also transforms an input to an output.
 
 ---
 
 ;filter
 : <$railroad text="""
-[{ : [:whitespace] ("+" | :- | "-") run }]
+[{: [:whitespace] ("+"|:-|"-") run }]
 """/>
 
-A filter starts with an empty result. The runs are processed from left to right, progressively modifying the result.
+A filter starts with an empty output. Its runs are processed from left to right, progressively modifying the output.
 
-Each run receives a <<doc-def "source">> set from which to select items. This is normally the set of all tiddlers in the wiki, in the order they happen to be stored there, but it can be changed by prefixing a run with `+`.
+A run's input is normally the set of all tiddler titles in the wiki (in no particular order), but the `+` prefix can change this.
 
-* If the run has no `+` or `-` prefix, the items in its result are <<doc-em appended>> to the filter's result. If this leaves the filter's result containing two copies of the same item, the earlier one is removed.
-* If the run has a `-` prefix, the items in its result are <<doc-em removed>> from the filter's result if they were present there.
-* If the run has a `+` prefix, it receives the filter's current result as its source set. The filter's result is then completely <<doc-em replaced>> by the run's result. Any subsequent run reverts to receiving all tiddlers as its source set, unless it too has a `+` prefix.
+* If a run has no `+` or `-` prefix, its output strings are [[dominantly appended|Dominant Append]] to the filter's output.
+* If a run has a `-` prefix, its output strings are <<.em removed>> from the filter's output (if they were present).
+* If a run has a `+` prefix, it receives the filter's output so far as its input. The filter's output is then completely <<.em replaced>> by the run's output. Any subsequent run reverts to receiving all tiddler titles as its input, unless it too has a `+` prefix.
 
 In concise technical terms:
 
-|!Run |!Interpretation |!Result |
-|`run` |union of sets|result OR run |
-|`+run` |intersection of sets |result AND run |
-|`-run` |difference of sets|result AND NOT run |
+|!Run |!Interpretation |!Output |
+|`run` |union of sets |... OR run |
+|`+run` |intersection of sets |... AND run |
+|`-run` |difference of sets |... AND NOT run |
 
 ---
 
@@ -46,34 +46,22 @@ In concise technical terms:
 )
 """/>
 
-The steps of a run are processed from left to right. Each step receives a source set. For the first step, this is the run's source set. For each subsequent step, the source is the result of the previous step.
+The steps of a run are processed from left to right. The input to the first step is same as the input to the run. For each subsequent step, the input is the output of the previous step.
 
-The result of a run depends on the operator involved:
+{{Absolute Operators}}
 
-* Most operators are <<doc-def filterers>>. They examine each item in their source set and discard any that don't match. Such steps serve to narrow down the result of their run.
-* A few operators, called <<doc-def selectors>>, ignore the source they're given and generate an independent result instead. `title` is a good example. The result of `[title[A]title[B]]` is `B`. But `field` is a filterer, so the result of `[title[A]field:title[B]` is empty.
-
-The lower three options in the diagram match items like `HelloThere`, `"HelloThere"` and `'HelloThere'`, and are short for `[title[HelloThere]]`. The two quoted options exist to support titles that contain square brackets, such as `"An [[[[Unusual]]]] Tiddler"`.
+The lower three options in the diagram match `HelloThere`, `"HelloThere"` and `'HelloThere'`, and are short for `[title[HelloThere]]`. The two quoted options exist to support titles that contain square brackets: `"An [[[[Unusual]]]] Tiddler"`.
 
 ---
 
 ;step
 : <$railroad text="""
-[:"!"] [:method] parameter
+[:"!"] [:operator [:":" suffix] ] parameter
 """/>
 
-If a step's method is omitted, it defaults to `title`.
+The <<.def operator>> is drawn from a list of [[predefined names|Filter Operators]], which can be extended by plugins. Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. If a step's operator is omitted altogether, it defaults to `title`.
 
----
-
-;method
-: <$railroad text="""
-operator [:":" suffix]
-"""/>
-
-The operator is drawn from a list of [[predefined names|FilterOperators]]. If it can't be found in that list, it is instead treated as the suffix to the <<doc-clink "field" "FilterOperator: field">> operator.
-
-The suffix is additional information, usually the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
+The <<.def suffix>> is additional text, usually the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
 
 ---
 
@@ -87,8 +75,8 @@ The suffix is additional information, usually the name of a [[field|TiddlerField
 )
 """/>
 
-* `[`...`]` encloses a literal parameter
-* `{`...`}` encloses a TextReference parameter
+* `[`...`]` encloses a direct parameter
+* `{`...`}` encloses a transcluded parameter
 * `<`...`>` encloses a [[variable|Variables]] parameter
 
 ---

@@ -1,5 +1,5 @@
 created: 20140416160234142
-modified: 20140416160234142
+modified: 20150118182457000
 tags: BetaReleaseNotes
 title: Release 5.0.10-beta
 type: text/vnd.tiddlywiki
@@ -25,7 +25,7 @@ caption: 5.0.10-beta
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/15d0c27e2a82359616ce6c7883557cd2ef1886cd]] `[is[tag]]` to the [[FilterOperator: is]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/15d0c27e2a82359616ce6c7883557cd2ef1886cd]] `[is[tag]]` to the <<.olink is>> operator
 * [[Hide|https://github.com/Jermolene/TiddlyWiki5/commit/95d291daac4a26664f0c232175f54780f0fa678f]] the top bars in the print stylesheet
 
 !! Bug Fixes

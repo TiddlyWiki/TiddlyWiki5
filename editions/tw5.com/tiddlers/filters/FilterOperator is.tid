@@ -1,8 +1,8 @@
 created: 20140410103123179
-modified: 20140418103123179
+modified: 20150118182931000
 tags: Filters CommonFilters
 caption: is
-title: FilterOperator: is
+title: is Operator
 type: text/vnd.tiddlywiki
 
 The ''is'' filter operator selects tiddlers from the current list according to their membership of the category specified in the operand:

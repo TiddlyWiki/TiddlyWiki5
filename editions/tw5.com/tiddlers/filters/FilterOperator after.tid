@@ -1,21 +1,18 @@
 created: 20140512103123179
-modified: 20140512103123179
-tags: Filters
-title: FilterOperator: after
-caption: after
+modified: 20150118183000000
+tags: [[Filter Operators]] [[List Operators]]
+title: after Operator
 type: text/vnd.tiddlywiki
+caption: after
+purpose: get the successor of an input item
 
-The ''after'' filter operator returns the tiddler from the current list that is after the tiddler named in the operand.
+<$macrocall $name=".operator-def"
+input="a [[set|Tiddler Sets]] of strings"
+parameter="one of those strings"
+paramName="p"
+output="the string that immediately follows <<.place p>> in the input set"
+/>
 
-The following examples assume a tiddler called `MyList` with a `list` field containing:
+If <<.place p>> is not present in the input set, or is the last item, then the output is empty.
 
-```
-one two three four five
-```
-
-|!Filter String |!Description |
-|`[list[MyList]after[two]]` |Returns `three` |
-|`[list[MyList]after[five]]` |Returns an empty list |
-|`[list[MyList]after{!!title}]` |Returns `five` if the current tiddler is `four` |
-
-See also [[FilterOperator: before]], [[FilterOperator: previous]] and [[FilterOperator: next]].
+<<.operator-examples "after">>

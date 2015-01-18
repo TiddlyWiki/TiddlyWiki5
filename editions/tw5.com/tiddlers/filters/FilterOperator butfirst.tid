@@ -1,8 +1,9 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: butfirst
-title: FilterOperator: butfirst
+modified: 20150118183016000
+tags: [[Filter Operators]] [[Sequence Operators]]
+title: butfirst Operator
 type: text/vnd.tiddlywiki
+caption: butfirst
+purpose: same as <<.op rest>>
 
-The ''butfirst'' filter operator is a synonym for [[FilterOperator: rest]].
+<<.op butfirst>> is a synonym for <<.olink rest>>, also known as <<.olink bf>>.

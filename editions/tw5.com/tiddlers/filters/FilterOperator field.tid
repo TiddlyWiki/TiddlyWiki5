@@ -1,16 +1,28 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters CommonFilters
-caption: field
-title: FilterOperator: field
+modified: 20150118183046000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]]
+title: field Operator
 type: text/vnd.tiddlywiki
+caption: field
+purpose: filter the input tiddlers by field value
 
-The ''field'' filter operator filters the current list according to whether a field matches a specified value.
+<$macrocall $name=".operator-def-suffix"
+input="a [[set|Tiddler Sets]] of tiddler titles"
+suffix="the name of a field"
+suffixName="f"
+parameter="a potential value for field <<.place f>>"
+paramName="p"
+output="the subset of the input tiddlers in which field <<.place f>> has the value <<.place p>>"
+/>
 
-The operand is the value to match, and the suffix is used to identify the field. For example:
+If <<.place p>> is empty, <<.op field>> will match both of the following:
 
-|!Filter String |!Description |
-|`[field:modifier[JeremyRuston]]` |Returns a list of the tiddlers created by `JeremyRuston` |
-|`[modifier[JeremyRuston]]` |Returns a list of the tiddlers created by `JeremyRuston` |
+* tiddlers that don't contain field <<.place f>>
+* tiddlers in which field <<.place f>> exists but has an empty value
 
-Note that if an unknown filter operator `[unknown[xxx]]` is encountered it is interpreted as `[field:unknown[xxx]]`.
+;Negation
+: `!field` outputs the subset of the input tiddlers in which field <<.place f>> does <<.em not>> have the value <<.place p>>.
+
+The [[Filter Syntax]] treats any unrecognised [[filter operator|Filter Operators]] as if it was the suffix to the <<.olink field>> operator. See the second example below.
+
+<<.operator-examples "field">>
