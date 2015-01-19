@@ -19,6 +19,8 @@ var RailroadWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
+var RAILROAD_OPTIONS = "$:/config/railroad";
+
 /*
 Inherit from the base widget class
 */
@@ -37,12 +39,13 @@ RailroadWidget.prototype.render = function(parent,nextSibling) {
 	// Create a div to contain the SVG or error message
 	var div = this.document.createElement("div");
 	try {
-		// Initialise options from widget attributes
+		// Initialise options from the config tiddler or widget attributes
+		var config = $tw.wiki.getTiddlerData(RAILROAD_OPTIONS,{});
 		var options = {
-			arrow: this.getAttribute("arrow","yes") === "yes",
-			debug: this.getAttribute("debug","no") === "yes",
-			start: this.getAttribute("start","single"),
-			end: this.getAttribute("end","single")
+			arrow: this.getAttribute("arrow", config.arrow || "yes") === "yes",
+			debug: this.getAttribute("debug", config.debug || "no") === "yes",
+			start: this.getAttribute("start", config.start || "single"),
+			end: this.getAttribute("end", config.end || "single")
 		};
 		// Parse the source
 		var parser = new Parser(this,source,options);

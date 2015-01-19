@@ -1,5 +1,5 @@
 created: 20150102163222184
-modified: 20150119220023000
+modified: 20150119231005000
 title: $:/plugins/tiddlywiki/railroad/readme
 
 This plugin provides a `<$railroad>` widget for generating railroad diagrams as SVG images.
@@ -17,4 +17,11 @@ The content of the `<$railroad>` widget is ignored.
 |end |Style of the endpoint: `single`, `double`, `none` |`single` |
 |debug |If set to `yes`, the diagram displays its parse tree |`no` |
 
-These options can also be specified via pragmas in the diagram notation.
+These options can also be specified via pragmas in the diagram notation, or globally via a dictionary tiddler called `$:/config/railroad`:
+
+```
+arrow: yes
+start: single
+end: single
+debug: no
+```
