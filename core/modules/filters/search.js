@@ -16,19 +16,14 @@ Filter operator for searching for the text in the operand tiddler
 Export our filter function
 */
 exports.search = function(source,operator,options) {
-	var invert = operator.prefix === "!";
-	if(operator.suffix) {
-		return options.wiki.search(operator.operand,{
-			source: source,
-			invert: invert,
-			field: operator.suffix
-		});
-	} else {
-		return options.wiki.search(operator.operand,{
-			source: source,
-			invert: invert
-		});
-	}
+	var result = [],
+		invert = operator.prefix === "!",
+		fields = (operator.suffix || "").split(":");
+	return options.wiki.search(operator.operand,{
+		source: source,
+		invert: invert,
+		field: fields[0] ? fields : undefined
+	});
 };
 
 })();

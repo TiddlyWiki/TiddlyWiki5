@@ -1001,7 +1001,9 @@ exports.search = function(text,options) {
 		if(!searchTermsRegExps) {
 			return true;
 		}
-		var tiddler = self.getTiddler(title);
+		var field = options.field,
+			fields=[],
+			tiddler = self.getTiddler(title);
 		if(!tiddler) {
 			tiddler = new $tw.Tiddler({title: title, text: "", type: "text/vnd.tiddlywiki"});
 		}
@@ -1009,8 +1011,21 @@ exports.search = function(text,options) {
 			match;
 		for(var t=0; t<searchTermsRegExps.length; t++) {
 			match = false;
-			if(options.field) {
-				match = searchTermsRegExps[t].test(tiddler.getFieldString(options.field));
+			if(field) {
+				if('[object Array]' == Object.prototype.toString.call(field)) {
+					$tw.utils.each(field, function(f){
+						f = 0 === f.indexOf("$") ? tiddler.listFields(f) : f;
+						$tw.utils.pushTop(fields, f);
+					});
+				} else {
+					fields = [field];
+				}
+				$tw.utils.each(fields, function(field) {
+					match = searchTermsRegExps[t].test(tiddler.getFieldString(field));
+					if(match){
+						return false;
+					}
+				});
 			} else {
 				// Search title, tags and body
 				if(contentTypeInfo.encoding === "utf8") {

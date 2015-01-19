@@ -12,6 +12,39 @@ Extension methods for the $tw.Tiddler object (constructor and methods required a
 /*global $tw: false */
 "use strict";
 
+/*
+returns names of tiddler fields
+
+default: the current tiddler's custom fields, or via...
+  => listFields("$custom")
+all fields:
+  => listFields("$all")	
+standard fields:
+  => listFields("$standard")
+standard text fields:
+  => listFields("$text")
+*/
+
+exports.listFields = function(which) {
+	var f, result = [],
+		text = ["title","text","tags","modifier","creator","list"],
+		standard = text.concat("modified","created");
+	switch (which) {
+	case "$text":
+		result = text;
+	case "$standard":
+		result = standard;
+		break
+	default :
+		for (f in this.fields){
+			if($tw.utils.hop(this.fields,f) && ("$all" === which || 0 > standard.indexOf(f))) {
+				result.push(f);
+			}
+		}
+	}
+	return result;
+};
+
 exports.hasTag = function(tag) {
 	return this.fields.tags && this.fields.tags.indexOf(tag) !== -1;
 };
