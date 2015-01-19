@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/railroad/tw-parser.js
+title: $:/plugins/tiddlywiki/railroad/typed-parser.js
 type: application/javascript
 module-type: parser
 
