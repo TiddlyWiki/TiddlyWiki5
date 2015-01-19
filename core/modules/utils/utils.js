@@ -98,6 +98,31 @@ exports.pushTop = function(array,value) {
 };
 
 /*
+returns intersection of arrays
+*/
+exports.intersect = function() {
+	var count = arguments.length,
+		result = arguments[0] || [],
+		i = function(a, b) {
+		    var x, y, result = [];
+		    for (x = 0; x < a.length; x++) {
+		        for (y = 0; y < b.length; y++) {
+		            if (a[x] === b[y]) {
+		                result.push(a[x]);
+		                break;
+		            }
+		        }
+		    }
+		    return result || [];
+		};
+	while(count-- > 1){
+		result = i(result,arguments[count])
+	}
+    return result;
+}
+
+
+/*
 Remove entries from an array
 	array: array to modify
 	value: a single value to remove, or an array of values to remove
