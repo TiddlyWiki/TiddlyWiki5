@@ -16,20 +16,17 @@ Filter function for [is[missing]]
 Export our filter function
 */
 exports.missing = function(source,prefix,options) {
-	var results = [];
-	if(prefix === "!") {
-		source(function(tiddler,title) {
-			if(options.wiki.tiddlerExists(title)) {
-				results.push(title);
-			}
-		});
-	} else {
-		source(function(tiddler,title) {
-			if(!options.wiki.tiddlerExists(title)) {
-				results.push(title);
-			}
-		});
-	}
+	var results = [],
+		missing = options.wiki.getMissingTitles();
+	source(function(tiddler,title) {
+		var i = missing.indexOf(title);
+		if(
+			"!" === prefix && i < 0 ||
+			"!" !== prefix && i >= 0
+		) {
+			results.push(title);
+		}
+	});
 	return results;
 };
 
