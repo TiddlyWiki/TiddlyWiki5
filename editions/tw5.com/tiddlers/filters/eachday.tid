@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150118183035000
+modified: 20150119192430000
 tags: [[Filter Operators]] [[Group Operators]]
 title: eachday Operator
 type: text/vnd.tiddlywiki
@@ -7,12 +7,12 @@ caption: eachday
 purpose: get one of each group of input tiddlers by date
 
 <$macrocall $name=".operator-def"
-input="a [[set|Tiddler Sets]] of tiddler titles"
+input="a [[selection|Title Selections]] of tiddler titles"
 parameter="the name of a [[date field|DateFields]]"
 paramName="f"
-output="a set containing the first tiddler with each distinct value (ignoring time of day) for field <<.place f>>"
+output="a [[selection|Title Selections]] containing the first tiddler found with each distinct value (ignoring times of day) for field <<.place f>>"
 />
 
-Each input tiddler is processed in turn. The value of field <<.place f>> in that tiddler is examined, and as long as this indicates a day that has not been encountered before, the tiddler's title is appended to the output set.
+Each input tiddler is processed in turn. The value of field <<.place f>> in that tiddler is examined, and as long as this indicates a date that has not been encountered before, the tiddler's title is appended to the output set.
 
 <<.operator-examples "eachday">>

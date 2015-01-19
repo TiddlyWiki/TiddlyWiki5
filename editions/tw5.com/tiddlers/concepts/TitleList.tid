@@ -1,9 +1,9 @@
 created: 20150117152418000
-modified: 20150117163928000
+modified: 20150119191533000
 tags: Concepts
-title: TitleList
+title: Title Lists
 
-A <<.def "title list">> is a line of text that presents one or more tiddler titles, strung together with a space between each one and the next.
+A <<.def "title list">> is a line of text that contians one or more tiddler titles, strung together with a space between each one and the next.
 
 If a title <<.em contains>> a space, it needs double square brackets around it:
 
@@ -11,4 +11,4 @@ If a title <<.em contains>> a space, it needs double square brackets around it:
 
 Title lists are used in various places, including PermaLinks and the ListField.
 
-They are in fact the simplest case of a [[filter|Filters]].
+They are in fact the simplest case of a [[filter|Filters]], and are thus a way of expressing a [[title selection|Title Selections]].

@@ -1,11 +1,11 @@
 created: 20151714300000000
-modified: 20150117172438000
+modified: 20150119191515000
 tags: Concepts
 title: Dominant Append
 type: text/vnd.tiddlywiki
 
 A <<.def "dominant append">> is a frequent occurrence in [[filter|Filters]] processing.
 
-Filters manipulate sets of items in which no item can appear more than once, and they often append one such set to another.
+Filters manipulate [[selections|Title Selections]] in which no title can appear more than once, and they often append one selection to another.
 
-This is done in such a way that if the result would contain two copies of the same item, the <<.em earlier>> one is removed. The appended items thus dominate over any earlier duplicates.
+This is done in such a way that if the result would contain two copies of the same title, the <<.em earlier>> one is removed. The appended titles thus dominate over any earlier duplicates.

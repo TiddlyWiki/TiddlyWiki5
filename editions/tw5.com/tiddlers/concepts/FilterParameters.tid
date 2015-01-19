@@ -1,5 +1,5 @@
 created: 20151714300000000
-modified: 20150117193508000
+modified: 20150119185917000
 tags: Concepts
 title: Filter Parameters
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ The parameter to a [[filter operator|Filter Operators]] can be:
 ;<<.def indirect>>
 :<<.def transcluded>>
 :: `{like this}`
-:: The value of a field of a specified tiddler, or the value of an index of a specified [[data tiddler|DataTiddlers]]
+:: The value of a field of a specified tiddler, or the value of a property of a specified [[data tiddler|DataTiddlers]]
 :<<.def variable>>
 ::`<like this>`
 :: The value of the specified [[variable|Variables]]

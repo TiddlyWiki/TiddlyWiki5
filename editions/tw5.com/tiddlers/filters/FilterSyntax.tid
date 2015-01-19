@@ -1,12 +1,12 @@
 created: 20140210141217955
-modified: 20150117204215000
+modified: 20150119191956000
 tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
 
 <<.preamble """[[Filters]] follow a grammar that is presented here, using [[RailroadDiagrams]], for those who find formal syntax descriptions helpful. However, you can [[learn to write filters|Introduction to filter notation]] without needing to understand this tiddler.""">>
 
-A <<.def filter>> is a pipeline for transforming an <<.def input>> into an <<.def output>>. Both the input and the output are [[ordered sets|Tiddler Sets]] of strings, usually tiddler titles.
+A <<.def filter>> is a pipeline for transforming an <<.def input>> into an <<.def output>>. Both the input and the output are [[ordered sets|Title Selections]] of tiddler titles or similar strings.
 
 Filters are built from smaller pieces, called ''runs'' and ''steps'', each of which also transforms an input to an output.
 
@@ -19,10 +19,10 @@ Filters are built from smaller pieces, called ''runs'' and ''steps'', each of wh
 
 A filter starts with an empty output. Its runs are processed from left to right, progressively modifying the output.
 
-A run's input is normally the set of all tiddler titles in the wiki (in no particular order), but the `+` prefix can change this.
+A run's input is normally a list of all the non-shadow tiddler titles in the wiki (in no particular order). But the `+` prefix can change this.
 
-* If a run has no `+` or `-` prefix, its output strings are [[dominantly appended|Dominant Append]] to the filter's output.
-* If a run has a `-` prefix, its output strings are <<.em removed>> from the filter's output (if they were present).
+* If a run has no `+` or `-` prefix, its output titles are [[dominantly appended|Dominant Append]] to the filter's output.
+* If a run has a `-` prefix, its output titles are <<.em removed>> from the filter's output (if they were present).
 * If a run has a `+` prefix, it receives the filter's output so far as its input. The filter's output is then completely <<.em replaced>> by the run's output. Any subsequent run reverts to receiving all tiddler titles as its input, unless it too has a `+` prefix.
 
 In concise technical terms:

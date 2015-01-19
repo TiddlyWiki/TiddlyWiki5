@@ -1,5 +1,5 @@
 created: 20140426183123179
-modified: 20150118183058000
+modified: 20150119192446000
 tags: [[Filter Operators]] [[Field Operators]]
 title: get Operator
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ caption: get
 purpose: get the values of a field from all input tiddlers
 
 <$macrocall $name=".operator-def"
-input="a [[set|Tiddler Sets]] of tiddler titles"
+input="a [[selection|Title Selections]] of tiddler titles"
 parameter="the name of a [[field|TiddlerFields]]"
 paramName="f"
 output="the values of field <<.place f>> in each of the input tiddlers"

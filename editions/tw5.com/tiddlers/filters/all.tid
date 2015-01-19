@@ -1,6 +1,6 @@
 created: 20140410103123179
-modified: 20150118183004000
-tags: [[Filter Operators]] [[Common Operators]] [[Absolute Operators]] [[Link Operators]]
+modified: 20150119191633000
+tags: [[Filter Operators]] [[Common Operators]] [[Absolute Operators]] [[Category Operators]]
 title: all Operator
 type: text/vnd.tiddlywiki
 caption: all
@@ -10,24 +10,26 @@ purpose: get all tiddlers of a basic category
 input="ignored, unless <<.place p>> is empty"
 parameter="see below"
 paramName="p"
-output="the [[set|Tiddler Sets]] of tiddler titles that belong to one or more basic categories"
+output="the complete [[selection|Title Selections]] of tiddler titles that belong to one or more basic categories"
 />
 
-The parameter specifies categories using the following syntax:
+The parameter specifies tiddler categories using the following syntax:
 
 <$railroad text="""
 [{: ("current" | "missing" |: "orphans" | "shadows" | "tiddlers" ) +"+" }]
 """/>
 
 |!Category |!Members |!Sorted |
-|^`current`|just the [[current tiddler|CurrentTiddler]]|^--|
-|^`missing`|all non-existent tiddlers to which there is at least one [[observable link|Observable Links]]|^no|
-|^`orphans`|all tiddlers to which there are <<.em no>> observable links|^by title|
-|^`shadows`|all the [[shadow tiddlers|ShadowTiddlers]] that exist, including any that have been overridden with non-shadow tiddlers|^no|
-|^`tiddlers`|all the non-shadow tiddlers that exist|no|
+|^`current` |just the [[current tiddler|CurrentTiddler]] |^-- |
+|^`missing` |all non-existent tiddlers to which there is at least one [[observable link|Observable Links]] |^no |
+|^`orphans` |all tiddlers to which there are <<.em no>> observable links |^by title |
+|^`shadows` |all the [[shadow tiddlers|ShadowTiddlers]] that exist, including any that have been overridden with non-shadow tiddlers |^no |
+|^`tiddlers` |all the non-shadow tiddlers that exist |no |
 
-If the parameter specifies more than one category, they are processed from left to right. The overall output is initially empty, and each parameter's output is [[dominantly appended|Dominant Append]] to it in turn.
+If the parameter specifies more than one category, they are processed from left to right. The overall output is initially empty, and each category's output is [[dominantly appended|Dominant Append]] to it in turn. Unrecognised categories contribute nothing to the output.
 
 As a special case, if there is no parameter, the output is simply a copy of the input. This can be useful when the parameter is [[supplied indirectly|Filter Parameters]].
+
+The <<.op is>> operator is similar, but its scope is restricted to its input tiddlers.
 
 <<.operator-examples "all">>

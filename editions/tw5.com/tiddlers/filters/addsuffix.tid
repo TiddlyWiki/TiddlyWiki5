@@ -1,16 +1,16 @@
 created: 20140828133830424
-modified: 20150118182957000
+modified: 20150119192734000
 tags: [[Filter Operators]] [[String Operators]]
 title: addsuffix Operator
 type: text/vnd.tiddlywiki
 caption: addsuffix
-purpose: extend each input item with a suffix
+purpose: extend each input title with a suffix
 
-<<.operator-def
-input:"a [[set|Tiddler Sets]] of strings"
-parameter:"a suffix to be added"
-paramName:"p"
-output:"a copy of the input, but with the suffix added to the end of each string"
->>
+<$macrocall $name=".operator-def"
+input="a [[title selection|Title Selections]]"
+parameter="a suffix to be added"
+paramName="p"
+output="a copy of the input, but with <<.place p>> added to the end of each title"
+/>
 
 <<.operator-examples "addsuffix">>

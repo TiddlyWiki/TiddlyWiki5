@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150118180311000
+modified: 20150119190404000
 tags: Concepts Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -12,7 +12,7 @@ A <<.def "filter operator">> is a predefined name attached to an individual step
 <th align="left">Purpose</th>
 <th align="left">Common</th>
 </tr>
-<$list filter="[tag[Filter Operators]]"><tr>
+<$list filter="[tag[Filter Operators]sort[]]"><tr>
 <td><$link to={{!!title}}>{{!!caption}}</$link></td>
 <td>{{!!purpose}}</td>
 <td><$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
@@ -21,4 +21,4 @@ A <<.def "filter operator">> is a predefined name attached to an individual step
 
 A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameters]].
 
-Most steps operate on a set of input items. For the exact rules, see [[Filter Syntax]].
+Most steps accept a [[selection|Selection]] of tiddler titles as their input. For the exact rules, see [[Filter Syntax]].

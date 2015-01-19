@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150118183030000
+modified: 20150119192427000
 tags: [[Filter Operators]] [[Group Operators]]
 title: each Operator
 type: text/vnd.tiddlywiki
@@ -7,10 +7,10 @@ caption: each
 purpose: get one of each group of input tiddlers by field value
 
 <$macrocall $name=".operator-def"
-input="a [[set|Tiddler Sets]] of tiddler titles"
+input="a [[title selection|Title Selections]]"
 parameter="the name of a [[field|TiddlerFields]]"
 paramName="f"
-output="a set containing the first tiddler with each distinct value for field <<.place f>>"
+output="a [[selection|Title Selections]] containing the first tiddler found with each distinct value for field <<.place f>>"
 />
 
 Each input tiddler is processed in turn. The value of field <<.place f>> in that tiddler is examined, and as long as the value has not been encountered before, the tiddler's title is appended to the output set.

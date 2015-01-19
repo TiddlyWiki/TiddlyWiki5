@@ -1,29 +1,37 @@
 created: 20140410103123179
-modified: 20150118182931000
-tags: Filters CommonFilters
-caption: is
+modified: 20150119192457000
+tags: [[Filter Operators]] [[Common Operators]] [[Category Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
+caption: is
+purpose: filter the input tiddlers by basic category
 
-The ''is'' filter operator selects tiddlers from the current list according to their membership of the category specified in the operand:
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selections]] of titles"
+parameter="see below"
+paramName="p"
+output="the [[subselection|Title Selections]] of the input tiddlers that belong to the specified basic category"
+/>
 
-* `[is[current]]` - returns any tiddler that matches the title of the current tiddler
-* `[is[image]]` - tiddlers that contain an image (eg, GIF, JPEG, PNG etc.)
-* `[is[missing]]` - MissingTiddlers that are referenced but undefined
-* `[is[orphan]]` - OrphanTiddlers that are not referenced from any other tiddler
-* `[is[shadow]]` - tiddlers that are ShadowTiddlers
-* `[is[system]]` - tiddlers that are SystemTiddlers
-* `[is[tiddler]]` - tiddlers that are not MissingTiddlers
-* `[is[tag]]` - tiddlers that are being used as tags
+The parameter is one of the following categories:
 
-For example:
+|!Category |!Matches any tiddler that... |
+|^`current`|is the [[current tiddler|CurrentTiddler]] |
+|^`image`|has an image ContentType |
+|^`missing` |does not exist (other than possibly as a non-shadow tiddler), regardless of whether there are any links it |
+|^`orphan` |has no [[Observable Links]] to it |
+|^`shadow` |is a [[shadow tiddler|ShadowTiddlers]], regardless of whether it has been overridden with a non-shadow tiddler |
+|^`system` |is a [[system tiddler|SystemTiddlers]], i.e. its title starts with `$:/` |
+|^`tag` |is in use as a tag |
+|^`tiddler` |exists as a non-shadow tiddler |
 
-|!Filter String |!Description |
-|`[tag[task]is[shadow]]` |Returns ShadowTiddlers tagged `task` |
-|`[tag[task]!is[system]]` |Returns non-SystemTiddlers tagged `task` |
-|`[is[shadow]]` |Returns ShadowTiddlers that have been overridden by a 'real' tiddler |
-|`[!is[shadow]]` |Returns ordinary tiddlers that are not shadow tiddlers |
-|`[!is[tag]]` |Returns all tiddlers that are not being used as tags |
-|`[is[missing]]` |Returns an empty list (see note below) |
+;Negation
+: `!is` outputs the subselection of the input tiddlers that are <<.em not>> in the specified category. `!is[tiddler]` is a synonym for `is[missing]`, and vice versa.
 
-Note that the ''is'' filter operator strictly filters the current list by choosing whether or not to include each one in the output. It never adds tiddlers to the results that are not already listed. This means that when used at the start of a run of filter operators the ''is'' operator will be choosing from the currently existing tiddlers, and so will never return missing tiddlers, or shadow tiddlers that haven't been overridden.
+An unrecognised category outputs an error string.
+
+When <<.op is[missing]>> is the first operator in a [[run|Filter Syntax]], its output is always empty. And when <<.op is[shadow]>> comes first, it outputs only those shadow tiddlers that have been overridden. This is because the [[initial input to a run|Filter Syntax]] contains only <<.em non>>-shadow tiddlers.
+
+The <<.op all>> operator is similar, but its scope is the whole wiki.
+
+<<.operator-examples "is">>

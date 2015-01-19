@@ -1,14 +1,19 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-title: FilterOperator: indexes
-caption: indexes
+modified: 20150119192453000
+tags: [[Filter Operators]]
+title: indexes Operator
 type: text/vnd.tiddlywiki
+caption: indexes
+purpose: get all properties of the input data tiddlers
 
-The ''indexes'' filter operator returns a list of all the property indexes found in the DataTiddlers in the current list. Tiddlers that are not DataTiddlers are ignored.
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selections]] of tiddler titles"
+parameter="none"
+output="the [[selection|Title Selections]] of all property names contained in the input data tiddlers"
+/>
 
-For example:
+Each input title is processed in turn, and is ignored if it does not denote a [[data tiddler|DataTiddlers]]. The list of property names is retrieved from the data tiddler (in no particular order) and then [[dominantly appended|Dominant Append]] to the operator's output.
 
-|!Filter String |!Description |
-|`[[MyData]indexes[]]` |Returns the indexes of all properties in the data tiddler `MyData` |
-|`[{$:/palette}indexes[]sort[title]]` |Returns the names of all the colours defined in the current [[colour palette|ColourPalettes]] |
+Where a tiddler's [[content is JSON|JSONTiddlers]] with an array as its root, the <<.op indexes>> operator retrieves a selection of integer indexes instead.
+
+<<.operator-examples "indexes">>

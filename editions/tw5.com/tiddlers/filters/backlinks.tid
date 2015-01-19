@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150118183008000
+modified: 20150119192416000
 tags: [[Filter Operators]] [[Link Operators]]
 title: backlinks Operator
 type: text/vnd.tiddlywiki
@@ -7,11 +7,11 @@ caption: backlinks
 purpose: get the tiddlers that link to each input tiddler
 
 <$macrocall $name=".operator-def"
-input="a [[set|Tiddler Sets]] of tiddler titles"
+input="a [[title selection|Title Selections]]"
 parameter="none"
 output="the titles of any non-system tiddlers that contain [[Observable Links]] to the input tiddlers"
 />
 
-Each input tiddler is processed in turn. Its corresponding set of backlinks is generated, sorted by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+Each input tiddler is processed in turn. Its corresponding list of backlinks is generated, sorted by title, and then [[dominantly appended|Dominant Append]] to the operator's overall output.
 
 <<.operator-examples "backlinks">>
