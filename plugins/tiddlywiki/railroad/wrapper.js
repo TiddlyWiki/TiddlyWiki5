@@ -33,6 +33,10 @@ RailroadWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Get the source text
+console.log('getAttribute(text)', this.getAttribute("text", 'not found'));
+$tw.utils.each(this.parseTreeNode,function(element,title,object) {
+console.log(':', element, title);
+});
 	var source = this.getAttribute("text",this.parseTreeNode.text || "");
 	// Create a div to contain the SVG or error message
 	var div = this.document.createElement("div");
