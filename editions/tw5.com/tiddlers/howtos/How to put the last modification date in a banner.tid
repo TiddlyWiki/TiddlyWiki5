@@ -24,4 +24,4 @@ Here's how to display the last modification date of a wiki in a banner in the co
 </div>
 # If required, change the background-color value to your preference
 # You can also try changing the positioning class from `right` to `right-bottom`
-## To make the banner appear at the top left you'll need to tag the tiddler [[$:/tags/PageTemplate]] instead of [[$:/tags/PageControls]] and then change the position class to `left`
+# To make the banner appear at the top left you'll need to tag the tiddler [[$:/tags/PageTemplate]] instead of [[$:/tags/PageControls]] and then change the position class to `left`
