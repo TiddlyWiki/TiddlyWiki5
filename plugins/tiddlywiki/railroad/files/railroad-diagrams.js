@@ -162,16 +162,17 @@ var temp = (function(options) {
 		return this;
 	}
 
-	function Diagram(items) {
-		if(!(this instanceof Diagram)) return new Diagram([].slice.call(arguments));
+/* TiddlyWiki: added twOptions parameter, passing it to Start() and End() */
+	function Diagram(twOptions, items) {
+		if(!(this instanceof Diagram)) return new Diagram(twOptions, [].slice.call(arguments,1));
 		FakeSVG.call(this, 'svg', {class: Diagram.DIAGRAM_CLASS});
 		this.items = items.map(wrapString);
-		this.items.unshift(new Start);
-		this.items.push(new End);
+		this.items.unshift(new Start(twOptions.start));
+		this.items.push(new End(twOptions.end));
 		this.width = this.items.reduce(function(sofar, el) { return sofar + el.width + (el.needsSpace?20:0)}, 0)+1;
 		this.up = Math.max.apply(null, this.items.map(function (x) { return x.up; }));
 		this.down = Math.max.apply(null, this.items.map(function (x) { return x.down; }));
-		this.formatted = false;
+		this.formatted = false;		
 	}
 	subclassOf(Diagram, FakeSVG);
 	for(var option in options) {
@@ -386,29 +387,47 @@ var temp = (function(options) {
 		return Optional(OneOrMore(item, rep, wantArrow), skip);
 	}
 
-	function Start() {
-		if(!(this instanceof Start)) return new Start();
+/* TiddlyWiki: added type parameter */
+	function Start(type) {
+		if(!(this instanceof Start)) return new Start(type);
 		FakeSVG.call(this, 'path');
-		this.width = 20;
+		this.type = type || 'single'
+		this.width = (this.type === 'double') ? 20 : 10;
 		this.up = 10;
 		this.down = 10;
 	}
 	subclassOf(Start, FakeSVG);
 	Start.prototype.format = function(x,y) {
-		this.attrs.d = 'M '+x+' '+(y-10)+' v 20 m 10 -20 v 20 m -10 -10 h 20.5';
+/* TiddlyWiki: added types */
+		if(this.type === 'single') {
+			this.attrs.d = 'M '+x+' '+(y-10)+' v 20 m 0 -10 h 10.5';
+		} else if(this.type === 'double') {
+			this.attrs.d = 'M '+x+' '+(y-10)+' v 20 m 10 -20 v 20 m -10 -10 h 20.5';
+		} else { // 'none'
+			this.attrs.d = 'M '+x+' '+y+' h 10.5';
+		}
 		return this;
 	}
 
-	function End() {
-		if(!(this instanceof End)) return new End();
+/* TiddlyWiki: added type parameter */
+	function End(type) {
+		if(!(this instanceof End)) return new End(type);
 		FakeSVG.call(this, 'path');
-		this.width = 20;
+		this.type = type || 'double';
+		this.width = (this.type === 'double') ? 20 : 10;
 		this.up = 10;
 		this.down = 10;
 	}
 	subclassOf(End, FakeSVG);
 	End.prototype.format = function(x,y) {
-		this.attrs.d = 'M '+x+' '+y+' h 20 m -10 -10 v 20 m 10 -20 v 20';
+/* TiddlyWiki: added types */
+		if(this.type === 'single') {
+			this.attrs.d = 'M '+x+' '+y+' h 10 m 0 -10 v 20';
+		} else if(this.type === 'double') {
+			this.attrs.d = 'M '+x+' '+y+' h 20 m -10 -10 v 20 m 10 -20 v 20';
+		} else { // 'none'
+			this.attrs.d = 'M '+x+' '+y+' h 10';
+		}
 		return this;
 	}
 

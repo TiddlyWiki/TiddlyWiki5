@@ -236,9 +236,11 @@ var Root = function(content) {
 
 Root.prototype = new Component();
 
-Root.prototype.toSvg = function() {
-	// Call Diagram(component1,component2,...)
-	return railroad.Diagram.apply(null, this.getSvgOfChildren());
+Root.prototype.toSvg = function(options) {
+	var args = this.getSvgOfChildren();
+	args.unshift(options);
+	// Call Diagram(options,component1,component2,...)
+	return railroad.Diagram.apply(null,args);
 }
 
 var Sequence = function(content) {
@@ -249,7 +251,7 @@ Sequence.prototype = new Component();
 
 Sequence.prototype.toSvg = function() {
 	// Call Sequence(component1,component2,...)
-	return railroad.Sequence.apply(null, this.getSvgOfChildren());
+	return railroad.Sequence.apply(null,this.getSvgOfChildren());
 }
 
 var Choice = function(content,normal) {
@@ -266,7 +268,7 @@ Choice.prototype.toSvg = function() {
 	// Call Choice(normal,component1,component2,...)
 	var args = this.getSvgOfChildren();
 	args.unshift(this.normal);
-	return railroad.Choice.apply(null, args);
+	return railroad.Choice.apply(null,args);
 }
 
 /////////////////////////// Exports

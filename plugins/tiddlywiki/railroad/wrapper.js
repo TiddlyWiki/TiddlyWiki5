@@ -33,18 +33,21 @@ RailroadWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Get the source text
-console.log('getAttribute(text)', this.getAttribute("text", 'not found'));
-$tw.utils.each(this.parseTreeNode,function(element,title,object) {
-console.log(':', element, title);
-});
 	var source = this.getAttribute("text",this.parseTreeNode.text || "");
 	// Create a div to contain the SVG or error message
 	var div = this.document.createElement("div");
 	try {
+		// Initialise options from widget attributes
+		var options = {
+			arrow: this.getAttribute("arrow","yes") === "yes",
+			debug: this.getAttribute("debug","no") === "yes",
+			start: this.getAttribute("start","single"),
+			end: this.getAttribute("end","single")
+		};
 		// Parse the source
-		var parser = new Parser(this,source,this.getAttribute("arrow","yes") === "yes");
+		var parser = new Parser(this,source,options);
 		// Generate content into the div
-		if(this.getAttribute("mode","svg") === "debug") {
+		if(parser.options.debug) {
 			this.renderDebug(parser,div);
 		} else {
 			this.renderSvg(parser,div);
@@ -67,7 +70,7 @@ RailroadWidget.prototype.renderDebug = function(parser,div) {
 
 RailroadWidget.prototype.renderSvg = function(parser,div) {
 	// Generate a model of the diagram
-	var fakeSvg = parser.root.toSvg();
+	var fakeSvg = parser.root.toSvg(parser.options);
 	// Render the model into a tree of SVG DOM nodes
 	var svg = fakeSvg.toSVG();
 	// Fill in the remaining attributes of any link nodes
@@ -111,7 +114,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 
 RailroadWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.text || changedAttributes.mode || changedAttributes.arrow) {
+	if(changedAttributes.text) {
 		this.refreshSelf();
 		return true;
 	}

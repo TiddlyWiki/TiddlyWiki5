@@ -1,8 +1,8 @@
 created: 20150103184022184
-modified: 20150103184022184
+modified: 20150119220342000
 title: $:/plugins/tiddlywiki/railroad/syntax
 
-The railroad widget uses a special ''diagram syntax'' to construct the components defined below.
+The railroad widget uses a special notation to construct the components defined below.
 
 `x` and `y` here stand for any component.
 
@@ -78,3 +78,22 @@ Names (as opposed to quoted strings) are available when a value starts with a le
 ; transclusion
 : <$railroad text=""" "{{" (name|string) "}}" """/>
 * Treats the content of another tiddler as diagram syntax and transcludes it into the current diagram
+
+---
+
+; arrow pragma
+: <$railroad text=""" "\arrow" ("yes" | "no") """/>
+* Controls whether repeat paths have an arrow on them
+* Can be toggled on and off in mid-diagram, if desired
+
+---
+
+; debug pragma
+: <$railroad text=""" "\debug" """/>
+* Causes the diagram to display its parse tree
+
+---
+
+; start/end pragma
+: <$railroad text=""" ("\start" |: "\end") ("none" |: "single" | "double") """/>
+* Controls the style of the diagram's startpoint or endpoint
