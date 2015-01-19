@@ -17,13 +17,11 @@ Export our filter function
 */
 exports.missing = function(source,prefix,options) {
 	var results = [],
+		get = "!" !== prefix,
 		missing = options.wiki.getMissingTitles();
 	source(function(tiddler,title) {
 		var i = missing.indexOf(title);
-		if(
-			"!" === prefix && i < 0 ||
-			"!" !== prefix && i >= 0
-		) {
+		if(get && i >= 0 || !get && i < 0) {
 			results.push(title);
 		}
 	});
