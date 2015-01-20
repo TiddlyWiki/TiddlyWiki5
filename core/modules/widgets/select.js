@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/select.js
 type: application/javascript
 module-type: widget
 
-Select widget (NG mod):
+Select widget:
 
 ```
 <$select tiddler="MyTiddler" field="text">
@@ -53,6 +53,7 @@ Handle a change event
 SelectWidget.prototype.handleChangeEvent = function(event) {
 	var value = this.getSelectDomNode().value;
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
+	this.invokeActions(event);
 };
 
 /*
