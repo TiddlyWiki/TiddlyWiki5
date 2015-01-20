@@ -9,7 +9,12 @@ http://$(userName)$.tiddlyspot.com/backup/
 \define backupLink()
 <$reveal type="nomatch" state="$:/UploadName" text="">
 <$set name="userName" value={{$:/UploadName}}>
+<$reveal type="match" state="$:/UploadURL" text="">
 <a href=<<backupURL>>><$macrocall $name="backupURL" $type="text/plain" $output="text/plain"/></a>
+</$reveal>
+<$reveal type="nomatch" state="$:/UploadURL" text="">
+<<lingo TiddlySpot/RelativeURL>>
+</$reveal>
 </$set>
 </$reveal>
 \end
