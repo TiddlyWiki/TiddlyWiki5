@@ -117,7 +117,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 
 RailroadWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.text) {
+	if(changedAttributes.text || changedTiddlers[RAILROAD_OPTIONS]) {
 		this.refreshSelf();
 		return true;
 	}
