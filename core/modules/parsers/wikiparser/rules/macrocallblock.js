@@ -53,6 +53,7 @@ exports.parse = function() {
 		type: "macrocall",
 		name: macroName,
 		params: params,
+		paramString: paramString,
 		isBlock: true
 	}];
 };
