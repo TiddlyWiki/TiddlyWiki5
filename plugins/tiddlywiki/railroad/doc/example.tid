@@ -1,9 +1,13 @@
 created: 20150102165032410
-modified: 20150119215720000
+modified: 20150120090735000
 tags:
 title: $:/plugins/tiddlywiki/railroad/example
 
-Transcluding from [[$:/plugins/tiddlywiki/railroad/example-source]]:
+Notation:
+
+<pre><code><$text text={{$:/plugins/tiddlywiki/railroad/example-source}}/></code></pre>
+
+Diagram:
 
 {{$:/plugins/tiddlywiki/railroad/example-source}}
 
