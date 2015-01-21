@@ -16,10 +16,19 @@ Filter operator for chopping the results to a specified maximum number of entrie
 Export our filter function
 */
 exports.limit = function(source,operator,options) {
-	var results = [];
+	var count = 0,
+		results = [],
+		offset = parseInt(operator.suffix,10);
+	if(isNaN(offset)) {
+		offset = 0;
+	}
 	// Convert to an array
 	source(function(tiddler,title) {
-		results.push(title);
+		if(count < offset) {
+			count++;			
+		} else {
+			results.push(title);
+		}
 	});
 	// Slice the array if necessary
 	var limit = Math.min(results.length,parseInt(operator.operand,10));
