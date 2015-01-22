@@ -152,17 +152,46 @@ NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 
 // Close a specified tiddler
 NavigatorWidget.prototype.handleCloseTiddlerEvent = function(event) {
-	var title = event.param || event.tiddlerTitle,
-		storyList = this.getStoryList();
-	// Look for tiddlers with this title to close
-	this.removeTitleFromStory(storyList,title);
-	this.saveStoryList(storyList);
+	var close = true,
+		title = event.param || event.tiddlerTitle,
+		storyList = this.getStoryList(),
+		config = this.wiki.getTiddler("$:/config/Story/OnEmpty"),
+		self = this,
+		closeTiddler = function(){
+			if(close) {
+		    	// Look for tiddlers with this title to close
+				self.removeTitleFromStory(storyList,title);
+				self.saveStoryList(storyList);
+			}
+		};
+    // Behaviour configured and last in story?
+    if(config && 2 > storyList.length) {
+		switch (config.fields.text){
+		case "keep":
+			close = false;
+			break;
+		case "default":
+			closeTiddler();
+			close = false;
+			$tw.rootWidget.dispatchEvent({type: "tm-home"});
+			break;
+		default:
+			closeTiddler();
+			close = false;
+			this.addToStory(
+				$tw.utils.trim(config.fields.text.substr(5))
+			);
+		}
+    }
+	closeTiddler();
 	return false;
 };
 
 // Close all tiddlers
 NavigatorWidget.prototype.handleCloseAllTiddlersEvent = function(event) {
-	this.saveStoryList([]);
+	var last = this.getStoryList()[0];
+	this.saveStoryList([last]);
+	this.handleCloseTiddlerEvent({param:last});
 	return false;
 };
 
