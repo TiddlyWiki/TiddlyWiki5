@@ -28,7 +28,7 @@ standard text fields:
 exports.listFields = function(which) {
 	var f, result = [],
 		text = ["title","text","tags","modifier","creator","list"],
-		standard = text.concat("modified","created");
+		standard = text.concat("color","created","modified");
 	switch (which) {
 	case "$text":
 		result = text;
