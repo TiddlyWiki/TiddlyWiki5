@@ -3,27 +3,22 @@ tags: $:/tags/Macro
 
 \define tag(tag,mode:"button")
 <$reveal type="match" default="$mode$" text="button">
-<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} popup="true"/>
+<$macrocall $name="tag-body" popup="true"/>
 </$reveal>
 <$reveal type="match" default="$mode$" text="link">
 <$link>
-<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}}/>
+<$macrocall $name="tag-body"/>
 </$link>
 </$reveal>
 <$reveal type="match" default="$mode$" text="remove">
-<$macrocall $name="tag-body" colour={{!!color}} palette={{$:/palette}} remove="true"/>
+<$macrocall $name="tag-body" remove="true"/>
 </$reveal>
 \end
 
-\define tag-body(colour,palette,popup,remove)
+\define tag-body(popup,remove)
 <span class="tc-tag-list-item">
-<$macrocall $name="tag-body-inner" colour="""$colour$""" fallbackTarget={{$palette$##tag-background}} colourA={{$palette$##foreground}} colourB={{$palette$##background}} popup="$popup$" remove="$remove$"/>
-</span>
-\end
-
-\define tag-body-inner(colour,fallbackTarget,colourA,colourB,popup,remove)
-<$set name="foregroundColor" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
-<$set name="backgroundColor" value="""$colour$""">
+<$set name="foregroundColor" value=<<contrastcolour>>>
+<$set name="backgroundColor" value={{!!color}}>
 <$reveal type="match" text="$popup$" default="">
 <span class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
 <$transclude tiddler={{!!icon}}/>
@@ -45,6 +40,7 @@ tags: $:/tags/Macro
 </$reveal>
 </$set>
 </$set>
+</span>
 \end
 
 \define tag-styles()

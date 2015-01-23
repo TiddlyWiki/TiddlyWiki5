@@ -29,6 +29,22 @@ exports.params = [
 Run the macro
 */
 exports.run = function(target,fallbackTarget,colourA,colourB) {
+	var wiki = this.wiki,
+		palette = wiki.getTiddler("$:/palette").fields.text;
+	if(!target){
+		target = "!!color";
+	}
+	if(-1 < target.indexOf("!!")) {
+		target = wiki.getTextReference(
+			target,
+			wiki.getTextReference(palette + "##tag-foreground"),
+			this.getVariable("currentTiddler")
+		);
+	}
+	fallbackTarget = fallbackTarget || wiki.getTextReference(palette + "##tag-background");
+	colourA = colourA || wiki.getTextReference(palette + "##foreground");
+	colourB = colourB || wiki.getTextReference(palette + "##background");
+
 	var rgbTarget = $tw.utils.parseCSSColor(target) || $tw.utils.parseCSSColor(fallbackTarget);
 	if(!rgbTarget) {
 		return colourA;
