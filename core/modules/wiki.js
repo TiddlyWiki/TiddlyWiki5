@@ -314,10 +314,11 @@ Sort an array of tiddler titles by a specified field
 	isCaseSensitive: true if the sort should consider upper and lower case letters to be different
 */
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
-	var x,y,self = this;
+	var self = this;
 	titles.sort(function(a,b) {
 		if(sortField !== "title") {
-			var tiddlerA = self.getTiddler(a),
+			var x,y,
+				tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
 			if(tiddlerA) {
 				a = tiddlerA.fields[sortField] || "";
