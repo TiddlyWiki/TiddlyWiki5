@@ -316,9 +316,16 @@ Sort an array of tiddler titles by a specified field
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
+		var x,y,
+			compareNumbers = function(x,y) {
+				var result = 
+					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
+					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
+											(isDescending ? y - x :  x - y);
+				return result;
+			};
 		if(sortField !== "title") {
-			var x,y,
-				tiddlerA = self.getTiddler(a),
+			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
 			if(tiddlerA) {
 				a = tiddlerA.fields[sortField] || "";
@@ -334,10 +341,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 		x = Number(a);
 		y = Number(b);
 		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
-		    return
-		        isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
-		        !isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-		                                 isDescending ? x - y :  y - x;
+			return compareNumbers(x,y);
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else {
