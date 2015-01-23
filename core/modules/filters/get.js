@@ -19,10 +19,12 @@ exports.get = function(source,operator,options) {
 	var results = [];
 	source(function(tiddler,title) {
 		if(tiddler) {
-			var value = tiddler.getFieldString(operator.operand);
-			if(value) {
-				results.push(value);
-			}
+	        var value = operator.suffix === "data" ?
+	            options.wiki.extractTiddlerDataItem(tiddler,operator.operand,"") :
+	            tiddler.getFieldString(operator.operand);
+	        if(value) {
+	            results.push(value);
+	        }
 		}
 	});
 	return results;
