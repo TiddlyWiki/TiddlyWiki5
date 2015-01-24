@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150124164959000
+modified: 20150124214554000
 tags: [[Filter Operators]] [[Group Operators]] [[Date Operators]]
 title: eachday Operator
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ purpose: select one of each group of input titles by date
 
 <$macrocall $name=".operator-def"
 input="a [[selection of titles|Title Selection]]"
-parameter="the name of a date [[field|TiddlerFields]]"
+parameter="the name of a [[date field|Date Fields]]"
 paramName="f"
 output="a selection containing the first input title encountered for each distinct value (ignoring times of day) of field <<.place f>>"
 />

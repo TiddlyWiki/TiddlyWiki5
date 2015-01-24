@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150124191743000
+modified: 20150124214612000
 tags: [[Filter Operators]] [[Date Operators]]
 title: sameday Operator
 type: text/vnd.tiddlywiki
@@ -8,7 +8,7 @@ purpose: filter the input by date
 
 <$macrocall $name=".operator-def"
 input="a [[selection of titles|Title Selection]]"
-suffix="the name of a date [[field|TiddlerFields]], defaulting to <<.field modified>>"
+suffix="the name of a [[date field|Date Fields]], defaulting to <<.field modified>>"
 suffixName="f"
 parameter="a date, in the [[format|DateFormat]] `YYYYMMDD`"
 paramName="d"
