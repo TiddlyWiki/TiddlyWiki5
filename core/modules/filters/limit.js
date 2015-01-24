@@ -18,10 +18,7 @@ Export our filter function
 exports.limit = function(source,operator,options) {
 	var count = 0,
 		results = [],
-		offset = parseInt(operator.suffix,10);
-	if(isNaN(offset)) {
-		offset = 0;
-	}
+		offset = parseInt(operator.suffix,10) || 0;
 	// Convert to an array
 	source(function(tiddler,title) {
 		if(count < offset) {
