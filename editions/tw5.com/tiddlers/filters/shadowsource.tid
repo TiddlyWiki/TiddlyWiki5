@@ -1,15 +1,17 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-title: FilterOperator: shadowsource
-caption: shadowsource
+modified: 20150124210534000
+tags: [[Filter Operators]] [[Special Operators]]
+title: shadowsource Operator
 type: text/vnd.tiddlywiki
+caption: shadowsource
+purpose: select the plugin titles that contain the input shadows
 
-The ''shadowsource'' filter operator returns the titles of the plugin tiddlers containing any ShadowTiddlers in the current list.
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selection]] of [[shadow titles|ShadowTiddlers]]"
+parameter="none"
+output="the [[plugins|Plugins]] that contain the input tiddlers"
+/>
 
-For example:
+Each input title is processed in turn. If it denotes a shadow tiddler, the title of its plugin tiddler is [[dominantly appended|Dominant Append]] to the output. Non-shadow tiddlers contribute nothing to the output.
 
-|!Filter String |!Description |
-|`[[$:/core/copyright.txt]shadowsource[]]` |Returns `$:/core`, which is the plugin that contains the shadow tiddler [[$:/core/copyright.txt]] |
-
-See also [[FilterOperator: plugintiddlers]].
+<<.operator-examples "shadowsource">>

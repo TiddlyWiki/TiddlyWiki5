@@ -1,15 +1,15 @@
 created: 20140410103123179
-modified: 20150118182943000
-tags: Filters
-caption: modules
-title: FilterOperator: modules
+modified: 20150124170624000
+tags: [[Filter Operators]] [[Special Operators]]
+title: modules Operator
 type: text/vnd.tiddlywiki
+caption: modules
+purpose: select the names of all modules of the input module types
 
-The ''modules'' filter operator treats the current list as a list of [[module types|ModuleType]], and returns the titles of all of the modules of those types.
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selection]] of module types"
+parameter="none"
+output="the title of each module with any of the input types"
+/>
 
-For example:
-
-|!Filter String |!Description |
-|`[[filteroperator]modules[]]` |Returns a list of the modules of type `filteroperator` |
-
-See also [[FilterOperator: moduletypes]].
+<<.operator-examples "modules">>

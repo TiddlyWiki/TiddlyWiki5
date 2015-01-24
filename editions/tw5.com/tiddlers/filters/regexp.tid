@@ -1,37 +1,31 @@
 created: 20140909134102102
-modified: 20140909134102102
-tags: Filters
-caption: regexp
-title: FilterOperator: regexp
+modified: 20150124203736000
+tags: [[Filter Operators]] [[Field Operators]] [[Negatable Operators]]
+title: regexp Operator
 type: text/vnd.tiddlywiki
+caption: regexp
+purpose: filter the input by pattern-matched field
 
-The ''regexp'' filter operator filters tiddlers that match a regular expression.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+suffix="the name of a [[field|TiddlerFields]]"
+suffixName="f"
+parameter="a regular expression"
+paramName="x"
+output="those input tiddlers in which field <<.place f>> matches <<.place x>>"
+negationOutput="those input tiddlers in which field <<.place f>> does <<.em not>> match <<.place x>>"
+/>
 
-Regular expressions are a way of encoding complex string matching criteria. The format is defined fully in [[this Mozilla reference|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions]].
+<<.def "Regular expressions">> are concise strings of characters that denote patterns of text to search for. The format used in ~TiddlyWiki is fully defined in [[this Mozilla reference|https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions]].
 
-The regexp filter operator takes a fieldname as the optional suffix (defaulting to `title`).
+The [[filter syntax|Filter Run]] makes it impossible to directly specify a regular expression that contains square brackets. The solution is to store the expression in a [[variable|Variables]]. See the <<.operator-examples "regexp" "examples">>.
 
-The regular expression itself can start or end with an optional string to specify flags in the format `(?flags)` where flags can be "g", "m" or "i". Only the "i" flag is generally useful: it forces the match to be case-insensitive (ie upper and lower case letters are considered the same).
+The parameter <<.place x>> can optionally start or end with a string of flags:
 
-For example:
+<$railroad text=""" "(?" { ("i"|"m"|:"g") } ")" """/>
 
-|!Filter String |!Description |
-|`[all[tiddlers]regexp[EggCup]]` |Selects all tiddlers that have the CamelCase string "EggCup" in their title |
-|`[all[tiddlers]regexp[eggcup(?i)]]` |Selects all tiddlers that have the string "eggcup" in their title (ignoring case) |
-|`[all[tiddlers]regexp[(?i)\.jpe?g$]]` |Selects all tiddlers with titles ending in ".jpg" or ".jpeg" (ignoring case) |
-|`[all[tiddlers]regexp:modified[^2014]]` |Selects all tiddlers whose modified field starts with the string "2014" |
+Only the `i` flag is generally useful: it forces the different between capital and lowercase letters to be ignored.
 
-! Regular Expressions with Square Brackets
+If <<.place x>> is empty, <<.op regexp>> will match all of the input tiddlers.
 
-Note that the filter syntax doesn't allow you to directly enter regular expressions that include square brackets. Instead, you should use a variable to store the filter string. For example, the following regular expression matches all titles that contain any combination the letters "a", "b" and "c" (with no other characters present).
-
-```
-<$set name="myfilter" value="^[abc]*$">
-<$list filter="[regexp:title<myfilter>]">
-<div>
-<$view field="title"/>
-</div>
-</$list>
-</$set>
-```
-
+<<.operator-examples "regexp">>

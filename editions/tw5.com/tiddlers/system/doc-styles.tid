@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20150118161750000
+modified: 20150124201551000
 title: $:/editions/tw5.com/doc-styles
 tags: $:/tags/Stylesheet
 
@@ -39,7 +39,8 @@ tags: $:/tags/Stylesheet
 .doc-value,
 .doc-operator,
 .doc-var,
-.doc-widget {
+.doc-widget,
+.doc-attr {
 	background-color: <<color background>>;
 	border: none;
 	color: <<color very-muted-foreground>>;
@@ -56,7 +57,8 @@ a .doc-field,
 a .doc-value,
 a .doc-operator,
 a .doc-var,
-a .doc-widget {
+a .doc-widget,
+a .doc-attr {
 	color: <<color tiddler-link-foreground>>;
 }
 
@@ -78,11 +80,19 @@ td svg {
 }
 
 .doc-preamble {
-	border: 2px solid <<colour very-muted-foreground>>;
+	border: 2px solid <<colour code-border>>;
 	color: <<colour very-muted-foreground>>;
 	font-size: 90%;
 	margin-left: 0;
 	padding: 0.5em 0.7em;
+}
+
+.doc-note dt {
+	color: <<colour very-muted-foreground>>;
+}
+.doc-note dd {
+	border-left: 2px solid <<colour code-border>>;
+	padding-left: 0.6em;
 }
 
 .doc-example {
@@ -96,4 +106,16 @@ td svg {
 	margin-bottom: 0;
 	padding-bottom: 0;
 	margin-top: 0.2em;
+}
+
+.doc-table th, .doc-table tr {
+	vertical-align: top;
+}
+.doc-table th a {
+	font-weight: bold;
+}
+
+tr.doc-table-subheading {
+	height: 2em;
+	vertical-align: middle;
 }

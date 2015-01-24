@@ -1,37 +1,37 @@
 created: 20140410103123179
-modified: 20150119192457000
-tags: [[Filter Operators]] [[Common Operators]] [[Category Operators]]
+modified: 20150124202225000
+tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
 caption: is
-purpose: filter the input tiddlers by basic category
+purpose: filter the input by fundamental category
 
 <$macrocall $name=".operator-def"
-input="a [[selection|Title Selections]] of titles"
-parameter="see below"
-paramName="p"
-output="the [[subselection|Title Selections]] of the input tiddlers that belong to the specified basic category"
+input="a [[selection of titles|Title Selection]]"
+parameter="a category -- see below"
+paramName="c"
+output="those input tiddlers that belong to category <<.place c>>"
+negationOutput="those input tiddlers that do <<.em not>> belong to category <<.place c>>"
 />
 
-The parameter is one of the following categories:
+The parameter <<.place c>> is one of the following fundamental categories:
 
 |!Category |!Matches any tiddler that... |
-|^`current`|is the [[current tiddler|CurrentTiddler]] |
-|^`image`|has an image ContentType |
+|^`current` |is the [[current tiddler|CurrentTiddler]] |
+|^`image` |has an image ContentType |
 |^`missing` |does not exist (other than possibly as a non-shadow tiddler), regardless of whether there are any links it |
-|^`orphan` |has no [[Observable Links]] to it |
+|^`orphan` |has no [[hard links|Hard and Soft Links]] to it |
 |^`shadow` |is a [[shadow tiddler|ShadowTiddlers]], regardless of whether it has been overridden with a non-shadow tiddler |
 |^`system` |is a [[system tiddler|SystemTiddlers]], i.e. its title starts with `$:/` |
 |^`tag` |is in use as a tag |
 |^`tiddler` |exists as a non-shadow tiddler |
 
-;Negation
-: `!is` outputs the subselection of the input tiddlers that are <<.em not>> in the specified category. `!is[tiddler]` is a synonym for `is[missing]`, and vice versa.
+If <<.place c>> is anything else, the output is an error message.
 
-An unrecognised category outputs an error string.
+`!is[tiddler]` is a synonym for `is[missing]`, and vice versa.
 
-When <<.op is[missing]>> is the first operator in a [[run|Filter Syntax]], its output is always empty. And when <<.op is[shadow]>> comes first, it outputs only those shadow tiddlers that have been overridden. This is because the [[initial input to a run|Filter Syntax]] contains only <<.em non>>-shadow tiddlers.
+When <<.op is[missing]>> is the first operator in a [[run|Filter Run]], its output is always empty. And when <<.op is[shadow]>> comes first, it outputs only those shadow tiddlers that have been overridden. This is because the [[initial input to a run|Filter Expression]] contains only <<.em non>>-shadow tiddlers.
 
-The <<.op all>> operator is similar, but its scope is the whole wiki.
+The <<.olink all>> operator is similar, but its scope is the whole wiki.
 
 <<.operator-examples "is">>

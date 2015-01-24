@@ -1,28 +1,26 @@
 created: 20140410103123179
-modified: 20150119192437000
-tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]]
+modified: 20150124201655000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
 title: field Operator
 type: text/vnd.tiddlywiki
 caption: field
-purpose: filter the input tiddlers by field value
+purpose: filter the input by field
 
-<$macrocall $name=".operator-def-suffix"
-input="a [[title selection|Title Selections]]"
-suffix="the name of a field"
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+suffix="the name of a [[field|TiddlerFields]]"
 suffixName="f"
-parameter="a potential value for field <<.place f>>"
-paramName="p"
-output="the [[subselection|Title Selections]] of the input tiddlers in which field <<.place f>> has the value <<.place p>>"
+parameter="a possible value of field <<.place f>>"
+paramName="s"
+output="those input tiddlers in which field <<.place f>> has the value <<.place s>>"
+negationOutput="those input tiddlers in which field <<.place f>> does <<.em not>> have the value <<.place s>>"
 />
 
-If <<.place p>> is empty, <<.op field>> will match both of the following:
+If <<.place s>> is empty, <<.op field>> will match both of the following:
 
 * tiddlers that don't contain field <<.place f>>
 * tiddlers in which field <<.place f>> exists but has an empty value
 
-;Negation
-: `!field` outputs the subselection of the input tiddlers in which field <<.place f>> does <<.em not>> have the value <<.place p>>.
-
-The [[Filter Syntax]] treats any unrecognised [[filter operator|Filter Operators]] as if it was the suffix to the <<.olink field>> operator. See the second example below.
+The syntax of a [[filter step|Filter Step]] treats any unrecognised [[filter operator|Filter Operators]] as if it was the suffix to the <<.op field>> operator. See the <<.operator-examples "field" "examples">>.
 
 <<.operator-examples "field">>

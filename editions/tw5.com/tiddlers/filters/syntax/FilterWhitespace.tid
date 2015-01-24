@@ -1,0 +1,11 @@
+created: 20150124182304000
+modified: 20150124185309000
+tags: [[Filter Syntax]]
+title: Filter Whitespace
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+{( "space" | "tab" | "linefeed" | "return" | "vertical tab" | "formfeed" )}
+"""/>
+
+At least one whitespace character must appear between each [[run|Filter Run]] of a [[filter expression|Filter Expression]].

@@ -1,16 +1,22 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-title: FilterOperator: title
-caption: title
+modified: 20150124192051000
+tags: [[Filter Operators]] [[Common Operators]] [[Absolute Operators]] [[Negatable Operators]]
+title: title Operator
 type: text/vnd.tiddlywiki
+caption: title
+purpose: select a single title
 
-The ''title'' filter operator replaces the current list with the title specified in the operand.
+<$macrocall $name=".operator-def"
+input="ignored"
+negationInput="a [[selection of titles|Title Selection]]"
+parameter="a tiddler title"
+paramName="t"
+output="a selection containing only <<.place t>>"
+negationOutput="the input, but with tiddler <<.place t>> filtered out if it exists in the wiki"
+/>
 
-For example:
+`[title[An Example]]` can be shortened to `[[An Example]]`, because <<.op title>> is the default filter operator.
 
-|!Filter String |!Description |
-|`[[mytiddler]]` |Returns the title `mytiddler` |
-|`[title[mytiddler]]` |Returns the title `mytiddler` |
+<<.op title>> is an [[absolute operator|Absolute Operators]] (except in the form `!title`), but <<.olink2 "field:title" field>> is relative.
 
-Note that the ''title'' operator is the default when no operator name is specified.
+<<.operator-examples "title">>

@@ -1,0 +1,21 @@
+created: 20150124182127000
+modified: 20150124191051000
+tags: [[Filter Syntax]]
+title: Filter Step
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[:"!"]
+[: [[operator|"Filter Operators"]] [:":" suffix] ]
+[[parameter|"Filter Parameter"]]
+"""/>
+
+A <<.def step>> represents a single operation within a [[filter|Filter Syntax]].
+
+In programming terms, it is akin to a function call to which [[the step's input|Filter Run]] is passed as an implicit parameter. A step's output is a [[selection|Title Selection]] that contributes to a [[run|Filter Run]] and hence to the entire [[filter expression|Filter Expression]] that contains it.
+
+The step's <<.def operator>> is drawn from a list of [[predefined keywords|Filter Operators]], which can be extended by plugins. Any unrecognised operator is treated as if it was the suffix to the <<.olink field>> operator. If a step's operator is omitted altogether, it defaults to `title`.
+
+The <<.def suffix>> is additional text, often the name of a [[field|TiddlerFields]], that extends the meaning of certain operators.
+
+Many steps require an explicit <<.def parameter>> value, also known as an <<.def operand>>, that further defines what the step is to do.

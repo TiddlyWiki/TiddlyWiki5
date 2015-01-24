@@ -1,13 +1,13 @@
 created: 20150111145738451
-modified: 20150118183042000
-tags: [[Filter Operators]] [[Non-Tiddler Operators]] [[Node.js Operators]] [[Absolute Operators]]
+modified: 20150124150912000
+tags: [[Filter Operators]] [[Special Operators]] [[Absolute Operators]]
 title: editions Operator
 type: text/vnd.tiddlywiki
 caption: editions
-purpose: get the names of all ~TiddlyWiki editions
+purpose: select the names of all the ~TiddlyWiki editions
 
 <$macrocall $name=".operator-def"
-input="none"
+input="ignored"
 parameter="none"
 output="the name of each ~TiddlyWiki edition, in alphabetical order"
 />

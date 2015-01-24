@@ -1,9 +1,7 @@
 created: 20150117152607000
-modified: 20150118182742000
+modified: 20150124180333000
 title: $:/editions/tw5.com/doc-macros
 tags: $:/tags/Macro
-
-\define .if(cond,then,else) <$reveal default="$cond$" type="nomatch" text="">$then$</$reveal><$reveal default="$cond$" type="match" text="">$else$</$reveal>
 
 \define .def(_) <dfn class="doc-def">$_$</dfn>
 \define .em(_) <em class="doc-em">$_$</em>
@@ -12,6 +10,12 @@ tags: $:/tags/Macro
 \define .word(_) "$_$"
 
 \define .preamble(_) :.doc-preamble $_$
+\define .note(_)
+@@.doc-note
+;Note
+: $_$
+@@
+\end
 
 \define .tid(_) <code class="doc-tiddler">$_$</code>
 \define .tag(_) <code class="doc-tag">$_$</code>
@@ -19,7 +23,8 @@ tags: $:/tags/Macro
 \define .value(_) <code class="doc-value">$_$</code>
 \define .op(_) <code class="doc-operator">$_$</code>
 \define .var(_) <code class="doc-var">$_$</code>
-\define .widget(_) <code class="doc-widget">$$_$</code>
+\define .wid(_) <code class="doc-widget">$$_$</code>
+\define .attr(_) <code class="doc-attr">$_$</code>
 
 \define .otitle(_) $_$ Operator
 

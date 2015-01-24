@@ -1,5 +1,5 @@
 created: 20150117192116000
-modified: 20150118131552000
+modified: 20150124204253000
 title: Thursday
 type: text/vnd.tiddlywiki
 
@@ -9,5 +9,5 @@ type: text/vnd.tiddlywiki
 
 <<.using-days-of-week>>
 
-<<.operator-example "[list[Days of the Week]before{!!title}]">>
-<<.operator-example "[list[Days of the Week]after{!!title}]">>
+<<.operator-example 1 "[list[Days of the Week]before{!!title}]">>
+<<.operator-example 2 "[list[Days of the Week]after{!!title}]">>

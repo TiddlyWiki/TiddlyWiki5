@@ -1,16 +1,19 @@
 created: 20140828133830424
-modified: 20140828133830424
-tags: Filters
-title: FilterOperator: suffix
-caption: suffix
+modified: 20150124192043000
+tags: [[Filter Operators]] [[String Operators]] [[Negatable Operators]]
+title: suffix Operator
 type: text/vnd.tiddlywiki
+caption: suffix
+purpose: filter the input titles by how they end
 
-The ''suffix'' filter operator returns the titles in the current list that end with a specified suffix. If the ''suffix'' operator is preceded by `!` then it returns the titles that do not end with the specified suffix.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="a string of characters"
+paramName="s"
+output="those input titles that end with <<.place p>>"
+negationOutput="those input tiddlers that do <<.em not>> end with <<.place p>>"
+/>
 
-For example:
+<<.s-matching-is-case-sensitive>>
 
-|!Filter String |!Description |
-|`[tag[task]!suffix[hidden]]` |Returns tiddlers tagged `task` whose titles do not end with `hidden` |
-|`[suffix[.jpg]]` |Returns tiddlers whose titles end with `.jpg` |
-
-See also [[FilterOperator: removesuffix]], [[FilterOperator: prefix]], [[FilterOperator: removeprefix]], [[FilterOperator: addprefix]], and [[FilterOperator: addsuffix]].
+<<.operator-examples "suffix">>

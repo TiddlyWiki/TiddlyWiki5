@@ -1,0 +1,11 @@
+created: 20150118134611000
+modified: 20150123211722000
+tags: [[rest Operator]] [[Operator Examples]]
+title: rest Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]rest[]]">>
+<<.operator-example 2 "[list[Days of the Week]rest[3]]">>
+<<.operator-example 3 "Z Y X W V U T S R Q P O +[rest[5]]">>

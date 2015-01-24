@@ -1,14 +1,20 @@
 created: 20140410103123179
-modified: 20140613103123179
-tags: Filters
-caption: listed
-title: FilterOperator: listed
+modified: 20150124203638000
+tags: [[Filter Operators]] [[Field Operators]]
+title: listed Operator
 type: text/vnd.tiddlywiki
+caption: listed
+purpose: find the titles that list the input titles
 
-The ''listed'' filter operator returns the titles of the tiddlers that have `list` fields that contain any members of the current list. The optional operand can be used to specify a different field.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]], defaulting to <<.field list>>"
+paramName="f"
+output="the titles in which field <<.place f>> mentions any of the input titles"
+/>
 
-For example:
+<<.field f>> is assumed to be a [[title list|Title List]].
 
-|!Filter String |!Description |
-|`[[HelloThere]listed[]]` |Returns the titles of any tiddlers containing `HelloThere` in their `list` fields |
-|`[all[current]listed[my-special-list]]` |Returns the titles of any tiddlers containing the current tiddler in their `my-special-list` fields |
+Each input title is processed in turn. A list of tiddlers whose <<.place f>> field mentions it is generated (in no particular order) and [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+<<.operator-examples "listed">>

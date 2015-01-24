@@ -1,19 +1,21 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters CommonFilters
-title: FilterOperator: tag
-caption: tag
+modified: 20150124205948000
+tags: [[Filter Operators]] [[Common Operators]] [[Tag Operators]] [[Negatable Operators]]
+title: tag Operator
 type: text/vnd.tiddlywiki
+caption: tag
+purpose: filter the input by tag
 
-The ''tag'' filter operator returns the tiddlers in the current list that have the tag specified in the operand. Preceding the operator with `!` returns tiddlers that do not have the specified tag.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the title of a [[tag|Tagging]]"
+paramName="t"
+output="those input tiddlers that have tag <<.place t>>"
+negationOutput="those input tiddlers that do <<.em not>> have tag <<.place t>>"
+/>
 
-For example:
+The output is [[sorted|Order of Tagged Tiddlers]] using the tag's <<.field list>> field and the tiddlers' <<.field list-before>> and <<.field list-after>> fields.
 
-|!Filter String |!Description |
-|`[tag[mytag]]` |Returns all tiddlers tagged `mytag` |
-|`[all[shadows]tag[mytag]]` |Returns all ShadowTiddlers tagged `mytag` |
-|`[all[shadows+tiddlers]tag[mytag]]` |Returns all ShadowTiddlers and non-ShadowTiddlers tagged `mytag` |
-|`[!tag[mytag]]` |Returns all tiddlers not tagged `mytag` |
-|`[tag[mytag]!tag[exclude]]` |Returns all tiddlers tagged `mytag` that are not tagged `exclude` |
+If <<.place t>> is empty, the output of `tag` is empty, and the output of `!tag` is a copy of the input.
 
-See also [[FilterOperator: tagging]], [[FilterOperator: tags]] and [[FilterOperator: untagged]].
+<<.operator-examples "tag">>

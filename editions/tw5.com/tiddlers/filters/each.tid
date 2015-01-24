@@ -1,18 +1,20 @@
 created: 20140410103123179
-modified: 20150119192427000
+modified: 20150124164957000
 tags: [[Filter Operators]] [[Group Operators]]
 title: each Operator
 type: text/vnd.tiddlywiki
 caption: each
-purpose: get one of each group of input tiddlers by field value
+purpose: select one of each group of input titles by field
 
 <$macrocall $name=".operator-def"
-input="a [[title selection|Title Selections]]"
+input="a [[selection of titles|Title Selection]]"
 parameter="the name of a [[field|TiddlerFields]]"
 paramName="f"
-output="a [[selection|Title Selections]] containing the first tiddler found with each distinct value for field <<.place f>>"
+output="a selection containing the first input title encountered for each distinct value of field <<.place f>>"
 />
 
-Each input tiddler is processed in turn. The value of field <<.place f>> in that tiddler is examined, and as long as the value has not been encountered before, the tiddler's title is appended to the output set.
+Each input title is processed in turn. The value of field <<.place f>> in the corresponding tiddler is examined, and as long as the value has not been encountered before, the title is appended to the output set.
+
+If a tiddler doesn't contain field <<.place f>>, or contains it but with an empty value, then it contributes nothing to the output.
 
 <<.operator-examples "each">>

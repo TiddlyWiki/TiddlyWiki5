@@ -1,15 +1,19 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-title: FilterOperator: sortcs
-caption: sortcs
+modified: 20150124205353000
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: sortcs Operator
 type: text/vnd.tiddlywiki
+caption: sortcs
+purpose: sort the input by text field, ignoring case
 
-The ''sortcs'' filter operator sorts the current list case sensitively (upper and lower case letters are considered different), along the field specified in the operand (which defaults to `title`). Preceding the operator with `!` reverses the sort order.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]], defaulting to <<.field title>>"
+paramName="f"
+output="the input, sorted into ascending order by field <<.field f>>, treating field values as text"
+negationOutput="the input, likewise sorted into descending order"
+/>
 
-For example:
+Capital and lowercase letters are treated as different. Compare <<.olink sort>>.
 
-|!Filter String |!Description |
-|`one two Three four +[sortcs[]]` |Returns `Three`, `four`, `one`, `two` |
-
-See also [[FilterOperator: sort]], [[FilterOperator: nsort]] and [[FilterOperator: nsortcs]].
+<<.operator-examples "sortcs">>

@@ -1,16 +1,19 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: nsortcs
-title: FilterOperator: nsortcs
+modified: 20150124205339000
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: nsortcs Operator
 type: text/vnd.tiddlywiki
+caption: nsortcs
+purpose: sort the input titles by number field, ignoring case
 
-The ''nsortcs'' filter operator sorts the current list as numeric values, along the field specified in the operand (which defaults to `title`). String values are sorted case sensitively (upper and lower case letters are considered different). Preceding the operator with `!` reverses the sort order.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]], defaulting to <<.field title>>"
+paramName="f"
+output="the input, sorted into ascending order by field <<.field f>>, treating field values as numbers"
+negationOutput="the input, likewise sorted into descending order"
+/>
 
-For example:
+Non-numeric values are treated as having a higher value than any number, and capital and lowercase letters are treated as different. Compare <<.olink nsort>>.
 
-|!Filter String |!Description |
-|`10 010 1000 100 +[nsortcs[]]` |Returns `10`, `010`, `100`, `1000` |
-|`10 010 alpha 1000 100 +[nsortcs[]]` |Returns `10`, `010`, `100`, `1000`, `alpha` |
-
-See also [[FilterOperator: sort]], [[FilterOperator: sortcs]] and [[FilterOperator: nsort]].
+<<.operator-examples "nsortcs">>

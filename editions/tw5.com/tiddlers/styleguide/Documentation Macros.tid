@@ -1,5 +1,5 @@
 created: 20150110182600000
-modified: 20150117180524000
+modified: 20150123221155000
 title: Documentation Macros
 tags: [[Improving TiddlyWiki Documentation]]
 
@@ -21,13 +21,14 @@ The following macros are used throughout ~TiddlyWiki's documentation.
 !Tiddlers and fields
 
 |!Macro |!Used for |!Example |
-|.tid |a tiddler title|<<.tid Example>> |
+|.tid |a tiddler title |<<.tid Example>> |
 |.tag |a tag |<<.tag Example>> |
-|.field|a field name|<<.field example>> |
-|.value|a field value|<<.value "example value">> |
-|.op|a filter operator|<<.op backlinks>> |
-|.var|a variable or macro name|<<.var currentTiddler>> |
-|.wid|a widget name|<<.wid list>> |
+|.field |a field name |<<.field example>> |
+|.value |a field value |<<.value "example value">> |
+|.op |a filter operator |<<.op backlinks>> |
+|.var |a variable or macro nam e|<<.var currentTiddler>> |
+|.wid |a widget name |<<.wid list>> |
+|.attr |an attribute name |<<.attr filter>> |
 
 !Links
 

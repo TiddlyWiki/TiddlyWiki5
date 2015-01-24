@@ -1,25 +1,18 @@
 created: 20140410103123179
-modified: 20150119192449000
-tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]]
+modified: 20150124191952000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
 title: has Operator
 type: text/vnd.tiddlywiki
 caption: has
-purpose: filter the input tiddlers by field existence
+purpose: filter the input by field existence
 
 <$macrocall $name=".operator-def"
 syntax="has[f]"
-input="a [[selection|Title Selections]] of tiddler titles"
-parameter="the name of a field"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]]"
 paramName="f"
-output="the [[subselection|Title Selections]] of the input tiddlers that have a value in field <<.place f>>"
+output="those input tiddlers in which field <<.place f>> has a non-empty value"
+negationOutput="those input tiddlers in which field <<.place f>> does <<.em not>> exist or has an empty value"
 />
-
-<<.op has>> filters out both of the following:
-
-* tiddlers that don't contain field <<.place f>>
-* tiddlers in which field <<.place f>> exists but has an empty value
-
-;Negation
-: `!has` outputs the subset of the input tiddlers in which field <<.place f>> does <<.em not>> exist or does not have the value <<.place p>>.
 
 <<.operator-examples "has">>

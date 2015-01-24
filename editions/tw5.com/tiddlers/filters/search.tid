@@ -1,17 +1,24 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters CommonFilters
-caption: search
-title: FilterOperator: search
+modified: 20150124204023000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
+title: search Operator
 type: text/vnd.tiddlywiki
+caption: search
+purpose: filter the input by searching tiddler content
 
-The ''search'' filter operator filters the current list to leave only those tiddlers that include the operand text in their title, body or tags. Preceding the operator with `!` returns all tiddlers that do not include the specified text. The search is case-insenstive.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+suffix="optionally, the name of a [[field|TiddlerFields]]"
+suffixName="f"
+parameter="one or more search terms, separated by spaces"
+output="those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place f>>"
+negationOutput="those input tiddlers in which <<.em not>> all of the search terms can be so found"
+/>
 
-Optionally, a field can be specified to restrict the search.
+When used with a suffix, the <<.op search>> operator is similar to <<.olink regexp>> but less powerful.
 
-For example:
+If the suffix is omitted, a tiddler is deemed to match if all the search terms appear in the combination of its <<.field tags>>, <<.field text>> and <<.field title>> fields.
 
-|!Filter String |!Description |
-|`[search[alsatian]]` |Returns a list of the tiddlers containing the text "alsatian" |
-|`[all[shadows]search[alsatian]]` |Returns a list of the shadow tiddlers containing the text "alsatian" |
-|`[search:caption[spaniel]]` |Returns a list of the tiddlers containing the text "spaniel" in their caption field |
+The search ignores the difference between capital and lowercase letters.
+
+<<.operator-examples "search">>

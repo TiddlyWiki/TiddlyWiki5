@@ -1,13 +1,15 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: reverse
-title: FilterOperator: reverse
+modified: 20150124205130000
+tags: [[Filter Operators]] [[Order Operators]]
+title: reverse Operator
 type: text/vnd.tiddlywiki
+caption: reverse
+purpose: reverse the order of the input titles
 
-The ''reverse'' filter operator reverses the order of the titles in the current list.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="none"
+output="the input, in reverse order"
+/>
 
-For example:
-
-|!Filter String |!Description |
-|`one two three +[reverse[]]` |Returns the list `three`, `two`, `one` |
+<<.operator-examples "reverse">>

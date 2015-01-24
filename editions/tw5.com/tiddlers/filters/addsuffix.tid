@@ -1,5 +1,5 @@
 created: 20140828133830424
-modified: 20150119192734000
+modified: 20150124172115000
 tags: [[Filter Operators]] [[String Operators]]
 title: addsuffix Operator
 type: text/vnd.tiddlywiki
@@ -7,10 +7,10 @@ caption: addsuffix
 purpose: extend each input title with a suffix
 
 <$macrocall $name=".operator-def"
-input="a [[title selection|Title Selections]]"
-parameter="a suffix to be added"
-paramName="p"
-output="a copy of the input, but with <<.place p>> added to the end of each title"
+input="a [[selection of titles|Title Selection]]"
+parameter="a string of characters"
+paramName="s"
+output="the input, but with <<.place s>> added to the end of each title"
 />
 
 <<.operator-examples "addsuffix">>

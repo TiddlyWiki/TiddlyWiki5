@@ -1,16 +1,16 @@
 created: 20140410103123179
-modified: 20150119192424000
-tags: [[Filter Operators]] [[Sequence Operators]]
+modified: 20150124172210000
+tags: [[Filter Operators]] [[Order Operators]]
 title: butlast Operator
 type: text/vnd.tiddlywiki
 caption: butlast
-purpose: get all the but last <<.place n>> input titles
+purpose: discard the last <<.place n>> input titles
 
 <$macrocall $name=".operator-def"
-input="a [[title selection|Title Selections]]"
+input="a [[selection of titles|Title Selection]]"
 parameter="an integer, defaulting to 1"
 paramName="n"
-output="all but the last <<.place n>> titles from the input"
+output="all but the last <<.place n>> input titles"
 />
 
 <<.operator-examples "butlast">>

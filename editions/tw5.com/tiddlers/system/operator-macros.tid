@@ -1,43 +1,33 @@
 created: 20150117152607000
-modified: 20150119193041000
+modified: 20150124210351000
 title: $:/editions/tw5.com/operator-macros
 tags: $:/tags/Macro
 
-\define .operator-def(input,parameter,paramName,output)
-<table><tr>
-<th align="left">input</th>
-<td>$input$</td>
-</tr><tr>
-<th align="left">parameter<$macrocall $name=".if" cond="$paramName$" then="&nbsp;<<.place '$paramName$'>>"/></th>
-<td>$parameter$</td>
-</tr><tr>
-<th align="left">output</th>
-<td>$output$</td>
-</tr></table>
+\define .operator-def(input,negationInput,suffix,suffixName,parameter,paramName,output,negationOutput)
+<table class="doc-table">
+<tr><th align="left">purpose</th><td>{{!!purpose}}</td></tr>
+<tr><th align="left">[[input|Filter Syntax]]</th><td>$input$</td></tr>
+<$macrocall $name=".if" cond="""$negationInput$"""
+then="""<tr><th align="left">`!` input</th><td>$negationInput$</td></tr>"""
+else=""/>
+<$macrocall $name=".if" cond="""$suffix$"""
+then="""<tr><th align="left">[[suffix|Filter Step]]&nbsp;<<.place "$suffixName$">></th><td>$suffix$</td></tr>"""
+else=""/>
+<tr><th align="left">[[parameter|Filter Parameter]]<$macrocall $name=".if" cond="""$paramName$"""
+then="&nbsp;<<.place '$paramName$'>>" else=""/></th><td>$parameter$</td></tr>
+<tr><th align="left">output</th><td>$output$</td></tr>
+<$macrocall $name=".if" cond="""$negationOutput$"""
+then="""<tr><th align="left">`!` output</th><td>$negationOutput$</td></tr>"""
+else=""/>
+</table>
 \end
 
-\define .operator-def-suffix(input,suffix,suffixName,parameter,paramName,output)
-<table><tr>
-<th align="left">input</th>
-<td>$input$</td>
-</tr><tr>
-<th align="left">suffix&nbsp;<<.place "$suffixName$">></th>
-<td>$suffix$</td>
-</tr><tr>
-<th align="left">parameter<$macrocall $name=".if" cond="$paramName$" then="&nbsp;<<.place '$paramName$'>>"/></th>
-<td>$parameter$</td>
-</tr><tr>
-<th align="left">output</th>
-<td>$output$</td>
-</tr></table>
-\end
-
-\define .operator-examples(op) <$link to="$op$ Operator (Examples)">Examples</$link>
+\define .operator-examples(op,text:"Examples") <$link to="$op$ Operator (Examples)">$text$</$link>
 
 \define .operator-example(n,eg,ie)
 <div class="doc-example">
 `$eg$`
-<<.if cond:"$ie$" then:"<dd>$ie$</dd>">>
+<$macrocall $name=".if" cond="""$ie$""" then="""<dd>&rarr; $ie$</dd>"""/>
 <$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
   <$reveal state=<<.state>> type="nomatch" text="show">
   <dl>
@@ -57,4 +47,10 @@ tags: $:/tags/Macro
 
 \define .this-is-operator-example() This example tiddler is used to illustrate some of the [[Filter Operators]].
 \define .using-days-of-week() These examples make use of the [[Days of the Week]] tiddler.
-\define .node-only-operator() This operator is <<.em not>> available when ~TiddlyWiki is running in a web browser.
+\define .s-matching-is-case-sensitive() In looking for matches for <<.place s>>, capital and lowercase letters are treated as different.
+
+\define .node-only-operator()
+
+<$macrocall $name=".note" _="This operator is <<.em not>> available when ~TiddlyWiki is running in a web browser."/>
+
+\end

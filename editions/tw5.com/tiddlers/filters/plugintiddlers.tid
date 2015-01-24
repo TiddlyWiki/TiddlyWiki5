@@ -1,15 +1,15 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: plugintiddlers
-title: FilterOperator: plugintiddlers
+modified: 20150124200549000
+tags: [[Filter Operators]] [[Special Operators]]
+title: plugintiddlers Operator
 type: text/vnd.tiddlywiki
+caption: plugintiddlers
+purpose: select all shadow titles in the input plugins
 
-The ''plugintiddlers'' filter operator returns the titles of the shadow tiddlers within any plugin tiddlers in the current list.
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selection]] of plugin tiddler titles"
+parameter="none"
+output="all shadow titles contained in the input plugins"
+/>
 
-For example:
-
-|!Filter String |!Description |
-|`[[$:/core]plugintiddlers[]]` |Returns a list of the shadow tiddlers within the [[$:/core]] module |
-
-See also [[FilterOperator: shadowsource]].
+<<.operator-examples "plugintiddlers">>

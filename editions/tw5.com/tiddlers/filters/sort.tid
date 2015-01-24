@@ -1,18 +1,19 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters CommonFilters
-title: FilterOperator: sort
-caption: sort
+modified: 20150124205350000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: sort Operator
 type: text/vnd.tiddlywiki
+caption: sort
+purpose: sort the input by text field
 
-The ''sort'' filter operator sorts the current list case insensitively (upper and lower case letters are considered equivalent), along the field specified in the operand (which defaults to `title`). Preceding the operator with `!` reverses the sort order.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]], defaulting to <<.field title>>"
+paramName="f"
+output="the input, sorted into ascending order by field <<.field f>>, treating field values as text"
+negationOutput="the input, likewise sorted into descending order"
+/>
 
-For example:
+The difference between capital and lowercase letters is ignored. Compare <<.olink sortcs>>.
 
-|!Filter String |!Description |
-|`one two three four +[sort[]]` |Returns `four`, `one`, `three`, `two` |
-|`one two Three four +[sort[]]` |Returns `four`, `one`, `Three`, `two` |
-
-For an example of use with explicit operands, see [[FilterOperator: limit]].
-
-See also [[FilterOperator: nsort]], [[FilterOperator: sortcs]] and [[FilterOperator: nsortcs]].
+<<.operator-examples "sort">>

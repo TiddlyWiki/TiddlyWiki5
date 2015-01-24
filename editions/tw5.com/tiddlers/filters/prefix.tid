@@ -1,16 +1,19 @@
 created: 20140410103123179
-modified: 20140410103123179
-tags: Filters
-caption: prefix
-title: FilterOperator: prefix
+modified: 20150124192023000
+tags: [[Filter Operators]] [[String Operators]] [[Negatable Operators]]
+title: prefix Operator
 type: text/vnd.tiddlywiki
+caption: prefix
+purpose: filter the input titles by how they start
 
-The ''prefix'' filter operator returns the titles in the current list that start with a specified prefix. If the ''prefix'' operator is preceded by `!` then it returns the titles that do not start with the specified prefix.
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="a string of characters"
+paramName="s"
+output="those input titles that start with <<.place s>>"
+negationOutput="those input tiddlers that do <<.em not>> start with <<.place s>>"
+/>
 
-For example:
+<<.s-matching-is-case-sensitive>>
 
-|!Filter String |!Description |
-|`[tag[task]!prefix[hidden]]` |Returns tiddlers tagged `task` whose titles do not start with `hidden` |
-|`[prefix[$:/]]` |Equivalent to `[is[system]]` |
-
-See also [[FilterOperator: removeprefix]], [[FilterOperator: removesuffix]], [[FilterOperator: removesuffix]], [[FilterOperator: addprefix]], and [[FilterOperator: addsuffix]].
+<<.operator-examples "prefix">>

@@ -1,11 +1,13 @@
 created: 20150117204109000
-modified: 20150119190116000
+modified: 20150124185709000
 tags: Concepts
 title: Absolute Operators
 type: text/vnd.tiddlywiki
 
-The output of a filter step depends on its [[operator|Filter Operators]]:
+The output of a [[filter|Filters]] step depends on its [[operator|Filter Operators]]:
 
 * Most operators perform <<.def relative>> to their input. They examine each input title in turn and filter out any that don't match. Such steps narrow down the output of a run.
 
-* <<.def Absolute>> operators ignore their input and generate an independent output instead. <<.olink title>> is an example: the result of `[title[A]title[B]]` is `B`. But the <<.olink field>> operator is relative, so the result of `[title[A]field:title[B]` is empty.
+* <<.def Absolute>> operators ignore their input and generate an independent output instead.
+
+A good example of an absolute operator is <<.olink title>>. The output of `[title[A]title[B]]` is just <<.tid B>>. But the <<.olink field>> operator is relative, so `[title[A]field:title[B]` outputs nothing at all.

@@ -1,13 +1,13 @@
 created: 20150111145738451
-modified: 20150119192433000
-tags: [[Filter Operators]] [[Non-Tiddler Operators]] [[Node.js Operators]]
+modified: 20150124165002000
+tags: [[Filter Operators]] [[Special Operators]]
 title: editiondescription Operator
 type: text/vnd.tiddlywiki
 caption: editiondescription
-purpose: get the descriptions of the input ~TiddlyWiki editions
+purpose: select the descriptions of the input editions
 
 <$macrocall $name=".operator-def"
-input="a [[selection|Title Selections]] of edition names"
+input="a [[selection|Title Selection]] of edition names"
 parameter="none"
 output="the description string of each edition in the input"
 />

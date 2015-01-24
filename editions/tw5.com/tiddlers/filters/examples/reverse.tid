@@ -1,0 +1,9 @@
+created: 20150118134611000
+modified: 20150123212752000
+tags: [[reverse Operator]] [[Operator Examples]]
+title: reverse Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]reverse[]]">>
