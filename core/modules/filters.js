@@ -161,6 +161,21 @@ exports.filterTiddlers = function(filterString,widget,source) {
 };
 
 /*
+Evaluates a condition and adds an item to the result set of a filter operation depending on the result set depending on negation
+	title: tiddler title
+	results: the results array
+	operator: the filter operator
+	condition: the condition depending on which to add to the results (boolean)
+Returns boolean, whether or not to add an item
+*/
+exports.addResult = function(title,results,operator,condition) {
+	var n = "!" === operator.prefix;
+	if(condition && !n || !condition && n) {
+		results.push(title);
+	}
+}
+
+/*
 Compile a filter into a function with the signature fn(source,widget) where:
 source: an iterator function for the source tiddlers, called source(iterator), where iterator is called as iterator(tiddler,title)
 widget: an optional widget node for retrieving the current tiddler etc.
