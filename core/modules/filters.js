@@ -30,7 +30,8 @@ function parseFilterOperation(operators,filterString,p) {
 		operator = {};
 		// Check for an operator prefix
 		if(filterString.charAt(p) === "!") {
-			operator.prefix = filterString.charAt(p++);
+			operator.prefix = filterString.charAt(p++); // remove?
+			operator.negate = true;
 		}
 		// Get the operator name
 		var nextBracketPos = filterString.substring(p).search(/[\[\{<\/]/);
@@ -169,8 +170,7 @@ Evaluates a condition and adds an item to the result set of a filter operation d
 Returns boolean, whether or not to add an item
 */
 exports.addResult = function(title,results,operator,condition) {
-	var n = "!" === operator.prefix;
-	if(condition && !n || !condition && n) {
+	if(condition && !operator.negate || !condition && operator.negate) {
 		results.push(title);
 	}
 }
