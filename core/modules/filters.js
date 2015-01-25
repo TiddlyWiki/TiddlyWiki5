@@ -162,7 +162,7 @@ exports.filterTiddlers = function(filterString,widget,source) {
 };
 
 /*
-Evaluates a condition and adds an item to the result set of a filter operation depending on the result set depending on negation
+Evaluates a condition and adds an item to the result-set of a filter operation depending on negation
 	title: tiddler title
 	results: the results array
 	operator: the filter operator
