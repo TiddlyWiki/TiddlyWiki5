@@ -321,7 +321,7 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				var result = 
 					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
 					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
-											(isDescending ? y - x :  x - y);
+					                        (isDescending ? y - x :  x - y);
 				return result;
 			};
 		if(sortField !== "title") {
