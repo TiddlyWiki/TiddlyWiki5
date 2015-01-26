@@ -206,3 +206,5 @@ Andrew Harrison, @infurnoape, 2014/12/27
 Arlen Beiler, @arlen22, 2014/12/30
 
 David P Dannemiller, @dpdannemiller, 2015/01/10
+
+Ben Williams, @Mathobal, 2015/01/26
