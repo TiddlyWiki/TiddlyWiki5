@@ -41,7 +41,11 @@ exports.regexp = function(source,operator,options) {
 			regexpString = regexpString.substr(0,regexpString.length - match[0].length);
 		}
 	}
-	regexp = new RegExp(regexpString,flags);
+	try {
+		regexp = new RegExp(regexpString,flags);
+	} catch(e) {
+		return ["" + e];
+	}
 	// Process the incoming tiddlers
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
