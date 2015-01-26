@@ -1,6 +1,6 @@
 caption: Variables
 created: 20141002141231992
-modified: 20150107121000000
+modified: 20150117152625000
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
@@ -68,7 +68,7 @@ Below, the `\define` pragma at the beginning of a tiddler [[defines the macro|Ma
 
 ''using a filter variable to get all incoming links''
 
-Using the [[backlinks|FilterOperator: backlinks]] [[filter operator|FilterOperators]] to get all tiddlers linking to this one...
+Using the <<olink backlinks>> [[filter operator|Filter Operators]] to get all tiddlers linking to this one...
 
 ```
 <<list-links filter:"[<currentTiddler>backlinks[]]">>

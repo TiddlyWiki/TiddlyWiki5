@@ -1,5 +1,5 @@
 created: 20141010093214683
-modified: 20141125123700243
+modified: 20150124202942000
 tags: [[Working with TiddlyWiki]]
 title: Creating journal tiddlers
 type: text/vnd.tiddlywiki
@@ -29,7 +29,7 @@ For example, you might be reviewing a tiddler called ''Oxford Street'' and reali
 To configure how new journal entries are created, visit the ''Basics'' tab under ''Info'' in the [[control panel|$:/ControlPanel]]:
 
 * "Title of new journal tiddlers" specifies how these tiddlers should be named, as a [[date format string|DateFormat]]. The default setting of `DDth MMM YYYY` causes new entries to have titles of the form "10th October 2014"
-* "Tags for new journal tiddlers" [specifies|TitleList] tags that will automatically appear on new journal entries. For example: `Journal [[Summer vacation]]`
+* "Tags for new journal tiddlers" [specifies|Title List] tags that will automatically appear on new journal entries. For example: `Journal [[Summer vacation]]`
 
 Hint: if you want to create a separate journal tiddler whenever you click ''new journal'' (even if you do this several times in the same day), you can include the clock time in the title format. Specify something like `YYYY-0MM-0DD at 0hhh0mm'0ss''` as the date format.
 

@@ -1,5 +1,5 @@
 created: 20140904075400000
-modified: 20140919155913046
+modified: 20150124202936000
 tags: [[Working with TiddlyWiki]] Concepts
 title: Tagging
 type: text/vnd.tiddlywiki
@@ -33,13 +33,8 @@ You can use the [[tag manager|$:/TagManager]], found on the ''Tags'' tab under '
 
 ! Change the order in which tags are listed
 
-By default, tagged tiddlers are listed in the order they were added to the wiki. The [[sort operator|Filter operator: sort]] can change the order to alphabetical.
+By default, tagged tiddlers are listed in the order they were added to the wiki. The <<.olink sort>> operator can change the order to alphabetical.
 
-If you want any other order, add a [[field called ''list''|ListField]] to the tag tiddler, and set its value to be a [[TitleList]] of the tiddlers in that order.
+If you want any other order, add a <<.flink ListField>> field to the tag tiddler, and set its value to be a [[list of the tiddlers|Title List]] in that order.
 
-The ''list'' field doesn't have to mention all of the tiddlers. Here are the precise rules ~TiddlyWiki uses to order tagged tiddlers:
-
-# Start with the tiddlers in the ''list'' field, in the sequence given there.
-# In each remaining tiddler, look for a ''list-before'' field. If this has a tiddler title as its value, insert the tiddler into the sequence just before that one. As a special case, if the field's value is blank, add the tiddler at the very start of the sequence.
-# In each remaining tiddler, look for a ''list-after'' field. If this has a tiddler title as its value, insert the tiddler into the sequence just after that one.
-# If any tiddlers still remain, add them to the very end of the sequence.
+The ''list'' field doesn't have to mention all of the tiddlers. See the [[precise rules|Order of Tagged Tiddlers]] ~TiddlyWiki uses to order tagged tiddlers.

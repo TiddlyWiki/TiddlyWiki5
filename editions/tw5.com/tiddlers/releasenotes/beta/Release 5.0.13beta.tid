@@ -1,5 +1,5 @@
 created: 20140518150234142
-modified: 20140624094134118
+modified: 20150118182554000
 tags: BetaReleaseNotes
 title: Release 5.0.13-beta
 type: text/vnd.tiddlywiki
@@ -41,7 +41,7 @@ This release includes a number of features designed to improve the experience of
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/1717c93d001ad184a08ca66d1bffb33fb5d32b3a]] CodeMirror (http://tiddlywiki.com/codemirrordemo.html) plugin for simpler configuration
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b2e48d00e9ea068a22b5ac5c0a4c93e8ddbb4a8a]] support for [[Environment Variables on Node.js]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/eee3a0cf8e5aa047f8596df06e28194409f38b01]] ServerCommand to allow a path prefix
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4238af2a405c14d22937d7c47a70bfb3d4e6f22d]] [[FilterOperator: listed]] to use any list field
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/4238af2a405c14d22937d7c47a70bfb3d4e6f22d]] the <<.olink listed>> operator to use any list field
 
 !! Bug Fixes
 

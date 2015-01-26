@@ -1,6 +1,6 @@
 caption: 5.0.17-beta
 created: 20140910131615798
-modified: 20140912164804565
+modified: 20150118182638000
 tags: BetaReleaseNotes
 title: Release 5.0.17-beta
 type: text/vnd.tiddlywiki
@@ -30,7 +30,7 @@ The use of the `title` attribute in the ButtonWidget was not consistent with the
 
 As discussed in [[the associated ticket|https://github.com/Jermolene/TiddlyWiki5/issues/762]], the support for regular expression filter operands is incomplete and inconsistent. The plan is to remove support for this feature in the next release. A new filter operator has been provided to replace it, along with the addition of a deprecation warning that is displayed whenever regular expression filter operators are used.
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f4fff7a33037ba9dd537379bcb44a52a280868d6]] new [[FilterOperator: regexp]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f4fff7a33037ba9dd537379bcb44a52a280868d6]] new <<.olink regexp>> operator
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d45c417c187fe3dcc35ee7a308e64feebc7b185b]] deprecation warning for regular expression filter operators
 
 !!! Repository Reorganisation
