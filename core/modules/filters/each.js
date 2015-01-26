@@ -22,12 +22,12 @@ exports.each = function(source,operator,options) {
 		list = "list" === operator.suffix;
 	source(function(tiddler,title) {
 		if(tiddler) {
-			var value,
-				field = operator.operand || "title";
+			var field = operator.operand || "title",
+				value = list ?
+					options.wiki.getTiddlerList(title,field) :
+					[ "title" === field ? title : tiddler.getFieldString(operator.operand)];
 			$tw.utils.each(
-				list ?
-				options.wiki.getTiddlerList(title,field) :
-				[ "title" === field ? title : tiddler.getFieldString(operator.operand)],
+				value,
 				function(value){
 					if(!$tw.utils.hop(values,value)) {
 						values[value] = true;
