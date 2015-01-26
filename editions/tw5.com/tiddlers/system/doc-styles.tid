@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20150124201551000
+modified: 20150126091948000
 title: $:/editions/tw5.com/doc-styles
 tags: $:/tags/Stylesheet
 
@@ -27,8 +27,10 @@ tags: $:/tags/Stylesheet
 .doc-place {
 	background-color: <<color background>>;
 	border: none;
-	color: <<color foreground>>;
-	font-style: italic;
+	color: <<color very-muted-foreground>>;
+	font-style: normal;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .doc-button,
