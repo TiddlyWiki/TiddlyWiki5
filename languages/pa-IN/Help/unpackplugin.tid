@@ -1,0 +1,4 @@
+title: $:/language/Help/unpackplugin
+description:  ਇੱਕ ਪਲੱਗਇਨ ਤੱਕ ਪੇਲੋਡ tiddlers ਨੂੰ ਖੋਲੋ
+
+ ਆਮ tiddlers ਦੇ ਤੌਰ ਤੇ ਬਣਾਉਣ ਲਈ, ਇੱਕ ਪਲੱਗਇਨ ਤੱਕ ਪੇਲੋਡ tiddlers ਖੋਲੋ: `` `--unpackplugin <ਦਾ ਸਿਰਲੇਖ>` ``
