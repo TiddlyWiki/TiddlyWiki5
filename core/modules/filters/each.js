@@ -23,18 +23,15 @@ exports.each = function(source,operator,options) {
 	source(function(tiddler,title) {
 		if(tiddler) {
 			var field = operator.operand || "title",
-				value = list ?
+				items = list ?
 					options.wiki.getTiddlerList(title,field) :
 					[ "title" === field ? title : tiddler.getFieldString(operator.operand)];
-			$tw.utils.each(
-				value,
-				function(value){
-					if(!$tw.utils.hop(values,value)) {
-						values[value] = true;
-						results.push(list ? value : title);
-					}
+			$tw.utils.each(items,function(value){
+				if(!$tw.utils.hop(values,value)) {
+					values[value] = true;
+					results.push(list ? value : title);
 				}
-			)
+			});
 		}
 	});
 	return results;
