@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20150126092438000
+modified: 20150126144131000
 title: $:/editions/tw5.com/operator-macros
 tags: $:/tags/Macro
 
@@ -11,9 +11,9 @@ tags: $:/tags/Macro
 then="""<tr><th align="left">`!` input</th><td>$negationInput$</td></tr>"""
 else=""/>
 <$macrocall $name=".if" cond="""$suffix$"""
-then="""<tr><th align="left">[[suffix|Filter Step]]</th><td><<.place "$suffixName$:">> $suffix$</td></tr>"""
+then="""<tr><th align="left">[[suffix|Filter Step]]</th><td><<.place "$suffixName$">> = $suffix$</td></tr>"""
 else=""/>
-<tr><th align="left">[[parameter|Filter Parameter]]</th><td><$macrocall $name=".if" cond="""$paramName$""" then="<<.place '$paramName$:'>>" else=""/>$parameter$</td></tr>
+<tr><th align="left">[[parameter|Filter Parameter]]</th><td><$macrocall $name=".if" cond="""$paramName$""" then="<<.place '$paramName$'>> = " else=""/>$parameter$</td></tr>
 <tr><th align="left">output</th><td>$output$</td></tr>
 <$macrocall $name=".if" cond="""$negationOutput$"""
 then="""<tr><th align="left">`!` output</th><td>$negationOutput$</td></tr>"""
