@@ -143,9 +143,14 @@ NavigatorWidget.prototype.addToHistory = function(title,fromPageRect) {
 Handle a tm-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
-	this.addToStory(event.navigateTo,event.navigateFromTitle);
-	if(!event.navigateSuppressNavigation) {
-		this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+	if(event.navigateEdit) {
+		event.param = event.navigateTo;
+		this.handleEditTiddlerEvent(event);
+	} else {
+		this.addToStory(event.navigateTo,event.navigateFromTitle);
+		if(!event.navigateSuppressNavigation) {
+			this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+		}
 	}
 	return false;
 };
