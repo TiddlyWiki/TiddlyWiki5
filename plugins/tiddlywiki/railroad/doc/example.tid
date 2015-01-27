@@ -1,16 +1,16 @@
 created: 20150102165032410
-modified: 20150102172010663
+modified: 20150120090735000
 tags:
 title: $:/plugins/tiddlywiki/railroad/example
 
-<$railroad text={{$:/plugins/tiddlywiki/railroad/example-source}}/>
+Notation:
 
-```
-<$railroad text="""
-["+"]
-({ [[digit|GettingStarted]] } | "#" <'escape sequence'>)
-[{("@" name-char | :"--" )}]
-"""/>
-```
+<pre><code><$text text={{$:/plugins/tiddlywiki/railroad/example-source}}/></code></pre>
 
-<$railroad mode="debug" text={{$:/plugins/tiddlywiki/railroad/example-source}}/>
+Diagram:
+
+{{$:/plugins/tiddlywiki/railroad/example-source}}
+
+Debug mode:
+
+<$railroad debug="yes" text={{$:/plugins/tiddlywiki/railroad/example-source}}/>
