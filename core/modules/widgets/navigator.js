@@ -144,13 +144,16 @@ Handle a tm-navigate event
 */
 NavigatorWidget.prototype.handleNavigateEvent = function(event) {
 	if(event.navigateEdit) {
-		event.param = event.navigateTo;
-		this.handleEditTiddlerEvent(event);
-	} else {
-		this.addToStory(event.navigateTo,event.navigateFromTitle);
-		if(!event.navigateSuppressNavigation) {
-			this.addToHistory(event.navigateTo,event.navigateFromClientRect);
+		var tiddler = this.wiki.getTiddler(event.navigateTo);
+		if(!tiddler || !tiddler.fields["draft.of"]) {
+			event.param = event.navigateTo;
+			this.handleEditTiddlerEvent(event);
+			return false;
 		}
+	}
+	this.addToStory(event.navigateTo,event.navigateFromTitle);
+	if(!event.navigateSuppressNavigation) {
+		this.addToHistory(event.navigateTo,event.navigateFromClientRect);
 	}
 	return false;
 };
