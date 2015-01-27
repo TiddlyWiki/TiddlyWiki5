@@ -20,16 +20,16 @@ exports.each = function(source,operator,options) {
 	var results = [],
 		values = {},
 		field = operator.operand || "title",
-		add = function(v) {
-			if(!$tw.utils.hop(values,v)) {
-				values[v] = true;
-				results.push(v);
+		add = function(val,title) {
+			if(!$tw.utils.hop(values,val)) {
+				values[val] = true;
+				results.push(title);
 			}
 		};
 	if("list" !== operator.suffix) {
 		source(function(tiddler,title) {
 			if(tiddler) {
-				add("title" === field ? title : tiddler.getFieldString(operator.operand));
+				add("title" === field ? title : tiddler.getFieldString(field),title);
 			}
 		});		
 	} else {
@@ -38,7 +38,7 @@ exports.each = function(source,operator,options) {
 				$tw.utils.each(
 					options.wiki.getTiddlerList(title,field),
 					function(value) {
-						add(value);
+						add(value,value);
 					}
 				);
 			}
