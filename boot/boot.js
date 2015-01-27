@@ -85,6 +85,15 @@ $tw.utils.each = function(object,callback) {
 };
 
 /*
+Pushes a value to an array only when not yet contained.
+*/
+$tw.utils.pushOnce = function(array,value) {
+	if(0 > array.indexOf(value)){
+		array.push(value);
+	}
+}
+
+/*
 Helper for making DOM elements
 tag: tag name
 options: see below
