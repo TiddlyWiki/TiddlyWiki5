@@ -19,21 +19,31 @@ Export our filter function
 exports.each = function(source,operator,options) {
 	var results = [],
 		values = {},
-		list = "list" === operator.suffix;
-	source(function(tiddler,title) {
-		if(tiddler) {
-			var field = operator.operand || "title",
-				items = list ?
-					options.wiki.getTiddlerList(title,field) :
-					[ "title" === field ? title : tiddler.getFieldString(operator.operand)];
-			$tw.utils.each(items,function(value){
-				if(!$tw.utils.hop(values,value)) {
-					values[value] = true;
-					results.push(list ? value : title);
-				}
-			});
-		}
-	});
+		field = operator.operand || "title",
+		add = function(v) {
+			if(!$tw.utils.hop(values,v)) {
+				values[v] = true;
+				results.push(v);
+			}
+		};
+	if("list" !== operator.suffix) {
+		source(function(tiddler,title) {
+			if(tiddler) {
+				add("title" === field ? title : tiddler.getFieldString(operator.operand));
+			}
+		});		
+	} else {
+		source(function(tiddler,title) {
+			if(tiddler) {
+				$tw.utils.each(
+					options.wiki.getTiddlerList(title,field),
+					function(value) {
+						add(value);
+					}
+				);
+			}
+		});
+	}
 	return results;
 };
 
