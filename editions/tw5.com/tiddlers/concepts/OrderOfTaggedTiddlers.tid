@@ -1,5 +1,5 @@
 created: 20150124125646000
-modified: 20150124202917000
+modified: 20150127154154000
 tags: Concepts
 title: Order of Tagged Tiddlers
 
@@ -12,4 +12,4 @@ When ~TiddlyWiki generates a list of the tiddlers that have a particular tag (e.
 
 # In each remaining tiddler <<.place T>>, look for a <<.field list-after>> field. If this has a tiddler title as its value, place tiddler <<.place T>> just <<.em after>> that one.
 
-# If any tiddlers still remain, place them at the end of the list. <!-- in alphabetical order if #1378 is accepted; then also update Tagging -->
+# If any tiddlers still remain, place them at the end of the list in ascending alphabetical order of title. The difference between capital and lowercase letters is ignored.
