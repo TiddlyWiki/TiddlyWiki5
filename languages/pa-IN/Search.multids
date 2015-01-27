@@ -1,0 +1,16 @@
+title: $:/language/Search/
+
+DefaultResults/Caption:  ਸੂਚੀ
+Filter/Caption: ਫਿਲਟਰ
+Filter/Hint: ਨੂੰ ਇੱਕ ਦੁਆਰਾ ਖੋਜ [[ਫਿਲਟਰ ਸਮੀਕਰਨ | http: //tiddlywiki.com/static/Filters.html]]
+Filter/Matches: / <ਛੋਟੇ ਛੋਟੇ> << ਨਤੀਜਾ ਲਈ Count >> ਮਿਲਦਾ ਹੈ </ ਛੋਟੇ ਛੋਟੇ> //
+Matches: / <ਛੋਟੇ ਛੋਟੇ> << ਨਤੀਜਾ ਲਈ Count >> ਮਿਲਦਾ ਹੈ </ ਛੋਟੇ ਛੋਟੇ> //
+Shadows/Caption: ਸ਼ੈਡੋ
+Shadows/Hint: ਸ਼ੈਡੋ tiddlers ਲਈ ਖੋਜ
+Shadows/Matches: / <ਛੋਟੇ ਛੋਟੇ> << ਨਤੀਜਾ ਲਈ Count >> ਮਿਲਦਾ ਹੈ </ ਛੋਟੇ ਛੋਟੇ> //
+Standard/Caption: ਮਾਨਕ
+Standard/Hint: ਮਾਨਕ tiddlers ਲਈ ਖੋਜ
+Standard/Matches: / <ਛੋਟੇ ਛੋਟੇ> << ਨਤੀਜਾ ਲਈ Count >> ਮਿਲਦਾ ਹੈ </ ਛੋਟੇ ਛੋਟੇ> //
+System/Caption: ਸਿਸਟਮ
+System/Hint: ਸਿਸਟਮ  tiddlers ਲਈ ਖੋਜ
+System/Matches: / <ਛੋਟੇ ਛੋਟੇ> << ਨਤੀਜਾ ਲਈ Count >> ਮਿਲਦਾ ਹੈ </ ਛੋਟੇ ਛੋਟੇ> //

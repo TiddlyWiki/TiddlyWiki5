@@ -24,7 +24,7 @@ Hello, my title is A
 
 The style is applied as expected, but the title is wrong: we want ``{{!!title}}`` to refer to the target tiddler B, and not the source tiddler A. 
 
-The solution is to use a \\template\\. In this case, the source tiddler A is called the [[TemplateTiddler|TemplateTiddlers]], and it is //applied// to tiddler B using the notation ``{{||A}}``. The difference is that any TextReference which does not refer explicitly to a specific tiddler is applied to the [[current tiddler|CurrentTiddler]], that is, the target tiddler. As a result, tiddler B now looks as expected:
+The solution is to use a //template//. In this case, the source tiddler A is called the [[TemplateTiddler|TemplateTiddlers]], and it is //applied// to tiddler B using the notation ``{{||A}}``. The difference is that any TextReference which does not refer explicitly to a specific tiddler is applied to the [[current tiddler|CurrentTiddler]], that is, the target tiddler. As a result, tiddler B now looks as expected:
 
 <<<
 @@background-color:yellow;

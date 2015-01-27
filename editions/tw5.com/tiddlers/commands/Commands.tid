@@ -1,6 +1,8 @@
+created: 20150117174359000
+modified: 20150117205257000
 title: Commands
-tags: Reference
+tags: Concepts Reference
 
-Commands are used with [[TiddlyWiki on Node.js|Using TiddlyWiki on Node.js]].
+A <<.def command>> is one of the following words, written with a `--` prefix and used as a command-line option to [[TiddlyWiki on Node.js]], indicating which action is desired.
 
 <<list-links "[tag[Commands]]">>

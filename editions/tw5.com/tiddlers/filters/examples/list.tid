@@ -1,0 +1,10 @@
+created: 20150118134611000
+modified: 20150123214445000
+tags: [[list Operator]] [[Operator Examples]]
+title: list Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[HelloThere]]">>
+<<.operator-example 2 "[list[Days of the Week!!short]]">>

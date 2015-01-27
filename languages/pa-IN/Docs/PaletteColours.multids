@@ -1,0 +1,101 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: ਚੇਤਾਵਨੀ ਦੇ ਪਿਛੋਕੜ
+alert-border: ਚੇਤਾਵਨੀ ਲਈ ਸਰਹੱਦ
+alert-highlight: ਚੇਤਾਵਨੀ ਉਭਾਰਨ
+alert-muted-foreground: ਚੇਤਾਵਨੀ ਚੁੱਪ ਮੁੱਖਭੂਮੀ
+background: ਆਮ ਪਿਛੋਕੜ
+blockquote-bar: ਬਲਾਕ ਹਵਾਲਾ ਪੱਟੀ
+code-background: ਕੋਡ ਦੀ ਪਿੱਠਭੂਮੀ
+code-border: ਕੋਡ ਸਰਹੱਦ
+code-foreground: ਕੋਡ  ਮੁੱਖਭੂਮੀ
+dirty-indicator: ਸੰਭਾਲ ਰਹਿਤ ਬਦਲਾਅ ਸੂਚਕ
+download-background: ਡਾਉਨਲੋਡ ਬਟਨ ਦੀ ਪਿੱਠਭੂਮੀ
+download-foreground: ਡਾਉਨਲੋਡ ਬਟਨ ਦੀ ਮੁੱਖਭੂਮੀ
+dragger-background: Dragger ਦੀ ਪਿੱਠਭੂਮੀ
+dragger-foreground: Dragger ਮੁੱਖਭੂਮੀ
+dropdown-background: ਡ੍ਰਾਪਡਾਉਨ ਪਿੱਠਭੂਮੀ
+dropdown-border: ਡ੍ਰਾਪਡਾਉਨ ਸਰਹੱਦ
+dropdown-tab-background: ਡ੍ਰਾਪਡਾਉਨ ਟੈਬ ਦੀ ਪਿੱਠਭੂਮੀ
+dropdown-tab-background-selected: ਚੁਣੇ ਟੈਬ ਲਈ ਲਟਕਦੇ ਟੈਬ ਦੀ ਪਿੱਠਭੂਮੀ
+dropzone-background: Dropzone ਦੀ ਪਿੱਠਭੂਮੀ
+external-link-background: ਬਾਹਰੀ ਲਿੰਕ ਦੀ ਪਿੱਠਭੂਮੀ
+external-link-background-hover: ਬਾਹਰੀ ਲਿੰਕ ਨੂੰ ਪਿਛੋਕੜ ਦੀ ਹੋਵਰ
+external-link-background-visited: ਬਾਹਰੀ ਲਿੰਕ ਨੂੰ ਪਿਛੋਕੜ ਦਾ ਦੌਰਾ ਕੀਤਾ
+external-link-foreground:  ਬਾਹਰੀ ਲਿੰਕ ਮੁੱਖਭੂਮੀ
+external-link-foreground-hover: ਬਾਹਰੀ ਲਿੰਕ ਨੂੰ ਮੁੱਖਭੂਮੀ ਹੋਵਰ
+external-link-foreground-visited:  ਬਾਹਰੀ ਲਿੰਕ ਨੂੰ ਮੁੱਖਭੂਮੀ ਦਾ ਦੌਰਾ ਕੀਤਾ
+foreground: ਜਨਰਲ ਮੁੱਖਭੂਮੀ
+message-background: ਮੈਸੇਜ ਬਾਕਸ ਦੀ ਪਿੱਠਭੂਮੀ
+message-border: ਮੈਸੇਜ ਬਾਕਸ ਲਈ ਸਰਹੱਦ
+message-foreground: ਸੁਨੇਹਾ ਬਾਕਸ ਲਈ ਮੁੱਖਭੂਮੀ
+modal-backdrop: ਮਾਡਲ ਨੂੰ ਵਾਪਸ ਸੁੱਟਣ
+modal-background: ਮਾਡਲ ਦੀ ਪਿੱਠਭੂਮੀ
+modal-border:  ਮਾਡਲ ਸਰਹੱਦ
+modal-footer-background: ਮਾਡਲ ਪਦਲੇਖ ਦੀ ਪਿੱਠਭੂਮੀ
+modal-footer-border: ਮਾਡਲ ਪਦਲੇਖ ਦੀ ਸਰਹੱਦ
+modal-header-border: ਮਾਡਲ ਸਿਰਲੇਖ ਸਰਹੱਦ
+muted-foreground: ਜਨਰਲ ਚੁੱਪ ਮੁੱਖਭੂਮੀ
+notification-background: ਸੂਚਨਾ ਦੀ ਪਿੱਠਭੂਮੀ
+notification-border: ਸੂਚਨਾ- ਸਰਹੱਦ
+page-background: ਸਫ਼ੇ ਦੀ ਪਿੱਠਭੂਮੀ
+pre-background: ਪਹਿਲੇ ਪ੍ਰਤੀਰੂਪ ਕੋਡ ਦੀ ਪਿੱਠਭੂਮੀ
+pre-border: ਪਹਿਲੇ ਪ੍ਰਤੀਰੂਪ ਕੋਡ ਲਈ ਸਰਹੱਦ
+primary: ਜਨਰਲ ਦਾ ਮੁੱਢਲਾ
+sidebar-button-foreground: ਸਾਈਡਬਾਰ ਬਟਨ ਨੂੰ ਅੱਗੇ ਕਰੋ 
+sidebar-controls-foreground: ਸਾਈਡਬਾਰ ਕੰਟਰੋਲ ਮੁੱਖਭੂਮੀ
+sidebar-controls-foreground-hover: ਸਾਈਡਬਾਰ ਮੁੱਖਭੂਮੀ ਹੋਵਰ ਕੰਟਰੋਲ
+sidebar-foreground: ਸਾਈਡਬਾਰ ਮੁੱਖਭੂਮੀ
+sidebar-foreground-shadow: ਸਾਈਡਬਾਰ ਮੁੱਖਭੂਮੀ ਸ਼ੈਡੋ
+sidebar-muted-foreground: ਸਾਈਡਬਾਰ ਚੁੱਪ ਮੁੱਖਭੂਮੀ
+sidebar-muted-foreground-hover: ਸਾਈਡਬਾਰ ਚੁੱਪ ਮੁੱਖਭੂਮੀ ਹੋਵਰ
+sidebar-tab-background: ਸਾਈਡਬਾਰ ਪਿੱਠਭੂਮੀ ਦੀ ਟੈਬ
+sidebar-tab-background-selected: ਚੁਣੇ ਟੈਬ ਲਈ ਸਾਈਡਬਾਰ ਪਿੱਠਭੂਮੀ ਦੀ  ਟੈਬ
+sidebar-tab-border: ਸਾਈਡਬਾਰ ਟੈਬ ਦੀ ਸਰਹੱਦ
+sidebar-tab-border-selected: ਚੁਣੇ ਟੈਬ ਲਈ ਸਾਈਡਬਾਰ ਟੈਬ ਦੀ ਸਰਹੱਦ
+sidebar-tab-divider: ਸਾਈਡਬਾਰ ਟੈਬ ਵਿਭਾਜਕ
+sidebar-tab-foreground: ਸਾਈਡਬਾਰ ਟੈਬ ਮੁੱਖਭੂਮੀ
+sidebar-tab-foreground-selected: ਚੁਣੇ ਟੈਬ ਲਈ ਸਾਈਡਬਾਰ ਟੈਬ ਮੁੱਖਭੂਮੀ
+sidebar-tiddler-link-foreground: ਸਾਈਡਬਾਰ tiddler ਲਿੰਕ ਮੁੱਖਭੂਮੀ
+sidebar-tiddler-link-foreground-hover: ਸਾਈਡਬਾਰ tiddler ਲਿੰਕ ਮੁੱਖਭੂਮੀ ਹੋਵਰ
+static-alert-foreground: ਸਟੈਟਿਕ ਚੇਤਾਵਨੀ ਮੁੱਖਭੂਮੀ
+tab-background: ਟੈਬ ਦੀ ਪਿੱਠਭੂਮੀ
+tab-background-selected: ਚੁਣੇ ਟੈਬ ਲਈ ਟੈਬ ਪਿੱਠਭੂਮੀ 
+tab-border: ਟੈਬ ਸਰਹੱਦ
+tab-border-selected: ਚੁਣੇ ਟੈਬ ਲਈ  ਟੈਬ ਸਰਹੱਦ
+tab-divider: ਟੈਬ ਵਿਭਾਜਕ
+tab-foreground: ਟੈਬ  ਮੁੱਖਭੂਮੀ
+tab-foreground-selected: ਚੁਣੇ ਟੈਬ ਲਈ  ਟੈਬ ਮੁੱਖਭੂਮੀ
+table-border: ਸਰਹੱਦ ਦੀ ਸਾਰਣੀ 
+table-footer-background: ਪਦਲੇਖ ਪਿੱਠਭੂਮੀ  ਦੀ ਸਾਰਣੀ
+table-header-background:  ਸਿਰਲੇਖ ਪਿੱਠਭੂਮੀ ਦੀ ਸਾਰਣੀ
+tag-background: ਟੈਗ ਪਿੱਠਭੂਮੀ
+tag-foreground: ਟੈਗ  ਮੁੱਖਭੂਮੀ
+tiddler-background: Tiddler ਦੀ ਪਿੱਠਭੂਮੀ
+tiddler-border: Tiddler  ਦੀ  ਸਰਹੱਦ 
+tiddler-controls-foreground: Tiddler ਮੁੱਖਭੂਮੀ  ਕੰਟਰੋਲ
+tiddler-controls-foreground-hover: Tiddler ਮੁੱਖਭੂਮੀ ਹੋਵਰ ਨੂੰ ਕੰਟਰੋਲ
+tiddler-controls-foreground-selected: Tiddler ਚੁਣੇ ਕੰਟਰੋਲ ਲਈ ਮੁੱਖਭੂਮੀ ਕੰਟਰੋਲ
+tiddler-editor-background: Tiddler ਸੰਪਾਦਕ ਦੀ ਪਿੱਠਭੂਮੀ
+tiddler-editor-border: Tiddler ਸੰਪਾਦਕ ਦੀ  ਸਰਹੱਦ
+tiddler-editor-border-image: Tiddler ਸੰਪਾਦਕ ਸਰਹੱਦ ਚਿੱਤਰ 
+tiddler-editor-fields-even:  Tiddler ਸੰਪਾਦਕ ਦੀ ਪਿੱਠਭੂਮੀ ਵੀ ਖੇਤਰ  ਲਈ 
+tiddler-editor-fields-odd: ਅਨਿਸ਼ਚਿਤ ਖੇਤਰ ਲਈ Tiddler ਸੰਪਾਦਕ ਦੀ ਪਿੱਠਭੂਮੀ
+tiddler-info-background: Tiddler ਜਾਣਕਾਰੀ  ਪੈਨਲ ਦੀ ਪਿੱਠਭੂਮੀ
+tiddler-info-border: Tiddler ਜਾਣਕਾਰੀ ਪੈਨਲ ਦੀ ਸਰਹੱਦ
+tiddler-info-tab-background: Tiddler ਜਾਣਕਾਰੀ ਪੈਨਲ ਟੈਬ ਦੀ ਪਿੱਠਭੂਮੀ
+tiddler-link-background:  Tiddler link ਦੀ ਪਿੱਠਭੂਮੀ
+tiddler-link-foreground: Tiddler ਲਿੰਕ ਨੂੰ ਮੁੱਖਭੂਮੀ
+tiddler-subtitle-foreground: Tiddler ਟਾਇਟਲ ਮੁੱਖਭੂਮੀ
+tiddler-title-foreground: Tiddler  ਮੁੱਖਭੂਮੀ ਦਾ ਸਿਰਲੇਖ 
+toolbar-cancel-button: ਟੂਲਬਾਰ 'ਰੱਦ ਕਰੋ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-close-button: ਟੂਲਬਾਰ 'ਬੰਦ ਕਰੋ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-delete-button: ਟੂਲਬਾਰ 'ਹਟਾਓ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-done-button: ਟੂਲਬਾਰ 'ਨੇ ਕੀਤਾ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-edit-button: ਟੂਲਬਾਰ 'ਸੰਪਾਦਨ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-info-button: ਟੂਲਬਾਰ 'ਜਾਣਕਾਰੀ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-new-button: ਟੂਲਬਾਰ 'ਨਿਊ tiddler' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-options-button:  ਟੂਲਬਾਰ 'ਚੋਣ' ਬਟਨ ਮੁੱਖਭੂਮੀ
+toolbar-save-button: ਬਟਨ ਮੁੱਖਭੂਮੀ 'ਸੰਭਾਲੋ' ਟੂਲਬਾਰ
+untagged-background: Untagged ਗੋਲ਼ੀ ਦੀ ਪਿੱਠਭੂਮੀ
+very-muted-foreground: ਬਹੁਤ ਹੀ ਚੁੱਪ ਮੁੱਖਭੂਮੀ

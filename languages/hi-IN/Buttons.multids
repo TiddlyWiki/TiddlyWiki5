@@ -1,0 +1,72 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: विकसित खोज
+AdvancedSearch/Hint: विकसित खोज
+Cancel/Caption: वापस लेना
+Cancel/Hint: इस tiddler मे एडिटिंग केन्स्ल करें 
+Clone/Caption: क्लोन
+Clone/Hint: इस tiddler को कॉपी करें 
+Close/Caption: बंद
+Close/Hint: इस tiddler को बंद करें 
+CloseAll/Caption: सब बंद करें 
+CloseAll/Hint: सभी tiddlers बंद करें
+CloseOthers/Caption: अन्य बंद करें  
+CloseOthers/Hint: अन्य टिड्लर्स बंद करे
+ControlPanel/Caption: कंट्रोल पैनल
+ControlPanel/Hint: कंट्रोल पैनल खोलेँ
+Delete/Caption: हटाएं
+Delete/Hint: इस tiddler को हटाएं
+Edit/Caption: एडिट
+Edit/Hint: इस tiddler को एडिट करे
+Encryption/Caption: एन्क्रिप्शन
+Encryption/ClearPassword/Caption: पासवर्ड ह्टायें
+Encryption/ClearPassword/Hint: पासवर्ड हटाएं और इस विकि को बिना encryption के सेव करें
+Encryption/Hint: इस विकि को सेव करने के लिए पासवर्ड ठीक करें या हटाएं
+Encryption/SetPassword/Caption: पासवर्ड स्थिर करें
+Encryption/SetPassword/Hint: इस विकी को encryption के साथ सेव करने के लिये पासवर्ड सेट करें
+ExportPage/Caption: सभी को बाहर करें
+ExportPage/Hint: सभी टिड्लर्स का निर्यात
+ExportTiddler/Caption: टिड्लर्स का निर्यात
+ExportTiddler/Hint: टिड्लर्स का निर्यात
+ExportTiddlers/Caption: टिड्लर्स का निर्यात
+ExportTiddlers/Hint: टिड्लर्स का निर्यात
+FullScreen/Caption: पूर्ण स्क्रीन
+FullScreen/Hint: पूर्ण स्क्रीन मोड दर्ज करें या छोडें 
+HideSideBar/Caption: साइडबार को छिपाएं
+HideSideBar/Hint: साइडबार को छिपाएं
+Home/Caption: होम
+Home/Hint: डिफ़ॉल्ट tiddlers खोलें
+Import/Caption: लायें
+Import/Hint: फ़ाइल लायें
+Info/Caption: इन्फो
+Info/Hint: इस tiddler के लिए जानकारी दिखाएँ
+Language/Caption: भाषा
+Language/Hint: यूजर इंटरफेस भाषा चुनें
+More/Caption: अतिरिक्त
+More/Hint: अतिरिक्त क्रियाएं
+NewHere/Caption: यहाँ पर नए
+NewHere/Hint: इस के साथ टैग करके एक नया tiddler बनाएं
+NewJournal/Caption: नया जर्नल
+NewJournal/Hint: एक नया जर्नल tiddler बनाएं
+NewJournalHere/Caption: नया जर्नल यहाँ
+NewJournalHere/Hint: इस के साथ टैग करके एक नया जर्नल tiddler बनाएं
+NewTiddler/Caption: नया tiddler
+NewTiddler/Hint: एक नया tiddler बनाएं
+Permalink/Caption: पर्मालिंक
+Permalink/Hint: ब्राउज़र अड्रेस बार को tiddler से लिंक कीजिये
+Permaview/Caption: परमाव्यू
+Permaview/Hint: इस कहानी में ब्राउज़र अड्रेस बार को सारे tiddler से लिंक कीजिये
+Refresh/Caption: रीफ्रेश
+Refresh/Hint: पूरे wiki को रीफ्रेश कीजिये
+Save/Caption: सेव
+Save/Hint: इस tiddler को सेव कीजिये 
+SaveWiki/Caption: परिवर्तनों को सेव कीजिये
+SaveWiki/Hint: परिवर्तनों को सेव कीजिये
+ShowSideBar/Caption: sidebar को दिखाएं
+ShowSideBar/Hint: sidebar को दिखाएं
+StoryView/Caption: स्टोरी देखें
+StoryView/Hint: कहानी दृश्य चुनें
+TagManager/Caption: टैग मॅनेजर
+TagManager/Hint: टैग मॅनेजर को खोलें
+Theme/Caption: विषय
+Theme/Hint: प्रदर्शन विषय चुनें

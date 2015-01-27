@@ -1,0 +1,15 @@
+created: 20150124140124000
+modified: 20150124140355000
+tags: [[title Operator]] [[Operator Examples]]
+title: title Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[title[HelloThere]]">>
+<<.operator-example 2 "[[HelloThere]]">>
+<<.operator-example 3 "HelloThere">>
+<<.operator-example 4 "[title[HelloThere]] [title[Filter Operators]]">>
+<<.operator-example 5 "[[HelloThere]] [[Filter Operators]]">>
+<<.operator-example 6 "HelloThere [[Filter Operators]]">>
+<<.operator-example 7 "[tag[Filters]] +[!title[Filter Operators]]">>
+<<.operator-example 8 "[tag[Filters]] +[![Filter Operators]]">>
+<<.operator-example 9 "[tag[Filters]] -[[Filter Operators]]">>

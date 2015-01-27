@@ -1,0 +1,8 @@
+created: 20150123223006000
+modified: 20150123223023000
+tags: [[plugintiddlers Operator]] [[Operator Examples]]
+title: plugintiddlers Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[$:/core]plugintiddlers[]]">>
+

@@ -1,0 +1,19 @@
+created: 20140410103123179
+modified: 20150124205353000
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: sortcs Operator
+type: text/vnd.tiddlywiki
+caption: sortcs
+purpose: sort the input by text field, ignoring case
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]], defaulting to <<.field title>>"
+paramName="f"
+output="the input, sorted into ascending order by field <<.field f>>, treating field values as text"
+negationOutput="the input, likewise sorted into descending order"
+/>
+
+Capital and lowercase letters are treated as different. Compare <<.olink sort>>.
+
+<<.operator-examples "sortcs">>

@@ -1,0 +1,15 @@
+created: 20150111145738451
+modified: 20150124150912000
+tags: [[Filter Operators]] [[Special Operators]] [[Absolute Operators]]
+title: editions Operator
+type: text/vnd.tiddlywiki
+caption: editions
+purpose: select the names of all the ~TiddlyWiki editions
+
+<$macrocall $name=".operator-def"
+input="ignored"
+parameter="none"
+output="the name of each ~TiddlyWiki edition, in alphabetical order"
+/>
+
+<<.node-only-operator>>

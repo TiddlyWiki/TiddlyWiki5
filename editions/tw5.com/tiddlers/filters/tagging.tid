@@ -1,0 +1,17 @@
+created: 20140410103123179
+modified: 20150124205941000
+tags: [[Filter Operators]] [[Tag Operators]]
+title: tagging Operator
+type: text/vnd.tiddlywiki
+caption: tagging
+purpose: find the tiddlers that have the input tags
+
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selection]] of [[tags|Tagging]]"
+parameter="none"
+output="the titles of any tiddlers that carry the input tags"
+/>
+
+Each input tag is processed in turn. The list of tiddlers carrying that tag is generated, [[sorted|Order of Tagged Tiddlers]], and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+<<.operator-examples "tagging">>

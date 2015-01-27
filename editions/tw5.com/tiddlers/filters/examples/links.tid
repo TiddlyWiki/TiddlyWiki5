@@ -1,0 +1,14 @@
+created: 20150118134611000
+modified: 20150124202748000
+tags: [[links Operator]] [[Operator Examples]]
+title: links Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[HelloThere]links[]]">>
+<<.operator-example 2 "[all[current]links[]]" "tiddlers [[hard-linked|Hard and Soft Links]] from the current one">>
+
+Here are some hard links:
+
+* HelloThere
+* [[Filter Operators]]
+* [[links Operator]]

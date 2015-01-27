@@ -1,0 +1,4 @@
+title: $:/language/Help/default
+description: 
+
+ \ਪਰਿਭਾਸ਼ਤ commandTitle () $ / ਭਾਸ਼ਾ / ਮੱਦਦ / $ (ਹੁਕਮ) $ \ end```usage: tiddlywiki [<wikifolder>] [- <ਹੁਕਮ> [<ਮੁੱਲ> ...] ...] `` `ਉਪਲੱਬਧ ਹੁਕਮ: <ਉਲ>" = = << commandTitle >>> <$ macrocall $ ਨਾਮ ਕਰਨ ਲਈ <li> <$ ਲਿੰਕ ਨੂੰ <$ ਸੂਚੀ ਨੂੰ ਫਿਲਟਰ = ਵੇਰੀਏਬਲ = "command" "[[] ਲੜੀਬੱਧ [ਦਾ ਸਿਰਲੇਖ] ਨੂੰ ਹੁਕਮ]"> ਹੁਕਮ "$ TYPE =" ਪਾਠ / plain "$ ਆਉਟਪੁੱਟ =" text / plain "/> </ $ link>: <$ transclude tiddler = << commandTitle >> ਖੇਤਰ =" ਵੇਰਵਾ "/> </ li> </ $ ਸੂਚੀ ਵਿੱਚ> </ ਉਲ> ਨੂੰ ਇੱਕ ਹੁਕਮ 'ਤੇ ਵੇਰਵੇ ਮਦਦ ਪ੍ਰਾਪਤ ਕਰਨ ਲਈ: `` `tiddlywiki --help <ਹੁਕਮ>` ``

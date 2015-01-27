@@ -1,0 +1,13 @@
+created: 20150117192116000
+modified: 20150124204253000
+title: Thursday
+type: text/vnd.tiddlywiki
+
+<<.this-is-operator-example>>
+
+! <<.olink before>> and <<.olink after>>
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]before{!!title}]">>
+<<.operator-example 2 "[list[Days of the Week]after{!!title}]">>

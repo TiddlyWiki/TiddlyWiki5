@@ -1,0 +1,9 @@
+created: 20140410103123179
+modified: 20150124200504000
+tags: [[Filter Operators]] [[Order Operators]]
+title: bf Operator
+type: text/vnd.tiddlywiki
+caption: bf
+purpose: same as <<.op rest>>
+
+<<.op bf>> is a synonym for <<.olink rest>>, also known as <<.olink butfirst>>.

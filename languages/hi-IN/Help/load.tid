@@ -1,0 +1,15 @@
+title: $:/language/Help/load
+description: एक फ़ाइल से लोड tiddlers।
+
+2.xx टिड्लीविकि फ़ाइलें (`.html`),` .tiddler`, `.tid`,` .json` या अन्य फ़ाइलों से लोड tiddlers
+```
+--load <filepath>
+```
+
+एक एन्क्रिप्टेड टिड्लीविकि फ़ाइल से tiddlers लोड करने के लिए आपको सबसे पहले PasswordCommand साथ पासवर्ड निर्दिष्ट करना चाहिए। उदाहरण के लिए:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+टिड्लीविकि एक पहले से ही भरी हुई प्लगइन के एक पुराने संस्करण लोड नहीं होगा कि ध्यान दें।
