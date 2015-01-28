@@ -53,7 +53,6 @@ Handle a change event
 SelectWidget.prototype.handleChangeEvent = function(event) {
 	var value = this.getSelectDomNode().value;
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
-	this.invokeActions(event);
 };
 
 /*
