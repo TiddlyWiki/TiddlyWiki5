@@ -25,6 +25,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |
 |retain |Set to "yes" to force the content to be retained even when hidden (defaults to "no")|
+|element|The html element produced by the reveal widget being hidden or shown (default: `span`)|
 
 Retaining the content when hidden can give poor performance since the hidden content requires refresh processing even though it is not displayed. On the other hand, the content can be revealed much more quickly. Note that setting ''animate="yes"'' will also force ''retain="yes"''.
 
