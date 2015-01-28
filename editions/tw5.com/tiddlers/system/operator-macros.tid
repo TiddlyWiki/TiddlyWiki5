@@ -1,7 +1,11 @@
 created: 20150117152607000
-modified: 20150126144131000
+modified: 20150127203427000
 title: $:/editions/tw5.com/operator-macros
 tags: $:/tags/Macro
+
+\define .operator-suffix-name(suffixName)
+<$macrocall $name=".if" cond="""$suffixName$""" then="<<.place '$suffixName$'>> = " else=""/>
+\end
 
 \define .operator-def(input,negationInput,suffix,suffixName,parameter,paramName,output,negationOutput)
 <table class="doc-table">
@@ -11,7 +15,7 @@ tags: $:/tags/Macro
 then="""<tr><th align="left">`!` input</th><td>$negationInput$</td></tr>"""
 else=""/>
 <$macrocall $name=".if" cond="""$suffix$"""
-then="""<tr><th align="left">[[suffix|Filter Step]]</th><td><<.place "$suffixName$">> = $suffix$</td></tr>"""
+then="""<tr><th align="left">[[suffix|Filter Step]]</th><td><<.operator-suffix-name "$suffixName$">>$suffix$</td></tr>"""
 else=""/>
 <tr><th align="left">[[parameter|Filter Parameter]]</th><td><$macrocall $name=".if" cond="""$paramName$""" then="<<.place '$paramName$'>> = " else=""/>$parameter$</td></tr>
 <tr><th align="left">output</th><td>$output$</td></tr>

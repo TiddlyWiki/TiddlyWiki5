@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150124214554000
+modified: 20150127202806000
 tags: [[Filter Operators]] [[Group Operators]] [[Date Operators]]
 title: eachday Operator
 type: text/vnd.tiddlywiki
@@ -13,7 +13,7 @@ paramName="f"
 output="a selection containing the first input title encountered for each distinct value (ignoring times of day) of field <<.place f>>"
 />
 
-Each input title is processed in turn. The value of field <<.place f>> in the corresponding tiddler is examined, and as long as this indicates a date that has not been encountered before, the title is appended to the output set.
+Each input title is processed in turn. The value of field <<.place f>> in the corresponding tiddler is examined, and as long as this indicates a date that has not been encountered before, the title is appended to the output.
 
 If a tiddler doesn't contain field <<.place f>>, it contributes nothing to the output.
 

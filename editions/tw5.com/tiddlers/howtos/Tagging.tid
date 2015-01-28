@@ -1,5 +1,5 @@
 created: 20140904075400000
-modified: 20150124202936000
+modified: 20150127154219000
 tags: [[Working with TiddlyWiki]] Concepts
 title: Tagging
 type: text/vnd.tiddlywiki
@@ -33,7 +33,7 @@ You can use the [[tag manager|$:/TagManager]], found on the ''Tags'' tab under '
 
 ! Change the order in which tags are listed
 
-By default, tagged tiddlers are listed in the order they were added to the wiki. The <<.olink sort>> operator can change the order to alphabetical.
+By default, tagged tiddlers are listed in alphabetical order.
 
 If you want any other order, add a <<.flink ListField>> field to the tag tiddler, and set its value to be a [[list of the tiddlers|Title List]] in that order.
 
