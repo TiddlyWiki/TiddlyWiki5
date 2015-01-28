@@ -23,12 +23,12 @@ exports.limit = function(source,operator,options) {
 	source(function(tiddler,title) {
 		tiddlers.push(title);
 	});
-	if(0 === offset){
+	if(0 === offset) {
 		results = tiddlers;
-	} else{
+	} else {
 		results = offset > 0 ? tiddlers.slice(offset) : tiddlers.slice(0,offset);
 	}
-	if(0 !== limit){
+	if(0 !== limit) {
 		results = limit > 0 ? results.slice(0,limit) : results.slice(limit);
 	}
 	if("!" === operator.prefix) {
