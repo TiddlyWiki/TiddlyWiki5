@@ -524,7 +524,7 @@ exports.sortByList = function(array,listTitle) {
 	if(!array || array.length === 0) {
 		return [];
 	} else {
-		var titles = [], t, title;
+		var t, title, titles = [], unlisted = [];
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
 			title = list[t];
@@ -532,13 +532,17 @@ exports.sortByList = function(array,listTitle) {
 				titles.push(title);
 			}
 		}
-		// Then place any remaining entries
+		// Add remaining entries to unlisted
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
-				titles.push(title);
+				unlisted.push(title);
 			}
 		}
+		//sort unlisted
+		$tw.wiki.sortTiddlers(unlisted,"title",false,false);
+		//concat listed with unlisted
+		titles = titles.concat(unlisted);
 		// Finally obey the list-before and list-after fields of each tiddler in turn
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {

@@ -111,9 +111,9 @@ var temp = (function(options) {
 		return str;
 	}
 
-	function Path(x,y) {
-		if(!(this instanceof Path)) return new Path(x,y);
-		FakeSVG.call(this, 'path');
+	function Path(x,y,attrs) {
+		if(!(this instanceof Path)) return new Path(x,y,attrs);
+		FakeSVG.call(this, 'path', attrs);
 		this.attrs.d = "M"+x+' '+y;
 	}
 	subclassOf(Path, FakeSVG);
@@ -156,17 +156,23 @@ var temp = (function(options) {
 		this.attrs.d += 'h.5';
 		return this;
 	}
+/* TiddlyWiki: added support for arbitrary straight lines */
+	Path.prototype.line = function(dx,dy) {
+		this.attrs.d += "l"+dx+" "+dy;
+		return this;
+	}
 
-	function Diagram(items) {
-		if(!(this instanceof Diagram)) return new Diagram([].slice.call(arguments));
+/* TiddlyWiki: added twOptions parameter, passing it to Start() and End() */
+	function Diagram(twOptions, items) {
+		if(!(this instanceof Diagram)) return new Diagram(twOptions, [].slice.call(arguments,1));
 		FakeSVG.call(this, 'svg', {class: Diagram.DIAGRAM_CLASS});
 		this.items = items.map(wrapString);
-		this.items.unshift(new Start);
-		this.items.push(new End);
+		this.items.unshift(new Start(twOptions.start));
+		this.items.push(new End(twOptions.end));
 		this.width = this.items.reduce(function(sofar, el) { return sofar + el.width + (el.needsSpace?20:0)}, 0)+1;
 		this.up = Math.max.apply(null, this.items.map(function (x) { return x.up; }));
 		this.down = Math.max.apply(null, this.items.map(function (x) { return x.down; }));
-		this.formatted = false;
+		this.formatted = false;		
 	}
 	subclassOf(Diagram, FakeSVG);
 	for(var option in options) {
@@ -325,15 +331,23 @@ var temp = (function(options) {
 			throw "Unknown value for Optional()'s 'skip' argument.";
 	}
 
-	function OneOrMore(item, rep) {
-		if(!(this instanceof OneOrMore)) return new OneOrMore(item, rep);
+/* TiddlyWiki: added wantArrow */
+	function OneOrMore(item, rep, wantArrow) {
+		if(!(this instanceof OneOrMore)) return new OneOrMore(item, rep, wantArrow);
 		FakeSVG.call(this, 'g');
+
+/* TiddlyWiki: code added */
+		this.wantArrow = wantArrow;
+
 		rep = rep || (new Skip);
 		this.item = wrapString(item);
 		this.rep = wrapString(rep);
 		this.width = Math.max(this.item.width, this.rep.width) + Diagram.ARC_RADIUS*2;
 		this.up = this.item.up;
 		this.down = Math.max(Diagram.ARC_RADIUS*2, this.item.down + Diagram.VERTICAL_SEPARATION + this.rep.up + this.rep.down);
+
+/* TiddlyWiki: moved calculation of distanceFromY (of the repeat arc) to here */
+		this.distanceFromY = Math.max(Diagram.ARC_RADIUS*2, this.item.down+Diagram.VERTICAL_SEPARATION+this.rep.up);
 	}
 	subclassOf(OneOrMore, FakeSVG);
 	OneOrMore.prototype.needsSpace = true;
@@ -350,41 +364,70 @@ var temp = (function(options) {
 		Path(x+this.width-Diagram.ARC_RADIUS,y).right(Diagram.ARC_RADIUS).addTo(this);
 
 		// Draw repeat arc
-		var distanceFromY = Math.max(Diagram.ARC_RADIUS*2, this.item.down+Diagram.VERTICAL_SEPARATION+this.rep.up);
+/* TiddlyWiki: moved calculation of distanceFromY from here to constructor */
+		var distanceFromY = this.distanceFromY;
+		
 		Path(x+Diagram.ARC_RADIUS,y).arc('nw').down(distanceFromY-Diagram.ARC_RADIUS*2).arc('ws').addTo(this);
 		this.rep.format(x+Diagram.ARC_RADIUS, y+distanceFromY, this.width - Diagram.ARC_RADIUS*2).addTo(this);
 		Path(x+this.width-Diagram.ARC_RADIUS, y+distanceFromY).arc('se').up(distanceFromY-Diagram.ARC_RADIUS*2).arc('en').addTo(this);
+		
+/* TiddlyWiki: code added */
+		if(this.wantArrow) {
+			var arrowSize = Diagram.ARC_RADIUS/2;
+			// Compensate for the illusion that makes the arrow look unbalanced if it's too close to the curve below it
+			var multiplier = (distanceFromY < arrowSize*5) ? 1.2 : 1;
+			Path(x-arrowSize, y+distanceFromY/2 + arrowSize/2, {class:"arrow"}).
+				line(arrowSize, -arrowSize).line(arrowSize*multiplier, arrowSize).addTo(this);
+		}
 
 		return this;
 	}
 
-	function ZeroOrMore(item, rep, skip) {
-		return Optional(OneOrMore(item, rep), skip);
+	function ZeroOrMore(item, rep, skip, wantArrow) {
+		return Optional(OneOrMore(item, rep, wantArrow), skip);
 	}
 
-	function Start() {
-		if(!(this instanceof Start)) return new Start();
+/* TiddlyWiki: added type parameter */
+	function Start(type) {
+		if(!(this instanceof Start)) return new Start(type);
 		FakeSVG.call(this, 'path');
-		this.width = 20;
+		this.type = type || 'single'
+		this.width = (this.type === 'double') ? 20 : 10;
 		this.up = 10;
 		this.down = 10;
 	}
 	subclassOf(Start, FakeSVG);
 	Start.prototype.format = function(x,y) {
-		this.attrs.d = 'M '+x+' '+(y-10)+' v 20 m 10 -20 v 20 m -10 -10 h 20.5';
+/* TiddlyWiki: added types */
+		if(this.type === 'single') {
+			this.attrs.d = 'M '+x+' '+(y-10)+' v 20 m 0 -10 h 10.5';
+		} else if(this.type === 'double') {
+			this.attrs.d = 'M '+x+' '+(y-10)+' v 20 m 10 -20 v 20 m -10 -10 h 20.5';
+		} else { // 'none'
+			this.attrs.d = 'M '+x+' '+y+' h 10.5';
+		}
 		return this;
 	}
 
-	function End() {
-		if(!(this instanceof End)) return new End();
+/* TiddlyWiki: added type parameter */
+	function End(type) {
+		if(!(this instanceof End)) return new End(type);
 		FakeSVG.call(this, 'path');
-		this.width = 20;
+		this.type = type || 'double';
+		this.width = (this.type === 'double') ? 20 : 10;
 		this.up = 10;
 		this.down = 10;
 	}
 	subclassOf(End, FakeSVG);
 	End.prototype.format = function(x,y) {
-		this.attrs.d = 'M '+x+' '+y+' h 20 m -10 -10 v 20 m 10 -20 v 20';
+/* TiddlyWiki: added types */
+		if(this.type === 'single') {
+			this.attrs.d = 'M '+x+' '+y+' h 10 m 0 -10 v 20';
+		} else if(this.type === 'double') {
+			this.attrs.d = 'M '+x+' '+y+' h 20 m -10 -10 v 20 m 10 -20 v 20';
+		} else { // 'none'
+			this.attrs.d = 'M '+x+' '+y+' h 10';
+		}
 		return this;
 	}
 

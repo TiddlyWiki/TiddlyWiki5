@@ -26,6 +26,12 @@ x y z			sequence
 
 "x" can also be written 'x' or """x"""
 
+pragmas:
+	\arrow yes|no
+	\debug yes|no
+	\start single|double|none
+	\end single|double|none
+
 \*/
 (function(){
 
@@ -35,9 +41,10 @@ x y z			sequence
 
 var components = require("$:/plugins/tiddlywiki/railroad/components.js").components;
 
-var Parser = function(widget,source) {
+var Parser = function(widget,source,options) {
 	this.widget = widget;
 	this.source = source;
+	this.options = options;
 	this.tokens = this.tokenise(source);
 	this.tokenPos = 0;
 	this.advance();
@@ -56,7 +63,9 @@ Parser.prototype.parseContent = function() {
 		if(!component) {
 			break;
 		}
-		content.push(component);
+		if(!component.isPragma) {
+			content.push(component);
+		}
 	}
 	return content;
 };
@@ -68,6 +77,8 @@ Parser.prototype.parseComponent = function() {
 			component = this.parseTerminal();
 		} else if(this.at("name")) {
 			component = this.parseName();
+		} else if(this.at("pragma")) {
+			component = this.parsePragma();
 		} else {
 			switch(this.token.value) {
 				case "[":
@@ -182,6 +193,7 @@ Parser.prototype.parseNonterminal = function() {
 };
 
 Parser.prototype.parseOptional = function() {
+	var wantArrow = this.options.arrow;
 	// Consume the [
 	this.advance();
 	// Consume the { if there is one
@@ -201,10 +213,12 @@ Parser.prototype.parseOptional = function() {
 	}
 	this.close("]");
 	// Create a component
-	return repeated ? new components.OptionalRepeated(content,separator,normal) : new components.Optional(content,normal);
+	return repeated ? new components.OptionalRepeated(content,separator,normal,wantArrow)
+		: new components.Optional(content,normal);
 };
 
 Parser.prototype.parseRepeated = function() {
+	var wantArrow = this.options.arrow;
 	// Consume the {
 	this.advance();
 	// Parse the content
@@ -217,7 +231,7 @@ Parser.prototype.parseRepeated = function() {
 	// Consume the closing bracket
 	this.close("}");
 	// Create a component
-	return new components.Repeated(content,separator);
+	return new components.Repeated(content,separator,wantArrow);
 };
 
 Parser.prototype.parseSequence = function() {
@@ -253,6 +267,44 @@ Parser.prototype.parseTransclusion = function() {
 	return new components.Transclusion(content);
 };
 
+/////////////////////////// Pragmas
+
+Parser.prototype.parsePragma = function() {
+	// Create a dummy component
+	var component = { isPragma: true };
+	// Consume the pragma
+	var pragma = this.token.value;
+	this.advance();
+	// Apply the setting
+	if(pragma === "arrow") {
+		this.options.arrow = this.parseYesNo(pragma);		
+	} else if(pragma === "debug") {
+		this.options.debug = true;
+	} else if(pragma === "start") {
+		this.options.start = this.parseTerminusStyle(pragma);		
+	} else if(pragma === "end") {
+		this.options.end = this.parseTerminusStyle(pragma);		
+	} else {
+		throw "Invalid pragma";
+	}
+	return component;
+};
+
+Parser.prototype.parseYesNo = function(pragma) {
+	return this.parseSetting(["yes","no"],pragma) === "yes";
+}
+
+Parser.prototype.parseTerminusStyle = function(pragma) {
+	return this.parseSetting(["single","double","none"],pragma);
+}
+
+Parser.prototype.parseSetting = function(options,pragma) {
+	if(this.at("name") && options.indexOf(this.token.value) !== -1) {
+		return this.tokenValueEaten();		
+	}
+	throw options.join(" or ") + " expected after \\" + pragma;
+}
+
 /////////////////////////// Token manipulation
 
 Parser.prototype.advance = function() {
@@ -274,7 +326,7 @@ Parser.prototype.eat = function(token) {
 	return at;
 };
 
-Parser.prototype.tokenValue = function() {
+Parser.prototype.tokenValueEaten = function() {
 	var output = this.token.value;
 	this.advance();
 	return output;
@@ -303,12 +355,12 @@ Parser.prototype.expectString = function(context,token) {
 		token = token || "String";
 		throw token + " expected " + context;
 	}
-	return this.tokenValue();
+	return this.tokenValueEaten();
 };
 
 Parser.prototype.expectNameOrString = function(context) {
 	if(this.at("name")) {
-		return this.tokenValue();
+		return this.tokenValueEaten();
 	}
 	return this.expectString(context,"Name or string");
 };
@@ -351,6 +403,9 @@ Parser.prototype.tokenise = function(source) {
 		} else if(c.match(/[a-zA-Z]/)) {
 			// Name
 			token = this.readName(source,pos);
+		} else if(c.match(/\\/)) {
+			// Pragma
+			token = this.readPragma(source,pos);
 		} else {
 			throw "Syntax error at " + c;
 		}
@@ -375,6 +430,18 @@ Parser.prototype.readName = function(source,pos) {
 		return {type: "name", value: match[1], start: pos, end: pos+match[1].length};
 	} else {
 		throw "Invalid name";
+	}
+};
+
+Parser.prototype.readPragma = function(source,pos) {
+	var re = /([a-z]+)/g;
+	pos++;
+	re.lastIndex = pos;
+	var match = re.exec(source);
+	if(match && match.index === pos) {
+		return {type: "pragma", value: match[1], start: pos, end: pos+match[1].length};
+	} else {
+		throw "Invalid pragma";
 	}
 };
 

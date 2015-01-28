@@ -1,8 +1,8 @@
 created: 20150103184022184
-modified: 20150103185522184
+modified: 20150119214125000
 tags:
 title: $:/plugins/tiddlywiki/railroad/example-source
-type: text/plain
+type: text/vnd.tiddlywiki.railroad
 
 ["+"]
 ({ [[digit|GettingStarted]] } | "#" <'escape sequence'>)
