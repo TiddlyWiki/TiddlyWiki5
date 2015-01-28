@@ -13,7 +13,7 @@ Extension methods for the $tw.Tiddler object (constructor and methods required a
 "use strict";
 
 /*
-returns names of tiddler fields
+Returns names of tiddler fields.
 
 default: the current tiddler's custom fields, or via...
   => listFields("$custom")
@@ -26,16 +26,24 @@ standard text fields:
 */
 
 exports.listFields = function(which) {
-	var f, result = [],
+	var core = [],f,result = [],
 		text = ["title","text","tags","modifier","creator","list"],
 		standard = text.concat("color","created","modified");
-	switch (which) {
-	case "$text":
-		result = text;
-	case "$standard":
-		result = standard;
-		break
-	default :
+	if("$text" === which) {
+		core = text;
+	}
+	if("$standard" === which) {
+		core = standard;
+	}
+	//$text or $standard
+	if(core.length) {
+		for(f=0; f<core.length; f++){
+			if($tw.utils.hop(this.fields,core[f])) {
+				result.push(core[f]);
+			}
+		}
+	// $all or $custom
+	} else {
 		for (f in this.fields){
 			if($tw.utils.hop(this.fields,f) && ("$all" === which || 0 > standard.indexOf(f))) {
 				result.push(f);
