@@ -26,18 +26,10 @@ exports.limit = function(source,operator,options) {
 	if(0 === offset){
 		results = tiddlers;
 	} else{
-		if(offset > 0){
-			results = tiddlers.slice(offset);
-		} else {
-			results = tiddlers.slice(0,offset);
-		}	
+		results = offset > 0 ? tiddlers.slice(offset) : tiddlers.slice(0,offset);
 	}
 	if(0 !== limit){
-		if(limit > 0){
-			results = results.slice(0,limit);
-		} else {
-			results = results.slice(limit);
-		}
+		results = limit > 0 ? results.slice(0,limit) : results.slice(limit);
 	}
 	if("!" === operator.prefix) {
 		for(t=0;t<results.length;t++){
