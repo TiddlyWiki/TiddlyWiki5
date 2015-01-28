@@ -88,7 +88,7 @@ $tw.utils.each = function(object,callback) {
 Pushes a value to an array only when not yet contained.
 */
 $tw.utils.pushOnce = function(array,value) {
-	if(0 > array.indexOf(value)){
+	if(array.indexOf(value) == -1) {
 		array.push(value);
 	}
 }

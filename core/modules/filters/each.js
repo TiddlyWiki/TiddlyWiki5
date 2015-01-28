@@ -20,10 +20,10 @@ exports.each = function(source,operator,options) {
 	var results =[] ,
 		value,values = {},
 		field = operator.operand || "title";
-	if("list" !== operator.suffix) {
+	if(operator.suffix !== "list") {
 		source(function(tiddler,title) {
 			if(tiddler) {
-				value = "title" === field ? title : tiddler.getFieldString(field);
+				value = (field === "title") ? title : tiddler.getFieldString(field);
 				if(!$tw.utils.hop(values,value)) {
 					values[value] = true;
 					results.push(title);
