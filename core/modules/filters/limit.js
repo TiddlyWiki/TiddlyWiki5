@@ -23,7 +23,7 @@ exports.limit = function(source,operator,options) {
 	source(function(tiddler,title) {
 		tiddlers.push(title);
 	});
-	if(0 === offset) {
+	if(offset === 0) {
 		results = tiddlers;
 	} else {
 		results = offset > 0 ? tiddlers.slice(offset) : tiddlers.slice(0,offset);
@@ -31,13 +31,12 @@ exports.limit = function(source,operator,options) {
 	if(0 !== limit) {
 		results = limit > 0 ? results.slice(0,limit) : results.slice(limit);
 	}
-	if("!" === operator.prefix) {
-		for(t=0;t<results.length;t++){
+	if(operator.prefix === "!") {
+		for(t=0; t<results.length; t++){
 			tiddlers.splice(tiddlers.indexOf(results[t]),1);
 		}
 		results = tiddlers;
 	}
-
 	return results;
 };
 
