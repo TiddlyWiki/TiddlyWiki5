@@ -23,7 +23,8 @@ var HtmlParser = function(type,text,options) {
 		type: "element",
 		tag: "iframe",
 		attributes: {
-			src: {type: "string", value: src}
+			src: {type: "string", value: src},
+			sandbox: {type: "string", value: "sandbox"}
 		}
 	}];
 };
