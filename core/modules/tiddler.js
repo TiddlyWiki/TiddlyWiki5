@@ -27,7 +27,7 @@ standard text fields:
 
 exports.getFieldNames = function(which) {
 	var core,f,result = [];
-	switch (which){
+	switch (which) {
 		case "$text":
 		case "$standard":
 			core = $tw.wiki.getFieldNames(which);
@@ -43,7 +43,7 @@ exports.getFieldNames = function(which) {
 	} else {
 		core = $tw.wiki.getFieldNames();
 		for (f in this.fields){
-			if($tw.utils.hop(this.fields,f) && ("$all" === which || 0 > core.indexOf(f))) {
+			if($tw.utils.hop(this.fields,f) && (which === "$all" || 0 > core.indexOf(f))) {
 				result.push(f);
 			}
 		}
