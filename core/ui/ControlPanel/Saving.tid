@@ -13,7 +13,7 @@ http://$(userName)$.tiddlyspot.com/backup/
 <<backupURL>>
 </$reveal>
 <$reveal type="nomatch" state="$:/UploadURL" text="">
-<$macrocall $name=serverpath source={{$:/UploadURL}} target={{$:/UploadBackupDir}}>>
+<$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}>>
 </$reveal>
 </$set>
 </$reveal>
