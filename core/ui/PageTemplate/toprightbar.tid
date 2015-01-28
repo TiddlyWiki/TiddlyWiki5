@@ -1,6 +1,5 @@
 title: $:/core/ui/PageTemplate/toprightbar
 tags: $:/tags/PageTemplate
-list-before: 
 
 <span class="tc-topbar tc-topbar-right">
 
