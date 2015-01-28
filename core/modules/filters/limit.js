@@ -16,24 +16,36 @@ Filter operator for chopping the results to a specified maximum number of entrie
 Export our filter function
 */
 exports.limit = function(source,operator,options) {
-	var count = 0,
-		results = [],
-		offset = parseInt(operator.suffix,10) || 0;
+	var results,t,tiddlers = [],
+		offset = parseInt(operator.suffix,10) || 0,
+		limit = parseInt(operator.operand,10) || 0;
 	// Convert to an array
 	source(function(tiddler,title) {
-		if(count < offset) {
-			count++;			
-		} else {
-			results.push(title);
-		}
+		tiddlers.push(title);
 	});
-	// Slice the array if necessary
-	var limit = Math.min(results.length,parseInt(operator.operand,10));
-	if(operator.prefix === "!") {
-		results = results.slice(-limit);
-	} else {
-		results = results.slice(0,limit);
+	if(0 === offset){
+		results = tiddlers;
+	} else{
+		if(offset > 0){
+			results = tiddlers.slice(offset);
+		} else {
+			results = tiddlers.slice(0,offset);
+		}	
 	}
+	if(0 !== limit){
+		if(limit > 0){
+			results = results.slice(0,limit);
+		} else {
+			results = results.slice(limit);
+		}
+	}
+	if("!" === operator.prefix) {
+		for(t=0;t<results.length;t++){
+			tiddlers.splice(tiddlers.indexOf(results[t]),1);
+		}
+		results = tiddlers;
+	}
+
 	return results;
 };
 
