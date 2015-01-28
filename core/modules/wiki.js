@@ -185,6 +185,16 @@ exports.generateNewTitle = function(baseTitle,options) {
 	return title;
 };
 
+exports.getFieldNames = function(which){
+	//$text
+	var result = ["title","text","tags","list","modifier","creator"];
+	if(!which || "$text" !== which){
+		//$standard
+		result = result.concat("modified","created","color");
+	}
+	return result;
+}
+
 exports.isSystemTiddler = function(title) {
 	return title.indexOf("$:/") === 0;
 };
@@ -1014,7 +1024,7 @@ exports.search = function(text,options) {
 			if(field) {
 				if('[object Array]' == Object.prototype.toString.call(field)) {
 					$tw.utils.each(field, function(f){
-						f = 0 === f.indexOf("$") ? tiddler.listFields(f) : f;
+						f = 0 === f.indexOf("$") ? tiddler.getFieldNames(f) : f;
 						$tw.utils.pushTop(fields, f);
 					});
 				} else {

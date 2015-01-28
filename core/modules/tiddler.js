@@ -16,27 +16,24 @@ Extension methods for the $tw.Tiddler object (constructor and methods required a
 Returns names of tiddler fields.
 
 default: the current tiddler's custom fields, or via...
-  => listFields("$custom")
+  => getFieldNames("$custom")
 all fields:
-  => listFields("$all")	
+  => getFieldNames("$all")	
 standard fields:
-  => listFields("$standard")
+  => getFieldNames("$standard")
 standard text fields:
-  => listFields("$text")
+  => getFieldNames("$text")
 */
 
-exports.listFields = function(which) {
-	var core = [],f,result = [],
-		text = ["title","text","tags","modifier","creator","list"],
-		standard = text.concat("color","created","modified");
-	if("$text" === which) {
-		core = text;
-	}
-	if("$standard" === which) {
-		core = standard;
+exports.getFieldNames = function(which) {
+	var core,f,result = [];
+	switch (which){
+		case "$text":
+		case "$standard":
+			core = $tw.wiki.getFieldNames(which);
 	}
 	//$text or $standard
-	if(core.length) {
+	if(core) {
 		for(f=0; f<core.length; f++){
 			if($tw.utils.hop(this.fields,core[f])) {
 				result.push(core[f]);
@@ -44,8 +41,9 @@ exports.listFields = function(which) {
 		}
 	// $all or $custom
 	} else {
+		core = $tw.wiki.getFieldNames();
 		for (f in this.fields){
-			if($tw.utils.hop(this.fields,f) && ("$all" === which || 0 > standard.indexOf(f))) {
+			if($tw.utils.hop(this.fields,f) && ("$all" === which || 0 > core.indexOf(f))) {
 				result.push(f);
 			}
 		}
