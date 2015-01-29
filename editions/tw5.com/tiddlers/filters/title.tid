@@ -1,6 +1,6 @@
 created: 20140410103123179
-modified: 20150124192051000
-tags: [[Filter Operators]] [[Common Operators]] [[Absolute Operators]] [[Negatable Operators]]
+modified: 20150129133732000
+tags: [[Filter Operators]] [[Common Operators]] [[Selection Constructors]] [[Negatable Operators]]
 title: title Operator
 type: text/vnd.tiddlywiki
 caption: title
@@ -17,6 +17,6 @@ negationOutput="the input, but with tiddler <<.place t>> filtered out if it exis
 
 `[title[An Example]]` can be shortened to `[[An Example]]`, because <<.op title>> is the default filter operator.
 
-<<.op title>> is an [[absolute operator|Absolute Operators]] (except in the form `!title`), but <<.olink2 "field:title" field>> is relative.
+<<.op title>> is a [[constructor|Selection Constructors]] (except in the form `!title`), but <<.olink2 "field:title" field>> is a [[modifier|Selection Constructors]].
 
 <<.operator-examples "title">>
