@@ -1139,13 +1139,13 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 		fields = Object.create(null);
 	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
-		type = $tw.config.fileExtensionInfo[type].type;
-		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+		var extension = $tw.config.fileExtensionInfo[type];
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[extension.type];
 	}
 	if(!deserializer && $tw.config.contentTypeInfo[type]) {
 		// see if this type has a different deserializer registered with it
-		type = $tw.config.contentTypeInfo[type].deserializerType;
-		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
+		var contentTypeDeserializer = $tw.config.contentTypeInfo[type].deserializerType;
+		deserializer = $tw.Wiki.tiddlerDeserializerModules[contentTypeDeserializer];
 	}
 	if(!deserializer) {
 		// If we still don't have a deserializer, treat it as plain text
