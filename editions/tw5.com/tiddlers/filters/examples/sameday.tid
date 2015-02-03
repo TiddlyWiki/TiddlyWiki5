@@ -1,0 +1,8 @@
+created: 20150124101702000
+modified: 20150124101739000
+tags: [[sameday Operator]] [[Operator Examples]]
+title: sameday Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[sameday[20140410]]" "tiddlers modified on 10 April 2014">>
+<<.operator-example 2 "[sameday:created[20140410]]" "tiddlers created on 10 April 2014">>

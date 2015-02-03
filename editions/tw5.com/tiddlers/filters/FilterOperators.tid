@@ -1,17 +1,42 @@
 created: 20140410103123179
-modified: 20141007213204936
-tags: Concepts
-title: FilterOperators
+modified: 20150124200331000
+tags: Concepts Filters
+title: Filter Operators
 type: text/vnd.tiddlywiki
 
-A <<doc-def "filter operator">> is a predefined name attached to an individual step in a [[filter|Filters]]. It defines how that step is to be performed.
+\define .operator-rows(filter)
+<$list filter="$filter$"><tr>
+<td><$link to={{!!title}}>{{!!caption}}</$link></td>
+<td>{{!!purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+<td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
+</tr></$list>
+\end
 
-A typical step is written as `[operator[parameter]]`, although not all of the operators need a parameter.
+\define .group-heading(_)
+<tr class="doc-table-subheading"><th colspan="3" align="center">$_$</th></tr>
+\end
 
-Here are the most commonly used operators:
+A <<.def "filter operator">> is a predefined keyword attached to an individual [[step|Filter Step]] of a [[filter|Filters]]. It defines the particular action of that step.
 
-<<list-links "[tag[CommonFilters]]">>
+The following table lists all the core operators. The commonest ones are checkmarked. The third column indicates which operators allow <$link to="Filter Step">the <code>!</code> prefix</$link> to reverse their meaning.
 
-The complete list is:
+<table>
+<tr>
+<th align="left">Operator</th>
+<th align="left">Purpose</th>
+<th align="left">Neg</th>
+</tr>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Order Operators">>
+<<.operator-rows "[tag[Filter Operators]tag[Order Operators]!tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "String Operators">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]tag[String Operators]!tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Tag Operators">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]tag[Tag Operators]!tag[Special Operators]sort[]]">>
+<<.group-heading "Special Operators">>
+<<.operator-rows "[tag[Filter Operators]!tag[Order Operators]!tag[String Operators]!tag[Tag Operators]tag[Special Operators]sort[]]">>
+</table>
 
-<<list-links "[tag[Filters]] -[[Introduction to filter notation]] -[[Filter Syntax]]">>
+A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameter]].
+
+Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few are [[absolute|Absolute Operators]]. For the exact rules, see [[Filter Syntax]].

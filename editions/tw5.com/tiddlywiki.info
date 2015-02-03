@@ -5,7 +5,7 @@
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
-                "tiddlywiki/railroad"
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -28,6 +28,8 @@
 		"nl-NL",
 		"zh-Hans",
 		"zh-Hant",
+		"hi-IN",
+		"pa-IN",
 		"it-IT",
 		"ja-JP",
 		"cs-CZ",

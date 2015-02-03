@@ -1,0 +1,7 @@
+created: 20150118134611000
+modified: 20150118183148000
+tags: [[commands Operator]] [[Operator Examples]]
+title: commands Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[commands[]]">>

@@ -1,0 +1,18 @@
+created: 20140410103123179
+modified: 20150124171748000
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]]
+title: previous Operator
+type: text/vnd.tiddlywiki
+caption: previous
+purpose: find which titles in a <<.field list>> field precede the input ones
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="a tiddler title"
+paramName="t"
+output="a selection containing each title that immediately precedes each of the input titles in the <<.field list>> field of <<.place t>>"
+/>
+
+Each input title is processed in turn, and its predecessor is located in the <<.field list>> field and appended to the output. If a title is not listed in the field, or is the first item there, then it contributes nothing to the output.
+
+<<.operator-examples "previous">>

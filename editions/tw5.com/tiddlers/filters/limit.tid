@@ -1,0 +1,19 @@
+created: 20140410103123179
+modified: 20150124204544000
+tags: [[Filter Operators]] [[Common Operators]] [[Order Operators]] [[Negatable Operators]]
+title: limit Operator
+type: text/vnd.tiddlywiki
+caption: limit
+purpose: select the first or last <<.place n>> input titles
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="an integer, defaulting to 0"
+paramName="n"
+output="the first <<.place n>> input titles"
+negationOutput="the last <<.place n>> input titles"
+/>
+
+`limit[n]` and `!limit[n]` are synonyms for `first[n]` and `last[n]` respectively.
+
+<<.operator-examples "limit">>

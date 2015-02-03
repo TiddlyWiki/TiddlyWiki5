@@ -1,0 +1,18 @@
+created: 20150122204111000
+modified: 20150124204959000
+tags: [[Filter Operators]] [[Order Operators]]
+title: nth Operator
+type: text/vnd.tiddlywiki
+caption: nth
+purpose: select the <<.place n>>th input title
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="an integer, defaulting to 1"
+paramName="n"
+output="the <<.place n>>th input title"
+/>
+
+<<.place n>> is one-based. In other words, `nth[1]` has the same effect as the <<.olink first>> operator.
+
+<<.operator-examples "nth">>
