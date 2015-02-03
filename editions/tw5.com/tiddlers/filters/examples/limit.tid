@@ -2,7 +2,12 @@ created: 20150118134611000
 modified: 20150123214304000
 tags: [[limit Operator]] [[Operator Examples]]
 title: limit Operator (Examples)
-type: text/vnd.tiddlywiki
 
-<<.operator-example 1 "[sort[modified]!limit[20]]" "the 20 most recently modified tiddlers">>
-<<.operator-example 2 "[has[created]sort[created]limit[10]]" "the oldest 10 tiddlers in the wiki">>
+<<.operator-example 1 "[!sort[modified]limit[20]]" "the 20 most recently modified tiddlers">>
+<<.operator-example 2 "[has[created]sort[created]limit[10]]" "the 10 oldest tiddlers by creation date">>
+<<.operator-example 3 "[sort[modified]limit[-20]]" "the 20 most recently modified tiddlers, the most recent being last in the list">>
+<<.operator-example 4 "[has[created]sort[created]limit[-10]]" "the 10  newest tiddlers by creation date, the newest being last in the list">>
+<<.operator-example 5 "[!sort[modified]limit:10[1]]" "the 11th most recently modified tiddler, first 10 skipped">>
+<<.operator-example 6 "[has[created]sort[created]limit:10[1]]" "the 11th oldest tiddler by creation date, first 10 skipped">>
+<<.operator-example 7 "[has[created]sort[created]limit:10[10]]" "the 11-21 oldest tiddlers by creation date, the 11th being topmost, first 10 skipped">>
+<<.operator-example 8 "[sort[modified]limit:-20[-20]]" "the 21-41 most recently modified tiddlers, the 21st most recent being last in the list, last 20 skipped">>
