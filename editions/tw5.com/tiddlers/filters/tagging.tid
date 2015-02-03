@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150124205941000
+modified: 20150203124500179
 tags: [[Filter Operators]] [[Tag Operators]]
 title: tagging Operator
 type: text/vnd.tiddlywiki
@@ -8,10 +8,14 @@ purpose: find the tiddlers that have the input tags
 
 <$macrocall $name=".operator-def"
 input="a [[selection|Title Selection]] of [[tags|Tagging]]"
+suffix="(optional) matches tiddlers that are tagged with ''all'' input tags"
+suffixName="all"
 parameter="none"
 output="the titles of any tiddlers that carry the input tags"
 />
 
-Each input tag is processed in turn. The list of tiddlers carrying that tag is generated, [[sorted|Order of Tagged Tiddlers]], and then [[dominantly appended|Dominant Append]] to the operator's overall output.
+By default, each input tag is processed using ''OR'' logic. A list of all tiddlers carrying any input tag is generated, [[sorted|Order of Tagged Tiddlers]], then [[dominantly appended|Dominant Append]] to the operator's overall output.
+
+Using the suffix ''all'', the input list is checked using ''AND'' logic, thus returning tiddlers that have all the tags specified in the input list.
 
 <<.operator-examples "tagging">>
