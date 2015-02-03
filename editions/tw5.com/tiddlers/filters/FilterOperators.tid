@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150124200331000
+modified: 20150129133657000
 tags: Concepts Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -39,4 +39,4 @@ The following table lists all the core operators. The commonest ones are checkma
 
 A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameter]].
 
-Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few are [[absolute|Absolute Operators]]. For the exact rules, see [[Filter Syntax]].
+Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few [[construct an entirely new selection|Selection Constructors]] instead. For the exact rules, see [[Filter Syntax]].
