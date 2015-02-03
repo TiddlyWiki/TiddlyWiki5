@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/filters/getIndex.js
+title: $:/core/modules/filters/getindex.js
 type: application/javascript
 module-type: filteroperator
 

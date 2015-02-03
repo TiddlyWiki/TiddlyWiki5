@@ -1,0 +1,17 @@
+created: 20150203140000000
+modified: 20150203140000000
+tags: [[Filter Operators]] [[Field Operators]]
+title: getindex Operator
+caption: getindex
+purpose: returns the value at an index of DataTiddlers
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of an [[index|DataTiddlers]]"
+paramName="i"
+output="the values at index <<.place f>> in each of the input titles"
+/>
+
+Each input title is tested in turn. If the corresponding tiddler is a [[DataTiddler|DataTiddlers]] and has the index <<.place i>> defined, its value is appended to the output.
+
+<<.operator-examples "getindex">>
