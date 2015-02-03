@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/macros/resolvePath.js
+title: $:/core/modules/macros/resolvepath.js
 type: application/javascript
 module-type: macro
 
@@ -12,7 +12,7 @@ Resolves a relative path for an absolute rootpath.
 /*global $tw: false */
 "use strict";
 
-exports.name = "resolvePath";
+exports.name = "resolvepath";
 
 exports.params = [
 	{name: "source"},

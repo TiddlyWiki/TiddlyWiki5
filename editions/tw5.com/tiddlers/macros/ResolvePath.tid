@@ -1,0 +1,23 @@
+created: 20150203152000000
+modified: 20150203152000000
+title: ResolvePath
+type: text/vnd.tiddlywiki
+caption: resolvepath
+
+The ''resolvepath'' macro constructs a url for a relative source path with respect to an absolute root path, trailing filenames being cut-off.
+
+! Parameters
+
+|!Position |!Name |!Description |!Default |
+|1st |source |the relative path to be appended| |
+|2nd |root |the absolute path to be appended to | |
+
+! Examples
+
+A trivial example to show how the macro works:
+
+```
+<<resolvepath "./backup" "http://mysite.com/store.php">>
+```
+
+<<resolvepath "./backup" "http://mysite.com/store.php">>
