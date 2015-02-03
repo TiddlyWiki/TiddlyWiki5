@@ -1,18 +1,15 @@
 created: 20140512103123179
-modified: 20150124204353000
+modified: 20150203183205000
 tags: [[Filter Operators]] [[Order Operators]]
 title: after Operator
 type: text/vnd.tiddlywiki
 caption: after
-purpose: find which input title follows a specified one
+op-purpose: find which input title follows a specified one
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: one of those titles
+op-parameter-name: T
+op-output: the title that immediately follows <<.place T>> in the input
 
-<$macrocall $name=".operator-def"
-input="a [[selection of titles|Title Selection]]"
-parameter="one of those titles"
-paramName="t"
-output="the title that immediately follows <<.place t>> in the input"
-/>
-
-If <<.place t>> is not present in the input, or is the last title there, then the output is empty.
+If <<.place T>> is not present in the input, or is the last title there, then the output is empty.
 
 <<.operator-examples "after">>

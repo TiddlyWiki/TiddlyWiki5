@@ -1,20 +1,17 @@
 created: 20140410103123179
-modified: 20150124202225000
+modified: 20150203185255000
 tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
 caption: is
-purpose: filter the input by fundamental category
+op-purpose: filter the input by fundamental category
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a category
+op-parameter-name: C
+op-output: those input tiddlers that belong to category <<.place C>>
+op-neg-output: those input tiddlers that do <<.em not>> belong to category <<.place C>>
 
-<$macrocall $name=".operator-def"
-input="a [[selection of titles|Title Selection]]"
-parameter="a category -- see below"
-paramName="c"
-output="those input tiddlers that belong to category <<.place c>>"
-negationOutput="those input tiddlers that do <<.em not>> belong to category <<.place c>>"
-/>
-
-The parameter <<.place c>> is one of the following fundamental categories:
+The parameter <<.place C>> is one of the following fundamental categories:
 
 |!Category |!Matches any tiddler that... |
 |^`current` |is the [[current tiddler|CurrentTiddler]] |
@@ -26,7 +23,7 @@ The parameter <<.place c>> is one of the following fundamental categories:
 |^`tag` |is in use as a tag |
 |^`tiddler` |exists as a non-shadow tiddler |
 
-If <<.place c>> is anything else, the output is an error message.
+If <<.place C>> is anything else, the output is an error message.
 
 `!is[tiddler]` is a synonym for `is[missing]`, and vice versa.
 
