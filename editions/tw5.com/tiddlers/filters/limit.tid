@@ -8,12 +8,15 @@ purpose: select the first or last <<.place n>> input titles
 
 <$macrocall $name=".operator-def"
 input="a [[selection of titles|Title Selection]]"
+suffix="optional, an offset"
+suffixName="o"
 parameter="an integer, defaulting to 0"
 paramName="n"
 output="the first <<.place n>> input titles"
-negationOutput="the last <<.place n>> input titles"
 />
 
-`limit[n]` and `!limit[n]` are synonyms for `first[n]` and `last[n]` respectively.
+The `limit[n]` filter returns at most the first <<.place n>> items from the input set. Using a negative  <<.place -n>> applies the limit from the end, thus returning the last  <<.place n>> elements.
+
+You can specify an offset in the suffix. A positive offset <<.place o>> removies the first <<.place o>> elements from the beginning of the input set. A negative offset <<.place -o>> removes the last elements from the input set. The offset is applied before the limit. 
 
 <<.operator-examples "limit">>
