@@ -1,0 +1,28 @@
+created: 20150124182421000
+modified: 20150124184900000
+tags: [[Filter Syntax]]
+title: Filter Expression
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[{:
+  [: [[whitespace|"Filter Whitespace"]] ]
+  ("+"|:-|"-")
+  [[run|"Filter Run"]]
+}]
+"""/>
+
+A <<.def "filter expression">> is the outermost level of the [[filter syntax|Filter Syntax]]. It consists of one or more [[runs|Filter Run]].
+
+A run's input is normally a list of all the non-[[shadow|ShadowTiddlers]] tiddler titles in the wiki (in no particular order). But the `+` prefix can change this.
+
+* If a run has no `+` or `-` prefix, its output titles are [[dominantly appended|Dominant Append]] to the filter's output.
+* If a run has a `-` prefix, its output titles are <<.em removed>> from the filter's output (if they were present).
+* If a run has a `+` prefix, it receives the filter's output so far as its input. The filter's output is then completely <<.em replaced>> by the run's output. Any subsequent run reverts to receiving all tiddler titles as its input, unless it too has a `+` prefix.
+
+In concise technical terms:
+
+|!Run |!Interpretation |!Output |
+|`run` |union of sets |... OR run |
+|`+run` |intersection of sets |... AND run |
+|`-run` |difference of sets |... AND NOT run |

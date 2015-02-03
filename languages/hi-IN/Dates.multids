@@ -1,0 +1,55 @@
+title: $:/language/
+
+Date/Long/Day/0: रविवार
+Date/Long/Day/1: सोमवार
+Date/Long/Day/2: मंगलवार
+Date/Long/Day/3: बुधवार
+Date/Long/Day/4: गुरुवार
+Date/Long/Day/5: शुक्रवार
+Date/Long/Day/6: शनिवार
+Date/Long/Month/1: जनवरी
+Date/Long/Month/10: अक्टूबर
+Date/Long/Month/11: नवम्बर
+Date/Long/Month/12: दिसंबर
+Date/Long/Month/2: फ़रवरी
+Date/Long/Month/3: मार्च
+Date/Long/Month/4: अप्रैल
+Date/Long/Month/5: मई
+Date/Long/Month/6: जून
+Date/Long/Month/7: जुलाई
+Date/Long/Month/8: अगस्त
+Date/Long/Month/9: सितंबर
+Date/Short/Day/0: रवि
+Date/Short/Day/1: सोम
+Date/Short/Day/2: मंगल
+Date/Short/Day/3: बुध
+Date/Short/Day/4: गुरु
+Date/Short/Day/5: शुक्र
+Date/Short/Day/6: शनि
+Date/Short/Month/1: जन
+Date/Short/Month/10: अक्टू
+Date/Short/Month/11: नव
+Date/Short/Month/12: दिसं
+Date/Short/Month/2: फ़र
+Date/Short/Month/3: मार्च
+Date/Short/Month/4: अप्र
+Date/Short/Month/5: मई
+Date/Short/Month/6: जून
+Date/Short/Month/7: जुल
+Date/Short/Month/8: अग
+Date/Short/Month/9: सितं
+RelativeDate/Future/Days: <<period>>दिन अब से
+RelativeDate/Future/Hours: <<period>>घंटे अब से
+RelativeDate/Future/Minutes: <<period>>मिनिट्स अब से
+RelativeDate/Future/Months: <<period>> महीने अब से
+RelativeDate/Future/Second: अब से एक second
+RelativeDate/Future/Seconds: <<period>> अब से सेकंड
+RelativeDate/Future/Years: <<period>> साल अब से
+RelativeDate/Past/Days: <<period>>दिन पहले
+RelativeDate/Past/Hours: <<period>>
+घंटे पहले
+RelativeDate/Past/Minutes: <<period>> मिनट पहले
+RelativeDate/Past/Months: <<period>>महीने पहले
+RelativeDate/Past/Second: एक second पहले
+RelativeDate/Past/Seconds: <<period>> सेकंड पहले
+RelativeDate/Past/Years: <<period>> साल पहले

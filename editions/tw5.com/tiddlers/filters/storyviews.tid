@@ -1,0 +1,17 @@
+created: 20150126141718000
+modified: 20150126142035000
+tags: [[Filter Operators]] [[Special Operators]]
+title: storyviews Operator
+type: text/vnd.tiddlywiki
+caption: storyviews
+purpose: select the names of all the story views
+
+<$macrocall $name=".operator-def"
+input="ignored"
+parameter="none"
+output="the name of each story view"
+/>
+
+The names are those exported by [[modules|Modules]] whose <<.field module-type>> is <<.value storyview>>.
+
+<<.operator-examples "storyviews">>

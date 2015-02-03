@@ -1,3 +1,5 @@
+created: 20150117152612000
+modified: 20150126091948000
 title: $:/editions/tw5.com/doc-styles
 tags: $:/tags/Stylesheet
 
@@ -22,10 +24,13 @@ tags: $:/tags/Stylesheet
 	font-style: italic;
 }
 
-.doc-ph {
+.doc-place {
+	background-color: <<color background>>;
 	border: none;
-	color: <<color foreground>>;
-	font-style: italic;
+	color: <<color very-muted-foreground>>;
+	font-style: normal;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .doc-button,
@@ -33,17 +38,37 @@ tags: $:/tags/Stylesheet
 .doc-tag,
 .doc-tiddler,
 .doc-field,
-.doc-field-value,
+.doc-value,
+.doc-operator,
 .doc-var,
-.doc-widget {
-	background: <<color background>>;
+.doc-widget,
+.doc-attr {
+	background-color: <<color background>>;
 	border: none;
 	color: <<color very-muted-foreground>>;
 	font-weight: bold;
 	padding: 0;
 }
 
+a .doc-place,
+a .doc-button,
+a .doc-tab,
+a .doc-tag,
+a .doc-tiddler,
+a .doc-field,
+a .doc-value,
+a .doc-operator,
+a .doc-var,
+a .doc-widget,
+a .doc-attr {
+	color: <<color tiddler-link-foreground>>;
+}
+
 .doc-button svg {
+	height: 1em;
+}
+
+td svg {
 	height: 1em;
 }
 
@@ -54,4 +79,45 @@ tags: $:/tags/Stylesheet
 
 .doc-clink code {
 	color: <<colour tiddler-link-foreground>>;
+}
+
+.doc-preamble {
+	border: 2px solid <<colour code-border>>;
+	color: <<colour very-muted-foreground>>;
+	font-size: 90%;
+	margin-left: 0;
+	padding: 0.5em 0.7em;
+}
+
+.doc-note dt {
+	color: <<colour very-muted-foreground>>;
+}
+.doc-note dd {
+	border-left: 2px solid <<colour code-border>>;
+	padding-left: 0.6em;
+}
+
+.doc-example {
+	margin: 1em 0;
+	padding: 0.8em 0;
+}
+.doc-example:hover {
+	background-color: <<colour code-background>>;
+}
+.doc-example ul {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	margin-top: 0.2em;
+}
+
+.doc-table th, .doc-table tr {
+	vertical-align: top;
+}
+.doc-table th a {
+	font-weight: bold;
+}
+
+tr.doc-table-subheading {
+	height: 2em;
+	vertical-align: middle;
 }

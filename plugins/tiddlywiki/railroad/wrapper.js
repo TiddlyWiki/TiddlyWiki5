@@ -19,6 +19,8 @@ var RailroadWidget = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
+var RAILROAD_OPTIONS = "$:/config/railroad";
+
 /*
 Inherit from the base widget class
 */
@@ -37,10 +39,18 @@ RailroadWidget.prototype.render = function(parent,nextSibling) {
 	// Create a div to contain the SVG or error message
 	var div = this.document.createElement("div");
 	try {
+		// Initialise options from the config tiddler or widget attributes
+		var config = $tw.wiki.getTiddlerData(RAILROAD_OPTIONS,{});
+		var options = {
+			arrow: this.getAttribute("arrow", config.arrow || "yes") === "yes",
+			debug: this.getAttribute("debug", config.debug || "no") === "yes",
+			start: this.getAttribute("start", config.start || "single"),
+			end: this.getAttribute("end", config.end || "single")
+		};
 		// Parse the source
-		var parser = new Parser(this,source);
+		var parser = new Parser(this,source,options);
 		// Generate content into the div
-		if(this.getAttribute("mode","svg") === "debug") {
+		if(parser.options.debug) {
 			this.renderDebug(parser,div);
 		} else {
 			this.renderSvg(parser,div);
@@ -63,7 +73,7 @@ RailroadWidget.prototype.renderDebug = function(parser,div) {
 
 RailroadWidget.prototype.renderSvg = function(parser,div) {
 	// Generate a model of the diagram
-	var fakeSvg = parser.root.toSvg();
+	var fakeSvg = parser.root.toSvg(parser.options);
 	// Render the model into a tree of SVG DOM nodes
 	var svg = fakeSvg.toSVG();
 	// Fill in the remaining attributes of any link nodes
@@ -107,7 +117,7 @@ RailroadWidget.prototype.patchLinks = function(node) {
 
 RailroadWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.text) {
+	if(changedAttributes.text || changedTiddlers[RAILROAD_OPTIONS]) {
 		this.refreshSelf();
 		return true;
 	}

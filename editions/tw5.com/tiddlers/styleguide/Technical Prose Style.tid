@@ -1,4 +1,5 @@
 created: 20150110182900000
+modified: 20150117152555000
 title: Technical Prose Style
 tags: [[Improving TiddlyWiki Documentation]]
 
@@ -6,9 +7,9 @@ When writing an [[instruction tiddler|Instruction Tiddlers]], start by planning 
 
 Keep sentences short and simple. A clear technical sentence seldom contains more than one idea. It therefore avoids parenthetical information. Similarly, keep paragraph structure simple. A flat presentation is often easier to understand than a hierarchical one.
 
-It is often possible to simplify a sentence without changing its meaning merely by adjusting its vocabulary. <<doc-w "Execution of the macro is performed">> just means <<doc-w "The macro runs">>. <<doc-w "Your expectation might be...">> just means <<doc-w "You might expect...">>.
+It is often possible to simplify a sentence without changing its meaning, merely by adjusting its vocabulary or grammatical structure. <<.word "Execution of the macro is performed">> just means <<.word "The macro runs">>. <<.word "Your expectation might be...">> just means <<.word "You might expect...">>.
 
-Prefer the active voice by default: <<doc-w "Jane creates a tiddler">> rather than <<doc-w "a tiddler is created by Jane">>. The passive voice can be useful if you want the reader to focus on the action itself or its result: <<doc-w "a tiddler is created">>. But it may be clearer to proceed from cause to effect and say <<doc-w "this creates a tiddler">> in the active voice.
+Prefer the active voice by default: <<.word "Jane creates a tiddler">> rather than <<.word "a tiddler is created by Jane">>. The passive voice can be useful if you want the reader to focus on the action itself or its result: <<.word "a tiddler is created">>. But it can often be clearer to proceed from cause to effect and say <<.word "this creates a tiddler">> in the active voice.
 
 Documentation often presents two items that are parallel either by similarity or by difference. The reader will more easily detect such a pattern if you use the same sentence or phrase structure for both. But this must be balanced with the need to avoid monotony.
 

@@ -1,0 +1,8 @@
+created: 20150123222108000
+modified: 20150123222139000
+tags: [[nsortcs Operator]] [[Operator Examples]]
+title: nsortcs Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "10 010 1000 100 +[nsortcs[]]">>
+<<.operator-example 2 "10 010 ALPHA beta alpha 1000 100 +[nsortcs[]]">>

@@ -1,0 +1,17 @@
+title: $:/language/Help/rendertiddlers
+description: एक निर्दिष्ट ContentType के लिए एक फिल्टर मिलान tiddlers प्रस्तुत करना
+
+एक text / html` `default to) एक निर्दिष्ट ContentType की फ़ाइलों को अलग करने के लिए एक फिल्टर मिलान tiddlers के सेट और विस्तार के लिए प्रस्तुत करना (` default to .html`)।
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+उदाहरण के लिए:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+डिफ़ॉल्ट रूप से, पथ नाम संस्करण निर्देशिका के `output` उपनिर्देशिका के सापेक्ष हल हो गई है। `--output` आदेश एक अलग निर्देशिका के लिए उत्पादन में निर्देशित करने के लिए इस्तेमाल किया जा सकता है।
+
+लक्ष्य निर्देशिका में किसी भी फाइल को नष्ट कर दिया जाता है। यह मौजूद नहीं है, तो लक्ष्य निर्देशिका बारी बारी से बनाया जाता है।

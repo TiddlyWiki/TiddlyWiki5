@@ -1,9 +1,9 @@
 created: 20150110101500000
-modified: 20150110181800000
+modified: 20150117152550000
 title: Instruction Tiddlers
 tags: [[Improving TiddlyWiki Documentation]]
 
-<<doc-def "Instruction tiddlers">> talk directly to the reader and guide them through a process. The reader is likely to be a beginner or an intermediate user.
+<<.def "Instruction tiddlers">> talk directly to the reader and guide them through a process. The reader is likely to be a beginner or an intermediate user.
 
 Such tiddlers can be subcategorised as:
 
@@ -18,7 +18,7 @@ Such tiddlers can be subcategorised as:
 * An ordered presentation of material for beginners
 * Each tiddler introduces one new point or concept
 * Its main content contains very few links
-* A revealable <<doc-w "Find out more">> section at the end can offer related links
+* A revealable <<.word "Find out more">> section at the end can offer related links
 
 ;Exercise
 * Accompanying a tutorial tiddler
@@ -34,6 +34,6 @@ Such tiddlers can be subcategorised as:
 * Can contain explanations and similar commentary
 * Kept separate to keep the reference tiddler pure
 
-Instruction tiddlers talk directly to the reader as <<doc-w you>>. They can be reasonably chatty.
+Instruction tiddlers talk directly to the reader as <<.word you>>. They can be reasonably chatty.
 
-But they avoid excessively colloquial language, cultural or topical references and attempts at humour, as these can baffle or even offend the international readership. They also avoid potentially frustrating the reader with descriptions of features as <<doc-w convenient>> or <<doc-w easy>>.
+But they avoid excessively colloquial language, cultural or topical references and attempts at humour, as these can baffle or even offend the international readership. They also avoid potentially frustrating the reader with descriptions of features as <<.word convenient>> or <<.word easy>>.

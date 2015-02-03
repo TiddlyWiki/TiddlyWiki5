@@ -316,6 +316,14 @@ Sort an array of tiddler titles by a specified field
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
+		var x,y,
+			compareNumbers = function(x,y) {
+				var result = 
+					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
+					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
+					                        (isDescending ? y - x :  x - y);
+				return result;
+			};
 		if(sortField !== "title") {
 			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
@@ -330,10 +338,10 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				b = "";
 			}
 		}
-		if(isNumeric) {
-			a = Number(a);
-			b = Number(b);
-			return isDescending ? b - a : a - b;
+		x = Number(a);
+		y = Number(b);
+		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
+			return compareNumbers(x,y);
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else {
@@ -516,7 +524,7 @@ exports.sortByList = function(array,listTitle) {
 	if(!array || array.length === 0) {
 		return [];
 	} else {
-		var titles = [], t, title;
+		var t, title, titles = [], unlisted = [];
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
 			title = list[t];
@@ -524,13 +532,17 @@ exports.sortByList = function(array,listTitle) {
 				titles.push(title);
 			}
 		}
-		// Then place any remaining entries
+		// Add remaining entries to unlisted
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
-				titles.push(title);
+				unlisted.push(title);
 			}
 		}
+		//sort unlisted
+		$tw.wiki.sortTiddlers(unlisted,"title",false,false);
+		//concat listed with unlisted
+		titles = titles.concat(unlisted);
 		// Finally obey the list-before and list-after fields of each tiddler in turn
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {

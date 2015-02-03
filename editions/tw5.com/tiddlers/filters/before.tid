@@ -1,0 +1,18 @@
+created: 20140512103123179
+modified: 20150124164952000
+tags: [[Filter Operators]] [[Order Operators]]
+caption: before
+title: before Operator
+type: text/vnd.tiddlywiki
+purpose: find which input title precedes a specified one
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="one of those titles"
+paramName="t"
+output="the title that immediately precedes <<.place t>> in the input"
+/>
+
+If <<.place t>> is not present in the input, or is the first title there, then the output is empty.
+
+<<.operator-examples "before">>

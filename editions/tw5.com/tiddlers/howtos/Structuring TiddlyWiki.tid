@@ -1,5 +1,5 @@
 created: 20131128090536894
-modified: 20140919155834905
+modified: 20150124211518000
 tags: [[Working with TiddlyWiki]]
 title: Structuring TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -8,5 +8,5 @@ TiddlyWiki5 provides several features to help you structure information as [[tid
 
 * TiddlerLinks
 * [[Tagging]]
-* TiddlerLists
+* [[Title Lists|Title List]]
 * DataTiddlers

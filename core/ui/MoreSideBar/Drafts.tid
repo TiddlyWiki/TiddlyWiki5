@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/Drafts
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Drafts/Caption}}
 
-<$list filter="[has[draft.of]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter={{$:/core/Filters/Drafts!!filter}} template="$:/core/ui/ListItemTemplate"/>
