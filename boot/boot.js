@@ -398,11 +398,19 @@ $tw.utils.registerFileType = function(type,encoding,extension,options) {
 };
 
 /*
+Given an extension, always access the $tw.config.fileExtensionInfo
+using a lowercase extension only.
+*/
+$tw.utils.getFileExtensionInfo = function(ext) {
+	return ext ? $tw.config.fileExtensionInfo[ext.toLowerCase()] : null;
+}
+
+/*
 Given an extension, get the correct encoding for that file.
 defaults to utf8
 */
 $tw.utils.getTypeEncoding = function(ext) {
-	var extensionInfo = $tw.config.fileExtensionInfo[ext],
+	var extensionInfo = $tw.util.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
 	return typeInfo ? typeInfo.encoding : "utf8";
@@ -1137,9 +1145,9 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	srcFields = srcFields || Object.create(null);
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
 		fields = Object.create(null);
-	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
+	if(!deserializer && $tw.utils.getFileExtensionInfo(type)) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
-		type = $tw.config.fileExtensionInfo[type].type;
+		type = $tw.utils.getFileExtensionInfo(type).type;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer && $tw.config.contentTypeInfo[type]) {
@@ -1386,7 +1394,7 @@ Load the tiddlers contained in a particular file (and optionally extract fields 
 */
 $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
-		extensionInfo = $tw.config.fileExtensionInfo[ext],
+		extensionInfo = $tw.utils.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
 		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),

@@ -9,7 +9,12 @@ http://$(userName)$.tiddlyspot.com/backup/
 \define backupLink()
 <$reveal type="nomatch" state="$:/UploadName" text="">
 <$set name="userName" value={{$:/UploadName}}>
-<a href=<<backupURL>>><$macrocall $name="backupURL" $type="text/plain" $output="text/plain"/></a>
+<$reveal type="match" state="$:/UploadURL" text="">
+<<backupURL>>
+</$reveal>
+<$reveal type="nomatch" state="$:/UploadURL" text="">
+<$macrocall $name=resolvePath source={{$:/UploadBackupDir}} root={{$:/UploadURL}}>>
+</$reveal>
 </$set>
 </$reveal>
 \end
@@ -29,4 +34,3 @@ http://$(userName)$.tiddlyspot.com/backup/
 |<<lingo TiddlySpot/BackupDir>> |<$edit-text tiddler="$:/UploadBackupDir" default="." tag="input"/> |
 
 <<lingo TiddlySpot/Hint>>
-
