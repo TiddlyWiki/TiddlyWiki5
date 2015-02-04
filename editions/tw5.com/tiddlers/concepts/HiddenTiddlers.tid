@@ -1,0 +1,19 @@
+title: HiddenTiddlers
+tags: Concepts
+
+TiddlyWiki entirely works on [[tiddlers|Tiddlers]]. This is not only true for the content you wish to give it but also for all the bells and whistles that actually make it work.
+
+!! System Tiddlers
+
+To not have you overwhelmed with the abundant components that provide TiddlyWiki's features, a special [[NameSpace|Naming of System Tiddlers]] was defined in order to hide these so-called SystemTiddlers, prefixed `$:/`.
+
+; hidden from
+: &raquo; search results
+: &raquo; most sidebar tabs, except ''More / System'' and ''More / Shadows''
+
+!! Embedded Media
+
+Whenever you drag an [[image|Images in WikiText]] or [[audio|Audio]] file to TiddlyWiki, it will be embedded as a tiddler with a special ContentType.
+
+; hidden from
+: &raquo; most sidebar tabs, except ''More / Types''
