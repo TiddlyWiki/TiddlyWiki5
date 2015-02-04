@@ -20,9 +20,9 @@ exports.getIndex = function(source,operator,options) {
 	if(operator.operand){
 		source(function(tiddler,title) {
 			title = tiddler ? tiddler.fields.title : title;
-			data = options.wiki.parseTextReference(title,"",operator.operand,{});
+			data = options.wiki.extractTiddlerDataItem(tiddler,operator.operand);
 			if(data) {
-				results.push(data.source);
+				results.push(data);
 			}
 		});
 	}
