@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: プラグインに含まれているtiddlerの取り出し
+
+プラグインに格納されているtiddlerを取り出し、一般的なtiddlerとして出力します。
+
+```
+--unpackplugin <title>
+```

@@ -6,4 +6,4 @@ description: {{$:/language/Buttons/ExportTiddler/Hint}}
 \define makeExportFilter()
 [[$(currentTiddler)$]]
 \end
-<$macrocall $name="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/"/>
+<$macrocall $name="exportButton" exportFilter=<<makeExportFilter>> lingoBase="$:/language/Buttons/ExportTiddler/" baseFilename=<<currentTiddler>>/>

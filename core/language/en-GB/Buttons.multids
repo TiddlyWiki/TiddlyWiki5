@@ -3,7 +3,7 @@ title: $:/language/Buttons/
 AdvancedSearch/Caption: advanced search
 AdvancedSearch/Hint: Advanced search
 Cancel/Caption: cancel
-Cancel/Hint: Cancel editing this tiddler
+Cancel/Hint: Discard changes to this tiddler
 Clone/Caption: clone
 Clone/Hint: Clone this tiddler
 Close/Caption: close
@@ -56,8 +56,8 @@ Permaview/Caption: permaview
 Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
-Save/Caption: save
-Save/Hint: Save this tiddler
+Save/Caption: ok
+Save/Hint: Store changes to this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
 StoryView/Caption: storyview

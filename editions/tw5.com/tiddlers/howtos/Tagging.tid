@@ -1,36 +1,40 @@
 created: 20140904075400000
-modified: 20140919155913046
+modified: 20150127154219000
 tags: [[Working with TiddlyWiki]] Concepts
 title: Tagging
 type: text/vnd.tiddlywiki
 
-Tagging a tiddler assigns a tiddler to a category of your choosing (see [[Creating and editing tiddlers]] for instructions on how to tag). For example, tiddlers representing individuals might be tagged ''friend'', ''family'', ''colleague'' etc to indicate the relationship to the author. Multiple tags can be applied to the same tiddler.
+Tagging is a way of organising tiddlers into categories. For example, if you had tiddlers representing various individuals, you could tag them as ''friend'', ''family'', ''colleague'' etc to indicate these people's relationships to you.
 
-Tagging tiddlers gives you numerous additional ways to view, navigate and organise your information:
+A tag is in fact just a tiddler (or a potential tiddler), and it can have tags of its own. You can add any number of tags to the same tiddler.
 
-* The coloured tag pills on a tagged tiddler gives you links to all the other tiddlers with the same tag, as well as to the tiddler representing the tag itself.
-* The tagging tab in the tiddler info panel (accessed by clicking the {{$:/core/images/info-button}} button) gives you links to all the tiddlers tagged with the title of the current tiddler.
+See [[Creating and editing tiddlers]] for instructions on how to tag.
 
-* You can use the tags tab in the 'More' sidebar tab to view all your tags and access your tagged tiddlers.
+By tagging your tiddlers, you can view, navigate and organise your information in numerous additional ways:
 
-* You can use [[filters|Filters]] to create lists of tiddlers based on tags, then display whichever combination of tiddler fields you wish. For example, you can create a list that shows both the title and the text of all tiddlers tagged 'Glossary.' Such lists can be formatted however you wish: for example: bulleted, numbered, or comma-separated.
+* The coloured tag pills on a tiddler give you quick access to all the other tiddlers with the same tag, as well as to the tiddler that represents the tag itself.
 
-* System tags can be used to customise the layout of tiddlers and the entire ~TiddlyWiki page. See [[Page and tiddler layout customisation]] for instructions.
+* If a tiddler is serving as a tag, then the ''Tagging'' tab in its InfoPanel will show you which tiddlers are currently tagged with it.
+
+* The ''More'' tab of the sidebar has a ''Tags'' tab that presents an overview of all your tags and lets you access all your tagged tiddlers.
+
+* You can use [[filters|Filters]] to create lists of tiddlers based on their tags. You can then display any combination of the [[fields|TiddlerFields]] of those tiddlers. For example, you could build a glossary by listing the title and text of all tiddlers tagged ''Glossary''. Such lists can be formatted in any way you wish: e.g. bulleted, numbered or comma-separated.
+
+* There are a number of special ''system tags'' that control the layout of tiddlers and the entire ~TiddlyWiki page. See [[Page and tiddler layout customisation]] for instructions.
 
 There are two more things you can do with tags:
 
-! Assign colours and icons to a tag
+! Set a tag's colour and icon
 
-You can use the [[tag manager|$:/TagManager]], found in the 'Tags' tab of the 'More' sidebar tab, to assign background colours and/or icons to a tag.
+You can use the [[tag manager|$:/TagManager]], found on the ''Tags'' tab under ''More'' in the sidebar, to change the colour of a tag's pill or add an icon to the pill.
 
-* Colours can be assigned to a tag either by specifying the CSS colour value in the upper window in the colour column, or choosing a colour from the dropdown colour picker provided.
-* Icons can be assigned to a tag by clicking the {{$:/core/images/down-arrow}} button in the icon column and choosing one of the icons listed.
+* To change the colour, click the button in the ''Colour'' column to select from a colour picker. Alternatively, click the icon in the ''Info'' column, then type a [[CSS]] colour value in the ''Colour'' field
+* To change the icon, click the {{$:/core/images/down-arrow}} button in the ''Icon'' column and choose from the list of available icons
 
-! Use list fields to adjust the ordering of tag lists
+! Change the order in which tags are listed
 
-* If you want to create a list of tagged tiddlers with a [[filter|Filters]], but want the tiddlers to be listed in a special order rather than the default alphabetical order, you can create a field called 'list' in the tag tiddler, and add the titles of the tiddlers to the field in the order you wish. ~TiddlyWiki will order lists of tagged tiddlers in the following order of priority:
-** First, any tiddlers that are listed in the ListField of the tag tiddler are placed into a new list in the same order
-** Second, any unplaced tiddlers that have the field ''list-before'' are placed before the tiddler specified in the field
-*** (if the ''list-before'' field is empty then the unplaced tiddler is placed at the start of the list)
-** Third, if any unplaced tiddlers have the field ''list-after'' then they placed immediately after the tiddler specified in the field
-** Finally, any remaining unplaced tiddlers are placed at the end of the list
+By default, tagged tiddlers are listed in alphabetical order.
+
+If you want any other order, add a <<.flink ListField>> field to the tag tiddler, and set its value to be a [[list of the tiddlers|Title List]] in that order.
+
+The ''list'' field doesn't have to mention all of the tiddlers. See the [[precise rules|Order of Tagged Tiddlers]] ~TiddlyWiki uses to order tagged tiddlers.

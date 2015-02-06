@@ -1,0 +1,11 @@
+created: 20141128103901173
+modified: 20141128170659622
+tags: Saving
+title: Exporter un sous-ensemble de tiddlers
+type: text/vnd.tiddlywiki
+
+Le mécanisme d'exportation qui a fait son apparition avec la version [[5.1.5]] de <<tw>> permet de sélectionner facilement un sous-ensemble de tiddlers afin de le sauvegarder dans un fichier.
+
+Si par exemple vous souhaitez sauvegarder dans un fichier tous les tiddlers ayant un tag `WikiText` et contenant un champ `fr-title`, entrez le [[filtre|Filters]] `[tag[WikiText]has[fr-title]]` dans l'onglet //Filtre// de la [[Recherche avancée|$:/AdvancedSearch]] et choisissez //Fichier de tiddlers au format JSON// après avoir cliqué sur @@.inline-button {{$:/core/images/export-button}}@@
+
+Vous obtenez alors un fichier nommé `tiddlers.json`, qui contient tous les tiddlers sélectionnés et qui pourra être réutilisé plus tard via un simple glissé-déposé sur un <<tw>> ouvert.

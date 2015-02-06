@@ -1,4 +1,5 @@
 title: $:/AdvancedSearch
+icon: $:/core/images/advanced-search-button
 
 <div class="tc-advanced-search">
 <<tabs "[all[shadows+tiddlers]tag[$:/tags/AdvancedSearch]!has[draft.of]]" "$:/core/ui/AdvancedSearch/System">>

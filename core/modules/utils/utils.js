@@ -176,89 +176,109 @@ exports.slowInSlowOut = function(t) {
 };
 
 exports.formatDateString = function(date,template) {
-	var t = template;
-	t = t.replace(/0hh12/g,function() {
-		return $tw.utils.pad($tw.utils.getHours12(date));
-	});
-	t = t.replace(/hh12/g,function() {
-		return $tw.utils.getHours12(date);
-	});
-	t = t.replace(/0hh/g,function() {
-		return $tw.utils.pad(date.getHours());
-	});
-	t = t.replace(/hh/g,function() {
-		return date.getHours();
-	});
-	t = t.replace(/mmm/g,function() {
-		return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
-	});
-	t = t.replace(/0mm/g,function() {
-		return $tw.utils.pad(date.getMinutes());
-	});
-	t = t.replace(/mm/g,function() {
-		return date.getMinutes();
-	});
-	t = t.replace(/0ss/g,function() {
-		return $tw.utils.pad(date.getSeconds());
-	});
-	t = t.replace(/ss/g,function() {
-		return date.getSeconds();
-	});
-	t = t.replace(/[ap]m/g,function() {
-		return $tw.utils.getAmPm(date).toLowerCase();
-	});
-	t = t.replace(/[AP]M/g,function() {
-		return $tw.utils.getAmPm(date).toUpperCase();
-	});
-	t = t.replace(/wYYYY/g,function() {
-		return $tw.utils.getYearForWeekNo(date);
-	});
-	t = t.replace(/wYY/g,function() {
-		return $tw.utils.pad($tw.utils.getYearForWeekNo(date)-2000);
-	});
-	t = t.replace(/YYYY/g,function() {
-		return date.getFullYear();
-	});
-	t = t.replace(/YY/g,function() {
-		return $tw.utils.pad(date.getFullYear()-2000);
-	});
-	t = t.replace(/MMM/g,function() {
-		return $tw.language.getString("Date/Long/Month/" + (date.getMonth() + 1));
-	});
-	t = t.replace(/0MM/g,function() {
-		return $tw.utils.pad(date.getMonth()+1);
-	});
-	t = t.replace(/MM/g,function() {
-		return date.getMonth() + 1;
-	});
-	t = t.replace(/0WW/g,function() {
-		return $tw.utils.pad($tw.utils.getWeek(date));
-	});
-	t = t.replace(/WW/g,function() {
-		return $tw.utils.getWeek(date);
-	});
-	t = t.replace(/DDD/g,function() {
-		return $tw.language.getString("Date/Long/Day/" + date.getDay());
-	});
-	t = t.replace(/ddd/g,function() {
-		return $tw.language.getString("Date/Short/Day/" + date.getDay());
-	});
-	t = t.replace(/0DD/g,function() {
-		return $tw.utils.pad(date.getDate());
-	});
-	t = t.replace(/DDth/g,function() {
-		return date.getDate() + $tw.utils.getDaySuffix(date);
-	});
-	t = t.replace(/DD/g,function() {
-		return date.getDate();
-	});
-	t = t.replace(/TZD/g,function() {
-		var tz = date.getTimezoneOffset(),
-			atz = Math.abs(tz);
-		return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
-	});
-	t = t.replace(/\\(.)/g,"$1");
-	return t;
+	var result = "",
+		t = template,
+		matches = [
+			[/^0hh12/, function() {
+				return $tw.utils.pad($tw.utils.getHours12(date));
+			}],
+			[/^wYYYY/, function() {
+				return $tw.utils.getYearForWeekNo(date);
+			}],
+			[/^hh12/, function() {
+				return $tw.utils.getHours12(date);
+			}],
+			[/^DDth/, function() {
+				return date.getDate() + $tw.utils.getDaySuffix(date);
+			}],
+			[/^YYYY/, function() {
+				return date.getFullYear();
+			}],
+			[/^0hh/, function() {
+				return $tw.utils.pad(date.getHours());
+			}],
+			[/^0mm/, function() {
+				return $tw.utils.pad(date.getMinutes());
+			}],
+			[/^0ss/, function() {
+				return $tw.utils.pad(date.getSeconds());
+			}],
+			[/^0DD/, function() {
+				return $tw.utils.pad(date.getDate());
+			}],
+			[/^0MM/, function() {
+				return $tw.utils.pad(date.getMonth()+1);
+			}],
+			[/^0WW/, function() {
+				return $tw.utils.pad($tw.utils.getWeek(date));
+			}],
+			[/^ddd/, function() {
+				return $tw.language.getString("Date/Short/Day/" + date.getDay());
+			}],
+			[/^mmm/, function() {
+				return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
+			}],
+			[/^DDD/, function() {
+				return $tw.language.getString("Date/Long/Day/" + date.getDay());
+			}],
+			[/^MMM/, function() {
+				return $tw.language.getString("Date/Long/Month/" + (date.getMonth() + 1));
+			}],
+			[/^TZD/, function() {
+				var tz = date.getTimezoneOffset(),
+				atz = Math.abs(tz);
+				return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
+			}],
+			[/^wYY/, function() {
+				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
+			}],
+			[/^[ap]m/, function() {
+				return $tw.utils.getAmPm(date).toLowerCase();
+			}],
+			[/^hh/, function() {
+				return date.getHours();
+			}],
+			[/^mm/, function() {
+				return date.getMinutes();
+			}],
+			[/^ss/, function() {
+				return date.getSeconds();
+			}],
+			[/^[AP]M/, function() {
+				return $tw.utils.getAmPm(date).toUpperCase();
+			}],
+			[/^DD/, function() {
+				return date.getDate();
+			}],
+			[/^MM/, function() {
+				return date.getMonth() + 1;
+			}],
+			[/^WW/, function() {
+				return $tw.utils.getWeek(date);
+			}],
+			[/^YY/, function() {
+				return $tw.utils.pad(date.getFullYear() - 2000);
+			}]
+		];
+	while(t.length){
+		var matchString = "";
+		$tw.utils.each(matches, function(m) {
+			var match = m[0].exec(t);
+			if(match) {
+				matchString = m[1].call();
+				t = t.substr(match[0].length);
+				return false;
+			}
+		});
+		if(matchString) {
+			result += matchString;
+		} else {
+			result += t.charAt(0);
+			t = t.substr(1);
+		}
+	}
+	result = result.replace(/\\(.)/g,"$1");
+	return result;
 };
 
 exports.getAmPm = function(date) {
@@ -419,9 +439,15 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+// Checks whether a link target is external, i.e. not a tiddler title
+exports.isLinkExternal = function(to) {
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
+	return externalRegExp.test(to);
+};
+
 exports.nextTick = function(fn) {
 /*global window: false */
-	if(typeof window !== "undefined") {
+	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,4);
 	} else {
@@ -461,21 +487,31 @@ Returns an object with the following fields, all optional:
 */
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
-	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##(.+)))?\s*/mg,
-		match = reTextRef.exec(textRef);
+	var reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg,
+		match = reTextRef.exec(textRef),
+		result = {};
 	if(match && reTextRef.lastIndex === textRef.length) {
 		// Return the parts
-		return {
-			title: match[1],
-			field: match[2],
-			index: match[3]
-		};
+		if(match[1]) {
+			result.title = match[1];
+		}
+		if(match[2]) {
+			result.field = match[2];
+		}
+		if(match[3]) {
+			result.title = match[3];
+		}
+		if(match[4]) {
+			result.index = match[4];
+		}
+		if(match[5]) {
+			result.title = match[5];
+		}
 	} else {
-		// If we couldn't parse it (eg it started with a)
-		return {
-			title: textRef
-		};
+		// If we couldn't parse it
+		result.title = textRef
 	}
+	return result;
 };
 
 /*
@@ -494,28 +530,21 @@ exports.isValidFieldName = function(name) {
 Extract the version number from the meta tag or from the boot file
 */
 
-if($tw.browser) {
-
 // Browser version
 exports.extractVersionInfo = function() {
-	var metatags = document.getElementsByTagName("meta");
-	for(var t=0; t<metatags.length; t++) {
-		var m = metatags[t];
-		if(m.name === "tiddlywiki-version") {
-			return m.content;
+	if($tw.packageInfo) {
+		return $tw.packageInfo.version;
+	} else {
+		var metatags = document.getElementsByTagName("meta");
+		for(var t=0; t<metatags.length; t++) {
+			var m = metatags[t];
+			if(m.name === "tiddlywiki-version") {
+				return m.content;
+			}
 		}
 	}
 	return null;
 };
-
-} else {
-
-// Server version
-exports.extractVersionInfo = function() {
-	return $tw.packageInfo.version;
-};
-
-}
 
 /*
 Get the animation duration in ms

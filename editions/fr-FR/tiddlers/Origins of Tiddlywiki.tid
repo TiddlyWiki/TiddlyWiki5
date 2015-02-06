@@ -1,0 +1,18 @@
+created: 20140923200251427
+fr-title: Origines de TiddlyWiki
+modified: 20141128151255002
+tags: [[à commiter]]
+title: Origins of Tiddlywiki
+type: text/vnd.tiddlywiki
+
+En 1997, un collègue me montra [[le wiki original de Ward Cunningham|http://c2.com/cgi/wiki]]. Que quelque chose d'aussi puissant puisse être écrit en seulement 700 lignes de Perl m'impressionna  à l'époque, et j'étais aussi fasciné par la manière radicale dont la sécurité et le système de permissions avaient été repensés. Comme beaucoup d'autres développeurs, je me suis jeté sur tous les types de wiki qui me passaient sous la main, afin d'explorer leur utilisation en environnement de travail.
+
+Le principal attrait du wiki pour moi était le sentiment qu'il pouvait remettre en question le paradigme qui prévalait jusqu'alors, à savoir les documents conçus pour être imprimés, et les emails.
+
+Après avoir observé pendant quelques années la manière dont les gens utilisaient les wikis, j'ai remarqué que les utilisateurs avancés faisait grand usage de la possibilité d'ouvrir plusieurs pages de wiki à la fois dans les onglets de leur navigateur, pour se faciliter la comparaison et la révision des pages, la recopie de texte d'une page à l'autre, et pour se constituer une sorte de file de pages en attente d'être lues.
+
+J'ai eu le sentiment que cette capacité à manipuler plusieurs pages en même temps était centrale dans la capacité à réorganiser un wiki, et on considère généralement qu'un wiki réorganisé avec amour a tendance à être plus utile. Pourtant, les interfaces utilisateur des wiki ont toujours été exclusivement conçues pour la présentation et la manipulation d'une seule page à la fois.
+
+Toutes ces réflexions se sont synthétisées lorsque j'ai vu l'interface de Gmail en avril 2004, qui utilisait Ajax de manière ingénieuse pour assembler des mails individuels dans des fils de conversations.
+
+J'ai commencer à expérimenter avec HTML et JavaScript pour pousser l'idée. Je n'avais eu jusqu'à présent pratiquement aucune expérience de l'un ou de l'autre, à part composer quelques pages statiques et des sites ASP simples dans des vies précédentes. Se plonger dans ces techniques orientées client a été une expérience douloureuse ; comme tout le monde, j'étais horrifié de découvrir l'atrocité des incompatibilités et incohériences de la programmation web.

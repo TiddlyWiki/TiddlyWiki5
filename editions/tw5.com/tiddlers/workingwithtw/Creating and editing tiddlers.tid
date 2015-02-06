@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! Creating tiddlers
 
-You create a tiddler either by clicking the {{$:/core/images/new-button}} button in the sidebar, or by clicking on a link to a missing tiddler (links to missing tiddlers will appear in [[blue italic text]]).
+You create a tiddler either by clicking the {{$:/core/images/new-button}} button in the sidebar, or by clicking on a link to a missing tiddler. Links to missing tiddlers are shown in [[blue italics]].
 
 See also:
 
@@ -14,22 +14,22 @@ See also:
 
 ! Editing tiddlers
 
-You can edit an existing tiddler by clicking the {{$:/core/images/edit-button}} button at the top right of the tiddler.
+To edit an existing tiddler, click the {{$:/core/images/edit-button}} button at the top right of the tiddler.
 
-! The ~EditTemplate
+!! Draft mode
 
-Creating new tiddlers and editing existing tiddlers both open up the ~EditTemplate. This is your control panel for modifying the tiddler in different ways. The ~EditTemplate has several areas:
+When you create a new tiddler or edit an existing one, the tiddler will go into draft mode. This presents a control panel for modifying the tiddler in various ways. It has several parts, from top to bottom:
 
-*''The title editor'' Use this to edit the title of the tiddler
-*''The tag editor'' Use this to add or remove tags to the tiddler. Type a tag name and either select a tag from the dropdown list or finish typing to create a new tag. Then click the 'add' button to add it to the tiddler. Delete tags from a tiddler by clicking the 'x' on the tag pill
-*''The text editor'' Use this to add content to the tiddler. You can also use the preview button to preview changes to the tiddler text
-*''The type editor'' Use this when you have a specific type of content that needs to be displayed in a different way, such as an image. See ContentType for a list of possible content types. The default is text/vnd.tiddlywiki)
-*''The field editor'' Use this to add fields to the tiddler. For example, you can use a [[list field|ListField]] to display the order of tiddlers tagged with the current tiddler's title in ways that are not alphabetical
+*''The title field'' - Use this to change the title of the tiddler
+*''The tag selector'' - Use this to add or remove tags. As you type a tag name in the box, a dropdown list will show you any existing tags that match. You can pick from this list or create a completely new tag. Then click the ''add'' button to add the tag to the tiddler. Each tag is shown as a coloured pill. Click the "×" on a pill to remove that tag
+*''The text area'' - Use this to edit the main content of the tiddler. Click the ''show preview'' button to see what your changes will look like
+*''The type selector'' - Use this when a tiddler needs to be displayed in a special way, such as an image. See ContentType for a list of the options. The default is `text/vnd.tiddlywiki`, which means the tiddler contains WikiText
+*''The field selector'' - Use this to add or remove fields on the tiddler. For example, if you are editing a tiddler that's being used to tag other tiddlers, you can add a [[''list'' field|ListField]] to change the order in which those tiddlers will be listed
 
 ! Save, cancel or delete
 
-When you are finished editing, select the desired button at the top of the ~EditTemplate:
+When you have finished editing, click a button at the top right of the tiddler:
 
-*The 'done' button ({{$:/core/images/done-button}}) saves your changes and returns to view mode.
-*The 'cancel' button ({{$:/core/images/cancel-button}}) cancels the changes and returns to view mode.
-*The 'delete' button ({{$:/core/images/delete-button}}) deletes the entire tiddler.
+*The ''save'' button ({{$:/core/images/done-button}}) stores your changes to this one tiddler and leaves draft mode. If your wiki is configured to [[AutoSave]], your changes will be permanently saved. Otherwise they will only be stored temporarily in your web browser, and you will lose them if you close your ~TiddlyWiki page without first clicking the master ''save changes'' button {{$:/core/images/save-button}} in the sidebar.
+*The ''cancel'' button ({{$:/core/images/cancel-button}}) discards your changes (after asking you to confirm) and leaves draft mode.
+*The ''delete'' button ({{$:/core/images/delete-button}}) deletes the entire tiddler (after asking you to confirm).

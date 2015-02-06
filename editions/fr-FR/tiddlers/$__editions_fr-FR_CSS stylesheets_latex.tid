@@ -1,0 +1,24 @@
+created: 20141005182628123
+modified: 20141115214429648
+tags: $:/tags/Stylesheet
+title: $:/editions/fr-FR/CSS stylesheets/latex
+type: text/css
+
+/* adapted from http://edward.oconnor.cx/2007/08/tex-poshlet */
+
+.latex {
+  text-transform: uppercase;
+}
+
+.latex sub {
+  font-size: 1em;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+}
+
+.latex sup {
+  vertical-align: -0.4ex;
+  font-size: 0.85em;
+  margin-left: -0.36em;
+  margin-right: -0.15em;
+}

@@ -18,6 +18,6 @@ If you're using [[Firefox for Android]], see the instructions for [[Saving with 
 # Open the file in [[Firefox]]
 # Click ''OK'' in response to the prompt from TiddlyFox that asks whether to enable saving for this file
 # Try creating a new tiddler using the ''plus'' {{$:/core/images/new-button}} button in the sidebar. Type some content for the tiddler, and click the {{$:/core/images/done-button}} ''tick'' button
-# Save your changes by clicking the {{$:/core/images/save-button}} ''download'' button in the sidebar
+# Save your changes by clicking the {{$:/core/images/save-button}} ''Save changes'' button in the sidebar
 #* Look for the yellow notification ''Saved wiki'' at the top right of the window
 # Refresh the browser window to verify that your changes have been saved correctly

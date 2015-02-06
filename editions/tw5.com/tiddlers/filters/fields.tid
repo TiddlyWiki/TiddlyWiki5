@@ -1,0 +1,17 @@
+created: 20140924115616653
+modified: 20150124184835000
+tags: [[Filter Operators]] [[Field Operators]]
+title: fields Operator
+type: text/vnd.tiddlywiki
+caption: fields
+purpose: select all field names of the input titles
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="none"
+output="all the field names contained in the input tiddlers"
+/>
+
+Each input title is processed in turn. Its list of field names is retrieved (in no particular order) and then [[dominantly appended|Dominant Append]] to the operator's output.
+
+<<.operator-examples "fields">>

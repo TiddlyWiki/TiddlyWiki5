@@ -1,0 +1,70 @@
+caption: HTML
+created: 20141017141153174
+modified: 20141118192457947
+tags: WikiText
+title: HTML in WikiText
+fr-title: HTML dans le WikiTexte
+type: text/vnd.tiddlywiki
+
+Les balises HTML (dont les commentaires `<!-- -->`) peuvent être utilisées directement en [[WikiTexte|WikiText]] :
+
+<<wikitexte-exemple "<article class='hello'>
+Ceci est un simple bloc de texte. HelloThere
+<!-- Ce commentaire n'apparaîtra pas. -->
+</article>">>
+
+; Remarque
+* Par conséquent, un mot écrit entre "chevrons" `< >` sera interprété comme une balise HTML, ce qui peut entraîner des effets de bord (notamment à cause de l'inexistence de la balise fermante).<br>À la place, mieux vaut utiliser le [[code HTML|Codes HTML]] des caractères "chevrons" : `&lt;` et `&gt;`
+
+! Interprétation du contenu
+
+Par défaut, le contenu d'un élément HTML est interprété en mode texte ("inline mode" en anglais). Cela signifie que les [[formatages de texte|Formatting in WikiText]] (comme du gras ou un exposant) s'appliquent, mais que les formatages de type bloc (comme les tables, les listes ou les titres) ne sont pas reconnus.
+
+Pour que le contenu de l'élément HTML soit interprété en mode bloc ("block mode" en anglais), il faut faire suivre la balise ouvrante de deux retours à la ligne.
+
+<<wikitexte-exemple "<article class='hello'>
+Ceci est du contenu en ''mode texte''.
+
+* Les listes ne sont pas reconnues
+
+-- pas plus que les paragraphes !
+</article>
+
+---
+<article class='hello'>
+
+Ceci est du contenu en ''mode bloc''.
+
+* Les listes sont reconnues
+</article>">>
+
+! Attributs
+
+Les attributs d'une balise HTML peuvent être spécifiés littéralement, à l'aide d'une [[transclusion|Transclusion in WikiText]] ou par l'invocation d'une [[macro|Macros in WikiText]] :
+
+Par exemple, ici la valeur de l'attribut `href` sera égale à la valeur du tiddler ~MonLienDestination :
+
+```
+<a href={{MonLienDestination}}>label du lien</a>
+```
+
+Et là, l'attribut est spécifié en invoquant une macro (qui génère elle-même un lien qui peut être paramétré) :
+
+```
+<a href=<<MaMacro "valeur du paramètre">>>label du lien</a>
+```
+
+Les valeurs d'attribut littérales peuvent contenir des retours à la ligne (ignoré par le HTML) :
+
+```
+<div data-address="Maison Souris,
+3 rue des rongeurs,
+Ratville"/>
+```
+
+L'utilisation de trois caractères "guillemets doubles" `"""` permet de spécifier des valeurs d'attributs qui contiennent un seul caractère "guillemet double" :
+
+```
+<div data-address="""Maison "Souris",
+3 rue des rongeurs,
+Ratville"""/>

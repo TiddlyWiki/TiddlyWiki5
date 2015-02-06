@@ -28,21 +28,21 @@ Choose a location in your file system (eg TW5) for your plugin project; issue co
 
 !!! 1. Create the directory
 
-```
+```bash
 mkdir TW5
 
 ```
 
 !!! 2. Make a local read-only copy of the ~TiddlyWiki5 repository
 
-```
+```bash
 git clone https://github.com/Jermolene/TiddlyWiki5.git TW5
 
 ```
 
 !!! 3. Make a directory for your plugin
 
-```
+```bash
 cd TW5
 cd plugins
 mkdir yourname
@@ -53,20 +53,20 @@ mkdir pluginname
 
 !!! 4. Make a local copy of your plugin repository
 
-```
+```bash
 git clone https://github.com/yourgithub/pluginname.git pluginname
 
 ```
 !!! 5. Go to your files
 
-```
+```bash
 cd pluginname
 
 ```
 
 Create the file plugin.info with content:
 
-```
+```js
 {
 	"title": "$:/plugins/yourgithub/pluginname",
 	"description": "summary of the plugin's purpose",
@@ -81,7 +81,7 @@ Create the file plugin.info with content:
 
 !! 4. Create the files for your plugin
 
-For example files see the plugins in the ~TiddlyWiki5 repository i.e. those located at plugins/tiddlywiki/. See TiddlerFiles for details of the supported tiddler file formats.
+For example files see the plugins in the ~TiddlyWiki5 repository i.e. those located at plugins/tiddlywiki/. See [[TiddlerFiles|http://tiddlywiki.com/#TiddlerFiles]] for details of the supported tiddler file formats.
 
 !!5. Build your files into a ~TiddlyWiki
 
@@ -89,7 +89,7 @@ Modify `editions/tw5.com/tiddlywiki.info` to include a reference to your plugin 
 
 From the TW5 directory issue the command
 
-```
+```bash
 node ./tiddlywiki.js editions/tw5.com --build index
 ```
 
@@ -101,18 +101,18 @@ From `plugins/yourname/pluginname/` issue commands to:
 
 !!! 1. Add all files
 
-```
+```bash
 git add -A
 ```
 
 !!! 2. Commit to your local repository
 
-```
+```bash
 git commit -am "something meaningful about this check in"
 ```
 
 !!! 3. Copy local changes to github
 
-```
+```bash
 git push
 ```

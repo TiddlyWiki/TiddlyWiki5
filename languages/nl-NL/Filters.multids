@@ -1,0 +1,13 @@
+title: $:/language/Filters/
+
+AllTags: Alle labels behalve systeemlabels
+AllTiddlers: Alle tiddlers behalve systeemtiddlers
+Drafts: Concepttiddlers
+Missing: Ontbrekende tiddlers
+Orphans: Weestiddlers
+OverriddenShadowTiddlers: Overschreven schaduwtiddlers
+RecentSystemTiddlers: Onlangs gewijzigde tiddlers inclusief systeemtiddlers
+RecentTiddlers: Onlangs gewijzigde tiddlers
+ShadowTiddlers: Schaduwtiddlers
+SystemTags: Systeemlabels
+SystemTiddlers: Systeemtiddlers

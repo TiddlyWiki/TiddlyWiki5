@@ -15,12 +15,12 @@ You can explore a static representation of this TiddlyWiki at <a href="static.ht
 The following commands are used to generate the sample static version of the TiddlyWiki5 site:
 
 ```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain
 --rendertiddler $:/core/templates/static.template.html static.html text/plain
 --rendertiddler $:/core/templates/static.template.css static/static.css text/plain
---rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html static text/plain
 ```
 
-The first RenderTiddlerCommand saves the static version of the DefaultTiddlers, the second saves the stylesheet, and the final RenderTiddlersCommand generates the HTML representations of individual tiddlers. (All the files are placed in the `output` folder of the wiki folder).
+The first RenderTiddlersCommand generates the HTML representations of individual tiddlers, the second RenderTiddlerCommand saves the static version of the DefaultTiddlers, and the final RenderTiddlerCommand saves the stylesheet. (All the files are placed in the `output` folder of the wiki folder).
 
 ! Wiki Snapshot with Internal Links
 

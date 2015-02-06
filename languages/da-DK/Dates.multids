@@ -71,7 +71,7 @@ Date/Short/Month/6: Jun
 Date/Short/Month/7: Jul
 Date/Short/Month/8: Aug
 Date/Short/Month/9: Sep
-RelativeDate/Future/Days: for <<period>> days from now
+RelativeDate/Future/Days: om <<period>> dage
 RelativeDate/Future/Hours: om <<period>> timer
 RelativeDate/Future/Minutes: om <<period>> minuter
 RelativeDate/Future/Months: om <<period>> måneder

@@ -1,0 +1,91 @@
+title: IteratorVariables
+tags: ListWidget Variables
+created: 20150106180000000
+modified: 20150106180000000
+
+The ListWidget exposes the following iterator variables during list processing:
+
+; `<<iterator>>`
+: set to the current index, e.g. `1` 
+; `<<iterator-even>>`
+: set to `true` for an even index, otherwise `false`
+; `<<iterator-last>>`
+: set to `true` for last index, otherwise `false`
+
+The ListWidget allows to declare an `iterator` attribute through which you can declare a custom iterator variable prefix:
+
+```
+<$list filter="[tag[foo]]" iterator="my-foo">
+...
+</$list>
+```
+
+!!Using Iterator Variables
+
+You can use iterator variables with the RevealWidget to conditionally render output depending on the current index...
+
+''only show for item at index 1, i.e. the first item''
+
+```
+<$reveal type=match default=1 text=<<my-foo>>>
+...
+</$reveal>
+```
+
+''show for all except first index''
+
+```
+<$reveal type=nomatch default=1 text=<<my-foo>>>
+...
+</$reveal>
+```
+
+''only show at even indexes''
+
+```
+<$reveal type=match default=true text=<<my-foo-even>>>
+...
+</$reveal>
+```
+
+''only show at uneven indexes''
+
+```
+<$reveal type=nomatch default=true text=<<my-foo-even>>>
+...
+</$reveal>
+```
+
+''only show for last index''
+
+```
+<$reveal type=match default=true text=<<my-foo-last>>>
+...
+</$reveal>
+```
+
+!! Live Example
+
+```
+<dl>
+<$list filter="one two three" iterator=foo>
+<dt><<currentTiddler>></dt>
+<dd>`<<foo>>` = <<foo>></dd>
+<dd>`<<foo-even>>` = <<foo-even>></dd>
+<dd>`<<foo-last>>` = <<foo-last>></dd>
+</$list>
+</dl>
+```
+
+Displays as:
+
+<<<
+<dl>
+<$list filter="one two three" iterator=foo>
+<dt><<currentTiddler>></dt>
+<dd>`<<foo>>` = <<foo>></dd>
+<dd>`<<foo-even>>` = <<foo-even>></dd>
+<dd>`<<foo-last>>` = <<foo-last>></dd>
+</$list>
+</dl>
+<<<

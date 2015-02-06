@@ -1,0 +1,33 @@
+created: 20131129090249275
+modified: 20141011134052576
+tags: [[Working with TiddlyWiki]]
+title: GettingStarted
+fr-title: Pour démarrer
+type: text/vnd.tiddlywiki
+
+\define default-platform()
+GettingStarted - $(browser-name)$
+\end
+Instructions pour bien commencer avec <<tw>>, selon les différentes plates-formes et configurations supportées.
+
+<$set name="browser-name" value={{$:/info/browser/name}}>
+<$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
+</$set>
+
+Autres informations :
+
+* [[Chiffrement|Encryption]] explique comment utiliser le système de chiffrement intégré à <<tw>> pour protéger votre contenu avec un mot de passe ;
+* [[Enregistrer avec Tiddlyspot|Saving on TiddlySpot]], un service gratuit qui vous permet d'utiliser <<tw>> en ligne ;
+* Sauvegarde avec TiddlyDesktop, une application de bureautique dédiée au travail avec <<tw>> ;
+* Vous pouvez aussi télécharger ce <<tw>> complet, avec toute sa documentation<<dp>><div>
+
+<<<
+{{$:/snippets/download-wiki-button}}
+
+Si le bouton ne fonctionne pas, sauvegardez ce lien :
+
+<a href="http://tiddlywiki.com/index.html" download="index.html">~http://tiddlywiki.com/index.html</a>
+
+Votre navigateur vous demandera sans doute confirmation avant de démarrer le téléchargement.
+<<<
+</div>

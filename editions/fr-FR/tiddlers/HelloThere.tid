@@ -1,0 +1,26 @@
+caption: Bienvenue !
+created: 20130822170200000
+fr-title: Bienvenue !
+list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[History of TiddlyWiki]] [[What happened to the original TiddlyWiki?]]
+modified: 20141221121901696
+tags: TableOfContents
+title: HelloThere
+type: text/vnd.tiddlywiki
+
+Bienvenue sur <<tw>>, une application web dédiée à la prise de notes, dont le signe distinctif est la grande souplesse d'utilisation. Vous pouvez l'obtenir gratuitement, la stocker n'importe où, et la personnaliser selon vos souhaits. Elle vous servira à conserver, organiser, et partager vos notes de manière inédite en comparaison des traitements de texte et autres outils habituels de prise de notes.
+
+<$button class="tc-btn-big-green" to="Introduction Video" style="background:red;">
+{{$:/core/images/video}} Visionnez une introduction en vidéo
+</$button>
+
+<<tw>> privilégie la non-linéarité : le contenu se structure à l'aide de déroulés, de tags, d'hyperliens, et d'autres fonctionnalités spécifiques. Vous pouvez organiser vos notes et y accéder selon votre manière de penser, sans vous sentir contraint par une structure d'organisation prédéfinie.
+
+Vous pouvez utiliser <<tw>> sous forme de fichier autonome, affichable et éditable depuis n'importe quel navigateur web, que vous soyez connecté ou déconnecté. Vous pouvez aussi vous en servir comme une [[application Node.js|TiddlyWiki on Node.js]], à même de synchroniser chacune de vos notes dans un fichier séparé.
+
+Comment faire fonctionner <<tw>> chez vous ? Notre conseil est de commencer par lire les textes de présentation ci-dessous, puis de naviguer dans la [[table des matières|TableOfContents]] présente dans l'onglet //{{TableOfContents!!caption}}// de la barre latérale. Ou si vous préférez, contentez-vous de suivre [[nos instructions de démarrage|GettingStarted]] et jetez-vous à l'eau !
+
+<<list-links "[tag[HelloThere]]">>
+
+Voir aussi<<:>>
+
+* [ext[Developer Documentation|http://tiddlywiki.com/dev/index.html]] (en anglais)

@@ -3,7 +3,7 @@ modified: 20140101175304016
 title: TiddlyWiki on node-webkit
 type: text/vnd.tiddlywiki
 
-[[node-webkit]] allows TiddlyWiki to be set up as a native application for Windows, Mac OS X or Linux.
+[[node-webkit|http://tiddlywiki.com/#node-webkit]] allows TiddlyWiki to be set up as a native application for Windows, Mac OS X or Linux.
 
 ! Setting up
 
@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
 ## The appropriate copy of [[node-webkit]] for your platform, downloaded from https://github.com/rogerwang/node-webkit
 ## Your TiddlyWiki HTML file as `index.html`
 ## A file called `package.json` with the following content:
-##> {{packge.json for node-webkit}}
+##> {{package.json for node-webkit}}
 # Run the [[node-webkit]] application
 #* If it doesn't work, you may need to unblock the application before your operating system will run it
 #** OS X: see http://support.apple.com/kb/PH14369

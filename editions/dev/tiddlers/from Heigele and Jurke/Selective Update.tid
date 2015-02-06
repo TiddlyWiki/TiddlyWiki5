@@ -8,7 +8,7 @@ title: Selective Update
 With [[Messages]] a widget is able to put some kind of events into the TiddlyWiki application which is one part of the dynamic behaviour of widgets.
 The other part is selective updating.
 Widgets are often dependant on tiddler states.
-The ~ListWidget for example can be configured to list all tiddlers which are tagged with "important".
+The [[ListWidget|http://tiddlywiki.com/#ListWidget]] for example can be configured to list all tiddlers which are tagged with "important".
 Now, when such a tiddler is changed and it's "important" tag is removed, this change should reflect in the ~ListWidget.
 To allow widgets to react on such changes, each widget can provide a function ``refresh(changedTiddlers)``.
 The [[RootWidget|RootWidget and Rendering Startup]] is registered to the wiki store, using the [[Event Mechanism]]. When an change event occurs it starts to call the refresh function of its children with a list of the changed tiddlers.
@@ -17,9 +17,10 @@ This way every time a tiddler or the wiki store itself changes, each widget can 
 
 Another way of updating are text reference attributes (text references explained in [[Transclusion and TextReference]]):
 
-```
+```js
 {type: "indirect", textReference: <textReference>}
 ```
+
 When a widget got a attribute which is a text reference and the refresh function is called, it can check if the text reference references a changed tiddler and update accordingly.
 
 Nearly every state of the UI is stored in tiddlers. A search mechanism for example would use a ~EditTextWidget which shows an text input field for the search string and a ListWidget to show the results.

@@ -1,0 +1,45 @@
+caption: Tabbed
+created: 20150104183128274
+modified: 20150104222928663
+tags: table-of-contents-example
+title: TableOfContentsMacro Tabbed Example
+type: text/vnd.tiddlywiki
+
+!! Table des matières tabulée
+
+La variante tabulée de la macro table des matières affiche une table des matières développable sélectivement à côté d'un panneau qui affiche le tiddler en cours de sélection.
+
+!!! Paramètres
+
+|!Position |!Nom |!Description |!Défaut |
+|1^^re^^ |tag |Tag à utiliser pour construire la table des matières | |
+|2^^e^^ |sort |Sous-filtre de tri optionnel (par exemple `sort[title]`) | |
+|3^^e^^ |selectedTiddler |Titre du tiddler contenant le titre du tiddler en cours d'affichage  |"$:/temp/toc/selectedTiddler" |
+|4^^e^^ |unselectedText |Texte à afficher lorsqu'aucun tiddler n'est sélectionné | |
+|5^^e^^ |missingText |Texte à afficher quand le tiddler sélectionné est manquant | |
+|6^^e^^ |template |Titre optionnel d'un tiddler à utiliser comme template pour le rendu du tiddler sélectionné | |
+
+!!! Navigation interne
+
+Cet exemple montre comment construire une table des matières tabulée avec navigation interne, de sorte que cliquer sur les liens du tiddler en cours d'affichage remplacera le tiddler en question.
+
+```
+<<toc-tabbed-internal-nav tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Choisissez un sujet dans la table des matières. Cliquez sur la flèche pour développer un sujet.">>
+```
+
+!!! Navigation externe
+
+Cet exemple montre comment construire une table des matières tabulée avec navigation externe, de sorte que cliquer sur les liens du tiddler en cours d'affichage ouvrira les tiddlers référencés dans le déroulé principal, selon la manière habituelle.
+
+```
+<<toc-tabbed-external-nav tag:"TableOfContents" selectedTiddler:"$:/temp/toc/selectedTiddler" unselectedText:"Choisissez un sujet dans la table des matières. Cliquez sur la flèche pour développer un sujet.">>
+```
+
+!! Exemple
+
+Type<<:>> <$select tiddler="TabbedExampleType">
+<option value="toc-tabbed-internal-nav">Ouvre les liens du tiddler affiché dans le même espace (toc-tabbed-internal-nav)</option>
+<option value="toc-tabbed-external-nav">Ouvre les liens du tiddler affiché hors de son espace (toc-tabbed-external-nav)</option>
+</$select>
+
+<$macrocall $name={{TabbedExampleType}} tag="TableOfContents" selectedTiddler="$:/temp/toc/selectedTiddler" unselectedText="<p>Choisissez un sujet dans la table des matières. Cliquez sur la flèche pour développer un sujet.</p>" missingText="<p>Tiddler manquant.</p>"/>

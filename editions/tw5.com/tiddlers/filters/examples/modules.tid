@@ -1,0 +1,7 @@
+created: 20150123221510000
+modified: 20150123221534000
+tags: [[modules Operator]] [[Operator Examples]]
+title: modules Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[[filteroperator]modules[]]">>

@@ -1,6 +1,16 @@
-title: $:/core/macros/timeline
+created: 20141212105914482
+modified: 20141212110330815
 tags: $:/tags/Macro
+title: $:/core/macros/timeline
+type: text/vnd.tiddlywiki
 
+\define timeline-title()
+<!-- Override this macro with a global macro 
+     of the same name if you need to change 
+     how titles are displayed on the timeline 
+     -->
+<$view field="title"/>
+\end
 \define timeline(limit:"100",format:"DDth MMM YYYY",subfilter:"",dateField:"modified")
 <div class="tc-timeline">
 <$list filter="[!is[system]$subfilter$has[$dateField$]!sort[$dateField$]limit[$limit$]eachday[$dateField$]]">
@@ -9,7 +19,7 @@ tags: $:/tags/Macro
 <$list filter="[sameday{!!$dateField$}!is[system]$subfilter$!sort[$dateField$]]">
 <div class="tc-menu-list-subitem">
 <$link to={{!!title}}>
-<$view field="title"/>
+<<timeline-title>>
 </$link>
 </div>
 </$list>

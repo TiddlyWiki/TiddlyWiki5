@@ -1,0 +1,7 @@
+created: 20141005122238133
+fr-title: Développement de TiddlyWiki5
+modified: 20141221121217987
+title: Development of TiddlyWiki5
+type: text/vnd.tiddlywiki
+
+J'ai travaillé sur une nouvelle version de <<tw>> à partir de novembre 2011. En tant que programmeur, travailler à une <<gf "version 2.0">> de quelque chose que j'avais déjà écrit était une projet très séduisant. Cela signifiait que les besoins étaient bien compris, et je pouvais dès lors me concentrer sur l'architecture et ses évolutions nécessaires à la mise en œuvre des fonctionnalités désirées.

@@ -4,40 +4,27 @@ tags: Concepts
 title: ColourPalettes
 type: text/vnd.tiddlywiki
 
-Colour palettes bind logical colour names (such as ''page-background'') to actual CSS colours (such as ''#fe0'').
+A colour palette is a [[data tiddler|DataTiddlers]] that supplies a [[CSS]] colour value, such as ''yellow'' or ''#fe0'', for each of several colour names, like this:
 
-Entire colour palettes are stored in a single [[data tiddler|DataTiddlers]].
+```
+page-background: #fe0
+table-border: #ccc
+...
+```
 
-The title of the tiddler containing the current colour palette is identified by the tiddler [[$:/palette]].
+Several palettes form part of the core. The system tiddler [[$:/palette]] always contains the title of the currently selected palette tiddler.
 
-To retrieve a named colour from the current palette you can use the ''colour'' macro:
+To retrieve the value of a named colour from the current palette, e.g. for use in a stylesheet tiddler, use the [[colour macro|$:/core/macros/CSS]]:
 
 ```
 <<colour page-background>>
 ```
 
-The ''colour'' macro is defined like this:
-
-```
-\define colour(name)
-<$transclude tiddler={{$:/palette}} index="$name$"/>
-\end
-```
-
-By convention, each theme provides a default colour palette in the tiddler [[$:/config/DefaultPalette]] tiddler. Thus, setting the tiddler [[$:/theme]] to the string `$:/config/DefaultPalette` will revert to the palette packaged with the current theme (as long as it hasn't been redefined, since it is a shadow tiddler).
-
 Palette tiddlers should have the following fields:
 
-|!Field |!Description |
-|title |Any title can be used, typically a system title starting with "$:/" |
-|type |`application/x-tiddler-dictionary` to identify this tiddler as a [[data tiddler|DataTiddlers]] |
-|tags |`$:/tags/Palette` to identify this tiddler as a palette |
-|description |Description to be displayed in palette browser |
-|text |Colour definitions (see below) |
-
-The text of a palette tiddler consists of name value pairs like this:
-
-```
-foreground: #000
-background: #fff
-```
+|!Name |!Value |
+|title |Typically starting with `$:/` |
+|type |`application/x-tiddler-dictionary` |
+|tags |`$:/tags/Palette` |
+|description |Displayed in the palette browser |
+|text |`name: value` colour definitions |

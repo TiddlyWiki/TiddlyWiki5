@@ -333,12 +333,12 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 	// Flip the specified tiddler from draft back to the original
 	var draftTitle = event.param || event.tiddlerTitle,
 		draftTiddler = this.wiki.getTiddler(draftTitle),
-		originalTitle = draftTiddler.fields["draft.of"],
-		originalTiddler = this.wiki.getTiddler(originalTitle),
-		storyList = this.getStoryList();
+		originalTitle = draftTiddler && draftTiddler.fields["draft.of"];
 	if(draftTiddler && originalTitle) {
 		// Ask for confirmation if the tiddler text has changed
-		var isConfirmed = true;
+		var isConfirmed = true,
+			originalTiddler = this.wiki.getTiddler(originalTitle),
+			storyList = this.getStoryList();
 		if(this.wiki.isDraftModified(draftTitle)) {
 			isConfirmed = confirm($tw.language.getString(
 				"ConfirmCancelTiddler",
@@ -376,7 +376,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 	// Get the story details
 	var storyList = this.getStoryList(),
-		templateTiddler, additionalFields, title, draftTitle, existingTiddler, mergedTags;
+		templateTiddler, additionalFields, title, draftTitle, existingTiddler;
 	// Get the template tiddler (if any)
 	if(typeof event.param === "string") {
 		// Get the template tiddler
@@ -406,13 +406,17 @@ NavigatorWidget.prototype.handleNewTiddlerEvent = function(event) {
 		existingTiddler = this.wiki.getTiddler(title);
 	}
 	// Merge the tags
-	if(existingTiddler && existingTiddler.fields.tags && additionalFields && additionalFields.tags) {
+	var mergedTags = [];
+	if(existingTiddler && existingTiddler.fields.tags) {
+		$tw.utils.pushTop(mergedTags,existingTiddler.fields.tags)
+	}
+	if(additionalFields && additionalFields.tags) {
 		// Merge tags
-		mergedTags = $tw.utils.pushTop($tw.utils.parseStringArray(additionalFields.tags),existingTiddler.fields.tags);
-	} else if(existingTiddler && existingTiddler.fields.tags) {
-		mergedTags = existingTiddler.fields.tags;
-	} else if(additionalFields && additionalFields.tags) {
-		mergedTags = additionalFields.tags;
+		mergedTags = $tw.utils.pushTop(mergedTags,$tw.utils.parseStringArray(additionalFields.tags));
+	}
+	if(templateTiddler && templateTiddler.fields.tags) {
+		// Merge tags
+		mergedTags = $tw.utils.pushTop(mergedTags,templateTiddler.fields.tags);
 	}
 	// Save the draft tiddler
 	var draftTiddler = new $tw.Tiddler({

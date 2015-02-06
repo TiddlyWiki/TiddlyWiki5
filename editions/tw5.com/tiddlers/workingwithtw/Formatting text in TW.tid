@@ -14,19 +14,19 @@ At its simplest, WikiText lets you use familiar word-processing features like bo
 The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
 ```
 
-Displays as:
+… displays as:
 
 The ''quick'' brown ~~flea~~ fox //jumps// over the `lazy` dog
 
 ! Working with Tiddlers
 
-WikiText allows you to link to tiddlers using double square brackets, or taking advantage of the automatic linking of CamelCase words:
+In WikiText, you can link to tiddlers using double square brackets, or by taking advantage of the automatic linking of CamelCase words:
 
 ```
 This is a link to HelloThere, and one to [[History of TiddlyWiki]]
 ```
 
-Displays as:
+… displays as:
 
 This is a link to HelloThere, and one to [[History of TiddlyWiki]]
 
@@ -34,7 +34,7 @@ This is a link to HelloThere, and one to [[History of TiddlyWiki]]
 
 Macros let you package repetitive fragments of WikiText so that you can easily reuse them.
 
-For example, here is the definition of a macro that generates a YouTube video URL from its unique identifier:
+For example, here is the definition of a macro that generates a ~YouTube video URL from its unique identifier:
 
 ```
 \define youtube(video)

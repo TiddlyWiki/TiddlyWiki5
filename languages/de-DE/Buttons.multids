@@ -1,66 +1,72 @@
 title: $:/language/Buttons/
 
-AdvancedSearch/Caption: erweiterte suche
+AdvancedSearch/Caption: Erweiterte Suche
 AdvancedSearch/Hint: Erweiterte Suche
-Cancel/Caption: abbrechen
+Cancel/Caption: Abbrechen
 Cancel/Hint: Tiddler bearbeiten abbrechen
-Clone/Caption: klone
+Clone/Caption: Klone
 Clone/Hint: Klone diesen Tiddler
-Close/Caption: schließen
+Close/Caption: Schließen
 Close/Hint: Schließe diesen Tiddler
-CloseAll/Caption: alle schließen
+CloseAll/Caption: Alle Schließen
 CloseAll/Hint: Alle Tiddler schließen
-CloseOthers/Caption: andere schließen
+CloseOthers/Caption: Andere Schließen
 CloseOthers/Hint: Alle anderen Tiddler schließen
-ControlPanel/Caption: Control Panel
-ControlPanel/Hint: Öffne das "Control Panel"
-Delete/Caption: löschen
+ControlPanel/Caption: Control-Panel
+ControlPanel/Hint: Öffne das Control-Panel
+Delete/Caption: Löschen
 Delete/Hint: Lösche diesen Tiddler
-Edit/Caption: bearbeiten
+Edit/Caption: Bearbeiten
 Edit/Hint: Bearbeite diesen Tiddler
-Encryption/Caption: verschlüsseln
+Encryption/Caption: Verschlüsselung
 Encryption/Hint: Aktivieren oder löschen des Passworts für dieses Wiki
-Encryption/ClearPassword/Caption: Verschlüsselung deaktivieren
+Encryption/ClearPassword/Caption: Verschlüsselung Deaktivieren
 Encryption/ClearPassword/Hint: Lösche das Passwort und speichere ohne Verschlüsselung
-Encryption/SetPassword/Caption: verschlüsseln
+Encryption/SetPassword/Caption: Verschlüsselung
 Encryption/SetPassword/Hint: Definiert ein Passwort, um dieses Wiki zu verschlüsseln
+ExportPage/Caption: Alle Exportieren
+ExportPage/Hint: Alle Tiddler exportieren
+ExportTiddler/Caption: Exportieren
+ExportTiddler/Hint: Diesen Tiddler Exportieren
+ExportTiddlers/Caption: Mehrere Exportieren
+ExportTiddlers/Hint: Mehrere Tiddler Exportieren
 FullScreen/Caption: Vollbild
-FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-modus
+FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-Modus
 Import/Caption: Import
 Import/Hint: Importiere Dateien
-Info/Caption: info
+Info/Caption: Info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
-Home/Caption: home
+Home/Caption: Home
 Home/Hint: Öffnen der Standard-Tiddler
 Language/Caption: Sprache
 Language/Hint: Auswahldialog für die Systemsprache
 More/Caption: mehr
 More/Hint: Weitere Aktionen
-NewHere/Caption: neu hier
+NewHere/Caption: Neu Hier
 NewHere/Hint: Erstelle einen neuen Tiddler der mit diesem getaggt ist
-NewJournal/Caption: neues Journal
+NewJournal/Caption: Neues Journal
 NewJournal/Hint: Erstelle einen neuen Journal-Tiddler
-NewJournalHere/Caption: neues Journal hier
+NewJournalHere/Caption: Neues Journal Hier
 NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
-NewTiddler/Caption: neuer Tiddler
+NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
-Permalink/Caption: permalink
+Permalink/Caption: Permalink
 Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
-Permaview/Caption: permaview
+Permaview/Caption: Permaview
 Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser [[Story]]
-Refresh/Caption: aktualisieren
+Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
-Save/Caption: speichern
+Save/Caption: Speichern
 Save/Hint: Speichere diesen Tiddler
 SaveWiki/Caption: Speichern
 SaveWiki/Hint: Das Wiki speichern
-StoryView/Caption: Story Modus
+StoryView/Caption: Story-Modus
 StoryView/Hint: Auswahl des Anzeigemodus für die [[Story]]
-HideSideBar/Caption: Sidebar ausblenden
+HideSideBar/Caption: Sidebar Ausblenden
 HideSideBar/Hint: Sidebar ausblenden
-ShowSideBar/Caption: Sidebar einblenden
+ShowSideBar/Caption: Sidebar Einblenden
 ShowSideBar/Hint: Sidebar einblenden
-TagManager/Caption: Tag Manager
-TagManager/Hint: Öffne den "Tag Manager"
-Theme/Caption: Thema
-Theme/Hint: Thema auswählen
+TagManager/Caption: Tag-Manager
+TagManager/Hint: Öffne den Tag-Manager
+Theme/Caption: Theme
+Theme/Hint: Theme auswählen

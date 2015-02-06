@@ -1,0 +1,19 @@
+{
+    "description": "Configuration en mode serveur de l'édition fr-FR",
+    "plugins": [
+        "tiddlywiki/tiddlyweb",
+        "tiddlywiki/filesystem",
+        "tiddlywiki/codemirror",
+        "tiddlywiki/highlight"
+    ],
+    "themes": [
+        "tiddlywiki/vanilla"
+    ],
+    "includeWikis": [
+        "../fr-FR"
+    ],
+    "config": {
+        "retain-original-tiddler-path": true,
+        "default-tiddler-location": "../fr-FR/tiddlers"
+    }
+}

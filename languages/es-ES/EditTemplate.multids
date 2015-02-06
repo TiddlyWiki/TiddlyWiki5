@@ -1,0 +1,25 @@
+title: $:/language/EditTemplate/
+
+Body/External/Hint: Este es un tiddler externo guardado fuera del archivo TiddlyWiki principal. Se puede editar las etiquetas y campos pero no se puede editar directamente el contenido
+Body/Hint: Usar [[texto wiki (instrucciones en inglés)|http://tiddlywiki.com/static/WikiText.html]] para añadir formato, imágenes y efectos dinámicos.
+Body/Placeholder: Escribir el texto de este tiddler
+Body/Preview/Button/Hide: ocultar vista previa
+Body/Preview/Button/Show: mostrar vista previa
+Field/Remove/Caption: eliminar campo
+Field/Remove/Hint: Eliminar campo
+Fields/Add/Button: añadir
+Fields/Add/Name/Placeholder: nombre del campo
+Fields/Add/Prompt: Añadir un nuevo campo:
+Fields/Add/Value/Placeholder: valor del campo
+Shadow/OverriddenWarning: Este es un tiddler oculto modificado. Puede restituirlo a su versión por defecto borrando este tiddler
+Shadow/Warning: Este es un tiddler oculto. Cualquier cambio que haga reemplazará la versión por defecto
+Tags/Add/Button: añadir
+Tags/Add/Placeholder: nombre de etiqueta
+Tags/Dropdown/Caption: lista de etiquetas
+Tags/Dropdown/Hint: Mostrar lista de etiquetas
+Type/Delete/Caption: borrar tipo de contenido
+Type/Delete/Hint: Borrar tipo de contenido
+Type/Dropdown/Caption: lista de tipos de contenido
+Type/Dropdown/Hint: Mostrar lista de tipos de contenido
+Type/Placeholder: tipo de contenido
+Type/Prompt: Tipo:

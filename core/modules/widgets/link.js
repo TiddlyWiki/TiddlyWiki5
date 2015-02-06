@@ -106,8 +106,8 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	this.domNodes.push(domNode);
 };
 
-LinkWidget.prototype.handleClickEvent = function (event) {
-	// Send the click on it's way as a navigate event
+LinkWidget.prototype.handleClickEvent = function(event) {
+	// Send the click on its way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
 		type: "tm-navigate",
@@ -155,7 +155,7 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 			dataTransfer.clearData();
 			var jsonData = this.wiki.getTiddlerAsJson(this.to),
 				textData = this.wiki.getTiddlerText(this.to,""),
-				title = this.to.indexOf(" ") === -1 ? this.to : "[[" + this.to + "]]";
+				title = (new RegExp("^" + $tw.config.textPrimitives.wikiLink + "$","mg")).exec(this.to) ? this.to : "[[" + this.to + "]]";
 			// IE doesn't like these content types
 			if(!$tw.browser.isIE) {
 				dataTransfer.setData("text/vnd.tiddler",jsonData);

@@ -1,15 +1,13 @@
 created: 20141002133113496
-modified: 20141002230631361
+modified: 20150107121000000
 tags: Reference
 title: Variables
 type: text/vnd.tiddlywiki
 
-Variables together with [[Widgets]] and [[Macros]] are essential for dynamic WikiText.
+[[Variables]] are an essential component of dynamic WikiText, as are [[Widgets]] and [[Macros]]. In fact, a variable is a shorthand of a macro.
 
-You can define your own [[Variables in WikiText]] or use built-in variables.
-
-More detailed information of built-in variables could be found in below:
+You can define custom [[Variables in WikiText]] or use one of the standard variables...
 
 <<list-links "[tag[Variables]]">>
 
-See also DumpVariablesMacro
+The [[<<dumpvariables>>|DumpVariablesMacro]] macro lists all variables defined in the current scope, allowing you to see and edit their values.

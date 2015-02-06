@@ -19,7 +19,7 @@ exports.has = function(source,operator,options) {
 	var results = [];
 	if(operator.prefix === "!") {
 		source(function(tiddler,title) {
-			if(tiddler && (!$tw.utils.hop(tiddler.fields,operator.operand) || tiddler.fields[operator.operand] === "")) {
+			if(!tiddler || (tiddler && (!$tw.utils.hop(tiddler.fields,operator.operand) || tiddler.fields[operator.operand] === ""))) {
 				results.push(title);
 			}
 		});

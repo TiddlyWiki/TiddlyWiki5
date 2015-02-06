@@ -62,7 +62,7 @@ exports.startup = function() {
 		timerId;
 	function refresh() {
 		// Process the refresh
-		$tw.pageWidgetNode.refresh(deferredChanges,$tw.pageContainer,null);
+		$tw.pageWidgetNode.refresh(deferredChanges);
 		deferredChanges = Object.create(null);
 	}
 	// Add the change event handler

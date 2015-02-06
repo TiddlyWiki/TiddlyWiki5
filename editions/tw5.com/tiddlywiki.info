@@ -1,11 +1,11 @@
 {
 	"description": "Documentation from http://tiddlywiki.com",
 	"plugins": [
-		"tiddlywiki/cecily",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
-		"tiddlywiki/browser-sniff"
+		"tiddlywiki/browser-sniff",
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -13,7 +13,6 @@
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
-		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],
@@ -24,11 +23,16 @@
 		"en-GB",
 		"de-AT",
 		"de-DE",
+		"es-ES",
 		"fr-FR",
+		"nl-NL",
 		"zh-Hans",
 		"zh-Hant",
+		"hi-IN",
+		"pa-IN",
 		"it-IT",
 		"ja-JP",
+		"cs-CZ",
 		"ru-RU"
 	],
 	"build": {

@@ -1,7 +1,7 @@
 {
 	"description": "Developer documentation from http://tiddlywiki.com/dev/",
 	"plugins": [
-		"tiddlywiki/cecily",
+		"tiddlywiki/highlight",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon"
@@ -12,7 +12,6 @@
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
-		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],

@@ -1,0 +1,18 @@
+created: 20131219100544073
+fr-title: Mettre à niveau pour Node.js
+modified: 20141129081501675
+tags: [[TiddlyWiki on Node.js]]
+title: Upgrading TiddlyWiki on Node.js
+type: text/vnd.tiddlywiki
+
+Si vous avez installé [[TiddlyWiki sur Node.js|TiddlyWiki on Node.js]] de manière standard, vous pouvez le mettre à jour dès qu'une nouvelle version est publiée, à l'aide de la commande suivante<<dp>>
+
+```
+npm update -g tiddlywiki
+```
+
+Sur Mac ou Linux, vous devrez ajouter ''sudo''<<dp>>
+
+```
+sudo npm update -g tiddlywiki
+```

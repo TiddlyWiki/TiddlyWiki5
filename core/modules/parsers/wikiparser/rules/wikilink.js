@@ -23,23 +23,10 @@ Precede a camel case word with `~` to prevent it from being recognised as a link
 exports.name = "wikilink";
 exports.types = {inline: true};
 
-var textPrimitives = {
-	upperLetter: "[A-Z\u00c0-\u00d6\u00d8-\u00de\u0150\u0170]",
-	lowerLetter: "[a-z\u00df-\u00f6\u00f8-\u00ff\u0151\u0171]",
-	anyLetter:   "[A-Za-z0-9\u00c0-\u00d6\u00d8-\u00de\u00df-\u00f6\u00f8-\u00ff\u0150\u0170\u0151\u0171]",
-	blockPrefixLetters:	"[A-Za-z0-9-_\u00c0-\u00d6\u00d8-\u00de\u00df-\u00f6\u00f8-\u00ff\u0150\u0170\u0151\u0171]"
-};
-
-textPrimitives.unWikiLink = "~";
-textPrimitives.wikiLink = textPrimitives.upperLetter + "+" +
-	textPrimitives.lowerLetter + "+" +
-	textPrimitives.upperLetter +
-	textPrimitives.anyLetter + "*";
-
 exports.init = function(parser) {
 	this.parser = parser;
 	// Regexp to match
-	this.matchRegExp = new RegExp(textPrimitives.unWikiLink + "?" + textPrimitives.wikiLink,"mg");
+	this.matchRegExp = new RegExp($tw.config.textPrimitives.unWikiLink + "?" + $tw.config.textPrimitives.wikiLink,"mg");
 };
 
 /*
@@ -51,12 +38,12 @@ exports.parse = function() {
 	// Move past the macro call
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// If the link starts with the unwikilink character then just output it as plain text
-	if(linkText.substr(0,1) === textPrimitives.unWikiLink) {
+	if(linkText.substr(0,1) === $tw.config.textPrimitives.unWikiLink) {
 		return [{type: "text", text: linkText.substr(1)}];
 	}
 	// If the link has been preceded with a blocked letter then don't treat it as a link
 	if(this.match.index > 0) {
-		var preRegExp = new RegExp(textPrimitives.blockPrefixLetters,"mg");
+		var preRegExp = new RegExp($tw.config.textPrimitives.blockPrefixLetters,"mg");
 		preRegExp.lastIndex = this.match.index-1;
 		var preMatch = preRegExp.exec(this.parser.source);
 		if(preMatch && preMatch.index === this.match.index-1) {

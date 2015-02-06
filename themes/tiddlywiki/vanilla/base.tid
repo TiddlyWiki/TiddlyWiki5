@@ -139,6 +139,7 @@ table tfoot tr td {
 ** Links
 */
 
+button.tc-tiddlylink,
 a.tc-tiddlylink {
 	text-decoration: none;
 	font-weight: normal;
@@ -154,6 +155,7 @@ a.tc-tiddlylink {
 	color: <<colour sidebar-tiddler-link-foreground-hover>>;
 }
 
+button.tc-tiddlylink:hover,
 a.tc-tiddlylink:hover {
 	text-decoration: underline;
 }
@@ -354,6 +356,10 @@ button.tc-untagged-label {
 	fill: <<colour tag-foreground>>;
 }
 
+.tc-tag-manager-table .tc-tag-label {
+	white-space: normal;
+}
+
 .tc-tag-manager-tag {
 	width: 100%;
 }
@@ -469,6 +475,7 @@ button.tc-untagged-label {
 	.tc-sidebar-header {
 		padding: 14px;
 		min-height: 32px;
+		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 	}
 
 	.tc-story-river {
@@ -591,6 +598,7 @@ button.tc-untagged-label {
 	.tc-tiddler-frame {
 		padding: 28px 42px 42px 42px;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth}};
+		border-radius: 2px;
 	}
 
 <<if-no-sidebar "
@@ -613,6 +621,10 @@ button.tc-untagged-label {
 	line-height: 1.2em;
 	color: <<colour tiddler-title-foreground>>;
 	margin: 0;
+}
+
+.tc-tiddler-title-icon {
+	vertical-align: middle;
 }
 
 .tc-system-title-prefix {
@@ -647,8 +659,13 @@ button.tc-untagged-label {
 	font-size: 0.6em;
 }
 
-.tc-tiddler-controls button {
+.tc-tiddler-controls .tc-drop-down .tc-drop-down {
+	font-size: 1em;
+}
+
+.tc-tiddler-controls > span > button {
 	vertical-align: baseline;
+	margin-left:5px;
 }
 
 .tc-tiddler-controls button svg, .tc-tiddler-controls button img {
@@ -903,7 +920,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-drop-down {
-	min-width: 280px;
+	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
 	padding: 7px 0 7px 0;
@@ -911,6 +928,10 @@ canvas.tc-edit-bitmapeditor  {
 	white-space: nowrap;
 	text-shadow: none;
 	line-height: 1.4;
+}
+
+.tc-drop-down .tc-drop-down {
+	margin-left: 14px;
 }
 
 .tc-drop-down button svg, .tc-drop-down a svg  {
@@ -986,7 +1007,7 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-block-dropdown {
 	position: absolute;
-	min-width: 280px;
+	min-width: 220px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
 	padding: 7px 0;
@@ -1094,7 +1115,7 @@ canvas.tc-edit-bitmapeditor  {
 	position: fixed;
 	top: 14px;
 	right: 42px;
-	z-index: 1000;
+	z-index: 1300;
 	max-width: 280px;
 	padding: 0 14px 0 14px;
 	background-color: <<colour notification-background>>;
@@ -1147,6 +1168,8 @@ canvas.tc-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border>>;
 	border-top: 1px solid <<colour tab-border>>;
 	border-right: 1px solid <<colour tab-border>>;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
 }
 
 .tc-tab-buttons.tc-vertical button {
@@ -1158,6 +1181,8 @@ canvas.tc-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border>>;
 	border-bottom: 1px solid <<colour tab-border>>;
 	border-right: none;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
 }
 
 .tc-tab-buttons.tc-vertical button.tc-tab-selected {
@@ -1185,6 +1210,10 @@ canvas.tc-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
+}
+
+.tc-sidebar-lists .tc-tab-buttons {
+	margin-bottom: -1px;
 }
 
 .tc-sidebar-lists .tc-tab-buttons button.tc-tab-selected {

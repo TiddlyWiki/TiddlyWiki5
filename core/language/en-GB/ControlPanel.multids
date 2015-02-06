@@ -56,7 +56,7 @@ Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
 Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://me.com/store.php`.//
 Saving/TiddlySpot/Password: Password
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
@@ -94,3 +94,5 @@ Toolbars/PageControls/Caption: Page Toolbar
 Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
+Tools/Download/Full/Caption: Download full wiki
+

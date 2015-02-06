@@ -34,10 +34,10 @@ Retaining the content when hidden can give poor performance since the hidden con
 
 Here's a simple example of showing and hiding content with buttons:
 
-<<wikitext-example-without-html '<$button set="$:/SampleRevealState1" setTo="show">Show me</$button>
-<$button set="$:/SampleRevealState1" setTo="hide">Hide me</$button>
+<<wikitext-example-without-html '<$button set="$:/state/SampleReveal1" setTo="show">Show me</$button>
+<$button set="$:/state/SampleReveal1" setTo="hide">Hide me</$button>
 
-<$reveal type="match" state="$:/SampleRevealState1" text="show">
+<$reveal type="match" state="$:/state/SampleReveal1" text="show">
 
 ! This is the revealed content
 And this is some text
@@ -48,14 +48,14 @@ And this is some text
 
 A slider appears as a single button that can be used to toggle the display of the contained content.
 
-<<wikitext-example-without-html '<$reveal type="nomatch" state="$:/SampleRevealState2" text="show">
+<<wikitext-example-without-html '<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
 
-<$button set="$:/SampleRevealState2" setTo="show">Show me</$button>
+<$button set="$:/state/SampleReveal2" setTo="show">Show me</$button>
 
 </$reveal>
-<$reveal type="match" state="$:/SampleRevealState2" text="show">
+<$reveal type="match" state="$:/state/SampleReveal2" text="show">
 
-<$button set="$:/SampleRevealState2" setTo="hide">Hide me</$button>
+<$button set="$:/state/SampleReveal2" setTo="hide">Hide me</$button>
 
 ! This is the revealed content
 And this is some text

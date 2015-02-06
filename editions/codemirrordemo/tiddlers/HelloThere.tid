@@ -8,4 +8,4 @@ To add the plugin to your own TiddlyWiki5, just drag this link to the browser wi
 
 [[$:/plugins/tiddlywiki/codemirror]]
 
-{{$:/plugins/tiddlywiki/codemirror/instructions}}
+{{$:/plugins/tiddlywiki/codemirror/readme}}

@@ -9,6 +9,6 @@ Listing/Title/Caption: Titel
 Upgrader/Plugins/Suppressed/Incompatible: Blokeret inkompatibelt eller forældet plugin 
 Upgrader/Plugins/Suppressed/Version: Blokeret plugin (pga. at indkommende <<incoming>>  er ældre end det eksisterende <<existing>>)
 Upgrader/Plugins/Upgraded: Upgraderet plugin fra <<incoming>> til <<upgraded>>
-Upgrader/State/Suppressed: Blokret temporær status tiddler
+Upgrader/State/Suppressed: Blokeret temporær status tiddler
 Upgrader/System/Suppressed: Blokeret system tiddler
 Upgrader/ThemeTweaks/Created: Migreret tema tweak fra <$text text=<<from>>/>

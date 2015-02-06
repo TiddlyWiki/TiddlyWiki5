@@ -1,0 +1,13 @@
+title: GettingStarted
+
+Bienvenido a TiddlyWiki y a la comunidad TiddlyWiki.
+
+Antes de que usted empiece a guardar información en TiddlyWiki es importante que se asegure que puede guardar cambios de manera fiable. Visite http://tiddlywiki.com/#GettingStarted para más información (en idioma inglés)
+
+!! Configurar este TiddlyWiki
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+
+Vea más opciones en el panel de control.

@@ -1,0 +1,14 @@
+created: 20141115220312678
+modified: 20141115220543951
+title: $:/Acknowledgements
+type: text/vnd.tiddlywiki
+
+TiddlyWiki intègre du code provenant de ces excellents projets OpenSource<<dp>>
+
+* [[The Stanford Javascript Crypto Library|http://bitwiseshiftleft.github.io/sjcl/]]
+* [[The Jasmine JavaScript Test Framework|http://pivotal.github.io/jasmine/]]
+* [[Normalize.css by Nicolas Gallagher|http://necolas.github.io/normalize.css/]]
+
+Et des contenus provenenant de ces sources<<dp>>
+
+* Icônes des drapeaux du monde de [[Wikipedia|http://commons.wikimedia.org/wiki/Category:SVG_flags_by_country]]

@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Establece el directorio de salida para comandos subsiguientes
+
+Establece el directorio de salida para comandos subsiguientes. El directorio por defecto es el subdirectorio `output`, en el directorio de la edición.
+
+```
+--output <pathname>
+```
+
+Si la ruta especificada es relativa, se interpreta como relativa al directorio de trabajo actual. Por ejemplo: `--output .` establece como directorio de salida al directorio de trabajo actual. 

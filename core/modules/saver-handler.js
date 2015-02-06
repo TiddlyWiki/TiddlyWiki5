@@ -75,14 +75,14 @@ function SaverHandler(options) {
 			}
 		});
 		// Set up our beforeunload handler
-		window.addEventListener("beforeunload",function(event) {
+		window.onbeforeunload = function(event) {
 			var confirmationMessage;
 			if(self.isDirty()) {
 				confirmationMessage = $tw.language.getString("UnsavedChangesWarning");
 				event.returnValue = confirmationMessage; // Gecko
 			}
 			return confirmationMessage;
-		});
+		};
 	}
 	// Install the save action handlers
 	if($tw.browser) {

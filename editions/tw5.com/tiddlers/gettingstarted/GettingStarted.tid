@@ -1,5 +1,5 @@
 created: 20131129090249275
-modified: 20140916140523223
+modified: 20150128172523223
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
 type: text/vnd.tiddlywiki
@@ -12,6 +12,10 @@ Instructions for getting started using TiddlyWiki on the different platforms and
 <$set name="browser-name" value={{$:/info/browser/name}}>
 <$macrocall $name="tabs" state="$:/state/tabs/platform" tabsList="[prefix[GettingStarted - ]]" default=<<default-platform>> class="tc-vertical"/>
 </$set>
+
+Troubleshooting:
+
+* Don't attempt to use the browser ''File''/''Save'' menu option to save changes (it doesn't work)
 
 See also:
 

@@ -1,0 +1,35 @@
+fr-title: La première règle d'utilisation de TiddlyWiki
+created: 20140419132828051
+modified: 20141116114839786
+tags: [[Working with TiddlyWiki]]
+title: The First Rule of Using TiddlyWiki
+type: text/vnd.tiddlywiki
+
+! Histoires épouvantables
+
+Il arrive régulièrement que des utilisateurs de <<tw>> nous rapportent des histoires à tordre le cœur concernant des pertes de données personnelles dans les groupes de discussion<<dp>>
+
+> Tout mon <<tw>> s'est volatilisé lorsque Firefox a crashé pendant l'enregistrement d'un tiddler.
+
+https://groups.google.com/d/topic/tiddlywiki/oG2L7OXhUoI/discussion
+
+> La dernière fois que je l'ai utilisé, c'était hier soir à la maison sur mon ordinateur Windows 7 ; j'ai cliqué sur la coche de validation pour terminer d'éditer ma dernière note, ce qui a déclenché l'enregistrement via TiddlyFox, et j'ai éjecté ma clé USB. Je suis arrivé au bureau ce matin, j'ai branché ma clé USB, entré mon mot de passe TW5, mais il n'a pas voulu s'ouvrir après plusieurs tentatives. J'ai exploré mes répertoires à la recherche de mon fichier html TW5 et j'ai remarqué qu'il ne pesait plus 3Mo, mais 80Ko. Ce qui me conduit à penser que j'ai tout perdu.
+
+https://groups.google.com/d/topic/tiddlywiki/SXStDJ0ntGI/discussion
+
+Arrangez-vous pour que cela ne vous arrive jamais !
+
+!! La première règle d'utilisation de <<tw>> est
+
+<p style="font-size:40pt;line-height:48pt;font-weight:700;color:red;">
+Sauvegardez vos données !
+</p>
+
+TiddlyWiki est un système très souple et personnalisable, qui vous rend responsable de vos données. Un grand soin est porté lors du développement de <<tw>> à s'assurer que c'est un lieu sûr pour préserver vos données les plus précieuses, mais au bout du compte, c'est aux utilisateurs que revient la responsabilité de limiter les risques d'une perte de données.
+
+La meilleure façon de s'assurer que vos données sont en sécurité est de mettre en œuvre une procédure de sauvegarde rigoureuse<<dp>>
+
+* Pensez à utiliser des services du type Dropbox pour sauvegarder continuellement vos données personnelles sur le //cloud//. (Dropbox dispose d'une [[fonctionnalité intéressante|https://www.dropbox.com/help/11]] grâce à laquelle vous pouvez garder la trace des versions précédentes de vos fichiers)
+* Faites des sauvegardes avant de passer à une nouvelle version de <<tw>>
+* Protégez-vous des pires scénarios imaginables<<dp>> que ce passerait-il si votre clé USB ou votre disque dur tombe en panne. Et si votre ordinateur est attaqué par un virus de la pire espèce ?
+* Soyez sur vos gardes et pratiquez la redondance<<dp>> par exemple, ayez plusieurs exemplaires de vos sauvegardes, et conservez-les dans des endroits physiquement séparés.

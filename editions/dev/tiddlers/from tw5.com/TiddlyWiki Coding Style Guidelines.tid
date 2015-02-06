@@ -20,7 +20,7 @@ One blank line is used to separate blocks of code. Occasional blank lines are pe
 
 See the following example for layout of basic JavaScript constructs:
 
-```
+```js
 /*
 Multiline comments are used to introduce a block of code such as a function definition
 */

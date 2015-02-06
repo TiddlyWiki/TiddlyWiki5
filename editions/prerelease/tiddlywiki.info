@@ -1,7 +1,6 @@
 {
 	"description": "Content for the current prerelease",
 	"plugins": [
-		"tiddlywiki/cecily",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
@@ -13,20 +12,26 @@
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
-		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
+		"da-DK",
+	    "el-GR",
 		"en-US",
 		"en-GB",
 		"de-AT",
 		"de-DE",
+		"es-ES",
 		"fr-FR",
+		"nl-NL",
 		"zh-Hans",
 		"zh-Hant",
+		"hi-IN",
+		"pa-IN",
 		"it-IT",
 		"ja-JP",
+		"cs-CZ",
 		"ru-RU"
 	],
 	"includeWikis": [

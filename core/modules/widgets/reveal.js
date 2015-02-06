@@ -106,20 +106,18 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	if(this.stateTitle) {
-		var state = this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler"));
-		switch(this.type) {
-			case "popup":
-				this.readPopupState(state);
-				break;
-			case "match":
-				this.readMatchState(state);
-				break;
-			case "nomatch":
-				this.readMatchState(state);
-				this.isOpen = !this.isOpen;
-				break;
-		}
+	var state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	switch(this.type) {
+		case "popup":
+			this.readPopupState(state);
+			break;
+		case "match":
+			this.readMatchState(state);
+			break;
+		case "nomatch":
+			this.readMatchState(state);
+			this.isOpen = !this.isOpen;
+			break;
 	}
 };
 

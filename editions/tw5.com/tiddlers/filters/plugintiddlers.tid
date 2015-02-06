@@ -1,0 +1,15 @@
+created: 20140410103123179
+modified: 20150124200549000
+tags: [[Filter Operators]] [[Special Operators]]
+title: plugintiddlers Operator
+type: text/vnd.tiddlywiki
+caption: plugintiddlers
+purpose: select all shadow titles in the input plugins
+
+<$macrocall $name=".operator-def"
+input="a [[selection|Title Selection]] of plugin tiddler titles"
+parameter="none"
+output="all shadow titles contained in the input plugins"
+/>
+
+<<.operator-examples "plugintiddlers">>

@@ -1,0 +1,10 @@
+caption: makelibrary
+created: 20140903085210479
+modified: 20141115222324590
+tags: Commands
+title: MakeLibraryCommand
+type: text/vnd.tiddlywiki
+
+{{$:/language/Help/makelibrary}}
+
+Voir le [[mécanisme de mise à jour|UpgradeMechanism]] pour plus de détails.

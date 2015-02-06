@@ -39,10 +39,16 @@ BrowseWidget.prototype.render = function(parent,nextSibling) {
 	if(this.browseMultiple) {
 		domNode.setAttribute("multiple","multiple");
 	}
+	if(this.tooltip) {
+		domNode.setAttribute("title",this.tooltip);
+	}
+	if(this.nwsaveas) {
+		domNode.setAttribute("nwsaveas",this.nwsaveas);
+	}
 	// Add a click event handler
 	domNode.addEventListener("change",function (event) {
 		if(self.message) {
-			self.dispatchEvent({type: self.message, param: event.target.files});
+			self.dispatchEvent({type: self.message, param: self.param, files: event.target.files});
 		} else {
 			self.wiki.readFiles(event.target.files,function(tiddlerFieldsArray) {
 				self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify(tiddlerFieldsArray)});
@@ -62,6 +68,9 @@ Compute the internal state of the widget
 BrowseWidget.prototype.execute = function() {
 	this.browseMultiple = this.getAttribute("multiple");
 	this.message = this.getAttribute("message");
+	this.param = this.getAttribute("param");
+	this.tooltip = this.getAttribute("tooltip");
+	this.nwsaveas = this.getAttribute("nwsaveas");
 };
 
 /*

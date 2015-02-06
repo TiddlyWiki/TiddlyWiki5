@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Annuleer
+Listing/Hint: Deze tiddlers staan klaar voor import:
+Listing/Import/Caption: Import
+Listing/Select/Caption: Selecteer
+Listing/Status/Caption: Status
+Listing/Title/Caption: Titel
+Upgrader/Plugins/Suppressed/Incompatible: Geblokkeerde plugin (incompatibel of verouderd)
+Upgrader/Plugins/Suppressed/Version: Geblokkeerde plugin (te importeren <<incoming>>  ouder dan bestaande <<existing>>)
+Upgrader/Plugins/Upgraded: Plugin opgewaardeerd van <<incoming>> naar <<upgraded>>
+Upgrader/State/Suppressed: Geblokkeerde tijdelijke statustiddler
+Upgrader/System/Suppressed: Geblokkeerde systeemtiddler
+Upgrader/ThemeTweaks/Created: Gemigreerde thema-aanpassing van <$text text=<<from>>/>

@@ -24,6 +24,12 @@ Encryption/ClearPassword/Hint: パスワードと暗号化を解除します
 Encryption/Hint: Wikiを保存するときのパスワードの設定/解除をします
 Encryption/SetPassword/Caption: パスワードの設定
 Encryption/SetPassword/Hint: パスワードを設定してwikiを暗号化します
+ExportPage/Caption: すべてエクスポート
+ExportPage/Hint: すべてのtiddlerをエクスポートします。
+ExportTiddler/Caption: tiddlerをエクスポート
+ExportTiddler/Hint: tiddlerをエクスポート
+ExportTiddlers/Caption: tiddlerをエクスポート
+ExportTiddlers/Hint: tiddlerをエクスポート
 FullScreen/Caption: フルスクリーン
 FullScreen/Hint: フルスクリーンで表示、またはフルスクリーン表示を解除します
 HideSideBar/Caption: サイドバーを消す

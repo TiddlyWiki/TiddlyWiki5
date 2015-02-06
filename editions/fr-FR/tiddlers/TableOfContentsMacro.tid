@@ -1,0 +1,51 @@
+caption: toc
+created: 20140919155729620
+modified: 20150105102807522
+tags: Macros
+title: TableOfContentsMacro
+type: text/vnd.tiddlywiki
+
+La macro //~TableOfContents// (Table des Matières) produit une arborescence hiérarchique de tiddlers, en se basant sur leurs tags.
+
+Les entrées de premier niveau de la table des matières sont définies par un tag racine. Les sous-entrées de chacune de ces entrées sont taguées avec le titre de l'entrée. Les entrées peuvent être triées à l'aide du champ `list` du tiddler de tag correspondant, comme décrit dans [[Tagging]].
+
+Le libellé utilisé pour chaque entrée est tiré du champ ''caption'' s'il est présent<<;>> dans le cas contraire, c'est le titre (champ ''title'') qui est utilisé.
+
+Les entrées sont affichées sous forme de liens vers le tiddler correspondant, à moins que le tiddler contienne un champ ''toc-link'' avec la valeur ''no''. Dans les exemples ci-dessous, l'entrée SecondThree est configurée ainsi, de manière à ne pas apparaître comme un lien.
+
+Il existe plusieurs variantes de cette macro<<:>>
+
+* `<<toc>>` produit une arborescence hiérarchique de liens simple
+* `<<toc-expandable>>` produit une arborescence de liens développable
+* `<<toc-selective-expandable>>` produit une arborescence de liens développable où les boutons développer / contracter ne sont affichés que pour les entrées qui possèdent des nœuds fils
+
+Les macros génèrent des listes HTML ordonnées. Les éléments `<ol>` bénéficient de la classe `tc-toc`, ceux de la variante //expandable// bénéficiant également de la classe `tc-toc-expandable` tandis que ceux de la variante //selective expandable// bénéficient de la classe `tc-toc-selective-expandable`.
+
+! Paramètres
+
+|!Position |!Nom |!Description |!Défaut |
+|1^^re^^ |tag |Le tag racine qui identifie le premier niveau de la hiérachie | |
+|2^^e^^ |sort |Sous-fitre optionnel de tri (par exemple `sort[title]`) | |
+
+Les paramètres ''tag'' et ''sort'' sont combinés pour construire une expression de filtre de la forme<<:>>
+
+```
+[tag[$tag$]$sort$]
+```
+
+! Exemples
+
+Dans les exemples suivants, les entrées de premier niveau de la table des matières sont définies par leur tag racine ''Contents''. Les sous-entrées sous chacune de ces entrées sont taguées avec le titre de leur parent, ici ''First'', ''Second'', ''Third'', et ''Fourth''. Au niveau du dessous, seul ''~SecondThree'' comporte des sous-entrées.
+
+Voici la structure des tags, affichée à l'aide de pastilles de tag cliquables<<:>>
+
+{{Contents||$:/core/ui/TagTemplate}}
+*{{First||$:/core/ui/TagTemplate}}
+*{{Second||$:/core/ui/TagTemplate}}
+**{{SecondThree||$:/core/ui/TagTemplate}}
+*{{Third||$:/core/ui/TagTemplate}}
+*{{Fourtth||$:/core/ui/TagTemplate}}
+
+Pour des instructions sur la manière d'ajouter une table des matières dans la barre latérale, voyez<<:>> [[Comment ajouter un nouvel onglet dans la barre latérale|How to add a new tab to the sidebar]].
+
+<<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>

@@ -1,0 +1,18 @@
+created: 20140211171341271
+modified: 20141014165441688
+tags: Concepts Reference
+title: Macros
+type: text/vnd.tiddlywiki
+
+Les macros sont des bouts de texte qui peuvent être insérés à l'aide d'un raccourci concis<<dp>>
+
+```
+<<maMacro>>
+```
+
+Vous pouvez écrire vos propres [[macros en WikiText|Macros in WikiText]] ou pour plus de souplesse, vous pouvez écrire des [[macros en Javascript|JavaScript Macros]].
+
+Les macros suivantes sont fournies avec <<tw>><<dp>>
+
+<<list-links "[tag[Macros]]">>
+

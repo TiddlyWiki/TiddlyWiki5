@@ -27,6 +27,7 @@ Filters are noted as strings and can look like
 ```
 [tag[task]!tag[done]interesting[very]]
 ```
+
 This example would (implicitly) put all available tiddlers into the pipe.
 The first operator ``tag[task]`` would only pass tiddlers which are tagged with "task".
 The ``!tag[done]`` operator is negated and only passes tiddlers which are not tagged with "done".
@@ -39,6 +40,7 @@ An example would be the search-operator. This filter operator looks for the sear
 If the provided filter operators are not enough, a developer can add new filters by adding a module with the ``filteroperator`` type.
 
 !!! System Tags
+
 Tags and the filter mechanism are used throughout the core plug-in for internal puproses.
 Tags which start with ``$:/`` are normally hidden from the casual user, similar to [[System Tiddlers]]
 

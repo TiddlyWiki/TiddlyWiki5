@@ -1,0 +1,13 @@
+title: BrowserCompatibility
+tags: [[Working with TiddlyWiki]]
+
+TiddlyWiki is designed to work with HTML5-compatible browsers.
+
+The following table summarises the browser versions that are known to work with TiddlyWiki
+
+|!Browser |!Status |
+|Internet Explorer |Version 10 and above |
+|Chrome |All recent versions |
+|Firefox |All recent versions |
+|Firefox for Android |All recent versions |
+|Safari |Version 6 and above |

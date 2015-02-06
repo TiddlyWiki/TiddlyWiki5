@@ -1,0 +1,20 @@
+created: 20141016155212150
+modified: 20141116090049122
+tags: Lexique
+title: Tirets
+type: text/vnd.tiddlywiki
+
+<<<
+Le tiret est un signe de ponctuation. Il ne doit pas être confondu avec le trait d’union et le signe moins. Il existe trois types de tirets, en fonction de leur longueur : le tiret court, le tiret moyen et le tiret long.
+<<< Wikipedia : http://fr.wikipedia.org/wiki/Tiret
+
+| Caractère | CP1252 | Code HTML | Noms | Usages |h
+|- |Alt 45 |`&#x002d;` |trait d'union-signe moins (celui du clavier) |trait d'union, signe moins |
+|‐ | |`&#x2010;` |trait d'union, tiret court, tiret quart de cadratin |trait d'union |
+|− | |`&minus;` |signe moins |signe moins |
+|– |Alt 0150 |`&ndash;` |tiret moyen, tiret demi-cadratin |tiret d'incise, tiret d'énumération, tiret de liste |
+|— |Alt 0151 |`&mdash;` |tiret long, tiret cadratin |tiret de dialogue |
+
+Illustration : − – + (signe moins, tiret moyen et signe plus)
+
+Voir aussi l'Atelier typographique : http://monsu.desiderio.free.fr/atelier/tiret.html

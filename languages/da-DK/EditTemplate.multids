@@ -1,10 +1,12 @@
 title: $:/language/EditTemplate/
 
-Body/External/Hint: Dette er en ekstern tiddler lagret udenfor hoved TiddlyWiki filen.Du kan redigere tags og felter men kan ikke direkte redigereselve  indholdet
+Body/External/Hint: Dette er en ekstern tiddler lagret udenfor hoved TiddlyWiki filen.Du kan redigere tags og felter men kan ikke direkte redigere selve  indholdet
 Body/Hint: Brug [[wiki text|http://tiddlywiki.com/static/WikiText.html]] til at tilføje formatering, billeder og dynamiske egenskaber
 Body/Placeholder: Skriv denne tiddlers tekst
 Body/Preview/Button/Hide: skjul forhåndsvisning
 Body/Preview/Button/Show: vis forhåndsvisning
+Field/Remove/Caption: fjern felt
+Field/Remove/Hint: Fjern felt
 Fields/Add/Button: tilføj
 Fields/Add/Name/Placeholder: felt navn
 Fields/Add/Prompt: Tilføj et nyt felt:
@@ -13,5 +15,11 @@ Shadow/OverriddenWarning: Dette er en ændret skygge tiddler. Du kan vende tilba
 Shadow/Warning: Dette er en skygge tiddler. Enhver ændring vil overskrive standard versionen
 Tags/Add/Button: tilføj
 Tags/Add/Placeholder: tag navn
+Tags/Dropdown/Caption: tag liste
+Tags/Dropdown/Hint: Vis tag liste
+Type/Delete/Caption: slet indholds type
+Type/Delete/Hint: Slet indholds type
+Type/Dropdown/Caption: indholds type liste
+Type/Dropdown/Hint: Vis indholds type liste
 Type/Placeholder: indholds type
 Type/Prompt: Type:

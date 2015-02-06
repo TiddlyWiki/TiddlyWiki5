@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 ! Prerequisites
 
-* [[TiddlyWiki on Node.js]]
+* [[TiddlyWiki on Node.js|http://tiddlywiki.com/#TiddlyWiki%20on%20Node.js]]
 * A GitHub account to submit the translation to tiddlywiki.com
 
 ! Setting Up
@@ -28,7 +28,7 @@ type: text/vnd.tiddlywiki
 
 Content of `plugin.info` for Joe Bloggs' Welsh translation:
 
-```
+```js
 {
 	"title": "$:/languages/cy-GB",
 	"name": "cy-GB",
@@ -39,7 +39,7 @@ Content of `plugin.info` for Joe Bloggs' Welsh translation:
 }
 ```
 
-MultiTiddlerFiles make it possible to pack the text of several tiddlers in a single text file, simplifying some editing tasks.
+[[MultiTiddlerFiles|http://tiddlywiki.com/#MultiTiddlerFiles]] make it possible to pack the text of several tiddlers in a single text file, simplifying some editing tasks.
 
 ! Handling Updates
 

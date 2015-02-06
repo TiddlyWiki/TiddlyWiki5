@@ -1,0 +1,72 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: geavanceerd zoeken
+AdvancedSearch/Hint: Geavanceerd zoeken
+Cancel/Caption: annuleer
+Cancel/Hint: Annuleer wijzigingen
+Clone/Caption: kloon
+Clone/Hint: Kloon deze tiddler
+Close/Caption: sluit
+Close/Hint: Sluit deze tiddler
+CloseAll/Caption: sluit alle
+CloseAll/Hint: Sluit alle tiddlers
+CloseOthers/Caption: sluit andere
+CloseOthers/Hint: Sluit alle andere tiddlers
+ControlPanel/Caption: bedieningspaneel
+ControlPanel/Hint: Open bedieningspaneel
+Delete/Caption: verwijder
+Delete/Hint: Verwijder deze tiddler
+Edit/Caption: wijzig
+Edit/Hint: Wijzig deze tiddler
+Encryption/Caption: versleuteling
+Encryption/ClearPassword/Caption: verwijder wachtwoord
+Encryption/ClearPassword/Hint: Verwijder het wachtwoord en sla de wiki onversleuteld op
+Encryption/Hint: Vul in / verwijder een wachtwoord om deze wiki op te slaan
+Encryption/SetPassword/Caption: vul wachtwoord in
+Encryption/SetPassword/Hint: Vul een wachtwoord in om deze wiki versleuteld op te slaan
+ExportPage/Caption: exporteer alle
+ExportPage/Hint: Exporteer alle tiddlers
+ExportTiddler/Caption: exporteer tiddler
+ExportTiddler/Hint: Exporteer tiddler
+ExportTiddlers/Caption: exporteer tiddlers
+ExportTiddlers/Hint: Exporteer tiddlers
+FullScreen/Caption: volledig scherm
+FullScreen/Hint: Start of verlaat 'volledig scherm'
+HideSideBar/Caption: verberg zijpaneel
+HideSideBar/Hint: Verberg zijpaneel
+Home/Caption: home
+Home/Hint: Open de standaard tiddlers
+Import/Caption: importeer
+Import/Hint: Importeer bestanden
+Info/Caption: info
+Info/Hint: Toon informatie over deze tiddler
+Language/Caption: taal
+Language/Hint: Kies de taal voor de gebruikersomgeving
+More/Caption: meer
+More/Hint: Meer mogelijkheden
+NewHere/Caption: nieuw hier
+NewHere/Hint: Maak een nieuwe tiddler gelabeld met deze tiddler
+NewJournal/Caption: nieuw journaal
+NewJournal/Hint: Maak een nieuwe journaaltiddler
+NewJournalHere/Caption: nieuw journaal hier
+NewJournalHere/Hint: Maak een nieuwe journaaltiddler gelabeld met deze tiddler
+NewTiddler/Caption: nieuwe tiddler
+NewTiddler/Hint: Maak een nieuwe tiddler
+Permalink/Caption: permalink
+Permalink/Hint: Zet browseradres als directe link naar deze tiddler
+Permaview/Caption: permaview
+Permaview/Hint: Zet browseradres als directe link naar alle open tiddlers
+Refresh/Caption: ververs
+Refresh/Hint: Ververs deze wiki
+Save/Caption: opslaan
+Save/Hint: Sla deze tiddler op
+SaveWiki/Caption: opslaan
+SaveWiki/Hint: Sla wijzigingen op
+ShowSideBar/Caption: toon zijpaneel
+ShowSideBar/Hint: Toon zijpaneel
+StoryView/Caption: story view
+StoryView/Hint: Kies de 'story' weergave
+TagManager/Caption: labelmanager
+TagManager/Hint: Open labelmanager
+Theme/Caption: thema
+Theme/Hint: Kies het thema

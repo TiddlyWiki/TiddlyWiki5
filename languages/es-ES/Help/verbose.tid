@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Genera modo de salida en texto indefinido
+
+Genera texto indefinido, útil para identificar errores
+
+```
+--verbose
+```

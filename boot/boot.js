@@ -62,14 +62,22 @@ $tw.utils.isDate = function(value) {
 Iterate through all the own properties of an object or array. Callback is invoked with (element,title,object)
 */
 $tw.utils.each = function(object,callback) {
-	var f;
+	var next,f;
 	if(object) {
 		if(Object.prototype.toString.call(object) == "[object Array]") {
-			object.forEach(callback);
+			for (f=0; f<object.length; f++) {
+				next = callback(object[f],f,object);
+				if(next === false) {
+					break;
+				}
+		    }
 		} else {
 			for(f in object) {
 				if(Object.prototype.hasOwnProperty.call(object,f)) {
-					callback(object[f],f,object);
+					next = callback(object[f],f,object);
+					if(next === false) {
+						break;
+					}
 				}
 			}
 		}
@@ -354,21 +362,20 @@ Returns true if the version string A is greater than the version string B. Retur
 */
 $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	var defaultVersion = {
-			major: 0,
-			minor: 0,
-			patch: 0
-		},
-		versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
-		versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
-		diff = [
-			versionA.major - versionB.major,
-			versionA.minor - versionB.minor,
-			versionA.patch - versionB.patch
-		];
+		major: 0,
+		minor: 0,
+		patch: 0
+	},
+	versionA = $tw.utils.parseVersion(versionStringA) || defaultVersion,
+	versionB = $tw.utils.parseVersion(versionStringB) || defaultVersion,
+	diff = [
+		versionA.major - versionB.major,
+		versionA.minor - versionB.minor,
+		versionA.patch - versionB.patch
+	];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] === 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
 };
 
 /*
@@ -391,11 +398,19 @@ $tw.utils.registerFileType = function(type,encoding,extension,options) {
 };
 
 /*
+Given an extension, always access the $tw.config.fileExtensionInfo
+using a lowercase extension only.
+*/
+$tw.utils.getFileExtensionInfo = function(ext) {
+	return ext ? $tw.config.fileExtensionInfo[ext.toLowerCase()] : null;
+}
+
+/*
 Given an extension, get the correct encoding for that file.
 defaults to utf8
 */
 $tw.utils.getTypeEncoding = function(ext) {
-	var extensionInfo = $tw.config.fileExtensionInfo[ext],
+	var extensionInfo = $tw.util.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null;
 	return typeInfo ? typeInfo.encoding : "utf8";
@@ -413,7 +428,7 @@ $tw.utils.evalGlobal = function(code,context,filename) {
 		contextValues.push(value);
 	});
 	// Add the code prologue and epilogue
-	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + ";})();\nreturn exports;\n})\n";
+	code = "(function(" + contextNames.join(",") + ") {(function(){\n" + code + "\n;})();\nreturn exports;\n})\n";
 	// Compile the code into a function
 	var fn;
 	if($tw.browser) {
@@ -930,7 +945,7 @@ $tw.Wiki = function(options) {
 
 	};
 
-	// Test for the existence of a tiddler
+	// Test for the existence of a tiddler (excludes shadow tiddlers)
 	this.tiddlerExists = function(title) {
 		return !!$tw.utils.hop(tiddlers,title);
 	};
@@ -1130,9 +1145,9 @@ $tw.Wiki.prototype.deserializeTiddlers = function(type,text,srcFields) {
 	srcFields = srcFields || Object.create(null);
 	var deserializer = $tw.Wiki.tiddlerDeserializerModules[type],
 		fields = Object.create(null);
-	if(!deserializer && $tw.config.fileExtensionInfo[type]) {
+	if(!deserializer && $tw.utils.getFileExtensionInfo(type)) {
 		// If we didn't find the serializer, try converting it from an extension to a content type
-		type = $tw.config.fileExtensionInfo[type].type;
+		type = $tw.utils.getFileExtensionInfo(type).type;
 		deserializer = $tw.Wiki.tiddlerDeserializerModules[type];
 	}
 	if(!deserializer && $tw.config.contentTypeInfo[type]) {
@@ -1379,7 +1394,7 @@ Load the tiddlers contained in a particular file (and optionally extract fields 
 */
 $tw.loadTiddlersFromFile = function(filepath,fields) {
 	var ext = path.extname(filepath),
-		extensionInfo = $tw.config.fileExtensionInfo[ext],
+		extensionInfo = $tw.utils.getFileExtensionInfo(ext),
 		type = extensionInfo ? extensionInfo.type : null,
 		typeInfo = type ? $tw.config.contentTypeInfo[type] : null,
 		data = fs.readFileSync(filepath,typeInfo ? typeInfo.encoding : "utf8"),
@@ -1529,7 +1544,7 @@ $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
 		env = process.env[envVar];
 	if(env) {
-		Array.prototype.push.apply(pluginPaths,env.split(":"));
+		Array.prototype.push.apply(pluginPaths,env.split(path.delimiter));
 	}
 	return pluginPaths;
 };
@@ -1897,6 +1912,35 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 		}
 	}
 	return true;
+};
+
+/*
+Global Hooks mechanism which allows plugins to modify default functionality
+*/
+$tw.hooks = $tw.hooks || { names: {}};
+ 
+/*
+Add hooks to the  hashmap 
+*/
+$tw.hooks.addHook = function(hookName,definition) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		$tw.hooks.names[hookName].push(definition);
+	}
+	else {
+		$tw.hooks.names[hookName] = [definition];
+	}
+};
+ 
+/*
+Invoke the hook by key 
+*/
+$tw.hooks.invokeHook = function(hookName, value) {
+	if($tw.utils.hop($tw.hooks.names,hookName)) {
+		for (var i = 0; i < $tw.hooks.names[hookName].length; i++) {
+			value = $tw.hooks.names[hookName][i](value);
+		}
+	}
+	return value;
 };
 
 /////////////////////////// Main boot function to decrypt tiddlers and then startup

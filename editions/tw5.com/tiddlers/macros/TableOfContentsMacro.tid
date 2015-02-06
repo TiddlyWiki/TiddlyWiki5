@@ -1,6 +1,6 @@
 caption: toc
 created: 20140919155729620
-modified: 20140919155735567
+modified: 20141117000000000
 tags: Macros
 title: TableOfContentsMacro
 type: text/vnd.tiddlywiki
@@ -45,5 +45,7 @@ Here is the tag structure shown with clickable tag pills:
 **{{SecondThree||$:/core/ui/TagTemplate}}
 *{{Third||$:/core/ui/TagTemplate}}
 *{{Fourtth||$:/core/ui/TagTemplate}}
+
+For instructions on adding a table of contents to the sidebar, see: [[How to add a new tab to the sidebar]].
 
 <<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>

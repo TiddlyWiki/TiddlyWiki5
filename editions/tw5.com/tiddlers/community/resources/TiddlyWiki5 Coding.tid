@@ -6,6 +6,8 @@ url: http://cjhunt.github.io/
 
 Chris Hunt's detailed developer tutorials for getting started with writing widgets for TiddlyWiki.
 
+{{!!url}}
+
 <<<
 These pages document aspects TiddlyWiki5 programming, sharing "lessons learned" to help developers to get started with TiddlyWiki5 customization and extension.
 

@@ -1,0 +1,53 @@
+created: 20150117152607000
+modified: 20150124180333000
+title: $:/editions/tw5.com/doc-macros
+tags: $:/tags/Macro
+
+\define .def(_) <dfn class="doc-def">$_$</dfn>
+\define .em(_) <em class="doc-em">$_$</em>
+\define .strong(_) <strong class="doc-strong">$_$</strong>
+\define .place(_) <code class="doc-place">$_$</code>
+\define .word(_) "$_$"
+
+\define .preamble(_) :.doc-preamble $_$
+\define .note(_)
+@@.doc-note
+;Note
+: $_$
+@@
+\end
+
+\define .tid(_) <code class="doc-tiddler">$_$</code>
+\define .tag(_) <code class="doc-tag">$_$</code>
+\define .field(_) <code class="doc-field">$_$</code>
+\define .value(_) <code class="doc-value">$_$</code>
+\define .op(_) <code class="doc-operator">$_$</code>
+\define .var(_) <code class="doc-var">$_$</code>
+\define .wid(_) <code class="doc-widget">$$_$</code>
+\define .attr(_) <code class="doc-attr">$_$</code>
+
+\define .otitle(_) $_$ Operator
+
+\define .link(_,to) <$link to="$to$">$_$</$link>
+\define .clink(_,to) <span class="doc-clink"><<.link """$_$""" "$to$">></span>
+\define .flink(to) <$macrocall $name=".link" _="<<.field {{$to$!!caption}}>>" to="$to$"/>
+\define .olink(_) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$_$">>/>
+\define .olink2(_,to) <$macrocall $name=".link" _=<<.op "$_$">> to=<<.otitle "$to$">>/>
+\define .wlink(to) <$macrocall $name=".link" _="<<.wid {{$to$!!caption}}>>" to="$to$"/>
+
+\define .key(_) <span class="doc-key">$_$</span>
+\define .combokey(_) <$macrocall $name=".if" cond="$_$" then="<<.key '$_$'>>"/>
+\define .keycombo(1,2,3,4) <<.combokey "$1$">><<.if "$2$" +>><<.combokey "$2$">><<.if "$3$" +>><<.combokey "$3$">><<.if "$4$" +>><<.combokey "$4$">>
+
+\define .tab(_) <span class="doc-tab">{{$_$!!caption}}</span>
+\define .sidebar-tab(_) <<.tab "$:/core/ui/SideBar/$_$">>
+\define .more-tab(_) <<.tab "$:/core/ui/MoreSideBar/$_$">>
+\define .info-tab(_) <<.tab "$:/core/ui/TiddlerInfo/$_$">>
+\define .controlpanel-tab(_) <<.tab "$:/core/ui/ControlPanel/$_$">>
+\define .advancedsearch-tab(_) <<.tab "$:/core/ui/AdvancedSearch/$_$">>
+\define .toc-tab() <<.tab "TableOfContents">>
+\define .example-tab(_) <span class="doc-tab">$_$</span>
+
+\define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+
+\define .state-prefix() $:/state/editions/tw5.com/

@@ -6,6 +6,7 @@ description: {{$:/language/Buttons/Language/Hint}}
 \define flag-title()
 $(languagePluginTitle)$/icon
 \end
+<span class="tc-popup-keep">
 <$button popup=<<qualify "$:/state/popup/language">> tooltip={{$:/language/Buttons/Language/Hint}} aria-label={{$:/language/Buttons/Language/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 <span class="tc-image-button">
@@ -18,10 +19,11 @@ $(languagePluginTitle)$/icon
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Language/Caption}}/></span>
 </$list>
 </$button>
+</span>
 <$reveal state=<<qualify "$:/state/popup/language">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down tc-drop-down-language-chooser">
 <$linkcatcher to="$:/language">
-<$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[title]]">
+<$list filter="[[$:/languages/en-GB]] [plugin-type[language]sort[description]]">
 <$link>
 <span class="tc-drop-down-bullet">
 <$reveal type="match" state="$:/language" text=<<currentTiddler>>>

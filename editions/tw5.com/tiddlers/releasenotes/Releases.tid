@@ -1,5 +1,5 @@
 created: 20131109105400007
-modified: 20140916132045295
+modified: 20141126153016142
 tags: About
 title: Releases
 type: text/vnd.tiddlywiki
@@ -8,4 +8,6 @@ Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versio
 
 (BetaReleases and AlphaReleases are listed separately).
 
-<<tabs "[tag[ReleaseNotes]!sort[created]]" "Release 5.1.4" "$:/state/tab2" "tc-vertical" "ReleaseTemplate">>
+<$list filter="[tag[ReleaseNotes]!sort[created]limit[1]]">
+  <$macrocall $name="tabs" tabsList="[tag[ReleaseNotes]!sort[created]]"default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />
+</$list>

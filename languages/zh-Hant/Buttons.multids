@@ -3,7 +3,7 @@ title: $:/language/Buttons/
 AdvancedSearch/Caption: 進階搜尋
 AdvancedSearch/Hint: 進階搜尋
 Cancel/Caption: 取消
-Cancel/Hint: 取消編輯此條目
+Cancel/Hint: 放棄對此條目的更改
 Clone/Caption: 複製
 Clone/Hint: 複製此條目
 Close/Caption: 關閉
@@ -56,8 +56,8 @@ Permaview/Caption: 固定連結
 Permaview/Hint: 設定瀏覽器網址列為直接連結到當前所有已開啟條目
 Refresh/Caption: 重新整理
 Refresh/Hint: 執行維基的完全刷新
-Save/Caption: 儲存
-Save/Hint: 儲存此條目
+Save/Caption: 確定
+Save/Hint: 確定對此條目的更改
 SaveWiki/Caption: 儲存變更
 SaveWiki/Hint: 儲存變更
 StoryView/Caption: 檢視模式

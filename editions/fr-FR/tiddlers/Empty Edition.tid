@@ -1,0 +1,12 @@
+fr-title: Édition « empty »
+created: 20140916213421041
+modified: 20141119192536463
+tags: Editions
+title: Empty Edition
+type: text/vnd.tiddlywiki
+
+L'édition <<gf "empty">> de ~TiddlyWiki est une distribution minimale, sans plugin additionnel ni configuration au-delà du code principal.
+
+L'édition //empty// peut être récupérée à l'adresse<<dp>>
+
+http://tiddlywiki.com/empty.html

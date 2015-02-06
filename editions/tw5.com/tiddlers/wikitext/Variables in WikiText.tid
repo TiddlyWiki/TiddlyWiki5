@@ -1,28 +1,79 @@
 caption: Variables
 created: 20141002141231992
-modified: 20141018104313995
+modified: 20150117152625000
 tags: WikiText
 title: Variables in WikiText
 type: text/vnd.tiddlywiki
 
-! Defining Variables
-Variables contains values defined by [[Widgets]].
-Variables are available within the widget that defines them, and the child widgets in the widget tree.
+\define tags() {{!!tags}}
 
-Variables are defined by:
+[[Variables]] contain values. They are available within the scope of the [[widget|Widgets]] in which they are defined, as well as all child widgets in the widget tree.
 
-* TiddlyWiki core and viewtemplate
-* SetWidget
-* ListWidget
-* [[Macro definition|Macros in WikiText]]
+!!Defining Variables
 
-! Using Variables
+Variables are defined by...
 
-Variables are used in:
+; [[Macros|Macros in WikiText]]
+: in fact, variables are macro shorthands (see example below)
+; SetWidget
+: sets a variable to a value
+; ListWidget
+: sets list-item and iterator variabes
+; TiddlyWiki
+: in the core and core templates
 
-* Variable substitution `$(name)$`
-* Concise shortcut  `<<name>>`
-* [[Filter expression|Introduction to Filters]] `[operator<variable-operand>]`
-* Some default behaviors of [[Widgets]]
+!!Using Variables
 
-See also [[currentTiddler|WidgetVariable: currentTiddler]] variable, built-in [[variables|Variables]] and [[Confusion between Transclusion and Substitution]].
+Variables are used...
+
+; via shorthand
+:`<<variableName>>`
+; via variable substitution within [[macros|Macros]]
+:`$(variableName)$`
+; as parameters to [[filter steps|Filters]]
+: `[operator<variableName>]`
+; in [[widgets|Widgets]]
+: internally, or as widget attributes
+: `<$edit tiddler=<<currentTiddler>>/>`
+
+!! Examples
+
+''defining a variable via SetWidget''
+
+```
+<$set name=foo value=bar>
+<<foo>>
+</$set>
+```
+
+<<<
+<$set name=foo value=bar>
+<<foo>>
+</$set>
+<<<
+
+''a variable is a macro''
+
+Below, the `\define` pragma at the beginning of a tiddler [[defines the macro|Macros in WikiText]] `<<tags>>`, valid in the scope of the CurrentTiddler, returning the value of the standard `tags` field.
+
+```
+\define tags() {{!!tags}}
+
+<<tags>>
+```
+
+<<<
+<<tags>>
+<<<
+
+''using a filter variable to get all incoming links''
+
+Using the <<olink backlinks>> [[filter operator|Filter Operators]] to get all tiddlers linking to this one...
+
+```
+<<list-links filter:"[<currentTiddler>backlinks[]]">>
+```
+
+<<<
+<<list-links filter:"[<currentTiddler>backlinks[]]">>
+<<<

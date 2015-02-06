@@ -14,8 +14,6 @@ Here are some recent articles written about ~TiddlyWiki. Submit new articles via
 
 ! <$link><$view field="title"/></$link>
 
-!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
-
 <div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
 
 <$transclude/>

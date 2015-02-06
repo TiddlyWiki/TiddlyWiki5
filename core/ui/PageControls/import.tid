@@ -12,5 +12,5 @@ description: {{$:/language/Buttons/Import/Hint}}
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/Import/Caption}}/></span>
 </$list>
 </$button>
-<$browse/>
+<$browse tooltip={{$:/language/Buttons/Import/Hint}}/>
 </div>

@@ -78,9 +78,7 @@ exports.startup = function() {
 	// Host-specific startup
 	if($tw.browser) {
 		// Install the popup manager
-		$tw.popup = new $tw.utils.Popup({
-			rootElement: document.body
-		});
+		$tw.popup = new $tw.utils.Popup();
 		// Install the animator
 		$tw.anim = new $tw.utils.Animator();
 	}

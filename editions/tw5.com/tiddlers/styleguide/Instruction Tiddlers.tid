@@ -1,0 +1,39 @@
+created: 20150110101500000
+modified: 20150117152550000
+title: Instruction Tiddlers
+tags: [[Improving TiddlyWiki Documentation]]
+
+<<.def "Instruction tiddlers">> talk directly to the reader and guide them through a process. The reader is likely to be a beginner or an intermediate user.
+
+Such tiddlers can be subcategorised as:
+
+;Welcome
+* What is ~TiddlyWiki and why should I care?
+* Demonstrations of key features and benefits
+* Frequently asked questions
+* Examples of ~TiddlyWiki in the field
+* Information about the project itself
+
+;Tutorial
+* An ordered presentation of material for beginners
+* Each tiddler introduces one new point or concept
+* Its main content contains very few links
+* A revealable <<.word "Find out more">> section at the end can offer related links
+
+;Exercise
+* Accompanying a tutorial tiddler
+* Solution revealed on demand
+
+;How-to
+* A list of numbered steps for performing a small specific task
+* Concise, with links to reference tiddlers where appropriate
+* Often has a preamble to clarify the nature of the task
+
+;Example
+* Accompanying a [[reference tiddler|Reference Tiddlers]]
+* Can contain explanations and similar commentary
+* Kept separate to keep the reference tiddler pure
+
+Instruction tiddlers talk directly to the reader as <<.word you>>. They can be reasonably chatty.
+
+But they avoid excessively colloquial language, cultural or topical references and attempts at humour, as these can baffle or even offend the international readership. They also avoid potentially frustrating the reader with descriptions of features as <<.word convenient>> or <<.word easy>>.

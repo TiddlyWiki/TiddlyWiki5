@@ -1,0 +1,69 @@
+caption: 5.1.8
+created: 20150111154632954
+modified: 20150111154632954
+tags: ReleaseNotes
+title: Release 5.1.8
+type: text/vnd.tiddlywiki
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.7...v5.1.8]]//
+
+This release includes many improvements to the documentation for TiddlyWiki. Many thanks to everyone who has helped out, but especially to our prodigious new contributor Astrid Elocson.
+
+!! Translation Improvements
+
+* Improvements to French, Chinese and Japanese translations
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5d947ed582fb9d68c01d82a334ab75498a8724ef]] Spanish translation
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/cb8caf6a01aeeac480bf28661888961657b0dbd8]] Czech translation
+
+!! Usability Improvements
+
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/1353]] behaviour of the tag dropdown in the edit template
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ea6e60e66983ee1184f09c5796ef6c8bceae703a]] automatic focusing of the search box at startup
+* [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/4f3cb8b9aebfc4f65f40c96ef99730887d746b41]] the [[Railroad Plugin]] by Astrid Elocson (see it in action in the new [[Filter Syntax]] documentation)
+* [[Migrated|https://github.com/Jermolene/TiddlyWiki5/commit/230066eeae9ace8336612e02c78f8cdaa3f717e4]] functionality of "Sticky Titles" theme into "Vanilla"/"Snow White". This means that tiddler titles will stick to the top of the window during scrolling on browsers that support `position: sticky` (such as Safari and Firefox)
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cb7090c40489c81e8c5dfb8cbbdee2c60998c3e]] icons to [[$:/AdvancedSearch]], [[$:/ControlPanel]] and [[$:/TagManager]]
+* [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/b9129d77e99970579074bdb4f9c2ef4b77b812c6]] wording of tiddler "save" button to "store"
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/1103]] automatic linking of system tiddlers such as $:/ControlPanel
+
+!! Hackability Improvements
+
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a1ca53fa9bab218719b582bd553a578a477666c9]] IteratorVariables to the ListWidget
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/1249]] version number compatibility checks for plugins
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1adfe20508116da0ee4b5c9e72ea9742f24b60c9]] problem with repeatedly cancelling a draft
+
+!! Node.js Changes
+
+//These changes are only relevant to people using TiddlyWiki under Node.js//
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/cc85368fd48f1e5878018a4e00b6c17d436e67a9]] [[Highlight Plugin]] to work when generating static files under Node.js
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c296f14210545374124df5d4ae9ffb402ed73561]] problem with case-insensitive filing systems (eg Windows)
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1354]] mobile metadata to static page templates
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1352]] added "noclean" parameter to RenderTiddlersCommand
+
+!! Changes affecting plugin authors
+
+* 
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+
+* [[@aelocson|https://github.com/aelocson]]
+* [[@Arlen22|https://github.com/Arlen22]]
+* [[@BramChen|https://github.com/BramChen]]
+* [[@Drakor|https://github.com/Drakor]]
+* [[@dpdannemiller|https://github.com/dpdannemiller]]
+* [[@evgeniy-gryaznov|https://github.com/evgeniy-gryaznov]]
+* [[@felixhayashi|https://github.com/felixhayashi]]
+* [[@gernert|https://github.com/gernert]]
+* [[@Infurnoape|https://github.com/Infurnoape]]
+* [[@Jc-L|https://github.com/Jc-L]]
+* [[@tobibeer|https://github.com/tobibeer]]
+* [[@twMat|https://github.com/twMat]]
+* [[@welford|https://github.com/welford]]
+* [[@xcazin|https://github.com/xcazin]]

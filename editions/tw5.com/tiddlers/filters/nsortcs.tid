@@ -1,0 +1,19 @@
+created: 20140410103123179
+modified: 20150124205339000
+tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]] [[Negatable Operators]]
+title: nsortcs Operator
+type: text/vnd.tiddlywiki
+caption: nsortcs
+purpose: sort the input titles by number field, ignoring case
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[field|TiddlerFields]], defaulting to <<.field title>>"
+paramName="f"
+output="the input, sorted into ascending order by field <<.field f>>, treating field values as numbers"
+negationOutput="the input, likewise sorted into descending order"
+/>
+
+Non-numeric values are treated as having a higher value than any number, and capital and lowercase letters are treated as different. Compare <<.olink nsort>>.
+
+<<.operator-examples "nsortcs">>

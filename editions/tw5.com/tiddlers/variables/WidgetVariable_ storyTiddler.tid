@@ -1,10 +1,23 @@
 caption: storyTiddler
 created: 20141001232753952
-modified: 20141002133957245
+modified: 20150107121000000
 tags: Variables
 title: WidgetVariable: storyTiddler
 type: text/vnd.tiddlywiki
 
-The ''storyTiddler'' variable is set by the  [[default viewtemplate|$:/core/ui/ViewTemplate]] to the name of the current tiddler within tiddlers in the story river, and is not defined within the sidebar.
+The ''storyTiddler'' [[variable|Variables]] is set by the [[default view-template|$:/core/ui/ViewTemplate]] to the title of the tiddler in the story river. It is therefore undefined in elements like the ''sidebar''.
 
-See also [[WidgetVariable: currentTiddler]]
+!! Example
+
+```
+<$view tiddler=<<storyTiddler>> field=title/>
+```
+
+<<<
+<$view tiddler=<<storyTiddler>> field=title/>
+<<<
+
+!! Other Standard Variables
+
+* [[WidgetVariable: currentTiddler]]
+* [[WidgetVariable: transclusion]]

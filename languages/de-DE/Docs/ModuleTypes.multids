@@ -6,11 +6,11 @@ config: Daten, die in `$tw.config` eingefügt werden.
 filteroperator: Individuelle Funktionen für den Filter-Operator.
 global: Globale Daten, die in `$tw` eingefügt werden.
 isfilteroperator: Operanden für den Filter-Operator: ''is''
-macro: Globale Macro-Definitionen in JavaScript.
+macro: Globale Makro-Definitionen in JavaScript.
 parser: Parser für verschiedene Tiddler Typen.
 saver: "Savers" stellen verschiedene Methoden zum Speichern mit dem Browser zur Verfügung.
 startup: Funktionen zur Initialisierung.
-storyview: "[[Story View|Story]]" ist für das Verhalten des "ListWidgets" zuständig, das die Tiddler "Hauptanzeige" verwaltet. Mit dem Toolbutton "Story Modus" wird einer dieser Modi ausgewählt.
+storyview: [[Story-View|Story]] ist für das Verhalten des "ListWidgets" zuständig, das die Tiddler "Hauptanzeige" verwaltet. Mit dem Toolbutton Story-Modus wird einer dieser Modi ausgewählt.
 tiddlerdeserializer: Konvertiert verschiedene textbasierte Inhaltstypen in das Tiddler-Format.
 tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler-Felder.
 tiddlermethod: Methoden werden dem `$tw.Tiddler` Prototypen hinzugefügt.

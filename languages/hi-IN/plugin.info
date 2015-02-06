@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/hi-IN",
+	"name": "hi-IN",
+	"plugin-type": "language",
+	"description": "Hindi (India)",
+	"author": "Atul Grover",
+	"core-version": ">=5.0.8"
+}

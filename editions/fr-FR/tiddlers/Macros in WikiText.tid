@@ -1,0 +1,120 @@
+caption: Macros
+created: 20131205160746466
+modified: 20140619111725471
+tags: WikiText
+title: Macros in WikiText
+fr-title: Macros dans WikiText
+type: text/vnd.tiddlywiki
+
+! Defining Macros
+
+Macros are snippets of text that can be inserted with a concise shortcut.
+
+Multi-line macros are defined like this:
+
+```
+\define mysamplemacro(name:"Bugs Bunny",address:"Rabbit Hole Hill")
+Hi, I'm $name$ and I live in $address$
+\end
+```
+
+!! Parameter Substitution
+
+The first line of the definition specifies the macro name and any parameters. Parameters are named and can optionally have default values that are used if the parameter isn't specified at the time of calling. The body of the macro definition follows, terminated with `\end` on a line by itself.
+
+The text of the macro can reference parameters using the `$name$` syntax. The value of the parameter is substituted at the time the macro is invoked.
+
+!! Variable Substitution
+
+The values of named variables can also be substituted into the text of a macro using the syntax `$(variable)$`. For example:
+
+```
+\define mysamplemacro2()
+Hi, I'm $(name)$ and I live in $(address)$
+\end
+\define name() Bugs Bunny
+
+<$set name="address" value="Rabbit Hole Hill">
+<<mysamplemacro2>>
+</$set>
+```
+
+The result is: `Hi, I'm Bugs Bunny and I live in Rabbit Hole Hill`.
+
+!! Single Line macros
+
+Single-line macros can omit the `\end` marker like this:
+
+```
+\define mysamplemacro3(name:"Bugs Bunny") Hi, I'm $name$
+```
+
+!! Macro Scope
+
+Macro definitions must be placed at the top of a tiddler. Macros are available to the tiddler that defines them, plus any tiddlers that it transcludes.
+
+Global macros can be defined in any tiddler with the tag [[$:/tags/Macro]]. They are then available within all tiddlers.
+
+Macros can be imported from other tiddlers with the ImportVariablesWidget.
+
+[[JavaScript Macros|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]] can also be used for more flexibility.
+
+! Using Macros
+
+In their simplest form, macros are used like this:
+
+```
+<<mysamplemacro>>
+<<mysamplemacro "Donald Duck">>
+<<mysamplemacro "Mickey Mouse" "Mouse House">>
+<<mysamplemacro name:"Minnie Mouse" address:"Mouse House">>
+```
+
+Resulting in:
+
+```
+Hi I'm Bugs Bunny and I live in Rabbit Hole Hill
+Hi I'm Donald Duck and I live in Rabbit Hole Hill
+Hi I'm Mickey Mouse and I live in Mouse House
+Hi I'm Minnie Mouse and I live in Mouse House
+
+```
+
+Note that parameter values that do not specify names are mapped in sequence to the parameters defined in the macro.
+
+!! Multiline Parameters
+
+Parameters can include line breaks. For example:
+
+```
+<<mysamplemacro "Mickey Mouse" "Mouse House,
+Mouse Lane,
+Rodentville,
+Ratland.">>
+```
+
+By using triple-double quotes you can specify parameter values that include single double quotes. For example:
+
+```
+<<mysamplemacro "Mickey Mouse" """Mouse House,
+"Mouse" Lane,
+Rodentville,
+Ratland.""">>
+```
+
+! Using Macros with the MacroCallWidget
+
+Macros can also be invoked with the MacroCallWidget
+
+```
+<<italicise "Text to be made into italics">>
+<<italicise text:"Text to be made into italics">>
+<$macrocall $name="italicise" text="Text to be made into italics"/>
+<$macrocall $name="italicise" text={{Title of tiddler containing text to be italicised}}/>
+<$macrocall $name="italicise" text=<<textMaker "Another macro to generate the text to be italicised">>/>
+```
+
+Also see:
+
+* [[Macros]]
+* [[MacroCallWidget]]

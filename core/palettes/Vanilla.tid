@@ -73,7 +73,7 @@ tab-foreground: #666666
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #d5ad34
+tag-background: #ec6
 tag-foreground: #ffffff
 tiddler-background: <<colour background>>
 tiddler-border: <<colour background>>

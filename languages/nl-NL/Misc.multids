@@ -1,0 +1,27 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Deze tiddler bevat binaire data
+ClassicWarning/Hint: Deze tiddler is in TiddlyWiki Classic wiki tekstformaat geschreven dat niet geheel compatibel is met TiddlyWiki versie 5. Zie http://tiddlywiki.com/static/Upgrading.html voor meer details.
+ClassicWarning/Upgrade/Caption: upgrade
+CloseAll/Button: sluit alle
+ConfirmCancelTiddler: Wil je gemaakte wijzigingen aan de tiddler "<$text text=<<title>>/>" annuleren?
+ConfirmDeleteTiddler: Wil je de tiddler "<$text text=<<title>>/>" verwijderen?
+ConfirmEditShadowTiddler: Je staat op het punt een schaduwtiddler te wijzigen. Toekomstige automatische veranderingen (upgrades) zijn dan niet mogelijk. Wil je "<$text text=<<title>>/>" wijzigen?
+ConfirmOverwriteTiddler: Wil je de tiddler "<$text text=<<title>>/>" overschrijven?
+DefaultNewTiddlerTitle: Nieuwe tiddler
+DropMessage: "Drop" hier (of klik escape om te annuleren)
+Encryption/ConfirmClearPassword: Wil je het wachtwoord verwijderen? Dan wordt de wiki onversleuteld opgeslagen.
+Encryption/PromptSetPassword: Stel een nieuw wachtwoord in voor deze TiddlyWiki
+Exporters/CsvFile: CSV tiddlers bestand
+Exporters/JsonFile: JSON tiddlers bestand
+Exporters/StaticRiver: Serie tiddlers als statisch HTML bestand
+Exporters/TidFile: Enkele tiddler ".tid" bestand
+InvalidFieldName: Illegale lettertekens in veldnaam "<$text text=<<fieldName>>/>". Velden kunnen alleen kleine letters, cijfers en de lettertekens liggend streepje (`_`), koppelteken (`-`) en punt (`.`)
+MissingTiddler/Hint: Ontbrekende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} om hem aan te maken
+RecentChanges/DateFormat: DD MMM YYYY
+SystemTiddler/Tooltip: Dit is een systeem tiddler
+TagManager/Colour/Heading: Kleur
+TagManager/Icon/Heading: Pictogram (icon)
+TagManager/Info/Heading: Info
+TagManager/Tag/Heading: Label
+UnsavedChangesWarning: Er zijn niet-opgeslagen veranderingen in TiddlyWiki

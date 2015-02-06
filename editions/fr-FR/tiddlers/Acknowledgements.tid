@@ -1,0 +1,10 @@
+fr-title: Remerciements
+created: 20140129204112515
+modified: 20141115225702483
+tags: About
+title: Acknowledgements
+type: text/vnd.tiddlywiki
+
+<<tw>> n'aurait pas été possible sans le soutien constant de la [[Communauté|Community]]. Son attention et ses retours ont permis de comprendre ce qui était attendu de cet outil, et sa passion pour le projet m'a appris que le jeu en valait la chandelle.
+
+{{$:/Acknowledgements}}

@@ -1,0 +1,18 @@
+title: $:/language/Help/setfield
+description: tiddlerを使用する準備
+
+
+//注意　このコマンドは実験的なもので、今後変更される可能性があります。//
+
+テンプレートtiddlerの内容を、複数のtiddlerの指定のフィールドに設定する。
+
+```
+--setfield <filter> <fieldname> <templatetitle> <rendertype>
+```
+
+パラメータ：
+
+* "filter" - コマンドの対象となるtiddler
+* "fieldname" - 変更するフィールド（規定値は"text"）
+* "templatetitle" - 指定のフィールドに転記する元になるtiddler。もし空白あるはtiddlerが存在しない場合は、指定したフィールドは削除される。
+* "type" - テキストの種類（規定値は"text/plain"。"text/html"にするとHTMLタグを含められる。）

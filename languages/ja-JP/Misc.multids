@@ -11,11 +11,13 @@ ConfirmOverwriteTiddler: 本当にこの tiddler "<$text text=<<title>>/>" を�
 DropMessage: ドロップしてください。（止めるには、キャンセルをクリックしてください。）
 Encryption/ConfirmClearPassword: パスワードを削除すると暗号化も解除されますが、本当にパスワードを削除しますか？
 Encryption/PromptSetPassword: パスワードを入力してください。
+Exporters/StaticRiver: 静的HTMLファイルとして構成される一連のtiddler
 InvalidFieldName: フィールド名に不正な文字が使われています "<$text text=<<fieldName>>/>". フィールド名に使用できるのは英小文字かアンダースコア(`_`)、ハイフン(`-`)、ピリオド(`.`)のみです。
 MissingTiddler/Hint: 未作成の tiddler "<$text text=<<currentTiddler>>/>" - クリック {{$:/core/images/edit-button}} して作成
 RecentChanges/DateFormat: YYYY-MM-DD
 SystemTiddler/Tooltip: これはシステム tiddler です
 TagManager/Colour/Heading: 色
 TagManager/Icon/Heading: アイコン
+TagManager/Info/Heading: 情報
 TagManager/Tag/Heading: タグ
 UnsavedChangesWarning: 保存していない編集内容があります。

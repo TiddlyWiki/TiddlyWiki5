@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/nl-NL",
+	"name": "nl-NL",
+	"plugin-type": "language",
+	"description": "Dutch (The Netherlands)",
+	"author": "gernert",
+	"core-version": ">=5.1.5"
+}

@@ -1,0 +1,57 @@
+title: $:/language/
+
+Date/DaySuffix/1: st
+Date/Long/Day/0: Sunday / ਐਤਵਾਰ 
+Date/Long/Day/1: Monday / ਸੋਮਵਾਰ
+Date/Long/Day/2: Tuesday / ਮੰਗਲਵਾਰ
+Date/Long/Day/3: Wednesday / ਬੁੱਧਵਾਰ
+Date/Long/Day/4: Thursday / ਵੀਰਵਾਰ
+Date/Long/Day/5: Friday / ਸ਼ੁੱਕਰਵਾਰ
+Date/Long/Day/6: Saturday / ਸ਼ਨੀਵਾਰ
+Date/Long/Month/1: January / ਜਨਵਰੀ
+Date/Long/Month/10: October / ਅਕਤੂਬਰ
+Date/Long/Month/11: November / ਨਵੰਬਰ
+Date/Long/Month/12: December / ਦਸੰਬਰ
+Date/Long/Month/2: February / ਫਰਵਰੀ
+Date/Long/Month/3: March / ਮਾਰਚ
+Date/Long/Month/4: April / ਅਪ੍ਰੈਲ
+Date/Long/Month/5: May / ਮਈ
+Date/Long/Month/6: June / ਜੂਨ
+Date/Long/Month/7: July / ਜੁਲਾਈ
+Date/Long/Month/8: August / ਅਗਸਤ
+Date/Long/Month/9: September / ਸਤੰਬਰ
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: ਐਤ
+Date/Short/Day/1: ਸੋਮ
+Date/Short/Day/2: ਮੰਗਲ
+Date/Short/Day/3: ਬੁੱਧ
+Date/Short/Day/4: ਵੀਰ
+Date/Short/Day/5: ਸ਼ੁੱਕਰ
+Date/Short/Day/6:  ਸ਼ਨੀ
+Date/Short/Month/1: ਜਨ
+Date/Short/Month/10: ਅਕਤੂ
+Date/Short/Month/11: ਨਵੰ
+Date/Short/Month/12: ਦਸੰ
+Date/Short/Month/2: ਫਰ
+Date/Short/Month/3: ਮਾਰ
+Date/Short/Month/4: ਅਪ੍ਰੈ
+Date/Short/Month/5: May / ਮਈ
+Date/Short/Month/6: Jun / ਜੂਨ
+Date/Short/Month/7: Jul / ਜੁਲਾਈ
+Date/Short/Month/8: Aug / ਅਗਸਤ
+Date/Short/Month/9: Sep / ਸਤੰਬਰ
+RelativeDate/Future/Days: <<ਅਵਧੀ >>  ਦੇ ਹੁਣ ਤੱਕ ਦੇ ਦਿਨ
+RelativeDate/Future/Hours: <<ਅਵਧੀ >> ਦੇ ਹੁਣ ਤੱਕ  ਦੇ  ਘੰਟੇ
+RelativeDate/Future/Minutes: <<ਅਵਧੀ >>  ਦੇ ਹੁਣ ਤੱਕ ਦੇ ਮਿੰਟ
+RelativeDate/Future/Months: << ਅਵਧੀ>>  ਦੇ ਹੁਣ ਤੱਕ ਦੇ ਮਹੀਨੇ
+RelativeDate/Future/Second: ਹੁਣ ਤੱਕ 1 ਸਕਿੰਟ
+RelativeDate/Future/Seconds: <<ਅਵਧੀ >>  ਦੇ ਹੁਣ ਤੱਕ ਦੇ ਸਕਿੰਟ
+RelativeDate/Future/Years: <<ਅਵਧੀ >>  ਦੇ ਹੁਣ ਤੱਕ ਦੇ ਸਾਲ
+RelativeDate/Past/Days: <<ਅਵਧੀ >> ਦੇ ਦਿਨ ਦੇ ਪਹਿਲਾ
+RelativeDate/Past/Hours: <<ਅਵਧੀ ਦੇ >> ਘੰਟੇ ਪਹਿਲਾ
+RelativeDate/Past/Minutes: << ਅਵਧੀ ਦੇ >> ਮਿੰਟ ਪਹਿਲਾ
+RelativeDate/Past/Months: <<ਅਵਧੀ >> ਦੇ ਮਹੀਨੇ ਪਹਿਲਾ
+RelativeDate/Past/Second: 1  ਸਕਿੰਟ ਪਹਿਲਾ
+RelativeDate/Past/Seconds: << ਅਵਧੀ >>  ਦੇ ਸਕਿੰਟ ਪਹਿਲਾ
+RelativeDate/Past/Years: <<ਅਵਧੀ >>ਦੇ ਸਾਲ

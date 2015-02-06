@@ -1,0 +1,4 @@
+title: $:/language/Help/savetiddlers
+description: rawテキストのtiddlerのグループをディレクトリに保存
+
+tiddler のグループを raw テキストあるいはバイナリフォーマットにて、指定したファイル名に保存します。```--savetiddlers <filter> <pathname>```デフォルトでは、パス名はエディションのディレクトリ配下にある`output`ディレクトリです。`--output`コマンドで異なる出力先を指定できます。ディレクトリ名が存在しない場合は自動的に作成されます。

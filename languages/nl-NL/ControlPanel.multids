@@ -1,0 +1,97 @@
+title: $:/language/ControlPanel/
+
+Advanced/Caption: Geavanceerd
+Advanced/Hint: Interne informatie over deze TiddlyWiki
+Appearance/Caption: Uiterlijk
+Appearance/Hint: Manieren om het uiterlijk van je TiddlyWiki aan te passen
+Basics/AnimDuration/Prompt: Duur van de animatie:
+Basics/Caption: Standaard
+Basics/DefaultTiddlers/BottomHint: Gebruik &#91;&#91;dubbele rechte haken&#93;&#93; voor titels met spaties. Of je kan <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]"> kiezen voor behoud van open tiddlers
+Basics/DefaultTiddlers/Prompt: Standaard tiddlers:
+Basics/DefaultTiddlers/TopHint: Kies welke tiddlers bij opstarten getoond worden:
+Basics/Language/Prompt: Hallo! Huidige taal:
+Basics/NewJournal/Tags/Prompt: Labels voor nieuwe journaaltiddlers
+Basics/NewJournal/Title/Prompt: Titel voor nieuwe journaaltiddlers
+Basics/OverriddenShadowTiddlers/Prompt: Aantal overschreven schaduwtiddlers:
+Basics/ShadowTiddlers/Prompt: Aantal schaduwtiddlers:
+Basics/Subtitle/Prompt: Ondertitel:
+Basics/SystemTiddlers/Prompt: Aantal systeem tiddlers:
+Basics/Tags/Prompt: Aantal labels:
+Basics/Tiddlers/Prompt: Aantal tiddlers:
+Basics/Title/Prompt: Titel van deze ~TiddlyWiki:
+Basics/Username/Prompt: Gebruikersnaam voor wijzigingen:
+Basics/Version/Prompt: ~TiddlyWiki versie:
+EditorTypes/Caption: Editor types
+EditorTypes/Editor/Caption: Editor
+EditorTypes/Hint: Deze tiddlers bepalen welke editor wordt gebruikt voor specifieke tiddler types
+EditorTypes/Type/Caption: Type
+Info/Caption: Info
+Info/Hint: Informatie over deze TiddlyWiki
+LoadedModules/Caption: Geladen modules
+LoadedModules/Hint: Dit zijn de nu geladen tiddler modules gekoppeld aan hun brontiddlers. Alle cursieve modules hebben geen brontiddler, gewoonlijk omdat ze tijdens het bootproces gemaakt werden.
+Palette/Caption: Palet
+Palette/Editor/Clone/Caption: kloon
+Palette/Editor/Clone/Prompt: Het wordt aanbevolen dit schaduwpalet te klonen alvorens het te wijzigen.
+Palette/Editor/Prompt: Wijzigen
+Palette/Editor/Prompt/Modified: Dit schaduwpalet is gewijzigd
+Palette/Editor/Reset/Caption: reset
+Palette/HideEditor/Caption: verberg editor
+Palette/Prompt: Huidig palet:
+Palette/ShowEditor/Caption: toon editor
+Plugins/Caption: Plugins
+Plugins/Disable/Caption: schakel uit
+Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
+Plugins/Disabled/Status: (uitgeschakeld)
+Plugins/Empty/Hint: Niets
+Plugins/Enable/Caption: activeer
+Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
+Plugins/Language/Prompt: Talen
+Plugins/Plugin/Prompt: Plugins
+Plugins/Theme/Prompt: Thema's
+Saving/Caption: Opslaan
+Saving/Heading: Opslaan
+Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
+Saving/TiddlySpot/BackupDir: Backup Folder
+Saving/TiddlySpot/Backups: Backups
+Saving/TiddlySpot/Description: Deze instellingen worden alleen gebruikt bij http://tiddlyspot.com of een vergelijkbare server
+Saving/TiddlySpot/Filename: Upload bestandsnaam
+Saving/TiddlySpot/Heading: ~TiddlySpot
+Saving/TiddlySpot/Hint: //De standaard server URL is `http://<wikiname>.tiddlyspot.com/store.cgi` en kan gewijzigd worden in een speciaal serveradres//
+Saving/TiddlySpot/Password: Wachtwoord
+Saving/TiddlySpot/ServerURL: Server URL
+Saving/TiddlySpot/UploadDir: Upload folder
+Saving/TiddlySpot/UserName: Wiki naam
+Settings/AutoSave/Caption: Automatisch opslaan
+Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
+Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
+Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
+Settings/Caption: Instellingen
+Settings/Hint: Met deze instellingen kun je het gedrag van TiddlyWiki veranderen.
+Settings/NavigationAddressBar/Caption: Navigatie adresbalk
+Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:
+Settings/NavigationAddressBar/No/Description: Verander het browseradres niet
+Settings/NavigationAddressBar/Permalink/Description: Voeg de doeltiddler toe
+Settings/NavigationAddressBar/Permaview/Description: Voeg alle open tiddlers toe
+Settings/NavigationHistory/Caption: Navigeer-geschiedenis
+Settings/NavigationHistory/Hint: Werk de browsergeschiedenis bij als er naar een tiddler genavigeerd wordt:
+Settings/NavigationHistory/No/Description: Werk de browsergeschiedenis niet bij
+Settings/NavigationHistory/Yes/Description: Werk de browsergeschiedenis bij 
+Settings/ToolbarButtons/Caption: Knoppen van knoppenbalk
+Settings/ToolbarButtons/Hint: Uiterlijk van standaard knop in knoppenbalk:
+Settings/ToolbarButtons/Icons/Description: Met pictogram (icon)
+Settings/ToolbarButtons/Text/Description: Met tekst
+StoryView/Caption: Story view
+StoryView/Prompt: Huidige view:
+Theme/Caption: Thema
+Theme/Prompt: Huidig thema:
+TiddlerFields/Caption: Tiddler velden
+TiddlerFields/Hint: Dit is de complete reeks tiddlervelden in gebruik bij deze wiki (inclusief systeemtiddlers maar exclusief schaduwtiddlers).
+Toolbars/Caption: Knoppenbalken
+Toolbars/EditToolbar/Caption: Knoppenbalk bij wijzigen
+Toolbars/EditToolbar/Hint: Kies welke knoppen getoond worden voor tiddlers in wijzigmode
+Toolbars/Hint: Kies welke knoppen getoond worden
+Toolbars/PageControls/Caption: Pagina-knoppenbalk
+Toolbars/PageControls/Hint: Kies welke knoppen getoond worden op de knoppenbalk van de pagina-knoppenbalk
+Toolbars/ViewToolbar/Caption: Knoppenbalk bij weergave
+Toolbars/ViewToolbar/Hint: Kies welke knoppen zichtbaar zijn bij weergave
+Tools/Download/Full/Caption: Download complete wiki (inclusief documentatie)

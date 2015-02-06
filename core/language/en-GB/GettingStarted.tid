@@ -1,13 +1,14 @@
 title: GettingStarted
 
-Welcome to TiddlyWiki, the non-linear personal web notebook.
+\define lingo-base() $:/language/ControlPanel/Basics/
+Welcome to ~TiddlyWiki and the ~TiddlyWiki community
 
-To get started, first verify that you can save changes successfully - see http://tiddlywiki.com/ for detailed instructions.
+Before you start storing important information in ~TiddlyWiki it is important to make sure that you can reliably save changes. See http://tiddlywiki.com/#GettingStarted for details
 
-Then you can:
+!! Set up this ~TiddlyWiki
 
-* Create new tiddlers using the 'plus' button in the sidebar
-* Visit the [[control panel|$:/ControlPanel]] using the 'cog' button in the sidebar to customise your wiki
-** Stop this message appearing by changing the default tiddlers under the ''Basics'' tab
-* Save changes using the 'download' button in the sidebar
-* Learn more about [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+
+See the [[control panel|$:/ControlPanel]] for more options.
