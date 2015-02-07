@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20150126091948000
+modified: 20150203183335000
 title: $:/editions/tw5.com/doc-styles
 tags: $:/tags/Stylesheet
 
@@ -30,7 +30,6 @@ tags: $:/tags/Stylesheet
 	color: <<color very-muted-foreground>>;
 	font-style: normal;
 	font-weight: bold;
-	text-transform: uppercase;
 }
 
 .doc-button,
@@ -120,4 +119,8 @@ td svg {
 tr.doc-table-subheading {
 	height: 2em;
 	vertical-align: middle;
+}
+
+.doc-table.before-tiddler-body {
+	margin-top: 2em;
 }

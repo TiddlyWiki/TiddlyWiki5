@@ -1,17 +1,14 @@
 created: 20140410103123179
-modified: 20150124171754000
+modified: 20150203185954000
 tags: [[Filter Operators]] [[Field Operators]] [[Order Operators]]
 title: next Operator
 type: text/vnd.tiddlywiki
 caption: next
-purpose: find which titles in a <<.field list>> field follow the input ones
-
-<$macrocall $name=".operator-def"
-input="a [[selection of titles|Title Selection]]"
-parameter="a tiddler title"
-paramName="t"
-output="a selection containing each title that immediately follows each of the input titles in the <<.field list>> field of <<.place t>>"
-/>
+op-purpose: find which titles in a <<.field list>> field follow the input ones
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a tiddler title
+op-parameter-name: T
+op-output: a selection containing each title that immediately follows each of the input titles in the <<.field list>> field of <<.place T>>
 
 Each input title is processed in turn, and its successor is located in the <<.field list>> field and appended to the output. If a title is not listed in the field, or is the last title there, then it contributes nothing to the output.
 

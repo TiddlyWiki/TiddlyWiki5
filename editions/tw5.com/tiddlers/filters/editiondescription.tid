@@ -1,16 +1,13 @@
 created: 20150111145738451
-modified: 20150124165002000
+modified: 20150203184528000
 tags: [[Filter Operators]] [[Special Operators]]
 title: editiondescription Operator
 type: text/vnd.tiddlywiki
 caption: editiondescription
-purpose: select the descriptions of the input editions
-
-<$macrocall $name=".operator-def"
-input="a [[selection|Title Selection]] of edition names"
-parameter="none"
-output="the description string of each edition in the input"
-/>
+op-purpose: select the descriptions of the input editions
+op-input: a [[selection|Title Selection]] of edition names
+op-parameter: none
+op-output: the description string of each edition in the input
 
 Each input title is processed in turn, ignoring any that is not the name of a ~TiddlyWiki edition.
 
