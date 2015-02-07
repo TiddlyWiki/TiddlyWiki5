@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Avantiate
+Advanced/PluginInfo/Empty/Hint: nulle
+Advanced/PluginInfo/Heading: Detalios de extension
+Advanced/PluginInfo/Hint: Iste extension contine le sequente notas umbral:
+Advanced/ShadowInfo/Heading: Stato umbral
+Advanced/ShadowInfo/NotShadow/Hint: Le nota <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> non es un nota umbral
+Advanced/ShadowInfo/OverriddenShadow/Hint: Illo es superscribite per un nota ordinari
+Advanced/ShadowInfo/Shadow/Hint: Le nota <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> es un nota umbral
+Advanced/ShadowInfo/Shadow/Source: Illo es definite in le extension <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Quadros
+List/Caption: Lista
+List/Empty: Iste nota non ha un lista
+Listed/Caption: Listate
+Listed/Empty: Iste nota non es listate per ulle alteres
+References/Caption: Referentias
+References/Empty: Nulle nota liga a isto
+Tagging/Caption: Etiquetta
+Tagging/Empty: Nulle nota porta iste etiquetta
+Tools/Caption: Utensiles

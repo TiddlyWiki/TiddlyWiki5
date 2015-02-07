@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Monstra adjuta pro commandos de TiddlyWiki
+
+Monstra texto de adjuta pro un commando:
+
+```
+--help [<command>]
+```
+
+Si le nomine de commando es omittite, un lista de commandos disponibile es monstrate.

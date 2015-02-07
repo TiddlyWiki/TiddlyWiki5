@@ -1,0 +1,83 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Fundo de alarma
+alert-border: Fundo de bordo
+alert-highlight: Coloration de alarma
+alert-muted-foreground: Prime plano mute de alarma
+background: Fundo general
+dirty-indicator: Indicator pro cambios non salvate
+download-background: Fundo de button pro discargar
+download-foreground: Prime plano de button pro discargar
+external-link-background: Fundo de ligamine externe
+external-link-background-hover: Fundo de ligamine externe, quando on move supra illo
+external-link-background-visited: Fundo de ligamine externe visitate
+external-link-foreground: Prime plano de ligamine externe
+external-link-foreground-hover: Prime plano de ligamine externe, quando on move supra illo
+external-link-foreground-visited: Prime plano de ligamine externe visitate
+foreground: Prime plano general
+message-background: Fundo de cassa con messages
+message-border: Bordo de cassa con messages
+message-foreground: Prime plano de cassa con messages
+muted-foreground: Prime plano general mute
+notification-background: Fundo de notification
+notification-border: Bordo de notification
+page-background: Fundo de pagina
+pre-background: Fundo de codice preformatate
+pre-border: Bordo de codice preformatate
+sidebar-button-foreground: Prime plano de button in barra lateral
+sidebar-controls-foreground: Prime plano de buttones in barra lateral
+sidebar-controls-foreground-hover: Prime plano de buttones in barra lateral, quando on move supra illos
+sidebar-foreground: Prime plano de barra lateral
+sidebar-foreground-shadow: Umbra in prime plano de barra lateral
+sidebar-muted-foreground: Fundo mute de barra lateral
+sidebar-muted-foreground-hover: Prime plano mute de barra lateral, quando on move supra illo
+sidebar-tab-background: Fundo de scheda in barra lateral
+sidebar-tab-background-selected: Fundo de scheda in barra lateral pro schedas seligite
+sidebar-tab-border: Bordo de scheda in barra lateral
+sidebar-tab-border-selected: Bordo de scheda in barra lateral pro schedas seligite
+sidebar-tab-divider: Marca de division de scheda in barra lateral
+sidebar-tab-foreground: Prime plano de scheda in barra lateral
+sidebar-tab-foreground-selected: Prime plano de schedas in barra lateral pro schedas seligite
+sidebar-tiddler-link-foreground: Prime plano de ligamine de nota in barra lateral
+sidebar-tiddler-link-foreground-hover: Prime plano de ligamine de nota in barra lateral, quando on move supra illo
+static-alert-foreground: Prime plano de alarma static
+tab-background: Fundo del scheda
+tab-background-selected: Fundo del scheda pro schedas seligite
+tab-border: Bordo de scheda
+tab-border-selected: Bordo del scheda pro schedas seligite
+tab-divider: Marca de division del schedas
+tab-foreground: Prime plano del scheda
+tab-foreground-selected: Prime plano de scheda pro schedas seligite
+table-border: Bordo del tabella
+table-footer-background: Fundo del pede del tabella
+table-header-background: Fundo del capite del tabella
+tag-background: Fundo del etiquetta
+tag-foreground: Prime plano del etiquetta
+tiddler-background: Fundo del nota
+tiddler-border: Bordo del nota
+tiddler-controls-foreground: Prime plano de buttones del nota
+tiddler-controls-foreground-hover: Prime plano de buttones del nota, quando on move supra illo
+tiddler-controls-foreground-selected: Prime plano de buttones del nota pro buttones seligite
+tiddler-editor-background: Fundo del editor de nota
+tiddler-editor-border: Bordo del editor de nota
+tiddler-editor-border-image: Imagine de bordo del editor del nota
+tiddler-editor-fields-even: Fundo de editor del nota pro quadros par
+tiddler-editor-fields-odd: Fundo de editor del nota pro quadros impar
+tiddler-info-background: Fundo del panello de info del nota
+tiddler-info-border: Bordo de panello de info del nota
+tiddler-info-tab-background: Scheda de panello de info del nota in fundo
+tiddler-link-background: Ligamine de nota in fundo
+tiddler-link-foreground: Ligamine de nota in prime plano
+tiddler-subtitle-foreground: Subtitutlo de nota in prime plano
+tiddler-title-foreground: Titulo de nota in prime plano
+toolbar-cancel-button: Button 'cancella' del barra de utensiles in prime plano
+toolbar-close-button: Button 'claude' del barra de utensiles in prime plano
+toolbar-delete-button: Button 'dele' del barra de utensiles in prime plano
+toolbar-done-button: Button 'OK' del barra de utensiles in prime plano
+toolbar-edit-button: Button 'redige' del barra de utensiles in prime plano
+toolbar-info-button: Button 'info' del barra de utensiles in prime plano
+toolbar-new-button: Button 'nove nota' del barra de utensiles in prime plano
+toolbar-options-button: Button 'optiones' del barra de utensiles in prime plano
+toolbar-save-button: Button 'salva' del barra de utensiles in prime plano
+untagged-background: Fundo sin etiquettas
+very-muted-foreground: Prime plano multo mute
