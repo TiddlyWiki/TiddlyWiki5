@@ -11,8 +11,7 @@ Basics/DefaultTiddlers/Prompt: Default tiddlers:
 Basics/DefaultTiddlers/TopHint: Choose which tiddlers are displayed at startup:
 Basics/EmptyStoryMessage/Prompt: Empty message:
 Basics/EmptyStoryMessage/TopHint: Wikitext displayed when the story is empty:
-Basics/Language/Prompt: Current language:
-Basics/Language/Hello: Hello!
+Basics/Language/Prompt: Hello! Current language:
 Basics/NewJournal/Title/Prompt: Title of new journal tiddlers
 Basics/NewJournal/Tags/Prompt: Tags for new journal tiddlers
 Basics/OverriddenShadowTiddlers/Prompt: Number of overridden shadow tiddlers:
