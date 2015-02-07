@@ -6,7 +6,7 @@ Appearance/Caption: 視覺外觀
 Appearance/Hint: 自訂您的 TiddlyWiki 外觀。
 Basics/AnimDuration/Prompt: 動畫持續時間：
 Basics/Caption: 基本
-Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
+Basics/DefaultTiddlers/BottomHint: 標題含空白時請使用 &#91;&#91;雙中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留開啟中的條目順序</$button>
 Basics/DefaultTiddlers/Prompt: 首頁：
 Basics/DefaultTiddlers/TopHint: 預設開啟的條目：
 Basics/Language/Prompt: 您好！當前的語言：
@@ -56,7 +56,7 @@ Saving/TiddlySpot/Backups: 備份
 Saving/TiddlySpot/Description: 這些設定只適用於儲存到 http://tiddlyspot.com 或相容的遠端伺服器時。
 Saving/TiddlySpot/Filename: 上傳檔名
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //預設之伺服器網址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改為自訂之伺服器網址//
+Saving/TiddlySpot/Hint: //預設之伺服器網址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改為自訂之伺服器網址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密碼
 Saving/TiddlySpot/ServerURL: 伺服器網址
 Saving/TiddlySpot/UploadDir: 上傳資料夾
