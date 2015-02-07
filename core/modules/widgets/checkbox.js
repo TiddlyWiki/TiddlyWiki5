@@ -35,6 +35,7 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 	this.execute();
 	// Create our elements
 	this.labelDomNode = this.document.createElement("label");
+	this.labelDomNode.setAttribute("class",this.checkboxClass);
 	this.inputDomNode = this.document.createElement("input");
 	this.inputDomNode.setAttribute("type","checkbox");
 	if(this.getValue()) {
@@ -126,6 +127,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxChecked = this.getAttribute("checked");
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
+	this.checkboxClass = this.getAttribute("class","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
