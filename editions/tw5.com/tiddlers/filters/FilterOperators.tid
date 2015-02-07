@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150129133657000
+modified: 20150203183422000
 tags: Concepts Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
 <td><$link to={{!!title}}>{{!!caption}}</$link></td>
-<td>{{!!purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
 <td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
 </tr></$list>
 \end

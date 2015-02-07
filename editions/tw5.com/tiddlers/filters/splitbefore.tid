@@ -1,22 +1,19 @@
 created: 20150126142522000
-modified: 20150126143945000
+modified: 20150203192107000
 tags: [[Filter Operators]] [[String Operators]]
 title: splitbefore Operator
 type: text/vnd.tiddlywiki
 caption: splitbefore
-purpose: select a delimited prefix from each input title
-
-<$macrocall $name=".operator-def"
-input="a [[selection of titles|Title Selection]]"
-parameter="a string of characters marking the end of the prefix"
-paramName="s"
-output="the prefix, up to and including <<.place S>>, of each input title"
-/>
+op-purpose: select a delimited prefix from each input title
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string of characters marking the end of the prefix
+op-parameter-name: S
+op-output: the prefix, up to and including <<.place S>>, of each input title
 
 Each input title is processed in turn.
 
-* A title that contains <<.place s>> contributes everything up to and including <<.place s>>.
-* A title that doesn't contain <<.place s>> simply contributes itself to the output.
+* A title that contains <<.place S>> contributes everything up to and including <<.place S>>.
+* A title that doesn't contain <<.place S>> simply contributes itself to the output.
 
 Contributions are [[dominantly appended|Dominant Append]] to the output.
 

@@ -1,0 +1,11 @@
+title: $:/language/Help/build
+description: Correr comandos configurados automaticamente
+
+Construir os alvos de construção especificados para a wiki actual. Se nenhum alvo for especificado todos os alvos disponíveis serão construídos.
+
+```
+--build <alvo> [<alvo> ...]
+```
+
+Os alvos de contrução são definidos no ficheiro `tiddlywiki.info` na pasta da wiki.
+

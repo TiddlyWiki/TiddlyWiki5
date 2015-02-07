@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Guarda tiddler em bruto para um ficheiro
+
+Guarda um tiddler individual no seu formato bruto texto ou binário para o caminho especificado. 
+
+```
+--savetiddler <título> <nome do ficheiro>
+```
+
+Por defeito, o caminho é resolvido relativamente à sub-pasta `output` da directoria de edição. O comando `--output` pode ser utilizado para redireccionar para uma directoria de destino diferente.
+
+Quaisquer pastas em falta no caminho de destino serão automaticamente criadas.
