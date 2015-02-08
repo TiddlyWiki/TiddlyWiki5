@@ -1,0 +1,15 @@
+created: 20150208191821000
+modified: 20150208191821000
+tags: [[Filter Operators]] [[Negatable Operators]]
+title: haschanged Operator
+type: text/vnd.tiddlywiki
+caption: haschanged
+op-purpose: returns input titles where the corresponding tiddlers have changed since startup
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: those input tiddlers that have not changed since startup
+op-neg-output: those input tiddlers that have changed since startup
+
+Each input title is processed in turn, and is returned if any of its fields have changed since startup (or, with negation, if it has not changed).
+
+<<.operator-examples "haschanged">>
