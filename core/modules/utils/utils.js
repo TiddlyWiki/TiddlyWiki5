@@ -421,9 +421,9 @@ exports.stringify = function(s) {
 	* line separator, paragraph separator, and line feed. Any character may
 	* appear in the form of an escape sequence.
 	*
-	* For portability, we also escape escape all non-ASCII characters.
+	* For portability, we also escape all non-ASCII characters.
 	*/
-	return s
+	return (s || "")
 		.replace(/\\/g, '\\\\')            // backslash
 		.replace(/"/g, '\\"')              // double quote character
 		.replace(/'/g, "\\'")              // single quote character
