@@ -594,17 +594,20 @@ exports.getSubTiddler = function(title,subTiddlerTitle) {
 /*
 Retrieve a tiddler as a JSON string of the fields
 */
-exports.getTiddlerAsJson = function(title) {
-	var tiddler = this.getTiddler(title);
+exports.getTiddlerAsJson = function(title,exporting) {
+	var fields = Object.create(null),
+		tiddler = this.getTiddler(title);
 	if(tiddler) {
-		var fields = Object.create(null);
 		$tw.utils.each(tiddler.fields,function(value,name) {
 			fields[name] = tiddler.getFieldString(name);
 		});
-		return JSON.stringify(fields);
 	} else {
-		return JSON.stringify({title: title});
+		fields["title"] = title;
 	}
+	if(exporting) {
+		fields["_origin"] = window.location.href;
+	}
+	return JSON.stringify(fields);
 };
 
 /*

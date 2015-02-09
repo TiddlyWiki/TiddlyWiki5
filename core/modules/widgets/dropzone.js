@@ -27,14 +27,14 @@ DropZoneWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	var domNode;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("div");
+	domNode = this.document.createElement("div");
 	domNode.className = "tc-dropzone";
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -119,20 +119,27 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 };
 
 DropZoneWidget.prototype.importData = function(dataTransfer) {
+	var data, dataType, origin, t, tiddlerFields, title;
 	// Try each provided data type in turn
-	for(var t=0; t<this.importDataTypes.length; t++) {
+	for(t=0; t<this.importDataTypes.length; t++) {
 		if(!$tw.browser.isIE || this.importDataTypes[t].IECompatible) {
 			// Get the data
-			var dataType = this.importDataTypes[t];
-				var data = dataTransfer.getData(dataType.type);
+			dataType = this.importDataTypes[t];
+			data = dataTransfer.getData(dataType.type);
 			// Import the tiddlers in the data
 			if(data !== "" && data !== null) {
 				if($tw.log.IMPORT) {
 					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
 				}
-				var tiddlerFields = dataType.convertToFields(data);
-				if(!tiddlerFields.title) {
+				tiddlerFields = dataType.convertToFields(data);
+				title = tiddlerFields.title;
+				if(!title) {
 					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
+				} else {
+					origin = tiddlerFields["_origin"];
+					if(origin && origin === window.location.href && $tw.wiki.getTiddler(title)) {
+						return false;
+					}
 				}
 				this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				return;
