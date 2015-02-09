@@ -208,7 +208,7 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 	var title = event.param || event.tiddlerTitle,
 		tiddler = this.wiki.getTiddler(title),
 		storyList = this.getStoryList(),
-		originalTitle = tiddler ? tiddler.fields["draft.of"] : 0,
+		originalTitle = tiddler ? tiddler.fields["draft.of"] : "",
 		confirmationTitle;
 	if(!tiddler) {
 		return false;
