@@ -241,6 +241,18 @@ a.tc-tiddlylink-external:hover {
 	content: "<<lingo DropMessage>>";
 }
 
+.tc-dropzone-cancel {
+	display:none;
+	position:absolute;
+	top:0;
+	right:10px;
+	z-index:10001;
+}
+
+.tc-dragover .tc-dropzone-cancel {
+	display:block;
+}
+
 /*
 ** Buttons
 */

@@ -27,14 +27,14 @@ DropZoneWidget.prototype = new Widget();
 Render this widget into the DOM
 */
 DropZoneWidget.prototype.render = function(parent,nextSibling) {
-	var self = this;
+	var cancel,domNode,self = this;
 	// Remember parent
 	this.parentDomNode = parent;
 	// Compute attributes and execute state
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("div");
+	domNode = this.document.createElement("div");
 	domNode.className = "tc-dropzone";
 	// Add event handlers
 	$tw.utils.addEventListeners(domNode,[
@@ -46,6 +46,14 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	]);
 	domNode.addEventListener("click",function (event) {
 	},false);
+	// Create cancel button
+	cancel = this.document.createElement("button");
+	cancel.className = "tc-dropzone-cancel tc-btn-invisible";
+	cancel.innerHTML = "x";
+	cancel.addEventListener("click",function (event) {
+		$tw.utils.removeClass(this.parentNode,"tc-dragover");
+	},false);
+	domNode.appendChild(cancel);
 	// Insert element
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
