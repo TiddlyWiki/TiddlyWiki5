@@ -1,0 +1,85 @@
+title: $:/core/ui/ControlPanel/Plugins/Add
+tags: $:/tags/ControlPanel/Plugins
+caption: {{$:/language/ControlPanel/Plugins/Add/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Plugins/
+
+\define install-plugin-button()
+<$button>
+<$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""install""">
+reinstall
+</$list>
+</$button>
+\end
+
+\define display-plugin-info()
+<tr>
+<td>
+<<install-plugin-button>>
+<br>
+</td>
+<td>
+''<$view tiddler=<<assetInfo>> field="description"/>''
+<br>
+<$view tiddler=<<assetInfo>> field="original-title"/>
+</td>
+<td>
+<$view tiddler=<<assetInfo>> field="version"/>
+<$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion">
+<br>
+<em>
+Installed:
+<br>
+<$text text=<<installedVersion>>/>
+</em>
+</$list>
+</td>
+</tr>
+\end
+
+\define load-plugin-library-button()
+<$button>
+<$action-sendmessage $message="tm-load-plugin-library" url={{!!url}} infoTitlePrefix="$:/temp/RemoteAssetInfo/"/>
+open plugin library
+</$button>
+\end
+
+\define display-server-connection()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/ServerConnection]suffix{!!url}]" variable="connectionTiddler" emptyMessage=<<load-plugin-library-button>>>
+
+Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input" focus="true"/>
+<$select tiddler="$:/temp/RemoteAssetCategory/$(currentTiddler)$" default="plugin">
+<option value="plugin">Plugins</option>
+<option value="theme">Themes</option>
+<option value="language">Languages</option>
+</$select>
+
+<$set name="pluginType" filter="[[$:/temp/RemoteAssetCategory/$(currentTiddler)$]is[tiddler]]" value={{$:/temp/RemoteAssetCategory/$(currentTiddler)$}} emptyValue="plugin">
+<table class="tc-plugin-library-listing">
+<tbody>
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type<pluginType>search{$:/temp/RemoteAssetSearch/$(currentTiddler)$}sort[description]]" variable="assetInfo">
+<<display-plugin-info>>
+</$list>
+</tbody>
+</table>
+</$set>
+</$list>
+\end
+
+\define plugin-library-listing()
+<$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
+<div class="tc-plugin-library">
+
+!! <$transclude field="caption"><$view field="title"/></$transclude>
+
+<$view field="url"/>
+<<display-server-connection>>
+</div>
+</$list>
+\end
+
+<div>
+<<plugin-library-listing>>
+</div>
+

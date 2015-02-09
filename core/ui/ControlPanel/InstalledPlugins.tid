@@ -1,6 +1,6 @@
-title: $:/core/ui/ControlPanel/Plugins
-tags: $:/tags/ControlPanel
-caption: {{$:/language/ControlPanel/Plugins/Caption}}
+title: $:/core/ui/ControlPanel/Plugins/Installed
+tags: $:/tags/ControlPanel/Plugins
+caption: {{$:/language/ControlPanel/Plugins/Installed/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Plugins/
 \define popup-state-macro()

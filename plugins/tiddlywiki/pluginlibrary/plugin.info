@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/tiddlywiki/pluginlibrary",
+	"description": "Plugin for building the TiddlyWiki Plugin Library",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0"
+}
