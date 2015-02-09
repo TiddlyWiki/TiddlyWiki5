@@ -58,9 +58,7 @@ Invoke the action associated with this widget
 */
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this;
-	if(typeof this.actionValue === "string") {
-		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);		
-	}
+	this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue);
 	$tw.utils.each(this.attributes,function(attribute,name) {
 		if(name.charAt(0) !== "$") {
 			self.wiki.setText(self.actionTiddler,name,undefined,attribute);
