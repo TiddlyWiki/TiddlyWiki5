@@ -71,9 +71,12 @@ Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" d
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
 <div class="tc-plugin-library">
 
-!! <$transclude field="caption"><$view field="title"/></$transclude>
+!! <$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
 
-<$view field="url"/>
+//<$view field="url"/>//
+
+<$transclude/>
+
 <<display-server-connection>>
 </div>
 </$list>
