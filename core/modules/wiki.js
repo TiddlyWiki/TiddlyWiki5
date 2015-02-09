@@ -65,8 +65,12 @@ exports.setText = function(title,field,index,value,options) {
 	// Check if it is a reference to a tiddler field
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
-		data[index] = value;
-		this.setTiddlerData(title,data,modificationFields);
+		if(value !== undefined) {
+			data[index] = value;
+		} else {
+			delete data[index];
+		}
+		this.setTiddlerData(title,data,this.getModificationFields());
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
