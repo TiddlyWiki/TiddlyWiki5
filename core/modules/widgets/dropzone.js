@@ -134,6 +134,10 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 				if(!tiddlerFields.title) {
 					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
 				}
+				if($tw.dragging) {
+					$tw.dragging = false;
+					return false;
+				}
 				this.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				return;
 			}
