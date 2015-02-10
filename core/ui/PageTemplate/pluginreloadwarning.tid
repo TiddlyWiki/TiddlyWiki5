@@ -3,7 +3,7 @@ tags: $:/tags/PageTemplate
 
 \define lingo-base() $:/language/
 
-<$list filter="[has[plugin-type]haschanged[]limit[1]]">
+<$list filter="[has[plugin-type]haschanged[]!plugin-type[import]limit[1]]">
 
 <$reveal type="nomatch" state="$:/temp/HidePluginWarning" text="yes">
 
