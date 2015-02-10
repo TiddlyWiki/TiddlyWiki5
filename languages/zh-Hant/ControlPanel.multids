@@ -38,6 +38,8 @@ Palette/Editor/Reset/Caption: 重置
 Palette/HideEditor/Caption: 隱藏編輯器
 Palette/Prompt: 當前的調色盤：
 Palette/ShowEditor/Caption: 顯示編輯器
+Plugins/Add/Hint: 安裝新插件
+Plugins/Add/Caption: 新增
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 停用
 Plugins/Disable/Hint: 重新載入頁面時停用此插件
@@ -45,6 +47,8 @@ Plugins/Disabled/Status: (已停用)
 Plugins/Empty/Hint: 無
 Plugins/Enable/Caption: 啟用
 Plugins/Enable/Hint: 重新載入頁面時啟用此插件
+Plugins/Installed/Hint: 當前已安裝的插件
+Plugins/Installed/Caption: 已安裝
 Plugins/Language/Prompt: 語言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 佈景主題
