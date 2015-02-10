@@ -153,7 +153,7 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 			}
 			// Then the data
 			dataTransfer.clearData();
-			var jsonData = this.wiki.getTiddlerAsJson(this.to,true),
+			var jsonData = this.wiki.getTiddlerAsJson(this.to),
 				textData = this.wiki.getTiddlerText(this.to,""),
 				title = (new RegExp("^" + $tw.config.textPrimitives.wikiLink + "$","mg")).exec(this.to) ? this.to : "[[" + this.to + "]]";
 			// IE doesn't like these content types
