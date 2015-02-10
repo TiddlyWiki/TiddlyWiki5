@@ -861,6 +861,8 @@ $tw.Wiki = function(options) {
 		if(tiddler) {
 			var title = tiddler.fields.title;
 			if(title) {
+// Uncomment the following line for detailed logs of all tiddler writes
+// console.log("Adding",title,tiddler)
 				tiddlers[title] = tiddler;
 				this.clearCache(title);
 				this.clearGlobalCache();
