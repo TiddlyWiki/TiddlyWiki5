@@ -15,7 +15,7 @@ returns the value at a given index of datatiddlers
 /*
 Export our filter function
 */
-exports.getIndex = function(source,operator,options) {
+exports.getindex = function(source,operator,options) {
 	var data,title,results = [];
 	if(operator.operand){
 		source(function(tiddler,title) {

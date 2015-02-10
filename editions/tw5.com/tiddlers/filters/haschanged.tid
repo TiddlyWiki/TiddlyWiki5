@@ -1,0 +1,15 @@
+created: 20150208191821000
+modified: 20150208191821000
+tags: [[Filter Operators]] [[Negatable Operators]]
+title: haschanged Operator
+type: text/vnd.tiddlywiki
+caption: haschanged
+op-purpose: filter the input by tiddler modification status
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: those input tiddlers that have been modified during this session
+op-neg-output: those input tiddlers that have <<.em not>> been modified during this session
+
+A tiddler is deemed to have been modified if it has been written back to the wiki since the start of the current ~TiddlyWiki session. If you edit a tiddler and immediately store it again without making any changes, that is enough to mark it as modified.
+
+<<.operator-examples "haschanged">>

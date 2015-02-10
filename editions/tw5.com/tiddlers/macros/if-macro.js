@@ -20,7 +20,6 @@ exports.params = [
 exports.run = function(cond, then, elze) {
 	then = then || "";
 	elze = elze || "";
-console.log('Condition:', cond);
 	return cond ? then : elze;
 };
 

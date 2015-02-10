@@ -27,5 +27,15 @@ See the PluginMechanism discussion for more details about how plugins are implem
 # In another browser window, find a link to the plugin, e.g. [[$:/plugins/tiddlywiki/example]]. You will typically find links to plugins on the home page of the plugin (for example, http://tiddlywiki.com/plugins/tiddlywiki/katex/)
 # Drag the link [[$:/plugins/tiddlywiki/example]] to the browser window containing your TiddlyWiki
 # Save your TiddlyWiki
-# Refresh the window
+# ''Refresh the window to automatically create the shadow tiddlers that are provided by the plugin in order for it to work correctly''
 # The plugin should now be available for use
+
+! How to uninstall / delete a plugin
+
+# Create a backup of your current TiddlyWiki HTML file ([[just in case|The First Rule of Using TiddlyWiki]])
+# Open the controlpanel and go to the plugin tab
+# Click on the plugin you want to delete to open its tiddler
+# Click the edit-mode icon then delete the tiddler
+# Save your TiddlyWiki
+# ''Refresh the window to automatically delete the shadow tiddlers created by the plugin''
+# The plugin should now be deleted

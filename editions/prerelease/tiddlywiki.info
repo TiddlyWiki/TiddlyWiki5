@@ -16,23 +16,6 @@
 		"tiddlywiki/readonly"
 	],
 	"languages": [
-		"da-DK",
-	    "el-GR",
-		"en-US",
-		"en-GB",
-		"de-AT",
-		"de-DE",
-		"es-ES",
-		"fr-FR",
-		"nl-NL",
-		"zh-Hans",
-		"zh-Hant",
-		"hi-IN",
-		"pa-IN",
-		"it-IT",
-		"ja-JP",
-		"cs-CZ",
-		"ru-RU"
 	],
 	"includeWikis": [
 		"../tw5.com"
