@@ -30,7 +30,7 @@ var ZoominListView = function(listWidget) {
 		if(!(domNode instanceof Element)) {
 			return;
 		}
-		if(targetTiddler !== itemWidget.parseTreeNode.itemTitle || (!targetTiddler && index)) {
+		if((targetTiddler && targetTiddler !== itemWidget.parseTreeNode.itemTitle) || (!targetTiddler && index)) {
 			domNode.style.display = "none";
 		} else {
 			self.currentTiddlerDomNode = domNode;
