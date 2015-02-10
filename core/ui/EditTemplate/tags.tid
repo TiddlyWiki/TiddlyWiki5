@@ -27,11 +27,11 @@ background-color:$(backgroundColor)$;
 <$reveal state=<<qualify "$:/state/popup/tags-auto-complete">> type="nomatch" text="" default="">
 <div class="tc-block-dropdown">
 <$linkcatcher set="$:/temp/NewTagName" setTo="" message="tm-add-tag">
-<$list filter="[tags[]search:title{$:/temp/NewTagName}sort[]]">
+<$list filter="[tags[]!is[system]search:title{$:/temp/NewTagName}sort[]]">
 {{||$:/core/ui/Components/tag-link}}
 </$list>
 <hr>
-<$list filter="[!is[system]search:title{$:/temp/NewTagName}sort[]]">
+<$list filter="[tags[]is[system]search:title{$:/temp/NewTagName}sort[]]">
 {{||$:/core/ui/Components/tag-link}}
 </$list>
 </$linkcatcher>
