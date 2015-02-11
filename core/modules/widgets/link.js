@@ -161,9 +161,9 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 			if(!$tw.browser.isIE) {
 				dataTransfer.setData("text/vnd.tiddler",jsonData);
 				dataTransfer.setData("text/plain",title);
-				dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURI(jsonData));
+				dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 			}
-			dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(jsonData));
+			dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
 			dataTransfer.setData("Text",title);
 			event.stopPropagation();
 		} else {

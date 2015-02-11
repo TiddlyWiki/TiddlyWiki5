@@ -159,7 +159,7 @@ DropZoneWidget.prototype.importDataTypes = [
 	}},
 	{type: "URL", IECompatible: true, convertToFields: function(data) {
 		// Check for tiddler data URI
-		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return JSON.parse(match[1]);
 		} else {
@@ -170,7 +170,7 @@ DropZoneWidget.prototype.importDataTypes = [
 	}},
 	{type: "text/x-moz-url", IECompatible: false, convertToFields: function(data) {
 		// Check for tiddler data URI
-		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return JSON.parse(match[1]);
 		} else {
