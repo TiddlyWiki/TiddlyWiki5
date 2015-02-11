@@ -11,4 +11,6 @@ op-output: the titles of any tiddlers that carry the input tags
 
 Each input tag is processed in turn. The list of tiddlers carrying that tag is generated, [[sorted|Order of Tagged Tiddlers]], and then [[dominantly appended|Dominant Append]] to the operator's overall output.
 
+By default, the output contains titles of tiddlers that carry <<.em any>> of the input tags. If the all suffix is used, the output is restricted to tiddlers that carry <<.em>> all of the input tags.
+
 <<.operator-examples "tagging">>
