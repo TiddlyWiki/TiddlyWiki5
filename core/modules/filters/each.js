@@ -29,14 +29,17 @@ exports.each = function(source,operator,options) {
 					results.push(title);
 				}
 			}
-		});		
+		});
 	} else {
 		source(function(tiddler,title) {
 			if(tiddler) {
 				$tw.utils.each(
 					options.wiki.getTiddlerList(title,field),
 					function(value) {
-						$tw.utils.pushOnce(results,value);
+						if(!$tw.utils.hop(values,value)) {
+							values[value] = true;
+							results.push(value);
+						}
 					}
 				);
 			}
