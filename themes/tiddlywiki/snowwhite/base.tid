@@ -71,7 +71,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-modal-displayed {
-	-webkit-filter: blur(4px);
+	<<filter "blur(4px)">>
 }
 
 .tc-modal {

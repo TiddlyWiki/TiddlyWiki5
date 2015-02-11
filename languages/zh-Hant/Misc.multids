@@ -14,6 +14,8 @@ Encryption/ConfirmClearPassword: 您要清除密碼？這將移除儲存此維�
 Encryption/PromptSetPassword: 為此 TiddlyWiki 設置一個新密碼
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
+OfficialPluginLibrary: 官方 ~TiddlyWiki 插件程式庫
+PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
 TagManager/Colour/Heading: 顏色

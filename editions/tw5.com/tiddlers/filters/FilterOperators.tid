@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150124200331000
+modified: 20150203183422000
 tags: Concepts Filters
 title: Filter Operators
 type: text/vnd.tiddlywiki
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 \define .operator-rows(filter)
 <$list filter="$filter$"><tr>
 <td><$link to={{!!title}}>{{!!caption}}</$link></td>
-<td>{{!!purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
+<td>{{!!op-purpose}} <$list filter="[all[current]tag[Common Operators]]">{{$:/core/images/done-button}}</$list></td>
 <td align="center"><$list filter="[all[current]tag[Negatable Operators]]">`!`</$list></td>
 </tr></$list>
 \end
@@ -39,4 +39,4 @@ The following table lists all the core operators. The commonest ones are checkma
 
 A typical step is written as `[operator[parameter]]`, although not all of the operators need a [[parameter|Filter Parameter]].
 
-Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few are [[absolute|Absolute Operators]]. For the exact rules, see [[Filter Syntax]].
+Most steps process the [[selection of titles|Title Selection]] that are supplied as their input, but a few [[construct an entirely new selection|Selection Constructors]] instead. For the exact rules, see [[Filter Syntax]].

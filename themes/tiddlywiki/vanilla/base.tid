@@ -242,6 +242,21 @@ a.tc-tiddlylink-external:hover {
 }
 
 /*
+** Plugin reload warning
+*/
+
+.tc-plugin-reload-warning {
+	z-index: 1000;
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: <<colour alert-background>>;
+	text-align: center;
+}
+
+/*
 ** Buttons
 */
 

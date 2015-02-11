@@ -38,6 +38,8 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
+Plugins/Add/Hint: Install new plugins
+Plugins/Add/Caption: Add
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -45,6 +47,8 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
+Plugins/Installed/Hint: Currently installed plugins
+Plugins/Installed/Caption: Installed
 Plugins/Language/Prompt: Languages
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Themes
@@ -56,7 +60,7 @@ Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
 Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address//
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://me.com/store.php`.//
 Saving/TiddlySpot/Password: Password
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory

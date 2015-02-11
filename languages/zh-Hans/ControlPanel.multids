@@ -6,7 +6,7 @@ Appearance/Caption: 视觉外观
 Appearance/Hint: 定制您的 TiddlyWiki 外观。
 Basics/AnimDuration/Prompt: 动画持续时间：
 Basics/Caption: 基本
-Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，<br />或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
+Basics/DefaultTiddlers/BottomHint: 标题含空白时请使用 &#91;&#91;双中括弧&#93;&#93;，或者您可用 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">保留开启中的条目顺序</$button>
 Basics/DefaultTiddlers/Prompt: 首页：
 Basics/DefaultTiddlers/TopHint: 默认开启的条目：
 Basics/Language/Prompt: 您好！当前的语言：
@@ -38,6 +38,8 @@ Palette/Editor/Reset/Caption: 重置
 Palette/HideEditor/Caption: 隐藏编辑器
 Palette/Prompt: 当前的调色板：
 Palette/ShowEditor/Caption: 显示编辑器
+Plugins/Add/Hint: 安装新插件
+Plugins/Add/Caption: 添加
 Plugins/Caption: 插件
 Plugins/Disable/Caption: 禁用
 Plugins/Disable/Hint: 重新加载页面时禁用此插件
@@ -45,6 +47,8 @@ Plugins/Disabled/Status: (已禁用)
 Plugins/Empty/Hint: 无
 Plugins/Enable/Caption: 启用
 Plugins/Enable/Hint: 重新加载页面时启用此插件
+Plugins/Installed/Hint: 当前已安装的插件
+Plugins/Installed/Caption: 已安装
 Plugins/Language/Prompt: 语言
 Plugins/Plugin/Prompt: 插件
 Plugins/Theme/Prompt: 布景主题
@@ -56,7 +60,7 @@ Saving/TiddlySpot/Backups: 备份
 Saving/TiddlySpot/Description: 这些设置只适用于保存到 http://tiddlyspot.com 或兼容的远程服务器时。
 Saving/TiddlySpot/Filename: 上传文件名
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址//
+Saving/TiddlySpot/Hint: //默认之服务器网址 `http://<wikiname>.tiddlyspot.com/store.cgi`，可改为定制之服务器网址，例如 `http://example.com/store.php`。//
 Saving/TiddlySpot/Password: 密码
 Saving/TiddlySpot/ServerURL: 服务器网址
 Saving/TiddlySpot/UploadDir: 上传文件夹

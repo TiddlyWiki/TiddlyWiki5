@@ -1,17 +1,14 @@
 created: 20140410103123179
-modified: 20150124192055000
+modified: 20150203191821000
 tags: [[Filter Operators]] [[Tag Operators]] [[Negatable Operators]]
 title: untagged Operator
 type: text/vnd.tiddlywiki
 caption: untagged
-purpose: discard any input titles that have tags
-
-<$macrocall $name=".operator-def"
-input="a [[selection of titles|Title Selection]]"
-parameter="none"
-output="those input tiddlers that have no tags"
-negationOutput="those input tiddlers that have at least one tag"
-/>
+op-purpose: discard any input titles that have tags
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: those input tiddlers that have no tags
+op-neg-output: those input tiddlers that have at least one tag
 
 A tiddler is deemed to have no tags if it:
 

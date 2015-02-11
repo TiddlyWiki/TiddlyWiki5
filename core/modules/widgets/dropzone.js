@@ -53,6 +53,10 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 };
 
 DropZoneWidget.prototype.enterDrag = function() {
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
+		return false;
+	}
 	// We count enter/leave events
 	this.dragEnterCount = (this.dragEnterCount || 0) + 1;
 	// If we're entering for the first time we need to apply highlighting
@@ -83,6 +87,10 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
 	}
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
+		return false;
+	}
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
 	event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
@@ -96,6 +104,10 @@ DropZoneWidget.prototype.handleDropEvent  = function(event) {
 	this.leaveDrag();
 	// Check for being over a TEXTAREA or INPUT
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+		return false;
+	}
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
 		return false;
 	}
 	var self = this,

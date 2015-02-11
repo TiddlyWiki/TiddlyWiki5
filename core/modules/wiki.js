@@ -761,8 +761,8 @@ exports.old_parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
-	if(!Parser && $tw.config.fileExtensionInfo[type]) {
-		Parser = $tw.Wiki.parsers[$tw.config.fileExtensionInfo[type].type];
+	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
+		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
 	}
 	if(!Parser) {
 		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
@@ -1104,7 +1104,7 @@ exports.readFile = function(file,callback) {
 	if(type === "" || !type) {
 		var dotPos = file.name.lastIndexOf(".");
 		if(dotPos !== -1) {
-			var fileExtensionInfo = $tw.config.fileExtensionInfo[file.name.substr(dotPos)];
+			var fileExtensionInfo = $tw.utils.getFileExtensionInfo(file.name.substr(dotPos));
 			if(fileExtensionInfo) {
 				type = fileExtensionInfo.type;
 			}

@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Fixa le bibliotheca basic de resultatos pro commandos sequente
+
+Fixa le bibliotheca basic de resultatos pro commandos sequente. Le bibliotheca standard de resultatos es le subbibliotheca `output` del bibliotheca ubi on redige.
+
+```
+--output <pathname>
+```
+
+Si le sentiero specificate es relative, illo es resolvite relativemente al actual bibliotheca de labor. Per exemplo `--output .` fixa le bibliotheca de resultatos al actual bibliotheca de labor.
+

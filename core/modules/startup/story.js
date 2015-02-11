@@ -133,8 +133,6 @@ function openStartupTiddlers(options) {
 			target = target.substr(2,target.length - 4);
 		}
 		$tw.wiki.addToHistory(target);
-	} else if(storyList.length > 0) {
-		$tw.wiki.addToHistory(storyList[0]);
 	}
 }
 

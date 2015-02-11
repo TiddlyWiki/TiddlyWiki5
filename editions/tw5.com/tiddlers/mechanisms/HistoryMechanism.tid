@@ -1,5 +1,5 @@
 created: 20140213171818824
-modified: 20140516172236345
+modified: 20150207131000000
 tags: Mechanisms
 title: HistoryMechanism
 type: text/vnd.tiddlywiki
@@ -25,3 +25,11 @@ Which renders the same as the "Open" sidebar tab, with the addition of a tick ag
 <$button message="tm-close-tiddler" class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/> <$reveal type="match" state="$:/HistoryList!!current-tiddler" text=<<currentTiddler>>>&#x2713;</$reveal></$link>
 
 </$list>
+
+!! Empty Story
+
+To display content when the story is empty, create $:/config/EmptyStoryMessage and enter the desired contents. The following would show the GettingStarted tiddler when all others are closed.
+
+```
+{{GettingStarted||$:/core/ui/ViewTemplate}}
+```
