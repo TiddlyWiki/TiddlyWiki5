@@ -17,7 +17,7 @@ The ''action-setfield'' widget is invisible. Any content within it is ignored.
 |$tiddler |The title of the tiddler whose fields are to be modified (if not provided defaults to the [[WidgetVariable: currentTiddler]] |
 |$field |Optional name of a field to be assigned the $value attribute |
 |$index |Optional index of a property in a [[data tiddler|DataTiddlers]] to be assigned the $value attribute|
-|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field |
+|$value |The value to be assigned to the field or index identified by the $field or $index attribute. If neither is specified then the value is assigned to the text field. If no value is specified, $field or $index are being deleted.|
 |//{any attributes not starting with $}// |Each attribute name specifies a field to be modified with the attribute value providing the value to assign to the field  |
 
 ! Examples
