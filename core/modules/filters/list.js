@@ -2,9 +2,7 @@
 title: $:/core/modules/filters/list.js
 type: application/javascript
 module-type: filteroperator
-
 Filter operator returning the tiddlers whose title is listed in the operand tiddler
-
 \*/
 (function(){
 
@@ -27,7 +25,11 @@ exports.list = function(source,operator,options) {
 			}
 		});
 	} else {
-		results = list;
+		source(function(tiddler,title) {
+			if(list.indexOf(title) > -1) {
+				results.push(title);
+			}
+		});
 	}
 	return results;
 };
