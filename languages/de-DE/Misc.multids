@@ -14,6 +14,8 @@ Encryption/ConfirmClearPassword: Wollen Sie das Passwort löschen? Damit wird di
 Encryption/PromptSetPassword: Der TiddlyWiki Inhalt wird mit dem nächsten Speichern verschlüsselt!
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
+OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin Verzeichnis
+PluginReloadWarning: Das Wiki muss gespeichert {{$:/core/ui/Buttons/save-wiki}} und neu gladen {{$:/core/ui/Buttons/refresh}} werden, damit die Plugins ausgeführt werden.
 RecentChanges/DateFormat: YYYY MMM DD
 SystemTiddler/Tooltip: Das ist ein System-Tiddler
 TagManager/Colour/Heading: Farbe
