@@ -17,7 +17,7 @@ The ''resolvepath'' macro constructs a url for a relative source path with respe
 A trivial example to show how the macro works:
 
 ```
-<<resolvepath "./backup" "http://mysite.com/store.php">>
+<<resolvepath "./backup" "http://example.com/store.php">>
 ```
 
-<<resolvepath "./backup" "http://mysite.com/store.php">>
+<<resolvepath "./backup" "http://example.com/store.php">>
