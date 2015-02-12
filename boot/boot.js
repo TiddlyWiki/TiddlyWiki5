@@ -1547,7 +1547,7 @@ $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 		env = process.env[envVar],
 		paths = [];
 	if(env) {
-		env.split(path.delimiter).map(function(item){
+		env.split(path.delimiter).map(function(item) {
 			if(item) {
 				paths.push(item)
 			}
