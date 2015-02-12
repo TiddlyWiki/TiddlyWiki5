@@ -40,14 +40,12 @@ exports.upgrade = function(wiki,titles,tiddlers) {
 		var incomingTiddler = tiddlers[title];
 		// Check if we're dealing with a plugin
 		if(incomingTiddler && incomingTiddler["plugin-type"] && incomingTiddler.version) {
-			// Upgrade the incoming plugin if we've got a newer version in the upgrade library
+			// Upgrade the incoming plugin if it is in the upgrade library
 			var libraryTiddler = getLibraryTiddler(title);
 			if(libraryTiddler && libraryTiddler["plugin-type"] && libraryTiddler.version) {
-				if($tw.utils.checkVersions(libraryTiddler.version,incomingTiddler.version)) {
-					tiddlers[title] = libraryTiddler;
-					messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Upgraded",{variables: {incoming: incomingTiddler.version, upgraded: libraryTiddler.version}});
-					return;
-				}
+				tiddlers[title] = libraryTiddler;
+				messages[title] = $tw.language.getString("Import/Upgrader/Plugins/Upgraded",{variables: {incoming: incomingTiddler.version, upgraded: libraryTiddler.version}});
+				return;
 			}
 			// Suppress the incoming plugin if it is older than the currently installed one
 			var existingTiddler = wiki.getTiddler(title);

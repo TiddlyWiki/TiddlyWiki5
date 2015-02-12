@@ -211,7 +211,7 @@ exports.importTiddler = function(tiddler) {
 	// Check if we're dealing with a plugin
 	if(tiddler && tiddler.hasField("plugin-type") && tiddler.hasField("version") && existingTiddler && existingTiddler.hasField("plugin-type") && existingTiddler.hasField("version")) {
 		// Reject the incoming plugin if it is older
-		if($tw.utils.checkVersions(existingTiddler.fields.version,tiddler.fields.version)) {
+		if(!$tw.utils.checkVersions(tiddler.fields.version,existingTiddler.fields.version)) {
 			return false;
 		}
 	}

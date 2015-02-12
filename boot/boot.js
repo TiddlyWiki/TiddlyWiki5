@@ -375,7 +375,7 @@ $tw.utils.checkVersions = function(versionStringA,versionStringB) {
 	];
 	return (diff[0] > 0) ||
 		(diff[0] === 0 && diff[1] > 0) ||
-		(diff[0] === 0 && diff[1] === 0 && diff[2] > 0);
+		(diff[0] === 0 && diff[1] === 0 && diff[2] >= 0);
 };
 
 /*
@@ -1750,7 +1750,7 @@ $tw.boot.startup = function(options) {
 		// Read package info
 		$tw.packageInfo = require("../package.json");
 		// Check node version number
-		if($tw.utils.checkVersions($tw.packageInfo.engines.node.substr(2),process.version.substr(1))) {
+		if(!$tw.utils.checkVersions(process.version.substr(1),$tw.packageInfo.engines.node.substr(2))) {
 			$tw.utils.error("TiddlyWiki5 requires node.js version " + $tw.packageInfo.engines.node);
 		}
 	}
