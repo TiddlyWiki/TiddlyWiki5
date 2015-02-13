@@ -1,0 +1,4 @@
+title: $:/core/config-macros/stacked-storyview
+tags: $:/tags/Macro
+
+\define tv-stacked-storyview-fan-height-config-title() $:/config/StackedStoryViewFanHeight
