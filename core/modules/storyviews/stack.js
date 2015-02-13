@@ -17,6 +17,7 @@ var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/
 var StackedListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
+	this.fanHeightConfigTitle = listWidget.getVariable("tv-stacked-storyview-fan-height-config-title");
 	this.placeTiddlers();
 };
 
@@ -38,22 +39,29 @@ StackedListView.prototype.placeTiddlers = function() {
 			$tw.utils.pushTop(this.listStack,title);
 		}
 	}
-	// Make all the tiddlers position absolute, and hide all but the top (or first) one
+	// Get the configured fan height
+	var fanHeight = parseInt(this.listWidget.wiki.getTiddlerText(this.fanHeightConfigTitle),10);
+	// Position each tiddler
 	for(var t=numItems-1; t>=0; t--) {
-		// Get the DOM node for this entry
+		// Get the DOM node for this tiddler
 		itemWidget = this.listWidget.children[t];
 		var domNode = itemWidget.findFirstDomNode();
 		if(domNode instanceof Element) {
+			// Find the position of the tiddler in the stack
 			var pos = this.listStack.indexOf(itemWidget.parseTreeNode.itemTitle);
 			if(pos !== -1) {
+				// Style the tiddler to position it
 				var posFactor = pos/(numItems-1);
 				$tw.utils.setStyle(domNode,[
 					{position: "absolute"},
 					{transformOrigin: "50% 0"},
 					{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing},
-					{transform: "translateX(0px) translateY(" + (100 * posFactor * posFactor) + "px) scale(" + (0.1 + posFactor * 0.9) + ")"},
+					{transform: "translateX(0px) translateY(" + (fanHeight * posFactor * posFactor) + "px) scale(" + (0.1 + posFactor * 0.9) + ")"},
 					{zIndex: pos + ""}
 				]);
+				// $tw.utils.addEventListeners(domNode,[
+				// 	{name: "mouseenter", handlerObject: this, handlerMethod: "handleMouseEnterEvent"},
+				// ]);
 			}
 		}
 	}
