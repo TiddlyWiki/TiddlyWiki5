@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/storyviews/stack.js
+title: $:/core/modules/storyviews/stacked.js
 type: application/javascript
 module-type: storyview
 
@@ -14,13 +14,13 @@ Keeps tiddlers in a stack
 
 var easing = "cubic-bezier(0.645, 0.045, 0.355, 1)"; // From http://easings.net/#easeInOutCubic
 
-var StackListView = function(listWidget) {
+var StackedListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
 	this.placeTiddlers();
 };
 
-StackListView.prototype.placeTiddlers = function() {
+StackedListView.prototype.placeTiddlers = function() {
 	// Initialise the stack of tiddler titles
 	this.listStack = [];
 	var numItems = this.listWidget.children.length,
@@ -59,19 +59,19 @@ StackListView.prototype.placeTiddlers = function() {
 	}
 };
 
-StackListView.prototype.navigateTo = function(historyInfo) {
+StackedListView.prototype.navigateTo = function(historyInfo) {
 	this.placeTiddlers();
 };
 
-StackListView.prototype.insert = function(widget) {
+StackedListView.prototype.insert = function(widget) {
 	this.placeTiddlers();
 };
 
-StackListView.prototype.remove = function(widget) {
+StackedListView.prototype.remove = function(widget) {
 	widget.removeChildDomNodes();
 	this.placeTiddlers();
 };
 
-exports.stack = StackListView;
+exports.stacked = StackedListView;
 
 })();
