@@ -77,6 +77,9 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
+	if(this.getExportLink){
+		wikiLinkText = this.getExportLink(wikiLinkText);
+	}
 	domNode.setAttribute("href",wikiLinkText);
 	// Set the tooltip
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
