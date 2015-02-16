@@ -27,11 +27,7 @@ exports.list = function(source,operator,options) {
 			}
 		});
 	} else {
-		source(function(tiddler,title) {
-			if(list.indexOf(title) > -1) {
-				results.push(title);
-			}
-		});
+		results = list;
 	}
 	return results;
 };
