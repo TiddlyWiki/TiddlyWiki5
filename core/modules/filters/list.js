@@ -2,7 +2,9 @@
 title: $:/core/modules/filters/list.js
 type: application/javascript
 module-type: filteroperator
+
 Filter operator returning the tiddlers whose title is listed in the operand tiddler
+
 \*/
 (function(){
 
