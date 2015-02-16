@@ -60,7 +60,7 @@ Saving/TiddlySpot/Backups: Backups
 Saving/TiddlySpot/Description: These settings are only used when saving to http://tiddlyspot.com or a compatible remote server
 Saving/TiddlySpot/Filename: Upload Filename
 Saving/TiddlySpot/Heading: ~TiddlySpot
-Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://me.com/store.php`.//
+Saving/TiddlySpot/Hint: //The server URL defaults to `http://<wikiname>.tiddlyspot.com/store.cgi` and can be changed to use a custom server address, e.g. `http://example.com/store.php`.//
 Saving/TiddlySpot/Password: Password
 Saving/TiddlySpot/ServerURL: Server URL
 Saving/TiddlySpot/UploadDir: Upload Directory
