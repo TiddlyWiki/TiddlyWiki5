@@ -1,5 +1,5 @@
 created: 20130825150000000
-modified: 20140912141751154
+modified: 20150216171751154
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlerFiles
 type: text/vnd.tiddlywiki
@@ -56,7 +56,23 @@ Older `*.tiddler` files more closely matched the store format used by TiddlyWiki
 
 !! ~TiddlyWeb-style JSON files
 
-These files are a straightforward array of hashmaps of `name:value` properties. Currently only these known fields are processed: `title`, `text`, `created`, `creator`, `modified`, `modifier`, `type` and `tags`.
+These files are a straightforward array of hashmaps of `name:value` properties. All field values must be specified as strings.
+
+For example:
+
+```
+[
+	{
+		"title": "First Tiddler",
+		"text": "Text of first tiddler",
+		"tags": "one two [[t h r e e]]"
+	},{
+		"title": "Second Tiddler",
+		"text": "Text of second tiddler",
+		"modified": "20150216171751154"
+	}
+]
+```
 
 //The ContentType `application/json` is used internally for these files//
 
