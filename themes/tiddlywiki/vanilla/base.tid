@@ -24,7 +24,9 @@ html button {
 
 html {
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/fontfamily}};
-	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */	
+	text-rendering: optimizeLegibility; /* Enables kerning and ligatures etc. */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 html:-webkit-full-screen {
