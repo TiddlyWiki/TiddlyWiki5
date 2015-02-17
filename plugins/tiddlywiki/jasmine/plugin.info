@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/jasmine",
-	"description": "Jasmine test framework plugin for TiddlyWiki5",
+	"description": "Jasmine: testing framework",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0"
 }
