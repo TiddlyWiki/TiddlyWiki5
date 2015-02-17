@@ -1544,15 +1544,13 @@ Returns an array of search paths
 */
 $tw.getLibraryItemSearchPaths = function(libraryPath,envVar) {
 	var pluginPaths = [path.resolve($tw.boot.corePath,libraryPath)],
-		env = process.env[envVar],
-		paths = [];
+		env = process.env[envVar];
 	if(env) {
 		env.split(path.delimiter).map(function(item) {
 			if(item) {
-				paths.push(item)
+				pluginPaths.push(item)
 			}
 		});
-		Array.prototype.push.apply(pluginPaths,paths);
 	}
 	return pluginPaths;
 };
