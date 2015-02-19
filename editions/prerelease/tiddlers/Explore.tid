@@ -32,5 +32,6 @@ caption: Explore
 </ol>
 \end
 
+<div class="tc-table-of-contents">
 <<treenode "$:/">>
-
+</div>
