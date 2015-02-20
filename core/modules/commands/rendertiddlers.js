@@ -41,25 +41,25 @@ Command.prototype.execute = function() {
 		extension = this.params[4] || ".html",
 		deleteDirectory = (this.params[5] || "") != "noclean",
 		tiddlers = wiki.filterTiddlers(filter);
-	if(deleteDirectory){
+	if(deleteDirectory) {
 		$tw.utils.deleteDirectory(pathname);
 	}
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
-			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
-		var container = $tw.fakeDocument.createElement("div");
+			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
+			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
-		var text = type === "text/html" ? container.innerHTML : container.textContent;
-		var export_path = null;
+		var text = type === "text/html" ? container.innerHTML : container.textContent,
+			exportPath = null;
 		if($tw.utils.hop($tw.macros,"tv-get-export-path")) {
 			var macroPath = $tw.macros["tv-get-export-path"].run.apply(self,[title]);
-			if(macroPath){
-				export_path = path.resolve( outputPath, macroPath + extension);
+			if(macroPath) {
+				exportPath = path.resolve(outputPath,macroPath + extension);
 			}
 		}
-		var final_path = export_path || path.resolve(pathname,encodeURIComponent(title) + extension);
-		$tw.utils.createFileDirectories(final_path);
-		fs.writeFileSync(final_path,text,"utf8");
+		var finalPath = exportPath || path.resolve(pathname,encodeURIComponent(title) + extension);
+		$tw.utils.createFileDirectories(finalPath);
+		fs.writeFileSync(finalPath,text,"utf8");
 	});
 	return null;
 };
