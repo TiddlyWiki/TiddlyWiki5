@@ -22,6 +22,8 @@ var StackedListView = function(listWidget) {
 };
 
 StackedListView.prototype.placeTiddlers = function() {
+	// Clear flag that a placement is needed
+	this.placementNeeded = false;
 	// Initialise the stack of tiddler titles
 	this.listStack = [];
 	var numItems = this.listWidget.children.length,
@@ -64,6 +66,16 @@ StackedListView.prototype.placeTiddlers = function() {
 				// ]);
 			}
 		}
+	}
+};
+
+StackedListView.prototype.refreshStart = function(changedTiddlers,changedAttributes) {
+	this.placementNeeded = !!(changedTiddlers[this.fanHeightConfigTitle]);
+};
+
+StackedListView.prototype.refreshEnd = function(changedTiddlers,changedAttributes) {
+	if(this.placementNeeded) {
+		this.placeTiddlers();
 	}
 };
 
