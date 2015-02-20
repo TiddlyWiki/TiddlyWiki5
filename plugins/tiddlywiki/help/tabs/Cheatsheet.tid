@@ -1,0 +1,776 @@
+title: $:/plugins/tiddlywiki/help/HelpPanel/Cheatsheet
+tags: $:/tags/HelpPanel
+caption: Cheatsheet
+
+<dl class="tc-help-cheatsheet">
+<dt>
+
+```
+''bold''
+```
+</dt>
+<dd>''bold''</dd>
+
+<dt>
+
+```
+//italics//
+```
+</dt>
+<dd>//italics//</dd>
+
+<dt>
+
+```
+''//bold italics//''
+```
+</dt>
+<dd>''//bold italics//''</dd>
+
+<dt>
+
+```
+__underline__
+```
+</dt>
+<dd>__underline__</dd>
+
+<dt>
+
+```
+~~strikethrough~~
+```
+</dt>
+<dd>~~strikethrough~~</dd>
+
+<dt>
+
+```
+super^^script^^
+```
+</dt>
+<dd>super^^script^^</dd>
+
+<dt>
+
+```
+sub,,script,,
+```
+</dt>
+<dd>sub,,script,,</dd>
+
+<dt>
+
+```
+foo -- bar
+foo --- bar
+```
+</dt>
+<dd>foo -- bar (En dash)<br>foo --- bar (Em dash)<br></dd>
+
+<dt>
+
+```
+!Heading 1
+!!Heading 2
+!!!Heading 3
+```
+</dt>
+<dd>
+
+!Heading 1
+!!Heading 2
+!!!Heading 3
+</dd>
+
+<dt>
+
+```
+---
+horizontal rules
+<hr>
+```
+</dt>
+<dd>
+
+---
+horizontal rules
+<hr>
+</dd>
+
+<dt><pre>&#96;code&#96;</pre></dt>
+<dd>`code` ...via backticks</dd>
+
+<dt><pre>&#96;&#96;with &#96;backticks&#96; &#96;&#96;</pre></dt>
+<dd>``with `backticks` ``</dd>
+
+<dt>
+<pre>&#96;&#96;&#96;
+monospaced
+codeblock
+&#96;&#96;&#96;</pre>
+</dt>
+
+<dd>
+
+```
+monospaced
+codeblock
+```
+</dd>
+
+<dt>
+
+```
+"""
+force
+hard
+linebreaks
+like
+this...
+"""
+```
+</dt>
+
+
+<dd>
+
+"""
+force
+hard
+linebreaks
+like
+this...
+"""
+</dd>
+
+<dt>
+
+```
+...since
+new paragraphs
+need two linebreaks
+
+in tw5
+```
+</dt>
+
+<dd>
+
+...since
+new paragraphs
+need two linebreaks
+
+in tw5
+</dd>
+
+
+<dt>
+
+```
+> block
+>> quotes
+>>> are easy
+```
+</dt>
+
+<dd>
+
+> block
+>> quotes
+>>> are <br>easy
+</dd>
+
+
+<dt>
+
+```
+<<<
+real
+easy
+<<<
+```
+</dt>
+
+<dd>
+
+<<<
+real
+easy
+<<<
+</dd>
+
+
+<dt>
+
+```
+* unordered
+** list
+```
+</dt>
+
+<dd>
+
+* unordered
+** list
+</dd>
+
+<dt>
+
+```
+# ordered
+## list
+```
+</dt>
+
+<dd>
+
+# ordered
+## list
+</dd>
+
+<dt>
+
+```
+;definition
+:term
+```
+</dt>
+
+<dd>
+
+;definition
+:term
+</dd>
+
+<dt>
+
+```
+# mixed
+#* lists
+#;you
+#:know
+#>like so
+```
+</dt>
+
+<dd>
+
+# mixed
+#* lists
+#;you
+#:know
+#>like so
+</dd>
+
+<dt>
+
+```
+!.h1-class.red CSS
+#.li-class.red classes
+*.li-class.red can be
+;.dt-class.red assigned
+:.dd-class.red like
+>.blockquote-class.red this
+```
+</dt>
+
+<dd>
+
+!.h1-class.red CSS
+#.li-class.red classes
+*.li-class.red can be
+;.dt-class.red assigned
+:.dd-class.red like
+>.blockquote-class.red this
+</dd>
+
+
+<dt>
+
+```
+[[The Tiddler]]
+[[pretty title|The Tiddler]]
+```
+</dt>
+<dd>
+
+[[The Tiddler]]<br>
+[[pretty title|The Tiddler]]
+</dd>
+
+<dt>
+
+```
+CamelCase
+~SuppressedCamelCase
+```
+</dt>
+<dd>
+
+CamelCase<br>
+~SuppressedWikiLink
+</dd>
+
+<dt>
+
+```
+http://tiddlywiki.com
+[[pretty|http://pretty.com]]
+~http://not.alink.com
+```
+</dt>
+<dd>
+
+http://tiddlywiki.com<br>
+[[google|http://google.com]]<br>
+~http://not.alink.com
+</dd>
+
+<dt>
+
+```
+file://///windows/network<br>
+file:///c:/Windows/foo<br>
+file:///linux/local<br>
+```
+</dt>
+<dd>
+
+file://///windows/network<br>
+file:///c:/Windows/foo<br>
+file:///linux/local<br>
+`file:///` only via local tw!
+</dd>
+
+<dt>
+
+```
+[ext[forced.link.com]]
+[ext[tw|tiddlywiki.com]]
+[ext[foo|file:///c:/foo]]
+[ext[relative/path]]
+```
+</dt>
+<dd>
+
+[ext[forced.link.com]]<br>
+[ext[tw|tiddlywiki.com]]<br>
+[ext[foo|file:///c:/foo]]<br>
+[ext[relative/path]]
+</dd>
+
+<dt>
+
+```
+[img[example.jpg]]
+[img[tooltip|example.jpg]]
+[img width=16 [example.jpg]]
+[img class="tc-image" [example.jpg]]
+```
+</dt>
+
+<dd>
+
+[img[http://www.tiddlywiki.com/favicon.ico]]<br>
+[img[tooltip|http://www.tiddlywiki.com/favicon.ico]]<br>
+[img width=16 [http://www.tiddlywiki.com/favicon.ico]]<br>
+[img class="tc-image" [http://www.tiddlywiki.com/favicon.ico]]
+</dd>
+
+<dt>
+
+```
+[img[http://www.tiddlywiki.com/favicon.ico]]
+[img[path/image.jpg]]
+```
+</dt>
+
+<dd>
+
+[img[http://www.tiddlywiki.com/favicon.ico]]
+</dd>
+
+<dt>
+
+```
+[img width={{!!mywidth}} class=<<image-classes>> [example.jpg]]
+
+{{example.jpg}}
+```
+</dt>
+
+<dd>
+
+params via
+[[transclusion|http://tiddlywiki.com/#Transclusion%20in%20WikiText]] or
+[[macro|http://tiddlywiki.com/#Macros%20in%20WikiText]]<br><br><br>
+
+embed via transclusion
+</dd>
+
+
+<dt>
+
+```
+@@.myStyleClass.red
+;term
+:definition
+@@
+```
+</dt>
+
+<dd>
+
+@@.myStyleClass.red
+;term
+:definition
+@@
+</dd>
+
+<dt>
+
+```
+@@color:red;
+;css styles
+:apply directly like this
+@@
+
+@@color:red; or this @@
+```
+</dt>
+
+<dd>
+
+@@color:red;
+;css styles
+:apply directly like this
+@@
+
+@@color:red; or this @@
+</dd>
+
+<dt>
+
+```
+@@.tc-tiddler-frame
+@@width:200px;height:50px;
+or combine both
+@@
+```
+</dt>
+
+<dd>
+
+@@.tc-tiddler-frame
+@@width:200px;height:50px;
+or combine both
+@@
+</dd>
+
+<dt>
+
+```
+@@.purple Am I purple?@@
+
+<style>
+.purple{color:purple;}
+</style>
+```
+</dt>
+<dd>
+@@.purple Am I purple?@@
+
+<style>
+.purple{color:purple;}
+</style>
+</dd>
+
+<dt style="font-size:80%;">
+
+```
+| !Header | !Header | Mhhh ?!? |
+|^NE |^ N |^ NW|
+|W | ✦ | E|
+|,SW |, S |, SE|
+|merge|left|<|
+|and|now| vertical |
+|>| right|~|
+```
+</dt>
+<dd style="font-size:80%;">
+
+| !Header | !Header | Mhhh ?!? |
+|^NW |^ @@padding:0 7px 14px 7px;display:block; N@@ |^ NE|
+|W | ✦ | @@padding:7px 0;display:block; E@@|
+|,SW |, @@padding:14px 7px 0 7px;display:block; S@@ |, SE|
+|merge|left|<|
+|and|now| vertical |
+|>| right|~|
+</dd>
+
+
+<dt>
+
+```
+<article class="hello">
+HTML tags work like that.
+<!-- even comments -->
+</article>
+```
+</dt>
+
+<dd>
+
+<article class="hello">
+HTML tags work like that.
+<!-- even comments -->
+</article>
+</dd>
+
+<dt>
+
+```
+<a href={{TiddlerWithURL}}>link</a>
+<b class=<<getClass>>>bold</b>
+```
+</dt>
+
+<dd>
+
+<a href={{TiddlerWithURL}}>link</a>
+<b class=<<version>>>bold</b>
+
+set attributes via transclusion or macro
+</dd>
+
+
+<dt>
+
+```
+<div address="""attribute,
+"quoted",
+with,
+linebreaks.""">inspect me!</div>
+```
+</dt>
+
+<dd>
+
+<div address="""attribute,
+"quoted",
+with,
+linebreaks.""">inspect me!</div>
+</dd>
+
+
+<dt>
+
+```
+*nest<div>
+
+;via
+:html
+</div>
+```
+</dt>
+
+<dd>
+
+*nest <div>
+
+;via
+:html
+</div>
+</dd>
+
+
+<dt>
+
+```
+{{Foo}}
+{{Foo||Bar}}
+{{||Foo}}
+{{Foo!!bar}}
+{{!!bar}}
+{{Foo##index}}
+{{##index}}
+{{{ [tag[Foo]] }}}
+{{{ [tag[Foo]] ||Bar}}}
+```
+</dt>
+
+<dd>
+
+» [[transcludes|http://tiddlywiki.com/#Transclusion%20in%20WikiText]] tiddler `Foo`<br>
+» `Foo` with template `Bar`<br>
+» template `Foo` for `CurrentTiddler`<br>
+» field `bar` of `Foo`<br>
+» field `bar` of `CurrentTiddler`<br>
+» `index` of datatiddler `Foo`<br>
+» `index` of `CurrentTiddler` (=data)<br>
+» list of tiddlers tagged `Foo`<br>
+» same using template `Bar`
+</dd>
+
+
+<dt>
+
+```
+\define run(foo:'bar') [[$foo$]]
+
+<<run "foo bar">>
+```
+</dt>
+<dd>
+
+» defines macro `run`<br>
+» with parameter `foo`<br>
+» whose value defaults to `bar`<br>
+» outputs a link to value of param:<br>
+&nbsp;&nbsp;[[foo bar]]
+</dd>
+
+<dt>
+
+```
+\define test()
+I am $(x)$.
+\end
+
+<$set name="x" value="y
+of z">
+<<test>>
+</$set>
+```
+</dt>
+
+<dd>
+
+» defines macro test which<br>
+» outputs value of variable x<br><br>
+
+» sets variable x to: "y<br>
+&nbsp;&nbsp;of z" //(multiline allowed)//<br>
+» runs macro test which outputs:<br>
+&nbsp;&nbsp;"I am y of z."
+</dd>
+
+<dt>
+
+```
+\define test(x, y, z:'0')
+$x$ $y$ $z$
+\end
+
+<$macrocall
+$name="test"
+x=<<version>>
+y={{!!title}}/>
+```
+</dt>
+
+<dd>
+
+» defines macro test<br>
+» outputs 3 params<br><br>
+
+» calls test via macrocall widget<br>
+» using macro version as param x<br>
+» and transclusion as param y<br><br>
+
+» outputs:<br>
+&nbsp;&nbsp;<<version>> Markup 0
+</dd>
+
+
+
+<dt>
+
+```
+$$$text/unknown
+plain text, not //formatted//
+$$$
+```
+</dt>
+<dd>
+
+$$$text/unknown
+plain text, not //formatted//
+$$$
+
+<br>
+These are [[Typed Blocks|http://tiddlywiki.com/#Typed%20Blocks%20in%20WikiText]]
+</dd>
+
+
+<dt>
+
+```
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
+$$$
+```
+</dt>
+<dd>
+
+$$$image/svg+xml
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="green" />
+</svg>
+$$$
+</dd>
+
+<dt>
+
+```
+$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$
+```
+</dt>
+<dd>
+
+$$$.svg
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100">
+  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
+</svg>
+$$$
+</dd>
+
+<dt>
+
+```
+$$$text/vnd.tiddlywiki>text/html
+This is ''some'' wikitext
+$$$
+```
+</dt>
+<dd>
+
+$$$text/vnd.tiddlywiki>text/html
+This is ''some'' wikitext
+$$$
+</dd>
+
+<dt>
+
+```
+$$$text/vnd.tiddlywiki>text/plain
+This is ''some'' wikitext
+$$$
+```
+</dt>
+<dd>
+
+$$$text/vnd.tiddlywiki>text/plain
+This is ''some'' wikitext
+$$$
+</dd>
+
+
+</dl>

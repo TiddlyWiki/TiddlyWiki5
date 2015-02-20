@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/help",
+	"description": "Floating help window for TiddlyWiki",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme"
+}
