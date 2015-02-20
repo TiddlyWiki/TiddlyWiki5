@@ -50,7 +50,13 @@ Command.prototype.execute = function() {
 		var container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
 		var text = type === "text/html" ? container.innerHTML : container.textContent;
-		fs.writeFileSync(path.resolve(pathname,encodeURIComponent(title) + extension),text,"utf8");
+		var export_path = null;
+		if($tw.utils.hop($tw.macros,"tv-get-export-path")) {
+			export_path = path.resolve(outputPath,$tw.macros["tv-get-export-path"].run.apply(self,[title]) + extension);
+		}
+		var final_path = export_path || path.resolve(pathname,encodeURIComponent(title) + extension);
+		$tw.utils.createFileDirectories(final_path);
+		fs.writeFileSync(final_path,text,"utf8");
 	});
 	return null;
 };
