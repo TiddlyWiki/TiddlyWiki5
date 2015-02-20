@@ -44,7 +44,6 @@ Command.prototype.execute = function() {
 	if(deleteDirectory){
 		$tw.utils.deleteDirectory(pathname);
 	}
-	$tw.utils.createDirectory(pathname);
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
 			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
@@ -53,7 +52,10 @@ Command.prototype.execute = function() {
 		var text = type === "text/html" ? container.innerHTML : container.textContent;
 		var export_path = null;
 		if($tw.utils.hop($tw.macros,"tv-get-export-path")) {
-			export_path = path.resolve(outputPath,$tw.macros["tv-get-export-path"].run.apply(self,[title]) + extension);
+			var macroPath = $tw.macros["tv-get-export-path"].run.apply(self,[title]);
+			if(macroPath){
+				export_path = path.resolve( outputPath, macroPath + extension);
+			}
 		}
 		var final_path = export_path || path.resolve(pathname,encodeURIComponent(title) + extension);
 		$tw.utils.createFileDirectories(final_path);
