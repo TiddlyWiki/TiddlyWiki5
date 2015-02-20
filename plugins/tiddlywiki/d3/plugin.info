@@ -1,6 +1,6 @@
 {
 	"title": "$:/plugins/tiddlywiki/d3",
-	"description": "d3.js plugin for TiddlyWiki5",
+	"description": "D3: data visualisation",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0"
 }

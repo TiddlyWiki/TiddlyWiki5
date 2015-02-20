@@ -1,6 +1,6 @@
 {
 	"title": "$:/core",
-	"description": "TiddlyWiki5 core plugin",
+	"description": "TiddlyWiki5 core",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
 	"plugin-priority": "0",
