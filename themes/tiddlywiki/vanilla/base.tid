@@ -690,7 +690,8 @@ button.tc-untagged-label {
 	fill: <<colour tiddler-controls-foreground>>;
 }
 
-.tc-tiddler-controls button.tc-selected svg {
+.tc-tiddler-controls button.tc-selected svg,
+.tc-page-controls button.tc-selected svg  {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
