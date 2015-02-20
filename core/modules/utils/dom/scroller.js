@@ -85,8 +85,8 @@ PageScroller.prototype.scrollIntoView = function(element) {
 		},
 		endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
 		endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
-	// Only scroll if necessary
-	if(endX !== scrollPosition.x || endY !== scrollPosition.y) {
+	// Only scroll if the position has changed, plus a special case that we won't scroll less than 50 pixels from the top of the window
+	if((endX !== scrollPosition.x || endY !== scrollPosition.y) && (scrollPosition.y !== 0 || endY > 50)) {
 		var self = this,
 			drawFrame;
 		drawFrame = function () {
