@@ -55,7 +55,7 @@ StackedListView.prototype.placeTiddlers = function() {
 				$tw.utils.setStyle(domNode,[
 					{position: "absolute"},
 					{transformOrigin: "50% 0"},
-					{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration + "ms " + easing},
+					{transition: $tw.utils.roundTripPropertyName("transform") + " " + duration * (0.5 + posFactor) + "ms " + easing},
 					{transform: "translateX(0px) translateY(" + (fanHeight * posFactor * posFactor) + "px) scale(" + (0.1 + posFactor * 0.9) + ")"},
 					{zIndex: pos + ""}
 				]);
