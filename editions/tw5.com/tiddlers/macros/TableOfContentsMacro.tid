@@ -1,51 +1,63 @@
-caption: toc
 created: 20140919155729620
-modified: 20141117000000000
-tags: Macros
-title: TableOfContentsMacro
+modified: 20150221224034000
+tags: Macros [[Core Macros]]
+title: Table-of-Contents Macros
 type: text/vnd.tiddlywiki
 
-The table of contents macro produces a hierarchical tree of tiddlers based on their tags.
+~TiddlyWiki provides several macros for generating a tree of tiddler links by analysing [[tags|Tagging]]:
 
-The top level entries of the table of contents are defined by a root tag. The subentries under each of those entries are tagged with the title of the entry. Entries can be ordered using the `list` field of the tag tiddler as described in [[Tagging]].
+;<<.var toc>>
+: A simple tree
+;<<.var toc-expandable>>
+: A tree in which all the branches can be expanded and collapsed
+;<<.var toc-selective-expandable>>
+: A tree in which the non-empty branches can be expanded and collapsed
+;<<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>>
+: A two-panel browser:
+:* on the left, a selectively expandable tree that behaves like a set of vertical tabs
+:* on the right, the content of whichever tiddler the user selects in the tree
 
-The text for each entry is taken from the ''caption'' field if it is present, otherwise the ''title'' is used.
+The difference between the last two has to do with what happens when the user clicks a link in the right-hand panel:
 
-Entries are rendered as a link to the corresponding tiddler unless the tiddler has the value ''no'' in the field ''toc-link''. In the examples below, the entry SecondThree is set up in this way to not appear as a link.
+;<<.var toc-tabbed-internal-nav>>
+: The target tiddler appears in the right-hand panel, replacing the tiddler that contained the link
+;<<.var toc-tabbed-external-nav>>
+: The target tiddler appears in the normal way (which depends on the user's configured storyview)
 
-There are several variants of the macro:
+!! Structure
 
-* `<<toc>>` produces a simple hierarchical tree of links
-* `<<toc-expandable>>` produces an expandable tree of links
-* `<<toc-selective-expandable>>` produces an expandable tree of links where the expand/contract buttons are only shown for entries that possess child nodes
+The top level of the tree consists of the tiddlers that carry a particular tag, known as the <<.def "root tag">>. Tiddlers tagged with any of those make up the next level down, and so on.
 
-The macros all generate HTML ordered lists. The `<ol>` elements are given the class `tc-toc`, with the expandable variant also having the class `tc-toc-expandable` and the selective expandable variant also having the class `tc-toc-selective-expandable`.
+At each level, the tiddlers can be [[ordered|Order of Tagged Tiddlers]] by means of the <<.field list>> field of the parent tag tiddler. They can also be ordered by the macro's <<.param sort>> parameter.
 
-! Parameters
+The tree displays the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
 
-|!Position |!Name |!Description |!Default |
-|1st |tag |The root tag that identifies the top level of the hierarchy | |
-|2nd |sort |Optional sorting subfilter (eg `sort[title]`) | |
+Each tiddler in the tree is normally displayed as a link. To suppress this, give the tiddler a <<.field toc-link>> field with the the value <<.value no>>. In the [[examples|Table-of-Contents Macros (Examples)]], the SecondThree tiddler is set up like this. Clicking such a tiddler in the tree causes its branch to expand or collapse.
 
-The ''tag'' and ''sort'' parameters are combined to make a filter expression of the form:
+The table of contents is generated as an HTML ordered list. The `<ol>` elements always have the class `tc-toc`. Expandable trees have the additional class `tc-toc-expandable`. Selectively expandable trees (including those in the two-panel browser) have `tc-toc-selective-expandable`.
 
-```
-[tag[$tag$]$sort$]
-```
+To make a table of contents appear in the sidebar, see [[How to add a new tab to the sidebar]].
 
-! Examples
+!! Parameters
 
-In these examples, the top level entries of the table of contents examples are defined by the root tag ''Contents''. The subentries under each of those entries are tagged with the title of the parent entry, here ''First'', ''Second'', ''Third'', and ''Fourth''. One level deeper only ''~SecondThree'' has subentries.
+;tag
+: The root tag that identifies the top level of the tree
+;sort
+: An optional extra [[filter step|Filter Step]], e.g. `sort[title]`
 
-Here is the tag structure shown with clickable tag pills:
+These two parameters are combined into a single [[filter expression|Filter Expression]] like this:
 
-{{Contents||$:/core/ui/TagTemplate}}
-*{{First||$:/core/ui/TagTemplate}}
-*{{Second||$:/core/ui/TagTemplate}}
-**{{SecondThree||$:/core/ui/TagTemplate}}
-*{{Third||$:/core/ui/TagTemplate}}
-*{{Fourtth||$:/core/ui/TagTemplate}}
+> `[tag[$tag$]$sort$]`
 
-For instructions on adding a table of contents to the sidebar, see: [[How to add a new tab to the sidebar]].
+<<.var toc-tabbed-internal-nav>> and <<.var toc-tabbed-external-nav>> take additional parameters:
 
-<<tabs "[tag[table-of-contents-example]]" "TableOfContentsMacro Simple Example">>
+;selectedTiddler
+: The title of the [[state tiddler|StateMechanism]] for noting the currently selected tiddler, defaulting to `$:/temp/toc/selectedTiddler`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
+;unselectedText
+: The text to display when no tiddler is selected in the tree
+;missingText
+: The text to display if the selected tiddler doesn't exist
+;template
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the selected tiddler into the right-hand panel
+
+[[Examples|Table-of-Contents Macros (Examples)]]

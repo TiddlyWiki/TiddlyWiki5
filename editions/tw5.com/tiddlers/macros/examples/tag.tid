@@ -1,0 +1,8 @@
+created: 20150221211317000
+modified: 20150221224519000
+tags: [[tag Macro]] [[Macro Examples]]
+title: tag Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1" eg="""<<tag>>"""/>
+<$macrocall $name=".example" n="2" eg="""<<tag Concepts>>"""/>

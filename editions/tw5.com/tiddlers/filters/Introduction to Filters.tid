@@ -1,5 +1,5 @@
 created: 20140410101941871
-modified: 20150124183957000
+modified: 20150221152006000
 tags: Learning Filters
 title: Introduction to filter notation
 type: text/vnd.tiddlywiki
@@ -109,7 +109,7 @@ The parameter of each step we've seen so far has been in square brackets, meanin
 
 as an alternative to `[tag[Vegetarian]]`. This allows the preference to change over time.
 
-<<.def "Angle brackets">> `<>` mean that the parameter is the name of a [[variable|Variables]] whose value is to be used instead. Here we use the built-in <<.clink currentTiddler "WidgetVariable: currentTiddler">> variable in a filter that selects any tiddlers whose text contains the title of the current one:
+<<.def "Angle brackets">> `<>` mean that the parameter is the name of a [[variable|Variables]] whose value is to be used instead. Here we use the built-in <<.vlink currentTiddler>> variable in a filter that selects any tiddlers whose text contains the title of the current one:
 
 ```
 [search<currentTiddler>]

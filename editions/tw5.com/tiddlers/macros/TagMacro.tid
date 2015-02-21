@@ -1,27 +1,15 @@
 caption: tag
 created: 20141206130540337
-modified: 20141206130540337
-tags: Macros
-title: TagMacro
+modified: 20150221224326000
+tags: Macros [[Core Macros]]
+title: tag Macro
 type: text/vnd.tiddlywiki
 
-The 'tag' macro displays a tag pill for a specified tag.
+The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag.
 
-! Parameters
+!! Parameters
 
-|!Position |!Name |!Description |!Default |
-|1st |tag |Title of tag |The current tiddler |
+;tag
+: The title of the tag, defaulting to the [[current tiddler|Current Tiddler]]
 
-! Examples
-
-For example:
-
-```
-* <<tag>>
-* <<tag "HelloThere">>
-```
-
-Returns:
-
-* <<tag>>
-* <<tag "HelloThere">>
+<<.macro-examples "tag">>

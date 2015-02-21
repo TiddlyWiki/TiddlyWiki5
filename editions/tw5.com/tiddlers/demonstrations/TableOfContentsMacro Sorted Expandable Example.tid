@@ -1,11 +1,11 @@
-title: TableOfContentsMacro Sorted Expandable Example
-caption: Sorted Expandable
+created: 20150221201942000
+modified: 20150221203958000
+title: Example Table of Contents: Sorted Expandable
+caption: Sorted
 tags: table-of-contents-example
+order: 3
 
-!! Sorted Expandable Table of Contents
-
-<$macrocall $name='wikitext-example-without-html'
-src='<div class="tc-table-of-contents">
+<$macrocall $name=".example" n="1"
+eg="""<div class="tc-table-of-contents">
 <<toc-expandable "Contents" "sort[title]">>
-</div>
-'/>
+</div>"""/>

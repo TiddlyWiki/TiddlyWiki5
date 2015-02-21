@@ -1,12 +1,12 @@
 title: SetWidget
 created: 201311151827
-modified: 20141113212520422
+modified: 20150220162217000
 tags: Widgets
 caption: set
 
 ! Introduction
 
-The set variable widget assigns a value to a specified [[variable|WidgetVariables]]. The new value of the variable is availale to the content within the set variable widget.
+The set variable widget assigns a value to a specified [[variable|Variables]]. The new value of the variable is availale to the content within the set variable widget.
 
 ! Content and Attributes
 

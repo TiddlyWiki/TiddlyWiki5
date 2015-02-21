@@ -1,6 +1,6 @@
 title: LinkWidget
 created: 201310241419
-modified: 201408280837
+modified: 20150220161251000
 tags: Widgets
 caption: link
 
@@ -9,7 +9,7 @@ The `link` widget generates links to tiddlers. (Use the HTML `<a>` element to ge
 ! Content and Attributes
 
 |!Attribute |!Description |
-|to |The title of the target tiddler for the link (defaults to the CurrentTiddler) |
+|to |The title of the target tiddler for the link (defaults to the [[current tiddler|Current Tiddler]]) |
 |aria-label |Optional [[Accessibility]] label |
 |tooltip |Optional tooltip WikiText |
 
@@ -89,4 +89,3 @@ Provides default text for the link tooltip:
 \define tv-wikilink-tooltip() This is a link to {{!!title}}
 <$link to="HelloThere"/>
 ```
-

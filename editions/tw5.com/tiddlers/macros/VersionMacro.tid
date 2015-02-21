@@ -1,18 +1,14 @@
 created: 20131228162448664
-modified: 20131228162605081
-tags: Macros
-title: VersionMacro
+modified: 20150221214134000
+tags: Macros [[Core Macros]]
+title: version Macro
 type: text/vnd.tiddlywiki
 caption: version
 
-The version macro returns the current TiddlyWiki version number.
+The <<.def version>> [[macro|Macros]] returns the current version number of ~TiddlyWiki.
 
-! Example
+!! Parameters
 
-The version macro takes no parameters:
+(none)
 
-```
-Version number: <<version>>
-```
-
-Version number: <<version>>
+<<.macro-examples "version">>

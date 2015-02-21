@@ -1,0 +1,5 @@
+created: 20150221145803000
+title: $:/editions/tw5.com/macro-examples/tags-of-current-tiddler
+type: text/vnd.tiddlywiki
+
+\define tags-of-current-tiddler() {{!!tags}}

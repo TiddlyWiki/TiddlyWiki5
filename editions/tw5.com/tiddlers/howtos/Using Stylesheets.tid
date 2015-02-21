@@ -1,5 +1,5 @@
 created: 20140305091244145
-modified: 20140912141203664
+modified: 20150221175658000
 tags: [[Customise TiddlyWiki]]
 title: Using Stylesheets
 type: text/vnd.tiddlywiki
@@ -47,12 +47,4 @@ A stylesheet tiddler is processed such that it is first wikified and then the te
 
 !! Stylesheet Macros
 
-Several globally available macros are provided that are helpful in constructing stylesheets. See [[$:/core/macros/CSS]] for the definitions of these macros.
-
-* `<<colour name>>` and `<<color name>>` retrieve named colours from the current [[colour palette|ColourPalettes]]
-* `<<box-shadow shadow>>` specify a box-shadow
-* `<<filter filter>>` specify a CSS filter
-* `<<transition transition>>` specify a CSS transition
-* `<<transform-origin origin>>` specify the CSS transform origin
-* `<<background-linear-gradient gradient>>` specify a linear gradient
-* `<<datauri title>>` retrieves the base64 content of a tiddler for use via the CSS `url()` operator
+The ~TiddlyWiki core provides several [[global macros that are helpful in constructing stylesheets|Stylesheet Macros]].

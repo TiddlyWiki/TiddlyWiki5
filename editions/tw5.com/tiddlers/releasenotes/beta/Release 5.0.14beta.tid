@@ -1,6 +1,6 @@
 caption: 5.0.14-beta
 created: 20140718150234142
-modified: 20150124211128000
+modified: 20150221225749000
 tags: BetaReleaseNotes
 title: Release 5.0.14-beta
 type: text/vnd.tiddlywiki
@@ -64,7 +64,7 @@ For 5.0.14-beta, the setting has been changed. Visit [[control panel|$:/ControlP
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b4d47858e587c96f3a68cc28cffff181ec45f55f]] support for the InfoMechanism
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/f08f57c5d24eb0146ac2cb77472a5fc5f135f1e9]] CheckboxWidget to allow it to toggle fields as well as tags
 * [[Refactored|https://github.com/Jermolene/TiddlyWiki5/commit/21c137a66c37f010b36697bb6bed5321138fbb9f]] [[control panel|$:/ControlPanel]] theme tweaks to be stored in individual tiddlers
-* [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/e18d8a88661a1c2caa1b722841747c75ca6af437]] the TabsMacro to allow tabs to be templated
+* [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/e18d8a88661a1c2caa1b722841747c75ca6af437]] the <<.mlink tabs>> macro to allow tabs to be templated
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/91acad0f7ce8637945a953dfcb122cd31292626d]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/8612bc4006e717e4fa3c562fa72a85650206b66f]]) SystemTags support for inserting content above and below the story river
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f793816dfa687ae7791143b33487fd5f95f3265c]] support for transcluding plugin subtiddlers with the TranscludeWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c73853288c5b4b0716da94fea2f2edec09345643]] (and [[here|https://github.com/Jermolene/TiddlyWiki5/commit/08f775eac8cb053d08c1c561e65a5eeb87c4c6b6]]) support for importing from `*.htm` and `*.hta` files as well as the existing support for `*.html` files

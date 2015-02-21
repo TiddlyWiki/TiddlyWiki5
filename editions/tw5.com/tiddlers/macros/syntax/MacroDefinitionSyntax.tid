@@ -1,0 +1,52 @@
+created: 20150220200255000
+modified: 20150221222349000
+tags: [[Macro Syntax]]
+title: Macro Definition Syntax
+type: text/vnd.tiddlywiki
+
+<<.preamble """What follows is a formal presentation of the syntax of the `\define` pragma, using [[railroad diagrams|Railroad Diagrams]]. A [[simpler overview|Macro Definitions in WikiText]] is also available.""">>
+
+<$railroad text="""
+"\define" space name params [:space] rest
+"""/>
+
+<<.place space>> denotes a sequence of [[whitespace characters|Filter Whitespace]].
+
+The [[macro|Macros]]'s <<.place name>> is a sequence of non-whitespace characters other than `(` or `>`.
+
+The parameter declaration list (<<.place params>>) has the following syntax:
+
+<$railroad text="""
+"(" [:sep] [:{ param sep }] ")"
+"""/>
+
+The parameter separator (<<.place sep>>) is any sequence of characters that does not match a <<.place param-name>>. Among other things, this includes commas, spaces and linefeeds.
+
+A <<.place param-name>> is a sequence of letters (`A`--`Z`, `a`--`z`), digits (`0`--`9`), hyphens (`-`) and underscores (`_`).
+
+Each individual <<.place param>> has the following syntax:
+
+<$railroad text="""
+param-name [: [:space] ":" [:space] default ]
+")"
+"""/>
+
+The optional <<.place default>> value of a parameter is specified as follows:
+
+<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+
+The <<.place rest>> of the definition has the following syntax:
+
+<$railroad text="""
+( snippet | lf snippet lf "\end" [:space] ) lf
+"""/>
+
+<<.place lf>> denotes a linefeed.
+
+The <<.place snippet>> is any sequence of characters that doesn't terminate the macro definition. That is to say, a single-line snippet cannot contain a linefeed, and a multi-line snippet cannot contain `\end` on a line of its own.
+
+The snippet can contain placeholders with the following syntax:
+
+<$railroad text="""
+( "$" name "$" | "$" "(" name ")" "$" )
+"""/>

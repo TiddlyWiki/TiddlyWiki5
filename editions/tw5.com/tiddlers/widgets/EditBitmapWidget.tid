@@ -1,5 +1,5 @@
 created: 20131024141900000
-modified: 20140221140151790
+modified: 20150220162127000
 tags: Widgets
 title: EditBitmapWidget
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ The edit bitmap widget provides a user interface in the browser for editing bitm
 The content of the `<$edit-bitmap>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the CurrentTiddler) |
+|tiddler |The tiddler to edit (defaults to the [[current tiddler|Current Tiddler]]) |
 
 ! Configuration
 

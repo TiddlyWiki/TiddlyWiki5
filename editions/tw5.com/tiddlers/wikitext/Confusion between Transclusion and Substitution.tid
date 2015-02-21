@@ -1,7 +1,6 @@
-caption: Confusion between Transclusion and Substitution
+title: Transclusion and Substitution
 created: 20141018090608643
-modified: 20141018181414011
-tags: WikiText
+modified: 20150220190346000
 type: text/vnd.tiddlywiki
 
 The power of WikiText comes from the ability to use the content of one tiddler inside another one. This ability takes several different forms that can easily be confused.
