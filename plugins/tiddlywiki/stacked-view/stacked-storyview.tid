@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/stacked-view/config-macros/stacked-storyview
+tags: $:/tags/Macro
+
+\define tv-stacked-storyview-fan-height-config-title() $:/config/StackedStoryViewFanHeight

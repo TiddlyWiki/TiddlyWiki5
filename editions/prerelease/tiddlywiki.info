@@ -5,7 +5,8 @@
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/help"
+		"tiddlywiki/help",
+		"tiddlywiki/stacked-view"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
