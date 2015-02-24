@@ -1,13 +1,23 @@
 created: 20141002133113496
-modified: 20150107121000000
-tags: Reference
+modified: 20150221215644000
+tags: Concepts Reference
 title: Variables
 type: text/vnd.tiddlywiki
 
-[[Variables]] are an essential component of dynamic WikiText, as are [[Widgets]] and [[Macros]]. In fact, a variable is a shorthand of a macro.
+A <<.def variable>> is a snippet of text that can be accessed by name within a particular branch of the [[widget tree|Widgets]]. The snippet is known as the variable's <<.def value>>.
 
-You can define custom [[Variables in WikiText]] or use one of the standard variables...
+A new variable is defined using a <<.wlink SetWidget>> widget, and is then available to any of the children of that widget, including transcluded content. A <<.wid set>> widget can reuse an existing name, thus binding a different snippet to that name for the duration of the widget's children.
 
-<<list-links "[tag[Variables]]">>
+The <<.wlink ListWidget>> widget also sets a particular variable (<<.var currentTiddler>> by default) to each listed title in turn.
 
-The [[<<dumpvariables>>|DumpVariablesMacro]] macro lists all variables defined in the current scope, allowing you to see and edit their values.
+For an overview of how to use variables, see [[Variables in WikiText]].
+
+Despite the term <<.word variable>>, each snippet is a constant string. The apparent variability is actually the result of the presence of multiple variables with the same name in different parts of the widget tree.
+
+[[Macros]] are a special form of variable whose value can contain placeholders that get filled in with parameters whenever the macro is used.
+
+By themselves, the snippets are <<.em not>> parsed as WikiText. However, a variable reference will transclude a snippet into a context where ~WikiText parsing <<.em may>> be occurring. Within a snippet, the only markup detected is `$name$` for a macro parameter transclusion and `$(name)$` for a variable transclusion.
+
+The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
+
+~TiddlyWiki's core has [[several variables|Core Variables]] built in.

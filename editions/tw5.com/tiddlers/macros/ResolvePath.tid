@@ -1,23 +1,27 @@
 created: 20150203152000000
-modified: 20150203152000000
-title: ResolvePath
+modified: 20150221223858000
+tags: Macros [[Core Macros]]
+title: resolvepath Macro
 type: text/vnd.tiddlywiki
 caption: resolvepath
 
-The ''resolvepath'' macro constructs a url for a relative source path with respect to an absolute root path, trailing filenames being cut-off.
+The <<.def resolvepath>> [[macro|Macros]] takes a relative path and an absolute path. It interprets the former relative to the latter, and returns the absolute equivalent of the former.
 
-! Parameters
+Folders in the paths are delimited by `/`.
 
-|!Position |!Name |!Description |!Default |
-|1st |source |the relative path to be appended| |
-|2nd |root |the absolute path to be appended to | |
+The special folder name `.` denotes the current folder, and `..` denotes the parent folder.
 
-! Examples
+If the absolute path indicates a folder, it needs to end with `/`. Anything after the final `/` is treated as an arbitrary filename within the intended path, and is discarded.
 
-A trivial example to show how the macro works:
+If no absolute path is supplied, the relative path is returned unchanged, except that anything after the final `/` is discarded.
 
-```
-<<resolvepath "./backup" "http://example.com/store.php">>
-```
+The return value is a path, but does <<.em not>> end with `/`.
 
-<<resolvepath "./backup" "http://example.com/store.php">>
+!! Parameters
+
+;source
+: the relative path
+;root
+: the absolute path
+
+<<.macro-examples "resolvepath">>

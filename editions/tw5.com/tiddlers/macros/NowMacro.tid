@@ -1,28 +1,17 @@
 caption: now
 created: 20141008141616791
-modified: 20141013180540337
-tags: Macros
-title: NowMacro
+modified: 20150221170300000
+tags: Macros [[Core Macros]]
+title: now Macro
 type: text/vnd.tiddlywiki
 
-The 'now' macro returns the current date and time, formatted with an optional format string.
+The <<.def now>> [[macro|Macros]] returns the current date and time in a specified [[format|DateFormat]].
 
-! Parameters
+The value doesn't update automatically, like a ticking clock. It updates whenever the macro call is rendered, such as when the containing tiddler's display needs to be refreshed for some other reason.
 
-|!Position |!Name |!Description |!Default |
-|1st |format |DateFormat string specifying the format for the date/time |`0hh:0mm, DDth MMM YYYY` |
+!! Parameters
 
-! Examples
+;format
+: A string specifying the desired [[format|DateFormat]], defaulting to `0hh:0mm, DDth MMM YYYY`
 
-For example:
-
-```
-* <<now>>
-* <<now "DDth MMM YYYY">>
-```
-
-Returns:
-
-* <<now>>
-* <<now "DDth MMM YYYY">>
-
+<<.macro-examples "now">>

@@ -1,0 +1,15 @@
+created: 20150221152226000
+modified: 20150221154213000
+tags: Macros [[Core Macros]]
+title: jsontiddlers Macro
+type: text/vnd.tiddlywiki
+caption: jsontiddlers
+
+The <<.def jsontiddlers>> [[macro|Macros]] returns the fields of a [[selection of tiddlers|Title Selection]] in [[JSON|JavaScript Object Notation]] form.
+
+An example can be seen in the [[template tiddler for JSON exports|$:/core/templates/exporters/JsonFile]].
+
+!! Parameters
+
+;filter
+: A [[filter|Filters]] selecting which tiddlers to include

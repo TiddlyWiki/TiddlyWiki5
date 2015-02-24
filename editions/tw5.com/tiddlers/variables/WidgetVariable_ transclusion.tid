@@ -1,46 +1,36 @@
 caption: transclusion
 created: 20141002004621385
-modified: 20150107121000000
-tags: Variables
-title: WidgetVariable: transclusion
+modified: 20150221225622000
+tags: Variables [[Core Variables]]
+title: transclusion Variable
 type: text/vnd.tiddlywiki
 
-The ''transclusion'' [[variable|Variables]] is automatically set by the TranscludeWidget to contain a string identifying the position of the current node within the widget tree.
+The <<.def transclusion>> [[variable|Variables]] is set by the <<.wlink TranscludeWidget>> widget to a string that identifies the position of that widget within the [[widget tree|Widgets]].
 
-With the ''transclusion'' variable, the QualifyMacro identifies the stack of transcluded tiddlers.
+~TiddlyWiki's core uses it to detect recursive [[transclusion|Transclusion]]. It is also used to implement the <<.mlink qualify>> macro.
 
-In the sidebar, the ''transclusion'' variable is set to:<br>
-`{|$:/core/ui/PageTemplate/sidebar|||}`
+The string has the following syntax:
 
-When the tiddler "HelloThere" is displayed in the story river ''transclusion'' is set to:<br> `{HelloThere|HelloThere|||}`
+<$railroad text="""
+"{" a "|" b "|" c "|" d "|" e "|" "}"
+"""/>
 
-Each nested level of transclusion appends another curly bracketed list of symbols.
+<ol style="list-style-type: lower-alpha;">
+<li>the title of the [[current tiddler|Current Tiddler]]</li>
+<li>the title of the tiddler being transcluded</li>
+<li>the name of the field being transcluded</li>
+<li>the name of the property name or index being transcluded</li>
+<li>the name of the subtiddler being transcluded from a plugin</li>
+</ol>
 
-!! Example
+Many of the five items are often blank.
 
-''identifying if we're in the sidebar or not''
+In the sidebar, the value of <<.var transclusion>> is:
 
-```
-\define mymacro()
-We are
-<$list
-filter="[<transclusion>prefix[{|$:/core/ui/PageTemplate/sidebar|||}]]"
-emptyMessage="in the story river.">
-in the sidebar.
-</$list>
-\end
+> `{|$:/core/ui/PageTemplate/sidebar|||}`
 
-<<mymacro>>
-```
+When the tiddler <<.tid HelloThere>> is displayed in the story river, <<.var transclusion>> is set to:
 
-Result in a story tiddler:
+> `{HelloThere|HelloThere|||}`
 
-<<<
-We are in the story river.
-<<<
-
-Result in the sidebar:
-
-<<<
-We are in the sidebar.
-<<<
+<<.variable-examples "transclusion">>

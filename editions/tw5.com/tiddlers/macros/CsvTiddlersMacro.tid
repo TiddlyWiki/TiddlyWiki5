@@ -1,0 +1,17 @@
+created: 20150221115509000
+modified: 20150221151344000
+tags: Macros [[Core Macros]]
+title: csvtiddlers Macro
+type: text/vnd.tiddlywiki
+caption: csvtiddlers
+
+The <<.def csvtiddlers>> [[macro|Macros]] returns the fields of a [[selection of tiddlers|Title Selection]] in [[CSV|Comma-Separated Values]] form, with one record (row) per tiddler.
+
+An example can be seen in the [[template tiddler for CSV exports|$:/core/templates/exporters/CsvFile]].
+
+!! Parameters
+
+;filter
+: A [[filter|Filters]] selecting which tiddlers to include
+;format
+: Reserved for future extension. Should be set to `quoted-comma-sep`

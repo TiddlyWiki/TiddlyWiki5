@@ -1,5 +1,5 @@
 created: 20130827080000000
-modified: 20150124183938000
+modified: 20150221225414000
 tags: Reference Concepts
 title: Filters
 type: text/vnd.tiddlywiki
@@ -9,11 +9,9 @@ You can think of TiddlyWiki as a database in which the records are tiddlers. A d
 
 A <<.def filter>> is a concise notation for selecting a particular [[set of tiddlers|Title Selection]], known as its <<.def "output">>. Whenever ~TiddlyWiki encounters a filter, it calculates the output. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
 
-The following example passes a filter to the [[list-links macro|ListMacro]] to display a list of all tiddlers whose titles start with the letter H:
+The following example passes a filter to the <<.mlink list-links>> macro to display a list of all tiddlers whose titles start with the letter H:
 
-```
-<<list-links "[prefix[H]]">>
-```
+> `<<list-links "[prefix[H]]">>`
 
 A filter's output can change as tiddlers are added and deleted in the wiki. ~TiddlyWiki recalculates on the fly, automatically updating any filter-based counts or lists as well.
 

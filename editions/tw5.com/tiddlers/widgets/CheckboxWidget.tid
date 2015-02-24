@@ -1,6 +1,6 @@
 title: CheckboxWidget
 created: 201310241419
-modified: 201502050050
+modified: 20150220161154000
 tags: Widgets
 caption: checkbox
 
@@ -16,7 +16,7 @@ The checkbox widget displays an HTML `<input type="checkbox">` element that is d
 The content of the `<$checkbox>` widget is displayed within an HTML `<label>` element immediately after the checkbox itself. This means that clicking on the content will toggle the checkbox.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the CurrentTiddler) |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
 |tag |The name of the tag to which the checkbox should be bound |
 |field |The name of the field to which the checkbox should be bound |
 |checked |The value of the field corresponding to the checkbox being checked |

@@ -1,6 +1,6 @@
 caption: 5.1.5
 created: 20141025120850184
-modified: 20150118182717000
+modified: 20150221225041000
 tags: ReleaseNotes
 title: Release 5.1.5
 type: text/vnd.tiddlywiki
@@ -39,13 +39,13 @@ released: 20141126153016142
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/13726ef73157d9e9d65ae4027d9c32aaa7cdcc90]] new canned filter for recently modified system tiddlers in [[$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c20c935faabbb63f679bc4720b52162c56b6af64]] new system image for videos: [[$:/core/images/video]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c13cf94413c94ee56bebc60fab2d9231d1824d88]] search results to allow custom visualisations - see [[Customising search results]]
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] TimelineMacro to be able to use different date fields
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/a3a50dbf6d96e7441e5e8ec183e40134bc4eb618]] <<.mlink timeline>> macro to be able to use different date fields
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/8260d000be1cf1caf35a557f6cd54a0fb8ccf4f0]] the <<.olink search>> operator to allow a field to be specified
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/73491f14dd63612d527632210d2c3873eb81188f]] the highlight plugin to display tabs as spaces
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/91a7c397911726e391ca368f96b50fbe1687d56a]] modal handling to permit variables to be passed to the modal (see [[WidgetMessage: tm-modal]])
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/853f5fd06402b16e271e8f119ef380de485aeff2]] simple logging to help track down drop/paste issues (see http://tiddlywiki.com/dev/#ImportLogging)
 * [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/b520efdeb83f6ac7536a69cf5af2bab3f94cf77f]] [[WidgetMessage: tm-download-file]] and [[WidgetMessage: tm-save-wiki]] to allow variables to be specified for the rendering
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f5055c0205d24102a36b9cf3a9dd9306e148a1f0]] [[TableOfContentsMacro Tabbed Example]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/f5055c0205d24102a36b9cf3a9dd9306e148a1f0]] [[Example Table of Contents: Tabbed Internal]]
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/79e428757b5562bd4a925b9b0428ea4ba70ad05a]] RevealWidget so that it can be used without specifying a state tiddler
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/90caf5bf42523cfb6cd603b979aadb719ddcede4]] "hooks" mechanism so that plugins can modify the default tiddler list
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b882a0dff12dc2660426de53e64d8c018f3a9d84]] support for nested popups
@@ -53,7 +53,7 @@ released: 20141126153016142
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/90096cbd367a7a685fb5dc5b2cbaa69a00d8199f]] problem with CodeMirror editor and missing tiddlers
-* [[Exclude|https://github.com/Jermolene/TiddlyWiki5/commit/5093cdc86047209f23b9ead5ee0f216d0414e4f2]] drafts from TableOfContentsMacro
+* [[Exclude|https://github.com/Jermolene/TiddlyWiki5/commit/5093cdc86047209f23b9ead5ee0f216d0414e4f2]] drafts from [[Table-of-Contents Macros]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5599f9f9338a5f96080143b2192214a78b961509]] problem with encoding of HTML tiddlers
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/835e3a945244dd8a07f4c7fd570eb890e9fdcc2c]] problem with sticky titles being covered by vertical tabs
 * [[Removed|https://github.com/Jermolene/TiddlyWiki5/commit/d1bbe7253c135ceed138fd02c82b0f861d5dda6b]] flicker when automatically resizing textareas

@@ -1,6 +1,6 @@
 title: EditTextWidget
 created: 201310241419
-modified: 20141025085449609
+modified: 20150220162131000
 tags: Widgets
 caption: edit-text
 
@@ -15,7 +15,7 @@ By default, the edit text widget generates a `<textarea>` as the HTML editing el
 The content of the `<$edit-text>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the CurrentTiddler) |
+|tiddler |The tiddler to edit (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |default |The default text to be provided when the target tiddler doesn't exist |

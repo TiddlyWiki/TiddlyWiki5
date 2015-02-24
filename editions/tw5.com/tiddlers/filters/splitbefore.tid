@@ -1,5 +1,5 @@
 created: 20150126142522000
-modified: 20150203192107000
+modified: 20150221193759000
 tags: [[Filter Operators]] [[String Operators]]
 title: splitbefore Operator
 type: text/vnd.tiddlywiki
@@ -17,6 +17,6 @@ Each input title is processed in turn.
 
 Contributions are [[dominantly appended|Dominant Append]] to the output.
 
-The <<.clink "`toc`" TableOfContentsMacro>> macros use this operator with `/` as the parameter.
+The [[table-of-contents macros|Table-of-Contents Macros]] use this operator with `/` as the parameter.
 
 <<.operator-examples "splitbefore">>

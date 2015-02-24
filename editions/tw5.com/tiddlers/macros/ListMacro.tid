@@ -1,28 +1,22 @@
-title: ListMacro
-tags: Macros
-modified: 20140917083515996
-caption: list
+created: 20140917083515996
+modified: 20150221223214000
+title: list-links Macro
+tags: Macros [[Core Macros]]
+caption: list-links
 
-The list macro is a family of macros that produce a list of tiddlers.
+The <<.def list-links>> [[macro|Macros]] returns a formatted list of links to a [[selection of tiddlers|Title Selection]].
 
-There are several variants of the macro:
+If a tiddler has a <<.field caption>> field, this is shown instead of the tiddler's title.
 
-* `<<list-links>>` produces a list of links to tiddlers that match a filter expression. If the tiddler has a //caption// field, it is displayed in lieu of the //title// field.
+!! Parameters
 
-! Parameters
+;filter
+: A [[filter|Filters]] selecting which tiddlers to include
+;type
+: An HTML element to use for the overall list element, defaulting to `ul`
+;subtype
+: An HTML element to use for each item in the list, defaulting to `li`
+;class
+: A [[CSS|Cascading Style Sheets]] class for the overall list element
 
-|!Position |!Name |!Description |!Default |
-|1st |filter |Filter expression | |
-|2nd |type |HTML tag to be used for the list wrapper |"ul" |
-|3rd |subtype |HTML tag to be used for list entries  |"li" |
-|4th |class |An optional CSS class to be applied to the list wrapper element (eg `<ul class="three-columns">`) | |
-
-! Examples
-
-<$macrocall $name='wikitext-example-without-html'
-src='<<list-links filter:"[tag[HelloThere]]">>
-'/>
-
-<$macrocall $name='wikitext-example-without-html'
-src='<<list-links filter:"[tag[HelloThere]]" type:"ol">>
-'/>
+<<.macro-examples "list-links">>
