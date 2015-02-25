@@ -72,24 +72,27 @@ PageScroller.prototype.scrollIntoView = function(element) {
 	// currentPos/currentSize - position and size of the current scroll viewport
 	// returns: new position of the scroll viewport
 	var getEndPos = function(targetPos,targetSize,currentPos,currentSize) {
+			var newPos = currentPos;
 			// If the target is entirely above/left of the current view, then scroll to its top/left
 			if((targetPos + targetSize) <= (currentPos + 50)) {
-				return targetPos;
+				newPos = targetPos;
 			// If the target is smaller than the window and the scroll position is too far up, then scroll till the target is at the bottom of the window
 			} else if(targetSize < currentSize && currentPos < (targetPos + targetSize - currentSize)) {
-				return targetPos + targetSize - currentSize;
+				newPos = targetPos + targetSize - currentSize;
 			// If the target is out of view below/right, then just scroll to the top/left
 			} else if(targetPos > (currentPos + currentSize - 50)) {
-				return targetPos;
-			// Otherwise, stay where we are
-			} else {
-				return currentPos;
+				newPos = targetPos;
 			}
+			// If we are scrolling within 50 pixels of the top/left then snap to zero
+			if(newPos < 50) {
+				newPos = 0;
+			}
+			return newPos;
 		},
 		endX = getEndPos(bounds.left,bounds.width,scrollPosition.x,window.innerWidth),
 		endY = getEndPos(bounds.top,bounds.height,scrollPosition.y,window.innerHeight);
-	// Only scroll if the position has changed, plus a special case that we won't scroll less than 50 pixels from the top of the window
-	if((endX !== scrollPosition.x || endY !== scrollPosition.y) && (scrollPosition.y !== 0 || endY > 50)) {
+	// Only scroll if the position has changed
+	if(endX !== scrollPosition.x || endY !== scrollPosition.y) {
 		var self = this,
 			drawFrame;
 		drawFrame = function () {
