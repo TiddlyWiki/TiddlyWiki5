@@ -1,3 +1,4 @@
+created: 20150227121348000
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
 
@@ -59,6 +60,7 @@ pre {
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
 	border-radius: 3px;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 code {
@@ -68,6 +70,7 @@ code {
     white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 blockquote {
@@ -1299,7 +1302,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-alert-highlight {
-	color: <<colour alert-highlight>>;	
+	color: <<colour alert-highlight>>;
 }
 
 .tc-static-alert {
@@ -1355,7 +1358,7 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 
 .tc-plugin-info-chunk {
 	display: inline-block;
-	vertical-align: middle;	
+	vertical-align: middle;
 }
 
 a.tc-plugin-info img, a.tc-plugin-info svg {

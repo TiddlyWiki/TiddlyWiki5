@@ -1,3 +1,4 @@
+created: 20150227124409000
 title: $:/themes/tiddlywiki/vanilla/themetweaks
 tags: $:/tags/ControlPanel/Appearance
 caption: Theme Tweaks
@@ -6,17 +7,18 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 
 ! Settings
 
-* [[Font family|$:/themes/tiddlywiki/vanilla/settings/fontfamily]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/>
+|[[Font family|$:/themes/tiddlywiki/vanilla/settings/fontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/> |
+|[[Code font family|$:/themes/tiddlywiki/vanilla/settings/codefontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> |
 
 ! Sizes
 
-* [[Font size|$:/themes/tiddlywiki/vanilla/metrics/fontsize]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/>
-* [[Line height|$:/themes/tiddlywiki/vanilla/metrics/lineheight]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/>
-* [[Font size for tiddler body|$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/>
-* [[Line height for tiddler body|$:/themes/tiddlywiki/vanilla/metrics/bodylineheight]]: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/>
-* [[Story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]] //(the distance between the left of the screen and the left margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/>
-* [[Story top position|$:/themes/tiddlywiki/vanilla/metrics/storytop]] //(the distance between the top of the screen and the top margin of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/>
-* [[Story right|$:/themes/tiddlywiki/vanilla/metrics/storyright]] //(the distance between the left side of the screen and the left margin of the sidebar area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/>
-* [[Story width|$:/themes/tiddlywiki/vanilla/metrics/storywidth]] //(the width of the story river or tiddler area)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/>
-* [[Tiddler width|$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth]] //(the width of individual tiddlers -- used for zoomin storyview)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/>
-* [[Sidebar breakpoint|$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint]] //(the minimum width for the sidebar to be displayed alongside the story river)//: <$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/>
+|[[Font size|$:/themes/tiddlywiki/vanilla/metrics/fontsize]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/fontsize" default="" tag="input"/> |
+|[[Line height|$:/themes/tiddlywiki/vanilla/metrics/lineheight]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/lineheight" default="" tag="input"/> |
+|[[Font size for tiddler body|$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize" default="" tag="input"/> |
+|[[Line height for tiddler body|$:/themes/tiddlywiki/vanilla/metrics/bodylineheight]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/bodylineheight" default="" tag="input"/> |
+|[[Story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]]<br>//how far the left margin of the story river<br>(tiddler area) is from the left of the page// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyleft" default="" tag="input"/> |
+|[[Story top position|$:/themes/tiddlywiki/vanilla/metrics/storytop]]<br>//how far the top margin of the story river<br>is from the top of the page// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storytop" default="" tag="input"/> |
+|[[Story right|$:/themes/tiddlywiki/vanilla/metrics/storyright]]<br>//how far the left margin of the sidebar <br>is from the left of the page// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storyright" default="" tag="input"/> |
+|[[Story width|$:/themes/tiddlywiki/vanilla/metrics/storywidth]]<br>//the overall width of the story river// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/> |
+|[[Tiddler width|$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth]]<br>//within the story river//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/> |
+|[[Sidebar breakpoint|$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint]]<br>//the minimum page width at which the story<br>river and sidebar will appear side by side// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |
