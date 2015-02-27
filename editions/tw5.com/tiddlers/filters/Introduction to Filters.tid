@@ -1,12 +1,12 @@
 created: 20140410101941871
-modified: 20150221152006000
+modified: 20150226162742000
 tags: Learning Filters
 title: Introduction to filter notation
 type: text/vnd.tiddlywiki
 
 <<.preamble """This explains the basics of writing a [[filter|Filters]] to select a set of tiddlers. For a more technical presentation, see [[Filter Syntax]].""">>
 
-<$macrocall $name=".note" _="""Filters do nothing if you just type them into a tiddler on their own. They need a context. An easy way to experiment with filters is to type them into the <<.advancedsearch-tab Filter>> tab of [[Advanced Search|$:/AdvancedSearch]]."""/>
+<$macrocall $name=".tip" _="""Filters do nothing if you just type them into a tiddler on their own. They need a context. An easy way to experiment with filters is to type them into the <<.advancedsearch-tab Filter>> tab of [[Advanced Search|$:/AdvancedSearch]]."""/>
 
 The simplest case is where you already know exactly which tiddlers you want. Type each title in double square brackets, with a space between each one and the next:
 

@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20150221200048000
+modified: 20150226161637000
 title: $:/editions/tw5.com/doc-macros
 tags: $:/tags/Macro
 
@@ -61,6 +61,10 @@ tags: $:/tags/Macro
 \define .example-tab(_) <span class="doc-tab">$_$</span>
 
 \define .button(_) <span class="doc-button">{{$:/core/ui/Buttons/$_$!!caption}}</span>
+
+\define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
+\define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
+\end
 
 \define .state-prefix() $:/state/editions/tw5.com/
 

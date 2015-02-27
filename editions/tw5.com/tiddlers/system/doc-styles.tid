@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20150221141207000
+modified: 20150226162159000
 title: $:/editions/tw5.com/doc-styles
 tags: $:/tags/Stylesheet
 
@@ -142,4 +142,22 @@ tr.doc-table-subheading {
 
 .doc-table.before-tiddler-body {
 	margin-top: 2em;
+}
+
+.doc-icon-block {
+	border-left: 2px solid <<colour code-border>>;
+	margin-left: 3em;
+	padding-left: 0.6em;
+	position: relative;
+}
+.doc-block-icon {
+	position: absolute;
+	left: -3em;
+	top: 0.2em;
+}
+.doc-block-icon .tc-image-tip {
+	fill: <<colour primary>>;
+}
+.doc-block-icon .tc-image-warning {
+	fill: <<colour alert-highlight>>;
 }
