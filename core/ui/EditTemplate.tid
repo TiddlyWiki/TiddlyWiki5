@@ -3,7 +3,7 @@ title: $:/core/ui/EditTemplate
 \define frame-classes()
 tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerClass)$ $(systemTiddlerClass)$
 \end
-<$link tag="div" draggable="no" tabindex="1" class=<<frame-classes>>>
+<div class=<<frame-classes>>>
 <$set name="storyTiddler" value=<<currentTiddler>>>
 <$keyboard key="escape" message="tm-cancel-tiddler">
 <$keyboard key="ctrl+enter" message="tm-save-tiddler">
@@ -13,4 +13,4 @@ tc-tiddler-frame tc-tiddler-edit-frame $(missingTiddlerClass)$ $(shadowTiddlerCl
 </$keyboard>
 </$keyboard>
 </$set>
-</$link>
+</div>
