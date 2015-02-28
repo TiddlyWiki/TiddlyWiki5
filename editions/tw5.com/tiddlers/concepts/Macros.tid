@@ -1,5 +1,5 @@
 created: 20140211171341271
-modified: 20150221220245000
+modified: 20150228114909000
 tags: Concepts Reference
 title: Macros
 type: text/vnd.tiddlywiki
@@ -22,7 +22,7 @@ The <<.mlink dumpvariables>> macro lists all variables (including macros) that a
 
 An <<.wlink ImportVariablesWidget>> widget can be used to copy macro definitions to another branch of the [[widget tree|Widgets]]. ~TiddlyWiki uses this technique internally to implement global macros -- namely any macros defined in tiddlers with the <<.tag $:/tags/Macro>> tag.
 
-For maximum flexibility, macros can also be [[written as JavaScript modules|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]].
+For maximum flexibility, macros can also be <<.js-macro-link "written as JavaScript modules">>.
 
 A similar effect to a parameterised macro call can be produced by setting [[variables|Variables]] around a [[transclusion|Transclusion]].
 

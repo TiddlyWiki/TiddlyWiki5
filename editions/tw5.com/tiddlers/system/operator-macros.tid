@@ -1,11 +1,9 @@
 created: 20150117152607000
-modified: 20150221151136000
+modified: 20150228114306000
 title: $:/editions/tw5.com/operator-macros
 tags: $:/tags/Macro
 
 \define .operator-examples(op,text:"Examples") <$link to="$op$ Operator (Examples)">$text$</$link>
-\define .variable-examples(v,text:"Examples") <$link to="$v$ Variable (Examples)">$text$</$link>
-\define .macro-examples(m,text:"Examples") <$link to="$m$ Macro (Examples)">$text$</$link>
 
 \define .operator-example(n,eg,ie)
 <div class="doc-example">

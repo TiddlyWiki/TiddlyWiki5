@@ -1,0 +1,10 @@
+created: 20150228132024000
+modified: 20150228133745000
+title: namespace Variable
+tags: Variables [[Core Variables]]
+type: text/vnd.tiddlywiki
+caption: namespace
+
+The <<.def namespace>> [[variable|Variables]] is used internally by [[HTML|HyperText Markup Language]] widgets to keep track of the correct namespace for the [[DOM|Document Object Model]] elements they generate.
+
+An `svg` or `math` element supplies a distinct namespace for itself and any child elements it contains.

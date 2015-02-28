@@ -1,5 +1,5 @@
 created: 20150110182600000
-modified: 20150226161700000
+modified: 20150228082845000
 title: Documentation Macros
 tags: [[Improving TiddlyWiki Documentation]]
 
@@ -18,7 +18,7 @@ The following macros are used throughout ~TiddlyWiki's documentation. Their name
 
 |!Macro |!Used for |!Example |
 |^.tip |^hints and tips |<<.tip "Turn your screen on, otherwise<br>you won't be able to see much.">> |
-|^.warning |^warning advice |<<.warning "Make a backup of your file<br>before your upgrade.">> |
+|^.warning |^warning advice |<<.warning "Make a backup of your file<br>before you upgrade.">> |
 
 !Blocks
 |!Macro |!Used for |
