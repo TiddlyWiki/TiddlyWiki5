@@ -70,6 +70,8 @@ Settings/AutoSave/Disabled/Description: 不要自动保存变更
 Settings/AutoSave/Enabled/Description: 自动保存变更
 Settings/AutoSave/Hint: 在编辑过程中自动保存变更
 Settings/Caption: 设置
+Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
+Settings/DefaultSidebarTab/Hint: 定义默认显示的侧边栏页签
 Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
 Settings/NavigationAddressBar/Caption: 网址栏导览
 Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：

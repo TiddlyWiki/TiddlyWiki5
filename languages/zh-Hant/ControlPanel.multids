@@ -70,6 +70,8 @@ Settings/AutoSave/Disabled/Description: 不要自動儲存變更
 Settings/AutoSave/Enabled/Description: 自動儲存變更
 Settings/AutoSave/Hint: 在編輯過程中自動儲存變更
 Settings/Caption: 設定
+Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
+Settings/DefaultSidebarTab/Hint: 定義預設顯示的側邊欄頁籤
 Settings/Hint: 這些進階設定讓您自訂 TiddlyWiki 的行為。
 Settings/NavigationAddressBar/Caption: 網址列導覽
 Settings/NavigationAddressBar/Hint: 在瀏覽器網址列導覽到條目時的行為：
