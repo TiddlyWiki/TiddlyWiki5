@@ -257,6 +257,10 @@ a.tc-tiddlylink-external:hover {
 ** Buttons
 */
 
+svg.tc-image-button {
+  padding: 0 1px 1px 0;
+}
+
 button svg, button img {
 	vertical-align: middle;
 }
