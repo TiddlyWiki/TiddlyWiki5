@@ -1,7 +1,7 @@
 title: $:/core/images/info-button
 tags: $:/tags/Image
 
-<svg class="tc-image-info-button tc-image-button" viewBox="0 0 128 128" width="22pt" height="22pt">
+<svg class="tc-image-info-button tc-image-button" viewBox="0 0 129 129" width="22pt" height="22pt">
     <g fill-rule="evenodd">
         <g transform="translate(0.049406, 0.000000)">
             <path d="M64,128 C99.346224,128 128,99.346224 128,64 C128,28.653776 99.346224,0 64,0 C28.653776,0 0,28.653776 0,64 C0,99.346224 28.653776,128 64,128 Z M64,112 C90.509668,112 112,90.509668 112,64 C112,37.490332 90.509668,16 64,16 C37.490332,16 16,37.490332 16,64 C16,90.509668 37.490332,112 64,112 Z"></path>

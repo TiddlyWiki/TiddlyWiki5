@@ -1,0 +1,64 @@
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	modified:   core/icon.tid
+	modified:   core/images/advanced-search-button.tid
+	modified:   core/images/cancel-button.tid
+	modified:   core/images/chevron-down.tid
+	modified:   core/images/chevron-left.tid
+	modified:   core/images/chevron-right.tid
+	modified:   core/images/chevron-up.tid
+	modified:   core/images/clone-button.tid
+	modified:   core/images/close-all-button.tid
+	modified:   core/images/close-button.tid
+	modified:   core/images/close-others-button.tid
+	modified:   core/images/delete-button.tid
+	modified:   core/images/done-button.tid
+	modified:   core/images/down-arrow.tid
+	modified:   core/images/download-button.tid
+	modified:   core/images/edit-button.tid
+	modified:   core/images/export-button.tid
+	modified:   core/images/full-screen-button.tid
+	modified:   core/images/globe.tid
+	modified:   core/images/help.tid
+	modified:   core/images/home-button.tid
+	modified:   core/images/import-button.tid
+	modified:   core/images/info-button.tid
+	modified:   core/images/locked-padlock.tid
+	modified:   core/images/menu-button.tid
+	modified:   core/images/new-button.tid
+	modified:   core/images/new-here-button.tid
+	modified:   core/images/new-journal-button.tid
+	modified:   core/images/options-button.tid
+	modified:   core/images/permalink-button.tid
+	modified:   core/images/permaview-button.tid
+	modified:   core/images/plugin-generic-language.tid
+	modified:   core/images/plugin-generic-plugin.tid
+	modified:   core/images/plugin-generic-theme.tid
+	modified:   core/images/refresh-button.tid
+	modified:   core/images/right-arrow.tid
+	modified:   core/images/save-button.tid
+	modified:   core/images/star-filled.tid
+	modified:   core/images/storyview-classic.tid
+	modified:   core/images/storyview-pop.tid
+	modified:   core/images/storyview-zoomin.tid
+	modified:   core/images/tag-button.tid
+	modified:   core/images/theme-button.tid
+	modified:   core/images/tip.tid
+	modified:   core/images/unlocked-padlock.tid
+	modified:   core/images/video.tid
+	modified:   core/images/warning.tid
+	modified:   plugins/tiddlywiki/cecily/storyview-cecily.tid
+	modified:   plugins/tiddlywiki/stacked-view/storyview-stacked.tid
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	temp.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
