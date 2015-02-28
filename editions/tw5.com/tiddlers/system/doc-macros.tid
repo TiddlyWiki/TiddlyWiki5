@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20150226161637000
+modified: 20150228081437000
 title: $:/editions/tw5.com/doc-macros
 tags: $:/tags/Macro
 
@@ -64,7 +64,6 @@ tags: $:/tags/Macro
 
 \define .tip(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/tip}}</div> $_$</div>
 \define .warning(_) <div class="doc-icon-block"><div class="doc-block-icon">{{$:/core/images/warning}}</div> $_$</div>
-\end
 
 \define .state-prefix() $:/state/editions/tw5.com/
 
