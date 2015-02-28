@@ -12,6 +12,7 @@ Plugins have a `plugin-type` field that may be:
 
 * `plugin` //(default)// - a plain plugin
 * `theme` - a theme plugin (see ThemeMechanism)
+* `language` - for translations only
 
 Plugins can be used to package ordinary content, or can include JavaScript [[modules|Modules]] that extend and enhance the core TiddlyWiki5 functionality.
 
