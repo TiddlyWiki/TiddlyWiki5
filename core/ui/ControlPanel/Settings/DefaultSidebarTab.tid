@@ -6,8 +6,8 @@ title: $:/core/ui/ControlPanel/Settings/DefaultSidebarTab
 
 <$link to="$:/config/DefaultSidebarTab"><<lingo Hint>></$link>
 
-<$select tiddler="$:/config/DefaultSidebarTab" default={{$:/config/DefaultSidebarTab}}>
+<$select tiddler="$:/config/DefaultSidebarTab">
 <$list filter="[all[shadows+tiddlers]tag[$:/tags/SideBar]!has[draft.of]]">
-<option value=<<currentTiddler>>><<currentTiddler>></option>
+<option value=<<currentTiddler>>><$transclude field="caption"><$text text=<<currentTiddler>>/></$transclude></option>
 </$list>
 </$select>
