@@ -85,7 +85,7 @@ Settings/ToolbarButtons/Hint: Default toolbar button appearance:
 Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
 Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Define the sidebar tab that is displayed per default
+Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Theme/Caption: Theme
