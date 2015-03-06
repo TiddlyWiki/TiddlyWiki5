@@ -48,6 +48,8 @@ Modal.prototype.display = function(title,options) {
 		modalFooter = document.createElement("div"),
 		modalFooterHelp = document.createElement("span"),
 		modalFooterButtons = document.createElement("span");
+	// Prevent background from scrolling when inside a modal
+	document.body.style.overflow = "hidden";
 	// Up the modal count and adjust the body class
 	this.modalCount++;
 	this.adjustPageClass();
@@ -155,6 +157,8 @@ Modal.prototype.display = function(title,options) {
 			if(wrapper.parentNode) {
 				// Remove the modal message from the DOM
 				document.body.removeChild(wrapper);
+				// Reset style to allow the body to scroll
+			        document.body.style.overflow = null;
 			}
 		},duration);
 		// Don't let anyone else handle the tm-close-tiddler message
