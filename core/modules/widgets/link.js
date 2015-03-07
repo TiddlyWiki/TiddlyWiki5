@@ -120,6 +120,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 };
 
 LinkWidget.prototype.handleClickEvent = function(event) {
+	var handled;
+	// Invoke any actions
+	if(this.invokeActions(event)) {
+		handled = true;
+	}
 	// Send the click on its way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
