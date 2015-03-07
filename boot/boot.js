@@ -793,7 +793,7 @@ $tw.Tiddler = function(/* [fields,] fields */) {
 					value = src[t];
 				}
 				// Freeze the field to keep it immutable
-				if(typeof value === "object") {
+				if(value != null && typeof value === "object") {
 					Object.freeze(value);
 				}
 				this.fields[t] = value;
