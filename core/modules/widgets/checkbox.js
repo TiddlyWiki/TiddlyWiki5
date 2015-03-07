@@ -90,7 +90,8 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		tiddler = this.wiki.getTiddler(this.checkboxTitle),
 		fallbackFields = {text: ""},
 		newFields = {title: this.checkboxTitle},
-		hasChanged = false;
+		hasChanged = false,
+		handled;
 	// Set the tag if specified
 	if(this.checkboxTag && (!tiddler || tiddler.hasTag(this.checkboxTag) !== checked)) {
 		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
@@ -113,6 +114,10 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 	}
 	if(hasChanged) {
 		this.wiki.addTiddler(new $tw.Tiddler(fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
+	}
+	// Invoke any actions
+	if(this.invokeActions(event)) {
+		handled = true;
 	}
 };
 
