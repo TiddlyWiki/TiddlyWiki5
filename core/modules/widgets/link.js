@@ -1,5 +1,5 @@
 /*\
-title: $:/core/modules/widgets/link.js
+title: $:/plugins/inmysocsk/WidgetsInvokeActions/link-invoke-actions.js
 type: application/javascript
 module-type: widget
 
@@ -14,19 +14,19 @@ Link widget
 
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 
-var LinkWidget = function(parseTreeNode,options) {
+var LinkWidgetInvokeActions = function(parseTreeNode,options) {
 	this.initialise(parseTreeNode,options);
 };
 
 /*
 Inherit from the base widget class
 */
-LinkWidget.prototype = new Widget();
+LinkWidgetInvokeActions.prototype = new Widget();
 
 /*
 Render this widget into the DOM
 */
-LinkWidget.prototype.render = function(parent,nextSibling) {
+LinkWidgetInvokeActions.prototype.render = function(parent,nextSibling) {
 	// Save the parent dom node
 	this.parentDomNode = parent;
 	// Compute our attributes
@@ -51,15 +51,10 @@ LinkWidget.prototype.render = function(parent,nextSibling) {
 /*
 Render this widget into the DOM
 */
-LinkWidget.prototype.renderLink = function(parent,nextSibling) {
+LinkWidgetInvokeActions.prototype.renderLink = function(parent,nextSibling) {
 	var self = this;
-	// Sanitise the specified tag
-	var tag = this.linkTag;
-	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
-		tag = "a";
-	}
 	// Create our element
-	var domNode = this.document.createElement(tag);
+	var domNode = this.document.createElement("a");
 	// Assign classes
 	var classes = [];
 	if(this.linkClasses) {
@@ -82,11 +77,7 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 		wikiLinkTemplate = wikiLinkTemplateMacro ? wikiLinkTemplateMacro.trim() : "#$uri_encoded$",
 		wikiLinkText = wikiLinkTemplate.replace("$uri_encoded$",encodeURIComponent(this.to));
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
-	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
-	if(tag === "a") {
-		domNode.setAttribute("href",wikiLinkText);		
-	}
-	domNode.setAttribute("tabindex",this.tabIndex);
+	domNode.setAttribute("href",wikiLinkText);
 	// Set the tooltip
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
 	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");
@@ -106,20 +97,21 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	// Add a click event handler
 	$tw.utils.addEventListeners(domNode,[
 		{name: "click", handlerObject: this, handlerMethod: "handleClickEvent"},
+		{name: "dragstart", handlerObject: this, handlerMethod: "handleDragStartEvent"},
+		{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
 	]);
-	if(this.draggable === "yes") {
-		$tw.utils.addEventListeners(domNode,[
-			{name: "dragstart", handlerObject: this, handlerMethod: "handleDragStartEvent"},
-			{name: "dragend", handlerObject: this, handlerMethod: "handleDragEndEvent"}
-		]);
-	}
 	// Insert the link into the DOM and render any children
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
 };
 
-LinkWidget.prototype.handleClickEvent = function(event) {
+LinkWidgetInvokeActions.prototype.handleClickEvent = function(event) {
+	var handled;
+	// Invoke any actions
+	if(this.invokeActions(event)) {
+		handled = true;
+	}
 	// Send the click on its way as a navigate event
 	var bounds = this.domNodes[0].getBoundingClientRect();
 	this.dispatchEvent({
@@ -131,17 +123,14 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 		},
 		navigateSuppressNavigation: event.metaKey || event.ctrlKey || (event.button === 1)
 	});
-	if(this.domNodes[0].hasAttribute("href")) {
-		event.preventDefault();
-		event.stopPropagation();
-		return false;
-	}
+	event.preventDefault();
+	event.stopPropagation();
+	return false;
 };
 
-LinkWidget.prototype.handleDragStartEvent = function(event) {
+LinkWidgetInvokeActions.prototype.handleDragStartEvent = function(event) {
 	if(event.target === this.domNodes[0]) {
 		if(this.to) {
-			$tw.dragInProgress = true;
 			// Set the dragging class on the element being dragged
 			$tw.utils.addClass(event.target,"tc-tiddlylink-dragging");
 			// Create the drag image elements
@@ -176,9 +165,9 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 			if(!$tw.browser.isIE) {
 				dataTransfer.setData("text/vnd.tiddler",jsonData);
 				dataTransfer.setData("text/plain",title);
-				dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
+				dataTransfer.setData("text/x-moz-url","data:text/vnd.tiddler," + encodeURI(jsonData));
 			}
-			dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURIComponent(jsonData));
+			dataTransfer.setData("URL","data:text/vnd.tiddler," + encodeURI(jsonData));
 			dataTransfer.setData("Text",title);
 			event.stopPropagation();
 		} else {
@@ -187,9 +176,8 @@ LinkWidget.prototype.handleDragStartEvent = function(event) {
 	}
 };
 
-LinkWidget.prototype.handleDragEndEvent = function(event) {
+LinkWidgetInvokeActions.prototype.handleDragEndEvent = function(event) {
 	if(event.target === this.domNodes[0]) {
-		$tw.dragInProgress = false;
 		// Remove the dragging class on the element being dragged
 		$tw.utils.removeClass(event.target,"tc-tiddlylink-dragging");
 		// Delete the drag image element
@@ -202,15 +190,14 @@ LinkWidget.prototype.handleDragEndEvent = function(event) {
 /*
 Compute the internal state of the widget
 */
-LinkWidget.prototype.execute = function() {
-	// Pick up our attributes
+LinkWidgetInvokeActions.prototype.execute = function() {
+	// Get the target tiddler title
 	this.to = this.getAttribute("to",this.getVariable("currentTiddler"));
+	// Get the link title and aria label
 	this.tooltip = this.getAttribute("tooltip");
 	this["aria-label"] = this.getAttribute("aria-label");
+	// Get the link classes
 	this.linkClasses = this.getAttribute("class");
-	this.tabIndex = this.getAttribute("tabindex");
-	this.draggable = this.getAttribute("draggable","yes");
-	this.linkTag = this.getAttribute("tag","a");
 	// Determine the link characteristics
 	this.isMissing = !this.wiki.tiddlerExists(this.to);
 	this.isShadow = this.wiki.isShadowTiddler(this.to);
@@ -221,7 +208,7 @@ LinkWidget.prototype.execute = function() {
 /*
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
-LinkWidget.prototype.refresh = function(changedTiddlers) {
+LinkWidgetInvokeActions.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
 	if(changedAttributes.to || changedTiddlers[this.to] || changedAttributes["aria-label"] || changedAttributes.tooltip) {
 		this.refreshSelf();
@@ -230,6 +217,6 @@ LinkWidget.prototype.refresh = function(changedTiddlers) {
 	return this.refreshChildren(changedTiddlers);
 };
 
-exports.link = LinkWidget;
+exports.linkInvokeActions = LinkWidgetInvokeActions;
 
 })();
