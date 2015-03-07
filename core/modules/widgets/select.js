@@ -53,6 +53,17 @@ Handle a change event
 SelectWidget.prototype.handleChangeEvent = function(event) {
 	var value = this.getSelectDomNode().value;
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
+
+	this.activeChild = 2*(this.getSelectDomNode().selectedIndex)+1;
+	var widgets = $tw.wiki.makeWidget(this.parseTreeNode.children[this.activeChild], {parentWidget:this});
+	widgets.parseTreeNode = this.parseTreeNode;
+	widgets.parseTreeNode.children = [this.parseTreeNode.children[this.activeChild]];
+	var container = $tw.fakeDocument.createElement("div");
+	widgets.setVariable("currentTiddler", this.getVariable("currentTiddler"));
+	widgets.render(container, null);
+	if(widgets) {
+		widgets.invokeActions({});
+	}
 };
 
 /*
