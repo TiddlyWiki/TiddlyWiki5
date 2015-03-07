@@ -54,7 +54,27 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 	var value = this.getSelectDomNode().value;
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
 
-	this.activeChild = 2*(this.getSelectDomNode().selectedIndex)+1;
+	for(var k = 0; k < this.parseTreeNode.children.length; k++) {
+		if(this.parseTreeNode.children[k].attributes){
+			if(this.parseTreeNode.children[k].attributes.value) {
+				if(this.parseTreeNode.children[k].attributes.value.value === this.getSelectDomNode().value) {
+					this.activeChild = k;
+					break;
+				}
+			} else {
+				for(var l = 0; l < this.parseTreeNode.children[k].children.length; l++) {
+					if(this.parseTreeNode.children[k].children[l].text) {
+						if(this.parseTreeNode.children[k].children[l].text === this.getSelectDomNode().value) {
+							this.activeChild = k;
+							break;
+						}
+					}
+				}
+			}
+		} 
+	}
+
+	if(this.activeChild){
 	var widgets = $tw.wiki.makeWidget(this.parseTreeNode.children[this.activeChild], {parentWidget:this});
 	widgets.parseTreeNode = this.parseTreeNode;
 	widgets.parseTreeNode.children = [this.parseTreeNode.children[this.activeChild]];
@@ -63,6 +83,9 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 	widgets.render(container, null);
 	if(widgets) {
 		widgets.invokeActions({});
+	}
+	} else {
+//		console.log("no active child");
 	}
 };
 
