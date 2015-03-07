@@ -59,6 +59,7 @@ RadioWidget.prototype.render = function(parent,nextSibling) {
 	this.labelDomNode.appendChild(this.inputDomNode);
 	this.spanDomNode = this.document.createElement("span");
 	this.labelDomNode.appendChild(this.spanDomNode);
+	this.setVariable("currentOption", this.radioValue);
 	// Add a click event handler
 	$tw.utils.addEventListeners(this.inputDomNode,[
 		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
@@ -84,8 +85,13 @@ RadioWidget.prototype.setValue = function() {
 };
 
 RadioWidget.prototype.handleChangeEvent = function(event) {
+	var handled;
 	if(this.inputDomNode.checked) {
 		this.setValue();
+	}
+	// Invoke any actions
+	if(this.invokeActions(event)) {
+		handled = true;
 	}
 };
 
