@@ -37,8 +37,12 @@ EditTextWidget.prototype.render = function(parent,nextSibling) {
 	// Execute our logic
 	this.execute();
 	// Create our element
-	var editInfo = this.getEditInfo();
-	var domNode = this.document.createElement(this.editTag);
+	var editInfo = this.getEditInfo(),
+		tag = this.editTag;
+	if($tw.config.htmlUnsafeElements.indexOf(tag) !== -1) {
+		tag = "input";
+	}
+	var domNode = this.document.createElement(tag);
 	if(this.editType) {
 		domNode.setAttribute("type",this.editType);
 	}
