@@ -19,4 +19,4 @@ ErsteSchritte - $(browser-name)$
 * [[Speichern mit Verschlüsselung]]: ~TiddlyWiki kann verschlüsselt gespeichert werden. Wichtig: Vergessen Sie das Passwort nicht!
 * [[Speichern auf TiddlySpot]]: TiddlySpot ist ein freier Service, mit dem Sie Ihr Wiki online stellen können.
 * [[TiddlyWiki und TiddlyDesktop]]: TiddlyDesktop ist eine "echte" Applikation mit der Sie mehrere Wikis verwalten und speichern können. 
-* Running [[TiddlyWiki on node-webkit]], turning a single TiddlyWiki into a native application on your desktop
+* Running [[TiddlyWiki on NW.js]], turning a single TiddlyWiki into a native application on your desktop
