@@ -4,7 +4,7 @@ The "full" edition of TiddlyWiki consists of all the available languages, themes
 
 It is intended for use in testing TiddlyWiki - in particular, for switching between all the available language plugins.
 
-{{$:/language/ControlPanel/Basics/Language/Prompt}}: {{$:/snippets/minilanguageswitcher}}
+{{$:/language/ControlPanel/Basics/Language/Prompt}} {{$:/snippets/minilanguageswitcher}}
 
 ---
 
