@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Rozbalí obsah plugin tiddlera
+
+Vyextrahuje obsah plugin tiddlerov vytvoriac z nich bežné tiddlery:
+
+```
+--unpackplugin <title>
+```
