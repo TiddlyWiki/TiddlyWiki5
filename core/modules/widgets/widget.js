@@ -479,20 +479,20 @@ Widget.prototype.removeChildDomNodes = function() {
 Invoke any action widgets that are descendants of this widget.
 */
 Widget.prototype.invokeActions = function(event) {
-	return this.invokeActionCall(this, event);
+	return this.invokeActionCall(this,event);
 };
 
 /*
 Recursively search through descendants, invoking all actions encountered.
 */
-Widget.prototype.invokeActionCall = function(here, event) {
+Widget.prototype.invokeActionCall = function(here,event) {
 	var handled = false;
 	for(var t=0; t<here.children.length; t++) {
 		var child = here.children[t];
 		if(child.invokeAction && child.invokeAction(this,event)) {
 			handled = true;
 		}
-		if(this.invokeActionCall(child, event)) {
+		if(this.invokeActionCall(child,event)) {
 			handled = true;
 		}
 	}
