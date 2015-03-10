@@ -31,7 +31,7 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	var tag = this.parseTreeNode.isBlock ? "div" : "span";
-	if($tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
+	if(this.revealTag && $tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
 		tag = this.revealTag;
 	}
 	var domNode = this.document.createElement(tag);
