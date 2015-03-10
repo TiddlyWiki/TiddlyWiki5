@@ -1,5 +1,5 @@
 created: 20131024141900000
-modified: 20140211232346858
+modified: 20150310124305795
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -19,6 +19,7 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 
 |!Attribute |!Description |
 |state |The title of the tiddler containing the state |
+|tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
 |type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |

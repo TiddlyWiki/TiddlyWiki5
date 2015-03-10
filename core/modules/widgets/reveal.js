@@ -30,7 +30,11 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
+	var tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if($tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
+		tag = this.revealTag;
+	}
+	var domNode = this.document.createElement(tag);
 	var classes = this["class"].split(" ") || [];
 	classes.push("tc-reveal");
 	domNode.className = classes.join(" ");
@@ -83,6 +87,7 @@ Compute the internal state of the widget
 RevealWidget.prototype.execute = function() {
 	// Get our parameters
 	this.state = this.getAttribute("state");
+	this.revealTag = this.getAttribute("tag");
 	this.type = this.getAttribute("type");
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
