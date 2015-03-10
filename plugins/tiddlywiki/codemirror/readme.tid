@@ -226,9 +226,8 @@ Then the closing tag ''</html>'' should automatically appear.
 ## Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/xml-fold.js`, the code can be found here [[https://raw.githubusercontent.com/codemirror/CodeMirror/master/addon/fold/xml-fold.js]]
 ## Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.js`, the code can be found here [[http://codemirror.net/addon/fold/foldgutter.js]]
 # Create a tiddler `$:/plugins/tiddlywiki/codemirror/addon/fold/foldgutter.css`
-## Add the tag ''$:/tags/Stylesheet''
+## Add the tag `$:/tags/Stylesheet`
 ## Set the text field of the tiddler with the css code from this link : [[http://codemirror.net/addon/fold/foldgutter.css]]
-
 # Set the text field of the tiddler `$:/config/CodeMirror` to:
 
 ```
@@ -247,7 +246,6 @@ Then the closing tag ''</html>'' should automatically appear.
       "gutters": ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
   }
 }
-
 ```
 
 Now if you type the below code in a tiddler with the type `text/html`:
