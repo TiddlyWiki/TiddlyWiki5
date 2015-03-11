@@ -3,4 +3,4 @@ modified: 20150227193157000
 tags: Macros
 title: Macro Syntax
 
-<<list-links "[tag[Macro Syntax]]">>
+<<list-links filter:"[tag[Macro Syntax]]">>
