@@ -1,0 +1,14 @@
+created: 20150228115959000
+modified: 20150228120621000
+tags: [[tv-wikilink-tooltip Variable]] [[Variable Examples]]
+title: tv-wikilink-tooltip Variable (Examples)
+type: text/vnd.tiddlywiki
+
+This example shows a way of giving links a tooltip derived from the target tiddler's <<.field caption>> field:
+
+<$importvariables filter="$:/editions/tw5.com/macro-examples/tv-wikilink-tooltip">
+<$codeblock code={{$:/editions/tw5.com/macro-examples/tv-wikilink-tooltip}}/>
+<$macrocall $name=".example" n="1" eg="""Here is a link to [[backlinks Operator]] with a custom tooltip."""/>
+</$importvariables>
+
+Here is [[a standard link|HelloThere]] for comparison.

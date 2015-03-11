@@ -1,0 +1,17 @@
+created: 20150228103411000
+modified: 20150228104438000
+tags: [[tv-wikilinks Variable]] [[Variable Examples]]
+title: tv-wikilinks Variable (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""HelloThere,
+[[HelloThere]],
+<$link to="HelloThere">is //this// a link?</$link>"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<$set name="tv-wikilinks" value="no">
+HelloThere,
+[[HelloThere]],
+<$link to="HelloThere">is //this// a link?</$link>
+</$set>"""/>
