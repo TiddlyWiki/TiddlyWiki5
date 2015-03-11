@@ -18,10 +18,8 @@ title: $:/core/templates/tiddlywiki5.html
 <title>{{$:/core/wiki/title}}</title>
 <!--~~ This is a Tiddlywiki file. The points of interest in the file are marked with this pattern ~~-->
 
-<!--~~ User defined plain text meta tags ~~-->
-{{{ [all[shadows+tiddlers]tag[$:/tags/MetaTag]] ||$:/core/templates/plain-text-tiddler}}}
-<!--~~ User defined wikified meta tags ~~-->
-{{{ [all[shadows+tiddlers]tag[$:/tags/MetaTagWikified]] ||$:/core/templates/wikified-tiddler-visible-code}}}
+<!--~~ Wikified Markup ~~-->
+{{{ [all[shadows+tiddlers]tag[$:/tags/WikifiedMarkup]] ||$:/core/templates/html-tiddler}}}
 <!--~~ Raw markup ~~-->
 {{{ [all[shadows+tiddlers]tag[$:/core/wiki/rawmarkup]] [all[shadows+tiddlers]tag[$:/tags/RawMarkup]] ||$:/core/templates/plain-text-tiddler}}}
 </head>
