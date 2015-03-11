@@ -38,6 +38,7 @@ These are the available system tags
 * {{$:/tags/TopRightBar||$:/core/ui/TagTemplate}} for the top right bar
 * {{$:/tags/ViewTemplate||$:/core/ui/TagTemplate}} for the view template
 * {{$:/tags/ViewToolbar||$:/core/ui/TagTemplate}} for the view mode tiddler toolbar
+* {{$:/tags/WikifiedMarkup||$:/core/ui/TagTemplate}} for markup that is wikified before being included in the generated HTML file
 
 ! System tags in use
 
