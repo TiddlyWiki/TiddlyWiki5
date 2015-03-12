@@ -32,6 +32,8 @@ ExportTiddlers/Caption: 導出條目
 ExportTiddlers/Hint: 導出條目
 FullScreen/Caption: 全螢幕
 FullScreen/Hint: 進入或離開全螢幕模式
+Help/Caption: 說明
+Help/Hint: 顯示說明中心
 Home/Caption: 首頁
 Home/Hint: 開啟首頁條目
 Import/Caption: 導入

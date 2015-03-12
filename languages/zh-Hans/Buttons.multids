@@ -32,6 +32,8 @@ ExportTiddlers/Caption: 导出条目
 ExportTiddlers/Hint: 导出条目
 FullScreen/Caption: 全屏幕
 FullScreen/Hint: 进入或离开全屏模式
+Help/Caption: 帮助
+Help/Hint: 显示帮助面板
 Home/Caption: 首页
 Home/Hint: 开启首页条目
 Import/Caption: 导入
