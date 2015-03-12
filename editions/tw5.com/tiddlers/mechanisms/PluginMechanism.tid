@@ -8,7 +8,7 @@ type: text/vnd.tiddlywiki
 
 Tiddlers within plugins behave something like shadow tiddlers in classic TiddlyWiki: they can be freely overwritten by creating a tiddler with the same title, but deleting that tiddler restores the underlying tiddler value from the plugin.
 
-Plugins have a `plugin-type` field that may be:
+Plugins have a `plugin-type` field that may be (see the table below):
 
 * `plugin` //(default)// - a plain plugin
 * `theme` - a theme plugin (see ThemeMechanism)
@@ -31,7 +31,7 @@ Plugins are stored as tiddlers with the following fields:
 |version |Version string (must conform to SemanticVersioning convention) |
 |source |Source URL of plugin |
 |type |Must be ''application/json'' |
-|plugin-type |Can be ''plugin'' (default) or ''theme'' |
+|plugin-type |Can be ''plugin'' (default), ''language'' or ''theme'' |
 |text |JSON encoding of the list of tiddlers comprising the plugin |
 |list |Names of exposed plugin information tiddlers (see below) |
 |name |Name of the theme (only for themes) |
