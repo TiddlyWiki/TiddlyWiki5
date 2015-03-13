@@ -7,7 +7,7 @@ Any WikiText markup is allowed, so transclusions and macros work as expected.
 
 !Example
 
-The following script, if put in the text field of a tiddler tagged with `$:/tags/StartupAction`, would change the title of a wiki to `title1` if it is not already `title1`, and if the title of the wiki is `title1` it will change the title to `title2`. This is done using the [[reveal widget|RevealWidget]].
+The following WikiText, if put in the text field of a tiddler tagged with `$:/tags/StartupAction`, would change the title of a wiki to `title1` if it is not already `title1`, and if the title of the wiki is `title1` it will change the title to `title2`. This is done using the [[reveal widget|RevealWidget]].
 
 ```
 <$reveal state='$:/SiteTitle' type='nomatch' text='title1'>
