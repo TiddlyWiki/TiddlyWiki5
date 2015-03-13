@@ -62,7 +62,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/c296f14210545374124df5d4ae9ffb402ed73561]] problem with case-insensitive filing systems (eg Windows)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1354]] mobile metadata to static page templates
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1352]] added "noclean" parameter to RenderTiddlersCommand
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b768dc332b2d5d7ac1f731953cafb5fd1b30dad9]] [[FilterOperator: editions]] and [[FilterOperator: editiondescription]] for enumerating available editions
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b768dc332b2d5d7ac1f731953cafb5fd1b30dad9]] [[editions Operator]] and [[editiondescription Operator]] for enumerating available editions
 
 !! Changes affecting plugin authors
 
@@ -74,15 +74,24 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 
 * [[@aelocson|https://github.com/aelocson]]
+* [[@alexhough|https://github.com/alexhough]]
 * [[@Arlen22|https://github.com/Arlen22]]
 * [[@BramChen|https://github.com/BramChen]]
-* [[@Drakor|https://github.com/Drakor]]
+* [[@danielo515|https://github.com/danielo515]]
 * [[@dpdannemiller|https://github.com/dpdannemiller]]
+* [[@Drakor|https://github.com/Drakor]]
 * [[@evgeniy-gryaznov|https://github.com/evgeniy-gryaznov]]
 * [[@felixhayashi|https://github.com/felixhayashi]]
 * [[@gernert|https://github.com/gernert]]
 * [[@Infurnoape|https://github.com/Infurnoape]]
 * [[@Jc-L|https://github.com/Jc-L]]
+* [[@Mathobal|https://github.com/Mathobal]]
+* [[@ng110|https://github.com/ng110]]
+* [[@pmario|https://github.com/pmario]]
+* [[@roma0104|https://github.com/roma0104]]
+* [[@simonbaird|https://github.com/simonbaird]]
+* [[@Spangenhelm|https://github.com/Spangenhelm]]
+* [[@sukima|https://github.com/sukima]]
 * [[@tobibeer|https://github.com/tobibeer]]
 * [[@twMat|https://github.com/twMat]]
 * [[@welford|https://github.com/welford]]
