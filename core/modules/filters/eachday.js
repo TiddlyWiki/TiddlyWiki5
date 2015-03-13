@@ -24,16 +24,9 @@ exports.eachday = function(source,operator,options) {
 		value = (new Date(value)).setHours(0,0,0,0);
 		return value+0;
 	};
-	// Convert ISO date string to Date object if needed.
-	var toDateObj = function(value) {
-		if(!(value instanceof Date)) {
-			value = new Date($tw.utils.parseDate(value));
-		}
-		return value;
-	};
 	source(function(tiddler,title) {
 		if(tiddler && tiddler.fields[fieldName]) {
-			var value = toDate(toDateObj(tiddler.fields[fieldName]));
+			var value = toDate($tw.utils.parseDate(tiddler.fields[fieldName]));
 			if(values.indexOf(value) === -1) {
 				values.push(value);
 				results.push(title);

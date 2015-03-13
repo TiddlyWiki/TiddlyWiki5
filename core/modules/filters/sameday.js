@@ -23,16 +23,9 @@ exports.sameday = function(source,operator,options) {
 	var isSameDay = function(dateField) {
 			return (new Date(dateField)).setHours(0,0,0,0) === targetDate;
 		};
-	// Convert ISO date string to Date object if needed.
-	var toDateObj = function(value) {
-		if(!(value instanceof Date)) {
-			value = new Date($tw.utils.parseDate(value));
-		}
-		return value;
-	};
 	source(function(tiddler,title) {
 		if(tiddler && tiddler.fields[fieldName]) {
-			if(isSameDay(toDateObj(tiddler.fields[fieldName]))) {
+			if(isSameDay($tw.utils.parseDate(tiddler.fields[fieldName]))) {
 				results.push(title);
 			}
 		}
