@@ -1,0 +1,19 @@
+tags: ActionWidgets
+title: Startup Actions
+
+Any tiddler that is tagged with `$:/tags/StartupAction` will have the contents of its text field evaluated as though it were triggered by a button widget. That is, any [[action widgets|ActionWidgets]] will be invoked.
+
+Any WikiText markup is allowed, so transclusions and macros work as expected.
+
+!Example
+
+The following script, if put in the text field of a tiddler tagged with `$:/tags/StartupAction`, would change the title of a wiki to `title1` if it is not already `title1`, and if the title of the wiki is `title1` it will change the title to `title2`. This is done using the [[reveal widget|RevealWidget]].
+
+```
+<$reveal state='$:/SiteTitle' type='nomatch' text='title1'>
+<$action-setfield $tiddler='$:/SiteTitle' text=title1/>
+</$reveal>
+<$reveal state='$:/SiteTitle' type='match' text='title1'>
+<$action-setfield $tiddler='$:/SiteTitle' text=title2/>
+</$reveal>
+```
