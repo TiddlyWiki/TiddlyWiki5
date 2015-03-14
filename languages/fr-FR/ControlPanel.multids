@@ -78,8 +78,10 @@ Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
 Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
 Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
-Settings/ToolbarButtons/Icons/Description: Afficher l'icone
+Settings/ToolbarButtons/Icons/Description: Afficher l'icône
 Settings/ToolbarButtons/Text/Description: Afficher le texte
+Settings/DefaultSidebarTab/Caption: Onglet par défaut sur la barre latérale
+Settings/DefaultSidebarTab/Hint: Indique l'onglet de la barre latérale qui sera affiché par défaut
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
