@@ -22,6 +22,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 !! Usability Improvements
 
+* [[Upgraded|https://github.com/Jermolene/TiddlyWiki5/commit/ae001a19e5b3e43cf5388fd4e8d99788085649fe]] the [[KaTeX Plugin]] to use [[KaTeX v0.2.0|https://github.com/Khan/KaTeX/releases/tag/v0.2.0]], with better symbol support
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/70e419824fab107aab58f87780dbb5a1de70c248]] [[Help Plugin]] providing floating help panel
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8643278a452d1a300cec8d3425c1b18699a17dca]] support for an online plugin library
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/1353]] behaviour of the tag dropdown in the edit template
