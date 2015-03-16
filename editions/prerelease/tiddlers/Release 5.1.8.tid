@@ -22,6 +22,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 !! Usability Improvements
 
+* Improved scrolling behaviour, including [[fixing|https://github.com/Jermolene/TiddlyWiki5/commit/3df341621d30b205775288e324cef137c48e9f6e]] problem with unnecessary scrolling at startup
 * [[Upgraded|https://github.com/Jermolene/TiddlyWiki5/commit/ae001a19e5b3e43cf5388fd4e8d99788085649fe]] the [[KaTeX Plugin]] to use [[KaTeX v0.2.0|https://github.com/Khan/KaTeX/releases/tag/v0.2.0]], with better symbol support
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/70e419824fab107aab58f87780dbb5a1de70c248]] [[Help Plugin]] providing floating help panel
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8643278a452d1a300cec8d3425c1b18699a17dca]] support for an online plugin library
@@ -47,7 +48,6 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 !! Bug Fixes
 
-* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3df341621d30b205775288e324cef137c48e9f6e]] problem with unnecessary scrolling at startup
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/1249]] version number compatibility checks for plugins
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1adfe20508116da0ee4b5c9e72ea9742f24b60c9]] problem with repeatedly cancelling a draft
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/050b643948e24d1d93a83766a23a0d693616d01e]] sandboxing of generated `<iframe>` elements
