@@ -18,8 +18,8 @@ window.addEventListener("message",function listener(event){
 	console.log("plugin library: Message content",event.data);
 	switch(event.data.verb) {
 		case "GET":
-			if(event.data.url === "recipes/default/tiddlers.json") {
-				// Route for recipes/default/tiddlers.json
+			if(event.data.url === "recipes/library/tiddlers.json") {
+				// Route for recipes/library/tiddlers.json
 				event.source.postMessage({
 					verb: "GET-RESPONSE",
 					status: "200",
@@ -28,9 +28,9 @@ window.addEventListener("message",function listener(event){
 					type: "application/json",
 					body: JSON.stringify(assetList,null,4)
 				},"*");
-			} else if(event.data.url.indexOf("recipes/default/tiddlers/") === 0) {
-				var url = "recipes/default/tiddlers/" + encodeURIComponent(removePrefix(event.data.url,"recipes/default/tiddlers/"));
-				// Route for recipes/default/tiddlers/<uri-encoded-tiddler-title>.json
+			} else if(event.data.url.indexOf("recipes/library/tiddlers/") === 0) {
+				var url = "recipes/library/tiddlers/" + encodeURIComponent(removePrefix(event.data.url,"recipes/library/tiddlers/"));
+				// Route for recipes/library/tiddlers/<uri-encoded-tiddler-title>.json
 				httpGet(url,function(err,responseText) {
 					if(err) {
 						event.source.postMessage({

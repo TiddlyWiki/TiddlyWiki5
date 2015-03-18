@@ -1,0 +1,4 @@
+title: $:/core/ui/ControlPanel/Plugins/Installed/Themes
+caption: {{$:/language/ControlPanel/Plugins/Themes/Caption}} (<$count filter="[!has[draft.of]plugin-type[theme]]"/>)
+
+<<plugin-table theme>>

@@ -1,7 +1,0 @@
-title: $:/core/ui/ControlPanel/Plugins
-tags: $:/tags/ControlPanel
-caption: {{$:/language/ControlPanel/Plugins/Caption}}
-
-<div class="tc-control-panel">
-<<tabs "[all[shadows+tiddlers]tag[$:/tags/ControlPanel/Plugins]!has[draft.of]]" "$:/core/ui/ControlPanel/Plugins/Installed">>
-</div>

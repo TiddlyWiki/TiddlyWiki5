@@ -38,8 +38,8 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
-Plugins/Add/Hint: Install new plugins
-Plugins/Add/Caption: Add
+Plugins/Add/Hint: Install plugins from the official library
+Plugins/Add/Caption: Get more plugins
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: disable
 Plugins/Disable/Hint: Disable this plugin when reloading page
@@ -47,11 +47,13 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
-Plugins/Installed/Hint: Currently installed plugins
-Plugins/Installed/Caption: Installed
-Plugins/Language/Prompt: Languages
-Plugins/Plugin/Prompt: Plugins
-Plugins/Theme/Prompt: Themes
+Plugins/Installed/Hint: Currently installed plugins:
+Plugins/Languages/Caption: Languages
+Plugins/Languages/Hint: Language pack plugins
+Plugins/Plugins/Caption: Plugins
+Plugins/Plugins/Hint: Plugins
+Plugins/Themes/Caption: Themes
+Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
 Saving/Heading: Saving
 Saving/TiddlySpot/Advanced/Heading: Advanced Settings
