@@ -1110,6 +1110,11 @@ canvas.tc-edit-bitmapeditor  {
 	line-height: 30px;
 }
 
+.tc-modal-header img, .tc-modal-header svg {
+	width: 1em;
+	height: 1em;
+}
+
 .tc-modal-body {
 	padding: 15px;
 }
@@ -1330,8 +1335,8 @@ canvas.tc-edit-bitmapeditor  {
 	display: block;
 	border: 1px solid <<colour muted-foreground>>;
 	background-colour: <<colour background>>;
-	margin: 1em 0 1em 0;
-	padding: 8px;
+	margin: 0.5em 0 0.5em 0;
+	padding: 4px;
 }
 
 .tc-plugin-info-disabled {
@@ -1360,16 +1365,46 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 	vertical-align: middle;
 }
 
-a.tc-plugin-info img, a.tc-plugin-info svg {
+.tc-plugin-info-chunk h1 {
+	font-size: 1em;
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info-chunk h2 {
+	font-size: 0.8em;
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info-chunk div {
+	font-size: 0.7em;	
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info img, .tc-plugin-info svg {
 	width: 2em;
 	height: 2em;
 	fill: <<colour muted-foreground>>;
 }
 
+.tc-plugin-info.tc-small-icon img, .tc-plugin-info.tc-small-icon svg {
+	width: 1em;
+	height: 1em;
+}
+
 .tc-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
+	margin-top: -8px;
+}
+
+.tc-plugin-info-dropdown-message {
+	background: <<colour message-background>>;
+	padding: 0.5em 1em 0.5em 1em;
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+.tc-plugin-info-dropdown-body {
 	padding: 1em 1em 1em 1em;
-	margin-top: -1em;
 }
 
 /*

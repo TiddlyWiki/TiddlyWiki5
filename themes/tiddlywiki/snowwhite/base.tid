@@ -8,13 +8,11 @@ tags: [[$:/tags/Stylesheet]]
 }
 
 .tc-tiddler-title {
-/********************************
 	position: -webkit-sticky;
 	position: -moz-sticky;
 	position: -o-sticky;
 	position: -ms-sticky;
 	position: sticky;
-********************************/
 	top: 0px;
 	background: <<colour tiddler-background>>;
 	z-index: 500;
@@ -116,5 +114,5 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-plugin-info {
-	<<box-shadow "2px 2px 4px rgba(0,0,0,0.2)">>
+	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
 }

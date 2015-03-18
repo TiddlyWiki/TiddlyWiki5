@@ -32,6 +32,8 @@ ExportTiddlers/Caption: exporte ces tiddlers
 ExportTiddlers/Hint: Exporter ces tiddlers
 FullScreen/Caption: plein-écran
 FullScreen/Hint: Entre ou sort du mode plein-écran
+Help/Caption: aide
+Help/Hint: Affiche le panneau d'aide
 Import/Caption: importer
 Import/Hint: Importer des fichiers
 Info/Caption: informations

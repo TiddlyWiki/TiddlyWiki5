@@ -39,20 +39,44 @@ Command.prototype.execute = function() {
 		fs = require("fs"),
 		path = require("path"),
 		containerTitle = this.params[0],
-		basepath = this.params[1],
-		skinnyListTitle = this.params[2];
+		filter = this.params[1],
+		basepath = this.params[2],
+		skinnyListTitle = this.params[3];
 	// Get the container tiddler as data
 	var containerData = self.commander.wiki.getTiddlerData(containerTitle,undefined);
 	if(!containerData) {
 		return "'" + containerTitle + "' is not a tiddler bundle";
 	}
-	// Save each JSON file and collect the skinny data
-	var skinnyList = [];
+	// Filter the list of plugins
+	var pluginList = [];
 	$tw.utils.each(containerData.tiddlers,function(tiddler,title) {
+		pluginList.push(title);
+	});
+	var filteredPluginList;
+	if(filter) {
+		filteredPluginList = self.commander.wiki.filterTiddlers(filter,null,self.commander.wiki.makeTiddlerIterator(pluginList));
+	} else {
+		filteredPluginList = pluginList;
+	}
+	// Iterate through the plugins
+	var skinnyList = [];
+	$tw.utils.each(filteredPluginList,function(title) {
+		var tiddler = containerData.tiddlers[title];
+		// Save each JSON file and collect the skinny data
 		var pathname = path.resolve(self.commander.outputPath,basepath + encodeURIComponent(title) + ".json");
 		$tw.utils.createFileDirectories(pathname);
 		fs.writeFileSync(pathname,JSON.stringify(tiddler,null,$tw.config.preferences.jsonSpaces),"utf8");
-		skinnyList.push($tw.utils.extend({},tiddler,{text: undefined}));
+		// Collect the skinny list data
+		var pluginTiddlers = JSON.parse(tiddler.text),
+			readmeContent = (pluginTiddlers.tiddlers[title + "/readme"] || {}).text,
+			iconTiddler = pluginTiddlers.tiddlers[title + "/icon"] || {},
+			iconType = iconTiddler.type,
+			iconText = iconTiddler.text,
+			iconContent;
+		if(iconType && iconText) {
+			iconContent = $tw.utils.makeDataUri(iconText,iconType);
+		}
+		skinnyList.push($tw.utils.extend({},tiddler,{text: undefined, readme: readmeContent, icon: iconContent}));
 	});
 	// Save the catalogue tiddler
 	if(skinnyListTitle) {

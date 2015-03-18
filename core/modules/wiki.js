@@ -905,6 +905,7 @@ Make a widget tree for transclusion
 title: target tiddler title
 options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
+options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
 */
 exports.makeTranscludeWidget = function(title,options) {
@@ -923,6 +924,9 @@ exports.makeTranscludeWidget = function(title,options) {
 	]};
 	if(options.field) {
 		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+	}
+	if(options.mode) {
+		parseTree.tree[0].children[0].attributes.mode = {type: "string", value: options.mode};
 	}
 	if(options.children) {
 		parseTree.tree[0].children[0].children = options.children;
