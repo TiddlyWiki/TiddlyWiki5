@@ -1,0 +1,11 @@
+title: $:/plugins/tiddlywiki/github-fork-ribbon/readme
+
+This plugin provides a diagonal ribbon across the corner of the window. It resembles the design used by ~GitHub for their "Fork me on ~GitHub" ribbons.
+
+The ribbon can be positioned over any corner, and can incorporate user defined text, colours and a link.
+
+The CSS stylesheet is adapted from work by Simon Whitaker:
+
+https://github.com/simonwhitaker/github-fork-ribbon-css/
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/github-fork-ribbon]]
