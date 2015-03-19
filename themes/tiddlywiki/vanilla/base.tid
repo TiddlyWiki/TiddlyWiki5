@@ -87,6 +87,10 @@ dl dt {
 	color: <<colour muted-foreground>>;
 }
 
+svg.tc-image-button {
+	padding: 0px 1px 1px 0px;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
