@@ -1,11 +1,4 @@
-title: $:/plugins/tiddlywiki/codemirror/readme
-
-The CodeMirror plugin brings many features:
-
-* Code colouring for many languages (see [[the official documentation here|http://codemirror.net/mode/index.html]])
-* Auto closing brackets and tags
-* Folding brackets, comments, and tags
-* Auto-completion 
+title: $:/plugins/tiddlywiki/codemirror/usage
 
 ! Setting ~CodeMirror Content Types
 

@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/tiddlyweb/readme
+
+This plugin runs in the browser to synchronise tiddler changes to and from a TiddlyWeb-compatible server (including TiddlyWiki 5 itself). It is inert when run under Node.js.
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tiddlyweb]]

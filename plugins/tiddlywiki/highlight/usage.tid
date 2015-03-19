@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/highlight/usage
+
+! Usage
+
+Fenced code blocks can have a language specifier added to trigger highlighting in a specific language. Otherwise heuristics are used to detect the language.
+
+```
+ ```js
+ var a = b + c; // Highlighted as JavaScript
+ ```
+```
+! Adding Themes
+
+You can add themes from highlight.js by copying the CSS to a new tiddler and tagging it with [[$:/tags/Stylesheet]]. The available themes can be found on GitHub:
+
+https://github.com/isagalaev/highlight.js/tree/master/src/styles

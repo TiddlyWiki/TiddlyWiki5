@@ -1,8 +1,8 @@
-title: $:/plugins/tiddlywiki/browser-sniff/readme
-
-This plugin adds a number of `$:/info/` tiddlers containing information about the current browser.
+title: $:/plugins/tiddlywiki/browser-sniff/usage
 
 ! Information Tiddlers
+
+The following informational tiddlers are created at startup:
 
 |!Title |!Description |
 |[[$:/info/browser/is/android]] |Running on Android? ("yes" or "no")  |

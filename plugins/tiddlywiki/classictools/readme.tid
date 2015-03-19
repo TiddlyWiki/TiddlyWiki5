@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/classictools/readme
+
+This plugin provides facilities for working with TiddlyWiki Classic. It is used in the build process for TiddlyWiki Classic.
+
+The additional features are:
+
+* A ''tiddlerdeserializer'' module for reading TiddlyWiki Classic `.recipe` files
+* Templates for building TiddlyWiki Classic.
+
+See https://github.com/TiddlyWiki/tiddlywiki.com for more details.
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/classictools]]
