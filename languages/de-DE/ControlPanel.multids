@@ -48,10 +48,12 @@ Plugins/Empty/Hint: keine
 Plugins/Enable/Caption: aktivieren
 Plugins/Enable/Hint: Aktivieren Sie dieses Plugin beim nächsten Laden der Seite.
 Plugins/Installed/Hint: Momentan installierte Plugins
-Plugins/Installed/Caption: Installiert
-Plugins/Language/Prompt: Sprachen
-Plugins/Plugin/Prompt: Plugins
-Plugins/Theme/Prompt: Themen
+Plugins/Languages/Caption: Sprachen
+Plugins/Languages/Hint: Spracherweiterungen
+Plugins/Plugins/Caption: Plugins
+Plugins/Plugins/Hint: Erweiterungen
+Plugins/Themes/Caption: Themes
+Plugins/Themes/Hint: Theme Erweiterungen
 Saving/Caption: Speichern
 Saving/Heading: Speichern
 Saving/TiddlySpot/Advanced/Heading: Erweiterte Einstellungen
@@ -84,6 +86,8 @@ Settings/ToolbarButtons/Caption: Toolbar Buttons
 Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
+Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
+Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktive ist.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Theme
