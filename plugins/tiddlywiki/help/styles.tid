@@ -16,6 +16,7 @@ tags: [[$:/tags/Stylesheet]]
 	background: <<colour tiddler-background>>;
 	padding: 1em;
 	margin: 0.5em;
+	z-index: 1000;
 }
 
 dl.tc-help-cheatsheet {
