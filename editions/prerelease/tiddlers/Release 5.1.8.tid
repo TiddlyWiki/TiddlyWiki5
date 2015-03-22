@@ -29,7 +29,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/pull/1353]] behaviour of the tag dropdown in the edit template
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/ea6e60e66983ee1184f09c5796ef6c8bceae703a]] automatic focusing of the search box at startup
 * [[Introduced|https://github.com/Jermolene/TiddlyWiki5/commit/4f3cb8b9aebfc4f65f40c96ef99730887d746b41]] the [[Railroad Plugin]] by Astrid Elocson (see it in action in the new [[Filter Syntax]] documentation)
-* [[Migrated|https://github.com/Jermolene/TiddlyWiki5/commit/230066eeae9ace8336612e02c78f8cdaa3f717e4]] functionality of "Sticky Titles" theme into "Vanilla"/"Snow White". This means that tiddler titles will stick to the top of the window during scrolling on browsers that support `position: sticky` (such as Safari and Firefox)
+* [[Migrated|https://github.com/Jermolene/TiddlyWiki5/commit/230066eeae9ace8336612e02c78f8cdaa3f717e4]] functionality of "Sticky Titles" theme into an optional tweak for the "Vanilla"/"Snow White" themes. This means that tiddler titles will stick to the top of the window during scrolling on browsers that support `position: sticky` (such as Safari and Firefox)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/8cb7090c40489c81e8c5dfb8cbbdee2c60998c3e]] icons to [[$:/AdvancedSearch]], [[$:/ControlPanel]] and [[$:/TagManager]]
 * [[Changed|https://github.com/Jermolene/TiddlyWiki5/commit/b9129d77e99970579074bdb4f9c2ef4b77b812c6]] wording of tiddler "save" button to "store"
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/issues/1103]] automatic linking of system tiddlers such as $:/ControlPanel
