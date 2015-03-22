@@ -1656,14 +1656,28 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	display: inline-block;
 }
 
-.tc-youtube-thumbnail {
+.tc-youtube-thumbnail svg,
+.tc-youtube-thumbnail img {
+	filter: alpha(opacity=0.6);
+	opacity: 0.6;
+}
+
+.tc-youtube-wrapper:hover .tc-youtube-thumbnail svg,
+.tc-youtube-wrapper:hover .tc-youtube-thumbnail img {
+	filter: alpha(opacity=1);
+	opacity: 1;
 }
 
 .tc-youtube-play-symbol svg,
 .tc-youtube-play-symbol img {
 	width: 3em;
 	height: 3em;
-	fill: red;
+	fill: #f44;
+}
+
+.tc-youtube-wrapper:hover .tc-youtube-play-symbol svg,
+.tc-youtube-wrapper:hover .tc-youtube-play-symbol img {
+	fill: #f00;
 }
 
 .tc-youtube-play-symbol {
@@ -1673,7 +1687,6 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	margin-left: -1.5em;
 	margin-top: -1.5em;
 }
-
 
 /*
 ** Errors
