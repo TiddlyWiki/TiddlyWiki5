@@ -363,10 +363,10 @@ exports.getRelativeDate = function(delta) {
 	};
 };
 
-// Convert & to "&amp;", < to "&lt;", > to "&gt;", " to "&quot;" ' to "&#39;"
+// Convert & to "&amp;", < to "&lt;", > to "&gt;", " to "&quot;"
 exports.htmlEncode = function(s) {
 	if(s) {
-		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;").replace(/\'/mg,"&#39;");
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
 	} else {
 		return "";
 	}
