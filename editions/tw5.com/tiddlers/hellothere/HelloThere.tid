@@ -7,9 +7,9 @@ type: text/vnd.tiddlywiki
 
 Welcome to ~TiddlyWiki, a versatile note-taking web application you can download for free, store wherever you like and customise however you wish. Use it to capture, organise and share your notes in ways that word processors and other note-taking tools cannot.
 
-<$button class="tc-btn-big-green" to="Introduction Video" style="background:red;">
-{{$:/core/images/video}} Watch a video introduction
-</$button>
+<div style="float:right;">
+<<youtube-thumbnail link:"Introduction Video" image:"Introduction Video Thumbnail.jpg">>
+</div>
 
 ~TiddlyWiki is designed to be non-linear, structuring content with stories, tags, hyperlinks, and other features. You can organise and retrieve your notes in ways that conform to your personal thought patterns, rather than feel chained to one preset organisational structure.
 

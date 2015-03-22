@@ -1648,6 +1648,34 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 /*
+** YouTube macros
+*/
+
+.tc-youtube-wrapper {
+	position: relative;
+	display: inline-block;
+}
+
+.tc-youtube-thumbnail {
+}
+
+.tc-youtube-play-symbol svg,
+.tc-youtube-play-symbol img {
+	width: 3em;
+	height: 3em;
+	fill: red;
+}
+
+.tc-youtube-play-symbol {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -1.5em;
+	margin-top: -1.5em;
+}
+
+
+/*
 ** Errors
 */
 
