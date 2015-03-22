@@ -16,3 +16,9 @@ $caption$
 </div>
 </$link>
 \end
+
+\define youtube-right-thumbnail(link,width:"280",height:"157",image,caption)
+<div class="tc-youtube-right-wrapper">
+<<youtube-thumbnail """$link$""" """$width$""" """$height$""" """$image$""" """$caption$""">>
+</div>
+\end
