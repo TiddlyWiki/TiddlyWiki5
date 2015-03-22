@@ -1,7 +1,7 @@
 title: $:/core/macros/youtube
 tags: $:/tags/Macro
 
-\define youtube-thumbnail(link,width:"280",height:"157",image)
+\define youtube-thumbnail(link,width:"280",height:"157",image,caption)
 <$link to="""$link$""">
 <div class="tc-youtube-wrapper">
 <div class="tc-youtube-thumbnail">
@@ -9,6 +9,9 @@ tags: $:/tags/Macro
 </div>
 <div class="tc-youtube-play-symbol">
 {{$:/core/images/video}}
+</div>
+<div class="tc-youtube-caption">
+$caption$
 </div>
 </div>
 </$link>

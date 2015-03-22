@@ -1654,6 +1654,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-youtube-wrapper {
 	position: relative;
 	display: inline-block;
+	border: 1px solid <<colour muted-foreground>>;
 }
 
 .tc-youtube-thumbnail svg,
@@ -1686,6 +1687,22 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	left: 50%;
 	margin-left: -1.5em;
 	margin-top: -1.5em;
+}
+
+.tc-youtube-caption {
+	position: absolute;
+	background-color: #666;
+	color: white;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	filter: alpha(opacity=0.5);
+	opacity: 0.5;
+}
+
+.tc-youtube-wrapper:hover .tc-youtube-caption {
+	filter: alpha(opacity=1);
+	opacity: 1;
 }
 
 /*
