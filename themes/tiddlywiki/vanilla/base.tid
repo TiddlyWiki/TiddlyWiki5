@@ -1655,6 +1655,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	position: relative;
 	display: inline-block;
 	border: 1px solid <<colour muted-foreground>>;
+	margin: 0.5em;
 }
 
 .tc-youtube-thumbnail svg,
