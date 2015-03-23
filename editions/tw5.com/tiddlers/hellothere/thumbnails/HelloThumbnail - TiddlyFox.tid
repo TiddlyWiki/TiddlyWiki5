@@ -2,6 +2,6 @@ title: HelloThumbnail - TiddlyFox
 tags: HelloThumbnail
 color: #D5B7EA
 background-color: #E44AE4
-icon: {{Motovun Jack.svg}}
+image: Motovun Jack.svg
 caption: Install ~TiddlyFox
 link: TiddlyFox
