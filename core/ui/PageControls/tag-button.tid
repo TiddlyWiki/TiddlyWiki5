@@ -3,7 +3,8 @@ tags: $:/tags/PageControls
 caption: {{$:/core/images/tag-button}} {{$:/language/Buttons/TagManager/Caption}}
 description: {{$:/language/Buttons/TagManager/Hint}}
 
-<$button to="$:/TagManager" tooltip={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class=<<tv-config-toolbar-class>>>
+\define control-panel-button(class)
+<$button to="$:/TagManager" tooltip={{$:/language/Buttons/TagManager/Hint}} aria-label={{$:/language/Buttons/TagManager/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/core/images/tag-button}}
 </$list>
@@ -11,3 +12,8 @@ description: {{$:/language/Buttons/TagManager/Hint}}
 <span class="tc-btn-text"><$text text={{$:/language/Buttons/TagManager/Caption}}/></span>
 </$list>
 </$button>
+\end
+
+<$list filter="[list[$:/StoryList]] +[field:title[$:/TagManager]]" emptyMessage=<<control-panel-button>>>
+<<control-panel-button "tc-selected">>
+</$list>
