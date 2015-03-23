@@ -1657,6 +1657,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	border: 1px solid <<colour muted-foreground>>;
 	border-radius: 3px;
 	margin: 2px;
+	vertical-align: top;
 }
 
 .tc-thumbnail-right-wrapper {
