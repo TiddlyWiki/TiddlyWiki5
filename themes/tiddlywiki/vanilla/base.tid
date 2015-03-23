@@ -1655,6 +1655,8 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	position: relative;
 	display: inline-block;
 	border: 1px solid <<colour muted-foreground>>;
+	border-radius: 3px;
+	margin: 2px;
 }
 
 .tc-thumbnail-right-wrapper {
@@ -1662,10 +1664,16 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	margin: 0.5em 0 0.5em 0.5em;
 }
 
+.tc-thumbnail-image {
+    text-align: center;
+}
+
 .tc-thumbnail-image svg,
 .tc-thumbnail-image img {
 	filter: alpha(opacity=0.6);
 	opacity: 0.6;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
@@ -1674,24 +1682,30 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	opacity: 1;
 }
 
-.tc-thumbnail-symbol svg,
-.tc-thumbnail-symbol img {
-	width: 3em;
-	height: 3em;
-	fill: #f44;
+.tc-thumbnail-background {
+	position: absolute;
+	border-radius: 2px;
 }
 
-.tc-thumbnail-wrapper:hover .tc-thumbnail-symbol svg,
-.tc-thumbnail-wrapper:hover .tc-thumbnail-symbol img {
-	fill: #f00;
+.tc-thumbnail-icon svg,
+.tc-thumbnail-icon img {
+	width: 2em;
+	height: 2em;
+	<<filter "drop-shadow(2px 2px 2px rgba(0,0,0,0.3))">>
 }
 
-.tc-thumbnail-symbol {
+.tc-thumbnail-wrapper:hover .tc-thumbnail-icon svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-icon img {
+	fill: #fff;
+	<<filter "drop-shadow(3px 3px 2px rgba(0,0,0,0.6))">>
+}
+
+.tc-thumbnail-icon {
 	position: absolute;
 	top: 50%;
 	left: 50%;
-	margin-left: -1.5em;
-	margin-top: -1.5em;
+	margin-left: -1em;
+	margin-top: -1em;
 }
 
 .tc-thumbnail-caption {
@@ -1701,8 +1715,11 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	text-align: center;
 	bottom: 0;
 	width: 100%;
-	filter: alpha(opacity=0.5);
-	opacity: 0.5;
+	filter: alpha(opacity=0.6);
+	opacity: 0.6;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border: 1px solid #666;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-caption {

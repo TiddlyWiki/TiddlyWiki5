@@ -1,0 +1,7 @@
+title: HelloThumbnail - News
+tags: HelloThumbnail
+color: #D5B7EA
+background-color: #E44A4A
+icon: {{$:/core/images/globe}}
+caption: Latest News
+link: Community

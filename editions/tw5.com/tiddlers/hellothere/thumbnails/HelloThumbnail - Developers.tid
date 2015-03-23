@@ -1,0 +1,7 @@
+title: HelloThumbnail - Developers
+tags: HelloThumbnail
+color: #58FFB9
+background-color: #39CBB6
+icon: {{$:/core/images/plugin-generic-theme}}
+caption: Developers
+link: Developers
