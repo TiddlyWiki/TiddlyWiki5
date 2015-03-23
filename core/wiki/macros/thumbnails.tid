@@ -1,0 +1,24 @@
+title: $:/core/macros/thumbails
+tags: $:/tags/Macro
+
+\define thumbnail(link,width:"280",height:"157",image,caption)
+<$link to="""$link$""">
+<div class="tc-thumbnail-wrapper">
+<div class="tc-thumbnail-image">
+[img width="$width$" height="$height$" [$image$]]
+</div>
+<div class="tc-thumbnail-symbol">
+{{$:/core/images/video}}
+</div>
+<div class="tc-thumbnail-caption">
+$caption$
+</div>
+</div>
+</$link>
+\end
+
+\define thumbnail-right(link,width:"280",height:"157",image,caption)
+<div class="tc-thumbnail-right-wrapper">
+<<thumbnail """$link$""" """$width$""" """$height$""" """$image$""" """$caption$""">>
+</div>
+\end

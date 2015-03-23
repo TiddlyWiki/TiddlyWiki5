@@ -1382,7 +1382,7 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 }
 
 .tc-plugin-info-chunk div {
-	font-size: 0.7em;	
+	font-size: 0.7em;
 	margin: 2px 0 2px 0;
 }
 
@@ -1651,42 +1651,42 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 ** YouTube macros
 */
 
-.tc-youtube-wrapper {
+.tc-thumbnail-wrapper {
 	position: relative;
 	display: inline-block;
 	border: 1px solid <<colour muted-foreground>>;
 }
 
-.tc-youtube-right-wrapper {
+.tc-thumbnail-right-wrapper {
 	float:right;
 	margin: 0.5em 0 0.5em 0.5em;
 }
 
-.tc-youtube-thumbnail svg,
-.tc-youtube-thumbnail img {
+.tc-thumbnail-image svg,
+.tc-thumbnail-image img {
 	filter: alpha(opacity=0.6);
 	opacity: 0.6;
 }
 
-.tc-youtube-wrapper:hover .tc-youtube-thumbnail svg,
-.tc-youtube-wrapper:hover .tc-youtube-thumbnail img {
+.tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-image img {
 	filter: alpha(opacity=1);
 	opacity: 1;
 }
 
-.tc-youtube-play-symbol svg,
-.tc-youtube-play-symbol img {
+.tc-thumbnail-symbol svg,
+.tc-thumbnail-symbol img {
 	width: 3em;
 	height: 3em;
 	fill: #f44;
 }
 
-.tc-youtube-wrapper:hover .tc-youtube-play-symbol svg,
-.tc-youtube-wrapper:hover .tc-youtube-play-symbol img {
+.tc-thumbnail-wrapper:hover .tc-thumbnail-symbol svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-symbol img {
 	fill: #f00;
 }
 
-.tc-youtube-play-symbol {
+.tc-thumbnail-symbol {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -1694,7 +1694,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	margin-top: -1.5em;
 }
 
-.tc-youtube-caption {
+.tc-thumbnail-caption {
 	position: absolute;
 	background-color: #666;
 	color: white;
@@ -1705,7 +1705,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	opacity: 0.5;
 }
 
-.tc-youtube-wrapper:hover .tc-youtube-caption {
+.tc-thumbnail-wrapper:hover .tc-thumbnail-caption {
 	filter: alpha(opacity=1);
 	opacity: 1;
 }
