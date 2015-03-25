@@ -476,27 +476,28 @@ Widget.prototype.removeChildDomNodes = function() {
 };
 
 /*
-Invoke any action widgets that are descendants of this widget.
+Invoke the action widgets that are descendents of the current widget.
 */
-Widget.prototype.invokeActions = function(event) {
-	return this.invokeActionCall(this,event);
-};
-
-/*
-Recursively search through descendants, invoking all actions encountered.
-*/
-Widget.prototype.invokeActionCall = function(here,event) {
+Widget.prototype.invokeActions = function(triggeringWidget,event) {
 	var handled = false;
-	for(var t=0; t<here.children.length; t++) {
-		var child = here.children[t];
-		if(child.invokeAction && child.invokeAction(this,event)) {
+	// For each child widget
+	for(var t=0; t<this.children.length; t++) {
+		var child = this.children[t];
+		// Invoke the child if it is an action widget
+		if(child.invokeAction && child.invokeAction(triggeringWidget,event)) {
 			handled = true;
 		}
-		if(this.invokeActionCall(child,event)) {
+		// Propagate through through the child if it permits it
+		if(child.allowActionPropagation() && child.invokeActions(triggeringWidget,event)) {
 			handled = true;
 		}
 	}
 	return handled;
+};
+
+
+Widget.prototype.allowActionPropagation = function() {
+	return true;
 };
 
 exports.widget = Widget;
