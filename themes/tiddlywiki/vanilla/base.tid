@@ -1656,15 +1656,13 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 /*
-** YouTube macros
+** Thumbnail macros
 */
 
 .tc-thumbnail-wrapper {
 	position: relative;
 	display: inline-block;
-	border: 1px solid <<colour muted-foreground>>;
-	border-radius: 3px;
-	margin: 2px;
+	margin: 0;
 	vertical-align: top;
 }
 
@@ -1694,7 +1692,6 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 
 .tc-thumbnail-background {
 	position: absolute;
-	border-radius: 2px;
 }
 
 .tc-thumbnail-icon svg,
@@ -1727,8 +1724,6 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	width: 100%;
 	filter: alpha(opacity=0.9);
 	opacity: 0.9;
-	border-bottom-left-radius: 2px;
-	border-bottom-right-radius: 2px;
 	line-height: 1.4;
 }
 
