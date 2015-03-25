@@ -294,6 +294,14 @@ button svg, button img {
 	border: none;
 	font-size: 1.2em;
 	line-height: 1.4em;
+	text-decoration: none;
+}
+
+.tc-btn-big-green svg,
+.tc-btn-big-green img {
+	height: 1em;
+	width: 1em;
+	vertical-align: middle;
 }
 
 .tc-sidebar-lists input {
