@@ -1,7 +1,11 @@
-title: HelloThumbnail - GettingStarted
-tags: HelloThumbnail
-color: #cfc
 background-color: #EDB431
-icon: <div style="font-weight:bold;color:white;background-color:#2a2;border-radius:16em;padding:0 9px 0 9px;">Go</div>
 caption: Beginners Start Here
-link: GettingStarted
+color: #cfc
+created: 20150325172634195
+icon: <div style="font-weight:bold;color:white;background-color:#2a2;border-radius:16em;padding:0 9px 0 9px;">Go</div>
+link: Beginners Guide
+modified: 20150325172637870
+tags: HelloThumbnail
+title: HelloThumbnail - GettingStarted
+type: text/vnd.tiddlywiki
+
