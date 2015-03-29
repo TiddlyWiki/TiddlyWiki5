@@ -38,6 +38,9 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	var classes = this["class"].split(" ") || [];
 	classes.push("tc-reveal");
 	domNode.className = classes.join(" ");
+	if(this.style) {
+		domNode.setAttribute("style",this.style);
+	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
@@ -92,6 +95,7 @@ RevealWidget.prototype.execute = function() {
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
 	this["class"] = this.getAttribute("class","");
+	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");

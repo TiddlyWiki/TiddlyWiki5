@@ -23,7 +23,7 @@ exports.startup = function() {
 		$tw.passwordPrompt.createPrompt({
 			serviceName: $tw.language.getString("Encryption/PromptSetPassword"),
 			noUserName: true,
-			submitText: "Set password",
+			submitText: $tw.language.getString("Encryption/SetPassword"),
 			canCancel: true,
 			repeatPassword: true,
 			callback: function(data) {

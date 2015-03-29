@@ -32,6 +32,8 @@ ExportTiddlers/Caption: Mehrere Exportieren
 ExportTiddlers/Hint: Mehrere Tiddler Exportieren
 FullScreen/Caption: Vollbild
 FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-Modus
+Help/Caption: Hilfe
+Help/Hint: Hilfe anzeigen
 Import/Caption: Import
 Import/Hint: Importiere Dateien
 Info/Caption: Info

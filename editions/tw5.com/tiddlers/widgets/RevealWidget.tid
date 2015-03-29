@@ -22,6 +22,8 @@ The content of the `<$reveal>` widget is displayed according to the rules given 
 |tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
 |type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
+|class |An optional CSS class name to be assigned to the HTML element|
+|style |An optional CSS style attribute to be assigned to the HTML element |
 |position |The position used for the popup when the type is ''popup''. Can be ''left'', ''above'', ''aboveright'', ''right'', ''belowleft'' or ''below'' |
 |default |Default value to use when the state tiddler is missing |
 |animate |Set to "yes" to animate opening and closure (defaults to "no") |

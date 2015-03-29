@@ -3,7 +3,6 @@
 	"plugins": [
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/railroad",
 		"tiddlywiki/help"

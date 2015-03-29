@@ -87,6 +87,10 @@ dl dt {
 	color: <<colour muted-foreground>>;
 }
 
+svg.tc-image-button {
+	padding: 0px 1px 1px 0px;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
@@ -290,6 +294,14 @@ button svg, button img {
 	border: none;
 	font-size: 1.2em;
 	line-height: 1.4em;
+	text-decoration: none;
+}
+
+.tc-btn-big-green svg,
+.tc-btn-big-green img {
+	height: 1em;
+	width: 1em;
+	vertical-align: middle;
 }
 
 .tc-sidebar-lists input {
@@ -566,6 +578,8 @@ button.tc-untagged-label {
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
 }
+
+{{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
 	padding: 14px 42px 14px 42px;
@@ -1376,7 +1390,7 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 }
 
 .tc-plugin-info-chunk div {
-	font-size: 0.7em;	
+	font-size: 0.7em;
 	margin: 2px 0 2px 0;
 }
 
@@ -1639,6 +1653,83 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	background: white;
 	cursor: pointer;
 	display: inline-block;
+}
+
+/*
+** Thumbnail macros
+*/
+
+.tc-thumbnail-wrapper {
+	position: relative;
+	display: inline-block;
+	margin: 0;
+	vertical-align: top;
+}
+
+.tc-thumbnail-right-wrapper {
+	float:right;
+	margin: 0.5em 0 0.5em 0.5em;
+}
+
+.tc-thumbnail-image {
+    text-align: center;
+	overflow: hidden;
+}
+
+.tc-thumbnail-image svg,
+.tc-thumbnail-image img {
+	filter: alpha(opacity=1);
+	opacity: 1;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-image img {
+	filter: alpha(opacity=0.8);
+	opacity: 0.8;
+}
+
+.tc-thumbnail-background {
+	position: absolute;
+}
+
+.tc-thumbnail-icon svg,
+.tc-thumbnail-icon img {
+	width: 3em;
+	height: 3em;
+	<<filter "drop-shadow(2px 2px 2px rgba(0,0,0,0.3))">>
+}
+
+.tc-thumbnail-wrapper:hover .tc-thumbnail-icon svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-icon img {
+	fill: #fff;
+	<<filter "drop-shadow(3px 3px 2px rgba(0,0,0,0.6))">>
+}
+
+.tc-thumbnail-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -1.5em;
+	margin-top: -1.5em;
+}
+
+.tc-thumbnail-caption {
+	position: absolute;
+	background-color: #777;
+	color: #fff;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	filter: alpha(opacity=0.9);
+	opacity: 0.9;
+	line-height: 1.4;
+}
+
+.tc-thumbnail-wrapper:hover .tc-thumbnail-caption {
+	filter: alpha(opacity=1);
+	opacity: 1;
 }
 
 /*

@@ -134,7 +134,7 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 			for(a=0; a<attr.length; a++) {
 				v = this.attributes[attr[a]];
 				if(v !== undefined) {
-					output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
+					output.push(" ",attr[a],"=\"",$tw.utils.htmlEncode(v),"\"");
 				}
 			}
 		}
@@ -144,7 +144,7 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 				style.push(s + ":" + this.style[s] + ";");
 			}
 			if(style.length > 0) {
-				output.push(" style='",style.join(""),"'")
+				output.push(" style=\"",style.join(""),"\"")
 			}
 		}
 		output.push(">");

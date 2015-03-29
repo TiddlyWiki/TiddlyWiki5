@@ -3,5 +3,5 @@
 	"description": "Railroad diagram generator",
 	"author": "AstridElocson",
 	"plugin-type": "plugin",
-	"list": "readme syntax example"
+	"list": "readme usage syntax example"
 }
