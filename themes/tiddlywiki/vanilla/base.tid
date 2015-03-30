@@ -286,6 +286,7 @@ button svg, button img {
 }
 
 .tc-btn-big-green {
+	display: inline-block;
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
 	background: <<colour download-background>>;
@@ -299,8 +300,8 @@ button svg, button img {
 
 .tc-btn-big-green svg,
 .tc-btn-big-green img {
-	height: 1em;
-	width: 1em;
+	height: 2em;
+	width: 2em;
 	vertical-align: middle;
 }
 
