@@ -64,7 +64,7 @@ By default, each run considers every tiddler in the wiki. But we can use a `+` s
 
 > `[serving[3]] [serving[4]] [serving[5]] +[tag[Vegetarian]] +[sort[title]]`
 
-This selects recipes for 3, 4 or 5 people, then filters <<.em those>> to remove the vegetarian ones, and finally sorts any that are left into alphabetical order of title.
+This selects recipes for 3, 4 or 5 people, then filters <<.em those>> to keep only the vegetarian ones, and finally sorts any that are left into alphabetical order of title.
 
 In a similar way, we can use a `-` sign to <<.em remove>> a run's tiddlers from the result so far. Here we select all vegetarian recipes apart from two:
 
