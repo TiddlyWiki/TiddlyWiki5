@@ -1,7 +1,24 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
 
+\define custom-background-datauri()
+<$reveal state="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" type="nomatch" text="">
+<$set name="background" value={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}>
+<$list filter="[<background>is[image]]">
+<$list filter="[<background>!has[_canonical_uri]]">
+`background: url(`<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>`);`
+</$list>
+<$list filter="[<background>has[_canonical_uri]]">
+`background: url(`<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>`);`
+</$list>
+`background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;`
+</$list>
+</$set>
+</$reveal>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
 */
@@ -39,6 +56,7 @@ body.tc-body {
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	word-wrap: break-word;
+	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
