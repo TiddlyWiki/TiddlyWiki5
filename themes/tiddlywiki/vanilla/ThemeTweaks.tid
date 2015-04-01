@@ -30,6 +30,14 @@ caption: Theme Tweaks
 </$select>
 \end
 
+\define backgroundimagesize-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" default="scroll">
+<option value="auto">Auto</option>
+<option value="cover">Cover</option>
+<option value="contain">Contain</option>
+</$select>
+\end
+
 You can tweak certain aspects of the ''Vanilla'' theme.
 
 ! Options
@@ -42,6 +50,7 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 |[[Code font family|$:/themes/tiddlywiki/vanilla/settings/codefontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> | |
 |[[Page background image|$:/themes/tiddlywiki/vanilla/settings/backgroundimage]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" default="" tag="input"/> |<<backgroundimage-dropdown>> |
 |[[Page background image attachment |$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment]] |<<backgroundimageattachment-dropdown>> | |
+|[[Page background image size |$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize]] |<<backgroundimagesize-dropdown>> | |
 
 ! Sizes
 
