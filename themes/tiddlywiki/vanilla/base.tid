@@ -1663,7 +1663,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-wrapper {
 	position: relative;
 	display: inline-block;
-	margin: 0;
+	margin: 2px;
 	vertical-align: top;
 }
 
@@ -1710,10 +1710,13 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 
 .tc-thumbnail-icon {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -1.5em;
-	margin-top: -1.5em;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tc-thumbnail-caption {
