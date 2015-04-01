@@ -5,7 +5,7 @@ tags: $:/tags/Macro
 <$link to="""$link$"""><div class="tc-thumbnail-wrapper">
 <div class="tc-thumbnail-image" style="width:$width$px;height:$height$px;"><$reveal type="nomatch" text="" default="""$image$""" tag="div" style="width:$width$px;height:$height$px;">
 [img[$image$]]
-</$reveal><$reveal type="match" text="" default="""$image$""" tag="div" class="tc-thumbnail-background" style="width:$width$px;height:$height$px;background-color:$background-color$;"></$reveal></div><div class="tc-thumbnail-icon" style="fill:$color$;">
+</$reveal><$reveal type="match" text="" default="""$image$""" tag="div" class="tc-thumbnail-background" style="width:$width$px;height:$height$px;background-color:$background-color$;"></$reveal></div><div class="tc-thumbnail-icon" style="fill:$color$;color:$color$;">
 $icon$
 </div><div class="tc-thumbnail-caption">
 $caption$
