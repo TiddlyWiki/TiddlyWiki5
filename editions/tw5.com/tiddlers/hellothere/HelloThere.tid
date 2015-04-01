@@ -12,7 +12,7 @@ Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook f
 Use it to keep your to-do list, to plan an essay or novel, or to organise your wedding. Record every thought that crosses your brain, or build a flexible, responsive website for publishing a manifesto.
 
 <div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
-<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"140" height:"79">>
+<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
 </div>
 
 Unlike conventional online services, TiddlyWiki lets you choose where to keep your data, guaranteeing that in the decades to come you will still be able to use the notes you take today.
