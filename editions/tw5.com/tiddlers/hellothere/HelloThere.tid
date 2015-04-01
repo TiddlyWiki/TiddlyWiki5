@@ -7,9 +7,9 @@ type: text/vnd.tiddlywiki
 
 ''Have you ever had the feeling that your head is not quite big enough to hold everything you need to remember?''
 
-Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for capturing, organising and sharing complex information. It boosts your brain power as a bicycle boosts the power of your body.
+Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for capturing, organising and sharing complex information.
 
-Use it to keep your to-do list, to plan an essay or novel, or to organise your wedding. Record every thought that crosses your brain, or build a flexible, responsive website for publishing a manifesto.
+Use it to keep your to-do list, to plan an essay or novel, or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
 <div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
 <<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
