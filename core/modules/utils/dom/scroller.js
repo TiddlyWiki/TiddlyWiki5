@@ -73,14 +73,10 @@ PageScroller.prototype.scrollIntoView = function(element) {
 	// returns: new position of the scroll viewport
 	var getEndPos = function(targetPos,targetSize,currentPos,currentSize) {
 			var newPos = currentPos;
-			// If the target is entirely above/left of the current view, then scroll to its top/left
-			if((targetPos + targetSize) <= (currentPos + 50)) {
 				newPos = targetPos;
 			// If the target is smaller than the window and the scroll position is too far up, then scroll till the target is at the bottom of the window
 			} else if(targetSize < currentSize && currentPos < (targetPos + targetSize - currentSize)) {
 				newPos = targetPos + targetSize - currentSize;
-			// If the target is out of view below/right, then just scroll to the top/left
-			} else if(targetPos > (currentPos + currentSize - 50)) {
 				newPos = targetPos;
 			}
 			// If we are scrolling within 50 pixels of the top/left then snap to zero
