@@ -62,8 +62,9 @@ sidebar-tab-foreground-selected:
 sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #444444
 sidebar-tiddler-link-foreground: #7897f3
+site-title-foreground: <<colour tiddler-title-foreground>>
 static-alert-foreground: #aaaaaa
-tab-background-selected: #fffffffff
+tab-background-selected: #ffffff
 tab-background: #eeeeee
 tab-border-selected: #cccccc
 tab-border: #cccccc
