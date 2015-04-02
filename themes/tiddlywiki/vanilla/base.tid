@@ -11,7 +11,7 @@ tags: [[$:/tags/Stylesheet]]
 <$list filter="[<background>has[_canonical_uri]]">
 <$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>
 </$list>
-`);`
+`) center center;`
 `background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;
 -webkit-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
 -moz-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
