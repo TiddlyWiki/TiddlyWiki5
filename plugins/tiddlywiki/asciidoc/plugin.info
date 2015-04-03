@@ -1,0 +1,5 @@
+{
+	"title": "$:/plugins/tiddlywiki/asciidoc",
+	"description": "Asciidoc plugin wrapping asciidoctor.js",
+	"author": "PatrickPfeifer"
+}
