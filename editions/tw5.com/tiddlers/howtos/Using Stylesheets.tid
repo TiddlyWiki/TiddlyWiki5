@@ -6,7 +6,7 @@ type: text/vnd.tiddlywiki
 
 The first steps to changing the appearance of TiddlyWiki are to choose and apply one of the available themes, or to modify the [[colour palette|ColourPalettes]].
 
-In addition, custom [[CSS stylesheets|http://www.w3schools.com/css]] can be can defined by tagging a tiddler `$:/tags/Stylesheet`. Try creating a custom stylesheet now with the following content in order to change the page background colour to red:
+In addition, custom [[CSS stylesheets|http://www.w3schools.com/css]] can be defined by tagging a tiddler `$:/tags/Stylesheet`. Try creating a custom stylesheet now with the following content in order to change the page background colour to red:
 
 ```
 html body.tc-body {

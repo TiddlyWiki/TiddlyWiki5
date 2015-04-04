@@ -10,8 +10,14 @@ ConfirmOverwriteTiddler: Tiddler: "<$text text=<<title>>/>" existiert! OK übers
 ConfirmEditShadowTiddler: Sie sind dabei, einen Schatten-Tiddler zu verändern. Zukünftige, automatische Anpassungen werden dadurch unterdrückt. Sie können Ihre Änderungen rückgängig machen, indem Sie diesen Tiddler wieder löschen. Wollen Sie den Tiddler: "<$text text=<<title>>/>" ändern?
 DefaultNewTiddlerTitle: Neuer Tiddler
 DropMessage: Hierher ziehen (oder Escape um abzubrechen)
+Encryption/Cancel: Abbrechen
 Encryption/ConfirmClearPassword: Wollen Sie das Passwort löschen? Damit wird die Verschlüsselung beim nächsten Speichervorgang abgeschalten!
 Encryption/PromptSetPassword: Der TiddlyWiki Inhalt wird mit dem nächsten Speichern verschlüsselt!
+Encryption/Username: Benutzername
+Encryption/Password: Passwort
+Encryption/RepeatPassword: Passwort wiederholen
+Encryption/PasswordNoMatch: Passwörter stimmen nicht überein
+Encryption/SetPassword: Passwort setzen
 InvalidFieldName: Das Feld: "<$text text=<<fieldName>>/>" enthält illegale Zeichen. Felder müssen klein geschrieben werden. Erlaubte Sonderzeichen sind: Zahlen, Unterstrich (`_`), Minus (`-`) und Punkt (`.`).
 MissingTiddler/Hint: Fehlender Tiddler "<$text text=<<currentTiddler>>/>" - klicken Sie {{$:/core/images/edit-button}} um ihn zu erzeugen.
 OfficialPluginLibrary: Offizielles ~TiddlyWiki Plugin Verzeichnis

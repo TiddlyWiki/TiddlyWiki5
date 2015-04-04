@@ -70,6 +70,7 @@ Modal.prototype.display = function(title,options) {
 	// Render the title of the message
 	var headerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "subtitle",
+		mode: "inline",
 		children: [{
 			type: "text",
 			attributes: {
@@ -112,6 +113,7 @@ Modal.prototype.display = function(title,options) {
 	}
 	var footerWidgetNode = this.wiki.makeTranscludeWidget(title,{
 		field: "footer",
+		mode: "inline",
 		children: [{
 			type: "button",
 			attributes: {

@@ -59,7 +59,7 @@ Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in 
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: ok
-Save/Hint: Store changes to this tiddler
+Save/Hint: Confirm changes to this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
 StoryView/Caption: storyview

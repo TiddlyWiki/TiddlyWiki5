@@ -3,5 +3,5 @@
 	"description": "Google Analytics: website statistics",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
-	"list": "readme"
+	"list": "readme usage"
 }

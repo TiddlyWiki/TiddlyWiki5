@@ -10,20 +10,28 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 [[hide]] -[title{$(config-title)$}]
 \end
 
-\define new-field(name,value)
-<$reveal type="nomatch" text="" default="""$name$""">
+\define new-field-inner()
+<$reveal type="nomatch" text="" default=<<name>>>
 <$button>
-<$action-sendmessage $message="tm-add-field" $name$="""$value$"""/>
+<$action-sendmessage $message="tm-add-field" $(name)$=<<value>>/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
-<$reveal type="match" text="" default="""$name$""">
+<$reveal type="match" text="" default=<<name>>>
 <$button>
 <<lingo Fields/Add/Button>>
 </$button>
 </$reveal>
+\end
+
+\define new-field()
+<$set name="name" value={{$:/temp/newfieldname}}>
+<$set name="value" value={{$:/temp/newfieldvalue}}>
+<<new-field-inner>>
+</$set>
+</$set>
 \end
 
 <div class="tc-edit-fields">
@@ -62,7 +70,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <$edit-text tiddler="$:/temp/newfieldvalue" tag="input" default="" placeholder={{$:/language/EditTemplate/Fields/Add/Value/Placeholder}} class="tc-edit-texteditor"/>
 </span>
 <span class="tc-edit-field-add-button">
-<$macrocall $name="new-field" name={{$:/temp/newfieldname}} value={{$:/temp/newfieldvalue}}/>
+<$macrocall $name="new-field"/>
 </span>
 </div>
 </$fieldmangler>

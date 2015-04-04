@@ -84,9 +84,11 @@ LinkWidget.prototype.renderLink = function(parent,nextSibling) {
 	wikiLinkText = wikiLinkText.replace("$uri_doubleencoded$",encodeURIComponent(encodeURIComponent(this.to)));
 	wikiLinkText = this.getVariable("tv-get-export-link",{params: [{name: "to",value: this.to}],defaultValue: wikiLinkText});
 	if(tag === "a") {
-		domNode.setAttribute("href",wikiLinkText);		
+		domNode.setAttribute("href",wikiLinkText);
 	}
-	domNode.setAttribute("tabindex",this.tabIndex);
+	if(this.tabIndex) {
+		domNode.setAttribute("tabindex",this.tabIndex);
+	}
 	// Set the tooltip
 	// HACK: Performance issues with re-parsing the tooltip prevent us defaulting the tooltip to "<$transclude field='tooltip'><$transclude field='title'/></$transclude>"
 	var tooltipWikiText = this.tooltip || this.getVariable("tv-wikilink-tooltip");

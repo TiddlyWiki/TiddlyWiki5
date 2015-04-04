@@ -63,7 +63,7 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	// Add a click event handler
 	domNode.addEventListener("click",function (event) {
 		var handled = false;
-		if(self.invokeActions(event)) {
+		if(self.invokeActions(this,event)) {
 			handled = true;
 		}
 		if(self.to) {
@@ -92,6 +92,13 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	this.domNodes.push(domNode);
+};
+
+/*
+We don't allow actions to propagate because we trigger actions ourselves
+*/
+ButtonWidget.prototype.allowActionPropagation = function() {
+	return false;
 };
 
 ButtonWidget.prototype.getBoundingClientRect = function() {

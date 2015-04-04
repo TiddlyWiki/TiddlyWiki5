@@ -490,20 +490,28 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		children = [dm("h1",{text: options.serviceName})];
 	if(!options.noUserName) {
 		children.push(dm("input",{
-			attributes: {type: "text", name: "username", placeholder: "Username"}
+			attributes: {type: "text", name: "username", placeholder: $tw.language.getString("Encryption/Username")}
 		}));
 	}
 	children.push(dm("input",{
-		attributes: {type: "password", name: "password", placeholder: "Password"}
+		attributes: {
+			type: "password",
+			name: "password",
+			placeholder: ( $tw.language == undefined ? "Password" : $tw.language.getString("Encryption/Password") )
+		}
 	}));
 	if(options.repeatPassword) {
 		children.push(dm("input",{
-			attributes: {type: "password", name: "password2", placeholder: "Repeat password"}
+			attributes: {
+				type: "password",
+				name: "password2",
+				placeholder: $tw.language.getString("Encryption/RepeatPassword")
+			}
 		}));
 	}
 	if(options.canCancel) {
 		children.push(dm("button",{
-			text: "Cancel",
+			text: $tw.language.getString("Encryption/Cancel"),
 			eventListeners: [{
 					name: "click",
 					handlerFunction: function(event) {
@@ -537,7 +545,7 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 		});
 		// Check that the passwords match
 		if(options.repeatPassword && data.password !== data.password2) {
-			alert("Passwords do not match");
+			alert($tw.language.getString("Encryption/PasswordNoMatch"));
 		} else {
 			// Call the callback
 			if(options.callback(data)) {
@@ -551,7 +559,7 @@ $tw.utils.PasswordPrompt.prototype.createPrompt = function(options) {
 					}
 				});
 			}
-		} 
+		}
 		event.preventDefault();
 		return false;
 	},true);
@@ -1925,9 +1933,9 @@ $tw.boot.isStartupTaskEligible = function(taskModule) {
 Global Hooks mechanism which allows plugins to modify default functionality
 */
 $tw.hooks = $tw.hooks || { names: {}};
- 
+
 /*
-Add hooks to the  hashmap 
+Add hooks to the  hashmap
 */
 $tw.hooks.addHook = function(hookName,definition) {
 	if($tw.utils.hop($tw.hooks.names,hookName)) {
@@ -1937,9 +1945,9 @@ $tw.hooks.addHook = function(hookName,definition) {
 		$tw.hooks.names[hookName] = [definition];
 	}
 };
- 
+
 /*
-Invoke the hook by key 
+Invoke the hook by key
 */
 $tw.hooks.invokeHook = function(hookName, value) {
 	if($tw.utils.hop($tw.hooks.names,hookName)) {

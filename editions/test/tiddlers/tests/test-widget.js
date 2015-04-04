@@ -69,7 +69,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		describe("should render", function() {
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='myTitle'> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIV</div>");
+			expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"myTitle\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIV</div>");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -113,7 +113,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		describe("should render", function() {
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='the quick brown fox'> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVthe quick brown fox</div>the quick brown fox");
+			expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"the quick brown fox\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVthe quick brown fox</div>the quick brown fox");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -131,7 +131,7 @@ describe("Widget module", function() {
 		refreshWidgetNode(widgetNode,wrapper,["TiddlerOne"]);
 		describe("should refresh", function() {
 			// Test the refreshing
-			expect(wrapper.innerHTML).toBe("A text node<div class='myClass' title='jumps over the lazy dog'> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
+			expect(wrapper.innerHTML).toBe("A text node<div class=\"myClass\" title=\"jumps over the lazy dog\"> and the content of a DIV<div> and an inner DIV</div> and back in the outer DIVjumps over the lazy dog</div>jumps over the lazy dog");
 			// Test the sequence numbers in the DOM
 			expect(wrapper.sequenceNumber).toBe(0);
 			expect(wrapper.children[0].sequenceNumber).toBe(1);
@@ -163,7 +163,7 @@ describe("Widget module", function() {
 		var wrapper = renderWidgetNode(widgetNode);
 		describe("should detect the recursion", function() {
 			// Test the rendering
-			expect(wrapper.innerHTML).toBe("<span class='tc-error'>Recursive transclusion error in transclude widget</span>\n");
+			expect(wrapper.innerHTML).toBe("<span class=\"tc-error\">Recursive transclusion error in transclude widget</span>\n");
 		});
 
 	});
@@ -171,12 +171,12 @@ describe("Widget module", function() {
 	it("should deal with SVG elements", function() {
 		var wiki = new $tw.Wiki();
 		// Construct the widget node
-		var text = "<svg class='tv-image-new-button' viewBox='83 81 50 50' width='22pt' height='22pt'><path d='M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z'/></svg>\n";
+		var text = "<svg class=\"tv-image-new-button\" viewBox=\"83 81 50 50\" width=\"22pt\" height=\"22pt\"><path d=\"M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z\"/></svg>\n";
 		var widgetNode = createWidgetNode(parseText(text,wiki,{parseAsInline:true}),wiki);
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<svg class='tv-image-new-button' height='22pt' viewBox='83 81 50 50' width='22pt'><path d='M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z'></path></svg>\n");
+		expect(wrapper.innerHTML).toBe("<svg class=\"tv-image-new-button\" height=\"22pt\" viewBox=\"83 81 50 50\" width=\"22pt\"><path d=\"M 101.25 112.5 L 101.25 127.5 C 101.25 127.5 101.25 127.5 101.25 127.5 L 101.25 127.5 C 101.25 129.156855 102.593146 130.5 104.25 130.5 L 111.75 130.5 C 113.406854 130.5 114.75 129.156854 114.75 127.5 L 114.75 112.5 L 129.75 112.5 C 131.406854 112.5 132.75 111.156854 132.75 109.5 L 132.75 102 C 132.75 100.343146 131.406854 99 129.75 99 L 114.75 99 L 114.75 84 C 114.75 82.343146 113.406854 81 111.75 81 L 104.25 81 C 104.25 81 104.25 81 104.25 81 C 102.593146 81 101.25 82.343146 101.25 84 L 101.25 99 L 86.25 99 C 86.25 99 86.25 99 86.25 99 C 84.593146 99 83.25 100.343146 83.25 102 L 83.25 109.5 C 83.25 109.5 83.25 109.5 83.25 109.5 L 83.25 109.5 C 83.25 111.156855 84.593146 112.5 86.25 112.5 Z\"></path></svg>\n");
 		expect(wrapper.firstChild.namespaceURI).toBe("http://www.w3.org/2000/svg");
 	});
 
@@ -268,7 +268,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p><div class='My something something,  or other thing'>Content</div></p>");
+		expect(wrapper.innerHTML).toBe("<p><div class=\"My something something,  or other thing\">Content</div></p>");
 	});
 
 	it("should deal with built-in macros", function() {
@@ -283,7 +283,7 @@ describe("Widget module", function() {
 		// Render the widget node to the DOM
 		var wrapper = renderWidgetNode(widgetNode);
 		// Test the rendering
-		expect(wrapper.innerHTML).toBe("<p><a href='data:text/vnd.tiddlywiki,Jolly%20Old%20World'>My linky link</a></p>");
+		expect(wrapper.innerHTML).toBe("<p><a href=\"data:text/vnd.tiddlywiki,Jolly%20Old%20World\">My linky link</a></p>");
 	});
 
 	it("should deal with the list widget", function() {
