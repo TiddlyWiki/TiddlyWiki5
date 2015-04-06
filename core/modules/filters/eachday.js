@@ -26,7 +26,7 @@ exports.eachday = function(source,operator,options) {
 	};
 	source(function(tiddler,title) {
 		if(tiddler && tiddler.fields[fieldName]) {
-			var value = toDate(tiddler.fields[fieldName]);
+			var value = toDate($tw.utils.parseDate(tiddler.fields[fieldName]));
 			if(values.indexOf(value) === -1) {
 				values.push(value);
 				results.push(title);
