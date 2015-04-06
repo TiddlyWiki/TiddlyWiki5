@@ -23,6 +23,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 !! Usability Improvements
 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/987bfcfd5b49b992e5fd45f3428497f6f55cae53]] user interface for [[setting a page background image|Setting a page background image]]
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3df341621d30b205775288e324cef137c48e9f6e]] problem with unnecessary scrolling at startup
 * [[Upgraded|https://github.com/Jermolene/TiddlyWiki5/commit/ae001a19e5b3e43cf5388fd4e8d99788085649fe]] the [[KaTeX Plugin]] to use [[KaTeX v0.2.0|https://github.com/Khan/KaTeX/releases/tag/v0.2.0]], with better symbol support
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/70e419824fab107aab58f87780dbb5a1de70c248]] [[Help Plugin]] providing floating help panel
@@ -40,7 +41,6 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 !! Hackability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/987bfcfd5b49b992e5fd45f3428497f6f55cae53]] user interface for [[setting a page background image|Setting a page background image]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d340277cb219ffebd212fbf409e8ea804121d105]] [[resolvepath Macro]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/718ce3e4aa04f7af5e9310f90d3415c0d82bee6f]] ''class'' attribute to CheckboxWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bb10e2b02900ece4701c44c3a7e7c03304e813b7]] support for a special message to be displayed when the main story river is empty
