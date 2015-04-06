@@ -3,7 +3,7 @@ description: Forbereder eksterne tiddlere til brug
 
 //Bemærk at denne kommando er eksperimentel og kan ændres eller erstattes før den bliver endelig//
 
-Sætter det angivne felt i en gruppe af tiddlere med resulterende wikificering af en template tiddler med den `currentTiddler` variable sat til den  tiddler.
+Sætter det angivne felt i en gruppe af tiddlere med resulterende wikificering af en skabelontiddler med den `currentTiddler` variable sat til den  tiddler.
 
 ```
 --setfield <filter> <fieldname> <templatetitle> <rendertype>

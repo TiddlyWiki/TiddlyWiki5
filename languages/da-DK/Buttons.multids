@@ -12,61 +12,63 @@ CloseAll/Caption: Luk alle
 CloseAll/Hint: Luk alle tiddlere
 CloseOthers/Caption: luk andre
 CloseOthers/Hint: Luk andre tiddlere
-ControlPanel/Caption: Kontrol panel
-ControlPanel/Hint: Åbn kontrol panel
+ControlPanel/Caption: Kontrolpanel
+ControlPanel/Hint: Åbn kontrolpanel
 Delete/Caption: slet
 Delete/Hint: Slet denne tiddler
 Edit/Caption: redigér
 Edit/Hint: Redigér denne tiddler
-Encryption/Caption: encryption
-Encryption/ClearPassword/Caption: slet password
-Encryption/ClearPassword/Hint: Slet password og gem denne wiki uden encryption
-Encryption/Hint: Sæt eller slet et  password for at gemme denne wiki
-Encryption/SetPassword/Caption: Angiv password
-Encryption/SetPassword/Hint: Angiv et password for gemme denne wiki med encryption
-ExportPage/Caption: eksport alle
-ExportPage/Hint: Eksport alle tiddlere
-ExportTiddler/Caption: eksport tiddler
-ExportTiddler/Hint: Eksport tiddler
-ExportTiddlers/Caption: eksport tiddlere
-ExportTiddlers/Hint: Eksport tiddlere
+Encryption/Caption: kryptering
+Encryption/ClearPassword/Caption: slet kodeord
+Encryption/ClearPassword/Hint: Slet kodeord og gem denne wiki uden kryptering
+Encryption/Hint: Angiv eller slet et kodeord for at gemme denne wiki
+Encryption/SetPassword/Caption: Angiv kodeord
+Encryption/SetPassword/Hint: Angiv et kodeord for gemme denne wiki i krypteret tilstand
+ExportPage/Caption: eksportér alle
+ExportPage/Hint: Eksportér alle tiddlere
+ExportTiddler/Caption: eksportér tiddler
+ExportTiddler/Hint: Eksportér tiddler
+ExportTiddlers/Caption: eksportér tiddlere
+ExportTiddlers/Hint: Eksportér tiddlere
 FullScreen/Caption: fuldskærm
-FullScreen/Hint: Gå til eller forlad fuldskærms tilstand
+FullScreen/Hint: Gå til eller forlad fuldskærmstilstand
+Help/Caption: hjælp
+Help/Hint: Vis hjælpepanel
 HideSideBar/Caption: skjul sidebar
-HideSideBar/Hint: Skjul sidebar
+HideSideBar/Hint: Skjul sidepanel
 Home/Caption: hjem
-Home/Hint: Åbn standard tiddlerne
-Import/Caption: import
-Import/Hint: Import filer
+Home/Hint: Åbn standardtiddlerne
+Import/Caption: importér
+Import/Hint: Importér filer
 Info/Caption: info
 Info/Hint: Vis information om denne tiddler
 Language/Caption: sprog
-Language/Hint: Vælg brugerflade sprog
+Language/Hint: Vælg brugerfladesprog
 More/Caption: mere
 More/Hint: Flere muligheder
 NewHere/Caption: ny her
-NewHere/Hint: Opret en ny tiddler tagget med denne
+NewHere/Hint: Opret en ny tiddler tagget med denne tiddlers titel
 NewJournal/Caption: ny journal
-NewJournal/Hint: Opret en ny journal tiddler
+NewJournal/Hint: Opret en ny journaltiddler
 NewJournalHere/Caption: ny journal her
-NewJournalHere/Hint: opret en ny journal tiddler tagget med denne
+NewJournalHere/Hint: opret en ny journaltiddler tagget med denne tiddlers titel
 NewTiddler/Caption: ny tiddler
 NewTiddler/Hint: Opret en ny tiddler
 Permalink/Caption: permalink
-Permalink/Hint: Sæt browserens adresse linie til et direkte link til denne tiddler
+Permalink/Hint: Sæt browserens adresselinie til et direkte link til denne tiddler
 Permaview/Caption: permaview
-Permaview/Hint: Sæt browserens adresse linie til et direkte link til alle tiddlere i denne historie
+Permaview/Hint: Sæt browserens adresselinie til et direkte link til alle tiddlere i denne historie
 Refresh/Caption: genopfrisk
 Refresh/Hint: Udfør en fuld genopfriskning af wiki'en
 Save/Caption: gem
 Save/Hint: Gem denne tiddler
 SaveWiki/Caption: gem ændringer
 SaveWiki/Hint: Gem ændringer
-ShowSideBar/Caption: vis sidebar
-ShowSideBar/Hint: Vis sidebar
-StoryView/Caption: historieSyn
-StoryView/Hint: Vælg historie visualisering
-TagManager/Caption: tag administrator
-TagManager/Hint: Åbn tag manager
+ShowSideBar/Caption: vis sidepanel
+ShowSideBar/Hint: Vis sidepanel
+StoryView/Caption: historieVisning
+StoryView/Hint: Vælg historievisning
+TagManager/Caption: tagadministrator
+TagManager/Hint: Åbn tagadministrator
 Theme/Caption: tema
-Theme/Hint: Vælg visnings tema
+Theme/Hint: Vælg visningstema
