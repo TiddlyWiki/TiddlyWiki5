@@ -179,7 +179,7 @@ exports.generateNewTitle = function(baseTitle,options) {
 		title = baseTitle;
 	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 		title = baseTitle + 
-			(options.prefix || " ") + 
+			(options.prefix === undefined ? " " || options.prefix) + 
 			(++c);
 	}
 	return title;
