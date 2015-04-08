@@ -1,0 +1,8 @@
+created: 20150408194207110
+modified: 20150408212602716
+tags: $:/tags/Image
+title: $:/core/images/circle-filled
+
+<svg class="tc-image-circle-filled tc-image-button" viewBox="0 0 128 128" width="22pt" height="22pt">
+  <circle cx="64" cy="64" r="62" />
+</svg>
