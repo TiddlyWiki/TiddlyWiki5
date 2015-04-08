@@ -2,17 +2,55 @@ title: $:/themes/tiddlywiki/vanilla/themetweaks
 tags: $:/tags/ControlPanel/Appearance
 caption: Theme Tweaks
 
+\define backgroundimage-dropdown()
+<div class="tc-drop-down-wrapper">
+<$button popup=<<qualify "$:/state/popup/themetweaks/backgroundimage">> class="tc-btn-invisible tc-btn-dropdown">{{$:/core/images/down-arrow}}</$button>
+<$reveal state=<<qualify "$:/state/popup/themetweaks/backgroundimage">> type="popup" position="belowleft" text="" default="">
+<div class="tc-drop-down">
+<$linkcatcher to="$:/themes/tiddlywiki/vanilla/settings/backgroundimage">
+<$link to="">
+(none)
+</$link>
+<hr>
+<$list filter="[all[shadows+tiddlers]is[image]] -[type[application/pdf]] +[sort[title]]">
+<$link to={{!!title}}>
+<$transclude/> <$view field="title"/>
+</$link>
+</$list>
+</$linkcatcher>
+</div>
+</$reveal>
+</div>
+\end
+
+\define backgroundimageattachment-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment" default="scroll">
+<option value="scroll">Scroll with tiddlers</option>
+<option value="fixed">Fixed to window</option>
+</$select>
+\end
+
+\define backgroundimagesize-dropdown()
+<$select tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" default="scroll">
+<option value="auto">Auto</option>
+<option value="cover">Cover</option>
+<option value="contain">Contain</option>
+</$select>
+\end
+
 You can tweak certain aspects of the ''Vanilla'' theme.
 
 ! Options
 
-|[[Sticky titles|$:/themes/tiddlywiki/vanilla/options/stickytitles]]<br>//Causes tiddler titles to "stick" to the top of the browser window. Does not work at all with Chrome, and causes some layout issues in Firefox// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">No</option><option value="yes">Yes</option></$select> |
-
+|[[Sticky titles|$:/themes/tiddlywiki/vanilla/options/stickytitles]]<br>//Causes tiddler titles to "stick" to the top of the browser window. Caution: Does not work at all with Chrome, and causes some layout issues in Firefox// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">No</option><option value="yes">Yes</option></$select> |
 
 ! Settings
 
-|[[Font family|$:/themes/tiddlywiki/vanilla/settings/fontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/> |
-|[[Code font family|$:/themes/tiddlywiki/vanilla/settings/codefontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> |
+|[[Font family|$:/themes/tiddlywiki/vanilla/settings/fontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/fontfamily" default="" tag="input"/> | |
+|[[Code font family|$:/themes/tiddlywiki/vanilla/settings/codefontfamily]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/codefontfamily" default="" tag="input"/> | |
+|[[Page background image|$:/themes/tiddlywiki/vanilla/settings/backgroundimage]] |<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" default="" tag="input"/> |<<backgroundimage-dropdown>> |
+|[[Page background image attachment |$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment]] |<<backgroundimageattachment-dropdown>> | |
+|[[Page background image size |$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize]] |<<backgroundimagesize-dropdown>> | |
 
 ! Sizes
 

@@ -1,7 +1,28 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
 
+\define custom-background-datauri()
+<$set name="background" value={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}>
+<$list filter="[<background>is[image]]">
+`background: url(`
+<$list filter="[<background>!has[_canonical_uri]]">
+<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>
+</$list>
+<$list filter="[<background>has[_canonical_uri]]">
+<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>
+</$list>
+`) center center;`
+`background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;
+-webkit-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+-moz-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+-o-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;`
+</$list>
+</$set>
+\end
+
 \rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
 */
@@ -39,6 +60,7 @@ body.tc-body {
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
 	word-wrap: break-word;
+	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -286,6 +308,7 @@ button svg, button img {
 }
 
 .tc-btn-big-green {
+	display: inline-block;
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
 	background: <<colour download-background>>;
@@ -299,8 +322,8 @@ button svg, button img {
 
 .tc-btn-big-green svg,
 .tc-btn-big-green img {
-	height: 1em;
-	width: 1em;
+	height: 2em;
+	width: 2em;
 	vertical-align: middle;
 }
 
@@ -649,6 +672,10 @@ button.tc-untagged-label {
 	line-height: 1.2em;
 	color: <<colour tiddler-title-foreground>>;
 	margin: 0;
+}
+
+.tc-site-title {
+	color: <<colour site-title-foreground>>;
 }
 
 .tc-tiddler-title-icon {
@@ -1244,6 +1271,7 @@ canvas.tc-edit-bitmapeditor  {
 	border-left: 1px solid <<colour tab-border>>;
 	-webkit-flex: 1 0 70%;
 	flex: 1 0 70%;
+	overflow: auto; 
 }
 
 .tc-sidebar-lists .tc-tab-buttons {
@@ -1662,7 +1690,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-wrapper {
 	position: relative;
 	display: inline-block;
-	margin: 0;
+	margin: 2px;
 	vertical-align: top;
 }
 
@@ -1709,10 +1737,13 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 
 .tc-thumbnail-icon {
 	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -1.5em;
-	margin-top: -1.5em;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .tc-thumbnail-caption {

@@ -1,6 +1,6 @@
 title: $:/language/Exporters/
 
-StaticRiver: River of tiddlers as static HTML file
+StaticRiver: Static HTML tiddlers
 JsonFile: JSON tiddlers file
 CsvFile: CSV tiddlers file
 TidFile: Single tiddler ".tid" file
