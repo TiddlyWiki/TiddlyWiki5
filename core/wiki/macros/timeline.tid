@@ -16,7 +16,7 @@ type: text/vnd.tiddlywiki
 <$list filter="[!is[system]$subfilter$has[$dateField$]!sort[$dateField$]limit[$limit$]eachday[$dateField$]]">
 <div class="tc-menu-list-item">
 <$view field="$dateField$" format="date" template="$format$"/>
-<$list filter="[sameday{!!$dateField$}!is[system]$subfilter$!sort[$dateField$]]">
+<$list filter="[sameday:$dateField${!!$dateField$}!is[system]$subfilter$!sort[$dateField$]]">
 <div class="tc-menu-list-subitem">
 <$link to={{!!title}}>
 <<timeline-title>>
