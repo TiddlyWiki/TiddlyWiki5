@@ -1130,14 +1130,22 @@ canvas.tc-edit-bitmapeditor  {
 	.tc-modal-body {
 		overflow-y: auto;
 		max-height: 400px;
+		max-height: 60vh;
 	}
 }
 
 @media (min-width: 55em) {
 	.tc-modal {
-		position: relative;
+		position: fixed;
+		top: 2em;
+		left: 25%;
 		width: 50%;
-		margin: 30px auto;
+	}
+
+	.tc-modal-body {
+		overflow-y: auto;
+		max-height: 400px;
+		max-height: 60vh;
 	}
 }
 
