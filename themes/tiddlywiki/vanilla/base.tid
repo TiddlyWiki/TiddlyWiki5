@@ -1367,6 +1367,7 @@ canvas.tc-edit-bitmapeditor  {
 	padding: 0 2px 2px 42px;
 	color: <<colour static-alert-foreground>>;
 	position: absolute;
+	z-index: 100;
 }
 
 /*
