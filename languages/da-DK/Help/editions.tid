@@ -1,7 +1,7 @@
 title: $:/language/Help/editions
 description: Lister mulige udgaver  af TiddlyWiki
 
-Lister navn og beskrivelse af de mulige udgaver. Du kan oprette en ny  wiki af en specificeret udgave med `--init` command.
+Lister navn og beskrivelse af de mulige udgaver. Du kan oprette en ny  wiki af en angivet udgave med `--init` command.
 
 ```
 --editions
