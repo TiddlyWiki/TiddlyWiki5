@@ -1750,9 +1750,10 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	left: 0;
 	right: 0;
 	bottom: 0;
+	display: -webkit-flex;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
 }
 
 .tc-thumbnail-caption {
