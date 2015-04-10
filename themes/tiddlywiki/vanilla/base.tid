@@ -105,6 +105,11 @@ dl dt {
 	margin-top: 6px;
 }
 
+textarea, input[type=text] {
+	color: <<colour foreground>>;
+	background-color: <<colour background>>;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
