@@ -1648,11 +1648,15 @@ $tw.loadWikiTiddlers = function(wikiPath,options) {
 	// Load any plugins within the wiki folder
 	var wikiPluginsPath = path.resolve(wikiPath,$tw.config.wikiPluginsSubDir);
 	if(fs.existsSync(wikiPluginsPath)) {
-		var pluginFolders = fs.readdirSync(wikiPluginsPath);
-		for(var t=0; t<pluginFolders.length; t++) {
-			pluginFields = $tw.loadPluginFolder(path.resolve(wikiPluginsPath,"./" + pluginFolders[t]));
-			if(pluginFields) {
-				$tw.wiki.addTiddler(pluginFields);
+		var publisherFolders = fs.readdirSync(wikiPluginsPath);
+		for(var t=0; t<publisherFolders.length; t++) {
+			var publisherFolder = path.resolve(wikiPluginsPath,"./" + publisherFolders[t]);
+			var pluginFolders = fs.readdirSync(publisherFolder);
+			for(var u=0; u<pluginFolders.length; u++) {
+				pluginFields = $tw.loadPluginFolder(path.resolve(publisherFolder,"./" + pluginFolders[u]));
+				if(pluginFields) {
+					$tw.wiki.addTiddler(pluginFields);
+				}
 			}
 		}
 	}
