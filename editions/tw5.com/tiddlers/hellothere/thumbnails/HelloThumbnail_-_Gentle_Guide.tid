@@ -1,12 +1,12 @@
 background-color: #EDB431
-caption: Beginners Start Here
-image: Motovun Jack.jpg
+caption: A Gentle Guide
+color: #fff
 created: 20150325172634195
 icon: <span style="font-weight:bold;background-color:#2a2;border-radius:16em;padding:0 9px 0 9px;">Go</span>
-color: #fff
-link: Beginners Guide
-modified: 20150325172637870
+image: Motovun Jack.jpg
+link: A Gentle Guide to TiddlyWiki
+modified: 20150414071032492
 tags: HelloThumbnail
-title: HelloThumbnail - Beginners
+title: HelloThumbnail - Gentle Guide
 type: text/vnd.tiddlywiki
 
