@@ -1704,7 +1704,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-wrapper {
 	position: relative;
 	display: inline-block;
-	margin: 2px;
+	margin: 6px;
 	vertical-align: top;
 }
 
@@ -1716,6 +1716,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-image {
     text-align: center;
 	overflow: hidden;
+	border-radius: 3px;
 }
 
 .tc-thumbnail-image svg,
@@ -1734,6 +1735,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 
 .tc-thumbnail-background {
 	position: absolute;
+	border-radius: 3px;
 }
 
 .tc-thumbnail-icon svg,
@@ -1771,6 +1773,8 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	filter: alpha(opacity=0.9);
 	opacity: 0.9;
 	line-height: 1.4;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-caption {
