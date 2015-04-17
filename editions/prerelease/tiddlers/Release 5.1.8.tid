@@ -1,6 +1,6 @@
 caption: 5.1.8
-created: 20150111154632954
-modified: 20150111154632954
+created: 20150417132452383
+modified: 20150417132452383
 tags: ReleaseNotes
 title: Release 5.1.8
 type: text/vnd.tiddlywiki
@@ -11,7 +11,7 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 
 !! Translation Improvements
 
-* Improvements to French, Chinese and Japanese translations
+* Improvements to French, Danish, Chinese and Japanese translations
 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/cb8caf6a01aeeac480bf28661888961657b0dbd8]] Czech translation
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d6918d737f5d1b663346ad9a35421a5ae0ffb9a7]] [[Interlingua|http://en.wikipedia.org/wiki/Interlingua]] translation
@@ -48,10 +48,12 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/a2493f80a973b24ad3d3affda945c437b98c2d2e]] support for embedding ZIP files
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/1808b1597e5a61379e4e5381d6d78bb73fa3a523]] support for custom elements with the RevealWidget
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bd6472c1d10bc86eaf1b317c35b86f84086ee3c8]] ''style'' attribute to RevealWidget
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/0b4ed3c72de16148ffe62abf1c5c06f2d2ce47f1]] text inputs to use palette colours
 * Several new [[core icons|ImageGallery Example]]: <span style="fill:#aaa;"><span title="$:/core/images/github">{{$:/core/images/github}}</span> <span title="$:/core/images/help">{{$:/core/images/help}}</span> <span title="$:/core/images/mail">{{$:/core/images/mail}}</span> <span title="$:/core/images/tip">{{$:/core/images/tip}}</span> <span title="$:/core/images/warning">{{$:/core/images/warning}}</span> <span title="$:/core/images/twitter">{{$:/core/images/twitter}}</span> <span title="$:/core/images/video">{{$:/core/images/video}}</span> <span title="$:/core/images/up-arrow">{{$:/core/images/up-arrow}}</span> <span title="$:/core/images/left-arrow">{{$:/core/images/left-arrow}}</span></span>
 
 !! Bug Fixes
 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/1520]] the [[sameday Operator]] and [[eachday Operator]] to accept TW5 date strings
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/pull/1249]] version number compatibility checks for plugins
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/1adfe20508116da0ee4b5c9e72ea9742f24b60c9]] problem with repeatedly cancelling a draft
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/050b643948e24d1d93a83766a23a0d693616d01e]] sandboxing of generated `<iframe>` elements
@@ -71,16 +73,12 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/pull/1352]] added "noclean" parameter to RenderTiddlersCommand
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/b768dc332b2d5d7ac1f731953cafb5fd1b30dad9]] [[editions Operator]] and [[editiondescription Operator]] for enumerating available editions
 
-!! Changes affecting plugin authors
-
-* 
-
 !! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
-
 * [[@aelocson|https://github.com/aelocson]]
+* [[@andreasabeck|https://github.com/andreasabeck]]
 * [[@alexhough|https://github.com/alexhough]]
 * [[@Arlen22|https://github.com/Arlen22]]
 * [[@BramChen|https://github.com/BramChen]]
@@ -92,9 +90,11 @@ This release includes many improvements to the documentation for TiddlyWiki. Man
 * [[@gernert|https://github.com/gernert]]
 * [[@Infurnoape|https://github.com/Infurnoape]]
 * [[@Jc-L|https://github.com/Jc-L]]
+* [[@le-pako|https://github.com/le-pako]]
 * [[@Mathobal|https://github.com/Mathobal]]
 * [[@ng110|https://github.com/ng110]]
 * [[@pmario|https://github.com/pmario]]
+* [[@reflectionist|https://github.com/reflectionist]]
 * [[@roma0104|https://github.com/roma0104]]
 * [[@simonbaird|https://github.com/simonbaird]]
 * [[@Spangenhelm|https://github.com/Spangenhelm]]
