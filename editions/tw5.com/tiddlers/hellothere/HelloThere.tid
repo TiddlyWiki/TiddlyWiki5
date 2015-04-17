@@ -1,17 +1,17 @@
 created: 20130822170200000
-list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
-modified: 20150326104653171
+list: [[A Gentle Guide to TiddlyWiki]] [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[What happened to the original TiddlyWiki?]]
+modified: 20150417163307227
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
 ''Have you ever had the feeling that your head is not quite big enough to hold everything you need to remember?''
 
-Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for capturing, organising and sharing complex information.
+Welcome to TiddlyWiki, a unique [[non-linear|Philosophy of Tiddlers]] notebook for [[capturing|Creating and editing tiddlers]], [[organising|Structuring TiddlyWiki]] and [[sharing|Sharing your tiddlers with others]] complex information.
 
-Use it to keep your to-do list, to plan an essay or novel, or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
+Use it to keep your [[to-do list|TaskManagementExample]], to plan an [[essay or novel|"TiddlyWiki for Scholars" by Alberto Molina]], or to organise your wedding. Record every thought that crosses your brain, or build a flexible and responsive website.
 
-<div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
+<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
 <<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
 </div>
 

@@ -105,6 +105,11 @@ dl dt {
 	margin-top: 6px;
 }
 
+textarea, input[type=text] {
+	color: <<colour foreground>>;
+	background-color: <<colour background>>;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
 }
@@ -1130,14 +1135,22 @@ canvas.tc-edit-bitmapeditor  {
 	.tc-modal-body {
 		overflow-y: auto;
 		max-height: 400px;
+		max-height: 60vh;
 	}
 }
 
 @media (min-width: 55em) {
 	.tc-modal {
-		position: relative;
+		position: fixed;
+		top: 2em;
+		left: 25%;
 		width: 50%;
-		margin: 30px auto;
+	}
+
+	.tc-modal-body {
+		overflow-y: auto;
+		max-height: 400px;
+		max-height: 60vh;
 	}
 }
 
@@ -1359,6 +1372,7 @@ canvas.tc-edit-bitmapeditor  {
 	padding: 0 2px 2px 42px;
 	color: <<colour static-alert-foreground>>;
 	position: absolute;
+	z-index: 100;
 }
 
 /*
@@ -1690,7 +1704,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-wrapper {
 	position: relative;
 	display: inline-block;
-	margin: 2px;
+	margin: 6px;
 	vertical-align: top;
 }
 
@@ -1702,6 +1716,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-image {
     text-align: center;
 	overflow: hidden;
+	border-radius: 3px;
 }
 
 .tc-thumbnail-image svg,
@@ -1720,6 +1735,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 
 .tc-thumbnail-background {
 	position: absolute;
+	border-radius: 3px;
 }
 
 .tc-thumbnail-icon svg,
@@ -1741,9 +1757,10 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	left: 0;
 	right: 0;
 	bottom: 0;
+	display: -webkit-flex;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-justify-content: center;
 }
 
 .tc-thumbnail-caption {
@@ -1756,6 +1773,8 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	filter: alpha(opacity=0.9);
 	opacity: 0.9;
 	line-height: 1.4;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-caption {

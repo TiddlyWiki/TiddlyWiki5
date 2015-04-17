@@ -1,7 +1,6 @@
 title: HelloThumbnail - Latest Version
 tags: HelloThumbnail
 caption: What's New in <<version>>
-icon: <span style="font-weight:bold;background-color:#639BE5;border-radius:16em;padding:0 9px 0 9px;"><<version>></span>
 link: Releases
-background-color: #4A4AE4
+image: New Release Banner.png
 color: #fff

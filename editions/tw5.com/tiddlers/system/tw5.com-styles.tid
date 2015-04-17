@@ -20,7 +20,7 @@ tags: $:/tags/Stylesheet
 
 }
 
-.tc-double-spaced-list {
+.tc-double-spaced-list li {
 	padding-bottom:.5em;padding-top:.5em;
 }
 
