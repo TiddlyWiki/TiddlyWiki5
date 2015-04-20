@@ -10,7 +10,10 @@ color:$(foregroundColor)$;
 <$set name="foregroundColor" value=<<contrastcolour target:"""$colour$""" fallbackTarget:"""$fallbackTarget$""" colourA:"""$colourA$""" colourB:"""$colourB$""">>>
 <$set name="backgroundColor" value="""$colour$""">
 <$button popup=<<qualify "$:/state/popup/tag">> class="tc-btn-invisible tc-tag-label" style=<<tag-styles>>>
-<$transclude tiddler={{!!icon}}/> <$view field="title" format="text" />
+<$transclude tiddler={{!!icon}}/>
+<$view field="caption" format="text">
+  <$view field="title" format="text" />
+</$view>
 </$button>
 <$reveal state=<<qualify "$:/state/popup/tag">> type="popup" position="below" animate="yes"><div class="tc-drop-down"><$transclude tiddler="$:/core/ui/ListItemTemplate"/>
 <hr>
