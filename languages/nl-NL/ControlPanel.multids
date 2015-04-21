@@ -38,6 +38,8 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: verberg editor
 Palette/Prompt: Huidig palet:
 Palette/ShowEditor/Caption: toon editor
+Plugins/Add/Caption: Verkrijg meer plugins
+Plugins/Add/Hint: Installeer plugins van de officiële bibliotheek
 Plugins/Caption: Plugins
 Plugins/Disable/Caption: schakel uit
 Plugins/Disable/Hint: Schakel deze plugin uit na verversen van deze pagina
@@ -45,9 +47,14 @@ Plugins/Disabled/Status: (uitgeschakeld)
 Plugins/Empty/Hint: Niets
 Plugins/Enable/Caption: activeer
 Plugins/Enable/Hint: Activeer deze plugin bij verversen van deze pagina
+Plugins/Installed/Hint: Geïnstalleerde plugins:
 Plugins/Language/Prompt: Talen
+Plugins/Languages/Caption: Talen
+Plugins/Languages/Hint: Taal plugins
 Plugins/Plugin/Prompt: Plugins
 Plugins/Theme/Prompt: Thema's
+Plugins/Themes/Caption: Thema's
+Plugins/Themes/Hint: Thema plugins
 Saving/Caption: Opslaan
 Saving/Heading: Opslaan
 Saving/TiddlySpot/Advanced/Heading: Geavanceerde instellingen
@@ -66,6 +73,8 @@ Settings/AutoSave/Disabled/Description: Sla veranderingen niet automatisch op
 Settings/AutoSave/Enabled/Description: Sla veranderingen automatisch op
 Settings/AutoSave/Hint: Sla veranderingen tijdens wijzigen automatisch op
 Settings/Caption: Instellingen
+Settings/DefaultSidebarTab/Caption: Standaard tab in zijpaneel
+Settings/DefaultSidebarTab/Hint: Geef aan welke tab in het zijpaneel standaard wordt getoond
 Settings/Hint: Met deze instellingen kun je het gedrag van TiddlyWiki veranderen.
 Settings/NavigationAddressBar/Caption: Navigatie adresbalk
 Settings/NavigationAddressBar/Hint: Gedrag van het browseradres bij navigeren naar een tiddler:

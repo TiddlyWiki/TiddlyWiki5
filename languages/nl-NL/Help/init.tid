@@ -19,5 +19,5 @@ N.B.:
 * De "editie" is standaard "empty"
 * Het init commando werkt niet als de wiki folder niet leeg is
 * Het init commando verwijdert alle `includeWikis` definities in het edition's `tiddlywiki.info` bestand
-* Als meerdere edities gespecificeerd worden zullen edities die later geïnitialiseerd worden all bestanden overschrijven die gedeeld worden met eerdere edities (dus het `tiddlywiki.info` bestand wordt gekopieerd van de laatste editie)
+* Als meerdere edities gespecificeerd worden zullen edities die later geïnitialiseerd worden alle bestanden overschrijven die gedeeld worden met eerdere edities (dus het `tiddlywiki.info` bestand wordt gekopieerd van de laatste editie)
 * `--editions` geeft een lijst met beschikbare edities
