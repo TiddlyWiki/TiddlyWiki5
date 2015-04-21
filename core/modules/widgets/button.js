@@ -34,7 +34,11 @@ ButtonWidget.prototype.render = function(parent,nextSibling) {
 	this.computeAttributes();
 	this.execute();
 	// Create element
-	var domNode = this.document.createElement("button");
+	var tag = "button";
+	if(this.buttonTag && $tw.config.htmlUnsafeElements.indexOf(this.buttonTag) === -1) {
+		tag = this.buttonTag;
+	}
+	var domNode = this.document.createElement(tag);
 	// Assign classes
 	var classes = this["class"].split(" ") || [],
 		isPoppedUp = this.popup && this.isPoppedUp();
@@ -163,6 +167,7 @@ ButtonWidget.prototype.execute = function() {
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
 	this.defaultSetValue = this.getAttribute("default");
+	this.buttonTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
 };
