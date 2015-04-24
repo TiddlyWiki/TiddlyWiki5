@@ -38,8 +38,8 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 	if(rgbColourA && !rgbColourB) {
 		return rgbColourA;
 	}
-	if(rgbColourA && !rgbColourB) {
-		return rgbColourA;
+	if(rgbColourB && !rgbColourA) {
+		return rgbColourB;
 	}
 	if(!rgbColourA && !rgbColourB) {
 		// If neither colour is readable, return a crude inverse of the target
