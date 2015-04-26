@@ -1,13 +1,7 @@
-created: 20131109105400007
-modified: 20150417163307227
+created: 20150419144523070
+modified: 20150420114530386
 tags: About
 title: Releases
 type: text/vnd.tiddlywiki
 
-Here are the details of recent releases of TiddlyWiki5. See [[TiddlyWiki5 Versioning]] for details of how releases are named.
-
-(BetaReleases and AlphaReleases are listed separately).
-
-<$list filter="[tag[ReleaseNotes]!sort[created]limit[1]]">
-  <$macrocall $name="tabs" tabsList="[tag[ReleaseNotes]!sort[created]]"default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />
-</$list>
+<<tabs "[[TiddlyWiki Releases]] [[TiddlyDesktop Releases]]" "[[TiddlyWiki Releases]]" "$:/state/tab">>
