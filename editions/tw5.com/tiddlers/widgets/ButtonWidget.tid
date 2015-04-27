@@ -1,6 +1,6 @@
 caption: button
 created: 20131024141900000
-modified: 20141008145311298
+modified: 20150427122454736
 tags: Widgets
 title: ButtonWidget
 type: text/vnd.tiddlywiki
@@ -36,4 +36,4 @@ The content of the `<$button>` widget is displayed within the button.
 |selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |
 |default |Default value if `set` tiddler is missing for testing against `setTo` to determine `selectedClass` |
 
-''Tip:'' Set ''class'' to `tc-btn-invisble tc-tiddlylink` to have a button look like an internal link.
+''Tip:'' Set ''class'' to `tc-btn-invisible tc-tiddlylink` to have a button look like an internal link.
