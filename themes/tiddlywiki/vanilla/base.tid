@@ -37,6 +37,9 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 
 html button {
 	line-height: 1.2;
+	color: <<colour button-foreground>>;
+	background: <<colour button-background>>;
+	border-color: <<colour button-border>>;
 }
 
 /*
@@ -105,9 +108,12 @@ dl dt {
 	margin-top: 6px;
 }
 
-textarea, input[type=text] {
+textarea,
+input[type=text],
+input[type=""],
+input:not([type]) {
 	color: <<colour foreground>>;
-	background-color: <<colour background>>;
+	background: <<colour background>>;
 }
 
 .tc-muted {
