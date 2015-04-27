@@ -87,7 +87,14 @@ Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" d
 \define display-server-connection()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/ServerConnection]suffix{!!url}]" variable="connectionTiddler" emptyMessage=<<load-plugin-library-button>>>
 
+<$reveal type='match' state=<<qualify $(currentTiddler)$>> text='show'>
+<$button set=<<qualify $(currentTiddler)$>> setTo=hide>Hide Plugins</$button>
 <<tabs "[[$:/core/ui/ControlPanel/Plugins/Add/Plugins]] [[$:/core/ui/ControlPanel/Plugins/Add/Themes]] [[$:/core/ui/ControlPanel/Plugins/Add/Languages]]" "$:/core/ui/ControlPanel/Plugins/Add/Plugins">>
+</$reveal>
+
+<$reveal type='nomatch' state=<<qualify $(currentTiddler)$>> text='show'>
+<$button set=<<qualify $(currentTiddler)$>> setTo=show>Show Plugins</$button>
+</$reveal>
 
 </$list>
 \end
