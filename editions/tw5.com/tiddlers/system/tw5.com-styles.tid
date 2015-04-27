@@ -44,6 +44,7 @@ tags: $:/tags/Stylesheet
 	background-color: <<colour message-background>>;
 	padding: 1em;
 	height: 400px;
+	position: relative;
 }
 
 .tc-improvement-banner {
