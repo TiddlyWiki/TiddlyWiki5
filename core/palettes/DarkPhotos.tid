@@ -1,4 +1,3 @@
-@@ -0,0 +1,107 @@
 created: 20150402111612188
 description: Good with dark photo backgrounds
 modified: 20150402112344080
@@ -13,9 +12,9 @@ alert-highlight: #881122
 alert-muted-foreground: #b99e2f
 background: #ffffff
 blockquote-bar: <<colour muted-foreground>>
-button-background:
-button-foreground:
-button-border:
+button-background: 
+button-foreground: 
+button-border: 
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
@@ -48,7 +47,7 @@ modal-header-border: #eeeeee
 muted-foreground: #ddd
 notification-background: #ffffdd
 notification-border: #999999
-page-background: #f4f4f4
+page-background: #336438
 pre-background: #f5f5f5
 pre-border: #cccccc
 primary: #5778d8

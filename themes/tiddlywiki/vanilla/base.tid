@@ -110,6 +110,7 @@ dl dt {
 
 textarea,
 input[type=text],
+input[type=search],
 input[type=""],
 input:not([type]) {
 	color: <<colour foreground>>;
@@ -118,6 +119,10 @@ input:not([type]) {
 
 .tc-muted {
 	color: <<colour muted-foreground>>;
+}
+
+svg {
+	fill: <<colour foreground>>;
 }
 
 svg.tc-image-button {
