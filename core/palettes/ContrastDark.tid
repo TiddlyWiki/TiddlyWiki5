@@ -1,6 +1,6 @@
-title: $:/palettes/Contrast
-name: Contrast
-description: High contrast and unambiguous
+title: $:/palettes/ContrastDark
+name: Contrast (Dark)
+description: High contrast and unambiguous (dark version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
@@ -52,7 +52,7 @@ primary: #00f
 sidebar-button-foreground: <<colour foreground>>
 sidebar-controls-foreground-hover: #000000
 sidebar-controls-foreground: #ffffff
-sidebar-foreground-shadow: rgba(255,0,0, 0.5)
+sidebar-foreground-shadow: rgba(0,0,0, 0)
 sidebar-foreground: #ffffff
 sidebar-muted-foreground-hover: #444444
 sidebar-muted-foreground: #fff
