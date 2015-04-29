@@ -1,10 +1,40 @@
 title: TiddlyWiki Pre-release
-modified: 20141013204930183
+modified: 20150428204930183
 
 This is a pre-release build of TiddlyWiki.
 
 It is provided for testing purposes. Please don't try to use it for anything important -- you should use the latest official release from http://tiddlywiki.com.
 
-Try out the experimental system tiddler browser:
+! Features for 5.1.9
 
-[[$:/core/ui/MoreSideBar/Explore]]
+!! Improvements for visually impaired users
+
+* Improved monochrome palettes:
+** <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/plugins/tiddlywiki/vanilla"/>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastDark"/>
+Set "Contrast (Dark)" palette
+</$button>
+** <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/plugins/tiddlywiki/vanilla"/>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastLight"/>
+Set "Contrast (Dark)" palette
+</$button>
+** <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/plugins/tiddlywiki/snowwhite"/>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/Vanilla"/>
+Revert
+</$button>
+
+! Features held back for later release
+
+These unfinished features are included in this prerelease build, but are not planned for inclusion in the next release.
+
+* <$button>
+<$action-setfield $tiddler="$:/view" text="stacked"/>
+Set "Stacked" story view
+</$button> <$button>
+<$action-setfield $tiddler="$:/view" text="classic"/>
+Revert
+</$button>
+* [[Hierarchical system tiddler browser|$:/core/ui/MoreSideBar/Explore]]
