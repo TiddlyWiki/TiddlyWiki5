@@ -11,17 +11,17 @@ It is provided for testing purposes. Please don't try to use it for anything imp
 
 * Improved monochrome palettes:
 ** <$button>
-<$action-setfield $tiddler="$:/theme" text="$:/plugins/tiddlywiki/vanilla"/>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastDark"/>
 Set "Contrast (Dark)" palette
 </$button>
 ** <$button>
-<$action-setfield $tiddler="$:/theme" text="$:/plugins/tiddlywiki/vanilla"/>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastLight"/>
 Set "Contrast (Dark)" palette
 </$button>
 ** <$button>
-<$action-setfield $tiddler="$:/theme" text="$:/plugins/tiddlywiki/snowwhite"/>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/Vanilla"/>
 Revert
 </$button>
