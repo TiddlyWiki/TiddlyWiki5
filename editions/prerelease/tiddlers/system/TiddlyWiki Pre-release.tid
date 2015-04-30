@@ -13,12 +13,12 @@ It is provided for testing purposes. Please don't try to use it for anything imp
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastDark"/>
-Set "Contrast (Dark)" palette
+Set "Contrast (Light)" palette
 </$button>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastLight"/>
-Set "Contrast (Light)" palette
+Set "Contrast (Dark)" palette
 </$button>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
