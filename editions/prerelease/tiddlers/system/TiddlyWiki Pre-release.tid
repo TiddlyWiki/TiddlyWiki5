@@ -18,7 +18,7 @@ Set "Contrast (Dark)" palette
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastLight"/>
-Set "Contrast (Dark)" palette
+Set "Contrast (Light)" palette
 </$button>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
