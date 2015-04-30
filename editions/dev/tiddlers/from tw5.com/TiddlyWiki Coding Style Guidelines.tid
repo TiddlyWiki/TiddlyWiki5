@@ -1,4 +1,4 @@
-modified: 20141016083333808
+modified: 20150430153333808
 title: TiddlyWiki Coding Style Guidelines
 tags: dev
 
@@ -25,9 +25,9 @@ See the following example for layout of basic JavaScript constructs:
 Multiline comments are used to introduce a block of code such as a function definition
 */
 function demoFunction(param,more) {
-	// Proper sentence capitalisation for comments
-	if(condition == "something") {
-		// No space between "if" and the brackets; always spaces around binary operators
+	// Proper sentence capitalisation for comments; prefer strict equality checks
+	if(condition === "something") {
+		// Always use braces, even when optional; no space between "if" and the brackets; always spaces around binary operators
 		something = somethingElse;
 		myOtherFunction(one,two); // No whitespace within function parameters
 		do {
