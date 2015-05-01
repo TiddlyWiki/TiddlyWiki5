@@ -14,6 +14,8 @@ html body.tc-body {
 }
 ```
 
+You can then use your own [[styles and classes in WikiText|Styles and Classes in WikiText]].
+
 ! Overriding Theme Settings
 
 Custom stylesheets are applied independently from theme stylesheets. Therefore, it is often necessary for the css rules in your custom stylesheet to be more specific than those of the theme you want to override. For example, `html body.tc-body` is more specific than `body.tc-body`.
