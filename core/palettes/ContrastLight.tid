@@ -1,6 +1,6 @@
-title: $:/palettes/ContrastLight
-name: Contrast (Light)
-description: High contrast and unambiguous (light version)
+title: $:/palettes/ContrastDark
+name: Contrast (Dark)
+description: High contrast and unambiguous (dark version)
 tags: $:/tags/Palette
 type: application/x-tiddler-dictionary
 
@@ -77,8 +77,8 @@ tab-foreground: <<colour background>>
 table-border: #dddddd
 table-footer-background: #a8a8a8
 table-header-background: #f0f0f0
-tag-background: #d5ad34
-tag-foreground: <<colour foreground>>
+tag-background: #fff
+tag-foreground: #000
 tiddler-background: <<colour background>>
 tiddler-border: <<colour foreground>>
 tiddler-controls-foreground-hover: #ddd
@@ -94,7 +94,7 @@ tiddler-info-border: <<colour foreground>>
 tiddler-info-tab-background: <<colour background>>
 tiddler-link-background: <<colour background>>
 tiddler-link-foreground: <<colour primary>>
-tiddler-subtitle-foreground: #c0c0c0
+tiddler-subtitle-foreground: <<colour foreground>>
 tiddler-title-foreground: <<colour foreground>>
 toolbar-new-button: 
 toolbar-options-button: 
@@ -105,5 +105,5 @@ toolbar-close-button:
 toolbar-delete-button: 
 toolbar-cancel-button: 
 toolbar-done-button: 
-untagged-background: #999999
+untagged-background: <<colour foreground>>
 very-muted-foreground: #888888
