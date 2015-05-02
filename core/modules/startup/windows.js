@@ -21,7 +21,8 @@ exports.synchronous = true;
 exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-open-window",function(event) {
 		// Get the parameters
-		var title = event.param || event.tiddlerTitle,
+		var refreshHandler,
+			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
 			template = paramObject.template || "$:/core/ui/ViewTemplate/body",
 			width = paramObject.width || "700",
@@ -29,14 +30,16 @@ exports.startup = function() {
 		// Open the window
 		var srcWindow = window.open("","external-" + title,"width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
-		srcWindow.onclose = function(event) {
-			console.log("closing popup");
-		};
-		srcWindow.addEventListener("close",function(event) {
-			console.log("closing2 popup");
-		},false);
+		// Check for reopening the same window
+		if(srcWindow.haveInitialisedWindow) {
+			return;
+		}
+		// Initialise the document
 		srcDocument.write("<html><head></head><body class='tc-body'></body></html>");
 		srcDocument.close();
+		srcWindow.addEventListener("beforeunload",function(event) {
+			$tw.wiki.removeEventListener("change",refreshHandler);
+		},false);
 		// Set up the styles
 		var styleWidgetNode = $tw.wiki.makeTranscludeWidget("$:/core/ui/PageStylesheet",{document: $tw.fakeDocument}),
 			styleContainer = $tw.fakeDocument.createElement("style");
@@ -44,19 +47,19 @@ exports.startup = function() {
 		var styleElement = srcDocument.createElement("style");
 		styleElement.innerHTML = styleContainer.textContent;
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
-		$tw.wiki.addEventListener("change",function(changes) {
-			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
-				styleElement.innerHTML = styleContainer.textContent;
-			}
-		});
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, variables: {currentTiddler: title}});
 		widgetNode.render(srcDocument.body,null);
-		$tw.wiki.addEventListener("change",function(changes) {
+		// Function to handle refreshes
+		refreshHandler = function(changes) {
+			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
+				styleElement.innerHTML = styleContainer.textContent;
+			}
 			widgetNode.refresh(changes);
-		});
-
+		};
+		$tw.wiki.addEventListener("change",refreshHandler);
+		srcWindow.haveInitialisedWindow = true;
 	});
 };
 
