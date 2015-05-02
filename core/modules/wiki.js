@@ -137,7 +137,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 		this.changeCount[title] = 1;
 	}
 	// Trigger events
-	this.eventListeners = this.eventListeners || [];
+	this.eventListeners = this.eventListeners || {};
 	if(!this.eventsTriggered) {
 		var self = this;
 		$tw.utils.nextTick(function() {
