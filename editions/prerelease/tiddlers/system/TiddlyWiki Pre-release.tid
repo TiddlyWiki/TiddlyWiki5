@@ -1,25 +1,38 @@
 title: TiddlyWiki Pre-release
 modified: 20150428204930183
 
+\define colour-picker(tiddler,colour)
+<$edit-text tiddler="""$tiddler$""" index="""$colour$""" type="color" tag="input"/>
+\end
+
 This is a pre-release build of TiddlyWiki.
 
 It is provided for testing purposes. Please don't try to use it for anything important -- you should use the latest official release from http://tiddlywiki.com.
 
 ! Features for 5.1.9
 
+!! New Tiddler Toolbar Button: "Open in new window"
+
+An experimental new tiddler toolbar button opens a single tiddler in a separate pop-up browser window. The tiddler will be dynamically updated just as in the main window. There are several uses:
+
+* Arranging reference tiddlers for easy access while editing in the main window
+* Making good use of multi-screen layouts
+* Printing the content of a single tiddler
+* Running presentations in a separate window while maintaining notes in the main window
+
 !! Improvements for visually impaired users
 
-* Improved monochrome palettes:
+* Improved monochrome palette variants:
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastDark"/>
-Set "Contrast (Light)" palette
-</$button>
+Dark palette
+</$button>. Foreground: <<colour-picker "$:/palettes/ContrastDark" "foreground">>, Background: <<colour-picker "$:/palettes/ContrastDark" "background">>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/vanilla"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/ContrastLight"/>
-Set "Contrast (Dark)" palette
-</$button>
+Light palette
+</$button>. Foreground: <<colour-picker "$:/palettes/ContrastLight" "foreground">>, Background: <<colour-picker "$:/palettes/ContrastLight" "background">>
 ** <$button>
 <$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
 <$action-setfield $tiddler="$:/palette" text="$:/palettes/Vanilla"/>

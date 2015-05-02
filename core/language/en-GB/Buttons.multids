@@ -52,6 +52,8 @@ NewJournalHere/Caption: new journal here
 NewJournalHere/Hint: Create a new journal tiddler tagged with this one
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+OpenWindow/Caption: open in new window
+OpenWindow/Hint: Open tiddler in new window
 Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
