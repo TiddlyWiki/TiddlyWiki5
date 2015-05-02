@@ -6,7 +6,7 @@ caption: set
 
 ! Introduction
 
-The set variable widget assigns a value to a specified [[variable|Variables]]. The new value of the variable is availale to the content within the set variable widget.
+The set variable widget assigns a value to a specified [[variable|Variables]]. The new value of the variable is available to the content within the set variable widget.
 
 ! Content and Attributes
 
