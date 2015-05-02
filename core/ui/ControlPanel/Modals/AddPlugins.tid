@@ -70,7 +70,7 @@ This plugin is already installed at version <$text text=<<installedVersion>>/>
 \end
 
 \define display-server-assets(type)
-Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input" focus="true"/>
+Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" default="" type="search" tag="input"/>
 <$reveal state="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" type="nomatch" text="">
 <$button class="tc-btn-invisible">
 <$action-setfield $tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" $field="text" $value=""/>
