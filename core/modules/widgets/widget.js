@@ -434,7 +434,9 @@ if(index === -1) {
 	var grandParent = parent.parentWidget;
 	if(grandParent && parent.parentDomNode === this.parentDomNode) {
 		index = grandParent.children.indexOf(parent);
-		return parent.findNextSiblingDomNode(index);
+		if(index !== -1) {
+			return parent.findNextSiblingDomNode(index);
+		}
 	}
 	return null;
 };
