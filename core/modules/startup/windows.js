@@ -57,7 +57,7 @@ exports.startup = function() {
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
 			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: {currentTiddler: title}});
-		widgetNode.render(srcDocument.body,null);
+		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
