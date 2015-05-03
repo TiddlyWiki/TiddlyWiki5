@@ -37,6 +37,7 @@ exports.startup = function() {
 		// Initialise the document
 		srcDocument.write("<html><head></head><body class='tc-body'></body></html>");
 		srcDocument.close();
+		srcDocument.title = title;
 		srcWindow.addEventListener("beforeunload",function(event) {
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);

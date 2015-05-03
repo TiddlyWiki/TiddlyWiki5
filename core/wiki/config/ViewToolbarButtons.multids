@@ -7,5 +7,6 @@ core/ui/Buttons/info: hide
 core/ui/Buttons/more-tiddler-actions: show
 core/ui/Buttons/new-here: hide
 core/ui/Buttons/new-journal-here: hide
+core/ui/Buttons/open-window: hide
 core/ui/Buttons/permalink: hide
 core/ui/Buttons/permaview: hide
