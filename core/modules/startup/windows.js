@@ -24,7 +24,7 @@ exports.startup = function() {
 		var refreshHandler,
 			title = event.param || event.tiddlerTitle,
 			paramObject = event.paramObject || {},
-			template = paramObject.template || "$:/core/ui/ViewTemplate/body",
+			template = paramObject.template || "$:/core/templates/single.tiddler.window",
 			width = paramObject.width || "700",
 			height = paramObject.height || "600";
 		// Open the window
