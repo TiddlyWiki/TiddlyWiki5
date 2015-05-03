@@ -820,7 +820,7 @@ canvas.tc-edit-bitmapeditor  {
 
 html body.tc-body.tc-single-tiddler-window {
 	margin: 1em;
-	background-color: <<colour tiddler-background>>;
+	background: <<colour tiddler-background>>;
 }
 
 /*
