@@ -66,10 +66,6 @@ body.tc-body {
 	<<custom-background-datauri>>
 }
 
-body.tc-body.tc-single-tiddler-window {
-	margin: 1em;
-}
-
 h1, h2, h3, h4, h5, h6 {
 	line-height: 1.2;
 	font-weight: 300;
@@ -345,6 +341,7 @@ button svg, button img {
 	height: 2em;
 	width: 2em;
 	vertical-align: middle;
+	fill: <<colour download-foreground>>;
 }
 
 .tc-sidebar-lists input {
@@ -819,6 +816,11 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-titlebar, .tc-tiddler-edit-title {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+}
+
+html body.tc-body.tc-single-tiddler-window {
+	margin: 1em;
+	background-color: <<colour tiddler-background>>;
 }
 
 /*
@@ -1740,6 +1742,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	opacity: 1;
     min-width: 100%;
     min-height: 100%;
+    max-width: 100%;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
