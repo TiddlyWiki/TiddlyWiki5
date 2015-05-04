@@ -841,6 +841,7 @@ html body.tc-body.tc-single-tiddler-window {
 <<if-fluid-fixed text:"""
 
 	.tc-story-river {
+		padding-right: 0;
 		position: relative;
 		width: auto;
 		left: 0;
@@ -852,17 +853,27 @@ html body.tc-body.tc-single-tiddler-window {
 	}
 
 	.tc-sidebar-scrollable {
-		padding-left: 0;
 		left: auto;
 		bottom: 0;
 		right: 0;
 		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 42px);
+	}
+
 """ hiddenSidebarText:"""
 
 	.tc-story-river {
+		padding-right: 3em;
 		margin-right: 0;
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 84px);
 	}
 
 """>>
