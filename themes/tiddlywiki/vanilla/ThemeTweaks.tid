@@ -42,6 +42,7 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 
 ! Options
 
+|[[Sidebar layout|$:/themes/tiddlywiki/vanilla/options/sidebarlayout]] |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/sidebarlayout"><option value="fixed-fluid">Fixed story, fluid sidebar</option><option value="fluid-fixed">Fluid story, fixed sidebar</option></$select> |
 |[[Sticky titles|$:/themes/tiddlywiki/vanilla/options/stickytitles]]<br>//Causes tiddler titles to "stick" to the top of the browser window. Caution: Does not work at all with Chrome, and causes some layout issues in Firefox// |<$select tiddler="$:/themes/tiddlywiki/vanilla/options/stickytitles"><option value="no">No</option><option value="yes">Yes</option></$select> |
 
 ! Settings
@@ -64,3 +65,4 @@ You can tweak certain aspects of the ''Vanilla'' theme.
 |[[Story width|$:/themes/tiddlywiki/vanilla/metrics/storywidth]]<br>//the overall width of the story river// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/storywidth" default="" tag="input"/> |
 |[[Tiddler width|$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth]]<br>//within the story river//<br> |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/tiddlerwidth" default="" tag="input"/> |
 |[[Sidebar breakpoint|$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint]]<br>//the minimum page width at which the story<br>river and sidebar will appear side by side// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint" default="" tag="input"/> |
+|[[Sidebar width|$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth]]<br>//the width of the sidebar in fluid-fixed layout// |^<$edit-text tiddler="$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth" default="" tag="input"/> |

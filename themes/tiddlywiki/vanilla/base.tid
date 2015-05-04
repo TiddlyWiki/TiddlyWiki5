@@ -21,7 +21,16 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 </$set>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define if-fluid-fixed(text,hiddenSidebarText)
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+$text$
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+$hiddenSidebarText$
+</$reveal>
+</$reveal>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
@@ -821,6 +830,43 @@ canvas.tc-edit-bitmapeditor  {
 html body.tc-body.tc-single-tiddler-window {
 	margin: 1em;
 	background: <<colour tiddler-background>>;
+}
+
+/*
+** Adjustments for fluid-fixed mode
+*/
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+<<if-fluid-fixed text:"""
+
+	.tc-story-river {
+		position: relative;
+		width: auto;
+		left: 0;
+		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+	.tc-tiddler-frame {
+		width: 100%;
+	}
+
+	.tc-sidebar-scrollable {
+		padding-left: 0;
+		left: auto;
+		bottom: 0;
+		right: 0;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+""" hiddenSidebarText:"""
+
+	.tc-story-river {
+		margin-right: 0;
+	}
+
+""">>
+
 }
 
 /*
