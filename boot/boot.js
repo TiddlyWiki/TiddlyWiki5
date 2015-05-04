@@ -1738,7 +1738,8 @@ $tw.boot.startup = function(options) {
 			languagesEnvVar: "TIDDLYWIKI_LANGUAGE_PATH",
 			editionsEnvVar: "TIDDLYWIKI_EDITION_PATH"
 		},
-		log: {} // Log flags
+		log: {}, // Log flags
+		unloadTasks: []
 	});
 	if(!$tw.boot.tasks.readBrowserTiddlers) {
 		// For writable tiddler files, a hashmap of title to {filepath:,type:,hasMetaFile:}
@@ -1797,6 +1798,20 @@ $tw.boot.startup = function(options) {
 	// Install the tiddler deserializer modules
 	$tw.Wiki.tiddlerDeserializerModules = Object.create(null);
 	$tw.modules.applyMethods("tiddlerdeserializer",$tw.Wiki.tiddlerDeserializerModules);
+	// Call unload handlers in the browser
+	if($tw.browser) {
+		window.onbeforeunload = function(event) {
+			event = event || {};
+			var result;
+			$tw.utils.each($tw.unloadTasks,function(task) {
+				var r = task(event);
+				if(r) {
+					result = r;
+				}
+			});
+			return result;
+		}
+	}
 	// Load tiddlers
 	if($tw.boot.tasks.readBrowserTiddlers) {
 		$tw.loadTiddlersBrowser();
@@ -1832,6 +1847,15 @@ $tw.boot.startup = function(options) {
 	// Repeatedly execute the next eligible task
 	$tw.boot.executeNextStartupTask();
 };
+
+/*
+Add another unload task
+*/
+$tw.addUnloadTask = function(task) {
+	if($tw.unloadTasks.indexOf(task) === -1) {
+		$tw.unloadTasks.push(task);
+	}
+}
 
 /*
 Execute the remaining eligible startup tasks

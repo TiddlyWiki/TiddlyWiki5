@@ -21,7 +21,16 @@ background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`
 </$set>
 \end
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define if-fluid-fixed(text,hiddenSidebarText)
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+$text$
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+$hiddenSidebarText$
+</$reveal>
+</$reveal>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
 
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
@@ -64,10 +73,6 @@ body.tc-body {
 	background-color: <<colour page-background>>;
 	word-wrap: break-word;
 	<<custom-background-datauri>>
-}
-
-body.tc-body.tc-single-tiddler-window {
-	margin: 1em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -345,6 +350,7 @@ button svg, button img {
 	height: 2em;
 	width: 2em;
 	vertical-align: middle;
+	fill: <<colour download-foreground>>;
 }
 
 .tc-sidebar-lists input {
@@ -819,6 +825,59 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-titlebar, .tc-tiddler-edit-title {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+}
+
+html body.tc-body.tc-single-tiddler-window {
+	margin: 1em;
+	background: <<colour tiddler-background>>;
+}
+
+/*
+** Adjustments for fluid-fixed mode
+*/
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+<<if-fluid-fixed text:"""
+
+	.tc-story-river {
+		padding-right: 0;
+		position: relative;
+		width: auto;
+		left: 0;
+		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+	.tc-tiddler-frame {
+		width: 100%;
+	}
+
+	.tc-sidebar-scrollable {
+		left: auto;
+		bottom: 0;
+		right: 0;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 42px);
+	}
+
+""" hiddenSidebarText:"""
+
+	.tc-story-river {
+		padding-right: 3em;
+		margin-right: 0;
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 84px);
+	}
+
+""">>
+
 }
 
 /*
@@ -1740,6 +1799,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	opacity: 1;
     min-width: 100%;
     min-height: 100%;
+    max-width: 100%;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,

@@ -18,7 +18,11 @@ exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
 
+// Global to keep track of open windows (hashmap by title)
+var windows = {};
+
 exports.startup = function() {
+	// Handle open window message
 	$tw.rootWidget.addEventListener("tm-open-window",function(event) {
 		// Get the parameters
 		var refreshHandler,
@@ -30,6 +34,7 @@ exports.startup = function() {
 		// Open the window
 		var srcWindow = window.open("","external-" + title,"width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
+		windows[title] = srcWindow;
 		// Check for reopening the same window
 		if(srcWindow.haveInitialisedWindow) {
 			return;
@@ -39,6 +44,7 @@ exports.startup = function() {
 		srcDocument.close();
 		srcDocument.title = title;
 		srcWindow.addEventListener("beforeunload",function(event) {
+			delete windows[title];
 			$tw.wiki.removeEventListener("change",refreshHandler);
 		},false);
 		// Set up the styles
@@ -50,8 +56,8 @@ exports.startup = function() {
 		srcDocument.head.insertBefore(styleElement,srcDocument.head.firstChild);
 		// Render the text of the tiddler
 		var parser = $tw.wiki.parseTiddler(template),
-			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, variables: {currentTiddler: title}});
-		widgetNode.render(srcDocument.body,null);
+			widgetNode = $tw.wiki.makeWidget(parser,{document: srcDocument, parentWidget: $tw.rootWidget, variables: {currentTiddler: title}});
+		widgetNode.render(srcDocument.body,srcDocument.body.firstChild);
 		// Function to handle refreshes
 		refreshHandler = function(changes) {
 			if(styleWidgetNode.refresh(changes,styleContainer,null)) {
@@ -62,6 +68,13 @@ exports.startup = function() {
 		$tw.wiki.addEventListener("change",refreshHandler);
 		srcWindow.haveInitialisedWindow = true;
 	});
+	// Close open windows when unloading main window
+	$tw.addUnloadTask(function() {
+		$tw.utils.each(windows,function(win) {
+			win.close();
+		});
+	});
+
 };
 
 })();

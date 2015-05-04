@@ -85,11 +85,6 @@ NavigatorWidget.prototype.saveStoryList = function(storyList) {
 	));
 };
 
-NavigatorWidget.prototype.findTitleInStory = function(storyList,title,defaultIndex) {
-	var p = storyList.indexOf(title);
-	return p === -1 ? defaultIndex : p;
-};
-
 NavigatorWidget.prototype.removeTitleFromStory = function(storyList,title) {
 	var p = storyList.indexOf(title);
 	while(p !== -1) {
@@ -115,19 +110,52 @@ NavigatorWidget.prototype.replaceFirstTitleInStory = function(storyList,oldTitle
 
 NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	var storyList = this.getStoryList();
-	if(storyList) {
-		// See if the tiddler is already there
-		var slot = this.findTitleInStory(storyList,title,-1);
-		// If not we need to add it
-		if(slot === -1) {
-			// First we try to find the position of the story element we navigated from
-			slot = this.findTitleInStory(storyList,fromTitle,-1) + 1;
-			// Add the tiddler
-			storyList.splice(slot,0,title);
-			// Save the story
-			this.saveStoryList(storyList);
+	// Quit if we cannot get hold of the story list
+	if(!storyList) {
+		return;
+	}
+	// See if the tiddler is already there
+	var slot = storyList.indexOf(title);
+	// Quit if it already exists in the story river
+	if(slot >= 0) {
+		return;
+	}
+	// First we try to find the position of the story element we navigated from
+	var fromIndex = storyList.indexOf(fromTitle);
+	if(fromIndex >= 0) {
+		// How to open internal links that were clicked from *within* the story river?
+		var openLinkFromInsideRiver = $tw.wiki.getTiddlerText("$:/config/Navigation/openLinkFromInsideRiver","below");
+		// The tiddler is added from inside the river
+		// Determine where to insert the tiddler; Fallback is "below"
+		switch(openLinkFromInsideRiver) {
+			case "top":
+				slot = 0;
+				break;
+			case "bottom":
+				slot = storyList.length;
+				break;
+			case "above":
+				slot = fromIndex;
+				break;
+			default:
+				slot = fromIndex + 1;
+		}
+	} else {
+		// The tiddler is opened from outside the river.
+		var openLinkFromOutsideRiver = $tw.wiki.getTiddlerText("$:/config/Navigation/openLinkFromOutsideRiver","top");
+		// Determine where to insert the tiddler; Default is "top"
+		if(openLinkFromOutsideRiver === "bottom") {
+			// Insert at bottom
+			slot = storyList.length;
+		} else {
+			// Insert at top
+			slot = 0;
 		}
 	}
+	// Add the tiddler
+	storyList.splice(slot,0,title);
+	// Save the story
+	this.saveStoryList(storyList);
 };
 
 /*
