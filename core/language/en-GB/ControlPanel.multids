@@ -88,6 +88,13 @@ Settings/ToolbarButtons/Icons/Description: Include icon
 Settings/ToolbarButtons/Text/Description: Include text
 Settings/DefaultSidebarTab/Caption: Default Sidebar Tab
 Settings/DefaultSidebarTab/Hint: Specify which sidebar tab is displayed by default
+Settings/LinkToBehaviour/Caption: Internal link opening behaviour
+Settings/LinkToBehaviour/InsideRiver/Hint: Click occurred //within// the story river
+Settings/LinkToBehaviour/OutsideRiver/Hint: Click occurred //outside// the story river
+Settings/LinkToBehaviour/OpenAbove: Open above the current tiddler
+Settings/LinkToBehaviour/OpenBelow: Open below the current tiddler
+Settings/LinkToBehaviour/OpenAtTop: Open at the top of the river
+Settings/LinkToBehaviour/OpenAtBottom: Open at the bottom of the river
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Theme/Caption: Theme
