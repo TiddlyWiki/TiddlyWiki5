@@ -32,7 +32,7 @@ exports.startup = function() {
 			width = paramObject.width || "700",
 			height = paramObject.height || "600";
 		// Open the window
-		var srcWindow = window.open("","external-" + title,"width=" + width + ",height=" + height),
+		var srcWindow = window.open("","external-" + title,"scrollbars,width=" + width + ",height=" + height),
 			srcDocument = srcWindow.document;
 		windows[title] = srcWindow;
 		// Check for reopening the same window
