@@ -1104,6 +1104,19 @@ html body.tc-body.tc-single-tiddler-window {
 	line-height: 1.4;
 }
 
+.tc-drop-down .tc-prompt {
+	padding: 0 14px;	
+}
+
+.tc-drop-down .tc-chooser {
+	border: none;
+}
+
+.tc-drop-down .tc-chooser .tc-swatches-horiz {
+	font-size: 0.4em;
+	padding-left: 1.2em;
+}
+
 .tc-drop-down .tc-file-input-wrapper {
 	width: 100%;
 }
@@ -1608,8 +1621,8 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 .tc-swatch {
 	width: 2em;
 	height: 2em;
-	margin: 4px;
-	border: 1px solid #000;
+	margin: 0.4em;
+	border: 1px solid #888;
 }
 
 /*

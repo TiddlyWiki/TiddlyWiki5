@@ -54,6 +54,8 @@ NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
 OpenWindow/Caption: open in new window
 OpenWindow/Hint: Open tiddler in new window
+Palette/Caption: palette
+Palette/Hint: Choose the colour palette
 Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
