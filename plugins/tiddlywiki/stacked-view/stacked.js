@@ -47,6 +47,8 @@ StackedListView.prototype.placeTiddlers = function() {
 		itemWidget = this.listWidget.children[t];
 		var domNode = itemWidget.findFirstDomNode();
 		if(domNode instanceof Element) {
+			// Allows the width of the tiddler to be adjusted
+			$tw.utils.addClass(domNode,"tc-storyview-zoomin-tiddler");
 			// Find the position of the tiddler in the stack
 			var pos = this.listStack.indexOf(itemWidget.parseTreeNode.itemTitle);
 			if(pos !== -1) {
