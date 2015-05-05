@@ -1,5 +1,5 @@
 created: 20131028132700000
-modified: 20140912141152984
+modified: 20150505063640327
 tags: Features
 title: UsingSVG
 type: text/vnd.tiddlywiki
@@ -49,3 +49,7 @@ When embedding SVG elements you can also use WikiText features like transclusion
 <svg width="150" height="150"><circle cx="75" cy="75" r={{$:/SVGExampleRadius}} stroke="black" stroke-width="2" fill="green"/></svg>
 
 You can edit the value of the radius here: <$edit-text tiddler="$:/SVGExampleRadius" tag="input"/>
+
+! Making curved text with SVG
+
+{{Making curved text with SVG}}

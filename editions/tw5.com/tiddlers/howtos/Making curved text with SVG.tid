@@ -1,5 +1,5 @@
 created: 20140324223413403
-modified: 20140919161431562
+modified: 20150505063713581
 tags: Learning
 title: Making curved text with SVG
 type: text/vnd.tiddlywiki
@@ -19,7 +19,7 @@ $text$
 </svg>
 $$$
 \end
-This demo shows how to use SVG to render transcluded text along a path. Enter some text in the textbox below to try it out; view the source to see how it is done.
+This demo shows how to use SVG to render transcluded text along a path. Enter some text in the textbox below to try it out; [[view the source|Making curved text with SVG]] to see how it is done.
 
 <$edit-text tiddler="$:/CurvedText" tag="input" placeholder="Type text here" default=""/>
 
