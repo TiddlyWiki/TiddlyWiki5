@@ -75,6 +75,13 @@ Settings/Caption: 設定
 Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
 Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
 Settings/Hint: 這些進階設定讓您自訂 TiddlyWiki 的行為。
+Settings/LinkToBehaviour/Caption: 條目開啟行為
+Settings/LinkToBehaviour/InsideRiver/Hint: 從故事河//中//導航
+Settings/LinkToBehaviour/OutsideRiver/Hint: 從故事河//外//導航
+Settings/LinkToBehaviour/OpenAbove: 開啟於當前條目之上
+Settings/LinkToBehaviour/OpenBelow: 開啟於當前條目之下
+Settings/LinkToBehaviour/OpenAtTop: 開啟於故事河的頂端
+Settings/LinkToBehaviour/OpenAtBottom: 開啟於故事河的底部
 Settings/NavigationAddressBar/Caption: 網址列導覽
 Settings/NavigationAddressBar/Hint: 在瀏覽器網址列導覽到條目時的行為：
 Settings/NavigationAddressBar/No/Description: 不更新網址列

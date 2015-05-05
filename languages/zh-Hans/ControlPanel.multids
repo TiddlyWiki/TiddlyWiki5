@@ -75,6 +75,13 @@ Settings/Caption: 设置
 Settings/DefaultSidebarTab/Caption: 默认侧边栏页签
 Settings/DefaultSidebarTab/Hint: 指定默认显示的侧边栏页签
 Settings/Hint: 这些高级设置让您定制 TiddlyWiki 的行为。
+Settings/LinkToBehaviour/Caption: 条目开启行为
+Settings/LinkToBehaviour/InsideRiver/Hint: 从故事河//中//导航
+Settings/LinkToBehaviour/OutsideRiver/Hint: 从故事河//外//导航
+Settings/LinkToBehaviour/OpenAbove: 开启于当前条目之上
+Settings/LinkToBehaviour/OpenBelow: 开启于当前条目之下
+Settings/LinkToBehaviour/OpenAtTop: 开启于故事河的顶端
+Settings/LinkToBehaviour/OpenAtBottom: 开启于故事河的底部
 Settings/NavigationAddressBar/Caption: 网址栏导览
 Settings/NavigationAddressBar/Hint: 在浏览器网址栏导览到条目时的行为：
 Settings/NavigationAddressBar/No/Description: 不更新网址栏
