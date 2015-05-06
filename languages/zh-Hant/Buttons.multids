@@ -54,6 +54,8 @@ NewTiddler/Caption: 新增條目
 NewTiddler/Hint: 建立一個新的條目
 OpenWindow/Caption: 開啟於新視窗
 OpenWindow/Hint: 在新視窗中開啟條目
+Palette/Caption: 調色盤
+Palette/Hint: 選擇調色盤
 Permalink/Caption: 引用連結
 Permalink/Hint: 設定瀏覽器網址列為直接連結到此條目
 Permaview/Caption: 固定連結
