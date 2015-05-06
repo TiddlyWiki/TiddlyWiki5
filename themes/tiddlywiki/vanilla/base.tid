@@ -832,6 +832,14 @@ html body.tc-body.tc-single-tiddler-window {
 	background: <<colour tiddler-background>>;
 }
 
+.tc-single-tiddler-window img,
+.tc-single-tiddler-window svg,
+.tc-single-tiddler-window canvas,
+.tc-single-tiddler-window embed,
+.tc-single-tiddler-window iframe {
+	max-width: 100%;
+}
+
 /*
 ** Adjustments for fluid-fixed mode
 */
