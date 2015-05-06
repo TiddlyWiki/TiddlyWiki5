@@ -67,7 +67,13 @@ SendMessageWidget.prototype.invokeAction = function(triggeringWidget,event) {
 		}
 	});
 	// Dispatch the message
-	this.dispatchEvent({type: this.actionMessage, param: param, paramObject: paramObject, tiddlerTitle: this.getVariable("currentTiddler")});
+	this.dispatchEvent({
+		type: this.actionMessage,
+		param: param,
+		paramObject: paramObject,
+		tiddlerTitle: this.getVariable("currentTiddler"),
+		navigateFromTitle: this.getVariable("storyTiddler")
+	});
 	return true; // Action was invoked
 };
 
