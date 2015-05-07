@@ -6,15 +6,14 @@ caption: vars
 
 ! Introduction
 
-The ''vars'' widget allows you to set multiple variables in one go. It thereby reduces code complexity that would arise when setting
-many variables using the [[SetWidget]].
+The ''vars'' widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible SetWidget.
 
 ! Content and Attributes
 
 The content of the `<$vars>` widget is the scope for the value assigned to the variable.
 
 |!Attribute |!Description |
-|//{attributes not starting with $}// |Each attribute name specifies a variable name. The attribute value is used as variable assignement |
+|//{attributes not starting with $}// |Each attribute name specifies a variable name. The attribute value is assigned to the variable |
 
 ! Examples
 
@@ -30,7 +29,7 @@ Using the `<$vars>` widget, this situation may be handled in the following way:
 </$vars>
 ```
 
-In contrast, here is the same example, but using the `<$set>` widget instead:
+In contrast, here is the same example using the `<$set>` widget:
 
 ```
 <$set name="greeting" value="Hi" />
@@ -42,11 +41,10 @@ In contrast, here is the same example, but using the `<$set>` widget instead:
 </$set>
 ```
 
-
 ! Remarks
 
 It should be noted that this widget differs from the set widget in the following ways:
 
-* You cannot specify a fallback (also known as "emptyValue")
-* You cannot use a filter to produce a conditional variable assignement
-
+* A fallback (also known as "emptyValue") cannot be specified
+* Filters cannot be used to produce a conditional variable assignement
+* Variable names must be literal strings

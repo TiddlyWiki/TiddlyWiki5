@@ -3,7 +3,7 @@ title: $:/core/modules/widgets/vars.js
 type: application/javascript
 module-type: widget
 
-This widget allows the user to set multiple variables in one go.
+This widget allows multiple variables to be set in one go:
 
 ```
 \define helloworld() Hello world!
