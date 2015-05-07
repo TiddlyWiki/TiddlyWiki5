@@ -294,7 +294,9 @@ $tw.utils.parseFields = function(text,fields) {
 			if(p !== -1) {
 				var field = line.substr(0, p).trim(),
 					value = line.substr(p+1).trim();
-				fields[field] = value;
+				if(field) {
+					fields[field] = value;
+				}
 			}
 		}
 	});
