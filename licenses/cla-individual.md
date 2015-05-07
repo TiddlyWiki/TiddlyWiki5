@@ -222,3 +222,5 @@ Andreas Abeck, @andreasabeck 2015/03/18
 Hong-Yi Dai, @reflectionalist 2015/04/04
 
 heroboy, @heroboy 2015/04/19
+
+vouko, @vouko 2015/05/02
