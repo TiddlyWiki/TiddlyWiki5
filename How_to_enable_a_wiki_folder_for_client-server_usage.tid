@@ -1,0 +1,18 @@
+created: 20150508053852097
+modified: 20150508104508841
+tags: [[TiddlyWiki on Node.js]]
+title: How to enable a wiki folder for client-server usage
+type: text/vnd.tiddlywiki
+
+# First install TiddlyWiki as described in [[Installing TiddlyWiki on Node.js]].
+# Then edit the `tiddlywiki.info` file present in the new wiki folder:<br /><br />
+## In the `plugins` section, add those lines:
+#> `"tiddlywiki/tiddlyweb",
+"tiddlywiki/filesystem",`
+# Save the wiki then exit the process in the terminal and re-launch it in order for this take effect.<br /><br />
+# To check if the modifications are functionnals:
+#> Once you have re-launched your wiki, check for the presence of the plugins in the control panel, make sure they are not disabled.
+#>And / or
+#> Check for scrolling text in the opened terminal, under: <br />`Serving on 127.0.0.1:8080 (press ctrl-C to exit)`
+
+@@color: orange; ⚠@@ Annoyingly, the plugin library can't be used to install these components under [[Node.js]], one has to edit the `tiddlywiki.info` file.
