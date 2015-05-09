@@ -92,6 +92,19 @@ Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" d
 </$list>
 \end
 
+\define close-library-button()
+<$reveal type='nomatch' state='$:/temp/ServerConnection/$(PluginLibraryURL)$' text=''>
+<$navigator story='$:/StoryList' history='$:/HistoryList'>
+<$button class='tc-btn-big-green' style='font-size:small'>
+{{$:/core/images/close-button}}Close Library
+<$list filter='[prefix[$:/temp/ServerConnection/$(PluginLibraryURL)$]][prefix[$:/temp/RemoteAssetInfo/$(PluginLibraryURL)$]]'>
+<$action-sendmessage $message='tm-delete-tiddler' $param=<<currentTiddler>>/>
+</$list>
+</$button>
+</$navigator>
+</$reveal>
+\end
+
 \define plugin-library-listing()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
 <div class="tc-plugin-library">
@@ -99,6 +112,10 @@ Search: <$edit-text tiddler="""$:/temp/RemoteAssetSearch/$(currentTiddler)$""" d
 !! <$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
 
 //<$view field="url"/>//
+
+<$set name=PluginLibraryURL value={{!!url}}>
+<<close-library-button>>
+</$set>
 
 <$transclude/>
 
