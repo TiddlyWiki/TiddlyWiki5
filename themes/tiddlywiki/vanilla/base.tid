@@ -1041,7 +1041,14 @@ html body.tc-body.tc-single-tiddler-window {
 	position: absolute;
 	display: block;
 	width: 100%;
-	width: calc(100% - 84px);
+}
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tc-storyview-zoomin-tiddler {
+		width: calc(100% - 84px);
+	}
+
 }
 
 /*
