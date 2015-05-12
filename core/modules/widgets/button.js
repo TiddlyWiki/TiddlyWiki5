@@ -107,11 +107,10 @@ ButtonWidget.prototype.allowActionPropagation = function() {
 
 ButtonWidget.prototype.getBoundingClientRect = function() {
 	return this.domNodes[0].getBoundingClientRect();
-}
+};
 
 ButtonWidget.prototype.isSelected = function() {
-	var tiddler = this.wiki.getTiddler(this.set);
-	return tiddler ? tiddler.fields.text === this.setTo : this.defaultSetValue === this.setTo;
+        return this.wiki.getTextReference(this.set,"",this.getVariable("currentTiddler")) === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
