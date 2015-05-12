@@ -18,7 +18,7 @@ The reveal widget hides or shows its content depending upon the value of a [[sta
 The content of the `<$reveal>` widget is displayed according to the rules given above.
 
 |!Attribute |!Description |
-|state |The title of the tiddler containing the state |
+|state |A TextReference containing the state |
 |tag |Overrides the default HTML element tag (`<div>` in block mode or `<span>` in inline mode) |
 |type |The type of matching performed: ''match'', ''nomatch'' or ''popup'' |
 |text |The text to match when the type is ''match'' and ''nomatch'' |
