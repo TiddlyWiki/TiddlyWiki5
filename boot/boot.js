@@ -883,6 +883,8 @@ $tw.Wiki = function(options) {
 
 	// Delete a tiddler
 	this.deleteTiddler = function(title) {
+// Uncomment the following line for detailed logs of all tiddler deletions
+// console.log("Deleting",title,tiddler)
 		delete tiddlers[title];
 		this.clearCache(title);
 		this.clearGlobalCache();
