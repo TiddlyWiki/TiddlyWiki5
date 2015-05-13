@@ -1,16 +1,14 @@
 created: 20131211220000000
 creator: pmario
-modified: 20141012141931383
+modified: 20150513161608996
 modifier: pmario
 tags: howto
 title: Speichern mit TiddlyIE
 type: text/vnd.tiddlywiki
 
-!! Video
+!! Speichern mit TiddlyIE
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/OrWuvjs3Ly0" frameborder="0" allowfullscreen></iframe>
-
-!! Speichern mit TiddlyIE
 
 # Installieren Sie TiddlyIE AddOn von:
 #* https://github.com/davidjade/TiddlyIE/releases
