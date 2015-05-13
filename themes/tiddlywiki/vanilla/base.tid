@@ -71,6 +71,7 @@ body.tc-body {
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
+	fill: <<colour foreground>>;
 	word-wrap: break-word;
 	<<custom-background-datauri>>
 }
@@ -128,10 +129,6 @@ input:not([type]) {
 
 .tc-muted {
 	color: <<colour muted-foreground>>;
-}
-
-svg {
-	fill: <<colour foreground>>;
 }
 
 svg.tc-image-button {
