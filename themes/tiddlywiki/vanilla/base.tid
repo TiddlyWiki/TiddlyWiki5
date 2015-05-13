@@ -1120,16 +1120,7 @@ html body.tc-body.tc-single-tiddler-window {
 }
 
 .tc-drop-down .tc-prompt {
-	padding: 0 14px;	
-}
-
-.tc-drop-down .tc-chooser {
-	border: none;
-}
-
-.tc-drop-down .tc-chooser .tc-swatches-horiz {
-	font-size: 0.4em;
-	padding-left: 1.2em;
+	padding: 0 14px;
 }
 
 .tc-drop-down .tc-file-input-wrapper {
@@ -1601,11 +1592,9 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 */
 
 .tc-chooser {
-	border: 1px solid <<colour table-border>>;
 }
 
 .tc-chooser-item {
-	border: 8px;
 	padding: 2px 4px;
 }
 
@@ -1627,6 +1616,7 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 */
 
 .tc-swatches-horiz {
+	padding: 4px;
 }
 
 .tc-swatches-horiz .tc-swatch {
@@ -1636,7 +1626,7 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 .tc-swatch {
 	width: 2em;
 	height: 2em;
-	margin: 0.4em;
+	margin-right: 1em;
 	border: 1px solid #888;
 }
 
