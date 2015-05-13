@@ -1606,6 +1606,7 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 
 .tc-chooser-item {
 	border: 8px;
+	padding: 2px 4px;
 }
 
 .tc-chooser-item a.tc-tiddlylink {
@@ -1613,7 +1614,6 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
 	background-color: <<colour tiddler-link-background>>;
-	margin: 4px;
 }
 
 .tc-chooser-item a.tc-tiddlylink:hover {
