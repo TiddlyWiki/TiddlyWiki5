@@ -110,7 +110,7 @@ ButtonWidget.prototype.getBoundingClientRect = function() {
 };
 
 ButtonWidget.prototype.isSelected = function() {
-        return this.wiki.getTextReference(this.set,"",this.getVariable("currentTiddler")) === this.setTo;
+    return this.wiki.getTextReference(this.set,this.defaultSetValue,this.getVariable("currentTiddler")) === this.setTo;
 };
 
 ButtonWidget.prototype.isPoppedUp = function() {
@@ -165,7 +165,7 @@ ButtonWidget.prototype.execute = function() {
 	this.tooltip = this.getAttribute("tooltip");
 	this.style = this.getAttribute("style");
 	this.selectedClass = this.getAttribute("selectedClass");
-	this.defaultSetValue = this.getAttribute("default");
+	this.defaultSetValue = this.getAttribute("default","");
 	this.buttonTag = this.getAttribute("tag");
 	// Make child widgets
 	this.makeChildWidgets();
