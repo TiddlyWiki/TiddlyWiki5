@@ -100,7 +100,7 @@ code {
 	color: <<colour code-foreground>>;
 	background-color: <<colour code-background>>;
 	border: 1px solid <<colour code-border>>;
-    white-space: pre-wrap;
+	white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
@@ -1816,7 +1816,7 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 }
 
 .tc-thumbnail-image {
-    text-align: center;
+	text-align: center;
 	overflow: hidden;
 	border-radius: 3px;
 }
@@ -1825,9 +1825,9 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-thumbnail-image img {
 	filter: alpha(opacity=1);
 	opacity: 1;
-    min-width: 100%;
-    min-height: 100%;
-    max-width: 100%;
+	min-width: 100%;
+	min-height: 100%;
+	max-width: 100%;
 }
 
 .tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
@@ -1894,4 +1894,26 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 .tc-error {
 	background: #f00;
 	color: #fff;
+}
+
+/*
+** Parse trees
+*/
+
+.tc-parse-tree ol {
+	list-style: none;
+}
+
+.tc-parse-tree-text {
+	background: #f0f0f0;
+	padding: 2px;
+}
+
+.tc-parse-tree-newline {
+	padding: 2px 2px 0px 2px;
+	border-radius: 16px;
+	background: #fbb1b1;
+	color: #fff;
+	font-size: 0.7em;
+	margin: 0 3px;
 }
