@@ -87,7 +87,14 @@ Settings/ToolbarButtons/Hint: Standard Toolbar Button Erscheinungsbild:
 Settings/ToolbarButtons/Icons/Description: Icon anzeigen
 Settings/ToolbarButtons/Text/Description: Text anzeigen
 Settings/DefaultSidebarTab/Caption: Standard Sidebar Tab
-Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktive ist.
+Settings/DefaultSidebarTab/Hint: Definition, welcher Sidebar Tab standardmäßig aktiv ist.
+Settings/LinkToBehaviour/Caption: Tiddler Öffnen
+Settings/LinkToBehaviour/InsideRiver/Hint: Navigation bei Klicks //innerhalb// der Story
+Settings/LinkToBehaviour/OutsideRiver/Hint: Navigation bei Klicks //außerhalb// der Story
+Settings/LinkToBehaviour/OpenAbove: Öffne vor dem aktuellen Tiddler
+Settings/LinkToBehaviour/OpenBelow: Öffne unter dem aktuellen Tiddler
+Settings/LinkToBehaviour/OpenAtTop: Öffne als ersten Tiddler in der Story
+Settings/LinkToBehaviour/OpenAtBottom: Öffne alse letzten Tiddler in der Story
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Theme

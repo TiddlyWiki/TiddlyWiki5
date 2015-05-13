@@ -52,14 +52,18 @@ NewJournalHere/Caption: Neues Journal Hier
 NewJournalHere/Hint: Erstelle ein neues Journal der mit diesem getaggt ist
 NewTiddler/Caption: Neuer Tiddler
 NewTiddler/Hint: Erstelle einen neuen Tiddler
+OpenWindow/Caption: Öffne in Neuem Fenster
+OpenWindow/Hint: Öffne diesen Tiddler in einem neuen Fenster
+Palette/Caption: Palette
+Palette/Hint: Wähle eine Farbpalette
 Permalink/Caption: Permalink
 Permalink/Hint: Die Adressleiste des Browsers enthält einen Link zu diesem Tiddler
 Permaview/Caption: Permaview
 Permaview/Hint: Die Adressleiste des Browsers enthält einen Link zu allen offenen Tiddlern in dieser [[Story]]
 Refresh/Caption: Aktualisieren
 Refresh/Hint: Die Seite wird neu in den Browser geladen
-Save/Caption: Speichern
-Save/Hint: Speichere diesen Tiddler
+Save/Caption: Fertig
+Save/Hint: Änderungen für diesen Tiddler bestätigen
 SaveWiki/Caption: Speichern
 SaveWiki/Hint: Das Wiki speichern
 StoryView/Caption: Story-Modus
