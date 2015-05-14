@@ -135,6 +135,20 @@ svg.tc-image-button {
 	padding: 0px 1px 1px 0px;
 }
 
+kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font-size: 0.8em;
+	line-height: 1.2;
+	color: <<colour foreground>>;
+	vertical-align: middle;
+	background-color: <<colour background>>;
+	border: solid 1px <<colour muted-foreground>>;
+	border-bottom-color: <<colour muted-foreground>>;
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
+}
+
 /*
 Markdown likes putting code elements inside pre elements
 */
