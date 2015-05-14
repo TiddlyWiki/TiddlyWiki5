@@ -6,6 +6,9 @@ alert-highlight: Surlignage pour les alertes
 alert-muted-foreground: Fond atténué pour les alertes
 background: Couleur de fond générale
 blockquote-bar: Barre de citation
+button-background: Fond du bouton par défaut
+button-border: Bordure du bouton par défaut
+button-foreground: Premier plan du bouton par défaut
 code-background: Fond pour le code
 code-border: Bordure pour le code
 code-foreground: Premier plan pour le code
