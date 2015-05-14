@@ -3,15 +3,28 @@ tags: $:/tags/ControlPanel/Info
 caption: {{$:/language/ControlPanel/Basics/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/Basics/
+
+\define show-filter-count(filter)
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/advancedsearch" $value="""$filter$"""/>
+<$action-setfield $tiddler="$:/state/tab--1498284803" $value="$:/core/ui/AdvancedSearch/Filter"/>
+<$action-navigate $to="$:/AdvancedSearch"/>
+''<$count filter="""$filter$"""/>''
+{{$:/core/images/advanced-search-button}}
+</$button>
+\end
+
 |<<lingo Version/Prompt>> |''<<version>>'' |
 |<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
 |<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
 |<$link to="$:/status/UserName"><<lingo Username/Prompt>></$link> |<$edit-text tiddler="$:/status/UserName" default="" tag="input"/> |
 |<$link to="$:/config/AnimationDuration"><<lingo AnimDuration/Prompt>></$link> |<$edit-text tiddler="$:/config/AnimationDuration" default="" tag="input"/> |
 |<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+|<$link to="$:/config/NewJournal/Title"><<lingo NewJournal/Title/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Title" default="" tag="input"/> |
+|<$link to="$:/config/NewJournal/Tags"><<lingo NewJournal/Tags/Prompt>></$link> |<$edit-text tiddler="$:/config/NewJournal/Tags" default="" tag="input"/> |
 |<<lingo Language/Prompt>> |{{$:/snippets/minilanguageswitcher}} |
-|<<lingo Tiddlers/Prompt>> |''<$count filter="[!is[system]]"/>'' |
-|<<lingo Tags/Prompt>> |''<$count filter="[tags[]]"/>'' |
-|<<lingo SystemTiddlers/Prompt>> |''<$count filter="[is[system]]"/>'' |
-|<<lingo ShadowTiddlers/Prompt>> |''<$count filter="[all[shadows]]"/>'' |
-|<<lingo OverriddenShadowTiddlers/Prompt>> |''<$count filter="[is[tiddler]is[shadow]]"/>'' |
+|<<lingo Tiddlers/Prompt>> |<<show-filter-count "[!is[system]sort[title]]">> |
+|<<lingo Tags/Prompt>> |<<show-filter-count "[tags[]sort[title]]">> |
+|<<lingo SystemTiddlers/Prompt>> |<<show-filter-count "[is[system]sort[title]]">> |
+|<<lingo ShadowTiddlers/Prompt>> |<<show-filter-count "[all[shadows]sort[title]]">> |
+|<<lingo OverriddenShadowTiddlers/Prompt>> |<<show-filter-count "[is[tiddler]is[shadow]sort[title]]">> |

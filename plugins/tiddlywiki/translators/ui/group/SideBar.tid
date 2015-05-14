@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/SideBar
+caption: Sidebar
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/SideBar/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/SideBar/]]
+\end
+
+! Sidebar
+
+Sidebar-related translatable strings.
+
+<<translatableStringEditor>>

@@ -1,0 +1,10 @@
+title: $:/language/Help/help
+description: Zobraz nápovedu pre TiddlyWiki príkazy
+
+Zobrazí nápovedu pre príkaz:
+
+```
+--help [<command>]
+```
+
+Ak sa vynechá názov príkazu, tak sa zobrazí zoznam všetkých existujúcich príkazov.

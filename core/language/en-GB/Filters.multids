@@ -1,6 +1,7 @@
 title: $:/language/Filters/
 
 AllTiddlers: All tiddlers except system tiddlers
+RecentSystemTiddlers: Recently modified tiddlers, including system tiddlers
 RecentTiddlers: Recently modified tiddlers
 AllTags: All tags except system tags
 Missing: Missing tiddlers
@@ -10,3 +11,4 @@ SystemTiddlers: System tiddlers
 ShadowTiddlers: Shadow tiddlers
 OverriddenShadowTiddlers: Overridden shadow tiddlers
 SystemTags: System tags
+TypedTiddlers: Non wiki-text tiddlers

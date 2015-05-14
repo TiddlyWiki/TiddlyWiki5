@@ -13,6 +13,13 @@ Various static utility functions.
 "use strict";
 
 /*
+Display a warning, in colour if we're on a terminal
+*/
+exports.warning = function(text) {
+	console.log($tw.node ? "\x1b[1;33m" + text + "\x1b[0m" : text);
+}
+
+/*
 Trim whitespace from the start and end of a string
 Thanks to Steven Levithan, http://blog.stevenlevithan.com/archives/faster-trim-javascript
 */
@@ -87,6 +94,7 @@ exports.pushTop = function(array,value) {
 		}
 		array.push(value);
 	}
+	return array;
 };
 
 /*
@@ -167,61 +175,138 @@ exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
 
-exports.formatDateString = function (date,template) {
-	var t = template.replace(/0hh12/g,$tw.utils.pad($tw.utils.getHours12(date)));
-	t = t.replace(/hh12/g,$tw.utils.getHours12(date));
-	t = t.replace(/0hh/g,$tw.utils.pad(date.getHours()));
-	t = t.replace(/hh/g,date.getHours());
-	t = t.replace(/mmm/g,$tw.config.dateFormats.shortMonths[date.getMonth()]);
-	t = t.replace(/0mm/g,$tw.utils.pad(date.getMinutes()));
-	t = t.replace(/mm/g,date.getMinutes());
-	t = t.replace(/0ss/g,$tw.utils.pad(date.getSeconds()));
-	t = t.replace(/ss/g,date.getSeconds());
-	t = t.replace(/[ap]m/g,$tw.utils.getAmPm(date).toLowerCase());
-	t = t.replace(/[AP]M/g,$tw.utils.getAmPm(date).toUpperCase());
-	t = t.replace(/wYYYY/g,$tw.utils.getYearForWeekNo(date));
-	t = t.replace(/wYY/g,$tw.utils.pad($tw.utils.getYearForWeekNo(date)-2000));
-	t = t.replace(/YYYY/g,date.getFullYear());
-	t = t.replace(/YY/g,$tw.utils.pad(date.getFullYear()-2000));
-	t = t.replace(/MMM/g,$tw.config.dateFormats.months[date.getMonth()]);
-	t = t.replace(/0MM/g,$tw.utils.pad(date.getMonth()+1));
-	t = t.replace(/MM/g,date.getMonth()+1);
-	t = t.replace(/0WW/g,$tw.utils.pad($tw.utils.getWeek(date)));
-	t = t.replace(/WW/g,$tw.utils.getWeek(date));
-	t = t.replace(/DDD/g,$tw.config.dateFormats.days[date.getDay()]);
-	t = t.replace(/ddd/g,$tw.config.dateFormats.shortDays[date.getDay()]);
-	t = t.replace(/0DD/g,$tw.utils.pad(date.getDate()));
-	t = t.replace(/DDth/g,date.getDate()+$tw.utils.getDaySuffix(date));
-	t = t.replace(/DD/g,date.getDate());
-	var tz = date.getTimezoneOffset();
-	var atz = Math.abs(tz);
-	t = t.replace(/TZD/g,(tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60));
-	t = t.replace(/\\(.)/g,"$1");
-	return t;
+exports.formatDateString = function(date,template) {
+	var result = "",
+		t = template,
+		matches = [
+			[/^0hh12/, function() {
+				return $tw.utils.pad($tw.utils.getHours12(date));
+			}],
+			[/^wYYYY/, function() {
+				return $tw.utils.getYearForWeekNo(date);
+			}],
+			[/^hh12/, function() {
+				return $tw.utils.getHours12(date);
+			}],
+			[/^DDth/, function() {
+				return date.getDate() + $tw.utils.getDaySuffix(date);
+			}],
+			[/^YYYY/, function() {
+				return date.getFullYear();
+			}],
+			[/^0hh/, function() {
+				return $tw.utils.pad(date.getHours());
+			}],
+			[/^0mm/, function() {
+				return $tw.utils.pad(date.getMinutes());
+			}],
+			[/^0ss/, function() {
+				return $tw.utils.pad(date.getSeconds());
+			}],
+			[/^0DD/, function() {
+				return $tw.utils.pad(date.getDate());
+			}],
+			[/^0MM/, function() {
+				return $tw.utils.pad(date.getMonth()+1);
+			}],
+			[/^0WW/, function() {
+				return $tw.utils.pad($tw.utils.getWeek(date));
+			}],
+			[/^ddd/, function() {
+				return $tw.language.getString("Date/Short/Day/" + date.getDay());
+			}],
+			[/^mmm/, function() {
+				return $tw.language.getString("Date/Short/Month/" + (date.getMonth() + 1));
+			}],
+			[/^DDD/, function() {
+				return $tw.language.getString("Date/Long/Day/" + date.getDay());
+			}],
+			[/^MMM/, function() {
+				return $tw.language.getString("Date/Long/Month/" + (date.getMonth() + 1));
+			}],
+			[/^TZD/, function() {
+				var tz = date.getTimezoneOffset(),
+				atz = Math.abs(tz);
+				return (tz < 0 ? '+' : '-') + $tw.utils.pad(Math.floor(atz / 60)) + ':' + $tw.utils.pad(atz % 60);
+			}],
+			[/^wYY/, function() {
+				return $tw.utils.pad($tw.utils.getYearForWeekNo(date) - 2000);
+			}],
+			[/^[ap]m/, function() {
+				return $tw.utils.getAmPm(date).toLowerCase();
+			}],
+			[/^hh/, function() {
+				return date.getHours();
+			}],
+			[/^mm/, function() {
+				return date.getMinutes();
+			}],
+			[/^ss/, function() {
+				return date.getSeconds();
+			}],
+			[/^[AP]M/, function() {
+				return $tw.utils.getAmPm(date).toUpperCase();
+			}],
+			[/^DD/, function() {
+				return date.getDate();
+			}],
+			[/^MM/, function() {
+				return date.getMonth() + 1;
+			}],
+			[/^WW/, function() {
+				return $tw.utils.getWeek(date);
+			}],
+			[/^YY/, function() {
+				return $tw.utils.pad(date.getFullYear() - 2000);
+			}]
+		];
+	while(t.length){
+		var matchString = "";
+		$tw.utils.each(matches, function(m) {
+			var match = m[0].exec(t);
+			if(match) {
+				matchString = m[1].call();
+				t = t.substr(match[0].length);
+				return false;
+			}
+		});
+		if(matchString) {
+			result += matchString;
+		} else {
+			result += t.charAt(0);
+			t = t.substr(1);
+		}
+	}
+	result = result.replace(/\\(.)/g,"$1");
+	return result;
 };
 
 exports.getAmPm = function(date) {
-	return date.getHours() >= 12 ? $tw.config.dateFormats.pm : $tw.config.dateFormats.am;
+	return $tw.language.getString("Date/Period/" + (date.getHours() >= 12 ? "pm" : "am"));
 };
 
 exports.getDaySuffix = function(date) {
-	return $tw.config.dateFormats.daySuffixes[date.getDate()-1];
+	return $tw.language.getString("Date/DaySuffix/" + date.getDate());
 };
 
 exports.getWeek = function(date) {
 	var dt = new Date(date.getTime());
 	var d = dt.getDay();
-	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
-	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week to calculate weekNo
-	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1)+3600000)/86400000);
-	return Math.floor(n/7)+1;
+	if(d === 0) {
+		d = 7; // JavaScript Sun=0, ISO Sun=7
+	}
+	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week to calculate weekNo
+	var n = Math.floor((dt.getTime()-new Date(dt.getFullYear(),0,1) + 3600000) / 86400000);
+	return Math.floor(n / 7) + 1;
 };
 
 exports.getYearForWeekNo = function(date) {
 	var dt = new Date(date.getTime());
 	var d = dt.getDay();
-	if(d === 0) d=7;// JavaScript Sun=0, ISO Sun=7
-	dt.setTime(dt.getTime()+(4-d)*86400000);// shift day to Thurs of same week
+	if(d === 0) {
+		d = 7; // JavaScript Sun=0, ISO Sun=7
+	}
+	dt.setTime(dt.getTime() + (4 - d) * 86400000);// shift day to Thurs of same week
 	return dt.getFullYear();
 };
 
@@ -278,7 +363,7 @@ exports.getRelativeDate = function(delta) {
 	};
 };
 
-// Convert & to "&amp;", < to "&lt;", > to "&gt;" and " to "&quot;"
+// Convert & to "&amp;", < to "&lt;", > to "&gt;", " to "&quot;"
 exports.htmlEncode = function(s) {
 	if(s) {
 		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
@@ -336,9 +421,9 @@ exports.stringify = function(s) {
 	* line separator, paragraph separator, and line feed. Any character may
 	* appear in the form of an escape sequence.
 	*
-	* For portability, we also escape escape all non-ASCII characters.
+	* For portability, we also escape all non-ASCII characters.
 	*/
-	return s
+	return (s || "")
 		.replace(/\\/g, '\\\\')            // backslash
 		.replace(/"/g, '\\"')              // double quote character
 		.replace(/'/g, "\\'")              // single quote character
@@ -354,9 +439,15 @@ exports.escapeRegExp = function(s) {
     return s.replace(/[\-\/\\\^\$\*\+\?\.\(\)\|\[\]\{\}]/g, '\\$&');
 };
 
+// Checks whether a link target is external, i.e. not a tiddler title
+exports.isLinkExternal = function(to) {
+	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
+	return externalRegExp.test(to);
+};
+
 exports.nextTick = function(fn) {
 /*global window: false */
-	if(typeof window !== "undefined") {
+	if(typeof process === "undefined") {
 		// Apparently it would be faster to use postMessage - http://dbaron.org/log/20100309-faster-timeouts
 		window.setTimeout(fn,4);
 	} else {
@@ -396,21 +487,31 @@ Returns an object with the following fields, all optional:
 */
 exports.parseTextReference = function(textRef) {
 	// Separate out the title, field name and/or JSON indices
-	var reTextRef = /^\s*([^!#]+)?(?:(?:!!([^\s]+))|(?:##(.+)))?\s*/mg,
-		match = reTextRef.exec(textRef);
+	var reTextRef = /(?:(.*?)!!(.+))|(?:(.*?)##(.+))|(.*)/mg,
+		match = reTextRef.exec(textRef),
+		result = {};
 	if(match && reTextRef.lastIndex === textRef.length) {
 		// Return the parts
-		return {
-			title: match[1],
-			field: match[2],
-			index: match[3]
-		};
+		if(match[1]) {
+			result.title = match[1];
+		}
+		if(match[2]) {
+			result.field = match[2];
+		}
+		if(match[3]) {
+			result.title = match[3];
+		}
+		if(match[4]) {
+			result.index = match[4];
+		}
+		if(match[5]) {
+			result.title = match[5];
+		}
 	} else {
-		// If we couldn't parse it (eg it started with a)
-		return {
-			title: textRef
-		};
+		// If we couldn't parse it
+		result.title = textRef
 	}
+	return result;
 };
 
 /*
@@ -429,28 +530,21 @@ exports.isValidFieldName = function(name) {
 Extract the version number from the meta tag or from the boot file
 */
 
-if($tw.browser) {
-
 // Browser version
 exports.extractVersionInfo = function() {
-	var metatags = document.getElementsByTagName("meta");
-	for(var t=0; t<metatags.length; t++) {
-		var m = metatags[t];
-		if(m.name === "tiddlywiki-version") {
-			return m.content;
+	if($tw.packageInfo) {
+		return $tw.packageInfo.version;
+	} else {
+		var metatags = document.getElementsByTagName("meta");
+		for(var t=0; t<metatags.length; t++) {
+			var m = metatags[t];
+			if(m.name === "tiddlywiki-version") {
+				return m.content;
+			}
 		}
 	}
 	return null;
 };
-
-} else {
-
-// Server version
-exports.extractVersionInfo = function() {
-	return $tw.packageInfo.version;
-};
-
-}
 
 /*
 Get the animation duration in ms
@@ -510,6 +604,22 @@ exports.timer = function(base) {
 		m = m - base;
 	}
 	return m;
+};
+
+/*
+Convert text and content type to a data URI
+*/
+exports.makeDataUri = function(text,type) {
+	type = type || "text/vnd.tiddlywiki";
+	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
+		isBase64 = typeInfo.encoding === "base64",
+		parts = [];
+	parts.push("data:");
+	parts.push(type);
+	parts.push(isBase64 ? ";base64" : "");
+	parts.push(",");
+	parts.push(isBase64 ? text : encodeURIComponent(text));
+	return parts.join("");
 };
 
 })();

@@ -1,0 +1,15 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: キャンセル
+Listing/Hint: インポートの準備ができたtiddler:
+Listing/Import/Caption: インポート
+Listing/Select/Caption: 選択
+Listing/Status/Caption: ステータス
+Listing/Title/Caption: タイトル
+Upgrader/Plugins/Suppressed/Incompatible: ブロックされた、互換性のないまたは廃止されたプラグイン
+Upgrader/Plugins/Suppressed/Version: ブロックされたプラグイン（インポートされる<<incoming>>プラグインが存在している<<existing>>プラグインより古いため）
+Upgrader/Plugins/Upgraded: <<incoming>> から <<upgraded>>にアップグレードされたプラグイン
+Upgrader/State/Suppressed: ブロックされた一時tiddler
+Upgrader/System/Suppressed: ブロックされたシステムtiddler
+Upgrader/ThemeTweaks/Created: <$text text=<<from>>/> から移動したtheme tweak
+

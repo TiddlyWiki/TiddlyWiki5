@@ -8,6 +8,6 @@ description: {{$:/language/Buttons/Cancel/Hint}}
 {{$:/core/images/cancel-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Cancel/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Cancel/Caption}}/></span>
 </$list>
 </$button>

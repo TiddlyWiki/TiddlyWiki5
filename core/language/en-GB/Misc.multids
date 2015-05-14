@@ -8,26 +8,24 @@ ConfirmCancelTiddler: Do you wish to discard changes to the tiddler "<$text text
 ConfirmDeleteTiddler: Do you wish to delete the tiddler "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Do you wish to overwrite the tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: You are about to edit a ShadowTiddler. Any changes will override the default system making future upgrades non-trivial. Are you sure you want to edit "<$text text=<<title>>/>"?
-DropMessage: Drop here (or click escape to cancel)
+DefaultNewTiddlerTitle: New Tiddler
+DropMessage: Drop here (or use the 'Escape' key to cancel)
+Encryption/Cancel: Cancel
+Encryption/ConfirmClearPassword: Do you wish to clear the password? This will remove the encryption applied when saving this wiki
+Encryption/PromptSetPassword: Set a new password for this TiddlyWiki
+Encryption/Username: Username
+Encryption/Password: Password
+Encryption/RepeatPassword: Repeat password
+Encryption/PasswordNoMatch: Passwords do not match
+Encryption/SetPassword: Set password
 InvalidFieldName: Illegal characters in field name "<$text text=<<fieldName>>/>". Fields can only contain lowercase letters, digits and the characters underscore (`_`), hyphen (`-`) and period (`.`)
 MissingTiddler/Hint: Missing tiddler "<$text text=<<currentTiddler>>/>" - click {{$:/core/images/edit-button}} to create
+OfficialPluginLibrary: Official ~TiddlyWiki Plugin Library
+PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$:/core/ui/Buttons/refresh}} to allow changes to plugins to take effect
 RecentChanges/DateFormat: DDth MMM YYYY
-RelativeDate/Future/Days: <<period>> days from now
-RelativeDate/Future/Hours: <<period>> hours from now
-RelativeDate/Future/Minutes: <<period>> minutes from now
-RelativeDate/Future/Months: <<period>> months from now
-RelativeDate/Future/Second: 1 second from now
-RelativeDate/Future/Seconds: <<period>> seconds from now
-RelativeDate/Future/Years: <<period>> years from now
-RelativeDate/Past/Days: <<period>> days ago
-RelativeDate/Past/Hours: <<period>> hours ago
-RelativeDate/Past/Minutes: <<period>> minutes ago
-RelativeDate/Past/Months: <<period>> months ago
-RelativeDate/Past/Second: 1 second ago
-RelativeDate/Past/Seconds: <<period>> seconds ago
-RelativeDate/Past/Years: <<period>> years ago
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
 TagManager/Icon/Heading: Icon
+TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
 UnsavedChangesWarning: You have unsaved changes in TiddlyWiki

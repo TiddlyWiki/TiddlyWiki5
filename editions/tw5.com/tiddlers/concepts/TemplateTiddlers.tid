@@ -1,40 +1,18 @@
 created: 20140107114355828
-modified: 20140317213147507
+modified: 20150220160920000
 tags: Concepts
 title: TemplateTiddlers
 type: text/vnd.tiddlywiki
 
-A template tiddler is not in fact a type of tiddler, it is a role in which a tiddler can be used.
+A template tiddler is not actually a type of tiddler, it is a role in which a tiddler can be used.
 
-When text is wikified there is the concept of the CurrentTiddler. Certain widgets (like the ViewWidget) can use the current tiddler implicitly. For example:
+Templates are a way to re-use chunks of WikiText.
 
-```
-<$view tiddler="HelloThere" field="myfield"/> - displays the field "myfield" of the tiddler HelloThere
-<$view field="myfield"/> - displays the field "myfield" of the current tiddler
-```
+Transcluding through a template extends the basic functionality of [[Transclusion]] by combining two tiddlers:
 
-When the TranscludeWidget pulls in the content from another tiddler, by default it does not change the current tiddler, so the transcluded content behaves as if it were in the context of the transcluding tiddler.
+* A template tiddler that contains the WikiText to be displayed. It can contain transclusions that reference fields in the [[current tiddler|Current Tiddler]]
+* A target tiddler that identifies which tiddler is to be treated as current when resolving references to fields
 
-So, if we have a tiddler "A" that contains:
+The best example of templating is the main story river in TiddlyWiki. Each tiddler in the story river is rendered through a ViewTemplate that specifies how each field is to be rendered.
 
-```
-<$view field="myfield"/>
-```
-
-And then transclude it from a tiddler "B" like so:
-
-```
-My field value is: <$transclude tiddler="A"/>
-```
-
-The result will be that the field from the tiddler "B" is displayed; in other words, tiddler "A" is acting as a template for displaying information from tiddler "B".
-
-The TiddlerWidget is used to change the current tiddler. Consider a tiddler "C" containing:
-
-```
-<$tiddler tiddler="A"><$transclude tiddler="A"/></$tiddler>
-```
-
-It is still transcluding tiddler "A", but now it is also setting the current tiddler to "A". The result is therefore that the field "myfield" for tiddler "A" is displayed.
-
-The shorthand syntax for [[Transclusion in WikiText]] actually generates both a TiddlerWidget and a TranscludeWidget.
+See [[Transclusion with Templates]] for details.

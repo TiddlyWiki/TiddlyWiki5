@@ -1,0 +1,145 @@
+created: 20140410101941871
+fr-title: Introduction au maniement des filtres
+modified: 20141213123128240
+tags: Learning
+title: Introduction to Filters
+type: text/vnd.tiddlywiki
+
+Nous vous proposons une introduction qui vous initiera étape par étape au maniement des [[filtres|Filters]].
+
+! Utilisation des filtres
+
+Les filtres constituent un langage particulier intégré à WikiText qui sert à exprimer des listes de tiddlers.
+
+Les filtres sont utilisés par les macros [[list|ListMacro]] ou [[tabs|TabsMacro]], par les widgets [[list|ListWidget]] ou [[count|CountWidget]], et dans beaucoup d'autres zones de <<tw>>.
+
+Par exemple, voici comment la [[macro list|ListMacro]] serait utilisée pour afficher le premier exemple ci-dessous<<:>>
+
+```
+<<list-links "HelloThere Introduction [[Titre avec des espaces]]">>
+```
+
+Le moyen le plus simple d'expérimenter avec les filtres de tiddlers est de les écrire dans l'onglet //Filtres// du [[panneau de recherche avancée|$:/AdvancedSearch]].
+
+! Filtres simples
+
+L'exemple de filtre le plus simple est une liste de titres de tiddlers (si besoin encadrés par des crochets doubles)<<:>>
+
+```
+HelloThere Introduction [[Titre avec des espaces]]
+```
+
+Les titres doivent être séparés par un ou plusieurs espaces et/ou sauts de lignes.
+
+! Opérateurs de filtre
+
+Les opérateurs de filtre sont utilisés pour sélectionner des tiddlers selon certains critères. Par exemple, ce filtre consiste en une opération unique qui sélectionne tous les tiddlers tagués "introduction"<<:>>
+
+```
+[tag[introduction]]
+```
+
+Le mot <<gf tag>> est l'''opérateur'' et <<gf introduction >> est l'''opérande''.
+
+Reportez-vous à la liste exhaustive des [[opérateurs de filtre|FilterOperators]].
+
+!! Opérateur de filtre par défaut
+
+Si l'opérateur est omis, il prend la valeur `title` par défaut, de sorte que `[[HelloThere]]` est équivalent à `[title[HelloThere]]`. Si le titre ne contient aucun espace, on peut aussi omettre les crochets doubles<<:>> `HelloThere`.
+
+! Négation des opérateurs
+
+La signification des opérations de filtre peut être inversée en faisant précéder l'opérateur d'un point d'exclamation (!). L'exemple suivant sélectionne tous les tiddlers qui n'ont pas pour tag <<gf introduction>><<:>>
+
+```
+[!tag[introduction]]
+```
+
+! Suffixes d'opérateurs
+
+Certains opérateurs de filtres admettent un suffixe optionnel qui fournit de plus amples informations sur l'opération. Par exemple, l'opérateur <<gf field>> prend un suffixe indiquant le champ à comparer. Le filtre ci-dessous retourne tous les tiddlers qui comportent <<gf JeremyRuston>> dans le champ //modifier//<<:>>
+
+```
+[field:modifier[JeremyRuston]]
+```
+
+! Raccourci pour l'opérateur //field//
+
+Si un opérateur inconnu est utilisé, il est interprété comme le suffixe de l'opérateur //field//. Ainsi, les deux filtres ci-dessous retournent tous les tiddlers qui contiennent la chaîne <<gf create>> dans leur champ //caption//<<:>>
+
+```
+[caption[create]]
+[field:caption[create]]
+```
+
+! Opérandes indirects
+
+Si un opérateur de filtre est écrit avec des accolades autour de l'opérande à la la place des crochets, celui-ci est alors considéré comme une [[référence|TextReference]] vers la valeur en question. Par exemple, le filtre ci-dessous sélectionnera tous les tiddlers contenant la chaîne contenue dans le tiddler ayant pour titre <<gf $:/temp/search>>
+
+```
+[search{$:/temp/search}]
+```
+
+! Opérandes variables
+
+Si une opération de filtre est écrite avec des chevrons autour de l'opérande à la place des crochets, celui-ci est alors considéré comme le nom d'une variable contenant la valeur en question. Par exemple, le filtre ci-dessous sélectionnera tous les tiddlers contenant le titre du [[tiddler courant|WidgetVariable: currentTiddler]]<<:>>
+
+```
+[search<currentTiddler>]
+```
+
+(On notera que la variable `currentTiddler` sert à garder trace du tiddler courant).
+
+! Accumuler plusieurs opérations
+
+Vous pouvez effectuer plusieurs opérations de filtre en une seule fois. L'exemple ci-dessous sélectionne tous les tiddlers qui ont au moins l'un des tags //introduction// ou //demo//<<:>>
+
+```
+[tag[introduction]] [tag[demo]]
+```
+
+Les opérations sont effectuées séparément l'une après l'autre,  les tiddlers qu'elles sélectionnent étant accumulés au résultat.
+
+! Conjuguer plusieurs opérations
+
+Une séquence d'opérations peut être considérée comme une conjonction logique lorsqu'elles sont accolées et qu'on fusionne leurs crochets extérieurs. Le terme consacré pour cette suite d'opérations est un <<gf run>>. Par exemple, voici comment sélectionner les tiddlers qui sont tagués ''à la fois'' //introduction// et //demo//<<:>>
+
+```
+[tag[introduction]tag[demo]]
+```
+
+Voici un autre exemple qui sélectionne tous les tiddlers tagués //introduction// mais pas //demo//<<:>>
+
+```
+[tag[introduction]!tag[demo]]
+```
+
+! Négation d'un //run//
+
+Généralement, chaque //run// d'opérations ajoute des tiddlers aux résultats accumulés par les //runs// précédents. Lorsqu'on préfixe un //run// avec `-`, la liste des tiddlers sélectionnée par ce run est au contraire supprimée du résultat précédent. Le filtre ci-dessous retourne par exemple tous les tiddlers tagués //introduction//, sauf `HelloThere` et `Titre avec des espaces`<<:>>
+
+```
+[tag[introduction]] -HelloThere -[[Titre avec des espaces]]
+```
+
+L'exemple ci-dessous retourne tous les tiddlers tagués //introduction// qui ne sont pas aussi tagués //demo//<<:>>
+
+```
+[tag[introduction]] -[tag[demo]]
+```
+
+! Travailler avec les résultats d'un filtre
+
+Généralement, chaque run d'opérations prend comme source l'intégralité des tiddlers disponibles. Lorsqu'on préfixe un run avec `+`, la source du run est au contraire constituée par l'ensemble des tiddlers accumulés par les opérations précédentes.
+
+Dans l'exemple ci-dessous, le filtre sélectionne les tiddlers tagués //introduction// ou //demo//, et trie ensuite la liste résultante selon le champ "title"<<:>>
+
+```
+[tag[introduction]] [tag[demo]] +[sort[title]]
+```
+
+Voici un autre exemple qui renvoie les tiddlers tagués ''alpha'' ou ''beta'' et qui sont aussi tagués avec ''task'' mais pas ''done''<<:>>
+
+```
+[tag[alpha]] [tag[beta]] +[tag[task]!tag[done]]
+```

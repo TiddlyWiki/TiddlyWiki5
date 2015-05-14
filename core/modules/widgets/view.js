@@ -46,6 +46,7 @@ Compute the internal state of the widget
 ViewWidget.prototype.execute = function() {
 	// Get parameters from our attributes
 	this.viewTitle = this.getAttribute("tiddler",this.getVariable("currentTiddler"));
+	this.viewSubtiddler = this.getAttribute("subtiddler");
 	this.viewField = this.getAttribute("field","text");
 	this.viewIndex = this.getAttribute("index");
 	this.viewFormat = this.getAttribute("format","text");
@@ -95,9 +96,14 @@ ViewWidget.prototype.getValue = function(options) {
 	if(this.viewIndex) {
 		value = this.wiki.extractTiddlerDataItem(this.viewTitle,this.viewIndex);
 	} else {
-		var tiddler = this.wiki.getTiddler(this.viewTitle);
+		var tiddler;
+		if(this.viewSubtiddler) {
+			tiddler = this.wiki.getSubTiddler(this.viewTitle,this.viewSubtiddler);	
+		} else {
+			tiddler = this.wiki.getTiddler(this.viewTitle);
+		}
 		if(tiddler) {
-			if(this.viewField === "text") {
+			if(this.viewField === "text" && !this.viewSubtiddler) {
 				// Calling getTiddlerText() triggers lazy loading of skinny tiddlers
 				value = this.wiki.getTiddlerText(this.viewTitle);
 			} else {

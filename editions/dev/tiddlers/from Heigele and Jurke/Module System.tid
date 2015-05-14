@@ -8,7 +8,7 @@ title: Module System
 After the boot kernel provides the functions used to load tiddlers, the rest of the TiddlyWiki application is loaded as modules.
 A module is a tiddler which has the type ``application/javascript`` and contains CommonJS compatible JavaScript code. This means a single module provides its public structures and functions in a variable called ``export``. Other modules can obtain these structures and functions by using a global ``require`` function.
 
-```
+```js
 var Widget = require("$:/core/modules/widgets/widget.js").widget;
 // ...
 ButtonWidget.prototype = new Widget();

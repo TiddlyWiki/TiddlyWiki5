@@ -1,0 +1,13 @@
+title: $:/language/Filters/
+
+AllTags: Všechny štítky kromě systémových
+AllTiddlers: Všechny tiddlery kromě systémových
+Drafts: Rozepsané tiddlery
+Missing: Chybějící tiddlery
+Orphans: Osamocené tiddlery
+OverriddenShadowTiddlers: Přepsané stínové tiddlery tiddlery
+RecentSystemTiddlers: Nedávno upravené tiddlery včetně systémových
+RecentTiddlers: Nedávno upravené tiddlery
+ShadowTiddlers: Stínové tiddlery
+SystemTags: Systémové štítky
+SystemTiddlers: Systémové tiddlery

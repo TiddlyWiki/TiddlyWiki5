@@ -1,0 +1,14 @@
+caption: Éditions
+created: 20140908125500000
+fr-title: Éditions
+list: [[Empty Edition]] [[TiddlyWiki in the Sky for TiddlyWeb]]
+modified: 20141127090932793
+tags: TableOfContents
+title: Editions
+type: text/vnd.tiddlywiki
+
+TiddlyWiki est publié sous différentes éditions adaptées à des objectifs spécifiques. Chacune est constituée des mêmes composants <<tw>> principaux, associés aux plugins nécessaires, à la documentation et au contenu d'exemple.
+
+Vous pouvez mélanger les composants de ces éditions à votre gré pour créer une solution unique pour votre application dédiée.
+
+<<list-links "[tag[Editions]]">>

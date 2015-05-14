@@ -3,7 +3,7 @@ title: $:/language/Buttons/
 AdvancedSearch/Caption: advanced search
 AdvancedSearch/Hint: Advanced search
 Cancel/Caption: cancel
-Cancel/Hint: Cancel editing this tiddler
+Cancel/Hint: Discard changes to this tiddler
 Clone/Caption: clone
 Clone/Hint: Clone this tiddler
 Close/Caption: close
@@ -24,8 +24,16 @@ Encryption/ClearPassword/Caption: clear password
 Encryption/ClearPassword/Hint: Clear the password and save this wiki without encryption
 Encryption/SetPassword/Caption: set password
 Encryption/SetPassword/Hint: Set a password for saving this wiki with encryption
+ExportPage/Caption: export all
+ExportPage/Hint: Export all tiddlers
+ExportTiddler/Caption: export tiddler
+ExportTiddler/Hint: Export tiddler
+ExportTiddlers/Caption: export tiddlers
+ExportTiddlers/Hint: Export tiddlers
 FullScreen/Caption: full-screen
 FullScreen/Hint: Enter or leave full-screen mode
+Help/Caption: help
+Help/Hint: Show help panel
 Import/Caption: import
 Import/Hint: Import files
 Info/Caption: info
@@ -34,18 +42,28 @@ Home/Caption: home
 Home/Hint: Open the default tiddlers
 Language/Caption: language
 Language/Hint: Choose the user interface language
-NewTiddler/Caption: new tiddler
-NewTiddler/Hint: Create a new tiddler
 More/Caption: more
 More/Hint: More actions
+NewHere/Caption: new here
+NewHere/Hint: Create a new tiddler tagged with this one
+NewJournal/Caption: new journal
+NewJournal/Hint: Create a new journal tiddler
+NewJournalHere/Caption: new journal here
+NewJournalHere/Hint: Create a new journal tiddler tagged with this one
+NewTiddler/Caption: new tiddler
+NewTiddler/Hint: Create a new tiddler
+OpenWindow/Caption: open in new window
+OpenWindow/Hint: Open tiddler in new window
+Palette/Caption: palette
+Palette/Hint: Choose the colour palette
 Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
 Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in this story
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
-Save/Caption: save
-Save/Hint: Save this tiddler
+Save/Caption: ok
+Save/Hint: Confirm changes to this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
 StoryView/Caption: storyview

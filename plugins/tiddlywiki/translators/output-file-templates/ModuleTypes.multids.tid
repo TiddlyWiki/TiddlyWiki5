@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/ModuleTypes.multids
+
+{{$:/language/Docs/ModuleTypes/||$:/plugins/tiddlywiki/translators/templates/multids}}

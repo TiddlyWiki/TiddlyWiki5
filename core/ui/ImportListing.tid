@@ -8,7 +8,7 @@ message-$(payloadTiddler)$
 selection-$(payloadTiddler)$
 \end
 \define previewPopupState()
-!!popup-$(payloadTiddler)$
+$(currentTiddler)$!!popup-$(payloadTiddler)$
 \end
 <table>
 <tbody>

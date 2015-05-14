@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/translators/templates/multids
+
+\define generateMultids(prefix)
+title: $prefix$
+
+<$list filter="[prefix[$prefix$]sort[title]]"><$list filter="[is[current]removeprefix[$prefix$]]"><$text text=<<currentTiddler>>/></$list>: <$text text={{!!text}}/>
+</$list>
+\end
+<$macrocall $name="generateMultids" prefix=<<currentTiddler>>/>

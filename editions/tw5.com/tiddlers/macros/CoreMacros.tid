@@ -1,0 +1,8 @@
+created: 20150220180315000
+modified: 20150221222052000
+title: Core Macros
+type: text/vnd.tiddlywiki
+
+The following [[macros|Macros]] are built into ~TiddlyWiki's core:
+
+<<list-links "[tag[Core Macros]]">>

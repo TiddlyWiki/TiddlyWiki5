@@ -1,6 +1,7 @@
 {
+	"description": "Developer documentation from http://tiddlywiki.com/dev/",
 	"plugins": [
-		"tiddlywiki/cecily",
+		"tiddlywiki/highlight",
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon"
@@ -11,7 +12,6 @@
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
-		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],
@@ -32,6 +32,8 @@
 			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
 			"--setfield","[tag[external-image]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"build-readme": [
+			"--rendertiddler","ReadMe for build.jermolene.github.io","readme.md","text/html"],
 		"favicon": [
 			"--savetiddler","$:/favicon.ico","favicon.ico"],
 		"static": [

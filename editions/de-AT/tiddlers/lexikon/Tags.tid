@@ -1,6 +1,6 @@
 created: 20140908130640417
 creator: pmario
-modified: 20140918124555159
+modified: 20140921170557820
 modifier: pmario
 tags: Lexikon
 title: Tags
@@ -18,5 +18,5 @@ Eine gekürzte Liste wird hier angezeigt mit:
 
 <<list-links filter:"[tag[Lexikon]limit[4]]">>
 
-Eine komplette liste können sie im rechten Menü unter ''Mehr: Tags" sehen.
+Eine komplette Liste können Sie im rechten Menü unter ''Mehr: Tags" sehen.
 

@@ -72,21 +72,21 @@ exports["application/x-tiddler-html-div"] = function(text,fields) {
 };
 
 exports["application/json"] = function(text,fields) {
-	var tiddlers = JSON.parse(text),
-		result = [],
-		getKnownFields = function(tid) {
-			var fields = {};
-			"title text created creator modified modifier type tags".split(" ").forEach(function(value) {
-				if(tid[value] !== null) {
-					fields[value] = tid[value];
+	var incoming = JSON.parse(text),
+		results = [];
+	if($tw.utils.isArray(incoming)) {
+		for(var t=0; t<incoming.length; t++) {
+			var incomingFields = incoming[t],
+				fields = {};
+			for(var f in incomingFields) {
+				if(typeof incomingFields[f] === "string") {
+					fields[f] = incomingFields[f];
 				}
-			});
-			return fields;
-		};
-	for(var t=0; t<tiddlers.length; t++) {
-		result.push(getKnownFields(tiddlers[t]));
+			}
+			results.push(fields);
+		}
 	}
-	return result;
+	return results;
 };
 
 /*

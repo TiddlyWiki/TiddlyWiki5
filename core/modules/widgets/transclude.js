@@ -65,7 +65,11 @@ TranscludeWidget.prototype.execute = function() {
 	// Check for recursion
 	if(parser) {
 		if(this.parentWidget && this.parentWidget.hasVariable("transclusion",recursionMarker)) {
-			parseTreeNodes = [{type: "text", text: "Recursive transclusion error in transclude widget"}];
+			parseTreeNodes = [{type: "element", tag: "span", attributes: {
+				"class": {type: "string", value: "tc-error"}
+			}, children: [
+				{type: "text", text: "Recursive transclusion error in transclude widget"}
+			]}];
 		}
 	}
 	// Construct the child widgets

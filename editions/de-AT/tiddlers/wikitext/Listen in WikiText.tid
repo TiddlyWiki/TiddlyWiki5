@@ -1,7 +1,7 @@
-caption: Lists
+caption: Listen
 created: 20131205160257619
 creator: pmario
-modified: 20140913134840699
+modified: 20140923173928536
 modifier: pmario
 tags: WikiText
 title: Listen in WikiText
@@ -12,7 +12,7 @@ type: text/vnd.tiddlywiki
 Ungeordnete Listen können mit dem Stern `*` erzeugt werden. Der `*` muss das erste Zeichen in der Zeile sein!
 
 <<wikitext-example src:"* Erstes Listen Element
-* Zwseites Listen Element
+* Zweites Listen Element
 ** Ein Unterelement
 * Drittes Listen Element
 ">>
@@ -48,7 +48,7 @@ Hinweis: [[Zitate|Zitate in WikiText]] und Listen lassen sich hervorragend gemei
 
 !! CSS Klassen
 
-''Für geübte Anwender in Ausnahmefällen!'' Sie können CSS Klassen direkt zuweisen:
+''Für geübte Anwender!'' Sie können CSS Klassen direkt zuweisen:
 
 <<wikitext-example src:"* Element Eins
 *.MyClass Element 2

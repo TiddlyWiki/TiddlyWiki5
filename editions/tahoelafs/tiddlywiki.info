@@ -1,4 +1,5 @@
 {
+	"description": "Demo of TahoeLAFS plugin",
 	"plugins": [
 		"tiddlywiki/tahoelafs"
 	],

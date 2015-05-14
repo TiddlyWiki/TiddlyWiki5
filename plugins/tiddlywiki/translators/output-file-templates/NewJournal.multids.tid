@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/NewJournal.multids
+
+{{$:/config/NewJournal/||$:/plugins/tiddlywiki/translators/templates/multids}}

@@ -4,6 +4,6 @@
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
 	"plugin-type": "theme",
-	"description": "An alternate theme",
+	"description": "Example alternative theme",
 	"dependents": ["$:/themes/tiddlywiki/snowwhite"]
 }

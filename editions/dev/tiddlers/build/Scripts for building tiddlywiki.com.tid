@@ -1,0 +1,93 @@
+title: Scripts for building tiddlywiki.com
+
+These scripts are used to build and release the content for tiddlywiki.com. They are not designed for general purpose use -- they resolve problems that are specific to the task of building tiddlywiki.com: pushing to GitHub Pages, handling the prerelease builds and bumping version numbers.
+
+Nonetheless, you may find techniques that are useful for your own scripts.
+
+! Hosting
+
+http://tiddlywiki.com is served by [[GitHub Pages|https://pages.github.com]] from the repository https://github.com/Jermolene/jermolene.github.io
+
+The scripts live in the repository https://github.com/Jermolene/build.jermolene.github.io
+
+! Directory structure
+
+These scripts require the following directories to be siblings:
+
+* `build.jermolene.github.io` - a local copy of https://github.com/Jermolene/build.jermolene.github.io
+* `jermolene.github.io` - a local copy of the repo https://github.com/Jermolene/jermolene.github.io
+* `TiddlyWiki5` - a local copy of the repo https://github.com/Jermolene/TiddlyWiki5
+
+The scripts are designed to be executed with the current directory being the `TiddlyWiki5` directory.
+
+! Configuration
+
+!! package.json
+
+The `package.json` in the root of the `build.jermolene.github.io` repository contains a dependency declaration that specifies the latest official released version of TiddlyWiki to be used when building the release targets:
+
+```js
+  "dependencies": {
+    "tiddlywiki": "5.1.2"
+  }
+```
+
+!! Environment variables
+
+Some of the scripts use the following environment variables:
+
+* ''TW5_BUILD_MAIN_EDITION'' - the path to the wiki folder to be used as the main edition, generating `index.html` and `encrypted.html`
+* ''TW5_BUILD_OUTPUT'' - the path to the output folder (defaults to `../jermolene.github.io`)
+* ''TW5_BUILD_TIDDLYWIKI'' - the pathname of the `tiddlywiki.js` to be used (defaults to `../build.jermolene.github.io/node_modules/tiddlywiki/tiddlywiki.js`)
+
+! Scripts
+
+!! `bld.sh`
+
+Builds the `tiddlywiki.com` target files. By default, it uses the version of tiddlywiki specified in the `package.json` file. This can be overridden with the ''TW5_BUILD_TIDDLYWIKI'' environment variable. The following command would select the latest prerelease version of tiddlywiki from the `TiddlyWiki5` directory:
+
+```bash
+    TW5_BUILD_TIDDLYWIKI=./tiddlywiki.js
+```
+
+!! `readme-bld.sh`
+
+Builds the readme files for the `TiddlyWiki5` and `build.jermolene.github.io` repos using the released version of TiddlyWiki specified in `package.json`.
+
+!! `prerelease-bld.sh`
+
+Builds the `tiddlywiki.com/prerelease` target files using the latest TiddlyWiki prerelease code and special ''prerelease'' edition for the content.
+
+!! `github-push.sh`
+
+Pushes the latest changes to the `jermolene.github.io` directory to GitHub.
+
+!! `dev-bld.sh`
+
+Builds the ''dev'' prerelease edition.
+
+!! `quick-bld.sh`
+
+Builds the ''prerelease'' prerelease edition.
+
+!! `tiddlyspace-upload.sh`
+
+Builds the ''tw5tiddlyweb'' edition and uploads it to TiddlySpace.
+
+!! `verbump.sh`
+
+Bumps the version number of the `package.json` in the `TiddlyWiki5` repo and applies the correct version tag to the repo.
+
+!! `npm-publish.sh`
+
+Publishes the `TiddlyWiki5` repo to npm.
+
+! Procedures
+
+!! Releasing a new version of TiddlyWiki
+
+{{Releasing a new version of TiddlyWiki}}
+
+!! Releasing new content for TiddlyWiki
+
+{{Releasing new content for TiddlyWiki}}

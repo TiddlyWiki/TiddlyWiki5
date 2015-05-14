@@ -1,12 +1,14 @@
 title: $:/core/macros/list
 tags: $:/tags/Macro
 
-\define list-links(filter,type:"ul",subtype:"li")
-<$type$>
+\define list-links(filter,type:"ul",subtype:"li",class:"")
+<$type$ class="$class$">
 <$list filter="$filter$">
 <$subtype$>
 <$link to={{!!title}}>
+<$transclude field="caption">
 <$view field="title"/>
+</$transclude>
 </$link>
 </$subtype$>
 </$list>

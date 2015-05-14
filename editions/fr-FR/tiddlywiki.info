@@ -1,4 +1,5 @@
 {
+	"description": "French (France) edition",
 	"plugins": [
 	],
 	"themes": [
@@ -6,15 +7,25 @@
 		"tiddlywiki/snowwhite",
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
-		"tiddlywiki/stickytitles",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
 		"fr-FR"
 	],
+    "includeWikis": [
+        {"path": "../tw5.com", "read-only": true}
+    ],
 	"build": {
 		"index": [
-			"--rendertiddler","$:/core/save/all","fr-fr-demo.html","text/plain"]
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
+		"empty": [
+			"--rendertiddler","$:/editions/fr-FR/download-empty","empty.html","text/plain",
+			"--rendertiddler","$:/editions/fr-FR/download-empty","empty.hta","text/plain"],
+		"static": [
+			"--rendertiddler","$:/core/templates/static.template.html","static.html","text/plain",
+			"--rendertiddler","$:/core/templates/alltiddlers.template.html","alltiddlers.html","text/plain",
+			"--rendertiddlers","[!is[system]]","$:/core/templates/static.tiddler.html","static","text/plain",
+			"--rendertiddler","$:/core/templates/static.template.css","static/static.css","text/plain"]
 	}
 }

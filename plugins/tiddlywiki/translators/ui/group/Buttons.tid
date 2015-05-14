@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Buttons
+caption: Buttons
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Buttons/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Buttons/]]
+\end
+
+! Buttons
+
+Toolbar buttons. The ''/Caption'' tiddlers specify the text to be displayed on the button and the ''/Hint'' tiddlers specify the tooltip text.
+
+<<translatableStringEditor>>

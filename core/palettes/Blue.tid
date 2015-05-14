@@ -10,6 +10,9 @@ alert-highlight: #881122
 alert-muted-foreground: #b99e2f
 background: #fff
 blockquote-bar: <<colour muted-foreground>>
+button-background:
+button-foreground:
+button-border:
 code-background: #f7f7f9
 code-border: #e1e1e8
 code-foreground: #dd1144
@@ -62,6 +65,7 @@ sidebar-tab-foreground-selected:
 sidebar-tab-foreground: <<colour tab-foreground>>
 sidebar-tiddler-link-foreground-hover: #444444
 sidebar-tiddler-link-foreground: #5959c0
+site-title-foreground: <<colour tiddler-title-foreground>>
 static-alert-foreground: #aaaaaa
 tab-background-selected: <<colour background>>
 tab-background: #ccccdd

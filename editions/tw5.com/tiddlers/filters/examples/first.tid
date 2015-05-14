@@ -1,0 +1,11 @@
+created: 20150118134611000
+modified: 20150118183210000
+tags: [[first Operator]] [[Operator Examples]]
+title: first Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.using-days-of-week>>
+
+<<.operator-example 1 "[list[Days of the Week]first[]]">>
+<<.operator-example 2 "[list[Days of the Week]first[5]]">>
+<<.operator-example 3 "[tag[Filter Operators]!sort[title]first[]]">>

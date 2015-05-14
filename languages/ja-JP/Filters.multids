@@ -1,12 +1,13 @@
 title: $:/language/Filters/
 
-AllTiddlers: システム tiddler を除くすべての tiddler
-RecentTiddlers: 最近更新された tiddler
 AllTags: システムタグを除くすべてのタグ
-Missing: 未作成の tiddler
-Drafts: ドラフト状態の tiddler
-Orphans: 孤立状態の tiddler
-SystemTiddlers: システム tiddler
-ShadowTiddlers: 隠し tiddler
-OverriddenShadowTiddlers: 上書きされている隠し tiddler
+AllTiddlers: システムtiddler を除くすべてのtiddler
+Drafts: ドラフト状態のtiddler
+Missing: 未作成のtiddler
+Orphans: 孤立状態のtiddler
+OverriddenShadowTiddlers: 上書きされている隠しtiddler
+RecentSystemTiddlers: 最近更新されたtiddler（システムtiddlerを含む）
+RecentTiddlers: 最近更新されたtiddler
+ShadowTiddlers: 隠しtiddler
 SystemTags: システムタグ
+SystemTiddlers: システムtiddler

@@ -1,0 +1,7 @@
+title: $:/language/Help/verbose
+description: वाचाल उत्पादन ट्रिगर  मोड
+
+डिबगिंग के लिए उपयोगी वाचाल उत्पादन, चलाता है
+
+`` `
+--verbose

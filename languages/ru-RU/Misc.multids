@@ -1,0 +1,23 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Эта заметка содержит двоичные данные
+ClassicWarning/Hint: Эта заметка написана в формате TiddlyWiki Classic WikiText, который не совместим с TiddlyWiki 5. Подробнее: http://tiddlywiki.com/static/Upgrading.html
+ClassicWarning/Upgrade/Caption: обновление
+CloseAll/Button: закрыть все
+ConfirmCancelTiddler: Отменить изменения заметки "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Удалить заметку "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: Заменить заметку "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Вы собираетесь редактировать встроенную заметку. Любое изменение переопределит стандартное значение и может привести к проблемам при обновлении TiddlyWiki. Вы действительно хотите редактировать "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: Новая заметка
+DropMessage: Перетащите сюда (или нажмите escape для отмены)
+Encryption/ConfirmClearPassword: Вы действительно хотите сбросить пароль? Это действие отменит шифрование при следующем сохранении
+Encryption/PromptSetPassword: Установить новый пароль для TiddlyWiki
+InvalidFieldName: Недопустимые символы в названии поля "<$text text=<<fieldName>>/>". Поля могут содержать только латинские буквы нижнего регистра, цифры и символы: подчеркивание (`_`), дефис (`-`) и точку (`.`)
+MissingTiddler/Hint: Заметка "<$text text=<<currentTiddler>>/>" отсутствует - нажмите {{$:/core/images/edit-button}} чтобы её создать
+RecentChanges/DateFormat: DD MMM YYYY
+SystemTiddler/Tooltip: Это системная заметка
+TagManager/Colour/Heading: Цвет
+TagManager/Icon/Heading: Значок
+TagManager/Info/Heading: Детали
+TagManager/Tag/Heading: Метка
+UnsavedChangesWarning: Изменения TiddlyWiki не сохранены

@@ -1,0 +1,13 @@
+created: 20140923185617067
+creator: pmario
+modified: 20140923191935882
+modifier: pmario
+tags: [[Was kann TiddlyWiki]] [[Transklusion in WikiText]]
+title: Ideensammlung
+type: text/vnd.tiddlywiki
+
+Weil ich zu faul bin um hier das gleiche zu schreiben wie in [[Erstellen von Notizen]] [[transkludiere|Transklusion]] ich es mit: `{{Erstellen von Notizen}}`. Wenn Sie sehen wollen wie das genau geht, dann öffnen Sie diesen Tiddler im Edit Modus oder sehen sich [[Transklusion in WikiText]] genau an!
+
+---
+
+{{Erstellen von Notizen}}

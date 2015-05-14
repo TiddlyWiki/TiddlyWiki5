@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: Анимации для виджета Reveal.
+command: Команды, исполняемые Node.js.
+config: Данные для вставки в `$tw.config`.
+filteroperator: Отдельные методы операторов фильтра.
+global: Глобальные данные для вставки в `$tw`.
+isfilteroperator: Операнды для оператора фильтра ''is''.
+macro: Макросы JavaScript.
+parser: Парсеры для разных типов содержимого.
+saver: Методы сохранения.
+startup: Функции, выполняемые при загрузке.
+storyview: Настройка анимации и поведения виджета List.
+tiddlerdeserializer: Превращают разные типы содержимого в заметки.
+tiddlerfield: Определяет поведение отдельных полей заметок.
+tiddlermethod: Добавляет методы к прототипу заметки `$tw.Tiddler`.
+upgrader: Обработка заметок во время обновления/импорта.
+utils: Добавляет методы в `$tw.utils`.
+utils-node: Добавляет специфичные для Node.js методы в `$tw.utils`.
+widget: Виджеты отвечают за отображение и обновление DOM.
+wikimethod: Добавляет методы в `$tw.Wiki`.
+wikirule: Отдельные правила для главного парсера WikiText.

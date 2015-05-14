@@ -39,6 +39,7 @@ var TW_Element = function(tag,namespace) {
 	this.attributes = {};
 	this.isRaw = false;
 	this.children = [];
+	this.style = {};
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
@@ -133,8 +134,17 @@ Object.defineProperty(TW_Element.prototype, "outerHTML", {
 			for(a=0; a<attr.length; a++) {
 				v = this.attributes[attr[a]];
 				if(v !== undefined) {
-					output.push(" ",attr[a],"='",$tw.utils.htmlEncode(v),"'");
+					output.push(" ",attr[a],"=\"",$tw.utils.htmlEncode(v),"\"");
 				}
+			}
+		}
+		if(this.style) {
+			var style = [];
+			for(var s in this.style) {
+				style.push(s + ":" + this.style[s] + ";");
+			}
+			if(style.length > 0) {
+				output.push(" style=\"",style.join(""),"\"")
 			}
 		}
 		output.push(">");
@@ -179,6 +189,9 @@ Object.defineProperty(TW_Element.prototype, "textContent", {
 			});
 			return b.join("");
 		}
+	},
+	set: function(value) {
+		this.children = [new TW_TextNode(value)];
 	}
 });
 
@@ -219,6 +232,7 @@ var document = {
 	createTextNode: function(text) {
 		return new TW_TextNode(text);
 	},
+	compatMode: "CSS1Compat", // For KaTeX to know that we're not a browser in quirks mode
 	isTiddlyWikiFakeDom: true
 };
 

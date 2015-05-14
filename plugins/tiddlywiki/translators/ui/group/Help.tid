@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Help
+caption: Help
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/Help/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Help/]]
+\end
+
+! Help
+
+Help text for the ~TiddlyWiki commands available under Node.js.
+
+<<translatableStringEditor editorFields:"text description">>

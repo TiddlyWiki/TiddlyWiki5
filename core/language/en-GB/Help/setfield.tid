@@ -1,7 +1,7 @@
 title: $:/language/Help/setfield
 description: Prepares external tiddlers for use
 
-//Note that this command is experimental and may change or be replaced during the TiddlyWiki version 5 beta//
+//Note that this command is experimental and may change or be replaced before being finalised//
 
 Sets the specified field of a group of tiddlers to the result of wikifying a template tiddler with the `currentTiddler` variable set to the tiddler.
 

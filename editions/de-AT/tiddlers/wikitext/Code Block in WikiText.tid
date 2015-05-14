@@ -1,8 +1,8 @@
 caption: Code Block
 created: 20131205160047557
 creator: pmario
-modified: 20140913112407303
-modifier: pmario
+modified: 20140922121828338
+modifier: ChrisK
 tags: WikiText
 title: Code Block in WikiText
 type: text/vnd.tiddlywiki
@@ -28,8 +28,8 @@ Anmerkung:
 
 Bei einigen Tastatur Anordnungen (je nach Betriebssystem und Sprache) können diese Zeichen als [[tote Taste|http://de.wikipedia.org/wiki/Tottaste]] konfiguriert sein, was sie schwerer zu tippen macht. 
 
-Für einen mehrzeiligen Code-Block tippen sie einfach ''6 mal'' auf das ''Akzent'' Zeichen, stellen den Cursor in die Mitte, tippen [Enter] und fertig. 
+Für einen mehrzeiligen Code-Block tippen Sie einfach ''6 mal'' auf das ''Akzent'' Zeichen, stellen den Cursor in die Mitte, tippen [Enter] und fertig. 
 
-Für ein einfaches Akzent Zeichen drücken ''Gravis'' und ein ''Leerzeichen''
+Für ein einfaches Akzent Zeichen drücken Sie ''Gravis'' und ein ''Leerzeichen''.
 
 TODO some short videos, and upload my own Keyboard settings

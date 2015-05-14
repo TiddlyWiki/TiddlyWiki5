@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Extrahiere Tiddler aus einem Plugin
+
+Extrahiert alle Tiddler aus einem plugin und schreibt diese als einzelne Tiddler Dateien:
+
+```
+--unpackplugin <title>
+```

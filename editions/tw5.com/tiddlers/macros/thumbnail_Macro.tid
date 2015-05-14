@@ -1,0 +1,14 @@
+caption: thumbnail
+created: 20150325172203603
+modified: 20150325172336079
+tags: Macros [[Core Macros]]
+title: thumbnail Macro
+type: text/vnd.tiddlywiki
+
+The <<.def thumbnail>> [[macros|Macros]] are used to create linkable thumbnail panels.
+
+!! Parameters
+
+(none)
+
+<<.macro-examples "thumbnail">>

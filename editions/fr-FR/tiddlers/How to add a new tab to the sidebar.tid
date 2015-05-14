@@ -1,0 +1,16 @@
+created: 20141117000000000
+fr-title: Comment ajouter un nouvel onglet dans la barre latérale
+modified: 20141127221257436
+tags: Learning [[Customise TiddlyWiki]]
+title: How to add a new tab to the sidebar
+type: text/vnd.tiddlywiki
+
+Pour créer un nouvel onglet dans le menu de la barre latérale<<dp>>
+
+# Créez un tiddler et étiquetez-le avec le [[tag système|SystemTags]] [[$:/tags/SideBar]]
+#* Si vous souhaitez créer un onglet de table des matières, vous pouvez peupler ce nouveau tiddler à l'aide de la macro [[TableOfContentsMacro]]. Regardez par exemple comment fonctionne [[TableOfContents]]
+# Par défault, libellé de l'onglet correspond au titre du tiddler, mais vous pouvez le remplacer en remplissant le champ `caption`.
+# Pour définir l'ordre des onglets, servez-vous des champs `list-after` ou `list-before`, comme expliqué dans [[Tagging]]
+#* Par exemple<<dp>> donnez à `list-after` la valeur [[$:/core/ui/SideBar/Open]] pour placer un onglet de barre latérale juste après l'onglet <<gf "Open">> (//{{$:/language/SideBar/Open/Caption}}//)
+
+Notez qu'il est possible de créer de la même manière de nouveaux onglets sous l'onglet <<gf "More">> (//{{$:/language/SideBar/More/Caption}}//), en utilisant le tag ``$:/tags/MoreSideBar``.

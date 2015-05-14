@@ -1,0 +1,20 @@
+title: $:/Translators
+
+\define allTheTranslatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/]] [all[tiddlers+shadows]prefix[$:/config/NewJournal/]] [[GettingStarted]] [[$:/SiteTitle]] [[$:/SiteSubtitle]] 
+[[$:/core/readme]] +[sort[title]]
+\end
+\define allTheTranslatedTiddlerTitles()
+[all[tiddlers]prefix[$:/language/]] [all[tiddlers]prefix[$:/config/NewJournal/]] [[GettingStarted]is[tiddler]] [[$:/SiteTitle]is[tiddler]] [[$:/SiteSubtitle]is[tiddler]] 
+[[$:/core/readme]is[tiddler]] +[sort[title]]
+\end
+\define allTheNotTranslatedTiddlerTitles()
+[all[tiddlers+shadows]!is[tiddler]prefix[$:/language/]] [all[tiddlers+shadows]!is[tiddler]prefix[$:/config/NewJournal/]] [[GettingStarted]!is[tiddler]] [[$:/SiteTitle]!is[tiddler]] [[$:/SiteSubtitle]!is[tiddler]] 
+[[$:/core/readme]!is[tiddler]] +[sort[title]]
+\end
+
+Number of translated tiddlers: <$count filter=<<allTheTranslatedTiddlerTitles>>/> of <$count filter=<<allTheTranslatableTiddlerTitles>>/>
+
+{{$:/core/ui/PageTemplate/pagecontrols}}
+
+<<tabs "[all[tiddlers+shadows]tag[$:/tags/TranslationGroup]sort[caption]]" "$:/plugins/tiddlywiki/translators/ui/group/Miscellaneous" "$:/state/translatorsTab" "tc-vertical">>

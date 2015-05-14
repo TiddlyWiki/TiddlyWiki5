@@ -1,6 +1,7 @@
 created: 20130825160900000
 creator: pmario
-modified: 20140909195214299
+modified: 20140922130327196
+modifier: ChrisK
 tags: howto
 title: Speichern mit Verschlüsselung
 type: text/vnd.tiddlywiki
@@ -10,12 +11,12 @@ verschlüsselt werden.
 
 ''Vorgehensweise''
 
-# Im rechten Menü wählen sie den "Tools" Reiter. Dort sehen sie einen Button "aktiviere Password"
-# Wenn sie den Button klicken, dann erscheint ein Password Dialog.
-# Geben sie ein Passwort ein und klicken sie den Button "Set Password"
+# Im rechten Menü wählen Sie den "Tools" Reiter. Dort sehen Sie einen Button "verschlüsseln"
+# Wenn Sie den Button klicken, dann erscheint ein Passwort Dialog.
+# Geben Sie ein Passwort ein und klicken Sie den Button "Set Password"
 # Der Button wechselt nun den Text auf: "Password löschen".
 #* Wichtig: Die Verschlüsselung wird erst beim Speichern des Wikis aktiv. 
-#* ''ACHTUNG'': Wenn sie das Passwort vergessen, dann sind die Daten weg. Es gibt keine Hintertüre.
-# Speichern sie das Wiki.
+#* ''ACHTUNG'': Wenn Sie das Passwort vergessen, dann sind die Daten weg. Es gibt keine Hintertüre.
+# Speichern Sie das Wiki.
 # Sie können zur Kontrolle die gespeicherte Datei mit einem Text Editor öffnen.
-# Wenn sie ein Verschlüsseltes Wiki öffnen, dann wird der Password Dialog angezeigt. 
+# Wenn Sie ein verschlüsseltes Wiki öffnen, dann wird der Passwort Dialog angezeigt. 

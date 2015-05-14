@@ -1,0 +1,25 @@
+created: 20141016083308219
+modified: 20141107213203691
+title: Contributing to the TiddlyWiki Core
+type: text/vnd.tiddlywiki
+
+The TiddlyWiki core is the container for all the generic features of TiddlyWiki that are of universal utility. Concretely, it comprises the tiddlers in the `$:/core` plugin.
+
+! Core Contribution Requirements
+
+There are requirements that must be met for any contribution that is to be accepted into the core:
+
+* If appropriate, the new functionality must support both standalone and Node.js configurations. For example, any new widgets must be capable of being rendered on the server
+* The contribution must not compromise the backwards compatibility of the existing code
+* Code contributions must comply with the [[TiddlyWiki Coding Style Guidelines]]
+* Generic components are preferred over point solutions for specific problems (which belong in plugins)
+
+! The Core and Innovation
+
+If you've created something new and innovative, don't try to rush to get it included into the core. Once new stuff is in the core it is subject to the core policies of strict backwards compatibility, making it frozen as far as radical innovation is concerned. It's usually better to release the new thing as a plugin so that it can be shared with the rest of the community for feedback.
+
+The expected model of innovation is that the core development will move relatively slowly as more and more of the initial planned functionality is implemented. Innovation can take place in the much more unconstrained environment of plugins. Over time, as these third party plugins gain popularity and become more polished, some or all of their functionality will be migrated into the core.
+
+! Improving Hackability of the Core
+
+Don't be afraid to submit issues or pull requests that add hooks or other points of extensibility to help your plugin integrate with the core. An important goal for TiddlyWiki is for the core to be infinitely adaptable through plugins. It is expected that many more points of extension will need to be added to support a healthy ecosystem of plugins.

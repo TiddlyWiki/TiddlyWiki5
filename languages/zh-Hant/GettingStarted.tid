@@ -1,12 +1,17 @@
 title: GettingStarted
 
-歡迎使用 TiddlyWiki，非線性的個人網頁式筆記。
+\define lingo-base() $:/language/ControlPanel/Basics/
+歡迎使用 TiddlyWiki 及參與 ~TiddlyWiki 社群
 
-使用此 TiddlyWiki 之前，請先檢查您可以儲存變更- 詳見http://tiddlywiki.com/ 。
+開始將重要資訊存放於 ~TiddlyWiki 之前，確認您可以可靠地儲存變更是很重要的。詳細資訊請參閱 http://tiddlywiki.com/#GettingStarted
 
-然後您可以:
+!! 設定此 ~TiddlyWiki
 
-* 點選右側欄的{{$:/core/images/new-button}}新增條目。
-* 點選右側欄的{{$:/core/images/options-button}}開啟[[控制台|$:/ControlPanel]]客制化您的維基
-* 點選右側欄的{{$:/core/images/save-button}}儲存變更。
-* 了解更多關於 [[WikiText]]
+<div class="tc-control-panel">
+
+|<$link to="$:/SiteTitle"><<lingo Title/Prompt>></$link> |<$edit-text tiddler="$:/SiteTitle" default="" tag="input"/> |
+|<$link to="$:/SiteSubtitle"><<lingo Subtitle/Prompt>></$link> |<$edit-text tiddler="$:/SiteSubtitle" default="" tag="input"/> |
+|<$link to="$:/DefaultTiddlers"><<lingo DefaultTiddlers/Prompt>></$link> |<<lingo DefaultTiddlers/TopHint>><br> <$edit-text tag="textarea" tiddler="$:/DefaultTiddlers"/><br>//<<lingo DefaultTiddlers/BottomHint>>// |
+</div>
+
+請參閱[[控制台|$:/ControlPanel]]查看更多選項。

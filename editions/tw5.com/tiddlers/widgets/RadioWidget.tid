@@ -1,5 +1,5 @@
 created: 20131212195353929
-modified: 20131212195656344
+modified: 20150220161302000
 tags: Widgets
 title: RadioWidget
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ The radio widget displays an HTML `<input type="radio">`  that reflects whether 
 The content of the `<$radio>` widget is displayed within an HTML `<label>` element also containing the radio button. This means that clicking on the content will have the same effect as clicking on the button itself.
 
 |!Attribute |!Description |
-|tiddler |Title of the tiddler to manipulate (defaults to the [[WidgetVariable: currentTiddler]]) |
+|tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The name of the field to which the radio button will be bound |
 |value |The value for the tiddler field |
 |class |CSS classes to be assigned to the label around the radio button |

@@ -1,0 +1,7 @@
+title: $:/plugins/tiddlywiki/tahoelafs/readme
+
+This plugin provides a ''saver'' module for saving changes under the [[Tahoe Least Authority File System|https://tahoe-lafs.org/]].
+
+At this point it is largely for experimentation by @zooko.
+
+[[Source code|https://github.com/Jermolene/TiddlyWiki5/blob/master/plugins/tiddlywiki/tahoelafs]]

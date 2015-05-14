@@ -1,4 +1,5 @@
 {
+	"description": "Demo of the Markdown plugin",
 	"plugins": [
 		"tiddlywiki/markdown"
 	],

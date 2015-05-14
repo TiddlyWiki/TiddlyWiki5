@@ -1,4 +1,5 @@
 {
+	"description": "Demo of the highlight plugin",
 	"plugins": [
 		"tiddlywiki/highlight"
 	],

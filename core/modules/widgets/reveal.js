@@ -30,10 +30,17 @@ RevealWidget.prototype.render = function(parent,nextSibling) {
 	this.parentDomNode = parent;
 	this.computeAttributes();
 	this.execute();
-	var domNode = this.document.createElement(this.parseTreeNode.isBlock ? "div" : "span");
+	var tag = this.parseTreeNode.isBlock ? "div" : "span";
+	if(this.revealTag && $tw.config.htmlUnsafeElements.indexOf(this.revealTag) === -1) {
+		tag = this.revealTag;
+	}
+	var domNode = this.document.createElement(tag);
 	var classes = this["class"].split(" ") || [];
 	classes.push("tc-reveal");
 	domNode.className = classes.join(" ");
+	if(this.style) {
+		domNode.setAttribute("style",this.style);
+	}
 	parent.insertBefore(domNode,nextSibling);
 	this.renderChildren(domNode,null);
 	if(!domNode.isTiddlyWikiFakeDom && this.type === "popup" && this.isOpen) {
@@ -83,10 +90,12 @@ Compute the internal state of the widget
 RevealWidget.prototype.execute = function() {
 	// Get our parameters
 	this.state = this.getAttribute("state");
+	this.revealTag = this.getAttribute("tag");
 	this.type = this.getAttribute("type");
 	this.text = this.getAttribute("text");
 	this.position = this.getAttribute("position");
 	this["class"] = this.getAttribute("class","");
+	this.style = this.getAttribute("style","");
 	this["default"] = this.getAttribute("default","");
 	this.animate = this.getAttribute("animate","no");
 	this.retain = this.getAttribute("retain","no");
@@ -106,20 +115,18 @@ Read the state tiddler
 */
 RevealWidget.prototype.readState = function() {
 	// Read the information from the state tiddler
-	if(this.stateTitle) {
-		var state = this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler"));
-		switch(this.type) {
-			case "popup":
-				this.readPopupState(state);
-				break;
-			case "match":
-				this.readMatchState(state);
-				break;
-			case "nomatch":
-				this.readMatchState(state);
-				this.isOpen = !this.isOpen;
-				break;
-		}
+	var state = this.stateTitle ? this.wiki.getTextReference(this.stateTitle,this["default"],this.getVariable("currentTiddler")) : this["default"];
+	switch(this.type) {
+		case "popup":
+			this.readPopupState(state);
+			break;
+		case "match":
+			this.readMatchState(state);
+			break;
+		case "nomatch":
+			this.readMatchState(state);
+			this.isOpen = !this.isOpen;
+			break;
 	}
 };
 

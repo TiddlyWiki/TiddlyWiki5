@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/help/HelpPanel
+tags: $:/tags/PageTemplate
+
+<$reveal type="match" state="$:/config/ShowHelp" text="yes">
+<div class="tc-help-panel">
+<div class="tc-tiddler-controls">
+<$button set="$:/config/ShowHelp" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Help Panel''
+</div>
+<<tabs "[all[shadows+tiddlers]tag[$:/tags/HelpPanel]!has[draft.of]]" "$:/plugins/tiddlywiki/help/HelpPanel/Support" "$:/state/tab/help">>
+</div>
+</$reveal>
+

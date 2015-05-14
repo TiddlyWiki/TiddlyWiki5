@@ -1,0 +1,19 @@
+created: 20150221160534000
+modified: 20150221223524000
+tags: [[datauri Macro]] [[Macro Examples]]
+title: datauri Macro (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="2"
+eg="""<style>
+.jack {
+	background: url(<$macrocall $name="datauri" title="Motovun Jack.jpg" $output="text/plain"/>);
+	height: 300px;
+}
+</style>
+
+<div class="jack"/>"""/>
+
+The example has to invoke <<.var datauri>> through the <<.wid macrocall>> widget. It needs to prevent the macro's output from being parsed as WikiText, as that would transform the data URI into a <<.wlink LinkWidget>> widget and break the example. If the example was in a CSS tiddler, you could simply write:
+
+> `background: url(<<datauri "Motovun Jack.jpg">>);`

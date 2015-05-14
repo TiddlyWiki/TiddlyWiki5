@@ -1,0 +1,16 @@
+created: 20140828133830424
+modified: 20150203192738000
+tags: [[Filter Operators]] [[String Operators]] [[Negatable Operators]]
+title: suffix Operator
+type: text/vnd.tiddlywiki
+caption: suffix
+op-purpose: filter the input titles by how they end
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: a string of characters
+op-parameter-name: S
+op-output: those input titles that end with <<.place S>>
+op-neg-output: those input tiddlers that do <<.em not>> end with <<.place S>>
+
+<<.s-matching-is-case-sensitive>>
+
+<<.operator-examples "suffix">>

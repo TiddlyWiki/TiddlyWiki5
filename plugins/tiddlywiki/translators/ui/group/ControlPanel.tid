@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/ControlPanel
+caption: Control Panel
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[tiddlers+shadows]prefix[$:/language/ControlPanel/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/ControlPanel/]]
+\end
+
+! Control Panel
+
+[[Control Panel|$:/ControlPanel]].
+
+<<translatableStringEditor>>

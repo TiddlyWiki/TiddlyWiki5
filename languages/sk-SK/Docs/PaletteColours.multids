@@ -1,0 +1,101 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Pozadie pre výstrahu
+alert-border: Okraj pre výstrahu
+alert-highlight: Highlight pre výstrahu
+alert-muted-foreground: Tlmené pozadie pre výstrahu
+background: Celkové pozadie
+blockquote-bar: Blockquote menu
+code-background: Pozadie pre zdrojový kód
+code-border: Okraj pre zdrojový  kód
+code-foreground: Popredie pre zdrojový kód
+dirty-indicator: Indikátor neuložených zmien
+download-background: Pozadie pre tlačítko sťahovania
+download-foreground: Popredie pre tlačítko sťahovania
+dragger-background: Pozadie pre dragger
+dragger-foreground: Popredie pre dragger
+dropdown-background: Pozadie pre dropdown
+dropdown-border: Okraj pre dropdown
+dropdown-tab-background: Pozadie pre dropdown záložku
+dropdown-tab-background-selected: Pozadie pre dropdown vybrané záložky
+dropzone-background: Pozadie pre dropzone
+external-link-background: Pozadie pre externú linku
+external-link-background-hover: Pozadie pre nábeh na externú linku
+external-link-background-visited: Pozadie pre navštívenú externú linku
+external-link-foreground: Popredie pre externú linku
+external-link-foreground-hover: Popredie pre nábeh na externú linku
+external-link-foreground-visited: Popredie pre navštívenú externú linku
+foreground: Celkové popredie
+message-background: Pozadie pre okno správ
+message-border: Okraj pre okno správ
+message-foreground: Popredie pre okno správ
+modal-backdrop: Popredie 
+modal-background: Modálne pozadie
+modal-border: Modálny okraj
+modal-footer-background: Pozadie pre modálnu pätu stránky
+modal-footer-border: Okraj pre modálnu pätu stránky
+modal-header-border: Pozadie pre modálnu hlavičku stránky
+muted-foreground: Všeobecné pozadie tlmené
+notification-background: Pozadie pre notifikáciu
+notification-border: Okraj pre notifikáciu
+page-background: Pozadie stránky
+pre-background: Pozadie pre predformátovaný zdrojový kód
+pre-border: Okraj pre predformátovaný zdrojový kód
+primary: Všeobecná primárna
+sidebar-button-foreground: Popredie tlačítka pre postranné menu
+sidebar-controls-foreground: Popredie pre tlačítka v postrannom menu
+sidebar-controls-foreground-hover: Popredie pri nábehu na tlačítka v postrannom menu
+sidebar-foreground: Popredie pre postranné menu
+sidebar-foreground-shadow: Popredie pre tieň postranného menu
+sidebar-muted-foreground: Tlmené popredie pre postranné menu
+sidebar-muted-foreground-hover: Tlmené popredie pri nábehu na tlačítka v postrannom menu
+sidebar-tab-background: Pozadie pre záložku v postrannom menu
+sidebar-tab-background-selected: Pozadie pre vybranú záložku v postrannom menu
+sidebar-tab-border: Okraj pre záložku v postrannom menu
+sidebar-tab-border-selected: Okraj pre vybranú  záložku v postrannom menu
+sidebar-tab-divider: Oddeľovač v postrannom menu
+sidebar-tab-foreground: Popredie pre záložku v postrannom menu
+sidebar-tab-foreground-selected: Popredie pre vybranú  záložku v postrannom menu
+sidebar-tiddler-link-foreground: Popredie pre linku na tiddler v postrannom menu
+sidebar-tiddler-link-foreground-hover: Popredie pri nábehu na  linku na tiddler v postrannom menu
+static-alert-foreground: Popredie pre statickú výstrahu
+tab-background: Pozadie pre záložku
+tab-background-selected: Pozadie pre vybranú záložku
+tab-border: Okraj pre záložku
+tab-border-selected: Okraj pre vybranú záložku
+tab-divider: Oddeľovač pre záložku
+tab-foreground: Popredie pre záložku
+tab-foreground-selected: Popredie pre vybranú záložku
+table-border: Okraj pre tabuľku
+table-footer-background: Pozadie pre pätu tabuľky
+table-header-background: Pozadie pre hlavičku tabuľky
+tag-background: Pozadie pre štítok
+tag-foreground: Popredie pre štítok
+tiddler-background: Pozadie pre tiddler
+tiddler-border: Okraj pre tiddler
+tiddler-controls-foreground: Popredie pre tlačítka v tiddlere
+tiddler-controls-foreground-hover: Popredie pre nábeh na tlačítka v tiddlere
+tiddler-controls-foreground-selected: Popredie pre vybrané tlačítka v tiddlere
+tiddler-editor-background: Pozadie pre editor tiddlera
+tiddler-editor-border: Okraj pre editor tiddlera
+tiddler-editor-border-image: Obrázok pre okraj editor tiddlera
+tiddler-editor-fields-even: Pozadie pre editor tiddlera pre párne polia
+tiddler-editor-fields-odd: Pozadie pre editor tiddlera pre nepárne polia
+tiddler-info-background: Pozadie pre informačný panel tiddlera
+tiddler-info-border: Okraj pre informačný panel tiddlera
+tiddler-info-tab-background: Pozadie pre záložku v informačnom paneli tiddlera
+tiddler-link-background: Pozadie pre linku v tiddlere
+tiddler-link-foreground: Popredie pre linku v tiddlere
+tiddler-subtitle-foreground: Popredie pre pomocný názov tiddlera
+tiddler-title-foreground: Popredie pre názov tiddlera
+toolbar-cancel-button: Popredie pre pre tlačítko 'zrušiť' v lište nástrojov
+toolbar-close-button: Popredie pre pre tlačítko 'zatvoriť' v lište nástrojov
+toolbar-delete-button: Popredie pre pre tlačítko 'vymazať' v lište nástrojov
+toolbar-done-button: Popredie pre pre tlačítko 'urobené' v lište nástrojov
+toolbar-edit-button: Popredie pre pre tlačítko 'editovať' v lište nástrojov
+toolbar-info-button: Popredie pre pre tlačítko 'info' v lište nástrojov
+toolbar-new-button: Popredie pre pre tlačítko 'nový tiddler' v lište nástrojov
+toolbar-options-button: Popredie pre pre tlačítko 'viac možnosti' v lište nástrojov
+toolbar-save-button: Popredie pre pre tlačítko 'ulož zmeny' v lište nástrojov
+untagged-background: Pozadie pre tabletku neoštítkované
+very-muted-foreground: Veľmi tlmené popredie

@@ -1,0 +1,38 @@
+caption: action-navigate
+created: 20141008163514491
+modified: 20150220162057000
+tags: Widgets ActionWidgets
+title: ActionNavigateWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-navigate'' widget is an [[action widget|ActionWidgets]] that sends a [[tm-navigate|WidgetMessage: tm-navigate]] message back up the widget tree. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+! Content and Attributes
+
+The ''action-navigate'' widget is invisible. Any content within it is ignored.
+
+|!Attribute |!Description |
+|$to |The title of the target tiddler for the navigation (if not provided defaults to the [[current tiddler|Current Tiddler]] |
+|$scroll |Optional parameter determining whether the navigation will also cause a scroll to the target tiddler (see below) |
+
+!! Scroll handling
+
+The optional `$scroll` attribute can be set to "yes" to force scrolling to occur to bring the target tiddler into view. If set to "no" then scrolling does not occur. If the `$scroll` attribute is omitted then scrolling occurs unless either:
+
+* the control key is pressed
+* the action was initiated with the middle mouse button (if available)
+
+Note that if navigating to multiple tiddlers at once you should use the same `$scroll` setting for all of them.
+
+! Examples
+
+Here is an example of button that navigates to two different tiddlers at once:
+
+<$macrocall $name='wikitext-example-without-html'
+src='<$button>
+<$action-navigate $to="ButtonWidget"/>
+<$action-navigate $to="ActionWidgets"/>
+Click me!
+</$button>'/>

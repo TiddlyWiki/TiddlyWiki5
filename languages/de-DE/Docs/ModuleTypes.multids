@@ -1,21 +1,22 @@
 title: $:/language/Docs/ModuleTypes/
 
 animation: Animationen, die vom RevealWidget verwendet werden. 
-command: Kommandozeilen Parameter, die mit node.js ausgeführt werden können.
+command: Kommandozeilen-Parameter, die mit node.js ausgeführt werden können.
 config: Daten, die in `$tw.config` eingefügt werden.
-filteroperator: Individuelle Filter Operator Funktionen.
+filteroperator: Individuelle Funktionen für den Filter-Operator.
 global: Globale Daten, die in `$tw` eingefügt werden.
-isfilteroperator: Operanden, für den ''is'' Filter Operator.
-macro: Globale JavaScript Macro Definitionen.
+isfilteroperator: Operanden für den Filter-Operator: ''is''
+macro: Globale Makro-Definitionen in JavaScript.
 parser: Parser für verschiedene Tiddler Typen.
 saver: "Savers" stellen verschiedene Methoden zum Speichern mit dem Browser zur Verfügung.
-startup: Initialisierungs Funktionen.
-storyview: "Story View" ist für das Verhalten des "ListWidget's" zuständig, das die Tiddler "Hauptanzeige" verwaltet.
-tiddlerdeserializer: Konvertiert unterschiedliche "Inhalts Typen" in das Tiddler Format. 
-tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler Felder.
+startup: Funktionen zur Initialisierung.
+storyview: [[Story-View|Story]] ist für das Verhalten des "ListWidgets" zuständig, das die Tiddler "Hauptanzeige" verwaltet. Mit dem Toolbutton Story-Modus wird einer dieser Modi ausgewählt.
+tiddlerdeserializer: Konvertiert verschiedene textbasierte Inhaltstypen in das Tiddler-Format.
+tiddlerfield: Definiert das Verhalten, der unterschiedlichen Tiddler-Felder.
 tiddlermethod: Methoden werden dem `$tw.Tiddler` Prototypen hinzugefügt.
+upgrader: Führt spezifische Änderungen während des Upgrade- oder Import-prozesses durch.
 utils: Methoden werden `$tw.utils` hinzugefügt.
-utils-node: Erweitert `$tw.utils` mit node.js spezifischen Methoden.
-widget: Widgets verarbeiten das "Rendern" und "Aktualisieren" der Anzeige in der DOM.
+utils-node: Erweitert `$tw.utils` mit Methoden aus node.js.
+widget: Widgets verarbeiten das Rendern und Aktualisieren der Anzeige in der DOM.
 wikimethod: Methoden werden zu `$tw.Wiki` hinzugefügt.
-wikirule: Enthält die individuellen "Parser Regeln" für den WikiText Parser.
+wikirule: Enthält die individuellen Parser Regeln für den WikiText-Parser.

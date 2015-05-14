@@ -1,0 +1,21 @@
+{
+	"description": "Japanese edition",
+	"plugins": [
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+		"ja-JP"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","ja-jp-demo.html","text/plain"]
+	}
+}

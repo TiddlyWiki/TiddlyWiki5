@@ -1,0 +1,29 @@
+fr-title: Comment construire un TiddlyWiki5 à partir de tiddlers isolés
+created: 20131124220600000
+modified: 20141124151300809
+tags: [[TiddlyWiki on Node.js]] [[à commiter]]
+title: How to build a TiddlyWiki5 from individual tiddlers
+type: text/vnd.tiddlywiki
+
+Commencez par installer <<tw>> comme indiqué dans [[Installer TiddlyWiki sur Node.js|Installing TiddlyWiki on Node.js]].
+
+# Créez un [[dossier TiddlyWiki|TiddlyWikiFolders]] vide
+#* Le plus simple pour ce faire est d'utiliser la [[commande init|InitCommand]]<<dp>> <div>
+
+```
+tiddlywiki ~/MonDossierWiki --init empty
+```
+</div>
+#* Vous pouvez aussi vous contenter de copier le dossier `editions/empty` à partir du répertoire source TiddlyWiki5
+#*Ou encore, ex-nihilo<<dp>>
+#*# Créez un nouveau dossier dans un endroit pratique (par exemple `~/MonDossierWiki`)
+#*# Créez un fichier appelé `tiddlywiki.info` contenant le texte ci-dessous<<dp>>
+#*#* `{"themes": ["tiddlywiki/vanilla","tiddlywiki/snowwhite"]}`
+#*# Créez un sous-dossier appelé `tiddlers`
+# Ajoutez des [[fichiers de tiddlers|TiddlerFiles]] individuels dans le répertoire `~/MonDossierWiki/tiddlers`
+# Exécutez la commande ci-dessous depuis le répertoire racine de TiddlyWiki5 pour construire un fichier TiddlyWiki5 complet à partir des tiddlers<<dp>><div>
+
+```
+tiddlywiki ~/MonDossierWiki --rendertiddler $:/core/save/all index.html text/plain
+```
+</div>

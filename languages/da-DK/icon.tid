@@ -1,0 +1,9 @@
+title: $:/languages/da-DK/icon
+type: image/svg+xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="280">
+<rect width="370" height="280" fill="#c60c30"/>
+<rect width="40" height="280" x="120" fill="#fff"/>
+<rect width="370" height="40" y="120" fill="#fff"/>
+</svg>

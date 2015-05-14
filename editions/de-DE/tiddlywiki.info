@@ -1,4 +1,5 @@
 {
+	"description": "Deutsche Basis Edition",
 	"plugins": [
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff"],

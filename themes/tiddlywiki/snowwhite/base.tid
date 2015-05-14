@@ -13,7 +13,7 @@ tags: [[$:/tags/Stylesheet]]
 
 @media screen {
 	.tc-tiddler-frame {
-		<<box-shadow "5px 5px 5px rgba(0, 0, 0, 0.1)">>
+		<<box-shadow "1px 1px 5px rgba(0, 0, 0, 0.3)">>
 	}
 }
 
@@ -27,7 +27,8 @@ tags: [[$:/tags/Stylesheet]]
 	<<transition "fill 150ms ease-in-out">>
 }
 
-.tc-tiddler-controls button.tc-selected svg {
+.tc-tiddler-controls button.tc-selected,
+.tc-page-controls button.tc-selected {
 	<<filter "drop-shadow(0px -1px 2px rgba(0,0,0,0.25))">>
 }
 
@@ -60,7 +61,7 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-modal-displayed {
-	-webkit-filter: blur(4px);
+	<<filter "blur(4px)">>
 }
 
 .tc-modal {
@@ -102,5 +103,5 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-plugin-info {
-	<<box-shadow "2px 2px 4px rgba(0,0,0,0.2)">>
+	<<box-shadow "1px 1px 3px rgba(0,0,0,0.5)">>
 }

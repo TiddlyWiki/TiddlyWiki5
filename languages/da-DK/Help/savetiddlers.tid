@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddlers
+description: Gemmer en gruppe af rå tiddlere til en mappe
+
+Gemmer en gruppe af tiddlere i deres rå tekst eller binære format i den specificerede mappe. 
+
+```
+--savetiddlers <filter> <pathname>
+```
+
+Som standard, løses stinavnet relativt til `output` undermappen i udgavens mappe . `--output` kommandoen kan bruges til at dirigere output til en anden mappe .
+
+Alle manglende mapper i stinavnet oprettes automatisk.

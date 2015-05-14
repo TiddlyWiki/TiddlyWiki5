@@ -1,0 +1,39 @@
+caption: 5.0.18-beta
+created: 20140917211055150
+modified: 20150221230143000
+tags: BetaReleaseNotes
+title: Release 5.0.18-beta
+type: text/vnd.tiddlywiki
+released: 20140917211055150
+
+//[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.0.17-beta...v5.0.18-beta]]//
+
+This is a minor release prior to the full release of TiddlyWiki on September 20th. The documentation has been cleaned up and improved (with more improvements to come).
+
+!! File Layout of tiddlywiki.com
+
+The layout of files on tiddlywiki.com has been adjusted to make it more logical. See the [[ticket|https://github.com/Jermolene/TiddlyWiki5/issues/823]] for a discussion. You can see the source files that make up tiddlywiki.com at https://github.com/Jermolene/jermolene.github.com
+
+!! Hackability Improvements
+
+* Added first iteration of a <<.mlink list-links>> macro (further improvements are planned)
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6d9bd4df8a1133c2ba246333edad14e6028d3ea4]] support for importing `.markdown` and `.md` files
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c4123ba3740f74f172468c4aa050451ebc5780d8]] <<.mlink timeline>> macro to support a subfilter
+
+!! Bug Fixes
+
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/a9f46525a0b1ecf7ce6d1bdae64e6763a247106b]] problem with digits being classified as lower case letters for wiki link matching
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8cc236b4dca96327c7b28ad45e1eb4c2dce174e5]] crash when sorting missing tiddlers by fields other than title
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/73a4747d05c6746476ccd9e8cb8255853f631d17]] problem with handling `.jpeg` file extensions
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/775482a2428d24a475e0c7df7bea215c190b5574]] problem with RadioWidget and missing tiddlers
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/2571f534aa67c7f9d423d44d36efa32480f4c370]] problem with dragging a partially selected link
+
+!! Contributors
+
+[[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
+
+* [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@Eucaly|https://github.com/Eucaly]]
+* [[@pmario|https://github.com/pmario]]
+* [[@xcazin|https://github.com/xcazin]]

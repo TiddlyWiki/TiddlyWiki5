@@ -9,8 +9,8 @@ description: {{$:/language/Buttons/Import/Hint}}
 {{$:/core/images/import-button}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Import/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Import/Caption}}/></span>
 </$list>
 </$button>
-<$browse/>
+<$browse tooltip={{$:/language/Buttons/Import/Hint}}/>
 </div>

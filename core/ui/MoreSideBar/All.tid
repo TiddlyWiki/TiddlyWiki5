@@ -2,4 +2,4 @@ title: $:/core/ui/MoreSideBar/All
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/All/Caption}}
 
-<$list filter="[!is[system]sort[title]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter={{$:/core/Filters/AllTiddlers!!filter}} template="$:/core/ui/ListItemTemplate"/>

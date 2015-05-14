@@ -1,0 +1,10 @@
+title: $:/languages/ru-RU/icon
+type: image/svg+xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 6" width="900" height="600">
+<rect width="9" height="6" fill="#D52B1E"/>
+<rect width="9" height="4" fill="#0039A6"/>
+<rect width="9" height="2" fill="#FFF"/>
+<path d="m0,0h9v6H0z" stroke="#a0a0a0" stroke-width=".1" fill="none"/>
+</svg>

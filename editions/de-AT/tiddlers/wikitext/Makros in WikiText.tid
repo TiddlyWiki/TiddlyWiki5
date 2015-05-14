@@ -1,8 +1,8 @@
 caption: Makros
 created: 20131205160746466
 creator: pmario
-modified: 20140913144641193
-modifier: pmario
+modified: 20140922124415476
+modifier: ChrisK
 tags: WikiText
 title: Makros in WikiText
 type: text/vnd.tiddlywiki
@@ -54,7 +54,7 @@ Der Bereich zwischen `\define` und `\end` wird als Makro Code bezeichnet. In die
 Wie im Beispiel ersichtlich: `Hallo, Ich bin $name$ und lebe in $adresse$`
 
 ---
-!!! Einzeilig Makros
+!!! Einzeilige Makros
 
 Für einzeilige Makros kann die `\end` Markierung entfallen!
 
@@ -64,17 +64,17 @@ Für einzeilige Makros kann die `\end` Markierung entfallen!
 
 !!! Makro Regeln
 
-* Makro Definitionen müssen am Anfange des Tiddlers eingefügt werden.
+* Makro Definitionen müssen am Anfang des Tiddlers eingefügt werden.
 * Makros sind nur in dem Tiddler sichtbar der sie definiert.
 * Tiddler die mit Transklusion eingefügt werden können definierte Makros sehen, jedoch nicht selber mitbringen!
 
 !!! Globale Makros
 
-* Globale Makros können in Tiddlern definiert weden, die mit dem System Tag: [[$:/tags/Macro]] getaggt sind. Diese Makros sind in jedem Tiddler sichtbar.
+* Globale Makros können in Tiddlern definiert werden, die mit dem System Tag: [[$:/tags/Macro]] getaggt sind. Diese Makros sind in jedem Tiddler sichtbar.
 
 * [[JavaScript Macros]] sind global sichtbar und haben Zugriff auf die TW Kern Funktionen. 
 
-* Macros können mit dem ImportVariablesWidget importiert werden. (Für geübte Anwender)
+* Makros können mit dem ImportVariablesWidget importiert werden. (Für geübte Anwender)
 
 !! Makros Verwenden
 
@@ -103,7 +103,7 @@ Wie wir sehen können, werden die Parameter in der Reihenfolge übernommen, in d
 
 !! Mehrzeilige Parameter beim Aufruf
 
-Makros können mit mehrzeiligen Parametern aufgerufen werden wenn sie in Anführungsstrichen gesetzt werden:
+Makros können mit mehrzeiligen Parametern aufgerufen werden, wenn sie in Anführungsstriche gesetzt werden:
 
 ```
 <<meinErstesMakro "Mickey Mouse" "Mouse House,
@@ -112,7 +112,7 @@ Rodentville,
 Ratland.">>
 ```
 
-Wenn sie 3 doppelte Anführungszeichen verwenden, dann können die Parameter einfache Anführungszeichen enthalten:
+Wenn Sie 3 doppelte Anführungszeichen verwenden, dann können die Parameter einfache Anführungszeichen enthalten:
 
 ```
 <<meinErstesMakro "Mickey Mouse" """Mouse House,

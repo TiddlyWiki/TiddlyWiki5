@@ -1,25 +1,26 @@
 created: 20140811171304926
 creator: pmario
-modified: 20140909111713240
+modified: 20140922125459696
+modifier: ChrisK
 tags: howto
 title: Speichern mit Safari
 type: text/vnd.tiddlywiki
 
-This method of saving changes is clunky because it requires manual intervention for each save.
+Diese Methode ist etwas umständlich, da jeder Schritt manuell gemacht werden muss. 
 
-# Speichern sie eine leere Datei der deutschen Version.
+# Speichern Sie eine leere Datei der deutschen Version.
 #> {{$:/editions/de-AT-DE/snippets/download-empty-button}}
 #> Ihr Browser kann eventuell nachfragen, ob die Datei gespeichert werden soll. 
-# Suchen sie die eben geladene Datei im Datei Manager.
-#* Geben sie der Datei einen vernünftigen Namen und stellen sie sicher, dass die Endung `.html` oder `.htm` ist.
-#  Öffnen sie die Datei mit ihrem Browser.
-# Erstellen sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
-# Geben sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
-# Speichern sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü
+# Suchen Sie die eben geladene Datei im Datei Manager.
+#* Geben Sie der Datei einen vernünftigen Namen und stellen Sie sicher, dass die Endung `.html` oder `.htm` ist.
+#  Öffnen Sie die Datei mit Ihrem Browser.
+# Erstellen Sie einen neuen Tiddler mit dem {{$:/core/images/new-button}} ''plus'' im rechten Menü. 
+# Geben Sie den Text ein und bestätigen die Eingabe mit dem {{$:/core/images/done-button}} ''OK''.
+# Speichern Sie die Änderungen mit: {{$:/core/images/save-button}} ''speichern'' im rechten Menü
 # Ein "popup" mit "Änderungen speichern" wird angezeigt. Es enthält einen Link mit der Information //Rechts klicken um zu speichern//
-# Klicken sie den Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  
-# Wählen sie das Verzeichnis, und selektieren sie die existierende Datei.
-# Klicken sie den "Speichern" button.
-# Klicken sie "Ersetzen" um das Überschreiben zu erlauben.
-# Laden sie das Browser Fenster neu.
+# Klicken Sie den Link mit der rechten Maustaste und wählen: "Ziel Speichern unter ..."  
+# Wählen Sie das Verzeichnis, und selektieren Sie die existierende Datei.
+# Klicken Sie den "Speichern" Button.
+# Klicken Sie "Ersetzen" um das Überschreiben zu erlauben.
+# Laden Sie das Browser Fenster neu.
 # Überprüfen sie, ob die Änderungen richtig gespeichert wurden.

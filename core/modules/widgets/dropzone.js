@@ -52,13 +52,30 @@ DropZoneWidget.prototype.render = function(parent,nextSibling) {
 	this.domNodes.push(domNode);
 };
 
-DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
+DropZoneWidget.prototype.enterDrag = function() {
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
+		return false;
+	}
 	// We count enter/leave events
 	this.dragEnterCount = (this.dragEnterCount || 0) + 1;
 	// If we're entering for the first time we need to apply highlighting
 	if(this.dragEnterCount === 1) {
 		$tw.utils.addClass(this.domNodes[0],"tc-dragover");
 	}
+};
+
+DropZoneWidget.prototype.leaveDrag = function() {
+	// Reduce the enter count
+	this.dragEnterCount = (this.dragEnterCount || 0) - 1;
+	// Remove highlighting if we're leaving externally
+	if(this.dragEnterCount <= 0) {
+		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
+	}
+};
+
+DropZoneWidget.prototype.handleDragEnterEvent  = function(event) {
+	this.enterDrag();
 	// Tell the browser that we're ready to handle the drop
 	event.preventDefault();
 	// Tell the browser not to ripple the drag up to any parent drop handlers
@@ -70,23 +87,27 @@ DropZoneWidget.prototype.handleDragOverEvent  = function(event) {
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
 		return false;
 	}
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
+		return false;
+	}
 	// Tell the browser that we're still interested in the drop
 	event.preventDefault();
 	event.dataTransfer.dropEffect = "copy"; // Explicitly show this is a copy
 };
 
 DropZoneWidget.prototype.handleDragLeaveEvent  = function(event) {
-	// Reduce the enter count
-	this.dragEnterCount = (this.dragEnterCount || 0) - 1;
-	// Remove highlighting if we're leaving externally
-	if(this.dragEnterCount <= 0) {
-		$tw.utils.removeClass(this.domNodes[0],"tc-dragover");
-	}
+	this.leaveDrag();
 };
 
 DropZoneWidget.prototype.handleDropEvent  = function(event) {
+	this.leaveDrag();
 	// Check for being over a TEXTAREA or INPUT
 	if(["TEXTAREA","INPUT"].indexOf(event.target.tagName) !== -1) {
+		return false;
+	}
+	// Check for this window being the source of the drag
+	if($tw.dragInProgress) {
 		return false;
 	}
 	var self = this,
@@ -118,6 +139,9 @@ DropZoneWidget.prototype.importData = function(dataTransfer) {
 				var data = dataTransfer.getData(dataType.type);
 			// Import the tiddlers in the data
 			if(data !== "" && data !== null) {
+				if($tw.log.IMPORT) {
+					console.log("Importing data type '" + dataType.type + "', data: '" + data + "'")
+				}
 				var tiddlerFields = dataType.convertToFields(data);
 				if(!tiddlerFields.title) {
 					tiddlerFields.title = this.wiki.generateNewTitle("Untitled");
@@ -135,7 +159,7 @@ DropZoneWidget.prototype.importDataTypes = [
 	}},
 	{type: "URL", IECompatible: true, convertToFields: function(data) {
 		// Check for tiddler data URI
-		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return JSON.parse(match[1]);
 		} else {
@@ -146,7 +170,7 @@ DropZoneWidget.prototype.importDataTypes = [
 	}},
 	{type: "text/x-moz-url", IECompatible: false, convertToFields: function(data) {
 		// Check for tiddler data URI
-		var match = decodeURI(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
+		var match = decodeURIComponent(data).match(/^data\:text\/vnd\.tiddler,(.*)/i);
 		if(match) {
 			return JSON.parse(match[1]);
 		} else {
@@ -199,6 +223,9 @@ DropZoneWidget.prototype.handlePasteEvent  = function(event) {
 						text: str,
 						type: type
 					};
+					if($tw.log.IMPORT) {
+						console.log("Importing string '" + str + "', type: '" + type + "'");
+					}
 					self.dispatchEvent({type: "tm-import-tiddlers", param: JSON.stringify([tiddlerFields])});
 				});
 			}

@@ -1,0 +1,14 @@
+created: 20140410103123179
+modified: 20150203191657000
+tags: [[Filter Operators]] [[Tag Operators]]
+title: tags Operator
+type: text/vnd.tiddlywiki
+caption: tags
+op-purpose: select all tags of the input tiddlers
+op-input: a [[selection of titles|Title Selection]]
+op-parameter: none
+op-output: all the tags carried by the input tiddlers
+
+Each input title is processed in turn. The corresponding tiddler's tags are retrieved (in order of appearance in the <<.field tags>> field) and then [[dominantly appended|Dominant Append]] to the operator's output.
+
+<<.operator-examples "tags">>

@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Uloží pôvodny obsah tiddlera do určeného súboru
+
+Uloží jednotlivý tiddler v jeho pôvodnej textovej alebo binárnej podobe do určeného súboru. 
+
+```
+--savetiddler <title> <filename>
+```
+
+Štandardne sa cesta k súboru resolvuje voči `output` podadresáru v adresári vydania. Príkaz `--output` je možné použiť na presmerovanie výstupu do iného adresára.
+
+Chýbajúce adresáre v ceste vytváraného súboru sa vytvoria automaticky.

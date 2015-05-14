@@ -1,0 +1,19 @@
+title: $:/core/ui/Buttons/advanced-search
+tags: $:/tags/PageControls
+caption: {{$:/core/images/advanced-search-button}} {{$:/language/Buttons/AdvancedSearch/Caption}}
+description: {{$:/language/Buttons/AdvancedSearch/Hint}}
+
+\define control-panel-button(class)
+<$button to="$:/AdvancedSearch" tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="""$(tv-config-toolbar-class)$ $class$""">
+<$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
+{{$:/core/images/advanced-search-button}}
+</$list>
+<$list filter="[<tv-config-toolbar-text>prefix[yes]]">
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/AdvancedSearch/Caption}}/></span>
+</$list>
+</$button>
+\end
+
+<$list filter="[list[$:/StoryList]] +[field:title[$:/AdvancedSearch]]" emptyMessage=<<control-panel-button>>>
+<<control-panel-button "tc-selected">>
+</$list>

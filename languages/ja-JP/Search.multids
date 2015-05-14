@@ -1,10 +1,17 @@
 title: $:/language/Search/
 
-Advanced/Matches: //<small><$count filter={{$:/temp/advancedsearch}}/> 件の一致</small>//
-Filter/Caption: フィルター
-Filter/Hint: [[フィルタの書式|http://tiddlywiki.com/static/Filters.html]] を参照
-Matches: //<small><$count filter="[!is[system]search{$:/temp/search}]"/> 件の一致</small>//
+Advanced/Matches: //<small><<resultCount>> 件一致</small>//
+DefaultResults/Caption: List
+Filter/Caption: フィルタ
+Filter/Hint: [[フィルタ|http://tiddlywiki.com/static/Filters.html]]で検索します。 
+Filter/Matches: //<small><<resultCount>> 件一致</small>//
+Matches: //<small><<resultCount>> 件一致</small>//
 Shadows/Caption: 隠し
-Shadows/Hint: 隠し tiddler を検索
+Shadows/Hint: 隠しtiddlerを検索します。
+Shadows/Matches: //<small><<resultCount>> 件一致</small>//
+Standard/Caption: 一般
+Standard/Hint: 一般のtiddlerを検索します。
+Standard/Matches: //<small><<resultCount>> 件一致</small>//
 System/Caption: システム
-System/Hint: システム tiddler を検索
+System/Hint: システムtiddlerを検索します。
+System/Matches: //<small><<resultCount>> 件一致</small>//

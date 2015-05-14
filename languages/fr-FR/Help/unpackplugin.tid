@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: Déballe les tiddlers contenus dans un plugin
+
+Extrait les tiddlers utiles d'un plugin, en les créant sous forme de tiddlers ordinaires :
+
+```
+--unpackplugin <titre>
+```

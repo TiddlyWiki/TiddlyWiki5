@@ -1,5 +1,5 @@
 created: 20140321090511826
-modified: 20140912150005429
+modified: 20140919170549958
 tags: Community
 title: Latest
 type: text/vnd.tiddlywiki
@@ -8,13 +8,11 @@ The latest news, articles, resources and examples.
 
 <div class="tc-link-info">
 
-<$list filter="[tag[Articles]] [tag[Examples]] [tag[Resources]] [tag[Tutorials]] +[!sort[modified]limit[7]]">
+<$list filter="[tag[Articles]] [tag[Examples]] [tag[Resources]] [tag[Tutorials]] +[!sort[modified]limit[8]]">
 
 <div class="tc-link-info-item">
 
 ! <$link><$view field="title"/></$link>
-
-!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
 
 <div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
 
@@ -23,3 +21,5 @@ The latest news, articles, resources and examples.
 </div>
 
 </$list>
+
+</div>

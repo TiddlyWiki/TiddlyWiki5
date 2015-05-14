@@ -1,0 +1,31 @@
+created: 20141027151552783
+modified: 20141027151947305
+tags: [[Customise TiddlyWiki]]
+title: Customising search results
+type: text/vnd.tiddlywiki
+
+By default, the results for the sidebar search box are displayed as a simple list of tiddler titles. The search results can be customised by adding plugin visualisations that show the search results in different ways. (Tabs are shown automatically if an additional search result visualisation is detected).
+
+Search result visualisations are stored in tiddlers tagged [[$:/tags/SearchResults]]. The default search result listing is implemented in the system tiddler [[$:/core/ui/DefaultSearchResultList]].
+
+To create a new search result visualisation:
+
+# Create a new tiddler tagged [[$:/tags/SearchResults]]
+# Use the widget variable ''searchTiddler'' to access the title of the tiddler containing the current search term
+
+If you'd like the new visualisation to be the default, create a tiddler called [[$:/config/SearchResults/Default]] containing the title of the tiddler containing the search visualisation that you want to display by default.
+
+Here is an example of an alternative visualisation that displays results in reverse chronological order:
+
+```
+\define searchResults()
+<$set name="resultCount" value="""<$count filter="[!is[system]search{$(searchTiddler)$}]"/>""">
+
+{{$:/language/Search/Matches}}
+
+</$set>
+<<timeline subfilter:"!is[system]search{$(searchTiddler)$}">>
+\end
+<<searchResults>>
+```
+

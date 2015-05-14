@@ -1,3 +1,6 @@
 title: $:/themes/tiddlywiki/vanilla/settings/
 
-fontfamily: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+fontfamily: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", "DejaVu Sans", sans-serif
+codefontfamily: Monaco, Consolas, "Lucida Console", "DejaVu Sans Mono", monospace
+backgroundimageattachment: fixed
+backgroundimagesize: auto

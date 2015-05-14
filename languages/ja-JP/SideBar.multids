@@ -1,15 +1,16 @@
 title: $:/language/SideBar/
 
 All/Caption: 全て
+Contents/Caption: コンテンツ
 Drafts/Caption: ドラフト
 Missing/Caption: 未作成
-More/Caption: さらに
-Open/Caption: オープン中
-Orphans/Caption: 孤立
-Recent/Caption: 最近
+More/Caption: 詳しく
+Open/Caption: 表示中
+Orphans/Caption: 被参照無し
+Recent/Caption: 最近の更新
 Shadows/Caption: 隠し
 System/Caption: システム
 Tags/Caption: タグ別
-Tags/Untagged/Caption: 未タグ
+Tags/Untagged/Caption: タグ無し
 Tools/Caption: ツール
 Types/Caption: 種類別

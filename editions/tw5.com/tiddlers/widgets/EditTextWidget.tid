@@ -1,6 +1,6 @@
 title: EditTextWidget
 created: 201310241419
-modified: 201407250837
+modified: 20150220162131000
 tags: Widgets
 caption: edit-text
 
@@ -15,22 +15,25 @@ By default, the edit text widget generates a `<textarea>` as the HTML editing el
 The content of the `<$edit-text>` widget is ignored.
 
 |!Attribute |!Description |
-|tiddler |The tiddler to edit (defaults to the [[WidgetVariable: currentTiddler]]) |
+|tiddler |The tiddler to edit (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The field to edit (defaults to `text`). Takes precedence over the `index` attribute |
 |index |The index to edit |
 |default |The default text to be provided when the target tiddler doesn't exist |
 |class |A CSS class to be assigned to the generated HTML editing element |
 |placeholder |Placeholder text to be displayed when the edit field is empty |
 |focusPopup |Title of a state tiddler for a popup that is displayed when the editing element has focus  |
-|tag |Overrides the generated HTML editing element tag |
-|size |The size of the input field (in characters) |
+|focus |Set to "true" to automatically focus the editor after creation  |
+|tag |Overrides the generated HTML editing element tag. Use `textarea` for a multi-line editor |
 |type |Overrides the generated HTML editing element `type` attribute |
+|size |The size of the input field (in characters) |
+|autoHeight |Either "yes" or "no" to specify whether to automatically resize `textarea` editors to fit their content (defaults to "yes") |
+|minHeight |Minimum height for automatically resized `textarea` editors, specified in CSS length units such as "px", "em" or "%" |
 
 ! Notes
 
 One trap to be aware of is that the edit text widget cannot be used to edit a field of the tiddler that contains it. Each keypress results in the tiddler being re-rendered, which loses the cursor position within the text field.
 
-Instead, place the edit text widget in a [[template|TiddlerTemplates]] that references the tiddler you want to modify.
+Instead, place the edit text widget in a [[template|TemplateTiddlers]] that references the tiddler you want to modify.
 
 For example, if you wanted to edit the value of the "myconfig" field of the tiddler "AppSettings", you might do so by creating a separate tiddler "ChangeAppSettings" that contains the following:
 

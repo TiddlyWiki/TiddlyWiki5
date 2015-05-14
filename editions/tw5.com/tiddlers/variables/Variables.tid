@@ -1,0 +1,23 @@
+created: 20141002133113496
+modified: 20150221215644000
+tags: Concepts Reference
+title: Variables
+type: text/vnd.tiddlywiki
+
+A <<.def variable>> is a snippet of text that can be accessed by name within a particular branch of the [[widget tree|Widgets]]. The snippet is known as the variable's <<.def value>>.
+
+A new variable is defined using a <<.wlink SetWidget>> widget, and is then available to any of the children of that widget, including transcluded content. A <<.wid set>> widget can reuse an existing name, thus binding a different snippet to that name for the duration of the widget's children.
+
+The <<.wlink ListWidget>> widget also sets a particular variable (<<.var currentTiddler>> by default) to each listed title in turn.
+
+For an overview of how to use variables, see [[Variables in WikiText]].
+
+Despite the term <<.word variable>>, each snippet is a constant string. The apparent variability is actually the result of the presence of multiple variables with the same name in different parts of the widget tree.
+
+[[Macros]] are a special form of variable whose value can contain placeholders that get filled in with parameters whenever the macro is used.
+
+By themselves, the snippets are <<.em not>> parsed as WikiText. However, a variable reference will transclude a snippet into a context where ~WikiText parsing <<.em may>> be occurring. Within a snippet, the only markup detected is `$name$` for a macro parameter transclusion and `$(name)$` for a variable transclusion.
+
+The <<.mlink dumpvariables>> macro lists all variables (including macros) that are available at that position in the widget tree.
+
+~TiddlyWiki's core has [[several variables|Core Variables]] built in.

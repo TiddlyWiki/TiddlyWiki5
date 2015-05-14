@@ -1,16 +1,23 @@
 created: 20130827080000000
-modified: 20140912145347313
+modified: 20150221225414000
 tags: Reference Concepts
 title: Filters
 type: text/vnd.tiddlywiki
+list: [[Introduction to filter notation]] [[Filter Syntax]]
 
-Filters are used in TiddlyWiki to choose tiddlers by specifying simple match criteria. They are used by widgets like the ListWidget and the CountWidget to perform operations on multiple tiddlers at once.
+You can think of TiddlyWiki as a database in which the records are tiddlers. A database typically provides a way of discovering which records match a given pattern, and in ~TiddlyWiki this is done with filters.
 
-* [[Introduction to Filters]] is a step-by-step introduction to how filters are used
-* [[Filter Formal Grammar]] is a technical explanation of the filter syntax.
+A <<.def filter>> is a concise notation for selecting a particular [[set of tiddlers|Title Selection]], known as its <<.def "output">>. Whenever ~TiddlyWiki encounters a filter, it calculates the output. Further work can then be done with just those tiddlers, such as [[counting|CountWidget]] or [[listing|ListWidget]] them.
 
-The most common filter operators are:
+The following example passes a filter to the <<.mlink list-links>> macro to display a list of all tiddlers whose titles start with the letter H:
 
-<<list-links "[tag[CommonFilters]]">>
+> `<<list-links "[prefix[H]]">>`
 
-See FilterOperators for a complete list of available filter operators
+A filter's output can change as tiddlers are added and deleted in the wiki. ~TiddlyWiki recalculates on the fly, automatically updating any filter-based counts or lists as well.
+
+[[Advanced Search|$:/AdvancedSearch]] has a <<.advancedsearch-tab Filter>> tab that makes it easy to experiment with filters.
+
+;Find out more:
+* [[Introduction to filter notation]] -- a step-by-step walkthrough
+* [[Filter Syntax]] -- the detailed technical rules
+* [[Filter Operators]] -- the available methods of filtering

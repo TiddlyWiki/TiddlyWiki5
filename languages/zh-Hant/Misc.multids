@@ -8,26 +8,24 @@ ConfirmCancelTiddler: 您確定要放棄對條目 "<$text text=<<title>>/>" 的�
 ConfirmDeleteTiddler: 您確定要刪除條目 "<$text text=<<title>>/>"？
 ConfirmOverwriteTiddler: 您確定要覆寫條目 "<$text text=<<title>>/>"？
 ConfirmEditShadowTiddler: 您即將要編輯預設條目，任何更改將會覆蓋預設的系統，使未來的升級不尋常。您確定要編輯 "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: 新條目
 DropMessage: 拖放到此處 （或按 ESC 鍵取消）
+Encryption/Cancel: 取消
+Encryption/ConfirmClearPassword: 您要清除密碼嗎？當儲存此維基時，這將刪除已套用的加密
+Encryption/Username: 使用者名稱
+Encryption/Password: 密碼
+Encryption/PromptSetPassword: 為此 TiddlyWiki 設定一個新密碼
+Encryption/RepeatPassword: 重複輸入密碼
+Encryption/PasswordNoMatch: 密碼不匹配
+Encryption/SetPassword: 設定密碼
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
+OfficialPluginLibrary: 官方 ~TiddlyWiki 插件程式庫
+PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
-RelativeDate/Future/Days: <<period>> 天後
-RelativeDate/Future/Hours: <<period>> 小時後
-RelativeDate/Future/Minutes: <<period>> 分鐘後
-RelativeDate/Future/Months: <<period>> 個月後
-RelativeDate/Future/Second: 1 秒後
-RelativeDate/Future/Seconds: <<period>> 秒後
-RelativeDate/Future/Years: <<period>> 年後
-RelativeDate/Past/Days: <<period>> 天前
-RelativeDate/Past/Hours: <<period>> 小時前
-RelativeDate/Past/Minutes: <<period>> 分鐘前
-RelativeDate/Past/Months: <<period>> 個月前
-RelativeDate/Past/Second: 1 秒前
-RelativeDate/Past/Seconds: <<period>> 秒前
-RelativeDate/Past/Years: <<period>> 年前
 SystemTiddler/Tooltip: 此為系統條目
 TagManager/Colour/Heading: 顏色
 TagManager/Icon/Heading: 圖示
+TagManager/Info/Heading: 資訊
 TagManager/Tag/Heading: 標籤
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未儲存的變更

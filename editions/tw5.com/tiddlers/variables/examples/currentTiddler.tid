@@ -1,0 +1,19 @@
+created: 20150221140726000
+modified: 20150221141342000
+tags: [[currentTiddler Variable]] [[Variable Examples]]
+title: currentTiddler Variable (Examples)
+type: text/vnd.tiddlywiki
+
+The following two examples have the same meaning:
+
+<$macrocall $name=".example" n="1" eg="""<$view field=title/>"""/>
+<$macrocall $name=".example" n="2" eg="""<$view tiddler=<<currentTiddler>> field=title/>"""/>
+
+This next example shows how the <<.wlink ListWidget>> widget changes the current tiddler:
+
+<$macrocall $name=".example" n="3"
+eg="""<ol>
+<$list filter="[prefix[J]]">
+<li><<currentTiddler>></li>
+</$list>
+</ol>"""/>

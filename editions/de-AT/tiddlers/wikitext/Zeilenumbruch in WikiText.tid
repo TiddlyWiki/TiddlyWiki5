@@ -1,8 +1,8 @@
 caption: Zeilenumbruch
 created: 20131214165710101
 creator: pmario
-modified: 20140913120456600
-modifier: pmario
+modified: 20140922133054642
+modifier: ChrisK
 tags: WikiText
 title: Zeilenumbruch in WikiText
 type: text/vnd.tiddlywiki
@@ -23,7 +23,7 @@ bim, bim, bim.
 
 In normalem Fließtext sollten keine zusätzlichen "harten" Zeilenumbrüche eingefügt werden, da diese bei unterschiedlichen Anzeigen zB: Handy's falsch dargestellt werden. 
 
-In Ausnahmefällen sollte es jedoch möglich sein einen "harten" Zeilenumbruch zu setzten. Dafür kann der HTML `<br>` "tag" verwendet werden. 
+In Ausnahmefällen sollte es jedoch möglich sein, einen "harten" Zeilenumbruch zu setzen. Dafür kann der HTML `<br>` "tag" verwendet werden. 
 
 ```
 Erste Zeile <br/>

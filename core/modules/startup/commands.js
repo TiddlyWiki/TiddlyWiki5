@@ -24,7 +24,7 @@ exports.startup = function(callback) {
 		$tw.boot.argv,
 		function(err) {
 			if(err) {
-				console.log("Error: " + err);
+				return $tw.utils.error("Error: " + err);
 			}
 			callback();
 		},

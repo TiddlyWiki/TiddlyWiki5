@@ -1,0 +1,28 @@
+caption: Tout récent
+created: 20140321090511826
+modified: 20141115220848210
+tags: Community
+title: Latest
+type: text/vnd.tiddlywiki
+
+Les informations, articles, ressources et exemples les plus récents.
+
+<div class="tc-link-info">
+
+<$list filter="[tag[Articles]] [tag[Examples]] [tag[Resources]] [tag[Tutorials]] +[!sort[modified]limit[8]]">
+
+<div class="tc-link-info-item">
+
+! <$link><$transclude field="caption"><$view field="title"/></$transclude></$link>
+
+!!! <a href={{!!url}} target="_blank"><$text text={{!!url}}/></a>
+
+<div class="tc-subtitle">Posted <$view field="modified" format="relativedate"/></div>
+
+<$transclude/>
+
+</div>
+
+</$list>
+
+</div>

@@ -1,0 +1,17 @@
+created: 20150203140000000
+modified: 20150203140000000
+tags: [[Filter Operators]] [[Field Operators]]
+title: getindex Operator
+caption: getindex
+purpose: select all values of a data property in the input titles
+
+<$macrocall $name=".operator-def"
+input="a [[selection of titles|Title Selection]]"
+parameter="the name of a [[property|DataTiddlers]]"
+paramName="P"
+output="the values of property <<.place P>> in each of the input titles"
+/>
+
+Each input title is processed in turn, and is ignored if it does not denote a [[data tiddler|DataTiddlers]]. If the tiddler contains property <<.place P>>, the value of that property is [[dominantly appended|Dominant Append]] to the output.
+
+<<.operator-examples "getindex">>

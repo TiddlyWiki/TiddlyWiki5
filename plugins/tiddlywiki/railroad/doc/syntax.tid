@@ -1,0 +1,99 @@
+created: 20150103184022184
+modified: 20150119220342000
+title: $:/plugins/tiddlywiki/railroad/syntax
+
+The railroad widget uses a special notation to construct the components defined below.
+
+`x` and `y` here stand for any component.
+
+Names (as opposed to quoted strings) are available when a value starts with a letter and contains only letters, digits, underscores, dots and hyphens.
+
+---
+
+; sequence
+: <$railroad text=""" ["<-"] {x} ["->"] """/>
+* A sequence of components
+* The `<-` and `->` delimiters allow you to force a single component to be treated as a sequence. This is occasionally useful for spacing a diagram out
+
+---
+
+; optional
+: <$railroad text=""" "[" [":"] x "]" """/>
+* A component that can be omitted
+* The colon makes `x` appear straight ahead
+
+---
+
+; repeated
+: <$railroad text=""" "{" x [:"+" y] "}" """/>
+* A list of one or more `x`
+* The `+` suffix adds `y` as a separator between each `x` and the next
+
+---
+
+; optional repeated
+: <$railroad text=""" "[{" [":"] x [:"+" y] "}]" """/>
+* An optional list of `x`, i.e. a list of zero or more `x`
+
+---
+
+; choice
+: <$railroad text=""" "(" {[:":"] x +"|"} ")" """/>
+* A set of alternatives
+* The colon indicates which branch appears straight ahead. By default, it's the first branch
+
+---
+
+; string / terminal
+: <$railroad text={{$:/plugins/tiddlywiki/railroad/syntax-string}}/>
+* A literal or terminal component
+* This follows the normal ~TiddlyWiki rules for quoted strings
+
+---
+
+; nonterminal
+: <$railroad text=""" (name | "<" string ">") """/>
+* A nonterminal component, i.e. the name of another diagram
+
+---
+
+; comment
+: <$railroad text=""" "/" string "/" """/>
+* A comment
+
+---
+
+; dummy
+: <$railroad text=""" "-" """/>
+* The absence of a component
+
+---
+
+; link
+: <$railroad text=""" "[[" x "|" (name|string) "]]" """/>
+* A link to the tiddler title or URI given by the string or name
+
+---
+
+; transclusion
+: <$railroad text=""" "{{" (name|string) "}}" """/>
+* Treats the content of another tiddler as diagram syntax and transcludes it into the current diagram
+
+---
+
+; arrow pragma
+: <$railroad text=""" "\arrow" ("yes" | "no") """/>
+* Controls whether repeat paths have an arrow on them
+* Can be toggled on and off in mid-diagram, if desired
+
+---
+
+; debug pragma
+: <$railroad text=""" "\debug" """/>
+* Causes the diagram to display its parse tree
+
+---
+
+; start/end pragma
+: <$railroad text=""" ("\start" |: "\end") ("none" |: "single" | "double") """/>
+* Controls the style of the diagram's startpoint or endpoint

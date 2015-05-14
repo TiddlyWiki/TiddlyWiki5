@@ -1,0 +1,13 @@
+title: $:/language/Filters/
+
+AllTags: सिस्टम टैग को छोड़कर सभी टैग
+AllTiddlers: सिस्टम tiddlers को छोड़कर सभी tiddlers
+Drafts: ड्राफ्ट tiddlers
+Missing: लापता tiddlers
+Orphans: ऑर्फ़न tiddlers
+OverriddenShadowTiddlers: अधिरोहित छाया tiddlers
+RecentSystemTiddlers: सिस्टम tiddlers समेत हाल ही में modified tiddlers,
+RecentTiddlers: हाल ही में modified tiddlers
+ShadowTiddlers: छाया tiddlers
+SystemTags: सिस्टम टैग
+SystemTiddlers: सिस्टम tiddlers

@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/translators/templates/TiddlerInfo.multids
+
+{{$:/language/TiddlerInfo/||$:/plugins/tiddlywiki/translators/templates/multids}}

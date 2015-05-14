@@ -1,0 +1,27 @@
+title: $:/language/
+
+BinaryWarning/Prompt: Este tiddler contiene datos binarios
+ClassicWarning/Hint: Este tiddler está escrito en formato de texto de una versión de TiddlyWiki Classic, que no es totalmente compatible con la versión 5 de TiddlyWiki. Visite http://tiddlywiki.com/static/Upgrading.html para más detalles.
+ClassicWarning/Upgrade/Caption: actualizar
+CloseAll/Button: cerrar todo
+ConfirmCancelTiddler: ¿Desea descartar los cambios efectuados en el tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: ¿Desea borrar el tiddler "<$text text=<<title>>/>"?
+ConfirmEditShadowTiddler: Usted está punto de editar un tiddler oculto (ShadowTiddler). Cualquier cambio afectará el sistema predeterminado por defecto poniendo en riesgo futuras actualizaciones del sistema. ¿Está usted seguro que desea editar "<$text text=<<title>>/>"?
+ConfirmOverwriteTiddler: ¿Desea sobreescribir el tiddler "<$text text=<<title>>/>"?
+DefaultNewTiddlerTitle: Nuevo Tiddler
+DropMessage: Suéltelo aquí (o pulse ''ESC'' para cancelar)
+Encryption/ConfirmClearPassword: ¿Desea usted borrar la contraseña? Esto removerá el cifrado que se aplica cuando se guarda este wiki
+Encryption/PromptSetPassword: Especificar una nueva contraseña para este TiddlyWiki
+Exporters/CsvFile: Archivo de tipo .CSV
+Exporters/JsonFile: Archivo de tipo .JSON
+Exporters/StaticRiver: Cadena de tiddlers como archivo estático .HTML
+Exporters/TidFile: Tiddler individual como archivo ".tid" 
+InvalidFieldName: Caracteres ilegales en el campo "<$text text=<<fieldName>>/>". Los campos sólo pueden contener letras en minúscula, dígitos y los caracteres guión bajo (`_`), guión corto (`-`) y punto (`.`)
+MissingTiddler/Hint: El tiddler "<$text text=<<currentTiddler>>/>" no existe - haga clic en {{$:/core/images/edit-button}} para crearlo
+RecentChanges/DateFormat: DD MMM YYYY
+SystemTiddler/Tooltip: Este es un tiddler de sistema
+TagManager/Colour/Heading: Color
+TagManager/Icon/Heading: Ícono
+TagManager/Info/Heading: Información
+TagManager/Tag/Heading: Etiqueta
+UnsavedChangesWarning: Usted tiene cambios sin guardar en TiddlyWiki

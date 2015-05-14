@@ -1,0 +1,14 @@
+caption: currentTiddler
+created: 20141001232824187
+modified: 20150221152029000
+tags: Variables [[Core Variables]]
+title: currentTiddler Variable
+type: text/vnd.tiddlywiki
+
+The <<.def currentTiddler>> [[variable|Variables]] contains the title of the [[current tiddler|Current Tiddler]].
+
+Several aspects of WikiText use this tiddler as their context. As a result, within a <<.wlink ListWidget>> widget or a [[template tiddler|TemplateTiddlers]], there is often no need to explicitly specify a tiddler title.
+
+Compare <<.vlink storyTiddler>>.
+
+<<.variable-examples "currentTiddler">>

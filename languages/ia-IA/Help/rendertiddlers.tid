@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Rende notas secundo un filtro a un specificate ContentType
+
+Render un serie de notas secundo un filtro pro separar files de un specificate ContentType (le standard es `text/html`) e extension (le standard es `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+Per exemplo:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Como standard, le nomine de sentiero es resolvite relative al subbibliotheca `output` del bibliotheca de redactiones. Le commando `--output` pote esser usate pro diriger resultatos a un bibliotheca differente.
+
+Ulle file in le bibliotheca de destination es delite. Le bibliotheca de destination es create, si illo manca.

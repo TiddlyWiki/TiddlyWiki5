@@ -137,7 +137,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 		this.changeCount[title] = 1;
 	}
 	// Trigger events
-	this.eventListeners = this.eventListeners || [];
+	this.eventListeners = this.eventListeners || {};
 	if(!this.eventsTriggered) {
 		var self = this;
 		$tw.utils.nextTick(function() {
@@ -177,7 +177,7 @@ exports.generateNewTitle = function(baseTitle,options) {
 	options = options || {};
 	var c = 0,
 		title = baseTitle;
-	while(this.tiddlerExists(title) || this.isShadowTiddler(title)) {
+	while(this.tiddlerExists(title) || this.isShadowTiddler(title) || this.findDraft(title)) {
 		title = baseTitle + 
 			(options.prefix || " ") + 
 			(++c);
@@ -211,7 +211,7 @@ exports.importTiddler = function(tiddler) {
 	// Check if we're dealing with a plugin
 	if(tiddler && tiddler.hasField("plugin-type") && tiddler.hasField("version") && existingTiddler && existingTiddler.hasField("plugin-type") && existingTiddler.hasField("version")) {
 		// Reject the incoming plugin if it is older
-		if($tw.utils.checkVersions(existingTiddler.fields.version,tiddler.fields.version)) {
+		if(!$tw.utils.checkVersions(tiddler.fields.version,existingTiddler.fields.version)) {
 			return false;
 		}
 	}
@@ -316,6 +316,14 @@ Sort an array of tiddler titles by a specified field
 exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,isNumeric) {
 	var self = this;
 	titles.sort(function(a,b) {
+		var x,y,
+			compareNumbers = function(x,y) {
+				var result = 
+					isNaN(x) && !isNaN(y) ? (isDescending ? -1 : 1) :
+					!isNaN(x) && isNaN(y) ? (isDescending ? 1 : -1) :
+					                        (isDescending ? y - x :  x - y);
+				return result;
+			};
 		if(sortField !== "title") {
 			var tiddlerA = self.getTiddler(a),
 				tiddlerB = self.getTiddler(b);
@@ -330,10 +338,10 @@ exports.sortTiddlers = function(titles,sortField,isDescending,isCaseSensitive,is
 				b = "";
 			}
 		}
-		if(isNumeric) {
-			a = Number(a);
-			b = Number(b);
-			return isDescending ? b - a : a - b;
+		x = Number(a);
+		y = Number(b);
+		if(isNumeric && (!isNaN(x) || !isNaN(y))) {
+			return compareNumbers(x,y);
 		} else if($tw.utils.isDate(a) && $tw.utils.isDate(b)) {
 			return isDescending ? b - a : a - b;
 		} else {
@@ -570,7 +578,7 @@ exports.sortByList = function(array,listTitle) {
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
 	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerData(title);
-	if(bundleInfo) {
+	if(bundleInfo && bundleInfo.tiddlers) {
 		var subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
 		if(subTiddler) {
 			return new $tw.Tiddler(subTiddler);
@@ -662,7 +670,7 @@ exports.setTiddlerData = function(title,data,fields) {
 		newFields.type = "application/json";
 		newFields.text = JSON.stringify(data,null,$tw.config.preferences.jsonSpaces);
 	}
-	this.addTiddler(new $tw.Tiddler(existingTiddler,fields,newFields,this.getModificationFields()));
+	this.addTiddler(new $tw.Tiddler(this.getCreationFields(),existingTiddler,fields,newFields,this.getModificationFields()));
 };
 
 /*
@@ -749,8 +757,8 @@ exports.old_parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
-	if(!Parser && $tw.config.fileExtensionInfo[type]) {
-		Parser = $tw.Wiki.parsers[$tw.config.fileExtensionInfo[type].type];
+	if(!Parser && $tw.utils.getFileExtensionInfo(type)) {
+		Parser = $tw.Wiki.parsers[$tw.utils.getFileExtensionInfo(type).type];
 	}
 	if(!Parser) {
 		Parser = $tw.Wiki.parsers[options.defaultType || "text/vnd.tiddlywiki"];
@@ -844,6 +852,7 @@ exports.parseTextReference = function(title,field,index,options) {
 		}
 		return this.parseText("text/vnd.tiddlywiki",text.toString(),options);
 	} else if(index) {
+		this.getTiddlerText(title); // Force the tiddler to be lazily loaded
 		text = this.extractTiddlerDataItem(tiddler,index,undefined);
 		if(text === undefined) {
 			return null;
@@ -896,6 +905,7 @@ Make a widget tree for transclusion
 title: target tiddler title
 options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
+options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
 */
 exports.makeTranscludeWidget = function(title,options) {
@@ -914,6 +924,9 @@ exports.makeTranscludeWidget = function(title,options) {
 	]};
 	if(options.field) {
 		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+	}
+	if(options.mode) {
+		parseTree.tree[0].children[0].attributes.mode = {type: "string", value: options.mode};
 	}
 	if(options.children) {
 		parseTree.tree[0].children[0].children = options.children;
@@ -968,6 +981,7 @@ Options available:
 	invert: If true returns tiddlers that do not contain the specified string
 	caseSensitive: If true forces a case sensitive search
 	literal: If true, searches for literal string, rather than separate search terms
+	field: If specified, restricts the search to the specified field
 */
 exports.search = function(text,options) {
 	options = options || {};
@@ -1006,13 +1020,17 @@ exports.search = function(text,options) {
 		var contentTypeInfo = $tw.config.contentTypeInfo[tiddler.fields.type] || $tw.config.contentTypeInfo["text/vnd.tiddlywiki"],
 			match;
 		for(var t=0; t<searchTermsRegExps.length; t++) {
-			// Search title, tags and body
 			match = false;
-			if(contentTypeInfo.encoding === "utf8") {
-				match = match || searchTermsRegExps[t].test(tiddler.fields.text);
+			if(options.field) {
+				match = searchTermsRegExps[t].test(tiddler.getFieldString(options.field));
+			} else {
+				// Search title, tags and body
+				if(contentTypeInfo.encoding === "utf8") {
+					match = match || searchTermsRegExps[t].test(tiddler.fields.text);
+				}
+				var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
+				match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
 			}
-			var tags = tiddler.fields.tags ? tiddler.fields.tags.join("\0") : "";
-			match = match || searchTermsRegExps[t].test(tags) || searchTermsRegExps[t].test(tiddler.fields.title);
 			if(!match) {
 				return false;
 			}
@@ -1086,7 +1104,7 @@ exports.readFile = function(file,callback) {
 	if(type === "" || !type) {
 		var dotPos = file.name.lastIndexOf(".");
 		if(dotPos !== -1) {
-			var fileExtensionInfo = $tw.config.fileExtensionInfo[file.name.substr(dotPos)];
+			var fileExtensionInfo = $tw.utils.getFileExtensionInfo(file.name.substr(dotPos));
 			if(fileExtensionInfo) {
 				type = fileExtensionInfo.type;
 			}
@@ -1095,6 +1113,10 @@ exports.readFile = function(file,callback) {
 	// Figure out if we're reading a binary file
 	var contentTypeInfo = $tw.config.contentTypeInfo[type],
 		isBinary = contentTypeInfo ? contentTypeInfo.encoding === "base64" : false;
+	// Log some debugging information
+	if($tw.log.IMPORT) {
+		console.log("Importing file '" + file.name + "', type: '" + type + "', isBinary: " + isBinary);
+	}
 	// Create the FileReader
 	var reader = new FileReader();
 	// Onload
@@ -1133,6 +1155,19 @@ exports.readFile = function(file,callback) {
 };
 
 /*
+Find any existing draft of a specified tiddler
+*/
+exports.findDraft = function(targetTitle) {
+	var draftTitle = undefined;
+	this.forEachTiddler({includeSystem: true},function(title,tiddler) {
+		if(tiddler.fields["draft.title"] && tiddler.fields["draft.of"] === targetTitle) {
+			draftTitle = title;
+		}
+	});
+	return draftTitle;
+}
+
+/*
 Check whether the specified draft tiddler has been modified
 */
 exports.isDraftModified = function(title) {
@@ -1143,9 +1178,9 @@ exports.isDraftModified = function(title) {
 	var ignoredFields = ["created", "modified", "title", "draft.title", "draft.of"],
 		origTiddler = this.getTiddler(tiddler.fields["draft.of"]);
 	if(!origTiddler) {
-		return true;
+		return tiddler.fields.text !== "";
 	}
-	return !tiddler.isEqual(origTiddler,ignoredFields);
+	return tiddler.fields["draft.title"] !== tiddler.fields["draft.of"] || !tiddler.isEqual(origTiddler,ignoredFields);
 };
 
 /*

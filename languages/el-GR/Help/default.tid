@@ -1,0 +1,22 @@
+title: $:/language/Help/default
+
+\define commandTitle()
+$:/language/Help/$(command)$
+\end
+```
+Χρήση: tiddlywiki [<φάκελος wiki>] [--<εντολή> [<ορίσματα>...]...]
+```
+
+Διαθέσιμες εντολές:
+
+<ul>
+<$list filter="[commands[]sort[title]]" variable="command">
+<li><$link to=<<commandTitle>>><$macrocall $name="command" $type="text/plain" $output="text/plain"/></$link>: <$transclude tiddler=<<commandTitle>> field="description"/></li>
+</$list>
+</ul>
+
+Για αναλυτική βοήθεια για κάποια εντολή:
+
+```
+tiddlywiki --help <εντολή>
+```

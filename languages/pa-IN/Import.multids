@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: ਰੱਦ ਕਰੋ
+Listing/Hint: ਇਹ tiddlers ਆਯਾਤ ਕਰਨ ਲਈ ਤਿਆਰ ਹਨ
+Listing/Import/Caption: ਅਯਾਤ
+Listing/Select/Caption:  ਚੋਣ ਕਰੋ
+Listing/Status/Caption: ਸਥਿਤੀ
+Listing/Title/Caption: ਸਿਰਲੇਖ
+Upgrader/Plugins/Suppressed/Incompatible:  ਰੋਕੀ ਹੋਈ ਅਨੁਕੂਲ ਜ ਛੱਡੇ ਪਲੱਗਇਨ
+Upgrader/Plugins/Suppressed/Version: ਪਲੱਗਇਨ ਰੋਕੀ (ਕਾਰਨ ਕਰਨ ਲਈ ਆਉਣ ਵਾਲੇ << ਆਉਣ >> ਮੌਜੂਦਾ ਜ਼ਿਆਦਾ ਉਮਰ ਦੇ ਹੋਣ ਦੇ << ਮੌਜੂਦਾ >>)
+Upgrader/Plugins/Upgraded: ਤੱਕ ਅੱਪਗਰੇਡ ਕੀਤਾ ਪਲੱਗਇਨ << ਆਉਣ >> ਨੂੰ << ਅੱਪਗਰੇਡ >>
+Upgrader/State/Suppressed: ਰੋਕੀ ਆਰਜ਼ੀ ਰਾਜ ਦੇ tiddler
+Upgrader/System/Suppressed: ਰੋਕੀ ਸਿਸਟਮ tiddler
+Upgrader/ThemeTweaks/Created: <$ ਪਾਠ = << ਤੱਕ >> /> ਤੱਕ ਮਾਈਗਰੇਟ ਥੀਮ tweak

@@ -7,19 +7,31 @@ caption: {{$:/language/Search/System/Caption}}
 
 <<lingo System/Hint>>
 
-<div class="tc-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/><$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tc-search">
+<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/>
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>
+{{$:/core/images/close-button}}
+</$button>
+</$reveal>
+</div>
 
 </$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
 
+<$set name="resultCount" value="""<$count filter="[is[system]search{$:/temp/advancedsearch}] -[[$:/temp/advancedsearch]]"/>""">
+
 <div class="tc-search-results">
 
 <<lingo System/Matches>>
 
-<$list filter="[is[system]search{$:/temp/advancedsearch}sort[title]limit[250]]" template="$:/core/ui/ListItemTemplate"/>
+<$list filter="[is[system]search{$:/temp/advancedsearch}sort[title]limit[250]] -[[$:/temp/advancedsearch]]" template="$:/core/ui/ListItemTemplate"/>
 
 </div>
+
+</$set>
 
 </$reveal>
 

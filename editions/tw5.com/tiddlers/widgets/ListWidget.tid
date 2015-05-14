@@ -1,5 +1,5 @@
 created: 201310241419
-modified: 201310300837
+modified: 201502231037
 tags: Widgets
 title: ListWidget
 caption: list
@@ -13,24 +13,74 @@ The list widget displays a sequence of tiddlers that match a [[tiddler filter|Fi
 * Listing each of the tags applied to a tiddler
 * Handling the main story river
 
-The tiddlers can either be displayed by transcluding each in turn through an optional template.
+The tiddlers are displayed by transcluding each in turn through a template. There are several ways to specify the template and for controlling the behaviour of the list.
+
+! Examples
+
+''plain list''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]"/>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]"/>
+
+<<<
+
+''custom item output''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]">
+<<currentTiddler>>
+{{||$:/core/ui/ViewTemplate/tags}}
+</$list>
+<<<
+
+''custom item template''
+
+```
+<$list filter="[tag[ListWidget]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+```
+
+Displays as:
+
+<<<
+<$list filter="[tag[ListWidget]sort[title]]" template="$:/core/ui/ViewTemplate/subtitle"/>
+
+<<<
+
+!! Grouped Lists
+
+See NestedLists for how to generate nested and grouped lists using the ListWidget.
 
 ! Content and Attributes
 
-The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list (alternatively, the template can be specified as a tiddler title in the ``template`` attribute).
+The content of the `<$list>` widget is an optional template to use for rendering each tiddler in the list. Alternatively, the template can be specified as a tiddler title in the ``template`` attribute. As a fallback, the default template just displays the tiddler title.
 
 |!Attribute |!Description |
-|filter |The TiddlerFilter to display |
-|template |The title of a template tiddler for rendering each tiddler in the list |
-|editTemplate |An alternative template to use for DraftTiddlers in edit mode |
-|variable |The [[widget variable|WidgetVariables]] name to be assigned the title of each tiddler in the list. Defaults to ''currentTiddler'' |
+|filter |The [[tiddler filter|Filters]] to display |
+|template |The title of a template tiddler for transcluding each tiddler in the list. When no template is specified, the body of the ListWidget serves as the item template. With no body, a simple link to the tiddler is returned. |
+|editTemplate |An alternative template to use for [[DraftTiddlers|DraftMechanism]] in edit mode |
+|variable |The name for a [[variable|Variables]] in which the title of each listed tiddler is stored. Defaults to ''currentTiddler'' |
 |emptyMessage |Message to be displayed when the list is empty |
 |storyview |Optional name of module responsible for animating/processing the list |
 |history |The title of the tiddler containing the navigation history |
 
-!! Handling edit mode
+!! Edit mode
 
-The `<$list>` widget can optionally render draft tiddlers through a different template tiddler than ordinary tiddlers -- see DraftMechanism for a discussion of how this capability is used.
+The `<$list>` widget can optionally render draft tiddlers through a different template to handle editing, see DraftMechanism.
 
 !! `storyview` attribute
 
@@ -40,48 +90,8 @@ The `storyview` attribute specifies the name of an optional module that can anim
 * `zoomin`: just renders the current tiddler from the list, with a zoom animation for navigating between tiddlers
 * `pop`: shrinks items in and out of place
 
-!! Handling history and navigation
+In order for the storyviews to animate correctly each entry in the list should be a single block mode DOM element.
 
-The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See the NavigationMechanism for more details.
+!! History and navigation
 
-! Examples
-
-!! Creating nested lists
-
-The ''types'' and ''recent'' tabs in the sidebar give two examples of a grouped list created by nesting.
-
-The ''types'' listing is performed with this markup:
-
-```
-<$list filter="[!is[system]has[type]each[type]sort[type]]">
-<div class="tc-menu-list-item">
-<$view field="type"/>
-<$list filter="[type{!!type}!is[system]sort[title]]">
-<div class="tc-menu-list-subitem">
-<$link to={{!!title}}><$view field="title"/></$link>
-</div>
-</$list>
-</div>
-</$list>
-
-```
-
-The outer list filter selects each discrete value found in the `type` field. The inner list filter selects all the (non-system) tiddlers with that type.
-
-The ''recent'' listing is performed with this markup:
-
-```
-<$list filter="[!is[system]has[modified]!sort[modified]limit[100]eachday[modified]]">
-<div class="tc-menu-list-item">
-<$view field="modified" format="date" template="DDth MMM YYYY"/>
-<$list filter="[sameday{!!modified}!is[system]!sort[modified]]">
-<div class="tc-menu-list-subitem">
-<$link to={{!!title}}><$view field="title"/></$link>
-</div>
-</$list>
-</div>
-</$list>
-```
-
-Here the outer list filter selects each discrete day found in the `modified` field, while the inner list filter selects all the tiddlers dated the same day in the `modified` field.
-
+The optional `history` attribute specifies the name of a tiddler that is used to track the current tiddler for navigation purposes. When the history tiddler changes the list view responds by telling the listview to handle navigating to the new tiddler. See HistoryMechanism for details.

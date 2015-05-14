@@ -27,18 +27,13 @@ exports.init = function(parser) {
 	this.matchRegExp = /\[\[(.*?)(?:\|(.*?))?\]\]/mg;
 };
 
-var isLinkExternal = function(to) {
-	var externalRegExp = /(?:file|http|https|mailto|ftp|irc|news|data|skype):[^\s<>{}\[\]`|'"\\^~]+(?:\/|\b)/i;
-	return externalRegExp.test(to);
-};
-
 exports.parse = function() {
 	// Move past the match
 	this.parser.pos = this.matchRegExp.lastIndex;
 	// Process the link
 	var text = this.match[1],
 		link = this.match[2] || text;
-	if(isLinkExternal(link)) {
+	if($tw.utils.isLinkExternal(link)) {
 		return [{
 			type: "element",
 			tag: "a",

@@ -20,9 +20,15 @@ $tw = $tw || Object.create(null);
 $tw.boot = $tw.boot || Object.create(null);
 
 // Detect platforms
-$tw.browser = typeof(window) !== "undefined" ? {} : null;
-$tw.node = typeof(process) === "object" ? {} : null;
-$tw.nodeWebKit = $tw.node && global.window && global.window.nwDispatcher ? {} : null;
+if(!("browser" in $tw)) {
+	$tw.browser = typeof(window) !== "undefined" ? {} : null;
+}
+if(!("node" in $tw)) {
+	$tw.node = typeof(process) === "object" ? {} : null;
+}
+if(!("nodeWebKit" in $tw)) {
+	$tw.nodeWebKit = $tw.node && global.window && global.window.nwDispatcher ? {} : null;
+}
 
 // Set default boot tasks
 $tw.boot.tasks = {
@@ -99,7 +105,7 @@ return $tw
 
 if(typeof(exports) === "undefined") {
 	// Set up $tw global for the browser
-	window.$tw = _bootprefix();
+	window.$tw = _bootprefix(window.$tw);
 } else {
 	// Export functionality as a module
 	exports.bootprefix = _bootprefix;

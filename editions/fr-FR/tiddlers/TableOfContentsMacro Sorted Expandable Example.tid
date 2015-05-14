@@ -1,0 +1,14 @@
+caption: Développable triée
+created: 20150104182748334
+modified: 20150104182956846
+tags: table-of-contents-example
+title: TableOfContentsMacro Sorted Expandable Example
+type: text/vnd.tiddlywiki
+
+!! Table des matières développable triée
+
+<$macrocall $name='wikitext-example-without-html'
+src='<div class="tc-table-of-contents">
+<<toc-expandable "Contents" "sort[title]">>
+</div>
+'/>

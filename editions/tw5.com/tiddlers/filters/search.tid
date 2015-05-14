@@ -1,0 +1,21 @@
+created: 20140410103123179
+modified: 20150203191048000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
+title: search Operator
+type: text/vnd.tiddlywiki
+caption: search
+op-purpose: filter the input by searching tiddler content
+op-input: a [[selection of titles|Title Selection]]
+op-suffix: optionally, the name of a [[field|TiddlerFields]]
+op-suffix-name: F
+op-parameter: one or more search terms, separated by spaces
+op-output: those input tiddlers in which <<.em all>> of the search terms can be found in the value of field <<.place F>>
+op-neg-output: those input tiddlers in which <<.em not>> all of the search terms can be so found
+
+When used with a suffix, the <<.op search>> operator is similar to <<.olink regexp>> but less powerful.
+
+If the suffix is omitted, a tiddler is deemed to match if all the search terms appear in the combination of its <<.field tags>>, <<.field text>> and <<.field title>> fields.
+
+The search ignores the difference between capital and lowercase letters.
+
+<<.operator-examples "search">>

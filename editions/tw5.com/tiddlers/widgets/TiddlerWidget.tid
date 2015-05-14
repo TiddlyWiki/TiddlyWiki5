@@ -1,5 +1,5 @@
 created: 20130824154300000
-modified: 20140802114152456
+modified: 20150220162134000
 tags: Widgets
 title: TiddlerWidget
 type: text/vnd.tiddlywiki
@@ -7,22 +7,27 @@ caption: tiddler
 
 ! Introduction
 
-The TiddlerWidget sets the CurrentTiddler that applies for processing its content.
+The TiddlerWidget sets the [[current tiddler|Current Tiddler]] that applies for processing its content.
 
 ! Content and Attributes
 
 |!Attribute |!Description |
-|tiddler |The title of the tiddler to become the new CurrentTiddler |
+|tiddler |The title of the tiddler to become the new [[current tiddler|Current Tiddler]] |
 |class |CSS classes to be added to the generated elements |
 
 ! CSS Class Variables
 
 The tiddler widget assigns several useful CSS classes to variables that it creates:
 
-* ''missingTiddlerClass'': ''"tc-tiddler-exists"'' or ''"tc-tiddler-missing"'' depending upon whether the target tiddler exists
-* ''shadowTiddlerClass'': ''"tc-tiddler-shadow"'' if the tiddler is a shadow tiddler
-* ''systemTiddlerClass'': ''"tc-tiddler-system"'' if the tiddler is a system tiddler
-* ''tiddlerTagClasses'': A space separated list of CSS classes named ''"tc-tagged-{tagname}"''. For example ''"tc-tagged-introduction"''. Note that tag names are UrlEncoded which means that the tag ''$:/tags/Macro'' appears as the CSS class ''"tc-tagged-%24%3A%2Ftags%2FMacro"''
+; missingTiddlerClass
+: `tc-tiddler-exists` or...
+: `tc-tiddler-missing` depending on whether the tiddler exists
+;shadowTiddlerClass
+: `tc-tiddler-shadow` if the tiddler is a shadow tiddler
+;systemTiddlerClass
+:` tc-tiddler-system` if the tiddler is a system tiddler
+;tiddlerTagClasses
+: a space separated list of CSS classes named `tc-tagged-{tagname}`,<br>e.g. `tc-tagged-introduction`<br><br>''Note:'' tag names are URI encoded which means that the tag [[$:/tags/Macro]] appears as the CSS class `tc-tagged-%24%3A%2Ftags%2FMacro`. See [[How to apply custom styles by tag]] for more details
 
 You can use these variables like this:
 
@@ -30,6 +35,7 @@ You can use these variables like this:
 <$tiddler tiddler="MyOtherTiddler">
 <div class=<<missingTiddlerClass>>>
 <$transclude/>
+</div>
 </$tiddler>
 ```
 

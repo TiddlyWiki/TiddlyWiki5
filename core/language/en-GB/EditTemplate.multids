@@ -5,6 +5,8 @@ Body/Hint: Use [[wiki text|http://tiddlywiki.com/static/WikiText.html]] to add f
 Body/Placeholder: Type the text for this tiddler
 Body/Preview/Button/Hide: hide preview
 Body/Preview/Button/Show: show preview
+Field/Remove/Caption: remove field
+Field/Remove/Hint: Remove field
 Fields/Add/Button: add
 Fields/Add/Name/Placeholder: field name
 Fields/Add/Prompt: Add a new field:
@@ -13,5 +15,11 @@ Shadow/Warning: This is a shadow tiddler. Any changes will override the default 
 Shadow/OverriddenWarning: This is a modified shadow tiddler. You can revert to the default version by deleting this tiddler
 Tags/Add/Button: add
 Tags/Add/Placeholder: tag name
+Tags/Dropdown/Caption: tag list
+Tags/Dropdown/Hint: Show tag list
+Type/Dropdown/Caption: content type list
+Type/Dropdown/Hint: Show content type list
+Type/Delete/Caption: delete content type
+Type/Delete/Hint: Delete content type
 Type/Placeholder: content type
 Type/Prompt: Type:

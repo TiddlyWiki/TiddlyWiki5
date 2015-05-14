@@ -1,0 +1,15 @@
+created: 20150228130131000
+modified: 20150228131730000
+title: tv-get-export-path Variable
+tags: Variables [[Core Variables]] [[Configuration Variables]]
+type: text/vnd.tiddlywiki
+caption: tv-get-export-path
+
+The <<.def tv-get-export-path>> [[variable|Variables]] specifies the full pathname to which the <<.clink rendertiddlers RenderTiddlersCommand>> [[Node.js|TiddlyWiki on Node.js]] command writes each tiddler.
+
+The variable should be implemented as a <<.js-macro-link "JavaScript macro">> with the following parameter:
+
+;title
+: The title of the tiddler
+
+If no such macro exists, the tiddlers are written to files whose names are [[percent-encoded|Percent Encoding]], in the command's output folder.

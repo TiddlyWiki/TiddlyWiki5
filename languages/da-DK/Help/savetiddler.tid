@@ -1,0 +1,12 @@
+title: $:/language/Help/savetiddler
+description: Gemmer en rå tiddler til en fil
+
+Gemmer en individuel tiddler i dens rå tekst eller binære format til det angivne filnavn. 
+
+```
+--savetiddler <title> <filename>
+```
+
+Som standard, sættes finavn til `output` undermappen i  udgavens mappe. `--output` kommandoen kan bruges til at rette output til et anden mappe.
+
+Enhver manglende mappe i stien til filnavnet oprettes automatisk.

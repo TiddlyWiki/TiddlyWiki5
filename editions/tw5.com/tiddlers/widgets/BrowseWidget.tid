@@ -1,6 +1,6 @@
 title: BrowseWidget
 created: 201310241419
-modified: 20140910200751303
+modified: 20141202155353547
 tags: Widgets
 caption: browse
 
@@ -14,5 +14,18 @@ The content of the `<$browse>` widget is ignored.
 
 |!Attribute |!Description |
 |multiple |Set to "multiple" to select multiple file upload |
+|tooltip |Optional tooltip text |
+|message |Optional override of widget message to be generated. The parameter for the message will be the JavaScript object `event.target.files` |
 
 On iPhone/iPad choosing the multiple option will remove the ability to take photographs/videos directly into TiddlyWiki.
+
+''e.g.''
+
+```
+<$browse>
+```
+
+renders as:
+
+<$browse>
+

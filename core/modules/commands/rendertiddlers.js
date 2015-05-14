@@ -35,19 +35,31 @@ Command.prototype.execute = function() {
 		wiki = this.commander.wiki,
 		filter = this.params[0],
 		template = this.params[1],
-		pathname = path.resolve(this.commander.outputPath,this.params[2]),
+		outputPath = this.commander.outputPath,
+		pathname = path.resolve(outputPath,this.params[2]),		
 		type = this.params[3] || "text/html",
 		extension = this.params[4] || ".html",
+		deleteDirectory = (this.params[5] || "") != "noclean",
 		tiddlers = wiki.filterTiddlers(filter);
-	$tw.utils.deleteDirectory(pathname);
-	$tw.utils.createDirectory(pathname);
+	if(deleteDirectory) {
+		$tw.utils.deleteDirectory(pathname);
+	}
 	$tw.utils.each(tiddlers,function(title) {
 		var parser = wiki.parseTiddler(template),
-			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}});
-		var container = $tw.fakeDocument.createElement("div");
+			widgetNode = wiki.makeWidget(parser,{variables: {currentTiddler: title}}),
+			container = $tw.fakeDocument.createElement("div");
 		widgetNode.render(container,null);
-		var text = type === "text/html" ? container.innerHTML : container.textContent;
-		fs.writeFileSync(path.resolve(pathname,encodeURIComponent(title) + extension),text,"utf8");
+		var text = type === "text/html" ? container.innerHTML : container.textContent,
+			exportPath = null;
+		if($tw.utils.hop($tw.macros,"tv-get-export-path")) {
+			var macroPath = $tw.macros["tv-get-export-path"].run.apply(self,[title]);
+			if(macroPath) {
+				exportPath = path.resolve(outputPath,macroPath + extension);
+			}
+		}
+		var finalPath = exportPath || path.resolve(pathname,encodeURIComponent(title) + extension);
+		$tw.utils.createFileDirectories(finalPath);
+		fs.writeFileSync(finalPath,text,"utf8");
 	});
 	return null;
 };

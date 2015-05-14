@@ -1,73 +1,11 @@
 created: 20131205160746466
-modified: 20140619111725471
+modified: 20150221094003000
 tags: WikiText
 title: Macros in WikiText
 type: text/vnd.tiddlywiki
 caption: Macros
 
-! Defining Macros
+The use of [[macros|Macros]] in WikiText has two distinct aspects:
 
-Macros are snippets of text that can be inserted with a concise shortcut.
-
-Multi-line macros are defined like this:
-
-```
-\define mysamplemacro(name:"Bugs Bunny",address:"Rabbit Hole Hill")
-Hi, I'm $name$ and I live in $address$
-\end
-```
-
-The first line of the definition specifies the macro name and any parameters. Parameters are named and can optionally have default values that are used if the parameter isn't specified at the time of calling. The body of the macro definition follows, terminated with `\end`. The macro can include parameters using the `$name$` construction.
-
-Single-line macros can omit the `\end` marker like this:
-
-```
-\define mysamplemacro(name:"Bugs Bunny") Hi, I'm $name$
-```
-
-Macro definitions must be placed at the top of a tiddler. Macros are available to the tiddler that defines them, plus any tiddlers that it transcludes.
-
-Global macros can be defined in any tiddler with the tag [[$:/tags/Macro]]. They are then available within all tiddlers.
-
-Macros can be imported from other tiddlers with the ImportVariablesWidget.
-
-[[JavaScript Macros]] can also be used for more flexibility.
-
-! Using Macros
-
-Macros are used like this:
-
-```
-<<mysamplemacro>>
-<<mysamplemacro "Donald Duck">>
-<<mysamplemacro "Mickey Mouse" "Mouse House">>
-```
-
-Resulting in:
-
-```
-Hi I'm Bugs Bunny and I live in Rabbit Hole Hill
-Hi I'm Donald Duck and I live in Rabbit Hole Hill
-Hi I'm Mickey Mouse and I live in Mouse House
-
-```
-
-! Multiline Parameters
-
-Parameters can include line breaks. For example:
-
-```
-<<mysamplemacro "Mickey Mouse" "Mouse House,
-Mouse Lane,
-Rodentville,
-Ratland.">>
-```
-
-By using triple-double quotes you can specify parameter values that include single double quotes. For example:
-
-```
-<<mysamplemacro "Mickey Mouse" """Mouse House,
-"Mouse" Lane,
-Rodentville,
-Ratland.""">>
-```
+* [[Defining macros|Macro Definitions in WikiText]]
+* [[Calling macros|Macro Calls in WikiText]]

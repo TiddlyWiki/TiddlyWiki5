@@ -1,0 +1,27 @@
+title: Extracting Translations
+
+The [[Instructions for Translators]] yield a standalone TiddlyWiki HTML file that contains tiddlers corresponding to each translated string.
+
+! Extracting a new language plugin
+
+Use this procedure if the language being submitted is not already present in the TiddlyWiki repository.
+
+# Run the following command in the terminal to generate the tiddler source files for the repository:
+#* `tiddlywiki editions/translators/ --verbose --load <path to HTML file> --build output-files`
+#*> The source files are generated in `editions/translators/output/language`
+# Create the new language folder `languages/xx-XX`
+# Copy the language files into the language folder
+# Create a `plugin.info` file for the translation
+# Create an appropriate flag image in `icon.tid`
+# Change the title of the [[$:/core/readme]] tiddler to `$:/core/xx-XX/readme`
+# Submit a pull request
+
+! Updating an existing language plugin
+
+Use this procedure for submissions of updates to language plugins that are already present in the TiddlyWiki repository.
+
+# Run the following command in the terminal to generate the tiddler source files for the repository:
+#* `tiddlywiki editions/translators/ --verbose --unpackplugin $:/languages/xx-XX --load <path to HTML file> --build output-files`
+#* substituting the appropriate language code for `xx-XX`
+# Copy the language files from the edition output folder to the appropriate language directory
+#* Take care not to copy any empty `.tid` files

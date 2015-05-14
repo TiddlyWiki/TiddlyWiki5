@@ -1,0 +1,12 @@
+created: 20140410103123179
+modified: 20150203185838000
+tags: [[Filter Operators]] [[Special Operators]]
+title: modules Operator
+type: text/vnd.tiddlywiki
+caption: modules
+op-purpose: select the names of all modules of the input module types
+op-input: a [[selection|Title Selection]] of module types
+op-parameter: none
+op-output: the title of each module with any of the input types
+
+<<.operator-examples "modules">>

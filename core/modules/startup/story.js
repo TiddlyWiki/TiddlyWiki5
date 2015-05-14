@@ -58,7 +58,12 @@ exports.startup = function() {
 			window.location.hash = "";
 			var storyFilter = $tw.wiki.getTiddlerText(DEFAULT_TIDDLERS_TITLE),
 				storyList = $tw.wiki.filterTiddlers(storyFilter);
+			//invoke any hooks that might change the default story list
+			storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
 			$tw.wiki.addTiddler({title: DEFAULT_STORY_TITLE, text: "", list: storyList},$tw.wiki.getModificationFields());
+			if(storyList[0]) {
+				$tw.wiki.addToHistory(storyList[0]);				
+			}
 		});
 		// Listen for the tm-permalink message
 		$tw.rootWidget.addEventListener("tm-permalink",function(event) {
@@ -113,6 +118,8 @@ function openStartupTiddlers(options) {
 	}
 	// Process the story filter to get the story list
 	var storyList = $tw.wiki.filterTiddlers(storyFilter);
+	//invoke any hooks that might change the default story list
+	storyList = $tw.hooks.invokeHook("th-opening-default-tiddlers-list",storyList);
 	// If the target tiddler isn't included then splice it in at the top
 	if(target && storyList.indexOf(target) === -1) {
 		storyList.unshift(target);

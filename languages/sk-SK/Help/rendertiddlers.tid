@@ -1,0 +1,18 @@
+title: $:/language/Help/rendertiddlers
+description: Zobraz tiddlery vyhovujúce filtru podľa určeného ContentType
+
+Zobraz sadu tiddlerov vyhovujúcich filtru na odlíšenie určeného ContentType (štandardne ako `text/html`) a prípony (štandardne ako `.html`).
+
+```
+--rendertiddlers <filter> <template> <pathname> [<type>] [<extension>]
+```
+
+Napríklad:
+
+```
+--rendertiddlers [!is[system]] $:/core/templates/static.tiddler.html ./static text/plain
+```
+
+Štandardne sa cesta k súboru resolvuje voči `output` podadresáru v adresári vydania. Príkaz `--output` je možné použiť na presmerovanie výstupu do iného adresára.
+
+Všetky súbory v cieľovom adresári sú vymazané. Ak cieľový adresár chýba, vytvorí sa rekurzívne.

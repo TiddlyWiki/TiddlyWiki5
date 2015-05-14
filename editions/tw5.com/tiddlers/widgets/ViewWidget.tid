@@ -1,6 +1,6 @@
 title: ViewWidget
 created: 201310241419
-modified: 201402220837
+modified: 20150220161335000
 tags: Widgets
 caption: view
 
@@ -13,11 +13,12 @@ The view widget displays the contents of a tiddler field in a specified format.
 The content of the `<$view>` widget is displayed if the field or property is missing or empty.
 
 |!Attribute |!Description |
-|tiddler |The title of the tiddler (defaults to the [[WidgetVariable: currentTiddler]]) |
+|tiddler |The title of the tiddler (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The name of the field to view (defaults to "text") |
 |index |The name of the index to view |
 |format |The format for displaying the field (see below) |
-|template |The optional template used with certain formats |
+|template |Optional template string used with certain formats such as dates |
+|subtiddler |Optional SubTiddler title when the target tiddler is a [[plugin|Plugins]] (see below) |
 
 !! Formats
 
@@ -31,3 +32,14 @@ The following formats can be specified in the `format` attribute:
 |''relativedate'' |The field is interpreted as a UTC date and displayed as the interval from the present instant |
 |''stripcomments'' |The field is interpreted as JavaScript source code and any lines beginning `\\#` are stripped |
 |''jsencoded'' |The field is displayed as a JavaScript encoded string |
+
+! SubTiddler Access
+
+The view widget allows access to the individual tiddlers stored within a [[plugin|Plugins]].
+
+The following example will view the core version of the tiddler [[$:/DefaultTiddlers]] even if it has been overridden:
+
+<<wikitext-example-without-html '
+<$view tiddler="$:/core" subtiddler="$:/DefaultTiddlers"/>
+
+'>>

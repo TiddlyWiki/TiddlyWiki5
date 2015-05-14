@@ -1,0 +1,17 @@
+title: Lists
+
+TiddlyWiki allows you to generate lists of tiddlers automatically, simplifying organisation and exploration.
+
+For example, here's how to generate a list of all the tiddlers with a particular tag:
+
+```
+{{{ [tag[This is another tag]] }}}
+```
+
+<div class="tc-example-box">
+
+{{{ [tag[This is another tag]] }}}
+
+</div>
+
+Next, extend TiddlyWiki in new ways with [[Plugins]].

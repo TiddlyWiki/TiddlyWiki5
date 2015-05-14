@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: .
+Date/DaySuffix/10: .
+Date/DaySuffix/11: .
+Date/DaySuffix/12: .
+Date/DaySuffix/13: .
+Date/DaySuffix/14: .
+Date/DaySuffix/15: .
+Date/DaySuffix/16: .
+Date/DaySuffix/17: .
+Date/DaySuffix/18: .
+Date/DaySuffix/19: .
+Date/DaySuffix/2: .
+Date/DaySuffix/20: .
+Date/DaySuffix/21: .
+Date/DaySuffix/22: .
+Date/DaySuffix/23: .
+Date/DaySuffix/24: .
+Date/DaySuffix/25: .
+Date/DaySuffix/26: .
+Date/DaySuffix/27: .
+Date/DaySuffix/28: .
+Date/DaySuffix/29: .
+Date/DaySuffix/3: .
+Date/DaySuffix/30: .
+Date/DaySuffix/31: .
+Date/DaySuffix/4: .
+Date/DaySuffix/5: .
+Date/DaySuffix/6: .
+Date/DaySuffix/7: .
+Date/DaySuffix/8: .
+Date/DaySuffix/9: .
+Date/Long/Day/0: Neděle
+Date/Long/Day/1: Pondělí
+Date/Long/Day/2: Úterý
+Date/Long/Day/3: Středa
+Date/Long/Day/4: Čtvrtek
+Date/Long/Day/5: Pátek
+Date/Long/Day/6: Sobota
+Date/Long/Month/1: Leden
+Date/Long/Month/10: Říjen
+Date/Long/Month/11: Listopad
+Date/Long/Month/12: Prosinec
+Date/Long/Month/2: Únor
+Date/Long/Month/3: Březen
+Date/Long/Month/4: Duben
+Date/Long/Month/5: Květen
+Date/Long/Month/6: Červen
+Date/Long/Month/7: Červenec
+Date/Long/Month/8: Srpen
+Date/Long/Month/9: Září
+Date/Period/am: dop
+Date/Period/pm: odp
+Date/Short/Day/0: Ne
+Date/Short/Day/1: Po
+Date/Short/Day/2: Út
+Date/Short/Day/3: St
+Date/Short/Day/4: Čt
+Date/Short/Day/5: Pá
+Date/Short/Day/6: So
+Date/Short/Month/1: Led
+Date/Short/Month/10: Říj
+Date/Short/Month/11: Lis
+Date/Short/Month/12: Pro
+Date/Short/Month/2: Úno
+Date/Short/Month/3: Bře
+Date/Short/Month/4: Dub
+Date/Short/Month/5: Kvě
+Date/Short/Month/6: Čer
+Date/Short/Month/7: Čec
+Date/Short/Month/8: Srp
+Date/Short/Month/9: Zář
+RelativeDate/Future/Days: za <<period>> dní(y)
+RelativeDate/Future/Hours: za <<period>> hodin(y)
+RelativeDate/Future/Minutes: za <<period>> minut(y)
+RelativeDate/Future/Months: za <<period>> měsíce(ů)
+RelativeDate/Future/Second: za 1 sekundu
+RelativeDate/Future/Seconds: za <<period>> sekund(y)
+RelativeDate/Future/Years: za <<period>> rok(y/ů)
+RelativeDate/Past/Days: před <<period>> dny
+RelativeDate/Past/Hours: před <<period>> hodinami
+RelativeDate/Past/Minutes: před <<period>> minutami
+RelativeDate/Past/Months: před <<period>> měsíci(em)
+RelativeDate/Past/Second: před 1 sekundou
+RelativeDate/Past/Seconds: před <<period>> sekundami
+RelativeDate/Past/Years: před <<period>> roky(em)

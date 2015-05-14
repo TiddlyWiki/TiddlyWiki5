@@ -7,7 +7,19 @@ caption: {{$:/language/Search/Filter/Caption}}
 
 <<lingo Filter/Hint>>
 
-<div class="tc-search tc-advanced-search"><$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/> <$button popup=<<qualify "$:/state/filterDropdown">> class="tc-btn-invisible">{{$:/core/images/down-arrow}}</$button> <$reveal state="$:/temp/advancedsearch" type="nomatch" text=""> <$link to="" class="tc-btn-invisible">{{$:/core/images/close-button}}</$link></$reveal></div>
+<div class="tc-search tc-advanced-search">
+<$edit-text tiddler="$:/temp/advancedsearch" type="search" tag="input"/>
+<$button popup=<<qualify "$:/state/filterDropdown">> class="tc-btn-invisible">
+{{$:/core/images/down-arrow}}
+</$button>
+<$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$button class="tc-btn-invisible">
+<$action-setfield $tiddler="$:/temp/advancedsearch" $field="text" $value=""/>
+{{$:/core/images/close-button}}
+</$button>
+<$macrocall $name="exportButton" exportFilter={{$:/temp/advancedsearch}} lingoBase="$:/language/Buttons/ExportTiddlers/"/>
+</$reveal>
+</div>
 
 <div class="tc-block-dropdown-wrapper">
 <$reveal state=<<qualify "$:/state/filterDropdown">> type="nomatch" text="" default="">
@@ -21,8 +33,10 @@ caption: {{$:/language/Search/Filter/Caption}}
 </$linkcatcher>
 
 <$reveal state="$:/temp/advancedsearch" type="nomatch" text="">
+<$set name="resultCount" value="""<$count filter={{$:/temp/advancedsearch}}/>""">
 <div class="tc-search-results">
 <<lingo Filter/Matches>>
 <$list filter={{$:/temp/advancedsearch}} template="$:/core/ui/ListItemTemplate"/>
 </div>
+</$set>
 </$reveal>

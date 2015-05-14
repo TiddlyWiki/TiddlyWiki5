@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Leverer et HTTP serverinterface til TiddlyWiki
+
+Serveren som er indbygget i ~TiddlyWiki5 er meget simpel. Skønt kompatibel med ~TiddlyWeb har den ikke understøttelse af mange af de funktioner som er nødvendige til pålidelig Internet-facing brug.
+
+I roden, serverer den rendering af en angivet tiddler. Væk fra roden, serverer den individuelle tiddlere kodet i JSON, og understøtter de basale HTTP operationer for `GET`, `PUT`og `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Parametrene er:
+
+* ''port'' - port nummeret til at servere fra (standard til "8080")
+* ''roottiddler'' - tiddler som serveres i  roden (standard til "$:/core/save/all") 
+* ''rendertype'' - den indholdstype rod tiddleren skal renderes til (standard til "text/plain")
+* ''servetype'' - den indholdstype rod tiddleren skal serveres (standard til "text/html")
+* ''username'' - standard brugernavn til signerering af redigeringer
+* ''password'' - valgfrit password til basis autentificering
+* ''host'' - valgfrit værtnavn at servere fra (standard til "127.0.0.1" også kendt som  "localhost")
+* ''pathprefix'' - valgfrit prefix til stier
+
+Hvis password parameteren er angivet, vil browseren bede brugeren om brugernavn og password. Bemærk at password sendes i ren tekst så denne implementering er ikke egnet til generel brug.
+
+For eksempel:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Brugernavn og password kan specificeres som tomme strenge hvis du har behov for at sætte værtsnavn eller stiprefix og ikke ønsker at kræve et password:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+For at køre flere tiddlywikiservere samtidigt, er du nødt til at sætte hver af dem til sin egen port.

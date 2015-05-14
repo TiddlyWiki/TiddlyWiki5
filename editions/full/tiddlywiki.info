@@ -1,0 +1,53 @@
+{
+	"description": "Full edition, containing all languages, themes and plugins",
+	"plugins": [
+		"tiddlywiki/browser-sniff",
+		"tiddlywiki/cecily",
+		"tiddlywiki/classictools",
+		"tiddlywiki/codemirror",
+		"tiddlywiki/d3",
+		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/googleanalytics",
+		"tiddlywiki/help",
+		"tiddlywiki/highlight",
+		"tiddlywiki/katex",
+		"tiddlywiki/markdown",
+		"tiddlywiki/nodewebkitsaver",
+		"tiddlywiki/railroad",
+		"tiddlywiki/stacked-view"
+	],
+	"languages": [
+		"cs-CZ",
+		"da-DK",
+		"de-AT",
+		"de-DE",
+		"el-GR",
+		"en-GB",
+		"en-US",
+		"es-ES",
+		"fr-FR",
+		"hi-IN",
+		"ia-IA",
+		"it-IT",
+		"ja-JP",
+		"nl-NL",
+		"pa-IN",
+		"pt-PT",
+		"ru-RU",
+		"sk-SK",
+		"zh-Hans",
+		"zh-Hant"
+	],
+	"themes": [
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly",
+		"tiddlywiki/seamless",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/starlight",
+		"tiddlywiki/vanilla"
+	],
+	"build": {
+		"index": [
+			"--rendertiddler","$:/core/save/all","index.html","text/plain"]
+	}
+}

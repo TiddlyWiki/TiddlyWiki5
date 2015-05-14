@@ -1,0 +1,23 @@
+created: 20140410103123179
+modified: 20150203184718000
+tags: [[Filter Operators]] [[Common Operators]] [[Field Operators]] [[Negatable Operators]]
+title: field Operator
+type: text/vnd.tiddlywiki
+caption: field
+op-purpose: filter the input by field
+op-input: a [[selection of titles|Title Selection]]
+op-suffix: the name of a [[field|TiddlerFields]]
+op-suffix-name: F
+op-parameter: a possible value of field <<.place F>>
+op-parameter-name: S
+op-output: those input tiddlers in which field <<.place F>> has the value <<.place S>>
+op-neg-output: those input tiddlers in which field <<.place F>> does <<.em not>> have the value <<.place S>>
+
+If <<.place S>> is empty, <<.op field>> will match both of the following:
+
+* tiddlers that don't contain field <<.place F>>
+* tiddlers in which field <<.place F>> exists but has an empty value
+
+The syntax of a [[filter step|Filter Step]] treats any unrecognised [[filter operator|Filter Operators]] as if it was the suffix to the <<.op field>> operator. See the <<.operator-examples "field" "examples">>.
+
+<<.operator-examples "field">>

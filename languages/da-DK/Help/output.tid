@@ -1,0 +1,10 @@
+title: $:/language/Help/output
+description: Sætter basis output mappe for efterfølgende kommandoer
+
+Sætter  basis output mappe for efterfølgende kommandoer. Standard output mappe er `output` undermappe for udgavens mappe.
+
+```
+--output <pathname>
+```
+
+Hvis det specificerede stinavn er relativt, sættes det relativt til den aktuelle arbejdsmappe.

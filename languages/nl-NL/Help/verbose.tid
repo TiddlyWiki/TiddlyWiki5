@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Activeert extra tekstoutput
+
+Activeert extra tekstoutput, zinvol voor debuggen
+
+```
+--verbose
+```

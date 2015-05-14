@@ -1,35 +1,31 @@
-created: 20131228162203521
-modified: 20140702113527667
-tags: Macros
-title: TabsMacro
-type: text/vnd.tiddlywiki
 caption: tabs
+created: 20131228162203521
+modified: 20150221211706000
+tags: Macros [[Core Macros]]
+title: tabs Macro
+type: text/vnd.tiddlywiki
 
-The tabs macro displays a list of tiddlers as a tab control. The user can switch between tabs by clicking on them. The tabs are labelled with the title of the corresponding tiddler, unless there is a `caption` field present in which case it is used instead.
+The <<.def tabs>> [[macro|Macros]] presents a [[selection of tiddlers|Title Selection]] as a set of tabs that the user can switch between.
 
-By default the tab control arranges the tabs horizontally with the content underneath. You can also choose to have the tabs arranged vertically by passing the class `tc-vertical`.
+The tabs display the <<.field caption>> field of a tiddler if it has one, or the tiddler's title otherwise.
 
-! Parameters
+By default the tabs are arranged horizontally above the content. To get vertical tabs, set the <<.param class>> parameter to <<.value tc-vertical>>.
 
-|!Position |!Name |!Description |!Default |
-|1st |tabsList |Filter giving the tiddlers to be displayed | |
-|2nd |default |Name of the tiddler containing the default tab | |
-|3rd |state |String to distinguish multiple tabs within the same tiddler (use of the system tiddler prefix is recommended) |''$:/state/tab'' |
-|4th |class |Additional CSS classes for the three wrappers DIV of the tab | |
-|5th |template |Optional template through which to render the tab content | |
+!! Parameters
 
-Within the template the title of the current tab is available in the widget variable ''currentTab''.
+;tabsList
+: A [[filter|Filters]] selecting which tiddlers to include
+;default
+: The title of the tiddler whose tab is to be selected by default
+;state
+: The prefix for the title of a [[state tiddler|StateMechanism]] for noting the currently selected tab, defaulting to `$:/state/tab`. It is recommended that this be a [[system tiddler|SystemTiddlers]]
+;class
+: Additional [[CSS|Cascading Style Sheets]] classes for the generated `div` elements. Multiple classes can be separated with spaces
+;template
+: Optionally, the title of a tiddler to use as a [[template|TemplateTiddlers]] for transcluding the content of the selected tab
 
-! Examples
+Within the template, the title of the selected tab is available in the <<.var currentTab>> variable.
 
-Here are some examples of the tabs macro:
+The <<.vlink currentTiddler>> variable is not affected by the <<.var tabs>> macro.
 
-```
-<<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
-
-<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
-```
-
-<<tabs "SampleTabOne SampleTabTwo SampleTabThree SampleTabFour" "SampleTabThree" "$:/state/tab1">>
-
-<<tabs "[tag[sampletab]]" "SampleTabTwo" "$:/state/tab2" "tc-vertical">>
+<<.macro-examples "tabs">>

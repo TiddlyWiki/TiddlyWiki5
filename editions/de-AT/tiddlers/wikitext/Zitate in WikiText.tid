@@ -1,7 +1,7 @@
 caption: Zitate
 created: 20131206154636572
 creator: pmario
-modified: 20140913112420348
+modified: 20140921170704585
 modifier: pmario
 tags: WikiText
 title: Zitate in WikiText
@@ -21,9 +21,9 @@ Das Ergebnis wird zusammenhängend dargestellt.
 <<<
 ">>
 
-!! Zitat mit Author
+!! Zitat mit Autor
 
-Wenn sie den Autor anführen möchten, dann schreiben sie wie folgt:
+Wenn Sie den Autor anführen möchten, dann schreiben Sie wie folgt:
 
 <<wikitext-example src:"<<<
 Computers are like a bicycle for our minds
@@ -46,7 +46,7 @@ Zitate können "verschachtelt" werden:
 > Zitat 2
 ```
 
-Which renders as:
+Dargestellt als: 
 
 > Zitat 1
 >> Zitat 1.1

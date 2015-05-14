@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: Animace může být použita s RevealWidget.
+command: Příkaz spustitelný pomocí Node.js.
+config: Data použitelná v `$tw.config`.
+filteroperator: Operator individuálního filtru
+global: Globální data použitelná v `$tw`.
+isfilteroperator: Operand pro filtr ''is''.
+macro: Definice JavaScript maker
+parser: Parsery pro různé typy obsahu.
+saver: Obsluhuje různé způsoby ukládná souborů z prohlížeče.
+startup: Funkce spouštěné při startu
+storyview: Upravuje animace a chování widgetů
+tiddlerdeserializer: Převádí různé druhy obsahu do tiddlerů
+tiddlerfield: Určuje chování jednotlivých polí tiddleru
+tiddlermethod: Přidává metody do `$tw.Tiddler` prototypu.
+upgrader: Provádí upgrade tiddleru během upgrade/importu.
+utils: Přidává metody do `$tw.utils`.
+utils-node: Přidává metody z Node.js-specific do `$tw.utils`.
+widget: Zapouzdřuje zobrazování a obnovování
+wikimethod: Přidává metody do `$tw.Wiki`.
+wikirule: Individuální pravidla pro hlavní WikiText parser.

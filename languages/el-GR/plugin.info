@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/el-GR",
+	"name": "el-GR",
+	"plugin-type": "language",
+	"description": "Greek (Greece)",
+	"author": "Stratis Aravias@ΓΕΛ Σαμοθράκης",
+	"core-version": ">=5.0.0"
+}

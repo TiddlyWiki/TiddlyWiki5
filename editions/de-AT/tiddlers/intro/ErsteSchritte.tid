@@ -15,8 +15,8 @@ ErsteSchritte - $(browser-name)$
 
 !!! Weitere Links:
 
-* [[Liste aller HowTo's]]: Diese Liste ist vor allem dann wichtig, wenn sie über "statische" Seiten hier her kommen. 
-* [[Speichern mit Verschlüsselung]]: ~TiddlyWiki kann verschlüsselt gespeichert werden. Wichtig: Vergessen sie das Passwort nicht!
-* [[Speichern auf TiddlySpot]]: TiddlySpot ist ein freier Service, mit dem sie Ihr Wiki online stellen können.
-* [[TiddlyWiki und TiddlyDesktop]]: TiddlyDesktop ist eine "echte" Applikation mit der sie mehrere Wikis verwalten und speichern können. 
-* Running [[TiddlyWiki on node-webkit]], turning a single TiddlyWiki into a native application on your desktop
+* [[Liste aller HowTo's]]: Diese Liste ist vor allem dann wichtig, wenn Sie über "statische" Seiten hier her kommen. 
+* [[Speichern mit Verschlüsselung]]: ~TiddlyWiki kann verschlüsselt gespeichert werden. Wichtig: Vergessen Sie das Passwort nicht!
+* [[Speichern auf TiddlySpot]]: TiddlySpot ist ein freier Service, mit dem Sie Ihr Wiki online stellen können.
+* [[TiddlyWiki und TiddlyDesktop]]: TiddlyDesktop ist eine "echte" Applikation mit der Sie mehrere Wikis verwalten und speichern können. 
+* Running [[TiddlyWiki on NW.js]], turning a single TiddlyWiki into a native application on your desktop

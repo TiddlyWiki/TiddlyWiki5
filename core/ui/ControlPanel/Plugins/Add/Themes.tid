@@ -1,0 +1,4 @@
+title: $:/core/ui/ControlPanel/Plugins/Add/Themes
+caption: {{$:/language/ControlPanel/Plugins/Themes/Caption}}  (<$count filter="[all[tiddlers+shadows]tag[$:/tags/RemoteAssetInfo]server-url{!!url}original-plugin-type[theme]]"/>)
+
+<<display-server-assets theme>>

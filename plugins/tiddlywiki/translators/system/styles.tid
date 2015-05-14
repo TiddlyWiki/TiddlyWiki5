@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/translators/styles
+tags: $:/tags/Stylesheet
+
+.tc-translators-string-table table {
+	width: 100%;
+}
+
+.tc-translators-string-table .tc-btn-invisible {
+	width: 1em;
+	height: 2em;
+}
+
+.tc-translators-string-table .tc-drop-down {
+	min-width: 500px;
+}

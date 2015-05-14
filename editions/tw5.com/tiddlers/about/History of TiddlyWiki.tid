@@ -1,5 +1,5 @@
 created: 20140908114400000
-modified: 20140916141919329
+modified: 20140923141919329
 tags: About
 title: History of TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -55,4 +55,14 @@ Our approach was to focus on showing rather than telling. We worked with the Tid
 ! Leaving BT
 
 By the end of 2011 I was increasingly feeling that I would be better placed to realise the potential of TiddlyWiki outside of the corporate confines BT. Accordingly, I left and started work as an independent developer, primarily working on a brand new reboot of TiddlyWiki in the shape of TiddlyWiki5.
+
+! Development of TiddlyWiki5
+
+I worked on new release of TiddlyWiki from November 2011. As a programmer, working on "version 2.0" of something that I had already written is a very attractive proposition. It means that the requirements were fully understood, allowing me to focus on evolving the architecture needed to support the desired functionality.
+
+! The Future
+
+Now that TiddlyWiki5 has finally left "beta" status behind, my hope is that it will have a long life. Because it only uses standard features of HTML5 and Node.js, there is no reason why it cannot be fully operational for many years to come. My goal is for it to last for at least 25 years.
+
+//Jeremy Ruston, 20th September 2014//
 

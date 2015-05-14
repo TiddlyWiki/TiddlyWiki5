@@ -18,12 +18,18 @@ Select the appropriate saver module and set it up
 var DownloadSaver = function(wiki) {
 };
 
-DownloadSaver.prototype.save = function(text,method,callback) {
+DownloadSaver.prototype.save = function(text,method,callback,options) {
+	options = options || {};
 	// Get the current filename
-	var filename = "tiddlywiki.html",
-		p = document.location.pathname.lastIndexOf("/");
-	if(p !== -1) {
-		filename = document.location.pathname.substr(p+1);
+	var filename = options.variables.filename;
+	if(!filename) {
+		var p = document.location.pathname.lastIndexOf("/");
+		if(p !== -1) {
+			filename = document.location.pathname.substr(p+1);
+		}
+	}
+	if(!filename) {
+		filename = "tiddlywiki.html";
 	}
 	// Set up the link
 	var link = document.createElement("a");

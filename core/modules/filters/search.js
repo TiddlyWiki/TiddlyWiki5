@@ -17,10 +17,18 @@ Export our filter function
 */
 exports.search = function(source,operator,options) {
 	var invert = operator.prefix === "!";
-	return options.wiki.search(operator.operand,{
-		source: source,
-		invert: invert
-	});
+	if(operator.suffix) {
+		return options.wiki.search(operator.operand,{
+			source: source,
+			invert: invert,
+			field: operator.suffix
+		});
+	} else {
+		return options.wiki.search(operator.operand,{
+			source: source,
+			invert: invert
+		});
+	}
 };
 
 })();

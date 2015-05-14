@@ -171,7 +171,7 @@ Widget.prototype.evaluateMacroModule = function(name,actualParams,defaultValue) 
 		else for(var i=0; i<actualParams.length; ++i) {
 			args.push(actualParams[i].value);
 		}
-		return macro.run.apply(this,args);
+		return (macro.run.apply(this,args) || "").toString();
 	} else {
 		return defaultValue;
 	}
@@ -434,7 +434,9 @@ if(index === -1) {
 	var grandParent = parent.parentWidget;
 	if(grandParent && parent.parentDomNode === this.parentDomNode) {
 		index = grandParent.children.indexOf(parent);
-		return parent.findNextSiblingDomNode(index);
+		if(index !== -1) {
+			return parent.findNextSiblingDomNode(index);
+		}
 	}
 	return null;
 };
@@ -473,6 +475,31 @@ Widget.prototype.removeChildDomNodes = function() {
 			childWidget.removeChildDomNodes();
 		});
 	}
+};
+
+/*
+Invoke the action widgets that are descendents of the current widget.
+*/
+Widget.prototype.invokeActions = function(triggeringWidget,event) {
+	var handled = false;
+	// For each child widget
+	for(var t=0; t<this.children.length; t++) {
+		var child = this.children[t];
+		// Invoke the child if it is an action widget
+		if(child.invokeAction && child.invokeAction(triggeringWidget,event)) {
+			handled = true;
+		}
+		// Propagate through through the child if it permits it
+		if(child.allowActionPropagation() && child.invokeActions(triggeringWidget,event)) {
+			handled = true;
+		}
+	}
+	return handled;
+};
+
+
+Widget.prototype.allowActionPropagation = function() {
+	return true;
 };
 
 exports.widget = Widget;

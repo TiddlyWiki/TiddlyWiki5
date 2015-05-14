@@ -26,12 +26,16 @@ var ZoominListView = function(listWidget) {
 	// Make all the tiddlers position absolute, and hide all but the top (or first) one
 	$tw.utils.each(this.listWidget.children,function(itemWidget,index) {
 		var domNode = itemWidget.findFirstDomNode();
-		if(targetTiddler !== itemWidget.parseTreeNode.itemTitle || (!targetTiddler && index)) {
+		// Abandon if the list entry isn't a DOM element (it might be a text node)
+		if(!(domNode instanceof Element)) {
+			return;
+		}
+		if((targetTiddler && targetTiddler !== itemWidget.parseTreeNode.itemTitle) || (!targetTiddler && index)) {
 			domNode.style.display = "none";
 		} else {
 			self.currentTiddlerDomNode = domNode;
 		}
-		domNode.style.position = "absolute";
+		$tw.utils.addClass(domNode,"tc-storyview-zoomin-tiddler");
 	});
 };
 
@@ -43,9 +47,13 @@ ZoominListView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Make the new tiddler be position absolute and visible so that we can measure it
+	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
-		{position: "absolute"},
 		{display: "block"},
 		{transformOrigin: "0 0"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
@@ -121,19 +129,31 @@ function findTitleDomNode(widget,targetClass) {
 
 ZoominListView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Make the newly inserted node position absolute and hidden
+	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
-		{display: "none"},
-		{position: "absolute"}
+		{display: "none"}
 	]);
 };
 
 ZoominListView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+		duration = $tw.utils.getAnimationDuration(),
+		removeElement = function() {
+			widget.removeChildDomNodes();
+		};
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		removeElement();
+		return;
+	}
 	// Set up the tiddler that is being closed
+	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
-		{position: "absolute"},
 		{display: "block"},
 		{transformOrigin: "50% 50%"},
 		{transform: "translateX(0px) translateY(0px) scale(1)"},
@@ -148,8 +168,8 @@ ZoominListView.prototype.remove = function(widget) {
 	var toWidgetDomNode = toWidget && toWidget.findFirstDomNode();
 	// Set up the tiddler we're moving back in
 	if(toWidgetDomNode) {
+		$tw.utils.addClass(toWidgetDomNode,"tc-storyview-zoomin-tiddler");
 		$tw.utils.setStyle(toWidgetDomNode,[
-			{position: "absolute"},
 			{display: "block"},
 			{transformOrigin: "50% 50%"},
 			{transform: "translateX(0px) translateY(0px) scale(10)"},
@@ -170,10 +190,7 @@ ZoominListView.prototype.remove = function(widget) {
 		{opacity: "0"},
 		{zIndex: "0"}
 	]);
-	setTimeout(function() {
-		// Delete the DOM node when the transition is over
-		widget.removeChildDomNodes();
-	},duration);
+	setTimeout(removeElement,duration);
 	// Now the tiddler we're going back to
 	if(toWidgetDomNode) {
 		$tw.utils.setStyle(toWidgetDomNode,[

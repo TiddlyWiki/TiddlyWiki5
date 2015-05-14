@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Docs/Types
+caption: Types
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[shadows+tiddlers]prefix[$:/language/Docs/Types/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Docs/Types/]]
+\end
+
+! Types
+
+Descriptions for each content type (as appears in the type dropdown in the tiddler editor).
+
+<<translatableStringEditor editorFields:"description group">>

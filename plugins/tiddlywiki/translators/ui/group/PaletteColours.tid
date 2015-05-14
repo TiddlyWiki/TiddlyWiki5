@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/translators/ui/group/Docs/PaletteColours
+caption: Palette Colours
+tags: $:/tags/TranslationGroup
+
+\define translatableTiddlerTitles()
+[all[shadows+tiddlers]prefix[$:/language/Docs/PaletteColours/]sort[title]]
+\end
+\define shortenTitle()
+[all[current]removeprefix[$:/language/Docs/PaletteColours/]]
+\end
+
+! Palette Colours
+
+Palette colours.
+
+<<translatableStringEditor>>

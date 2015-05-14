@@ -1,0 +1,16 @@
+created: 20150403104230499
+modified: 20150403104650559
+tags: Resources
+title: rboue's plugins for TiddlyWiki
+type: text/vnd.tiddlywiki
+url: http://rboue.tiddlyspot.com
+
+Featuring plugins that integrate [[SocialCalc|https://dmzwik01.collaborate.ag/help-en/SocialCalc]] and [[Three.js|http://threejs.org/]] into TiddlyWiki.
+
+{{!!url}}
+
+<<<
+I developed some plugins related to engineering tasks.
+
+After using them for personal projects I'm glad to share with TiddlyWiki community.
+<<<

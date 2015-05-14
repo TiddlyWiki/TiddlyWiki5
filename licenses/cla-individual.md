@@ -170,3 +170,59 @@ Eucaly J, @Eucaly, 2014/09/14
 Mal Gamble, @malgam, 2014/09/19
 
 Ton Gerner, @gernert, 2014/09/19
+
+Julie Bertrand, @Evolena, 2014/09/22
+
+Andrey Yankin, @andrey013, 2014/09/30
+
+David john, @fghhfg, 2014/10/06
+
+Mark S., @marxsal, 2014/10/18
+
+Erwan Moreau, @erwanm, 2014/10/27
+
+Felix Küppers, @felixhayashi, 2014/11/02
+
+Roma Hicks, @roma0104, 2014/11/18
+
+Jedediah Carty, @inmysocks, 2014/11/21
+
+Erwan Dano, @Braincoke, 2014/11/24
+
+Jim Lehmer, @dullroar, 2014/12/07
+
+Aurelien Navarre, @anavarre, 2014/12/15
+
+Astrid Elocson, @aelocson, 2014/12/21
+
+Andreas Hahn, @Drakor, 2014/12/21
+
+Jean-Charles Longuet, @Jc-L, 2014/12/22
+
+Evgeniy Gryaznov, @evgeniy-gryaznov, 2014/12/23
+
+Andrew Harrison, @infurnoape, 2014/12/27
+
+Arlen Beiler, @arlen22, 2014/12/30
+
+David P Dannemiller, @dpdannemiller, 2015/01/10
+
+Ben Williams, @Mathobal, 2015/01/26
+
+Neil Griffin, @ng110, 2015/01/20
+
+Alex Hough, @alexhough 2015/01/26
+
+Florent V., @Spangenhelm 2015/02/03
+
+Francisco A., @le-pako 2015/03/14
+
+Andreas Abeck, @andreasabeck 2015/03/18
+
+Hong-Yi Dai, @reflectionalist 2015/04/04
+
+YangWeiQin, @heroboy 2015/04/19
+
+vouko, @vouko 2015/05/02
+
+Christian Ehmke, @cehmke 2015/05/10

@@ -1,0 +1,21 @@
+title: $:/language/TiddlerInfo/
+
+Advanced/Caption: Pokročilé
+Advanced/PluginInfo/Empty/Hint: žádné
+Advanced/PluginInfo/Heading: Detaily pluginu
+Advanced/PluginInfo/Hint: Plugin obsahuje následující stínové tiddlery:
+Advanced/ShadowInfo/Heading: Stínový status
+Advanced/ShadowInfo/NotShadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> není stínový tiddler
+Advanced/ShadowInfo/OverriddenShadow/Hint: Přepsáno běžným tiddlerem
+Advanced/ShadowInfo/Shadow/Hint: Tiddler <$link to=<<infoTiddler>>><$text text=<<infoTiddler>>/></$link> je stínový tiddler
+Advanced/ShadowInfo/Shadow/Source: Je definováno v pluginu <$link to=<<pluginTiddler>>><$text text=<<pluginTiddler>>/></$link>
+Fields/Caption: Pole
+List/Caption: Seznam
+List/Empty: Tento tiddler nemá žádný seznam
+Listed/Caption: Odkazy
+Listed/Empty: Na tento tiddler nevede odkaz z jiného tiddleru
+References/Caption: Reference
+References/Empty: Tento tiddler neodkazuje na žádné další tiddlery
+Tagging/Caption: Štítky
+Tagging/Empty: Tímto štítkem není označen žádný tiddler
+Tools/Caption: Nástroje

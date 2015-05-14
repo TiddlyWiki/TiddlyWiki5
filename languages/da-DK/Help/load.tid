@@ -1,0 +1,16 @@
+title: $:/language/Help/load
+description: Indlæs tiddlere fra en fil
+
+Indlæs tiddlere fra 2.x.x TiddlyWiki filer (`.html`), `.tiddler`, `.tid`, `.json` eller andre filer
+
+```
+--load <filepath>
+```
+
+For at indlæse tiddlere fra en krypteret ~TiddlyWiki fil, skal du først angive kodeord med PasswordCommand. For eksempel:
+
+```
+tiddlywiki ./MyWiki --password pa55w0rd --load my_encrypted_wiki.html
+```
+
+Bemærk at ~TiddlyWiki ikke vil indlæse en ældre version af en allerede indlæst udvidelse.

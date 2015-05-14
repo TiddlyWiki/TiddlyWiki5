@@ -20,4 +20,4 @@ Note:
 * Il comando init fallir&agrave; se la direcotry del wiki non &egrave; vuota
 * Il comando init rimuove qualsiasi definizione `includeWikis` nell'edizione del file `tiddlywiki.info`
 * Se sono specificate edizioni multiple, l'edizione inizializzata dopo sovrascrive tutti i file condivisi con le edizioni precedenti (il file finale `tiddlywiki.info` sar&agrave; copiato dall'ultima edizione)
-* `--help editions` restituisce una lista delle edizioni disponibili
+* `--editions` restituisce una lista delle edizioni disponibili

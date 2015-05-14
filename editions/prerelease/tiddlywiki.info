@@ -1,0 +1,25 @@
+{
+	"description": "Content for the current prerelease",
+	"plugins": [
+		"tiddlywiki/googleanalytics",
+		"tiddlywiki/nodewebkitsaver",
+		"tiddlywiki/github-fork-ribbon",
+		"tiddlywiki/browser-sniff",
+		"tiddlywiki/help",
+		"tiddlywiki/stacked-view"
+	],
+	"themes": [
+		"tiddlywiki/vanilla",
+		"tiddlywiki/snowwhite",
+		"tiddlywiki/nighttime",
+		"tiddlywiki/starlight",
+		"tiddlywiki/seamless",
+		"tiddlywiki/centralised",
+		"tiddlywiki/readonly"
+	],
+	"languages": [
+	],
+	"includeWikis": [
+		"../tw5.com"
+	]
+}

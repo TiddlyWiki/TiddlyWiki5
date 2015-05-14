@@ -9,7 +9,7 @@ description: {{$:/language/Buttons/Encryption/Hint}}
 {{$:/core/images/locked-padlock}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Encryption/ClearPassword/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Encryption/ClearPassword/Caption}}/></span>
 </$list>
 </$button>
 </$reveal>
@@ -19,7 +19,7 @@ description: {{$:/language/Buttons/Encryption/Hint}}
 {{$:/core/images/unlocked-padlock}}
 </$list>
 <$list filter="[<tv-config-toolbar-text>prefix[yes]]">
-<$text text={{$:/language/Buttons/Encryption/SetPassword/Caption}}/>
+<span class="tc-btn-text"><$text text={{$:/language/Buttons/Encryption/SetPassword/Caption}}/></span>
 </$list>
 </$button>
 </$reveal>

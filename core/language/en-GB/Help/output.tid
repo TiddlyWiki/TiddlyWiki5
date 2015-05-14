@@ -7,4 +7,5 @@ Sets the base output directory for subsequent commands. The default output direc
 --output <pathname>
 ```
 
-If the specified pathname is relative then it is resolved relative to the current working directory.
+If the specified pathname is relative then it is resolved relative to the current working directory. For example `--output .` sets the output directory to the current working directory.
+

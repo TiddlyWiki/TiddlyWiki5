@@ -1,0 +1,15 @@
+title: GettingStarted
+
+Velkommen til TiddlyWiki og TiddlyWiki fællesskabet
+
+Før du begynder at lagre vigtige informationer i TiddlyWiki er det vigtigt at du sikrer dig, at du kan gemme på pålidelig måde. Se http://tiddlywiki.com/#GettingStarted for detaljer
+
+!! Opsæt denne TiddlyWiki
+
+ HelloThere
+[[$:/Translators]]
+[[$:/plugins/tiddlywiki/translators/readme]]
+
+
+Se kontrolpanelet for flere muligheder.
+

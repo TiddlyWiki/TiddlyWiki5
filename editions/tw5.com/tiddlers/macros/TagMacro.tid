@@ -1,0 +1,15 @@
+caption: tag
+created: 20141206130540337
+modified: 20150221224326000
+tags: Macros [[Core Macros]]
+title: tag Macro
+type: text/vnd.tiddlywiki
+
+The <<.def tag>> [[macro|Macros]] generates a tag pill for a specified tag.
+
+!! Parameters
+
+;tag
+: The title of the tag, defaulting to the [[current tiddler|Current Tiddler]]
+
+<<.macro-examples "tag">>

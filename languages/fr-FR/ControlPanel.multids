@@ -10,6 +10,8 @@ Basics/DefaultTiddlers/BottomHint: Utilisez les &#91;&#91;crochets doubles&#93;&
 Basics/DefaultTiddlers/Prompt: Tiddlers par défaut
 Basics/DefaultTiddlers/TopHint: Liste des tiddlers qui seront affichés au démarrage :
 Basics/Language/Prompt: Bonjour ! Langue active :
+Basics/NewJournal/Title/Prompt: Modèle pour les titres des tiddlers journaux
+Basics/NewJournal/Tags/Prompt: Tags pour les nouveaux tiddlers journaux
 Basics/OverriddenShadowTiddlers/Prompt: Nombre de tiddlers //shadow// remplacés
 Basics/ShadowTiddlers/Prompt: Nombre de tiddlers //shadow//
 Basics/Subtitle/Prompt: Sous-titre
@@ -51,6 +53,7 @@ Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
 Saving/TiddlySpot/BackupDir: Dossier des //sauvegardes//
 Saving/TiddlySpot/Backups: Sauvegardes
+Saving/TiddlySpot/Description: Ces paramètres ne servent que lors de la sauvegarde vers http://tiddlyspot.com ou vers un serveur distant compatible
 Saving/TiddlySpot/Filename: Nom du fichier enregistré
 Saving/TiddlySpot/Heading: ~TiddlySpot
 Saving/TiddlySpot/Hint: //L'URL par défaut est `http://<nom du wiki>.tiddlyspot.com/store.cgi`. Elle peut être remplacée par une adresse serveur personnalisée.//
@@ -75,8 +78,10 @@ Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
 Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
 Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
-Settings/ToolbarButtons/Icons/Description: Afficher l'icone
+Settings/ToolbarButtons/Icons/Description: Afficher l'icône
 Settings/ToolbarButtons/Text/Description: Afficher le texte
+Settings/DefaultSidebarTab/Caption: Onglet par défaut sur la barre latérale
+Settings/DefaultSidebarTab/Hint: Indique l'onglet de la barre latérale qui sera affiché par défaut
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
@@ -91,7 +96,4 @@ Toolbars/PageControls/Caption: Barre d'outils de la page
 Toolbars/PageControls/Hint: Choix des boutons à afficher sur la barre d'outils principale de la page
 Toolbars/ViewToolbar/Caption: Barre d'outils du mode visualisation
 Toolbars/ViewToolbar/Hint: Choix des boutons à afficher pour les tiddlers en mode visualisation
-Tools/Caption: Outils
 Tools/Download/Full/Caption: Télécharger le wiki complet
-Tools/Export/AllAsStaticHTML/Caption: Regrouper tous les tiddlers dans un même fichier HTML statique
-Tools/Export/Heading: Exporter

@@ -1,5 +1,7 @@
 {
 	"title": "$:/plugins/tiddlywiki/markdown",
-	"description": "Markdown plugin wrapping markdown-js",
-	"author": "JeremyRuston"
+	"description": "Markdown parser",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": "readme usage"
 }

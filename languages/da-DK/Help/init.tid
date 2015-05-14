@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Initialisér en ny wikimappe
+
+Initialisér en tom [[WikiFolder|WikiFolders]] med en kopi af den angivne udgave.
+
+```
+--init <edition> [<edition> ...]
+```
+
+For eksempel:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Bemærk:
+
+* wikimappe bliver oprettet, hvis det er nødvendigt
+* "udgave" bliver som standard til ''tom''
+* init kommandoen fejler, hvis wikimappen ikke er tom
+* init kommandoen fjerner alle `includeWikis` definitioner i udgavens `tiddlywiki.info` fil
+* Når flere udgaver er specificerede, vil udgaver som intialiseres senere overskrive alle filer delt med tidligere udgaver (altså, den endelige `tiddlywiki.info` fil vil bliver kopieret fra den sidste udgave)
+* `--help editions` returnerer en liste over de udgaver, der er til rådighed

@@ -25,6 +25,10 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 	}
 	var listItemWidget = this.listWidget.children[listElementIndex],
 		targetElement = listItemWidget.findFirstDomNode();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Scroll the node into view
 	this.listWidget.dispatchEvent({type: "tm-scroll", target: targetElement});
 };
@@ -32,6 +36,10 @@ ClassicStoryView.prototype.navigateTo = function(historyInfo) {
 ClassicStoryView.prototype.insert = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
 		duration = $tw.utils.getAnimationDuration();
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		return;
+	}
 	// Get the current height of the tiddler
 	var computedStyle = window.getComputedStyle(targetElement),
 		currMarginBottom = parseInt(computedStyle.marginBottom,10),
@@ -62,7 +70,15 @@ ClassicStoryView.prototype.insert = function(widget) {
 
 ClassicStoryView.prototype.remove = function(widget) {
 	var targetElement = widget.findFirstDomNode(),
-		duration = $tw.utils.getAnimationDuration();
+		duration = $tw.utils.getAnimationDuration(),
+		removeElement = function() {
+			widget.removeChildDomNodes();
+		};
+	// Abandon if the list entry isn't a DOM element (it might be a text node)
+	if(!(targetElement instanceof Element)) {
+		removeElement();
+		return;
+	}
 	// Get the current height of the tiddler
 	var currWidth = targetElement.offsetWidth,
 		computedStyle = window.getComputedStyle(targetElement),
@@ -70,9 +86,7 @@ ClassicStoryView.prototype.remove = function(widget) {
 		currMarginTop = parseInt(computedStyle.marginTop,10),
 		currHeight = targetElement.offsetHeight + currMarginTop;
 	// Remove the dom nodes of the widget at the end of the transition
-	setTimeout(function() {
-		widget.removeChildDomNodes();
-	},duration);
+	setTimeout(removeElement,duration);
 	// Animate the closure
 	$tw.utils.setStyle(targetElement,[
 		{transition: "none"},

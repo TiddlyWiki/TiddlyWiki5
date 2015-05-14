@@ -1,0 +1,26 @@
+created: 20141226192500000
+modified: 20150117152552000
+title: Reference Tiddlers
+tags: [[Improving TiddlyWiki Documentation]]
+
+<<.def "Reference tiddlers">> offer raw information in a comprehensive interlinked way. The reader is likely to be an intermediate or expert user.
+
+There are several subcategories:
+
+;Concepts
+* With definitions, together forming a glossary
+
+;User manual
+* Presenting technical details of ~WikiText features
+* Subcategorised: messages, operators, widgets, etc
+
+;Developer manual
+* Presenting technical details of ~TiddlyWiki's internal architecture
+
+Reference material is written in a terse, formal style that avoids referring to the reader, and instead focuses on how ~TiddlyWiki itself behaves. The passive voice is often suitable:
+
+* <<.word "the template is specified as a tiddler">> rather than <<.word "specify the template as a tiddler">>
+* <<.word "the widget can be used for various purposes">> rather than <<.word "you can use the widget for various purposes">>
+* But <<.word "this widget has several possible uses">> is better, because it is less convoluted and more succinct
+
+Most contracted verb forms are avoided in reference tiddlers. But those ending in <<.word "n't">> (<<.word "aren't">>, <<.word "doesn't">>, <<.word "hasn't">>, <<.word "isn't">>, etc) are acceptable, as they make it less easy to accidentally overlook the word <<.word not>>.

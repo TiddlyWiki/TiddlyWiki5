@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Άκυρο
+Listing/Hint: Αυτά τα tiddlers είναι έτοιμα για εισαγωγή:
+Listing/Import/Caption: Εισαγωγή
+Listing/Select/Caption: Επιλογή
+Listing/Status/Caption: Κατάσταση
+Listing/Title/Caption: Τίτλος
+Upgrader/Plugins/Suppressed/Incompatible: Μπλοκαρισμένο ασύμβατο, ή παρωχημένο πρόσθετο
+Upgrader/Plugins/Suppressed/Version: Μπλοκαρισμένο πρόσθετο (επειδή το εισερχόμενο <<incoming>>  είναι παλαιότερο από το υπάρχον <<existing>>)
+Upgrader/Plugins/Upgraded: Αναβαθμισμένο πρόσθετο από <<incoming>> σε <<upgraded>>
+Upgrader/State/Suppressed: Μπλοκαρισμένο προσωρινά tiddler κατάστασης
+Upgrader/System/Suppressed: Μπλοκαρισμένο tiddler συστήματος
+Upgrader/ThemeTweaks/Created: Μετα-εγκατεστημένη παραλλαγή θέματος από <$text text=<<from>>/>

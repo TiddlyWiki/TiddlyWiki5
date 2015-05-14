@@ -1,32 +1,14 @@
 created: 20131219100637788
-modified: 20140917190022854
+modified: 20141015165343893
 tags: [[TiddlyWiki on Node.js]]
 title: Scripts for TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
 ! Script Files
 
-The TiddlyWiki5 repository contains several scripts in the `bin` folder that are used to build and deploy TiddlyWiki (`.sh` for *nix and `.cmd` for Windows). They can serve as a useful starting point for your own scripts.
+The TiddlyWiki5 repository contains several scripts in the `bin` folder that you can use to automate common tasks, or as a useful starting point for your own scripts. See [[Scripts for building tiddlywiki.com]] for details of the scripts used to build and release http://tiddlywiki.com/.
 
 All the scripts expect to be run from the root folder of the repository.
-
-!! `fullbld`: builds tw5.com
-
-This script builds several variants of TiddlyWiki5 for deployment on tiddlywiki.com.
-
-By default, files are output to a folder called `jermolene.github.com`, sibling to the TiddlyWiki5 repo directory. For example:
-
-```
-/TiddlyWork/ - Directory for working with TiddlyWiki5
-  |
-  +--+-- /TiddlyWiki5/ - Directory containing the TiddlyWiki5 repo from GitHub
-     |
-     +-- /jermolene.github.com/ - Directory for output files
-```
-
-You can override the build output directory by defining the environment variable `TW5_BUILD_OUTPUT`. The easiest way to do this is to create a personal batch file to invoke TiddlyWiki5 that first sets the environment variable and then invokes `fullbld`.
-
-`fullbld` also runs the TiddlyWiki5 Node.js-based test suite (see TestingMechanism)
 
 !! `serve`: serves tw5.com
 
@@ -66,15 +48,7 @@ Or:
 
 This script serves the `tw5.com-server` edition content with LazyLoading applied to images.
 
-!! `wbld`: builds TiddlyWiki for TiddlyWeb
-
-This script builds and deploys the code for [[TiddlyWiki in the Sky for TiddlyWeb]]. If you want to experiment with your own builds of TiddlyWiki5 for TiddlyWeb you could use this batch file as a base.
-
 !! `2bld`: builds TiddlyWiki 2.6.5
 
 This script builds TiddlyWiki 2.6.5 from the original source and then displays the differences between them (`diff` is used for *nix, `fc` for Windows).
-
-!! `deploy` & `verbump`: deploy TiddlyWiki and bump the TiddlyWiki version number
-
-These scripts are concerned with releasing a new version of TiddlyWiki. See [[Releasing a new version of TiddlyWiki5]].
 

@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/translators/templates/modal-tid
+
+\define generateTid(title)
+title: $:/language/Modals/$title$
+type: <$text text={{$:/language/Modals/$title$!!type}}/>
+subtitle: <$text text={{$:/language/Modals/$title$!!subtitle}}/>
+footer: <$text text={{$:/language/Modals/$title$!!footer}}/>
+help: <$text text={{$:/language/Modals/$title$!!help}}/>
+
+<$text text={{$:/language/Modals/$title$}}/>
+\end
+<$macrocall $name="generateTid" title=<<currentTiddler>>/>

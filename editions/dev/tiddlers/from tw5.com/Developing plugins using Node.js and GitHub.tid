@@ -1,14 +1,14 @@
 created: 20140320055936611
-modified: 20140908152942119
+modified: 20141022145259278
 tags: howto
 title: Developing plugins using Node.js and GitHub
 type: text/vnd.tiddlywiki
 
 The most practical way to develop plugins is to use Node.js with the tiddlywiki5 repository to build your plugins, and to use ~GitHub to manage you files.
 
-!Step by step
+! Step by step
 
-!!1. Setup your development environment
+!! 1. Installation
 
 First read  http://tiddlywiki.com/static/PluginMechanism.html.
 
@@ -16,33 +16,33 @@ Install Git from http://git-scm.com/downloads
 
 Install Node.js from http://nodejs.org/
 
-!!2. Create a new blank repository on ~GitHub
+!! 2. Create a new blank repository on ~GitHub
 
 Hint: ~GitHub repositories cannot be grouped together into directories, so it is only possible to group by using a naming scheme, e.g. use 'TW5-' as a name prefix with tiddlywiki5 projects to group them together.
 
 Go to https://github.com/ and create new a repository 'pluginname' - choose to add a readme file.
 
-!!3. Setup a working environment
+!! 3. Setup a working environment
 
-Choose a location in your file system (eg TW5) for you plugin project; issue commands to:
+Choose a location in your file system (eg TW5) for your plugin project; issue commands to:
 
---create the directory--
+!!! 1. Create the directory
 
-```
+```bash
 mkdir TW5
 
 ```
 
---make a local read-only copy of the tiddlywiki5 repository--
+!!! 2. Make a local read-only copy of the ~TiddlyWiki5 repository
 
-```
+```bash
 git clone https://github.com/Jermolene/TiddlyWiki5.git TW5
 
 ```
 
---make a directory for your plugin--
+!!! 3. Make a directory for your plugin
 
-```
+```bash
 cd TW5
 cd plugins
 mkdir yourname
@@ -51,22 +51,22 @@ mkdir pluginname
 
 ```
 
---make a local copy of you plugin repository--
+!!! 4. Make a local copy of your plugin repository
 
-```
+```bash
 git clone https://github.com/yourgithub/pluginname.git pluginname
 
 ```
---go to your files--
+!!! 5. Go to your files
 
-```
+```bash
 cd pluginname
 
 ```
 
 Create the file plugin.info with content:
 
-```
+```js
 {
 	"title": "$:/plugins/yourgithub/pluginname",
 	"description": "summary of the plugin's purpose",
@@ -79,40 +79,40 @@ Create the file plugin.info with content:
 ```
 
 
-!!4. Create the files for you plugin
+!! 4. Create the files for your plugin
 
-For example files see the plugins in the tiddlywiki5 repository i.e. those located at plugins/tiddlywiki/ - Note in particular that files need to contain information that is used to tell tiddlywiki the name of the tiddler that is to be used in the tiddlywiki in place of the name of the file within the file system.
+For example files see the plugins in the ~TiddlyWiki5 repository i.e. those located at plugins/tiddlywiki/. See [[TiddlerFiles|http://tiddlywiki.com/#TiddlerFiles]] for details of the supported tiddler file formats.
 
-!!5. Build your files into a tiddlywiki
+!!5. Build your files into a ~TiddlyWiki
 
-Modify editions/tw5.com/tiddlywiki.info to include a reference to your plugin directory,  i.e. find `"plugins": [ ` and add `"yourname/pluginname"`.
+Modify `editions/tw5.com/tiddlywiki.info` to include a reference to your plugin directory,  i.e. find `"plugins": [ ` and add `"yourname/pluginname"`.
 
-From the TW5 directory  issue command
+From the TW5 directory issue the command
 
+```bash
+node ./tiddlywiki.js editions/tw5.com --build index
 ```
-./bin/qbld.sh
-```
 
-the resultant file (index.html) will be placed in the build directory, the default build directory is  `../jermolene.github.com` relative to TW5/
+The resultant file (index.html) will be placed in the `editions/tw5.com/output` directory of the TW5 repo.
 
-!!6. Save your work on ~GitHub
+!! 6. Save your work on ~GitHub
 
 From `plugins/yourname/pluginname/` issue commands to:
 
---add all files--
+!!! 1. Add all files
 
-```
+```bash
 git add -A
 ```
 
---commit to your local repository---
+!!! 2. Commit to your local repository
 
-```
+```bash
 git commit -am "something meaningful about this check in"
 ```
 
---copy local changes to github--
+!!! 3. Copy local changes to github
 
-```
+```bash
 git push
 ```
