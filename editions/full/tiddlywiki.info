@@ -14,7 +14,8 @@
 		"tiddlywiki/markdown",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/railroad",
-		"tiddlywiki/stacked-view"
+		"tiddlywiki/stacked-view",
+		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"languages": [
 		"cs-CZ",
