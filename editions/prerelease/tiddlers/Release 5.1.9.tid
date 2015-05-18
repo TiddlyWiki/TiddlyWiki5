@@ -9,6 +9,10 @@ type: text/vnd.tiddlywiki
 
 ! Major Improvements
 
+!! New "Powered by ~TiddlyWiki" plugin
+
+An experimental plugin to add a simple "Powered by ~TiddlyWiki" banner to your site. It is included in this prerelease but will not be on the main tiddlywiki.com wiki.
+
 !! New "Fluid story, fixed sidebar" mode
 
 It is now possible to arrange the main window so that the sidebar has a fixed width and the story river expands to fill the remaining space.
