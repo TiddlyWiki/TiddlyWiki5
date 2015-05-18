@@ -1,7 +1,6 @@
 {
 	"description": "Deutsch (Österreich) Edition",
 	"plugins": [
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff"],
 	"themes": [
 		"tiddlywiki/vanilla",
