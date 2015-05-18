@@ -7,6 +7,16 @@ type: text/vnd.tiddlywiki
 
 //[[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyWiki5/compare/v5.1.8...v5.1.9]]//
 
+! Special Edition with "parse-tree" widget
+
+```
+<$parse-tree tiddler="HelloThere"/>
+```
+
+Renders as:
+
+<$parse-tree tiddler="HelloThere"/>
+
 ! Major Improvements
 
 !! New "Fluid story, fixed sidebar" mode
