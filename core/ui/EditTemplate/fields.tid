@@ -13,7 +13,7 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 \define new-field-inner()
 <$reveal type="nomatch" text="" default=<<name>>>
 <$button>
-<$action-sendmessage $message="tm-add-field" $(name)$=<<value>>/>
+<$action-setfield $tiddler={{!!title}} $field=<<name>> $value=<<value>>/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldname"/>
 <$action-deletetiddler $tiddler="$:/temp/newfieldvalue"/>
 <<lingo Fields/Add/Button>>
