@@ -1477,15 +1477,22 @@ html body.tc-body.tc-single-tiddler-window {
 	color: <<colour alert-highlight>>;
 }
 
-.tc-static-alert {
-	position: relative;
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tc-static-alert {
+		position: relative;
+	}
+
+	.tc-static-alert-inner {
+		position: absolute;
+		z-index: 100;
+	}
+
 }
 
 .tc-static-alert-inner {
 	padding: 0 2px 2px 42px;
 	color: <<colour static-alert-foreground>>;
-	position: absolute;
-	z-index: 100;
 }
 
 /*
