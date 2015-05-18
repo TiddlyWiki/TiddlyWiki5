@@ -1,12 +1,12 @@
 background-color: #fff
-caption: Einführung in ~TiddlyWiki
+caption: ~TiddlyWiki Präsentation
 color: red
 created: 20150513145829349
 creator: pmario
 icon: {{$:/core/images/video}}
 image: Introduction Video Thumbnail.jpg
 link: Einführungsvideo
-modified: 20150513154633783
+modified: 20150518080313355
 modifier: pmario
 tags: HelloThumbnail
 title: HelloThumbnail - Introduction Video
