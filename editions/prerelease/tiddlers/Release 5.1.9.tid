@@ -53,6 +53,20 @@ Light palette
 Revert
 </$button>
 
+!! New "Solar Flare" palette
+
+There's a new core palette "Solar Flare", contributed by Rustem Akbulatov (@nameanyone).
+
+<$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/SolarFlare"/>
+Try it out
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+<$action-setfield $tiddler="$:/palette" text="$:/palettes/Vanilla"/>
+Revert
+</$button>
+
 !! Options for Story Control
 
 There are new options for controlling the position in the story river of newly opened tiddles. Visit the ''Settings'' tab of $:/ControlPanel and look for "Tiddler Opening Behaviour".
@@ -67,19 +81,45 @@ The timeout can now be changed by changing the value in [[$:/config/Drafts/Typin
 
 !! Translation Improvements
 
-* 
+* Updates to the Dutch, Chinese and German translations.
 
 !! Usability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/789069bb6b9ca1bd9da75e035b18728e83eb232c]] new page control icon for setting the palette: <$set name="tv-config-toolbar-class" value="btn">
+<$set name="tv-config-toolbar-icons" value="yes">
+<$set name="tv-config-toolbar-text" value="yes">
+{{$:/core/ui/Buttons/palette}}
+</$set>
+</$set>
+</$set>
+* Added new icons for <span style="fill:#aaa;">
+palette <span title="$:/core/images/palette">{{$:/core/images/palette}}</span>
+and "open new window" <span title="$:/core/images/open-window">{{$:/core/images/open-window}}</span>
+</span>
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/648f670bcbba088780bc76f0c33cbe378d283bbd]] the theme icon to better match the new palette icon: <span style="fill:#aaa;">
+<span title="$:/core/images/theme-button">{{$:/core/images/theme-button}}</span>
+<span title="$:/core/images/plugin-generic-theme">{{$:/core/images/plugin-generic-theme}}</span>
+</span>
+* [[Avoid|https://github.com/Jermolene/TiddlyWiki5/commit/7b4153f87f8b4793fa055ec287a659ece3150d99]] glitch with autofocusing the search box in the plugin library
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9f92c086c31a528a2ffb6bc9fed53d4cc016480f]] information about TiddlyDesktop to [[Releases]]
 
 !! Hackability Improvements
 
-* 
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/9b4b9d4d8878b8646112de7b5a7b282f50a4d1cb]] ActionSendMessageWidget for more flexible passing of named parameters via new `$name` and `$value` attributes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6942efa6289c9f1d99ea9f63972aa314ac06a8b1]] styling for `<kbd>` elements such as <kbd>escape</kbd> and <kbd>enter</kbd>
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/637aaca2fc3563cc695ab5603fc0cde222a770da]] subtle new "pin stripe" pattern for page background - <$button>
+<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimage" text="Pinstripe.gif"/>
+<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment" text="fixed"/>
+<$action-setfield $tiddler="$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize" text="auto"/>
+Try it out
+</$button>
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/139496209f92d229feadf5c2883edec9090c0a0a]] support for custom elements to the ButtonWidget
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5a6249894d5e79ee4e472c72be8956ce59558797]] problem with special characters in field names
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/230f40c3bd71177eb7b1f7e8252a5164e99a12c5]] static banner layout on mobile devices
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/df84e932833b3643ce600499ddd5fef497bec908]] popups within the scrollable widget by adding `position: relative;` to example scrollable widget styles
 
 !! Node.js Changes
 
@@ -91,4 +131,11 @@ The timeout can now be changed by changing the value in [[$:/config/Drafts/Typin
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@BramChen|https://github.com/BramChen]]
+* [[@ericshulman|https://github.com/ericshulman]]
 * [[@felixhayashi|https://github.com/felixhayashi]]
+* [[@gernert|https://github.com/gernert]]
+* [[@heroboy|https://github.com/heroboy]]
+* [[@nameanyone|https://github.com/nameanyone]]
+* [[@pmario|https://github.com/pmario]]
+* [[@xcazin|https://github.com/xcazin]]
