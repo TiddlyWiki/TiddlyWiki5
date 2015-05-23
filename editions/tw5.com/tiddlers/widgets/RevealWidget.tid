@@ -1,5 +1,5 @@
 created: 20131024141900000
-modified: 20150310124305795
+modified: 20150518163239603
 tags: Widgets
 title: RevealWidget
 type: text/vnd.tiddlywiki
@@ -47,9 +47,9 @@ And this is some text
 
 </$reveal>'>>
 
-!! "Slider"
+!! Accordion or Slider
 
-A slider appears as a single button that can be used to toggle the display of the contained content.
+An "accordion" or "slider" is a button that can be used to toggle the display of associated content.
 
 <<wikitext-example-without-html '<$reveal type="nomatch" state="$:/state/SampleReveal2" text="show">
 

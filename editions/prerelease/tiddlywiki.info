@@ -6,7 +6,8 @@
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
 		"tiddlywiki/help",
-		"tiddlywiki/stacked-view"
+		"tiddlywiki/stacked-view",
+		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",

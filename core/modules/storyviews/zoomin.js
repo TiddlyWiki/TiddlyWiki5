@@ -151,6 +151,11 @@ ZoominListView.prototype.remove = function(widget) {
 		removeElement();
 		return;
 	}
+	// Abandon if hidden
+	if(targetElement.style.display != "block" ) {
+		removeElement();
+		return;
+	}
 	// Set up the tiddler that is being closed
 	$tw.utils.addClass(targetElement,"tc-storyview-zoomin-tiddler");
 	$tw.utils.setStyle(targetElement,[
