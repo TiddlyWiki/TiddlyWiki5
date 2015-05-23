@@ -197,11 +197,10 @@ var Command = function(params,commander,callback) {
 		path: /^\/$/,
 		handler: function(request,response,state) {
 			response.writeHead(200, {'content-encoding': 'gzip',"Content-Type": state.server.get("serveType")});
-			var text = state.wiki.renderTiddler(state.server.get("renderType"),state.server.get("rootTiddler"));
-			//response.end(text,"utf8");
-			zlib.gzip(text,function(_,result){
-                                response.end(result,"utf8");
-                        });
+			var text = state.wiki.renderTiddler(state.server.get("renderType"), state.server.get("rootTiddler"));
+			zlib.gzip(text, function(_, result) {
+				response.end(result, "utf8");
+			});
 		}
 	});
 	this.server.addRoute({
