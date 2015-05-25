@@ -196,11 +196,21 @@ var Command = function(params,commander,callback) {
 		method: "GET",
 		path: /^\/$/,
 		handler: function(request,response,state) {
-			response.writeHead(200, {'content-encoding': 'gzip',"Content-Type": state.server.get("serveType")});
+			var acceptEncoding = request.headers['accept-encoding'] || '';
 			var text = state.wiki.renderTiddler(state.server.get("renderType"), state.server.get("rootTiddler"));
-			zlib.gzip(text, function(_, result) {
-				response.end(result, "utf8");
-			});
+			var result,
+				contentEncoding = '';
+			if (acceptEncoding.match(/\bdeflate\b/)) {
+				contentEncoding = 'deflate';
+				result = zlib.deflateSync(text);
+			} else if (acceptEncoding.match(/\bgzip\b/)) {
+				contentEncoding = 'gzip';
+				result = zlib.gzipSync(text);
+			} else {
+				result = text;
+			}
+			response.writeHead(200, {'content-encoding': contentEncoding ,"Content-Type": state.server.get("serveType")});
+			response.end(result, "utf8");
 		}
 	});
 	this.server.addRoute({
