@@ -1,0 +1,27 @@
+created: 20140206214608586
+fr-title: Chargement allégé
+modified: 20150531190652388
+tags: Features
+title: LazyLoading
+type: text/vnd.tiddlywiki
+
+Habituellement, avec <<tw>>, le contenu complet de tous les tiddlers est intégré dans le fichier HTML principal. Le Chargement Allégé (Lazy loading) fait référence à une  technique qui intègre seulement les métadonnées dans le tiddler (en d'autres termes, tous les champs hormis le champ ''text''), et demande le contenu au serveur quand il est requis.
+
+Le Chargement Allégé peut être utilisé dans deux configurations:
+
+* À l'exécution de [[TiddlyWiki sous Node.js|TiddlyWiki on Node.js]], les tiddlers images peuvent être soumis au Chargement Allégé
+* À l'exécution de [[TiddlyWiki au Ciel pour TiddlyWeb|TiddlyWiki in the Sky for TiddlyWeb]], tous les tiddlers sont soumis au Chargement Allégé
+
+Voir le LazyLoadingMechanism pour plus de détails sur la façon dont le contenu allégé est implémenté.
+
+! Le Chargement Allégé sous Node.js
+
+Pour exécuter le Chargement Allégé des images par TiddlyWiki, lancer le serveur par cette ServerCommand&nbsp;:
+
+```
+tiddlywiki --server 8080 $:/core/save/lazy-images
+```
+
+! Le Chargement Allégé sous TiddlyWeb
+
+Dans la configuration actuelle, le Contenu Allégé est activé par défaut.

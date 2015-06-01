@@ -1,0 +1,23 @@
+created: 20130823203800000
+fr-title: Feuille de route
+modified: 20150531191057009
+tags: About
+title: RoadMap
+type: text/vnd.tiddlywiki
+
+Même si <<tw>> n'est plus en version béta, il y a plusieurs évolutions de prévues pour les mois à venir&nbsp;:
+
+* Remédier aux vestiges de TiddlyWikiClassic
+* Un format de fichier <<tw>> (pour éviter les noms d'attributs illégaux)
+* Des Alias (titres alternatifs pour les tiddlers)
+* Chercher et remplacer
+* Prise en compte du renommage d'un Tiddler
+* Infobulles étendues, incorporant une prévisualisation
+* Augmenter les raccourcis clavier
+* Accès au clavier étendu dans l'éditeur de texte
+* Éditeur de liste par glisser-déposer
+* Recherche sélective selon les titres, les contenus ou les champs
+* Notation Mathématiques
+
+Se reporter aussi à la liste des problèmes sur GitHub&nbsp;: https://github.com/Jermolene/TiddlyWiki5
+

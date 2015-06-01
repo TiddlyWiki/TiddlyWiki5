@@ -2,25 +2,31 @@ caption: Bienvenue !
 created: 20130822170200000
 fr-title: Bienvenue !
 list: [[Discover TiddlyWiki]] [[Some of the things you can do with TiddlyWiki]] [[Ten reasons to switch to TiddlyWiki]] Examples [[History of TiddlyWiki]] [[What happened to the original TiddlyWiki?]]
-modified: 20141221121901696
+modified: 20150601094003857
 tags: TableOfContents
 title: HelloThere
 type: text/vnd.tiddlywiki
 
-Bienvenue sur <<tw>>, une application web dédiée à la prise de notes, dont le signe distinctif est la grande souplesse d'utilisation. Vous pouvez l'obtenir gratuitement, la stocker n'importe où, et la personnaliser selon vos souhaits. Elle vous servira à conserver, organiser, et partager vos notes de manière inédite en comparaison des traitements de texte et autres outils habituels de prise de notes.
+''N'avez-vous jamais eu la sensation que votre tête était trop petite pour contenir tout ce que vous aviez besoin de mémoriser&nbsp;?''
 
-<$button class="tc-btn-big-green" to="Introduction Video" style="background:red;">
-{{$:/core/images/video}} Visionnez une introduction en vidéo
-</$button>
+Bienvenue sur TiddlyWiki, un carnet de notes web [[non-linéaire|Philosophy of Tiddlers]] pour [[saisir|Creating and editing tiddlers]], [[organiser|Structuring TiddlyWiki]] et [[partager|Sharing your tiddlers with others]] des informations simples ou complexes.
 
-<<tw>> privilégie la non-linéarité : le contenu se structure à l'aide de déroulés, de tags, d'hyperliens, et d'autres fonctionnalités spécifiques. Vous pouvez organiser vos notes et y accéder selon votre manière de penser, sans vous sentir contraint par une structure d'organisation prédéfinie.
+Utilisez-le pour gérer votre [[liste de tâches|TaskManagementExample]], faire le plan d'un [[essai ou d'une nouvelle|"TiddlyWiki for Scholars" by Alberto Molina]], ou pour organiser votre mariage. Enregistrez tout ce qui vous traverse l'esprit, ou construisez un site web flexible et réactif.
 
-Vous pouvez utiliser <<tw>> sous forme de fichier autonome, affichable et éditable depuis n'importe quel navigateur web, que vous soyez connecté ou déconnecté. Vous pouvez aussi vous en servir comme une [[application Node.js|TiddlyWiki on Node.js]], à même de synchroniser chacune de vos notes dans un fichier séparé.
+<div style="font-size:0.7em;text-align:center;margin-top:2em;margin-bottom:2em;">
+<<list-thumbnails filter:"[tag[HelloThumbnail]]" width:"168" height:"95">>
+</div>
 
-Comment faire fonctionner <<tw>> chez vous ? Notre conseil est de commencer par lire les textes de présentation ci-dessous, puis de naviguer dans la [[table des matières|TableOfContents]] présente dans l'onglet //{{TableOfContents!!caption}}// de la barre latérale. Ou si vous préférez, contentez-vous de suivre [[nos instructions de démarrage|GettingStarted]] et jetez-vous à l'eau !
+Contrairement aux services en ligne classiques, TiddlyWiki vous permet de choisir où conserver vos informations, et garantit que dans les décennies à venir vous pourrez toujours utiliser les notes que vous prenez aujourd'hui.
 
-<<list-links "[tag[HelloThere]]">>
-
-Voir aussi<<:>>
-
-* [ext[Developer Documentation|http://tiddlywiki.com/dev/index.html]] (en anglais)
+<div style="font-size:0.7em;text-align:center;margin-top:3em;margin-bottom:3em;">
+<a href="http://groups.google.com/group/TiddlyWiki" class="tc-btn-big-green" style="background-color:#FF8C19;" target="_blank">
+{{$:/core/images/mail}} ~TiddlyWiki Mailing List
+</a>
+<a href="https://twitter.com/TiddlyWiki" class="tc-btn-big-green" style="background-color:#5E9FCA;" target="_blank">
+{{$:/core/images/twitter}} @~TiddlyWiki on Twitter
+</a>
+<a href="https://github.com/Jermolene/TiddlyWiki5" class="tc-btn-big-green" style="background-color:#444;" target="_blank">
+{{$:/core/images/github}} ~TiddlyWiki on ~GitHub
+</a>
+</div>

@@ -1,0 +1,39 @@
+caption: Liens
+created: 20131205155230596
+fr-title: Liens avec WikiText
+modified: 20150601094319226
+tags: WikiText
+title: Linking in WikiText
+type: text/vnd.tiddlywiki
+
+L'une des aptitudes-clé de WikiText est sa capacité à créer des liens vers d'autres mémos (appelés tiddlers) ou vers des sites externes. Il existe plusieurs moyens de les mettre en oeuvre&nbsp;:
+
+* Lien vers un tiddler via le titre&nbsp;: `[[Titre du Tiddler]]`
+* Lien vers un tiddler avec libellé&nbsp;: `[[Texte à afficher|Titre du Tiddler]]`
+* Pour les tiddlers conformes aux règles CamelCase, saisir leur titre génère automatiquement la création du lien
+* Pour un lien vers un site externe, saisir l'URL complète du site&nbsp;: `http://tiddlywiki.com/` ou `[[TW5|http://tiddlywiki.com/]]`
+
+Vous pouvez annuler la prise en compte du lien en le préfixant du signe `~`. 
+
+Par exemple&nbsp;:
+
+<<wikitext-example src:"* ~SalueATous suit la règle CamelCase, mais n'est pas considéré comme un lien
+* ~http://google.com/ n'est pas un lien automatique non plus">>
+
+Pour que cette syntaxe fonctionne, l'adresse URL doit être reconnue comme une URL, donc débuter par un protocole comme `http://` ou `file://`. Mais, vous pouvez forcer le lien externe sans cela en utilisant cette syntaxe&nbsp;:
+
+```
+[ext[tiddlywiki.com]]
+
+[ext[libellé à afficher|tiddlywiki.com]]
+
+[ext[Faire un Don|bitcoin:1aabbdd....?amount=0.001]]
+```
+
+! Personnaliser les Liens des Tiddlers
+
+Voir le LinkWidget pour plus de détail sur le widget sous-jacent utilisé pour implémenter les liens des tiddlers, et notamment les macros qui peuvent être utilisées pour personnaliser leur comportements.
+
+! Personnaliser les Liens des Tiddlers
+
+Voir le LinkWidget pour plus de détail sur le widget sous-jacent utilisé pour implémenter les liens des tiddlers, et notamment les macros qui peuvent être utilisées pour personnaliser leur comportements.

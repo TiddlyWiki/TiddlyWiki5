@@ -1,6 +1,7 @@
 caption: Formatage
 created: 20141016142259705
-modified: 20141116093315685
+fr-title: Mise en forme avec WikiText
+modified: 20150601093436425
 tags: WikiText
 title: Formatting in WikiText
 type: text/vnd.tiddlywiki
@@ -16,7 +17,7 @@ Voici les formatages de texte disponibles en [[WikiTexte|WikiText]] :
 |`^^exposant^^` |texte en ^^exposant^^ |
 |`,,indice,,` |texte en ,,indice,, |
 
-Voir aussi : [[WikiTexte : Blocs de code|Code Blocks in WikiText]]
+Voir aussi : [[WikiTexte : blocs de code|Code Blocks in WikiText]]
 
 ; Remarque
 * Si le code inclus est à la fin du code contenant, l'espace entre le <code>&#96;</code> et les <code>&#96;&#96;</code> est nécessaire.
