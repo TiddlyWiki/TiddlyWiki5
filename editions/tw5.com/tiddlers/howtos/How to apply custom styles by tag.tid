@@ -1,5 +1,5 @@
 created: 20141001132300000
-modified: 20141001132300000
+modified: 20150608132300000
 tags: Learning
 title: How to apply custom styles by tag
 type: text/vnd.tiddlywiki
@@ -26,5 +26,16 @@ Note that tags containing spaces or non-alphanumeric characters will be converte
 
 |!Tag |!Generated Class Name |
 |`$:/mytag` |`tc-tagged-%24%3A%2Fmytag` |
-|`one two` |`tc-tagged-one%20two` |
+|`Doctor Who` |`tc-tagged-Doctor%20Who` |
 |`£35.23` |`tc-tagged-%C2%A335.23` |
+
+Although ~TiddlyWiki will generate these tags, to actually use them in your css, you will need to escape the percent character in your stylesheet, like:
+
+```
+.tc-tagged-Doctor\%20Who {
+    background-image: url(./tardis_back.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    color:#FBFBFB;
+}
+```
