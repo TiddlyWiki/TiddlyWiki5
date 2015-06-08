@@ -1,0 +1,95 @@
+created: 20150607235625799
+modified: 20150608032345215
+module-type: widget
+tags: 
+title: $:/edition/tw5.com/dropbox-url.js
+type: application/javascript
+
+/*\
+title: $:/edition/tw5.com/dropbox-url.js
+type: application/javascript
+module-type: widget
+
+Implements the Dropbox URL converter widget.
+
+```
+<$dropbox-url/>
+```
+
+\*/
+
+(function(){
+
+/*jslint node: true, browser: true */
+/*global $tw: false */
+"use strict";
+var Widget = require("$:/core/modules/widgets/widget.js").widget;
+var urlMatcher = new RegExp("^https://www.dropbox.com/s/(.*)/mywiki.html$");
+var urlTemplate = "https://dl.dropboxusercontent.com/s/{hash}/mywiki.html";
+
+function userContentUrl(dropboxUrl) {
+	var match = dropboxUrl.match(urlMatcher);
+	var gobbledegook = match ? match[1] : "<gobbledegook>";
+	return urlTemplate.replace(/{hash}/, gobbledegook);
+}
+
+var DropboxUrlWidget = function(parseTreeNode,options) {
+	this.initialise(parseTreeNode,options);
+	this.dropboxUrl = "https://www.dropbox.com/s/<gobbledegook>/mywiki.html";
+};
+
+DropboxUrlWidget.prototype = new Widget();
+
+DropboxUrlWidget.prototype.render = function(parent,nextSibling) {
+	this.parentDomNode = parent;
+	this.computeAttributes();
+	this.execute();
+	var domNode = this.create(parent,nextSibling);
+	this.domNodes.push(domNode);
+	parent.insertBefore(domNode,nextSibling);
+	this.renderChildren(domNode,null);
+};
+
+DropboxUrlWidget.prototype.execute = function() {
+	this.widgetClass = this.getAttribute("class");
+	this.makeChildWidgets();
+};
+
+DropboxUrlWidget.prototype.refresh = function(changedTiddlers) {
+  return false;
+};
+
+DropboxUrlWidget.prototype.removeChildDomNodes = function() {
+	$tw.utils.each(this.domNodes,function(domNode) {
+		domNode.parentNode.removeChild(domNode);
+	});
+	this.domNodes = [];
+};
+
+DropboxUrlWidget.prototype.create = function() {
+	var domNode = $tw.utils.domMaker("div", {class: this.widgetClass});
+	var input = this.document.createElement("input");
+	var pre = this.document.createElement("pre");
+	var output = this.document.createTextNode(userContentUrl(this.dropboxUrl));
+	input.type = "text";
+	input.size = 60;
+	input.value = this.dropboxUrl;
+	$tw.utils.addEventListeners(input,[
+		{name: "change", handlerObject: this, handlerMethod: "handleChangeEvent"}
+	]);
+	domNode.appendChild(input);
+	domNode.appendChild(this.document.createElement("br"));
+	pre.appendChild(output);
+	domNode.appendChild(pre);
+	return domNode;
+};
+
+DropboxUrlWidget.prototype.handleChangeEvent = function(event) {
+	this.dropboxUrl = event.target.value;
+	this.refreshSelf();
+	return true;
+};
+
+exports["dropbox-url"] = DropboxUrlWidget;
+
+})();
