@@ -229,4 +229,4 @@ Christian Ehmke, @cehmke 2015/05/10
 
 kixam, @kixam, 2015/05/27
 
-Sylvain Naudin, @naudinsylvain, 2015/06/09
+Sylvain Naudin, @silvyn, 2015/06/09
