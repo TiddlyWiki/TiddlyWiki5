@@ -228,3 +228,5 @@ vouko, @vouko 2015/05/02
 Christian Ehmke, @cehmke 2015/05/10
 
 kixam, @kixam, 2015/05/27
+
+Sylvain Naudin, @naudinsylvain, 2015/06/09
