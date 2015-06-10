@@ -12,7 +12,7 @@ released: 20150111
 
 [[See GitHub for detailed change history of this release|https://github.com/Jermolene/TiddlyDesktop/compare/v0.0.3...v0.0.4]]
 
-This release includes a major reworking of the internals of TiddlyDesktop. It's really a bit early for general release, but we need feedback to improve it. Please use it with great caution, and consider reverting to v0.0.3 if you run into any problems.
+This release includes a major reworking of the internals of TiddlyDesktop.
 
 Please report any problems or suggestions via GitHub issues, or post to the TiddlyWiki discussion group:
 
