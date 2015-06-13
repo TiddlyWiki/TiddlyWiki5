@@ -234,3 +234,5 @@ Sylvain Naudin, @silvyn, 2015/06/09
 Lolo le 13 @lolole13 2015/06/04
 
 Steven McDonald, @StevenMcD 2015/05/21
+
+Richard Smith, @richardwsmith 2015/05/22
