@@ -174,7 +174,7 @@ EditCodeMirrorWidget.prototype.refresh = function(changedTiddlers) {
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {
 		var editInfo = this.getEditInfo();
-		this.updateEditor(editInfo.value, editInfo.type);
+		this.updateEditor(editInfo.value,editInfo.type);
 		return true;
 	}
 	return false;
@@ -184,9 +184,9 @@ EditCodeMirrorWidget.prototype.refresh = function(changedTiddlers) {
 Update the editor with new text and type. This method is separate from updateEditorDomNode()
 so that subclasses can override updateEditor() and still use updateEditorDomNode()
 */
-EditCodeMirrorWidget.prototype.updateEditor = function(text, type) {
+EditCodeMirrorWidget.prototype.updateEditor = function(text,type) {
 	this.updateEditorDomNode(text);
-	this.codeMirrorInstance.setOption("mode", type);
+	this.codeMirrorInstance.setOption("mode",type);
 };
 
 /*
