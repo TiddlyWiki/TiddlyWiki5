@@ -81,7 +81,8 @@ The timeout can now be changed by changing the value in [[$:/config/Drafts/Typin
 
 !! Translation Improvements
 
-* Updates to the Dutch, Chinese and German translations.
+* Updates to the Dutch, Chinese and German translations
+* New Catalan (Spain) translation
 
 !! Usability Improvements
 
@@ -102,6 +103,7 @@ and "open new window" <span title="$:/core/images/open-window">{{$:/core/images/
 </span>
 * [[Avoid|https://github.com/Jermolene/TiddlyWiki5/commit/7b4153f87f8b4793fa055ec287a659ece3150d99]] glitch with autofocusing the search box in the plugin library
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9f92c086c31a528a2ffb6bc9fed53d4cc016480f]] information about TiddlyDesktop to [[Releases]]
+* [[Stopped|https://github.com/Jermolene/TiddlyWiki5/commit/4a3a5bf1f06c4efb8449c860e90c214f707954f6]] autosaving after cancelling an edit
 
 !! Hackability Improvements
 
@@ -114,6 +116,8 @@ and "open new window" <span title="$:/core/images/open-window">{{$:/core/images/
 Try it out
 </$button>
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/139496209f92d229feadf5c2883edec9090c0a0a]] support for custom elements to the ButtonWidget
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/d8366cc45f25d16c9085e05ee18965e626e218ff]] CodeMirror plugin to automatically refresh when a tiddler type changes
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d5033e2a00e34a7665c2cff58c0d15da224dd2b]] new setting in $:/ControlPanel to render tiddler titles as links, which can be convenient for drag and drop
 
 !! Bug Fixes
 
@@ -132,10 +136,24 @@ Try it out
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
 * [[@BramChen|https://github.com/BramChen]]
+* [[@buggyj|https://github.com/buggyj]]
+* [[@cehmke|https://github.com/cehmke]]
+* [[@danielo515|https://github.com/danielo515]]
+* [[@Drakor|https://github.com/Drakor]]
 * [[@ericshulman|https://github.com/ericshulman]]
 * [[@felixhayashi|https://github.com/felixhayashi]]
 * [[@gernert|https://github.com/gernert]]
 * [[@heroboy|https://github.com/heroboy]]
+* [[@inmysocks|https://github.com/inmysocks]]
+* [[@kixam|https://github.com/kixam]]
+* [[@lolole13|https://github.com/lolole13]]
+* [[@Marxsal|https://github.com/Marxsal]]
 * [[@nameanyone|https://github.com/nameanyone]]
 * [[@pmario|https://github.com/pmario]]
+* [[@r1chard5mith|https://github.com/r1chard5mith]]
+* [[@roma0104|https://github.com/roma0104]]
+* [[@silvyn|https://github.com/silvyn]]
+* [[@StevenMcD|https://github.com/StevenMcD]]
+* [[@sukima|https://github.com/sukima]]
+* [[@vouko|https://github.com/vouko]]
 * [[@xcazin|https://github.com/xcazin]]
