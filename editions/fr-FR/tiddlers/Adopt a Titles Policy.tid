@@ -15,7 +15,7 @@ Fixer une politique formelle concernant les titres peuvent aider à réduire les
 ** exemples : TiddlerFields, DeveloperDocs
 * Utilisation de mots séparés pour les titres qui sont des expressions ou des phrases complètes, comme des FAQ, des howtos ou des tâches
 ** exemple : [[How to build a TiddlyWiki5 from individual tiddlers]]
-* Là où TiddlyWiki or TiddlyWiki5 est utilisé comme qualifieur au début du titre, toujours utiliser des mots séparés
+* Là où TiddlyWiki ou TiddlyWiki5 est utilisé comme qualifieur au début du titre, toujours utiliser des mots séparés
 ** exemple : [[TiddlyWiki on Node.js]]
 
 Une politique qui inclurait la règle ci-dessous pourrait s'appliquer à vos propres wikis<<dp>>
