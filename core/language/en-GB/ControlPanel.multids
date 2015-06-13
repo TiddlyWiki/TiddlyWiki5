@@ -95,6 +95,10 @@ Settings/LinkToBehaviour/OpenAbove: Open above the current tiddler
 Settings/LinkToBehaviour/OpenBelow: Open below the current tiddler
 Settings/LinkToBehaviour/OpenAtTop: Open at the top of the story river
 Settings/LinkToBehaviour/OpenAtBottom: Open at the bottom of the story river
+Settings/TitleLinks/Caption: Tiddler Titles
+Settings/TitleLinks/Hint: Optionally display tiddler titles as links
+Settings/TitleLinks/No/Description: Do not display tiddler titles as links
+Settings/TitleLinks/Yes/Description: Display tiddler titles as links
 StoryView/Caption: Story View
 StoryView/Prompt: Current view:
 Theme/Caption: Theme
