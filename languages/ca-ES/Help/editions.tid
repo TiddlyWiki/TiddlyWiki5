@@ -1,0 +1,8 @@
+title: $:/language/Help/editions
+description: Llista les edicions disponibles de TiddlyWiki
+
+Llista els noms i descripcions de les edicions disponibles. Podeu generar un nou wiki d'una edició concreta amb l'ordre `--init`.
+
+```
+--editions
+```

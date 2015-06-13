@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/ca-ES",
+	"name": "ca-ES",
+	"plugin-type": "language",
+	"description": "Catalan (Spain)",
+	"author": "Paco Rivière",
+	"core-version": ">=5.0.0"
+}

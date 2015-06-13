@@ -1,0 +1,14 @@
+title: $:/language/Import/
+
+Listing/Cancel/Caption: Anul·la
+Listing/Hint: Aquests tiddlers estàn llestos per a ser importats
+Listing/Import/Caption: Importa
+Listing/Select/Caption: Trieu
+Listing/Status/Caption: Estat
+Listing/Title/Caption: Títol
+Upgrader/Plugins/Suppressed/Incompatible: Connector bloquejat incompatible o obsolet
+Upgrader/Plugins/Suppressed/Version: Connector bloquejat (degut a que la nova versió <<entrant>>  és anterior a l'actual <<actual>>)
+Upgrader/Plugins/Upgraded: Connector actualitzat de <<entrant>> a <<actualitzat>>
+Upgrader/State/Suppressed: Tiddler temporalment en estat bloquejat
+Upgrader/System/Suppressed: Tiddler del sistema bloquejat
+Upgrader/ThemeTweaks/Created: Tema migrat des de <$text text=<<desde>>/>
