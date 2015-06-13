@@ -1,6 +1,6 @@
-fr-title: Fonctionnalités
 created: 20130822172800000
-modified: 20141115214833142
+fr-title: Fonctionnalités
+modified: 20150531185159561
 tags: TableOfContents
 title: Features
 type: text/vnd.tiddlywiki
@@ -15,10 +15,10 @@ Plus d'informations sur les fonctionnalités spécifiques de <<tw>><<dp>>
 
 ----
 
-* Des éléments d'interface utilisateur aussi familiers que <<alert-demo>>, <$button message="tm-modal" param="SampleWizard">wizards</$button> et <$button message="tm-notify" param="SampleNotification">notifications</$button>
+* Des outils d'interface utilisateur conviviaux comme <<alert-demo>>, <$button message="tm-modal" param="SampleWizard">wizards</$button> et <$button message="tm-notify" param="SampleNotification">notifications</$button>
 * Essayez le <$button message="tm-full-screen">mode plein-écran</$button>
 * Explorez le [[plugin de visualisation D3.js|http://tiddlywiki.com/plugins/tiddlywiki/d3/index.html]]
-* [[CodeMirror support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html]]
-* [[Markdown support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html]]
-* [[Classic TiddlyWiki markup support via a plugin|http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html]]
-* Last but not least, TiddlyWiki est un exemple rare de [[quine|Quine]] utilisable quotidiennement.
+* Accédez à [[CodeMirror par plugin|http://tiddlywiki.com/plugins/tiddlywiki/codemirror/index.html]]
+* Notez avec [[Markdown par  plugin|http://tiddlywiki.com/plugins/tiddlywiki/markdown/index.html]]
+* Conservez le marquage [[TiddlyWiki Classic par plugin|http://tiddlywiki.com/plugins/tiddlywiki/tw2parser/index.html]]
+* Enfin, mais non des moindres, TiddlyWiki est un des rares exemples d'utilisation d'une [[quine|Quine]] au quotidien.

@@ -1,0 +1,54 @@
+created: 20140908093600000
+fr-title: Utiliser des liens pour naviguer entre les tiddlers
+modified: 20150531191742919
+tags: [[Working with TiddlyWiki]]
+title: Using links to navigate between tiddlers
+type: text/vnd.tiddlywiki
+
+Vous pouvez utiliser des liens (habituellement affichés en bleu)pour naviguer d'un tiddler à l'autre. Cliquer sur le lien vers un tiddler vous amène à ce tiddler. Si le tiddler est fermé, il sera ouvert. La particularité de TiddlyWiki est de rendre les liens vers tiddlers aussi accessible que possible. Il y a des liens partout&nbsp;! Voici les principaux endroits où vous pourrez trouver des liens vers d'autres tiddlers dans TiddlyWiki&nbsp;:
+
+* Vous pouvez ''créer un lien'' vers un tiddler, qu'il existe déjà ou pas, dans le contenu de tout tiddler. Voir [[Linking in WikiText]] pour consulter les différentes façons de créer simplement des liens entre tiddlers.
+
+* Chaque ''étiquette'' de votre tiddler (comme par exemple l'étiquette ''Working with ~TiddlyWiki'' sous le titre de ce tiddler) contient un lien vers ce tiddler étiquette,  ainsi que la liste de tous les tiddlers avec cette étiquette. Ce qui vous permet d'ouvrir un de ces tiddlers.
+
+* Le ''Panneau d'information'' de chaque tiddler vous donne l'accès à 4 onglets contenant un liste additionnelle de tiddlers connexes&nbsp;:
+
+** L'onglet ''Références'' liste tous les tiddlers avec un lien //vers// le tiddler en cours.
+
+** L'onglet ''Étiquettes'' liste tous les tiddlers étiquetés avec le titre du tiddler en cours.
+
+** L'onglet ''Liste'' liste tous les tiddlers (ou les tiddlers potentiels) mentionnés dans le [[champ liste|ListField]] du tiddler en cours.
+
+** L'onglet ''Listé'' liste tous les tiddlers qui mentionnent le tiddler en cours dans //leurs// champs liste.
+
+* Les ''onglets de la barre de menu'' contiennent plusieurs listes de liens vers des tiddlers&nbsp;:
+
+** L'onglet ''Ouverts'' liste tous les tiddlers that are currently open, i.e. visible somewhere on the page.
+
+** L'onglet ''Récents'' liste the 100 most recently modified tiddlers, beginning with the most recently modified.
+
+** L'onglet ''Plus'' offers eight additional lists of tiddlers:
+
+*** ''Tout'' lists all tiddlers in alphabetical order.
+
+*** ''Tags'' lists all the tags. You can click on the pill for any tag to access a list of the tiddlers tagged with that tag.
+
+*** ''Manquants'' lists any tiddlers that don't yet exist, but have been linked to from other tiddlers. This is helpful for finding tiddlers you planned to create, but never got around to.
+
+*** ''Brouillons'' lists any tiddlers that are currently in draft mode. ~TiddlyWiki considers a tiddler's draft to be a separate tiddler for as long as you are editing it, so while you're editing a tiddler entitled ''Australia'', there will be two tiddlers, ''Australia'' and ''Draft of 'Australia&apos;''. When you close the draft by saving your changes to it, those changes will be applied to the ''Australia'' tiddler. So treat the ''Drafts'' tab as a way of finding any unfinished drafts you started.
+
+*** ''Orphelins'' lists all the tiddlers that are not connected to any other tiddler by links, tags or lists. This is a helpful aid to editing your file - it shows you which tiddlers need to be integrated more carefully with the others.
+
+*** ''Types'' lists any tiddlers with special content, such as images or audio.
+
+*** ''Système'' lists all of the SystemTiddlers.
+
+*** ''Shadows'' lists all of the ShadowTiddlers.
+
+* ''Search results'' are a list of the tiddlers that contain the text you type in the search box.
+
+* Finally, you can create your own custom lists of tiddlers by various methods:
+
+** You can transclude a [[filter|Filters]] (see [[Transclusion in WikiText]]). For example, adding `{{{ [tag[mountain]] }}}` to a tiddler will insert a list of all tiddlers tagged with ''mountain''.
+
+** You can use the ListWidget. This is more complicated than transcluding a [[filter|Filters]], but in return it allows you more flexibility in designing and displaying the list exactly as you want it to appear.

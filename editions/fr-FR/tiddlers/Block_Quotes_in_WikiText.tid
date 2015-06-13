@@ -1,0 +1,72 @@
+caption: Blocs citation
+created: 20131206154636572
+fr-title: Blocs citation
+modified: 20150601093101762
+tags: WikiText
+title: Block Quotes in WikiText
+type: text/vnd.tiddlywiki
+
+Il existe deux manières de produire des éléments HTML de type bloc citations avec <<tw>>, l'un pour du contenu qui pourra s'afficher sur plusieurs lignes, et l'autre pour du contenu qui ne devra s'afficher que sur une seule ligne.
+
+! Blocs citation multi-lignes
+
+La syntaxe pour les blocs multilignes est&nbsp;:
+
+<<wikitext-example src:"<<<
+Ceci est un paragraphe de type bloc citation
+écrit en français
+<<<
+">>
+
+!! Citation
+
+Une citation peut-être ajoutée au bloc, comme ceci&nbsp;:
+
+<<wikitext-example src:"<<<
+Les ordinateurs sont des vélos pour nos neurones
+<<< Steve Jobs
+">>
+
+!! Classes CSS
+
+Les blocs peuvent hériter des propriétés de classes CSS:
+
+<<wikitext-example src:"<<<.myClass.another-class
+Les systèmes d'exploitation sont des murs pour notre esprit
+<<< Personne
+">>
+
+! Bloc monoligne
+
+La syntaxe des blocs citation monoligne est une extension de la syntaxe des [[Lists in WikiText]]. Par exemple&nbsp;:
+
+<<wikitext-example src:"> Bloc citation monoligne
+> Un autre bloc citation monoligne
+">>
+
+Vous pouvez agréer des blocs monolignes comme ceci&nbsp;:
+
+```
+> Un bloc de niveau 1
+>> Un bloc de niveau 2
+> Un autre bloc de niveau 1
+">>
+```
+
+Affichera&nbsp;:
+
+> Un bloc de niveau 1
+>> Un bloc de niveau 2
+> Un autre bloc de niveau 1
+
+Vous pouvez mixer les blocs citation avec d'autres types de listes. Par exemple&nbsp;:
+
+<<wikitext-example src:"* Liste une
+** Liste deux
+**> Un bloc monoligne
+**> Un autre bloc monoligne quote
+* Liste trois
+">>
+
+!! Aller plus loin
+* les [[blocs en HTML5|http://www.alsacreations.com/tuto/lire/530-La-structure-des-balises-bloc-et-en-ligne.html]]

@@ -1,0 +1,15 @@
+caption: ~TiddlyWiki
+created: 20131109105400007
+fr-title: Versions de TiddlyWiki
+modified: 20150601094644380
+tags: Releases
+title: TiddlyWiki Releases
+type: text/vnd.tiddlywiki
+
+Voici la description des récentes mise à jour de TiddlyWiki5. Voir [[TiddlyWiki5 Versioning]] pour plus de détails sur la nomination des versions.
+
+(Les versions [[Bêta|BetaReleases]] et [[Alpha|AlphaReleases]] sont listées séparément).
+
+<$list filter="[tag[ReleaseNotes]!sort[created]limit[1]]">
+  <$macrocall $name="tabs" tabsList="[tag[ReleaseNotes]!sort[created]]" default={{!!title}} class="tc-vertical" template="ReleaseTemplate" />
+</$list>
