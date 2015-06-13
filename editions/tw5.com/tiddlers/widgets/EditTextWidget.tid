@@ -31,12 +31,22 @@ The content of the `<$edit-text>` widget is ignored.
 
 ! Notes
 
-One trap to be aware of is that the edit text widget cannot be used to edit a field of the tiddler that contains it. Each keypress results in the tiddler being re-rendered, which loses the cursor position within the text field.
+One trap to be aware of is that the edit text widget //cannot be used// to edit a field of the tiddler that contains it. Each keypress results in the tiddler being re-rendered, which loses the cursor position within the text field.
 
 Instead, place the edit text widget in a [[template|TemplateTiddlers]] that references the tiddler you want to modify.
 
-For example, if you wanted to edit the value of the "myconfig" field of the tiddler "AppSettings", you might do so by creating a separate tiddler "ChangeAppSettings" that contains the following:
+For example, if you wanted the tiddler GettingStarted to edit the value of the "myconfig" field of the tiddler "AppSettings", you might do so by creating a separate tiddler "ChangeAppSettings" that contains the following:
 
 ```
 <$edit-text tiddler="AppSettings" field="myconfig"/>
 ```
+
+And reference the template in any other tiddler (e.g. GettingStarted) with `{{ChangeAppSettings}}`.
+
+This works when your use of the tiddler //is not// the AppSettings itself which would cause a recursion problem. In this latter case you have to save the fields to a temporary (or alternative) tiddler (sort of the reverse of above) like so:
+
+```
+<$edit-text tiddler="StoreAppSettings" field="myconfig"/>
+```
+
+In short the EditTextWidget //can not// change properties of the tiddler it is embedded in or part of. It can only change fields of //other// tiddlers. One could use ShadowTiddlers to accomplish the field storage if needed.
