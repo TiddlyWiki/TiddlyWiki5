@@ -95,6 +95,10 @@ Settings/LinkToBehaviour/OpenAbove: Ouvrir au-dessus du tiddler courant
 Settings/LinkToBehaviour/OpenBelow: Ouvrir en dessous du tiddler courant
 Settings/LinkToBehaviour/OpenAtTop: Ouvrir tout en haut du déroulé
 Settings/LinkToBehaviour/OpenAtBottom: Ouvrir tout en bas du déroulé
+Settings/TitleLinks/Caption: Titres des tiddlers
+Settings/TitleLinks/Hint: Faut-il afficher les titres des tiddlers comme des liens ?
+Settings/TitleLinks/No/Description: Ne pas afficher les titres des tiddlers comme des liens
+Settings/TitleLinks/Yes/Description: Afficher les titres des tiddlers comme des liens
 StoryView/Caption: Vue sur le déroulé
 StoryView/Prompt: Vue courante :
 Theme/Caption: Thème
