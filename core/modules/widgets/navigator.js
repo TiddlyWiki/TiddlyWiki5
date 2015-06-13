@@ -389,9 +389,7 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 			} else {
 				this.removeTitleFromStory(storyList,draftTitle);
 			}
-			this.saveStoryList(storyList);
-			// Trigger an autosave
-			$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});			
+			this.saveStoryList(storyList);	
 		}
 	}
 	return false;
