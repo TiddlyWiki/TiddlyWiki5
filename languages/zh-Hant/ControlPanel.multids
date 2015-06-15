@@ -95,6 +95,10 @@ Settings/ToolbarButtons/Caption: 工具列按鈕
 Settings/ToolbarButtons/Hint: 預設的工具列按鈕外觀：
 Settings/ToolbarButtons/Icons/Description: 包含圖示
 Settings/ToolbarButtons/Text/Description: 包含文字
+Settings/TitleLinks/Caption: 條目標題
+Settings/TitleLinks/Hint: 可選地顯示條目標題為鏈接
+Settings/TitleLinks/No/Description: 不顯示條目標題為鏈接
+Settings/TitleLinks/Yes/Description: 顯示條目標題為鏈接
 StoryView/Caption: 檢視模式
 StoryView/Prompt: 當前的檢視模式：
 Theme/Caption: 佈景主題

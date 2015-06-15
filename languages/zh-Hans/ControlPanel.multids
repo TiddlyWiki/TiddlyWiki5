@@ -95,6 +95,10 @@ Settings/ToolbarButtons/Caption: 工具栏按钮
 Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
 Settings/ToolbarButtons/Icons/Description: 包含图标
 Settings/ToolbarButtons/Text/Description: 包含文本
+Settings/TitleLinks/Caption: 条目标题
+Settings/TitleLinks/Hint: 可选地显示条目标题为链接
+Settings/TitleLinks/No/Description: 不显示条目标题为链接
+Settings/TitleLinks/Yes/Description: 显示条目标题为链接
 StoryView/Caption: 查看模式
 StoryView/Prompt: 当前的查看模式：
 Theme/Caption: 布景主题
