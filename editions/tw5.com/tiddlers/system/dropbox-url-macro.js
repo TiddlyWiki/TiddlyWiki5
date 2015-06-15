@@ -1,10 +1,3 @@
-created: 20150607235625799
-modified: 20150608032345215
-module-type: macro
-tags: $:/tags/Macro
-title: $:/edition/tw5.com/dropbox-url.js
-type: application/javascript
-
 /*\
 title: $:/edition/tw5.com/dropbox-url.js
 type: application/javascript
@@ -32,7 +25,7 @@ exports.params = [
 ];
 
 exports.run = function(url) {
-	url = url.replace("www.dropbox.com",  "dl.dropboxusercontent.com");
+	url = url.replace("www.dropbox.com","dl.dropboxusercontent.com");
 	return "`" + url + "` <small>([[open|" + url + "]])</small>";
 };
 
