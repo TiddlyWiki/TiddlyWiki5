@@ -81,8 +81,8 @@ Settings/NavigationAddressBar/Permalink/Description: Inclou el tiddler destí
 Settings/NavigationAddressBar/Permaview/Description: Inclou el tiddler destí i la seqùència actual
 Settings/NavigationHistory/Caption: Història de navegació
 Settings/NavigationHistory/Hint: Actualitza la història del navegador en navegar cap a un tiddler:
-Settings/NavigationHistory/No/Description: No actualitzis la història
-Settings/NavigationHistory/Yes/Description: Actualitza la història
+Settings/NavigationHistory/No/Description: No actualitzis la cronologia
+Settings/NavigationHistory/Yes/Description: Actualitza la cronologia
 Settings/ToolbarButtons/Caption: Botons de la barra d'eines
 Settings/ToolbarButtons/Hint: Aparença del botó de la barra d'eines per omissió:
 Settings/ToolbarButtons/Icons/Description: Inclou la icona

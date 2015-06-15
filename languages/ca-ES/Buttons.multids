@@ -9,17 +9,17 @@ Clone/Hint: Clona aquest tiddler
 Close/Caption: tanca
 Close/Hint: Tanca aquest tiddler
 CloseAll/Caption: tanca-ho tot
-CloseAll/Hint: Tanca tots els tiddlershttp://educacio.gencat.cat/documents/FormularisModels/PersonalDocent/A123.pdf
+CloseAll/Hint: Tanca tots els tiddlers
 CloseOthers/Caption: tanca els altres
 CloseOthers/Hint: Tanca els altres tiddlers
 ControlPanel/Caption: tauler de control
 ControlPanel/Hint: Obre el tauler de control
-Delete/Caption: suprimeixhttp://educacio.gencat.cat/documents/FormularisModels/PersonalDocent/A123.pdf
+Delete/Caption: suprimeix
 Delete/Hint: Suprimeix aquest tiddler
 Edit/Caption: edita
 Edit/Hint: Edita aquest tiddler
 Encryption/Caption: encriptació
-Encryption/ClearPassword/Caption: neteja la contrasenyahttp://educacio.gencat.cat/documents/FormularisModels/PersonalDocent/A123.pdf
+Encryption/ClearPassword/Caption: neteja la contrasenya
 Encryption/ClearPassword/Hint: Suprimeix la contrasenya per desar aquest wiki sense encriptació
 Encryption/Hint: Estableix o suprimeix la contrasenya per desar aquest wiki
 Encryption/SetPassword/Caption: tria la contrasenya
@@ -66,8 +66,8 @@ SaveWiki/Caption: desa els canvis
 SaveWiki/Hint: Desa els canvis
 ShowSideBar/Caption: mostra la barra lateral
 ShowSideBar/Hint: Mostra la barra lateral
-StoryView/Caption: visualització de la història
-StoryView/Hint: Trieu la visualització de la història
+StoryView/Caption: visualització de la cronologia
+StoryView/Hint: Trieu la visualització de la cronologia
 TagManager/Caption: gestor d'etiquetes
 TagManager/Hint: Obre el gestor d'etiquetes
 Theme/Caption: tema

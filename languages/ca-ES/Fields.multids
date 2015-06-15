@@ -7,7 +7,7 @@ color: El valor del color CSS associat amb un tiddler
 component: El nom del component responsable d'un [[tiddler d'avís|AlertMechanism]]
 created: La data en que es va generar el tiddler
 creator: El nom de la persona que va generar el tiddler
-current-tiddler: Utilitzat per desar la darrera còpia del tiddler a una [[llista històrica|HistoryMechanism]]
+current-tiddler: Utilitzat per desar la darrera còpia del tiddler a una [[cronologia|HistoryMechanism]]
 dependents: Per a un connector, llista els títols que depenen del connector
 description: El text que descriu un connector, o un diàleg modal
 draft.of: Per als tiddlers esborranys, conté el títol del tiddler del qual és un esborrany
