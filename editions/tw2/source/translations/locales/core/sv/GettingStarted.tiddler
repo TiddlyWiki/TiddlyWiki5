@@ -1,8 +1,0 @@
-<div title="TranslatedGettingStarted" modifier="MartinBudden">
-<pre>För att komma igång med denna tomma TiddlyWiki, måste du ändra följande tiddler:
-* SiteTitle &amp; SiteSubtitle: Titel och undertitel för platsen, så som visas ovan (efter att du sparat, visas de även i din webbläsares titelrad)
-* MainMenu: Menyn (vanligtvid till vänster)
-* DefaultTiddlers: Innehåller namnen på de tiddler som du vill ska visas när TiddlyWiki öppnas
-Du behöver också ange ditt användarnamn för signering av dina redigeringar: 
-&lt;&lt;option txtUserName&gt;&gt;</pre>
-</div>

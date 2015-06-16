@@ -1,5 +1,0 @@
-recipe: test.recipe
-title=TiddlyWiki Wikifier tests
-jsspecsrc=<script type="text/javascript" src="../../js/Wikifier.js"></script>
-jsspecsrc=<script type="text/javascript" src="../js/mock.js"></script>
-jsspecsrc=<script type="text/javascript" src="../jsspec/Wikifier.jsspec.js"></script>

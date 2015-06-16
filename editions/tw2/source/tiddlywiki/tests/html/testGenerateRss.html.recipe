@@ -1,6 +1,0 @@
-recipe: test.recipe
-title=TiddlyWiki GenerateRss tests
-
-jsspecsrc=<script type="text/javascript" src="../js/tiddlywiki.js"></script>
-jsspecsrc=<script type="text/javascript" src="../js/xml.js"></script>
-jsspecsrc=<script type="text/javascript" src="../jsspec/GenerateRss.jsspec.js"></script>
