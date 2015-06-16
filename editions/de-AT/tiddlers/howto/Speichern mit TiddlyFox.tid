@@ -1,6 +1,6 @@
 created: 20131221085742684
 creator: pmario
-modified: 20150513161404773
+modified: 20150615130547291
 modifier: pmario
 tags: howto TiddlyFox
 title: Speichern mit TiddlyFox
@@ -12,7 +12,7 @@ Wenn Sie "Firefox for Android" verwenden, dann beachten sie: [[Speichern mit Tid
 
 !! Speichern mit TiddlyFox
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/bsWE7jXPbb0" frameborder="0" allowfullscreen></iframe>
+<<iframe-responsive src:"http://www.youtube.com/embed/bsWE7jXPbb0">>
 
 # Stellen Sie sicher, dass Sie die [[aktuelle Version von Firefox|http://getfirefox.com]] verwenden.
 # Installieren Sie die aktuelle TiddlyFox Erweiterung von: https://addons.mozilla.org/en-US/firefox/addon/tiddlyfox/

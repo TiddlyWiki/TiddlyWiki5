@@ -95,6 +95,10 @@ Settings/LinkToBehaviour/OpenAbove: Öffne vor dem aktuellen Tiddler
 Settings/LinkToBehaviour/OpenBelow: Öffne unter dem aktuellen Tiddler
 Settings/LinkToBehaviour/OpenAtTop: Öffne als ersten Tiddler in der Story
 Settings/LinkToBehaviour/OpenAtBottom: Öffne alse letzten Tiddler in der Story
+Settings/TitleLinks/Caption: Tiddler Titel
+Settings/TitleLinks/Hint: Tiddler Titel als Links anzeigen:
+Settings/TitleLinks/No/Description: Tiddler Titel normal anzeigen.
+Settings/TitleLinks/Yes/Description: Tiddler Titel als Link anzeigen.
 StoryView/Caption: Anzeige
 StoryView/Prompt: Ausgewählte Anzeige:
 Theme/Caption: Theme
