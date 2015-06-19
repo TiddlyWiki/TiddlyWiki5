@@ -3,7 +3,7 @@ title: $:/core/ui/SideBarLists
 <div class="tc-sidebar-lists">
 
 <div class="tc-search">
-<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus="true"/>
+<$edit-text tiddler="$:/temp/search" type="search" tag="input" focus={{$:/config/Search/AutoFocus}}/>
 <$reveal state="$:/temp/search" type="nomatch" text="">
 <$button tooltip={{$:/language/Buttons/AdvancedSearch/Hint}} aria-label={{$:/language/Buttons/AdvancedSearch/Caption}} class="tc-btn-invisible">
 <$action-setfield $tiddler="$:/temp/advancedsearch" text={{$:/temp/search}}/>
