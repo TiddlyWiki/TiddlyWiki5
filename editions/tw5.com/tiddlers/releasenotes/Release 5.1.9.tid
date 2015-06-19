@@ -1,6 +1,6 @@
 caption: 5.1.9
 created: 20150616073318877
-modified: 20150616073318877
+modified: 20150619162737565
 tags: ReleaseNotes
 title: Release 5.1.9
 type: text/vnd.tiddlywiki
@@ -71,11 +71,12 @@ Revert
 
 There are new options for controlling the position in the story river of newly opened tiddles. Visit the ''Settings'' tab of $:/ControlPanel and look for "Tiddler Opening Behaviour".
 
-!! New Setting for Draft Tiddler Typing Timeout
+!! New Hidden Settings
 
-TiddlyWiki defers processing changes to draft tiddlers until a timeout has elapsed. The default value of 400ms gives a good balance of responsiveness in most cases but isn't always optimal on lower powered mobile devices.
+Two new [[hidden settings|Hidden Settings]] for advanced configuration:
 
-The timeout can now be changed by changing the value in [[$:/config/Drafts/TypingTimeout]].
+* [[Hidden Setting: Search AutoFocus]]
+* [[Hidden Setting: Typing Refresh Delay]]
 
 !! New Vars widget
 
