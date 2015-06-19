@@ -4,14 +4,14 @@ BinaryWarning/Prompt: Aquest tiddler conté dades binàries
 ClassicWarning/Hint: Aquest tiddler està escrit en format de text de TiddlyWiki, que no es totalment compatible amb la versió 5 de TiddlyWiki. Veieu els detalls a http://tiddlywiki.com/static/Upgrading.html . 
 ClassicWarning/Upgrade/Caption: actualitza
 CloseAll/Button: tanca-ho tot
-ConfirmCancelTiddler: Segur que voleu descartar els canvis del tiddler "<$text text=<<title>>/>"?
-ConfirmDeleteTiddler: Segur que voleu suprimir el tiddler "<$text text=<<title>>/>"?
+ConfirmCancelTiddler: Voleu descartar els canvis del tiddler "<$text text=<<title>>/>"?
+ConfirmDeleteTiddler: Voleu suprimir el tiddler "<$text text=<<title>>/>"?
 ConfirmEditShadowTiddler: Aneu a editar un TiddlerOmbra. Qualsevol canvi sobreescriurà les opcions per omisió del sistema i complicarà les actualitzacions. Segur que voleu editar "<$text text=<<title>>/>"?
 ConfirmOverwriteTiddler: Segur que voleu sobreescriure el tiddler "<$text text=<<title>>/>"?
 DefaultNewTiddlerTitle: Nou Tiddler
 DropMessage: Dexeu-ho anar aquí (o anul·leu-ho amb la tecla 'Escape')
 Encryption/Cancel: Anul·la
-Encryption/ConfirmClearPassword: Segur que voleu suprimir la contrasenya? Això eliminarà l'encriptació utilitzada quan es desa aquest wiki
+Encryption/ConfirmClearPassword: Voleu suprimir la contrasenya? Això eliminarà l'encriptació utilitzada quan es desa aquest wiki
 Encryption/Password: Contrasenya
 Encryption/PasswordNoMatch: Les contrasenyes no coincideixen
 Encryption/PromptSetPassword: Indiqueu una nova contrasenya per aquest TiddlyWiki
@@ -23,9 +23,10 @@ Exporters/JsonFile: Fitxer JSON
 Exporters/StaticRiver: HTML estàtic
 Exporters/TidFile: Fitxer ".tid"
 InvalidFieldName: Hi ha caràcters il·legals al nom del camp "<$text text=<<fieldName>>/>". Els camps només poden utilitzar minúscules, digits i els caràcters subratllat (`_`), guió (`-`) i punt (`.`)
-MissingTiddler/Hint: Tiddler que falta "<$text text=<<currentTiddler>>/>" - cliqueu {{$:/core/images/edit-button}} per generar-ho
+MissingTiddler/Hint: Falta el tiddler "<$text text=<<currentTiddler>>/>" - cliqueu {{$:/core/images/edit-button}} per generar-ho
 OfficialPluginLibrary: Biblioteca de connectors de ~TiddlyWiki Oficial
 PluginReloadWarning: Deseu si us plau {{$:/core/ui/Buttons/save-wiki}} i torneu a carregar {{$:/core/ui/Buttons/refresh}} per tal que els canvis als connectors es puguin activar
+RecentChanges/DateFormat: DD MMM YYYY
 SystemTiddler/Tooltip: Aquest és un tiddler del sistema
 TagManager/Colour/Heading: Color
 TagManager/Icon/Heading: Icona

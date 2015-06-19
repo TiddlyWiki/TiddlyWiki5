@@ -10,7 +10,7 @@ Inicialitza una [[CarpetaWiki|WikiFolders]] buida amb una còpia de l'edició in
 Per exemple:
 
 ```
-tiddlywiki .LaMevaCarpetaWiki --init empty
+tiddlywiki ./LaMevaCarpetaWiki --init empty
 ```
 
 Notes:
@@ -19,5 +19,5 @@ Notes:
 * El valor per omisió de "edition" és ''empty''
 * L'ordre init fracassarà si la carpeta wiki no està buida
 * L'ordre init suprimeix qualsevol definició `includeWikis` de l'edició del fitxer `tiddlywiki.info`
-* Quan s'indiqui múltiples edicions, les edicions que s'iniciïn més tard sobreescriuran qualsevol fitxers compartit amb edicions anteriors (així que el fitxer final `tiddlywiki.info` es copiarà de la darrera edció)
+* Quan s'indiqui múltiples edicions, les edicions que s'iniciïn més tard sobreescriuran qualsevol fitxer compartit amb edicions anteriors (així que el fitxer final `tiddlywiki.info` es copiarà de la darrera edció)
 * `--editions` retorna la llista d'edicions disponibles

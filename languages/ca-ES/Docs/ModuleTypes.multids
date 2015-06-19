@@ -19,4 +19,4 @@ utils: Afegeix mètodes a `$tw.utils`.
 utils-node: Afegeix mètodes específics de Node.js a `$tw.utils`.
 widget: Els widgets encapsulen el renderitzat i l'actualització del DOM.
 wikimethod: Afegeix mètodes a `$tw.Wiki`.
-wikirule: Regles d'anàlisi sintàctic individuals  per a l'analitzador sintactic principal del WikiText.
+wikirule: Regles d'anàlisi sintàctic individuals per a l'analitzador sintàctic principal del WikiText.
