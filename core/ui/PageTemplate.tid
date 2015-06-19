@@ -22,7 +22,7 @@ tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 
 <div class=<<containerClasses>>>
 
-<$navigator story="$:/StoryList" history="$:/HistoryList">
+<$navigator story="$:/StoryList" history="$:/HistoryList" openLinkFromInsideRiver={{$:/config/Navigation/openLinkFromInsideRiver}} openLinkFromOutsideRiver={{$:/config/Navigation/openLinkFromOutsideRiver}}>
 
 <$dropzone>
 

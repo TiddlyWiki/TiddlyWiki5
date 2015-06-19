@@ -123,11 +123,9 @@ NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 	// First we try to find the position of the story element we navigated from
 	var fromIndex = storyList.indexOf(fromTitle);
 	if(fromIndex >= 0) {
-		// How to open internal links that were clicked from *within* the story river?
-		var openLinkFromInsideRiver = $tw.wiki.getTiddlerText("$:/config/Navigation/openLinkFromInsideRiver","below");
 		// The tiddler is added from inside the river
 		// Determine where to insert the tiddler; Fallback is "below"
-		switch(openLinkFromInsideRiver) {
+		switch(this.getAttribute("openLinkFromInsideRiver","below")) {
 			case "top":
 				slot = 0;
 				break;
@@ -137,14 +135,14 @@ NavigatorWidget.prototype.addToStory = function(title,fromTitle) {
 			case "above":
 				slot = fromIndex;
 				break;
+			case "below": // Intentional fall-through
 			default:
 				slot = fromIndex + 1;
+				break;
 		}
 	} else {
-		// The tiddler is opened from outside the river.
-		var openLinkFromOutsideRiver = $tw.wiki.getTiddlerText("$:/config/Navigation/openLinkFromOutsideRiver","top");
-		// Determine where to insert the tiddler; Default is "top"
-		if(openLinkFromOutsideRiver === "bottom") {
+		// The tiddler is opened from outside the river. Determine where to insert the tiddler; default is "top"
+		if(this.getAttribute("openLinkFromOutsideRiver","top") === "bottom") {
 			// Insert at bottom
 			slot = storyList.length;
 		} else {
