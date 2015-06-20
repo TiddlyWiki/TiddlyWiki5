@@ -129,18 +129,13 @@ Try it out
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/139496209f92d229feadf5c2883edec9090c0a0a]] support for custom elements to the ButtonWidget
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/d8366cc45f25d16c9085e05ee18965e626e218ff]] CodeMirror plugin to automatically refresh when a tiddler type changes
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d5033e2a00e34a7665c2cff58c0d15da224dd2b]] new setting in $:/ControlPanel to render tiddler titles as links, which can be convenient for drag and drop
+* [[Simplified|]] detecting the preview pane with the [[tv-tiddler-preview Variable]]
 
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/5a6249894d5e79ee4e472c72be8956ce59558797]] problem with special characters in field names
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/230f40c3bd71177eb7b1f7e8252a5164e99a12c5]] static banner layout on mobile devices
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/df84e932833b3643ce600499ddd5fef497bec908]] popups within the scrollable widget by adding `position: relative;` to example scrollable widget styles
-
-!! Node.js Changes
-
-//These changes are only relevant to those using TiddlyWiki under Node.js//
-
-* 
 
 !! Contributors
 

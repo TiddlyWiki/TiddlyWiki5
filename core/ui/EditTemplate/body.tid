@@ -24,9 +24,11 @@ tags: $:/tags/EditTemplate
 
 <div class="tc-tiddler-preview">
 <div class="tc-tiddler-preview-preview">
+<$set name="tv-tiddler-preview" value="yes">
 
 <$transclude />
 
+</$set>
 </div>
 
 <div class="tc-tiddler-preview-edit">
