@@ -129,7 +129,7 @@ Try it out
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/139496209f92d229feadf5c2883edec9090c0a0a]] support for custom elements to the ButtonWidget
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/d8366cc45f25d16c9085e05ee18965e626e218ff]] CodeMirror plugin to automatically refresh when a tiddler type changes
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/0d5033e2a00e34a7665c2cff58c0d15da224dd2b]] new setting in $:/ControlPanel to render tiddler titles as links, which can be convenient for drag and drop
-* [[Simplified|]] detecting the preview pane with the [[tv-tiddler-preview Variable]]
+* [[Simplified|https://github.com/Jermolene/TiddlyWiki5/commit/f42842f80104e8e892545c758ea0b997cacbdd31]] detecting the preview pane with the [[tv-tiddler-preview Variable]]
 
 !! Bug Fixes
 
