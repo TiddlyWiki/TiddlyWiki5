@@ -1,7 +1,7 @@
 created: 20141129194651420
 modified: 20150620161017341
 tags: Concepts
-title: TableOfContentsMacro
+title: Tranclusion
 type: text/vnd.tiddlywiki
 
 La <a href="http://fr.wikipedia.org/wiki/Transclusion">Transclusion</a> est le procédé de référencement d'un tiddler "A" à partir d'un autre tiddler "B" de sorte que le contenu de "A" apparait être une partie de "B".
