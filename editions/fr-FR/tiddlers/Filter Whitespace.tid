@@ -1,0 +1,14 @@
+created: 20150124182304000
+modified: 20150602121929616
+tags: [[Filter Syntax]]
+title: Filter Whitespace
+type: text/vnd.tiddlywiki
+fr-title: Espacevierge
+
+<$railroad text="""
+{( "espace" | "tab" | "sautligne" | "retour" | "tab verticale" | "sautpage" )}
+"""/>
+
+Des espaces vierges peuvent exister entre chaque [[séquence|Filter Run]] ou [[expression filtre|Filter Expression]].
+
+
