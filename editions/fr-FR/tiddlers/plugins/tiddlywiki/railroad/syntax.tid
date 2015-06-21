@@ -1,7 +1,6 @@
 created: 20150103184022184
 modified: 20150615094548934
 title: $:/plugins/tiddlywiki/railroad/syntax
-type: text/vnd.tiddlywiki
 
 Le widget railroad utilise une notation spéciale pour construire les composants définis çi-après.
 
