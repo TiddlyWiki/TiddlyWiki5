@@ -1,13 +1,47 @@
 created: 20141217193625476
-modified: 20150601073913778
+modified: 20150619131936229
 title: Glossaire en-GB -> fr-FR
 type: text/vnd.tiddlywiki
 
 |en-GB |fr-FR |Commentaire |h
+|added|ajouté||
+|background|arrière plan||
+|bug|bogue||
 |core |noyau ||
-|lazy loading|chargement allégé |Manque la notion de retard |
-|~SafeMode|Mode Sans Échec ||
-|shadow|masqué||
-|tagging |étiquetage |(marquage ?) |
-|upgrade |mettre à niveau |(mettre à jour/ actualiser<<?>>) |
-|widget |widget |Remplacer ButtonWidget par //bouton widget/gadget//<<?>> |
+|draft|ébauche||
+|empty édition |édition basique ||
+|encryption|cryptage||
+|fixed|corrigé||
+|flexible|souple|maléable |
+|improved|amélioré||
+|introduce|intègrer|ex (eng)<<:>> Introduce plugin|
+|keyword|motclé||
+|layout|mise en page||
+|lazy loading|chargement allégé |chargement paresseux/flemmard ? |
+|no *|sauf * |hormis * |
+|non-linear| |3D ? |
+|placeholder|zoneréservée||
+|pull request|proposer une contribution||
+|run|séquence||
+|~SafeMode|~ModeSansÉchec |=> ~ModeSecours ?|
+|~SandBox|~BacàSable|=> ~ZoneBrouillon/Protégée ?|
+|sequence|suite /série||
+|a set|un ensemble||
+|shaddow|ombre||
+|snippet|portion||
+|step|étape||
+|story river|déroulé||
+|tagging |étiquet(er/age) |tag=> tag/étiquette|
+|template|gabarit||
+|tweak|régl(er/age)||
+|upgrade |mettre à niveau |actualiser/Obtenir la dernière version |
+|view|visualisation |abr.<<:>> 'Visu'|
+|Whitespace|Espacevierge||
+|widget |widget ||
+
+---
+
+!!AVERTISSEMENT - Mots et références réservés pour le système<<:>>
+
+* Les noms de `champ` et leurs références (nom du champ sans séparateur suivi de Field, ex<<:>> ListField)
+* Les noms des widgets, ex<<dp>> NavigatorWidget
