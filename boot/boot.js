@@ -1446,17 +1446,21 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				// If so, process the files it describes
 				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
-					var typeInfo = $tw.config.contentTypeInfo[tidInfo.fields.type || "text/plain"],
+					var type = tidInfo.fields.type || "text/plain",
+						typeInfo = $tw.config.contentTypeInfo[type],
 						pathname = path.resolve(filepath,tidInfo.file),
-						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
-					if(tidInfo.prefix) {
-						text = tidInfo.prefix + text;
-					}
-					if(tidInfo.suffix) {
-						text = text + tidInfo.suffix;
-					}
-					tidInfo.fields.text = text;
-					tiddlers.push({tiddlers: [tidInfo.fields]});
+						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8"),
+						fileTiddlers = $tw.wiki.deserializeTiddlers(path.extname(pathname),text) || [];
+					$tw.utils.each(fileTiddlers,function(tiddler) {
+						$tw.utils.extend(tiddler,tidInfo.fields);
+						if(tidInfo.prefix) {
+							tiddler.text = tidInfo.prefix + tiddler.text;
+						}
+						if(tidInfo.suffix) {
+							tiddler.text = tiddler.text + tidInfo.suffix;
+						}
+					});
+					tiddlers.push({tiddlers: fileTiddlers});
 				});
 			} else {
 				// If not, read all the files in the directory
