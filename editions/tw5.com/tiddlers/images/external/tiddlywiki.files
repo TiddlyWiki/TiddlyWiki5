@@ -1,0 +1,156 @@
+{
+	"tiddlers": [
+		{
+			"file": "../../../../../languages/ca-ES/icon.tid",
+			"fields": {
+				"title": "Language Icon: ca-ES",
+				"language": "ca-ES",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/cs-CZ/icon.tid",
+			"fields": {
+				"title": "Language Icon: cs-CZ",
+				"language": "cs-CZ",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/da-DK/icon.tid",
+			"fields": {
+				"title": "Language Icon: da-DK",
+				"language": "da-DK",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/de-AT/icon.tid",
+			"fields": {
+				"title": "Language Icon: de-AT",
+				"language": "de-AT",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/de-DE/icon.tid",
+			"fields": {
+				"title": "Language Icon: de-DE",
+				"language": "de-DE",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/el-GR/icon.tid",
+			"fields": {
+				"title": "Language Icon: el-GR",
+				"language": "el-GR",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/es-ES/icon.tid",
+			"fields": {
+				"title": "Language Icon: es-ES",
+				"language": "es-ES",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/fr-FR/icon.tid",
+			"fields": {
+				"title": "Language Icon: fr-FR",
+				"language": "fr-FR",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/hi-IN/icon.tid",
+			"fields": {
+				"title": "Language Icon: hi-IN",
+				"language": "hi-IN",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/ia-IA/icon.tid",
+			"fields": {
+				"title": "Language Icon: ia-IA",
+				"language": "ia-IA",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/it-IT/icon.tid",
+			"fields": {
+				"title": "Language Icon: it-IT",
+				"language": "it-IT",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/ja-JP/icon.tid",
+			"fields": {
+				"title": "Language Icon: ja-JP",
+				"language": "ja-JP",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/nl-NL/icon.tid",
+			"fields": {
+				"title": "Language Icon: nl-NL",
+				"language": "nl-NL",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/pa-IN/icon.tid",
+			"fields": {
+				"title": "Language Icon: pa-IN",
+				"language": "pa-IN",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/pt-PT/icon.tid",
+			"fields": {
+				"title": "Language Icon: pt-PT",
+				"language": "pt-PT",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/ru-RU/icon.tid",
+			"fields": {
+				"title": "Language Icon: ru-RU",
+				"language": "ru-RU",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/sk-SK/icon.tid",
+			"fields": {
+				"title": "Language Icon: sk-SK",
+				"language": "sk-SK",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/zh-Hans/icon.tid",
+			"fields": {
+				"title": "Language Icon: zh-Hans",
+				"language": "zh-Hans",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/zh-Hant/icon.tid",
+			"fields": {
+				"title": "Language Icon: zh-Hant",
+				"language": "zh-Hant",
+				"tags": "Language Icon"
+			}
+		}
+	]
+}
