@@ -23,7 +23,7 @@ TiddlyWiki5 modifie l'apparence des liens des tiddlers pour donner plus d'inform
 |!Description lien |!Affichage lien |
 |Vers tiddler existant |[[Ainsi|TiddlerLinks]] |
 |Vers tiddler inexistant |[[Ainsi|ATiddlerThatDoesntExist]] |
-|Vers tiddler ombre non remplacé |[[Ainsi|$:/core/copyright.txt]] |
-|Vers tiddler ombre remplacé par un tiddler ordinaire|[[Ainsi|$:/SiteTitle]] |
+|Vers tiddler shadow non remplacé |[[Ainsi|$:/core/copyright.txt]] |
+|Vers tiddler shadow remplacé par un tiddler ordinaire|[[Ainsi|$:/SiteTitle]] |
 
 Les liens externes sont affichés comme ceci&lt;&lt;:&gt;&gt; http://tiddlywiki.com/ ou [[comme ça|http://tiddlywiki.com/]].

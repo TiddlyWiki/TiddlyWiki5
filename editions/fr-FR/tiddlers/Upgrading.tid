@@ -40,6 +40,6 @@ Vous pouvez également télécharger le fichier http://tiddlywiki.com/upgrade.ht
 Il est possible qu'une personnalisation appliquée dans une version précédente devienne inopérante une fois la mise à niveau effectuée. Deux techniques peuvent être employées pour vous aider à retrouver l'origine du problème :
 
 * Essayez de répéter la mise à niveau en décochant tous les tiddlers qui pourraient contenir des personnalisations de <<tw>>
-* Utilisez le [[ModeSansÉchec|SafeMode]] pour désactiver toutes les adaptations personnalisées des tiddlers //ombre//
+* Utilisez le [[ModeSansÉchec|SafeMode]] pour désactiver toutes les adaptations personnalisées des tiddlers //shadow//
 
-Vous pouvez voir quels tiddlers //ombre// ont été modifiés dans l'onglet ''Filtres'' de la [[recherche avancée|$:/AdvancedSearch]]. Choisir "Les tidders ombre modifiés" depuis le menu déroulant.
+Vous pouvez voir quels tiddlers //shadow// ont été modifiés dans l'onglet ''Filtres'' de la [[recherche avancée|$:/AdvancedSearch]]. Choisir "Les tidders shadow modifiés" depuis le menu déroulant.

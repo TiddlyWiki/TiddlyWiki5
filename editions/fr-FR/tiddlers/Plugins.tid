@@ -15,7 +15,7 @@ Ces plugins sont distribués sur tiddlywiki.com comme des éléments de la distr
 
 Un plugin, dans TiddlyWiki5, est un ensemble de tiddlers empaquetés dans un seul tiddler. Les Plugins sont utilisés pour distribuer des composants optionnels et personnalisés de TiddlyWiki.
 
-Les tiddlers d'un plugin deviennent des [[tiddlers ombre|ShadowTiddlers]].
+Les tiddlers d'un plugin deviennent des [[tiddlers shadow|ShadowTiddlers]].
 
 Les Plugins peuvent contenir des modules JavaScript, des feuilles de styles, et des gabarits pour étendre les fonctionnalités de TiddlyWiki lui-même. Les plugins peuvent aussi être employés pour diffuser du texte oridinaire, des images ou tout autre contenu. 
 Leurs mise à jour depuis leur source les traite comme une simple unité.

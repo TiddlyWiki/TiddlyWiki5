@@ -20,6 +20,6 @@ http://tiddlywiki.com/#:safe
 Le Mode Sans Échec déclenche 2 modifications&nbsp;:
 
 * Tous les plugins sont momentanément désactivés. Vous pouvez alors utiliser le control panel pour désactiver des plugins.
-* Les tiddlers qui modifient les tiddlers ombres sont renommés avec le préfixe `SAFE: `, ce qui a pour effet de restaurer les tiddlers ombres sous-jacents.
+* Les tiddlers qui modifient les tiddlers shadows sont renommés avec le préfixe `SAFE: `, ce qui a pour effet de restaurer les tiddlers shadows sous-jacents.
 
 Un tiddler rapport est affiché pour vous permettre d'examiner les tiddlers renommés.
