@@ -1,9 +1,9 @@
 created: 20150124182421000
-modified: 20150621103022171
-tags:  	[[Filter Syntax]]
+fr-title: Expression d'un filtre
+modified: 20150621103316084
+tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
-fr-title: Expression d'un filtre
 
 <$railroad text="""
 [{:

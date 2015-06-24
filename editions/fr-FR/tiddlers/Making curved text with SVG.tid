@@ -1,5 +1,6 @@
 created: 20140324223413403
-modified: 20141116132159609
+fr-title: Tracer un texte incurvé avec SVG
+modified: 20150622054404265
 tags: Learning
 title: Making curved text with SVG
 type: text/vnd.tiddlywiki
@@ -19,7 +20,7 @@ $text$
 </svg>
 $$$
 \end
-This demo shows how to use SVG to render transcluded text along a path. Enter some text in the textbox below to try it out; view the source to see how it is done.
+Cette démonstration montre comment utiliser SVG pour faire suivre un chemin incurvé à un texte transclu. Entrez du texte dans la zone çi-dessous pour essayer<<;>> visualiser le code source pour voir examiner le fonctionnement.
 
 <$edit-text tiddler="$:/CurvedText" tag="input" placeholder="Type text here" default=""/>
 

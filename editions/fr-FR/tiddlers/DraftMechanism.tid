@@ -1,0 +1,19 @@
+created: 20150619170122415
+fr-title: Mécanisme pour les ébauches
+modified: 20150624091226014
+tags: Mechanisms
+title: DraftMechanism
+type: text/vnd.tiddlywiki
+
+Les Tiddlers qui ont un champ `draft.of` sont traités comme les ébauches en suspens des tiddlers indiqués dans le champ. Les tiddlers d'ébauche ont aussi un champ `draft.title` spécifiant le titre qui sera donné au tiddler après validation.
+
+Plusieurs fonctionnalités fonctionnent de concert afin d'obtenir le comportement souhaité des tiddlers d'ébauche<<:>>
+
+* Le ListWidget peut éventuellement afficher les tiddlers ébauche via un gabarit différent
+* Le NavigatorWidget inclut des particularismes concernant les événements suivants<<:>>
+** `tm-new-tiddler` pour créer un nouveau tiddler en mode ébauche
+** `tm-edit-tiddler` pour mettre un tiddler en mode édition 
+** `tm-cancel-tiddler` pour annuler un tiddler en mode édition
+** `tm-save-tiddler` pour confirmer un tiddler d'ébauche
+* Les tiddlers en cours d'ébauche sont exclus automatiquement du champ des recherche
+

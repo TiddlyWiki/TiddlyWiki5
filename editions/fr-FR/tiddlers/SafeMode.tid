@@ -1,6 +1,6 @@
 created: 20140419082845576
 fr-title: Mode Sans Échec
-modified: 20150531191219102
+modified: 20150617072959172
 tags: Features
 title: SafeMode
 type: text/vnd.tiddlywiki
@@ -20,6 +20,6 @@ http://tiddlywiki.com/#:safe
 Le Mode Sans Échec déclenche 2 modifications&nbsp;:
 
 * Tous les plugins sont momentanément désactivés. Vous pouvez alors utiliser le control panel pour désactiver des plugins.
-* Les tiddlers qui modifient les tiddlers masqués sont renommés avec le préfixe `SAFE: `, ce qui a pour effet de restaurer les tiddlers masqués sous-jacents.
+* Les tiddlers qui modifient les tiddlers ombres sont renommés avec le préfixe `SAFE: `, ce qui a pour effet de restaurer les tiddlers ombres sous-jacents.
 
 Un tiddler rapport est affiché pour vous permettre d'examiner les tiddlers renommés.

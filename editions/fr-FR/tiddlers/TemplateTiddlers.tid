@@ -1,0 +1,19 @@
+created: 20140107114355828
+fr-title: Tiddlers gabarits
+modified: 20150624092849464
+tags: Concepts
+title: TemplateTiddlers
+type: text/vnd.tiddlywiki
+
+Un tiddler gabarit n'est pas vraiment un type de tiddler, c'est un rôle dans lequel un tiddler peut être utilisé.
+
+Les gabarits sont un moyen de réutiliser différentes portions de [[WikiTexte|WikiText]].
+
+Transclure par un gabarit étend les fonctionnalités de base de la [[Transclusion]] en combinant deux tiddlers<<:>>
+
+* Un tiddler gabarit contenant le ~WikiTexte à afficher. Il peut contenir des transclusions se référant aux champs du [[tiddler en cours|Current Tiddler]]
+* Un tiddler cible qui indique quel tiddler sera considéré comme en cours lors des calculs de références des champs
+
+Le meilleur exemple de modélisation est le flux principal des tiddlers ouverts de TiddlyWiki. Chaque tiddler du déroulé principal est affiché via un [[Gabarit d'affichage|ViewTemplate]] qui spécifie le rendu de chaque champ.
+
+Voir la [[Transclusion par Gabarits|Transclusion with Templates]] pour plus de détails.

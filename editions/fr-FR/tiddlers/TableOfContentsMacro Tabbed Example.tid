@@ -1,11 +1,11 @@
-caption: Onglets Internes
-created:  20150221203607000
-modified: 20150104222928663
+caption: Onglets internes
+created: 20150221203607000
+fr-title: Exemple Table des matières: Onglets internes
+modified: 20150621091852105
+order: 5
 tags: table-of-contents-example
 title: Example Table of Contents: Tabbed Internal
 type: text/vnd.tiddlywiki
-order: 5
-fr-title: Exemple Table des matières: Onglets internes
 
 <$macrocall
 	$name="toc-tabbed-internal-nav"

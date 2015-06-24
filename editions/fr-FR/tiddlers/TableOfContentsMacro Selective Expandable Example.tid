@@ -1,11 +1,11 @@
 caption: Sélective
 created: 20150221201907000
-modified: 20150620180208002
+fr-title: Exemple Table des matières: Sélective étendue
+modified: 20150621091909265
+order: 4
 tags: table-of-contents-example
 title: Example Table of Contents: Selectively Expandable
 type: text/vnd.tiddlywiki
-order: 4
-fr-title: Exemple Table des matières: Sélective étendue
 
 <$macrocall $name=".example" n="1"
 eg="""<div class="tc-table-of-contents">

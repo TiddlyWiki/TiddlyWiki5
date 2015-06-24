@@ -1,9 +1,9 @@
 created: 20160515060000000
-modified: 20150621110355391
+fr-title: Paramètre d'un filtre
+modified: 20150621111345608
 tags: [[Filter Syntax]]
 title: Filter Parameter
 type: text/vnd.tiddlywiki
-fr-title: Paramètre d'un filtre
 
 <$railroad text="""
 ( "[" [:{/"tout sauf ]"/}] "]"
@@ -26,4 +26,3 @@ Le paramètre de l'[[opérateur de filtre|Filter Operators]] peut être<<:>>
 : <<.def variable>>
 :: `<comme ceci>`
 :: Le paramètre est la valeur actuelle de la [[variable|Variables]] dont le nom apparaît entre les chevrons. Les paramètres Macro ne sont <<.em pas>> supportés.
-

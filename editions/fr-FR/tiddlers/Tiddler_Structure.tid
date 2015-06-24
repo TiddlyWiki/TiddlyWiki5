@@ -1,0 +1,18 @@
+created: 20150110183300000
+fr-title: Structure d'un tiddler
+modified: 20150624094454650
+tags: [[Improving TiddlyWiki Documentation]]
+title: Tiddler Structure
+type: text/vnd.tiddlywiki
+
+Suivant la [[Philosophie des tiddlers|Philosophy of Tiddlers]], la documentation des tiddlers est typiquement courte et interconnectée. 
+
+Quand un tiddler semble nécessiter des subdivisions, c'est souvent le signe qu'il devrait être fractionné en plusieurs tiddlers. Mais il est raisonnable pour un [[tiddler de référence|Reference Tiddlers]] de se décomposer en une section d'introduction non titrée, suivie d'une section titrée pour les détails.
+
+La cohérence de la terminologie est essentielle pour éviter la confusion du lecteur. La cohérence de la typographie et de la ponctuation offrent une qualité professionnelle à la documentation. Les macros peuvent participer à l'amélioration de la cohérence du texte et de sa maintenabilité .
+
+Utilisez les listes numérotées pour les instructions pas-à-pas, et les puces pour les listes dont l'ordre est arbitraire. Utilisez une liste de définitions de préférence à une liste à puces si chaque élément de la liste débute par un terme suivi d'une virgule. Autant que possible, évitez de surcharger le lecteur avec une liste hiérarchisée.
+
+Utilisez une table lorsque l'information se divise naturellement en trois colonnes ou plus, ainsi que pour les listes de paramètres, d'attributs, etc., au sein des [[tiddlers de référence|Reference Tiddlers]].
+
+La documentation reflète la réalité actuelle de ~TiddlyWiki. Elle évite les discussions sur ses aspirations.

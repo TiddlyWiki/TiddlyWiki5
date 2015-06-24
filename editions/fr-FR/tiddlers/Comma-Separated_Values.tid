@@ -1,0 +1,15 @@
+caption: CSV
+created: 20150221120117000
+fr-title: CSV (Valeurs séparées par des virgules)
+modified: 20150624091518147
+tags: Definitions
+title: Comma-Separated Values
+type: text/vnd.tiddlywiki
+
+Le <<.dlink-ex CSV "http://fr.wikipedia.org/wiki/Comma-separated_values">> est un format de texte brut standard pour stocker des tableaux de données.
+
+Chaque ligne d'une table est appelé un <<.def enregistrement>> (record) et n'occupe qu'une seule ligne.
+
+Les colonnes sont appelées <<.def champs>> (field). Chaque champ d'une ligne est séparée du suivant par une virgule, et souvent encadré par des balises double-cote.
+
+La macro <<.mlink csvtiddlers>> renvoie le contenu d'un tiddler dans ce format.

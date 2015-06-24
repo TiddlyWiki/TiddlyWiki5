@@ -1,5 +1,5 @@
 created: 20141217193625476
-modified: 20150619131936229
+modified: 20150624092403261
 title: Glossaire en-GB -> fr-FR
 type: text/vnd.tiddlywiki
 
@@ -17,17 +17,17 @@ type: text/vnd.tiddlywiki
 |introduce|intègrer|ex (eng)<<:>> Introduce plugin|
 |keyword|motclé||
 |layout|mise en page||
-|lazy loading|chargement allégé |chargement paresseux/flemmard ? |
+|lazy loading|téléconsigne ||
 |no *|sauf * |hormis * |
-|non-linear| |3D ? |
+|non-linear|3D ? ||
 |placeholder|zoneréservée||
 |pull request|proposer une contribution||
 |run|séquence||
-|~SafeMode|~ModeSansÉchec |=> ~ModeSecours ?|
+|~SafeMode|~ModeSansÉchec |~ModeSecours ?|
 |~SandBox|~BacàSable|=> ~ZoneBrouillon/Protégée ?|
 |sequence|suite /série||
 |a set|un ensemble||
-|shaddow|ombre||
+|shadow|shadow| (ombre, fantôme ?)|
 |snippet|portion||
 |step|étape||
 |story river|déroulé||

@@ -1,0 +1,26 @@
+created: 20150110183300000
+fr-title: Règles de rédaction des titres des tiddlers
+modified: 20150621223956064
+tags: [[Improving TiddlyWiki Documentation]]
+title: Tiddler Title Policy
+type: text/vnd.tiddlywiki
+
+Plusieurs tiddlers documentaires, particulièrement [[les référents|Reference Tiddlers]], sont concernés par un seul concept. Leurs titres doivent correspondre à un groupe nominal succinct comme <<.tid "List Widget">> ou <<.tid "Champs de Tiddler">>.
+
+Chacun des mots principaux d'un tel titre commence avec une majuscule. Les mots mineurs comme <<.word et>>, <<.word ou>>, <<.word le>>, <<.word de>> and <<.word avec>> n'en ont pas.
+
+Les Tags suivent aussi ce modèle.
+
+Les titres de ce genre sont au pluriel s'ils représentent une catégorie d'articles, comme. <<.tid "Raccourcis Clavier">> ou <<.tid "Champs de Tiddler">>. Cette forme est utilisée pour étiqueter des tiddlers plus spécifiques dans une catégorie.
+
+Quand un concept est un article plus qu'une catégorie, son tiddler a titre particulier, comme<<:>> <<.tid "List Widget">>, <<.tid "tag Operator">>.
+
+Commencer un titre avec sa partie la plus distinctive. Par exemple, les tiddlers documents, les opérateurs de filtre ont des titres comme <<.tid "addprefix Operateur">>. Cela aide le lecteur a parcourir une liste de liens pour trouver un tiddler particulier.
+
+Éviter de commencer un titre avec un article comme <<.word "le, la, les">> ou <<.word "un, une, des">>.
+
+Par le passé, plusieurs tiddlers avaient des titres CamelCase. C'est progressivement abandonné pour accroître la lisibilité. Les titres ~CamelCase ne seront plus employés, même pour les tags, exceptés pour les cas comme <<.tid ~JavaScript>> où il existe une orthographe standard.
+
+Les [[tiddlers d'apprentissage|Instruction Tiddlers]] ont souvent des titres long un peu plus élaborés qu'un simple groupe nominal, comme<<:>> <<.tid "Dix raisons de passer à ~TiddlyWiki">>. Ces titres suivent la règle de la phrase, où seul le premier mot (ainsi que tous noms propres) commence par une majuscule.
+
+Les tiddlers Comment<<?>> ont des titres qui débutent par <<.word "Comment ?">>, de type<<:>> <<.tid "Comment éditer un tiddler">>. Éviter les titres comme<<:>><<.tid "Tiddlers Edition">>, car un locuteur moyen pourrait ne pas l'interpréter comme le nom d'une catégorie de  tiddlers.

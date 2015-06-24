@@ -1,17 +1,18 @@
 created: 20140904075400000
-modified: 20141212102639883
+fr-title: Étiqueter par tag
+modified: 20150624092812640
 tags: [[Working with TiddlyWiki]] Concepts
 title: Tagging
 type: text/vnd.tiddlywiki
 
-Taguer un tiddler consiste à assigner à un tiddler une catégorie de votre choix (voir [[Créer et éditer des tiddlers|Creating and editing tiddlers]] pour des instructions sur la manière de taguer). Par exemple, les tiddlers représentant des individus pourraient être tagués avec ''ami'', ''famille'', ''collègue'', etc. pour indiquer leur relation avec l'auteur. Plusieurs tags peuvent être appliqués au même tiddler.
+Étiqueter un tiddler consiste à assigner par  un tag à un tiddler une catégorie de votre choix (voir [[Créer et éditer des tiddlers|Creating and editing tiddlers]] pour des instructions sur la manière de taguer). Par exemple, les tiddlers représentant des individus pourraient être étiquetés par les tags ''ami'', ''famille'', ''collègue'', etc. pour indiquer leur relation avec l'auteur. Plusieurs tags peuvent être appliqués au même tiddler.
 
-Le fait de taguer les tiddlers vous procure de nombreux moyens supplémentaires de visualiser, parcourir, et organiser vos informations<<:>>
+Le fait d'étiqueter les tiddlers vous procure de nombreux moyens supplémentaires de visualiser, parcourir, et organiser vos informations<<:>>
 
 * Les pastilles colorées pour chaque tag d'un tiddler vous donnent accès à tous les autres tiddlers de même tag, ainsi qu'au tiddler correspondant au tag lui-même.
-* L'onglet //Étiquetage// dans le panneau d'informations du tiddler (accessible en cliquand sur le bouton {{$:/core/images/info-button}}) vous donne les liens vers tous les tiddlers tagués avec le titre du tiddler courant.
-* Vous pouvez utiliser l'onglet Tags dans l'onglet Plus de la barre latérale pour visualiser tous vos tags et accéder à vos tiddlers tagués.
-* Vous pouvez utiliser des [[filtres|Filters]] pour créer des listes de tiddlers selon leurs tags, puis afficher toute combinaison de champs souhaitée. Par exemple, vous pouvez créer une liste qui montre à la fois le titre et le texte de tous les tiddlers tagués //Glossary//. Ces listes peuvent être formatées à votre goût<<:>> avec des puces, des nombres, ou séparées par des virgules, etc.
+* L'onglet //Étiqueté// dans le panneau d'informations du tiddler (accessible en cliquant sur le bouton {{$:/core/images/info-button}}) vous donne les liens vers tous les tiddlers tagués avec le titre du tiddler courant.
+* Vous pouvez utiliser l'onglet Tags dans l'onglet Plus de la barre latérale pour visualiser tous vos tags et accéder à vos tiddlers étiquetés.
+* Vous pouvez utiliser des [[filtres|Filters]] pour créer des listes de tiddlers selon leurs tags, puis afficher toute combinaison de champs souhaitée. Par exemple, vous pouvez créer une liste qui montre à la fois le titre et le texte de tous les tiddlers étiquetés //Glossaire//. Ces listes peuvent être formatées à votre goût<<:>> avec des puces, des nombres, ou séparées par des virgules, etc.
 * Les tags <<gf système>> peuvent servir à personnaliser la mise en forme des tiddlers et de la page ~TiddlyWiki dans son ensemble. Voir les instructions correspondantes dans [[Personnalisation de la mise en forme de la page et des tiddlers|Page and tiddler layout customisation]].
 
 Encore deux choses que les tags permettent de faire<<:>>

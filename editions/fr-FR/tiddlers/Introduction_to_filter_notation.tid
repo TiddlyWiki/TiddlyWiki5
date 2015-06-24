@@ -1,0 +1,87 @@
+created: 20140410101941871
+fr-title: Introduction à la rédaction d'un filtre
+modified: 20150621094618461
+tags: Learning Filters
+title: Introduction to filter notation
+type: nq 
+
+<<.preamble """Ceci décrit les bases de l'écriture d'un [[filtre|Filters]] de sélection d'un ensemble de tiddlers. Pour une présentation plus technique, voir [[Syntaxe d'un filtre|Filter Syntax]].""">>
+
+<$macrocall $name=".tip" _="""Les filtres ne font rien par eux-même si vous vous contentez de les intégrer dans un tiddler. Il faut un contexte. Une manière facile d'expérimenter les filtres est de les saisir dans l'option <<.advancedsearch-tab Filter>> de l'onglet [[Recherche avancée|$:/AdvancedSearch]]."""/>
+
+Le plus simple des cas se présente lorsque vous savez exactement quels tiddlers vous recherchez. Saisissez chaque titre entre une paire de double crochets, un espace entre chacun<<:>>
+
+> `[[Livre de recettes]] [[OeufsBrouillés]] [[Gateau aux pommes de moman]]`
+
+Vous pouvez omettre les crochets quand un titre ne contient aucun espace<<:>>
+
+> `[[Livre de recettes]] OeufsBrouillés [[Gateau aux pommes de moman]]`
+
+La paire de double crochets est une abréviation de<<:>>
+
+> `[title[OeufsBrouillés]]`
+
+... qui offre une syntaxe du <<.def "modèle général">> de tous les filtres<<:>>
+
+> `[operateur[paramètre]]`
+
+En l'occurence, voici comment sélectionner tous les tiddlers étiquetés <<.tag Recipe>><<:>>
+
+> `[tag[Recette]]`
+
+Vous pouvez inverser la sélection en ajoutant le point d'exclamation `!` juste avant l'opérateur. Par exemple, nous pouvons sélectionner tous les tiddlers <<.em sans>> l'étiquette <<.tag Recette>><<:>>
+
+> `[!tag[Recette]]`
+
+Les tiddlers peuvent être filtrés par d'autres champs que les titres ou les étiquettes<<:
+>>
+
+> `[field:convive[4]]`
+
+Cette exemple sélectionnera tous les tiddlers qui ont <<.value 4>> dans leur champ <<.field convive>>.
+
+Comme le mot "convive" n'est pas un opérateur filtre standard (et n'est pas près de le devenir), vous pouvez omettre le préfixe `field:` en toute sécurité<<:>>
+
+> `[convive[4]]`
+
+!Combinaisons
+
+Les filtres que nous avons examinés jusqu'à présent ont chacun une étape. Mais vous pouvez <<.def exécuter>> plusieurs étapes ensemble comme ceci<<dp>>
+
+> `[tag[Végétarien]!tag[soupe]convive[4]]`
+
+Notez que la séquence entière est contenue dans une seule paire de crochets.
+
+Un tiddler doit correspondre à <<.em toutes>> les étapes de la séquence. Ainsi l'exemple supra renvoie à toutes les recettes végétariennes (autre que soupes) pour 4 convives.
+
+Une série de séquences séparée sélectionnera les tiddlers qui correspondent à l'<<.em une>> des séquences. Nous pouvons réutiliser ceci pour trouver les recettes pour 3, 4 or 5 convives<<:>>
+
+> `[convive[3]] [convive[4]] [convive[5]]`
+
+Si nous voulons ignorer les recettes végétariennes pour 4 convives, nous formulerons ainsi<<:>>
+
+> `[convive[3]] [convive[4]!tag[Végétarien]] [convive[5]]`
+
+Par défaut, chaque séquence prend en compte tous les tiddlers du wiki. Mais on peut utiliser le signe `+` pour ne tenir compte que des seuls tiddlers sélectionnés par les précédentes séquences<<:>>
+
+> `[convive[3]] [convive[4]] [convive[5]] +[tag[Végétarien]] +[sort[titre]]`
+
+Ceci sélectionne les recettes pour 3, 4 ou 5 convives, puis filtre <<.em celles>> qui correspondent uniquement aux végétariennes, et enfin trie ce qui reste dans l'ordre alphabétique des titres.
+
+D'une façon similaire, nous pouvons utiliser le signe `-` pour <<.em extraire>> une séquence de tiddlers du résultat précédent. Ici nous sélectionnons toutes les recettes végétariennes exceptées deux<<:>>
+
+> `[tag[Végétarien]] -[title[OeufsBrouillés]] -HaricotsSurToast`
+
+!Paramètres spéciaux
+
+Le paramètre de chaque étape que nous avons vu jusqu'à présent s'insérait entre crochets, signifiant un traitement littéral par ~TiddlyWiki. Mais deux autres formes de parenthèses sont possibles<<:>>
+
+<<.def "Les accolades">> `{}` indiquent que le paramètre est une [[Référence textuelle|TextReference]], et que sa valeur doit être recherchée dans un tiddler spécial. Par exemple, si nous avons un tiddler nommé <<.tid Préférence>> dont le texte apparait être le mot <<.value Végétarien>>, nous pouvons dire
+
+> `[tag{Préférence}]`
+
+est une alternative à `[tag[Végétarien]]`. Ce qui permet à 'préférence' d'évoluer dans le temps.
+
+<<.def "Les chevrons">> `<>` indiquent que le paramètre est le nom d'une [[variable|Variables]] dont la valeur sera utilisée en lieu et place. Ici, nous utilisons la variable intégrée <<.vlink currentTiddler>> au sein d'un filtre qui sélectionne tous les tiddlers dont le texte contient le titre du tiddler en cours<<:>>
+
+> `[search<currentTiddler>]`

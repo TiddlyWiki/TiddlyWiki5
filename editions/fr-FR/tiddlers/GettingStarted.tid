@@ -1,8 +1,8 @@
 created: 20131129090249275
-modified: 20141011134052576
+fr-title: La mise en route
+modified: 20150614115652702
 tags: [[Working with TiddlyWiki]]
 title: GettingStarted
-fr-title: Pour démarrer
 type: text/vnd.tiddlywiki
 
 \define default-platform()
@@ -16,7 +16,7 @@ Instructions pour bien commencer avec <<tw>>, selon les différentes plates-form
 
 Autres informations :
 
-* [[Chiffrement|Encryption]] explique comment utiliser le système de chiffrement intégré à <<tw>> pour protéger votre contenu avec un mot de passe ;
+* [[Cryptage|Encryption]] explique comment utiliser le système de cryptage intégré à <<tw>> pour protéger votre contenu avec un mot de passe ;
 * [[Enregistrer avec Tiddlyspot|Saving on TiddlySpot]], un service gratuit qui vous permet d'utiliser <<tw>> en ligne ;
 * Sauvegarde avec TiddlyDesktop, une application de bureautique dédiée au travail avec <<tw>> ;
 * Vous pouvez aussi télécharger ce <<tw>> complet, avec toute sa documentation<<dp>><div>
