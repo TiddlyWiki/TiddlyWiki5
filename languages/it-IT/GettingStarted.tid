@@ -7,7 +7,7 @@ Per iniziare, verifica prima di tutto di riuscire a salvare correttamente le mod
 Successivamente puoi:
 
 * Creare nuovi frammenti utilizzando il pulsante '+' presente nella sidebar
-* Aprire il [[pannello di controllo|$:/ControlPanel]] utilizzando il pulsante 'ingranaggio' presente nella sidebar per personalizzare il tuo wiki
-** Bloccare la comparsa di questo messaggio modificando i frammenti di default elencati nel tab ''Impostazioni base''
+* Aprire il pannello di controllo utilizzando il pulsante 'ingranaggio' presente nella sidebar per personalizzare il tuo wiki
+** Bloccare la comparsa di questo messaggio modificando i frammenti di default elencati nel tab Impostazioni base
 * Salvare le modifiche utilizzando il pulsante 'download' presente nella sidebar
-* Conoscere meglio la sintassi del [[WikiText|http://tiddlywiki.com/static/WikiText.html]]
+* Conoscere meglio la sintassi del WikiText
