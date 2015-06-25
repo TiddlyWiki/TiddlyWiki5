@@ -1,11 +1,11 @@
 caption: Onglets Externes
 created: 20150221205834000
-modified: 20150620181010090
+fr-title: Exemple Table des matères: Onglets externes
+modified: 20150621091831154
+order: 6
 tags: table-of-contents-example
 title: Example Table of Contents: Tabbed External
 type: text/vnd.tiddlywiki
-sorted: 6
-fr-title: Exemple Table des matères: Onglets externes
 
 <$macrocall
 	$name="toc-tabbed-external-nav"

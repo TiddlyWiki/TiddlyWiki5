@@ -1,6 +1,6 @@
-fr-title: Exemple de gestion de tâches
 created: 20130825213300000
-modified: 20141119225318652
+fr-title: Exemple de gestion de tâches
+modified: 20150602174012468
 tags: Learning
 title: TaskManagementExample
 type: text/vnd.tiddlywiki
@@ -11,7 +11,7 @@ TiddlyWiki5 peut servir de système de gestion de tâches simple sans personnali
 
 <$list filter="[!has[draft.of]tag[task]!tag[done]sort[created]]">
 
-<$checkbox tag="done"> <$link to={{!!title}}><$view field="caption"><$view field="title"/></$view></$link></$checkbox>
+<$checkbox tag="done"> <$link to={{!!title}}><$view field="fr-title"><$view field="title"/></$view></$link></$checkbox>
 
 </$list>
 

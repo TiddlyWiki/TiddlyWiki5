@@ -1,0 +1,10 @@
+created: 20150221145447000
+modified: 20150601194637381
+title: $:/editions/tw5.com/macro-examples/say-hi-using-variables
+type: text/vnd.tiddlywiki
+
+\define say-hi-using-variables()
+Salut, je suis $(name)$ et je vis à $(address)$.
+\end
+
+\define name() Bugs

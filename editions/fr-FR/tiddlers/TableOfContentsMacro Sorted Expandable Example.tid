@@ -1,11 +1,11 @@
 caption: Triée
 created: 20150221201942000
-modified: 20150620180728457
+fr-title: Exemple Table des matières: Triée étendue
+modified: 20150621084211641
+order: 3
 tags: table-of-contents-example
 title: Example Table of Contents: Sorted Expandable
 type: text/vnd.tiddlywiki
-order: 3
-fr-title: Exemple Table des matières: Triée étendue
 
 <$macrocall $name=".example" n="1"
 eg="""<div class="tc-table-of-contents">

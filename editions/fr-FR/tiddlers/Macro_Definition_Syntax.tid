@@ -1,0 +1,52 @@
+created: 20150220200255000
+fr-title: Syntaxe de la définition d'une macro
+modified: 20150604094513400
+tags: [[Macro Syntax]]
+title: Macro Definition Syntax
+type: text/vnd.tiddlywiki
+
+<<.preamble """Ce qui suit est la description formelle de la syntaxe du pragma `\define`, par des [[diagrammes en chemin de fer|Railroad Diagrams]]. Une [[présentation simplifiée|Macro Definitions in WikiText]] est aussi disponible.""">>
+
+<$railroad text="""
+"\define" espace nom parametres [:espace] suite
+"""/>
+
+<<.place espace>> représente une série d'[[espaces vierges|Filter Whitespace]].
+
+Le <<.place nom>> de [[macro|Macros]] est une série de caractères sans espace, autres que `(` ou `>`.
+
+La liste de déclaration de paramètre (<<.place parametres>>) a la syntaxe suivante<<dp>>
+<$railroad text="""
+"(" [:sep] [:{ parametre sep }] ")"
+"""/>
+
+Le séparateur de paramètres (<<.place sep>>) est toute série de caractères différente d'un nom de paramètre (<<.place parametre.nom>>). Entre autre chose, cela comprend les virgules, les espaces et les sautsdeligne.
+
+Un <<.place parametre.nom>> est une suite de lettres (`A`--`Z`, `a`--`z`), de chiffres (`0`--`9`), de tirets (`-`) de soulignés (`_`).
+
+Chaque <<.place parametre>> a, respectivement, la syntaxe suivante<<dp>>
+
+<$railroad text="""
+parametre.nom [: [:espace] ":" [:espace] defaut ]
+")"
+"""/>
+
+La valeur par <<.place défaut>> d'un paramètre est spécifiée comme suit<<:>>
+
+<$railroad text={{$:/editions/tw5.com/railroad/macro-parameter-value}}/>
+
+La définition de la <<.place suite>> se fait comme suit<<:>>
+
+<$railroad text="""
+( code.extrait | Si code.extrait Si "\end" [:espace] ) Si
+"""/>
+
+<<.place Si>> marque un saut de ligne.
+
+Un <<.place code.extrait>> correspond à toute suite de caractère qui ne termine pas la définition de la macro. Ce qui veut dire qu'un extrait de code, s'il comporte une ligne unique, ne peut comporter de sautdeligne ou s'il occupe plusieurs lignes ne peut comporter de `\end`.
+
+L'extrait de code peut contenir des [[ZoneRéservée|PlaceHolder]] en utilisant la syntaxe suivante:
+
+<$railroad text="""
+( "$" nom "$" | "$" "(" nom ")" "$" )
+"""/>

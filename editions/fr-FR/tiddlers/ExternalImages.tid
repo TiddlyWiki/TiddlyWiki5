@@ -1,6 +1,6 @@
 created: 20140610213500000
 fr-title: Images externes
-modified: 20150601094250441
+modified: 20150624092640854
 tags: Concepts Features
 title: ExternalImages
 type: text/vnd.tiddlywiki
@@ -13,9 +13,9 @@ Les images externes sont utilisées dans le navigateur. Elles peuvent être cré
 
 Une image externe est un tiddler image ordinaire avec un champ ''_canonical_uri'' contenant l'URI de l'image. L'URI pointe de façon absolue ou relative vers le document HTML. Si le champ ''_canonical_uri'' est renseigné, alors le champ ''text'' du tiddler est ignoré et peut être omis.
 
-! Création manuelle d'images externes
+! Création manuelle d'Images Externes
 
-Pour créer manuellement une image externe, il suffit juste de créer un tiddler avec le content type image approprié, puis d'ajouter un champ ''_canonical_uri'' dont l'URI pointe vers l'emplacement de stockage de l'image.
+Pour créer manuellement une image externe, il suffit juste de créer un tiddler avec le type de contenu image approprié, puis d'ajouter un champ ''_canonical_uri'' dont l'URI pointe vers l'emplacement de stockage de l'image.
 
 ''IMPORTANT&nbsp;:'' Revérifiez votre orthographe. ``_canonical_uri`` s'épelle [[URI|https://en.wikipedia.org/wiki/URI#The_relationship_between_URIs.2C_URLs.2C_and_URNs]], et pas URL.
 
@@ -39,7 +39,7 @@ Pour un exemple, voir la génération de la cible ''externalimages'' dans la dem
 --rendertiddler $:/core/save/all externalimages.html text/plain
 ```
 
-!!  Sauvegardez les images en fichiers séparés
+!!  Sauvegardez les images en fichiers séparées
 
 La commande `--savetiddlers` suivante peut être utilisée pour sauvegarder les images d'un wiki dans un sous-répertoire ''images''&nbsp;:
 
@@ -47,7 +47,7 @@ La commande `--savetiddlers` suivante peut être utilisée pour sauvegarder les 
 --savetiddlers [is[image]] images
 ```
 
-!! Externalisez les tiddlers image
+!! Externalisez les Tiddlers Image
 
 Deux commandes `--setfield` sont utilisées&nbsp;: la première affecte au champ ''_canonical_uri'' l'URI correspondant au titre du tiddler, et la deuxième efface le champ text.
 
@@ -56,7 +56,7 @@ Deux commandes `--setfield` sont utilisées&nbsp;: la première affecte au champ
 --setfield [is[image]] text "" text/plain
 ```
 
-Le tiddler modèle [[$:/core/templates/canonical-uri-external-image]] contient&nbsp;:
+Le tiddler gabarit [[$:/core/templates/canonical-uri-external-image]] contient&nbsp;:
 
 <pre>
 
@@ -66,6 +66,6 @@ Le tiddler modèle [[$:/core/templates/canonical-uri-external-image]] contient&n
 
 Notez que ces opérations modifient les tiddlers dans la mémoire du wiki et peuvent donc affecter le fonctionnement de commandes ultérieures.
 
-! Utilisation d'images externes
+! Utilisation d'Images Externes
 
 Vous ne pouvez pas éditer une image externe directement dans le navigateur, sauf en changeant le champ URI pour pointer vers une image différente.

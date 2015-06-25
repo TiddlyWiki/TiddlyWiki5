@@ -1,0 +1,41 @@
+created: 20150110101500000
+fr-title: Tiddlers d'apprentissage
+modified: 20150624094350435
+tags: [[Improving TiddlyWiki Documentation]]
+title: Instruction Tiddlers
+type: text/vnd.tiddlywiki
+
+Les <<.def "Tiddlers d'apprentissage">> s'adressent directement aux lecteurs et les guident à travers un processus. Le lecteur est aussi bien un débutant qu'un utilisateur moyen.
+
+Ces tiddlers peuvent se subdiviser en<<:>>
+
+;Bienvenue
+* Qu'est-ce que ~TiddlyWiki et pourquoi m'en soucier?
+* Démonstration des points clés et avantages
+* Questions fréquemment posées
+* Exemples de ~TiddlyWiki en action
+* Information sur le projet lui-même
+
+;Tutoriel
+* Une présentation ordonnée de matériaux pour débutants
+* Chaque tiddler introduit une nouveauté ou un concept
+* Son contenu principal contient très peu de liens
+* Une section <<.word "En savoir plus">> accessible à la fin peut proposer des liens connexes
+
+;Exercice
+* Accompagne un tiddler tutoriel
+* Solution obtenue sur demande
+
+;Comment<<?>>
+* Une liste d'étapes numérotées pour effectuer une petite tâche spécifique
+* Concis, avec des liens vers les tiddlers référents si besoin
+* Toujours avec un préambule pour clarifier la nature de la tache
+
+;Exemple
+* Accompagne un [[tiddler référence|Reference Tiddlers]]
+* Peut contenir explications et commentaires similaires
+* Reste indépendant pour préserver la sobriété du tiddler référence
+
+Les tiddlers d'apprentissage s'adressent directement au lecteur par l'emploie du <<.word vous>>. Ils peuvent être raisonnablement cordiaux.
+
+Mais ils évitent l'excès de langage académique, culturel, les références à l'actualité et les tentatives de l'humour,car ils peuvent dérouter ou même offenser le lectorat international. Ils évitent aussi de frustrer potentiellement le lecteur par des descriptions caractérisées de commodes ou faciles.

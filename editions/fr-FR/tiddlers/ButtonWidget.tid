@@ -1,0 +1,41 @@
+caption: button
+created: 20131024141900000
+creator: 127.0.0.1
+modified: 20141217211239522
+modifier: 127.0.0.1
+tags: Widgets
+title: ButtonWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The button widget displays an HTML `<button>` element that can perform a combination of optional actions when clicked:
+
+* Executing any ActionWidgets that are immediate children of the button widget
+* Execute any integrated actions:
+** Navigate to a specified tiddler
+** Dispatch a user defined [[widget message|Messages]]
+** Trigger a user defined [[popup|PopupMechanism]]
+** Assign new text to a specified tiddler
+
+The integrated actions are provided as a shortcut for invoking common actions. The same functionality is available via ActionWidgets, with the exception of the support for highlighting selected popups.
+
+! Content and Attributes
+
+The content of the `<$button>` widget is displayed within the button.
+
+|!Attribute |!Description |
+|to |The title of the tiddler to navigate to |
+|message |The name of the [[widget message|Messages]] to send when the button is clicked |
+|param |The optional parameter to the message |
+|set |A TextReference to which a new value will be assigned |
+|setTo |The new value to assign to the TextReference identified in the `set` attribute |
+|popup |Title of a state tiddler for a popup that is toggled when the button is clicked |
+|aria-label |Optional [[Accessibility]] label |
+|tooltip |Optional tooltip |
+|class |An optional CSS class name to be assigned to the HTML element|
+|style |An optional CSS style attribute to be assigned to the HTML element |
+|selectedClass |An optional additional CSS class to be assigned if the popup is triggered or the tiddler specified in `set` already has the value specified in `setTo`  |
+|default |Default value if `set` tiddler is missing for testing against `setTo` to determine `selectedClass` |
+
+''Tip:'' Set ''class'' to `tc-btn-invisible tc-tiddlylink` to have a button look like an internal link.

@@ -1,6 +1,6 @@
 created: 20130825213500000
 fr-title: Sauvegarder sur Tiddlyspot
-modified: 20141221111838003
+modified: 20150603145933656
 tags: Saving
 title: Saving on TiddlySpot
 type: text/vnd.tiddlywiki
@@ -15,12 +15,13 @@ Vous pouvez publier un document TiddlyWiki depuis votre disque local vers ~Tiddl
 # Cliquez sur le bouton <<gf "Enregistrer les modifications">> dans la barre latérale. Vous devriez voir un message de confirmation en haut à droite de la barre latérale indiquant ''Wiki enregistré''. Cela peut durer plusieurs secondes si vous avez une connexion lente ou si vous travaillez avec un wiki volumineux.
 # Ouvrez votre wiki ~TiddlySpot à l'URL `http://<nom-du-wiki>.tiddlyspot.com/`
 
-Notez que lorsque vous utilisez ~TiddlySpot, votre mot de passe est envoyé non chiffré. Extrait de http://faq.tiddlyspot.com/<<:>>
+Notez que lorsque vous utilisez ~TiddlySpot, votre mot de passe est envoyé non-crypté. Extrait de http://faq.tiddlyspot.com/<<:>>
 
 <<<
 ''Tiddlyspot est-il sûr ?''
 
-Non. Tiddlyspot n'utilise pas SSL/https. Votre mot de passe est envoyé en clair lorsque vous enregistrez votre wiki et au moment où vous vous authentifiez pour accéder à un site privé. Autrement dit, votre Tiddlyspot est ouvert aux renifleurs de paquets et votre mot de passe peut être découvert par un tiers malveillant. De même, vos données sont transmises non chiffrées lorsque vous vous affichez votre site, même s'il s'agit d'un site privé. C'est pourquoi nous vous prions instamment de ne pas conserver d'informations sensibles comme des données bancaires dans votre Tiddlyspot et de ne pas utiliser un mot de passe que vous utilisez pour d'autres sites plus sensibles.
+Non. Tiddlyspot n'utilise pas SSL/https. Votre mot de passe est envoyé en clair lorsque vous enregistrez votre wiki et au moment où vous vous authentifiez pour accéder à un site privé. Autrement dit, votre Tiddlyspot est ouvert aux renifleurs de paquets et votre mot de passe peut être découvert par un tiers malveillant. De même, vos données sont transmises non 
+-cryptées lorsque vous vous affichez votre site, même s'il s'agit d'un site privé. C'est pourquoi nous vous prions instamment de ne pas conserver d'informations sensibles comme des données bancaires dans votre Tiddlyspot et de ne pas utiliser un mot de passe que vous utilisez pour d'autres sites plus sensibles.
 <<<
 
 ! Problèmes lors de la sauvegarde sur Tiddlyspot

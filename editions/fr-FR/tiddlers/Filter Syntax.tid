@@ -1,10 +1,10 @@
 created: 20140210141217955
-modified: 20141213084853423
+fr-title: Syntaxe d'un filtre
+list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
+modified: 20150621095832048
 tags: Filters
 title: Filter Syntax
 type: text/vnd.tiddlywiki
-fr-title: Syntaxe d'un filtre
-list: [[Filter Expression]] [[Filter Run]] [[Filter Step]] [[Filter Parameter]] [[Filter Whitespace]]
 
 <<.preamble """Les [[Filtres]] suivent une grammaire représentée ici par des [[diagrammes en chemin de fer|Railroad Diagrams]], pour ceux qui trouvent utile une description formelle de la syntaxe. Cependant, vous pouvez [[apprendre à écrire des filtres|Introduction to filter notation]] sans avoir besoin de comprendre ces tiddlers modèle de description.""">>
 

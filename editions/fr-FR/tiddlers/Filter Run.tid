@@ -1,9 +1,9 @@
 created: 20150124182117000
-modified: 20150602081345435
+fr-title: Séquence d'un filtre
+modified: 20150621104254554
 tags: [[Filter Syntax]]
 title: Filter Run
 type: text/vnd.tiddlywiki
-fr-title: Séquence d'un filtre
 
 <$railroad text="""
 ( "[" { [[etape|"Filter Step"]] } "]"

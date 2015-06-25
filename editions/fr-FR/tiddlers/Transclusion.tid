@@ -1,0 +1,23 @@
+caption: Transclusion
+created: 20141129194651420
+modified: 20150622112927685
+tags: Concepts
+title: Transclusion
+type: text/vnd.tiddlywiki
+
+La <a href="http://fr.wikipedia.org/wiki/Transclusion">Transclusion</a> est le procédé de référencement d'un tiddler "A" à partir d'un autre tiddler "B" de sorte que le contenu de "A" apparait être une partie de "B".
+
+Copier / coller du contenu crée des copies multiples d'un même contenu en différents endroits. Avec la transclusion, il peut y avoir une seule copie et une instruction spéciale dans "B" qui mentionne le point à partir duquel doit être inséré le contenu du tiddler "A".
+
+Notez que si le contenu de "A" est modifié, alors la modification apparait immédiatement dans "B". Cela rend aisé la maintenance de contenu répétitif, en permettant l'écriture d'éléments à un seul endroit, mais l'affichage en de multiple lieux.
+
+Le concept de transclusion joue un rôle important dans la [[Philosophie des Tiddlers|Philosophy of Tiddlers]] car c'est la première façon de combiner le contenu de petits articles.
+
+En savoir plus<<:>>
+
+* [[Transclusion grâce à WikiText|Transclusion in WikiText]]
+* [[Transclusion - utilisation basique|Transclusion Basic Usage]]
+* [[Transclusion par Gabarits|Transclusion with Templates]]
+* [[Référence textuelle|TextReference]]
+* [[Tiddlers Gabarits|TemplateTiddlers]]
+* [[Widget Transclude|TranscludeWidget]]

@@ -1,0 +1,16 @@
+caption: storyTiddler
+created: 20141001232753952
+modified: 20150622085159253
+tags: Variables [[Core Variables]]
+title: storyTiddler Variable
+type: text/vnd.tiddlywiki
+
+=> tiddler en cours d'affichage ou d'édition. 
+
+When a tiddler is viewed or edited, then within its branch of the [[widget tree|Widgets]], the <<.def storyTiddler>> [[variable|Variables]] contains the title of that tiddler.
+
+The default [[view template|$:/core/ui/ViewTemplate]] and [[edit template|$:/core/ui/EditTemplate]] initialise <<.var storyTiddler>> to the value of the <<.vlink currentTiddler>> variable. This in turn will have been set by a <<.wlink ListWidget>> widget in [[the relevant part of the page template|$:/core/ui/PageTemplate/story]].
+
+<<.var storyTiddler>> is undefined outside the story river, such as in the sidebar.
+
+<<.variable-examples "storyTiddler">>

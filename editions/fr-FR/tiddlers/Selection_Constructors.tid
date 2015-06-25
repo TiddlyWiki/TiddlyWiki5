@@ -1,0 +1,14 @@
+created: 20150117204109000
+fr-title: Constructeurs de sélection
+modified: 20150624092756192
+tags: Concepts
+title: Selection Constructors
+type: text/vnd.tiddlywiki
+
+Le résultat du [[filtre|Filters]] d'une étape dépend de son [[opérateur|Filter Operators]]:
+
+* La plupart des opérateurs forment leurs résultats à partir de leurs entrées. Par exemple, la plupart produisent un sous-ensemble de leur entrée, et se faisant, méritent vraiment leur nom de <<.word filtres>>,car ils réduisent la taille du résultat généré par la [[séquence|Filter Run]]. Ces opérateurs sont nommés <<.def "modifieurs de sélection">>.
+
+* Quelques opérateurs ignorent leurs entrées et génèrent un résultat indépendant. Ils sont appelés <<.def "constructeurs de sélection">><<:>> Ils construisent une [[sélection|Title Selection]] entièrement nouvelle.
+
+Un bon exemple de constructeur est l'opérateur <<.olink title>>. Le résultat de `[title[A]title[B]]` est juste <<.tid B>>. Mais l'ajout de l'opérateur modifieur <<.olink field>>, `[title[A]field:title[B]` ne produit plus rien du tout.

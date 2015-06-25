@@ -1,0 +1,8 @@
+created: 20130822173400000
+fr-title: Adaptabilité
+modified: 20150602103603959
+tags: Features
+title: Scalability
+type: text/vnd.tiddlywiki
+
+Vous pourriez vous demander si l'architecture de TiddlyWiki en tant que SinglePageApplication serait adaptée pour de gros volume de d'information. En réalité, les utilisateurs de TiddlyWiki travaillent souvent avec des fichiers de 20 or 30 mégaoctets sans problème - et des expérience traitant des gigaoctets ont aussi été couronnées de succès.

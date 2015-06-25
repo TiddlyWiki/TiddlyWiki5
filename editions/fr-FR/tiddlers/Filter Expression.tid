@@ -1,9 +1,9 @@
 created: 20150124182421000
-modified: 20150621103022171
-tags:  	[[Filter Syntax]]
+fr-title: Expression d'un filtre
+modified: 20150621103316084
+tags: [[Filter Syntax]]
 title: Filter Expression
 type: text/vnd.tiddlywiki
-fr-title: Expression d'un filtre
 
 <$railroad text="""
 [{:
@@ -15,7 +15,7 @@ fr-title: Expression d'un filtre
 
 L'<<.def "expression d'un filtre">> est le plus haut niveau de la [[syntaxe d'un filtre|Filter Syntax]].Elle est composée d'une ou plusieurs [[séquences|Filter Run]].
 
-Une entrée de séquence est souvent une liste de tous les titres des tiddlers non-[[ombres|ShadowTiddlers]] du wiki (sans tri particulier). Mais le préfixe `+` peut modifier cela.
+Une entrée de séquence est souvent une liste de tous les titres des tiddlers non-[[shadow|ShadowTiddlers]] du wiki (sans tri particulier). Mais le préfixe `+` peut modifier cela.
 
 * Si une séquence ne comporte pas de préfixe `+` ou `-`, ces titres en sortie sont [[ajoutés par prépondérance|Dominant Append]] au résultat du filtre.
 * Si une séquence comporte un préfixe `-`, les titres en sortie sont <<.em extraits>> du résultat du filtre (s'ils y étaient).
