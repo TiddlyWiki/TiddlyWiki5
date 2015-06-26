@@ -8,7 +8,7 @@ global: Globale data die aan `$tw.config` moet worden toegevoegd.
 isfilteroperator: Operands voor de ''is'' filter operator.
 macro: JavaScript macro definities.
 parser: Parsers voor verschillende inhoudstypes.
-saver: "Savers" gebruiken verschillende methodes voor het opslaan van bestanden vanuit de browser.
+saver: 'Savers' gebruiken verschillende methodes voor het opslaan van bestanden vanuit de browser.
 startup: Startup functies.
 storyview: Story views passen de animatie en het gedrag van 'list' widgets aan.
 tiddlerdeserializer: Zet verschillende inhoudstypes in tiddlers om.
