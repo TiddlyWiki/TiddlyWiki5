@@ -58,7 +58,7 @@ CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler) {
 		if(this.checkboxTag) {
-			if(this.checkboxInvert) {
+			if(this.checkboxInvertTag) {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
@@ -96,7 +96,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		newFields = {title: this.checkboxTitle},
 		hasChanged = false,
 		tagCheck = false;
-	if(this.checkboxTag && this.checkboxInvert === "yes") {
+	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
 		tagCheck = tiddler.hasTag(this.checkboxTag) === checked;
 	} else {
 		tagCheck = tiddler.hasTag(this.checkboxTag) !== checked;
@@ -108,9 +108,9 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		if(pos !== -1) {
 			newFields.tags.splice(pos,1);
 		}
-		if(this.checkboxInvert === "yes" && !checked) {
+		if(this.checkboxInvertTag === "yes" && !checked) {
 			newFields.tags.push(this.checkboxTag);
-		} else if(this.checkboxInvert !== "yes" && checked) {
+		} else if(this.checkboxInvertTag !== "yes" && checked) {
 			newFields.tags.push(this.checkboxTag);
 		}
 		hasChanged = true;
@@ -140,7 +140,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxUnchecked = this.getAttribute("unchecked");
 	this.checkboxDefault = this.getAttribute("default");
 	this.checkboxClass = this.getAttribute("class","");
-	this.checkboxInvert = this.getAttribute("invert","");
+	this.checkboxInvertTag = this.getAttribute("invertTag","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -150,7 +150,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.field || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"]) {
 		this.refreshSelf();
 		return true;
 	} else {
