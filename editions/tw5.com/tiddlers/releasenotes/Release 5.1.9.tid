@@ -118,6 +118,12 @@ and "open new window" <span title="$:/core/images/open-window">{{$:/core/images/
 
 !! Hackability Improvements
 
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/]] to ~KaTeX version 0.4.3, with the following editions since the previous 0.2.0 release that was distributed with TiddlyWiki 5.1.8:
+** Added support for some `\begin`/`\end` environments, including support for `array`, `matrix`, `pmatrix`, `bmatrix`, `vmatrix`, and `Vmatrix`
+** Added support for optional `\sqrt` arguments, e.g. `\sqrt[3]{x}`
+** Add support for `\phantom`
+** Add `\#`, `\&`
+** See the [[KaTeX GitHub page|https://github.com/Khan/KaTeX/releases]] for full release details
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/9b4b9d4d8878b8646112de7b5a7b282f50a4d1cb]] ActionSendMessageWidget for more flexible passing of named parameters via new `$name` and `$value` attributes
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6942efa6289c9f1d99ea9f63972aa314ac06a8b1]] styling for `<kbd>` elements such as <kbd>escape</kbd> and <kbd>enter</kbd>
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/637aaca2fc3563cc695ab5603fc0cde222a770da]] subtle new "pin stripe" pattern for page background - <$button>

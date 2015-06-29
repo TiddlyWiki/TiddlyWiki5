@@ -14,8 +14,8 @@ KaTeX supports all major browsers, including Chrome, Safari, Firefox, Opera, and
 You can [download KaTeX](https://github.com/khan/katex/releases) and host it on your server or include the `katex.min.js` and `katex.min.css` files on your page directly from a CDN:
 
 ```html
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.1.1/katex.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.js"></script>
 ```
 
 #### In-browser rendering
@@ -26,6 +26,8 @@ Call `katex.render` with a TeX expression and a DOM element to render into:
 katex.render("c = \\pm\\sqrt{a^2 + b^2}", element);
 ```
 
+If KaTeX can't parse the expression, it throws a `katex.ParseError` error.
+
 #### Server side rendering or rendering to a string
 
 To generate HTML on the server or to generate an HTML string of the rendered math, you can use `katex.renderToString`:
@@ -35,7 +37,7 @@ var html = katex.renderToString("c = \\pm\\sqrt{a^2 + b^2}");
 // '<span class="katex">...</span>'
 ```
 
-Make sure to include the CSS and font files, but there is no need to include the JavaScript.
+Make sure to include the CSS and font files, but there is no need to include the JavaScript. Like `render`, `renderToString` throws if it can't parse the expression.
 
 #### Rendering options
 
@@ -48,6 +50,10 @@ For example:
 ```js
 katex.render("c = \\pm\\sqrt{a^2 + b^2}", element, { displayMode: true });
 ```
+
+#### Automatic rendering of math on a page
+
+Math on the page can be automatically rendered using the auto-render extension. See [the Auto-render README](contrib/auto-render/README.md) for more information.
 
 ## Contributing
 
