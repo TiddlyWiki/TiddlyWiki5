@@ -10,5 +10,7 @@ Fields/Add/Prompt: Aggiungi un nuovo campo:
 Fields/Add/Value/Placeholder: Valore campo
 Tags/Add/Button: Aggiungi
 Tags/Add/Placeholder: Nome categoria
+Tags/Dropdown/Caption: lista dei tag
+Tags/Dropdown/Hint: Mostra la lista dei tag
 Type/Placeholder: Tipo contenuto
 Type/Prompt: Tipo:
