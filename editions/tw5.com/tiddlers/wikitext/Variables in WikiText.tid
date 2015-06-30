@@ -22,7 +22,7 @@ eg="""<$set name=animal value=zebra>
 
 !! Example: defining a macro
 
-The `\define` pragma below [[defines a macro|Macros in WikiText]] called <<.var tags>>. The macro returns the value of the tiddler's <<.field tags>> field, and can be accessed from anywhere else in the same tiddler (or in any tiddler that [[imports|ImportVariablesWidget]] it).
+The `\define` pragma below [[defines a macro|Macros in WikiText]] called <<.var tags-of-current-tiddler>>. The macro returns the value of the tiddler's <<.field tags>> field, and can be accessed from anywhere else in the same tiddler (or in any tiddler that [[imports|ImportVariablesWidget]] it).
 
 <$importvariables filter="$:/editions/tw5.com/macro-examples/tags-of-current-tiddler">
 <$codeblock code={{$:/editions/tw5.com/macro-examples/tags-of-current-tiddler}}/>
