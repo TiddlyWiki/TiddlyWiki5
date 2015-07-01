@@ -76,5 +76,16 @@ $title$$(currentTiddler)$
 <td></td>
 </tr>
 </$list>
+<tr>
+<td></td>
+<td>
+{{$:/core/ui/UntaggedTemplate}}
+</td>
+<td>
+<small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>
+</td>
+<td></td>
+<td></td>
+</tr>
 </tbody>
 </table>
