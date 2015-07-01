@@ -25,6 +25,7 @@ PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
 TagManager/Colour/Heading: 顏色
+TagManager/Count/Heading: 計數
 TagManager/Icon/Heading: 圖示
 TagManager/Info/Heading: 資訊
 TagManager/Tag/Heading: 標籤
