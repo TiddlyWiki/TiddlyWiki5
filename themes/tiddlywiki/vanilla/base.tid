@@ -343,14 +343,6 @@ button svg, button img {
 	margin: 0;
 }
 
-.tc-tiddler-controls .tc-btn-text {
-	font-size: 0.5em;	
-}
-
-.tc-page-controls .tc-btn-text {
-	font-size: 0.7em;
-}
-
 .tc-btn-big-green {
 	display: inline-block;
 	padding: 8px;
