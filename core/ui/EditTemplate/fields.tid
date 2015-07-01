@@ -71,19 +71,21 @@ $:/config/EditTemplateFields/Visibility/$(currentField)$
 <div class="tc-block-dropdown tc-edit-type-dropdown">
 <$linkcatcher to="$:/temp/newfieldname">
 <div class="tc-dropdown-item">
-Personal<br>
+<<lingo Fields/Add/Dropdown/User>>
+</div>
 <$list filter="[!is[shadow]!is[system]fields[]sort[]] -created -creator -draft.of -draft.title -modified -modifier -tags -text -title -type"  variable="currentField">
 <$link to=<<currentField>>>
 <<currentField>>
 </$link>
 </$list>
-System<br>
+<div class="tc-dropdown-item">
+<<lingo Fields/Add/Dropdown/System>>
+</div>
 <$list filter="[fields[]sort[]] -[!is[shadow]!is[system]fields[]]" variable="currentField">
 <$link to=<<currentField>>>
 <<currentField>>
 </$link>
 </$list>
-</div>
 </$linkcatcher>
 </div>
 </$reveal>

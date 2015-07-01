@@ -115,10 +115,11 @@ and "open new window" <span title="$:/core/images/open-window">{{$:/core/images/
 * [[Avoid|https://github.com/Jermolene/TiddlyWiki5/commit/7b4153f87f8b4793fa055ec287a659ece3150d99]] glitch with autofocusing the search box in the plugin library
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/9f92c086c31a528a2ffb6bc9fed53d4cc016480f]] information about TiddlyDesktop to [[Releases]]
 * [[Stopped|https://github.com/Jermolene/TiddlyWiki5/commit/4a3a5bf1f06c4efb8449c860e90c214f707954f6]] autosaving after cancelling an edit
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/]] dropdown to edit template to allow existing field names to be selected
 
 !! Hackability Improvements
 
-* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/]] to ~KaTeX version 0.4.3, with the following editions since the previous 0.2.0 release that was distributed with TiddlyWiki 5.1.8:
+* [[Updated|https://github.com/Jermolene/TiddlyWiki5/commit/5f3587c38c2968ff63780552ef50b52d87ada3ca]] to ~KaTeX version 0.4.3, with the following editions since the previous 0.2.0 release that was distributed with TiddlyWiki 5.1.8:
 ** Added support for some `\begin`/`\end` environments, including support for `array`, `matrix`, `pmatrix`, `bmatrix`, `vmatrix`, and `Vmatrix`
 ** Added support for optional `\sqrt` arguments, e.g. `\sqrt[3]{x}`
 ** Add support for `\phantom`
