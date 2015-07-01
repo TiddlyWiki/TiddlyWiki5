@@ -25,6 +25,7 @@ PluginReloadWarning: Please save {{$:/core/ui/Buttons/save-wiki}} and reload {{$
 RecentChanges/DateFormat: DDth MMM YYYY
 SystemTiddler/Tooltip: This is a system tiddler
 TagManager/Colour/Heading: Colour
+TagManager/Count/Heading: Count
 TagManager/Icon/Heading: Icon
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
