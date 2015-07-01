@@ -44,6 +44,7 @@ $title$$(currentTiddler)$
 <tr>
 <th><<lingo Colour/Heading>></th>
 <th class="tc-tag-manager-tag"><<lingo Tag/Heading>></th>
+<th><<lingo Count/Heading>></th>
 <th><<lingo Icon/Heading>></th>
 <th><<lingo Info/Heading>></th>
 </tr>
@@ -51,6 +52,7 @@ $title$$(currentTiddler)$
 <tr>
 <td><$edit-text field="color" tag="input" type="color"/></td>
 <td><$transclude tiddler="$:/core/ui/TagTemplate"/></td>
+<td><$count filter="[all[current]tagging[]]"/></td>
 <td>
 <$macrocall $name="iconEditor" title={{!!title}}/>
 </td>
@@ -60,7 +62,7 @@ $title$$(currentTiddler)$
 </tr>
 <tr>
 <td></td>
-<td>
+<td colspan="4">
 <$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
 <table>
 <tbody>
@@ -70,9 +72,18 @@ $title$$(currentTiddler)$
 </table>
 </$reveal>
 </td>
+</tr>
+</$list>
+<tr>
+<td></td>
+<td>
+{{$:/core/ui/UntaggedTemplate}}
+</td>
+<td>
+<small class="tc-menu-list-count"><$count filter="[untagged[]!is[system]] -[tags[]]"/></small>
+</td>
 <td></td>
 <td></td>
 </tr>
-</$list>
 </tbody>
 </table>
