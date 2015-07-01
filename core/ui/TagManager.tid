@@ -62,7 +62,7 @@ $title$$(currentTiddler)$
 </tr>
 <tr>
 <td></td>
-<td>
+<td colspan="4">
 <$reveal state=<<qualifyTitle "$:/state/tag-manager/">> type="match" text="open" default="">
 <table>
 <tbody>
@@ -72,8 +72,6 @@ $title$$(currentTiddler)$
 </table>
 </$reveal>
 </td>
-<td></td>
-<td></td>
 </tr>
 </$list>
 <tr>
