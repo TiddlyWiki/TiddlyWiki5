@@ -25,6 +25,16 @@ To switch it on, visit ''Theme Tweaks'' in the $:/ControlPanel ''Appearance'' ta
 * Sidebar width:
 ** The width of the sidebar. Can be specified in pixels (eg ''350px''), a percentage (eg ''25%'') or other [[CSS unit|https://developer.mozilla.org/en/docs/Web/CSS/length]]
 
+!! Toolbar Button Style Setting
+
+A new setting in $:/ControlPanel ''Settings'' tab allows the toolbar button style to be chosen from the following options:
+
+* ''Borderless'', the existing style
+* ''Boxed'', which adds a thin border box around the button
+* ''Rounded'', which rounds the button corners and inverts the button colours
+
+Plugins can add new style options.
+
 !! New Tiddler Toolbar Button: "Open in new window"
 
 An experimental new tiddler toolbar button opens a single tiddler in a separate pop-up browser window. The tiddler will be dynamically updated just as in the main window. There are several uses:
