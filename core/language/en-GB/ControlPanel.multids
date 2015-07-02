@@ -82,6 +82,11 @@ Settings/NavigationHistory/Caption: Navigation History
 Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
 Settings/NavigationHistory/No/Description: Do not update history
 Settings/NavigationHistory/Yes/Description: Update history
+Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
+Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
+Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
+Settings/ToolbarButtonStyle/Styles/Boxed: Boxed
+Settings/ToolbarButtonStyle/Styles/Rounded: Rounded
 Settings/ToolbarButtons/Caption: Toolbar Buttons
 Settings/ToolbarButtons/Hint: Default toolbar button appearance:
 Settings/ToolbarButtons/Icons/Description: Include icon

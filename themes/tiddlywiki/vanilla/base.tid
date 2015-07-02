@@ -332,6 +332,53 @@ button svg, button img {
 	border: none;
 }
 
+.tc-btn-boxed {
+	font-size: 0.6em;
+	padding: 0.2em;
+	margin: 1px;
+	background: none;
+	border: 1px solid <<colour tiddler-controls-foreground>>;
+	border-radius: 0.25em;
+}
+
+html body.tc-body .tc-btn-boxed svg {
+	font-size: 1.6666em;
+}
+
+.tc-btn-boxed:hover {
+	background: <<colour foreground>>;
+	color: <<color background>>;
+}
+
+html body.tc-body .tc-btn-boxed:hover svg {
+	fill: <<color background>>;
+}
+
+.tc-btn-rounded {
+	font-size: 0.6em;
+	padding: 0.2em 0.4em 0.2em 0.4em;
+	margin: 1px;
+	border: 1px solid <<colour foreground>>;
+	background: <<colour foreground>>;
+	color: <<color background>>;
+	border-radius: 2em;
+}
+
+html body.tc-body .tc-btn-rounded svg {
+	font-size: 1.6666em;
+	fill: <<color background>>;
+}
+
+.tc-btn-rounded:hover {
+	border: 1px solid <<colour foreground>>;
+	background: <<colour background>>;
+	color: <<color foreground>>;
+}
+
+html body.tc-body .tc-btn-rounded:hover svg {
+	fill: <<color foreground>>;
+}
+
 .tc-btn-icon svg {
 	height: 1em;
 	width: 1em;
