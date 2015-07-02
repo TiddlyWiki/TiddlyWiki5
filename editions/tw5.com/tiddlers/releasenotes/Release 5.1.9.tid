@@ -29,9 +29,9 @@ To switch it on, visit ''Theme Tweaks'' in the $:/ControlPanel ''Appearance'' ta
 
 A new setting in $:/ControlPanel ''Settings'' tab allows the toolbar button style to be chosen from the following options:
 
-* ''Borderless'', the existing style
-* ''Boxed'', which adds a thin border box around the button
-* ''Rounded'', which rounds the button corners and inverts the button colours
+* <$button set="$:/config/Toolbar/ButtonClass" setTo="tc-btn-invisible">borderless</$button> the existing style
+* <$button set="$:/config/Toolbar/ButtonClass" setTo="tc-btn-boxed">boxed</$button>, which adds a thin border box around the button
+* <$button set="$:/config/Toolbar/ButtonClass" setTo="tc-btn-rounded">rounded</$button>, which rounds the button corners and inverts the button colours
 
 Plugins can add new style options.
 
