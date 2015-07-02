@@ -346,37 +346,38 @@ html body.tc-body .tc-btn-boxed svg {
 }
 
 .tc-btn-boxed:hover {
-	background: <<colour foreground>>;
-	color: <<color background>>;
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
 }
 
 html body.tc-body .tc-btn-boxed:hover svg {
-	fill: <<color background>>;
+	fill: <<colour background>>;
 }
 
 .tc-btn-rounded {
-	font-size: 0.6em;
-	padding: 0.2em 0.4em 0.2em 0.4em;
+	font-size: 0.5em;
+	line-height: 2;
+	padding: 0em 0.3em 0.2em 0.4em;
 	margin: 1px;
-	border: 1px solid <<colour foreground>>;
-	background: <<colour foreground>>;
-	color: <<color background>>;
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
 	border-radius: 2em;
 }
 
 html body.tc-body .tc-btn-rounded svg {
 	font-size: 1.6666em;
-	fill: <<color background>>;
+	fill: <<colour background>>;
 }
 
 .tc-btn-rounded:hover {
-	border: 1px solid <<colour foreground>>;
+	border: 1px solid <<colour muted-foreground>>;
 	background: <<colour background>>;
-	color: <<color foreground>>;
+	color: <<colour muted-foreground>>;
 }
 
 html body.tc-body .tc-btn-rounded:hover svg {
-	fill: <<color foreground>>;
+	fill: <<colour muted-foreground>>;
 }
 
 .tc-btn-icon svg {
