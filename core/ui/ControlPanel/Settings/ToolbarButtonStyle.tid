@@ -1,0 +1,12 @@
+title: $:/core/ui/ControlPanel/Settings/ToolbarButtonStyle
+tags: $:/tags/ControlPanel/Settings
+caption: {{$:/language/ControlPanel/Settings/ToolbarButtonStyle/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Settings/ToolbarButtonStyle/
+<$link to="$:/config/Toolbar/ButtonClass"><<lingo "Hint">></$link>
+
+<$select tiddler="$:/config/Toolbar/ButtonClass">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ToolbarButtonStyle]]">
+<option value={{!!text}}>{{!!caption}}</option>
+</$list>
+</$select>

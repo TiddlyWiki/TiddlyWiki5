@@ -10,7 +10,7 @@ tc-page-container tc-page-view-$(themeTitle)$ tc-language-$(languageTitle)$
 
 <$set name="tv-config-toolbar-text" value={{$:/config/Toolbar/Text}}>
 
-<$set name="tv-config-toolbar-class" value="tc-btn-invisible">
+<$set name="tv-config-toolbar-class" value={{$:/config/Toolbar/ButtonClass}}>
 
 <$set name="themeTitle" value={{$:/view}}>
 

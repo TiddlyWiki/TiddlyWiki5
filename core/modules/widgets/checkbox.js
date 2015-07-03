@@ -95,11 +95,12 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		fallbackFields = {text: ""},
 		newFields = {title: this.checkboxTitle},
 		hasChanged = false,
-		tagCheck = false;
+		tagCheck = false,
+		hasTag = tiddler && tiddler.hasTag(this.checkboxTag);
 	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
-		tagCheck = tiddler.hasTag(this.checkboxTag) === checked;
+		tagCheck = hasTag === checked;
 	} else {
-		tagCheck = tiddler.hasTag(this.checkboxTag) !== checked;
+		tagCheck = hasTag !== checked;
 	}
 	// Set the tag if specified
 	if(this.checkboxTag && (!tiddler || tagCheck)) {
