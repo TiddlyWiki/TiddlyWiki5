@@ -91,6 +91,11 @@ Settings/NavigationHistory/Caption: 历史记录导览
 Settings/NavigationHistory/Hint: 当导览到条目时，更新浏览器历史记录：
 Settings/NavigationHistory/No/Description: 不更新历史记录
 Settings/NavigationHistory/Yes/Description: 更新历史记录
+Settings/ToolbarButtonStyle/Caption: 工具栏按钮样式
+Settings/ToolbarButtonStyle/Hint: 选择工具栏按钮的样式:
+Settings/ToolbarButtonStyle/Styles/Borderless: 无边框
+Settings/ToolbarButtonStyle/Styles/Boxed: 方框
+Settings/ToolbarButtonStyle/Styles/Rounded: 圆形
 Settings/ToolbarButtons/Caption: 工具栏按钮
 Settings/ToolbarButtons/Hint: 默认的工具栏按钮外观：
 Settings/ToolbarButtons/Icons/Description: 包含图标
