@@ -11,6 +11,8 @@ Fields/Add/Button: ajouter
 Fields/Add/Name/Placeholder: nom du champ
 Fields/Add/Prompt: Ajouter un nouveau champ :
 Fields/Add/Value/Placeholder: valeur du champ
+Fields/Add/Dropdown/System: Champs système
+Fields/Add/Dropdown/User: Champs utilisateur
 Shadow/OverriddenWarning: Ce tiddler est une version modifiée d'un tiddler « shadow ». Pour revenir à la version par défaut, il vous suffit de supprimer ce tiddler.
 Shadow/Warning: Ceci est un tiddler « shadow ». Toute modification supplantera la version par défaut 
 Tags/Add/Button: ajouter
