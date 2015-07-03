@@ -8,6 +8,8 @@ Body/Preview/Button/Show: 显示预览
 Field/Remove/Caption: 删除栏位
 Field/Remove/Hint: 删除栏位
 Fields/Add/Button: 添加
+Fields/Add/Dropdown/System: 系统栏位
+Fields/Add/Dropdown/User: 使用者栏位
 Fields/Add/Name/Placeholder: 栏位名称
 Fields/Add/Prompt: 添加栏位：
 Fields/Add/Value/Placeholder: 栏位内容
