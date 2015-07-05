@@ -1,0 +1,6 @@
+tags: [[recent Operator]] [[Operator Examples]]
+title: recent Operator (Examples)
+type: text/vnd.tiddlywiki
+
+<<.operator-example 1 "[recent[1]]" "tiddlers modified yesterday and today">>
+<<.operator-example 2 "[recent:created[14]]" "tiddlers created within the last 14 days">>
