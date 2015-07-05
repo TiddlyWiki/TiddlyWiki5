@@ -18,8 +18,8 @@ Export our filter function
 exports.recent = function(source,operator,options) {
 	var results = [],
 		fieldName = operator.suffix || "modified",
-		targetTimeStamp = (new Date()).setHours(0,0,0,0) - 1000*60*60*24*(parseInt(operator.operand,10)||0);
-	var isRecent = function(dateField) {
+		targetTimeStamp = (new Date()).setHours(0,0,0,0) - 1000*60*60*24*(parseInt(operator.operand,10) || 0),
+		isRecent = function(dateField) {
 			return targetTimeStamp <= (new Date(dateField)).setHours(0,0,0,0);
 		};
 	source(function(tiddler,title) {
