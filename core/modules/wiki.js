@@ -705,22 +705,18 @@ exports.clearGlobalCache = function() {
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
-
-// Temporarily disable caching so that tweakParseTreeNode() works
-return initializer();
-
-//	this.caches = this.caches || Object.create(null);
-//	var caches = this.caches[title];
-//	if(caches && caches[cacheName]) {
-//		return caches[cacheName];
-//	} else {
-//		if(!caches) {
-//			caches = Object.create(null);
-//			this.caches[title] = caches;
-//		}
-//		caches[cacheName] = initializer();
-//		return caches[cacheName];
-//	}
+	this.caches = this.caches || Object.create(null);
+	var caches = this.caches[title];
+	if(caches && caches[cacheName]) {
+		return caches[cacheName];
+	} else {
+		if(!caches) {
+			caches = Object.create(null);
+			this.caches[title] = caches;
+		}
+		caches[cacheName] = initializer();
+		return caches[cacheName];
+	}
 };
 
 // Clear all caches associated with a particular tiddler
@@ -753,7 +749,7 @@ Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
 */
-exports.old_parseText = function(type,text,options) {
+exports.parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
@@ -777,7 +773,7 @@ exports.old_parseText = function(type,text,options) {
 /*
 Parse a tiddler according to its MIME type
 */
-exports.old_parseTiddler = function(title,options) {
+exports.parseTiddler = function(title,options) {
 	options = $tw.utils.extend({},options);
 	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
 		tiddler = this.getTiddler(title),
@@ -786,42 +782,8 @@ exports.old_parseTiddler = function(title,options) {
 			if(tiddler.hasField("_canonical_uri")) {
 				options._canonical_uri = tiddler.fields._canonical_uri;
 			}
-			return self.old_parseText(tiddler.fields.type,tiddler.fields.text,options);
+			return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
 		}) : null;
-};
-
-var tweakMacroDefinition = function(nodeList) {
-	if(nodeList && nodeList[0] && nodeList[0].type === "macrodef") {
-		nodeList[0].type = "set";
-		nodeList[0].attributes = {
-			name: {type: "string", value: nodeList[0].name},
-			value: {type: "string", value: nodeList[0].text}
-		};
-		nodeList[0].children = nodeList.slice(1);
-		nodeList.splice(1,nodeList.length-1);
-		tweakMacroDefinition(nodeList[0].children);
-	}
-};
-
-var tweakParser = function(parser) {
-	// Move any macro definitions to contain the body tree
-	tweakMacroDefinition(parser.tree);
-};
-
-exports.parseText = function(type,text,options) {
-	var parser = this.old_parseText(type,text,options);
-	if(parser) {
-		tweakParser(parser);
-	}
-	return parser;
-};
-
-exports.parseTiddler = function(title,options) {
-	var parser = this.old_parseTiddler(title,options);
-	if(parser) {
-		tweakParser(parser);
-	}
-	return parser;
 };
 
 exports.parseTextReference = function(title,field,index,options) {

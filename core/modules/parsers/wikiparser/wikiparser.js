@@ -48,12 +48,13 @@ var WikiParser = function(type,text,options) {
 	this.blockRules = this.instantiateRules(this.blockRuleClasses,"block",0);
 	this.inlineRules = this.instantiateRules(this.inlineRuleClasses,"inline",0);
 	// Parse any pragmas
-	this.tree = this.parsePragmas();
+	this.tree = [];
+	var topBranch = this.parsePragmas();
 	// Parse the text into inline runs or blocks
 	if(options.parseAsInline) {
-		this.tree.push.apply(this.tree,this.parseInlineRun());
+		topBranch.push.apply(topBranch,this.parseInlineRun());
 	} else {
-		this.tree.push.apply(this.tree,this.parseBlocks());
+		topBranch.push.apply(topBranch,this.parseBlocks());
 	}
 	// Return the parse tree
 };
@@ -122,7 +123,7 @@ WikiParser.prototype.findNextMatch = function(rules,startPos) {
 Parse any pragmas at the beginning of a block of parse text
 */
 WikiParser.prototype.parsePragmas = function() {
-	var tree = [];
+	var currentTreeBranch = this.tree;
 	while(true) {
 		// Skip whitespace
 		this.skipWhitespace();
@@ -137,9 +138,15 @@ WikiParser.prototype.parsePragmas = function() {
 			break;
 		}
 		// Process the pragma rule
-		tree.push.apply(tree,nextMatch.rule.parse());
+		var subTree = nextMatch.rule.parse();
+		if(subTree.length > 0) {
+			// Quick hack; we only cope with a single parse tree node being returned, which is true at the moment
+			currentTreeBranch.push.apply(currentTreeBranch,subTree);
+			subTree[0].children = [];
+			currentTreeBranch = subTree[0].children;
+		}
 	}
-	return tree;
+	return currentTreeBranch;
 };
 
 /*
