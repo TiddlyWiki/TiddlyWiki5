@@ -621,18 +621,20 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 		tiddler = this.getTiddler(tiddler);	
 	}
 	if(tiddler && tiddler.fields.text) {
-		switch(tiddler.fields.type) {
-			case "application/json":
-				// JSON tiddler
-				try {
-					data = JSON.parse(tiddler.fields.text);
-				} catch(ex) {
-					return defaultData;
-				}
-				return data;
-			case "application/x-tiddler-dictionary":
-				return $tw.utils.parseFields(tiddler.fields.text);
-		}
+		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
+			switch(tiddler.fields.type) {
+				case "application/json":
+					// JSON tiddler
+					try {
+						data = JSON.parse(tiddler.fields.text);
+					} catch(ex) {
+						return defaultData;
+					}
+					return data;
+				case "application/x-tiddler-dictionary":
+					return $tw.utils.parseFields(tiddler.fields.text);
+			}
+		});
 	}
 	return defaultData;
 };

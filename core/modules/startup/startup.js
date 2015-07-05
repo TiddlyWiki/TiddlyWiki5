@@ -18,7 +18,7 @@ exports.after = ["load-modules"];
 exports.synchronous = true;
 
 // Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION = false;
+var PERFORMANCE_INSTRUMENTATION = true;
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
