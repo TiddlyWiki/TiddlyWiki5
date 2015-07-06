@@ -21,3 +21,6 @@ The field mangler widget displays any contained content, and responds to [[Messa
 
 |!Attribute |!Description |
 |tiddler |Title of the tiddler to manipulate (defaults to the [[current tiddler|Current Tiddler]]) |
+
+<<.widget-examples "FieldMangler">>
+
