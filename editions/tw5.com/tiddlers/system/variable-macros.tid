@@ -5,6 +5,7 @@ tags: $:/tags/Macro
 
 \define .variable-examples(v,text:"Examples") <$link to="$v$ Variable (Examples)">$text$</$link>
 \define .macro-examples(m,text:"Examples") <$link to="$m$ Macro (Examples)">$text$</$link>
+\define .widget-examples(w,text:"Examples") <$link to="$w$ Widget (Examples)">$text$</$link>
 
 \define .js-macro-link(_) [[$_$|http://tiddlywiki.com/dev/index.html#JavaScript%20Macros]]
 
