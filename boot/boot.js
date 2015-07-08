@@ -910,7 +910,10 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all tiddler titles
 	this.each = function(callback) {
-		for(var title in tiddlers) {
+		var titles = Object.keys(tiddlers),
+			index,titlesLength,title;
+		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			title = titles[index];
 			callback(tiddlers[title],title);
 		}
 	};
@@ -922,7 +925,10 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all shadow tiddler titles
 	this.eachShadow = function(callback) {
-		for(var title in shadowTiddlers) {
+		var titles = Object.keys(shadowTiddlers),
+			index,titlesLength,title;
+		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			title = titles[index];
 			var shadowInfo = shadowTiddlers[title];
 			callback(shadowInfo.tiddler,title);
 		}
@@ -930,10 +936,15 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all tiddlers and then the shadows
 	this.eachTiddlerPlusShadows = function(callback) {
-		for(var title in tiddlers) {
+		var titles = Object.keys(tiddlers),
+			index,titlesLength,title;
+		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			title = titles[index];
 			callback(tiddlers[title],title);
 		}
-		for(var title in shadowTiddlers) {
+		titles = Object.keys(shadowTiddlers);
+		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			title = titles[index];
 			if(!Object.prototype.hasOwnProperty.call(tiddlers,title)) {
 				var shadowInfo = shadowTiddlers[title];
 				callback(shadowInfo.tiddler,title);
@@ -943,7 +954,10 @@ $tw.Wiki = function(options) {
 
 	// Iterate through all the shadows and then the tiddlers
 	this.eachShadowPlusTiddlers = function(callback) {
-		for(var title in shadowTiddlers) {
+		var titles = Object.keys(shadowTiddlers),
+			index,titlesLength,title;
+		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			title = titles[index];
 			if(Object.prototype.hasOwnProperty.call(tiddlers,title)) {
 				callback(tiddlers[title],title);
 			} else {
@@ -951,7 +965,9 @@ $tw.Wiki = function(options) {
 				callback(shadowInfo.tiddler,title);
 			}
 		}
-		for(var title in tiddlers) {
+		titles = Object.keys(tiddlers);
+		for(index = 0, titlesLength = titles.length; index < titlesLength; index++) {
+			title = titles[index];
 			if(!Object.prototype.hasOwnProperty.call(shadowTiddlers,title)) {
 				callback(tiddlers[title],title);
 			}
