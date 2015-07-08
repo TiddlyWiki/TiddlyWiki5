@@ -777,7 +777,7 @@ Parse a tiddler according to its MIME type
 */
 exports.parseTiddler = function(title,options) {
 	options = $tw.utils.extend({},options);
-	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
+	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
 	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
