@@ -301,7 +301,7 @@ Command.prototype.execute = function() {
 	console.log("Serving on " + host + ":" + port);
 	console.log("(press ctrl-C to exit)");
 	// Warn if required plugins are missing
-	if($tw.boot.wikiInfo.plugins.indexOf("tiddlywiki/tiddlyweb") === -1 || $tw.boot.wikiInfo.plugins.indexOf("tiddlywiki/filesystem") === -1) {
+	if(!$tw.wiki.getTiddler("$:/plugins/tiddlywiki/tiddlyweb") || !$tw.wiki.getTiddler("$:/plugins/tiddlywiki/filesystem")) {
 		$tw.utils.warning("Warning: Plugins required for client-server operation (\"tiddlywiki/filesystem\" and \"tiddlywiki/tiddlyweb\") are missing from tiddlywiki.info file");
 	}
 	return null;
