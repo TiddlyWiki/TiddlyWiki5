@@ -577,7 +577,7 @@ exports.sortByList = function(array,listTitle) {
 };
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
-	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerData(title);
+	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerDataCached(title);
 	if(bundleInfo && bundleInfo.tiddlers) {
 		var subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
 		if(subTiddler) {
@@ -613,6 +613,29 @@ Other types currently just return null.
 
 titleOrTiddler: string tiddler title or a tiddler object
 defaultData: default data to be returned if the tiddler is missing or doesn't contain data
+
+Note that the same value is returned for repeated calls for the same tiddler data. The value is frozen to prevent modification; otherwise modifications would be visible to all callers
+*/
+exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
+	var self = this,
+		tiddler = titleOrTiddler;
+	if(!(tiddler instanceof $tw.Tiddler)) {
+		tiddler = this.getTiddler(tiddler);	
+	}
+	if(tiddler) {
+		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
+			// Return the frozen value
+			var value = self.getTiddlerData(tiddler.fields.title,defaultData);
+			$tw.utils.deepFreeze(value);
+			return value;
+		});
+	} else {
+		return defaultData;
+	}
+};
+
+/*
+Alternative, uncached version of getTiddlerDataCached(). The return value can be mutated freely and reused
 */
 exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
@@ -621,20 +644,18 @@ exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 		tiddler = this.getTiddler(tiddler);	
 	}
 	if(tiddler && tiddler.fields.text) {
-		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
-			switch(tiddler.fields.type) {
-				case "application/json":
-					// JSON tiddler
-					try {
-						data = JSON.parse(tiddler.fields.text);
-					} catch(ex) {
-						return defaultData;
-					}
-					return data;
-				case "application/x-tiddler-dictionary":
-					return $tw.utils.parseFields(tiddler.fields.text);
-			}
-		});
+		switch(tiddler.fields.type) {
+			case "application/json":
+				// JSON tiddler
+				try {
+					data = JSON.parse(tiddler.fields.text);
+				} catch(ex) {
+					return defaultData;
+				}
+				return data;
+			case "application/x-tiddler-dictionary":
+				return $tw.utils.parseFields(tiddler.fields.text);
+		}
 	}
 	return defaultData;
 };

@@ -171,6 +171,17 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 	return result;
 };
 
+exports.deepFreeze = function deepFreeze(object) {
+	var property, key;
+	Object.freeze(object);
+	for(key in object) {
+		property = object[key];
+		if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
+			deepFreeze(property);
+		}
+	}
+};
+
 exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };

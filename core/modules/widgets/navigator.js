@@ -539,7 +539,7 @@ NavigatorWidget.prototype.handleImportTiddlersEvent = function(event) {
 NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	var self = this,
 		importTiddler = this.wiki.getTiddler(event.param),
-		importData = this.wiki.getTiddlerData(event.param,{tiddlers: {}}),
+		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 		importReport = [];
 	// Add the tiddlers to the store
 	importReport.push("The following tiddlers were imported:\n");

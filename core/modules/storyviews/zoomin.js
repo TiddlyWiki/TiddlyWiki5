@@ -18,7 +18,7 @@ var ZoominListView = function(listWidget) {
 	var self = this;
 	this.listWidget = listWidget;
 	// Get the index of the tiddler that is at the top of the history
-	var history = this.listWidget.wiki.getTiddlerData(this.listWidget.historyTitle,[]),
+	var history = this.listWidget.wiki.getTiddlerDataCached(this.listWidget.historyTitle,[]),
 		targetTiddler;
 	if(history.length > 0) {
 		targetTiddler = history[history.length-1].title;

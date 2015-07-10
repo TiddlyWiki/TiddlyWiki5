@@ -43,7 +43,7 @@ Command.prototype.execute = function() {
 		basepath = this.params[2],
 		skinnyListTitle = this.params[3];
 	// Get the container tiddler as data
-	var containerData = self.commander.wiki.getTiddlerData(containerTitle,undefined);
+	var containerData = self.commander.wiki.getTiddlerDataCached(containerTitle,undefined);
 	if(!containerData) {
 		return "'" + containerTitle + "' is not a tiddler bundle";
 	}
