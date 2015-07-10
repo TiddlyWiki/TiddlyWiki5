@@ -1,0 +1,10 @@
+created: 20150709150749755
+modified: 20150709150806031
+tags: Mechanisms
+title: Filters involved in saving of single file eddition
+type: text/vnd.tiddlywiki
+
+There are two filters controlling saving TiddlyWiki as a standalone file.
+
+* $:/config/SaverFilter determines which modified tiddlers trigger the dirty state
+* $:/core/save/all determines which tiddlers are saved in the file
