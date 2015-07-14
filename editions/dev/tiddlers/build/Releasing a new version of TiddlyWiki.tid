@@ -24,4 +24,4 @@ title: Releasing a new version of TiddlyWiki
 
 # Preparation for the next release:
 ## Adjust version number in [[$:/config/OfficialPluginLibrary]]
-## Adjust version number in https://github.com/Jermolene/build.jermolene.github.io in `bld.sh` and `make-library-bld.sh`
+## Adjust version number in https://github.com/Jermolene/build.jermolene.github.io in `prerelease-bld.sh`, `bld.sh` and `make-library-bld.sh`
