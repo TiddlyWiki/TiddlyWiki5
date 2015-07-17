@@ -36,16 +36,16 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
 	// Render it into a span
 	var span = this.document.createElement("span");
-	// try {
+	try {
 		if(!this.document.isTiddlyWikiFakeDom) {
 			katex.render(text,span);
 		} else {
 			span.innerHTML = katex.renderToString(text);
 		}
-	// } catch(ex) {
-		// span.className = "tc-error";
-		// span.textContent = ex;
-	// }
+	} catch(ex) {
+		span.className = "tc-error";
+		span.textContent = ex;
+	}
 	// Insert it into the DOM
 	parent.insertBefore(span,nextSibling);
 	this.domNodes.push(span);
