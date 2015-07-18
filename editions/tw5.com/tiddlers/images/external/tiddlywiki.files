@@ -1,7 +1,7 @@
 {
 	"tiddlers": [
 		{
-			"file": "../../../../../languages/ca-ES/icon.tid",
+			"tiddlerFile": "../../../../../languages/ca-ES/icon.tid",
 			"fields": {
 				"title": "Language Icon: ca-ES",
 				"language": "ca-ES",
@@ -9,7 +9,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/cs-CZ/icon.tid",
+			"tiddlerFile": "../../../../../languages/cs-CZ/icon.tid",
 			"fields": {
 				"title": "Language Icon: cs-CZ",
 				"language": "cs-CZ",
@@ -17,7 +17,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/da-DK/icon.tid",
+			"tiddlerFile": "../../../../../languages/da-DK/icon.tid",
 			"fields": {
 				"title": "Language Icon: da-DK",
 				"language": "da-DK",
@@ -25,7 +25,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/de-AT/icon.tid",
+			"tiddlerFile": "../../../../../languages/de-AT/icon.tid",
 			"fields": {
 				"title": "Language Icon: de-AT",
 				"language": "de-AT",
@@ -33,7 +33,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/de-DE/icon.tid",
+			"tiddlerFile": "../../../../../languages/de-DE/icon.tid",
 			"fields": {
 				"title": "Language Icon: de-DE",
 				"language": "de-DE",
@@ -41,7 +41,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/el-GR/icon.tid",
+			"tiddlerFile": "../../../../../languages/el-GR/icon.tid",
 			"fields": {
 				"title": "Language Icon: el-GR",
 				"language": "el-GR",
@@ -49,7 +49,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/es-ES/icon.tid",
+			"tiddlerFile": "../../../../../languages/es-ES/icon.tid",
 			"fields": {
 				"title": "Language Icon: es-ES",
 				"language": "es-ES",
@@ -57,7 +57,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/fr-FR/icon.tid",
+			"tiddlerFile": "../../../../../languages/fr-FR/icon.tid",
 			"fields": {
 				"title": "Language Icon: fr-FR",
 				"language": "fr-FR",
@@ -65,7 +65,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/hi-IN/icon.tid",
+			"tiddlerFile": "../../../../../languages/hi-IN/icon.tid",
 			"fields": {
 				"title": "Language Icon: hi-IN",
 				"language": "hi-IN",
@@ -73,7 +73,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/ia-IA/icon.tid",
+			"tiddlerFile": "../../../../../languages/ia-IA/icon.tid",
 			"fields": {
 				"title": "Language Icon: ia-IA",
 				"language": "ia-IA",
@@ -81,7 +81,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/it-IT/icon.tid",
+			"tiddlerFile": "../../../../../languages/it-IT/icon.tid",
 			"fields": {
 				"title": "Language Icon: it-IT",
 				"language": "it-IT",
@@ -89,7 +89,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/ja-JP/icon.tid",
+			"tiddlerFile": "../../../../../languages/ja-JP/icon.tid",
 			"fields": {
 				"title": "Language Icon: ja-JP",
 				"language": "ja-JP",
@@ -97,7 +97,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/nl-NL/icon.tid",
+			"tiddlerFile": "../../../../../languages/nl-NL/icon.tid",
 			"fields": {
 				"title": "Language Icon: nl-NL",
 				"language": "nl-NL",
@@ -105,7 +105,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/pa-IN/icon.tid",
+			"tiddlerFile": "../../../../../languages/pa-IN/icon.tid",
 			"fields": {
 				"title": "Language Icon: pa-IN",
 				"language": "pa-IN",
@@ -113,7 +113,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/pt-PT/icon.tid",
+			"tiddlerFile": "../../../../../languages/pt-PT/icon.tid",
 			"fields": {
 				"title": "Language Icon: pt-PT",
 				"language": "pt-PT",
@@ -121,7 +121,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/ru-RU/icon.tid",
+			"tiddlerFile": "../../../../../languages/ru-RU/icon.tid",
 			"fields": {
 				"title": "Language Icon: ru-RU",
 				"language": "ru-RU",
@@ -129,7 +129,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/sk-SK/icon.tid",
+			"tiddlerFile": "../../../../../languages/sk-SK/icon.tid",
 			"fields": {
 				"title": "Language Icon: sk-SK",
 				"language": "sk-SK",
@@ -137,7 +137,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/zh-Hans/icon.tid",
+			"tiddlerFile": "../../../../../languages/zh-Hans/icon.tid",
 			"fields": {
 				"title": "Language Icon: zh-Hans",
 				"language": "zh-Hans",
@@ -145,7 +145,7 @@
 			}
 		},
 		{
-			"file": "../../../../../languages/zh-Hant/icon.tid",
+			"tiddlerFile": "../../../../../languages/zh-Hant/icon.tid",
 			"fields": {
 				"title": "Language Icon: zh-Hant",
 				"language": "zh-Hant",

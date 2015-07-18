@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20141113122142639
+modified: 20150718104424501
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -76,7 +76,7 @@ For example:
 
 All the TiddlerFiles in the `tiddlers` folder are read into the wiki at startup. Sub-folders are scanned recursively for TiddlerFiles.
 
-Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` JSON file that overrides the default processing for that folder. The file format is illustrated with this example from the D3 plugin:
+Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` JSON file that overrides the default processing for that folder. The file format is illustrated with this example:
 
 ```
 {
@@ -98,6 +98,12 @@ Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` 
 				"title": "$:/plugins/tiddlywiki/d3/d3.layout.cloud.js",
 				"module-type": "library"
 			}
+		},
+		{
+			"tiddlerFile": "local/mytiddler.tid",
+			"fields": {
+				"title": "A different title"
+			}
 		}
 	]
 }
@@ -105,6 +111,8 @@ Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` 
 
 The JSON data consists of an object with a `tiddlers` property that contains an array of information about each tiddler to be loaded into the wiki. That information consists of:
 
-* `file`: the relative or absolute path to the file to include
+* The relative or absolute path to the file to include as either:
+** `file`: a plain file that will not be deserialised
+** `tiddlerFile`: a tiddler file that will be deserialised to extract the tiddlers
 * `fields`: an object containing fields that override any provided in the tiddler file
 * `prefix` & `suffix`: (optional) specify strings to be prefixed and suffixed to the tiddler file text content

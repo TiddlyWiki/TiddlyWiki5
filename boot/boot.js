@@ -1464,19 +1464,30 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 					var type = tidInfo.fields.type || "text/plain",
 						typeInfo = $tw.config.contentTypeInfo[type],
-						pathname = path.resolve(filepath,tidInfo.file),
-						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8"),
-						fileTiddlers = $tw.wiki.deserializeTiddlers(path.extname(pathname),text) || [];
-					$tw.utils.each(fileTiddlers,function(tiddler) {
-						$tw.utils.extend(tiddler,tidInfo.fields);
+						pathname = path.resolve(filepath,tidInfo.file || tidInfo.tiddlerFile),
+						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
+					if(tidInfo.tiddlerFile) {
+						var fileTiddlers = $tw.wiki.deserializeTiddlers(path.extname(pathname),text) || [];
+						$tw.utils.each(fileTiddlers,function(tiddler) {
+							$tw.utils.extend(tiddler,tidInfo.fields);
+							if(tidInfo.prefix) {
+								tiddler.text = tidInfo.prefix + tiddler.text;
+							}
+							if(tidInfo.suffix) {
+								tiddler.text = tiddler.text + tidInfo.suffix;
+							}
+						});
+						tiddlers.push({tiddlers: fileTiddlers});
+					} else {
 						if(tidInfo.prefix) {
-							tiddler.text = tidInfo.prefix + tiddler.text;
+							text = tidInfo.prefix + text;
 						}
 						if(tidInfo.suffix) {
-							tiddler.text = tiddler.text + tidInfo.suffix;
+							text = text + tidInfo.suffix;
 						}
-					});
-					tiddlers.push({tiddlers: fileTiddlers});
+						tidInfo.fields.text = text;
+						tiddlers.push({tiddlers: [tidInfo.fields]});
+					}
 				});
 			} else {
 				// If not, read all the files in the directory
