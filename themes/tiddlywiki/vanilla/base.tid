@@ -578,13 +578,11 @@ button.tc-untagged-label {
 	width: 1em;
 }
 
-.tc-page-controls svg,
-.tc-search svg {
+.tc-page-controls svg {
 	fill: <<colour sidebar-controls-foreground>>;
 }
 
-.tc-page-controls button:hover svg, .tc-page-controls a:hover svg,
-.tc-search button:hover svg, .tc-search a:hover svg {
+.tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
@@ -808,7 +806,8 @@ button.tc-untagged-label {
 	margin-left:5px;
 }
 
-.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img,
+.tc-search button svg, .tc-search a svg {
 	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
 }
@@ -818,7 +817,8 @@ button.tc-untagged-label {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tc-tiddler-controls button.tc-btn-invisible:hover svg {
+.tc-tiddler-controls button.tc-btn-invisible:hover svg,
+.tc-search button:hover svg, .tc-search a:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
