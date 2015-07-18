@@ -1,0 +1,16 @@
+tags: $:/tags/SideBar
+title: Preview
+
+\define thisMakePreview()
+<$list filter='[tag[Section Display]removeprefix[$:/display/]addprefix[$:/settings/$(ThisResume)$/]sort[order]!show[false]removeprefix[$:/settings/$(ThisResume)$/]addprefix[$:/display/]]'>
+<$transclude mode=block/>
+</$list>
+\end
+
+<div class='tc-tiddly-frame' style='background:white;max-width:700px;border:solid black 1px;color:black'>
+<div style='max-width:689px;margin-left:20px'>
+<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+<<thisMakePreview>>
+</$vars>
+</div>
+</div>

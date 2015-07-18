@@ -1,0 +1,6 @@
+section: Resume Title
+tags: [[Section Display]]
+template: $:/template/ResumeTitleTemplate
+title: $:/display/Resume Title Display
+
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>

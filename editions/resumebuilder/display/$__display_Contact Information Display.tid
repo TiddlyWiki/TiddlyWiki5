@@ -1,0 +1,6 @@
+section: Contact Information
+tags: [[Section Display]]
+template: $:/template/ContactInformationTemplate
+title: $:/display/Contact Information Display
+
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>

@@ -1,0 +1,64 @@
+title: Making a new section
+
+Each section needs the following tiddlers:
+
+#A display tiddler
+#A template tiddler (possibly more than one)
+#An input tiddler (at least one, up to one per template tiddler)
+#An options tiddler (optional and recommended, up to one per template tiddler)
+
+You can have multiple template tiddlers that use the same input and options tiddlers.
+
+!!Display tiddler
+Create a tiddler tagged with `Section Display`, I have been naming the tiddlers in the form `$:/display/(section name) Display`, like [[$:/display/Resume Title Display]] and [[$:/display/Objective Display]]. Following this convention isn't strictly necessary, but you should use it to remain consistent with other sections.
+
+In the text field put 
+
+```
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>
+```
+
+and nothing else. Additionally, these tiddlers need to have 1 additional field:
+
+*`section` - the section name (in the ones I have created it is the title of the tiddler you are creating without the Display part at the end, so `Resume Title` and `Objective`)
+
+!!Template tiddler(s)
+Create a template tiddler (or multiple templates if you want) for that section. See [[$:/template/ResumeTitleTemplate]] or [[$:/template/EducationTemplate]], or any of the other tiddlers that start with `$:/template/` for examples.
+
+These tiddlers need to have two fields:
+
+*`section_name` - the name of the section that the template is for, this must be the same as the value in the `section` field of the section display template you made.
+*`input_tiddler` - the name of the tiddler that has the form to take input for this section.
+*`template_name` - an optional field containing a more convenient name for the template than the tiddler title. If it exists this will be displayed for the template selection.
+*`options_tiddler` - The name of the options tiddler for this template, if any.
+
+!!Input Tiddler
+
+A tiddler that contains the input from for adding entries to the section, and if desired options for the section. The title of this tiddler should start with `$:/input/`, this is not strictly required, but it keeps everything consistent.
+
+I don't have any real help for this one, what you do will be dependent on what you want in the section. Look at the examples here, the tiddlers [[$:/input/Resume Title]], [[$:/input/ObjectiveInput1]], [[$:/input/ObjectiveInput2]], [[$:/input/Education]] and [[$:/input/Skills and Expertise]] are examples of what you would make for this.
+
+!!Options tiddler
+
+And finally, if you wish, you can make an options tiddler for the section you are adding. You would change the fonts used and list types and similar things here. This tiddler should be tagged with `Options` and all of the settings should be stored following the rules below. Other than that there aren't any restrictions on how to make one. Some examples are [[Education Options]] and [[Previous Employment Options]].
+
+All settings and state information about each section should be stored in a tiddler named in the form `$:/settings/(ResumeName)/(SectionName)`
+
+For each item within a section all state and configuration information should be kept in a tiddler with a name in the form `$:/settings/(ResumeName)/(SectionName)/(ItemName)`
+
+These need to be different than the tiddlers holding the data that have names in the form `$:/data/(SectionName)` or `$:/data/(SectionName)/(ItemName)`
+
+These tiddlers hold the information about which items/sections are visible in each resume. See the list of system tiddlers for many examples. You don't need to make those tiddlers, you just need to make your input and settings tiddlers create or modify the correct tiddler name and they will be created. See the examples.
+
+''Important note:''
+
+If you are going to make your own section, in order to allow the items to be in different orders in different resumes you will need to use this wonderful filter
+(Thanks to Eric for pointing out that my original version could be shortened):
+
+`[prefix[$:/data/(SectionName)/]removeprefix[$:/data/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/]addprefix[$:/data/]]`
+
+<!--
+`[prefix[$:/data/(SectionName)/]removeprefix[$:/data/(SectionName)/]addprefix[$:/settings/$(ThisResumeName)$/(SectionName)/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/(SectionName)/]addprefix[$:/data/(SectionName)/]]`
+-->
+
+you need to manually replace `(SectionName)` with the name of the section you are adding, and you need to put `<$vars ThisResumeName={{$:/settings/Global!!selected_resume}}>` and `</$vars>` around the macro that contains the list widget with the above filter. Look at the examples and it will hopefully make more sense. PreviousEmploymentTemplate is one example.

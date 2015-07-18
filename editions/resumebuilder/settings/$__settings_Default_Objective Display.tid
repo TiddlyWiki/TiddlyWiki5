@@ -1,0 +1,5 @@
+order: 3
+show: true
+template: $:/template/ObjectiveTemplate2
+title: $:/settings/Default/Objective Display
+

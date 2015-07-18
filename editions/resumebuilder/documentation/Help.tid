@@ -1,0 +1,41 @@
+tags: 
+title: Help
+
+Clicking on [[Resume Wizard]] at the top is a good place to start.
+
+To save your work, either click on the {{$:/core/ui/Buttons/save-wiki}} button to the right or the Save button at the top of the screen. The button to the right will turn red when there are unsaved changes.
+
+How it works:
+
+There are buttons along the top that bring you to the different things you can do with the resume builder. To the right you should see a preview of the completed resume.
+
+*Resume Wizard - A wizard that guides you through a sequence of steps to create a resume.
+*Edit Existing Items - An interface to edit already entered information
+*Layout Options - Options for changing the order of the sections, which sections are visible, and the templates used for each section.
+*Resume Options - Available options for the resume output. The `Layout Options` tab has options for which sections are included in the resume as well as their order and the templates used, the other tabs are for configuring each section individually.
+*Preview - Shows a preview of the result, this is also shown on the right side of the screen by default.
+*Help - Displays this information.
+*Save - saves your changes
+
+<!--
+There is a sequence of tiddlers that are input forms that guide you through entering your information for each section. These tiddlers are then displayed in the tiddler 'Resume Wizard' and you can go through them in sequence to fill out each form.
+
+At the end templates are used to display all of the information in a reasonable format.
+
+You can go to the [[Resume Wizard]] or to [[Edit Existing Items]].
+
+To set if a section is displayed, change the order of the sections on the resume, or to change the templates used go to [[Layout Options]]. The order set in that tiddler also determines the order of the sections in the [[Resume Wizard]].
+-->
+
+Things to add:
+
+*The section/item order options should get a better way to change the order
+*There should be options for other templates for each section
+*options for fonts and sizes and so on. Using a settings system like I have for the contacts database would be a good idea.
+*More section options
+*A reasonable way for users to create custom sections without requiring knowledge of wikitext. This could turn into something rather complex by itself if I let it. I will try to avoid that.
+*Other user options?
+
+Other documentation:
+
+[[Making a new section]]
