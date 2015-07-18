@@ -1,0 +1,5 @@
+order: 6
+show: true
+template: $:/template/EducationTemplate
+title: $:/settings/Default/Education Display
+

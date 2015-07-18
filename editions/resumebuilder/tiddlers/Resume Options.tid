@@ -1,0 +1,4 @@
+tags: 
+title: Resume Options
+
+<<tabs "[[Layout Options]][tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]!show[false]get[template]get[options_tiddler]]" [[Layout Options]]>>

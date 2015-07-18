@@ -1,0 +1,10 @@
+tags: 
+title: Preview and Set Options
+
+<$transclude tiddler='Resume Options' mode=block/>
+
+---
+
+---
+
+<$transclude tiddler='Preview' mode=block/>

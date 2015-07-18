@@ -1,0 +1,9 @@
+tags: $:/tags/TopLeftBar
+title: Top Bar Buttons
+
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Resume Wizard">Resume Wizard</$button>
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Edit Existing Items">Edit Existing Items</$button>
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Resume Options">Resume Options</$button>
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Preview">Preview</$button>
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Help">Help</$button>
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' message='tm-save-wiki'>Save</$button>
