@@ -1,3 +1,5 @@
+created: 20150719172021101
+modified: 20150719172244848
 tags: $:/tags/TopLeftBar
 title: Top Bar Buttons
 
@@ -6,4 +8,7 @@ title: Top Bar Buttons
 <$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Resume Options">Resume Options</$button>
 <$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Preview">Preview</$button>
 <$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' to="Help">Help</$button>
+<$tiddler tiddler=Preview>
+<$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' message="tm-open-window">Print</$button>
+</$tiddler>
 <$button style='border:solid 1px;height:1.25em;vertical-align:top;line-height:0.025em;' message='tm-save-wiki'>Save</$button>

@@ -1,4 +1,6 @@
 caption: Skills and Expertise
+created: 20150719182443671
+modified: 20150719182521401
 tags: Section
 title: $:/input/Skills and Expertise
 
@@ -19,7 +21,7 @@ Add Skill
 </$button>
 </$set>
 
-!!Current Listing:
+<h2>Current Listing:</h2>
 
 <table style='width:100%'>
 <tr><th></th><th>Visible</th><th>Entry</th><th>Order</th></tr>

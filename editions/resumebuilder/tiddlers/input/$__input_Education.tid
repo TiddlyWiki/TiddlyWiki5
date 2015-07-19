@@ -1,4 +1,6 @@
 caption: Education
+created: 20150719182635535
+modified: 20150719182642114
 tags: Section
 title: $:/input/Education
 
@@ -52,7 +54,7 @@ Add Education
 </$set>
 </$set>
 
-!!Current list:
+<h2>Current list:</h2>
 
 <$vars ThisResume={{$:/settings/Global!!selected_resume}}>
 <table style='width:100%'>

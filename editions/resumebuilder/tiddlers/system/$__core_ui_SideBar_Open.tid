@@ -1,0 +1,13 @@
+caption: {{$:/language/SideBar/Open/Caption}}
+created: 20150719185529309
+modified: 20150719185529309
+title: $:/core/ui/SideBar/Open
+
+\define lingo-base() $:/language/CloseAll/
+<$list filter="[list[$:/StoryList]]" history="$:/HistoryList" storyview="pop">
+
+<$button message="tm-close-tiddler" tooltip={{$:/language/Buttons/Close/Hint}} aria-label={{$:/language/Buttons/Close/Caption}} class="tc-btn-invisible tc-btn-mini">&times;</$button> <$link to={{!!title}}><$view field="title"/></$link>
+
+</$list>
+
+<$button message="tm-close-all-tiddlers" class="tc-btn-invisible tc-btn-mini"><<lingo Button>></$button>
