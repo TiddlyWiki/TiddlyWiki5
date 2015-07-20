@@ -1,16 +1,10 @@
+created: 20150720171244344
+modified: 20150720171304274
 tags: $:/tags/SideBar
 title: Preview
 
-\define thisMakePreview()
-<$list filter='[tag[Section Display]removeprefix[$:/display/]addprefix[$:/settings/$(ThisResume)$/]sort[order]!show[false]removeprefix[$:/settings/$(ThisResume)$/]addprefix[$:/display/]]'>
-<$transclude mode=block/>
-</$list>
-\end
-
 <div class='tc-tiddly-frame' style='background:white;max-width:700px;border:solid black 1px;color:black'>
 <div style='max-width:689px;margin-left:20px'>
-<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
-<<thisMakePreview>>
-</$vars>
+<$transclude tiddler='Print Version' mode=block/>
 </div>
 </div>

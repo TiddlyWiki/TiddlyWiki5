@@ -1,35 +1,24 @@
 created: 20150719184941848
-modified: 20150719185024380
+modified: 20150720163457716
 tags: 
 title: Help
 
-Clicking on [[Resume Wizard]] at the top is a good place to start.
+Clicking on [[Résumé Wizard]] at the top is a good place to start.
 
 To save your work, either click on the {{$:/core/ui/Buttons/save-wiki}} button to the right or the Save button at the top of the screen. The button to the right will turn red when there are unsaved changes.
 
 How it works:
 
-There are buttons along the top that bring you to the different things you can do with the resume builder. To the right you should see a preview of the completed resume.
+There are buttons along the top that bring you to the different things you can do with the résumé builder. To the right you should see a preview of the completed résumé.
 
-*Resume Wizard - A wizard that guides you through a sequence of steps to create a resume.
+*Résumé Wizard - A wizard that guides you through a sequence of steps to create a résumé.
 *Edit Existing Items - An interface to edit already entered information
 *Layout Options - Options for changing the order of the sections, which sections are visible, and the templates used for each section.
-*Resume Options - Available options for the resume output. The `Layout Options` tab has options for which sections are included in the resume as well as their order and the templates used, the other tabs are for configuring each section individually.
+*Résumé Options - Available options for the résumé output. The `Layout Options` tab has options for which sections are included in the résumé as well as their order and the templates used, the other tabs are for configuring each section individually.
 *Preview - Shows a preview of the result, this is also shown on the right side of the screen by default.
 *Help - Displays this information.
-*Print - Open the resume by itself in a new window for printing.
+*Print - Open the résumé by itself in a new window for printing.
 *Save - saves your changes
-
-<!--
-Things to add:
-
-*The section/item order options should get a better way to change the order
-*There should be options for other templates for each section
-*options for fonts and sizes and so on. Using a settings system like I have for the contacts database would be a good idea.
-*More section options
-*A reasonable way for users to create custom sections without requiring knowledge of wikitext. This could turn into something rather complex by itself if I let it. I will try to avoid that.
-*Other user options?
--->
 
 Other documentation:
 

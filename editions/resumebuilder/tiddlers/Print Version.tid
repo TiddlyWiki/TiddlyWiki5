@@ -1,0 +1,16 @@
+created: 20150720171146515
+modified: 20150720171221769
+tags: 
+title: Print Version
+
+\define thisMakePreview()
+<$list filter='[tag[Section Display]removeprefix[$:/display/]addprefix[$:/settings/$(ThisResume)$/]sort[order]!show[false]removeprefix[$:/settings/$(ThisResume)$/]addprefix[$:/display/]]'>
+<$transclude mode=block/>
+</$list>
+\end
+
+<div style='max-width:689px;margin-left:20px'>
+<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+<<thisMakePreview>>
+</$vars>
+</div>
