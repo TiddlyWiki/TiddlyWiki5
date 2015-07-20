@@ -1,7 +1,7 @@
 created: 20150719173441992
-modified: 20150719182326153
+modified: 20150720171426440
 tags: 
-title: Resume Wizard
+title: Résumé Wizard
 
 \define CurrentResume() {{$:/settings/Global!!selected_resume}}
 
@@ -36,26 +36,44 @@ title: Resume Wizard
 </$list>
 \end
 
-<!-- If the user hasn't started the wizard yet display the interface to add or select a resume and the button to start the wizard -->
+\define thisAddResumeButton()
+<$button>
+	Add Résumé
+	<$action-setfield $tiddler='$:/data/ResumeList' $index={{$:/temp/NewResumeName!!resume_name}} $value=true/>
+	<$action-setfield $tiddler='$:/temp/NewResumeName' resume_name=''/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Resume Title Display' order=1 show=true template='$:/template/ResumeTitleTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Contact Information Display' order=2 show=true template='$:/template/ContactInformationTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Objective Display' order=3 show=true template='$:/template/ObjectiveTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Skills and Expertise Display' order=4 show=true template='$:/template/SkillsAndExpertiseTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Previous Employment Display' order=5 show=true template='$:/template/PreviousEmploymentTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/Education Display' order=6 show=true template='$:/template/EducationTemplate'/>
+	<$action-setfield $tiddler='$:/settings/$(ResumeName)$/ResumeTitle' text=Resume/>
+</$button>
+\end
+
+<!-- If the user hasn't started the wizard yet display the interface to add or select a résumé and the button to start the wizard -->
 <$reveal type='match' state='$:/state/ResumeWizardState' text=''>
-	<!-- User can select an existing resume -->
-	Select resume to work on:
+	<!-- User can select an existing résumé -->
+	Select résumé to work on:
 	<$select tiddler='$:/settings/Global' field='selected_resume'>
 		<$list filter='[[$:/data/ResumeList]indexes[]]'>
 			<option><$view field='title'/></option>
 		</$list>
 	</$select>
 	<br>
-	<!-- User can add a new resume -->
-	You can add a resume to the list:
-	<$edit-text tiddler='$:/temp/NewResumeName' field='resume_name' class='tc-edit-texteditor' placeholder='Name of new resume'/>
-	<$button>
-		Add Resume
-		<$action-setfield $tiddler='$:/data/ResumeList' $index={{$:/temp/NewResumeName!!resume_name}} $value=true/>
-		<$action-setfield $tiddler='$:/temp/NewResumeName' resume_name=''/>
-	</$button>
+	<!-- User can add a new résumé. Creating a new résumé automatically populates some of the settings, namely setting all default résumé sections to visible using the first template and in the default order. -->
+	You can add a résumé to the list:
+	<$edit-text tiddler='$:/temp/NewResumeName' field='resume_name' class='tc-edit-texteditor' placeholder='Name of new résumé'/>
+	<$vars ResumeName={{$:/temp/NewResumeName!!resume_name}}>
+		<<thisAddResumeButton>>
+	</$vars>
 	<br>
 	<br>
+
+	<!-- The layout options. This is so that the user can set up which sections they want to see before starting the résumé wizard. -->
+	The preview is displayed to the right. The options below let you set which sections are visible and the section order. Only sections that are visible will be included in the wizard. You will be able to change these options later also.
+
+	<$transclude tiddler='Layout Options' mode=block/>
 
 	<!-- The button that starts the wizard -->
 	<$button>
@@ -79,11 +97,11 @@ title: Resume Wizard
 			<<thisDisplayInputTiddler>>
 		</$vars>
 	</$list>
-	<!-- Display the resume options if that is the current section. -->
+	<!-- Display the résumé options if that is the current section. -->
 	<$reveal type='match' state='$:/state/ResumeWizardState' text='Resume Options'>
-		Here you can change the order of sections (or of items in each section) on your resume as well as set other options. Click on 'Print' to open the resume in a new window to save or print it.
+		Here you can change the order of sections (or of items in each section) on your résumé as well as set other options. Click on 'Print' to open the résumé in a new window to save or print it.<br>
 
-		<$transclude tiddler='Resume Options' mode=block/>
+		<$transclude tiddler='Résumé Options' mode=block/><br>
 	</$reveal>
 
 	<!-- If the user hasn't reached options section yet, make and display the back and next buttons. -->
@@ -113,8 +131,8 @@ title: Resume Wizard
 				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<PreviousTiddler>>/>
 			</$button>
 		</$list>
-		<!-- Open resume in new window for saving/printing. -->
-		<$tiddler tiddler='Preview'>
+		<!-- Open résumé in new window for saving/printing. -->
+		<$tiddler tiddler='Print Version'>
 			<$button message="tm-open-window">
 				Print
 			</$button>

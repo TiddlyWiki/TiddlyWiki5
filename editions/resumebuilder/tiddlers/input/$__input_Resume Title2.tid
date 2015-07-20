@@ -1,4 +1,6 @@
 caption: Resume Title
+created: 20150720170858240
+modified: 20150720170900145
 tags: Section
 title: $:/input/Resume Title2
 
@@ -13,7 +15,7 @@ Select title to use:<br>
 \end
 
 Add New Title:
-<$edit-text tiddler='$:/temp/ResumeTitle' field='resume_title' placeholder='Resume Title' class='tc-edit-texteditor'/>
+<$edit-text tiddler='$:/temp/ResumeTitle' field='resume_title' placeholder='Résumé Title' class='tc-edit-texteditor'/>
 
 <$vars ThisResume={{$:/settings/Global!!selected_resume}} ThisTitle={{$:/temp/ResumeTitle!!resume_title}}>
 <<thisResumeTitleInput>>

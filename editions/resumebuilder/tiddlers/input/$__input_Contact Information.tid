@@ -1,8 +1,10 @@
 caption: Contact Information
+created: 20150720164912365
+modified: 20150720164948543
 tags: Section
 title: $:/input/Contact Information
 
-This is contact information to be included in your resume.
+This is contact information to be included in your résumé.<br><br>
 
 Name: <$edit-text tiddler='$:/data/Personal Information' field='name' placeholder='Your Name' class='tc-edit-texteditor'/>
 

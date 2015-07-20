@@ -1,5 +1,5 @@
 created: 20150719200725211
-modified: 20150719235401264
+modified: 20150720164139669
 tags: Tools
 title: New Section Creation Tool
 
@@ -39,9 +39,9 @@ $(UserTemplateTiddlerText)$
 <$action-setfield $tiddler="""$:/template/$(ThisSection)$/$(TemplateName)$""" text=<<thisTemplateTiddlerText>> input_tiddler="""$:/input/$(ThisSection)$/$(TemplateName)$""" options_tiddler="""$:/options/$(ThisSection)$/$(TemplateName)$""" section_name="""$(ThisSection)$""" template_name="""$(TemplateName)$""" tags=DisplayTemplate/>
 \end
 
-''Once you have created your new section you have to go to [[Resume Options]] and select a template and set the section as visible before it will appear in the resume.''
+''Once you have created your new section you have to go to [[Résumé Options]] and select a template and set the section as visible before it will appear in the résumé.''
 
-This is a tool to aid in the creation of custom resume sections. Fill out each section and then click on the 'Create Section' button below. Click on the ^^(?)^^ next to each tiddler name to get more information and a basic example. If you copy all of the examples given they will work together.
+This is a tool to aid in the creation of custom résumé sections. Fill out each section and then click on the 'Create Section' button below. Click on the ^^(?)^^ next to each tiddler name to get more information and a basic example. If you copy all of the examples given they will work together.
 
 Automatically defined helper macros and values (with the exception of `<<thisAddResumeSectionItem>>` these macros are defined for all of the tiddlers created using this tool.):
 
@@ -53,7 +53,7 @@ Automatically defined helper macros and values (with the exception of `<<thisAdd
 *`<<SectionName>>` - This is the name of the current section.
 *`<<SectionSettingsTiddler>>` - This is the name of the tiddler containing the settings for the current section. It holds the visibility and order settings, but they are automatically created by the [[Layout Options]] tiddler. You shouldn't need to use this unless you are doing something special.
 
-Section Name^^(<$button class='tc-btn-invisible' popup='$:/state/popup/SectionNameHelp'>?</$button><$reveal type='popup' state='$:/state/popup/SectionNameHelp'><div class='tc-drop-down'>This should be a short descriptive section name, like 'Resume Title' or 'Lands Conquered'</div></$reveal>)^^:
+Section Name^^(<$button class='tc-btn-invisible' popup='$:/state/popup/SectionNameHelp'>?</$button><$reveal type='popup' state='$:/state/popup/SectionNameHelp'><div class='tc-drop-down'>This should be a short descriptive section name, like 'Résumé Title' or 'Lands Conquered'</div></$reveal>)^^:
 <$edit-text tiddler='$:/temp/NewSection' field='section_name' class='tc-edit-texteditor' placeholder='Section Name'/>
 
 Input Tiddler^^(<$reveal type='nomatch' state='$:/state/popup/InputTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/InputTiddlerHelp' setTo='show'>?</$button></$reveal><$reveal type='match' state='$:/state/popup/InputTiddlerHelp' text=show><$button class='tc-btn-invisible' set='$:/state/popup/InputTiddlerHelp' setTo='hide'>?</$button></$reveal>)^^:
@@ -137,7 +137,7 @@ Template Tiddler^^(<$reveal type='nomatch' state='$:/state/popup/TemplateTiddler
 <div style="word-wrap: true;">
 <hr>
 
-A template tiddler is used to display the section in the final resume. Each template must have a unique name. It should be descriptive (like Basic Objective Template).
+A template tiddler is used to display the section in the final résumé. Each template must have a unique name. It should be descriptive (like Basic Objective Template).
 
 A very example template tiddler is:
 
