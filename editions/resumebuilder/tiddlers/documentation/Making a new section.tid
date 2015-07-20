@@ -1,4 +1,8 @@
+created: 20150719191225198
+modified: 20150719234223143
 title: Making a new section
+
+There is a [[New Section Creation Tool]] to help with creating new resume sections.
 
 Each section needs the following tiddlers:
 
@@ -10,7 +14,17 @@ Each section needs the following tiddlers:
 You can have multiple template tiddlers that use the same input and options tiddlers.
 
 !!Display tiddler
-Create a tiddler tagged with `Section Display`, I have been naming the tiddlers in the form `$:/display/(section name) Display`, like [[$:/display/Resume Title Display]] and [[$:/display/Objective Display]]. Following this convention isn't strictly necessary, but you should use it to remain consistent with other sections.
+
+This is the container used to display the section in the resume itself, there isn't any customization here.
+
+''Required tags'': `Section Display`<br>
+''Required name format'': `$:/display/(section name) Display`<br>
+''Additional fields'':
+
+*'section' - the section name, something like 'Resume Title' or 'Objective'.
+''Examples'': [[$:/display/Resume Title Display]] and [[$:/display/Objective Display]].<br>
+
+''Other things'':
 
 In the text field put 
 
@@ -18,35 +32,57 @@ In the text field put
 <$transclude tiddler=GenericSectionDisplayTemplate mode=block/>
 ```
 
-and nothing else. Additionally, these tiddlers need to have 1 additional field:
+and nothing else.
 
-*`section` - the section name (in the ones I have created it is the title of the tiddler you are creating without the Display part at the end, so `Resume Title` and `Objective`)
+This tiddler should have only what is listed above.
 
 !!Template tiddler(s)
-Create a template tiddler (or multiple templates if you want) for that section. See [[$:/template/ResumeTitleTemplate]] or [[$:/template/EducationTemplate]], or any of the other tiddlers that start with `$:/template/` for examples.
 
-These tiddlers need to have two fields:
+These tiddlers determine how the section is displayed on the resume. This sets the look of the final result.
+
+''Required tags'': `DisplayTemplate`<br>
+''Required name format'': `$:/template/(template name)`<br>
+''Additional fields'':
 
 *`section_name` - the name of the section that the template is for, this must be the same as the value in the `section` field of the section display template you made.
 *`input_tiddler` - the name of the tiddler that has the form to take input for this section.
 *`template_name` - an optional field containing a more convenient name for the template than the tiddler title. If it exists this will be displayed for the template selection.
 *`options_tiddler` - The name of the options tiddler for this template, if any.
 
+''Examples'': [[$:/template/ResumeTitleTemplate]] or [[$:/template/EducationTemplate]], or any of the other tiddlers that start with `$:/template/` for examples.
+
+The data displayed by the templates will be from tiddlers named in the form `$:/data/(section name)/(section item)`.
+
 !!Input Tiddler
 
-A tiddler that contains the input from for adding entries to the section, and if desired options for the section. The title of this tiddler should start with `$:/input/`, this is not strictly required, but it keeps everything consistent.
+A tiddler that contains the input from for adding entries to the section, and if desired options for the section. 
 
-I don't have any real help for this one, what you do will be dependent on what you want in the section. Look at the examples here, the tiddlers [[$:/input/Resume Title]], [[$:/input/ObjectiveInput1]], [[$:/input/ObjectiveInput2]], [[$:/input/Education]] and [[$:/input/Skills and Expertise]] are examples of what you would make for this.
+''Required tags'': none<br>
+''Required name format'': `$:/input/(template name)`<br>
+''Additional fields'': 
+
+*`caption` - The contents of this field will be displayed as the section name in the [[Resume Wizard]].
+''Examples'': [[$:/input/Resume Title]], [[$:/input/Education]]
+
+The data taken from the input tiddler should be stored in the fields of a tiddler named in the form `$:/data/(SectionName)/(ItemName)`.
+
+I don't have any real help for this one, what you do will be dependent on what you want in the section. Look at the examples. If you have any questions please feel free to ask on the group (https://groups.google.com/forum/#!forum/tiddlywiki).
 
 !!Options tiddler
 
-And finally, if you wish, you can make an options tiddler for the section you are adding. You would change the fonts used and list types and similar things here. This tiddler should be tagged with `Options` and all of the settings should be stored following the rules below. Other than that there aren't any restrictions on how to make one. Some examples are [[Education Options]] and [[Previous Employment Options]].
+A tiddler used to set options for a section.
 
-All settings and state information about each section should be stored in a tiddler named in the form `$:/settings/(ResumeName)/(SectionName)`
+''Required tags'': `Options`<br>
+''Required name format'': `$:/options/(template name)`<br>
+''Additional fields'':
 
-For each item within a section all state and configuration information should be kept in a tiddler with a name in the form `$:/settings/(ResumeName)/(SectionName)/(ItemName)`
+*`caption` - a caption field, it should have something like `(section name) Options`. This is what appears on the tabs in the [[Resume Options]] tiddler.
+''Examples'': [[$:/options/Education Options]], [[$:/options/Previous Employment Options]].
 
-These need to be different than the tiddlers holding the data that have names in the form `$:/data/(SectionName)` or `$:/data/(SectionName)/(ItemName)`
+You would use this tiddler to change the fonts used and list types and similar things here.
+All settings and state information about each section should be stored in a tiddler named in the form `$:/settings/(ResumeName)/(SectionName)`.
+For each item within a section all state and configuration information should be kept in a tiddler with a name in the form `$:/settings/(ResumeName)/(SectionName)/(ItemName)`.
+The options tiddler must only change fields in these tiddlers.
 
 These tiddlers hold the information about which items/sections are visible in each resume. See the list of system tiddlers for many examples. You don't need to make those tiddlers, you just need to make your input and settings tiddlers create or modify the correct tiddler name and they will be created. See the examples.
 
@@ -57,8 +93,4 @@ If you are going to make your own section, in order to allow the items to be in 
 
 `[prefix[$:/data/(SectionName)/]removeprefix[$:/data/]addprefix[$:/settings/$(ThisResumeName)$/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/]addprefix[$:/data/]]`
 
-<!--
-`[prefix[$:/data/(SectionName)/]removeprefix[$:/data/(SectionName)/]addprefix[$:/settings/$(ThisResumeName)$/(SectionName)/]!show[false]sort[order]removeprefix[$:/settings/$(ThisResumeName)$/(SectionName)/]addprefix[$:/data/(SectionName)/]]`
--->
-
-you need to manually replace `(SectionName)` with the name of the section you are adding, and you need to put `<$vars ThisResumeName={{$:/settings/Global!!selected_resume}}>` and `</$vars>` around the macro that contains the list widget with the above filter. Look at the examples and it will hopefully make more sense. PreviousEmploymentTemplate is one example.
+you need to manually replace `(SectionName)` with the name of the section you are adding, and you need to put `<$vars ThisResumeName={{$:/settings/Global!!selected_resume}}>` and `</$vars>` around the macro that contains the list widget with the above filter. Look at the examples and it will hopefully make more sense.

@@ -1,3 +1,5 @@
+created: 20150719182943383
+modified: 20150719182947178
 tags: 
 title: Edit Existing Items
 
@@ -11,4 +13,4 @@ Each tab lets you edit the contents of that section. Click on the `Preview and S
 <<thisMakeTabs>>
 </$vars>
 
-<$button to="Preview and Set Options">Open Preview and Options</$button>
+<!--<$button to="Preview and Set Options">Open Preview and Options</$button>-->

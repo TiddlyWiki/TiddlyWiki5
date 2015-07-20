@@ -1,4 +1,6 @@
 caption: Previous Employment
+created: 20150719182555935
+modified: 20150719182603681
 tags: Section
 title: $:/input/Previous Employment
 
@@ -27,7 +29,7 @@ Add Employment
 </$set>
 </$set>
 
-!!Current Listing:
+<h2>Current Listing:</h2>
 
 <table style='width:100%'>
 <tr><th></th><th>Visible</th><th>Entry</th><th>Order</th></tr>

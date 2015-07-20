@@ -1,3 +1,5 @@
+created: 20150719173441992
+modified: 20150719182326153
 tags: 
 title: Resume Wizard
 
@@ -9,61 +11,122 @@ title: Resume Wizard
 </$list>
 \end
 
+\define thisResumeWizardTiddlerEmptyMessage()
+<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]last[]]'>
+	<$reveal type='match' state='$:/state/ResumeWizardState' text=<<currentTiddler>>>
+		<$button>
+			Continue to Options
+			<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value="Resume Options"/>
+		</$button>
+	</$reveal>
+
+	<$reveal type='match' state='$:/state/ResumeWizardState' text="Resume Options">
+		<$button>
+			Go to Preview
+			<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value="Preview"/>
+		</$button>
+	</$reveal>
+	<$reveal type='match' state='$:/state/ResumeWizardState' text="Preview">
+		<$tiddler tiddler='Preview'>
+			<$button message="tm-open-window">
+				Print
+			</$button>
+		</$tiddler>
+	</$reveal>
+</$list>
+\end
+
+<!-- If the user hasn't started the wizard yet display the interface to add or select a resume and the button to start the wizard -->
 <$reveal type='match' state='$:/state/ResumeWizardState' text=''>
-Select resume to work on: <$select tiddler='$:/settings/Global' field='selected_resume'><$list filter='[[$:/data/ResumeList]indexes[]]'>
-<option><$view field='title'/></option>
-</$list>
-</$select>
-<br>
- You can add a resume to the list:
-<$edit-text tiddler='$:/temp/NewResumeName' field='resume_name' class='tc-edit-texteditor' placeholder='Name of new resume'/> <$button>Add Resume<$action-setfield $tiddler='$:/data/ResumeList' $index={{$:/temp/NewResumeName!!resume_name}} $value=true/>
-<$action-setfield $tiddler='$:/temp/NewResumeName' resume_name=''/>
-</$button><br><br>
+	<!-- User can select an existing resume -->
+	Select resume to work on:
+	<$select tiddler='$:/settings/Global' field='selected_resume'>
+		<$list filter='[[$:/data/ResumeList]indexes[]]'>
+			<option><$view field='title'/></option>
+		</$list>
+	</$select>
+	<br>
+	<!-- User can add a new resume -->
+	You can add a resume to the list:
+	<$edit-text tiddler='$:/temp/NewResumeName' field='resume_name' class='tc-edit-texteditor' placeholder='Name of new resume'/>
+	<$button>
+		Add Resume
+		<$action-setfield $tiddler='$:/data/ResumeList' $index={{$:/temp/NewResumeName!!resume_name}} $value=true/>
+		<$action-setfield $tiddler='$:/temp/NewResumeName' resume_name=''/>
+	</$button>
+	<br>
+	<br>
 
-<$button>Click here to get started
-<$list filter='[tag[Section Display]sort[order]first[]]'>
-<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<currentTiddler>>/>
-</$list>
-</$button>
+	<!-- The button that starts the wizard -->
+	<$button>
+		Click here to get started
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]first[]]'>
+			<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<currentTiddler>>/>
+		</$list>
+	</$button>
 </$reveal>
 
+<!-- Once the wizard is started display the current input tiddler with forward and back buttons. There is also a 'back to start' button. -->
 <$reveal type='nomatch' state='$:/state/ResumeWizardState' text=''>
-<h1><$transclude tiddler={{$:/state/ResumeWizardState}} field='section' mode=block/></h1>
+	<!-- Display the current section title. -->
+	<h1>
+		<$transclude tiddler={{$:/state/ResumeWizardState}} field='section' mode=block/>
+	</h1>
 
-<$list filter='[{$:/state/ResumeWizardState}removeprefix[$:/display/]]' variable=CurrentSection>
-<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
-<<thisDisplayInputTiddler>>
-</$vars>
-</$list>
+	<!-- Display the correct input tiddler. -->
+	<$list filter='[{$:/state/ResumeWizardState}removeprefix[$:/display/]]' variable=CurrentSection>
+		<$vars ThisResume={{$:/settings/Global!!selected_resume}}>
+			<<thisDisplayInputTiddler>>
+		</$vars>
+	</$list>
+	<!-- Display the resume options if that is the current section. -->
+	<$reveal type='match' state='$:/state/ResumeWizardState' text='Resume Options'>
+		Here you can change the order of sections (or of items in each section) on your resume as well as set other options. Click on 'Print' to open the resume in a new window to save or print it.
 
-<$reveal type='nomatch' state='$:/state/ResumeWizardState' text='Preview and Set Options'>
-<$tiddler tiddler={{$:/state/ResumeWizardState}}>
-<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]before<currentTiddler>]' emptyMessage="" variable=PreviousTiddler>
-<$button>
-Back (<$view tiddler=<<PreviousTiddler>> field='section'/>)
-<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<PreviousTiddler>>/>
-</$button>
-</$list>
-<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]after<currentTiddler>]' emptyMessage="""<$list filter='[tag[Section]sort[order]last[]]'><$reveal type='match' state='$:/state/ResumeWizardState' text=<<currentTiddler>>><$button>Continue to Options<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value="Resume Options"/></$button></$reveal><$reveal type='match' state='$:/state/ResumeWizardState' text="Resume Options"><$button>Go to Preview<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value="Preview"/></$button></$reveal><$reveal type='match' state='$:/state/ResumeWizardState' text="Preview"><$tiddler tiddler='Preview'><$button message="tm-open-window">Print</$button></$tiddler></$reveal></$list>""" variable=NextTiddler>
-<$button>
-Next Section (<$view tiddler=<<NextTiddler>> field='section'/>)
-<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<NextTiddler>>/>
-</$button>
-</$list>
-</$tiddler>
-</$reveal>
+		<$transclude tiddler='Resume Options' mode=block/>
+	</$reveal>
 
+	<!-- If the user hasn't reached options section yet, make and display the back and next buttons. -->
+	<$reveal type='nomatch' state='$:/state/ResumeWizardState' text='Resume Options'>
+		<!-- This makes the back button. If the user is on the first section this doesn't display anything. -->
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]before{$:/state/ResumeWizardState}]' emptyMessage="" variable=PreviousTiddler>
+			<$button>
+				Back (<$view tiddler=<<PreviousTiddler>> field='section'/>)
+				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<PreviousTiddler>>/>
+			</$button>
+		</$list>
+		<!-- This Makes the next button. If the user is on the last section this is a button that opens the options section. -->
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]after{$:/state/ResumeWizardState}]' emptyMessage=<<thisResumeWizardTiddlerEmptyMessage>> variable=NextTiddler>
+			<$button>
+				Next Section (<$view tiddler=<<NextTiddler>> field='section'/>)
+				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<NextTiddler>>/>
+			</$button>
+		</$list>
+	</$reveal>
 
-<$reveal type='match' state='$:/state/ResumeWizardState' text='Preview and Set Options'>
-<$button>Print</$button> (This doesn't work yet)<br>
-<$button to=Preview>Show Preview By Itself</$button>
-</$reveal>
+	<!-- If the user has reached the options section display the print button (and the back button, this is a special case). -->
+	<$reveal type='match' state='$:/state/ResumeWizardState' text='Resume Options'>
+		<!-- Magic to make the back button. -->
+		<$list filter='[tag[Section Display]removeprefix[$:/display]addprefix{$:/settings/Global!!selected_resume}addprefix[$:/settings/]sort[order]removeprefix[$:/settings/]removeprefix{$:/settings/Global!!selected_resume}addprefix[$:/display]last[]]' emptyMessage="" variable=PreviousTiddler>
+			<$button>
+				Back (<$view tiddler=<<PreviousTiddler>> field='section'/>)
+				<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=<<PreviousTiddler>>/>
+			</$button>
+		</$list>
+		<!-- Open resume in new window for saving/printing. -->
+		<$tiddler tiddler='Preview'>
+			<$button message="tm-open-window">
+				Print
+			</$button>
+		</$tiddler>
+		<br>
+	</$reveal>
 
-<hr>
-<hr>
+	<hr>
+	<hr>
 
-<$button>
-Back to start
-<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=''/>
-</$button>
+	<$button>
+		Back to start
+		<$action-setfield $tiddler='$:/state/ResumeWizardState' $field='text' $value=''/>
+	</$button>
 </$reveal>

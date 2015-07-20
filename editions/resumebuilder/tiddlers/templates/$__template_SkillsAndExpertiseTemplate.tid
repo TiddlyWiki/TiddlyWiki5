@@ -15,9 +15,4 @@ title: $:/template/SkillsAndExpertiseTemplate
 
 <ul>
 <<thisSkillsAndExpertiseList>>
-<!--
-<$list filter='[prefix[$:/data/Skills and Expertise/]!show[false]sort[order]]'>
-<li><$view field='skill'/></li>
-</$list>
--->
 </ul>

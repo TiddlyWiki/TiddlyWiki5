@@ -1,3 +1,5 @@
+created: 20150719190741300
+modified: 20150719191131503
 tags: Options
 title: Layout Options
 
@@ -26,7 +28,7 @@ title: Layout Options
 \end
 
 \define thisSetOrder()
-<$edit-text tiddler='$:/settings/$(ThisResumeName)$/$(currentTiddler)$' field='order'/>
+<$edit-text tiddler='$:/settings/$(ThisResumeName)$/$(currentTiddler)$' field='order' size=2/>
 \end
 
 <$set name=ThisResumeName value={{$:/settings/Global!!selected_resume}}>
@@ -43,7 +45,9 @@ title: Layout Options
 <<thisMakeCheckbox>>
 </td>
 <td>
+<$list filter='[<currentTiddler>addprefix[$:/display/]]'>
 <$view field='section'/>
+</$list>
 </td>
 <td>
 <<thisSelectTemplate>>
