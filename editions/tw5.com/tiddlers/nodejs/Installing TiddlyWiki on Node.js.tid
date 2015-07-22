@@ -4,31 +4,52 @@ tags: [[TiddlyWiki on Node.js]]
 title: Installing TiddlyWiki on Node.js
 type: text/vnd.tiddlywiki
 
-# Installing [[Node.js]] from http://nodejs.org
+!! Installing Node.js
+
+# Install [[Node.js]] from http://nodejs.org
 # Open a command line terminal and type:
 #> `npm install -g tiddlywiki`
 #> If it fails with an error you may need to re-run the command as an administrator:
 #> `sudo npm install -g tiddlywiki` (Mac/Linux)
-#* The `-g` flag causes TiddlyWiki to be installed globally. Without it, TiddlyWiki will only be available in the directory where you installed it.<br /><br />
 # Check TiddlyWiki is installed by typing:
 #> `tiddlywiki --version`
 # In response, you should see TiddlyWiki report its current version (eg "<<version>>"; you may also see other debugging information reported)
-# Create an empty folder manually [optionnal]:
-#> `cd /path/to/your_working_directory` 
-#> `mkdir YourFolder`
-#* You can also use your file explorer to create the folder.<br /><br />
-# Initialise an empty TiddlyWikiFolders with a copy of the specified edition.
-#> `tiddlywiki YourFolder --init VersionToUse`
-#> To find help on this command: `tiddlywiki --help init`
-#> Replace the `VersionToUse` by one of the edition provided here:<br />`tiddlywiki --editions`
-#* Example:<br />`tiddlywiki ~/Test/MyWikiFolder --init tw5.com`<br /><br />
-# To start your new TiddlyWiki:
-#> `tiddlywiki ~/Test/MyWikiFolder --server`
-#> Visit http://127.0.0.1:8080/ in your browser
-#> Try editing, creating and saving tiddlers
-# To create a folder for a new wiki that includes server-related components [Optionnal]: 
-#>[[How to enable a wiki folder for client-server usage]]
 
 If you are using Debian or Debian-based Linux and you are receiving a `node: command not found` error though node.js package is installed, you may need to create a symbolic link between `nodejs` and `node`. Consult your distro's manual and `whereis` to correctly create a link. See github [[issue 1434|http://github.com/Jermolene/TiddlyWiki5/issues/1434]]
 
 Example Debian v8.0: `sudo ln -s /usr/bin/nodejs /usr/bin/node`
+
+!! Installing the server-related empty edition:
+# Open the commandline and navigate to the directory where you want to create the wiki folder
+# `tiddlywiki mynewwiki --init server` this will create a folder for a new wiki that includes server-related components
+# `tiddlywiki mynewwiki --server` to start TiddlyWiki
+# Visit http://127.0.0.1:8080/ in your browser
+# Try editing and creating tiddlers
+The purpose of this edition is that this wiki should now auto-save the changes.
+
+!! Installing other editions (without server-related components included):
+In the case where one would need to install another edition (like for contributing to the code or to the docs or to start a new wiki translated in another language)
+
+# `tiddlywiki mynewwiki --init version_to_use`
+#* To find help on this command: `tiddlywiki --help init`
+# Replace the `version_to_use` by one of the edition provided by this command:<br />`tiddlywiki --editions`
+#* Example:<br />`tiddlywiki mynewwiki --init tw5.com`<br /><br />
+# `tiddlywiki mynewwiki --server` to start your new TiddlyWiki
+# Visit http://127.0.0.1:8080/ in your browser
+# Try editing and creating tiddlers
+
+!! How to add server-related components to an existing wiki
+
+# After installing a new TiddlyWiki with the commands above
+# Edit the `tiddlywiki.info` file present in the new wiki folder:<br /><br />
+## In the `plugins` section, add those lines:
+#> `"tiddlywiki/tiddlyweb",
+"tiddlywiki/filesystem",`
+# If opened: save the wiki then exit the process in the terminal and re-launch it in order for this to take effect.<br /><br />
+# To check if the modifications are functionnals:
+#> Once you have re-launched your wiki, check for the presence of the two plugins in the control panel, make sure they are not disabled.
+#>And / or
+#> Check for scrolling text in the opened terminal, under: <br />`Serving on 127.0.0.1:8080`
+This wiki should now auto-save changes.
+
+<<.warning "With Node.js server-related plugins you add via the plugin library are not persisted across page refreshes. To make it permanent you have to edit the tiddlywiki.info file.">>
