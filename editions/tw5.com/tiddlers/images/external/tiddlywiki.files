@@ -1,7 +1,8 @@
 {
 	"tiddlers": [
 		{
-			"tiddlerFile": "../../../../../languages/ca-ES/icon.tid",
+			"file": "../../../../../languages/ca-ES/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: ca-ES",
 				"language": "ca-ES",
@@ -9,7 +10,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/cs-CZ/icon.tid",
+			"file": "../../../../../languages/cs-CZ/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: cs-CZ",
 				"language": "cs-CZ",
@@ -17,7 +19,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/da-DK/icon.tid",
+			"file": "../../../../../languages/da-DK/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: da-DK",
 				"language": "da-DK",
@@ -25,7 +28,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/de-AT/icon.tid",
+			"file": "../../../../../languages/de-AT/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: de-AT",
 				"language": "de-AT",
@@ -33,7 +37,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/de-DE/icon.tid",
+			"file": "../../../../../languages/de-DE/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: de-DE",
 				"language": "de-DE",
@@ -41,7 +46,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/el-GR/icon.tid",
+			"file": "../../../../../languages/el-GR/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: el-GR",
 				"language": "el-GR",
@@ -49,7 +55,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/es-ES/icon.tid",
+			"file": "../../../../../languages/es-ES/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: es-ES",
 				"language": "es-ES",
@@ -57,7 +64,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/fr-FR/icon.tid",
+			"file": "../../../../../languages/fr-FR/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: fr-FR",
 				"language": "fr-FR",
@@ -65,7 +73,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/hi-IN/icon.tid",
+			"file": "../../../../../languages/hi-IN/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: hi-IN",
 				"language": "hi-IN",
@@ -73,7 +82,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/ia-IA/icon.tid",
+			"file": "../../../../../languages/ia-IA/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: ia-IA",
 				"language": "ia-IA",
@@ -81,7 +91,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/it-IT/icon.tid",
+			"file": "../../../../../languages/it-IT/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: it-IT",
 				"language": "it-IT",
@@ -89,7 +100,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/ja-JP/icon.tid",
+			"file": "../../../../../languages/ja-JP/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: ja-JP",
 				"language": "ja-JP",
@@ -97,7 +109,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/nl-NL/icon.tid",
+			"file": "../../../../../languages/nl-NL/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: nl-NL",
 				"language": "nl-NL",
@@ -105,7 +118,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/pa-IN/icon.tid",
+			"file": "../../../../../languages/pa-IN/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: pa-IN",
 				"language": "pa-IN",
@@ -113,7 +127,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/pt-PT/icon.tid",
+			"file": "../../../../../languages/pt-PT/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: pt-PT",
 				"language": "pt-PT",
@@ -121,7 +136,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/ru-RU/icon.tid",
+			"file": "../../../../../languages/ru-RU/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: ru-RU",
 				"language": "ru-RU",
@@ -129,7 +145,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/sk-SK/icon.tid",
+			"file": "../../../../../languages/sk-SK/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: sk-SK",
 				"language": "sk-SK",
@@ -137,7 +154,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/zh-Hans/icon.tid",
+			"file": "../../../../../languages/zh-Hans/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: zh-Hans",
 				"language": "zh-Hans",
@@ -145,7 +163,8 @@
 			}
 		},
 		{
-			"tiddlerFile": "../../../../../languages/zh-Hant/icon.tid",
+			"file": "../../../../../languages/zh-Hant/icon.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "Language Icon: zh-Hant",
 				"language": "zh-Hant",

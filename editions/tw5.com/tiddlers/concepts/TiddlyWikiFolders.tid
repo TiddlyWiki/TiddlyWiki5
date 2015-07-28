@@ -1,5 +1,5 @@
 created: 20130825214200000
-modified: 20150718104424501
+modified: 20150728104424501
 tags: [[TiddlyWiki on Node.js]]
 title: TiddlyWikiFolders
 type: text/vnd.tiddlywiki
@@ -100,7 +100,8 @@ Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` 
 			}
 		},
 		{
-			"tiddlerFile": "local/mytiddler.tid",
+			"file": "local/mytiddler.tid",
+			"isTiddlerFile": true,
 			"fields": {
 				"title": "A different title"
 			}
@@ -112,7 +113,7 @@ Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` 
 The JSON data consists of an object with a `tiddlers` property that contains an array of information about each tiddler to be loaded into the wiki. That information consists of:
 
 * The relative or absolute path to the file to include as either:
-** `file`: a plain file that will not be deserialised
-** `tiddlerFile`: a tiddler file that will be deserialised to extract the tiddlers
+** `file`: the file containing the tiddler
+** `isTiddlerFile`: if `true`, the file will be deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
 * `fields`: an object containing fields that override any provided in the tiddler file
 * `prefix` & `suffix`: (optional) specify strings to be prefixed and suffixed to the tiddler file text content

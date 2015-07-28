@@ -1464,9 +1464,9 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 					var type = tidInfo.fields.type || "text/plain",
 						typeInfo = $tw.config.contentTypeInfo[type],
-						pathname = path.resolve(filepath,tidInfo.file || tidInfo.tiddlerFile),
+						pathname = path.resolve(filepath,tidInfo.file),
 						text = fs.readFileSync(pathname,typeInfo ? typeInfo.encoding : "utf8");
-					if(tidInfo.tiddlerFile) {
+					if(tidInfo.isTiddlerFile) {
 						var fileTiddlers = $tw.wiki.deserializeTiddlers(path.extname(pathname),text) || [];
 						$tw.utils.each(fileTiddlers,function(tiddler) {
 							$tw.utils.extend(tiddler,tidInfo.fields);
