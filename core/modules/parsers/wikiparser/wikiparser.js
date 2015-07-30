@@ -29,12 +29,15 @@ var WikiParser = function(type,text,options) {
 	// Initialise the classes if we don't have them already
 	if(!this.pragmaRuleClasses) {
 		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);
+		this.setupRules(WikiParser.prototype.pragmaRuleClasses,"$:/config/WikiParserRules/Pragmas/");
 	}
 	if(!this.blockRuleClasses) {
 		WikiParser.prototype.blockRuleClasses = $tw.modules.createClassesFromModules("wikirule","block",$tw.WikiRuleBase);
+		this.setupRules(WikiParser.prototype.blockRuleClasses,"$:/config/WikiParserRules/Block/");
 	}
 	if(!this.inlineRuleClasses) {
 		WikiParser.prototype.inlineRuleClasses = $tw.modules.createClassesFromModules("wikirule","inline",$tw.WikiRuleBase);
+		this.setupRules(WikiParser.prototype.inlineRuleClasses,"$:/config/WikiParserRules/Inline/");
 	}
 	// Save the parse text
 	this.type = type || "text/vnd.tiddlywiki";
@@ -57,6 +60,18 @@ var WikiParser = function(type,text,options) {
 		topBranch.push.apply(topBranch,this.parseBlocks());
 	}
 	// Return the parse tree
+};
+
+/*
+*/
+WikiParser.prototype.setupRules = function(proto,configPrefix) {
+	var self = this;
+	$tw.utils.each(proto,function(object,name) {
+		if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
+			delete proto[name];
+console.log("deleting",name)
+		}
+	});
 };
 
 /*

@@ -1,0 +1,29 @@
+title: $:/core/ui/ControlPanel/Parsing
+tags: $:/tags/ControlPanel
+caption: Parsing
+
+\define parsing-inner(typeCap)
+<li>
+<$checkbox tiddler="""$:/config/WikiParserRules/$typeCap$/$(currentTiddler)$""" field="text" checked="enable" unchecked="disable" default="enable"> ''<$text text=<<currentTiddler>>/>'': </$checkbox>
+</li>
+\end
+
+\define parsing-outer(typeLower,typeCap)
+<ul>
+<$list filter="[wikiparserrules[$typeLower$]]">
+<<parsing-inner typeCap:"$typeCap$">>
+</$list>
+</ul>
+\end
+
+! Pragma Parse Rules
+
+<<parsing-outer typeLower:"pragma" typeCap:"Pragma">>
+
+! Inline Parse Rules
+
+<<parsing-outer typeLower:"inline" typeCap:"Inline">>
+
+! Block Parse Rules
+
+<<parsing-outer typeLower:"block" typeCap:"Block">>
