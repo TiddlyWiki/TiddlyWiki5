@@ -66,12 +66,13 @@ var WikiParser = function(type,text,options) {
 */
 WikiParser.prototype.setupRules = function(proto,configPrefix) {
 	var self = this;
-	$tw.utils.each(proto,function(object,name) {
-		if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
-			delete proto[name];
-console.log("deleting",name)
-		}
-	});
+	if(!$tw.safemode) {
+		$tw.utils.each(proto,function(object,name) {
+			if(self.wiki.getTiddlerText(configPrefix + name,"enable") !== "enable") {
+				delete proto[name];
+			}
+		});
+	}
 };
 
 /*

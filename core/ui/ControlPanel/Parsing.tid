@@ -1,6 +1,8 @@
 title: $:/core/ui/ControlPanel/Parsing
-tags: $:/tags/ControlPanel
-caption: Parsing
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/Parsing/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Parsing/
 
 \define parsing-inner(typeCap)
 <li>
@@ -16,14 +18,16 @@ caption: Parsing
 </ul>
 \end
 
-! Pragma Parse Rules
+<<lingo Hint>>
+
+! <<lingo Pragma/Caption>>
 
 <<parsing-outer typeLower:"pragma" typeCap:"Pragma">>
 
-! Inline Parse Rules
+! <<lingo Inline/Caption>>
 
 <<parsing-outer typeLower:"inline" typeCap:"Inline">>
 
-! Block Parse Rules
+! <<lingo Block/Caption>>
 
 <<parsing-outer typeLower:"block" typeCap:"Block">>

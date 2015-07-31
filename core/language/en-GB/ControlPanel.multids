@@ -38,6 +38,11 @@ Palette/Editor/Reset/Caption: reset
 Palette/HideEditor/Caption: hide editor
 Palette/Prompt: Current palette:
 Palette/ShowEditor/Caption: show editor
+Parsing/Caption: Parsing
+Parsing/Hint: Here you can globally disable individual wiki parser rules. Take care as disabling some paser rules can prevent ~TiddlyWiki functioning correctly (you can restore normal operation with [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Block/Caption: Block Parse Rules
+Parsing/Inline/Caption: Inline Parse Rules
+Parsing/Pragma/Caption: Pragma Parse Rules
 Plugins/Add/Hint: Install plugins from the official library
 Plugins/Add/Caption: Get more plugins
 Plugins/Caption: Plugins
@@ -71,6 +76,9 @@ Settings/AutoSave/Caption: Autosave
 Settings/AutoSave/Disabled/Description: Do not save changes automatically
 Settings/AutoSave/Enabled/Description: Save changes automatically
 Settings/AutoSave/Hint: Automatically save changes during editing
+Settings/CamelCase/Caption: Camel Case Wiki Links
+Settings/CamelCase/Hint: You can globally disable automatic linking of ~CamelCase phrases. Requires reload to take effect
+Settings/CamelCase/Description: Enable automatic ~CamelCase linking
 Settings/Caption: Settings
 Settings/Hint: These settings let you customise the behaviour of TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Navigation Address Bar
