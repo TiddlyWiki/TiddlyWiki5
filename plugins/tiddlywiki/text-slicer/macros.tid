@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/text-slicer/macros
+tags: $:/tags/Macro
+
+\define display-heading-tiddler(level:"h1")
+<$level$><$view field="title"/></$level$>
+<$list filter='[tag<currentTiddler>]'>
+<$tiddler>
+<$transclude mode='block'/>
+</$tiddler>
+</$list>
+\end
+
+\define display-list-tiddler(type:"ol")
+<$type$>
+<$list filter='[tag<currentTiddler>]'>
+<li>
+<$tiddler>
+<$transclude mode='block'/>
+</$tiddler>
+</li>
+</$list>
+</$type$>
+\end

@@ -1,6 +1,6 @@
 caption: 5.1.10
-created: 20150705153725652
-modified: 20150705153725652
+created: 20150801123725652
+modified: 20150801123725652
 tags: ReleaseNotes
 title: Release 5.1.10
 type: text/vnd.tiddlywiki
@@ -11,7 +11,21 @@ type: text/vnd.tiddlywiki
 
 !! Performance Optimisations
 
+This release includes several low-level performance optimisations that should improve speed and responsiveness in many common operations.
 
+* [[Caching the results of parsing a tiddler|https://github.com/Jermolene/TiddlyWiki5/commit/b0cb17cd83dde89753ec159e27c920a7bf22bee1]]
+* [[Loop optimisations|https://github.com/Jermolene/TiddlyWiki5/commit/c6e48ebc2db4af895f5b3935b3f575b8aab292fe]]
+* [[Tiddler iteration optimisations|https://github.com/Jermolene/TiddlyWiki5/commit/8f63e2a959a7ac44533ae2b6192716ee17a1ce93]]
+* [[State qualifier generation|https://github.com/Jermolene/TiddlyWiki5/commit/848a7f4e744c8f4dcb4ec88a0e99c4ae6aac25e5]]
+* [[Caching data tiddlers|https://github.com/Jermolene/TiddlyWiki5/commit/32f6d7f1b01474b82debcbdd5d76c49c59303265]]
+
+!! Résumé Builder Edition
+
+The new [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ).
+
+!! Text-Slicer Edition
+
+The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
 
 ! Other Improvements
 
@@ -21,18 +35,26 @@ type: text/vnd.tiddlywiki
 
 !! Usability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d5e690a06d523a2047eaf9b623b633bb72c18af9]] ability to disable individual WikiText parser rules (see the ''Advanced'' tab of $:/ControlPanel). Also [[added|https://github.com/Jermolene/TiddlyWiki5/commit/58188cf8053bef87dbe97e4b05cdba67f75c615d]] a simple setting for disabling automatic linking of ~CamelCase words
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2cb6400773096b02b71c1851fb0fac5dfefbbd6f]] support for automatically linked system tiddler titles to include digits and underscore
 
 !! Hackability Improvements
 
-* 
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c4397792f5d396288048bcc3bb4ee8e95dbc2c5e]] added [[recent Operator]]
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e0aacc84d5f084ff7a53153c590fbff3d24f2e2c]] `publishFilter` to default save template
+* [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/7dddc925ae93725552b98bc348a07572895da96c]] ''delete'' button to be used in the tiddler view-mode toolbar
 
 !! Bug Fixes
 
-* 
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/1882]] problem introduced in 5.1.9 with processing `tiddlywiki.info` files
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3fbf29093b32c00941b0c03951250de7c0cc8d6f]] problem with invisible icons in $:/AdvancedSearch
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/862e358b57fde74595420e7948bf44fdadf690dc]] check for required plugins in ServerCommand
 
 !! Contributors
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@danielo515|https://github.com/danielo515]]
+* [[@idoine|https://github.com/idoine]]
+* [[@inmysocks|https://github.com/inmysocks]]
 * [[@nameanyone|https://github.com/nameanyone]]
