@@ -24,7 +24,7 @@ var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
 		// Slice up and output the tiddler
-		outputTiddlers(sliceTiddler(event.param));
+		outputTiddlers(sliceTiddler(event.param),event.param);
 	});
 };
 
@@ -130,7 +130,7 @@ function sliceTiddler(title) {
 }
 
 // Output to the output tiddler
-function outputTiddlers(tiddlers) {
+function outputTiddlers(tiddlers,navigateFromTitle) {
 	// Get the current slicer output tiddler
 	var slicerOutputTiddler = $tw.wiki.getTiddler(SLICER_OUTPUT_TITLE),
 		slicerOutputData = $tw.wiki.getTiddlerData(SLICER_OUTPUT_TITLE,{}),
@@ -151,7 +151,9 @@ function outputTiddlers(tiddlers) {
 	// Save the slicer output tiddler
 	newFields.text = JSON.stringify(slicerOutputData,null,$tw.config.preferences.jsonSpaces);
 	$tw.wiki.addTiddler(new $tw.Tiddler(slicerOutputTiddler,newFields));
-	// TBD: Navigate to $:/Import
+	// Navigate to output
+	var story = new $tw.Story({wiki: $tw.wiki});
+	story.navigateTiddler(SLICER_OUTPUT_TITLE,navigateFromTitle);
 }
 
 })();
