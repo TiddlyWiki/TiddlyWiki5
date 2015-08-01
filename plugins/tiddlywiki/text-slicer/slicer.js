@@ -18,7 +18,7 @@ exports.platforms = ["browser"];
 exports.after = ["startup"];
 exports.synchronous = true;
 
-var SLICER_OUTPUT_TITLE = "$:/Import";
+var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 
 // Install the root widget event handlers
 exports.startup = function() {
