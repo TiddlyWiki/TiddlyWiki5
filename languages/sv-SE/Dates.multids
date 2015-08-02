@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: :a
+Date/DaySuffix/2: :a
+Date/DaySuffix/3: :dje
+Date/DaySuffix/4: :dje
+Date/DaySuffix/5: :e
+Date/DaySuffix/6: :e
+Date/DaySuffix/7: :e
+Date/DaySuffix/8: :e
+Date/DaySuffix/9: :e
+Date/DaySuffix/10: :e
+Date/DaySuffix/11: :e
+Date/DaySuffix/12: :e
+Date/DaySuffix/13: :e
+Date/DaySuffix/14: :e
+Date/DaySuffix/15: :e
+Date/DaySuffix/16: :e
+Date/DaySuffix/17: :e
+Date/DaySuffix/18: :e
+Date/DaySuffix/19: :e
+Date/DaySuffix/20: :e
+Date/DaySuffix/21: :a
+Date/DaySuffix/22: :a
+Date/DaySuffix/23: :a
+Date/DaySuffix/24: :e
+Date/DaySuffix/25: :e
+Date/DaySuffix/26: :e
+Date/DaySuffix/27: :e
+Date/DaySuffix/28: :e
+Date/DaySuffix/29: :e
+Date/DaySuffix/30: :dje
+Date/DaySuffix/31: :a
+Date/Long/Day/0: Söndag
+Date/Long/Day/1: Måndag
+Date/Long/Day/2: Tisdag
+Date/Long/Day/3: Onsdag
+Date/Long/Day/4: Torsdag
+Date/Long/Day/5: Fredag
+Date/Long/Day/6: Lördag
+Date/Long/Month/1: Januari
+Date/Long/Month/2: Februari
+Date/Long/Month/3: Mars
+Date/Long/Month/4: April
+Date/Long/Month/5: Maj
+Date/Long/Month/6: Juni
+Date/Long/Month/7: Juli
+Date/Long/Month/8: Augusti
+Date/Long/Month/9: September
+Date/Long/Month/10: Oktober
+Date/Long/Month/11: November
+Date/Long/Month/12: December
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Day/0: Sön
+Date/Short/Day/1: Mån
+Date/Short/Day/2: Tis
+Date/Short/Day/3: Ons
+Date/Short/Day/4: Tor
+Date/Short/Day/5: Fre
+Date/Short/Day/6: Lör
+Date/Short/Month/1: Jan
+Date/Short/Month/2: Feb
+Date/Short/Month/3: Mar
+Date/Short/Month/4: Apr
+Date/Short/Month/5: Maj
+Date/Short/Month/6: Jun
+Date/Short/Month/7: Jul
+Date/Short/Month/8: Aug
+Date/Short/Month/9: Sep
+Date/Short/Month/10: Okt
+Date/Short/Month/11: Nov
+Date/Short/Month/12: Dec
+RelativeDate/Future/Days: <<period>> dagar från och med nu
+RelativeDate/Future/Hours: <<period>> timmar från och med nu
+RelativeDate/Future/Minutes: <<period>> minuter från och med nu
+RelativeDate/Future/Months: <<period>> månader från och med nu
+RelativeDate/Future/Second: 1 sekund från och med nu
+RelativeDate/Future/Seconds: <<period>> sekunder från och med nu
+RelativeDate/Future/Years: <<period>> år från och med nu
+RelativeDate/Past/Days: <<period>> dagar sen
+RelativeDate/Past/Hours: <<period>> timmar sen
+RelativeDate/Past/Minutes: <<period>> minuter sen
+RelativeDate/Past/Months: <<period>> månader sen
+RelativeDate/Past/Second: 1 sekund sen
+RelativeDate/Past/Seconds: <<period>> seconds ago
+RelativeDate/Past/Years: <<period>> år sen
