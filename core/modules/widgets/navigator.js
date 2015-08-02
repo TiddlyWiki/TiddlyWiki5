@@ -552,12 +552,12 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	});
 	// Replace the $:/Import tiddler with an import report
 	this.wiki.addTiddler(new $tw.Tiddler({
-		title: IMPORT_TITLE,
+		title: event.param,
 		text: importReport.join("\n"),
 		"status": "complete"
 	}));
 	// Navigate to the $:/Import tiddler
-	this.addToHistory([IMPORT_TITLE]);
+	this.addToHistory([event.param]);
 	// Trigger an autosave
 	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
 };

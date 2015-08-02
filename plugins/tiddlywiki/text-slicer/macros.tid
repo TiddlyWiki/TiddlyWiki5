@@ -1,0 +1,27 @@
+title: $:/plugins/tiddlywiki/text-slicer/macros
+tags: $:/tags/Macro
+
+\define display-tiddler()
+<$list filter="[draft.of<currentTiddler>limit[1]]" editTemplate="$:/core/ui/EditTemplate" emptyMessage="""<$transclude mode='block'/>"""/>
+\end
+
+\define display-heading-tiddler(level:"h1")
+<$level$><$view field="title"/></$level$>
+<$list filter='[tag<currentTiddler>!has[draft.of]]'>
+<$tiddler>
+<<display-tiddler>>
+</$tiddler>
+</$list>
+\end
+
+\define display-list-tiddler(type:"ol")
+<$type$>
+<$list filter='[tag<currentTiddler>!has[draft.of]]'>
+<li>
+<$tiddler>
+<<display-tiddler>>
+</$tiddler>
+</li>
+</$list>
+</$type$>
+\end

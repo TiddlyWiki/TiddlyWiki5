@@ -9,6 +9,9 @@ tags: $:/tags/ViewTemplate
 
 <<lingo Listing/Hint>>
 
+<$button message="tm-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
+<$button message="tm-perform-import" param=<<currentTiddler>>><<lingo Listing/Import/Caption>></$button>
+
 {{||$:/core/ui/ImportListing}}
 
 <$button message="tm-delete-tiddler" param=<<currentTiddler>>><<lingo Listing/Cancel/Caption>></$button>
