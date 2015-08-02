@@ -1,0 +1,8 @@
+{
+	"title": "$:/languages/ko-KR",
+	"name": "ko-KR",
+	"plugin-type": "language",
+	"description": "Korean (Korea Republic)",
+	"author": "Myeongjin",
+	"core-version": ">=5.1.4"
+}
