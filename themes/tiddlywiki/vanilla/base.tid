@@ -1579,7 +1579,7 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	fill: <<colour foreground>>;
 }
 
-a.tc-tiddlylink.tc-plugin-info:hover svg {
+a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > svg {
 	fill: <<colour foreground>>;
 }
 
@@ -1603,13 +1603,19 @@ a.tc-tiddlylink.tc-plugin-info:hover svg {
 	margin: 2px 0 2px 0;
 }
 
-.tc-plugin-info img, .tc-plugin-info svg {
+.tc-plugin-info:hover > .tc-plugin-info-chunk > img, .tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	width: 2em;
+	height: 2em;
+	fill: <<colour foreground>>;
+}
+
+.tc-plugin-info > .tc-plugin-info-chunk > img, .tc-plugin-info > .tc-plugin-info-chunk > svg {
 	width: 2em;
 	height: 2em;
 	fill: <<colour muted-foreground>>;
 }
 
-.tc-plugin-info.tc-small-icon img, .tc-plugin-info.tc-small-icon svg {
+.tc-plugin-info.tc-small-icon > .tc-plugin-info-chunk > img, .tc-plugin-info.tc-small-icon > .tc-plugin-info-chunk > svg {
 	width: 1em;
 	height: 1em;
 }
