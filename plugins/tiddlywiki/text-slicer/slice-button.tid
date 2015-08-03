@@ -3,7 +3,11 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/plugins/tiddlywiki/text-slicer/text-slicer-icon}} Slice tiddler
 description: Slice this tiddler by headings and lists
 
-<$button message="tm-slice-tiddler" param=<<currentTiddler>> tooltip={{$:/language/Buttons/Clone/Hint}} aria-label={{$:/language/Buttons/Clone/Caption}} class=<<tv-config-toolbar-class>>>
+\define hint()
+Slice this tiddler by headings and lists
+\end
+
+<$button message="tm-slice-tiddler" param=<<currentTiddler>> tooltip=<<hint>> aria-label=<<hint>> class=<<tv-config-toolbar-class>>>
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
 {{$:/plugins/tiddlywiki/text-slicer/text-slicer-icon}}
 </$list>
