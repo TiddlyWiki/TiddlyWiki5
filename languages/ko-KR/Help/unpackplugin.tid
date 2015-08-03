@@ -1,0 +1,8 @@
+title: $:/language/Help/unpackplugin
+description: 플러그인에 포함되어 있는 티들러의 압축을 풉니다
+
+플러그인에 포함되어 있는 티들러의 압축을 풀어 일반 티들러로 만듭니다:
+
+```
+--unpackplugin <제목>
+```

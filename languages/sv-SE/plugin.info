@@ -1,0 +1,8 @@
+{
+    "title": "$:/languages/sv-SE",
+    "name": "sv-SE",
+    "plugin-type": "language",
+    "description": "Swedish (Sweden)",
+    "author": "SuperDOS",
+    "core-version": ">=5.1.0"
+}

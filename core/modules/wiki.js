@@ -742,11 +742,15 @@ exports.getCacheForTiddler = function(title,cacheName,initializer) {
 	}
 };
 
-// Clear all caches associated with a particular tiddler
+// Clear all caches associated with a particular tiddler, or, if the title is null, clear all the caches for all the tiddlers
 exports.clearCache = function(title) {
-	this.caches = this.caches || Object.create(null);
-	if($tw.utils.hop(this.caches,title)) {
-		delete this.caches[title];
+	if(title) {
+		this.caches = this.caches || Object.create(null);
+		if($tw.utils.hop(this.caches,title)) {
+			delete this.caches[title];
+		}
+	} else {
+		this.caches = Object.create(null);
 	}
 };
 

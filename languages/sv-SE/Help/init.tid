@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Initialise a new wiki folder
+
+Initierar en tom [[WikiFolder|WikiFolders]] med en kopia av angiven utgåva.
+
+```
+--init <edition> [<edition> ...]
+```
+
+Till exempel:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Notera:
+
+* Wiki-mappen skapas om det är nödvändigt
+* "Utgåvan" blir som standard ''tom''
+* Intieringskommandot kommer misslyckas om wikimappen inte är tom
+* Intieringskommandot tar bort alla `includeWikis` definitioner i utgåvans `tiddlywiki.info` fil
+* När flera utgåvor är specificerade, skulle versioner som initialiseras senare skriva över alla filer som hör ihop med tidigare utgåvor (d.v.s. den senaste `tiddlywiki.info` filen kommer att kopieras från den senaste utgåvan)
+* `--editions` retunerar en lista över tillgänglia utgåvor

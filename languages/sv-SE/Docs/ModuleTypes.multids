@@ -1,0 +1,22 @@
+title: $:/language/Docs/ModuleTypes/
+
+animation: Animationer som kan användas med RevealWidget.
+command: Kommandon som kan exekveras under Node.js.
+config: Data som sätts in i `$tw.config`.
+filteroperator: Individuella filter-växel metoder.
+global: Global data som sätts in i `$tw`.
+isfilteroperator: Operander för ''is'' filter-växeln.
+macro: JavaScript makrodefinitioner.
+parser: Parser för olika innehållstyper.
+saver: Savers hanterar olika metoder för att spara filer från webbläsaren.
+startup: Uppstartsfunktioner.
+storyview: Artikel-vyer anpassar animation och beteende över list-widgets.
+tiddlerdeserializer: Converts different content types into tiddlers.
+tiddlerfield: Definierar beteendet för ett enstaka tiddler-fält.
+tiddlermethod: Lägger till metoder till `$tw.Tiddler` prototypen.
+upgrader: Tillämpar uppgraderingsprocessens av tiddlers under en upgrade/import.
+utils: Lägger till metoder till `$tw.utils`.
+utils-node: Lägger till Node.js-specifik metod till `$tw.utils`.
+widget: Widgets kapslar in DOM rendering och uppdaterar.
+wikimethod: Lägger till metoder till `$tw.Wiki`.
+wikirule: Individuell parserregler för huvud WikiText-parsern.
