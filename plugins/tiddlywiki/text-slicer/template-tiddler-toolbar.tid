@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/tiddler-toolbar
+
+<div class="tc-slice-toolbar" style="background:#def;">
+<$link><$text text=<<currentTiddler>>/></$link>
+</div>

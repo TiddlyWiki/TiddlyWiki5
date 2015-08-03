@@ -121,7 +121,7 @@ function sliceTiddler(title) {
 	if(parser) {
 		parentStack.push({type: "h0", title: addTiddler({
 			title: "Sliced up " + title,
-			text: "<div class='tc-table-of-contents'>\n\n<<toc-selective-expandable 'Sliced up " + title + "'>>\n\n</div>\n<<display-heading-tiddler level:'h1'>>",
+			text: "{{||$:/plugins/tiddlywiki/text-slicer/templates/display-document}}",
 			list: []
 		})});
 		processNodeList(parser.tree);

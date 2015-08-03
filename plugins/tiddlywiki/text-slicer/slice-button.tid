@@ -1,5 +1,6 @@
 title: $:/plugins/tiddlywiki/text-slicer/ui/slice-button
 tags: $:/tags/ViewToolbar
+list-before: $:/core/ui/Buttons/edit
 caption: {{$:/plugins/tiddlywiki/text-slicer/text-slicer-icon}} Slice tiddler
 description: Slice this tiddler by headings and lists
 
