@@ -3,5 +3,5 @@
 	"description": "Tools for slicing text into tiddlers",
 	"author": "JeremyRuston",
 	"core-version": ">=5.0.0",
-	"list": "readme"
+	"list": "readme docs"
 }

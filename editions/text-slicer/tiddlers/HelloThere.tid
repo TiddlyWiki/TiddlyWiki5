@@ -2,7 +2,9 @@ title: HelloThere
 
 This edition of ~TiddlyWiki contains tools to help slice up long texts into individual tiddlers.
 
-//It is currently only intended for advanced users. The tools are in the early stages of development, and likely to need some customisation to do what you need.//
+//''This plugin is under active development, and is subject to change in the future''. It is currently only intended for advanced users. The tools are in the early stages of development, and likely to need some customisation to do what you need.//
+
+! Usage
 
 The source document must first be marked up as an ordinary wikitext tiddler. Currently only the following formatting is recognised:
 
@@ -16,10 +18,8 @@ To try it out:
 # Click the ''import'' button in the resulting import listing
 # Open the tiddler [[Sliced up Sample Text]]
 #* It should match the content of [[Sample Text]]
+#* The table of contents at the top allows the structure to be explored
 
-The table of contents at the top of the output tiddler shows how the document has been split up into individual tiddlers:
+! Plugin Instructions
 
-* A tiddler for each heading, with the children of the heading tagged with the title of the heading
-* A tiddler for each paragraph
-* A tiddler for each list, and a tiddler for each list item
-* The list field of tag tiddlers is used to control ordering of children
+{{$:/plugins/tiddlywiki/text-slicer/docs}}

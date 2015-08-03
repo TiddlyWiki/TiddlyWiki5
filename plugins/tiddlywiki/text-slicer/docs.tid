@@ -1,0 +1,26 @@
+title: $:/plugins/tiddlywiki/text-slicer/docs
+
+!! Text Slicing Approach
+
+Individual tiddlers are created for each heading, paragraph and list item. They are linked together using TiddlyWiki's tagging mechanism.
+
+For example, consider a tiddler titled ''Example'' containing this simple text:
+
+<<<
+! This is a heading
+
+This is a paragraph.
+
+* And the first list item
+* Second list item
+<<<
+
+It will be sliced up into:
+
+* a tiddler for the overall document
+** a tiddler for the heading
+*** a tiddler for the paragraph
+*** a tiddler for the list
+**** and a tiddler for each list item
+
+These tiddlers are bound together using tagging: child tiddlers are tagged with the title of their parent, and the parent tiddler has a ''list'' field that lists each child in the correct order.
