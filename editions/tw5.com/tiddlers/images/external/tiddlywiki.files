@@ -109,6 +109,15 @@
 			}
 		},
 		{
+			"file": "../../../../../languages/ko-KR/icon.tid",
+			"isTiddlerFile": true,
+			"fields": {
+				"title": "Language Icon: ko-KR",
+				"language": "ko-KR",
+				"tags": "Language Icon"
+			}
+		},
+		{
 			"file": "../../../../../languages/nl-NL/icon.tid",
 			"isTiddlerFile": true,
 			"fields": {
@@ -150,6 +159,15 @@
 			"fields": {
 				"title": "Language Icon: sk-SK",
 				"language": "sk-SK",
+				"tags": "Language Icon"
+			}
+		},
+		{
+			"file": "../../../../../languages/sv-SE/icon.tid",
+			"isTiddlerFile": true,
+			"fields": {
+				"title": "Language Icon: sv-SE",
+				"language": "sv-SE",
 				"tags": "Language Icon"
 			}
 		},
