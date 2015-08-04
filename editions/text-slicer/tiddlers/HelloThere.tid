@@ -14,10 +14,12 @@ The source document must first be marked up as an ordinary wikitext tiddler. Cur
 
 To try it out:
 
-# Click the "text slicer" icon on the [[Sample Text]] tiddler below
+# Click the ''text slicer'' icon on the [[Sample Text]] tiddler below
 # View the tiddler [[Sliced up Sample Text]]
 #* It should match the content of [[Sample Text]]
 #* The table of contents at the top allows the structure to be explored
+# Click the ''Show toolbar'' checkbox to display a simple toolbar for each tiddler
+# Use the text box and the ''rename'' button to rename tiddlers without breaking the tagging links
 
 ! Plugin Instructions
 
