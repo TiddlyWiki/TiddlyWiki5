@@ -15,8 +15,7 @@ The source document must first be marked up as an ordinary wikitext tiddler. Cur
 To try it out:
 
 # Click the "text slicer" icon on the [[Sample Text]] tiddler below
-# Click the ''import'' button in the resulting import listing
-# Open the tiddler [[Sliced up Sample Text]]
+# View the tiddler [[Sliced up Sample Text]]
 #* It should match the content of [[Sample Text]]
 #* The table of contents at the top allows the structure to be explored
 
