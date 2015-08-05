@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
 
 pre {
 	display: block;
-	padding: 14px;
+	padding: 0.5em;
 	margin-top: 1em;
 	margin-bottom: 1em;
 	word-break: normal;
@@ -92,7 +92,6 @@ pre {
 	white-space: pre-wrap;
 	background-color: <<colour pre-background>>;
 	border: 1px solid <<colour pre-border>>;
-	padding: 0 3px 2px;
 	border-radius: 3px;
 	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
