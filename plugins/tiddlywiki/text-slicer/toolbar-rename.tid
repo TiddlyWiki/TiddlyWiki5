@@ -13,4 +13,5 @@ rename
 </$button>
 \end
 
-<<body>>
+<$list filter="[draft.of<currentTiddler>limit[1]]" emptyMessage="""<<body>>""">
+</$list>

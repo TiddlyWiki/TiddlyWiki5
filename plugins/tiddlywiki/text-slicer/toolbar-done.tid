@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/text-slicer/toolbar/done
+tags: $:/tags/TextSlicerToolbar
+
+\define body()
+<$button>
+<$action-sendmessage $message="tm-save-tiddler" $param=<<currentTiddler>> suppressNavigation="yes"/>
+done
+</$button>
+\end
+
+<$list filter="[draft.of<currentTiddler>limit[1]]">
+<<body>>
+</$list>
