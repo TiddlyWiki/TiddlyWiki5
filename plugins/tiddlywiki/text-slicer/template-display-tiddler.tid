@@ -1,0 +1,6 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/display-tiddler
+
+<$list filter="[<tv-show-toolbar>prefix[yes]]" variable="hasToolbar">
+{{||$:/plugins/tiddlywiki/text-slicer/templates/tiddler-toolbar}}
+</$list>
+<$list filter="[draft.of<currentTiddler>limit[1]]" editTemplate="$:/core/ui/EditTemplate" emptyMessage="""<$transclude mode='block'/>"""/>

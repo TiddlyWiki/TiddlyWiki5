@@ -1,0 +1,16 @@
+title: $:/plugins/tiddlywiki/text-slicer/toolbar/rename
+tags: $:/tags/TextSlicerToolbar
+
+\define renameProxyTitle()
+$:/config/plugins/tiddlywiki/text-slicer/rename-$(currentTiddler)$
+\end
+
+\define body()
+<$edit-text tag="input" tiddler=<<renameProxyTitle>> placeholder="Rename" default=<<currentTiddler>>/>
+<$button>
+<$action-sendmessage $message="tm-rename-tiddler" from=<<currentTiddler>> to={{$(renameProxyTitle)$}}/>
+rename
+</$button>
+\end
+
+<<body>>
