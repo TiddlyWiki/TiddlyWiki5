@@ -240,3 +240,5 @@ Richard Smith, @richardwsmith 2015/05/22
 Marco Rimoldi, @marcor, 2015/06/26
 
 Slobodan Vujnovic, @slovuj, 2015/06/30
+
+Anthon Nilsson, @superdos, 2015/08/06
