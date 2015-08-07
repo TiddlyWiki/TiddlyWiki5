@@ -9,8 +9,10 @@ $:/config/plugins/tiddlywiki/text-slicer/rename-$(currentTiddler)$
 <$edit-text tag="input" tiddler=<<renameProxyTitle>> placeholder="Rename" default=<<currentTiddler>>/>
 <$button>
 <$action-sendmessage $message="tm-rename-tiddler" from=<<currentTiddler>> to={{$(renameProxyTitle)$}}/>
+<$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
 rename
 </$button>
 \end
 
-<<body>>
+<$list filter="[draft.of<currentTiddler>limit[1]]" emptyMessage="""<<body>>""">
+</$list>

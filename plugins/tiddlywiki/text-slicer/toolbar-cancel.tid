@@ -1,0 +1,13 @@
+title: $:/plugins/tiddlywiki/text-slicer/toolbar/cancel
+tags: $:/tags/TextSlicerToolbar
+
+\define body()
+<$button>
+<$action-sendmessage $message="tm-cancel-tiddler" $param=<<currentTiddler>> suppressNavigation="yes"/>
+cancel
+</$button>
+\end
+
+<$list filter="[draft.of<currentTiddler>limit[1]]">
+<<body>>
+</$list>

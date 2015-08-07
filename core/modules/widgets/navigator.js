@@ -220,14 +220,17 @@ NavigatorWidget.prototype.handleEditTiddlerEvent = function(event) {
 		return false;
 	}
 	// Replace the specified tiddler with a draft in edit mode
-	var draftTiddler = this.makeDraftTiddler(title),
-		draftTitle = draftTiddler.fields.title,
-		storyList = this.getStoryList();
-	this.removeTitleFromStory(storyList,draftTitle);
-	this.replaceFirstTitleInStory(storyList,title,draftTitle);
-	this.addToHistory(draftTitle,event.navigateFromClientRect);
-	this.saveStoryList(storyList);
-	return false;
+	var draftTiddler = this.makeDraftTiddler(title);
+	// Update the story and history if required
+	if(!event.paramObject || event.paramObject.suppressNavigation !== "yes") {
+		var draftTitle = draftTiddler.fields.title,
+			storyList = this.getStoryList();
+		this.removeTitleFromStory(storyList,draftTitle);
+		this.replaceFirstTitleInStory(storyList,title,draftTitle);
+		this.addToHistory(draftTitle,event.navigateFromClientRect);
+		this.saveStoryList(storyList);
+		return false;
+	}
 };
 
 // Delete a tiddler
@@ -345,11 +348,13 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				if(isRename) {
 					this.wiki.deleteTiddler(draftOf);
 				}
-				// Replace the draft in the story with the original
-				this.replaceFirstTitleInStory(storyList,title,draftTitle);
-				this.addToHistory(draftTitle,event.navigateFromClientRect);
-				if(draftTitle !== this.storyTitle) {
-					this.saveStoryList(storyList);
+				if(!event.paramObject || event.paramObject.suppressNavigation !== "yes") {
+					// Replace the draft in the story with the original
+					this.replaceFirstTitleInStory(storyList,title,draftTitle);
+					this.addToHistory(draftTitle,event.navigateFromClientRect);
+					if(draftTitle !== this.storyTitle) {
+						this.saveStoryList(storyList);
+					}
 				}
 				// Trigger an autosave
 				$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
@@ -381,13 +386,15 @@ NavigatorWidget.prototype.handleCancelTiddlerEvent = function(event) {
 		// Remove the draft tiddler
 		if(isConfirmed) {
 			this.wiki.deleteTiddler(draftTitle);
-			if(originalTiddler) {
-				this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
-				this.addToHistory(originalTitle,event.navigateFromClientRect);
-			} else {
-				this.removeTitleFromStory(storyList,draftTitle);
+			if(!event.paramObject || event.paramObject.suppressNavigation !== "yes") {
+				if(originalTiddler) {
+					this.replaceFirstTitleInStory(storyList,draftTitle,originalTitle);
+					this.addToHistory(originalTitle,event.navigateFromClientRect);
+				} else {
+					this.removeTitleFromStory(storyList,draftTitle);
+				}
+				this.saveStoryList(storyList);
 			}
-			this.saveStoryList(storyList);	
 		}
 	}
 	return false;

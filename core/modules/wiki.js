@@ -58,17 +58,20 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	this.setText(title,tr.field,tr.index,value);
 };
 
-exports.setText = function(title,field,index,value) {
+exports.setText = function(title,field,index,value,options) {
+	options = options || {};
+	var creationFields = options.timestamp ? this.getCreationFields() : {},
+		modificationFields = options.timestamp ? this.getModificationFields() : {};
 	// Check if it is a reference to a tiddler field
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
 		data[index] = value;
-		this.setTiddlerData(title,data,this.getModificationFields());
+		this.setTiddlerData(title,data,modificationFields);
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
 		fields[field || "text"] = value;
-		this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
+		this.addTiddler(new $tw.Tiddler(creationFields,tiddler,fields,modificationFields));
 	}
 };
 
