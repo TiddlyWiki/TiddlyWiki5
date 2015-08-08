@@ -60,10 +60,6 @@ canvas.tc-edit-bitmapeditor  {
 	<<box-shadow "2px 2px 10px rgba(0, 0, 0, 0.5)">>
 }
 
-.tc-modal-displayed {
-	<<filter "blur(4px)">>
-}
-
 .tc-modal {
 	border-radius: 6px;
 	<<box-shadow "0 3px 7px rgba(0,0,0,0.3)">>
