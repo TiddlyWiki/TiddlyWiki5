@@ -18,6 +18,7 @@ This release includes several low-level performance optimisations that should im
 * [[Tiddler iteration optimisations|https://github.com/Jermolene/TiddlyWiki5/commit/8f63e2a959a7ac44533ae2b6192716ee17a1ce93]]
 * [[State qualifier generation|https://github.com/Jermolene/TiddlyWiki5/commit/848a7f4e744c8f4dcb4ec88a0e99c4ae6aac25e5]]
 * [[Caching data tiddlers|https://github.com/Jermolene/TiddlyWiki5/commit/32f6d7f1b01474b82debcbdd5d76c49c59303265]]
+* [[Removed expensive visual effects|https://github.com/Jermolene/TiddlyWiki5/commit/4f5cf4597abb08af787b62c2e2ee1b8c667dad1e]]
 
 !! Résumé Builder Edition
 
@@ -32,6 +33,7 @@ The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced 
 !! Translation Improvements
 
 * Added Swedish translation by @Superdos
+* Added Korean (Korean Republic) translation by @araname
 
 !! Usability Improvements
 
@@ -43,6 +45,9 @@ The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced 
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c4397792f5d396288048bcc3bb4ee8e95dbc2c5e]] added [[recent Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e0aacc84d5f084ff7a53153c590fbff3d24f2e2c]] `publishFilter` to default save template
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/7dddc925ae93725552b98bc348a07572895da96c]] ''delete'' button to be used in the tiddler view-mode toolbar
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/742161675421a942051abed01cb47c0394f4db6d]] a new [[hidden setting for keyboard shortcuts|Hidden Setting: Keyboard Shortcuts]]
+* [[Update|https://github.com/Jermolene/TiddlyWiki5/commit/e5cd8313a0d1a4a3dea17457a8a883675243b9c7]] ActionSetFieldWidget to allow timestamp to be preserved
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/fdce67399d175a9911df908981b83ac3edfb1142]] option to suppress navigation for edit/cancel/save
 
 !! Bug Fixes
 
