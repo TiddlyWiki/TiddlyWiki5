@@ -606,9 +606,27 @@ button.tc-untagged-label {
 
 	.tc-sidebar-header {
 		padding: 14px;
-		min-height: 32px;
+		<<if-no-sidebar "
+		    padding: inherit;
+		">>
 		margin-top: {{$:/themes/tiddlywiki/vanilla/metrics/storytop}};
 	}
+
+	.tc-sidebar-scrollable {
+		position: fixed;
+		overflow-y: auto;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	    z-index: 1000;
+	    background-color: <<colour page-background>>;
+	    width: 100%;
+	    max-height: 100%;
+		<<if-no-sidebar "
+		    width: auto;
+		    max-height: auto;
+		">>
+	}
+
 
 	.tc-story-river {
 		position: relative;
