@@ -54,6 +54,11 @@ Plugins/Plugins/Caption: 插件
 Plugins/Plugins/Hint: 插件
 Plugins/Themes/Caption: 佈景主題
 Plugins/Themes/Hint: 佈景主題插件
+Parsing/Caption: 解析
+Parsing/Hint: 在此您可以全域停用個別的維基語法解析規則。請小心，停用某些解析規則，會妨礙 ~TiddlyWiki 正常運作 (您可以用[[安全模式|http://tiddlywiki.com/#SafeMode]]恢復正常操作)
+Parsing/Block/Caption: 區塊解析規則
+Parsing/Inline/Caption: 行內解析規則
+Parsing/Pragma/Caption: 編譯指示解析規則
 Saving/Caption: 儲存
 Saving/Heading: 儲存
 Saving/TiddlySpot/Advanced/Heading: 進階設定
@@ -71,6 +76,9 @@ Settings/AutoSave/Caption: 自動儲存
 Settings/AutoSave/Disabled/Description: 不要自動儲存變更
 Settings/AutoSave/Enabled/Description: 自動儲存變更
 Settings/AutoSave/Hint: 在編輯過程中自動儲存變更
+Settings/CamelCase/Caption: 駝峰式維基鏈接
+Settings/CamelCase/Hint: 您可以全域停用駝峰式短語自動鏈接。須儲存後重新載入，方才生效。
+Settings/CamelCase/Description: 啟用自動駝峰式鏈接
 Settings/Caption: 設定
 Settings/DefaultSidebarTab/Caption: 預設側邊欄頁籤
 Settings/DefaultSidebarTab/Hint: 指定預設顯示的側邊欄頁籤
