@@ -242,3 +242,5 @@ Marco Rimoldi, @marcor, 2015/06/26
 Slobodan Vujnovic, @slovuj, 2015/06/30
 
 Anthon Nilsson, @superdos, 2015/08/06
+
+Myeongjin, @araname, 2015/08/08
