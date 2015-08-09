@@ -36,6 +36,10 @@ Unfold/Caption: unfold tiddler
 Unfold/Hint: Unfold the body of this tiddler
 FoldOthers/Caption: fold other tiddlers
 FoldOthers/Hint: Fold the bodies of other opened tiddlers
+FoldAll/Caption: fold all tiddlers
+FoldAll/Hint: Fold the bodies of all opened tiddlers
+UnfoldAll/Caption: unfold all tiddlers
+UnfoldAll/Hint: Unfold the bodies of all opened tiddlers
 FullScreen/Caption: full-screen
 FullScreen/Hint: Enter or leave full-screen mode
 Help/Caption: help

@@ -31,7 +31,9 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tm-import-tiddlers", handler: "handleImportTiddlersEvent"},
 		{type: "tm-perform-import", handler: "handlePerformImportEvent"},
 		{type: "tm-fold-tiddler", handler: "handleFoldTiddlerEvent"},
-		{type: "tm-fold-other-tiddlers", handler: "handleFoldOtherTiddlersEvent"}
+		{type: "tm-fold-other-tiddlers", handler: "handleFoldOtherTiddlersEvent"},
+		{type: "tm-fold-all-tiddlers", handler: "handleFoldAllTiddlersEvent"},
+		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"}
 	]);
 };
 
@@ -586,6 +588,24 @@ NavigatorWidget.prototype.handleFoldOtherTiddlersEvent = function(event) {
 		prefix = paramObject.foldedStatePrefix;
 	$tw.utils.each(this.getStoryList(),function(title) {
 		self.wiki.setText(prefix + title,"text",null,event.param === title ? "show" : "hide");
+	});
+};
+
+NavigatorWidget.prototype.handleFoldAllTiddlersEvent = function(event) {
+	var self = this,
+		paramObject = event.paramObject || {},
+		prefix = paramObject.foldedStatePrefix;
+	$tw.utils.each(this.getStoryList(),function(title) {
+		self.wiki.setText(prefix + title,"text",null,"hide");
+	});
+};
+
+NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
+	var self = this,
+		paramObject = event.paramObject || {},
+		prefix = paramObject.foldedStatePrefix;
+	$tw.utils.each(this.getStoryList(),function(title) {
+		self.wiki.setText(prefix + title,"text",null,"show");
 	});
 };
 
