@@ -585,8 +585,7 @@ NavigatorWidget.prototype.handleFoldOtherTiddlersEvent = function(event) {
 		paramObject = event.paramObject || {},
 		prefix = paramObject.foldedStatePrefix;
 	$tw.utils.each(this.getStoryList(),function(title) {
-		var foldedState = self.wiki.getTiddlerText(prefix + title,"show");
-		self.wiki.setText(prefix + title,"text",null,event.param === title ? foldedState : "hide");
+		self.wiki.setText(prefix + title,"text",null,event.param === title ? "show" : "hide");
 	});
 };
 
