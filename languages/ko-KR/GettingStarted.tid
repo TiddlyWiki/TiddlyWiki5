@@ -7,8 +7,8 @@ TiddlyWiki에 중요한 정보를 저장하는 것을 시작하기 전에 확실
 !! 이 TiddlyWiki 설정하기
 
  HelloThere
-[[$:/Translators]]
-[[$:/plugins/tiddlywiki/translators/readme]]
+$:/Translators
+$:/plugins/tiddlywiki/translators/readme
 
 
 더 많은 옵션에 대해서는 제어판을 보세요.

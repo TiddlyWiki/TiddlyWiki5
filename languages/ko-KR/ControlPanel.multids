@@ -2,8 +2,8 @@ title: $:/language/ControlPanel/
 
 Advanced/Caption: 고급
 Advanced/Hint: 이 TiddlyWiki에 대한 내부 정보
-Appearance/Caption: 모양
-Appearance/Hint: TiddlyWiki의 모양을 사용자 지정하는 방법입니다.
+Appearance/Caption: 외관
+Appearance/Hint: TiddlyWiki의 외관을 사용자 지정하는 방법입니다.
 Basics/AnimDuration/Prompt: 애니메이션 지속 시간:
 Basics/Caption: 기본
 Basics/DefaultTiddlers/BottomHint: 스페이스로 되어 있는 제목에는 &#91;&#91;이중 대괄호&#93;&#93;를 사용하세요. 또는 <$button set="$:/DefaultTiddlers" setTo="[list[$:/StoryList]]">이야기 정렬 유지</$button>로 선택할 수 있습니다
@@ -38,6 +38,11 @@ Palette/Editor/Reset/Caption: 재설정
 Palette/HideEditor/Caption: 편집기 숨기기
 Palette/Prompt: 현재 팔레트:
 Palette/ShowEditor/Caption: 편집기 보이기
+Parsing/Block/Caption: 블록 파서 규칙
+Parsing/Caption: 구문 분석
+Parsing/Hint: 여기서 개별 위키 파서 규칙을 전역으로 비활성화할 수 있습니다. 어떤 파서 규칙을 비활성화하면 ~TiddlyWiki가 제대로 작동하는 것을 막을 수 있으므로 주의하십시오 ([[안전 모드|http://tiddlywiki.com/#SafeMode]]로 정상 작동하도록 복구할 수 있습니다)
+Parsing/Inline/Caption: 인라인 파서 규칙
+Parsing/Pragma/Caption: 플라그마 파서 규칙
 Plugins/Add/Caption: 더 많은 플러그인 얻기
 Plugins/Add/Hint: 공식 라이브러리에서 플러그인을 설치합니다
 Plugins/Caption: 플러그인
@@ -70,6 +75,9 @@ Settings/AutoSave/Caption: 자동 저장
 Settings/AutoSave/Disabled/Description: 바뀜을 자동으로 저장하지 않습니다
 Settings/AutoSave/Enabled/Description: 바뀜을 자동으로 저장합니다
 Settings/AutoSave/Hint: 편집하는 동안 자동으로 바뀜을 저장합니다
+Settings/CamelCase/Caption: Camel Case 위키 링크
+Settings/CamelCase/Description: 자동으로 ~CamelCase 링크를 활성화
+Settings/CamelCase/Hint: ~CamelCase 어구를 자동으로 링크하는 것을 전역으로 비활성화할 수 있습니다. 적용하려면 다시 불러와야 합니다
 Settings/Caption: 설정
 Settings/DefaultSidebarTab/Caption: 기본 사이드바 탭
 Settings/DefaultSidebarTab/Hint: 기본적으로 보여지는 사이드바 탭을 지정합니다
@@ -95,14 +103,14 @@ Settings/TitleLinks/Hint: 티들러 제목을 링크로 선택적으로 보여�
 Settings/TitleLinks/No/Description: 티들러 제목을 링크로 보여주지 않음
 Settings/TitleLinks/Yes/Description: 티들러 제목을 링크로 보여주기
 Settings/ToolbarButtons/Caption: 툴바 버튼
-Settings/ToolbarButtons/Hint: 기본 툴바 버튼 모양:
+Settings/ToolbarButtons/Hint: 기본 툴바 버튼 외관:
 Settings/ToolbarButtons/Icons/Description: 아이콘을 포함
 Settings/ToolbarButtons/Text/Description: 텍스트를 포함
 Settings/ToolbarButtonStyle/Caption: 툴바 버튼 스타일
 Settings/ToolbarButtonStyle/Hint: 툴바 버튼에 대한 스타일을 선택합니다:
-Settings/ToolbarButtonStyle/Styles/Borderless: 윤곽선 없음
-Settings/ToolbarButtonStyle/Styles/Boxed: 상자 모양
-Settings/ToolbarButtonStyle/Styles/Rounded: 둥근 모양
+Settings/ToolbarButtonStyle/Styles/Borderless: 테두리 없음
+Settings/ToolbarButtonStyle/Styles/Boxed: 상자형
+Settings/ToolbarButtonStyle/Styles/Rounded: 둥근형
 StoryView/Caption: 이야기 보기
 StoryView/Prompt: 현재 보기:
 Theme/Caption: 테마

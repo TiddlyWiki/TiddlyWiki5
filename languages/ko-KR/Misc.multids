@@ -29,7 +29,7 @@ PluginReloadWarning: 플러그인의 바뀜을 적용할 수 있도록 하려면
 RecentChanges/DateFormat: YYYY년 MMM DD일
 SystemTiddler/Tooltip: 이것은 시스템 티들러입니다
 TagManager/Colour/Heading: 색
-TagManager/Count/Heading: 수
+TagManager/Count/Heading: 횟수
 TagManager/Icon/Heading: 아이콘
 TagManager/Info/Heading: 정보
 TagManager/Tag/Heading: 태그
