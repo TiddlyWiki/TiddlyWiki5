@@ -60,8 +60,8 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 
 exports.setText = function(title,field,index,value,options) {
 	options = options || {};
-	var creationFields = options.timestamp ? this.getCreationFields() : {},
-		modificationFields = options.timestamp ? this.getModificationFields() : {};
+	var creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
+		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields();
 	// Check if it is a reference to a tiddler field
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));

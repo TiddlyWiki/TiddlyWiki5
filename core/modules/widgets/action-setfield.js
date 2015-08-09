@@ -60,7 +60,7 @@ Invoke the action associated with this widget
 SetFieldWidget.prototype.invokeAction = function(triggeringWidget,event) {
 	var self = this,
 		options = {};
-	options.timestamp = this.actionTimestamp;
+	options.suppressTimestamp = !this.actionTimestamp;
 	if(typeof this.actionValue === "string") {
 		this.wiki.setText(this.actionTiddler,this.actionField,this.actionIndex,this.actionValue,options);		
 	}
