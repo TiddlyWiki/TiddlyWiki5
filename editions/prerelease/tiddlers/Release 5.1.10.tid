@@ -37,7 +37,7 @@ The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced 
 
 !! Usability Improvements
 
-* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5d43cd740863be188e43fd49893dc8dddcd5b937]] new ''fold'' and ''fold others'' buttons to the tiddler toolbar to temporarily hide the body of a tiddler
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5d43cd740863be188e43fd49893dc8dddcd5b937]] new ''fold'' and ''fold others'' buttons to the tiddler toolbar to temporarily hide the body of a tiddler, and also [[added|https://github.com/Jermolene/TiddlyWiki5/commit/ac08dc2e35d99eb563ab8c4449ce1fcfe30f3bf7]] new ''fold all'' and ''unfold all'' page buttons
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d5e690a06d523a2047eaf9b623b633bb72c18af9]] ability to disable individual WikiText parser rules (see the ''Advanced'' tab of $:/ControlPanel). Also [[added|https://github.com/Jermolene/TiddlyWiki5/commit/58188cf8053bef87dbe97e4b05cdba67f75c615d]] a simple setting for disabling automatic linking of ~CamelCase words
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2cb6400773096b02b71c1851fb0fac5dfefbbd6f]] support for automatically linked system tiddler titles to include digits and underscore
 
