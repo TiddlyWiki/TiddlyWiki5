@@ -1,7 +1,13 @@
 title: $:/core/ui/ViewTemplate/body
 tags: $:/tags/ViewTemplate
 
+\define folded-state()
+$:/state/folded/$(currentTiddler)$
+\end
+
 <div class="tc-tiddler-body">
+
+<$reveal type="nomatch" state=<<folded-state>> text="hide" retain="yes" animate="yes">
 
 <$list filter="[all[current]!has[plugin-type]!field:hide-body[yes]]">
 
@@ -12,5 +18,7 @@ tags: $:/tags/ViewTemplate
 </$transclude>
 
 </$list>
+
+</$reveal>
 
 </div>

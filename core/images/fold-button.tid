@@ -1,0 +1,9 @@
+title: $:/core/images/fold-button
+tags: $:/tags/Image
+
+<svg class="tc-image-fold tc-image-button" width="22pt" height="22pt" viewBox="0 0 128 128">
+    <g fill-rule="evenodd">
+        <rect x="0" y="0" width="128" height="16" rx="8"></rect>
+        <path d="M40,118 L40,62.0000511 C40,57.5797863 36.418278,54 32,54 C27.5907123,54 24,57.5817449 24,62.0000511 L24,125.999949 C24,130.409288 27.5817449,134 32.0000511,134 L95.9999489,134 C100.420214,134 104,130.418278 104,126 C104,121.590712 100.418255,118 95.9999489,118 L40,118 Z" id="Rectangle-432-Copy" transform="translate(64.000000, 94.000000) scale(1, -1) rotate(-45.000000) translate(-64.000000, -94.000000) "></path>
+    </g>
+</svg>

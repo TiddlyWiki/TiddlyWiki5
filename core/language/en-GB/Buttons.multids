@@ -30,6 +30,8 @@ ExportTiddler/Caption: export tiddler
 ExportTiddler/Hint: Export tiddler
 ExportTiddlers/Caption: export tiddlers
 ExportTiddlers/Hint: Export tiddlers
+Fold/Caption: fold/unfold tiddler
+Fold/Hint: Fold/unfold the body of this tiddler
 FullScreen/Caption: full-screen
 FullScreen/Hint: Enter or leave full-screen mode
 Help/Caption: help

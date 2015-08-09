@@ -1,0 +1,9 @@
+title: $:/core/images/unfold-button
+tags: $:/tags/Image
+
+<svg class="tc-image-unfold tc-image-button" width="22pt" height="22pt" viewBox="0 0 128 128">
+    <g fill-rule="evenodd">
+        <rect x="0" y="0" width="128" height="16" rx="8"></rect>
+        <path d="M40,73 L40,17.0000511 C40,12.5797863 36.418278,9 32,9 C27.5907123,9 24,12.5817449 24,17.0000511 L24,80.9999489 C24,85.4092877 27.5817449,89 32.0000511,89 L95.9999489,89 C100.420214,89 104,85.418278 104,81 C104,76.5907123 100.418255,73 95.9999489,73 L40,73 Z" transform="translate(64.000000, 49.000000) rotate(-45.000000) translate(-64.000000, -49.000000) "></path>
+    </g>
+</svg>

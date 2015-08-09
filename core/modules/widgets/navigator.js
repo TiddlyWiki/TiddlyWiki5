@@ -29,7 +29,8 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tm-close-other-tiddlers", handler: "handleCloseOtherTiddlersEvent"},
 		{type: "tm-new-tiddler", handler: "handleNewTiddlerEvent"},
 		{type: "tm-import-tiddlers", handler: "handleImportTiddlersEvent"},
-		{type: "tm-perform-import", handler: "handlePerformImportEvent"}
+		{type: "tm-perform-import", handler: "handlePerformImportEvent"},
+		{type: "tm-fold-tiddler", handler: "handleFoldTiddlerEvent"}
 	]);
 };
 
@@ -567,6 +568,15 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 	this.addToHistory([event.param]);
 	// Trigger an autosave
 	$tw.rootWidget.dispatchEvent({type: "tm-auto-save-wiki"});
+};
+
+NavigatorWidget.prototype.handleFoldTiddlerEvent = function(event) {
+	var self = this,
+		paramObject = event.paramObject || {};
+	if(paramObject.foldedState) {
+		var foldedState = this.wiki.getTiddlerText(paramObject.foldedState,"show") === "show" ? "hide" : "show";
+		this.wiki.setText(paramObject.foldedState,"text",null,foldedState);
+	}
 };
 
 exports.navigator = NavigatorWidget;
