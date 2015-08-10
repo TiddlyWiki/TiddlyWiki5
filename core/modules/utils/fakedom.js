@@ -43,6 +43,12 @@ var TW_Element = function(tag,namespace) {
 	this.namespaceURI = namespace || "http://www.w3.org/1999/xhtml";
 };
 
+Object.defineProperty(TW_Element.prototype, "nodeType", {
+	get: function() {
+		return 1;
+	}
+});
+
 TW_Element.prototype.setAttribute = function(name,value) {
 	if(this.isRaw) {
 		throw "Cannot setAttribute on a raw TW_Element";
@@ -93,6 +99,12 @@ TW_Element.prototype.hasChildNodes = function() {
 	return !!this.children.length;
 };
 
+Object.defineProperty(TW_Element.prototype, "childNodes", {
+	get: function() {
+		return this.children;
+	}
+});
+
 Object.defineProperty(TW_Element.prototype, "firstChild", {
 	get: function() {
 		return this.children[0];
@@ -102,6 +114,12 @@ Object.defineProperty(TW_Element.prototype, "firstChild", {
 TW_Element.prototype.addEventListener = function(type,listener,useCapture) {
 	// Do nothing
 };
+
+Object.defineProperty(TW_Element.prototype, "tagName", {
+	get: function() {
+		return this.tag || "";
+	}
+});
 
 Object.defineProperty(TW_Element.prototype, "className", {
 	get: function() {
