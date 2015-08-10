@@ -37,6 +37,7 @@ function Slicer(wiki,sourceTitle) {
 	this.sourceTitle = sourceTitle;
 	this.currentId = 0;
 	this.iframe = null; // Reference to iframe used for HTML parsing
+	this.stopWordList = "the and a of on i".split(" ");
 }
 
 Slicer.prototype.destroy = function() {
@@ -73,6 +74,31 @@ Slicer.prototype.getSourceDocument = function() {
 	} else {
 		return this.getSourceWikiDocument(tiddler);
 	}
+};
+
+Slicer.prototype.makeParagraphTitle = function(title,text) {
+	// Remove characters other than lowercase alphanumeric and spaces
+	var self = this,
+		cleanText = text.toLowerCase().replace(/[^\s\xA0]/mg,function($0,$1,$2) {
+			if(($0 >= "a" && $0 <= "z") || ($0 >= "0" && $0 <= "9")) {
+				return $0;
+			} else {
+				return " ";
+			}
+		});
+	// Split on word boundaries
+	var words = cleanText.split(/[\s\xA0]+/mg);
+	// Remove common words
+	words = words.filter(function(word) {
+		return word && (self.stopWordList.indexOf(word) === -1);
+	});
+	// Accumulate the number of words that will fit
+	var c = 0,
+		s = "";
+	while(c < words.length && (s.length + words[c].length + 1) < 20) {
+		s += "-" + words[c++];
+	}
+	return this.wiki.generateNewTitle("para" + s);
 };
 
 // Slice a tiddler into individual tiddlers
@@ -169,7 +195,7 @@ Slicer.prototype.sliceTiddler = function(title) {
 						if(!isBlank(text)) {
 							parentTitle = parentStack[parentStack.length - 1].title;
 							addToList(parentTitle,addTiddler({
-								title: title + "-para-" + self.nextId(),
+								title: self.makeParagraphTitle(title,text),
 								text: text,
 								tags: [parentTitle]
 							}));
