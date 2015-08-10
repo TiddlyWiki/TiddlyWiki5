@@ -6,16 +6,20 @@ $:/plugins/tiddlywiki/text-slicer/config/show-toolbar/$(currentTiddler)$
 
 \define display-tiddler()
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
-<<display-heading-tiddler level:'h1'>>
-</$set>
-\end
+
+<$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
 
 <div class='tc-table-of-contents'>
 
-<$macrocall $name="toc-selective-expandable" tag=<<currentTiddler>>/>
+<$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
+
+<$macrocall $name="toc-tabbed-internal-nav" tag=<<currentTiddler>>/>
+
+</$set>
 
 </div>
 
-<$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
+</$set>
+\end
 
 <<display-tiddler>>
