@@ -49,6 +49,13 @@ Object.defineProperty(TW_Element.prototype, "nodeType", {
 	}
 });
 
+TW_Element.prototype.getAttribute = function(name) {
+	if(this.isRaw) {
+		throw "Cannot getAttribute on a raw TW_Element";
+	}
+	return this.attributes[name];
+};
+
 TW_Element.prototype.setAttribute = function(name,value) {
 	if(this.isRaw) {
 		throw "Cannot setAttribute on a raw TW_Element";
