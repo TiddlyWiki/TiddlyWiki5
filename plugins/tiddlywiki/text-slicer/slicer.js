@@ -151,11 +151,6 @@ Slicer.prototype.sliceTiddler = function(title) {
 					nodeType = domNode.nodeType;
 				if(nodeType === 1) {
 					var tagName = domNode.tagName.toLowerCase();
-
-					if(tagName === "p" && (domNode.getAttribute("style") || "").indexOf("mso-list:") !== -1) {
-						tagName = "li";
-					}
-
 					if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
 						if(!isBlank(text)) {
 							parentTitle = popParentStackUntil(tagName);
