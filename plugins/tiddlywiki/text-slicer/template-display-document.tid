@@ -4,8 +4,22 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/display-document
 $:/plugins/tiddlywiki/text-slicer/config/show-toolbar/$(currentTiddler)$
 \end
 
+\define config-view-type()
+$:/plugins/tiddlywiki/text-slicer/config/view-type/$(currentTiddler)$
+\end
+
+\define display-document()
+<<display-heading-tiddler level:'h1'>>
+\end
+
 \define display-tiddler()
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
+
+View: <$select tiddler=<<config-view-type>> default="display-document">
+<option value="display-document">Document</option>
+<option value="toc-selective-expandable">Outline</option>
+<option value="toc-tabbed-internal-nav">Tabbed outline</option>
+</$select>
 
 <$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
 
@@ -13,7 +27,15 @@ $:/plugins/tiddlywiki/text-slicer/config/show-toolbar/$(currentTiddler)$
 
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
 
-<$macrocall $name="toc-tabbed-internal-nav" tag=<<currentTiddler>>/>
+<$list filter="[field:title[$(config-view-type)$]]" variable="listItem" emptyMessage="""
+
+<$macrocall $name="display-document" tag=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/toc-entry"/>
+
+""">
+
+<$macrocall $name={{$(config-view-type)$}} tag=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/toc-entry"/>
+
+</$list>
 
 </$set>
 
