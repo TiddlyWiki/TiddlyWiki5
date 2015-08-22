@@ -553,7 +553,7 @@ NavigatorWidget.prototype.handlePerformImportEvent = function(event) {
 		importData = this.wiki.getTiddlerDataCached(event.param,{tiddlers: {}}),
 		importReport = [];
 	// Add the tiddlers to the store
-	importReport.push("The following tiddlers were imported:\n");
+	importReport.push($tw.language.getString("Import/Imported") + "\n");
 	$tw.utils.each(importData.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title && importTiddler && importTiddler.fields["selection-" + title] !== "unchecked") {
