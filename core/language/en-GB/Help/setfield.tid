@@ -14,5 +14,4 @@ The parameters are:
 * ''filter'' - filter identifying the tiddlers to be affected
 * ''fieldname'' - the field to modify (defaults to "text")
 * ''templatetitle'' - the tiddler to wikify into the specified field. If blank or missing then the specified field is deleted
-* ''type'' - the text type to render (defaults to "text/plain"; "text/html" can be used to include HTML tags)
-
+* ''rendertype'' - the text type to render (defaults to "text/plain"; "text/html" can be used to include HTML tags)

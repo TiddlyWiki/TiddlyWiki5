@@ -15,4 +15,3 @@ Els paràmetres són:
 * ''nomdelcamp'' - el camp a modificar (per omisió "text")
 * ''plantilladeltítol'' - el tiddler a wikificar del camp indicat. Si està en blanc o no hi és llavors el camp indicar es suprimirà
 * ''tipus'' - el tipus de text que cal generar (per omisió "text/plain"; es possible utilitzar "text/html" per incloure etiquetes HTML)
-
