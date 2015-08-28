@@ -95,7 +95,7 @@ Slicer.prototype.makeParagraphTitle = function(title,text) {
 	// Accumulate the number of words that will fit
 	var c = 0,
 		s = "";
-	while(c < words.length && (s.length + words[c].length + 1) < 20) {
+	while(c < words.length && (s.length + words[c].length + 1) < 50) {
 		s += "-" + words[c++];
 	}
 	return this.wiki.generateNewTitle("para" + s);
@@ -146,7 +146,7 @@ Slicer.prototype.sliceTiddler = function(title) {
 		},
 		processNodeList = function(domNodeList) {
 			$tw.utils.each(domNodeList,function(domNode) {
-				var parentTitle,
+				var parentTitle, tags,
 					text = domNode.textContent,
 					nodeType = domNode.nodeType;
 				if(nodeType === 1) {
@@ -154,23 +154,31 @@ Slicer.prototype.sliceTiddler = function(title) {
 					if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
 						if(!isBlank(text)) {
 							parentTitle = popParentStackUntil(tagName);
+							tags = [parentTitle];
+							if(domNode.className.trim() !== "") {
+								tags = tags.concat(domNode.className.split(" "));
+							}
 							addToList(parentTitle,text);
 							parentStack.push({type: tagName, title: addTiddler({
 								title: text,
 								text: "<<display-heading-tiddler level:'" + tagName + "'>>",
 								list: [],
-								tags: [parentTitle]
+								tags: tags
 							})});
 						}
 					} else if(tagName === "ul" || tagName === "ol") {
 						var listTitle = title + "-list-" + self.nextId();
 						parentTitle = parentStack[parentStack.length - 1].title;
+						tags = [parentTitle];
+						if(domNode.className.trim() !== "") {
+							tags = tags.concat(domNode.className.split(" "));
+						}
 						addToList(parentTitle,listTitle);
 						parentStack.push({type: tagName, title: addTiddler({
 							title: listTitle,
 							text: "<<display-list-tiddler type:'" + tagName + "'>>",
 							list: [],
-							tags: [parentTitle]
+							tags: tags
 						})});
 						processNodeList(domNode.childNodes);
 						parentStack.pop();
@@ -178,21 +186,29 @@ Slicer.prototype.sliceTiddler = function(title) {
 						if(!isBlank(text)) {
 							var listItemTitle = title + "-listitem-" + self.nextId();
 							parentTitle = parentStack[parentStack.length - 1].title;
+							tags = [parentTitle];
+							if(domNode.className.trim() !== "") {
+								tags = tags.concat(domNode.className.split(" "));
+							}
 							addToList(parentTitle,listItemTitle);
 							addTiddler({
 								title: listItemTitle,
 								text: text,
 								list: [],
-								tags: [parentTitle]
+								tags: tags
 							});
 						}
 					} else if(tagName === "p") {
 						if(!isBlank(text)) {
 							parentTitle = parentStack[parentStack.length - 1].title;
+							tags = [parentTitle];
+							if(domNode.className.trim() !== "") {
+								tags = tags.concat(domNode.className.split(" "));
+							}
 							addToList(parentTitle,addTiddler({
 								title: self.makeParagraphTitle(title,text),
 								text: text,
-								tags: [parentTitle]
+								tags: tags
 							}));
 						}
 					} else if(domNode.hasChildNodes()) {

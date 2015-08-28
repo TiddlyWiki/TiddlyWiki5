@@ -1,8 +1,8 @@
 title: $:/plugins/tiddlywiki/text-slicer/docs
 
-!! Text Slicing Approach
+!! Introduction
 
-Individual tiddlers are created for each heading, paragraph and list item. They are linked together using TiddlyWiki's tagging mechanism.
+Individual tiddlers are created for each heading, paragraph and list item. They are linked together into a hierarchical outline using TiddlyWiki's tagging mechanism.
 
 For example, consider a tiddler titled ''Example'' containing this simple text:
 
@@ -24,3 +24,54 @@ It will be sliced up into:
 **** and a tiddler for each list item
 
 These tiddlers are bound together using tagging: child tiddlers are tagged with the title of their parent, and the parent tiddler has a ''list'' field that lists each child in the correct order.
+
+!! Slicing Process
+
+Slicing generates the following component tiddlers:
+
+!!! Headings
+
+Tiddlers representing headings have the following fields:
+
+* ''title'': the text of the heading (which must be unique)
+* ''text'': the text `<<display-heading-tiddler level:'h1'>>`, with the appropriate heading number
+* ''list'': ordered list of tiddlers tagged with this heading (i.e. the child headings, paragraphs and lists displayed under this heading)
+* ''tags'': tagged with the title of the parent heading
+** In addition, any CSS classes found in the HTML are converted into tags
+
+!!! Paragraphs
+
+Tiddlers representing paragraphs have the following fields:
+
+* ''title'': an automatically generated unique title. See below
+* ''text'': the text of the paragraph
+* ''tags'': tagged with the title of the parent heading
+** In addition, any CSS classes found in the HTML are converted into tags
+
+The automatically generated title is made up of concatenating the following elements:
+
+* the word ''para''
+* a dash ''-''
+* the first few words of the paragraph (up to 40 characters), separated with dashes ''-''
+* if necessary, a space and a numerical index to make the title unique
+
+For example, ''para-how-to-use-pentagonal-tiles 23''.
+
+!!! Lists
+
+Lists are represented by several tiddlers: one for the list itself, and one for each item in the list.
+
+The tiddler representing the list itself has the following fields:
+
+* ''title'': an automatically generated unique title
+* ''text'': the text `<<display-list-tiddler type:'ul'>>` with the appropriate list type ("ul" or "ol")
+* ''list'': ordered list of titles of tiddlers representing the items in this list
+* ''tags'': tagged with the title of the parent heading
+** In addition, any CSS classes found in the HTML are converted into tags
+
+The tiddlers representing items within the list have the following fields:
+
+* ''title'': an automatically generated unique title
+* ''text'': the text of the list item
+* ''tags'': tagged with the title of the tiddler representing the list itself
+
