@@ -29,6 +29,13 @@ These tiddlers are bound together using tagging: child tiddlers are tagged with 
 
 Slicing generates the following component tiddlers:
 
+!!! Document
+
+The document itself is represented by a tiddler with the following fields:
+
+* ''title'': the text ''"Sliced up "'' plus the title of the tiddler that was sliced
+* ''text'': the text `{{||$:/plugins/tiddlywiki/text-slicer/templates/display-document}}`
+
 !!! Headings
 
 Tiddlers representing headings have the following fields:

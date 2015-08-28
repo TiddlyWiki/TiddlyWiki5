@@ -15,7 +15,7 @@ $:/plugins/tiddlywiki/text-slicer/config/view-type/$(currentTiddler)$
 \define display-tiddler()
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
 
-View: <$select tiddler=<<config-view-type>> default="display-document">
+View: <$select tiddler=<<config-view-type>> default="toc-tabbed-internal-nav">
 <option value="display-document">Document</option>
 <option value="toc-selective-expandable">Outline</option>
 <option value="toc-tabbed-internal-nav">Tabbed outline</option>
@@ -29,7 +29,7 @@ View: <$select tiddler=<<config-view-type>> default="display-document">
 
 <$list filter="[field:title[$(config-view-type)$]]" variable="listItem" emptyMessage="""
 
-<$macrocall $name="display-document" tag=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/toc-entry"/>
+<$macrocall $name="toc-tabbed-internal-nav" tag=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/toc-entry"/>
 
 """>
 
