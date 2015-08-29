@@ -24,10 +24,8 @@ var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
 		var slicer = new Slicer($tw.wiki,event.param);
-		// slicer.sliceTiddler();
-		// slicer.outputTiddlers();
-		// Slice up and output the tiddler
-		slicer.outputTiddlers(slicer.sliceTiddler(event.param),event.param,event.param);
+		slicer.sliceTiddler(event.param)
+		slicer.outputTiddlers(event.param);
 		slicer.destroy();
 	});
 };
@@ -38,6 +36,9 @@ function Slicer(wiki,sourceTitle) {
 	this.currentId = 0;
 	this.iframe = null; // Reference to iframe used for HTML parsing
 	this.stopWordList = "the and a of on i".split(" ");
+	this.tiddlers = {};
+	this.parentStack = [];
+	this.sliceTitle = null;
 }
 
 Slicer.prototype.destroy = function() {
@@ -49,6 +50,50 @@ Slicer.prototype.destroy = function() {
 
 Slicer.prototype.nextId = function() {
 	return ++this.currentId;
+};
+
+
+Slicer.prototype.addTiddler = function(fields) {
+	if(fields.title) {
+		this.tiddlers[fields.title] = $tw.utils.extend({},this.tiddlers[fields.title],fields);
+		return fields.title;
+	} else {
+		return null;
+	}
+};
+
+Slicer.prototype.addToList = function(parent,child) {
+	var parentTiddler = this.tiddlers[parent] || {},
+		parentList = parentTiddler.list || [];
+	parentList.push(child);
+	this.addTiddler($tw.utils.extend({title: parent},parentTiddler,{list: parentList}));
+};
+
+Slicer.prototype.popParentStackUntil = function(type) {
+	// Pop the stack to remove any entries at the same or lower level
+	var newLevel = this.convertTypeToLevel(type),
+		topIndex = this.parentStack.length - 1;
+	do {
+		var topLevel = this.convertTypeToLevel(this.parentStack[this.parentStack.length - 1].type);
+		if(topLevel !== null && topLevel < newLevel ) {
+			break;
+		}
+		this.parentStack.length--;
+	} while(true);
+	return this.parentStack[this.parentStack.length - 1].title;
+};
+
+
+Slicer.prototype.convertTypeToLevel = function(type) {
+	if(type.charAt(0) === "h") {
+		return parseInt(type.charAt(1),10);			
+	} else {
+		return null;
+	}
+};
+
+Slicer.prototype.isBlank = function(s) {
+	return (/^[\s\xA0]*$/mg).test(s);
 };
 
 Slicer.prototype.getSourceHtmlDocument = function(tiddler) {
@@ -76,7 +121,7 @@ Slicer.prototype.getSourceDocument = function() {
 	}
 };
 
-Slicer.prototype.makeParagraphTitle = function(title,text) {
+Slicer.prototype.makeParagraphTitle = function(text) {
 	// Remove characters other than lowercase alphanumeric and spaces
 	var self = this,
 		cleanText = text.toLowerCase().replace(/[^\s\xA0]/mg,function($0,$1,$2) {
@@ -98,138 +143,107 @@ Slicer.prototype.makeParagraphTitle = function(title,text) {
 	while(c < words.length && (s.length + words[c].length + 1) < 50) {
 		s += "-" + words[c++];
 	}
-	return this.wiki.generateNewTitle("para" + s);
+	// Check for duplicates
+	var baseTitle = "para" + s;
+	c = 0;
+	var title = baseTitle;
+	while(this.tiddlers[title] || this.wiki.tiddlerExists(title) || this.wiki.isShadowTiddler(title) || this.wiki.findDraft(title)) {
+		title = baseTitle + " " + (++c);
+	}
+	return title;
+};
+
+Slicer.prototype.processNodeList = function(domNodeList) {
+	$tw.utils.each(domNodeList,this.processNode.bind(this));
+}
+
+Slicer.prototype.processNode = function(domNode) {
+	var parentTitle, tags,
+		text = domNode.textContent,
+		nodeType = domNode.nodeType;
+	if(nodeType === 1) {
+		var tagName = domNode.tagName.toLowerCase();
+		if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
+			if(!this.isBlank(text)) {
+				parentTitle = this.popParentStackUntil(tagName);
+				tags = [parentTitle];
+				if(domNode.className.trim() !== "") {
+					tags = tags.concat(domNode.className.split(" "));
+				}
+				this.addToList(parentTitle,text);
+				this.parentStack.push({type: tagName, title: this.addTiddler({
+					title: text,
+					text: "<<display-heading-tiddler level:'" + tagName + "'>>",
+					list: [],
+					tags: tags
+				})});
+			}
+		} else if(tagName === "ul" || tagName === "ol") {
+			var listTitle = this.sliceTitle + "-list-" + this.nextId();
+			parentTitle = this.parentStack[this.parentStack.length - 1].title;
+			tags = [parentTitle];
+			if(domNode.className.trim() !== "") {
+				tags = tags.concat(domNode.className.split(" "));
+			}
+			this.addToList(parentTitle,listTitle);
+			this.parentStack.push({type: tagName, title: this.addTiddler({
+				title: listTitle,
+				text: "<<display-list-tiddler type:'" + tagName + "'>>",
+				list: [],
+				tags: tags
+			})});
+			this.processNodeList(domNode.childNodes);
+			this.parentStack.pop();
+		} else if(tagName === "li") {
+			if(!this.isBlank(text)) {
+				var listItemTitle = this.sliceTitle + "-listitem-" + this.nextId();
+				parentTitle = this.parentStack[this.parentStack.length - 1].title;
+				tags = [parentTitle];
+				if(domNode.className.trim() !== "") {
+					tags = tags.concat(domNode.className.split(" "));
+				}
+				this.addToList(parentTitle,listItemTitle);
+				this.addTiddler({
+					title: listItemTitle,
+					text: text,
+					list: [],
+					tags: tags
+				});
+			}
+		} else if(tagName === "p") {
+			if(!this.isBlank(text)) {
+				parentTitle = this.parentStack[this.parentStack.length - 1].title;
+				tags = [parentTitle];
+				if(domNode.className.trim() !== "") {
+					tags = tags.concat(domNode.className.split(" "));
+				}
+				this.addToList(parentTitle,this.addTiddler({
+					title: this.makeParagraphTitle(text),
+					text: text,
+					tags: tags
+				}));
+			}
+		} else if(domNode.hasChildNodes()) {
+			this.processNodeList(domNode.childNodes);
+		}
+	}
 };
 
 // Slice a tiddler into individual tiddlers
 Slicer.prototype.sliceTiddler = function(title) {
-	var self = this,
-		tiddlers = {},
-		domNode = this.getSourceDocument(),
-		parentStack = [],
-		addTiddler = function(fields) {
-			if(fields.title) {
-				tiddlers[fields.title] = $tw.utils.extend({},tiddlers[fields.title],fields);
-				return fields.title;
-			} else {
-				return null;
-			}
-		},
-		addToList = function(parent,child) {
-			var parentTiddler = tiddlers[parent] || {},
-				parentList = parentTiddler.list || [];
-			parentList.push(child);
-			addTiddler($tw.utils.extend({title: parent},parentTiddler,{list: parentList}));
-		},
-		convertTypeToLevel = function(type) {
-			if(type.charAt(0) === "h") {
-				return parseInt(type.charAt(1),10);			
-			} else {
-				return null;
-			}
-		},
-		popParentStackUntil = function(type) {
-			// Pop the stack to remove any entries at the same or lower level
-			var newLevel = convertTypeToLevel(type),
-				topIndex = parentStack.length - 1;
-			do {
-				var topLevel = convertTypeToLevel(parentStack[parentStack.length - 1].type);
-				if(topLevel !== null && topLevel < newLevel ) {
-					break;
-				}
-				parentStack.length--;
-			} while(true);
-			return parentStack[parentStack.length - 1].title;
-		},
-		isBlank = function(s) {
-			return (/^[\s\xA0]*$/mg).test(s);
-		},
-		processNodeList = function(domNodeList) {
-			$tw.utils.each(domNodeList,function(domNode) {
-				var parentTitle, tags,
-					text = domNode.textContent,
-					nodeType = domNode.nodeType;
-				if(nodeType === 1) {
-					var tagName = domNode.tagName.toLowerCase();
-					if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
-						if(!isBlank(text)) {
-							parentTitle = popParentStackUntil(tagName);
-							tags = [parentTitle];
-							if(domNode.className.trim() !== "") {
-								tags = tags.concat(domNode.className.split(" "));
-							}
-							addToList(parentTitle,text);
-							parentStack.push({type: tagName, title: addTiddler({
-								title: text,
-								text: "<<display-heading-tiddler level:'" + tagName + "'>>",
-								list: [],
-								tags: tags
-							})});
-						}
-					} else if(tagName === "ul" || tagName === "ol") {
-						var listTitle = title + "-list-" + self.nextId();
-						parentTitle = parentStack[parentStack.length - 1].title;
-						tags = [parentTitle];
-						if(domNode.className.trim() !== "") {
-							tags = tags.concat(domNode.className.split(" "));
-						}
-						addToList(parentTitle,listTitle);
-						parentStack.push({type: tagName, title: addTiddler({
-							title: listTitle,
-							text: "<<display-list-tiddler type:'" + tagName + "'>>",
-							list: [],
-							tags: tags
-						})});
-						processNodeList(domNode.childNodes);
-						parentStack.pop();
-					} else if(tagName === "li") {
-						if(!isBlank(text)) {
-							var listItemTitle = title + "-listitem-" + self.nextId();
-							parentTitle = parentStack[parentStack.length - 1].title;
-							tags = [parentTitle];
-							if(domNode.className.trim() !== "") {
-								tags = tags.concat(domNode.className.split(" "));
-							}
-							addToList(parentTitle,listItemTitle);
-							addTiddler({
-								title: listItemTitle,
-								text: text,
-								list: [],
-								tags: tags
-							});
-						}
-					} else if(tagName === "p") {
-						if(!isBlank(text)) {
-							parentTitle = parentStack[parentStack.length - 1].title;
-							tags = [parentTitle];
-							if(domNode.className.trim() !== "") {
-								tags = tags.concat(domNode.className.split(" "));
-							}
-							addToList(parentTitle,addTiddler({
-								title: self.makeParagraphTitle(title,text),
-								text: text,
-								tags: tags
-							}));
-						}
-					} else if(domNode.hasChildNodes()) {
-						processNodeList(domNode.childNodes);
-					}
-				}
-			});
-		};
-	parentStack.push({type: "h0", title: addTiddler({
+	this.sliceTitle = title;
+	var domNode = this.getSourceDocument();
+	this.parentStack.push({type: "h0", title: this.addTiddler({
 		title: "Sliced up " + title,
 		text: "{{||$:/plugins/tiddlywiki/text-slicer/templates/display-document}}",
 		list: []
 	})});
-console.log(domNode);
-	processNodeList(domNode.childNodes);
-	return tiddlers;
+	this.processNodeList(domNode.childNodes);
 };
 
 // Output directly to the output tiddlers
-Slicer.prototype.outputTiddlers = function(tiddlers,title,navigateFromTitle) {
-	$tw.utils.each(tiddlers,function(tiddlerFields) {
+Slicer.prototype.outputTiddlers = function(navigateFromTitle) {
+	$tw.utils.each(this.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title) {
 			$tw.wiki.addTiddler(new $tw.Tiddler($tw.wiki.getCreationFields(),tiddlerFields,$tw.wiki.getModificationFields()));
@@ -237,7 +251,7 @@ Slicer.prototype.outputTiddlers = function(tiddlers,title,navigateFromTitle) {
 	});
 	// Navigate to output
 	var story = new $tw.Story({wiki: $tw.wiki});
-	story.navigateTiddler("Sliced up " + title,navigateFromTitle);
+	story.navigateTiddler("Sliced up " + this.sliceTitle,navigateFromTitle);
 };
 
 // Output via an import tiddler

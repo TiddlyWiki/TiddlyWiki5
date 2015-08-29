@@ -8,15 +8,15 @@ $:/plugins/tiddlywiki/text-slicer/config/show-toolbar/$(currentTiddler)$
 $:/plugins/tiddlywiki/text-slicer/config/view-type/$(currentTiddler)$
 \end
 
-\define display-document()
+\define toc-document()
 <<display-heading-tiddler level:'h1'>>
 \end
 
-\define display-tiddler()
+\define display-document()
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
 
 View: <$select tiddler=<<config-view-type>> default="toc-tabbed-internal-nav">
-<option value="display-document">Document</option>
+<option value="toc-document">Document</option>
 <option value="toc-selective-expandable">Outline</option>
 <option value="toc-tabbed-internal-nav">Tabbed outline</option>
 </$select>
@@ -44,4 +44,4 @@ View: <$select tiddler=<<config-view-type>> default="toc-tabbed-internal-nav">
 </$set>
 \end
 
-<<display-tiddler>>
+<<display-document>>
