@@ -28,6 +28,17 @@ The new [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide 
 
 The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
 
+!! External Text Tiddlers
+
+Limited support for tiddlers stored in external `.tid` files:
+
+* standalone TiddlyWiki HTML files with external text tiddlers can be built under Node.js
+* wikis with external text tiddlers can be worked with in the browser, automatically lazily loading the content of external text tiddlers when it is first referenced
+** saving changes in the browser doesn't work as expected: if edited, the external text tiddler is replaced with an ordinary tiddler
+** lazy loading of external text tiddlers doesn't work in Chrome when viewing the TiddlyWiki HTML file on a ''file:'' URI; it works OK in Firefox. It works on an HTTP URI on all browsers
+
+See [[Alice in Wonderland]] for an example. Try opening it without a network connection.
+
 ! Other Improvements
 
 !! Translation Improvements

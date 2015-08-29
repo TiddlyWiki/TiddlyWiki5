@@ -26,6 +26,23 @@ Attributes are stored as hashmaps of the following objects:
 
 var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
+	var self = this;
+	// Check for an externally linked tiddler
+	if($tw.browser && options._canonical_uri) {
+		$tw.utils.httpRequest({
+			url: options._canonical_uri,
+			type: "GET",
+			callback: function(err,data) {
+				if(!err) {
+					var tiddlers = self.wiki.deserializeTiddlers(".tid",data,self.wiki.getCreationFields())
+					if(tiddlers) {
+						self.wiki.addTiddlers(tiddlers);
+					}
+				}
+			}
+		});
+		text = "Loading external text from ''" + options._canonical_uri + "''\n\nIf this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See http://tiddlywiki.com/#ExternalText";
+	}
 	// Initialise the classes if we don't have them already
 	if(!this.pragmaRuleClasses) {
 		WikiParser.prototype.pragmaRuleClasses = $tw.modules.createClassesFromModules("wikirule","pragma",$tw.WikiRuleBase);

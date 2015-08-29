@@ -58,7 +58,11 @@ exports.httpRequest = function(options) {
 	if(data && !$tw.utils.hop(headers,"Content-type")) {
 		request.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=UTF-8");
 	}
-	request.send(data);
+	try {
+		request.send(data);
+	} catch(e) {
+		options.callback(e);
+	}
 	return request;
 };
 

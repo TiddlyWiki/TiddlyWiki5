@@ -43,7 +43,7 @@ exports.convertStyleNameToPropertyName = function(styleName) {
 	// Convert it by first removing any hyphens
 	var propertyName = $tw.utils.unHyphenateCss(styleName);
 	// Then check if it needs a prefix
-	if(document.body.style[propertyName] === undefined) {
+	if($tw.browser && document.body.style[propertyName] === undefined) {
 		var prefixes = ["O","MS","Moz","webkit"];
 		for(var t=0; t<prefixes.length; t++) {
 			var prefixedName = prefixes[t] + propertyName.substr(0,1).toUpperCase() + propertyName.substr(1);
