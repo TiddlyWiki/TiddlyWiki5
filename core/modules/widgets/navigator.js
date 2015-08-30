@@ -33,7 +33,8 @@ var NavigatorWidget = function(parseTreeNode,options) {
 		{type: "tm-fold-tiddler", handler: "handleFoldTiddlerEvent"},
 		{type: "tm-fold-other-tiddlers", handler: "handleFoldOtherTiddlersEvent"},
 		{type: "tm-fold-all-tiddlers", handler: "handleFoldAllTiddlersEvent"},
-		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"}
+		{type: "tm-unfold-all-tiddlers", handler: "handleUnfoldAllTiddlersEvent"},
+		{type: "tm-rename-tiddler", handler: "handleRenameTiddlerEvent"}
 	]);
 };
 
@@ -607,6 +608,14 @@ NavigatorWidget.prototype.handleUnfoldAllTiddlersEvent = function(event) {
 	$tw.utils.each(this.getStoryList(),function(title) {
 		self.wiki.setText(prefix + title,"text",null,"show");
 	});
+};
+
+NavigatorWidget.prototype.handleRenameTiddlerEvent = function(event) {
+	var self = this,
+		paramObject = event.paramObject || {},
+		from = paramObject.from || event.tiddlerTitle,
+		to = paramObject.to;
+	$tw.wiki.renameTiddler(from,to);
 };
 
 exports.navigator = NavigatorWidget;
