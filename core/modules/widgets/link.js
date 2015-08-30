@@ -135,9 +135,9 @@ LinkWidget.prototype.handleClickEvent = function(event) {
 	});
 	if(this.domNodes[0].hasAttribute("href")) {
 		event.preventDefault();
-		event.stopPropagation();
-		return false;
 	}
+	event.stopPropagation();
+	return false;
 };
 
 LinkWidget.prototype.handleDragStartEvent = function(event) {
