@@ -1,4 +1,0 @@
-title: $:/plugins/tiddlywiki/text-slicer/toolbar/tags
-tags: $:/tags/TextSlicerToolbar
-
-<span class="tc-tags-wrapper"><$list filter="[all[current]tags[]sort[title]]" template="$:/core/ui/TagTemplate" storyview="pop"/></span>

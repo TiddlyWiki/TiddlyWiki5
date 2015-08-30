@@ -1,0 +1,23 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/view-template-tiddler
+tags: $:/tags/ViewTemplate
+
+<$reveal type="nomatch" state="!!toc-type" text="">
+
+<div class="tc-view-template-document-tiddler-heading">
+
+//This tiddler is part of a document. The content as it appears in the document appears below.//
+
+</div>
+
+<div class="tc-view-template-document-tiddler">
+
+<$set name="tv-default-heading-state" value="open">
+
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler"/>
+
+</$set>
+
+</div>
+
+</$reveal>
+

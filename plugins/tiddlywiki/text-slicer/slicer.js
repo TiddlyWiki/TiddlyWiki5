@@ -25,7 +25,7 @@ exports.startup = function() {
 	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
 		var slicer = new Slicer($tw.wiki,event.param);
 		slicer.sliceTiddler(event.param)
-		slicer.outputTiddlers(event.param);
+		slicer.outputTiddlers();
 		slicer.destroy();
 	});
 };
@@ -47,11 +47,6 @@ Slicer.prototype.destroy = function() {
 		this.iframe.parentNode.removeChild(this.iframe);
 	}
 };
-
-Slicer.prototype.nextId = function() {
-	return ++this.currentId;
-};
-
 
 Slicer.prototype.addTiddler = function(fields) {
 	if(fields.title) {
@@ -121,34 +116,38 @@ Slicer.prototype.getSourceDocument = function() {
 	}
 };
 
-Slicer.prototype.makeParagraphTitle = function(text) {
+Slicer.prototype.makeUniqueTitle = function(prefix,rawText) {
 	// Remove characters other than lowercase alphanumeric and spaces
 	var self = this,
-		cleanText = text.toLowerCase().replace(/[^\s\xA0]/mg,function($0,$1,$2) {
+		cleanText;
+	if(rawText) {
+		cleanText = rawText.toLowerCase().replace(/[^\s\xA0]/mg,function($0,$1,$2) {
 			if(($0 >= "a" && $0 <= "z") || ($0 >= "0" && $0 <= "9")) {
 				return $0;
 			} else {
 				return " ";
 			}
 		});
-	// Split on word boundaries
-	var words = cleanText.split(/[\s\xA0]+/mg);
-	// Remove common words
-	words = words.filter(function(word) {
-		return word && (self.stopWordList.indexOf(word) === -1);
-	});
-	// Accumulate the number of words that will fit
-	var c = 0,
-		s = "";
-	while(c < words.length && (s.length + words[c].length + 1) < 50) {
-		s += "-" + words[c++];
+		// Split on word boundaries
+		var words = cleanText.split(/[\s\xA0]+/mg);
+		// Remove common words
+		words = words.filter(function(word) {
+			return word && (self.stopWordList.indexOf(word) === -1);
+		});
+		// Accumulate the number of words that will fit
+		var c = 0,
+			s = "";
+		while(c < words.length && (s.length + words[c].length + 1) < 50) {
+			s += "-" + words[c++];
+		}
+		prefix = prefix + s;
 	}
 	// Check for duplicates
-	var baseTitle = "para" + s;
+	var baseTitle = prefix;
 	c = 0;
 	var title = baseTitle;
 	while(this.tiddlers[title] || this.wiki.tiddlerExists(title) || this.wiki.isShadowTiddler(title) || this.wiki.findDraft(title)) {
-		title = baseTitle + " " + (++c);
+		title = baseTitle + "-" + (++c);
 	}
 	return title;
 };
@@ -158,10 +157,10 @@ Slicer.prototype.processNodeList = function(domNodeList) {
 }
 
 Slicer.prototype.processNode = function(domNode) {
-	var parentTitle, tags,
+	var title, parentTitle, tags,
 		text = domNode.textContent,
 		nodeType = domNode.nodeType;
-	if(nodeType === 1) {
+	if(nodeType === 1) { // DOM element nodes
 		var tagName = domNode.tagName.toLowerCase();
 		if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
 			if(!this.isBlank(text)) {
@@ -172,23 +171,27 @@ Slicer.prototype.processNode = function(domNode) {
 				}
 				this.addToList(parentTitle,text);
 				this.parentStack.push({type: tagName, title: this.addTiddler({
-					title: text,
-					text: "<<display-heading-tiddler level:'" + tagName + "'>>",
+					"toc-type": "heading",
+					"toc-heading-level": tagName,
+					title: this.makeUniqueTitle("heading",text),
+					text: text,
 					list: [],
 					tags: tags
 				})});
 			}
 		} else if(tagName === "ul" || tagName === "ol") {
-			var listTitle = this.sliceTitle + "-list-" + this.nextId();
+			title = this.makeUniqueTitle("list-" + tagName);
 			parentTitle = this.parentStack[this.parentStack.length - 1].title;
 			tags = [parentTitle];
 			if(domNode.className.trim() !== "") {
 				tags = tags.concat(domNode.className.split(" "));
 			}
-			this.addToList(parentTitle,listTitle);
+			this.addToList(parentTitle,title);
 			this.parentStack.push({type: tagName, title: this.addTiddler({
-				title: listTitle,
-				text: "<<display-list-tiddler type:'" + tagName + "'>>",
+				"toc-type": "list",
+				"toc-list-type": tagName,
+				title: title,
+				text: "[tag<currentTiddler>!has[draft.of]]",
 				list: [],
 				tags: tags
 			})});
@@ -196,15 +199,16 @@ Slicer.prototype.processNode = function(domNode) {
 			this.parentStack.pop();
 		} else if(tagName === "li") {
 			if(!this.isBlank(text)) {
-				var listItemTitle = this.sliceTitle + "-listitem-" + this.nextId();
+				title = this.makeUniqueTitle("list-item",text);
 				parentTitle = this.parentStack[this.parentStack.length - 1].title;
 				tags = [parentTitle];
 				if(domNode.className.trim() !== "") {
 					tags = tags.concat(domNode.className.split(" "));
 				}
-				this.addToList(parentTitle,listItemTitle);
+				this.addToList(parentTitle,title);
 				this.addTiddler({
-					title: listItemTitle,
+					"toc-type": "item",
+					title: title,
 					text: text,
 					list: [],
 					tags: tags
@@ -218,7 +222,8 @@ Slicer.prototype.processNode = function(domNode) {
 					tags = tags.concat(domNode.className.split(" "));
 				}
 				this.addToList(parentTitle,this.addTiddler({
-					title: this.makeParagraphTitle(text),
+					"toc-type": "paragraph",
+					title: this.makeUniqueTitle("paragraph",text),
 					text: text,
 					tags: tags
 				}));
@@ -235,30 +240,29 @@ Slicer.prototype.sliceTiddler = function(title) {
 	var domNode = this.getSourceDocument();
 	this.parentStack.push({type: "h0", title: this.addTiddler({
 		title: "Sliced up " + title,
-		text: "{{||$:/plugins/tiddlywiki/text-slicer/templates/display-document}}",
-		list: []
+		text: "Document sliced at " + (new Date()),
+		list: [],
+		"toc-type": "document"
 	})});
 	this.processNodeList(domNode.childNodes);
 };
 
 // Output directly to the output tiddlers
-Slicer.prototype.outputTiddlers = function(navigateFromTitle) {
+Slicer.prototype.outputTiddlers = function() {
+	var self = this;
 	$tw.utils.each(this.tiddlers,function(tiddlerFields) {
 		var title = tiddlerFields.title;
 		if(title) {
-			$tw.wiki.addTiddler(new $tw.Tiddler($tw.wiki.getCreationFields(),tiddlerFields,$tw.wiki.getModificationFields()));
+			$tw.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddlerFields,self.wiki.getModificationFields()));
 		}
 	});
-	// Navigate to output
-	var story = new $tw.Story({wiki: $tw.wiki});
-	story.navigateTiddler("Sliced up " + this.sliceTitle,navigateFromTitle);
 };
 
 // Output via an import tiddler
-Slicer.prototype.outputTiddlers_viaImportTiddler = function(tiddlers,navigateFromTitle) {
+Slicer.prototype.outputTiddlers_viaImportTiddler = function(tiddlers) {
 	// Get the current slicer output tiddler
-	var slicerOutputTiddler = $tw.wiki.getTiddler(SLICER_OUTPUT_TITLE),
-		slicerOutputData = $tw.wiki.getTiddlerData(SLICER_OUTPUT_TITLE,{}),
+	var slicerOutputTiddler = this.wiki.getTiddler(SLICER_OUTPUT_TITLE),
+		slicerOutputData = this.wiki.getTiddlerData(SLICER_OUTPUT_TITLE,{}),
 		newFields = new Object({
 			title: SLICER_OUTPUT_TITLE,
 			type: "application/json",
@@ -275,10 +279,7 @@ Slicer.prototype.outputTiddlers_viaImportTiddler = function(tiddlers,navigateFro
 	});
 	// Save the slicer output tiddler
 	newFields.text = JSON.stringify(slicerOutputData,null,$tw.config.preferences.jsonSpaces);
-	$tw.wiki.addTiddler(new $tw.Tiddler(slicerOutputTiddler,newFields));
-	// Navigate to output
-	var story = new $tw.Story({wiki: $tw.wiki});
-	story.navigateTiddler(SLICER_OUTPUT_TITLE,navigateFromTitle);
+	this.wiki.addTiddler(new $tw.Tiddler(slicerOutputTiddler,newFields));
 };
 
 })();

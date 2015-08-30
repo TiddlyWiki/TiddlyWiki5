@@ -1,0 +1,43 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/template-document
+
+\define config-show-toolbar()
+$:/config/plugins/tiddlywiki/text-slicer/show-toolbar/$(currentTiddler)$
+\end
+
+\define config-heading-status()
+$:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
+\end
+
+\define body()
+<$set name="tv-heading-status-config-title" value=<<config-heading-status>>>
+
+<$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
+
+<div class="tc-sliced-document">
+
+<div class="tc-sliced-document-header">
+
+''Document'': <$link><$view field="title"/></$link>
+
+<$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
+
+</div>
+
+<div class='tc-table-of-contents'>
+
+<$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
+
+<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>
+
+</$set>
+
+</div>
+
+</div>
+
+</$set>
+
+</$set>
+\end
+
+<<body>>

@@ -1,4 +1,0 @@
-title: $:/plugins/tiddlywiki/text-slicer/toolbar/title
-tags: $:/tags/TextSlicerToolbar
-
-<$link><$text text=<<currentTiddler>>/></$link>

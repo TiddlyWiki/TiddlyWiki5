@@ -1,0 +1,25 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/template-tiddler
+
+<$list filter="[<tv-show-toolbar>prefix[yes]]" variable="hasToolbar">
+{{||$:/plugins/tiddlywiki/text-slicer/templates/tiddler-toolbar}}
+</$list>
+
+<$reveal type="match" state="!!toc-type" text="document">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-document" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="heading">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-heading" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="paragraph">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-paragraph" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="list">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-list" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-item" mode="block"/>
+</$reveal>

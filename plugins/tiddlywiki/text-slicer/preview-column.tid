@@ -1,0 +1,12 @@
+title: $:/plugins/tiddlywiki/text-slicer/preview-column
+tags: $:/tags/AboveStory
+
+<$scrollable fallthrough="no" class="tc-document-preview-column">
+
+<$set name="tv-default-heading-state" value="closed">
+
+<$list filter="[toc-type[document]!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-document"/>
+
+</$set>
+
+</$scrollable>
