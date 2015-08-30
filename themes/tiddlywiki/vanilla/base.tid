@@ -930,6 +930,7 @@ html body.tc-body.tc-single-tiddler-window {
 		position: relative;
 		width: auto;
 		left: 0;
+		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
 		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
 	}
 
