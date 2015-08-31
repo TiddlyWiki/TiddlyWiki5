@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/preview-column
+title: $:/plugins/tiddlywiki/text-slicer/ui/preview-column
 tags: $:/tags/AboveStory
 
 <$scrollable fallthrough="no" class="tc-document-preview-column">
@@ -7,7 +7,7 @@ tags: $:/tags/AboveStory
 
 <$set name="tv-show-gadgets" value="yes">
 
-<$list filter="[toc-type[document]!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-document"/>
+<$list filter="[toc-type[document]!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/document"/>
 
 </$set>
 

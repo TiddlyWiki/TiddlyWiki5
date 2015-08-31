@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/templates/view-template-tiddler
+title: $:/plugins/tiddlywiki/text-slicer/ui/view-template-segment
 tags: $:/tags/ViewTemplate
 
 <$reveal type="nomatch" state="!!toc-type" text="">
@@ -15,7 +15,7 @@ tags: $:/tags/ViewTemplate
 
 <$set name="tv-show-gadgets" value="yes">
 
-<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler"/>
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
 
 </$set>
 

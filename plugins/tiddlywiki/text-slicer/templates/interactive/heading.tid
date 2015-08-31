@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/templates/template-heading
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/heading
 
 \define config-heading-status()
 $(tv-heading-status-config-title)$/$(currentTiddler)$
@@ -27,7 +27,7 @@ $(tv-heading-status-config-title)$/$(currentTiddler)$
 <$view field="text"/>
 </$link>
 <$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="open" default=<<tv-default-heading-state>>>
-<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>
+<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler" listItem="item"/>
 </$reveal>
 </div>
 </$set>

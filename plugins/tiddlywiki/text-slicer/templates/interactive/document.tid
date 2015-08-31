@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/templates/template-document
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/document
 
 \define config-show-toolbar()
 $:/config/plugins/tiddlywiki/text-slicer/show-toolbar/$(currentTiddler)$
@@ -21,7 +21,7 @@ $:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 <$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
 
-{{||$:/plugins/tiddlywiki/text-slicer/templates/view-document}}
+{{||$:/plugins/tiddlywiki/text-slicer/ui/view-document-button}}
 
 </div>
 
@@ -29,7 +29,7 @@ $:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
 
-<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler" listItem="item"/>
 
 </$set>
 

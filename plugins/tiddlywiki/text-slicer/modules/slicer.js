@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/tiddlywiki/text-slicer/slicer.js
+title: $:/plugins/tiddlywiki/text-slicer/modules/slicer.js
 type: application/javascript
 module-type: startup
 

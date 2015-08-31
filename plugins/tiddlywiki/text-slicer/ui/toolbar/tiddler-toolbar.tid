@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/templates/tiddler-toolbar
+title: $:/plugins/tiddlywiki/text-slicer/ui/toolbar/tiddler-toolbar
 
 <$list filter="[<tv-show-gadgets>prefix[yes]]" variable="hasToolbar">
 <div class="tc-slice-toolbar">

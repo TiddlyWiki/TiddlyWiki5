@@ -1,9 +1,0 @@
-title: $:/plugins/tiddlywiki/text-slicer/templates/template-list
-
-\define body(type:"ul")
-<$type$>
-<$list filter={{!!text}} template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>
-</$type$>
-\end
-
-<$macrocall $name="body" type={{!!toc-list-type}}/>

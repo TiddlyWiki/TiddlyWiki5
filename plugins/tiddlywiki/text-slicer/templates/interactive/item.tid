@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/templates/template-item
+title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/item
 
 <$link tag="li" class="tc-document-tiddler-link">
 
