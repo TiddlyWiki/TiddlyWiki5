@@ -885,7 +885,7 @@ $tw.Wiki = function(options) {
 	this.deleteTiddler = function(title) {
 // Uncomment the following line for detailed logs of all tiddler deletions
 // console.log("Deleting",title,tiddler)
-		if($tw.utils.hop(tiddler,title)) {
+		if($tw.utils.hop(tiddlers,title)) {
 			delete tiddlers[title];
 			this.clearCache(title);
 			this.clearGlobalCache();
