@@ -54,6 +54,7 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 
 !! Hackability Improvements
 
+* Updated to KaTeX v0.5.0, with [[several new features|https://github.com/Khan/KaTeX/releases/tag/v0.5.0]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/c4397792f5d396288048bcc3bb4ee8e95dbc2c5e]] added [[recent Operator]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e0aacc84d5f084ff7a53153c590fbff3d24f2e2c]] `publishFilter` to default save template
 * [[Allow|https://github.com/Jermolene/TiddlyWiki5/commit/7dddc925ae93725552b98bc348a07572895da96c]] ''delete'' button to be used in the tiddler view-mode toolbar
