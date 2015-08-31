@@ -5,7 +5,11 @@ tags: $:/tags/AboveStory
 
 <$set name="tv-default-heading-state" value="closed">
 
+<$set name="tv-show-gadgets" value="yes">
+
 <$list filter="[toc-type[document]!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-document"/>
+
+</$set>
 
 </$set>
 

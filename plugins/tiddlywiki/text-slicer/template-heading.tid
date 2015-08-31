@@ -9,7 +9,7 @@ $(tv-heading-status-config-title)$/$(currentTiddler)$
 <div class="tc-document-tiddler">
 <div class="tc-document-tiddler-toolbar">
 
-<$list filter="[<tv-show-gadgets>!prefix[no]]" variable="hasToolbar">
+<$list filter="[<tv-show-gadgets>prefix[yes]]" variable="hasToolbar">
 <$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="open" default=<<tv-default-heading-state>>>
 <$button set=<<tv-heading-status-config-title>> setTo="open" class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}

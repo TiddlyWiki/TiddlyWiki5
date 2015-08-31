@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/view-document
 
 <$button>
-<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/export-full-doc" tv-show-toolbar="no" tv-show-gadgets="no"/>
+<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/export-full-doc"/>
 View document
 </$button>
