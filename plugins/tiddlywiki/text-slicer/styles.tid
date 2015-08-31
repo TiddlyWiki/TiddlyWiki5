@@ -21,17 +21,17 @@ tags: $:/tags/Stylesheet
 	margin-left: 24px;
 }
 
+.tc-document-preview-column .tc-sliced-document {
+	margin-bottom: 3px;
+	border-bottom: 2px solid <<colour muted-foreground>>;
+}
+
 .tc-view-template-document-tiddler-heading {
 	border-top: 2px solid <<colour muted-foreground>>;
 }
 
 .tc-view-template-document-tiddler {
 	font-size: 0.9em;
-}
-
-.tc-sliced-document {
-	margin-bottom: 3px;
-	border-bottom: 2px solid <<colour muted-foreground>>;
 }
 
 .tc-document-tiddler {
@@ -57,7 +57,7 @@ tags: $:/tags/Stylesheet
 	text-align: center;
 }
 
-.tc-document-preview-column .tc-table-of-contents {
+.tc-document-preview-column .tc-sliced-document-body {
 	margin-left: 24px;
 }
 

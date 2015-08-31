@@ -18,6 +18,11 @@ cancel
 <$action-deletetiddler $tiddler=<<renameProxyTitle>>/>
 rename
 </$button>
+<$set name="proxy-title" value={{$(renameProxyTitle)$}}>
+<$list filter="""[<proxy-title>is[tiddler]]""">
+Warning: tiddler already exists
+</$list>
+</$set>
 </$reveal>
 </div>
 \end

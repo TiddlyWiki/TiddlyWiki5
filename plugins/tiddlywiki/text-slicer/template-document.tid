@@ -21,13 +21,15 @@ $:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 <$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
 
+{{||$:/plugins/tiddlywiki/text-slicer/templates/view-document}}
+
 </div>
 
-<div class='tc-table-of-contents'>
+<div class='tc-sliced-document-body'>
 
 <$set name="tv-show-toolbar" value={{$(config-show-toolbar)$}}>
 
-<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>
 
 </$set>
 

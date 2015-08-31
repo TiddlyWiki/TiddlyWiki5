@@ -164,16 +164,17 @@ Slicer.prototype.processNode = function(domNode) {
 		var tagName = domNode.tagName.toLowerCase();
 		if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
 			if(!this.isBlank(text)) {
+				title = this.makeUniqueTitle("heading",text);
 				parentTitle = this.popParentStackUntil(tagName);
 				tags = [parentTitle];
 				if(domNode.className.trim() !== "") {
 					tags = tags.concat(domNode.className.split(" "));
 				}
-				this.addToList(parentTitle,text);
+				this.addToList(parentTitle,title);
 				this.parentStack.push({type: tagName, title: this.addTiddler({
 					"toc-type": "heading",
 					"toc-heading-level": tagName,
-					title: this.makeUniqueTitle("heading",text),
+					title: title,
 					text: text,
 					list: [],
 					tags: tags

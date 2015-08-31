@@ -1,0 +1,4 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/export-full-doc
+tags: $:/tags/ViewTemplate
+
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/template-tiddler" listItem="item"/>

@@ -44,7 +44,10 @@ The document itself is represented by a tiddler with the following fields:
 
 * ''toc-type'': the text "document"
 * ''title'': the text ''"Sliced up "'' plus the title of the tiddler that was sliced
-* ''text'': left blank for description of the document
+* ''text'': Available for comments about the document
+* ''list'': ordered list of tiddlers making up the root level of this document
+
+Note that the relationship between the document and component tiddlers is that the components are listed in the ''list'' field. This differs from the relationship between headings and their components, which use the ''tags'' field of the components to tie them to the heading. The purpose of this difference is to make it possible to clone doument tiddlers without losing the connection to the constituent parts.
 
 !!! Headings
 
