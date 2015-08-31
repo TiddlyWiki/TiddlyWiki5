@@ -15,18 +15,7 @@ $:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 <div class="tc-sliced-document">
 
-<div class="tc-sliced-document-header">
-
-''Document'': <$link><$view field="title"/></$link>
-
-<$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
-
-<$button>
-<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/exporters/full-doc"/>
-View document
-</$button>
-
-</div>
+{{||$:/plugins/tiddlywiki/text-slicer/ui/document/header}}
 
 <div class='tc-sliced-document-body'>
 

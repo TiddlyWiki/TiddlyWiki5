@@ -1,4 +1,4 @@
-title: $:/plugins/tiddlywiki/text-slicer/ui/toolbar/title
+title: $:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar/title
 tags: $:/tags/TextSlicerToolbar
 
 \define renameProxyTitle()

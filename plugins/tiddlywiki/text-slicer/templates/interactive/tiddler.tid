@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler
 
 <$list filter="[<tv-show-toolbar>prefix[yes]]" variable="hasToolbar">
-{{||$:/plugins/tiddlywiki/text-slicer/ui/toolbar/tiddler-toolbar}}
+{{||$:/plugins/tiddlywiki/text-slicer/ui/tiddler/toolbar}}
 </$list>
 
 <$reveal type="match" state="!!toc-type" text="document">

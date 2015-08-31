@@ -1,3 +1,3 @@
 title: $:/plugins/tiddlywiki/text-slicer/exporters/full-doc
 
-<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler" listItem="item"/>
+{{||$:/plugins/tiddlywiki/text-slicer/templates/static/document}}
