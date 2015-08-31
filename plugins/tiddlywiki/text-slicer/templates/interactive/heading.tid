@@ -8,8 +8,6 @@ $(tv-heading-status-config-title)$/$(currentTiddler)$
 <$set name="tv-heading-status-config-title" value=<<config-heading-status>>>
 <div class="tc-document-tiddler">
 <div class="tc-document-tiddler-toolbar">
-
-<$list filter="[<tv-show-gadgets>prefix[yes]]" variable="hasToolbar">
 <$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="open" default=<<tv-default-heading-state>>>
 <$button set=<<tv-heading-status-config-title>> setTo="open" class="tc-btn-invisible">
 {{$:/core/images/down-arrow}}
@@ -20,8 +18,6 @@ $(tv-heading-status-config-title)$/$(currentTiddler)$
 {{$:/core/images/right-arrow}}
 </$button>
 </$reveal>
-</$list>
-
 </div>
 <$link tag="$level$" class="tc-document-tiddler-link">
 <$view field="text"/>

@@ -1,0 +1,21 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/tiddler
+
+<$reveal type="match" state="!!toc-type" text="document">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/document" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="heading">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/heading" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="paragraph">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/paragraph" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="list">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/list" mode="block"/>
+</$reveal>
+
+<$reveal type="match" state="!!toc-type" text="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/item" mode="block"/>
+</$reveal>

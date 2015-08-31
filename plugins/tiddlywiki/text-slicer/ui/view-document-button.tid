@@ -1,6 +1,0 @@
-title: $:/plugins/tiddlywiki/text-slicer/ui/view-document-button
-
-<$button>
-<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/exporters/full-doc"/>
-View document
-</$button>

@@ -13,11 +13,7 @@ tags: $:/tags/ViewTemplate
 
 <$set name="tv-default-heading-state" value="open">
 
-<$set name="tv-show-gadgets" value="yes">
-
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
-
-</$set>
 
 </$set>
 
