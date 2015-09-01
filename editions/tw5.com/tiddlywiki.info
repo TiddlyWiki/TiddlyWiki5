@@ -4,6 +4,7 @@
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/browser-sniff",
+		"tiddlywiki/text-slicer",
 		"tiddlywiki/railroad"
 	],
 	"themes": [

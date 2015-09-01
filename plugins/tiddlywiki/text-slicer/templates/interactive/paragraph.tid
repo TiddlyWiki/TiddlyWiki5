@@ -1,7 +1,15 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/paragraph
 
+\define body()
 <$link tag="div" class="tc-document-tiddler-link">
+
+<$list filter="""[all[current]] $(tv-exclude-filter)$""" listItem="item">
 
 <$transclude/>
 
+</$list>
+
 </$link>
+\end
+
+<<body>>

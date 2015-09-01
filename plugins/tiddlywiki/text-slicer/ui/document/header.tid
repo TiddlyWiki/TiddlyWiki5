@@ -4,7 +4,7 @@ title: $:/plugins/tiddlywiki/text-slicer/ui/document/header
 
 ''Document'': <$link><$view field="title"/></$link>
 
-''Exclude tags'': <$edit-text field="toc-exclude-tags"/>
+''Exclude filter'': <$edit-text field="toc-exclude-filter"/>
 
 <$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
 

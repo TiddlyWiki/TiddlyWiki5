@@ -1,7 +1,11 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/static/item
 
-<$link tag="li" class="tc-document-tiddler-link">
+\define body()
+<li class="tc-document-tiddler-link">
 
 <$transclude/>
 
-</$link>
+</li>
+\end
+
+<<body>>
