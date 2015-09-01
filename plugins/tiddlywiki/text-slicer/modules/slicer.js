@@ -1,7 +1,7 @@
 /*\
 title: $:/plugins/tiddlywiki/text-slicer/modules/slicer.js
 type: application/javascript
-module-type: startup
+module-type: global
 
 Setup the root widget event handlers
 
@@ -12,23 +12,7 @@ Setup the root widget event handlers
 /*global $tw: false */
 "use strict";
 
-// Export name and synchronous status
-exports.name = "slicer";
-exports.platforms = ["browser"];
-exports.after = ["startup"];
-exports.synchronous = true;
-
 var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
-
-// Install the root widget event handlers
-exports.startup = function() {
-	$tw.rootWidget.addEventListener("tm-slice-tiddler",function(event) {
-		var slicer = new Slicer($tw.wiki,event.param);
-		slicer.sliceTiddler(event.param)
-		slicer.outputTiddlers();
-		slicer.destroy();
-	});
-};
 
 function Slicer(wiki,sourceTitle) {
 	this.wiki = wiki;
@@ -282,5 +266,7 @@ Slicer.prototype.outputTiddlers_viaImportTiddler = function(tiddlers) {
 	newFields.text = JSON.stringify(slicerOutputData,null,$tw.config.preferences.jsonSpaces);
 	this.wiki.addTiddler(new $tw.Tiddler(slicerOutputTiddler,newFields));
 };
+
+exports.Slicer = Slicer;
 
 })();
