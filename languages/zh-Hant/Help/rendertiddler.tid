@@ -1,10 +1,10 @@
 title: $:/language/Help/rendertiddler
 description: 呈現個別條目為指定的內容類型 
 
-呈現個別條目為指定的[[內容類型|ContentType]]，預設為 `text/html` 且儲存為指定的檔名：
+呈現個別條目為指定的[[內容類型|ContentType]]，預設為 `text/html` 且儲存為指定的檔名。還可以指定一個範本，在這種情況下，"currentTiddler" 變數設為正在呈現的條目 (第一個參數值) 與範本條目合併呈現。
 
 ```
---rendertiddler <title> <filename> [<type>]
+--rendertiddler <title> <filename> [<type>] [<template>]
 ```
 
 預設情況下，檔名被解析為相對於版本資料夾的 `output` 子資料夾。 `--output` 命令可以用於將輸出指定到一個不同的資料夾。
