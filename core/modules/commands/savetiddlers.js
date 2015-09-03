@@ -35,8 +35,11 @@ Command.prototype.execute = function() {
 		wiki = this.commander.wiki,
 		filter = this.params[0],
 		pathname = path.resolve(this.commander.outputPath,this.params[1]),
+		dontDelete = (this.params[2] || "").toLowerCase() === "-do-not-delete",
 		tiddlers = wiki.filterTiddlers(filter);
-	$tw.utils.deleteDirectory(pathname);
+	if(!dontDelete) {
+		$tw.utils.deleteDirectory(pathname);
+	}
 	$tw.utils.createDirectory(pathname);
 	$tw.utils.each(tiddlers,function(title) {
 		var tiddler = self.commander.wiki.getTiddler(title),
