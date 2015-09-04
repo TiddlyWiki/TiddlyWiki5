@@ -24,6 +24,10 @@ This release includes several low-level performance optimisations that should im
 
 The new [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ).
 
+!! Blog Edition
+
+The new [[Blog Edition]] provides tools for using TiddlyWiki to create a static HTML blog that can be published on GitHub pages (or similar).
+
 !! Text-Slicer Edition
 
 The new [[Text-Slicer Edition]] is a custom edition with tools to help advanced users slice longer texts up into individual tiddlers.
@@ -51,6 +55,7 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/5d43cd740863be188e43fd49893dc8dddcd5b937]] new ''fold'' and ''fold others'' buttons to the tiddler toolbar to temporarily hide the body of a tiddler, and also [[added|https://github.com/Jermolene/TiddlyWiki5/commit/ac08dc2e35d99eb563ab8c4449ce1fcfe30f3bf7]] new ''fold all'' and ''unfold all'' page buttons
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d5e690a06d523a2047eaf9b623b633bb72c18af9]] ability to disable individual WikiText parser rules (see the ''Advanced'' tab of $:/ControlPanel). Also [[added|https://github.com/Jermolene/TiddlyWiki5/commit/58188cf8053bef87dbe97e4b05cdba67f75c615d]] a simple setting for disabling automatic linking of ~CamelCase words
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2cb6400773096b02b71c1851fb0fac5dfefbbd6f]] support for automatically linked system tiddler titles to include digits and underscore
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2c9b1ae2579f8d2452c60217aa3e153a29d32d1f]] warning when trying to use plugins designed for TiddlyWiki Classic
 
 !! Hackability Improvements
 
@@ -61,12 +66,16 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/742161675421a942051abed01cb47c0394f4db6d]] a new [[hidden setting for keyboard shortcuts|Hidden Setting: Keyboard Shortcuts]]
 * [[Update|https://github.com/Jermolene/TiddlyWiki5/commit/e5cd8313a0d1a4a3dea17457a8a883675243b9c7]] ActionSetFieldWidget to allow timestamp to be preserved
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/fdce67399d175a9911df908981b83ac3edfb1142]] option to suppress navigation for edit/cancel/save
+* [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/5176f008f0bc15751e36933c95ae299c1ee5971a]] SaveTiddlersCommand with do not delete option
+* [[Enhance|https://github.com/Jermolene/TiddlyWiki5/commit/4ccdaf3fafda2f1d0766ed69c68d030a7db2bbc6]] RenderTiddlerCommand with template option
+* [[Extend|https://github.com/Jermolene/TiddlyWiki5/commit/51d771a07493f91c32145b69e4f5534724416d2e]] tm-open-window to pass variables
 
 !! Bug Fixes
 
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/issues/1882]] problem introduced in 5.1.9 with processing `tiddlywiki.info` files
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3fbf29093b32c00941b0c03951250de7c0cc8d6f]] problem with invisible icons in $:/AdvancedSearch
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/862e358b57fde74595420e7948bf44fdadf690dc]] check for required plugins in ServerCommand
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/709126dd643207adab725569c214f8617c28fbeb]] problem with queueing change events for deleting non-existent tiddlers 
 
 !! Contributors
 
