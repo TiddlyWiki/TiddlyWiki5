@@ -150,7 +150,7 @@ Slicer.prototype.processNode = function(domNode) {
 			if(!this.isBlank(text)) {
 				title = this.makeUniqueTitle("heading",text);
 				parentTitle = this.popParentStackUntil(tagName);
-				tags = [parentTitle];
+				tags = [];
 				if(domNode.className.trim() !== "") {
 					tags = tags.concat(domNode.className.split(" "));
 				}
@@ -167,7 +167,7 @@ Slicer.prototype.processNode = function(domNode) {
 		} else if(tagName === "ul" || tagName === "ol") {
 			title = this.makeUniqueTitle("list-" + tagName);
 			parentTitle = this.parentStack[this.parentStack.length - 1].title;
-			tags = [parentTitle];
+			tags = [];
 			if(domNode.className.trim() !== "") {
 				tags = tags.concat(domNode.className.split(" "));
 			}
@@ -187,7 +187,7 @@ Slicer.prototype.processNode = function(domNode) {
 			if(!this.isBlank(text)) {
 				title = this.makeUniqueTitle("list-item",text);
 				parentTitle = this.parentStack[this.parentStack.length - 1].title;
-				tags = [parentTitle];
+				tags = [];
 				if(domNode.className.trim() !== "") {
 					tags = tags.concat(domNode.className.split(" "));
 				}
@@ -203,7 +203,7 @@ Slicer.prototype.processNode = function(domNode) {
 		} else if(tagName === "p") {
 			if(!this.isBlank(text)) {
 				parentTitle = this.parentStack[this.parentStack.length - 1].title;
-				tags = [parentTitle];
+				tags = [];
 				if(domNode.className.trim() !== "") {
 					tags = tags.concat(domNode.className.split(" "));
 				}
