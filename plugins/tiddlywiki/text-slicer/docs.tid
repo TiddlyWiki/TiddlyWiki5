@@ -132,8 +132,8 @@ The tiddler representing the list itself has the following fields:
 
 * ''toc-type'': the text "list"
 * ''toc-list-type'': the text "ul" or "ol"
+* ''toc-list-filter'': the default filter used to generate the titles of the list items
 * ''title'': an automatically generated unique title
-* ''text'': the default filter used to generate the titles of the list items
 * ''list'': ordered list of titles of tiddlers representing the items in this list
 * ''tags'': tagged with the title of the parent heading
 ** In addition, any CSS classes found in the HTML are converted into tags

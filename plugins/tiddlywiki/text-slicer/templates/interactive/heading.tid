@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/heading
 
 \define config-heading-status()
-$(tv-heading-status-config-title)$/$(currentTiddler)$
+$(tv-heading-status-config-title)$/$(tv-heading-status-config-prefix)$/$(currentTiddler)$
 \end
 
 \define body(level:"h1")
@@ -23,7 +23,7 @@ $(tv-heading-status-config-title)$/$(currentTiddler)$
 <$view field="text"/>
 </$link>
 <$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="open" default=<<tv-default-heading-state>>>
-<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler" listItem="item"/>
+<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
 </$reveal>
 </div>
 </$set>

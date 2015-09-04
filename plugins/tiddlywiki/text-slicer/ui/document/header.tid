@@ -9,7 +9,7 @@ title: $:/plugins/tiddlywiki/text-slicer/ui/document/header
 <$checkbox tiddler=<<config-show-toolbar>> field="text" checked="yes" unchecked="no" default="no"> Show toolbar</$checkbox>
 
 <$button>
-<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/exporters/full-doc"/>
+<$action-sendmessage $message="tm-open-window" $param=<<currentTiddler>> template="$:/plugins/tiddlywiki/text-slicer/templates/static/document" output="text/html"/>
 View document
 </$button>
 

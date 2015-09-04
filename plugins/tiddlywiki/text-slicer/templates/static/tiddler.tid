@@ -1,21 +1,25 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/static/tiddler
 
-<$reveal type="match" state="!!toc-type" text="document">
+<$vars toc-type={{!!toc-type}}>
+
+<$list filter="[<toc-type>prefix[document]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/document" mode="block"/>
-</$reveal>
+</$list>
 
-<$reveal type="match" state="!!toc-type" text="heading">
+<$list filter="[<toc-type>prefix[heading]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/heading" mode="block"/>
-</$reveal>
+</$list>
 
-<$reveal type="match" state="!!toc-type" text="paragraph">
+<$list filter="[<toc-type>prefix[paragraph]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/paragraph" mode="block"/>
-</$reveal>
+</$list>
 
-<$reveal type="match" state="!!toc-type" text="list">
+<$list filter="[<toc-type>prefix[list]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/list" mode="block"/>
-</$reveal>
+</$list>
 
-<$reveal type="match" state="!!toc-type" text="item">
+<$list filter="[<toc-type>prefix[item]]" variable="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/item" mode="block"/>
-</$reveal>
+</$list>
+
+</$vars>

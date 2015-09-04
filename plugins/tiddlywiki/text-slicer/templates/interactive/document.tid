@@ -23,7 +23,7 @@ $:/config/plugins/tiddlywiki/text-slicer/heading-status/$(currentTiddler)$
 
 <$set name="tv-exclude-filter" value={{!!toc-exclude-filter}}>
 
-<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler" listItem="item"/>
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
 
 </$set>
 

@@ -175,8 +175,9 @@ Slicer.prototype.processNode = function(domNode) {
 			this.parentStack.push({type: tagName, title: this.addTiddler({
 				"toc-type": "list",
 				"toc-list-type": tagName,
+				"toc-list-filter": "[tag<currentTiddler>!has[draft.of]]",
+				text: "",
 				title: title,
-				text: "[tag<currentTiddler>!has[draft.of]]",
 				list: [],
 				tags: tags
 			})});

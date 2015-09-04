@@ -2,6 +2,6 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/static/document
 
 <$set name="tv-exclude-filter" value={{!!toc-exclude-filter}}>
 
-<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler" listItem="item"/>
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler"/>
 
 </$set>

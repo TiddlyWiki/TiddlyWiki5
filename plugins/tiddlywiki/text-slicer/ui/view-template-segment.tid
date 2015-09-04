@@ -11,11 +11,11 @@ tags: $:/tags/ViewTemplate
 
 <div class="tc-view-template-document-tiddler">
 
-<$set name="tv-default-heading-state" value="open">
+<$vars tv-default-heading-state="closed" tv-heading-status-config-prefix="view-template">
 
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>
 
-</$set>
+</$vars>
 
 </div>
 

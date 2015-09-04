@@ -4,7 +4,7 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/static/heading
 <$level$>
 <$view field="text"/>
 </$level$>
-<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler" listItem="item"/>
+<$list filter="[tag<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler"/>
 \end
 
 <$macrocall $name="body" level={{!!toc-heading-level}}/>
