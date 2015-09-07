@@ -1,6 +1,8 @@
 title: $:/plugins/tiddlywiki/text-slicer/ui/view-template-segment
 tags: $:/tags/ViewTemplate
 
+<$reveal type="nomatch" state=<<folded-state>> text="hide" retain="yes" animate="yes">
+
 <$reveal type="nomatch" state="!!toc-type" text="">
 
 <div class="tc-view-template-document-tiddler-heading">
@@ -21,3 +23,4 @@ tags: $:/tags/ViewTemplate
 
 </$reveal>
 
+</$reveal>
