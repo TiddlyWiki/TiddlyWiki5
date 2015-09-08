@@ -70,7 +70,7 @@ For more flexibility the KaTeX widget can also be used via the full widget synta
 
 ! Error Handling
 
-An warning message is displayed if KaTeX detects a problem with the ~LaTeX syntax. For example:
+Any LaTeX syntax errors are flagged with the problematic syntax highlighted. For example:
 
 ```
 $$\displaystyle f(x) = \int_{-\infty}^\infinity\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$

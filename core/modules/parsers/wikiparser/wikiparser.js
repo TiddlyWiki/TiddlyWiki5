@@ -28,20 +28,9 @@ var WikiParser = function(type,text,options) {
 	this.wiki = options.wiki;
 	var self = this;
 	// Check for an externally linked tiddler
-	if($tw.browser && options._canonical_uri) {
-		$tw.utils.httpRequest({
-			url: options._canonical_uri,
-			type: "GET",
-			callback: function(err,data) {
-				if(!err) {
-					var tiddlers = self.wiki.deserializeTiddlers(".tid",data,self.wiki.getCreationFields())
-					if(tiddlers) {
-						self.wiki.addTiddlers(tiddlers);
-					}
-				}
-			}
-		});
-		text = "Loading external text from ''" + options._canonical_uri + "''\n\nIf this message doesn't disappear you may be using a browser that doesn't support external text in this configuration. See http://tiddlywiki.com/#ExternalText";
+	if($tw.browser && (text || "") === "" && options._canonical_uri) {
+		this.loadRemoteTiddler(options._canonical_uri);
+		text = $tw.language.getRawString("LazyLoadingWarning");
 	}
 	// Initialise the classes if we don't have them already
 	if(!this.pragmaRuleClasses) {
@@ -77,6 +66,27 @@ var WikiParser = function(type,text,options) {
 		topBranch.push.apply(topBranch,this.parseBlocks());
 	}
 	// Return the parse tree
+};
+
+/*
+*/
+WikiParser.prototype.loadRemoteTiddler = function(url) {
+	var self = this;
+	$tw.utils.httpRequest({
+		url: url,
+		type: "GET",
+		callback: function(err,data) {
+			if(!err) {
+				var tiddlers = self.wiki.deserializeTiddlers(".tid",data,self.wiki.getCreationFields());
+				$tw.utils.each(tiddlers,function(tiddler) {
+					tiddler["_canonical_uri"] = url;
+				});
+				if(tiddlers) {
+					self.wiki.addTiddlers(tiddlers);
+				}
+			}
+		}
+	});
 };
 
 /*
