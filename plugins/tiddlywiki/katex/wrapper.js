@@ -35,12 +35,13 @@ KaTeXWidget.prototype.render = function(parent,nextSibling) {
 	// Get the source text
 	var text = this.getAttribute("text",this.parseTreeNode.text || "");
 	// Render it into a span
-	var span = this.document.createElement("span");
+	var span = this.document.createElement("span"),
+		options = {throwOnError: false};
 	try {
 		if(!this.document.isTiddlyWikiFakeDom) {
-			katex.render(text,span);
+			katex.render(text,span,options);
 		} else {
-			span.innerHTML = katex.renderToString(text);
+			span.innerHTML = katex.renderToString(text,options);
 		}
 	} catch(ex) {
 		span.className = "tc-error";
