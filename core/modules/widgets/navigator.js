@@ -341,12 +341,14 @@ NavigatorWidget.prototype.handleSaveTiddlerEvent = function(event) {
 				));
 			}
 			if(isConfirmed) {
-				// Save the draft tiddler as the real tiddler
-				this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
+				// Create the new tiddler and pass it through the th-saving-tiddler hook
+				var newTiddler = new $tw.Tiddler(this.wiki.getCreationFields(),tiddler,{
 					title: draftTitle,
 					"draft.title": undefined,
 					"draft.of": undefined
-				},this.wiki.getModificationFields()));
+				},this.wiki.getModificationFields());
+				newTiddler = $tw.hooks.invokeHook("th-saving-tiddler",newTiddler);
+				this.wiki.addTiddler(newTiddler);
 				// Remove the draft tiddler
 				this.wiki.deleteTiddler(title);
 				// Remove the original tiddler if we're renaming it

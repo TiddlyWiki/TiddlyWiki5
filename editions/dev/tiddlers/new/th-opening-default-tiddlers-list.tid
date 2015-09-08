@@ -1,6 +1,6 @@
 created: 20141122200310516
 modified: 20141122200310516
-title: Hook: tc-opening-default-tiddlers-list
+title: Hook: th-opening-default-tiddlers-list
 type: text/vnd.tiddlywiki
 
 This hook allows plugins to add to or remove from the list of tiddlers that are opened when the wiki is first loaded or the home button is clicked.
