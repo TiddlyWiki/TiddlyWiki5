@@ -1,4 +1,4 @@
-title: $:/core/macros/thumbails
+title: $:/core/macros/thumbnails
 tags: $:/tags/Macro
 
 \define thumbnail(link,icon,color,background-color,image,caption,width:"280",height:"157")
