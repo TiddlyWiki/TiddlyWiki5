@@ -4,6 +4,6 @@ tags: Editions
 title: Blog Edition
 type: text/vnd.tiddlywiki
 
-The ''Blog'' edition of TiddlyWiki contains tools to help publish blogs written in TiddlyWiki.
+The ''Blog'' edition of TiddlyWiki contains tools to help publish static HTML blogs written in TiddlyWiki. It is currently designed for use under Node.js.
 
-<a href="editions/blog/index.html" target="_blank">editions/blog/index.html</a>
+While documentation is being prepared, see https://github.com/Jermolene-blog/blog for an example of use.
