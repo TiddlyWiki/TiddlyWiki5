@@ -57,6 +57,7 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/d5e690a06d523a2047eaf9b623b633bb72c18af9]] ability to disable individual WikiText parser rules (see the ''Advanced'' tab of $:/ControlPanel). Also [[added|https://github.com/Jermolene/TiddlyWiki5/commit/58188cf8053bef87dbe97e4b05cdba67f75c615d]] a simple setting for disabling automatic linking of ~CamelCase words
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/2cb6400773096b02b71c1851fb0fac5dfefbbd6f]] support for automatically linked system tiddler titles to include digits and underscore
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/2c9b1ae2579f8d2452c60217aa3e153a29d32d1f]] warning when trying to use plugins designed for TiddlyWiki Classic
+* Upgraded to version v8.8.0 of highlight.js for the [[Highlight Plugin]]
 
 !! Hackability Improvements
 
