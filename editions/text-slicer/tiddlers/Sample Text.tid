@@ -16,6 +16,10 @@ Dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
 
 @@
 
+!! What's with all the < angle brackets
+
+An opportunity to see how characters that need HTML encoding (like < angle brackets) are dealt with.
+
 !!! Who uses TiddlyWiki?
 
 @@.intro

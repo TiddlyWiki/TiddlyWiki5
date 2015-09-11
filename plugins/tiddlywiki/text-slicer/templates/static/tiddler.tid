@@ -3,23 +3,33 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/static/tiddler
 <$vars toc-type={{!!toc-type}}>
 
 <$list filter="[<toc-type>prefix[document]]" variable="item">
+
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/document" mode="block"/>
+
 </$list>
 
 <$list filter="[<toc-type>prefix[heading]]" variable="item">
+
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/heading" mode="block"/>
+
 </$list>
 
 <$list filter="[<toc-type>prefix[paragraph]]" variable="item">
+
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/paragraph" mode="block"/>
+
 </$list>
 
 <$list filter="[<toc-type>prefix[list]]" variable="item">
+
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/list" mode="block"/>
+
 </$list>
 
 <$list filter="[<toc-type>prefix[item]]" variable="item">
+
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/item" mode="block"/>
+
 </$list>
 
 </$vars>

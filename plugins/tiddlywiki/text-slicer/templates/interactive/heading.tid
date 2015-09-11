@@ -20,7 +20,7 @@ $(tv-heading-status-config-title)$/$(tv-heading-status-config-prefix)$/$(current
 </$reveal>
 </div>
 <$link tag="$level$" class="tc-document-tiddler-link">
-<$view field="text"/>
+<$transclude/>
 </$link>
 <$reveal type="nomatch" state=<<tv-heading-status-config-title>> text="open" default=<<tv-default-heading-state>>>
 <$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler"/>

@@ -1,0 +1,10 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/plain/heading
+
+\define body(level:"h1")
+<$level$>
+<$transclude/>
+</$level$>
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/plain/tiddler"/>
+\end
+
+<$macrocall $name="body" level={{!!toc-heading-level}}/>

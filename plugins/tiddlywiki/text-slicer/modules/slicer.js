@@ -142,7 +142,7 @@ Slicer.prototype.processNodeList = function(domNodeList) {
 
 Slicer.prototype.processNode = function(domNode) {
 	var title, parentTitle, tags,
-		text = domNode.textContent,
+		text = $tw.utils.htmlEncode(domNode.textContent),
 		nodeType = domNode.nodeType;
 	if(nodeType === 1) { // DOM element nodes
 		var tagName = domNode.tagName.toLowerCase();
