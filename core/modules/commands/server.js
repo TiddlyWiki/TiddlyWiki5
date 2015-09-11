@@ -170,7 +170,7 @@ var Command = function(params,commander,callback) {
 			if(fields.revision) {
 				delete fields.revision;
 			}
-			state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title}));
+			state.wiki.addTiddler(new $tw.Tiddler(state.wiki.getCreationFields(),fields,{title: title},state.wiki.getModificationFields()));
 			var changeCount = state.wiki.getChangeCount(title).toString();
 			response.writeHead(204, "OK",{
 				Etag: "\"default/" + encodeURIComponent(title) + "/" + changeCount + ":\"",

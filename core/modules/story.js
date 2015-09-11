@@ -82,9 +82,11 @@ Story.prototype.addToStory = function(navigateTo,navigateFromTitle,options) {
 Story.prototype.saveStoryList = function(storyList) {
 	var storyTiddler = this.wiki.getTiddler(this.storyTitle);
 	this.wiki.addTiddler(new $tw.Tiddler(
+		this.wiki.getCreationFields(),
 		{title: this.storyTitle},
 		storyTiddler,
-		{list: storyList}
+		{list: storyList},
+		this.wiki.getModificationFields()
 	));
 };
 

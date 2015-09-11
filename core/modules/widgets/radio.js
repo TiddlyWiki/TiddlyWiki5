@@ -79,7 +79,7 @@ RadioWidget.prototype.setValue = function() {
 		var tiddler = this.wiki.getTiddler(this.radioTitle),
 			addition = {};
 		addition[this.radioField] = this.radioValue;
-		this.wiki.addTiddler(new $tw.Tiddler({title: this.radioTitle},tiddler,addition,this.wiki.getModificationFields()));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),{title: this.radioTitle},tiddler,addition,this.wiki.getModificationFields()));
 	}
 };
 

@@ -125,7 +125,7 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		}
 	}
 	if(hasChanged) {
-		this.wiki.addTiddler(new $tw.Tiddler(fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getCreationFields(),fallbackFields,tiddler,newFields,this.wiki.getModificationFields()));
 	}
 };
 
