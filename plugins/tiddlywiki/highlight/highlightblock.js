@@ -23,14 +23,14 @@ CodeBlockWidget.prototype.postRender = function() {
 	if($tw.browser && this.document !== $tw.fakeDocument && this.language) {
 		domNode.className = this.language.toLowerCase();
 		hljs.highlightBlock(domNode);
-	} else if(!$tw.browser && this.language && this.language.indexOf("/") == -1 ){
-		try{
+	} else if(!$tw.browser && this.language && this.language.indexOf("/") === -1 ){
+		try {
 			domNode.className = this.language.toLowerCase() + " hljs";
 			domNode.children[0].innerHTML = hljs.fixMarkup(hljs.highlight(this.language, this.getAttribute("code")).value);
 		}
 		catch(err) {
-			//can't easily tell if a language is registered or not in the packed version of hightlight.js
-			//so we silently fail and the codeblock remains unchanged
+			// Can't easily tell if a language is registered or not in the packed version of hightlight.js,
+			// so we silently fail and the codeblock remains unchanged
 		}
 	}	
 };
