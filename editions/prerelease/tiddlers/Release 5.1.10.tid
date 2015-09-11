@@ -39,7 +39,8 @@ Limited support for tiddlers stored in external `.tid` files:
 * standalone TiddlyWiki HTML files with external text tiddlers can be built under Node.js
 * wikis with external text tiddlers can be worked with in the browser, automatically lazily loading the content of external text tiddlers when it is first referenced
 ** saving changes in the browser doesn't work as expected: if edited, the external text tiddler is replaced with an ordinary tiddler
-** lazy loading of external text tiddlers doesn't work in Chrome when viewing the TiddlyWiki HTML file on a ''file:'' URI; it works OK in Firefox. It works on an HTTP URI on all browsers
+** lazy loading of external text tiddlers doesn't work in Chrome when viewing the TiddlyWiki HTML file on a ''file:'' URI; it works OK in Firefox
+** lazy loading works on an HTTP URI on all browsers as long as the target file is either stored on the same domain or is served by a [[server that supports CORS|https://en.wikipedia.org/wiki/Cross-origin_resource_sharing]]
 
 See [[Alice in Wonderland]] for an example. Try opening it without a network connection.
 
