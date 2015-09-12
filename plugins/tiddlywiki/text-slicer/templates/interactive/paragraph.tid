@@ -1,7 +1,7 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/paragraph
 
 \define body()
-<$link tag="div" class="tc-document-tiddler-link">
+<$link tag="div" class="tc-document-tiddler-link tc-document-tiddler">
 
 <$list filter="""[all[current]] $(tv-exclude-filter)$ +[limit[1]]""" variable="item">
 
