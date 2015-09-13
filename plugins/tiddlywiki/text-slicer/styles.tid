@@ -17,6 +17,10 @@ tags: $:/tags/Stylesheet
 	font-size: 0.9em;
 }
 
+.tc-sliced-document-title {
+	font-size: 1.7em;
+}
+
 .tc-document-preview-column .tc-sliced-document-header {
 	margin-left: 24px;
 }

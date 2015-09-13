@@ -36,7 +36,7 @@ The document preview column appears at the left side of the screen. The content 
 
 Clicking ''Show toolbar'' causes each tiddler be preceded by a toolbar showing the underlying title. It can be edited directly to rename the tiddler. References to the tiddler in the ''tags'' and ''list'' are automatically updated to reflect the change, but note that links to the tiddler will not be automatically changed.
 
-The preview column to be visible, the following theme tweaks should be applied:
+The following theme tweaks should be applied to enable the preview column:
 
 * Set [[story left position|$:/themes/tiddlywiki/vanilla/metrics/storyleft]] to ''400px'' (or more)
 * It is recommended to also set the [[sidebar layout|$:/themes/tiddlywiki/vanilla/options/sidebarlayout]] to ''fluid-fixed''.
