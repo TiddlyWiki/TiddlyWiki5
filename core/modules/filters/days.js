@@ -12,14 +12,6 @@ Filter operator that selects tiddlers with a specified date field within a speci
 /*global $tw: false */
 "use strict";
 
-Math.sign = Math.sign || function(x) {
-	x = +x; // convert to a number
-	if (x === 0 || isNaN(x)) {
-		return x;
-	}
-	return x > 0 ? 1 : -1;
-};
-
 /*
 Export our filter function
 */
@@ -27,10 +19,10 @@ exports.days = function(source,operator,options) {
 	var results = [],
 		fieldName = operator.suffix || "modified",
 		dayInterval = (parseInt(operator.operand,10)||0),
-		dayIntervalSign = Math.sign(dayInterval),
+		dayIntervalSign = $tw.utils.sign(dayInterval),
 		targetTimeStamp = (new Date()).setHours(0,0,0,0) + 1000*60*60*24*dayInterval,
 		isWithinDays = function(dateField) {
-			var sign = Math.sign(targetTimeStamp - (new Date(dateField)).setHours(0,0,0,0));
+			var sign = $tw.utils.sign(targetTimeStamp - (new Date(dateField)).setHours(0,0,0,0));
 			return sign === 0 || sign === dayIntervalSign;
 		};
 
