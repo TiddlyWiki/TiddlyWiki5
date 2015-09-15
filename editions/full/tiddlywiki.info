@@ -15,6 +15,7 @@
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/railroad",
 		"tiddlywiki/stacked-view",
+		"tiddlywiki/text-slicer",
 		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"languages": [
