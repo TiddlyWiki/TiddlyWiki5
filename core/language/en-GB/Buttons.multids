@@ -45,7 +45,7 @@ FullScreen/Hint: Enter or leave full-screen mode
 Help/Caption: help
 Help/Hint: Show help panel
 Import/Caption: import
-Import/Hint: Import files
+Import/Hint: Import tiddlers from text or image files
 Info/Caption: info
 Info/Hint: Show information for this tiddler
 Home/Caption: home
