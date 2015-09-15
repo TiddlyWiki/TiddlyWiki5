@@ -1,4 +1,4 @@
-title: Improving TiddlyWiki Documentation
+title: Welcome to tw5.com-docs
 
 This edition of TiddlyWiki is a tool to help people make and submit improvements to the main documentation on http://tiddlywiki.com/
 
@@ -13,3 +13,15 @@ Note that currently some functionality doesn't work properly because of macros a
 ''Default tiddlers from tiddlywiki.com'':
 
 <$macrocall $name="list-links" filter={{$:/tw5.com/DefaultTiddlers}}/>
+
+<$list filter="[[$:/plugins/tiddlywiki/tw5.com-docs]plugintiddlers[]is[tiddler]] -[[$:/DefaultTiddlers]] +[limit[1]]" emptyMessage="""
+
+Additional information will appear here if you modify any of the documentation tiddlers.
+
+""">
+
+''Tiddlers that you have modified'':
+
+<<list-links "[[$:/plugins/tiddlywiki/tw5.com-docs]plugintiddlers[]is[tiddler]] -[[$:/DefaultTiddlers]]">>
+
+</$list>
