@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/text-slicer/modules/slicer.js
 type: application/javascript
 module-type: global
 
-Setup the root widget event handlers
+Main text-slicing logic
 
 \*/
 (function(){
@@ -23,6 +23,7 @@ function Slicer(wiki,sourceTitle) {
 	this.tiddlers = {};
 	this.parentStack = [];
 	this.sliceTitle = null;
+	this.slicers = $tw.modules.applyMethods("slicer");
 }
 
 Slicer.prototype.destroy = function() {
@@ -141,81 +142,22 @@ Slicer.prototype.processNodeList = function(domNodeList) {
 }
 
 Slicer.prototype.processNode = function(domNode) {
-	var title, parentTitle, tags,
-		text = $tw.utils.htmlEncode(domNode.textContent),
+	var text = $tw.utils.htmlEncode(domNode.textContent),
 		nodeType = domNode.nodeType;
 	if(nodeType === 1) { // DOM element nodes
-		var tagName = domNode.tagName.toLowerCase();
-		if(tagName === "h1" || tagName === "h2" || tagName === "h3" || tagName === "h4") {
-			if(!this.isBlank(text)) {
-				title = this.makeUniqueTitle("heading",text);
-				parentTitle = this.popParentStackUntil(tagName);
-				tags = [];
-				if(domNode.className.trim() !== "") {
-					tags = tags.concat(domNode.className.split(" "));
-				}
-				this.addToList(parentTitle,title);
-				this.parentStack.push({type: tagName, title: this.addTiddler({
-					"toc-type": "heading",
-					"toc-heading-level": tagName,
-					title: title,
-					text: text,
-					list: [],
-					tags: tags
-				})});
+		var tagName = domNode.tagName.toLowerCase(),
+			hasProcessed = false;
+		for(var slicerTitle in this.slicers) {
+			var slicer = this.slicers[slicerTitle];
+			if(slicer.bind(this)(domNode,tagName)) {
+				hasProcessed = true;
+				break;
 			}
-		} else if(tagName === "ul" || tagName === "ol") {
-			title = this.makeUniqueTitle("list-" + tagName);
-			parentTitle = this.parentStack[this.parentStack.length - 1].title;
-			tags = [];
-			if(domNode.className.trim() !== "") {
-				tags = tags.concat(domNode.className.split(" "));
+		}
+		if(!hasProcessed) {
+			if(domNode.hasChildNodes()) {
+				this.processNodeList(domNode.childNodes);
 			}
-			this.addToList(parentTitle,title);
-			this.parentStack.push({type: tagName, title: this.addTiddler({
-				"toc-type": "list",
-				"toc-list-type": tagName,
-				"toc-list-filter": "[list<currentTiddler>!has[draft.of]]",
-				text: "",
-				title: title,
-				list: [],
-				tags: tags
-			})});
-			this.processNodeList(domNode.childNodes);
-			this.parentStack.pop();
-		} else if(tagName === "li") {
-			if(!this.isBlank(text)) {
-				title = this.makeUniqueTitle("list-item",text);
-				parentTitle = this.parentStack[this.parentStack.length - 1].title;
-				tags = [];
-				if(domNode.className.trim() !== "") {
-					tags = tags.concat(domNode.className.split(" "));
-				}
-				this.addToList(parentTitle,title);
-				this.addTiddler({
-					"toc-type": "item",
-					title: title,
-					text: text,
-					list: [],
-					tags: tags
-				});
-			}
-		} else if(tagName === "p") {
-			if(!this.isBlank(text)) {
-				parentTitle = this.parentStack[this.parentStack.length - 1].title;
-				tags = [];
-				if(domNode.className.trim() !== "") {
-					tags = tags.concat(domNode.className.split(" "));
-				}
-				this.addToList(parentTitle,this.addTiddler({
-					"toc-type": "paragraph",
-					title: this.makeUniqueTitle("paragraph",text),
-					text: text,
-					tags: tags
-				}));
-			}
-		} else if(domNode.hasChildNodes()) {
-			this.processNodeList(domNode.childNodes);
 		}
 	}
 };
@@ -242,30 +184,6 @@ Slicer.prototype.outputTiddlers = function() {
 			$tw.wiki.addTiddler(new $tw.Tiddler(self.wiki.getCreationFields(),tiddlerFields,self.wiki.getModificationFields()));
 		}
 	});
-};
-
-// Output via an import tiddler
-Slicer.prototype.outputTiddlers_viaImportTiddler = function(tiddlers) {
-	// Get the current slicer output tiddler
-	var slicerOutputTiddler = this.wiki.getTiddler(SLICER_OUTPUT_TITLE),
-		slicerOutputData = this.wiki.getTiddlerData(SLICER_OUTPUT_TITLE,{}),
-		newFields = new Object({
-			title: SLICER_OUTPUT_TITLE,
-			type: "application/json",
-			"plugin-type": "import",
-			"status": "pending"
-		});
-	// Process each tiddler
-	slicerOutputData.tiddlers = slicerOutputData.tiddlers || {};
-	$tw.utils.each(tiddlers,function(tiddlerFields) {
-		var title = tiddlerFields.title;
-		if(title) {
-			slicerOutputData.tiddlers[title] = tiddlerFields;
-		}
-	});
-	// Save the slicer output tiddler
-	newFields.text = JSON.stringify(slicerOutputData,null,$tw.config.preferences.jsonSpaces);
-	this.wiki.addTiddler(new $tw.Tiddler(slicerOutputTiddler,newFields));
 };
 
 exports.Slicer = Slicer;
