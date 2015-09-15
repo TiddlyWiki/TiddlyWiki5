@@ -1465,6 +1465,7 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 			if(files.indexOf("tiddlywiki.files") !== -1) {
 				// If so, process the files it describes
 				var filesInfo = JSON.parse(fs.readFileSync(filepath + path.sep + "tiddlywiki.files","utf8"));
+				// First the tiddlers
 				$tw.utils.each(filesInfo.tiddlers,function(tidInfo) {
 					var type = tidInfo.fields.type || "text/plain",
 						typeInfo = $tw.config.contentTypeInfo[type],
@@ -1491,6 +1492,13 @@ $tw.loadTiddlersFromPath = function(filepath,excludeRegExp) {
 						}
 						tidInfo.fields.text = text;
 						tiddlers.push({tiddlers: [tidInfo.fields]});
+					}
+				});
+				// Then any recursive directories
+				$tw.utils.each(filesInfo.directories,function(dirPath) {
+					var pathname = path.resolve(filepath,dirPath);
+					if(fs.existsSync(pathname) && fs.statSync(pathname).isDirectory()) {
+						tiddlers.push.apply(tiddlers,$tw.loadTiddlersFromPath(pathname,excludeRegExp));
 					}
 				});
 			} else {

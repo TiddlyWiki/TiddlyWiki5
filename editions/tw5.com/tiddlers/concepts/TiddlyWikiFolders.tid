@@ -106,6 +106,9 @@ Sub-folders within the `tiddlers` folder can also be given a `tiddlywiki.files` 
 				"title": "A different title"
 			}
 		}
+	],
+	"directories": [
+		"../../mytiddlers/store"
 	]
 }
 ```
@@ -117,3 +120,5 @@ The JSON data consists of an object with a `tiddlers` property that contains an 
 ** `isTiddlerFile`: if `true`, the file will be deserialised to extract the tiddlers. Otherwise, the raw content of the file is assigned to the `text` field without any parsing
 * `fields`: an object containing fields that override any provided in the tiddler file
 * `prefix` & `suffix`: (optional) specify strings to be prefixed and suffixed to the tiddler file text content
+
+The ''directories'' property allows a list of directories to be specified. All tiddlers will be recursively loaded from each directory listed.
