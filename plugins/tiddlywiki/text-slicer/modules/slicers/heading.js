@@ -31,6 +31,7 @@ exports.processHeadingNode = function(domNode,tagName) {
 				list: [],
 				tags: tags
 			})});
+			this.currentTiddler = title;
 			return true;
 		}
 	}

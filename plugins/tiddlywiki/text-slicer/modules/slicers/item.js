@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/text-slicer/modules/slicers/item.js
 type: application/javascript
 module-type: slicer
 
-Handle slicing heading nodes
+Handle slicing list item nodes
 
 \*/
 (function(){
@@ -30,6 +30,8 @@ exports.processListItemNode = function(domNode,tagName) {
 				list: [],
 				tags: tags
 			});
+			this.currentTiddler = title;
+			this.processNodeList(domNode.childNodes);
 			return true;
 		}
 	}

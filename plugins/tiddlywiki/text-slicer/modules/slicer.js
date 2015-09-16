@@ -17,13 +17,13 @@ var SLICER_OUTPUT_TITLE = "$:/TextSlicer";
 function Slicer(wiki,sourceTitle) {
 	this.wiki = wiki;
 	this.sourceTitle = sourceTitle;
-	this.currentId = 0;
 	this.iframe = null; // Reference to iframe used for HTML parsing
 	this.stopWordList = "the and a of on i".split(" ");
 	this.tiddlers = {};
 	this.parentStack = [];
 	this.sliceTitle = null;
 	this.slicers = $tw.modules.applyMethods("slicer");
+	this.anchors = Object.create(null); // Hashmap of HTML anchor ID to tiddler title
 }
 
 Slicer.prototype.destroy = function() {
@@ -106,6 +106,7 @@ Slicer.prototype.makeUniqueTitle = function(prefix,rawText) {
 	var self = this,
 		cleanText;
 	if(rawText) {
+		// Replace non alpha characters with spaces
 		cleanText = rawText.toLowerCase().replace(/[^\s\xA0]/mg,function($0,$1,$2) {
 			if(($0 >= "a" && $0 <= "z") || ($0 >= "0" && $0 <= "9")) {
 				return $0;
@@ -137,13 +138,16 @@ Slicer.prototype.makeUniqueTitle = function(prefix,rawText) {
 	return title;
 };
 
+Slicer.prototype.registerAnchor = function(id) {
+	this.anchors[id] = this.currentTiddler;
+}
+
 Slicer.prototype.processNodeList = function(domNodeList) {
 	$tw.utils.each(domNodeList,this.processNode.bind(this));
 }
 
 Slicer.prototype.processNode = function(domNode) {
-	var text = $tw.utils.htmlEncode(domNode.textContent),
-		nodeType = domNode.nodeType;
+	var nodeType = domNode.nodeType;
 	if(nodeType === 1) { // DOM element nodes
 		var tagName = domNode.tagName.toLowerCase(),
 			hasProcessed = false;

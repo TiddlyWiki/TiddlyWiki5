@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/text-slicer/modules/slicers/paragraph.js
 type: application/javascript
 module-type: slicer
 
-Handle slicing heading nodes
+Handle slicing paragraph nodes
 
 \*/
 (function(){
@@ -17,16 +17,18 @@ exports.processParagraphNode = function(domNode,tagName) {
 	if(tagName === "p") {
 		if(!this.isBlank(text)) {
 			var parentTitle = this.parentStack[this.parentStack.length - 1].title,
-				tags = [];
+				tags = [],
+				title = this.makeUniqueTitle("paragraph",text);
 			if(domNode.className.trim() !== "") {
 				tags = tags.concat(domNode.className.split(" "));
 			}
 			this.addToList(parentTitle,this.addTiddler({
 				"toc-type": "paragraph",
-				title: this.makeUniqueTitle("paragraph",text),
+				title: title,
 				text: text,
 				tags: tags
 			}));
+			this.currentTiddler = title;
 			return true;
 		}
 	} 
