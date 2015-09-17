@@ -14,7 +14,7 @@ Handle slicing paragraph nodes
 
 exports.processParagraphNode = function(domNode,tagName) {
 	var text = $tw.utils.htmlEncode(domNode.textContent);
-	if(tagName === "p") {
+	if(domNode.nodeType === 1 && tagName === "p") {
 		if(!this.isBlank(text)) {
 			var parentTitle = this.parentStack[this.parentStack.length - 1].title,
 				tags = [],
@@ -25,10 +25,13 @@ exports.processParagraphNode = function(domNode,tagName) {
 			this.addToList(parentTitle,this.addTiddler({
 				"toc-type": "paragraph",
 				title: title,
-				text: text,
+				text: "",
 				tags: tags
 			}));
 			this.currentTiddler = title;
+			this.containerStack.push(title);
+			this.processNodeList(domNode.childNodes);
+			this.containerStack.pop();
 			return true;
 		}
 	} 

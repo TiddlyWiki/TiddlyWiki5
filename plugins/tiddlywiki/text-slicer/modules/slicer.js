@@ -20,7 +20,8 @@ function Slicer(wiki,sourceTitle) {
 	this.iframe = null; // Reference to iframe used for HTML parsing
 	this.stopWordList = "the and a of on i".split(" ");
 	this.tiddlers = {};
-	this.parentStack = [];
+	this.parentStack = []; // Stack of parent heading or list
+	this.containerStack = []; // Stack of elements containing other elements
 	this.sliceTitle = null;
 	this.slicers = $tw.modules.applyMethods("slicer");
 	this.anchors = Object.create(null); // Hashmap of HTML anchor ID to tiddler title
@@ -63,6 +64,20 @@ Slicer.prototype.popParentStackUntil = function(type) {
 	return this.parentStack[this.parentStack.length - 1].title;
 };
 
+Slicer.prototype.getTopContainer = function() {
+	return this.containerStack[this.containerStack.length-1];
+};
+
+Slicer.prototype.appendToCurrentContainer = function(newText) {
+	var title = this.containerStack[this.containerStack.length-1];
+	if(title) {
+		var tiddler = this.tiddlers[title] || {},
+			text = tiddler.text || "";
+		this.addTiddler($tw.utils.extend({title: title},tiddler,{text: text + newText}));
+	}
+
+	else {debugger;}
+};
 
 Slicer.prototype.convertTypeToLevel = function(type) {
 	if(type.charAt(0) === "h") {
@@ -73,7 +88,7 @@ Slicer.prototype.convertTypeToLevel = function(type) {
 };
 
 Slicer.prototype.isBlank = function(s) {
-	return (/^[\s\xA0]*$/mg).test(s);
+	return (/^[\s\xA0]*$/g).test(s);
 };
 
 Slicer.prototype.getSourceHtmlDocument = function(tiddler) {
@@ -147,36 +162,37 @@ Slicer.prototype.processNodeList = function(domNodeList) {
 }
 
 Slicer.prototype.processNode = function(domNode) {
-	var nodeType = domNode.nodeType;
-	if(nodeType === 1) { // DOM element nodes
-		var tagName = domNode.tagName.toLowerCase(),
-			hasProcessed = false;
-		for(var slicerTitle in this.slicers) {
-			var slicer = this.slicers[slicerTitle];
-			if(slicer.bind(this)(domNode,tagName)) {
-				hasProcessed = true;
-				break;
-			}
+	var nodeType = domNode.nodeType,
+		tagName = (domNode.tagName || "").toLowerCase(),
+		hasProcessed = false;
+	for(var slicerTitle in this.slicers) {
+		var slicer = this.slicers[slicerTitle];
+		if(slicer.bind(this)(domNode,tagName)) {
+			hasProcessed = true;
+			break;
 		}
-		if(!hasProcessed) {
-			if(domNode.hasChildNodes()) {
-				this.processNodeList(domNode.childNodes);
-			}
+	}
+	if(!hasProcessed) {
+		if(domNode.hasChildNodes()) {
+			this.processNodeList(domNode.childNodes);
 		}
 	}
 };
 
 // Slice a tiddler into individual tiddlers
 Slicer.prototype.sliceTiddler = function(title) {
-	this.sliceTitle = title;
+	this.sliceTitle = "Sliced up " + title;
 	var domNode = this.getSourceDocument();
 	this.parentStack.push({type: "h0", title: this.addTiddler({
-		title: "Sliced up " + title,
+		title: this.sliceTitle,
 		text: "Document sliced at " + (new Date()),
 		list: [],
 		"toc-type": "document"
 	})});
+	this.currentTiddler = title;
+	this.containerStack.push(this.sliceTitle);
 	this.processNodeList(domNode.childNodes);
+	this.containerStack.pop();
 };
 
 // Output directly to the output tiddlers

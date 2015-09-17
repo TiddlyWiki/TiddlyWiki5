@@ -13,7 +13,7 @@ Handle slicing list nodes
 "use strict";
 
 exports.processListNode = function(domNode,tagName) {
-	if(tagName === "ul" || tagName === "ol") {
+	if(domNode.nodeType === 1 && (tagName === "ul" || tagName === "ol")) {
 		var title = this.makeUniqueTitle("list-" + tagName),
 			parentTitle = this.parentStack[this.parentStack.length - 1].title,
 			tags = [];

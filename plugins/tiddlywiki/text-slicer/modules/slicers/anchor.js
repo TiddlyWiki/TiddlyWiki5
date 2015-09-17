@@ -13,12 +13,12 @@ Handle slicing anchor nodes
 "use strict";
 
 exports.processAnchorNode = function(domNode,tagName) {
-	if(tagName === "a") {
+	if(domNode.nodeType === 1 && tagName === "a") {
 		var id = domNode.getAttribute("id");
 		if(id) {
 			this.registerAnchor(id);
+			return true;
 		}
-		return true;
 	} 
 	return false;
 };
