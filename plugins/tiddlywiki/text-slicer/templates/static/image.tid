@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/image
+
+`<img src="data:`<$view format="text" field="type"/>`;base64,`<$view format="text" field="text"/>`">`

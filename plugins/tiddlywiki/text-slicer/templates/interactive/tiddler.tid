@@ -23,3 +23,7 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/interactive/tiddler
 <$reveal type="match" state="!!toc-type" text="item">
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/item" mode="block"/>
 </$reveal>
+
+<$reveal type="match" state="!!toc-type" text="image">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/interactive/image" mode="block"/>
+</$reveal>

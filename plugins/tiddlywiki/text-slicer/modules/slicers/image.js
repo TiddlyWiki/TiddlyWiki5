@@ -17,14 +17,42 @@ exports.processImageNode = function(domNode,tagName) {
 		var src = domNode.getAttribute("src");
 		if(src && src.substr(0,5) === "data:") {
 			var parts = src.toString().substr(5).split(";base64,"),
+				type = parts[0],
+				text = parts[1],
+				contentTypeInfo = $tw.config.contentTypeInfo[type],
 				containerTitle = this.getTopContainer(),
-				title = this.makeUniqueTitle("image",containerTitle);
-			this.addTiddler({
-				title: title,
-				type: parts[0],
-				text: parts[1]
-			});
-			this.appendToCurrentContainer("[img[" + title + "]]");
+				containerTiddler = this.tiddlers[containerTitle],
+				title = this.makeUniqueTitle("image",containerTitle) + contentTypeInfo.extension,
+				tiddler = {
+					title: title,
+					type: parts[0],
+					text: parts[1],
+					"toc-type": "image"
+				};
+			switch(containerTiddler["toc-type"]) {
+				case "document":
+					// Make the image be the next child of the document
+					this.addToList(containerTitle,title);
+					break;
+				case "heading":
+					// Make the image be the older sibling of the heading
+					var parentTitle = this.parentStack[this.parentStack.length - 2].title;
+					this.insertBeforeListItem(parentTitle,title,containerTitle);
+					break;
+				case "paragraph":
+					// Make the image be the older sibling of the paragraph
+					var parentTitle = this.parentStack[this.parentStack.length - 1].title;
+					this.insertBeforeListItem(parentTitle,title,containerTitle);
+					break;
+				case "item":
+					// Create a new older sibling item to contain the image
+					var parentTitle = this.parentStack[this.parentStack.length - 1].title;
+					tiddler["toc-type"] = "item";
+					this.insertBeforeListItem(parentTitle,title,containerTitle);
+					break;
+			}
+			this.addTiddler(tiddler);
+			// this.appendToCurrentContainer("[img[" + title + "]]");
 		}
 		return true;
 	} 

@@ -50,6 +50,18 @@ Slicer.prototype.addToList = function(parent,child) {
 	this.addTiddler($tw.utils.extend({title: parent},parentTiddler,{list: parentList}));
 };
 
+Slicer.prototype.insertBeforeListItem = function(parent,child,beforeSibling) {
+	var parentTiddler = this.tiddlers[parent] || {},
+		parentList = parentTiddler.list || [],
+		parentListSiblingPosition = parentList.indexOf(beforeSibling);
+	if(parentListSiblingPosition !== -1) {
+		parentList.splice(parentListSiblingPosition,0,child)
+		this.addTiddler($tw.utils.extend({title: parent},parentTiddler,{list: parentList}));
+	}
+
+	else {debugger;}
+};
+
 Slicer.prototype.popParentStackUntil = function(type) {
 	// Pop the stack to remove any entries at the same or lower level
 	var newLevel = this.convertTypeToLevel(type),
@@ -173,7 +185,7 @@ Slicer.prototype.processNode = function(domNode) {
 		}
 	}
 	if(!hasProcessed) {
-		if(domNode.hasChildNodes()) {
+		if(nodeType === 1 && domNode.hasChildNodes()) {
 			this.processNodeList(domNode.childNodes);
 		}
 	}

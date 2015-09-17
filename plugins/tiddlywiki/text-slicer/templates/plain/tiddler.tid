@@ -22,4 +22,8 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/plain/tiddler
 <$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/item" mode="block"/>
 </$list>
 
+<$list filter="[<toc-type>prefix[image]]" variable="item">
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/plain/image" mode="block"/>
+</$list>
+
 </$vars>

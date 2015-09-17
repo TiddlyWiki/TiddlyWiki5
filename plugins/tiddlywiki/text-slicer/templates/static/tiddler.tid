@@ -32,4 +32,10 @@ title: $:/plugins/tiddlywiki/text-slicer/templates/static/tiddler
 
 </$list>
 
+<$list filter="[<toc-type>prefix[image]]" variable="item">
+
+<$transclude tiddler="$:/plugins/tiddlywiki/text-slicer/templates/static/image" mode="block"/>
+
+</$list>
+
 </$vars>
