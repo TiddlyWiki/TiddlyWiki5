@@ -46,9 +46,16 @@ exports.processImageNode = function(domNode,tagName) {
 					break;
 				case "item":
 					// Create a new older sibling item to contain the image
-					var parentTitle = this.parentStack[this.parentStack.length - 1].title;
-					tiddler["toc-type"] = "item";
-					this.insertBeforeListItem(parentTitle,title,containerTitle);
+					var parentTitle = this.parentStack[this.parentStack.length - 1].title,
+						itemTitle = this.makeUniqueTitle("image-item-wrapper",containerTitle),
+						itemTiddler = {
+							title: itemTitle,
+							"toc-type": "item",
+							list: [title],
+							text: "[img[" + title + "]]"
+						};
+					this.addTiddler(itemTiddler);
+					this.insertBeforeListItem(parentTitle,itemTitle,containerTitle);
 					break;
 			}
 			this.addTiddler(tiddler);
