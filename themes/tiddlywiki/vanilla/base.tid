@@ -435,27 +435,63 @@ button svg.tc-image-button, button .tc-image-button img {
 }
 
 .tc-unfold-banner {
+	position: absolute;
 	padding: 0;
 	margin: 0;
 	background: none;
 	border: none;
 	width: 100%;
+    width: calc(100% + 2px);
+    margin-left: -43px;
 	text-align: center;
-	border-top: 2px solid <<colour tiddler-controls-foreground>>;
-	margin-top: 8px;
+	border-top: 2px solid <<colour tiddler-info-background>>;
+	margin-top: 4px;
 }
 
 .tc-unfold-banner:hover {
 	background: <<colour tiddler-info-background>>;
+	border-top: 2px solid <<colour tiddler-info-border>>;
 }
 
-.tc-unfold-banner svg {
+.tc-unfold-banner svg, .tc-fold-banner svg {
 	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
 }
 
-.tc-unfold-banner:hover svg {
+.tc-unfold-banner:hover svg, .tc-fold-banner:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
+}
+
+.tc-fold-banner {
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	width: 23px;
+	text-align: center;
+	margin-left: -35px;
+    top: 6px;
+    bottom: 6px;
+}
+
+.tc-fold-banner:hover {
+	background: <<colour tiddler-info-background>>;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	
+	.tc-unfold-banner {
+		position: static;
+	    width: calc(100% + 59px);
+    }
+
+	.tc-fold-banner {
+		width: 16px;
+		margin-left: -16px;
+	    font-size: 0.75em;
+	}
+
 }
 
 /*
@@ -704,6 +740,7 @@ button.tc-untagged-label {
 */
 
 .tc-tiddler-frame {
+	position: relative;
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
