@@ -3,10 +3,6 @@ tags: $:/tags/ViewToolbar
 caption: {{$:/core/images/fold-button}} {{$:/language/Buttons/Fold/Caption}}
 description: {{$:/language/Buttons/Fold/Hint}}
 
-\define folded-state()
-$:/state/folded/$(currentTiddler)$
-\end
-
 <$reveal type="nomatch" state=<<folded-state>> text="hide" default="show">
 <$button tooltip={{$:/language/Buttons/Fold/Hint}} aria-label={{$:/language/Buttons/Fold/Caption}} class=<<tv-config-toolbar-class>>>
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>

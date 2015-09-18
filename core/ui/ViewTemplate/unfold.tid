@@ -1,0 +1,9 @@
+title: $:/core/ui/ViewTemplate/unfold
+tags: $:/tags/ViewTemplate
+
+<$reveal tag="div" class="tc-tiddler-body" type="nomatch" state=<<folded-state>> text="show" default="show" retain="yes" animate="yes">
+<$button tooltip={{$:/language/Buttons/Unfold/Hint}} aria-label={{$:/language/Buttons/Unfold/Caption}} class="tc-unfold-banner">
+<$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
+{{$:/core/images/chevron-down}}
+</$button>
+</$reveal>

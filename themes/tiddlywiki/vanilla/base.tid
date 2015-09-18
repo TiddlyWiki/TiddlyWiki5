@@ -434,6 +434,30 @@ button svg.tc-image-button, button .tc-image-button img {
 	width: 1em;
 }
 
+.tc-unfold-banner {
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	width: 100%;
+	text-align: center;
+	border-top: 2px solid <<colour tiddler-controls-foreground>>;
+	margin-top: 8px;
+}
+
+.tc-unfold-banner:hover {
+	background: <<colour tiddler-info-background>>;
+}
+
+.tc-unfold-banner svg {
+	height: 0.75em;
+	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-unfold-banner:hover svg {
+	fill: <<colour tiddler-controls-foreground-hover>>;
+}
+
 /*
 ** Tags and missing tiddlers
 */
