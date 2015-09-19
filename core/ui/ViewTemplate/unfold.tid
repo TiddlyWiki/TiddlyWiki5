@@ -1,6 +1,8 @@
 title: $:/core/ui/ViewTemplate/unfold
 tags: $:/tags/ViewTemplate
 
+<$reveal tag="div" type="nomatch" state="$:/config/ViewToolbarButtons/Visibility/$:/core/ui/Buttons/fold-bar" text="hide">
+
 <$reveal tag="div" type="nomatch" state=<<folded-state>> text="hide" default="show" retain="yes" animate="yes">
 <$button tooltip={{$:/language/Buttons/Fold/Hint}} aria-label={{$:/language/Buttons/Fold/Caption}} class="tc-fold-banner">
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
@@ -13,4 +15,6 @@ tags: $:/tags/ViewTemplate
 <$action-sendmessage $message="tm-fold-tiddler" $param=<<currentTiddler>> foldedState=<<folded-state>>/>
 {{$:/core/images/chevron-down}}
 </$button>
+</$reveal>
+
 </$reveal>

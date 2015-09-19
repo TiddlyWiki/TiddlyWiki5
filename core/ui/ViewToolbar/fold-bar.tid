@@ -1,0 +1,6 @@
+title: $:/core/ui/Buttons/fold-bar
+tags: $:/tags/ViewToolbar
+caption: fold-bar
+description: Optional bars to fold and unfold tiddlers
+
+<!-- This dummy toolbar button is here to allow visibility of the fold-bar to be controlled as if it were a toolbar button -->
