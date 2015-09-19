@@ -6,6 +6,9 @@ alert-highlight: Advarselsopmærkning
 alert-muted-foreground: Dæmpet advarselsforgrund
 background: Generel baggrund
 blockquote-bar: Blokcitatslinie
+button-background: Standard knap baggrund
+button-border: Standard knap ramme
+button-foreground: Standard knap forgrund
 code-background: Kodebaggrund
 code-border: Koderamme
 code-foreground: Kodeforgrund

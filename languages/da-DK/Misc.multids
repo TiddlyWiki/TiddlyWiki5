@@ -1,5 +1,6 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: Det ser ud til, at du prøver at indlæse et plugin beregnet for ~TiddlyWiki Classic. Bemærk venligst, at [[disse plugins ikke virker med TiddlyWiki version 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. ~TiddlyWiki Classic plugins opdaget:
 BinaryWarning/Prompt: Denne tiddler indeholder binære data
 ClassicWarning/Hint: Denne tiddler er skrevet i ~TiddlyWiki Classic wikitekstformat, som ikke er fuldt kompatibel med ~TiddlyWiki version 5. Se http://tiddlywiki.com/static/Upgrading.html for flere detaljer.. 
 ClassicWarning/Upgrade/Caption: Opgradér
@@ -23,12 +24,14 @@ Exporters/JsonFile: JSON tiddler fil
 Exporters/StaticRiver: Statiske HTML tiddlere
 Exporters/TidFile: Enkelt tiddler ".tid" fil
 InvalidFieldName: Illegale tegn i felt navn "<$text text=<<fieldName>>/>". Felter kan kun indeholde små bogstaver, tal og tegnene undersstreg (`_`), bindestreg (`-`) og punktum (`.`)
+LazyLoadingWarning: <p>indlæser ekstern tekst fra ''<$text text={{!!_canonical_uri}}/>''</p><p>Hvis denne besked ikke forsvinder, bruger du måske en browser, som ikke understøtter ekstern tekst i denne konfiguration. Se http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: Manglende tiddler "<$text text=<<currentTiddler>>/>" - klik {{$:/core/images/edit-button}} for at oprette den.
 OfficialPluginLibrary: Officielt ~TiddlyWiki udvidelsesbibliotek
 PluginReloadWarning: Venligst gem {{$:/core/ui/Buttons/save-wiki}} og genindlæs {{$:/core/ui/Buttons/refresh}} for at tillade udvidelser at træde i kraft
 RecentChanges/DateFormat: DD. MMM YYYY
 SystemTiddler/Tooltip: Dette er en systemtiddler
 TagManager/Colour/Heading: Farve
+TagManager/Count/Heading: Tæl
 TagManager/Icon/Heading: Ikon
 TagManager/Tag/Heading: Tag
 UnsavedChangesWarning: Du har ændringer som ikke er gemt i ~TiddlyWiki

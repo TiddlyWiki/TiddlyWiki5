@@ -8,6 +8,8 @@ Body/Preview/Button/Show: vis forhåndsvisning
 Field/Remove/Caption: fjern felt
 Field/Remove/Hint: Fjern felt
 Fields/Add/Button: tilføj
+Fields/Add/Dropdown/System: System felter
+Fields/Add/Dropdown/User: Bruger felter
 Fields/Add/Name/Placeholder: felt navn
 Fields/Add/Prompt: Tilføj et nyt felt:
 Fields/Add/Value/Placeholder: feltværdi

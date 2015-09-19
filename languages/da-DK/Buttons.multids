@@ -30,6 +30,11 @@ ExportTiddler/Caption: eksportér tiddler
 ExportTiddler/Hint: Eksportér tiddler
 ExportTiddlers/Caption: eksportér tiddlere
 ExportTiddlers/Hint: Eksportér tiddlere
+Fold/Hint: Fold denne tiddlers krop
+FoldAll/Caption: fold alle tiddlere
+FoldAll/Hint: Fold kroppen i alle åbne tiddlere
+FoldOthers/Caption: fold andre tiddlere
+FoldOthers/Hint: Fold kroppen i andre åbne tiddlere
 FullScreen/Caption: fuldskærm
 FullScreen/Hint: Gå til eller forlad fuldskærmstilstand
 Help/Caption: hjælp
@@ -54,6 +59,9 @@ NewJournalHere/Caption: ny journal her
 NewJournalHere/Hint: opret en ny journaltiddler tagget med denne tiddlers titel
 NewTiddler/Caption: ny tiddler
 NewTiddler/Hint: Opret en ny tiddler
+OpenWindow/Caption: Åben i nyt vindue
+OpenWindow/Hint: Åbn tiddler i nyt vindue
+Palette/Hint: Vælg farve palette
 Permalink/Caption: permalink
 Permalink/Hint: Sæt browserens adresselinie til et direkte link til denne tiddler
 Permaview/Caption: permaview
@@ -72,3 +80,7 @@ TagManager/Caption: tagadministrator
 TagManager/Hint: Åbn tagadministrator
 Theme/Caption: tema
 Theme/Hint: Vælg visningstema
+Unfold/Caption: udfold tiddler
+Unfold/Hint: Udfold denne tiddlers krop
+UnfoldAll/Caption: udfold alle tiddlere
+UnfoldAll/Hint: Udfold kroppen i alle åbne tiddlere
