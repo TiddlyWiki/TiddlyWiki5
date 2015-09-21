@@ -1742,11 +1742,24 @@ a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > s
 	padding: 2px 4px;
 }
 
+.tc-chooser-item.tc-chosen {
+	background-color: <<colour tab-background>>
+}
+
+.tc-chooser-item a.tc-tiddlylink > div:first-child {
+	padding-left:10px;
+}
+
+.tc-chooser-item.tc-chosen a.tc-tiddlylink > div:first-child:before {
+	margin-left:-10px;
+	content: "» ";
+}
+
 .tc-chooser-item a.tc-tiddlylink {
 	display: block;
 	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
-	background-color: <<colour tiddler-link-background>>;
+	background-color: transparent;
 }
 
 .tc-chooser-item a.tc-tiddlylink:hover {
