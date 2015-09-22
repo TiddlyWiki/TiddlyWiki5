@@ -75,6 +75,7 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tiddler-frame .tc-document-tiddler-toolbar {
-    left: 52px;
+    left: 0;
+    width: 42px;
 }
 

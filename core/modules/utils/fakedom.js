@@ -26,6 +26,12 @@ var TW_TextNode = function(text) {
 	this.textContent = text;
 };
 
+Object.defineProperty(TW_TextNode.prototype, "nodeType", {
+	get: function() {
+		return 3;
+	}
+});
+
 Object.defineProperty(TW_TextNode.prototype, "formattedTextContent", {
 	get: function() {
 		return this.textContent.replace(/(\r?\n)/g,"");
