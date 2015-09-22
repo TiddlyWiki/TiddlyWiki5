@@ -16,19 +16,7 @@ description: {{$:/language/Buttons/Theme/Hint}}
 <$reveal state=<<qualify "$:/state/popup/theme">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
 <$linkcatcher to="$:/theme">
-<$list filter="[plugin-type[theme]sort[title]]" variable="themeTitle">
-<$link to=<<themeTitle>>>
-<span class="tc-drop-down-bullet">
-<$reveal type="match" state="$:/theme" text=<<themeTitle>>>
-&bull;
-</$reveal>
-<$reveal type="nomatch" state="$:/theme" text=<<themeTitle>>>
-&nbsp;
-</$reveal>
-</span>
-<$view tiddler=<<themeTitle>> field="name"/>
-</$link>
-</$list>
+{{$:/snippets/themeswitcher}}
 </$linkcatcher>
 </div>
 </$reveal>
