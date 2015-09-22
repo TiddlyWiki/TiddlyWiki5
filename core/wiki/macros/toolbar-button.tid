@@ -1,0 +1,9 @@
+title: $:/core/macros/toolbar-button
+tags: $:/tags/Macro
+
+\define toolbar-button(button, icon:"yes", text:"yes", class)
+<$set name="tv-config-toolbar-icons" filter="[[$icon$]]" value="$icon$" emtpyValue=<<tv-config-toolbar-icons>>>
+<$vars tv-config-toolbar-text="$text$"
+tv-config-toolbar-class="$class$"><$transclude tiddler="$button$"/></$vars>
+</$set>
+\end
