@@ -3,4 +3,4 @@ tags: $:/tags/PluginLibrary
 url: http://tiddlywiki.com/library/v5.1.9/index.html
 caption: {{$:/language/OfficialPluginLibrary}}
 
-The official ~TiddlyWiki plugin library at tiddlywiki.com. Plugins, themes and language packs are maintained by the core team.
+{{$:/language/ControlPanel/OfficialPluginLibrary/Hint}}
