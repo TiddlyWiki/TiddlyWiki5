@@ -2,7 +2,7 @@ title: $:/core/ui/MoreSideBar/Tags
 tags: $:/tags/MoreSideBar
 caption: {{$:/language/SideBar/Tags/Caption}}
 
-<$macrocall $name="toolbar-button" button="$:/core/ui/Buttons/tag-manager" icon="yes" text="yes" class=<<tv-config-toolbar-class>>/>
+<$macrocall $name="toolbar-button" button="$:/core/ui/Buttons/tag-manager" icon="yes" text="yes"/>
 
 <$list filter={{$:/core/Filters/AllTags!!filter}}>
 

@@ -4,16 +4,18 @@ caption: {{$:/language/SideBar/Tools/Caption}}
 
 \define lingo-base() $:/language/ControlPanel/
 \define config-title()
-$:/config/PageControlButtons/Visibility/$(listItem)$
+$:/config/PageControlButtons/Visibility/$(currentTiddler)$
 \end
 
 <<lingo Basics/Version/Prompt>> <<version>>
 
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]" variable="listItem">
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/PageControls]!has[draft.of]]">
 
 <div style="position:relative;">
 
-<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/> <$macrocall $name="toolbar-button" button=<<listItem>> icon="yes" text="yes" class={{$:/config/Toolbar/ButtonClass}}/> <i class="tc-muted"><$transclude tiddler=<<listItem>> field="description"/></i>
+<$checkbox tiddler=<<config-title>> field="text" checked="show" unchecked="hide" default="show"/>
+<$macrocall $name="toolbar-button" button=<<currentTiddler>> icon="yes" text="yes"/>
+<i class="tc-muted">{{!!description}}</i>
 
 </div>
 

@@ -4,7 +4,7 @@ caption: {{$:/core/images/down-arrow}} {{$:/language/Buttons/More/Caption}}
 description: {{$:/language/Buttons/More/Hint}}
 
 \define config-title()
-$:/config/ViewToolbarButtons/Visibility/$(listItem)$
+$:/config/ViewToolbarButtons/Visibility/$(currentTiddler)$
 \end
 <$button popup=<<qualify "$:/state/popup/more">> tooltip={{$:/language/Buttons/More/Hint}} aria-label={{$:/language/Buttons/More/Caption}} class=<<tv-config-toolbar-class>> selectedClass="tc-selected">
 <$list filter="[<tv-config-toolbar-icons>prefix[yes]]">
@@ -15,8 +15,8 @@ $:/config/ViewToolbarButtons/Visibility/$(listItem)$
 </$list>
 </$button><$reveal state=<<qualify "$:/state/popup/more">> type="popup" position="below" animate="yes">
 <div class="tc-drop-down">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]" variable="listItem">
-<$reveal type="match" state=<<config-title>> text="hide"><$macrocall $name="toolbar-button" button=<<listItem>> icon="yes" text="yes" class="tc-btn-invisible"/></$reveal>
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/ViewToolbar]!has[draft.of]] -[[$:/core/ui/Buttons/more-tiddler-actions]]">
+<$reveal type="match" state=<<config-title>> text="hide"><$macrocall $name="toolbar-button" button=<<currentTiddler>> icon="yes" text="yes" class="tc-btn-invisible"/></$reveal>
 </$list>
 </div>
 </$reveal>
