@@ -333,17 +333,16 @@ button svg, button img {
 }
 
 .tc-btn-boxed {
-	padding: 0 0.1em 0.1em 0.1em;
+	font-size: 0.6em;
+	padding: 0.2em;
 	margin: 1px;
-	line-height: 1em;
 	background: none;
 	border: 1px solid <<colour tiddler-controls-foreground>>;
 	border-radius: 0.25em;
 }
 
 html body.tc-body .tc-btn-boxed svg {
-	margin-top:-0.1em;
-	font-size: 1;
+	font-size: 1.6666em;
 }
 
 .tc-btn-boxed:hover {
@@ -355,13 +354,10 @@ html body.tc-body .tc-btn-boxed:hover svg {
 	fill: <<colour background>>;
 }
 
-.tc-page-controls .tc-btn-boxed,
-.tc-page-controls .tc-btn-rounded {
-    margin-right: 0.2em;
-}
-
 .tc-btn-rounded {
-	padding: 0 0.15em;
+	font-size: 0.5em;
+	line-height: 2;
+	padding: 0em 0.3em 0.2em 0.4em;
 	margin: 1px;
 	border: 1px solid <<colour muted-foreground>>;
 	background: <<colour muted-foreground>>;
@@ -370,8 +366,7 @@ html body.tc-body .tc-btn-boxed:hover svg {
 }
 
 html body.tc-body .tc-btn-rounded svg {
-	margin-top: -0.15em;
-	font-size: 0.85em;
+	font-size: 1.6666em;
 	fill: <<colour background>>;
 }
 
