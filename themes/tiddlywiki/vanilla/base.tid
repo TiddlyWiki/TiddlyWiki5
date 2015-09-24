@@ -335,7 +335,7 @@ button svg, button img {
 .tc-btn-boxed {
 	padding: 0 0.1em 0.1em 0.1em;
 	margin: 1px;
-    line-height: 1em;
+	line-height: 1em;
 	background: none;
 	border: 1px solid <<colour tiddler-controls-foreground>>;
 	border-radius: 0.25em;
