@@ -36,9 +36,9 @@ Action widget to manipulate the tags of a tiddler.
   */
   MangleTagsWidget.prototype.execute = function () {
     // Get our parameters
-    this.targetTiddler = this.getAttribute("tiddler", this.getVariable("currentTiddler"));
-    this.addTag = this.getAttribute("add");
-    this.removeTag = this.getAttribute("remove");
+    this.targetTiddler = this.getAttribute("$tiddler", this.getVariable("currentTiddler"));
+    this.addTag = this.getAttribute("$add");
+    this.removeTag = this.getAttribute("$remove");
   };
 
   /*
@@ -46,7 +46,7 @@ Action widget to manipulate the tags of a tiddler.
   */
   MangleTagsWidget.prototype.refresh = function (changedTiddlers) {
     var changedAttributes = this.computeAttributes();
-    if (changedAttributes.tiddler || changedAttributes.add || changedAttributes.remove) {
+    if (changedAttributes.$tiddler || changedAttributes.$add || changedAttributes.$remove) {
       this.refreshSelf();
       return true;
     }
