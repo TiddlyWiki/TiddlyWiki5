@@ -1,0 +1,104 @@
+created: 20150925181827962
+creator: matabele
+modified: 20150925191257169
+modifier: Matabele
+revision: 7
+tags: ActionWidgets Widgets
+title: ActionMangleTagsWidget
+type: text/vnd.tiddlywiki
+
+! Introduction
+
+The ''action-mangletags'' widget is an [[action widget|ActionWidgets]] that manipulates the tags field of the target tiddler. ActionWidgets are used within triggering widgets such as the ButtonWidget.
+
+The "action-mangletags" widget may be used to do any of the following.
+
+* append a tag to the tags field
+* find and remove a tag from the tags field 
+* find and replace a tag in the tags field
+
+! Content and Attributes
+
+|Attribute |Explanation |h
+|$tiddler |Title of the tiddler to manipulate (if not provided defaults to the [[current tiddler|Current Tiddler]] |
+|$add |Optional name of a tag to append to the tags field |
+|$remove |Optional name of a tag to find and remove |
+
+! Examples
+
+In this example we shall create buttons to manipulate the tags field of this tiddler (the default, where the $tiddler attribute has not been specified.)
+
+```
+<$button><$action-mangletags add="old-tag"/>
+Add 'old-tag'</$button>
+<$button><$action-mangletags remove="old-tag"/>
+<$action-mangletags remove="new-tag"/>
+Remove 'old-tag' and 'new-tag'</$button>
+
+<$button><$action-mangletags add="new-tag" remove="old-tag"/>
+Replace 'old-tag' with 'new-tag'</$button>
+<$button><$action-mangletags add="old-tag" remove="new-tag"/>
+Replace 'new-tag' with 'old-tag'</$button>
+
+```
+
+<$button><$action-mangletags add="old-tag"/>
+Add 'old-tag'</$button>
+<$button><$action-mangletags remove="old-tag"/>
+<$action-mangletags remove="new-tag"/>
+Remove 'old-tag' and 'new-tag'</$button>
+
+<$button><$action-mangletags add="new-tag" remove="old-tag"/>
+Replace 'old-tag' with 'new-tag'</$button>
+<$button><$action-mangletags add="old-tag" remove="new-tag"/>
+Replace 'new-tag' with 'old-tag'</$button>
+
+Clicking the buttons will manipulate the tags field of this tiddler without disturbing the other tags.
+
+Notice that when both the 'add=' and 'remove=' attributes are specified (find and replace), a tag is not appended unless the tag to remove is found. Clear the tags, then click the two lower buttons -- the tags field will not be modified.
+
+---
+
+In this example, we shall create a tabular search and replace where the tag to remove is selected with a SelectWidget and the tag to be added is specified in a text box (if not specified, this will remove the selected tag from the target tiddler.)
+
+Individual tiddlers may be targeted by clicking the large 'X' next to the title; all tiddlers may be targeted by clicking the four small 'x's at the top of the column.
+
+```
+Remove Tag: <$select tiddler="$:/data" index="remove" default='(none)'>
+<option value="null">(none)</option>
+<$list filter="[all[tiddlers]tags[]sort[title]]">
+<option value=<<currentTiddler>>><$view field="title"/></option>
+</$list></$select>
+Add Tag: <$edit-text tiddler="$:/data"  index="add" tag="input" type="text" placeholder="Add Me" />
+
+<table>
+<tr><td> Tiddler Title </td> <td><$button tooltip="Modify All" class="tc-btn-invisible">
+<$list filter="[tag{$:/data##remove}]">
+<$action-mangletags tiddler=<<currentTiddler>> add={{$:/data##add}} remove={{$:/data##remove}}/>
+</$list>
+{{$:/core/images/close-all-button}}
+</$button></td></tr>
+<$list filter="[tag{$:/data##remove}]">
+<tr><td>{{!!title}}</td><td><$button tooltip="Modify Me" class="tc-btn-invisible">
+<$action-mangletags tiddler=<<currentTiddler>> add={{$:/data##add}} remove={{$:/data##remove}}/>{{$:/core/images/close-button}}</$button></td></tr></$list>
+</table>
+```
+
+Remove Tag: <$select tiddler="$:/data" index="remove" default='(none)'>
+<option value="null">(none)</option>
+<$list filter="[all[tiddlers]tags[]sort[title]]">
+<option value=<<currentTiddler>>><$view field="title"/></option>
+</$list></$select>
+Add Tag: <$edit-text tiddler="$:/data"  index="add" tag="input" type="text" placeholder="Add Me" />
+
+<table>
+<tr><td> Tiddler Title </td> <td><$button tooltip="Modify All" class="tc-btn-invisible">
+<$list filter="[tag{$:/data##remove}]">
+<$action-mangletags tiddler=<<currentTiddler>> add={{$:/data##add}} remove={{$:/data##remove}}/>
+</$list>
+{{$:/core/images/close-all-button}}
+</$button></td></tr>
+<$list filter="[tag{$:/data##remove}]">
+<tr><td>{{!!title}}</td><td><$button tooltip="Modify Me" class="tc-btn-invisible">
+<$action-mangletags tiddler=<<currentTiddler>> add={{$:/data##add}} remove={{$:/data##remove}}/>{{$:/core/images/close-button}}</$button></td></tr></$list>
+</table> 
