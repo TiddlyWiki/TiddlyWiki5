@@ -247,4 +247,4 @@ Myeongjin, @araname, 2015/08/08
 
 Hegart Dmishiv, @hegart-dmishiv, 2015/09/15
 
-William Jackson, @matabele 2015/09/26
+William Jackson, @matabele  2015/09/24
