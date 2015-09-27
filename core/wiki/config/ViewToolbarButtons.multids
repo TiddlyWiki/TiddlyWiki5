@@ -12,4 +12,5 @@ core/ui/Buttons/permalink: hide
 core/ui/Buttons/permaview: hide
 core/ui/Buttons/delete: hide
 core/ui/Buttons/fold: hide
+core/ui/Buttons/fold-bar: hide
 core/ui/Buttons/fold-others: hide
