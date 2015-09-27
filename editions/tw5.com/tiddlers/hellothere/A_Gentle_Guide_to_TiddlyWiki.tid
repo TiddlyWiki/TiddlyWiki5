@@ -1,5 +1,5 @@
 created: 20150325170720682
-modified: 20150414072711004
+modified: 20150926171049725
 tags: HelloThere
 title: A Gentle Guide to TiddlyWiki
 type: text/vnd.tiddlywiki
@@ -15,3 +15,5 @@ You can use ~TiddlyWiki as a single file that you view and edit through any web 
 How can you make ~TiddlyWiki work for you? We recommend you start with our introductory documentation listed below, and then browse the TableOfContents, available in the Contents tab in the sidebar. Or just [[follow our simple instructions|GettingStarted]] and try it out for yourself!
 
 <<list-links "[tag[HelloThere]]">>
+
+Also see [[TiddlyWiki Video Tutorials by Francis Meetze]]
