@@ -633,4 +633,16 @@ exports.makeDataUri = function(text,type) {
 	return parts.join("");
 };
 
+/*
+Useful for finding out the fully escaped CSS selector equivalent to a given tag. For example:
+
+$tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
+*/
+exports.tagToCssSelector = function(tagName) {
+	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
+		return "\\" + c;
+	});
+};
+
+
 })();
