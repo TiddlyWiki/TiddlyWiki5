@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 Anyone can submit improvements to the TiddlyWiki documentation that appears on http://tiddlywiki.com.
 If you want to help, please start by reading the [[Documentation Style Guide]]. 
 
-Changes to the documentation can be submitted in two way: 
+Changes to the documentation can be submitted in two ways: 
 
 * The Github method should be prefered if you are familiar with Github (or are happy to give it a try): see the detailed instructions and video tutorials below.
 * Otherwise, you can simply send the proposed content to the [[tiddlywikidocs discussion group|https://groups.google.com/forum/#!forum/tiddlywikidocs]], mentioning that you need someone to create the pull request for you. 
