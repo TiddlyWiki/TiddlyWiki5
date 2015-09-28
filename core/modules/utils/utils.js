@@ -633,4 +633,15 @@ exports.makeDataUri = function(text,type) {
 	return parts.join("");
 };
 
+/*
+IE does not have sign function
+*/
+exports.sign = Math.sign || function(x) {
+	x = +x; // convert to a number
+	if (x === 0 || isNaN(x)) {
+		return x;
+	}
+	return x > 0 ? 1 : -1;
+};
+
 })();
