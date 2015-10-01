@@ -22,7 +22,8 @@ title: $:/plugins/tiddlywiki/blog/templates/html-page/post
 `{{$:/StaticBanner||$:/core/templates/html-tiddler}}`
 <section class="tc-story-river">
 `<$importvariables filter="[[$:/core/ui/PageMacros]] [all[shadows+tiddlers]tag[$:/tags/Macro]!has[draft.of]]">
-<$view tiddler="$:/core/ui/ViewTemplate" format="htmlwikified"/>
+<$view tiddler="$:/plugins/tiddlywiki/blog/templates/tiddler" format="htmlwikified"/>
+<$view tiddler="$:/plugins/tiddlywiki/blog/templates/menu" format="htmlwikified"/>
 </$importvariables>`
 </section>
 </body>
