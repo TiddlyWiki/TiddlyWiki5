@@ -1,33 +1,32 @@
 created: 20140820151051019
-modified: 20150927205758258
+modified: 20151002001558258
 tags: Community
 title: Improving TiddlyWiki Documentation
 type: text/vnd.tiddlywiki
 
-Anyone can submit improvements to the TiddlyWiki documentation that appears on http://tiddlywiki.com.
-If you want to help, please start by reading the [[Documentation Style Guide]]. 
+Anyone can submit improvements to the TiddlyWiki documentation on http://tiddlywiki.com. Please start by reading the [[Documentation Style Guide]].
 
-Changes to the documentation can be submitted in two ways: 
+You can submit changes in two ways:
 
-* The Github method should be prefered if you are familiar with Github (or are happy to give it a try): see the detailed instructions and video tutorials below.
-* Otherwise, you can simply send the proposed content to the [[tiddlywikidocs discussion group|https://groups.google.com/forum/#!forum/tiddlywikidocs]], mentioning that you need someone to create the pull request for you. 
-
+# The much preferred method is to use GitHub as detailed below.
+# Alternatively, send modifications and content proposals to the [[TiddlyWikiDocs discussion group|https://groups.google.com/forum/#!forum/tiddlywikidocs]].
 
 ! Github method
 
-
-# Create an account on https://github.com if you don't already have one
-# If you haven't done so already, sign the [[Contributor License Agreement]] as described in [[Signing the Contributor License Agreement]]
-# On http://tiddlywiki.com, click "edit" on the tiddler you want to improve
-# You should see a pink banner with the text: //Can you help us improve this documentation? Find out how to edit this tiddler on ~GitHub//
-# Click on the external link ...''this tiddler on ~GitHub''
-## You will be prompted that "you need to fork this repository to propose changes". A "fork" is your own copy of the repository that incorporates the changes you are proposing
-# A new browser tab should open ready to edit the tiddler on github.com
-# Below the edit box for the tiddler text you should see a box labelled ''Propose file change''
-# Enter a brief title to explain the change (eg, "Clarify attribute syntax instability")
-# If necessary, enter a longer description too
-# Click the green button labelled ''Propose file change''
-# On the following screen, click the green button labelled ''Create pull request''
+# Create an account on http://github.com if you don't already have one.
+# Before your first contribution, read [[Signing the Contributor License Agreement]], then sign the [[CLA|Contributor License Agreement]].
+# On http://tiddlywiki.com, click {{$:/core/ui/Buttons/edit}}''edit'' on the tiddler you want to improve.
+#* You can test your modifications here directly and review the results.
+# During editing, you should see the following pink banner: <$transclude tiddler="$:/ContributionBanner" mode="block"/>
+# Click on the external link [[this tiddler on GitHub|https://github.com/Jermolene/TiddlyWiki5/edit/master/editions/tw5.com/tiddlers/community/Improving%20TiddlyWiki%20Documentation.tid]].
+#* You will be prompted that: "You need to fork this repository to propose changes."
+#* A "fork" is your own copy of the repository that incorporates the changes you are proposing.
+# A new browser tab will open on GitHub with an editor for the tiddler.
+# Below the editor you will find a box labelled ''Propose file change''.
+# Enter a brief title to explain the change (eg, "fixed typo").
+#* For more comprehensive changes or your reasons for modifications, use the long description.
+# Click the green button labelled ''Propose file change''.
+# On the next screen, click the green button labelled ''Create pull request''.
 
 [[Jermolene|https://github.com/Jermolene]] or one of the other core developers will then have the opportunity to merge your pull request so that it is incorporated into the next build of http://tiddlywiki.com.
 
@@ -38,3 +37,5 @@ Mario Pietsch has created these short video tutorials:
 <iframe width="560" height="315" src="http://www.youtube.com/embed/6ElUruH92tc" frameborder="0" allowfullscreen></iframe>
 
 <iframe width="560" height="315" src="http://www.youtube.com/embed/axFCk9KsMFc" frameborder="0" allowfullscreen></iframe>
+
+
