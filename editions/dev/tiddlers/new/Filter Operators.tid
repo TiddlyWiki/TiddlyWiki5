@@ -16,7 +16,7 @@ Each function will be called with three arguments:
 ** //suffix//: (optional) a string containing an additional filter argument (typically a tiddler field name) following the filter name (separated by a colon in the filter syntax);
 ** //regexp//: (optional, deprecated) used instead of //operand// if the filter operand is a regexp.
 * An object, conventionally called `options`, with the following keys:
-** //wiki//: The $tw.Wiki object;
+** //wiki//: The `$tw.Wiki` object;
 ** //widget//: (optional) a widget node.
 
 The function should return either a new [[tiddler iterator|Tiddler Iterators]], or else an array of tiddler titles (as strings). The underlying filter mechanism will convert back and forth between iterators and arrays as needed.
