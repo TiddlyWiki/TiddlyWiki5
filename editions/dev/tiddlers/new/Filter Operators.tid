@@ -21,8 +21,6 @@ Each function will be called with three arguments:
 
 The function should return either a new [[tiddler iterator|Tiddler Iterators]], or else an array of tiddler titles (as strings). The underlying filter mechanism will convert back and forth between iterators and arrays as needed.
 
-Normally
-
 ! References
 
 There are several filter operators built into the core which can serve as a jumping off point for your own filter operators:
