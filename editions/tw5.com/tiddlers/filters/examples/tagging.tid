@@ -5,5 +5,5 @@ title: tagging Operator (Examples)
 type: text/vnd.tiddlywiki
 
 <<.operator-example 1 "[[task]tagging[]]" "same as `[tag[task]]`">>
-<<.operator-example 2 "Concepts task +[tagging[]]" "tiddlers that either tag to ''Concepts'' or ''task''">>
+<<.operator-example 2 "Concepts task +[tagging[]]" "tiddlers that are either tagged ''Concepts'' or ''task''">>
 <<.operator-example 3 "[all[current]tagging[]]" "tiddlers tagged with the current one">>
