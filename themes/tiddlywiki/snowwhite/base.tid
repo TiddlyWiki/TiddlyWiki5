@@ -83,15 +83,15 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-sidebar-lists .tc-tab-divider {
-	<<background-linear-gradient "left, rgb(216,216,216) 0%, rgb(236,236,236) 250px">>
+	<<background-linear-gradient "left, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.11) 250px">>
 }
 
 .tc-more-sidebar .tc-tab-buttons button {
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(224,224,224) 100%">>
+	<<background-linear-gradient "left, rgba(0,0,0,0.01) 0%, rgba(0,0,0,0.1) 100%">>
 }
 
 .tc-more-sidebar .tc-tab-buttons button.tc-tab-selected {
-	<<background-linear-gradient "left, rgb(236,236,236) 0%, rgb(248,248,248) 100%">>
+	<<background-linear-gradient "left, rgba(0,0,0,0.05) 0%, rgba(255,255,255,0.05) 100%">>
 }
 
 .tc-message-box img {
