@@ -77,6 +77,7 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/99df9f46f7cc4c1d3aa0320347f9b6c1bc458c60]] support for tiddlers containing mp4 videos
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/fd997c45814e6bb5b576137bf62bad5575b0a28c]] the ActionSetFieldWidget to enable it to be used to delete a field or indexed property
 * [[Made|https://github.com/Jermolene/TiddlyWiki5/commit/746aab2cf6bbe3c1905efd5caf80e40e23b914b0]] the tw5.com documentation available as a plugin and an <a href="editions/tw5.com-docs/index.html" target="_blank">edition</a>, simplifying some scenarios for re-using it
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/0035a0046315ee0203b1adfb75efdbb0e854a7f6]] rendering of "More" sidebar tab gradients in the "Snow White" theme
 
 !! Bug Fixes
 
