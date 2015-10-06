@@ -8,11 +8,11 @@ type: text/vnd.tiddlywiki
 
 To export ''all'' tiddlers click on the "Tools" tab of the Sidebar. Find and click the ``export all`` ({{$:/core/ui/Buttons/export-tiddler}}) button. A pop-up menu will offer you the chance to export tiddlers in multiple formats. 
 
-!!! Selecting individual tiddlers for export
+!!! Exporting a tiddler
 
 If you want to export a particular tiddler, first navigate to that tiddler. Then click on the More Actions  icon ({{$:/core/ui/Buttons/more-tiddler-actions}}) that appears above the tiddler. From the list that appears select ``export tiddler``. A pop-up menu will offer you the chance to export the tiddler in multiple formats. 
 
-!!! Selecting tiddlers matching a search criteria for export
+!!! Exporting tiddlers matching a criteria (filter)
 
 To export a selection of tiddlers, click the little magnifying glass next to the search area on the sidebar. This will open the [[Advanced Search|$:/AdvancedSearch]] tiddler. Click on the ``Filter`` tab of the Advanced Search tiddler. Only the [[Filter|Filters]] tab will allow you to export a selection of tiddlers. [[Filters]] follow a particular syntax. Click on this [[Filters|Filters]] link to learn about how to make filters.
 
