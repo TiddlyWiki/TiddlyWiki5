@@ -5,6 +5,6 @@ tags: $:/tags/ViewTemplate
 <div class="tc-subtitle">
 <$link to={{!!modifier}}>
 <$view field="modifier"/>
-</$link> <$view field="modified" format="relativedate"/>
+</$link> <$view field="modified" format="date" template={{$:/language/Tiddler/DateFormat}}/>
 </div>
 </$reveal>
