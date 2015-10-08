@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/static/item
 
-`<li>`
+`<li class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
 
 <$transclude/>
 
