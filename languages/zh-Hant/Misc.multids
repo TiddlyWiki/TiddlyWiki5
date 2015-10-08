@@ -31,4 +31,5 @@ TagManager/Count/Heading: 計數
 TagManager/Icon/Heading: 圖示
 TagManager/Info/Heading: 資訊
 TagManager/Tag/Heading: 標籤
+Tiddler/DateFormat: YYYY年0MM月0DD日 0hh:0mm
 UnsavedChangesWarning: 在此 TiddlyWiki 您有尚未儲存的變更
