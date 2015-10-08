@@ -57,11 +57,17 @@ CheckboxWidget.prototype.render = function(parent,nextSibling) {
 CheckboxWidget.prototype.getValue = function() {
 	var tiddler = this.wiki.getTiddler(this.checkboxTitle);
 	if(tiddler) {
-		if(this.checkboxTag) {
+		if(this.checkboxTag && (!this.checkboxTagField || this.checkboxTagField === "tags"))  {
 			if(this.checkboxInvertTag) {
 				return !tiddler.hasTag(this.checkboxTag);
 			} else {
 				return tiddler.hasTag(this.checkboxTag);
+			}
+		} else if (this.checkboxTag && this.checkboxTagField) {
+			if(this.checkboxInvertTag) {
+				return ($tw.utils.parseStringArray(tiddler.fields[this.checkboxTagField] || []).slice(0).indexOf(this.checkboxTag) !== -1);
+			} else {
+				return ($tw.utils.parseStringArray(tiddler.fields[this.checkboxTagField] || []).slice(0).indexOf(this.checkboxTag) !== -1);
 			}
 		}
 		if(this.checkboxField) {
@@ -96,25 +102,54 @@ CheckboxWidget.prototype.handleChangeEvent = function(event) {
 		newFields = {title: this.checkboxTitle},
 		hasChanged = false,
 		tagCheck = false,
-		hasTag = tiddler && tiddler.hasTag(this.checkboxTag);
-	if(this.checkboxTag && this.checkboxInvertTag === "yes") {
-		tagCheck = hasTag === checked;
+		hasTag,
+		notTagField;
+
+	if(this.checkboxTagField) {
+		notTagField = $tw.utils.parseStringArray(tiddler.fields[this.checkboxTagField] || []).slice(0);
+		hasTag = tiddler && (notTagField.indexOf(this.checkboxTag) !== -1);
+		if(this.checkboxTag && this.checkboxInvertTag === "yes") {
+			tagCheck = hasTag === checked;
+		} else {
+			tagCheck = hasTag !== checked;
+		}
+		// Set the tag if specified
+		if(this.checkboxTag && (!tiddler || tagCheck)) {
+			newFields[this.checkboxTagField] = tiddler ? $tw.utils.parseStringArray(tiddler.fields[this.checkboxTagField] || []).slice(0) : [];
+			var pos = newFields[this.checkboxTagField].indexOf(this.checkboxTag);
+			if(pos !== -1) {
+				newFields[this.checkboxTagField].splice(pos,1);
+			}
+			if(this.checkboxInvertTag === "yes" && !checked) {
+				newFields[this.checkboxTagField].push(this.checkboxTag);
+			} else if(this.checkboxInvertTag !== "yes" && checked) {
+				newFields[this.checkboxTagField].push(this.checkboxTag);
+			}
+			newFields[this.checkboxTagField] = $tw.utils.stringifyList(newFields[this.checkboxTagField]);
+			this.wiki.addTiddler(new $tw.Tiddler(tiddler,newFields));
+			//hasChanged = true;
+		}
 	} else {
-		tagCheck = hasTag !== checked;
-	}
-	// Set the tag if specified
-	if(this.checkboxTag && (!tiddler || tagCheck)) {
-		newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
-		var pos = newFields.tags.indexOf(this.checkboxTag);
-		if(pos !== -1) {
-			newFields.tags.splice(pos,1);
+		hasTag = tiddler && tiddler.hasTag(this.checkboxTag);
+		if(this.checkboxTag && this.checkboxInvertTag === "yes") {
+			tagCheck = hasTag === checked;
+		} else {
+			tagCheck = hasTag !== checked;
 		}
-		if(this.checkboxInvertTag === "yes" && !checked) {
-			newFields.tags.push(this.checkboxTag);
-		} else if(this.checkboxInvertTag !== "yes" && checked) {
-			newFields.tags.push(this.checkboxTag);
+		// Set the tag if specified
+		if(this.checkboxTag && (!tiddler || tagCheck)) {
+			newFields.tags = tiddler ? (tiddler.fields.tags || []).slice(0) : [];
+			var pos = newFields.tags.indexOf(this.checkboxTag);
+			if(pos !== -1) {
+				newFields.tags.splice(pos,1);
+			}
+			if(this.checkboxInvertTag === "yes" && !checked) {
+				newFields.tags.push(this.checkboxTag);
+			} else if(this.checkboxInvertTag !== "yes" && checked) {
+				newFields.tags.push(this.checkboxTag);
+			}
+			hasChanged = true;
 		}
-		hasChanged = true;
 	}
 	// Set the field if specified
 	if(this.checkboxField) {
@@ -142,6 +177,7 @@ CheckboxWidget.prototype.execute = function() {
 	this.checkboxDefault = this.getAttribute("default");
 	this.checkboxClass = this.getAttribute("class","");
 	this.checkboxInvertTag = this.getAttribute("invertTag","");
+	this.checkboxTagField = this.getAttribute("tagField","");
 	// Make the child widgets
 	this.makeChildWidgets();
 };
@@ -151,7 +187,7 @@ Selectively refreshes the widget if needed. Returns true if the widget or any of
 */
 CheckboxWidget.prototype.refresh = function(changedTiddlers) {
 	var changedAttributes = this.computeAttributes();
-	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"]) {
+	if(changedAttributes.tiddler || changedAttributes.tag || changedAttributes.invertTag || changedAttributes.field || changedAttributes.checked || changedAttributes.unchecked || changedAttributes["default"] || changedAttributes["class"] || changedAttributes.checkboxTagField) {
 		this.refreshSelf();
 		return true;
 	} else {
