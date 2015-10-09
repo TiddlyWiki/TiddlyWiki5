@@ -252,3 +252,5 @@ William Jackson, @matabele 2015/09/26
 Karl Knechtel, @zahlman, 2015/10/03
 
 Tony Grosinger @tgrosinger 2015/10/03
+
+Soeren Enevoldsen, @senevoldsen90, 2015/10/09
