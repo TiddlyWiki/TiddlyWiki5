@@ -36,7 +36,7 @@ Compute the internal state of the widget
 */
 DeleteTiddlerWidget.prototype.execute = function() {
 	this.actionFilter = this.getAttribute("$filter");
-	this.actionTiddler = this.getAttribute("$tiddler");
+	this.actionTiddler = this.getAttribute("$tiddler",this.getVariable("currentTiddler"));
 };
 
 /*
