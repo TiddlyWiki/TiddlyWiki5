@@ -166,6 +166,7 @@ Modal.prototype.display = function(title,options) {
 	headerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	bodyWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
 	footerWidgetNode.addEventListener("tm-close-tiddler",closeHandler,false);
+	modalBackdrop.addEventListener("click",closeHandler,false);
 	// Set the initial styles for the message
 	$tw.utils.setStyle(modalBackdrop,[
 		{opacity: "0"}
