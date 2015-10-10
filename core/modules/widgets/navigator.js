@@ -258,12 +258,12 @@ NavigatorWidget.prototype.handleDeleteTiddlerEvent = function(event) {
 		confirmationTitle = title;
 	}
 	// Seek confirmation
-	if(!tiddler.hasTag("$:/tags/Alert") && ((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
+	if((this.wiki.getTiddler(originalTitle) || (tiddler.fields.text || "") !== "") && !confirm($tw.language.getString(
 				"ConfirmDeleteTiddler",
 				{variables:
 					{title: confirmationTitle}
 				}
-			)))) {
+			))) {
 		return false;
 	}
 	// Delete the original tiddler
