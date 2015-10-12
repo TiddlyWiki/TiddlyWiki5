@@ -44,6 +44,18 @@ Limited support for tiddlers stored in external `.tid` files:
 
 See [[Alice in Wonderland]] for an example. Try opening it without a network connection.
 
+!! New "Tight" Theme
+
+A new theme called "Tight" uses reduced padding, margins and font-sizes to pack as much text as possible:
+
+<$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/tight"/>
+Try it out
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+Revert
+</$button>
+
 ! Other Improvements
 
 !! Translation Improvements

@@ -54,22 +54,41 @@ tags: [[$:/tags/Stylesheet]]
 
 	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h1 {
 		font-size: 1.5em;
-		font-weight: 700;
+		font-weight: 500;
 	}
 
 	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h2 {
 		font-size: 1.3em;
-		font-weight: 700;
+		font-weight: 500;
 	}
 
 	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h3 {
 		font-size: 1.2em;
-		font-weight: 700;
+		font-weight: 500;
 	}
 
 	html body.tc-body .tc-tiddler-frame .tc-tiddler-body h4 {
 		font-size: 1.1em;
-		font-weight: 700;
+		font-weight: 500;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-improvement-banner {
+		margin-right: -15px;
+		margin-left: -10px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-tiddler-info {
+	    margin: 0 -13px 0 -13px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-fold-banner {
+	    width: 13px;
+	    margin-left: -15px;
+	}
+
+	html body.tc-body .tc-tiddler-frame .tc-unfold-banner {
+	    margin-left: -13px;
+	    margin-top: -4px;
 	}
 
 }
