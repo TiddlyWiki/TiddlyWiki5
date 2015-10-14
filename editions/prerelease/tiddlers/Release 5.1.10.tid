@@ -20,6 +20,8 @@ This release includes several low-level performance optimisations that should im
 * [[Caching data tiddlers|https://github.com/Jermolene/TiddlyWiki5/commit/32f6d7f1b01474b82debcbdd5d76c49c59303265]]
 * [[Removed expensive visual effects|https://github.com/Jermolene/TiddlyWiki5/commit/4f5cf4597abb08af787b62c2e2ee1b8c667dad1e]]
 
+There is a new setting in the control panel to enable performance instrumentation, making it much easier to measure and improve performance issues.
+
 !! Résumé Builder Edition
 
 The new [[Résumé Builder Edition]] by @inmysocks is a custom edition to guide you through the process of using TiddlyWiki to create a good looking résumé (or curriculum vitæ).
@@ -43,6 +45,18 @@ Limited support for tiddlers stored in external `.tid` files:
 ** lazy loading works on an HTTP URI on all browsers as long as the target file is either stored on the same domain or is served by a [[server that supports CORS|https://en.wikipedia.org/wiki/Cross-origin_resource_sharing]]
 
 See [[Alice in Wonderland]] for an example. Try opening it without a network connection.
+
+!! New "Tight" Theme
+
+A new theme called "Tight" uses reduced padding, margins and font-sizes to pack as much text as possible:
+
+<$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/tight"/>
+Try it out
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+Revert
+</$button>
 
 ! Other Improvements
 
@@ -78,6 +92,7 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/fd997c45814e6bb5b576137bf62bad5575b0a28c]] the ActionSetFieldWidget to enable it to be used to delete a field or indexed property
 * [[Made|https://github.com/Jermolene/TiddlyWiki5/commit/746aab2cf6bbe3c1905efd5caf80e40e23b914b0]] the tw5.com documentation available as a plugin and an <a href="editions/tw5.com-docs/index.html" target="_blank">edition</a>, simplifying some scenarios for re-using it
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/0035a0046315ee0203b1adfb75efdbb0e854a7f6]] rendering of "More" sidebar tab gradients in the "Snow White" theme
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/33563d01baed4b4092fc834eb6a1df55e1671418]] option in [[control panel|$:/ControlPanel]] to enable the display of detailed performance instrumentation in the browser developer console
 
 !! Bug Fixes
 
@@ -85,6 +100,10 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3fbf29093b32c00941b0c03951250de7c0cc8d6f]] problem with invisible icons in $:/AdvancedSearch
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/862e358b57fde74595420e7948bf44fdadf690dc]] check for required plugins in ServerCommand
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/709126dd643207adab725569c214f8617c28fbeb]] problem with queueing change events for deleting non-existent tiddlers
+* [[Ensure|https://github.com/Jermolene/TiddlyWiki5/commit/85553609b10ccc813662c867d4043e5df78efcec]] EditTextWidget fixes height even if refresh isn't required
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8a763e9d838fcb571d12c4175952cd4e15e95e00]] the gradient on the sidebar tabs divider
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/6add992bf2e9cedd077c74c3471758bbe9d6e1b2]] problem with tiddler titles such as `$:/templates/something` being erroneously classed as `$:/temp` tiddlers, and so excluded from syncing
+* [[Switched|https://github.com/Jermolene/TiddlyWiki5/commit/acbf87657b6c88719148266100b91a61e29a0546]] to absolute date format in tiddler subtitles
 
 !! Node.js Improvements
 

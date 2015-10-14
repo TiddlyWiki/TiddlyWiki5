@@ -185,6 +185,8 @@ EditTextWidget.prototype.refresh = function(changedTiddlers) {
 		this.updateEditor(this.getEditInfo().value);
 		return true;
 	}
+	// Fix the height anyway in case there has been a reflow
+	this.fixHeight();
 	return false;
 };
 

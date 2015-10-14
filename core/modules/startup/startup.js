@@ -18,7 +18,7 @@ exports.after = ["load-modules"];
 exports.synchronous = true;
 
 // Set to `true` to enable performance instrumentation
-var PERFORMANCE_INSTRUMENTATION = false;
+var PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE = "$:/config/Performance/Instrumentation";
 
 var widget = require("$:/core/modules/widgets/widget.js");
 
@@ -29,7 +29,7 @@ exports.startup = function() {
 	}
 	$tw.version = $tw.utils.extractVersionInfo();
 	// Set up the performance framework
-	$tw.perf = new $tw.Performance(PERFORMANCE_INSTRUMENTATION);
+	$tw.perf = new $tw.Performance($tw.wiki.getTiddlerText(PERFORMANCE_INSTRUMENTATION_CONFIG_TITLE,"no") === "yes");
 	// Kick off the language manager and switcher
 	$tw.language = new $tw.Language();
 	$tw.languageSwitcher = new $tw.PluginSwitcher({

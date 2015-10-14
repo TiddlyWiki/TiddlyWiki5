@@ -90,6 +90,9 @@ Settings/NavigationHistory/Caption: Navigation History
 Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
 Settings/NavigationHistory/No/Description: Do not update history
 Settings/NavigationHistory/Yes/Description: Update history
+Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
+Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
+Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
 Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
 Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
