@@ -263,7 +263,7 @@ $tw.utils.stringifyList = function(value) {
 };
 
 // Parse a string array from a bracketted list. For example "OneTiddler [[Another Tiddler]] LastOne"
-$tw.utils.parseStringArray = function(value) {
+$tw.utils.parseStringArray = function(value, allowDuplicate) {
 	if(typeof value === "string") {
 		var memberRegExp = /(?:^|[^\S\xA0])(?:\[\[(.*?)\]\])(?=[^\S\xA0]|$)|([\S\xA0]+)/mg,
 			results = [],
@@ -272,7 +272,7 @@ $tw.utils.parseStringArray = function(value) {
 			match = memberRegExp.exec(value);
 			if(match) {
 				var item = match[1] || match[2];
-				if(item !== undefined && results.indexOf(item) === -1) {
+				if(item !== undefined && (results.indexOf(item) === -1 || allowDuplicate)) {
 					results.push(item);
 				}
 			}
