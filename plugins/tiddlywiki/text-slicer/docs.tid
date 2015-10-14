@@ -144,6 +144,32 @@ The tiddlers representing items within the list have the following fields:
 * ''text'': the text of the list item
 * ''tags'': any CSS classes found in the HTML are converted into tags
 
+!!! Definition lists
+
+Definition lists are represented by several tiddlers: one for the definition list itself, and one for each term and definition in the list.
+
+The tiddler representing the definition list itself has the following fields:
+
+* ''toc-type'': the text "def-list"
+* ''toc-list-filter'': the default filter used to generate the titles of the list-items
+* ''title'': an automatically generated unique title
+* ''list'': ordered list of titles of tiddlers representing the items (terms and/or definition) in the definition list
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+The tiddlers representing terms within the definition list have the following fields:
+
+* ''toc-type'': the text "term"
+* ''title'': an automatically generated unique title
+* ''text'': the text of the definition list term
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
+The tiddlers representing definitions within the definition list have the following fields:
+
+* ''toc-type'': the text "definition"
+* ''title'': an automatically generated unique title
+* ''text'' : the text of the definition list definition
+* ''tags'': any CSS classes found in the HTML are converted into tags
+
 !!! Images
 
 Tiddlers representing images have the following fields:
