@@ -1,7 +1,6 @@
 title: $:/core/macros/tabs
 tags: $:/tags/Macro
 
-\define retain-tab() $:/config/tabs/retain/$(currentTab)$
 \define tabs(tabsList,default,state:"$:/state/tab",class,template)
 <div class="tc-tab-set $class$">
 <div class="tc-tab-buttons $class$">
@@ -17,7 +16,7 @@ tags: $:/tags/Macro
 </div><div class="tc-tab-divider $class$"/><div class="tc-tab-content $class$">
 <$list filter="$tabsList$" variable="currentTab">
 
-<$set name="retain" filter="[<retain-tab>get[text]]">
+<$set name="retain" filter="[<currentTab>get[retain-tab]]">
 <$reveal type="match" state=<<qualify "$state$">> text=<<currentTab>> default="$default$" retain=<<retain>>>
 
 <$transclude tiddler="$template$" mode="block">
