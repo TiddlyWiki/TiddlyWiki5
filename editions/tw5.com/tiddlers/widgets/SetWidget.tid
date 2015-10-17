@@ -57,7 +57,7 @@ This form of the set variable widget evaluates the filter and assigns the result
 </$set>
 ```
 
-Without a defined an output ''format'', the output is a list of tiddler titles as encoded in the tags field...
+Without a defined ''format'', the output is a list of tiddler titles as encoded in the tags field...
 
 ```
 <$set name="myVariable" filter="[[my tiddler]]">
