@@ -41,6 +41,7 @@ SetWidget.prototype.execute = function() {
 	this.setName = this.getAttribute("name","currentTiddler");
 	this.setFilter = this.getAttribute("filter");
 	this.setValue = this.getAttribute("value");
+	this.setFormat = this.getAttribute("format","list");
 	this.setEmptyValue = this.getAttribute("emptyValue");
 	// Set context variable
 	this.setVariable(this.setName,this.getValue(),this.parseTreeNode.params);
@@ -56,7 +57,11 @@ SetWidget.prototype.getValue = function() {
 	if(this.setFilter) {
 		var results = this.wiki.filterTiddlers(this.setFilter,this);
 		if(!this.setValue) {
-			value = $tw.utils.stringifyList(results);
+			if(this.setFormat === "list") {
+				value = $tw.utils.stringifyList(results);
+			} else {
+				value = results.join(" ");
+			}
 		}
 		if(results.length === 0 && this.setEmptyValue !== undefined) {
 			value = this.setEmptyValue;
