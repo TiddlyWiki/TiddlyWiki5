@@ -12,7 +12,7 @@ At the root, it serves a rendering of a specified tiddler. Away from the root, i
 The parameters are:
 
 * ''port'' - port number to serve from (defaults to "8080")
-* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all") 
+* ''roottiddler'' - the tiddler to serve at the root (defaults to "$:/core/save/all")
 * ''rendertype'' - the content type to which the root tiddler should be rendered (defaults to "text/plain")
 * ''servetype'' - the content type with which the root tiddler should be served (defaults to "text/html")
 * ''username'' - the default username for signing edits
