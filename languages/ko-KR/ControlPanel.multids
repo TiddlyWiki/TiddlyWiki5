@@ -52,11 +52,14 @@ Plugins/Disabled/Status: (비활성화됨)
 Plugins/Empty/Hint: 없음
 Plugins/Enable/Caption: 활성화
 Plugins/Enable/Hint: 페이지를 다시 불러올 때 이 플러그인을 활성화합니다
+Plugins/Install: 설치
 Plugins/Installed/Hint: 현재 설치된 플러그인:
 Plugins/Languages/Caption: 언어
 Plugins/Languages/Hint: 언어 팩 플러그인
+Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
 Plugins/Plugins/Caption: 플러그인
 Plugins/Plugins/Hint: 플러그인
+Plugins/Reinstall: 재설치
 Plugins/Themes/Caption: 테마
 Plugins/Themes/Hint: 테마 플러그인
 Saving/Caption: 저장

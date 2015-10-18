@@ -52,11 +52,14 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
+Plugins/Install: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
+Plugins/OpenPluginLibrary: open plugin library
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
+Plugins/Reinstall: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
