@@ -77,6 +77,17 @@ Extended filter operators to manipulate the current list.
     return results.slice(count).concat(results.slice(0, count));
   };
 
+/*
+  Moves the item named in the operand a number of places forward or backward in the list
+  */
+  exports.move = function (source, operator, options) {
+    var results = prepare_results(source),
+        index = results.indexOf(operator.operand),
+        count = parseInt(operator.suffix) || 1,
+        marker = results.splice(index, 1);
+    return results.slice(0, index + count).concat(marker).concat(results.slice(index + count));
+  };
+
   /*
   Returns the items from the current list that are after the item named in the operand
   */
@@ -87,9 +98,9 @@ Extended filter operators to manipulate the current list.
       return [];
     }
     if (operator.suffix) {
-      return results.slice(index - 1);
+      return results.slice(index);
     }
-    return results.slice(index);
+    return results.slice(index + 1);
   };
 
   /*
