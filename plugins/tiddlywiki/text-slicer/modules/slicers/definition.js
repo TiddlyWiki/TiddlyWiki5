@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/text-slicer/modules/slicers/definition.js
 type: application/javascript
 module-type: slicer
 
-Handle slicing definition list definition nodes
+Handle slicing definition nodes in definition lists
 
 \*/
 (function(){
@@ -12,7 +12,7 @@ Handle slicing definition list definition nodes
 /*global $tw: false */
 "use strict";
 
-exports.processDefinitionItemNode = function(domNode,tagName) {
+exports.processDefinitionNode = function(domNode,tagName) {
 	var text = $tw.utils.htmlEncode(domNode.textContent);
 	if(domNode.nodeType === 1 && tagName === "dd") {
 		// if(!this.isBlank(text)) {

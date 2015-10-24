@@ -151,7 +151,7 @@ Definition lists are represented by several tiddlers: one for the definition lis
 The tiddler representing the definition list itself has the following fields:
 
 * ''toc-type'': the text "def-list"
-* ''toc-list-filter'': the default filter used to generate the titles of the list-items
+* ''toc-list-filter'': the default filter used to generate the titles of the definition list items
 * ''title'': an automatically generated unique title
 * ''list'': ordered list of titles of tiddlers representing the items (terms and/or definition) in the definition list
 * ''tags'': any CSS classes found in the HTML are converted into tags

@@ -3,7 +3,7 @@ title: $:/plugins/tiddlywiki/text-slicer/modules/slicers/term.js
 type: application/javascript
 module-type: slicer
 
-Handle slicing definition list term nodes
+Handle slicing term nodes in definition lists
 
 \*/
 (function(){
@@ -12,7 +12,7 @@ Handle slicing definition list term nodes
 /*global $tw: false */
 "use strict";
 
-exports.processTermItemNode = function(domNode,tagName) {
+exports.processTermNode = function(domNode,tagName) {
 	var text = $tw.utils.htmlEncode(domNode.textContent);
 	if(domNode.nodeType === 1 && tagName === "dt") {
 		// if(!this.isBlank(text)) {
