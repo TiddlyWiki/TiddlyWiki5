@@ -19,10 +19,13 @@ Encryption/PromptSetPassword: 為此 TiddlyWiki 設定一個新密碼
 Encryption/RepeatPassword: 重複輸入密碼
 Encryption/PasswordNoMatch: 密碼不匹配
 Encryption/SetPassword: 設定密碼
+InternalJavaScriptError/Title: 內部的 JavaScript 錯誤
+InternalJavaScriptError/Hint: 喔，真是令人尷尬。建議刷新您的瀏覽器，重新啟動 TiddlyWiki
 InvalidFieldName: 欄位名稱 "<$text text=<<fieldName>>/>" 包含無效字元，欄位名稱只能包含小寫字母、數字、底線 (`_`)、 連接號 (`-`) 和小數點 (`.`)
 LazyLoadingWarning: <p>正在從 ''<$text text={{!!_canonical_uri}}/>'' 載入外部條目 ...</p><p>如果此訊息未消失，可能您使用的瀏覽器不支援此配置的外部條目。請參閱 http://tiddlywiki.com/#ExternalText</p>
 MissingTiddler/Hint: 佚失條目 "<$text text=<<currentTiddler>>/>" - 點擊 {{$:/core/images/edit-button}} 可建立此條目
-OfficialPluginLibrary: 官方 ~TiddlyWiki 插件程式庫
+OfficialPluginLibrary: ~TiddlyWiki 官方插件程式庫
+OfficialPluginLibrary/Hint: 此為在 tiddlywiki.com 的 ~TiddlyWiki 官方插件程式庫。由核心團隊維護的插件、主題和語言包。
 PluginReloadWarning: 請儲存 {{$:/core/ui/Buttons/save-wiki}} 並刷新頁面 {{$:/core/ui/Buttons/refresh}} 允許更改插件才能生效
 RecentChanges/DateFormat: YYYY年0MM月0DD日
 SystemTiddler/Tooltip: 此為系統條目
