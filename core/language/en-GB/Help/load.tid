@@ -1,7 +1,7 @@
 title: $:/language/Help/load
 description: Load tiddlers from a file
 
-Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files 
+Load tiddlers from 2.x.x TiddlyWiki files (`.html`), `.tiddler`, `.tid`, `.json` or other files
 
 ```
 --load <filepath>

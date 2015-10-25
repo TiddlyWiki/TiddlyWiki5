@@ -30,6 +30,12 @@ ExportTiddler/Caption: 티들러 내보내기
 ExportTiddler/Hint: 티들러를 내보냅니다
 ExportTiddlers/Caption: 여러 티들러 내보내기
 ExportTiddlers/Hint: 여러 티들러를 내보냅니다
+Fold/Caption: 티들러 접기
+Fold/Hint: 이 티들러의 본문을 접습니다
+FoldAll/Caption: 모든 티들러 접기
+FoldAll/Hint: 모든 열린 티들러의 본문을 접습니다
+FoldOthers/Caption: 다른 티들러 접기
+FoldOthers/Hint: 다른 열린 티들러의 본문을 접습니다
 FullScreen/Caption: 전체 화면
 FullScreen/Hint: 전체 화면 모드에 들어가거나 떠납니다
 Help/Caption: 도움말
@@ -39,7 +45,7 @@ HideSideBar/Hint: 사이드바를 숨깁니다
 Home/Caption: 홈
 Home/Hint: 기본 티들러를 엽니다
 Import/Caption: 가져오기
-Import/Hint: 파일을 가져옵니다
+Import/Hint: 텍스트, 그림, TiddlyWiki 또는 JSON을 포함한 여러 파일의 형식을 가져옵니다
 Info/Caption: 정보
 Info/Hint: 이 티들러에 대한 정보를 보여줍니다
 Language/Caption: 언어
@@ -76,3 +82,7 @@ TagManager/Caption: 태그 관리자
 TagManager/Hint: 태그 관리자를 엽니다
 Theme/Caption: 테마
 Theme/Hint: 보일 테마를 선택합니다
+Unfold/Caption: 티들러 펼치기
+Unfold/Hint: 이 티들러의 본문을 펼칩니다
+UnfoldAll/Caption: 모든 티들러 펼치기
+UnfoldAll/Hint: 모든 열린 티들러의 본문을 펼칩니다
