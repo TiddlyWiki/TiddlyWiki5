@@ -12,7 +12,7 @@ description: 提供一個 HTTP 伺服器介面到 TiddlyWiki
 參數說明：
 
 * ''port'' - 服務的埠號 (預設為 "8080")
-* ''roottiddler'' - 服務的基本條目 (預設為 "$:/core/save/all") 
+* ''roottiddler'' - 服務的基本條目 (預設為 "$:/core/save/all")
 * ''rendertype'' - 呈現的基本條目內容類型 (預設為 "text/plain")
 * ''servetype'' - 服務的基本條目內容類型(預設為 "text/html")
 * ''username'' - 預設的編輯者署名
