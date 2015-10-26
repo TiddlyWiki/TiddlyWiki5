@@ -1,7 +1,7 @@
 created: 20150706160301163
 modified: 20150706172915783
 tags: [[Widget Examples]] FieldManglerWidget
-title: FieldMangler Widget Example
+title: FieldMangler Widget (Examples)
 type: text/vnd.tiddlywiki
 
 <$macrocall $name=".example" n="1"
