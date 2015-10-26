@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/definition
+
+`<dd class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
+
+<$transclude/>
+
+`</dd>`
+
+<$list filter="[list<currentTiddler>!has[draft.of]]" template="$:/plugins/tiddlywiki/text-slicer/templates/static/tiddler"/>
