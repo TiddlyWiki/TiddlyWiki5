@@ -123,11 +123,16 @@ Extended filter operators to manipulate the current list.
   */
   exports.append = function (source, operator, options) {
     var results = prepare_results(source),
+        count = parseInt(operator.suffix) || 1,
         append = $tw.utils.parseStringArray(operator.operand);
     if (append === "") {
       return results;
     }
-    return results.concat(append);
+    if (operator.prefix) {
+        return results.concat(append.slice(-count));
+    } else {
+        return results.concat(append.slice(0, count));
+    }
   };
 
   /*
@@ -135,11 +140,16 @@ Extended filter operators to manipulate the current list.
   */
   exports.prepend = function (source, operator, options) {
       var results = prepare_results(source),
+          count = parseInt(operator.suffix) || 1,
           prepend = $tw.utils.parseStringArray(operator.operand);
     if (prepend === "") {
       return results;
     }
-    return prepend.concat(results);
+    if (operator.prefix) {
+        return prepend.slice(-count).concat(results);
+    } else {
+        return prepend.slice(0, count).concat(results);
+    }
   };
 
   /*
