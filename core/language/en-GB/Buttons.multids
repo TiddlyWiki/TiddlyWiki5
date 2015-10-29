@@ -32,6 +32,8 @@ ExportTiddlers/Caption: export tiddlers
 ExportTiddlers/Hint: Export tiddlers
 Fold/Caption: fold tiddler
 Fold/Hint: Fold the body of this tiddler
+Fold/FoldBar/Caption: fold-bar
+Fold/FoldBar/Hint: Optional bars to fold and unfold tiddlers
 Unfold/Caption: unfold tiddler
 Unfold/Hint: Unfold the body of this tiddler
 FoldOthers/Caption: fold other tiddlers
