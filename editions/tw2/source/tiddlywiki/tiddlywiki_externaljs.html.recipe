@@ -1,4 +1,0 @@
-recipe: html/split.recipe
-recipe: shadows/split.recipe
-version: js/Version.js
-jsext: html/externaljs.txt

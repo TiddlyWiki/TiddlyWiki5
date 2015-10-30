@@ -1,0 +1,29 @@
+created: 20150124182421000
+fr-title: Expression d'un filtre
+modified: 20150621103316084
+tags: [[Filter Syntax]]
+title: Filter Expression
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[{:
+  [: [[Espacevierge|"Filter Whitespace"]] ]
+  ("+"|:-|"-")
+  [[sequence|"Filter Run"]]
+}]
+"""/>
+
+L'<<.def "expression d'un filtre">> est le plus haut niveau de la [[syntaxe d'un filtre|Filter Syntax]].Elle est composée d'une ou plusieurs [[séquences|Filter Run]].
+
+Une entrée de séquence est souvent une liste de tous les titres des tiddlers non-[[shadow|ShadowTiddlers]] du wiki (sans tri particulier). Mais le préfixe `+` peut modifier cela.
+
+* Si une séquence ne comporte pas de préfixe `+` ou `-`, ces titres en sortie sont [[ajoutés par prépondérance|Dominant Append]] au résultat du filtre.
+* Si une séquence comporte un préfixe `-`, les titres en sortie sont <<.em extraits>> du résultat du filtre (s'ils y étaient).
+* Si une séquence comporte un préfixe `+`, elle compare les sorties du filtre à ses entrées. La sortie du filtre est alors entièrement <<.em remplacée>> par les séquences qui se recoupent. Toutes séquences de titres de tiddler suivantes sont traitées comme des entrées, à moins qu'elles n'aient aussi un préfixe ` +`.
+
+En termes techniques plus concis<<dp>>
+
+|!Séquence |!Interpretation |!Output |
+|`séquence` |réunion |... OR séquence |
+|`+séquence` |intersection |... AND séquence |
+|`-séquence` |exclusion |... AND NOT séquence |

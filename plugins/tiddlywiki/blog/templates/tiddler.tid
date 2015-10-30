@@ -1,0 +1,35 @@
+title: $:/plugins/tiddlywiki/blog/templates/tiddler
+
+<div class="tc-tiddler-frame tc-tiddler-view-frame">
+
+<div class="tc-tiddler-title">
+
+<div class="tc-titlebar">
+
+<h2 class="tc-title">
+
+<$transclude field="caption" mode="inline">
+
+<$view field="title"/>
+
+</$transclude>
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="tc-subtitle">
+
+<$view field="modified" format="date" template="DDth MMM YYYY"/>
+
+</div>
+
+<div class="tc-tiddler-body">
+
+<$transclude/>
+
+</div>
+
+</div>

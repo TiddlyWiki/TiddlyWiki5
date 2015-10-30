@@ -11,4 +11,4 @@ The `tm-edit-tiddler` message replaces the specified tiddler in the current stor
 |param |Title of the tiddler that is being switched to edit mode |
 |tiddlerTitle |Fallback title that is used if ''param'' isn't specified (automatically set by the ButtonWidget)  |
 
-The edit tiddler message is usually generated with the ButtonWidget and is handled by the NavigatorWidget.
+The edit tiddler message is usually generated with the ButtonWidget or the ActionSendMessageWidget and is handled by the NavigatorWidget.

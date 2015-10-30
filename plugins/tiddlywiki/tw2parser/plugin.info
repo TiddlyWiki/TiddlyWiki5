@@ -3,5 +3,5 @@
 	"description": "TiddlyWiki Classic parser",
 	"authors": "JeremyRuston, JeffreyWilkinson",
 	"core-version": ">=5.0.15",
-	"plugin-type": "plugin"
+	"list": "readme"
 }

@@ -14,5 +14,4 @@ Les paramètres sont les suivants :
 * ''filtre'' - filtre identifiant les tiddlers cibles
 * ''nom-du-champ'' - le champ à modifier ("text" par défaut)
 * ''titre-du-template'' - le tiddler à wikifier dans le champ spécifié. Si manquant ou blanc, le champ spécifié est supprimé
-* ''type'' - le type de texte à utiliser pour le rendu ("text/plain" par défaut ; "text/html" peut être utilisé pour inclure des éléments HTML)
-
+* ''type-de-rendu'' - le type de texte à utiliser pour le rendu ("text/plain" par défaut ; "text/html" peut être utilisé pour inclure des éléments HTML)

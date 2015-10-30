@@ -5,7 +5,7 @@ tags: $:/tags/PageTemplate
 
 <div class="tc-sidebar-header">
 
-<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes">
+<$reveal state="$:/state/sidebar" type="match" text="yes" default="yes" retain="yes" animate="yes">
 
 <h1 class="tc-site-title">
 

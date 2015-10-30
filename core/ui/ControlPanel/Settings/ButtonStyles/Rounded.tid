@@ -1,0 +1,5 @@
+title: $:/core/buttonstyles/Rounded
+tags: $:/tags/ToolbarButtonStyle
+caption: {{$:/language/ControlPanel/Settings/ToolbarButtonStyle/Styles/Rounded}}
+
+tc-btn-rounded

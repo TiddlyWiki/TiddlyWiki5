@@ -121,9 +121,9 @@ FileSystemAdaptor.prototype.saveTiddler = function(tiddler,callback) {
 		if(err) {
 			return callback(err);
 		}
-		if(fileInfo.hasMetaFile) {
+		var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
+		if(fileInfo.hasMetaFile || typeInfo.encoding === "base64") {
 			// Save the tiddler as a separate body and meta file
-			var typeInfo = $tw.config.contentTypeInfo[fileInfo.type];
 			fs.writeFile(fileInfo.filepath,tiddler.fields.text,{encoding: typeInfo.encoding},function(err) {
 				if(err) {
 					return callback(err);

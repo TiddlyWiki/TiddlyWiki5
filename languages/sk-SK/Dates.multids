@@ -1,0 +1,87 @@
+title: $:/language/
+
+Date/DaySuffix/1: -ého
+Date/DaySuffix/10: -teho
+Date/DaySuffix/11: -teho
+Date/DaySuffix/12: -teho
+Date/DaySuffix/13: -teho
+Date/DaySuffix/14: -teho
+Date/DaySuffix/15: -teho
+Date/DaySuffix/16: -teho
+Date/DaySuffix/17: -teho
+Date/DaySuffix/18: -teho
+Date/DaySuffix/19: -teho
+Date/DaySuffix/2: -ého
+Date/DaySuffix/20: -teho
+Date/DaySuffix/21: -ého
+Date/DaySuffix/22: -ého
+Date/DaySuffix/23: -tieho
+Date/DaySuffix/24: -ého
+Date/DaySuffix/25: -eho
+Date/DaySuffix/26: -eho
+Date/DaySuffix/27: -eho
+Date/DaySuffix/28: -eho
+Date/DaySuffix/29: -eho
+Date/DaySuffix/3: -eho
+Date/DaySuffix/30: -eho
+Date/DaySuffix/31: -ého
+Date/DaySuffix/4: -ého
+Date/DaySuffix/5: -eho
+Date/DaySuffix/6: -eho
+Date/DaySuffix/7: -eho
+Date/DaySuffix/8: -eho
+Date/DaySuffix/9: -eho
+Date/Long/Day/0: nedeľa
+Date/Long/Day/1: pondelok
+Date/Long/Day/2: utorok
+Date/Long/Day/3: streda
+Date/Long/Day/4: štvrtok
+Date/Long/Day/5: piatok
+Date/Long/Day/6: sobota
+Date/Long/Month/1: januára
+Date/Long/Month/10: októbra
+Date/Long/Month/11: novembra
+Date/Long/Month/12: decembra
+Date/Long/Month/2: februára
+Date/Long/Month/3: marca
+Date/Long/Month/4: apríla
+Date/Long/Month/5: mája
+Date/Long/Month/6: júna
+Date/Long/Month/7: júla
+Date/Long/Month/8: augusta
+Date/Long/Month/9: septembra
+Date/Period/am: doobeda
+Date/Period/pm: poobede
+Date/Short/Day/0: ne
+Date/Short/Day/1: po
+Date/Short/Day/2: ut
+Date/Short/Day/3: St
+Date/Short/Day/4: št
+Date/Short/Day/5: pi
+Date/Short/Day/6: so
+Date/Short/Month/1: jan
+Date/Short/Month/10: okt
+Date/Short/Month/11: nov
+Date/Short/Month/12: dec
+Date/Short/Month/2: feb
+Date/Short/Month/3: mar
+Date/Short/Month/4: apr
+Date/Short/Month/5: máj
+Date/Short/Month/6: jún
+Date/Short/Month/7: júl
+Date/Short/Month/8: aug
+Date/Short/Month/9: sep
+RelativeDate/Future/Days: <<period>> dní odteraz
+RelativeDate/Future/Hours: <<period>> hodín odteraz
+RelativeDate/Future/Minutes: <<period>> minút odteraz
+RelativeDate/Future/Months: <<period>> mesiacov odteraz
+RelativeDate/Future/Second: 1 sekundu odteraz
+RelativeDate/Future/Seconds: <<period>> sekúnd odteraz
+RelativeDate/Future/Years: <<period>> rokov odteraz
+RelativeDate/Past/Days: <<period>> dní predtým
+RelativeDate/Past/Hours: <<period>> hodín predtým
+RelativeDate/Past/Minutes: <<period>> minút predtým
+RelativeDate/Past/Months: <<period>> mesiacov predtým
+RelativeDate/Past/Second: 1 sekundu predtým
+RelativeDate/Past/Seconds: <<period>> sekúnd predtým
+RelativeDate/Past/Years: <<period>> rokov predtým

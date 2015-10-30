@@ -1,0 +1,15 @@
+created: 20150403104722092
+fr-title: PESpot Un planificateur de cours par Patrick Detzner
+modified: 20150614095142426
+tags: Examples
+title: PESpot Lesson Planner by Patrick Detzner
+type: text/vnd.tiddlywiki
+url: http://pespot.tiddlyspot.com
+
+Un développement pour planifier les cours créés avec TiddlyWiki.
+
+{{!!url}}
+
+<<<
+J'ai développé un logiciel pour assister dans la saisie et la mémorisation des information de planification des cours et ainsi faciliter/automatiser un ennuyeux travail lors de à la création du document actuel de planification des leçons.
+<<<

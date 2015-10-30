@@ -5,10 +5,10 @@ tags: [[$:/tags/Stylesheet]]
 
 .tc-help-panel {
 	position: fixed;
-	top: 2.5em;
 	bottom: 0;
 	right: 0;
 	width: 310px;
+	height: 400px;
 	overflow: scroll;
 	-webkit-overflow-scrolling: touch;
 	<<box-shadow "0px 0px 5px rgba(0, 0, 0, 0.3)">>
@@ -16,6 +16,7 @@ tags: [[$:/tags/Stylesheet]]
 	background: <<colour tiddler-background>>;
 	padding: 1em;
 	margin: 0.5em;
+	z-index: 1000;
 }
 
 dl.tc-help-cheatsheet {

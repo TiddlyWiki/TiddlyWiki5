@@ -39,7 +39,7 @@ Command.prototype.execute = function() {
 		pathname = path.resolve(outputPath,this.params[2]),		
 		type = this.params[3] || "text/html",
 		extension = this.params[4] || ".html",
-		deleteDirectory = (this.params[5] || "") != "noclean",
+		deleteDirectory = (this.params[5] || "").toLowerCase() !== "noclean",
 		tiddlers = wiki.filterTiddlers(filter);
 	if(deleteDirectory) {
 		$tw.utils.deleteDirectory(pathname);

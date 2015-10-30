@@ -1,5 +1,5 @@
 created: 20150117152607000
-modified: 20150203190441000
+modified: 20150228114306000
 title: $:/editions/tw5.com/operator-macros
 tags: $:/tags/Macro
 
@@ -10,19 +10,21 @@ tags: $:/tags/Macro
 `$eg$`
 <$macrocall $name=".if" cond="""$ie$""" then="""<dd>&rarr; $ie$</dd>"""/>
 <$list filter="[title<.state-prefix>addsuffix{!!title}addsuffix[/]addsuffix[$n$]]" variable=".state">
-  <$reveal state=<<.state>> type="nomatch" text="show">
-  <dl>
-    <dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
-  </dl>
-  </$reveal>
-  <$reveal state=<<.state>> type="match" text="show">
-    <dl>
-      <dd><$button set=<<.state>> setTo="">Hide</$button></dd>
-    </dl>
-    <ul><$list filter="$eg$" emptyMessage="(empty)">
-      <li><$link><$view field="title"/></$link></li>
-    </$list></ul>
-  </$reveal>
+<$reveal state=<<.state>> type="nomatch" text="show">
+	<dl>
+	<dd><$button set=<<.state>> setTo="show">Try it</$button></dd>
+	</dl>
+</$reveal>
+<$reveal state=<<.state>> type="match" text="show">
+	<dl>
+	<dd><$button set=<<.state>> setTo="">Hide</$button></dd>
+	</dl>
+	<blockquote class="doc-example-result">
+	<ul><$list filter="$eg$" emptyMessage="(empty)">
+	<li><$link><$view field="title"/></$link></li>
+	</$list></ul>
+	</blockquote>
+</$reveal>
 </$list>
 \end
 

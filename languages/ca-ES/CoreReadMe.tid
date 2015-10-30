@@ -1,0 +1,3 @@
+title: $:/core/readme
+
+Aquest connector conté  components del nucli de TiddlyWiki, com ara: els mòduls de codi JavaScript, Icones* Plantilles que calen per la traducció de les cadenes de caràcters localitzables del nucli i de l'interfície d'usuari en Català ("ca-ES") del TiddlyWiki

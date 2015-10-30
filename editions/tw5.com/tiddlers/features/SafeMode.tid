@@ -20,5 +20,7 @@ Safe mode triggers two changes:
 
 * All plugins are temporarily disabled. You can use the control panel to disable individual plugins
 * Any tiddlers that override shadow tiddlers are renamed to give them the prefix `SAFE: `, thus restoring the underlying shadow tiddler
+* Certain configuration options are ignored, and the default settings used instead:
+** WikiParserRuleConfiguration
 
 A report tiddler is displayed that allows you to inspect the tiddlers that were renamed.

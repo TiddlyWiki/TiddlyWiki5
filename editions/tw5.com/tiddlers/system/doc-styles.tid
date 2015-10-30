@@ -1,5 +1,5 @@
 created: 20150117152612000
-modified: 20150203183335000
+modified: 20150226162159000
 title: $:/editions/tw5.com/doc-styles
 tags: $:/tags/Stylesheet
 
@@ -41,7 +41,8 @@ tags: $:/tags/Stylesheet
 .doc-operator,
 .doc-var,
 .doc-widget,
-.doc-attr {
+.doc-attr,
+.doc-param {
 	background-color: <<color background>>;
 	border: none;
 	color: <<color very-muted-foreground>>;
@@ -108,6 +109,24 @@ td svg {
 	padding-bottom: 0;
 	margin-top: 0.2em;
 }
+.doc-example pre:first-child {
+	margin-top: 0;
+}
+.doc-example-result {
+	border-left: 5px solid <<colour blockquote-bar>>;
+	border-right: 5px solid <<colour blockquote-bar>>;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 0 10px;
+}
+.doc-example-result ul {
+	margin-left: 0;
+	padding-left: 10px;
+}
+.doc-example-result ol {
+	margin-left: 0;
+	padding-left: 20px;
+}
 
 .doc-table th, .doc-table tr {
 	vertical-align: top;
@@ -123,4 +142,22 @@ tr.doc-table-subheading {
 
 .doc-table.before-tiddler-body {
 	margin-top: 2em;
+}
+
+.doc-icon-block {
+	border-left: 2px solid <<colour code-border>>;
+	margin-left: 3em;
+	padding-left: 0.6em;
+	position: relative;
+}
+.doc-block-icon {
+	position: absolute;
+	left: -3em;
+	top: 0.2em;
+}
+.doc-block-icon .tc-image-tip {
+	fill: <<colour primary>>;
+}
+.doc-block-icon .tc-image-warning {
+	fill: <<colour alert-highlight>>;
 }

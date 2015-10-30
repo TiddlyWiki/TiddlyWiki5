@@ -1,0 +1,41 @@
+created: 20140604204709181
+fr-title: Signaler les bogues
+modified: 20150621191807096
+tags: Community
+title: ReportingBugs
+type: text/vnd.tiddlywiki
+
+Vous pouvez signaler les bogues et les problèmes rencontrés avec TiddlyWiki sur nos [[groupes de discussions|Forums]]. Si vous avez un compte GitHub vous pouvez aussi le faire là<<:>>
+
+https://github.com/Jermolene/TiddlyWiki5/issues/new
+
+À moins que vous ne soyez un familier de GitHub, nos forums restent, en général, la façon la plus simple de faire part d'un problème.
+
+! TiddlyWiki sur GitHub
+
+Nous utilisons le processus de questions sur GitHub pour gérer les rapports de bugs et demandes de fonctionnalités pour TiddlyWiki. Pour maintenir leur efficacité nous nous efforçons d'avoir aussi peu de questions en suspens que possible.
+
+!! Politique de gestion des questions
+
+Les questions en suspens se traduisent généralement<<:>> soit par un rapport de bogue reproductible, soit par une demande de fonctionnalité spécifique. Du point de vue des développeurs du noyau, la liste des questions se présente comme une liste de tâches partagée. Chaque élément de la liste demande un peu d'attention à chaque fois que nous vérifions la liste.
+
+Les questionnements GitHub ne sont pas très efficaces pour gérer les idées qui ne sont pas réalisables immédiatement. Mieux vaut utiliser les  [[forum TiddlyWiki |Forums]] pour les questions ouvertes, ou les discussions spéculatives sur de nouvelles fonctionnalités.
+
+!! Soumettre une question
+
+Avant de soumettre une question sur GitHub, il est de bon ton de chercher dans les questions existantes pour déterminer si le problème n'aurait pas déjà été posé. Si la recherche ne vous semble pas pratique, ne vous inquiétez pas trop<<;>> Avec GitHub, il est facile de fusionner les questions existantes.
+
+Lorsque vous devez soumettre un problème, gardez en mémoire que nous avons besoin du plus d'informations possibles pour une résolution efficace. Au minimum, veuillez essayer d'inclure<<:>>
+
+* Un titre descriptif
+* Un résumé
+* Étapes à reproduire
+* Comportement attendu
+* Contexte (OS, Navigateur, etc.)
+
+Pensez également à ajouter des captures d'écran si cela peut rendre les choses plus claires.
+
+Il y a beaucoup de bon matériel sur le web au sujet du signalement des bogues<<:>>
+
+* http://mhay68.tumblr.com/post/1648223018/what-makes-a-good-bug-report
+* [[http://www.chiark.greenend.org.uk/~sgtatham/bugs.html]]

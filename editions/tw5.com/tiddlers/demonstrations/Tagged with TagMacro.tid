@@ -1,4 +1,5 @@
-title: Tagged with TagMacro
-tags: TagMacro
+created: 20150221230034000
+title: Example for tag Macro
+tags: [[tag Macro (Examples)]]
 
-This tiddler is to demonstrate the TagMacro.
+This tiddler exists to demonstrate the <<.mlink tag>> macro.

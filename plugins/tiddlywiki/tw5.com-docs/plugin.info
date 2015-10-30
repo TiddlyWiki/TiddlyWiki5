@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tiddlywiki/tw5.com-docs",
+	"description": "Documentation from tiddlywiki.com",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"list": ""
+}

@@ -10,8 +10,14 @@ ConfirmOverwriteTiddler: Souhaitez-vous supplanter le tiddler « <$text text=<<t
 ConfirmEditShadowTiddler: Vous êtes sur le point d'éditer un ShadowTiddler. Toute modification supplantera la version par défaut du système, rendant les prochaines mises à jour non-triviales. Êtes-vous sûr(e) de vouloir éditer "<$text text=<<title>>/>"?
 DefaultNewTiddlerTitle: Nouveau tiddler
 DropMessage: Lâcher ici (ou appuyer sur « escape » pour annuler)
+Encryption/Cancel: Annuler
 Encryption/ConfirmClearPassword: Souhaitez-vous supprimer ce mot de passe ? Si oui, ce wiki ne sera plus chiffré au moment de la sauvegarde
-Encryption/PromptSetPassword: Indiquer un nouveau mot de passe pour ce TiddlyWiki
+Encryption/PromptSetPassword: Choisir un nouveau mot de passe pour ce TiddlyWiki
+Encryption/Username: Nom d'utilisateur
+Encryption/Password: Mot de passe
+Encryption/RepeatPassword: Répéter le mot de passe
+Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
+Encryption/SetPassword: Définir ce mot de passe 
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant - cliquez sur {{$:/core/images/edit-button}} pour le créer
 RecentChanges/DateFormat: DD MMM YYYY

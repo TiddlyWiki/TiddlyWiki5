@@ -30,10 +30,24 @@ ExportTiddler/Caption: export tiddler
 ExportTiddler/Hint: Export tiddler
 ExportTiddlers/Caption: export tiddlers
 ExportTiddlers/Hint: Export tiddlers
+Fold/Caption: fold tiddler
+Fold/Hint: Fold the body of this tiddler
+Fold/FoldBar/Caption: fold-bar
+Fold/FoldBar/Hint: Optional bars to fold and unfold tiddlers
+Unfold/Caption: unfold tiddler
+Unfold/Hint: Unfold the body of this tiddler
+FoldOthers/Caption: fold other tiddlers
+FoldOthers/Hint: Fold the bodies of other opened tiddlers
+FoldAll/Caption: fold all tiddlers
+FoldAll/Hint: Fold the bodies of all opened tiddlers
+UnfoldAll/Caption: unfold all tiddlers
+UnfoldAll/Hint: Unfold the bodies of all opened tiddlers
 FullScreen/Caption: full-screen
 FullScreen/Hint: Enter or leave full-screen mode
+Help/Caption: help
+Help/Hint: Show help panel
 Import/Caption: import
-Import/Hint: Import files
+Import/Hint: Import many types of file including text, image, TiddlyWiki or JSON
 Info/Caption: info
 Info/Hint: Show information for this tiddler
 Home/Caption: home
@@ -50,6 +64,10 @@ NewJournalHere/Caption: new journal here
 NewJournalHere/Hint: Create a new journal tiddler tagged with this one
 NewTiddler/Caption: new tiddler
 NewTiddler/Hint: Create a new tiddler
+OpenWindow/Caption: open in new window
+OpenWindow/Hint: Open tiddler in new window
+Palette/Caption: palette
+Palette/Hint: Choose the colour palette
 Permalink/Caption: permalink
 Permalink/Hint: Set browser address bar to a direct link to this tiddler
 Permaview/Caption: permaview
@@ -57,7 +75,7 @@ Permaview/Hint: Set browser address bar to a direct link to all the tiddlers in 
 Refresh/Caption: refresh
 Refresh/Hint: Perform a full refresh of the wiki
 Save/Caption: ok
-Save/Hint: Store changes to this tiddler
+Save/Hint: Confirm changes to this tiddler
 SaveWiki/Caption: save changes
 SaveWiki/Hint: Save changes
 StoryView/Caption: storyview

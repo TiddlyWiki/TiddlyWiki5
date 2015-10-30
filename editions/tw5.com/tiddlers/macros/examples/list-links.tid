@@ -1,0 +1,13 @@
+created: 20150221160534000
+modified: 20150221160748000
+tags: [[list-links Macro]] [[Macro Examples]]
+title: list-links Macro (Examples)
+type: text/vnd.tiddlywiki
+
+This example lists all the tiddlers whose titles start with J:
+
+<$macrocall $name=".example" n="1" eg="""<<list-links filter:"[prefix[J]]">>"""/>
+
+This example lists the documentation tiddlers for the core macros, each of which has a <<.field caption>> field:
+
+<$macrocall $name=".example" n="2" eg="""<<list-links filter:"[tag[Core Macros]]">>"""/>

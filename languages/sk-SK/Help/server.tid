@@ -1,0 +1,37 @@
+title: $:/language/Help/server
+description: Poskytuje interfejs HTTP servera pre TiddlyWiki
+
+Server zabudovaný do TiddlyWiki5 je veľmi jednoduchý. Hoci je kompatibilný s TiddlyWeb, nemá mnohé z vlastností potrebné na robustné používanie z Internetu.
+
+Na úrovni roota slúži na zobrazenie určeného tiddlera. Mimo roota poskytuje jednotlivé tiddlery vo formáte JSON, a podporuje základné HTTP operácie ako `GET`, `PUT` a `DELETE`.
+
+```
+--server <port> <roottiddler> <rendertype> <servetype> <username> <password> <host> <pathprefix>
+```
+
+Parametre sú:
+
+* ''port'' - port number (defaults to "8080")
+* ''roottiddler'' - tiddler slúžiaci ako root (štandardne "$:/core/save/all") 
+* ''rendertype'' - typ obsahu, v ktorom sa má root tiddler zobrazovať (štandardne ako "text/plain")
+* ''servetype'' - typ obsahu, v ktorom má byť root tiddler poskytnutý (štandardne ako "text/html")
+* ''username'' - štandarne pred-definované meno používateľa na podpisovanie vykonaných zmien
+* ''password'' - voliteľné heslo pre základnú autentifikáciu
+* ''host'' - voliteľný hostname z ktorého sa poskytuje stránka (štandardne  "127.0.0.1" alebo "localhost")
+* ''pathprefix'' - voliteľný prefix pre cesty k súborom
+
+Ak je špecifikovaný parameter hesla, tak browser vyzve používateľa na zadanie mena a hesla. Majte na pamäti, že heslo je posielané v nechránenej podobe, takže táto implentácia nie je vhodná na všeobecné použitie.
+
+Napríklad:
+
+```
+--server 8080 $:/core/save/all text/plain text/html MyUserName passw0rd
+```
+
+Meno a heslo musia byť zadané ako prázdne reťazce (v úvodzovkách), ak potrebujete nastaviť hostname alebo predponu pre cestu k súboru a nechcete vyžadovať heslo:
+
+```
+--server 8080 $:/core/save/all text/plain text/html "" "" 192.168.0.245
+```
+
+Ak chcete spustiť viacero TiddlyWiki serverov naraz, musíte spustiť každý na inom porte.

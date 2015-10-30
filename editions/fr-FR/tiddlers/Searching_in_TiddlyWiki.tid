@@ -1,0 +1,23 @@
+created: 20140210160125905
+fr-title: Chercher avec TiddlyWiki 
+modified: 20150617073048971
+tags: Features [[Working with TiddlyWiki]]
+title: Searching in TiddlyWiki
+type: text/vnd.tiddlywiki
+
+Une recherche rapide et maléable avec ~TiddlyWiki. 
+
+''Recherche standard''
+
+Saisir du texte dans la case recherche du menu latéral listera une liste de tous les tiddlers contenant ce texte.
+
+://(Notez que les onglets du menu latéral seront masqués par les résultats de la recherche jusqu'à ce que vous cliquiez sur le 'x' à droite de la case de recherche pour les faire disparaitre)//
+
+''Recherche avancée''
+
+Cliquer sur l'icone loupe à droit de la case de recherche ouvrira [[$:/AdvancedSearch]], un tiddler contenant 4 onglets<<dp>>
+
+* L'onglet ''standard'' est un autre présentation de la case recherche du menu classique
+* L'onglet ''système'' étend la recherche aux tiddlers système
+* L'onglet ''shadows''  étend la recherche aux tiddlers shadows
+* L'onglet ''filtre'' n'est pas une case de recherche, en soi, mais juste un moyen d'avoir une liste de tous les tiddlers selon les critères définis par le [[filtre|Filters]], par exemple, "Toutes les étiquettes hormis les tags système"

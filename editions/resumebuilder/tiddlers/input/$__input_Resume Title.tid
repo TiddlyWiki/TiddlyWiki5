@@ -1,0 +1,23 @@
+created: 20150720170603658
+modified: 20150720170624801
+tags: Section
+title: $:/input/Resume Title
+
+\define thisResumeTitleInput()
+<$button>Add Title<$action-setfield $tiddler='$:/temp/ResumeTitle' title='$:/data/ResumeTitle/$(ThisTitle)$'/><$action-setfield $tiddler='$:/temp/ResumeTitle' resume_title=''/></$button>
+<br><br>
+Select title to use:<br>
+<$radio tiddler='$:/settings/$(ThisResume)$/ResumeTitle' value='use name'>Use your name</$radio><br>
+<$list filter='[prefix[$:/data/ResumeTitle/]get[resume_title]]'>
+<$radio tiddler='$:/settings/$(ThisResume)$/ResumeTitle' value=<<currentTiddler>>><$view field='title'/></$radio><br>
+</$list>
+\end
+
+This is the title that will appear at the top of your résumé. Just putting 'Résumé' isn't an uncommon choice. You can add a new title or pick an existing title from the list. If you select 'Use your name' than your name (entered with your contact information) will be used as the title.
+
+Add New Title:
+<$edit-text tiddler='$:/temp/ResumeTitle' field='resume_title' placeholder='Résumé Title' class='tc-edit-texteditor'/>
+
+<$vars ThisResume={{$:/settings/Global!!selected_resume}} ThisTitle={{$:/temp/ResumeTitle!!resume_title}}>
+<<thisResumeTitleInput>>
+</$vars>

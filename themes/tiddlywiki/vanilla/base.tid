@@ -1,7 +1,37 @@
 title: $:/themes/tiddlywiki/vanilla/base
 tags: [[$:/tags/Stylesheet]]
 
-\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline
+\define custom-background-datauri()
+<$set name="background" value={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}>
+<$list filter="[<background>is[image]]">
+`background: url(`
+<$list filter="[<background>!has[_canonical_uri]]">
+<$macrocall $name="datauri" title={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}}/>
+</$list>
+<$list filter="[<background>has[_canonical_uri]]">
+<$view tiddler={{$:/themes/tiddlywiki/vanilla/settings/backgroundimage}} field="_canonical_uri"/>
+</$list>
+`) center center;`
+`background-attachment: `{{$:/themes/tiddlywiki/vanilla/settings/backgroundimageattachment}}`;
+-webkit-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+-moz-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+-o-background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;
+background-size:` {{$:/themes/tiddlywiki/vanilla/settings/backgroundimagesize}}`;`
+</$list>
+</$set>
+\end
+
+\define if-fluid-fixed(text,hiddenSidebarText)
+<$reveal state="$:/themes/tiddlywiki/vanilla/options/sidebarlayout" type="match" text="fluid-fixed">
+$text$
+<$reveal state="$:/state/sidebar" type="nomatch" text="yes" default="yes">
+$hiddenSidebarText$
+</$reveal>
+</$reveal>
+\end
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
 /*
 ** Start with the normalize CSS reset, and then belay some of its effects
 */
@@ -16,6 +46,9 @@ tags: [[$:/tags/Stylesheet]]
 
 html button {
 	line-height: 1.2;
+	color: <<colour button-foreground>>;
+	background: <<colour button-background>>;
+	border-color: <<colour button-border>>;
 }
 
 /*
@@ -38,7 +71,9 @@ body.tc-body {
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/lineheight}};
 	color: <<colour foreground>>;
 	background-color: <<colour page-background>>;
+	fill: <<colour foreground>>;
 	word-wrap: break-word;
+	<<custom-background-datauri>>
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -59,6 +94,7 @@ pre {
 	border: 1px solid <<colour pre-border>>;
 	padding: 0 3px 2px;
 	border-radius: 3px;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 code {
@@ -68,6 +104,7 @@ code {
     white-space: pre-wrap;
 	padding: 0 3px 2px;
 	border-radius: 3px;
+	font-family: {{$:/themes/tiddlywiki/vanilla/settings/codefontfamily}};
 }
 
 blockquote {
@@ -81,8 +118,35 @@ dl dt {
 	margin-top: 6px;
 }
 
+textarea,
+input[type=text],
+input[type=search],
+input[type=""],
+input:not([type]) {
+	color: <<colour foreground>>;
+	background: <<colour background>>;
+}
+
 .tc-muted {
 	color: <<colour muted-foreground>>;
+}
+
+svg.tc-image-button {
+	padding: 0px 1px 1px 0px;
+}
+
+kbd {
+	display: inline-block;
+	padding: 3px 5px;
+	font-size: 0.8em;
+	line-height: 1.2;
+	color: <<colour foreground>>;
+	vertical-align: middle;
+	background-color: <<colour background>>;
+	border: solid 1px <<colour muted-foreground>>;
+	border-bottom-color: <<colour muted-foreground>>;
+	border-radius: 3px;
+	box-shadow: inset 0 -1px 0 <<colour muted-foreground>>;
 }
 
 /*
@@ -229,12 +293,7 @@ a.tc-tiddlylink-external:hover {
 .tc-dropzone.tc-dragover:before {
 	z-index: 10000;
 	display: block;
-	position: absolute;
-	position: -webkit-sticky;
-	position: -moz-sticky;
-	position: -o-sticky;
-	position: -ms-sticky;
-	position: sticky;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -273,6 +332,54 @@ button svg, button img {
 	border: none;
 }
 
+.tc-btn-boxed {
+	font-size: 0.6em;
+	padding: 0.2em;
+	margin: 1px;
+	background: none;
+	border: 1px solid <<colour tiddler-controls-foreground>>;
+	border-radius: 0.25em;
+}
+
+html body.tc-body .tc-btn-boxed svg {
+	font-size: 1.6666em;
+}
+
+.tc-btn-boxed:hover {
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+}
+
+html body.tc-body .tc-btn-boxed:hover svg {
+	fill: <<colour background>>;
+}
+
+.tc-btn-rounded {
+	font-size: 0.5em;
+	line-height: 2;
+	padding: 0em 0.3em 0.2em 0.4em;
+	margin: 1px;
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour muted-foreground>>;
+	color: <<colour background>>;
+	border-radius: 2em;
+}
+
+html body.tc-body .tc-btn-rounded svg {
+	font-size: 1.6666em;
+	fill: <<colour background>>;
+}
+
+.tc-btn-rounded:hover {
+	border: 1px solid <<colour muted-foreground>>;
+	background: <<colour background>>;
+	color: <<colour muted-foreground>>;
+}
+
+html body.tc-body .tc-btn-rounded:hover svg {
+	fill: <<colour muted-foreground>>;
+}
+
 .tc-btn-icon svg {
 	height: 1em;
 	width: 1em;
@@ -285,6 +392,7 @@ button svg, button img {
 }
 
 .tc-btn-big-green {
+	display: inline-block;
 	padding: 8px;
 	margin: 4px 8px 4px 8px;
 	background: <<colour download-background>>;
@@ -293,6 +401,15 @@ button svg, button img {
 	border: none;
 	font-size: 1.2em;
 	line-height: 1.4em;
+	text-decoration: none;
+}
+
+.tc-btn-big-green svg,
+.tc-btn-big-green img {
+	height: 2em;
+	width: 2em;
+	vertical-align: middle;
+	fill: <<colour download-foreground>>;
 }
 
 .tc-sidebar-lists input {
@@ -315,6 +432,66 @@ button svg, button img {
 button svg.tc-image-button, button .tc-image-button img {
 	height: 1em;
 	width: 1em;
+}
+
+.tc-unfold-banner {
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	width: 100%;
+    width: calc(100% + 2px);
+    margin-left: -43px;
+	text-align: center;
+	border-top: 2px solid <<colour tiddler-info-background>>;
+	margin-top: 4px;
+}
+
+.tc-unfold-banner:hover {
+	background: <<colour tiddler-info-background>>;
+	border-top: 2px solid <<colour tiddler-info-border>>;
+}
+
+.tc-unfold-banner svg, .tc-fold-banner svg {
+	height: 0.75em;
+	fill: <<colour tiddler-controls-foreground>>;
+}
+
+.tc-unfold-banner:hover svg, .tc-fold-banner:hover svg {
+	fill: <<colour tiddler-controls-foreground-hover>>;
+}
+
+.tc-fold-banner {
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	background: none;
+	border: none;
+	width: 23px;
+	text-align: center;
+	margin-left: -35px;
+    top: 6px;
+    bottom: 6px;
+}
+
+.tc-fold-banner:hover {
+	background: <<colour tiddler-info-background>>;
+}
+
+@media (max-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+	
+	.tc-unfold-banner {
+		position: static;
+	    width: calc(100% + 59px);
+    }
+
+	.tc-fold-banner {
+		width: 16px;
+		margin-left: -16px;
+	    font-size: 0.75em;
+	}
+
 }
 
 /*
@@ -440,10 +617,6 @@ button.tc-untagged-label {
 	vertical-align: middle;
 }
 
-.tc-search-results {
-	padding-top: 14px;
-}
-
 .tc-page-controls {
 	margin-top: 14px;
 	font-size: 1.5em;
@@ -461,13 +634,11 @@ button.tc-untagged-label {
 	width: 1em;
 }
 
-.tc-page-controls svg,
-.tc-search svg {
+.tc-page-controls svg {
 	fill: <<colour sidebar-controls-foreground>>;
 }
 
-.tc-page-controls button:hover svg, .tc-page-controls a:hover svg,
-.tc-search button:hover svg, .tc-search a:hover svg {
+.tc-page-controls button:hover svg, .tc-page-controls a:hover svg {
 	fill: <<colour sidebar-controls-foreground-hover>>;
 }
 
@@ -565,10 +736,13 @@ button.tc-untagged-label {
 */
 
 .tc-tiddler-frame {
+	position: relative;
 	margin-bottom: 28px;
 	background-color: <<colour tiddler-background>>;
 	border: 1px solid <<colour tiddler-border>>;
 }
+
+{{$:/themes/tiddlywiki/vanilla/sticky}}
 
 .tc-tiddler-info {
 	padding: 14px 42px 14px 42px;
@@ -640,6 +814,10 @@ button.tc-untagged-label {
 	margin: 0;
 }
 
+.tc-site-title {
+	color: <<colour site-title-foreground>>;
+}
+
 .tc-tiddler-title-icon {
 	vertical-align: middle;
 }
@@ -685,7 +863,8 @@ button.tc-untagged-label {
 	margin-left:5px;
 }
 
-.tc-tiddler-controls button svg, .tc-tiddler-controls button img {
+.tc-tiddler-controls button svg, .tc-tiddler-controls button img,
+.tc-search button svg, .tc-search a svg {
 	height: 0.75em;
 	fill: <<colour tiddler-controls-foreground>>;
 }
@@ -695,7 +874,8 @@ button.tc-untagged-label {
 	fill: <<colour tiddler-controls-foreground-selected>>;
 }
 
-.tc-tiddler-controls button.tc-btn-invisible:hover svg {
+.tc-tiddler-controls button.tc-btn-invisible:hover svg,
+.tc-search button:hover svg, .tc-search a:hover svg {
 	fill: <<colour tiddler-controls-foreground-hover>>;
 }
 
@@ -754,6 +934,10 @@ canvas.tc-edit-bitmapeditor  {
 	display: block;
 }
 
+.tc-tiddler-body {
+	clear: both;
+}
+
 .tc-tiddler-frame .tc-tiddler-body {
 	font-size: {{$:/themes/tiddlywiki/vanilla/metrics/bodyfontsize}};
 	line-height: {{$:/themes/tiddlywiki/vanilla/metrics/bodylineheight}};
@@ -761,6 +945,68 @@ canvas.tc-edit-bitmapeditor  {
 
 .tc-titlebar, .tc-tiddler-edit-title {
 	overflow: hidden; /* https://github.com/Jermolene/TiddlyWiki5/issues/282 */
+}
+
+html body.tc-body.tc-single-tiddler-window {
+	margin: 1em;
+	background: <<colour tiddler-background>>;
+}
+
+.tc-single-tiddler-window img,
+.tc-single-tiddler-window svg,
+.tc-single-tiddler-window canvas,
+.tc-single-tiddler-window embed,
+.tc-single-tiddler-window iframe {
+	max-width: 100%;
+}
+
+/*
+** Adjustments for fluid-fixed mode
+*/
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+<<if-fluid-fixed text:"""
+
+	.tc-story-river {
+		padding-right: 0;
+		position: relative;
+		width: auto;
+		left: 0;
+		margin-left: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+		margin-right: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+	.tc-tiddler-frame {
+		width: 100%;
+	}
+
+	.tc-sidebar-scrollable {
+		left: auto;
+		bottom: 0;
+		right: 0;
+		width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarwidth}};
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 42px);
+	}
+
+""" hiddenSidebarText:"""
+
+	.tc-story-river {
+		padding-right: 3em;
+		margin-right: 0;
+	}
+
+	body.tc-body .tc-storyview-zoomin-tiddler {
+		width: 100%;
+		width: calc(100% - 84px);
+	}
+
+""">>
+
 }
 
 /*
@@ -916,7 +1162,14 @@ canvas.tc-edit-bitmapeditor  {
 	position: absolute;
 	display: block;
 	width: 100%;
-	width: calc(100% - 84px);
+}
+
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tc-storyview-zoomin-tiddler {
+		width: calc(100% - 84px);
+	}
+
 }
 
 /*
@@ -938,6 +1191,8 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-drop-down {
+	position: absolute;
+	z-index: 1000;
 	min-width: 380px;
 	border: 1px solid <<colour dropdown-border>>;
 	background-color: <<colour dropdown-background>>;
@@ -946,6 +1201,10 @@ canvas.tc-edit-bitmapeditor  {
 	white-space: nowrap;
 	text-shadow: none;
 	line-height: 1.4;
+}
+
+.tc-search-drop-down {
+	margin-left: -12px;
 }
 
 .tc-drop-down .tc-drop-down {
@@ -985,6 +1244,19 @@ canvas.tc-edit-bitmapeditor  {
 	text-align: left;
 	color: <<colour foreground>>;
 	line-height: 1.4;
+}
+
+.tc-drop-down .tc-prompt {
+	padding: 0 14px;	
+}
+
+.tc-drop-down .tc-chooser {
+	border: none;
+}
+
+.tc-drop-down .tc-chooser .tc-swatches-horiz {
+	font-size: 0.4em;
+	padding-left: 1.2em;
 }
 
 .tc-drop-down .tc-file-input-wrapper {
@@ -1092,14 +1364,22 @@ canvas.tc-edit-bitmapeditor  {
 	.tc-modal-body {
 		overflow-y: auto;
 		max-height: 400px;
+		max-height: 60vh;
 	}
 }
 
 @media (min-width: 55em) {
 	.tc-modal {
-		position: relative;
+		position: fixed;
+		top: 2em;
+		left: 25%;
 		width: 50%;
-		margin: 30px auto;
+	}
+
+	.tc-modal-body {
+		overflow-y: auto;
+		max-height: 400px;
+		max-height: 60vh;
 	}
 }
 
@@ -1111,6 +1391,11 @@ canvas.tc-edit-bitmapeditor  {
 .tc-modal-header h3 {
 	margin: 0;
 	line-height: 30px;
+}
+
+.tc-modal-header img, .tc-modal-header svg {
+	width: 1em;
+	height: 1em;
 }
 
 .tc-modal-body {
@@ -1243,6 +1528,8 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-sidebar-lists .tc-tab-buttons button {
+	display: inline;
+	width: auto;
 	background-color: <<colour sidebar-tab-background>>;
 	color: <<colour sidebar-tab-foreground>>;
 	border-left: 1px solid <<colour sidebar-tab-border>>;
@@ -1255,6 +1542,8 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-more-sidebar .tc-tab-buttons button {
+	display: block;
+	width: 100%;
 	background-color: <<colour sidebar-tab-background>>;
 	border-top: none;
 	border-left: none;
@@ -1304,17 +1593,25 @@ canvas.tc-edit-bitmapeditor  {
 }
 
 .tc-alert-highlight {
-	color: <<colour alert-highlight>>;	
+	color: <<colour alert-highlight>>;
 }
 
-.tc-static-alert {
-	position: relative;
+@media (min-width: {{$:/themes/tiddlywiki/vanilla/metrics/sidebarbreakpoint}}) {
+
+	.tc-static-alert {
+		position: relative;
+	}
+
+	.tc-static-alert-inner {
+		position: absolute;
+		z-index: 100;
+	}
+
 }
 
 .tc-static-alert-inner {
 	padding: 0 2px 2px 42px;
 	color: <<colour static-alert-foreground>>;
-	position: absolute;
 }
 
 /*
@@ -1333,8 +1630,8 @@ canvas.tc-edit-bitmapeditor  {
 	display: block;
 	border: 1px solid <<colour muted-foreground>>;
 	background-colour: <<colour background>>;
-	margin: 1em 0 1em 0;
-	padding: 8px;
+	margin: 0.5em 0 0.5em 0;
+	padding: 4px;
 }
 
 .tc-plugin-info-disabled {
@@ -1354,25 +1651,61 @@ a.tc-tiddlylink.tc-plugin-info:hover {
 	fill: <<colour foreground>>;
 }
 
-a.tc-tiddlylink.tc-plugin-info:hover svg {
+a.tc-tiddlylink.tc-plugin-info:hover .tc-plugin-info > .tc-plugin-info-chunk > svg {
 	fill: <<colour foreground>>;
 }
 
 .tc-plugin-info-chunk {
 	display: inline-block;
-	vertical-align: middle;	
+	vertical-align: middle;
 }
 
-a.tc-plugin-info img, a.tc-plugin-info svg {
+.tc-plugin-info-chunk h1 {
+	font-size: 1em;
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info-chunk h2 {
+	font-size: 0.8em;
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info-chunk div {
+	font-size: 0.7em;
+	margin: 2px 0 2px 0;
+}
+
+.tc-plugin-info:hover > .tc-plugin-info-chunk > img, .tc-plugin-info:hover > .tc-plugin-info-chunk > svg {
+	width: 2em;
+	height: 2em;
+	fill: <<colour foreground>>;
+}
+
+.tc-plugin-info > .tc-plugin-info-chunk > img, .tc-plugin-info > .tc-plugin-info-chunk > svg {
 	width: 2em;
 	height: 2em;
 	fill: <<colour muted-foreground>>;
 }
 
+.tc-plugin-info.tc-small-icon > .tc-plugin-info-chunk > img, .tc-plugin-info.tc-small-icon > .tc-plugin-info-chunk > svg {
+	width: 1em;
+	height: 1em;
+}
+
 .tc-plugin-info-dropdown {
 	border: 1px solid <<colour muted-foreground>>;
+	margin-top: -8px;
+}
+
+.tc-plugin-info-dropdown-message {
+	background: <<colour message-background>>;
+	padding: 0.5em 1em 0.5em 1em;
+	font-weight: bold;
+	font-size: 0.8em;
+}
+
+.tc-plugin-info-dropdown-body {
 	padding: 1em 1em 1em 1em;
-	margin-top: -1em;
 }
 
 /*
@@ -1416,6 +1749,7 @@ a.tc-plugin-info img, a.tc-plugin-info svg {
 
 .tc-chooser-item {
 	border: 8px;
+	padding: 2px 4px;
 }
 
 .tc-chooser-item a.tc-tiddlylink {
@@ -1423,7 +1757,6 @@ a.tc-plugin-info img, a.tc-plugin-info svg {
 	text-decoration: none;
 	color: <<colour tiddler-link-foreground>>;
 	background-color: <<colour tiddler-link-background>>;
-	margin: 4px;
 }
 
 .tc-chooser-item a.tc-tiddlylink:hover {
@@ -1446,8 +1779,8 @@ a.tc-plugin-info img, a.tc-plugin-info svg {
 .tc-swatch {
 	width: 2em;
 	height: 2em;
-	margin: 4px;
-	border: 1px solid #000;
+	margin: 0.4em;
+	border: 1px solid #888;
 }
 
 /*
@@ -1607,6 +1940,94 @@ body.tc-dirty span.tc-dirty-indicator, body.tc-dirty span.tc-dirty-indicator svg
 	background: white;
 	cursor: pointer;
 	display: inline-block;
+}
+
+/*
+** Thumbnail macros
+*/
+
+.tc-thumbnail-wrapper {
+	position: relative;
+	display: inline-block;
+	margin: 6px;
+	vertical-align: top;
+}
+
+.tc-thumbnail-right-wrapper {
+	float:right;
+	margin: 0.5em 0 0.5em 0.5em;
+}
+
+.tc-thumbnail-image {
+    text-align: center;
+	overflow: hidden;
+	border-radius: 3px;
+}
+
+.tc-thumbnail-image svg,
+.tc-thumbnail-image img {
+	filter: alpha(opacity=1);
+	opacity: 1;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+}
+
+.tc-thumbnail-wrapper:hover .tc-thumbnail-image svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-image img {
+	filter: alpha(opacity=0.8);
+	opacity: 0.8;
+}
+
+.tc-thumbnail-background {
+	position: absolute;
+	border-radius: 3px;
+}
+
+.tc-thumbnail-icon svg,
+.tc-thumbnail-icon img {
+	width: 3em;
+	height: 3em;
+	<<filter "drop-shadow(2px 2px 4px rgba(0,0,0,0.3))">>
+}
+
+.tc-thumbnail-wrapper:hover .tc-thumbnail-icon svg,
+.tc-thumbnail-wrapper:hover .tc-thumbnail-icon img {
+	fill: #fff;
+	<<filter "drop-shadow(3px 3px 4px rgba(0,0,0,0.6))">>
+}
+
+.tc-thumbnail-icon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: -webkit-flex;
+	-webkit-align-items: center;
+	-webkit-justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.tc-thumbnail-caption {
+	position: absolute;
+	background-color: #777;
+	color: #fff;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	filter: alpha(opacity=0.9);
+	opacity: 0.9;
+	line-height: 1.4;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.tc-thumbnail-wrapper:hover .tc-thumbnail-caption {
+	filter: alpha(opacity=1);
+	opacity: 1;
 }
 
 /*

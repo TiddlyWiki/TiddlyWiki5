@@ -58,17 +58,24 @@ exports.setTextReference = function(textRef,value,currTiddlerTitle) {
 	this.setText(title,tr.field,tr.index,value);
 };
 
-exports.setText = function(title,field,index,value) {
+exports.setText = function(title,field,index,value,options) {
+	options = options || {};
+	var creationFields = options.suppressTimestamp ? {} : this.getCreationFields(),
+		modificationFields = options.suppressTimestamp ? {} : this.getModificationFields();
 	// Check if it is a reference to a tiddler field
 	if(index) {
 		var data = this.getTiddlerData(title,Object.create(null));
-		data[index] = value;
-		this.setTiddlerData(title,data,this.getModificationFields());
+		if(value !== undefined) {
+			data[index] = value;
+		} else {
+			delete data[index];
+		}
+		this.setTiddlerData(title,data,modificationFields);
 	} else {
 		var tiddler = this.getTiddler(title),
 			fields = {title: title};
 		fields[field || "text"] = value;
-		this.addTiddler(new $tw.Tiddler(tiddler,fields,this.getModificationFields()));
+		this.addTiddler(new $tw.Tiddler(creationFields,tiddler,fields,modificationFields));
 	}
 };
 
@@ -137,7 +144,7 @@ exports.enqueueTiddlerEvent = function(title,isDeleted) {
 		this.changeCount[title] = 1;
 	}
 	// Trigger events
-	this.eventListeners = this.eventListeners || [];
+	this.eventListeners = this.eventListeners || {};
 	if(!this.eventsTriggered) {
 		var self = this;
 		$tw.utils.nextTick(function() {
@@ -524,7 +531,7 @@ exports.sortByList = function(array,listTitle) {
 	if(!array || array.length === 0) {
 		return [];
 	} else {
-		var t, title, titles = [], unlisted = [];
+		var titles = [], t, title;
 		// First place any entries that are present in the list
 		for(t=0; t<list.length; t++) {
 			title = list[t];
@@ -532,17 +539,13 @@ exports.sortByList = function(array,listTitle) {
 				titles.push(title);
 			}
 		}
-		// Add remaining entries to unlisted
+		// Then place any remaining entries
 		for(t=0; t<array.length; t++) {
 			title = array[t];
 			if(list.indexOf(title) === -1) {
-				unlisted.push(title);
+				titles.push(title);
 			}
 		}
-		//sort unlisted
-		$tw.wiki.sortTiddlers(unlisted,"title",false,false);
-		//concat listed with unlisted
-		titles = titles.concat(unlisted);
 		// Finally obey the list-before and list-after fields of each tiddler in turn
 		var sortedTitles = titles.slice(0);
 		for(t=0; t<sortedTitles.length; t++) {
@@ -581,7 +584,7 @@ exports.sortByList = function(array,listTitle) {
 };
 
 exports.getSubTiddler = function(title,subTiddlerTitle) {
-	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerData(title);
+	var bundleInfo = this.getPluginInfo(title) || this.getTiddlerDataCached(title);
 	if(bundleInfo && bundleInfo.tiddlers) {
 		var subTiddler = bundleInfo.tiddlers[subTiddlerTitle];
 		if(subTiddler) {
@@ -617,6 +620,29 @@ Other types currently just return null.
 
 titleOrTiddler: string tiddler title or a tiddler object
 defaultData: default data to be returned if the tiddler is missing or doesn't contain data
+
+Note that the same value is returned for repeated calls for the same tiddler data. The value is frozen to prevent modification; otherwise modifications would be visible to all callers
+*/
+exports.getTiddlerDataCached = function(titleOrTiddler,defaultData) {
+	var self = this,
+		tiddler = titleOrTiddler;
+	if(!(tiddler instanceof $tw.Tiddler)) {
+		tiddler = this.getTiddler(tiddler);	
+	}
+	if(tiddler) {
+		return this.getCacheForTiddler(tiddler.fields.title,"data",function() {
+			// Return the frozen value
+			var value = self.getTiddlerData(tiddler.fields.title,defaultData);
+			$tw.utils.deepFreeze(value);
+			return value;
+		});
+	} else {
+		return defaultData;
+	}
+};
+
+/*
+Alternative, uncached version of getTiddlerDataCached(). The return value can be mutated freely and reused
 */
 exports.getTiddlerData = function(titleOrTiddler,defaultData) {
 	var tiddler = titleOrTiddler,
@@ -709,29 +735,29 @@ exports.clearGlobalCache = function() {
 
 // Return the named cache object for a tiddler. If the cache doesn't exist then the initializer function is invoked to create it
 exports.getCacheForTiddler = function(title,cacheName,initializer) {
-
-// Temporarily disable caching so that tweakParseTreeNode() works
-return initializer();
-
-//	this.caches = this.caches || Object.create(null);
-//	var caches = this.caches[title];
-//	if(caches && caches[cacheName]) {
-//		return caches[cacheName];
-//	} else {
-//		if(!caches) {
-//			caches = Object.create(null);
-//			this.caches[title] = caches;
-//		}
-//		caches[cacheName] = initializer();
-//		return caches[cacheName];
-//	}
+	this.caches = this.caches || Object.create(null);
+	var caches = this.caches[title];
+	if(caches && caches[cacheName]) {
+		return caches[cacheName];
+	} else {
+		if(!caches) {
+			caches = Object.create(null);
+			this.caches[title] = caches;
+		}
+		caches[cacheName] = initializer();
+		return caches[cacheName];
+	}
 };
 
-// Clear all caches associated with a particular tiddler
+// Clear all caches associated with a particular tiddler, or, if the title is null, clear all the caches for all the tiddlers
 exports.clearCache = function(title) {
-	this.caches = this.caches || Object.create(null);
-	if($tw.utils.hop(this.caches,title)) {
-		delete this.caches[title];
+	if(title) {
+		this.caches = this.caches || Object.create(null);
+		if($tw.utils.hop(this.caches,title)) {
+			delete this.caches[title];
+		}
+	} else {
+		this.caches = Object.create(null);
 	}
 };
 
@@ -757,7 +783,7 @@ Options include:
 	parseAsInline: if true, the text of the tiddler will be parsed as an inline run
 	_canonical_uri: optional string of the canonical URI of this content
 */
-exports.old_parseText = function(type,text,options) {
+exports.parseText = function(type,text,options) {
 	options = options || {};
 	// Select a parser
 	var Parser = $tw.Wiki.parsers[type];
@@ -781,51 +807,17 @@ exports.old_parseText = function(type,text,options) {
 /*
 Parse a tiddler according to its MIME type
 */
-exports.old_parseTiddler = function(title,options) {
+exports.parseTiddler = function(title,options) {
 	options = $tw.utils.extend({},options);
-	var cacheType = options.parseAsInline ? "newInlineParseTree" : "newBlockParseTree",
+	var cacheType = options.parseAsInline ? "inlineParseTree" : "blockParseTree",
 		tiddler = this.getTiddler(title),
 		self = this;
 	return tiddler ? this.getCacheForTiddler(title,cacheType,function() {
 			if(tiddler.hasField("_canonical_uri")) {
 				options._canonical_uri = tiddler.fields._canonical_uri;
 			}
-			return self.old_parseText(tiddler.fields.type,tiddler.fields.text,options);
+			return self.parseText(tiddler.fields.type,tiddler.fields.text,options);
 		}) : null;
-};
-
-var tweakMacroDefinition = function(nodeList) {
-	if(nodeList && nodeList[0] && nodeList[0].type === "macrodef") {
-		nodeList[0].type = "set";
-		nodeList[0].attributes = {
-			name: {type: "string", value: nodeList[0].name},
-			value: {type: "string", value: nodeList[0].text}
-		};
-		nodeList[0].children = nodeList.slice(1);
-		nodeList.splice(1,nodeList.length-1);
-		tweakMacroDefinition(nodeList[0].children);
-	}
-};
-
-var tweakParser = function(parser) {
-	// Move any macro definitions to contain the body tree
-	tweakMacroDefinition(parser.tree);
-};
-
-exports.parseText = function(type,text,options) {
-	var parser = this.old_parseText(type,text,options);
-	if(parser) {
-		tweakParser(parser);
-	}
-	return parser;
-};
-
-exports.parseTiddler = function(title,options) {
-	var parser = this.old_parseTiddler(title,options);
-	if(parser) {
-		tweakParser(parser);
-	}
-	return parser;
 };
 
 exports.parseTextReference = function(title,field,index,options) {
@@ -909,6 +901,7 @@ Make a widget tree for transclusion
 title: target tiddler title
 options: as for wiki.makeWidget() plus:
 options.field: optional field to transclude (defaults to "text")
+options.mode: transclusion mode "inline" or "block"
 options.children: optional array of children for the transclude widget
 */
 exports.makeTranscludeWidget = function(title,options) {
@@ -927,6 +920,9 @@ exports.makeTranscludeWidget = function(title,options) {
 	]};
 	if(options.field) {
 		parseTree.tree[0].children[0].attributes.field = {type: "string", value: options.field};
+	}
+	if(options.mode) {
+		parseTree.tree[0].children[0].attributes.mode = {type: "string", value: options.mode};
 	}
 	if(options.children) {
 		parseTree.tree[0].children[0].children = options.children;
@@ -1190,14 +1186,8 @@ fromPageRect: page coordinates of the origin of the navigation
 historyTitle: title of history tiddler (defaults to $:/HistoryList)
 */
 exports.addToHistory = function(title,fromPageRect,historyTitle) {
-	historyTitle = historyTitle || "$:/HistoryList";
-	var titles = $tw.utils.isArray(title) ? title : [title];
-	// Add a new record to the top of the history stack
-	var historyList = this.getTiddlerData(historyTitle,[]);
-	$tw.utils.each(titles,function(title) {
-		historyList.push({title: title, fromPageRect: fromPageRect});
-	});
-	this.setTiddlerData(historyTitle,historyList,{"current-tiddler": titles[titles.length-1]});
+	var story = new $tw.Story({wiki: this, historyTitle: historyTitle});
+	story.addToHistory(title,fromPageRect);
 };
 
 /*

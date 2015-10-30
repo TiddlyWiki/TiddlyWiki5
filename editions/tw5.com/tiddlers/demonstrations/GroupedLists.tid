@@ -1,7 +1,7 @@
 title: GroupedLists
 tags: ListWidget
 created: 20150106180000000
-modified: 20150106180000000
+modified: 20150221230117000
 
 The following sidebar tabs give examples of grouped lists created by nesting.
 
@@ -13,6 +13,6 @@ For the [[Types|$:/core/ui/MoreSideBar/Types]] tab, the outer list filter as sho
 
 !! Recent Tab
 
-The list in the [[Recent|$:/core/ui/SideBar/Recent]] tab is generated using the TimelineMacro. Here, the outer list filter selects each discrete day found in the `modified` field, while the inner list filter selects all the tiddlers dated the same day in the `modified` field.
+The list in the [[Recent|$:/core/ui/SideBar/Recent]] tab is generated using the <<.mlink timeline>> macro. Here, the outer list filter selects each discrete day found in the `modified` field, while the inner list filter selects all the tiddlers dated the same day in the `modified` field.
 
 <<tw-code-link "$:/core/macros/timeline">>

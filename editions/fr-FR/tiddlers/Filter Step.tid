@@ -1,0 +1,22 @@
+created: 20150124182127000
+fr-title: Étape d'un filtre
+modified: 20150621105911393
+tags: [[Filter Syntax]]
+title: Filter Step
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+[:"!"]
+[: [[operateur|"Filter Operators"]] [:":" suffixe] ]
+[[parametre|"Filter Parameter"]]
+"""/>
+
+Une <<.def étape>> correspond à une opération unique au sein d'un [[filtre|Filter Syntax]].
+
+En termes de développement, cela s'apparente à l'appel d'une fonction où l'[[entrée d'une étape|Filter Run]] est passée comme un paramètre implicite. La sortie d'une étape est une [[sélection|Title Selection]] qui contribue à former une [[séquence|Filter Run]] et donc aussi à l'[[expression du filtre|Filter Expression]] entière qui la contient.
+
+L'<<.def opérateur>> d'étape est issu d'une liste de [[motsclés prédéfinis|Filter Operators]], et qui peut être étendue par des plugins. Tout opérateur inconnu est traité comme s'il était le suffixe de l'opérateur <<.olink field>>. Si un opérateur d'étape est omis, sa valeur par défaut est `title`.
+
+Le <<.def suffixe>> est un texte additionnel, souvent le nom d'un [[field|TiddlerFields]], qui étend la signification de certains opérateurs.
+
+Plusieurs étapes requièrent une valeur de <<.def paramètre>> explicite, aussi connue sous le nom d'<<.def opérande>>, qui définit ce que l'étape doit faire.

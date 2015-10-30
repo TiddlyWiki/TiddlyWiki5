@@ -1,6 +1,6 @@
 created: 20140126125259638
-modified: 20140916131440645
-tags: Definitions Features Saving Editions
+modified: 20150427121710347
+tags: Definitions Features Saving Platforms
 title: TiddlyDesktop
 type: text/vnd.tiddlywiki
 
@@ -17,7 +17,8 @@ See the [[Introducing TiddlyDesktop Video]]
 
 ! Source
 
-TiddlyDesktop is based on the OpenSource project [[node-webkit]]. The source is on GitHub:
+TiddlyDesktop is based on the OpenSource project [[NW.js]]. The source is on GitHub:
 
 https://github.com/Jermolene/TiddlyDesktop/
 
+See [[TiddlyDesktop Releases]]

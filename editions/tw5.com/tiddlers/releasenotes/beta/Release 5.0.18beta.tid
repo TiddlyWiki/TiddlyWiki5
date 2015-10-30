@@ -1,6 +1,6 @@
 caption: 5.0.18-beta
 created: 20140917211055150
-modified: 20140917211055150
+modified: 20150221230143000
 tags: BetaReleaseNotes
 title: Release 5.0.18-beta
 type: text/vnd.tiddlywiki
@@ -16,9 +16,9 @@ The layout of files on tiddlywiki.com has been adjusted to make it more logical.
 
 !! Hackability Improvements
 
-* Added first iteration of a ListMacro (further improvements are planned)
+* Added first iteration of a <<.mlink list-links>> macro (further improvements are planned)
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/6d9bd4df8a1133c2ba246333edad14e6028d3ea4]] support for importing `.markdown` and `.md` files
-* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c4123ba3740f74f172468c4aa050451ebc5780d8]] TimelineMacro to support a subfilter
+* [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/c4123ba3740f74f172468c4aa050451ebc5780d8]] <<.mlink timeline>> macro to support a subfilter
 
 !! Bug Fixes
 

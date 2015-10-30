@@ -6,9 +6,11 @@ tags: $:/tags/Macro
 <div class="tc-tab-buttons $class$">
 <$list filter="$tabsList$" variable="currentTab">
 <$button set=<<qualify "$state$">> setTo=<<currentTab>> default="$default$" selectedClass="tc-tab-selected">
+<$set name="tv-wikilinks" value="no">
 <$transclude tiddler=<<currentTab>> field="caption">
 <$macrocall $name="currentTab" $type="text/plain" $output="text/plain"/>
 </$transclude>
+</$set>
 </$button>
 </$list>
 </div><div class="tc-tab-divider $class$"/><div class="tc-tab-content $class$">

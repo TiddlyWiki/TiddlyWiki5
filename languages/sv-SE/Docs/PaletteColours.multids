@@ -1,0 +1,105 @@
+title: $:/language/Docs/PaletteColours/
+
+alert-background: Varningsbakgrund
+alert-border: Varningsram
+alert-highlight: Varningsmarkering
+alert-muted-foreground: Dämpad varningsförgrund
+background: Generell bakgrund
+blockquote-bar: Blockcitatslinje
+button-background: Standardbakgrund för knapp
+button-border: Standardram för knapp
+button-foreground: Standardförgrund för knapp
+dirty-indicator: Indikator för osparade ändringar
+code-background: Kodbakgrund
+code-border: Kodram
+code-foreground: Kodförgrund
+download-background: Bakgrund för Nedladdningsknapp
+download-foreground: Förgrund för Nedladdningsknapp
+dragger-background: Dragger background
+dragger-foreground: Dragger foreground
+dropdown-background: Rullgardinsbakgrund
+dropdown-border: Rullgardinsram
+dropdown-tab-background-selected: Rullgardinsfliks bakgrund för valda flikar
+dropdown-tab-background: Rullgardinfliks bakgrund
+dropzone-background: Dropzone background
+external-link-background-hover: Bakgrund för extern länk, hover
+external-link-background-visited: Bakgrund för besökt extern länk
+external-link-background: Bakgrund för extern länk
+external-link-foreground-hover: Förgrund för extern länk, hover
+external-link-foreground-visited: Förgrund för besökt extern länk
+external-link-foreground: Förgrund för extern länk
+foreground: Generell förgrund
+message-background: Bakgrund för meddelanderuta
+message-border: Meddelanderutas ram
+message-foreground: Förgrund för meddelanderuta
+modal-backdrop: Modal bakgrund
+modal-background: Modal bakgrund
+modal-border: Modal ram
+modal-footer-background: Modal sidfotbakgrund
+modal-footer-border: Modal sidfotram
+modal-header-border: Modal sidhuvudram
+muted-foreground: Generell dämpad förgrund
+notification-background: Notifikationsbakrund
+notification-border: Notifikationram
+page-background: Sidbakgrund
+pre-background: Förformaterad kodbakgrund
+pre-border: Förformaterad kodram
+primary: Generell primär
+sidebar-button-foreground: Sidofältets knapp förgrund
+sidebar-controls-foreground-hover: Sidofältets kontroller förgrund, hover
+sidebar-controls-foreground: Sidofältets kontroller förgrund
+sidebar-foreground-shadow: Sidofältets förgrund skugga
+sidebar-foreground: Sidofältets förgrund
+sidebar-muted-foreground-hover: Sidofältets dämpade förgrund, hover
+sidebar-muted-foreground: Sidofältets dämpade förgrund
+sidebar-tab-background-selected: Sidofältets flikbakgrund för valda flikar
+sidebar-tab-background: Sidofältets flikbakgrund
+sidebar-tab-border-selected: Sidofältets flikram för valda flikar
+sidebar-tab-border: Sidofältets flikram
+sidebar-tab-divider: Sidofältets uppdelare
+sidebar-tab-foreground-selected: Sidofältets flikförgrund för valda flikar
+sidebar-tab-foreground: Sidofältets flikförgrund
+sidebar-tiddler-link-foreground-hover: Förgrund för tiddler-länk i sidofältet, hover
+sidebar-tiddler-link-foreground: Förgrund för tiddler-länk i sidofältet
+site-title-foreground: Förgrund för sidrubrik
+static-alert-foreground: Förgrund för Statisk varning
+tab-background-selected: Flikbakgrund för valda flikar
+tab-background: Flikbakgrund
+tab-border-selected: Flikram för valda flikar
+tab-border: Flikram
+tab-divider: Flikuppdelare
+tab-foreground-selected: Flikförgrund för valda flikar
+tab-foreground: Flikförgrund
+table-border: Tabellram
+table-footer-background: Bakgrund för tabellfot
+table-header-background: Förgrund för rubrikrad
+tag-background: Taggbakgrund
+tag-foreground: Taggförgrund
+tiddler-background: Tiddler-bakgrund
+tiddler-border: Tiddler-ram
+tiddler-controls-foreground-hover: Förgrund för Tiddler-kontroller, hover
+tiddler-controls-foreground-selected: Förgund för Tiddler-kontroller för valda kontroller
+tiddler-controls-foreground: Förgrund för Tiddler-kontroller
+tiddler-editor-background: Bakgrund för Tiddler-redigerare
+tiddler-editor-border-image: Rambild för Tiddler-redigerare
+tiddler-editor-border: Ram för Tiddler-redigerare
+tiddler-editor-fields-even: Bakgrund för jämna fält i Tiddler-redigerare
+tiddler-editor-fields-odd: Bakgrund för ojämna fält i Tiddler-redigerare
+tiddler-info-background: Tiddler infopanel bakgrund
+tiddler-info-border: Tiddler infopanel ram
+tiddler-info-tab-background: Tiddler infopanel flikbakgrund
+tiddler-link-background: Tiddler länkbakgrund
+tiddler-link-foreground: Tiddler länkbakgrund
+tiddler-subtitle-foreground: Tiddler underrubrik förgrund
+tiddler-title-foreground: Tiddler rubrik förgrund
+toolbar-new-button: Verktygsfält 'ny tiddler' knappen förgrund
+toolbar-options-button: Verktygsfält 'inställningar' knappen förgrund
+toolbar-save-button: Verktygsfält 'spara' knappen förgrund
+toolbar-info-button: Verktygsfält 'info' knappen förgrund
+toolbar-edit-button: Verktygsfält 'redigera' knappen förgrund
+toolbar-close-button: Verktygsfält 'stäng' knappen förgrund
+toolbar-delete-button: Verktygsfält 'ta bort' knappen förgrund
+toolbar-cancel-button: Verktygsfält 'avbryt' knappen förgrund
+toolbar-done-button: Verktygsfält 'klar' knappen förgrund
+untagged-background: Otaggad pillerbakgrund
+very-muted-foreground: Väldigt dämpad förgrund

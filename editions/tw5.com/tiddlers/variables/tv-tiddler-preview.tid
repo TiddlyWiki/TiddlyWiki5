@@ -1,0 +1,11 @@
+created: 20150620082727484
+modified: 20150620082727484
+title: tv-tiddler-preview Variable
+tags: Variables [[Core Variables]]
+type: text/vnd.tiddlywiki
+caption: tv-tiddler-preview
+
+The <<.def tv-tiddler-preview>> [[variable|Variables]] indicates whether content is being rendered in a tiddler preview panel.
+
+The value is ''yes'' within the preview panel, and undefined elsewhere.
+

@@ -1,6 +1,6 @@
 created: 20131202102427114
-fr-title: Mettre à niveau
-modified: 20141217193600632
+fr-title: Obtenir la dernière version
+modified: 20150620090746011
 tags: Features [[Working with TiddlyWiki]]
 title: Upgrading
 type: text/vnd.tiddlywiki
@@ -24,7 +24,7 @@ Cette procédure fonctionnera sur la plupart des navigateurs de bureau. Notez qu
 # Localisez votre fichier <<tw>> sur le système de fichiers (à l'aide de Windows Explorer, du Finder sur Mac OS X, ou de votre gestionnaire de fichiers sur Linux)
 # Visitez la page http://tiddlywiki.com/upgrade.html dans votre navigateur
 # Faites glisser votre ancien fichier <<tw>> HTML sur la fenêtre du navigateur
-#* Si le fichier est chiffré, un mot de passe vous sera demandé
+#* Si le fichier est crypté, un mot de passe vous sera demandé
 # Passez en revue la liste des tiddlers qui seront mis à niveau
 # Cliquez sur ''Upgrade''
 # Enregistrer les changements pour sauvegarder la nouvelle version
@@ -40,6 +40,6 @@ Vous pouvez également télécharger le fichier http://tiddlywiki.com/upgrade.ht
 Il est possible qu'une personnalisation appliquée dans une version précédente devienne inopérante une fois la mise à niveau effectuée. Deux techniques peuvent être employées pour vous aider à retrouver l'origine du problème :
 
 * Essayez de répéter la mise à niveau en décochant tous les tiddlers qui pourraient contenir des personnalisations de <<tw>>
-* Utilisez le SafeMode pour désactiver toutes les adaptations personnalisées des tiddlers //shadow//
+* Utilisez le [[ModeSansÉchec|SafeMode]] pour désactiver toutes les adaptations personnalisées des tiddlers //shadow//
 
 Vous pouvez voir quels tiddlers //shadow// ont été modifiés dans l'onglet ''Filtres'' de la [[recherche avancée|$:/AdvancedSearch]]. Choisir "Les tidders shadow modifiés" depuis le menu déroulant.

@@ -126,20 +126,29 @@ ListWidget.prototype.makeItemTemplate = function(title) {
 Selectively refreshes the widget if needed. Returns true if the widget or any of its children needed re-rendering
 */
 ListWidget.prototype.refresh = function(changedTiddlers) {
-	var changedAttributes = this.computeAttributes();
+	var changedAttributes = this.computeAttributes(),
+		result;
+	// Call the storyview
+	if(this.storyview && this.storyview.refreshStart) {
+		this.storyview.refreshStart(changedTiddlers,changedAttributes);
+	}
 	// Completely refresh if any of our attributes have changed
 	if(changedAttributes.filter || changedAttributes.template || changedAttributes.editTemplate || changedAttributes.emptyMessage || changedAttributes.storyview || changedAttributes.history) {
 		this.refreshSelf();
-		return true;
+		result = true;
 	} else {
 		// Handle any changes to the list
-		var hasChanged = this.handleListChanges(changedTiddlers);
+		result = this.handleListChanges(changedTiddlers);
 		// Handle any changes to the history stack
 		if(this.historyTitle && changedTiddlers[this.historyTitle]) {
 			this.handleHistoryChanges();
 		}
-		return hasChanged;
 	}
+	// Call the storyview
+	if(this.storyview && this.storyview.refreshEnd) {
+		this.storyview.refreshEnd(changedTiddlers,changedAttributes);
+	}
+	return result;
 };
 
 /*
@@ -147,7 +156,7 @@ Handle any changes to the history list
 */
 ListWidget.prototype.handleHistoryChanges = function() {
 	// Get the history data
-	var newHistory = this.wiki.getTiddlerData(this.historyTitle,[]);
+	var newHistory = this.wiki.getTiddlerDataCached(this.historyTitle,[]);
 	// Ignore any entries of the history that match the previous history
 	var entry = 0;
 	while(entry < newHistory.length && entry < this.history.length && newHistory[entry].title === this.history[entry].title) {

@@ -1,0 +1,17 @@
+created: 20150228140420000
+modified: 20150228140516000
+tags: [[tv-config-toolbar-text Variable]] [[Variable Examples]]
+title: tv-config-toolbar-text Variable (Examples)
+type: text/vnd.tiddlywiki
+
+<$macrocall $name=".example" n="1"
+eg="""<$set name="tv-config-toolbar-text" value="no">
+{{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+"""/>
+
+<$macrocall $name=".example" n="2"
+eg="""<$set name="tv-config-toolbar-text" value="yes">
+{{$:/core/ui/Buttons/new-tiddler}}
+</$set>
+"""/>

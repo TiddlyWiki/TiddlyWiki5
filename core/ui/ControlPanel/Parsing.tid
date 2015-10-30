@@ -1,0 +1,33 @@
+title: $:/core/ui/ControlPanel/Parsing
+tags: $:/tags/ControlPanel/Advanced
+caption: {{$:/language/ControlPanel/Parsing/Caption}}
+
+\define lingo-base() $:/language/ControlPanel/Parsing/
+
+\define parsing-inner(typeCap)
+<li>
+<$checkbox tiddler="""$:/config/WikiParserRules/$typeCap$/$(currentTiddler)$""" field="text" checked="enable" unchecked="disable" default="enable"> ''<$text text=<<currentTiddler>>/>'': </$checkbox>
+</li>
+\end
+
+\define parsing-outer(typeLower,typeCap)
+<ul>
+<$list filter="[wikiparserrules[$typeLower$]]">
+<<parsing-inner typeCap:"$typeCap$">>
+</$list>
+</ul>
+\end
+
+<<lingo Hint>>
+
+! <<lingo Pragma/Caption>>
+
+<<parsing-outer typeLower:"pragma" typeCap:"Pragma">>
+
+! <<lingo Inline/Caption>>
+
+<<parsing-outer typeLower:"inline" typeCap:"Inline">>
+
+! <<lingo Block/Caption>>
+
+<<parsing-outer typeLower:"block" typeCap:"Block">>

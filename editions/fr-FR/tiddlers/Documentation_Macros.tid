@@ -1,0 +1,166 @@
+created: 20150110182600000
+fr-title: Macros de documentation
+modified: 20150624093314089
+tags: [[Improving TiddlyWiki Documentation]]
+title: Documentation Macros
+type: text/vnd.tiddlywiki
+
+Les macros suivantes sont utilisées tout au long de la documentation de ~TiddlyWiki. Leurs noms commencent par un point pour les séparer de celles que les utilisateurs ont l'habitude d'expérimenter.
+
+!Général
+
+|!Macro |!Utilisé pour |!Exemple |
+|.def |l'occurrence d'un terme défini |<<.def widget>> |
+|.em |mise en valeur mineur dans une phrase |<<.em non>> |
+|.place |un emplacement à saisir par l'utilisateur |<<.place nomtag>> |
+|.strong |mise en valeur majeur dans un tiddler |<<.strong Important!>> |
+|.word |la mention d'un mot ou une phrase ordinaire |<<.word "Salut à tous">> |
+
+!Avis
+
+|!Macro |!Utilisé pour |!Exemple |
+|^.tip |^Astuces & infos |<<.tip "Allumez votre écran, ou<br>vous n'en verrez pas plus.">> |
+|^.warning |^Avertissement |<<.warning "Sauvegardez vos fichiers<br>avant la mise à jour.">> |
+
+!Blocs
+
+|!Macro |!Utilisé pour |
+|.preamble |Un préambule qui se démarque du reste du tiddler |
+
+!Tiddlers et champs
+
+|!Macro |!Utilisé pour |!Exemple |
+|.tid |un titre de tiddler |<<.tid Exemple>> |
+|.tag |un tag |<<.tag Exemple>> |
+|.field |un nom de champ |<<.field exemple>> |
+|.value |la valeur d'un champ |<<.value "exemple de valeur">> |
+|.op |un opérateur de filtre |<<.op backlinks>> |
+|.var |un nom de variable ou de macro |<<.var currentTiddler>> |
+|.wid |un nom de widget |<<.wid list>> |
+|.attr |un nom d'attribut |<<.attr filter>> |
+|.param |un nom de paramètre de macro |<<.param text>> |
+
+!Le carnaval des liens (cliquez pour essayer)
+
+|!Macro |!Utilisé pour |!Exemple |
+|.link |un lien avec du WikiText |<<.link "^^an^^ ~~exemple~~" Exemple >> |
+|.clink |un lien en code |<<.clink `<$list>` ListWidget>> |
+|.dlink |un lien vers l'occurrence d'un terme défini |<<.dlink widget Widgets>> |
+|.dlink-ex |un lien externe vers une occurrence définie |<<.dlink-ex Exemple "http://example.com/">> |
+|.flink |un lien vers un champ |<<.flink ListField>> |
+|.mlink |un lien vers une macro |<<.mlink qualify>> |
+|.mlink2 |un lien vers une macro, avec cible spécifiée |<<.mlink2 foo "Examples of Macros">> |
+|.olink |un lien vers un opérateur |<<.olink prefix>> |
+|.olink2 |un lien vers un opérateur, avec cible spécifiée |<<.olink2 foo prefix>> |
+|.vlink |un lien vers une variable |<<.vlink currentTiddler>> |
+|.vlink2 |un lien vers une variable, avec cible spécifiée |<<.vlink2 foo "Examples of Variables">> |
+|.wlink |un lien vers un widget |<<.wlink ButtonWidget>> |
+|.wlink2 |un lien vers un widget, avec texte spécifié |<<.wlink2 foo ButtonWidget>> |
+
+!Interface utilisateur
+
+|!Macro |!Utilisé pour |!Exemple |
+|.key |une touche du clavier |<<.key Escape>> |
+|.keycombo |une combinaison de touches |<<.keycombo Ctrl Enter>> |
+
+!Onglets
+
+|!Macro |!Utilisé pour |!Exemple |
+|.sidebar-tab |le nom d'onglet du menu latéral |<<.sidebar-tab More>> |
+|.more-tab |le nom d'une option de l'onglet Plus |<<.more-tab Shadows>> |
+|.info-tab |le nom d'un tiddler de l'onglet info |<<.info-tab Fields>> |
+|.controlpanel-tab |the name of a Control Panel tab |<<.controlpanel-tab Settings>> |
+|.advancedsearch-tab |the name of an Advanced Search tab |<<.advancedsearch-tab Filter>> |
+|.toc-tab |name of the tw5.com TOC tab |<<.toc-tab>> |
+|.example-tab |an example tab name |<<.example-tab "Notes">> |
+
+!!Paramètres de .sidebar-tab (menu latéral)
+
+|Open |<<.sidebar-tab Open>> |
+|Recent |<<.sidebar-tab Recent>> |
+|Tools |<<.sidebar-tab Tools>> |
+|More |<<.sidebar-tab More>> |
+
+!!Paramètres de .more-tab (onglet plus)
+
+|All |<<.more-tab All>> |
+|Recent |<<.more-tab Recent>> |
+|Tags |<<.more-tab Tags>> |
+|Missing |<<.more-tab Missing>> |
+|Drafts |<<.more-tab Drafts>> |
+|Orphans |<<.more-tab Orphans>> |
+|Types |<<.more-tab Types>> |
+|System |<<.more-tab System>> |
+|Shadows |<<.more-tab Shadows>> |
+
+!!Paramètres de .info-tab (panneau d'info)
+
+|Tools |<<.info-tab Tools>> |
+|References |<<.info-tab References>> |
+|Tagging |<<.info-tab Tagging>> |
+|List |<<.info-tab List>> |
+|Listed |<<.info-tab Listed>> |
+|Fields |<<.info-tab Fields>> |
+|Advanced |<<.info-tab Advanced>> |
+
+!!Paramètres de .controlpanel-tab (panneau de contrôle)
+
+|Info |<<.controlpanel-tab Info>> |
+|Appearance |<<.controlpanel-tab Appearance>> |
+|Settings |<<.controlpanel-tab Settings>> |
+|Saving |<<.controlpanel-tab Saving>> |
+|Plugins |<<.controlpanel-tab Plugins>> |
+
+!!Paramètres de .advancedsearch-tab (Recherche avancée)
+
+|Standard |<<.advancedsearch-tab Standard>> |
+|System |<<.advancedsearch-tab System>> |
+|Shadows |<<.advancedsearch-tab Shadows>> |
+|Filter |<<.advancedsearch-tab Filter>> |
+
+!Boutons
+
+|!Macro |!Utilisé pour |!Exemple |
+|.button |un bouton standard et son icone |<<.button "new-tiddler">> |
+
+!!Paramètres de .button
+
+!!!Barre d'outils de Tiddler
+
+|clone |<<.button "clone">> |
+|close |<<.button "close">> |
+|close-others |<<.button "close-others">> |
+|edit |<<.button "edit">> |
+|export-tiddler |<<.button "export-tiddler">> |
+|info |<<.button "info">> |
+|more-tiddler-actions |<<.button "more-tiddler-actions">> |
+|new-here |<<.button "new-here">> |
+|new-journal-here |<<.button "new-journal-here">> |
+|permalink |<<.button "permalink">> |
+
+!!!Barre d'outil du mode Edition
+
+|cancel |<<.button "cancel">> |
+|delete |<<.button "delete">> |
+|save |<<.button "save">> |
+
+!!!Page des outils
+
+|advanced-search |<<.button "advanced-search">> |
+|close-all |<<.button "close-all">> |
+|control-panel |<<.button "control-panel">> |
+|encryption |<<.button "encryption">> |
+|export-page |<<.button "export-page">> |
+|full-screen |<<.button "full-screen">> |
+|home |<<.button "home">> |
+|import |<<.button "import">> |
+|language |<<.button "language">> |
+|more-page-actions |<<.button "more-page-actions">> |
+|new-journal |<<.button "new-journal">> |
+|new-tiddler |<<.button "new-tiddler">> |
+|permaview |<<.button "permaview">> |
+|refresh |<<.button "refresh">> |
+|save-wiki |<<.button "save-wiki">> |
+|storyview |<<.button "storyview">> |
+|tag-manager |<<.button "tag-manager">> |
+|theme |<<.button "theme">> |

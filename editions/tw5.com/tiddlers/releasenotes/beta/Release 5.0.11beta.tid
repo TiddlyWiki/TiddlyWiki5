@@ -1,5 +1,5 @@
 created: 20140516150234142
-modified: 20150118182530000
+modified: 20150221225737000
 tags: BetaReleaseNotes
 title: Release 5.0.11-beta
 type: text/vnd.tiddlywiki
@@ -36,7 +36,7 @@ See [[Notes for upgrading to 5.0.11-beta]] for more details of these changes:
 
 !! Hackability Improvements
 
-* Improved vertical layouts of TabsMacro
+* Improved vertical layouts of <<.mlink tabs>> macro
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/93566cdc332226b77eaba8a70fa166f3b8fcfe1e]] "standard" tab to [[advanced search|$:/AdvancedSearch]]
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/e83759e86d2a9e05e4b85dae50925fe988f8e239]] new filter operators <<.olink before>> and <<.olink after>>
 * [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/570cad1c7f90e685961130918f09a7f9b2951f8c]] new <<.olink get>> operator

@@ -1,0 +1,12 @@
+title: $:/language/Help/rendertiddler
+description: Mostra un tiddler individual indicat per ContentTypecommand
+
+Mostra un tiddler individual indicat per ContentType, per omisió `text/html` i el desa al fitxer indicat:
+
+```
+--rendertiddler <títol> <nomdelfitxer> [<tipus>]
+```
+
+Per omisió, el nom del fitxer es resoldrà de forma relativa a la carpeta `output` de la carpeta d'edició. L'ordre `--output` es pot fer servir per dirigir la sortida a una altre carpeta.
+
+Les carpetes de la ruta del fitxer que no es trobin es crearan de forma automàtica.

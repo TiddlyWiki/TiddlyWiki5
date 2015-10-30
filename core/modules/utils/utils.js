@@ -171,6 +171,17 @@ exports.extendDeepCopy = function(object,extendedProperties) {
 	return result;
 };
 
+exports.deepFreeze = function deepFreeze(object) {
+	var property, key;
+	Object.freeze(object);
+	for(key in object) {
+		property = object[key];
+		if($tw.utils.hop(object,key) && (typeof property === "object") && !Object.isFrozen(property)) {
+			deepFreeze(property);
+		}
+	}
+};
+
 exports.slowInSlowOut = function(t) {
 	return (1 - ((Math.cos(t * Math.PI) + 1) / 2));
 };
@@ -363,10 +374,10 @@ exports.getRelativeDate = function(delta) {
 	};
 };
 
-// Convert & to "&amp;", < to "&lt;", > to "&gt;", " to "&quot;" ' to "&#39;"
+// Convert & to "&amp;", < to "&lt;", > to "&gt;", " to "&quot;"
 exports.htmlEncode = function(s) {
 	if(s) {
-		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;").replace(/\'/mg,"&#39;");
+		return s.toString().replace(/&/mg,"&amp;").replace(/</mg,"&lt;").replace(/>/mg,"&gt;").replace(/\"/mg,"&quot;");
 	} else {
 		return "";
 	}
@@ -605,5 +616,33 @@ exports.timer = function(base) {
 	}
 	return m;
 };
+
+/*
+Convert text and content type to a data URI
+*/
+exports.makeDataUri = function(text,type) {
+	type = type || "text/vnd.tiddlywiki";
+	var typeInfo = $tw.config.contentTypeInfo[type] || $tw.config.contentTypeInfo["text/plain"],
+		isBase64 = typeInfo.encoding === "base64",
+		parts = [];
+	parts.push("data:");
+	parts.push(type);
+	parts.push(isBase64 ? ";base64" : "");
+	parts.push(",");
+	parts.push(isBase64 ? text : encodeURIComponent(text));
+	return parts.join("");
+};
+
+/*
+Useful for finding out the fully escaped CSS selector equivalent to a given tag. For example:
+
+$tw.utils.tagToCssSelector("$:/tags/Stylesheet") --> tc-tagged-\%24\%3A\%2Ftags\%2FStylesheet
+*/
+exports.tagToCssSelector = function(tagName) {
+	return "tc-tagged-" + encodeURIComponent(tagName).replace(/[!"#$%&'()*+,\-./:;<=>?@[\\\]^`{\|}~,]/mg,function(c) {
+		return "\\" + c;
+	});
+};
+
 
 })();

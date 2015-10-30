@@ -1,6 +1,6 @@
 title: ViewWidget
 created: 201310241419
-modified: 20141022131222150
+modified: 20150220161335000
 tags: Widgets
 caption: view
 
@@ -13,7 +13,7 @@ The view widget displays the contents of a tiddler field in a specified format.
 The content of the `<$view>` widget is displayed if the field or property is missing or empty.
 
 |!Attribute |!Description |
-|tiddler |The title of the tiddler (defaults to the CurrentTiddler) |
+|tiddler |The title of the tiddler (defaults to the [[current tiddler|Current Tiddler]]) |
 |field |The name of the field to view (defaults to "text") |
 |index |The name of the index to view |
 |format |The format for displaying the field (see below) |

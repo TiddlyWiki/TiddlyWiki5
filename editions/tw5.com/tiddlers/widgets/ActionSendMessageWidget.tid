@@ -1,6 +1,6 @@
 caption: action-sendmessage
 created: 20141008134309742
-modified: 20141107132122081
+modified: 20150518210909583
 tags: Widgets ActionWidgets
 title: ActionSendMessageWidget
 type: text/vnd.tiddlywiki
@@ -16,7 +16,9 @@ The ''action-sendmessage'' widget is invisible. Any content within it is ignored
 |!Attribute |!Description |
 |$message |The message to send (eg, [[WidgetMessage: tm-new-tiddler]]) |
 |$param |Optional parameter string whose meaning is dependent on the message being sent |
-|//{any attributes not starting with $}// |Multiple additional named parameters that are attached to the message |
+|$name |Optional name of additional parameter |
+|$value |Value for optional parameter whose name is specified in `$name` |
+|//{any attributes not starting with $}// |Multiple additional, optional named parameters that are attached to the message |
 
 ! Examples
 

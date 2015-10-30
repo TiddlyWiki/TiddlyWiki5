@@ -1,0 +1,17 @@
+caption: Tiddlers Tag
+created: 20141228094500000
+fr-title: Tiddlers Tag
+modified: 20150622122213606
+tags: Concepts
+title: TagTiddlers
+type: text/vnd.tiddlywiki
+
+Un tiddler tag correspond à tout tiddler utilisé comme tag.
+
+Pour connaître quels tiddlers sont étiquetés par un tiddler tag sélectionné. Aller dans son [[panneau d'information|InfoPanel]] et choisir <<.info-tab Tagging>>, ou cliquez<<:>>
+
+# <<.button more-tiddler-actions>>, 
+# <<.button info>>
+# puis <<.info-tab Tagging>>
+
+Un tag peut être utilisé sans nécessairement correspondre à un tiddler tag.

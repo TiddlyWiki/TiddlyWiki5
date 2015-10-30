@@ -1,5 +1,5 @@
 created: 20140410103123179
-modified: 20150210090410000
+modified: 20150220161001000
 tags: [[Filter Operators]] [[Common Operators]] [[Negatable Operators]]
 title: is Operator
 type: text/vnd.tiddlywiki
@@ -14,7 +14,7 @@ op-neg-output: those input tiddlers that do <<.em not>> belong to category <<.pl
 The parameter <<.place C>> is one of the following fundamental categories:
 
 |!Category |!Matches any tiddler that... |
-|^`current` |is the [[current tiddler|CurrentTiddler]] |
+|^`current` |is the [[current tiddler|Current Tiddler]] |
 |^`image` |has an image ContentType |
 |^`missing` |does not exist (other than possibly as a shadow tiddler), regardless of whether there are any links it |
 |^`orphan` |has no [[hard links|Hard and Soft Links]] to it |

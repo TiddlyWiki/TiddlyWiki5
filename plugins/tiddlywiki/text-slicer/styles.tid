@@ -1,0 +1,81 @@
+title: $:/plugins/tiddlywiki/text-slicer/styles
+tags: $:/tags/Stylesheet
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tc-document-preview-column {
+	position: fixed;
+	overflow-y: auto;
+	overflow-x: visible;
+	-webkit-overflow-scrolling: touch;
+    background-color: <<colour page-background>>;
+	right: auto;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: {{$:/themes/tiddlywiki/vanilla/metrics/storyleft}};
+	font-size: 0.9em;
+}
+
+.tc-sliced-document-title {
+	font-size: 1.7em;
+}
+
+.tc-document-preview-column .tc-sliced-document-header {
+	margin-left: 24px;
+}
+
+.tc-document-preview-column .tc-sliced-document {
+	margin-bottom: 3px;
+	border-bottom: 2px solid <<colour muted-foreground>>;
+}
+
+.tc-view-template-document-tiddler-heading {
+	border-top: 2px solid <<colour muted-foreground>>;
+}
+
+.tc-view-template-document-tiddler {
+	font-size: 0.9em;
+}
+
+.tc-document-tiddler {
+	font-family: Georgia, Times, 'Times New Roman', serif;
+}
+
+.tc-text-slicer-rename input {
+	display: block;
+	width: 100%;
+}
+
+.tc-document-tiddler-link {
+	cursor: pointer;
+}
+
+.tc-document-tiddler-link:hover {
+    background: <<color background>>;
+}
+
+.tc-document-tiddler-toolbar {
+	position: absolute;
+	width: 24px;
+	text-align: center;
+}
+
+.tc-document-preview-column .tc-sliced-document-body {
+	margin-left: 24px;
+}
+
+.tc-document-preview-column .tc-document-tiddler-toolbar {
+	margin-left: -24px;
+}
+
+.tc-table-of-contents .tc-slice-toolbar button {
+	color: inherit;
+	background-color: inherit;
+}
+
+.tc-tiddler-frame .tc-document-tiddler-toolbar {
+    left: 0;
+    width: 42px;
+}
+

@@ -173,18 +173,20 @@ EditCodeMirrorWidget.prototype.refresh = function(changedTiddlers) {
 		this.refreshSelf();
 		return true;
 	} else if(changedTiddlers[this.editTitle]) {
-		this.updateEditor(this.getEditInfo().value);
+		var editInfo = this.getEditInfo();
+		this.updateEditor(editInfo.value,editInfo.type);
 		return true;
 	}
 	return false;
 };
 
 /*
-Update the editor with new text. This method is separate from updateEditorDomNode()
+Update the editor with new text and type. This method is separate from updateEditorDomNode()
 so that subclasses can override updateEditor() and still use updateEditorDomNode()
 */
-EditCodeMirrorWidget.prototype.updateEditor = function(text) {
+EditCodeMirrorWidget.prototype.updateEditor = function(text,type) {
 	this.updateEditorDomNode(text);
+	this.codeMirrorInstance.setOption("mode",type);
 };
 
 /*

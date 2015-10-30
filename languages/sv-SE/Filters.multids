@@ -1,0 +1,14 @@
+title: $:/language/Filters/
+
+AllTiddlers: Alla tiddlers förutom system-tiddlers
+RecentSystemTiddlers: Nyligen ändrade tiddlers, även system-tiddlers
+RecentTiddlers: Nyligen ändrade tiddlers
+AllTags: Alla taggar förutom system-taggar
+Missing: Saknade tiddlers
+Drafts: Utkast-tiddlers
+Orphans: Orphan tiddlers
+SystemTiddlers: System-tiddlers
+ShadowTiddlers: Skugg-tiddlers
+OverriddenShadowTiddlers: Åsidosatt skugg-tiddlers
+SystemTags: System-taggar
+TypedTiddlers: Icke wiki-text-tiddlers

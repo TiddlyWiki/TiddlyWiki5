@@ -1,0 +1,23 @@
+title: $:/language/Help/init
+description: Initializuj nový wiki adresár
+
+Inicializuj prázdny [[WikiFolder|WikiFolders]] s kópiou špecifikovaného vydania.
+
+```
+--init <edition> [<edition> ...]
+```
+
+Napríklad:
+
+```
+tiddlywiki ./MyWikiFolder --init empty
+```
+
+Poznámka:
+
+* ak je to potrebné, vytvorí sa wiki adresár
+* "Vydanie" je štandardne ''empty''
+* ini príkaz zlyhá, ak wiki adresár nie je prázdny
+* init príkaz odstráni akékoľvek `includeWikis` definície definované v `tiddlywiki.info` súbore vydania
+* Ak sú špecifikované viaceré vydania, neskôr inicializované vydania prepíšu akékoľvek súbory zdieľané s predošlými vydaniami (čiže, ostatný `tiddlywiki.info` súbor sa prekopíruje z posledného vydania
+* `--editions` vráti zoznam dostupných vydaní

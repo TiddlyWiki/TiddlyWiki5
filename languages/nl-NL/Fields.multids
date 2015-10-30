@@ -22,7 +22,7 @@ list-before: Indien ingevuld, de titel van de tiddler waarvoor deze tiddler toeg
 modified: De datum en tijd waarop de tiddler voor het laatst werd gewijzigd
 modifier: De persoon die voor het laatst de tiddler gewijzigd heeft
 name: De leesbare naam gekoppeld aan een plugin tiddler
-plugin-priority: Een numerieke waard die de prioriteit van een plugintiddler aangeeft
+plugin-priority: Een numerieke waarde die de prioriteit van een plugintiddler aangeeft
 plugin-type: Het type van een plugin in een plugin tiddler
 released: Datum van een TiddlyWiki versie
 revision: De versie van de tiddler op de server

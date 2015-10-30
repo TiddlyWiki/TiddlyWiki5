@@ -1,0 +1,13 @@
+caption: DOM
+created: 20150228133106000
+fr-title: DOM, Modèle d'Objet Document
+modified: 20150623073527614
+tags: Definitions
+title: Document Object Model
+type: text/vnd.tiddlywiki
+
+Le <<.dlink-ex DOM "http://fr.wikipedia.org/wiki/Document_Object_Model">> d'une page web est une représentation arborescente de son contenu, maintenue en interne pas le navigateur web pendant que l'utilisateur interagit avec ce contenu. Chaque intersection de l'arbre est appelée <<.def nœud>> (node).
+
+Quand ~TiddlyWiki s'exécute dans un navigateur web, ses [[widgets|Widgets]] interprètent les nœuds du DOM pour les afficher.
+
+Quand ~TiddlyWiki est exécuté sur [[Node.js|TiddlyWiki on Node.js]], il utilise un faux DOM pour simuler le comportement du navigateur.

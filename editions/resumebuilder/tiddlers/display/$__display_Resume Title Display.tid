@@ -1,0 +1,8 @@
+created: 20150720164501834
+modified: 20150720164522750
+section: Résumé Title
+tags: [[Section Display]]
+template: $:/template/ResumeTitleTemplate
+title: $:/display/Resume Title Display
+
+<$transclude tiddler=GenericSectionDisplayTemplate mode=block/>

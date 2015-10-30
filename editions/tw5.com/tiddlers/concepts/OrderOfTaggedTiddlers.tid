@@ -1,7 +1,8 @@
 created: 20150124125646000
-modified: 20150127154154000
-tags: Concepts
+modified: 20150917193522589
+tags: Tagging
 title: Order of Tagged Tiddlers
+type: text/vnd.tiddlywiki
 
 When ~TiddlyWiki generates a list of the tiddlers that have a particular tag (e.g. the dropdown list of a tag pill), it orders the tiddlers using the following rules:
 

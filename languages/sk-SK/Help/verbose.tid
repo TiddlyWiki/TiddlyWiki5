@@ -1,0 +1,8 @@
+title: $:/language/Help/verbose
+description: Spúšťa režim detailného výpisu
+
+Spustí detailný výpis, užitočný pre debugovanie 
+
+```
+--verbose
+```

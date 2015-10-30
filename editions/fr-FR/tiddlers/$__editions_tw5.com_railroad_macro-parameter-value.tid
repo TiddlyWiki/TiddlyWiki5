@@ -1,0 +1,11 @@
+created: 20150220191009000
+modified: 20150602092431500
+title: $:/editions/tw5.com/railroad/macro-parameter-value
+type: text/vnd.tiddlywiki.railroad
+
+( '"""' [:{/'tout sauf """'/}] '"""'
+| '"'   [:{/'tout sauf "'/}]   '"'
+| "'"   [:{/"tout sauf '"/}]   "'"
+| "[["  [:{/"tout sauf ]"/}]   "]]"
+| {/"""tout sauf ' " ou espacevierge"""/}
+)

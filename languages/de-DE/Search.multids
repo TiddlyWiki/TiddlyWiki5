@@ -5,6 +5,9 @@ Filter/Caption: Filter
 Filter/Hint: Suche mit [["filter expression"|http://tiddlywiki.com/static/Filters.html]].
 Filter/Matches: //<small><<resultCount>> Treffer</small>//
 Matches: //<small><<resultCount>> Treffer</small>//
+Matches/All: Alle Treffer:
+Matches/Title: Titel Treffer:
+Search: Suchen
 Shadows/Caption: Schatten
 Shadows/Hint: Suche in Schatten-Tiddlern.
 Shadows/Matches: //<small><<resultCount>> Treffer</small>//

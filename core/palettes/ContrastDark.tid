@@ -1,0 +1,109 @@
+title: $:/palettes/ContrastLight
+name: Contrast (Light)
+description: High contrast and unambiguous (light version)
+tags: $:/tags/Palette
+type: application/x-tiddler-dictionary
+
+alert-background: #f00
+alert-border: <<colour background>>
+alert-highlight: <<colour foreground>>
+alert-muted-foreground: #800
+background: #fff
+blockquote-bar: <<colour muted-foreground>>
+button-background: <<colour background>>
+button-foreground: <<colour foreground>>
+button-border: <<colour foreground>>
+code-background: <<colour background>>
+code-border: <<colour foreground>>
+code-foreground: <<colour foreground>>
+dirty-indicator: #f00
+download-background: #080
+download-foreground: <<colour background>>
+dragger-background: <<colour foreground>>
+dragger-foreground: <<colour background>>
+dropdown-background: <<colour background>>
+dropdown-border: <<colour muted-foreground>>
+dropdown-tab-background-selected: <<colour foreground>>
+dropdown-tab-background: <<colour foreground>>
+dropzone-background: rgba(0,200,0,0.7)
+external-link-background-hover: inherit
+external-link-background-visited: inherit
+external-link-background: inherit
+external-link-foreground-hover: inherit
+external-link-foreground-visited: #00a
+external-link-foreground: #00e
+foreground: #000
+message-background: <<colour foreground>>
+message-border: <<colour background>>
+message-foreground: <<colour background>>
+modal-backdrop: <<colour foreground>>
+modal-background: <<colour background>>
+modal-border: <<colour foreground>>
+modal-footer-background: <<colour background>>
+modal-footer-border: <<colour foreground>>
+modal-header-border: <<colour foreground>>
+muted-foreground: <<colour foreground>>
+notification-background: <<colour background>>
+notification-border: <<colour foreground>>
+page-background: <<colour background>>
+pre-background: <<colour background>>
+pre-border: <<colour foreground>>
+primary: #00f
+sidebar-button-foreground: <<colour foreground>>
+sidebar-controls-foreground-hover: <<colour background>>
+sidebar-controls-foreground: <<colour foreground>>
+sidebar-foreground-shadow: rgba(0,0,0, 0)
+sidebar-foreground: <<colour foreground>>
+sidebar-muted-foreground-hover: #444444
+sidebar-muted-foreground: <<colour foreground>>
+sidebar-tab-background-selected: <<colour background>>
+sidebar-tab-background: <<colour tab-background>>
+sidebar-tab-border-selected: <<colour tab-border-selected>>
+sidebar-tab-border: <<colour tab-border>>
+sidebar-tab-divider: <<colour tab-divider>>
+sidebar-tab-foreground-selected: <<colour foreground>>
+sidebar-tab-foreground: <<colour tab-foreground>>
+sidebar-tiddler-link-foreground-hover: <<colour foreground>>
+sidebar-tiddler-link-foreground: <<colour primary>>
+site-title-foreground: <<colour tiddler-title-foreground>>
+static-alert-foreground: #aaaaaa
+tab-background-selected: <<colour background>>
+tab-background: <<colour foreground>>
+tab-border-selected: <<colour foreground>>
+tab-border: <<colour foreground>>
+tab-divider: <<colour foreground>>
+tab-foreground-selected: <<colour foreground>>
+tab-foreground: <<colour background>>
+table-border: #dddddd
+table-footer-background: #a8a8a8
+table-header-background: #f0f0f0
+tag-background: #000
+tag-foreground: #fff
+tiddler-background: <<colour background>>
+tiddler-border: <<colour foreground>>
+tiddler-controls-foreground-hover: #ddd
+tiddler-controls-foreground-selected: #fdd
+tiddler-controls-foreground: <<colour foreground>>
+tiddler-editor-background: <<colour background>>
+tiddler-editor-border-image: <<colour foreground>>
+tiddler-editor-border: #cccccc
+tiddler-editor-fields-even: <<colour background>>
+tiddler-editor-fields-odd: <<colour background>>
+tiddler-info-background: <<colour background>>
+tiddler-info-border: <<colour foreground>>
+tiddler-info-tab-background: <<colour background>>
+tiddler-link-background: <<colour background>>
+tiddler-link-foreground: <<colour primary>>
+tiddler-subtitle-foreground: <<colour foreground>>
+tiddler-title-foreground: <<colour foreground>>
+toolbar-new-button: 
+toolbar-options-button: 
+toolbar-save-button: 
+toolbar-info-button: 
+toolbar-edit-button: 
+toolbar-close-button: 
+toolbar-delete-button: 
+toolbar-cancel-button: 
+toolbar-done-button: 
+untagged-background: <<colour foreground>>
+very-muted-foreground: #888888

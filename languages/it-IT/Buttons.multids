@@ -1,0 +1,68 @@
+title: $:/language/Buttons/
+
+AdvancedSearch/Caption: ricerca avanzata
+AdvancedSearch/Hint: Ricerca avanzata
+Cancel/Caption: annulla
+Cancel/Hint: Annulla i cambiamenti a questo tiddler
+Clone/Caption: clona
+Clone/Hint: clona questo tiddler
+Close/Caption: chiudi
+Close/Hint: Chiudi questo tiddler
+CloseAll/Caption: chiudi tutti
+CloseAll/Hint: Chiudi tutti i tiddler
+CloseOthers/Caption: chiudi altri
+CloseOthers/Hint: Chiudi gli altri tiddler
+ControlPanel/Caption: pannello di controllo
+ControlPanel/Hint: Apri il pannello di controllo
+Delete/Caption: elimina
+Delete/Hint: Elimina questo tiddler
+Edit/Caption: modifica
+Edit/Hint: Modifica questo tiddler
+Encryption/Caption: cifratura
+Encryption/ClearPassword/Caption: rimuovi password
+Encryption/ClearPassword/Hint: Rimuovi la password e salva questo wiki senza cifrarlo
+Encryption/Hint: Imposta o rimuovi la password per salvare questo wiki
+Encryption/SetPassword/Caption: imposta password
+Encryption/SetPassword/Hint: Imposta una password per salvare questo wiki con cifratura
+ExportPage/Caption: esporta tutti
+ExportPage/Hint: Esporta tutti i tiddler
+ExportTiddler/Caption: esporta tiddler
+ExportTiddler/Hint: Esporta tiddler
+ExportTiddlers/Caption: esporta tiddler
+ExportTiddlers/Hint: Esporta tiddler
+FullScreen/Caption: schermo intero
+FullScreen/Hint: Entra o esci dalla modalit&agrave; a schermo intero
+Help/Caption: aiuto
+Help/Hint: Mostra il pannello dell'aiuto
+HideSideBar/Caption: nascondi barra laterale
+HideSideBar/Hint: Nascondi la barra laterale
+Home/Hint: Apri i tiddler predefiniti
+Import/Caption: importa
+Import/Hint: Importa dei file
+Info/Hint: Mostra informazioni su questo tiddler
+Language/Caption: lingua
+Language/Hint: Scegli la lingua dell'interfaccia
+More/Caption: altro
+More/Hint: Altre azioni
+NewHere/Caption: nuovo da qui
+NewHere/Hint: Crea un nuovo tiddler taggato con questo
+NewJournal/Caption: diario
+NewJournal/Hint: Crea un nuovo tiddler diario
+NewJournalHere/Caption: diario da qui
+NewJournalHere/Hint: Crea un nuovo tiddler diario taggato con questo
+NewTiddler/Caption: nuovo tiddler
+NewTiddler/Hint: Crea un nuovo tiddler
+Permalink/Hint: Link diretto a questo tiddler
+Permaview/Hint: Link diretto a tutti i tiddler in questa storia
+Refresh/Caption: ricarica
+Refresh/Hint: Ricarica completamente il wiki
+Save/Hint: Conferma i cambiamenti a questo tiddler
+SaveWiki/Caption: salva modifiche
+SaveWiki/Hint: Salva le modifiche
+ShowSideBar/Caption: mostra barra laterale
+ShowSideBar/Hint: Mostra barra laterale
+StoryView/Hint: Scegli la visualizzazione "storia"
+TagManager/Caption: gestore dei tag
+TagManager/Hint: Apri il gestore dei tag
+Theme/Caption: tema
+Theme/Hint: Scegli il tema grafico

@@ -1,0 +1,8 @@
+caption: URI
+created: 20150228113450000
+modified: 20150623065502688
+tags: Definitions
+title: URI
+type: text/vnd.tiddlywiki
+
+Une <<.dlink-ex "URI" "http://fr.wikipedia.org/wiki/Uniform_resource_identifier">> (souvent aussi connue comme <<.def URL>>) est une chaine de caractère utilisée pour spécifier la localisation d'une ressource telle qu'une page web.

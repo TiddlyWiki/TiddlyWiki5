@@ -1,0 +1,50 @@
+title: VarsWidget
+created: 20150426115958020
+modified: 20150426115958020
+tags: Widgets
+caption: vars
+
+! Introduction
+
+The ''vars'' widget allows multiple variables to be set in one operation. In some situations it can result in simpler code than using the more flexible SetWidget.
+
+! Content and Attributes
+
+The content of the `<$vars>` widget is the scope for the value assigned to the variable.
+
+|!Attribute |!Description |
+|//{attributes not starting with $}// |Each attribute name specifies a variable name. The attribute value is assigned to the variable |
+
+! Examples
+
+Consider a case where you need to set multiple variables.
+
+Using the `<$vars>` widget, this situation may be handled in the following way:
+
+```
+\define helloworld() Hello world!
+
+<$vars greeting="Hi" me={{!!title}} sentence=<<helloworld>>>
+  <<greeting>>! I am <<me>> and I say: <<sentence>>
+</$vars>
+```
+
+In contrast, here is the same example using the `<$set>` widget:
+
+```
+<$set name="greeting" value="Hi" />
+<$set name="me" value={{!!title}} />
+<$set name="sentence" value=<<helloworld>> />
+  <<greeting>>! I am <<me>> and I say: <<sentence>>
+</$set>
+</$set>
+</$set>
+```
+
+! Remarks
+
+It should be noted that this widget differs from the set widget in the following ways:
+
+* A fallback (also known as "emptyValue") cannot be specified
+* Filters cannot be used to produce a conditional variable assignement
+* Variable names must be literal strings

@@ -1,0 +1,11 @@
+title: $:/language/Help/output
+description: Definuje základný výstupný adresár pre každý následný príkaz.
+
+Definuje základný výstupný adresár pre každý následný príkaz. Pred-definovaným adresárom je podadresár `output`  v adresári vydania.
+
+```
+--output <pathname>
+```
+
+Ak je udaná cesta k súboru relatívna, tak sa resolvuje voči aktuálnemu adresáru,  s ktorým sa pracuje. Napríklad `--output .` argument nastaví výstup na aktuálne používaný adresár.
+

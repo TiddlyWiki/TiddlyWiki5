@@ -10,8 +10,8 @@
 	"build": {
 		"library": [
 			"--makelibrary","$:/UpgradeLibrary",
-   			"--savelibrarytiddlers","$:/UpgradeLibrary","library/recipes/default/tiddlers/","$:/UpgradeLibrary/List",
-   			"--savetiddler","$:/UpgradeLibrary/List","library/recipes/default/tiddlers.json",
-			"--rendertiddler","$:/plugins/tiddlywiki/pluginlibrary/library.template.html","library/index.html","text/plain"]
+   			"--savelibrarytiddlers","$:/UpgradeLibrary","[prefix[$:/]] -[[$:/plugins/tiddlywiki/upgrade]] -[[$:/plugins/tiddlywiki/translators]] -[[$:/plugins/tiddlywiki/pluginlibrary]] -[[$:/plugins/tiddlywiki/jasmine]]","recipes/library/tiddlers/","$:/UpgradeLibrary/List",
+   			"--savetiddler","$:/UpgradeLibrary/List","recipes/library/tiddlers.json",
+			"--rendertiddler","$:/plugins/tiddlywiki/pluginlibrary/library.template.html","index.html","text/plain"]
 	}
 }

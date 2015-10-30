@@ -1,0 +1,9 @@
+{
+	"title": "$:/themes/tiddlywiki/tight",
+	"name": "Tight",
+	"author": "JeremyRuston",
+	"core-version": ">=5.0.0",
+	"plugin-type": "theme",
+	"description": "Tightly packed theme",
+	"dependents": ["$:/themes/tiddlywiki/vanilla"]
+}

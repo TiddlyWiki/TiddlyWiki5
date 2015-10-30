@@ -1,0 +1,28 @@
+created: 20160515060000000
+fr-title: Paramètre d'un filtre
+modified: 20150621111345608
+tags: [[Filter Syntax]]
+title: Filter Parameter
+type: text/vnd.tiddlywiki
+
+<$railroad text="""
+( "[" [:{/"tout sauf ]"/}] "]"
+  |
+  "{" [:{/"tout sauf }"/}] "}"
+  |
+  "<" [:{/"tout sauf >"/}] ">"
+)
+"""/>
+
+Le paramètre de l'[[opérateur de filtre|Filter Operators]] peut être<<:>>
+
+;<<.def dur>>
+: `[comme ceci]`
+: Le paramètre est le texte exact tel qu'il apparait entre les crochets.
+;<<.def souple>>
+: <<.def indirect>>
+:: `{comme ceci}`
+:: Le paramètre est le texte mentionné par la [[Référence Textuelle|TextReference]] dont le nom apparaît entre les accolades, c'est à dire un [[champ|TiddlerFields]] d'un tiddler spécifique, ou la valeur d'une propriété d'un [[tiddler de données|DataTiddlers]].
+: <<.def variable>>
+:: `<comme ceci>`
+:: Le paramètre est la valeur actuelle de la [[variable|Variables]] dont le nom apparaît entre les chevrons. Les paramètres Macro ne sont <<.em pas>> supportés.

@@ -3,10 +3,8 @@
 	"plugins": [
 		"tiddlywiki/googleanalytics",
 		"tiddlywiki/nodewebkitsaver",
-		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/railroad",
-		"tiddlywiki/help"
+		"tiddlywiki/railroad"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -15,6 +13,7 @@
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
 		"tiddlywiki/centralised",
+		"tiddlywiki/tight",
 		"tiddlywiki/readonly"
 	],
 	"languages": [
@@ -22,8 +21,10 @@
 	"build": {
 		"index": [
 			"--savetiddlers","[tag[external-image]]","images",
+			"--rendertiddlers","[tag[external-text]]","$:/core/templates/tid-tiddler","text","text/plain",".tid",
 			"--setfield","[tag[external-image]]","_canonical_uri","$:/core/templates/canonical-uri-external-image","text/plain",
-			"--setfield","[tag[external-image]]","text","","text/plain",
+			"--setfield","[tag[external-text]]","_canonical_uri","$:/core/templates/canonical-uri-external-text","text/plain",
+			"--setfield","[tag[external-image]] [tag[external-text]]","text","","text/plain",
 			"--rendertiddler","$:/core/save/all","index.html","text/plain"],
 		"encrypted": [
 			"--password", "password",

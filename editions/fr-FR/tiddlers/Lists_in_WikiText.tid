@@ -1,0 +1,94 @@
+caption: Listes
+created: 20131205160257619
+fr-title: Les listes de WikiText
+modified: 20150601074427119
+tags: WikiText
+title: Lists in WikiText
+type: text/vnd.tiddlywiki
+
+! Listes non-ordonnées
+
+Vous pouvez créer des listes non ordonnées en préfixant du caractère `*`<<:>>
+
+<<wikitext-example src:"* Premier élément d'une liste
+* Deuxième éléments d'un liste
+** Un sous-élément
+* Troisième élément d'une liste
+">>
+
+! Listes ordonnées
+
+Les listes ordonnées utilisent `#` au lieu de  `*`:
+
+<<wikitext-example src:"# Premier élément
+# Deuxième élément
+# Troisième élément
+">>
+
+Vous pouvez combiner des listes non-ordonnées et des listes ordonnées&nbsp;:
+
+<<wikitext-example src:"* À faire ce jour
+*# Manger
+* Chercher qlq chose à faire
+*# Ceci
+*# Cela
+*## Et le reste
+">>
+
+L'exemple inverse, avec les nombres en premier niveau&nbsp;:
+
+<<wikitext-example src:"# À faire ce jour
+#* Manger
+# Chercher qlq chose à faire
+#* Ceci
+#* Cela
+#** Et le reste
+">>
+
+! Les classes CSS
+
+Vous pouvez affecter une classe CSS à un des membres de la liste en procédant ainsi&nbsp;:
+
+<<wikitext-example src:"* Liste Un
+*.MyClass Liste Deux
+* Liste Trois
+">>
+
+! Combiner listes et blocs
+
+Noter que [[les blocs avec WikiText]] peuvent être mixés aux listes. Par exemple<<:>>
+
+<<wikitext-example src:"* Liste Une 
+** Liste deux
+**> Un bloc
+**> Un autre bloc
+* Liste trois
+">>
+
+! Les paragraphes dans les listes
+
+Les entrées d'une liste sont séparées par des sauts de ligne, rendant impossible d'y inclure des sauts de lignes, sans passer à l'entrée suivante. Il y a deux façons de passer outre.
+
+En un, vous pouvez transclure dans le paragraphe le contenu d'un autre tiddler. Par exemple&nbsp;:
+
+```
+* Première entrée
+* <$transclude tiddler="MonTiddler" mode="block"/>
+* Troisième
+```
+
+En deux, vous pouvez utiliser le tag HTML "div" pour inclure un contenu multiligne. Par exemple&nbsp;:
+
+```
+# Étape 1
+# Étape 2
+# Étape 3<div>
+
+Ici, le premier parmi plusieurs paragraphes. Noter que le double saut de ligne précédant ce paragraphe est pris en compte.
+
+Et ici, le deuxième parmi plusieurs paragraphes.
+</div>
+# Étape 4
+# Étape 5
+# Étape 6
+```

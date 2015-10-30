@@ -1,5 +1,5 @@
 created: 20141019101221547
-modified: 20141020124855415
+modified: 20150603145904203
 title: TiddlyWikiFiles
 type: text/vnd.tiddlywiki
 
@@ -7,7 +7,7 @@ type: text/vnd.tiddlywiki
 
 Les fichiers <<tw>> HTML contiennent une collection de tiddlers encodés au format `<DIV>`.
 
-Pour qu'un fichier HTML soit importable comme un fichier TW non chiffré, il faut au minimum qu'il contienne un `<div id="storeArea">` juste avant les DIVs des tiddlers, eux-mêmes suivis immédiatement par un `</div>`. Par exemple<<dp>>
+Pour qu'un fichier HTML soit importable comme un fichier TW non crypté, il faut au minimum qu'il contienne un `<div id="storeArea">` juste avant les DIVs des tiddlers, eux-mêmes suivis immédiatement par un `</div>`. Par exemple<<dp>>
 
 ```
 <div id="storeArea">

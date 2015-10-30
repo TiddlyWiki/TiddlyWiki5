@@ -33,10 +33,20 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 	if(!rgbTarget) {
 		return colourA;
 	}
-	// Colour brightness formula derived from http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
 	var rgbColourA = $tw.utils.parseCSSColor(colourA),
-		rgbColourB = $tw.utils.parseCSSColor(colourB),
-		brightnessTarget = rgbTarget[0] * 0.299 + rgbTarget[1] * 0.587 + rgbTarget[2] * 0.114,
+		rgbColourB = $tw.utils.parseCSSColor(colourB);
+	if(rgbColourA && !rgbColourB) {
+		return rgbColourA;
+	}
+	if(rgbColourB && !rgbColourA) {
+		return rgbColourB;
+	}
+	if(!rgbColourA && !rgbColourB) {
+		// If neither colour is readable, return a crude inverse of the target
+		return [255 - rgbTarget[0],255 - rgbTarget[1],255 - rgbTarget[2],rgbTarget[3]];
+	}
+	// Colour brightness formula derived from http://www.w3.org/WAI/ER/WD-AERT/#color-contrast
+	var brightnessTarget = rgbTarget[0] * 0.299 + rgbTarget[1] * 0.587 + rgbTarget[2] * 0.114,
 		brightnessA = rgbColourA[0] * 0.299 + rgbColourA[1] * 0.587 + rgbColourA[2] * 0.114,
 		brightnessB = rgbColourB[0] * 0.299 + rgbColourB[1] * 0.587 + rgbColourB[2] * 0.114;
 	return Math.abs(brightnessTarget - brightnessA) > Math.abs(brightnessTarget - brightnessB) ? colourA : colourB;

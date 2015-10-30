@@ -1,0 +1,25 @@
+created: 20150719184941848
+modified: 20150720163457716
+tags: 
+title: Help
+
+Clicking on [[Résumé Wizard]] at the top is a good place to start.
+
+To save your work, either click on the {{$:/core/ui/Buttons/save-wiki}} button to the right or the Save button at the top of the screen. The button to the right will turn red when there are unsaved changes.
+
+How it works:
+
+There are buttons along the top that bring you to the different things you can do with the résumé builder. To the right you should see a preview of the completed résumé.
+
+*Résumé Wizard - A wizard that guides you through a sequence of steps to create a résumé.
+*Edit Existing Items - An interface to edit already entered information
+*Layout Options - Options for changing the order of the sections, which sections are visible, and the templates used for each section.
+*Résumé Options - Available options for the résumé output. The `Layout Options` tab has options for which sections are included in the résumé as well as their order and the templates used, the other tabs are for configuring each section individually.
+*Preview - Shows a preview of the result, this is also shown on the right side of the screen by default.
+*Help - Displays this information.
+*Print - Open the résumé by itself in a new window for printing.
+*Save - saves your changes
+
+Other documentation:
+
+[[Making a new section]]

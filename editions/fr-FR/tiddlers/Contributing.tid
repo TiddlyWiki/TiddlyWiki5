@@ -1,0 +1,41 @@
+created: 20131101111400000
+fr-title: Contribuer
+modified: 20150601172431960
+tags: Community
+title: Contributing
+type: text/vnd.tiddlywiki
+
+Nous accueillons les contributions au code et à la documentation de TiddlyWiki de plusieurs manières<<dp>>
+
+* [[SignalerBugs|ReportingBugs]]
+* Aider à [[améliorer notre documentation|Improving TiddlyWiki Documentation]]
+* Contribuer au code via [[GitHub|https://github.com/Jermolene/TiddlyWiki5]]
+** Voir http://tiddlywiki.com/dev pour plus de détails
+
+Il existe encore plusieurs façons d'[[aider TiddlyWiki|HelpingTiddlyWiki]].
+
+! Accord de Licence des Contributeurs
+
+À l'instar d'autres projets OpenSource, TiddlyWiki5 a besoin que ses contributeurs signent un accord de licence pour leurs contributions. C'est un accord contractuel qui permet aux contributeurs de confirmer qu'ils sont propriétaires des droits d'auteur de leurs contributions, et qu'ils acceptent de les licencier à l'Association UnaMesa (l'entité juridique qui possède TiddlyWiki au nom de la communauté).
+
+* Pour les licences individuelles<<dp>> [[licenses/CLA-individuelle|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]]
+* Pour les licences d'organisation<<dp>> [[licenses/CLA-organisation|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
+
+! Comment signer la CLA
+
+Proposez une contribution (PullRequest) sur GitHub en ajoutant à `cla-individual.md` ou `cla-entity.md`, votre nom suivi de la date au format (YYYY/MM/DD).
+
+''pas à pas''
+
+# Cliquez [[licenses/CLA-individuelle|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-individual.md]] ou [[licenses/CLA-organisation|https://github.com/Jermolene/TiddlyWiki5/tree/master/licenses/cla-entity.md]]
+# Dans le document `cla-individual.md` ou le `cla-entity.md` cliquez sur l'icone dans le coin en haut à droite, ce qui créera une copie modifiable du projet, un ''fork'', dans votre espace de propositions et vous permettra de modifier ses différents documents
+# Modifiez la licence en ajoutant votre nom en bas comme dans l'exemple, eg<<:>> `Jeremy Ruston, @Jermolene, 2011/11/22`
+# Validez par un PullRequest
+
+---
+
+//Les documents de CLA utilisés pour ce projets ont été créés en utilisant les [[modèles du projet Harmony|http://www.harmonyagreements.org]]. "HA-CLA-I-LIST Version 1.0" pour la "CLA-individuelle" et "HA-CLA-E-LIST Version 1.0" pour la "CLA-organisation".//
+
+''Remarque''
+
+* Au cas où vous ne soyez pas propriétaire des droits d'auteurs de toutes vos propositions<<pe>><br><br>Veuillez le mentionner clairement, ou nous vous considérerons comme le détenteur légal des droits d'auteur de la contribution<<pe>> Aussi, veuillez fournir les liens et informations additionnelles décrivant sous quelle licence le reste du code est diffusé.

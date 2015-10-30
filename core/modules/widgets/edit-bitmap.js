@@ -299,7 +299,7 @@ EditBitmapWidget.prototype.saveChanges = function() {
 			type = dataURL.substring(posColon+1,posSemiColon),
 			text = dataURL.substring(posComma+1);
 		var update = {type: type, text: text};
-		this.wiki.addTiddler(new $tw.Tiddler(tiddler,update));
+		this.wiki.addTiddler(new $tw.Tiddler(this.wiki.getModificationFields(),tiddler,update,this.wiki.getCreationFields()));
 	}
 };
 

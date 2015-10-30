@@ -1,0 +1,27 @@
+title: Welcome to tw5.com-docs
+
+This edition of TiddlyWiki is a tool to help people make and submit improvements to the main documentation on http://tiddlywiki.com/
+
+In this wiki, all the tiddlers from http://tiddlywiki.com (to be precise, all the tiddlers [[from here|https://github.com/Jermolene/TiddlyWiki5/tree/master/editions/tw5.com/tiddlers]]) are packed into a plugin:
+
+[[$:/plugins/tiddlywiki/tw5.com-docs]]
+
+This means that the original documentation tiddlers become //shadow tiddlers//: if you edit them, you can just delete your modified copy to revert to the shadow value.
+
+Note that currently some functionality doesn't work properly because of macros and filters written expecting all the content tiddlers to be non-shadow tiddlers. For example, see [[Community]].
+
+''Default tiddlers from tiddlywiki.com'':
+
+<$macrocall $name="list-links" filter={{$:/tw5.com/DefaultTiddlers}}/>
+
+<$list filter="[[$:/plugins/tiddlywiki/tw5.com-docs]plugintiddlers[]is[tiddler]] -[[$:/DefaultTiddlers]] +[limit[1]]" emptyMessage="""
+
+Additional information will appear here if you modify any of the documentation tiddlers.
+
+""">
+
+''Tiddlers that you have modified'':
+
+<<list-links "[[$:/plugins/tiddlywiki/tw5.com-docs]plugintiddlers[]is[tiddler]] -[[$:/DefaultTiddlers]]">>
+
+</$list>

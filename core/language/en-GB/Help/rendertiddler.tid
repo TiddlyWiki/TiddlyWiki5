@@ -1,10 +1,10 @@
 title: $:/language/Help/rendertiddler
 description: Render an individual tiddler as a specified ContentType
 
-Render an individual tiddler as a specified ContentType, defaults to `text/html` and save it to the specified filename:
+Render an individual tiddler as a specified ContentType, defaulting to `text/html` and save it to the specified filename. Optionally a template can be specified, in which case the template tiddler is rendered with the "currentTiddler" variable set to the tiddler that is being rendered (the first parameter value).
 
 ```
---rendertiddler <title> <filename> [<type>]
+--rendertiddler <title> <filename> [<type>] [<template>]
 ```
 
 By default, the filename is resolved relative to the `output` subdirectory of the edition directory. The `--output` command can be used to direct output to a different directory.

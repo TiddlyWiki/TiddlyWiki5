@@ -214,3 +214,45 @@ Neil Griffin, @ng110, 2015/01/20
 Alex Hough, @alexhough 2015/01/26
 
 Florent V., @Spangenhelm 2015/02/03
+
+Francisco A., @le-pako 2015/03/14
+
+Andreas Abeck, @andreasabeck 2015/03/18
+
+Hong-Yi Dai, @reflectionalist 2015/04/04
+
+YangWeiQin, @heroboy 2015/04/19
+
+vouko, @vouko 2015/05/02
+
+Christian Ehmke, @cehmke 2015/05/10
+
+kixam, @kixam, 2015/05/27
+
+Sylvain Naudin, @silvyn, 2015/06/09
+
+Lolo le 13 @lolole13 2015/06/04
+
+Steven McDonald, @StevenMcD 2015/05/21
+
+Richard Smith, @richardwsmith 2015/05/22
+
+Marco Rimoldi, @marcor, 2015/06/26
+
+Slobodan Vujnovic, @slovuj, 2015/06/30
+
+Anthon Nilsson, @superdos, 2015/08/06
+
+Myeongjin, @araname, 2015/08/08
+
+Hegart Dmishiv, @hegart-dmishiv, 2015/09/15
+
+William Jackson, @matabele 2015/09/26
+
+Karl Knechtel, @zahlman, 2015/10/03
+
+Tony Grosinger @tgrosinger 2015/10/03
+
+Antaeus Feldspar @afeldspar 2015/10/20
+
+Soeren Enevoldsen, @senevoldsen90, 2015/10/09

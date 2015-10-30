@@ -1,0 +1,9 @@
+title: $:/plugins/tiddlywiki/powered-by-tiddlywiki/styles
+tags: $:/tags/Stylesheet
+
+.tc-powered-by-tiddlywiki-banner {
+	position: fixed;
+	right: 1em;
+	bottom: 0;
+    z-index: 2000;
+}

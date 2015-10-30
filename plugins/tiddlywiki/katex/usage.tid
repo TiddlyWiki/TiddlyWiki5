@@ -1,0 +1,15 @@
+title: $:/plugins/tiddlywiki/katex/usage
+
+The usual way to include ~LaTeX is to use `$$`. For example:
+
+```
+$$\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+```
+
+The underlying widget can also be used directly, giving more flexibility:
+
+```
+<$latex text="\displaystyle f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi"></$latex>
+```
+
+The KaTeX widget is provided under the name `<$latex>` and is also available under the alias `<$katex>`. It's better to use the generic `<$latex>` name unless you are running multiple ~LaTeX plugins and wish to specifically target KaTeX.

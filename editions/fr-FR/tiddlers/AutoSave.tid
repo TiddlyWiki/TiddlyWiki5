@@ -1,0 +1,12 @@
+created: 20140206211715540
+fr-title: Sauvegarde automatique
+modified: 20150601094452510
+tags: Features
+title: AutoSave
+type: text/vnd.tiddlywiki
+
+S'il y a un ~ModuleSauvegarde qui l'accepte, <<tw>> déclenche automatiquement celle du document courant au clic sur {{$:/core/images/done-button}} ''valide'' ou sur {{$:/core/images/delete-button}} ''supprime'' lors de la saisie d'un tiddler.
+
+Vous apercevrez une notification jaune en haut à droite de la fenêtre confirmant qu'une sauvegarde automatique à eu lieu.
+
+La sauvegarde automatique peut être activée ou non via l'onglet ''Paramétrage'' du [[panneau de contrôle |$:/ControlPanel]]. En arrière plan, elle est contrôlé par le tiddler de paramétrage [[$:/config/AutoSave]], qui doit avoir la valeur ''yes'' pour activer la sauvegarde automatique.

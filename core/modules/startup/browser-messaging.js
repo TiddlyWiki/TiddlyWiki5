@@ -82,7 +82,7 @@ exports.startup = function() {
 				} else {
 					iframeInfo.domNode.contentWindow.postMessage({
 						verb: "GET",
-						url: "recipes/default/tiddlers.json",
+						url: "recipes/library/tiddlers.json",
 						cookies: {
 							type: "save-info",
 							infoTitlePrefix: paramObject.infoTitlePrefix || "$:/temp/RemoteAssetInfo/",
@@ -104,7 +104,7 @@ exports.startup = function() {
 				} else {
 					iframeInfo.domNode.contentWindow.postMessage({
 						verb: "GET",
-						url: "recipes/default/tiddlers/" + encodeURIComponent(title) + ".json",
+						url: "recipes/library/tiddlers/" + encodeURIComponent(title) + ".json",
 						cookies: {
 							type: "save-tiddler",
 							url: url

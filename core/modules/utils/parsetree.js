@@ -56,4 +56,24 @@ exports.findParseTreeNode = function(nodeArray,search) {
 	return undefined;
 };
 
+/*
+Helper to get the text of a parse tree node or array of nodes
+*/
+exports.getParseTreeText = function getParseTreeText(tree) {
+	var output = [];
+	if($tw.utils.isArray(tree)) {
+		$tw.utils.each(tree,function(node) {
+			output.push(getParseTreeText(node));
+		});
+	} else {
+		if(tree.type === "text") {
+			output.push(tree.text);
+		}
+		if(tree.children) {
+			return getParseTreeText(tree.children);
+		}
+	}
+	return output.join("");
+};
+
 })();

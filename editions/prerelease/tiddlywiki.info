@@ -5,7 +5,9 @@
 		"tiddlywiki/nodewebkitsaver",
 		"tiddlywiki/github-fork-ribbon",
 		"tiddlywiki/browser-sniff",
-		"tiddlywiki/help"
+		"tiddlywiki/help",
+		"tiddlywiki/stacked-view",
+		"tiddlywiki/powered-by-tiddlywiki"
 	],
 	"themes": [
 		"tiddlywiki/vanilla",
@@ -13,6 +15,7 @@
 		"tiddlywiki/nighttime",
 		"tiddlywiki/starlight",
 		"tiddlywiki/seamless",
+		"tiddlywiki/tight",
 		"tiddlywiki/centralised",
 		"tiddlywiki/readonly"
 	],
