@@ -35,9 +35,7 @@ exports.trim = function(str) {
 Return the number of keys in an object
 */
 exports.count = function(object) {
-	var s = 0;
-	$tw.utils.each(object,function() {s++;});
-	return s;
+	return Object.keys(object || {}).length;
 };
 
 /*
