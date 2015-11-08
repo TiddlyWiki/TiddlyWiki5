@@ -122,10 +122,10 @@ Extended filter operators to manipulate the current list.
   Appends the items listed in the operand array to the tail of the current list 
   */
   exports.append = function (source, operator, options) {
-    var results = prepare_results(source),
-        count = parseInt(operator.suffix) || 1,
-        append = $tw.utils.parseStringArray(operator.operand);
-    if (append === "") {
+    var append = $tw.utils.parseStringArray(operator.operand),
+        results = prepare_results(source),
+        count = parseInt(operator.suffix) || append.length;
+    if (append.length === 0) {
       return results;
     }
     if (operator.prefix) {
@@ -139,10 +139,10 @@ Extended filter operators to manipulate the current list.
   Prepends the items listed in the operand array to the head of the current list 
   */
   exports.prepend = function (source, operator, options) {
-      var results = prepare_results(source),
-          count = parseInt(operator.suffix) || 1,
-          prepend = $tw.utils.parseStringArray(operator.operand);
-    if (prepend === "") {
+      var prepend = $tw.utils.parseStringArray(operator.operand),
+          results = prepare_results(source),
+          count = parseInt(operator.suffix) || prepend.length;  
+    if (prepend.length === 0) {
       return results;
     }
     if (operator.prefix) {
@@ -156,9 +156,10 @@ Extended filter operators to manipulate the current list.
   Returns all items from the current list except the items listed in the operand array
   */
   exports.remove = function (source, operator, options) {
-    var results = prepare_results(source),
-        count = parseInt(operator.suffix) || 1,
-        p, len, index, array = $tw.utils.parseStringArray(operator.operand);
+    var array = $tw.utils.parseStringArray(operator.operand),
+        results = prepare_results(source),
+        count = parseInt(operator.suffix) || array.length,
+        p, len, index;
     len = array.length - 1;
     for (p = 0; p < count; ++p) {
       if (operator.prefix) {
