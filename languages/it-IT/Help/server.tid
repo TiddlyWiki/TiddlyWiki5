@@ -1,5 +1,5 @@
 title: $:/language/Help/server
-description: Provides an HTTP server interface to TiddlyWiki
+description: Fornisce un'interfaccia server HTTP a TiddlyWiki
 
 Il server incluso in TiddlyWiki5 &egrave; molto semplice. Sebbene compatibile con TiddlyWeb, il server non supporta molte delle funzionalit&agrave; necessarie per un utilizzo affidabile su internet.
 

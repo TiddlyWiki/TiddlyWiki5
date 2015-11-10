@@ -65,6 +65,12 @@ Date/Short/Month/6: Giu
 Date/Short/Month/7: Lug
 Date/Short/Month/8: Ago
 Date/Short/Month/9: Set
+Date/Period/am: am
+Date/Period/pm: pm
+Date/Short/Month/11: Nov
+Date/Short/Month/2: Feb
+Date/Short/Month/3: Mar
+Date/Short/Month/4: Apr
 RelativeDate/Future/Days: tra <<period>> giorni
 RelativeDate/Future/Hours: tra <<period>> ore
 RelativeDate/Future/Minutes: tra <<period>> minuti
