@@ -54,6 +54,22 @@ Command.prototype.execute = function() {
 	collectPublisherPlugins(path.resolve($tw.boot.corePath,$tw.config.pluginsPath));
 	collectPublisherPlugins(path.resolve($tw.boot.corePath,$tw.config.themesPath));
 	collectPlugins(path.resolve($tw.boot.corePath,$tw.config.languagesPath));
+	// Adding local wiki paths
+	try {
+		collectPlugins(path.resolve($tw.boot.wikiPath,$tw.config.wikiPluginsSubDir));
+	} catch (ex) {
+		console.log("No Local Plugins Folder");
+	}
+	try {
+		collectPlugins(path.resolve($tw.boot.wikiPath,$tw.config.wikiThemesSubDir));
+	} catch (ex) {
+		console.log("No Local Themes Folder");
+	}
+	try {
+		collectPlugins(path.resolve($tw.boot.wikiPath,$tw.config.wikiLanguagesSubDir));
+	} catch (ex) {
+		console.log("No Local Languages Folder");
+	}
 	// Save the upgrade library tiddler
 	var pluginFields = {
 		title: upgradeLibraryTitle,
