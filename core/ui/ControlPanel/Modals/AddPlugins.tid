@@ -5,7 +5,7 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 
 \define install-plugin-button()
 <$button>
-<$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
+<$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}}}}/>
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install}}""">
 {{$:/language/ControlPanel/Plugins/Reinstall}}
 </$list>
@@ -92,6 +92,16 @@ This plugin is already installed at version <$text text=<<installedVersion>>/>
 </$list>
 \end
 
+\define close-library-button()
+<$reveal type='nomatch' state='$:/temp/ServerConnection/$(PluginLibraryURL)$' text=''>
+<$button class='tc-btn-big-green'>
+<$action-sendmessage $message="tm-unload-plugin-library" url={{!!url}}}}/>
+{{$:/core/images/chevron-left}} {{$:/language/ControlPanel/Plugins/ClosePluginLibrary}}
+<$action-deletetiddler $filter="[prefix[$:/temp/ServerConnection/$(PluginLibraryURL)$]][prefix[$:/temp/RemoteAssetInfo/$(PluginLibraryURL)$]]"/>
+</$button>
+</$reveal>
+\end
+
 \define plugin-library-listing()
 <$list filter="[all[tiddlers+shadows]tag[$:/tags/PluginLibrary]]">
 <div class="tc-plugin-library">
@@ -101,6 +111,10 @@ This plugin is already installed at version <$text text=<<installedVersion>>/>
 //<$view field="url"/>//
 
 <$transclude/>
+
+<$set name=PluginLibraryURL value={{!!url}}>
+<<close-library-button>>
+</$set>
 
 <<display-server-connection>>
 </div>

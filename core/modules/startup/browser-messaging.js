@@ -39,6 +39,7 @@ function loadIFrame(url,callback) {
 		saveIFrameInfoTiddler(iframeInfo);
 		// Add the iframe to the DOM and hide it
 		iframe.style.display = "none";
+		iframe.setAttribute("library","true");
 		document.body.appendChild(iframe);
 		// Set up onload
 		iframe.onload = function() {
@@ -91,6 +92,26 @@ exports.startup = function() {
 					},"*");
 				}
 			});
+		}
+	});
+	// Listen for widget messages to control loading the plugin library
+	$tw.rootWidget.addEventListener("tm-unload-plugin-library",function(event) {
+		var paramObject = event.paramObject || {},
+			url = paramObject.url;
+		$tw.browserMessaging.iframeInfoMap[url] = undefined;
+		if(url) {
+			$tw.utils.each(document.getElementsByTagName('iframe'), function(iframe) {
+				if(iframe.getAttribute("library") === "true" &&
+				  iframe.getAttribute("src") === url) {
+					iframe.parentNode.removeChild(iframe);
+				}
+			});
+			$tw.utils.each(
+				$tw.wiki.filterTiddlers("[[$:/temp/ServerConnection/" + url + "]] [prefix[$:/temp/RemoteAssetInfo/" + url + "/]]"),
+				function(title) {
+					$tw.wiki.deleteTiddler(title)
+				}
+			);
 		}
 	});
 	$tw.rootWidget.addEventListener("tm-load-plugin-from-library",function(event) {
