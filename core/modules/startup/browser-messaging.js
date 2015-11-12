@@ -94,7 +94,7 @@ exports.startup = function() {
 			});
 		}
 	});
-	// Listen for widget messages to control loading the plugin library
+	// Listen for widget messages to control unloading the plugin library
 	$tw.rootWidget.addEventListener("tm-unload-plugin-library",function(event) {
 		var paramObject = event.paramObject || {},
 			url = paramObject.url;
