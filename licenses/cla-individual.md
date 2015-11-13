@@ -257,4 +257,4 @@ Antaeus Feldspar @afeldspar 2015/10/20
 
 Soeren Enevoldsen, @senevoldsen90, 2015/10/09
 
-Matthew LAuber, @mklauber, 2015/11/13
+Matthew Lauber, @mklauber, 2015/11/13
