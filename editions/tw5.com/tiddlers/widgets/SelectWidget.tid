@@ -1,3 +1,11 @@
+caption: select
+created: 20131024141900000
+modified: 20141203155137508
+tags: Widgets
+title: SelectWidget
+type: text/vnd.tiddlywiki
+
+
 ! Introduction
 
 The select widget displays a popup menu based on a [[HTML select element|https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select]]. The popup (or dropdown) contains a list of items defined by `<option>` and `<optgroup>` elements. 
