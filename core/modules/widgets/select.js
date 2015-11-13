@@ -54,7 +54,7 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 	if(this.selectMultiple == false) {
 		var value = this.getSelectDomNode().value;
 	} else {
-		var value = this.getSelectValues();
+		var value = this.getSelectValues()
 				value = value.map(function(s) { return "[["+s+"]]"}).join(" ");
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
@@ -89,7 +89,7 @@ SelectWidget.prototype.setSelectValue = function() {
 	if (this.selectMultiple) {
 		value = value === undefined ? "" : value;
 		var select = this.getSelectDomNode();
-		var values = Array.isArray(value) ? value : value.split(",");
+		var values = Array.isArray(value) ? value : $tw.utils.parseStringArray(value);
 		for(var i=0; i < select.children.length; i++){
 			if(values.indexOf(select.children[i].value) != -1) {
 				select.children[i].selected = true;
