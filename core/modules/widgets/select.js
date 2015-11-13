@@ -114,11 +114,11 @@ SelectWidget.prototype.getSelectDomNode = function() {
 // Return an array of the selected opion values
 // select is an HTML select element
 SelectWidget.prototype.getSelectValues = function() {
-	var select = this.getSelectDomNode()
-	var result = [];
-	var options = select && select.options;
-	var opt;
-	for (var i=0, iLen=options.length; i<iLen; i++) {
+	var select, result, options, opt;
+	select = this.getSelectDomNode();
+	result = [];
+	options = select && select.options;
+	for (var i=0; i<options.length; i++) {
 		opt = options[i];
 		if (opt.selected) {
 			result.push(opt.value || opt.text);
