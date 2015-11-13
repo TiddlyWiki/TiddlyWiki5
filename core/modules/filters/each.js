@@ -20,7 +20,7 @@ exports.each = function(source,operator,options) {
 	var results =[] ,
 		value,values = {},
 		field = operator.operand || "title";
-	if(operator.suffix !== "list") {
+	if(operator.suffix !== "list-item") {
 		source(function(tiddler,title) {
 			if(tiddler) {
 				value = (field === "title") ? title : tiddler.getFieldString(field);
