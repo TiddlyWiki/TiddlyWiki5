@@ -52,11 +52,14 @@ Plugins/Disabled/Status: (비활성화됨)
 Plugins/Empty/Hint: 없음
 Plugins/Enable/Caption: 활성화
 Plugins/Enable/Hint: 페이지를 다시 불러올 때 이 플러그인을 활성화합니다
+Plugins/Install: 설치
 Plugins/Installed/Hint: 현재 설치된 플러그인:
 Plugins/Languages/Caption: 언어
 Plugins/Languages/Hint: 언어 팩 플러그인
+Plugins/OpenPluginLibrary: 플러그인 라이브러리 열기
 Plugins/Plugins/Caption: 플러그인
 Plugins/Plugins/Hint: 플러그인
+Plugins/Reinstall: 재설치
 Plugins/Themes/Caption: 테마
 Plugins/Themes/Hint: 테마 플러그인
 Saving/Caption: 저장
@@ -98,6 +101,9 @@ Settings/NavigationHistory/Caption: 둘러보기 역사
 Settings/NavigationHistory/Hint: 티들러로 둘러보기할 때 둘러보기 역사를 업데이트합니다:
 Settings/NavigationHistory/No/Description: 역사를 업데이트하지 않음
 Settings/NavigationHistory/Yes/Description: 역사를 업데이트
+Settings/PerformanceInstrumentation/Caption: 성능 계측
+Settings/PerformanceInstrumentation/Description: 성능 계측 활성화
+Settings/PerformanceInstrumentation/Hint: 브라우저 개발자 콘솔에서 성능 통계를 보여줍니다. 적용하려면 다시 불러와야 합니다
 Settings/TitleLinks/Caption: 티들러 제목
 Settings/TitleLinks/Hint: 티들러 제목을 링크로 선택적으로 보여줍니다
 Settings/TitleLinks/No/Description: 티들러 제목을 링크로 보여주지 않음

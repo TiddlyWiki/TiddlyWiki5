@@ -52,11 +52,14 @@ Plugins/Disabled/Status: (disabled)
 Plugins/Empty/Hint: None
 Plugins/Enable/Caption: enable
 Plugins/Enable/Hint: Enable this plugin when reloading page
+Plugins/Install: install
 Plugins/Installed/Hint: Currently installed plugins:
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Language pack plugins
+Plugins/OpenPluginLibrary: open plugin library
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
+Plugins/Reinstall: reinstall
 Plugins/Themes/Caption: Themes
 Plugins/Themes/Hint: Theme plugins
 Saving/Caption: Saving
@@ -90,6 +93,9 @@ Settings/NavigationHistory/Caption: Navigation History
 Settings/NavigationHistory/Hint: Update browser history when navigating to a tiddler:
 Settings/NavigationHistory/No/Description: Do not update history
 Settings/NavigationHistory/Yes/Description: Update history
+Settings/PerformanceInstrumentation/Caption: Performance Instrumentation
+Settings/PerformanceInstrumentation/Hint: Displays performance statistics in the browser developer console. Requires reload to take effect
+Settings/PerformanceInstrumentation/Description: Enable performance instrumentation
 Settings/ToolbarButtonStyle/Caption: Toolbar Button Style
 Settings/ToolbarButtonStyle/Hint: Choose the style for toolbar buttons:
 Settings/ToolbarButtonStyle/Styles/Borderless: Borderless
@@ -123,8 +129,7 @@ Toolbars/EditToolbar/Caption: Edit Toolbar
 Toolbars/EditToolbar/Hint: Choose which buttons are displayed for tiddlers in edit mode
 Toolbars/Hint: Select which toolbar buttons are displayed
 Toolbars/PageControls/Caption: Page Toolbar
-Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar  
+Toolbars/PageControls/Hint: Choose which buttons are displayed on the main page toolbar
 Toolbars/ViewToolbar/Caption: View Toolbar
 Toolbars/ViewToolbar/Hint: Choose which buttons are displayed for tiddlers in view mode
 Tools/Download/Full/Caption: Download full wiki
-

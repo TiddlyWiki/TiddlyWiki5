@@ -85,7 +85,7 @@ canvas.tc-edit-bitmapeditor  {
 .tc-sidebar-lists .tc-tab-set .tc-tab-divider {
 	border-top: none;
 	height: 1px;
-	<<background-linear-gradient "left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 350px">>
+	<<background-linear-gradient "left, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 100%">>
 }
 
 .tc-more-sidebar .tc-tab-buttons button {

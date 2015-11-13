@@ -11,7 +11,7 @@ type: text/vnd.tiddlywiki
   |
   '"' [:{/'anything but "'/}] '"'
   |
-  "'" [:{/"anything but '"/}] '"'
+  "'" [:{/"anything but '"/}] "'"
 )
 """/>
 

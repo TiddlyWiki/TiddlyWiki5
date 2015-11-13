@@ -1,6 +1,6 @@
 caption: 5.1.10
-created: 20150801123725652
-modified: 20150801123725652
+created: 20151105122712982
+modified: 20151105122712982
 tags: ReleaseNotes
 title: Release 5.1.10
 type: text/vnd.tiddlywiki
@@ -19,6 +19,8 @@ This release includes several low-level performance optimisations that should im
 * [[State qualifier generation|https://github.com/Jermolene/TiddlyWiki5/commit/848a7f4e744c8f4dcb4ec88a0e99c4ae6aac25e5]]
 * [[Caching data tiddlers|https://github.com/Jermolene/TiddlyWiki5/commit/32f6d7f1b01474b82debcbdd5d76c49c59303265]]
 * [[Removed expensive visual effects|https://github.com/Jermolene/TiddlyWiki5/commit/4f5cf4597abb08af787b62c2e2ee1b8c667dad1e]]
+
+There is a new setting in the control panel to enable performance instrumentation, making it much easier to measure and improve performance issues.
 
 !! Résumé Builder Edition
 
@@ -44,13 +46,25 @@ Limited support for tiddlers stored in external `.tid` files:
 
 See [[Alice in Wonderland]] for an example. Try opening it without a network connection.
 
+!! New "Tight" Theme
+
+A new theme called "Tight" uses reduced padding, margins and font-sizes to pack as much text as possible:
+
+<$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/tight"/>
+Try it out
+</$button> <$button>
+<$action-setfield $tiddler="$:/theme" text="$:/themes/tiddlywiki/snowwhite"/>
+Revert
+</$button>
+
 ! Other Improvements
 
 !! Translation Improvements
 
 * Added Swedish translation by @Superdos
 * Added Korean (Korean Republic) translation by @araname
-* Improved Danish and Dutch translations
+* Improved Chinese, Danish, Dutch and Russian translations
 
 !! Usability Improvements
 
@@ -78,6 +92,9 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Extended|https://github.com/Jermolene/TiddlyWiki5/commit/fd997c45814e6bb5b576137bf62bad5575b0a28c]] the ActionSetFieldWidget to enable it to be used to delete a field or indexed property
 * [[Made|https://github.com/Jermolene/TiddlyWiki5/commit/746aab2cf6bbe3c1905efd5caf80e40e23b914b0]] the tw5.com documentation available as a plugin and an <a href="editions/tw5.com-docs/index.html" target="_blank">edition</a>, simplifying some scenarios for re-using it
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/0035a0046315ee0203b1adfb75efdbb0e854a7f6]] rendering of "More" sidebar tab gradients in the "Snow White" theme
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/33563d01baed4b4092fc834eb6a1df55e1671418]] option in [[control panel|$:/ControlPanel]] to enable the display of detailed performance instrumentation in the browser developer console
+* [[Added|https://github.com/Jermolene/TiddlyWiki5/commit/bc0cbf907063ccd484da7d56c8e42cf5e90489b8]] a LazyLoading template for all non-system tiddlers
+* [[Improved|https://github.com/Jermolene/TiddlyWiki5/issues/1984]] handling of TiddlerLinks in Markdown tiddlers
 
 !! Bug Fixes
 
@@ -85,6 +102,10 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/3fbf29093b32c00941b0c03951250de7c0cc8d6f]] problem with invisible icons in $:/AdvancedSearch
 * [[Improved|https://github.com/Jermolene/TiddlyWiki5/commit/862e358b57fde74595420e7948bf44fdadf690dc]] check for required plugins in ServerCommand
 * [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/709126dd643207adab725569c214f8617c28fbeb]] problem with queueing change events for deleting non-existent tiddlers
+* [[Ensure|https://github.com/Jermolene/TiddlyWiki5/commit/85553609b10ccc813662c867d4043e5df78efcec]] EditTextWidget fixes height even if refresh isn't required
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/8a763e9d838fcb571d12c4175952cd4e15e95e00]] the gradient on the sidebar tabs divider
+* [[Fixed|https://github.com/Jermolene/TiddlyWiki5/commit/6add992bf2e9cedd077c74c3471758bbe9d6e1b2]] problem with tiddler titles such as `$:/templates/something` being erroneously classed as `$:/temp` tiddlers, and so excluded from syncing
+* [[Switched|https://github.com/Jermolene/TiddlyWiki5/commit/acbf87657b6c88719148266100b91a61e29a0546]] to absolute date format in tiddler subtitles
 
 !! Node.js Improvements
 
@@ -95,15 +116,22 @@ See [[Alice in Wonderland]] for an example. Try opening it without a network con
 
 [[@Jermolene|https://github.com/Jermolene]] would like to thank the contributors to this release who have generously given their time to help improve TiddlyWiki:
 
+* [[@afeldspar|https://github.com/afeldspar]]
 * [[@araname|https://github.com/araname]]
 * [[@BramChen|https://github.com/BramChen]]
 * [[@danielo515|https://github.com/danielo515]]
+* [[@erwanm|https://github.com/erwanm]]
 * [[@Evolena|https://github.com/Evolena]]
 * [[@hegart-dmishiv|https://github.com/hegart-dmishiv]]
 * [[@idoine|https://github.com/idoine]]
 * [[@inmysocks|https://github.com/inmysocks]]
+* [[@kixam|https://github.com/kixam]]
+* [[@Marxsal|https://github.com/Marxsal]]
 * [[@matabele|https://github.com/matabele]]
 * [[@nameanyone|https://github.com/nameanyone]]
+* [[@pmario|https://github.com/pmario]]
+* [[@senevoldsen90|https://github.com/senevoldsen90]]
+* [[@Spangenhelm|https://github.com/Spangenhelm]]
 * [[@SuperDOS|https://github.com/SuperDOS]]
 * [[@tgrosinger|https://github.com/tgrosinger]]
 * [[@tobibeer|https://github.com/tobibeer]]

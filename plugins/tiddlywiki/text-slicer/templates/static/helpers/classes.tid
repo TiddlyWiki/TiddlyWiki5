@@ -1,0 +1,3 @@
+title: $:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes
+
+<$list filter="[all[current]tags[]addprefix[$:/_DocumentTags/]has[title]]"><$view field="css-class"/> </$list>

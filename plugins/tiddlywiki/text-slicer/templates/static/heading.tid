@@ -1,6 +1,6 @@
 title: $:/plugins/tiddlywiki/text-slicer/templates/static/heading
 
-`<`<$text text={{!!toc-heading-level}}/>`>`
+`<`<$text text={{!!toc-heading-level}}/>` class="`{{||$:/plugins/tiddlywiki/text-slicer/templates/static/helpers/classes}}`">`
 
 <$view field="text" format="htmlencodedplainwikified"/>
 

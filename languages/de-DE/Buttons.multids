@@ -30,12 +30,22 @@ ExportTiddler/Caption: Exportieren
 ExportTiddler/Hint: Diesen Tiddler Exportieren
 ExportTiddlers/Caption: Mehrere Exportieren
 ExportTiddlers/Hint: Mehrere Tiddler Exportieren
+Fold/Caption: Ausblenden Textbereich
+Fold/Hint: Der Tiddler Textbereich wird ausgeblendet
+Unfold/Caption: Einblenden Textbereich
+Unfold/Hint: Der Tiddler Textbereich wird eingeblendet
+FoldOthers/Caption: Ausblenden Andere Textbereiche
+FoldOthers/Hint: Die Textbereiche aller anderen Tiddler wird ausgeblendet
+FoldAll/Caption: Ausblenden Aller Textbereiche
+FoldAll/Hint: Ausblenden der Textbereiche aller Tiddler
+UnfoldAll/Caption: Einblenden Aller Textbereiche
+UnfoldAll/Hint: Einblenden der Textbereiche aller Tiddler
 FullScreen/Caption: Vollbild
 FullScreen/Hint: Aktivieren oder deaktivieren des Vollbild-Modus
 Help/Caption: Hilfe
 Help/Hint: Hilfe anzeigen
 Import/Caption: Import
-Import/Hint: Importiere Dateien
+Import/Hint: Importiere unterschiedliche Dateitypen. zB: Text, Bilder, TiddlyWiki oder JSON
 Info/Caption: Info
 Info/Hint: Informationen zu diesem Tiddler anzeigen
 Home/Caption: Home
