@@ -55,7 +55,7 @@ SelectWidget.prototype.handleChangeEvent = function(event) {
 		var value = this.getSelectDomNode().value;
 	} else {
 		var value = this.getSelectValues()
-				value = value.map(function(s) { return "[["+s+"]]"}).join(" ");
+				value = $tw.utils.stringifyList(value);
 	}
 	this.wiki.setText(this.selectTitle,this.selectField,this.selectIndex,value);
 };
