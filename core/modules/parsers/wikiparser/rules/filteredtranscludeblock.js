@@ -50,7 +50,7 @@ exports.parse = function() {
 		node.attributes.tooltip = {type: "string", value: tooltip};
 	}
 	if(template) {
-		node.attributes.template = {type: "string", value: template};
+		node.attributes.template = {type: "string", value: $tw.wiki.getTemplate(template)};
 	}
 	if(style) {
 		node.attributes.style = {type: "string", value: style};

@@ -1217,4 +1217,15 @@ exports.invokeUpgraders = function(titles,tiddlers) {
 	return messages;
 };
 
+/*
+If existing, retrieves a template tiddler from $:/config/templates/<templatename>, otherwise returns given title
+*/
+exports.getTemplate = function(title){
+	var template = "$:/config/templates/" + title;
+	if($tw.wiki.getTiddler(template)) {
+		title = template;
+	}
+	return title;
+};
+
 })();
