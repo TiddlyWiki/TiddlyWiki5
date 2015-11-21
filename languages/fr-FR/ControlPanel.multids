@@ -57,6 +57,11 @@ Plugins/Plugins/Hint: Plugins
 Plugins/Reinstall: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
+Parsing/Caption: Parsing
+Parsing/Hint: Ici, vous pouvez désactiver globalement des règles individuelles de parsing du wiki. Soyez prudent, car désactiver certaines règles peuvent empêcher ~TiddlyWiki de fonctionner correctement (vous pouvez revenir au parsing par défaut avec le [[safe mode|http://tiddlywiki.com/#SafeMode]] )
+Parsing/Block/Caption: Block Parse Rules
+Parsing/Inline/Caption: Inline Parse Rules
+Parsing/Pragma/Caption: Pragma Parse Rules
 Saving/Caption: Sauvegarde
 Saving/Heading: Sauvegarde
 Saving/TiddlySpot/Advanced/Heading: Paramètres avancés
