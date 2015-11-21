@@ -18,6 +18,8 @@ Encryption/Password: Mot de passe
 Encryption/RepeatPassword: Répéter le mot de passe
 Encryption/PasswordNoMatch: Les mots de passe ne correspondent pas
 Encryption/SetPassword: Définir ce mot de passe 
+InternalJavaScriptError/Title: Erreur interne JavaScript
+InternalJavaScriptError/Hint: C'est assez embarrassant. Il est recommandé de rafraîchir l'affichage de votre navigateur
 InvalidFieldName: Caractères illicites dans le nom du champ « <$text text=<<fieldName>>/> ». Les champs ne peuvent contenir que des lettres minuscules non accentuées et les caractères souligné (`_`), tiret (`-`) et point (`.`)
 MissingTiddler/Hint: Le tiddler « <$text text=<<currentTiddler>>/> » est manquant - cliquez sur {{$:/core/images/edit-button}} pour le créer
 RecentChanges/DateFormat: DD MMM YYYY
