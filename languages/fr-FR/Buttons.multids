@@ -30,6 +30,18 @@ ExportTiddler/Caption: exporte ce tiddler
 ExportTiddler/Hint: Exporter ce tiddler
 ExportTiddlers/Caption: exporte ces tiddlers
 ExportTiddlers/Hint: Exporter ces tiddlers
+Fold/Caption: replie le tiddler
+Fold/Hint: Replier le corps du tiddler
+Fold/FoldBar/Caption: fold-bar
+Fold/FoldBar/Hint: Barres optionnelles pour replier et déplier les tiddlers
+Unfold/Caption: déplie le tiddler
+Unfold/Hint: Déplie le corps de ce tiddler
+FoldOthers/Caption: replie les autres tiddlers
+FoldOthers/Hint: Replie le corps des autres tiddlers ouverts
+FoldAll/Caption: replie tous les tiddlers
+FoldAll/Hint: Replie le corps de tous les tiddlers ouverts
+UnfoldAll/Caption: déplie tous les tiddlers
+UnfoldAll/Hint: Déplie le corps de tous les tiddlers ouverts
 FullScreen/Caption: plein-écran
 FullScreen/Hint: Entre ou sort du mode plein-écran
 Help/Caption: aide
