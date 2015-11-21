@@ -47,11 +47,14 @@ Plugins/Disabled/Status: (désactivé)
 Plugins/Empty/Hint: Aucun
 Plugins/Enable/Caption: activer
 Plugins/Enable/Hint: Active ce plugin au prochain rechargement de la page
+Plugins/Install: installe
 Plugins/Installed/Hint: Plugins installés :
 Plugins/Languages/Caption: Languages
 Plugins/Languages/Hint: Plugins de langue
+Plugins/OpenPluginLibrary: ouvre la bibliothèque de plugins
 Plugins/Plugins/Caption: Plugins
 Plugins/Plugins/Hint: Plugins
+Plugins/Reinstall: réinstalle
 Plugins/Themes/Caption: Thèmes
 Plugins/Themes/Hint: Plugins de thème
 Saving/Caption: Sauvegarde
