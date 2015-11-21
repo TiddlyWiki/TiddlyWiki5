@@ -79,6 +79,9 @@ Settings/AutoSave/Caption: Sauvegarde automatique
 Settings/AutoSave/Disabled/Description: Pas de sauvegarde automatique des modifications
 Settings/AutoSave/Enabled/Description: Sauvegarde automatique des modifications
 Settings/AutoSave/Hint: Sauvegarde automatique des modifications pendant l'édition
+Settings/CamelCase/Caption: Liens Wiki //Camel Case//
+Settings/CamelCase/Hint: Vous pouvez désactiver globalement les liens créés à partir des expressions de la forme ~CamelCase. Pour que ce paramètres prenne effet, il est nécessaire de recharger le wiki
+Settings/CamelCase/Description: Active les liens automatiques sur les expressions de la forme ~CamelCase
 Settings/Caption: Paramétrage
 Settings/Hint: Ce paramétrage vous permet de personnaliser le comportement de TiddlyWiki.
 Settings/NavigationAddressBar/Caption: Barre d'adresse pendant la navigation
