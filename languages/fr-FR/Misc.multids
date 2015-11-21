@@ -1,5 +1,6 @@
 title: $:/language/
 
+AboveStory/ClassicPlugin/Warning: On dirait que vous essayez de charger un plugin conçu pour ~TiddlyWiki Classic. Merci de noter que [[ces plugins ne fonctionnent pas avec TiddlyWiki version 5.x.x|http://tiddlywiki.com/#TiddlyWikiClassic]]. Plugins ~TiddlyWiki Classic détectés :
 BinaryWarning/Prompt: Ce tiddler contient des données binaires
 ClassicWarning/Hint: Ce tiddler est écrit au format TiddlyWiki Classic, qui n'est pas entièrement compatible avec TiddlyWiki version 5. Pour en savoir plus, rendez-vous à l'adresse http://tiddlywiki.com/static/Upgrading.html. 
 ClassicWarning/Upgrade/Caption: Mettre à jour
