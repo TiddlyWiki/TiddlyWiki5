@@ -96,6 +96,11 @@ Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
 Settings/PerformanceInstrumentation/Caption: Instrumentation de la Performance
 Settings/PerformanceInstrumentation/Hint: Affiche des statistiques de performance dans la console de développement du navigateur. Nécessite de recharger la page pour prendre effet.
 Settings/PerformanceInstrumentation/Description: Active l'instrumentation de la performance
+Settings/ToolbarButtonStyle/Caption: Style des boutons de la barre d'outils
+Settings/ToolbarButtonStyle/Hint: Choix du style des boutons de la barre d'outils :
+Settings/ToolbarButtonStyle/Styles/Borderless: Sans bordure
+Settings/ToolbarButtonStyle/Styles/Boxed: Avec une bordure
+Settings/ToolbarButtonStyle/Styles/Rounded: Arrondis
 Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
 Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
 Settings/ToolbarButtons/Icons/Description: Afficher l'icône
