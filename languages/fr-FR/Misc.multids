@@ -31,4 +31,5 @@ TagManager/Colour/Heading: Couleur
 TagManager/Icon/Heading: Icône
 TagManager/Info/Heading: Info
 TagManager/Tag/Heading: Tag
+Tiddler/DateFormat: DD MMM YYYY à hhhmm
 UnsavedChangesWarning: Vos dernières modifications n'ont pas été sauvegardées dans votre TiddlyWiki
