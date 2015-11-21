@@ -85,6 +85,9 @@ Settings/NavigationHistory/Caption: Historique de navigation
 Settings/NavigationHistory/Hint: Mise à jour de l'historique de navigation du navigateur lorsqu'on pointe vers un tiddler :
 Settings/NavigationHistory/No/Description: Ne pas mettre à jour l'historique
 Settings/NavigationHistory/Yes/Description: Mettre à jour l'historique
+Settings/PerformanceInstrumentation/Caption: Instrumentation de la Performance
+Settings/PerformanceInstrumentation/Hint: Affiche des statistiques de performance dans la console de développement du navigateur. Nécessite de recharger la page pour prendre effet.
+Settings/PerformanceInstrumentation/Description: Active l'instrumentation de la performance
 Settings/ToolbarButtons/Caption: Boutons de la barre d'outils
 Settings/ToolbarButtons/Hint: Apparence par défaut des boutons sur la barre d'outils :
 Settings/ToolbarButtons/Icons/Description: Afficher l'icône
