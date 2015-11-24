@@ -6,7 +6,7 @@ op-output: returns titles that are matches for <<.place F>> with respect to each
 op-parameter: the [[filter|Filters]] to be evaluated
 op-parameter-name: F
 op-purpose: evaluate input titles against a filter
-op-suffix: optional, a `variable-name` and/or the flag `op-suffix:  or `$all`
+op-suffix: optional, a `variable-name` and/or the flag `$` or `$all`
 tags: [[Filter Operators]] [[Group Operators]]
 title: filter Operator
 type: text/vnd.tiddlywiki
