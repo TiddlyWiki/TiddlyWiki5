@@ -1,0 +1,39 @@
+caption: filter
+created: 20151123141704448
+modified: 20151124061614723
+op-input: a [[selection of titles|Title Selection]]
+op-output: returns titles that are matches for <<.place F>> with respect to each input title in turn
+op-parameter: the [[filter|Filters]] to be evaluated
+op-parameter-name: F
+op-purpose: evaluate input titles against a filter
+op-suffix: optional, a `variable-name` and/or the flag `op-suffix:  or `$all`
+tags: [[Filter Operators]] [[Group Operators]]
+title: filter Operator
+type: text/vnd.tiddlywiki
+
+Each input title is processed in turn matching the filter specified in the operand.
+
+!! Suffix
+
+; filter: variable-name
+: optional, sets a variable to the current title when evaluating <<.place F>> 
+; filter: $
+: optional, returns all those input titles for which <<.place F>> returns matches
+; filter: $all
+: optional, returns <<.em all>> input titles, if <<.place F>> returned at least one match for any of them
+
+!! Operand As A Filter
+
+To specify <<.place F>>, either use a [[Variable|Variables]] or a [[TextReference]]. The below example demonstrates the process: a macro variable called ''isTag'' is defined that has the filter only output the title of the current tiddler if it is used as a tag:
+
+```
+<$vars isTag="[<item>tagging[]]">
+{{{ [all[current]filter:$ item<isTag>] }}}
+</$vars>
+```
+
+> <$vars isTag="[<item>tagging[]]">
+{{{ [all[current]filter:$ item<isTag>] }}}
+</$vars>
+
+<<.operator-examples "filter">>
