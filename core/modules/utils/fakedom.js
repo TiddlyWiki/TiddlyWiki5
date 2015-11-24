@@ -68,7 +68,7 @@ TW_Element.prototype.setAttribute = function(name,value) {
 		throw "Cannot setAttribute on a raw TW_Element";
 	}
 	this.attributes[name] = value;
-	if(name === "id") {
+	if(name === "id" && !elements[value]) {
 		elements[value] = this;
 	}
 };
