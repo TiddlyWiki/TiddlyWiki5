@@ -34,7 +34,7 @@ exports.run = function(target,fallbackTarget,colourA,colourB) {
 	if(!target){
 		target = "!!color";
 	}
-	if(-1 < target.indexOf("!!")) {
+	if(target.indexOf("!!") >= 0) {
 		target = wiki.getTextReference(
 			target,
 			wiki.getTextReference(palette + "##tag-foreground"),
