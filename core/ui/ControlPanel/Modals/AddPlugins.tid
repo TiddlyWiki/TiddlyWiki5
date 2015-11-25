@@ -5,7 +5,7 @@ subtitle: {{$:/core/images/download-button}} {{$:/language/ControlPanel/Plugins/
 
 \define install-plugin-button()
 <$button>
-<$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}}}}/>
+<$action-sendmessage $message="tm-load-plugin-from-library" url={{!!url}} title={{$(assetInfo)$!!original-title}}/>
 <$list filter="[<assetInfo>get[original-title]get[version]]" variable="installedVersion" emptyMessage="""{{$:/language/ControlPanel/Plugins/Install}}""">
 {{$:/language/ControlPanel/Plugins/Reinstall}}
 </$list>
