@@ -16,6 +16,7 @@ The content of the `<$set>` widget is the scope for the value assigned to the va
 |name |The name of the variable to assign (defaults to "currentTiddler") |
 |value |The value to assign to the variable if the filter is missing or not empty |
 |filter |An optional filter to be evaluated and assigned to the variable (see below) |
+|format|The output format when using ''filter'' (defaults to "list" , see below) |
 |emptyValue |The value to assign to the variable if the filter is present and evaluates to an empty list (see below) |
 
 !! Simple Variable Assignment
@@ -55,3 +56,23 @@ This form of the set variable widget evaluates the filter and assigns the result
 <$text text=<<myVariable>>/>
 </$set>
 ```
+
+Without a defined ''format'', the output is a list of tiddler titles as encoded in the tags field...
+
+```
+<$set name="myVariable" filter="[[my tiddler]]">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+> ''outputs:'' <$text text="[[my tiddler]]"/>
+
+If you set the format to "text", all list items returned by the filter are joined to a string instead...
+
+```
+<$set name="myVariable" filter="[[my tiddler]]" format="text">
+<$text text=<<myVariable>>/>
+</$set>
+```
+
+> ''outputs:'' my tiddler
